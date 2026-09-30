@@ -1,0 +1,58 @@
+import type { Metadata } from "next"
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+
+import { CompanyHeader } from "@/components/company/company-header"
+import { InviteAdmin } from "@/components/company/invite-admin"
+import { MemberRow } from "@/components/company/member-row"
+import { SignInPrompt } from "@/components/sign-in-prompt"
+import { TOKEN_COOKIE } from "@/constants/auth"
+import { serverFetch } from "@/lib/server-api"
+import type { Company, CompanyMember } from "@/types/company"
+
+export const metadata: Metadata = { title: "Admins" }
+
+export default async function MembersPage({
+  params,
+}: {
+  params: Promise<{ companyId: string }>
+}) {
+  const { companyId } = await params
+  const signedIn = (await cookies()).has(TOKEN_COOKIE)
+  const company = signedIn
+    ? await serverFetch<Company>(`/companies/companies/${companyId}`)
+    : null
+  const members = company
+    ? await serverFetch<CompanyMember[]>(
+        `/companies/members?company_id=${companyId}`
+      )
+    : null
+
+  if (!signedIn) {
+    return (
+      <main className="mx-auto max-w-5xl px-6 py-12">
+        <SignInPrompt message="Sign in to see company admins." />
+      </main>
+    )
+  }
+
+  if (!company) {
+    redirect("/company")
+  }
+
+  return (
+    <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
+      <CompanyHeader
+        companyId={companyId}
+        name={company.name}
+        current="members"
+      />
+      {company.role === "owner" && <InviteAdmin companyId={companyId} />}
+      <ul className="divide-y rounded-2xl border">
+        {(members ?? []).map((member) => (
+          <MemberRow key={member.email} member={member} />
+        ))}
+      </ul>
+    </main>
+  )
+}

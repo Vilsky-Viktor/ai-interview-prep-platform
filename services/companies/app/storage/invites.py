@@ -1,0 +1,75 @@
+import secrets
+import uuid
+from datetime import UTC, datetime
+
+from sqlalchemy import select, update
+from sqlalchemy.dialects.postgresql import insert
+
+from app.constants.invites import InviteStatus
+from app.models.interviews import Interview
+from app.models.invites import CandidateInvite
+from app.storage.db import Session
+
+
+async def upsert(interview_id, email: str) -> CandidateInvite:
+    """Creates the invite, or returns the existing one so it can be sent again."""
+    email = email.lower()
+    statement = (
+        insert(CandidateInvite)
+        .values(
+            id=uuid.uuid4(),
+            interview_id=interview_id,
+            email=email,
+            token=secrets.token_urlsafe(32),
+            status=InviteStatus.INVITED,
+            created_at=datetime.now(UTC),
+        )
+        .on_conflict_do_nothing(index_elements=["interview_id", "email"])
+    )
+
+    async with Session() as session:
+        await session.execute(statement)
+        await session.commit()
+
+        return await session.scalar(
+            select(CandidateInvite).where(
+                CandidateInvite.interview_id == interview_id, CandidateInvite.email == email
+            )
+        )
+
+
+async def get_by_token(token: str) -> tuple[CandidateInvite, Interview] | None:
+    query = (
+        select(CandidateInvite, Interview)
+        .join(Interview, Interview.id == CandidateInvite.interview_id)
+        .where(CandidateInvite.token == token)
+    )
+
+    async with Session() as session:
+        row = (await session.execute(query)).first()
+
+        return tuple(row) if row else None
+
+
+async def start(invite: CandidateInvite, user_id: str) -> None:
+    async with Session() as session:
+        stored = await session.get(CandidateInvite, invite.id)
+        stored.user_id = user_id
+
+        if stored.status == InviteStatus.INVITED:
+            stored.status = InviteStatus.IN_PROCESS
+
+        await session.commit()
+
+
+async def set_status(invite_ids: list, status: str) -> None:
+    if not invite_ids:
+        return
+
+    async with Session() as session:
+        await session.execute(
+            update(CandidateInvite)
+            .where(CandidateInvite.id.in_(invite_ids))
+            .values(status=status)
+        )
+        await session.commit()

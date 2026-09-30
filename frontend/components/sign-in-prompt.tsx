@@ -1,0 +1,19 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { signIn } from "@/lib/auth"
+
+export function SignInPrompt({ message }: { message: string }) {
+  return (
+    <div className="mx-auto flex w-full max-w-lg flex-col items-center gap-6 rounded-2xl border p-12 text-center">
+      <p className="text-base text-muted-foreground">{message}</p>
+      <Button
+        size="lg"
+        className="h-12 px-5 text-base"
+        onClick={() => signIn()}
+      >
+        <span className="font-light">Sign in with</span> Google
+      </Button>
+    </div>
+  )
+}

@@ -1,0 +1,209 @@
+# FIREBASE_AUTH_EMULATOR_HOST is set only in docker-compose.override.yml (local development).
+x-firebase-env: &firebase-env
+  FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
+
+x-service: &service
+  restart: unless-stopped
+  environment:
+    <<: *firebase-env
+  healthcheck:
+    test:
+      - CMD
+      - python
+      - -c
+      - import urllib.request; urllib.request.urlopen('http://localhost:8000/health')
+    interval: 10s
+    timeout: 3s
+    retries: 3
+
+x-generation-env: &generation-env
+  <<: *firebase-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/generation
+  REDIS_URL: redis://redis:6379
+  LIBRARY_URL: http://library:8000
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  QUESTIONS_PER_TOPIC: ${QUESTIONS_PER_TOPIC:-20}
+  LLM_MODEL: ${LLM_MODEL:-gpt-4o}
+  GENERATION_LIMIT: ${GENERATION_LIMIT:-20}
+  GENERATION_WINDOW_SECONDS: ${GENERATION_WINDOW_SECONDS:-86400}
+
+services:
+  postgres:
+    restart: unless-stopped
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: prepza
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "prepza"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    restart: unless-stopped
+    image: redis:8-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  library:
+    <<: *service
+    build: services/library
+    environment:
+      <<: *firebase-env
+      DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/library
+      REDIS_URL: redis://redis:6379
+      SERVICE_SECRET: ${SERVICE_SECRET}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  notifications:
+    restart: unless-stopped
+    build: services/notifications
+    environment:
+      REDIS_URL: redis://redis:6379
+      SMTP_HOST: ${SMTP_HOST:-mailpit}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      SITE_URL: ${SITE_URL:-http://localhost:8090}
+    depends_on:
+      redis:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+
+  mailpit:
+    restart: unless-stopped
+    image: axllent/mailpit
+    ports:
+      # Web UI with every email sent locally.
+      - "8125:8025"
+
+  generation:
+    <<: *service
+    build: services/generation
+    environment:
+      <<: *generation-env
+      # Re-generating a single question runs in the request, not in the worker.
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  generation-worker:
+    restart: unless-stopped
+    build: services/generation
+    command: ["uv", "run", "--no-sync", "arq", "app.workers.generation.WorkerSettings"]
+    environment:
+      <<: *generation-env
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      TAVILY_API_KEY: ${TAVILY_API_KEY}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+    depends_on:
+      # The API container runs the migrations.
+      generation:
+        condition: service_healthy
+      library:
+        condition: service_healthy
+
+  rounds:
+    <<: *service
+    build: services/rounds
+    environment:
+      <<: *firebase-env
+      DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/rounds
+      REDIS_URL: redis://redis:6379
+      LIBRARY_URL: http://library:8000
+      SERVICE_SECRET: ${SERVICE_SECRET}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+      LLM_LIMIT: ${LLM_LIMIT:-400}
+      LLM_MODEL: ${LLM_MODEL:-gpt-4o}
+      LLM_WINDOW_SECONDS: ${LLM_WINDOW_SECONDS:-3600}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  companies:
+    <<: *service
+    build: services/companies
+    environment:
+      <<: *firebase-env
+      DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/companies
+      REDIS_URL: redis://redis:6379
+      SERVICE_SECRET: ${SERVICE_SECRET}
+      GENERATION_URL: http://generation:8000
+      LIBRARY_URL: http://library:8000
+      ROUNDS_URL: http://rounds:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      generation:
+        condition: service_healthy
+      library:
+        condition: service_healthy
+      rounds:
+        condition: service_healthy
+
+  frontend:
+    restart: unless-stopped
+    build:
+      context: frontend
+      args:
+        NEXT_PUBLIC_FIREBASE_API_KEY: ${NEXT_PUBLIC_FIREBASE_API_KEY}
+        NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}
+        NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${NEXT_PUBLIC_FIREBASE_PROJECT_ID}
+        NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL: ${NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL}
+    environment:
+      # Server-side rendering calls the API through the gateway.
+      API_URL: http://gateway
+
+  firebase-auth:
+    restart: unless-stopped
+    build: firebase
+    ports:
+      - "9199:9199"
+      - "4100:4100"
+
+  gateway:
+    restart: unless-stopped
+    image: nginx:1.29-alpine
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "8090:80"
+    depends_on:
+      library:
+        condition: service_healthy
+      generation:
+        condition: service_healthy
+      rounds:
+        condition: service_healthy
+      companies:
+        condition: service_healthy
+      frontend:
+        condition: service_started
+
+volumes:
+  postgres-data:

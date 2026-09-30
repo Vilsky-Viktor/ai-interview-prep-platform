@@ -1,0 +1,10 @@
+.DS_Store
+.env
+
+# Python
+__pycache__/
+.venv/
+.pytest_cache/
+
+# poc.py output
+interview_prep.json

@@ -1,0 +1,118 @@
+import uuid
+
+from sqlalchemy import func, select
+from sqlalchemy.exc import IntegrityError
+
+from app.models.feedback import PreparationRating, QuestionRating, QuestionReport
+from app.storage.db import Session
+
+
+async def rate_preparation(set_id: uuid.UUID, user_id: str, value: int) -> bool:
+    async with Session() as session:
+        session.add(PreparationRating(set_id=set_id, user_id=user_id, value=value))
+
+        try:
+            await session.commit()
+        except IntegrityError:
+            await session.rollback()
+
+            return False
+
+        return True
+
+
+async def my_preparation_rating(set_id: uuid.UUID, user_id: str) -> int | None:
+    query = select(PreparationRating.value).where(
+        PreparationRating.set_id == set_id, PreparationRating.user_id == user_id
+    )
+
+    async with Session() as session:
+        return await session.scalar(query)
+
+
+async def rate_question(question_id: uuid.UUID, user_id: str, value: int) -> bool:
+    async with Session() as session:
+        session.add(QuestionRating(question_id=question_id, user_id=user_id, value=value))
+
+        try:
+            await session.commit()
+        except IntegrityError:
+            await session.rollback()
+
+            return False
+
+        return True
+
+
+async def my_question_rating(question_id: uuid.UUID, user_id: str) -> int | None:
+    query = select(QuestionRating.value).where(
+        QuestionRating.question_id == question_id, QuestionRating.user_id == user_id
+    )
+
+    async with Session() as session:
+        return await session.scalar(query)
+
+
+async def question_stats(question_ids: list[uuid.UUID]) -> dict[uuid.UUID, dict[str, int]]:
+    """Likes, dislikes and reports per question; questions without feedback are missing."""
+    ratings = (
+        select(
+            QuestionRating.question_id,
+            func.count().filter(QuestionRating.value == 1),
+            func.count().filter(QuestionRating.value == -1),
+        )
+        .where(QuestionRating.question_id.in_(question_ids))
+        .group_by(QuestionRating.question_id)
+    )
+    reports = (
+        select(QuestionReport.question_id, func.count())
+        .where(QuestionReport.question_id.in_(question_ids))
+        .group_by(QuestionReport.question_id)
+    )
+    stats = {}
+
+    async with Session() as session:
+        for question_id, likes, dislikes in await session.execute(ratings):
+            stats[question_id] = {"likes": likes, "dislikes": dislikes, "reports": 0}
+
+        for question_id, count in await session.execute(reports):
+            stats.setdefault(question_id, {"likes": 0, "dislikes": 0, "reports": 0})
+            stats[question_id]["reports"] = count
+
+    return stats
+
+
+async def list_reports(question_id: uuid.UUID) -> list[QuestionReport]:
+    query = (
+        select(QuestionReport)
+        .where(QuestionReport.question_id == question_id)
+        .order_by(QuestionReport.created_at.desc())
+    )
+
+    async with Session() as session:
+        return list(await session.scalars(query))
+
+
+async def report_question(question_id: uuid.UUID, user_id: str, reason: str, comment: str) -> bool:
+    async with Session() as session:
+        session.add(
+            QuestionReport(question_id=question_id, user_id=user_id, reason=reason, comment=comment)
+        )
+
+        try:
+            await session.commit()
+        except IntegrityError:
+            await session.rollback()
+
+            return False
+
+        return True
+
+
+async def has_reported(question_id: uuid.UUID, user_id: str) -> bool:
+    query = select(QuestionReport.id).where(
+        QuestionReport.question_id == question_id, QuestionReport.user_id == user_id
+    )
+
+    async with Session() as session:
+        return await session.scalar(query) is not None
