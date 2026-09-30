@@ -110,7 +110,3 @@ CI runs all of these on every push and pull request.
 ## Project conventions
 
 See [CLAUDE.md](CLAUDE.md): separate modules for schemas, models, prompts, helpers and constants; `app/main.py` only wires the app; at most 300 lines per file; and the simplest solution that works.
-
-## Roadmap
-
-[docs/improvement-plan.md](docs/improvement-plan.md) lists the known issues and the planned work: reusing high-quality questions across preparations, using ratings and reports to improve quality automatically, and reducing the cost of each generation.
