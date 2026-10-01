@@ -2,6 +2,8 @@
 
 Turn a job description or a learning goal into a structured practice path: reviewed topics, a bank of questions with reference answers, graded practice rounds, and certificates for topics you have fully covered. Companies can use the same engine to generate interviews and invite candidates.
 
+![prepza](screenshot.png)
+
 ## Features
 
 **For learners**
