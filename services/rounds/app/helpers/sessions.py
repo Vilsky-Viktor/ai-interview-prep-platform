@@ -1,5 +1,6 @@
+from app.constants.rounds import RoundStatus
 from app.helpers.rounds import next_question
-from app.helpers.scores import current_score
+from app.helpers.scores import current_score, score_passed
 from app.integrations import library
 from app.models.sessions import Session
 from app.schemas.sessions import SessionOut, SessionTopicOut
@@ -36,6 +37,11 @@ def session_out(row: Session, interview_title: str | None = None) -> SessionOut:
         answered=len(row.answers),
         current_score=current_score(scores) if shown else None,
         final_score=row.final_score if shown else None,
+        passed=score_passed(
+            row.final_score if row.status == RoundStatus.FINISHED else current_score(scores)
+        )
+        if shown
+        else None,
         started_at=row.started_at,
         finished_at=row.finished_at,
         deadline=row.deadline,

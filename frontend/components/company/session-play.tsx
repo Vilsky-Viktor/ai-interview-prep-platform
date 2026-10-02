@@ -18,7 +18,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Progress } from "@/components/ui/progress"
-import { scorePassed } from "@/lib/rounds"
 import type { InterviewSession, SessionAnswerResult } from "@/types/company"
 import type { AnswerInput, AnswerResult, NextQuestion } from "@/types/round"
 
@@ -198,7 +197,7 @@ function SessionHeader({
               <span
                 className={cn(
                   "text-xl font-light",
-                  scorePassed(score)
+                  session.passed
                     ? "text-green-600 dark:text-green-400"
                     : "text-red-600 dark:text-red-400"
                 )}
@@ -229,6 +228,7 @@ function shownResult(result: SessionAnswerResult): AnswerResult | null {
     correct: result.correct,
     correct_option_index: result.correct ? optionIndex : null,
     current_score: result.current_score ?? 0,
+    passed: result.passed ?? false,
     answered: result.answered,
     total: result.total,
     option_index: optionIndex,

@@ -55,6 +55,8 @@ class PreparationSummary(BaseModel):
 
 class MyPreparation(PreparationSummary):
     owned: bool
+    # Every topic mastered.
+    done: bool
 
 
 class PreparationDetail(PreparationSummary):
@@ -62,6 +64,10 @@ class PreparationDetail(PreparationSummary):
     topics: list[TopicOut]
     access: Access
     my_rating: int | None
+    # Every topic mastered by the viewer; false for anonymous visitors.
+    done: bool
+    # Stars a rating can give, so the page draws that many.
+    rating_scale: int
 
 
 class VisibilityIn(BaseModel):

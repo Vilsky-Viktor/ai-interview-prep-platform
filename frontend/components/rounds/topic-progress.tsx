@@ -1,13 +1,12 @@
 import { cn } from "cn"
 
 import { Progress } from "@/components/ui/progress"
-import { scorePassed } from "@/lib/rounds"
 import type { TopicProgress as Progressed } from "@/types/round"
 
 const PASSED_BAR = "[&_[data-slot=progress-indicator]]:bg-green-600 dark:[&_[data-slot=progress-indicator]]:bg-green-400"
 const FAILED_BAR = "[&_[data-slot=progress-indicator]]:bg-red-600 dark:[&_[data-slot=progress-indicator]]:bg-red-400"
 
-/** Progress towards the certificate: every question answered, then 70% of them correct. */
+/** Progress towards the certificate; whether it's complete and passes comes from the API. */
 export function TopicProgress({
   progress,
   total,
@@ -16,11 +15,8 @@ export function TopicProgress({
   total: number
 }) {
   const answered = Math.min(progress?.answered ?? 0, total)
-  const score = progress?.score ?? null
-  const complete = total > 0 && answered >= total
-  const passed =
-    Boolean(progress?.certificate_id) ||
-    (complete && score !== null && scorePassed(score))
+  const complete = progress?.complete ?? false
+  const passed = progress?.passed ?? false
 
   return (
     <Progress

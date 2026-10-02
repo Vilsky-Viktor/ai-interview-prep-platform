@@ -8,5 +8,3 @@ export const REPORT_REASONS = {
 export const FEEDBACK_HOVER_CLASS =
   "text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground dark:hover:bg-foreground/15"
 
-export const MAX_REPORT_COMMENT_LENGTH = 1000
-export const MAX_RATING = 5

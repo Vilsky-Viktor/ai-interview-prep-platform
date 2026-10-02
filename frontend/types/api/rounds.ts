@@ -290,26 +290,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/preparations/mastered": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * List Mastered Topics
-     * @description Topics this user has mastered, meaning earned a certificate for, on any preparation.
-     */
-    get: operations["list_mastered_topics_preparations_mastered_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/preparations/{preparation_id}/progress": {
     parameters: {
       query?: never
@@ -346,6 +326,27 @@ export interface paths {
      * @description Streams the reply as server-sent events: {"delta"}..., then {"done"} or {"error"}.
      */
     post: operations["send_chat_answers__answer_id__chat_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/certificates/rules": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Rules
+     * @description What earns a topic's certificate; public, shown before practicing. Declared before
+     *     /{certificate_id}, which would otherwise take "rules" as an id.
+     */
+    get: operations["get_rules_certificates_rules_get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -403,6 +404,26 @@ export interface paths {
     put?: never
     /** Invite Scores */
     post: operations["invite_scores_internal_invite_scores_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/mastered-counts": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Mastered Counts
+     * @description Topics with a certificate per preparation, so library can tell which ones are done.
+     */
+    post: operations["mastered_counts_internal_mastered_counts_post"]
     delete?: never
     options?: never
     head?: never
@@ -530,6 +551,8 @@ export interface components {
       correct_option_index: number
       /** Current Score */
       current_score: number
+      /** Passed */
+      passed: boolean
       /** Answered */
       answered: number
       /** Total */
@@ -605,18 +628,12 @@ export interface components {
       /** Invite Ids */
       invite_ids: string[]
     }
-    /** MasteredTopicOut */
-    MasteredTopicOut: {
-      /**
-       * Preparation Id
-       * Format: uuid
-       */
-      preparation_id: string
-      /**
-       * Topic Id
-       * Format: uuid
-       */
-      topic_id: string
+    /** MasteredCountsIn */
+    MasteredCountsIn: {
+      /** User Id */
+      user_id: string
+      /** Preparation Ids */
+      preparation_ids: string[]
     }
     /**
      * NextQuestion
@@ -728,6 +745,8 @@ export interface components {
       current_score: number | null
       /** Final Score */
       final_score: number | null
+      /** Passed */
+      passed: boolean | null
       /**
        * Started At
        * Format: date-time
@@ -773,6 +792,8 @@ export interface components {
       correct?: boolean | null
       /** Current Score */
       current_score?: number | null
+      /** Passed */
+      passed?: boolean | null
     }
     /** SessionOut */
     SessionOut: {
@@ -801,6 +822,8 @@ export interface components {
       current_score: number | null
       /** Final Score */
       final_score: number | null
+      /** Passed */
+      passed: boolean | null
       /**
        * Started At
        * Format: date-time
@@ -859,6 +882,10 @@ export interface components {
       answered: number
       /** Score */
       score: number | null
+      /** Complete */
+      complete: boolean
+      /** Passed */
+      passed: boolean
       /** Certificate Id */
       certificate_id?: string | null
       /**
@@ -1487,26 +1514,6 @@ export interface operations {
       }
     }
   }
-  list_mastered_topics_preparations_mastered_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["MasteredTopicOut"][]
-        }
-      }
-    }
-  }
   list_progress_preparations__preparation_id__progress_get: {
     parameters: {
       query?: never
@@ -1604,6 +1611,26 @@ export interface operations {
       }
     }
   }
+  get_rules_certificates_rules_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": string[]
+        }
+      }
+    }
+  }
   get_certificate_certificates__certificate_id__get: {
     parameters: {
       query?: never
@@ -1691,6 +1718,41 @@ export interface operations {
             [key: string]: {
               [key: string]: number | null
             }
+          }
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  mastered_counts_internal_mastered_counts_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["MasteredCountsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": {
+            [key: string]: number
           }
         }
       }

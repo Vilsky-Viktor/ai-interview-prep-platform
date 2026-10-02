@@ -783,6 +783,8 @@ export interface components {
       join_count: number
       /** Owned */
       owned: boolean
+      /** Done */
+      done: boolean
     }
     /** MyReportOut */
     MyReportOut: {
@@ -829,6 +831,10 @@ export interface components {
       access: components["schemas"]["Access"]
       /** My Rating */
       my_rating: number | null
+      /** Done */
+      done: boolean
+      /** Rating Scale */
+      rating_scale: number
     }
     /**
      * PreparationIn

@@ -8,7 +8,6 @@ import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { SUBMIT_HINT } from "@/constants/keys"
-import { MAX_CHAT_MESSAGE_LENGTH } from "@/constants/rounds"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { streamChat } from "@/lib/chat"
 import { isSubmitShortcut } from "@/lib/keys"
@@ -43,7 +42,9 @@ export function ChatPanel({ answerId }: { answerId: string }) {
         { role: "assistant", content: full },
       ])
     } catch (error) {
-      toast.error(apiErrorMessage(error, "Couldn't get a reply. Please try again."))
+      toast.error(
+        apiErrorMessage(error, "Couldn't get a reply. Please try again.")
+      )
       setMessages((current) => current.slice(0, -1))
       setInput(message)
     }
@@ -78,7 +79,6 @@ export function ChatPanel({ answerId }: { answerId: string }) {
           value={input}
           onChange={(event) => setInput(event.target.value)}
           onKeyDown={handleKeyDown}
-          maxLength={MAX_CHAT_MESSAGE_LENGTH}
           placeholder={`Ask a follow-up question… (${SUBMIT_HINT})`}
           aria-label="Follow-up question"
           className="max-h-40 min-h-16 resize-none border-0 bg-transparent px-6 py-4 pr-20 text-lg shadow-none focus-visible:border-transparent focus-visible:ring-0 md:text-lg dark:bg-input/30"

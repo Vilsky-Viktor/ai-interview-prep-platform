@@ -28,3 +28,11 @@ CHAT_HISTORY_MESSAGES = 10
 
 # A timed interview's deadline has passed; it finished by itself.
 TIME_UP = "Time is up: the interview has finished."
+
+# Shown to learners before they practice; the pass mark comes from CERTIFICATE_MIN_SCORE.
+CERTIFICATE_RULES = [
+    "Answer every question of the topic.",
+    "Only your latest answer to each question counts.",
+    f"At least {CERTIFICATE_MIN_SCORE}% of your answers must be correct.",
+    "Once all of the above are done, you'll receive your certificate.",
+]

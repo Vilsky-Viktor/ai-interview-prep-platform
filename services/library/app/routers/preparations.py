@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser, OptionalUser
 from prepza_common.paging import PageParams
 
+from app.constants.feedback import MAX_RATING
 from app.helpers.preparations import summary_out
 from app.integrations import rounds
 from app.schemas.preparations import (
@@ -15,6 +16,7 @@ from app.schemas.preparations import (
     VisibilityIn,
 )
 from app.services.access import access_for, require_owner
+from app.services.done import done_ids
 from app.services.questions import question_texts
 from app.storage import feedback, preparations
 
@@ -25,9 +27,14 @@ router = APIRouter(prefix="/preparations", tags=["preparations"])
 async def list_mine(user: CurrentUser, page: PageParams) -> list[MyPreparation]:
     """The user's own and joined preparations together, newest first, a page at a time."""
     rows = await preparations.list_mine(user.uid, page.offset, page.limit)
+    done = await done_ids(user.uid, {row[0].id: row[0].topic_count for row in rows})
 
     return [
-        MyPreparation(**summary_out(row).model_dump(), owned=row[0].owner_id == user.uid)
+        MyPreparation(
+            **summary_out(row).model_dump(),
+            owned=row[0].owner_id == user.uid,
+            done=row[0].id in done,
+        )
         for row in rows
     ]
 
@@ -58,6 +65,7 @@ async def get_preparation(preparation_id: UUID, user: OptionalUser) -> Preparati
 
     topics = await preparations.get_topics(preparation_id)
     my_rating = await feedback.my_preparation_rating(preparation_id, user_id) if user_id else None
+    done = await done_ids(user_id, {preparation_id: len(topics)}) if user_id else set()
 
     return PreparationDetail(
         **summary_out(row).model_dump(),
@@ -73,6 +81,8 @@ async def get_preparation(preparation_id: UUID, user: OptionalUser) -> Preparati
         ],
         access=access,
         my_rating=my_rating,
+        done=preparation_id in done,
+        rating_scale=MAX_RATING,
     )
 
 

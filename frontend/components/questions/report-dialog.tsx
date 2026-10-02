@@ -17,12 +17,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  FEEDBACK_HOVER_CLASS,
-  MAX_REPORT_COMMENT_LENGTH,
-  REPORT_REASONS,
-} from "@/constants/feedback"
-import { ApiError, apiFetch } from "@/lib/api"
+import { FEEDBACK_HOVER_CLASS, REPORT_REASONS } from "@/constants/feedback"
+import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { ReportReason } from "@/types/feedback"
 
 export function ReportDialog({ basePath }: { basePath: string }) {
@@ -31,7 +27,6 @@ export function ReportDialog({ basePath }: { basePath: string }) {
   const [comment, setComment] = useState("")
   const [sending, setSending] = useState(false)
   const [reported, setReported] = useState(false)
-  const detailsRequired = reason === "other"
 
   // Callers remount this per question, so the state never carries over.
   useEffect(() => {
@@ -52,7 +47,8 @@ export function ReportDialog({ basePath }: { basePath: string }) {
   async function send(event: React.FormEvent) {
     event.preventDefault()
 
-    if (!reason || (detailsRequired && !comment.trim())) {
+    // Which reasons need details is the API's rule; its message shows if they're missing.
+    if (!reason) {
       return
     }
 
@@ -74,7 +70,9 @@ export function ReportDialog({ basePath }: { basePath: string }) {
         return
       }
 
-      toast.error("Couldn't send the report. Please try again.")
+      toast.error(
+        apiErrorMessage(error, "Couldn't send the report. Please try again.")
+      )
     } finally {
       setSending(false)
     }
@@ -94,7 +92,9 @@ export function ReportDialog({ basePath }: { basePath: string }) {
           />
         }
       >
-        <FlagIcon className={cn("size-6", reported && "fill-primary text-primary")} />
+        <FlagIcon
+          className={cn("size-6", reported && "fill-primary text-primary")}
+        />
       </DialogTrigger>
       <DialogContent showCloseButton={false} className="sm:max-w-lg">
         <DialogHeader>
@@ -129,10 +129,8 @@ export function ReportDialog({ basePath }: { basePath: string }) {
           </div>
           <div className="rounded-lg border border-transparent transition-colors focus-within:border-ring">
             <Textarea
-              required={detailsRequired}
-              placeholder={detailsRequired ? "Details" : "Details (optional)"}
+              placeholder="Details"
               aria-label="Details"
-              maxLength={MAX_REPORT_COMMENT_LENGTH}
               value={comment}
               onChange={(event) => setComment(event.target.value)}
               className="min-h-32 resize-none border-0 bg-transparent px-6 py-4 text-lg shadow-none focus-visible:border-transparent focus-visible:ring-0 md:text-lg dark:bg-input/30"
@@ -142,7 +140,11 @@ export function ReportDialog({ basePath }: { basePath: string }) {
         <DialogFooter>
           <DialogClose
             render={
-              <Button variant="outline" className="h-10 px-5 text-base" disabled={sending} />
+              <Button
+                variant="outline"
+                className="h-10 px-5 text-base"
+                disabled={sending}
+              />
             }
           >
             Cancel
@@ -151,7 +153,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
             type="submit"
             form="report-question-form"
             className="h-10 px-5 text-base"
-            disabled={!reason || sending || (detailsRequired && !comment.trim())}
+            disabled={!reason || sending}
           >
             Send
           </Button>

@@ -1,6 +1,7 @@
 import random
 
-from app.helpers.scores import current_score
+from app.constants.rounds import RoundStatus
+from app.helpers.scores import current_score, score_passed
 from app.models.rounds import Round
 from app.schemas.library import TopicQuestions
 from app.schemas.rounds import NextQuestion, RoundOut
@@ -51,6 +52,11 @@ def round_out(round_: Round) -> RoundOut:
         answered=len(round_.answers),
         current_score=current_score([answer.score for answer in round_.answers]),
         final_score=round_.final_score,
+        passed=score_passed(
+            round_.final_score
+            if round_.status == RoundStatus.FINISHED
+            else current_score([answer.score for answer in round_.answers])
+        ),
         started_at=round_.started_at,
         finished_at=round_.finished_at,
         certificate_id=round_.certificate.id if round_.certificate else None,

@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 
 from app.constants.rounds import TIME_UP, RoundStatus
-from app.helpers.scores import current_score
+from app.helpers.scores import current_score, score_passed
 from app.models.sessions import Session
 from app.schemas.rounds import AnswerCreate
 from app.schemas.sessions import SessionAnswerResult
@@ -30,5 +30,6 @@ async def submit_session_answer(row: Session, body: AnswerCreate) -> SessionAnsw
     if row.share_results:
         result.correct = answer.correct
         result.current_score = current_score(scores)
+        result.passed = score_passed(result.current_score)
 
     return result

@@ -5,7 +5,7 @@ from fastapi import HTTPException, status
 from app.constants.events import ANSWER_RECORDED
 from app.constants.rounds import CORRECT_SCORE, RoundStatus
 from app.helpers.rounds import correct_option_index, find_question
-from app.helpers.scores import current_score
+from app.helpers.scores import current_score, score_passed
 from app.integrations import events
 from app.models.rounds import Answer, Round
 from app.schemas.rounds import AnswerCreate, AnswerResult
@@ -74,6 +74,7 @@ async def submit_answer(round_: Round, body: AnswerCreate) -> AnswerResult:
         correct=answer.correct,
         correct_option_index=correct_option_index(question),
         current_score=current_score(scores),
+        passed=score_passed(current_score(scores)),
         answered=len(scores),
         total=len(round_.questions),
     )

@@ -5,9 +5,15 @@ from fastapi import APIRouter, HTTPException, status
 
 from app.helpers.review import build_review
 from app.helpers.sessions import session_out
-from app.schemas.sessions import InviteScoresIn, ScorecardSession, SessionOut, SessionsCreate
+from app.schemas.sessions import (
+    InviteScoresIn,
+    MasteredCountsIn,
+    ScorecardSession,
+    SessionOut,
+    SessionsCreate,
+)
 from app.service_auth import ServiceCaller
-from app.storage import rounds, sessions
+from app.storage import certificates, rounds, sessions
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -43,6 +49,14 @@ async def invite_scores(
         str(invite_id): {"progress": progress, "grade": grade, "finished": finished}
         for invite_id, (progress, grade, finished) in found.items()
     }
+
+
+@router.post("/mastered-counts")
+async def mastered_counts(body: MasteredCountsIn, caller: ServiceCaller) -> dict[str, int]:
+    """Topics with a certificate per preparation, so library can tell which ones are done."""
+    found = await certificates.mastered_counts(body.user_id, body.preparation_ids)
+
+    return {str(preparation_id): count for preparation_id, count in found.items()}
 
 
 @router.delete("/preparations/{preparation_id}", status_code=status.HTTP_204_NO_CONTENT)

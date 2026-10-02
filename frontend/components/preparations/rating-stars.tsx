@@ -6,15 +6,17 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 
-import { MAX_RATING } from "@/constants/feedback"
 import { apiFetch } from "@/lib/api"
 
 export function RatingStars({
   preparationId,
   myRating,
+  scale,
 }: {
   preparationId: string
   myRating: number | null
+  // Stars a rating can give; the API sets the scale.
+  scale: number
 }) {
   const router = useRouter()
   const [hovered, setHovered] = useState(0)
@@ -62,30 +64,28 @@ export function RatingStars({
           }
         }}
       >
-        {Array.from({ length: MAX_RATING }, (_, index) => index + 1).map(
-          (value) => (
-            <button
-              key={value}
-              type="button"
-              aria-label={`Rate ${value} of ${MAX_RATING}`}
-              disabled={locked}
-              onMouseEnter={() => {
-                if (!locked) {
-                  setHovered(value)
-                }
-              }}
-              onClick={() => rate(value)}
-              className="rounded-sm p-0.5 text-muted-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring enabled:hover:text-yellow-600"
-            >
-              <StarIcon
-                className={cn(
-                  "size-5",
-                  value <= shown && "fill-yellow-500 text-yellow-600"
-                )}
-              />
-            </button>
-          )
-        )}
+        {Array.from({ length: scale }, (_, index) => index + 1).map((value) => (
+          <button
+            key={value}
+            type="button"
+            aria-label={`Rate ${value} of ${scale}`}
+            disabled={locked}
+            onMouseEnter={() => {
+              if (!locked) {
+                setHovered(value)
+              }
+            }}
+            onClick={() => rate(value)}
+            className="rounded-sm p-0.5 text-muted-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring enabled:hover:text-yellow-600"
+          >
+            <StarIcon
+              className={cn(
+                "size-5",
+                value <= shown && "fill-yellow-500 text-yellow-600"
+              )}
+            />
+          </button>
+        ))}
       </div>
     </div>
   )

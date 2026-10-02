@@ -1,4 +1,4 @@
-import { ApiError, authHeaders } from "@/lib/api"
+import { ApiError, authHeaders, errorDetail } from "@/lib/api"
 
 /** Sends a follow-up message and calls onDelta with each streamed piece of the reply. */
 export async function streamChat(
@@ -13,8 +13,7 @@ export async function streamChat(
   })
 
   if (!response.ok || !response.body) {
-    const body = await response.json().catch(() => null)
-    const detail = typeof body?.detail === "string" ? body.detail : null
+    const detail = errorDetail(await response.json().catch(() => null))
 
     throw new ApiError(
       response.status,

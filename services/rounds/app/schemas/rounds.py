@@ -25,6 +25,8 @@ class RoundOut(BaseModel):
     answered: int
     current_score: int | None
     final_score: int | None
+    # Whether the score shown passes: the final one once finished, the running one before.
+    passed: bool | None
     started_at: datetime
     finished_at: datetime | None
     certificate_id: UUID | None
@@ -40,13 +42,12 @@ class TopicProgressOut(BaseModel):
     topic_id: UUID
     answered: int
     score: int | None
+    # Every question of the topic answered, and whether the topic passes (certified, or complete
+    # with a passing score).
+    complete: bool
+    passed: bool
     certificate_id: UUID | None = None
     in_progress: bool = False
-
-
-class MasteredTopicOut(BaseModel):
-    preparation_id: UUID
-    topic_id: UUID
 
 
 class NextQuestion(BaseModel):
@@ -63,5 +64,6 @@ class AnswerResult(BaseModel):
     correct: bool
     correct_option_index: int
     current_score: int
+    passed: bool
     answered: int
     total: int

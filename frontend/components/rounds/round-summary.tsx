@@ -5,12 +5,11 @@ import Link from "next/link"
 import { RoundChange } from "@/components/rounds/round-change"
 import { RoundReview } from "@/components/rounds/round-review"
 import { Button } from "@/components/ui/button"
-import { scorePassed } from "@/lib/rounds"
 import type { Round } from "@/types/round"
 
 export function RoundSummary({ round }: { round: Round }) {
   const historyHref = `/preparations/${round.preparation_id}/topics/${round.topic_id}/history`
-  const passed = scorePassed(round.final_score ?? 0)
+  const passed = round.passed
   const scoreColor = passed
     ? "text-green-600 dark:text-green-400"
     : "text-red-600 dark:text-red-400"

@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Switch } from "@/components/ui/switch"
-import { MAX_TIME_LIMIT_MINUTES } from "@/constants/interviews"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 
 type Settings = {
@@ -73,23 +72,9 @@ export function InterviewSettings({
     }
   }
 
+  // The API checks the range; its message shows if the value doesn't fit.
   function saveMinutes() {
-    const value = Number(minutes)
-
-    if (
-      !Number.isInteger(value) ||
-      value < 1 ||
-      value > MAX_TIME_LIMIT_MINUTES
-    ) {
-      toast.error(
-        `Set a time limit from 1 to ${MAX_TIME_LIMIT_MINUTES} minutes.`
-      )
-      setMinutes(String(settings.time_limit_minutes))
-
-      return
-    }
-
-    void save({ time_limit_minutes: value })
+    void save({ time_limit_minutes: Number(minutes) })
   }
 
   async function remove() {
@@ -203,8 +188,6 @@ export function InterviewSettings({
                   <Input
                     type="number"
                     inputMode="numeric"
-                    min={1}
-                    max={MAX_TIME_LIMIT_MINUTES}
                     value={minutes}
                     disabled={saving}
                     aria-label="Time limit in minutes"

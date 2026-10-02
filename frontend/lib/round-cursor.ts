@@ -31,6 +31,7 @@ export function resultFromReview(
     correct: item.answer.correct,
     correct_option_index: item.correct_option_index,
     current_score: round.current_score ?? 0,
+    passed: round.passed ?? false,
     answered: round.answered,
     total: round.total,
     option_index: item.answer.option_index,

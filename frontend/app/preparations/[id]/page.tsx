@@ -20,7 +20,6 @@ import { TopicProgress } from "@/components/rounds/topic-progress"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { formatDate, plural } from "@/lib/format"
-import { isPreparationDone, topicMastered } from "@/lib/rounds"
 import { serverFetch } from "@/lib/server-api"
 import type { PreparationDetail } from "@/types/preparation"
 import type { TopicProgress as Progressed } from "@/types/round"
@@ -56,12 +55,7 @@ export default async function PreparationPage({ params }: PageProps) {
 
   const canPractice = preparation.access !== "public"
   const isOwner = preparation.access === "owner"
-  const done = isPreparationDone(
-    preparation.topics.length,
-    preparation.topics.filter((topic) =>
-      topicMastered(progressByTopic.get(topic.id))
-    ).length
-  )
+  const done = preparation.done
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
@@ -89,6 +83,7 @@ export default async function PreparationPage({ params }: PageProps) {
               <RatingStars
                 preparationId={preparation.id}
                 myRating={preparation.my_rating}
+                scale={preparation.rating_scale}
               />
             )}
           </div>
@@ -126,11 +121,16 @@ export default async function PreparationPage({ params }: PageProps) {
             <li key={topic.id} className="space-y-4 p-4 sm:p-6">
               <div className="flex items-start justify-between gap-8">
                 <span className="min-w-0 space-y-2">
-                  <span className="block text-2xl font-medium">{topic.title}</span>
+                  <span className="block text-2xl font-medium">
+                    {topic.title}
+                  </span>
                   <SubtopicList subtopics={topic.subtopics} />
                 </span>
                 {canPractice && (
-                  <StartRound topicId={topic.id} inProgress={progress?.in_progress} />
+                  <StartRound
+                    topicId={topic.id}
+                    inProgress={progress?.in_progress}
+                  />
                 )}
               </div>
               {/* Questions, progress, actions; on phones the progress bar takes its own line. */}
@@ -146,7 +146,10 @@ export default async function PreparationPage({ params }: PageProps) {
                 </span>
                 {canPractice && (
                   <div className="order-last w-full sm:order-none">
-                    <TopicProgress progress={progress} total={topic.question_count} />
+                    <TopicProgress
+                      progress={progress}
+                      total={topic.question_count}
+                    />
                   </div>
                 )}
                 {canPractice && (

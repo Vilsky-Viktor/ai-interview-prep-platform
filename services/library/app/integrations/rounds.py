@@ -14,3 +14,16 @@ async def delete_preparation_data(preparation_id: UUID) -> None:
     )
 
     response.raise_for_status()
+
+
+async def mastered_counts(user_id: str, preparation_ids: list[UUID]) -> dict[str, int]:
+    """Topics the user holds a certificate for, per preparation id."""
+    response = await http.get_client().post(
+        f"{settings.rounds_url}/internal/mastered-counts",
+        json={"user_id": user_id, "preparation_ids": [str(item) for item in preparation_ids]},
+        headers={"Authorization": f"Bearer {service_token()}"},
+    )
+
+    response.raise_for_status()
+
+    return response.json()

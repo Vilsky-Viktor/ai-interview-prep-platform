@@ -10,24 +10,17 @@ import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
 import type { GenerationSummary } from "@/types/generation"
 import type { MyPreparation } from "@/types/preparation"
-import type { MasteredTopic } from "@/types/round"
 
 export const metadata: Metadata = { title: "My preparations" }
 
 export default async function PreparationsPage() {
   // The first page renders on the server; the rest load as the user scrolls.
-  const [first, masteredTopics, unfinished] = await Promise.all([
+  const [first, unfinished] = await Promise.all([
     serverFetch<MyPreparation[]>(`/library/preparations?limit=${PAGE_SIZE}`),
-    serverFetch<MasteredTopic[]>("/rounds/preparations/mastered"),
     serverFetch<GenerationSummary[]>(
       `/generate/generations?limit=${PAGE_SIZE}`
     ),
   ])
-  const mastered: Record<string, number> = {}
-
-  for (const item of masteredTopics ?? []) {
-    mastered[item.preparation_id] = (mastered[item.preparation_id] ?? 0) + 1
-  }
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
@@ -56,7 +49,6 @@ export default async function PreparationsPage() {
         <PreparationList
           path="/library/preparations"
           initial={first}
-          mastered={mastered}
           className="p-6"
           empty={
             (unfinished ?? []).length === 0 && (

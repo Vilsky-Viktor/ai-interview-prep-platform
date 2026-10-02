@@ -4,7 +4,10 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.helpers.scores import score_passed
+from app.integrations import library
 from app.main import app
+from app.service_auth import service_token
 from app.storage import certificates, rounds
 
 PREPARATION_ID = uuid.uuid4()
@@ -23,6 +26,14 @@ def no_open_rounds(monkeypatch):
         return set()
 
     monkeypatch.setattr(rounds, "in_progress_topics", fake_open)
+
+
+@pytest.fixture(autouse=True)
+def ten_questions(monkeypatch):
+    async def fake_set(set_id):
+        return {"topics": [{"id": str(TOPIC_ID), "question_count": 10}]}
+
+    monkeypatch.setattr(library, "get_set", fake_set)
 
 
 def sign_in():
@@ -60,6 +71,8 @@ def test_lists_answered_and_score_per_topic(client, monkeypatch):
             "topic_id": str(TOPIC_ID),
             "answered": 7,
             "score": 86,
+            "complete": False,
+            "passed": False,
             "certificate_id": None,
             "in_progress": False,
         }
@@ -84,6 +97,8 @@ def test_marks_a_topic_with_an_open_round_even_before_any_answer(client, monkeyp
             "topic_id": str(TOPIC_ID),
             "answered": 0,
             "score": None,
+            "complete": False,
+            "passed": False,
             "certificate_id": None,
             "in_progress": True,
         }
@@ -120,6 +135,8 @@ def test_includes_certificate_even_without_current_answers(client, monkeypatch):
         "topic_id": str(TOPIC_ID),
         "answered": 10,
         "score": 90,
+        "complete": True,
+        "passed": True,
         "certificate_id": str(cert_id),
         "in_progress": False,
     }
@@ -127,22 +144,51 @@ def test_includes_certificate_even_without_current_answers(client, monkeypatch):
     assert rows[str(other_topic)]["score"] is None
 
 
-def test_lists_mastered_topics_for_user(client, monkeypatch):
-    other_prep = uuid.uuid4()
-    other_topic = uuid.uuid4()
-
-    async def fake_mastered(user_id):
-        assert user_id == "member"
-
-        return [(PREPARATION_ID, TOPIC_ID), (other_prep, other_topic)]
-
-    monkeypatch.setattr(certificates, "mastered_topics", fake_mastered)
+@pytest.mark.parametrize(
+    ("answered", "score", "complete", "passed"),
+    [
+        (10, 70, True, True),
+        (10, 69, True, False),
+        (9, 100, False, False),
+    ],
+)
+def test_a_topic_passes_once_complete_with_a_passing_score(
+    client, monkeypatch, answered, score, complete, passed
+):
+    fake_progress(monkeypatch, {TOPIC_ID: (answered, score)})
+    no_certificates(monkeypatch)
     sign_in()
 
-    response = client.get("/preparations/mastered")
+    [row] = client.get(f"/preparations/{PREPARATION_ID}/progress").json()
 
-    assert response.status_code == 200
-    assert response.json() == [
-        {"preparation_id": str(PREPARATION_ID), "topic_id": str(TOPIC_ID)},
-        {"preparation_id": str(other_prep), "topic_id": str(other_topic)},
-    ]
+    assert (row["complete"], row["passed"]) == (complete, passed)
+
+
+def test_certificate_rules_name_the_pass_mark(client):
+    rules = client.get("/certificates/rules").json()
+
+    assert any("70%" in rule for rule in rules)
+
+
+def test_scores_pass_from_the_pass_mark():
+    assert [score_passed(score) for score in (None, 69, 70)] == [None, False, True]
+
+
+def test_library_learns_how_many_topics_are_mastered(client, monkeypatch):
+    other = uuid.uuid4()
+
+    async def fake_counts(user_id, preparation_ids):
+        assert user_id == "member"
+
+        return {PREPARATION_ID: 2}
+
+    monkeypatch.setattr(certificates, "mastered_counts", fake_counts)
+    body = {"user_id": "member", "preparation_ids": [str(PREPARATION_ID), str(other)]}
+
+    response = client.post(
+        "/internal/mastered-counts",
+        json=body,
+        headers={"Authorization": f"Bearer {service_token()}"},
+    )
+
+    assert response.json() == {str(PREPARATION_ID): 2}

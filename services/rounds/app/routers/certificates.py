@@ -2,10 +2,18 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 
+from app.constants.rounds import CERTIFICATE_RULES
 from app.schemas.certificates import CertificateOut
 from app.storage import certificates
 
 router = APIRouter(prefix="/certificates", tags=["certificates"])
+
+
+@router.get("/rules")
+async def get_rules() -> list[str]:
+    """What earns a topic's certificate; public, shown before practicing. Declared before
+    /{certificate_id}, which would otherwise take "rules" as an id."""
+    return CERTIFICATE_RULES
 
 
 @router.get("/{certificate_id}")

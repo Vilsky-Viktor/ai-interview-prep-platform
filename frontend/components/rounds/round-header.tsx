@@ -4,7 +4,6 @@ import Link from "next/link"
 
 import { BackLink } from "@/components/back-link"
 import { Progress } from "@/components/ui/progress"
-import { scorePassed } from "@/lib/rounds"
 import type { Round } from "@/types/round"
 
 export function RoundHeader({ round }: { round: Round }) {
@@ -32,7 +31,7 @@ export function RoundHeader({ round }: { round: Round }) {
             <span
               className={cn(
                 "text-xl font-light",
-                scorePassed(score)
+                round.passed
                   ? "text-green-600 dark:text-green-400"
                   : "text-red-600 dark:text-red-400"
               )}

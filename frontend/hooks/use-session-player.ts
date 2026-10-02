@@ -146,6 +146,7 @@ export function useSessionPlayer(id: string) {
             ...current,
             answered: next.answered,
             current_score: next.current_score ?? current.current_score,
+            passed: next.passed ?? current.passed,
           }
       )
       setTopics((current) =>

@@ -40,6 +40,8 @@ class SessionOut(BaseModel):
     answered: int
     current_score: int | None
     final_score: int | None
+    # Whether the score shown passes; None when there is none or results aren't shared.
+    passed: bool | None
     started_at: datetime
     finished_at: datetime | None
     # Timed interviews only: when the interview finishes by itself.
@@ -53,6 +55,7 @@ class SessionAnswerResult(BaseModel):
     # Only when the candidate may see results.
     correct: bool | None = None
     current_score: int | None = None
+    passed: bool | None = None
 
 
 class ScorecardSession(BaseModel):
@@ -61,3 +64,8 @@ class ScorecardSession(BaseModel):
     status: RoundStatus
     final_score: int | None
     review: list[ReviewItem]
+
+
+class MasteredCountsIn(BaseModel):
+    user_id: str
+    preparation_ids: list[UUID]

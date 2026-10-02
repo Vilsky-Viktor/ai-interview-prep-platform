@@ -120,6 +120,7 @@ export function useRoundPlayer(id: string) {
             ...current,
             answered: next.answered,
             current_score: next.current_score,
+            passed: next.passed,
           }
       )
 

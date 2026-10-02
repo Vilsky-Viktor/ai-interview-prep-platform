@@ -21,7 +21,6 @@ import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { apiFetch } from "@/lib/api"
 import { formatDate } from "@/lib/format"
-import { scorePassed } from "@/lib/rounds"
 import { clearRoundCursor } from "@/lib/round-cursor"
 import type { Round } from "@/types/round"
 
@@ -176,7 +175,7 @@ export function RoundHistory({
                     <span
                       className={cn(
                         "text-2xl font-light tabular-nums",
-                        scorePassed(score)
+                        round.passed
                           ? "text-green-600 dark:text-green-400"
                           : "text-red-600 dark:text-red-400"
                       )}

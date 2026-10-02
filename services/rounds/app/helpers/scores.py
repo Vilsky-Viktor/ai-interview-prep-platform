@@ -30,3 +30,8 @@ def final_score(scores: list[int], total: int) -> int:
 def earns_certificate(coverage: int | None) -> bool:
     """`coverage` is the topic-wide score, None until every topic question has an answer."""
     return coverage is not None and coverage >= CERTIFICATE_MIN_SCORE
+
+
+def score_passed(score: int | None) -> bool | None:
+    """Whether a score reaches the pass mark; None while there is no score."""
+    return None if score is None else score >= CERTIFICATE_MIN_SCORE

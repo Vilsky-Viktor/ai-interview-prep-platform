@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 
 from app.models.certificates import Certificate
 from app.storage.db import Session
@@ -30,20 +30,6 @@ async def for_preparation(
         return certs
 
 
-async def mastered_topics(user_id: str) -> list[tuple[uuid.UUID, uuid.UUID]]:
-    """Topics the user holds a certificate for, on any preparation."""
-    query = (
-        select(Certificate.preparation_id, Certificate.topic_id)
-        .where(Certificate.user_id == user_id)
-        .distinct()
-    )
-
-    async with Session() as session:
-        rows = await session.execute(query)
-
-        return [(preparation_id, topic_id) for preparation_id, topic_id in rows]
-
-
 async def has_for_topic(user_id: str, topic_id: uuid.UUID) -> bool:
     query = select(Certificate.id).where(
         Certificate.user_id == user_id, Certificate.topic_id == topic_id
@@ -51,3 +37,18 @@ async def has_for_topic(user_id: str, topic_id: uuid.UUID) -> bool:
 
     async with Session() as session:
         return await session.scalar(query.limit(1)) is not None
+
+
+async def mastered_counts(
+    user_id: str, preparation_ids: list[uuid.UUID]
+) -> dict[uuid.UUID, int]:
+    """Topics the user holds a certificate for, per preparation; preparations without any are
+    missing."""
+    query = (
+        select(Certificate.preparation_id, func.count(Certificate.topic_id.distinct()))
+        .where(Certificate.user_id == user_id, Certificate.preparation_id.in_(preparation_ids))
+        .group_by(Certificate.preparation_id)
+    )
+
+    async with Session() as session:
+        return dict((await session.execute(query)).all())
