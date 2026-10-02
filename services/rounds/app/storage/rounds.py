@@ -70,9 +70,7 @@ async def get(round_id: uuid.UUID) -> Round | None:
         return await session.get(Round, round_id, options=LOAD_ROUND)
 
 
-async def list_for_topic(
-    user_id: str, topic_id: uuid.UUID, offset: int, limit: int
-) -> list[Round]:
+async def list_for_topic(user_id: str, topic_id: uuid.UUID, offset: int, limit: int) -> list[Round]:
     query = (
         select(Round)
         .where(Round.user_id == user_id, Round.topic_id == topic_id)
@@ -127,9 +125,7 @@ async def remove(round_id: uuid.UUID, user_id: str) -> list[uuid.UUID] | None:
         owned = Round.id == round_id, Round.user_id == user_id
         # Certificates outlive rounds only when the whole preparation is deleted.
         await session.execute(
-            delete(Certificate).where(
-                Certificate.round_id.in_(select(Round.id).where(*owned))
-            )
+            delete(Certificate).where(Certificate.round_id.in_(select(Round.id).where(*owned)))
         )
         result = await session.execute(delete(Round).where(*owned))
         await session.commit()

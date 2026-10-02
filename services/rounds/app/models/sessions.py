@@ -1,5 +1,6 @@
 import uuid
 from datetime import UTC, datetime
+from typing import TYPE_CHECKING
 
 from sqlalchemy import DateTime, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB
@@ -8,6 +9,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.constants.rounds import RoundStatus
 from app.models.base import Base
 from app.models.signals import Signal
+
+# For the relationship's annotation only; the class is resolved by name at runtime.
+if TYPE_CHECKING:
+    from app.models.rounds import Answer
 
 
 class Session(Base):

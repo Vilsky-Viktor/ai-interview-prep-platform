@@ -18,9 +18,7 @@ COUNTERS = ("topic_count", "rating_sum", "rating_count", "join_count")
 
 def upgrade() -> None:
     for column in COUNTERS:
-        op.add_column(
-            "sets", sa.Column(column, sa.Integer(), nullable=False, server_default="0")
-        )
+        op.add_column("sets", sa.Column(column, sa.Integer(), nullable=False, server_default="0"))
 
     op.execute(
         """

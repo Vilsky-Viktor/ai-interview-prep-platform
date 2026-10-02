@@ -123,7 +123,9 @@ async def list_question_texts(set_id: UUID, caller: ServiceCaller) -> dict[str, 
     if await preparations.get(set_id) is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Set not found")
 
-    return {str(question_id): text for question_id, text in await preparations.question_texts(set_id)}
+    return {
+        str(question_id): text for question_id, text in await preparations.question_texts(set_id)
+    }
 
 
 @router.get("/sets/{set_id}/topics/{topic_id}/questions")

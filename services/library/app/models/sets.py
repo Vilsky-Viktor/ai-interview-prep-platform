@@ -31,9 +31,7 @@ class QuestionSet(Base):
     rating_sum: Mapped[int] = mapped_column(default=0)
     rating_count: Mapped[int] = mapped_column(default=0)
     join_count: Mapped[int] = mapped_column(default=0)
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     topics: Mapped[list["Topic"]] = relationship(
         order_by="Topic.position", cascade="all, delete-orphan"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, Poppins } from "next/font/google"
+import { headers } from "next/headers"
 
 import "./globals.css"
 import { AuthProvider } from "@/components/auth-provider"
@@ -24,11 +25,14 @@ export const metadata: Metadata = {
     "Prepare for interviews with AI-generated multiple-choice questions, practice rounds and certificates.",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // The Content-Security-Policy's nonce from proxy.ts, for the theme's inline script.
+  const nonce = (await headers()).get("x-nonce") ?? undefined
+
   return (
     <html
       lang="en"
@@ -42,7 +46,7 @@ export default function RootLayout({
       )}
     >
       <body>
-        <ThemeProvider>
+        <ThemeProvider nonce={nonce}>
           <AuthProvider>
             <SiteHeader />
             {children}

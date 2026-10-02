@@ -4,7 +4,9 @@ import httpx
 from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
+from prepza_common.rate_limit import hit_emails
 
+from app.config.settings import settings
 from app.constants.events import CANDIDATE_INVITED
 from app.constants.invites import InviteStatus
 from app.constants.roles import Role
@@ -16,7 +18,7 @@ from app.helpers.interviews import (
 )
 from app.integrations import generation as generation_api
 from app.integrations import library, rounds
-from app.integrations.events import publish
+from app.integrations.events import get_redis, publish
 from app.schemas.interviews import (
     InterviewCreate,
     InterviewDetail,
@@ -47,9 +49,7 @@ async def create_interview(
 
         raise
 
-    interview = await interviews.create(
-        company.id, created["id"], body.share_results
-    )
+    interview = await interviews.create(company.id, created["id"], body.share_results)
 
     return await interview_out(interview)
 
@@ -82,9 +82,7 @@ async def get_interview(interview_id: UUID, user: CurrentUser) -> InterviewDetai
 
 
 @router.patch("/{interview_id}/settings", status_code=status.HTTP_204_NO_CONTENT)
-async def update_settings(
-    interview_id: UUID, body: InterviewSettings, user: CurrentUser
-) -> None:
+async def update_settings(interview_id: UUID, body: InterviewSettings, user: CurrentUser) -> None:
     interview = await interviews.get(interview_id)
 
     if interview is None:
@@ -154,6 +152,14 @@ async def invite_candidate(
         raise HTTPException(status.HTTP_409_CONFLICT, "Interview is still being generated")
 
     email = str(body.email).lower()
+    await hit_emails(
+        get_redis(),
+        user.uid,
+        f"{interview.id}:{email}",
+        settings.email_hourly_limit,
+        settings.email_daily_limit,
+        settings.email_recipient_daily_limit,
+    )
     invite = await invites.upsert(interview.id, email)
     title = await interview_title(interview) or "an interview"
     await publish(
@@ -211,9 +217,7 @@ async def list_candidates(
     ]
 
 
-@router.delete(
-    "/{interview_id}/candidates/{invite_id}", status_code=status.HTTP_204_NO_CONTENT
-)
+@router.delete("/{interview_id}/candidates/{invite_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUser) -> None:
     """Withdraws an invite the candidate hasn't used yet; later it would discard their answers."""
     interview = await interviews.get(interview_id)
@@ -235,7 +239,9 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
 @router.get("/{interview_id}/candidates/{invite_id}")
 async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: CurrentUser) -> dict:
     interview = await interviews.get(interview_id)
-    invite = next((item for item in (interview.invites if interview else []) if item.id == invite_id), None)
+    invite = next(
+        (item for item in (interview.invites if interview else []) if item.id == invite_id), None
+    )
 
     if interview is None or invite is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
@@ -244,10 +250,11 @@ async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: Current
 
     card = await rounds.scorecard(invite.id) or []
 
-    if card and all(item["status"] == "finished" for item in card):
-        if invite.status != InviteStatus.FINISHED:
-            await invites.set_status([invite.id], InviteStatus.FINISHED)
-            invite.status = InviteStatus.FINISHED
+    finished = card and all(item["status"] == "finished" for item in card)
+
+    if finished and invite.status != InviteStatus.FINISHED:
+        await invites.set_status([invite.id], InviteStatus.FINISHED)
+        invite.status = InviteStatus.FINISHED
 
     return {
         "id": str(invite.id),

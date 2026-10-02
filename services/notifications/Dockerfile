@@ -22,4 +22,10 @@ FROM base AS prod
 
 COPY app ./app
 
+# An unprivileged user that can read the code but not change it. Bytecode is compiled now, as
+# that user can't write it later.
+RUN python -m compileall -q app && adduser -D -H -u 10001 app
+ENV UV_CACHE_DIR=/tmp/uv-cache
+USER app
+
 CMD ["uv", "run", "--no-sync", "python", "-m", "app.main"]

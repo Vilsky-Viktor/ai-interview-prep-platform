@@ -26,7 +26,11 @@ async def lifespan(app: FastAPI):
     await http.get_client().aclose()
 
 
-app = FastAPI(title="generation", lifespan=lifespan)
+app = FastAPI(
+    title="generation",
+    lifespan=lifespan,
+    openapi_url="/openapi.json" if settings.api_docs else None,
+)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(generations.router)
 app.include_router(internal.router)

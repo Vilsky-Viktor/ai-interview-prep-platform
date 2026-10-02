@@ -152,9 +152,14 @@ Failed sends are retried 5 times and then moved to the `events:notifications:dea
 
 ## Tests
 
+Each Python service (and `packages/common`) keeps `tests/unit` (fakes, no services needed) and `tests/integration` (real Postgres and Redis), with the shared setup in `tests/conftest.py`.
+
 ```bash
-# Each Python service
+# Unit tests of each Python service, and of the shared package (packages/common)
 cd services/rounds && uv sync && uv run pytest
+
+# Python lint and format, as CI runs them (ruff's version is pinned in CI)
+uvx ruff@0.16.10 check services packages && uvx ruff@0.16.10 format --check services packages
 
 # Frontend
 cd frontend && pnpm install && pnpm lint && pnpm typecheck
@@ -163,9 +168,13 @@ cd frontend && pnpm api-types
 
 # Smoke test against a running stack
 ./scripts/smoke.sh
+
+# Integration tests: each service's tests/integration against the running stack's real Postgres
+# and Redis, in a "<service>_test" database created and dropped for the run
+./scripts/integration.sh            # or: ./scripts/integration.sh rounds library
 ```
 
-CI runs all of these on every push and pull request.
+CI runs all of these on every push and pull request, and also builds every production image and starts the whole stack for the smoke test.
 
 ## Project conventions
 

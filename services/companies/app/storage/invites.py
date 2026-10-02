@@ -68,9 +68,7 @@ async def set_status(invite_ids: list, status: str) -> None:
 
     async with Session() as session:
         await session.execute(
-            update(CandidateInvite)
-            .where(CandidateInvite.id.in_(invite_ids))
-            .values(status=status)
+            update(CandidateInvite).where(CandidateInvite.id.in_(invite_ids)).values(status=status)
         )
         await session.commit()
 

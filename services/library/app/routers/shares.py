@@ -3,9 +3,11 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
+from prepza_common.rate_limit import hit_emails
 
+from app.config.settings import settings
 from app.constants.events import PREPARATION_SHARED
-from app.integrations.events import publish
+from app.integrations.events import get_redis, publish
 from app.schemas.sharing import ShareIn, ShareInviteOut, ShareOut
 from app.services.access import require_owner
 from app.storage import preparations, shares
@@ -22,6 +24,14 @@ async def share(preparation_id: UUID, body: ShareIn, user: CurrentUser) -> Share
     if email == user.email.lower():
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "You can't share with yourself")
 
+    await hit_emails(
+        get_redis(),
+        user.uid,
+        f"{preparation_id}:{email}",
+        settings.email_hourly_limit,
+        settings.email_daily_limit,
+        settings.email_recipient_daily_limit,
+    )
     invite = await shares.upsert(preparation_id, email, user.uid)
     await publish(
         PREPARATION_SHARED,
@@ -39,9 +49,7 @@ async def share(preparation_id: UUID, body: ShareIn, user: CurrentUser) -> Share
 
 
 @router.get("/preparations/{preparation_id}/shares")
-async def list_shares(
-    preparation_id: UUID, user: CurrentUser, page: PageParams
-) -> list[ShareOut]:
+async def list_shares(preparation_id: UUID, user: CurrentUser, page: PageParams) -> list[ShareOut]:
     require_owner(await preparations.get(preparation_id), user.uid)
 
     return [

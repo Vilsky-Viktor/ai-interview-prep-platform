@@ -11,9 +11,7 @@ def round_questions(topic: TopicQuestions, latest: dict[str, int]) -> list[dict]
     """Every question of the topic: unanswered first, then the lowest latest scores; ties shuffled."""
     questions = [question.model_dump(mode="json") for question in topic.questions]
     random.shuffle(questions)
-    questions.sort(
-        key=lambda question: (question["id"] in latest, latest.get(question["id"], 0))
-    )
+    questions.sort(key=lambda question: (question["id"] in latest, latest.get(question["id"], 0)))
 
     return questions
 

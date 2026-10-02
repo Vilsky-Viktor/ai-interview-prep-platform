@@ -1,5 +1,10 @@
 import os
 
+# Integration tests (tests/integration) use a database of their own, never the dev one: the
+# service's database name with "_test" added.
+if os.getenv("INTEGRATION_TESTS"):
+    os.environ["DATABASE_URL"] += "_test"
+
 os.environ.setdefault("FIREBASE_PROJECT_ID", "demo-test")
 os.environ.setdefault("DATABASE_URL", "postgresql://test:test@localhost/test")
 os.environ.setdefault("REDIS_URL", "redis://localhost:6379")
@@ -9,10 +14,10 @@ os.environ.setdefault("LIBRARY_URL", "http://library")
 os.environ.setdefault("ROUNDS_URL", "http://rounds")
 os.environ.setdefault("CONSUME_EVENTS", "false")
 
-import pytest  # noqa: E402
-from fastapi.testclient import TestClient  # noqa: E402
+import pytest
+from fastapi.testclient import TestClient
 
-from app.main import app  # noqa: E402
+from app.main import app
 
 
 @pytest.fixture(scope="session")

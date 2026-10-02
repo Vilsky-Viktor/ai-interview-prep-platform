@@ -3,7 +3,7 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import create_engine
 
-import app.models.generation  # noqa: F401  registers the tables on Base.metadata
+import app.models.generation  # registers the tables on Base.metadata
 import app.models.key_checks  # noqa: F401
 from app.config.settings import settings
 from app.models.base import Base

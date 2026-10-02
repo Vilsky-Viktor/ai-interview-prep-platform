@@ -11,4 +11,3 @@ async def question_texts(questions: list[Question]) -> list[QuestionText]:
         QuestionText(id=question.id, text=question.text, **stats.get(question.id, {}))
         for question in questions
     ]
-

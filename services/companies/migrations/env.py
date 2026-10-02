@@ -3,8 +3,8 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import create_engine
 
-import app.models.companies  # noqa: F401
-import app.models.interviews  # noqa: F401
+import app.models.companies
+import app.models.interviews
 import app.models.invites  # noqa: F401
 from app.config.settings import settings
 from app.models.base import Base

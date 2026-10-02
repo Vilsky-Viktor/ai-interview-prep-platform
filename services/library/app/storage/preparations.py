@@ -56,9 +56,7 @@ async def create(preparation: PreparationIn) -> uuid.UUID:
     async with Session() as session:
         session.add(question_set)
         await session.flush()
-        session.add(
-            JoinedPreparation(set_id=question_set.id, user_id=preparation.owner_uid)
-        )
+        session.add(JoinedPreparation(set_id=question_set.id, user_id=preparation.owner_uid))
         await reuse.save_embeddings(
             session,
             [topic.id for topic in question_set.topics],

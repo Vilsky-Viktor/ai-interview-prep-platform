@@ -76,9 +76,7 @@ async def review_generation(
 async def retry(generation_id: UUID, user: CurrentUser, request: Request) -> GenerationOut:
     generation = await get_owned(generation_id, user)
 
-    return GenerationOut.model_validate(
-        await retry_generation(request.app.state.arq, generation)
-    )
+    return GenerationOut.model_validate(await retry_generation(request.app.state.arq, generation))
 
 
 @router.post("/{generation_id}/cancel")

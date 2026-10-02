@@ -65,9 +65,7 @@ async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
     interview = await get_interview(interview_id)
     await require_manager(user, interview)
 
-    return passed_through(
-        await generation_api.retry(interview.generation_id, interview.company_id)
-    )
+    return passed_through(await generation_api.retry(interview.generation_id, interview.company_id))
 
 
 @router.post("/{interview_id}/generation/cancel")

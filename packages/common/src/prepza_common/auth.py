@@ -3,6 +3,7 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from firebase_admin import auth as firebase_auth
+from prepza_common.constants import SIGN_IN_UNAVAILABLE
 from prepza_common.user import User
 
 bearer = HTTPBearer()
@@ -10,11 +11,17 @@ optional_bearer = HTTPBearer(auto_error=False)
 
 
 def verify(token: str) -> User | None:
-    """The user a Firebase ID token belongs to, or None when it isn't valid."""
+    """The user a Firebase ID token belongs to, or None when it isn't valid.
+
+    When Google's signing certificates can't be fetched, no token can be checked: that's our
+    outage, not a bad token, so it's a 503 rather than a 401.
+    """
     try:
         claims = firebase_auth.verify_id_token(token)
     except (ValueError, firebase_auth.InvalidIdTokenError):
         return None
+    except firebase_auth.CertificateFetchError:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, SIGN_IN_UNAVAILABLE)
 
     return User(
         uid=claims["uid"],

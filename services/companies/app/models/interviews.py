@@ -1,5 +1,6 @@
 import uuid
 from datetime import UTC, datetime
+from typing import TYPE_CHECKING
 
 from sqlalchemy import DateTime, ForeignKey, Text, false
 from sqlalchemy.dialects.postgresql import JSONB
@@ -7,6 +8,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.constants.interviews import DEFAULT_QUESTION_SECONDS
 from app.models.base import Base
+
+# For the relationship's annotation only; the class is resolved by name at runtime.
+if TYPE_CHECKING:
+    from app.models.invites import CandidateInvite
 
 
 class Interview(Base):

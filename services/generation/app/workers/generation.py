@@ -2,6 +2,7 @@ import logging
 import os
 import uuid
 from datetime import UTC, datetime, timedelta
+from typing import ClassVar
 
 from arq import cron
 from arq.connections import RedisSettings
@@ -98,8 +99,8 @@ async def shutdown(ctx: dict) -> None:
 
 
 class WorkerSettings:
-    functions = [run_generation, verify_question]
-    cron_jobs = [
+    functions: ClassVar = [run_generation, verify_question]
+    cron_jobs: ClassVar = [
         cron(sweep, minute=SWEEP_MINUTES),
         cron(key_check_batches, minute=KEY_CHECK_MINUTES),
     ]

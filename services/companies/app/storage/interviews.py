@@ -31,9 +31,7 @@ async def create(company_id, generation_id, share_results: bool) -> Interview:
 
 async def get(interview_id) -> Interview | None:
     async with Session() as session:
-        return await session.get(
-            Interview, interview_id, options=[selectinload(Interview.invites)]
-        )
+        return await session.get(Interview, interview_id, options=[selectinload(Interview.invites)])
 
 
 async def counts(company_ids: list) -> dict:
@@ -72,9 +70,7 @@ async def list_for_company(
 async def update_settings(interview_id, settings: InterviewSettings) -> None:
     async with Session() as session:
         await session.execute(
-            update(Interview)
-            .where(Interview.id == interview_id)
-            .values(**settings.model_dump())
+            update(Interview).where(Interview.id == interview_id).values(**settings.model_dump())
         )
         await session.commit()
 
@@ -82,7 +78,9 @@ async def update_settings(interview_id, settings: InterviewSettings) -> None:
 async def set_topic_limit(interview_id, topic_id: uuid.UUID, limit: int | None) -> None:
     async with Session() as session:
         interview = await session.get(Interview, interview_id)
-        limits = {key: value for key, value in interview.topic_limits.items() if key != str(topic_id)}
+        limits = {
+            key: value for key, value in interview.topic_limits.items() if key != str(topic_id)
+        }
 
         if limit is not None:
             limits[str(topic_id)] = limit

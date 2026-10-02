@@ -11,9 +11,7 @@ from app.storage.db import Session
 async def create(name: str, user_id: str, email: str) -> Company:
     company = Company(
         name=name,
-        members=[
-            Member(user_id=user_id, invited_email=email.lower(), role=Role.OWNER)
-        ],
+        members=[Member(user_id=user_id, invited_email=email.lower(), role=Role.OWNER)],
     )
 
     async with Session() as session:

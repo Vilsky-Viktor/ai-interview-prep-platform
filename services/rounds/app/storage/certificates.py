@@ -11,9 +11,7 @@ async def get(certificate_id: uuid.UUID) -> Certificate | None:
         return await session.get(Certificate, certificate_id)
 
 
-async def for_preparation(
-    user_id: str, preparation_id: uuid.UUID
-) -> dict[uuid.UUID, uuid.UUID]:
+async def for_preparation(user_id: str, preparation_id: uuid.UUID) -> dict[uuid.UUID, uuid.UUID]:
     """Latest best-score certificate per topic on this preparation."""
     query = (
         select(Certificate.topic_id, Certificate.id)
@@ -39,9 +37,7 @@ async def has_for_topic(user_id: str, topic_id: uuid.UUID) -> bool:
         return await session.scalar(query.limit(1)) is not None
 
 
-async def mastered_counts(
-    user_id: str, preparation_ids: list[uuid.UUID]
-) -> dict[uuid.UUID, int]:
+async def mastered_counts(user_id: str, preparation_ids: list[uuid.UUID]) -> dict[uuid.UUID, int]:
     """Topics the user holds a certificate for, per preparation; preparations without any are
     missing."""
     query = (

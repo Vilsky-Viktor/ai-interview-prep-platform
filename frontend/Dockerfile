@@ -39,9 +39,12 @@ WORKDIR /frontend
 
 ENV NODE_ENV=production HOSTNAME=0.0.0.0 PORT=3000
 
-COPY --from=build /frontend/.next/standalone ./
-COPY --from=build /frontend/.next/static ./.next/static
-COPY --from=build /frontend/public ./public
+# Owned by the image's unprivileged node user, which runs the server and writes Next's cache.
+COPY --from=build --chown=node:node /frontend/.next/standalone ./
+COPY --from=build --chown=node:node /frontend/.next/static ./.next/static
+COPY --from=build --chown=node:node /frontend/public ./public
+
+USER node
 
 EXPOSE 3000
 

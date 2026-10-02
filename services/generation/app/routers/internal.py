@@ -59,9 +59,7 @@ async def retry_interview_generation(
     """For a caller that already checked the user may manage the company's interviews."""
     generation = await get_company_generation(generation_id, company_id)
 
-    return GenerationOut.model_validate(
-        await retry_generation(request.app.state.arq, generation)
-    )
+    return GenerationOut.model_validate(await retry_generation(request.app.state.arq, generation))
 
 
 @router.post("/generations/{generation_id}/cancel")

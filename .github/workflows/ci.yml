@@ -5,22 +5,41 @@ on:
     branches: [main]
   pull_request:
 
+# The ruff version is pinned: newer versions enable more rules by default.
+env:
+  RUFF_VERSION: "0.16.10"
+
 jobs:
-  services:
-    name: ${{ matrix.service }} tests
+  lint:
+    name: python lint and format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uvx ruff@${{ env.RUFF_VERSION }} check services packages
+      - run: uvx ruff@${{ env.RUFF_VERSION }} format --check services packages
+
+  tests:
+    name: ${{ matrix.path }} tests
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        service: [library, generation, rounds, companies, notifications]
+        path:
+          - services/library
+          - services/generation
+          - services/rounds
+          - services/companies
+          - services/notifications
+          - packages/common
     defaults:
       run:
-        working-directory: services/${{ matrix.service }}
+        working-directory: ${{ matrix.path }}
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
         with:
-          working-directory: services/${{ matrix.service }}
+          working-directory: ${{ matrix.path }}
       - run: uv sync --frozen
       - run: uv run pytest -q
 
@@ -43,3 +62,64 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm typecheck
+
+  images:
+    name: ${{ matrix.name }} production image
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # The API images are built from the repo root, as they include packages/common.
+          - { name: library, context: ., file: services/library/Dockerfile }
+          - { name: generation, context: ., file: services/generation/Dockerfile }
+          - { name: rounds, context: ., file: services/rounds/Dockerfile }
+          - { name: companies, context: ., file: services/companies/Dockerfile }
+          - { name: notifications, context: services/notifications, file: services/notifications/Dockerfile }
+          - { name: frontend, context: frontend, file: frontend/Dockerfile }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          target: prod
+          push: false
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
+          # Placeholder Firebase settings: the frontend bakes NEXT_PUBLIC_* values in at build time.
+          build-args: |
+            NEXT_PUBLIC_FIREBASE_API_KEY=demo-api-key
+            NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=demo-prepza.firebaseapp.com
+            NEXT_PUBLIC_FIREBASE_PROJECT_ID=demo-prepza
+
+  smoke:
+    name: smoke test (whole stack)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      # The example settings run everything locally: the Firebase emulator, mailpit, no OpenAI key.
+      - run: cp .env.example .env
+      - run: docker compose up --build -d
+      # Waits for the services and the frontend's first compile, then checks pages and /ready.
+      - name: Smoke test
+        run: |
+          for attempt in $(seq 1 40); do
+            if ./scripts/smoke.sh; then
+              exit 0
+            fi
+
+            sleep 15
+          done
+
+          exit 1
+      # Each service's tests/integration, against the stack's real Postgres and Redis.
+      - name: Integration tests
+        run: ./scripts/integration.sh
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs --tail 100
+      - if: always()
+        run: docker compose down -v

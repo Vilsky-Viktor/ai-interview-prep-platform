@@ -37,7 +37,9 @@ def upgrade() -> None:
         "answers",
         sa.Column("session_id", sa.Uuid(), sa.ForeignKey("sessions.id", ondelete="CASCADE")),
     )
-    op.create_unique_constraint("uq_answers_session_question", "answers", ["session_id", "question_id"])
+    op.create_unique_constraint(
+        "uq_answers_session_question", "answers", ["session_id", "question_id"]
+    )
 
 
 def downgrade() -> None:

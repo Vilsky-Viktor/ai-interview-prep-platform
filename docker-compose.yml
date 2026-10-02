@@ -6,6 +6,8 @@ x-firebase-env: &firebase-env
   FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
   # While set, the services accept unsigned tokens from the Auth emulator. Never in production.
   FIREBASE_AUTH_EMULATOR_HOST: ${FIREBASE_AUTH_EMULATOR_HOST}
+  # Development only: serves /docs and /openapi.json, which `pnpm api-types` reads.
+  API_DOCS: "true"
 
 x-service: &service
   restart: unless-stopped
@@ -21,8 +23,14 @@ x-service: &service
     timeout: 3s
     retries: 3
 
+# Invite email limits, shared by library (shares) and companies (candidate invites).
+x-email-limits: &email-limits
+  EMAIL_HOURLY_LIMIT: ${EMAIL_HOURLY_LIMIT:-30}
+  EMAIL_DAILY_LIMIT: ${EMAIL_DAILY_LIMIT:-200}
+  EMAIL_RECIPIENT_DAILY_LIMIT: ${EMAIL_RECIPIENT_DAILY_LIMIT:-3}
+
 x-library-env: &library-env
-  <<: *firebase-env
+  <<: [*firebase-env, *email-limits]
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/library
   REDIS_URL: redis://redis:6379
   SERVICE_SECRET: ${SERVICE_SECRET}
@@ -44,7 +52,7 @@ x-rounds-env: &rounds-env
   LLM_WINDOW_SECONDS: ${LLM_WINDOW_SECONDS:-3600}
 
 x-companies-env: &companies-env
-  <<: *firebase-env
+  <<: [*firebase-env, *email-limits]
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/companies
   REDIS_URL: redis://redis:6379
   SERVICE_SECRET: ${SERVICE_SECRET}
