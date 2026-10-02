@@ -3,7 +3,7 @@ import uuid
 from datetime import UTC, datetime
 
 from prepza_common import outbox
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.events import PREPARATION_SHARED
@@ -38,11 +38,18 @@ async def upsert(
         invite = await session.scalar(
             select(ShareInvite).where(ShareInvite.set_id == set_id, ShareInvite.email == email)
         )
+        invite.undelivered_at = None
         outbox.add(
             session,
             OutboxEvent,
             PREPARATION_SHARED,
-            {"email": invite.email, "token": invite.token, "title": title, "inviter": inviter},
+            {
+                "share_id": str(invite.id),
+                "email": invite.email,
+                "token": invite.token,
+                "title": title,
+                "inviter": inviter,
+            },
         )
         await session.commit()
 
@@ -73,6 +80,17 @@ async def get_by_token(token: str) -> tuple[ShareInvite, QuestionSet] | None:
         row = (await session.execute(query)).first()
 
         return tuple(row) if row else None
+
+
+async def mark_undelivered(share_id: uuid.UUID) -> None:
+    """Only an invite nobody has accepted: whoever accepted it got the email after all."""
+    async with Session() as session:
+        await session.execute(
+            update(ShareInvite)
+            .where(ShareInvite.id == share_id, ShareInvite.accepted_by.is_(None))
+            .values(undelivered_at=datetime.now(UTC))
+        )
+        await session.commit()
 
 
 async def accept(invite: ShareInvite, user_id: str) -> None:

@@ -134,8 +134,8 @@ resource "google_cloud_run_v2_service" "service" {
   ]
 }
 
-# Public services take requests from anyone (through the load balancer) and check users
-# themselves; the worker and notifications only from Google, as the invoker.
+# Public services take requests from anyone (through the load balancer) and check users, or
+# webhook signatures, themselves; the worker only from Google, as the invoker.
 resource "google_cloud_run_v2_service_iam_member" "public" {
   for_each = { for name, service in local.services : name => service if service.public }
   name     = google_cloud_run_v2_service.service[each.key].name

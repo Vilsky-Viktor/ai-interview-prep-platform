@@ -38,11 +38,21 @@ async def upsert(interview_id, email: str, title: str, company: str) -> Candidat
                 CandidateInvite.interview_id == interview_id, CandidateInvite.email == email
             )
         )
+
+        if invite.status == InviteStatus.UNDELIVERED:
+            invite.status = InviteStatus.INVITED
+
         outbox.add(
             session,
             OutboxEvent,
             CANDIDATE_INVITED,
-            {"email": invite.email, "token": invite.token, "title": title, "company": company},
+            {
+                "invite_id": str(invite.id),
+                "email": invite.email,
+                "token": invite.token,
+                "title": title,
+                "company": company,
+            },
         )
         await session.commit()
 
@@ -76,9 +86,23 @@ async def start(invite: CandidateInvite, user_id: str) -> None:
         stored = await session.get(CandidateInvite, invite.id)
         stored.user_id = user_id
 
-        if stored.status == InviteStatus.INVITED:
+        if stored.status in (InviteStatus.INVITED, InviteStatus.UNDELIVERED):
             stored.status = InviteStatus.IN_PROCESS
 
+        await session.commit()
+
+
+async def mark_undelivered(invite_id: uuid.UUID) -> None:
+    """Only an unused invite: a candidate who has started got the email after all."""
+    async with Session() as session:
+        await session.execute(
+            update(CandidateInvite)
+            .where(
+                CandidateInvite.id == invite_id,
+                CandidateInvite.status == InviteStatus.INVITED,
+            )
+            .values(status=InviteStatus.UNDELIVERED)
+        )
         await session.commit()
 
 

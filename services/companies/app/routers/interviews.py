@@ -227,7 +227,7 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
 
     await require_company(user, interview.company_id)
 
-    if invite.status != InviteStatus.INVITED:
+    if invite.status not in (InviteStatus.INVITED, InviteStatus.UNDELIVERED):
         raise HTTPException(status.HTTP_409_CONFLICT, "The candidate has already started")
 
     await invites.remove(invite.id)

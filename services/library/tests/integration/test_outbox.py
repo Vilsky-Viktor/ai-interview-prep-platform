@@ -23,6 +23,7 @@ def test_a_share_invite_and_its_email_event_are_saved_together(run):
     invite, events = run(scenario())
 
     assert {
+        "share_id": str(invite.id),
         "email": "bob@example.com",
         "token": invite.token,
         "title": "Shared",

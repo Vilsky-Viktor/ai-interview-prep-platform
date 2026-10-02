@@ -22,6 +22,8 @@ class ShareInvite(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
+    # The email bounced or was marked as spam; cleared when it's sent again.
+    undelivered_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class JoinedPreparation(Base):

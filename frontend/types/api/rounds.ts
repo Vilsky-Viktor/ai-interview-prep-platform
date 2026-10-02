@@ -508,6 +508,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/schedules/outbox": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Flush Outbox
+     * @description Every minute, from Cloud Scheduler: publishes events that weren't published right after
+     *     their change.
+     */
+    post: operations["flush_outbox_internal_schedules_outbox_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/users/{user_id}": {
     parameters: {
       query?: never
@@ -2004,6 +2025,24 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
         }
+      }
+    }
+  }
+  flush_outbox_internal_schedules_outbox_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
     }
   }

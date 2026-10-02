@@ -170,6 +170,8 @@ Share and candidate invites are sent by the `notifications` service, as HTML wit
 
 A failed send answers Pub/Sub's push with an error, so Pub/Sub retries it and, after the subscription's maximum attempts, moves it to the dead-letter topic; the error from Resend is in the logs. Retries never send an email twice.
 
+To show invites whose email bounced or was marked as spam ("Email not delivered" in the candidates and share lists), add a webhook at resend.com/webhooks pointing at `https://<your domain>/api/notifications/webhooks/resend` with the events `email.bounced`, `email.complained` and `email.suppressed`. Put its signing secret (`whsec_...`) in `.env` as `RESEND_WEBHOOK_SECRET` and restart notifications. Without the secret every webhook is refused. Locally, Resend reaches it only through a tunnel, as with Paddle.
+
 ## Tests
 
 Each Python service (and `packages/common`) keeps `tests/unit` (fakes, no services needed) and `tests/integration` (real Postgres and Redis), with the shared setup in `tests/conftest.py`.

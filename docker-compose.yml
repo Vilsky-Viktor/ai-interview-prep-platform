@@ -205,7 +205,10 @@ services:
     environment:
       <<: *firebase-env
       RESEND_API_KEY: ${RESEND_API_KEY:-}
+      RESEND_WEBHOOK_SECRET: ${RESEND_WEBHOOK_SECRET:-}
       MAIL_FROM: ${MAIL_FROM:-prepza. <no-reply@prepza.local>}
+      COMPANIES_URL: http://companies:8000
+      LIBRARY_URL: http://library:8000
       SMTP_HOST: ${SMTP_HOST:-mailpit}
       SMTP_PORT: ${SMTP_PORT:-1025}
       SITE_URL: ${SITE_URL:-http://localhost:8090}

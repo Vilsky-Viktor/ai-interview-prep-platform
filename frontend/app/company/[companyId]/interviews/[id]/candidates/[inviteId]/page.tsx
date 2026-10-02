@@ -98,7 +98,7 @@ export default async function ScorecardPage({
           }
         >
           <Badge
-            variant="outline"
+            variant={card.status === "undelivered" ? "destructive" : "outline"}
             className="h-7 px-3 text-sm font-light capitalize"
           >
             {card.status.replace("_", " ")}

@@ -17,7 +17,7 @@ locals {
     rounds            = { image = "rounds", public = true, path = "rounds", port = 8000, min = 1, max = 4, connections = 10, cpu = "1", memory = "512Mi", timeout = 60, concurrency = 80, database = "rounds", command = null }
     companies         = { image = "companies", public = true, path = "companies", port = 8000, min = 0, max = 2, connections = 10, cpu = "1", memory = "512Mi", timeout = 150, concurrency = 80, database = "companies", command = null }
     billing           = { image = "billing", public = true, path = "billing", port = 8000, min = 0, max = 1, connections = 10, cpu = "1", memory = "512Mi", timeout = 60, concurrency = 80, database = "billing", command = null }
-    notifications     = { image = "notifications", public = false, path = null, port = 8000, min = 0, max = 5, connections = 0, cpu = "1", memory = "512Mi", timeout = 60, concurrency = 40, database = null, command = null }
+    notifications     = { image = "notifications", public = true, path = "notifications", port = 8000, min = 0, max = 5, connections = 0, cpu = "1", memory = "512Mi", timeout = 60, concurrency = 40, database = null, command = null }
     generation-worker = { image = "generation", public = false, path = null, port = 8000, min = 0, max = 3, connections = 14, cpu = "1", memory = "2Gi", timeout = 1800, concurrency = 8, database = "generation", command = ["uv", "run", "--no-sync", "uvicorn", "app.worker_main:app", "--host", "0.0.0.0", "--port", "8000"] }
   }
 
@@ -32,7 +32,7 @@ locals {
     rounds            = ["library"]
     companies         = ["generation", "library", "rounds", "billing"]
     billing           = []
-    notifications     = []
+    notifications     = ["companies", "library"]
   }
 
   # Each service's own key checks calls to it. The worker shares generation's settings, so it
@@ -55,7 +55,7 @@ locals {
     rounds            = { redis-url = "REDIS_URL", openai-api-key = "OPENAI_API_KEY" }
     companies         = { redis-url = "REDIS_URL" }
     billing           = { paddle-webhook-secret = "PADDLE_WEBHOOK_SECRET" }
-    notifications     = { resend-api-key = "RESEND_API_KEY" }
+    notifications     = { resend-api-key = "RESEND_API_KEY", resend-webhook-secret = "RESEND_WEBHOOK_SECRET" }
   }
 
   secrets = {

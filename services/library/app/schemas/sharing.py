@@ -11,6 +11,8 @@ class ShareIn(BaseModel):
 class ShareOut(BaseModel):
     email: str
     accepted: bool
+    # The email bounced or was marked as spam.
+    undelivered: bool = False
     created_at: datetime
 
 

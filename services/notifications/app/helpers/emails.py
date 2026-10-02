@@ -1,5 +1,6 @@
 from html import escape
 
+from app.constants.webhooks import CANDIDATE_INVITE_KIND, ID_TAG, KIND_TAG, SHARE_KIND
 from app.models.email import Email
 from app.templates.emails import CANDIDATE_INVITE, FOOTER, SHARE_INVITE
 from app.templates.layout import (
@@ -42,9 +43,23 @@ def render(template: dict, data: dict, link: str) -> Email:
     return Email(to=data["email"], subject=template["subject"].format(**data), html=html, text=text)
 
 
+def invite_tags(kind: str, invite_id: str | None) -> dict[str, str]:
+    """Events saved before invites carried their id get no tags."""
+    if invite_id is None:
+        return {}
+
+    return {KIND_TAG: kind, ID_TAG: invite_id}
+
+
 def share_invite_email(data: dict, site_url: str) -> Email:
-    return render(SHARE_INVITE, data, f"{site_url.rstrip('/')}/share/{data['token']}")
+    email = render(SHARE_INVITE, data, f"{site_url.rstrip('/')}/share/{data['token']}")
+    email.tags = invite_tags(SHARE_KIND, data.get("share_id"))
+
+    return email
 
 
 def candidate_invite_email(data: dict, site_url: str) -> Email:
-    return render(CANDIDATE_INVITE, data, f"{site_url.rstrip('/')}/invite/{data['token']}")
+    email = render(CANDIDATE_INVITE, data, f"{site_url.rstrip('/')}/invite/{data['token']}")
+    email.tags = invite_tags(CANDIDATE_INVITE_KIND, data.get("invite_id"))
+
+    return email

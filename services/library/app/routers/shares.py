@@ -50,6 +50,7 @@ async def list_shares(preparation_id: UUID, user: CurrentUser, page: PageParams)
         ShareOut(
             email=invite.email,
             accepted=invite.accepted_by is not None,
+            undelivered=invite.undelivered_at is not None,
             created_at=invite.created_at,
         )
         for invite in await shares.list_for_set(preparation_id, page.offset, page.limit)

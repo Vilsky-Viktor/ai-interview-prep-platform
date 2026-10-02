@@ -69,6 +69,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    printf '%s' "$OPENAI_API_KEY" | gcloud secrets versions add openai-api-key --data-file=-
    printf '%s' "rediss://...upstash.io:6379" | gcloud secrets versions add redis-url --data-file=-
    printf '%s' "$RESEND_API_KEY" | gcloud secrets versions add resend-api-key --data-file=-
+   printf '%s' "$RESEND_WEBHOOK_SECRET" | gcloud secrets versions add resend-webhook-secret --data-file=-
    printf '%s' "$PADDLE_WEBHOOK_SECRET" | gcloud secrets versions add paddle-webhook-secret --data-file=-
    ```
 
@@ -89,7 +90,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
     ```
 11. **Update the services that call back to the site:**
     - **Paddle:** the webhook destination is `https://prepza.ai/api/billing/webhooks/paddle`.
-    - **Resend:** the `prepza.ai` sending domain is already verified.
+    - **Resend:** the `prepza.ai` sending domain is already verified. Add a webhook at `https://prepza.ai/api/notifications/webhooks/resend` for `email.bounced`, `email.complained` and `email.suppressed`; its signing secret is `resend-webhook-secret` in step 8.
     - **Sentry:** set `sentry_dsn` in `terraform.tfvars`.
 
 12. **Connect GitHub for deploys.** In the repository's **Settings → Secrets and variables → Actions → Variables**, add:

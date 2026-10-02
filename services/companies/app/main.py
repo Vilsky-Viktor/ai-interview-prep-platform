@@ -13,6 +13,7 @@ from app.routers import (
     companies,
     internal_accounts,
     internal_events,
+    internal_invites,
     interview_generation,
     interview_questions,
     interviews,
@@ -48,6 +49,7 @@ app.include_router(interview_generation.router)
 app.include_router(interview_questions.router)
 app.include_router(invites.router)
 app.include_router(internal_accounts.router)
+app.include_router(internal_invites.router)
 app.include_router(internal_events.router)
 app.include_router(schedules.router)
 

@@ -25,6 +25,36 @@ def test_inviting_the_same_address_again_returns_the_same_invite(run):
     assert first.status == InviteStatus.INVITED
 
 
+def test_an_undelivered_invite_is_marked_until_it_is_sent_again(run):
+    async def scenario():
+        found = await interview()
+        invite = await invites.upsert(found.id, "erin@example.com", "Backend", "Acme")
+        await invites.mark_undelivered(invite.id)
+        bounced, _ = await invites.get_by_token(invite.token)
+        await invites.upsert(found.id, "erin@example.com", "Backend", "Acme")
+        resent, _ = await invites.get_by_token(invite.token)
+
+        return bounced, resent
+
+    bounced, resent = run(scenario())
+
+    assert bounced.status == InviteStatus.UNDELIVERED
+    assert resent.status == InviteStatus.INVITED
+
+
+def test_a_started_invite_is_never_marked_undelivered(run):
+    async def scenario():
+        found = await interview()
+        invite = await invites.upsert(found.id, "fay@example.com", "Backend", "Acme")
+        await invites.start(invite, "fay-uid")
+        await invites.mark_undelivered(invite.id)
+        stored, _ = await invites.get_by_token(invite.token)
+
+        return stored
+
+    assert run(scenario()).status == InviteStatus.IN_PROCESS
+
+
 def test_an_invite_moves_from_invited_to_in_process_to_finished(run):
     async def scenario():
         found = await interview()

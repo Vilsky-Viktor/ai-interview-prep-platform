@@ -15,6 +15,7 @@ from app.routers import (
     internal_feedback,
     internal_quality,
     internal_reuse,
+    internal_shares,
     joins,
     library,
     me,
@@ -56,6 +57,7 @@ app.include_router(internal_events.router)
 app.include_router(internal_feedback.router)
 app.include_router(internal_quality.router)
 app.include_router(internal_reuse.router)
+app.include_router(internal_shares.router)
 
 
 @app.get("/health")

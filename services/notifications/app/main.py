@@ -5,7 +5,7 @@ from prepza_common import http
 from prepza_common.logging import RequestLogMiddleware, configure_logging
 from prepza_common.sentry import init_sentry
 
-from app.routers import events
+from app.routers import events, webhooks
 
 configure_logging()
 init_sentry("notifications")
@@ -18,10 +18,11 @@ async def lifespan(app: FastAPI):
     await http.get_client().aclose()
 
 
-# Only Pub/Sub calls it, so there's no API description to serve.
+# Only Pub/Sub and Resend call it, so there's no API description to serve.
 app = FastAPI(title="notifications", lifespan=lifespan, openapi_url=None)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(events.router)
+app.include_router(webhooks.router)
 
 
 @app.get("/health")

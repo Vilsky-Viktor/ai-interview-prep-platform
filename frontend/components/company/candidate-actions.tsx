@@ -45,6 +45,7 @@ export function CandidateActions({
       // Inviting the same email again sends the same link again.
       await apiFetch(path, { method: "POST", body: JSON.stringify({ email }) })
       toast.success(`Invite sent again to ${email}`)
+      router.refresh()
     } catch (error) {
       toast.error(apiErrorMessage(error, "Couldn't resend the invite."))
     } finally {
@@ -76,7 +77,7 @@ export function CandidateActions({
       <Button variant="outline" disabled={busy} onClick={resend}>
         Resend invite
       </Button>
-      {status === "invited" && (
+      {(status === "invited" || status === "undelivered") && (
         <Button
           variant="destructive"
           disabled={busy}

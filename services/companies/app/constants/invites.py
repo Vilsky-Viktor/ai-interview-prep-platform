@@ -3,6 +3,8 @@ from enum import StrEnum
 
 class InviteStatus(StrEnum):
     INVITED = "invited"
+    # The invite email bounced or was marked as spam, before the candidate opened the invite.
+    UNDELIVERED = "undelivered"
     IN_PROCESS = "in_process"
     FINISHED = "finished"
     # The candidate deleted their account: their email and results are gone.

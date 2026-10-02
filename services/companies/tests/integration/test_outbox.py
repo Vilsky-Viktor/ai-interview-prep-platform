@@ -25,6 +25,7 @@ def test_a_candidate_invite_and_its_email_event_are_saved_together(run):
     invite, events = run(scenario())
 
     assert {
+        "invite_id": str(invite.id),
         "email": "erin@example.com",
         "token": invite.token,
         "title": "Backend",

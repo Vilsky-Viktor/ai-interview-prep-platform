@@ -452,6 +452,88 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/invites/{invite_id}/undelivered": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Invite Undelivered
+     * @description Notifications reports a bounced or spam-flagged invite email; safe to repeat.
+     */
+    post: operations["invite_undelivered_internal_invites__invite_id__undelivered_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/events": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Receive Event
+     * @description Pub/Sub pushes every event here. A failure answers with an error, so Pub/Sub retries it,
+     *     and moves it to the dead-letter topic after the subscription's maximum attempts.
+     */
+    post: operations["receive_event_internal_events_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/schedules/retention": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Retention
+     * @description Daily, from Cloud Scheduler: candidate data past its retention period goes.
+     */
+    post: operations["retention_internal_schedules_retention_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/schedules/outbox": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Flush Outbox
+     * @description Every minute, from Cloud Scheduler: publishes events that weren't published right after
+     *     their change.
+     */
+    post: operations["flush_outbox_internal_schedules_outbox_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/health": {
     parameters: {
       query?: never
@@ -706,6 +788,32 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+    }
+    /**
+     * PushBody
+     * @description What Pub/Sub sends to a push endpoint.
+     */
+    PushBody: {
+      message: components["schemas"]["PushMessage"]
+      /** Subscription */
+      subscription: string
+    }
+    /** PushMessage */
+    PushMessage: {
+      /**
+       * Data
+       * @default
+       */
+      data: string
+      /**
+       * Attributes
+       * @default {}
+       */
+      attributes: {
+        [key: string]: string
+      }
+      /** Messageid */
+      messageId: string
     }
     /** QuestionText */
     QuestionText: {
@@ -1831,6 +1939,102 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
         }
+      }
+    }
+  }
+  invite_undelivered_internal_invites__invite_id__undelivered_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  receive_event_internal_events_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["PushBody"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  retention_internal_schedules_retention_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  flush_outbox_internal_schedules_outbox_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
     }
   }

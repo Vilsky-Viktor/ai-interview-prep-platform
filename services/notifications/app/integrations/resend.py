@@ -20,6 +20,7 @@ async def send(email: Email, idempotency_key: str) -> None:
                 "subject": email.subject,
                 "html": email.html,
                 "text": email.text,
+                "tags": [{"name": name, "value": value} for name, value in email.tags.items()],
             },
         )
 

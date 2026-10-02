@@ -24,9 +24,13 @@ export function ShareList({ path }: { path: string }) {
         <div className="pb-2">
           <div className="flex items-center justify-between gap-2 rounded-lg bg-black/5 px-5 py-4 dark:bg-black/40">
             <span className="truncate">{share.email}</span>
-            <Badge variant={share.accepted ? "secondary" : "outline"}>
-              {share.accepted ? "Joined" : "Invited"}
-            </Badge>
+            {share.accepted ? (
+              <Badge variant="secondary">Joined</Badge>
+            ) : share.undelivered ? (
+              <Badge variant="destructive">Undelivered</Badge>
+            ) : (
+              <Badge variant="outline">Invited</Badge>
+            )}
           </div>
         </div>
       )}

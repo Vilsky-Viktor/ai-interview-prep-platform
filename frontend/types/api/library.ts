@@ -549,6 +549,48 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/schedules/outbox": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Flush Outbox
+     * @description Every minute, from Cloud Scheduler: publishes events that weren't published right after
+     *     their change.
+     */
+    post: operations["flush_outbox_internal_schedules_outbox_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/events": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Receive Event
+     * @description Pub/Sub pushes every event here. A failure answers with an error, so Pub/Sub retries it,
+     *     and moves it to the dead-letter topic after the subscription's maximum attempts.
+     */
+    post: operations["receive_event_internal_events_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/questions/{question_id}/rating": {
     parameters: {
       query?: never
@@ -692,6 +734,26 @@ export interface paths {
     /** Save Embeddings */
     put: operations["save_embeddings_internal_embeddings_put"]
     post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/shares/{share_id}/undelivered": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Share Undelivered
+     * @description Notifications reports a bounced or spam-flagged share email; safe to repeat.
+     */
+    post: operations["share_undelivered_internal_shares__share_id__undelivered_post"]
     delete?: never
     options?: never
     head?: never
@@ -914,6 +976,32 @@ export interface components {
       rating_count: number
       /** Join Count */
       join_count: number
+    }
+    /**
+     * PushBody
+     * @description What Pub/Sub sends to a push endpoint.
+     */
+    PushBody: {
+      message: components["schemas"]["PushMessage"]
+      /** Subscription */
+      subscription: string
+    }
+    /** PushMessage */
+    PushMessage: {
+      /**
+       * Data
+       * @default
+       */
+      data: string
+      /**
+       * Attributes
+       * @default {}
+       */
+      attributes: {
+        [key: string]: string
+      }
+      /** Messageid */
+      messageId: string
     }
     /**
      * QuestionContext
@@ -1153,6 +1241,11 @@ export interface components {
       email: string
       /** Accepted */
       accepted: boolean
+      /**
+       * Undelivered
+       * @default false
+       */
+      undelivered: boolean
       /**
        * Created At
        * Format: date-time
@@ -2359,6 +2452,55 @@ export interface operations {
       }
     }
   }
+  flush_outbox_internal_schedules_outbox_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  receive_event_internal_events_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["PushBody"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   get_rating_internal_questions__question_id__rating_get: {
     parameters: {
       query: {
@@ -2629,6 +2771,35 @@ export interface operations {
         "application/json": components["schemas"]["TopicEmbedding"][]
       }
     }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  share_undelivered_internal_shares__share_id__undelivered_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        share_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
     responses: {
       /** @description Successful Response */
       204: {

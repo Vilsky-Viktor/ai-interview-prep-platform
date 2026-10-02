@@ -79,7 +79,9 @@ export function CandidateList({
             </span>
             <span className="flex justify-end sm:w-32">
               <Badge
-                variant="outline"
+                variant={
+                  candidate.status === "undelivered" ? "destructive" : "outline"
+                }
                 className="h-7 px-3 text-sm font-light capitalize"
               >
                 {candidate.status.replace("_", " ")}
