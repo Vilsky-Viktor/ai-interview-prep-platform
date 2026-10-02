@@ -78,7 +78,7 @@ export function CandidateActions({
       </Button>
       {status === "invited" && (
         <Button
-          variant="ghost"
+          variant="destructive"
           disabled={busy}
           onClick={() => setConfirmRevoke(true)}
         >
