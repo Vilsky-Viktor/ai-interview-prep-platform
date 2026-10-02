@@ -30,7 +30,7 @@ async def get_invite(token: str, user: CurrentUser) -> InviteView:
         company=company.name if company else "",
         email=invite.email,
         status=invite.status,
-        time_limit_minutes=interview.time_limit_minutes if interview.timed else None,
+        question_seconds=interview.question_seconds if interview.timed else None,
         share_results=interview.share_results,
     )
 
@@ -69,7 +69,7 @@ async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
             "user_id": user.uid,
             "candidate_invite_id": str(invite.id),
             "share_results": interview.share_results,
-            "time_limit_minutes": interview.time_limit_minutes if interview.timed else None,
+            "question_seconds": interview.question_seconds if interview.timed else None,
             "topics": [
                 {
                     "id": topic["id"],

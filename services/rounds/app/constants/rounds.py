@@ -26,8 +26,10 @@ CHAT_TIMEOUT_SECONDS = 60
 # correct option and the learner's pick, so older turns add little but cost.
 CHAT_HISTORY_MESSAGES = 10
 
-# A timed interview's deadline has passed; it finished by itself.
-TIME_UP = "Time is up: the interview has finished."
+# A timed interview's question ran out of time; it counts as wrong.
+TIME_UP = "Time is up for this question."
+# Extra seconds an answer may arrive after the deadline, for the trip to the server.
+TIME_GRACE_SECONDS = 2
 
 # Shown to learners before they practice; the pass mark comes from CERTIFICATE_MIN_SCORE.
 CERTIFICATE_RULES = [

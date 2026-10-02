@@ -46,7 +46,7 @@ async def interview_out(interview: Interview) -> InterviewOut:
         title=title,
         share_results=interview.share_results,
         timed=interview.timed,
-        time_limit_minutes=interview.time_limit_minutes,
+        question_seconds=interview.question_seconds,
         candidate_count=len(interview.invites),
         created_at=interview.created_at,
     )

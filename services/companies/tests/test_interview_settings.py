@@ -65,14 +65,14 @@ def test_updates_shared_scores(client, monkeypatch):
 
     assert response.status_code == 204
     # Without timer settings, an interview stays untimed with the default limit.
-    assert saved == {"share_results": True, "timed": False, "time_limit_minutes": 60}
+    assert saved == {"share_results": True, "timed": False, "question_seconds": 60}
 
     response = client.patch(
-        url, json={"share_results": False, "timed": True, "time_limit_minutes": 45}
+        url, json={"share_results": False, "timed": True, "question_seconds": 45}
     )
 
     assert response.status_code == 204
-    assert saved == {"share_results": False, "timed": True, "time_limit_minutes": 45}
-    too_short = client.patch(url, json={"share_results": False, "time_limit_minutes": 0})
+    assert saved == {"share_results": False, "timed": True, "question_seconds": 45}
+    too_short = client.patch(url, json={"share_results": False, "question_seconds": 5})
 
     assert too_short.status_code == 422

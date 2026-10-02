@@ -28,8 +28,12 @@ class Session(Base):
         DateTime(timezone=True), default=lambda: datetime.now(UTC), server_default=func.now()
     )
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
-    # Timed interviews only: when every section of the candidate's interview ends. The same for
-    # all of them, set when the candidate starts.
-    deadline: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # Timed interviews only: the seconds each question has before it counts as wrong.
+    question_seconds: Mapped[int | None]
+    # When the question now waiting for an answer was first shown; cleared by the answer.
+    question_shown_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # Integrity signals from the candidate's browser.
+    tab_leaves: Mapped[int] = mapped_column(default=0, server_default="0")
+    copies: Mapped[int] = mapped_column(default=0, server_default="0")
 
     answers: Mapped[list["Answer"]] = relationship(order_by="Answer.created_at")

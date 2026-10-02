@@ -7,6 +7,7 @@ from fastapi import HTTPException
 from prepza_common.user import User
 
 from app.constants.rounds import TIME_UP
+from app.models.rounds import Answer
 from app.models.sessions import Session
 from app.schemas.rounds import AnswerCreate
 from app.service_auth import service_token
@@ -16,9 +17,11 @@ from app.storage import sessions
 
 CANDIDATE = User(uid="cand", email="cand@example.com", email_verified=True)
 INVITE_ID = uuid4()
+QUESTION_ID = uuid4()
 
 
-def timed(deadline, status="in_progress"):
+def timed(shown_seconds_ago, answers=None):
+    """A section whose question has 30 seconds and was shown this many seconds ago."""
     return Session(
         id=uuid4(),
         user_id="cand",
@@ -27,24 +30,31 @@ def timed(deadline, status="in_progress"):
         candidate_invite_id=INVITE_ID,
         topic_title="Python",
         share_results=False,
-        status=status,
-        questions=[{"id": "q1", "text": "Q?", "options": []}],
+        status="in_progress",
+        questions=[
+            {
+                "id": str(QUESTION_ID),
+                "text": "Q?",
+                "options": [{"answer": "A", "correct": True}, {"answer": "B", "correct": False}],
+            }
+        ],
         final_score=None,
         started_at=datetime.now(UTC),
         finished_at=None,
-        deadline=deadline,
-        answers=[],
+        question_seconds=30,
+        question_shown_at=datetime.now(UTC) - timedelta(seconds=shown_seconds_ago),
+        answers=answers or [],
     )
 
 
-def test_starting_a_timed_interview_sets_one_deadline(client, monkeypatch):
+def test_starting_a_timed_interview_passes_the_seconds_per_question(client, monkeypatch):
     created = {}
 
     async def no_sessions(invite_id):
         return []
 
-    async def fake_create(user_id, invite_id, share_results, topics, deadline):
-        created["deadline"] = deadline
+    async def fake_create(user_id, invite_id, share_results, topics, question_seconds):
+        created["question_seconds"] = question_seconds
 
         return []
 
@@ -55,58 +65,75 @@ def test_starting_a_timed_interview_sets_one_deadline(client, monkeypatch):
         "candidate_invite_id": str(INVITE_ID),
         "share_results": False,
         "topics": [],
-        "time_limit_minutes": 45,
+        "question_seconds": 45,
     }
 
     response = client.post(
         "/internal/sessions", json=body, headers={"Authorization": f"Bearer {service_token()}"}
     )
 
-    left = created["deadline"] - datetime.now(UTC)
     assert response.status_code == 201
-    assert timedelta(minutes=44) < left <= timedelta(minutes=45)
+    assert created["question_seconds"] == 45
 
 
-def test_an_expired_section_finishes_the_whole_interview(monkeypatch):
-    expired = timed(datetime.now(UTC) - timedelta(seconds=1))
-    finished = timed(expired.deadline, status="finished")
-    calls = []
+def test_a_question_past_its_time_counts_as_wrong(monkeypatch):
+    expired = timed(shown_seconds_ago=40)
+    saved = []
 
     async def fake_get(session_id):
-        return finished if calls else expired
+        return expired
 
-    async def fake_finish_expired(invite_ids):
-        calls.append(invite_ids)
+    async def fake_add(answer):
+        saved.append(answer)
+        expired.answers = [answer]
+
+        return True
 
     monkeypatch.setattr(sessions, "get", fake_get)
-    monkeypatch.setattr(sessions, "finish_expired", fake_finish_expired)
+    monkeypatch.setattr(sessions, "add_answer", fake_add)
 
-    row = asyncio.run(get_owned_session(expired.id, CANDIDATE))
+    asyncio.run(get_owned_session(expired.id, CANDIDATE))
 
-    assert calls == [[INVITE_ID]]
-    assert row.status == "finished"
+    assert [(a.question_id, a.option_index, a.correct, a.score) for a in saved] == [
+        (QUESTION_ID, None, False, 0)
+    ]
 
 
-def test_a_running_section_is_left_alone(monkeypatch):
-    running = timed(datetime.now(UTC) + timedelta(minutes=5))
+def test_a_question_within_its_time_is_left_alone(monkeypatch):
+    running = timed(shown_seconds_ago=10)
 
     async def fake_get(session_id):
         return running
 
-    async def never(invite_ids):
-        raise AssertionError("must not finish a running interview")
+    async def never(answer):
+        raise AssertionError("must not time out a running question")
 
     monkeypatch.setattr(sessions, "get", fake_get)
-    monkeypatch.setattr(sessions, "finish_expired", never)
+    monkeypatch.setattr(sessions, "add_answer", never)
 
-    assert asyncio.run(get_owned_session(running.id, CANDIDATE)).status == "in_progress"
+    assert asyncio.run(get_owned_session(running.id, CANDIDATE)).answers == []
 
 
-def test_no_answers_once_time_is_up():
-    row = timed(datetime.now(UTC) - timedelta(minutes=1), status="finished")
+def test_no_answer_once_the_question_timed_out():
+    timed_out = Answer(question_id=QUESTION_ID, option_index=None, correct=False, score=0)
+    row = timed(shown_seconds_ago=40, answers=[timed_out])
 
     with pytest.raises(HTTPException) as error:
-        asyncio.run(submit_session_answer(row, AnswerCreate(question_id=uuid4(), option_index=0)))
+        asyncio.run(
+            submit_session_answer(row, AnswerCreate(question_id=QUESTION_ID, option_index=0))
+        )
 
     assert error.value.status_code == 409
     assert error.value.detail == TIME_UP
+
+
+def test_only_the_question_on_screen_can_be_answered():
+    row = timed(shown_seconds_ago=5)
+    row.question_shown_at = None
+
+    with pytest.raises(HTTPException) as error:
+        asyncio.run(
+            submit_session_answer(row, AnswerCreate(question_id=QUESTION_ID, option_index=0))
+        )
+
+    assert error.value.status_code == 409

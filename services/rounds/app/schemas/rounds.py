@@ -57,6 +57,9 @@ class NextQuestion(BaseModel):
     number: int
     text: str
     options: list[str]
+    # Timed interviews only: seconds until the question counts as wrong. Relative, so the
+    # candidate's clock being off doesn't matter.
+    seconds_left: float | None = None
 
 
 class AnswerResult(BaseModel):

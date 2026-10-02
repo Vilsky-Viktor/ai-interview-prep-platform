@@ -1,4 +1,3 @@
-from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
@@ -26,13 +25,12 @@ async def create_sessions(body: SessionsCreate, caller: ServiceCaller) -> list[S
     if existing:
         return [session_out(row) for row in existing]
 
-    deadline = (
-        datetime.now(UTC) + timedelta(minutes=body.time_limit_minutes)
-        if body.time_limit_minutes
-        else None
-    )
     rows = await sessions.create_many(
-        body.user_id, body.candidate_invite_id, body.share_results, body.topics, deadline
+        body.user_id,
+        body.candidate_invite_id,
+        body.share_results,
+        body.topics,
+        body.question_seconds,
     )
 
     return [session_out(row) for row in rows]
@@ -42,7 +40,6 @@ async def create_sessions(body: SessionsCreate, caller: ServiceCaller) -> list[S
 async def invite_scores(
     body: InviteScoresIn, caller: ServiceCaller
 ) -> dict[str, dict[str, int | None]]:
-    await sessions.finish_expired(body.invite_ids)
     found = await sessions.scores_for_invites(body.invite_ids)
 
     return {
@@ -73,7 +70,6 @@ async def delete_interview_data(interview_set_id: UUID, caller: ServiceCaller) -
 
 @router.get("/invites/{invite_id}/scorecard")
 async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[ScorecardSession]:
-    await sessions.finish_expired([invite_id])
     rows = await sessions.list_for_invite(invite_id)
 
     if not rows:
@@ -85,7 +81,11 @@ async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[Score
             topic_title=row.topic_title,
             status=row.status,
             final_score=row.final_score,
-            review=build_review(row),
+            tab_leaves=row.tab_leaves,
+            copies=row.copies,
+            fast_answers=sum(item.answer is not None and item.answer.fast for item in review),
+            review=review,
         )
         for row in rows
+        for review in [build_review(row)]
     ]

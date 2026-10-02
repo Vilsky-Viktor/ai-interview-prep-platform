@@ -44,10 +44,11 @@ class Answer(Base):
         ForeignKey("sessions.id", ondelete="CASCADE")
     )
     question_id: Mapped[uuid.UUID]
-    option_index: Mapped[int]
+    # None when a timed question ran out before the candidate answered.
+    option_index: Mapped[int | None]
     correct: Mapped[bool]
     # CORRECT_SCORE or 0, so averages read as percent correct.
     score: Mapped[int]
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    # Interview answers only: seconds from the question being shown to it being answered.
+    seconds: Mapped[int | None]
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

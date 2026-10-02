@@ -90,14 +90,14 @@ export function InviteView({ token }: { token: string }) {
         <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
           {invite.title ?? "an interview"}
         </h1>
-        {invite.time_limit_minutes != null && invite.status !== "finished" && (
+        {invite.question_seconds != null && invite.status !== "finished" && (
           <p className="pt-6 text-base text-muted-foreground">
-            Time limit:
+            Time per question:
             <span className="block">
               <span className="text-3xl font-medium text-foreground tabular-nums">
-                {invite.time_limit_minutes}
+                {invite.question_seconds}
               </span>{" "}
-              min
+              s
             </span>
           </p>
         )}
@@ -106,13 +106,15 @@ export function InviteView({ token }: { token: string }) {
         <ul className="mx-auto max-w-lg list-disc space-y-2 pl-5 text-left text-base text-muted-foreground">
           <li>Pick one of four options for each question.</li>
           <li>An answer can&apos;t be changed once given.</li>
-          <li>Progress is saved: use this link again to continue.</li>
-          <li>Unanswered questions aren&apos;t scored when you finish.</li>
-          {invite.time_limit_minutes != null && (
+          {invite.question_seconds != null && (
             <li>
-              The timer starts when you accept and keeps running if you leave.
+              When a question&apos;s time runs out, it counts as wrong and the
+              next one opens. The clock keeps running if you leave.
             </li>
           )}
+          <li>Unanswered questions count as wrong.</li>
+          <li>Progress is saved: use this link again to continue.</li>
+          <li>Stay on this page: leaving it or copying is recorded.</li>
           {invite.share_results && (
             <li>You&apos;ll see whether each answer was right.</li>
           )}

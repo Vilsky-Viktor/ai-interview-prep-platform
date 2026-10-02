@@ -3,6 +3,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field
 
+from app.constants.integrity import IntegritySignal
 from app.constants.rounds import RoundStatus
 from app.schemas.library import TopicQuestions
 from app.schemas.review import ReviewItem
@@ -17,8 +18,8 @@ class SessionsCreate(BaseModel):
     candidate_invite_id: UUID
     share_results: bool
     topics: list[TopicQuestions]
-    # Set for a timed interview: the candidate has this long from now for every section.
-    time_limit_minutes: int | None = Field(default=None, ge=1)
+    # Set for a timed interview: the seconds each question has.
+    question_seconds: int | None = Field(default=None, ge=1)
 
 
 class SessionTopicOut(BaseModel):
@@ -44,8 +45,8 @@ class SessionOut(BaseModel):
     passed: bool | None
     started_at: datetime
     finished_at: datetime | None
-    # Timed interviews only: when the interview finishes by itself.
-    deadline: datetime | None
+    # Timed interviews only: the seconds each question has.
+    question_seconds: int | None
 
 
 class SessionAnswerResult(BaseModel):
@@ -63,7 +64,16 @@ class ScorecardSession(BaseModel):
     topic_title: str
     status: RoundStatus
     final_score: int | None
+    # Integrity signals: times the candidate left the tab, copy attempts, and answers faster
+    # than FAST_ANSWER_SECONDS.
+    tab_leaves: int
+    copies: int
+    fast_answers: int
     review: list[ReviewItem]
+
+
+class SignalIn(BaseModel):
+    kind: IntegritySignal
 
 
 class MasteredCountsIn(BaseModel):

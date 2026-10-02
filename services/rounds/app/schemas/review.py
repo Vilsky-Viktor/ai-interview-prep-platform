@@ -5,9 +5,14 @@ from pydantic import BaseModel
 
 class AnswerView(BaseModel):
     answer_id: UUID
-    option_index: int
+    # None when a timed question ran out first.
+    option_index: int | None
     # None when the candidate may not see results.
     correct: bool | None
+    # Seconds the answer took; interview answers only.
+    seconds: int | None = None
+    # Answered faster than FAST_ANSWER_SECONDS.
+    fast: bool = False
 
 
 class ReviewItem(BaseModel):

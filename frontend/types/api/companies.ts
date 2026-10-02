@@ -540,8 +540,8 @@ export interface components {
       share_results: boolean
       /** Timed */
       timed: boolean
-      /** Time Limit Minutes */
-      time_limit_minutes: number
+      /** Question Seconds */
+      question_seconds: number
       /** Candidate Count */
       candidate_count: number
       /**
@@ -572,8 +572,8 @@ export interface components {
       share_results: boolean
       /** Timed */
       timed: boolean
-      /** Time Limit Minutes */
-      time_limit_minutes: number
+      /** Question Seconds */
+      question_seconds: number
       /** Candidate Count */
       candidate_count: number
       /**
@@ -592,10 +592,10 @@ export interface components {
        */
       timed: boolean
       /**
-       * Time Limit Minutes
+       * Question Seconds
        * @default 60
        */
-      time_limit_minutes: number
+      question_seconds: number
     }
     /** InviteStartOut */
     InviteStartOut: {
@@ -617,8 +617,8 @@ export interface components {
       email: string
       /** Status */
       status: string
-      /** Time Limit Minutes */
-      time_limit_minutes: number | null
+      /** Question Seconds */
+      question_seconds: number | null
       /** Share Results */
       share_results: boolean
     }

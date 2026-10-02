@@ -5,6 +5,7 @@ import { cn } from "cn"
 import { InlineText } from "@/components/questions/inline-text"
 import { QuestionText } from "@/components/questions/question-text"
 import { VirtualList } from "@/components/virtual-list"
+import { formatSeconds } from "@/lib/format"
 import { answerText, verdict } from "@/lib/rounds"
 import type { ReviewItem } from "@/types/round"
 
@@ -39,8 +40,13 @@ export function ScorecardReview({ items }: { items: ReviewItem[] }) {
 function ScorecardMark({ item }: { item: ReviewItem }) {
   const answer = item.answer
 
-  if (!answer) {
-    return <span className="shrink-0 text-muted-foreground">Not answered</span>
+  // Unanswered and timed-out questions count as wrong.
+  if (!answer || answer.option_index == null) {
+    return (
+      <span className="shrink-0 text-lg font-light text-red-600 dark:text-red-400">
+        {answer ? "Time ran out" : "Not answered"}
+      </span>
+    )
   }
 
   return (
@@ -58,13 +64,37 @@ function ScorecardMark({ item }: { item: ReviewItem }) {
 }
 
 function ScorecardAnswer({ item }: { item: ReviewItem }) {
-  if (!item.answer) {
+  if (!item.answer || item.answer.option_index == null) {
     return null
   }
 
+  const { seconds, fast } = item.answer
+
   return (
-    <p className="rounded-xl bg-muted px-5 py-4 text-lg leading-relaxed font-light whitespace-pre-wrap">
-      <InlineText text={answerText(item)} />
-    </p>
+    <div className="space-y-2">
+      <p className="rounded-xl bg-muted px-5 py-4 text-lg leading-relaxed font-light whitespace-pre-wrap">
+        <InlineText text={answerText(item)} />
+      </p>
+      {/* Not known for answers given before timing was recorded. */}
+      {seconds != null && (
+        <p
+          className={cn(
+            "text-sm text-muted-foreground",
+            fast && "text-amber-600 dark:text-amber-400"
+          )}
+        >
+          Answered in{" "}
+          <span
+            className={cn(
+              "tabular-nums",
+              fast ? "font-medium" : "text-foreground"
+            )}
+          >
+            {formatSeconds(seconds)}
+          </span>
+          {fast && ": too fast to have read the question"}
+        </p>
+      )}
+    </div>
   )
 }

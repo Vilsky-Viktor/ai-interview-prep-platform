@@ -164,6 +164,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/sessions/{session_id}/signals": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Add Signal
+     * @description The candidate's browser reports leaving the tab or copying; the scorecard counts them.
+     */
+    post: operations["add_signal_sessions__session_id__signals_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/sessions/{session_id}/answers": {
     parameters: {
       query?: never
@@ -566,9 +586,16 @@ export interface components {
        */
       answer_id: string
       /** Option Index */
-      option_index: number
+      option_index: number | null
       /** Correct */
       correct: boolean | null
+      /** Seconds */
+      seconds?: number | null
+      /**
+       * Fast
+       * @default false
+       */
+      fast: boolean
     }
     /**
      * CertificateOut
@@ -623,6 +650,12 @@ export interface components {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
     }
+    /**
+     * IntegritySignal
+     * @description What the candidate's browser reports during an interview.
+     * @enum {string}
+     */
+    IntegritySignal: "tab_leave" | "copy"
     /** InviteScoresIn */
     InviteScoresIn: {
       /** Invite Ids */
@@ -651,6 +684,8 @@ export interface components {
       text: string
       /** Options */
       options: string[]
+      /** Seconds Left */
+      seconds_left?: number | null
     }
     /** Option */
     Option: {
@@ -774,6 +809,12 @@ export interface components {
       status: components["schemas"]["RoundStatus"]
       /** Final Score */
       final_score: number | null
+      /** Tab Leaves */
+      tab_leaves: number
+      /** Copies */
+      copies: number
+      /** Fast Answers */
+      fast_answers: number
       /** Review */
       review: components["schemas"]["ReviewItem"][]
     }
@@ -831,8 +872,8 @@ export interface components {
       started_at: string
       /** Finished At */
       finished_at: string | null
-      /** Deadline */
-      deadline: string | null
+      /** Question Seconds */
+      question_seconds: number | null
     }
     /** SessionTopicOut */
     SessionTopicOut: {
@@ -862,8 +903,12 @@ export interface components {
       share_results: boolean
       /** Topics */
       topics: components["schemas"]["TopicQuestions"][]
-      /** Time Limit Minutes */
-      time_limit_minutes?: number | null
+      /** Question Seconds */
+      question_seconds?: number | null
+    }
+    /** SignalIn */
+    SignalIn: {
+      kind: components["schemas"]["IntegritySignal"]
     }
     /**
      * TopicProgressOut
@@ -1235,6 +1280,39 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["NextQuestion"] | null
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  add_signal_sessions__session_id__signals_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        session_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SignalIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {

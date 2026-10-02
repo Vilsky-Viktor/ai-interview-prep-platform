@@ -6,40 +6,38 @@ import { useEffect, useRef, useState } from "react"
 
 import { COUNTDOWN_WARNING_SECONDS } from "@/constants/interviews"
 
-function secondsLeft(deadline: string) {
-  return Math.max(
-    0,
-    Math.ceil((new Date(deadline).getTime() - Date.now()) / 1000)
-  )
+function secondsUntil(end: number) {
+  return Math.max(0, Math.ceil((end - Date.now()) / 1000))
 }
 
 function clock(seconds: number) {
-  const hours = Math.floor(seconds / 3600)
-  const minutes = Math.floor((seconds % 3600) / 60)
+  const minutes = Math.floor(seconds / 60)
   const rest = String(seconds % 60).padStart(2, "0")
 
-  return hours > 0
-    ? `${hours}:${String(minutes).padStart(2, "0")}:${rest}`
-    : `${minutes}:${rest}`
+  return `${minutes}:${rest}`
 }
 
-/** Time left in a timed interview; calls onExpire once when it reaches zero. */
+/** Time left on a timed question; calls onExpire once when it reaches zero.
+
+`seconds` comes from the server as time left, not a moment, so a wrong device clock doesn't
+matter. Render it with a key per question, so each question starts its own clock. */
 export function Countdown({
-  deadline,
+  seconds,
   onExpire,
 }: {
-  deadline: string
+  seconds: number
   onExpire: () => void
 }) {
-  const [left, setLeft] = useState(() => secondsLeft(deadline))
+  const [end] = useState(() => Date.now() + seconds * 1000)
+  const [left, setLeft] = useState(() => secondsUntil(end))
   const expired = useRef(false)
 
   useEffect(() => {
-    // Recomputed from the deadline every tick, so a slow tab never drifts.
-    const timer = window.setInterval(() => setLeft(secondsLeft(deadline)), 1000)
+    // Recomputed from the end every tick, so a slow tab never drifts.
+    const timer = window.setInterval(() => setLeft(secondsUntil(end)), 250)
 
     return () => window.clearInterval(timer)
-  }, [deadline])
+  }, [end])
 
   useEffect(() => {
     if (left === 0 && !expired.current) {

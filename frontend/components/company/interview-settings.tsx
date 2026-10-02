@@ -19,7 +19,7 @@ import { apiErrorMessage, apiFetch } from "@/lib/api"
 type Settings = {
   share_results: boolean
   timed: boolean
-  time_limit_minutes: number
+  question_seconds: number
 }
 
 export function InterviewSettings({
@@ -31,7 +31,7 @@ export function InterviewSettings({
 }) {
   const router = useRouter()
   const [settings, setSettings] = useState(initial)
-  const [minutes, setMinutes] = useState(String(initial.time_limit_minutes))
+  const [seconds, setSeconds] = useState(String(initial.question_seconds))
   const [saving, setSaving] = useState(false)
 
   // Every save sends all settings, so one change never resets another.
@@ -54,7 +54,7 @@ export function InterviewSettings({
       router.refresh()
     } catch (error) {
       setSettings(previous)
-      setMinutes(String(previous.time_limit_minutes))
+      setSeconds(String(previous.question_seconds))
       toast.error(
         apiErrorMessage(error, "Couldn't save the interview settings.")
       )
@@ -64,8 +64,8 @@ export function InterviewSettings({
   }
 
   // The API checks the range; its message shows if the value doesn't fit.
-  function saveMinutes() {
-    void save({ time_limit_minutes: Number(minutes) })
+  function saveSeconds() {
+    void save({ question_seconds: Number(seconds) })
   }
 
   return (
@@ -102,7 +102,7 @@ export function InterviewSettings({
           <span className="space-y-1">
             <span className="block text-lg font-medium">Timed interview</span>
             <span className="block text-sm text-muted-foreground">
-              The interview finishes by itself when time runs out.
+              A question left unanswered when its time runs out is wrong.
             </span>
           </span>
           <Switch
@@ -114,18 +114,18 @@ export function InterviewSettings({
         </div>
         {settings.timed && (
           <label className="flex items-center justify-between gap-4">
-            <span className="text-lg font-medium">Time limit</span>
+            <span className="text-lg font-medium">Time per question</span>
             {/* Same look as the app's other fields (library search, candidate invite). */}
             <span className="relative w-36 rounded-lg border border-transparent transition-colors focus-within:border-ring">
               <Input
                 type="number"
                 inputMode="numeric"
-                value={minutes}
+                value={seconds}
                 disabled={saving}
-                aria-label="Time limit in minutes"
+                aria-label="Time per question in seconds"
                 className="h-14 [appearance:textfield] border-0 pr-14 pl-5 text-lg focus-visible:ring-0 md:text-lg [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-                onChange={(event) => setMinutes(event.target.value)}
-                onBlur={saveMinutes}
+                onChange={(event) => setSeconds(event.target.value)}
+                onBlur={saveSeconds}
                 onKeyDown={(event) => {
                   if (event.key === "Enter") {
                     event.currentTarget.blur()
@@ -133,7 +133,7 @@ export function InterviewSettings({
                 }}
               />
               <span className="pointer-events-none absolute top-1/2 right-5 -translate-y-1/2 text-lg text-muted-foreground">
-                min
+                s
               </span>
             </span>
           </label>

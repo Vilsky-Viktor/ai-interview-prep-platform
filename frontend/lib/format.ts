@@ -9,3 +9,15 @@ export function formatDate(iso: string) {
 export function plural(count: number, word: string) {
   return `${count} ${word}${count === 1 ? "" : "s"}`
 }
+
+/** "45 s", "2 min 5 s". */
+export function formatSeconds(seconds: number) {
+  const minutes = Math.floor(seconds / 60)
+  const rest = seconds % 60
+
+  if (minutes === 0) {
+    return `${rest} s`
+  }
+
+  return rest === 0 ? `${minutes} min` : `${minutes} min ${rest} s`
+}

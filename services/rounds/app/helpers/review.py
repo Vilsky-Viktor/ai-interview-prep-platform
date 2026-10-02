@@ -1,3 +1,4 @@
+from app.constants.integrity import FAST_ANSWER_SECONDS
 from app.helpers.rounds import correct_option_index
 from app.schemas.review import AnswerView, ReviewItem
 
@@ -21,6 +22,10 @@ def build_review(round_) -> list[ReviewItem]:
                         answer_id=answer.id,
                         option_index=answer.option_index,
                         correct=answer.correct,
+                        seconds=answer.seconds,
+                        fast=answer.option_index is not None
+                        and answer.seconds is not None
+                        and answer.seconds < FAST_ANSWER_SECONDS,
                     )
                     if answer
                     else None

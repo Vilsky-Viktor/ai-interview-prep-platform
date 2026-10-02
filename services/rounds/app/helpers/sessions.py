@@ -1,9 +1,39 @@
+from datetime import datetime, timedelta
+
 from app.constants.rounds import RoundStatus
 from app.helpers.rounds import next_question
 from app.helpers.scores import current_score, score_passed
 from app.integrations import library
 from app.models.sessions import Session
 from app.schemas.sessions import SessionOut, SessionTopicOut
+
+
+def answer_seconds(shown_at: datetime | None, answered_at: datetime) -> int | None:
+    """Whole seconds the answer took; None when the question was never marked as shown."""
+    if shown_at is None:
+        return None
+
+    return max(0, round((answered_at - shown_at).total_seconds()))
+
+
+def question_deadline(row: Session) -> datetime | None:
+    """When the question on screen counts as wrong; None when untimed or nothing is shown."""
+    if row.question_seconds is None or row.question_shown_at is None:
+        return None
+
+    return row.question_shown_at + timedelta(seconds=row.question_seconds)
+
+
+def time_is_up(row: Session, now: datetime, grace_seconds: int = 0) -> bool:
+    deadline = question_deadline(row)
+
+    return deadline is not None and now > deadline + timedelta(seconds=grace_seconds)
+
+
+def seconds_left(row: Session, now: datetime) -> float | None:
+    deadline = question_deadline(row)
+
+    return None if deadline is None else max(0.0, (deadline - now).total_seconds())
 
 
 def topic_out(row: Session) -> SessionTopicOut:
@@ -44,7 +74,7 @@ def session_out(row: Session, interview_title: str | None = None) -> SessionOut:
         else None,
         started_at=row.started_at,
         finished_at=row.finished_at,
-        deadline=row.deadline,
+        question_seconds=row.question_seconds,
     )
 
 

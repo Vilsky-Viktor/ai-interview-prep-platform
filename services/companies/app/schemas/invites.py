@@ -24,7 +24,7 @@ class InviteView(BaseModel):
     email: str
     status: str
     # Shown before the candidate starts: the timer begins at start.
-    time_limit_minutes: int | None
+    question_seconds: int | None
     # Whether the candidate sees if each answer was right.
     share_results: bool
 

@@ -22,9 +22,11 @@ Turn a job description or a learning goal into a structured practice path: revie
 **For companies**
 
 - Generate an interview from a job description and set how many questions each topic asks.
-- Invite candidates by email, resend an invite, or revoke one the candidate hasn't used yet. Each candidate gets a random subset of each topic, in a single pass.
-- Scorecards show every answer and whether it was right; you choose whether candidates see their scores.
-- Make an interview **timed**: candidates see a countdown, and when it reaches zero the whole interview finishes by itself. The server enforces the deadline too, so closing the tab doesn't stop the clock.
+- Invite candidates by email, resend an invite, or revoke one the candidate hasn't used yet. The invite page tells candidates what to expect before they start.
+- Each candidate gets a random subset of each topic, with their own question and option order, in a single pass. Answers can't be changed, and unanswered questions count as wrong.
+- Make an interview **timed**: each question gets its own countdown (60 seconds by default), and a question still open when it reaches zero counts as wrong. The server enforces it, so closing the tab doesn't stop the clock.
+- Scorecards show every answer, whether it was right and how long it took. They flag answers too fast to have read the question, times the candidate left the page, and copy attempts.
+- You choose whether candidates see their scores.
 
 ## Architecture
 
@@ -90,7 +92,7 @@ Rounds publish every answer; library keeps per-question stats (answers, correct,
 | `rewrite` | 2 "unclear" or "off topic" reports, 3+ dislikes at twice the likes, or ≤ 15% correct | Writes a new question in its place |
 | `weak_options` | A wrong option almost nobody picks, or ≥ 95% correct | Writes new options for the same question |
 
-Fixes happen in place, so a topic's size never changes, and the replaced version is archived with its stats and feedback.
+Fixes happen in place, so a topic's size never changes, and the replaced version is archived with its stats and feedback. A replacement question must differ in meaning from every question already in the topic, checked by embeddings like the pipeline's duplicate step.
 
 ## Running locally
 
@@ -107,6 +109,8 @@ docker compose up --build
 | http://localhost:8090 | The app |
 | http://localhost:4100 | Firebase Auth emulator UI (sign-in creates fake accounts here) |
 | http://localhost:8125 | Mailpit: every email sent locally, when `RESEND_API_KEY` is empty |
+
+Without `RESEND_API_KEY`, emails go to Mailpit instead of real inboxes. See [Emails](#emails) to send real ones.
 
 Each API's database migrations run once in a short-lived `*-migrate` container before the API starts, and Docker marks an API healthy only when `/ready` confirms its database and Redis answer.
 
@@ -136,6 +140,16 @@ Three settings in `.env` shape every generation:
 
 Per-user rate limits (`GENERATION_LIMIT`, `LLM_LIMIT`) cap how much a single account can generate and chat.
 
+### Emails
+
+Share and candidate invites are sent by the `notifications` service, as HTML with a plain-text version. To send real emails through [Resend](https://resend.com):
+
+1. Verify your domain at resend.com/domains.
+2. In `.env`, set `RESEND_API_KEY` (a sending-only key is enough) and `MAIL_FROM` with an address on that domain, for example `prepza. <no-reply@yourdomain.com>`.
+3. Restart the service: it reads `.env` only when it starts.
+
+Failed sends are retried 5 times and then moved to the `events:notifications:dead` stream; the error from Resend is in the logs. Retries never send an email twice.
+
 ## Tests
 
 ```bash
@@ -155,4 +169,4 @@ CI runs all of these on every push and pull request.
 
 ## Project conventions
 
-See [CLAUDE.md](CLAUDE.md): separate modules for schemas, models, prompts, helpers and constants; `app/main.py` only wires the app; at most 300 lines per file; and the simplest solution that works.
+See [CLAUDE.md](CLAUDE.md): separate modules for schemas, models, prompts, helpers and constants; `app/main.py` only wires the app; at most 300 lines per file; the simplest solution that works; and no business logic on the frontend (rules, thresholds and decisions live in the services).

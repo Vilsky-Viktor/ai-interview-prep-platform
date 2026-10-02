@@ -1,3 +1,4 @@
+import { MinusIcon } from "lucide-react"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { cn } from "cn"
@@ -7,6 +8,7 @@ import { CandidateActions } from "@/components/company/candidate-actions"
 import { ScorecardReview } from "@/components/company/scorecard-review"
 import { PageHeader } from "@/components/page-header"
 import { Badge } from "@/components/ui/badge"
+import { plural } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
 import type { ReviewItem } from "@/types/round"
 
@@ -21,8 +23,44 @@ type Scorecard = {
     topic_title: string
     status: string
     final_score: number | null
+    tab_leaves: number
+    copies: number
+    fast_answers: number
     review: ReviewItem[]
   }[]
+}
+
+/** What the candidate's browser and timing showed; counts above zero stand out. */
+function IntegrityLine({
+  session,
+}: {
+  session: { tab_leaves: number; copies: number; fast_answers: number }
+}) {
+  const signals = [
+    plural(session.tab_leaves, "page leave"),
+    plural(session.copies, "copy attempt"),
+    plural(session.fast_answers, "fast answer"),
+  ]
+  const counts = [session.tab_leaves, session.copies, session.fast_answers]
+
+  return (
+    <p className="flex flex-wrap items-center gap-x-1.5 text-sm text-muted-foreground tabular-nums">
+      {signals.map((signal, index) => (
+        <span key={signal} className="flex items-center gap-x-1.5">
+          {index > 0 && (
+            <MinusIcon aria-hidden className="size-3.5 text-foreground/55" />
+          )}
+          <span
+            className={cn(
+              counts[index] > 0 && "text-amber-600 dark:text-amber-400"
+            )}
+          >
+            {signal}
+          </span>
+        </span>
+      ))}
+    </p>
+  )
 }
 
 export default async function ScorecardPage({
@@ -96,6 +134,7 @@ export default async function ScorecardPage({
                 {score == null ? "—" : `${score}%`}
               </p>
             </div>
+            <IntegrityLine session={session} />
             <ScorecardReview items={session.review} />
           </section>
         )

@@ -1,7 +1,10 @@
 import type { ReviewItem } from "@/types/round"
 
 export function answerText(item: ReviewItem) {
-  return item.answer ? item.options[item.answer.option_index] : null
+  // A timed question that ran out has no option picked.
+  return item.answer?.option_index != null
+    ? item.options[item.answer.option_index]
+    : null
 }
 
 /** The right option's text, once the question is answered and the key may be shown. */

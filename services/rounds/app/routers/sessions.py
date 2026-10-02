@@ -1,14 +1,21 @@
+from datetime import UTC, datetime
 from uuid import UUID
 
 from fastapi import APIRouter
 from prepza_common.auth import CurrentUser
 
+from app.constants.rounds import TIME_GRACE_SECONDS, RoundStatus
 from app.helpers.review import build_review
 from app.helpers.scores import final_score
-from app.helpers.sessions import next_session_question, session_out_titled, topic_out
+from app.helpers.sessions import (
+    next_session_question,
+    seconds_left,
+    session_out_titled,
+    topic_out,
+)
 from app.schemas.review import ReviewItem
 from app.schemas.rounds import AnswerCreate, NextQuestion
-from app.schemas.sessions import SessionAnswerResult, SessionOut, SessionTopicOut
+from app.schemas.sessions import SessionAnswerResult, SessionOut, SessionTopicOut, SignalIn
 from app.services.session_access import get_owned_session
 from app.services.session_answers import submit_session_answer
 from app.storage import sessions
@@ -32,14 +39,35 @@ async def list_topics(session_id: UUID, user: CurrentUser) -> list[SessionTopicO
 
 @router.get("/{session_id}/next")
 async def get_next_question(session_id: UUID, user: CurrentUser) -> NextQuestion | None:
-    return next_session_question(await get_owned_session(session_id, user))
+    row = await get_owned_session(session_id, user)
+    question = next_session_question(row)
+
+    if question is None or row.status != RoundStatus.IN_PROGRESS:
+        return question
+
+    if row.question_shown_at is None:
+        row.question_shown_at = await sessions.mark_shown(row.id)
+
+    question.seconds_left = seconds_left(row, datetime.now(UTC))
+
+    return question
+
+
+@router.post("/{session_id}/signals", status_code=204)
+async def add_signal(session_id: UUID, body: SignalIn, user: CurrentUser) -> None:
+    """The candidate's browser reports leaving the tab or copying; the scorecard counts them."""
+    row = await get_owned_session(session_id, user)
+    await sessions.add_signal(row.id, body.kind)
 
 
 @router.post("/{session_id}/answers", status_code=201)
 async def answer_question(
     session_id: UUID, body: AnswerCreate, user: CurrentUser
 ) -> SessionAnswerResult:
-    return await submit_session_answer(await get_owned_session(session_id, user), body)
+    # An answer sent just before the clock ran out still counts.
+    row = await get_owned_session(session_id, user, TIME_GRACE_SECONDS)
+
+    return await submit_session_answer(row, body)
 
 
 @router.get("/{session_id}/review")

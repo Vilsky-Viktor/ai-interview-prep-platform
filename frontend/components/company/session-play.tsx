@@ -1,6 +1,7 @@
 import { cn } from "cn"
 import { MinusIcon } from "lucide-react"
 import { useState } from "react"
+import { toast } from "sonner"
 
 import { Countdown } from "@/components/company/countdown"
 import { QuestionActions } from "@/components/questions/question-actions"
@@ -18,6 +19,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Progress } from "@/components/ui/progress"
+import { useIntegritySignals } from "@/hooks/use-integrity-signals"
 import type { InterviewSession, SessionAnswerResult } from "@/types/company"
 import type { AnswerInput, AnswerResult, NextQuestion } from "@/types/round"
 
@@ -46,6 +48,7 @@ export function SessionPlay({
   finishing,
 }: SessionPlayProps) {
   const [confirmFinish, setConfirmFinish] = useState(false)
+  useIntegritySignals(session.id, session.status === "in_progress")
   const shown = result && session.share_results ? shownResult(result) : null
   const allAnswered = progress.total > 0 && progress.answered === progress.total
 
@@ -55,7 +58,11 @@ export function SessionPlay({
         session={session}
         progress={progress}
         section={section}
-        onTimeUp={onFinish}
+        question={result ? null : question}
+        onTimeUp={() => {
+          toast.error("Time is up for this question.")
+          onAdvance()
+        }}
       />
       {question && (
         <div key={question.question_id} className="space-y-6">
@@ -150,12 +157,16 @@ function SessionHeader({
   session,
   progress,
   section,
+  question,
   onTimeUp,
 }: {
   session: InterviewSession
   progress: { answered: number; total: number }
   section: { number: number; count: number }
-  // Called when a timed interview's clock reaches zero: the whole interview finishes.
+  // The question waiting for an answer; its clock shows in a timed interview.
+  question: NextQuestion | null
+  // Called when the question's clock reaches zero: the server counts it as wrong, and the
+  // next one opens.
   onTimeUp: () => void
 }) {
   const score = session.current_score ?? 0
@@ -178,9 +189,13 @@ function SessionHeader({
           )}
         </p>
         <p className="flex shrink-0 items-center text-sm text-muted-foreground tabular-nums">
-          {session.deadline && (
+          {question?.seconds_left != null && (
             <>
-              <Countdown deadline={session.deadline} onExpire={onTimeUp} />
+              <Countdown
+                key={question.question_id}
+                seconds={question.seconds_left}
+                onExpire={onTimeUp}
+              />
               <MinusIcon
                 aria-hidden
                 className="mx-1.5 size-3.5 text-foreground/55"

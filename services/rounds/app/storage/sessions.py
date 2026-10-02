@@ -6,8 +6,9 @@ from sqlalchemy import delete, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
+from app.constants.integrity import IntegritySignal
 from app.constants.rounds import RoundStatus
-from app.helpers.scores import candidate_progress, final_score, interview_finished
+from app.helpers.scores import candidate_progress, interview_finished
 from app.models.rounds import Answer
 from app.models.sessions import Session
 from app.schemas.library import TopicQuestions
@@ -21,7 +22,7 @@ async def create_many(
     candidate_invite_id: uuid.UUID,
     share_results: bool,
     topics: list[TopicQuestions],
-    deadline: datetime | None,
+    question_seconds: int | None,
 ) -> list[Session]:
     rows = [
         Session(
@@ -35,14 +36,18 @@ async def create_many(
             questions=[question.model_dump(mode="json") for question in topic.questions],
             final_score=None,
             finished_at=None,
-            deadline=deadline,
+            question_seconds=question_seconds,
             answers=[],
         )
         for topic in topics
     ]
 
+    # Each candidate gets their own question and option order, so answers can't be passed on.
     for row in rows:
         random.shuffle(row.questions)
+
+        for question in row.questions:
+            random.shuffle(question["options"])
 
     async with Db() as session:
         session.add_all(rows)
@@ -103,9 +108,40 @@ async def scores_for_invites(
     return result
 
 
+async def mark_shown(session_id: uuid.UUID) -> datetime:
+    """Starts the clock on the waiting question; reloading the page doesn't restart it."""
+    now = datetime.now(UTC)
+
+    async with Db() as session:
+        await session.execute(
+            update(Session)
+            .where(Session.id == session_id, Session.question_shown_at.is_(None))
+            .values(question_shown_at=now)
+        )
+        await session.commit()
+
+    return now
+
+
+async def add_signal(session_id: uuid.UUID, kind: IntegritySignal) -> None:
+    column = Session.tab_leaves if kind == IntegritySignal.TAB_LEAVE else Session.copies
+
+    async with Db() as session:
+        await session.execute(
+            update(Session)
+            .where(Session.id == session_id, Session.status == RoundStatus.IN_PROGRESS)
+            .values({column: column + 1})
+        )
+        await session.commit()
+
+
 async def add_answer(answer: Answer) -> bool:
+    """Saves the answer and stops the clock, so the next question starts its own."""
     async with Db() as session:
         session.add(answer)
+        await session.execute(
+            update(Session).where(Session.id == answer.session_id).values(question_shown_at=None)
+        )
 
         try:
             await session.commit()
@@ -133,27 +169,4 @@ async def remove_for_interview(interview_set_id: uuid.UUID) -> None:
     """Deletes every candidate's sessions on the interview; answers and chats cascade."""
     async with Db() as session:
         await session.execute(delete(Session).where(Session.interview_set_id == interview_set_id))
-        await session.commit()
-
-
-async def finish_expired(candidate_invite_ids: list[uuid.UUID]) -> None:
-    """Finishes the timed sessions of these invites whose deadline has passed, as of then."""
-    query = (
-        select(Session)
-        .where(
-            Session.candidate_invite_id.in_(candidate_invite_ids),
-            Session.status == RoundStatus.IN_PROGRESS,
-            Session.deadline < datetime.now(UTC),
-        )
-        .options(selectinload(Session.answers))
-    )
-
-    async with Db() as session:
-        for row in await session.scalars(query):
-            row.status = RoundStatus.FINISHED
-            row.final_score = final_score(
-                [answer.score for answer in row.answers], len(row.questions)
-            )
-            row.finished_at = row.deadline
-
         await session.commit()

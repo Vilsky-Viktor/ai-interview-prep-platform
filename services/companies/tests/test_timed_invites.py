@@ -39,7 +39,7 @@ def start(client, monkeypatch, timed):
         share_results=False,
         set_id=uuid.uuid4(),
         timed=timed,
-        time_limit_minutes=45,
+        question_seconds=45,
         topic_limits={},
     )
     sent = {}
@@ -75,9 +75,9 @@ def start(client, monkeypatch, timed):
     return sent
 
 
-def test_a_timed_interview_starts_the_clock(client, monkeypatch):
-    assert start(client, monkeypatch, timed=True)["time_limit_minutes"] == 45
+def test_a_timed_interview_limits_each_question(client, monkeypatch):
+    assert start(client, monkeypatch, timed=True)["question_seconds"] == 45
 
 
 def test_an_untimed_interview_has_no_limit(client, monkeypatch):
-    assert start(client, monkeypatch, timed=False)["time_limit_minutes"] is None
+    assert start(client, monkeypatch, timed=False)["question_seconds"] is None

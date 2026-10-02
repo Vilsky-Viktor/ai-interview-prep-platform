@@ -3,7 +3,11 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field, field_validator
 
-from app.constants.interviews import DEFAULT_TIME_LIMIT_MINUTES, MAX_TIME_LIMIT_MINUTES
+from app.constants.interviews import (
+    DEFAULT_QUESTION_SECONDS,
+    MAX_QUESTION_SECONDS,
+    MIN_QUESTION_SECONDS,
+)
 
 
 class InterviewCreate(BaseModel):
@@ -18,7 +22,7 @@ class InterviewOut(BaseModel):
     title: str | None
     share_results: bool
     timed: bool
-    time_limit_minutes: int
+    question_seconds: int
     candidate_count: int
     created_at: datetime
 
@@ -66,8 +70,8 @@ class TopicLimitIn(BaseModel):
 class InterviewSettings(BaseModel):
     share_results: bool
     timed: bool = False
-    time_limit_minutes: int = Field(
-        default=DEFAULT_TIME_LIMIT_MINUTES, ge=1, le=MAX_TIME_LIMIT_MINUTES
+    question_seconds: int = Field(
+        default=DEFAULT_QUESTION_SECONDS, ge=MIN_QUESTION_SECONDS, le=MAX_QUESTION_SECONDS
     )
 
 

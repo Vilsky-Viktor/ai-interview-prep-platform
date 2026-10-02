@@ -76,7 +76,7 @@ export default async function InterviewPage({
                 initial={{
                   share_results: interview.share_results,
                   timed: interview.timed,
-                  time_limit_minutes: interview.time_limit_minutes,
+                  question_seconds: interview.question_seconds,
                 }}
               />
             </div>

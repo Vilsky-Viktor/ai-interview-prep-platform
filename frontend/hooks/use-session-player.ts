@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
-import { apiErrorMessage, apiFetch } from "@/lib/api"
+import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import { fetchStep, openTopic, type Step } from "@/lib/sessions"
 import type {
   InterviewSession,
@@ -162,6 +162,11 @@ export function useSessionPlayer(id: string) {
       toast.error(
         apiErrorMessage(error, "Couldn't submit your answer. Please try again.")
       )
+
+      // Refused because the question's time ran out: the next one opens.
+      if (error instanceof ApiError && error.status === 409) {
+        await advance()
+      }
 
       return false
     }
