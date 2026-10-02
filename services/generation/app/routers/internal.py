@@ -4,8 +4,10 @@ from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
+from app.constants.generation import RUN_GENERATION, VERIFY_QUESTION
 from app.constants.kinds import GenerationKind
-from app.integrations import library
+from app.integrations import library, tasks
+from app.integrations.redis import get_redis
 from app.models.generation import Generation
 from app.schemas.generation import GenerationOut, InterviewGenerationCreate, ReviewRequest
 from app.schemas.regenerate import RegeneratedOut, RegenerateIn
@@ -35,7 +37,7 @@ async def create_interview_generation(
 ) -> GenerationOut:
     """A company's interview; companies pays per candidate, so this one is free."""
     await hit(
-        request.app.state.arq,
+        get_redis(),
         f"rate:generations:{body.owner_uid}",
         settings.generation_limit,
         settings.generation_window_seconds,
@@ -43,7 +45,7 @@ async def create_interview_generation(
     generation = await generations.create(
         body.owner_uid, body.text, GenerationKind.INTERVIEW, body.company_id
     )
-    await request.app.state.arq.enqueue_job("run_generation", str(generation.id))
+    await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
 
     return GenerationOut.model_validate(generation)
 
@@ -67,9 +69,7 @@ async def review_interview_generation(
     """For a caller that already checked the user may manage the company's interviews."""
     generation = await get_company_generation(generation_id, company_id)
 
-    return GenerationOut.model_validate(
-        await submit_review(request.app.state.arq, generation, body)
-    )
+    return GenerationOut.model_validate(await submit_review(generation, body))
 
 
 @router.post("/generations/{generation_id}/retry")
@@ -79,7 +79,7 @@ async def retry_interview_generation(
     """For a caller that already checked the user may manage the company's interviews."""
     generation = await get_company_generation(generation_id, company_id)
 
-    return GenerationOut.model_validate(await retry_generation(request.app.state.arq, generation))
+    return GenerationOut.model_validate(await retry_generation(generation))
 
 
 @router.post("/generations/{generation_id}/cancel")
@@ -103,7 +103,7 @@ async def regenerate_interview_question(
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Question not found")
 
     await hit(
-        request.app.state.arq,
+        get_redis(),
         f"rate:regenerations:{body.user_id}",
         settings.regeneration_limit,
         settings.generation_window_seconds,
@@ -121,4 +121,4 @@ async def verify_question(
     question_id: UUID, body: VerifyIn, caller: ServiceCaller, request: Request
 ) -> None:
     """The library flagged the question; the worker checks it and fixes or replaces it."""
-    await request.app.state.arq.enqueue_job("verify_question", str(question_id), body.flag)
+    await tasks.enqueue(VERIFY_QUESTION, {"question_id": str(question_id), "flag": body.flag})

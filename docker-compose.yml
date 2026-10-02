@@ -8,6 +8,9 @@ x-firebase-env: &firebase-env
   FIREBASE_AUTH_EMULATOR_HOST: ${FIREBASE_AUTH_EMULATOR_HOST}
   # Development only: serves /docs and /openapi.json, which `pnpm api-types` reads.
   API_DOCS: "true"
+  # Events go through the Pub/Sub emulator locally; Google Cloud uses the real service.
+  GOOGLE_CLOUD_PROJECT: ${FIREBASE_PROJECT_ID}
+  PUBSUB_EMULATOR_HOST: pubsub:8085
   # Error reports; nothing is sent while SENTRY_DSN is empty.
   SENTRY_DSN: ${SENTRY_DSN:-}
   SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
@@ -118,6 +121,9 @@ x-migrate: &migrate
   depends_on:
     postgres:
       condition: service_healthy
+    # Every API publishes events, so the topic must exist before any of them starts.
+    pubsub-setup:
+      condition: service_completed_successfully
 
 x-generation-env: &generation-env
   <<: *firebase-env
@@ -181,26 +187,56 @@ services:
         condition: service_healthy
 
   notifications:
-    restart: unless-stopped
+    <<: *service
     build:
-      context: services/notifications
+      context: .
+      dockerfile: services/notifications/Dockerfile
       target: dev
     volumes:
-      - ./services/notifications/app:/service/app
+      - ./services/notifications/app:/services/notifications/app
+      - ./packages/common/src:/packages/common/src
     environment:
-      REDIS_URL: redis://redis:6379
-      SENTRY_DSN: ${SENTRY_DSN:-}
-      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
+      <<: *firebase-env
       RESEND_API_KEY: ${RESEND_API_KEY:-}
       MAIL_FROM: ${MAIL_FROM:-prepza. <no-reply@prepza.local>}
       SMTP_HOST: ${SMTP_HOST:-mailpit}
       SMTP_PORT: ${SMTP_PORT:-1025}
       SITE_URL: ${SITE_URL:-http://localhost:8090}
     depends_on:
-      redis:
-        condition: service_healthy
       mailpit:
         condition: service_started
+
+  # Google's Pub/Sub emulator: events between services, pushed like in Google Cloud.
+  pubsub:
+    restart: unless-stopped
+    image: google/cloud-sdk:emulators
+    command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085 --project=${FIREBASE_PROJECT_ID}
+
+  # Creates the topic and push subscriptions before the services start.
+  pubsub-setup:
+    restart: "no"
+    image: curlimages/curl:8.17.0
+    entrypoint: ["sh", "/pubsub-setup.sh"]
+    volumes:
+      - ./scripts/pubsub-setup.sh:/pubsub-setup.sh:ro
+    environment:
+      PUBSUB_EMULATOR_HOST: pubsub:8085
+      GOOGLE_CLOUD_PROJECT: ${FIREBASE_PROJECT_ID}
+    depends_on:
+      - pubsub
+
+  # Local stand-in for Cloud Scheduler (see scripts/crontab).
+  scheduler:
+    restart: unless-stopped
+    image: alpine:3.22
+    command: sh -c "apk add --no-cache curl >/dev/null && crond -f -l 8"
+    volumes:
+      - ./scripts/crontab:/etc/crontabs/root:ro
+    depends_on:
+      generation-worker:
+        condition: service_healthy
+      companies:
+        condition: service_healthy
 
   mailpit:
     restart: unless-stopped
@@ -238,26 +274,19 @@ services:
       redis:
         condition: service_healthy
 
+  # Runs jobs (Cloud Tasks in Google Cloud; called directly here) and scheduled work.
   generation-worker:
-    restart: unless-stopped
+    <<: *service
     build:
       context: .
       dockerfile: services/generation/Dockerfile
       target: dev
     volumes: *generation-source
-    # A fresh process on every change: `arq --watch` restarts the worker but keeps the old code.
     command:
-      - uv
-      - run
-      - --with
-      - watchfiles
-      - --no-sync
-      - watchfiles
-      - --filter
-      - python
-      - arq app.workers.generation.WorkerSettings
-      - /services/generation/app
-      - /packages/common/src
+      [
+        "uv", "run", "--no-sync", "uvicorn", "app.worker_main:app", "--host", "0.0.0.0",
+        "--port", "8000", "--reload", "--reload-dir", "app", "--reload-dir", "/packages/common/src",
+      ]
     environment:
       <<: *generation-env
       OPENAI_API_KEY: ${OPENAI_API_KEY}

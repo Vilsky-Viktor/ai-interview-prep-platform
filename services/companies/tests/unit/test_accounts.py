@@ -100,3 +100,12 @@ def test_retention_keeps_the_invites_when_rounds_fails(monkeypatch):
         asyncio.run(retention.delete_expired_candidates())
 
     assert deleted == []
+
+
+def test_cloud_scheduler_runs_retention_through_its_route(client, monkeypatch):
+    async def expired_invites(before):
+        return []
+
+    monkeypatch.setattr(accounts, "expired_invites", expired_invites)
+
+    assert client.post("/internal/schedules/retention").status_code == 204

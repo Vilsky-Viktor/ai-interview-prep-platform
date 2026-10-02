@@ -3,8 +3,9 @@ import uuid
 from types import SimpleNamespace
 
 import pytest
+from prepza_common import pubsub
 
-from app.integrations import events, library
+from app.integrations import library
 from app.models.generation import Generation
 from app.services.pipeline import stream_graph
 from app.storage import generations
@@ -47,7 +48,7 @@ def published(monkeypatch):
     async def not_cancelled(_generation_id):
         return False
 
-    monkeypatch.setattr(events, "publish", publish)
+    monkeypatch.setattr(pubsub, "publish", publish)
     monkeypatch.setattr(library, "create_interview", saved)
     monkeypatch.setattr(library, "create_preparation", saved)
     monkeypatch.setattr(generations, "update", nothing)

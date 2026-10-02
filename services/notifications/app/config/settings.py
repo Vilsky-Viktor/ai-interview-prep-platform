@@ -2,7 +2,6 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    redis_url: str
     # With a Resend key emails go out through Resend; without one, to the SMTP server (mailpit).
     resend_api_key: str = ""
     smtp_host: str = "mailpit"

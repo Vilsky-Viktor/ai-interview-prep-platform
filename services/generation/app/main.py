@@ -2,14 +2,13 @@ import logging
 from contextlib import asynccontextmanager
 
 import firebase_admin
-from arq import create_pool
-from arq.connections import RedisSettings
-from fastapi import FastAPI, HTTPException, Request, status
+from fastapi import FastAPI, HTTPException, status
 from prepza_common import http
 from prepza_common.logging import RequestLogMiddleware, configure_logging
 from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
+from app.integrations.redis import get_redis
 from app.routers import generations, internal, internal_accounts
 from app.storage.db import ping as ping_database
 
@@ -20,11 +19,10 @@ init_sentry("generation")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     firebase_admin.initialize_app(options={"projectId": settings.firebase_project_id})
-    app.state.arq = await create_pool(RedisSettings.from_dsn(settings.redis_url))
 
     yield
 
-    await app.state.arq.aclose()
+    await get_redis().aclose()
     await http.get_client().aclose()
 
 
@@ -45,11 +43,11 @@ def health() -> dict:
 
 
 @app.get("/ready")
-async def ready(request: Request) -> dict:
+async def ready() -> dict:
     """Ready only once the database and Redis answer; Docker's healthcheck uses this."""
     try:
         await ping_database()
-        await request.app.state.arq.ping()
+        await get_redis().ping()
     except Exception:
         logging.getLogger(__name__).exception("Not ready")
 

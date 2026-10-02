@@ -6,6 +6,9 @@ if os.getenv("INTEGRATION_TESTS"):
     os.environ["DATABASE_URL"] += "_test"
 
 os.environ.setdefault("FIREBASE_PROJECT_ID", "demo-test")
+# A demo- project: no Google Cloud, so calls from Pub/Sub, Cloud Tasks and Scheduler aren't
+# token-checked, and jobs run locally.
+os.environ.setdefault("GOOGLE_CLOUD_PROJECT", "demo-test")
 os.environ.setdefault("DATABASE_URL", "postgresql://test:test@localhost/test")
 os.environ.setdefault("LIBRARY_URL", "http://library")
 os.environ.setdefault("REDIS_URL", "redis://localhost")

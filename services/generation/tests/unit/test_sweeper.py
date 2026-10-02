@@ -6,8 +6,8 @@ from sqlalchemy.dialects import postgresql
 
 from app.constants.generation import GENERATION_STOPPED, STUCK_AFTER_SECONDS
 from app.models.generation import Generation
+from app.services import jobs, schedules
 from app.storage import generations
-from app.workers import generation as worker
 
 
 class FakeCheckpointer:
@@ -40,7 +40,7 @@ def test_sweep_fails_generations_untouched_for_longer_than_a_job_may_run(monkeyp
     monkeypatch.setattr(generations, "fail_stuck", fake_fail_stuck)
     no_finished_threads(monkeypatch)
 
-    asyncio.run(worker.sweep({"checkpointer": FakeCheckpointer()}))
+    asyncio.run(schedules.sweep(FakeCheckpointer()))
 
     [(before, error)] = calls
     expected = datetime.now(UTC) - timedelta(seconds=STUCK_AFTER_SECONDS)
@@ -56,7 +56,7 @@ def test_sweep_deletes_checkpoints_of_finished_generations(monkeypatch):
     monkeypatch.setattr(generations, "fail_stuck", fake_fail_stuck)
     no_finished_threads(monkeypatch, ["done-1", "cancelled-1"])
 
-    asyncio.run(worker.sweep({"checkpointer": checkpointer}))
+    asyncio.run(schedules.sweep(checkpointer))
 
     assert checkpointer.deleted == ["done-1", "cancelled-1"]
 
@@ -73,10 +73,10 @@ def test_expired_reviews_remove_their_interviews(monkeypatch):
         published.append((event_type, data))
 
     monkeypatch.setattr(generations, "fail_stuck", fake_fail_stuck)
-    monkeypatch.setattr(worker.events, "publish", fake_publish)
+    monkeypatch.setattr(schedules.pubsub, "publish", fake_publish)
     no_finished_threads(monkeypatch, expired=[interview, preparation])
 
-    asyncio.run(worker.sweep({"checkpointer": FakeCheckpointer()}))
+    asyncio.run(schedules.sweep(FakeCheckpointer()))
 
     assert published == [("generation.cancelled", {"generation_id": str(interview.id)})]
 
@@ -140,10 +140,28 @@ def test_only_done_and_cancelled_checkpoints_are_deleted(monkeypatch):
     assert "failed" not in sql and "awaiting_review" not in sql
 
 
-def test_sweeper_key_check_batches_and_retention_run_on_a_schedule():
-    jobs = [job.coroutine for job in worker.WorkerSettings.cron_jobs]
+def test_the_worker_runs_schedules_and_jobs_through_its_routes(monkeypatch):
+    from fastapi.testclient import TestClient
 
-    assert jobs == [worker.sweep, worker.key_check_batches, worker.retention]
+    from app.worker_main import app as worker_app
+
+    called = []
+
+    async def record(*args):
+        called.append(args)
+
+    for name in ("sweep", "key_check_batches", "retention"):
+        monkeypatch.setattr(schedules, name, lambda *args, name=name: record(name))
+
+    monkeypatch.setattr(jobs, "run_pipeline", record)
+    worker_app.state.checkpointer = "checkpointer"
+    worker_app.state.graph = "graph"
+    client = TestClient(worker_app)
+
+    for path in ("sweep", "key-check-batches", "retention"):
+        assert client.post(f"/internal/schedules/{path}").status_code == 204
+
+    assert called == [("sweep",), ("key_check_batches",), ("retention",)]
 
 
 def test_worker_skips_a_generation_the_sweeper_already_failed(monkeypatch):
@@ -156,8 +174,8 @@ def test_worker_skips_a_generation_the_sweeper_already_failed(monkeypatch):
         started.append(args)
 
     monkeypatch.setattr(generations, "get", get)
-    monkeypatch.setattr(worker, "run_pipeline", run_pipeline)
+    monkeypatch.setattr(jobs, "run_pipeline", run_pipeline)
 
-    asyncio.run(worker.run_generation({"graph": None}, str(uuid.uuid4())))
+    asyncio.run(jobs.run_generation(None, uuid.uuid4(), None))
 
     assert started == []

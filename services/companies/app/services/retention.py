@@ -1,8 +1,7 @@
-import asyncio
 import logging
 from datetime import UTC, datetime, timedelta
 
-from app.constants.invites import CANDIDATE_RETENTION_DAYS, RETENTION_INTERVAL_SECONDS
+from app.constants.invites import CANDIDATE_RETENTION_DAYS
 from app.integrations import rounds
 from app.storage import accounts
 
@@ -20,19 +19,3 @@ async def delete_expired_candidates() -> int:
         await accounts.delete_invites(invite_ids)
 
     return len(invite_ids)
-
-
-async def keep_retaining() -> None:
-    """Runs for the life of the app, next to the API (see main.py), once a day."""
-    while True:
-        try:
-            count = await delete_expired_candidates()
-
-            if count:
-                logger.info("Deleted %d expired candidate invites", count)
-        except asyncio.CancelledError:
-            raise
-        except Exception:
-            logger.exception("Retention failed; trying again tomorrow")
-
-        await asyncio.sleep(RETENTION_INTERVAL_SECONDS)

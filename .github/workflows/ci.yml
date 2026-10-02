@@ -77,7 +77,7 @@ jobs:
           - { name: rounds, context: ., file: services/rounds/Dockerfile }
           - { name: companies, context: ., file: services/companies/Dockerfile }
           - { name: billing, context: ., file: services/billing/Dockerfile }
-          - { name: notifications, context: services/notifications, file: services/notifications/Dockerfile }
+          - { name: notifications, context: ., file: services/notifications/Dockerfile }
           - { name: frontend, context: frontend, file: frontend/Dockerfile }
     steps:
       - uses: actions/checkout@v4

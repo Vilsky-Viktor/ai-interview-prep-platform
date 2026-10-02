@@ -3,9 +3,9 @@ import uuid
 
 import pytest
 from fastapi import HTTPException
+from prepza_common import pubsub
 
 from app.helpers.rounds import next_question
-from app.integrations import events
 from app.models.rounds import Answer, Round
 from app.schemas.rounds import AnswerCreate
 from app.services.answers import submit_answer
@@ -36,7 +36,7 @@ def published(monkeypatch):
     async def publish(event_type, data):
         sent.append((event_type, data))
 
-    monkeypatch.setattr(events, "publish", publish)
+    monkeypatch.setattr(pubsub, "publish", publish)
 
     return sent
 
@@ -138,7 +138,7 @@ def test_answering_works_even_if_the_event_cannot_be_published(monkeypatch):
     async def redis_down(event_type, data):
         raise ConnectionError("redis is down")
 
-    monkeypatch.setattr(events, "publish", redis_down)
+    monkeypatch.setattr(pubsub, "publish", redis_down)
 
     result = asyncio.run(submit_answer(make_round(), AnswerCreate(question_id=Q1, option_index=1)))
 

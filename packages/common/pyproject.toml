@@ -6,6 +6,7 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.141.1",
     "firebase-admin>=7.7.0",
+    "google-auth[requests]>=2.40.0",
     "httpx>=0.28.1",
     "pyjwt>=2.15.1",
     "sentry-sdk[fastapi]>=2.71.0",

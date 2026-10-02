@@ -12,6 +12,12 @@ class Settings(BaseSettings):
     redis_url: str
     library_url: str
     billing_url: str
+    # Where Cloud Tasks (or, locally, the API itself) sends jobs.
+    worker_url: str = "http://generation-worker:8000"
+    # Google Cloud only: the queue ("projects/<p>/locations/<l>/queues/<q>") and the service
+    # account whose signed token Cloud Tasks attaches.
+    tasks_queue: str = ""
+    invoker_service_account: str = ""
     service_secret: str
     questions_per_topic: int = Field(default=100, gt=0)
     llm_model: str = "gpt-6-luna"

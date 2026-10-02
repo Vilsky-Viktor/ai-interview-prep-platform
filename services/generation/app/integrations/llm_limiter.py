@@ -5,7 +5,7 @@ import time
 from langchain_core.rate_limiters import BaseRateLimiter
 
 from app.constants.generation import LLM_RATE_KEY
-from app.integrations.events import get_redis
+from app.integrations.redis import get_redis
 
 logger = logging.getLogger(__name__)
 

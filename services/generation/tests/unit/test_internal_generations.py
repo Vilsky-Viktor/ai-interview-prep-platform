@@ -3,6 +3,7 @@ import uuid
 import pytest
 from pydantic import ValidationError
 
+from app.constants.generation import RUN_GENERATION
 from app.main import app
 from app.models.generation import Generation
 from app.routers import internal
@@ -75,14 +76,13 @@ def test_company_review_queues_the_topics(client, monkeypatch):
     fake_get(monkeypatch)
     reviewed = []
 
-    async def fake_submit(_arq, generation, body):
+    async def fake_submit(generation, body):
         reviewed.append(body.selected)
         generation.status = "queued"
 
         return generation
 
     monkeypatch.setattr(internal, "submit_review", fake_submit)
-    monkeypatch.setattr(app.state, "arq", object(), raising=False)
     response = client.post(
         f"/internal/generations/{GENERATION_ID}/review",
         params={"company_id": str(COMPANY_ID)},
@@ -95,31 +95,24 @@ def test_company_review_queues_the_topics(client, monkeypatch):
     assert reviewed == [[0]]
 
 
-def test_only_a_failed_generation_is_retried(client, monkeypatch):
+def test_only_a_failed_generation_is_retried(client, monkeypatch, queued):
     fake_get(monkeypatch)
-    queued = []
     claims = iter([True, False])
-
-    class FakeArq:
-        async def enqueue_job(self, name, generation_id):
-            queued.append(generation_id)
 
     async def fake_claim(_generation_id):
         return next(claims)
 
     monkeypatch.setattr(generations, "claim_retry", fake_claim)
-    monkeypatch.setattr(app.state, "arq", FakeArq(), raising=False)
     url = f"/internal/generations/{GENERATION_ID}/retry"
     params = {"company_id": str(COMPANY_ID)}
 
     assert client.post(url, params=params, headers=headers()).status_code == 200
     assert client.post(url, params=params, headers=headers()).status_code == 409
-    assert queued == [str(GENERATION_ID)]
+    assert queued == [(RUN_GENERATION, {"generation_id": str(GENERATION_ID)})]
 
 
 def test_approving_more_than_max_topics_is_rejected(client, monkeypatch):
     fake_get(monkeypatch)
-    monkeypatch.setattr(app.state, "arq", object(), raising=False)
     url = f"/internal/generations/{GENERATION_ID}/review"
     params = {"company_id": str(COMPANY_ID)}
     eleven = list(range(11))
@@ -136,13 +129,12 @@ def test_more_than_max_topics_is_fine_with_instructions_to_revise(client, monkey
     fake_get(monkeypatch)
     revised = []
 
-    async def fake_submit(_arq, generation, body):
+    async def fake_submit(generation, body):
         revised.append(len(body.selected))
 
         return generation
 
     monkeypatch.setattr(internal, "submit_review", fake_submit)
-    monkeypatch.setattr(app.state, "arq", object(), raising=False)
     response = client.post(
         f"/internal/generations/{GENERATION_ID}/review",
         params={"company_id": str(COMPANY_ID)},

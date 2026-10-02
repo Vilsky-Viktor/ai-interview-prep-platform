@@ -4,9 +4,9 @@ from datetime import UTC, datetime, timedelta
 
 import jwt
 
+from app.constants.generation import VERIFY_QUESTION
 from app.constants.quality import QualityFlag
 from app.integrations import library, llm
-from app.main import app
 from app.schemas.questions import AnswerItem, AnswerList
 from app.schemas.regenerate import QuestionContext, RegeneratedOption
 from app.schemas.verify import KeyCheck, QuestionQuality, ReportNote
@@ -174,16 +174,7 @@ def test_a_deleted_question_is_skipped(monkeypatch):
     assert calls == []
 
 
-class FakeArq:
-    def __init__(self):
-        self.jobs = []
-
-    async def enqueue_job(self, *args):
-        self.jobs.append(args)
-
-
-def test_verify_endpoint_queues_the_worker_job(client):
-    app.state.arq = FakeArq()
+def test_verify_endpoint_queues_the_worker_job(client, queued):
     exp = datetime.now(UTC) + timedelta(seconds=60)
     service_token = jwt.encode(
         {"iss": "library", "exp": exp}, "test-secret-that-is-at-least-32-bytes", algorithm="HS256"
@@ -196,4 +187,6 @@ def test_verify_endpoint_queues_the_worker_job(client):
     )
 
     assert response.status_code == 202
-    assert app.state.arq.jobs == [("verify_question", str(QUESTION_ID), "wrong_key")]
+    assert queued == [
+        (VERIFY_QUESTION, {"question_id": str(QUESTION_ID), "flag": QualityFlag.WRONG_KEY})
+    ]

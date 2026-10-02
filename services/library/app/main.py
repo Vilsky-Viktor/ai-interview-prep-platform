@@ -1,4 +1,3 @@
-import asyncio
 import logging
 from contextlib import asynccontextmanager
 
@@ -9,9 +8,10 @@ from prepza_common.logging import RequestLogMiddleware, configure_logging
 from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
-from app.integrations.events import get_redis
+from app.integrations.redis import get_redis
 from app.routers import (
     internal,
+    internal_events,
     internal_feedback,
     internal_quality,
     internal_reuse,
@@ -22,7 +22,6 @@ from app.routers import (
     questions,
     shares,
 )
-from app.services.answer_events import consume
 from app.storage.db import ping as ping_database
 
 configure_logging()
@@ -32,13 +31,7 @@ init_sentry("library")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     firebase_admin.initialize_app(options={"projectId": settings.firebase_project_id})
-    # Turns answers recorded by rounds into question statistics.
-    listener = asyncio.create_task(consume()) if settings.consume_events else None
-
     yield
-
-    if listener:
-        listener.cancel()
 
     await get_redis().aclose()
     await http.get_client().aclose()
@@ -57,6 +50,7 @@ app.include_router(shares.router)
 app.include_router(questions.router)
 app.include_router(library.router)
 app.include_router(internal.router)
+app.include_router(internal_events.router)
 app.include_router(internal_feedback.router)
 app.include_router(internal_quality.router)
 app.include_router(internal_reuse.router)

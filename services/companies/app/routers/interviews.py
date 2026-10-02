@@ -4,6 +4,7 @@ import httpx
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
+from prepza_common.pubsub import publish
 from prepza_common.rate_limit import hit_emails
 
 from app.config.settings import settings
@@ -18,7 +19,7 @@ from app.helpers.interviews import (
 )
 from app.integrations import billing, library, rounds
 from app.integrations import generation as generation_api
-from app.integrations.events import get_redis, publish
+from app.integrations.redis import get_redis
 from app.schemas.interviews import (
     InterviewCreate,
     InterviewDetail,

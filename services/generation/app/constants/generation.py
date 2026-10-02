@@ -40,12 +40,17 @@ MAX_GOAL_LENGTH = 20_000
 # How much of the pasted goal a list shows to tell generations apart.
 GOAL_PREVIEW_LENGTH = 120
 
-JOB_TIMEOUT_SECONDS = 60 * 60
-MAX_WORKER_JOBS = 4
+# A generation stops after this long: Cloud Tasks gives one request at most 30 minutes.
+JOB_TIMEOUT_SECONDS = 25 * 60
+# How long Cloud Tasks waits for the worker's answer; a little over JOB_TIMEOUT_SECONDS.
+TASK_DEADLINE_SECONDS = 28 * 60
+CLOUD_TASKS_URL = "https://cloudtasks.googleapis.com"
+# The worker's job endpoints.
+RUN_GENERATION = "/internal/jobs/run-generation"
+VERIFY_QUESTION = "/internal/jobs/verify-question"
 # A running job updates its row as it goes; one untouched for longer than a job may run has lost
 # its worker. The margin covers the last update coming a little before the timeout.
 STUCK_AFTER_SECONDS = JOB_TIMEOUT_SECONDS + 10 * 60
-SWEEP_MINUTES = set(range(0, 60, 5))
 
 GENERATION_FAILED = "Generation failed. Please try again."
 GENERATION_STOPPED = "Generation stopped unexpectedly. Please try again."

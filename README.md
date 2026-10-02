@@ -41,7 +41,8 @@ flowchart LR
     gateway --> billing
     paddle[Paddle] -- payment webhooks --> billing
 
-    generation -- jobs --> worker[generation worker]
+    generation -- jobs via Cloud Tasks --> worker[generation worker]
+    scheduler[Cloud Scheduler] -- sweeps, retention --> worker
     worker -- saves sets, reuses questions --> library
     library -- re-generate, verify --> generation
     rounds -- questions --> library
@@ -51,26 +52,26 @@ flowchart LR
     companies -- candidate credits --> billing
     generation -- preparations --> billing
 
-    rounds -- answer.recorded --> redis[(Redis stream)]
-    worker -- generation.completed / cancelled --> redis
-    library -- preparation.shared --> redis
-    companies -- candidate.invited --> redis
-    redis --> library
-    redis --> companies
-    redis --> notifications -- email --> smtp[Resend / mailpit]
+    rounds -- answer.recorded --> pubsub[(Pub/Sub topic: events)]
+    worker -- generation.completed / cancelled --> pubsub
+    library -- preparation.shared --> pubsub
+    companies -- candidate.invited --> pubsub
+    pubsub -- push --> library
+    pubsub -- push --> companies
+    pubsub -- push --> notifications -- email --> smtp[Resend / mailpit]
 ```
 
 | Service | Responsibility |
 |---|---|
 | `library` | Preparations and interviews (question sets), sharing, joining, ratings and reports, public library search, question quality flags and reuse |
-| `generation` | The generation pipeline (LangGraph) run by an arq worker, topic review, re-generating single questions, the question verifier |
+| `generation` | The generation pipeline (LangGraph), run by its worker (`app/worker_main.py`) as Cloud Tasks jobs; topic review, re-generating single questions, the question verifier, and scheduled sweeps |
 | `rounds` | Practice rounds, progress and certificates, the follow-up chat, candidate interview sessions |
 | `companies` | Companies, admins, interviews and candidate invites |
 | `billing` | Credits, the Job Search Pass, free allowances and Paddle payments (webhooks); other services ask it before a paid action |
-| `notifications` | Consumes domain events from a Redis stream and sends emails through Resend (mailpit without a key) |
+| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key) |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
-Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed).
+Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed). Long jobs (a generation, a question check) are Cloud Tasks that call the generation worker's `/internal/jobs/...`; periodic work (stuck-generation sweeps, key-check batches, retention) is Cloud Scheduler calling `/internal/schedules/...`. Google signs those calls, and pushes, as one invoker service account, which each service checks. Locally there is no queue: the API calls the worker directly, and a small `scheduler` container runs `scripts/crontab`. Domain events go to one Pub/Sub topic, `events`, which pushes each event to the `/internal/events` endpoint of library, companies and notifications; each ignores events that aren't its own. Locally, Google's Pub/Sub emulator runs in docker-compose and `scripts/pubsub-setup.sh` creates the topic and subscriptions.
 
 ### Generation pipeline
 
@@ -121,6 +122,10 @@ Each API's database migrations run once in a short-lived `*-migrate` container b
 
 `docker-compose.yml` is for local development only. It builds each image's `dev` target, mounts the source so servers reload on change, and enables the Firebase emulator. The frontend keeps its `node_modules` in a volume, so after a frontend dependency changes, run `docker compose build frontend`, remove the `prepza_frontend-modules` volume and start again.
 
+### Google Cloud
+
+Production runs on Google Cloud in `europe-west1`, set up by Terraform in [`infra/`](infra/README.md), which also has the one-time bootstrap steps.
+
 ### Production images
 
 Every app Dockerfile (on Alpine) has a `prod` target with the code built in and no reload. The API images are built from the repo root, because they include `packages/common`:
@@ -163,7 +168,7 @@ Share and candidate invites are sent by the `notifications` service, as HTML wit
 2. In `.env`, set `RESEND_API_KEY` (a sending-only key is enough) and `MAIL_FROM` with an address on that domain, for example `prepza. <no-reply@yourdomain.com>`.
 3. Restart the service: it reads `.env` only when it starts.
 
-Failed sends are retried 5 times and then moved to the `events:notifications:dead` stream; the error from Resend is in the logs. Retries never send an email twice.
+A failed send answers Pub/Sub's push with an error, so Pub/Sub retries it and, after the subscription's maximum attempts, moves it to the dead-letter topic; the error from Resend is in the logs. Retries never send an email twice.
 
 ## Tests
 

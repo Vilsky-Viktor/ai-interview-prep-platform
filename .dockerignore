@@ -6,6 +6,7 @@
 !services/rounds
 !services/companies
 !services/billing
+!services/notifications
 **/.venv
 **/__pycache__
 **/.pytest_cache

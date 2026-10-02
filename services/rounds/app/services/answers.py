@@ -1,12 +1,12 @@
 import logging
 
 from fastapi import HTTPException, status
+from prepza_common import pubsub
 
 from app.constants.events import ANSWER_RECORDED
 from app.constants.rounds import CORRECT_SCORE, RoundStatus
 from app.helpers.rounds import correct_option_index, find_question
 from app.helpers.scores import current_score, score_passed
-from app.integrations import events
 from app.models.rounds import Answer, Round
 from app.schemas.rounds import AnswerCreate, AnswerResult
 from app.storage import progress, rounds
@@ -20,7 +20,7 @@ async def announce(answer: Answer, question: dict) -> None:
     Statistics never block answering: a failure is only logged.
     """
     try:
-        await events.publish(
+        await pubsub.publish(
             ANSWER_RECORDED,
             {
                 "question_id": str(answer.question_id),

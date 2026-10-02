@@ -467,6 +467,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/7d/fd/4208e3ac1d7df39f4e8b044a3943eb8a5a99aaf8699285bf780f614a0b30/google_auth-2.59.0-py3-none-any.whl", hash = "sha256:43e47b1d3067fb90d77bd9ba21f139bb0577b3f2b9f3e2516fc00f37435efcad", size = 262487, upload-time = "2026-09-28T21:49:57.428Z" },
 ]
 
+[package.optional-dependencies]
+requests = [
+    { name = "requests" },
+]
+
 [[package]]
 name = "google-cloud-core"
 version = "2.7.0"
@@ -969,6 +974,7 @@ source = { editable = "../../packages/common" }
 dependencies = [
     { name = "fastapi" },
     { name = "firebase-admin" },
+    { name = "google-auth", extra = ["requests"] },
     { name = "httpx" },
     { name = "pyjwt" },
     { name = "sentry-sdk", extra = ["fastapi"] },
@@ -979,6 +985,7 @@ dependencies = [
 requires-dist = [
     { name = "fastapi", specifier = ">=0.141.1" },
     { name = "firebase-admin", specifier = ">=7.7.0" },
+    { name = "google-auth", extras = ["requests"], specifier = ">=2.40.0" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "pyjwt", specifier = ">=2.15.1" },
     { name = "sentry-sdk", extras = ["fastapi"], specifier = ">=2.71.0" },

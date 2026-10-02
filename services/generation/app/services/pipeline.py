@@ -2,6 +2,7 @@ import uuid
 from contextlib import aclosing
 
 from langgraph.types import Command
+from prepza_common import pubsub
 
 from app.constants.events import GENERATION_COMPLETED
 from app.constants.generation import MAX_CONCURRENCY, RECURSION_LIMIT
@@ -9,7 +10,7 @@ from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
 from app.helpers.payload import build_preparation
 from app.helpers.progress import track_progress
-from app.integrations import events, library
+from app.integrations import library
 from app.models.generation import Generation
 from app.storage import generations
 
@@ -78,7 +79,7 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
 
     if generation.kind == GenerationKind.INTERVIEW:
         # Companies stores the set and title, so its pages don't have to ask for them.
-        await events.publish(
+        await pubsub.publish(
             GENERATION_COMPLETED,
             {
                 "generation_id": str(generation.id),

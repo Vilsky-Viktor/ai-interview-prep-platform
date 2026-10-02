@@ -1,85 +1,77 @@
-import asyncio
+import base64
 import json
 import uuid
 
-from app.constants.events import CONSUMER_GROUP, EVENTS_STREAM
-from app.services import generation_events
+import pytest
+
 from app.storage import interviews
 
 GENERATION_ID = uuid.uuid4()
 SET_ID = uuid.uuid4()
 
 
-class FakeRedis:
-    def __init__(self):
-        self.acked = []
-
-    async def xack(self, stream, group, entry_id):
-        self.acked.append((stream, group, entry_id))
-
-
-def completed():
-    data = {
-        "generation_id": str(GENERATION_ID),
-        "company_id": str(uuid.uuid4()),
-        "set_id": str(SET_ID),
-        "title": "Bookkeeper interview",
+def push(event_type, data):
+    """A Pub/Sub push of one event, as the emulator sends it (no token)."""
+    return {
+        "message": {
+            "data": base64.b64encode(json.dumps(data).encode()).decode(),
+            "attributes": {"type": event_type},
+            "messageId": "1",
+        },
+        "subscription": "projects/demo-test/subscriptions/companies-events",
     }
 
-    return {"type": "generation.completed", "data": json.dumps(data)}
+
+COMPLETED = {
+    "generation_id": str(GENERATION_ID),
+    "company_id": str(uuid.uuid4()),
+    "set_id": str(SET_ID),
+    "title": "Bookkeeper interview",
+}
 
 
-def test_finished_generation_is_stored_on_its_interview(monkeypatch):
+@pytest.fixture(autouse=True)
+def emulator(monkeypatch):
+    monkeypatch.setenv("PUBSUB_EMULATOR_HOST", "pubsub:8085")
+    monkeypatch.setenv("GOOGLE_CLOUD_PROJECT", "demo-test")
+
+
+def test_finished_generation_is_stored_on_its_interview(client, monkeypatch):
     stored = []
 
     async def set_generated(generation_id, set_id, title):
         stored.append((generation_id, set_id, title))
 
     monkeypatch.setattr(interviews, "set_generated", set_generated)
-    redis = FakeRedis()
 
-    asyncio.run(generation_events.process(redis, "1-0", completed()))
+    response = client.post("/internal/events", json=push("generation.completed", COMPLETED))
 
+    assert response.status_code == 204
     assert stored == [(GENERATION_ID, SET_ID, "Bookkeeper interview")]
-    assert redis.acked == [(EVENTS_STREAM, CONSUMER_GROUP, "1-0")]
 
 
-def test_other_events_are_acknowledged_without_action(monkeypatch):
-    redis = FakeRedis()
-
-    asyncio.run(
-        generation_events.process(redis, "2-0", {"type": "candidate.invited", "data": "{}"})
-    )
-
-    assert redis.acked == [(EVENTS_STREAM, CONSUMER_GROUP, "2-0")]
-
-
-def test_failed_store_stays_pending_for_a_retry(monkeypatch):
-    async def database_down(*args):
-        raise ConnectionError("database is down")
-
-    monkeypatch.setattr(interviews, "set_generated", database_down)
-    redis = FakeRedis()
-
-    asyncio.run(generation_events.process(redis, "3-0", completed()))
-
-    assert redis.acked == []
-
-
-def test_an_expired_review_removes_its_interview(monkeypatch):
+def test_a_cancelled_generation_removes_its_interview(client, monkeypatch):
     removed = []
 
     async def remove_for_generation(generation_id):
         removed.append(generation_id)
 
     monkeypatch.setattr(interviews, "remove_for_generation", remove_for_generation)
-    redis = FakeRedis()
-    event = {
-        "type": "generation.cancelled",
-        "data": json.dumps({"generation_id": str(GENERATION_ID)}),
-    }
+    event = push("generation.cancelled", {"generation_id": str(GENERATION_ID)})
 
-    asyncio.run(generation_events.process(redis, "4-0", event))
-
+    assert client.post("/internal/events", json=event).status_code == 204
     assert removed == [GENERATION_ID]
-    assert redis.acked == [(EVENTS_STREAM, CONSUMER_GROUP, "4-0")]
+
+
+def test_other_events_are_accepted_without_action(client):
+    assert client.post("/internal/events", json=push("candidate.invited", {})).status_code == 204
+
+
+def test_a_failure_answers_with_an_error_so_pubsub_retries(client, monkeypatch):
+    async def database_down(*args):
+        raise ConnectionError("database is down")
+
+    monkeypatch.setattr(interviews, "set_generated", database_down)
+
+    with pytest.raises(ConnectionError):
+        client.post("/internal/events", json=push("generation.completed", COMPLETED))

@@ -16,7 +16,7 @@ def fake_services(monkeypatch, database_up=True):
         async def ping(self):
             return True
 
-    monkeypatch.setattr(main.app.state, "arq", FakeRedis(), raising=False)
+    monkeypatch.setattr(main, "get_redis", FakeRedis)
     monkeypatch.setattr(main, "ping_database", ping_database)
 
 

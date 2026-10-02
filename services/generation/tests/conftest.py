@@ -6,6 +6,9 @@ if os.getenv("INTEGRATION_TESTS"):
     os.environ["DATABASE_URL"] += "_test"
 
 os.environ.setdefault("FIREBASE_PROJECT_ID", "demo-test")
+# A demo- project: no Google Cloud, so calls from Pub/Sub, Cloud Tasks and Scheduler aren't
+# token-checked, and jobs run locally.
+os.environ.setdefault("GOOGLE_CLOUD_PROJECT", "demo-test")
 os.environ.setdefault("BILLING_URL", "http://billing:8000")
 os.environ.setdefault("DATABASE_URL", "postgresql://test:test@localhost/test")
 os.environ.setdefault("REDIS_URL", "redis://localhost")
@@ -23,3 +26,18 @@ from app.main import app
 def client():
     # No lifespan: tests don't have Redis.
     return TestClient(app)
+
+
+@pytest.fixture(autouse=True)
+def queued(monkeypatch):
+    """Worker jobs the code queues, recorded instead of sent: (path, payload)."""
+    from app.integrations import tasks
+
+    jobs = []
+
+    async def enqueue(path, payload):
+        jobs.append((path, payload))
+
+    monkeypatch.setattr(tasks, "enqueue", enqueue)
+
+    return jobs

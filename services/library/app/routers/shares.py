@@ -3,11 +3,12 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
+from prepza_common.pubsub import publish
 from prepza_common.rate_limit import hit_emails
 
 from app.config.settings import settings
 from app.constants.events import PREPARATION_SHARED
-from app.integrations.events import get_redis, publish
+from app.integrations.redis import get_redis
 from app.schemas.sharing import ShareIn, ShareInviteOut, ShareOut
 from app.services.access import require_owner
 from app.storage import preparations, shares

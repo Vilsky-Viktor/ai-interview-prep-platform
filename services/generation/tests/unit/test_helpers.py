@@ -170,8 +170,8 @@ def test_worker_skips_a_generation_cancelled_while_queued(monkeypatch):
     import uuid
 
     from app.models.generation import Generation
+    from app.services import jobs
     from app.storage import generations
-    from app.workers import generation as worker
 
     started = []
 
@@ -182,8 +182,8 @@ def test_worker_skips_a_generation_cancelled_while_queued(monkeypatch):
         started.append(args)
 
     monkeypatch.setattr(generations, "get", get)
-    monkeypatch.setattr(worker, "run_pipeline", run_pipeline)
+    monkeypatch.setattr(jobs, "run_pipeline", run_pipeline)
 
-    asyncio.run(worker.run_generation({"graph": None}, str(uuid.uuid4())))
+    asyncio.run(jobs.run_generation(None, uuid.uuid4(), None))
 
     assert started == []

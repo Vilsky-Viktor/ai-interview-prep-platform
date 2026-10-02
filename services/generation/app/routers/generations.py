@@ -6,8 +6,10 @@ from prepza_common.paging import PageParams
 from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
+from app.constants.generation import RUN_GENERATION
 from app.constants.kinds import GenerationKind
-from app.integrations import billing
+from app.integrations import billing, tasks
+from app.integrations.redis import get_redis
 from app.models.generation import Generation
 from app.schemas.generation import (
     GenerationCreate,
@@ -41,7 +43,7 @@ async def create_generation(
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Interviews are created from a company")
 
     await hit(
-        request.app.state.arq,
+        get_redis(),
         f"rate:generations:{user.uid}",
         settings.generation_limit,
         settings.generation_window_seconds,
@@ -49,7 +51,7 @@ async def create_generation(
     await billing.use_generation(user.uid)
 
     generation = await generations.create(user.uid, body.text, body.kind, body.company_id)
-    await request.app.state.arq.enqueue_job("run_generation", str(generation.id))
+    await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
 
     return GenerationOut.model_validate(generation)
 
@@ -73,16 +75,14 @@ async def review_generation(
 ) -> GenerationOut:
     generation = await get_owned(generation_id, user)
 
-    return GenerationOut.model_validate(
-        await submit_review(request.app.state.arq, generation, body)
-    )
+    return GenerationOut.model_validate(await submit_review(generation, body))
 
 
 @router.post("/{generation_id}/retry")
 async def retry(generation_id: UUID, user: CurrentUser, request: Request) -> GenerationOut:
     generation = await get_owned(generation_id, user)
 
-    return GenerationOut.model_validate(await retry_generation(request.app.state.arq, generation))
+    return GenerationOut.model_validate(await retry_generation(generation))
 
 
 @router.post("/{generation_id}/cancel")

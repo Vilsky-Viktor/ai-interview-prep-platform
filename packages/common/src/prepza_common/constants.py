@@ -25,3 +25,9 @@ MAX_PAGE_SIZE = 100
 DEFAULT_TRACES_SAMPLE_RATE = "0.1"
 EMAIL_PATTERN = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
 REDACTED_EMAIL = "[email]"
+
+# Pub/Sub: the one topic every domain event goes to, and its REST API.
+EVENTS_TOPIC = "events"
+PUBSUB_URL = "https://pubsub.googleapis.com"
+# Google APIs our services call with their own credentials (Pub/Sub, Cloud Tasks).
+GOOGLE_SCOPE = "https://www.googleapis.com/auth/cloud-platform"

@@ -4,7 +4,7 @@ import logging
 
 from app.config.settings import settings
 from app.constants.generation import DRAFT_CACHE_SECONDS
-from app.integrations.events import get_redis
+from app.integrations.redis import get_redis
 
 logger = logging.getLogger(__name__)
 

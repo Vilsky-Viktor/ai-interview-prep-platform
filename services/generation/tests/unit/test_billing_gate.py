@@ -15,18 +15,9 @@ from tests.unit.test_internal_generations import headers
 COMPANY_ID = uuid.uuid4()
 
 
-class FakeArq:
-    def __init__(self):
-        self.jobs = []
-
-    async def enqueue_job(self, *args):
-        self.jobs.append(args)
-
-
 @pytest.fixture
 def queue(monkeypatch):
     """A signed-in learner, no rate limit, and generations that are recorded, not run."""
-    arq = FakeArq()
     created = []
 
     async def fake_create(owner_uid, text, kind="preparation", company_id=None):
@@ -36,7 +27,6 @@ def queue(monkeypatch):
             id=uuid.uuid4(), owner_uid=owner_uid, text=text, kind=kind, status="queued"
         )
 
-    monkeypatch.setattr(app.state, "arq", arq, raising=False)
     monkeypatch.setattr(settings, "generation_limit", 0)
     monkeypatch.setattr(generations, "create", fake_create)
     app.dependency_overrides[current_user] = lambda: User(
