@@ -24,6 +24,7 @@ Turn a job description or a learning goal into a structured practice path: revie
 - Generate an interview from a job description and set how many questions each topic asks.
 - Invite candidates by email, resend an invite, or revoke one the candidate hasn't used yet. Each candidate gets a random subset of each topic, in a single pass.
 - Scorecards show every answer and whether it was right; you choose whether candidates see their scores.
+- Make an interview **timed**: candidates see a countdown, and when it reaches zero the whole interview finishes by itself. The server enforces the deadline too, so closing the tab doesn't stop the clock.
 
 ## Architecture
 

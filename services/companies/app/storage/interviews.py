@@ -4,6 +4,7 @@ from sqlalchemy import delete, func, select, update
 from sqlalchemy.orm import selectinload
 
 from app.models.interviews import Interview
+from app.schemas.interviews import InterviewSettings
 from app.storage.db import Session
 
 
@@ -68,12 +69,12 @@ async def list_for_company(
         return list(await session.scalars(query))
 
 
-async def update_settings(interview_id, share_results: bool) -> None:
+async def update_settings(interview_id, settings: InterviewSettings) -> None:
     async with Session() as session:
         await session.execute(
             update(Interview)
             .where(Interview.id == interview_id)
-            .values(share_results=share_results)
+            .values(**settings.model_dump())
         )
         await session.commit()
 

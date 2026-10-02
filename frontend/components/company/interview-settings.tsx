@@ -15,57 +15,99 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
 import { Switch } from "@/components/ui/switch"
+import { MAX_TIME_LIMIT_MINUTES } from "@/constants/interviews"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
+
+type Settings = {
+  share_results: boolean
+  timed: boolean
+  time_limit_minutes: number
+}
 
 export function InterviewSettings({
   interviewId,
-  shareResults,
+  initial,
   deletable,
   leaveTo,
 }: {
   interviewId: string
-  shareResults: boolean
+  initial: Settings
   deletable: boolean
   leaveTo: string
 }) {
   const router = useRouter()
-  const [shared, setShared] = useState(shareResults)
+  const [settings, setSettings] = useState(initial)
+  const [minutes, setMinutes] = useState(String(initial.time_limit_minutes))
   const [saving, setSaving] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
 
-  async function save(next: boolean) {
-    if (saving || next === shared) {
+  // Every save sends all settings, so one change never resets another.
+  async function save(change: Partial<Settings>) {
+    const next = { ...settings, ...change }
+
+    if (saving || JSON.stringify(next) === JSON.stringify(settings)) {
       return
     }
 
-    setShared(next)
+    const previous = settings
+    setSettings(next)
     setSaving(true)
 
     try {
       await apiFetch(`/companies/interviews/${interviewId}/settings`, {
         method: "PATCH",
-        body: JSON.stringify({ share_results: next }),
+        body: JSON.stringify(next),
       })
       router.refresh()
     } catch (error) {
-      setShared(!next)
-      toast.error(apiErrorMessage(error, "Couldn't save the interview settings."))
+      setSettings(previous)
+      setMinutes(String(previous.time_limit_minutes))
+      toast.error(
+        apiErrorMessage(error, "Couldn't save the interview settings.")
+      )
     } finally {
       setSaving(false)
     }
+  }
+
+  function saveMinutes() {
+    const value = Number(minutes)
+
+    if (
+      !Number.isInteger(value) ||
+      value < 1 ||
+      value > MAX_TIME_LIMIT_MINUTES
+    ) {
+      toast.error(
+        `Set a time limit from 1 to ${MAX_TIME_LIMIT_MINUTES} minutes.`
+      )
+      setMinutes(String(settings.time_limit_minutes))
+
+      return
+    }
+
+    void save({ time_limit_minutes: value })
   }
 
   async function remove() {
     setDeleting(true)
 
     try {
-      await apiFetch(`/companies/interviews/${interviewId}`, { method: "DELETE" })
+      await apiFetch(`/companies/interviews/${interviewId}`, {
+        method: "DELETE",
+      })
       router.push(leaveTo)
       router.refresh()
     } catch (error) {
-      toast.error(apiErrorMessage(error, "Couldn't delete the interview. Please try again."))
+      toast.error(
+        apiErrorMessage(
+          error,
+          "Couldn't delete the interview. Please try again."
+        )
+      )
       setDeleting(false)
     }
   }
@@ -98,10 +140,12 @@ export function InterviewSettings({
         {confirming ? (
           <>
             <DialogHeader>
-              <DialogTitle className="no-dot">Delete this interview?</DialogTitle>
+              <DialogTitle className="no-dot">
+                Delete this interview?
+              </DialogTitle>
               <DialogDescription>
-                Candidates lose access, and their results are deleted. This can&apos;t
-                be undone.
+                Candidates lose access, and their results are deleted. This
+                can&apos;t be undone.
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
@@ -126,14 +170,57 @@ export function InterviewSettings({
         ) : (
           <>
             <div className="flex items-center justify-between gap-4">
-              <span className="text-lg font-medium">Show scores to the candidate</span>
+              <span className="text-lg font-medium">
+                Show scores to the candidate
+              </span>
               <Switch
-                checked={shared}
+                checked={settings.share_results}
                 disabled={saving}
                 aria-label="Show scores to the candidate"
-                onCheckedChange={save}
+                onCheckedChange={(checked) => save({ share_results: checked })}
               />
             </div>
+            <div className="flex items-center justify-between gap-4">
+              <span className="space-y-1">
+                <span className="block text-lg font-medium">
+                  Timed interview
+                </span>
+                <span className="block text-sm text-muted-foreground">
+                  The interview finishes by itself when time runs out.
+                </span>
+              </span>
+              <Switch
+                checked={settings.timed}
+                disabled={saving}
+                aria-label="Timed interview"
+                onCheckedChange={(checked) => save({ timed: checked })}
+              />
+            </div>
+            {settings.timed && (
+              <label className="flex items-center justify-between gap-4">
+                <span className="text-lg font-medium">Time limit</span>
+                <span className="flex items-center gap-2 text-muted-foreground">
+                  <Input
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    max={MAX_TIME_LIMIT_MINUTES}
+                    value={minutes}
+                    disabled={saving}
+                    aria-label="Time limit in minutes"
+                    className="h-10 w-24 text-right text-base"
+                    onChange={(event) => setMinutes(event.target.value)}
+                    onBlur={saveMinutes}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter") {
+                        event.currentTarget.blur()
+                      }
+                    }}
+                  />
+                  minutes
+                </span>
+              </label>
+            )}
             {deletable && (
               <div className="flex items-center justify-between gap-4">
                 <span className="text-lg font-medium">Delete interview</span>

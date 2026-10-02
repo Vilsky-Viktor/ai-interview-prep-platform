@@ -28,5 +28,8 @@ class Session(Base):
         DateTime(timezone=True), default=lambda: datetime.now(UTC), server_default=func.now()
     )
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # Timed interviews only: when every section of the candidate's interview ends. The same for
+    # all of them, set when the candidate starts.
+    deadline: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     answers: Mapped[list["Answer"]] = relationship(order_by="Answer.created_at")

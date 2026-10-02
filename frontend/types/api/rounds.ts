@@ -808,6 +808,8 @@ export interface components {
       started_at: string
       /** Finished At */
       finished_at: string | null
+      /** Deadline */
+      deadline: string | null
     }
     /** SessionTopicOut */
     SessionTopicOut: {
@@ -837,6 +839,8 @@ export interface components {
       share_results: boolean
       /** Topics */
       topics: components["schemas"]["TopicQuestions"][]
+      /** Time Limit Minutes */
+      time_limit_minutes?: number | null
     }
     /**
      * TopicProgressOut

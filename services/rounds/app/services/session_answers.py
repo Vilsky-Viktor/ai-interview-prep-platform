@@ -1,5 +1,6 @@
 from fastapi import HTTPException, status
 
+from app.constants.rounds import TIME_UP, RoundStatus
 from app.helpers.scores import current_score
 from app.models.sessions import Session
 from app.schemas.rounds import AnswerCreate
@@ -10,6 +11,11 @@ from app.storage import sessions
 
 async def submit_session_answer(row: Session, body: AnswerCreate) -> SessionAnswerResult:
     """Candidates see whether they were right only when the interview shares results."""
+    if row.status != RoundStatus.IN_PROGRESS:
+        raise HTTPException(
+            status.HTTP_409_CONFLICT, TIME_UP if row.deadline else "This section is finished"
+        )
+
     answer, question = checked_answer(row, body)
     answer.session_id = row.id
 

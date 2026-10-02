@@ -7,7 +7,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
 from app.constants.rounds import RoundStatus
-from app.helpers.scores import candidate_progress, interview_finished
+from app.helpers.scores import candidate_progress, final_score, interview_finished
 from app.models.rounds import Answer
 from app.models.sessions import Session
 from app.schemas.library import TopicQuestions
@@ -21,6 +21,7 @@ async def create_many(
     candidate_invite_id: uuid.UUID,
     share_results: bool,
     topics: list[TopicQuestions],
+    deadline: datetime | None,
 ) -> list[Session]:
     rows = [
         Session(
@@ -34,6 +35,7 @@ async def create_many(
             questions=[question.model_dump(mode="json") for question in topic.questions],
             final_score=None,
             finished_at=None,
+            deadline=deadline,
             answers=[],
         )
         for topic in topics
@@ -131,4 +133,27 @@ async def remove_for_interview(interview_set_id: uuid.UUID) -> None:
     """Deletes every candidate's sessions on the interview; answers and chats cascade."""
     async with Db() as session:
         await session.execute(delete(Session).where(Session.interview_set_id == interview_set_id))
+        await session.commit()
+
+
+async def finish_expired(candidate_invite_ids: list[uuid.UUID]) -> None:
+    """Finishes the timed sessions of these invites whose deadline has passed, as of then."""
+    query = (
+        select(Session)
+        .where(
+            Session.candidate_invite_id.in_(candidate_invite_ids),
+            Session.status == RoundStatus.IN_PROGRESS,
+            Session.deadline < datetime.now(UTC),
+        )
+        .options(selectinload(Session.answers))
+    )
+
+    async with Db() as session:
+        for row in await session.scalars(query):
+            row.status = RoundStatus.FINISHED
+            row.final_score = final_score(
+                [answer.score for answer in row.answers], len(row.questions)
+            )
+            row.finished_at = row.deadline
+
         await session.commit()

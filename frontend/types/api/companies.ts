@@ -538,6 +538,10 @@ export interface components {
       title: string | null
       /** Share Results */
       share_results: boolean
+      /** Timed */
+      timed: boolean
+      /** Time Limit Minutes */
+      time_limit_minutes: number
       /** Candidate Count */
       candidate_count: number
       /**
@@ -566,6 +570,10 @@ export interface components {
       title: string | null
       /** Share Results */
       share_results: boolean
+      /** Timed */
+      timed: boolean
+      /** Time Limit Minutes */
+      time_limit_minutes: number
       /** Candidate Count */
       candidate_count: number
       /**
@@ -578,6 +586,16 @@ export interface components {
     InterviewSettings: {
       /** Share Results */
       share_results: boolean
+      /**
+       * Timed
+       * @default false
+       */
+      timed: boolean
+      /**
+       * Time Limit Minutes
+       * @default 60
+       */
+      time_limit_minutes: number
     }
     /** InviteStartOut */
     InviteStartOut: {
@@ -599,6 +617,8 @@ export interface components {
       email: string
       /** Status */
       status: string
+      /** Time Limit Minutes */
+      time_limit_minutes: number | null
     }
     /** MemberIn */
     MemberIn: {

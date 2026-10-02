@@ -65,7 +65,11 @@ export default async function InterviewPage({
               </div>
               <InterviewSettings
                 interviewId={interview.id}
-                shareResults={interview.share_results}
+                initial={{
+                  share_results: interview.share_results,
+                  timed: interview.timed,
+                  time_limit_minutes: interview.time_limit_minutes,
+                }}
                 deletable={ready}
                 leaveTo={interviewsHref}
               />

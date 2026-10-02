@@ -95,7 +95,7 @@ async def update_settings(
     if member.role not in (Role.OWNER, Role.ADMIN):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "You can't change this interview")
 
-    await interviews.update_settings(interview.id, body.share_results)
+    await interviews.update_settings(interview.id, body)
 
 
 @router.patch("/{interview_id}/title", status_code=status.HTTP_204_NO_CONTENT)

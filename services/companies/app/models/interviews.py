@@ -1,10 +1,11 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, ForeignKey, Text
+from sqlalchemy import DateTime, ForeignKey, Text, false
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from app.constants.interviews import DEFAULT_TIME_LIMIT_MINUTES
 from app.models.base import Base
 
 
@@ -20,6 +21,11 @@ class Interview(Base):
     title: Mapped[str | None] = mapped_column(Text)
     generation_id: Mapped[uuid.UUID]
     share_results: Mapped[bool]
+    # A timed interview finishes by itself time_limit_minutes after the candidate starts.
+    timed: Mapped[bool] = mapped_column(default=False, server_default=false())
+    time_limit_minutes: Mapped[int] = mapped_column(
+        default=DEFAULT_TIME_LIMIT_MINUTES, server_default=str(DEFAULT_TIME_LIMIT_MINUTES)
+    )
     topic_limits: Mapped[dict[str, int]] = mapped_column(
         JSONB, default=dict, server_default="{}"
     )

@@ -8,6 +8,7 @@ import { useAuth } from "@/components/auth-provider"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { ApiError, apiFetch } from "@/lib/api"
+import { plural } from "@/lib/format"
 import type { InviteView as Invite, SessionSummary } from "@/types/company"
 
 export function InviteView({ token }: { token: string }) {
@@ -81,20 +82,33 @@ export function InviteView({ token }: { token: string }) {
       <div className="space-y-4">
         {invite.company && (
           <p className="text-base text-muted-foreground">
-            <span className="font-medium text-foreground">{invite.company}</span>{" "}
+            <span className="font-medium text-foreground">
+              {invite.company}
+            </span>{" "}
             invited you to interview.
           </p>
         )}
         <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
           {invite.title ?? "an interview"}
         </h1>
+        {invite.time_limit_minutes != null && invite.status !== "finished" && (
+          <p className="text-base text-muted-foreground">
+            {invite.status === "in_process"
+              ? "This interview is timed, and the clock started when you began."
+              : `This interview is timed: you'll have ${plural(invite.time_limit_minutes, "minute")} from the moment you start. It finishes by itself when time runs out.`}
+          </p>
+        )}
       </div>
       {invite.status === "finished" ? (
         <p className="text-base text-muted-foreground">
           This interview is already finished.
         </p>
       ) : matches ? (
-        <Button className="h-12 px-6 text-base" disabled={starting} onClick={start}>
+        <Button
+          className="h-12 px-6 text-base"
+          disabled={starting}
+          onClick={start}
+        >
           {invite.status === "in_process" ? "Continue" : "Accept"}
         </Button>
       ) : (

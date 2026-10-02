@@ -53,17 +53,26 @@ def test_updates_shared_scores(client, monkeypatch):
     async def fake_company(_company_id):
         return company
 
-    async def fake_update(_interview_id, share_results):
-        saved["share_results"] = share_results
+    async def fake_update(_interview_id, settings):
+        saved.update(settings.model_dump())
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(interviews, "update_settings", fake_update)
+    url = f"/interviews/{INTERVIEW_ID}/settings"
+
+    response = client.patch(url, json={"share_results": True})
+
+    assert response.status_code == 204
+    # Without timer settings, an interview stays untimed with the default limit.
+    assert saved == {"share_results": True, "timed": False, "time_limit_minutes": 60}
 
     response = client.patch(
-        f"/interviews/{INTERVIEW_ID}/settings",
-        json={"share_results": True},
+        url, json={"share_results": False, "timed": True, "time_limit_minutes": 45}
     )
 
     assert response.status_code == 204
-    assert saved == {"share_results": True}
+    assert saved == {"share_results": False, "timed": True, "time_limit_minutes": 45}
+    too_short = client.patch(url, json={"share_results": False, "time_limit_minutes": 0})
+
+    assert too_short.status_code == 422

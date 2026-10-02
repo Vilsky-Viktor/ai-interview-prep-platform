@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.constants.rounds import RoundStatus
 from app.schemas.library import TopicQuestions
@@ -17,6 +17,8 @@ class SessionsCreate(BaseModel):
     candidate_invite_id: UUID
     share_results: bool
     topics: list[TopicQuestions]
+    # Set for a timed interview: the candidate has this long from now for every section.
+    time_limit_minutes: int | None = Field(default=None, ge=1)
 
 
 class SessionTopicOut(BaseModel):
@@ -40,6 +42,8 @@ class SessionOut(BaseModel):
     final_score: int | None
     started_at: datetime
     finished_at: datetime | None
+    # Timed interviews only: when the interview finishes by itself.
+    deadline: datetime | None
 
 
 class SessionAnswerResult(BaseModel):

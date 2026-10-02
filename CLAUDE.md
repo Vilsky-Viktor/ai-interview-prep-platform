@@ -25,3 +25,8 @@
 4. **Keep code as simple as possible.** Strictly avoid overcomplicating and
    overengineering: no abstractions, layers, options or generalizations that the
    current need doesn't require. Choose the most direct solution that works.
+
+5. **No business logic on the frontend.** Rules, thresholds, limits and decisions
+   (what passes, what counts as done, what is allowed) live in the backend services,
+   which return the results. The frontend only displays data, collects input and
+   sends it to the API.

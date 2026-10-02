@@ -25,3 +25,6 @@ CHAT_TIMEOUT_SECONDS = 60
 # Earlier chat messages sent with a new one. The system prompt already holds the question, the
 # correct option and the learner's pick, so older turns add little but cost.
 CHAT_HISTORY_MESSAGES = 10
+
+# A timed interview's deadline has passed; it finished by itself.
+TIME_UP = "Time is up: the interview has finished."

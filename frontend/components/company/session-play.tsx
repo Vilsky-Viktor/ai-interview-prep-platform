@@ -2,6 +2,7 @@ import { cn } from "cn"
 import { MinusIcon } from "lucide-react"
 import { useState } from "react"
 
+import { Countdown } from "@/components/company/countdown"
 import { QuestionActions } from "@/components/questions/question-actions"
 import { QuestionText } from "@/components/questions/question-text"
 import { ChoiceOptions } from "@/components/rounds/choice-options"
@@ -51,7 +52,12 @@ export function SessionPlay({
 
   return (
     <div className="space-y-8 pb-28">
-      <SessionHeader session={session} progress={progress} section={section} />
+      <SessionHeader
+        session={session}
+        progress={progress}
+        section={section}
+        onTimeUp={onFinish}
+      />
       {question && (
         <div key={question.question_id} className="space-y-6">
           <QuestionText
@@ -100,7 +106,9 @@ export function SessionPlay({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="no-dot">Finish the whole interview?</DialogTitle>
+            <DialogTitle className="no-dot">
+              Finish the whole interview?
+            </DialogTitle>
             <DialogDescription>
               {section.count > 1
                 ? `This ends all ${section.count} sections, not only this one.`
@@ -143,10 +151,13 @@ function SessionHeader({
   session,
   progress,
   section,
+  onTimeUp,
 }: {
   session: InterviewSession
   progress: { answered: number; total: number }
   section: { number: number; count: number }
+  // Called when a timed interview's clock reaches zero: the whole interview finishes.
+  onTimeUp: () => void
 }) {
   const score = session.current_score ?? 0
 
@@ -168,6 +179,15 @@ function SessionHeader({
           )}
         </p>
         <p className="flex shrink-0 items-center text-sm text-muted-foreground tabular-nums">
+          {session.deadline && (
+            <>
+              <Countdown deadline={session.deadline} onExpire={onTimeUp} />
+              <MinusIcon
+                aria-hidden
+                className="mx-1.5 size-3.5 text-foreground/55"
+              />
+            </>
+          )}
           {progress.answered} / {progress.total}
           {session.share_results && (
             <>

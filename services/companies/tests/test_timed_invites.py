@@ -1,0 +1,83 @@
+import uuid
+from datetime import UTC, datetime
+
+import pytest
+from prepza_common.auth import current_user
+from prepza_common.user import User
+
+from app.constants.invites import InviteStatus
+from app.integrations import library, rounds
+from app.main import app
+from app.models.interviews import Interview
+from app.models.invites import CandidateInvite
+from app.routers import invites as invites_router
+from app.storage import invites as invite_store
+
+
+@pytest.fixture(autouse=True)
+def candidate():
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="cand", email="bob@example.com", email_verified=True
+    )
+    yield
+    app.dependency_overrides.clear()
+
+
+def start(client, monkeypatch, timed):
+    invite = CandidateInvite(
+        id=uuid.uuid4(),
+        interview_id=uuid.uuid4(),
+        email="bob@example.com",
+        token="token-1",
+        status=InviteStatus.INVITED,
+        created_at=datetime.now(UTC),
+    )
+    interview = Interview(
+        id=invite.interview_id,
+        company_id=uuid.uuid4(),
+        generation_id=uuid.uuid4(),
+        share_results=False,
+        set_id=uuid.uuid4(),
+        timed=timed,
+        time_limit_minutes=45,
+        topic_limits={},
+    )
+    sent = {}
+
+    async def fake_get(token):
+        return invite, interview
+
+    async def same(item):
+        return item
+
+    async def fake_content(set_id):
+        return {
+            "id": str(set_id),
+            "topics": [{"id": str(uuid.uuid4()), "title": "T", "questions": []}],
+        }
+
+    async def fake_start(item, user_id):
+        pass
+
+    async def fake_create(payload):
+        sent.update(payload)
+
+        return []
+
+    monkeypatch.setattr(invite_store, "get_by_token", fake_get)
+    monkeypatch.setattr(invites_router, "attach_set", same)
+    monkeypatch.setattr(library, "get_content", fake_content)
+    monkeypatch.setattr(invite_store, "start", fake_start)
+    monkeypatch.setattr(rounds, "create_sessions", fake_create)
+
+    assert client.post("/invites/token-1/start").status_code == 200
+
+    return sent
+
+
+def test_a_timed_interview_starts_the_clock(client, monkeypatch):
+    assert start(client, monkeypatch, timed=True)["time_limit_minutes"] == 45
+
+
+def test_an_untimed_interview_has_no_limit(client, monkeypatch):
+    assert start(client, monkeypatch, timed=False)["time_limit_minutes"] is None

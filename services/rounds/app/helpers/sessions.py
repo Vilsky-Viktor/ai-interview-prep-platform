@@ -38,6 +38,7 @@ def session_out(row: Session, interview_title: str | None = None) -> SessionOut:
         final_score=row.final_score if shown else None,
         started_at=row.started_at,
         finished_at=row.finished_at,
+        deadline=row.deadline,
     )
 
 
