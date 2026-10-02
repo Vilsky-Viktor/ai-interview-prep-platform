@@ -2,7 +2,8 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 
-from app.helpers.review import build_review
+from app.constants.integrity import IntegritySignal
+from app.helpers.review import add_signals, build_review
 from app.helpers.sessions import session_out
 from app.schemas.sessions import (
     InviteScoresIn,
@@ -75,17 +76,23 @@ async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[Score
     if not rows:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "No sessions for this invite")
 
-    return [
-        ScorecardSession(
-            id=row.id,
-            topic_title=row.topic_title,
-            status=row.status,
-            final_score=row.final_score,
-            tab_leaves=row.tab_leaves,
-            copies=row.copies,
-            fast_answers=sum(item.answer is not None and item.answer.fast for item in review),
-            review=review,
+    cards = []
+
+    for row in rows:
+        review = build_review(row)
+        add_signals(review, row.signals)
+        kinds = [signal.kind for signal in row.signals]
+        cards.append(
+            ScorecardSession(
+                id=row.id,
+                topic_title=row.topic_title,
+                status=row.status,
+                final_score=row.final_score,
+                tab_leaves=kinds.count(IntegritySignal.TAB_LEAVE),
+                copies=kinds.count(IntegritySignal.COPY),
+                fast_answers=sum(item.answer is not None and item.answer.fast for item in review),
+                review=review,
+            )
         )
-        for row in rows
-        for review in [build_review(row)]
-    ]
+
+    return cards

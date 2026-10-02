@@ -175,7 +175,8 @@ export interface paths {
     put?: never
     /**
      * Add Signal
-     * @description The candidate's browser reports leaving the tab or copying; the scorecard counts them.
+     * @description The candidate's browser reports leaving the page or copying, saved with the question on
+     *     screen so the scorecard can show where it happened.
      */
     post: operations["add_signal_sessions__session_id__signals_post"]
     delete?: never
@@ -743,6 +744,16 @@ export interface components {
       /** Correct Option Index */
       correct_option_index: number | null
       answer: components["schemas"]["AnswerView"] | null
+      /**
+       * Tab Leaves
+       * @default 0
+       */
+      tab_leaves: number
+      /**
+       * Copies
+       * @default 0
+       */
+      copies: number
     }
     /** RoundCreate */
     RoundCreate: {

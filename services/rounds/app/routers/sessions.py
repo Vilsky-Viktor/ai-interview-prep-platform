@@ -55,9 +55,15 @@ async def get_next_question(session_id: UUID, user: CurrentUser) -> NextQuestion
 
 @router.post("/{session_id}/signals", status_code=204)
 async def add_signal(session_id: UUID, body: SignalIn, user: CurrentUser) -> None:
-    """The candidate's browser reports leaving the tab or copying; the scorecard counts them."""
+    """The candidate's browser reports leaving the page or copying, saved with the question on
+    screen so the scorecard can show where it happened."""
     row = await get_owned_session(session_id, user)
-    await sessions.add_signal(row.id, body.kind)
+
+    if row.status != RoundStatus.IN_PROGRESS:
+        return
+
+    question = next_session_question(row) if row.question_shown_at else None
+    await sessions.add_signal(row.id, question.question_id if question else None, body.kind)
 
 
 @router.post("/{session_id}/answers", status_code=201)

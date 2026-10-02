@@ -6,10 +6,11 @@ from fastapi.testclient import TestClient
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.helpers.review import build_review
+from app.helpers.review import add_signals, build_review
 from app.main import app
 from app.models.rounds import Answer
 from app.models.sessions import Session
+from app.models.signals import Signal
 from app.schemas.library import TopicQuestions
 from app.storage import sessions
 
@@ -93,13 +94,15 @@ def test_each_candidate_gets_their_own_option_order(monkeypatch):
 
 def test_the_browser_reports_signals(monkeypatch):
     row = session(seconds=10)
+    row.answers = []
+    row.question_shown_at = datetime.now(UTC)
     counted = []
 
     async def fake_get(session_id):
         return row
 
-    async def fake_add_signal(session_id, kind):
-        counted.append(kind)
+    async def fake_add_signal(session_id, question_id, kind):
+        counted.append((question_id, kind))
 
     monkeypatch.setattr(sessions, "get", fake_get)
     monkeypatch.setattr(sessions, "add_signal", fake_add_signal)
@@ -116,4 +119,18 @@ def test_the_browser_reports_signals(monkeypatch):
 
     assert ok.status_code == 204
     assert bad.status_code == 422
-    assert counted == ["tab_leave"]
+    assert counted == [(QUESTION_ID, "tab_leave")]
+
+
+def test_signals_are_counted_on_their_question():
+    items = build_review(session(seconds=10))
+    signals = [
+        Signal(question_id=QUESTION_ID, kind="tab_leave"),
+        Signal(question_id=QUESTION_ID, kind="tab_leave"),
+        Signal(question_id=QUESTION_ID, kind="copy"),
+        Signal(question_id=None, kind="tab_leave"),
+    ]
+
+    add_signals(items, signals)
+
+    assert (items[0].tab_leaves, items[0].copies) == (2, 1)

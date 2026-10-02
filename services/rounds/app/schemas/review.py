@@ -24,3 +24,6 @@ class ReviewItem(BaseModel):
     options: list[str]
     correct_option_index: int | None
     answer: AnswerView | None
+    # Interview scorecards only: page leaves and copy attempts while this question was open.
+    tab_leaves: int = 0
+    copies: int = 0

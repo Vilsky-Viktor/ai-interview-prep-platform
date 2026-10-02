@@ -48,7 +48,7 @@ function IntegrityLine({
       {signals.map((signal, index) => (
         <span key={signal} className="flex items-center gap-x-1.5">
           {index > 0 && (
-            <MinusIcon aria-hidden className="size-3.5 text-foreground/55" />
+            <MinusIcon aria-hidden className="size-3.5 text-foreground" />
           )}
           <span
             className={cn(
@@ -127,14 +127,16 @@ export default async function ScorecardPage({
         return (
           <section key={session.id} className="space-y-4">
             <div className="flex items-center justify-between gap-4">
-              <h2 className="font-heading text-2xl font-medium">
-                {session.topic_title}
-              </h2>
+              <div className="min-w-0 space-y-1">
+                <h2 className="font-heading text-2xl font-medium">
+                  {session.topic_title}
+                </h2>
+                <IntegrityLine session={session} />
+              </div>
               <p className={cn("text-5xl font-light tabular-nums", tone)}>
                 {score == null ? "—" : `${score}%`}
               </p>
             </div>
-            <IntegrityLine session={session} />
             <ScorecardReview items={session.review} />
           </section>
         )

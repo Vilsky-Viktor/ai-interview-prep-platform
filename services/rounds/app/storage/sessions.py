@@ -11,10 +11,11 @@ from app.constants.rounds import RoundStatus
 from app.helpers.scores import candidate_progress, interview_finished
 from app.models.rounds import Answer
 from app.models.sessions import Session
+from app.models.signals import Signal
 from app.schemas.library import TopicQuestions
 from app.storage.db import Session as Db
 
-LOAD_SESSION = [selectinload(Session.answers)]
+LOAD_SESSION = [selectinload(Session.answers), selectinload(Session.signals)]
 
 
 async def create_many(
@@ -123,27 +124,30 @@ async def mark_shown(session_id: uuid.UUID) -> datetime:
     return now
 
 
-async def add_signal(session_id: uuid.UUID, kind: IntegritySignal) -> None:
-    column = Session.tab_leaves if kind == IntegritySignal.TAB_LEAVE else Session.copies
-
+async def add_signal(
+    session_id: uuid.UUID, question_id: uuid.UUID | None, kind: IntegritySignal
+) -> None:
     async with Db() as session:
-        await session.execute(
-            update(Session)
-            .where(Session.id == session_id, Session.status == RoundStatus.IN_PROGRESS)
-            .values({column: column + 1})
-        )
+        session.add(Signal(session_id=session_id, question_id=question_id, kind=kind))
         await session.commit()
 
 
 async def add_answer(answer: Answer) -> bool:
-    """Saves the answer and stops the clock, so the next question starts its own."""
+    """Saves the answer and stops the clock, so the next question starts its own.
+
+    False when the question already has an answer, e.g. two requests timing out the same
+    question at once.
+    """
     async with Db() as session:
         session.add(answer)
-        await session.execute(
-            update(Session).where(Session.id == answer.session_id).values(question_shown_at=None)
-        )
 
         try:
+            await session.flush()
+            await session.execute(
+                update(Session)
+                .where(Session.id == answer.session_id)
+                .values(question_shown_at=None)
+            )
             await session.commit()
         except IntegrityError:
             return False

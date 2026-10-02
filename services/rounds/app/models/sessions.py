@@ -7,6 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.constants.rounds import RoundStatus
 from app.models.base import Base
+from app.models.signals import Signal
 
 
 class Session(Base):
@@ -32,8 +33,6 @@ class Session(Base):
     question_seconds: Mapped[int | None]
     # When the question now waiting for an answer was first shown; cleared by the answer.
     question_shown_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
-    # Integrity signals from the candidate's browser.
-    tab_leaves: Mapped[int] = mapped_column(default=0, server_default="0")
-    copies: Mapped[int] = mapped_column(default=0, server_default="0")
 
     answers: Mapped[list["Answer"]] = relationship(order_by="Answer.created_at")
+    signals: Mapped[list[Signal]] = relationship(order_by=Signal.created_at)

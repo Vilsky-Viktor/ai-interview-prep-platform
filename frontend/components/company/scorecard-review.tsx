@@ -1,11 +1,12 @@
 "use client"
 
 import { cn } from "cn"
+import { MinusIcon } from "lucide-react"
 
 import { InlineText } from "@/components/questions/inline-text"
 import { QuestionText } from "@/components/questions/question-text"
 import { VirtualList } from "@/components/virtual-list"
-import { formatSeconds } from "@/lib/format"
+import { formatSeconds, plural } from "@/lib/format"
 import { answerText, verdict } from "@/lib/rounds"
 import type { ReviewItem } from "@/types/round"
 
@@ -30,6 +31,7 @@ export function ScorecardReview({ items }: { items: ReviewItem[] }) {
               <ScorecardMark item={item} />
             </div>
             <ScorecardAnswer item={item} />
+            <ScorecardSignals item={item} />
           </div>
         </div>
       )}
@@ -44,7 +46,7 @@ function ScorecardMark({ item }: { item: ReviewItem }) {
   if (!answer || answer.option_index == null) {
     return (
       <span className="shrink-0 text-lg font-light text-red-600 dark:text-red-400">
-        {answer ? "Time ran out" : "Not answered"}
+        {answer ? "Time out" : "Not answered"}
       </span>
     )
   }
@@ -60,6 +62,31 @@ function ScorecardMark({ item }: { item: ReviewItem }) {
     >
       {verdict(answer.correct)}
     </span>
+  )
+}
+
+/** Page leaves and copy attempts while this question was open; nothing when there were none. */
+function ScorecardSignals({ item }: { item: ReviewItem }) {
+  const signals = [
+    item.tab_leaves > 0 && `Left the page ${plural(item.tab_leaves, "time")}`,
+    item.copies > 0 && plural(item.copies, "copy attempt"),
+  ].filter(Boolean)
+
+  if (signals.length === 0) {
+    return null
+  }
+
+  return (
+    <p className="flex flex-wrap items-center gap-x-1.5 text-sm text-amber-600 tabular-nums dark:text-amber-400">
+      {signals.map((signal, index) => (
+        <span key={String(signal)} className="flex items-center gap-x-1.5">
+          {index > 0 && (
+            <MinusIcon aria-hidden className="size-3.5 text-foreground" />
+          )}
+          {signal}
+        </span>
+      ))}
+    </p>
   )
 }
 
