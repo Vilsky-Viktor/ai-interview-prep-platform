@@ -25,6 +25,8 @@ class InviteView(BaseModel):
     status: str
     # Shown before the candidate starts: the timer begins at start.
     time_limit_minutes: int | None
+    # Whether the candidate sees if each answer was right.
+    share_results: bool
 
 
 class SessionSummary(BaseModel):

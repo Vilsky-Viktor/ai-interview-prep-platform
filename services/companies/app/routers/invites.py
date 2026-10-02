@@ -31,6 +31,7 @@ async def get_invite(token: str, user: CurrentUser) -> InviteView:
         email=invite.email,
         status=invite.status,
         time_limit_minutes=interview.time_limit_minutes if interview.timed else None,
+        share_results=interview.share_results,
     )
 
 

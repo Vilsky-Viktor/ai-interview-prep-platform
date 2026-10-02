@@ -619,6 +619,8 @@ export interface components {
       status: string
       /** Time Limit Minutes */
       time_limit_minutes: number | null
+      /** Share Results */
+      share_results: boolean
     }
     /** MemberIn */
     MemberIn: {

@@ -100,6 +100,25 @@ export function InviteView({ token }: { token: string }) {
           </p>
         )}
       </div>
+      {invite.status !== "finished" && (
+        <ul className="mx-auto max-w-md list-disc space-y-2 pl-5 text-left text-base text-muted-foreground">
+          <li>One section per topic, taken one after another.</li>
+          <li>Pick one of four options for each question.</li>
+          <li>An answer can&apos;t be changed once given.</li>
+          <li>Progress is saved: use this link again to continue.</li>
+          <li>Unanswered questions aren&apos;t scored when you finish.</li>
+          {invite.time_limit_minutes != null && (
+            <li>
+              The timer starts when you accept and keeps running if you leave.
+            </li>
+          )}
+          <li>
+            {invite.share_results
+              ? "You'll see whether each answer was right."
+              : "You won't see your results."}
+          </li>
+        </ul>
+      )}
       {invite.status === "finished" ? (
         <p className="text-base text-muted-foreground">
           This interview is already finished.
