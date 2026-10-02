@@ -23,17 +23,28 @@ from app.constants.events import (
     RECLAIM_INTERVAL_S,
 )
 from app.helpers.emails import candidate_invite_email, share_invite_email
-from app.integrations import smtp
+from app.integrations import resend, smtp
+from app.models.email import Email
 
 logger = logging.getLogger(__name__)
 
 
-async def handle(event_type: str, data: dict) -> None:
+async def deliver(email: Email, entry_id: str) -> None:
+    if settings.resend_api_key:
+        # The event's id as the key, so a retried event never sends the email twice.
+        await resend.send(email, f"{EVENTS_STREAM}/{entry_id}")
+
+        return
+
+    await smtp.send(email)
+
+
+async def handle(event_type: str, data: dict, entry_id: str) -> None:
     if event_type == PREPARATION_SHARED:
-        await smtp.send(share_invite_email(data, settings.site_url, settings.mail_from))
+        await deliver(share_invite_email(data, settings.site_url), entry_id)
 
     if event_type == CANDIDATE_INVITED:
-        await smtp.send(candidate_invite_email(data, settings.site_url, settings.mail_from))
+        await deliver(candidate_invite_email(data, settings.site_url), entry_id)
 
 
 async def process(redis: Redis, entry_id: str, fields: dict) -> None:
@@ -43,7 +54,7 @@ async def process(redis: Redis, entry_id: str, fields: dict) -> None:
     broken event can't be retried forever.
     """
     try:
-        await handle(fields["type"], json.loads(fields["data"]))
+        await handle(fields["type"], json.loads(fields["data"]), entry_id)
     except Exception as error:
         attempts = await redis.hincrby(ATTEMPTS_KEY, entry_id, 1)
 

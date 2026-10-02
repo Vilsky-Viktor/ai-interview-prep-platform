@@ -9,11 +9,12 @@ from app.integrations import library, llm
 from app.prompts.regenerate import REGENERATE_PROMPT
 from app.schemas.questions import NewQuestion
 from app.schemas.regenerate import QuestionContext, RegeneratedOut, RegeneratedQuestion
+from app.services.dedupe import distinct_by_meaning
 from app.services.nodes.answers import generate_answers
 
 
 async def new_question(context: QuestionContext) -> str | None:
-    """A question that is not a duplicate of any existing one in the topic."""
+    """A question that neither repeats nor rephrases any existing one in the topic."""
     structured_llm = llm.get_llm().with_structured_output(NewQuestion)
     existing = list(context.existing)
     taken = {normalize(text) for text in existing}
@@ -29,7 +30,11 @@ async def new_question(context: QuestionContext) -> str | None:
         text = strip_choices(result.question)
 
         if text and normalize(text) not in taken:
-            return text
+            texts = [*context.existing, text]
+            kept = await distinct_by_meaning(texts, keep_first=len(context.existing))
+
+            if len(kept) == len(texts):
+                return text
 
         existing.append(text)
 

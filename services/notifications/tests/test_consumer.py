@@ -1,6 +1,7 @@
 import asyncio
 import json
 
+from app.config.settings import settings
 from app.constants.events import (
     ATTEMPTS_KEY,
     CONSUMER_GROUP,
@@ -10,7 +11,7 @@ from app.constants.events import (
     PREPARATION_SHARED,
 )
 from app.helpers.emails import candidate_invite_email, share_invite_email
-from app.integrations import smtp
+from app.integrations import resend, smtp
 from app.services import consumer
 
 DATA = {"email": "bob@example.com", "token": "abc", "title": "Backend", "inviter": "Ann"}
@@ -49,26 +50,36 @@ def test_candidate_invite_email():
         "title": "Backend",
         "company": "Acme",
     }
-    message = candidate_invite_email(data, "http://localhost:8090", "prepza. <no-reply@prepza.local>")
+    email = candidate_invite_email(data, "http://localhost:8090")
 
-    assert message["To"] == "bob@example.com"
-    assert message["Subject"] == "Acme invited you to an interview on prepza."
-    assert "http://localhost:8090/invite/xyz" in message.get_content()
+    assert email.to == "bob@example.com"
+    assert email.subject == "Acme invited you to an interview"
+    assert "http://localhost:8090/invite/xyz" in email.text
+    assert 'href="http://localhost:8090/invite/xyz"' in email.html
 
 
 def test_share_invite_email():
-    message = share_invite_email(DATA, "http://localhost:8090/", "prepza. <no-reply@prepza.local>")
+    email = share_invite_email(DATA, "http://localhost:8090/")
 
-    assert message["To"] == "bob@example.com"
-    assert message["Subject"] == "Ann shared “Backend” with you on prepza."
-    assert "http://localhost:8090/share/abc" in message.get_content()
+    assert email.to == "bob@example.com"
+    assert email.subject == "Ann shared “Backend” with you"
+    assert "http://localhost:8090/share/abc" in email.text
+    assert "Ann invited you to prepare with “Backend”" in email.html
+
+
+def test_html_escapes_names_and_titles():
+    email = share_invite_email({**DATA, "inviter": "<b>Ann</b>"}, "http://localhost:8090")
+
+    assert "<b>Ann</b>" not in email.html
+    assert "&lt;b&gt;Ann&lt;/b&gt;" in email.html
+    assert "<b>Ann</b> invited you" in email.text
 
 
 def test_sends_and_acknowledges(monkeypatch):
     sent = []
 
-    async def fake_send(message):
-        sent.append(message["To"])
+    async def fake_send(email):
+        sent.append(email.to)
 
     monkeypatch.setattr(smtp, "send", fake_send)
     redis = FakeRedis()
@@ -79,8 +90,24 @@ def test_sends_and_acknowledges(monkeypatch):
     assert redis.acked == [(EVENTS_STREAM, CONSUMER_GROUP, "1-0")]
 
 
+def test_sends_through_resend_with_the_event_as_key(monkeypatch):
+    sent = []
+
+    async def fake_send(email, idempotency_key):
+        sent.append((email.to, idempotency_key))
+
+    monkeypatch.setattr(settings, "resend_api_key", "re_test")
+    monkeypatch.setattr(resend, "send", fake_send)
+    redis = FakeRedis()
+
+    asyncio.run(consumer.process(redis, "1-0", fields()))
+
+    assert sent == [("bob@example.com", f"{EVENTS_STREAM}/1-0")]
+    assert redis.acked == [(EVENTS_STREAM, CONSUMER_GROUP, "1-0")]
+
+
 def test_failed_send_stays_pending(monkeypatch):
-    async def failing_send(message):
+    async def failing_send(email):
         raise ConnectionError("SMTP is down")
 
     monkeypatch.setattr(smtp, "send", failing_send)
@@ -93,7 +120,7 @@ def test_failed_send_stays_pending(monkeypatch):
 
 
 def test_event_moves_to_dead_letters_after_max_attempts(monkeypatch):
-    async def failing_send(message):
+    async def failing_send(email):
         raise ConnectionError("SMTP is down")
 
     monkeypatch.setattr(smtp, "send", failing_send)

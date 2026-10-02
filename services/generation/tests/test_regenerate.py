@@ -1,6 +1,8 @@
 import asyncio
 import uuid
 
+import pytest
+
 from app.integrations import library, llm
 from app.schemas.questions import AnswerItem, AnswerList, NewQuestion
 from app.schemas.regenerate import QuestionContext
@@ -34,9 +36,32 @@ class FakeStructured:
 
         return AnswerList(
             answers=[
-                AnswerItem(id=0, correct_option="Right", distractors=["A", "B", "C"], ambiguous=ambiguous)
+                AnswerItem(
+                    id=0, correct_option="Right", distractors=["A", "B", "C"], ambiguous=ambiguous
+                )
             ]
         )
+
+
+class FakeEmbeddings:
+    """Texts about the GIL mean the same thing; every other text means something of its own."""
+
+    async def aembed_documents(self, texts):
+        meanings = [
+            "gil" if "gil" in text.lower() or "interpreter lock" in text.lower() else text
+            for text in texts
+        ]
+        distinct = list(dict.fromkeys(meanings))
+
+        return [
+            [float(distinct.index(meaning) == i) for i in range(len(distinct))]
+            for meaning in meanings
+        ]
+
+
+@pytest.fixture(autouse=True)
+def fake_embeddings(monkeypatch):
+    monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
 
 
 class FakeLLM:
@@ -63,6 +88,22 @@ def test_skips_duplicates_and_saves_new_question(monkeypatch):
     assert result.text == "How do you cancel an asyncio task?"
     assert saved["id"] == QUESTION_ID
     assert sum(option.correct for option in saved["question"].options) == 1
+
+
+def test_skips_a_rephrased_existing_question(monkeypatch):
+    fake = FakeLLM(["What does the global interpreter lock do?", "What does asyncio.run do?"])
+    saved = {}
+
+    async def fake_replace(question_id, question):
+        saved["question"] = question
+
+    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(library, "replace_question", fake_replace)
+
+    result = asyncio.run(regenerate(QUESTION_ID, context()))
+
+    assert result.text == "What does asyncio.run do?"
+    assert saved["question"].text == "What does asyncio.run do?"
 
 
 def test_ambiguous_question_is_replaced_by_another(monkeypatch):

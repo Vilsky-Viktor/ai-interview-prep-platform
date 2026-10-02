@@ -51,7 +51,7 @@ flowchart LR
     companies -- candidate.invited --> redis
     redis --> library
     redis --> companies
-    redis --> notifications -- email --> smtp[SMTP / mailpit]
+    redis --> notifications -- email --> smtp[Resend / mailpit]
 ```
 
 | Service | Responsibility |
@@ -60,7 +60,7 @@ flowchart LR
 | `generation` | The generation pipeline (LangGraph) run by an arq worker, topic review, re-generating single questions, the question verifier |
 | `rounds` | Practice rounds, progress and certificates, the follow-up chat, candidate interview sessions |
 | `companies` | Companies, admins, interviews and candidate invites |
-| `notifications` | Consumes domain events from a Redis stream and sends emails |
+| `notifications` | Consumes domain events from a Redis stream and sends emails through Resend (mailpit without a key) |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
 Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed).
@@ -106,7 +106,7 @@ docker compose up --build
 |---|---|
 | http://localhost:8090 | The app |
 | http://localhost:4100 | Firebase Auth emulator UI (sign-in creates fake accounts here) |
-| http://localhost:8125 | Mailpit: every email sent locally |
+| http://localhost:8125 | Mailpit: every email sent locally, when `RESEND_API_KEY` is empty |
 
 Each API's database migrations run once in a short-lived `*-migrate` container before the API starts, and Docker marks an API healthy only when `/ready` confirms its database and Redis answer.
 
