@@ -6,6 +6,7 @@ dependencies = [
     "httpx>=0.28.1",
     "pydantic-settings>=2.15.0",
     "redis>=8.1.0",
+    "sentry-sdk>=2.71.0",
 ]
 
 [tool.pytest.ini_options]

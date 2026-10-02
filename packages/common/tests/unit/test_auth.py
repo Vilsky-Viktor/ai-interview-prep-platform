@@ -40,3 +40,18 @@ def test_unreachable_certificates_are_a_503_not_a_bad_token():
 
     assert raised.value.status_code == 503
     assert raised.value.detail == SIGN_IN_UNAVAILABLE
+
+
+def test_a_signed_in_request_names_the_user_to_sentry_by_id_only():
+    from fastapi.security import HTTPAuthorizationCredentials
+    from prepza_common.auth import current_user
+
+    credentials = HTTPAuthorizationCredentials(scheme="Bearer", credentials="token")
+
+    with (
+        mock.patch.object(firebase_auth, "verify_id_token", return_value=CLAIMS),
+        mock.patch("sentry_sdk.set_user") as set_user,
+    ):
+        current_user(credentials)
+
+    set_user.assert_called_once_with({"id": "ann"})

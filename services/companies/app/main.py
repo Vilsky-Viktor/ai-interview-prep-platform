@@ -6,6 +6,7 @@ import firebase_admin
 from fastapi import FastAPI, HTTPException, status
 from prepza_common import http
 from prepza_common.logging import RequestLogMiddleware, configure_logging
+from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
 from app.integrations.events import get_redis
@@ -21,6 +22,7 @@ from app.services.generation_events import consume
 from app.storage.db import ping as ping_database
 
 configure_logging()
+init_sentry("companies")
 
 
 @asynccontextmanager

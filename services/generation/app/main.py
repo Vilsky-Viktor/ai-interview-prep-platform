@@ -7,12 +7,14 @@ from arq.connections import RedisSettings
 from fastapi import FastAPI, HTTPException, Request, status
 from prepza_common import http
 from prepza_common.logging import RequestLogMiddleware, configure_logging
+from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
 from app.routers import generations, internal
 from app.storage.db import ping as ping_database
 
 configure_logging()
+init_sentry("generation")
 
 
 @asynccontextmanager

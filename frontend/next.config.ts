@@ -1,3 +1,4 @@
+import { withSentryConfig } from "@sentry/nextjs/config"
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
@@ -34,4 +35,10 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+// Errors reach Sentry through /monitoring on our own domain, so ad blockers don't drop them and
+// the Content-Security-Policy needs no new origin. Source maps upload only with SENTRY_AUTH_TOKEN.
+export default withSentryConfig(nextConfig, {
+  tunnelRoute: "/monitoring",
+  silent: true,
+  telemetry: false,
+})

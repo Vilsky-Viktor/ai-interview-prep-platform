@@ -130,6 +130,8 @@ docker build --target prod -t prepza-frontend \
 
 Run each API's migrations (`uv run --no-sync alembic upgrade head`) once before it starts, and never set `FIREBASE_AUTH_EMULATOR_HOST` in production.
 
+Errors go to Sentry when `SENTRY_DSN` (backend services) and `NEXT_PUBLIC_SENTRY_DSN` (frontend, a build argument) are set; empty, nothing is sent. Events carry user ids only, with emails scrubbed. To see the original code in frontend stack traces, also pass `SENTRY_AUTH_TOKEN`, `SENTRY_ORG` and `SENTRY_PROJECT` to the frontend build.
+
 ### Generation settings
 
 Three settings in `.env` shape every generation:

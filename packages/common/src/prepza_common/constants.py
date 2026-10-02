@@ -20,3 +20,8 @@ DB_MAX_OVERFLOW = 5
 
 # Lists are served a page at a time; a page holds at most this many items.
 MAX_PAGE_SIZE = 100
+
+# Sentry: share of requests traced for performance, and emails scrubbed from every event.
+DEFAULT_TRACES_SAMPLE_RATE = "0.1"
+EMAIL_PATTERN = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+REDACTED_EMAIL = "[email]"

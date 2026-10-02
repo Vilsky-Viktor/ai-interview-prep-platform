@@ -1,5 +1,6 @@
 from typing import Annotated
 
+import sentry_sdk
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from firebase_admin import auth as firebase_auth
@@ -38,6 +39,9 @@ def current_user(
 
     if user is None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid token")
+
+    # Errors from this request name the account by id only, never by email.
+    sentry_sdk.set_user({"id": user.uid})
 
     return user
 

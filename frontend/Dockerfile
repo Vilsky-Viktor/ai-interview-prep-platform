@@ -13,6 +13,12 @@ ARG NEXT_PUBLIC_FIREBASE_API_KEY
 ARG NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
 ARG NEXT_PUBLIC_FIREBASE_PROJECT_ID
 ARG NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL
+ARG NEXT_PUBLIC_SENTRY_DSN
+ARG NEXT_PUBLIC_SENTRY_ENVIRONMENT
+# Optional: uploads source maps to Sentry, so stack traces show the original code.
+ARG SENTRY_AUTH_TOKEN
+ARG SENTRY_ORG
+ARG SENTRY_PROJECT
 RUN pnpm build
 
 # Development: docker-compose.yml mounts the source, and Next reloads on change.

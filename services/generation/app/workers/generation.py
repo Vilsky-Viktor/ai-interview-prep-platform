@@ -8,6 +8,8 @@ from arq import cron
 from arq.connections import RedisSettings
 from prepza_common import http
 from prepza_common.logging import configure_logging
+from prepza_common.sentry import init_sentry
+from sentry_sdk.integrations.arq import ArqIntegration
 
 from app.config.settings import settings
 from app.constants.events import GENERATION_CANCELLED
@@ -84,6 +86,8 @@ async def sweep(ctx: dict) -> None:
 
 async def startup(ctx: dict) -> None:
     configure_logging()
+    # Failed jobs (generations, question checks) are reported too.
+    init_sentry("generation-worker", [ArqIntegration()])
 
     if os.getenv("LANGSMITH_TRACING", "").lower() == "true":
         logger.info("LangSmith tracing enabled")

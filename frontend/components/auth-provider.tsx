@@ -1,5 +1,6 @@
 "use client"
 
+import * as Sentry from "@sentry/nextjs"
 import { onIdTokenChanged } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { createContext, useContext, useEffect, useState } from "react"
@@ -17,6 +18,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     return onIdTokenChanged(auth, async (user) => {
       writeTokenCookie(user ? await user.getIdToken() : null)
+      // Errors name the account by id only, never by email.
+      Sentry.setUser(user ? { id: user.uid } : null)
       setState({ user, loading: false })
       // Server-rendered pages read the token cookie, so re-render them with the new one.
       router.refresh()
