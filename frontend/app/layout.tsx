@@ -4,6 +4,7 @@ import { headers } from "next/headers"
 
 import "./globals.css"
 import { AuthProvider } from "@/components/auth-provider"
+import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
@@ -50,6 +51,7 @@ export default async function RootLayout({
           <AuthProvider>
             <SiteHeader />
             {children}
+            <SiteFooter />
             <Toaster />
           </AuthProvider>
         </ThemeProvider>

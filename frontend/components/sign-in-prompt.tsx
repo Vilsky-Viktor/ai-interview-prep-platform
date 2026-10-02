@@ -1,5 +1,6 @@
 "use client"
 
+import { LegalConsent } from "@/components/legal-consent"
 import { Button } from "@/components/ui/button"
 import { signIn } from "@/lib/auth"
 
@@ -14,6 +15,7 @@ export function SignInPrompt({ message }: { message: string }) {
       >
         <span className="font-light">Sign in with</span> Google
       </Button>
+      <LegalConsent />
     </div>
   )
 }

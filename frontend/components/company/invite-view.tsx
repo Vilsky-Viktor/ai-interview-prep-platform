@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
@@ -114,7 +115,13 @@ export function InviteView({ token }: { token: string }) {
           )}
           <li>Unanswered questions count as wrong.</li>
           <li>Progress is saved: use this link again to continue.</li>
-          <li>Stay on this page: leaving it or copying is recorded.</li>
+          <li>
+            Stay on this page: leaving it or copying is recorded (
+            <Link href="/privacy" className="underline underline-offset-4">
+              how we handle it
+            </Link>
+            ).
+          </li>
           {invite.share_results && (
             <li>You&apos;ll see whether each answer was right.</li>
           )}
