@@ -91,18 +91,19 @@ export function InviteView({ token }: { token: string }) {
           {invite.title ?? "an interview"}
         </h1>
         {invite.time_limit_minutes != null && invite.status !== "finished" && (
-          <p className="text-base text-muted-foreground">
-            Time limit:{" "}
-            <span className="text-2xl font-medium text-foreground tabular-nums">
-              {invite.time_limit_minutes}
-            </span>{" "}
-            min
+          <p className="pt-6 text-base text-muted-foreground">
+            Time limit:
+            <span className="block">
+              <span className="text-3xl font-medium text-foreground tabular-nums">
+                {invite.time_limit_minutes}
+              </span>{" "}
+              min
+            </span>
           </p>
         )}
       </div>
       {invite.status !== "finished" && (
-        <ul className="mx-auto max-w-md list-disc space-y-2 pl-5 text-left text-base text-muted-foreground">
-          <li>One section per topic, taken one after another.</li>
+        <ul className="mx-auto max-w-lg list-disc space-y-2 pl-5 text-left text-base text-muted-foreground">
           <li>Pick one of four options for each question.</li>
           <li>An answer can&apos;t be changed once given.</li>
           <li>Progress is saved: use this link again to continue.</li>
@@ -112,11 +113,9 @@ export function InviteView({ token }: { token: string }) {
               The timer starts when you accept and keeps running if you leave.
             </li>
           )}
-          <li>
-            {invite.share_results
-              ? "You'll see whether each answer was right."
-              : "You won't see your results."}
-          </li>
+          {invite.share_results && (
+            <li>You&apos;ll see whether each answer was right.</li>
+          )}
         </ul>
       )}
       {invite.status === "finished" ? (

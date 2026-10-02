@@ -16,7 +16,7 @@ CANDIDATE_INVITE = {
     "preheader": "Take “{title}” on prepza. Sign in with {email} to start.",
     "heading": "Interview invitation",
     "lines": [
-        "{company} invited you to take “{title}” on prepza.",
+        "{company} invited you to the “{title}” interview on prepza.",
         (
             "Sign in with {email} to start. Only this address can take the interview, "
             "and you get one attempt."

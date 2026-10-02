@@ -14,6 +14,9 @@ TEXT_LAYOUT = """\
 prepza.
 """
 
+# Who sent the invite, in the body: bold, so it stands out.
+HTML_NAME = '<strong style="font-weight:600;color:#0a0a0a;">{name}</strong>'
+
 HTML_PARAGRAPH = (
     '<p style="margin:0 0 16px;font-size:16px;line-height:24px;color:#404040;">{text}</p>'
 )

@@ -2,12 +2,22 @@ from html import escape
 
 from app.models.email import Email
 from app.templates.emails import CANDIDATE_INVITE, FOOTER, SHARE_INVITE
-from app.templates.layout import HTML_LAYOUT, HTML_PARAGRAPH, PREHEADER_PADDING, TEXT_LAYOUT
+from app.templates.layout import (
+    HTML_LAYOUT,
+    HTML_NAME,
+    HTML_PARAGRAPH,
+    PREHEADER_PADDING,
+    TEXT_LAYOUT,
+)
 
 
 def render(template: dict, data: dict, link: str) -> Email:
     """Builds the plain-text and HTML versions; names and titles are escaped in the HTML."""
     safe = {key: escape(str(value)) for key, value in data.items()}
+    emphasized = {
+        **safe,
+        **{key: HTML_NAME.format(name=safe[key]) for key in ("company", "inviter") if key in safe},
+    }
 
     text = TEXT_LAYOUT.format(
         heading=template["heading"],
@@ -22,7 +32,7 @@ def render(template: dict, data: dict, link: str) -> Email:
         padding=PREHEADER_PADDING,
         heading=template["heading"],
         lines="\n".join(
-            HTML_PARAGRAPH.format(text=line.format(**safe)) for line in template["lines"]
+            HTML_PARAGRAPH.format(text=line.format(**emphasized)) for line in template["lines"]
         ),
         button=template["button"],
         link=escape(link),

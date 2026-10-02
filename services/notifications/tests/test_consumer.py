@@ -56,6 +56,8 @@ def test_candidate_invite_email():
     assert email.subject == "Acme invited you to an interview"
     assert "http://localhost:8090/invite/xyz" in email.text
     assert 'href="http://localhost:8090/invite/xyz"' in email.html
+    assert "Acme invited you to the “Backend” interview on prepza." in email.text
+    assert ">Acme</strong> invited you" in email.html
 
 
 def test_share_invite_email():
@@ -64,7 +66,7 @@ def test_share_invite_email():
     assert email.to == "bob@example.com"
     assert email.subject == "Ann shared “Backend” with you"
     assert "http://localhost:8090/share/abc" in email.text
-    assert "Ann invited you to prepare with “Backend”" in email.html
+    assert ">Ann</strong> invited you to prepare with “Backend”" in email.html
 
 
 def test_html_escapes_names_and_titles():
