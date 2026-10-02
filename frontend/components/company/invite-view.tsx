@@ -8,7 +8,6 @@ import { useAuth } from "@/components/auth-provider"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { ApiError, apiFetch } from "@/lib/api"
-import { plural } from "@/lib/format"
 import type { InviteView as Invite, SessionSummary } from "@/types/company"
 
 export function InviteView({ token }: { token: string }) {
@@ -93,9 +92,11 @@ export function InviteView({ token }: { token: string }) {
         </h1>
         {invite.time_limit_minutes != null && invite.status !== "finished" && (
           <p className="text-base text-muted-foreground">
-            {invite.status === "in_process"
-              ? "This interview is timed, and the clock started when you began."
-              : `This interview is timed: you'll have ${plural(invite.time_limit_minutes, "minute")} from the moment you start. It finishes by itself when time runs out.`}
+            Time limit:{" "}
+            <span className="text-2xl font-medium text-foreground tabular-nums">
+              {invite.time_limit_minutes}
+            </span>{" "}
+            min
           </p>
         )}
       </div>
@@ -109,7 +110,7 @@ export function InviteView({ token }: { token: string }) {
           disabled={starting}
           onClick={start}
         >
-          {invite.status === "in_process" ? "Continue" : "Accept"}
+          {invite.status === "in_process" ? "Continue" : "Accept & Start"}
         </Button>
       ) : (
         <p className="text-base text-muted-foreground">
