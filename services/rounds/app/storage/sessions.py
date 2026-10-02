@@ -169,6 +169,18 @@ async def finish(session_id: uuid.UUID, final_score: int) -> None:
         await session.commit()
 
 
+async def remove_for_invites(candidate_invite_ids: list[uuid.UUID]) -> None:
+    """Deletes the candidates' sessions; answers and signals cascade."""
+    if not candidate_invite_ids:
+        return
+
+    async with Db() as session:
+        await session.execute(
+            delete(Session).where(Session.candidate_invite_id.in_(candidate_invite_ids))
+        )
+        await session.commit()
+
+
 async def remove_for_interview(interview_set_id: uuid.UUID) -> None:
     """Deletes every candidate's sessions on the interview; answers and chats cascade."""
     async with Db() as session:

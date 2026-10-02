@@ -10,7 +10,7 @@ from prepza_common.logging import RequestLogMiddleware, configure_logging
 from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
-from app.routers import generations, internal
+from app.routers import generations, internal, internal_accounts
 from app.storage.db import ping as ping_database
 
 configure_logging()
@@ -36,6 +36,7 @@ app = FastAPI(
 app.add_middleware(RequestLogMiddleware)
 app.include_router(generations.router)
 app.include_router(internal.router)
+app.include_router(internal_accounts.router)
 
 
 @app.get("/health")

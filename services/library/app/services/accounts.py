@@ -1,0 +1,45 @@
+import asyncio
+
+from firebase_admin import auth as firebase_auth
+from prepza_common.user import User
+
+from app.integrations import accounts as services
+from app.integrations import rounds
+from app.storage import accounts, preparations
+
+
+def delete_sign_in(user_id: str) -> None:
+    try:
+        firebase_auth.delete_user(user_id)
+    except firebase_auth.UserNotFoundError:
+        pass
+
+
+async def delete_account(user: User) -> None:
+    """Deletes everything about the user, in every service, then their sign-in.
+
+    Each step is safe to repeat and raises on failure, so a failed deletion is retried whole and
+    the sign-in, which lets the user retry, goes last.
+    """
+    for service in services.services():
+        await services.delete_user(service, user.uid, user.email)
+
+    # Their own preparations, with everyone's practice on them.
+    for set_id in await accounts.owned_preparations(user.uid):
+        await rounds.delete_preparation_data(set_id)
+        await preparations.remove(set_id)
+
+    await accounts.delete_user(user.uid, user.email)
+    await asyncio.to_thread(delete_sign_in, user.uid)
+
+
+async def export_account(user: User) -> dict:
+    exports = await asyncio.gather(
+        *(services.export_user(name, user.uid, user.email) for name in services.services())
+    )
+
+    return {
+        "account": {"id": user.uid, "email": user.email, "name": user.name},
+        "library": await accounts.export(user.uid, user.email),
+        **dict(zip(services.services(), exports, strict=True)),
+    }

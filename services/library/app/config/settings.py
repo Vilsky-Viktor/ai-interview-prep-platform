@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     email_recipient_daily_limit: int = Field(default=3, ge=0)
     rounds_url: str
     generation_url: str
+    companies_url: str
     # Off in tests, which have no Redis.
     consume_events: bool = True
 

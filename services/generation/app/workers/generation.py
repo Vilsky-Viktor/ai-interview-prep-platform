@@ -12,6 +12,7 @@ from prepza_common.sentry import init_sentry
 from sentry_sdk.integrations.arq import ArqIntegration
 
 from app.config.settings import settings
+from app.constants.accounts import RETENTION_HOUR, TEXT_RETENTION_DAYS
 from app.constants.events import GENERATION_CANCELLED
 from app.constants.generation import (
     GENERATION_FAILED,
@@ -30,7 +31,7 @@ from app.services.graph import build_graph
 from app.services.key_check_batches import collect_finished, submit_pending
 from app.services.pipeline import run_pipeline
 from app.services.verify import verify
-from app.storage import generations
+from app.storage import accounts, generations
 from app.storage.checkpointer import open_checkpointer
 
 logger = logging.getLogger(__name__)
@@ -84,6 +85,15 @@ async def sweep(ctx: dict) -> None:
         await ctx["checkpointer"].adelete_thread(thread_id)
 
 
+async def retention(ctx: dict) -> None:
+    """Daily: pasted job texts aren't kept longer than needed."""
+    before = datetime.now(UTC) - timedelta(days=TEXT_RETENTION_DAYS)
+    count = await accounts.forget_texts(before, ctx["checkpointer"])
+
+    if count:
+        logger.info("Removed the pasted texts of %d old generations", count)
+
+
 async def startup(ctx: dict) -> None:
     configure_logging()
     # Failed jobs (generations, question checks) are reported too.
@@ -107,6 +117,7 @@ class WorkerSettings:
     cron_jobs: ClassVar = [
         cron(sweep, minute=SWEEP_MINUTES),
         cron(key_check_batches, minute=KEY_CHECK_MINUTES),
+        cron(retention, hour=RETENTION_HOUR, minute=0),
     ]
     on_startup = startup
     on_shutdown = shutdown

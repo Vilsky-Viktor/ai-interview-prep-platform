@@ -13,6 +13,10 @@ class InviteScoresIn(BaseModel):
     invite_ids: list[UUID]
 
 
+class InviteIdsIn(BaseModel):
+    invite_ids: list[UUID]
+
+
 class SessionsCreate(BaseModel):
     user_id: str
     candidate_invite_id: UUID

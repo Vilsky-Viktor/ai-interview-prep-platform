@@ -10,7 +10,7 @@ from app.integrations import generation, library, rounds
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
-from app.routers import companies as companies_router
+from app.services import company_deletion
 from app.storage import companies, interviews
 
 COMPANY_ID = uuid.uuid4()
@@ -78,7 +78,7 @@ def record_calls(monkeypatch, listed, fail_library=False):
 
     monkeypatch.setattr(interviews, "list_for_company", fake_list)
     monkeypatch.setattr(generation, "cancel", fake_cancel)
-    monkeypatch.setattr(companies_router, "attach_set", fake_attach)
+    monkeypatch.setattr(company_deletion, "attach_set", fake_attach)
     monkeypatch.setattr(rounds, "delete_interview_data", fake_rounds)
     monkeypatch.setattr(library, "delete_interview", fake_library)
     monkeypatch.setattr(companies, "delete", fake_delete)

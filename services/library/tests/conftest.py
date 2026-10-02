@@ -11,6 +11,7 @@ os.environ.setdefault("REDIS_URL", "redis://localhost:6379")
 os.environ.setdefault("SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("ROUNDS_URL", "http://rounds:8000")
 os.environ.setdefault("GENERATION_URL", "http://generation:8000")
+os.environ.setdefault("COMPANIES_URL", "http://companies:8000")
 os.environ.setdefault("CONSUME_EVENTS", "false")
 
 import pytest

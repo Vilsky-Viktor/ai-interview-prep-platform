@@ -5,11 +5,9 @@ from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 
 from app.constants.roles import Role
-from app.helpers.interviews import attach_set
-from app.integrations import generation as generation_api
-from app.integrations import library, rounds
 from app.models.companies import Company
 from app.schemas.companies import CompanyCreate, CompanyOut
+from app.services import company_deletion
 from app.services.access import require_company
 from app.storage import companies, interviews
 
@@ -51,27 +49,13 @@ async def list_companies(user: CurrentUser, page: PageParams) -> list[CompanyOut
 
 @router.delete("/{company_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_company(company_id: UUID, user: CurrentUser) -> None:
-    """Only the owner can do it. Each interview's results and questions go first, so a
-    failure leaves the company to delete again."""
+    """Only the owner can do it."""
     _, member = await require_company(user, company_id)
 
     if member.role != Role.OWNER:
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Only the owner can remove the company")
 
-    for interview in await interviews.list_for_company(company_id):
-        if interview.set_id is None:
-            cancelled = await generation_api.cancel(interview.generation_id, company_id)
-
-            if cancelled.is_server_error:
-                cancelled.raise_for_status()
-
-            interview = await attach_set(interview)
-
-        if interview.set_id:
-            await rounds.delete_interview_data(interview.set_id)
-            await library.delete_interview(interview.set_id)
-
-    await companies.delete(company_id)
+    await company_deletion.delete_company(company_id)
 
 
 @router.get("/{company_id}")

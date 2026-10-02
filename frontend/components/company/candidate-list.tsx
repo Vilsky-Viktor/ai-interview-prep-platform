@@ -47,7 +47,9 @@ export function CandidateList({
         >
           <span className="min-w-0 space-y-1">
             <span className="block text-lg font-medium break-all">
-              {candidate.email}
+              {candidate.status === "deleted"
+                ? "Deleted candidate"
+                : candidate.email}
             </span>
             <span className="block text-sm text-muted-foreground">
               <time dateTime={candidate.created_at} suppressHydrationWarning>

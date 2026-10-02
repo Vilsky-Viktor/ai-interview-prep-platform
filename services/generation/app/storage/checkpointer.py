@@ -19,3 +19,23 @@ async def open_checkpointer() -> tuple[AsyncConnectionPool, AsyncPostgresSaver]:
     await checkpointer.setup()
 
     return pool, checkpointer
+
+
+async def delete_threads(thread_ids: list[str], checkpointer=None) -> None:
+    """Deletes these generations' checkpoints through LangGraph, which owns their tables. Without
+    a checkpointer (outside the worker), a short-lived one is opened."""
+    if not thread_ids:
+        return
+
+    if checkpointer is not None:
+        for thread_id in thread_ids:
+            await checkpointer.adelete_thread(thread_id)
+
+        return
+
+    pool, own = await open_checkpointer()
+
+    try:
+        await delete_threads(thread_ids, own)
+    finally:
+        await pool.close()

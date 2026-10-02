@@ -14,6 +14,7 @@ from app.routers import (
     certificates,
     chat,
     internal,
+    internal_accounts,
     preparations,
     rounds,
     session_feedback,
@@ -54,6 +55,7 @@ app.include_router(preparations.router)
 app.include_router(chat.router)
 app.include_router(certificates.router)
 app.include_router(internal.router)
+app.include_router(internal_accounts.router)
 
 
 @app.get("/health")

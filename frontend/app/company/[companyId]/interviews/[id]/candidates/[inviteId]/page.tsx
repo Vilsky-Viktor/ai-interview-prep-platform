@@ -77,6 +77,8 @@ export default async function ScorecardPage({
     notFound()
   }
 
+  const deleted = card.status === "deleted"
+
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
       {/* The actions sit beside the email and status, centered on both. */}
@@ -91,7 +93,7 @@ export default async function ScorecardPage({
           }
           title={
             <h1 className="font-heading text-3xl font-medium tracking-tight">
-              {card.email}
+              {deleted ? "Deleted candidate" : card.email}
             </h1>
           }
         >
@@ -102,18 +104,22 @@ export default async function ScorecardPage({
             {card.status.replace("_", " ")}
           </Badge>
         </PageHeader>
-        <CandidateActions
-          interviewId={id}
-          inviteId={inviteId}
-          email={card.email}
-          status={card.status}
-          backHref={`/company/${companyId}/interviews/${id}?tab=candidates`}
-        />
+        {!deleted && (
+          <CandidateActions
+            interviewId={id}
+            inviteId={inviteId}
+            email={card.email}
+            status={card.status}
+            backHref={`/company/${companyId}/interviews/${id}?tab=candidates`}
+          />
+        )}
       </div>
 
       {card.sessions.length === 0 && (
         <p className="py-16 text-center text-muted-foreground">
-          The candidate has not started yet.
+          {deleted
+            ? "The candidate deleted their account, and their results with it."
+            : "The candidate has not started yet."}
         </p>
       )}
 

@@ -140,10 +140,10 @@ def test_only_done_and_cancelled_checkpoints_are_deleted(monkeypatch):
     assert "failed" not in sql and "awaiting_review" not in sql
 
 
-def test_sweeper_and_key_check_batches_run_on_a_schedule():
+def test_sweeper_key_check_batches_and_retention_run_on_a_schedule():
     jobs = [job.coroutine for job in worker.WorkerSettings.cron_jobs]
 
-    assert jobs == [worker.sweep, worker.key_check_batches]
+    assert jobs == [worker.sweep, worker.key_check_batches, worker.retention]
 
 
 def test_worker_skips_a_generation_the_sweeper_already_failed(monkeypatch):

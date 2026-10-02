@@ -12,6 +12,7 @@ from app.config.settings import settings
 from app.integrations.events import get_redis
 from app.routers import (
     companies,
+    internal_accounts,
     interview_generation,
     interview_questions,
     interviews,
@@ -19,6 +20,7 @@ from app.routers import (
     members,
 )
 from app.services.generation_events import consume
+from app.services.retention import keep_retaining
 from app.storage.db import ping as ping_database
 
 configure_logging()
@@ -30,11 +32,14 @@ async def lifespan(app: FastAPI):
     firebase_admin.initialize_app(options={"projectId": settings.firebase_project_id})
     # Stores finished interview generations as they're announced.
     listener = asyncio.create_task(consume()) if settings.consume_events else None
+    # Deletes candidate data past its retention period, daily.
+    retainer = asyncio.create_task(keep_retaining()) if settings.consume_events else None
 
     yield
 
-    if listener:
-        listener.cancel()
+    for task in (listener, retainer):
+        if task:
+            task.cancel()
 
     await get_redis().aclose()
     await http.get_client().aclose()
@@ -52,6 +57,7 @@ app.include_router(interviews.router)
 app.include_router(interview_generation.router)
 app.include_router(interview_questions.router)
 app.include_router(invites.router)
+app.include_router(internal_accounts.router)
 
 
 @app.get("/health")

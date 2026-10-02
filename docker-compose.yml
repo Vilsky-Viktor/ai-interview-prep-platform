@@ -40,6 +40,7 @@ x-library-env: &library-env
   SERVICE_SECRET: ${SERVICE_SECRET}
   ROUNDS_URL: http://rounds:8000
   GENERATION_URL: http://generation:8000
+  COMPANIES_URL: http://companies:8000
 
 x-rounds-env: &rounds-env
   <<: *firebase-env

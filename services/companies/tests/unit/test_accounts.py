@@ -1,0 +1,102 @@
+import asyncio
+import uuid
+
+import httpx
+import pytest
+
+from app.constants.roles import Role
+from app.integrations import rounds
+from app.models.companies import Company, Member
+from app.services import accounts as account_service
+from app.services import company_deletion, retention
+from app.storage import accounts
+
+
+def membership(role, owners):
+    company = Company(id=uuid.uuid4(), name="Acme")
+    member = Member(id=uuid.uuid4(), company_id=company.id, user_id="ann", role=role)
+
+    return member, company, owners
+
+
+@pytest.fixture
+def calls(monkeypatch):
+    done = []
+
+    async def delete_company(company_id):
+        done.append(("company", company_id))
+
+    async def remove_member(member_id):
+        done.append(("member", member_id))
+
+    async def forget(user_id, email):
+        done.append(("candidate", user_id, email))
+
+    monkeypatch.setattr(company_deletion, "delete_company", delete_company)
+    monkeypatch.setattr(accounts, "remove_member", remove_member)
+    monkeypatch.setattr(accounts, "forget_candidate", forget)
+
+    return done
+
+
+def test_a_company_goes_with_its_only_owner_other_memberships_just_end(calls, monkeypatch):
+    sole = membership(Role.OWNER, owners=1)
+    shared = membership(Role.OWNER, owners=2)
+    admin = membership(Role.ADMIN, owners=1)
+
+    async def memberships(user_id):
+        return [sole, shared, admin]
+
+    monkeypatch.setattr(accounts, "memberships", memberships)
+
+    asyncio.run(account_service.delete_user("ann", "ann@example.com"))
+
+    assert calls == [
+        ("company", sole[1].id),
+        ("member", shared[0].id),
+        ("member", admin[0].id),
+        ("candidate", "ann", "ann@example.com"),
+    ]
+
+
+def test_retention_deletes_results_in_rounds_before_the_invites(monkeypatch):
+    done = []
+    expired = [uuid.uuid4()]
+
+    async def expired_invites(before):
+        return expired
+
+    async def delete_sessions(invite_ids):
+        done.append(("rounds", invite_ids))
+
+    async def delete_invites(invite_ids):
+        done.append(("invites", invite_ids))
+
+    monkeypatch.setattr(accounts, "expired_invites", expired_invites)
+    monkeypatch.setattr(rounds, "delete_invite_sessions", delete_sessions)
+    monkeypatch.setattr(accounts, "delete_invites", delete_invites)
+
+    assert asyncio.run(retention.delete_expired_candidates()) == 1
+    assert done == [("rounds", expired), ("invites", expired)]
+
+
+def test_retention_keeps_the_invites_when_rounds_fails(monkeypatch):
+    deleted = []
+
+    async def expired_invites(before):
+        return [uuid.uuid4()]
+
+    async def rounds_down(invite_ids):
+        raise httpx.ConnectError("rounds is down")
+
+    async def delete_invites(invite_ids):
+        deleted.append(invite_ids)
+
+    monkeypatch.setattr(accounts, "expired_invites", expired_invites)
+    monkeypatch.setattr(rounds, "delete_invite_sessions", rounds_down)
+    monkeypatch.setattr(accounts, "delete_invites", delete_invites)
+
+    with pytest.raises(httpx.ConnectError):
+        asyncio.run(retention.delete_expired_candidates())
+
+    assert deleted == []
