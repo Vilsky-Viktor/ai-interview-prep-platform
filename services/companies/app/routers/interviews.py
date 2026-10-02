@@ -1,7 +1,7 @@
 from uuid import UUID
 
 import httpx
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 from prepza_common.rate_limit import hit_emails
@@ -16,8 +16,8 @@ from app.helpers.interviews import (
     interview_title,
     topics_out,
 )
+from app.integrations import billing, library, rounds
 from app.integrations import generation as generation_api
-from app.integrations import library, rounds
 from app.integrations.events import get_redis, publish
 from app.schemas.interviews import (
     InterviewCreate,
@@ -27,7 +27,7 @@ from app.schemas.interviews import (
     TitleIn,
 )
 from app.schemas.invites import CandidateIn, CandidateOut
-from app.services.access import bearer_token, require_company, require_manager
+from app.services.access import require_company, require_manager
 from app.storage import interviews, invites
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
@@ -35,12 +35,12 @@ router = APIRouter(prefix="/interviews", tags=["interviews"])
 
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def create_interview(
-    body: InterviewCreate, company_id: UUID, user: CurrentUser, request: Request
+    body: InterviewCreate, company_id: UUID, user: CurrentUser
 ) -> InterviewOut:
     company, _ = await require_company(user, company_id)
 
     try:
-        created = await generation_api.create(body.text, company.id, bearer_token(request))
+        created = await generation_api.create(body.text, company.id, user.uid)
     except httpx.HTTPStatusError as error:
         if error.response.status_code == status.HTTP_429_TOO_MANY_REQUESTS:
             raise HTTPException(
@@ -152,6 +152,11 @@ async def invite_candidate(
         raise HTTPException(status.HTTP_409_CONFLICT, "Interview is still being generated")
 
     email = str(body.email).lower()
+
+    # Each new candidate uses a credit; resending to someone already invited doesn't.
+    if not await invites.exists(interview.id, email):
+        await billing.use_candidate(company.id)
+
     await hit_emails(
         get_redis(),
         user.uid,

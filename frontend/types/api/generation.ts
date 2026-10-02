@@ -96,6 +96,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/generations": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create Interview Generation
+     * @description A company's interview; companies pays per candidate, so this one is free.
+     */
+    post: operations["create_interview_generation_internal_generations_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/generations/{generation_id}": {
     parameters: {
       query?: never
@@ -210,6 +230,43 @@ export interface paths {
      * @description The library flagged the question; the worker checks it and fixes or replaces it.
      */
     post: operations["verify_question_internal_questions__question_id__verify_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/users/{user_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    /**
+     * Delete User
+     * @description Part of deleting an account (library coordinates it); safe to repeat.
+     */
+    delete: operations["delete_user_internal_users__user_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/users/{user_id}/export": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Export User */
+    get: operations["export_user_internal_users__user_id__export_get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -346,6 +403,21 @@ export interface components {
     HTTPValidationError: {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
+    }
+    /**
+     * InterviewGenerationCreate
+     * @description From companies, once it has checked the user belongs to the company.
+     */
+    InterviewGenerationCreate: {
+      /** Text */
+      text: string
+      /**
+       * Company Id
+       * Format: uuid
+       */
+      company_id: string
+      /** Owner Uid */
+      owner_uid: string
     }
     /**
      * QualityFlag
@@ -610,6 +682,39 @@ export interface operations {
       }
     }
   }
+  create_interview_generation_internal_generations_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["InterviewGenerationCreate"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["GenerationOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   get_interview_generation_internal_generations__generation_id__get: {
     parameters: {
       query: {
@@ -803,6 +908,68 @@ export interface operations {
         }
         content: {
           "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  delete_user_internal_users__user_id__delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  export_user_internal_users__user_id__export_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": {
+            [key: string]: unknown
+          }
         }
       }
       /** @description Validation Error */

@@ -27,11 +27,15 @@ export function InviteCandidate({ interviewId }: { interviewId: string }) {
       setEmail("")
       router.refresh()
     } catch (error) {
+      // Out of candidate credits: billing's message says how to get more.
+      const noCredits = error instanceof ApiError && error.status === 402
       const invalid = error instanceof ApiError && error.status < 500
       toast.error(
-        invalid
-          ? "Check the email address and try again."
-          : "Couldn't send the invite."
+        noCredits
+          ? error.message
+          : invalid
+            ? "Check the email address and try again."
+            : "Couldn't send the invite."
       )
     } finally {
       setSending(false)

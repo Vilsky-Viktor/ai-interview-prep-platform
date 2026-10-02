@@ -4,9 +4,10 @@ from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
+from app.constants.kinds import GenerationKind
 from app.integrations import library
 from app.models.generation import Generation
-from app.schemas.generation import GenerationOut, ReviewRequest
+from app.schemas.generation import GenerationOut, InterviewGenerationCreate, ReviewRequest
 from app.schemas.regenerate import RegeneratedOut, RegenerateIn
 from app.schemas.verify import VerifyIn
 from app.service_auth import ServiceCaller
@@ -26,6 +27,25 @@ async def get_company_generation(generation_id: UUID, company_id: UUID) -> Gener
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Generation not found")
 
     return generation
+
+
+@router.post("/generations", status_code=status.HTTP_201_CREATED)
+async def create_interview_generation(
+    body: InterviewGenerationCreate, caller: ServiceCaller, request: Request
+) -> GenerationOut:
+    """A company's interview; companies pays per candidate, so this one is free."""
+    await hit(
+        request.app.state.arq,
+        f"rate:generations:{body.owner_uid}",
+        settings.generation_limit,
+        settings.generation_window_seconds,
+    )
+    generation = await generations.create(
+        body.owner_uid, body.text, GenerationKind.INTERVIEW, body.company_id
+    )
+    await request.app.state.arq.enqueue_job("run_generation", str(generation.id))
+
+    return GenerationOut.model_validate(generation)
 
 
 @router.get("/generations/{generation_id}")

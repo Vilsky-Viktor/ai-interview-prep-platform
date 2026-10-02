@@ -7,6 +7,7 @@ from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
 from app.constants.kinds import GenerationKind
+from app.integrations import billing
 from app.models.generation import Generation
 from app.schemas.generation import (
     GenerationCreate,
@@ -35,12 +36,17 @@ async def get_owned(generation_id: UUID, user: CurrentUser) -> Generation:
 async def create_generation(
     body: GenerationCreate, user: CurrentUser, request: Request
 ) -> GenerationOut:
+    # Interviews come only through companies (/internal/generations), which checks membership.
+    if body.kind == GenerationKind.INTERVIEW:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Interviews are created from a company")
+
     await hit(
         request.app.state.arq,
         f"rate:generations:{user.uid}",
         settings.generation_limit,
         settings.generation_window_seconds,
     )
+    await billing.use_generation(user.uid)
 
     generation = await generations.create(user.uid, body.text, body.kind, body.company_id)
     await request.app.state.arq.enqueue_job("run_generation", str(generation.id))

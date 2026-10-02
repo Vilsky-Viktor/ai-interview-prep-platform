@@ -38,6 +38,15 @@ async def upsert(interview_id, email: str) -> CandidateInvite:
         )
 
 
+async def exists(interview_id, email: str) -> bool:
+    query = select(CandidateInvite.id).where(
+        CandidateInvite.interview_id == interview_id, CandidateInvite.email == email.lower()
+    )
+
+    async with Session() as session:
+        return await session.scalar(query) is not None
+
+
 async def get_by_token(token: str) -> tuple[CandidateInvite, Interview] | None:
     query = (
         select(CandidateInvite, Interview)

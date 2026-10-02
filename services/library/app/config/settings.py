@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     rounds_url: str
     generation_url: str
     companies_url: str
+    billing_url: str
     # Off in tests, which have no Redis.
     consume_events: bool = True
 

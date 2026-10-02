@@ -5,8 +5,9 @@ from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 
 from app.constants.roles import Role
+from app.integrations import billing
 from app.models.companies import Company
-from app.schemas.companies import CompanyCreate, CompanyOut
+from app.schemas.companies import CompanyCreate, CompanyCreditsOut, CompanyOut
 from app.services import company_deletion
 from app.services.access import require_company
 from app.storage import companies, interviews
@@ -56,6 +57,14 @@ async def delete_company(company_id: UUID, user: CurrentUser) -> None:
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Only the owner can remove the company")
 
     await company_deletion.delete_company(company_id)
+
+
+@router.get("/{company_id}/credits")
+async def get_credits(company_id: UUID, user: CurrentUser) -> CompanyCreditsOut:
+    """Candidates the company can still invite; any member may see it."""
+    await require_company(user, company_id)
+
+    return CompanyCreditsOut(candidate_credits=await billing.candidate_credits(company_id))
 
 
 @router.get("/{company_id}")

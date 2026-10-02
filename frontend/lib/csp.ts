@@ -1,6 +1,7 @@
 import {
   ACCOUNT_IMAGE_ORIGINS,
   FIREBASE_CONNECT_ORIGINS,
+  PADDLE_ORIGINS,
 } from "@/constants/security"
 
 /**
@@ -19,10 +20,10 @@ export function contentSecurityPolicy(nonce: string, isDev: boolean) {
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${devScript}`,
     "style-src 'self' 'unsafe-inline'",
-    `img-src 'self' blob: data: ${ACCOUNT_IMAGE_ORIGINS.join(" ")}`,
+    `img-src 'self' blob: data: ${[...ACCOUNT_IMAGE_ORIGINS, ...PADDLE_ORIGINS].join(" ")}`,
     "font-src 'self'",
-    `connect-src 'self' ${FIREBASE_CONNECT_ORIGINS.join(" ")} ${emulator}${devConnect}`,
-    `frame-src https://${authDomain} https://apis.google.com ${emulator}`,
+    `connect-src 'self' ${[...FIREBASE_CONNECT_ORIGINS, ...PADDLE_ORIGINS].join(" ")} ${emulator}${devConnect}`,
+    `frame-src https://${authDomain} https://apis.google.com ${PADDLE_ORIGINS.join(" ")} ${emulator}`,
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",

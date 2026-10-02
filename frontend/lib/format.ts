@@ -21,3 +21,12 @@ export function formatSeconds(seconds: number) {
 
   return rest === 0 ? `${minutes} min` : `${minutes} min ${rest} s`
 }
+
+/** 2400 cents in USD: "$24". */
+export function formatPrice(cents: number, currency: string) {
+  return new Intl.NumberFormat("en", {
+    style: "currency",
+    currency,
+    maximumFractionDigits: cents % 100 === 0 ? 0 : 2,
+  }).format(cents / 100)
+}

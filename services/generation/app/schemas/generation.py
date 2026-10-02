@@ -15,6 +15,14 @@ from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
 
 
+class InterviewGenerationCreate(BaseModel):
+    """From companies, once it has checked the user belongs to the company."""
+
+    text: str = Field(min_length=1, max_length=MAX_GOAL_LENGTH)
+    company_id: UUID
+    owner_uid: str
+
+
 class GenerationCreate(BaseModel):
     text: str = Field(min_length=1, max_length=MAX_GOAL_LENGTH)
     kind: GenerationKind = GenerationKind.PREPARATION

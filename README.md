@@ -38,6 +38,8 @@ flowchart LR
     gateway --> generation
     gateway --> rounds
     gateway --> companies
+    gateway --> billing
+    paddle[Paddle] -- payment webhooks --> billing
 
     generation -- jobs --> worker[generation worker]
     worker -- saves sets, reuses questions --> library
@@ -46,6 +48,8 @@ flowchart LR
     companies --> generation
     companies --> library
     companies --> rounds
+    companies -- candidate credits --> billing
+    generation -- preparations --> billing
 
     rounds -- answer.recorded --> redis[(Redis stream)]
     worker -- generation.completed / cancelled --> redis
@@ -62,6 +66,7 @@ flowchart LR
 | `generation` | The generation pipeline (LangGraph) run by an arq worker, topic review, re-generating single questions, the question verifier |
 | `rounds` | Practice rounds, progress and certificates, the follow-up chat, candidate interview sessions |
 | `companies` | Companies, admins, interviews and candidate invites |
+| `billing` | Credits, the Job Search Pass, free allowances and Paddle payments (webhooks); other services ask it before a paid action |
 | `notifications` | Consumes domain events from a Redis stream and sends emails through Resend (mailpit without a key) |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
@@ -141,6 +146,14 @@ Three settings in `.env` shape every generation:
 - `LLM_MODEL` (default `gpt-6-luna`): used for generation and the follow-up chat.
 
 Per-user rate limits (`GENERATION_LIMIT`, `LLM_LIMIT`) cap how much a single account can generate and chat.
+
+### Payments
+
+`billing` sells through [Paddle](https://www.paddle.com), which is the merchant of record (it handles VAT and sales tax). Companies buy candidate credits (the first 5 are free); learners get 1 free private preparation a month and can buy the Job Search Pass or 3 more preparations. To sell:
+
+1. In Paddle (start with the sandbox), create a product and price for each item in `services/billing/app/constants/products.py`, and a client-side token.
+2. Add a webhook destination for `transaction.completed` pointing at `https://<your domain>/api/billing/webhooks/paddle`.
+3. Set `PADDLE_ENVIRONMENT`, `PADDLE_CLIENT_TOKEN`, `PADDLE_WEBHOOK_SECRET` and the `PADDLE_PRICE_*` ids in `.env`, then restart billing. Locally, Paddle reaches the webhook only through a tunnel (for example `cloudflared tunnel --url http://localhost:8090`).
 
 ### Emails
 

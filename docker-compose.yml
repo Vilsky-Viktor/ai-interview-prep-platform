@@ -41,6 +41,7 @@ x-library-env: &library-env
   ROUNDS_URL: http://rounds:8000
   GENERATION_URL: http://generation:8000
   COMPANIES_URL: http://companies:8000
+  BILLING_URL: http://billing:8000
 
 x-rounds-env: &rounds-env
   <<: *firebase-env
@@ -56,8 +57,28 @@ x-rounds-env: &rounds-env
   LLM_MODEL: ${LLM_MODEL:-gpt-6-luna}
   LLM_WINDOW_SECONDS: ${LLM_WINDOW_SECONDS:-3600}
 
+x-billing-env: &billing-env
+  <<: *firebase-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/billing
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  PADDLE_ENVIRONMENT: ${PADDLE_ENVIRONMENT:-sandbox}
+  PADDLE_CLIENT_TOKEN: ${PADDLE_CLIENT_TOKEN:-}
+  PADDLE_WEBHOOK_SECRET: ${PADDLE_WEBHOOK_SECRET:-}
+  PADDLE_PRICE_CANDIDATES_10: ${PADDLE_PRICE_CANDIDATES_10:-}
+  PADDLE_PRICE_CANDIDATES_50: ${PADDLE_PRICE_CANDIDATES_50:-}
+  PADDLE_PRICE_CANDIDATES_200: ${PADDLE_PRICE_CANDIDATES_200:-}
+  PADDLE_PRICE_JOB_SEARCH_PASS: ${PADDLE_PRICE_JOB_SEARCH_PASS:-}
+  PADDLE_PRICE_GENERATIONS_3: ${PADDLE_PRICE_GENERATIONS_3:-}
+
+x-billing-source: &billing-source
+  - ./services/billing/app:/services/billing/app
+  - ./services/billing/migrations:/services/billing/migrations
+  - ./services/billing/alembic.ini:/services/billing/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
 x-companies-env: &companies-env
   <<: [*firebase-env, *email-limits]
+  BILLING_URL: http://billing:8000
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/companies
   REDIS_URL: redis://redis:6379
   SERVICE_SECRET: ${SERVICE_SECRET}
@@ -103,6 +124,7 @@ x-generation-env: &generation-env
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/generation
   REDIS_URL: redis://redis:6379
   LIBRARY_URL: http://library:8000
+  BILLING_URL: http://billing:8000
   SERVICE_SECRET: ${SERVICE_SECRET}
   QUESTIONS_PER_TOPIC: ${QUESTIONS_PER_TOPIC:-100}
   LLM_MODEL: ${LLM_MODEL:-gpt-6-luna}
@@ -299,6 +321,27 @@ services:
         condition: service_healthy
       rounds:
         condition: service_healthy
+
+  billing-migrate:
+    <<: *migrate
+    build:
+      context: .
+      dockerfile: services/billing/Dockerfile
+      target: dev
+    volumes: *billing-source
+    environment: *billing-env
+
+  billing:
+    <<: *service
+    build:
+      context: .
+      dockerfile: services/billing/Dockerfile
+      target: dev
+    volumes: *billing-source
+    environment: *billing-env
+    depends_on:
+      billing-migrate:
+        condition: service_completed_successfully
 
   frontend:
     restart: unless-stopped

@@ -10,6 +10,7 @@ def services() -> dict[str, str]:
         "companies": settings.companies_url,
         "rounds": settings.rounds_url,
         "generation": settings.generation_url,
+        "billing": settings.billing_url,
     }
 
 

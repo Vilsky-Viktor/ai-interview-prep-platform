@@ -9,7 +9,7 @@ import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { SUBMIT_HINT } from "@/constants/keys"
-import { apiErrorMessage, apiFetch } from "@/lib/api"
+import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import { signIn } from "@/lib/auth"
 import { isSubmitShortcut } from "@/lib/keys"
 import type { Generation } from "@/types/generation"
@@ -38,8 +38,21 @@ export function GoalForm() {
       })
       router.push(`/generate/${generation.id}`)
     } catch (error) {
+      const outOfPreparations =
+        error instanceof ApiError && error.status === 402
       toast.error(
-        apiErrorMessage(error, "Couldn't start the generation. Please try again.")
+        apiErrorMessage(
+          error,
+          "Couldn't start the generation. Please try again."
+        ),
+        outOfPreparations
+          ? {
+              action: {
+                label: "See plans",
+                onClick: () => router.push("/pricing"),
+              },
+            }
+          : undefined
       )
       setSubmitting(false)
     }
@@ -66,9 +79,7 @@ export function GoalForm() {
         className="max-h-72 min-h-40 resize-none border-0 bg-transparent p-2 text-base shadow-none focus-visible:ring-0 md:text-base dark:bg-transparent"
       />
       <div className="flex items-center justify-between gap-4 pt-2 pl-2">
-        <p className="text-xs text-muted-foreground">
-          {SUBMIT_HINT}
-        </p>
+        <p className="text-xs text-muted-foreground">{SUBMIT_HINT}</p>
         <Button
           type="submit"
           size="icon-lg"

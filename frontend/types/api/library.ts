@@ -15,6 +15,30 @@ export interface paths {
     get: operations["me_me_get"]
     put?: never
     post?: never
+    /**
+     * Delete Me
+     * @description Deletes the account and everything about it. A company the user alone owns goes too.
+     */
+    delete: operations["delete_me_me_delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/me/export": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Export Me
+     * @description Everything prepza holds about the user, as one JSON file to download.
+     */
+    get: operations["export_me_me_export_get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -1265,6 +1289,46 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["User"]
+        }
+      }
+    }
+  }
+  delete_me_me_delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  export_me_me_export_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": {
+            [key: string]: unknown
+          }
         }
       }
     }

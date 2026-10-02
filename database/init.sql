@@ -4,3 +4,4 @@ CREATE DATABASE library;
 CREATE DATABASE generation;
 CREATE DATABASE rounds;
 CREATE DATABASE companies;
+CREATE DATABASE billing;

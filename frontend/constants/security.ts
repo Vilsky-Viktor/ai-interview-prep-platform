@@ -6,6 +6,9 @@ export const FIREBASE_CONNECT_ORIGINS = [
   "https://apis.google.com",
 ]
 
+// Paddle's checkout runs in a frame from these, and Paddle.js talks to them.
+export const PADDLE_ORIGINS = ["https://*.paddle.com"]
+
 // Profile photos of Google accounts.
 export const ACCOUNT_IMAGE_ORIGINS = ["https://*.googleusercontent.com"]
 

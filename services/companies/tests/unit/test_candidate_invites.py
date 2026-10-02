@@ -1,9 +1,11 @@
 import uuid
 from datetime import UTC, datetime
 
+from fastapi import HTTPException
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.integrations import billing
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
@@ -43,6 +45,8 @@ def invite_setup(monkeypatch):
         created_at=datetime.now(UTC),
     )
     sent = []
+    invited = set()
+    used = []
 
     async def fake_interview(_interview_id):
         return interview
@@ -50,8 +54,16 @@ def invite_setup(monkeypatch):
     async def fake_company(_company_id):
         return company
 
-    async def fake_upsert(_interview_id, _email):
+    async def fake_upsert(_interview_id, email):
+        invited.add(email)
+
         return invite
+
+    async def fake_exists(_interview_id, email):
+        return email in invited
+
+    async def fake_use_candidate(company_id):
+        used.append(company_id)
 
     async def fake_publish(event_type, data):
         sent.append(data["email"])
@@ -59,24 +71,28 @@ def invite_setup(monkeypatch):
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(invites, "upsert", fake_upsert)
+    monkeypatch.setattr(invites, "exists", fake_exists)
+    monkeypatch.setattr(billing, "use_candidate", fake_use_candidate)
     monkeypatch.setattr(interviews_router, "publish", fake_publish)
     redis = FakeRedis()
     monkeypatch.setattr(interviews_router, "get_redis", lambda: redis)
 
-    return sent
+    return sent, used
 
 
 URL = f"/interviews/{INTERVIEW_ID}/candidates"
 
 
 def test_inviting_the_same_email_again_resends_the_invite(client, monkeypatch):
-    sent = invite_setup(monkeypatch)
+    sent, used = invite_setup(monkeypatch)
     url = URL
 
     first = client.post(url, json={"email": "Carol@example.com"})
     second = client.post(url, json={"email": "carol@example.com"})
 
     assert first.status_code == second.status_code == 201
+    # Only the first invite used a candidate credit; the resend was free.
+    assert used == [COMPANY_ID]
     assert first.json()["id"] == second.json()["id"]
     assert sent == ["carol@example.com", "carol@example.com"]
 
@@ -84,7 +100,7 @@ def test_inviting_the_same_email_again_resends_the_invite(client, monkeypatch):
 
 
 def test_one_address_gets_at_most_three_invites_a_day(client, monkeypatch):
-    sent = invite_setup(monkeypatch)
+    sent, _ = invite_setup(monkeypatch)
 
     codes = [client.post(URL, json={"email": "carol@example.com"}).status_code for _ in range(4)]
     other = client.post(URL, json={"email": "dave@example.com"})
@@ -93,3 +109,19 @@ def test_one_address_gets_at_most_three_invites_a_day(client, monkeypatch):
     assert codes == [201, 201, 201, 429]
     assert other.status_code == 201
     assert len(sent) == 4
+
+
+def test_a_company_without_credits_cannot_invite_new_candidates(client, monkeypatch):
+    sent, _ = invite_setup(monkeypatch)
+
+    async def no_credits(company_id):
+        raise HTTPException(402, "No candidate credits left.")
+
+    monkeypatch.setattr(billing, "use_candidate", no_credits)
+
+    response = client.post(URL, json={"email": "erin@example.com"})
+    app.dependency_overrides.clear()
+
+    assert response.status_code == 402
+    assert response.json()["detail"] == "No candidate credits left."
+    assert sent == []

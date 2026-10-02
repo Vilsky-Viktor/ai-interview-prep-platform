@@ -35,10 +35,29 @@ export interface paths {
     post?: never
     /**
      * Delete Company
-     * @description Only the owner can do it. Each interview's results and questions go first, so a
-     *     failure leaves the company to delete again.
+     * @description Only the owner can do it.
      */
     delete: operations["delete_company_companies__company_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/companies/{company_id}/credits": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Credits
+     * @description Candidates the company can still invite; any member may see it.
+     */
+    get: operations["get_credits_companies__company_id__credits_get"]
+    put?: never
+    post?: never
+    delete?: never
     options?: never
     head?: never
     patch?: never
@@ -396,6 +415,43 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/users/{user_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    /**
+     * Delete User
+     * @description Part of deleting an account (library coordinates it); safe to repeat.
+     */
+    delete: operations["delete_user_internal_users__user_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/users/{user_id}/export": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Export User */
+    get: operations["export_user_internal_users__user_id__export_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/health": {
     parameters: {
       query?: never
@@ -485,6 +541,11 @@ export interface components {
     CompanyCreate: {
       /** Name */
       name: string
+    }
+    /** CompanyCreditsOut */
+    CompanyCreditsOut: {
+      /** Candidate Credits */
+      candidate_credits: number
     }
     /** CompanyOut */
     CompanyOut: {
@@ -876,6 +937,37 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_credits_companies__company_id__credits_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CompanyCreditsOut"]
+        }
       }
       /** @description Validation Error */
       422: {
@@ -1663,6 +1755,72 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["InviteStartOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  delete_user_internal_users__user_id__delete: {
+    parameters: {
+      query: {
+        email: string
+      }
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  export_user_internal_users__user_id__export_get: {
+    parameters: {
+      query: {
+        email: string
+      }
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": {
+            [key: string]: unknown
+          }
         }
       }
       /** @description Validation Error */

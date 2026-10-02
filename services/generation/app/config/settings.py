@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     database_url: str
     redis_url: str
     library_url: str
+    billing_url: str
     service_secret: str
     questions_per_topic: int = Field(default=100, gt=0)
     llm_model: str = "gpt-6-luna"

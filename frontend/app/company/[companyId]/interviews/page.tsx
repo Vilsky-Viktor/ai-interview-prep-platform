@@ -4,6 +4,7 @@ import { cookies } from "next/headers"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 
+import { CompanyCredits as CreditsPanel } from "@/components/company/company-credits"
 import { CompanyHeader } from "@/components/company/company-header"
 import { InterviewList } from "@/components/company/interview-list"
 import { SignInPrompt } from "@/components/sign-in-prompt"
@@ -11,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
+import type { Catalog, CompanyCredits } from "@/types/billing"
 import type { Company, Interview } from "@/types/company"
 
 export const metadata: Metadata = { title: "Interviews" }
@@ -25,11 +27,17 @@ export default async function InterviewsPage({
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
     : null
-  const interviews = company
-    ? await serverFetch<Interview[]>(
-        `/companies/interviews?company_id=${companyId}&limit=${PAGE_SIZE}`
-      )
-    : null
+  const [interviews, credits, catalog] = company
+    ? await Promise.all([
+        serverFetch<Interview[]>(
+          `/companies/interviews?company_id=${companyId}&limit=${PAGE_SIZE}`
+        ),
+        serverFetch<CompanyCredits>(
+          `/companies/companies/${companyId}/credits`
+        ),
+        serverFetch<Catalog>("/billing/catalog"),
+      ])
+    : [null, null, null]
 
   if (!signedIn) {
     return (
@@ -61,6 +69,14 @@ export default async function InterviewsPage({
           </Button>
         }
       />
+
+      {credits != null && catalog && (
+        <CreditsPanel
+          companyId={companyId}
+          credits={credits.candidate_credits}
+          catalog={catalog}
+        />
+      )}
 
       {interviews && (
         <InterviewList companyId={companyId} initial={interviews} />

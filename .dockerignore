@@ -5,6 +5,7 @@
 !services/generation
 !services/rounds
 !services/companies
+!services/billing
 **/.venv
 **/__pycache__
 **/.pytest_cache

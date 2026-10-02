@@ -34,3 +34,7 @@ class CompanyOut(BaseModel):
 
 class MemberIn(BaseModel):
     email: EmailStr
+
+
+class CompanyCreditsOut(BaseModel):
+    candidate_credits: int

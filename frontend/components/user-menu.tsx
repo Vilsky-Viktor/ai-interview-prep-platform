@@ -1,6 +1,12 @@
 "use client"
 
-import { DownloadIcon, LogOutIcon, Trash2Icon } from "lucide-react"
+import {
+  CreditCardIcon,
+  DownloadIcon,
+  LogOutIcon,
+  Trash2Icon,
+} from "lucide-react"
+import Link from "next/link"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -78,6 +84,13 @@ export function UserMenu() {
             </DropdownMenuLabel>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
+          <DropdownMenuItem
+            className="px-3 py-2"
+            render={<Link href="/pricing" />}
+          >
+            <CreditCardIcon />
+            Plans and pricing
+          </DropdownMenuItem>
           <DropdownMenuItem className="px-3 py-2" onClick={download}>
             <DownloadIcon />
             Download my data

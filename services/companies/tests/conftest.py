@@ -6,6 +6,7 @@ if os.getenv("INTEGRATION_TESTS"):
     os.environ["DATABASE_URL"] += "_test"
 
 os.environ.setdefault("FIREBASE_PROJECT_ID", "demo-test")
+os.environ.setdefault("BILLING_URL", "http://billing:8000")
 os.environ.setdefault("DATABASE_URL", "postgresql://test:test@localhost/test")
 os.environ.setdefault("REDIS_URL", "redis://localhost:6379")
 os.environ.setdefault("SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")

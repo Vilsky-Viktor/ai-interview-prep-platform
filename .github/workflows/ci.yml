@@ -31,6 +31,7 @@ jobs:
           - services/rounds
           - services/companies
           - services/notifications
+          - services/billing
           - packages/common
     defaults:
       run:
@@ -75,6 +76,7 @@ jobs:
           - { name: generation, context: ., file: services/generation/Dockerfile }
           - { name: rounds, context: ., file: services/rounds/Dockerfile }
           - { name: companies, context: ., file: services/companies/Dockerfile }
+          - { name: billing, context: ., file: services/billing/Dockerfile }
           - { name: notifications, context: services/notifications, file: services/notifications/Dockerfile }
           - { name: frontend, context: frontend, file: frontend/Dockerfile }
     steps:
