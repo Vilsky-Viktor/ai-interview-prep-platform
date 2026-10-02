@@ -17,6 +17,7 @@ from app.schemas.generation import (
     GenerationSummary,
     ReviewRequest,
 )
+from app.services.budget import use_daily_budget
 from app.services.cancel import cancel_generation
 from app.services.retry import retry_generation
 from app.services.review import submit_review
@@ -48,6 +49,7 @@ async def create_generation(
         settings.generation_limit,
         settings.generation_window_seconds,
     )
+    await use_daily_budget()
     await billing.use_generation(user.uid)
 
     generation = await generations.create(user.uid, body.text, body.kind, body.company_id)

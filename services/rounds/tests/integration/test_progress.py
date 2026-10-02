@@ -20,7 +20,8 @@ async def answer_all(round_, correct):
                 option_index=option_index(question, correct),
                 correct=correct,
                 score=100 if correct else 0,
-            )
+            ),
+            ("answer.recorded", {"question_id": question["id"]}),
         )
 
     return await rounds.get(round_.id)

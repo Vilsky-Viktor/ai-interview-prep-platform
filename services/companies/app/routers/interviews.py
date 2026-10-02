@@ -4,11 +4,9 @@ import httpx
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
-from prepza_common.pubsub import publish
 from prepza_common.rate_limit import hit_emails
 
 from app.config.settings import settings
-from app.constants.events import CANDIDATE_INVITED
 from app.constants.invites import InviteStatus
 from app.constants.roles import Role
 from app.helpers.interviews import (
@@ -28,6 +26,7 @@ from app.schemas.interviews import (
     TitleIn,
 )
 from app.schemas.invites import CandidateIn, CandidateOut
+from app.services import outbox as outbox_service
 from app.services.access import require_company, require_manager
 from app.storage import interviews, invites
 
@@ -166,17 +165,9 @@ async def invite_candidate(
         settings.email_daily_limit,
         settings.email_recipient_daily_limit,
     )
-    invite = await invites.upsert(interview.id, email)
     title = await interview_title(interview) or "an interview"
-    await publish(
-        CANDIDATE_INVITED,
-        {
-            "email": invite.email,
-            "token": invite.token,
-            "title": title,
-            "company": company.name,
-        },
-    )
+    invite = await invites.upsert(interview.id, email, title, company.name)
+    await outbox_service.flush_quietly()
 
     return CandidateOut(
         id=invite.id, email=invite.email, status=invite.status, created_at=invite.created_at

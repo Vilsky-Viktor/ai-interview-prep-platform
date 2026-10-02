@@ -61,26 +61,6 @@ def test_sweep_deletes_checkpoints_of_finished_generations(monkeypatch):
     assert checkpointer.deleted == ["done-1", "cancelled-1"]
 
 
-def test_expired_reviews_remove_their_interviews(monkeypatch):
-    async def fake_fail_stuck(before, error):
-        return 0
-
-    interview = Generation(id=uuid.uuid4(), kind="interview", status="cancelled")
-    preparation = Generation(id=uuid.uuid4(), kind="preparation", status="cancelled")
-    published = []
-
-    async def fake_publish(event_type, data):
-        published.append((event_type, data))
-
-    monkeypatch.setattr(generations, "fail_stuck", fake_fail_stuck)
-    monkeypatch.setattr(schedules.pubsub, "publish", fake_publish)
-    no_finished_threads(monkeypatch, expired=[interview, preparation])
-
-    asyncio.run(schedules.sweep(FakeCheckpointer()))
-
-    assert published == [("generation.cancelled", {"generation_id": str(interview.id)})]
-
-
 def fake_session(monkeypatch, statements, rowcount=0):
     class FakeSession:
         async def __aenter__(self):

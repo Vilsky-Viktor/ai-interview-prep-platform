@@ -2,7 +2,6 @@ import uuid
 from contextlib import aclosing
 
 from langgraph.types import Command
-from prepza_common import pubsub
 
 from app.constants.events import GENERATION_COMPLETED
 from app.constants.generation import MAX_CONCURRENCY, RECURSION_LIMIT
@@ -12,6 +11,7 @@ from app.helpers.payload import build_preparation
 from app.helpers.progress import track_progress
 from app.integrations import library
 from app.models.generation import Generation
+from app.services import outbox as outbox_service
 from app.storage import generations
 
 
@@ -75,11 +75,9 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
     else:
         set_id = await library.create_preparation(payload)
 
-    await generations.update(generation.id, status=Status.DONE, preparation_id=set_id)
-
-    if generation.kind == GenerationKind.INTERVIEW:
-        # Companies stores the set and title, so its pages don't have to ask for them.
-        await pubsub.publish(
+    # Companies stores an interview's set and title, so its pages don't have to ask for them.
+    completed = (
+        (
             GENERATION_COMPLETED,
             {
                 "generation_id": str(generation.id),
@@ -88,3 +86,10 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
                 "title": payload.title,
             },
         )
+        if generation.kind == GenerationKind.INTERVIEW
+        else None
+    )
+    await generations.update(
+        generation.id, event=completed, status=Status.DONE, preparation_id=set_id
+    )
+    await outbox_service.flush_quietly()

@@ -13,6 +13,7 @@ from app.schemas.generation import GenerationOut, InterviewGenerationCreate, Rev
 from app.schemas.regenerate import RegeneratedOut, RegenerateIn
 from app.schemas.verify import VerifyIn
 from app.service_auth import ServiceCaller
+from app.services.budget import use_daily_budget
 from app.services.cancel import cancel_generation
 from app.services.regenerate import regenerate
 from app.services.retry import retry_generation
@@ -42,6 +43,7 @@ async def create_interview_generation(
         settings.generation_limit,
         settings.generation_window_seconds,
     )
+    await use_daily_budget()
     generation = await generations.create(
         body.owner_uid, body.text, GenerationKind.INTERVIEW, body.company_id
     )

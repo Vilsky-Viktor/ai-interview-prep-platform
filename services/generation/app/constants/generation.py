@@ -64,3 +64,11 @@ DRAFT_CACHE_SECONDS = 30 * 24 * 60 * 60
 LLM_RATE_KEY = "rate:llm"
 # Connections of the checkpointer's own pool, on top of the SQLAlchemy pool.
 CHECKPOINTER_POOL_SIZE = 4
+
+# The daily generation budget: its counter, kept a little over a day, and the refusal.
+BUDGET_KEY = "budget:generations"
+BUDGET_KEY_SECONDS = 2 * 24 * 60 * 60
+GENERATIONS_PAUSED = (
+    "We've reached today's limit for new generations. Please try again tomorrow; practice and "
+    "interviews keep working."
+)

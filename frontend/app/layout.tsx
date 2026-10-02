@@ -8,6 +8,8 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
+import { SITE_NAME } from "@/constants/seo"
+import { siteUrl } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" })
@@ -20,10 +22,16 @@ const poppins = Poppins({
   variable: "--font-poppins",
 })
 
+const description =
+  "Prepare for interviews with AI-generated multiple-choice questions, practice rounds and certificates."
+
 export const metadata: Metadata = {
-  title: { default: "prepza.", template: "%s · prepza." },
-  description:
-    "Prepare for interviews with AI-generated multiple-choice questions, practice rounds and certificates.",
+  // Absolute links for shared pages' previews and canonical addresses.
+  metadataBase: new URL(siteUrl()),
+  title: { default: SITE_NAME, template: `%s · ${SITE_NAME}` },
+  description,
+  openGraph: { siteName: SITE_NAME, type: "website" },
+  twitter: { card: "summary" },
 }
 
 export default async function RootLayout({

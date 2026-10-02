@@ -56,12 +56,13 @@ export async function apiFetch<T>(
   return response.json()
 }
 
-/** The service's own message for nothing left to use (402), rate limits (429) and invalid
-input (422), whose rules live in the backend; the fallback for anything else. */
+/** The service's own message for nothing left to use (402), rate limits (429), invalid
+input (422) and a temporary pause (503), whose rules live in the backend; the fallback for
+anything else. */
 export function apiErrorMessage(error: unknown, fallback: string): string {
   if (
     error instanceof ApiError &&
-    (error.status === 402 || error.status === 429 || error.status === 422)
+    [402, 422, 429, 503].includes(error.status)
   ) {
     return error.message
   }

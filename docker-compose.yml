@@ -8,6 +8,12 @@ x-firebase-env: &firebase-env
   FIREBASE_AUTH_EMULATOR_HOST: ${FIREBASE_AUTH_EMULATOR_HOST}
   # Development only: serves /docs and /openapi.json, which `pnpm api-types` reads.
   API_DOCS: "true"
+  # The key of each service, for tokens calling it; in Google Cloud each service has its own.
+  LIBRARY_SERVICE_SECRET: ${SERVICE_SECRET}
+  GENERATION_SERVICE_SECRET: ${SERVICE_SECRET}
+  ROUNDS_SERVICE_SECRET: ${SERVICE_SECRET}
+  COMPANIES_SERVICE_SECRET: ${SERVICE_SECRET}
+  BILLING_SERVICE_SECRET: ${SERVICE_SECRET}
   # Events go through the Pub/Sub emulator locally; Google Cloud uses the real service.
   GOOGLE_CLOUD_PROJECT: ${FIREBASE_PROJECT_ID}
   PUBSUB_EMULATOR_HOST: pubsub:8085
@@ -136,6 +142,7 @@ x-generation-env: &generation-env
   LLM_MODEL: ${LLM_MODEL:-gpt-6-luna}
   GENERATION_LIMIT: ${GENERATION_LIMIT:-20}
   GENERATION_WINDOW_SECONDS: ${GENERATION_WINDOW_SECONDS:-86400}
+  DAILY_GENERATION_LIMIT: ${DAILY_GENERATION_LIMIT:-0}
   LLM_REQUESTS_PER_SECOND: ${LLM_REQUESTS_PER_SECOND:-8}
 
 services:
@@ -229,9 +236,10 @@ services:
   scheduler:
     restart: unless-stopped
     image: alpine:3.22
-    command: sh -c "apk add --no-cache curl >/dev/null && crond -f -l 8"
+    # Cron reads only a crontab owned by root, so the mounted one is copied into place.
+    command: sh -c "apk add --no-cache curl >/dev/null && cp /crontab /etc/crontabs/root && crond -f -l 2"
     volumes:
-      - ./scripts/crontab:/etc/crontabs/root:ro
+      - ./scripts/crontab:/crontab:ro
     depends_on:
       generation-worker:
         condition: service_healthy
@@ -380,6 +388,7 @@ services:
     environment:
       # Server-side rendering calls the API through the gateway.
       API_URL: http://gateway
+      SITE_URL: ${SITE_URL:-http://localhost:8090}
       NEXT_PUBLIC_FIREBASE_API_KEY: ${NEXT_PUBLIC_FIREBASE_API_KEY}
       NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}
       NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${NEXT_PUBLIC_FIREBASE_PROJECT_ID}

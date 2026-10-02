@@ -14,7 +14,7 @@ def test_deleting_a_user_removes_their_traces_and_recounts_ratings(run):
         await joins.join(theirs, "gone")
         await feedback.rate_preparation(theirs, "gone", 5)
         await feedback.rate_preparation(theirs, "stays", 3)
-        await shares.upsert(theirs, "gone@example.com", "owner")
+        await shares.upsert(theirs, "gone@example.com", "owner", "Theirs", "Owner")
         owned = await accounts.owned_preparations("owner")
         exported = await accounts.export("gone", "gone@example.com")
 

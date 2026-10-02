@@ -2,9 +2,12 @@ import secrets
 import uuid
 from datetime import UTC, datetime
 
+from prepza_common import outbox
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 
+from app.constants.events import PREPARATION_SHARED
+from app.models.outbox import OutboxEvent
 from app.models.sets import QuestionSet
 from app.models.sharing import ShareInvite
 from app.storage import stats
@@ -12,8 +15,11 @@ from app.storage.db import Session
 from app.storage.joins import join_statement
 
 
-async def upsert(set_id: uuid.UUID, email: str, invited_by: str) -> ShareInvite:
-    """Creates the invite, or returns the existing one so it can be sent again."""
+async def upsert(
+    set_id: uuid.UUID, email: str, invited_by: str, title: str, inviter: str
+) -> ShareInvite:
+    """Creates the invite, or returns the existing one so it can be sent again, and saves the
+    email's event with it."""
     statement = (
         insert(ShareInvite)
         .values(
@@ -29,11 +35,18 @@ async def upsert(set_id: uuid.UUID, email: str, invited_by: str) -> ShareInvite:
 
     async with Session() as session:
         await session.execute(statement)
-        await session.commit()
-
-        return await session.scalar(
+        invite = await session.scalar(
             select(ShareInvite).where(ShareInvite.set_id == set_id, ShareInvite.email == email)
         )
+        outbox.add(
+            session,
+            OutboxEvent,
+            PREPARATION_SHARED,
+            {"email": invite.email, "token": invite.token, "title": title, "inviter": inviter},
+        )
+        await session.commit()
+
+        return invite
 
 
 async def list_for_set(set_id: uuid.UUID, offset: int, limit: int) -> list[ShareInvite]:

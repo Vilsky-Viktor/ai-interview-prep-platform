@@ -8,7 +8,8 @@ from app.helpers.sessions import answer_seconds, next_session_question
 from app.models.sessions import Session
 from app.schemas.rounds import AnswerCreate
 from app.schemas.sessions import SessionAnswerResult
-from app.services.answers import announce, checked_answer
+from app.services import outbox as outbox_service
+from app.services.answers import checked_answer, recorded
 from app.storage import sessions
 
 
@@ -33,10 +34,10 @@ async def submit_session_answer(row: Session, body: AnswerCreate) -> SessionAnsw
     answer.session_id = row.id
     answer.seconds = answer_seconds(row.question_shown_at, datetime.now(UTC))
 
-    if not await sessions.add_answer(answer):
+    if not await sessions.add_answer(answer, recorded(answer, question)):
         raise HTTPException(status.HTTP_409_CONFLICT, "Question already answered")
 
-    await announce(answer, question)
+    await outbox_service.flush_quietly()
 
     scores = [previous.score for previous in row.answers] + [answer.score]
     result = SessionAnswerResult(

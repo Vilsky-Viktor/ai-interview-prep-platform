@@ -17,6 +17,7 @@ from app.routers import (
     internal_accounts,
     preparations,
     rounds,
+    schedules,
     session_feedback,
     sessions,
     topics,
@@ -55,6 +56,7 @@ app.include_router(preparations.router)
 app.include_router(chat.router)
 app.include_router(certificates.router)
 app.include_router(internal.router)
+app.include_router(schedules.router)
 app.include_router(internal_accounts.router)
 
 

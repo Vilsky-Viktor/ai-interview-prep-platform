@@ -19,7 +19,8 @@ def test_deleting_a_user_removes_rounds_progress_certificates_and_sessions(run):
                 option_index=option_index(question, True),
                 correct=True,
                 score=100,
-            )
+            ),
+            ("answer.recorded", {"question_id": question["id"]}),
         )
         await progress.rebuild("gone", [uuid.UUID(question["id"])])
         certificate = Certificate(

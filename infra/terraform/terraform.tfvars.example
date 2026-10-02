@@ -1,0 +1,18 @@
+# Copy to terraform.tfvars (ignored by git) and fill in.
+project_id = "prepza-prod"
+region     = "europe-west1"
+domain     = "prepza.ai"
+image_tag  = "first"
+
+mail_from  = "prepza. <no-reply@prepza.ai>"
+sentry_dsn = ""
+
+paddle_environment  = "sandbox"
+paddle_client_token = ""
+paddle_prices = {
+  candidates_10   = ""
+  candidates_50   = ""
+  candidates_200  = ""
+  job_search_pass = ""
+  generations_3   = ""
+}

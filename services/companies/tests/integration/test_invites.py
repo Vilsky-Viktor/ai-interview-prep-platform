@@ -13,8 +13,8 @@ async def interview():
 def test_inviting_the_same_address_again_returns_the_same_invite(run):
     async def scenario():
         found = await interview()
-        first = await invites.upsert(found.id, "Carol@Example.com")
-        again = await invites.upsert(found.id, "carol@example.com")
+        first = await invites.upsert(found.id, "Carol@Example.com", "Backend", "Acme")
+        again = await invites.upsert(found.id, "carol@example.com", "Backend", "Acme")
 
         return first, again
 
@@ -28,7 +28,7 @@ def test_inviting_the_same_address_again_returns_the_same_invite(run):
 def test_an_invite_moves_from_invited_to_in_process_to_finished(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "dave@example.com")
+        invite = await invites.upsert(found.id, "dave@example.com", "Backend", "Acme")
         await invites.start(invite, "dave-uid")
         started, _ = await invites.get_by_token(invite.token)
         await invites.set_status([invite.id], InviteStatus.FINISHED)

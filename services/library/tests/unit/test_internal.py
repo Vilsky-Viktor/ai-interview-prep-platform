@@ -22,7 +22,9 @@ PAYLOAD = {
 def token(secret="test-secret-that-is-at-least-32-bytes", lifetime=60):
     exp = datetime.now(UTC) + timedelta(seconds=lifetime)
 
-    return jwt.encode({"iss": "generation", "exp": exp}, secret, algorithm="HS256")
+    return jwt.encode(
+        {"iss": "generation", "aud": "library", "exp": exp}, secret, algorithm="HS256"
+    )
 
 
 def post(client, value):

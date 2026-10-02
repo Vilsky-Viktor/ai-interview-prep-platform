@@ -11,6 +11,7 @@ from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.routers import interviews as interviews_router
+from app.services import outbox as outbox_service
 from app.storage import companies, interviews, invites
 from tests.unit.fake_redis import FakeRedis
 
@@ -54,7 +55,9 @@ def invite_setup(monkeypatch):
     async def fake_company(_company_id):
         return company
 
-    async def fake_upsert(_interview_id, email):
+    async def fake_upsert(_interview_id, email, title, company):
+        # The storage saves the email's event in the invite's transaction.
+        sent.append(email)
         invited.add(email)
 
         return invite
@@ -65,15 +68,15 @@ def invite_setup(monkeypatch):
     async def fake_use_candidate(company_id):
         used.append(company_id)
 
-    async def fake_publish(event_type, data):
-        sent.append(data["email"])
+    async def no_flush():
+        pass
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(invites, "upsert", fake_upsert)
     monkeypatch.setattr(invites, "exists", fake_exists)
     monkeypatch.setattr(billing, "use_candidate", fake_use_candidate)
-    monkeypatch.setattr(interviews_router, "publish", fake_publish)
+    monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
     redis = FakeRedis()
     monkeypatch.setattr(interviews_router, "get_redis", lambda: redis)
 

@@ -11,7 +11,7 @@ from app.service_auth import service_token
 async def get_set(set_id: UUID) -> dict | None:
     response = await http.get_client().get(
         f"{settings.library_url}/internal/sets/{set_id}",
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:
@@ -26,7 +26,7 @@ async def get_question_texts(set_id: UUID) -> dict[str, str] | None:
     """Current text per question id of a set, without answers."""
     response = await http.get_client().get(
         f"{settings.library_url}/internal/sets/{set_id}/question-texts",
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:
@@ -42,7 +42,7 @@ async def get_topic_questions(topic_id: UUID, user_id: str) -> TopicQuestions | 
     response = await http.get_client().get(
         f"{settings.library_url}/internal/topics/{topic_id}",
         params={"user_id": user_id},
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:

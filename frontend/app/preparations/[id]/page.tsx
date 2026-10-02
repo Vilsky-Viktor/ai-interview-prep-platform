@@ -21,6 +21,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { formatDate, plural } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
+import { pageMetadata } from "@/lib/site"
 import type { PreparationDetail } from "@/types/preparation"
 import type { TopicProgress as Progressed } from "@/types/round"
 
@@ -33,9 +34,18 @@ async function getPreparation(id: string) {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const preparation = await getPreparation((await params).id)
+  const { id } = await params
+  const preparation = await getPreparation(id)
 
-  return { title: preparation?.title ?? "Preparation" }
+  if (!preparation) {
+    return { title: "Preparation" }
+  }
+
+  return pageMetadata(
+    preparation.title,
+    `Interview preparation for ${preparation.title}: ${plural(preparation.topic_count, "topic")} of multiple-choice questions, with practice rounds and certificates.`,
+    `/preparations/${id}`
+  )
 }
 
 export default async function PreparationPage({ params }: PageProps) {

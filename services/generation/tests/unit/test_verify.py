@@ -177,7 +177,9 @@ def test_a_deleted_question_is_skipped(monkeypatch):
 def test_verify_endpoint_queues_the_worker_job(client, queued):
     exp = datetime.now(UTC) + timedelta(seconds=60)
     service_token = jwt.encode(
-        {"iss": "library", "exp": exp}, "test-secret-that-is-at-least-32-bytes", algorithm="HS256"
+        {"iss": "library", "aud": "generation", "exp": exp},
+        "test-secret-that-is-at-least-32-bytes",
+        algorithm="HS256",
     )
 
     response = client.post(

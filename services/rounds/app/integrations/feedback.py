@@ -11,7 +11,7 @@ async def _request(method: str, path: str, **kwargs) -> httpx.Response:
     return await http.get_client().request(
         method,
         f"{settings.library_url}/internal/questions{path}",
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
         **kwargs,
     )
 

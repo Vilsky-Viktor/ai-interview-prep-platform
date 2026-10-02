@@ -5,6 +5,7 @@ import { CopyLinkButton } from "@/components/copy-link-button"
 import { Wordmark } from "@/components/wordmark"
 import { formatDate } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
+import { pageMetadata } from "@/lib/site"
 import type { Certificate } from "@/types/round"
 
 type PageProps = { params: Promise<{ id: string }> }
@@ -14,16 +15,18 @@ async function getCertificate(id: string) {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const certificate = await getCertificate((await params).id)
+  const { id } = await params
+  const certificate = await getCertificate(id)
 
   if (!certificate) {
     return { title: "Certificate" }
   }
 
-  return {
-    title: `${certificate.user_name} · ${certificate.topic_title}`,
-    description: `${certificate.user_name} completed ${certificate.topic_title} with a score of ${certificate.score}%.`,
-  }
+  return pageMetadata(
+    `${certificate.user_name} · ${certificate.topic_title}`,
+    `${certificate.user_name} completed ${certificate.topic_title} with a score of ${certificate.score}%.`,
+    `/certificates/${id}`
+  )
 }
 
 export default async function CertificatePage({ params }: PageProps) {

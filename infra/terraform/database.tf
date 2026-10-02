@@ -1,0 +1,87 @@
+# One Postgres instance holding each service's database. Cloud Run reaches it through the
+# built-in Cloud SQL connector (a Unix socket), so it needs no private network.
+resource "google_sql_database_instance" "main" {
+  name             = "prepza"
+  database_version = "POSTGRES_17"
+  region           = var.region
+
+  settings {
+    tier              = var.db_tier
+    edition           = "ENTERPRISE"
+    availability_type = var.db_high_availability ? "REGIONAL" : "ZONAL"
+
+    backup_configuration {
+      enabled                        = true
+      point_in_time_recovery_enabled = true
+      start_time                     = "02:00"
+
+      backup_retention_settings {
+        retained_backups = 14
+      }
+    }
+
+    database_flags {
+      name  = "max_connections"
+      value = tostring(local.db_max_connections)
+    }
+
+    insights_config {
+      query_insights_enabled = true
+    }
+  }
+
+  deletion_protection = true
+
+  depends_on = [google_project_service.apis]
+}
+
+resource "google_sql_database" "service" {
+  for_each = toset(local.databases)
+  name     = each.value
+  instance = google_sql_database_instance.main.name
+}
+
+resource "random_password" "database" {
+  length  = 32
+  special = false
+}
+
+resource "google_sql_user" "prepza" {
+  name     = "prepza"
+  instance = google_sql_database_instance.main.name
+  password = random_password.database.result
+}
+
+# Each service's connection string, with the password, kept in Secret Manager.
+resource "google_secret_manager_secret" "database_url" {
+  for_each  = toset(local.databases)
+  secret_id = "database-url-${each.value}"
+
+  replication {
+    auto {}
+  }
+
+  depends_on = [google_project_service.apis]
+}
+
+resource "google_secret_manager_secret_version" "database_url" {
+  for_each    = toset(local.databases)
+  secret      = google_secret_manager_secret.database_url[each.value].id
+  secret_data = "postgresql://prepza:${random_password.database.result}@/${each.value}?host=/cloudsql/${google_sql_database_instance.main.connection_name}"
+}
+
+locals {
+  db_max_connections = 200
+  # Kept free for migrations, Query Insights and an admin's session.
+  db_reserved_connections = 20
+  db_connections_at_peak  = sum([for service in local.services : service.max * service.connections])
+}
+
+# Fails the plan if instance limits could open more connections than Postgres allows; raise
+# db_tier (and db_max_connections) or add PgBouncer before raising a service's `max`.
+check "database_connections" {
+  assert {
+    condition     = local.db_connections_at_peak <= local.db_max_connections - local.db_reserved_connections
+    error_message = "Services at their instance limits could open ${local.db_connections_at_peak} database connections; the budget is ${local.db_max_connections - local.db_reserved_connections}."
+  }
+}

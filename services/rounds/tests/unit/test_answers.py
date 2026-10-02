@@ -3,7 +3,7 @@ import uuid
 
 import pytest
 from fastapi import HTTPException
-from prepza_common import pubsub
+from prepza_common import outbox
 
 from app.helpers.rounds import next_question
 from app.models.rounds import Answer, Round
@@ -30,23 +30,27 @@ def make_round(status: str = "in_progress") -> Round:
 
 
 @pytest.fixture(autouse=True)
-def published(monkeypatch):
-    sent = []
+def flushed(monkeypatch):
+    """The outbox flush after an answer, without a database."""
+    calls = []
 
-    async def publish(event_type, data):
-        sent.append((event_type, data))
+    async def flush(sessionmaker, model):
+        calls.append(model)
 
-    monkeypatch.setattr(pubsub, "publish", publish)
+        return 0
 
-    return sent
+    monkeypatch.setattr(outbox, "flush", flush)
+
+    return calls
 
 
 @pytest.fixture(autouse=True)
-def rebuilt(monkeypatch):
+def rebuilt(monkeypatch, saved_events):
     calls = []
 
-    async def add_answer(answer):
+    async def add_answer(answer, event):
         answer.id = uuid.uuid4()
+        saved_events.append(event)
 
         return True
 
@@ -118,10 +122,16 @@ def test_answer_counts_towards_progress_before_the_round_finishes(rebuilt):
     assert rebuilt == [("u1", [Q1])]
 
 
-def test_answer_is_announced_with_the_picked_option(published):
+@pytest.fixture
+def saved_events():
+    return []
+
+
+def test_the_answers_event_is_saved_with_it_and_published_right_after(saved_events, flushed):
     asyncio.run(submit_answer(make_round(), AnswerCreate(question_id=Q1, option_index=0)))
 
-    assert published == [
+    assert len(flushed) == 1
+    assert saved_events == [
         (
             "answer.recorded",
             {
@@ -134,11 +144,12 @@ def test_answer_is_announced_with_the_picked_option(published):
     ]
 
 
-def test_answering_works_even_if_the_event_cannot_be_published(monkeypatch):
-    async def redis_down(event_type, data):
-        raise ConnectionError("redis is down")
+def test_answering_works_even_if_the_event_cannot_be_published_yet(monkeypatch):
+    async def pubsub_down(sessionmaker, model):
+        raise ConnectionError("Pub/Sub is down")
 
-    monkeypatch.setattr(pubsub, "publish", redis_down)
+    # The event stays in the outbox for the scheduled flush.
+    monkeypatch.setattr(outbox, "flush", pubsub_down)
 
     result = asyncio.run(submit_answer(make_round(), AnswerCreate(question_id=Q1, option_index=1)))
 

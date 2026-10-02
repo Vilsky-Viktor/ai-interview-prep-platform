@@ -20,6 +20,7 @@ from app.routers import (
     me,
     preparations,
     questions,
+    schedules,
     shares,
 )
 from app.storage.db import ping as ping_database
@@ -50,6 +51,7 @@ app.include_router(shares.router)
 app.include_router(questions.router)
 app.include_router(library.router)
 app.include_router(internal.router)
+app.include_router(schedules.router)
 app.include_router(internal_events.router)
 app.include_router(internal_feedback.router)
 app.include_router(internal_quality.router)

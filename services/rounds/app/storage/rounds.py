@@ -1,6 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
+from prepza_common import outbox
 from sqlalchemy import delete, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
@@ -8,6 +9,7 @@ from sqlalchemy.orm import selectinload
 from app.constants.rounds import RoundStatus
 from app.helpers.rounds import round_questions
 from app.models.certificates import Certificate
+from app.models.outbox import OutboxEvent
 from app.models.progress import QuestionProgress
 from app.models.rounds import Answer, Round
 from app.schemas.library import TopicQuestions
@@ -84,10 +86,12 @@ async def list_for_topic(user_id: str, topic_id: uuid.UUID, offset: int, limit: 
         return list(await session.scalars(query))
 
 
-async def add_answer(answer: Answer) -> bool:
-    """Stores the answer; False if this question was already answered in the round."""
+async def add_answer(answer: Answer, event: tuple[str, dict]) -> bool:
+    """Stores the answer with its event; False if this question was already answered in the
+    round."""
     async with Session() as session:
         session.add(answer)
+        outbox.add(session, OutboxEvent, *event)
 
         try:
             await session.commit()

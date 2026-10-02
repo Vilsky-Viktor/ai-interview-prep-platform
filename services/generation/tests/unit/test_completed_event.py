@@ -3,10 +3,10 @@ import uuid
 from types import SimpleNamespace
 
 import pytest
-from prepza_common import pubsub
 
 from app.integrations import library
 from app.models.generation import Generation
+from app.services import outbox as outbox_service
 from app.services.pipeline import stream_graph
 from app.storage import generations
 
@@ -34,24 +34,26 @@ class FinishedGraph:
 
 @pytest.fixture
 def published(monkeypatch):
+    """Events the pipeline saves with the generation's last update (the outbox)."""
     sent = []
-
-    async def publish(event_type, data):
-        sent.append((event_type, data))
 
     async def saved(_payload):
         return SET_ID
 
-    async def nothing(*args, **kwargs):
+    async def update(generation_id, event=None, **values):
+        if event:
+            sent.append(event)
+
+    async def nothing():
         return None
 
     async def not_cancelled(_generation_id):
         return False
 
-    monkeypatch.setattr(pubsub, "publish", publish)
+    monkeypatch.setattr(outbox_service, "flush_quietly", nothing)
     monkeypatch.setattr(library, "create_interview", saved)
     monkeypatch.setattr(library, "create_preparation", saved)
-    monkeypatch.setattr(generations, "update", nothing)
+    monkeypatch.setattr(generations, "update", update)
     monkeypatch.setattr(generations, "is_cancelled", not_cancelled)
 
     return sent

@@ -3,13 +3,12 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
-from prepza_common.pubsub import publish
 from prepza_common.rate_limit import hit_emails
 
 from app.config.settings import settings
-from app.constants.events import PREPARATION_SHARED
 from app.integrations.redis import get_redis
 from app.schemas.sharing import ShareIn, ShareInviteOut, ShareOut
+from app.services import outbox as outbox_service
 from app.services.access import require_owner
 from app.storage import preparations, shares
 
@@ -33,16 +32,10 @@ async def share(preparation_id: UUID, body: ShareIn, user: CurrentUser) -> Share
         settings.email_daily_limit,
         settings.email_recipient_daily_limit,
     )
-    invite = await shares.upsert(preparation_id, email, user.uid)
-    await publish(
-        PREPARATION_SHARED,
-        {
-            "email": invite.email,
-            "token": invite.token,
-            "title": question_set.title,
-            "inviter": user.name or user.email,
-        },
+    invite = await shares.upsert(
+        preparation_id, email, user.uid, question_set.title, user.name or user.email
     )
+    await outbox_service.flush_quietly()
 
     return ShareOut(
         email=invite.email, accepted=invite.accepted_by is not None, created_at=invite.created_at

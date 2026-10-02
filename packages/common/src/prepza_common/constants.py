@@ -31,3 +31,7 @@ EVENTS_TOPIC = "events"
 PUBSUB_URL = "https://pubsub.googleapis.com"
 # Google APIs our services call with their own credentials (Pub/Sub, Cloud Tasks).
 GOOGLE_SCOPE = "https://www.googleapis.com/auth/cloud-platform"
+
+# Outbox: events published per flush, and how long published ones are kept.
+OUTBOX_BATCH = 100
+OUTBOX_KEEP_DAYS = 7

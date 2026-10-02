@@ -4,6 +4,7 @@ from alembic import context
 from sqlalchemy import create_engine
 
 import app.models.chat  # registers the tables on Base.metadata
+import app.models.outbox
 import app.models.progress
 import app.models.rounds
 import app.models.sessions

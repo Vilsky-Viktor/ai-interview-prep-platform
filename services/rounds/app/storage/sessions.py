@@ -2,6 +2,7 @@ import random
 import uuid
 from datetime import UTC, datetime
 
+from prepza_common import outbox
 from sqlalchemy import delete, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
@@ -9,6 +10,7 @@ from sqlalchemy.orm import selectinload
 from app.constants.integrity import IntegritySignal
 from app.constants.rounds import RoundStatus
 from app.helpers.scores import candidate_progress, interview_finished
+from app.models.outbox import OutboxEvent
 from app.models.rounds import Answer
 from app.models.sessions import Session
 from app.models.signals import Signal
@@ -132,14 +134,18 @@ async def add_signal(
         await session.commit()
 
 
-async def add_answer(answer: Answer) -> bool:
-    """Saves the answer and stops the clock, so the next question starts its own.
+async def add_answer(answer: Answer, event: tuple[str, dict] | None = None) -> bool:
+    """Saves the answer (and its event, when it has one) and stops the clock, so the next
+    question starts its own. A question that timed out has no event: nothing was picked.
 
     False when the question already has an answer, e.g. two requests timing out the same
     question at once.
     """
     async with Db() as session:
         session.add(answer)
+
+        if event:
+            outbox.add(session, OutboxEvent, *event)
 
         try:
             await session.flush()

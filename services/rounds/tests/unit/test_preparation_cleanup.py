@@ -47,7 +47,7 @@ def test_library_deletes_a_preparations_practice_data(client, monkeypatch):
     monkeypatch.setattr(rounds, "remove_for_preparation", fake_remove)
     url = f"/internal/preparations/{PREPARATION_ID}"
 
-    response = client.delete(url, headers={"Authorization": f"Bearer {service_token()}"})
+    response = client.delete(url, headers={"Authorization": f"Bearer {service_token('rounds')}"})
 
     assert response.status_code == 204
     assert removed == [PREPARATION_ID]
@@ -70,7 +70,7 @@ def test_companies_deletes_an_interviews_sessions(client, monkeypatch):
     monkeypatch.setattr(sessions, "remove_for_interview", fake_remove)
     url = f"/internal/interviews/{PREPARATION_ID}"
 
-    response = client.delete(url, headers={"Authorization": f"Bearer {service_token()}"})
+    response = client.delete(url, headers={"Authorization": f"Bearer {service_token('rounds')}"})
 
     assert response.status_code == 204
     assert removed == [PREPARATION_ID]

@@ -1,12 +1,14 @@
-from prepza_common.service_auth import issue_token, service_caller
+from prepza_common.service_auth import callee_secret, issue_token, service_caller
 
 from app.config.settings import settings
 
 SERVICE_NAME = "generation"
 
 
-def service_token() -> str:
-    return issue_token(SERVICE_NAME, settings.service_secret)
+def service_token(callee: str) -> str:
+    """A token for calling `callee` (library, rounds, ...), signed with that service's key."""
+    return issue_token(SERVICE_NAME, callee, callee_secret(callee))
 
 
-ServiceCaller = service_caller(settings.service_secret)
+# Calls to this service, signed with its own key.
+ServiceCaller = service_caller(settings.service_secret, SERVICE_NAME)

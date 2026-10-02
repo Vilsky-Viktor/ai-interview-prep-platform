@@ -51,17 +51,17 @@ def test_answer_seconds():
 def test_answer_records_the_seconds_since_the_question_was_shown(monkeypatch):
     saved = []
 
-    async def fake_add(answer):
+    async def fake_add(answer, event=None):
         answer.id = uuid4()
         saved.append(answer)
 
         return True
 
-    async def no_announce(answer, question):
+    async def no_flush():
         return None
 
     monkeypatch.setattr(sessions, "add_answer", fake_add)
-    monkeypatch.setattr(session_answers, "announce", no_announce)
+    monkeypatch.setattr(session_answers.outbox_service, "flush_quietly", no_flush)
     row = session(datetime.now(UTC) - timedelta(seconds=30))
 
     asyncio.run(

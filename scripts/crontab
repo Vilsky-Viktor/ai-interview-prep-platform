@@ -1,0 +1,10 @@
+# Local stand-in for Cloud Scheduler: the same endpoints on the same timetable (UTC).
+*/5 * * * * curl -s -X POST http://generation-worker:8000/internal/schedules/sweep
+*/10 * * * * curl -s -X POST http://generation-worker:8000/internal/schedules/key-check-batches
+0 3 * * * curl -s -X POST http://generation-worker:8000/internal/schedules/retention
+15 3 * * * curl -s -X POST http://companies:8000/internal/schedules/retention
+# Events not published right after their change (the outbox), every minute.
+* * * * * curl -s -X POST http://library:8000/internal/schedules/outbox
+* * * * * curl -s -X POST http://companies:8000/internal/schedules/outbox
+* * * * * curl -s -X POST http://rounds:8000/internal/schedules/outbox
+* * * * * curl -s -X POST http://generation-worker:8000/internal/schedules/outbox

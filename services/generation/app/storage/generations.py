@@ -1,12 +1,15 @@
 import uuid
 from datetime import datetime
 
+from prepza_common import outbox
 from sqlalchemy import String, bindparam, select, text
 from sqlalchemy import update as sql_update
 
+from app.constants.events import GENERATION_CANCELLED
 from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
 from app.models.generation import Generation
+from app.models.outbox import OutboxEvent
 from app.storage.db import Session
 
 
@@ -32,14 +35,19 @@ async def get(generation_id: uuid.UUID) -> Generation | None:
         return await session.get(Generation, generation_id)
 
 
-async def update(generation_id: uuid.UUID, **values) -> None:
-    """Never touches a cancelled generation, so a job still running can't bring it back."""
+async def update(generation_id: uuid.UUID, event: tuple[str, dict] | None = None, **values) -> None:
+    """Never touches a cancelled generation, so a job still running can't bring it back. An
+    `event` is saved with the change, for the outbox to publish."""
     async with Session() as session:
         await session.execute(
             sql_update(Generation)
             .where(Generation.id == generation_id, Generation.status != Status.CANCELLED)
             .values(**values)
         )
+
+        if event:
+            outbox.add(session, OutboxEvent, *event)
+
         await session.commit()
 
 
@@ -85,6 +93,17 @@ async def expire_reviews(before: datetime) -> list[Generation]:
             .returning(Generation)
         )
         expired = list(expired)
+
+        # Companies removes the interview of an expired review.
+        for generation in expired:
+            if generation.kind == GenerationKind.INTERVIEW:
+                outbox.add(
+                    session,
+                    OutboxEvent,
+                    GENERATION_CANCELLED,
+                    {"generation_id": str(generation.id)},
+                )
+
         await session.commit()
 
         return expired

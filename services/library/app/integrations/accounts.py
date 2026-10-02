@@ -19,7 +19,7 @@ async def delete_user(service: str, user_id: str, email: str) -> None:
     response = await http.get_client().delete(
         f"{services()[service]}/internal/users/{user_id}",
         params={"email": email},
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token(service)}"},
     )
 
     response.raise_for_status()
@@ -29,7 +29,7 @@ async def export_user(service: str, user_id: str, email: str) -> dict:
     response = await http.get_client().get(
         f"{services()[service]}/internal/users/{user_id}/export",
         params={"email": email},
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token(service)}"},
     )
 
     response.raise_for_status()

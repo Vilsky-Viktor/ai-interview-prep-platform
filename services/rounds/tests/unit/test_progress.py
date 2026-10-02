@@ -188,7 +188,7 @@ def test_library_learns_how_many_topics_are_mastered(client, monkeypatch):
     response = client.post(
         "/internal/mastered-counts",
         json=body,
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('rounds')}"},
     )
 
     assert response.json() == {str(PREPARATION_ID): 2}

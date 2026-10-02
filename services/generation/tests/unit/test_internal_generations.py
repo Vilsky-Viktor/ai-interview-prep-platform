@@ -16,7 +16,7 @@ GENERATION_ID = uuid.uuid4()
 
 
 def headers():
-    return {"Authorization": f"Bearer {service_token()}"}
+    return {"Authorization": f"Bearer {service_token('generation')}"}
 
 
 def company_generation():

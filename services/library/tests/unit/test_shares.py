@@ -6,12 +6,12 @@ from prepza_common.auth import current_user
 from prepza_common.user import User
 
 from app.config.settings import settings
-from app.constants.events import PREPARATION_SHARED
 from app.constants.sets import SetKind
 from app.main import app
 from app.models.sets import QuestionSet
 from app.models.sharing import ShareInvite
 from app.routers import shares as shares_router
+from app.services import outbox as outbox_service
 from app.storage import preparations, shares
 from tests.unit.fake_redis import FakeRedis
 
@@ -81,33 +81,33 @@ def test_unknown_token(client, stored_invite):
     assert client.post("/shares/missing/accept").status_code == 404
 
 
-def test_owner_shares_and_event_is_published(client, monkeypatch):
-    events = []
+def test_owner_shares_and_the_email_event_is_saved_with_the_invite(client, monkeypatch):
+    saved = []
+    flushed = []
 
     async def fake_get(set_id):
         return QuestionSet(id=SET_ID, kind=SetKind.PREPARATION, owner_id="owner", title="Backend")
 
-    async def fake_upsert(set_id, email, invited_by):
+    async def fake_upsert(set_id, email, invited_by, title, inviter):
+        saved.append((email, invited_by, title, inviter))
+
         return invite()
 
-    async def fake_publish(event_type, data):
-        events.append((event_type, data))
+    async def fake_flush():
+        flushed.append(True)
 
     monkeypatch.setattr(preparations, "get", fake_get)
     monkeypatch.setattr(shares, "upsert", fake_upsert)
-    monkeypatch.setattr(shares_router, "publish", fake_publish)
+    monkeypatch.setattr(outbox_service, "flush_quietly", fake_flush)
     monkeypatch.setattr(shares_router, "get_redis", FakeRedis)
     sign_in("ann@example.com", uid="owner")
 
     response = client.post(f"/preparations/{SET_ID}/shares", json={"email": "Bob@example.com"})
 
     assert response.status_code == 201
-    assert events == [
-        (
-            PREPARATION_SHARED,
-            {"email": "bob@example.com", "token": "token-1", "title": "Backend", "inviter": "Ann"},
-        )
-    ]
+    # The storage saves the event in the invite's transaction; it's published right after.
+    assert saved == [("bob@example.com", "owner", "Backend", "Ann")]
+    assert flushed == [True]
 
 
 def test_only_owner_can_share(client, monkeypatch):
@@ -128,15 +128,15 @@ def test_a_sender_is_limited_per_hour(client, monkeypatch):
     async def fake_get(set_id):
         return QuestionSet(id=SET_ID, kind=SetKind.PREPARATION, owner_id="owner", title="Backend")
 
-    async def fake_upsert(set_id, email, invited_by):
+    async def fake_upsert(set_id, email, invited_by, title, inviter):
         return invite()
 
-    async def fake_publish(event_type, data):
+    async def no_flush():
         pass
 
     monkeypatch.setattr(preparations, "get", fake_get)
     monkeypatch.setattr(shares, "upsert", fake_upsert)
-    monkeypatch.setattr(shares_router, "publish", fake_publish)
+    monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
     monkeypatch.setattr(shares_router, "get_redis", lambda: redis)
     monkeypatch.setattr(settings, "email_hourly_limit", 2)
     sign_in("ann@example.com", uid="owner")

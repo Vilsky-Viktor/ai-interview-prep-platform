@@ -12,7 +12,7 @@ async def verify_question(question_id: UUID, flag: str) -> None:
     response = await http.get_client().post(
         f"{settings.generation_url}/internal/questions/{question_id}/verify",
         json={"flag": flag},
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('generation')}"},
     )
 
     response.raise_for_status()
@@ -23,7 +23,7 @@ async def regenerate_question(question_id: UUID, set_id: UUID, user_id: str) -> 
     return await http.get_client().post(
         f"{settings.generation_url}/internal/questions/{question_id}/regenerate",
         json={"user_id": user_id, "set_id": str(set_id)},
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('generation')}"},
         # Writing a question and its options waits on the LLM.
         timeout=120,
     )

@@ -9,10 +9,10 @@ def test_a_deleted_candidate_keeps_a_row_without_their_email(run):
     async def scenario():
         company = await companies.create("Acme", "owner", "owner@example.com")
         interview = await interviews.create(company.id, uuid.uuid4(), False)
-        first = await invites.upsert(interview.id, "gone@example.com")
+        first = await invites.upsert(interview.id, "gone@example.com", "Backend", "Acme")
         await invites.start(first, "gone")
         # A second address of the same person, never started: matched by email.
-        await invites.upsert(interview.id, "Gone2@Example.com")
+        await invites.upsert(interview.id, "Gone2@Example.com", "Backend", "Acme")
         await accounts.forget_candidate("gone", "gone2@example.com")
 
         return (
@@ -43,7 +43,7 @@ def test_only_invites_older_than_the_cutoff_expire(run):
     async def scenario():
         company = await companies.create("Acme", "owner", "owner@example.com")
         interview = await interviews.create(company.id, uuid.uuid4(), False)
-        invite = await invites.upsert(interview.id, "carol@example.com")
+        invite = await invites.upsert(interview.id, "carol@example.com", "Backend", "Acme")
         recent = await accounts.expired_invites(datetime.now(UTC) - timedelta(days=365))
         everything = await accounts.expired_invites(datetime.now(UTC) + timedelta(seconds=1))
         await accounts.delete_invites([invite.id])

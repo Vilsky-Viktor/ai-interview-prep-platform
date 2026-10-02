@@ -2,17 +2,21 @@ import secrets
 import uuid
 from datetime import UTC, datetime
 
+from prepza_common import outbox
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
+from app.constants.events import CANDIDATE_INVITED
 from app.constants.invites import InviteStatus
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
+from app.models.outbox import OutboxEvent
 from app.storage.db import Session
 
 
-async def upsert(interview_id, email: str) -> CandidateInvite:
-    """Creates the invite, or returns the existing one so it can be sent again."""
+async def upsert(interview_id, email: str, title: str, company: str) -> CandidateInvite:
+    """Creates the invite, or returns the existing one so it can be sent again, and saves the
+    email's event with it."""
     email = email.lower()
     statement = (
         insert(CandidateInvite)
@@ -29,13 +33,20 @@ async def upsert(interview_id, email: str) -> CandidateInvite:
 
     async with Session() as session:
         await session.execute(statement)
-        await session.commit()
-
-        return await session.scalar(
+        invite = await session.scalar(
             select(CandidateInvite).where(
                 CandidateInvite.interview_id == interview_id, CandidateInvite.email == email
             )
         )
+        outbox.add(
+            session,
+            OutboxEvent,
+            CANDIDATE_INVITED,
+            {"email": invite.email, "token": invite.token, "title": title, "company": company},
+        )
+        await session.commit()
+
+        return invite
 
 
 async def exists(interview_id, email: str) -> bool:

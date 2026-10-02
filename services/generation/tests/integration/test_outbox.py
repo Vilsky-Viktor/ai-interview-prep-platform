@@ -1,0 +1,68 @@
+import uuid
+from datetime import UTC, datetime, timedelta
+
+from prepza_common import outbox, pubsub
+from sqlalchemy import select
+
+from app.constants.statuses import Status
+from app.models.outbox import OutboxEvent
+from app.services import outbox as outbox_service
+from app.storage import generations
+from app.storage.db import Session
+
+
+async def waiting():
+    async with Session() as session:
+        return list(
+            await session.scalars(select(OutboxEvent).where(OutboxEvent.published_at.is_(None)))
+        )
+
+
+def test_an_expired_interview_review_saves_its_event_and_the_flush_publishes_it(run, monkeypatch):
+    sent = []
+
+    async def publish(event_type, data):
+        sent.append((event_type, data))
+
+    monkeypatch.setattr(pubsub, "publish", publish)
+
+    async def scenario():
+        interview = await generations.create("ann", "job", "interview", uuid.uuid4())
+        preparation = await generations.create("ann", "goal")
+
+        for generation in (interview, preparation):
+            await generations.update(generation.id, status=Status.AWAITING_REVIEW)
+
+        await generations.expire_reviews(datetime.now(UTC) + timedelta(seconds=1))
+        saved = [(row.event_type, row.data) for row in await waiting()]
+        published = await outbox_service.flush()
+
+        return interview.id, preparation.id, saved, published, await waiting()
+
+    interview_id, preparation_id, saved, published, left = run(scenario())
+
+    expected = ("generation.cancelled", {"generation_id": str(interview_id)})
+    assert expected in saved
+    # A learner's preparation has no company to tell.
+    assert all(data.get("generation_id") != str(preparation_id) for _, data in saved)
+    assert expected in sent
+    assert published == len(saved)
+    assert left == []
+
+
+def test_a_failed_publish_leaves_the_event_for_the_next_flush(run, monkeypatch):
+    async def down(event_type, data):
+        raise ConnectionError("Pub/Sub is down")
+
+    monkeypatch.setattr(pubsub, "publish", down)
+
+    async def scenario():
+        async with Session() as session:
+            outbox.add(session, OutboxEvent, "test.event", {"n": 1})
+            await session.commit()
+
+        await outbox_service.flush_quietly()
+
+        return [row.event_type for row in await waiting()]
+
+    assert "test.event" in run(scenario())

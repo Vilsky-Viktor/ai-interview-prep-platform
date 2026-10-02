@@ -15,7 +15,7 @@ async def _post(path: str, preparation: PreparationIn) -> UUID:
     response = await http.get_client().post(
         f"{settings.library_url}{path}",
         json=preparation.model_dump(mode="json"),
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     response.raise_for_status()
@@ -34,7 +34,7 @@ async def create_interview(preparation: PreparationIn) -> UUID:
 async def get_question_context(question_id: UUID) -> QuestionContext | None:
     response = await http.get_client().get(
         f"{settings.library_url}/internal/questions/{question_id}/context",
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:
@@ -49,7 +49,7 @@ async def replace_question(question_id: UUID, question: RegeneratedQuestion) -> 
     response = await http.get_client().put(
         f"{settings.library_url}/internal/questions/{question_id}",
         json=question.model_dump(),
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     response.raise_for_status()
@@ -58,7 +58,7 @@ async def replace_question(question_id: UUID, question: RegeneratedQuestion) -> 
 async def get_question_quality(question_id: UUID) -> QuestionQuality | None:
     response = await http.get_client().get(
         f"{settings.library_url}/internal/questions/{question_id}/quality",
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:
@@ -72,7 +72,7 @@ async def get_question_quality(question_id: UUID) -> QuestionQuality | None:
 async def keep_question(question_id: UUID) -> None:
     response = await http.get_client().post(
         f"{settings.library_url}/internal/questions/{question_id}/keep",
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     response.raise_for_status()
@@ -83,7 +83,7 @@ async def find_reusable(request: ReuseIn) -> list[QuestionIn]:
     response = await http.get_client().post(
         f"{settings.library_url}/internal/reuse",
         json=request.model_dump(),
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     response.raise_for_status()
@@ -96,7 +96,7 @@ async def missing_embeddings(limit: int) -> list[dict]:
     response = await http.get_client().get(
         f"{settings.library_url}/internal/embeddings/missing",
         params={"limit": limit},
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     response.raise_for_status()
@@ -108,7 +108,7 @@ async def save_embeddings(embeddings: dict[str, list[float]]) -> None:
     response = await http.get_client().put(
         f"{settings.library_url}/internal/embeddings",
         json=[{"id": topic_id, "embedding": value} for topic_id, value in embeddings.items()],
-        headers={"Authorization": f"Bearer {service_token()}"},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
     )
 
     response.raise_for_status()

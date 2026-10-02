@@ -69,7 +69,9 @@ def test_starting_a_timed_interview_passes_the_seconds_per_question(client, monk
     }
 
     response = client.post(
-        "/internal/sessions", json=body, headers={"Authorization": f"Bearer {service_token()}"}
+        "/internal/sessions",
+        json=body,
+        headers={"Authorization": f"Bearer {service_token('rounds')}"},
     )
 
     assert response.status_code == 201
