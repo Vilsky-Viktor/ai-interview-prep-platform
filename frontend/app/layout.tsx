@@ -21,7 +21,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: { default: "prepza.", template: "%s · prepza." },
   description:
-    "Prepare for interviews with AI-generated questions, reference answers and grading.",
+    "Prepare for interviews with AI-generated multiple-choice questions, practice rounds and certificates.",
 }
 
 export default function RootLayout({

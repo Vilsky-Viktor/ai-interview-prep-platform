@@ -2,12 +2,12 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.auth import current_user
+from prepza_common.user import User
 
-from app.auth import current_user
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
-from app.schemas.user import User
 from app.storage import companies, interviews
 
 COMPANY_ID = uuid.uuid4()
@@ -26,14 +26,13 @@ def clear_overrides():
     app.dependency_overrides.clear()
 
 
-def test_updates_mode_and_shared_scores(client, monkeypatch):
+def test_updates_shared_scores(client, monkeypatch):
     sign_in()
     saved = {}
     interview = Interview(
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        mode="choice",
         share_results=False,
         set_id=None,
     )
@@ -54,8 +53,7 @@ def test_updates_mode_and_shared_scores(client, monkeypatch):
     async def fake_company(_company_id):
         return company
 
-    async def fake_update(_interview_id, mode, share_results):
-        saved["mode"] = mode
+    async def fake_update(_interview_id, share_results):
         saved["share_results"] = share_results
 
     monkeypatch.setattr(interviews, "get", fake_interview)
@@ -64,8 +62,8 @@ def test_updates_mode_and_shared_scores(client, monkeypatch):
 
     response = client.patch(
         f"/interviews/{INTERVIEW_ID}/settings",
-        json={"mode": "open", "share_results": True},
+        json={"share_results": True},
     )
 
     assert response.status_code == 204
-    assert saved == {"mode": "open", "share_results": True}
+    assert saved == {"share_results": True}

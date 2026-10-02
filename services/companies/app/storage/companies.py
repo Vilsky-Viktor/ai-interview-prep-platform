@@ -1,4 +1,6 @@
-from sqlalchemy import delete, select
+# Aliased: this module's own delete() would otherwise shadow it.
+from sqlalchemy import delete as sql_delete
+from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
 from app.constants.roles import Role
@@ -28,17 +30,19 @@ async def get(company_id) -> Company | None:
 
 async def delete(company_id) -> None:
     async with Session() as session:
-        await session.execute(delete(Company).where(Company.id == company_id))
+        await session.execute(sql_delete(Company).where(Company.id == company_id))
         await session.commit()
 
 
-async def list_for_user(user_id: str) -> list[Company]:
+async def list_for_user(user_id: str, offset: int, limit: int) -> list[Company]:
     query = (
         select(Company)
         .join(Member, Member.company_id == Company.id)
         .where(Member.user_id == user_id)
         .options(selectinload(Company.members))
-        .order_by(Company.created_at)
+        .order_by(Company.created_at, Company.id)
+        .offset(offset)
+        .limit(limit)
     )
 
     async with Session() as session:

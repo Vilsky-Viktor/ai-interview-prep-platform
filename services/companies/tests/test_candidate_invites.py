@@ -1,14 +1,14 @@
 import uuid
 from datetime import UTC, datetime
 
-from app.auth import current_user
-from app.integrations import library
+from prepza_common.auth import current_user
+from prepza_common.user import User
+
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.routers import interviews as interviews_router
-from app.schemas.user import User
 from app.storage import companies, interviews, invites
 
 COMPANY_ID = uuid.uuid4()
@@ -23,9 +23,9 @@ def test_inviting_the_same_email_again_resends_the_invite(client, monkeypatch):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        mode="open",
         share_results=False,
         set_id=uuid.uuid4(),
+        title="Backend interview",
         invites=[],
     )
     company = Company(id=COMPANY_ID, name="Acme", created_at=datetime.now(UTC))
@@ -51,16 +51,12 @@ def test_inviting_the_same_email_again_resends_the_invite(client, monkeypatch):
     async def fake_upsert(_interview_id, _email):
         return invite
 
-    async def fake_set(_set_id):
-        return {"title": "Backend interview"}
-
     async def fake_publish(event_type, data):
         sent.append(data["email"])
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(invites, "upsert", fake_upsert)
-    monkeypatch.setattr(library, "get_set", fake_set)
     monkeypatch.setattr(interviews_router, "publish", fake_publish)
     url = f"/interviews/{INTERVIEW_ID}/candidates"
 

@@ -2,12 +2,12 @@ from datetime import UTC, datetime
 from uuid import uuid4
 
 import httpx
+from prepza_common.auth import current_user
+from prepza_common.user import User
 
-from app.auth import current_user
 from app.integrations import feedback
 from app.main import app
 from app.models.sessions import Session
-from app.schemas.user import User
 from app.storage import sessions
 
 QUESTION_ID = uuid4()
@@ -21,7 +21,6 @@ def owned_session():
         interview_set_id=uuid4(),
         candidate_invite_id=uuid4(),
         topic_title="Python",
-        mode="open",
         share_results=False,
         status="in_progress",
         questions=[{"id": str(QUESTION_ID), "text": "What is the GIL?"}],

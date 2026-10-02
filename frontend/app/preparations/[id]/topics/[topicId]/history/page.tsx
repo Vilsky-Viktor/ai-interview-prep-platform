@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 
 import { BackLink } from "@/components/back-link"
 import { RoundHistory } from "@/components/rounds/round-history"
+import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
 import type { PreparationDetail } from "@/types/preparation"
 import type { Round } from "@/types/round"
@@ -17,7 +18,8 @@ export default async function HistoryPage({
   const { id, topicId } = await params
   const [preparation, rounds] = await Promise.all([
     serverFetch<PreparationDetail>(`/library/preparations/${id}`),
-    serverFetch<Round[]>(`/rounds/topics/${topicId}/rounds`),
+    // The first page renders on the server; the rest load as the user scrolls.
+    serverFetch<Round[]>(`/rounds/topics/${topicId}/rounds?limit=${PAGE_SIZE}`),
   ])
   const topic = preparation?.topics.find((item) => item.id === topicId)
 
@@ -28,6 +30,7 @@ export default async function HistoryPage({
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
       <RoundHistory
+        topicId={topicId}
         rounds={rounds}
         back={
           <BackLink href={`/preparations/${id}`}>Preparation page</BackLink>

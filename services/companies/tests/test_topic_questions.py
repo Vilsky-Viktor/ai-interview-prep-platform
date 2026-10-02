@@ -2,13 +2,13 @@ import uuid
 from datetime import UTC, datetime
 
 import httpx
+from prepza_common.auth import current_user
+from prepza_common.user import User
 
-from app.auth import current_user
 from app.integrations import generation, library
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
-from app.schemas.user import User
 from app.storage import companies, interviews
 
 COMPANY_ID = uuid.uuid4()
@@ -28,7 +28,6 @@ def interview_and_company(role):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        mode="open",
         share_results=False,
         set_id=uuid.uuid4(),
     )
@@ -80,7 +79,7 @@ def test_only_owner_or_admin_can_regenerate(client, monkeypatch):
 def test_only_owner_or_admin_reads_reports(client, monkeypatch):
     sign_in()
 
-    async def fake_reports(_set_id, _question_id):
+    async def fake_reports(_set_id, _question_id, page):
         return [
             {
                 "id": str(uuid.uuid4()),
@@ -116,7 +115,6 @@ def test_topic_questions_are_text_only(client, monkeypatch):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        mode="open",
         share_results=False,
         set_id=uuid.uuid4(),
     )

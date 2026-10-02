@@ -1,0 +1,9 @@
+# The services are written to 100 columns; without this, ruff would rewrap them to 88.
+line-length = 100
+# Each service has its own first-party `app` package.
+src = ["services/*"]
+
+[lint.isort]
+# The shared package is installed like any other dependency.
+known-first-party = ["app"]
+known-third-party = ["prepza_common"]

@@ -13,10 +13,12 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "api-types": "openapi-typescript http://127.0.0.1:8090/api/library/openapi.json -o types/api/library.ts && openapi-typescript http://127.0.0.1:8090/api/generate/openapi.json -o types/api/generation.ts && openapi-typescript http://127.0.0.1:8090/api/rounds/openapi.json -o types/api/rounds.ts && openapi-typescript http://127.0.0.1:8090/api/companies/openapi.json -o types/api/companies.ts && prettier --write types/api"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
+    "@tanstack/react-virtual": "^3.14.13",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0",
     "firebase": "^12.19.0",
@@ -36,6 +38,7 @@
     "@types/react-dom": "^19",
     "eslint": "^10",
     "eslint-config-next": "16.3.4",
+    "openapi-typescript": "^7.13.0",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",

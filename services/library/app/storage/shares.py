@@ -7,6 +7,7 @@ from sqlalchemy.dialects.postgresql import insert
 
 from app.models.sets import QuestionSet
 from app.models.sharing import ShareInvite
+from app.storage import stats
 from app.storage.db import Session
 from app.storage.joins import join_statement
 
@@ -35,11 +36,13 @@ async def upsert(set_id: uuid.UUID, email: str, invited_by: str) -> ShareInvite:
         )
 
 
-async def list_for_set(set_id: uuid.UUID) -> list[ShareInvite]:
+async def list_for_set(set_id: uuid.UUID, offset: int, limit: int) -> list[ShareInvite]:
     query = (
         select(ShareInvite)
         .where(ShareInvite.set_id == set_id)
-        .order_by(ShareInvite.created_at.desc())
+        .order_by(ShareInvite.created_at.desc(), ShareInvite.id)
+        .offset(offset)
+        .limit(limit)
     )
 
     async with Session() as session:
@@ -65,4 +68,5 @@ async def accept(invite: ShareInvite, user_id: str) -> None:
         invite = await session.get(ShareInvite, invite.id)
         invite.accepted_by = user_id
         await session.execute(join_statement(invite.set_id, user_id))
+        await stats.recount(session, invite.set_id)
         await session.commit()

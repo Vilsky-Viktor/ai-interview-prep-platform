@@ -25,7 +25,7 @@ def finishing_round(scores: dict[str, int]) -> Round:
     return Round(
         id=uuid.uuid4(),
         questions=[
-            {"id": question_id, "text": TEXTS[question_id], "reference_answer": "", "options": []}
+            {"id": question_id, "text": TEXTS[question_id], "options": []}
             for question_id in scores
         ],
         answers=[

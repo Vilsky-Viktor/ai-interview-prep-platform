@@ -6,16 +6,7 @@ from pydantic import BaseModel, Field, field_validator
 
 class InterviewCreate(BaseModel):
     text: str = Field(min_length=1, max_length=20_000)
-    mode: str
     share_results: bool = False
-
-    @field_validator("mode")
-    @classmethod
-    def valid_mode(cls, value: str) -> str:
-        if value not in ("open", "choice"):
-            raise ValueError("mode must be open or choice")
-
-        return value
 
 
 class InterviewOut(BaseModel):
@@ -23,7 +14,6 @@ class InterviewOut(BaseModel):
     generation_id: UUID
     set_id: UUID | None
     title: str | None
-    mode: str
     share_results: bool
     candidate_count: int
     created_at: datetime
@@ -49,7 +39,7 @@ class TopicOut(BaseModel):
     title: str
     subtopics: list[str] = []
     question_count: int
-    question_limit: int | None = None
+    question_limit: int | None
 
 
 class InterviewDetail(InterviewOut):
@@ -61,6 +51,8 @@ class ReviewIn(BaseModel):
 
     selected: list[int] = Field(min_length=1)
     instructions: str = ""
+    # Every drafted topic with the reviewer's own edits; generation validates it.
+    topics: list[dict] | None = None
 
 
 class TopicLimitIn(BaseModel):
@@ -68,16 +60,7 @@ class TopicLimitIn(BaseModel):
 
 
 class InterviewSettings(BaseModel):
-    mode: str
     share_results: bool
-
-    @field_validator("mode")
-    @classmethod
-    def valid_mode(cls, value: str) -> str:
-        if value not in ("open", "choice"):
-            raise ValueError("mode must be open or choice")
-
-        return value
 
 
 class TitleIn(BaseModel):

@@ -3,12 +3,8 @@ import { MinusIcon } from "lucide-react"
 import { useState } from "react"
 
 import { QuestionActions } from "@/components/questions/question-actions"
-import { AnswerReveal } from "@/components/rounds/answer-reveal"
+import { QuestionText } from "@/components/questions/question-text"
 import { ChoiceOptions } from "@/components/rounds/choice-options"
-import {
-  OpenAnswerForm,
-  type OpenAnswerStatus,
-} from "@/components/rounds/open-answer-form"
 import { RoundFooter } from "@/components/rounds/round-footer"
 import { Button } from "@/components/ui/button"
 import {
@@ -21,7 +17,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Progress } from "@/components/ui/progress"
-import { MODE_LABELS, OPEN_ANSWER_FORM_ID } from "@/constants/rounds"
 import { scorePassed } from "@/lib/rounds"
 import type { InterviewSession, SessionAnswerResult } from "@/types/company"
 import type { AnswerInput, AnswerResult, NextQuestion } from "@/types/round"
@@ -29,11 +24,11 @@ import type { AnswerInput, AnswerResult, NextQuestion } from "@/types/round"
 type SessionPlayProps = {
   session: InterviewSession
   progress: { answered: number; total: number }
+  // This topic's place among the interview's sections.
+  section: { number: number; count: number }
   question: NextQuestion | null
   result: SessionAnswerResult | null
-  openAnswer: OpenAnswerStatus
   onAnswer: (input: AnswerInput) => Promise<boolean>
-  onStatusChange: (status: OpenAnswerStatus) => void
   onAdvance: () => void
   onFinish: () => void
   finishing: boolean
@@ -42,44 +37,40 @@ type SessionPlayProps = {
 export function SessionPlay({
   session,
   progress,
+  section,
   question,
   result,
-  openAnswer,
   onAnswer,
-  onStatusChange,
   onAdvance,
   onFinish,
   finishing,
 }: SessionPlayProps) {
   const [confirmFinish, setConfirmFinish] = useState(false)
-  const shown =
-    result && session.share_results ? shownResult(session.mode, result) : null
+  const shown = result && session.share_results ? shownResult(result) : null
   const allAnswered = progress.total > 0 && progress.answered === progress.total
 
   return (
     <div className="space-y-8 pb-28">
-      <SessionHeader session={session} progress={progress} />
+      <SessionHeader session={session} progress={progress} section={section} />
       {question && (
         <div key={question.question_id} className="space-y-6">
-          <h1 className="text-2xl leading-snug font-medium">{question.text}</h1>
-          {session.mode === "choice" && question.options ? (
-            <ChoiceOptions
-              options={question.options}
-              result={shown}
-              onAnswer={(option_index) => onAnswer({ option_index })}
-            />
-          ) : (
-            <OpenAnswerForm
-              answered={result !== null}
-              onAnswer={(text) => onAnswer({ text })}
-              onStatusChange={onStatusChange}
+          <QuestionText
+            heading
+            text={question.text}
+            className="text-2xl leading-snug font-medium"
+          />
+          <ChoiceOptions
+            options={question.options}
+            result={shown}
+            onAnswer={(option_index) => onAnswer({ option_index })}
+          />
+          {/* Judged once answered, not mid-question. */}
+          {result && (
+            <QuestionActions
+              questionId={question.question_id}
+              basePath={`/rounds/sessions/${session.id}/questions/${question.question_id}`}
             />
           )}
-          {shown && <AnswerReveal result={shown} />}
-          <QuestionActions
-            questionId={question.question_id}
-            basePath={`/rounds/sessions/${session.id}/questions/${question.question_id}`}
-          />
         </div>
       )}
       <RoundFooter>
@@ -92,16 +83,6 @@ export function SessionPlay({
           {finishing ? "Finishing…" : "Finish interview"}
         </Button>
         <div className="flex items-center gap-3">
-          {question && session.mode === "open" && !result && (
-            <Button
-              type="submit"
-              form={OPEN_ANSWER_FORM_ID}
-              className="h-12 px-6 text-base"
-              disabled={!openAnswer.canSubmit}
-            >
-              {openAnswer.grading ? "Grading…" : "Submit answer"}
-            </Button>
-          )}
           {result && (
             <Button className="h-12 px-6 text-base" onClick={onAdvance}>
               Next question
@@ -119,12 +100,18 @@ export function SessionPlay({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle>Finish this interview?</DialogTitle>
-            {!allAnswered && (
-              <DialogDescription>
-                Unanswered questions won&apos;t be scored.
-              </DialogDescription>
-            )}
+            <DialogTitle className="no-dot">Finish the whole interview?</DialogTitle>
+            <DialogDescription>
+              {section.count > 1
+                ? `This ends all ${section.count} sections, not only this one.`
+                : "This ends the interview."}
+              {!allAnswered &&
+                ` ${progress.total - progress.answered} unanswered ${
+                  progress.total - progress.answered === 1
+                    ? "question"
+                    : "questions"
+                } won't be scored.`}
+            </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose
@@ -155,17 +142,30 @@ export function SessionPlay({
 function SessionHeader({
   session,
   progress,
+  section,
 }: {
   session: InterviewSession
   progress: { answered: number; total: number }
+  section: { number: number; count: number }
 }) {
   const score = session.current_score ?? 0
 
   return (
     <div className="space-y-3">
       <div className="flex min-w-0 items-center justify-between gap-4">
-        <p className="min-w-0 text-sm text-muted-foreground">
-          {session.topic_title} · {MODE_LABELS[session.mode]}
+        <p className="flex min-w-0 items-center text-sm text-muted-foreground">
+          <span className="truncate">{session.topic_title}</span>
+          {section.count > 1 && (
+            <>
+              <MinusIcon
+                aria-hidden
+                className="mx-1.5 size-3.5 shrink-0 text-foreground/55"
+              />
+              <span className="shrink-0 tabular-nums">
+                Section {section.number} of {section.count}
+              </span>
+            </>
+          )}
         </p>
         <p className="flex shrink-0 items-center text-sm text-muted-foreground tabular-nums">
           {progress.answered} / {progress.total}
@@ -196,11 +196,9 @@ function SessionHeader({
   )
 }
 
-function shownResult(
-  mode: "open" | "choice",
-  result: SessionAnswerResult
-): AnswerResult | null {
-  if (result.score == null) {
+/** Candidates learn only whether they were right; the right option stays hidden. */
+function shownResult(result: SessionAnswerResult): AnswerResult | null {
+  if (result.correct == null) {
     return null
   }
 
@@ -208,12 +206,9 @@ function shownResult(
 
   return {
     answer_id: result.answer_id,
-    correct: result.correct ?? null,
-    score: result.score,
-    feedback: result.feedback ?? null,
-    reference_answer: "",
-    correct_option_index: mode === "choice" && result.correct ? optionIndex : null,
-    current_score: result.current_score ?? result.score,
+    correct: result.correct,
+    correct_option_index: result.correct ? optionIndex : null,
+    current_score: result.current_score ?? 0,
     answered: result.answered,
     total: result.total,
     option_index: optionIndex,

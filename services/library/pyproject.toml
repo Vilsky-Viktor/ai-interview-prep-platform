@@ -3,10 +3,12 @@ name = "library"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
+    "prepza-common",
     "alembic>=1.20.0",
     "email-validator>=2.3.0",
     "fastapi>=0.141.1",
     "firebase-admin>=7.7.0",
+    "httpx>=0.28.1",
     "psycopg[binary]>=3.3.6",
     "pydantic-settings>=2.15.0",
     "pyjwt>=2.15.1",
@@ -14,6 +16,11 @@ dependencies = [
     "sqlalchemy[asyncio]>=2.1.1",
     "uvicorn>=0.54.0",
 ]
+
+# The shared package, from this repo. To use a published version, drop this source and require
+# a version above instead (see packages/common/README.md).
+[tool.uv.sources]
+prepza-common = { path = "../../packages/common", editable = true }
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

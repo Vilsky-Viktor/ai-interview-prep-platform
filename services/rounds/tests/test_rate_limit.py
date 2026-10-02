@@ -2,8 +2,7 @@ import asyncio
 
 import pytest
 from fastapi import HTTPException
-
-from app.helpers.rate_limit import hit
+from prepza_common.rate_limit import hit
 
 
 class FakePipeline:

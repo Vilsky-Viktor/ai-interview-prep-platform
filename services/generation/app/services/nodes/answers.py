@@ -1,37 +1,20 @@
-import random
+import logging
 
 from langchain_core.messages import HumanMessage
-from langgraph.types import Send
+from openai import LengthFinishReasonError
 
-from app.constants.generation import ANSWER_ATTEMPTS, ANSWER_BATCH_SIZE, DISTRACTORS
-from app.helpers.prompts import company_block
-from app.helpers.questions import clean_distractors
+from app.constants.generation import ANSWER_ATTEMPTS, DISTRACTORS, MAX_OPTION_CHARS
+from app.helpers.questions import build_options
 from app.integrations import llm
-from app.models.state import AnswerTask, State
+from app.models.state import AnswerTask
 from app.prompts.answers import ANSWERS_PROMPT
 from app.schemas.questions import AnswerList
 
-
-def fan_out_answers(state: State):
-    """Conditional edge: one branch per batch of ANSWER_BATCH_SIZE questions."""
-    sends = []
-
-    for ti, questions in enumerate(state.get("topic_questions", [])):
-        for start in range(0, len(questions), ANSWER_BATCH_SIZE):
-            task: AnswerTask = {
-                "topic_index": ti,
-                "topic": state["topics"][ti]["main_topic"],
-                "start": start,
-                "questions": questions[start : start + ANSWER_BATCH_SIZE],
-                "level": state["level"],
-                "company_description": state.get("company_description", ""),
-            }
-            sends.append(Send("generate_answers", task))
-
-    return sends or "collect_results"
+logger = logging.getLogger(__name__)
 
 
 async def generate_answers(task: AnswerTask) -> dict:
+    """Options for questions that already exist: a re-generated question, or new options for one."""
     structured_llm = llm.get_llm().with_structured_output(AnswerList)
     questions = task["questions"]
     done: dict = {}
@@ -43,29 +26,35 @@ async def generate_answers(task: AnswerTask) -> dict:
             break
 
         prompt = ANSWERS_PROMPT.format(
-            company_block=company_block(task["company_description"]),
             level=task["level"],
             topic=task["topic"],
             distractors=DISTRACTORS,
+            max_chars=MAX_OPTION_CHARS,
             questions="\n".join(f"[{i}] {questions[i]}" for i in pending),
         )
-        result: AnswerList = await structured_llm.ainvoke([HumanMessage(content=prompt)])
+        try:
+            result: AnswerList = await structured_llm.ainvoke([HumanMessage(content=prompt)])
+        except LengthFinishReasonError:
+            # The model looped until the output cap; the next attempt retries the same questions.
+            logger.warning("Options for %r ran too long", task["topic"])
+
+            continue
 
         for item in result.answers:
             if item.id not in pending:
                 continue
 
-            answer = item.answer.strip()
-            correct = item.correct_option.strip()
-            distractors = clean_distractors(item.distractors, correct)
+            if item.ambiguous:
+                # More than one defensible answer: drop it (no options) rather than retry.
+                done[item.id] = []
 
-            if answer and correct and len(distractors) >= DISTRACTORS:
-                options = [{"answer": correct, "correct": True}] + [
-                    {"answer": d, "correct": False} for d in distractors[:DISTRACTORS]
-                ]
-                # Avoid the correct option always being first.
-                random.shuffle(options)
-                done[item.id] = {"answer": answer, "options": options}
+                continue
+
+            options = build_options(item.correct_option, item.distractors)
+
+            # Options that don't qualify count as incomplete, so the next attempt retries them.
+            if options:
+                done[item.id] = options
 
         pending = [i for i in pending if i not in done]
 
@@ -74,8 +63,7 @@ async def generate_answers(task: AnswerTask) -> dict:
             {
                 "topic_index": task["topic_index"],
                 "start": task["start"],
-                "answers": [done.get(i, {}).get("answer", "") for i in range(len(questions))],
-                "options": [done.get(i, {}).get("options", []) for i in range(len(questions))],
+                "options": [done.get(i, []) for i in range(len(questions))],
             }
         ]
     }

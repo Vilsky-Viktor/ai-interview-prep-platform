@@ -9,57 +9,75 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Switch } from "@/components/ui/switch"
-import { MODE_LABELS, ROUND_MODES } from "@/constants/rounds"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
-import type { RoundMode } from "@/types/round"
 
 export function InterviewSettings({
   interviewId,
-  mode,
   shareResults,
+  deletable,
+  leaveTo,
 }: {
   interviewId: string
-  mode: RoundMode
   shareResults: boolean
+  deletable: boolean
+  leaveTo: string
 }) {
   const router = useRouter()
-  const [currentMode, setCurrentMode] = useState(mode)
   const [shared, setShared] = useState(shareResults)
   const [saving, setSaving] = useState(false)
+  const [confirming, setConfirming] = useState(false)
+  const [deleting, setDeleting] = useState(false)
 
-  async function save(nextMode: RoundMode, nextShared: boolean) {
-    if (saving || (nextMode === currentMode && nextShared === shared)) {
+  async function save(next: boolean) {
+    if (saving || next === shared) {
       return
     }
 
-    const previousMode = currentMode
-    const previousShared = shared
-
-    setCurrentMode(nextMode)
-    setShared(nextShared)
+    setShared(next)
     setSaving(true)
 
     try {
       await apiFetch(`/companies/interviews/${interviewId}/settings`, {
         method: "PATCH",
-        body: JSON.stringify({ mode: nextMode, share_results: nextShared }),
+        body: JSON.stringify({ share_results: next }),
       })
       router.refresh()
     } catch (error) {
-      setCurrentMode(previousMode)
-      setShared(previousShared)
+      setShared(!next)
       toast.error(apiErrorMessage(error, "Couldn't save the interview settings."))
     } finally {
       setSaving(false)
     }
   }
 
+  async function remove() {
+    setDeleting(true)
+
+    try {
+      await apiFetch(`/companies/interviews/${interviewId}`, { method: "DELETE" })
+      router.push(leaveTo)
+      router.refresh()
+    } catch (error) {
+      toast.error(apiErrorMessage(error, "Couldn't delete the interview. Please try again."))
+      setDeleting(false)
+    }
+  }
+
   return (
-    <Dialog>
+    <Dialog
+      onOpenChange={(open) => {
+        if (!open) {
+          setConfirming(false)
+        }
+      }}
+    >
       <DialogTrigger
         render={
           <Button
@@ -77,35 +95,60 @@ export function InterviewSettings({
         className="sm:max-w-lg"
         aria-label="Settings"
       >
-        <div className="space-y-6">
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-lg font-medium">Mode</span>
-            <div className="inline-flex shrink-0 rounded-lg border p-1">
-              {ROUND_MODES.map((value) => (
-                <Button
-                  key={value}
-                  type="button"
-                  variant={currentMode === value ? "secondary" : "ghost"}
-                  className="h-10 px-5 text-base"
-                  disabled={saving}
-                  onClick={() => save(value, shared)}
-                >
-                  {MODE_LABELS[value]}
-                </Button>
-              ))}
+        {confirming ? (
+          <>
+            <DialogHeader>
+              <DialogTitle className="no-dot">Delete this interview?</DialogTitle>
+              <DialogDescription>
+                Candidates lose access, and their results are deleted. This can&apos;t
+                be undone.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button
+                variant="outline"
+                className="h-10 px-5 text-base"
+                disabled={deleting}
+                onClick={() => setConfirming(false)}
+              >
+                Keep
+              </Button>
+              <Button
+                variant="destructive"
+                className="h-10 px-5 text-base"
+                disabled={deleting}
+                onClick={remove}
+              >
+                {deleting ? "Deleting…" : "Delete"}
+              </Button>
+            </DialogFooter>
+          </>
+        ) : (
+          <>
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-lg font-medium">Show scores to the candidate</span>
+              <Switch
+                checked={shared}
+                disabled={saving}
+                aria-label="Show scores to the candidate"
+                onCheckedChange={save}
+              />
             </div>
-          </div>
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-lg font-medium">Show scores to the candidate</span>
-            <Switch
-              checked={shared}
-              disabled={saving}
-              aria-label="Show scores to the candidate"
-              onCheckedChange={(checked) => save(currentMode, checked)}
-            />
-          </div>
-        </div>
-        <DialogFooter showCloseButton />
+            {deletable && (
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-lg font-medium">Delete interview</span>
+                <Button
+                  variant="destructive"
+                  className="h-10 px-5 text-base"
+                  onClick={() => setConfirming(true)}
+                >
+                  Delete
+                </Button>
+              </div>
+            )}
+            <DialogFooter showCloseButton />
+          </>
+        )}
       </DialogContent>
     </Dialog>
   )

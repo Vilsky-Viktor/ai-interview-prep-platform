@@ -6,7 +6,7 @@ from app.helpers.review import build_review
 from app.helpers.sessions import session_out
 from app.schemas.sessions import InviteScoresIn, ScorecardSession, SessionOut, SessionsCreate
 from app.service_auth import ServiceCaller
-from app.storage import sessions
+from app.storage import rounds, sessions
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -20,7 +20,7 @@ async def create_sessions(body: SessionsCreate, caller: ServiceCaller) -> list[S
         return [session_out(row) for row in existing]
 
     rows = await sessions.create_many(
-        body.user_id, body.candidate_invite_id, body.mode, body.share_results, body.topics
+        body.user_id, body.candidate_invite_id, body.share_results, body.topics
     )
 
     return [session_out(row) for row in rows]
@@ -38,6 +38,18 @@ async def invite_scores(
     }
 
 
+@router.delete("/preparations/{preparation_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_preparation_data(preparation_id: UUID, caller: ServiceCaller) -> None:
+    """Called by library before it deletes a preparation; safe to repeat."""
+    await rounds.remove_for_preparation(preparation_id)
+
+
+@router.delete("/interviews/{interview_set_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_interview_data(interview_set_id: UUID, caller: ServiceCaller) -> None:
+    """Called by companies before it deletes an interview; safe to repeat."""
+    await sessions.remove_for_interview(interview_set_id)
+
+
 @router.get("/invites/{invite_id}/scorecard")
 async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[ScorecardSession]:
     rows = await sessions.list_for_invite(invite_id)
@@ -49,7 +61,6 @@ async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[Score
         ScorecardSession(
             id=row.id,
             topic_title=row.topic_title,
-            mode=row.mode,
             status=row.status,
             final_score=row.final_score,
             review=build_review(row),

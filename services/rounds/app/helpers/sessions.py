@@ -30,7 +30,6 @@ def session_out(row: Session, interview_title: str | None = None) -> SessionOut:
         topic_id=row.topic_id,
         topic_title=row.topic_title,
         interview_title=interview_title,
-        mode=row.mode,
         share_results=row.share_results,
         status=row.status,
         total=len(row.questions),

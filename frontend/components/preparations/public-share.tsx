@@ -97,7 +97,7 @@ export function PublicShare({ preparationId, title }: PublicShareProps) {
         <Button
           type="button"
           size="icon"
-          className="absolute top-1/2 right-3 size-10 -translate-y-1/2 rounded-full"
+          className="absolute inset-y-0 right-3 my-auto size-10 rounded-full"
           aria-label="Copy link"
           onClick={copy}
           disabled={!url}

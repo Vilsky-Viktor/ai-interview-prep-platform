@@ -11,7 +11,6 @@ class Option(BaseModel):
 class Question(BaseModel):
     id: UUID
     text: str
-    reference_answer: str
     options: list[Option]
 
 
@@ -19,5 +18,4 @@ class TopicQuestions(BaseModel):
     id: UUID
     preparation_id: UUID
     title: str
-    question_limit: int | None = None
     questions: list[Question]

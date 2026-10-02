@@ -3,8 +3,7 @@ import { notFound } from "next/navigation"
 
 import { BackLink } from "@/components/back-link"
 import { PageHeader } from "@/components/page-header"
-import { CompareCell } from "@/components/rounds/compare-cell"
-import { MODE_LABELS } from "@/constants/rounds"
+import { CompareList } from "@/components/rounds/compare-list"
 import { formatDate } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
 import type { ReviewItem, Round } from "@/types/round"
@@ -36,10 +35,6 @@ export default async function ComparePage({
     notFound()
   }
 
-  const secondByQuestion = new Map(
-    second.review.map((item) => [item.question_id, item])
-  )
-
   return (
     <main className="mx-auto max-w-4xl space-y-8 px-6 py-12">
       <PageHeader
@@ -64,34 +59,13 @@ export default async function ComparePage({
               {round.final_score ?? 0}%
             </p>
             <p className="text-sm text-muted-foreground">
-              {MODE_LABELS[round.mode]} · {formatDate(round.started_at)}
+              {formatDate(round.started_at)}
             </p>
           </div>
         ))}
       </div>
 
-      <ul className="divide-y rounded-2xl border">
-        {first.review.map((item) => {
-          const other = secondByQuestion.get(item.question_id)
-          const reference = item.reference_answer ?? other?.reference_answer
-
-          return (
-            <li key={item.question_id} className="space-y-4 p-5">
-              <p className="font-medium">{item.text}</p>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <CompareCell item={item} />
-                <CompareCell item={other} />
-              </div>
-              {reference && (
-                <p className="text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">Reference: </span>
-                  {reference}
-                </p>
-              )}
-            </li>
-          )
-        })}
-      </ul>
+      <CompareList first={first.review} second={second.review} />
     </main>
   )
 }

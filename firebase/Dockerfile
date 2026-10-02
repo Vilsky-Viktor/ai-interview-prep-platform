@@ -8,4 +8,8 @@ COPY firebase.json .firebaserc ./
 
 EXPOSE 9199 4100
 
-CMD ["firebase", "emulators:start", "--only", "auth", "--project", "demo-prepza"]
+# Users are saved to data/export on shutdown and loaded from it on start. data/ is a volume.
+# The emulator runs from inside data/ (it still finds firebase.json one level up), because it
+# writes the export to a temporary folder in its working directory and then moves it into
+# place, which fails across filesystems.
+CMD ["sh", "-c", "mkdir -p data && cd data && if [ -f export/firebase-export-metadata.json ]; then set -- --import=export; fi; exec firebase emulators:start --only auth --project demo-prepza --export-on-exit=export \"$@\""]

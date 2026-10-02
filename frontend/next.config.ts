@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   watchOptions: {
     pollIntervalMs: 1000,
   },
+  // Production builds use Turbopack and skip the webpack hook below, which only sets up polling
+  // for the dev server (that runs with --webpack). Without this, Next 16 refuses to build.
+  turbopack: {},
   webpack: (config, { dev }) => {
     if (dev) {
       config.watchOptions = {

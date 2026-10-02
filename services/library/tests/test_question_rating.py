@@ -1,10 +1,11 @@
 import uuid
 
-from app.auth import current_user
+from prepza_common.auth import current_user
+from prepza_common.user import User
+
 from app.constants.sets import SetKind, Visibility
 from app.main import app
 from app.models.sets import QuestionSet
-from app.schemas.user import User
 from app.storage import feedback, preparations
 
 QUESTION_ID = uuid.uuid4()
@@ -29,12 +30,7 @@ def test_owner_can_rate_and_read_question(client, monkeypatch):
         return question_set()
 
     async def fake_rate(question_id, user_id, value):
-        if "value" in stored:
-            return False
-
         stored["value"] = value
-
-        return True
 
     async def fake_mine(question_id, user_id):
         return stored.get("value")
@@ -51,7 +47,7 @@ def test_owner_can_rate_and_read_question(client, monkeypatch):
 
     assert empty.json() == {"value": None}
     assert put.status_code == 204
-    assert again.status_code == 409
-    assert saved.json() == {"value": 1}
+    assert again.status_code == 204
+    assert saved.json() == {"value": -1}
 
     app.dependency_overrides.clear()

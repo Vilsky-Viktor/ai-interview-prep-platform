@@ -2,11 +2,11 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.auth import current_user
+from prepza_common.user import User
 
-from app.auth import current_user
 from app.main import app
 from app.models.companies import Company, Member
-from app.schemas.user import User
 from app.storage import companies, interviews
 
 OWNED_ID = uuid.uuid4()
@@ -45,7 +45,7 @@ def two_companies(monkeypatch):
     owned = company(OWNED_ID, "My company", "owner")
     joined = company(JOINED_ID, "Arcolabs", "admin")
 
-    async def fake_list(user_id):
+    async def fake_list(user_id, offset, limit):
         return [owned, joined]
 
     async def fake_get(company_id):
@@ -97,7 +97,11 @@ def test_owner_removes_company(client, two_companies, monkeypatch):
     async def fake_delete(company_id):
         removed.append(company_id)
 
+    async def no_interviews(_company_id):
+        return []
+
     monkeypatch.setattr(companies, "delete", fake_delete)
+    monkeypatch.setattr(interviews, "list_for_company", no_interviews)
     sign_in()
     response = client.delete(f"/companies/{OWNED_ID}")
 

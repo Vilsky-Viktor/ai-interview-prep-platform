@@ -1,13 +1,14 @@
 import uuid
 from datetime import UTC, datetime
 
-from app.auth import current_user
+from prepza_common.auth import current_user
+from prepza_common.user import User
+
 from app.helpers.interviews import pick_questions
 from app.integrations import library
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
-from app.schemas.user import User
 from app.storage import companies, interviews
 
 COMPANY_ID = uuid.uuid4()
@@ -23,7 +24,6 @@ def setup(monkeypatch, saved):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        mode="open",
         share_results=False,
         set_id=uuid.uuid4(),
         topic_limits={},

@@ -2,13 +2,13 @@ import uuid
 from datetime import UTC, datetime
 
 import httpx
+from prepza_common.auth import current_user
+from prepza_common.user import User
 
-from app.auth import current_user
 from app.integrations import generation
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
-from app.schemas.user import User
 from app.storage import companies, interviews
 
 COMPANY_ID = uuid.uuid4()
@@ -27,7 +27,6 @@ def setup(monkeypatch, role):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=GENERATION_ID,
-        mode="open",
         share_results=False,
         set_id=None,
         invites=[],
@@ -99,7 +98,8 @@ def test_only_managers_review_topics(client, monkeypatch):
 
         assert client.post(url, json=body).status_code == expected
 
-    assert calls == [body]
+    # Without hand edits the topics go through as null; generation then keeps its draft.
+    assert calls == [{**body, "topics": None}]
 
     app.dependency_overrides.clear()
 
@@ -144,5 +144,53 @@ def test_only_managers_retry(client, monkeypatch):
         assert client.post(url).status_code == expected
 
     assert calls == [GENERATION_ID]
+
+    app.dependency_overrides.clear()
+
+
+def test_only_managers_cancel_and_the_interview_goes_with_it(client, monkeypatch):
+    sign_in("bob")
+    removed = []
+
+    async def fake_cancel(generation_id, company_id):
+        return httpx.Response(
+            200,
+            json={"id": str(generation_id), "status": "cancelled"},
+            request=httpx.Request("POST", "http://generation"),
+        )
+
+    async def fake_remove(interview_id):
+        removed.append(interview_id)
+
+    monkeypatch.setattr(generation, "cancel", fake_cancel)
+    monkeypatch.setattr(interviews, "remove", fake_remove)
+    url = f"/interviews/{INTERVIEW_ID}/generation/cancel"
+
+    for role, expected in (("viewer", 403), ("admin", 200)):
+        setup(monkeypatch, role)
+
+        assert client.post(url).status_code == expected
+
+    assert removed == [INTERVIEW_ID]
+
+    app.dependency_overrides.clear()
+
+
+def test_a_finished_generation_keeps_its_interview(client, monkeypatch):
+    setup(monkeypatch, "admin")
+    sign_in("bob")
+    removed = []
+
+    async def fake_cancel(generation_id, company_id):
+        return httpx.Response(409, json={"detail": "Generation already finished"})
+
+    async def fake_remove(interview_id):
+        removed.append(interview_id)
+
+    monkeypatch.setattr(generation, "cancel", fake_cancel)
+    monkeypatch.setattr(interviews, "remove", fake_remove)
+
+    assert client.post(f"/interviews/{INTERVIEW_ID}/generation/cancel").status_code == 409
+    assert removed == []
 
     app.dependency_overrides.clear()

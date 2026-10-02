@@ -17,7 +17,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { MODE_LABELS } from "@/constants/rounds"
+import { VirtualList } from "@/components/virtual-list"
+import { usePagedList } from "@/hooks/use-paged-list"
 import { apiFetch } from "@/lib/api"
 import { formatDate } from "@/lib/format"
 import { scorePassed } from "@/lib/rounds"
@@ -27,15 +28,21 @@ import type { Round } from "@/types/round"
 type Pending = { id: string; kind: "delete" | "finish" }
 
 export function RoundHistory({
+  topicId,
   rounds,
   back,
   title,
 }: {
+  topicId: string
+  // The first page, already rendered by the server; the rest load as the user scrolls.
   rounds: Round[]
   back: ReactNode
   title: ReactNode
 }) {
-  const [items, setItems] = useState(rounds)
+  const { items, setItems, loadMore } = usePagedList(
+    `/rounds/topics/${topicId}/rounds`,
+    rounds
+  )
   const [selected, setSelected] = useState<string[]>([])
   const [pending, setPending] = useState<Pending | null>(null)
   const [busy, setBusy] = useState(false)
@@ -43,7 +50,9 @@ export function RoundHistory({
 
   function toggle(id: string, checked: boolean) {
     setSelected((current) =>
-      checked ? [...current, id].slice(-2) : current.filter((item) => item !== id)
+      checked
+        ? [...current, id].slice(-2)
+        : current.filter((item) => item !== id)
     )
   }
 
@@ -113,81 +122,105 @@ export function RoundHistory({
         </div>
       </div>
       {items.length === 0 && (
-        <p className="py-16 text-center text-muted-foreground">No rounds yet.</p>
+        <p className="py-16 text-center text-muted-foreground">
+          No rounds yet.
+        </p>
       )}
       {items.length > 0 && (
-        <ul className="divide-y rounded-2xl border">
-        {items.map((round) => {
-          const finished = round.status === "finished"
+        <VirtualList
+          items={items}
+          getKey={(round) => round.id}
+          estimateSize={89}
+          onEndReached={loadMore}
+          className="divide-y rounded-2xl border"
+          renderItem={(round) => {
+            const finished = round.status === "finished"
+            const score = finished ? round.final_score : round.current_score
 
-          return (
-            <li
-              key={round.id}
-              className="flex flex-wrap items-center gap-2 p-3 transition-colors hover:bg-muted/50 sm:flex-nowrap sm:gap-4 sm:p-4"
-            >
-              <div className="p-3">
-                <Checkbox
-                  className="size-6 [&_[data-slot=checkbox-indicator]>svg]:size-4"
-                  disabled={!finished}
-                  checked={selected.includes(round.id)}
-                  onCheckedChange={(checked) => toggle(round.id, checked)}
-                  aria-label="Select for comparison"
-                />
-              </div>
-              <Link href={`/rounds/${round.id}`} className="min-w-0 flex-1 space-y-1">
-                <span className="block text-lg font-medium">
-                  {MODE_LABELS[round.mode]}
-                </span>
-                <span className="block text-sm text-muted-foreground">
-                  {formatDate(round.started_at)} · {round.answered} of {round.total}{" "}
-                  answered
-                </span>
-              </Link>
-              {finished ? (
-                <span
-                  className={cn(
-                    "shrink-0 text-2xl font-light tabular-nums",
-                    scorePassed(round.final_score ?? 0)
-                      ? "text-green-600 dark:text-green-400"
-                      : "text-red-600 dark:text-red-400"
-                  )}
+            return (
+              <div className="flex flex-wrap items-center gap-2 p-3 transition-colors hover:bg-muted/50 sm:flex-nowrap sm:gap-4 sm:p-4">
+                <div className="p-3">
+                  <Checkbox
+                    className="size-6 [&_[data-slot=checkbox-indicator]>svg]:size-4"
+                    disabled={!finished}
+                    checked={selected.includes(round.id)}
+                    onCheckedChange={(checked) => toggle(round.id, checked)}
+                    aria-label="Select for comparison"
+                  />
+                </div>
+                <Link
+                  href={`/rounds/${round.id}`}
+                  className="min-w-0 flex-1 space-y-1"
                 >
-                  {round.final_score}%
-                </span>
-              ) : (
-                <div className="flex shrink-0 items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    nativeButton={false}
-                    render={<Link href={`/rounds/${round.id}`} />}
+                  <span className="block text-lg font-medium">
+                    <time dateTime={round.started_at} suppressHydrationWarning>
+                      {formatDate(round.started_at)}
+                    </time>
+                  </span>
+                  <span className="block text-sm text-muted-foreground">
+                    {round.answered} of {round.total} answered
+                  </span>
+                </Link>
+                {score != null && (
+                  <div
+                    className={cn(
+                      "flex shrink-0 items-baseline gap-2",
+                      !finished && "mr-2 sm:mr-4"
+                    )}
                   >
-                    Continue
-                  </Button>
+                    {!finished && (
+                      <span className="text-xs text-muted-foreground">
+                        grade
+                      </span>
+                    )}
+                    <span
+                      className={cn(
+                        "text-2xl font-light tabular-nums",
+                        scorePassed(score)
+                          ? "text-green-600 dark:text-green-400"
+                          : "text-red-600 dark:text-red-400"
+                      )}
+                    >
+                      {score}%
+                    </span>
+                  </div>
+                )}
+                {!finished && (
+                  <div className="flex shrink-0 items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      nativeButton={false}
+                      render={<Link href={`/rounds/${round.id}`} />}
+                    >
+                      Continue
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        setPending({ id: round.id, kind: "finish" })
+                      }
+                    >
+                      Finish
+                    </Button>
+                  </div>
+                )}
+                <div className="p-3">
                   <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setPending({ id: round.id, kind: "finish" })}
+                    variant="ghost"
+                    size="icon"
+                    aria-label="Delete round"
+                    className="size-12 text-muted-foreground hover:text-destructive"
+                    onClick={() => setPending({ id: round.id, kind: "delete" })}
                   >
-                    Finish
+                    <Trash2Icon className="size-6" />
                   </Button>
                 </div>
-              )}
-              <div className="p-3">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label="Delete round"
-                  className="size-12 text-muted-foreground hover:text-destructive"
-                  onClick={() => setPending({ id: round.id, kind: "delete" })}
-                >
-                  <Trash2Icon className="size-6" />
-                </Button>
               </div>
-            </li>
-          )
-        })}
-        </ul>
+            )
+          }}
+        />
       )}
       <Dialog
         open={pending !== null}
@@ -199,7 +232,7 @@ export function RoundHistory({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle>
+            <DialogTitle className="no-dot">
               {finishing ? "Finish this round?" : "Delete this round?"}
             </DialogTitle>
             <DialogDescription>

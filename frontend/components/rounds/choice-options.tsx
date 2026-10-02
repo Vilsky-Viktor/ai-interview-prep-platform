@@ -3,6 +3,7 @@
 import { cn } from "cn"
 import { useState } from "react"
 
+import { InlineText } from "@/components/questions/inline-text"
 import type { AnswerResult } from "@/types/round"
 
 type ChoiceOptionsProps = {
@@ -57,7 +58,9 @@ export function ChoiceOptions({ options, result, onAnswer }: ChoiceOptionsProps)
             <span className="w-4 shrink-0 text-muted-foreground">
               {String.fromCharCode(65 + index)}
             </span>
-            <span className="min-w-0">{option}</span>
+            <span className="min-w-0">
+              <InlineText text={option} />
+            </span>
           </button>
         </li>
       ))}

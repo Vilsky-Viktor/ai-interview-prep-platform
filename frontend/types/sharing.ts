@@ -1,12 +1,6 @@
-export type Share = {
-  email: string
-  accepted: boolean
-  created_at: string
-}
+import type { components } from "@/types/api/library"
 
-export type ShareInvite = {
-  preparation_id: string
-  title: string
-  email: string
-  accepted: boolean
-}
+type Schemas = components["schemas"]
+
+export type Share = Schemas["ShareOut"]
+export type ShareInvite = Schemas["ShareInviteOut"]

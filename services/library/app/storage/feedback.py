@@ -1,24 +1,29 @@
 import uuid
 
 from sqlalchemy import func, select
+from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import IntegrityError
 
 from app.models.feedback import PreparationRating, QuestionRating, QuestionReport
+from app.storage import stats
 from app.storage.db import Session
 
 
-async def rate_preparation(set_id: uuid.UUID, user_id: str, value: int) -> bool:
+async def rate_preparation(set_id: uuid.UUID, user_id: str, value: int) -> None:
+    """Sets the user's rating; rating again changes it."""
+    statement = (
+        insert(PreparationRating)
+        .values(set_id=set_id, user_id=user_id, value=value)
+        .on_conflict_do_update(
+            index_elements=[PreparationRating.set_id, PreparationRating.user_id],
+            set_={"value": value},
+        )
+    )
+
     async with Session() as session:
-        session.add(PreparationRating(set_id=set_id, user_id=user_id, value=value))
-
-        try:
-            await session.commit()
-        except IntegrityError:
-            await session.rollback()
-
-            return False
-
-        return True
+        await session.execute(statement)
+        await stats.recount(session, set_id)
+        await session.commit()
 
 
 async def my_preparation_rating(set_id: uuid.UUID, user_id: str) -> int | None:
@@ -30,18 +35,20 @@ async def my_preparation_rating(set_id: uuid.UUID, user_id: str) -> int | None:
         return await session.scalar(query)
 
 
-async def rate_question(question_id: uuid.UUID, user_id: str, value: int) -> bool:
+async def rate_question(question_id: uuid.UUID, user_id: str, value: int) -> None:
+    """Sets the user's thumbs up or down; voting again changes it."""
+    statement = (
+        insert(QuestionRating)
+        .values(question_id=question_id, user_id=user_id, value=value)
+        .on_conflict_do_update(
+            index_elements=[QuestionRating.question_id, QuestionRating.user_id],
+            set_={"value": value},
+        )
+    )
+
     async with Session() as session:
-        session.add(QuestionRating(question_id=question_id, user_id=user_id, value=value))
-
-        try:
-            await session.commit()
-        except IntegrityError:
-            await session.rollback()
-
-            return False
-
-        return True
+        await session.execute(statement)
+        await session.commit()
 
 
 async def my_question_rating(question_id: uuid.UUID, user_id: str) -> int | None:
@@ -82,11 +89,16 @@ async def question_stats(question_ids: list[uuid.UUID]) -> dict[uuid.UUID, dict[
     return stats
 
 
-async def list_reports(question_id: uuid.UUID) -> list[QuestionReport]:
+async def list_reports(
+    question_id: uuid.UUID, offset: int = 0, limit: int | None = None
+) -> list[QuestionReport]:
+    """Newest first; without a limit, every report (the verifier reads them all)."""
     query = (
         select(QuestionReport)
         .where(QuestionReport.question_id == question_id)
-        .order_by(QuestionReport.created_at.desc())
+        .order_by(QuestionReport.created_at.desc(), QuestionReport.id)
+        .offset(offset)
+        .limit(limit)
     )
 
     async with Session() as session:

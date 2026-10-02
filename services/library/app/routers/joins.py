@@ -1,8 +1,8 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.auth import CurrentUser
 
-from app.auth import CurrentUser
 from app.constants.sets import Access
 from app.schemas.feedback import PreparationRatingIn
 from app.services.access import access_for, require_member
@@ -43,5 +43,4 @@ async def rate(preparation_id: UUID, body: PreparationRatingIn, user: CurrentUse
     if access == Access.OWNER:
         raise HTTPException(status.HTTP_403_FORBIDDEN, "You can't rate your own preparation")
 
-    if not await feedback.rate_preparation(preparation_id, user.uid, body.value):
-        raise HTTPException(status.HTTP_409_CONFLICT, "Already rated")
+    await feedback.rate_preparation(preparation_id, user.uid, body.value)

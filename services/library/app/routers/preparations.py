@@ -1,15 +1,16 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.auth import CurrentUser, OptionalUser
+from prepza_common.paging import PageParams
 
-from app.auth import CurrentUser, OptionalUser
 from app.helpers.preparations import summary_out
+from app.integrations import rounds
 from app.schemas.preparations import (
+    MyPreparation,
     PreparationDetail,
-    PreparationSummary,
     QuestionText,
     TitleIn,
-    TopicLimitIn,
     TopicOut,
     VisibilityIn,
 )
@@ -21,19 +22,20 @@ router = APIRouter(prefix="/preparations", tags=["preparations"])
 
 
 @router.get("")
-async def list_preparations(user: CurrentUser) -> list[PreparationSummary]:
-    return [summary_out(row) for row in await preparations.list_for_owner(user.uid)]
+async def list_mine(user: CurrentUser, page: PageParams) -> list[MyPreparation]:
+    """The user's own and joined preparations together, newest first, a page at a time."""
+    rows = await preparations.list_mine(user.uid, page.offset, page.limit)
 
-
-@router.get("/joined")
-async def list_joined(user: CurrentUser) -> list[PreparationSummary]:
-    return [summary_out(row) for row in await preparations.list_joined(user.uid)]
+    return [
+        MyPreparation(**summary_out(row).model_dump(), owned=row[0].owner_id == user.uid)
+        for row in rows
+    ]
 
 
 @router.get("/topics/{topic_id}/questions")
 async def list_topic_questions(topic_id: UUID, user: OptionalUser) -> list[QuestionText]:
     """Question text for a topic the viewer can already open."""
-    found = await preparations.get_topic_with_questions(topic_id)
+    found = await preparations.get_topic_with_question_texts(topic_id)
     question_set, topic = found if found else (None, None)
     user_id = user.uid if user else None
     access = await access_for(question_set, user_id) if question_set else None
@@ -42,22 +44,6 @@ async def list_topic_questions(topic_id: UUID, user: OptionalUser) -> list[Quest
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Topic not found")
 
     return await question_texts(topic.questions)
-
-
-@router.put("/topics/{topic_id}/limit", status_code=status.HTTP_204_NO_CONTENT)
-async def set_topic_limit(topic_id: UUID, body: TopicLimitIn, user: CurrentUser) -> None:
-    """Only the owner limits how many of the topic's questions each round asks."""
-    found = await preparations.get_topic_with_questions(topic_id)
-    question_set, topic = found if found else (None, None)
-    require_owner(question_set, user.uid)
-
-    if body.limit is not None and body.limit > len(topic.questions):
-        raise HTTPException(
-            status.HTTP_422_UNPROCESSABLE_CONTENT,
-            f"The topic has only {len(topic.questions)} questions",
-        )
-
-    await preparations.set_topic_limit(topic_id, body.limit)
 
 
 @router.get("/{preparation_id}")
@@ -82,7 +68,6 @@ async def get_preparation(preparation_id: UUID, user: OptionalUser) -> Preparati
                 title=topic.title,
                 subtopics=topic.subtopics,
                 question_count=question_count,
-                question_limit=topic.question_limit,
             )
             for topic, question_count in topics
         ],
@@ -102,3 +87,14 @@ async def update_title(preparation_id: UUID, body: TitleIn, user: CurrentUser) -
 async def update_visibility(preparation_id: UUID, body: VisibilityIn, user: CurrentUser) -> None:
     require_owner(await preparations.get(preparation_id), user.uid)
     await preparations.set_visibility(preparation_id, body.visibility)
+
+
+@router.delete("/{preparation_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_preparation(preparation_id: UUID, user: CurrentUser) -> None:
+    """Only the owner deletes a preparation; everyone who joined it loses access too.
+
+    Practice data goes first, so a failure there leaves the preparation in place to retry.
+    """
+    require_owner(await preparations.get(preparation_id), user.uid)
+    await rounds.delete_preparation_data(preparation_id)
+    await preparations.remove(preparation_id)

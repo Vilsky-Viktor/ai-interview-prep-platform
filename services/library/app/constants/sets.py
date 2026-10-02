@@ -24,4 +24,3 @@ class Access(StrEnum):
     PUBLIC = "public"
 
 
-SEARCH_LIMIT = 50

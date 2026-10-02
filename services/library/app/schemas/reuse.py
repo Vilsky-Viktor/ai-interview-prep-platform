@@ -1,0 +1,28 @@
+from uuid import UUID
+
+from prepza_common.sets import OptionIn
+from pydantic import BaseModel, Field
+
+from app.constants.reuse import MAX_REUSE_COUNT
+
+
+class ReuseIn(BaseModel):
+    embedding: list[float]
+    level: str
+    count: int = Field(ge=1, le=MAX_REUSE_COUNT)
+
+
+class ReusedQuestion(BaseModel):
+    text: str
+    options: list[OptionIn]
+
+
+class TopicToEmbed(BaseModel):
+    id: UUID
+    title: str
+    subtopics: list[str]
+
+
+class TopicEmbedding(BaseModel):
+    id: UUID
+    embedding: list[float]

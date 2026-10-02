@@ -1,24 +1,39 @@
-"""Correlated subqueries with the public numbers of a preparation."""
+"""A preparation's public numbers, stored on the set and recounted whenever they change."""
 
-from sqlalchemy import func, select
+import uuid
+
+from sqlalchemy import func, select, update
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.feedback import PreparationRating
-from app.models.sets import QuestionSet, Topic
+from app.models.sets import QuestionSet
 from app.models.sharing import JoinedPreparation
 
 
 def summary_columns() -> tuple:
-    topic_count = select(func.count(Topic.id)).where(Topic.set_id == QuestionSet.id)
-    rating_avg = select(func.avg(PreparationRating.value)).where(
-        PreparationRating.set_id == QuestionSet.id
-    )
-    rating_count = select(func.count()).where(PreparationRating.set_id == QuestionSet.id)
-    join_count = select(func.count()).where(JoinedPreparation.set_id == QuestionSet.id)
+    rating_avg = QuestionSet.rating_sum * 1.0 / func.nullif(QuestionSet.rating_count, 0)
 
-    # Correlate only with the preparation, even when the outer query joins these tables.
     return (
-        topic_count.correlate(QuestionSet).scalar_subquery().label("topic_count"),
-        rating_avg.correlate(QuestionSet).scalar_subquery().label("rating_avg"),
-        rating_count.correlate(QuestionSet).scalar_subquery().label("rating_count"),
-        join_count.correlate(QuestionSet).scalar_subquery().label("join_count"),
+        QuestionSet.topic_count.label("topic_count"),
+        rating_avg.label("rating_avg"),
+        QuestionSet.rating_count.label("rating_count"),
+        QuestionSet.join_count.label("join_count"),
+    )
+
+
+async def recount(session: AsyncSession, set_id: uuid.UUID) -> None:
+    """Recounts ratings and joins in the caller's transaction, so they can never drift."""
+    rated = PreparationRating.set_id == set_id
+    await session.execute(
+        update(QuestionSet)
+        .where(QuestionSet.id == set_id)
+        .values(
+            rating_sum=select(func.coalesce(func.sum(PreparationRating.value), 0))
+            .where(rated)
+            .scalar_subquery(),
+            rating_count=select(func.count()).where(rated).scalar_subquery(),
+            join_count=select(func.count())
+            .where(JoinedPreparation.set_id == set_id)
+            .scalar_subquery(),
+        )
     )

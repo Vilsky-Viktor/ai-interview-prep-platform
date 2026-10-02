@@ -1,12 +1,20 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Request, status
+from prepza_common.auth import CurrentUser
+from prepza_common.paging import PageParams
+from prepza_common.rate_limit import hit
 
-from app.auth import CurrentUser
 from app.config.settings import settings
-from app.helpers.rate_limit import hit
+from app.constants.kinds import GenerationKind
 from app.models.generation import Generation
-from app.schemas.generation import GenerationCreate, GenerationOut, ReviewRequest
+from app.schemas.generation import (
+    GenerationCreate,
+    GenerationOut,
+    GenerationSummary,
+    ReviewRequest,
+)
+from app.services.cancel import cancel_generation
 from app.services.retry import retry_generation
 from app.services.review import submit_review
 from app.storage import generations
@@ -40,6 +48,14 @@ async def create_generation(
     return GenerationOut.model_validate(generation)
 
 
+@router.get("")
+async def list_unfinished(user: CurrentUser, page: PageParams) -> list[GenerationSummary]:
+    """Preparations still generating, waiting for topic review, or failed, newest first."""
+    rows = await generations.list_unfinished(user.uid, page.offset, page.limit)
+
+    return [GenerationSummary.of(item) for item in rows]
+
+
 @router.get("/{generation_id}")
 async def get_generation(generation_id: UUID, user: CurrentUser) -> GenerationOut:
     return GenerationOut.model_validate(await get_owned(generation_id, user))
@@ -63,3 +79,14 @@ async def retry(generation_id: UUID, user: CurrentUser, request: Request) -> Gen
     return GenerationOut.model_validate(
         await retry_generation(request.app.state.arq, generation)
     )
+
+
+@router.post("/{generation_id}/cancel")
+async def cancel(generation_id: UUID, user: CurrentUser) -> GenerationOut:
+    """Interviews are cancelled through companies, which also removes the interview."""
+    generation = await get_owned(generation_id, user)
+
+    if generation.kind == GenerationKind.INTERVIEW:
+        raise HTTPException(status.HTTP_409_CONFLICT, "Interview generations can't be cancelled")
+
+    return GenerationOut.model_validate(await cancel_generation(generation))

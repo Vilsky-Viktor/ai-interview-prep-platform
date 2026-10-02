@@ -1,7 +1,6 @@
 "use client"
 
 import { LogOutIcon } from "lucide-react"
-import Link from "next/link"
 
 import { useAuth } from "@/components/auth-provider"
 import { ThemeModes } from "@/components/theme-toggle"
@@ -61,19 +60,6 @@ export function UserMenu() {
             <p className="truncate font-normal">{user.email}</p>
           </DropdownMenuLabel>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          className="px-3 py-2"
-          render={<Link href="/preparations" />}
-        >
-          My preparations
-        </DropdownMenuItem>
-        <DropdownMenuItem className="px-3 py-2" render={<Link href="/company" />}>
-          Companies
-        </DropdownMenuItem>
-        <DropdownMenuItem className="px-3 py-2" render={<Link href="/library" />}>
-          Public library
-        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="px-3 py-2"

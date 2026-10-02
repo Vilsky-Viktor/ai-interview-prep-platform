@@ -2,13 +2,13 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.auth import current_user
+from prepza_common.user import User
 
-from app.auth import current_user
 from app.constants.invites import InviteStatus
 from app.main import app
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
-from app.schemas.user import User
 from app.storage import invites as invite_store
 
 INVITE_ID = uuid.uuid4()
@@ -41,7 +41,6 @@ def stored_invite(monkeypatch):
         id=INTERVIEW_ID,
         company_id=uuid.uuid4(),
         generation_id=uuid.uuid4(),
-        mode="choice",
         share_results=False,
         set_id=uuid.uuid4(),
     )

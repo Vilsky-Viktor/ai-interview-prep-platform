@@ -6,7 +6,7 @@ import { toast } from "sonner"
 
 import { InputAction } from "@/components/input-action"
 import { PublicShare } from "@/components/preparations/public-share"
-import { Badge } from "@/components/ui/badge"
+import { ShareList } from "@/components/preparations/share-list"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -30,20 +30,11 @@ export function ShareDialog({
   title,
   isPublic,
 }: ShareDialogProps) {
-  const [shares, setShares] = useState<Share[] | null>(null)
+  // Bumped after each new share, so the list loads again with it at the top.
+  const [version, setVersion] = useState(0)
   const [email, setEmail] = useState("")
   const [sending, setSending] = useState(false)
   const sharesPath = `/library/preparations/${preparationId}/shares`
-
-  function load(open: boolean) {
-    if (!open || isPublic) {
-      return
-    }
-
-    apiFetch<Share[]>(sharesPath)
-      .then(setShares)
-      .catch(() => setShares([]))
-  }
 
   async function send(event: React.FormEvent) {
     event.preventDefault()
@@ -54,10 +45,7 @@ export function ShareDialog({
         method: "POST",
         body: JSON.stringify({ email }),
       })
-      setShares((current) => [
-        share,
-        ...(current ?? []).filter((item) => item.email !== share.email),
-      ])
+      setVersion((current) => current + 1)
       setEmail("")
       toast.success(`Invite sent to ${share.email}`)
     } catch (error) {
@@ -73,7 +61,7 @@ export function ShareDialog({
   }
 
   return (
-    <Dialog onOpenChange={load}>
+    <Dialog>
       <DialogTrigger render={<Button variant="outline" />}>
         <Share2Icon />
         Share
@@ -103,21 +91,7 @@ export function ShareDialog({
                 disabled={sending || !email}
               />
             </form>
-            {shares && shares.length > 0 && (
-              <ul className="space-y-2">
-                {shares.map((share) => (
-                  <li
-                    key={share.email}
-                    className="flex items-center justify-between gap-2 rounded-lg bg-black/5 px-5 py-4 dark:bg-black/40"
-                  >
-                    <span className="truncate">{share.email}</span>
-                    <Badge variant={share.accepted ? "secondary" : "outline"}>
-                      {share.accepted ? "Joined" : "Invited"}
-                    </Badge>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <ShareList key={version} path={sharesPath} />
           </>
         )}
       </DialogContent>

@@ -1,19 +1,19 @@
 from uuid import UUID
 
 import httpx
+from prepza_common import http
 
 from app.config.settings import settings
 from app.service_auth import service_token
 
 
 async def _request(method: str, path: str, **kwargs) -> httpx.Response:
-    async with httpx.AsyncClient(timeout=30) as client:
-        return await client.request(
-            method,
-            f"{settings.library_url}/internal/questions{path}",
-            headers={"Authorization": f"Bearer {service_token()}"},
-            **kwargs,
-        )
+    return await http.get_client().request(
+        method,
+        f"{settings.library_url}/internal/questions{path}",
+        headers={"Authorization": f"Bearer {service_token()}"},
+        **kwargs,
+    )
 
 
 async def get_rating(question_id: UUID, user_id: str) -> httpx.Response:

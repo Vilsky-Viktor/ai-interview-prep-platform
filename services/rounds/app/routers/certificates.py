@@ -11,12 +11,10 @@ router = APIRouter(prefix="/certificates", tags=["certificates"])
 @router.get("/{certificate_id}")
 async def get_certificate(certificate_id: UUID) -> CertificateOut:
     """Public, no auth: certificates are shared by link."""
-    row = await certificates.get(certificate_id)
+    certificate = await certificates.get(certificate_id)
 
-    if row is None:
+    if certificate is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Certificate not found")
-
-    certificate, preparation_id = row
 
     return CertificateOut(
         id=certificate.id,
@@ -24,5 +22,5 @@ async def get_certificate(certificate_id: UUID) -> CertificateOut:
         topic_title=certificate.topic_title,
         score=certificate.score,
         issued_at=certificate.issued_at,
-        preparation_id=preparation_id,
+        preparation_id=certificate.preparation_id,
     )

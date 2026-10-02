@@ -16,6 +16,8 @@ class QuestionSet(Base):
     __tablename__ = "sets"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    # Null for sets saved before generations were tracked.
+    generation_id: Mapped[uuid.UUID | None] = mapped_column(unique=True)
     kind: Mapped[str] = mapped_column(String(32))
     owner_type: Mapped[str] = mapped_column(String(32))
     owner_id: Mapped[str] = mapped_column(String(128), index=True)
@@ -24,6 +26,11 @@ class QuestionSet(Base):
     level: Mapped[str] = mapped_column(String(32))
     requirements: Mapped[list] = mapped_column(JSONB)
     visibility: Mapped[str] = mapped_column(String(32), default=Visibility.PRIVATE)
+    # Stored so lists don't count per row; storage/stats.py keeps them up to date.
+    topic_count: Mapped[int] = mapped_column(default=0)
+    rating_sum: Mapped[int] = mapped_column(default=0)
+    rating_count: Mapped[int] = mapped_column(default=0)
+    join_count: Mapped[int] = mapped_column(default=0)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
@@ -41,7 +48,6 @@ class Topic(Base):
     position: Mapped[int]
     title: Mapped[str] = mapped_column(Text)
     subtopics: Mapped[list] = mapped_column(JSONB)
-    question_limit: Mapped[int | None]
     search: Mapped[str] = mapped_column(
         TSVECTOR, Computed(TOPIC_SEARCH_EXPRESSION, persisted=True), deferred=True
     )
@@ -60,5 +66,4 @@ class Question(Base):
     )
     position: Mapped[int]
     text: Mapped[str] = mapped_column(Text)
-    reference_answer: Mapped[str] = mapped_column(Text)
     options: Mapped[list] = mapped_column(JSONB)

@@ -1,12 +1,12 @@
 import uuid
 
 import pytest
+from prepza_common.auth import current_user
+from prepza_common.user import User
 
-from app.auth import current_user
 from app.constants.sets import SetKind, Visibility
 from app.main import app
 from app.models.sets import QuestionSet
-from app.schemas.user import User
 from app.storage import feedback, joins, preparations
 
 SET_ID = uuid.uuid4()
@@ -76,12 +76,7 @@ def test_joined_user_can_rate(client, monkeypatch):
         return user_id == "member"
 
     async def fake_rate(set_id, user_id, value):
-        if rated:
-            return False
-
         rated.append((user_id, value))
-
-        return True
 
     monkeypatch.setattr(preparations, "get", fake_get)
     monkeypatch.setattr(joins, "is_joined", fake_is_joined)
@@ -92,8 +87,8 @@ def test_joined_user_can_rate(client, monkeypatch):
     again = client.put(f"/preparations/{SET_ID}/rating", json={"value": 1})
 
     assert response.status_code == 204
-    assert again.status_code == 409
-    assert rated == [("member", 5)]
+    assert again.status_code == 204
+    assert rated == [("member", 5), ("member", 1)]
 
 
 def test_owner_cannot_rate(client, monkeypatch):

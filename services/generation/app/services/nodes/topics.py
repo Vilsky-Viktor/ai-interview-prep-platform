@@ -1,36 +1,62 @@
 import json
 
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.types import interrupt
 
-from app.constants.generation import MAX_TOPICS
-from app.helpers.prompts import bullet_list, company_block
+from app.constants.generation import MAX_TOPICS, TOPIC_ATTEMPTS
+from app.helpers.prompts import bullet_list
 from app.integrations import llm
 from app.models.state import State
-from app.prompts.topics import REVISION_PROMPT, TOPICS_PROMPT
+from app.prompts.topics import REVISION_PROMPT, TOO_MANY_TOPICS, TOPICS_PROMPT
 from app.schemas.topics import TopicList
-from app.services.nodes.questions import fan_out_questions
+from app.storage import draft_cache
+
+
+async def plan_topics(prompt: str) -> list[dict]:
+    """Ask for topics; when the model goes over the limit, send the list back to merge."""
+    structured_llm = llm.get_llm().with_structured_output(TopicList)
+    messages = [HumanMessage(content=prompt)]
+
+    for _ in range(TOPIC_ATTEMPTS):
+        result: TopicList = await structured_llm.ainvoke(messages)
+        topics = [topic.model_dump() for topic in result.topics]
+
+        if len(topics) <= MAX_TOPICS:
+            break
+
+        messages += [
+            AIMessage(content=json.dumps(topics, ensure_ascii=False)),
+            HumanMessage(content=TOO_MANY_TOPICS.format(count=len(topics), max_topics=MAX_TOPICS)),
+        ]
+
+    return topics
 
 
 async def generate_topics(state: State) -> dict:
-    structured_llm = llm.get_llm().with_structured_output(TopicList)
+    """Drafts topics; the same level and requirements reuse their earlier draft."""
     prompt = TOPICS_PROMPT.format(
-        company_block=company_block(state.get("company_description", "")),
         level=state["level"],
         requirements=bullet_list(state["requirements"]),
         max_topics=MAX_TOPICS,
     )
-    result: TopicList = await structured_llm.ainvoke([HumanMessage(content=prompt)])
+    topics = await draft_cache.get("topics", prompt)
 
-    return {"topics": [topic.model_dump() for topic in result.topics]}
+    if topics is None:
+        topics = await plan_topics(prompt)
+        await draft_cache.put("topics", prompt, topics)
+
+    return {"topics": topics}
 
 
 def human_review(state: State) -> dict:
-    # Pauses the graph until the API resumes it with
-    # {"selected": [topic indices to keep], "instructions": "free text or empty"}.
+    # Pauses the graph until the API resumes it with {"selected": [topic indices to keep],
+    # "instructions": "free text or empty", "topics": [every topic, edited by hand] or null}.
     response = interrupt({"topics": state["topics"]}) or {}
     keep = set(response.get("selected") or [])
-    kept = [topic for index, topic in enumerate(state["topics"]) if index in keep]
+    edited = response.get("topics")
+    # Edits made by hand need no model call; an edited list must match the drafted one.
+    topics = edited if edited and len(edited) == len(state["topics"]) else state["topics"]
+    kept = [topic for index, topic in enumerate(topics) if index in keep]
     instructions = (response.get("instructions") or "").strip()
 
     # Empty instructions mean approved; otherwise the topics go to revise_topics.
@@ -39,7 +65,6 @@ def human_review(state: State) -> dict:
 
 async def revise_topics(state: State) -> dict:
     """Apply the reviewer's free-text instructions to the topics kept in the checkboxes."""
-    structured_llm = llm.get_llm().with_structured_output(TopicList)
     prompt = REVISION_PROMPT.format(
         level=state["level"],
         requirements=bullet_list(state["requirements"]),
@@ -47,18 +72,17 @@ async def revise_topics(state: State) -> dict:
         feedback=state["feedback"],
         max_topics=MAX_TOPICS,
     )
-    result: TopicList = await structured_llm.ainvoke([HumanMessage(content=prompt)])
 
     return {
-        "topics": [topic.model_dump() for topic in result.topics],
+        "topics": await plan_topics(prompt),
         "feedback": "",
         "approved": False,
     }
 
 
 def review_router(state: State):
-    """Conditional edge after human_review: revise again, or start question generation."""
+    """Conditional edge after human_review: revise again, or look for questions to reuse."""
     if not state.get("approved"):
         return "revise_topics"
 
-    return fan_out_questions(state)
+    return "find_reused"

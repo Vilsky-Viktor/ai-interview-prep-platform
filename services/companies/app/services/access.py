@@ -1,8 +1,8 @@
 from uuid import UUID
 
 from fastapi import HTTPException, Request, status
+from prepza_common.auth import CurrentUser
 
-from app.auth import CurrentUser
 from app.constants.roles import Role
 from app.models.companies import Company, Member
 from app.models.interviews import Interview

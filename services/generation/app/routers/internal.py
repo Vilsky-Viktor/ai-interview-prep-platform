@@ -1,14 +1,16 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Request, status
+from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
-from app.helpers.rate_limit import hit
 from app.integrations import library
 from app.models.generation import Generation
 from app.schemas.generation import GenerationOut, ReviewRequest
 from app.schemas.regenerate import RegeneratedOut, RegenerateIn
+from app.schemas.verify import VerifyIn
 from app.service_auth import ServiceCaller
+from app.services.cancel import cancel_generation
 from app.services.regenerate import regenerate
 from app.services.retry import retry_generation
 from app.services.review import submit_review
@@ -62,6 +64,16 @@ async def retry_interview_generation(
     )
 
 
+@router.post("/generations/{generation_id}/cancel")
+async def cancel_interview_generation(
+    generation_id: UUID, company_id: UUID, caller: ServiceCaller
+) -> GenerationOut:
+    """For a caller that already checked the user may manage the company's interviews."""
+    generation = await get_company_generation(generation_id, company_id)
+
+    return GenerationOut.model_validate(await cancel_generation(generation))
+
+
 @router.post("/questions/{question_id}/regenerate")
 async def regenerate_interview_question(
     question_id: UUID, body: RegenerateIn, caller: ServiceCaller, request: Request
@@ -84,3 +96,11 @@ async def regenerate_interview_question(
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Couldn't generate a new question")
 
     return question
+
+
+@router.post("/questions/{question_id}/verify", status_code=status.HTTP_202_ACCEPTED)
+async def verify_question(
+    question_id: UUID, body: VerifyIn, caller: ServiceCaller, request: Request
+) -> None:
+    """The library flagged the question; the worker checks it and fixes or replaces it."""
+    await request.app.state.arq.enqueue_job("verify_question", str(question_id), body.flag)

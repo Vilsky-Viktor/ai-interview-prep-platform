@@ -1,101 +1,20 @@
-export type Company = {
-  id: string
-  name: string
-  role: "owner" | "admin"
-  interview_count: number
-  created_at: string
-}
+import type { components as companies } from "@/types/api/companies"
+import type { components as rounds } from "@/types/api/rounds"
 
-export type CompanyMember = {
-  email: string
-  role: "owner" | "admin"
-  joined: boolean
-  token: string | null
-  created_at: string
-}
+type Schemas = companies["schemas"]
+type RoundSchemas = rounds["schemas"]
 
-export type AdminInvite = {
-  company_name: string
-  email: string
-  joined: boolean
-}
-
-export type Interview = {
-  id: string
-  generation_id: string
-  set_id: string | null
-  title: string | null
-  mode: "open" | "choice"
-  share_results: boolean
-  candidate_count: number
-  created_at: string
-}
-
-export type InterviewDetail = Interview & {
-  topics: {
-    id: string
-    title: string
-    subtopics: string[]
-    question_count: number
-    question_limit: number | null
-  }[]
-}
-
-export type Candidate = {
-  id: string
-  email: string
-  status: "invited" | "in_process" | "finished"
-  progress: number
-  grade: number | null
-  created_at: string
-}
-
-export type InviteView = {
-  interview_id: string
-  title: string | null
-  company: string
-  email: string
-  status: "invited" | "in_process" | "finished"
-}
-
-export type SessionTopic = {
-  id: string
-  topic_title: string
-  status: "in_progress" | "finished"
-  total: number
-  answered: number
-}
-
-export type SessionSummary = {
-  id: string
-  topic_title: string
-  status: "in_progress" | "finished"
-  final_score: number | null
-}
-
-export type InterviewSession = {
-  id: string
-  topic_id: string
-  topic_title: string
-  interview_title: string | null
-  mode: "open" | "choice"
-  share_results: boolean
-  status: "in_progress" | "finished"
-  total: number
-  answered: number
-  current_score: number | null
-  final_score: number | null
-  started_at: string
-  finished_at: string | null
-}
-
-export type SessionAnswerResult = {
-  answer_id: string
-  answered: number
-  total: number
-  correct?: boolean | null
-  score?: number | null
-  feedback?: string | null
-  current_score?: number | null
+export type Company = Schemas["CompanyOut"]
+export type CompanyMember = Schemas["MemberOut"]
+export type AdminInvite = Schemas["AdminInviteOut"]
+export type Interview = Schemas["InterviewOut"]
+export type InterviewDetail = Schemas["InterviewDetail"]
+export type Candidate = Schemas["CandidateOut"]
+export type InviteView = Schemas["InviteView"]
+export type SessionSummary = Schemas["SessionSummary"]
+export type SessionTopic = RoundSchemas["SessionTopicOut"]
+export type InterviewSession = RoundSchemas["SessionOut"]
+// The option picked is kept on the client to mark it after the answer.
+export type SessionAnswerResult = RoundSchemas["SessionAnswerResult"] & {
   option_index?: number | null
 }

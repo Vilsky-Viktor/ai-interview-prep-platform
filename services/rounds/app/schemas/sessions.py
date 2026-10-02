@@ -3,7 +3,7 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
-from app.constants.rounds import Mode, RoundStatus
+from app.constants.rounds import RoundStatus
 from app.schemas.library import TopicQuestions
 from app.schemas.review import ReviewItem
 
@@ -15,7 +15,6 @@ class InviteScoresIn(BaseModel):
 class SessionsCreate(BaseModel):
     user_id: str
     candidate_invite_id: UUID
-    mode: Mode
     share_results: bool
     topics: list[TopicQuestions]
 
@@ -33,7 +32,6 @@ class SessionOut(BaseModel):
     topic_id: UUID
     topic_title: str
     interview_title: str | None = None
-    mode: Mode
     share_results: bool
     status: RoundStatus
     total: int
@@ -48,16 +46,14 @@ class SessionAnswerResult(BaseModel):
     answer_id: UUID
     answered: int
     total: int
+    # Only when the candidate may see results.
     correct: bool | None = None
-    score: int | None = None
-    feedback: str | None = None
     current_score: int | None = None
 
 
 class ScorecardSession(BaseModel):
     id: UUID
     topic_title: str
-    mode: Mode
     status: RoundStatus
     final_score: int | None
     review: list[ReviewItem]

@@ -7,6 +7,7 @@ os.environ.setdefault("SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("GENERATION_URL", "http://generation")
 os.environ.setdefault("LIBRARY_URL", "http://library")
 os.environ.setdefault("ROUNDS_URL", "http://rounds")
+os.environ.setdefault("CONSUME_EVENTS", "false")
 
 import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402

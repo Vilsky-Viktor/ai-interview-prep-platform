@@ -3,19 +3,16 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field
 
-from app.constants.rounds import MAX_ANSWER_LENGTH, OPTIONS_PER_QUESTION, Mode, RoundStatus
+from app.constants.rounds import OPTIONS_PER_QUESTION, RoundStatus
 
 
 class RoundCreate(BaseModel):
     topic_id: UUID
-    mode: Mode
 
 
 class AnswerCreate(BaseModel):
     question_id: UUID
-    # `text` for open answer rounds, `option_index` for multiple choice rounds.
-    text: str | None = Field(default=None, max_length=MAX_ANSWER_LENGTH)
-    option_index: int | None = Field(default=None, ge=0, lt=OPTIONS_PER_QUESTION)
+    option_index: int = Field(ge=0, lt=OPTIONS_PER_QUESTION)
 
 
 class RoundOut(BaseModel):
@@ -23,7 +20,6 @@ class RoundOut(BaseModel):
     topic_id: UUID
     preparation_id: UUID
     topic_title: str
-    mode: Mode
     status: RoundStatus
     total: int
     answered: int
@@ -34,12 +30,18 @@ class RoundOut(BaseModel):
     certificate_id: UUID | None
 
 
-class TopicPassOut(BaseModel):
+class TopicProgressOut(BaseModel):
+    """How far the user is towards the topic's certificate.
+
+    `answered` counts distinct current questions; `score` is the percent of them answered
+    correctly, by the latest answer to each. `in_progress` is true while a round is unfinished.
+    """
+
     topic_id: UUID
-    mode: Mode
-    score: int
-    answered: int = 0
+    answered: int
+    score: int | None
     certificate_id: UUID | None = None
+    in_progress: bool = False
 
 
 class MasteredTopicOut(BaseModel):
@@ -48,21 +50,18 @@ class MasteredTopicOut(BaseModel):
 
 
 class NextQuestion(BaseModel):
-    """The next unanswered question, without reference answer or correct flags."""
+    """The next unanswered question, without the correct flags."""
 
     question_id: UUID
     number: int
     text: str
-    options: list[str] | None
+    options: list[str]
 
 
 class AnswerResult(BaseModel):
     answer_id: UUID
-    correct: bool | None
-    score: int
-    feedback: str | None
-    reference_answer: str
-    correct_option_index: int | None
+    correct: bool
+    correct_option_index: int
     current_score: int
     answered: int
     total: int

@@ -1,86 +1,24 @@
-export type RoundMode = "open" | "choice"
+import type { components } from "@/types/api/rounds"
 
-export type Round = {
-  id: string
-  topic_id: string
-  preparation_id: string
-  topic_title: string
-  mode: RoundMode
-  status: "in_progress" | "finished"
-  total: number
-  answered: number
-  current_score: number | null
-  final_score: number | null
-  started_at: string
-  finished_at: string | null
-  certificate_id: string | null
-}
+type Schemas = components["schemas"]
 
-export type AnswerView = {
-  answer_id: string
-  text: string | null
-  option_index: number | null
-  correct: boolean | null
-  score: number
-  feedback: string | null
-}
-
-export type ReviewItem = {
-  question_id: string
-  number: number
-  text: string
-  options: string[] | null
-  reference_answer: string | null
+export type Round = Schemas["RoundOut"]
+export type AnswerView = Schemas["AnswerView"]
+export type ReviewItem = Schemas["ReviewItem"]
+// Messages show before the server stores them, so the client needs only these fields.
+export type ChatMessage = Pick<Schemas["ChatMessageOut"], "role" | "content">
+export type Certificate = Schemas["CertificateOut"]
+/** How far the user is towards a topic's certificate; missing until they practice it. */
+export type TopicProgress = Schemas["TopicProgressOut"]
+export type MasteredTopic = Schemas["MasteredTopicOut"]
+export type NextQuestion = Schemas["NextQuestion"]
+// The option picked is kept on the client to mark it after the answer. The right option can be
+// null because candidate results reuse this shape and may not reveal it.
+export type AnswerResult = Omit<
+  Schemas["AnswerResult"],
+  "correct_option_index"
+> & {
   correct_option_index: number | null
-  answer: AnswerView | null
-}
-
-export type ChatMessage = {
-  role: "user" | "assistant"
-  content: string
-}
-
-export type Certificate = {
-  id: string
-  user_name: string
-  topic_title: string
-  score: number
-  issued_at: string
-  preparation_id: string
-}
-
-export type TopicPass = {
-  topic_id: string
-  mode: RoundMode
-  score: number
-  answered: number
-  certificate_id: string | null
-}
-
-export type MasteredTopic = {
-  preparation_id: string
-  topic_id: string
-}
-
-export type NextQuestion = {
-  question_id: string
-  number: number
-  text: string
-  options: string[] | null
-}
-
-export type AnswerResult = {
-  answer_id: string
-  correct: boolean | null
-  score: number
-  feedback: string | null
-  reference_answer: string
-  correct_option_index: number | null
-  current_score: number
-  answered: number
-  total: number
   option_index?: number | null
-  text?: string | null
 }
-
-export type AnswerInput = { text: string } | { option_index: number }
+export type AnswerInput = Omit<Schemas["AnswerCreate"], "question_id">

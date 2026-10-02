@@ -45,8 +45,14 @@ async def accept(member: Member, user_id: str) -> None:
         await session.commit()
 
 
-async def list_for_company(company_id) -> list[Member]:
-    query = select(Member).where(Member.company_id == company_id).order_by(Member.created_at)
+async def list_for_company(company_id, offset: int, limit: int) -> list[Member]:
+    query = (
+        select(Member)
+        .where(Member.company_id == company_id)
+        .order_by(Member.created_at, Member.id)
+        .offset(offset)
+        .limit(limit)
+    )
 
     async with Session() as session:
         return list(await session.scalars(query))

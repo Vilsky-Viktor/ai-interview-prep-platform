@@ -8,6 +8,10 @@ class Settings(BaseSettings):
     database_url: str
     redis_url: str
     service_secret: str
+    rounds_url: str
+    generation_url: str
+    # Off in tests, which have no Redis.
+    consume_events: bool = True
 
     @model_validator(mode="after")
     def emulator_only_for_demo_projects(self) -> "Settings":

@@ -1,4 +1,3 @@
-import { MinusIcon } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -13,17 +12,18 @@ import {
 } from "@/components/preparations/preparation-actions"
 import { PreparationStats } from "@/components/preparations/preparation-stats"
 import { RatingStars } from "@/components/preparations/rating-stars"
-import { TopicQuestionLimit } from "@/components/questions/topic-question-limit"
+import { SubtopicList } from "@/components/questions/subtopic-list"
+import { TopicQuestions } from "@/components/questions/topic-questions"
 import { StartRound } from "@/components/rounds/start-round"
 import { CertificateButton } from "@/components/rounds/certificate-button"
-import { TopicPasses } from "@/components/rounds/topic-passes"
+import { TopicProgress } from "@/components/rounds/topic-progress"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { formatDate, plural } from "@/lib/format"
-import { isPreparationDone, topicCertificate, topicMastered } from "@/lib/rounds"
+import { isPreparationDone, topicMastered } from "@/lib/rounds"
 import { serverFetch } from "@/lib/server-api"
 import type { PreparationDetail } from "@/types/preparation"
-import type { TopicPass } from "@/types/round"
+import type { TopicProgress as Progressed } from "@/types/round"
 
 type PageProps = { params: Promise<{ id: string }> }
 
@@ -41,30 +41,25 @@ export async function generateMetadata({
 
 export default async function PreparationPage({ params }: PageProps) {
   const { id } = await params
-  const [preparation, passes] = await Promise.all([
+  const [preparation, progressRows] = await Promise.all([
     getPreparation(id),
-    serverFetch<TopicPass[]>(`/rounds/preparations/${id}/passes`),
+    serverFetch<Progressed[]>(`/rounds/preparations/${id}/progress`),
   ])
 
   if (!preparation) {
     notFound()
   }
 
-  const passing = new Map<string, TopicPass[]>()
-
-  for (const item of passes ?? []) {
-    const current = passing.get(item.topic_id) ?? []
-
-    current.push(item)
-    passing.set(item.topic_id, current)
-  }
+  const progressByTopic = new Map(
+    (progressRows ?? []).map((item) => [item.topic_id, item])
+  )
 
   const canPractice = preparation.access !== "public"
   const isOwner = preparation.access === "owner"
   const done = isPreparationDone(
     preparation.topics.length,
     preparation.topics.filter((topic) =>
-      topicMastered(passing.get(topic.id) ?? [])
+      topicMastered(progressByTopic.get(topic.id))
     ).length
   )
 
@@ -125,53 +120,40 @@ export default async function PreparationPage({ params }: PageProps) {
 
       <ul className="divide-y rounded-2xl border">
         {preparation.topics.map((topic) => {
-          const topicPasses = passing.get(topic.id) ?? []
-          const certificateId = topicCertificate(topicPasses)
+          const progress = progressByTopic.get(topic.id)
 
           return (
             <li key={topic.id} className="space-y-4 p-4 sm:p-6">
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start justify-between gap-8">
                 <span className="min-w-0 space-y-2">
                   <span className="block text-2xl font-medium">{topic.title}</span>
-                  <span className="block text-sm text-muted-foreground">
-                    {topic.subtopics.map((subtopic, index) => (
-                      <span key={subtopic}>
-                        {index > 0 && (
-                          <MinusIcon
-                            aria-hidden
-                            className="mx-1.5 inline size-3.5 align-[-2px] text-foreground/55"
-                          />
-                        )}
-                        {subtopic}
-                      </span>
-                    ))}
-                  </span>
+                  <SubtopicList subtopics={topic.subtopics} />
                 </span>
-                {canPractice && <StartRound topicId={topic.id} />}
+                {canPractice && (
+                  <StartRound topicId={topic.id} inProgress={progress?.in_progress} />
+                )}
               </div>
-              <div className="flex flex-wrap items-center justify-between gap-3 sm:grid sm:grid-cols-[1fr_auto_1fr]">
+              {/* Questions, progress, actions; on phones the progress bar takes its own line. */}
+              <div className="flex flex-wrap items-center justify-between gap-3 sm:grid sm:grid-cols-[auto_1fr_auto] sm:gap-6">
                 <span className="flex items-center">
-                  <TopicQuestionLimit
+                  <TopicQuestions
                     title={topic.title}
                     count={topic.question_count}
                     path={`/library/preparations/topics/${topic.id}/questions`}
-                    regeneratePath={isOwner ? "/generate/questions" : undefined}
+                    regeneratePath={isOwner ? "/library/questions" : undefined}
                     reportsPath={isOwner ? "/library/questions" : undefined}
-                    limit={topic.question_limit}
-                    limitPath={
-                      isOwner
-                        ? `/library/preparations/topics/${topic.id}/limit`
-                        : undefined
-                    }
-                    caption="per round"
                   />
                 </span>
-                <span className="flex justify-center">
-                  <TopicPasses passes={topicPasses} total={topic.question_count} />
-                </span>
+                {canPractice && (
+                  <div className="order-last w-full sm:order-none">
+                    <TopicProgress progress={progress} total={topic.question_count} />
+                  </div>
+                )}
                 {canPractice && (
                   <span className="flex items-center justify-end gap-2">
-                    <CertificateButton certificateId={certificateId} />
+                    <CertificateButton
+                      certificateId={progress?.certificate_id ?? null}
+                    />
                     <Button
                       variant="outline"
                       nativeButton={false}

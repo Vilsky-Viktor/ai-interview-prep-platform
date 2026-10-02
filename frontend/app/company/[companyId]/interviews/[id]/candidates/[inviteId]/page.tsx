@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { cn } from "cn"
 
 import { BackLink } from "@/components/back-link"
+import { CandidateActions } from "@/components/company/candidate-actions"
 import { ScorecardReview } from "@/components/company/scorecard-review"
 import { PageHeader } from "@/components/page-header"
 import { Badge } from "@/components/ui/badge"
@@ -18,7 +19,6 @@ type Scorecard = {
   sessions: {
     id: string
     topic_title: string
-    mode: "open" | "choice"
     status: string
     final_score: number | null
     review: ReviewItem[]
@@ -41,25 +41,37 @@ export default async function ScorecardPage({
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
-      <PageHeader
-        back={
-          <BackLink href={`/company/${companyId}/interviews/${id}?tab=candidates`}>
-            Interview
-          </BackLink>
-        }
-        title={
-          <h1 className="font-heading text-3xl font-medium tracking-tight">
-            {card.email}
-          </h1>
-        }
-      >
-        <Badge
-          variant="outline"
-          className="h-7 px-3 text-sm font-light capitalize"
+      {/* The actions sit beside the email and status, centered on both. */}
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <PageHeader
+          back={
+            <BackLink
+              href={`/company/${companyId}/interviews/${id}?tab=candidates`}
+            >
+              Interview
+            </BackLink>
+          }
+          title={
+            <h1 className="font-heading text-3xl font-medium tracking-tight">
+              {card.email}
+            </h1>
+          }
         >
-          {card.status.replace("_", " ")}
-        </Badge>
-      </PageHeader>
+          <Badge
+            variant="outline"
+            className="h-7 px-3 text-sm font-light capitalize"
+          >
+            {card.status.replace("_", " ")}
+          </Badge>
+        </PageHeader>
+        <CandidateActions
+          interviewId={id}
+          inviteId={inviteId}
+          email={card.email}
+          status={card.status}
+          backHref={`/company/${companyId}/interviews/${id}?tab=candidates`}
+        />
+      </div>
 
       {card.sessions.length === 0 && (
         <p className="py-16 text-center text-muted-foreground">
@@ -84,7 +96,7 @@ export default async function ScorecardPage({
                 {score == null ? "—" : `${score}%`}
               </p>
             </div>
-            <ScorecardReview items={session.review} mode={session.mode} />
+            <ScorecardReview items={session.review} />
           </section>
         )
       })}

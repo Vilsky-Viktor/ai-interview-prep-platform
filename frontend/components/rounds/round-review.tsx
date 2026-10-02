@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 
 import { ReviewItem } from "@/components/rounds/review-item"
+import { VirtualList } from "@/components/virtual-list"
 import { apiFetch } from "@/lib/api"
 import type { ReviewItem as ReviewItemType } from "@/types/round"
 
@@ -20,10 +21,12 @@ export function RoundReview({ roundId }: { roundId: string }) {
   }
 
   return (
-    <ul className="divide-y rounded-2xl border">
-      {items.map((item) => (
-        <ReviewItem key={item.question_id} item={item} />
-      ))}
-    </ul>
+    <VirtualList
+      items={items}
+      getKey={(item) => item.question_id}
+      estimateSize={160}
+      className="divide-y rounded-2xl border"
+      renderItem={(item) => <ReviewItem item={item} />}
+    />
   )
 }

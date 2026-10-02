@@ -61,7 +61,7 @@ export function ChatPanel({ answerId }: { answerId: string }) {
   const streaming = reply !== null
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {(messages.length > 0 || streaming) && (
         <ul className="space-y-3">
           {messages.map((message, index) => (

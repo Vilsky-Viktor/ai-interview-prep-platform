@@ -1,16 +1,15 @@
-import { PlusIcon, UsersIcon } from "lucide-react"
+import { PlusIcon } from "lucide-react"
 import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 
 import { CompanyHeader } from "@/components/company/company-header"
+import { InterviewList } from "@/components/company/interview-list"
 import { SignInPrompt } from "@/components/sign-in-prompt"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { TOKEN_COOKIE } from "@/constants/auth"
-import { MODE_LABELS } from "@/constants/rounds"
-import { formatDate } from "@/lib/format"
+import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
 import type { Company, Interview } from "@/types/company"
 
@@ -28,7 +27,7 @@ export default async function InterviewsPage({
     : null
   const interviews = company
     ? await serverFetch<Interview[]>(
-        `/companies/interviews?company_id=${companyId}`
+        `/companies/interviews?company_id=${companyId}&limit=${PAGE_SIZE}`
       )
     : null
 
@@ -63,47 +62,8 @@ export default async function InterviewsPage({
         }
       />
 
-      {interviews?.length === 0 && (
-        <p className="py-16 text-center text-muted-foreground">
-          No interviews yet. Create your first one.
-        </p>
-      )}
-
-      {interviews && interviews.length > 0 && (
-        <ul className="divide-y rounded-2xl border">
-          {interviews.map((interview) => (
-            <li key={interview.id}>
-              <Link
-                href={`/company/${companyId}/interviews/${interview.id}`}
-                className="flex items-center justify-between gap-4 p-6 transition-colors hover:bg-muted/50"
-              >
-                <span className="space-y-1">
-                  <span className="block text-lg font-medium">
-                    {interview.title ?? "Generating…"}
-                  </span>
-                  <span className="block text-sm text-muted-foreground">
-                    {formatDate(interview.created_at)}
-                  </span>
-                </span>
-                <span className="flex shrink-0 items-center gap-4">
-                  <span
-                    className="flex items-center gap-1.5 text-sm text-muted-foreground tabular-nums"
-                    aria-label={`${interview.candidate_count} candidates`}
-                  >
-                    <UsersIcon aria-hidden className="size-5" />
-                    {interview.candidate_count}
-                  </span>
-                  <Badge
-                    variant="secondary"
-                    className="h-7 px-3 text-sm font-light"
-                  >
-                    {MODE_LABELS[interview.mode]}
-                  </Badge>
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+      {interviews && (
+        <InterviewList companyId={companyId} initial={interviews} />
       )}
     </main>
   )

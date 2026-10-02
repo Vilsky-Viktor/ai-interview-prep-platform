@@ -20,7 +20,6 @@ class Session(Base):
     interview_set_id: Mapped[uuid.UUID]
     candidate_invite_id: Mapped[uuid.UUID] = mapped_column(index=True)
     topic_title: Mapped[str] = mapped_column(Text)
-    mode: Mapped[str] = mapped_column(String(32))
     share_results: Mapped[bool]
     status: Mapped[str] = mapped_column(String(32), default=RoundStatus.IN_PROGRESS)
     questions: Mapped[list] = mapped_column(JSONB)

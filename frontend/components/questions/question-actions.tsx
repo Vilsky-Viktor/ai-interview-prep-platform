@@ -9,9 +9,12 @@ export function QuestionActions({
   basePath?: string
 }) {
   return (
-    <div className="mx-auto grid h-14 w-60 grid-cols-3 overflow-hidden rounded-xl bg-muted">
-      <QuestionRating basePath={basePath} />
-      <ReportDialog basePath={basePath} />
+    <div className="space-y-2 text-center">
+      <p className="text-sm text-muted-foreground">Good question?</p>
+      <div className="mx-auto grid h-14 w-60 grid-cols-3 overflow-hidden rounded-xl border">
+        <QuestionRating basePath={basePath} />
+        <ReportDialog basePath={basePath} />
+      </div>
     </div>
   )
 }

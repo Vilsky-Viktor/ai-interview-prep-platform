@@ -4,7 +4,6 @@ import Link from "next/link"
 
 import { BackLink } from "@/components/back-link"
 import { Progress } from "@/components/ui/progress"
-import { MODE_LABELS } from "@/constants/rounds"
 import { scorePassed } from "@/lib/rounds"
 import type { Round } from "@/types/round"
 
@@ -22,7 +21,7 @@ export function RoundHeader({ round }: { round: Round }) {
             href={`/preparations/${round.preparation_id}`}
             className="min-w-0 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
-            {round.topic_title} · {MODE_LABELS[round.mode]}
+            {round.topic_title}
           </Link>
           <p className="flex shrink-0 items-center text-sm text-muted-foreground tabular-nums">
             {round.answered} / {round.total}

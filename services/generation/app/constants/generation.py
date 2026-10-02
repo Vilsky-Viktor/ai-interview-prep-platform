@@ -2,15 +2,60 @@ MAX_CONCURRENCY = 8
 RECURSION_LIMIT = 200
 
 MAX_TOPICS = 10
-QUESTION_OVERSAMPLE = 1.2
-ANSWER_BATCH_SIZE = 10
+# Limits for topics edited by hand during review.
+MAX_TOPIC_NAME_LENGTH = 200
+MAX_SUBTOPICS = 30
+TOPIC_ATTEMPTS = 2
+# Questions are written for this many times a topic's size, so the ones dropped as ambiguous or
+# duplicate are replaced; fill_topics covers whatever is still missing.
+QUESTION_OVERSAMPLE = 1.1
+# Questions, each with its options, per call. A subtopic needing more is split into calls.
+QUESTION_BATCH_SIZE = 20
+# Each call for the same subtopic takes the next angle, so parallel calls don't write the same
+# obvious questions.
+QUESTION_FOCUSES = (
+    "core concepts, terms and facts",
+    "applying it in everyday practice",
+    "situations: what happens next, or what to do first",
+    "trade-offs, comparisons and common mistakes",
+)
+# Questions whose embeddings are this close (cosine distance) ask the same thing in other words.
+DUPLICATE_DISTANCE = 0.08
 ANSWER_ATTEMPTS = 3
+QUESTION_ATTEMPTS = 3
+# Output cap per call, reasoning tokens included. A model that loops fails at this many tokens
+# instead of writing until its own limit, minutes later.
+MAX_OUTPUT_TOKENS = 16_000
+# Writing MAX_OUTPUT_TOKENS can take a few minutes; a call silent for longer has hung.
+LLM_TIMEOUT_SECONDS = 300
+REASONING_EFFORT = "low"
 DISTRACTORS = 3
+# Upper bound for any answer option; most are much shorter. Longer options are rejected.
+MAX_OPTION_CHARS = 250
 REGENERATE_ATTEMPTS = 3
+# Rounds of extra questions for a topic that ended short, before the generation fails.
+FILL_ATTEMPTS = 3
 
 MAX_GOAL_LENGTH = 20_000
+# How much of the pasted goal a list shows to tell generations apart.
+GOAL_PREVIEW_LENGTH = 120
 
 JOB_TIMEOUT_SECONDS = 60 * 60
 MAX_WORKER_JOBS = 4
+# A running job updates its row as it goes; one untouched for longer than a job may run has lost
+# its worker. The margin covers the last update coming a little before the timeout.
+STUCK_AFTER_SECONDS = JOB_TIMEOUT_SECONDS + 10 * 60
+SWEEP_MINUTES = set(range(0, 60, 5))
 
 GENERATION_FAILED = "Generation failed. Please try again."
+GENERATION_STOPPED = "Generation stopped unexpectedly. Please try again."
+# Topics left waiting for review this long are cancelled; nothing has been generated yet.
+REVIEW_EXPIRY_DAYS = 14
+
+# Extraction and drafted topics are reused for the same prompt and input for this long.
+DRAFT_CACHE_SECONDS = 30 * 24 * 60 * 60
+
+# Redis counters for the LLM requests made in each second, shared by all generation processes.
+LLM_RATE_KEY = "rate:llm"
+# Connections of the checkpointer's own pool, on top of the SQLAlchemy pool.
+CHECKPOINTER_POOL_SIZE = 4

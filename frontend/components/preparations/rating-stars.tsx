@@ -3,11 +3,11 @@
 import { cn } from "cn"
 import { StarIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 
 import { MAX_RATING } from "@/constants/feedback"
-import { ApiError, apiFetch } from "@/lib/api"
+import { apiFetch } from "@/lib/api"
 
 export function RatingStars({
   preparationId,
@@ -20,33 +20,29 @@ export function RatingStars({
   const [hovered, setHovered] = useState(0)
   const [saving, setSaving] = useState(false)
   const [rating, setRating] = useState(myRating)
-  const rated = useRef(myRating !== null)
   const shown = hovered || rating || 0
-  const locked = rating !== null || saving
+  const locked = saving
 
+  // Rating again changes the rating.
   async function rate(value: number) {
-    if (rated.current || saving) {
+    if (saving || value === rating) {
       return
     }
 
-    rated.current = true
+    const previous = rating
     setSaving(true)
     setRating(value)
+    setHovered(0)
 
     try {
       await apiFetch(`/library/preparations/${preparationId}/rating`, {
         method: "PUT",
         body: JSON.stringify({ value }),
       })
-      toast.success("Thanks for rating")
+      toast.success(previous === null ? "Thanks for rating" : "Rating updated")
       router.refresh()
-    } catch (error) {
-      if (error instanceof ApiError && error.status === 409) {
-        return
-      }
-
-      rated.current = false
-      setRating(null)
+    } catch {
+      setRating(previous)
       toast.error("Couldn't save your rating. Please try again.")
     } finally {
       setSaving(false)
@@ -79,7 +75,7 @@ export function RatingStars({
                 }
               }}
               onClick={() => rate(value)}
-              className="rounded-sm p-0.5 text-muted-foreground transition-colors outline-none enabled:hover:text-yellow-600 focus-visible:ring-2 focus-visible:ring-ring"
+              className="rounded-sm p-0.5 text-muted-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring enabled:hover:text-yellow-600"
             >
               <StarIcon
                 className={cn(

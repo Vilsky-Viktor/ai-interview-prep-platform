@@ -1,8 +1,9 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.auth import CurrentUser
+from prepza_common.paging import PageParams
 
-from app.auth import CurrentUser
 from app.constants.events import PREPARATION_SHARED
 from app.integrations.events import publish
 from app.schemas.sharing import ShareIn, ShareInviteOut, ShareOut
@@ -38,7 +39,9 @@ async def share(preparation_id: UUID, body: ShareIn, user: CurrentUser) -> Share
 
 
 @router.get("/preparations/{preparation_id}/shares")
-async def list_shares(preparation_id: UUID, user: CurrentUser) -> list[ShareOut]:
+async def list_shares(
+    preparation_id: UUID, user: CurrentUser, page: PageParams
+) -> list[ShareOut]:
     require_owner(await preparations.get(preparation_id), user.uid)
 
     return [
@@ -47,7 +50,7 @@ async def list_shares(preparation_id: UUID, user: CurrentUser) -> list[ShareOut]
             accepted=invite.accepted_by is not None,
             created_at=invite.created_at,
         )
-        for invite in await shares.list_for_set(preparation_id)
+        for invite in await shares.list_for_set(preparation_id, page.offset, page.limit)
     ]
 
 

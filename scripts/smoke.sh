@@ -21,9 +21,9 @@ check() {
 
 check /
 check /library
-check /api/library/health
-check /api/generate/health
-check /api/rounds/health
-check /api/companies/health
+check /api/library/ready
+check /api/generate/ready
+check /api/rounds/ready
+check /api/companies/ready
 
 echo "smoke ok"

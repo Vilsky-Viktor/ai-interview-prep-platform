@@ -1,13 +1,13 @@
 import uuid
 
+from prepza_common.sets import PreparationIn
 from sqlalchemy import Row, delete, func, select, update
 from sqlalchemy.orm import selectinload
 
 from app.constants.sets import OwnerType, SetKind, Visibility
-from app.models.feedback import QuestionRating, QuestionReport
 from app.models.sets import Question, QuestionSet, Topic
 from app.models.sharing import JoinedPreparation
-from app.schemas.preparations import PreparationIn
+from app.storage import quality, reuse
 from app.storage.db import Session
 from app.storage.stats import summary_columns
 
@@ -22,7 +22,6 @@ def _topics(preparation: PreparationIn) -> list[Topic]:
                 Question(
                     position=qi,
                     text=question.text,
-                    reference_answer=question.reference_answer,
                     options=[option.model_dump() for option in question.options],
                 )
                 for qi, question in enumerate(topic.questions)
@@ -32,8 +31,16 @@ def _topics(preparation: PreparationIn) -> list[Topic]:
     ]
 
 
+async def find_by_generation(generation_id: uuid.UUID) -> uuid.UUID | None:
+    query = select(QuestionSet.id).where(QuestionSet.generation_id == generation_id)
+
+    async with Session() as session:
+        return await session.scalar(query)
+
+
 async def create(preparation: PreparationIn) -> uuid.UUID:
     question_set = QuestionSet(
+        generation_id=preparation.generation_id,
         kind=SetKind.PREPARATION,
         owner_type=OwnerType.USER,
         owner_id=preparation.owner_uid,
@@ -42,6 +49,8 @@ async def create(preparation: PreparationIn) -> uuid.UUID:
         level=preparation.level,
         requirements=preparation.requirements,
         topics=_topics(preparation),
+        topic_count=len(preparation.topics),
+        join_count=1,
     )
 
     async with Session() as session:
@@ -49,6 +58,11 @@ async def create(preparation: PreparationIn) -> uuid.UUID:
         await session.flush()
         session.add(
             JoinedPreparation(set_id=question_set.id, user_id=preparation.owner_uid)
+        )
+        await reuse.save_embeddings(
+            session,
+            [topic.id for topic in question_set.topics],
+            [topic.embedding for topic in preparation.topics],
         )
         await session.commit()
 
@@ -58,6 +72,7 @@ async def create(preparation: PreparationIn) -> uuid.UUID:
 async def create_interview(payload: PreparationIn) -> uuid.UUID:
     """Company interviews are always private."""
     question_set = QuestionSet(
+        generation_id=payload.generation_id,
         kind=SetKind.INTERVIEW,
         owner_type=OwnerType.COMPANY,
         owner_id=payload.owner_uid,
@@ -67,6 +82,7 @@ async def create_interview(payload: PreparationIn) -> uuid.UUID:
         requirements=payload.requirements,
         visibility=Visibility.PRIVATE,
         topics=_topics(payload),
+        topic_count=len(payload.topics),
     )
 
     async with Session() as session:
@@ -100,30 +116,15 @@ async def question_texts(set_id: uuid.UUID) -> list[tuple[uuid.UUID, str]]:
         return [(question_id, text) for question_id, text in await session.execute(query)]
 
 
-async def list_for_owner(owner_uid: str) -> list[Row]:
-    query = (
-        select(QuestionSet, *summary_columns())
-        .where(
-            QuestionSet.kind == SetKind.PREPARATION,
-            QuestionSet.owner_type == OwnerType.USER,
-            QuestionSet.owner_id == owner_uid,
-        )
-        .order_by(QuestionSet.created_at.desc())
-    )
-
-    async with Session() as session:
-        return list(await session.execute(query))
-
-
-async def list_joined(user_id: str) -> list[Row]:
+async def list_mine(user_id: str, offset: int, limit: int) -> list[Row]:
+    """Preparations the user owns or joined (owners are joined to their own), newest first."""
     query = (
         select(QuestionSet, *summary_columns())
         .join(JoinedPreparation, JoinedPreparation.set_id == QuestionSet.id)
-        .where(
-            JoinedPreparation.user_id == user_id,
-            QuestionSet.owner_id != user_id,
-        )
-        .order_by(JoinedPreparation.joined_at.desc())
+        .where(JoinedPreparation.user_id == user_id, QuestionSet.kind == SetKind.PREPARATION)
+        .order_by(QuestionSet.created_at.desc(), QuestionSet.id)
+        .offset(offset)
+        .limit(limit)
     )
 
     async with Session() as session:
@@ -169,6 +170,23 @@ async def get_topic_with_questions(topic_id: uuid.UUID) -> tuple[QuestionSet, To
         return tuple(row) if row else None
 
 
+async def get_topic_with_question_texts(
+    topic_id: uuid.UUID,
+) -> tuple[QuestionSet, Topic] | None:
+    """Like get_topic_with_questions, but its questions carry only their id and text."""
+    query = (
+        select(QuestionSet, Topic)
+        .join(Topic, Topic.set_id == QuestionSet.id)
+        .where(Topic.id == topic_id)
+        .options(selectinload(Topic.questions).load_only(Question.id, Question.text))
+    )
+
+    async with Session() as session:
+        row = (await session.execute(query)).first()
+
+        return tuple(row) if row else None
+
+
 async def get_for_question(question_id: uuid.UUID) -> QuestionSet | None:
     query = (
         select(QuestionSet)
@@ -199,25 +217,12 @@ async def get_question_context(
         return tuple(row) if row else None
 
 
-async def replace_question(
-    question_id: uuid.UUID, text: str, reference_answer: str, options: list[dict]
-) -> None:
-    """New content in the same slot; feedback on the old question no longer applies."""
+async def replace_question(question_id: uuid.UUID, text: str, options: list[dict]) -> None:
+    """New content in the same slot. The old content and its feedback are kept as a revision."""
     async with Session() as session:
+        await quality.archive(session, question_id)
         await session.execute(
-            update(Question)
-            .where(Question.id == question_id)
-            .values(text=text, reference_answer=reference_answer, options=options)
-        )
-        await session.execute(delete(QuestionRating).where(QuestionRating.question_id == question_id))
-        await session.execute(delete(QuestionReport).where(QuestionReport.question_id == question_id))
-        await session.commit()
-
-
-async def set_topic_limit(topic_id: uuid.UUID, limit: int | None) -> None:
-    async with Session() as session:
-        await session.execute(
-            update(Topic).where(Topic.id == topic_id).values(question_limit=limit)
+            update(Question).where(Question.id == question_id).values(text=text, options=options)
         )
         await session.commit()
 
@@ -235,4 +240,11 @@ async def set_visibility(set_id: uuid.UUID, visibility: str) -> None:
         await session.execute(
             update(QuestionSet).where(QuestionSet.id == set_id).values(visibility=visibility)
         )
+        await session.commit()
+
+
+async def remove(set_id: uuid.UUID) -> None:
+    """Deletes the set; its topics, questions, feedback, invites and joins cascade with it."""
+    async with Session() as session:
+        await session.execute(delete(QuestionSet).where(QuestionSet.id == set_id))
         await session.commit()

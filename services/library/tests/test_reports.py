@@ -1,10 +1,11 @@
 import uuid
 
-from app.auth import current_user
+from prepza_common.auth import current_user
+from prepza_common.user import User
+
 from app.constants.sets import SetKind, Visibility
 from app.main import app
 from app.models.sets import QuestionSet
-from app.schemas.user import User
 from app.storage import feedback, preparations
 
 QUESTION_ID = uuid.uuid4()

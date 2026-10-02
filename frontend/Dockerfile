@@ -15,6 +15,7 @@ ARG NEXT_PUBLIC_FIREBASE_PROJECT_ID
 ARG NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL
 RUN pnpm build
 
+# Development: docker-compose.yml mounts the source, and Next reloads on change.
 FROM node:24-alpine AS dev
 
 RUN corepack enable
@@ -30,7 +31,9 @@ EXPOSE 3000
 
 CMD ["pnpm", "exec", "next", "dev", "--hostname", "0.0.0.0", "--port", "3000", "--webpack"]
 
-FROM node:24-alpine
+# Production: the standalone server from the build stage. NEXT_PUBLIC_* values are baked in at
+# build time, so pass them as build arguments.
+FROM node:24-alpine AS prod
 
 WORKDIR /frontend
 

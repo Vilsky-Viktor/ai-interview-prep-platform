@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.auth import CurrentUser
 
-from app.auth import CurrentUser
 from app.constants.invites import InviteStatus
-from app.helpers.interviews import attach_set, pick_questions
+from app.helpers.interviews import attach_set, interview_title, pick_questions
 from app.integrations import library, rounds
 from app.schemas.invites import InviteStartOut, InviteView, SessionSummary
 from app.storage import companies
@@ -20,11 +20,7 @@ async def get_invite(token: str, user: CurrentUser) -> InviteView:
 
     invite, interview = found
     interview = await attach_set(interview)
-    title = None
-
-    if interview.set_id:
-        row = await library.get_set(interview.set_id)
-        title = row["title"] if row else None
+    title = await interview_title(interview)
 
     company = await companies.get(interview.company_id)
 
@@ -70,7 +66,6 @@ async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
         {
             "user_id": user.uid,
             "candidate_invite_id": str(invite.id),
-            "mode": interview.mode,
             "share_results": interview.share_results,
             "topics": [
                 {

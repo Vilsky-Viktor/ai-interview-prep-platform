@@ -9,12 +9,13 @@ import { NAV_LINKS } from "@/constants/navigation"
 
 export function SiteNav() {
   const pathname = usePathname()
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
 
   return (
-    <nav className="flex items-center gap-1" aria-label="Main">
+    // The negative margin cancels the first link's padding, so the separator sits evenly.
+    <nav className="-ml-1.5 flex h-8 items-center sm:-ml-2.5" aria-label="Main">
       {NAV_LINKS.map((link) => {
-        if (link.signedInOnly && !user) {
+        if (link.signedInOnly && (loading || !user)) {
           return null
         }
 
@@ -26,10 +27,8 @@ export function SiteNav() {
             href={link.href}
             aria-current={current ? "page" : undefined}
             className={cn(
-              "rounded-md px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground",
-              current && "text-foreground",
-              // On phones the account menu has these; Library stays for signed-out visitors.
-              link.signedInOnly && "hidden sm:block"
+              "rounded-md px-1.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:px-2.5",
+              current && "text-foreground"
             )}
           >
             {link.label}

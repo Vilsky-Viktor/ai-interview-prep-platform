@@ -1,14 +1,19 @@
+import asyncio
+import logging
 from contextlib import asynccontextmanager
 
 import firebase_admin
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, status
+from prepza_common import http
+from prepza_common.logging import RequestLogMiddleware, configure_logging
 
 from app.config.settings import settings
-from app.helpers.logging import RequestLogMiddleware, configure_logging
 from app.integrations.events import get_redis
 from app.routers import (
     internal,
     internal_feedback,
+    internal_quality,
+    internal_reuse,
     joins,
     library,
     me,
@@ -16,6 +21,8 @@ from app.routers import (
     questions,
     shares,
 )
+from app.services.answer_events import consume
+from app.storage.db import ping as ping_database
 
 configure_logging()
 
@@ -23,10 +30,16 @@ configure_logging()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     firebase_admin.initialize_app(options={"projectId": settings.firebase_project_id})
+    # Turns answers recorded by rounds into question statistics.
+    listener = asyncio.create_task(consume()) if settings.consume_events else None
 
     yield
 
+    if listener:
+        listener.cancel()
+
     await get_redis().aclose()
+    await http.get_client().aclose()
 
 
 app = FastAPI(title="library", lifespan=lifespan)
@@ -39,8 +52,24 @@ app.include_router(questions.router)
 app.include_router(library.router)
 app.include_router(internal.router)
 app.include_router(internal_feedback.router)
+app.include_router(internal_quality.router)
+app.include_router(internal_reuse.router)
 
 
 @app.get("/health")
 def health() -> dict:
     return {"status": "ok"}
+
+
+@app.get("/ready")
+async def ready() -> dict:
+    """Ready only once the database and Redis answer; Docker's healthcheck uses this."""
+    try:
+        await ping_database()
+        await get_redis().ping()
+    except Exception:
+        logging.getLogger(__name__).exception("Not ready")
+
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Not ready")
+
+    return {"status": "ready"}

@@ -1,8 +1,8 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Response, status
+from prepza_common.auth import CurrentUser
 
-from app.auth import CurrentUser
 from app.helpers.coverage import current_scores, topic_texts
 from app.helpers.review import build_review
 from app.helpers.rounds import next_question, round_out
@@ -24,16 +24,16 @@ async def create_round(body: RoundCreate, user: CurrentUser, response: Response)
     if topic is None or not topic.questions:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Topic not found")
 
-    existing = await rounds.get_in_progress(user.uid, body.topic_id, body.mode)
+    existing = await rounds.get_in_progress(user.uid, body.topic_id)
 
     if existing:
         return round_out(existing)
 
-    rows = await progress.for_topic(user.uid, topic.id, body.mode)
+    rows = await progress.for_topic(user.uid, topic.id)
     latest = current_scores(rows, topic_texts(topic))
     response.status_code = status.HTTP_201_CREATED
 
-    return round_out(await rounds.create(user.uid, topic, body.mode, latest))
+    return round_out(await rounds.create(user.uid, topic, latest))
 
 
 @router.get("/{round_id}")

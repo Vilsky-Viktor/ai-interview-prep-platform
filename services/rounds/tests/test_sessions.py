@@ -13,7 +13,6 @@ def session(share_results, answers=None, final=80):
         interview_set_id=uuid4(),
         candidate_invite_id=uuid4(),
         topic_title="Python",
-        mode="choice",
         share_results=share_results,
         status="finished",
         questions=[{}, {}],

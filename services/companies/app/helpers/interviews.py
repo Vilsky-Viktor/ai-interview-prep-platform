@@ -21,20 +21,29 @@ async def attach_set(interview: Interview) -> Interview:
     return interview
 
 
+async def interview_title(interview: Interview) -> str | None:
+    """The stored title. Interviews finished before titles were stored fetch it once."""
+    if interview.title or not interview.set_id:
+        return interview.title
+
+    found = await library.get_set(interview.set_id)
+
+    if found:
+        await interviews.set_title(interview.id, found["title"])
+        interview.title = found["title"]
+
+    return interview.title
+
+
 async def interview_out(interview: Interview) -> InterviewOut:
     interview = await attach_set(interview)
-    title = None
-
-    if interview.set_id:
-        found = await library.get_set(interview.set_id)
-        title = found["title"] if found else None
+    title = await interview_title(interview)
 
     return InterviewOut(
         id=interview.id,
         generation_id=interview.generation_id,
         set_id=interview.set_id,
         title=title,
-        mode=interview.mode,
         share_results=interview.share_results,
         candidate_count=len(interview.invites),
         created_at=interview.created_at,

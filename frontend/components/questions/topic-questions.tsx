@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { VirtualList } from "@/components/virtual-list"
 import { ApiError, apiFetch } from "@/lib/api"
 import type { QuestionStats } from "@/types/feedback"
 
@@ -105,24 +106,24 @@ export function TopicQuestions({
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         {questions ? (
-          <div className="max-h-[60vh] overflow-y-auto rounded-xl border [scrollbar-color:var(--color-border)_transparent] [scrollbar-width:thin]">
-            <table className="w-full text-left">
-              <tbody className="divide-y">
-                {questions.map((question, index) => (
-                  <QuestionRow
-                    key={question.id}
-                    question={question}
-                    number={index + 1}
-                    canRegenerate={Boolean(regeneratePath)}
-                    reportsPath={reportsPath}
-                    regenerating={regeneratingId === question.id}
-                    busy={regeneratingId !== null}
-                    onRegenerate={() => regenerate(question.id)}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <VirtualList
+            items={questions}
+            getKey={(question) => question.id}
+            estimateSize={88}
+            scrollClassName="max-h-[60vh] [scrollbar-width:thin] [scrollbar-color:var(--color-border)_transparent] overflow-y-auto rounded-xl border"
+            className="divide-y"
+            renderItem={(question, index) => (
+              <QuestionRow
+                question={question}
+                number={index + 1}
+                canRegenerate={Boolean(regeneratePath)}
+                reportsPath={reportsPath}
+                regenerating={regeneratingId === question.id}
+                busy={regeneratingId !== null}
+                onRegenerate={() => regenerate(question.id)}
+              />
+            )}
+          />
         ) : (
           <p className="text-muted-foreground">
             {missing ? "Couldn't load the questions." : "Loading…"}

@@ -8,10 +8,10 @@ from app.models.base import Base
 
 
 class QuestionProgress(Base):
-    """A user's latest score per question and mode, from finished rounds only.
+    """A user's latest score per question, counting rounds still in progress.
 
-    Derived from rounds and answers, and rebuilt for a question whenever a round with it
-    finishes or is deleted. `question_text` is the text that was answered, so a question
+    Derived from rounds and answers, and rebuilt for a question whenever it is answered or a
+    round with it is deleted. `question_text` is the text that was answered, so a question
     re-generated since then no longer matches the library's current text.
     """
 
@@ -20,7 +20,6 @@ class QuestionProgress(Base):
 
     user_id: Mapped[str] = mapped_column(String(128), primary_key=True)
     question_id: Mapped[uuid.UUID] = mapped_column(primary_key=True)
-    mode: Mapped[str] = mapped_column(String(32), primary_key=True)
     preparation_id: Mapped[uuid.UUID]
     topic_id: Mapped[uuid.UUID]
     question_text: Mapped[str] = mapped_column(Text)

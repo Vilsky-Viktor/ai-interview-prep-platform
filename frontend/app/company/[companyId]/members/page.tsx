@@ -4,9 +4,10 @@ import { redirect } from "next/navigation"
 
 import { CompanyHeader } from "@/components/company/company-header"
 import { InviteAdmin } from "@/components/company/invite-admin"
-import { MemberRow } from "@/components/company/member-row"
+import { MemberList } from "@/components/company/member-list"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { TOKEN_COOKIE } from "@/constants/auth"
+import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
 import type { Company, CompanyMember } from "@/types/company"
 
@@ -24,7 +25,7 @@ export default async function MembersPage({
     : null
   const members = company
     ? await serverFetch<CompanyMember[]>(
-        `/companies/members?company_id=${companyId}`
+        `/companies/members?company_id=${companyId}&limit=${PAGE_SIZE}`
       )
     : null
 
@@ -48,11 +49,7 @@ export default async function MembersPage({
         current="members"
       />
       {company.role === "owner" && <InviteAdmin companyId={companyId} />}
-      <ul className="divide-y rounded-2xl border">
-        {(members ?? []).map((member) => (
-          <MemberRow key={member.email} member={member} />
-        ))}
-      </ul>
+      <MemberList companyId={companyId} initial={members ?? []} />
     </main>
   )
 }

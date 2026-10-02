@@ -3,6 +3,7 @@ name = "generation"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
+    "prepza-common",
     "alembic>=1.20.0",
     "arq>=0.28.0",
     "fastapi>=0.141.1",
@@ -16,10 +17,15 @@ dependencies = [
     "psycopg[binary,pool]>=3.3.6",
     "pydantic-settings>=2.15.0",
     "pyjwt>=2.15.1",
+    "redis>=5.3",
     "sqlalchemy[asyncio]>=2.1.1",
-    "tavily-python>=0.8.4",
     "uvicorn>=0.54.0",
 ]
+
+# The shared package, from this repo. To use a published version, drop this source and require
+# a version above instead (see packages/common/README.md).
+[tool.uv.sources]
+prepza-common = { path = "../../packages/common", editable = true }
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

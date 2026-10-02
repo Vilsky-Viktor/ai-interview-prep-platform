@@ -2,7 +2,7 @@ import random
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import select, update
+from sqlalchemy import delete, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
@@ -19,7 +19,6 @@ LOAD_SESSION = [selectinload(Session.answers)]
 async def create_many(
     user_id: str,
     candidate_invite_id: uuid.UUID,
-    mode: str,
     share_results: bool,
     topics: list[TopicQuestions],
 ) -> list[Session]:
@@ -30,7 +29,6 @@ async def create_many(
             interview_set_id=topic.preparation_id,
             candidate_invite_id=candidate_invite_id,
             topic_title=topic.title,
-            mode=mode,
             share_results=share_results,
             status=RoundStatus.IN_PROGRESS,
             questions=[question.model_dump(mode="json") for question in topic.questions],
@@ -126,4 +124,11 @@ async def finish(session_id: uuid.UUID, final_score: int) -> None:
                 finished_at=datetime.now(UTC),
             )
         )
+        await session.commit()
+
+
+async def remove_for_interview(interview_set_id: uuid.UUID) -> None:
+    """Deletes every candidate's sessions on the interview; answers and chats cascade."""
+    async with Db() as session:
+        await session.execute(delete(Session).where(Session.interview_set_id == interview_set_id))
         await session.commit()

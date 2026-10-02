@@ -1,17 +1,16 @@
 import uuid
 
-from sqlalchemy import func, select, update
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.orm import selectinload
 
 from app.models.interviews import Interview
 from app.storage.db import Session
 
 
-async def create(company_id, generation_id, mode: str, share_results: bool) -> Interview:
+async def create(company_id, generation_id, share_results: bool) -> Interview:
     interview = Interview(
         company_id=company_id,
         generation_id=generation_id,
-        mode=mode,
         share_results=share_results,
         set_id=None,
     )
@@ -20,7 +19,10 @@ async def create(company_id, generation_id, mode: str, share_results: bool) -> I
         session.add(interview)
         await session.commit()
         loaded = await session.get(
-            Interview, interview.id, options=[selectinload(Interview.invites)]
+            Interview,
+            interview.id,
+            options=[selectinload(Interview.invites)],
+            populate_existing=True,
         )
 
     return loaded
@@ -49,24 +51,29 @@ async def counts(company_ids: list) -> dict:
     return {company_id: count for company_id, count in rows}
 
 
-async def list_for_company(company_id) -> list[Interview]:
+async def list_for_company(
+    company_id, offset: int = 0, limit: int | None = None
+) -> list[Interview]:
+    """Newest first; without a limit, all of them (deleting a company goes through each)."""
     query = (
         select(Interview)
         .where(Interview.company_id == company_id)
         .options(selectinload(Interview.invites))
-        .order_by(Interview.created_at.desc())
+        .order_by(Interview.created_at.desc(), Interview.id)
+        .offset(offset)
+        .limit(limit)
     )
 
     async with Session() as session:
         return list(await session.scalars(query))
 
 
-async def update_settings(interview_id, mode: str, share_results: bool) -> None:
+async def update_settings(interview_id, share_results: bool) -> None:
     async with Session() as session:
         await session.execute(
             update(Interview)
             .where(Interview.id == interview_id)
-            .values(mode=mode, share_results=share_results)
+            .values(share_results=share_results)
         )
         await session.commit()
 
@@ -83,9 +90,45 @@ async def set_topic_limit(interview_id, topic_id: uuid.UUID, limit: int | None) 
         await session.commit()
 
 
+async def remove(interview_id) -> None:
+    async with Session() as session:
+        await session.execute(delete(Interview).where(Interview.id == interview_id))
+        await session.commit()
+
+
 async def set_set_id(interview_id, set_id: uuid.UUID) -> None:
     async with Session() as session:
         await session.execute(
             update(Interview).where(Interview.id == interview_id).values(set_id=set_id)
+        )
+        await session.commit()
+
+
+async def set_generated(generation_id: uuid.UUID, set_id: uuid.UUID, title: str) -> None:
+    """Stores the set and title a finished generation produced for its interview."""
+    async with Session() as session:
+        await session.execute(
+            update(Interview)
+            .where(Interview.generation_id == generation_id)
+            .values(set_id=set_id, title=title)
+        )
+        await session.commit()
+
+
+async def remove_for_generation(generation_id: uuid.UUID) -> None:
+    """Removes the interview of a generation that was cancelled before producing questions."""
+    async with Session() as session:
+        await session.execute(
+            delete(Interview).where(
+                Interview.generation_id == generation_id, Interview.set_id.is_(None)
+            )
+        )
+        await session.commit()
+
+
+async def set_title(interview_id, title: str) -> None:
+    async with Session() as session:
+        await session.execute(
+            update(Interview).where(Interview.id == interview_id).values(title=title)
         )
         await session.commit()

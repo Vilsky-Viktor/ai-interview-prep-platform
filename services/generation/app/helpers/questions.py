@@ -1,38 +1,55 @@
+import math
+import random
+import re
+
+from app.config.settings import settings
+from app.constants.generation import (
+    DISTRACTORS,
+    MAX_OPTION_CHARS,
+    QUESTION_BATCH_SIZE,
+    QUESTION_OVERSAMPLE,
+)
+
+# A line starting with "A." or "A)" begins choices the model listed in the question itself.
+LISTED_CHOICES = re.compile(r"\n\s*A[.)]\s.*", re.DOTALL)
+
+
 def normalize(text: str) -> str:
     return " ".join(text.lower().split())
 
 
-def merge_buckets(buckets: list[list[str]], limit: int) -> list[str]:
-    """Round-robin across subtopic buckets, dropping duplicates, up to `limit`."""
+def strip_choices(question: str) -> str:
+    return LISTED_CHOICES.sub("", question).strip()
+
+
+def merge_buckets(buckets: list[list[dict]]) -> list[dict]:
+    """Round-robin across buckets of {"text", "options"}, dropping exact duplicates."""
     seen = set()
-    merged: list[str] = []
-    pos = [0] * len(buckets)
-    progressed = True
+    merged: list[dict] = []
 
-    while len(merged) < limit and progressed:
-        progressed = False
-
-        for bi, bucket in enumerate(buckets):
-            while pos[bi] < len(bucket):
-                question = bucket[pos[bi]].strip()
-                pos[bi] += 1
-                key = normalize(question)
-
-                if question and key not in seen:
-                    seen.add(key)
-                    merged.append(question)
-                    progressed = True
-
-                    break
-
-            if len(merged) >= limit:
-                break
+    for row in range(max((len(bucket) for bucket in buckets), default=0)):
+        for bucket in buckets:
+            if row < len(bucket) and normalize(bucket[row]["text"]) not in seen:
+                seen.add(normalize(bucket[row]["text"]))
+                merged.append(bucket[row])
 
     return merged
 
 
-def clean_distractors(distractors: list[str], correct: str) -> list[str]:
-    """Strip, dedupe (case-insensitive), and drop anything equal to the correct option."""
+def question_calls(subtopic_count: int) -> int:
+    """Calls each subtopic's questions are split into; reuse lowers their size, not their number."""
+    per_subtopic = math.ceil(settings.questions_per_topic * QUESTION_OVERSAMPLE / subtopic_count)
+
+    return math.ceil(per_subtopic / QUESTION_BATCH_SIZE)
+
+
+def split_count(count: int, parts: int) -> list[int]:
+    """`count` spread over `parts` as evenly as possible."""
+    return [count // parts + (1 if part < count % parts else 0) for part in range(parts)]
+
+
+def clean_distractors(distractors: list[str], correct: str, max_chars: int) -> list[str]:
+    """Strip, dedupe (case-insensitive), drop anything equal to the correct option or too long."""
     seen = {normalize(correct)}
     cleaned: list[str] = []
 
@@ -40,8 +57,25 @@ def clean_distractors(distractors: list[str], correct: str) -> list[str]:
         distractor = distractor.strip()
         key = normalize(distractor)
 
-        if distractor and key not in seen:
+        if distractor and len(distractor) <= max_chars and key not in seen:
             seen.add(key)
             cleaned.append(distractor)
 
     return cleaned
+
+
+def build_options(correct: str, distractors: list[str]) -> list[dict] | None:
+    """The correct option and DISTRACTORS wrong ones, shuffled; None when they don't qualify."""
+    correct = correct.strip()
+    wrong = clean_distractors(distractors, correct, MAX_OPTION_CHARS)
+
+    if not correct or len(correct) > MAX_OPTION_CHARS or len(wrong) < DISTRACTORS:
+        return None
+
+    options = [{"answer": correct, "correct": True}] + [
+        {"answer": answer, "correct": False} for answer in wrong[:DISTRACTORS]
+    ]
+    # Avoid the correct option always being first.
+    random.shuffle(options)
+
+    return options

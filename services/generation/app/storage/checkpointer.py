@@ -3,11 +3,14 @@ from psycopg.rows import dict_row
 from psycopg_pool import AsyncConnectionPool
 
 from app.config.settings import settings
+from app.constants.generation import CHECKPOINTER_POOL_SIZE
 
 
 async def open_checkpointer() -> tuple[AsyncConnectionPool, AsyncPostgresSaver]:
     pool = AsyncConnectionPool(
         settings.database_url,
+        min_size=CHECKPOINTER_POOL_SIZE,
+        max_size=CHECKPOINTER_POOL_SIZE,
         open=False,
         kwargs={"autocommit": True, "prepare_threshold": 0, "row_factory": dict_row},
     )

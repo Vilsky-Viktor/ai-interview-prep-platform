@@ -13,9 +13,11 @@ class Certificate(Base):
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     user_id: Mapped[str] = mapped_column(String(128), index=True)
     user_name: Mapped[str] = mapped_column(Text)
-    round_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("rounds.id", ondelete="CASCADE"), unique=True
+    # Null once the preparation is deleted: shared certificate links keep working.
+    round_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("rounds.id", ondelete="SET NULL"), unique=True
     )
+    preparation_id: Mapped[uuid.UUID]
     topic_id: Mapped[uuid.UUID]
     topic_title: Mapped[str] = mapped_column(Text)
     score: Mapped[int]

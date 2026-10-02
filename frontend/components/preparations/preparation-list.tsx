@@ -1,26 +1,60 @@
+"use client"
+
 import { cn } from "cn"
 import { UserRoundIcon } from "lucide-react"
 import Link from "next/link"
+import type { ReactNode } from "react"
 
 import { DoneBadge } from "@/components/preparations/done-badge"
 import { PreparationStats } from "@/components/preparations/preparation-stats"
 import { Badge } from "@/components/ui/badge"
+import { VirtualList } from "@/components/virtual-list"
+import { usePagedList } from "@/hooks/use-paged-list"
 import { formatDate, plural } from "@/lib/format"
+import { isPreparationDone } from "@/lib/rounds"
 import type { PreparationSummary } from "@/types/preparation"
 
-type ListedPreparation = PreparationSummary & { owned?: boolean; done?: boolean }
+type ListedPreparation = PreparationSummary & { owned?: boolean }
+
+type PreparationListProps = {
+  // Where pages come from; `initial` is the first page, already rendered by the server.
+  path: string
+  initial: ListedPreparation[]
+  // Mastered topics per preparation, to mark finished ones (my preparations only).
+  mastered?: Record<string, number>
+  className?: string
+  empty: ReactNode
+}
 
 export function PreparationList({
-  preparations,
+  path,
+  initial,
+  mastered,
   className,
-}: {
-  preparations: ListedPreparation[]
-  className?: string
-}) {
+  empty,
+}: PreparationListProps) {
+  const { items, loadMore } = usePagedList(path, initial)
+
+  if (items.length === 0) {
+    return empty
+  }
+
   return (
-    <ul className="divide-y rounded-2xl border">
-      {preparations.map((preparation) => (
-        <li key={preparation.id}>
+    <VirtualList
+      items={items}
+      getKey={(preparation) => preparation.id}
+      estimateSize={97}
+      onEndReached={loadMore}
+      className="divide-y rounded-2xl border"
+      renderItem={(preparation) => {
+        const done =
+          mastered !== undefined &&
+          isPreparationDone(
+            preparation.topic_count,
+            mastered[preparation.id] ?? 0
+          )
+
+        return (
           <Link
             href={`/preparations/${preparation.id}`}
             className={cn(
@@ -40,11 +74,16 @@ export function PreparationList({
                     <UserRoundIcon className="size-5" />
                   </span>
                 )}
-                {preparation.done && <DoneBadge />}
+                {done && <DoneBadge />}
               </span>
               <span className="block text-sm text-muted-foreground">
                 {plural(preparation.topic_count, "topic")} ·{" "}
-                {formatDate(preparation.created_at)}
+                <time
+                  dateTime={preparation.created_at}
+                  suppressHydrationWarning
+                >
+                  {formatDate(preparation.created_at)}
+                </time>
               </span>
             </span>
             <span className="flex shrink-0 items-center gap-4">
@@ -57,8 +96,8 @@ export function PreparationList({
               </Badge>
             </span>
           </Link>
-        </li>
-      ))}
-    </ul>
+        )
+      }}
+    />
   )
 }

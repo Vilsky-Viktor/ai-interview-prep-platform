@@ -3,10 +3,11 @@ import os
 from contextlib import asynccontextmanager
 
 import firebase_admin
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, status
+from prepza_common import http
+from prepza_common.logging import RequestLogMiddleware, configure_logging
 
 from app.config.settings import settings
-from app.helpers.logging import RequestLogMiddleware, configure_logging
 from app.integrations.redis import get_redis
 from app.routers import (
     certificates,
@@ -18,6 +19,7 @@ from app.routers import (
     sessions,
     topics,
 )
+from app.storage.db import ping as ping_database
 
 configure_logging()
 logger = logging.getLogger(__name__)
@@ -33,6 +35,7 @@ async def lifespan(app: FastAPI):
     yield
 
     await get_redis().aclose()
+    await http.get_client().aclose()
 
 
 app = FastAPI(title="rounds", lifespan=lifespan)
@@ -50,3 +53,17 @@ app.include_router(internal.router)
 @app.get("/health")
 def health() -> dict:
     return {"status": "ok"}
+
+
+@app.get("/ready")
+async def ready() -> dict:
+    """Ready only once the database and Redis answer; Docker's healthcheck uses this."""
+    try:
+        await ping_database()
+        await get_redis().ping()
+    except Exception:
+        logging.getLogger(__name__).exception("Not ready")
+
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Not ready")
+
+    return {"status": "ready"}

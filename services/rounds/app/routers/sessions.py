@@ -1,8 +1,8 @@
 from uuid import UUID
 
 from fastapi import APIRouter
+from prepza_common.auth import CurrentUser
 
-from app.auth import CurrentUser
 from app.helpers.review import build_review
 from app.helpers.scores import final_score
 from app.helpers.sessions import next_session_question, session_out_titled, topic_out
@@ -44,24 +44,15 @@ async def answer_question(
 
 @router.get("/{session_id}/review")
 async def review_session(session_id: UUID, user: CurrentUser) -> list[ReviewItem]:
-    """Candidates only see scores and answers when share_results is on; never the reference."""
+    """Candidates see whether they were right only when share_results is on; never the key."""
     row = await get_owned_session(session_id, user)
     items = build_review(row)
 
-    if not row.share_results:
-        for item in items:
-            item.reference_answer = None
-            item.correct_option_index = None
+    for item in items:
+        item.correct_option_index = None
 
-            if item.answer:
-                item.answer.correct = None
-                item.answer.score = 0
-                item.answer.feedback = None
-
-    else:
-        for item in items:
-            item.reference_answer = None
-            item.correct_option_index = None
+        if item.answer and not row.share_results:
+            item.answer.correct = None
 
     return items
 
@@ -69,7 +60,7 @@ async def review_session(session_id: UUID, user: CurrentUser) -> list[ReviewItem
 @router.post("/{session_id}/finish")
 async def finish(session_id: UUID, user: CurrentUser) -> SessionOut:
     row = await get_owned_session(session_id, user)
-    final = final_score(row.mode, [answer.score for answer in row.answers], len(row.questions))
+    final = final_score([answer.score for answer in row.answers], len(row.questions))
     await sessions.finish(row.id, final)
 
     return await session_out_titled(await sessions.get(session_id))

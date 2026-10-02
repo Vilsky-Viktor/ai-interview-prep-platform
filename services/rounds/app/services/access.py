@@ -1,9 +1,9 @@
 from uuid import UUID
 
 from fastapi import HTTPException, status
+from prepza_common.user import User
 
 from app.models.rounds import Answer, Round
-from app.schemas.user import User
 from app.storage import answers, rounds
 
 

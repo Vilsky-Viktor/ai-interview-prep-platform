@@ -7,14 +7,14 @@ from app.schemas.rounds import NextQuestion, RoundOut
 
 
 def round_questions(topic: TopicQuestions, latest: dict[str, int]) -> list[dict]:
-    """Unanswered questions first, then the lowest latest scores; ties shuffled; cut to the limit."""
+    """Every question of the topic: unanswered first, then the lowest latest scores; ties shuffled."""
     questions = [question.model_dump(mode="json") for question in topic.questions]
     random.shuffle(questions)
     questions.sort(
         key=lambda question: (question["id"] in latest, latest.get(question["id"], 0))
     )
 
-    return questions[: topic.question_limit]
+    return questions
 
 
 def next_question(round_) -> NextQuestion | None:
@@ -46,7 +46,6 @@ def round_out(round_: Round) -> RoundOut:
         topic_id=round_.topic_id,
         preparation_id=round_.preparation_id,
         topic_title=round_.topic_title,
-        mode=round_.mode,
         status=round_.status,
         total=len(round_.questions),
         answered=len(round_.answers),

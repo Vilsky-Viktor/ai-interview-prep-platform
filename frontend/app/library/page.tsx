@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 
 import { InputAction } from "@/components/input-action"
 import { PreparationList } from "@/components/preparations/preparation-list"
+import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
 import type { PreparationSummary } from "@/types/preparation"
 
@@ -14,10 +15,11 @@ export default async function LibraryPage({
   searchParams: Promise<{ q?: string }>
 }) {
   const q = (await searchParams).q?.trim() ?? ""
-  const results =
-    (await serverFetch<PreparationSummary[]>(
-      `/library/library?q=${encodeURIComponent(q)}`
-    )) ?? []
+  const path = `/library/library?q=${encodeURIComponent(q)}`
+  // The first page renders on the server; the rest load as the user scrolls.
+  const first =
+    (await serverFetch<PreparationSummary[]>(`${path}&limit=${PAGE_SIZE}`)) ??
+    []
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
@@ -36,15 +38,15 @@ export default async function LibraryPage({
         />
       </form>
 
-      {results.length === 0 ? (
-        <p className="py-16 text-center text-muted-foreground">
-          {q
-            ? "No matching preparations."
-            : "No public preparations yet."}
-        </p>
-      ) : (
-        <PreparationList preparations={results} />
-      )}
+      <PreparationList
+        path={path}
+        initial={first}
+        empty={
+          <p className="py-16 text-center text-muted-foreground">
+            {q ? "No matching preparations." : "No public preparations yet."}
+          </p>
+        }
+      />
     </main>
   )
 }

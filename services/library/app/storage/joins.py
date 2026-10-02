@@ -5,6 +5,7 @@ from sqlalchemy import delete, select
 from sqlalchemy.dialects.postgresql import insert
 
 from app.models.sharing import JoinedPreparation
+from app.storage import stats
 from app.storage.db import Session
 
 
@@ -28,6 +29,7 @@ async def is_joined(set_id: uuid.UUID, user_id: str) -> bool:
 async def join(set_id: uuid.UUID, user_id: str) -> None:
     async with Session() as session:
         await session.execute(join_statement(set_id, user_id))
+        await stats.recount(session, set_id)
         await session.commit()
 
 
@@ -38,4 +40,5 @@ async def leave(set_id: uuid.UUID, user_id: str) -> None:
                 JoinedPreparation.set_id == set_id, JoinedPreparation.user_id == user_id
             )
         )
+        await stats.recount(session, set_id)
         await session.commit()

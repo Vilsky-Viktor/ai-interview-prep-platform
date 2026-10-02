@@ -1,7 +1,6 @@
 from fastapi import APIRouter
-
-from app.auth import CurrentUser
-from app.schemas.user import User
+from prepza_common.auth import CurrentUser
+from prepza_common.user import User
 
 router = APIRouter()
 

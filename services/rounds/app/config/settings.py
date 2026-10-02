@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     service_secret: str
     llm_limit: int = Field(default=400, ge=0)
     llm_window_seconds: int = Field(default=3_600, gt=0)
-    llm_model: str = "gpt-4o"
+    llm_model: str = "gpt-6-luna"
 
     @model_validator(mode="after")
     def emulator_only_for_demo_projects(self) -> "Settings":

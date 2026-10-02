@@ -59,7 +59,7 @@ export function HomeTitle() {
   return (
     <h1
       aria-label={`Preparing for ${WORDS[index]}?`}
-      className="text-center font-heading text-3xl font-medium tracking-tight sm:text-5xl sm:whitespace-nowrap"
+      className="no-dot text-center font-heading text-3xl font-medium tracking-tight sm:text-5xl sm:whitespace-nowrap"
     >
       <span aria-hidden>
         Preparing for{" "}

@@ -1,17 +1,19 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.paging import PageParams
+from prepza_common.sets import PreparationIn
 
+from app.constants.sets import SetKind
+from app.schemas.feedback import ReportOut
 from app.schemas.preparations import (
     CreatedOut,
-    PreparationIn,
     QuestionOut,
     QuestionText,
     TitleIn,
     TopicOut,
     TopicQuestionsOut,
 )
-from app.schemas.feedback import ReportOut
 from app.schemas.regenerate import QuestionContext, QuestionReplace
 from app.schemas.sets import SetContent, SetOut, SetTopicOut
 from app.service_auth import ServiceCaller
@@ -24,12 +26,32 @@ router = APIRouter(prefix="/internal", tags=["internal"])
 
 @router.post("/preparations", status_code=status.HTTP_201_CREATED)
 async def create_preparation(body: PreparationIn, caller: ServiceCaller) -> CreatedOut:
-    return CreatedOut(id=await preparations.create(body))
+    """A retried save from the same generation returns the set it already made."""
+    existing = await preparations.find_by_generation(body.generation_id)
+
+    return CreatedOut(id=existing or await preparations.create(body))
 
 
 @router.post("/interviews", status_code=status.HTTP_201_CREATED)
 async def create_interview(body: PreparationIn, caller: ServiceCaller) -> CreatedOut:
-    return CreatedOut(id=await preparations.create_interview(body))
+    """A retried save from the same generation returns the set it already made."""
+    existing = await preparations.find_by_generation(body.generation_id)
+
+    return CreatedOut(id=existing or await preparations.create_interview(body))
+
+
+@router.delete("/interviews/{set_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_interview(set_id: UUID, caller: ServiceCaller) -> None:
+    """Deletes an interview set; safe to repeat. Never deletes a user's preparation."""
+    question_set = await preparations.get(set_id)
+
+    if question_set is None:
+        return
+
+    if question_set.kind != SetKind.INTERVIEW:
+        raise HTTPException(status.HTTP_409_CONFLICT, "Not an interview")
+
+    await preparations.remove(set_id)
 
 
 @router.patch("/sets/{set_id}/title", status_code=status.HTTP_204_NO_CONTENT)
@@ -85,7 +107,6 @@ async def get_set_content(set_id: UUID, caller: ServiceCaller) -> SetContent:
                     QuestionOut(
                         id=question.id,
                         text=question.text,
-                        reference_answer=question.reference_answer,
                         options=question.options,
                     )
                     for question in topic.questions
@@ -110,7 +131,7 @@ async def list_topic_questions(
     set_id: UUID, topic_id: UUID, caller: ServiceCaller
 ) -> list[QuestionText]:
     """Question text and feedback counts of one topic in a set, without answers."""
-    found = await preparations.get_topic_with_questions(topic_id)
+    found = await preparations.get_topic_with_question_texts(topic_id)
 
     if found is None or found[0].id != set_id:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Topic not found")
@@ -120,14 +141,14 @@ async def list_topic_questions(
 
 @router.get("/sets/{set_id}/questions/{question_id}/reports")
 async def list_question_reports(
-    set_id: UUID, question_id: UUID, caller: ServiceCaller
+    set_id: UUID, question_id: UUID, caller: ServiceCaller, page: PageParams
 ) -> list[ReportOut]:
     question_set = await preparations.get_for_question(question_id)
 
     if question_set is None or question_set.id != set_id:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Question not found")
 
-    reports = await feedback.list_reports(question_id)
+    reports = await feedback.list_reports(question_id, page.offset, page.limit)
 
     return [ReportOut.model_validate(report, from_attributes=True) for report in reports]
 
@@ -157,7 +178,6 @@ async def replace_question(question_id: UUID, body: QuestionReplace, caller: Ser
     await preparations.replace_question(
         question_id,
         body.text,
-        body.reference_answer,
         [option.model_dump() for option in body.options],
     )
 
@@ -179,12 +199,10 @@ async def get_topic_questions(
         id=topic.id,
         preparation_id=question_set.id,
         title=topic.title,
-        question_limit=topic.question_limit,
         questions=[
             QuestionOut(
                 id=question.id,
                 text=question.text,
-                reference_answer=question.reference_answer,
                 options=question.options,
             )
             for question in topic.questions

@@ -2,7 +2,7 @@ import secrets
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import select, update
+from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.invites import InviteStatus
@@ -73,3 +73,23 @@ async def set_status(invite_ids: list, status: str) -> None:
             .values(status=status)
         )
         await session.commit()
+
+
+async def remove(invite_id: uuid.UUID) -> None:
+    """Deletes the invite; its link stops working."""
+    async with Session() as session:
+        await session.execute(delete(CandidateInvite).where(CandidateInvite.id == invite_id))
+        await session.commit()
+
+
+async def list_for_interview(interview_id, offset: int, limit: int) -> list[CandidateInvite]:
+    query = (
+        select(CandidateInvite)
+        .where(CandidateInvite.interview_id == interview_id)
+        .order_by(CandidateInvite.created_at.desc(), CandidateInvite.id)
+        .offset(offset)
+        .limit(limit)
+    )
+
+    async with Session() as session:
+        return list(await session.scalars(query))

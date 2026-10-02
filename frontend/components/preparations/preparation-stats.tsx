@@ -10,7 +10,10 @@ export function PreparationStats({
 }) {
   return (
     <span className="flex items-center gap-4 text-sm text-muted-foreground tabular-nums">
-      <span className="flex items-center gap-1.5 text-yellow-600">
+      <span
+        className="flex items-center gap-1.5 text-yellow-600"
+        title="Average rating and number of ratings"
+      >
         <StarIcon
           className={cn(
             "size-5",
@@ -18,6 +21,11 @@ export function PreparationStats({
           )}
         />
         {preparation.rating_avg?.toFixed(1) ?? "–"}
+        {preparation.rating_count > 0 && (
+          <span className="text-muted-foreground">
+            ({preparation.rating_count})
+          </span>
+        )}
       </span>
       <span className="flex items-center gap-1.5">
         <UsersIcon className="size-5" />

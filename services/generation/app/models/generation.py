@@ -20,8 +20,6 @@ class Generation(Base):
     status: Mapped[str] = mapped_column(String(32), default=Status.QUEUED)
     topics: Mapped[list | None] = mapped_column(JSONB)
     progress: Mapped[dict | None] = mapped_column(JSONB)
-    # Tokens per model: {model: {input_tokens, output_tokens}}.
-    usage: Mapped[dict | None] = mapped_column(JSONB)
     preparation_id: Mapped[uuid.UUID | None]
     error: Mapped[str | None] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(

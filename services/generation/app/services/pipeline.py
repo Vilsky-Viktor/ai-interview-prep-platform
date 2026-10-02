@@ -1,15 +1,15 @@
 import uuid
+from contextlib import aclosing
 
-from langchain_core.callbacks import get_usage_metadata_callback
 from langgraph.types import Command
 
+from app.constants.events import GENERATION_COMPLETED
 from app.constants.generation import MAX_CONCURRENCY, RECURSION_LIMIT
 from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
 from app.helpers.payload import build_preparation
 from app.helpers.progress import track_progress
-from app.helpers.usage import merge_usage
-from app.integrations import library
+from app.integrations import events, library
 from app.models.generation import Generation
 from app.storage import generations
 
@@ -31,33 +31,35 @@ async def run_pipeline(graph, generation: Generation, resume: dict | None) -> No
         graph_input = {"input_text": generation.text}
 
     await generations.update(generation.id, status=Status.RUNNING, error=None)
-    previous_usage = dict(generation.usage or {})
-
-    # Counts the tokens of every LLM call in this run, including the parallel branches.
-    with get_usage_metadata_callback() as tokens:
-        try:
-            await stream_graph(graph, generation, graph_input, config, previous_usage, tokens)
-        finally:
-            # Also on failure: a failed run still cost money.
-            usage = merge_usage(previous_usage, tokens.usage_metadata)
-            await generations.update(generation.id, usage=usage)
+    await stream_graph(graph, generation, graph_input, config)
 
 
-async def stream_graph(
-    graph, generation: Generation, graph_input, config: dict, previous_usage: dict, tokens
-) -> None:
+async def stream_graph(graph, generation: Generation, graph_input, config: dict) -> None:
     progress = dict(generation.progress or {})
+    paused = False
 
-    async for chunk in graph.astream(graph_input, config, stream_mode="updates"):
-        if "__interrupt__" in chunk:
-            topics = chunk["__interrupt__"][0].value["topics"]
-            await generations.update(generation.id, status=Status.AWAITING_REVIEW, topics=topics)
+    # aclosing stops the graph right away on cancel instead of leaving it to garbage collection.
+    async with aclosing(graph.astream(graph_input, config, stream_mode="updates")) as stream:
+        async for chunk in stream:
+            # Stop spending tokens as soon as the user cancels.
+            if await generations.is_cancelled(generation.id):
+                return
 
-            return
+            # The stream ends by itself after an interrupt; leaving early would abort the run.
+            if "__interrupt__" in chunk:
+                topics = chunk["__interrupt__"][0].value["topics"]
+                await generations.update(
+                    generation.id, status=Status.AWAITING_REVIEW, topics=topics
+                )
+                paused = True
 
-        if track_progress(progress, chunk):
-            usage = merge_usage(previous_usage, tokens.usage_metadata)
-            await generations.update(generation.id, progress=progress, usage=usage)
+                continue
+
+            if track_progress(progress, chunk):
+                await generations.update(generation.id, progress=progress)
+
+    if paused or await generations.is_cancelled(generation.id):
+        return
 
     values = (await graph.aget_state(config)).values
     owner_id = (
@@ -65,7 +67,7 @@ async def stream_graph(
         if generation.kind == GenerationKind.INTERVIEW
         else generation.owner_uid
     )
-    payload = build_preparation(owner_id, generation.text, values)
+    payload = build_preparation(generation.id, owner_id, generation.text, values)
 
     if generation.kind == GenerationKind.INTERVIEW:
         set_id: uuid.UUID = await library.create_interview(payload)
@@ -73,3 +75,15 @@ async def stream_graph(
         set_id = await library.create_preparation(payload)
 
     await generations.update(generation.id, status=Status.DONE, preparation_id=set_id)
+
+    if generation.kind == GenerationKind.INTERVIEW:
+        # Companies stores the set and title, so its pages don't have to ask for them.
+        await events.publish(
+            GENERATION_COMPLETED,
+            {
+                "generation_id": str(generation.id),
+                "company_id": str(generation.company_id),
+                "set_id": str(set_id),
+                "title": payload.title,
+            },
+        )

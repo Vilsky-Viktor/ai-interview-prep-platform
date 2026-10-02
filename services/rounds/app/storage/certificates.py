@@ -3,19 +3,12 @@ import uuid
 from sqlalchemy import select
 
 from app.models.certificates import Certificate
-from app.models.rounds import Round
 from app.storage.db import Session
 
 
-async def get(certificate_id: uuid.UUID) -> tuple[Certificate, uuid.UUID] | None:
-    query = (
-        select(Certificate, Round.preparation_id)
-        .join(Round, Round.id == Certificate.round_id)
-        .where(Certificate.id == certificate_id)
-    )
-
+async def get(certificate_id: uuid.UUID) -> Certificate | None:
     async with Session() as session:
-        return (await session.execute(query)).tuples().first()
+        return await session.get(Certificate, certificate_id)
 
 
 async def for_preparation(
@@ -24,8 +17,7 @@ async def for_preparation(
     """Latest best-score certificate per topic on this preparation."""
     query = (
         select(Certificate.topic_id, Certificate.id)
-        .join(Round, Round.id == Certificate.round_id)
-        .where(Certificate.user_id == user_id, Round.preparation_id == preparation_id)
+        .where(Certificate.user_id == user_id, Certificate.preparation_id == preparation_id)
         .order_by(Certificate.score.desc(), Certificate.issued_at.desc())
     )
     certs: dict[uuid.UUID, uuid.UUID] = {}
@@ -41,8 +33,7 @@ async def for_preparation(
 async def mastered_topics(user_id: str) -> list[tuple[uuid.UUID, uuid.UUID]]:
     """Topics the user holds a certificate for, on any preparation."""
     query = (
-        select(Round.preparation_id, Certificate.topic_id)
-        .join(Round, Round.id == Certificate.round_id)
+        select(Certificate.preparation_id, Certificate.topic_id)
         .where(Certificate.user_id == user_id)
         .distinct()
     )
@@ -51,3 +42,12 @@ async def mastered_topics(user_id: str) -> list[tuple[uuid.UUID, uuid.UUID]]:
         rows = await session.execute(query)
 
         return [(preparation_id, topic_id) for preparation_id, topic_id in rows]
+
+
+async def has_for_topic(user_id: str, topic_id: uuid.UUID) -> bool:
+    query = select(Certificate.id).where(
+        Certificate.user_id == user_id, Certificate.topic_id == topic_id
+    )
+
+    async with Session() as session:
+        return await session.scalar(query.limit(1)) is not None

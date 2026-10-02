@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     generation_url: str
     library_url: str
     rounds_url: str
+    # Off in tests, which have no Redis.
+    consume_events: bool = True
 
     @model_validator(mode="after")
     def emulator_only_for_demo_projects(self) -> "Settings":

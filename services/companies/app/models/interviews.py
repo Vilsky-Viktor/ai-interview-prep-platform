@@ -1,7 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, ForeignKey, String
+from sqlalchemy import DateTime, ForeignKey, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -16,8 +16,9 @@ class Interview(Base):
         ForeignKey("companies.id", ondelete="CASCADE"), index=True
     )
     set_id: Mapped[uuid.UUID | None]
+    # Copied from the generated set (and renames), so pages don't ask library for it.
+    title: Mapped[str | None] = mapped_column(Text)
     generation_id: Mapped[uuid.UUID]
-    mode: Mapped[str] = mapped_column(String(32))
     share_results: Mapped[bool]
     topic_limits: Mapped[dict[str, int]] = mapped_column(
         JSONB, default=dict, server_default="{}"

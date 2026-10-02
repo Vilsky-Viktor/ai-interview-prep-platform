@@ -1,23 +1,9 @@
-export type GenerationStatus =
-  | "queued"
-  | "running"
-  | "awaiting_review"
-  | "done"
-  | "failed"
+import type { components } from "@/types/api/generation"
 
-export type DraftTopic = {
-  main_topic: string
-  subtopics: string[]
-}
+type Schemas = components["schemas"]
 
-export type Generation = {
-  id: string
-  kind: "preparation" | "interview"
-  company_id: string | null
-  status: GenerationStatus
-  topics: DraftTopic[] | null
-  progress: { done: number; total: number } | null
-  preparation_id: string | null
-  error: string | null
-  cost_usd: number | null
-}
+export type Generation = Schemas["GenerationOut"]
+export type GenerationStatus = Generation["status"]
+export type DraftTopic = Schemas["DraftTopic"]
+/** A preparation generation that hasn't produced a preparation yet. */
+export type GenerationSummary = Schemas["GenerationSummary"]

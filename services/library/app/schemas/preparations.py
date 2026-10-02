@@ -1,35 +1,10 @@
 from datetime import datetime
 from uuid import UUID
 
+from prepza_common.sets import OptionIn
 from pydantic import BaseModel, Field, field_validator
 
 from app.constants.sets import Access, Visibility
-
-
-class OptionIn(BaseModel):
-    answer: str
-    correct: bool
-
-
-class QuestionIn(BaseModel):
-    text: str
-    reference_answer: str
-    options: list[OptionIn]
-
-
-class TopicIn(BaseModel):
-    title: str
-    subtopics: list[str]
-    questions: list[QuestionIn]
-
-
-class PreparationIn(BaseModel):
-    owner_uid: str
-    source_text: str
-    title: str
-    level: str
-    requirements: list[str]
-    topics: list[TopicIn]
 
 
 class CreatedOut(BaseModel):
@@ -47,17 +22,15 @@ class QuestionText(BaseModel):
 class QuestionOut(BaseModel):
     id: UUID
     text: str
-    reference_answer: str
     options: list[OptionIn]
 
 
 class TopicQuestionsOut(BaseModel):
-    """Internal only: a topic with reference answers and correct flags."""
+    """Internal only: a topic with its questions' correct flags."""
 
     id: UUID
     preparation_id: UUID
     title: str
-    question_limit: int | None = None
     questions: list[QuestionOut]
 
 
@@ -66,11 +39,6 @@ class TopicOut(BaseModel):
     title: str
     subtopics: list[str]
     question_count: int
-    question_limit: int | None = None
-
-
-class TopicLimitIn(BaseModel):
-    limit: int | None = Field(default=None, ge=1)
 
 
 class PreparationSummary(BaseModel):
@@ -83,6 +51,10 @@ class PreparationSummary(BaseModel):
     rating_avg: float | None
     rating_count: int
     join_count: int
+
+
+class MyPreparation(PreparationSummary):
+    owned: bool
 
 
 class PreparationDetail(PreparationSummary):

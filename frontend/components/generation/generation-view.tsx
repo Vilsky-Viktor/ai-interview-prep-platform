@@ -7,13 +7,14 @@ import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
 import { BackLink } from "@/components/back-link"
+import { CancelGeneration } from "@/components/generation/cancel-generation"
 import { GenerationProgress } from "@/components/generation/generation-progress"
 import { TopicReview } from "@/components/generation/topic-review"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { ACTIVE_STATUSES, POLL_INTERVAL_MS } from "@/constants/generation"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
-import type { Generation } from "@/types/generation"
+import type { DraftTopic, Generation } from "@/types/generation"
 
 export function GenerationView({
   path,
@@ -77,11 +78,15 @@ export function GenerationView({
     }
   }, [generation, next, router])
 
-  async function submitReview(selected: number[], instructions: string) {
+  async function submitReview(
+    selected: number[],
+    instructions: string,
+    topics: DraftTopic[] | null
+  ) {
     try {
       const next = await apiFetch<Generation>(
         `${path}/review`,
-        { method: "POST", body: JSON.stringify({ selected, instructions }) }
+        { method: "POST", body: JSON.stringify({ selected, instructions, topics }) }
       )
       setGeneration(next)
       setRound((value) => value + 1)
@@ -118,6 +123,16 @@ export function GenerationView({
     )
   }
 
+  if (generation?.status === "cancelled") {
+    return (
+      <WithBack href={backHref} label={backLabel}>
+        <Message text="This generation was cancelled." />
+      </WithBack>
+    )
+  }
+
+  const cancel = <CancelGeneration path={path} leaveTo={backHref} />
+
   if (generation?.status === "failed") {
     return (
       <WithBack href={backHref} label={backLabel}>
@@ -125,6 +140,7 @@ export function GenerationView({
           text={generation.error ?? "Generation failed."}
           onRetry={retry}
         />
+        {cancel && <div className="flex justify-center">{cancel}</div>}
       </WithBack>
     )
   }
@@ -134,7 +150,9 @@ export function GenerationView({
       <TopicReview
         key={round}
         topics={generation.topics}
+        maxTopics={generation.max_topics}
         back={<BackLink href={backHref}>{backLabel}</BackLink>}
+        cancel={cancel}
         onSubmit={submitReview}
       />
     )
@@ -149,6 +167,7 @@ export function GenerationView({
       generation={generation}
       backHref={backHref}
       backLabel={backLabel}
+      action={cancel}
     />
   )
 }

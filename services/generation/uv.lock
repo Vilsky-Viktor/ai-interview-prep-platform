@@ -399,11 +399,12 @@ dependencies = [
     { name = "langgraph" },
     { name = "langgraph-checkpoint-postgres" },
     { name = "langsmith" },
+    { name = "prepza-common" },
     { name = "psycopg", extra = ["binary", "pool"] },
     { name = "pydantic-settings" },
     { name = "pyjwt" },
+    { name = "redis" },
     { name = "sqlalchemy", extra = ["asyncio"] },
-    { name = "tavily-python" },
     { name = "uvicorn" },
 ]
 
@@ -425,11 +426,12 @@ requires-dist = [
     { name = "langgraph", specifier = ">=1.2.12" },
     { name = "langgraph-checkpoint-postgres", specifier = ">=3.1.2" },
     { name = "langsmith", specifier = ">=0.14.1" },
+    { name = "prepza-common", editable = "../../packages/common" },
     { name = "psycopg", extras = ["binary", "pool"], specifier = ">=3.3.6" },
     { name = "pydantic-settings", specifier = ">=2.15.0" },
     { name = "pyjwt", specifier = ">=2.15.1" },
+    { name = "redis", specifier = ">=5.3" },
     { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.1.1" },
-    { name = "tavily-python", specifier = ">=0.8.4" },
     { name = "uvicorn", specifier = ">=0.54.0" },
 ]
 
@@ -1354,6 +1356,27 @@ wheels = [
 ]
 
 [[package]]
+name = "prepza-common"
+version = "0.1.0"
+source = { editable = "../../packages/common" }
+dependencies = [
+    { name = "fastapi" },
+    { name = "firebase-admin" },
+    { name = "httpx" },
+    { name = "pyjwt" },
+    { name = "sqlalchemy", extra = ["asyncio"] },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "fastapi", specifier = ">=0.141.1" },
+    { name = "firebase-admin", specifier = ">=7.7.0" },
+    { name = "httpx", specifier = ">=0.28.1" },
+    { name = "pyjwt", specifier = ">=2.15.1" },
+    { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.1.1" },
+]
+
+[[package]]
 name = "proto-plus"
 version = "1.28.4"
 source = { registry = "https://pypi.org/simple" }
@@ -1869,20 +1892,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/7b/2b/3850dc6bf7ef71b088962eba31dafc6cffd2f96e577ebb0bb316df96da3e/starlette-1.7.0.tar.gz", hash = "sha256:c79f74ea63cff761804fbbfb182f1e0b440c2d07b164d24700c5a1bab5d6ff5d", size = 2736246, upload-time = "2026-09-23T07:30:26.35Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4e/d6/1ec1b290f9e0fb067899b61e1d37a30c923068bad260b216dbe37a7d2967/starlette-1.7.0-py3-none-any.whl", hash = "sha256:67f8e99895493dd2911a03f11314af6ceebeae4e704bb9f43dfc6a9db151c93e", size = 78980, upload-time = "2026-09-23T07:30:24.567Z" },
-]
-
-[[package]]
-name = "tavily-python"
-version = "0.8.4"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "httpx" },
-    { name = "requests" },
-    { name = "tiktoken" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/ba/15/832a4340267f16cc1cf683b5c5036850db3c07a4bf4b0cae6e5d200628c6/tavily_python-0.8.4.tar.gz", hash = "sha256:8031fd435e1c9580b7846044f456fc1d14b9c42b715740b3f0643a6e483abf83", size = 35530, upload-time = "2026-09-18T15:37:29.768Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b2/fb/bb477351532705f83c1d2643099901a1f3fc6328e79b57dfc4dd67a6efd0/tavily_python-0.8.4-py3-none-any.whl", hash = "sha256:1cbbb6d59ff22e3655586a1c8a1edf28d6abfa29d14da71dcd2922955da2033f", size = 24623, upload-time = "2026-09-18T15:37:28.765Z" },
 ]
 
 [[package]]

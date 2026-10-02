@@ -2,9 +2,9 @@ import { cn } from "cn"
 import { MinusIcon } from "lucide-react"
 import Link from "next/link"
 
+import { RoundChange } from "@/components/rounds/round-change"
 import { RoundReview } from "@/components/rounds/round-review"
 import { Button } from "@/components/ui/button"
-import { MODE_LABELS } from "@/constants/rounds"
 import { scorePassed } from "@/lib/rounds"
 import type { Round } from "@/types/round"
 
@@ -19,9 +19,7 @@ export function RoundSummary({ round }: { round: Round }) {
     <div className="space-y-12">
       <div className="space-y-8 py-8 text-center">
         <div className="space-y-4">
-          <p className="text-sm text-muted-foreground">
-            {round.topic_title} · {MODE_LABELS[round.mode]}
-          </p>
+          <p className="text-sm text-muted-foreground">{round.topic_title}</p>
           <p
             className={cn(
               "font-heading text-8xl font-light tabular-nums",
@@ -29,9 +27,6 @@ export function RoundSummary({ round }: { round: Round }) {
             )}
           >
             {round.final_score ?? 0}%
-          </p>
-          <p className={cn("text-2xl font-medium", scoreColor)}>
-            {passed ? "Passed" : "Failed"}
           </p>
           <p className="flex items-center justify-center text-muted-foreground">
             Final score
@@ -42,6 +37,7 @@ export function RoundSummary({ round }: { round: Round }) {
             {round.answered} of {round.total} answered
           </p>
         </div>
+        <RoundChange round={round} />
         <div className="flex flex-wrap justify-center gap-3">
           {round.certificate_id && (
             <Button

@@ -1,8 +1,7 @@
 from uuid import UUID
 
+from prepza_common.sets import OptionIn
 from pydantic import BaseModel, Field
-
-from app.schemas.preparations import OptionIn
 
 
 class QuestionContext(BaseModel):
@@ -19,5 +18,4 @@ class QuestionContext(BaseModel):
 
 class QuestionReplace(BaseModel):
     text: str = Field(min_length=1)
-    reference_answer: str = Field(min_length=1)
     options: list[OptionIn]

@@ -2,8 +2,8 @@ from uuid import UUID
 
 import httpx
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.auth import CurrentUser
 
-from app.auth import CurrentUser
 from app.integrations import generation as generation_api
 from app.models.interviews import Interview
 from app.schemas.interviews import ReviewIn
@@ -23,8 +23,12 @@ async def get_interview(interview_id: UUID) -> Interview:
 
 
 def passed_through(response: httpx.Response) -> dict:
-    """Keeps the generation service's 404 and 409 (wrong state) for the client."""
-    if response.status_code in (status.HTTP_404_NOT_FOUND, status.HTTP_409_CONFLICT):
+    """Keeps the generation service's 404, 409 (wrong state) and 422 (invalid) for the client."""
+    if response.status_code in (
+        status.HTTP_404_NOT_FOUND,
+        status.HTTP_409_CONFLICT,
+        status.HTTP_422_UNPROCESSABLE_CONTENT,
+    ):
         raise HTTPException(response.status_code, response.json().get("detail"))
 
     response.raise_for_status()
@@ -64,3 +68,16 @@ async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
     return passed_through(
         await generation_api.retry(interview.generation_id, interview.company_id)
     )
+
+
+@router.post("/{interview_id}/generation/cancel")
+async def cancel_generation(interview_id: UUID, user: CurrentUser) -> dict:
+    """Removes the interview too, so it isn't left without questions."""
+    interview = await get_interview(interview_id)
+    await require_manager(user, interview)
+    cancelled = passed_through(
+        await generation_api.cancel(interview.generation_id, interview.company_id)
+    )
+    await interviews.remove(interview.id)
+
+    return cancelled

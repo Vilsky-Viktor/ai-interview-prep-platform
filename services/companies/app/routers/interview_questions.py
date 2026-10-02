@@ -1,8 +1,9 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.auth import CurrentUser
+from prepza_common.paging import PageParams
 
-from app.auth import CurrentUser
 from app.integrations import generation as generation_api
 from app.integrations import library
 from app.models.interviews import Interview
@@ -73,11 +74,11 @@ async def regenerate_question(interview_id: UUID, question_id: UUID, user: Curre
 
 @router.get("/{interview_id}/questions/{question_id}/reports")
 async def list_question_reports(
-    interview_id: UUID, question_id: UUID, user: CurrentUser
+    interview_id: UUID, question_id: UUID, user: CurrentUser, page: PageParams
 ) -> list[ReportOut]:
     interview = await generated_interview(interview_id)
     await require_manager(user, interview)
-    reports = await library.get_question_reports(interview.set_id, question_id)
+    reports = await library.get_question_reports(interview.set_id, question_id, page)
 
     if reports is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Question not found")

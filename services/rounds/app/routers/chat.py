@@ -3,11 +3,11 @@ from uuid import UUID
 
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
+from prepza_common.auth import CurrentUser
+from prepza_common.rate_limit import hit
 
-from app.auth import CurrentUser
 from app.config.settings import settings
 from app.constants.rounds import CHAT_FAILED
-from app.helpers.rate_limit import hit
 from app.helpers.sse import sse_event
 from app.integrations.redis import get_redis
 from app.schemas.chat import ChatMessageOut, ChatRequest

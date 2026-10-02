@@ -2,16 +2,12 @@ from app.models.rounds import Answer
 
 
 def learner_answer(question: dict, answer: Answer) -> str:
-    if answer.option_index is not None:
-        return question["options"][answer.option_index]["answer"]
-
-    return answer.text or ""
+    return question["options"][answer.option_index]["answer"]
 
 
-def grade_summary(answer: Answer) -> str:
-    if answer.correct is not None:
-        verdict = "correct" if answer.correct else "incorrect"
+def correct_answer(question: dict) -> str:
+    return next(option["answer"] for option in question["options"] if option["correct"])
 
-        return f"Result: {verdict} (multiple choice)."
 
-    return f"Grade: {answer.score}/100. Grader feedback: {answer.feedback or 'none'}"
+def result_summary(answer: Answer) -> str:
+    return f"Result: {'correct' if answer.correct else 'incorrect'}."

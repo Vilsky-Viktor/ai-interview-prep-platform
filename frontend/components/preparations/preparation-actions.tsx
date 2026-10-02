@@ -1,3 +1,4 @@
+import { DeletePreparation } from "@/components/preparations/delete-preparation"
 import { MembershipButton } from "@/components/preparations/membership-button"
 import { ShareDialog } from "@/components/preparations/share-dialog"
 import { VisibilityToggle } from "@/components/preparations/visibility-toggle"
@@ -27,6 +28,9 @@ export function PreparationShare({
           title={preparation.title}
           isPublic={isPublic}
         />
+      )}
+      {isOwner && (
+        <DeletePreparation preparationId={preparation.id} title={preparation.title} />
       )}
     </div>
   )

@@ -63,7 +63,7 @@ export function RemoveCompany({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle>Remove {name}?</DialogTitle>
+            <DialogTitle className="no-dot">Remove {name}?</DialogTitle>
             <DialogDescription>
               Its interviews and invites will be deleted.
             </DialogDescription>

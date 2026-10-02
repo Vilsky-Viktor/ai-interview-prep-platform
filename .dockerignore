@@ -1,0 +1,11 @@
+# For the API services, built from the repo root: send only the shared package and their code.
+*
+!packages/common
+!services/library
+!services/generation
+!services/rounds
+!services/companies
+**/.venv
+**/__pycache__
+**/.pytest_cache
+services/*/tests

@@ -1,40 +1,34 @@
 import { PASSING_SCORE } from "@/constants/rounds"
-import type { ReviewItem, TopicPass } from "@/types/round"
+import type { ReviewItem, TopicProgress } from "@/types/round"
 
 export function answerText(item: ReviewItem) {
-  const answer = item.answer
-
-  if (!answer) {
-    return null
-  }
-
-  if (answer.option_index !== null && item.options) {
-    return item.options[answer.option_index]
-  }
-
-  return answer.text
+  return item.answer ? item.options[item.answer.option_index] : null
 }
 
-export function isPreparationDone(topicCount: number, passedCount: number) {
-  return topicCount > 0 && passedCount >= topicCount
+/** The right option's text, once the question is answered and the key may be shown. */
+export function correctText(item: ReviewItem | undefined) {
+  return item?.correct_option_index != null
+    ? item.options[item.correct_option_index]
+    : null
+}
+
+export function isPreparationDone(topicCount: number, masteredCount: number) {
+  return topicCount > 0 && masteredCount >= topicCount
 }
 
 export function scorePassed(score: number) {
   return score >= PASSING_SCORE
 }
 
-export function topicCertificate(passes: TopicPass[]) {
-  return passes.find((item) => item.certificate_id)?.certificate_id ?? null
-}
-
 /** A topic is mastered once it has a certificate, the same rule everywhere. */
-export function topicMastered(passes: TopicPass[]) {
-  return topicCertificate(passes) !== null
+export function topicMastered(progress: TopicProgress | undefined) {
+  return Boolean(progress?.certificate_id)
 }
 
-export function verdict(correct: boolean | null, score: number) {
+/** `correct` is null when a candidate may not see results. */
+export function verdict(correct: boolean | null) {
   if (correct === null) {
-    return `${score}%`
+    return "Answered"
   }
 
   return correct ? "Correct" : "Incorrect"

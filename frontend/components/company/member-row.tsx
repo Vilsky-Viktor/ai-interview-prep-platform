@@ -18,7 +18,7 @@ export function MemberRow({ member }: { member: CompanyMember }) {
   }
 
   return (
-    <li className="space-y-3 p-6">
+    <div className="space-y-3 p-6">
       <div className="flex items-center justify-between gap-4">
         <span>
           <span className="block text-lg font-medium">{member.email}</span>
@@ -44,6 +44,6 @@ export function MemberRow({ member }: { member: CompanyMember }) {
           </Button>
         </div>
       )}
-    </li>
+    </div>
   )
 }

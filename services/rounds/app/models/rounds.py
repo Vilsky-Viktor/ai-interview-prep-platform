@@ -18,9 +18,8 @@ class Round(Base):
     topic_id: Mapped[uuid.UUID] = mapped_column(index=True)
     preparation_id: Mapped[uuid.UUID]
     topic_title: Mapped[str] = mapped_column(Text)
-    mode: Mapped[str] = mapped_column(String(32))
     status: Mapped[str] = mapped_column(String(32), default=RoundStatus.IN_PROGRESS)
-    # Snapshot of the topic's questions in this round's shuffled order, with reference answers.
+    # Snapshot of the topic's questions in this round's order, with their options.
     questions: Mapped[list] = mapped_column(JSONB)
     final_score: Mapped[int | None]
     started_at: Mapped[datetime] = mapped_column(
@@ -45,11 +44,10 @@ class Answer(Base):
         ForeignKey("sessions.id", ondelete="CASCADE")
     )
     question_id: Mapped[uuid.UUID]
-    text: Mapped[str | None] = mapped_column(Text)
-    option_index: Mapped[int | None]
-    correct: Mapped[bool | None]
+    option_index: Mapped[int]
+    correct: Mapped[bool]
+    # CORRECT_SCORE or 0, so averages read as percent correct.
     score: Mapped[int]
-    feedback: Mapped[str | None] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

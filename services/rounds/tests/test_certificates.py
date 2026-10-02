@@ -13,15 +13,13 @@ def test_returns_public_certificate(client, monkeypatch):
     async def fake_get(certificate_id):
         assert certificate_id == CERT_ID
 
-        return (
-            SimpleNamespace(
-                id=CERT_ID,
-                user_name="Viktor Vilskyi",
-                topic_title="Python concurrency",
-                score=90,
-                issued_at=ISSUED,
-            ),
-            PREP_ID,
+        return SimpleNamespace(
+            id=CERT_ID,
+            user_name="Viktor Vilskyi",
+            topic_title="Python concurrency",
+            score=90,
+            issued_at=ISSUED,
+            preparation_id=PREP_ID,
         )
 
     monkeypatch.setattr(certificates, "get", fake_get)

@@ -1,8 +1,9 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.auth import CurrentUser
+from prepza_common.paging import PageParams
 
-from app.auth import CurrentUser
 from app.constants.roles import Role
 from app.models.companies import Member
 from app.schemas.companies import AdminInviteOut, MemberIn, MemberOut
@@ -25,10 +26,11 @@ def member_out(member: Member) -> MemberOut:
 
 
 @router.get("")
-async def list_members(company_id: UUID, user: CurrentUser) -> list[MemberOut]:
+async def list_members(company_id: UUID, user: CurrentUser, page: PageParams) -> list[MemberOut]:
     company, _ = await require_company(user, company_id)
+    rows = await members.list_for_company(company.id, page.offset, page.limit)
 
-    return [member_out(member) for member in await members.list_for_company(company.id)]
+    return [member_out(member) for member in rows]
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)

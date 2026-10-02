@@ -1,8 +1,11 @@
 "use client"
 
+import { MinusIcon, PencilIcon } from "lucide-react"
 import type { ReactNode } from "react"
 import { useState } from "react"
 
+import { TopicEditor } from "@/components/generation/topic-editor"
+import { RoundFooter } from "@/components/rounds/round-footer"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
@@ -10,16 +13,38 @@ import type { DraftTopic } from "@/types/generation"
 
 type TopicReviewProps = {
   topics: DraftTopic[]
+  maxTopics: number
   back: ReactNode
-  onSubmit: (selected: number[], instructions: string) => Promise<void>
+  // Shown at the left of the submit row.
+  cancel?: ReactNode
+  // `edited` is every topic with the reviewer's own changes, or null when nothing was edited.
+  onSubmit: (
+    selected: number[],
+    instructions: string,
+    edited: DraftTopic[] | null
+  ) => Promise<void>
 }
 
-export function TopicReview({ topics, back, onSubmit }: TopicReviewProps) {
-  const [selected, setSelected] = useState(() => topics.map((_, index) => index))
+export function TopicReview({
+  topics,
+  maxTopics,
+  back,
+  cancel,
+  onSubmit,
+}: TopicReviewProps) {
+  const [selected, setSelected] = useState(() =>
+    topics.map((_, index) => index)
+  )
+  const [draft, setDraft] = useState(topics)
+  const [editing, setEditing] = useState<number | null>(null)
   const [instructions, setInstructions] = useState("")
   const [submitting, setSubmitting] = useState(false)
+  const edited = JSON.stringify(draft) !== JSON.stringify(topics)
+  const unnamed = draft.some((topic) => !topic.main_topic.trim())
   const revising =
     instructions.trim().length > 0 || selected.length !== topics.length
+  // Without instructions the selection is approved as is, so it must fit the limit.
+  const tooMany = !instructions.trim() && selected.length > maxTopics
 
   function toggle(index: number, checked: boolean) {
     setSelected((current) =>
@@ -32,12 +57,13 @@ export function TopicReview({ topics, back, onSubmit }: TopicReviewProps) {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setSubmitting(true)
-    await onSubmit(selected, instructions.trim())
+    await onSubmit(selected, instructions.trim(), edited ? draft : null)
     setSubmitting(false)
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    // pb-28 keeps the last field clear of the sticky footer.
+    <form onSubmit={handleSubmit} className="space-y-8 pb-28">
       <div className="space-y-2">
         <div className="relative">
           {back}
@@ -46,48 +72,95 @@ export function TopicReview({ topics, back, onSubmit }: TopicReviewProps) {
           </h1>
         </div>
         <p className="text-muted-foreground">
-          Uncheck topics you don&apos;t need, or describe changes. Each topic
-          gets its own set of questions with answers.
+          Uncheck topics you don&apos;t need, edit them, or describe changes.
+          Each topic gets its own set of questions with answers.
         </p>
       </div>
 
       <ul className="divide-y rounded-2xl border">
-        {topics.map((topic, index) => (
-          <li key={topic.main_topic}>
-            <label className="flex cursor-pointer gap-3 p-4">
-              <Checkbox
-                className="mt-1"
-                checked={selected.includes(index)}
-                onCheckedChange={(checked) => toggle(index, checked)}
+        {draft.map((topic, index) =>
+          editing === index ? (
+            <li key={index}>
+              <TopicEditor
+                topic={topic}
+                onChange={(changed) =>
+                  setDraft((current) =>
+                    current.map((item, itemIndex) =>
+                      itemIndex === index ? changed : item
+                    )
+                  )
+                }
+                onDone={() => setEditing(null)}
               />
-              <span className="space-y-1">
-                <span className="block font-medium">{topic.main_topic}</span>
-                <span className="block text-sm text-muted-foreground">
-                  {topic.subtopics.join(" · ")}
+            </li>
+          ) : (
+            <li key={index} className="relative">
+              <label className="flex cursor-pointer items-center gap-5 p-6 pr-16">
+                <Checkbox
+                  className="size-6 shrink-0 [&_[data-slot=checkbox-indicator]>svg]:size-4"
+                  checked={selected.includes(index)}
+                  onCheckedChange={(checked) => toggle(index, checked)}
+                />
+                <span className="space-y-1">
+                  <span className="block font-medium">{topic.main_topic}</span>
+                  <span className="block text-sm text-muted-foreground">
+                    {topic.subtopics.map((subtopic, subtopicIndex) => (
+                      <span key={subtopic}>
+                        {subtopicIndex > 0 && (
+                          <MinusIcon
+                            aria-hidden
+                            className="mx-1.5 inline size-3.5 align-[-2px] text-foreground/55"
+                          />
+                        )}
+                        {subtopic}
+                      </span>
+                    ))}
+                  </span>
                 </span>
-              </span>
-            </label>
-          </li>
-        ))}
+              </label>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute top-1/2 right-4 -translate-y-1/2"
+                aria-label={`Edit ${topic.main_topic}`}
+                onClick={() => setEditing(index)}
+              >
+                <PencilIcon />
+              </Button>
+            </li>
+          )
+        )}
       </ul>
 
-      <Textarea
-        value={instructions}
-        onChange={(event) => setInstructions(event.target.value)}
-        placeholder="Optional: describe changes, e.g. “Add a topic on system design”"
-        aria-label="Changes to the topics"
-        className="min-h-20"
-      />
-
-      <div className="flex justify-end">
-        <Button
-          type="submit"
-          size="lg"
-          disabled={selected.length === 0 || submitting}
-        >
-          {revising ? "Apply changes" : "Approve and generate"}
-        </Button>
+      {/* Same card as the goal input on the home page. */}
+      <div className="w-full rounded-2xl border border-transparent bg-card p-3 transition-colors focus-within:border-ring">
+        <Textarea
+          value={instructions}
+          onChange={(event) => setInstructions(event.target.value)}
+          placeholder="Optional: describe changes, e.g. “Add a topic on team leadership”"
+          aria-label="Changes to the topics"
+          className="max-h-72 min-h-24 resize-none border-0 bg-transparent p-2 text-base shadow-none focus-visible:ring-0 md:text-base dark:bg-transparent"
+        />
       </div>
+
+      <RoundFooter>
+        <div>{cancel}</div>
+        <div className="flex items-center gap-4">
+          {tooMany && (
+            <p className="text-sm text-destructive">
+              Choose at most {maxTopics} topics, or describe how to merge them.
+            </p>
+          )}
+          <Button
+            type="submit"
+            className="h-12 px-6 text-base"
+            disabled={selected.length === 0 || tooMany || unnamed || submitting}
+          >
+            {revising ? "Apply changes" : "Approve and generate"}
+          </Button>
+        </div>
+      </RoundFooter>
     </form>
   )
 }

@@ -2,8 +2,8 @@ from collections.abc import AsyncIterator
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
 
-from app.constants.rounds import ChatRole
-from app.helpers.chat import grade_summary, learner_answer
+from app.constants.rounds import CHAT_HISTORY_MESSAGES, ChatRole
+from app.helpers.chat import correct_answer, learner_answer, result_summary
 from app.helpers.rounds import find_question
 from app.integrations import llm
 from app.models.chat import ChatMessage
@@ -17,13 +17,13 @@ def build_messages(
     question = find_question(round_, str(answer.question_id))
     system = CHAT_SYSTEM.format(
         question=question["text"],
-        reference_answer=question["reference_answer"],
+        correct_answer=correct_answer(question),
         answer=learner_answer(question, answer),
-        grade=grade_summary(answer),
+        result=result_summary(answer),
     )
     messages: list[BaseMessage] = [SystemMessage(content=system)]
 
-    for item in history:
+    for item in history[-CHAT_HISTORY_MESSAGES:]:
         message_class = HumanMessage if item.role == ChatRole.USER else AIMessage
         messages.append(message_class(content=item.content))
 

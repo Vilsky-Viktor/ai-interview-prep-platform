@@ -2,11 +2,12 @@ import uuid
 from datetime import UTC, datetime
 from types import SimpleNamespace
 
-from app.auth import current_user
+from prepza_common.auth import current_user
+from prepza_common.user import User
+
 from app.constants.sets import Access, SetKind, Visibility
 from app.main import app
 from app.models.sets import QuestionSet
-from app.schemas.user import User
 from app.storage import feedback, preparations
 
 TOPIC_ID = uuid.uuid4()
@@ -25,7 +26,7 @@ def test_topic_questions_are_text_only(client, monkeypatch):
     async def fake_stats(_question_ids):
         return {QUESTION_ID: {"likes": 2, "dislikes": 0, "reports": 1}}
 
-    monkeypatch.setattr(preparations, "get_topic_with_questions", fake_found)
+    monkeypatch.setattr(preparations, "get_topic_with_question_texts", fake_found)
     monkeypatch.setattr("app.routers.preparations.access_for", fake_access)
     monkeypatch.setattr(feedback, "question_stats", fake_stats)
 
@@ -48,7 +49,7 @@ def test_only_owner_reads_reports(client, monkeypatch):
     async def fake_set(_question_id):
         return question_set
 
-    async def fake_reports(_question_id):
+    async def fake_reports(_question_id, offset=0, limit=None):
         return [report]
 
     monkeypatch.setattr(preparations, "get_for_question", fake_set)
@@ -73,7 +74,7 @@ def test_hidden_topic_questions_are_not_found(client, monkeypatch):
     async def fake_found(_topic_id):
         return None
 
-    monkeypatch.setattr(preparations, "get_topic_with_questions", fake_found)
+    monkeypatch.setattr(preparations, "get_topic_with_question_texts", fake_found)
 
     response = client.get(f"/preparations/topics/{TOPIC_ID}/questions")
 

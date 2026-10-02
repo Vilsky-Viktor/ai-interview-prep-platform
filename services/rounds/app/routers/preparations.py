@@ -1,10 +1,10 @@
 from uuid import UUID
 
 from fastapi import APIRouter
+from prepza_common.auth import CurrentUser
 
-from app.auth import CurrentUser
-from app.schemas.rounds import MasteredTopicOut, TopicPassOut
-from app.services.coverage import answered_counts
+from app.schemas.rounds import MasteredTopicOut, TopicProgressOut
+from app.services.coverage import topic_progress
 from app.storage import certificates, rounds
 
 router = APIRouter(prefix="/preparations", tags=["history"])
@@ -19,21 +19,21 @@ async def list_mastered_topics(user: CurrentUser) -> list[MasteredTopicOut]:
     ]
 
 
-@router.get("/{preparation_id}/passes")
-async def list_passes(preparation_id: UUID, user: CurrentUser) -> list[TopicPassOut]:
-    """Best finished score per topic and mode on this preparation."""
+@router.get("/{preparation_id}/progress")
+async def list_progress(preparation_id: UUID, user: CurrentUser) -> list[TopicProgressOut]:
+    """Per topic the user has practiced: answered questions, percent correct, certificate and
+    whether a round is still open."""
     certs = await certificates.for_preparation(user.uid, preparation_id)
-    answered = await answered_counts(user.uid, preparation_id)
+    found = await topic_progress(user.uid, preparation_id)
+    open_topics = await rounds.in_progress_topics(user.uid, preparation_id)
 
     return [
-        TopicPassOut(
+        TopicProgressOut(
             topic_id=topic_id,
-            mode=mode,
-            score=score,
-            answered=answered.get((topic_id, mode), 0),
+            answered=found.get(topic_id, (0, None))[0],
+            score=found.get(topic_id, (0, None))[1],
             certificate_id=certs.get(topic_id),
+            in_progress=topic_id in open_topics,
         )
-        for topic_id, mode, score in await rounds.best_for_preparation(
-            user.uid, preparation_id
-        )
+        for topic_id in found.keys() | certs.keys() | open_topics
     ]

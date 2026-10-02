@@ -1,11 +1,18 @@
+from datetime import datetime
+from typing import Annotated
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, computed_field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
-from app.constants.generation import MAX_GOAL_LENGTH
+from app.constants.generation import (
+    GOAL_PREVIEW_LENGTH,
+    MAX_GOAL_LENGTH,
+    MAX_SUBTOPICS,
+    MAX_TOPIC_NAME_LENGTH,
+    MAX_TOPICS,
+)
 from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
-from app.helpers.usage import cost_usd
 
 
 class GenerationCreate(BaseModel):
@@ -24,9 +31,47 @@ class GenerationCreate(BaseModel):
         return self
 
 
+TopicName = Annotated[
+    str, StringConstraints(strip_whitespace=True, min_length=1, max_length=MAX_TOPIC_NAME_LENGTH)
+]
+
+
+class EditedTopic(BaseModel):
+    main_topic: TopicName
+    subtopics: list[TopicName] = Field(max_length=MAX_SUBTOPICS)
+
+
 class ReviewRequest(BaseModel):
     selected: list[int] = Field(min_length=1)
     instructions: str = ""
+    # Every drafted topic, in order, with the reviewer's own edits; `selected` indexes this list.
+    topics: list[EditedTopic] | None = None
+
+    @model_validator(mode="after")
+    def approve_at_most_max_topics(self):
+        """Without instructions the review approves the selection, which caps the topics.
+
+        With instructions the topics are revised first, so the reviewer may ask to merge.
+        """
+        if not self.instructions.strip() and len(self.selected) > MAX_TOPICS:
+            raise ValueError(f"Choose at most {MAX_TOPICS} topics")
+
+        return self
+
+
+class DraftTopic(BaseModel):
+    main_topic: str
+    subtopics: list[str]
+
+
+class GenerationProgress(BaseModel):
+    """What the progress screen shows; the worker's own per-topic counters stay internal."""
+
+    done: int
+    total: int
+    # Missing on generations started before per-topic progress existed.
+    topics: int | None = None
+    topics_ready: int | None = None
 
 
 class GenerationOut(BaseModel):
@@ -36,13 +81,29 @@ class GenerationOut(BaseModel):
     kind: GenerationKind
     company_id: UUID | None
     status: Status
-    topics: list[dict] | None
-    progress: dict | None
+    topics: list[DraftTopic] | None
+    progress: GenerationProgress | None
     preparation_id: UUID | None
     error: str | None
-    usage: dict | None = None
+    max_topics: int = MAX_TOPICS
 
-    @computed_field
-    @property
-    def cost_usd(self) -> float | None:
-        return cost_usd(self.usage)
+
+class GenerationSummary(BaseModel):
+    """An unfinished generation in a list, with the start of the goal it was made from."""
+
+    id: UUID
+    status: Status
+    preview: str
+    created_at: datetime
+
+    @classmethod
+    def of(cls, generation) -> "GenerationSummary":
+        text = " ".join(generation.text.split())
+        preview = text[:GOAL_PREVIEW_LENGTH] + ("…" if len(text) > GOAL_PREVIEW_LENGTH else "")
+
+        return cls(
+            id=generation.id,
+            status=generation.status,
+            preview=preview,
+            created_at=generation.created_at,
+        )

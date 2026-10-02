@@ -129,6 +129,17 @@
     }
   html {
     @apply font-sans;
+    scrollbar-gutter: stable;
+    }
+  /* Titles and menu items end with the logo's blue dot; as text, it scales with their font.
+     Titles that end with a question mark opt out with .no-dot. */
+  h1:not(.no-dot)::after,
+  h2:not(.no-dot)::after,
+  [data-slot="dialog-title"]:not(.no-dot)::after,
+  nav[aria-label="Main"] a::after,
+  [data-slot="dropdown-menu-item"]::after {
+    content: ".";
+    color: var(--primary);
     }
 }
 

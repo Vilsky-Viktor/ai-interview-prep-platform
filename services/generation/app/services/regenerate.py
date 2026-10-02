@@ -4,7 +4,7 @@ from langchain_core.messages import HumanMessage
 
 from app.constants.generation import REGENERATE_ATTEMPTS
 from app.helpers.prompts import bullet_list
-from app.helpers.questions import normalize
+from app.helpers.questions import normalize, strip_choices
 from app.integrations import library, llm
 from app.prompts.regenerate import REGENERATE_PROMPT
 from app.schemas.questions import NewQuestion
@@ -14,7 +14,7 @@ from app.services.nodes.answers import generate_answers
 
 async def new_question(context: QuestionContext) -> str | None:
     """A question that is not a duplicate of any existing one in the topic."""
-    structured_llm = llm.get_question_llm().with_structured_output(NewQuestion)
+    structured_llm = llm.get_llm().with_structured_output(NewQuestion)
     existing = list(context.existing)
     taken = {normalize(text) for text in existing}
 
@@ -26,7 +26,7 @@ async def new_question(context: QuestionContext) -> str | None:
             existing=bullet_list(existing),
         )
         result: NewQuestion = await structured_llm.ainvoke([HumanMessage(content=prompt)])
-        text = result.question.strip()
+        text = strip_choices(result.question)
 
         if text and normalize(text) not in taken:
             return text
@@ -37,32 +37,32 @@ async def new_question(context: QuestionContext) -> str | None:
 
 
 async def regenerate(question_id: UUID, context: QuestionContext) -> RegeneratedOut | None:
-    """Writes a new question with its answer and options and saves it in place of the old one."""
-    text = await new_question(context)
+    """Writes a new question with its options and saves it in place of the old one."""
+    for _ in range(REGENERATE_ATTEMPTS):
+        text = await new_question(context)
 
-    if text is None:
-        return None
+        if text is None:
+            return None
 
-    result = await generate_answers(
-        {
-            "topic_index": 0,
-            "topic": context.topic,
-            "start": 0,
-            "questions": [text],
-            "level": context.level,
-            "company_description": "",
-        }
-    )
-    answered = result["answer_pool"][0]
+        result = await generate_answers(
+            {
+                "topic_index": 0,
+                "topic": context.topic,
+                "start": 0,
+                "questions": [text],
+                "level": context.level,
+            }
+        )
+        options = result["answer_pool"][0]["options"][0]
 
-    if not answered["answers"][0]:
-        return None
+        if options:
+            await library.replace_question(
+                question_id, RegeneratedQuestion(text=text, options=options)
+            )
 
-    await library.replace_question(
-        question_id,
-        RegeneratedQuestion(
-            text=text, reference_answer=answered["answers"][0], options=answered["options"][0]
-        ),
-    )
+            return RegeneratedOut(id=question_id, text=text)
 
-    return RegeneratedOut(id=question_id, text=text)
+        # No options means the question was ambiguous; never offer it again.
+        context = context.model_copy(update={"existing": [*context.existing, text]})
+
+    return None

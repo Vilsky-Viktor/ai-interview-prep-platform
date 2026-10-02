@@ -7,3 +7,4 @@ class Status(StrEnum):
     AWAITING_REVIEW = "awaiting_review"
     DONE = "done"
     FAILED = "failed"
+    CANCELLED = "cancelled"

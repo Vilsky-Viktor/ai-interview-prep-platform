@@ -25,7 +25,6 @@ class RegeneratedOption(BaseModel):
 
 class RegeneratedQuestion(BaseModel):
     text: str
-    reference_answer: str
     options: list[RegeneratedOption]
 
 
