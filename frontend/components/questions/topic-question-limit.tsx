@@ -33,9 +33,11 @@ export function TopicQuestionLimit({
       <span className="flex flex-col items-end leading-none">
         <span className="flex items-baseline gap-1 text-sm text-muted-foreground">
           of
-          <TopicQuestions {...questions} />
+          <TopicQuestions {...questions} alignCount />
         </span>
-        <span className="-mt-0.5 text-xs text-muted-foreground/60">{caption}</span>
+        <span className="-mt-0.5 text-xs text-muted-foreground/60">
+          {caption}
+        </span>
       </span>
     </span>
   )

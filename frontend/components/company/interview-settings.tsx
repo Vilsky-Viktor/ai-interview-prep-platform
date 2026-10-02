@@ -9,10 +9,7 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
@@ -28,20 +25,14 @@ type Settings = {
 export function InterviewSettings({
   interviewId,
   initial,
-  deletable,
-  leaveTo,
 }: {
   interviewId: string
   initial: Settings
-  deletable: boolean
-  leaveTo: string
 }) {
   const router = useRouter()
   const [settings, setSettings] = useState(initial)
   const [minutes, setMinutes] = useState(String(initial.time_limit_minutes))
   const [saving, setSaving] = useState(false)
-  const [confirming, setConfirming] = useState(false)
-  const [deleting, setDeleting] = useState(false)
 
   // Every save sends all settings, so one change never resets another.
   async function save(change: Partial<Settings>) {
@@ -77,34 +68,8 @@ export function InterviewSettings({
     void save({ time_limit_minutes: Number(minutes) })
   }
 
-  async function remove() {
-    setDeleting(true)
-
-    try {
-      await apiFetch(`/companies/interviews/${interviewId}`, {
-        method: "DELETE",
-      })
-      router.push(leaveTo)
-      router.refresh()
-    } catch (error) {
-      toast.error(
-        apiErrorMessage(
-          error,
-          "Couldn't delete the interview. Please try again."
-        )
-      )
-      setDeleting(false)
-    }
-  }
-
   return (
-    <Dialog
-      onOpenChange={(open) => {
-        if (!open) {
-          setConfirming(false)
-        }
-      }}
-    >
+    <Dialog>
       <DialogTrigger
         render={
           <Button
@@ -122,103 +87,58 @@ export function InterviewSettings({
         className="sm:max-w-lg"
         aria-label="Settings"
       >
-        {confirming ? (
-          <>
-            <DialogHeader>
-              <DialogTitle className="no-dot">
-                Delete this interview?
-              </DialogTitle>
-              <DialogDescription>
-                Candidates lose access, and their results are deleted. This
-                can&apos;t be undone.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <Button
-                variant="outline"
-                className="h-10 px-5 text-base"
-                disabled={deleting}
-                onClick={() => setConfirming(false)}
-              >
-                Keep
-              </Button>
-              <Button
-                variant="destructive"
-                className="h-10 px-5 text-base"
-                disabled={deleting}
-                onClick={remove}
-              >
-                {deleting ? "Deleting…" : "Delete"}
-              </Button>
-            </DialogFooter>
-          </>
-        ) : (
-          <>
-            <div className="flex items-center justify-between gap-4">
-              <span className="text-lg font-medium">
-                Show scores to the candidate
-              </span>
-              <Switch
-                checked={settings.share_results}
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-lg font-medium">
+            Show scores to the candidate
+          </span>
+          <Switch
+            checked={settings.share_results}
+            disabled={saving}
+            aria-label="Show scores to the candidate"
+            onCheckedChange={(checked) => save({ share_results: checked })}
+          />
+        </div>
+        <div className="flex items-center justify-between gap-4">
+          <span className="space-y-1">
+            <span className="block text-lg font-medium">Timed interview</span>
+            <span className="block text-sm text-muted-foreground">
+              The interview finishes by itself when time runs out.
+            </span>
+          </span>
+          <Switch
+            checked={settings.timed}
+            disabled={saving}
+            aria-label="Timed interview"
+            onCheckedChange={(checked) => save({ timed: checked })}
+          />
+        </div>
+        {settings.timed && (
+          <label className="flex items-center justify-between gap-4">
+            <span className="text-lg font-medium">Time limit</span>
+            {/* Same look as the app's other fields (library search, candidate invite). */}
+            <span className="relative w-36 rounded-lg border border-transparent transition-colors focus-within:border-ring">
+              <Input
+                type="number"
+                inputMode="numeric"
+                value={minutes}
                 disabled={saving}
-                aria-label="Show scores to the candidate"
-                onCheckedChange={(checked) => save({ share_results: checked })}
+                aria-label="Time limit in minutes"
+                className="h-14 [appearance:textfield] border-0 pr-14 pl-5 text-lg focus-visible:ring-0 md:text-lg [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                onChange={(event) => setMinutes(event.target.value)}
+                onBlur={saveMinutes}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    event.currentTarget.blur()
+                  }
+                }}
               />
-            </div>
-            <div className="flex items-center justify-between gap-4">
-              <span className="space-y-1">
-                <span className="block text-lg font-medium">
-                  Timed interview
-                </span>
-                <span className="block text-sm text-muted-foreground">
-                  The interview finishes by itself when time runs out.
-                </span>
+              <span className="pointer-events-none absolute top-1/2 right-5 -translate-y-1/2 text-lg text-muted-foreground">
+                min
               </span>
-              <Switch
-                checked={settings.timed}
-                disabled={saving}
-                aria-label="Timed interview"
-                onCheckedChange={(checked) => save({ timed: checked })}
-              />
-            </div>
-            {settings.timed && (
-              <label className="flex items-center justify-between gap-4">
-                <span className="text-lg font-medium">Time limit</span>
-                <span className="flex items-center gap-2 text-muted-foreground">
-                  <Input
-                    type="number"
-                    inputMode="numeric"
-                    value={minutes}
-                    disabled={saving}
-                    aria-label="Time limit in minutes"
-                    className="h-10 w-24 text-right text-base"
-                    onChange={(event) => setMinutes(event.target.value)}
-                    onBlur={saveMinutes}
-                    onKeyDown={(event) => {
-                      if (event.key === "Enter") {
-                        event.currentTarget.blur()
-                      }
-                    }}
-                  />
-                  minutes
-                </span>
-              </label>
-            )}
-            {deletable && (
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-lg font-medium">Delete interview</span>
-                <Button
-                  variant="destructive"
-                  className="h-10 px-5 text-base"
-                  onClick={() => setConfirming(true)}
-                >
-                  Delete
-                </Button>
-              </div>
-            )}
-            <DialogFooter showCloseButton />
-          </>
+            </span>
+          </label>
         )}
+        <DialogFooter showCloseButton />
       </DialogContent>
     </Dialog>
   )

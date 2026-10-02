@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 
 import { BackLink } from "@/components/back-link"
 import { CandidateList } from "@/components/company/candidate-list"
+import { DeleteInterview } from "@/components/company/delete-interview"
 import { InterviewNav } from "@/components/company/interview-nav"
 import { EditableTitle } from "@/components/editable-title"
 import { InterviewSettings } from "@/components/company/interview-settings"
@@ -63,6 +64,13 @@ export default async function InterviewPage({
                   </h1>
                 )}
               </div>
+              {ready && (
+                <DeleteInterview
+                  interviewId={interview.id}
+                  title={interview.title ?? "interview"}
+                  leaveTo={interviewsHref}
+                />
+              )}
               <InterviewSettings
                 interviewId={interview.id}
                 initial={{
@@ -70,8 +78,6 @@ export default async function InterviewPage({
                   timed: interview.timed,
                   time_limit_minutes: interview.time_limit_minutes,
                 }}
-                deletable={ready}
-                leaveTo={interviewsHref}
               />
             </div>
           }

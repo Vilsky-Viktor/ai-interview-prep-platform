@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "cn"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -22,12 +23,15 @@ export function TopicQuestions({
   path,
   regeneratePath,
   reportsPath,
+  alignCount = false,
 }: {
   title: string
   count: number
   path: string
   regeneratePath?: string
   reportsPath?: string
+  // Reserve room for three digits, so rows with 99 and 100 questions line up.
+  alignCount?: boolean
 }) {
   const [open, setOpen] = useState(false)
   const [questions, setQuestions] = useState<QuestionStats[] | null>(null)
@@ -96,7 +100,15 @@ export function TopicQuestions({
           />
         }
       >
-        <span className="text-lg tabular-nums">{count}</span> {label}
+        <span
+          className={cn(
+            "text-lg tabular-nums",
+            alignCount && "inline-block min-w-[3ch] text-right"
+          )}
+        >
+          {count}
+        </span>{" "}
+        {label}
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}
