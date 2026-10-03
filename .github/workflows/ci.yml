@@ -120,6 +120,9 @@ jobs:
       # Each service's tests/integration, against the stack's real Postgres and Redis.
       - name: Integration tests
         run: ./scripts/tests/integration.sh
+      # The signed-out pages in a real browser (Playwright's image), on desktop and phone sizes.
+      - name: Page tests
+        run: ./scripts/tests/pages.sh
       - name: Logs on failure
         if: failure()
         run: docker compose logs --tail 100

@@ -207,6 +207,11 @@ cd frontend && pnpm api-types
 # and Redis, in a "<service>_test" database created and dropped for the run
 ./scripts/tests/integration.sh            # or: ./scripts/tests/integration.sh rounds library
 
+# Browser tests of the signed-out pages (home, explore, pricing, terms, privacy) on desktop and
+# phone sizes, in Playwright's Docker image: no console errors, no sideways scroll, the same page
+# width everywhere, the footer at the end, lowercase titles
+./scripts/tests/pages.sh
+
 # End-to-end, with real generations (needs OPENAI_API_KEY; a few cents and a few minutes): a learner
 # generates a kit and practises; a company generates an interview and invites a candidate, who
 # takes it from the invite link; the company sees the scorecard and pays for that candidate

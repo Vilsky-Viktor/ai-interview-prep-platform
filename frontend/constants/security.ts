@@ -4,6 +4,8 @@ export const FIREBASE_CONNECT_ORIGINS = [
   "https://securetoken.googleapis.com",
   "https://www.googleapis.com",
   "https://apis.google.com",
+  // Google's sign-in scripts check the connection by fetching an image from here.
+  "https://www.google.com",
 ]
 
 // Paddle's checkout runs in a frame from these, and Paddle.js talks to them.
