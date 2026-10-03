@@ -102,4 +102,4 @@ jobs:
           deploy notifications notifications
           deploy frontend frontend
       - name: Smoke test
-        run: ./scripts/smoke.sh "${{ vars.SITE_URL }}"
+        run: ./scripts/tests/smoke.sh "${{ vars.SITE_URL }}"

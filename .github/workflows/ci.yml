@@ -109,7 +109,7 @@ jobs:
       - name: Smoke test
         run: |
           for attempt in $(seq 1 40); do
-            if ./scripts/smoke.sh; then
+            if ./scripts/tests/smoke.sh; then
               exit 0
             fi
 
@@ -119,7 +119,7 @@ jobs:
           exit 1
       # Each service's tests/integration, against the stack's real Postgres and Redis.
       - name: Integration tests
-        run: ./scripts/integration.sh
+        run: ./scripts/tests/integration.sh
       - name: Logs on failure
         if: failure()
         run: docker compose logs --tail 100

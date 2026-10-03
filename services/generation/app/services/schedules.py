@@ -11,7 +11,7 @@ from app.storage import accounts, generations
 logger = logging.getLogger(__name__)
 
 # Cloud Scheduler calls these through routers/schedules.py; their timetable is in the
-# infrastructure (and scripts/crontab locally).
+# infrastructure (and scripts/local/crontab locally).
 
 
 async def key_check_batches() -> None:

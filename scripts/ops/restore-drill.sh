@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Proves backups restore: the latest backup goes into a temporary Cloud SQL instance, its main
 # tables are counted, and the instance is deleted. Run before launch, then quarterly.
-# Needs gcloud (signed in), cloud-sql-proxy and psql. Usage: scripts/restore-drill.sh prepza-prod
+# Needs gcloud (signed in), cloud-sql-proxy and psql. Usage: scripts/ops/restore-drill.sh prepza-prod
 set -euo pipefail
 
-project="${1:?usage: scripts/restore-drill.sh <project id>}"
+project="${1:?usage: scripts/ops/restore-drill.sh <project id>}"
 region="${REGION:-europe-west1}"
 source_instance="prepza"
 drill="prepza-restore-drill-$(date +%Y%m%d%H%M)"

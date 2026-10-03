@@ -1,10 +1,8 @@
-from pydantic import Field, model_validator
-from pydantic_settings import BaseSettings
+from prepza_common.settings import ServiceSettings
+from pydantic import Field
 
 
-class Settings(BaseSettings):
-    firebase_project_id: str
-    firebase_auth_emulator_host: str = ""
+class Settings(ServiceSettings):
     # The API description (/docs, /openapi.json) lists every route, internal ones too, so it's
     # served only in development, where the frontend's types are generated from it.
     api_docs: bool = False
@@ -30,14 +28,6 @@ class Settings(BaseSettings):
     # LLM requests a second across the API and every worker; 0 turns the limit off. The default
     # stays under OpenAI's 500 requests a minute on its first tier.
     llm_requests_per_second: int = Field(default=8, ge=0)
-
-    @model_validator(mode="after")
-    def emulator_only_for_demo_projects(self) -> "Settings":
-        # With the emulator host set, firebase_admin accepts unsigned tokens.
-        if self.firebase_auth_emulator_host and not self.firebase_project_id.startswith("demo-"):
-            raise ValueError("FIREBASE_AUTH_EMULATOR_HOST is only allowed for a demo- project")
-
-        return self
 
     @property
     def sqlalchemy_url(self) -> str:

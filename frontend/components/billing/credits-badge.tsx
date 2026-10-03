@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 import { useAuth } from "@/components/auth-provider"
 import { apiFetch } from "@/lib/api"
 import { onCreditsChanged } from "@/lib/credits"
-import { cn } from "@/lib/utils"
+import { cn } from "cn"
 import type { Balance } from "@/types/billing"
 
 /** The signed-in user's available credits, next to their avatar; a link to top up. */

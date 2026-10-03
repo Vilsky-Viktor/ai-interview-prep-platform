@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useEffectEvent, useRef, useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
@@ -44,21 +44,30 @@ export function useSessionPlayer(id: string) {
     }
   }, [user, id, showStep])
 
+  const sessionId = session?.id
+
   useEffect(() => {
-    if (!user || !session) {
+    if (!user || !sessionId) {
       return
     }
 
-    apiFetch<SessionTopic[]>(`/rounds/sessions/${session.id}/topics`)
+    apiFetch<SessionTopic[]>(`/rounds/sessions/${sessionId}/topics`)
       .then(setTopics)
       .catch(() => setTopics([]))
       .finally(() => setTopicsLoaded(true))
-  }, [user, session?.id])
+  }, [user, sessionId])
 
-  useEffect(() => {
-    if (user && session && !started.current) {
+  // Starts once, when the session first loads, with the latest state.
+  const startOnce = useEffectEvent(() => {
+    if (!started.current) {
       started.current = true
       void begin()
+    }
+  })
+
+  useEffect(() => {
+    if (user && session) {
+      startOnce()
     }
   }, [user, session])
 

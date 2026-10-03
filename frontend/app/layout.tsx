@@ -12,7 +12,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { SITE_NAME } from "@/constants/seo"
 import { siteUrl } from "@/lib/site"
-import { cn } from "@/lib/utils"
+import { cn } from "cn"
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" })
 

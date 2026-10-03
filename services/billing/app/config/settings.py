@@ -1,10 +1,7 @@
-from pydantic import model_validator
-from pydantic_settings import BaseSettings
+from prepza_common.settings import ServiceSettings
 
 
-class Settings(BaseSettings):
-    firebase_project_id: str
-    firebase_auth_emulator_host: str = ""
+class Settings(ServiceSettings):
     # The API description lists every route, internal ones too: development only.
     api_docs: bool = False
     database_url: str
@@ -27,14 +24,6 @@ class Settings(BaseSettings):
     # monthly price whose checkout saves it. Without both, it isn't offered.
     paddle_api_key: str = ""
     paddle_price_auto_top_up: str = ""
-
-    @model_validator(mode="after")
-    def emulator_only_for_demo_projects(self) -> "Settings":
-        # With the emulator host set, firebase_admin accepts unsigned tokens.
-        if self.firebase_auth_emulator_host and not self.firebase_project_id.startswith("demo-"):
-            raise ValueError("FIREBASE_AUTH_EMULATOR_HOST is only allowed for a demo- project")
-
-        return self
 
     @property
     def sqlalchemy_url(self) -> str:

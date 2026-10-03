@@ -82,7 +82,7 @@ flowchart LR
 | `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key) |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
-Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed). Long jobs (a generation, a question check) are Cloud Tasks that call the generation worker's `/internal/jobs/...`; periodic work (stuck-generation sweeps, key-check batches, retention) is Cloud Scheduler calling `/internal/schedules/...`. Google signs those calls, and pushes, as one invoker service account, which each service checks. Locally there is no queue: the API calls the worker directly, and a small `scheduler` container runs `scripts/crontab`. Domain events are saved in an `outbox` table in the same transaction as the change they announce, published right after, and published by a per-minute scheduled flush if that failed, so a change never loses its event. They go to one Pub/Sub topic, `events`, which pushes each event to the `/internal/events` endpoint of library, companies and notifications; each ignores events that aren't its own. Locally, Google's Pub/Sub emulator runs in docker-compose and `scripts/pubsub-setup.sh` creates the topic and subscriptions. The services also publish small `funnel.*` events (signed up, kit ready, topped up and so on) to the same topic; a filtered BigQuery subscription stores them for the dashboards and the push subscriptions skip them. They carry counts and a salted hash of the user id (`ANALYTICS_SALT`), never emails or text; see [docs/measurement.md](docs/measurement.md). Locally nothing stores them.
+Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed). Long jobs (a generation, a question check) are Cloud Tasks that call the generation worker's `/internal/jobs/...`; periodic work (stuck-generation sweeps, key-check batches, retention) is Cloud Scheduler calling `/internal/schedules/...`. Google signs those calls, and pushes, as one invoker service account, which each service checks. Locally there is no queue: the API calls the worker directly, and a small `scheduler` container runs `scripts/local/crontab`. Domain events are saved in an `outbox` table in the same transaction as the change they announce, published right after, and published by a per-minute scheduled flush if that failed, so a change never loses its event. They go to one Pub/Sub topic, `events`, which pushes each event to the `/internal/events` endpoint of library, companies and notifications; each ignores events that aren't its own. Locally, Google's Pub/Sub emulator runs in docker-compose and `scripts/local/pubsub-setup.sh` creates the topic and subscriptions. The services also publish small `funnel.*` events (signed up, kit ready, topped up and so on) to the same topic; a filtered BigQuery subscription stores them for the dashboards and the push subscriptions skip them. They carry counts and a salted hash of the user id (`ANALYTICS_SALT`), never emails or text; see [docs/measurement.md](docs/measurement.md). Locally nothing stores them.
 
 ### Generation pipeline
 
@@ -201,14 +201,19 @@ cd frontend && pnpm install && pnpm lint && pnpm typecheck
 cd frontend && pnpm api-types
 
 # Smoke test against a running stack
-./scripts/smoke.sh
+./scripts/tests/smoke.sh
 
 # Integration tests: each service's tests/integration against the running stack's real Postgres
 # and Redis, in a "<service>_test" database created and dropped for the run
-./scripts/integration.sh            # or: ./scripts/integration.sh rounds library
+./scripts/tests/integration.sh            # or: ./scripts/tests/integration.sh rounds library
+
+# End-to-end, with real generations (needs OPENAI_API_KEY; a few cents and a few minutes): a learner
+# generates a kit and practises; a company generates an interview and invites a candidate, who
+# takes it from the invite link; the company sees the scorecard and pays for that candidate
+python3 scripts/tests/e2e.py
 ```
 
-CI runs all of these on every push and pull request, and also builds every production image and starts the whole stack for the smoke test.
+CI runs all of these on every push and pull request, except the end-to-end test, which needs an OpenAI key; it also builds every production image and starts the whole stack for the smoke test.
 
 ## Project conventions
 

@@ -16,7 +16,7 @@ resource "google_cloud_tasks_queue" "generation" {
   depends_on = [google_project_service.apis]
 }
 
-# Periodic work, as scripts/crontab does locally (UTC).
+# Periodic work, as scripts/local/crontab does locally (UTC).
 locals {
   schedules = {
     sweep                = { service = "generation-worker", path = "/internal/schedules/sweep", cron = "*/5 * * * *" }

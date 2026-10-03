@@ -120,7 +120,7 @@ A failed step stops the deploy, and the services keep running the previous image
 
 ## Restore drill
 
-A backup is only proven by restoring it. Run `scripts/restore-drill.sh prepza-prod` before launch, and then every quarter. It needs `gcloud`, `cloud-sql-proxy` and `psql`, and it:
+A backup is only proven by restoring it. Run `scripts/ops/restore-drill.sh prepza-prod` before launch, and then every quarter. It needs `gcloud`, `cloud-sql-proxy` and `psql`, and it:
 1. Restores the latest backup into a temporary instance.
 2. Reads each service's main tables through the Cloud SQL Auth Proxy.
 3. Deletes the temporary instance, even if a step fails.

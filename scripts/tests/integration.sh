@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Runs each service's integration tests (tests/integration) in a one-off container next to the
 # running stack: real Postgres and Redis, but a "<service>_test" database and Redis database 15,
-# so dev data is never touched. Usage: scripts/integration.sh [service...]
+# so dev data is never touched. Usage: scripts/tests/integration.sh [service...]
 set -euo pipefail
 
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/../.."
 
 if docker compose version >/dev/null 2>&1; then
   compose=(docker compose)

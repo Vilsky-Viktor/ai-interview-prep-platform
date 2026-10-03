@@ -235,21 +235,21 @@ services:
     image: curlimages/curl:8.17.0
     entrypoint: ["sh", "/pubsub-setup.sh"]
     volumes:
-      - ./scripts/pubsub-setup.sh:/pubsub-setup.sh:ro
+      - ./scripts/local/pubsub-setup.sh:/pubsub-setup.sh:ro
     environment:
       PUBSUB_EMULATOR_HOST: pubsub:8085
       GOOGLE_CLOUD_PROJECT: ${FIREBASE_PROJECT_ID}
     depends_on:
       - pubsub
 
-  # Local stand-in for Cloud Scheduler (see scripts/crontab).
+  # Local stand-in for Cloud Scheduler (see scripts/local/crontab).
   scheduler:
     restart: unless-stopped
     image: alpine:3.22
     # Cron reads only a crontab owned by root, so the mounted one is copied into place.
     command: sh -c "apk add --no-cache curl >/dev/null && cp /crontab /etc/crontabs/root && crond -f -l 2"
     volumes:
-      - ./scripts/crontab:/crontab:ro
+      - ./scripts/local/crontab:/crontab:ro
     depends_on:
       generation-worker:
         condition: service_healthy
