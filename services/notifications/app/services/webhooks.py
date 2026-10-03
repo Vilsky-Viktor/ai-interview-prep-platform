@@ -14,7 +14,11 @@ async def handle(event: dict) -> None:
     if event.get("type") not in UNDELIVERED_EVENTS:
         return
 
-    tags = (event.get("data") or {}).get("tags") or {}
+    await report_undelivered((event.get("data") or {}).get("tags") or {})
+
+
+async def report_undelivered(tags: dict[str, str]) -> None:
+    """Marks the invite or share the email was for as undelivered, from its tags."""
     kind, invite_id = tags.get(KIND_TAG), tags.get(ID_TAG)
 
     if not invite_id:

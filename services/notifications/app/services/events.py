@@ -1,14 +1,24 @@
+import logging
+
 from app.config.settings import settings
 from app.constants.events import CANDIDATE_INVITED, PREPARATION_SHARED
 from app.helpers.emails import candidate_invite_email, share_invite_email
 from app.integrations import resend, smtp
 from app.models.email import Email
+from app.services.webhooks import report_undelivered
+
+logger = logging.getLogger(__name__)
 
 
 async def deliver(email: Email, message_id: str) -> None:
     if settings.resend_api_key:
         # Pub/Sub's message id as the key, so a retried event never sends the email twice.
-        await resend.send(email, f"events/{message_id}")
+        try:
+            await resend.send(email, f"events/{message_id}")
+        except resend.EmailRefused:
+            # Final, like a bounce: the invite shows as undelivered and the event isn't retried.
+            logger.warning("Email for %s refused", email.tags or "an untagged event", exc_info=True)
+            await report_undelivered(email.tags)
 
         return
 

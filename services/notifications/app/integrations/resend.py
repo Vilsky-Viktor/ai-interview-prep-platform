@@ -1,8 +1,12 @@
 import httpx
 
 from app.config.settings import settings
-from app.constants.email import RESEND_EMAILS_URL, SEND_TIMEOUT_S
+from app.constants.email import RESEND_EMAILS_URL, RESEND_REFUSED, SEND_TIMEOUT_S
 from app.models.email import Email
+
+
+class EmailRefused(Exception):
+    """Resend won't ever send this email; retrying is pointless."""
 
 
 async def send(email: Email, idempotency_key: str) -> None:
@@ -23,6 +27,9 @@ async def send(email: Email, idempotency_key: str) -> None:
                 "tags": [{"name": name, "value": value} for name, value in email.tags.items()],
             },
         )
+
+    if response.status_code in RESEND_REFUSED:
+        raise EmailRefused(f"Resend refused the email ({response.status_code}): {response.text}")
 
     if response.is_error:
         raise RuntimeError(f"Resend refused the email ({response.status_code}): {response.text}")

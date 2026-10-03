@@ -1,11 +1,13 @@
+import asyncio
 import base64
 import json
 
+import httpx
 import pytest
 
 from app.config.settings import settings
 from app.helpers.emails import candidate_invite_email, share_invite_email
-from app.integrations import resend, smtp
+from app.integrations import companies, resend, smtp
 
 DATA = {"email": "bob@example.com", "token": "abc", "title": "Backend", "inviter": "Ann"}
 
@@ -103,3 +105,48 @@ def test_other_events_are_accepted_without_an_email(client):
     response = client.post("/internal/events", json=push("answer.recorded", {}))
 
     assert response.status_code == 204
+
+
+def resend_answering(monkeypatch, status_code):
+    """Resend's API, answering every send with `status_code`."""
+    transport = httpx.MockTransport(lambda request: httpx.Response(status_code, text="no"))
+    real_client = httpx.AsyncClient
+    monkeypatch.setattr(
+        resend.httpx, "AsyncClient", lambda **kwargs: real_client(transport=transport, **kwargs)
+    )
+
+
+@pytest.mark.parametrize("status_code", [400, 422])
+def test_an_address_resend_refuses_is_final(monkeypatch, status_code):
+    resend_answering(monkeypatch, status_code)
+
+    with pytest.raises(resend.EmailRefused):
+        asyncio.run(resend.send(candidate_invite_email({**DATA, "company": "Acme"}, ""), "k"))
+
+
+@pytest.mark.parametrize("status_code", [401, 409, 429, 503])
+def test_other_resend_errors_are_retried(monkeypatch, status_code):
+    resend_answering(monkeypatch, status_code)
+
+    with pytest.raises(RuntimeError):
+        asyncio.run(resend.send(candidate_invite_email({**DATA, "company": "Acme"}, ""), "k"))
+
+
+def test_a_refused_invite_is_marked_undelivered_and_not_retried(client, monkeypatch):
+    reported = []
+
+    async def refuse(email, key):
+        raise resend.EmailRefused("422")
+
+    async def undelivered(invite_id):
+        reported.append(invite_id)
+
+    monkeypatch.setattr(settings, "resend_api_key", "re_test")
+    monkeypatch.setattr(resend, "send", refuse)
+    monkeypatch.setattr(companies, "invite_undelivered", undelivered)
+    data = {**DATA, "company": "Acme", "invite_id": "inv-1"}
+
+    response = client.post("/internal/events", json=push("candidate.invited", data))
+
+    assert response.status_code == 204
+    assert reported == ["inv-1"]
