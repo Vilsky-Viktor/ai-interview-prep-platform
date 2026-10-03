@@ -16,10 +16,10 @@ from app.storage.joins import join_statement
 
 
 async def upsert(
-    set_id: uuid.UUID, email: str, invited_by: str, title: str, inviter: str
+    set_id: uuid.UUID, email: str, invited_by: str, title: str, inviter: str, language: str
 ) -> ShareInvite:
     """Creates the invite, or returns the existing one so it can be sent again, and saves the
-    email's event with it."""
+    email's event with it; the email goes out in the kit's language."""
     statement = (
         insert(ShareInvite)
         .values(
@@ -49,6 +49,7 @@ async def upsert(
                 "token": invite.token,
                 "title": title,
                 "inviter": inviter,
+                "language": language,
             },
         )
         await session.commit()

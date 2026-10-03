@@ -26,7 +26,7 @@ PREHEADER_PADDING = "&#8199;&#65279;&#847; " * 40
 
 HTML_LAYOUT = """\
 <!doctype html>
-<html lang="en">
+<html lang="{language}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,7 +58,7 @@ font-size:16px;line-height:20px;font-weight:600;color:#ffffff;text-decoration:no
 border-radius:10px;">{button}</a></td></tr>
 </table>
 <p style="margin:0;font-size:14px;line-height:20px;color:#737373;">\
-Or paste this link into your browser:<br>\
+{paste_link}:<br>\
 <a href="{link}" target="_blank" style="color:#0071e0;word-break:break-all;">{link}</a></p>
 </td></tr>
 <tr><td style="padding:24px 8px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',\

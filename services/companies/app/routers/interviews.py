@@ -70,7 +70,8 @@ async def create_interview(
 
         raise
 
-    interview = await interviews.create(company.id, created["id"])
+    # Generation picks the language from the job description, not from the recruiter's interface.
+    interview = await interviews.create(company.id, created["id"], created["language"])
 
     return await interview_out(interview)
 
@@ -193,7 +194,7 @@ async def invite_candidate(
     title = await interview_title(interview) or "an interview"
 
     try:
-        invite = await invites.upsert(interview.id, email, title, company.name)
+        invite = await invites.upsert(interview.id, email, title, company.name, interview.language)
     except Exception:
         # A brand-new invite that couldn't be saved gives its credits back.
         if current is None:

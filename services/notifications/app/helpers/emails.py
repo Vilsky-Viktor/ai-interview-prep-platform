@@ -1,8 +1,10 @@
 from html import escape
 
+from prepza_common.constants import DEFAULT_LANGUAGE
+
 from app.constants.webhooks import CANDIDATE_INVITE_KIND, ID_TAG, KIND_TAG, SHARE_KIND
 from app.models.email import Email
-from app.templates.emails import CANDIDATE_INVITE, FOOTER, SHARE_INVITE
+from app.templates.emails import CANDIDATE_INVITE, FOOTER, PASTE_LINK, SHARE_INVITE
 from app.templates.layout import (
     HTML_LAYOUT,
     HTML_NAME,
@@ -12,8 +14,14 @@ from app.templates.layout import (
 )
 
 
-def render(template: dict, data: dict, link: str) -> Email:
-    """Builds the plain-text and HTML versions; names and titles are escaped in the HTML."""
+def render(templates: dict, data: dict, link: str) -> Email:
+    """Builds the plain-text and HTML versions, in the language of what the invite is for (the
+    interview's or the kit's; English for older events); names and titles are escaped in the
+    HTML."""
+    language = data.get("language")
+    language = language if language in templates else DEFAULT_LANGUAGE
+    template = templates[language]
+    footer = FOOTER[language]
     safe = {key: escape(str(value)) for key, value in data.items()}
     emphasized = {
         **safe,
@@ -25,7 +33,7 @@ def render(template: dict, data: dict, link: str) -> Email:
         lines="\n\n".join(line.format(**data) for line in template["lines"]),
         button=template["button"],
         link=link,
-        footer=FOOTER.format(**data),
+        footer=footer.format(**data),
     )
     html = HTML_LAYOUT.format(
         subject=escape(template["subject"].format(**data)),
@@ -37,7 +45,9 @@ def render(template: dict, data: dict, link: str) -> Email:
         ),
         button=template["button"],
         link=escape(link),
-        footer=FOOTER.format(**safe),
+        footer=footer.format(**safe),
+        language=language,
+        paste_link=PASTE_LINK[language],
     )
 
     return Email(to=data["email"], subject=template["subject"].format(**data), html=html, text=text)

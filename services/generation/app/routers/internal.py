@@ -6,6 +6,7 @@ from prepza_common.rate_limit import hit
 from app.config.settings import settings
 from app.constants.generation import RUN_GENERATION, VERIFY_QUESTION
 from app.constants.kinds import GenerationKind
+from app.helpers.language import text_language
 from app.integrations import library, tasks
 from app.integrations.redis import get_redis
 from app.models.generation import Generation
@@ -45,7 +46,11 @@ async def create_interview_generation(
     )
     await use_daily_budget()
     generation = await generations.create(
-        body.owner_uid, body.text, GenerationKind.INTERVIEW, body.company_id, body.language
+        body.owner_uid,
+        body.text,
+        GenerationKind.INTERVIEW,
+        body.company_id,
+        text_language(body.text, body.language),
     )
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
 

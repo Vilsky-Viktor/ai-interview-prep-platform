@@ -44,7 +44,12 @@ async def share(preparation_id: UUID, body: ShareIn, user: CurrentUser) -> Share
         settings.email_recipient_daily_limit,
     )
     invite = await shares.upsert(
-        preparation_id, email, user.uid, question_set.title, user.name or user.email
+        preparation_id,
+        email,
+        user.uid,
+        question_set.title,
+        user.name or user.email,
+        question_set.language,
     )
     await outbox_service.flush_quietly()
 

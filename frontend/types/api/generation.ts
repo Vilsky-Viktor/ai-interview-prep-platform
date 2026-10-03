@@ -360,6 +360,8 @@ export interface components {
       preparation_id: string | null
       /** Error */
       error: string | null
+      /** Language */
+      language: string
       /**
        * Max Topics
        * @default 10

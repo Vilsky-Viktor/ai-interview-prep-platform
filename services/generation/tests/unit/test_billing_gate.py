@@ -26,10 +26,15 @@ def queue(monkeypatch):
     async def fake_create(
         owner_uid, text, kind="preparation", company_id=None, language="en", generation_id=None
     ):
-        created.append((owner_uid, kind, company_id))
+        created.append((owner_uid, kind, company_id, language))
 
         return Generation(
-            id=uuid.uuid4(), owner_uid=owner_uid, text=text, kind=kind, status="queued"
+            id=uuid.uuid4(),
+            owner_uid=owner_uid,
+            text=text,
+            kind=kind,
+            status="queued",
+            language=language,
         )
 
     monkeypatch.setattr(settings, "generation_limit", 0)
@@ -115,18 +120,41 @@ def test_a_learners_preparation_uses_one_from_billing(client, queue, monkeypatch
 
     assert response.status_code == 201
     assert charged == ["ann"]
-    assert queue == [("ann", "preparation", None)]
+    assert queue == [("ann", "preparation", None, "en")]
+
+
+def test_a_kit_is_written_in_its_texts_language_not_the_interfaces(client, queue, monkeypatch):
+    async def hold(user_id, generation_id):
+        pass
+
+    monkeypatch.setattr(billing, "hold_kit", hold)
+    # A Russian interface, hiring for an English-speaking role.
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="ann", email="ann@example.com", email_verified=True, language="ru"
+    )
+
+    response = client.post("/generations", json={"text": "Senior Python developer, remote"})
+
+    assert response.json()["language"] == "en"
+    assert queue == [("ann", "preparation", None, "en")]
 
 
 def test_companies_starts_interviews_through_the_internal_route(client, queue):
     response = client.post(
         "/internal/generations",
-        json={"text": "Backend engineer", "company_id": str(COMPANY_ID), "owner_uid": "bob"},
+        # A recruiter with a Russian interface, hiring for an English-speaking role.
+        json={
+            "text": "Backend engineer",
+            "company_id": str(COMPANY_ID),
+            "owner_uid": "bob",
+            "language": "ru",
+        },
         headers=headers(),
     )
 
     assert response.status_code == 201
-    assert queue == [("bob", "interview", COMPANY_ID)]
+    assert response.json()["language"] == "en"
+    assert queue == [("bob", "interview", COMPANY_ID, "en")]
 
 
 def test_a_billing_hiccup_doesnt_fail_a_finished_kit(monkeypatch):

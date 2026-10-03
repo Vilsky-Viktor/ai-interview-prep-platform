@@ -14,7 +14,9 @@ from app.models.outbox import OutboxEvent
 from app.storage.db import Session
 
 
-async def upsert(interview_id, email: str, title: str, company: str) -> CandidateInvite:
+async def upsert(
+    interview_id, email: str, title: str, company: str, language: str
+) -> CandidateInvite:
     """Creates the invite, or returns the existing one so it can be sent again, and saves the
     email's event with it."""
     email = email.lower()
@@ -56,6 +58,7 @@ async def upsert(interview_id, email: str, title: str, company: str) -> Candidat
                 "token": invite.token,
                 "title": title,
                 "company": company,
+                "language": language,
             },
         )
         await session.commit()

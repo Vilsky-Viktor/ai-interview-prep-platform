@@ -7,14 +7,14 @@ from app.storage import companies, interviews, invites
 async def interview():
     company = await companies.create("Acme", "owner", "owner@example.com")
 
-    return await interviews.create(company.id, uuid.uuid4())
+    return await interviews.create(company.id, uuid.uuid4(), "en")
 
 
 def test_inviting_the_same_address_again_returns_the_same_invite(run):
     async def scenario():
         found = await interview()
-        first = await invites.upsert(found.id, "Carol@Example.com", "Backend", "Acme")
-        again = await invites.upsert(found.id, "carol@example.com", "Backend", "Acme")
+        first = await invites.upsert(found.id, "Carol@Example.com", "Backend", "Acme", "en")
+        again = await invites.upsert(found.id, "carol@example.com", "Backend", "Acme", "en")
 
         return first, again
 
@@ -28,10 +28,10 @@ def test_inviting_the_same_address_again_returns_the_same_invite(run):
 def test_an_undelivered_invite_is_marked_until_it_is_sent_again(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "erin@example.com", "Backend", "Acme")
+        invite = await invites.upsert(found.id, "erin@example.com", "Backend", "Acme", "en")
         await invites.mark_undelivered(invite.id)
         bounced, _ = await invites.get_by_token(invite.token)
-        await invites.upsert(found.id, "erin@example.com", "Backend", "Acme")
+        await invites.upsert(found.id, "erin@example.com", "Backend", "Acme", "en")
         resent, _ = await invites.get_by_token(invite.token)
 
         return bounced, resent
@@ -45,7 +45,7 @@ def test_an_undelivered_invite_is_marked_until_it_is_sent_again(run):
 def test_a_started_invite_is_never_marked_undelivered(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "fay@example.com", "Backend", "Acme")
+        invite = await invites.upsert(found.id, "fay@example.com", "Backend", "Acme", "en")
         await invites.start(invite, "fay-uid")
         await invites.mark_undelivered(invite.id)
         stored, _ = await invites.get_by_token(invite.token)
@@ -58,7 +58,7 @@ def test_a_started_invite_is_never_marked_undelivered(run):
 def test_an_invite_moves_from_invited_to_in_process_to_finished(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "dave@example.com", "Backend", "Acme")
+        invite = await invites.upsert(found.id, "dave@example.com", "Backend", "Acme", "en")
         await invites.start(invite, "dave-uid")
         started, _ = await invites.get_by_token(invite.token)
         await invites.set_status([invite.id], InviteStatus.FINISHED)

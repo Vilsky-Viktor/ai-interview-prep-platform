@@ -9,6 +9,7 @@ from prepza_common.rate_limit import hit
 from app.config.settings import settings
 from app.constants.generation import RUN_GENERATION
 from app.constants.kinds import GenerationKind
+from app.helpers.language import text_language
 from app.integrations import billing, tasks
 from app.integrations.redis import get_redis
 from app.models.generation import Generation
@@ -60,15 +61,18 @@ async def create_generation(
         await billing.release_kit(generation_id)
         raise
 
+    # Written in the pasted text's language; the interface's only when the text has no letters.
+    language = text_language(body.text, user.language)
+
     try:
         generation = await generations.create(
-            user.uid, body.text, body.kind, body.company_id, user.language, generation_id
+            user.uid, body.text, body.kind, body.company_id, language, generation_id
         )
     except Exception:
         await billing.release_kit(generation_id)
         raise
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
-    await track("kit_started", user_id=user.uid, kind=body.kind, language=user.language)
+    await track("kit_started", user_id=user.uid, kind=body.kind, language=language)
 
     return GenerationOut.model_validate(generation)
 

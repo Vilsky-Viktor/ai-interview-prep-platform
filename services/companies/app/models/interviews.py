@@ -2,7 +2,8 @@ import uuid
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import DateTime, ForeignKey, Text
+from prepza_common.constants import DEFAULT_LANGUAGE
+from sqlalchemy import DateTime, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -25,6 +26,8 @@ class Interview(Base):
     # Copied from the generated set (and renames), so pages don't ask library for it.
     title: Mapped[str | None] = mapped_column(Text)
     generation_id: Mapped[uuid.UUID]
+    # What the interview is generated in, as its set in library; invites are emailed in it.
+    language: Mapped[str] = mapped_column(String(8), default=DEFAULT_LANGUAGE)
     # Every interview is timed: each question has question_seconds, and one left unanswered is
     # wrong. Candidates never see their scores.
     question_seconds: Mapped[int] = mapped_column(

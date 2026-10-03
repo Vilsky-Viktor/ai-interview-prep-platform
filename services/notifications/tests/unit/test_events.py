@@ -150,3 +150,21 @@ def test_a_refused_invite_is_marked_undelivered_and_not_retried(client, monkeypa
 
     assert response.status_code == 204
     assert reported == ["inv-1"]
+
+
+def test_an_invite_is_emailed_in_the_interviews_language():
+    data = {**DATA, "company": "Acme", "language": "ru"}
+    email = candidate_invite_email(data, "http://localhost:8090")
+
+    assert email.subject == "Acme приглашает вас на собеседование"
+    assert '<html lang="ru">' in email.html
+    assert "Или вставьте эту ссылку в браузер" in email.html
+    assert "«Backend»" in email.text
+
+
+def test_a_share_in_a_language_without_texts_is_emailed_in_english():
+    for language in ("de", None):
+        email = share_invite_email({**DATA, "language": language}, "http://localhost:8090")
+
+        assert email.subject == "Ann shared “Backend” with you"
+        assert '<html lang="en">' in email.html

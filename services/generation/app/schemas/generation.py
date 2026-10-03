@@ -23,7 +23,8 @@ class InterviewGenerationCreate(BaseModel):
     text: str = Field(min_length=1, max_length=MAX_GOAL_LENGTH)
     company_id: UUID
     owner_uid: str
-    # The recruiter's language, which the interview is written in.
+    # The recruiter's interface language: the interview is written in the job description's
+    # own language, and this only when that can't be told.
     language: Language = DEFAULT_LANGUAGE
 
 
@@ -97,6 +98,8 @@ class GenerationOut(BaseModel):
     progress: GenerationProgress | None
     preparation_id: UUID | None
     error: str | None
+    # What it's generated in, from the pasted text (helpers/language.py).
+    language: str
     max_topics: int = MAX_TOPICS
 
 

@@ -54,7 +54,7 @@ def invite_setup(monkeypatch):
     async def fake_company(_company_id):
         return company
 
-    async def fake_upsert(_interview_id, email, title, company):
+    async def fake_upsert(_interview_id, email, title, company, language):
         # The storage saves the email's event in the invite's transaction.
         sent.append(email)
         invited.add(email)

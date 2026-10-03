@@ -26,6 +26,7 @@ def company_generation():
         kind="interview",
         company_id=COMPANY_ID,
         text="Job description",
+        language="en",
         status="awaiting_review",
         topics=[{"main_topic": "Python", "subtopics": ["asyncio"]}],
         progress=None,

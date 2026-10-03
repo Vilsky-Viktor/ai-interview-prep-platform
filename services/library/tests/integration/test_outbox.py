@@ -9,7 +9,7 @@ from tests.integration.factories import preparation
 def test_a_share_invite_and_its_email_event_are_saved_together(run):
     async def scenario():
         set_id = await preparation("Shared")
-        invite = await shares.upsert(set_id, "bob@example.com", "owner", "Shared", "Ann")
+        invite = await shares.upsert(set_id, "bob@example.com", "owner", "Shared", "Ann", "en")
 
         async with Session() as session:
             events = list(
@@ -28,4 +28,5 @@ def test_a_share_invite_and_its_email_event_are_saved_together(run):
         "token": invite.token,
         "title": "Shared",
         "inviter": "Ann",
+        "language": "en",
     } in events

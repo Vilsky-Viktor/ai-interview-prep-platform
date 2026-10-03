@@ -100,10 +100,12 @@ def test_owner_shares_and_the_email_event_is_saved_with_the_invite(client, monke
     flushed = []
 
     async def fake_get(set_id):
-        return QuestionSet(id=SET_ID, kind=SetKind.PREPARATION, owner_id="owner", title="Backend")
+        return QuestionSet(
+            id=SET_ID, kind=SetKind.PREPARATION, owner_id="owner", title="Backend", language="ru"
+        )
 
-    async def fake_upsert(set_id, email, invited_by, title, inviter):
-        saved.append((email, invited_by, title, inviter))
+    async def fake_upsert(set_id, email, invited_by, title, inviter, language):
+        saved.append((email, invited_by, title, inviter, language))
 
         return invite()
 
@@ -120,7 +122,8 @@ def test_owner_shares_and_the_email_event_is_saved_with_the_invite(client, monke
 
     assert response.status_code == 201
     # The storage saves the event in the invite's transaction; it's published right after.
-    assert saved == [("bob@example.com", "owner", "Backend", "Ann")]
+    # The email goes out in the kit's language.
+    assert saved == [("bob@example.com", "owner", "Backend", "Ann", "ru")]
     assert flushed == [True]
 
 
@@ -142,7 +145,7 @@ def test_a_sender_is_limited_per_hour(client, monkeypatch):
     async def fake_get(set_id):
         return QuestionSet(id=SET_ID, kind=SetKind.PREPARATION, owner_id="owner", title="Backend")
 
-    async def fake_upsert(set_id, email, invited_by, title, inviter):
+    async def fake_upsert(set_id, email, invited_by, title, inviter, language):
         return invite()
 
     async def no_flush():
@@ -176,7 +179,7 @@ def test_a_kit_is_shared_with_at_most_30_people_but_resends_still_work(client, m
     async def invited(set_id, email):
         return email == "old@example.com"
 
-    async def fake_upsert(set_id, email, invited_by, title, inviter):
+    async def fake_upsert(set_id, email, invited_by, title, inviter, language):
         sent.append(email)
 
         return ShareInvite(email=email, created_at=datetime.now(UTC))
