@@ -1,6 +1,7 @@
 resource "google_project_service" "apis" {
   for_each = toset([
     "artifactregistry.googleapis.com",
+    "billingbudgets.googleapis.com",
     "bigquery.googleapis.com",
     "cloudscheduler.googleapis.com",
     "cloudtasks.googleapis.com",
@@ -9,6 +10,7 @@ resource "google_project_service" "apis" {
     "iamcredentials.googleapis.com",
     "sts.googleapis.com",
     "identitytoolkit.googleapis.com",
+    "monitoring.googleapis.com",
     "pubsub.googleapis.com",
     "run.googleapis.com",
     "secretmanager.googleapis.com",

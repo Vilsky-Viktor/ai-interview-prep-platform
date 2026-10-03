@@ -7,6 +7,11 @@ image_tag  = "first"
 mail_from  = "prepza. <no-reply@prepza.ai>"
 sentry_dsn = ""
 
+# Outage and budget alerts (monitoring.tf).
+alert_email     = "you@example.com"
+billing_account = "XXXXXX-XXXXXX-XXXXXX"
+monthly_budget  = 300
+
 paddle_environment  = "sandbox"
 paddle_client_token = ""
 paddle_prices = {

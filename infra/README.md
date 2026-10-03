@@ -25,6 +25,8 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    gcloud billing projects link prepza-prod --billing-account=<BILLING_ACCOUNT_ID>
    gcloud config set project prepza-prod
    gcloud auth application-default login
+   # The budget API needs a project to bill your own login's calls to.
+   gcloud auth application-default set-quota-project prepza-prod
    ```
 2. **Add Firebase to the project** in the [Firebase console](https://console.firebase.google.com) ("Add project", then choose `prepza-prod`).
    - **Authentication → Sign-in method:** enable Google.
@@ -42,6 +44,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    cp terraform.tfvars.example terraform.tfvars   # fill it in
    terraform init -backend-config="bucket=prepza-prod-terraform"
    ```
+   `alert_email`, `billing_account` and `monthly_budget` set up the alerts in `monitoring.tf`: an uptime check every minute on the site and each API's `/ready`, an email when one fails, and budget emails at 50%, 90% and 100% of the month (and when the forecast passes it). Creating the budget needs the Billing Account Costs Manager role on the billing account, which its administrator already has.
 6. **Create the image registry first,** then push the first images. The deploy pipeline does this on every push afterwards.
    - Cloud Run runs `linux/amd64`, so build for it even on an Apple-silicon Mac.
    - Use the same tag as `image_tag` in `terraform.tfvars`.
@@ -89,6 +92,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
     ```bash
     gcloud compute ssl-certificates describe prepza --global --format='value(managed.status)'
     ```
+    Until the certificate is active, the uptime checks fail and their alerts email you; they clear by themselves once the site answers.
 11. **Update the services that call back to the site:**
     - **Paddle:** the webhook destination is `https://prepza.ai/api/billing/webhooks/paddle`, for `transaction.completed`, `adjustment.created`, `adjustment.updated`, `subscription.created` and `subscription.canceled`. The adjustments are refunds and chargebacks, which take the credits back; the subscriptions start and end automatic top-ups.
     - **Resend:** the `prepza.ai` sending domain is already verified. Add a webhook at `https://prepza.ai/api/notifications/webhooks/resend` for `email.bounced`, `email.complained` and `email.suppressed`; its signing secret is `resend-webhook-secret` in step 8.

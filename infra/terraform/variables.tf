@@ -74,3 +74,19 @@ variable "paddle_prices" {
   type        = map(string)
   default     = {}
 }
+
+variable "alert_email" {
+  description = "Where outage and budget alerts go."
+  type        = string
+}
+
+variable "billing_account" {
+  description = "The billing account the project uses (XXXXXX-XXXXXX-XXXXXX), for the monthly budget."
+  type        = string
+}
+
+variable "monthly_budget" {
+  description = "Monthly Google Cloud budget, in the billing account's currency; alerts only, nothing stops."
+  type        = number
+  default     = 300
+}
