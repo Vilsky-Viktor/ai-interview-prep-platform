@@ -1,0 +1,33 @@
+import { debug, flush, GLOBAL_OBJ } from '@sentry/core';
+import { vercelWaitUntil } from '@sentry/core/server';
+import { DEBUG_BUILD } from '../debug-build.js';
+
+async function flushSafelyWithTimeout() {
+  try {
+    DEBUG_BUILD && debug.log("Flushing events...");
+    await flush(2e3);
+    DEBUG_BUILD && debug.log("Done flushing events");
+  } catch (e) {
+    DEBUG_BUILD && debug.log("Error while flushing events:\n", e);
+  }
+}
+function waitUntil(task) {
+  if (isCloudflareWaitUntilAvailable()) {
+    cloudflareWaitUntil(task);
+    return;
+  }
+  vercelWaitUntil(task);
+}
+function _getOpenNextCloudflareContext() {
+  const openNextCloudflareContextSymbol = /* @__PURE__ */ Symbol.for("__cloudflare-context__");
+  return GLOBAL_OBJ[openNextCloudflareContextSymbol]?.ctx;
+}
+function cloudflareWaitUntil(task) {
+  _getOpenNextCloudflareContext()?.waitUntil(task);
+}
+function isCloudflareWaitUntilAvailable() {
+  return typeof _getOpenNextCloudflareContext()?.waitUntil === "function";
+}
+
+export { cloudflareWaitUntil, flushSafelyWithTimeout, isCloudflareWaitUntilAvailable, waitUntil };
+//# sourceMappingURL=responseEnd.js.map

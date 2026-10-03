@@ -85,7 +85,7 @@ export function InterviewSettings({
               value={seconds}
               disabled={saving}
               aria-label={t("secondsLabel")}
-              className="h-14 [appearance:textfield] border-0 pr-14 pl-5 text-lg focus-visible:ring-0 md:text-lg [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              className="h-14 [appearance:textfield] border-0 ps-5 pe-14 text-lg focus-visible:ring-0 md:text-lg [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               onChange={(event) => setSeconds(event.target.value)}
               onBlur={save}
               onKeyDown={(event) => {
@@ -94,7 +94,7 @@ export function InterviewSettings({
                 }
               }}
             />
-            <span className="pointer-events-none absolute top-1/2 right-5 -translate-y-1/2 text-lg text-muted-foreground">
+            <span className="pointer-events-none absolute end-5 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">
               {t("secondsUnit")}
             </span>
           </span>

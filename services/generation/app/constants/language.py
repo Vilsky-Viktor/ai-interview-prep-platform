@@ -1,9 +1,24 @@
-# Telling the pasted text's language (helpers/language.py), among CONTENT_LANGUAGES.
+# Telling the pasted text's language (helpers/language.py), among LANGUAGES.
 
-# A text is in a non-Latin alphabet (Cyrillic, Hebrew, Arabic) once this share of its letters is
-# in it. Job descriptions in those carry many Latin tech terms (Python, PostgreSQL), so a majority
-# would miss them; texts in Latin-script languages almost never contain those alphabets.
+# A text is in a non-Latin script once this share of its letters is in it. Job descriptions in
+# those carry many Latin tech terms (Python, PostgreSQL), so a majority would miss them; texts in
+# Latin-script languages almost never contain those scripts.
 SCRIPT_SHARE = 0.2
+
+# Unicode ranges of each non-Latin script. Japanese mixes kana with Han characters, so both count
+# as "cjk"; kana then tells Japanese from Chinese.
+SCRIPTS = {
+    "cyrillic": [(0x0400, 0x04FF)],
+    "hebrew": [(0x0590, 0x05FF)],
+    "arabic": [(0x0600, 0x06FF)],
+    "devanagari": [(0x0900, 0x097F)],
+    "thai": [(0x0E00, 0x0E7F)],
+    "hangul": [(0x1100, 0x11FF), (0x3130, 0x318F), (0xAC00, 0xD7AF)],
+    "cjk": [(0x3040, 0x30FF), (0x4E00, 0x9FFF)],
+}
+KANA = (0x3040, 0x30FF)
+# The language each script means, where it means only one.
+SCRIPT_LANGUAGES = {"hebrew": "he", "devanagari": "hi", "thai": "th", "hangul": "ko"}
 
 # Persian's own letters (پ چ ژ گ, and its forms of ye and kaf); Arabic script without them is
 # Arabic.
@@ -190,5 +205,73 @@ LATIN_WORDS = {
         "nitelikler",
         "çalışma",
         "geliştirme",
+    },
+    "id": {
+        "dan",
+        "yang",
+        "dengan",
+        "untuk",
+        "di",
+        "ke",
+        "dari",
+        "kami",
+        "anda",
+        "pengalaman",
+        "memiliki",
+        "kemampuan",
+        "persyaratan",
+        "bekerja",
+        "tahun",
+    },
+    "vi": {
+        "và",
+        "của",
+        "với",
+        "cho",
+        "có",
+        "các",
+        "những",
+        "được",
+        "là",
+        "kinh",
+        "nghiệm",
+        "yêu",
+        "cầu",
+        "làm",
+        "việc",
+    },
+    "fil": {
+        "ang",
+        "ng",
+        "mga",
+        "sa",
+        "na",
+        "at",
+        "para",
+        "ay",
+        "kami",
+        "karanasan",
+        "kailangan",
+        "trabaho",
+        "kasanayan",
+        "naming",
+        "ninyo",
+    },
+    "et": {
+        "ja",
+        "on",
+        "ning",
+        "ka",
+        "et",
+        "meie",
+        "sinu",
+        "töö",
+        "otsime",
+        "kogemus",
+        "kogemust",
+        "nõuded",
+        "aastat",
+        "oskus",
+        "arendajat",
     },
 }

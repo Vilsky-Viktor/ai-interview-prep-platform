@@ -1,0 +1,72 @@
+import type { VercelCronsConfig } from '../../common/types';
+import type { RouteManifest } from '../manifest/types';
+import type { NextConfigObject, SentryBuildOptions } from '../types';
+/**
+ * Resolves the Sentry release name to use for build-time behavior.
+ *
+ * Note: if `release.create === false`, we avoid falling back to git to preserve build determinism.
+ */
+export declare function resolveReleaseName(userSentryOptions: SentryBuildOptions): string | undefined;
+/**
+ * Applies tunnel-route rewrites, if configured.
+ *
+ * Note: this mutates `userSentryOptions` (to store the resolved tunnel route) and `incomingUserNextConfigObject`.
+ */
+export declare function maybeSetUpTunnelRouteRewriteRules(incomingUserNextConfigObject: NextConfigObject, userSentryOptions: SentryBuildOptions): void;
+/**
+ * Handles Next's experimental build-mode warning/early return behavior.
+ *
+ * @returns `true` if Sentry config processing should be skipped for the current process invocation
+ */
+export declare function shouldReturnEarlyInExperimentalBuildMode(silent?: boolean): boolean;
+/**
+ * Creates the route manifest used for client-side route name normalization, unless disabled.
+ */
+export declare function maybeCreateRouteManifest(incomingUserNextConfigObject: NextConfigObject, userSentryOptions: SentryBuildOptions): RouteManifest | undefined;
+type ExcludeFilter = ((route: string) => boolean) | (string | RegExp)[] | undefined;
+/**
+ * Filters routes from the manifest based on the exclude filter.
+ * (Exported only for testing)
+ */
+export declare function filterRouteManifest(manifest: RouteManifest, excludeFilter: ExcludeFilter): RouteManifest;
+/**
+ * Adds `experimental.clientTraceMetadata` for supported Next.js versions.
+ */
+export declare function maybeSetClientTraceMetadataOption(incomingUserNextConfigObject: NextConfigObject, nextJsVersion: string | undefined, silent?: boolean): void;
+/**
+ * Ensures Next.js' `experimental.instrumentationHook` is set for versions which require it.
+ */
+export declare function maybeSetInstrumentationHookOption(incomingUserNextConfigObject: NextConfigObject, nextJsVersion: string | undefined, silent?: boolean): void;
+/**
+ * Warns if the project has an `instrumentation-client` file but doesn't export `onRouterTransitionStart`.
+ */
+export declare function warnIfMissingOnRouterTransitionStartHook(userSentryOptions: SentryBuildOptions): void;
+/**
+ * Parses the major Next.js version number from a semver string.
+ */
+export declare function getNextMajor(nextJsVersion: string | undefined): number | undefined;
+/** Strategy for Vercel cron monitoring instrumentation */
+export type VercelCronsStrategy = 'spans' | 'wrapper';
+export type VercelCronsConfigResult = {
+    /** The crons configuration from vercel.json, if available */
+    config: VercelCronsConfig;
+    /**
+     * The instrumentation strategy to use:
+     * - `spans`: New span-based approach (works for both App Router and Pages Router)
+     * - `wrapper`: Old wrapper-based approach (Pages Router only)
+     * - `undefined`: No cron monitoring enabled
+     */
+    strategy: VercelCronsStrategy | undefined;
+};
+/**
+ * Reads and returns the Vercel crons configuration from vercel.json along with
+ * information about which instrumentation approach to use.
+ *
+ * - `_experimental.vercelCronsMonitoring`: New span-based approach (works for both App Router and Pages Router)
+ * - `webpack.automaticVercelMonitors`: Old wrapper-based approach (Pages Router only)
+ *
+ * If both are enabled, the new approach is preferred and a warning is logged.
+ */
+export declare function maybeGetVercelCronsConfig(userSentryOptions: SentryBuildOptions): VercelCronsConfigResult;
+export {};
+//# sourceMappingURL=getFinalConfigObjectUtils.d.ts.map

@@ -799,6 +799,25 @@ export interface components {
     InterviewCreate: {
       /** Text */
       text: string
+      /** Generate In */
+      generate_in?:
+        | (
+            | "en"
+            | "ru"
+            | "uk"
+            | "es"
+            | "pt"
+            | "de"
+            | "fr"
+            | "it"
+            | "pl"
+            | "nl"
+            | "tr"
+            | "ar"
+            | "he"
+            | "fa"
+          )
+        | null
     }
     /** InterviewDetail */
     InterviewDetail: {

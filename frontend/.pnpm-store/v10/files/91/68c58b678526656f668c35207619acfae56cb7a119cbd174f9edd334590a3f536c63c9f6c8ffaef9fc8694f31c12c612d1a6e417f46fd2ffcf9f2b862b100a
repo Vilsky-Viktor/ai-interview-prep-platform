@@ -1,0 +1,10 @@
+import type { RawAttributes } from '@sentry/core';
+import { type Span } from '@sentry/core';
+/**
+ * Drops spans for tunnel requests from middleware, fetch instrumentation, or BaseServer.handleRequest.
+ * This catches:
+ * 1. Requests to the local tunnel route (before rewrite) via middleware or BaseServer.handleRequest
+ * 2. Requests to Sentry ingest (after rewrite) via fetch spans
+ */
+export declare function dropMiddlewareTunnelRequests(span: Span, attrs: RawAttributes<Record<string, unknown>> | undefined): void;
+//# sourceMappingURL=dropMiddlewareTunnelRequests.d.ts.map

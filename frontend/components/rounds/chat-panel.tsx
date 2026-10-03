@@ -106,12 +106,12 @@ export function ChatPanel({ answerId }: { answerId: string }) {
           onKeyDown={handleKeyDown}
           placeholder={t("followUpPlaceholder", { hint: common("submitHint") })}
           aria-label={t("followUp")}
-          className="max-h-40 min-h-16 resize-none border-0 bg-transparent px-6 py-4 pr-20 text-lg shadow-none focus-visible:border-transparent focus-visible:ring-0 md:text-lg dark:bg-input/30"
+          className="max-h-40 min-h-16 resize-none border-0 bg-transparent px-6 py-4 pe-20 text-lg shadow-none focus-visible:border-transparent focus-visible:ring-0 md:text-lg dark:bg-input/30"
         />
         <Button
           type="submit"
           size="icon"
-          className="absolute top-3 right-3 size-10 rounded-full"
+          className="absolute end-3 top-3 size-10 rounded-full"
           disabled={!input.trim() || streaming}
           aria-label={common("send")}
         >
@@ -127,7 +127,7 @@ function Bubble({ role, content }: ChatMessage) {
     <li
       className={cn(
         "bidi-auto w-fit max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap",
-        role === "user" ? "ml-auto bg-muted" : "bg-card"
+        role === "user" ? "ms-auto bg-muted" : "bg-card"
       )}
     >
       {content}

@@ -1,0 +1,23 @@
+import { SENTRY_SEGMENT_NAME_SOURCE, HTTP_REQUEST_METHOD, HTTP_METHOD } from '@sentry/conventions/attributes';
+import { HTTP_SERVER } from '@sentry/conventions/op';
+import { ATTR_NEXT_SPAN_TYPE, ATTR_NEXT_SPAN_NAME } from '../common/nextSpanAttributes.js';
+import { ATTR_NEXT_PAGES_API_ROUTE_TYPE } from '../common/span-attributes-with-logic-attached.js';
+
+function enhanceRunHandlerRootSpan(span) {
+  const { attributes } = span;
+  if (attributes[ATTR_NEXT_SPAN_TYPE] !== "Node.runHandler") {
+    return;
+  }
+  const spanName = attributes[ATTR_NEXT_SPAN_NAME];
+  if (typeof spanName !== "string" || !spanName.startsWith(ATTR_NEXT_PAGES_API_ROUTE_TYPE)) {
+    return;
+  }
+  span.setOp(HTTP_SERVER);
+  attributes[SENTRY_SEGMENT_NAME_SOURCE] = "route";
+  const path = spanName.replace(ATTR_NEXT_PAGES_API_ROUTE_TYPE, "").trim();
+  const method = attributes[HTTP_REQUEST_METHOD] ?? attributes[HTTP_METHOD];
+  span.setName(`${typeof method === "string" ? method : "GET"} ${path}`);
+}
+
+export { enhanceRunHandlerRootSpan };
+//# sourceMappingURL=enhanceRunHandlerRootSpan.js.map

@@ -1,0 +1,15 @@
+/** Installs the `use cache` handler instrumentation once per process.
+ *
+ *  Only exported for testing.
+ *
+ *  @internal
+ */
+export declare function _instrumentUseCacheHandlers(): void;
+/**
+ * Wraps Next.js' `use cache` handlers with `cache.get`/`cache.put` spans, so cached function
+ * reads and fills show up in traces with hit/miss information.
+ */
+export declare const nextjsUseCacheIntegration: () => import("@sentry/core").Integration & {
+    name: string;
+};
+//# sourceMappingURL=useCacheInstrumentation.d.ts.map

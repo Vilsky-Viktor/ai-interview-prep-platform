@@ -85,7 +85,7 @@ export function UserMenu() {
           variant="destructive"
           onClick={() => signOut()}
         >
-          <LogOutIcon />
+          <LogOutIcon className="rtl:-scale-x-100" />
           {t("signOut")}
         </DropdownMenuItem>
         <DropdownMenuSeparator className="mb-3" />

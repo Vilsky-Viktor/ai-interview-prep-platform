@@ -1,0 +1,19 @@
+Object.defineProperties(exports, { __esModule: { value: true }, [Symbol.toStringTag]: { value: 'Module' } });
+
+const loaderUtils = require('@sentry/bundler-plugins/loader-utils');
+
+function valueInjectionLoader(userCode) {
+  const { values } = "getOptions" in this ? this.getOptions() : this.query;
+  this.cacheable(false);
+  const injectedCode = (
+    // eslint-disable-next-line prefer-template
+    ";" + Object.entries(values).map(([key, value]) => `globalThis["${key}"] = ${JSON.stringify(value)};`).join("")
+  );
+  const injectionIndex = loaderUtils.getCodeInjectionPosition(userCode);
+  const codeToInject = injectionIndex === userCode.length ? `
+${injectedCode}` : injectedCode;
+  return `${userCode.slice(0, injectionIndex)}${codeToInject}${userCode.slice(injectionIndex)}`;
+}
+
+exports.default = valueInjectionLoader;
+//# sourceMappingURL=valueInjectionLoader.js.map

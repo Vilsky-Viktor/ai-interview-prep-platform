@@ -1,13 +1,18 @@
 import { getRequestConfig } from "next-intl/server"
-import { cookies } from "next/headers"
+import { cookies, headers } from "next/headers"
 
 import { DEFAULT_LOCALE, LOCALE_COOKIE } from "@/constants/i18n"
-import { isLocale } from "@/lib/locale"
+import { isLocale, preferredLocale } from "@/lib/locale"
 
-// The interface language: the signed-in user's setting, which auth-provider.tsx keeps in a cookie.
+// The interface language: the signed-in user's setting, which auth-provider.tsx keeps in a
+// cookie. Without one (a first visit), the browser's preferred language if we support it.
 export default getRequestConfig(async () => {
   const value = (await cookies()).get(LOCALE_COOKIE)?.value
-  const locale = value && isLocale(value) ? value : DEFAULT_LOCALE
+  const locale =
+    value && isLocale(value)
+      ? value
+      : (preferredLocale((await headers()).get("accept-language")) ??
+        DEFAULT_LOCALE)
 
   return {
     locale,

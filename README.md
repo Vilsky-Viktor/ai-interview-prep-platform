@@ -17,7 +17,9 @@ Turn a job description or a learning goal into a structured practice path: revie
 - After answering, rate the question (thumbs up or down, changeable) or report a problem; rate preparations with stars. Owners can re-generate individual questions.
 - Questions improve on their own: answers, votes and reports flag weak ones, and a background verifier fixes or replaces them (see [Question quality](#question-quality)).
 - Share a preparation privately by email, or publish it to the public library.
-- Kits and interviews come in 14 languages, whichever the pasted text is in (English, Russian, Ukrainian, Spanish, Portuguese, German, French, Italian, Polish, Dutch, Turkish, Arabic, Hebrew, Persian), and invite emails follow; right-to-left languages read right to left on the site and in emails. The interface is in English and Russian.
+- Everything works in 23 languages: English, Russian, Ukrainian, Spanish, Portuguese, German, French, Italian, Polish, Dutch, Turkish, Arabic, Hebrew, Persian, Japanese, Chinese, Korean, Hindi, Indonesian, Thai, Vietnamese, Filipino and Estonian. That covers the interface, error messages, generated kits and interviews, and emails.
+- On a first visit the site opens in the browser's preferred language if it's supported, otherwise in English. A new account keeps the language it signed up in; it can be changed in Settings.
+- Kits and interviews are generated in the language chosen in "generate in" next to the text box (the interface language by default), whatever language the pasted text is in. Invite emails follow the interview's language. Arabic, Hebrew and Persian read right to left on the site and in emails.
 - Every list loads more as you scroll and renders only what's on screen, however long it gets.
 
 **For companies**

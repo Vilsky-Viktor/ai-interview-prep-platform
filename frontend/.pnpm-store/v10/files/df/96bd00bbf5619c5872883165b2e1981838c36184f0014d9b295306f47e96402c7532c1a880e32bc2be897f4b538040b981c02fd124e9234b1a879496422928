@@ -1,0 +1,100 @@
+"use client";
+import { consoleSandbox, GLOBAL_OBJ, applySdkMetadata, addEventProcessor, getGlobalScope } from '@sentry/core';
+import { init as init$1, getDefaultIntegrations as getDefaultIntegrations$1 } from '@sentry/react';
+export * from '@sentry/react';
+import { DEBUG_BUILD } from '../common/debug-build.js';
+import { devErrorSymbolicationEventProcessor } from '../common/devErrorSymbolicationEventProcessor.js';
+import { getClientVercelEnv } from '../common/getVercelEnv.js';
+import { isRedirectNavigationError } from '../common/nextNavigationErrorUtils.js';
+import { browserTracingIntegration } from './browserTracingIntegration.js';
+import { nextjsClientStackFrameNormalizationIntegration } from './clientNormalizationIntegration.js';
+import { removeIsrSsgTraceMetaTags } from './routing/isrRoutingTracing.js';
+import { applyTunnelRouteOption } from './tunnelRoute.js';
+export { wrapGetStaticPropsWithSentry } from '../common/pages-router-instrumentation/wrapGetStaticPropsWithSentry.js';
+export { wrapGetInitialPropsWithSentry } from '../common/pages-router-instrumentation/wrapGetInitialPropsWithSentry.js';
+export { wrapAppGetInitialPropsWithSentry } from '../common/pages-router-instrumentation/wrapAppGetInitialPropsWithSentry.js';
+export { wrapDocumentGetInitialPropsWithSentry } from '../common/pages-router-instrumentation/wrapDocumentGetInitialPropsWithSentry.js';
+export { wrapErrorGetInitialPropsWithSentry } from '../common/pages-router-instrumentation/wrapErrorGetInitialPropsWithSentry.js';
+export { wrapGetServerSidePropsWithSentry } from '../common/pages-router-instrumentation/wrapGetServerSidePropsWithSentry.js';
+export { wrapServerComponentWithSentry } from '../common/wrapServerComponentWithSentry.js';
+export { wrapRouteHandlerWithSentry } from '../common/wrapRouteHandlerWithSentry.js';
+export { wrapApiHandlerWithSentryVercelCrons } from '../common/pages-router-instrumentation/wrapApiHandlerWithSentryVercelCrons.js';
+export { wrapMiddlewareWithSentry } from '../common/wrapMiddlewareWithSentry.js';
+export { wrapPageComponentWithSentry } from '../common/pages-router-instrumentation/wrapPageComponentWithSentry.js';
+export { wrapGenerationFunctionWithSentry } from '../common/wrapGenerationFunctionWithSentry.js';
+export { withServerActionInstrumentation } from '../common/withServerActionInstrumentation.js';
+export { captureRequestError } from '../common/captureRequestError.js';
+export { captureUnderscoreErrorException } from '../common/pages-router-instrumentation/_error.js';
+export { captureRouterTransitionStart } from './routing/appRouterRoutingInstrumentation.js';
+
+let clientIsInitialized = false;
+const globalWithInjectedValues = GLOBAL_OBJ;
+function init(options) {
+  if (clientIsInitialized) {
+    consoleSandbox(() => {
+      console.warn(
+        "[@sentry/nextjs] You are calling `Sentry.init()` more than once on the client. This can happen if you have both a `sentry.client.config.ts` and a `instrumentation-client.ts` file with `Sentry.init()` calls. It is recommended to call `Sentry.init()` once in `instrumentation-client.ts`."
+      );
+    });
+  }
+  clientIsInitialized = true;
+  if (!DEBUG_BUILD && options.debug) {
+    consoleSandbox(() => {
+      console.warn(
+        "[@sentry/nextjs] You have enabled `debug: true`, but Sentry debug logging was removed from your bundle (likely via `webpack.treeshake.removeDebugLogging: true`). Set that option to `false` to see Sentry debug output."
+      );
+    });
+  }
+  if (typeof __SENTRY_TRACING__ === "undefined" || __SENTRY_TRACING__) {
+    removeIsrSsgTraceMetaTags();
+  }
+  const opts = {
+    environment: options.environment || process.env.SENTRY_ENVIRONMENT || getClientVercelEnv() || process.env.NODE_ENV,
+    defaultIntegrations: getDefaultIntegrations(options),
+    release: process.env._sentryRelease || globalWithInjectedValues._sentryRelease,
+    ...options
+  };
+  applyTunnelRouteOption(opts);
+  applySdkMetadata(opts, "nextjs", ["nextjs", "react"]);
+  opts.ignoreSpans = [
+    ...opts.ignoreSpans || [],
+    // we filter out segment spans for /404 pages (exact match, so a string match isn't safe)
+    /^\/404$/
+  ];
+  const client = init$1(opts);
+  const filterNextRedirectError = (event, hint) => isRedirectNavigationError(hint?.originalException) || event.exception?.values?.[0]?.value === "NEXT_REDIRECT" ? null : event;
+  filterNextRedirectError.id = "NextRedirectErrorFilter";
+  addEventProcessor(filterNextRedirectError);
+  if (process.env.NODE_ENV === "development") {
+    addEventProcessor(devErrorSymbolicationEventProcessor);
+  }
+  try {
+    if (process.turbopack) {
+      getGlobalScope().setTag("turbopack", true);
+    }
+  } catch {
+  }
+  return client;
+}
+function getDefaultIntegrations(options) {
+  const customDefaultIntegrations = getDefaultIntegrations$1(options);
+  if (typeof __SENTRY_TRACING__ === "undefined" || __SENTRY_TRACING__) {
+    customDefaultIntegrations.push(browserTracingIntegration());
+  }
+  const rewriteFramesAssetPrefixPath = process.env._sentryRewriteFramesAssetPrefixPath || globalWithInjectedValues._sentryRewriteFramesAssetPrefixPath || "";
+  const assetPrefix = process.env._sentryAssetPrefix || globalWithInjectedValues._sentryAssetPrefix;
+  const basePath = process.env._sentryBasePath || globalWithInjectedValues._sentryBasePath;
+  const experimentalThirdPartyOriginStackFrames = process.env._experimentalThirdPartyOriginStackFrames === "true" || globalWithInjectedValues._experimentalThirdPartyOriginStackFrames === "true";
+  customDefaultIntegrations.push(
+    nextjsClientStackFrameNormalizationIntegration({
+      assetPrefix,
+      basePath,
+      rewriteFramesAssetPrefixPath,
+      experimentalThirdPartyOriginStackFrames
+    })
+  );
+  return customDefaultIntegrations;
+}
+
+export { browserTracingIntegration, init };
+//# sourceMappingURL=index.js.map

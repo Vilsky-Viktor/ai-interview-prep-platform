@@ -37,10 +37,9 @@ OUTBOX_BATCH = 100
 OUTBOX_KEEP_DAYS = 7
 
 # Languages the interface and generated content come in, by code, with the name prompts use.
-LANGUAGES = {"en": "English", "ru": "Russian"}
-# Languages prep kits and interviews are written in, detected from the pasted text; the interface
-# is in LANGUAGES only. Names are as prompts use them.
-CONTENT_LANGUAGES = {
+# Every language prepza supports: the interface, its messages and emails, and the prep kits and
+# interviews it generates. Names are as prompts use them.
+LANGUAGES = {
     "en": "English",
     "ru": "Russian",
     "uk": "Ukrainian",
@@ -55,6 +54,15 @@ CONTENT_LANGUAGES = {
     "ar": "Arabic",
     "he": "Hebrew",
     "fa": "Persian",
+    "ja": "Japanese",
+    "zh": "Chinese (Simplified)",
+    "ko": "Korean",
+    "hi": "Hindi",
+    "id": "Indonesian",
+    "th": "Thai",
+    "vi": "Vietnamese",
+    "fil": "Filipino",
+    "et": "Estonian",
 }
 # Of those, the ones written right to left.
 RTL_LANGUAGES = {"ar", "he", "fa"}

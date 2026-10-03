@@ -113,7 +113,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
                 setReason(event.target.value as ReportReason | "")
               }
               className={cn(
-                "h-16 w-full appearance-none rounded-full border-0 bg-transparent px-6 pr-16 text-lg outline-none dark:bg-input/30",
+                "h-16 w-full appearance-none rounded-full border-0 bg-transparent px-6 pe-16 text-lg outline-none dark:bg-input/30",
                 !reason && "text-muted-foreground"
               )}
             >
@@ -126,7 +126,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
             </select>
             <ChevronDownIcon
               aria-hidden
-              className="pointer-events-none absolute top-1/2 right-6 size-6 -translate-y-1/2 text-muted-foreground"
+              className="pointer-events-none absolute end-6 top-1/2 size-6 -translate-y-1/2 text-muted-foreground"
             />
           </div>
           <div className="rounded-xl border border-transparent transition-colors focus-within:border-ring">

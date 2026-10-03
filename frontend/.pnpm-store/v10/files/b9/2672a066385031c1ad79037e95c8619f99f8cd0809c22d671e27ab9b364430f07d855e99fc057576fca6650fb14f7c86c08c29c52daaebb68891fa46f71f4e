@@ -1,0 +1,1 @@
+{"version":3,"file":"forkIsolationScopeForRootSpan.d.ts","sourceRoot":"","sources":["../../../../src/common/utils/forkIsolationScopeForRootSpan.ts"],"names":[],"mappings":"AACA,OAAO,KAAK,EAAE,aAAa,EAAE,IAAI,EAAE,MAAM,cAAc,CAAC;AAWxD;;;GAGG;AACH,wBAAgB,kCAAkC,CAChD,IAAI,EAAE,IAAI,EACV,cAAc,EAAE,aAAa,CAAC,MAAM,CAAC,MAAM,EAAE,OAAO,CAAC,CAAC,GAAG,SAAS,GACjE,IAAI,CAqBN"}

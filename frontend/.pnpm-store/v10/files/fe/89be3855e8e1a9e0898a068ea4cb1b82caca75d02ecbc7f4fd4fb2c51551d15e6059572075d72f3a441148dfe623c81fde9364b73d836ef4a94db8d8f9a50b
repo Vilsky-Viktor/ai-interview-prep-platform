@@ -1,0 +1,68 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const core = require('@sentry/core');
+const react = require('@sentry/react');
+const RouterImport = require('next/router');
+const attributes = require('@sentry/conventions/attributes');
+const op = require('@sentry/conventions/op');
+
+const Router = RouterImport.default.events ? RouterImport.default : RouterImport.default.default;
+const globalObject = react.WINDOW;
+function pagesRouterInstrumentNavigation(client) {
+  Router.events.on("routeChangeStart", (navigationTarget) => {
+    const strippedNavigationTarget = core.stripUrlQueryAndFragment(navigationTarget);
+    const matchedRoute = getNextRouteFromPathname(strippedNavigationTarget);
+    let newLocation;
+    let spanSource;
+    if (matchedRoute) {
+      newLocation = matchedRoute;
+      spanSource = "route";
+    } else {
+      newLocation = strippedNavigationTarget;
+      spanSource = "url";
+    }
+    react.startBrowserTracingNavigationSpan(
+      client,
+      {
+        // With span streaming, span names have to be low cardinality, so we can't fall back to the URL.
+        name: spanSource === "route" || !core.hasSpanStreamingEnabled(client) ? newLocation : core.NAVIGATION_SPAN_NAME_FALLBACK,
+        attributes: {
+          [attributes.SENTRY_OP]: op.NAVIGATION,
+          [core.SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.navigation.nextjs.pages_router_instrumentation",
+          [attributes.SENTRY_SEGMENT_NAME_SOURCE]: spanSource,
+          ...spanSource === "route" && { [attributes.URL_TEMPLATE]: newLocation }
+        }
+      },
+      { url: react.getAbsoluteUrl(navigationTarget) }
+    );
+  });
+}
+function getNextRouteFromPathname(pathname) {
+  const pageRoutes = globalObject.__BUILD_MANIFEST?.sortedPages;
+  if (!pageRoutes) {
+    return;
+  }
+  return pageRoutes.find((route) => {
+    const routeRegExp = convertNextRouteToRegExp(route);
+    return pathname.match(routeRegExp);
+  });
+}
+function convertNextRouteToRegExp(route) {
+  const routeParts = route.split("/");
+  let optionalCatchallWildcardRegex = "";
+  if (routeParts[routeParts.length - 1]?.match(/^\[\[\.\.\..+\]\]$/)) {
+    routeParts.pop();
+    optionalCatchallWildcardRegex = "(?:/(.+?))?";
+  }
+  const rejoinedRouteParts = routeParts.map(
+    (routePart) => routePart.replace(/^\[\.\.\..+\]$/, "(.+?)").replace(/^\[.*\]$/, "([^/]+?)")
+    // Replace route wildcards with lazy regex wildcards
+  ).join("/");
+  return new RegExp(
+    `^${rejoinedRouteParts}${optionalCatchallWildcardRegex}(?:/)?$`
+    // optional slash at the end
+  );
+}
+
+exports.pagesRouterInstrumentNavigation = pagesRouterInstrumentNavigation;
+//# sourceMappingURL=pagesRouterNavigationInstrumentation.js.map

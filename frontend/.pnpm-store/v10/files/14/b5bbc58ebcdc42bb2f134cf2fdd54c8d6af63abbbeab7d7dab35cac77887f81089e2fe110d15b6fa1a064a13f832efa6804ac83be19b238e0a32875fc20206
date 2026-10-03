@@ -1,0 +1,180 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const node_crypto = require('node:crypto');
+const attributes = require('@sentry/conventions/attributes');
+const op = require('@sentry/conventions/op');
+const core = require('@sentry/core');
+const debugBuild = require('../common/debug-build.js');
+
+const NEXT_CACHE_HANDLERS_MAP = /* @__PURE__ */ Symbol.for("@next/cache-handlers-map");
+const NEXT_PRIVATE_CACHE_HANDLER = /* @__PURE__ */ Symbol.for("@next/cache-handlers-private");
+const SENTRY_CACHE_INSTRUMENTED = /* @__PURE__ */ Symbol.for("sentry.nextjs.cacheHandlersInstrumented");
+const SENTRY_WRAPPED_HANDLERS = /* @__PURE__ */ Symbol.for("sentry.nextjs.wrappedCacheHandlers");
+const INTEGRATION_NAME = "NextjsUseCache";
+const CACHE_SPAN_ORIGIN = "auto.cache.nextjs";
+const NEXT_INFINITE_CACHE = 4294967294;
+const NEXT_DEV_MIN_EXPIRE = 300;
+function keyDigest(cacheKey) {
+  return node_crypto.createHash("sha1").update(cacheKey).digest("hex").slice(0, 12);
+}
+function shouldRecordCacheSpan() {
+  const activeSpan = core.getActiveSpan();
+  return !!activeSpan && core.spanIsSampled(activeSpan);
+}
+function startCacheSpan(op, cacheKey, callback) {
+  const client = core.getClient();
+  const digest = keyDigest(cacheKey);
+  return core.startSpan(
+    {
+      // low cardinality name for span streaming, so we can't fall back to the cache key
+      name: client && core.hasSpanStreamingEnabled(client) ? op : digest,
+      op,
+      attributes: {
+        [core.SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: CACHE_SPAN_ORIGIN,
+        [core.SEMANTIC_ATTRIBUTE_CACHE_KEY]: [digest],
+        [attributes.CACHE_OPERATION]: core.CACHE_OPERATION_NAMES[op]
+      }
+    },
+    callback
+  );
+}
+function isExpired(ageMs, expire) {
+  if (ageMs === void 0 || typeof expire !== "number") {
+    return false;
+  }
+  const effectiveExpire = process.env.NODE_ENV === "development" ? Math.max(expire, NEXT_DEV_MIN_EXPIRE) : expire;
+  return ageMs > effectiveExpire * 1e3;
+}
+function setEntryAttributes(span, entry) {
+  if (entry === void 0) {
+    span.setAttribute(core.SEMANTIC_ATTRIBUTE_CACHE_HIT, false);
+    return;
+  }
+  const { timestamp, expire, tags } = entry ?? {};
+  const ageMs = typeof timestamp === "number" ? core.timestampInSeconds() * 1e3 - timestamp : void 0;
+  span.setAttribute(core.SEMANTIC_ATTRIBUTE_CACHE_HIT, !isExpired(ageMs, expire));
+  if (ageMs !== void 0) {
+    span.setAttribute(attributes.CACHE_ITEM_AGE, Math.max(0, Math.round(ageMs / 1e3)));
+  }
+  if (typeof expire === "number" && expire >= 0 && expire < NEXT_INFINITE_CACHE) {
+    span.setAttribute(attributes.CACHE_TTL, expire);
+  }
+  const stringTags = Array.isArray(tags) ? tags.filter((tag) => typeof tag === "string") : [];
+  if (stringTags.length > 0) {
+    span.setAttribute(attributes.CACHE_TAGS, stringTags);
+  }
+}
+function isCacheHandler(value) {
+  return typeof value === "object" && value !== null && typeof value.get === "function" && typeof value.set === "function";
+}
+function getWrappedHandlers() {
+  const globalWithCacheHandlers = globalThis;
+  if (!globalWithCacheHandlers[SENTRY_WRAPPED_HANDLERS]) {
+    globalWithCacheHandlers[SENTRY_WRAPPED_HANDLERS] = /* @__PURE__ */ new WeakSet();
+  }
+  return globalWithCacheHandlers[SENTRY_WRAPPED_HANDLERS];
+}
+function instrumentHandler(handler) {
+  try {
+    const wrappedHandlers = getWrappedHandlers();
+    if (!isCacheHandler(handler) || wrappedHandlers.has(handler)) {
+      return;
+    }
+    wrappedHandlers.add(handler);
+    core.fill(handler, "get", (originalGet) => {
+      return function(cacheKey, softTags) {
+        if (!shouldRecordCacheSpan()) {
+          return originalGet.call(this, cacheKey, softTags);
+        }
+        return startCacheSpan(
+          op.CACHE_GET,
+          cacheKey,
+          (span) => (
+            // `Promise.resolve` because custom handlers may return the entry synchronously.
+            Promise.resolve(originalGet.call(this, cacheKey, softTags)).then((entry) => {
+              try {
+                setEntryAttributes(span, entry);
+              } catch (error) {
+                debugBuild.DEBUG_BUILD && core.debug.warn("Failed to read Next.js cache entry metadata", error);
+              }
+              return entry;
+            })
+          )
+        );
+      };
+    });
+    core.fill(handler, "set", (originalSet) => {
+      return function(cacheKey, pendingEntry) {
+        if (!shouldRecordCacheSpan()) {
+          return originalSet.call(this, cacheKey, pendingEntry);
+        }
+        return startCacheSpan(op.CACHE_PUT, cacheKey, () => originalSet.call(this, cacheKey, pendingEntry));
+      };
+    });
+  } catch (error) {
+    debugBuild.DEBUG_BUILD && core.debug.warn("Failed to instrument a Next.js cache handler", error);
+  }
+}
+function instrumentHandlersMap(handlersMap) {
+  for (const handler of handlersMap.values()) {
+    instrumentHandler(handler);
+  }
+  core.fill(handlersMap, "set", (originalSet) => {
+    return function(kind, handler) {
+      const result = originalSet.call(this, kind, handler);
+      instrumentHandler(handler);
+      return result;
+    };
+  });
+}
+function instrumentWhenAssigned(symbol, onValue) {
+  const globalWithCacheHandlers = globalThis;
+  const existingValue = globalWithCacheHandlers[symbol];
+  if (existingValue !== void 0) {
+    onValue(existingValue);
+    return;
+  }
+  let storedValue;
+  Object.defineProperty(globalWithCacheHandlers, symbol, {
+    configurable: true,
+    // Non-enumerable so the accessor stays out of copies/spreads of `globalThis` in apps that
+    // never assign the registry.
+    enumerable: false,
+    get: () => storedValue,
+    set: (value) => {
+      storedValue = value;
+      onValue(value);
+    }
+  });
+}
+function _instrumentUseCacheHandlers() {
+  try {
+    const globalWithCacheHandlers = globalThis;
+    if (globalWithCacheHandlers[SENTRY_CACHE_INSTRUMENTED]) {
+      return;
+    }
+    globalWithCacheHandlers[SENTRY_CACHE_INSTRUMENTED] = true;
+    instrumentWhenAssigned(NEXT_CACHE_HANDLERS_MAP, (value) => {
+      if (value instanceof Map) {
+        instrumentHandlersMap(value);
+      }
+    });
+    instrumentWhenAssigned(NEXT_PRIVATE_CACHE_HANDLER, instrumentHandler);
+  } catch (error) {
+    debugBuild.DEBUG_BUILD && core.debug.warn("Failed to instrument Next.js cache handlers", error);
+  }
+}
+const nextjsUseCacheIntegration = core.defineIntegration(() => {
+  return {
+    name: INTEGRATION_NAME,
+    setup(client) {
+      if (core.hasSpansEnabled(client.getOptions())) {
+        _instrumentUseCacheHandlers();
+      }
+    }
+  };
+});
+
+exports._instrumentUseCacheHandlers = _instrumentUseCacheHandlers;
+exports.nextjsUseCacheIntegration = nextjsUseCacheIntegration;
+//# sourceMappingURL=useCacheInstrumentation.js.map

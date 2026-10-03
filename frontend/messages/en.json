@@ -6,7 +6,7 @@
     "billing": "Billing",
     "referral": "Referral",
     "language": "Language",
-    "languageNote": "For the interface and tutor replies. Prep kits and interviews are written in the language of the text you paste.",
+    "languageNote": "For the interface and tutor replies, and the language new prep kits and interviews start in. You can generate them in any supported language.",
     "languageFailed": "Couldn't change the language. Please try again.",
     "yourData": "Your data",
     "yourDataNote": "Download everything prepza. holds about you, or delete your account.",
@@ -85,7 +85,8 @@
       "a test",
       "a promotion"
     ],
-    "widest": "self-education"
+    "widest": "self-education",
+    "mark": "?"
   },
   "goal": {
     "placeholder": "Paste a job description or describe what you want to learn…",
@@ -545,6 +546,9 @@
     "turnedOn": "Card saved. Automatic top-up is on.",
     "turnedOff": "Automatic top-up is off.",
     "failed": "Couldn't change automatic top-up. Please try again."
+  },
+  "generateIn": {
+    "label": "Generate in"
   },
   "referral": {
     "title": "Invite friends",

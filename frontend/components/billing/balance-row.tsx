@@ -35,7 +35,7 @@ export function BalanceRow({
         <AutoTopUpSetting catalog={catalog} companyId={companyId} />
       </div>
       <div className="flex items-center gap-6">
-        <p className="text-right">
+        <p className="text-end">
           <span className="font-heading text-3xl font-medium tabular-nums">
             {available.toLocaleString(locale)}
           </span>{" "}

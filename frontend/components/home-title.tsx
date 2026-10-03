@@ -60,20 +60,21 @@ export function HomeTitle() {
 
   return (
     <h1
-      aria-label={`${t("preparingFor")} ${words[index]}?`}
+      aria-label={`${t("preparingFor")} ${words[index]}${t("mark")}`}
       className="no-dot text-center font-heading text-3xl font-medium tracking-tight sm:text-5xl sm:whitespace-nowrap"
     >
       <span aria-hidden>
         {t("preparingFor")}{" "}
-        <span className="inline-grid text-left">
+        <span className="inline-grid text-start">
           <span className="invisible col-start-1 row-start-1">
             {t("widest")}
-            <span className="mx-2 inline-block w-0.5" />?
+            <span className="mx-2 inline-block w-0.5" />
+            {t("mark")}
           </span>
           <span className="col-start-1 row-start-1">
             <span className="text-primary">{text}</span>
             <span className="mx-2 inline-block h-[0.85em] w-0.5 translate-y-[0.08em] animate-[caret-blink_0.5s_steps(1,end)_infinite] bg-current align-middle motion-reduce:hidden" />
-            ?
+            {t("mark")}
           </span>
         </span>
       </span>

@@ -10,6 +10,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
+import { RTL_LOCALES, type Locale } from "@/constants/i18n"
 import { SITE_NAME } from "@/constants/seo"
 import { siteUrl } from "@/lib/site"
 import { cn } from "cn"
@@ -45,10 +46,12 @@ export default async function RootLayout({
   // The Content-Security-Policy's nonce from proxy.ts, for the theme's inline script.
   const nonce = (await headers()).get("x-nonce") ?? undefined
   const locale = await getLocale()
+  const direction = RTL_LOCALES.includes(locale as Locale) ? "rtl" : "ltr"
 
   return (
     <html
       lang={locale}
+      dir={direction}
       suppressHydrationWarning
       className={cn(
         "antialiased",

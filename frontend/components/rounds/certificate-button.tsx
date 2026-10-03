@@ -68,7 +68,7 @@ function CertificateRules() {
   }
 
   return (
-    <ul className="list-disc space-y-2 pl-5 font-light">
+    <ul className="list-disc space-y-2 ps-5 font-light">
       {rules.map((rule) => (
         <li key={rule}>{rule}</li>
       ))}

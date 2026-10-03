@@ -1,0 +1,57 @@
+import { getIsolationScope, winterCGHeadersToDict, handleCallbackErrors, getActiveSpan, SPAN_STATUS_ERROR, SPAN_STATUS_OK, captureException } from '@sentry/core';
+import { isNotFoundNavigationError, isRedirectNavigationError, isPrerenderControlFlowError } from './nextNavigationErrorUtils.js';
+import { waitUntil, flushSafelyWithTimeout } from './utils/responseEnd.js';
+
+function wrapGenerationFunctionWithSentry(generationFunction, context) {
+  return new Proxy(generationFunction, {
+    apply: (originalFunction, thisArg, args) => {
+      const isolationScope = getIsolationScope();
+      let headers = void 0;
+      try {
+        headers = context.requestAsyncStorage?.getStore()?.headers;
+      } catch {
+      }
+      const headersDict = headers ? winterCGHeadersToDict(headers) : void 0;
+      isolationScope.setSDKProcessingMetadata({
+        normalizedRequest: {
+          headers: headersDict
+        }
+      });
+      return handleCallbackErrors(
+        () => originalFunction.apply(thisArg, args),
+        (error) => {
+          const span = getActiveSpan();
+          const { componentRoute, componentType, generationFunctionIdentifier } = context;
+          isolationScope.setTransactionName(`${componentType}.${generationFunctionIdentifier} (${componentRoute})`);
+          if (isNotFoundNavigationError(error)) {
+            span?.setStatus({ code: SPAN_STATUS_ERROR, message: "not_found" });
+            return;
+          }
+          if (isRedirectNavigationError(error)) {
+            span?.setStatus({ code: SPAN_STATUS_OK });
+            return;
+          }
+          if (isPrerenderControlFlowError(error)) {
+            return;
+          }
+          span?.setStatus({ code: SPAN_STATUS_ERROR, message: "internal_error" });
+          captureException(error, {
+            mechanism: {
+              handled: false,
+              type: "auto.function.nextjs.generation_function",
+              data: {
+                function: generationFunctionIdentifier
+              }
+            }
+          });
+        },
+        () => {
+          waitUntil(flushSafelyWithTimeout());
+        }
+      );
+    }
+  });
+}
+
+export { wrapGenerationFunctionWithSentry };
+//# sourceMappingURL=wrapGenerationFunctionWithSentry.js.map

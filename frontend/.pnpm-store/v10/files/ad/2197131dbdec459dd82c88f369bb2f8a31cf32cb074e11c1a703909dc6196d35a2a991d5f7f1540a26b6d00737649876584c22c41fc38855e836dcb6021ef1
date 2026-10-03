@@ -1,0 +1,24 @@
+export { addClsInstrumentationHandler, addFcpInstrumentationHandler, addInpInstrumentationHandler, addLcpInstrumentationHandler, addPerformanceInstrumentationHandler, addTtfbInstrumentationHandler, enableBfcacheReporting, enableSoftNavigationReporting } from './instrumentation/performanceObserver.js';
+export { startSoftNavigationCorrelation, supportsSoftNavigations } from './web-vitals/softNavs.js';
+export { addPerformanceEntries, startTrackingLongAnimationFrames, startTrackingLongTasks } from './performance/entries.js';
+export { addWebVitalsToSpan, startTrackingWebVitals } from './web-vitals/tracking.js';
+export { elementTimingIntegration, startTrackingElementTiming } from './performance/elementTiming.js';
+export { interactionsIntegration } from './performance/interactions.js';
+export { isBotUserAgent } from './isBotUserAgent.js';
+export { getLocationHref } from './getLocationHref.js';
+export { userTimingIntegration } from './performance/userTiming.js';
+export { extractNetworkProtocol } from './performance/utils.js';
+export { trackClsAsSpan, trackInpAsSpan, trackLcpAsSpan } from './web-vitals/spans.js';
+export { whenIdleOrHidden } from './web-vitals/utils.js';
+export { addClickKeypressInstrumentationHandler } from './instrumentation/dom.js';
+export { addHistoryInstrumentationHandler } from './instrumentation/history.js';
+export { clearCachedImplementation, fetch, getNativeImplementation, setTimeout } from './getNativeImplementation.js';
+export { SENTRY_XHR_DATA_KEY, addXhrInstrumentationHandler } from './instrumentation/xhr.js';
+export { getBodyString, getFetchRequestArgBody, parseXhrResponseHeaders, serializeFormData } from './networkUtils.js';
+export { resourceTimingToSpanAttributes } from './performance/resourceTiming.js';
+export { htmlTreeAsString } from './htmlTreeAsString.js';
+export { getComponentName } from './component-name.js';
+export { isElement } from './is.js';
+export { getAbsoluteUrl } from './instrumentation/location.js';
+export { registerInpInteractionListener } from './web-vitals/inp.js';
+//# sourceMappingURL=index.js.map

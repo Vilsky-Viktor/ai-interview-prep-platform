@@ -1,0 +1,128 @@
+"use client";
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const core = require('@sentry/core');
+const react = require('@sentry/react');
+const debugBuild = require('../common/debug-build.js');
+const devErrorSymbolicationEventProcessor = require('../common/devErrorSymbolicationEventProcessor.js');
+const getVercelEnv = require('../common/getVercelEnv.js');
+const nextNavigationErrorUtils = require('../common/nextNavigationErrorUtils.js');
+const browserTracingIntegration = require('./browserTracingIntegration.js');
+const clientNormalizationIntegration = require('./clientNormalizationIntegration.js');
+const isrRoutingTracing = require('./routing/isrRoutingTracing.js');
+const tunnelRoute = require('./tunnelRoute.js');
+const wrapGetStaticPropsWithSentry = require('../common/pages-router-instrumentation/wrapGetStaticPropsWithSentry.js');
+const wrapGetInitialPropsWithSentry = require('../common/pages-router-instrumentation/wrapGetInitialPropsWithSentry.js');
+const wrapAppGetInitialPropsWithSentry = require('../common/pages-router-instrumentation/wrapAppGetInitialPropsWithSentry.js');
+const wrapDocumentGetInitialPropsWithSentry = require('../common/pages-router-instrumentation/wrapDocumentGetInitialPropsWithSentry.js');
+const wrapErrorGetInitialPropsWithSentry = require('../common/pages-router-instrumentation/wrapErrorGetInitialPropsWithSentry.js');
+const wrapGetServerSidePropsWithSentry = require('../common/pages-router-instrumentation/wrapGetServerSidePropsWithSentry.js');
+const wrapServerComponentWithSentry = require('../common/wrapServerComponentWithSentry.js');
+const wrapRouteHandlerWithSentry = require('../common/wrapRouteHandlerWithSentry.js');
+const wrapApiHandlerWithSentryVercelCrons = require('../common/pages-router-instrumentation/wrapApiHandlerWithSentryVercelCrons.js');
+const wrapMiddlewareWithSentry = require('../common/wrapMiddlewareWithSentry.js');
+const wrapPageComponentWithSentry = require('../common/pages-router-instrumentation/wrapPageComponentWithSentry.js');
+const wrapGenerationFunctionWithSentry = require('../common/wrapGenerationFunctionWithSentry.js');
+const withServerActionInstrumentation = require('../common/withServerActionInstrumentation.js');
+const captureRequestError = require('../common/captureRequestError.js');
+const _error = require('../common/pages-router-instrumentation/_error.js');
+const appRouterRoutingInstrumentation = require('./routing/appRouterRoutingInstrumentation.js');
+
+let clientIsInitialized = false;
+const globalWithInjectedValues = core.GLOBAL_OBJ;
+function init(options) {
+  if (clientIsInitialized) {
+    core.consoleSandbox(() => {
+      console.warn(
+        "[@sentry/nextjs] You are calling `Sentry.init()` more than once on the client. This can happen if you have both a `sentry.client.config.ts` and a `instrumentation-client.ts` file with `Sentry.init()` calls. It is recommended to call `Sentry.init()` once in `instrumentation-client.ts`."
+      );
+    });
+  }
+  clientIsInitialized = true;
+  if (!debugBuild.DEBUG_BUILD && options.debug) {
+    core.consoleSandbox(() => {
+      console.warn(
+        "[@sentry/nextjs] You have enabled `debug: true`, but Sentry debug logging was removed from your bundle (likely via `webpack.treeshake.removeDebugLogging: true`). Set that option to `false` to see Sentry debug output."
+      );
+    });
+  }
+  if (typeof __SENTRY_TRACING__ === "undefined" || __SENTRY_TRACING__) {
+    isrRoutingTracing.removeIsrSsgTraceMetaTags();
+  }
+  const opts = {
+    environment: options.environment || process.env.SENTRY_ENVIRONMENT || getVercelEnv.getClientVercelEnv() || process.env.NODE_ENV,
+    defaultIntegrations: getDefaultIntegrations(options),
+    release: process.env._sentryRelease || globalWithInjectedValues._sentryRelease,
+    ...options
+  };
+  tunnelRoute.applyTunnelRouteOption(opts);
+  core.applySdkMetadata(opts, "nextjs", ["nextjs", "react"]);
+  opts.ignoreSpans = [
+    ...opts.ignoreSpans || [],
+    // we filter out segment spans for /404 pages (exact match, so a string match isn't safe)
+    /^\/404$/
+  ];
+  const client = react.init(opts);
+  const filterNextRedirectError = (event, hint) => nextNavigationErrorUtils.isRedirectNavigationError(hint?.originalException) || event.exception?.values?.[0]?.value === "NEXT_REDIRECT" ? null : event;
+  filterNextRedirectError.id = "NextRedirectErrorFilter";
+  core.addEventProcessor(filterNextRedirectError);
+  if (process.env.NODE_ENV === "development") {
+    core.addEventProcessor(devErrorSymbolicationEventProcessor.devErrorSymbolicationEventProcessor);
+  }
+  try {
+    if (process.turbopack) {
+      core.getGlobalScope().setTag("turbopack", true);
+    }
+  } catch {
+  }
+  return client;
+}
+function getDefaultIntegrations(options) {
+  const customDefaultIntegrations = react.getDefaultIntegrations(options);
+  if (typeof __SENTRY_TRACING__ === "undefined" || __SENTRY_TRACING__) {
+    customDefaultIntegrations.push(browserTracingIntegration.browserTracingIntegration());
+  }
+  const rewriteFramesAssetPrefixPath = process.env._sentryRewriteFramesAssetPrefixPath || globalWithInjectedValues._sentryRewriteFramesAssetPrefixPath || "";
+  const assetPrefix = process.env._sentryAssetPrefix || globalWithInjectedValues._sentryAssetPrefix;
+  const basePath = process.env._sentryBasePath || globalWithInjectedValues._sentryBasePath;
+  const experimentalThirdPartyOriginStackFrames = process.env._experimentalThirdPartyOriginStackFrames === "true" || globalWithInjectedValues._experimentalThirdPartyOriginStackFrames === "true";
+  customDefaultIntegrations.push(
+    clientNormalizationIntegration.nextjsClientStackFrameNormalizationIntegration({
+      assetPrefix,
+      basePath,
+      rewriteFramesAssetPrefixPath,
+      experimentalThirdPartyOriginStackFrames
+    })
+  );
+  return customDefaultIntegrations;
+}
+
+exports.browserTracingIntegration = browserTracingIntegration.browserTracingIntegration;
+exports.wrapGetStaticPropsWithSentry = wrapGetStaticPropsWithSentry.wrapGetStaticPropsWithSentry;
+exports.wrapGetInitialPropsWithSentry = wrapGetInitialPropsWithSentry.wrapGetInitialPropsWithSentry;
+exports.wrapAppGetInitialPropsWithSentry = wrapAppGetInitialPropsWithSentry.wrapAppGetInitialPropsWithSentry;
+exports.wrapDocumentGetInitialPropsWithSentry = wrapDocumentGetInitialPropsWithSentry.wrapDocumentGetInitialPropsWithSentry;
+exports.wrapErrorGetInitialPropsWithSentry = wrapErrorGetInitialPropsWithSentry.wrapErrorGetInitialPropsWithSentry;
+exports.wrapGetServerSidePropsWithSentry = wrapGetServerSidePropsWithSentry.wrapGetServerSidePropsWithSentry;
+exports.wrapServerComponentWithSentry = wrapServerComponentWithSentry.wrapServerComponentWithSentry;
+exports.wrapRouteHandlerWithSentry = wrapRouteHandlerWithSentry.wrapRouteHandlerWithSentry;
+exports.wrapApiHandlerWithSentryVercelCrons = wrapApiHandlerWithSentryVercelCrons.wrapApiHandlerWithSentryVercelCrons;
+exports.wrapMiddlewareWithSentry = wrapMiddlewareWithSentry.wrapMiddlewareWithSentry;
+exports.wrapPageComponentWithSentry = wrapPageComponentWithSentry.wrapPageComponentWithSentry;
+exports.wrapGenerationFunctionWithSentry = wrapGenerationFunctionWithSentry.wrapGenerationFunctionWithSentry;
+exports.withServerActionInstrumentation = withServerActionInstrumentation.withServerActionInstrumentation;
+exports.captureRequestError = captureRequestError.captureRequestError;
+exports.captureUnderscoreErrorException = _error.captureUnderscoreErrorException;
+exports.captureRouterTransitionStart = appRouterRoutingInstrumentation.captureRouterTransitionStart;
+exports.init = init;
+Object.prototype.hasOwnProperty.call(react, '__proto__') &&
+  !Object.prototype.hasOwnProperty.call(exports, '__proto__') &&
+  Object.defineProperty(exports, '__proto__', {
+    enumerable: true,
+    value: react['__proto__']
+  });
+
+Object.keys(react).forEach(k => {
+  if (k !== 'default' && !Object.prototype.hasOwnProperty.call(exports, k)) exports[k] = react[k];
+});
+//# sourceMappingURL=index.js.map

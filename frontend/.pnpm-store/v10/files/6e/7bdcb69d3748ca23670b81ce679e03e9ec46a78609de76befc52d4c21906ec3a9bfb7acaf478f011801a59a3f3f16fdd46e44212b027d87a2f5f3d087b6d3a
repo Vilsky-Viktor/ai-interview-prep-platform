@@ -1,0 +1,73 @@
+{
+  "name": "@sentry/replay-canvas",
+  "version": "11.2.0",
+  "description": "Replay canvas integration",
+  "main": "build/npm/cjs/index.js",
+  "module": "build/npm/esm/index.js",
+  "types": "build/npm/types/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "react-native": "./build/npm/esm/index.js",
+      "import": {
+        "types": "./build/npm/types/index.d.ts",
+        "default": "./build/npm/esm/index.js"
+      },
+      "require": {
+        "types": "./build/npm/types/index.d.ts",
+        "default": "./build/npm/cjs/index.js"
+      }
+    }
+  },
+  "files": [
+    "/build/npm"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "run-p build:transpile build:types build:bundle",
+    "build:transpile": "rollup -c rollup.npm.config.mjs",
+    "build:bundle": "rollup -c rollup.bundle.config.mjs",
+    "build:dev": "run-p build:transpile build:types",
+    "build:types": "tsc -p tsconfig.types.json",
+    "build:watch": "run-p build:transpile:watch build:bundle:watch",
+    "build:dev:watch": "run-p build:transpile:watch",
+    "build:transpile:watch": "yarn build:transpile --watch",
+    "build:bundle:watch": "yarn build:bundle --watch",
+    "build:tarball": "npm pack",
+    "circularDepCheck": "madge --circular src/index.ts",
+    "clean": "rimraf build sentry-replay-*.tgz",
+    "lint:fix": "oxlint . --fix --type-aware",
+    "lint": "oxlint . --type-aware",
+    "lint:types": "oxlint src --type-aware --type-check",
+    "lint:es-compatibility": "es-check es2020 ./build/{bundles,npm/cjs}/*.js && es-check es2020 ./build/npm/esm/*.js --module",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "yalc:publish": "yalc publish --push --sig"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getsentry/sentry-javascript.git"
+  },
+  "author": "Sentry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/getsentry/sentry-javascript/issues"
+  },
+  "homepage": "https://docs.sentry.io/platforms/javascript/session-replay/",
+  "devDependencies": {
+    "@sentry/rrweb": "2.43.2"
+  },
+  "dependencies": {
+    "@sentry/replay": "11.2.0",
+    "@sentry/core": "11.2.0"
+  },
+  "engines": {
+    "node": ">=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0"
+  },
+  "volta": {
+    "extends": "../../package.json"
+  }
+}

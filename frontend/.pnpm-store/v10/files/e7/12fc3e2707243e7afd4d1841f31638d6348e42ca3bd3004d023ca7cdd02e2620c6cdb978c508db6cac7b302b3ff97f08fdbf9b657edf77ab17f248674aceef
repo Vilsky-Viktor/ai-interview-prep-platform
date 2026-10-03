@@ -1,0 +1,94 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const core = require('@sentry/core');
+const nextNavigationErrorUtils = require('./nextNavigationErrorUtils.js');
+const responseEnd = require('./utils/responseEnd.js');
+const tracingUtils = require('./utils/tracingUtils.js');
+const attributes = require('@sentry/conventions/attributes');
+const op = require('@sentry/conventions/op');
+
+function wrapRouteHandlerWithSentry(routeHandler, context) {
+  const { method, parameterizedRoute, headers } = context;
+  return new Proxy(routeHandler, {
+    apply: async (originalFunction, thisArg, args) => {
+      const activeSpan = core.getActiveSpan();
+      const rootSpan = activeSpan ? core.getRootSpan(activeSpan) : void 0;
+      let edgeRuntimeIsolationScopeOverride;
+      if (rootSpan && process.env.NEXT_RUNTIME === "edge") {
+        const isolationScope = tracingUtils.commonObjectToIsolationScope(headers);
+        const { scope } = core.getCapturedScopesOnSpan(rootSpan);
+        core.setCapturedScopesOnSpan(rootSpan, scope ?? new core.Scope(), isolationScope);
+        edgeRuntimeIsolationScopeOverride = isolationScope;
+        rootSpan.updateName(`${method} ${parameterizedRoute}`);
+        rootSpan.setAttributes({
+          [attributes.SENTRY_SEGMENT_NAME_SOURCE]: "route",
+          [attributes.SENTRY_OP]: op.HTTP_SERVER,
+          [attributes.HTTP_ROUTE]: parameterizedRoute
+        });
+      }
+      return core.withIsolationScope(
+        process.env.NEXT_RUNTIME === "edge" ? edgeRuntimeIsolationScopeOverride : core.getIsolationScope(),
+        () => {
+          return core.withScope(async (scope) => {
+            scope.setTransactionName(`${method} ${parameterizedRoute}`);
+            if (process.env.NEXT_RUNTIME === "edge") {
+              const completeHeadersDict = headers ? core.winterCGHeadersToDict(headers) : {};
+              const incomingPropagationContext = core.propagationContextFromHeaders(
+                completeHeadersDict["sentry-trace"],
+                completeHeadersDict["baggage"]
+              );
+              scope.setPropagationContext(incomingPropagationContext);
+              scope.setSDKProcessingMetadata({
+                normalizedRequest: {
+                  method,
+                  headers: completeHeadersDict
+                }
+              });
+            }
+            const response = await core.handleCallbackErrors(
+              () => originalFunction.apply(thisArg, args),
+              (error) => {
+                if (nextNavigationErrorUtils.isRedirectNavigationError(error)) ; else if (nextNavigationErrorUtils.isNotFoundNavigationError(error)) {
+                  if (activeSpan) {
+                    core.setHttpStatus(activeSpan, 404);
+                  }
+                  if (rootSpan) {
+                    core.setHttpStatus(rootSpan, 404);
+                  }
+                } else if (nextNavigationErrorUtils.isPrerenderControlFlowError(error)) ; else {
+                  const errorStatus = { code: core.SPAN_STATUS_ERROR, message: "internal_error" };
+                  activeSpan?.setStatus(errorStatus);
+                  rootSpan?.setStatus(errorStatus);
+                  core.captureException(error, {
+                    mechanism: {
+                      handled: false,
+                      type: "auto.function.nextjs.route_handler"
+                    }
+                  });
+                }
+              },
+              () => {
+                responseEnd.waitUntil(responseEnd.flushSafelyWithTimeout());
+              }
+            );
+            try {
+              if (response.status) {
+                if (activeSpan) {
+                  core.setHttpStatus(activeSpan, response.status);
+                }
+                if (rootSpan) {
+                  core.setHttpStatus(rootSpan, response.status);
+                }
+              }
+            } catch {
+            }
+            return response;
+          });
+        }
+      );
+    }
+  });
+}
+
+exports.wrapRouteHandlerWithSentry = wrapRouteHandlerWithSentry;
+//# sourceMappingURL=wrapRouteHandlerWithSentry.js.map

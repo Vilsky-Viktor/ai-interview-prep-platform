@@ -105,7 +105,7 @@ export function TopicQuestions({
         <span
           className={cn(
             "text-lg tabular-nums",
-            alignCount && "inline-block min-w-[3ch] text-right"
+            alignCount && "inline-block min-w-[3ch] text-end"
           )}
         >
           {count}

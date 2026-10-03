@@ -61,8 +61,9 @@ async def create_generation(
         await billing.release_kit(generation_id)
         raise
 
-    # Written in the pasted text's language; the interface's only when the text has no letters.
-    language = text_language(body.text, user.language)
+    # The chosen language, or else the pasted text's (the interface's only when it has no
+    # letters).
+    language = body.generate_in or text_language(body.text, user.language)
 
     try:
         generation = await generations.create(

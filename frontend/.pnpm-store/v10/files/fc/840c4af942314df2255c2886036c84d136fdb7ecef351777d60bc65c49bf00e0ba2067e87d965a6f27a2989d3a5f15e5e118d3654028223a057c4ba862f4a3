@@ -1,0 +1,71 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const attributes = require('@sentry/conventions/attributes');
+const core = require('@sentry/core');
+const nextSpanAttributes = require('../common/nextSpanAttributes.js');
+const addHeadersAsAttributes = require('../common/utils/addHeadersAsAttributes.js');
+const dropMiddlewareTunnelRequests = require('../common/utils/dropMiddlewareTunnelRequests.js');
+const liveRootSpanAdapter = require('../common/utils/liveRootSpanAdapter.js');
+const forkIsolationScopeForRootSpan = require('../common/utils/forkIsolationScopeForRootSpan.js');
+const tracingUtils = require('../common/utils/tracingUtils.js');
+const vercelCronsMonitoring = require('./vercelCronsMonitoring.js');
+const vercelQueuesMonitoring = require('./vercelQueuesMonitoring.js');
+
+function handleOnSpanStart(span, client) {
+  const spanAttributes = core.spanToJSON(span).attributes;
+  const rootSpan = core.getRootSpan(span);
+  const rootSpanAttributes = core.spanToJSON(rootSpan).attributes;
+  const isRootSpan = span === rootSpan;
+  dropMiddlewareTunnelRequests.dropMiddlewareTunnelRequests(span, spanAttributes);
+  if (isRootSpan && spanAttributes?.[nextSpanAttributes.ATTR_NEXT_SPAN_TYPE] === "BaseServer.handleRequest" && core.hasSpanStreamingEnabled(client)) {
+    const method = spanAttributes[attributes.HTTP_REQUEST_METHOD] ?? spanAttributes[attributes.HTTP_METHOD];
+    liveRootSpanAdapter.createLiveRootSpanAdapter(span).setName(
+      (typeof method === "string" ? method.toUpperCase() : "") || core.HTTP_SPAN_NAME_FALLBACK
+    );
+  }
+  if (typeof spanAttributes?.[nextSpanAttributes.ATTR_NEXT_ROUTE] === "string") {
+    if (
+      // eslint-disable-next-line typescript/no-deprecated
+      (rootSpanAttributes?.[attributes.HTTP_REQUEST_METHOD] || rootSpanAttributes?.[attributes.HTTP_METHOD]) && !rootSpanAttributes?.[attributes.HTTP_ROUTE]
+    ) {
+      const route = spanAttributes[nextSpanAttributes.ATTR_NEXT_ROUTE].replace(/\/route$/, "");
+      const method = rootSpanAttributes?.[attributes.HTTP_REQUEST_METHOD] || rootSpanAttributes?.[attributes.HTTP_METHOD];
+      const name = typeof method === "string" ? `${method} ${route}` : route;
+      rootSpan.updateName(name);
+      rootSpan.setAttributes({
+        [attributes.HTTP_ROUTE]: route,
+        // Preserving the original attribute despite internally not depending on it
+        [nextSpanAttributes.ATTR_NEXT_ROUTE]: route,
+        [attributes.SENTRY_SEGMENT_NAME_SOURCE]: "route"
+      });
+      core.getIsolationScope().setTransactionName(name);
+      vercelCronsMonitoring.maybeStartCronCheckIn(rootSpan, route);
+      vercelQueuesMonitoring.maybeEnrichQueueConsumerSpan(rootSpan);
+    }
+  }
+  if (spanAttributes?.[nextSpanAttributes.ATTR_NEXT_SPAN_TYPE] === "Middleware.execute") {
+    const middlewareName = spanAttributes[nextSpanAttributes.ATTR_NEXT_SPAN_NAME];
+    if (typeof middlewareName === "string") {
+      rootSpan.updateName(middlewareName);
+      rootSpan.setAttributes({
+        [attributes.HTTP_ROUTE]: middlewareName,
+        [nextSpanAttributes.ATTR_NEXT_SPAN_NAME]: middlewareName,
+        [attributes.SENTRY_SEGMENT_NAME_SOURCE]: "route"
+      });
+    }
+    span.setAttribute(core.SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN, "auto");
+  }
+  if (spanAttributes?.[nextSpanAttributes.ATTR_NEXT_SPAN_TYPE] !== void 0) {
+    span.setAttribute(core.SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN, "auto");
+  }
+  if (isRootSpan) {
+    const headers = core.getIsolationScope().getScopeData().sdkProcessingMetadata?.normalizedRequest?.headers;
+    addHeadersAsAttributes.addHeadersAsAttributes(headers, rootSpan);
+  }
+  forkIsolationScopeForRootSpan.maybeForkIsolationScopeForRootSpan(span, spanAttributes);
+  tracingUtils.maybeEnhanceServerComponentSpanName(span, spanAttributes, rootSpanAttributes, client);
+  vercelQueuesMonitoring.maybeEnrichQueueProducerSpan(span);
+}
+
+exports.handleOnSpanStart = handleOnSpanStart;
+//# sourceMappingURL=handleOnSpanStart.js.map

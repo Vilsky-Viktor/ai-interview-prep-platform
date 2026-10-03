@@ -1,0 +1,45 @@
+import { URL_PATH, HTTP_TARGET, URL_FULL } from '@sentry/conventions/attributes';
+import { getClient, SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN, GLOBAL_OBJ, isSentryRequestUrl } from '@sentry/core';
+import { ATTR_NEXT_SPAN_TYPE } from '../nextSpanAttributes.js';
+import { isPathnameUnderSentryTunnelRoute } from './tunnelPathnameMatch.js';
+import { TRANSACTION_ATTR_SHOULD_DROP_TRANSACTION } from '../span-attributes-with-logic-attached.js';
+
+const globalWithInjectedValues = GLOBAL_OBJ;
+function dropMiddlewareTunnelRequests(span, attrs) {
+  if (getClient()?.getOptions()?.enableOpenTelemetrySetup === false) {
+    return;
+  }
+  const isMiddleware = attrs?.[ATTR_NEXT_SPAN_TYPE] === "Middleware.execute";
+  const isFetchSpan = attrs?.[SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN] === "auto.http.node_fetch";
+  const isBaseServerHandleRequest = attrs?.[ATTR_NEXT_SPAN_TYPE] === "BaseServer.handleRequest";
+  if (!isMiddleware && !isFetchSpan && !isBaseServerHandleRequest) {
+    return;
+  }
+  const isTunnel = isTunnelRouteSpan(attrs || {});
+  const isSentry = isSentryRequestSpan(attrs || {});
+  if (isTunnel || isSentry) {
+    span.setAttribute(TRANSACTION_ATTR_SHOULD_DROP_TRANSACTION, true);
+  }
+}
+function isSentryRequestSpan(attrs) {
+  const httpUrl = attrs[URL_FULL];
+  if (!httpUrl) {
+    return false;
+  }
+  return isSentryRequestUrl(httpUrl.toString(), getClient());
+}
+function isTunnelRouteSpan(spanAttributes) {
+  const tunnelPath = globalWithInjectedValues._sentryRewritesTunnelPath || process.env._sentryRewritesTunnelPath;
+  if (!tunnelPath) {
+    return false;
+  }
+  const target = spanAttributes[URL_PATH] ?? spanAttributes[HTTP_TARGET];
+  if (typeof target === "string") {
+    const pathname = target.split("?")[0] || "";
+    return isPathnameUnderSentryTunnelRoute(pathname, tunnelPath);
+  }
+  return false;
+}
+
+export { dropMiddlewareTunnelRequests };
+//# sourceMappingURL=dropMiddlewareTunnelRequests.js.map

@@ -1,0 +1,10 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const constants_js = require('next/constants.js');
+
+function isBuild() {
+  return process.env.NEXT_PHASE === constants_js.PHASE_PRODUCTION_BUILD;
+}
+
+exports.isBuild = isBuild;
+//# sourceMappingURL=isBuild.js.map

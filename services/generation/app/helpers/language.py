@@ -3,40 +3,51 @@ import re
 from prepza_common.constants import DEFAULT_LANGUAGE
 
 from app.constants.language import (
+    KANA,
     LATIN_WORDS,
     PERSIAN_LETTERS,
     RUSSIAN_LETTERS,
+    SCRIPT_LANGUAGES,
     SCRIPT_SHARE,
+    SCRIPTS,
     UKRAINIAN_LETTERS,
 )
 
 
-def text_language(text: str, fallback: str = DEFAULT_LANGUAGE) -> str:
-    """The language to generate in: the pasted text's own, so a Russian interface can still make
-    an English interview. A text without letters takes `fallback`, the interface's."""
-    lowered = text.lower()
-    hebrew = sum(1 for char in lowered if "\u0590" <= char <= "\u05ff")
-    arabic = sum(1 for char in lowered if "\u0600" <= char <= "\u06ff")
-    cyrillic = sum(1 for char in lowered if "а" <= char <= "я" or char in "ёіїєґ")
-    latin = sum(1 for char in lowered if "a" <= char <= "z")
+def script_of(char: str) -> str | None:
+    code = ord(char)
 
-    letters = hebrew + arabic + cyrillic + latin
+    for script, ranges in SCRIPTS.items():
+        if any(start <= code <= end for start, end in ranges):
+            return script
+
+    return None
+
+
+def text_language(text: str, fallback: str = DEFAULT_LANGUAGE) -> str:
+    """The pasted text's own language, for callers that don't choose one. A text without letters
+    takes `fallback`, the interface's."""
+    lowered = text.lower()
+    counts = {script: 0 for script in SCRIPTS}
+    latin = 0
+
+    for char in lowered:
+        script = script_of(char)
+
+        if script:
+            counts[script] += 1
+        elif char.isalpha():
+            latin += 1
+
+    letters = latin + sum(counts.values())
 
     if letters == 0:
         return fallback
 
-    # Hebrew and Arabic-script texts are told by their alphabet, as Cyrillic ones are.
-    if max(hebrew, arabic) / letters >= SCRIPT_SHARE:
-        if hebrew > arabic:
-            return "he"
+    script = max(counts, key=counts.get)
 
-        return "fa" if any(char in PERSIAN_LETTERS for char in lowered) else "ar"
-
-    if cyrillic / letters >= SCRIPT_SHARE:
-        ukrainian = sum(1 for char in lowered if char in UKRAINIAN_LETTERS)
-        russian = sum(1 for char in lowered if char in RUSSIAN_LETTERS)
-
-        return "uk" if ukrainian > russian else "ru"
+    if counts[script] / letters >= SCRIPT_SHARE:
+        return script_language(script, lowered)
 
     words = re.findall(r"[^\W\d_]+", lowered)
     hits = {
@@ -46,3 +57,20 @@ def text_language(text: str, fallback: str = DEFAULT_LANGUAGE) -> str:
     best = max(hits, key=hits.get)
 
     return best if hits[best] > 0 else DEFAULT_LANGUAGE
+
+
+def script_language(script: str, text: str) -> str:
+    """The language a text in a non-Latin script is in."""
+    if script in SCRIPT_LANGUAGES:
+        return SCRIPT_LANGUAGES[script]
+
+    if script == "arabic":
+        return "fa" if any(char in PERSIAN_LETTERS for char in text) else "ar"
+
+    if script == "cjk":
+        return "ja" if any(KANA[0] <= ord(char) <= KANA[1] for char in text) else "zh"
+
+    ukrainian = sum(1 for char in text if char in UKRAINIAN_LETTERS)
+    russian = sum(1 for char in text if char in RUSSIAN_LETTERS)
+
+    return "uk" if ukrainian > russian else "ru"

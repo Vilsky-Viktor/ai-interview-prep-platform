@@ -12,6 +12,7 @@ from app.config.settings import settings
 from app.integrations.redis import get_redis
 from app.routers import (
     auto_top_ups,
+    candidates,
     companies,
     internal_accounts,
     internal_events,
@@ -49,6 +50,7 @@ app.include_router(companies.router)
 app.include_router(auto_top_ups.router)
 app.include_router(members.router)
 app.include_router(interviews.router)
+app.include_router(candidates.router)
 app.include_router(interview_generation.router)
 app.include_router(interview_questions.router)
 app.include_router(invites.router)

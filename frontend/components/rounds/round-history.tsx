@@ -169,7 +169,7 @@ export function RoundHistory({
                   <div
                     className={cn(
                       "flex shrink-0 items-baseline gap-2",
-                      !finished && "mr-2 sm:mr-4"
+                      !finished && "me-2 sm:me-4"
                     )}
                   >
                     {!finished && (

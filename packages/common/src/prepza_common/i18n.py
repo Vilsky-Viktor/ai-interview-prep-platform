@@ -14,7 +14,9 @@ VALUE_ERROR = "Value error, "
 
 def request_language(request: Request) -> str:
     """The interface language, which the frontend sends as Accept-Language."""
-    value = request.headers.get("accept-language", "")[:2].lower()
+    # The first tag, without its region: "fil-PH" is Filipino, "pt-BR" Portuguese.
+    value = request.headers.get("accept-language", "").split(",")[0].split(";")[0]
+    value = value.split("-")[0].strip().lower()
 
     return value if value in LANGUAGES else DEFAULT_LANGUAGE
 

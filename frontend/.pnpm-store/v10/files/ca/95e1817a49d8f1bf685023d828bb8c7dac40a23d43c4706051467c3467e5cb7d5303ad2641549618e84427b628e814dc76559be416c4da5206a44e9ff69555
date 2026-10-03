@@ -1,0 +1,6 @@
+import type { InstrumentationConfig } from '../apmTypes';
+export declare const remixV3Config: InstrumentationConfig[];
+export declare const remixV3Channels: {
+    readonly REMIX_V3_CREATE_ROUTER: 'orchestrion:@remix-run/fetch-router:createRouter';
+};
+//# sourceMappingURL=remix-v3.d.ts.map

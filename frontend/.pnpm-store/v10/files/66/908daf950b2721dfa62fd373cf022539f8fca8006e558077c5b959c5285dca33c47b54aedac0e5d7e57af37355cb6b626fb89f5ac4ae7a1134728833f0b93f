@@ -1,0 +1,49 @@
+import { getIsolationScope, winterCGHeadersToDict, handleCallbackErrors, getActiveSpan, SPAN_STATUS_ERROR, SPAN_STATUS_OK, captureException } from '@sentry/core';
+import { isNotFoundNavigationError, isRedirectNavigationError, isPrerenderControlFlowError } from './nextNavigationErrorUtils.js';
+import { waitUntil, flushSafelyWithTimeout } from './utils/responseEnd.js';
+
+function wrapServerComponentWithSentry(appDirComponent, context) {
+  return new Proxy(appDirComponent, {
+    apply: (originalFunction, thisArg, args) => {
+      const isolationScope = getIsolationScope();
+      const headersDict = context.headers ? winterCGHeadersToDict(context.headers) : void 0;
+      isolationScope.setSDKProcessingMetadata({
+        normalizedRequest: {
+          headers: headersDict
+        }
+      });
+      return handleCallbackErrors(
+        () => originalFunction.apply(thisArg, args),
+        (error) => {
+          const span = getActiveSpan();
+          const { componentRoute, componentType } = context;
+          isolationScope.setTransactionName(`${componentType} Server Component (${componentRoute})`);
+          if (isNotFoundNavigationError(error)) {
+            span?.setStatus({ code: SPAN_STATUS_ERROR, message: "not_found" });
+            return;
+          }
+          if (isRedirectNavigationError(error)) {
+            span?.setStatus({ code: SPAN_STATUS_OK });
+            return;
+          }
+          if (isPrerenderControlFlowError(error)) {
+            return;
+          }
+          span?.setStatus({ code: SPAN_STATUS_ERROR, message: "internal_error" });
+          captureException(error, {
+            mechanism: {
+              handled: false,
+              type: "auto.function.nextjs.server_component"
+            }
+          });
+        },
+        () => {
+          waitUntil(flushSafelyWithTimeout());
+        }
+      );
+    }
+  });
+}
+
+export { wrapServerComponentWithSentry };
+//# sourceMappingURL=wrapServerComponentWithSentry.js.map

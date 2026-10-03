@@ -1,0 +1,8 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+function getClientVercelEnv() {
+  return process.env.NEXT_PUBLIC_VERCEL_TARGET_ENV || process.env.NEXT_PUBLIC_VERCEL_ENV || void 0;
+}
+
+exports.getClientVercelEnv = getClientVercelEnv;
+//# sourceMappingURL=getVercelEnv.js.map

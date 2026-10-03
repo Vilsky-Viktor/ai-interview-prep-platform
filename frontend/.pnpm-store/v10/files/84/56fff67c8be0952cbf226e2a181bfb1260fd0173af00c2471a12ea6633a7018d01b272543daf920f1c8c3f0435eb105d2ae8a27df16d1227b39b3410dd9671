@@ -1,0 +1,61 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const core = require('@sentry/core');
+const spanAttributesWithLogicAttached = require('../span-attributes-with-logic-attached.js');
+const responseEnd = require('../utils/responseEnd.js');
+
+function wrapApiHandlerWithSentry(apiHandler, parameterizedRoute) {
+  return new Proxy(apiHandler, {
+    apply: async (wrappingTarget, thisArg, args) => {
+      const [req, res] = args;
+      if (!req) {
+        core.debug.log(
+          `Wrapped API handler on route "${parameterizedRoute}" was not passed a request object. Will not instrument.`
+        );
+        return wrappingTarget.apply(thisArg, args);
+      } else if (!res) {
+        core.debug.log(
+          `Wrapped API handler on route "${parameterizedRoute}" was not passed a response object. Will not instrument.`
+        );
+        return wrappingTarget.apply(thisArg, args);
+      }
+      if (req.__withSentry_applied__) {
+        return wrappingTarget.apply(thisArg, args);
+      }
+      req.__withSentry_applied__ = true;
+      return core.withIsolationScope(async (isolationScope) => {
+        const reqMethod = `${(req.method || "GET").toUpperCase()} `;
+        isolationScope.setSDKProcessingMetadata({ normalizedRequest: core.httpRequestToRequestData(req) });
+        isolationScope.setTransactionName(`${reqMethod}${parameterizedRoute}`);
+        const activeSpan = core.getActiveSpan();
+        const rootSpan = activeSpan ? core.getRootSpan(activeSpan) : void 0;
+        if (rootSpan) {
+          core.setCapturedScopesOnSpan(rootSpan, core.getCurrentScope(), isolationScope);
+          rootSpan.setAttribute(spanAttributesWithLogicAttached.TRANSACTION_ATTR_SENTRY_ROUTE_BACKFILL, parameterizedRoute);
+        }
+        try {
+          const result = await wrappingTarget.apply(thisArg, args);
+          responseEnd.waitUntil(responseEnd.flushSafelyWithTimeout());
+          return result;
+        } catch (e) {
+          const objectifiedErr = core.objectify(e);
+          core.captureException(objectifiedErr, {
+            mechanism: {
+              type: "auto.http.nextjs.api_handler",
+              handled: false,
+              data: {
+                wrapped_handler: wrappingTarget.name,
+                function: "withSentry"
+              }
+            }
+          });
+          await responseEnd.flushSafelyWithTimeout();
+          throw objectifiedErr;
+        }
+      });
+    }
+  });
+}
+
+exports.wrapApiHandlerWithSentry = wrapApiHandlerWithSentry;
+//# sourceMappingURL=wrapApiHandlerWithSentry.js.map

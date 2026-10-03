@@ -1,0 +1,12 @@
+import type { HandlerDataDom } from '@sentry/browser-utils';
+import type { Breadcrumb } from '@sentry/core';
+import type { ReplayContainer } from '../types';
+export declare const handleDomListener: (replay: ReplayContainer) => (handlerData: HandlerDataDom) => void;
+/** Get the base DOM breadcrumb. */
+export declare function getBaseDomBreadcrumb(target: Node | null, message: string): Breadcrumb;
+/**
+ * An event handler to react to DOM events.
+ * Exported for tests.
+ */
+export declare function handleDom(handlerData: HandlerDataDom): Breadcrumb | null;
+//# sourceMappingURL=handleDom.d.ts.map

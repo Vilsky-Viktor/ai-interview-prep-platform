@@ -1,0 +1,149 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const core = require('@sentry/core');
+const fs = require('fs');
+const module$1 = require('module');
+const path = require('path');
+
+function getNextjsVersion() {
+  const nextjsPackageJsonPath = resolveNextjsPackageJson();
+  if (nextjsPackageJsonPath) {
+    try {
+      const nextjsPackageJson = JSON.parse(
+        fs.readFileSync(nextjsPackageJsonPath, { encoding: "utf-8" })
+      );
+      return nextjsPackageJson.version;
+    } catch {
+    }
+  }
+  return void 0;
+}
+let sdkRequire;
+sdkRequire = module$1.createRequire(__filename);
+function resolveNextjsPackageJson() {
+  for (const nodeRequire of [module$1.createRequire(`${process.cwd()}/`), sdkRequire]) {
+    try {
+      return nodeRequire.resolve("next/package.json");
+    } catch {
+    }
+  }
+  return void 0;
+}
+function supportsProductionCompileHook(version) {
+  const versionToCheck = version;
+  if (!versionToCheck) {
+    return false;
+  }
+  const { major, minor, patch } = core.parseSemver(versionToCheck);
+  if (major === void 0 || minor === void 0 || patch === void 0) {
+    return false;
+  }
+  if (major > 15) {
+    return true;
+  }
+  if (major === 15) {
+    if (minor > 4) {
+      return true;
+    }
+    if (minor === 4 && patch >= 1) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+}
+function supportsTurbopackRuleCondition(version) {
+  if (!version) {
+    return false;
+  }
+  const { major } = core.parseSemver(version);
+  if (major === void 0) {
+    return false;
+  }
+  return major >= 16;
+}
+function supportsNativeDebugIds(version) {
+  if (!version) {
+    return false;
+  }
+  const { major, minor, prerelease } = core.parseSemver(version);
+  if (major === void 0 || minor === void 0) {
+    return false;
+  }
+  if (major >= 16) {
+    return true;
+  }
+  if (major === 15 && prerelease?.startsWith("canary.")) {
+    if (minor > 6) {
+      return true;
+    }
+    if (minor === 6) {
+      const canaryNumber = parseInt(prerelease.split(".")[1] || "0", 10);
+      if (canaryNumber >= 36) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+function requiresInstrumentationHook(version) {
+  if (!version) {
+    return true;
+  }
+  const { major, minor, patch, prerelease } = core.parseSemver(version);
+  if (major === void 0 || minor === void 0 || patch === void 0) {
+    return true;
+  }
+  if (major >= 16) {
+    return false;
+  }
+  if (major < 15) {
+    return true;
+  }
+  if (!prerelease) {
+    return false;
+  }
+  if (minor > 0 || patch > 0) {
+    return false;
+  }
+  if (prerelease.startsWith("rc.")) {
+    const rcNumber = parseInt(prerelease.split(".")[1] || "0", 10);
+    return rcNumber === 0;
+  }
+  if (prerelease.startsWith("canary.")) {
+    const canaryNumber = parseInt(prerelease.split(".")[1] || "0", 10);
+    return canaryNumber < 124;
+  }
+  return true;
+}
+function detectActiveBundler() {
+  const turbopackEnv = process.env.TURBOPACK;
+  const isTurbopackEnabled = turbopackEnv && turbopackEnv !== "false" && turbopackEnv !== "0";
+  if (isTurbopackEnabled || process.argv.includes("--turbo")) {
+    return "turbopack";
+  } else {
+    return "webpack";
+  }
+}
+function getPackageModules(projectDir) {
+  try {
+    const packageJson = path.join(projectDir, "package.json");
+    const packageJsonContent = fs.readFileSync(packageJson, "utf8");
+    const packageJsonObject = JSON.parse(packageJsonContent);
+    return {
+      ...packageJsonObject.dependencies,
+      ...packageJsonObject.devDependencies
+    };
+  } catch {
+    return {};
+  }
+}
+
+exports.detectActiveBundler = detectActiveBundler;
+exports.getNextjsVersion = getNextjsVersion;
+exports.getPackageModules = getPackageModules;
+exports.requiresInstrumentationHook = requiresInstrumentationHook;
+exports.supportsNativeDebugIds = supportsNativeDebugIds;
+exports.supportsProductionCompileHook = supportsProductionCompileHook;
+exports.supportsTurbopackRuleCondition = supportsTurbopackRuleCondition;
+//# sourceMappingURL=util.js.map

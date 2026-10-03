@@ -48,7 +48,7 @@ def test_errors_come_in_the_interface_language():
 
 def test_english_and_unknown_languages_keep_the_message():
     assert client.get("/limited").json() == {"detail": RATE_LIMITED}
-    assert client.get("/limited", headers={"Accept-Language": "de-DE"}).json() == {
+    assert client.get("/limited", headers={"Accept-Language": "sv-SE"}).json() == {
         "detail": RATE_LIMITED
     }
 
@@ -71,3 +71,19 @@ def test_every_translation_language_is_offered():
     from prepza_common.translations import TRANSLATIONS
 
     assert set(TRANSLATIONS) <= set(LANGUAGES)
+
+
+def test_every_language_translates_every_message():
+    from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGES
+    from prepza_common.translations import TRANSLATIONS
+
+    english = set(TRANSLATIONS["ru"])
+
+    assert set(TRANSLATIONS) == set(LANGUAGES) - {DEFAULT_LANGUAGE}
+    assert all(set(messages) == english for messages in TRANSLATIONS.values())
+
+
+def test_a_three_letter_language_with_a_region_is_read_whole():
+    response = client.get("/limited", headers={"Accept-Language": "fil-PH,fil;q=0.9"})
+
+    assert response.json() == {"detail": "Masyadong maraming request. Subukang muli mamaya."}

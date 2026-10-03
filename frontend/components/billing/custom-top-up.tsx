@@ -64,7 +64,7 @@ export function CustomTopUp({
     <div className="flex flex-wrap items-center gap-4 rounded-2xl border p-5">
       <p className="font-medium">{t("customAmount")}</p>
       <div className="relative w-28 rounded-full border border-transparent transition-colors focus-within:border-ring">
-        <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-lg text-muted-foreground">
+        <span className="pointer-events-none absolute start-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">
           $
         </span>
         <Input
@@ -73,7 +73,7 @@ export function CustomTopUp({
           value={dollars}
           placeholder="20"
           aria-label={t("customAmount")}
-          className="h-10 border-0 pl-8 text-lg tabular-nums focus-visible:ring-0 md:text-lg"
+          className="h-10 border-0 ps-8 text-lg tabular-nums focus-visible:ring-0 md:text-lg"
           onChange={(event) => change(event.target.value)}
           onBlur={lift}
         />
@@ -94,7 +94,7 @@ export function CustomTopUp({
         quantity={amount}
         companyId={companyId}
         disabled={!quote}
-        className="ml-auto h-10 px-5"
+        className="ms-auto h-10 px-5"
       />
     </div>
   )

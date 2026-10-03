@@ -1,0 +1,230 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const attributes = require('@sentry/conventions/attributes');
+const core = require('@sentry/core');
+const node = require('@sentry/node');
+const debugBuild = require('../common/debug-build.js');
+const devErrorSymbolicationEventProcessor = require('../common/devErrorSymbolicationEventProcessor.js');
+const nextNavigationErrorUtils = require('../common/nextNavigationErrorUtils.js');
+const spanAttributesWithLogicAttached = require('../common/span-attributes-with-logic-attached.js');
+const isBuild = require('../common/utils/isBuild.js');
+const responseEnd = require('../common/utils/responseEnd.js');
+const setUrlProcessingMetadata = require('../common/utils/setUrlProcessingMetadata.js');
+const distDirRewriteFramesIntegration = require('./distDirRewriteFramesIntegration.js');
+const enhanceMiddlewareRootSpan = require('../common/enhanceMiddlewareRootSpan.js');
+const backfillHttpServerStatus = require('../common/utils/backfillHttpServerStatus.js');
+const liveRootSpanAdapter = require('../common/utils/liveRootSpanAdapter.js');
+const enhanceHandleRequestRootSpan = require('./enhanceHandleRequestRootSpan.js');
+const handleOnSpanStart = require('./handleOnSpanStart.js');
+const prepareSafeIdGeneratorContext = require('./prepareSafeIdGeneratorContext.js');
+const useCacheInstrumentation = require('./useCacheInstrumentation.js');
+const vercelCronsMonitoring = require('./vercelCronsMonitoring.js');
+const vercelQueuesMonitoring = require('./vercelQueuesMonitoring.js');
+const _error = require('../common/pages-router-instrumentation/_error.js');
+const nextSpan = require('../common/utils/nextSpan.js');
+const wrapGetStaticPropsWithSentry = require('../common/pages-router-instrumentation/wrapGetStaticPropsWithSentry.js');
+const wrapGetInitialPropsWithSentry = require('../common/pages-router-instrumentation/wrapGetInitialPropsWithSentry.js');
+const wrapAppGetInitialPropsWithSentry = require('../common/pages-router-instrumentation/wrapAppGetInitialPropsWithSentry.js');
+const wrapDocumentGetInitialPropsWithSentry = require('../common/pages-router-instrumentation/wrapDocumentGetInitialPropsWithSentry.js');
+const wrapErrorGetInitialPropsWithSentry = require('../common/pages-router-instrumentation/wrapErrorGetInitialPropsWithSentry.js');
+const wrapGetServerSidePropsWithSentry = require('../common/pages-router-instrumentation/wrapGetServerSidePropsWithSentry.js');
+const wrapServerComponentWithSentry = require('../common/wrapServerComponentWithSentry.js');
+const wrapRouteHandlerWithSentry = require('../common/wrapRouteHandlerWithSentry.js');
+const wrapApiHandlerWithSentryVercelCrons = require('../common/pages-router-instrumentation/wrapApiHandlerWithSentryVercelCrons.js');
+const wrapMiddlewareWithSentry = require('../common/wrapMiddlewareWithSentry.js');
+const wrapPageComponentWithSentry = require('../common/pages-router-instrumentation/wrapPageComponentWithSentry.js');
+const wrapGenerationFunctionWithSentry = require('../common/wrapGenerationFunctionWithSentry.js');
+const withServerActionInstrumentation = require('../common/withServerActionInstrumentation.js');
+const captureRequestError = require('../common/captureRequestError.js');
+const wrapApiHandlerWithSentry = require('../common/pages-router-instrumentation/wrapApiHandlerWithSentry.js');
+
+const globalWithInjectedValues = core.GLOBAL_OBJ;
+prepareSafeIdGeneratorContext.prepareSafeIdGeneratorContext();
+const ErrorBoundary = (props) => {
+  if (!props.children) {
+    return null;
+  }
+  if (typeof props.children === "function") {
+    return props.children();
+  }
+  return props.children;
+};
+function createReduxEnhancer() {
+  return (createStore) => createStore;
+}
+function withErrorBoundary(WrappedComponent) {
+  return WrappedComponent;
+}
+function showReportDialog() {
+  return;
+}
+function getCloudflareRuntimeConfig() {
+  if (responseEnd.isCloudflareWaitUntilAvailable()) {
+    return { runtime: { name: "cloudflare" } };
+  }
+  return void 0;
+}
+function init(options) {
+  prepareSafeIdGeneratorContext.prepareSafeIdGeneratorContext();
+  if (isBuild.isBuild()) {
+    return;
+  }
+  if (!debugBuild.DEBUG_BUILD && options.debug) {
+    console.warn(
+      "[@sentry/nextjs] You have enabled `debug: true`, but Sentry debug logging was removed from your bundle (likely via `webpack.treeshake.removeDebugLogging: true`). Set that option to `false` to see Sentry debug output."
+    );
+  }
+  const customDefaultIntegrations = node.getDefaultIntegrations(options).filter((integration) => integration.name !== "Http").concat(
+    // We are using the HTTP integration without instrumenting incoming HTTP requests because Next.js does that by itself.
+    node.httpIntegration({
+      disableIncomingRequestSpans: true
+    })
+  );
+  if (options.enableOpenTelemetrySetup ?? true) {
+    process.env.NEXT_OTEL_FETCH_DISABLED = "1";
+  }
+  const distDirName = process.env._sentryRewriteFramesDistDir || globalWithInjectedValues._sentryRewriteFramesDistDir;
+  if (distDirName) {
+    customDefaultIntegrations.push(distDirRewriteFramesIntegration.distDirRewriteFramesIntegration({ distDirName }));
+  }
+  customDefaultIntegrations.push(useCacheInstrumentation.nextjsUseCacheIntegration());
+  const cloudflareConfig = getCloudflareRuntimeConfig();
+  const opts = {
+    environment: options.environment || process.env.SENTRY_ENVIRONMENT || core.getVercelEnv() || process.env.NODE_ENV,
+    release: process.env._sentryRelease || globalWithInjectedValues._sentryRelease,
+    defaultIntegrations: customDefaultIntegrations,
+    // Next.js emits its own OpenTelemetry spans, so it defaults to registering the Sentry tracer
+    // provider (unlike most Node-based SDKs). A user-provided value still overrides this via `...options`.
+    enableOpenTelemetrySetup: true,
+    ...options,
+    // Override runtime to 'cloudflare' when running on OpenNext/Cloudflare
+    ...cloudflareConfig
+  };
+  const nextjsIgnoreSpans = [
+    // Static assets (matches `_next/static` anywhere in the name to handle custom basePath)
+    /^GET (\/.*)?\/_next\/static\//,
+    // Dev source-map fetch endpoints
+    /\/__nextjs_original-stack-frame/,
+    // Pages router /404
+    /^\/404$/,
+    // App router /404 and /_not-found segments (any HTTP method)
+    /^(GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH) \/(404|_not-found)$/,
+    // Root transactions named "NextServer.getRequestHandler" containing useless tracing
+    /^NextServer\.getRequestHandler$/,
+    // Spans flagged via TRANSACTION_ATTR_SHOULD_DROP_TRANSACTION
+    // (set in `dropMiddlewareTunnelRequests` during `spanStart`)
+    { attributes: { [spanAttributesWithLogicAttached.TRANSACTION_ATTR_SHOULD_DROP_TRANSACTION]: true } }
+  ];
+  opts.ignoreSpans = [...opts.ignoreSpans || [], ...nextjsIgnoreSpans];
+  if (debugBuild.DEBUG_BUILD && opts.debug) {
+    core.debug.enable();
+  }
+  debugBuild.DEBUG_BUILD && core.debug.log("Initializing SDK...");
+  if (sdkAlreadyInitialized()) {
+    debugBuild.DEBUG_BUILD && core.debug.log("SDK already initialized");
+    return;
+  }
+  core.applySdkMetadata(opts, "nextjs", ["nextjs", cloudflareConfig ? "cloudflare" : "node"]);
+  const client = node.init(opts);
+  client?.on("beforeSampling", ({ spanAttributes }, samplingDecision) => {
+    if (
+      // eslint-disable-next-line typescript/no-deprecated
+      typeof spanAttributes[attributes.HTTP_TARGET] === "string" && // eslint-disable-next-line typescript/no-deprecated
+      spanAttributes[attributes.HTTP_TARGET].includes("sentry_key") && // eslint-disable-next-line typescript/no-deprecated
+      spanAttributes[attributes.HTTP_TARGET].includes("sentry_client") || typeof spanAttributes[attributes.URL_QUERY] === "string" && spanAttributes[attributes.URL_QUERY].includes("sentry_key") && spanAttributes[attributes.URL_QUERY].includes("sentry_client")
+    ) {
+      samplingDecision.decision = false;
+    }
+  });
+  client?.on("spanStart", (span) => handleOnSpanStart.handleOnSpanStart(span, client));
+  client?.on("spanEnd", (span) => {
+    if (span !== core.getRootSpan(span)) {
+      return;
+    }
+    const mutableRootSpan = liveRootSpanAdapter.createLiveRootSpanAdapter(span);
+    enhanceHandleRequestRootSpan.enhanceHandleRequestRootSpan(mutableRootSpan);
+    enhanceMiddlewareRootSpan.enhanceMiddlewareRootSpan(mutableRootSpan);
+    backfillHttpServerStatus.backfillHttpServerStatus(span);
+  });
+  client?.on("spanEnd", vercelCronsMonitoring.maybeCompleteCronCheckIn);
+  client?.on("spanEnd", vercelQueuesMonitoring.maybeCleanupQueueSpan);
+  core.getGlobalScope().addEventProcessor(
+    Object.assign(
+      ((event, hint) => {
+        if (event.type !== void 0) {
+          return event;
+        }
+        const originalException = hint.originalException;
+        const isPostponeError = typeof originalException === "object" && originalException !== null && "$$typeof" in originalException && originalException.$$typeof === /* @__PURE__ */ Symbol.for("react.postpone");
+        if (isPostponeError) {
+          return null;
+        }
+        if (nextNavigationErrorUtils.isPrerenderControlFlowError(originalException)) {
+          return null;
+        }
+        const exceptionMessage = event.exception?.values?.[0]?.value;
+        if (exceptionMessage?.includes("Suspense Exception: This is not a real error!") || exceptionMessage?.includes("Suspense Exception: This is not a real error, and should not leak")) {
+          return null;
+        }
+        return event;
+      }),
+      { id: "DropReactControlFlowErrors" }
+    )
+  );
+  client?.on("preprocessEvent", (event) => {
+    setUrlProcessingMetadata.setUrlProcessingMetadata(event);
+  });
+  if (process.env.NODE_ENV === "development") {
+    core.getGlobalScope().addEventProcessor(devErrorSymbolicationEventProcessor.devErrorSymbolicationEventProcessor);
+  }
+  try {
+    if (process.turbopack) {
+      core.getGlobalScope().setTag("turbopack", true);
+      core.getGlobalScope().setAttribute("turbopack", true);
+    }
+  } catch {
+  }
+  debugBuild.DEBUG_BUILD && core.debug.log("SDK successfully initialized");
+  return client;
+}
+function sdkAlreadyInitialized() {
+  return !!core.getClient();
+}
+
+exports.pinoIntegration = node.pinoIntegration;
+exports.vercelAIIntegration = node.vercelAIIntegration;
+exports.captureUnderscoreErrorException = _error.captureUnderscoreErrorException;
+exports.startInactiveSpan = nextSpan.startInactiveSpan;
+exports.startSpan = nextSpan.startSpan;
+exports.startSpanManual = nextSpan.startSpanManual;
+exports.wrapGetStaticPropsWithSentry = wrapGetStaticPropsWithSentry.wrapGetStaticPropsWithSentry;
+exports.wrapGetInitialPropsWithSentry = wrapGetInitialPropsWithSentry.wrapGetInitialPropsWithSentry;
+exports.wrapAppGetInitialPropsWithSentry = wrapAppGetInitialPropsWithSentry.wrapAppGetInitialPropsWithSentry;
+exports.wrapDocumentGetInitialPropsWithSentry = wrapDocumentGetInitialPropsWithSentry.wrapDocumentGetInitialPropsWithSentry;
+exports.wrapErrorGetInitialPropsWithSentry = wrapErrorGetInitialPropsWithSentry.wrapErrorGetInitialPropsWithSentry;
+exports.wrapGetServerSidePropsWithSentry = wrapGetServerSidePropsWithSentry.wrapGetServerSidePropsWithSentry;
+exports.wrapServerComponentWithSentry = wrapServerComponentWithSentry.wrapServerComponentWithSentry;
+exports.wrapRouteHandlerWithSentry = wrapRouteHandlerWithSentry.wrapRouteHandlerWithSentry;
+exports.wrapApiHandlerWithSentryVercelCrons = wrapApiHandlerWithSentryVercelCrons.wrapApiHandlerWithSentryVercelCrons;
+exports.wrapMiddlewareWithSentry = wrapMiddlewareWithSentry.wrapMiddlewareWithSentry;
+exports.wrapPageComponentWithSentry = wrapPageComponentWithSentry.wrapPageComponentWithSentry;
+exports.wrapGenerationFunctionWithSentry = wrapGenerationFunctionWithSentry.wrapGenerationFunctionWithSentry;
+exports.withServerActionInstrumentation = withServerActionInstrumentation.withServerActionInstrumentation;
+exports.captureRequestError = captureRequestError.captureRequestError;
+exports.wrapApiHandlerWithSentry = wrapApiHandlerWithSentry.wrapApiHandlerWithSentry;
+exports.ErrorBoundary = ErrorBoundary;
+exports.createReduxEnhancer = createReduxEnhancer;
+exports.init = init;
+exports.showReportDialog = showReportDialog;
+exports.withErrorBoundary = withErrorBoundary;
+Object.prototype.hasOwnProperty.call(node, '__proto__') &&
+  !Object.prototype.hasOwnProperty.call(exports, '__proto__') &&
+  Object.defineProperty(exports, '__proto__', {
+    enumerable: true,
+    value: node['__proto__']
+  });
+
+Object.keys(node).forEach(k => {
+  if (k !== 'default' && !Object.prototype.hasOwnProperty.call(exports, k)) exports[k] = node[k];
+});
+//# sourceMappingURL=index.js.map

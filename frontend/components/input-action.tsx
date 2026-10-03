@@ -24,8 +24,8 @@ export function InputAction({
       <Input
         className={
           icon
-            ? "h-16 border-0 px-6 pr-20 text-lg focus-visible:ring-0 md:text-lg"
-            : "h-12 px-4 pr-32"
+            ? "h-16 border-0 px-6 pe-20 text-lg focus-visible:ring-0 md:text-lg"
+            : "h-12 px-4 pe-32"
         }
         {...props}
       />
@@ -35,8 +35,8 @@ export function InputAction({
         size={icon ? "icon" : "default"}
         className={
           icon
-            ? "absolute top-3 right-3 size-10 rounded-full"
-            : "absolute top-2 right-2"
+            ? "absolute end-3 top-3 size-10 rounded-full"
+            : "absolute end-2 top-2"
         }
         aria-label={icon ? action : undefined}
       >

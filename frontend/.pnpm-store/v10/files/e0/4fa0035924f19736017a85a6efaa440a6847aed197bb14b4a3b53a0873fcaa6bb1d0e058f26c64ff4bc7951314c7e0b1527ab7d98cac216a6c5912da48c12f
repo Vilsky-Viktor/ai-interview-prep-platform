@@ -1,0 +1,51 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const attributes = require('@sentry/conventions/attributes');
+const op = require('@sentry/conventions/op');
+const core = require('@sentry/core');
+const nextSpanAttributes = require('../common/nextSpanAttributes.js');
+const spanAttributesWithLogicAttached = require('../common/span-attributes-with-logic-attached.js');
+const backfillHttpResponseStatusCode = require('../common/utils/backfillHttpResponseStatusCode.js');
+
+function enhanceHandleRequestRootSpan(span) {
+  const { attributes: attributes$1 } = span;
+  if (attributes$1[nextSpanAttributes.ATTR_NEXT_SPAN_TYPE] !== "BaseServer.handleRequest") {
+    return;
+  }
+  attributes$1[attributes.SENTRY_OP] = op.HTTP_SERVER;
+  span.setOp(op.HTTP_SERVER);
+  backfillHttpResponseStatusCode.backfillHttpResponseStatusCode(attributes$1);
+  const currentName = span.getName();
+  if (currentName) {
+    span.setName(core.stripUrlQueryAndFragment(currentName));
+  }
+  const method = attributes$1[attributes.HTTP_REQUEST_METHOD] ?? attributes$1[attributes.HTTP_METHOD];
+  const target = attributes$1[attributes.URL_PATH] ?? attributes$1[attributes.HTTP_TARGET];
+  const route = attributes$1[attributes.HTTP_ROUTE] || attributes$1[nextSpanAttributes.ATTR_NEXT_ROUTE];
+  const spanName = attributes$1[nextSpanAttributes.ATTR_NEXT_SPAN_NAME];
+  if (typeof method === "string" && typeof route === "string" && !route.startsWith("middleware")) {
+    const cleanRoute = route.replace(/\/route$/, "");
+    span.setName(`${method} ${cleanRoute}`);
+    attributes$1[attributes.SENTRY_SEGMENT_NAME_SOURCE] = "route";
+    attributes$1[attributes.HTTP_ROUTE] = cleanRoute;
+    attributes$1[nextSpanAttributes.ATTR_NEXT_ROUTE] = cleanRoute;
+  }
+  const routeBackfill = attributes$1[spanAttributesWithLogicAttached.TRANSACTION_ATTR_SENTRY_ROUTE_BACKFILL];
+  if (typeof routeBackfill === "string" && span.getName() !== "GET /_app") {
+    span.setName(`${typeof method === "string" ? method : "GET"} ${routeBackfill}`);
+    attributes$1[attributes.SENTRY_SEGMENT_NAME_SOURCE] = "route";
+    attributes$1[attributes.HTTP_ROUTE] = attributes$1[attributes.HTTP_ROUTE] ?? routeBackfill;
+  }
+  const middlewareMatch = typeof spanName === "string" && spanName.match(/^middleware (GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS)/);
+  if (middlewareMatch) {
+    span.setName(`middleware ${middlewareMatch[1]}`);
+    span.setOp(op.MIDDLEWARE);
+    attributes$1[attributes.SENTRY_SEGMENT_NAME_SOURCE] = "route";
+  }
+  if (span.getName() === "GET /_error" && typeof target === "string") {
+    span.setName(`${typeof method === "string" ? `${method} ` : ""}${target}`);
+  }
+}
+
+exports.enhanceHandleRequestRootSpan = enhanceHandleRequestRootSpan;
+//# sourceMappingURL=enhanceHandleRequestRootSpan.js.map

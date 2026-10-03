@@ -4,7 +4,7 @@ import json
 
 import httpx
 import pytest
-from prepza_common.constants import CONTENT_LANGUAGES
+from prepza_common.constants import LANGUAGES
 
 from app.config.settings import settings
 from app.helpers.emails import candidate_invite_email, share_invite_email
@@ -181,7 +181,7 @@ def test_an_arabic_invite_reads_right_to_left():
     assert email.subject == "تلقيت دعوة من Acme إلى مقابلة"
 
 
-@pytest.mark.parametrize("language", sorted(CONTENT_LANGUAGES))
+@pytest.mark.parametrize("language", sorted(LANGUAGES))
 def test_every_content_language_has_both_emails(language):
     share = share_invite_email({**DATA, "language": language}, "http://localhost:8090")
     invite = candidate_invite_email({**DATA, "company": "Acme", "language": language}, "")

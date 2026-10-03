@@ -1,0 +1,6 @@
+const TRANSACTION_ATTR_SHOULD_DROP_TRANSACTION = "sentry.drop_transaction";
+const TRANSACTION_ATTR_SENTRY_ROUTE_BACKFILL = "sentry.route_backfill";
+const ATTR_NEXT_PAGES_API_ROUTE_TYPE = "executing api route (pages)";
+
+export { ATTR_NEXT_PAGES_API_ROUTE_TYPE, TRANSACTION_ATTR_SENTRY_ROUTE_BACKFILL, TRANSACTION_ATTR_SHOULD_DROP_TRANSACTION };
+//# sourceMappingURL=span-attributes-with-logic-attached.js.map

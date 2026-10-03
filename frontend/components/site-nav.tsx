@@ -18,7 +18,7 @@ export function SiteNav() {
     // globals.css finds it by data-slot to add the blue dots; the label is translated.
     <nav
       data-slot="main-nav"
-      className="-ml-1.5 flex h-8 items-center sm:-ml-2.5"
+      className="-ms-1.5 flex h-8 items-center sm:-ms-2.5"
       aria-label={t("main")}
     >
       {NAV_LINKS.map((link) => {

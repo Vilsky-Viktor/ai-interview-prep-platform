@@ -1,0 +1,23 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const attributes = require('@sentry/conventions/attributes');
+const core = require('@sentry/core');
+
+function createLiveRootSpanAdapter(span) {
+  const attributes$1 = core.spanToStaticSpanJSON(span).data;
+  return {
+    attributes: attributes$1,
+    getName: () => core.spanToStaticSpanJSON(span).description,
+    setName: (name) => {
+      const source = attributes$1[attributes.SENTRY_SEGMENT_NAME_SOURCE];
+      span.updateName(name);
+      span.setAttribute(attributes.SENTRY_SEGMENT_NAME_SOURCE, source);
+    },
+    setOp: (op) => {
+      span.setAttribute(core.SEMANTIC_ATTRIBUTE_SENTRY_OP, op);
+    }
+  };
+}
+
+exports.createLiveRootSpanAdapter = createLiveRootSpanAdapter;
+//# sourceMappingURL=liveRootSpanAdapter.js.map

@@ -1,0 +1,43 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const core = require('@sentry/core');
+const responseEnd = require('../common/utils/responseEnd.js');
+
+function wrapApiHandlerWithSentry(handler, parameterizedRoute) {
+  return new Proxy(handler, {
+    apply: async (wrappingTarget, thisArg, args) => {
+      return core.withIsolationScope(async (isolationScope) => {
+        const req = args[0];
+        if (req instanceof Request) {
+          const method = req.method || "GET";
+          isolationScope.setTransactionName(`${method} ${parameterizedRoute}`);
+          isolationScope.setSDKProcessingMetadata({
+            normalizedRequest: core.winterCGRequestToRequestData(req)
+          });
+        } else {
+          isolationScope.setTransactionName(`handler (${parameterizedRoute})`);
+        }
+        const activeSpan = core.getActiveSpan();
+        const rootSpan = activeSpan ? core.getRootSpan(activeSpan) : void 0;
+        if (rootSpan) {
+          core.setCapturedScopesOnSpan(rootSpan, core.getCurrentScope(), isolationScope);
+        }
+        try {
+          return await wrappingTarget.apply(thisArg, args);
+        } catch (error) {
+          core.captureException(error, {
+            mechanism: {
+              type: "auto.function.nextjs.wrap_api_handler",
+              handled: false
+            }
+          });
+          await responseEnd.flushSafelyWithTimeout();
+          throw error;
+        }
+      });
+    }
+  });
+}
+
+exports.wrapApiHandlerWithSentry = wrapApiHandlerWithSentry;
+//# sourceMappingURL=wrapApiHandlerWithSentry.js.map

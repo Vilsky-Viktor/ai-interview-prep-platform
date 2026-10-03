@@ -1,0 +1,15 @@
+import { feedbackAsyncIntegration } from './feedbackAsync';
+export * from './index.bundle.base';
+export { getActiveSpan, getRootSpan, getSpanDescendants, setMeasurement, startNewTrace, withActiveSpan, logger, consoleLoggingIntegration, metrics, spanStreamingIntegration, } from '@sentry/core';
+export { startSpan, startInactiveSpan, startSpanManual } from '@sentry/core/browser';
+export { browserTracingIntegration, startBrowserTracingNavigationSpan, startBrowserTracingPageLoadSpan, } from './tracing/browserTracingIntegration';
+export { isBotUserAgent } from '@sentry/browser-utils';
+export { elementTimingIntegration } from '@sentry/browser-utils';
+export { reportPageLoaded } from './tracing/reportPageLoaded';
+export { setActiveSpanInBrowser } from './tracing/setActiveSpan';
+export { fetchStreamPerformanceIntegration } from './integrations/fetchStreamPerformance';
+export { webVitalsIntegration } from './integrations/webVitals';
+export { getFeedback, sendFeedback } from '@sentry/feedback';
+export { feedbackAsyncIntegration as feedbackAsyncIntegration, feedbackAsyncIntegration as feedbackIntegration };
+export { replayIntegration, getReplay } from '@sentry/replay';
+//# sourceMappingURL=index.bundle.tracing.replay.feedback.logs.metrics.d.ts.map

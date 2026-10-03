@@ -1,0 +1,1 @@
+{"version":3,"file":"functions.d.ts","sourceRoot":"","sources":["../../../../src/integrations/firebase/functions.ts"],"names":[],"mappings":"AA4BA,UAAU,uBAAuB;IAI/B,SAAS,EAAE,OAAO,EAAE,CAAC;IACrB,IAAI,CAAC,EAAE,OAAO,CAAC;CAChB;AAED;;;;;;;GAOG;AACH,wBAAgB,yBAAyB,CAAC,IAAI,EAAE,uBAAuB,EAAE,WAAW,EAAE,MAAM,GAAG,IAAI,CAclG"}

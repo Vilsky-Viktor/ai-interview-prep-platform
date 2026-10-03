@@ -5,7 +5,7 @@ import { onIdTokenChanged } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { createContext, useContext, useEffect, useState } from "react"
 
-import { DEFAULT_LOCALE } from "@/constants/i18n"
+import { apiFetch } from "@/lib/api"
 import { writeTokenCookie } from "@/lib/auth"
 import { auth } from "@/lib/firebase"
 import { isLocale, readLocaleCookie, writeLocaleCookie } from "@/lib/locale"
@@ -24,10 +24,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // The interface follows the account's language, also on a new device.
       if (user) {
         const { claims } = await user.getIdTokenResult()
-        const language = String(claims.language ?? DEFAULT_LOCALE)
+        const language = String(claims.language ?? "")
 
         if (isLocale(language) && language !== readLocaleCookie()) {
           writeLocaleCookie(language)
+        }
+
+        // A new account keeps the language it signed up in, for the interface and its emails.
+        // The refreshed token carries it, and this runs again with it.
+        if (!claims.language && isLocale(document.documentElement.lang)) {
+          await apiFetch("/library/me/settings", {
+            method: "PUT",
+            body: JSON.stringify({ language: document.documentElement.lang }),
+          })
+            .then(() => user.getIdToken(true))
+            .catch(() => {})
         }
       }
 

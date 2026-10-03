@@ -39,7 +39,7 @@ function PillSelect({
         <select
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          className="h-14 w-full appearance-none rounded-full border-0 bg-transparent px-6 pr-16 text-lg outline-none dark:bg-input/30"
+          className="h-14 w-full appearance-none rounded-full border-0 bg-transparent px-6 pe-16 text-lg outline-none dark:bg-input/30"
         >
           {options.map((option) => (
             <option key={option.value} value={option.value}>
@@ -49,7 +49,7 @@ function PillSelect({
         </select>
         <ChevronDownIcon
           aria-hidden
-          className="pointer-events-none absolute top-1/2 right-6 size-6 -translate-y-1/2 text-muted-foreground"
+          className="pointer-events-none absolute end-6 top-1/2 size-6 -translate-y-1/2 text-muted-foreground"
         />
       </span>
     </label>
@@ -174,7 +174,7 @@ export function AutoTopUpSetting({
         render={
           <button
             type="button"
-            className="text-left text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+            className="text-start text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
           />
         }
       >

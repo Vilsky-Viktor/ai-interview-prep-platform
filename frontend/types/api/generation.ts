@@ -96,6 +96,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/languages": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Languages
+     * @description The languages kits and interviews can be generated in, for the "generate in" choice.
+     */
+    get: operations["list_languages_languages_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/generations": {
     parameters: {
       query?: never
@@ -336,6 +356,25 @@ export interface components {
       kind: components["schemas"]["GenerationKind"]
       /** Company Id */
       company_id?: string | null
+      /** Generate In */
+      generate_in?:
+        | (
+            | "en"
+            | "ru"
+            | "uk"
+            | "es"
+            | "pt"
+            | "de"
+            | "fr"
+            | "it"
+            | "pl"
+            | "nl"
+            | "tr"
+            | "ar"
+            | "he"
+            | "fa"
+          )
+        | null
     }
     /**
      * GenerationKind
@@ -426,6 +465,25 @@ export interface components {
        * @enum {string}
        */
       language: "en" | "ru"
+      /** Generate In */
+      generate_in?:
+        | (
+            | "en"
+            | "ru"
+            | "uk"
+            | "es"
+            | "pt"
+            | "de"
+            | "fr"
+            | "it"
+            | "pl"
+            | "nl"
+            | "tr"
+            | "ar"
+            | "he"
+            | "fa"
+          )
+        | null
     }
     /**
      * QualityFlag
@@ -686,6 +744,26 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_languages_languages_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": string[]
         }
       }
     }

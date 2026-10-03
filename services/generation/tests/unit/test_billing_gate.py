@@ -4,6 +4,7 @@ import uuid
 import pytest
 from fastapi import HTTPException
 from prepza_common.auth import current_user
+from prepza_common.constants import LANGUAGES
 from prepza_common.user import User
 
 from app.config.settings import settings
@@ -176,3 +177,47 @@ def test_a_billing_hiccup_doesnt_fail_a_finished_kit(monkeypatch):
     asyncio.run(pipeline.charge_finished_kit(kit))
 
     assert calls == [kit, kit]
+
+
+def test_a_chosen_language_wins_over_the_texts_own(client, queue, monkeypatch):
+    async def hold(user_id, generation_id):
+        pass
+
+    monkeypatch.setattr(billing, "hold_kit", hold)
+
+    # A Russian job description, generated as a German kit.
+    response = client.post(
+        "/generations", json={"text": "Ищем Python-разработчика", "generate_in": "de"}
+    )
+
+    assert response.json()["language"] == "de"
+    assert queue == [("ann", "preparation", None, "de")]
+
+
+def test_a_recruiter_can_choose_the_interviews_language(client, queue):
+    response = client.post(
+        "/internal/generations",
+        json={
+            "text": "Backend engineer",
+            "company_id": str(COMPANY_ID),
+            "owner_uid": "bob",
+            "generate_in": "ar",
+        },
+        headers=headers(),
+    )
+
+    assert response.json()["language"] == "ar"
+
+
+def test_only_supported_languages_can_be_chosen(client, queue):
+    response = client.post("/generations", json={"text": "Backend", "generate_in": "xx"})
+
+    assert response.status_code == 422
+    assert queue == []
+
+
+def test_the_languages_to_generate_in_are_listed(client):
+    languages = client.get("/languages").json()
+
+    assert languages[0] == "en"
+    assert languages == list(LANGUAGES)

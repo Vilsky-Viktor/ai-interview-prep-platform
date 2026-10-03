@@ -1,0 +1,246 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const fs = require('fs');
+const path = require('path');
+const buildLogger = require('./buildLogger.js');
+
+const LOGGER_PREFIXES = {
+  "webpack-nodejs": "[@sentry/nextjs - Node.js]",
+  "webpack-edge": "[@sentry/nextjs - Edge]",
+  "webpack-client": "[@sentry/nextjs - Client]",
+  "after-production-compile-webpack": "[@sentry/nextjs - After Production Compile (Webpack)]",
+  "after-production-compile-turbopack": "[@sentry/nextjs - After Production Compile (Turbopack)]"
+};
+const FILE_PATTERNS = {
+  SERVER: {
+    GLOB: "server/**",
+    PATH: "server"
+  },
+  SERVERLESS: "serverless/**",
+  STATIC_CHUNKS: {
+    GLOB: "static/chunks/**",
+    PATH: "static/chunks"
+  },
+  STATIC_IMMUTABLE_CHUNKS: {
+    PATH: "static/immutable/chunks"
+  },
+  STATIC_CHUNKS_PAGES: {
+    GLOB: "static/chunks/pages/**",
+    PATH: "static/chunks/pages"
+  },
+  STATIC_CHUNKS_APP: {
+    GLOB: "static/chunks/app/**",
+    PATH: "static/chunks/app"
+  },
+  MAIN_CHUNKS: "static/chunks/main-*",
+  FRAMEWORK_CHUNKS: "static/chunks/framework-*",
+  FRAMEWORK_CHUNKS_DOT: "static/chunks/framework.*",
+  POLYFILLS_CHUNKS: "static/chunks/polyfills-*",
+  WEBPACK_CHUNKS: "static/chunks/webpack-*",
+  PAGE_CLIENT_REFERENCE_MANIFEST: "**/page_client-reference-manifest.js",
+  SERVER_REFERENCE_MANIFEST: "**/server-reference-manifest.js",
+  NEXT_FONT_MANIFEST: "**/next-font-manifest.js",
+  MIDDLEWARE_BUILD_MANIFEST: "**/middleware-build-manifest.js",
+  INTERCEPTION_ROUTE_REWRITE_MANIFEST: "**/interception-route-rewrite-manifest.js",
+  ROUTE_CLIENT_REFERENCE_MANIFEST: "**/route_client-reference-manifest.js",
+  MIDDLEWARE_REACT_LOADABLE_MANIFEST: "**/middleware-react-loadable-manifest.js"
+};
+const SOURCEMAP_EXTENSIONS = ["*.js.map", "*.mjs.map", "*.cjs.map", "*.css.map"];
+function normalizePathForGlob(distPath) {
+  return distPath.replace(/\\/g, "/");
+}
+function getServerPattern({ useDirectoryPath = false }) {
+  return useDirectoryPath ? FILE_PATTERNS.SERVER.PATH : FILE_PATTERNS.SERVER.GLOB;
+}
+function getStaticChunksPattern({ useDirectoryPath = false }) {
+  return useDirectoryPath ? FILE_PATTERNS.STATIC_CHUNKS.PATH : FILE_PATTERNS.STATIC_CHUNKS.GLOB;
+}
+function getStaticChunksPagesPattern({ useDirectoryPath = false }) {
+  return useDirectoryPath ? FILE_PATTERNS.STATIC_CHUNKS_PAGES.PATH : FILE_PATTERNS.STATIC_CHUNKS_PAGES.GLOB;
+}
+function getStaticChunksAppPattern({ useDirectoryPath = false }) {
+  return useDirectoryPath ? FILE_PATTERNS.STATIC_CHUNKS_APP.PATH : FILE_PATTERNS.STATIC_CHUNKS_APP.GLOB;
+}
+function createSourcemapUploadAssetPatterns(normalizedDistPath, buildTool, widenClientFileUpload = false) {
+  const assets = [];
+  if (buildTool.startsWith("after-production-compile")) {
+    assets.push(path.posix.join(normalizedDistPath, getServerPattern({ useDirectoryPath: true })));
+    if (buildTool === "after-production-compile-turbopack") {
+      const staticChunksPath = path.posix.join(normalizedDistPath, getStaticChunksPattern({ useDirectoryPath: true }));
+      const immutableChunksPath = path.posix.join(normalizedDistPath, FILE_PATTERNS.STATIC_IMMUTABLE_CHUNKS.PATH);
+      for (const chunksPath of [staticChunksPath, immutableChunksPath]) {
+        if (fs.existsSync(chunksPath)) {
+          assets.push(chunksPath);
+        }
+      }
+    } else {
+      if (widenClientFileUpload) {
+        assets.push(path.posix.join(normalizedDistPath, getStaticChunksPattern({ useDirectoryPath: true })));
+      } else {
+        assets.push(
+          path.posix.join(normalizedDistPath, getStaticChunksPagesPattern({ useDirectoryPath: true })),
+          path.posix.join(normalizedDistPath, getStaticChunksAppPattern({ useDirectoryPath: true }))
+        );
+      }
+    }
+  } else {
+    if (buildTool === "webpack-nodejs" || buildTool === "webpack-edge") {
+      assets.push(
+        path.posix.join(normalizedDistPath, getServerPattern({ useDirectoryPath: false })),
+        path.posix.join(normalizedDistPath, FILE_PATTERNS.SERVERLESS)
+      );
+    } else if (buildTool === "webpack-client") {
+      if (widenClientFileUpload) {
+        assets.push(path.posix.join(normalizedDistPath, getStaticChunksPattern({ useDirectoryPath: false })));
+      } else {
+        assets.push(
+          path.posix.join(normalizedDistPath, getStaticChunksPagesPattern({ useDirectoryPath: false })),
+          path.posix.join(normalizedDistPath, getStaticChunksAppPattern({ useDirectoryPath: false }))
+        );
+      }
+    }
+  }
+  return assets;
+}
+function createSourcemapUploadIgnorePattern(normalizedDistPath, widenClientFileUpload = false) {
+  const ignore = [];
+  if (!widenClientFileUpload) {
+    ignore.push(path.posix.join(normalizedDistPath, FILE_PATTERNS.MAIN_CHUNKS));
+  }
+  ignore.push(
+    path.posix.join(normalizedDistPath, FILE_PATTERNS.FRAMEWORK_CHUNKS),
+    path.posix.join(normalizedDistPath, FILE_PATTERNS.FRAMEWORK_CHUNKS_DOT),
+    path.posix.join(normalizedDistPath, FILE_PATTERNS.POLYFILLS_CHUNKS),
+    path.posix.join(normalizedDistPath, FILE_PATTERNS.WEBPACK_CHUNKS),
+    // Next.js internal manifest files that don't have source maps
+    // These files are auto-generated by Next.js and do not contain user code.
+    // Ignoring them prevents "Could not determine source map reference" warnings.
+    FILE_PATTERNS.PAGE_CLIENT_REFERENCE_MANIFEST,
+    FILE_PATTERNS.SERVER_REFERENCE_MANIFEST,
+    FILE_PATTERNS.NEXT_FONT_MANIFEST,
+    FILE_PATTERNS.MIDDLEWARE_BUILD_MANIFEST,
+    FILE_PATTERNS.INTERCEPTION_ROUTE_REWRITE_MANIFEST,
+    FILE_PATTERNS.ROUTE_CLIENT_REFERENCE_MANIFEST,
+    FILE_PATTERNS.MIDDLEWARE_REACT_LOADABLE_MANIFEST
+  );
+  return ignore;
+}
+function createFilesToDeleteAfterUploadPattern(normalizedDistPath, buildTool, deleteSourcemapsAfterUpload, useRunAfterProductionCompileHook = false) {
+  if (!deleteSourcemapsAfterUpload) {
+    return void 0;
+  }
+  if (buildTool === "webpack-nodejs" || buildTool === "webpack-edge") {
+    return void 0;
+  }
+  if (buildTool === "webpack-client" && useRunAfterProductionCompileHook) {
+    return void 0;
+  }
+  return SOURCEMAP_EXTENSIONS.map((ext) => path.posix.join(normalizedDistPath, "static", "**", ext));
+}
+function shouldSkipSourcemapUpload(buildTool, useRunAfterProductionCompileHook = false) {
+  return useRunAfterProductionCompileHook && buildTool.startsWith("webpack");
+}
+function rewriteWebpackSources(source) {
+  return source.replace(/^webpack:\/\/(?:_N_E\/)?/, "");
+}
+function createReleaseConfig(releaseName, sentryBuildOptions) {
+  if (releaseName !== void 0) {
+    return {
+      inject: false,
+      // The webpack plugin's release injection breaks the `app` directory - we inject the release manually with the value injection loader instead.
+      name: releaseName,
+      create: sentryBuildOptions.release?.create,
+      finalize: sentryBuildOptions.release?.finalize,
+      dist: sentryBuildOptions.release?.dist,
+      vcsRemote: sentryBuildOptions.release?.vcsRemote,
+      setCommits: sentryBuildOptions.release?.setCommits,
+      deploy: sentryBuildOptions.release?.deploy
+    };
+  }
+  return {
+    inject: false,
+    create: false,
+    finalize: false
+  };
+}
+function mergeIgnorePatterns(defaultPatterns, userPatterns) {
+  if (!userPatterns) {
+    return defaultPatterns;
+  }
+  const userPatternsArray = Array.isArray(userPatterns) ? userPatterns : [userPatterns];
+  return [...defaultPatterns, ...userPatternsArray];
+}
+function getBuildPluginOptions({
+  sentryBuildOptions,
+  releaseName,
+  distDirAbsPath,
+  buildTool,
+  useRunAfterProductionCompileHook
+}) {
+  const logger = buildLogger.getBuildLogger(sentryBuildOptions.silent);
+  const normalizedDistDirAbsPath = normalizePathForGlob(distDirAbsPath);
+  const loggerPrefix = LOGGER_PREFIXES[buildTool];
+  const widenClientFileUpload = sentryBuildOptions.widenClientFileUpload ?? false;
+  const deleteSourcemapsAfterUpload = sentryBuildOptions.sourcemaps?.deleteSourcemapsAfterUpload ?? false;
+  const sourcemapUploadAssets = createSourcemapUploadAssetPatterns(
+    normalizedDistDirAbsPath,
+    buildTool,
+    widenClientFileUpload
+  );
+  const sourcemapUploadIgnore = createSourcemapUploadIgnorePattern(normalizedDistDirAbsPath, widenClientFileUpload);
+  const finalIgnorePatterns = mergeIgnorePatterns(sourcemapUploadIgnore, sentryBuildOptions.sourcemaps?.ignore);
+  const userFilesToDeleteAfterUpload = sentryBuildOptions.sourcemaps?.filesToDeleteAfterUpload;
+  if (sentryBuildOptions.debug && userFilesToDeleteAfterUpload !== void 0) {
+    logger.debug(
+      "[@sentry/nextjs] Skipping auto-deletion of source maps as user has provided filesToDeleteAfterUpload:",
+      userFilesToDeleteAfterUpload
+    );
+  }
+  const filesToDeleteAfterUpload = userFilesToDeleteAfterUpload !== void 0 ? Array.isArray(userFilesToDeleteAfterUpload) ? userFilesToDeleteAfterUpload : [userFilesToDeleteAfterUpload] : createFilesToDeleteAfterUploadPattern(
+    normalizedDistDirAbsPath,
+    buildTool,
+    deleteSourcemapsAfterUpload,
+    useRunAfterProductionCompileHook
+  );
+  const skipSourcemapsUpload = shouldSkipSourcemapUpload(buildTool, useRunAfterProductionCompileHook);
+  return {
+    applicationKey: sentryBuildOptions.applicationKey,
+    authToken: sentryBuildOptions.authToken,
+    headers: sentryBuildOptions.headers,
+    org: sentryBuildOptions.org,
+    project: sentryBuildOptions.project,
+    telemetry: sentryBuildOptions.telemetry,
+    debug: sentryBuildOptions.debug,
+    errorHandler: sentryBuildOptions.errorHandler,
+    reactComponentAnnotation: buildTool.startsWith("after-production-compile") ? void 0 : {
+      ...sentryBuildOptions.reactComponentAnnotation,
+      // eslint-disable-next-line typescript/no-deprecated
+      ...sentryBuildOptions.webpack?.reactComponentAnnotation
+    },
+    silent: sentryBuildOptions.silent,
+    url: sentryBuildOptions.sentryUrl,
+    sourcemaps: {
+      disable: skipSourcemapsUpload ? true : sentryBuildOptions.sourcemaps?.disable ?? false,
+      rewriteSources: sentryBuildOptions.sourcemaps?.rewriteSources ?? rewriteWebpackSources,
+      assets: sentryBuildOptions.sourcemaps?.assets ?? sourcemapUploadAssets,
+      ignore: finalIgnorePatterns,
+      filesToDeleteAfterUpload,
+      resolveSourceMap: sentryBuildOptions.sourcemaps?.resolveSourceMap
+    },
+    release: createReleaseConfig(releaseName, sentryBuildOptions),
+    bundleSizeOptimizations: {
+      ...sentryBuildOptions.bundleSizeOptimizations
+    },
+    moduleMetadata: sentryBuildOptions.moduleMetadata,
+    _metaOptions: {
+      loggerPrefixOverride: loggerPrefix,
+      telemetry: {
+        metaFramework: "nextjs"
+      }
+    }
+  };
+}
+
+exports.getBuildPluginOptions = getBuildPluginOptions;
+exports.normalizePathForGlob = normalizePathForGlob;
+//# sourceMappingURL=getBuildPluginOptions.js.map

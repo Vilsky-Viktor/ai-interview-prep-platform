@@ -92,13 +92,13 @@ export function PublicShare({ preparationId, title }: PublicShareProps) {
         <DialogDescription>{t("public")}</DialogDescription>
       </DialogHeader>
       <div className="relative">
-        <p className="rounded-xl border px-6 py-6 pr-20 font-mono text-sm break-all">
+        <p className="rounded-xl border px-6 py-6 pe-20 font-mono text-sm break-all">
           {url}
         </p>
         <Button
           type="button"
           size="icon"
-          className="absolute inset-y-0 right-3 my-auto size-10 rounded-full"
+          className="absolute inset-y-0 end-3 my-auto size-10 rounded-full"
           aria-label={common("copyLink")}
           onClick={copy}
           disabled={!url}

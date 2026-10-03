@@ -26,12 +26,16 @@ class InterviewGenerationCreate(BaseModel):
     # The recruiter's interface language: the interview is written in the job description's
     # own language, and this only when that can't be told.
     language: Language = DEFAULT_LANGUAGE
+    # The language the recruiter chose to generate in; none means the text's own.
+    generate_in: Language | None = None
 
 
 class GenerationCreate(BaseModel):
     text: str = Field(min_length=1, max_length=MAX_GOAL_LENGTH)
     kind: GenerationKind = GenerationKind.PREPARATION
     company_id: UUID | None = None
+    # The language the learner chose to generate in; none means the text's own.
+    generate_in: Language | None = None
 
     @model_validator(mode="after")
     def interview_needs_company(self):

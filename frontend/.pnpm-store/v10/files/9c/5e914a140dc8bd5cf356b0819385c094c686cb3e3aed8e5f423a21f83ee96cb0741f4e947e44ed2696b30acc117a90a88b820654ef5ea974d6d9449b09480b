@@ -1,0 +1,65 @@
+import { getNextjsVersion } from '../util.js';
+import { setUpBuildTimeVariables } from './buildTime.js';
+import { getBundlerInfo, maybeWarnAboutUnsupportedTurbopack, maybeWarnAboutTurbopackModuleMetadata, maybeWarnAboutUnsupportedRunAfterProductionCompileHook, maybeConstructTurbopackConfig, resolveUseRunAfterProductionCompileHookOption, maybeSetUpRunAfterProductionCompileHook, maybeEnableTurbopackSourcemaps, resolveBuildTimeInstrumentationOption, getTurbopackPatch, getWebpackPatch, getServerExternalPackagesPatch } from './getFinalConfigObjectBundlerUtils.js';
+import { resolveReleaseName, maybeSetUpTunnelRouteRewriteRules, shouldReturnEarlyInExperimentalBuildMode, maybeCreateRouteManifest, maybeGetVercelCronsConfig, getNextMajor, maybeSetClientTraceMetadataOption, maybeSetInstrumentationHookOption, warnIfMissingOnRouterTransitionStartHook } from './getFinalConfigObjectUtils.js';
+
+function getFinalConfigObject(incomingUserNextConfigObject, userSentryOptions) {
+  const releaseName = resolveReleaseName(userSentryOptions);
+  maybeSetUpTunnelRouteRewriteRules(incomingUserNextConfigObject, userSentryOptions);
+  if (shouldReturnEarlyInExperimentalBuildMode(userSentryOptions.silent)) {
+    return incomingUserNextConfigObject;
+  }
+  const routeManifest = maybeCreateRouteManifest(incomingUserNextConfigObject, userSentryOptions);
+  const vercelCronsConfigResult = maybeGetVercelCronsConfig(userSentryOptions);
+  setUpBuildTimeVariables(incomingUserNextConfigObject, userSentryOptions, releaseName);
+  const nextJsVersion = getNextjsVersion();
+  const nextMajor = getNextMajor(nextJsVersion);
+  maybeSetClientTraceMetadataOption(incomingUserNextConfigObject, nextJsVersion, userSentryOptions.silent);
+  maybeSetInstrumentationHookOption(incomingUserNextConfigObject, nextJsVersion, userSentryOptions.silent);
+  warnIfMissingOnRouterTransitionStartHook(userSentryOptions);
+  const bundlerInfo = getBundlerInfo(nextJsVersion);
+  maybeWarnAboutUnsupportedTurbopack(nextJsVersion, bundlerInfo, userSentryOptions.silent);
+  maybeWarnAboutTurbopackModuleMetadata(userSentryOptions, bundlerInfo);
+  maybeWarnAboutUnsupportedRunAfterProductionCompileHook(nextJsVersion, userSentryOptions, bundlerInfo);
+  const turboPackConfig = maybeConstructTurbopackConfig(
+    incomingUserNextConfigObject,
+    userSentryOptions,
+    routeManifest,
+    nextJsVersion,
+    bundlerInfo,
+    vercelCronsConfigResult
+  );
+  const shouldUseRunAfterProductionCompileHook = resolveUseRunAfterProductionCompileHookOption(
+    userSentryOptions,
+    bundlerInfo
+  );
+  maybeSetUpRunAfterProductionCompileHook({
+    incomingUserNextConfigObject,
+    userSentryOptions,
+    releaseName,
+    nextJsVersion,
+    bundlerInfo,
+    turboPackConfig,
+    shouldUseRunAfterProductionCompileHook
+  });
+  maybeEnableTurbopackSourcemaps(incomingUserNextConfigObject, userSentryOptions, bundlerInfo);
+  const buildTimeInstrumentation = resolveBuildTimeInstrumentationOption(userSentryOptions, bundlerInfo, nextJsVersion);
+  return {
+    ...incomingUserNextConfigObject,
+    ...getServerExternalPackagesPatch(incomingUserNextConfigObject, nextMajor, buildTimeInstrumentation),
+    ...getWebpackPatch({
+      incomingUserNextConfigObject,
+      userSentryOptions,
+      releaseName,
+      routeManifest,
+      nextJsVersion,
+      shouldUseRunAfterProductionCompileHook,
+      bundlerInfo,
+      vercelCronsConfigResult
+    }),
+    ...getTurbopackPatch(bundlerInfo, turboPackConfig)
+  };
+}
+
+export { getFinalConfigObject };
+//# sourceMappingURL=getFinalConfigObject.js.map

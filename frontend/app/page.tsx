@@ -13,7 +13,7 @@ export default async function HomePage() {
       <div className="inline-grid max-w-full gap-16">
         <div className="space-y-4 text-center">
           <HomeTitle key={locale} />
-          <p className="text-left text-base text-balance text-muted-foreground">
+          <p className="text-start text-base text-balance text-muted-foreground">
             {t("tagline")}
           </p>
         </div>

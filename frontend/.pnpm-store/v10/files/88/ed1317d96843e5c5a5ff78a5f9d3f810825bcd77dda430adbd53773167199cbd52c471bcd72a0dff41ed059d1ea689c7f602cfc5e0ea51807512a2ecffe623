@@ -1,0 +1,110 @@
+import { withIsolationScope, getClient, debug, getActiveSpan, continueTrace, startSpan, SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN, hasSpanStreamingEnabled, handleCallbackErrors, SPAN_STATUS_ERROR, SPAN_STATUS_OK, captureException, getIsolationScope } from '@sentry/core';
+import { waitUntil, flushSafelyWithTimeout } from './utils/responseEnd.js';
+import { DEBUG_BUILD } from './debug-build.js';
+import { isNotFoundNavigationError, isRedirectNavigationError, isPrerenderControlFlowError } from './nextNavigationErrorUtils.js';
+import { SENTRY_SEGMENT_NAME_SOURCE, CODE_FUNCTION_NAME, SENTRY_DESCRIPTION, SENTRY_OP, SENTRY_KIND } from '@sentry/conventions/attributes';
+import { FUNCTION } from '@sentry/conventions/op';
+
+function withServerActionInstrumentation(...args) {
+  if (typeof args[1] === "function") {
+    const [serverActionName, callback] = args;
+    return withServerActionInstrumentationImplementation(serverActionName, {}, callback);
+  } else {
+    const [serverActionName, options, callback] = args;
+    return withServerActionInstrumentationImplementation(serverActionName, options, callback);
+  }
+}
+async function withServerActionInstrumentationImplementation(serverActionName, options, callback) {
+  return withIsolationScope(async (isolationScope) => {
+    const shouldRecordResponse = getClient()?.getDataCollectionOptions().httpBodies.includes("outgoingResponse");
+    let sentryTraceHeader;
+    let baggageHeader;
+    const fullHeadersObject = {};
+    try {
+      const awaitedHeaders = await options.headers;
+      sentryTraceHeader = awaitedHeaders?.get("sentry-trace") ?? void 0;
+      baggageHeader = awaitedHeaders?.get("baggage");
+      awaitedHeaders?.forEach((value, key) => {
+        fullHeadersObject[key] = value;
+      });
+    } catch {
+      DEBUG_BUILD && debug.warn(
+        "Sentry wasn't able to extract the tracing headers for a server action. Will not trace this request."
+      );
+    }
+    isolationScope.setTransactionName(`serverAction/${serverActionName}`);
+    isolationScope.setSDKProcessingMetadata({
+      normalizedRequest: {
+        headers: fullHeadersObject
+      }
+    });
+    const continueTraceIfNoActiveSpan = getActiveSpan() ? (_opts, callback2) => callback2() : continueTrace;
+    return continueTraceIfNoActiveSpan(
+      {
+        sentryTrace: sentryTraceHeader,
+        baggage: baggageHeader
+      },
+      async () => {
+        try {
+          const client = getClient();
+          const description = `serverAction/${serverActionName}`;
+          return await startSpan(
+            {
+              name: client && hasSpanStreamingEnabled(client) ? serverActionName : description,
+              // oxlint-disable-next-line typescript/no-deprecated
+              forceTransaction: true,
+              attributes: {
+                [SENTRY_KIND]: "server",
+                [SENTRY_OP]: FUNCTION,
+                // Overriding span description inference in Relay, because we can't express the serverAction/ prefix
+                // as a sentry-conventions span name rule for `function` spans.
+                [SENTRY_DESCRIPTION]: description,
+                [CODE_FUNCTION_NAME]: serverActionName,
+                [SENTRY_SEGMENT_NAME_SOURCE]: "route",
+                [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.function.nextjs.server_action"
+              }
+            },
+            async (span) => {
+              const result = await handleCallbackErrors(callback, (error) => {
+                if (isNotFoundNavigationError(error)) {
+                  span.setStatus({ code: SPAN_STATUS_ERROR, message: "not_found" });
+                } else if (isRedirectNavigationError(error)) {
+                  span.setStatus({ code: SPAN_STATUS_OK });
+                  span.end();
+                } else if (isPrerenderControlFlowError(error)) {
+                  span.setStatus({ code: SPAN_STATUS_OK });
+                  span.end();
+                } else {
+                  span.setStatus({ code: SPAN_STATUS_ERROR, message: "internal_error" });
+                  captureException(error, {
+                    mechanism: {
+                      handled: false,
+                      type: "auto.function.nextjs.server_action"
+                    }
+                  });
+                }
+              });
+              if (options.recordResponse !== void 0 ? options.recordResponse : shouldRecordResponse) {
+                getIsolationScope().setExtra("server_action_result", result);
+              }
+              if (options.formData) {
+                options.formData.forEach((value, key) => {
+                  getIsolationScope().setExtra(
+                    `server_action_form_data.${key}`,
+                    typeof value === "string" ? value : "[non-string value]"
+                  );
+                });
+              }
+              return result;
+            }
+          );
+        } finally {
+          waitUntil(flushSafelyWithTimeout());
+        }
+      }
+    );
+  });
+}
+
+export { withServerActionInstrumentation };
+//# sourceMappingURL=withServerActionInstrumentation.js.map

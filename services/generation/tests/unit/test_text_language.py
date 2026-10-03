@@ -18,6 +18,15 @@ JOBS = {
     "ar": "نبحث عن مطور خلفية لديه خبرة في Python و PostgreSQL للانضمام إلى فريقنا.",
     "he": "אנחנו מחפשים מפתח צד שרת עם ניסיון ב-Python ו-PostgreSQL להצטרף לצוות שלנו.",
     "fa": "ما به دنبال یک برنامه‌نویس بک‌اند با تجربه کار با Python و PostgreSQL هستیم.",
+    "ja": "PythonとPostgreSQLの経験があるバックエンドエンジニアを募集しています。",
+    "zh": "我们正在招聘有Python和PostgreSQL经验的后端开发工程师。",
+    "ko": "Python과 PostgreSQL 경험이 있는 백엔드 개발자를 찾고 있습니다.",
+    "hi": "हमें Python और PostgreSQL के अनुभव वाले बैकएंड डेवलपर की तलाश है।",
+    "id": "Kami mencari pengembang backend yang memiliki pengalaman dengan Python dan PostgreSQL.",
+    "th": "เรากำลังมองหานักพัฒนาแบ็กเอนด์ที่มีประสบการณ์ด้าน Python และ PostgreSQL",
+    "vi": "Chúng tôi cần lập trình viên backend có kinh nghiệm làm việc với Python và PostgreSQL.",
+    "fil": "Naghahanap kami ng backend developer na may karanasan sa Python at PostgreSQL para sa aming team.",
+    "et": "Otsime backend-arendajat, kellel on kogemus Pythoni ja PostgreSQL-iga ning soov meie tiimiga liituda.",
 }
 
 

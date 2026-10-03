@@ -51,7 +51,7 @@ export function QuestionRow({
       >
         <QuestionText text={question.text} />
       </div>
-      <div className="self-center py-5 pr-6 pl-5 text-sm whitespace-nowrap text-muted-foreground tabular-nums">
+      <div className="self-center py-5 ps-5 pe-6 text-sm whitespace-nowrap text-muted-foreground tabular-nums">
         <span className="flex flex-col items-end gap-3">
           <span className="flex items-center gap-4">
             <span className="flex items-center gap-1.5" title={t("likes")}>
@@ -95,7 +95,7 @@ export function QuestionRow({
         </span>
       </div>
       {canViewReports && showReports && (
-        <div className="col-span-3 bg-muted/40 py-5 pr-6 pl-[4.75rem]">
+        <div className="col-span-3 bg-muted/40 py-5 ps-[4.75rem] pe-6">
           <QuestionReports path={`${reportsPath}/${question.id}/reports`} />
         </div>
       )}

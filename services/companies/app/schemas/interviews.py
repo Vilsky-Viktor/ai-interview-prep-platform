@@ -1,6 +1,7 @@
 from datetime import datetime
 from uuid import UUID
 
+from prepza_common.user import Language
 from pydantic import BaseModel, Field, field_validator
 
 from app.constants.interviews import (
@@ -12,6 +13,8 @@ from app.constants.interviews import (
 
 class InterviewCreate(BaseModel):
     text: str = Field(min_length=1, max_length=20_000)
+    # The language to generate the interview in; none means the job description's own.
+    generate_in: Language | None = None
 
 
 class InterviewOut(BaseModel):

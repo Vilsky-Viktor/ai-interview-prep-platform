@@ -1,0 +1,41 @@
+import { withIsolationScope, winterCGRequestToRequestData, getActiveSpan, getRootSpan, setCapturedScopesOnSpan, getCurrentScope, captureException } from '@sentry/core';
+import { flushSafelyWithTimeout } from '../common/utils/responseEnd.js';
+
+function wrapApiHandlerWithSentry(handler, parameterizedRoute) {
+  return new Proxy(handler, {
+    apply: async (wrappingTarget, thisArg, args) => {
+      return withIsolationScope(async (isolationScope) => {
+        const req = args[0];
+        if (req instanceof Request) {
+          const method = req.method || "GET";
+          isolationScope.setTransactionName(`${method} ${parameterizedRoute}`);
+          isolationScope.setSDKProcessingMetadata({
+            normalizedRequest: winterCGRequestToRequestData(req)
+          });
+        } else {
+          isolationScope.setTransactionName(`handler (${parameterizedRoute})`);
+        }
+        const activeSpan = getActiveSpan();
+        const rootSpan = activeSpan ? getRootSpan(activeSpan) : void 0;
+        if (rootSpan) {
+          setCapturedScopesOnSpan(rootSpan, getCurrentScope(), isolationScope);
+        }
+        try {
+          return await wrappingTarget.apply(thisArg, args);
+        } catch (error) {
+          captureException(error, {
+            mechanism: {
+              type: "auto.function.nextjs.wrap_api_handler",
+              handled: false
+            }
+          });
+          await flushSafelyWithTimeout();
+          throw error;
+        }
+      });
+    }
+  });
+}
+
+export { wrapApiHandlerWithSentry };
+//# sourceMappingURL=wrapApiHandlerWithSentry.js.map

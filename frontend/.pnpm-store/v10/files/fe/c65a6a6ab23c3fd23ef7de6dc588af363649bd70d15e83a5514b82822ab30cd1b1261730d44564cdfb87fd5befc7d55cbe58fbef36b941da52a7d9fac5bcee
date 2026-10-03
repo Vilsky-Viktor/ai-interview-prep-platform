@@ -1,0 +1,31 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const core = require('@sentry/core');
+const buildLogger = require('../buildLogger.js');
+const getFinalConfigObject = require('./getFinalConfigObject.js');
+
+function withSentryConfig(nextConfig, sentryBuildOptions = {}) {
+  const logWarning = (message) => buildLogger.getBuildLogger(sentryBuildOptions.silent).warn(message);
+  core.warnOnRemovedBuildOptions(sentryBuildOptions, ["unstable_sentryWebpackPluginOptions"], logWarning);
+  core.warnOnRemovedBuildOptions(sentryBuildOptions.webpack, ["unstable_sentryWebpackPluginOptions"], logWarning);
+  const castNextConfig = nextConfig || {};
+  if (typeof castNextConfig === "function") {
+    return function(...webpackConfigFunctionArgs) {
+      const maybePromiseNextConfig = castNextConfig.apply(
+        this,
+        webpackConfigFunctionArgs
+      );
+      if (core.isThenable(maybePromiseNextConfig)) {
+        return maybePromiseNextConfig.then((promiseResultNextConfig) => {
+          return getFinalConfigObject.getFinalConfigObject(promiseResultNextConfig, sentryBuildOptions);
+        });
+      }
+      return getFinalConfigObject.getFinalConfigObject(maybePromiseNextConfig, sentryBuildOptions);
+    };
+  } else {
+    return getFinalConfigObject.getFinalConfigObject(castNextConfig, sentryBuildOptions);
+  }
+}
+
+exports.withSentryConfig = withSentryConfig;
+//# sourceMappingURL=index.js.map

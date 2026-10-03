@@ -1,0 +1,27 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const api = require('@opentelemetry/api');
+const core = require('@sentry/core');
+const opentelemetry = require('@sentry/opentelemetry');
+const nextSpanAttributes = require('../nextSpanAttributes.js');
+
+function maybeForkIsolationScopeForRootSpan(span, spanAttributes) {
+  const spanType = spanAttributes?.[nextSpanAttributes.ATTR_NEXT_SPAN_TYPE];
+  if (spanType !== "BaseServer.handleRequest" && spanType !== "Middleware.execute") {
+    return;
+  }
+  if (span !== core.getRootSpan(span)) {
+    return;
+  }
+  const scopes = core.getCapturedScopesOnSpan(span);
+  const isolationScope = (scopes.isolationScope || core.getIsolationScope()).clone();
+  const scope = scopes.scope || core.getCurrentScope();
+  const currentScopesPointer = opentelemetry.getScopesFromContext(api.context.active());
+  if (currentScopesPointer) {
+    currentScopesPointer.isolationScope = isolationScope;
+  }
+  core.setCapturedScopesOnSpan(span, scope, isolationScope);
+}
+
+exports.maybeForkIsolationScopeForRootSpan = maybeForkIsolationScopeForRootSpan;
+//# sourceMappingURL=forkIsolationScopeForRootSpan.js.map

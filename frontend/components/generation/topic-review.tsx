@@ -94,7 +94,7 @@ export function TopicReview({
             </li>
           ) : (
             <li key={index} className="relative">
-              <label className="flex cursor-pointer items-center gap-5 p-6 pr-16">
+              <label className="flex cursor-pointer items-center gap-5 p-6 pe-16">
                 <Checkbox
                   className="size-6 shrink-0 [&_[data-slot=checkbox-indicator]>svg]:size-4"
                   checked={selected.includes(index)}
@@ -121,7 +121,7 @@ export function TopicReview({
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="absolute top-1/2 right-4 -translate-y-1/2"
+                className="absolute end-4 top-1/2 -translate-y-1/2"
                 aria-label={t("editTopic", { topic: topic.main_topic })}
                 onClick={() => setEditing(index)}
               >

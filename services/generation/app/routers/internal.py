@@ -50,7 +50,7 @@ async def create_interview_generation(
         body.text,
         GenerationKind.INTERVIEW,
         body.company_id,
-        text_language(body.text, body.language),
+        body.generate_in or text_language(body.text, body.language),
     )
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
 

@@ -29,32 +29,35 @@ export async function LegalPage({
           )}
           {t("updated")} <time dateTime={LEGAL_UPDATED}>{LEGAL_UPDATED}</time>
         </p>
+      </header>
+      {/* The documents are English only, so they read left to right in every interface. */}
+      <div lang="en" dir="ltr" className="space-y-10">
         <p className="text-base leading-relaxed text-muted-foreground">
           {intro}
         </p>
-      </header>
-      {sections.map((section) => (
-        <section key={section.heading} className="space-y-3">
-          <h2 className="font-heading text-2xl font-medium">
-            {section.heading}
-          </h2>
-          {section.paragraphs?.map((paragraph) => (
-            <p
-              key={paragraph}
-              className="text-base leading-relaxed text-muted-foreground"
-            >
-              {paragraph}
-            </p>
-          ))}
-          {section.items && (
-            <ul className="list-disc space-y-2 pl-5 text-base leading-relaxed text-muted-foreground">
-              {section.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          )}
-        </section>
-      ))}
+        {sections.map((section) => (
+          <section key={section.heading} className="space-y-3">
+            <h2 className="font-heading text-2xl font-medium">
+              {section.heading}
+            </h2>
+            {section.paragraphs?.map((paragraph) => (
+              <p
+                key={paragraph}
+                className="text-base leading-relaxed text-muted-foreground"
+              >
+                {paragraph}
+              </p>
+            ))}
+            {section.items && (
+              <ul className="list-disc space-y-2 ps-5 text-base leading-relaxed text-muted-foreground">
+                {section.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))}
+      </div>
     </main>
   )
 }

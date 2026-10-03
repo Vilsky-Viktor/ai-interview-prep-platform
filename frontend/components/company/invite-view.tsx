@@ -110,7 +110,7 @@ export function InviteView({ token }: { token: string }) {
         )}
       </div>
       {invite.status !== "finished" && (
-        <ul className="mx-auto max-w-lg list-disc space-y-2 pl-5 text-left text-base text-muted-foreground">
+        <ul className="mx-auto max-w-lg list-disc space-y-2 ps-5 text-start text-base text-muted-foreground">
           <li>{t("pickOne")}</li>
           <li>{t("noChange")}</li>
           <li>{t("timeRunsOut")}</li>

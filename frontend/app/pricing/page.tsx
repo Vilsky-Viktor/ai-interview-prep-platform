@@ -12,7 +12,7 @@ function PriceRow({ what, price }: { what: string; price: string }) {
   return (
     <li className="flex items-baseline justify-between gap-6 px-5 py-4">
       <span>{what}</span>
-      <span className="shrink-0 text-right font-medium tabular-nums">
+      <span className="shrink-0 text-end font-medium tabular-nums">
         {price}
       </span>
     </li>

@@ -1,9 +1,10 @@
 from typing import Literal
 
-from prepza_common.constants import DEFAULT_LANGUAGE
+from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGES
 from pydantic import BaseModel
 
-Language = Literal["en", "ru"]
+# A supported language's code (LANGUAGES).
+Language = Literal[tuple(LANGUAGES)]
 
 
 class User(BaseModel):

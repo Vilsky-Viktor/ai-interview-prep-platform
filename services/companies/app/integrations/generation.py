@@ -7,7 +7,9 @@ from app.config.settings import settings
 from app.service_auth import service_token
 
 
-async def create(text: str, company_id: UUID, owner_uid: str, language: str) -> dict:
+async def create(
+    text: str, company_id: UUID, owner_uid: str, language: str, generate_in: str | None
+) -> dict:
     """Only companies may start an interview generation, after checking the user's membership."""
     response = await http.get_client().post(
         f"{settings.generation_url}/internal/generations",
@@ -16,6 +18,7 @@ async def create(text: str, company_id: UUID, owner_uid: str, language: str) -> 
             "company_id": str(company_id),
             "owner_uid": owner_uid,
             "language": language,
+            "generate_in": generate_in,
         },
         headers={"Authorization": f"Bearer {service_token('generation')}"},
     )

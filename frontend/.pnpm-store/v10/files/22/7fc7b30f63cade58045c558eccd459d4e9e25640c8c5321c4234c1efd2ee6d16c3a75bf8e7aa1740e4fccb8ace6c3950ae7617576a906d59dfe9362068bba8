@@ -1,0 +1,10 @@
+import { defineIntegration } from '@sentry/core';
+
+const vercelAIIntegration = defineIntegration(() => {
+  return {
+    name: "VercelAI"
+  };
+});
+
+export { vercelAIIntegration };
+//# sourceMappingURL=vercelAIIntegrationShim.js.map

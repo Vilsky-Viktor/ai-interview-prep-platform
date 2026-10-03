@@ -1,0 +1,12 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const core = require('@sentry/core');
+
+const vercelAIIntegration = core.defineIntegration(() => {
+  return {
+    name: "VercelAI"
+  };
+});
+
+exports.vercelAIIntegration = vercelAIIntegration;
+//# sourceMappingURL=vercelAIIntegrationShim.js.map

@@ -1,0 +1,12 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+function defaultShouldHandleError(error) {
+  if (typeof error !== "object" || error === null) {
+    return true;
+  }
+  const status = error.status;
+  return !(typeof status === "number" && status >= 300 && status < 500);
+}
+
+exports.defaultShouldHandleError = defaultShouldHandleError;
+//# sourceMappingURL=defaultShouldHandleError.js.map

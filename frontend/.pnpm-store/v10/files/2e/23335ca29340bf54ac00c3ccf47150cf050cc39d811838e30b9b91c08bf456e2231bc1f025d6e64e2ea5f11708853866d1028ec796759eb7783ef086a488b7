@@ -1,0 +1,85 @@
+import { spanToJSON, _INTERNAL_safeDateNow, captureCheckIn, debug, getIsolationScope } from '@sentry/core';
+import { DEBUG_BUILD } from '../common/debug-build.js';
+
+const ATTR_SENTRY_CRON_CHECK_IN_ID = "sentry.cron.checkInId";
+const ATTR_SENTRY_CRON_MONITOR_SLUG = "sentry.cron.monitorSlug";
+const ATTR_SENTRY_CRON_START_TIME = "sentry.cron.startTime";
+const ATTR_SENTRY_CRON_SCHEDULE = "sentry.cron.schedule";
+function getVercelCronsConfig() {
+  const globalWithCronsConfig = globalThis;
+  if (!globalWithCronsConfig._sentryVercelCronsConfig) {
+    return void 0;
+  }
+  try {
+    return JSON.parse(globalWithCronsConfig._sentryVercelCronsConfig);
+  } catch {
+    DEBUG_BUILD && debug.log("[@sentry/nextjs] Failed to parse Vercel crons config");
+    return void 0;
+  }
+}
+function maybeStartCronCheckIn(span, route) {
+  const vercelCronsConfig = getVercelCronsConfig();
+  if (!vercelCronsConfig || !route) {
+    return;
+  }
+  const headers = getIsolationScope().getScopeData().sdkProcessingMetadata?.normalizedRequest?.headers;
+  if (!headers) {
+    return;
+  }
+  const userAgent = Array.isArray(headers["user-agent"]) ? headers["user-agent"][0] : headers["user-agent"];
+  if (!userAgent?.includes("vercel-cron")) {
+    return;
+  }
+  const matchedCron = vercelCronsConfig.find((cron) => cron.path === route);
+  if (!matchedCron?.path || !matchedCron.schedule) {
+    return;
+  }
+  const monitorSlug = matchedCron.path;
+  const startTime = _INTERNAL_safeDateNow() / 1e3;
+  const checkInId = captureCheckIn(
+    { monitorSlug, status: "in_progress" },
+    {
+      maxRuntime: 60 * 12,
+      schedule: { type: "crontab", value: matchedCron.schedule }
+    }
+  );
+  DEBUG_BUILD && debug.log(`[Cron] Started check-in for "${monitorSlug}" with ID "${checkInId}"`);
+  span.setAttribute(ATTR_SENTRY_CRON_CHECK_IN_ID, checkInId);
+  span.setAttribute(ATTR_SENTRY_CRON_MONITOR_SLUG, monitorSlug);
+  span.setAttribute(ATTR_SENTRY_CRON_START_TIME, startTime);
+  span.setAttribute(ATTR_SENTRY_CRON_SCHEDULE, matchedCron.schedule);
+}
+function maybeCompleteCronCheckIn(span) {
+  const spanData = spanToJSON(span).attributes;
+  const checkInId = spanData?.[ATTR_SENTRY_CRON_CHECK_IN_ID];
+  const monitorSlug = spanData?.[ATTR_SENTRY_CRON_MONITOR_SLUG];
+  const startTime = spanData?.[ATTR_SENTRY_CRON_START_TIME];
+  const schedule = spanData?.[ATTR_SENTRY_CRON_SCHEDULE];
+  if (!checkInId || !monitorSlug || typeof startTime !== "number") {
+    return;
+  }
+  const duration = _INTERNAL_safeDateNow() / 1e3 - startTime;
+  const spanStatus = spanToJSON(span).status;
+  const checkInStatus = spanStatus && spanStatus !== "ok" ? "error" : "ok";
+  const monitorConfig = typeof schedule === "string" ? {
+    maxRuntime: 60 * 12,
+    schedule: { type: "crontab", value: schedule }
+  } : void 0;
+  captureCheckIn(
+    {
+      checkInId,
+      monitorSlug,
+      status: checkInStatus,
+      duration
+    },
+    monitorConfig
+  );
+  span.setAttribute(ATTR_SENTRY_CRON_CHECK_IN_ID, void 0);
+  span.setAttribute(ATTR_SENTRY_CRON_MONITOR_SLUG, void 0);
+  span.setAttribute(ATTR_SENTRY_CRON_START_TIME, void 0);
+  span.setAttribute(ATTR_SENTRY_CRON_SCHEDULE, void 0);
+  DEBUG_BUILD && debug.log(`[Cron] Completed check-in for "${monitorSlug}" with status "${checkInStatus}"`);
+}
+
+export { maybeCompleteCronCheckIn, maybeStartCronCheckIn };
+//# sourceMappingURL=vercelCronsMonitoring.js.map

@@ -1,0 +1,44 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+
+const node_module = require('node:module');
+
+const BUNDLE_SAFE_INSTRUMENTED_PACKAGES = ["ioredis"];
+const ORCHESTRION_RUNTIME_EXTERNAL_PACKAGES = ["@sentry/server-runtime-injection"];
+let nextjsRequire;
+nextjsRequire = node_module.createRequire(__filename);
+function isRequireResolvable(request) {
+  try {
+    nextjsRequire.resolve(request);
+    return true;
+  } catch {
+    return false;
+  }
+}
+function filterInstrumentedExternals(externals, packagesToBundle) {
+  const set = new Set(packagesToBundle);
+  return externals.filter((name) => !set.has(name));
+}
+const ORCHESTRION_FORWARDER_PREFIX = "@sentry/nextjs/orchestrion-runtime/";
+function getOrchestrionForwarderSpecifier(request, externalPackage) {
+  const subpath = request.slice(externalPackage.length + 1);
+  return `${ORCHESTRION_FORWARDER_PREFIX}${subpath || "index"}`;
+}
+async function externalizeOrchestrionRuntimePackages({
+  request
+}) {
+  const externalPackage = request ? ORCHESTRION_RUNTIME_EXTERNAL_PACKAGES.find((pkg) => request === pkg || request.startsWith(`${pkg}/`)) : void 0;
+  if (!request || !externalPackage) {
+    return void 0;
+  }
+  if (!isRequireResolvable(request)) {
+    return void 0;
+  }
+  return `commonjs ${getOrchestrionForwarderSpecifier(request, externalPackage)}`;
+}
+
+exports.BUNDLE_SAFE_INSTRUMENTED_PACKAGES = BUNDLE_SAFE_INSTRUMENTED_PACKAGES;
+exports.ORCHESTRION_RUNTIME_EXTERNAL_PACKAGES = ORCHESTRION_RUNTIME_EXTERNAL_PACKAGES;
+exports.externalizeOrchestrionRuntimePackages = externalizeOrchestrionRuntimePackages;
+exports.filterInstrumentedExternals = filterInstrumentedExternals;
+exports.getOrchestrionForwarderSpecifier = getOrchestrionForwarderSpecifier;
+//# sourceMappingURL=diagnosticsChannelInjection.js.map

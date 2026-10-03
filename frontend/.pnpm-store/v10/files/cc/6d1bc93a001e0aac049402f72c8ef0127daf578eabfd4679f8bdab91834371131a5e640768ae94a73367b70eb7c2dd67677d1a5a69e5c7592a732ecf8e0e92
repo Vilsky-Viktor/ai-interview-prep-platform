@@ -1,0 +1,194 @@
+import { debug, parseSemver, isMatchingPattern } from '@sentry/core';
+import { getSentryRelease } from '@sentry/node';
+import * as fs from 'fs';
+import * as path from 'path';
+import { getBuildLogger } from '../buildLogger.js';
+import { createRouteManifest } from '../manifest/createRouteManifest.js';
+import { requiresInstrumentationHook } from '../util.js';
+import { getGitRevision, getInstrumentationClientFileContents } from './buildTime.js';
+import { resolveTunnelRoute, setUpTunnelRewriteRules } from './tunnel.js';
+
+let showedExportModeTunnelWarning = false;
+let showedExperimentalBuildModeWarning = false;
+function resolveReleaseName(userSentryOptions) {
+  const shouldCreateRelease = userSentryOptions.release?.create !== false;
+  return shouldCreateRelease ? userSentryOptions.release?.name ?? getSentryRelease() ?? getGitRevision() : userSentryOptions.release?.name;
+}
+function maybeSetUpTunnelRouteRewriteRules(incomingUserNextConfigObject, userSentryOptions) {
+  if (!userSentryOptions.tunnelRoute) {
+    return;
+  }
+  if (incomingUserNextConfigObject.output === "export") {
+    if (!showedExportModeTunnelWarning) {
+      showedExportModeTunnelWarning = true;
+      getBuildLogger(userSentryOptions.silent).warn(
+        "[@sentry/nextjs] The Sentry Next.js SDK `tunnelRoute` option will not work in combination with Next.js static exports. The `tunnelRoute` option uses server-side features that cannot be accessed in export mode. If you still want to tunnel Sentry events, set up your own tunnel: https://docs.sentry.io/platforms/javascript/troubleshooting/#using-the-tunnel-option"
+      );
+    }
+    return;
+  }
+  const resolvedTunnelRoute = resolveTunnelRoute(userSentryOptions.tunnelRoute);
+  userSentryOptions.tunnelRoute = resolvedTunnelRoute || void 0;
+  setUpTunnelRewriteRules(incomingUserNextConfigObject, resolvedTunnelRoute);
+}
+function shouldReturnEarlyInExperimentalBuildMode(silent) {
+  if (!process.argv.includes("--experimental-build-mode")) {
+    return false;
+  }
+  if (!showedExperimentalBuildModeWarning) {
+    showedExperimentalBuildModeWarning = true;
+    getBuildLogger(silent).warn(
+      "[@sentry/nextjs] The Sentry Next.js SDK does not currently fully support next build --experimental-build-mode"
+    );
+  }
+  return process.argv.includes("generate");
+}
+function maybeCreateRouteManifest(incomingUserNextConfigObject, userSentryOptions) {
+  if (userSentryOptions.routeManifestInjection === false) {
+    return void 0;
+  }
+  const manifest = createRouteManifest({
+    basePath: incomingUserNextConfigObject.basePath,
+    localeParamNames: userSentryOptions.routeManifestInjection?.localeParamNames,
+    silent: userSentryOptions.silent
+  });
+  const excludeFilter = userSentryOptions.routeManifestInjection?.exclude;
+  return filterRouteManifest(manifest, excludeFilter);
+}
+function filterRouteManifest(manifest, excludeFilter) {
+  if (!excludeFilter) {
+    return manifest;
+  }
+  const shouldExclude = (route) => {
+    if (typeof excludeFilter === "function") {
+      return excludeFilter(route);
+    }
+    return excludeFilter.some((pattern) => isMatchingPattern(route, pattern));
+  };
+  return {
+    staticRoutes: manifest.staticRoutes.filter((r) => !shouldExclude(r.path)),
+    dynamicRoutes: manifest.dynamicRoutes.filter((r) => !shouldExclude(r.path)),
+    isrRoutes: manifest.isrRoutes.filter((r) => !shouldExclude(r))
+  };
+}
+function maybeSetClientTraceMetadataOption(incomingUserNextConfigObject, nextJsVersion, silent) {
+  if (incomingUserNextConfigObject.cacheComponents) {
+    return;
+  }
+  if (nextJsVersion) {
+    const { major, minor } = parseSemver(nextJsVersion);
+    if (major !== void 0 && minor !== void 0 && (major >= 15 || major === 14 && minor >= 3)) {
+      incomingUserNextConfigObject.experimental = incomingUserNextConfigObject.experimental || {};
+      incomingUserNextConfigObject.experimental.clientTraceMetadata = [
+        "baggage",
+        "sentry-trace",
+        ...incomingUserNextConfigObject.experimental?.clientTraceMetadata || []
+      ];
+    }
+  } else {
+    getBuildLogger(silent).log(
+      "[@sentry/nextjs] The Sentry SDK was not able to determine your Next.js version. If you are using Next.js version 15 or greater, please add `experimental.clientTraceMetadata: ['sentry-trace', 'baggage']` to your Next.js config to enable pageload tracing for App Router."
+    );
+  }
+}
+function maybeSetInstrumentationHookOption(incomingUserNextConfigObject, nextJsVersion, silent) {
+  const logger = getBuildLogger(silent);
+  if (nextJsVersion && requiresInstrumentationHook(nextJsVersion)) {
+    if (incomingUserNextConfigObject.experimental?.instrumentationHook === false) {
+      logger.warn(
+        "[@sentry/nextjs] You turned off the `experimental.instrumentationHook` option. Note that Sentry will not be initialized if you did not set it up inside `instrumentation.(js|ts)`."
+      );
+    }
+    incomingUserNextConfigObject.experimental = {
+      instrumentationHook: true,
+      ...incomingUserNextConfigObject.experimental
+    };
+    return;
+  }
+  if (nextJsVersion) {
+    return;
+  }
+  if (incomingUserNextConfigObject.experimental && "instrumentationHook" in incomingUserNextConfigObject.experimental) {
+    if (incomingUserNextConfigObject.experimental.instrumentationHook === false) {
+      logger.warn(
+        "[@sentry/nextjs] You set `experimental.instrumentationHook` to `false`. If you are using Next.js version 15 or greater, you can remove that option. If you are using Next.js version 14 or lower, you need to set `experimental.instrumentationHook` in your `next.config.(js|mjs)` to `true` for the SDK to be properly initialized in combination with `instrumentation.(js|ts)`."
+      );
+    }
+  } else {
+    logger.log(
+      "[@sentry/nextjs] The Sentry SDK was not able to determine your Next.js version. If you are using Next.js version 15 or greater, Next.js will probably show you a warning about the `experimental.instrumentationHook` being set. To silence Next.js' warning, explicitly set the `experimental.instrumentationHook` option in your `next.config.(js|mjs|ts)` to `undefined`. If you are on Next.js version 14 or lower, you can silence this particular warning by explicitly setting the `experimental.instrumentationHook` option in your `next.config.(js|mjs)` to `true`."
+    );
+    incomingUserNextConfigObject.experimental = {
+      instrumentationHook: true,
+      ...incomingUserNextConfigObject.experimental
+    };
+  }
+}
+function warnIfMissingOnRouterTransitionStartHook(userSentryOptions) {
+  const instrumentationClientFileContents = getInstrumentationClientFileContents();
+  if (instrumentationClientFileContents !== void 0 && !instrumentationClientFileContents.includes("onRouterTransitionStart") && !userSentryOptions.suppressOnRouterTransitionStartWarning) {
+    getBuildLogger(userSentryOptions.silent).warn(
+      "[@sentry/nextjs] ACTION REQUIRED: To instrument navigations, the Sentry SDK requires you to export an `onRouterTransitionStart` hook from your `instrumentation-client.(js|ts)` file. You can do so by adding `export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;` to the file."
+    );
+  }
+}
+function getNextMajor(nextJsVersion) {
+  if (!nextJsVersion) {
+    return void 0;
+  }
+  const { major } = parseSemver(nextJsVersion);
+  return major;
+}
+function readVercelCronsConfig() {
+  try {
+    const vercelJsonPath = path.join(process.cwd(), "vercel.json");
+    const vercelJsonContents = fs.readFileSync(vercelJsonPath, "utf8");
+    const cronsConfig = JSON.parse(vercelJsonContents).crons;
+    if (cronsConfig && Array.isArray(cronsConfig) && cronsConfig.length > 0) {
+      return cronsConfig;
+    }
+    return void 0;
+  } catch (e) {
+    if (e.code === "ENOENT") {
+      return void 0;
+    }
+    debug.error("[@sentry/nextjs] Failed to read vercel.json for automatic cron job monitoring instrumentation", e);
+    return void 0;
+  }
+}
+function maybeGetVercelCronsConfig(userSentryOptions) {
+  const result = { config: void 0, strategy: void 0 };
+  if (!process.env.VERCEL) {
+    return result;
+  }
+  const experimentalEnabled = userSentryOptions._experimental?.vercelCronsMonitoring === true;
+  const legacyEnabled = userSentryOptions.webpack?.automaticVercelMonitors === true;
+  if (!experimentalEnabled && !legacyEnabled) {
+    return result;
+  }
+  const config = readVercelCronsConfig();
+  if (!config) {
+    return result;
+  }
+  result.config = config;
+  if (experimentalEnabled && legacyEnabled) {
+    debug.warn(
+      "[@sentry/nextjs] Both '_experimental.vercelCronsMonitoring' and 'webpack.automaticVercelMonitors' are enabled. Using the new span-based approach from '_experimental.vercelCronsMonitoring'. You can remove 'webpack.automaticVercelMonitors' from your config."
+    );
+    result.strategy = "spans";
+  } else if (experimentalEnabled) {
+    debug.log(
+      "[@sentry/nextjs] Creating Sentry cron monitors for your Vercel Cron Jobs using span-based instrumentation."
+    );
+    result.strategy = "spans";
+  } else {
+    debug.log(
+      "[@sentry/nextjs] Creating Sentry cron monitors for your Vercel Cron Jobs. You can disable this feature by setting the 'webpack.automaticVercelMonitors' option to false in your Next.js config."
+    );
+    result.strategy = "wrapper";
+  }
+  return result;
+}
+
+export { filterRouteManifest, getNextMajor, maybeCreateRouteManifest, maybeGetVercelCronsConfig, maybeSetClientTraceMetadataOption, maybeSetInstrumentationHookOption, maybeSetUpTunnelRouteRewriteRules, resolveReleaseName, shouldReturnEarlyInExperimentalBuildMode, warnIfMissingOnRouterTransitionStartHook };
+//# sourceMappingURL=getFinalConfigObjectUtils.js.map
