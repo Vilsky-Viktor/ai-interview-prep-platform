@@ -47,7 +47,9 @@ for (const path of PAGES) {
     // The footer ends the page.
     expect(Math.abs(layout.footerBottom - layout.scrollHeight)).toBeLessThanOrEqual(1)
     // The home page's input is on the first screen, above the landing sections.
-    expect(layout.inputBottom).toBeLessThanOrEqual(layout.innerHeight)
+    if (path === "/") {
+      expect(layout.inputBottom).toBeLessThanOrEqual(layout.innerHeight)
+    }
 
     // Titles are lowercase, like the logo.
     expect(layout.headingCase).toBe("lowercase")
