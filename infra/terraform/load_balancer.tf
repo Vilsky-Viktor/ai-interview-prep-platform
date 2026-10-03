@@ -45,6 +45,31 @@ resource "google_compute_security_policy" "edge" {
     }
   }
 
+  # The FAQ page's help chat is open to visitors; each IP gets 20 questions per 10 minutes, so
+  # one visitor can't run up its model costs. The service also caps accounts and the daily total.
+  rule {
+    action      = "throttle"
+    priority    = 1100
+    description = "Help chat questions per visitor"
+
+    match {
+      expr {
+        expression = "request.path == '/api/rounds/help/chat'"
+      }
+    }
+
+    rate_limit_options {
+      conform_action = "allow"
+      exceed_action  = "deny(429)"
+      enforce_on_key = "IP"
+
+      rate_limit_threshold {
+        count        = 20
+        interval_sec = 600
+      }
+    }
+  }
+
   rule {
     action   = "allow"
     priority = 2147483647

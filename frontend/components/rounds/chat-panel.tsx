@@ -1,12 +1,12 @@
 "use client"
 
-import { cn } from "cn"
 import { ArrowUpIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
+import { ChatBubble } from "@/components/chat-bubble"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
@@ -84,9 +84,13 @@ export function ChatPanel({ answerId }: { answerId: string }) {
       {(messages.length > 0 || streaming) && (
         <ul className="space-y-3">
           {messages.map((message, index) => (
-            <Bubble key={index} role={message.role} content={message.content} />
+            <ChatBubble
+              key={index}
+              role={message.role}
+              content={message.content}
+            />
           ))}
-          {streaming && <Bubble role="assistant" content={reply || "…"} />}
+          {streaming && <ChatBubble role="assistant" content={reply || "…"} />}
         </ul>
       )}
       {turns && (
@@ -98,15 +102,15 @@ export function ChatPanel({ answerId }: { answerId: string }) {
       )}
       <form
         onSubmit={send}
-        className="relative rounded-xl border border-transparent transition-colors focus-within:border-ring"
+        className="relative rounded-[2rem] border border-transparent transition-colors focus-within:border-ring"
       >
         <Textarea
           value={input}
           onChange={(event) => setInput(event.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={t("followUpPlaceholder", { hint: common("submitHint") })}
+          placeholder={t("followUpPlaceholder")}
           aria-label={t("followUp")}
-          className="max-h-40 min-h-16 resize-none border-0 bg-transparent px-6 py-4 pe-20 text-lg shadow-none focus-visible:border-transparent focus-visible:ring-0 md:text-lg dark:bg-input/30"
+          className="max-h-40 min-h-16 resize-none rounded-[2rem] border-0 bg-transparent px-6 py-4 pe-20 text-lg shadow-none focus-visible:border-transparent focus-visible:ring-0 md:text-lg dark:bg-input/30"
         />
         <Button
           type="submit"
@@ -119,18 +123,5 @@ export function ChatPanel({ answerId }: { answerId: string }) {
         </Button>
       </form>
     </div>
-  )
-}
-
-function Bubble({ role, content }: ChatMessage) {
-  return (
-    <li
-      className={cn(
-        "bidi-auto w-fit max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap",
-        role === "user" ? "ms-auto bg-muted" : "bg-card"
-      )}
-    >
-      {content}
-    </li>
   )
 }

@@ -1,19 +1,19 @@
 import { getLocale, getTranslations } from "next-intl/server"
 
 import { DEFAULT_LOCALE } from "@/constants/i18n"
-import { LEGAL_UPDATED, type LegalSection } from "@/constants/legal"
+import type { LegalDocument } from "@/types/help"
 
-/** The privacy policy and terms, from their sections in constants. English only: they're legal
-texts, and a translation would need its own legal review. */
+/** The privacy policy and terms, as the rounds service serves them (the FAQ chat answers from
+the same texts). English only: they're legal texts, and a translation would need its own legal
+review. */
 export async function LegalPage({
   title,
-  intro,
-  sections,
+  document,
 }: {
   title: string
-  intro: string
-  sections: LegalSection[]
+  document: LegalDocument
 }) {
+  const { intro, sections, updated } = document
   const t = await getTranslations("legal")
   const locale = await getLocale()
 
@@ -27,7 +27,7 @@ export async function LegalPage({
           {locale !== DEFAULT_LOCALE && (
             <span className="block pb-2">{t("englishOnly")}</span>
           )}
-          {t("updated")} <time dateTime={LEGAL_UPDATED}>{LEGAL_UPDATED}</time>
+          {t("updated")} <time dateTime={updated}>{updated}</time>
         </p>
       </header>
       {/* The documents are English only, so they read left to right in every interface. */}

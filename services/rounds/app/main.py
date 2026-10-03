@@ -14,6 +14,7 @@ from app.integrations.redis import get_redis
 from app.routers import (
     certificates,
     chat,
+    help,
     internal,
     internal_accounts,
     preparations,
@@ -57,6 +58,7 @@ app.include_router(topics.router)
 app.include_router(preparations.router)
 app.include_router(chat.router)
 app.include_router(certificates.router)
+app.include_router(help.router)
 app.include_router(internal.router)
 app.include_router(schedules.router)
 app.include_router(internal_accounts.router)

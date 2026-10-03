@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "किसी किट को अधिकतम 30 लोगों के साथ साझा किया जा सकता है।",
     "Title is required": "शीर्षक आवश्यक है",
     "Details are required for this reason.": "इस कारण के लिए विवरण आवश्यक है।",
+    "The question is too long.": "सवाल बहुत लंबा है।",
 }

@@ -251,7 +251,7 @@
     "yourAnswer": "Iyong sagot",
     "askFollowUp": "Magtanong pa",
     "followUp": "Karagdagang tanong",
-    "followUpPlaceholder": "Magtanong pa… ({hint})",
+    "followUpPlaceholder": "Magtanong pa…",
     "replyFailed": "Hindi makakuha ng sagot. Pakisubukang muli.",
     "firstRound": "Ang una mong round sa paksang ito",
     "sameAsLast": "Pareho sa huli mong round",
@@ -683,60 +683,12 @@
   },
   "faq": {
     "title": "Mga madalas itanong",
-    "intro": "Hindi mo makita ang sagot? Sumulat sa amin sa address na nasa privacy policy.",
-    "items": {
-      "different": {
-        "q": "Paano naiiba ang prepza sa flashcards o question bank?",
-        "a": "Ginagawa ng prepza ang mga tanong para mismo sa pinaghahandaan mo, mula sa job description o layunin mo. Ibinabalik ng mga round ang mga mali mo, ipinapaliwanag ng AI tutor ang bawat sagot, at ipinapakita ng mga certificate kung kailan mo na-master ang isang topic."
-      },
-      "topics": {
-        "q": "Para saan ako puwedeng maghanda?",
-        "a": "Mga job interview sa anumang larangan, certification, exam, test, promotion, o anumang gusto mong matutunan. Kung kaya mo itong ilarawan, kaya itong gawan ng kit ng prepza."
-      },
-      "certificates": {
-        "q": "Paano gumagana ang mga certificate?",
-        "a": "May sariling certificate ang bawat topic. Sagutin ang lahat ng tanong sa topic nang may sapat na tamang sagot, at sa iyo na ito. Ang huling sagot mo sa bawat tanong ang binibilang, kaya puwede kang patuloy na mag-practice hanggang makuha mo."
-      },
-      "cost": {
-        "q": "Magkano ito?",
-        "a": "Magbabayad ka habang ginagamit, gamit ang credits. Nagkakahalaga ng {kit} credits ang bagong kit, at nakakakuha ang bawat bagong account ng {welcome} libreng credits, sapat para sa unang kit. Nakalista ang lahat ng presyo sa pricing page."
-      },
-      "expire": {
-        "q": "Nag-e-expire ba ang credits?",
-        "a": "Hindi. Hindi kailanman nag-e-expire ang credits, at walang subscription o renewal."
-      },
-      "failed": {
-        "q": "Paano kung pumalya ang kit?",
-        "a": "Sinisingil ka lang kapag handa na ang kit. Kung pumalya ang paggawa o kinansela mo ito, babalik sa iyo ang credits."
-      },
-      "refunds": {
-        "q": "Puwede ba akong ma-refund?",
-        "a": "Oo, para sa credits na binili mo sa nakaraang 14 na araw at hindi pa nagagastos: sa Paddle o sa pagsulat sa amin. Hindi nire-refund ang libreng credits, gaya ng welcome gift. Nasa terms ang mga detalye."
-      },
-      "privacy": {
-        "q": "Ano ang nangyayari sa pine-paste at sinasagot ko?",
-        "a": "Ginagamit namin ito para gawin ang mga kit mo at subaybayan ang progreso mo. Ikaw lang at ang mga taong binahagian mo ang nakakakita sa mga pribadong kit. Ipinapaliwanag ng privacy policy kung ano ang iniingatan namin, gaano katagal, at ang mga karapatan mo."
-      },
-      "delete": {
-        "q": "Puwede ko bang burahin ang account ko?",
-        "a": "Oo, sa Settings. Buburahin ang account at data mo, at puwede mo munang i-download ang kopya ng data mo."
-      },
-      "languages": {
-        "q": "Aling mga wika ang suportado?",
-        "a": "{count} wika, para sa site, sa mga kit, at sa mga email. Piliin ang wikang gagamitin sa paggawa ng kit, anuman ang wika ng text mo."
-      },
-      "hiring": {
-        "q": "Paano gumagana ang hiring sa prepza?",
-        "a": "Gumawa ng kompanya, gumawa ng interview mula sa job description, at imbitahan ang mga kandidato sa email. Nagkakahalaga ng {candidate} credits ang bawat kandidato, na sinisingil lang kapag natapos nila ang interview, at nakakakuha ang bagong kompanya ng {company} libreng credits."
-      },
-      "scorecards": {
-        "q": "Ano ang ipinapakita ng mga scorecard?",
-        "a": "Bawat sagot, kung tama ito, at gaano katagal. Mina-mark din nila ang mga sagot na masyadong mabilis para nabasa ang tanong, ang mga pagkakataong umalis ang kandidato sa page, at mga pagtatangkang mangopya."
-      },
-      "candidates": {
-        "q": "Ano ang nakikita ng mga kandidato?",
-        "a": "Kung ano ang aasahan bago sila magsimula, saka isang may oras na tanong sa bawat pagkakataon. Hindi nila kailanman nakikita ang score nila o kung tama ang isang sagot."
-      }
+    "intro": "Hindi mo makita ang sagot? Itanong sa chat sa dulo ng page na ito, o sumulat sa amin sa address na nasa privacy policy.",
+    "chat": {
+      "title": "Magtanong tungkol sa prepza",
+      "text": "Mga tanong tungkol sa features, presyo, bayad, terms, o privacy. Sumasagot ang AI batay sa sariling mga dokumento ng prepza. AI ang sumusulat ng mga sagot at puwedeng magkamali. Ang pricing page, terms, at privacy policy ang masusunod.",
+      "placeholder": "Magtanong tungkol sa prepza…",
+      "failed": "Hindi makakuha ng sagot ngayon. Pakisubukang muli."
     }
   }
 }

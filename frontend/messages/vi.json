@@ -251,7 +251,7 @@
     "yourAnswer": "Câu trả lời của bạn",
     "askFollowUp": "Hỏi thêm",
     "followUp": "Câu hỏi thêm",
-    "followUpPlaceholder": "Đặt câu hỏi thêm… ({hint})",
+    "followUpPlaceholder": "Đặt câu hỏi thêm…",
     "replyFailed": "Không nhận được câu trả lời. Vui lòng thử lại.",
     "firstRound": "Vòng luyện đầu tiên của bạn ở chủ đề này",
     "sameAsLast": "Giống vòng trước",
@@ -683,60 +683,12 @@
   },
   "faq": {
     "title": "Câu hỏi thường gặp",
-    "intro": "Không tìm thấy câu trả lời? Hãy viết cho chúng tôi theo địa chỉ trong chính sách quyền riêng tư.",
-    "items": {
-      "different": {
-        "q": "prepza khác thẻ ghi nhớ hay ngân hàng câu hỏi thế nào?",
-        "a": "prepza tạo câu hỏi đúng cho điều bạn đang chuẩn bị, từ mô tả công việc hoặc mục tiêu của bạn. Các lượt luyện đưa lại câu bạn làm sai, gia sư AI giải thích mọi câu trả lời, và chứng chỉ cho thấy khi nào bạn đã thành thạo một chủ đề."
-      },
-      "topics": {
-        "q": "Tôi có thể chuẩn bị cho những gì?",
-        "a": "Phỏng vấn xin việc ở mọi lĩnh vực, chứng chỉ, kỳ thi, bài kiểm tra, thăng chức hoặc bất cứ điều gì bạn muốn học. Nếu bạn mô tả được, prepza có thể tạo một bộ cho nó."
-      },
-      "certificates": {
-        "q": "Chứng chỉ hoạt động thế nào?",
-        "a": "Mỗi chủ đề có chứng chỉ riêng. Trả lời tất cả câu hỏi của chủ đề với đủ số câu đúng, và chứng chỉ là của bạn. Câu trả lời gần nhất cho mỗi câu hỏi được tính, nên bạn có thể tiếp tục luyện đến khi đạt."
-      },
-      "cost": {
-        "q": "Chi phí là bao nhiêu?",
-        "a": "Bạn trả theo mức dùng, bằng tín dụng. Một bộ mới có giá {kit} tín dụng, và mỗi tài khoản mới nhận {welcome} tín dụng miễn phí, đủ cho bộ đầu tiên. Trang bảng giá liệt kê mọi mức giá."
-      },
-      "expire": {
-        "q": "Tín dụng có hết hạn không?",
-        "a": "Không. Tín dụng không bao giờ hết hạn, và không có gói đăng ký hay gia hạn."
-      },
-      "failed": {
-        "q": "Nếu tạo bộ thất bại thì sao?",
-        "a": "Bạn chỉ bị trừ phí khi bộ đã sẵn sàng. Nếu quá trình tạo thất bại hoặc bạn hủy, tín dụng sẽ được hoàn lại."
-      },
-      "refunds": {
-        "q": "Tôi có được hoàn tiền không?",
-        "a": "Có, với tín dụng bạn mua trong 14 ngày gần nhất và chưa dùng: qua Paddle hoặc bằng cách viết cho chúng tôi. Tín dụng miễn phí, như quà chào mừng, không được hoàn. Chi tiết có trong điều khoản."
-      },
-      "privacy": {
-        "q": "Những gì tôi dán và trả lời sẽ ra sao?",
-        "a": "Chúng tôi dùng chúng để tạo bộ và theo dõi tiến độ của bạn. Bộ riêng tư chỉ bạn và những người bạn chia sẻ mới thấy. Chính sách quyền riêng tư giải thích chúng tôi lưu gì, trong bao lâu và quyền của bạn."
-      },
-      "delete": {
-        "q": "Tôi có thể xóa tài khoản không?",
-        "a": "Có, trong Cài đặt. Tài khoản và dữ liệu của bạn bị xóa, và trước đó bạn có thể tải xuống bản sao dữ liệu."
-      },
-      "languages": {
-        "q": "Hỗ trợ những ngôn ngữ nào?",
-        "a": "{count} ngôn ngữ, cho trang web, các bộ và email. Chọn ngôn ngữ để tạo bộ, bất kể văn bản của bạn bằng ngôn ngữ nào."
-      },
-      "hiring": {
-        "q": "Tuyển dụng với prepza diễn ra thế nào?",
-        "a": "Tạo công ty, tạo buổi phỏng vấn từ mô tả công việc và mời ứng viên qua email. Mỗi ứng viên tốn {candidate} tín dụng, chỉ bị trừ khi họ hoàn thành phỏng vấn, và công ty mới nhận {company} tín dụng miễn phí."
-      },
-      "scorecards": {
-        "q": "Bảng điểm cho thấy gì?",
-        "a": "Mọi câu trả lời, đúng hay sai và mất bao lâu. Bảng điểm cũng đánh dấu các câu trả lời quá nhanh để kịp đọc câu hỏi, những lần ứng viên rời trang và các lần định sao chép."
-      },
-      "candidates": {
-        "q": "Ứng viên thấy gì?",
-        "a": "Những gì cần biết trước khi bắt đầu, rồi lần lượt từng câu hỏi có giới hạn thời gian. Họ không bao giờ thấy điểm của mình hay câu trả lời có đúng không."
-      }
+    "intro": "Không tìm thấy câu trả lời? Hãy hỏi khung chat cuối trang này, hoặc viết cho chúng tôi theo địa chỉ trong chính sách quyền riêng tư.",
+    "chat": {
+      "title": "Hỏi về prepza",
+      "text": "Câu hỏi về tính năng, giá, thanh toán, điều khoản hoặc quyền riêng tư. AI trả lời dựa trên tài liệu của chính prepza. Câu trả lời do AI viết và có thể sai. Trang bảng giá, điều khoản và chính sách quyền riêng tư mới là căn cứ.",
+      "placeholder": "Đặt câu hỏi về prepza…",
+      "failed": "Hiện chưa lấy được câu trả lời. Vui lòng thử lại."
     }
   }
 }

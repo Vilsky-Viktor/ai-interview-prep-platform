@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "แชร์ชุดได้กับคนสูงสุด 30 คน",
     "Title is required": "ต้องระบุชื่อ",
     "Details are required for this reason.": "เหตุผลนี้ต้องระบุรายละเอียด",
+    "The question is too long.": "คำถามยาวเกินไป",
 }

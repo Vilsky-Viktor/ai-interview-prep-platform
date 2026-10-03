@@ -1,3 +1,4 @@
+import httpx
 from fastapi import HTTPException, status
 from prepza_common import http
 
@@ -7,6 +8,17 @@ from app.service_auth import service_token
 
 def _headers() -> dict:
     return {"Authorization": f"Bearer {service_token('billing')}"}
+
+
+async def catalog() -> dict | None:
+    """Billing's public prices; None when billing can't be reached, so help still answers."""
+    try:
+        response = await http.get_client().get(f"{settings.billing_url}/catalog")
+        response.raise_for_status()
+    except httpx.HTTPError:
+        return None
+
+    return response.json()
 
 
 async def available_credits(user_id: str) -> int:

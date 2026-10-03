@@ -73,6 +73,16 @@ LANGUAGE_CLAIM = "language"
 # Tutor turns free on each answered question; rounds enforces it, billing's catalog shows it.
 CHAT_FREE_TURNS = 3
 
+# Limits a service enforces and the help chat explains, so both read the same numbers.
+# People a private kit can be shared with, counting accepted and pending invites (library).
+MAX_SHARES = 30
+# Companies one person may own; the welcome credits come with the first one only (companies).
+MAX_OWNED_COMPANIES = 3
+# Interviews are free to generate, so each company may start this many a day (companies).
+INTERVIEWS_PER_DAY = 10
+# Seconds each timed interview question starts with; an admin can change it (companies).
+DEFAULT_QUESTION_SECONDS = 60
+
 # Funnel events for analytics go on the events topic with this type prefix; only they reach
 # BigQuery, and the services' push subscriptions leave them out.
 FUNNEL_PREFIX = "funnel."

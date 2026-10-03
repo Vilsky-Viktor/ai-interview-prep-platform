@@ -1,5 +1,10 @@
 from enum import StrEnum
 
+from prepza_common.constants import (  # noqa: F401 (re-exported)
+    INTERVIEWS_PER_DAY,
+    MAX_OWNED_COMPANIES,
+)
+
 
 class InviteStatus(StrEnum):
     INVITED = "invited"
@@ -21,9 +26,5 @@ NOT_STARTED = (InviteStatus.INVITED, InviteStatus.UNDELIVERED, InviteStatus.EXPI
 CANDIDATE_RETENTION_DAYS = 365
 # An invite never started this long after it was last sent expires, and its credits come back.
 INVITE_EXPIRY_DAYS = 30
-# Companies one person may own; the welcome credits come with the first one only.
-MAX_OWNED_COMPANIES = 3
 TOO_MANY_COMPANIES = "You can own at most 3 companies."
-# Interviews are free to generate, so each company may start this many a day.
-INTERVIEWS_PER_DAY = 10
 TOO_MANY_INTERVIEWS = "Your company can generate up to 10 interviews a day. Try again tomorrow."

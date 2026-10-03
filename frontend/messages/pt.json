@@ -251,7 +251,7 @@
     "yourAnswer": "Sua resposta",
     "askFollowUp": "Fazer uma pergunta complementar",
     "followUp": "Pergunta complementar",
-    "followUpPlaceholder": "Faça uma pergunta complementar… ({hint})",
+    "followUpPlaceholder": "Faça uma pergunta complementar…",
     "replyFailed": "Não foi possível obter uma resposta. Tente novamente.",
     "firstRound": "Sua primeira rodada neste tópico",
     "sameAsLast": "Igual à sua última rodada",
@@ -683,60 +683,12 @@
   },
   "faq": {
     "title": "Perguntas frequentes",
-    "intro": "Não encontrou sua resposta? Escreva para o endereço que está na política de privacidade.",
-    "items": {
-      "different": {
-        "q": "Em que o prepza é diferente de flashcards ou bancos de questões?",
-        "a": "O prepza cria as questões exatamente para o que você está se preparando, a partir da sua vaga ou do seu objetivo. As rodadas trazem de volta o que você errou, um tutor de IA explica cada resposta e os certificados mostram quando um tópico está dominado."
-      },
-      "topics": {
-        "q": "Para o que posso me preparar?",
-        "a": "Entrevistas de emprego em qualquer área, certificações, provas, testes, uma promoção ou qualquer coisa que você queira aprender. Se você consegue descrever, o prepza consegue criar um kit para isso."
-      },
-      "certificates": {
-        "q": "Como funcionam os certificados?",
-        "a": "Cada tópico tem seu próprio certificado. Responda todas as questões do tópico com acertos suficientes e ele é seu. Vale sua última resposta a cada questão, então você pode continuar praticando até chegar lá."
-      },
-      "cost": {
-        "q": "Quanto custa?",
-        "a": "Você paga conforme usa, com créditos. Um kit novo custa {kit} créditos, e cada conta nova recebe {welcome} créditos grátis, o suficiente para um primeiro kit. A página de preços lista todos os preços."
-      },
-      "expire": {
-        "q": "Os créditos expiram?",
-        "a": "Não. Os créditos nunca expiram, e não há assinaturas nem renovações."
-      },
-      "failed": {
-        "q": "E se um kit falhar?",
-        "a": "Você só é cobrado quando o kit fica pronto. Se a geração falhar ou você cancelar, os créditos voltam para você."
-      },
-      "refunds": {
-        "q": "Posso pedir reembolso?",
-        "a": "Sim, dos créditos que você comprou nos últimos 14 dias e ainda não gastou: pelo Paddle ou escrevendo para nós. Créditos grátis, como o presente de boas-vindas, não são reembolsados. Os termos têm os detalhes."
-      },
-      "privacy": {
-        "q": "O que acontece com o que eu colo e respondo?",
-        "a": "Usamos isso para criar seus kits e acompanhar seu progresso. Kits privados são visíveis só para você e para quem você compartilhar. A política de privacidade explica o que guardamos, por quanto tempo e seus direitos."
-      },
-      "delete": {
-        "q": "Posso excluir minha conta?",
-        "a": "Sim, nas Configurações. Sua conta e seus dados são excluídos, e antes você pode baixar uma cópia dos seus dados."
-      },
-      "languages": {
-        "q": "Quais idiomas são suportados?",
-        "a": "{count} idiomas, para o site, os kits e os e-mails. Escolha o idioma em que um kit é gerado, seja qual for o idioma do seu texto."
-      },
-      "hiring": {
-        "q": "Como funciona a contratação com o prepza?",
-        "a": "Crie uma empresa, gere uma entrevista a partir de uma descrição de vaga e convide candidatos por e-mail. Cada candidato custa {candidate} créditos, cobrados só quando ele termina a entrevista, e uma empresa nova recebe {company} créditos grátis."
-      },
-      "scorecards": {
-        "q": "O que os relatórios mostram?",
-        "a": "Cada resposta, se estava certa e quanto tempo levou. Eles também sinalizam respostas rápidas demais para a questão ter sido lida, as vezes que o candidato saiu da página e tentativas de cópia."
-      },
-      "candidates": {
-        "q": "O que os candidatos veem?",
-        "a": "O que esperar antes de começar e depois uma questão cronometrada por vez. Eles nunca veem sua pontuação nem se uma resposta estava certa."
-      }
+    "intro": "Não encontrou sua resposta? Pergunte ao chat no fim desta página ou escreva para o endereço da política de privacidade.",
+    "chat": {
+      "title": "Pergunte sobre o prepza",
+      "text": "Perguntas sobre recursos, preços, pagamentos, os termos ou a privacidade. A IA responde com base nos documentos do prepza. As respostas são escritas por IA e podem conter erros. O que vale é a página de preços, os termos e a política de privacidade.",
+      "placeholder": "Faça uma pergunta sobre o prepza…",
+      "failed": "Não foi possível obter uma resposta. Tente novamente."
     }
   }
 }

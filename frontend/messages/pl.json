@@ -251,7 +251,7 @@
     "yourAnswer": "Twoja odpowiedź",
     "askFollowUp": "Zadaj pytanie uzupełniające",
     "followUp": "Pytanie uzupełniające",
-    "followUpPlaceholder": "Zadaj pytanie uzupełniające… ({hint})",
+    "followUpPlaceholder": "Zadaj pytanie uzupełniające…",
     "replyFailed": "Nie udało się uzyskać odpowiedzi. Spróbuj ponownie.",
     "firstRound": "Twoja pierwsza sesja w tym temacie",
     "sameAsLast": "Tak samo jak w ostatniej sesji",
@@ -683,60 +683,12 @@
   },
   "faq": {
     "title": "Często zadawane pytania",
-    "intro": "Nie ma tu twojej odpowiedzi? Napisz do nas na adres podany w polityce prywatności.",
-    "items": {
-      "different": {
-        "q": "Czym prepza różni się od fiszek i baz pytań?",
-        "a": "Prepza tworzy pytania dokładnie pod to, do czego się przygotowujesz, na podstawie ogłoszenia o pracę lub twojego celu. Rundy wracają do tego, w czym się pomyliłeś, korepetytor AI wyjaśnia każdą odpowiedź, a certyfikaty pokazują, kiedy temat jest opanowany."
-      },
-      "topics": {
-        "q": "Do czego mogę się przygotować?",
-        "a": "Do rozmów o pracę w każdej dziedzinie, certyfikacji, egzaminów, testów, awansu lub czegokolwiek, czego chcesz się nauczyć. Jeśli potrafisz to opisać, prepza zbuduje do tego zestaw."
-      },
-      "certificates": {
-        "q": "Jak działają certyfikaty?",
-        "a": "Każdy temat ma własny certyfikat. Odpowiedz na wszystkie pytania tematu z wystarczającą liczbą poprawnych odpowiedzi, a będzie twój. Liczy się ostatnia odpowiedź na każde pytanie, więc możesz ćwiczyć, aż ci się uda."
-      },
-      "cost": {
-        "q": "Ile to kosztuje?",
-        "a": "Płacisz za użycie, kredytami. Nowy zestaw kosztuje {kit} kredytów, a każde nowe konto dostaje {welcome} darmowych kredytów, wystarczająco na pierwszy zestaw. Wszystkie ceny są w cenniku."
-      },
-      "expire": {
-        "q": "Czy kredyty wygasają?",
-        "a": "Nie. Kredyty nigdy nie wygasają i nie ma subskrypcji ani odnowień."
-      },
-      "failed": {
-        "q": "Co jeśli zestaw się nie uda?",
-        "a": "Płacisz dopiero, gdy zestaw jest gotowy. Jeśli tworzenie się nie powiedzie albo je anulujesz, kredyty wracają do ciebie."
-      },
-      "refunds": {
-        "q": "Czy mogę dostać zwrot?",
-        "a": "Tak, za kredyty kupione w ciągu ostatnich 14 dni i jeszcze niewydane: przez Paddle lub pisząc do nas. Darmowe kredyty, takie jak prezent powitalny, nie podlegają zwrotowi. Szczegóły są w regulaminie."
-      },
-      "privacy": {
-        "q": "Co dzieje się z tym, co wklejam i odpowiadam?",
-        "a": "Używamy tego, by tworzyć twoje zestawy i śledzić postępy. Prywatne zestawy widzisz tylko ty i osoby, którym je udostępnisz. Polityka prywatności wyjaśnia, co przechowujemy, jak długo i jakie masz prawa."
-      },
-      "delete": {
-        "q": "Czy mogę usunąć konto?",
-        "a": "Tak, w Ustawieniach. Twoje konto i dane zostają usunięte, a wcześniej możesz pobrać ich kopię."
-      },
-      "languages": {
-        "q": "Jakie języki są obsługiwane?",
-        "a": "{count} języków, dla strony, zestawów i e-maili. Wybierz język, w którym powstaje zestaw, niezależnie od języka twojego tekstu."
-      },
-      "hiring": {
-        "q": "Jak działa rekrutacja z prepza?",
-        "a": "Utwórz firmę, wygeneruj rozmowę z ogłoszenia o pracę i zaproś kandydatów e-mailem. Każdy kandydat kosztuje {candidate} kredytów, pobieranych dopiero, gdy ukończy rozmowę, a nowa firma dostaje {company} darmowych kredytów."
-      },
-      "scorecards": {
-        "q": "Co pokazują raporty?",
-        "a": "Każdą odpowiedź, czy była poprawna i ile trwała. Oznaczają też odpowiedzi zbyt szybkie, by przeczytać pytanie, opuszczenia strony i próby kopiowania."
-      },
-      "candidates": {
-        "q": "Co widzą kandydaci?",
-        "a": "Przed startem, czego się spodziewać, a potem po jednym pytaniu z limitem czasu. Nigdy nie widzą swojego wyniku ani tego, czy odpowiedź była poprawna."
-      }
+    "intro": "Nie ma tu twojej odpowiedzi? Zapytaj czat na końcu tej strony albo napisz do nas na adres z polityki prywatności.",
+    "chat": {
+      "title": "Zapytaj o prepza",
+      "text": "Pytania o funkcje, ceny, płatności, regulamin lub prywatność. AI odpowiada na podstawie dokumentów prepza. Odpowiedzi pisze AI i mogą zawierać błędy. Wiążące są cennik, regulamin i polityka prywatności.",
+      "placeholder": "Zadaj pytanie o prepza…",
+      "failed": "Nie udało się teraz uzyskać odpowiedzi. Spróbuj ponownie."
     }
   }
 }

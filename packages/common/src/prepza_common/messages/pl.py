@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "Zestaw można udostępnić najwyżej 30 osobom.",
     "Title is required": "Tytuł jest wymagany",
     "Details are required for this reason.": "Dla tego powodu potrzebne są szczegóły.",
+    "The question is too long.": "Pytanie jest za długie.",
 }

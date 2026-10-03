@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "ניתן לשתף ערכה עם 30 אנשים לכל היותר.",
     "Title is required": "נדרשת כותרת",
     "Details are required for this reason.": "לסיבה זו נדרשים פרטים.",
+    "The question is too long.": "השאלה ארוכה מדי.",
 }

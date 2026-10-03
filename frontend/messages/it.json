@@ -251,7 +251,7 @@
     "yourAnswer": "La tua risposta",
     "askFollowUp": "Fai una domanda di approfondimento",
     "followUp": "Domanda di approfondimento",
-    "followUpPlaceholder": "Fai una domanda di approfondimento… ({hint})",
+    "followUpPlaceholder": "Fai una domanda di approfondimento…",
     "replyFailed": "Impossibile ottenere una risposta. Riprova.",
     "firstRound": "La tua prima sessione su questo argomento",
     "sameAsLast": "Come nella tua ultima sessione",
@@ -683,60 +683,12 @@
   },
   "faq": {
     "title": "Domande frequenti",
-    "intro": "Non trovi la risposta? Scrivici all’indirizzo indicato nell’informativa sulla privacy.",
-    "items": {
-      "different": {
-        "q": "In cosa prepza è diverso dalle flashcard o dalle banche di domande?",
-        "a": "Prepza crea le domande esattamente per ciò a cui ti stai preparando, partendo dal tuo annuncio di lavoro o dal tuo obiettivo. I turni riprendono ciò che hai sbagliato, un tutor IA spiega ogni risposta e i certificati mostrano quando un argomento è padroneggiato."
-      },
-      "topics": {
-        "q": "A cosa posso prepararmi?",
-        "a": "Colloqui di lavoro in qualsiasi campo, certificazioni, esami, test, una promozione o qualsiasi cosa tu voglia imparare. Se puoi descriverlo, prepza può creare un kit."
-      },
-      "certificates": {
-        "q": "Come funzionano i certificati?",
-        "a": "Ogni argomento ha il suo certificato. Rispondi a tutte le domande dell’argomento con abbastanza risposte giuste, ed è tuo. Conta la tua ultima risposta a ogni domanda, quindi puoi continuare a esercitarti finché non ci riesci."
-      },
-      "cost": {
-        "q": "Quanto costa?",
-        "a": "Paghi a consumo, con i crediti. Un nuovo kit costa {kit} crediti, e ogni nuovo account riceve {welcome} crediti gratuiti, abbastanza per un primo kit. La pagina dei prezzi elenca tutti i prezzi."
-      },
-      "expire": {
-        "q": "I crediti scadono?",
-        "a": "No. I crediti non scadono mai, e non ci sono abbonamenti né rinnovi."
-      },
-      "failed": {
-        "q": "E se un kit non riesce?",
-        "a": "Paghi solo quando il kit è pronto. Se la generazione non riesce o la annulli, i crediti ti tornano indietro."
-      },
-      "refunds": {
-        "q": "Posso avere un rimborso?",
-        "a": "Sì, per i crediti acquistati negli ultimi 14 giorni e non ancora spesi: tramite Paddle o scrivendoci. I crediti gratuiti, come il regalo di benvenuto, non sono rimborsabili. I termini riportano i dettagli."
-      },
-      "privacy": {
-        "q": "Cosa succede a ciò che incollo e rispondo?",
-        "a": "Lo usiamo per creare i tuoi kit e seguire i tuoi progressi. I kit privati sono visibili solo a te e alle persone con cui li condividi. L’informativa sulla privacy spiega cosa conserviamo, per quanto tempo e quali sono i tuoi diritti."
-      },
-      "delete": {
-        "q": "Posso eliminare il mio account?",
-        "a": "Sì, nelle Impostazioni. Il tuo account e i tuoi dati vengono eliminati, e prima puoi scaricarne una copia."
-      },
-      "languages": {
-        "q": "Quali lingue sono supportate?",
-        "a": "{count} lingue, per il sito, i kit e le email. Scegli la lingua in cui generare un kit, qualunque sia la lingua del tuo testo."
-      },
-      "hiring": {
-        "q": "Come funziona l’assunzione con prepza?",
-        "a": "Crea un’azienda, genera un colloquio da un annuncio di lavoro e invita i candidati via email. Ogni candidato costa {candidate} crediti, addebitati solo quando completa il colloquio, e una nuova azienda riceve {company} crediti gratuiti."
-      },
-      "scorecards": {
-        "q": "Cosa mostrano i report?",
-        "a": "Ogni risposta, se era giusta e quanto tempo ha richiesto. Segnalano anche risposte troppo veloci per aver letto la domanda, le uscite dalla pagina e i tentativi di copia."
-      },
-      "candidates": {
-        "q": "Cosa vedono i candidati?",
-        "a": "Cosa aspettarsi prima di iniziare, poi una domanda a tempo alla volta. Non vedono mai il punteggio né se una risposta era giusta."
-      }
+    "intro": "Non trovi la risposta? Chiedi alla chat in fondo a questa pagina o scrivici all’indirizzo indicato nell’informativa sulla privacy.",
+    "chat": {
+      "title": "Chiedi di prepza",
+      "text": "Domande su funzioni, prezzi, pagamenti, termini o privacy. L’IA risponde in base ai documenti di prepza. Le risposte sono scritte da un’IA e possono essere sbagliate. Valgono la pagina dei prezzi, i termini e l’informativa sulla privacy.",
+      "placeholder": "Fai una domanda su prepza…",
+      "failed": "Impossibile ottenere una risposta ora. Riprova."
     }
   }
 }

@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "Sebuah kit bisa dibagikan kepada paling banyak 30 orang.",
     "Title is required": "Judul wajib diisi",
     "Details are required for this reason.": "Alasan ini memerlukan detail.",
+    "The question is too long.": "Pertanyaannya terlalu panjang.",
 }

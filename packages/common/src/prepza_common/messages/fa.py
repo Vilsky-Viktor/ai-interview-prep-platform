@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "یک مجموعه را می\u200cتوان حداکثر با ۳۰ نفر به اشتراک گذاشت.",
     "Title is required": "عنوان لازم است",
     "Details are required for this reason.": "برای این دلیل، جزئیات لازم است.",
+    "The question is too long.": "پرسش خیلی طولانی است.",
 }

@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "يمكن مشاركة الحزمة مع 30 شخصًا على الأكثر.",
     "Title is required": "العنوان مطلوب",
     "Details are required for this reason.": "هذا السبب يتطلب تفاصيل.",
+    "The question is too long.": "السؤال طويل جدًا.",
 }

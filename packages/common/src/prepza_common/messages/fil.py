@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "Puwedeng i-share ang isang kit sa hanggang 30 tao lang.",
     "Title is required": "Kailangan ang pamagat",
     "Details are required for this reason.": "Kailangan ng detalye para sa dahilang ito.",
+    "The question is too long.": "Masyadong mahaba ang tanong.",
 }

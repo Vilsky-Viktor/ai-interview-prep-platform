@@ -251,7 +251,7 @@
     "yourAnswer": "Jouw antwoord",
     "askFollowUp": "Vervolgvraag stellen",
     "followUp": "Vervolgvraag",
-    "followUpPlaceholder": "Stel een vervolgvraag… ({hint})",
+    "followUpPlaceholder": "Stel een vervolgvraag…",
     "replyFailed": "Er kon geen antwoord worden opgehaald. Probeer het opnieuw.",
     "firstRound": "Je eerste ronde over dit onderwerp",
     "sameAsLast": "Hetzelfde als je vorige ronde",
@@ -683,60 +683,12 @@
   },
   "faq": {
     "title": "Veelgestelde vragen",
-    "intro": "Staat je antwoord er niet bij? Schrijf ons op het adres in het privacybeleid.",
-    "items": {
-      "different": {
-        "q": "Wat is het verschil tussen prepza en flashcards of vragenbanken?",
-        "a": "Prepza maakt de vragen precies voor waar jij je op voorbereidt, op basis van je vacature of doel. Rondes brengen terug wat je fout had, een AI-tutor legt elk antwoord uit, en certificaten laten zien wanneer je een onderwerp beheerst."
-      },
-      "topics": {
-        "q": "Waarop kan ik me voorbereiden?",
-        "a": "Sollicitatiegesprekken in elk vakgebied, certificeringen, examens, toetsen, een promotie of alles wat je wilt leren. Als je het kunt beschrijven, kan prepza er een kit voor maken."
-      },
-      "certificates": {
-        "q": "Hoe werken certificaten?",
-        "a": "Elk onderwerp heeft een eigen certificaat. Beantwoord alle vragen van het onderwerp met genoeg goede antwoorden, en het is van jou. Je laatste antwoord op elke vraag telt, dus je kunt blijven oefenen tot het lukt."
-      },
-      "cost": {
-        "q": "Wat kost het?",
-        "a": "Je betaalt naar gebruik, met credits. Een nieuwe kit kost {kit} credits, en elk nieuw account krijgt {welcome} gratis credits, genoeg voor een eerste kit. De prijspagina toont alle prijzen."
-      },
-      "expire": {
-        "q": "Verlopen credits?",
-        "a": "Nee. Credits verlopen nooit, en er zijn geen abonnementen of verlengingen."
-      },
-      "failed": {
-        "q": "Wat als een kit mislukt?",
-        "a": "Je betaalt pas als een kit klaar is. Mislukt het maken of annuleer je het, dan krijg je de credits terug."
-      },
-      "refunds": {
-        "q": "Kan ik mijn geld terugkrijgen?",
-        "a": "Ja, voor credits die je de afgelopen 14 dagen hebt gekocht en nog niet hebt besteed: via Paddle of door ons te schrijven. Gratis credits, zoals het welkomstcadeau, worden niet terugbetaald. De voorwaarden geven de details."
-      },
-      "privacy": {
-        "q": "Wat gebeurt er met wat ik plak en beantwoord?",
-        "a": "We gebruiken het om je kits te maken en je voortgang bij te houden. Privé-kits zijn alleen zichtbaar voor jou en de mensen met wie je ze deelt. Het privacybeleid legt uit wat we bewaren, hoe lang, en wat je rechten zijn."
-      },
-      "delete": {
-        "q": "Kan ik mijn account verwijderen?",
-        "a": "Ja, in Instellingen. Je account en je gegevens worden verwijderd, en vooraf kun je een kopie van je gegevens downloaden."
-      },
-      "languages": {
-        "q": "Welke talen worden ondersteund?",
-        "a": "{count} talen, voor de site, de kits en de e-mails. Kies de taal waarin een kit wordt gemaakt, in welke taal je tekst ook is."
-      },
-      "hiring": {
-        "q": "Hoe werkt werven met prepza?",
-        "a": "Maak een bedrijf aan, maak een sollicitatiegesprek van een vacaturetekst en nodig kandidaten uit per e-mail. Elke kandidaat kost {candidate} credits, die pas worden afgeschreven als hij het gesprek afrondt, en een nieuw bedrijf krijgt {company} gratis credits."
-      },
-      "scorecards": {
-        "q": "Wat laten rapporten zien?",
-        "a": "Elk antwoord, of het goed was en hoe lang het duurde. Ze markeren ook antwoorden die te snel waren om de vraag te hebben gelezen, keren dat de kandidaat de pagina verliet, en kopieerpogingen."
-      },
-      "candidates": {
-        "q": "Wat zien kandidaten?",
-        "a": "Wat ze kunnen verwachten voordat ze beginnen, en daarna één vraag met tijdslimiet tegelijk. Ze zien nooit hun score of of een antwoord goed was."
-      }
+    "intro": "Staat je antwoord er niet bij? Vraag het de chat onderaan deze pagina, of schrijf ons op het adres in het privacybeleid.",
+    "chat": {
+      "title": "Vraag over prepza",
+      "text": "Vragen over functies, prijzen, betalingen, de voorwaarden of privacy. De AI antwoordt op basis van prepza’s eigen documenten. Antwoorden worden door AI geschreven en kunnen fout zijn. De prijspagina, de voorwaarden en het privacybeleid zijn bepalend.",
+      "placeholder": "Stel een vraag over prepza…",
+      "failed": "Er kon nu geen antwoord worden opgehaald. Probeer het opnieuw."
     }
   }
 }

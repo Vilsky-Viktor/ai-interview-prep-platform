@@ -245,7 +245,7 @@
     "yourAnswer": "Jawabanmu",
     "askFollowUp": "Ajukan pertanyaan lanjutan",
     "followUp": "Pertanyaan lanjutan",
-    "followUpPlaceholder": "Ajukan pertanyaan lanjutan… ({hint})",
+    "followUpPlaceholder": "Ajukan pertanyaan lanjutan…",
     "replyFailed": "Tidak bisa mendapatkan balasan. Coba lagi.",
     "firstRound": "Sesi pertamamu di topik ini",
     "sameAsLast": "Sama seperti sesi terakhirmu",
@@ -677,60 +677,12 @@
   },
   "faq": {
     "title": "Pertanyaan yang sering diajukan",
-    "intro": "Tidak menemukan jawabannya? Kirim pesan ke alamat yang ada di kebijakan privasi.",
-    "items": {
-      "different": {
-        "q": "Apa bedanya prepza dengan flashcard atau bank soal?",
-        "a": "Prepza membuat soal tepat untuk hal yang sedang kamu siapkan, dari deskripsi pekerjaan atau tujuanmu. Ronde mengulang soal yang kamu salah, tutor AI menjelaskan setiap jawaban, dan sertifikat menunjukkan kapan sebuah topik sudah dikuasai."
-      },
-      "topics": {
-        "q": "Aku bisa bersiap untuk apa saja?",
-        "a": "Wawancara kerja di bidang apa pun, sertifikasi, ujian, tes, promosi, atau apa saja yang ingin kamu pelajari. Kalau kamu bisa menjelaskannya, prepza bisa membuat kit untuknya."
-      },
-      "certificates": {
-        "q": "Bagaimana sertifikat bekerja?",
-        "a": "Setiap topik punya sertifikatnya sendiri. Jawab semua soal topik itu dengan cukup banyak jawaban benar, dan sertifikatnya milikmu. Yang dihitung adalah jawaban terakhirmu untuk setiap soal, jadi kamu bisa terus berlatih sampai berhasil."
-      },
-      "cost": {
-        "q": "Berapa biayanya?",
-        "a": "Kamu membayar sesuai pemakaian, dengan kredit. Kit baru seharga {kit} kredit, dan setiap akun baru mendapat {welcome} kredit gratis, cukup untuk kit pertama. Halaman harga mencantumkan semua harga."
-      },
-      "expire": {
-        "q": "Apakah kredit bisa kedaluwarsa?",
-        "a": "Tidak. Kredit tidak pernah kedaluwarsa, dan tidak ada langganan atau perpanjangan."
-      },
-      "failed": {
-        "q": "Bagaimana kalau kit gagal dibuat?",
-        "a": "Kamu hanya dikenai biaya saat kit sudah siap. Kalau pembuatan gagal atau kamu membatalkannya, kreditnya kembali."
-      },
-      "refunds": {
-        "q": "Bisakah aku mendapat pengembalian dana?",
-        "a": "Bisa, untuk kredit yang kamu beli dalam 14 hari terakhir dan belum dipakai: lewat Paddle atau dengan menulis kepada kami. Kredit gratis, seperti hadiah sambutan, tidak dikembalikan. Rinciannya ada di ketentuan."
-      },
-      "privacy": {
-        "q": "Apa yang terjadi pada yang kutempel dan kujawab?",
-        "a": "Kami memakainya untuk membuat kit dan melacak kemajuanmu. Kit pribadi hanya terlihat olehmu dan orang yang kamu bagikan. Kebijakan privasi menjelaskan apa yang kami simpan, berapa lama, dan apa hak-hakmu."
-      },
-      "delete": {
-        "q": "Bisakah aku menghapus akunku?",
-        "a": "Bisa, di Pengaturan. Akun dan datamu dihapus, dan sebelumnya kamu bisa mengunduh salinan datamu."
-      },
-      "languages": {
-        "q": "Bahasa apa saja yang didukung?",
-        "a": "{count} bahasa, untuk situs, kit, dan email. Pilih bahasa pembuatan kit, apa pun bahasa teksmu."
-      },
-      "hiring": {
-        "q": "Bagaimana merekrut dengan prepza?",
-        "a": "Buat perusahaan, buat wawancara dari deskripsi pekerjaan, dan undang kandidat lewat email. Setiap kandidat seharga {candidate} kredit, yang hanya dipotong saat kandidat menyelesaikan wawancara, dan perusahaan baru mendapat {company} kredit gratis."
-      },
-      "scorecards": {
-        "q": "Apa yang ditampilkan kartu skor?",
-        "a": "Setiap jawaban, apakah benar, dan berapa lama waktunya. Kartu skor juga menandai jawaban yang terlalu cepat untuk sempat membaca soal, saat kandidat keluar dari halaman, dan upaya menyalin."
-      },
-      "candidates": {
-        "q": "Apa yang dilihat kandidat?",
-        "a": "Apa yang bisa diharapkan sebelum mulai, lalu satu soal berbatas waktu setiap kalinya. Mereka tidak pernah melihat skornya atau apakah jawabannya benar."
-      }
+    "intro": "Tidak menemukan jawabannya? Tanyakan ke chat di akhir halaman ini, atau kirim pesan ke alamat di kebijakan privasi.",
+    "chat": {
+      "title": "Tanya tentang prepza",
+      "text": "Pertanyaan tentang fitur, harga, pembayaran, ketentuan, atau privasi. AI menjawab berdasarkan dokumen prepza sendiri. Jawaban ditulis oleh AI dan bisa salah. Yang berlaku adalah halaman harga, ketentuan, dan kebijakan privasi.",
+      "placeholder": "Ajukan pertanyaan tentang prepza…",
+      "failed": "Jawaban tidak bisa didapat sekarang. Coba lagi."
     }
   }
 }

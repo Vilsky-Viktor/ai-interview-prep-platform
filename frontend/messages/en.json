@@ -251,7 +251,7 @@
     "yourAnswer": "Your answer",
     "askFollowUp": "Ask a follow-up",
     "followUp": "Follow-up question",
-    "followUpPlaceholder": "Ask a follow-up question… ({hint})",
+    "followUpPlaceholder": "Ask a follow-up question…",
     "replyFailed": "Couldn't get a reply. Please try again.",
     "firstRound": "Your first round on this topic",
     "sameAsLast": "Same as your last round",
@@ -683,60 +683,12 @@
   },
   "faq": {
     "title": "Frequently asked questions",
-    "intro": "Can't find your answer? Write to us at the address in the privacy policy.",
-    "items": {
-      "different": {
-        "q": "How is prepza different from flashcards or question banks?",
-        "a": "Prepza writes the questions for exactly what you're preparing for, from your job description or goal. Every round starts with what you haven't answered, then what you got wrong; an AI tutor explains every answer; and certificates show when a topic is mastered."
-      },
-      "topics": {
-        "q": "What can I prepare for?",
-        "a": "Job interviews in any field, certifications, exams, tests, a promotion, or anything you want to learn. If you can describe it, prepza can build a kit for it."
-      },
-      "certificates": {
-        "q": "How do certificates work?",
-        "a": "Each topic has its own certificate. Answer every question of the topic with enough of them right, and it's yours. Your latest answer to each question counts, so you can keep practicing until you get there."
-      },
-      "cost": {
-        "q": "How much does it cost?",
-        "a": "You pay as you go with credits. A new kit costs {kit} credits, and every new account gets {welcome} free credits, enough for a first kit. The pricing page lists every price."
-      },
-      "expire": {
-        "q": "Do credits expire?",
-        "a": "No. Credits never expire, and there are no subscriptions or renewals."
-      },
-      "failed": {
-        "q": "What if a kit fails?",
-        "a": "You're only charged when a kit is ready. If generation fails or you cancel it, the credits come back to you."
-      },
-      "refunds": {
-        "q": "Can I get a refund?",
-        "a": "Yes, for credits you bought in the last 14 days and haven't spent: through Paddle, or by writing to us. Free credits, such as the welcome gift, aren't refunded. The terms have the details."
-      },
-      "privacy": {
-        "q": "What happens to what I paste and answer?",
-        "a": "We use it to build your kits and track your progress. Private kits are visible only to you and the people you share them with. The privacy policy explains what we keep, for how long, and your rights."
-      },
-      "delete": {
-        "q": "Can I delete my account?",
-        "a": "Yes, in Settings. Your account and your data are deleted, and you can download a copy of your data first."
-      },
-      "languages": {
-        "q": "Which languages are supported?",
-        "a": "{count} languages, for the site, the kits and the emails. Choose the language a kit is generated in, whatever language your text is in."
-      },
-      "hiring": {
-        "q": "How does hiring with prepza work?",
-        "a": "Create a company, generate an interview from a job description, and invite candidates by email. Each candidate costs {candidate} credits, charged only when they finish the interview, and a new company gets {company} free credits."
-      },
-      "scorecards": {
-        "q": "What do scorecards show?",
-        "a": "Every answer, whether it was right and how long it took. They also flag answers too fast to have been read, times the candidate left the page, and copy attempts."
-      },
-      "candidates": {
-        "q": "What do candidates see?",
-        "a": "What to expect before they start, then one timed question at a time. They never see their score or whether an answer was right."
-      }
+    "intro": "Can't find your answer? Ask the chat at the end of this page, or write to us at the address in the privacy policy.",
+    "chat": {
+      "title": "Ask about prepza",
+      "text": "Questions about features, prices, billing, the terms or privacy. The AI answers from prepza's own documents but can be wrong; the pricing page, terms and privacy policy are what count.",
+      "placeholder": "Ask a question about prepza…",
+      "failed": "Couldn't get an answer right now. Please try again."
     }
   }
 }

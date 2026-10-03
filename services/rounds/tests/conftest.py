@@ -20,6 +20,8 @@ os.environ.setdefault("ROUNDS_SERVICE_SECRET", "test-secret-that-is-at-least-32-
 os.environ.setdefault("COMPANIES_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("BILLING_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("LLM_LIMIT", "0")
+os.environ.setdefault("HELP_USER_LIMIT", "0")
+os.environ.setdefault("HELP_DAILY_LIMIT", "0")
 
 import pytest
 from fastapi.testclient import TestClient

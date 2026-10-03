@@ -1,15 +1,16 @@
 import { ApiError, authHeaders, errorDetail } from "@/lib/api"
+import type { HelpMessage } from "@/types/help"
 
-/** Sends a follow-up message and calls onDelta with each streamed piece of the reply. */
-export async function streamChat(
-  answerId: string,
-  message: string,
+/** Posts to a streaming chat route and calls onDelta with each piece of the reply. */
+async function streamReply(
+  path: string,
+  body: unknown,
   onDelta: (delta: string) => void
 ) {
-  const response = await fetch(`/api/rounds/answers/${answerId}/chat`, {
+  const response = await fetch(`/api${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json", ...(await authHeaders()) },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify(body),
   })
 
   if (!response.ok || !response.body) {
@@ -47,4 +48,21 @@ export async function streamChat(
       }
     }
   }
+}
+
+/** Sends a follow-up message to the tutor about an answer. */
+export function streamChat(
+  answerId: string,
+  message: string,
+  onDelta: (delta: string) => void
+) {
+  return streamReply(`/rounds/answers/${answerId}/chat`, { message }, onDelta)
+}
+
+/** Asks the FAQ page's help chat; the page keeps the conversation and sends it whole. */
+export function streamHelp(
+  messages: HelpMessage[],
+  onDelta: (delta: string) => void
+) {
+  return streamReply("/rounds/help/chat", { messages }, onDelta)
 }

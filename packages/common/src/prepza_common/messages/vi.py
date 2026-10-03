@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "Một bộ có thể chia sẻ với tối đa 30 người.",
     "Title is required": "Bắt buộc phải có tiêu đề",
     "Details are required for this reason.": "Lý do này cần có chi tiết.",
+    "The question is too long.": "Câu hỏi quá dài.",
 }

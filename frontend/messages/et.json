@@ -251,7 +251,7 @@
     "yourAnswer": "Sinu vastus",
     "askFollowUp": "Esita täpsustav küsimus",
     "followUp": "Täpsustav küsimus",
-    "followUpPlaceholder": "Esita täpsustav küsimus… ({hint})",
+    "followUpPlaceholder": "Esita täpsustav küsimus…",
     "replyFailed": "Vastust ei õnnestunud saada. Proovi uuesti.",
     "firstRound": "Sinu esimene voor sellel teemal",
     "sameAsLast": "Sama mis eelmises voorus",
@@ -683,60 +683,12 @@
   },
   "faq": {
     "title": "Korduma kippuvad küsimused",
-    "intro": "Ei leidnud vastust? Kirjuta meile privaatsuspoliitikas toodud aadressil.",
-    "items": {
-      "different": {
-        "q": "Mille poolest erineb prepza mälukaartidest või küsimustepankadest?",
-        "a": "Prepza loob küsimused täpselt selle jaoks, milleks valmistud, sinu töökuulutuse või eesmärgi põhjal. Voorud toovad tagasi, milles eksisid, tehisaru juhendaja selgitab iga vastust ja sertifikaadid näitavad, millal teema on omandatud."
-      },
-      "topics": {
-        "q": "Milleks saan valmistuda?",
-        "a": "Tööintervjuudeks mis tahes valdkonnas, sertifitseerimisteks, eksamiteks, testideks, edutamiseks või millekski muuks, mida tahad õppida. Kui suudad seda kirjeldada, suudab prepza selle jaoks komplekti luua."
-      },
-      "certificates": {
-        "q": "Kuidas sertifikaadid töötavad?",
-        "a": "Igal teemal on oma sertifikaat. Vasta kõigile teema küsimustele piisavalt paljude õigete vastustega ja see on sinu. Arvesse läheb viimane vastus igale küsimusele, nii et võid harjutada, kuni see õnnestub."
-      },
-      "cost": {
-        "q": "Kui palju see maksab?",
-        "a": "Maksad kasutuse järgi, krediitidega. Uus komplekt maksab {kit} krediiti ja iga uus konto saab {welcome} tasuta krediiti, millest piisab esimeseks komplektiks. Hinnaleht näitab kõiki hindu."
-      },
-      "expire": {
-        "q": "Kas krediidid aeguvad?",
-        "a": "Ei. Krediidid ei aegu kunagi ning tellimusi ega pikendamisi pole."
-      },
-      "failed": {
-        "q": "Mis siis, kui komplekt ebaõnnestub?",
-        "a": "Tasu võetakse alles siis, kui komplekt on valmis. Kui loomine ebaõnnestub või tühistad selle, saad krediidid tagasi."
-      },
-      "refunds": {
-        "q": "Kas saan raha tagasi?",
-        "a": "Jah, viimase 14 päeva jooksul ostetud ja kulutamata krediitide eest: Paddle'i kaudu või meile kirjutades. Tasuta krediite, näiteks tervituskingitust, ei hüvitata. Üksikasjad on tingimustes."
-      },
-      "privacy": {
-        "q": "Mis saab sellest, mida kleebin ja vastan?",
-        "a": "Kasutame seda sinu komplektide loomiseks ja edusammude jälgimiseks. Privaatseid komplekte näevad ainult sina ja need, kellega neid jagad. Privaatsuspoliitika selgitab, mida me hoiame, kui kaua ja millised on sinu õigused."
-      },
-      "delete": {
-        "q": "Kas saan oma konto kustutada?",
-        "a": "Jah, seadetes. Sinu konto ja andmed kustutatakse ning enne seda saad oma andmetest koopia alla laadida."
-      },
-      "languages": {
-        "q": "Milliseid keeli toetatakse?",
-        "a": "{count} keelt saidi, komplektide ja e-kirjade jaoks. Vali keel, milles komplekt luuakse, olenemata sellest, mis keeles on sinu tekst."
-      },
-      "hiring": {
-        "q": "Kuidas prepzaga värbamine käib?",
-        "a": "Loo ettevõte, koosta töökuulutusest intervjuu ja kutsu kandidaadid e-postiga. Iga kandidaat maksab {candidate} krediiti, mis võetakse alles siis, kui ta intervjuu lõpetab, ja uus ettevõte saab {company} tasuta krediiti."
-      },
-      "scorecards": {
-        "q": "Mida aruanded näitavad?",
-        "a": "Iga vastust, kas see oli õige ja kui kaua see aega võttis. Need märgivad ka vastused, mis olid küsimuse lugemiseks liiga kiired, lehelt lahkumised ja kopeerimiskatsed."
-      },
-      "candidates": {
-        "q": "Mida kandidaadid näevad?",
-        "a": "Enne algust, mida oodata, ja siis ühe ajapiiranguga küsimuse korraga. Nad ei näe kunagi oma tulemust ega seda, kas vastus oli õige."
-      }
+    "intro": "Ei leidnud vastust? Küsi selle lehe lõpus olevalt vestluselt või kirjuta meile privaatsuspoliitikas toodud aadressil.",
+    "chat": {
+      "title": "Küsi prepza kohta",
+      "text": "Küsimused funktsioonide, hindade, maksete, tingimuste või privaatsuse kohta. Tehisaru vastab prepza enda dokumentide põhjal. Vastused kirjutab tehisaru ja need võivad olla valed. Kehtivad hinnaleht, tingimused ja privaatsuspoliitika.",
+      "placeholder": "Esita küsimus prepza kohta…",
+      "failed": "Praegu ei õnnestunud vastust saada. Proovi uuesti."
     }
   }
 }

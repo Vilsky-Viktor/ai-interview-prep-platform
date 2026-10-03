@@ -251,7 +251,7 @@
     "yourAnswer": "Cevabınız",
     "askFollowUp": "Ek soru sor",
     "followUp": "Ek soru",
-    "followUpPlaceholder": "Ek bir soru sorun… ({hint})",
+    "followUpPlaceholder": "Ek bir soru sorun…",
     "replyFailed": "Yanıt alınamadı. Lütfen tekrar deneyin.",
     "firstRound": "Bu konudaki ilk turunuz",
     "sameAsLast": "Son turunuzla aynı",
@@ -683,60 +683,12 @@
   },
   "faq": {
     "title": "Sıkça sorulan sorular",
-    "intro": "Yanıtınızı bulamadınız mı? Gizlilik politikasındaki adrese yazın.",
-    "items": {
-      "different": {
-        "q": "prepza'nın bilgi kartlarından veya soru bankalarından farkı ne?",
-        "a": "Prepza, soruları iş ilanınızdan veya hedefinizden yola çıkarak tam olarak hazırlandığınız şey için oluşturur. Turlar yanlış yaptıklarınızı geri getirir, bir yapay zekâ eğitmeni her yanıtı açıklar ve sertifikalar bir konuda ne zaman ustalaştığınızı gösterir."
-      },
-      "topics": {
-        "q": "Neye hazırlanabilirim?",
-        "a": "Her alanda iş mülakatlarına, sertifikalara, sınavlara, testlere, bir terfiye veya öğrenmek istediğiniz her şeye. Tarif edebiliyorsanız prepza onun için bir set oluşturabilir."
-      },
-      "certificates": {
-        "q": "Sertifikalar nasıl çalışır?",
-        "a": "Her konunun kendi sertifikası vardır. Konunun tüm sorularını yeterince doğru yanıtla tamamlayın, sertifika sizin olsun. Her soruya verdiğiniz son yanıt sayılır, bu yüzden başarana kadar çalışmaya devam edebilirsiniz."
-      },
-      "cost": {
-        "q": "Ücreti ne kadar?",
-        "a": "Kullandıkça kredilerle ödersiniz. Yeni bir set {kit} krediye mal olur ve her yeni hesap, ilk set için yeterli olan {welcome} ücretsiz kredi alır. Fiyatlar sayfası tüm fiyatları listeler."
-      },
-      "expire": {
-        "q": "Kredilerin süresi dolar mı?",
-        "a": "Hayır. Kredilerin süresi asla dolmaz; abonelik veya yenileme yoktur."
-      },
-      "failed": {
-        "q": "Bir set başarısız olursa ne olur?",
-        "a": "Yalnızca set hazır olduğunda ücret alınır. Oluşturma başarısız olursa veya iptal ederseniz krediler size geri döner."
-      },
-      "refunds": {
-        "q": "Para iadesi alabilir miyim?",
-        "a": "Evet, son 14 gün içinde satın aldığınız ve harcamadığınız krediler için: Paddle üzerinden veya bize yazarak. Hoş geldin hediyesi gibi ücretsiz krediler iade edilmez. Ayrıntılar koşullarda yer alır."
-      },
-      "privacy": {
-        "q": "Yapıştırdıklarım ve yanıtlarım ne oluyor?",
-        "a": "Bunları setlerinizi oluşturmak ve ilerlemenizi takip etmek için kullanırız. Özel setleri yalnızca siz ve paylaştığınız kişiler görür. Gizlilik politikası neyi, ne kadar süre sakladığımızı ve haklarınızı açıklar."
-      },
-      "delete": {
-        "q": "Hesabımı silebilir miyim?",
-        "a": "Evet, Ayarlar'dan. Hesabınız ve verileriniz silinir; öncesinde verilerinizin bir kopyasını indirebilirsiniz."
-      },
-      "languages": {
-        "q": "Hangi diller destekleniyor?",
-        "a": "Site, setler ve e-postalar için {count} dil. Metniniz hangi dilde olursa olsun, setin oluşturulacağı dili seçin."
-      },
-      "hiring": {
-        "q": "prepza ile işe alım nasıl çalışır?",
-        "a": "Bir şirket oluşturun, bir iş ilanından mülakat oluşturun ve adayları e-postayla davet edin. Her aday {candidate} krediye mal olur ve bu yalnızca aday mülakatı bitirdiğinde düşülür; yeni bir şirket {company} ücretsiz kredi alır."
-      },
-      "scorecards": {
-        "q": "Raporlar neyi gösterir?",
-        "a": "Her yanıtı, doğru olup olmadığını ve ne kadar sürdüğünü. Ayrıca soruyu okumak için fazla hızlı verilen yanıtları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler."
-      },
-      "candidates": {
-        "q": "Adaylar ne görür?",
-        "a": "Başlamadan önce neyle karşılaşacaklarını, ardından her seferinde tek bir süreli soruyu. Puanlarını veya bir yanıtın doğru olup olmadığını asla görmezler."
-      }
+    "intro": "Yanıtınızı bulamadınız mı? Bu sayfanın sonundaki sohbete sorun ya da gizlilik politikasındaki adrese yazın.",
+    "chat": {
+      "title": "prepza hakkında sorun",
+      "text": "Özellikler, fiyatlar, ödemeler, koşullar veya gizlilik hakkında sorular. Yapay zekâ, prepza’nın kendi belgelerine göre yanıtlar. Yanıtları yapay zekâ yazar ve hatalı olabilir. Geçerli olan fiyatlar sayfası, koşullar ve gizlilik politikasıdır.",
+      "placeholder": "prepza hakkında bir soru sorun…",
+      "failed": "Şu anda yanıt alınamadı. Lütfen tekrar deneyin."
     }
   }
 }

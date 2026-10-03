@@ -251,7 +251,7 @@
     "yourAnswer": "Deine Antwort",
     "askFollowUp": "Rückfrage stellen",
     "followUp": "Rückfrage",
-    "followUpPlaceholder": "Stell eine Rückfrage… ({hint})",
+    "followUpPlaceholder": "Stell eine Rückfrage…",
     "replyFailed": "Es konnte keine Antwort geladen werden. Bitte versuche es erneut.",
     "firstRound": "Deine erste Runde zu diesem Thema",
     "sameAsLast": "Wie in deiner letzten Runde",
@@ -683,60 +683,12 @@
   },
   "faq": {
     "title": "Häufige Fragen",
-    "intro": "Keine Antwort gefunden? Schreib uns an die Adresse in der Datenschutzerklärung.",
-    "items": {
-      "different": {
-        "q": "Was unterscheidet prepza von Karteikarten oder Fragenkatalogen?",
-        "a": "Prepza erstellt die Fragen genau für das, worauf du dich vorbereitest, aus deiner Stellenbeschreibung oder deinem Ziel. Runden bringen zurück, was du falsch hattest, ein KI-Tutor erklärt jede Antwort, und Zertifikate zeigen, wann ein Thema gemeistert ist."
-      },
-      "topics": {
-        "q": "Worauf kann ich mich vorbereiten?",
-        "a": "Vorstellungsgespräche in jedem Bereich, Zertifizierungen, Prüfungen, Tests, eine Beförderung oder alles, was du lernen willst. Wenn du es beschreiben kannst, kann prepza ein Kit dafür erstellen."
-      },
-      "certificates": {
-        "q": "Wie funktionieren Zertifikate?",
-        "a": "Jedes Thema hat sein eigenes Zertifikat. Beantworte alle Fragen des Themas mit genug richtigen Antworten, und es gehört dir. Es zählt deine letzte Antwort auf jede Frage, du kannst also weiterüben, bis du es schaffst."
-      },
-      "cost": {
-        "q": "Was kostet es?",
-        "a": "Du zahlst nach Nutzung, mit Credits. Ein neues Kit kostet {kit} Credits, und jedes neue Konto bekommt {welcome} Gratis-Credits, genug für ein erstes Kit. Die Preisseite listet alle Preise."
-      },
-      "expire": {
-        "q": "Verfallen Credits?",
-        "a": "Nein. Credits verfallen nie, und es gibt keine Abos oder Verlängerungen."
-      },
-      "failed": {
-        "q": "Was, wenn ein Kit fehlschlägt?",
-        "a": "Du zahlst erst, wenn ein Kit fertig ist. Schlägt die Erstellung fehl oder brichst du sie ab, bekommst du die Credits zurück."
-      },
-      "refunds": {
-        "q": "Kann ich mein Geld zurückbekommen?",
-        "a": "Ja, für Credits, die du in den letzten 14 Tagen gekauft und noch nicht ausgegeben hast: über Paddle oder indem du uns schreibst. Gratis-Credits wie das Willkommensgeschenk werden nicht erstattet. Details stehen in den Bedingungen."
-      },
-      "privacy": {
-        "q": "Was passiert mit dem, was ich einfüge und beantworte?",
-        "a": "Wir nutzen es, um deine Kits zu erstellen und deinen Fortschritt zu verfolgen. Private Kits sehen nur du und die Personen, mit denen du sie teilst. Die Datenschutzerklärung erklärt, was wir speichern, wie lange und welche Rechte du hast."
-      },
-      "delete": {
-        "q": "Kann ich mein Konto löschen?",
-        "a": "Ja, in den Einstellungen. Dein Konto und deine Daten werden gelöscht, und vorher kannst du eine Kopie deiner Daten herunterladen."
-      },
-      "languages": {
-        "q": "Welche Sprachen werden unterstützt?",
-        "a": "{count} Sprachen, für die Seite, die Kits und die E-Mails. Wähle die Sprache, in der ein Kit erstellt wird, egal in welcher Sprache dein Text ist."
-      },
-      "hiring": {
-        "q": "Wie funktioniert Recruiting mit prepza?",
-        "a": "Leg ein Unternehmen an, erstelle ein Interview aus einer Stellenbeschreibung und lade Kandidaten per E-Mail ein. Jeder Kandidat kostet {candidate} Credits, die erst abgebucht werden, wenn er das Interview beendet, und ein neues Unternehmen bekommt {company} Gratis-Credits."
-      },
-      "scorecards": {
-        "q": "Was zeigen die Auswertungen?",
-        "a": "Jede Antwort, ob sie richtig war und wie lange sie gedauert hat. Außerdem markieren sie Antworten, die zu schnell waren, um die Frage gelesen zu haben, wann der Kandidat die Seite verlassen hat und Kopierversuche."
-      },
-      "candidates": {
-        "q": "Was sehen Kandidaten?",
-        "a": "Vor dem Start, was sie erwartet, dann jeweils eine Frage mit Zeitlimit. Sie sehen nie ihre Punktzahl oder ob eine Antwort richtig war."
-      }
+    "intro": "Keine Antwort gefunden? Frag den Chat unten auf dieser Seite oder schreib uns an die Adresse in der Datenschutzerklärung.",
+    "chat": {
+      "title": "Frag zu prepza",
+      "text": "Fragen zu Funktionen, Preisen, Zahlungen, den Bedingungen oder dem Datenschutz. Die KI antwortet aus prepzas eigenen Dokumenten. Die Antworten schreibt eine KI, sie können falsch sein. Maßgeblich sind die Preisseite, die Bedingungen und die Datenschutzerklärung.",
+      "placeholder": "Stell eine Frage zu prepza…",
+      "failed": "Gerade keine Antwort möglich. Bitte versuche es erneut."
     }
   }
 }

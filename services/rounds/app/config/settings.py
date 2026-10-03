@@ -14,6 +14,10 @@ class Settings(ServiceSettings):
     llm_limit: int = Field(default=400, ge=0)
     llm_window_seconds: int = Field(default=3_600, gt=0)
     llm_model: str = "gpt-6-luna"
+    # The FAQ page's help chat is free and open to visitors: messages per signed-in account an
+    # hour, and in all a day, which caps what it can cost. Cloud Armor limits each visitor's IP.
+    help_user_limit: int = Field(default=30, ge=0)
+    help_daily_limit: int = Field(default=5_000, ge=0)
 
     @property
     def sqlalchemy_url(self) -> str:

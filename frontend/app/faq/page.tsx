@@ -1,11 +1,10 @@
 import { ChevronDownIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { FAQ_ITEMS } from "@/constants/faq"
-import { LOCALES } from "@/constants/i18n"
+import { HelpChat } from "@/components/help-chat"
 import { serverFetch } from "@/lib/server-api"
 import { pageMetadata } from "@/lib/site"
-import type { Catalog } from "@/types/billing"
+import type { FaqItem } from "@/types/help"
 
 export async function generateMetadata() {
   const t = await getTranslations("faq")
@@ -15,20 +14,8 @@ export async function generateMetadata() {
 
 export default async function FaqPage() {
   const t = await getTranslations("faq")
-  // Prices come from billing, which decides them.
-  const catalog = await serverFetch<Catalog>("/billing/catalog")
-  const values = {
-    count: LOCALES.length,
-    kit: catalog?.kit_credits ?? "",
-    welcome: catalog?.welcome_user ?? "",
-    candidate: catalog?.candidate_credits ?? "",
-    company: catalog?.welcome_company ?? "",
-  }
-  const items = FAQ_ITEMS.map((key) => ({
-    key,
-    question: t(`items.${key}.q`),
-    answer: t(`items.${key}.a`, values),
-  }))
+  // The questions come from the rounds service in the page's language, with today's prices.
+  const items = (await serverFetch<FaqItem[]>("/rounds/help/faq")) ?? []
   // FAQ structured data, so search engines can show the answers.
   const structured = {
     "@context": "https://schema.org",
@@ -67,6 +54,7 @@ export default async function FaqPage() {
           </details>
         ))}
       </div>
+      <HelpChat />
     </main>
   )
 }

@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "Bir set en fazla 30 kişiyle paylaşılabilir.",
     "Title is required": "Başlık gerekli",
     "Details are required for this reason.": "Bu neden için ayrıntı gerekli.",
+    "The question is too long.": "Soru çok uzun.",
 }

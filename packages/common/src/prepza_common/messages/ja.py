@@ -14,4 +14,5 @@ MESSAGES = {
     "A kit can be shared with at most 30 people.": "キットを共有できるのは最大30人までです。",
     "Title is required": "タイトルは必須です",
     "Details are required for this reason.": "この理由には詳細が必要です。",
+    "The question is too long.": "質問が長すぎます。",
 }
