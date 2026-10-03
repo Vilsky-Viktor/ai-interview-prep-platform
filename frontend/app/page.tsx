@@ -44,19 +44,17 @@ export default async function HomePage() {
           <ArrowDownIcon className="size-4" />
         </a>
       </div>
-      <div className="space-y-32 pt-8 pb-32">
-        <HowItWorks />
-        <ControlSection />
-        <GapsSection />
-        <TutorSection />
-        <ProofSection />
-        <QualitySection />
-        <ShareSection />
-        <CompaniesSection />
-        <LanguagesSection />
-        <PricingSection />
-        <Closing />
-      </div>
+      <HowItWorks />
+      <ControlSection />
+      <GapsSection />
+      <TutorSection />
+      <ProofSection />
+      <QualitySection />
+      <ShareSection />
+      <CompaniesSection />
+      <LanguagesSection />
+      <PricingSection />
+      <Closing />
     </main>
   )
 }

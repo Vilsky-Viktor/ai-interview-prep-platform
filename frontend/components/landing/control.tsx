@@ -19,7 +19,10 @@ export async function ControlSection() {
         <div className="space-y-3">
           <ul className={`${PANEL} divide-y divide-border/70`}>
             {TOPICS.map(({ key, checked }) => (
-              <li key={key} className="flex items-center gap-3 px-5 py-4">
+              <li
+                key={key}
+                className="flex items-center gap-4 px-6 py-4 text-base"
+              >
                 {checked ? (
                   <span className="flex size-4 items-center justify-center rounded-[5px] bg-primary text-primary-foreground">
                     <CheckIcon className="size-3" />
@@ -28,7 +31,9 @@ export async function ControlSection() {
                   <span className="size-4 rounded-[5px] border border-input" />
                 )}
                 <span
-                  className={checked ? "" : "text-muted-foreground line-through"}
+                  className={
+                    checked ? "" : "text-muted-foreground line-through"
+                  }
                 >
                   {t(`topics.${key}`)}
                 </span>
@@ -36,10 +41,10 @@ export async function ControlSection() {
             ))}
           </ul>
           <div
-            className={`${PANEL} flex items-center justify-between gap-3 rounded-full py-2 ps-5 pe-2 text-muted-foreground`}
+            className={`${PANEL} flex items-center justify-between gap-3 rounded-full py-2 ps-6 pe-2 text-base text-muted-foreground`}
           >
             <span>{t("change")}</span>
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
               <ArrowUpIcon className="size-4" />
             </span>
           </div>

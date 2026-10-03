@@ -1,9 +1,7 @@
 import { expect, test } from "@playwright/test"
 
 // The signed-out pages. Signed-in ones are checked by hand: sign-in isn't automated.
-const PAGES = ["/", "/library", "/pricing", "/terms", "/privacy"]
-// Pages short enough that the footer sits at the bottom of the window with nothing to scroll.
-const SHORT_PAGES = ["/"]
+const PAGES = ["/", "/library", "/pricing", "/terms", "/privacy", "/faq"]
 // The width every page's <main> has: max-w-5xl (CLAUDE.md, rule 6).
 const MAIN_MAX_WIDTH = 1024
 
@@ -27,6 +25,7 @@ for (const path of PAGES) {
       const root = document.documentElement
       const footer = document.querySelector("footer")!.getBoundingClientRect()
       const heading = document.querySelector("h1")
+      const input = document.querySelector("textarea")
 
       return {
         viewport: window.innerWidth,
@@ -37,6 +36,7 @@ for (const path of PAGES) {
         footerBottom: footer.bottom + window.scrollY,
         mainWidth: document.querySelector("main")!.getBoundingClientRect().width,
         headingCase: heading ? getComputedStyle(heading).textTransform : "lowercase",
+        inputBottom: input ? input.getBoundingClientRect().bottom : 0,
       }
     })
 
@@ -44,12 +44,10 @@ for (const path of PAGES) {
     expect(layout.scrollWidth).toBeLessThanOrEqual(layout.clientWidth)
     // Every page is as wide as the header.
     expect(layout.mainWidth).toBe(Math.min(MAIN_MAX_WIDTH, layout.viewport))
-    // The footer ends the page; a short page doesn't scroll.
+    // The footer ends the page.
     expect(Math.abs(layout.footerBottom - layout.scrollHeight)).toBeLessThanOrEqual(1)
-
-    if (SHORT_PAGES.includes(path)) {
-      expect(layout.scrollHeight).toBeLessThanOrEqual(layout.innerHeight)
-    }
+    // The home page's input is on the first screen, above the landing sections.
+    expect(layout.inputBottom).toBeLessThanOrEqual(layout.innerHeight)
 
     // Titles are lowercase, like the logo.
     expect(layout.headingCase).toBe("lowercase")

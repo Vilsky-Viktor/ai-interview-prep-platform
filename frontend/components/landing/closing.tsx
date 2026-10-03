@@ -1,34 +1,25 @@
-import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 
+import { MoreLink } from "@/components/landing/section"
 import { StartButton } from "@/components/landing/start-button"
 
-/** The landing page's end: a link to the FAQ, and a way back to the input. */
+/** The landing page's last screen: a way back to the input, and a link to the FAQ. */
 export async function Closing() {
   const t = await getTranslations("landing")
 
   return (
-    <>
-      <section className="flex flex-wrap items-baseline justify-between gap-4 border-y py-8">
-        <div className="space-y-1">
-          <h2 className="no-dot font-heading text-xl font-medium">
-            {t("faq.title")}
-          </h2>
-          <p className="text-muted-foreground">{t("faq.text")}</p>
-        </div>
-        <Link
-          href="/faq"
-          className="text-primary underline-offset-4 hover:underline"
-        >
-          {t("faq.read")} →
-        </Link>
-      </section>
-      <section className="space-y-8 py-12 text-center">
-        <h2 className="no-dot font-heading text-4xl font-medium tracking-tight sm:text-6xl">
+    <section className="flex min-h-[calc(100svh-3.5rem)] flex-col items-center justify-center gap-24 py-24 text-center">
+      <div className="space-y-10">
+        <h2 className="no-dot font-heading text-5xl font-medium tracking-tight sm:text-7xl">
           {t("ready.title")}
         </h2>
         <StartButton label={t("ready.start")} />
-      </section>
-    </>
+      </div>
+      <div className="space-y-3">
+        <h3 className="font-heading text-2xl font-medium">{t("faq.title")}</h3>
+        <p className="text-lg text-muted-foreground">{t("faq.text")}</p>
+        <MoreLink href="/faq">{t("faq.read")}</MoreLink>
+      </div>
+    </section>
   )
 }

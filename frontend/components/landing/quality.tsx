@@ -10,22 +10,20 @@ export async function QualitySection() {
   return (
     <LandingSection title={t("title")} text={t("text")}>
       <Stage>
-        <ol className={`${PANEL} space-y-0 p-5`}>
+        <ol className={`${PANEL} p-6 text-base`}>
           {STEPS.map((key, index) => (
-            <li key={key} className="flex gap-4">
-              <div className="flex flex-col items-center">
-                <span
-                  className={
-                    index === STEPS.length - 1
-                      ? "mt-1.5 size-2.5 rounded-full bg-primary"
-                      : "mt-1.5 size-2.5 rounded-full border-2 border-primary"
-                  }
-                />
-                {index < STEPS.length - 1 && (
-                  <span className="my-1 w-px flex-1 bg-border" />
-                )}
-              </div>
-              <span className="pb-6 last:pb-0">{t(`steps.${key}`)}</span>
+            <li key={key} className="relative flex gap-4 pb-8 last:pb-0">
+              {index < STEPS.length - 1 && (
+                <span className="absolute start-[4.5px] top-5 bottom-1 w-px bg-border" />
+              )}
+              <span
+                className={
+                  index === STEPS.length - 1
+                    ? "mt-2 size-2.5 shrink-0 rounded-full bg-primary"
+                    : "mt-2 size-2.5 shrink-0 rounded-full border-2 border-primary bg-background"
+                }
+              />
+              <span>{t(`steps.${key}`)}</span>
             </li>
           ))}
         </ol>

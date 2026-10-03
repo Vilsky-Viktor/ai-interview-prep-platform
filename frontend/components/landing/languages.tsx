@@ -13,12 +13,14 @@ export async function LanguagesSection() {
       text={t("text", { count: LOCALES.length })}
     >
       <Stage>
-        <p className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-center font-heading text-lg">
+        <p className="flex flex-wrap justify-center gap-x-5 gap-y-3 text-center text-xl">
           {LOCALES.map((code) => (
             <span
               key={code}
               lang={code}
-              className={code === locale ? "text-primary" : "text-muted-foreground"}
+              className={
+                code === locale ? "text-primary" : "text-muted-foreground"
+              }
             >
               {LANGUAGE_NAMES[code]}
             </span>
