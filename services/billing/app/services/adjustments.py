@@ -1,7 +1,10 @@
 import logging
 
+from prepza_common.analytics import track
+
 from app.constants.credits import Reason
 from app.constants.products import ADJUSTMENT_APPROVED, DELETED_OWNER
+from app.helpers.owners import owner_of
 from app.storage import ledger, purchases
 
 logger = logging.getLogger(__name__)
@@ -54,4 +57,10 @@ async def handle_adjustment(data: dict) -> None:
     if credits:
         await ledger.adjust(
             owner_type, owner_id, sign * credits, f"adjustment:{data['id']}", reason
+        )
+        await track(
+            "credits_taken_back",
+            **owner_of(owner_type, owner_id),
+            why=reason,
+            credits=sign * credits,
         )

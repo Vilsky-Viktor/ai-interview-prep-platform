@@ -3,6 +3,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import StreamingResponse
+from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.i18n import translate
 from prepza_common.rate_limit import hit
@@ -59,6 +60,8 @@ async def send_chat(answer_id: UUID, body: ChatRequest, user: CurrentUser) -> St
 
     # Checked before the reply, charged after it: a reply that fails costs nothing.
     if paid and await billing.available_credits(user.uid) < CHAT_TURN_CREDITS:
+        await track("balance_too_low", user_id=user.uid, what="chat")
+
         raise HTTPException(status.HTTP_402_PAYMENT_REQUIRED, NOT_ENOUGH_CREDITS)
 
     messages = build_messages(round_, answer, history, body.message.strip(), user.language)
@@ -80,6 +83,8 @@ async def send_chat(answer_id: UUID, body: ChatRequest, user: CurrentUser) -> St
 
         if paid:
             await charge_turn(user.uid, f"{answer_id}:{user_turns(history) + 1}")
+
+        await track("chat_turn", user_id=user.uid, paid=paid, turn=user_turns(history) + 1)
 
         yield sse_event({"done": True})
 

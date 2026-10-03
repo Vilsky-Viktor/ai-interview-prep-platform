@@ -40,9 +40,10 @@ async def history(owner_type: str, owner_id: str, offset: int, limit: int) -> li
         return list(await session.scalars(query))
 
 
-async def welcome(owner_type: str, owner_id: str, kind: str, email: str, amount: int) -> None:
+async def welcome(owner_type: str, owner_id: str, kind: str, email: str, amount: int) -> bool:
     """Creates the wallet with the welcome gift, once per email and kind: a learner's first
-    account, a person's first company. Deleting and signing up again doesn't repeat it."""
+    account, a person's first company. Deleting and signing up again doesn't repeat it. True
+    when the gift is new."""
     async with Session() as session:
         await ensure(session, owner_type, owner_id)
         new = await session.scalar(
@@ -57,9 +58,11 @@ async def welcome(owner_type: str, owner_id: str, kind: str, email: str, amount:
 
         await session.commit()
 
+        return bool(new)
 
-async def welcome_user(user_id: str, email: str) -> None:
-    await welcome(OwnerType.USER, user_id, GiftKind.USER, email, WELCOME_USER)
+
+async def welcome_user(user_id: str, email: str) -> bool:
+    return await welcome(OwnerType.USER, user_id, GiftKind.USER, email, WELCOME_USER)
 
 
 async def welcome_company(company_id: str, owner_email: str) -> None:

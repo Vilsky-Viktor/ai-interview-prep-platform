@@ -15,12 +15,13 @@ resource "google_pubsub_subscription" "dead_letter" {
   message_retention_duration = "604800s"
 }
 
-# Each consumer gets every event pushed to its /internal/events, signed as the invoker; it
-# ignores the types that aren't its own.
+# Each consumer gets every domain event pushed to its /internal/events, signed as the invoker;
+# it ignores the types that aren't its own. Funnel events go only to BigQuery (analytics.tf).
 resource "google_pubsub_subscription" "push" {
   for_each = toset(["library", "companies", "notifications"])
   name     = "${each.value}-events"
   topic    = google_pubsub_topic.events.id
+  filter   = "NOT hasPrefix(attributes.type, \"${local.funnel_prefix}\")"
 
   ack_deadline_seconds = 60
 

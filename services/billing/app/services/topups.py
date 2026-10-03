@@ -1,8 +1,11 @@
 import logging
 from datetime import UTC, datetime
 
+from prepza_common.analytics import track
+
 from app.constants.products import OwnerType
 from app.helpers.credits import credits_for
+from app.helpers.owners import owner_of
 from app.services.catalog import price_cents_for
 from app.storage import purchases
 
@@ -31,7 +34,7 @@ async def handle_completed(data: dict) -> None:
             continue
 
         key, paid_cents = found
-        await purchases.grant(
+        granted = await purchases.grant(
             owner_type,
             owner_id,
             credits_for(paid_cents),
@@ -43,3 +46,12 @@ async def handle_completed(data: dict) -> None:
             data["currency_code"],
             datetime.now(UTC),
         )
+
+        if granted:
+            await track(
+                "topped_up",
+                **owner_of(owner_type, owner_id),
+                amount_cents=paid_cents,
+                product=key,
+                currency=data["currency_code"],
+            )

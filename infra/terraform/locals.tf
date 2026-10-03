@@ -63,6 +63,8 @@ locals {
       base,
       { for callee in local.calls[name] : "service-secret-${callee}" => "${upper(callee)}_SERVICE_SECRET" },
       contains(keys(local.own_key), name) ? { "service-secret-${local.own_key[name]}" = "SERVICE_SECRET" } : {},
+      # The backend services record funnel events.
+      contains(keys(local.own_key), name) ? { analytics-salt = "ANALYTICS_SALT" } : {},
     )
   }
 }

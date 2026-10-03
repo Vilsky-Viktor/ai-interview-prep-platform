@@ -164,12 +164,12 @@ def test_signing_up_again_or_a_new_company_doesnt_repeat_the_gifts(run):
     company, recreated = str(uuid.uuid4()), str(uuid.uuid4())
 
     async def scenario():
-        await ledger.welcome_user(first, email)
+        assert await ledger.welcome_user(first, email)
         await ledger.welcome_company(company, email)
         await purchases.delete_user(first)
         await purchases.delete_company(company)
         # The same Google account signs in again as a new user, and makes a new company.
-        await ledger.welcome_user(again, email.upper())
+        assert not await ledger.welcome_user(again, email.upper())
         await ledger.welcome_company(recreated, email)
 
         return (

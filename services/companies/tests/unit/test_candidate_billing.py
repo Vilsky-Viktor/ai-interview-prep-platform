@@ -8,7 +8,7 @@ import pytest
 from app.constants.invites import INVITE_EXPIRY_DAYS, InviteStatus
 from app.integrations import billing
 from app.services import candidate_billing
-from app.storage import invites
+from app.storage import interviews, invites
 
 INTERVIEW_ID = uuid.uuid4()
 
@@ -42,7 +42,12 @@ def finished(monkeypatch, status=InviteStatus.IN_PROCESS):
         statuses.append(value)
 
     monkeypatch.setattr(invites, "get", fake_get)
+
+    async def fake_interview(interview_id):
+        return SimpleNamespace(id=interview_id, company_id=uuid.uuid4())
+
     monkeypatch.setattr(invites, "set_status", fake_set)
+    monkeypatch.setattr(interviews, "get", fake_interview)
 
     return invite, statuses
 

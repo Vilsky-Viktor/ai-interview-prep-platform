@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 
@@ -36,10 +37,13 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def create_company(body: CompanyCreate, user: CurrentUser) -> CompanyOut:
     if await companies.owned_count(user.uid) >= MAX_OWNED_COMPANIES:
+        await track("limit_hit", user_id=user.uid, which="companies_owned")
+
         raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, TOO_MANY_COMPANIES)
 
     company = await companies.create(body.name.strip(), user.uid, user.email)
     await billing.welcome_company(company.id, user.email)
+    await track("company_created", user_id=user.uid, company_id=company.id)
 
     return CompanyOut(
         id=company.id,

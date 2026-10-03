@@ -2,6 +2,8 @@ import asyncio
 import logging
 import uuid
 
+from prepza_common.analytics import track
+
 from app.constants.generation import GENERATION_FAILED, GENERATION_STOPPED, JOB_TIMEOUT_SECONDS
 from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
@@ -22,7 +24,7 @@ async def run_generation(graph, generation_id: uuid.UUID, resume: dict | None) -
         return
 
     if generation.status in (Status.CANCELLED, Status.FAILED):
-        await give_back(generation)
+        await give_back(generation, generation.status)
 
         return
 
@@ -31,14 +33,15 @@ async def run_generation(graph, generation_id: uuid.UUID, resume: dict | None) -
     except TimeoutError:
         logger.error("Generation %s ran out of time", generation_id)
         await generations.update(generation.id, status=Status.FAILED, error=GENERATION_STOPPED)
-        await give_back(generation)
+        await give_back(generation, "timeout")
     except Exception:
         logger.exception("Generation %s failed", generation_id)
         await generations.update(generation.id, status=Status.FAILED, error=GENERATION_FAILED)
-        await give_back(generation)
+        await give_back(generation, "error")
 
 
-async def give_back(generation) -> None:
+async def give_back(generation, why: str) -> None:
     """A learner's kit that didn't finish costs nothing. Interviews aren't charged."""
     if generation.kind == GenerationKind.PREPARATION:
         await billing.release_kit(generation.id)
+        await track("kit_failed", user_id=generation.owner_uid, why=why)

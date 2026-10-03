@@ -44,3 +44,7 @@ LANGUAGE_CLAIM = "language"
 
 # Tutor turns free on each answered question; rounds enforces it, billing's catalog shows it.
 CHAT_FREE_TURNS = 3
+
+# Funnel events for analytics go on the events topic with this type prefix; only they reach
+# BigQuery, and the services' push subscriptions leave them out.
+FUNNEL_PREFIX = "funnel."

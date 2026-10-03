@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 from fastapi.encoders import jsonable_encoder
+from prepza_common.analytics import track
 from prepza_common.paging import PageParams
 
 from app.constants.credits import (
@@ -12,6 +13,7 @@ from app.constants.credits import (
     Reason,
 )
 from app.constants.products import OwnerType
+from app.helpers.owners import owner_of
 from app.helpers.wallets import balance_out, entry_out
 from app.schemas.billing import BalanceOut, EntryOut, OwnersIn, SpendIn, WelcomeIn
 from app.service_auth import ServiceCaller
@@ -20,9 +22,15 @@ from app.storage import ledger, purchases
 router = APIRouter(prefix="/internal", tags=["internal"])
 
 
+async def refuse(owner_type: str, owner_id: str, reason: str) -> None:
+    await track("balance_too_low", **owner_of(owner_type, owner_id), what=reason)
+
+    raise HTTPException(status.HTTP_402_PAYMENT_REQUIRED, NOT_ENOUGH)
+
+
 async def take(owner_type: str, owner_id: str, amount: int, key: str, reason: str) -> None:
     if not await ledger.reserve(owner_type, owner_id, amount, key, reason):
-        raise HTTPException(status.HTTP_402_PAYMENT_REQUIRED, NOT_ENOUGH)
+        await refuse(owner_type, owner_id, reason)
 
 
 @router.post("/kits/{generation_id}/hold", status_code=status.HTTP_204_NO_CONTENT)
@@ -73,7 +81,7 @@ async def charge_certificate(body: SpendIn, caller: ServiceCaller) -> None:
         body.note,
         share,
     ):
-        raise HTTPException(status.HTTP_402_PAYMENT_REQUIRED, NOT_ENOUGH)
+        await refuse(OwnerType.USER, body.owner_id, Reason.CERTIFICATE)
 
 
 @router.post("/chat-turns", status_code=status.HTTP_204_NO_CONTENT)
@@ -82,7 +90,7 @@ async def charge_chat_turn(body: SpendIn, caller: ServiceCaller) -> None:
     if not await ledger.spend(
         OwnerType.USER, body.owner_id, CHAT_TURN_CREDITS, f"chat:{body.key}", Reason.CHAT
     ):
-        raise HTTPException(status.HTTP_402_PAYMENT_REQUIRED, NOT_ENOUGH)
+        await refuse(OwnerType.USER, body.owner_id, Reason.CHAT)
 
 
 @router.get("/users/{user_id}/credits")

@@ -1,11 +1,13 @@
 import uuid
 from datetime import UTC, datetime, timedelta
 
+from prepza_common.analytics import track
+
 from app.constants.events import INTERVIEW_FINISHED
 from app.constants.invites import INVITE_EXPIRY_DAYS, NOT_STARTED, InviteStatus
 from app.helpers.candidates import candidate_key
 from app.integrations import billing
-from app.storage import invites
+from app.storage import interviews, invites
 
 
 async def handle(event_type: str, data: dict) -> None:
@@ -25,10 +27,20 @@ async def handle(event_type: str, data: dict) -> None:
 
     key = candidate_key(invite.interview_id, invite.email)
 
-    if data["answered"] > 0:
+    charged = data["answered"] > 0
+
+    if charged:
         await billing.charge_candidate(key)
     else:
         await billing.release_candidate(key)
+
+    interview = await interviews.get(invite.interview_id)
+    await track(
+        "interview_finished",
+        company_id=interview.company_id if interview else None,
+        answered=data["answered"],
+        charged=charged,
+    )
 
 
 async def expire_unstarted() -> int:

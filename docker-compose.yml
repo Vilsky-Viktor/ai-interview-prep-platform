@@ -8,6 +8,8 @@ x-firebase-env: &firebase-env
   FIREBASE_AUTH_EMULATOR_HOST: ${FIREBASE_AUTH_EMULATOR_HOST}
   # Development only: serves /docs and /openapi.json, which `pnpm api-types` reads.
   API_DOCS: "true"
+  # Salts user ids in funnel events; in Google Cloud it's a secret.
+  ANALYTICS_SALT: local-analytics-salt
   # The key of each service, for tokens calling it; in Google Cloud each service has its own.
   LIBRARY_SERVICE_SECRET: ${SERVICE_SECRET}
   GENERATION_SERVICE_SECRET: ${SERVICE_SECRET}

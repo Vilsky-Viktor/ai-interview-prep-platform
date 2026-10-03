@@ -27,7 +27,7 @@ async def expire_reviews() -> None:
 
     # A learner's kit that expired in review gives its credits back.
     for generation in await generations.expire_reviews(before):
-        await give_back(generation)
+        await give_back(generation, "review_expired")
 
     await outbox_service.flush_quietly()
 
@@ -43,7 +43,7 @@ async def sweep(checkpointer) -> None:
 
     # Their credits come back; a retry sets them aside again.
     for generation in failed:
-        await give_back(generation)
+        await give_back(generation, "stuck")
 
     await expire_reviews()
 

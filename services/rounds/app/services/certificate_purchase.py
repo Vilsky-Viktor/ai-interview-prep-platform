@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from fastapi import HTTPException, status
+from prepza_common.analytics import track
 from prepza_common.user import User
 
 from app.helpers.coverage import coverage_score, current_scores, topic_texts
@@ -36,6 +37,8 @@ async def buy_certificate(topic_id: UUID, user: User) -> Certificate:
     await billing.charge_certificate(
         user.uid, f"{user.uid}:{topic.id}", topic.title, topic.public_author_id
     )
+
+    await track("certificate_issued", user_id=user.uid, paid=True, score=coverage)
 
     return await certificates.create(
         Certificate(

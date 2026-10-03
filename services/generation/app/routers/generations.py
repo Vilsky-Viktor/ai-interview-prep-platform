@@ -1,6 +1,7 @@
 from uuid import UUID, uuid4
 
 from fastapi import APIRouter, HTTPException, Request, status
+from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 from prepza_common.rate_limit import hit
@@ -67,6 +68,7 @@ async def create_generation(
         await billing.release_kit(generation_id)
         raise
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
+    await track("kit_started", user_id=user.uid, kind=body.kind, language=user.language)
 
     return GenerationOut.model_validate(generation)
 

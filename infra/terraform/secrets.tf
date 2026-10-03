@@ -54,5 +54,6 @@ locals {
   secret_ids = merge(
     { for name, secret in google_secret_manager_secret.manual : name => secret.secret_id },
     { for name in local.keyed_services : "service-secret-${name}" => google_secret_manager_secret.service_secret[name].secret_id },
+    { analytics-salt = google_secret_manager_secret.analytics_salt.secret_id },
   )
 }

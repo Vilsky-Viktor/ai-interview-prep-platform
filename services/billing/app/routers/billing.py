@@ -1,6 +1,7 @@
 import time
 
 from fastapi import APIRouter, HTTPException, Query, Request, status
+from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import CHAT_FREE_TURNS
 from prepza_common.paging import PageParams
@@ -89,7 +90,8 @@ def quote(
 @router.get("/me")
 async def my_balance(user: CurrentUser) -> BalanceOut:
     # The first visit gives the welcome gift, once per email (the frontend asks on sign-in).
-    await ledger.welcome_user(user.uid, user.email)
+    if await ledger.welcome_user(user.uid, user.email):
+        await track("signed_up", user_id=user.uid, language=user.language)
 
     return balance_out(await ledger.wallet(OwnerType.USER, user.uid))
 

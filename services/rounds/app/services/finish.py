@@ -1,3 +1,4 @@
+from prepza_common.analytics import track
 from prepza_common.user import User
 
 from app.constants.rounds import RoundStatus
@@ -50,4 +51,14 @@ async def finish_round(round_: Round, user: User) -> None:
         )
 
     await rounds.finish(round_.id, final, certificate)
+    await track(
+        "round_finished",
+        user_id=user.uid,
+        public=topic is not None and topic.public_author_id is not None,
+        score=final,
+    )
+
+    if certificate is not None:
+        await track("certificate_issued", user_id=user.uid, paid=False, score=coverage)
+
     await progress.rebuild(user.uid, [answer.question_id for answer in round_.answers])

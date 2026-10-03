@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 from prepza_common.rate_limit import hit_emails
@@ -26,9 +27,12 @@ async def share(preparation_id: UUID, body: ShareIn, user: CurrentUser) -> Share
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "You can't share with yourself")
 
     # Resending to someone already invited is always allowed.
-    if not await shares.is_invited(preparation_id, email) and (
-        await shares.count_for_set(preparation_id) >= MAX_SHARES
-    ):
+    invited = await shares.is_invited(preparation_id, email)
+    people = await shares.count_for_set(preparation_id)
+
+    if not invited and people >= MAX_SHARES:
+        await track("limit_hit", user_id=user.uid, which="shares")
+
         raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, TOO_MANY_SHARES)
 
     await hit_emails(
@@ -43,6 +47,9 @@ async def share(preparation_id: UUID, body: ShareIn, user: CurrentUser) -> Share
         preparation_id, email, user.uid, question_set.title, user.name or user.email
     )
     await outbox_service.flush_quietly()
+
+    if not invited:
+        await track("kit_shared", user_id=user.uid, people=people + 1)
 
     return ShareOut(
         email=invite.email, accepted=invite.accepted_by is not None, created_at=invite.created_at

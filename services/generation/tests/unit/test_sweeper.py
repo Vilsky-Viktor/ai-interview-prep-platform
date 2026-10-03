@@ -166,9 +166,9 @@ def test_worker_skips_a_generation_the_sweeper_already_failed(monkeypatch):
 
 
 def test_kits_failed_by_the_sweep_or_expired_in_review_give_their_credits_back(monkeypatch):
-    stuck_kit = SimpleNamespace(id=uuid.uuid4(), kind="preparation")
+    stuck_kit = SimpleNamespace(id=uuid.uuid4(), kind="preparation", owner_uid="ann")
     stuck_interview = SimpleNamespace(id=uuid.uuid4(), kind="interview")
-    expired_kit = SimpleNamespace(id=uuid.uuid4(), kind="preparation")
+    expired_kit = SimpleNamespace(id=uuid.uuid4(), kind="preparation", owner_uid="ann")
     released = []
 
     async def fake_fail_stuck(before, error):

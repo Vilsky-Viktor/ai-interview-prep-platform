@@ -4,6 +4,7 @@ import uuid
 from contextlib import aclosing
 
 from langgraph.types import Command
+from prepza_common.analytics import track
 
 from app.constants.events import GENERATION_COMPLETED
 from app.constants.generation import (
@@ -105,6 +106,12 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
 
     if generation.kind == GenerationKind.PREPARATION:
         await charge_finished_kit(generation.id)
+        await track(
+            "kit_ready",
+            user_id=generation.owner_uid,
+            topics=len(payload.topics),
+            language=generation.language,
+        )
 
 
 async def charge_finished_kit(generation_id: uuid.UUID) -> None:

@@ -1,4 +1,5 @@
 from fastapi import HTTPException, status
+from prepza_common.analytics import track
 
 from app.constants.kinds import GenerationKind
 from app.integrations import billing
@@ -16,5 +17,6 @@ async def cancel_generation(generation: Generation) -> Generation:
 
     if generation.kind == GenerationKind.PREPARATION:
         await billing.release_kit(generation.id)
+        await track("kit_failed", user_id=generation.owner_uid, why="cancelled")
 
     return await generations.get(generation.id)

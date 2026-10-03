@@ -2,6 +2,7 @@ from uuid import UUID
 
 import httpx
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import DAY_SECONDS
 from prepza_common.paging import PageParams
@@ -46,13 +47,18 @@ async def create_interview(
     body: InterviewCreate, company_id: UUID, user: CurrentUser
 ) -> InterviewOut:
     company, _ = await require_company(user, company_id)
-    await hit(
-        get_redis(),
-        f"rate:interviews:{company.id}",
-        INTERVIEWS_PER_DAY,
-        DAY_SECONDS,
-        TOO_MANY_INTERVIEWS,
-    )
+
+    try:
+        await hit(
+            get_redis(),
+            f"rate:interviews:{company.id}",
+            INTERVIEWS_PER_DAY,
+            DAY_SECONDS,
+            TOO_MANY_INTERVIEWS,
+        )
+    except HTTPException:
+        await track("limit_hit", user_id=user.uid, company_id=company.id, which="interviews_a_day")
+        raise
 
     try:
         created = await generation_api.create(body.text, company.id, user.uid, user.language)
@@ -196,6 +202,9 @@ async def invite_candidate(
         raise
 
     await outbox_service.flush_quietly()
+
+    if current is None:
+        await track("candidate_invited", user_id=user.uid, company_id=company.id)
 
     return CandidateOut(
         id=invite.id, email=invite.email, status=invite.status, created_at=invite.created_at
