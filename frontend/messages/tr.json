@@ -542,7 +542,7 @@
     "failed": "Otomatik yükleme değiştirilemedi. Lütfen tekrar deneyin."
   },
   "generateIn": {
-    "label": "Dil"
+    "label": "Oluşturma dili"
   },
   "referral": {
     "title": "Arkadaşlarınızı davet edin",

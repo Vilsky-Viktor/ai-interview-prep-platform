@@ -43,7 +43,7 @@ export function LanguagePicker({
         className={cn(
           "flex items-center justify-between gap-3 rounded-full bg-muted/50 normal-case transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50",
           compact
-            ? "h-9 w-40 px-4 text-sm"
+            ? "h-9 w-48 px-4 text-sm"
             : "h-12 w-full max-w-xs px-5 text-base"
         )}
       >

@@ -542,7 +542,7 @@
     "failed": "无法更改自动充值，请重试。"
   },
   "generateIn": {
-    "label": "语言"
+    "label": "生成语言"
   },
   "referral": {
     "title": "邀请朋友",

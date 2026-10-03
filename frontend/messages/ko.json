@@ -542,7 +542,7 @@
     "failed": "자동 충전을 변경하지 못했습니다. 다시 시도해 주세요."
   },
   "generateIn": {
-    "label": "언어"
+    "label": "생성 언어"
   },
   "referral": {
     "title": "친구 초대",
