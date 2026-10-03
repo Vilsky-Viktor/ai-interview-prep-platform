@@ -423,6 +423,44 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/me/auto-top-up": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** My Auto Top Up */
+    get: operations["my_auto_top_up_me_auto_top_up_get"]
+    /** Turn On Mine */
+    put: operations["turn_on_mine_me_auto_top_up_put"]
+    post?: never
+    /** Turn Off Mine */
+    delete: operations["turn_off_mine_me_auto_top_up_delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/auto-top-up": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Company Auto Top Up */
+    get: operations["company_auto_top_up_internal_companies__company_id__auto_top_up_get"]
+    /** Turn On Company */
+    put: operations["turn_on_company_internal_companies__company_id__auto_top_up_put"]
+    post?: never
+    /** Turn Off Company */
+    delete: operations["turn_off_company_internal_companies__company_id__auto_top_up_delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/health": {
     parameters: {
       query?: never
@@ -464,6 +502,38 @@ export interface paths {
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
+    /**
+     * AutoTopUpIn
+     * @description Which top-up to buy, and under which available balance (credits).
+     */
+    AutoTopUpIn: {
+      /** Product */
+      product: string
+      /** Threshold */
+      threshold: number
+    }
+    /**
+     * AutoTopUpOut
+     * @description A wallet's automatic top-up: whether it's offered at all, running, or waiting for its
+     *     checkout, what it buys and when, and the choices.
+     */
+    AutoTopUpOut: {
+      /** Offered */
+      offered: boolean
+      /** On */
+      on: boolean
+      /** Waiting */
+      waiting: boolean
+      /** Product */
+      product: string | null
+      /** Threshold */
+      threshold: number | null
+      /** Products */
+      products: string[]
+      /** Thresholds */
+      thresholds: number[]
+      checkout?: components["schemas"]["CheckoutOut"] | null
+    }
     /** BalanceOut */
     BalanceOut: {
       /** Balance */
@@ -509,6 +579,18 @@ export interface components {
       /** Products */
       products: components["schemas"]["TopUpOut"][]
       custom: components["schemas"]["CustomTopUpOut"]
+    }
+    /**
+     * CheckoutOut
+     * @description The Paddle checkout to open: its price and the custom data to send with it.
+     */
+    CheckoutOut: {
+      /** Price Id */
+      price_id: string
+      /** Custom Data */
+      custom_data: {
+        [key: string]: string
+      }
     }
     /**
      * CustomTopUpOut
@@ -1296,6 +1378,174 @@ export interface operations {
             [key: string]: unknown
           }
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  my_auto_top_up_me_auto_top_up_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AutoTopUpOut"]
+        }
+      }
+    }
+  }
+  turn_on_mine_me_auto_top_up_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AutoTopUpIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AutoTopUpOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  turn_off_mine_me_auto_top_up_delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  company_auto_top_up_internal_companies__company_id__auto_top_up_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AutoTopUpOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  turn_on_company_internal_companies__company_id__auto_top_up_put: {
+    parameters: {
+      query: {
+        buyer_id: string
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AutoTopUpIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AutoTopUpOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  turn_off_company_internal_companies__company_id__auto_top_up_delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {

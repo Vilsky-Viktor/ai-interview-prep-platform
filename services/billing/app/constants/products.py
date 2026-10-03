@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import timedelta
 from enum import StrEnum
 
 
@@ -43,3 +44,15 @@ TRANSACTION_COMPLETED = "transaction.completed"
 ADJUSTMENT_EVENTS = ("adjustment.created", "adjustment.updated")
 ADJUSTMENT_APPROVED = "approved"
 DELETED_OWNER = "deleted-user"
+
+# Automatic top-up: the balances (in credits) it can refill under, and the least time between two
+# automatic charges, so a webhook still on its way can't cause a second one.
+AUTO_TOP_UP_THRESHOLDS = {"user": [100, 300, 500], "company": [300, 900, 1_500]}
+AUTO_TOP_UP_COOLDOWN = timedelta(minutes=10)
+# Turning it on is a checkout for a $0 monthly subscription, which saves the card; Paddle tells
+# us when it starts and when it ends (cancelled in Paddle, or after failed payments).
+SUBSCRIPTION_CREATED = "subscription.created"
+SUBSCRIPTION_CANCELED = "subscription.canceled"
+# Marks the checkout that turns automatic top-up on.
+AUTO_TOP_UP_FLAG = "auto_top_up"
+PADDLE_API = {"sandbox": "https://sandbox-api.paddle.com", "production": "https://api.paddle.com"}

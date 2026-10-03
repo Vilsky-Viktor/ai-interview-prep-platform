@@ -54,7 +54,7 @@ locals {
     generation-worker = { redis-url = "REDIS_URL", openai-api-key = "OPENAI_API_KEY" }
     rounds            = { redis-url = "REDIS_URL", openai-api-key = "OPENAI_API_KEY" }
     companies         = { redis-url = "REDIS_URL" }
-    billing           = { paddle-webhook-secret = "PADDLE_WEBHOOK_SECRET" }
+    billing           = { paddle-webhook-secret = "PADDLE_WEBHOOK_SECRET", paddle-api-key = "PADDLE_API_KEY" }
     notifications     = { resend-api-key = "RESEND_API_KEY", resend-webhook-secret = "RESEND_WEBHOOK_SECRET" }
   }
 

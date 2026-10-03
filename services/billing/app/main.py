@@ -9,7 +9,7 @@ from prepza_common.logging import RequestLogMiddleware, configure_logging
 from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
-from app.routers import billing, internal
+from app.routers import auto_top_ups, billing, internal
 from app.storage.db import ping as ping_database
 
 configure_logging()
@@ -34,6 +34,8 @@ add_localized_errors(app)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(billing.router)
 app.include_router(internal.router)
+app.include_router(auto_top_ups.router)
+app.include_router(auto_top_ups.internal)
 
 
 @app.get("/health")

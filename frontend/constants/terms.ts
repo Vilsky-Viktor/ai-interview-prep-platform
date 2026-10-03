@@ -10,7 +10,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
     ],
   },
   {
-    heading: "What prepza is, and isn't",
+    heading: "The service and its limits",
     items: [
       "Questions, answers and tutor replies are written by AI and can be wrong. We check and improve them continuously, but don't rely on them as professional advice.",
       "A prepza certificate shows that you answered every question of a topic on prepza with the required score. It is not an accredited qualification.",
@@ -43,6 +43,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
       "prepza is paid with credits: 1 US dollar buys 100 credits, with a bonus on larger top-ups. What each thing costs in credits is on the pricing page and is shown before you use it.",
       "Top-ups are sold by Paddle, who acts as the reseller (merchant of record): Paddle takes the payment, charges any VAT or sales tax, and issues the receipt or invoice.",
       "Your credits are for your own use on prepza. A company's credits belong to the company and are used for its candidates; any of its admins can top them up. Credits can't be transferred between accounts or companies, sold, or paid out as money.",
+      "Automatic top-up is optional and off unless you turn it on. When you turn it on, you authorise Paddle to save your card and to charge it the top-up amount you chose each time the available balance falls under the level you chose, without asking again. Paddle emails a receipt for every charge. You can change or turn it off at any time on the top-up page, which also cancels the saved card's authorisation; charges already made follow the refund rules below.",
       "Credits don't expire. Deleting your account or a company deletes its credits.",
       "Referrals: when someone who signs up through your link, or a company created through your company's link, first tops up the amount shown on the pricing page, both of you get the referral credits shown there, for up to 25 referrals a year. Referring yourself or your own companies doesn't count, and we may withhold referral credits obtained by abuse.",
       "Some credits are free: the welcome credits, top-up bonuses, referral credits and similar gifts. They are given once, as described on the pricing page, and are never refunded or paid out. Free credits are used before paid ones.",

@@ -3,9 +3,11 @@ from datetime import UTC, datetime
 
 from prepza_common.analytics import track
 
+from app.config.settings import settings
 from app.constants.products import OwnerType
 from app.helpers.credits import credits_for
 from app.helpers.owners import owner_of
+from app.services import auto_top_ups
 from app.services.catalog import price_cents_for
 from app.services.referrals import reward_after_top_up
 from app.storage import purchases
@@ -15,10 +17,20 @@ logger = logging.getLogger(__name__)
 
 async def handle_completed(data: dict) -> None:
     """Adds the credits a completed top-up bought. Whose wallet they go to comes from the
-    checkout; the amount comes from Paddle's price id."""
+    checkout, or for an automatic top-up from its subscription; the amount comes from Paddle's
+    price id."""
     custom = data.get("custom_data") or {}
     owner_id = custom.get("owner_id")
     owner_type = custom.get("owner_type")
+    subscription_id = data.get("subscription_id")
+
+    if subscription_id:
+        # The checkout that turns automatic top-up on; its $0 price buys nothing.
+        await auto_top_ups.start(custom, subscription_id)
+        owner_type, owner_id = await auto_top_ups.owner(subscription_id) or (
+            owner_type,
+            owner_id,
+        )
 
     if not owner_id or owner_type not in tuple(OwnerType):
         logger.warning("Transaction %s has no valid owner", data["id"])
@@ -26,6 +38,9 @@ async def handle_completed(data: dict) -> None:
         return
 
     for item in data.get("items", []):
+        if item["price"]["id"] == settings.paddle_price_auto_top_up:
+            continue
+
         quantity = item.get("quantity", 1)
         found = price_cents_for(item["price"]["id"], quantity)
 
@@ -56,4 +71,5 @@ async def handle_completed(data: dict) -> None:
                 amount_cents=paid_cents,
                 product=key,
                 currency=data["currency_code"],
+                automatic=subscription_id is not None,
             )

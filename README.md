@@ -28,6 +28,15 @@ Turn a job description or a learning goal into a structured practice path: revie
 - Scorecards show every answer, whether it was right and how long it took. They flag answers too fast to have read the question, times the candidate left the page, and copy attempts.
 - Candidates never see their scores or whether an answer was right.
 
+**Credits and payments** (see [docs/monetization.md](docs/monetization.md))
+
+- Pay as you go: $1 buys 100 credits, with a bonus on large top-ups, and credits never expire. Learners pay for their own prep kits, tutor turns after 3 free ones per question, and certificates on someone else's public kit; companies pay per candidate who answers at least one question. A new learner gets 500 credits, a person's first company 1,500.
+- Only what works is charged: credits are set aside when something starts and given back if it fails, is cancelled, or a candidate never answers.
+- Top up a fixed amount or any whole amount from $10 to $500 on the top-up page, for yourself or any company you belong to. The header shows your balance and turns amber when it runs low.
+- **Automatic top-up:** on the top-up page, under each balance ("Automatic top-up: off"), choose a top-up and a balance to refill under; the card is saved through Paddle once. Shown only when Paddle's API key and the $0 price are set (see [Payments](#payments)).
+- **Referrals:** a learner's link in Settings → referral, a company's in its referrals tab. Both sides get credits on the newcomer's first top-up (200 each for learners; 600 each for companies, from $25).
+- Settings → billing lists every credit in and out. Refunds and chargebacks in Paddle take the credits they bought back.
+
 ## Architecture
 
 ```mermaid
@@ -50,7 +59,8 @@ flowchart LR
     companies --> library
     companies --> rounds
     companies -- candidate credits --> billing
-    generation -- preparations --> billing
+    generation -- kit credits --> billing
+    rounds -- certificates, chat turns --> billing
 
     rounds -- answer.recorded --> pubsub[(Pub/Sub topic: events)]
     worker -- generation.completed / cancelled --> pubsub
@@ -59,6 +69,7 @@ flowchart LR
     pubsub -- push --> library
     pubsub -- push --> companies
     pubsub -- push --> notifications -- email --> smtp[Resend / mailpit]
+    pubsub -- funnel.* events --> bigquery[(BigQuery: funnel_events)]
 ```
 
 | Service | Responsibility |
@@ -67,11 +78,11 @@ flowchart LR
 | `generation` | The generation pipeline (LangGraph), run by its worker (`app/worker_main.py`) as Cloud Tasks jobs; topic review, re-generating single questions, the question verifier, and scheduled sweeps |
 | `rounds` | Practice rounds, progress and certificates, the follow-up chat, candidate interview sessions |
 | `companies` | Companies, admins, interviews and candidate invites |
-| `billing` | Credits, the Job Search Pass, free allowances and Paddle payments (webhooks); other services ask it before a paid action |
+| `billing` | Credit wallets for learners and companies (holds, charges, history), welcome gifts, referrals, Paddle top-ups, automatic top-ups, refunds and chargebacks (webhooks); other services set credits aside or charge them through it |
 | `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key) |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
-Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed). Long jobs (a generation, a question check) are Cloud Tasks that call the generation worker's `/internal/jobs/...`; periodic work (stuck-generation sweeps, key-check batches, retention) is Cloud Scheduler calling `/internal/schedules/...`. Google signs those calls, and pushes, as one invoker service account, which each service checks. Locally there is no queue: the API calls the worker directly, and a small `scheduler` container runs `scripts/crontab`. Domain events are saved in an `outbox` table in the same transaction as the change they announce, published right after, and published by a per-minute scheduled flush if that failed, so a change never loses its event. They go to one Pub/Sub topic, `events`, which pushes each event to the `/internal/events` endpoint of library, companies and notifications; each ignores events that aren't its own. Locally, Google's Pub/Sub emulator runs in docker-compose and `scripts/pubsub-setup.sh` creates the topic and subscriptions.
+Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed). Long jobs (a generation, a question check) are Cloud Tasks that call the generation worker's `/internal/jobs/...`; periodic work (stuck-generation sweeps, key-check batches, retention) is Cloud Scheduler calling `/internal/schedules/...`. Google signs those calls, and pushes, as one invoker service account, which each service checks. Locally there is no queue: the API calls the worker directly, and a small `scheduler` container runs `scripts/crontab`. Domain events are saved in an `outbox` table in the same transaction as the change they announce, published right after, and published by a per-minute scheduled flush if that failed, so a change never loses its event. They go to one Pub/Sub topic, `events`, which pushes each event to the `/internal/events` endpoint of library, companies and notifications; each ignores events that aren't its own. Locally, Google's Pub/Sub emulator runs in docker-compose and `scripts/pubsub-setup.sh` creates the topic and subscriptions. The services also publish small `funnel.*` events (signed up, kit ready, topped up and so on) to the same topic; a filtered BigQuery subscription stores them for the dashboards and the push subscriptions skip them. They carry counts and a salted hash of the user id (`ANALYTICS_SALT`), never emails or text; see [docs/measurement.md](docs/measurement.md). Locally nothing stores them.
 
 ### Generation pipeline
 
@@ -154,11 +165,12 @@ Per-user rate limits (`GENERATION_LIMIT`, `LLM_LIMIT`) cap how much a single acc
 
 ### Payments
 
-`billing` sells through [Paddle](https://www.paddle.com), which is the merchant of record (it handles VAT and sales tax). Companies buy candidate credits (the first 5 are free); learners get 1 free private preparation a month and can buy the Job Search Pass or 3 more preparations. To sell:
+`billing` sells through [Paddle](https://www.paddle.com), which is the merchant of record (it handles VAT and sales tax). Learners and companies top up credits ($1 = 100 credits) and spend them on prep kits, tutor turns, certificates and candidates; see [docs/monetization.md](docs/monetization.md). To sell:
 
-1. In Paddle (start with the sandbox), create a product and price for each item in `services/billing/app/constants/products.py`, and a client-side token.
-2. Add a webhook destination for `transaction.completed` pointing at `https://<your domain>/api/billing/webhooks/paddle`.
-3. Set `PADDLE_ENVIRONMENT`, `PADDLE_CLIENT_TOKEN`, `PADDLE_WEBHOOK_SECRET` and the `PADDLE_PRICE_*` ids in `.env`, then restart billing. Locally, Paddle reaches the webhook only through a tunnel (for example `cloudflared tunnel --url http://localhost:8090`).
+1. In Paddle (start with the sandbox), create a product with a USD price for each top-up in `services/billing/app/constants/products.py` ($10, $25, $50, $100, $250, $500), a $1 price for custom amounts with its quantity range set to 10–500 (Paddle allows 1–100 by default), and a client-side token.
+2. Under Developer tools → Notifications, add a webhook destination at `https://<your domain>/api/billing/webhooks/paddle` for `transaction.completed`, `adjustment.created`, `adjustment.updated`, `subscription.created` and `subscription.canceled` (the adjustments are refunds and chargebacks, which take credits back; the subscriptions start and end automatic top-ups). Copy its secret key.
+3. For automatic top-up, create a $0 monthly price (its checkout saves the card) and a server-side API key with permission to read and update subscriptions. Without both, automatic top-up isn't offered.
+4. Set `PADDLE_ENVIRONMENT`, `PADDLE_CLIENT_TOKEN`, `PADDLE_WEBHOOK_SECRET`, `PADDLE_PRICE_TOPUP_10` … `PADDLE_PRICE_TOPUP_500`, `PADDLE_PRICE_TOPUP_CUSTOM`, `PADDLE_PRICE_AUTO_TOP_UP` and `PADDLE_API_KEY` in `.env`, then restart billing (in Google Cloud the webhook secret and the API key go into the `paddle-webhook-secret` and `paddle-api-key` secrets, see [infra/README.md](infra/README.md)). Until a price is set, its top-up button is disabled; until both automatic top-up values are set, its line on the top-up page is hidden. Locally, Paddle reaches the webhook only through a tunnel (for example `cloudflared tunnel --url http://localhost:8090`).
 
 ### Emails
 

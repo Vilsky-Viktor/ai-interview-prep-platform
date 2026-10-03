@@ -83,6 +83,8 @@ x-billing-env: &billing-env
   PADDLE_PRICE_TOPUP_250: ${PADDLE_PRICE_TOPUP_250:-}
   PADDLE_PRICE_TOPUP_500: ${PADDLE_PRICE_TOPUP_500:-}
   PADDLE_PRICE_TOPUP_CUSTOM: ${PADDLE_PRICE_TOPUP_CUSTOM:-}
+  PADDLE_PRICE_AUTO_TOP_UP: ${PADDLE_PRICE_AUTO_TOP_UP:-}
+  PADDLE_API_KEY: ${PADDLE_API_KEY:-}
 
 x-billing-source: &billing-source
   - ./services/billing/app:/services/billing/app

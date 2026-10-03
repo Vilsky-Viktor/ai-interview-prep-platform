@@ -104,6 +104,25 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/companies/{company_id}/auto-top-up": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Auto Top Up */
+    get: operations["get_auto_top_up_companies__company_id__auto_top_up_get"]
+    /** Turn On */
+    put: operations["turn_on_companies__company_id__auto_top_up_put"]
+    post?: never
+    /** Turn Off */
+    delete: operations["turn_off_companies__company_id__auto_top_up_delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/members": {
     parameters: {
       query?: never
@@ -648,6 +667,37 @@ export interface components {
       /** Joined */
       joined: boolean
     }
+    /**
+     * AutoTopUpIn
+     * @description Which top-up to buy, and under which available balance (credits).
+     */
+    AutoTopUpIn: {
+      /** Product */
+      product: string
+      /** Threshold */
+      threshold: number
+    }
+    /**
+     * AutoTopUpOut
+     * @description The company's automatic top-up, as billing has it.
+     */
+    AutoTopUpOut: {
+      /** Offered */
+      offered: boolean
+      /** On */
+      on: boolean
+      /** Waiting */
+      waiting: boolean
+      /** Product */
+      product: string | null
+      /** Threshold */
+      threshold: number | null
+      /** Products */
+      products: string[]
+      /** Thresholds */
+      thresholds: number[]
+      checkout?: components["schemas"]["CheckoutOut"] | null
+    }
     /** CandidateIn */
     CandidateIn: {
       /**
@@ -679,6 +729,18 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+    }
+    /**
+     * CheckoutOut
+     * @description The Paddle checkout to open: its price and the custom data to send with it.
+     */
+    CheckoutOut: {
+      /** Price Id */
+      price_id: string
+      /** Custom Data */
+      custom_data: {
+        [key: string]: string
+      }
     }
     /**
      * CompanyBalanceOut
@@ -1209,6 +1271,101 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["ReferralOut"]
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_auto_top_up_companies__company_id__auto_top_up_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AutoTopUpOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  turn_on_companies__company_id__auto_top_up_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AutoTopUpIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AutoTopUpOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  turn_off_companies__company_id__auto_top_up_delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {

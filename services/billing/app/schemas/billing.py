@@ -96,3 +96,32 @@ class ReferralOut(BaseModel):
     reward: int
     min_dollars: int
     rewarded: int
+
+
+class AutoTopUpIn(BaseModel):
+    """Which top-up to buy, and under which available balance (credits)."""
+
+    product: str
+    threshold: int
+
+
+class CheckoutOut(BaseModel):
+    """The Paddle checkout to open: its price and the custom data to send with it."""
+
+    price_id: str
+    custom_data: dict[str, str]
+
+
+class AutoTopUpOut(BaseModel):
+    """A wallet's automatic top-up: whether it's offered at all, running, or waiting for its
+    checkout, what it buys and when, and the choices."""
+
+    offered: bool
+    on: bool
+    waiting: bool
+    product: str | None
+    threshold: int | None
+    products: list[str]
+    thresholds: list[int]
+    # Only when turning it on still needs the checkout that saves the card.
+    checkout: CheckoutOut | None = None

@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl"
 
+import { AutoTopUpSetting } from "@/components/billing/auto-top-up"
 import { TopUpDialog } from "@/components/billing/top-up-dialog"
 import type { Catalog } from "@/types/billing"
 
@@ -24,13 +25,14 @@ export function BalanceRow({
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5">
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1 space-y-1">
         <p className="truncate text-lg font-medium">{name}</p>
         {low && (
           <p className="text-sm text-amber-600 dark:text-amber-400">
             {t("low")}
           </p>
         )}
+        <AutoTopUpSetting catalog={catalog} companyId={companyId} />
       </div>
       <div className="flex items-center gap-6">
         <p className="text-right">

@@ -24,6 +24,7 @@ from app.schemas.billing import (
     WelcomeIn,
 )
 from app.service_auth import ServiceCaller
+from app.services import auto_top_ups
 from app.services.referrals import referral_out
 from app.storage import ledger, purchases, referrals
 
@@ -32,6 +33,8 @@ router = APIRouter(prefix="/internal", tags=["internal"])
 
 async def refuse(owner_type: str, owner_id: str, reason: str) -> None:
     await track("balance_too_low", **owner_of(owner_type, owner_id), what=reason)
+    # An automatic top-up refills it for the next try.
+    await auto_top_ups.check(owner_type, owner_id)
 
     raise HTTPException(status.HTTP_402_PAYMENT_REQUIRED, NOT_ENOUGH)
 
@@ -39,6 +42,8 @@ async def refuse(owner_type: str, owner_id: str, reason: str) -> None:
 async def take(owner_type: str, owner_id: str, amount: int, key: str, reason: str) -> None:
     if not await ledger.reserve(owner_type, owner_id, amount, key, reason):
         await refuse(owner_type, owner_id, reason)
+
+    await auto_top_ups.check(owner_type, owner_id)
 
 
 @router.post("/kits/{generation_id}/hold", status_code=status.HTTP_204_NO_CONTENT)
@@ -91,6 +96,8 @@ async def charge_certificate(body: SpendIn, caller: ServiceCaller) -> None:
     ):
         await refuse(OwnerType.USER, body.owner_id, Reason.CERTIFICATE)
 
+    await auto_top_ups.check(OwnerType.USER, body.owner_id)
+
 
 @router.post("/chat-turns", status_code=status.HTTP_204_NO_CONTENT)
 async def charge_chat_turn(body: SpendIn, caller: ServiceCaller) -> None:
@@ -99,6 +106,8 @@ async def charge_chat_turn(body: SpendIn, caller: ServiceCaller) -> None:
         OwnerType.USER, body.owner_id, CHAT_TURN_CREDITS, f"chat:{body.key}", Reason.CHAT
     ):
         await refuse(OwnerType.USER, body.owner_id, Reason.CHAT)
+
+    await auto_top_ups.check(OwnerType.USER, body.owner_id)
 
 
 @router.get("/users/{user_id}/credits")
@@ -148,11 +157,13 @@ async def company_history(
 
 @router.delete("/companies/{company_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_company(company_id: str, caller: ServiceCaller) -> None:
+    await auto_top_ups.turn_off(OwnerType.COMPANY, company_id)
     await purchases.delete_company(company_id)
 
 
 @router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_user(user_id: str, caller: ServiceCaller) -> None:
+    await auto_top_ups.turn_off(OwnerType.USER, user_id)
     await purchases.delete_user(user_id)
 
 

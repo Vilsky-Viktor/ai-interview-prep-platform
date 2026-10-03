@@ -529,6 +529,23 @@
       "referral": "Referral reward"
     }
   },
+  "autoTopUp": {
+    "title": "Automatic top-up",
+    "text": "When the available balance falls under the amount you choose, we buy the top-up with your saved card. Paddle emails a receipt each time, and you can turn it off at any time.",
+    "amount": "Top up",
+    "when": "When the balance falls",
+    "under": "Under {threshold} credits",
+    "off": "Automatic top-up: off",
+    "on": "Automatic top-up: {amount} under {threshold} credits",
+    "waiting": "Automatic top-up: waiting for your card",
+    "turnOn": "Turn on",
+    "turnOff": "Turn off",
+    "save": "Save",
+    "saved": "Automatic top-up updated.",
+    "turnedOn": "Card saved. Automatic top-up is on.",
+    "turnedOff": "Automatic top-up is off.",
+    "failed": "Couldn't change automatic top-up. Please try again."
+  },
   "referral": {
     "title": "Invite friends",
     "note": "You both get {reward, number} credits when they first top up.",

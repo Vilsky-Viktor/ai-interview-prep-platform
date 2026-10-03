@@ -1,7 +1,7 @@
 # Secrets you set yourself after the first apply (see README.md); they start as "set-me", and
 # Terraform never overwrites what you set.
 resource "google_secret_manager_secret" "manual" {
-  for_each  = toset(["openai-api-key", "redis-url", "resend-api-key", "resend-webhook-secret", "paddle-webhook-secret"])
+  for_each  = toset(["openai-api-key", "redis-url", "resend-api-key", "resend-webhook-secret", "paddle-webhook-secret", "paddle-api-key"])
   secret_id = each.value
 
   replication {

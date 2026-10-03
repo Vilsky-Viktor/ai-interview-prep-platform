@@ -23,6 +23,10 @@ class Settings(BaseSettings):
     paddle_price_topup_500: str = ""
     # Paddle's $1 price; a custom amount buys it in a quantity of 10 to 500.
     paddle_price_topup_custom: str = ""
+    # Automatic top-up: the server-side API key that charges the saved card, and the $0
+    # monthly price whose checkout saves it. Without both, it isn't offered.
+    paddle_api_key: str = ""
+    paddle_price_auto_top_up: str = ""
 
     @model_validator(mode="after")
     def emulator_only_for_demo_projects(self) -> "Settings":

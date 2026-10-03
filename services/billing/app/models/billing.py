@@ -35,6 +35,23 @@ class Referral(Base):
     rewarded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
+class AutoTopUp(Base):
+    """A wallet's automatic top-up: the top-up to buy when the available balance falls under
+    `threshold`. Waiting for its checkout until `subscription_id` is set; `charged_at` is the
+    last automatic charge."""
+
+    __tablename__ = "auto_top_ups"
+
+    owner_type: Mapped[str] = mapped_column(String(16), primary_key=True)
+    owner_id: Mapped[str] = mapped_column(String(128), primary_key=True)
+    product: Mapped[str] = mapped_column(String(64))
+    threshold: Mapped[int]
+    # Who turned it on; only their checkout can start it.
+    buyer_id: Mapped[str] = mapped_column(String(128))
+    subscription_id: Mapped[str | None] = mapped_column(String(64), unique=True)
+    charged_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
 class Gift(Base):
     """A welcome gift already given, by a one-way hash of the email. Kept when the account or
     company is deleted, so signing up again doesn't give the gift again."""

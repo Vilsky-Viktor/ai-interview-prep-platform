@@ -11,6 +11,7 @@ from prepza_common.sentry import init_sentry
 from app.config.settings import settings
 from app.integrations.redis import get_redis
 from app.routers import (
+    auto_top_ups,
     companies,
     internal_accounts,
     internal_events,
@@ -45,6 +46,7 @@ app = FastAPI(
 add_localized_errors(app)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(companies.router)
+app.include_router(auto_top_ups.router)
 app.include_router(members.router)
 app.include_router(interviews.router)
 app.include_router(interview_generation.router)

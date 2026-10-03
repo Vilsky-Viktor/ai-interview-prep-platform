@@ -9,6 +9,8 @@ TRANSLATIONS = {
         "Not enough credits. Top up to continue.": (
             "Недостаточно кредитов. Пополните баланс, чтобы продолжить."
         ),
+        "This top-up isn't available": "Это пополнение недоступно",
+        "Choose one of the balances": "Выберите один из порогов баланса",
         "We've reached today's limit for new generations. Please try again tomorrow; practice "
         "and interviews keep working.": (
             "Сегодняшний лимит новых генераций исчерпан. Попробуйте завтра; тренировки и "

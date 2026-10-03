@@ -18,4 +18,6 @@ paddle_prices = {
   topup_500    = ""
   # A $1 price, with quantity 10 to 500 allowed: custom top-ups.
   topup_custom = ""
+  # A $0 monthly price: its checkout saves the card for automatic top-ups.
+  auto_top_up = ""
 }

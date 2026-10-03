@@ -104,3 +104,40 @@ async def companies_credits(company_ids: list[UUID]) -> dict[str, dict]:
     response.raise_for_status()
 
     return response.json()
+
+
+def _auto_top_up_url(company_id: UUID) -> str:
+    return f"{settings.billing_url}/internal/companies/{company_id}/auto-top-up"
+
+
+async def auto_top_up(company_id: UUID) -> dict:
+    """The company's automatic top-up and its choices."""
+    response = await http.get_client().get(_auto_top_up_url(company_id), headers=_headers())
+
+    response.raise_for_status()
+
+    return response.json()
+
+
+async def turn_on_auto_top_up(company_id: UUID, body: dict, buyer_id: str) -> dict:
+    """Saves the choice; billing's answer carries the checkout when the card isn't saved yet.
+    Its refusal of a choice (422) reaches the user unchanged."""
+    response = await http.get_client().put(
+        _auto_top_up_url(company_id),
+        json=body,
+        params={"buyer_id": buyer_id},
+        headers=_headers(),
+    )
+
+    if response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, response.json()["detail"])
+
+    response.raise_for_status()
+
+    return response.json()
+
+
+async def turn_off_auto_top_up(company_id: UUID) -> None:
+    response = await http.get_client().delete(_auto_top_up_url(company_id), headers=_headers())
+
+    response.raise_for_status()
