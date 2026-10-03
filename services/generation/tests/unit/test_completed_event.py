@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from app.integrations import library
+from app.integrations import billing, library
 from app.models.generation import Generation
 from app.services import outbox as outbox_service
 from app.services.pipeline import stream_graph
@@ -12,6 +12,14 @@ from app.storage import generations
 
 SET_ID = uuid.uuid4()
 COMPANY_ID = uuid.uuid4()
+
+
+@pytest.fixture(autouse=True)
+def no_charge(monkeypatch):
+    async def charge(_generation_id):
+        return None
+
+    monkeypatch.setattr(billing, "charge_kit", charge)
 
 
 class FinishedGraph:

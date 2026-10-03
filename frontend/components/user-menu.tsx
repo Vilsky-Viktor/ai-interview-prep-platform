@@ -67,10 +67,10 @@ export function UserMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="px-3 py-2"
-          render={<Link href="/pricing" />}
+          render={<Link href="/top-up" />}
         >
           <DollarSignIcon />
-          {t("pricing")}
+          {t("topUp")}
         </DropdownMenuItem>
         <DropdownMenuItem
           className="px-3 py-2"

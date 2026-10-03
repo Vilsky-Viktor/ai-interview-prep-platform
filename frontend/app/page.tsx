@@ -9,7 +9,7 @@ export default async function HomePage() {
   const locale = await getLocale()
 
   return (
-    <main className="mx-auto flex min-h-[calc(100svh-3.5rem)] w-full max-w-3xl flex-col items-center justify-center px-6 pb-24">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 pb-24">
       <div className="inline-grid max-w-full gap-16">
         <div className="space-y-4 text-center">
           <HomeTitle key={locale} />

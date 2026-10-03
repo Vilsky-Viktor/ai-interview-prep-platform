@@ -40,7 +40,7 @@ export default async function HistoryPage({
         rounds={rounds}
         back={<BackLink href={`/preparations/${id}`}>{t("page")}</BackLink>}
         title={
-          <h1 className="font-heading text-3xl font-medium tracking-tight text-balance">
+          <h1 className="font-heading text-3xl font-medium tracking-tight text-balance normal-case">
             {topic.title}
           </h1>
         }

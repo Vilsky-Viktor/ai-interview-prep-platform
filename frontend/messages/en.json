@@ -11,18 +11,20 @@
     "downloadFailed": "Couldn't prepare your data. Please try again.",
     "delete": "Delete account",
     "searchLanguage": "Search languages",
-    "noLanguage": "No language found."
+    "noLanguage": "No language found.",
+    "credits": "Credits",
+    "creditsNote": "$1 buys 100 credits. Credits never expire."
   },
   "userMenu": {
     "signIn": "Sign in",
     "account": "Account",
-    "pricing": "Pricing",
     "settings": "Settings",
     "signOut": "Sign out",
     "theme": "Theme",
     "system": "System",
     "light": "Light",
-    "dark": "Dark"
+    "dark": "Dark",
+    "topUp": "Top up"
   },
   "nav": {
     "home": "prepza. home",
@@ -35,7 +37,8 @@
     "create": "create",
     "explore": "explore",
     "myKits": "my kits",
-    "hiring": "hiring"
+    "hiring": "hiring",
+    "pricingLink": "pricing"
   },
   "signIn": {
     "with": "Sign in with",
@@ -86,7 +89,7 @@
     "label": "What are you preparing for?",
     "submit": "Generate preparation",
     "failed": "Couldn't start the generation. Please try again.",
-    "seePlans": "See plans"
+    "seePlans": "Top up"
   },
   "membership": {
     "signIn": "Sign in to join",
@@ -94,10 +97,16 @@
     "join": "Join to practice"
   },
   "billing": {
-    "buy": "Buy",
-    "comingSoon": "Coming soon",
     "paid": "Payment received. It shows up here in a moment.",
-    "checkoutFailed": "Couldn't open the checkout. Please try again."
+    "checkoutFailed": "Couldn't open the checkout. Please try again.",
+    "credits": "{count, plural, one {# credit} other {# credits}}",
+    "bonus": "+{count, number} bonus",
+    "topUp": "Top up",
+    "balance": "{count} credits available. Top up",
+    "creditsWord": "{count, plural, one {credit} other {credits}}",
+    "topUpTitle": "Top up: {name}",
+    "topUpNote": "$1 buys 100 credits, with a bonus on larger amounts. Credits never expire.",
+    "customAmount": "Custom"
   },
   "deleteAccount": {
     "title": "Delete your account?",
@@ -270,7 +279,12 @@
     "next": "Next question",
     "progress": "Questions answered towards the certificate",
     "nextFailed": "Couldn't load the next question. Please try again.",
-    "submitFailed": "Couldn't submit your answer. Please try again."
+    "submitFailed": "Couldn't submit your answer. Please try again.",
+    "freeTurns": "{count, plural, one {# free tutor turn} other {# free tutor turns}} left on this question",
+    "paidTurns": "Further turns on this question cost {count, plural, one {# credit} other {# credits}} each",
+    "buyCertificate": "Get certificate · {count} credits",
+    "makeItYours": "Preparing for a specific job? Paste the vacancy text and get a kit made for it.",
+    "makeItYoursAction": "Make it yours"
   },
   "session": {
     "startFailed": "Couldn't start the interview. Please try again.",
@@ -339,7 +353,8 @@
     "undelivered": "undelivered",
     "in_process": "in process",
     "finished": "finished",
-    "deleted": "deleted"
+    "deleted": "deleted",
+    "expired": "expired"
   },
   "roles": {
     "owner": "owner",
@@ -363,10 +378,7 @@
     "signInJoin": "Sign in with the invitation email to join this company.",
     "open": "Open company",
     "join": "Join company",
-    "creditsLeft": "{count, plural, one {candidate} other {candidates}} left to invite",
-    "buyCandidates": "Buy candidates",
-    "buyText": "Each new candidate you invite uses one. Resending an invite is free, and credits never expire.",
-    "each": "{price} each",
+    "creditsLeft": "{count, plural, one {credit} other {credits}} available · a candidate is {candidate}",
     "timeLeft": "Time left: {time}",
     "removeLabel": "Remove {name}",
     "removeTitle": "Remove {name}?",
@@ -460,26 +472,26 @@
     "minutes": "{m} min",
     "minutesSeconds": "{m} min {s} s"
   },
-  "products": {
-    "pass": "Job Search Pass",
-    "candidates": "{count} candidates",
-    "generations": "{count, plural, one {# more preparation} other {# more preparations}}"
-  },
   "pricing": {
     "title": "Pricing",
+    "intro": "Pay only for what you use: $1 buys 100 credits, and credits never expire. No subscriptions.",
     "learners": "For learners",
-    "passUntil": "Your Job Search Pass runs until {date}.",
-    "freeLeft": "This month you have {count, plural, one {# free preparation} other {# free preparations}} left.",
-    "freeAndExtraLeft": "This month you have {count, plural, one {# free preparation} other {# free preparations}} left, plus {extra, plural, one {# extra preparation} other {# extra preparations}}.",
-    "free": "Free",
-    "freeNote": "{count, plural, one {# private preparation} other {# private preparations}} a month, practice with the AI tutor, certificates and the public library.",
-    "start": "Start",
-    "passNote": "Unlimited preparations for {days} days. Paid once, no renewal.",
-    "creditsNote": "{count, plural, one {# more private preparation} other {# more private preparations}}, used when the free one is gone. They don't expire.",
+    "welcome": "When you sign up",
+    "credits": "{count, plural, one {# credit} other {# credits}}",
     "companies": "For companies",
-    "companiesNote": "Your first {count, plural, one {# candidate is} other {# candidates are}} free. Creating interviews is always free; you pay per candidate you invite, and credits never expire.",
-    "perCandidate": "{price} per candidate",
-    "buyFromCompany": "Buy from your company"
+    "kit": "Your own prep kit, built from a job description",
+    "chat": "AI tutor: {free} free turns on each question, then",
+    "perTurn": "{count, plural, one {# credit} other {# credits}} a turn",
+    "ownCertificate": "Certificate on your own or a shared kit",
+    "publicCertificate": "Certificate on a public kit",
+    "publicPractice": "Practice in public kits (3 new topics a day)",
+    "gift": "{count, number} credits free",
+    "free": "Free",
+    "interview": "Generating an interview",
+    "candidate": "Each candidate who finishes and answers at least one question",
+    "companyWelcome": "Your first company",
+    "openCompanies": "Open companies",
+    "topUp": "Top up"
   },
   "site": {
     "description": "Prepare for interviews with AI-generated multiple-choice questions, practice rounds and certificates."
@@ -487,5 +499,31 @@
   "legal": {
     "updated": "Last updated",
     "englishOnly": ""
+  },
+  "credits": {
+    "available": "credits available",
+    "reserved": "{count} set aside for a kit being generated",
+    "history": "History",
+    "noHistory": "Nothing yet.",
+    "reasons": {
+      "welcome": "Welcome gift",
+      "topup": "Top-up",
+      "kit": "Prep kit",
+      "candidate": "Candidate",
+      "certificate": "Certificate",
+      "author_share": "Your public kit earned a certificate",
+      "chat": "Tutor turn"
+    }
+  },
+  "topUp": {
+    "title": "Top up",
+    "intro": "$1 buys 100 credits, and credits never expire.",
+    "signIn": "Sign in to top up your credits.",
+    "yours": "Learner balance",
+    "personal": "Personal credits",
+    "personalNote": "For your prep kits, the AI tutor and certificates.",
+    "companies": "Company credits",
+    "companiesNote": "For each company's candidates.",
+    "pricing": "Pricing"
   }
 }

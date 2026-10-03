@@ -1,6 +1,6 @@
 from app.helpers.interviews import attach_set
+from app.integrations import billing, library, rounds
 from app.integrations import generation as generation_api
-from app.integrations import library, rounds
 from app.storage import companies, interviews
 
 
@@ -21,3 +21,4 @@ async def delete_company(company_id) -> None:
             await library.delete_interview(interview.set_id)
 
     await companies.delete(company_id)
+    await billing.delete_company(company_id)

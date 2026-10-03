@@ -12,6 +12,7 @@ from app.schemas.rounds import AnswerCreate, AnswerResult, NextQuestion, RoundCr
 from app.services.access import get_owned_round
 from app.services.answers import submit_answer
 from app.services.finish import finish_round
+from app.services.public_kits import check_daily_limit
 from app.storage import progress, rounds
 
 router = APIRouter(prefix="/rounds", tags=["rounds"])
@@ -28,6 +29,8 @@ async def create_round(body: RoundCreate, user: CurrentUser, response: Response)
 
     if existing:
         return round_out(existing)
+
+    await check_daily_limit(user.uid, topic)
 
     rows = await progress.for_topic(user.uid, topic.id)
     latest = current_scores(rows, topic_texts(topic))

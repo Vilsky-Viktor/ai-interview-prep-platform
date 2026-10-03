@@ -34,13 +34,15 @@ export async function openCheckout(
   priceId: string,
   customData: Record<string, string>,
   email: string | null,
-  completed: () => void
+  completed: () => void,
+  // A custom amount buys the $1 price this many times.
+  quantity = 1
 ) {
   onCompleted = completed
   const instance = await load(catalog)
 
   instance?.Checkout.open({
-    items: [{ priceId, quantity: 1 }],
+    items: [{ priceId, quantity }],
     customData,
     ...(email ? { customer: { email } } : {}),
   })

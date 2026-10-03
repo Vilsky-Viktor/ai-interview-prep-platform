@@ -14,12 +14,15 @@ class Settings(BaseSettings):
     paddle_environment: str = "sandbox"
     paddle_client_token: str = ""
     paddle_webhook_secret: str = ""
-    # Paddle's price id of each product (see constants/products.py); unset products aren't sold.
-    paddle_price_candidates_10: str = ""
-    paddle_price_candidates_50: str = ""
-    paddle_price_candidates_200: str = ""
-    paddle_price_job_search_pass: str = ""
-    paddle_price_generations_3: str = ""
+    # Paddle's price id of each top-up (see constants/products.py); one without an id isn't sold.
+    paddle_price_topup_10: str = ""
+    paddle_price_topup_25: str = ""
+    paddle_price_topup_50: str = ""
+    paddle_price_topup_100: str = ""
+    paddle_price_topup_250: str = ""
+    paddle_price_topup_500: str = ""
+    # Paddle's $1 price; a custom amount buys it in a quantity of 10 to 500.
+    paddle_price_topup_custom: str = ""
 
     @model_validator(mode="after")
     def emulator_only_for_demo_projects(self) -> "Settings":

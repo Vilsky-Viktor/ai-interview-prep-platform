@@ -11,6 +11,7 @@ export const PRIVATE_PATHS = [
   "/rounds",
   "/sessions",
   "/settings",
+  "/top-up",
   "/share",
 ]
 

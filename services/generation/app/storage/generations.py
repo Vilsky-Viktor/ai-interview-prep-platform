@@ -20,9 +20,11 @@ async def create(
     kind: str = "preparation",
     company_id=None,
     language: str = DEFAULT_LANGUAGE,
+    generation_id: uuid.UUID | None = None,
 ) -> Generation:
     async with Session() as session:
         generation = Generation(
+            id=generation_id or uuid.uuid4(),
             owner_uid=owner_uid,
             kind=kind,
             company_id=company_id,
@@ -73,20 +75,22 @@ async def cancel(generation_id: uuid.UUID) -> bool:
         return result.rowcount == 1
 
 
-async def fail_stuck(before: datetime, error: str) -> int:
-    """Marks queued or running generations untouched since `before` as failed; returns how many."""
+async def fail_stuck(before: datetime, error: str) -> list[Generation]:
+    """Marks queued or running generations untouched since `before` as failed; returns them."""
     async with Session() as session:
-        result = await session.execute(
+        failed = await session.scalars(
             sql_update(Generation)
             .where(
                 Generation.status.in_([Status.QUEUED, Status.RUNNING]),
                 Generation.updated_at < before,
             )
             .values(status=Status.FAILED, error=error)
+            .returning(Generation)
         )
+        failed = list(failed)
         await session.commit()
 
-        return result.rowcount
+        return failed
 
 
 async def expire_reviews(before: datetime) -> list[Generation]:

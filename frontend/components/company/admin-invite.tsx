@@ -71,7 +71,7 @@ export function AdminInvite({ token }: { token: string }) {
         <p className="text-base text-muted-foreground">
           {share("invitedToJoin")}
         </p>
-        <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
+        <h1 className="font-heading text-4xl font-medium tracking-tight text-balance normal-case sm:text-5xl">
           {invite.company_name}
         </h1>
       </div>

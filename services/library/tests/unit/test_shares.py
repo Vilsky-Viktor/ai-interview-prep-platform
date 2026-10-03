@@ -24,6 +24,20 @@ def sign_in(email, verified=True, uid="user-1"):
 
 
 @pytest.fixture(autouse=True)
+def few_shares(monkeypatch):
+    """The kit is shared with nobody yet, unless a test says otherwise."""
+
+    async def not_invited(set_id, email):
+        return False
+
+    async def none(set_id):
+        return 0
+
+    monkeypatch.setattr(shares, "is_invited", not_invited)
+    monkeypatch.setattr(shares, "count_for_set", none)
+
+
+@pytest.fixture(autouse=True)
 def clear_overrides():
     yield
     app.dependency_overrides.clear()
@@ -147,3 +161,42 @@ def test_a_sender_is_limited_per_hour(client, monkeypatch):
     assert codes == [201, 201, 429]
     # Companies count against the same limit, as both use these keys.
     assert redis.counts["rate:emails:hour:owner"] == 3
+
+
+def test_a_kit_is_shared_with_at_most_30_people_but_resends_still_work(client, monkeypatch):
+    owned = QuestionSet(id=uuid.uuid4(), kind=SetKind.PREPARATION, owner_id="user-1", title="Kit")
+    sent = []
+
+    async def fake_get(set_id):
+        return owned
+
+    async def thirty(set_id):
+        return 30
+
+    async def invited(set_id, email):
+        return email == "old@example.com"
+
+    async def fake_upsert(set_id, email, invited_by, title, inviter):
+        sent.append(email)
+
+        return ShareInvite(email=email, created_at=datetime.now(UTC))
+
+    async def no_flush():
+        pass
+
+    monkeypatch.setattr(preparations, "get", fake_get)
+    monkeypatch.setattr(shares, "count_for_set", thirty)
+    monkeypatch.setattr(shares, "is_invited", invited)
+    monkeypatch.setattr(shares, "upsert", fake_upsert)
+    monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
+    monkeypatch.setattr(shares_router, "get_redis", lambda: FakeRedis())
+    sign_in("owner@example.com")
+    url = f"/preparations/{owned.id}/shares"
+
+    new = client.post(url, json={"email": "new@example.com"})
+    resent = client.post(url, json={"email": "old@example.com"})
+
+    assert new.status_code == 429
+    assert new.json()["detail"] == "A kit can be shared with at most 30 people."
+    assert resent.status_code == 201
+    assert sent == ["old@example.com"]

@@ -3,12 +3,19 @@ from uuid import UUID
 import httpx
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
+from prepza_common.constants import DAY_SECONDS
 from prepza_common.paging import PageParams
-from prepza_common.rate_limit import hit_emails
+from prepza_common.rate_limit import hit, hit_emails
 
 from app.config.settings import settings
-from app.constants.invites import InviteStatus
+from app.constants.invites import (
+    INTERVIEWS_PER_DAY,
+    NOT_STARTED,
+    TOO_MANY_INTERVIEWS,
+    InviteStatus,
+)
 from app.constants.roles import Role
+from app.helpers.candidates import candidate_key
 from app.helpers.interviews import (
     attach_set,
     interview_out,
@@ -28,6 +35,7 @@ from app.schemas.interviews import (
 from app.schemas.invites import CandidateIn, CandidateOut
 from app.services import outbox as outbox_service
 from app.services.access import require_company, require_manager
+from app.services.candidate_billing import release_unfinished
 from app.storage import interviews, invites
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
@@ -38,6 +46,13 @@ async def create_interview(
     body: InterviewCreate, company_id: UUID, user: CurrentUser
 ) -> InterviewOut:
     company, _ = await require_company(user, company_id)
+    await hit(
+        get_redis(),
+        f"rate:interviews:{company.id}",
+        INTERVIEWS_PER_DAY,
+        DAY_SECONDS,
+        TOO_MANY_INTERVIEWS,
+    )
 
     try:
         created = await generation_api.create(body.text, company.id, user.uid, user.language)
@@ -132,6 +147,7 @@ async def delete_interview(interview_id: UUID, user: CurrentUser) -> None:
 
     await rounds.delete_interview_data(interview.set_id)
     await library.delete_interview(interview.set_id)
+    await release_unfinished(await invites.unfinished(interview.id))
     await interviews.remove(interview.id)
 
 
@@ -153,10 +169,7 @@ async def invite_candidate(
 
     email = str(body.email).lower()
 
-    # Each new candidate uses a credit; resending to someone already invited doesn't.
-    if not await invites.exists(interview.id, email):
-        await billing.use_candidate(company.id)
-
+    # Email limits first, so a refused invite never leaves credits set aside.
     await hit_emails(
         get_redis(),
         user.uid,
@@ -165,8 +178,23 @@ async def invite_candidate(
         settings.email_daily_limit,
         settings.email_recipient_daily_limit,
     )
+    current = await invites.status_of(interview.id, email)
+    key = candidate_key(interview.id, email)
+    # A candidate who hasn't started has credits set aside: new, or sent again after expiring.
+    if current is None or current in NOT_STARTED:
+        await billing.hold_candidate(company.id, key)
+
     title = await interview_title(interview) or "an interview"
-    invite = await invites.upsert(interview.id, email, title, company.name)
+
+    try:
+        invite = await invites.upsert(interview.id, email, title, company.name)
+    except Exception:
+        # A brand-new invite that couldn't be saved gives its credits back.
+        if current is None:
+            await billing.release_candidate(key)
+
+        raise
+
     await outbox_service.flush_quietly()
 
     return CandidateOut(
@@ -227,9 +255,10 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
 
     await require_company(user, interview.company_id)
 
-    if invite.status not in (InviteStatus.INVITED, InviteStatus.UNDELIVERED):
+    if invite.status not in NOT_STARTED:
         raise HTTPException(status.HTTP_409_CONFLICT, "The candidate has already started")
 
+    await billing.release_candidate(candidate_key(interview.id, invite.email))
     await invites.remove(invite.id)
 
 

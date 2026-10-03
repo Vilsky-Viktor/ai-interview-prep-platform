@@ -102,7 +102,7 @@ export default async function ScorecardPage({
         >
           <Badge
             variant={card.status === "undelivered" ? "destructive" : "outline"}
-            className="h-7 px-3 text-sm font-light capitalize"
+            className="h-7 px-3 text-sm font-light"
           >
             {statuses(card.status)}
           </Badge>
@@ -135,7 +135,7 @@ export default async function ScorecardPage({
           <section key={session.id} className="space-y-4">
             <div className="flex items-center justify-between gap-4">
               <div className="min-w-0 space-y-1">
-                <h2 className="font-heading text-2xl font-medium">
+                <h2 className="font-heading text-2xl font-medium normal-case">
                   {session.topic_title}
                 </h2>
                 <IntegrityLine session={session} />

@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "cn"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
@@ -8,22 +9,32 @@ import { toast } from "sonner"
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { signIn } from "@/lib/auth"
+import { announceCreditsChanged } from "@/lib/credits"
 import { openCheckout } from "@/lib/paddle"
-import type { Catalog, Product } from "@/types/billing"
+import type { Catalog } from "@/types/billing"
 
-/** Buys one product for the signed-in user, or for `companyId` when given. */
+/** Buys a top-up for the signed-in user, or for `companyId` when given: Paddle's `priceId`,
+`quantity` times. */
 export function BuyButton({
   catalog,
-  product,
+  priceId,
+  quantity = 1,
+  disabled = false,
   companyId,
   label,
   variant = "default",
+  className,
 }: {
   catalog: Catalog
-  product: Product
+  // None while the price isn't on sale yet.
+  priceId: string | null
+  quantity?: number
+  // A custom amount not quoted yet, or out of range.
+  disabled?: boolean
   companyId?: string
   label?: string
   variant?: "default" | "outline"
+  className?: string
 }) {
   const t = useTranslations("billing")
   const signInText = useTranslations("signIn")
@@ -31,10 +42,14 @@ export function BuyButton({
   const { user } = useAuth()
   const [opening, setOpening] = useState(false)
 
-  if (!product.price_id) {
+  if (!priceId) {
     return (
-      <Button variant="outline" className="h-12 px-6 text-base" disabled>
-        {t("comingSoon")}
+      <Button
+        variant="outline"
+        className={cn("h-12 px-6 text-base", className)}
+        disabled
+      >
+        {label ?? t("topUp")}
       </Button>
     )
   }
@@ -51,7 +66,7 @@ export function BuyButton({
     try {
       await openCheckout(
         catalog,
-        product.price_id!,
+        priceId!,
         companyId
           ? { owner_type: "company", owner_id: companyId, buyer_id: user.uid }
           : { owner_type: "user", owner_id: user.uid, buyer_id: user.uid },
@@ -59,8 +74,12 @@ export function BuyButton({
         () => {
           toast.success(t("paid"))
           // The webhook usually lands within seconds; show the new balance then.
-          window.setTimeout(() => router.refresh(), 4000)
-        }
+          window.setTimeout(() => {
+            router.refresh()
+            announceCreditsChanged()
+          }, 4000)
+        },
+        quantity
       )
     } catch {
       toast.error(t("checkoutFailed"))
@@ -72,11 +91,11 @@ export function BuyButton({
   return (
     <Button
       variant={variant}
-      className="h-12 px-6 text-base"
-      disabled={opening}
+      className={cn("h-12 px-6 text-base", className)}
+      disabled={opening || disabled}
       onClick={buy}
     >
-      {label ?? t("buy")}
+      {label ?? t("topUp")}
     </Button>
   )
 }

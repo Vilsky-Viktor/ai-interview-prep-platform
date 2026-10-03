@@ -16,6 +16,7 @@ from app.helpers.sessions import (
 from app.schemas.review import ReviewItem
 from app.schemas.rounds import AnswerCreate, NextQuestion
 from app.schemas.sessions import SessionAnswerResult, SessionOut, SessionTopicOut, SignalIn
+from app.services import outbox as outbox_service
 from app.services.session_access import get_owned_session
 from app.services.session_answers import submit_session_answer
 from app.storage import sessions
@@ -96,5 +97,6 @@ async def finish(session_id: UUID, user: CurrentUser) -> SessionOut:
     row = await get_owned_session(session_id, user)
     final = final_score([answer.score for answer in row.answers], len(row.questions))
     await sessions.finish(row.id, final)
+    await outbox_service.flush_quietly()
 
     return await session_out_titled(await sessions.get(session_id))

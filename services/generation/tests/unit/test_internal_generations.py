@@ -210,7 +210,11 @@ def test_owner_cancels_an_unfinished_preparation(client, monkeypatch):
 
         return claimed
 
+    async def release(_generation_id):
+        return None
+
     monkeypatch.setattr(generations, "cancel", fake_cancel)
+    monkeypatch.setattr("app.services.cancel.billing.release_kit", release)
     url = f"/generations/{GENERATION_ID}/cancel"
 
     first = client.post(url)

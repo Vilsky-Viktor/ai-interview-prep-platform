@@ -24,7 +24,7 @@ export default async function GeneratePage({
   const companyMatch = next?.match(/^\/company\/([^/]+)\/interviews\/([^/?]+)/)
 
   return (
-    <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col space-y-8 px-6 py-12">
       <GenerationView
         // Interview generations go through companies, so every admin can follow them.
         path={

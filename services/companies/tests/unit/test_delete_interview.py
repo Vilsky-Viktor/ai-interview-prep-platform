@@ -6,11 +6,11 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.integrations import library, rounds
+from app.integrations import billing, library, rounds
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
-from app.storage import companies, interviews
+from app.storage import companies, interviews, invites
 
 COMPANY_ID = uuid.uuid4()
 INTERVIEW_ID = uuid.uuid4()
@@ -106,5 +106,24 @@ def test_a_failed_cleanup_keeps_the_interview(client, monkeypatch):
         client.delete(URL)
 
     assert calls == []
+
+    app.dependency_overrides.clear()
+
+
+def test_deleting_an_interview_gives_back_unfinished_candidates_credits(client, monkeypatch):
+    setup(monkeypatch, "admin")
+    released = []
+
+    async def unfinished(interview_id):
+        return [(INTERVIEW_ID, "carol@example.com", "invited")]
+
+    async def release(key):
+        released.append(key)
+
+    monkeypatch.setattr(invites, "unfinished", unfinished)
+    monkeypatch.setattr(billing, "release_candidate", release)
+
+    assert client.delete(URL).status_code == 204
+    assert released == [f"{INTERVIEW_ID}:carol@example.com"]
 
     app.dependency_overrides.clear()

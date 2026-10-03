@@ -1,6 +1,6 @@
 # Aliased: this module's own delete() would otherwise shadow it.
 from sqlalchemy import delete as sql_delete
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import selectinload
 
 from app.constants.roles import Role
@@ -19,6 +19,17 @@ async def create(name: str, user_id: str, email: str) -> Company:
         await session.commit()
 
     return company
+
+
+async def owned_count(user_id: str) -> int:
+    query = (
+        select(func.count())
+        .select_from(Member)
+        .where(Member.user_id == user_id, Member.role == Role.OWNER)
+    )
+
+    async with Session() as session:
+        return await session.scalar(query)
 
 
 async def get(company_id) -> Company | None:

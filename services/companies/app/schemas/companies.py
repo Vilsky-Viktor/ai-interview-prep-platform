@@ -37,4 +37,12 @@ class MemberIn(BaseModel):
 
 
 class CompanyCreditsOut(BaseModel):
-    candidate_credits: int
+    available: int
+
+
+class CompanyBalanceOut(BaseModel):
+    """A company the user can top up, with its credits."""
+
+    id: UUID
+    name: str
+    available: int

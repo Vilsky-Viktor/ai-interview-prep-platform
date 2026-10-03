@@ -72,3 +72,6 @@ GENERATIONS_PAUSED = (
     "We've reached today's limit for new generations. Please try again tomorrow; practice and "
     "interviews keep working."
 )
+# Charging a finished kit: attempts, and the pause between them.
+CHARGE_ATTEMPTS = 3
+CHARGE_RETRY_SECONDS = 2

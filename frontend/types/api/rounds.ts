@@ -374,6 +374,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/certificates/topics/{topic_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Buy
+     * @description Charges and issues an earned certificate on someone else's public kit.
+     */
+    post: operations["buy_certificates_topics__topic_id__post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/certificates/{certificate_id}": {
     parameters: {
       query?: never
@@ -523,6 +543,27 @@ export interface paths {
      *     their change.
      */
     post: operations["flush_outbox_internal_schedules_outbox_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/schedules/expire-interviews": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Expire Interviews
+     * @description Every minute, from Cloud Scheduler: finishes interviews whose time ran out after the
+     *     candidate left, so companies see them as finished.
+     */
+    post: operations["expire_interviews_internal_schedules_expire_interviews_post"]
     delete?: never
     options?: never
     head?: never
@@ -714,6 +755,15 @@ export interface components {
        */
       created_at: string
     }
+    /** ChatOut */
+    ChatOut: {
+      /** Messages */
+      messages: components["schemas"]["ChatMessageOut"][]
+      /** Free Turns Left */
+      free_turns_left: number
+      /** Turn Credits */
+      turn_credits: number
+    }
     /** ChatRequest */
     ChatRequest: {
       /** Message */
@@ -865,6 +915,11 @@ export interface components {
       preparation_id: string
       /** Topic Title */
       topic_title: string
+      /**
+       * Public Kit
+       * @default false
+       */
+      public_kit: boolean
       status: components["schemas"]["RoundStatus"]
       /** Total */
       total: number
@@ -1016,6 +1071,11 @@ export interface components {
        * @default false
        */
       in_progress: boolean
+      /**
+       * Certificate For Sale
+       * @default false
+       */
+      certificate_for_sale: boolean
     }
     /** TopicQuestions */
     TopicQuestions: {
@@ -1033,6 +1093,8 @@ export interface components {
       title: string
       /** Questions */
       questions: components["schemas"]["Question"][]
+      /** Public Author Id */
+      public_author_id?: string | null
     }
     /** ValidationError */
     ValidationError: {
@@ -1718,7 +1780,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["ChatMessageOut"][]
+          "application/json": components["schemas"]["ChatOut"]
         }
       }
       /** @description Validation Error */
@@ -1783,6 +1845,37 @@ export interface operations {
         }
         content: {
           "application/json": string[]
+        }
+      }
+    }
+  }
+  buy_certificates_topics__topic_id__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        topic_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CertificateOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }
@@ -2013,6 +2106,24 @@ export interface operations {
     }
   }
   flush_outbox_internal_schedules_outbox_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  expire_interviews_internal_schedules_expire_interviews_post: {
     parameters: {
       query?: never
       header?: never

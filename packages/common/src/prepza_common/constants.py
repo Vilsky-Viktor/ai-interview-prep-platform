@@ -41,3 +41,6 @@ LANGUAGES = {"en": "English", "ru": "Russian"}
 DEFAULT_LANGUAGE = "en"
 # The Firebase custom claim that carries the user's language in every ID token.
 LANGUAGE_CLAIM = "language"
+
+# Tutor turns free on each answered question; rounds enforces it, billing's catalog shows it.
+CHAT_FREE_TURNS = 3

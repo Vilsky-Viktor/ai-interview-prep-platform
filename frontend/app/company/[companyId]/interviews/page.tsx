@@ -76,7 +76,8 @@ export default async function InterviewsPage({
       {credits != null && catalog && (
         <CreditsPanel
           companyId={companyId}
-          credits={credits.candidate_credits}
+          companyName={company.name}
+          credits={credits.available}
           catalog={catalog}
         />
       )}

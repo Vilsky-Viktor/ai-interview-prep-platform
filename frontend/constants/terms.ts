@@ -52,7 +52,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
   {
     heading: "Liability",
     paragraphs: [
-      "prepza is provided as it is. As far as the law allows, we are not liable for indirect losses, and our total liability is limited to what you paid us in the last 12 months, or 100 euros if you paid nothing. Nothing here limits rights you have as a consumer under the law of your country.",
+      "prepza is provided as it is. As far as the law allows, we are not liable for indirect losses, and our total liability is limited to what you paid us in the last 12 months, or 100 US dollars if you paid nothing. Nothing here limits rights you have as a consumer under the law of your country.",
     ],
   },
   {

@@ -45,6 +45,7 @@ def round_out(round_: Round) -> RoundOut:
         topic_id=round_.topic_id,
         preparation_id=round_.preparation_id,
         topic_title=round_.topic_title,
+        public_kit=round_.public_author_id is not None,
         status=round_.status,
         total=len(round_.questions),
         answered=len(round_.answers),

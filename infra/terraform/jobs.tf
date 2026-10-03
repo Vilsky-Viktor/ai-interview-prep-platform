@@ -23,6 +23,7 @@ locals {
     key-check-batches    = { service = "generation-worker", path = "/internal/schedules/key-check-batches", cron = "*/10 * * * *" }
     generation-retention = { service = "generation-worker", path = "/internal/schedules/retention", cron = "0 3 * * *" }
     candidate-retention  = { service = "companies", path = "/internal/schedules/retention", cron = "15 3 * * *" }
+    invite-expiry        = { service = "companies", path = "/internal/schedules/invite-expiry", cron = "30 3 * * *" }
     # Events not published right after their change (the outbox).
     library-outbox    = { service = "library", path = "/internal/schedules/outbox", cron = "* * * * *" }
     companies-outbox  = { service = "companies", path = "/internal/schedules/outbox", cron = "* * * * *" }

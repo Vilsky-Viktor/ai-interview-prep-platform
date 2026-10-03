@@ -58,12 +58,17 @@ export default async function RootLayout({
         "font-sans"
       )}
     >
-      <body>
+      {/* A full-height column: the content grows, so the footer sits at the bottom of short
+          pages without making them scroll. Pages take the full width, as auto margins in a
+          flex column would otherwise shrink them to their content. */}
+      <body className="flex min-h-svh flex-col">
         <NextIntlClientProvider>
           <ThemeProvider nonce={nonce}>
             <AuthProvider>
               <SiteHeader />
-              {children}
+              <div className="flex flex-1 flex-col [&>*]:w-full">
+                {children}
+              </div>
               <SiteFooter />
               <Toaster />
             </AuthProvider>

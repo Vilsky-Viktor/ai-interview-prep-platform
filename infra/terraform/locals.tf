@@ -29,7 +29,7 @@ locals {
     library           = ["rounds", "generation", "companies", "billing"]
     generation        = ["library", "billing"]
     generation-worker = ["library", "billing"]
-    rounds            = ["library"]
+    rounds            = ["library", "billing"]
     companies         = ["generation", "library", "rounds", "billing"]
     billing           = []
     notifications     = ["companies", "library"]

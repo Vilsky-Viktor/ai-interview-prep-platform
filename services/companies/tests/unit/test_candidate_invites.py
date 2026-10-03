@@ -61,11 +61,13 @@ def invite_setup(monkeypatch):
 
         return invite
 
-    async def fake_exists(_interview_id, email):
-        return email in invited
+    async def fake_status(_interview_id, email):
+        return "invited" if email in invited else None
 
-    async def fake_use_candidate(company_id):
-        used.append(company_id)
+    async def fake_hold(company_id, key):
+        # Billing sets credits aside once per key, however often it's asked.
+        if key not in used:
+            used.append(key)
 
     async def no_flush():
         pass
@@ -73,8 +75,8 @@ def invite_setup(monkeypatch):
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(invites, "upsert", fake_upsert)
-    monkeypatch.setattr(invites, "exists", fake_exists)
-    monkeypatch.setattr(billing, "use_candidate", fake_use_candidate)
+    monkeypatch.setattr(invites, "status_of", fake_status)
+    monkeypatch.setattr(billing, "hold_candidate", fake_hold)
     monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
     redis = FakeRedis()
     monkeypatch.setattr(interviews_router, "get_redis", lambda: redis)
@@ -93,8 +95,8 @@ def test_inviting_the_same_email_again_resends_the_invite(client, monkeypatch):
     second = client.post(url, json={"email": "carol@example.com"})
 
     assert first.status_code == second.status_code == 201
-    # Only the first invite used a candidate credit; the resend was free.
-    assert used == [COMPANY_ID]
+    # Credits are set aside once for the candidate; the resend costs nothing more.
+    assert used == [f"{INTERVIEW_ID}:carol@example.com"]
     assert first.json()["id"] == second.json()["id"]
     assert sent == ["carol@example.com", "carol@example.com"]
 
@@ -116,10 +118,10 @@ def test_one_address_gets_at_most_three_invites_a_day(client, monkeypatch):
 def test_a_company_without_credits_cannot_invite_new_candidates(client, monkeypatch):
     sent, _ = invite_setup(monkeypatch)
 
-    async def no_credits(company_id):
+    async def no_credits(company_id, key):
         raise HTTPException(402, "No candidate credits left.")
 
-    monkeypatch.setattr(billing, "use_candidate", no_credits)
+    monkeypatch.setattr(billing, "hold_candidate", no_credits)
 
     response = client.post(URL, json={"email": "erin@example.com"})
     app.dependency_overrides.clear()
@@ -127,3 +129,18 @@ def test_a_company_without_credits_cannot_invite_new_candidates(client, monkeypa
     assert response.status_code == 402
     assert response.json()["detail"] == "No candidate credits left."
     assert sent == []
+
+
+def test_an_email_limit_refusal_sets_no_credits_aside(client, monkeypatch):
+    _, used = invite_setup(monkeypatch)
+
+    async def limited(*args):
+        raise HTTPException(429, "Too many requests. Try again later.")
+
+    monkeypatch.setattr(interviews_router, "hit_emails", limited)
+
+    response = client.post(URL, json={"email": "frank@example.com"})
+    app.dependency_overrides.clear()
+
+    assert response.status_code == 429
+    assert used == []

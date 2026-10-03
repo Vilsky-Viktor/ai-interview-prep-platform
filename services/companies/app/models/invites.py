@@ -23,3 +23,8 @@ class CandidateInvite(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
+    # When the invite email was last sent; an invite never started expires INVITE_EXPIRY_DAYS
+    # after it.
+    sent_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )

@@ -22,7 +22,7 @@ export default function ErrorPage({
   }, [error])
 
   return (
-    <main className="mx-auto flex min-h-[calc(100svh-3.5rem)] w-full max-w-5xl flex-col items-center justify-center px-6 py-12">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-12">
       <div className="w-full space-y-8 text-center">
         <div className="space-y-4">
           <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">

@@ -1351,6 +1351,8 @@ export interface components {
       title: string
       /** Questions */
       questions: components["schemas"]["QuestionOut"][]
+      /** Public Author Id */
+      public_author_id?: string | null
     }
     /** TopicToEmbed */
     TopicToEmbed: {

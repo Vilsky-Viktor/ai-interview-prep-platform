@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "cn"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
@@ -88,7 +89,12 @@ export function InviteView({ token }: { token: string }) {
             })}
           </p>
         )}
-        <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
+        <h1
+          className={cn(
+            "font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl",
+            invite.title && "normal-case"
+          )}
+        >
           {invite.title ?? t("fallbackTitle")}
         </h1>
         {invite.status !== "finished" && (

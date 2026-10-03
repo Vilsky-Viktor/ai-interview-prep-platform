@@ -8,7 +8,7 @@ import { toast } from "sonner"
 import { apiFetch } from "@/lib/api"
 
 const titleClass =
-  "font-heading text-3xl font-medium tracking-tight text-balance"
+  "font-heading text-3xl font-medium tracking-tight text-balance normal-case"
 
 export function EditableTitle({
   title,
@@ -86,7 +86,7 @@ export function EditableTitle({
       <h1 className={titleClass}>
         <button
           type="button"
-          className="cursor-text text-left"
+          className="cursor-text text-left normal-case"
           onClick={() => {
             setValue(title)
             setEditing(true)

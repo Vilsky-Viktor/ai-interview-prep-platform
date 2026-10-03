@@ -30,3 +30,8 @@
    (what passes, what counts as done, what is allowed) live in the backend services,
    which return the results. The frontend only displays data, collects input and
    sends it to the API.
+
+6. **Every page has the same width.** A page's `<main>` is
+   `mx-auto max-w-5xl px-6`, the width of the header, so content lines up with the
+   logo and the menu on every page. No page is narrower or wider. Cards, forms and
+   prompts inside a page may be narrower, but the page itself never is.

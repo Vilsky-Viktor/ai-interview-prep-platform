@@ -5,6 +5,7 @@ type Schemas = companies["schemas"]
 type RoundSchemas = rounds["schemas"]
 
 export type Company = Schemas["CompanyOut"]
+export type CompanyBalance = Schemas["CompanyBalanceOut"]
 export type CompanyMember = Schemas["MemberOut"]
 export type AdminInvite = Schemas["AdminInviteOut"]
 export type Interview = Schemas["InterviewOut"]

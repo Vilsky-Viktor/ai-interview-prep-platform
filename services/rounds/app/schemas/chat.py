@@ -15,3 +15,10 @@ class ChatMessageOut(BaseModel):
     role: ChatRole
     content: str
     created_at: datetime
+
+
+class ChatOut(BaseModel):
+    messages: list[ChatMessageOut]
+    # Free tutor turns left on this question; later ones cost turn_credits each.
+    free_turns_left: int
+    turn_credits: int

@@ -18,6 +18,8 @@ class Round(Base):
     topic_id: Mapped[uuid.UUID] = mapped_column(index=True)
     preparation_id: Mapped[uuid.UUID]
     topic_title: Mapped[str] = mapped_column(Text)
+    # The author of the public kit the topic is in, when it isn't the user's own or shared.
+    public_author_id: Mapped[str | None] = mapped_column(String(128))
     status: Mapped[str] = mapped_column(String(32), default=RoundStatus.IN_PROGRESS)
     # Snapshot of the topic's questions in this round's order, with their options.
     questions: Mapped[list] = mapped_column(JSONB)

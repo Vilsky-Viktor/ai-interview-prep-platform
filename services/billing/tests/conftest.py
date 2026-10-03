@@ -17,9 +17,8 @@ os.environ.setdefault("ROUNDS_SERVICE_SECRET", "test-secret-that-is-at-least-32-
 os.environ.setdefault("COMPANIES_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("BILLING_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("PADDLE_WEBHOOK_SECRET", "pdl_ntfset_test_secret")
-os.environ.setdefault("PADDLE_PRICE_CANDIDATES_10", "pri_candidates_10")
-os.environ.setdefault("PADDLE_PRICE_JOB_SEARCH_PASS", "pri_pass")
-os.environ.setdefault("PADDLE_PRICE_GENERATIONS_3", "pri_generations_3")
+os.environ.setdefault("PADDLE_PRICE_TOPUP_10", "pri_topup_10")
+os.environ.setdefault("PADDLE_PRICE_TOPUP_CUSTOM", "pri_topup_custom")
 
 import pytest
 from fastapi.testclient import TestClient

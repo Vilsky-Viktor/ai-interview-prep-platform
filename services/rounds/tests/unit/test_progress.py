@@ -29,6 +29,14 @@ def no_open_rounds(monkeypatch):
 
 
 @pytest.fixture(autouse=True)
+def own_kit(monkeypatch):
+    async def none_public(user_id, preparation_id):
+        return set()
+
+    monkeypatch.setattr(rounds, "public_topics", none_public)
+
+
+@pytest.fixture(autouse=True)
 def ten_questions(monkeypatch):
     async def fake_set(set_id):
         return {"topics": [{"id": str(TOPIC_ID), "question_count": 10}]}
@@ -75,6 +83,7 @@ def test_lists_answered_and_score_per_topic(client, monkeypatch):
             "passed": False,
             "certificate_id": None,
             "in_progress": False,
+            "certificate_for_sale": False,
         }
     ]
 
@@ -101,6 +110,7 @@ def test_marks_a_topic_with_an_open_round_even_before_any_answer(client, monkeyp
             "passed": False,
             "certificate_id": None,
             "in_progress": True,
+            "certificate_for_sale": False,
         }
     ]
 
@@ -139,6 +149,7 @@ def test_includes_certificate_even_without_current_answers(client, monkeypatch):
         "passed": True,
         "certificate_id": str(cert_id),
         "in_progress": False,
+        "certificate_for_sale": False,
     }
     assert rows[str(other_topic)]["answered"] == 0
     assert rows[str(other_topic)]["score"] is None
@@ -192,3 +203,17 @@ def test_library_learns_how_many_topics_are_mastered(client, monkeypatch):
     )
 
     assert response.json() == {str(PREPARATION_ID): 2}
+
+
+def test_an_earned_certificate_on_a_public_kit_is_for_sale(client, monkeypatch):
+    async def public(user_id, preparation_id):
+        return {TOPIC_ID}
+
+    fake_progress(monkeypatch, {TOPIC_ID: (10, 90)})
+    no_certificates(monkeypatch)
+    monkeypatch.setattr(rounds, "public_topics", public)
+    sign_in()
+
+    [row] = client.get(f"/preparations/{PREPARATION_ID}/progress").json()
+
+    assert (row["passed"], row["certificate_id"], row["certificate_for_sale"]) == (True, None, True)

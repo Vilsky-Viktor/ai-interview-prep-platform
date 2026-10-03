@@ -6,7 +6,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
-import { apiFetch } from "@/lib/api"
+import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { Round } from "@/types/round"
 
 // Starting a topic with an unfinished round resumes that round.
@@ -30,8 +30,20 @@ export function StartRound({
         body: JSON.stringify({ topic_id: topicId }),
       })
       router.push(`/rounds/${round.id}`)
-    } catch {
-      toast.error(t("startFailed"))
+    } catch (error) {
+      // Over the day's new public topics: the message offers a kit of their own.
+      const limited = error instanceof ApiError && error.status === 429
+      toast.error(
+        apiErrorMessage(error, t("startFailed")),
+        limited
+          ? {
+              action: {
+                label: t("makeItYoursAction"),
+                onClick: () => router.push("/"),
+              },
+            }
+          : undefined
+      )
       setStarting(false)
     }
   }

@@ -12,8 +12,14 @@ type ChoiceOptionsProps = {
   onAnswer: (optionIndex: number) => Promise<boolean>
 }
 
-export function ChoiceOptions({ options, result, onAnswer }: ChoiceOptionsProps) {
-  const [chosen, setChosen] = useState<number | null>(result?.option_index ?? null)
+export function ChoiceOptions({
+  options,
+  result,
+  onAnswer,
+}: ChoiceOptionsProps) {
+  const [chosen, setChosen] = useState<number | null>(
+    result?.option_index ?? null
+  )
   const picked = result?.option_index ?? chosen
 
   async function choose(index: number) {
@@ -51,7 +57,7 @@ export function ChoiceOptions({ options, result, onAnswer }: ChoiceOptionsProps)
             disabled={picked !== null}
             onClick={() => choose(index)}
             className={cn(
-              "flex w-full items-start gap-3 rounded-2xl border p-4 text-left text-lg leading-7 font-light transition-colors disabled:cursor-default",
+              "flex w-full items-start gap-3 rounded-2xl border p-4 text-left text-lg leading-7 font-light normal-case transition-colors disabled:cursor-default",
               optionClass(index)
             )}
           >

@@ -6,7 +6,7 @@ from prepza_common.auth import current_user
 from prepza_common.user import User
 
 from app.constants.invites import InviteStatus
-from app.integrations import rounds
+from app.integrations import billing, rounds
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
@@ -29,6 +29,15 @@ def sign_in():
 def clear_overrides():
     yield
     app.dependency_overrides.clear()
+
+
+@pytest.fixture(autouse=True)
+def no_billing(monkeypatch):
+    async def done(_key):
+        return None
+
+    monkeypatch.setattr(billing, "charge_candidate", done)
+    monkeypatch.setattr(billing, "release_candidate", done)
 
 
 def test_finished_interview_status(client, monkeypatch):

@@ -84,7 +84,7 @@ export function CandidateList({
                 variant={
                   candidate.status === "undelivered" ? "destructive" : "outline"
                 }
-                className="h-7 px-3 text-sm font-light capitalize"
+                className="h-7 px-3 text-sm font-light"
               >
                 {statuses(candidate.status)}
               </Badge>

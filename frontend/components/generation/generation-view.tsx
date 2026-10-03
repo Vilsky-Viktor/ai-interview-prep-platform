@@ -15,6 +15,7 @@ import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { ACTIVE_STATUSES, POLL_INTERVAL_MS } from "@/constants/generation"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
+import { topUpAction } from "@/lib/credits"
 import type { DraftTopic, Generation } from "@/types/generation"
 
 export function GenerationView({
@@ -29,6 +30,7 @@ export function GenerationView({
   backLabel: string
 }) {
   const t = useTranslations("generation")
+  const billing = useTranslations("billing")
   const { user, loading } = useAuth()
   const router = useRouter()
   const [generation, setGeneration] = useState<Generation | null>(null)
@@ -103,7 +105,10 @@ export function GenerationView({
       setGeneration(next)
       setRound((value) => value + 1)
     } catch (error) {
-      toast.error(apiErrorMessage(error, t("retryFailed")))
+      toast.error(
+        apiErrorMessage(error, t("retryFailed")),
+        topUpAction(error, billing("topUp"), () => router.push("/top-up"))
+      )
     }
   }
 

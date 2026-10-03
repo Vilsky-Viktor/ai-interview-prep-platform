@@ -7,6 +7,7 @@ import { BackLink } from "@/components/back-link"
 import { EditableTitle } from "@/components/editable-title"
 import { PageHeader } from "@/components/page-header"
 import { DoneBadge } from "@/components/preparations/done-badge"
+import { MakeItYours } from "@/components/preparations/make-it-yours"
 import {
   PreparationActions,
   PreparationShare,
@@ -16,6 +17,7 @@ import { RatingStars } from "@/components/preparations/rating-stars"
 import { SubtopicList } from "@/components/questions/subtopic-list"
 import { TopicQuestions } from "@/components/questions/topic-questions"
 import { StartRound } from "@/components/rounds/start-round"
+import { BuyCertificate } from "@/components/rounds/buy-certificate"
 import { CertificateButton } from "@/components/rounds/certificate-button"
 import { TopicProgress } from "@/components/rounds/topic-progress"
 import { Badge } from "@/components/ui/badge"
@@ -23,6 +25,7 @@ import { Button } from "@/components/ui/button"
 import { formatDate } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
 import { pageMetadata } from "@/lib/site"
+import type { Catalog } from "@/types/billing"
 import type { PreparationDetail } from "@/types/preparation"
 import type { TopicProgress as Progressed } from "@/types/round"
 
@@ -59,9 +62,10 @@ export default async function PreparationPage({ params }: PageProps) {
   const levels = await getTranslations("levels")
   const visibility = await getTranslations("visibility")
   const locale = await getLocale()
-  const [preparation, progressRows] = await Promise.all([
+  const [preparation, progressRows, catalog] = await Promise.all([
     getPreparation(id),
     serverFetch<Progressed[]>(`/rounds/preparations/${id}/progress`),
+    serverFetch<Catalog>("/billing/catalog"),
   ])
 
   if (!preparation) {
@@ -75,6 +79,8 @@ export default async function PreparationPage({ params }: PageProps) {
   const canPractice = preparation.access !== "public"
   const isOwner = preparation.access === "owner"
   const done = preparation.done
+  // Someone else's public kit: invite the learner to a kit of their own.
+  const othersPublic = preparation.visibility === "public" && !isOwner
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
@@ -85,13 +91,13 @@ export default async function PreparationPage({ params }: PageProps) {
             <div className="flex flex-wrap items-center gap-2">
               <Badge
                 variant="secondary"
-                className="h-7 px-3 text-sm font-light capitalize"
+                className="h-7 px-3 text-sm font-light"
               >
                 {levels(preparation.level)}
               </Badge>
               <Badge
                 variant="outline"
-                className="h-7 px-3 text-sm font-light capitalize"
+                className="h-7 px-3 text-sm font-light"
               >
                 {visibility(preparation.visibility)}
               </Badge>
@@ -116,7 +122,7 @@ export default async function PreparationPage({ params }: PageProps) {
                   path={`/library/preparations/${preparation.id}/title`}
                 />
               ) : (
-                <h1 className="font-heading text-3xl font-medium tracking-tight text-balance">
+                <h1 className="font-heading text-3xl font-medium tracking-tight text-balance normal-case">
                   {preparation.title}
                 </h1>
               )}
@@ -131,6 +137,8 @@ export default async function PreparationPage({ params }: PageProps) {
         </p>
         <PreparationActions preparation={preparation} />
       </PageHeader>
+
+      {othersPublic && <MakeItYours />}
 
       <ul className="divide-y rounded-2xl border">
         {preparation.topics.map((topic) => {
@@ -173,9 +181,16 @@ export default async function PreparationPage({ params }: PageProps) {
                 )}
                 {canPractice && (
                   <span className="flex items-center justify-end gap-2">
-                    <CertificateButton
-                      certificateId={progress?.certificate_id ?? null}
-                    />
+                    {progress?.certificate_for_sale && catalog ? (
+                      <BuyCertificate
+                        topicId={topic.id}
+                        price={catalog.certificate_credits}
+                      />
+                    ) : (
+                      <CertificateButton
+                        certificateId={progress?.certificate_id ?? null}
+                      />
+                    )}
                     <Button
                       variant="outline"
                       nativeButton={false}

@@ -7,6 +7,7 @@ from sqlalchemy import delete, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
+from app.constants.events import INTERVIEW_FINISHED
 from app.constants.integrity import IntegritySignal
 from app.constants.rounds import RoundStatus
 from app.helpers.scores import candidate_progress, interview_finished
@@ -160,16 +161,44 @@ async def add_answer(answer: Answer, event: tuple[str, dict] | None = None) -> b
 
 
 async def finish(session_id: uuid.UUID, final_score: int) -> None:
+    """Finishes one section. When it was the interview's last open one, the interview.finished
+    event is saved with it, carrying how many answers the candidate picked."""
     async with Db() as session:
-        await session.execute(
-            update(Session)
-            .where(Session.id == session_id, Session.status == RoundStatus.IN_PROGRESS)
-            .values(
-                status=RoundStatus.FINISHED,
-                final_score=final_score,
-                finished_at=datetime.now(UTC),
+        invite_id = await session.scalar(
+            select(Session.candidate_invite_id).where(Session.id == session_id)
+        )
+        # The invite's sections are locked together, so two finishing at once still announce
+        # the interview exactly once.
+        sections = list(
+            await session.scalars(
+                select(Session)
+                .where(Session.candidate_invite_id == invite_id)
+                .options(selectinload(Session.answers))
+                .with_for_update()
             )
         )
+        finishing = next((row for row in sections if row.id == session_id), None)
+
+        if finishing is None or finishing.status != RoundStatus.IN_PROGRESS:
+            await session.commit()
+
+            return
+
+        finishing.status = RoundStatus.FINISHED
+        finishing.final_score = final_score
+        finishing.finished_at = datetime.now(UTC)
+
+        if all(row.status == RoundStatus.FINISHED for row in sections):
+            picked = sum(
+                1 for row in sections for answer in row.answers if answer.option_index is not None
+            )
+            outbox.add(
+                session,
+                OutboxEvent,
+                INTERVIEW_FINISHED,
+                {"candidate_invite_id": str(invite_id), "answered": picked},
+            )
+
         await session.commit()
 
 

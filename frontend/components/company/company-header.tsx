@@ -23,7 +23,7 @@ export function CompanyHeader({
     <div className="space-y-4">
       <div className="relative flex min-h-14 items-center">
         <BackLink href="/company">{t("title")}</BackLink>
-        <h1 className="min-w-0 flex-1 font-heading text-3xl font-medium tracking-tight">
+        <h1 className="min-w-0 flex-1 font-heading text-3xl font-medium tracking-tight normal-case">
           {name}
         </h1>
         {action}

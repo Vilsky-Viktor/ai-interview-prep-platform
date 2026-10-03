@@ -5,6 +5,7 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.integrations import billing
 from app.main import app
 from app.models.companies import Company, Member
 from app.storage import companies, interviews
@@ -113,3 +114,22 @@ def test_admin_cannot_remove_company(client, two_companies):
     sign_in()
 
     assert client.delete(f"/companies/{JOINED_ID}").status_code == 403
+
+
+def test_lists_the_users_companies_with_their_credits(client, monkeypatch):
+    company = Company(id=uuid.uuid4(), name="Acme", created_at=datetime.now(UTC), members=[])
+
+    async def mine(user_id, offset, limit):
+        return [company]
+
+    async def credits(company_ids):
+        return {str(company.id): 1_200}
+
+    monkeypatch.setattr(companies, "list_for_user", mine)
+    monkeypatch.setattr(billing, "companies_credits", credits)
+    sign_in()
+
+    response = client.get("/companies/credits")
+
+    assert response.status_code == 200
+    assert response.json() == [{"id": str(company.id), "name": "Acme", "available": 1_200}]

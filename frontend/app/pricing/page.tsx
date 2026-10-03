@@ -1,153 +1,94 @@
-import { cookies } from "next/headers"
 import Link from "next/link"
-import { getLocale, getTranslations } from "next-intl/server"
+import { getTranslations } from "next-intl/server"
 
-import { BuyButton } from "@/components/billing/buy-button"
 import { Button } from "@/components/ui/button"
-import { TOKEN_COOKIE } from "@/constants/auth"
-import { formatDate, formatPrice } from "@/lib/format"
-import { productName } from "@/lib/products"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
-import type { Catalog, Plan, Product } from "@/types/billing"
+import type { Catalog } from "@/types/billing"
 
 export const generateMetadata = () => translatedTitle("pricing", "title")
 
-function PriceCard({
-  title,
-  price,
-  note,
-  children,
-}: {
-  title: string
-  price: string
-  note: string
-  children: React.ReactNode
-}) {
+function PriceRow({ what, price }: { what: string; price: string }) {
   return (
-    <div className="flex flex-col justify-between gap-6 rounded-2xl border p-6">
-      <div className="space-y-2">
-        <p className="text-lg font-medium">{title}</p>
-        <p className="font-heading text-4xl font-medium tabular-nums">
-          {price}
-        </p>
-        <p className="text-sm text-muted-foreground">{note}</p>
-      </div>
-      {children}
-    </div>
+    <li className="flex items-baseline justify-between gap-6 px-5 py-4">
+      <span>{what}</span>
+      <span className="shrink-0 text-right font-medium tabular-nums">
+        {price}
+      </span>
+    </li>
   )
 }
 
 export default async function PricingPage() {
-  const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const t = await getTranslations("pricing")
-  const products = await getTranslations("products")
-  const locale = await getLocale()
-  const [catalog, plan] = await Promise.all([
-    serverFetch<Catalog>("/billing/catalog"),
-    signedIn ? serverFetch<Plan>("/billing/me") : null,
-  ])
+  const catalog = await serverFetch<Catalog>("/billing/catalog")
 
   if (!catalog) {
     return null
   }
 
-  const price = (product: Product) =>
-    formatPrice(product.price_cents, catalog.currency, locale)
-  const name = (product: Product) => products(...productName(product))
-  const learner = catalog.products.filter((product) => product.owner === "user")
-  const company = catalog.products.filter(
-    (product) => product.owner === "company"
-  )
+  const credits = (count: number) => t("credits", { count })
 
   return (
     <main className="mx-auto max-w-5xl space-y-12 px-6 py-12">
-      <h1 className="font-heading text-4xl font-medium tracking-tight">
-        {t("title")}
-      </h1>
-
-      <section className="space-y-6">
-        <div className="space-y-2">
-          <h2 className="font-heading text-2xl font-medium">{t("learners")}</h2>
-          {plan && (
-            <p className="text-base text-muted-foreground">
-              {plan.pass_until
-                ? t("passUntil", { date: formatDate(plan.pass_until, locale) })
-                : plan.generation_credits
-                  ? t("freeAndExtraLeft", {
-                      count: plan.free_generations_left,
-                      extra: plan.generation_credits,
-                    })
-                  : t("freeLeft", { count: plan.free_generations_left })}
-            </p>
-          )}
-        </div>
-        <div className="grid gap-4 sm:grid-cols-3">
-          <PriceCard
-            title={t("free")}
-            price={formatPrice(0, catalog.currency, locale)}
-            note={t("freeNote", { count: catalog.free_generations_per_month })}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between gap-4">
+          <h1 className="font-heading text-4xl font-medium tracking-tight">
+            {t("title")}
+          </h1>
+          <Button
+            className="h-12 px-6 text-base"
+            render={<Link href="/top-up" />}
+            nativeButton={false}
           >
-            <Button
-              variant="outline"
-              className="h-12 px-6 text-base"
-              render={<Link href="/" />}
-              nativeButton={false}
-            >
-              {t("start")}
-            </Button>
-          </PriceCard>
-          {learner.map((product) => (
-            <PriceCard
-              key={product.key}
-              title={name(product)}
-              price={price(product)}
-              note={
-                product.pass_days
-                  ? t("passNote", { days: product.pass_days })
-                  : t("creditsNote", { count: product.generation_credits })
-              }
-            >
-              <BuyButton catalog={catalog} product={product} />
-            </PriceCard>
-          ))}
+            {t("topUp")}
+          </Button>
         </div>
+        <p className="text-base text-muted-foreground">{t("intro")}</p>
+      </div>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-2xl font-medium">{t("learners")}</h2>
+        <ul className="divide-y rounded-xl border">
+          <PriceRow what={t("kit")} price={credits(catalog.kit_credits)} />
+          <PriceRow
+            what={t("chat", { free: catalog.chat_free_turns })}
+            price={t("perTurn", { count: catalog.chat_turn_credits })}
+          />
+          <PriceRow what={t("ownCertificate")} price={t("free")} />
+          <PriceRow
+            what={t("publicCertificate")}
+            price={credits(catalog.certificate_credits)}
+          />
+          <PriceRow what={t("publicPractice")} price={t("free")} />
+          <PriceRow
+            what={t("welcome")}
+            price={t("gift", { count: catalog.welcome_user })}
+          />
+        </ul>
       </section>
 
-      <section className="space-y-6">
-        <div className="space-y-2">
-          <h2 className="font-heading text-2xl font-medium">
-            {t("companies")}
-          </h2>
-          <p className="text-base text-muted-foreground">
-            {t("companiesNote", { count: catalog.free_candidates })}
-          </p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {company.map((product) => (
-            <PriceCard
-              key={product.key}
-              title={name(product)}
-              price={price(product)}
-              note={t("perCandidate", {
-                price: formatPrice(
-                  product.price_cents / product.candidate_credits,
-                  catalog.currency,
-                  locale
-                ),
-              })}
-            >
-              <Button
-                variant="outline"
-                className="h-12 px-6 text-base"
-                render={<Link href="/company" />}
-                nativeButton={false}
-              >
-                {t("buyFromCompany")}
-              </Button>
-            </PriceCard>
-          ))}
-        </div>
+      <section className="space-y-4">
+        <h2 className="font-heading text-2xl font-medium">{t("companies")}</h2>
+        <ul className="divide-y rounded-xl border">
+          <PriceRow what={t("interview")} price={t("free")} />
+          <PriceRow
+            what={t("candidate")}
+            price={credits(catalog.candidate_credits)}
+          />
+          <PriceRow
+            what={t("companyWelcome")}
+            price={t("gift", { count: catalog.welcome_company })}
+          />
+        </ul>
+        <Button
+          variant="outline"
+          className="h-12 px-6 text-base"
+          render={<Link href="/company" />}
+          nativeButton={false}
+        >
+          {t("openCompanies")}
+        </Button>
       </section>
     </main>
   )

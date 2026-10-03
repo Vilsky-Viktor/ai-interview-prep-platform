@@ -6,13 +6,8 @@ TRANSLATIONS = {
         "Sign-in is temporarily unavailable. Please try again shortly.": (
             "Вход временно недоступен. Попробуйте чуть позже."
         ),
-        "No candidate credits left. Buy more to keep inviting candidates.": (
-            "Кредиты на кандидатов закончились. Купите ещё, чтобы приглашать кандидатов."
-        ),
-        "You've used this month's free preparation. Get the Job Search Pass or 3 more "
-        "preparations.": (
-            "Бесплатная подготовка в этом месяце использована. Купите пропуск на поиск работы "
-            "или ещё 3 подготовки."
+        "Not enough credits. Top up to continue.": (
+            "Недостаточно кредитов. Пополните баланс, чтобы продолжить."
         ),
         "We've reached today's limit for new generations. Please try again tomorrow; practice "
         "and interviews keep working.": (
@@ -21,6 +16,18 @@ TRANSLATIONS = {
         ),
         "Couldn't get a reply right now. Please try again.": (
             "Не удалось получить ответ. Попробуйте ещё раз."
+        ),
+        "You've started 3 new public topics today. Come back tomorrow, or generate your own kit "
+        "now.": (
+            "Сегодня вы начали уже 3 новые публичные темы. Возвращайтесь завтра или создайте свой "
+            "набор прямо сейчас."
+        ),
+        "You can own at most 3 companies.": "Можно владеть не более чем 3 компаниями.",
+        "Your company can generate up to 10 interviews a day. Try again tomorrow.": (
+            "Компания может создавать не больше 10 собеседований в день. Попробуйте завтра."
+        ),
+        "A kit can be shared with at most 30 people.": (
+            "Набором можно поделиться не более чем с 30 людьми."
         ),
         "Title is required": "Нужно название",
         "Details are required for this reason.": "Для этой причины нужны подробности.",

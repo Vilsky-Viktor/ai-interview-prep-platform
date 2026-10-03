@@ -21,6 +21,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/topups/quote": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Quote
+     * @description What a custom amount buys, bonus included, so the client shows it without the rule.
+     */
+    get: operations["quote_topups_quote_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/me": {
     parameters: {
       query?: never
@@ -28,8 +48,25 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** My Plan */
-    get: operations["my_plan_me_get"]
+    /** My Balance */
+    get: operations["my_balance_me_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/me/history": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** My History */
+    get: operations["my_history_me_history_get"]
     put?: never
     post?: never
     delete?: never
@@ -58,7 +95,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/companies/{company_id}/candidates/use": {
+  "/internal/kits/{generation_id}/hold": {
     parameters: {
       query?: never
       header?: never
@@ -68,10 +105,178 @@ export interface paths {
     get?: never
     put?: never
     /**
-     * Use Candidate
-     * @description Called by companies before a new candidate is invited.
+     * Hold Kit
+     * @description A learner's prep kit. Charged when it's ready, given back if it fails or is cancelled.
      */
-    post: operations["use_candidate_internal_companies__company_id__candidates_use_post"]
+    post: operations["hold_kit_internal_kits__generation_id__hold_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/kits/{generation_id}/charge": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Charge Kit */
+    post: operations["charge_kit_internal_kits__generation_id__charge_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/kits/{generation_id}/release": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Release Kit */
+    post: operations["release_kit_internal_kits__generation_id__release_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/candidates/hold": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Hold Candidate
+     * @description Set aside on invite. Charged once the interview finishes with at least one answer.
+     */
+    post: operations["hold_candidate_internal_candidates_hold_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/candidates/charge": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Charge Candidate */
+    post: operations["charge_candidate_internal_candidates_charge_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/candidates/release": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Release Candidate */
+    post: operations["release_candidate_internal_candidates_release_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/certificates": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Charge Certificate
+     * @description A certificate on someone else's public kit; its author gets a share.
+     */
+    post: operations["charge_certificate_internal_certificates_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/chat-turns": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Charge Chat Turn
+     * @description A tutor turn after the free ones on a question.
+     */
+    post: operations["charge_chat_turn_internal_chat_turns_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/users/{user_id}/credits": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * User Credits
+     * @description For a check before work starts, such as a chat turn.
+     */
+    get: operations["user_credits_internal_users__user_id__credits_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/welcome": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Welcome Company
+     * @description The company's wallet. The welcome credits come once per owner's email.
+     */
+    post: operations["welcome_company_internal_companies__company_id__welcome_post"]
     delete?: never
     options?: never
     head?: never
@@ -95,7 +300,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/users/{user_id}/generations/use": {
+  "/internal/companies/credits": {
     parameters: {
       query?: never
       header?: never
@@ -105,11 +310,45 @@ export interface paths {
     get?: never
     put?: never
     /**
-     * Use Generation
-     * @description Called by generation before a learner's preparation is generated.
+     * Companies Credits
+     * @description Several companies' balances at once, for the top-up page.
      */
-    post: operations["use_generation_internal_users__user_id__generations_use_post"]
+    post: operations["companies_credits_internal_companies_credits_post"]
     delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/history": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Company History */
+    get: operations["company_history_internal_companies__company_id__history_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    /** Delete Company */
+    delete: operations["delete_company_internal_companies__company_id__delete"]
     options?: never
     head?: never
     patch?: never
@@ -125,10 +364,7 @@ export interface paths {
     get?: never
     put?: never
     post?: never
-    /**
-     * Delete User
-     * @description Part of deleting an account (library coordinates it); safe to repeat.
-     */
+    /** Delete User */
     delete: operations["delete_user_internal_users__user_id__delete"]
     options?: never
     head?: never
@@ -193,9 +429,18 @@ export interface paths {
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
+    /** BalanceOut */
+    BalanceOut: {
+      /** Balance */
+      balance: number
+      /** Reserved */
+      reserved: number
+      /** Available */
+      available: number
+    }
     /**
      * CatalogOut
-     * @description What the pricing page and Paddle.js need; the client token is public by design.
+     * @description What the pricing page and Paddle.js need. Prices are decided here, not in the client.
      */
     CatalogOut: {
       /** Environment */
@@ -204,51 +449,101 @@ export interface components {
       client_token: string
       /** Currency */
       currency: string
-      /** Free Generations Per Month */
-      free_generations_per_month: number
-      /** Free Candidates */
-      free_candidates: number
-      /** Products */
-      products: components["schemas"]["ProductOut"][]
-    }
-    /** CompanyCreditsOut */
-    CompanyCreditsOut: {
+      /** Kit Credits */
+      kit_credits: number
       /** Candidate Credits */
       candidate_credits: number
+      /** Certificate Credits */
+      certificate_credits: number
+      /** Chat Turn Credits */
+      chat_turn_credits: number
+      /** Chat Free Turns */
+      chat_free_turns: number
+      /** Welcome User */
+      welcome_user: number
+      /** Welcome Company */
+      welcome_company: number
+      /** Products */
+      products: components["schemas"]["TopUpOut"][]
+      custom: components["schemas"]["CustomTopUpOut"]
+    }
+    /**
+     * CustomTopUpOut
+     * @description Any whole-dollar amount in the range: Paddle's $1 price in that quantity.
+     */
+    CustomTopUpOut: {
+      /** Price Id */
+      price_id: string | null
+      /** Min Dollars */
+      min_dollars: number
+      /** Max Dollars */
+      max_dollars: number
+    }
+    /**
+     * EntryOut
+     * @description One line of a wallet's history.
+     */
+    EntryOut: {
+      /** Amount */
+      amount: number
+      /** Reason */
+      reason: string
+      /** Note */
+      note: string | null
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
     }
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
     }
-    /**
-     * PlanOut
-     * @description A learner's preparations: an active pass covers all of them.
-     */
-    PlanOut: {
-      /** Pass Until */
-      pass_until: string | null
-      /** Generation Credits */
-      generation_credits: number
-      /** Free Generations Left */
-      free_generations_left: number
+    /** OwnersIn */
+    OwnersIn: {
+      /** Owner Ids */
+      owner_ids: string[]
     }
-    /** ProductOut */
-    ProductOut: {
+    /**
+     * QuoteOut
+     * @description What a custom amount buys.
+     */
+    QuoteOut: {
+      /** Price Cents */
+      price_cents: number
+      /** Credits */
+      credits: number
+      /** Bonus Credits */
+      bonus_credits: number
+    }
+    /**
+     * SpendIn
+     * @description A charge for something delivered at once. `key` makes a repeat count once.
+     */
+    SpendIn: {
+      /** Owner Id */
+      owner_id: string
+      /** Key */
+      key: string
+      /** Note */
+      note?: string | null
+      /** Author Id */
+      author_id?: string | null
+    }
+    /** TopUpOut */
+    TopUpOut: {
       /** Key */
       key: string
       /** Title */
       title: string
-      /** Owner */
-      owner: string
       /** Price Cents */
       price_cents: number
-      /** Candidate Credits */
-      candidate_credits: number
-      /** Generation Credits */
-      generation_credits: number
-      /** Pass Days */
-      pass_days: number
+      /** Credits */
+      credits: number
+      /** Bonus Credits */
+      bonus_credits: number
       /** Price Id */
       price_id: string | null
     }
@@ -264,6 +559,11 @@ export interface components {
       input?: unknown
       /** Context */
       ctx?: Record<string, never>
+    }
+    /** WelcomeIn */
+    WelcomeIn: {
+      /** Owner Email */
+      owner_email: string
     }
   }
   responses: never
@@ -294,7 +594,38 @@ export interface operations {
       }
     }
   }
-  my_plan_me_get: {
+  quote_topups_quote_get: {
+    parameters: {
+      query: {
+        dollars: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["QuoteOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  my_balance_me_get: {
     parameters: {
       query?: never
       header?: never
@@ -309,7 +640,39 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["PlanOut"]
+          "application/json": components["schemas"]["BalanceOut"]
+        }
+      }
+    }
+  }
+  my_history_me_history_get: {
+    parameters: {
+      query?: {
+        offset?: number
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["EntryOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }
@@ -336,7 +699,277 @@ export interface operations {
       }
     }
   }
-  use_candidate_internal_companies__company_id__candidates_use_post: {
+  hold_kit_internal_kits__generation_id__hold_post: {
+    parameters: {
+      query: {
+        user_id: string
+      }
+      header?: never
+      path: {
+        generation_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  charge_kit_internal_kits__generation_id__charge_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        generation_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  release_kit_internal_kits__generation_id__release_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        generation_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  hold_candidate_internal_candidates_hold_post: {
+    parameters: {
+      query: {
+        company_id: string
+        key: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  charge_candidate_internal_candidates_charge_post: {
+    parameters: {
+      query: {
+        key: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  release_candidate_internal_candidates_release_post: {
+    parameters: {
+      query: {
+        key: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  charge_certificate_internal_certificates_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SpendIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  charge_chat_turn_internal_chat_turns_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SpendIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  user_credits_internal_users__user_id__credits_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["BalanceOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  welcome_company_internal_companies__company_id__welcome_post: {
     parameters: {
       query?: never
       header?: never
@@ -345,7 +978,11 @@ export interface operations {
       }
       cookie?: never
     }
-    requestBody?: never
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["WelcomeIn"]
+      }
+    }
     responses: {
       /** @description Successful Response */
       204: {
@@ -382,7 +1019,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["CompanyCreditsOut"]
+          "application/json": components["schemas"]["BalanceOut"]
         }
       }
       /** @description Validation Error */
@@ -396,12 +1033,81 @@ export interface operations {
       }
     }
   }
-  use_generation_internal_users__user_id__generations_use_post: {
+  companies_credits_internal_companies_credits_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["OwnersIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": {
+            [key: string]: components["schemas"]["BalanceOut"]
+          }
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  company_history_internal_companies__company_id__history_get: {
+    parameters: {
+      query?: {
+        offset?: number
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["EntryOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  delete_company_internal_companies__company_id__delete: {
     parameters: {
       query?: never
       header?: never
       path: {
-        user_id: string
+        company_id: string
       }
       cookie?: never
     }

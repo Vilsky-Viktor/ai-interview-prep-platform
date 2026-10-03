@@ -24,16 +24,22 @@ def test_only_queued_or_running_generations_untouched_for_long_are_failed(run):
         stuck = await generations.create("ann", "stuck")
         done = await generations.create("ann", "done")
         await generations.update(done.id, status=Status.DONE)
-        count = await generations.fail_stuck(datetime.now(UTC) + timedelta(seconds=1), "stopped")
+        failed = await generations.fail_stuck(datetime.now(UTC) + timedelta(seconds=1), "stopped")
         # Nothing new has stalled since, so a second sweep changes nothing.
         again = await generations.fail_stuck(datetime.now(UTC) - timedelta(hours=1), "stopped")
 
-        return count, again, await generations.get(stuck.id), await generations.get(done.id)
+        return (
+            [row.id for row in failed],
+            again,
+            stuck.id,
+            await generations.get(stuck.id),
+            await generations.get(done.id),
+        )
 
-    count, again, stuck, done = run(scenario())
+    failed, again, stuck_id, stuck, done = run(scenario())
 
-    # Other tests' queued generations share the database, so at least this one was failed.
-    assert count >= 1
-    assert again == 0
+    # Other tests' queued generations share the database; this one is among those failed.
+    assert stuck_id in failed
+    assert again == []
     assert (stuck.status, stuck.error) == (Status.FAILED, "stopped")
     assert done.status == Status.DONE

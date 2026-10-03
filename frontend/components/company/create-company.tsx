@@ -18,7 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import { apiFetch } from "@/lib/api"
+import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { Company } from "@/types/company"
 
 export function CreateCompany() {
@@ -56,8 +56,8 @@ export function CreateCompany() {
         body: JSON.stringify({ name: name.trim() }),
       })
       router.replace(`/company/${company.id}/interviews`)
-    } catch {
-      toast.error(t("createFailed"))
+    } catch (error) {
+      toast.error(apiErrorMessage(error, t("createFailed")))
       setSaving(false)
     }
   }

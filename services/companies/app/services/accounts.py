@@ -1,5 +1,5 @@
 from app.constants.roles import Role
-from app.services import company_deletion
+from app.services import candidate_billing, company_deletion
 from app.storage import accounts
 
 
@@ -12,4 +12,5 @@ async def delete_user(user_id: str, email: str) -> None:
         else:
             await accounts.remove_member(member.id)
 
+    await candidate_billing.release_unfinished(await accounts.candidate_invites(user_id, email))
     await accounts.forget_candidate(user_id, email)

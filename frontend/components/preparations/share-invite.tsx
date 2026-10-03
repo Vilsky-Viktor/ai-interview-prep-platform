@@ -66,7 +66,7 @@ export function ShareInvite({ token }: { token: string }) {
     <div className="w-full space-y-8 text-center">
       <div className="space-y-4">
         <p className="text-base text-muted-foreground">{t("invitedToJoin")}</p>
-        <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
+        <h1 className="font-heading text-4xl font-medium tracking-tight text-balance normal-case sm:text-5xl">
           {invite.title}
         </h1>
       </div>

@@ -80,7 +80,9 @@ export function CandidateActions({
       <Button variant="outline" disabled={busy} onClick={resend}>
         {t("resend")}
       </Button>
-      {(status === "invited" || status === "undelivered") && (
+      {(status === "invited" ||
+        status === "undelivered" ||
+        status === "expired") && (
         <Button
           variant="destructive"
           disabled={busy}

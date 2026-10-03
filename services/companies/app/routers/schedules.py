@@ -4,6 +4,7 @@ from fastapi import APIRouter, status
 from prepza_common.google import Invoker
 
 from app.services import outbox as outbox_service
+from app.services.candidate_billing import expire_unstarted
 from app.services.retention import delete_expired_candidates
 
 logger = logging.getLogger(__name__)
@@ -18,6 +19,15 @@ async def retention() -> None:
 
     if count:
         logger.info("Deleted %d expired candidate invites", count)
+
+
+@router.post("/invite-expiry", status_code=status.HTTP_204_NO_CONTENT)
+async def invite_expiry() -> None:
+    """Daily, from Cloud Scheduler: invites never started expire, and their credits come back."""
+    count = await expire_unstarted()
+
+    if count:
+        logger.info("Expired %d invites never started", count)
 
 
 @router.post("/outbox", status_code=status.HTTP_204_NO_CONTENT)

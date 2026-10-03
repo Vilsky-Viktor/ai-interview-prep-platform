@@ -32,6 +32,9 @@ class TopicQuestionsOut(BaseModel):
     preparation_id: UUID
     title: str
     questions: list[QuestionOut]
+    # Set when the topic is in someone else's public kit: its certificate is paid, its author
+    # gets a share, and starting it counts towards the daily limit on new public topics.
+    public_author_id: str | None = None
 
 
 class TopicOut(BaseModel):

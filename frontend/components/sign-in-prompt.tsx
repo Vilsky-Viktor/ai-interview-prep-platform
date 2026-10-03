@@ -17,7 +17,9 @@ export function SignInPrompt({ message }: { message: string }) {
         className="h-12 px-5 text-base"
         onClick={() => signIn(t("failed"))}
       >
-        <span className="font-light">{t("with")}</span> Google
+        <span className="font-light">{t("with")}</span>{" "}
+        {/* Google's name keeps its capital inside the lowercase button. */}
+        <span className="normal-case">Google</span>
       </Button>
       <LegalConsent />
     </div>

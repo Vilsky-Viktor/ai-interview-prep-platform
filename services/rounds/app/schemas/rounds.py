@@ -20,6 +20,8 @@ class RoundOut(BaseModel):
     topic_id: UUID
     preparation_id: UUID
     topic_title: str
+    # On someone else's public kit: its certificate is bought, and an own kit is suggested.
+    public_kit: bool = False
     status: RoundStatus
     total: int
     answered: int
@@ -48,6 +50,8 @@ class TopicProgressOut(BaseModel):
     passed: bool
     certificate_id: UUID | None = None
     in_progress: bool = False
+    # Earned on someone else's public kit and not bought yet: the price is in billing's catalog.
+    certificate_for_sale: bool = False
 
 
 class NextQuestion(BaseModel):

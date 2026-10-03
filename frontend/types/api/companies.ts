@@ -22,6 +22,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/companies/credits": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Credits
+     * @description The user's companies with their credits; any member may top one up. Declared before
+     *     /{company_id}, which would otherwise take "credits" as an id.
+     */
+    get: operations["list_credits_companies_credits_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/companies/{company_id}": {
     parameters: {
       query?: never
@@ -513,6 +534,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/schedules/invite-expiry": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Invite Expiry
+     * @description Daily, from Cloud Scheduler: invites never started expire, and their credits come back.
+     */
+    post: operations["invite_expiry_internal_schedules_invite_expiry_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/schedules/outbox": {
     parameters: {
       query?: never
@@ -619,6 +660,21 @@ export interface components {
        */
       created_at: string
     }
+    /**
+     * CompanyBalanceOut
+     * @description A company the user can top up, with its credits.
+     */
+    CompanyBalanceOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Name */
+      name: string
+      /** Available */
+      available: number
+    }
     /** CompanyCreate */
     CompanyCreate: {
       /** Name */
@@ -626,8 +682,8 @@ export interface components {
     }
     /** CompanyCreditsOut */
     CompanyCreditsOut: {
-      /** Candidate Credits */
-      candidate_credits: number
+      /** Available */
+      available: number
     }
     /** CompanyOut */
     CompanyOut: {
@@ -960,6 +1016,38 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["CompanyOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_credits_companies_credits_get: {
+    parameters: {
+      query?: {
+        offset?: number
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CompanyBalanceOut"][]
         }
       }
       /** @description Validation Error */
@@ -1979,6 +2067,24 @@ export interface operations {
     }
   }
   retention_internal_schedules_retention_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  invite_expiry_internal_schedules_invite_expiry_post: {
     parameters: {
       query?: never
       header?: never

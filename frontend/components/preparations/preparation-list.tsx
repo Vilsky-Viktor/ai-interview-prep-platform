@@ -87,7 +87,7 @@ export function PreparationList({
               <PreparationStats preparation={preparation} />
               <Badge
                 variant="secondary"
-                className="h-7 px-3 text-sm font-light capitalize"
+                className="h-7 px-3 text-sm font-light"
               >
                 {levels(preparation.level)}
               </Badge>

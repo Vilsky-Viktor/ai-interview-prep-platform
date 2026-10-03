@@ -46,7 +46,7 @@ export function LanguageSetting({ current }: { current: Locale }) {
     >
       <Combobox.Trigger
         aria-label={t("language")}
-        className="flex h-12 w-full max-w-xs items-center justify-between gap-3 rounded-lg bg-muted/50 px-4 text-base transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+        className="flex h-12 w-full max-w-xs items-center justify-between gap-3 rounded-lg bg-muted/50 px-4 text-base normal-case transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
       >
         <Combobox.Value />
         <ChevronDownIcon className="size-5 text-muted-foreground" />

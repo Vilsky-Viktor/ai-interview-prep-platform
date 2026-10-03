@@ -2,7 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 from prepza_common import outbox
-from sqlalchemy import delete, select, update
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
@@ -46,12 +46,62 @@ async def in_progress_topics(user_id: str, preparation_id: uuid.UUID) -> set[uui
         return set(await session.scalars(query))
 
 
+async def has_started(user_id: str, topic_id: uuid.UUID) -> bool:
+    query = select(Round.id).where(Round.user_id == user_id, Round.topic_id == topic_id)
+
+    async with Session() as session:
+        return await session.scalar(query.limit(1)) is not None
+
+
+async def public_topics_started_since(user_id: str, since: datetime) -> int:
+    """Topics of other people's public kits the user first started at or after `since`."""
+    first_rounds = (
+        select(Round.topic_id)
+        .where(Round.user_id == user_id, Round.public_author_id.is_not(None))
+        .group_by(Round.topic_id)
+        .having(func.min(Round.started_at) >= since)
+        .subquery()
+    )
+
+    async with Session() as session:
+        return await session.scalar(select(func.count()).select_from(first_rounds))
+
+
+async def public_topics(user_id: str, preparation_id: uuid.UUID) -> set[uuid.UUID]:
+    """Topics of this preparation the user practises as someone else's public kit."""
+    query = select(Round.topic_id).where(
+        Round.user_id == user_id,
+        Round.preparation_id == preparation_id,
+        Round.public_author_id.is_not(None),
+    )
+
+    async with Session() as session:
+        return set(await session.scalars(query))
+
+
+async def latest_finished(user_id: str, topic_id: uuid.UUID) -> Round | None:
+    query = (
+        select(Round)
+        .where(
+            Round.user_id == user_id,
+            Round.topic_id == topic_id,
+            Round.status == RoundStatus.FINISHED,
+        )
+        .order_by(Round.finished_at.desc())
+        .limit(1)
+    )
+
+    async with Session() as session:
+        return await session.scalar(query)
+
+
 async def create(user_id: str, topic: TopicQuestions, latest: dict[str, int]) -> Round:
     new_round = Round(
         user_id=user_id,
         topic_id=topic.id,
         preparation_id=topic.preparation_id,
         topic_title=topic.title,
+        public_author_id=topic.public_author_id,
         status=RoundStatus.IN_PROGRESS,
         questions=round_questions(topic, latest),
         final_score=None,

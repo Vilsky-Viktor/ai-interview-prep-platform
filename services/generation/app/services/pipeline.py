@@ -1,18 +1,27 @@
+import asyncio
+import logging
 import uuid
 from contextlib import aclosing
 
 from langgraph.types import Command
 
 from app.constants.events import GENERATION_COMPLETED
-from app.constants.generation import MAX_CONCURRENCY, RECURSION_LIMIT
+from app.constants.generation import (
+    CHARGE_ATTEMPTS,
+    CHARGE_RETRY_SECONDS,
+    MAX_CONCURRENCY,
+    RECURSION_LIMIT,
+)
 from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
 from app.helpers.payload import build_preparation
 from app.helpers.progress import track_progress
-from app.integrations import library
+from app.integrations import billing, library
 from app.models.generation import Generation
 from app.services import outbox as outbox_service
 from app.storage import generations
+
+logger = logging.getLogger(__name__)
 
 
 async def run_pipeline(graph, generation: Generation, resume: dict | None) -> None:
@@ -93,3 +102,22 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
         generation.id, event=completed, status=Status.DONE, preparation_id=set_id
     )
     await outbox_service.flush_quietly()
+
+    if generation.kind == GenerationKind.PREPARATION:
+        await charge_finished_kit(generation.id)
+
+
+async def charge_finished_kit(generation_id: uuid.UUID) -> None:
+    """The kit is saved and done, so a billing hiccup mustn't turn it into a failure (which
+    would also give its credits back). Charging is safe to repeat: try a few times, then report
+    the open hold for a person to charge."""
+    for attempt in range(CHARGE_ATTEMPTS):
+        try:
+            await billing.charge_kit(generation_id)
+
+            return
+        except Exception:
+            if attempt == CHARGE_ATTEMPTS - 1:
+                logger.exception("Couldn't charge finished kit %s", generation_id)
+            else:
+                await asyncio.sleep(CHARGE_RETRY_SECONDS)

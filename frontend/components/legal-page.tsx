@@ -18,7 +18,7 @@ export async function LegalPage({
   const locale = await getLocale()
 
   return (
-    <main className="mx-auto max-w-3xl space-y-10 px-6 py-12">
+    <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
       <header className="space-y-4">
         <h1 className="font-heading text-4xl font-medium tracking-tight">
           {title}

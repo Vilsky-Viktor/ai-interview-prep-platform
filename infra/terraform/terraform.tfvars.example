@@ -10,9 +10,12 @@ sentry_dsn = ""
 paddle_environment  = "sandbox"
 paddle_client_token = ""
 paddle_prices = {
-  candidates_10   = ""
-  candidates_50   = ""
-  candidates_200  = ""
-  job_search_pass = ""
-  generations_3   = ""
+  topup_10     = ""
+  topup_25     = ""
+  topup_50     = ""
+  topup_100    = ""
+  topup_250    = ""
+  topup_500    = ""
+  # A $1 price, with quantity 10 to 500 allowed: custom top-ups.
+  topup_custom = ""
 }

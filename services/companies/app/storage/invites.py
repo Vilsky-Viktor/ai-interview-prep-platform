@@ -27,6 +27,7 @@ async def upsert(interview_id, email: str, title: str, company: str) -> Candidat
             token=secrets.token_urlsafe(32),
             status=InviteStatus.INVITED,
             created_at=datetime.now(UTC),
+            sent_at=datetime.now(UTC),
         )
         .on_conflict_do_nothing(index_elements=["interview_id", "email"])
     )
@@ -39,8 +40,11 @@ async def upsert(interview_id, email: str, title: str, company: str) -> Candidat
             )
         )
 
-        if invite.status == InviteStatus.UNDELIVERED:
+        # Sending again revives an undelivered or expired invite and restarts its 30 days.
+        if invite.status in (InviteStatus.UNDELIVERED, InviteStatus.EXPIRED):
             invite.status = InviteStatus.INVITED
+
+        invite.sent_at = datetime.now(UTC)
 
         outbox.add(
             session,
@@ -59,13 +63,50 @@ async def upsert(interview_id, email: str, title: str, company: str) -> Candidat
         return invite
 
 
-async def exists(interview_id, email: str) -> bool:
-    query = select(CandidateInvite.id).where(
+async def status_of(interview_id, email: str) -> str | None:
+    """The invite's status, or None when this email hasn't been invited."""
+    query = select(CandidateInvite.status).where(
         CandidateInvite.interview_id == interview_id, CandidateInvite.email == email.lower()
     )
 
     async with Session() as session:
-        return await session.scalar(query) is not None
+        return await session.scalar(query)
+
+
+async def unfinished(interview_id) -> list[tuple]:
+    """(interview id, email, status) of the interview's invites not finished yet."""
+    query = select(
+        CandidateInvite.interview_id, CandidateInvite.email, CandidateInvite.status
+    ).where(
+        CandidateInvite.interview_id == interview_id,
+        CandidateInvite.status != InviteStatus.FINISHED,
+    )
+
+    async with Session() as session:
+        return [tuple(row) for row in await session.execute(query)]
+
+
+async def get(invite_id: uuid.UUID) -> CandidateInvite | None:
+    async with Session() as session:
+        return await session.get(CandidateInvite, invite_id)
+
+
+async def expire_unstarted(before: datetime) -> list[CandidateInvite]:
+    """Marks invites never started and last sent before `before` as expired; returns them."""
+    async with Session() as session:
+        expired = await session.scalars(
+            update(CandidateInvite)
+            .where(
+                CandidateInvite.status.in_([InviteStatus.INVITED, InviteStatus.UNDELIVERED]),
+                CandidateInvite.sent_at < before,
+            )
+            .values(status=InviteStatus.EXPIRED)
+            .returning(CandidateInvite)
+        )
+        expired = list(expired)
+        await session.commit()
+
+        return expired
 
 
 async def get_by_token(token: str) -> tuple[CandidateInvite, Interview] | None:

@@ -15,7 +15,8 @@ router = APIRouter(prefix="/invites", tags=["invites"])
 async def get_invite(token: str, user: CurrentUser) -> InviteView:
     found = await invite_store.get_by_token(token)
 
-    if found is None:
+    # An expired invite's link stops working until the company sends it again.
+    if found is None or found[0].status == InviteStatus.EXPIRED:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
 
     invite, interview = found
@@ -39,7 +40,7 @@ async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
     """Only the invited, verified email can start; a forwarded link is useless to anyone else."""
     found = await invite_store.get_by_token(token)
 
-    if found is None:
+    if found is None or found[0].status == InviteStatus.EXPIRED:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
 
     invite, interview = found

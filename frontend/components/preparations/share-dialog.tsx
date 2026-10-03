@@ -52,7 +52,10 @@ export function ShareDialog({
       toast.success(t("sent", { email: share.email }))
     } catch (error) {
       const invalid = error instanceof ApiError && error.status < 500
-      toast.error(invalid ? t("checkEmail") : t("failed"))
+      const limited = error instanceof ApiError && error.status === 429
+      toast.error(
+        limited ? error.message : invalid ? t("checkEmail") : t("failed")
+      )
     } finally {
       setSending(false)
     }

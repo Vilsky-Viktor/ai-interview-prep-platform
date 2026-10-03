@@ -7,6 +7,7 @@ export type AnswerView = Schemas["AnswerView"]
 export type ReviewItem = Schemas["ReviewItem"]
 // Messages show before the server stores them, so the client needs only these fields.
 export type ChatMessage = Pick<Schemas["ChatMessageOut"], "role" | "content">
+export type Chat = Schemas["ChatOut"]
 export type Certificate = Schemas["CertificateOut"]
 /** How far the user is towards a topic's certificate; missing until they practice it. */
 export type TopicProgress = Schemas["TopicProgressOut"]

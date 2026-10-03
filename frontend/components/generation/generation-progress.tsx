@@ -27,7 +27,7 @@ export function GenerationProgress({
     : 0
 
   return (
-    <div className="flex min-h-[calc(100svh-3.5rem-6rem)] flex-col items-center justify-center space-y-8 text-center">
+    <div className="flex flex-1 flex-col items-center justify-center space-y-8 text-center">
       <LoaderCircleIcon className="size-20 animate-spin text-primary" />
       <div className="space-y-4">
         <div className="relative">

@@ -1,0 +1,19 @@
+from datetime import UTC, datetime, time
+
+from fastapi import HTTPException, status
+
+from app.constants.rounds import PUBLIC_TOPICS_LIMIT, PUBLIC_TOPICS_PER_DAY
+from app.schemas.library import TopicQuestions
+from app.storage import rounds
+
+
+async def check_daily_limit(user_id: str, topic: TopicQuestions) -> None:
+    """Starting a new topic of someone else's public kit counts towards the day's limit;
+    continuing one already started never does."""
+    if topic.public_author_id is None or await rounds.has_started(user_id, topic.id):
+        return
+
+    midnight = datetime.combine(datetime.now(UTC).date(), time(), tzinfo=UTC)
+
+    if await rounds.public_topics_started_since(user_id, midnight) >= PUBLIC_TOPICS_PER_DAY:
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, PUBLIC_TOPICS_LIMIT)

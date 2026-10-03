@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.paging import PageParams
 from prepza_common.sets import PreparationIn
 
-from app.constants.sets import SetKind
+from app.constants.sets import SetKind, Visibility
 from app.schemas.feedback import ReportOut
 from app.schemas.preparations import (
     CreatedOut,
@@ -19,7 +19,7 @@ from app.schemas.sets import SetContent, SetOut, SetTopicOut
 from app.service_auth import ServiceCaller
 from app.services.access import require_member
 from app.services.questions import question_texts
-from app.storage import feedback, preparations
+from app.storage import feedback, preparations, shares
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -197,11 +197,18 @@ async def get_topic_questions(
 
     question_set, topic = found
     await require_member(question_set, user_id)
+    # Someone else's public kit, unless the owner shared it with the user: shared kits are free.
+    public = (
+        question_set.visibility == Visibility.PUBLIC
+        and question_set.owner_id != user_id
+        and not await shares.accepted_by(question_set.id, user_id)
+    )
 
     return TopicQuestionsOut(
         id=topic.id,
         preparation_id=question_set.id,
         title=topic.title,
+        public_author_id=question_set.owner_id if public else None,
         questions=[
             QuestionOut(
                 id=question.id,

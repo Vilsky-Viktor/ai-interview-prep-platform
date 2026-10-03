@@ -181,8 +181,12 @@ def test_worker_skips_a_generation_cancelled_while_queued(monkeypatch):
     async def run_pipeline(*args):
         started.append(args)
 
+    async def release(_generation_id):
+        return None
+
     monkeypatch.setattr(generations, "get", get)
     monkeypatch.setattr(jobs, "run_pipeline", run_pipeline)
+    monkeypatch.setattr(jobs.billing, "release_kit", release)
 
     asyncio.run(jobs.run_generation(None, uuid.uuid4(), None))
 

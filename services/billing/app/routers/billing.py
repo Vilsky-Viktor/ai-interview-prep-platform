@@ -1,23 +1,41 @@
 import time
-from datetime import UTC, datetime
 
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, HTTPException, Query, Request, status
 from prepza_common.auth import CurrentUser
+from prepza_common.constants import CHAT_FREE_TURNS
+from prepza_common.paging import PageParams
 
 from app.config.settings import settings
+from app.constants.credits import (
+    CANDIDATE_CREDITS,
+    CERTIFICATE_CREDITS,
+    CHAT_TURN_CREDITS,
+    KIT_CREDITS,
+    WELCOME_COMPANY,
+    WELCOME_USER,
+)
 from app.constants.products import (
     CURRENCY,
-    FREE_CANDIDATES,
-    FREE_GENERATIONS_PER_MONTH,
-    PRODUCTS,
+    CUSTOM_MAX_DOLLARS,
+    CUSTOM_MIN_DOLLARS,
+    TOP_UPS,
     WEBHOOK_TOLERANCE_SECONDS,
     OwnerType,
 )
+from app.helpers.credits import credits_for
 from app.helpers.paddle import signature_valid
-from app.schemas.billing import CatalogOut, PlanOut, ProductOut
+from app.helpers.wallets import balance_out, entry_out
+from app.schemas.billing import (
+    BalanceOut,
+    CatalogOut,
+    CustomTopUpOut,
+    EntryOut,
+    QuoteOut,
+    TopUpOut,
+)
 from app.services.catalog import price_ids
 from app.services.webhooks import handle
-from app.storage import wallets
+from app.storage import ledger
 
 router = APIRouter(tags=["billing"])
 
@@ -30,38 +48,57 @@ def catalog() -> CatalogOut:
         environment=settings.paddle_environment,
         client_token=settings.paddle_client_token,
         currency=CURRENCY,
-        free_generations_per_month=FREE_GENERATIONS_PER_MONTH,
-        free_candidates=FREE_CANDIDATES,
+        kit_credits=KIT_CREDITS,
+        candidate_credits=CANDIDATE_CREDITS,
+        certificate_credits=CERTIFICATE_CREDITS,
+        chat_turn_credits=CHAT_TURN_CREDITS,
+        chat_free_turns=CHAT_FREE_TURNS,
+        welcome_user=WELCOME_USER,
+        welcome_company=WELCOME_COMPANY,
         products=[
-            ProductOut(
+            TopUpOut(
                 key=product.key,
                 title=product.title,
-                owner=product.owner,
                 price_cents=product.price_cents,
-                candidate_credits=product.candidate_credits,
-                generation_credits=product.generation_credits,
-                pass_days=product.pass_days,
+                credits=credits_for(product.price_cents),
+                bonus_credits=credits_for(product.price_cents) - product.price_cents,
                 price_id=prices[product.key] or None,
             )
-            for product in PRODUCTS
+            for product in TOP_UPS
         ],
+        custom=CustomTopUpOut(
+            price_id=settings.paddle_price_topup_custom or None,
+            min_dollars=CUSTOM_MIN_DOLLARS,
+            max_dollars=CUSTOM_MAX_DOLLARS,
+        ),
+    )
+
+
+@router.get("/topups/quote")
+def quote(
+    dollars: int = Query(ge=CUSTOM_MIN_DOLLARS, le=CUSTOM_MAX_DOLLARS),
+) -> QuoteOut:
+    """What a custom amount buys, bonus included, so the client shows it without the rule."""
+    credits = credits_for(dollars * 100)
+
+    return QuoteOut(
+        price_cents=dollars * 100, credits=credits, bonus_credits=credits - dollars * 100
     )
 
 
 @router.get("/me")
-async def my_plan(user: CurrentUser) -> PlanOut:
-    now = datetime.now(UTC)
-    wallet = await wallets.get(OwnerType.USER, user.uid)
-    used = await wallets.free_generations_used(user.uid, now)
-    active_pass = (
-        wallet.pass_until if wallet and wallet.pass_until and wallet.pass_until > now else None
-    )
+async def my_balance(user: CurrentUser) -> BalanceOut:
+    # The first visit gives the welcome gift, once per email (the frontend asks on sign-in).
+    await ledger.welcome_user(user.uid, user.email)
 
-    return PlanOut(
-        pass_until=active_pass,
-        generation_credits=wallet.generation_credits if wallet else 0,
-        free_generations_left=max(0, FREE_GENERATIONS_PER_MONTH - used),
-    )
+    return balance_out(await ledger.wallet(OwnerType.USER, user.uid))
+
+
+@router.get("/me/history")
+async def my_history(user: CurrentUser, page: PageParams) -> list[EntryOut]:
+    rows = await ledger.history(OwnerType.USER, user.uid, page.offset, page.limit)
+
+    return [entry_out(row) for row in rows]
 
 
 @router.post("/webhooks/paddle", status_code=status.HTTP_200_OK)

@@ -9,8 +9,9 @@ import { toast } from "sonner"
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { signIn } from "@/lib/auth"
+import { topUpAction } from "@/lib/credits"
 import { isSubmitShortcut } from "@/lib/keys"
 import type { Generation } from "@/types/generation"
 
@@ -41,18 +42,9 @@ export function GoalForm() {
       })
       router.push(`/generate/${generation.id}`)
     } catch (error) {
-      const outOfPreparations =
-        error instanceof ApiError && error.status === 402
       toast.error(
         apiErrorMessage(error, t("failed")),
-        outOfPreparations
-          ? {
-              action: {
-                label: t("seePlans"),
-                onClick: () => router.push("/pricing"),
-              },
-            }
-          : undefined
+        topUpAction(error, t("seePlans"), () => router.push("/top-up"))
       )
       setSubmitting(false)
     }

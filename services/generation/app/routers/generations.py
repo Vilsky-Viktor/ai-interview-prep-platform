@@ -1,4 +1,4 @@
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.auth import CurrentUser
@@ -49,12 +49,23 @@ async def create_generation(
         settings.generation_limit,
         settings.generation_window_seconds,
     )
-    await use_daily_budget()
-    await billing.use_generation(user.uid)
+    # Credits first: a refused attempt mustn't use up the day's cap for everyone.
+    generation_id = uuid4()
+    await billing.hold_kit(user.uid, generation_id)
 
-    generation = await generations.create(
-        user.uid, body.text, body.kind, body.company_id, user.language
-    )
+    try:
+        await use_daily_budget()
+    except HTTPException:
+        await billing.release_kit(generation_id)
+        raise
+
+    try:
+        generation = await generations.create(
+            user.uid, body.text, body.kind, body.company_id, user.language, generation_id
+        )
+    except Exception:
+        await billing.release_kit(generation_id)
+        raise
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
 
     return GenerationOut.model_validate(generation)

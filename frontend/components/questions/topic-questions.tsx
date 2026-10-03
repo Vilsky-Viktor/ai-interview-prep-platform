@@ -117,7 +117,7 @@ export function TopicQuestions({
         className={regeneratePath ? "sm:max-w-4xl" : "sm:max-w-3xl"}
       >
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
+          <DialogTitle className="normal-case">{title}</DialogTitle>
         </DialogHeader>
         {questions ? (
           <VirtualList

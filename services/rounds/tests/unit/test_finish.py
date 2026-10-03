@@ -5,6 +5,7 @@ import pytest
 from prepza_common.user import User
 
 from app.models.rounds import Answer, Round
+from app.schemas.library import TopicQuestions
 from app.services import finish
 from app.storage import certificates, progress, rounds
 
@@ -39,13 +40,25 @@ def saved(monkeypatch):
     return calls
 
 
-def setup(monkeypatch, coverage, has_certificate=False):
-    async def fake_coverage(round_, user_id):
+def setup(monkeypatch, coverage, has_certificate=False, author=None):
+    async def fake_topic(topic_id, user_id):
+        return TopicQuestions.model_validate(
+            {
+                "id": str(topic_id),
+                "preparation_id": str(uuid.uuid4()),
+                "title": "Python",
+                "questions": [],
+                "public_author_id": author,
+            }
+        )
+
+    async def fake_coverage(round_, user_id, topic):
         return coverage
 
     async def fake_has(user_id, topic_id):
         return has_certificate
 
+    monkeypatch.setattr(finish.library, "get_topic_questions", fake_topic)
     monkeypatch.setattr(finish, "topic_coverage", fake_coverage)
     monkeypatch.setattr(certificates, "has_for_topic", fake_has)
 
@@ -81,3 +94,11 @@ def test_finished_round_is_left_alone(monkeypatch, saved):
     asyncio.run(finish.finish_round(finishing_round("finished"), USER))
 
     assert saved == {"finish": [], "rebuild": []}
+
+
+def test_on_someone_elses_public_kit_the_certificate_is_bought_not_issued(monkeypatch, saved):
+    setup(monkeypatch, coverage=90, author="bob")
+    asyncio.run(finish.finish_round(finishing_round(), USER))
+
+    ((_, certificate),) = saved["finish"]
+    assert certificate is None

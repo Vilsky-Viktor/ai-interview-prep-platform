@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useTranslations } from "next-intl"
 
 import { useAuth } from "@/components/auth-provider"
+import { CreditsBadge } from "@/components/billing/credits-badge"
 import { SiteNav } from "@/components/site-nav"
 import { ThemeModes } from "@/components/theme-toggle"
 import { UserMenu } from "@/components/user-menu"
@@ -14,7 +15,7 @@ export function SiteHeader() {
   const { user, loading } = useAuth()
 
   return (
-    // Exactly 3.5rem including the border: pages size themselves as 100svh - 3.5rem.
+    // Exactly 3.5rem including the border.
     <header className="h-14 border-b">
       {/* Both sides are h-8 boxes centered in the row, so they share one center line. */}
       <div className="mx-auto flex h-full max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
@@ -38,6 +39,7 @@ export function SiteHeader() {
               <ThemeModes />
             </div>
           )}
+          <CreditsBadge />
           <UserMenu />
         </div>
       </div>

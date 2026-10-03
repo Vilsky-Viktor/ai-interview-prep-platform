@@ -3,7 +3,7 @@ import uuid
 from datetime import UTC, datetime
 
 from prepza_common import outbox
-from sqlalchemy import select, update
+from sqlalchemy import func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.events import PREPARATION_SHARED
@@ -54,6 +54,31 @@ async def upsert(
         await session.commit()
 
         return invite
+
+
+async def is_invited(set_id: uuid.UUID, email: str) -> bool:
+    query = select(ShareInvite.id).where(ShareInvite.set_id == set_id, ShareInvite.email == email)
+
+    async with Session() as session:
+        return await session.scalar(query.limit(1)) is not None
+
+
+async def accepted_by(set_id: uuid.UUID, user_id: str) -> bool:
+    """Whether the user joined the kit through the owner's invite."""
+    query = select(ShareInvite.id).where(
+        ShareInvite.set_id == set_id, ShareInvite.accepted_by == user_id
+    )
+
+    async with Session() as session:
+        return await session.scalar(query.limit(1)) is not None
+
+
+async def count_for_set(set_id: uuid.UUID) -> int:
+    """People the kit is shared with: accepted and pending invites."""
+    query = select(func.count()).select_from(ShareInvite).where(ShareInvite.set_id == set_id)
+
+    async with Session() as session:
+        return await session.scalar(query)
 
 
 async def list_for_set(set_id: uuid.UUID, offset: int, limit: int) -> list[ShareInvite]:

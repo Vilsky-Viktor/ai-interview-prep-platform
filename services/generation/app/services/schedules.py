@@ -4,6 +4,7 @@ from datetime import UTC, datetime, timedelta
 from app.constants.accounts import TEXT_RETENTION_DAYS
 from app.constants.generation import GENERATION_STOPPED, REVIEW_EXPIRY_DAYS, STUCK_AFTER_SECONDS
 from app.services import outbox as outbox_service
+from app.services.jobs import give_back
 from app.services.key_check_batches import collect_finished, submit_pending
 from app.storage import accounts, generations
 
@@ -23,7 +24,11 @@ async def expire_reviews() -> None:
     """Cancels topic reviews left open for REVIEW_EXPIRY_DAYS; an interview's event, saved with
     the cancellation, removes it in companies."""
     before = datetime.now(UTC) - timedelta(days=REVIEW_EXPIRY_DAYS)
-    await generations.expire_reviews(before)
+
+    # A learner's kit that expired in review gives its credits back.
+    for generation in await generations.expire_reviews(before):
+        await give_back(generation)
+
     await outbox_service.flush_quietly()
 
 
@@ -31,10 +36,14 @@ async def sweep(checkpointer) -> None:
     """Fails generations whose worker died mid-job, so the user can Retry them, and deletes
     checkpoints nothing will resume. Failed and in-review generations keep theirs."""
     before = datetime.now(UTC) - timedelta(seconds=STUCK_AFTER_SECONDS)
-    count = await generations.fail_stuck(before, GENERATION_STOPPED)
+    failed = await generations.fail_stuck(before, GENERATION_STOPPED)
 
-    if count:
-        logger.warning("Marked %d stuck generations as failed", count)
+    if failed:
+        logger.warning("Marked %d stuck generations as failed", len(failed))
+
+    # Their credits come back; a retry sets them aside again.
+    for generation in failed:
+        await give_back(generation)
 
     await expire_reviews()
 

@@ -1,6 +1,7 @@
 import asyncio
 import uuid
 from datetime import UTC, datetime, timedelta
+from types import SimpleNamespace
 
 from sqlalchemy.dialects import postgresql
 
@@ -35,7 +36,7 @@ def test_sweep_fails_generations_untouched_for_longer_than_a_job_may_run(monkeyp
     async def fake_fail_stuck(before, error):
         calls.append((before, error))
 
-        return 1
+        return []
 
     monkeypatch.setattr(generations, "fail_stuck", fake_fail_stuck)
     no_finished_threads(monkeypatch)
@@ -50,7 +51,7 @@ def test_sweep_fails_generations_untouched_for_longer_than_a_job_may_run(monkeyp
 
 def test_sweep_deletes_checkpoints_of_finished_generations(monkeypatch):
     async def fake_fail_stuck(before, error):
-        return 0
+        return []
 
     checkpointer = FakeCheckpointer()
     monkeypatch.setattr(generations, "fail_stuck", fake_fail_stuck)
@@ -98,12 +99,11 @@ def compiled(statement) -> str:
 
 def test_only_queued_and_running_rows_are_swept(monkeypatch):
     statements = []
-    fake_session(monkeypatch, statements, rowcount=2)
+    fake_session(monkeypatch, statements)
 
-    count = asyncio.run(generations.fail_stuck(datetime.now(UTC), GENERATION_STOPPED))
+    asyncio.run(generations.fail_stuck(datetime.now(UTC), GENERATION_STOPPED))
 
     sql = compiled(statements[0])
-    assert count == 2
     assert "status IN ('queued', 'running')" in sql
     assert "updated_at <" in sql
     assert "'failed'" in sql
@@ -153,9 +153,35 @@ def test_worker_skips_a_generation_the_sweeper_already_failed(monkeypatch):
     async def run_pipeline(*args):
         started.append(args)
 
+    async def release(_generation_id):
+        return None
+
     monkeypatch.setattr(generations, "get", get)
     monkeypatch.setattr(jobs, "run_pipeline", run_pipeline)
+    monkeypatch.setattr(jobs.billing, "release_kit", release)
 
     asyncio.run(jobs.run_generation(None, uuid.uuid4(), None))
 
     assert started == []
+
+
+def test_kits_failed_by_the_sweep_or_expired_in_review_give_their_credits_back(monkeypatch):
+    stuck_kit = SimpleNamespace(id=uuid.uuid4(), kind="preparation")
+    stuck_interview = SimpleNamespace(id=uuid.uuid4(), kind="interview")
+    expired_kit = SimpleNamespace(id=uuid.uuid4(), kind="preparation")
+    released = []
+
+    async def fake_fail_stuck(before, error):
+        return [stuck_kit, stuck_interview]
+
+    async def release(generation_id):
+        released.append(generation_id)
+
+    monkeypatch.setattr(generations, "fail_stuck", fake_fail_stuck)
+    monkeypatch.setattr(jobs.billing, "release_kit", release)
+    no_finished_threads(monkeypatch, expired=[expired_kit])
+
+    asyncio.run(schedules.sweep(FakeCheckpointer()))
+
+    # Interviews aren't charged, so only the kits get credits back.
+    assert sorted(released) == sorted([stuck_kit.id, expired_kit.id])

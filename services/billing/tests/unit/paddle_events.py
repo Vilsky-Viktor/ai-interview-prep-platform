@@ -6,7 +6,7 @@ import time
 SECRET = "pdl_ntfset_test_secret"
 
 
-def completed(price_id="pri_candidates_10", owner_type="company", owner_id="acme", quantity=1):
+def completed(price_id="pri_topup_10", owner_type="company", owner_id="acme", quantity=1):
     return {
         "event_type": "transaction.completed",
         "data": {

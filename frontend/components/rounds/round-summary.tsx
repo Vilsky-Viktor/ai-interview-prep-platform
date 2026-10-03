@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useTranslations } from "next-intl"
 
 import { RoundChange } from "@/components/rounds/round-change"
+import { MakeItYours } from "@/components/preparations/make-it-yours"
 import { RoundReview } from "@/components/rounds/round-review"
 import { Button } from "@/components/ui/button"
 import type { Round } from "@/types/round"
@@ -69,6 +70,7 @@ export function RoundSummary({ round }: { round: Round }) {
           </Button>
         </div>
       </div>
+      {round.public_kit && <MakeItYours />}
       <RoundReview roundId={round.id} />
     </div>
   )

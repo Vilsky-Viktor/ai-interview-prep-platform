@@ -55,6 +55,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
       "Interview results, timings and page-leave signals: 12 months after the invitation was sent, then deleted automatically.",
       "Pasted job descriptions in our generation records: 90 days after the generation finishes. The preparation made from them stays in your account until you delete it.",
       "Error reports: up to 90 days.",
+      "A one-way hash of your email after you delete your account, only so that signing up again doesn't repeat the welcome credits. It can't be turned back into your email.",
     ],
   },
   {

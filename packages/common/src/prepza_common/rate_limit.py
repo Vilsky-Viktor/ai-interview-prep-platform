@@ -2,7 +2,8 @@ from fastapi import HTTPException, status
 from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS, RATE_LIMITED
 
 
-async def hit(redis, key: str, limit: int, window: int) -> None:
+async def hit(redis, key: str, limit: int, window: int, message: str = RATE_LIMITED) -> None:
+    """Counts one use in the window; over `limit`, a 429 with `message`."""
     if limit <= 0:
         return
 
@@ -13,7 +14,7 @@ async def hit(redis, key: str, limit: int, window: int) -> None:
         _, count = await pipe.execute()
 
     if count > limit:
-        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, RATE_LIMITED)
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, message)
 
 
 async def hit_emails(

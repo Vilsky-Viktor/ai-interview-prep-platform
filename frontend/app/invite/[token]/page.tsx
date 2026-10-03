@@ -11,7 +11,7 @@ export default async function InvitePage({
   const { token } = await params
 
   return (
-    <main className="mx-auto flex min-h-[calc(100svh-3.5rem)] w-full max-w-5xl flex-col items-center justify-center px-6 py-12">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-12">
       <InviteView token={token} />
     </main>
   )

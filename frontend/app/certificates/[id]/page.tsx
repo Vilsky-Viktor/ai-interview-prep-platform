@@ -47,7 +47,7 @@ export default async function CertificatePage({ params }: PageProps) {
   }
 
   return (
-    <main className="mx-auto max-w-4xl space-y-6 px-6 py-12">
+    <main className="mx-auto max-w-5xl space-y-6 px-6 py-12">
       <div className="space-y-10 rounded-3xl border bg-card px-8 py-14 text-center shadow-sm">
         <div className="flex flex-col items-center gap-6">
           <Wordmark className="text-2xl" />

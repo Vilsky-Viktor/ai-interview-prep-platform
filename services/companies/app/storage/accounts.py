@@ -36,6 +36,16 @@ async def remove_member(member_id) -> None:
         await session.commit()
 
 
+async def candidate_invites(user_id: str, email: str) -> list[tuple]:
+    """(interview id, email, status) of every invite the user was sent or accepted."""
+    query = select(
+        CandidateInvite.interview_id, CandidateInvite.email, CandidateInvite.status
+    ).where(or_(CandidateInvite.user_id == user_id, CandidateInvite.email == email.lower()))
+
+    async with Session() as session:
+        return [tuple(row) for row in await session.execute(query)]
+
+
 async def forget_candidate(user_id: str, email: str) -> None:
     """Keeps the company's invite row, marked deleted, without the candidate's email or a
     usable link. The email becomes unique per invite, as an interview can't hold it twice."""

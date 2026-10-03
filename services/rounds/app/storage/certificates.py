@@ -28,6 +28,14 @@ async def for_preparation(user_id: str, preparation_id: uuid.UUID) -> dict[uuid.
         return certs
 
 
+async def create(certificate: Certificate) -> Certificate:
+    async with Session() as session:
+        session.add(certificate)
+        await session.commit()
+
+        return certificate
+
+
 async def has_for_topic(user_id: str, topic_id: uuid.UUID) -> bool:
     query = select(Certificate.id).where(
         Certificate.user_id == user_id, Certificate.topic_id == topic_id

@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     database_url: str
     redis_url: str
     library_url: str
+    billing_url: str
     service_secret: str
     llm_limit: int = Field(default=400, ge=0)
     llm_window_seconds: int = Field(default=3_600, gt=0)

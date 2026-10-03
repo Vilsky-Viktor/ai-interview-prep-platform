@@ -6,6 +6,7 @@ from prepza_common.paging import PageParams
 from prepza_common.rate_limit import hit_emails
 
 from app.config.settings import settings
+from app.constants.sets import MAX_SHARES, TOO_MANY_SHARES
 from app.integrations.redis import get_redis
 from app.schemas.sharing import ShareIn, ShareInviteOut, ShareOut
 from app.services import outbox as outbox_service
@@ -23,6 +24,12 @@ async def share(preparation_id: UUID, body: ShareIn, user: CurrentUser) -> Share
 
     if email == user.email.lower():
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "You can't share with yourself")
+
+    # Resending to someone already invited is always allowed.
+    if not await shares.is_invited(preparation_id, email) and (
+        await shares.count_for_set(preparation_id) >= MAX_SHARES
+    ):
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, TOO_MANY_SHARES)
 
     await hit_emails(
         get_redis(),

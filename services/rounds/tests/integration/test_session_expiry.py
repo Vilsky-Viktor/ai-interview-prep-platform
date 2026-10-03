@@ -1,9 +1,12 @@
 import uuid
 from datetime import UTC, datetime, timedelta
 
-from sqlalchemy import update
+from sqlalchemy import select, update
 
+from app.constants.events import INTERVIEW_FINISHED
 from app.constants.rounds import RoundStatus
+from app.models.outbox import OutboxEvent
+from app.models.rounds import Answer
 from app.models.sessions import Session
 from app.services import session_expiry
 from app.storage import sessions
@@ -64,3 +67,41 @@ def test_a_candidate_coming_back_late_finds_the_interview_finished(run):
 
     assert (late, on_time) == (True, False)
     assert row.status == RoundStatus.FINISHED
+
+
+def test_the_last_section_finishing_announces_the_interview_with_its_answers(run):
+    async def scenario():
+        invite_id, rows = await interview(started_minutes_ago=1)
+        question = rows[0].questions[0]
+        await sessions.add_answer(
+            Answer(
+                session_id=rows[0].id,
+                question_id=uuid.UUID(question["id"]),
+                option_index=0,
+                correct=True,
+                score=100,
+            )
+        )
+        await sessions.finish(rows[0].id, 33)
+        after_first = await announced(invite_id)
+        await sessions.finish(rows[1].id, 0)
+        await sessions.finish(rows[1].id, 0)
+
+        return after_first, await announced(invite_id)
+
+    after_first, after_last = run(scenario())
+
+    assert after_first == []
+    # Announced once, with the one answer the candidate picked.
+    assert after_last == [
+        {"candidate_invite_id": after_last[0]["candidate_invite_id"], "answered": 1}
+    ]
+
+
+async def announced(invite_id):
+    async with Db() as db:
+        rows = await db.scalars(
+            select(OutboxEvent.data).where(OutboxEvent.event_type == INTERVIEW_FINISHED)
+        )
+
+        return [data for data in rows if data["candidate_invite_id"] == str(invite_id)]
