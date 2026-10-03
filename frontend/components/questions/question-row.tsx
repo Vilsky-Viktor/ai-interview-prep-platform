@@ -7,6 +7,7 @@ import {
   ThumbsUpIcon,
 } from "lucide-react"
 import { cn } from "cn"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 
 import { QuestionReports } from "@/components/questions/question-reports"
@@ -32,6 +33,7 @@ export function QuestionRow({
   busy: boolean
   onRegenerate: () => void
 }) {
+  const t = useTranslations("questions")
   const [showReports, setShowReports] = useState(false)
   const canViewReports = Boolean(reportsPath)
 
@@ -52,11 +54,11 @@ export function QuestionRow({
       <div className="self-center py-5 pr-6 pl-5 text-sm whitespace-nowrap text-muted-foreground tabular-nums">
         <span className="flex flex-col items-end gap-3">
           <span className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5" title="Likes">
+            <span className="flex items-center gap-1.5" title={t("likes")}>
               <ThumbsUpIcon className="size-4" />
               {question.likes}
             </span>
-            <span className="flex items-center gap-1.5" title="Dislikes">
+            <span className="flex items-center gap-1.5" title={t("dislikes")}>
               <ThumbsDownIcon className="size-4" />
               {question.dislikes}
             </span>
@@ -65,7 +67,7 @@ export function QuestionRow({
                 type="button"
                 aria-expanded={showReports}
                 onClick={() => setShowReports((shown) => !shown)}
-                aria-label={`Show reports (${question.reports})`}
+                aria-label={t("showReports", { count: question.reports })}
                 className={cn(
                   "-mx-2 -my-1 flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 aria-expanded:bg-foreground/10 aria-expanded:text-foreground",
                   FEEDBACK_HOVER_CLASS
@@ -75,7 +77,7 @@ export function QuestionRow({
                 {question.reports}
               </button>
             ) : (
-              <span className="flex items-center gap-1.5" title="Reports">
+              <span className="flex items-center gap-1.5" title={t("reports")}>
                 <FlagIcon className="size-4" />
                 {question.reports}
               </span>
@@ -87,7 +89,7 @@ export function QuestionRow({
                 data-icon="inline-start"
                 className={cn(regenerating && "animate-spin")}
               />
-              {regenerating ? "Re-generating…" : "Re-generate"}
+              {regenerating ? t("regenerating") : t("regenerate")}
             </Button>
           )}
         </span>

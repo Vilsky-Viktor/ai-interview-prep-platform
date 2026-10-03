@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -16,6 +17,7 @@ export function TopicLimit({
   count: number
   limit: number | null
 }) {
+  const t = useTranslations("questions")
   const router = useRouter()
   const saved = String(limit ?? count)
   const [value, setValue] = useState(saved)
@@ -29,7 +31,7 @@ export function TopicLimit({
     }
 
     if (!Number.isInteger(number) || number < 1 || number > count) {
-      toast.error(`Enter a number from 1 to ${count}.`)
+      toast.error(t("limitRange", { count }))
       setValue(saved)
 
       return
@@ -47,7 +49,7 @@ export function TopicLimit({
       router.refresh()
     } catch (error) {
       setValue(saved)
-      toast.error(apiErrorMessage(error, "Couldn't save the limit."))
+      toast.error(apiErrorMessage(error, t("limitFailed")))
     } finally {
       setSaving(false)
     }
@@ -61,8 +63,8 @@ export function TopicLimit({
       max={count}
       value={value}
       disabled={saving}
-      aria-label="Question limit"
-      className="h-9 w-14 border-0 bg-muted px-1 text-center text-lg text-foreground tabular-nums md:text-lg dark:bg-muted [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+      aria-label={t("limit")}
+      className="h-9 w-14 [appearance:textfield] border-0 bg-muted px-1 text-center text-lg text-foreground tabular-nums md:text-lg dark:bg-muted [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       onChange={(event) => setValue(event.target.value)}
       onBlur={save}
       onKeyDown={(event) => {

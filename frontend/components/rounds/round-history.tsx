@@ -3,6 +3,7 @@
 import { cn } from "cn"
 import { Trash2Icon } from "lucide-react"
 import Link from "next/link"
+import { useLocale, useTranslations } from "next-intl"
 import { useState, type ReactNode } from "react"
 import { toast } from "sonner"
 
@@ -38,6 +39,9 @@ export function RoundHistory({
   back: ReactNode
   title: ReactNode
 }) {
+  const t = useTranslations("rounds")
+  const common = useTranslations("common")
+  const locale = useLocale()
   const { items, setItems, loadMore } = usePagedList(
     `/rounds/topics/${topicId}/rounds`,
     rounds
@@ -81,9 +85,7 @@ export function RoundHistory({
       setPending(null)
     } catch {
       toast.error(
-        pending.kind === "delete"
-          ? "Couldn't delete the round. Please try again."
-          : "Couldn't finish the round. Please try again."
+        pending.kind === "delete" ? t("deleteFailed") : t("finishFailed")
       )
     } finally {
       setBusy(false)
@@ -103,11 +105,11 @@ export function RoundHistory({
         }
         nativeButton={false}
       >
-        Compare
+        {t("compare")}
       </Button>
     ) : (
       <Button variant="outline" className="h-9 shrink-0 px-4" disabled>
-        Compare
+        {t("compare")}
       </Button>
     )
 
@@ -122,7 +124,7 @@ export function RoundHistory({
       </div>
       {items.length === 0 && (
         <p className="py-16 text-center text-muted-foreground">
-          No rounds yet.
+          {t("noRounds")}
         </p>
       )}
       {items.length > 0 && (
@@ -144,7 +146,7 @@ export function RoundHistory({
                     disabled={!finished}
                     checked={selected.includes(round.id)}
                     onCheckedChange={(checked) => toggle(round.id, checked)}
-                    aria-label="Select for comparison"
+                    aria-label={t("selectToCompare")}
                   />
                 </div>
                 <Link
@@ -153,11 +155,14 @@ export function RoundHistory({
                 >
                   <span className="block text-lg font-medium">
                     <time dateTime={round.started_at} suppressHydrationWarning>
-                      {formatDate(round.started_at)}
+                      {formatDate(round.started_at, locale)}
                     </time>
                   </span>
                   <span className="block text-sm text-muted-foreground">
-                    {round.answered} of {round.total} answered
+                    {t("answeredOf", {
+                      answered: round.answered,
+                      total: round.total,
+                    })}
                   </span>
                 </Link>
                 {score != null && (
@@ -169,7 +174,7 @@ export function RoundHistory({
                   >
                     {!finished && (
                       <span className="text-xs text-muted-foreground">
-                        grade
+                        {t("grade")}
                       </span>
                     )}
                     <span
@@ -192,7 +197,7 @@ export function RoundHistory({
                       nativeButton={false}
                       render={<Link href={`/rounds/${round.id}`} />}
                     >
-                      Continue
+                      {t("continue")}
                     </Button>
                     <Button
                       variant="outline"
@@ -201,7 +206,7 @@ export function RoundHistory({
                         setPending({ id: round.id, kind: "finish" })
                       }
                     >
-                      Finish
+                      {t("finish")}
                     </Button>
                   </div>
                 )}
@@ -209,7 +214,7 @@ export function RoundHistory({
                   <Button
                     variant="ghost"
                     size="icon"
-                    aria-label="Delete round"
+                    aria-label={t("deleteRound")}
                     className="size-12 text-muted-foreground hover:text-destructive"
                     onClick={() => setPending({ id: round.id, kind: "delete" })}
                   >
@@ -232,14 +237,14 @@ export function RoundHistory({
         <DialogContent showCloseButton={false}>
           <DialogHeader>
             <DialogTitle className="no-dot">
-              {finishing ? "Finish this round?" : "Delete this round?"}
+              {finishing ? t("finishTitle") : t("deleteTitle")}
             </DialogTitle>
             <DialogDescription>
               {finishing
                 ? unanswered
-                  ? "Unanswered questions won't be scored."
-                  : "You won't be able to answer more questions."
-                : "This can't be undone."}
+                  ? t("unscored")
+                  : t("noMore")
+                : t("cantUndo")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -252,7 +257,7 @@ export function RoundHistory({
                 />
               }
             >
-              Cancel
+              {common("cancel")}
             </DialogClose>
             <Button
               variant={finishing ? "default" : "destructive"}
@@ -260,7 +265,7 @@ export function RoundHistory({
               disabled={busy}
               onClick={confirm}
             >
-              {finishing ? "Finish" : "Delete"}
+              {finishing ? t("finish") : common("delete")}
             </Button>
           </DialogFooter>
         </DialogContent>

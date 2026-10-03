@@ -1,6 +1,7 @@
 "use client"
 
 import { LinkIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
 import { Badge } from "@/components/ui/badge"
@@ -9,12 +10,15 @@ import { useOrigin } from "@/lib/origin"
 import type { CompanyMember } from "@/types/company"
 
 export function MemberRow({ member }: { member: CompanyMember }) {
+  const t = useTranslations("members")
+  const common = useTranslations("common")
+  const roles = useTranslations("roles")
   const origin = useOrigin()
   const url = origin && member.token ? `${origin}/join/${member.token}` : ""
 
   async function copy() {
     await navigator.clipboard.writeText(url)
-    toast.success("Link copied")
+    toast.success(common("linkCopied"))
   }
 
   return (
@@ -23,14 +27,14 @@ export function MemberRow({ member }: { member: CompanyMember }) {
         <span>
           <span className="block text-lg font-medium">{member.email}</span>
           <span className="text-sm text-muted-foreground">
-            {member.joined ? "Joined" : "Invited"}
+            {member.joined ? t("joined") : t("invited")}
           </span>
         </span>
         <Badge
           variant="secondary"
           className="h-7 px-3 text-sm font-light capitalize"
         >
-          {member.role}
+          {roles(member.role)}
         </Badge>
       </div>
       {!member.joined && url && (
@@ -40,7 +44,7 @@ export function MemberRow({ member }: { member: CompanyMember }) {
           </p>
           <Button type="button" variant="outline" onClick={copy}>
             <LinkIcon />
-            Copy
+            {t("copy")}
           </Button>
         </div>
       )}

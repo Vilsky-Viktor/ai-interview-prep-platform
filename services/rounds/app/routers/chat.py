@@ -4,6 +4,7 @@ from uuid import UUID
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 from prepza_common.auth import CurrentUser
+from prepza_common.i18n import translate
 from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
@@ -39,7 +40,7 @@ async def send_chat(answer_id: UUID, body: ChatRequest, user: CurrentUser) -> St
         settings.llm_window_seconds,
     )
     history = await chat.list_messages(answer_id)
-    messages = build_messages(round_, answer, history, body.message.strip())
+    messages = build_messages(round_, answer, history, body.message.strip(), user.language)
 
     async def events():
         reply = []
@@ -50,7 +51,7 @@ async def send_chat(answer_id: UUID, body: ChatRequest, user: CurrentUser) -> St
                 yield sse_event({"delta": delta})
         except Exception:
             logger.exception("Chat failed for answer %s", answer_id)
-            yield sse_event({"error": CHAT_FAILED})
+            yield sse_event({"error": translate(CHAT_FAILED, user.language)})
 
             return
 

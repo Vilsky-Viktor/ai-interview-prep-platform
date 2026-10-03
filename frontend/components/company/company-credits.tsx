@@ -1,5 +1,6 @@
 "use client"
 
+import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
 
 import { BuyButton } from "@/components/billing/buy-button"
@@ -13,6 +14,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { formatPrice } from "@/lib/format"
+import { productName } from "@/lib/products"
 import type { Catalog } from "@/types/billing"
 
 /** How many candidates the company can still invite, and a way to buy more. */
@@ -25,6 +27,9 @@ export function CompanyCredits({
   credits: number
   catalog: Catalog
 }) {
+  const t = useTranslations("company")
+  const locale = useLocale()
+  const products = useTranslations("products")
   const [open, setOpen] = useState(false)
   const packs = catalog.products.filter(
     (product) => product.owner === "company"
@@ -37,7 +42,7 @@ export function CompanyCredits({
           {credits}
         </span>{" "}
         <span className="text-muted-foreground">
-          {credits === 1 ? "candidate" : "candidates"} left to invite
+          {t("creditsLeft", { count: credits })}
         </span>
       </p>
       <Button
@@ -45,15 +50,14 @@ export function CompanyCredits({
         className="h-12 px-6 text-base"
         onClick={() => setOpen(true)}
       >
-        Buy candidates
+        {t("buyCandidates")}
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent showCloseButton={false} className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Buy candidates</DialogTitle>
+            <DialogTitle>{t("buyCandidates")}</DialogTitle>
             <DialogDescription className="text-base">
-              Each new candidate you invite uses one. Resending an invite is
-              free, and credits never expire.
+              {t("buyText")}
             </DialogDescription>
           </DialogHeader>
           <div className="divide-y rounded-xl border">
@@ -64,15 +68,17 @@ export function CompanyCredits({
               >
                 <span className="space-y-1">
                   <span className="block text-lg font-medium">
-                    {pack.title}
+                    {products(...productName(pack))}
                   </span>
                   <span className="block text-sm text-muted-foreground">
-                    {formatPrice(pack.price_cents, catalog.currency)} ·{" "}
-                    {formatPrice(
-                      pack.price_cents / pack.candidate_credits,
-                      catalog.currency
-                    )}{" "}
-                    each
+                    {formatPrice(pack.price_cents, catalog.currency, locale)} ·{" "}
+                    {t("each", {
+                      price: formatPrice(
+                        pack.price_cents / pack.candidate_credits,
+                        catalog.currency,
+                        locale
+                      ),
+                    })}
                   </span>
                 </span>
                 <BuyButton

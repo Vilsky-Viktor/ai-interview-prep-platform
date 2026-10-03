@@ -1,3 +1,6 @@
+"use client"
+
+import { useTranslations } from "next-intl"
 import type { ComponentProps } from "react"
 
 import { TopicLimit } from "@/components/questions/topic-limit"
@@ -13,6 +16,8 @@ export function TopicQuestionLimit({
   limitPath?: string
   caption: string
 }) {
+  const t = useTranslations("questions")
+
   if (!limitPath && limit == null) {
     return <TopicQuestions {...questions} />
   }
@@ -32,7 +37,7 @@ export function TopicQuestionLimit({
       )}
       <span className="flex flex-col items-end leading-none">
         <span className="flex items-baseline gap-1 text-sm text-muted-foreground">
-          of
+          {t("of")}
           <TopicQuestions {...questions} alignCount />
         </span>
         <span className="-mt-0.5 text-xs text-muted-foreground/60">

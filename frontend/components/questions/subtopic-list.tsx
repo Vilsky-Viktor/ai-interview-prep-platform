@@ -2,9 +2,11 @@
 
 import { cn } from "cn"
 import { MinusIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 
 export function SubtopicList({ subtopics }: { subtopics: string[] }) {
+  const t = useTranslations("questions")
   const listRef = useRef<HTMLSpanElement>(null)
   const [expanded, setExpanded] = useState(false)
   const [overflows, setOverflows] = useState(false)
@@ -32,7 +34,10 @@ export function SubtopicList({ subtopics }: { subtopics: string[] }) {
     <span className="block space-y-1">
       <span
         ref={listRef}
-        className={cn("block text-sm text-muted-foreground", !expanded && "line-clamp-2")}
+        className={cn(
+          "block text-sm text-muted-foreground",
+          !expanded && "line-clamp-2"
+        )}
       >
         {subtopics.map((subtopic, index) => (
           <span key={subtopic}>
@@ -52,7 +57,7 @@ export function SubtopicList({ subtopics }: { subtopics: string[] }) {
           onClick={() => setExpanded((current) => !current)}
           className="cursor-pointer text-sm text-foreground transition-colors hover:text-primary"
         >
-          {expanded ? "Show less" : "Show all"}
+          {expanded ? t("showLess") : t("showAll")}
         </button>
       )}
     </span>

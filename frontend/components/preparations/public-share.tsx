@@ -1,6 +1,7 @@
 "use client"
 
 import { CopyIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
 import {
@@ -70,6 +71,8 @@ function shareLinks(url: string, title: string) {
 }
 
 export function PublicShare({ preparationId, title }: PublicShareProps) {
+  const t = useTranslations("share")
+  const common = useTranslations("common")
   const origin = useOrigin()
   const url = origin ? `${origin}/preparations/${preparationId}` : ""
 
@@ -79,16 +82,14 @@ export function PublicShare({ preparationId, title }: PublicShareProps) {
     }
 
     await navigator.clipboard.writeText(url)
-    toast.success("Link copied")
+    toast.success(common("linkCopied"))
   }
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle>Share preparation</DialogTitle>
-        <DialogDescription>
-          Anyone with the link can view this preparation.
-        </DialogDescription>
+        <DialogTitle>{t("title")}</DialogTitle>
+        <DialogDescription>{t("public")}</DialogDescription>
       </DialogHeader>
       <div className="relative">
         <p className="rounded-lg border px-6 py-6 pr-20 font-mono text-sm break-all">
@@ -98,7 +99,7 @@ export function PublicShare({ preparationId, title }: PublicShareProps) {
           type="button"
           size="icon"
           className="absolute inset-y-0 right-3 my-auto size-10 rounded-full"
-          aria-label="Copy link"
+          aria-label={common("copyLink")}
           onClick={copy}
           disabled={!url}
         >

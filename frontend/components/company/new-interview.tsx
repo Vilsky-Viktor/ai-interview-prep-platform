@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -11,6 +12,7 @@ import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { Interview } from "@/types/company"
 
 export function NewInterview({ companyId }: { companyId: string }) {
+  const t = useTranslations("interviews")
   const router = useRouter()
   const [text, setText] = useState("")
   const [shareResults, setShareResults] = useState(false)
@@ -35,9 +37,7 @@ export function NewInterview({ companyId }: { companyId: string }) {
         `/generate/${interview.generation_id}?next=/company/${companyId}/interviews/${interview.id}`
       )
     } catch (error) {
-      toast.error(
-        apiErrorMessage(error, "Couldn't start the interview. Please try again.")
-      )
+      toast.error(apiErrorMessage(error, t("startFailed")))
       setSaving(false)
     }
   }
@@ -51,14 +51,14 @@ export function NewInterview({ companyId }: { companyId: string }) {
         required
         value={text}
         onChange={(event) => setText(event.target.value)}
-        placeholder="Paste the job description"
-        aria-label="Job description"
+        placeholder={t("pasteJob")}
+        aria-label={t("jobDescription")}
         className="max-h-72 min-h-40 resize-none border-0 bg-transparent p-2 text-base shadow-none focus-visible:ring-0 md:text-base dark:bg-transparent"
       />
       <div className="flex flex-wrap items-center justify-between gap-4 pt-2 pl-2">
         <div className="flex flex-wrap items-center gap-4 sm:ml-auto">
           <label className="flex items-center gap-3 text-sm">
-            Show scores to the candidate
+            {t("showScores")}
             <Switch checked={shareResults} onCheckedChange={setShareResults} />
           </label>
           <Button
@@ -66,7 +66,7 @@ export function NewInterview({ companyId }: { companyId: string }) {
             className="h-12 px-6 text-base"
             disabled={saving || !text.trim()}
           >
-            Generate interview
+            {t("generate")}
           </Button>
         </div>
       </div>

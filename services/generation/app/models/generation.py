@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime
 
+from prepza_common.constants import DEFAULT_LANGUAGE
 from sqlalchemy import DateTime, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
@@ -17,6 +18,7 @@ class Generation(Base):
     kind: Mapped[str] = mapped_column(String(32), default="preparation")
     company_id: Mapped[uuid.UUID | None]
     text: Mapped[str] = mapped_column(Text)
+    language: Mapped[str] = mapped_column(String(8), default=DEFAULT_LANGUAGE)
     status: Mapped[str] = mapped_column(String(32), default=Status.QUEUED)
     topics: Mapped[list | None] = mapped_column(JSONB)
     progress: Mapped[dict | None] = mapped_column(JSONB)

@@ -1,5 +1,6 @@
 from uuid import UUID
 
+from prepza_common.constants import DEFAULT_LANGUAGE
 from pydantic import BaseModel
 
 
@@ -32,3 +33,4 @@ class PreparationIn(BaseModel):
     level: str
     requirements: list[str]
     topics: list[TopicIn]
+    language: str = DEFAULT_LANGUAGE

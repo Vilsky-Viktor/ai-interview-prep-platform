@@ -1,4 +1,6 @@
+import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { auth } from "@/lib/firebase"
+import { readLocaleCookie } from "@/lib/locale"
 
 export class ApiError extends Error {
   constructor(
@@ -23,12 +25,14 @@ export function errorDetail(body: unknown): string | null {
   return typeof first === "string" ? first.replace(/^Value error, /, "") : null
 }
 
+/** The signed-in user's token, and the interface language for the services' messages. */
 export async function authHeaders(): Promise<Record<string, string>> {
   // Right after page load Firebase may still be restoring the signed-in user.
   await auth.authStateReady()
   const token = await auth.currentUser?.getIdToken()
+  const language = { "Accept-Language": readLocaleCookie() ?? DEFAULT_LOCALE }
 
-  return token ? { Authorization: `Bearer ${token}` } : {}
+  return token ? { ...language, Authorization: `Bearer ${token}` } : language
 }
 
 export async function apiFetch<T>(

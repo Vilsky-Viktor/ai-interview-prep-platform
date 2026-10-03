@@ -15,16 +15,24 @@ def direction(*values: float) -> list[float]:
 
 
 async def preparation(
-    title="Backend", topic="Python", level="mid", embedding=None, public=True, questions=3
+    title="Backend",
+    topic="Python",
+    level="mid",
+    embedding=None,
+    public=True,
+    questions=3,
+    language="en",
+    owner="owner",
 ):
     set_id = await preparations.create(
         PreparationIn.model_validate(
             {
                 "generation_id": str(uuid.uuid4()),
-                "owner_uid": "owner",
+                "owner_uid": owner,
                 "source_text": "job text",
                 "title": title,
                 "level": level,
+                "language": language,
                 "requirements": [],
                 "topics": [
                     {

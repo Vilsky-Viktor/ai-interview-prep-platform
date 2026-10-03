@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -11,6 +12,8 @@ import { ApiError, apiFetch } from "@/lib/api"
 import type { AdminInvite as Invite } from "@/types/company"
 
 export function AdminInvite({ token }: { token: string }) {
+  const t = useTranslations("company")
+  const share = useTranslations("share")
   const router = useRouter()
   const { user, loading } = useAuth()
   const [invite, setInvite] = useState<Invite | null>(null)
@@ -39,25 +42,19 @@ export function AdminInvite({ token }: { token: string }) {
       router.push("/company")
     } catch (error) {
       const forbidden = error instanceof ApiError && error.status === 403
-      toast.error(
-        forbidden
-          ? "This invite was sent to a different email address."
-          : "Couldn't accept the invite. Please try again."
-      )
+      toast.error(forbidden ? share("wrongEmail") : share("acceptFailed"))
       setAccepting(false)
     }
   }
 
   if (!loading && !user) {
-    return (
-      <SignInPrompt message="Sign in with the invitation email to join this company." />
-    )
+    return <SignInPrompt message={t("signInJoin")} />
   }
 
   if (missing) {
     return (
       <p className="py-24 text-center text-base text-muted-foreground">
-        This invite isn&apos;t valid anymore.
+        {share("invalid")}
       </p>
     )
   }
@@ -71,7 +68,9 @@ export function AdminInvite({ token }: { token: string }) {
   return (
     <div className="w-full space-y-8 text-center">
       <div className="space-y-4">
-        <p className="text-base text-muted-foreground">You were invited to join.</p>
+        <p className="text-base text-muted-foreground">
+          {share("invitedToJoin")}
+        </p>
         <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
           {invite.company_name}
         </h1>
@@ -81,7 +80,7 @@ export function AdminInvite({ token }: { token: string }) {
           className="h-12 px-6 text-base"
           onClick={() => router.push("/company")}
         >
-          Open company
+          {t("open")}
         </Button>
       ) : matches ? (
         <Button
@@ -89,12 +88,10 @@ export function AdminInvite({ token }: { token: string }) {
           disabled={accepting}
           onClick={accept}
         >
-          Join company
+          {t("join")}
         </Button>
       ) : (
-        <p className="text-base text-muted-foreground">
-          The email does not match. Sign in with the invitation email to join.
-        </p>
+        <p className="text-base text-muted-foreground">{share("mismatch")}</p>
       )}
     </div>
   )

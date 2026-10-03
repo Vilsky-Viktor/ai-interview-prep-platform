@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -27,6 +28,7 @@ export function GenerationView({
   backHref: string
   backLabel: string
 }) {
+  const t = useTranslations("generation")
   const { user, loading } = useAuth()
   const router = useRouter()
   const [generation, setGeneration] = useState<Generation | null>(null)
@@ -72,9 +74,7 @@ export function GenerationView({
 
   useEffect(() => {
     if (generation?.status === "done") {
-        router.replace(
-          next ?? `/preparations/${generation.preparation_id}`
-        )
+      router.replace(next ?? `/preparations/${generation.preparation_id}`)
     }
   }, [generation, next, router])
 
@@ -84,33 +84,33 @@ export function GenerationView({
     topics: DraftTopic[] | null
   ) {
     try {
-      const next = await apiFetch<Generation>(
-        `${path}/review`,
-        { method: "POST", body: JSON.stringify({ selected, instructions, topics }) }
-      )
+      const next = await apiFetch<Generation>(`${path}/review`, {
+        method: "POST",
+        body: JSON.stringify({ selected, instructions, topics }),
+      })
       setGeneration(next)
       setRound((value) => value + 1)
     } catch {
-      toast.error("Couldn't submit your review. Please try again.")
+      toast.error(t("reviewFailed"))
     }
   }
 
   async function retry() {
     try {
-      const next = await apiFetch<Generation>(`${path}/retry`, { method: "POST" })
+      const next = await apiFetch<Generation>(`${path}/retry`, {
+        method: "POST",
+      })
       setGeneration(next)
       setRound((value) => value + 1)
     } catch (error) {
-      toast.error(
-        apiErrorMessage(error, "Couldn't retry the generation. Please try again.")
-      )
+      toast.error(apiErrorMessage(error, t("retryFailed")))
     }
   }
 
   if (!loading && !user) {
     return (
       <WithBack href={backHref} label={backLabel}>
-        <SignInPrompt message="Sign in to see this generation." />
+        <SignInPrompt message={t("signIn")} />
       </WithBack>
     )
   }
@@ -118,7 +118,7 @@ export function GenerationView({
   if (missing) {
     return (
       <WithBack href={backHref} label={backLabel}>
-        <Message text="This generation doesn't exist." />
+        <Message text={t("missing")} />
       </WithBack>
     )
   }
@@ -126,7 +126,7 @@ export function GenerationView({
   if (generation?.status === "cancelled") {
     return (
       <WithBack href={backHref} label={backLabel}>
-        <Message text="This generation was cancelled." />
+        <Message text={t("cancelled")} />
       </WithBack>
     )
   }
@@ -136,10 +136,7 @@ export function GenerationView({
   if (generation?.status === "failed") {
     return (
       <WithBack href={backHref} label={backLabel}>
-        <Message
-          text={generation.error ?? "Generation failed."}
-          onRetry={retry}
-        />
+        <Message text={t("failed")} onRetry={retry} />
         {cancel && <div className="flex justify-center">{cancel}</div>}
       </WithBack>
     )
@@ -196,6 +193,7 @@ function Message({
   text: string
   onRetry?: () => Promise<void>
 }) {
+  const t = useTranslations("generation")
   const [retrying, setRetrying] = useState(false)
 
   async function retry() {
@@ -214,7 +212,7 @@ function Message({
             disabled={retrying}
             onClick={retry}
           >
-            {retrying ? "Retrying…" : "Retry"}
+            {retrying ? t("retrying") : t("retry")}
           </Button>
         )}
         <Button
@@ -223,7 +221,7 @@ function Message({
           render={<Link href="/" />}
           nativeButton={false}
         >
-          Start over
+          {t("startOver")}
         </Button>
       </div>
     </div>

@@ -1,8 +1,7 @@
-import type { Metadata } from "next"
-
+import { translatedTitle } from "@/lib/site"
 import { SessionView } from "@/components/company/session-view"
 
-export const metadata: Metadata = { title: "Interview" }
+export const generateMetadata = () => translatedTitle("session", "title")
 
 export default async function SessionPage({
   params,

@@ -4,7 +4,7 @@ from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.types import interrupt
 
 from app.constants.generation import MAX_TOPICS, TOPIC_ATTEMPTS
-from app.helpers.prompts import bullet_list
+from app.helpers.prompts import bullet_list, language_name
 from app.integrations import llm
 from app.models.state import State
 from app.prompts.topics import REVISION_PROMPT, TOO_MANY_TOPICS, TOPICS_PROMPT
@@ -38,6 +38,7 @@ async def generate_topics(state: State) -> dict:
         level=state["level"],
         requirements=bullet_list(state["requirements"]),
         max_topics=MAX_TOPICS,
+        language=language_name(state.get("language")),
     )
     topics = await draft_cache.get("topics", prompt)
 
@@ -71,6 +72,7 @@ async def revise_topics(state: State) -> dict:
         current=json.dumps(state["topics"], indent=2, ensure_ascii=False),
         feedback=state["feedback"],
         max_topics=MAX_TOPICS,
+        language=language_name(state.get("language")),
     )
 
     return {

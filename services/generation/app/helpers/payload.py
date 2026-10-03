@@ -1,5 +1,6 @@
 from uuid import UUID
 
+from prepza_common.constants import DEFAULT_LANGUAGE
 from prepza_common.sets import PreparationIn, QuestionIn, TopicIn
 
 from app.config.settings import settings
@@ -38,4 +39,5 @@ def build_preparation(
         level=values["level"],
         requirements=values["requirements"],
         topics=topics,
+        language=values.get("language") or DEFAULT_LANGUAGE,
     )

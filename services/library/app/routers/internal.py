@@ -169,6 +169,7 @@ async def get_question_context(question_id: UUID, caller: ServiceCaller) -> Ques
         kind=question_set.kind,
         owner_id=question_set.owner_id,
         level=question_set.level,
+        language=question_set.language,
         topic=topic.title,
         subtopics=topic.subtopics,
         existing=[question.text for question in topic.questions],

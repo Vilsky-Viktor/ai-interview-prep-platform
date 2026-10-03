@@ -2,11 +2,11 @@
 
 import { cn } from "cn"
 import { MinusIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 import { InlineText } from "@/components/questions/inline-text"
 import { QuestionText } from "@/components/questions/question-text"
 import { VirtualList } from "@/components/virtual-list"
-import { formatSeconds, plural } from "@/lib/format"
 import { answerText, verdict } from "@/lib/rounds"
 import type { ReviewItem } from "@/types/round"
 
@@ -40,13 +40,15 @@ export function ScorecardReview({ items }: { items: ReviewItem[] }) {
 }
 
 function ScorecardMark({ item }: { item: ReviewItem }) {
+  const t = useTranslations("scorecard")
+  const rounds = useTranslations("rounds")
   const answer = item.answer
 
   // Unanswered and timed-out questions count as wrong.
   if (!answer || answer.option_index == null) {
     return (
       <span className="shrink-0 text-lg font-light text-red-600 dark:text-red-400">
-        {answer ? "Time out" : "Not answered"}
+        {answer ? t("timeOut") : rounds("notAnswered")}
       </span>
     )
   }
@@ -60,16 +62,18 @@ function ScorecardMark({ item }: { item: ReviewItem }) {
           : "text-red-600 dark:text-red-400"
       )}
     >
-      {verdict(answer.correct)}
+      {rounds(verdict(answer.correct))}
     </span>
   )
 }
 
 /** Page leaves and copy attempts while this question was open; nothing when there were none. */
 function ScorecardSignals({ item }: { item: ReviewItem }) {
+  const t = useTranslations("scorecard")
+  const candidates = useTranslations("candidates")
   const signals = [
-    item.tab_leaves > 0 && `Left the page ${plural(item.tab_leaves, "time")}`,
-    item.copies > 0 && plural(item.copies, "copy attempt"),
+    item.tab_leaves > 0 && t("leftPage", { count: item.tab_leaves }),
+    item.copies > 0 && candidates("copies", { count: item.copies }),
   ].filter(Boolean)
 
   if (signals.length === 0) {
@@ -90,7 +94,26 @@ function ScorecardSignals({ item }: { item: ReviewItem }) {
   )
 }
 
+/** "45 s", "2 min 5 s". */
+function useDuration() {
+  const t = useTranslations("scorecard")
+
+  return (seconds: number) => {
+    const m = Math.floor(seconds / 60)
+    const s = seconds % 60
+
+    if (m === 0) {
+      return t("seconds", { s })
+    }
+
+    return s === 0 ? t("minutes", { m }) : t("minutesSeconds", { m, s })
+  }
+}
+
 function ScorecardAnswer({ item }: { item: ReviewItem }) {
+  const t = useTranslations("scorecard")
+  const duration = useDuration()
+
   if (!item.answer || item.answer.option_index == null) {
     return null
   }
@@ -110,16 +133,20 @@ function ScorecardAnswer({ item }: { item: ReviewItem }) {
             fast && "text-amber-600 dark:text-amber-400"
           )}
         >
-          Answered in{" "}
-          <span
-            className={cn(
-              "tabular-nums",
-              fast ? "font-medium" : "text-foreground"
-            )}
-          >
-            {formatSeconds(seconds)}
-          </span>
-          {fast && ": too fast to have read the question"}
+          {t.rich("answeredIn", {
+            time: duration(seconds),
+            b: (chunks) => (
+              <span
+                className={cn(
+                  "tabular-nums",
+                  fast ? "font-medium" : "text-foreground"
+                )}
+              >
+                {chunks}
+              </span>
+            ),
+          })}
+          {fast && t("tooFast")}
         </p>
       )}
     </div>

@@ -14,11 +14,12 @@ export function correctText(item: ReviewItem | undefined) {
     : null
 }
 
-/** `correct` is null when a candidate may not see results. */
+/** The message key for an answer's verdict; `correct` is null when a candidate may not see
+results. */
 export function verdict(correct: boolean | null) {
   if (correct === null) {
-    return "Answered"
+    return "answered"
   }
 
-  return correct ? "Correct" : "Incorrect"
+  return correct ? "correct" : "incorrect"
 }

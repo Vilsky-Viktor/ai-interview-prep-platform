@@ -1,6 +1,6 @@
-import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
+import { getTranslations } from "next-intl/server"
 
 import { CompanyHeader } from "@/components/company/company-header"
 import { InviteAdmin } from "@/components/company/invite-admin"
@@ -9,9 +9,10 @@ import { SignInPrompt } from "@/components/sign-in-prompt"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
+import { translatedTitle } from "@/lib/site"
 import type { Company, CompanyMember } from "@/types/company"
 
-export const metadata: Metadata = { title: "Admins" }
+export const generateMetadata = () => translatedTitle("company", "admins")
 
 export default async function MembersPage({
   params,
@@ -19,6 +20,7 @@ export default async function MembersPage({
   params: Promise<{ companyId: string }>
 }) {
   const { companyId } = await params
+  const t = await getTranslations("company")
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
@@ -32,7 +34,7 @@ export default async function MembersPage({
   if (!signedIn) {
     return (
       <main className="mx-auto max-w-5xl px-6 py-12">
-        <SignInPrompt message="Sign in to see company admins." />
+        <SignInPrompt message={t("signInAdmins")} />
       </main>
     )
   }

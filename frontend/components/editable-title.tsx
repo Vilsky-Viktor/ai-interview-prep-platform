@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
@@ -9,7 +10,14 @@ import { apiFetch } from "@/lib/api"
 const titleClass =
   "font-heading text-3xl font-medium tracking-tight text-balance"
 
-export function EditableTitle({ title, path }: { title: string; path: string }) {
+export function EditableTitle({
+  title,
+  path,
+}: {
+  title: string
+  path: string
+}) {
+  const t = useTranslations("common")
   const router = useRouter()
   const inputRef = useRef<HTMLInputElement>(null)
   const skipSave = useRef(false)
@@ -60,7 +68,7 @@ export function EditableTitle({ title, path }: { title: string; path: string }) 
       setEditing(false)
       router.refresh()
     } catch {
-      toast.error("Couldn't save the title.")
+      toast.error(t("titleFailed"))
     } finally {
       savingRef.current = false
       setSaving(false)
@@ -94,7 +102,7 @@ export function EditableTitle({ title, path }: { title: string; path: string }) 
     <input
       ref={inputRef}
       maxLength={200}
-      aria-label="Title"
+      aria-label={t("title")}
       disabled={saving}
       value={value}
       className={`${titleClass} w-full min-w-0 rounded-lg border border-ring bg-transparent px-3 py-1 outline-none`}

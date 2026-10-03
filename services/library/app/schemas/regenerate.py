@@ -11,6 +11,7 @@ class QuestionContext(BaseModel):
     kind: str
     owner_id: str
     level: str
+    language: str
     topic: str
     subtopics: list[str]
     existing: list[str]

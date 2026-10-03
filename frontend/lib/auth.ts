@@ -13,7 +13,8 @@ import {
 } from "@/constants/auth"
 import { auth } from "@/lib/firebase"
 
-export async function signIn() {
+/** `failed` is the message shown when sign-in fails, in the interface language. */
+export async function signIn(failed: string) {
   try {
     await signInWithPopup(auth, new GoogleAuthProvider())
   } catch (error) {
@@ -24,7 +25,7 @@ export async function signIn() {
       return
     }
 
-    toast.error("Sign-in failed. Please try again.")
+    toast.error(failed)
   }
 }
 

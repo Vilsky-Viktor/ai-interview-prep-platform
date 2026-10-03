@@ -1,6 +1,7 @@
 "use client"
 
 import { cn } from "cn"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 
 import { InlineText } from "@/components/questions/inline-text"
@@ -11,6 +12,7 @@ import { answerText, correctText, verdict } from "@/lib/rounds"
 import type { ReviewItem as ReviewItemType } from "@/types/round"
 
 export function ReviewItem({ item }: { item: ReviewItemType }) {
+  const t = useTranslations("rounds")
   const [chatOpen, setChatOpen] = useState(false)
   const answer = item.answer
 
@@ -35,13 +37,13 @@ export function ReviewItem({ item }: { item: ReviewItemType }) {
                   : "text-red-600 dark:text-red-400")
             )}
           >
-            {answer ? verdict(answer.correct) : "Not answered"}
+            {answer ? t(verdict(answer.correct)) : t("notAnswered")}
           </span>
         </div>
 
         {answer && (
           <div className="space-y-3 rounded-xl bg-muted px-5 py-4">
-            <p className="text-sm text-muted-foreground">Your answer</p>
+            <p className="text-sm text-muted-foreground">{t("yourAnswer")}</p>
             <p className="text-lg leading-relaxed font-light whitespace-pre-wrap">
               <InlineText text={answerText(item)} />
             </p>
@@ -49,7 +51,9 @@ export function ReviewItem({ item }: { item: ReviewItemType }) {
         )}
         {answer && !answer.correct && correctText(item) && (
           <div className="space-y-3 rounded-xl border px-5 py-4">
-            <p className="text-sm text-muted-foreground">Correct answer</p>
+            <p className="text-sm text-muted-foreground">
+              {t("correctAnswer")}
+            </p>
             <p className="text-lg leading-relaxed font-light whitespace-pre-wrap">
               <InlineText text={correctText(item)} />
             </p>
@@ -65,7 +69,7 @@ export function ReviewItem({ item }: { item: ReviewItemType }) {
                 className="h-12 px-6 text-base"
                 onClick={() => setChatOpen(true)}
               >
-                Ask a follow-up
+                {t("askFollowUp")}
               </Button>
             </div>
           ))}

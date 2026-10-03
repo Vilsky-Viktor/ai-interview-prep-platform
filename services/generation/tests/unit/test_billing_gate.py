@@ -20,7 +20,7 @@ def queue(monkeypatch):
     """A signed-in learner, no rate limit, and generations that are recorded, not run."""
     created = []
 
-    async def fake_create(owner_uid, text, kind="preparation", company_id=None):
+    async def fake_create(owner_uid, text, kind="preparation", company_id=None, language="en"):
         created.append((owner_uid, kind, company_id))
 
         return Generation(

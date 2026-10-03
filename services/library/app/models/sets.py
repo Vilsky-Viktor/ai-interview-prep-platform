@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime
 
+from prepza_common.constants import DEFAULT_LANGUAGE
 from sqlalchemy import Computed, DateTime, ForeignKey, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB, TSVECTOR
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -24,6 +25,8 @@ class QuestionSet(Base):
     title: Mapped[str] = mapped_column(String(200))
     source_text: Mapped[str] = mapped_column(Text)
     level: Mapped[str] = mapped_column(String(32))
+    # The language its content was generated in; reuse only mixes sets of one language.
+    language: Mapped[str] = mapped_column(String(8), default=DEFAULT_LANGUAGE)
     requirements: Mapped[list] = mapped_column(JSONB)
     visibility: Mapped[str] = mapped_column(String(32), default=Visibility.PRIVATE)
     # Stored so lists don't count per row; storage/stats.py keeps them up to date.

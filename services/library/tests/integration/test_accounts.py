@@ -45,3 +45,25 @@ def test_deleting_a_user_removes_their_traces_and_recounts_ratings(run):
     # Only the remaining rating counts; the owner's own join stays.
     assert counts[:2] == (3, 1)
     assert still_joined is False
+
+
+def test_the_export_holds_owned_preparations_in_full(run):
+    async def scenario():
+        await preparation("Exported", topic="Ledgers", owner="exporter")
+
+        return await accounts.export("exporter", "exporter@example.com")
+
+    exported = run(scenario())
+    [own] = exported["own_preparations"]
+    [topic] = own["topics"]
+
+    assert own["title"] == "Exported"
+    assert own["pasted_text"] == "job text"
+    assert topic["title"] == "Ledgers"
+    assert topic["questions"][0] == {
+        "question": "Exported question 0?",
+        "options": [
+            {"answer": "right", "correct": True},
+            {"answer": "wrong", "correct": False},
+        ],
+    }

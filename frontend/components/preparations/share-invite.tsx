@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -11,6 +12,7 @@ import { ApiError, apiFetch } from "@/lib/api"
 import type { ShareInvite as Invite } from "@/types/sharing"
 
 export function ShareInvite({ token }: { token: string }) {
+  const t = useTranslations("share")
   const router = useRouter()
   const { user, loading } = useAuth()
   const [invite, setInvite] = useState<Invite | null>(null)
@@ -37,25 +39,19 @@ export function ShareInvite({ token }: { token: string }) {
       router.push(`/preparations/${invite.preparation_id}`)
     } catch (error) {
       const forbidden = error instanceof ApiError && error.status === 403
-      toast.error(
-        forbidden
-          ? "This invite was sent to a different email address."
-          : "Couldn't accept the invite. Please try again."
-      )
+      toast.error(forbidden ? t("wrongEmail") : t("acceptFailed"))
       setAccepting(false)
     }
   }
 
   if (!loading && !user) {
-    return (
-      <SignInPrompt message="Sign in with the invitation email to join this preparation." />
-    )
+    return <SignInPrompt message={t("signIn")} />
   }
 
   if (missing) {
     return (
       <p className="py-24 text-center text-base text-muted-foreground">
-        This invite isn&apos;t valid anymore.
+        {t("invalid")}
       </p>
     )
   }
@@ -69,7 +65,7 @@ export function ShareInvite({ token }: { token: string }) {
   return (
     <div className="w-full space-y-8 text-center">
       <div className="space-y-4">
-        <p className="text-base text-muted-foreground">You were invited to join.</p>
+        <p className="text-base text-muted-foreground">{t("invitedToJoin")}</p>
         <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
           {invite.title}
         </h1>
@@ -79,7 +75,7 @@ export function ShareInvite({ token }: { token: string }) {
           className="h-12 px-6 text-base"
           onClick={() => router.push(`/preparations/${invite.preparation_id}`)}
         >
-          Open preparation
+          {t("open")}
         </Button>
       ) : matches ? (
         <Button
@@ -87,12 +83,10 @@ export function ShareInvite({ token }: { token: string }) {
           disabled={accepting}
           onClick={accept}
         >
-          Join preparation
+          {t("join")}
         </Button>
       ) : (
-        <p className="text-base text-muted-foreground">
-          The email does not match. Sign in with the invitation email to join.
-        </p>
+        <p className="text-base text-muted-foreground">{t("mismatch")}</p>
       )}
     </div>
   )

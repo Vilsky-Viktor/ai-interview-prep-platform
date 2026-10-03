@@ -1,4 +1,7 @@
+"use client"
+
 import { LoaderCircleIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import type { ReactNode } from "react"
 
 import { BackLink } from "@/components/back-link"
@@ -16,6 +19,7 @@ export function GenerationProgress({
   backLabel: string
   action?: ReactNode
 }) {
+  const t = useTranslations("generation")
   const progress = generation.progress
   const writing = progress !== null && progress.total > 0
   const percent = writing
@@ -29,23 +33,23 @@ export function GenerationProgress({
         <div className="relative">
           <BackLink href={backHref}>{backLabel}</BackLink>
           <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
-            {writing ? "Writing your questions" : "Drafting your topics"}
+            {writing ? t("writing") : t("drafting")}
           </h1>
         </div>
         <p className="text-base text-muted-foreground">
-          {writing
-            ? "This takes a few minutes. You can leave this page; we keep going."
-            : "Reading your goal and planning what to cover."}
+          {writing ? t("writingNote") : t("draftingNote")}
         </p>
       </div>
       {writing && (
         <div className="mx-auto w-full max-w-2xl space-y-2">
           <Progress value={percent} />
           <p className="text-2xl font-light tabular-nums">{percent}%</p>
-          {progress.topics !== undefined && (
+          {progress.topics != null && (
             <p className="text-sm text-muted-foreground tabular-nums">
-              {progress.topics_ready ?? 0} of {progress.topics}{" "}
-              {progress.topics === 1 ? "topic" : "topics"} ready
+              {t("topicsReady", {
+                ready: progress.topics_ready ?? 0,
+                count: progress.topics,
+              })}
             </p>
           )}
         </div>

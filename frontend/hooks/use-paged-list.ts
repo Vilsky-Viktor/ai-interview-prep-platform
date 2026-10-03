@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
@@ -15,6 +16,7 @@ function pagePath(path: string, offset: number) {
 /** A list the API serves a page at a time. `initial` is the first page the server already
 rendered; without it, the first page loads on mount. */
 export function usePagedList<T>(path: string, initial?: T[]) {
+  const t = useTranslations("common")
   const [items, setItems] = useState<T[]>(initial ?? [])
   const [hasMore, setHasMore] = useState(
     initial === undefined || initial.length === PAGE_SIZE
@@ -65,12 +67,12 @@ export function usePagedList<T>(path: string, initial?: T[]) {
       setItems((current) => [...current, ...page])
       setHasMore(page.length === PAGE_SIZE)
     } catch {
-      toast.error("Couldn't load more. Please try again.")
+      toast.error(t("loadMoreFailed"))
       setHasMore(false)
     } finally {
       loading.current = false
     }
-  }, [path, items.length, hasMore, loaded])
+  }, [path, items.length, hasMore, loaded, t])
 
   return { items, setItems, hasMore, loaded, loadMore }
 }

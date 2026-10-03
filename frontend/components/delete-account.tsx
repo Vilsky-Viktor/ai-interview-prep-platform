@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -24,6 +25,8 @@ export function DeleteAccount({
   open: boolean
   onOpenChange: (open: boolean) => void
 }) {
+  const t = useTranslations("deleteAccount")
+  const common = useTranslations("common")
   const router = useRouter()
   const [deleting, setDeleting] = useState(false)
 
@@ -34,15 +37,10 @@ export function DeleteAccount({
       await apiFetch("/library/me", { method: "DELETE" })
       await signOut()
       onOpenChange(false)
-      toast.success("Your account was deleted.")
+      toast.success(t("deleted"))
       router.push("/")
     } catch (error) {
-      toast.error(
-        apiErrorMessage(
-          error,
-          "Couldn't delete your account. Please try again."
-        )
-      )
+      toast.error(apiErrorMessage(error, t("failed")))
     } finally {
       setDeleting(false)
     }
@@ -55,16 +53,10 @@ export function DeleteAccount({
     >
       <DialogContent showCloseButton={false} className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle className="no-dot">Delete your account?</DialogTitle>
+          <DialogTitle className="no-dot">{t("title")}</DialogTitle>
           <DialogDescription className="space-y-2 text-base">
-            <span className="block">
-              Everything goes: your preparations (also for people who joined
-              them), progress, certificates, chats and interview results.
-            </span>
-            <span className="block">
-              A company you alone own is deleted with its interviews. This
-              can&apos;t be undone.
-            </span>
+            <span className="block">{t("everything")}</span>
+            <span className="block">{t("company")}</span>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -74,7 +66,7 @@ export function DeleteAccount({
             }
             disabled={deleting}
           >
-            Keep
+            {common("keep")}
           </DialogClose>
           <Button
             variant="destructive"
@@ -82,7 +74,7 @@ export function DeleteAccount({
             disabled={deleting}
             onClick={remove}
           >
-            {deleting ? "Deleting…" : "Delete account"}
+            {deleting ? common("deleting") : t("confirm")}
           </Button>
         </DialogFooter>
       </DialogContent>

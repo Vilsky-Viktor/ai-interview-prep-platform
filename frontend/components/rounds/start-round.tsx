@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -16,6 +17,7 @@ export function StartRound({
   topicId: string
   inProgress?: boolean
 }) {
+  const t = useTranslations("rounds")
   const router = useRouter()
   const [starting, setStarting] = useState(false)
 
@@ -29,7 +31,7 @@ export function StartRound({
       })
       router.push(`/rounds/${round.id}`)
     } catch {
-      toast.error("Couldn't start the round. Please try again.")
+      toast.error(t("startFailed"))
       setStarting(false)
     }
   }
@@ -41,7 +43,7 @@ export function StartRound({
       disabled={starting}
       onClick={start}
     >
-      {inProgress ? "Continue" : "Start"}
+      {inProgress ? t("continue") : t("start")}
     </Button>
   )
 }

@@ -23,6 +23,7 @@ class QuestionTask(TypedDict):
     existing: list[str]
     # Which angle this call mostly asks about.
     focus: str
+    language: str
 
 
 class AnswerTask(TypedDict):
@@ -33,10 +34,13 @@ class AnswerTask(TypedDict):
     start: int
     questions: list[str]
     level: str
+    language: str
 
 
 class State(TypedDict):
     input_text: str
+    # The code of the language content is written in (prepza_common.constants.LANGUAGES).
+    language: str
     title: str
     requirements: list[str]
     level: str

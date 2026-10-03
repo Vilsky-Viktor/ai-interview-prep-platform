@@ -2,6 +2,7 @@
 
 import { Trash2Icon } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -24,6 +25,8 @@ export function DeletePreparation({
   preparationId: string
   title: string
 }) {
+  const t = useTranslations("preparations")
+  const common = useTranslations("common")
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -32,11 +35,13 @@ export function DeletePreparation({
     setDeleting(true)
 
     try {
-      await apiFetch(`/library/preparations/${preparationId}`, { method: "DELETE" })
+      await apiFetch(`/library/preparations/${preparationId}`, {
+        method: "DELETE",
+      })
       router.push("/preparations")
       router.refresh()
     } catch {
-      toast.error("Couldn't delete the preparation. Please try again.")
+      toast.error(t("deleteFailed"))
       setDeleting(false)
     }
   }
@@ -47,7 +52,7 @@ export function DeletePreparation({
         variant="ghost"
         size="icon"
         className="size-10 text-muted-foreground hover:text-destructive"
-        aria-label={`Delete ${title}`}
+        aria-label={t("deleteLabel", { title })}
         onClick={() => setOpen(true)}
       >
         <Trash2Icon className="size-5" />
@@ -62,11 +67,10 @@ export function DeletePreparation({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="no-dot">Delete {title}?</DialogTitle>
-            <DialogDescription>
-              Its topics and questions are deleted, and everyone who joined it loses
-              access. This can&apos;t be undone.
-            </DialogDescription>
+            <DialogTitle className="no-dot">
+              {t("deleteTitle", { title })}
+            </DialogTitle>
+            <DialogDescription>{t("deleteText")}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose
@@ -78,7 +82,7 @@ export function DeletePreparation({
                 />
               }
             >
-              Keep
+              {common("keep")}
             </DialogClose>
             <Button
               variant="destructive"
@@ -86,7 +90,7 @@ export function DeletePreparation({
               disabled={deleting}
               onClick={remove}
             >
-              {deleting ? "Deleting…" : "Delete"}
+              {deleting ? common("deleting") : common("delete")}
             </Button>
           </DialogFooter>
         </DialogContent>

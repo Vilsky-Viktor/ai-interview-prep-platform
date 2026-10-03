@@ -2,6 +2,8 @@ from datetime import datetime
 from typing import Annotated
 from uuid import UUID
 
+from prepza_common.constants import DEFAULT_LANGUAGE
+from prepza_common.user import Language
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
 from app.constants.generation import (
@@ -21,6 +23,8 @@ class InterviewGenerationCreate(BaseModel):
     text: str = Field(min_length=1, max_length=MAX_GOAL_LENGTH)
     company_id: UUID
     owner_uid: str
+    # The recruiter's language, which the interview is written in.
+    language: Language = DEFAULT_LANGUAGE
 
 
 class GenerationCreate(BaseModel):

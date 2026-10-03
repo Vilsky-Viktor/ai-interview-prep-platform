@@ -31,6 +31,7 @@ FIND_SQL = text(
         JOIN questions q ON q.topic_id = t.id
         JOIN question_stats qs ON qs.question_id = q.id
         WHERE s.visibility = :visibility AND s.kind = :kind AND s.level = :level
+            AND s.language = :language
             AND t.embedding <=> CAST(:embedding AS vector) <= :max_distance
             AND qs.flag IS NULL AND qs.answers >= :min_answers
         ORDER BY q.text, distance
@@ -55,12 +56,15 @@ async def save_embeddings(
             )
 
 
-async def find(embedding: list[float], level: str, count: int) -> list[tuple[str, list]]:
+async def find(
+    embedding: list[float], level: str, language: str, count: int
+) -> list[tuple[str, list]]:
     params = {
         "embedding": as_vector(embedding),
         "visibility": Visibility.PUBLIC,
         "kind": SetKind.PREPARATION,
         "level": level,
+        "language": language,
         "max_distance": MAX_TOPIC_DISTANCE,
         "min_answers": MIN_REUSE_ANSWERS,
         "count": count,

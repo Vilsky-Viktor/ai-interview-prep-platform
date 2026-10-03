@@ -1,4 +1,7 @@
-ANSWERS_PROMPT = """Level: {level}
+ANSWERS_PROMPT = """Write every option in {language}. Keep formulas, commands and the names of tools and
+products as they are.
+
+Level: {level}
 Topic: {topic}
 
 For each multiple-choice interview question below, produce:

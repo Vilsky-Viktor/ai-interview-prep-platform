@@ -1,15 +1,17 @@
-import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import Link from "next/link"
+import { getLocale, getTranslations } from "next-intl/server"
 
 import { BuyButton } from "@/components/billing/buy-button"
 import { Button } from "@/components/ui/button"
 import { TOKEN_COOKIE } from "@/constants/auth"
-import { formatDate, formatPrice, plural } from "@/lib/format"
+import { formatDate, formatPrice } from "@/lib/format"
+import { productName } from "@/lib/products"
 import { serverFetch } from "@/lib/server-api"
+import { translatedTitle } from "@/lib/site"
 import type { Catalog, Plan, Product } from "@/types/billing"
 
-export const metadata: Metadata = { title: "Pricing" }
+export const generateMetadata = () => translatedTitle("pricing", "title")
 
 function PriceCard({
   title,
@@ -38,6 +40,9 @@ function PriceCard({
 
 export default async function PricingPage() {
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
+  const t = await getTranslations("pricing")
+  const products = await getTranslations("products")
+  const locale = await getLocale()
   const [catalog, plan] = await Promise.all([
     serverFetch<Catalog>("/billing/catalog"),
     signedIn ? serverFetch<Plan>("/billing/me") : null,
@@ -48,7 +53,8 @@ export default async function PricingPage() {
   }
 
   const price = (product: Product) =>
-    formatPrice(product.price_cents, catalog.currency)
+    formatPrice(product.price_cents, catalog.currency, locale)
+  const name = (product: Product) => products(...productName(product))
   const learner = catalog.products.filter((product) => product.owner === "user")
   const company = catalog.products.filter(
     (product) => product.owner === "company"
@@ -57,29 +63,30 @@ export default async function PricingPage() {
   return (
     <main className="mx-auto max-w-5xl space-y-12 px-6 py-12">
       <h1 className="font-heading text-4xl font-medium tracking-tight">
-        Pricing
+        {t("title")}
       </h1>
 
       <section className="space-y-6">
         <div className="space-y-2">
-          <h2 className="font-heading text-2xl font-medium">For learners</h2>
+          <h2 className="font-heading text-2xl font-medium">{t("learners")}</h2>
           {plan && (
             <p className="text-base text-muted-foreground">
               {plan.pass_until
-                ? `Your Job Search Pass runs until ${formatDate(plan.pass_until)}.`
-                : `This month you have ${plural(plan.free_generations_left, "free preparation")} left${
-                    plan.generation_credits
-                      ? `, plus ${plural(plan.generation_credits, "extra preparation")}`
-                      : ""
-                  }.`}
+                ? t("passUntil", { date: formatDate(plan.pass_until, locale) })
+                : plan.generation_credits
+                  ? t("freeAndExtraLeft", {
+                      count: plan.free_generations_left,
+                      extra: plan.generation_credits,
+                    })
+                  : t("freeLeft", { count: plan.free_generations_left })}
             </p>
           )}
         </div>
         <div className="grid gap-4 sm:grid-cols-3">
           <PriceCard
-            title="Free"
-            price={formatPrice(0, catalog.currency)}
-            note={`${plural(catalog.free_generations_per_month, "private preparation")} a month, practice with the AI tutor, certificates and the public library.`}
+            title={t("free")}
+            price={formatPrice(0, catalog.currency, locale)}
+            note={t("freeNote", { count: catalog.free_generations_per_month })}
           >
             <Button
               variant="outline"
@@ -87,18 +94,18 @@ export default async function PricingPage() {
               render={<Link href="/" />}
               nativeButton={false}
             >
-              Start
+              {t("start")}
             </Button>
           </PriceCard>
           {learner.map((product) => (
             <PriceCard
               key={product.key}
-              title={product.title}
+              title={name(product)}
               price={price(product)}
               note={
                 product.pass_days
-                  ? `Unlimited preparations for ${product.pass_days} days. Paid once, no renewal.`
-                  : `${plural(product.generation_credits, "more private preparation")}, used when the free one is gone. They don't expire.`
+                  ? t("passNote", { days: product.pass_days })
+                  : t("creditsNote", { count: product.generation_credits })
               }
             >
               <BuyButton catalog={catalog} product={product} />
@@ -109,23 +116,26 @@ export default async function PricingPage() {
 
       <section className="space-y-6">
         <div className="space-y-2">
-          <h2 className="font-heading text-2xl font-medium">For companies</h2>
+          <h2 className="font-heading text-2xl font-medium">
+            {t("companies")}
+          </h2>
           <p className="text-base text-muted-foreground">
-            Your first {plural(catalog.free_candidates, "candidate")} are free.
-            Creating interviews is always free; you pay per candidate you
-            invite, and credits never expire.
+            {t("companiesNote", { count: catalog.free_candidates })}
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-3">
           {company.map((product) => (
             <PriceCard
               key={product.key}
-              title={product.title}
+              title={name(product)}
               price={price(product)}
-              note={`${formatPrice(
-                product.price_cents / product.candidate_credits,
-                catalog.currency
-              )} per candidate`}
+              note={t("perCandidate", {
+                price: formatPrice(
+                  product.price_cents / product.candidate_credits,
+                  catalog.currency,
+                  locale
+                ),
+              })}
             >
               <Button
                 variant="outline"
@@ -133,7 +143,7 @@ export default async function PricingPage() {
                 render={<Link href="/company" />}
                 nativeButton={false}
               >
-                Buy from your company
+                {t("buyFromCompany")}
               </Button>
             </PriceCard>
           ))}

@@ -1,8 +1,7 @@
-import type { Metadata } from "next"
-
+import { translatedTitle } from "@/lib/site"
 import { InviteView } from "@/components/company/invite-view"
 
-export const metadata: Metadata = { title: "Interview invite" }
+export const generateMetadata = () => translatedTitle("invite", "title")
 
 export default async function InvitePage({
   params,

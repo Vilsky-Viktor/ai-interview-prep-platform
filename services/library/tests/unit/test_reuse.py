@@ -13,20 +13,22 @@ def find(client, body):
 def test_proven_questions_are_offered_for_a_similar_topic(client, monkeypatch):
     asked = {}
 
-    async def fake_find(embedding, level, count):
-        asked.update(embedding=embedding, level=level, count=count)
+    async def fake_find(embedding, level, language, count):
+        asked.update(embedding=embedding, level=level, language=language, count=count)
 
         return [("A customer pays cash. Which entry is recorded?", OPTIONS)]
 
     monkeypatch.setattr(reuse, "find", fake_find)
 
-    response = find(client, {"embedding": [0.1, 0.2], "level": "basic", "count": 5})
+    response = find(
+        client, {"embedding": [0.1, 0.2], "level": "basic", "language": "ru", "count": 5}
+    )
 
     assert response.status_code == 200
     assert response.json() == [
         {"text": "A customer pays cash. Which entry is recorded?", "options": OPTIONS}
     ]
-    assert asked == {"embedding": [0.1, 0.2], "level": "basic", "count": 5}
+    assert asked == {"embedding": [0.1, 0.2], "level": "basic", "language": "ru", "count": 5}
 
 
 def test_count_is_bounded(client):

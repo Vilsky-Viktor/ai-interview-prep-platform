@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -15,7 +16,7 @@ export function BuyButton({
   catalog,
   product,
   companyId,
-  label = "Buy",
+  label,
   variant = "default",
 }: {
   catalog: Catalog
@@ -24,6 +25,8 @@ export function BuyButton({
   label?: string
   variant?: "default" | "outline"
 }) {
+  const t = useTranslations("billing")
+  const signInText = useTranslations("signIn")
   const router = useRouter()
   const { user } = useAuth()
   const [opening, setOpening] = useState(false)
@@ -31,14 +34,14 @@ export function BuyButton({
   if (!product.price_id) {
     return (
       <Button variant="outline" className="h-12 px-6 text-base" disabled>
-        Coming soon
+        {t("comingSoon")}
       </Button>
     )
   }
 
   async function buy() {
     if (!user) {
-      await signIn()
+      await signIn(signInText("failed"))
 
       return
     }
@@ -54,13 +57,13 @@ export function BuyButton({
           : { owner_type: "user", owner_id: user.uid, buyer_id: user.uid },
         user.email,
         () => {
-          toast.success("Payment received. It shows up here in a moment.")
+          toast.success(t("paid"))
           // The webhook usually lands within seconds; show the new balance then.
           window.setTimeout(() => router.refresh(), 4000)
         }
       )
     } catch {
-      toast.error("Couldn't open the checkout. Please try again.")
+      toast.error(t("checkoutFailed"))
     } finally {
       setOpening(false)
     }
@@ -73,7 +76,7 @@ export function BuyButton({
       disabled={opening}
       onClick={buy}
     >
-      {label}
+      {label ?? t("buy")}
     </Button>
   )
 }

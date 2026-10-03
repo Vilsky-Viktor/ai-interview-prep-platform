@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 import { useAuth } from "@/components/auth-provider"
 import { SiteNav } from "@/components/site-nav"
@@ -9,6 +10,7 @@ import { UserMenu } from "@/components/user-menu"
 import { Wordmark } from "@/components/wordmark"
 
 export function SiteHeader() {
+  const t = useTranslations("nav")
   const { user, loading } = useAuth()
 
   return (
@@ -20,7 +22,7 @@ export function SiteHeader() {
         <div className="flex items-baseline gap-2 sm:gap-4">
           <Link
             href="/"
-            aria-label="prepza. home"
+            aria-label={t("home")}
             className="flex h-8 items-center"
           >
             <Wordmark className="text-xl leading-none" shortOnPhones />

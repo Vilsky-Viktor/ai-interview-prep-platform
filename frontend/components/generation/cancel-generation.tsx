@@ -2,6 +2,7 @@
 
 import { XIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -27,6 +28,8 @@ export function CancelGeneration({
   // An X button for compact rows; a text button otherwise.
   iconOnly?: boolean
 }) {
+  const t = useTranslations("generation")
+  const common = useTranslations("common")
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [cancelling, setCancelling] = useState(false)
@@ -41,7 +44,7 @@ export function CancelGeneration({
       router.push(leaveTo)
       router.refresh()
     } catch (error) {
-      toast.error(apiErrorMessage(error, "Couldn't cancel the generation. Please try again."))
+      toast.error(apiErrorMessage(error, t("cancelFailed")))
       setCancelling(false)
     }
   }
@@ -54,7 +57,7 @@ export function CancelGeneration({
           type="button"
           variant="ghost"
           size="icon"
-          aria-label="Cancel generation"
+          aria-label={t("cancel")}
           className="size-12 text-muted-foreground hover:text-destructive"
           onClick={() => setOpen(true)}
         >
@@ -67,7 +70,7 @@ export function CancelGeneration({
           className="h-12 px-6 text-base text-muted-foreground hover:text-destructive"
           onClick={() => setOpen(true)}
         >
-          Cancel generation
+          {t("cancel")}
         </Button>
       )}
       <Dialog
@@ -80,10 +83,8 @@ export function CancelGeneration({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="no-dot">Cancel this generation?</DialogTitle>
-            <DialogDescription>
-              It stops now, and nothing generated so far is kept.
-            </DialogDescription>
+            <DialogTitle className="no-dot">{t("cancelTitle")}</DialogTitle>
+            <DialogDescription>{t("cancelText")}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose
@@ -95,7 +96,7 @@ export function CancelGeneration({
                 />
               }
             >
-              Keep
+              {common("keep")}
             </DialogClose>
             <Button
               type="button"
@@ -104,7 +105,7 @@ export function CancelGeneration({
               disabled={cancelling}
               onClick={cancel}
             >
-              {cancelling ? "Cancelling…" : "Cancel"}
+              {cancelling ? t("cancelling") : common("cancel")}
             </Button>
           </DialogFooter>
         </DialogContent>

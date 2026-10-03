@@ -1,6 +1,7 @@
 from sqlalchemy import delete, select
 from sqlalchemy.orm import selectinload
 
+from app.helpers.export import answer_export
 from app.models.certificates import Certificate
 from app.models.chat import ChatMessage
 from app.models.progress import QuestionProgress
@@ -27,7 +28,9 @@ async def export(user_id: str) -> dict:
             select(Round).where(Round.user_id == user_id).options(selectinload(Round.answers))
         )
         chats = await session.execute(
-            select(ChatMessage.role, ChatMessage.content, ChatMessage.created_at)
+            select(
+                ChatMessage.answer_id, ChatMessage.role, ChatMessage.content, ChatMessage.created_at
+            )
             .join(Answer, Answer.id == ChatMessage.answer_id)
             .join(Round, Round.id == Answer.round_id)
             .where(Round.user_id == user_id)
@@ -42,6 +45,14 @@ async def export(user_id: str) -> dict:
             .options(selectinload(Session.answers), selectinload(Session.signals))
         )
 
+        # Each answer's follow-up chat, shown with the answer it's about.
+        chat_by_answer: dict = {}
+
+        for answer_id, role, content, created_at in chats:
+            chat_by_answer.setdefault(answer_id, []).append(
+                {"role": role, "content": content, "at": created_at}
+            )
+
         return {
             "practice_rounds": [
                 {
@@ -51,15 +62,14 @@ async def export(user_id: str) -> dict:
                     "started_at": row.started_at,
                     "finished_at": row.finished_at,
                     "answers": [
-                        {"question_id": a.question_id, "correct": a.correct, "at": a.created_at}
+                        {
+                            **answer_export(row.questions, a),
+                            "tutor_chat": chat_by_answer.get(a.id, []),
+                        }
                         for a in row.answers
                     ],
                 }
                 for row in rounds
-            ],
-            "tutor_chat_messages": [
-                {"role": role, "content": content, "at": created_at}
-                for role, content, created_at in chats
             ],
             "certificates": [
                 {
@@ -77,12 +87,7 @@ async def export(user_id: str) -> dict:
                     "final_score": row.final_score,
                     "started_at": row.started_at,
                     "answers": [
-                        {
-                            "question_id": a.question_id,
-                            "correct": a.correct,
-                            "seconds": a.seconds,
-                            "at": a.created_at,
-                        }
+                        {**answer_export(row.questions, a), "seconds": a.seconds}
                         for a in row.answers
                     ],
                     "page_leaves_and_copies": [

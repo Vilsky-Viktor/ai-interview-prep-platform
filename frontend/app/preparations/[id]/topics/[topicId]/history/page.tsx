@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { RoundHistory } from "@/components/rounds/round-history"
@@ -8,7 +9,11 @@ import { serverFetch } from "@/lib/server-api"
 import type { PreparationDetail } from "@/types/preparation"
 import type { Round } from "@/types/round"
 
-export const metadata: Metadata = { title: "Rounds" }
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("preparations")
+
+  return { title: t("rounds") }
+}
 
 export default async function HistoryPage({
   params,
@@ -16,6 +21,7 @@ export default async function HistoryPage({
   params: Promise<{ id: string; topicId: string }>
 }) {
   const { id, topicId } = await params
+  const t = await getTranslations("preparations")
   const [preparation, rounds] = await Promise.all([
     serverFetch<PreparationDetail>(`/library/preparations/${id}`),
     // The first page renders on the server; the rest load as the user scrolls.
@@ -32,9 +38,7 @@ export default async function HistoryPage({
       <RoundHistory
         topicId={topicId}
         rounds={rounds}
-        back={
-          <BackLink href={`/preparations/${id}`}>Preparation page</BackLink>
-        }
+        back={<BackLink href={`/preparations/${id}`}>{t("page")}</BackLink>}
         title={
           <h1 className="font-heading text-3xl font-medium tracking-tight text-balance">
             {topic.title}

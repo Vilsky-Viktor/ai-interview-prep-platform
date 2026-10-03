@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, Poppins } from "next/font/google"
 import { headers } from "next/headers"
+import { NextIntlClientProvider } from "next-intl"
+import { getLocale, getTranslations } from "next-intl/server"
 
 import "./globals.css"
 import { AuthProvider } from "@/components/auth-provider"
@@ -22,16 +24,17 @@ const poppins = Poppins({
   variable: "--font-poppins",
 })
 
-const description =
-  "Prepare for interviews with AI-generated multiple-choice questions, practice rounds and certificates."
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("site")
 
-export const metadata: Metadata = {
-  // Absolute links for shared pages' previews and canonical addresses.
-  metadataBase: new URL(siteUrl()),
-  title: { default: SITE_NAME, template: `%s · ${SITE_NAME}` },
-  description,
-  openGraph: { siteName: SITE_NAME, type: "website" },
-  twitter: { card: "summary" },
+  return {
+    // Absolute links for shared pages' previews and canonical addresses.
+    metadataBase: new URL(siteUrl()),
+    title: { default: SITE_NAME, template: `%s · ${SITE_NAME}` },
+    description: t("description"),
+    openGraph: { siteName: SITE_NAME, type: "website" },
+    twitter: { card: "summary" },
+  }
 }
 
 export default async function RootLayout({
@@ -41,10 +44,11 @@ export default async function RootLayout({
 }>) {
   // The Content-Security-Policy's nonce from proxy.ts, for the theme's inline script.
   const nonce = (await headers()).get("x-nonce") ?? undefined
+  const locale = await getLocale()
 
   return (
     <html
-      lang="en"
+      lang={locale}
       suppressHydrationWarning
       className={cn(
         "antialiased",
@@ -55,14 +59,16 @@ export default async function RootLayout({
       )}
     >
       <body>
-        <ThemeProvider nonce={nonce}>
-          <AuthProvider>
-            <SiteHeader />
-            {children}
-            <SiteFooter />
-            <Toaster />
-          </AuthProvider>
-        </ThemeProvider>
+        <NextIntlClientProvider>
+          <ThemeProvider nonce={nonce}>
+            <AuthProvider>
+              <SiteHeader />
+              {children}
+              <SiteFooter />
+              <Toaster />
+            </AuthProvider>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

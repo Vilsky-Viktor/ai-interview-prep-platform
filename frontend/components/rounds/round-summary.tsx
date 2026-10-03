@@ -1,6 +1,9 @@
+"use client"
+
 import { cn } from "cn"
 import { MinusIcon } from "lucide-react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 import { RoundChange } from "@/components/rounds/round-change"
 import { RoundReview } from "@/components/rounds/round-review"
@@ -8,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import type { Round } from "@/types/round"
 
 export function RoundSummary({ round }: { round: Round }) {
+  const t = useTranslations("rounds")
   const historyHref = `/preparations/${round.preparation_id}/topics/${round.topic_id}/history`
   const passed = round.passed
   const scoreColor = passed
@@ -28,12 +32,12 @@ export function RoundSummary({ round }: { round: Round }) {
             {round.final_score ?? 0}%
           </p>
           <p className="flex items-center justify-center text-muted-foreground">
-            Final score
+            {t("finalScore")}
             <MinusIcon
               aria-hidden
               className="mx-1.5 size-3.5 text-foreground/55"
             />
-            {round.answered} of {round.total} answered
+            {t("answeredOf", { answered: round.answered, total: round.total })}
           </p>
         </div>
         <RoundChange round={round} />
@@ -44,7 +48,7 @@ export function RoundSummary({ round }: { round: Round }) {
               render={<Link href={`/certificates/${round.certificate_id}`} />}
               nativeButton={false}
             >
-              Certificate
+              {t("certificate")}
             </Button>
           )}
           <Button
@@ -53,7 +57,7 @@ export function RoundSummary({ round }: { round: Round }) {
             render={<Link href={historyHref} />}
             nativeButton={false}
           >
-            History
+            {t("history")}
           </Button>
           <Button
             variant="outline"
@@ -61,7 +65,7 @@ export function RoundSummary({ round }: { round: Round }) {
             render={<Link href={`/preparations/${round.preparation_id}`} />}
             nativeButton={false}
           >
-            Preparation page
+            {t("preparationPage")}
           </Button>
         </div>
       </div>

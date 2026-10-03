@@ -3,6 +3,7 @@
 import type { ReactNode } from "react"
 import { ArrowLeftIcon } from "lucide-react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 import { Button } from "@/components/ui/button"
 
@@ -13,7 +14,8 @@ export function BackLink({
   href: string
   children: ReactNode
 }) {
-  const label = typeof children === "string" ? children : "Back"
+  const t = useTranslations("nav")
+  const label = typeof children === "string" ? children : t("back")
 
   return (
     <Button

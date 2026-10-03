@@ -2,6 +2,7 @@
 
 import * as Sentry from "@sentry/nextjs"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { useEffect } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,9 @@ export default function ErrorPage({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  const t = useTranslations("errors")
+  const common = useTranslations("common")
+
   useEffect(() => {
     Sentry.captureException(error)
   }, [error])
@@ -22,15 +26,13 @@ export default function ErrorPage({
       <div className="w-full space-y-8 text-center">
         <div className="space-y-4">
           <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
-            Something went wrong
+            {t("title")}
           </h1>
-          <p className="text-base text-muted-foreground">
-            Please try again. If it keeps happening, come back later.
-          </p>
+          <p className="text-base text-muted-foreground">{t("text")}</p>
         </div>
         <div className="flex justify-center gap-3">
           <Button className="h-12 px-6 text-base" onClick={reset}>
-            Try again
+            {common("retry")}
           </Button>
           <Button
             variant="outline"
@@ -38,7 +40,7 @@ export default function ErrorPage({
             render={<Link href="/" />}
             nativeButton={false}
           >
-            Home
+            {common("home")}
           </Button>
         </div>
       </div>

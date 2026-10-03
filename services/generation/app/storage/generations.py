@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime
 
 from prepza_common import outbox
+from prepza_common.constants import DEFAULT_LANGUAGE
 from sqlalchemy import String, bindparam, select, text
 from sqlalchemy import update as sql_update
 
@@ -14,7 +15,11 @@ from app.storage.db import Session
 
 
 async def create(
-    owner_uid: str, text: str, kind: str = "preparation", company_id=None
+    owner_uid: str,
+    text: str,
+    kind: str = "preparation",
+    company_id=None,
+    language: str = DEFAULT_LANGUAGE,
 ) -> Generation:
     async with Session() as session:
         generation = Generation(
@@ -22,6 +27,7 @@ async def create(
             kind=kind,
             company_id=company_id,
             text=text,
+            language=language,
             status=Status.QUEUED,
         )
         session.add(generation)

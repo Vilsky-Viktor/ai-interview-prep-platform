@@ -1,6 +1,7 @@
 "use client"
 
 import { SendIcon, Share2Icon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -30,6 +31,7 @@ export function ShareDialog({
   title,
   isPublic,
 }: ShareDialogProps) {
+  const t = useTranslations("share")
   // Bumped after each new share, so the list loads again with it at the top.
   const [version, setVersion] = useState(0)
   const [email, setEmail] = useState("")
@@ -47,14 +49,10 @@ export function ShareDialog({
       })
       setVersion((current) => current + 1)
       setEmail("")
-      toast.success(`Invite sent to ${share.email}`)
+      toast.success(t("sent", { email: share.email }))
     } catch (error) {
       const invalid = error instanceof ApiError && error.status < 500
-      toast.error(
-        invalid
-          ? "Check the email address and try again."
-          : "Couldn't send the invite."
-      )
+      toast.error(invalid ? t("checkEmail") : t("failed"))
     } finally {
       setSending(false)
     }
@@ -64,7 +62,7 @@ export function ShareDialog({
     <Dialog>
       <DialogTrigger render={<Button variant="outline" />}>
         <Share2Icon />
-        Share
+        {t("share")}
       </DialogTrigger>
       <DialogContent className="sm:max-w-lg">
         {isPublic ? (
@@ -72,21 +70,18 @@ export function ShareDialog({
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle>Share preparation</DialogTitle>
-              <DialogDescription>
-                We&apos;ll email an invite link. Only that email address can
-                accept it.
-              </DialogDescription>
+              <DialogTitle>{t("title")}</DialogTitle>
+              <DialogDescription>{t("private")}</DialogDescription>
             </DialogHeader>
             <form onSubmit={send} className="flex">
               <InputAction
                 type="email"
                 required
                 placeholder="name@example.com"
-                aria-label="Email"
+                aria-label={t("email")}
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                action="Send"
+                action={t("send")}
                 icon={<SendIcon className="size-5" />}
                 disabled={sending || !email}
               />

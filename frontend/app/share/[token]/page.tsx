@@ -1,8 +1,7 @@
-import type { Metadata } from "next"
-
+import { translatedTitle } from "@/lib/site"
 import { ShareInvite } from "@/components/preparations/share-invite"
 
-export const metadata: Metadata = { title: "Share invite" }
+export const generateMetadata = () => translatedTitle("share", "inviteTitle")
 
 export default async function SharePage({
   params,

@@ -31,10 +31,19 @@ TIME_UP = "Time is up for this question."
 # Extra seconds an answer may arrive after the deadline, for the trip to the server.
 TIME_GRACE_SECONDS = 2
 
-# Shown to learners before they practice; the pass mark comes from CERTIFICATE_MIN_SCORE.
-CERTIFICATE_RULES = [
-    "Answer every question of the topic.",
-    "Only your latest answer to each question counts.",
-    f"At least {CERTIFICATE_MIN_SCORE}% of your answers must be correct.",
-    "Once all of the above are done, you'll receive your certificate.",
-]
+# Shown to learners before they practice, by language; the pass mark comes from
+# CERTIFICATE_MIN_SCORE.
+CERTIFICATE_RULES = {
+    "en": [
+        "Answer every question of the topic.",
+        "Only your latest answer to each question counts.",
+        f"At least {CERTIFICATE_MIN_SCORE}% of your answers must be correct.",
+        "Once all of the above are done, you'll receive your certificate.",
+    ],
+    "ru": [
+        "Ответьте на все вопросы темы.",
+        "Учитывается только последний ответ на каждый вопрос.",
+        f"Не меньше {CERTIFICATE_MIN_SCORE}% ответов должны быть верными.",
+        "Когда всё это выполнено, вы получите сертификат.",
+    ],
+}

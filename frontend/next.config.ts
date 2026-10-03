@@ -1,5 +1,6 @@
 import { withSentryConfig } from "@sentry/nextjs/config"
 import type { NextConfig } from "next"
+import createNextIntlPlugin from "next-intl/plugin"
 
 const nextConfig: NextConfig = {
   output: "standalone",
@@ -37,7 +38,10 @@ const nextConfig: NextConfig = {
 
 // Errors reach Sentry through /monitoring on our own domain, so ad blockers don't drop them and
 // the Content-Security-Policy needs no new origin. Source maps upload only with SENTRY_AUTH_TOKEN.
-export default withSentryConfig(nextConfig, {
+// next-intl reads the interface language per request in i18n/request.ts.
+const withNextIntl = createNextIntlPlugin()
+
+export default withSentryConfig(withNextIntl(nextConfig), {
   tunnelRoute: "/monitoring",
   silent: true,
   telemetry: false,

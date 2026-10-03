@@ -1,15 +1,17 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 
-const WORDS = ["an interview", "a certification", "an exam", "a test", "a promotion"]
 const TYPE_MS = 70
 const DELETE_MS = 40
 const HOLD_MS = 1600
 
 export function HomeTitle() {
+  const t = useTranslations("home")
+  const words = t.raw("words") as string[]
   const [index, setIndex] = useState(0)
-  const [text, setText] = useState(WORDS[0])
+  const [text, setText] = useState(words[0])
   const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
@@ -19,7 +21,7 @@ export function HomeTitle() {
       return
     }
 
-    const word = WORDS[index]
+    const word = words[index]
     const typed = text === word
     const cleared = deleting && text === ""
     let delay = TYPE_MS
@@ -33,7 +35,7 @@ export function HomeTitle() {
     const timer = window.setTimeout(() => {
       if (cleared) {
         setDeleting(false)
-        setIndex((current) => (current + 1) % WORDS.length)
+        setIndex((current) => (current + 1) % words.length)
 
         return
       }
@@ -54,18 +56,18 @@ export function HomeTitle() {
     }, delay)
 
     return () => window.clearTimeout(timer)
-  }, [text, deleting, index])
+  }, [text, deleting, index, words])
 
   return (
     <h1
-      aria-label={`Preparing for ${WORDS[index]}?`}
+      aria-label={`${t("preparingFor")} ${words[index]}?`}
       className="no-dot text-center font-heading text-3xl font-medium tracking-tight sm:text-5xl sm:whitespace-nowrap"
     >
       <span aria-hidden>
-        Preparing for{" "}
+        {t("preparingFor")}{" "}
         <span className="inline-grid text-left">
           <span className="invisible col-start-1 row-start-1">
-            self-education
+            {t("widest")}
             <span className="mx-2 inline-block w-0.5" />?
           </span>
           <span className="col-start-1 row-start-1">

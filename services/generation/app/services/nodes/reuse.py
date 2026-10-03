@@ -1,6 +1,8 @@
 import logging
 import math
 
+from prepza_common.constants import DEFAULT_LANGUAGE
+
 from app.config.settings import settings
 from app.constants.reuse import MAX_REUSE_SHARE
 from app.integrations import library, llm
@@ -40,7 +42,12 @@ async def find_reused(state: State) -> dict:
         try:
             found = (
                 await library.find_reusable(
-                    ReuseIn(embedding=embedding, level=state["level"], count=count)
+                    ReuseIn(
+                        embedding=embedding,
+                        level=state["level"],
+                        language=state.get("language") or DEFAULT_LANGUAGE,
+                        count=count,
+                    )
                 )
                 if count
                 else []

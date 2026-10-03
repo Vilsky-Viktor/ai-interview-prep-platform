@@ -40,7 +40,7 @@ async def create_interview(
     company, _ = await require_company(user, company_id)
 
     try:
-        created = await generation_api.create(body.text, company.id, user.uid)
+        created = await generation_api.create(body.text, company.id, user.uid, user.language)
     except httpx.HTTPStatusError as error:
         if error.response.status_code == status.HTTP_429_TOO_MANY_REQUESTS:
             raise HTTPException(

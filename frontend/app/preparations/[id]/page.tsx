@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { getLocale, getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { EditableTitle } from "@/components/editable-title"
@@ -19,7 +20,7 @@ import { CertificateButton } from "@/components/rounds/certificate-button"
 import { TopicProgress } from "@/components/rounds/topic-progress"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { formatDate, plural } from "@/lib/format"
+import { formatDate } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
 import { pageMetadata } from "@/lib/site"
 import type { PreparationDetail } from "@/types/preparation"
@@ -36,20 +37,28 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { id } = await params
   const preparation = await getPreparation(id)
+  const t = await getTranslations("preparations")
 
   if (!preparation) {
-    return { title: "Preparation" }
+    return { title: t("metaTitle") }
   }
 
   return pageMetadata(
     preparation.title,
-    `Interview preparation for ${preparation.title}: ${plural(preparation.topic_count, "topic")} of multiple-choice questions, with practice rounds and certificates.`,
+    t("metaDescription", {
+      title: preparation.title,
+      count: preparation.topic_count,
+    }),
     `/preparations/${id}`
   )
 }
 
 export default async function PreparationPage({ params }: PageProps) {
   const { id } = await params
+  const t = await getTranslations("preparations")
+  const levels = await getTranslations("levels")
+  const visibility = await getTranslations("visibility")
+  const locale = await getLocale()
   const [preparation, progressRows] = await Promise.all([
     getPreparation(id),
     serverFetch<Progressed[]>(`/rounds/preparations/${id}/progress`),
@@ -70,7 +79,7 @@ export default async function PreparationPage({ params }: PageProps) {
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
       <PageHeader
-        back={<BackLink href="/preparations">My preparations</BackLink>}
+        back={<BackLink href="/preparations">{t("title")}</BackLink>}
         before={
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
@@ -78,13 +87,13 @@ export default async function PreparationPage({ params }: PageProps) {
                 variant="secondary"
                 className="h-7 px-3 text-sm font-light capitalize"
               >
-                {preparation.level}
+                {levels(preparation.level)}
               </Badge>
               <Badge
                 variant="outline"
                 className="h-7 px-3 text-sm font-light capitalize"
               >
-                {preparation.visibility}
+                {visibility(preparation.visibility)}
               </Badge>
               {done && <DoneBadge />}
               <PreparationStats preparation={preparation} />
@@ -117,8 +126,8 @@ export default async function PreparationPage({ params }: PageProps) {
         }
       >
         <p className="text-sm text-muted-foreground">
-          {plural(preparation.topics.length, "topic")} · Created{" "}
-          {formatDate(preparation.created_at)}
+          {t("topics", { count: preparation.topics.length })} ·{" "}
+          {t("created", { date: formatDate(preparation.created_at, locale) })}
         </p>
         <PreparationActions preparation={preparation} />
       </PageHeader>
@@ -176,7 +185,7 @@ export default async function PreparationPage({ params }: PageProps) {
                         />
                       }
                     >
-                      History
+                      {t("history")}
                     </Button>
                   </span>
                 )}

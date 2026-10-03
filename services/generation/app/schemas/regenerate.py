@@ -1,5 +1,6 @@
 from uuid import UUID
 
+from prepza_common.constants import DEFAULT_LANGUAGE
 from pydantic import BaseModel
 
 
@@ -8,6 +9,7 @@ class QuestionContext(BaseModel):
     kind: str
     owner_id: str
     level: str
+    language: str = DEFAULT_LANGUAGE
     topic: str
     subtopics: list[str]
     existing: list[str]

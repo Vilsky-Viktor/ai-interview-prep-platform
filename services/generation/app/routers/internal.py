@@ -45,7 +45,7 @@ async def create_interview_generation(
     )
     await use_daily_budget()
     generation = await generations.create(
-        body.owner_uid, body.text, GenerationKind.INTERVIEW, body.company_id
+        body.owner_uid, body.text, GenerationKind.INTERVIEW, body.company_id, body.language
     )
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
 

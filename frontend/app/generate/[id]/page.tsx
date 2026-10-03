@@ -1,8 +1,13 @@
 import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 
 import { GenerationView } from "@/components/generation/generation-view"
 
-export const metadata: Metadata = { title: "New preparation" }
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("generation")
+
+  return { title: t("title") }
+}
 
 export default async function GeneratePage({
   params,
@@ -12,6 +17,8 @@ export default async function GeneratePage({
   searchParams: Promise<{ next?: string }>
 }) {
   const { id } = await params
+  const t = await getTranslations("generation")
+  const preparations = await getTranslations("preparations")
   const raw = (await searchParams).next
   const next = raw?.startsWith("/company/") ? raw : undefined
   const companyMatch = next?.match(/^\/company\/([^/]+)\/interviews\/([^/?]+)/)
@@ -31,7 +38,7 @@ export default async function GeneratePage({
             ? `/company/${companyMatch[1]}/interviews`
             : "/preparations"
         }
-        backLabel={companyMatch ? "Interviews" : "My preparations"}
+        backLabel={companyMatch ? t("interviews") : preparations("title")}
       />
     </main>
   )

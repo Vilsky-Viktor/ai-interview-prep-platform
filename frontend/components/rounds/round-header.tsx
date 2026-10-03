@@ -1,19 +1,23 @@
+"use client"
+
 import { cn } from "cn"
 import { MinusIcon } from "lucide-react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 import { BackLink } from "@/components/back-link"
 import { Progress } from "@/components/ui/progress"
 import type { Round } from "@/types/round"
 
 export function RoundHeader({ round }: { round: Round }) {
+  const t = useTranslations("rounds")
   const score = round.current_score ?? 0
 
   return (
     <div className="space-y-3">
       <div className="relative">
         <BackLink href={`/preparations/${round.preparation_id}`}>
-          Preparation page
+          {t("preparationPage")}
         </BackLink>
         <div className="flex min-w-0 items-center justify-between gap-4">
           <Link

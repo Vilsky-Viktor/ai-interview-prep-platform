@@ -2,6 +2,7 @@
 
 import { PlusIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -21,6 +22,8 @@ import { apiFetch } from "@/lib/api"
 import type { Company } from "@/types/company"
 
 export function CreateCompany() {
+  const t = useTranslations("company")
+  const common = useTranslations("common")
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [name, setName] = useState("")
@@ -54,7 +57,7 @@ export function CreateCompany() {
       })
       router.replace(`/company/${company.id}/interviews`)
     } catch {
-      toast.error("Couldn't create the company. Please try again.")
+      toast.error(t("createFailed"))
       setSaving(false)
     }
   }
@@ -66,7 +69,7 @@ export function CreateCompany() {
           <Button
             size="icon"
             className="size-14 rounded-full"
-            aria-label="New company"
+            aria-label={t("new")}
           />
         }
       >
@@ -74,18 +77,16 @@ export function CreateCompany() {
       </DialogTrigger>
       <DialogContent showCloseButton={false} className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>New company</DialogTitle>
-          <DialogDescription>
-            Create a company to generate interviews and invite candidates.
-          </DialogDescription>
+          <DialogTitle>{t("new")}</DialogTitle>
+          <DialogDescription>{t("newText")}</DialogDescription>
         </DialogHeader>
         <form id="create-company-form" onSubmit={create}>
           <div className="rounded-lg border border-transparent transition-colors focus-within:border-ring">
             <Input
               required
               maxLength={200}
-              placeholder="Company name"
-              aria-label="Company name"
+              placeholder={t("name")}
+              aria-label={t("name")}
               value={name}
               onChange={(event) => setName(event.target.value)}
               className="h-16 border-0 px-6 text-lg focus-visible:ring-0 md:text-lg"
@@ -102,7 +103,7 @@ export function CreateCompany() {
               />
             }
           >
-            Cancel
+            {common("cancel")}
           </DialogClose>
           <Button
             type="submit"
@@ -110,7 +111,7 @@ export function CreateCompany() {
             className="h-10 px-5 text-base"
             disabled={saving || !name.trim()}
           >
-            Create
+            {t("create")}
           </Button>
         </DialogFooter>
       </DialogContent>

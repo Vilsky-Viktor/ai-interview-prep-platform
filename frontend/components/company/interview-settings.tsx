@@ -2,6 +2,7 @@
 
 import { SettingsIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -29,6 +30,7 @@ export function InterviewSettings({
   interviewId: string
   initial: Settings
 }) {
+  const t = useTranslations("interviews")
   const router = useRouter()
   const [settings, setSettings] = useState(initial)
   const [seconds, setSeconds] = useState(String(initial.question_seconds))
@@ -55,9 +57,7 @@ export function InterviewSettings({
     } catch (error) {
       setSettings(previous)
       setSeconds(String(previous.question_seconds))
-      toast.error(
-        apiErrorMessage(error, "Couldn't save the interview settings.")
-      )
+      toast.error(apiErrorMessage(error, t("settingsFailed")))
     } finally {
       setSaving(false)
     }
@@ -76,7 +76,7 @@ export function InterviewSettings({
             variant="ghost"
             size="icon"
             className="size-12 shrink-0 text-muted-foreground"
-            aria-label="Settings"
+            aria-label={t("settings")}
           />
         }
       >
@@ -85,36 +85,34 @@ export function InterviewSettings({
       <DialogContent
         showCloseButton={false}
         className="sm:max-w-lg"
-        aria-label="Settings"
+        aria-label={t("settings")}
       >
         <div className="flex items-center justify-between gap-4">
-          <span className="text-lg font-medium">
-            Show scores to the candidate
-          </span>
+          <span className="text-lg font-medium">{t("showScores")}</span>
           <Switch
             checked={settings.share_results}
             disabled={saving}
-            aria-label="Show scores to the candidate"
+            aria-label={t("showScores")}
             onCheckedChange={(checked) => save({ share_results: checked })}
           />
         </div>
         <div className="flex items-center justify-between gap-4">
           <span className="space-y-1">
-            <span className="block text-lg font-medium">Timed interview</span>
+            <span className="block text-lg font-medium">{t("timed")}</span>
             <span className="block text-sm text-muted-foreground">
-              A question left unanswered when its time runs out is wrong.
+              {t("timedText")}
             </span>
           </span>
           <Switch
             checked={settings.timed}
             disabled={saving}
-            aria-label="Timed interview"
+            aria-label={t("timed")}
             onCheckedChange={(checked) => save({ timed: checked })}
           />
         </div>
         {settings.timed && (
           <label className="flex items-center justify-between gap-4">
-            <span className="text-lg font-medium">Time per question</span>
+            <span className="text-lg font-medium">{t("timePerQuestion")}</span>
             {/* Same look as the app's other fields (library search, candidate invite). */}
             <span className="relative w-36 rounded-lg border border-transparent transition-colors focus-within:border-ring">
               <Input
@@ -122,7 +120,7 @@ export function InterviewSettings({
                 inputMode="numeric"
                 value={seconds}
                 disabled={saving}
-                aria-label="Time per question in seconds"
+                aria-label={t("secondsLabel")}
                 className="h-14 [appearance:textfield] border-0 pr-14 pl-5 text-lg focus-visible:ring-0 md:text-lg [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                 onChange={(event) => setSeconds(event.target.value)}
                 onBlur={saveSeconds}
@@ -133,7 +131,7 @@ export function InterviewSettings({
                 }}
               />
               <span className="pointer-events-none absolute top-1/2 right-5 -translate-y-1/2 text-lg text-muted-foreground">
-                s
+                {t("secondsUnit")}
               </span>
             </span>
           </label>

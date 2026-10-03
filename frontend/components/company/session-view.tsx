@@ -1,11 +1,14 @@
 "use client"
 
+import { useTranslations } from "next-intl"
+
 import { useAuth } from "@/components/auth-provider"
 import { SessionPlay } from "@/components/company/session-play"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { useSessionPlayer } from "@/hooks/use-session-player"
 
 export function SessionView({ id }: { id: string }) {
+  const t = useTranslations("session")
   const { user, loading } = useAuth()
   const {
     session,
@@ -22,13 +25,13 @@ export function SessionView({ id }: { id: string }) {
   } = useSessionPlayer(id)
 
   if (!loading && !user) {
-    return <SignInPrompt message="Sign in to continue this interview." />
+    return <SignInPrompt message={t("signIn")} />
   }
 
   if (missing || !session) {
     return missing ? (
       <p className="py-24 text-center text-base text-muted-foreground">
-        This session doesn&apos;t exist.
+        {t("missing")}
       </p>
     ) : null
   }
@@ -66,9 +69,7 @@ export function SessionView({ id }: { id: string }) {
         <h1 className="font-heading text-3xl font-medium tracking-tight text-balance">
           {session.interview_title ?? session.topic_title}
         </h1>
-        <p className="text-muted-foreground">
-          You have finished the interview. Good luck!
-        </p>
+        <p className="text-muted-foreground">{t("done")}</p>
       </div>
     )
   }

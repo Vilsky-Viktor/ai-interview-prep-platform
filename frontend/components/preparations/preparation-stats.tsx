@@ -1,5 +1,8 @@
+"use client"
+
 import { cn } from "cn"
 import { StarIcon, UsersIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 import type { PreparationSummary } from "@/types/preparation"
 
@@ -8,11 +11,13 @@ export function PreparationStats({
 }: {
   preparation: PreparationSummary
 }) {
+  const t = useTranslations("preparations")
+
   return (
     <span className="flex items-center gap-4 text-sm text-muted-foreground tabular-nums">
       <span
         className="flex items-center gap-1.5 text-yellow-600"
-        title="Average rating and number of ratings"
+        title={t("ratingTitle")}
       >
         <StarIcon
           className={cn(

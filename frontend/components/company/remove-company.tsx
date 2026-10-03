@@ -2,6 +2,7 @@
 
 import { Trash2Icon } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -24,6 +25,8 @@ export function RemoveCompany({
   companyId: string
   name: string
 }) {
+  const t = useTranslations("company")
+  const common = useTranslations("common")
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [removing, setRemoving] = useState(false)
@@ -36,7 +39,7 @@ export function RemoveCompany({
       setOpen(false)
       router.refresh()
     } catch {
-      toast.error("Couldn't remove the company.")
+      toast.error(t("removeFailed"))
     } finally {
       setRemoving(false)
     }
@@ -48,7 +51,7 @@ export function RemoveCompany({
         variant="ghost"
         size="icon"
         className="size-12 text-muted-foreground hover:text-destructive"
-        aria-label={`Remove ${name}`}
+        aria-label={t("removeLabel", { name })}
         onClick={() => setOpen(true)}
       >
         <Trash2Icon className="size-6" />
@@ -63,10 +66,10 @@ export function RemoveCompany({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="no-dot">Remove {name}?</DialogTitle>
-            <DialogDescription>
-              Its interviews and invites will be deleted.
-            </DialogDescription>
+            <DialogTitle className="no-dot">
+              {t("removeTitle", { name })}
+            </DialogTitle>
+            <DialogDescription>{t("removeText")}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose
@@ -78,7 +81,7 @@ export function RemoveCompany({
                 />
               }
             >
-              Cancel
+              {common("cancel")}
             </DialogClose>
             <Button
               variant="destructive"
@@ -86,7 +89,7 @@ export function RemoveCompany({
               disabled={removing}
               onClick={remove}
             >
-              Remove
+              {t("remove")}
             </Button>
           </DialogFooter>
         </DialogContent>

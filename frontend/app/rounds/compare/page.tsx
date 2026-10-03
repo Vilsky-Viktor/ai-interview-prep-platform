@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { getLocale, getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { PageHeader } from "@/components/page-header"
@@ -8,7 +9,11 @@ import { formatDate } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
 import type { ReviewItem, Round } from "@/types/round"
 
-export const metadata: Metadata = { title: "Compare rounds" }
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("rounds")
+
+  return { title: t("compareTitle") }
+}
 
 async function loadRound(id: string | undefined) {
   if (!id) {
@@ -29,6 +34,8 @@ export default async function ComparePage({
   searchParams: Promise<{ a?: string; b?: string }>
 }) {
   const { a, b } = await searchParams
+  const t = await getTranslations("rounds")
+  const locale = await getLocale()
   const [first, second] = await Promise.all([loadRound(a), loadRound(b)])
 
   if (!first || !second || first.round.topic_id !== second.round.topic_id) {
@@ -42,12 +49,12 @@ export default async function ComparePage({
           <BackLink
             href={`/preparations/${first.round.preparation_id}/topics/${first.round.topic_id}/history`}
           >
-            Rounds
+            {t("rounds")}
           </BackLink>
         }
         title={
           <h1 className="font-heading text-3xl font-medium tracking-tight">
-            Compare rounds
+            {t("compareTitle")}
           </h1>
         }
       />
@@ -59,7 +66,7 @@ export default async function ComparePage({
               {round.final_score ?? 0}%
             </p>
             <p className="text-sm text-muted-foreground">
-              {formatDate(round.started_at)}
+              {formatDate(round.started_at, locale)}
             </p>
           </div>
         ))}

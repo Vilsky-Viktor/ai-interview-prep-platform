@@ -3,6 +3,7 @@
 import { cn } from "cn"
 import { UserRoundIcon } from "lucide-react"
 import Link from "next/link"
+import { useLocale, useTranslations } from "next-intl"
 import type { ReactNode } from "react"
 
 import { DoneBadge } from "@/components/preparations/done-badge"
@@ -10,7 +11,7 @@ import { PreparationStats } from "@/components/preparations/preparation-stats"
 import { Badge } from "@/components/ui/badge"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
-import { formatDate, plural } from "@/lib/format"
+import { formatDate } from "@/lib/format"
 import type { PreparationSummary } from "@/types/preparation"
 
 // My preparations carry whether the user owns each one and has mastered every topic.
@@ -33,6 +34,9 @@ export function PreparationList({
   className,
   empty,
 }: PreparationListProps) {
+  const t = useTranslations("preparations")
+  const levels = useTranslations("levels")
+  const locale = useLocale()
   const { items, loadMore } = usePagedList(path, initial)
 
   if (items.length === 0) {
@@ -61,7 +65,7 @@ export function PreparationList({
                 {preparation.owned && (
                   <span
                     role="img"
-                    aria-label="Owner"
+                    aria-label={t("owner")}
                     className="text-muted-foreground"
                   >
                     <UserRoundIcon className="size-5" />
@@ -70,12 +74,12 @@ export function PreparationList({
                 {preparation.done && <DoneBadge />}
               </span>
               <span className="block text-sm text-muted-foreground">
-                {plural(preparation.topic_count, "topic")} ·{" "}
+                {t("topics", { count: preparation.topic_count })} ·{" "}
                 <time
                   dateTime={preparation.created_at}
                   suppressHydrationWarning
                 >
-                  {formatDate(preparation.created_at)}
+                  {formatDate(preparation.created_at, locale)}
                 </time>
               </span>
             </span>
@@ -85,7 +89,7 @@ export function PreparationList({
                 variant="secondary"
                 className="h-7 px-3 text-sm font-light capitalize"
               >
-                {preparation.level}
+                {levels(preparation.level)}
               </Badge>
             </span>
           </Link>

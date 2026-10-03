@@ -35,3 +35,9 @@ GOOGLE_SCOPE = "https://www.googleapis.com/auth/cloud-platform"
 # Outbox: events published per flush, and how long published ones are kept.
 OUTBOX_BATCH = 100
 OUTBOX_KEEP_DAYS = 7
+
+# Languages the interface and generated content come in, by code, with the name prompts use.
+LANGUAGES = {"en": "English", "ru": "Russian"}
+DEFAULT_LANGUAGE = "en"
+# The Firebase custom claim that carries the user's language in every ID token.
+LANGUAGE_CLAIM = "language"

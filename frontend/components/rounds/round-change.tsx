@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 
 import { TopicProgress } from "@/components/rounds/topic-progress"
@@ -8,6 +9,7 @@ import type { Round, TopicProgress as Progressed } from "@/types/round"
 
 /** How a finished round compares with the previous one, and where the topic now stands. */
 export function RoundChange({ round }: { round: Round }) {
+  const t = useTranslations("rounds")
   const [previous, setPrevious] = useState<Round | null | undefined>(undefined)
   const [progress, setProgress] = useState<Progressed | undefined>(undefined)
 
@@ -42,17 +44,19 @@ export function RoundChange({ round }: { round: Round }) {
       {previous !== undefined && (
         <p className="text-2xl font-medium">
           {change === null
-            ? "Your first round on this topic"
+            ? t("firstRound")
             : change === 0
-              ? "Same as your last round"
-              : `${change > 0 ? "+" : "−"}${Math.abs(change)} points since your last round`}
+              ? t("sameAsLast")
+              : t("change", {
+                  change: `${change > 0 ? "+" : "−"}${Math.abs(change)}`,
+                })}
         </p>
       )}
       {progress !== undefined && (
         <div className="space-y-2">
           <TopicProgress progress={progress} total={round.total} />
           <p className="text-sm text-muted-foreground tabular-nums">
-            Topic: {answered} of {round.total} questions answered
+            {t("topicAnswered", { answered, total: round.total })}
           </p>
         </div>
       )}

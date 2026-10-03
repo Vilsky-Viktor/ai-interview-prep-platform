@@ -1,6 +1,7 @@
 "use client"
 
 import { MinusIcon, PencilIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import type { ReactNode } from "react"
 import { useState } from "react"
 
@@ -32,6 +33,7 @@ export function TopicReview({
   cancel,
   onSubmit,
 }: TopicReviewProps) {
+  const t = useTranslations("generation")
   const [selected, setSelected] = useState(() =>
     topics.map((_, index) => index)
   )
@@ -68,13 +70,10 @@ export function TopicReview({
         <div className="relative">
           {back}
           <h1 className="font-heading text-3xl font-medium tracking-tight">
-            Review your topics
+            {t("reviewTitle")}
           </h1>
         </div>
-        <p className="text-muted-foreground">
-          Uncheck topics you don&apos;t need, edit them, or describe changes.
-          Each topic gets its own set of questions with answers.
-        </p>
+        <p className="text-muted-foreground">{t("reviewText")}</p>
       </div>
 
       <ul className="divide-y rounded-2xl border">
@@ -123,7 +122,7 @@ export function TopicReview({
                 variant="ghost"
                 size="icon"
                 className="absolute top-1/2 right-4 -translate-y-1/2"
-                aria-label={`Edit ${topic.main_topic}`}
+                aria-label={t("editTopic", { topic: topic.main_topic })}
                 onClick={() => setEditing(index)}
               >
                 <PencilIcon />
@@ -138,8 +137,8 @@ export function TopicReview({
         <Textarea
           value={instructions}
           onChange={(event) => setInstructions(event.target.value)}
-          placeholder="Optional: describe changes, e.g. “Add a topic on team leadership”"
-          aria-label="Changes to the topics"
+          placeholder={t("changesPlaceholder")}
+          aria-label={t("changes")}
           className="max-h-72 min-h-24 resize-none border-0 bg-transparent p-2 text-base shadow-none focus-visible:ring-0 md:text-base dark:bg-transparent"
         />
       </div>
@@ -149,7 +148,7 @@ export function TopicReview({
         <div className="flex items-center gap-4">
           {tooMany && (
             <p className="text-sm text-destructive">
-              Choose at most {maxTopics} topics, or describe how to merge them.
+              {t("tooMany", { max: maxTopics })}
             </p>
           )}
           <Button
@@ -157,7 +156,7 @@ export function TopicReview({
             className="h-12 px-6 text-base"
             disabled={selected.length === 0 || tooMany || unnamed || submitting}
           >
-            {revising ? "Apply changes" : "Approve and generate"}
+            {revising ? t("apply") : t("approve")}
           </Button>
         </div>
       </RoundFooter>

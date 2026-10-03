@@ -41,7 +41,7 @@ def test_chat_messages_include_context_and_history():
         ChatMessage(role="assistant", content="Because."),
     ]
 
-    messages = build_messages(round_, round_.answers[0], history, "And then?")
+    messages = build_messages(round_, round_.answers[0], history, "And then?", "en")
 
     assert isinstance(messages[0], SystemMessage)
     assert "Correct answer:\nRight" in messages[0].content
@@ -57,11 +57,12 @@ def test_a_long_chat_sends_only_its_latest_messages():
         for i in range(CHAT_HISTORY_MESSAGES + 6)
     ]
 
-    messages = build_messages(round_, round_.answers[0], history, "Last question")
+    messages = build_messages(round_, round_.answers[0], history, "Last question", "ru")
 
     sent = [m.content for m in messages[1:-1]]
 
     assert isinstance(messages[0], SystemMessage)
+    assert "Reply in Russian" in messages[0].content
     assert sent == [m.content for m in history[-CHAT_HISTORY_MESSAGES:]]
     assert messages[-1].content == "Last question"
 

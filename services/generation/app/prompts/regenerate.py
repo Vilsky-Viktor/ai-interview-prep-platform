@@ -21,6 +21,9 @@ Rules:
 - Write formulas and short expressions inline in plain text with proper symbols
   (for example a² + b² = c², ≤, √, π), not in a block.
 
+Write every word of the question in {language}. Keep formulas, commands and the names of tools and
+products as they are.
+
 Level: {level}
 
 Main topic: {topic}

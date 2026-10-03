@@ -52,7 +52,9 @@ async def create_generation(
     await use_daily_budget()
     await billing.use_generation(user.uid)
 
-    generation = await generations.create(user.uid, body.text, body.kind, body.company_id)
+    generation = await generations.create(
+        user.uid, body.text, body.kind, body.company_id, user.language
+    )
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
 
     return GenerationOut.model_validate(generation)

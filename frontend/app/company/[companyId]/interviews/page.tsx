@@ -1,7 +1,7 @@
 import { PlusIcon } from "lucide-react"
-import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import Link from "next/link"
+import { getTranslations } from "next-intl/server"
 import { redirect } from "next/navigation"
 
 import { CompanyCredits as CreditsPanel } from "@/components/company/company-credits"
@@ -12,10 +12,11 @@ import { Button } from "@/components/ui/button"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
+import { translatedTitle } from "@/lib/site"
 import type { Catalog, CompanyCredits } from "@/types/billing"
 import type { Company, Interview } from "@/types/company"
 
-export const metadata: Metadata = { title: "Interviews" }
+export const generateMetadata = () => translatedTitle("interviews", "title")
 
 export default async function InterviewsPage({
   params,
@@ -23,6 +24,8 @@ export default async function InterviewsPage({
   params: Promise<{ companyId: string }>
 }) {
   const { companyId } = await params
+  const t = await getTranslations("interviews")
+  const companyText = await getTranslations("company")
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
@@ -42,7 +45,7 @@ export default async function InterviewsPage({
   if (!signedIn) {
     return (
       <main className="mx-auto max-w-5xl px-6 py-12">
-        <SignInPrompt message="Sign in to see company interviews." />
+        <SignInPrompt message={companyText("signInInterviews")} />
       </main>
     )
   }
@@ -63,7 +66,7 @@ export default async function InterviewsPage({
             nativeButton={false}
             size="icon"
             className="size-14 rounded-full"
-            aria-label="New interview"
+            aria-label={t("new")}
           >
             <PlusIcon className="size-6" />
           </Button>

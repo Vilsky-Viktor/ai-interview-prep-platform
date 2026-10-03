@@ -2,6 +2,7 @@
 
 import { PlusIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -10,6 +11,7 @@ import { apiFetch } from "@/lib/api"
 import type { CompanyMember } from "@/types/company"
 
 export function InviteAdmin({ companyId }: { companyId: string }) {
+  const t = useTranslations("interviews")
   const router = useRouter()
   const [email, setEmail] = useState("")
   const [sending, setSending] = useState(false)
@@ -29,7 +31,7 @@ export function InviteAdmin({ companyId }: { companyId: string }) {
       setEmail("")
       router.refresh()
     } catch {
-      toast.error("Couldn't invite that admin. Please try again.")
+      toast.error(t("adminFailed"))
     } finally {
       setSending(false)
     }
@@ -41,10 +43,10 @@ export function InviteAdmin({ companyId }: { companyId: string }) {
         type="email"
         required
         placeholder="admin@example.com"
-        aria-label="Admin email"
+        aria-label={t("adminEmail")}
         value={email}
         onChange={(event) => setEmail(event.target.value)}
-        action="Add admin"
+        action={t("addAdmin")}
         icon={<PlusIcon className="size-5" />}
         disabled={sending || !email}
       />

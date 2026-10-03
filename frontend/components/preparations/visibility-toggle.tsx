@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -13,6 +14,7 @@ export function VisibilityToggle({
 }: {
   preparation: PreparationSummary
 }) {
+  const t = useTranslations("preparations")
   const router = useRouter()
   const [saving, setSaving] = useState(false)
 
@@ -24,12 +26,10 @@ export function VisibilityToggle({
         method: "PATCH",
         body: JSON.stringify({ visibility: isPublic ? "public" : "private" }),
       })
-      toast.success(
-        isPublic ? "Now listed in the public library" : "Now private"
-      )
+      toast.success(isPublic ? t("nowPublic") : t("nowPrivate"))
       router.refresh()
     } catch {
-      toast.error("Couldn't change the visibility. Please try again.")
+      toast.error(t("visibilityFailed"))
     } finally {
       setSaving(false)
     }
@@ -42,7 +42,7 @@ export function VisibilityToggle({
         disabled={saving}
         onCheckedChange={change}
       />
-      Public
+      {t("public")}
     </label>
   )
 }

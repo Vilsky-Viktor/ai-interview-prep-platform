@@ -2,6 +2,7 @@
 
 import { Trash2Icon } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -27,6 +28,8 @@ export function DeleteInterview({
   // Where to go once deleted, from the interview's own page; a list just refreshes.
   leaveTo?: string
 }) {
+  const t = useTranslations("interviews")
+  const common = useTranslations("common")
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -46,12 +49,7 @@ export function DeleteInterview({
 
       router.refresh()
     } catch (error) {
-      toast.error(
-        apiErrorMessage(
-          error,
-          "Couldn't delete the interview. Please try again."
-        )
-      )
+      toast.error(apiErrorMessage(error, t("deleteFailed")))
     } finally {
       setDeleting(false)
     }
@@ -63,7 +61,7 @@ export function DeleteInterview({
         variant="ghost"
         size="icon"
         className="size-12 shrink-0 text-muted-foreground hover:text-destructive"
-        aria-label={`Delete ${title}`}
+        aria-label={t("deleteLabel", { title })}
         onClick={() => setOpen(true)}
       >
         <Trash2Icon className="size-6" />
@@ -78,11 +76,8 @@ export function DeleteInterview({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="no-dot">Delete this interview?</DialogTitle>
-            <DialogDescription>
-              Candidates lose access, and their results are deleted. This
-              can&apos;t be undone.
-            </DialogDescription>
+            <DialogTitle className="no-dot">{t("deleteTitle")}</DialogTitle>
+            <DialogDescription>{t("deleteText")}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose
@@ -94,7 +89,7 @@ export function DeleteInterview({
                 />
               }
             >
-              Keep
+              {common("keep")}
             </DialogClose>
             <Button
               variant="destructive"
@@ -102,7 +97,7 @@ export function DeleteInterview({
               disabled={deleting}
               onClick={remove}
             >
-              {deleting ? "Deleting…" : "Delete"}
+              {deleting ? common("deleting") : common("delete")}
             </Button>
           </DialogFooter>
         </DialogContent>

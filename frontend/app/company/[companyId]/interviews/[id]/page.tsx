@@ -1,6 +1,6 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { CandidateList } from "@/components/company/candidate-list"
@@ -15,9 +15,10 @@ import { TopicQuestionLimit } from "@/components/questions/topic-question-limit"
 import { Button } from "@/components/ui/button"
 import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
+import { translatedTitle } from "@/lib/site"
 import type { Candidate, InterviewDetail } from "@/types/company"
 
-export const metadata: Metadata = { title: "Interview" }
+export const generateMetadata = () => translatedTitle("interviews", "interview")
 
 export default async function InterviewPage({
   params,
@@ -28,6 +29,7 @@ export default async function InterviewPage({
 }) {
   const { companyId, id } = await params
   const { tab } = await searchParams
+  const t = await getTranslations("interviews")
   const [interview, candidates] = await Promise.all([
     serverFetch<InterviewDetail>(`/companies/interviews/${id}`),
     // The first page renders on the server; the rest load as the user scrolls.
@@ -49,7 +51,7 @@ export default async function InterviewPage({
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
       <div className="space-y-4">
         <PageHeader
-          back={<BackLink href={interviewsHref}>Interviews</BackLink>}
+          back={<BackLink href={interviewsHref}>{t("title")}</BackLink>}
           title={
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0 flex-1">
@@ -60,14 +62,14 @@ export default async function InterviewPage({
                   />
                 ) : (
                   <h1 className="font-heading text-3xl font-medium tracking-tight text-balance">
-                    Generating…
+                    {t("generating")}
                   </h1>
                 )}
               </div>
               {ready && (
                 <DeleteInterview
                   interviewId={interview.id}
-                  title={interview.title ?? "interview"}
+                  title={interview.title ?? t("fallbackTitle")}
                   leaveTo={interviewsHref}
                 />
               )}
@@ -93,7 +95,7 @@ export default async function InterviewPage({
               }
               nativeButton={false}
             >
-              Continue generation
+              {t("continueGeneration")}
             </Button>
           )}
         </PageHeader>
@@ -131,7 +133,7 @@ export default async function InterviewPage({
                   reportsPath={`/companies/interviews/${id}/questions`}
                   limit={topic.question_limit}
                   limitPath={`/companies/interviews/${id}/topics/${topic.id}/limit`}
-                  caption="per session"
+                  caption={t("perSession")}
                 />
               </li>
             ))}

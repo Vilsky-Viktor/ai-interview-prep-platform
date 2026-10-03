@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
@@ -16,6 +17,8 @@ import type { AnswerInput, NextQuestion } from "@/types/round"
 /** A candidate's interview: its sections, the current question, answering, moving on through
 sections and finishing. */
 export function useSessionPlayer(id: string) {
+  const t = useTranslations("session")
+  const rounds = useTranslations("rounds")
   const { user } = useAuth()
   const [session, setSession] = useState<InterviewSession | null>(null)
   const [question, setQuestion] = useState<NextQuestion | null>(null)
@@ -119,7 +122,7 @@ export function useSessionPlayer(id: string) {
 
       await openSection(upcoming.id)
     } catch {
-      toast.error("Couldn't start the interview. Please try again.")
+      toast.error(t("startFailed"))
     }
   }
 
@@ -159,9 +162,7 @@ export function useSessionPlayer(id: string) {
 
       return true
     } catch (error) {
-      toast.error(
-        apiErrorMessage(error, "Couldn't submit your answer. Please try again.")
-      )
+      toast.error(apiErrorMessage(error, rounds("submitFailed")))
 
       // Refused because the question's time ran out: the next one opens.
       if (error instanceof ApiError && error.status === 409) {
@@ -205,7 +206,7 @@ export function useSessionPlayer(id: string) {
       setTopicsLoaded(true)
       setPlaying(false)
     } catch {
-      toast.error("Couldn't finish the interview. Please try again.")
+      toast.error(t("finishFailed"))
       setFinishing(false)
     }
   }
@@ -218,7 +219,7 @@ export function useSessionPlayer(id: string) {
     try {
       await openSection(session.id)
     } catch {
-      toast.error("Couldn't continue. Please try again.")
+      toast.error(t("continueFailed"))
     }
   }
 

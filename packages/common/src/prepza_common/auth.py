@@ -4,7 +4,7 @@ import sentry_sdk
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from firebase_admin import auth as firebase_auth
-from prepza_common.constants import SIGN_IN_UNAVAILABLE
+from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGE_CLAIM, LANGUAGES, SIGN_IN_UNAVAILABLE
 from prepza_common.user import User
 
 bearer = HTTPBearer()
@@ -24,11 +24,14 @@ def verify(token: str) -> User | None:
     except firebase_auth.CertificateFetchError:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, SIGN_IN_UNAVAILABLE)
 
+    language = claims.get(LANGUAGE_CLAIM)
+
     return User(
         uid=claims["uid"],
         email=claims.get("email", ""),
         email_verified=claims.get("email_verified", False),
         name=claims.get("name"),
+        language=language if language in LANGUAGES else DEFAULT_LANGUAGE,
     )
 
 

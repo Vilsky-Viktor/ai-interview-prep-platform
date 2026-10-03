@@ -1,3 +1,6 @@
+"use client"
+
+import { useTranslations } from "next-intl"
 import type { ReactNode } from "react"
 
 import { BackLink } from "@/components/back-link"
@@ -14,10 +17,12 @@ export function CompanyHeader({
   current: "interviews" | "members"
   action?: ReactNode
 }) {
+  const t = useTranslations("company")
+
   return (
     <div className="space-y-4">
       <div className="relative flex min-h-14 items-center">
-        <BackLink href="/company">Companies</BackLink>
+        <BackLink href="/company">{t("title")}</BackLink>
         <h1 className="min-w-0 flex-1 font-heading text-3xl font-medium tracking-tight">
           {name}
         </h1>

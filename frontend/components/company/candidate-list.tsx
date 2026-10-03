@@ -2,6 +2,7 @@
 
 import { cn } from "cn"
 import Link from "next/link"
+import { useLocale, useTranslations } from "next-intl"
 
 import { Badge } from "@/components/ui/badge"
 import { VirtualList } from "@/components/virtual-list"
@@ -20,6 +21,9 @@ export function CandidateList({
   interviewHref: string
   initial: Candidate[]
 }) {
+  const t = useTranslations("candidates")
+  const statuses = useTranslations("candidateStatus")
+  const locale = useLocale()
   const { items, loadMore } = usePagedList(
     `/companies/interviews/${interviewId}/candidates`,
     initial
@@ -27,9 +31,7 @@ export function CandidateList({
 
   if (items.length === 0) {
     return (
-      <p className="py-16 text-center text-muted-foreground">
-        No candidates invited yet.
-      </p>
+      <p className="py-16 text-center text-muted-foreground">{t("empty")}</p>
     )
   }
 
@@ -47,13 +49,11 @@ export function CandidateList({
         >
           <span className="min-w-0 space-y-1">
             <span className="block text-lg font-medium break-all">
-              {candidate.status === "deleted"
-                ? "Deleted candidate"
-                : candidate.email}
+              {candidate.status === "deleted" ? t("deleted") : candidate.email}
             </span>
             <span className="block text-sm text-muted-foreground">
               <time dateTime={candidate.created_at} suppressHydrationWarning>
-                {formatDate(candidate.created_at)}
+                {formatDate(candidate.created_at, locale)}
               </time>
             </span>
           </span>
@@ -63,7 +63,7 @@ export function CandidateList({
                 {candidate.progress}%
               </span>
               <span className="block text-sm text-muted-foreground">
-                Progress
+                {t("progress")}
               </span>
             </span>
             <span className="w-20 text-center sm:w-24">
@@ -75,7 +75,9 @@ export function CandidateList({
               >
                 {candidate.grade == null ? "—" : `${candidate.grade}%`}
               </span>
-              <span className="block text-sm text-muted-foreground">Grade</span>
+              <span className="block text-sm text-muted-foreground">
+                {t("grade")}
+              </span>
             </span>
             <span className="flex justify-end sm:w-32">
               <Badge
@@ -84,7 +86,7 @@ export function CandidateList({
                 }
                 className="h-7 px-3 text-sm font-light capitalize"
               >
-                {candidate.status.replace("_", " ")}
+                {statuses(candidate.status)}
               </Badge>
             </span>
           </span>

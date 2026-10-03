@@ -1,8 +1,7 @@
-import type { Metadata } from "next"
-
+import { translatedTitle } from "@/lib/site"
 import { AdminInvite } from "@/components/company/admin-invite"
 
-export const metadata: Metadata = { title: "Company invite" }
+export const generateMetadata = () => translatedTitle("members", "inviteTitle")
 
 export default async function JoinPage({
   params,

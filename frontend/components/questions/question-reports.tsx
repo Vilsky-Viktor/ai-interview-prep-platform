@@ -1,20 +1,26 @@
 "use client"
 
+import { useLocale, useTranslations } from "next-intl"
+
 import { VirtualList } from "@/components/virtual-list"
-import { REPORT_REASONS } from "@/constants/feedback"
 import { usePagedList } from "@/hooks/use-paged-list"
+import { formatDate } from "@/lib/format"
 import type { QuestionReport } from "@/types/feedback"
 
 /** A question's reports in their own scroll box, loading more as the user scrolls it. */
 export function QuestionReports({ path }: { path: string }) {
+  const t = useTranslations("questions")
+  const common = useTranslations("common")
+  const reasons = useTranslations("reportReasons")
+  const locale = useLocale()
   const { items, loaded, loadMore } = usePagedList<QuestionReport>(path)
 
   if (!loaded) {
-    return <p className="text-sm text-muted-foreground">Loading…</p>
+    return <p className="text-sm text-muted-foreground">{common("loading")}</p>
   }
 
   if (items.length === 0) {
-    return <p className="text-sm text-muted-foreground">No reports.</p>
+    return <p className="text-sm text-muted-foreground">{t("noReports")}</p>
   }
 
   return (
@@ -28,13 +34,12 @@ export function QuestionReports({ path }: { path: string }) {
         <div className="space-y-1 pb-3 text-sm">
           <p className="flex flex-wrap items-baseline justify-between gap-2">
             <span className="font-medium">
-              {REPORT_REASONS[report.reason as keyof typeof REPORT_REASONS] ??
-                report.reason}
+              {reasons.has(report.reason)
+                ? reasons(report.reason)
+                : report.reason}
             </span>
             <span className="text-muted-foreground">
-              {new Date(report.created_at).toLocaleDateString(undefined, {
-                dateStyle: "medium",
-              })}
+              {formatDate(report.created_at, locale)}
             </span>
           </p>
           {report.comment && (

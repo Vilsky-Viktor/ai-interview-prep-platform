@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -33,6 +34,8 @@ export function CandidateActions({
   status,
   backHref,
 }: CandidateActionsProps) {
+  const t = useTranslations("candidates")
+  const common = useTranslations("common")
   const router = useRouter()
   const [busy, setBusy] = useState(false)
   const [confirmRevoke, setConfirmRevoke] = useState(false)
@@ -44,10 +47,10 @@ export function CandidateActions({
     try {
       // Inviting the same email again sends the same link again.
       await apiFetch(path, { method: "POST", body: JSON.stringify({ email }) })
-      toast.success(`Invite sent again to ${email}`)
+      toast.success(t("resent", { email }))
       router.refresh()
     } catch (error) {
-      toast.error(apiErrorMessage(error, "Couldn't resend the invite."))
+      toast.error(apiErrorMessage(error, t("resendFailed")))
     } finally {
       setBusy(false)
     }
@@ -58,11 +61,11 @@ export function CandidateActions({
 
     try {
       await apiFetch(`${path}/${inviteId}`, { method: "DELETE" })
-      toast.success(`Invite for ${email} revoked`)
+      toast.success(t("revoked", { email }))
       router.push(backHref)
       router.refresh()
     } catch (error) {
-      toast.error(apiErrorMessage(error, "Couldn't revoke the invite."))
+      toast.error(apiErrorMessage(error, t("revokeFailed")))
       setBusy(false)
       setConfirmRevoke(false)
     }
@@ -75,7 +78,7 @@ export function CandidateActions({
   return (
     <div className="flex items-center gap-2">
       <Button variant="outline" disabled={busy} onClick={resend}>
-        Resend invite
+        {t("resend")}
       </Button>
       {(status === "invited" || status === "undelivered") && (
         <Button
@@ -83,7 +86,7 @@ export function CandidateActions({
           disabled={busy}
           onClick={() => setConfirmRevoke(true)}
         >
-          Revoke invite
+          {t("revoke")}
         </Button>
       )}
       <Dialog
@@ -96,11 +99,8 @@ export function CandidateActions({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="no-dot">Revoke the invite?</DialogTitle>
-            <DialogDescription>
-              The link sent to {email} stops working. You can invite them again
-              later.
-            </DialogDescription>
+            <DialogTitle className="no-dot">{t("revokeTitle")}</DialogTitle>
+            <DialogDescription>{t("revokeText", { email })}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose
@@ -112,7 +112,7 @@ export function CandidateActions({
                 />
               }
             >
-              Keep
+              {common("keep")}
             </DialogClose>
             <Button
               variant="destructive"
@@ -120,7 +120,7 @@ export function CandidateActions({
               disabled={busy}
               onClick={revoke}
             >
-              Revoke
+              {t("revokeConfirm")}
             </Button>
           </DialogFooter>
         </DialogContent>

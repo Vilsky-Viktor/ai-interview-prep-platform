@@ -1,6 +1,6 @@
 import { MinusIcon } from "lucide-react"
-import type { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { getTranslations } from "next-intl/server"
 import { cn } from "cn"
 
 import { BackLink } from "@/components/back-link"
@@ -8,11 +8,11 @@ import { CandidateActions } from "@/components/company/candidate-actions"
 import { ScorecardReview } from "@/components/company/scorecard-review"
 import { PageHeader } from "@/components/page-header"
 import { Badge } from "@/components/ui/badge"
-import { plural } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
+import { translatedTitle } from "@/lib/site"
 import type { ReviewItem } from "@/types/round"
 
-export const metadata: Metadata = { title: "Scorecard" }
+export const generateMetadata = () => translatedTitle("candidates", "scorecard")
 
 type Scorecard = {
   id: string
@@ -31,15 +31,16 @@ type Scorecard = {
 }
 
 /** What the candidate's browser and timing showed; counts above zero stand out. */
-function IntegrityLine({
+async function IntegrityLine({
   session,
 }: {
   session: { tab_leaves: number; copies: number; fast_answers: number }
 }) {
+  const t = await getTranslations("candidates")
   const signals = [
-    plural(session.tab_leaves, "page leave"),
-    plural(session.copies, "copy attempt"),
-    plural(session.fast_answers, "fast answer"),
+    t("pageLeaves", { count: session.tab_leaves }),
+    t("copies", { count: session.copies }),
+    t("fastAnswers", { count: session.fast_answers }),
   ]
   const counts = [session.tab_leaves, session.copies, session.fast_answers]
 
@@ -69,6 +70,8 @@ export default async function ScorecardPage({
   params: Promise<{ companyId: string; id: string; inviteId: string }>
 }) {
   const { companyId, id, inviteId } = await params
+  const t = await getTranslations("candidates")
+  const statuses = await getTranslations("candidateStatus")
   const card = await serverFetch<Scorecard>(
     `/companies/interviews/${id}/candidates/${inviteId}`
   )
@@ -88,12 +91,12 @@ export default async function ScorecardPage({
             <BackLink
               href={`/company/${companyId}/interviews/${id}?tab=candidates`}
             >
-              Interview
+              {t("interview")}
             </BackLink>
           }
           title={
             <h1 className="font-heading text-3xl font-medium tracking-tight">
-              {deleted ? "Deleted candidate" : card.email}
+              {deleted ? t("deleted") : card.email}
             </h1>
           }
         >
@@ -101,7 +104,7 @@ export default async function ScorecardPage({
             variant={card.status === "undelivered" ? "destructive" : "outline"}
             className="h-7 px-3 text-sm font-light capitalize"
           >
-            {card.status.replace("_", " ")}
+            {statuses(card.status)}
           </Badge>
         </PageHeader>
         {!deleted && (
@@ -117,9 +120,7 @@ export default async function ScorecardPage({
 
       {card.sessions.length === 0 && (
         <p className="py-16 text-center text-muted-foreground">
-          {deleted
-            ? "The candidate deleted their account, and their results with it."
-            : "The candidate has not started yet."}
+          {deleted ? t("deletedText") : t("notStarted")}
         </p>
       )}
 

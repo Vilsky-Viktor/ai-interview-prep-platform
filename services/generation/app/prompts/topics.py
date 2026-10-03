@@ -20,6 +20,7 @@ Rules:
 - Keep every main topic and subtopic name to about 10 words at most. If a subtopic would list
   several things, split it into separate subtopics instead.
 - Do not add numbering.
+- Write every main topic and subtopic in {language}, whatever language the requirements are in.
 
 Level: {level}
 
@@ -51,6 +52,7 @@ Rules:
 - Use specific named subtopics. Keep every main topic and subtopic name to about 10 words at
   most; split a longer subtopic that lists several things into separate subtopics.
 - Do not add numbering.
+- Write every main topic and subtopic in {language}, whatever language the requirements are in.
 
 Level: {level}
 

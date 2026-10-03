@@ -3,7 +3,8 @@ from fastapi.encoders import jsonable_encoder
 from prepza_common.auth import CurrentUser
 from prepza_common.user import User
 
-from app.services.accounts import delete_account, export_account
+from app.schemas.me import SettingsIn
+from app.services.accounts import delete_account, export_account, set_language
 
 router = APIRouter()
 
@@ -11,6 +12,12 @@ router = APIRouter()
 @router.get("/me")
 def me(user: CurrentUser) -> User:
     return user
+
+
+@router.put("/me/settings", status_code=status.HTTP_204_NO_CONTENT)
+async def update_settings(body: SettingsIn, user: CurrentUser) -> None:
+    """Takes effect once the frontend refreshes the user's ID token."""
+    await set_language(user, body.language)
 
 
 @router.delete("/me", status_code=status.HTTP_204_NO_CONTENT)

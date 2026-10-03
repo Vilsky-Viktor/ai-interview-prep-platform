@@ -1,8 +1,10 @@
 from sqlalchemy import delete, or_, select, union
+from sqlalchemy.orm import selectinload
 
 from app.constants.sets import OwnerType, SetKind
+from app.helpers.export import preparation_export
 from app.models.feedback import PreparationRating, QuestionRating, QuestionReport
-from app.models.sets import QuestionSet
+from app.models.sets import Question, QuestionSet, Topic
 from app.models.sharing import JoinedPreparation, ShareInvite
 from app.storage import stats
 from app.storage.db import Session
@@ -54,12 +56,14 @@ async def export(user_id: str, email: str) -> dict:
     email = email.lower()
 
     async with Session() as session:
-        owned = await session.execute(
-            select(QuestionSet.title, QuestionSet.visibility, QuestionSet.created_at).where(
+        owned = await session.scalars(
+            select(QuestionSet)
+            .where(
                 QuestionSet.kind == SetKind.PREPARATION,
                 QuestionSet.owner_type == OwnerType.USER,
                 QuestionSet.owner_id == user_id,
             )
+            .options(selectinload(QuestionSet.topics).selectinload(Topic.questions))
         )
         joined = await session.execute(
             select(QuestionSet.title, JoinedPreparation.joined_at)
@@ -72,17 +76,19 @@ async def export(user_id: str, email: str) -> dict:
             .where(PreparationRating.user_id == user_id)
         )
         votes = await session.execute(
-            select(QuestionRating.question_id, QuestionRating.value).where(
-                QuestionRating.user_id == user_id
-            )
+            select(Question.text, QuestionRating.value)
+            .join(Question, Question.id == QuestionRating.question_id)
+            .where(QuestionRating.user_id == user_id)
         )
         reports = await session.execute(
             select(
-                QuestionReport.question_id,
+                Question.text,
                 QuestionReport.reason,
                 QuestionReport.comment,
                 QuestionReport.created_at,
-            ).where(QuestionReport.user_id == user_id)
+            )
+            .join(Question, Question.id == QuestionReport.question_id)
+            .where(QuestionReport.user_id == user_id)
         )
         shares = await session.execute(
             select(QuestionSet.title, ShareInvite.email, ShareInvite.created_at)
@@ -91,16 +97,13 @@ async def export(user_id: str, email: str) -> dict:
         )
 
         return {
-            "own_preparations": [
-                {"title": title, "visibility": visibility, "created_at": at}
-                for title, visibility, at in owned
-            ],
+            "own_preparations": [preparation_export(row) for row in owned],
             "joined_preparations": [{"title": title, "joined_at": at} for title, at in joined],
             "preparation_ratings": [{"title": title, "stars": value} for title, value in ratings],
-            "question_votes": [{"question_id": qid, "vote": value} for qid, value in votes],
+            "question_votes": [{"question": text, "vote": value} for text, value in votes],
             "question_reports": [
-                {"question_id": qid, "reason": reason, "comment": comment, "at": at}
-                for qid, reason, comment, at in reports
+                {"question": text, "reason": reason, "comment": comment, "at": at}
+                for text, reason, comment, at in reports
             ],
             "shares": [
                 {"preparation": title, "email": address, "at": at} for title, address, at in shares

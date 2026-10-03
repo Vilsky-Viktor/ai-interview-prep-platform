@@ -1,10 +1,15 @@
+"use client"
+
 import { cn } from "cn"
+import { useTranslations } from "next-intl"
 
 import { Progress } from "@/components/ui/progress"
 import type { TopicProgress as Progressed } from "@/types/round"
 
-const PASSED_BAR = "[&_[data-slot=progress-indicator]]:bg-green-600 dark:[&_[data-slot=progress-indicator]]:bg-green-400"
-const FAILED_BAR = "[&_[data-slot=progress-indicator]]:bg-red-600 dark:[&_[data-slot=progress-indicator]]:bg-red-400"
+const PASSED_BAR =
+  "[&_[data-slot=progress-indicator]]:bg-green-600 dark:[&_[data-slot=progress-indicator]]:bg-green-400"
+const FAILED_BAR =
+  "[&_[data-slot=progress-indicator]]:bg-red-600 dark:[&_[data-slot=progress-indicator]]:bg-red-400"
 
 /** Progress towards the certificate; whether it's complete and passes comes from the API. */
 export function TopicProgress({
@@ -14,6 +19,7 @@ export function TopicProgress({
   progress: Progressed | undefined
   total: number
 }) {
+  const t = useTranslations("rounds")
   const answered = Math.min(progress?.answered ?? 0, total)
   const complete = progress?.complete ?? false
   const passed = progress?.passed ?? false
@@ -21,7 +27,7 @@ export function TopicProgress({
   return (
     <Progress
       value={total ? (answered / total) * 100 : 0}
-      aria-label="Questions answered towards the certificate"
+      aria-label={t("progress")}
       className={cn("w-full", complete && (passed ? PASSED_BAR : FAILED_BAR))}
     />
   )

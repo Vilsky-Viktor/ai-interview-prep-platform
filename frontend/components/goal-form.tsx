@@ -2,19 +2,22 @@
 
 import { ArrowUpIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { SUBMIT_HINT } from "@/constants/keys"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import { signIn } from "@/lib/auth"
 import { isSubmitShortcut } from "@/lib/keys"
 import type { Generation } from "@/types/generation"
 
 export function GoalForm() {
+  const t = useTranslations("goal")
+  const common = useTranslations("common")
+  const signInText = useTranslations("signIn")
   const { user } = useAuth()
   const router = useRouter()
   const [goal, setGoal] = useState("")
@@ -24,7 +27,7 @@ export function GoalForm() {
     event.preventDefault()
 
     if (!user) {
-      await signIn()
+      await signIn(signInText("failed"))
 
       return
     }
@@ -41,14 +44,11 @@ export function GoalForm() {
       const outOfPreparations =
         error instanceof ApiError && error.status === 402
       toast.error(
-        apiErrorMessage(
-          error,
-          "Couldn't start the generation. Please try again."
-        ),
+        apiErrorMessage(error, t("failed")),
         outOfPreparations
           ? {
               action: {
-                label: "See plans",
+                label: t("seePlans"),
                 onClick: () => router.push("/pricing"),
               },
             }
@@ -74,18 +74,18 @@ export function GoalForm() {
         value={goal}
         onChange={(event) => setGoal(event.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Paste a job description or describe what you want to learn…"
-        aria-label="What are you preparing for?"
+        placeholder={t("placeholder")}
+        aria-label={t("label")}
         className="max-h-72 min-h-40 resize-none border-0 bg-transparent p-2 text-base shadow-none focus-visible:ring-0 md:text-base dark:bg-transparent"
       />
       <div className="flex items-center justify-between gap-4 pt-2 pl-2">
-        <p className="text-xs text-muted-foreground">{SUBMIT_HINT}</p>
+        <p className="text-xs text-muted-foreground">{common("submitHint")}</p>
         <Button
           type="submit"
           size="icon-lg"
           className="rounded-full"
           disabled={!goal.trim() || submitting}
-          aria-label="Generate preparation"
+          aria-label={t("submit")}
         >
           <ArrowUpIcon />
         </Button>

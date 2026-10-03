@@ -1,11 +1,11 @@
 "use client"
 
 import Link from "next/link"
+import { useLocale, useTranslations } from "next-intl"
 
 import { CancelGeneration } from "@/components/generation/cancel-generation"
 import { Badge } from "@/components/ui/badge"
 import { VirtualList } from "@/components/virtual-list"
-import { UNFINISHED_LABELS } from "@/constants/generation"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { formatDate } from "@/lib/format"
 import type { GenerationSummary } from "@/types/generation"
@@ -27,11 +27,16 @@ export function UnfinishedGenerations({
   // The first page, already rendered by the server; the rest load as the user scrolls.
   generations: GenerationSummary[]
 }) {
+  const t = useTranslations("generation")
+  const statuses = useTranslations("generationStatus")
+  const locale = useLocale()
   const { items, loadMore } = usePagedList("/generate/generations", generations)
 
   return (
     <section className="space-y-3">
-      <h2 className="text-sm font-medium text-muted-foreground">Unfinished</h2>
+      <h2 className="text-sm font-medium text-muted-foreground">
+        {t("unfinished")}
+      </h2>
       <VirtualList
         items={items}
         getKey={(generation) => generation.id}
@@ -54,7 +59,7 @@ export function UnfinishedGenerations({
                     dateTime={generation.created_at}
                     suppressHydrationWarning
                   >
-                    {formatDate(generation.created_at)}
+                    {formatDate(generation.created_at, locale)}
                   </time>
                 </span>
               </span>
@@ -62,7 +67,7 @@ export function UnfinishedGenerations({
                 variant={BADGE_VARIANTS[generation.status]}
                 className="h-7 shrink-0 px-3 text-sm font-light"
               >
-                {UNFINISHED_LABELS[generation.status]}
+                {statuses(generation.status)}
               </Badge>
             </Link>
             <div className="relative z-10 shrink-0">

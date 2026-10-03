@@ -1,6 +1,7 @@
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Request, status
+from prepza_common.i18n import request_language
 
 from app.constants.rounds import CERTIFICATE_RULES
 from app.schemas.certificates import CertificateOut
@@ -10,10 +11,10 @@ router = APIRouter(prefix="/certificates", tags=["certificates"])
 
 
 @router.get("/rules")
-async def get_rules() -> list[str]:
+async def get_rules(request: Request) -> list[str]:
     """What earns a topic's certificate; public, shown before practicing. Declared before
     /{certificate_id}, which would otherwise take "rules" as an id."""
-    return CERTIFICATE_RULES
+    return CERTIFICATE_RULES[request_language(request)]
 
 
 @router.get("/{certificate_id}")

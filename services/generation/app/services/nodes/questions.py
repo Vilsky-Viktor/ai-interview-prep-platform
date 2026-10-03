@@ -13,7 +13,7 @@ from app.constants.generation import (
     QUESTION_FOCUSES,
     QUESTION_OVERSAMPLE,
 )
-from app.helpers.prompts import bullet_list
+from app.helpers.prompts import bullet_list, language_name
 from app.helpers.questions import (
     build_options,
     merge_buckets,
@@ -67,6 +67,7 @@ def fan_out_questions(state: State):
                     "level": state["level"],
                     "existing": [question["text"] for question in reused],
                     "focus": focus_for(call, calls),
+                    "language": state.get("language"),
                 }
                 sends.append(Send("generate_questions", task))
                 bucket += 1
@@ -86,6 +87,7 @@ async def generate_questions(task: QuestionTask) -> dict:
         distractors=DISTRACTORS,
         max_chars=MAX_OPTION_CHARS,
         existing=bullet_list(task.get("existing", [])) or "None",
+        language=language_name(task.get("language")),
     )
     items = []
 

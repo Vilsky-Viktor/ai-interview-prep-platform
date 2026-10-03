@@ -97,7 +97,12 @@ def test_the_export_holds_every_service_and_downloads_as_a_file(client, monkeypa
     assert response.status_code == 200
     assert response.headers["content-disposition"] == 'attachment; filename="prepza-data.json"'
     assert response.json() == {
-        "account": {"id": "ann", "email": "Ann@Example.com", "name": "Ann"},
+        "account": {
+            "id": "ann",
+            "email": "Ann@Example.com",
+            "name": "Ann",
+            "language": "en",
+        },
         "library": {"own_preparations": []},
         "companies": {"from": "companies"},
         "rounds": {"from": "rounds"},

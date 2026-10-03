@@ -41,6 +41,9 @@ Option rules:
 - A distractor must be wrong for the question exactly as written, not merely less precise. If
   an expert could defend it as a correct answer, it is not a distractor.
 
+Write every question and option in {language}. Keep formulas, commands and the names of tools and
+products as they are.
+
 Level: {level}
 Main topic: {topic}
 Subtopic: {subtopic}

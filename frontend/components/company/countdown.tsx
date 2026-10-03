@@ -2,6 +2,7 @@
 
 import { cn } from "cn"
 import { TimerIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 
 import { COUNTDOWN_WARNING_SECONDS } from "@/constants/interviews"
@@ -28,6 +29,7 @@ export function Countdown({
   seconds: number
   onExpire: () => void
 }) {
+  const t = useTranslations("company")
   const [end] = useState(() => Date.now() + seconds * 1000)
   const [left, setLeft] = useState(() => secondsUntil(end))
   const expired = useRef(false)
@@ -49,7 +51,7 @@ export function Countdown({
   return (
     <span
       role="timer"
-      aria-label={`Time left: ${clock(left)}`}
+      aria-label={t("timeLeft", { time: clock(left) })}
       className={cn(
         "flex items-center gap-1.5 font-medium tabular-nums",
         left <= COUNTDOWN_WARNING_SECONDS && "text-red-600 dark:text-red-400"

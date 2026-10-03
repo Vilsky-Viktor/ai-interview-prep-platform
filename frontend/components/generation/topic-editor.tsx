@@ -1,6 +1,7 @@
 "use client"
 
 import { PlusIcon, XIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -15,6 +16,7 @@ type TopicEditorProps = {
 
 /** Rename a topic and change its subtopics by hand, without asking the model. */
 export function TopicEditor({ topic, onChange, onDone }: TopicEditorProps) {
+  const t = useTranslations("generation")
   const [newSubtopic, setNewSubtopic] = useState("")
   const name = topic.main_topic.trim()
 
@@ -42,7 +44,7 @@ export function TopicEditor({ topic, onChange, onDone }: TopicEditorProps) {
         onChange={(event) =>
           onChange({ ...topic, main_topic: event.target.value })
         }
-        aria-label="Topic name"
+        aria-label={t("topicName")}
         aria-invalid={!name}
         className="h-10 font-medium"
         autoFocus
@@ -60,7 +62,7 @@ export function TopicEditor({ topic, onChange, onDone }: TopicEditorProps) {
               variant="ghost"
               size="icon-xs"
               className="rounded-full"
-              aria-label={`Remove ${subtopic}`}
+              aria-label={t("removeSubtopic", { subtopic })}
               onClick={() => removeSubtopic(index)}
             >
               <XIcon />
@@ -80,8 +82,8 @@ export function TopicEditor({ topic, onChange, onDone }: TopicEditorProps) {
               addSubtopic()
             }
           }}
-          placeholder="Add a subtopic"
-          aria-label="New subtopic"
+          placeholder={t("addSubtopic")}
+          aria-label={t("newSubtopic")}
           className="h-10"
         />
         <Button
@@ -92,7 +94,7 @@ export function TopicEditor({ topic, onChange, onDone }: TopicEditorProps) {
           onClick={addSubtopic}
         >
           <PlusIcon />
-          Add
+          {t("add")}
         </Button>
         <Button
           type="button"
@@ -101,7 +103,7 @@ export function TopicEditor({ topic, onChange, onDone }: TopicEditorProps) {
           disabled={!name}
           onClick={onDone}
         >
-          Done
+          {t("done")}
         </Button>
       </div>
     </div>

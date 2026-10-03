@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -19,6 +20,8 @@ export function CertificateButton({
 }: {
   certificateId: string | null
 }) {
+  const t = useTranslations("certificate")
+
   if (certificateId) {
     return (
       <Button
@@ -26,7 +29,7 @@ export function CertificateButton({
         nativeButton={false}
         render={<Link href={`/certificates/${certificateId}`} />}
       >
-        Certificate
+        {t("title")}
       </Button>
     )
   }
@@ -34,11 +37,11 @@ export function CertificateButton({
   return (
     <Dialog>
       <DialogTrigger render={<Button variant="outline" />}>
-        Certificate
+        {t("title")}
       </DialogTrigger>
       <DialogContent showCloseButton={false} className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>How to earn the certificate</DialogTitle>
+          <DialogTitle>{t("howTo")}</DialogTitle>
         </DialogHeader>
         <CertificateRules />
         <DialogFooter showCloseButton />
@@ -49,6 +52,7 @@ export function CertificateButton({
 
 /** The rules come from rounds, which decides who earns a certificate; loaded when shown. */
 function CertificateRules() {
+  const common = useTranslations("common")
   const [rules, setRules] = useState<string[] | null>(null)
 
   useEffect(() => {
@@ -58,7 +62,9 @@ function CertificateRules() {
   }, [])
 
   if (!rules) {
-    return <p className="font-light text-muted-foreground">Loading…</p>
+    return (
+      <p className="font-light text-muted-foreground">{common("loading")}</p>
+    )
   }
 
   return (

@@ -1,6 +1,7 @@
 from collections.abc import AsyncIterator
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
+from prepza_common.constants import LANGUAGES
 
 from app.constants.rounds import CHAT_HISTORY_MESSAGES, ChatRole
 from app.helpers.chat import correct_answer, learner_answer, result_summary
@@ -12,7 +13,7 @@ from app.prompts.chat import CHAT_SYSTEM
 
 
 def build_messages(
-    round_: Round, answer: Answer, history: list[ChatMessage], message: str
+    round_: Round, answer: Answer, history: list[ChatMessage], message: str, language: str
 ) -> list[BaseMessage]:
     question = find_question(round_, str(answer.question_id))
     system = CHAT_SYSTEM.format(
@@ -20,6 +21,7 @@ def build_messages(
         correct_answer=correct_answer(question),
         answer=learner_answer(question, answer),
         result=result_summary(answer),
+        language=LANGUAGES[language],
     )
     messages: list[BaseMessage] = [SystemMessage(content=system)]
 

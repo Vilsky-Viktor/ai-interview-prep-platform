@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 import { Button } from "@/components/ui/button"
 
@@ -9,9 +12,14 @@ export function InterviewNav({
   href: string
   current: "topics" | "candidates"
 }) {
+  const t = useTranslations("interviews")
   const items = [
-    { id: "topics", href, label: "Interview" },
-    { id: "candidates", href: `${href}?tab=candidates`, label: "Candidates" },
+    { id: "topics", href, label: t("interview") },
+    {
+      id: "candidates",
+      href: `${href}?tab=candidates`,
+      label: t("candidates"),
+    },
   ] as const
 
   return (

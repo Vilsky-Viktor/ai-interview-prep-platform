@@ -2,6 +2,7 @@
 
 import { UsersIcon } from "lucide-react"
 import Link from "next/link"
+import { useLocale, useTranslations } from "next-intl"
 
 import { DeleteInterview } from "@/components/company/delete-interview"
 import { VirtualList } from "@/components/virtual-list"
@@ -17,6 +18,8 @@ export function InterviewList({
   companyId: string
   initial: Interview[]
 }) {
+  const t = useTranslations("interviews")
+  const locale = useLocale()
   const { items, loadMore } = usePagedList(
     `/companies/interviews?company_id=${companyId}`,
     initial
@@ -24,9 +27,7 @@ export function InterviewList({
 
   if (items.length === 0) {
     return (
-      <p className="py-16 text-center text-muted-foreground">
-        No interviews yet. Create your first one.
-      </p>
+      <p className="py-16 text-center text-muted-foreground">{t("empty")}</p>
     )
   }
 
@@ -46,17 +47,19 @@ export function InterviewList({
           >
             <span className="min-w-0 space-y-1">
               <span className="block text-lg font-medium">
-                {interview.title ?? "Generating…"}
+                {interview.title ?? t("generating")}
               </span>
               <span className="block text-sm text-muted-foreground">
                 <time dateTime={interview.created_at} suppressHydrationWarning>
-                  {formatDate(interview.created_at)}
+                  {formatDate(interview.created_at, locale)}
                 </time>
               </span>
             </span>
             <span
               className="flex shrink-0 items-center gap-1.5 text-sm text-muted-foreground tabular-nums"
-              aria-label={`${interview.candidate_count} candidates`}
+              aria-label={t("candidateCount", {
+                count: interview.candidate_count,
+              })}
             >
               <UsersIcon aria-hidden className="size-5" />
               {interview.candidate_count}
@@ -67,7 +70,7 @@ export function InterviewList({
             <div className="relative z-10">
               <DeleteInterview
                 interviewId={interview.id}
-                title={interview.title ?? "interview"}
+                title={interview.title ?? t("fallbackTitle")}
               />
             </div>
           )}

@@ -2,6 +2,7 @@
 
 import { cn } from "cn"
 import { ThumbsDownIcon, ThumbsUpIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
@@ -12,6 +13,7 @@ import { apiFetch } from "@/lib/api"
 type Thumb = 1 | -1
 
 export function QuestionRating({ basePath }: { basePath: string }) {
+  const t = useTranslations("questions")
   const [value, setValue] = useState<Thumb | null>(null)
   const [saving, setSaving] = useState(false)
   // Set once the user votes, so a slow load of the saved vote doesn't overwrite theirs.
@@ -46,7 +48,7 @@ export function QuestionRating({ basePath }: { basePath: string }) {
       })
     } catch {
       setValue(previous)
-      toast.error("Couldn't save your rating. Please try again.")
+      toast.error(t("ratingFailed"))
     } finally {
       setSaving(false)
     }
@@ -60,7 +62,7 @@ export function QuestionRating({ basePath }: { basePath: string }) {
         type="button"
         variant="ghost"
         size="icon-lg"
-        aria-label="Helpful question"
+        aria-label={t("helpful")}
         className={cn(FEEDBACK_HOVER_CLASS, "h-full w-full rounded-none")}
         aria-pressed={value === 1}
         disabled={locked}
@@ -74,7 +76,7 @@ export function QuestionRating({ basePath }: { basePath: string }) {
         type="button"
         variant="ghost"
         size="icon-lg"
-        aria-label="Unhelpful question"
+        aria-label={t("unhelpful")}
         className={cn(FEEDBACK_HOVER_CLASS, "h-full w-full rounded-none")}
         aria-pressed={value === -1}
         disabled={locked}

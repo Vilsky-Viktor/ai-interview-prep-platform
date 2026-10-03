@@ -91,6 +91,7 @@ async def new_options(
             "start": 0,
             "questions": [question.text],
             "level": context.level,
+            "language": context.language,
         }
     )
     options = result["answer_pool"][0]["options"][0]

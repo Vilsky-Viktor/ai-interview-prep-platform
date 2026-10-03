@@ -1,7 +1,11 @@
+import { getLocale, getTranslations } from "next-intl/server"
+
+import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { LEGAL_UPDATED, type LegalSection } from "@/constants/legal"
 
-/** The privacy policy and terms, from their sections in constants. */
-export function LegalPage({
+/** The privacy policy and terms, from their sections in constants. English only: they're legal
+texts, and a translation would need its own legal review. */
+export async function LegalPage({
   title,
   intro,
   sections,
@@ -10,6 +14,9 @@ export function LegalPage({
   intro: string
   sections: LegalSection[]
 }) {
+  const t = await getTranslations("legal")
+  const locale = await getLocale()
+
   return (
     <main className="mx-auto max-w-3xl space-y-10 px-6 py-12">
       <header className="space-y-4">
@@ -17,7 +24,10 @@ export function LegalPage({
           {title}
         </h1>
         <p className="text-sm text-muted-foreground">
-          Last updated <time dateTime={LEGAL_UPDATED}>{LEGAL_UPDATED}</time>
+          {locale !== DEFAULT_LOCALE && (
+            <span className="block pb-2">{t("englishOnly")}</span>
+          )}
+          {t("updated")} <time dateTime={LEGAL_UPDATED}>{LEGAL_UPDATED}</time>
         </p>
         <p className="text-base leading-relaxed text-muted-foreground">
           {intro}

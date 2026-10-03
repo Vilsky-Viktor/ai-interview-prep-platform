@@ -1,6 +1,7 @@
 "use client"
 
 import { cn } from "cn"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -33,11 +34,12 @@ export function TopicQuestions({
   // Reserve room for three digits, so rows with 99 and 100 questions line up.
   alignCount?: boolean
 }) {
+  const t = useTranslations("questions")
+  const common = useTranslations("common")
   const [open, setOpen] = useState(false)
   const [questions, setQuestions] = useState<QuestionStats[] | null>(null)
   const [missing, setMissing] = useState(false)
   const [regeneratingId, setRegeneratingId] = useState<string | null>(null)
-  const label = count === 1 ? "question" : "questions"
 
   useEffect(() => {
     if (!open || questions) {
@@ -78,12 +80,12 @@ export function TopicQuestions({
             : row
         )
       )
-      toast.success("Question re-generated")
+      toast.success(t("regenerated"))
     } catch (error) {
       toast.error(
         error instanceof ApiError && error.status === 429
           ? error.message
-          : "Couldn't re-generate the question. Please try again."
+          : t("regenerateFailed")
       )
     } finally {
       setRegeneratingId(null)
@@ -108,7 +110,7 @@ export function TopicQuestions({
         >
           {count}
         </span>{" "}
-        {label}
+        {t("count", { count })}
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}
@@ -138,7 +140,7 @@ export function TopicQuestions({
           />
         ) : (
           <p className="text-muted-foreground">
-            {missing ? "Couldn't load the questions." : "Loading…"}
+            {missing ? t("loadFailed") : common("loading")}
           </p>
         )}
         <DialogFooter showCloseButton />

@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -12,6 +13,9 @@ import { ApiError, apiFetch } from "@/lib/api"
 import type { InviteView as Invite, SessionSummary } from "@/types/company"
 
 export function InviteView({ token }: { token: string }) {
+  const t = useTranslations("invite")
+  const share = useTranslations("share")
+  const session = useTranslations("session")
   const router = useRouter()
   const { user, loading } = useAuth()
   const [invite, setInvite] = useState<Invite | null>(null)
@@ -48,25 +52,19 @@ export function InviteView({ token }: { token: string }) {
       setStarting(false)
     } catch (error) {
       const forbidden = error instanceof ApiError && error.status === 403
-      toast.error(
-        forbidden
-          ? "This invite was sent to a different email address."
-          : "Couldn't start the interview. Please try again."
-      )
+      toast.error(forbidden ? share("wrongEmail") : session("startFailed"))
       setStarting(false)
     }
   }
 
   if (!loading && !user) {
-    return (
-      <SignInPrompt message="Sign in with the invitation email to take this interview." />
-    )
+    return <SignInPrompt message={t("signIn")} />
   }
 
   if (missing) {
     return (
       <p className="py-24 text-center text-base text-muted-foreground">
-        This invite isn&apos;t valid anymore.
+        {share("invalid")}
       </p>
     )
   }
@@ -82,67 +80,60 @@ export function InviteView({ token }: { token: string }) {
       <div className="space-y-4">
         {invite.company && (
           <p className="text-base text-muted-foreground">
-            <span className="font-medium text-foreground">
-              {invite.company}
-            </span>{" "}
-            invited you to interview.
+            {t.rich("invitedYou", {
+              company: invite.company,
+              b: (chunks) => (
+                <span className="font-medium text-foreground">{chunks}</span>
+              ),
+            })}
           </p>
         )}
         <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
-          {invite.title ?? "an interview"}
+          {invite.title ?? t("fallbackTitle")}
         </h1>
         {invite.question_seconds != null && invite.status !== "finished" && (
           <p className="pt-6 text-base text-muted-foreground">
-            Time per question:
+            {t("timePerQuestion")}
             <span className="block">
               <span className="text-3xl font-medium text-foreground tabular-nums">
                 {invite.question_seconds}
               </span>{" "}
-              s
+              {t("secondsUnit")}
             </span>
           </p>
         )}
       </div>
       {invite.status !== "finished" && (
         <ul className="mx-auto max-w-lg list-disc space-y-2 pl-5 text-left text-base text-muted-foreground">
-          <li>Pick one of four options for each question.</li>
-          <li>An answer can&apos;t be changed once given.</li>
-          {invite.question_seconds != null && (
-            <li>
-              When a question&apos;s time runs out, it counts as wrong and the
-              next one opens. The clock keeps running if you leave.
-            </li>
-          )}
-          <li>Unanswered questions count as wrong.</li>
-          <li>Progress is saved: use this link again to continue.</li>
+          <li>{t("pickOne")}</li>
+          <li>{t("noChange")}</li>
+          {invite.question_seconds != null && <li>{t("timeRunsOut")}</li>}
+          <li>{t("unanswered")}</li>
+          <li>{t("saved")}</li>
           <li>
-            Stay on this page: leaving it or copying is recorded (
-            <Link href="/privacy" className="underline underline-offset-4">
-              how we handle it
-            </Link>
-            ).
+            {t.rich("stay", {
+              link: (chunks) => (
+                <Link href="/privacy" className="underline underline-offset-4">
+                  {chunks}
+                </Link>
+              ),
+            })}
           </li>
-          {invite.share_results && (
-            <li>You&apos;ll see whether each answer was right.</li>
-          )}
+          {invite.share_results && <li>{t("seeResults")}</li>}
         </ul>
       )}
       {invite.status === "finished" ? (
-        <p className="text-base text-muted-foreground">
-          This interview is already finished.
-        </p>
+        <p className="text-base text-muted-foreground">{t("finished")}</p>
       ) : matches ? (
         <Button
           className="h-12 px-6 text-base"
           disabled={starting}
           onClick={start}
         >
-          {invite.status === "in_process" ? "Continue" : "Accept & Start"}
+          {invite.status === "in_process" ? t("continue") : t("start")}
         </Button>
       ) : (
-        <p className="text-base text-muted-foreground">
-          The email does not match. Sign in with the invitation email to start.
-        </p>
+        <p className="text-base text-muted-foreground">{t("mismatch")}</p>
       )}
     </div>
   )

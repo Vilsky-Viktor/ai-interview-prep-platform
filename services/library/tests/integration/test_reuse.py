@@ -8,18 +8,20 @@ async def prove(question_id, text):
         await quality.record_answer(question_id, text, "right", True)
 
 
-def test_reuse_takes_proven_questions_from_close_public_topics_only(run):
+def test_reuse_takes_proven_questions_from_close_public_topics_in_the_language_only(run):
     async def scenario():
         close = await preparation("Close", embedding=direction(1.0, 0.1))
         far = await preparation("Far", embedding=direction(0.0, 1.0))
         private = await preparation("Private", embedding=direction(1.0, 0.0), public=False)
         senior = await preparation("Senior", level="senior", embedding=direction(1.0, 0.0))
+        russian = await preparation("Russian", language="ru", embedding=direction(1.0, 0.0))
 
         for set_id, title in [
             (close, "Close"),
             (far, "Far"),
             (private, "Private"),
             (senior, "Senior"),
+            (russian, "Russian"),
         ]:
             for index, question_id in enumerate(await question_ids(set_id)):
                 await prove(question_id, f"{title} question {index}?")
@@ -29,7 +31,7 @@ def test_reuse_takes_proven_questions_from_close_public_topics_only(run):
         await quality.save_flag(close_ids[0], "rewrite")
         unproven = await preparation("Unproven", embedding=direction(1.0, 0.05))
 
-        found = await reuse.find(direction(1.0, 0.0), "mid", 10)
+        found = await reuse.find(direction(1.0, 0.0), "mid", "en", 10)
 
         return [text for text, _ in found], unproven
 

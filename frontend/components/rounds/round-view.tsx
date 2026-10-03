@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 
 import { useAuth } from "@/components/auth-provider"
@@ -24,6 +25,8 @@ import {
 import { useRoundPlayer } from "@/hooks/use-round-player"
 
 export function RoundView({ id }: { id: string }) {
+  const t = useTranslations("rounds")
+  const common = useTranslations("common")
   const { user, loading } = useAuth()
   const {
     round,
@@ -38,13 +41,13 @@ export function RoundView({ id }: { id: string }) {
   const [confirmFinish, setConfirmFinish] = useState(false)
 
   if (!loading && !user) {
-    return <SignInPrompt message="Sign in to continue this round." />
+    return <SignInPrompt message={t("signIn")} />
   }
 
   if (missing) {
     return (
       <p className="py-24 text-center text-base text-muted-foreground">
-        This round doesn&apos;t exist.
+        {t("missing")}
       </p>
     )
   }
@@ -81,7 +84,7 @@ export function RoundView({ id }: { id: string }) {
         </div>
       ) : (
         <p className="py-16 text-center text-muted-foreground">
-          You answered every question in this round.
+          {t("allAnswered")}
         </p>
       )}
 
@@ -92,12 +95,12 @@ export function RoundView({ id }: { id: string }) {
           disabled={finishing}
           onClick={() => (allAnswered ? finish() : setConfirmFinish(true))}
         >
-          {finishing ? "Finishing…" : "Finish round"}
+          {finishing ? t("finishing") : t("finishRound")}
         </Button>
         <div className="flex items-center gap-3">
           {result && !allAnswered && (
             <Button className="h-12 px-6 text-base" onClick={() => loadNext()}>
-              Next question
+              {t("next")}
             </Button>
           )}
         </div>
@@ -112,10 +115,8 @@ export function RoundView({ id }: { id: string }) {
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="no-dot">Finish this round?</DialogTitle>
-            <DialogDescription>
-              Unanswered questions won&apos;t be scored.
-            </DialogDescription>
+            <DialogTitle className="no-dot">{t("finishTitle")}</DialogTitle>
+            <DialogDescription>{t("unscored")}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose
@@ -127,14 +128,14 @@ export function RoundView({ id }: { id: string }) {
                 />
               }
             >
-              Cancel
+              {common("cancel")}
             </DialogClose>
             <Button
               className="h-10 px-5 text-base"
               disabled={finishing}
               onClick={finish}
             >
-              {finishing ? "Finishing…" : "Finish"}
+              {finishing ? t("finishing") : t("finish")}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -3,7 +3,7 @@ from uuid import UUID
 from langchain_core.messages import HumanMessage
 
 from app.constants.generation import REGENERATE_ATTEMPTS
-from app.helpers.prompts import bullet_list
+from app.helpers.prompts import bullet_list, language_name
 from app.helpers.questions import normalize, strip_choices
 from app.integrations import library, llm
 from app.prompts.regenerate import REGENERATE_PROMPT
@@ -25,6 +25,7 @@ async def new_question(context: QuestionContext) -> str | None:
             topic=context.topic,
             subtopics=", ".join(context.subtopics) or context.topic,
             existing=bullet_list(existing),
+            language=language_name(context.language),
         )
         result: NewQuestion = await structured_llm.ainvoke([HumanMessage(content=prompt)])
         text = strip_choices(result.question)
@@ -56,6 +57,7 @@ async def regenerate(question_id: UUID, context: QuestionContext) -> Regenerated
                 "start": 0,
                 "questions": [text],
                 "level": context.level,
+                "language": context.language,
             }
         )
         options = result["answer_pool"][0]["options"][0]

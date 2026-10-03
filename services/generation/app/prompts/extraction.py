@@ -25,4 +25,5 @@ You extract interview-relevant requirements from a job posting or learning goal.
    scope of responsibility.
 5. title: a short title for this preparation (max 60 characters), for example
    "Senior Accountant at Acme" or "Regional Sales Manager, Asia".
+6. Write the title and every requirement in {language}, whatever language the text is in.
 """

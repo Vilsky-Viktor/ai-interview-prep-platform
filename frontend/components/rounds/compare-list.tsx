@@ -1,5 +1,7 @@
 "use client"
 
+import { useTranslations } from "next-intl"
+
 import { InlineText } from "@/components/questions/inline-text"
 import { QuestionText } from "@/components/questions/question-text"
 import { CompareCell } from "@/components/rounds/compare-cell"
@@ -15,6 +17,7 @@ export function CompareList({
   first: ReviewItem[]
   second: ReviewItem[]
 }) {
+  const t = useTranslations("rounds")
   const secondByQuestion = new Map(
     second.map((item) => [item.question_id, item])
   )
@@ -39,7 +42,7 @@ export function CompareList({
             {correct && (
               <p className="text-sm text-muted-foreground">
                 <span className="font-medium text-foreground">
-                  Correct answer:{" "}
+                  {t("correctAnswer")}:{" "}
                 </span>
                 <InlineText text={correct} />
               </p>

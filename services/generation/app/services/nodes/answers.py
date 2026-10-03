@@ -4,6 +4,7 @@ from langchain_core.messages import HumanMessage
 from openai import LengthFinishReasonError
 
 from app.constants.generation import ANSWER_ATTEMPTS, DISTRACTORS, MAX_OPTION_CHARS
+from app.helpers.prompts import language_name
 from app.helpers.questions import build_options
 from app.integrations import llm
 from app.models.state import AnswerTask
@@ -30,6 +31,7 @@ async def generate_answers(task: AnswerTask) -> dict:
             topic=task["topic"],
             distractors=DISTRACTORS,
             max_chars=MAX_OPTION_CHARS,
+            language=language_name(task.get("language")),
             questions="\n".join(f"[{i}] {questions[i]}" for i in pending),
         )
         try:

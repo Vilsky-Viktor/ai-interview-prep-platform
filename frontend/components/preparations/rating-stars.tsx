@@ -3,6 +3,7 @@
 import { cn } from "cn"
 import { StarIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -18,6 +19,7 @@ export function RatingStars({
   // Stars a rating can give; the API sets the scale.
   scale: number
 }) {
+  const t = useTranslations("preparations")
   const router = useRouter()
   const [hovered, setHovered] = useState(0)
   const [saving, setSaving] = useState(false)
@@ -41,11 +43,11 @@ export function RatingStars({
         method: "PUT",
         body: JSON.stringify({ value }),
       })
-      toast.success(previous === null ? "Thanks for rating" : "Rating updated")
+      toast.success(previous === null ? t("rated") : t("ratingUpdated"))
       router.refresh()
     } catch {
       setRating(previous)
-      toast.error("Couldn't save your rating. Please try again.")
+      toast.error(t("ratingFailed"))
     } finally {
       setSaving(false)
     }
@@ -54,7 +56,7 @@ export function RatingStars({
   return (
     <div className="flex items-center gap-3">
       {!rating && (
-        <span className="text-sm text-muted-foreground">Rate it</span>
+        <span className="text-sm text-muted-foreground">{t("rateIt")}</span>
       )}
       <div
         className="flex"
@@ -68,7 +70,7 @@ export function RatingStars({
           <button
             key={value}
             type="button"
-            aria-label={`Rate ${value} of ${scale}`}
+            aria-label={t("rate", { value, scale })}
             disabled={locked}
             onMouseEnter={() => {
               if (!locked) {

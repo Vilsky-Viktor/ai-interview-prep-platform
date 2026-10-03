@@ -1,5 +1,6 @@
 import { cn } from "cn"
 import { MinusIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -47,6 +48,9 @@ export function SessionPlay({
   onFinish,
   finishing,
 }: SessionPlayProps) {
+  const t = useTranslations("session")
+  const rounds = useTranslations("rounds")
+  const common = useTranslations("common")
   const [confirmFinish, setConfirmFinish] = useState(false)
   useIntegritySignals(session.id, session.status === "in_progress")
   const shown = result && session.share_results ? shownResult(result) : null
@@ -60,7 +64,7 @@ export function SessionPlay({
         section={section}
         question={result ? null : question}
         onTimeUp={() => {
-          toast.error("Time is up for this question.")
+          toast.error(t("timeUp"))
           onAdvance()
         }}
       />
@@ -92,12 +96,12 @@ export function SessionPlay({
           disabled={finishing}
           onClick={() => setConfirmFinish(true)}
         >
-          {finishing ? "Finishing…" : "Finish interview"}
+          {finishing ? rounds("finishing") : t("finish")}
         </Button>
         <div className="flex items-center gap-3">
           {result && (
             <Button className="h-12 px-6 text-base" onClick={onAdvance}>
-              Next question
+              {rounds("next")}
             </Button>
           )}
         </div>
@@ -112,19 +116,13 @@ export function SessionPlay({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="no-dot">
-              Finish the whole interview?
-            </DialogTitle>
+            <DialogTitle className="no-dot">{t("finishTitle")}</DialogTitle>
             <DialogDescription>
               {section.count > 1
-                ? `This ends all ${section.count} sections, not only this one.`
-                : "This ends the interview."}
+                ? t("endsAll", { count: section.count })
+                : t("endsOne")}
               {!allAnswered &&
-                ` ${progress.total - progress.answered} unanswered ${
-                  progress.total - progress.answered === 1
-                    ? "question"
-                    : "questions"
-                } won't be scored.`}
+                ` ${t("unscored", { count: progress.total - progress.answered })}`}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -137,14 +135,14 @@ export function SessionPlay({
                 />
               }
             >
-              Cancel
+              {common("cancel")}
             </DialogClose>
             <Button
               className="h-10 px-5 text-base"
               disabled={finishing}
               onClick={onFinish}
             >
-              {finishing ? "Finishing…" : "Finish"}
+              {finishing ? rounds("finishing") : rounds("finish")}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -169,6 +167,7 @@ function SessionHeader({
   // next one opens.
   onTimeUp: () => void
 }) {
+  const t = useTranslations("session")
   const score = session.current_score ?? 0
 
   return (
@@ -183,7 +182,7 @@ function SessionHeader({
                 className="mx-1.5 size-3.5 shrink-0 text-foreground/55"
               />
               <span className="shrink-0 tabular-nums">
-                Section {section.number} of {section.count}
+                {t("section", { number: section.number, count: section.count })}
               </span>
             </>
           )}

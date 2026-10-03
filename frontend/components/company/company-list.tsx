@@ -2,6 +2,7 @@
 
 import { MessagesSquareIcon, UserRoundIcon } from "lucide-react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 import { RemoveCompany } from "@/components/company/remove-company"
 import { Badge } from "@/components/ui/badge"
@@ -13,12 +14,14 @@ const PATH = "/companies/companies"
 
 /** The companies the user belongs to, a page at a time; `initial` is the server's first page. */
 export function CompanyList({ initial }: { initial: Company[] }) {
+  const t = useTranslations("company")
+  const roles = useTranslations("roles")
   const { items, loadMore } = usePagedList(PATH, initial)
 
   if (items.length === 0) {
     return (
       <p className="rounded-2xl border p-6 text-muted-foreground">
-        No companies yet.
+        {t("empty")}
       </p>
     )
   }
@@ -42,7 +45,7 @@ export function CompanyList({ initial }: { initial: Company[] }) {
               {company.role === "owner" && (
                 <span
                   role="img"
-                  aria-label="Owner"
+                  aria-label={t("owner")}
                   className="text-muted-foreground"
                 >
                   <UserRoundIcon className="size-5" />
@@ -52,7 +55,9 @@ export function CompanyList({ initial }: { initial: Company[] }) {
             <span className="flex shrink-0 items-center gap-4">
               <span
                 className="flex items-center gap-1.5 text-sm text-muted-foreground tabular-nums"
-                aria-label={`${company.interview_count} interviews`}
+                aria-label={t("interviewCount", {
+                  count: company.interview_count,
+                })}
               >
                 <MessagesSquareIcon aria-hidden className="size-5" />
                 {company.interview_count}
@@ -62,7 +67,7 @@ export function CompanyList({ initial }: { initial: Company[] }) {
                   variant="secondary"
                   className="h-7 px-3 text-sm font-light capitalize"
                 >
-                  {company.role}
+                  {roles(company.role)}
                 </Badge>
               )}
             </span>

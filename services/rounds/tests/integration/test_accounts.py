@@ -52,7 +52,13 @@ def test_deleting_a_user_removes_rounds_progress_certificates_and_sessions(run):
 
     exported, round_, progress_rows, certificate, session, kept = run(scenario())
 
-    assert len(exported["practice_rounds"]) == 1
+    [practice] = exported["practice_rounds"]
+    [answer] = practice["answers"]
+
+    # The round shuffles its questions; the first one answered is any of them.
+    assert answer["question"] in {"Question 0?", "Question 1?", "Question 2?"}
+    assert answer["your_answer"] == "right"
+    assert answer["correct"] is True
     assert len(exported["certificates"]) == 1
     assert len(exported["interview_sections"]) == 1
     assert (round_, progress_rows, certificate, session) == (None, [], None, None)

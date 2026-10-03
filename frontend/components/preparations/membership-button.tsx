@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -17,6 +18,9 @@ export function MembershipButton({
   preparation: PreparationSummary
   joined: boolean
 }) {
+  const t = useTranslations("membership")
+  const common = useTranslations("common")
+  const signInText = useTranslations("signIn")
   const router = useRouter()
   const { user } = useAuth()
   const [busy, setBusy] = useState(false)
@@ -38,14 +42,18 @@ export function MembershipButton({
 
       router.refresh()
     } catch {
-      toast.error("Something went wrong. Please try again.")
+      toast.error(common("failed"))
     } finally {
       setBusy(false)
     }
   }
 
   if (!user) {
-    return <Button onClick={() => signIn()}>Sign in to join</Button>
+    return (
+      <Button onClick={() => signIn(signInText("failed"))}>
+        {t("signIn")}
+      </Button>
+    )
   }
 
   return (
@@ -54,7 +62,7 @@ export function MembershipButton({
       disabled={busy}
       onClick={toggle}
     >
-      {joined ? "Leave" : "Join to practice"}
+      {joined ? t("leave") : t("join")}
     </Button>
   )
 }

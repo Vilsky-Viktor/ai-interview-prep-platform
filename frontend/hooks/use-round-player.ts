@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -32,6 +33,7 @@ function fetchStep(id: string): Promise<Step> {
 /** A round's state and actions: loading it (back where the user left off), answering,
 moving on and finishing. */
 export function useRoundPlayer(id: string) {
+  const t = useTranslations("rounds")
   const { user } = useAuth()
   const [round, setRound] = useState<Round | null>(null)
   const [question, setQuestion] = useState<NextQuestion | null>(null)
@@ -93,7 +95,7 @@ export function useRoundPlayer(id: string) {
 
       showStep(step)
     } catch {
-      toast.error("Couldn't load the next question. Please try again.")
+      toast.error(t("nextFailed"))
     }
   }
 
@@ -126,9 +128,7 @@ export function useRoundPlayer(id: string) {
 
       return true
     } catch (error) {
-      toast.error(
-        apiErrorMessage(error, "Couldn't submit your answer. Please try again.")
-      )
+      toast.error(apiErrorMessage(error, t("submitFailed")))
 
       return false
     }
@@ -143,7 +143,7 @@ export function useRoundPlayer(id: string) {
         await apiFetch<Round>(`/rounds/rounds/${id}/finish`, { method: "POST" })
       )
     } catch {
-      toast.error("Couldn't finish the round. Please try again.")
+      toast.error(t("finishFailed"))
       setFinishing(false)
     }
   }

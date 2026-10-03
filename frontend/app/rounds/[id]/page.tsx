@@ -1,8 +1,13 @@
 import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 
 import { RoundView } from "@/components/rounds/round-view"
 
-export const metadata: Metadata = { title: "Round" }
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("rounds")
+
+  return { title: t("title") }
+}
 
 export default async function RoundPage({
   params,

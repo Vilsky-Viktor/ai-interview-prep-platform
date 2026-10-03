@@ -2,6 +2,7 @@
 
 import { cn } from "cn"
 import { ChevronDownIcon, FlagIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -22,6 +23,9 @@ import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { ReportReason } from "@/types/feedback"
 
 export function ReportDialog({ basePath }: { basePath: string }) {
+  const t = useTranslations("questions")
+  const common = useTranslations("common")
+  const reasons = useTranslations("reportReasons")
   const [open, setOpen] = useState(false)
   const [reason, setReason] = useState<ReportReason | "">("")
   const [comment, setComment] = useState("")
@@ -59,7 +63,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
         method: "POST",
         body: JSON.stringify({ reason, comment: comment.trim() }),
       })
-      toast.success("Thanks, we got your report")
+      toast.success(t("reported"))
       setReported(true)
       handleOpen(false)
     } catch (error) {
@@ -70,9 +74,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
         return
       }
 
-      toast.error(
-        apiErrorMessage(error, "Couldn't send the report. Please try again.")
-      )
+      toast.error(apiErrorMessage(error, t("reportFailed")))
     } finally {
       setSending(false)
     }
@@ -85,7 +87,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
           <Button
             variant="ghost"
             size="icon-lg"
-            aria-label={reported ? "Question reported" : "Report question"}
+            aria-label={reported ? t("questionReported") : t("report")}
             className={cn(FEEDBACK_HOVER_CLASS, "h-full w-full rounded-none")}
             aria-pressed={reported}
             disabled={reported}
@@ -98,14 +100,14 @@ export function ReportDialog({ basePath }: { basePath: string }) {
       </DialogTrigger>
       <DialogContent showCloseButton={false} className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>Report question</DialogTitle>
-          <DialogDescription>What&apos;s wrong with it?</DialogDescription>
+          <DialogTitle>{t("report")}</DialogTitle>
+          <DialogDescription>{t("whatsWrong")}</DialogDescription>
         </DialogHeader>
         <form id="report-question-form" onSubmit={send} className="space-y-4">
           <div className="relative rounded-lg border border-transparent transition-colors focus-within:border-ring">
             <select
               required
-              aria-label="Report reason"
+              aria-label={t("reason")}
               value={reason}
               onChange={(event) =>
                 setReason(event.target.value as ReportReason | "")
@@ -115,10 +117,10 @@ export function ReportDialog({ basePath }: { basePath: string }) {
                 !reason && "text-muted-foreground"
               )}
             >
-              <option value="">Select a reason</option>
-              {(Object.keys(REPORT_REASONS) as ReportReason[]).map((key) => (
+              <option value="">{t("selectReason")}</option>
+              {REPORT_REASONS.map((key) => (
                 <option key={key} value={key}>
-                  {REPORT_REASONS[key]}
+                  {reasons(key)}
                 </option>
               ))}
             </select>
@@ -129,8 +131,8 @@ export function ReportDialog({ basePath }: { basePath: string }) {
           </div>
           <div className="rounded-lg border border-transparent transition-colors focus-within:border-ring">
             <Textarea
-              placeholder="Details"
-              aria-label="Details"
+              placeholder={t("details")}
+              aria-label={t("details")}
               value={comment}
               onChange={(event) => setComment(event.target.value)}
               className="min-h-32 resize-none border-0 bg-transparent px-6 py-4 text-lg shadow-none focus-visible:border-transparent focus-visible:ring-0 md:text-lg dark:bg-input/30"
@@ -147,7 +149,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
               />
             }
           >
-            Cancel
+            {common("cancel")}
           </DialogClose>
           <Button
             type="submit"
@@ -155,7 +157,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
             className="h-10 px-5 text-base"
             disabled={!reason || sending}
           >
-            Send
+            {common("send")}
           </Button>
         </DialogFooter>
       </DialogContent>
