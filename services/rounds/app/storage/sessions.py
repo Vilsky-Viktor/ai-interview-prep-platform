@@ -23,9 +23,8 @@ LOAD_SESSION = [selectinload(Session.answers), selectinload(Session.signals)]
 async def create_many(
     user_id: str,
     candidate_invite_id: uuid.UUID,
-    share_results: bool,
     topics: list[TopicQuestions],
-    question_seconds: int | None,
+    question_seconds: int,
 ) -> list[Session]:
     rows = [
         Session(
@@ -34,7 +33,6 @@ async def create_many(
             interview_set_id=topic.preparation_id,
             candidate_invite_id=candidate_invite_id,
             topic_title=topic.title,
-            share_results=share_results,
             status=RoundStatus.IN_PROGRESS,
             questions=[question.model_dump(mode="json") for question in topic.questions],
             final_score=None,

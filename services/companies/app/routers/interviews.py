@@ -49,7 +49,7 @@ async def create_interview(
 
         raise
 
-    interview = await interviews.create(company.id, created["id"], body.share_results)
+    interview = await interviews.create(company.id, created["id"])
 
     return await interview_out(interview)
 

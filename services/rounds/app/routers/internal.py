@@ -29,7 +29,6 @@ async def create_sessions(body: SessionsCreate, caller: ServiceCaller) -> list[S
     rows = await sessions.create_many(
         body.user_id,
         body.candidate_invite_id,
-        body.share_results,
         body.topics,
         body.question_seconds,
     )

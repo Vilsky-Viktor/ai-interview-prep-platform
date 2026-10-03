@@ -657,11 +657,6 @@ export interface components {
     InterviewCreate: {
       /** Text */
       text: string
-      /**
-       * Share Results
-       * @default false
-       */
-      share_results: boolean
     }
     /** InterviewDetail */
     InterviewDetail: {
@@ -679,10 +674,6 @@ export interface components {
       set_id: string | null
       /** Title */
       title: string | null
-      /** Share Results */
-      share_results: boolean
-      /** Timed */
-      timed: boolean
       /** Question Seconds */
       question_seconds: number
       /** Candidate Count */
@@ -711,10 +702,6 @@ export interface components {
       set_id: string | null
       /** Title */
       title: string | null
-      /** Share Results */
-      share_results: boolean
-      /** Timed */
-      timed: boolean
       /** Question Seconds */
       question_seconds: number
       /** Candidate Count */
@@ -727,13 +714,6 @@ export interface components {
     }
     /** InterviewSettings */
     InterviewSettings: {
-      /** Share Results */
-      share_results: boolean
-      /**
-       * Timed
-       * @default false
-       */
-      timed: boolean
       /**
        * Question Seconds
        * @default 60
@@ -761,9 +741,7 @@ export interface components {
       /** Status */
       status: string
       /** Question Seconds */
-      question_seconds: number | null
-      /** Share Results */
-      share_results: boolean
+      question_seconds: number
     }
     /** MemberIn */
     MemberIn: {
@@ -878,8 +856,6 @@ export interface components {
       topic_title: string
       /** Status */
       status: string
-      /** Final Score */
-      final_score?: number | null
     }
     /** TitleIn */
     TitleIn: {

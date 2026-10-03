@@ -28,7 +28,6 @@ def interview_and_company(role):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        share_results=False,
         set_id=uuid.uuid4(),
     )
     company = Company(id=COMPANY_ID, name="My company", created_at=datetime.now(UTC))
@@ -115,7 +114,6 @@ def test_topic_questions_are_text_only(client, monkeypatch):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        share_results=False,
         set_id=uuid.uuid4(),
     )
     company = Company(id=COMPANY_ID, name="My company", created_at=datetime.now(UTC))

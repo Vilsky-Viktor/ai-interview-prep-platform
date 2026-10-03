@@ -75,11 +75,7 @@ export default async function InterviewPage({
               )}
               <InterviewSettings
                 interviewId={interview.id}
-                initial={{
-                  share_results: interview.share_results,
-                  timed: interview.timed,
-                  question_seconds: interview.question_seconds,
-                }}
+                questionSeconds={interview.question_seconds}
               />
             </div>
           }

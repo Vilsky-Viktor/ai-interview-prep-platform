@@ -21,7 +21,6 @@ def owned_session():
         interview_set_id=uuid4(),
         candidate_invite_id=uuid4(),
         topic_title="Python",
-        share_results=False,
         status="in_progress",
         questions=[{"id": str(QUESTION_ID), "text": "What is the GIL?"}],
         started_at=datetime.now(UTC),

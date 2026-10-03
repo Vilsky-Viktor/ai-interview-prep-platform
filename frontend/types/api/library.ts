@@ -25,6 +25,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/me/settings": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Update Settings
+     * @description Takes effect once the frontend refreshes the user's ID token.
+     */
+    put: operations["update_settings_me_settings_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/me/export": {
     parameters: {
       query?: never
@@ -944,6 +964,11 @@ export interface components {
       requirements: string[]
       /** Topics */
       topics: components["schemas"]["TopicIn"][]
+      /**
+       * Language
+       * @default en
+       */
+      language: string
     }
     /** PreparationRatingIn */
     PreparationRatingIn: {
@@ -1019,6 +1044,8 @@ export interface components {
       owner_id: string
       /** Level */
       level: string
+      /** Language */
+      language: string
       /** Topic */
       topic: string
       /** Subtopics */
@@ -1155,6 +1182,11 @@ export interface components {
       embedding: number[]
       /** Level */
       level: string
+      /**
+       * Language
+       * @default en
+       */
+      language: string
       /** Count */
       count: number
     }
@@ -1209,6 +1241,14 @@ export interface components {
       title: string
       /** Questions */
       questions: components["schemas"]["QuestionOut"][]
+    }
+    /** SettingsIn */
+    SettingsIn: {
+      /**
+       * Language
+       * @enum {string}
+       */
+      language: "en" | "ru"
     }
     /** ShareIn */
     ShareIn: {
@@ -1334,6 +1374,12 @@ export interface components {
       email_verified: boolean
       /** Name */
       name?: string | null
+      /**
+       * Language
+       * @default en
+       * @enum {string}
+       */
+      language: "en" | "ru"
     }
     /** ValidationError */
     ValidationError: {
@@ -1401,6 +1447,37 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+    }
+  }
+  update_settings_me_settings_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SettingsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
       }
     }
   }

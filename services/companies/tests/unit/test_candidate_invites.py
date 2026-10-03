@@ -28,7 +28,6 @@ def invite_setup(monkeypatch):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        share_results=False,
         set_id=uuid.uuid4(),
         title="Backend interview",
         invites=[],

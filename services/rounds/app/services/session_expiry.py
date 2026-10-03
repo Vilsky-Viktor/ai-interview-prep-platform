@@ -1,0 +1,34 @@
+import uuid
+from datetime import UTC, datetime
+
+from app.constants.rounds import EXPIRY_BATCH, RoundStatus
+from app.helpers.scores import final_score
+from app.storage import session_expiry, sessions
+
+
+async def finish_invite(invite_id: uuid.UUID) -> None:
+    """Finishes every open section of the interview; unanswered questions count as wrong."""
+    for row in await sessions.list_for_invite(invite_id):
+        if row.status == RoundStatus.IN_PROGRESS:
+            scores = [answer.score for answer in row.answers]
+            await sessions.finish(row.id, final_score(scores, len(row.questions)))
+
+
+async def finish_expired() -> int:
+    """Finishes interviews whose time ran out while the candidate was away."""
+    expired = await session_expiry.expired_invites(datetime.now(UTC), EXPIRY_BATCH)
+
+    for invite_id in expired:
+        await finish_invite(invite_id)
+
+    return len(expired)
+
+
+async def finish_if_expired(invite_id: uuid.UUID) -> bool:
+    """For a candidate coming back: their interview ends at once if its time ran out."""
+    if not await session_expiry.expired_invites(datetime.now(UTC), 1, invite_id):
+        return False
+
+    await finish_invite(invite_id)
+
+    return True

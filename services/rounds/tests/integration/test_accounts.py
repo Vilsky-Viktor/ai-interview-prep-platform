@@ -33,7 +33,7 @@ def test_deleting_a_user_removes_rounds_progress_certificates_and_sessions(run):
             score=100,
         )
         await rounds.finish(round_.id, 100, certificate)
-        [session] = await sessions.create_many("gone", uuid.uuid4(), False, [topic()], None)
+        [session] = await sessions.create_many("gone", uuid.uuid4(), [topic()], 60)
         kept = await rounds.create("stays", subject, {})
         exported = await accounts.export("gone")
 

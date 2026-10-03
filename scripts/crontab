@@ -8,3 +8,5 @@
 * * * * * curl -s -X POST http://companies:8000/internal/schedules/outbox
 * * * * * curl -s -X POST http://rounds:8000/internal/schedules/outbox
 * * * * * curl -s -X POST http://generation-worker:8000/internal/schedules/outbox
+# Interviews whose time ran out after the candidate left, every minute.
+* * * * * curl -s -X POST http://rounds:8000/internal/schedules/expire-interviews

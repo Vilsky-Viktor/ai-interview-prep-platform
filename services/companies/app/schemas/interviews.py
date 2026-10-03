@@ -12,7 +12,6 @@ from app.constants.interviews import (
 
 class InterviewCreate(BaseModel):
     text: str = Field(min_length=1, max_length=20_000)
-    share_results: bool = False
 
 
 class InterviewOut(BaseModel):
@@ -20,8 +19,6 @@ class InterviewOut(BaseModel):
     generation_id: UUID
     set_id: UUID | None
     title: str | None
-    share_results: bool
-    timed: bool
     question_seconds: int
     candidate_count: int
     created_at: datetime
@@ -68,8 +65,6 @@ class TopicLimitIn(BaseModel):
 
 
 class InterviewSettings(BaseModel):
-    share_results: bool
-    timed: bool = False
     question_seconds: int = Field(
         default=DEFAULT_QUESTION_SECONDS, ge=MIN_QUESTION_SECONDS, le=MAX_QUESTION_SECONDS
     )

@@ -1,4 +1,3 @@
-import { cn } from "cn"
 import { MinusIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
@@ -22,7 +21,7 @@ import {
 import { Progress } from "@/components/ui/progress"
 import { useIntegritySignals } from "@/hooks/use-integrity-signals"
 import type { InterviewSession, SessionAnswerResult } from "@/types/company"
-import type { AnswerInput, AnswerResult, NextQuestion } from "@/types/round"
+import type { AnswerInput, NextQuestion } from "@/types/round"
 
 type SessionPlayProps = {
   session: InterviewSession
@@ -53,7 +52,6 @@ export function SessionPlay({
   const common = useTranslations("common")
   const [confirmFinish, setConfirmFinish] = useState(false)
   useIntegritySignals(session.id, session.status === "in_progress")
-  const shown = result && session.share_results ? shownResult(result) : null
   const allAnswered = progress.total > 0 && progress.answered === progress.total
 
   return (
@@ -75,9 +73,10 @@ export function SessionPlay({
             text={question.text}
             className="text-2xl leading-snug font-medium"
           />
+          {/* Candidates never learn whether they were right: their pick only stays marked. */}
           <ChoiceOptions
             options={question.options}
-            result={shown}
+            result={null}
             onAnswer={(option_index) => onAnswer({ option_index })}
           />
           {/* Judged once answered, not mid-question. */}
@@ -161,14 +160,13 @@ function SessionHeader({
   session: InterviewSession
   progress: { answered: number; total: number }
   section: { number: number; count: number }
-  // The question waiting for an answer; its clock shows in a timed interview.
+  // The question waiting for an answer, with its clock.
   question: NextQuestion | null
   // Called when the question's clock reaches zero: the server counts it as wrong, and the
   // next one opens.
   onTimeUp: () => void
 }) {
   const t = useTranslations("session")
-  const score = session.current_score ?? 0
 
   return (
     <div className="space-y-3">
@@ -202,24 +200,6 @@ function SessionHeader({
             </>
           )}
           {progress.answered} / {progress.total}
-          {session.share_results && (
-            <>
-              <MinusIcon
-                aria-hidden
-                className="mx-1.5 size-3.5 text-foreground/55"
-              />
-              <span
-                className={cn(
-                  "text-xl font-light",
-                  session.passed
-                    ? "text-green-600 dark:text-green-400"
-                    : "text-red-600 dark:text-red-400"
-                )}
-              >
-                {score}%
-              </span>
-            </>
-          )}
         </p>
       </div>
       <Progress
@@ -227,24 +207,4 @@ function SessionHeader({
       />
     </div>
   )
-}
-
-/** Candidates learn only whether they were right; the right option stays hidden. */
-function shownResult(result: SessionAnswerResult): AnswerResult | null {
-  if (result.correct == null) {
-    return null
-  }
-
-  const optionIndex = result.option_index ?? null
-
-  return {
-    answer_id: result.answer_id,
-    correct: result.correct,
-    correct_option_index: result.correct ? optionIndex : null,
-    current_score: result.current_score ?? 0,
-    passed: result.passed ?? false,
-    answered: result.answered,
-    total: result.total,
-    option_index: optionIndex,
-  }
 }

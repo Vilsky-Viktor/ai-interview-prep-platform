@@ -25,7 +25,6 @@ def session(seconds):
         interview_set_id=uuid4(),
         candidate_invite_id=uuid4(),
         topic_title="Python",
-        share_results=False,
         status="in_progress",
         questions=[
             {
@@ -84,7 +83,7 @@ def test_each_candidate_gets_their_own_option_order(monkeypatch):
     orders = set()
 
     for _ in range(30):
-        rows = asyncio.run(sessions.create_many("cand", uuid4(), False, [topic], None))
+        rows = asyncio.run(sessions.create_many("cand", uuid4(), [topic], 60))
         question = rows[0].questions[0]
         orders.add(tuple(option["answer"] for option in question["options"]))
         assert [option["answer"] for option in question["options"] if option["correct"]] == ["0"]

@@ -23,7 +23,7 @@ def candidate():
     app.dependency_overrides.clear()
 
 
-def start(client, monkeypatch, timed):
+def start(client, monkeypatch):
     invite = CandidateInvite(
         id=uuid.uuid4(),
         interview_id=uuid.uuid4(),
@@ -36,9 +36,7 @@ def start(client, monkeypatch, timed):
         id=invite.interview_id,
         company_id=uuid.uuid4(),
         generation_id=uuid.uuid4(),
-        share_results=False,
         set_id=uuid.uuid4(),
-        timed=timed,
         question_seconds=45,
         topic_limits={},
     )
@@ -75,9 +73,9 @@ def start(client, monkeypatch, timed):
     return sent
 
 
-def test_a_timed_interview_limits_each_question(client, monkeypatch):
-    assert start(client, monkeypatch, timed=True)["question_seconds"] == 45
+def test_every_interview_limits_each_question(client, monkeypatch):
+    sent = start(client, monkeypatch)
 
-
-def test_an_untimed_interview_has_no_limit(client, monkeypatch):
-    assert start(client, monkeypatch, timed=False)["question_seconds"] is None
+    assert sent["question_seconds"] == 45
+    # Candidates never see their scores, so there's nothing to share.
+    assert "share_results" not in sent

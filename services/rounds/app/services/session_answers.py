@@ -3,7 +3,6 @@ from datetime import UTC, datetime
 from fastapi import HTTPException, status
 
 from app.constants.rounds import TIME_UP, RoundStatus
-from app.helpers.scores import current_score, score_passed
 from app.helpers.sessions import answer_seconds, next_session_question
 from app.models.sessions import Session
 from app.schemas.rounds import AnswerCreate
@@ -39,14 +38,6 @@ async def submit_session_answer(row: Session, body: AnswerCreate) -> SessionAnsw
 
     await outbox_service.flush_quietly()
 
-    scores = [previous.score for previous in row.answers] + [answer.score]
-    result = SessionAnswerResult(
-        answer_id=answer.id, answered=len(scores), total=len(row.questions)
+    return SessionAnswerResult(
+        answer_id=answer.id, answered=len(row.answers) + 1, total=len(row.questions)
     )
-
-    if row.share_results:
-        result.correct = answer.correct
-        result.current_score = current_score(scores)
-        result.passed = score_passed(result.current_score)
-
-    return result

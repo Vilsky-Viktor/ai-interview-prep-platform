@@ -8,11 +8,10 @@ from app.schemas.interviews import InterviewSettings
 from app.storage.db import Session
 
 
-async def create(company_id, generation_id, share_results: bool) -> Interview:
+async def create(company_id, generation_id) -> Interview:
     interview = Interview(
         company_id=company_id,
         generation_id=generation_id,
-        share_results=share_results,
         set_id=None,
     )
 

@@ -211,7 +211,7 @@ export interface paths {
     }
     /**
      * Review Session
-     * @description Candidates see whether they were right only when share_results is on; never the key.
+     * @description Candidates see their questions and picks, never whether they were right or the key.
      */
     get: operations["review_session_sessions__session_id__review_get"]
     put?: never
@@ -923,12 +923,6 @@ export interface components {
       answered: number
       /** Total */
       total: number
-      /** Correct */
-      correct?: boolean | null
-      /** Current Score */
-      current_score?: number | null
-      /** Passed */
-      passed?: boolean | null
     }
     /** SessionOut */
     SessionOut: {
@@ -946,19 +940,11 @@ export interface components {
       topic_title: string
       /** Interview Title */
       interview_title?: string | null
-      /** Share Results */
-      share_results: boolean
       status: components["schemas"]["RoundStatus"]
       /** Total */
       total: number
       /** Answered */
       answered: number
-      /** Current Score */
-      current_score: number | null
-      /** Final Score */
-      final_score: number | null
-      /** Passed */
-      passed: boolean | null
       /**
        * Started At
        * Format: date-time
@@ -993,12 +979,10 @@ export interface components {
        * Format: uuid
        */
       candidate_invite_id: string
-      /** Share Results */
-      share_results: boolean
       /** Topics */
       topics: components["schemas"]["TopicQuestions"][]
       /** Question Seconds */
-      question_seconds?: number | null
+      question_seconds: number
     }
     /** SignalIn */
     SignalIn: {

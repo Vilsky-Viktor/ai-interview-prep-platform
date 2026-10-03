@@ -19,7 +19,7 @@ def timed_out(session_id, question_id):
 
 def test_two_requests_timing_out_the_same_question_save_one_answer(run):
     async def scenario():
-        [row] = await sessions.create_many("cand", uuid.uuid4(), False, [topic()], 30)
+        [row] = await sessions.create_many("cand", uuid.uuid4(), [topic()], 30)
         await sessions.mark_shown(row.id)
         question_id = uuid.UUID(row.questions[0]["id"])
         saved = await asyncio.gather(
@@ -41,7 +41,7 @@ def test_signals_are_saved_with_their_question_and_loaded_with_the_session(run):
     invite_id = uuid.uuid4()
 
     async def scenario():
-        [row] = await sessions.create_many("cand", invite_id, False, [topic()], None)
+        [row] = await sessions.create_many("cand", invite_id, [topic()], 60)
         question_id = uuid.UUID(row.questions[0]["id"])
         await sessions.add_signal(row.id, question_id, "tab_leave")
         await sessions.add_signal(row.id, None, "copy")
@@ -60,7 +60,7 @@ def test_scores_show_progress_and_the_grade_of_answers_so_far(run):
     invite_id = uuid.uuid4()
 
     async def scenario():
-        rows = await sessions.create_many("cand", invite_id, False, [topic(4)], None)
+        rows = await sessions.create_many("cand", invite_id, [topic(4)], 60)
         row = rows[0]
         question = row.questions[0]
         correct = next(i for i, option in enumerate(question["options"]) if option["correct"])

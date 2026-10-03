@@ -2,7 +2,7 @@ import uuid
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import DateTime, ForeignKey, Text, false
+from sqlalchemy import DateTime, ForeignKey, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -25,9 +25,8 @@ class Interview(Base):
     # Copied from the generated set (and renames), so pages don't ask library for it.
     title: Mapped[str | None] = mapped_column(Text)
     generation_id: Mapped[uuid.UUID]
-    share_results: Mapped[bool]
-    # In a timed interview every question has question_seconds; one left unanswered is wrong.
-    timed: Mapped[bool] = mapped_column(default=False, server_default=false())
+    # Every interview is timed: each question has question_seconds, and one left unanswered is
+    # wrong. Candidates never see their scores.
     question_seconds: Mapped[int] = mapped_column(
         default=DEFAULT_QUESTION_SECONDS, server_default=str(DEFAULT_QUESTION_SECONDS)
     )

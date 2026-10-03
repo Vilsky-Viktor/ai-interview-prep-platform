@@ -46,7 +46,6 @@ def test_finished_interview_status(client, monkeypatch):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        share_results=False,
         set_id=uuid.uuid4(),
     )
     interview.invites = [invite]
@@ -110,7 +109,6 @@ def revoke(client, monkeypatch, status):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        share_results=False,
         set_id=uuid.uuid4(),
     )
     interview.invites = [invite]

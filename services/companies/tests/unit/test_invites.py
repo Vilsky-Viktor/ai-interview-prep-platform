@@ -41,7 +41,6 @@ def stored_invite(monkeypatch):
         id=INTERVIEW_ID,
         company_id=uuid.uuid4(),
         generation_id=uuid.uuid4(),
-        share_results=False,
         set_id=uuid.uuid4(),
     )
 

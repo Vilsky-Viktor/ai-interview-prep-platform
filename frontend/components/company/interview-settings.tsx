@@ -14,58 +14,46 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import { Switch } from "@/components/ui/switch"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 
-type Settings = {
-  share_results: boolean
-  timed: boolean
-  question_seconds: number
-}
-
+/** The interview's one setting: the time each question has. Every interview is timed, and
+candidates never see their scores. */
 export function InterviewSettings({
   interviewId,
-  initial,
+  questionSeconds,
 }: {
   interviewId: string
-  initial: Settings
+  questionSeconds: number
 }) {
   const t = useTranslations("interviews")
   const router = useRouter()
-  const [settings, setSettings] = useState(initial)
-  const [seconds, setSeconds] = useState(String(initial.question_seconds))
+  const [saved, setSaved] = useState(questionSeconds)
+  const [seconds, setSeconds] = useState(String(questionSeconds))
   const [saving, setSaving] = useState(false)
 
-  // Every save sends all settings, so one change never resets another.
-  async function save(change: Partial<Settings>) {
-    const next = { ...settings, ...change }
+  // The API checks the range; its message shows if the value doesn't fit.
+  async function save() {
+    const next = Number(seconds)
 
-    if (saving || JSON.stringify(next) === JSON.stringify(settings)) {
+    if (saving || next === saved) {
       return
     }
 
-    const previous = settings
-    setSettings(next)
     setSaving(true)
 
     try {
       await apiFetch(`/companies/interviews/${interviewId}/settings`, {
         method: "PATCH",
-        body: JSON.stringify(next),
+        body: JSON.stringify({ question_seconds: next }),
       })
+      setSaved(next)
       router.refresh()
     } catch (error) {
-      setSettings(previous)
-      setSeconds(String(previous.question_seconds))
+      setSeconds(String(saved))
       toast.error(apiErrorMessage(error, t("settingsFailed")))
     } finally {
       setSaving(false)
     }
-  }
-
-  // The API checks the range; its message shows if the value doesn't fit.
-  function saveSeconds() {
-    void save({ question_seconds: Number(seconds) })
   }
 
   return (
@@ -87,55 +75,30 @@ export function InterviewSettings({
         className="sm:max-w-lg"
         aria-label={t("settings")}
       >
-        <div className="flex items-center justify-between gap-4">
-          <span className="text-lg font-medium">{t("showScores")}</span>
-          <Switch
-            checked={settings.share_results}
-            disabled={saving}
-            aria-label={t("showScores")}
-            onCheckedChange={(checked) => save({ share_results: checked })}
-          />
-        </div>
-        <div className="flex items-center justify-between gap-4">
-          <span className="space-y-1">
-            <span className="block text-lg font-medium">{t("timed")}</span>
-            <span className="block text-sm text-muted-foreground">
-              {t("timedText")}
+        <label className="flex items-center justify-between gap-4">
+          <span className="text-lg font-medium">{t("timePerQuestion")}</span>
+          {/* Same look as the app's other fields (library search, candidate invite). */}
+          <span className="relative w-36 rounded-lg border border-transparent transition-colors focus-within:border-ring">
+            <Input
+              type="number"
+              inputMode="numeric"
+              value={seconds}
+              disabled={saving}
+              aria-label={t("secondsLabel")}
+              className="h-14 [appearance:textfield] border-0 pr-14 pl-5 text-lg focus-visible:ring-0 md:text-lg [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              onChange={(event) => setSeconds(event.target.value)}
+              onBlur={save}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.currentTarget.blur()
+                }
+              }}
+            />
+            <span className="pointer-events-none absolute top-1/2 right-5 -translate-y-1/2 text-lg text-muted-foreground">
+              {t("secondsUnit")}
             </span>
           </span>
-          <Switch
-            checked={settings.timed}
-            disabled={saving}
-            aria-label={t("timed")}
-            onCheckedChange={(checked) => save({ timed: checked })}
-          />
-        </div>
-        {settings.timed && (
-          <label className="flex items-center justify-between gap-4">
-            <span className="text-lg font-medium">{t("timePerQuestion")}</span>
-            {/* Same look as the app's other fields (library search, candidate invite). */}
-            <span className="relative w-36 rounded-lg border border-transparent transition-colors focus-within:border-ring">
-              <Input
-                type="number"
-                inputMode="numeric"
-                value={seconds}
-                disabled={saving}
-                aria-label={t("secondsLabel")}
-                className="h-14 [appearance:textfield] border-0 pr-14 pl-5 text-lg focus-visible:ring-0 md:text-lg [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-                onChange={(event) => setSeconds(event.target.value)}
-                onBlur={saveSeconds}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    event.currentTarget.blur()
-                  }
-                }}
-              />
-              <span className="pointer-events-none absolute top-1/2 right-5 -translate-y-1/2 text-lg text-muted-foreground">
-                {t("secondsUnit")}
-              </span>
-            </span>
-          </label>
-        )}
+        </label>
         <DialogFooter showCloseButton />
       </DialogContent>
     </Dialog>

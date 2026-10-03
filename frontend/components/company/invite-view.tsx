@@ -91,7 +91,7 @@ export function InviteView({ token }: { token: string }) {
         <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
           {invite.title ?? t("fallbackTitle")}
         </h1>
-        {invite.question_seconds != null && invite.status !== "finished" && (
+        {invite.status !== "finished" && (
           <p className="pt-6 text-base text-muted-foreground">
             {t("timePerQuestion")}
             <span className="block">
@@ -107,7 +107,7 @@ export function InviteView({ token }: { token: string }) {
         <ul className="mx-auto max-w-lg list-disc space-y-2 pl-5 text-left text-base text-muted-foreground">
           <li>{t("pickOne")}</li>
           <li>{t("noChange")}</li>
-          {invite.question_seconds != null && <li>{t("timeRunsOut")}</li>}
+          <li>{t("timeRunsOut")}</li>
           <li>{t("unanswered")}</li>
           <li>{t("saved")}</li>
           <li>
@@ -119,7 +119,6 @@ export function InviteView({ token }: { token: string }) {
               ),
             })}
           </li>
-          {invite.share_results && <li>{t("seeResults")}</li>}
         </ul>
       )}
       {invite.status === "finished" ? (

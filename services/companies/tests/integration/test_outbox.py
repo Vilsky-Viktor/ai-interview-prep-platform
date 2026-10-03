@@ -10,7 +10,7 @@ from app.storage.db import Session
 def test_a_candidate_invite_and_its_email_event_are_saved_together(run):
     async def scenario():
         company = await companies.create("Acme", "owner", "owner@example.com")
-        interview = await interviews.create(company.id, uuid.uuid4(), False)
+        interview = await interviews.create(company.id, uuid.uuid4())
         invite = await invites.upsert(interview.id, "erin@example.com", "Backend", "Acme")
 
         async with Session() as session:

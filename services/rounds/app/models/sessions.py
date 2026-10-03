@@ -26,7 +26,6 @@ class Session(Base):
     interview_set_id: Mapped[uuid.UUID]
     candidate_invite_id: Mapped[uuid.UUID] = mapped_column(index=True)
     topic_title: Mapped[str] = mapped_column(Text)
-    share_results: Mapped[bool]
     status: Mapped[str] = mapped_column(String(32), default=RoundStatus.IN_PROGRESS)
     questions: Mapped[list] = mapped_column(JSONB)
     final_score: Mapped[int | None]
@@ -34,7 +33,8 @@ class Session(Base):
         DateTime(timezone=True), default=lambda: datetime.now(UTC), server_default=func.now()
     )
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
-    # Timed interviews only: the seconds each question has before it counts as wrong.
+    # The seconds each question has before it counts as wrong; None only for sessions from
+    # before every interview was timed.
     question_seconds: Mapped[int | None]
     # When the question now waiting for an answer was first shown; cleared by the answer.
     question_shown_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

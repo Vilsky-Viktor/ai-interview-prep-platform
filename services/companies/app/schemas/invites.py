@@ -24,16 +24,13 @@ class InviteView(BaseModel):
     email: str
     status: str
     # Shown before the candidate starts: the timer begins at start.
-    question_seconds: int | None
-    # Whether the candidate sees if each answer was right.
-    share_results: bool
+    question_seconds: int
 
 
 class SessionSummary(BaseModel):
     id: UUID
     topic_title: str
     status: str
-    final_score: int | None = None
 
 
 class InviteStartOut(BaseModel):

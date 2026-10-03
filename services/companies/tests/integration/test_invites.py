@@ -7,7 +7,7 @@ from app.storage import companies, interviews, invites
 async def interview():
     company = await companies.create("Acme", "owner", "owner@example.com")
 
-    return await interviews.create(company.id, uuid.uuid4(), False)
+    return await interviews.create(company.id, uuid.uuid4())
 
 
 def test_inviting_the_same_address_again_returns_the_same_invite(run):

@@ -20,7 +20,6 @@ def session(shown_at):
         interview_set_id=uuid4(),
         candidate_invite_id=uuid4(),
         topic_title="Python",
-        share_results=False,
         status="in_progress",
         questions=[
             {

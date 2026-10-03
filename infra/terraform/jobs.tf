@@ -28,6 +28,8 @@ locals {
     companies-outbox  = { service = "companies", path = "/internal/schedules/outbox", cron = "* * * * *" }
     rounds-outbox     = { service = "rounds", path = "/internal/schedules/outbox", cron = "* * * * *" }
     generation-outbox = { service = "generation-worker", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    # Interviews whose time ran out after the candidate left.
+    interview-expiry = { service = "rounds", path = "/internal/schedules/expire-interviews", cron = "* * * * *" }
   }
 }
 

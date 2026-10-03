@@ -43,7 +43,6 @@ def interview(set_id, generation_id=None):
         id=uuid.uuid4(),
         company_id=COMPANY_ID,
         generation_id=generation_id or uuid.uuid4(),
-        share_results=False,
         set_id=set_id,
         invites=[],
     )

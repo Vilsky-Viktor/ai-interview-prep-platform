@@ -27,7 +27,6 @@ def setup(monkeypatch, role):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=GENERATION_ID,
-        share_results=False,
         set_id=None,
         invites=[],
     )

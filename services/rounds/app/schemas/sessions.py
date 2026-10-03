@@ -20,10 +20,9 @@ class InviteIdsIn(BaseModel):
 class SessionsCreate(BaseModel):
     user_id: str
     candidate_invite_id: UUID
-    share_results: bool
     topics: list[TopicQuestions]
-    # Set for a timed interview: the seconds each question has.
-    question_seconds: int | None = Field(default=None, ge=1)
+    # Every interview is timed: the seconds each question has.
+    question_seconds: int = Field(ge=1)
 
 
 class SessionTopicOut(BaseModel):
@@ -39,17 +38,12 @@ class SessionOut(BaseModel):
     topic_id: UUID
     topic_title: str
     interview_title: str | None = None
-    share_results: bool
     status: RoundStatus
     total: int
     answered: int
-    current_score: int | None
-    final_score: int | None
-    # Whether the score shown passes; None when there is none or results aren't shared.
-    passed: bool | None
     started_at: datetime
     finished_at: datetime | None
-    # Timed interviews only: the seconds each question has.
+    # The seconds each question has; None for sessions from before every interview was timed.
     question_seconds: int | None
 
 
@@ -57,10 +51,6 @@ class SessionAnswerResult(BaseModel):
     answer_id: UUID
     answered: int
     total: int
-    # Only when the candidate may see results.
-    correct: bool | None = None
-    current_score: int | None = None
-    passed: bool | None = None
 
 
 class ScorecardSession(BaseModel):

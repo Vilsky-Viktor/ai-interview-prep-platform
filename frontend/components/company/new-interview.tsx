@@ -6,7 +6,6 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { Interview } from "@/types/company"
@@ -15,7 +14,6 @@ export function NewInterview({ companyId }: { companyId: string }) {
   const t = useTranslations("interviews")
   const router = useRouter()
   const [text, setText] = useState("")
-  const [shareResults, setShareResults] = useState(false)
   const [saving, setSaving] = useState(false)
 
   async function create(event: React.FormEvent) {
@@ -27,10 +25,7 @@ export function NewInterview({ companyId }: { companyId: string }) {
         `/companies/interviews?company_id=${companyId}`,
         {
           method: "POST",
-          body: JSON.stringify({
-            text,
-            share_results: shareResults,
-          }),
+          body: JSON.stringify({ text }),
         }
       )
       router.push(
@@ -57,10 +52,6 @@ export function NewInterview({ companyId }: { companyId: string }) {
       />
       <div className="flex flex-wrap items-center justify-between gap-4 pt-2 pl-2">
         <div className="flex flex-wrap items-center gap-4 sm:ml-auto">
-          <label className="flex items-center gap-3 text-sm">
-            {t("showScores")}
-            <Switch checked={shareResults} onCheckedChange={setShareResults} />
-          </label>
           <Button
             type="submit"
             className="h-12 px-6 text-base"

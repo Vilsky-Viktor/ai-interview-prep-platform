@@ -26,14 +26,13 @@ def clear_overrides():
     app.dependency_overrides.clear()
 
 
-def test_updates_shared_scores(client, monkeypatch):
+def test_updates_the_time_per_question(client, monkeypatch):
     sign_in()
     saved = {}
     interview = Interview(
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        share_results=False,
         set_id=None,
     )
     company = Company(id=COMPANY_ID, name="My company", created_at=datetime.now(UTC))
@@ -61,18 +60,10 @@ def test_updates_shared_scores(client, monkeypatch):
     monkeypatch.setattr(interviews, "update_settings", fake_update)
     url = f"/interviews/{INTERVIEW_ID}/settings"
 
-    response = client.patch(url, json={"share_results": True})
+    response = client.patch(url, json={"question_seconds": 45})
 
     assert response.status_code == 204
-    # Without timer settings, an interview stays untimed with the default limit.
-    assert saved == {"share_results": True, "timed": False, "question_seconds": 60}
-
-    response = client.patch(
-        url, json={"share_results": False, "timed": True, "question_seconds": 45}
-    )
-
-    assert response.status_code == 204
-    assert saved == {"share_results": False, "timed": True, "question_seconds": 45}
-    too_short = client.patch(url, json={"share_results": False, "question_seconds": 5})
+    assert saved == {"question_seconds": 45}
+    too_short = client.patch(url, json={"question_seconds": 5})
 
     assert too_short.status_code == 422

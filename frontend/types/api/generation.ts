@@ -418,6 +418,12 @@ export interface components {
       company_id: string
       /** Owner Uid */
       owner_uid: string
+      /**
+       * Language
+       * @default en
+       * @enum {string}
+       */
+      language: "en" | "ru"
     }
     /**
      * QualityFlag

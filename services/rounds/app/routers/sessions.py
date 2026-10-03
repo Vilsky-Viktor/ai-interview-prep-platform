@@ -78,14 +78,14 @@ async def answer_question(
 
 @router.get("/{session_id}/review")
 async def review_session(session_id: UUID, user: CurrentUser) -> list[ReviewItem]:
-    """Candidates see whether they were right only when share_results is on; never the key."""
+    """Candidates see their questions and picks, never whether they were right or the key."""
     row = await get_owned_session(session_id, user)
     items = build_review(row)
 
     for item in items:
         item.correct_option_index = None
 
-        if item.answer and not row.share_results:
+        if item.answer:
             item.answer.correct = None
 
     return items

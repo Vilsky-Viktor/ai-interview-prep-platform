@@ -24,7 +24,6 @@ def setup(monkeypatch, saved):
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
-        share_results=False,
         set_id=uuid.uuid4(),
         topic_limits={},
     )
