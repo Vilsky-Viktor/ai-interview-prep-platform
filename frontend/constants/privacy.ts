@@ -18,6 +18,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
       "Practice: your answers, scores, progress and certificates. A certificate shows your name and score to anyone with its link.",
       "Interviews: the email you were invited with, your answers, how long each answer took, and when you left the interview page or copied text during it. You are told about this before you start.",
       "Technical: error reports without your IP address or email, and short-lived server logs needed to run and secure the service.",
+      "Referrals: whose referral link you or your company came through, and whether it has been rewarded.",
       "Usage statistics: steps such as signing up, a prep kit being ready, a round finished or a top-up, with counts like a score or an amount. Your account id is replaced by a code that can't be traced back to you, and no names, emails or texts are included.",
     ],
   },

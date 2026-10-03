@@ -84,6 +84,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/companies/{company_id}/referral": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Referral
+     * @description The company's referral link; any member may share it.
+     */
+    get: operations["get_referral_companies__company_id__referral_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/members": {
     parameters: {
       query?: never
@@ -869,6 +889,20 @@ export interface components {
       /** Reports */
       reports: number
     }
+    /**
+     * ReferralOut
+     * @description The company's referral link code, what it earns, and how many it has earned for.
+     */
+    ReferralOut: {
+      /** Code */
+      code: string
+      /** Reward */
+      reward: number
+      /** Min Dollars */
+      min_dollars: number
+      /** Rewarded */
+      rewarded: number
+    }
     /** ReportOut */
     ReportOut: {
       /**
@@ -1143,6 +1177,37 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["CompanyCreditsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_referral_companies__company_id__referral_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["ReferralOut"]
         }
       }
       /** @description Validation Error */

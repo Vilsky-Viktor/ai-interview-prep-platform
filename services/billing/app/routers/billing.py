@@ -3,7 +3,7 @@ import time
 from fastapi import APIRouter, HTTPException, Query, Request, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
-from prepza_common.constants import CHAT_FREE_TURNS
+from prepza_common.constants import CHAT_FREE_TURNS, REFERRAL_COOKIE
 from prepza_common.paging import PageParams
 
 from app.config.settings import settings
@@ -12,6 +12,8 @@ from app.constants.credits import (
     CERTIFICATE_CREDITS,
     CHAT_TURN_CREDITS,
     KIT_CREDITS,
+    REFERRAL_MIN_CENTS,
+    REFERRAL_REWARD,
     WELCOME_COMPANY,
     WELCOME_USER,
 )
@@ -32,11 +34,13 @@ from app.schemas.billing import (
     CustomTopUpOut,
     EntryOut,
     QuoteOut,
+    ReferralOut,
     TopUpOut,
 )
 from app.services.catalog import price_ids
+from app.services.referrals import referral_out
 from app.services.webhooks import handle
-from app.storage import ledger
+from app.storage import ledger, referrals
 
 router = APIRouter(tags=["billing"])
 
@@ -56,6 +60,9 @@ def catalog() -> CatalogOut:
         chat_free_turns=CHAT_FREE_TURNS,
         welcome_user=WELCOME_USER,
         welcome_company=WELCOME_COMPANY,
+        referral_user=REFERRAL_REWARD[OwnerType.USER],
+        referral_company=REFERRAL_REWARD[OwnerType.COMPANY],
+        referral_company_min_dollars=REFERRAL_MIN_CENTS[OwnerType.COMPANY] // 100,
         products=[
             TopUpOut(
                 key=product.key,
@@ -88,12 +95,20 @@ def quote(
 
 
 @router.get("/me")
-async def my_balance(user: CurrentUser) -> BalanceOut:
+async def my_balance(user: CurrentUser, request: Request) -> BalanceOut:
     # The first visit gives the welcome gift, once per email (the frontend asks on sign-in).
+    # A new person who came through a referral link is noted then.
     if await ledger.welcome_user(user.uid, user.email):
-        await track("signed_up", user_id=user.uid, language=user.language)
+        code = request.cookies.get(REFERRAL_COOKIE)
+        referred = bool(code) and await referrals.record(code, OwnerType.USER, user.uid, [])
+        await track("signed_up", user_id=user.uid, language=user.language, referred=referred)
 
     return balance_out(await ledger.wallet(OwnerType.USER, user.uid))
+
+
+@router.get("/me/referral")
+async def my_referral(user: CurrentUser) -> ReferralOut:
+    return await referral_out(OwnerType.USER, user.uid)
 
 
 @router.get("/me/history")

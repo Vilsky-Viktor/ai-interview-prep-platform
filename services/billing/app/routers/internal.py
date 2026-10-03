@@ -15,9 +15,17 @@ from app.constants.credits import (
 from app.constants.products import OwnerType
 from app.helpers.owners import owner_of
 from app.helpers.wallets import balance_out, entry_out
-from app.schemas.billing import BalanceOut, EntryOut, OwnersIn, SpendIn, WelcomeIn
+from app.schemas.billing import (
+    BalanceOut,
+    EntryOut,
+    OwnersIn,
+    ReferralOut,
+    SpendIn,
+    WelcomeIn,
+)
 from app.service_auth import ServiceCaller
-from app.storage import ledger, purchases
+from app.services.referrals import referral_out
+from app.storage import ledger, purchases, referrals
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -101,8 +109,15 @@ async def user_credits(user_id: str, caller: ServiceCaller) -> BalanceOut:
 
 @router.post("/companies/{company_id}/welcome", status_code=status.HTTP_204_NO_CONTENT)
 async def welcome_company(company_id: str, body: WelcomeIn, caller: ServiceCaller) -> None:
-    """The company's wallet. The welcome credits come once per owner's email."""
-    await ledger.welcome_company(company_id, body.owner_email)
+    """The company's wallet. The welcome credits come once per owner's email; a company new
+    in that sense can be referred by another, unrelated one."""
+    if await ledger.welcome_company(company_id, body.owner_email) and body.referral:
+        await referrals.record(body.referral, OwnerType.COMPANY, company_id, body.related)
+
+
+@router.get("/companies/{company_id}/referral")
+async def company_referral(company_id: str, caller: ServiceCaller) -> ReferralOut:
+    return await referral_out(OwnerType.COMPANY, company_id)
 
 
 @router.get("/companies/{company_id}/credits")

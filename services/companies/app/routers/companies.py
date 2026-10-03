@@ -1,8 +1,9 @@
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
+from prepza_common.constants import REFERRAL_COOKIE
 from prepza_common.paging import PageParams
 
 from app.constants.invites import MAX_OWNED_COMPANIES, TOO_MANY_COMPANIES
@@ -14,6 +15,7 @@ from app.schemas.companies import (
     CompanyCreate,
     CompanyCreditsOut,
     CompanyOut,
+    ReferralOut,
 )
 from app.services import company_deletion
 from app.services.access import require_company
@@ -35,14 +37,19 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)
-async def create_company(body: CompanyCreate, user: CurrentUser) -> CompanyOut:
+async def create_company(body: CompanyCreate, user: CurrentUser, request: Request) -> CompanyOut:
     if await companies.owned_count(user.uid) >= MAX_OWNED_COMPANIES:
         await track("limit_hit", user_id=user.uid, which="companies_owned")
 
         raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, TOO_MANY_COMPANIES)
 
     company = await companies.create(body.name.strip(), user.uid, user.email)
-    await billing.welcome_company(company.id, user.email)
+    await billing.welcome_company(
+        company.id,
+        user.email,
+        request.cookies.get(REFERRAL_COOKIE),
+        await companies.ids_for_user(user.uid),
+    )
     await track("company_created", user_id=user.uid, company_id=company.id)
 
     return CompanyOut(
@@ -89,6 +96,14 @@ async def get_credits(company_id: UUID, user: CurrentUser) -> CompanyCreditsOut:
     await require_company(user, company_id)
 
     return CompanyCreditsOut(**await billing.company_credits(company_id))
+
+
+@router.get("/{company_id}/referral")
+async def get_referral(company_id: UUID, user: CurrentUser) -> ReferralOut:
+    """The company's referral link; any member may share it."""
+    await require_company(user, company_id)
+
+    return ReferralOut(**await billing.company_referral(company_id))
 
 
 @router.get("/{company_id}")

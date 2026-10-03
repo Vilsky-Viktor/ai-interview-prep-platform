@@ -6,6 +6,7 @@ from sqlalchemy.dialects.postgresql import insert
 from app.constants.credits import Reason
 from app.constants.products import DELETED_OWNER, OwnerType
 from app.models.billing import Entry, Hold, Purchase, Wallet
+from app.storage import referrals
 from app.storage.db import Session
 from app.storage.ledger import add, ensure
 
@@ -105,6 +106,7 @@ async def delete_user(user_id: str) -> None:
         await session.execute(delete(Wallet).filter_by(**is_user))
         await session.execute(delete(Hold).filter_by(**is_user))
         await session.execute(delete(Entry).filter_by(**is_user))
+        await referrals.forget(session, OwnerType.USER, user_id)
         await session.execute(update(Purchase).filter_by(**is_user).values(owner_id=DELETED_OWNER))
         await session.execute(
             update(Purchase).where(Purchase.buyer_id == user_id).values(buyer_id=None)
@@ -120,4 +122,5 @@ async def delete_company(company_id: str) -> None:
         await session.execute(delete(Wallet).filter_by(**is_company))
         await session.execute(delete(Hold).filter_by(**is_company))
         await session.execute(delete(Entry).filter_by(**is_company))
+        await referrals.forget(session, OwnerType.COMPANY, company_id)
         await session.commit()

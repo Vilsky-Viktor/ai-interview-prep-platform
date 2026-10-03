@@ -367,11 +367,13 @@
     "signIn": "Sign in to create interviews for your company and invite candidates.",
     "signInInterviews": "Sign in to see company interviews.",
     "signInAdmins": "Sign in to see company admins.",
+    "signInReferrals": "Sign in to see the company's referral link.",
     "empty": "No companies yet.",
     "owner": "Owner",
     "interviewCount": "{count, plural, one {# interview} other {# interviews}}",
     "interviews": "Interviews",
     "admins": "Admins",
+    "referrals": "Referrals",
     "new": "New company",
     "newText": "Create a company to generate interviews and invite candidates.",
     "name": "Company name",
@@ -480,6 +482,11 @@
     "intro": "Pay only for what you use: $1 buys 100 credits, and credits never expire. No subscriptions.",
     "learners": "For learners",
     "welcome": "When you sign up",
+    "referrals": "Referrals",
+    "referralsNote": "Share your link from Settings, or a company's link from its referrals tab.",
+    "referral": "A friend you invited first tops up",
+    "companyReferral": "A company you invited first tops up ${min} or more",
+    "each": "{count, number} credits each",
     "credits": "{count, plural, one {# credit} other {# credits}}",
     "companies": "For companies",
     "kit": "Your own prep kit, built from a job description",
@@ -493,7 +500,7 @@
     "interview": "Generating an interview",
     "candidate": "Each candidate who finishes and answers at least one question",
     "companyWelcome": "Your first company",
-    "openCompanies": "Open companies",
+    "openCompanies": "Companies",
     "topUp": "Top up"
   },
   "site": {
@@ -518,8 +525,16 @@
       "chat": "Tutor turn",
       "refund": "Refund",
       "chargeback": "Payment reversed by the bank",
-      "chargeback_reversed": "Reversed payment restored"
+      "chargeback_reversed": "Reversed payment restored",
+      "referral": "Referral reward"
     }
+  },
+  "referral": {
+    "title": "Invite friends",
+    "note": "You both get {reward, number} credits when they first top up.",
+    "companyTitle": "Invite another company",
+    "companyNote": "Both companies get {reward, number} credits when the new one first tops up ${min} or more.",
+    "rewarded": "{count, plural, =0 {No rewards yet.} one {Rewarded # time so far.} other {Rewarded # times so far.}}"
   },
   "topUp": {
     "title": "Top up",

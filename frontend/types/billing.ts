@@ -7,4 +7,5 @@ export type Product = Schemas["TopUpOut"]
 export type Balance = Schemas["BalanceOut"]
 export type Entry = Schemas["EntryOut"]
 export type Quote = Schemas["QuoteOut"]
+export type Referral = Schemas["ReferralOut"]
 export type CompanyCredits = { available: number; low: boolean }

@@ -65,8 +65,10 @@ async def welcome_user(user_id: str, email: str) -> bool:
     return await welcome(OwnerType.USER, user_id, GiftKind.USER, email, WELCOME_USER)
 
 
-async def welcome_company(company_id: str, owner_email: str) -> None:
-    await welcome(OwnerType.COMPANY, company_id, GiftKind.COMPANY, owner_email, WELCOME_COMPANY)
+async def welcome_company(company_id: str, owner_email: str) -> bool:
+    return await welcome(
+        OwnerType.COMPANY, company_id, GiftKind.COMPANY, owner_email, WELCOME_COMPANY
+    )
 
 
 async def reserve(owner_type: str, owner_id: str, amount: int, key: str, reason: str) -> bool:

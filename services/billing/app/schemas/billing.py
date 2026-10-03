@@ -43,6 +43,9 @@ class CatalogOut(BaseModel):
     chat_free_turns: int
     welcome_user: int
     welcome_company: int
+    referral_user: int
+    referral_company: int
+    referral_company_min_dollars: int
     products: list[TopUpOut]
     custom: CustomTopUpOut
 
@@ -80,3 +83,16 @@ class SpendIn(BaseModel):
 
 class WelcomeIn(BaseModel):
     owner_email: str
+    # The code of the link the owner came through, and their other companies, which can't
+    # refer this one.
+    referral: str | None = None
+    related: list[str] = Field(default=[], max_length=MAX_PAGE_SIZE)
+
+
+class ReferralOut(BaseModel):
+    """The owner's referral link code, what it earns, and how many it has earned for."""
+
+    code: str
+    reward: int
+    min_dollars: int
+    rewarded: int

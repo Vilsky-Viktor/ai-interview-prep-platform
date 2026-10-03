@@ -45,15 +45,30 @@ async def release_candidate(key: str) -> None:
     response.raise_for_status()
 
 
-async def welcome_company(company_id: UUID, owner_email: str) -> None:
-    """The welcome credits come once per owner's email; billing keeps only a hash of it."""
+async def welcome_company(
+    company_id: UUID, owner_email: str, referral: str | None, related: list[str]
+) -> None:
+    """The welcome credits come once per owner's email; billing keeps only a hash of it. A
+    referral code counts unless it's from one of the owner's other companies (`related`)."""
     response = await http.get_client().post(
         f"{settings.billing_url}/internal/companies/{company_id}/welcome",
-        json={"owner_email": owner_email},
+        json={"owner_email": owner_email, "referral": referral, "related": related},
         headers=_headers(),
     )
 
     response.raise_for_status()
+
+
+async def company_referral(company_id: UUID) -> dict:
+    """The company's referral code, its reward, and how many it has earned for."""
+    response = await http.get_client().get(
+        f"{settings.billing_url}/internal/companies/{company_id}/referral",
+        headers=_headers(),
+    )
+
+    response.raise_for_status()
+
+    return response.json()
 
 
 async def company_credits(company_id: UUID) -> dict:

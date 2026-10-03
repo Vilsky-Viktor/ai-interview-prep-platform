@@ -3,13 +3,14 @@ import { cookies } from "next/headers"
 import { getLocale, getTranslations } from "next-intl/server"
 
 import { SignInPrompt } from "@/components/sign-in-prompt"
+import { ReferralLink } from "@/components/billing/referral-link"
 import { AccountData } from "@/components/settings/account-data"
 import { Credits } from "@/components/settings/credits"
 import { LanguageSetting } from "@/components/settings/language-setting"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import type { Locale } from "@/constants/i18n"
 import { serverFetch } from "@/lib/server-api"
-import type { Balance } from "@/types/billing"
+import type { Balance, Referral } from "@/types/billing"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("settings")
@@ -41,7 +42,13 @@ export default async function SettingsPage() {
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const t = await getTranslations("settings")
   const locale = (await getLocale()) as Locale
-  const balance = signedIn ? await serverFetch<Balance>("/billing/me") : null
+  const [balance, referral] = signedIn
+    ? await Promise.all([
+        serverFetch<Balance>("/billing/me"),
+        serverFetch<Referral>("/billing/me/referral"),
+      ])
+    : [null, null]
+  const referralText = await getTranslations("referral")
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
@@ -56,6 +63,14 @@ export default async function SettingsPage() {
           {balance && (
             <Section title={t("credits")} description={t("creditsNote")}>
               <Credits balance={balance} />
+            </Section>
+          )}
+          {referral && (
+            <Section
+              title={referralText("title")}
+              description={referralText("note", { reward: referral.reward })}
+            >
+              <ReferralLink referral={referral} path="/" />
             </Section>
           )}
           <Section title={t("language")} description={t("languageNote")}>

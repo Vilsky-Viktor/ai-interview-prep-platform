@@ -16,6 +16,23 @@ class Wallet(Base):
     owner_id: Mapped[str] = mapped_column(String(128), primary_key=True)
     balance: Mapped[int] = mapped_column(default=0)
     reserved: Mapped[int] = mapped_column(default=0)
+    # The code in the owner's referral link; made the first time they ask for it.
+    referral_code: Mapped[str | None] = mapped_column(String(16), unique=True)
+
+
+class Referral(Base):
+    """A new learner or company that came through someone's link. `rewarded_at` is set when
+    their first big enough top-up pays both sides."""
+
+    __tablename__ = "referrals"
+
+    owner_type: Mapped[str] = mapped_column(String(16), primary_key=True)
+    owner_id: Mapped[str] = mapped_column(String(128), primary_key=True)
+    referrer_id: Mapped[str] = mapped_column(String(128), index=True)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
+    rewarded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class Gift(Base):

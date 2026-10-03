@@ -6,7 +6,7 @@ import pytest
 from app.constants.products import WEBHOOK_TOLERANCE_SECONDS
 from app.helpers.paddle import signature_valid
 from app.services import webhooks
-from app.storage import purchases
+from app.storage import purchases, referrals
 from tests.unit.paddle_events import SECRET, completed, signed
 
 
@@ -53,7 +53,11 @@ def granted(monkeypatch):
 
         return True
 
+    async def no_referral(owner_type, owner_id):
+        return None
+
     monkeypatch.setattr(purchases, "grant", fake_grant)
+    monkeypatch.setattr(referrals, "reward", no_referral)
 
     return calls
 

@@ -32,6 +32,14 @@ async def owned_count(user_id: str) -> int:
         return await session.scalar(query)
 
 
+async def ids_for_user(user_id: str) -> list[str]:
+    """Every company the user is a member of."""
+    query = select(Member.company_id).where(Member.user_id == user_id)
+
+    async with Session() as session:
+        return [str(company_id) for company_id in await session.scalars(query)]
+
+
 async def get(company_id) -> Company | None:
     async with Session() as session:
         return await session.get(Company, company_id, options=[selectinload(Company.members)])

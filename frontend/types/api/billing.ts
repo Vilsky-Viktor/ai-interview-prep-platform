@@ -58,6 +58,23 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/me/referral": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** My Referral */
+    get: operations["my_referral_me_referral_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/me/history": {
     parameters: {
       query?: never
@@ -274,9 +291,27 @@ export interface paths {
     put?: never
     /**
      * Welcome Company
-     * @description The company's wallet. The welcome credits come once per owner's email.
+     * @description The company's wallet. The welcome credits come once per owner's email; a company new
+     *     in that sense can be referred by another, unrelated one.
      */
     post: operations["welcome_company_internal_companies__company_id__welcome_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/referral": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Company Referral */
+    get: operations["company_referral_internal_companies__company_id__referral_get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -465,6 +500,12 @@ export interface components {
       welcome_user: number
       /** Welcome Company */
       welcome_company: number
+      /** Referral User */
+      referral_user: number
+      /** Referral Company */
+      referral_company: number
+      /** Referral Company Min Dollars */
+      referral_company_min_dollars: number
       /** Products */
       products: components["schemas"]["TopUpOut"][]
       custom: components["schemas"]["CustomTopUpOut"]
@@ -521,6 +562,20 @@ export interface components {
       bonus_credits: number
     }
     /**
+     * ReferralOut
+     * @description The owner's referral link code, what it earns, and how many it has earned for.
+     */
+    ReferralOut: {
+      /** Code */
+      code: string
+      /** Reward */
+      reward: number
+      /** Min Dollars */
+      min_dollars: number
+      /** Rewarded */
+      rewarded: number
+    }
+    /**
      * SpendIn
      * @description A charge for something delivered at once. `key` makes a repeat count once.
      */
@@ -566,6 +621,13 @@ export interface components {
     WelcomeIn: {
       /** Owner Email */
       owner_email: string
+      /** Referral */
+      referral?: string | null
+      /**
+       * Related
+       * @default []
+       */
+      related: string[]
     }
   }
   responses: never
@@ -643,6 +705,26 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["BalanceOut"]
+        }
+      }
+    }
+  }
+  my_referral_me_referral_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["ReferralOut"]
         }
       }
     }
@@ -992,6 +1074,37 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  company_referral_internal_companies__company_id__referral_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["ReferralOut"]
+        }
       }
       /** @description Validation Error */
       422: {

@@ -69,7 +69,19 @@ export default async function PricingPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-heading text-2xl font-medium">{t("companies")}</h2>
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="font-heading text-2xl font-medium">
+            {t("companies")}
+          </h2>
+          <Button
+            variant="outline"
+            className="h-12 px-6 text-base"
+            render={<Link href="/company" />}
+            nativeButton={false}
+          >
+            {t("openCompanies")}
+          </Button>
+        </div>
         <ul className="divide-y rounded-xl border">
           <PriceRow what={t("interview")} price={t("free")} />
           <PriceRow
@@ -81,14 +93,29 @@ export default async function PricingPage() {
             price={t("gift", { count: catalog.welcome_company })}
           />
         </ul>
-        <Button
-          variant="outline"
-          className="h-12 px-6 text-base"
-          render={<Link href="/company" />}
-          nativeButton={false}
-        >
-          {t("openCompanies")}
-        </Button>
+      </section>
+
+      <section className="space-y-4">
+        <div className="space-y-1">
+          <h2 className="font-heading text-2xl font-medium">
+            {t("referrals")}
+          </h2>
+          <p className="text-base text-muted-foreground">
+            {t("referralsNote")}
+          </p>
+        </div>
+        <ul className="divide-y rounded-xl border">
+          <PriceRow
+            what={t("referral")}
+            price={t("each", { count: catalog.referral_user })}
+          />
+          <PriceRow
+            what={t("companyReferral", {
+              min: catalog.referral_company_min_dollars,
+            })}
+            price={t("each", { count: catalog.referral_company })}
+          />
+        </ul>
       </section>
     </main>
   )

@@ -36,6 +36,15 @@ class MemberIn(BaseModel):
     email: EmailStr
 
 
+class ReferralOut(BaseModel):
+    """The company's referral link code, what it earns, and how many it has earned for."""
+
+    code: str
+    reward: int
+    min_dollars: int
+    rewarded: int
+
+
 class CompanyCreditsOut(BaseModel):
     available: int
     low: bool

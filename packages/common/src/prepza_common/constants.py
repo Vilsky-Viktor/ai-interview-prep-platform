@@ -48,3 +48,6 @@ CHAT_FREE_TURNS = 3
 # Funnel events for analytics go on the events topic with this type prefix; only they reach
 # BigQuery, and the services' push subscriptions leave them out.
 FUNNEL_PREFIX = "funnel."
+
+# Holds the referral code from a ?ref= link until the new person signs up or makes a company.
+REFERRAL_COOKIE = "prepza_ref"

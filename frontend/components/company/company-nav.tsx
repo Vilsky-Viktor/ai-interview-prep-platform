@@ -10,7 +10,7 @@ export function CompanyNav({
   current,
 }: {
   companyId: string
-  current: "interviews" | "members"
+  current: "interviews" | "members" | "referrals"
 }) {
   const t = useTranslations("company")
   const items = [
@@ -23,6 +23,11 @@ export function CompanyNav({
       id: "members",
       href: `/company/${companyId}/members`,
       label: t("admins"),
+    },
+    {
+      id: "referrals",
+      href: `/company/${companyId}/referrals`,
+      label: t("referrals"),
     },
   ] as const
 

@@ -14,7 +14,7 @@ export function CompanyHeader({
 }: {
   companyId: string
   name: string
-  current: "interviews" | "members"
+  current: "interviews" | "members" | "referrals"
   action?: ReactNode
 }) {
   const t = useTranslations("company")
