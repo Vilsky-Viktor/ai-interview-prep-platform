@@ -27,7 +27,7 @@ export function CompareCell({ item }: { item: ReviewItem | undefined }) {
       >
         {t(verdict(answer.correct))}
       </p>
-      <p className="leading-relaxed whitespace-pre-wrap">
+      <p className="bidi-auto leading-relaxed whitespace-pre-wrap">
         <InlineText text={answerText(item)} />
       </p>
     </div>

@@ -122,7 +122,7 @@ function ScorecardAnswer({ item }: { item: ReviewItem }) {
 
   return (
     <div className="space-y-2">
-      <p className="rounded-xl bg-muted px-5 py-4 text-lg leading-relaxed font-light whitespace-pre-wrap">
+      <p className="bidi-auto rounded-xl bg-muted px-5 py-4 text-lg leading-relaxed font-light whitespace-pre-wrap">
         <InlineText text={answerText(item)} />
       </p>
       {/* Not known for answers given before timing was recorded. */}

@@ -4,6 +4,7 @@ import json
 
 import httpx
 import pytest
+from prepza_common.constants import CONTENT_LANGUAGES
 
 from app.config.settings import settings
 from app.helpers.emails import candidate_invite_email, share_invite_email
@@ -157,14 +158,37 @@ def test_an_invite_is_emailed_in_the_interviews_language():
     email = candidate_invite_email(data, "http://localhost:8090")
 
     assert email.subject == "Acme приглашает вас на собеседование"
-    assert '<html lang="ru">' in email.html
+    assert '<html lang="ru" dir="ltr">' in email.html
     assert "Или вставьте эту ссылку в браузер" in email.html
     assert "«Backend»" in email.text
 
 
 def test_a_share_in_a_language_without_texts_is_emailed_in_english():
-    for language in ("de", None):
+    for language in ("xx", None):
         email = share_invite_email({**DATA, "language": language}, "http://localhost:8090")
 
         assert email.subject == "Ann shared “Backend” with you"
-        assert '<html lang="en">' in email.html
+        assert '<html lang="en" dir="ltr">' in email.html
+
+
+def test_an_arabic_invite_reads_right_to_left():
+    data = {**DATA, "company": "Acme", "language": "ar"}
+    email = candidate_invite_email(data, "http://localhost:8090")
+
+    assert '<html lang="ar" dir="rtl">' in email.html
+    assert 'dir="rtl"' in email.html.split("<body")[1]
+    assert "text-align:right" in email.html
+    assert email.subject == "تلقيت دعوة من Acme إلى مقابلة"
+
+
+@pytest.mark.parametrize("language", sorted(CONTENT_LANGUAGES))
+def test_every_content_language_has_both_emails(language):
+    share = share_invite_email({**DATA, "language": language}, "http://localhost:8090")
+    invite = candidate_invite_email({**DATA, "company": "Acme", "language": language}, "")
+
+    # Every placeholder is filled in, and the texts aren't English stand-ins.
+    for email in (share, invite):
+        assert "{" not in email.html and "{" not in email.text
+        assert f'lang="{language}"' in email.html
+
+    assert language == "en" or share.subject != "Ann shared “Backend” with you"

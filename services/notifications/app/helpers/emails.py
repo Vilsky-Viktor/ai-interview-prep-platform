@@ -1,10 +1,10 @@
 from html import escape
 
-from prepza_common.constants import DEFAULT_LANGUAGE
+from prepza_common.constants import DEFAULT_LANGUAGE, RTL_LANGUAGES
 
 from app.constants.webhooks import CANDIDATE_INVITE_KIND, ID_TAG, KIND_TAG, SHARE_KIND
 from app.models.email import Email
-from app.templates.emails import CANDIDATE_INVITE, FOOTER, PASTE_LINK, SHARE_INVITE
+from app.templates.emails import EMAILS
 from app.templates.layout import (
     HTML_LAYOUT,
     HTML_NAME,
@@ -14,14 +14,16 @@ from app.templates.layout import (
 )
 
 
-def render(templates: dict, data: dict, link: str) -> Email:
-    """Builds the plain-text and HTML versions, in the language of what the invite is for (the
-    interview's or the kit's; English for older events); names and titles are escaped in the
-    HTML."""
+def render(kind: str, data: dict, link: str) -> Email:
+    """Builds the plain-text and HTML versions of the `kind` email ("share" or "candidate"), in
+    the language of what the invite is for (the interview's or the kit's; English for older
+    events), right to left where that language is; names and titles are escaped in the HTML."""
     language = data.get("language")
-    language = language if language in templates else DEFAULT_LANGUAGE
-    template = templates[language]
-    footer = FOOTER[language]
+    language = language if language in EMAILS else DEFAULT_LANGUAGE
+    texts = EMAILS[language]
+    template = texts[kind]
+    footer = texts["footer"]
+    rtl = language in RTL_LANGUAGES
     safe = {key: escape(str(value)) for key, value in data.items()}
     emphasized = {
         **safe,
@@ -47,7 +49,9 @@ def render(templates: dict, data: dict, link: str) -> Email:
         link=escape(link),
         footer=footer.format(**safe),
         language=language,
-        paste_link=PASTE_LINK[language],
+        direction="rtl" if rtl else "ltr",
+        align="right" if rtl else "left",
+        paste_link=texts["paste_link"],
     )
 
     return Email(to=data["email"], subject=template["subject"].format(**data), html=html, text=text)
@@ -62,14 +66,14 @@ def invite_tags(kind: str, invite_id: str | None) -> dict[str, str]:
 
 
 def share_invite_email(data: dict, site_url: str) -> Email:
-    email = render(SHARE_INVITE, data, f"{site_url.rstrip('/')}/share/{data['token']}")
+    email = render("share", data, f"{site_url.rstrip('/')}/share/{data['token']}")
     email.tags = invite_tags(SHARE_KIND, data.get("share_id"))
 
     return email
 
 
 def candidate_invite_email(data: dict, site_url: str) -> Email:
-    email = render(CANDIDATE_INVITE, data, f"{site_url.rstrip('/')}/invite/{data['token']}")
+    email = render("candidate", data, f"{site_url.rstrip('/')}/invite/{data['token']}")
     email.tags = invite_tags(CANDIDATE_INVITE_KIND, data.get("invite_id"))
 
     return email

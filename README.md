@@ -17,6 +17,7 @@ Turn a job description or a learning goal into a structured practice path: revie
 - After answering, rate the question (thumbs up or down, changeable) or report a problem; rate preparations with stars. Owners can re-generate individual questions.
 - Questions improve on their own: answers, votes and reports flag weak ones, and a background verifier fixes or replaces them (see [Question quality](#question-quality)).
 - Share a preparation privately by email, or publish it to the public library.
+- Kits and interviews come in 14 languages, whichever the pasted text is in (English, Russian, Ukrainian, Spanish, Portuguese, German, French, Italian, Polish, Dutch, Turkish, Arabic, Hebrew, Persian), and invite emails follow; right-to-left languages read right to left on the site and in emails. The interface is in English and Russian.
 - Every list loads more as you scroll and renders only what's on screen, however long it gets.
 
 **For companies**

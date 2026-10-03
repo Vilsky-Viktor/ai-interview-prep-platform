@@ -131,6 +131,15 @@
     @apply font-sans;
     scrollbar-gutter: stable;
     }
+  /* Kits and interviews can be in a right-to-left language (Arabic, Hebrew, Persian). What people
+     read and type (questions, answer options, answers, tutor chat, text boxes; marked .bidi-auto)
+     takes its direction and alignment from its own text, paragraph by paragraph. Titles and the
+     rest of the interface keep its alignment; the browser still orders their words correctly. */
+  textarea,
+  input,
+  .bidi-auto {
+    unicode-bidi: plaintext;
+    }
   /* Titles, buttons, menu items, badges and input placeholders are lowercase, like the logo. Content people typed or the
      generator wrote (kit, company and topic names, answer options) keeps its case with
      .normal-case. */

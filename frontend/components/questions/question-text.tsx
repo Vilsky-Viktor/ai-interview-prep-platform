@@ -27,7 +27,7 @@ export function QuestionText({
             <code>{part.text}</code>
           </pre>
         ) : (
-          <p key={index} className="whitespace-pre-line">
+          <p key={index} className="bidi-auto whitespace-pre-line">
             <InlineText text={part.text.trim()} />
           </p>
         )

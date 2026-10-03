@@ -44,7 +44,7 @@ export function ReviewItem({ item }: { item: ReviewItemType }) {
         {answer && (
           <div className="space-y-3 rounded-xl bg-muted px-5 py-4">
             <p className="text-sm text-muted-foreground">{t("yourAnswer")}</p>
-            <p className="text-lg leading-relaxed font-light whitespace-pre-wrap">
+            <p className="bidi-auto text-lg leading-relaxed font-light whitespace-pre-wrap">
               <InlineText text={answerText(item)} />
             </p>
           </div>
@@ -54,7 +54,7 @@ export function ReviewItem({ item }: { item: ReviewItemType }) {
             <p className="text-sm text-muted-foreground">
               {t("correctAnswer")}
             </p>
-            <p className="text-lg leading-relaxed font-light whitespace-pre-wrap">
+            <p className="bidi-auto text-lg leading-relaxed font-light whitespace-pre-wrap">
               <InlineText text={correctText(item)} />
             </p>
           </div>

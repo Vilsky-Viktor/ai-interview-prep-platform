@@ -38,6 +38,26 @@ OUTBOX_KEEP_DAYS = 7
 
 # Languages the interface and generated content come in, by code, with the name prompts use.
 LANGUAGES = {"en": "English", "ru": "Russian"}
+# Languages prep kits and interviews are written in, detected from the pasted text; the interface
+# is in LANGUAGES only. Names are as prompts use them.
+CONTENT_LANGUAGES = {
+    "en": "English",
+    "ru": "Russian",
+    "uk": "Ukrainian",
+    "es": "Spanish",
+    "pt": "Portuguese",
+    "de": "German",
+    "fr": "French",
+    "it": "Italian",
+    "pl": "Polish",
+    "nl": "Dutch",
+    "tr": "Turkish",
+    "ar": "Arabic",
+    "he": "Hebrew",
+    "fa": "Persian",
+}
+# Of those, the ones written right to left.
+RTL_LANGUAGES = {"ar", "he", "fa"}
 DEFAULT_LANGUAGE = "en"
 # The Firebase custom claim that carries the user's language in every ID token.
 LANGUAGE_CLAIM = "language"

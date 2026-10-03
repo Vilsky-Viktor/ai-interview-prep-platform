@@ -39,7 +39,7 @@ class AnswerTask(TypedDict):
 
 class State(TypedDict):
     input_text: str
-    # The code of the language content is written in (prepza_common.constants.LANGUAGES).
+    # The code of the language content is written in (prepza_common.constants.CONTENT_LANGUAGES).
     language: str
     title: str
     requirements: list[str]

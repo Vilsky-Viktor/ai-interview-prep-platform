@@ -1,7 +1,6 @@
 import pytest
-from pydantic import ValidationError
-
 from prepza_common.settings import ServiceSettings
+from pydantic import ValidationError
 
 
 def test_the_auth_emulator_is_allowed_only_for_a_demo_project():

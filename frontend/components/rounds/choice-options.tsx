@@ -57,14 +57,14 @@ export function ChoiceOptions({
             disabled={picked !== null}
             onClick={() => choose(index)}
             className={cn(
-              "flex w-full items-start gap-3 rounded-2xl border p-4 text-left text-lg leading-7 font-light normal-case transition-colors disabled:cursor-default",
+              "flex w-full items-start gap-3 rounded-2xl border p-4 text-start text-lg leading-7 font-light normal-case transition-colors disabled:cursor-default",
               optionClass(index)
             )}
           >
             <span className="w-4 shrink-0 text-muted-foreground">
               {String.fromCharCode(65 + index)}
             </span>
-            <span className="min-w-0">
+            <span className="bidi-auto min-w-0 flex-1">
               <InlineText text={option} />
             </span>
           </button>

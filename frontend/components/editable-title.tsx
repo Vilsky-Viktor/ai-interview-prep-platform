@@ -86,7 +86,7 @@ export function EditableTitle({
       <h1 className={titleClass}>
         <button
           type="button"
-          className="cursor-text text-left normal-case"
+          className="cursor-text text-start normal-case"
           onClick={() => {
             setValue(title)
             setEditing(true)
