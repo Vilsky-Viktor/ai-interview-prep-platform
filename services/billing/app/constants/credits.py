@@ -22,6 +22,11 @@ class Reason:
     CERTIFICATE = "certificate"
     AUTHOR_SHARE = "author_share"
     CHAT = "chat"
+    # Paddle refunded a top-up, or the bank reversed it: the credits it bought go back.
+    REFUND = "refund"
+    CHARGEBACK = "chargeback"
+    # Paddle won a chargeback back: the credits return.
+    CHARGEBACK_REVERSED = "chargeback_reversed"
 
 
 class GiftKind:

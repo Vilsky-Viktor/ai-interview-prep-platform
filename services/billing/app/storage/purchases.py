@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import delete, select, update
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.credits import Reason
@@ -59,6 +59,27 @@ async def grant(
         await session.commit()
 
         return True
+
+
+async def for_transaction(transaction_id: str) -> tuple[str, str, int, str] | None:
+    """Whose wallet a transaction topped up, the credits it bought, and what was paid."""
+    async with Session() as session:
+        rows = list(
+            await session.scalars(select(Purchase).where(Purchase.transaction_id == transaction_id))
+        )
+
+        if not rows:
+            return None
+
+        granted = await session.scalar(
+            select(func.coalesce(func.sum(Entry.amount), 0)).where(
+                Entry.key.in_([f"{transaction_id}:{row.product}" for row in rows])
+            )
+        )
+
+    first = rows[0]
+
+    return first.owner_type, first.owner_id, granted, first.total
 
 
 async def purchases_of(user_id: str) -> list[Purchase]:

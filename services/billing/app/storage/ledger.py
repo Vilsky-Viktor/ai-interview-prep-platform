@@ -186,6 +186,14 @@ async def spend(
         return True
 
 
+async def adjust(owner_type: str, owner_id: str, amount: int, key: str, reason: str) -> None:
+    """Moves credits whatever the balance: a refund or chargeback may leave it negative."""
+    async with Session() as session:
+        await ensure(session, owner_type, owner_id)
+        await add(session, owner_type, owner_id, amount, key, reason)
+        await session.commit()
+
+
 async def ensure(session: AsyncSession, owner_type: str, owner_id: str) -> None:
     """Creates the wallet, empty; the welcome gift comes from welcome()."""
     await session.execute(

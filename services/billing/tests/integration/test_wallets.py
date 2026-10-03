@@ -180,3 +180,26 @@ def test_signing_up_again_or_a_new_company_doesnt_repeat_the_gifts(run):
     learner, new_company = run(scenario())
 
     assert (learner.balance, new_company.balance) == (0, 0)
+
+
+def test_a_refund_of_spent_credits_leaves_the_balance_negative(run):
+    ann = user()
+
+    async def scenario():
+        await purchases.grant(
+            OwnerType.USER, ann, TOPUP_CREDITS, 1, "txn-r", TOPUP.key, ann, "1000", "USD", NOW
+        )
+        await ledger.spend(OwnerType.USER, ann, 600, "chat:spent", Reason.CHAT)
+        bought = await purchases.for_transaction("txn-r")
+        await ledger.adjust(OwnerType.USER, ann, -1_000, "adjustment:r1", Reason.REFUND)
+        # Paddle sends the same event again.
+        await ledger.adjust(OwnerType.USER, ann, -1_000, "adjustment:r1", Reason.REFUND)
+        blocked = await ledger.spend(OwnerType.USER, ann, 1, "chat:after", Reason.CHAT)
+
+        return bought, (await ledger.wallet(OwnerType.USER, ann)).balance, blocked
+
+    bought, balance, blocked = run(scenario())
+
+    assert bought == (OwnerType.USER, ann, TOPUP_CREDITS, "1000")
+    assert balance == -600
+    assert blocked is False

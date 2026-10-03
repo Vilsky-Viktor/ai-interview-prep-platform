@@ -89,7 +89,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
     gcloud compute ssl-certificates describe prepza --global --format='value(managed.status)'
     ```
 11. **Update the services that call back to the site:**
-    - **Paddle:** the webhook destination is `https://prepza.ai/api/billing/webhooks/paddle`.
+    - **Paddle:** the webhook destination is `https://prepza.ai/api/billing/webhooks/paddle`, for `transaction.completed`, `adjustment.created` and `adjustment.updated`. The adjustments are refunds and chargebacks, which take the credits back.
     - **Resend:** the `prepza.ai` sending domain is already verified. Add a webhook at `https://prepza.ai/api/notifications/webhooks/resend` for `email.bounced`, `email.complained` and `email.suppressed`; its signing secret is `resend-webhook-secret` in step 8.
     - **Sentry:** set `sentry_dsn` in `terraform.tfvars`.
 

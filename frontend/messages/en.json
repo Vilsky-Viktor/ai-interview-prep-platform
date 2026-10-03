@@ -512,7 +512,10 @@
       "candidate": "Candidate",
       "certificate": "Certificate",
       "author_share": "Your public kit earned a certificate",
-      "chat": "Tutor turn"
+      "chat": "Tutor turn",
+      "refund": "Refund",
+      "chargeback": "Payment reversed by the bank",
+      "chargeback_reversed": "Reversed payment restored"
     }
   },
   "topUp": {

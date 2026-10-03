@@ -39,4 +39,7 @@ CURRENCY = "USD"
 WEBHOOK_TOLERANCE_SECONDS = 5 * 60
 # The only Paddle event that grants anything: a fully paid transaction.
 TRANSACTION_COMPLETED = "transaction.completed"
+# Refunds and chargebacks; a refund is approved after it's created, so both events matter.
+ADJUSTMENT_EVENTS = ("adjustment.created", "adjustment.updated")
+ADJUSTMENT_APPROVED = "approved"
 DELETED_OWNER = "deleted-user"
