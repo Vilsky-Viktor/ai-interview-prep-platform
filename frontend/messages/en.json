@@ -2,6 +2,9 @@
   "settings": {
     "title": "Settings",
     "signIn": "Sign in to change your settings.",
+    "general": "General",
+    "billing": "Billing",
+    "referral": "Referral",
     "language": "Language",
     "languageNote": "For the interface and new questions, answers and tutor replies.",
     "languageFailed": "Couldn't change the language. Please try again.",
@@ -12,8 +15,8 @@
     "delete": "Delete account",
     "searchLanguage": "Search languages",
     "noLanguage": "No language found.",
-    "credits": "Credits",
-    "creditsNote": "$1 buys 100 credits. Credits never expire."
+    "history": "Billing history",
+    "historyNote": "Every credit in and out, newest first."
   },
   "userMenu": {
     "signIn": "Sign in",
@@ -511,9 +514,6 @@
     "englishOnly": ""
   },
   "credits": {
-    "available": "credits available",
-    "reserved": "{count} set aside for a kit being generated",
-    "history": "History",
     "noHistory": "Nothing yet.",
     "reasons": {
       "welcome": "Welcome gift",
