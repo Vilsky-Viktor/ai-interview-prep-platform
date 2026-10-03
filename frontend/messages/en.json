@@ -443,7 +443,7 @@
     "candidateEmail": "Candidate email",
     "invite": "Invite",
     "jobDescription": "Job description",
-    "pasteJob": "Paste the job description",
+    "pasteJob": "Paste the job description: the role, its requirements and nice-to-haves…",
     "generate": "Generate interview",
     "startFailed": "Couldn't start the interview. Please try again."
   },
