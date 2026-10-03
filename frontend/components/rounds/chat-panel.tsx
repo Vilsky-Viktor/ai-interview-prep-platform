@@ -98,7 +98,7 @@ export function ChatPanel({ answerId }: { answerId: string }) {
       )}
       <form
         onSubmit={send}
-        className="relative rounded-lg border border-transparent transition-colors focus-within:border-ring"
+        className="relative rounded-xl border border-transparent transition-colors focus-within:border-ring"
       >
         <Textarea
           value={input}

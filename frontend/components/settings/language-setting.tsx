@@ -46,14 +46,14 @@ export function LanguageSetting({ current }: { current: Locale }) {
     >
       <Combobox.Trigger
         aria-label={t("language")}
-        className="flex h-12 w-full max-w-xs items-center justify-between gap-3 rounded-lg bg-muted/50 px-4 text-base normal-case transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+        className="flex h-12 w-full max-w-xs items-center justify-between gap-3 rounded-full bg-muted/50 px-5 text-base normal-case transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
       >
         <Combobox.Value />
         <ChevronDownIcon className="size-5 text-muted-foreground" />
       </Combobox.Trigger>
       <Combobox.Portal>
         <Combobox.Positioner sideOffset={6} align="start" className="z-50">
-          <Combobox.Popup className="w-(--anchor-width) overflow-hidden rounded-lg bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10">
+          <Combobox.Popup className="w-(--anchor-width) overflow-hidden rounded-xl bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10">
             <div className="flex items-center gap-2 border-b px-3">
               <SearchIcon className="size-4 text-muted-foreground" />
               <Combobox.Input
@@ -69,7 +69,7 @@ export function LanguageSetting({ current }: { current: Locale }) {
                 <Combobox.Item
                   key={locale}
                   value={locale}
-                  className="flex cursor-default items-center justify-between gap-2 rounded-md px-3 py-2 text-base outline-none select-none data-highlighted:bg-accent data-highlighted:text-accent-foreground"
+                  className="flex cursor-default items-center justify-between gap-2 rounded-lg px-3 py-2 text-base outline-none select-none data-highlighted:bg-accent data-highlighted:text-accent-foreground"
                 >
                   {LANGUAGE_NAMES[locale]}
                   <Combobox.ItemIndicator>

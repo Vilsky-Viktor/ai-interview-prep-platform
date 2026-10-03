@@ -17,7 +17,7 @@ export function InputAction({
     <div
       className={
         icon
-          ? "relative min-w-0 flex-1 rounded-lg border border-transparent transition-colors focus-within:border-ring"
+          ? "relative min-w-0 flex-1 rounded-full border border-transparent transition-colors focus-within:border-ring"
           : "relative min-w-0 flex-1"
       }
     >

@@ -81,7 +81,7 @@ export function CreateCompany() {
           <DialogDescription>{t("newText")}</DialogDescription>
         </DialogHeader>
         <form id="create-company-form" onSubmit={create}>
-          <div className="rounded-lg border border-transparent transition-colors focus-within:border-ring">
+          <div className="rounded-full border border-transparent transition-colors focus-within:border-ring">
             <Input
               required
               maxLength={200}

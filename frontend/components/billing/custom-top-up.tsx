@@ -63,7 +63,7 @@ export function CustomTopUp({
   return (
     <div className="flex flex-wrap items-center gap-4 rounded-2xl border p-5">
       <p className="font-medium">{t("customAmount")}</p>
-      <div className="relative w-28 rounded-lg border border-transparent transition-colors focus-within:border-ring">
+      <div className="relative w-28 rounded-full border border-transparent transition-colors focus-within:border-ring">
         <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-lg text-muted-foreground">
           $
         </span>

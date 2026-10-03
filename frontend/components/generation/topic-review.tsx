@@ -133,7 +133,7 @@ export function TopicReview({
       </ul>
 
       {/* Same card as the goal input on the home page. */}
-      <div className="w-full rounded-2xl border border-transparent bg-card p-3 transition-colors focus-within:border-ring">
+      <div className="w-full rounded-3xl border border-transparent bg-card p-3 transition-colors focus-within:border-ring">
         <Textarea
           value={instructions}
           onChange={(event) => setInstructions(event.target.value)}

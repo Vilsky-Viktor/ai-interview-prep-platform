@@ -30,16 +30,13 @@ export function MemberRow({ member }: { member: CompanyMember }) {
             {member.joined ? t("joined") : t("invited")}
           </span>
         </span>
-        <Badge
-          variant="secondary"
-          className="h-7 px-3 text-sm font-light"
-        >
+        <Badge variant="secondary" className="h-7 px-3 text-sm font-light">
           {roles(member.role)}
         </Badge>
       </div>
       {!member.joined && url && (
         <div className="flex items-center gap-2">
-          <p className="min-w-0 flex-1 rounded-lg border px-2.5 py-2 font-mono text-xs break-all">
+          <p className="min-w-0 flex-1 rounded-xl border px-2.5 py-2 font-mono text-xs break-all">
             {url}
           </p>
           <Button type="button" variant="outline" onClick={copy}>

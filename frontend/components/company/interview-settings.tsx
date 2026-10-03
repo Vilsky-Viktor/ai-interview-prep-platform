@@ -78,7 +78,7 @@ export function InterviewSettings({
         <label className="flex items-center justify-between gap-4">
           <span className="text-lg font-medium">{t("timePerQuestion")}</span>
           {/* Same look as the app's other fields (library search, candidate invite). */}
-          <span className="relative w-36 rounded-lg border border-transparent transition-colors focus-within:border-ring">
+          <span className="relative w-36 rounded-full border border-transparent transition-colors focus-within:border-ring">
             <Input
               type="number"
               inputMode="numeric"

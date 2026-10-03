@@ -104,7 +104,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
           <DialogDescription>{t("whatsWrong")}</DialogDescription>
         </DialogHeader>
         <form id="report-question-form" onSubmit={send} className="space-y-4">
-          <div className="relative rounded-lg border border-transparent transition-colors focus-within:border-ring">
+          <div className="relative rounded-full border border-transparent transition-colors focus-within:border-ring">
             <select
               required
               aria-label={t("reason")}
@@ -113,7 +113,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
                 setReason(event.target.value as ReportReason | "")
               }
               className={cn(
-                "h-16 w-full appearance-none rounded-lg border-0 bg-transparent px-6 pr-16 text-lg outline-none dark:bg-input/30",
+                "h-16 w-full appearance-none rounded-full border-0 bg-transparent px-6 pr-16 text-lg outline-none dark:bg-input/30",
                 !reason && "text-muted-foreground"
               )}
             >
@@ -129,7 +129,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
               className="pointer-events-none absolute top-1/2 right-6 size-6 -translate-y-1/2 text-muted-foreground"
             />
           </div>
-          <div className="rounded-lg border border-transparent transition-colors focus-within:border-ring">
+          <div className="rounded-xl border border-transparent transition-colors focus-within:border-ring">
             <Textarea
               placeholder={t("details")}
               aria-label={t("details")}

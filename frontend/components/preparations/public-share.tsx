@@ -92,7 +92,7 @@ export function PublicShare({ preparationId, title }: PublicShareProps) {
         <DialogDescription>{t("public")}</DialogDescription>
       </DialogHeader>
       <div className="relative">
-        <p className="rounded-lg border px-6 py-6 pr-20 font-mono text-sm break-all">
+        <p className="rounded-xl border px-6 py-6 pr-20 font-mono text-sm break-all">
           {url}
         </p>
         <Button
