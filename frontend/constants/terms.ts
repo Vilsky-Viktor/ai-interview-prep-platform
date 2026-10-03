@@ -6,7 +6,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
   {
     heading: "Your account",
     paragraphs: [
-      "You sign in with Google and are responsible for what happens in your account. You can delete it at any time from your account menu.",
+      "You sign in with Google and are responsible for what happens in your account. You can delete it at any time in Settings.",
     ],
   },
   {
@@ -38,9 +38,17 @@ export const TERMS_SECTIONS: LegalSection[] = [
     ],
   },
   {
-    heading: "Prices",
-    paragraphs: [
-      "prepza is free for now. Paid plans, when they come, are shown with their prices before you buy and are sold through Paddle, who acts as the reseller and handles payments and taxes.",
+    heading: "Credits and payments",
+    items: [
+      "prepza is paid with credits: 1 US dollar buys 100 credits, with a bonus on larger top-ups. What each thing costs in credits is on the pricing page and is shown before you use it.",
+      "Top-ups are sold by Paddle, who acts as the reseller (merchant of record): Paddle takes the payment, charges any VAT or sales tax, and issues the receipt or invoice.",
+      "Your credits are for your own use on prepza. A company's credits belong to the company and are used for its candidates; any of its admins can top them up. Credits can't be transferred between accounts or companies, sold, or paid out as money.",
+      "Credits don't expire. Deleting your account or a company deletes its credits.",
+      "Some credits are free: the welcome credits, top-up bonuses and similar gifts. They are given once, as described on the pricing page, and are never refunded or paid out. Free credits are used before paid ones.",
+      "Credits are only charged for what works: a prep kit that fails or is cancelled, a candidate who never starts or answers nothing, or a tutor reply that fails costs nothing, and credits set aside for them come back.",
+      "Refunds: you can ask for a refund of credits you bought in the last 14 days and haven't spent, through Paddle or by writing to us. Once you start using credits you bought, you agree that the service begins at once, and spent credits can't be refunded.",
+      "If a payment is refunded or reversed by your bank, the credits it bought are removed. If they were already spent, your balance can go below zero, and credits can't be used until a top-up brings it back up.",
+      "We may change prices in credits or the top-up amounts. Changes apply from when they are shown on the pricing page and never take away credits you already have.",
     ],
   },
   {
@@ -52,7 +60,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
   {
     heading: "Liability",
     paragraphs: [
-      "prepza is provided as it is. As far as the law allows, we are not liable for indirect losses, and our total liability is limited to what you paid us in the last 12 months, or 100 US dollars if you paid nothing. Nothing here limits rights you have as a consumer under the law of your country.",
+      "prepza is provided as it is. As far as the law allows, we are not liable for indirect losses, and our total liability is limited to what you paid for credits in the last 12 months, or 100 US dollars if you paid nothing. Nothing here limits rights you have as a consumer under the law of your country.",
     ],
   },
   {

@@ -8,7 +8,7 @@ export const COMPANY = {
 }
 
 // When the privacy policy and terms last changed.
-export const LEGAL_UPDATED = "2026-10-02"
+export const LEGAL_UPDATED = "2026-10-03"
 
 export type LegalSection = {
   heading: string
