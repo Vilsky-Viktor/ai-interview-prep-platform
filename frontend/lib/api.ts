@@ -30,7 +30,8 @@ export async function authHeaders(): Promise<Record<string, string>> {
   // Right after page load Firebase may still be restoring the signed-in user.
   await auth.authStateReady()
   const token = await auth.currentUser?.getIdToken()
-  const language = { "Accept-Language": readLocaleCookie() ?? DEFAULT_LOCALE }
+  // The page's own language: a first visit has no cookie yet.
+  const language = { "Accept-Language": document.documentElement.lang || DEFAULT_LOCALE }
 
   return token ? { ...language, Authorization: `Bearer ${token}` } : language
 }

@@ -1,4 +1,5 @@
 import { cookies } from "next/headers"
+import { getLocale } from "next-intl/server"
 
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { REFERRAL_COOKIE } from "@/constants/referral"
@@ -15,7 +16,8 @@ export async function serverFetch<T>(path: string): Promise<T | null> {
   const jar = await cookies()
   const token = jar.get(TOKEN_COOKIE)?.value
   const referral = jar.get(REFERRAL_COOKIE)?.value
-  const headers: Record<string, string> = {}
+  // The services' messages and texts in the page's language.
+  const headers: Record<string, string> = { "Accept-Language": await getLocale() }
 
   if (token) {
     headers.Authorization = `Bearer ${token}`
