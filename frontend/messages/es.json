@@ -41,7 +41,8 @@
     "explore": "explorar",
     "myKits": "mis kits",
     "hiring": "contratación",
-    "pricingLink": "precios"
+    "pricingLink": "precios",
+    "faq": "Preguntas frecuentes"
   },
   "signIn": {
     "with": "Iniciar sesión con",
@@ -78,7 +79,13 @@
   "home": {
     "tagline": "Agentes de IA practican contigo hasta que te sientas seguro.",
     "preparingFor": "¿Te preparas para",
-    "words": ["una entrevista", "una certificación", "un examen", "una prueba", "un ascenso"],
+    "words": [
+      "una entrevista",
+      "una certificación",
+      "un examen",
+      "una prueba",
+      "un ascenso"
+    ],
     "widest": "una certificación",
     "mark": "?"
   },
@@ -561,5 +568,175 @@
     "companies": "Créditos de empresas",
     "companiesNote": "Para los candidatos de cada empresa.",
     "pricing": "Precios"
+  },
+  "landing": {
+    "more": "Cómo funciona",
+    "how": {
+      "title": "Tres pasos para estar listo",
+      "paste": {
+        "title": "Pega o describe",
+        "text": "Una oferta de empleo, un temario o unas palabras sobre lo que quieres aprender."
+      },
+      "review": {
+        "title": "Revisa el plan",
+        "text": "Los agentes de IA destacan lo importante y proponen temas. Mantenlos, cámbiales el nombre o modifícalos."
+      },
+      "practice": {
+        "title": "Practica hasta sentirte seguro",
+        "text": "Cada tema tiene su propio banco de preguntas. Practica por rondas y mira cómo crece tu progreso."
+      }
+    },
+    "control": {
+      "title": "Tú decides qué estudiar",
+      "text": "No se genera nada hasta que estés de acuerdo con el plan. Desmarca lo que ya sabes, cambia el nombre de un tema, edita sus subtemas o describe cambios mayores con tus palabras.",
+      "topics": {
+        "design": "Diseño de sistemas",
+        "sql": "SQL e índices",
+        "behavior": "Preguntas de comportamiento",
+        "basics": "Fundamentos de programación"
+      },
+      "change": "Añadir más sobre caché"
+    },
+    "gaps": {
+      "title": "Práctica que encuentra tus lagunas",
+      "text": "Cada ronda empieza con las preguntas que aún no has respondido y luego vuelve a las que fallaste. Tu tiempo va donde más importa.",
+      "questions": {
+        "first": "¿Cuándo un índice hace más lenta una consulta?",
+        "second": "¿Qué hace un balanceador de carga cuando falla un servidor?",
+        "third": "Cuéntanos un conflicto en tu equipo"
+      },
+      "fresh": "Nueva",
+      "missed": "Fallada dos veces",
+      "right": "Correcta"
+    },
+    "tutor": {
+      "title": "Un tutor para cada pregunta",
+      "text": "Después de cada respuesta ves al instante la opción correcta. ¿No sabes por qué es correcta? Pregunta al tutor de IA y profundiza tanto como necesites.",
+      "question": "¿Qué índice ayuda a una consulta que filtra por fecha?",
+      "options": {
+        "first": "Un índice hash sobre la fecha",
+        "second": "Un índice B-tree sobre la fecha",
+        "third": "Un índice sobre la clave primaria"
+      },
+      "ask": "¿Por qué no el índice hash?",
+      "answer": "Un índice hash solo encuentra valores exactos. Un filtro por fecha busca un rango, y un B-tree mantiene las fechas en orden."
+    },
+    "proof": {
+      "title": "Sabe cuándo estás listo",
+      "text": "Cada tema tiene una barra de progreso hacia su certificado. Consíguelo y el tema cuenta como dominado.",
+      "rules": "Qué se necesita para el certificado",
+      "certificate": "Certificado"
+    },
+    "quality": {
+      "title": "Preguntas que mejoran solas",
+      "text": "Cada pregunta tiene una opción correcta y tres incorrectas pero plausibles. Los votos, los reportes y las respuestas señalan las preguntas débiles, y un verificador las corrige o reemplaza en segundo plano.",
+      "steps": {
+        "flagged": "Señalada por los estudiantes",
+        "checked": "Revisada por el verificador",
+        "fixed": "Corregida o reemplazada"
+      }
+    },
+    "share": {
+      "title": "Compártelo o publícalo",
+      "text": "Envía un kit en privado a amigos o colegas por correo, o publícalo en la biblioteca pública para todos los que se preparan para lo mismo.",
+      "private": "Compartido en privado",
+      "public": "En la biblioteca pública",
+      "browse": "Explorar la biblioteca"
+    },
+    "companies": {
+      "title": "¿Contratas? Evalúa a los candidatos con justicia",
+      "text": "Convierte una oferta de empleo en una entrevista con tiempo y invita a los candidatos por correo.",
+      "points": {
+        "own": "Cada candidato recibe sus propias preguntas, en su propio orden.",
+        "timed": "Cada pregunta tiene su propia cuenta atrás, controlada por el servidor.",
+        "flags": "Los informes señalan respuestas precipitadas, salidas de la página e intentos de copiar.",
+        "private": "Los candidatos nunca ven su puntuación ni qué respuestas eran correctas."
+      },
+      "candidate": "Candidato",
+      "score": "Puntuación",
+      "rushed": "Respuestas precipitadas",
+      "left": "Salió de la página",
+      "start": "Empezar a contratar"
+    },
+    "languages": {
+      "title": "En tu idioma",
+      "text": "El sitio y todo lo que genera funcionan en {count} idiomas, también de derecha a izquierda. Pega una oferta en un idioma y practica en otro."
+    },
+    "pricing": {
+      "title": "Paga solo por lo que funciona",
+      "text": "Sin suscripciones ni planes. Recarga cuando lo necesites y gasta créditos solo en lo que usas.",
+      "welcome": "{count, plural, one {# crédito gratis} other {# créditos gratis}} para cada cuenta nueva",
+      "company": "{count, plural, one {# crédito gratis} other {# créditos gratis}} para cada empresa nueva",
+      "never": "Los créditos nunca caducan",
+      "failed": "Un kit que falla no cuesta nada",
+      "see": "Ver precios"
+    },
+    "faq": {
+      "title": "¿Aún tienes preguntas?",
+      "text": "Respuestas sobre precios, certificados, privacidad y contratación.",
+      "read": "Leer las preguntas frecuentes"
+    },
+    "ready": {
+      "title": "¿Listo para prepararte?",
+      "start": "Empezar ahora"
+    }
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "intro": "¿No encuentras tu respuesta? Escríbenos a la dirección que aparece en la política de privacidad.",
+    "items": {
+      "different": {
+        "q": "¿En qué se diferencia prepza de las tarjetas de estudio o los bancos de preguntas?",
+        "a": "Prepza crea las preguntas para exactamente lo que estás preparando, a partir de tu oferta de empleo o tu objetivo. Las rondas vuelven a lo que fallaste, un tutor de IA explica cada respuesta y los certificados muestran cuándo dominas un tema."
+      },
+      "topics": {
+        "q": "¿Para qué puedo prepararme?",
+        "a": "Entrevistas de trabajo en cualquier campo, certificaciones, exámenes, pruebas, un ascenso o cualquier cosa que quieras aprender. Si puedes describirlo, prepza puede crear un kit para ello."
+      },
+      "certificates": {
+        "q": "¿Cómo funcionan los certificados?",
+        "a": "Cada tema tiene su propio certificado. Responde todas las preguntas del tema con suficientes aciertos y será tuyo. Cuenta tu última respuesta a cada pregunta, así que puedes seguir practicando hasta lograrlo."
+      },
+      "cost": {
+        "q": "¿Cuánto cuesta?",
+        "a": "Pagas según usas, con créditos. Un kit nuevo cuesta {kit} créditos, y cada cuenta nueva recibe {welcome} créditos gratis, suficientes para un primer kit. La página de precios muestra todos los precios."
+      },
+      "expire": {
+        "q": "¿Caducan los créditos?",
+        "a": "No. Los créditos nunca caducan y no hay suscripciones ni renovaciones."
+      },
+      "failed": {
+        "q": "¿Y si un kit falla?",
+        "a": "Solo se cobra cuando el kit está listo. Si la generación falla o la cancelas, los créditos vuelven a ti."
+      },
+      "refunds": {
+        "q": "¿Puedo obtener un reembolso?",
+        "a": "Sí, de los créditos que compraste en los últimos 14 días y no has gastado: a través de Paddle o escribiéndonos. Los créditos gratis, como el regalo de bienvenida, no se reembolsan. Los términos tienen los detalles."
+      },
+      "privacy": {
+        "q": "¿Qué pasa con lo que pego y respondo?",
+        "a": "Lo usamos para crear tus kits y seguir tu progreso. Los kits privados solo los ves tú y las personas con quienes los compartes. La política de privacidad explica qué guardamos, durante cuánto tiempo y tus derechos."
+      },
+      "delete": {
+        "q": "¿Puedo eliminar mi cuenta?",
+        "a": "Sí, en Ajustes. Tu cuenta y tus datos se eliminan, y antes puedes descargar una copia de tus datos."
+      },
+      "languages": {
+        "q": "¿Qué idiomas se admiten?",
+        "a": "{count} idiomas, para el sitio, los kits y los correos. Elige el idioma en que se genera un kit, sea cual sea el idioma de tu texto."
+      },
+      "hiring": {
+        "q": "¿Cómo funciona la contratación con prepza?",
+        "a": "Crea una empresa, genera una entrevista a partir de una oferta de empleo e invita a los candidatos por correo. Cada candidato cuesta {candidate} créditos, que se cobran solo cuando termina la entrevista, y una empresa nueva recibe {company} créditos gratis."
+      },
+      "scorecards": {
+        "q": "¿Qué muestran los informes?",
+        "a": "Cada respuesta, si fue correcta y cuánto tardó. También señalan respuestas demasiado rápidas para haber leído la pregunta, las veces que el candidato salió de la página y los intentos de copiar."
+      },
+      "candidates": {
+        "q": "¿Qué ven los candidatos?",
+        "a": "Qué esperar antes de empezar y luego una pregunta con tiempo cada vez. Nunca ven su puntuación ni si una respuesta fue correcta."
+      }
+    }
   }
 }

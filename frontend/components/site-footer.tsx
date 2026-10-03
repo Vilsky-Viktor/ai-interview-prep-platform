@@ -8,7 +8,7 @@ export async function SiteFooter() {
     <footer className="border-t">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-6 text-sm text-muted-foreground">
         <span>© {new Date().getFullYear()} prepza</span>
-        <nav aria-label={t("legal")} className="flex gap-6">
+        <nav aria-label={t("legal")} className="flex flex-wrap gap-x-6 gap-y-2">
           <Link href="/pricing" className="hover:text-foreground">
             {t("pricing")}
           </Link>
@@ -17,6 +17,9 @@ export async function SiteFooter() {
           </Link>
           <Link href="/terms" className="hover:text-foreground">
             {t("terms")}
+          </Link>
+          <Link href="/faq" className="hover:text-foreground">
+            {t("faq")}
           </Link>
         </nav>
       </div>

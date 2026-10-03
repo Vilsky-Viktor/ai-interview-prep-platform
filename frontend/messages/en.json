@@ -41,7 +41,8 @@
     "explore": "explore",
     "myKits": "my kits",
     "hiring": "hiring",
-    "pricingLink": "pricing"
+    "pricingLink": "pricing",
+    "faq": "FAQ"
   },
   "signIn": {
     "with": "Sign in with",
@@ -567,5 +568,175 @@
     "companies": "Company credits",
     "companiesNote": "For each company's candidates.",
     "pricing": "Pricing"
+  },
+  "landing": {
+    "more": "How it works",
+    "how": {
+      "title": "Three steps to ready",
+      "paste": {
+        "title": "Paste or describe",
+        "text": "A job description, a syllabus, or a few words about what you want to learn."
+      },
+      "review": {
+        "title": "Review the plan",
+        "text": "AI agents pick out what matters and propose topics. Keep them, rename them or change them."
+      },
+      "practice": {
+        "title": "Practice until confident",
+        "text": "Every topic gets its own bank of questions. Practice in rounds and watch your progress grow."
+      }
+    },
+    "control": {
+      "title": "You decide what to study",
+      "text": "Nothing is generated until you agree with the plan. Uncheck what you already know, rename a topic, edit its subtopics, or describe bigger changes in plain words.",
+      "topics": {
+        "design": "System design",
+        "sql": "SQL and indexes",
+        "behavior": "Behavioral questions",
+        "basics": "Programming basics"
+      },
+      "change": "Add more on caching"
+    },
+    "gaps": {
+      "title": "Practice that finds your gaps",
+      "text": "Every round starts with questions you haven't answered yet, then brings back the ones you got wrong. Your time goes where it matters most.",
+      "questions": {
+        "first": "When does an index slow a query down?",
+        "second": "What does a load balancer do when a server fails?",
+        "third": "Tell about a conflict in your team"
+      },
+      "fresh": "New",
+      "missed": "Missed twice",
+      "right": "Right"
+    },
+    "tutor": {
+      "title": "A tutor for every question",
+      "text": "After each answer you see the right option at once. Not sure why it's right? Ask the AI tutor and go as deep as you need.",
+      "question": "Which index helps a query that filters by date?",
+      "options": {
+        "first": "A hash index on the date",
+        "second": "A B-tree index on the date",
+        "third": "An index on the primary key"
+      },
+      "ask": "Why not the hash index?",
+      "answer": "A hash index finds exact values only. A date filter asks for a range, and a B-tree keeps dates in order."
+    },
+    "proof": {
+      "title": "Know when you're ready",
+      "text": "Each topic has a progress bar towards its certificate. Earn it, and the topic counts as mastered.",
+      "rules": "What earns a certificate",
+      "certificate": "Certificate"
+    },
+    "quality": {
+      "title": "Questions that get better on their own",
+      "text": "Every question has one correct option and three plausible wrong ones. Votes, reports and answers point out weak questions, and a verifier fixes or replaces them in the background.",
+      "steps": {
+        "flagged": "Flagged by learners",
+        "checked": "Checked by the verifier",
+        "fixed": "Fixed or replaced"
+      }
+    },
+    "share": {
+      "title": "Share it or publish it",
+      "text": "Send a kit privately to friends or colleagues by email, or publish it to the public library for everyone preparing for the same thing.",
+      "private": "Shared privately",
+      "public": "In the public library",
+      "browse": "Explore the library"
+    },
+    "companies": {
+      "title": "Hiring? Test candidates fairly",
+      "text": "Turn a job description into a timed interview and invite candidates by email.",
+      "points": {
+        "own": "Each candidate gets their own questions, in their own order.",
+        "timed": "Every question has its own countdown, kept by the server.",
+        "flags": "Scorecards flag rushed answers, leaving the page and copy attempts.",
+        "private": "Candidates never see their score or which answers were right."
+      },
+      "candidate": "Candidate",
+      "score": "Score",
+      "rushed": "Rushed answers",
+      "left": "Left the page",
+      "start": "Start hiring"
+    },
+    "languages": {
+      "title": "In your language",
+      "text": "The site and everything it generates work in {count} languages, right to left too. Paste a job description in one language and practice in another."
+    },
+    "pricing": {
+      "title": "Pay only for what works",
+      "text": "No subscriptions or plans. Top up when you need to, and spend credits only on what you use.",
+      "welcome": "{count, plural, one {# free credit} other {# free credits}} for every new account",
+      "company": "{count, plural, one {# free credit} other {# free credits}} for every new company",
+      "never": "Credits never expire",
+      "failed": "A kit that fails costs nothing",
+      "see": "See pricing"
+    },
+    "faq": {
+      "title": "Still have questions?",
+      "text": "Answers about pricing, certificates, privacy and hiring.",
+      "read": "Read the FAQ"
+    },
+    "ready": {
+      "title": "Ready to prepare?",
+      "start": "Start now"
+    }
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "intro": "Can't find your answer? Write to us at the address in the privacy policy.",
+    "items": {
+      "different": {
+        "q": "How is prepza different from flashcards or question banks?",
+        "a": "Prepza builds the questions for exactly what you're preparing for, from your job description or goal. Rounds bring back what you got wrong, an AI tutor explains every answer, and certificates show when a topic is mastered."
+      },
+      "topics": {
+        "q": "What can I prepare for?",
+        "a": "Job interviews in any field, certifications, exams, tests, a promotion, or anything you want to learn. If you can describe it, prepza can build a kit for it."
+      },
+      "certificates": {
+        "q": "How do certificates work?",
+        "a": "Each topic has its own certificate. Answer every question of the topic with enough of them right, and it's yours. Your latest answer to each question counts, so you can keep practicing until you get there."
+      },
+      "cost": {
+        "q": "How much does it cost?",
+        "a": "You pay as you go with credits. A new kit costs {kit} credits, and every new account gets {welcome} free credits, enough for a first kit. The pricing page lists every price."
+      },
+      "expire": {
+        "q": "Do credits expire?",
+        "a": "No. Credits never expire, and there are no subscriptions or renewals."
+      },
+      "failed": {
+        "q": "What if a kit fails?",
+        "a": "You're only charged when a kit is ready. If generation fails or you cancel it, the credits come back to you."
+      },
+      "refunds": {
+        "q": "Can I get a refund?",
+        "a": "Yes, for credits you bought in the last 14 days and haven't spent: through Paddle, or by writing to us. Free credits, such as the welcome gift, aren't refunded. The terms have the details."
+      },
+      "privacy": {
+        "q": "What happens to what I paste and answer?",
+        "a": "We use it to build your kits and track your progress. Private kits are visible only to you and the people you share them with. The privacy policy explains what we keep, for how long, and your rights."
+      },
+      "delete": {
+        "q": "Can I delete my account?",
+        "a": "Yes, in Settings. Your account and your data are deleted, and you can download a copy of your data first."
+      },
+      "languages": {
+        "q": "Which languages are supported?",
+        "a": "{count} languages, for the site, the kits and the emails. Choose the language a kit is generated in, whatever language your text is in."
+      },
+      "hiring": {
+        "q": "How does hiring with prepza work?",
+        "a": "Create a company, generate an interview from a job description, and invite candidates by email. Each candidate costs {candidate} credits, charged only when they finish the interview, and a new company gets {company} free credits."
+      },
+      "scorecards": {
+        "q": "What do scorecards show?",
+        "a": "Every answer, whether it was right and how long it took. They also flag answers too fast to have been read, times the candidate left the page, and copy attempts."
+      },
+      "candidates": {
+        "q": "What do candidates see?",
+        "a": "What to expect before they start, then one timed question at a time. They never see their score or whether an answer was right."
+      }
+    }
   }
 }

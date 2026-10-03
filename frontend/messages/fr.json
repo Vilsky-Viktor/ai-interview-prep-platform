@@ -41,7 +41,8 @@
     "explore": "explorer",
     "myKits": "mes kits",
     "hiring": "recrutement",
-    "pricingLink": "tarifs"
+    "pricingLink": "tarifs",
+    "faq": "FAQ"
   },
   "signIn": {
     "with": "Se connecter avec",
@@ -78,7 +79,13 @@
   "home": {
     "tagline": "Des agents d'IA s'entraînent avec vous jusqu'à ce que vous soyez prêt.",
     "preparingFor": "Vous préparez",
-    "words": ["un entretien", "une certification", "un examen", "un test", "une promotion"],
+    "words": [
+      "un entretien",
+      "une certification",
+      "un examen",
+      "un test",
+      "une promotion"
+    ],
     "widest": "une certification",
     "mark": "?"
   },
@@ -561,5 +568,175 @@
     "companies": "Crédits des entreprises",
     "companiesNote": "Pour les candidats de chaque entreprise.",
     "pricing": "Tarifs"
+  },
+  "landing": {
+    "more": "Comment ça marche",
+    "how": {
+      "title": "Prêt en trois étapes",
+      "paste": {
+        "title": "Collez ou décrivez",
+        "text": "Une offre d'emploi, un programme ou quelques mots sur ce que vous voulez apprendre."
+      },
+      "review": {
+        "title": "Validez le plan",
+        "text": "Des agents d'IA repèrent l'essentiel et proposent des thèmes. Gardez-les, renommez-les ou modifiez-les."
+      },
+      "practice": {
+        "title": "Entraînez-vous jusqu'à être sûr de vous",
+        "text": "Chaque thème a sa propre banque de questions. Entraînez-vous par sessions et suivez vos progrès."
+      }
+    },
+    "control": {
+      "title": "Vous décidez de ce que vous étudiez",
+      "text": "Rien n'est généré tant que vous n'avez pas validé le plan. Décochez ce que vous savez déjà, renommez un thème, modifiez ses sous-thèmes ou décrivez de plus gros changements avec vos mots.",
+      "topics": {
+        "design": "Conception de systèmes",
+        "sql": "SQL et index",
+        "behavior": "Questions comportementales",
+        "basics": "Bases de la programmation"
+      },
+      "change": "Ajouter plus sur le cache"
+    },
+    "gaps": {
+      "title": "Un entraînement qui trouve vos lacunes",
+      "text": "Chaque session commence par les questions auxquelles vous n'avez pas encore répondu, puis revient sur celles que vous avez ratées. Votre temps va là où il compte.",
+      "questions": {
+        "first": "Quand un index ralentit-il une requête ?",
+        "second": "Que fait un répartiteur de charge quand un serveur tombe ?",
+        "third": "Parlez d'un conflit dans votre équipe"
+      },
+      "fresh": "Nouvelle",
+      "missed": "Ratée deux fois",
+      "right": "Juste"
+    },
+    "tutor": {
+      "title": "Un tuteur pour chaque question",
+      "text": "Après chaque réponse, vous voyez tout de suite la bonne option. Vous ne comprenez pas pourquoi ? Demandez au tuteur IA et creusez autant que nécessaire.",
+      "question": "Quel index aide une requête qui filtre par date ?",
+      "options": {
+        "first": "Un index de hachage sur la date",
+        "second": "Un index B-tree sur la date",
+        "third": "Un index sur la clé primaire"
+      },
+      "ask": "Pourquoi pas l'index de hachage ?",
+      "answer": "Un index de hachage ne trouve que des valeurs exactes. Un filtre par date cherche une plage, et un B-tree garde les dates dans l'ordre."
+    },
+    "proof": {
+      "title": "Sachez quand vous êtes prêt",
+      "text": "Chaque thème a une barre de progression vers son certificat. Obtenez-le, et le thème est considéré comme maîtrisé.",
+      "rules": "Ce qu'il faut pour le certificat",
+      "certificate": "Certificat"
+    },
+    "quality": {
+      "title": "Des questions qui s'améliorent seules",
+      "text": "Chaque question a une bonne option et trois mauvaises mais plausibles. Les votes, les signalements et les réponses repèrent les questions faibles, et un vérificateur les corrige ou les remplace en arrière-plan.",
+      "steps": {
+        "flagged": "Signalée par les apprenants",
+        "checked": "Contrôlée par le vérificateur",
+        "fixed": "Corrigée ou remplacée"
+      }
+    },
+    "share": {
+      "title": "Partagez ou publiez",
+      "text": "Envoyez un kit en privé à des amis ou collègues par e-mail, ou publiez-le dans la bibliothèque publique pour tous ceux qui préparent la même chose.",
+      "private": "Partagé en privé",
+      "public": "Dans la bibliothèque publique",
+      "browse": "Explorer la bibliothèque"
+    },
+    "companies": {
+      "title": "Vous recrutez ? Évaluez les candidats équitablement",
+      "text": "Transformez une offre d'emploi en entretien chronométré et invitez les candidats par e-mail.",
+      "points": {
+        "own": "Chaque candidat reçoit ses propres questions, dans son propre ordre.",
+        "timed": "Chaque question a son propre compte à rebours, tenu par le serveur.",
+        "flags": "Les rapports signalent les réponses trop rapides, les sorties de la page et les tentatives de copie.",
+        "private": "Les candidats ne voient jamais leur score ni quelles réponses étaient justes."
+      },
+      "candidate": "Candidat",
+      "score": "Score",
+      "rushed": "Réponses trop rapides",
+      "left": "A quitté la page",
+      "start": "Commencer à recruter"
+    },
+    "languages": {
+      "title": "Dans votre langue",
+      "text": "Le site et tout ce qu'il génère fonctionnent en {count} langues, y compris de droite à gauche. Collez une offre dans une langue et entraînez-vous dans une autre."
+    },
+    "pricing": {
+      "title": "Ne payez que ce qui fonctionne",
+      "text": "Ni abonnement ni formule. Rechargez quand vous en avez besoin et ne dépensez des crédits que pour ce que vous utilisez.",
+      "welcome": "{count, plural, one {# crédit offert} other {# crédits offerts}} à chaque nouveau compte",
+      "company": "{count, plural, one {# crédit offert} other {# crédits offerts}} à chaque nouvelle entreprise",
+      "never": "Les crédits n'expirent jamais",
+      "failed": "Un kit qui échoue ne coûte rien",
+      "see": "Voir les tarifs"
+    },
+    "faq": {
+      "title": "Encore des questions ?",
+      "text": "Des réponses sur les tarifs, les certificats, la confidentialité et le recrutement.",
+      "read": "Lire la FAQ"
+    },
+    "ready": {
+      "title": "Prêt à vous préparer ?",
+      "start": "Commencer"
+    }
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "intro": "Vous ne trouvez pas votre réponse ? Écrivez-nous à l'adresse indiquée dans la politique de confidentialité.",
+    "items": {
+      "different": {
+        "q": "En quoi prepza diffère-t-il des fiches ou des banques de questions ?",
+        "a": "Prepza crée les questions exactement pour ce que vous préparez, à partir de votre offre d'emploi ou de votre objectif. Les sessions reviennent sur vos erreurs, un tuteur IA explique chaque réponse, et les certificats montrent quand un thème est maîtrisé."
+      },
+      "topics": {
+        "q": "À quoi puis-je me préparer ?",
+        "a": "Des entretiens d'embauche dans tous les domaines, des certifications, des examens, des tests, une promotion, ou tout ce que vous voulez apprendre. Si vous pouvez le décrire, prepza peut en faire un kit."
+      },
+      "certificates": {
+        "q": "Comment fonctionnent les certificats ?",
+        "a": "Chaque thème a son propre certificat. Répondez à toutes les questions du thème avec assez de bonnes réponses, et il est à vous. C'est votre dernière réponse à chaque question qui compte : vous pouvez donc continuer à vous entraîner jusqu'à y arriver."
+      },
+      "cost": {
+        "q": "Combien ça coûte ?",
+        "a": "Vous payez à l'usage, avec des crédits. Un nouveau kit coûte {kit} crédits, et chaque nouveau compte reçoit {welcome} crédits offerts, de quoi créer un premier kit. La page des tarifs liste tous les prix."
+      },
+      "expire": {
+        "q": "Les crédits expirent-ils ?",
+        "a": "Non. Les crédits n'expirent jamais, et il n'y a ni abonnement ni renouvellement."
+      },
+      "failed": {
+        "q": "Et si un kit échoue ?",
+        "a": "Vous n'êtes débité que lorsque le kit est prêt. Si la génération échoue ou si vous l'annulez, les crédits vous sont rendus."
+      },
+      "refunds": {
+        "q": "Puis-je être remboursé ?",
+        "a": "Oui, pour les crédits achetés au cours des 14 derniers jours et non dépensés : via Paddle ou en nous écrivant. Les crédits offerts, comme le cadeau de bienvenue, ne sont pas remboursés. Les conditions donnent les détails."
+      },
+      "privacy": {
+        "q": "Que devient ce que je colle et ce que je réponds ?",
+        "a": "Nous l'utilisons pour créer vos kits et suivre vos progrès. Les kits privés ne sont visibles que par vous et les personnes avec qui vous les partagez. La politique de confidentialité explique ce que nous conservons, combien de temps, et vos droits."
+      },
+      "delete": {
+        "q": "Puis-je supprimer mon compte ?",
+        "a": "Oui, dans les Paramètres. Votre compte et vos données sont supprimés, et vous pouvez d'abord télécharger une copie de vos données."
+      },
+      "languages": {
+        "q": "Quelles langues sont prises en charge ?",
+        "a": "{count} langues, pour le site, les kits et les e-mails. Choisissez la langue dans laquelle un kit est généré, quelle que soit la langue de votre texte."
+      },
+      "hiring": {
+        "q": "Comment recruter avec prepza ?",
+        "a": "Créez une entreprise, générez un entretien à partir d'une offre d'emploi et invitez les candidats par e-mail. Chaque candidat coûte {candidate} crédits, débités seulement quand il termine l'entretien, et une nouvelle entreprise reçoit {company} crédits offerts."
+      },
+      "scorecards": {
+        "q": "Que montrent les rapports ?",
+        "a": "Chaque réponse, si elle était juste et le temps qu'elle a pris. Ils signalent aussi les réponses trop rapides pour avoir lu la question, les sorties de la page et les tentatives de copie."
+      },
+      "candidates": {
+        "q": "Que voient les candidats ?",
+        "a": "Ce qui les attend avant de commencer, puis une question chronométrée à la fois. Ils ne voient jamais leur score ni si une réponse était juste."
+      }
+    }
   }
 }

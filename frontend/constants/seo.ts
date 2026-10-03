@@ -16,7 +16,14 @@ export const PRIVATE_PATHS = [
 ]
 
 // Public pages listed in the sitemap, besides public preparations.
-export const PUBLIC_PATHS = ["/", "/library", "/pricing", "/privacy", "/terms"]
+export const PUBLIC_PATHS = [
+  "/",
+  "/library",
+  "/pricing",
+  "/privacy",
+  "/terms",
+  "/faq",
+]
 
 // Public preparations in the sitemap, read a page of 100 at a time.
 export const SITEMAP_PREPARATIONS = 1000

@@ -41,7 +41,8 @@
     "explore": "ontdekken",
     "myKits": "mijn kits",
     "hiring": "werving",
-    "pricingLink": "prijzen"
+    "pricingLink": "prijzen",
+    "faq": "Veelgestelde vragen"
   },
   "signIn": {
     "with": "Inloggen met",
@@ -78,7 +79,13 @@
   "home": {
     "tagline": "AI-agents oefenen met je tot je je zeker voelt.",
     "preparingFor": "Bereid je je voor op",
-    "words": ["een sollicitatiegesprek", "een certificering", "een examen", "een toets", "een promotie"],
+    "words": [
+      "een sollicitatiegesprek",
+      "een certificering",
+      "een examen",
+      "een toets",
+      "een promotie"
+    ],
     "widest": "een sollicitatiegesprek",
     "mark": "?"
   },
@@ -561,5 +568,175 @@
     "companies": "Credits van bedrijven",
     "companiesNote": "Voor de kandidaten van elk bedrijf.",
     "pricing": "Prijzen"
+  },
+  "landing": {
+    "more": "Hoe het werkt",
+    "how": {
+      "title": "In drie stappen klaar",
+      "paste": {
+        "title": "Plak of beschrijf",
+        "text": "Een vacaturetekst, een lesprogramma of een paar woorden over wat je wilt leren."
+      },
+      "review": {
+        "title": "Bekijk het plan",
+        "text": "AI-agents halen eruit wat telt en stellen onderwerpen voor. Houd ze, hernoem ze of pas ze aan."
+      },
+      "practice": {
+        "title": "Oefen tot je zeker bent",
+        "text": "Elk onderwerp krijgt een eigen vragenbank. Oefen in rondes en zie je voortgang groeien."
+      }
+    },
+    "control": {
+      "title": "Jij bepaalt wat je leert",
+      "text": "Er wordt niets gemaakt tot je het eens bent met het plan. Vink uit wat je al weet, hernoem een onderwerp, bewerk de subonderwerpen of beschrijf grotere wijzigingen in je eigen woorden.",
+      "topics": {
+        "design": "Systeemontwerp",
+        "sql": "SQL en indexen",
+        "behavior": "Gedragsvragen",
+        "basics": "Basis van programmeren"
+      },
+      "change": "Meer over caching toevoegen"
+    },
+    "gaps": {
+      "title": "Oefenen dat je zwakke plekken vindt",
+      "text": "Elke ronde begint met vragen die je nog niet hebt beantwoord en brengt daarna de vragen terug die je fout had. Je tijd gaat naar waar het telt.",
+      "questions": {
+        "first": "Wanneer maakt een index een query trager?",
+        "second": "Wat doet een load balancer als een server uitvalt?",
+        "third": "Vertel over een conflict in je team"
+      },
+      "fresh": "Nieuw",
+      "missed": "Twee keer fout",
+      "right": "Goed"
+    },
+    "tutor": {
+      "title": "Een tutor voor elke vraag",
+      "text": "Na elk antwoord zie je meteen de juiste optie. Niet zeker waarom die klopt? Vraag het de AI-tutor en ga zo diep als je wilt.",
+      "question": "Welke index helpt een query die op datum filtert?",
+      "options": {
+        "first": "Een hash-index op de datum",
+        "second": "Een B-tree-index op de datum",
+        "third": "Een index op de primaire sleutel"
+      },
+      "ask": "Waarom niet de hash-index?",
+      "answer": "Een hash-index vindt alleen exacte waarden. Een datumfilter zoekt een bereik, en een B-tree houdt datums op volgorde."
+    },
+    "proof": {
+      "title": "Weet wanneer je klaar bent",
+      "text": "Elk onderwerp heeft een voortgangsbalk naar zijn certificaat. Haal het, en het onderwerp telt als beheerst.",
+      "rules": "Wat je nodig hebt voor een certificaat",
+      "certificate": "Certificaat"
+    },
+    "quality": {
+      "title": "Vragen die vanzelf beter worden",
+      "text": "Elke vraag heeft één juiste optie en drie geloofwaardige foute. Stemmen, meldingen en antwoorden wijzen zwakke vragen aan, en een controleur verbetert of vervangt ze op de achtergrond.",
+      "steps": {
+        "flagged": "Gemarkeerd door leerlingen",
+        "checked": "Gecontroleerd door de controleur",
+        "fixed": "Verbeterd of vervangen"
+      }
+    },
+    "share": {
+      "title": "Deel of publiceer het",
+      "text": "Stuur een kit privé per e-mail naar vrienden of collega's, of publiceer hem in de openbare bibliotheek voor iedereen die zich op hetzelfde voorbereidt.",
+      "private": "Privé gedeeld",
+      "public": "In de openbare bibliotheek",
+      "browse": "Ontdek de bibliotheek"
+    },
+    "companies": {
+      "title": "Werven? Test kandidaten eerlijk",
+      "text": "Maak van een vacaturetekst een sollicitatiegesprek met tijdslimiet en nodig kandidaten uit per e-mail.",
+      "points": {
+        "own": "Elke kandidaat krijgt eigen vragen, in een eigen volgorde.",
+        "timed": "Elke vraag heeft een eigen afteltimer, bijgehouden door de server.",
+        "flags": "Rapporten markeren overhaaste antwoorden, het verlaten van de pagina en kopieerpogingen.",
+        "private": "Kandidaten zien nooit hun score of welke antwoorden goed waren."
+      },
+      "candidate": "Kandidaat",
+      "score": "Score",
+      "rushed": "Overhaaste antwoorden",
+      "left": "Pagina verlaten",
+      "start": "Begin met werven"
+    },
+    "languages": {
+      "title": "In jouw taal",
+      "text": "De site en alles wat hij maakt werken in {count} talen, ook van rechts naar links. Plak een vacature in de ene taal en oefen in een andere."
+    },
+    "pricing": {
+      "title": "Betaal alleen voor wat werkt",
+      "text": "Geen abonnementen of pakketten. Waardeer op wanneer je wilt en besteed credits alleen aan wat je gebruikt.",
+      "welcome": "{count, plural, one {# gratis credit} other {# gratis credits}} voor elk nieuw account",
+      "company": "{count, plural, one {# gratis credit} other {# gratis credits}} voor elk nieuw bedrijf",
+      "never": "Credits verlopen nooit",
+      "failed": "Een mislukte kit kost niets",
+      "see": "Bekijk prijzen"
+    },
+    "faq": {
+      "title": "Nog vragen?",
+      "text": "Antwoorden over prijzen, certificaten, privacy en werving.",
+      "read": "Lees de veelgestelde vragen"
+    },
+    "ready": {
+      "title": "Klaar om je voor te bereiden?",
+      "start": "Nu beginnen"
+    }
+  },
+  "faq": {
+    "title": "Veelgestelde vragen",
+    "intro": "Staat je antwoord er niet bij? Schrijf ons op het adres in het privacybeleid.",
+    "items": {
+      "different": {
+        "q": "Wat is het verschil tussen prepza en flashcards of vragenbanken?",
+        "a": "Prepza maakt de vragen precies voor waar jij je op voorbereidt, op basis van je vacature of doel. Rondes brengen terug wat je fout had, een AI-tutor legt elk antwoord uit, en certificaten laten zien wanneer je een onderwerp beheerst."
+      },
+      "topics": {
+        "q": "Waarop kan ik me voorbereiden?",
+        "a": "Sollicitatiegesprekken in elk vakgebied, certificeringen, examens, toetsen, een promotie of alles wat je wilt leren. Als je het kunt beschrijven, kan prepza er een kit voor maken."
+      },
+      "certificates": {
+        "q": "Hoe werken certificaten?",
+        "a": "Elk onderwerp heeft een eigen certificaat. Beantwoord alle vragen van het onderwerp met genoeg goede antwoorden, en het is van jou. Je laatste antwoord op elke vraag telt, dus je kunt blijven oefenen tot het lukt."
+      },
+      "cost": {
+        "q": "Wat kost het?",
+        "a": "Je betaalt naar gebruik, met credits. Een nieuwe kit kost {kit} credits, en elk nieuw account krijgt {welcome} gratis credits, genoeg voor een eerste kit. De prijspagina toont alle prijzen."
+      },
+      "expire": {
+        "q": "Verlopen credits?",
+        "a": "Nee. Credits verlopen nooit, en er zijn geen abonnementen of verlengingen."
+      },
+      "failed": {
+        "q": "Wat als een kit mislukt?",
+        "a": "Je betaalt pas als een kit klaar is. Mislukt het maken of annuleer je het, dan krijg je de credits terug."
+      },
+      "refunds": {
+        "q": "Kan ik mijn geld terugkrijgen?",
+        "a": "Ja, voor credits die je de afgelopen 14 dagen hebt gekocht en nog niet hebt besteed: via Paddle of door ons te schrijven. Gratis credits, zoals het welkomstcadeau, worden niet terugbetaald. De voorwaarden geven de details."
+      },
+      "privacy": {
+        "q": "Wat gebeurt er met wat ik plak en beantwoord?",
+        "a": "We gebruiken het om je kits te maken en je voortgang bij te houden. Privé-kits zijn alleen zichtbaar voor jou en de mensen met wie je ze deelt. Het privacybeleid legt uit wat we bewaren, hoe lang, en wat je rechten zijn."
+      },
+      "delete": {
+        "q": "Kan ik mijn account verwijderen?",
+        "a": "Ja, in Instellingen. Je account en je gegevens worden verwijderd, en vooraf kun je een kopie van je gegevens downloaden."
+      },
+      "languages": {
+        "q": "Welke talen worden ondersteund?",
+        "a": "{count} talen, voor de site, de kits en de e-mails. Kies de taal waarin een kit wordt gemaakt, in welke taal je tekst ook is."
+      },
+      "hiring": {
+        "q": "Hoe werkt werven met prepza?",
+        "a": "Maak een bedrijf aan, maak een sollicitatiegesprek van een vacaturetekst en nodig kandidaten uit per e-mail. Elke kandidaat kost {candidate} credits, die pas worden afgeschreven als hij het gesprek afrondt, en een nieuw bedrijf krijgt {company} gratis credits."
+      },
+      "scorecards": {
+        "q": "Wat laten rapporten zien?",
+        "a": "Elk antwoord, of het goed was en hoe lang het duurde. Ze markeren ook antwoorden die te snel waren om de vraag te hebben gelezen, keren dat de kandidaat de pagina verliet, en kopieerpogingen."
+      },
+      "candidates": {
+        "q": "Wat zien kandidaten?",
+        "a": "Wat ze kunnen verwachten voordat ze beginnen, en daarna één vraag met tijdslimiet tegelijk. Ze zien nooit hun score of of een antwoord goed was."
+      }
+    }
   }
 }

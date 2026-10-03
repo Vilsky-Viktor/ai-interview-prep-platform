@@ -1,6 +1,5 @@
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { auth } from "@/lib/firebase"
-import { readLocaleCookie } from "@/lib/locale"
 
 export class ApiError extends Error {
   constructor(
@@ -31,7 +30,9 @@ export async function authHeaders(): Promise<Record<string, string>> {
   await auth.authStateReady()
   const token = await auth.currentUser?.getIdToken()
   // The page's own language: a first visit has no cookie yet.
-  const language = { "Accept-Language": document.documentElement.lang || DEFAULT_LOCALE }
+  const language = {
+    "Accept-Language": document.documentElement.lang || DEFAULT_LOCALE,
+  }
 
   return token ? { ...language, Authorization: `Bearer ${token}` } : language
 }

@@ -41,7 +41,8 @@
     "explore": "entdecken",
     "myKits": "meine kits",
     "hiring": "recruiting",
-    "pricingLink": "preise"
+    "pricingLink": "preise",
+    "faq": "FAQ"
   },
   "signIn": {
     "with": "Anmelden mit",
@@ -78,7 +79,13 @@
   "home": {
     "tagline": "KI-Agenten üben mit dir, bis du dich sicher fühlst.",
     "preparingFor": "Vorbereitung auf",
-    "words": ["ein Vorstellungsgespräch", "eine Zertifizierung", "eine Prüfung", "einen Test", "eine Beförderung"],
+    "words": [
+      "ein Vorstellungsgespräch",
+      "eine Zertifizierung",
+      "eine Prüfung",
+      "einen Test",
+      "eine Beförderung"
+    ],
     "widest": "ein Vorstellungsgespräch",
     "mark": "?"
   },
@@ -561,5 +568,175 @@
     "companies": "Credits der Unternehmen",
     "companiesNote": "Für die Kandidaten jedes Unternehmens.",
     "pricing": "Preise"
+  },
+  "landing": {
+    "more": "So funktioniert's",
+    "how": {
+      "title": "In drei Schritten bereit",
+      "paste": {
+        "title": "Einfügen oder beschreiben",
+        "text": "Eine Stellenbeschreibung, ein Lehrplan oder ein paar Worte darüber, was du lernen willst."
+      },
+      "review": {
+        "title": "Plan prüfen",
+        "text": "KI-Agenten erkennen, worauf es ankommt, und schlagen Themen vor. Behalte, benenne oder ändere sie."
+      },
+      "practice": {
+        "title": "Üben, bis du sicher bist",
+        "text": "Jedes Thema bekommt eigene Fragen. Übe in Runden und sieh, wie dein Fortschritt wächst."
+      }
+    },
+    "control": {
+      "title": "Du entscheidest, was du lernst",
+      "text": "Nichts wird erstellt, bevor du dem Plan zustimmst. Entferne, was du schon kannst, benenne ein Thema um, bearbeite seine Unterthemen oder beschreibe größere Änderungen in eigenen Worten.",
+      "topics": {
+        "design": "Systemdesign",
+        "sql": "SQL und Indizes",
+        "behavior": "Verhaltensfragen",
+        "basics": "Programmiergrundlagen"
+      },
+      "change": "Mehr zu Caching hinzufügen"
+    },
+    "gaps": {
+      "title": "Üben, das deine Lücken findet",
+      "text": "Jede Runde beginnt mit Fragen, die du noch nicht beantwortet hast, und bringt dann die zurück, die du falsch hattest. So geht deine Zeit dorthin, wo es zählt.",
+      "questions": {
+        "first": "Wann macht ein Index eine Abfrage langsamer?",
+        "second": "Was tut ein Load Balancer, wenn ein Server ausfällt?",
+        "third": "Erzähl von einem Konflikt in deinem Team"
+      },
+      "fresh": "Neu",
+      "missed": "Zweimal falsch",
+      "right": "Richtig"
+    },
+    "tutor": {
+      "title": "Ein Tutor für jede Frage",
+      "text": "Nach jeder Antwort siehst du sofort die richtige Option. Unklar, warum sie stimmt? Frag den KI-Tutor und geh so tief, wie du willst.",
+      "question": "Welcher Index hilft einer Abfrage, die nach Datum filtert?",
+      "options": {
+        "first": "Ein Hash-Index auf dem Datum",
+        "second": "Ein B-Tree-Index auf dem Datum",
+        "third": "Ein Index auf dem Primärschlüssel"
+      },
+      "ask": "Warum nicht der Hash-Index?",
+      "answer": "Ein Hash-Index findet nur exakte Werte. Ein Datumsfilter sucht einen Bereich, und ein B-Tree hält die Daten sortiert."
+    },
+    "proof": {
+      "title": "Wisse, wann du bereit bist",
+      "text": "Jedes Thema hat einen Fortschrittsbalken bis zu seinem Zertifikat. Erreichst du es, gilt das Thema als gemeistert.",
+      "rules": "Was du für ein Zertifikat brauchst",
+      "certificate": "Zertifikat"
+    },
+    "quality": {
+      "title": "Fragen, die von selbst besser werden",
+      "text": "Jede Frage hat eine richtige und drei plausible falsche Optionen. Bewertungen, Meldungen und Antworten zeigen schwache Fragen auf, und ein Prüfer korrigiert oder ersetzt sie im Hintergrund.",
+      "steps": {
+        "flagged": "Von Lernenden markiert",
+        "checked": "Vom Prüfer kontrolliert",
+        "fixed": "Korrigiert oder ersetzt"
+      }
+    },
+    "share": {
+      "title": "Teilen oder veröffentlichen",
+      "text": "Schick ein Kit privat per E-Mail an Freunde oder Kollegen, oder veröffentliche es in der öffentlichen Bibliothek für alle, die sich auf dasselbe vorbereiten.",
+      "private": "Privat geteilt",
+      "public": "In der öffentlichen Bibliothek",
+      "browse": "Bibliothek entdecken"
+    },
+    "companies": {
+      "title": "Du stellst ein? Prüfe Kandidaten fair",
+      "text": "Mach aus einer Stellenbeschreibung ein Interview mit Zeitlimit und lade Kandidaten per E-Mail ein.",
+      "points": {
+        "own": "Jeder Kandidat bekommt eigene Fragen in eigener Reihenfolge.",
+        "timed": "Jede Frage hat ihren eigenen Countdown, den der Server führt.",
+        "flags": "Auswertungen markieren überhastete Antworten, das Verlassen der Seite und Kopierversuche.",
+        "private": "Kandidaten sehen nie ihre Punktzahl oder welche Antworten richtig waren."
+      },
+      "candidate": "Kandidat",
+      "score": "Ergebnis",
+      "rushed": "Überhastete Antworten",
+      "left": "Seite verlassen",
+      "start": "Jetzt einstellen"
+    },
+    "languages": {
+      "title": "In deiner Sprache",
+      "text": "Die Seite und alles, was sie erstellt, funktionieren in {count} Sprachen, auch von rechts nach links. Füge eine Stellenbeschreibung in einer Sprache ein und übe in einer anderen."
+    },
+    "pricing": {
+      "title": "Zahl nur für das, was funktioniert",
+      "text": "Keine Abos, keine Tarife. Lade auf, wenn du es brauchst, und gib Credits nur für das aus, was du nutzt.",
+      "welcome": "{count, plural, one {# Gratis-Credit} other {# Gratis-Credits}} für jedes neue Konto",
+      "company": "{count, plural, one {# Gratis-Credit} other {# Gratis-Credits}} für jedes neue Unternehmen",
+      "never": "Credits verfallen nie",
+      "failed": "Ein fehlgeschlagenes Kit kostet nichts",
+      "see": "Preise ansehen"
+    },
+    "faq": {
+      "title": "Noch Fragen?",
+      "text": "Antworten zu Preisen, Zertifikaten, Datenschutz und Recruiting.",
+      "read": "Zur FAQ"
+    },
+    "ready": {
+      "title": "Bereit für die Vorbereitung?",
+      "start": "Jetzt starten"
+    }
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "intro": "Keine Antwort gefunden? Schreib uns an die Adresse in der Datenschutzerklärung.",
+    "items": {
+      "different": {
+        "q": "Was unterscheidet prepza von Karteikarten oder Fragenkatalogen?",
+        "a": "Prepza erstellt die Fragen genau für das, worauf du dich vorbereitest, aus deiner Stellenbeschreibung oder deinem Ziel. Runden bringen zurück, was du falsch hattest, ein KI-Tutor erklärt jede Antwort, und Zertifikate zeigen, wann ein Thema gemeistert ist."
+      },
+      "topics": {
+        "q": "Worauf kann ich mich vorbereiten?",
+        "a": "Vorstellungsgespräche in jedem Bereich, Zertifizierungen, Prüfungen, Tests, eine Beförderung oder alles, was du lernen willst. Wenn du es beschreiben kannst, kann prepza ein Kit dafür erstellen."
+      },
+      "certificates": {
+        "q": "Wie funktionieren Zertifikate?",
+        "a": "Jedes Thema hat sein eigenes Zertifikat. Beantworte alle Fragen des Themas mit genug richtigen Antworten, und es gehört dir. Es zählt deine letzte Antwort auf jede Frage, du kannst also weiterüben, bis du es schaffst."
+      },
+      "cost": {
+        "q": "Was kostet es?",
+        "a": "Du zahlst nach Nutzung, mit Credits. Ein neues Kit kostet {kit} Credits, und jedes neue Konto bekommt {welcome} Gratis-Credits, genug für ein erstes Kit. Die Preisseite listet alle Preise."
+      },
+      "expire": {
+        "q": "Verfallen Credits?",
+        "a": "Nein. Credits verfallen nie, und es gibt keine Abos oder Verlängerungen."
+      },
+      "failed": {
+        "q": "Was, wenn ein Kit fehlschlägt?",
+        "a": "Du zahlst erst, wenn ein Kit fertig ist. Schlägt die Erstellung fehl oder brichst du sie ab, bekommst du die Credits zurück."
+      },
+      "refunds": {
+        "q": "Kann ich mein Geld zurückbekommen?",
+        "a": "Ja, für Credits, die du in den letzten 14 Tagen gekauft und noch nicht ausgegeben hast: über Paddle oder indem du uns schreibst. Gratis-Credits wie das Willkommensgeschenk werden nicht erstattet. Details stehen in den Bedingungen."
+      },
+      "privacy": {
+        "q": "Was passiert mit dem, was ich einfüge und beantworte?",
+        "a": "Wir nutzen es, um deine Kits zu erstellen und deinen Fortschritt zu verfolgen. Private Kits sehen nur du und die Personen, mit denen du sie teilst. Die Datenschutzerklärung erklärt, was wir speichern, wie lange und welche Rechte du hast."
+      },
+      "delete": {
+        "q": "Kann ich mein Konto löschen?",
+        "a": "Ja, in den Einstellungen. Dein Konto und deine Daten werden gelöscht, und vorher kannst du eine Kopie deiner Daten herunterladen."
+      },
+      "languages": {
+        "q": "Welche Sprachen werden unterstützt?",
+        "a": "{count} Sprachen, für die Seite, die Kits und die E-Mails. Wähle die Sprache, in der ein Kit erstellt wird, egal in welcher Sprache dein Text ist."
+      },
+      "hiring": {
+        "q": "Wie funktioniert Recruiting mit prepza?",
+        "a": "Leg ein Unternehmen an, erstelle ein Interview aus einer Stellenbeschreibung und lade Kandidaten per E-Mail ein. Jeder Kandidat kostet {candidate} Credits, die erst abgebucht werden, wenn er das Interview beendet, und ein neues Unternehmen bekommt {company} Gratis-Credits."
+      },
+      "scorecards": {
+        "q": "Was zeigen die Auswertungen?",
+        "a": "Jede Antwort, ob sie richtig war und wie lange sie gedauert hat. Außerdem markieren sie Antworten, die zu schnell waren, um die Frage gelesen zu haben, wann der Kandidat die Seite verlassen hat und Kopierversuche."
+      },
+      "candidates": {
+        "q": "Was sehen Kandidaten?",
+        "a": "Vor dem Start, was sie erwartet, dann jeweils eine Frage mit Zeitlimit. Sie sehen nie ihre Punktzahl oder ob eine Antwort richtig war."
+      }
+    }
   }
 }

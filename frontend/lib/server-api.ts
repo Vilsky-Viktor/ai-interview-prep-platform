@@ -17,7 +17,9 @@ export async function serverFetch<T>(path: string): Promise<T | null> {
   const token = jar.get(TOKEN_COOKIE)?.value
   const referral = jar.get(REFERRAL_COOKIE)?.value
   // The services' messages and texts in the page's language.
-  const headers: Record<string, string> = { "Accept-Language": await getLocale() }
+  const headers: Record<string, string> = {
+    "Accept-Language": await getLocale(),
+  }
 
   if (token) {
     headers.Authorization = `Bearer ${token}`
