@@ -41,7 +41,8 @@
     "explore": "odkrywaj",
     "myKits": "moje zestawy",
     "hiring": "rekrutacja",
-    "pricingLink": "cennik"
+    "pricingLink": "cennik",
+    "faq": "Częste pytania"
   },
   "signIn": {
     "with": "Zaloguj się przez",
@@ -78,7 +79,13 @@
   "home": {
     "tagline": "Agenci AI ćwiczą z Tobą, dopóki nie poczujesz się pewnie.",
     "preparingFor": "Przygotowujesz się do",
-    "words": ["rozmowy kwalifikacyjnej", "certyfikacji", "egzaminu", "testu", "awansu"],
+    "words": [
+      "rozmowy kwalifikacyjnej",
+      "certyfikacji",
+      "egzaminu",
+      "testu",
+      "awansu"
+    ],
     "widest": "rozmowy kwalifikacyjnej",
     "mark": "?"
   },
@@ -561,5 +568,175 @@
     "companies": "Kredyty firm",
     "companiesNote": "Na kandydatów każdej firmy.",
     "pricing": "Cennik"
+  },
+  "landing": {
+    "more": "Jak to działa",
+    "how": {
+      "title": "Trzy kroki do gotowości",
+      "paste": {
+        "title": "Wklej lub opisz",
+        "text": "Ogłoszenie o pracę, program nauki albo kilka słów o tym, czego chcesz się nauczyć."
+      },
+      "review": {
+        "title": "Sprawdź plan",
+        "text": "Agenci AI wyłapują to, co ważne, i proponują tematy. Zostaw je, zmień nazwę albo je zmodyfikuj."
+      },
+      "practice": {
+        "title": "Ćwicz, aż poczujesz się pewnie",
+        "text": "Każdy temat dostaje własną bazę pytań. Ćwicz w rundach i patrz, jak rosną postępy."
+      }
+    },
+    "control": {
+      "title": "Ty decydujesz, czego się uczysz",
+      "text": "Nic nie powstaje, dopóki nie zaakceptujesz planu. Odznacz to, co już umiesz, zmień nazwę tematu, edytuj podtematy albo opisz większe zmiany własnymi słowami.",
+      "topics": {
+        "design": "Projektowanie systemów",
+        "sql": "SQL i indeksy",
+        "behavior": "Pytania behawioralne",
+        "basics": "Podstawy programowania"
+      },
+      "change": "Dodaj więcej o cache"
+    },
+    "gaps": {
+      "title": "Ćwiczenia, które znajdują luki",
+      "text": "Każda runda zaczyna się od pytań, na które jeszcze nie odpowiedziałeś, a potem wraca do tych, w których się pomyliłeś. Twój czas idzie tam, gdzie jest najbardziej potrzebny.",
+      "questions": {
+        "first": "Kiedy indeks spowalnia zapytanie?",
+        "second": "Co robi load balancer, gdy serwer pada?",
+        "third": "Opowiedz o konflikcie w zespole"
+      },
+      "fresh": "Nowe",
+      "missed": "Dwa razy źle",
+      "right": "Dobrze"
+    },
+    "tutor": {
+      "title": "Korepetytor do każdego pytania",
+      "text": "Po każdej odpowiedzi od razu widzisz poprawną opcję. Nie wiesz, dlaczego jest poprawna? Zapytaj korepetytora AI i zgłębiaj temat, ile chcesz.",
+      "question": "Który indeks pomoże zapytaniu filtrującemu po dacie?",
+      "options": {
+        "first": "Indeks haszujący na dacie",
+        "second": "Indeks B-tree na dacie",
+        "third": "Indeks na kluczu głównym"
+      },
+      "ask": "Dlaczego nie indeks haszujący?",
+      "answer": "Indeks haszujący znajduje tylko dokładne wartości. Filtr po dacie szuka zakresu, a B-tree przechowuje daty w kolejności."
+    },
+    "proof": {
+      "title": "Wiedz, kiedy jesteś gotowy",
+      "text": "Każdy temat ma pasek postępu do swojego certyfikatu. Zdobądź go, a temat liczy się jako opanowany.",
+      "rules": "Co trzeba zrobić, by dostać certyfikat",
+      "certificate": "Certyfikat"
+    },
+    "quality": {
+      "title": "Pytania, które same stają się lepsze",
+      "text": "Każde pytanie ma jedną poprawną opcję i trzy wiarygodne błędne. Oceny, zgłoszenia i odpowiedzi wskazują słabe pytania, a weryfikator poprawia je lub wymienia w tle.",
+      "steps": {
+        "flagged": "Zgłoszone przez uczących się",
+        "checked": "Sprawdzone przez weryfikatora",
+        "fixed": "Poprawione lub wymienione"
+      }
+    },
+    "share": {
+      "title": "Udostępnij lub opublikuj",
+      "text": "Wyślij zestaw prywatnie znajomym lub współpracownikom e-mailem albo opublikuj go w publicznej bibliotece dla wszystkich, którzy przygotowują się do tego samego.",
+      "private": "Udostępnione prywatnie",
+      "public": "W publicznej bibliotece",
+      "browse": "Przeglądaj bibliotekę"
+    },
+    "companies": {
+      "title": "Rekrutujesz? Sprawdzaj kandydatów uczciwie",
+      "text": "Zamień ogłoszenie o pracę w rozmowę z limitem czasu i zaproś kandydatów e-mailem.",
+      "points": {
+        "own": "Każdy kandydat dostaje własne pytania, we własnej kolejności.",
+        "timed": "Każde pytanie ma własne odliczanie, pilnowane przez serwer.",
+        "flags": "Raporty oznaczają pośpieszne odpowiedzi, opuszczanie strony i próby kopiowania.",
+        "private": "Kandydaci nigdy nie widzą swojego wyniku ani tego, które odpowiedzi były poprawne."
+      },
+      "candidate": "Kandydat",
+      "score": "Wynik",
+      "rushed": "Pośpieszne odpowiedzi",
+      "left": "Opuścił stronę",
+      "start": "Zacznij rekrutować"
+    },
+    "languages": {
+      "title": "W twoim języku",
+      "text": "Strona i wszystko, co tworzy, działają w {count} językach, także od prawej do lewej. Wklej ogłoszenie w jednym języku i ćwicz w innym."
+    },
+    "pricing": {
+      "title": "Płać tylko za to, co działa",
+      "text": "Bez subskrypcji i planów. Doładuj, kiedy potrzebujesz, i wydawaj kredyty tylko na to, z czego korzystasz.",
+      "welcome": "{count, plural, one {# darmowy kredyt} few {# darmowe kredyty} many {# darmowych kredytów} other {# darmowego kredytu}} dla każdego nowego konta",
+      "company": "{count, plural, one {# darmowy kredyt} few {# darmowe kredyty} many {# darmowych kredytów} other {# darmowego kredytu}} dla każdej nowej firmy",
+      "never": "Kredyty nigdy nie wygasają",
+      "failed": "Nieudany zestaw nic nie kosztuje",
+      "see": "Zobacz cennik"
+    },
+    "faq": {
+      "title": "Masz jeszcze pytania?",
+      "text": "Odpowiedzi o cenach, certyfikatach, prywatności i rekrutacji.",
+      "read": "Przeczytaj częste pytania"
+    },
+    "ready": {
+      "title": "Gotowy, by się przygotować?",
+      "start": "Zacznij teraz"
+    }
+  },
+  "faq": {
+    "title": "Często zadawane pytania",
+    "intro": "Nie ma tu twojej odpowiedzi? Napisz do nas na adres podany w polityce prywatności.",
+    "items": {
+      "different": {
+        "q": "Czym prepza różni się od fiszek i baz pytań?",
+        "a": "Prepza tworzy pytania dokładnie pod to, do czego się przygotowujesz, na podstawie ogłoszenia o pracę lub twojego celu. Rundy wracają do tego, w czym się pomyliłeś, korepetytor AI wyjaśnia każdą odpowiedź, a certyfikaty pokazują, kiedy temat jest opanowany."
+      },
+      "topics": {
+        "q": "Do czego mogę się przygotować?",
+        "a": "Do rozmów o pracę w każdej dziedzinie, certyfikacji, egzaminów, testów, awansu lub czegokolwiek, czego chcesz się nauczyć. Jeśli potrafisz to opisać, prepza zbuduje do tego zestaw."
+      },
+      "certificates": {
+        "q": "Jak działają certyfikaty?",
+        "a": "Każdy temat ma własny certyfikat. Odpowiedz na wszystkie pytania tematu z wystarczającą liczbą poprawnych odpowiedzi, a będzie twój. Liczy się ostatnia odpowiedź na każde pytanie, więc możesz ćwiczyć, aż ci się uda."
+      },
+      "cost": {
+        "q": "Ile to kosztuje?",
+        "a": "Płacisz za użycie, kredytami. Nowy zestaw kosztuje {kit} kredytów, a każde nowe konto dostaje {welcome} darmowych kredytów, wystarczająco na pierwszy zestaw. Wszystkie ceny są w cenniku."
+      },
+      "expire": {
+        "q": "Czy kredyty wygasają?",
+        "a": "Nie. Kredyty nigdy nie wygasają i nie ma subskrypcji ani odnowień."
+      },
+      "failed": {
+        "q": "Co jeśli zestaw się nie uda?",
+        "a": "Płacisz dopiero, gdy zestaw jest gotowy. Jeśli tworzenie się nie powiedzie albo je anulujesz, kredyty wracają do ciebie."
+      },
+      "refunds": {
+        "q": "Czy mogę dostać zwrot?",
+        "a": "Tak, za kredyty kupione w ciągu ostatnich 14 dni i jeszcze niewydane: przez Paddle lub pisząc do nas. Darmowe kredyty, takie jak prezent powitalny, nie podlegają zwrotowi. Szczegóły są w regulaminie."
+      },
+      "privacy": {
+        "q": "Co dzieje się z tym, co wklejam i odpowiadam?",
+        "a": "Używamy tego, by tworzyć twoje zestawy i śledzić postępy. Prywatne zestawy widzisz tylko ty i osoby, którym je udostępnisz. Polityka prywatności wyjaśnia, co przechowujemy, jak długo i jakie masz prawa."
+      },
+      "delete": {
+        "q": "Czy mogę usunąć konto?",
+        "a": "Tak, w Ustawieniach. Twoje konto i dane zostają usunięte, a wcześniej możesz pobrać ich kopię."
+      },
+      "languages": {
+        "q": "Jakie języki są obsługiwane?",
+        "a": "{count} języków, dla strony, zestawów i e-maili. Wybierz język, w którym powstaje zestaw, niezależnie od języka twojego tekstu."
+      },
+      "hiring": {
+        "q": "Jak działa rekrutacja z prepza?",
+        "a": "Utwórz firmę, wygeneruj rozmowę z ogłoszenia o pracę i zaproś kandydatów e-mailem. Każdy kandydat kosztuje {candidate} kredytów, pobieranych dopiero, gdy ukończy rozmowę, a nowa firma dostaje {company} darmowych kredytów."
+      },
+      "scorecards": {
+        "q": "Co pokazują raporty?",
+        "a": "Każdą odpowiedź, czy była poprawna i ile trwała. Oznaczają też odpowiedzi zbyt szybkie, by przeczytać pytanie, opuszczenia strony i próby kopiowania."
+      },
+      "candidates": {
+        "q": "Co widzą kandydaci?",
+        "a": "Przed startem, czego się spodziewać, a potem po jednym pytaniu z limitem czasu. Nigdy nie widzą swojego wyniku ani tego, czy odpowiedź była poprawna."
+      }
+    }
   }
 }

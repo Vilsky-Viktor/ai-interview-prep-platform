@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.auth import CurrentUser
 from prepza_common.i18n import request_language
 
-from app.constants.rounds import CERTIFICATE_RULES
+from app.constants.certificate_rules import CERTIFICATE_RULES
 from app.models.certificates import Certificate
 from app.schemas.certificates import CertificateOut
 from app.services.certificate_purchase import buy_certificate

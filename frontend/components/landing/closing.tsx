@@ -2,7 +2,6 @@ import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 
 import { StartButton } from "@/components/landing/start-button"
-import { Button } from "@/components/ui/button"
 
 /** The landing page's end: a link to the FAQ, and a way back to the input. */
 export async function Closing() {
@@ -10,24 +9,22 @@ export async function Closing() {
 
   return (
     <>
-      <section className="flex flex-wrap items-center justify-between gap-6 rounded-3xl bg-card p-8 shadow-sm ring-1 ring-foreground/5">
-        <div className="space-y-2">
-          <h2 className="no-dot font-heading text-2xl font-medium tracking-tight">
+      <section className="flex flex-wrap items-baseline justify-between gap-4 border-y py-8">
+        <div className="space-y-1">
+          <h2 className="no-dot font-heading text-xl font-medium">
             {t("faq.title")}
           </h2>
-          <p className="text-base text-muted-foreground">{t("faq.text")}</p>
+          <p className="text-muted-foreground">{t("faq.text")}</p>
         </div>
-        <Button
-          variant="outline"
-          className="h-10 px-5 text-base"
-          render={<Link href="/faq" />}
-          nativeButton={false}
+        <Link
+          href="/faq"
+          className="text-primary underline-offset-4 hover:underline"
         >
-          {t("faq.read")}
-        </Button>
+          {t("faq.read")} →
+        </Link>
       </section>
-      <section className="space-y-6 text-center">
-        <h2 className="no-dot font-heading text-3xl font-medium tracking-tight sm:text-4xl">
+      <section className="space-y-8 py-12 text-center">
+        <h2 className="no-dot font-heading text-4xl font-medium tracking-tight sm:text-6xl">
           {t("ready.title")}
         </h2>
         <StartButton label={t("ready.start")} />

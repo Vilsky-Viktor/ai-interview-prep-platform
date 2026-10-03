@@ -1,27 +1,24 @@
 import { cn } from "cn"
 
-/** One landing section: its title and text beside an illustration, which alternates sides on
- * wide screens and goes under the text on phones. */
+/** One landing section: a large title and a short text, then its picture below. */
 export function LandingSection({
   title,
   text,
-  reverse = false,
-  children,
   extra,
+  children,
 }: {
   title: string
   text: string
-  reverse?: boolean
-  children: React.ReactNode
   extra?: React.ReactNode
+  children?: React.ReactNode
 }) {
   return (
-    <section className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
-      <div className={cn("space-y-4", reverse && "md:order-last")}>
-        <h2 className="font-heading text-3xl font-medium tracking-tight text-balance">
+    <section className="space-y-10">
+      <div className="max-w-2xl space-y-4">
+        <h2 className="font-heading text-3xl font-medium tracking-tight text-balance sm:text-4xl">
           {title}
         </h2>
-        <p className="text-base leading-relaxed text-muted-foreground">
+        <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
           {text}
         </p>
         {extra}
@@ -31,8 +28,8 @@ export function LandingSection({
   )
 }
 
-/** A still picture of the product, built from the interface's own look; screen readers skip it. */
-export function Mockup({
+/** The soft panel a section's picture sits on; screen readers skip the picture. */
+export function Stage({
   className,
   children,
 }: {
@@ -43,11 +40,15 @@ export function Mockup({
     <div
       aria-hidden
       className={cn(
-        "space-y-3 rounded-3xl bg-card p-5 shadow-sm ring-1 ring-foreground/5",
+        "flex justify-center rounded-[2rem] bg-muted/60 px-5 py-10 sm:px-12 sm:py-14 dark:bg-muted/30",
         className
       )}
     >
-      {children}
+      <div className="w-full max-w-md">{children}</div>
     </div>
   )
 }
+
+/** A piece of interface inside a stage: plain, with a hairline edge. */
+export const PANEL =
+  "rounded-2xl border border-border/70 bg-background text-sm"

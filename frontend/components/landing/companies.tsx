@@ -1,8 +1,6 @@
-import { CheckIcon } from "lucide-react"
 import Link from "next/link"
 import { getLocale, getTranslations } from "next-intl/server"
 
-import { LandingSection, Mockup } from "@/components/landing/section"
 import { Button } from "@/components/ui/button"
 
 const POINTS = ["own", "timed", "flags", "private"] as const
@@ -14,60 +12,58 @@ const CANDIDATES = [
   { letter: "C", score: 0.41, flag: "rushed" },
 ] as const
 
+/** The hiring side, on a dark panel of its own so companies see it's for them. */
 export async function CompaniesSection() {
   const t = await getTranslations("landing.companies")
   const percent = new Intl.NumberFormat(await getLocale(), { style: "percent" })
 
-  const extra = (
-    <>
-      <ul className="space-y-2 text-sm text-muted-foreground">
-        {POINTS.map((point) => (
-          <li key={point} className="flex gap-2">
-            <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
-            <span>{t(`points.${point}`)}</span>
-          </li>
-        ))}
-      </ul>
-      <Button
-        className="h-10 px-5 text-base"
-        render={<Link href="/company" />}
-        nativeButton={false}
-      >
-        {t("start")}
-      </Button>
-    </>
-  )
-
   return (
-    <LandingSection title={t("title")} text={t("text")} extra={extra}>
-      <Mockup>
-        <div className="flex justify-between px-4 text-xs text-muted-foreground">
-          <span>{t("candidate")}</span>
-          <span>{t("score")}</span>
-        </div>
-        <ul className="space-y-2">
-          {CANDIDATES.map(({ letter, score, flag }) => (
-            <li
-              key={letter}
-              className="flex items-center gap-3 rounded-2xl bg-muted/60 p-4"
-            >
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-medium text-primary">
-                {letter}
-              </span>
-              <span className="min-w-0 flex-1">
-                {flag && (
-                  <span className="rounded-full bg-red-600/10 px-2.5 py-1 text-xs font-medium text-red-600 dark:text-red-400">
-                    {t(flag)}
-                  </span>
-                )}
-              </span>
-              <span className="font-medium tabular-nums">
-                {percent.format(score)}
-              </span>
+    <section className="grid gap-12 rounded-[2rem] bg-foreground p-8 text-background sm:p-14 md:grid-cols-2">
+      <div className="space-y-6">
+        <h2 className="font-heading text-3xl font-medium tracking-tight text-balance sm:text-4xl">
+          {t("title")}
+        </h2>
+        <p className="text-lg leading-relaxed text-background/70">{t("text")}</p>
+        <ul className="space-y-3 text-background/70">
+          {POINTS.map((point) => (
+            <li key={point} className="flex gap-3">
+              <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary" />
+              <span>{t(`points.${point}`)}</span>
             </li>
           ))}
         </ul>
-      </Mockup>
-    </LandingSection>
+        <Button
+          variant="secondary"
+          className="h-11 px-6 text-base"
+          render={<Link href="/company" />}
+          nativeButton={false}
+        >
+          {t("start")}
+        </Button>
+      </div>
+      <div aria-hidden className="self-center">
+        <div className="rounded-2xl border border-background/15 text-sm">
+          <div className="flex justify-between px-5 py-3 text-xs text-background/50">
+            <span>{t("candidate")}</span>
+            <span>{t("score")}</span>
+          </div>
+          <ul className="divide-y divide-background/15 border-t border-background/15">
+            {CANDIDATES.map(({ letter, score, flag }) => (
+              <li key={letter} className="flex items-center gap-3 px-5 py-4">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-background/10 text-xs">
+                  {letter}
+                </span>
+                <span className="min-w-0 flex-1 text-xs text-red-400">
+                  {flag && t(flag)}
+                </span>
+                <span className="font-medium tabular-nums">
+                  {percent.format(score)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
   )
 }

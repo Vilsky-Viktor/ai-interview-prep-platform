@@ -1,7 +1,7 @@
-import { CheckIcon, SendIcon } from "lucide-react"
+import { ArrowUpIcon, CheckIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { LandingSection, Mockup } from "@/components/landing/section"
+import { LandingSection, PANEL, Stage } from "@/components/landing/section"
 
 const TOPICS = [
   { key: "design", checked: true },
@@ -15,32 +15,36 @@ export async function ControlSection() {
 
   return (
     <LandingSection title={t("title")} text={t("text")}>
-      <Mockup>
-        <ul className="divide-y">
-          {TOPICS.map(({ key, checked }) => (
-            <li key={key} className="flex items-center gap-3 py-3">
-              <span
-                className={
-                  checked
-                    ? "flex size-4 items-center justify-center rounded-[6px] bg-primary text-primary-foreground"
-                    : "size-4 rounded-[6px] border border-input"
-                }
-              >
-                {checked && <CheckIcon className="size-3.5" />}
-              </span>
-              <span
-                className={checked ? "" : "text-muted-foreground line-through"}
-              >
-                {t(`topics.${key}`)}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <div className="flex items-center justify-between gap-3 rounded-full bg-muted px-4 py-2 text-sm text-muted-foreground">
-          <span>{t("change")}</span>
-          <SendIcon className="size-4 rtl:-scale-x-100" />
+      <Stage>
+        <div className="space-y-3">
+          <ul className={`${PANEL} divide-y divide-border/70`}>
+            {TOPICS.map(({ key, checked }) => (
+              <li key={key} className="flex items-center gap-3 px-5 py-4">
+                {checked ? (
+                  <span className="flex size-4 items-center justify-center rounded-[5px] bg-primary text-primary-foreground">
+                    <CheckIcon className="size-3" />
+                  </span>
+                ) : (
+                  <span className="size-4 rounded-[5px] border border-input" />
+                )}
+                <span
+                  className={checked ? "" : "text-muted-foreground line-through"}
+                >
+                  {t(`topics.${key}`)}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div
+            className={`${PANEL} flex items-center justify-between gap-3 rounded-full py-2 ps-5 pe-2 text-muted-foreground`}
+          >
+            <span>{t("change")}</span>
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+              <ArrowUpIcon className="size-4" />
+            </span>
+          </div>
         </div>
-      </Mockup>
+      </Stage>
     </LandingSection>
   )
 }

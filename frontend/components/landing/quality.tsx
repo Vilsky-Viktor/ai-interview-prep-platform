@@ -1,34 +1,35 @@
-import { FlagIcon, RefreshCwIcon, ShieldCheckIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { LandingSection, Mockup } from "@/components/landing/section"
+import { LandingSection, PANEL, Stage } from "@/components/landing/section"
 
-const STEPS = [
-  { key: "flagged", icon: FlagIcon },
-  { key: "checked", icon: ShieldCheckIcon },
-  { key: "fixed", icon: RefreshCwIcon },
-] as const
+const STEPS = ["flagged", "checked", "fixed"] as const
 
 export async function QualitySection() {
   const t = await getTranslations("landing.quality")
 
   return (
     <LandingSection title={t("title")} text={t("text")}>
-      <Mockup>
-        <ol className="space-y-3">
-          {STEPS.map(({ key, icon: Icon }) => (
-            <li
-              key={key}
-              className="flex items-center gap-4 rounded-2xl bg-muted/60 p-4"
-            >
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                <Icon className="size-5" />
-              </span>
-              <span className="text-sm">{t(`steps.${key}`)}</span>
+      <Stage>
+        <ol className={`${PANEL} space-y-0 p-5`}>
+          {STEPS.map((key, index) => (
+            <li key={key} className="flex gap-4">
+              <div className="flex flex-col items-center">
+                <span
+                  className={
+                    index === STEPS.length - 1
+                      ? "mt-1.5 size-2.5 rounded-full bg-primary"
+                      : "mt-1.5 size-2.5 rounded-full border-2 border-primary"
+                  }
+                />
+                {index < STEPS.length - 1 && (
+                  <span className="my-1 w-px flex-1 bg-border" />
+                )}
+              </div>
+              <span className="pb-6 last:pb-0">{t(`steps.${key}`)}</span>
             </li>
           ))}
         </ol>
-      </Mockup>
+      </Stage>
     </LandingSection>
   )
 }

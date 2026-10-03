@@ -1,7 +1,8 @@
 from prepza_common.constants import LANGUAGES
 from prepza_common.translations import TRANSLATIONS
 
-from app.constants.rounds import CERTIFICATE_RULES, CHAT_FAILED, PUBLIC_TOPICS_LIMIT
+from app.constants.certificate_rules import CERTIFICATE_RULES
+from app.constants.rounds import CHAT_FAILED, PUBLIC_TOPICS_LIMIT
 
 
 def test_messages_users_see_have_translations():

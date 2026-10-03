@@ -41,7 +41,8 @@
     "explore": "tumuklas",
     "myKits": "aking mga kit",
     "hiring": "hiring",
-    "pricingLink": "presyo"
+    "pricingLink": "presyo",
+    "faq": "FAQ"
   },
   "signIn": {
     "with": "Mag-sign in gamit ang",
@@ -78,7 +79,13 @@
   "home": {
     "tagline": "Ang mga AI agent ay nagpa-practice kasama mo hanggang maging kumpiyansa ka.",
     "preparingFor": "Naghahanda para sa",
-    "words": ["isang interview", "isang certification", "isang exam", "isang test", "isang promotion"],
+    "words": [
+      "isang interview",
+      "isang certification",
+      "isang exam",
+      "isang test",
+      "isang promotion"
+    ],
     "widest": "isang certification",
     "mark": "?"
   },
@@ -561,5 +568,175 @@
     "companies": "Credits ng mga kumpanya",
     "companiesNote": "Para sa mga kandidato ng bawat kumpanya.",
     "pricing": "Presyo"
+  },
+  "landing": {
+    "more": "Paano ito gumagana",
+    "how": {
+      "title": "Tatlong hakbang para maging handa",
+      "paste": {
+        "title": "I-paste o ilarawan",
+        "text": "Isang job description, syllabus, o ilang salita tungkol sa gusto mong matutunan."
+      },
+      "review": {
+        "title": "Suriin ang plano",
+        "text": "Hinahanap ng mga AI agent ang mahalaga at nagmumungkahi ng mga topic. Panatilihin, palitan ang pangalan, o baguhin ang mga ito."
+      },
+      "practice": {
+        "title": "Mag-practice hanggang kumpiyansa ka",
+        "text": "May sariling bangko ng tanong ang bawat topic. Mag-practice nang pa-round at panoorin ang paglago ng progreso mo."
+      }
+    },
+    "control": {
+      "title": "Ikaw ang magpapasya kung ano ang pag-aaralan",
+      "text": "Walang gagawin hangga't hindi ka sang-ayon sa plano. Alisin ang check sa alam mo na, palitan ang pangalan ng topic, i-edit ang mga subtopic nito, o ilarawan ang mas malalaking pagbabago sa sarili mong salita.",
+      "topics": {
+        "design": "System design",
+        "sql": "SQL at mga index",
+        "behavior": "Mga behavioral na tanong",
+        "basics": "Mga batayan ng programming"
+      },
+      "change": "Magdagdag pa tungkol sa caching"
+    },
+    "gaps": {
+      "title": "Practice na hinahanap ang kahinaan mo",
+      "text": "Nagsisimula ang bawat round sa mga tanong na hindi mo pa nasasagot, saka ibinabalik ang mga mali mo. Napupunta ang oras mo kung saan pinakamahalaga.",
+      "questions": {
+        "first": "Kailan pinababagal ng index ang isang query?",
+        "second": "Ano ang ginagawa ng load balancer kapag bumagsak ang isang server?",
+        "third": "Magkuwento tungkol sa isang alitan sa team mo"
+      },
+      "fresh": "Bago",
+      "missed": "Dalawang beses mali",
+      "right": "Tama"
+    },
+    "tutor": {
+      "title": "Isang tutor para sa bawat tanong",
+      "text": "Pagkatapos ng bawat sagot, makikita mo agad ang tamang opsyon. Hindi sigurado kung bakit ito tama? Tanungin ang AI tutor at lumalim hangga't kailangan mo.",
+      "question": "Aling index ang tumutulong sa query na nagfi-filter ayon sa petsa?",
+      "options": {
+        "first": "Isang hash index sa petsa",
+        "second": "Isang B-tree index sa petsa",
+        "third": "Isang index sa primary key"
+      },
+      "ask": "Bakit hindi ang hash index?",
+      "answer": "Eksaktong value lang ang nahahanap ng hash index. Range ang hinahanap ng filter sa petsa, at nakaayos ang mga petsa sa B-tree."
+    },
+    "proof": {
+      "title": "Alamin kung kailan ka handa",
+      "text": "May progress bar ang bawat topic papunta sa certificate nito. Kunin ito, at maituturing na master mo na ang topic.",
+      "rules": "Ano ang kailangan para sa certificate",
+      "certificate": "Certificate"
+    },
+    "quality": {
+      "title": "Mga tanong na kusang gumaganda",
+      "text": "May isang tamang opsyon at tatlong kapani-paniwalang maling opsyon ang bawat tanong. Itinuturo ng mga boto, report, at sagot ang mahihinang tanong, at inaayos o pinapalitan ang mga ito ng isang verifier sa background.",
+      "steps": {
+        "flagged": "Na-flag ng mga nag-aaral",
+        "checked": "Sinuri ng verifier",
+        "fixed": "Inayos o pinalitan"
+      }
+    },
+    "share": {
+      "title": "I-share o i-publish",
+      "text": "Ipadala nang pribado ang isang kit sa mga kaibigan o katrabaho sa email, o i-publish ito sa pampublikong library para sa lahat ng naghahanda para sa parehong bagay.",
+      "private": "Pribadong naka-share",
+      "public": "Nasa pampublikong library",
+      "browse": "Tuklasin ang library"
+    },
+    "companies": {
+      "title": "Nagha-hire? Subukin nang patas ang mga kandidato",
+      "text": "Gawing may oras na interview ang isang job description at imbitahan ang mga kandidato sa email.",
+      "points": {
+        "own": "May sariling mga tanong ang bawat kandidato, sa sarili nitong pagkakasunod.",
+        "timed": "May sariling countdown ang bawat tanong, na binabantayan ng server.",
+        "flags": "Mina-mark ng mga scorecard ang mga minadaling sagot, pag-alis sa page, at pagtatangkang mangopya.",
+        "private": "Hindi kailanman nakikita ng mga kandidato ang score nila o kung aling sagot ang tama."
+      },
+      "candidate": "Kandidato",
+      "score": "Score",
+      "rushed": "Minadaling sagot",
+      "left": "Umalis sa page",
+      "start": "Magsimulang mag-hire"
+    },
+    "languages": {
+      "title": "Sa wika mo",
+      "text": "Gumagana ang site at lahat ng ginagawa nito sa {count} wika, pati mula kanan pakaliwa. Mag-paste ng job description sa isang wika at mag-practice sa iba."
+    },
+    "pricing": {
+      "title": "Magbayad lang para sa gumagana",
+      "text": "Walang subscription o plan. Mag-top up kapag kailangan mo, at gumastos ng credits sa ginagamit mo lang.",
+      "welcome": "{count, plural, one {# libreng credit} other {# libreng credits}} para sa bawat bagong account",
+      "company": "{count, plural, one {# libreng credit} other {# libreng credits}} para sa bawat bagong kompanya",
+      "never": "Hindi kailanman nag-e-expire ang credits",
+      "failed": "Walang bayad ang kit na pumalya",
+      "see": "Tingnan ang presyo"
+    },
+    "faq": {
+      "title": "May tanong pa?",
+      "text": "Mga sagot tungkol sa presyo, certificate, privacy, at hiring.",
+      "read": "Basahin ang FAQ"
+    },
+    "ready": {
+      "title": "Handa ka nang maghanda?",
+      "start": "Magsimula na"
+    }
+  },
+  "faq": {
+    "title": "Mga madalas itanong",
+    "intro": "Hindi mo makita ang sagot? Sumulat sa amin sa address na nasa privacy policy.",
+    "items": {
+      "different": {
+        "q": "Paano naiiba ang prepza sa flashcards o question bank?",
+        "a": "Ginagawa ng prepza ang mga tanong para mismo sa pinaghahandaan mo, mula sa job description o layunin mo. Ibinabalik ng mga round ang mga mali mo, ipinapaliwanag ng AI tutor ang bawat sagot, at ipinapakita ng mga certificate kung kailan mo na-master ang isang topic."
+      },
+      "topics": {
+        "q": "Para saan ako puwedeng maghanda?",
+        "a": "Mga job interview sa anumang larangan, certification, exam, test, promotion, o anumang gusto mong matutunan. Kung kaya mo itong ilarawan, kaya itong gawan ng kit ng prepza."
+      },
+      "certificates": {
+        "q": "Paano gumagana ang mga certificate?",
+        "a": "May sariling certificate ang bawat topic. Sagutin ang lahat ng tanong sa topic nang may sapat na tamang sagot, at sa iyo na ito. Ang huling sagot mo sa bawat tanong ang binibilang, kaya puwede kang patuloy na mag-practice hanggang makuha mo."
+      },
+      "cost": {
+        "q": "Magkano ito?",
+        "a": "Magbabayad ka habang ginagamit, gamit ang credits. Nagkakahalaga ng {kit} credits ang bagong kit, at nakakakuha ang bawat bagong account ng {welcome} libreng credits, sapat para sa unang kit. Nakalista ang lahat ng presyo sa pricing page."
+      },
+      "expire": {
+        "q": "Nag-e-expire ba ang credits?",
+        "a": "Hindi. Hindi kailanman nag-e-expire ang credits, at walang subscription o renewal."
+      },
+      "failed": {
+        "q": "Paano kung pumalya ang kit?",
+        "a": "Sinisingil ka lang kapag handa na ang kit. Kung pumalya ang paggawa o kinansela mo ito, babalik sa iyo ang credits."
+      },
+      "refunds": {
+        "q": "Puwede ba akong ma-refund?",
+        "a": "Oo, para sa credits na binili mo sa nakaraang 14 na araw at hindi pa nagagastos: sa Paddle o sa pagsulat sa amin. Hindi nire-refund ang libreng credits, gaya ng welcome gift. Nasa terms ang mga detalye."
+      },
+      "privacy": {
+        "q": "Ano ang nangyayari sa pine-paste at sinasagot ko?",
+        "a": "Ginagamit namin ito para gawin ang mga kit mo at subaybayan ang progreso mo. Ikaw lang at ang mga taong binahagian mo ang nakakakita sa mga pribadong kit. Ipinapaliwanag ng privacy policy kung ano ang iniingatan namin, gaano katagal, at ang mga karapatan mo."
+      },
+      "delete": {
+        "q": "Puwede ko bang burahin ang account ko?",
+        "a": "Oo, sa Settings. Buburahin ang account at data mo, at puwede mo munang i-download ang kopya ng data mo."
+      },
+      "languages": {
+        "q": "Aling mga wika ang suportado?",
+        "a": "{count} wika, para sa site, sa mga kit, at sa mga email. Piliin ang wikang gagamitin sa paggawa ng kit, anuman ang wika ng text mo."
+      },
+      "hiring": {
+        "q": "Paano gumagana ang hiring sa prepza?",
+        "a": "Gumawa ng kompanya, gumawa ng interview mula sa job description, at imbitahan ang mga kandidato sa email. Nagkakahalaga ng {candidate} credits ang bawat kandidato, na sinisingil lang kapag natapos nila ang interview, at nakakakuha ang bagong kompanya ng {company} libreng credits."
+      },
+      "scorecards": {
+        "q": "Ano ang ipinapakita ng mga scorecard?",
+        "a": "Bawat sagot, kung tama ito, at gaano katagal. Mina-mark din nila ang mga sagot na masyadong mabilis para nabasa ang tanong, ang mga pagkakataong umalis ang kandidato sa page, at mga pagtatangkang mangopya."
+      },
+      "candidates": {
+        "q": "Ano ang nakikita ng mga kandidato?",
+        "a": "Kung ano ang aasahan bago sila magsimula, saka isang may oras na tanong sa bawat pagkakataon. Hindi nila kailanman nakikita ang score nila o kung tama ang isang sagot."
+      }
+    }
   }
 }

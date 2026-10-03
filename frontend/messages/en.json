@@ -575,51 +575,51 @@
       "title": "Three steps to ready",
       "paste": {
         "title": "Paste or describe",
-        "text": "A job description, a syllabus, or a few words about what you want to learn."
+        "text": "A job description, a syllabus, or a few words about your goal."
       },
       "review": {
         "title": "Review the plan",
-        "text": "AI agents pick out what matters and propose topics. Keep them, rename them or change them."
+        "text": "AI agents pick out what matters and propose topics. Keep, rename or change them."
       },
       "practice": {
         "title": "Practice until confident",
-        "text": "Every topic gets its own bank of questions. Practice in rounds and watch your progress grow."
+        "text": "Every topic gets its own questions. Practice in rounds and watch your progress grow."
       }
     },
     "control": {
       "title": "You decide what to study",
-      "text": "Nothing is generated until you agree with the plan. Uncheck what you already know, rename a topic, edit its subtopics, or describe bigger changes in plain words.",
+      "text": "No questions are written until you approve the topics. Uncheck what you already know, rename a topic, edit its subtopics, or describe bigger changes in plain words.",
       "topics": {
-        "design": "System design",
-        "sql": "SQL and indexes",
-        "behavior": "Behavioral questions",
-        "basics": "Programming basics"
+        "design": "Customer communication",
+        "sql": "Negotiation",
+        "behavior": "Time management",
+        "basics": "Team leadership"
       },
-      "change": "Add more on caching"
+      "change": "Add more on handling complaints"
     },
     "gaps": {
       "title": "Practice that finds your gaps",
-      "text": "Every round starts with questions you haven't answered yet, then brings back the ones you got wrong. Your time goes where it matters most.",
+      "text": "Every round asks all of the topic's questions: the ones you haven't answered first, then the ones you got wrong last time. Your effort goes where it matters most.",
       "questions": {
-        "first": "When does an index slow a query down?",
-        "second": "What does a load balancer do when a server fails?",
-        "third": "Tell about a conflict in your team"
+        "first": "What should a good meeting agenda include?",
+        "second": "How do you choose between two urgent tasks?",
+        "third": "Tell about a time you handled a disagreement"
       },
       "fresh": "New",
-      "missed": "Missed twice",
+      "missed": "Wrong last time",
       "right": "Right"
     },
     "tutor": {
       "title": "A tutor for every question",
       "text": "After each answer you see the right option at once. Not sure why it's right? Ask the AI tutor and go as deep as you need.",
-      "question": "Which index helps a query that filters by date?",
+      "question": "A customer is upset about a late delivery. What do you do first?",
       "options": {
-        "first": "A hash index on the date",
-        "second": "A B-tree index on the date",
-        "third": "An index on the primary key"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away"
       },
-      "ask": "Why not the hash index?",
-      "answer": "A hash index finds exact values only. A date filter asks for a range, and a B-tree keeps dates in order."
+      "ask": "Why not explain first?",
+      "answer": "People listen to reasons once they feel heard. Acknowledge the problem first, then explain and offer a fix."
     },
     "proof": {
       "title": "Know when you're ready",
@@ -687,7 +687,7 @@
     "items": {
       "different": {
         "q": "How is prepza different from flashcards or question banks?",
-        "a": "Prepza builds the questions for exactly what you're preparing for, from your job description or goal. Rounds bring back what you got wrong, an AI tutor explains every answer, and certificates show when a topic is mastered."
+        "a": "Prepza writes the questions for exactly what you're preparing for, from your job description or goal. Every round starts with what you haven't answered, then what you got wrong; an AI tutor explains every answer; and certificates show when a topic is mastered."
       },
       "topics": {
         "q": "What can I prepare for?",

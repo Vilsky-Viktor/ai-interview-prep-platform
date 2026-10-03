@@ -41,7 +41,8 @@
     "explore": "avasta",
     "myKits": "minu komplektid",
     "hiring": "värbamine",
-    "pricingLink": "hinnad"
+    "pricingLink": "hinnad",
+    "faq": "KKK"
   },
   "signIn": {
     "with": "Logi sisse kontoga",
@@ -78,7 +79,13 @@
   "home": {
     "tagline": "Tehisaru agendid harjutavad sinuga, kuni tunned end kindlalt.",
     "preparingFor": "Valmistud",
-    "words": ["tööintervjuuks", "sertifitseerimiseks", "eksamiks", "testiks", "edutamiseks"],
+    "words": [
+      "tööintervjuuks",
+      "sertifitseerimiseks",
+      "eksamiks",
+      "testiks",
+      "edutamiseks"
+    ],
     "widest": "sertifitseerimiseks",
     "mark": "?"
   },
@@ -561,5 +568,175 @@
     "companies": "Ettevõtete krediidid",
     "companiesNote": "Iga ettevõtte kandidaatide jaoks.",
     "pricing": "Hinnad"
+  },
+  "landing": {
+    "more": "Kuidas see töötab",
+    "how": {
+      "title": "Kolm sammu valmisolekuni",
+      "paste": {
+        "title": "Kleebi või kirjelda",
+        "text": "Töökuulutus, õppekava või paar sõna sellest, mida tahad õppida."
+      },
+      "review": {
+        "title": "Vaata plaan üle",
+        "text": "Tehisaru agendid leiavad olulise ja pakuvad teemasid. Jäta need alles, nimeta ümber või muuda."
+      },
+      "practice": {
+        "title": "Harjuta, kuni oled kindel",
+        "text": "Iga teema saab oma küsimuste panga. Harjuta voorudes ja vaata, kuidas edusammud kasvavad."
+      }
+    },
+    "control": {
+      "title": "Sina otsustad, mida õppida",
+      "text": "Midagi ei looda enne, kui oled plaaniga nõus. Eemalda linnuke sellelt, mida juba oskad, nimeta teema ümber, muuda alateemasid või kirjelda suuremaid muudatusi oma sõnadega.",
+      "topics": {
+        "design": "Süsteemide disain",
+        "sql": "SQL ja indeksid",
+        "behavior": "Käitumisküsimused",
+        "basics": "Programmeerimise alused"
+      },
+      "change": "Lisa rohkem vahemälu kohta"
+    },
+    "gaps": {
+      "title": "Harjutamine, mis leiab lüngad",
+      "text": "Iga voor algab küsimustega, millele sa pole veel vastanud, ja toob siis tagasi need, milles eksisid. Sinu aeg läheb sinna, kus see loeb.",
+      "questions": {
+        "first": "Millal indeks päringut aeglustab?",
+        "second": "Mida teeb koormusjaotur, kui server langeb?",
+        "third": "Räägi konfliktist oma meeskonnas"
+      },
+      "fresh": "Uus",
+      "missed": "Kaks korda vale",
+      "right": "Õige"
+    },
+    "tutor": {
+      "title": "Juhendaja iga küsimuse jaoks",
+      "text": "Pärast iga vastust näed kohe õiget valikut. Pole kindel, miks see õige on? Küsi tehisaru juhendajalt ja süvene nii palju, kui vaja.",
+      "question": "Milline indeks aitab päringut, mis filtreerib kuupäeva järgi?",
+      "options": {
+        "first": "Räsiindeks kuupäeval",
+        "second": "B-tree indeks kuupäeval",
+        "third": "Indeks primaarvõtmel"
+      },
+      "ask": "Miks mitte räsiindeks?",
+      "answer": "Räsiindeks leiab ainult täpseid väärtusi. Kuupäevafilter otsib vahemikku ja B-tree hoiab kuupäevi järjekorras."
+    },
+    "proof": {
+      "title": "Tea, millal oled valmis",
+      "text": "Igal teemal on edenemisriba kuni sertifikaadini. Teeni see välja ja teema loetakse omandatuks.",
+      "rules": "Mida sertifikaadiks vaja on",
+      "certificate": "Sertifikaat"
+    },
+    "quality": {
+      "title": "Küsimused, mis paranevad ise",
+      "text": "Igal küsimusel on üks õige ja kolm usutavat vale valikut. Hinnangud, teated ja vastused näitavad nõrku küsimusi ning kontrollija parandab või asendab need taustal.",
+      "steps": {
+        "flagged": "Õppijate märgitud",
+        "checked": "Kontrollija üle vaadatud",
+        "fixed": "Parandatud või asendatud"
+      }
+    },
+    "share": {
+      "title": "Jaga või avalda",
+      "text": "Saada komplekt e-postiga privaatselt sõpradele või kolleegidele või avalda see avalikus raamatukogus kõigile, kes valmistuvad sama asja jaoks.",
+      "private": "Jagatud privaatselt",
+      "public": "Avalikus raamatukogus",
+      "browse": "Avasta raamatukogu"
+    },
+    "companies": {
+      "title": "Värbad? Testi kandidaate ausalt",
+      "text": "Tee töökuulutusest ajapiiranguga intervjuu ja kutsu kandidaadid e-postiga.",
+      "points": {
+        "own": "Iga kandidaat saab oma küsimused, omas järjekorras.",
+        "timed": "Igal küsimusel on oma taimer, mida peab server.",
+        "flags": "Aruanded märgivad kiirustatud vastused, lehelt lahkumised ja kopeerimiskatsed.",
+        "private": "Kandidaadid ei näe kunagi oma tulemust ega seda, millised vastused olid õiged."
+      },
+      "candidate": "Kandidaat",
+      "score": "Tulemus",
+      "rushed": "Kiirustatud vastused",
+      "left": "Lahkus lehelt",
+      "start": "Alusta värbamist"
+    },
+    "languages": {
+      "title": "Sinu keeles",
+      "text": "Sait ja kõik, mida see loob, töötavad {count} keeles, ka paremalt vasakule. Kleebi kuulutus ühes keeles ja harjuta teises."
+    },
+    "pricing": {
+      "title": "Maksa ainult selle eest, mis töötab",
+      "text": "Ei mingeid tellimusi ega pakette. Lae kontot, kui vaja, ja kuluta krediite ainult sellele, mida kasutad.",
+      "welcome": "{count, plural, one {# tasuta krediit} other {# tasuta krediiti}} igale uuele kontole",
+      "company": "{count, plural, one {# tasuta krediit} other {# tasuta krediiti}} igale uuele ettevõttele",
+      "never": "Krediidid ei aegu kunagi",
+      "failed": "Ebaõnnestunud komplekt ei maksa midagi",
+      "see": "Vaata hindu"
+    },
+    "faq": {
+      "title": "Küsimusi veel?",
+      "text": "Vastused hindade, sertifikaatide, privaatsuse ja värbamise kohta.",
+      "read": "Loe KKK-d"
+    },
+    "ready": {
+      "title": "Valmis valmistuma?",
+      "start": "Alusta kohe"
+    }
+  },
+  "faq": {
+    "title": "Korduma kippuvad küsimused",
+    "intro": "Ei leidnud vastust? Kirjuta meile privaatsuspoliitikas toodud aadressil.",
+    "items": {
+      "different": {
+        "q": "Mille poolest erineb prepza mälukaartidest või küsimustepankadest?",
+        "a": "Prepza loob küsimused täpselt selle jaoks, milleks valmistud, sinu töökuulutuse või eesmärgi põhjal. Voorud toovad tagasi, milles eksisid, tehisaru juhendaja selgitab iga vastust ja sertifikaadid näitavad, millal teema on omandatud."
+      },
+      "topics": {
+        "q": "Milleks saan valmistuda?",
+        "a": "Tööintervjuudeks mis tahes valdkonnas, sertifitseerimisteks, eksamiteks, testideks, edutamiseks või millekski muuks, mida tahad õppida. Kui suudad seda kirjeldada, suudab prepza selle jaoks komplekti luua."
+      },
+      "certificates": {
+        "q": "Kuidas sertifikaadid töötavad?",
+        "a": "Igal teemal on oma sertifikaat. Vasta kõigile teema küsimustele piisavalt paljude õigete vastustega ja see on sinu. Arvesse läheb viimane vastus igale küsimusele, nii et võid harjutada, kuni see õnnestub."
+      },
+      "cost": {
+        "q": "Kui palju see maksab?",
+        "a": "Maksad kasutuse järgi, krediitidega. Uus komplekt maksab {kit} krediiti ja iga uus konto saab {welcome} tasuta krediiti, millest piisab esimeseks komplektiks. Hinnaleht näitab kõiki hindu."
+      },
+      "expire": {
+        "q": "Kas krediidid aeguvad?",
+        "a": "Ei. Krediidid ei aegu kunagi ning tellimusi ega pikendamisi pole."
+      },
+      "failed": {
+        "q": "Mis siis, kui komplekt ebaõnnestub?",
+        "a": "Tasu võetakse alles siis, kui komplekt on valmis. Kui loomine ebaõnnestub või tühistad selle, saad krediidid tagasi."
+      },
+      "refunds": {
+        "q": "Kas saan raha tagasi?",
+        "a": "Jah, viimase 14 päeva jooksul ostetud ja kulutamata krediitide eest: Paddle'i kaudu või meile kirjutades. Tasuta krediite, näiteks tervituskingitust, ei hüvitata. Üksikasjad on tingimustes."
+      },
+      "privacy": {
+        "q": "Mis saab sellest, mida kleebin ja vastan?",
+        "a": "Kasutame seda sinu komplektide loomiseks ja edusammude jälgimiseks. Privaatseid komplekte näevad ainult sina ja need, kellega neid jagad. Privaatsuspoliitika selgitab, mida me hoiame, kui kaua ja millised on sinu õigused."
+      },
+      "delete": {
+        "q": "Kas saan oma konto kustutada?",
+        "a": "Jah, seadetes. Sinu konto ja andmed kustutatakse ning enne seda saad oma andmetest koopia alla laadida."
+      },
+      "languages": {
+        "q": "Milliseid keeli toetatakse?",
+        "a": "{count} keelt saidi, komplektide ja e-kirjade jaoks. Vali keel, milles komplekt luuakse, olenemata sellest, mis keeles on sinu tekst."
+      },
+      "hiring": {
+        "q": "Kuidas prepzaga värbamine käib?",
+        "a": "Loo ettevõte, koosta töökuulutusest intervjuu ja kutsu kandidaadid e-postiga. Iga kandidaat maksab {candidate} krediiti, mis võetakse alles siis, kui ta intervjuu lõpetab, ja uus ettevõte saab {company} tasuta krediiti."
+      },
+      "scorecards": {
+        "q": "Mida aruanded näitavad?",
+        "a": "Iga vastust, kas see oli õige ja kui kaua see aega võttis. Need märgivad ka vastused, mis olid küsimuse lugemiseks liiga kiired, lehelt lahkumised ja kopeerimiskatsed."
+      },
+      "candidates": {
+        "q": "Mida kandidaadid näevad?",
+        "a": "Enne algust, mida oodata, ja siis ühe ajapiiranguga küsimuse korraga. Nad ei näe kunagi oma tulemust ega seda, kas vastus oli õige."
+      }
+    }
   }
 }

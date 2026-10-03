@@ -41,7 +41,8 @@
     "explore": "keşfet",
     "myKits": "setlerim",
     "hiring": "işe alım",
-    "pricingLink": "fiyatlar"
+    "pricingLink": "fiyatlar",
+    "faq": "SSS"
   },
   "signIn": {
     "with": "Şununla giriş yap:",
@@ -78,7 +79,13 @@
   "home": {
     "tagline": "Yapay zekâ ajanları, kendinizi hazır hissedene kadar sizinle çalışır.",
     "preparingFor": "Hedefiniz",
-    "words": ["bir mülakat mı", "bir sertifika mı", "bir sınav mı", "bir test mi", "bir terfi mi"],
+    "words": [
+      "bir mülakat mı",
+      "bir sertifika mı",
+      "bir sınav mı",
+      "bir test mi",
+      "bir terfi mi"
+    ],
     "widest": "bir sertifika mı",
     "mark": "?"
   },
@@ -561,5 +568,175 @@
     "companies": "Şirket kredileri",
     "companiesNote": "Her şirketin adayları için.",
     "pricing": "Fiyatlar"
+  },
+  "landing": {
+    "more": "Nasıl çalışır",
+    "how": {
+      "title": "Hazır olmak için üç adım",
+      "paste": {
+        "title": "Yapıştırın veya anlatın",
+        "text": "Bir iş ilanı, bir müfredat ya da öğrenmek istediğiniz şey hakkında birkaç kelime."
+      },
+      "review": {
+        "title": "Planı inceleyin",
+        "text": "Yapay zekâ ajanları önemli olanı bulur ve konular önerir. Onları tutun, yeniden adlandırın veya değiştirin."
+      },
+      "practice": {
+        "title": "Kendinize güvenene kadar çalışın",
+        "text": "Her konu kendi soru bankasını alır. Turlar hâlinde çalışın ve ilerlemenizin büyüdüğünü görün."
+      }
+    },
+    "control": {
+      "title": "Ne çalışacağınıza siz karar verirsiniz",
+      "text": "Plana onay vermeden hiçbir şey oluşturulmaz. Bildiklerinizin işaretini kaldırın, bir konuyu yeniden adlandırın, alt konularını düzenleyin ya da büyük değişiklikleri kendi kelimelerinizle anlatın.",
+      "topics": {
+        "design": "Sistem tasarımı",
+        "sql": "SQL ve indeksler",
+        "behavior": "Davranışsal sorular",
+        "basics": "Programlamanın temelleri"
+      },
+      "change": "Önbellekleme hakkında daha fazla ekle"
+    },
+    "gaps": {
+      "title": "Eksiklerinizi bulan çalışma",
+      "text": "Her tur henüz yanıtlamadığınız sorularla başlar, ardından yanlış yaptıklarınızı geri getirir. Zamanınız en önemli yere gider.",
+      "questions": {
+        "first": "Bir indeks sorguyu ne zaman yavaşlatır?",
+        "second": "Bir sunucu çöktüğünde yük dengeleyici ne yapar?",
+        "third": "Ekibinizdeki bir anlaşmazlığı anlatın"
+      },
+      "fresh": "Yeni",
+      "missed": "İki kez yanlış",
+      "right": "Doğru"
+    },
+    "tutor": {
+      "title": "Her soru için bir eğitmen",
+      "text": "Her yanıttan sonra doğru seçeneği hemen görürsünüz. Neden doğru olduğundan emin değil misiniz? Yapay zekâ eğitmenine sorun ve gerektiği kadar derine inin.",
+      "question": "Tarihe göre filtreleyen bir sorguya hangi indeks yardımcı olur?",
+      "options": {
+        "first": "Tarih üzerinde bir hash indeksi",
+        "second": "Tarih üzerinde bir B-tree indeksi",
+        "third": "Birincil anahtar üzerinde bir indeks"
+      },
+      "ask": "Neden hash indeksi değil?",
+      "answer": "Hash indeksi yalnızca tam değerleri bulur. Tarih filtresi bir aralık ister ve B-tree tarihleri sıralı tutar."
+    },
+    "proof": {
+      "title": "Ne zaman hazır olduğunuzu bilin",
+      "text": "Her konunun sertifikasına giden bir ilerleme çubuğu vardır. Sertifikayı kazanın, konu ustalaşılmış sayılsın.",
+      "rules": "Sertifika için gerekenler",
+      "certificate": "Sertifika"
+    },
+    "quality": {
+      "title": "Kendi kendine iyileşen sorular",
+      "text": "Her sorunun bir doğru ve üç inandırıcı yanlış seçeneği vardır. Oylar, bildirimler ve yanıtlar zayıf soruları gösterir; bir doğrulayıcı da onları arka planda düzeltir veya değiştirir.",
+      "steps": {
+        "flagged": "Öğrenenler tarafından işaretlendi",
+        "checked": "Doğrulayıcı tarafından kontrol edildi",
+        "fixed": "Düzeltildi veya değiştirildi"
+      }
+    },
+    "share": {
+      "title": "Paylaşın veya yayımlayın",
+      "text": "Bir seti arkadaşlarınıza veya iş arkadaşlarınıza e-postayla özel olarak gönderin ya da aynı şeye hazırlanan herkes için herkese açık kitaplıkta yayımlayın.",
+      "private": "Özel olarak paylaşıldı",
+      "public": "Herkese açık kitaplıkta",
+      "browse": "Kitaplığı keşfedin"
+    },
+    "companies": {
+      "title": "İşe alım mı yapıyorsunuz? Adayları adil ölçün",
+      "text": "Bir iş ilanını süreli bir mülakata dönüştürün ve adayları e-postayla davet edin.",
+      "points": {
+        "own": "Her aday kendi sorularını, kendi sırasıyla alır.",
+        "timed": "Her sorunun sunucunun tuttuğu kendi geri sayımı vardır.",
+        "flags": "Raporlar aceleyle verilen yanıtları, sayfadan ayrılmaları ve kopyalama girişimlerini işaretler.",
+        "private": "Adaylar puanlarını veya hangi yanıtların doğru olduğunu asla görmez."
+      },
+      "candidate": "Aday",
+      "score": "Puan",
+      "rushed": "Aceleci yanıtlar",
+      "left": "Sayfadan ayrıldı",
+      "start": "İşe almaya başlayın"
+    },
+    "languages": {
+      "title": "Kendi dilinizde",
+      "text": "Site ve oluşturduğu her şey, sağdan sola yazılanlar dahil {count} dilde çalışır. Bir ilanı bir dilde yapıştırın, başka bir dilde çalışın."
+    },
+    "pricing": {
+      "title": "Yalnızca işe yarayana ödeyin",
+      "text": "Abonelik veya paket yok. İhtiyacınız olduğunda bakiye yükleyin ve krediyi yalnızca kullandığınız şeye harcayın.",
+      "welcome": "Her yeni hesaba {count, plural, one {# ücretsiz kredi} other {# ücretsiz kredi}}",
+      "company": "Her yeni şirkete {count, plural, one {# ücretsiz kredi} other {# ücretsiz kredi}}",
+      "never": "Kredilerin süresi asla dolmaz",
+      "failed": "Başarısız bir set hiçbir şeye mal olmaz",
+      "see": "Fiyatları görün"
+    },
+    "faq": {
+      "title": "Hâlâ sorunuz mu var?",
+      "text": "Fiyatlar, sertifikalar, gizlilik ve işe alım hakkında yanıtlar.",
+      "read": "SSS'yi okuyun"
+    },
+    "ready": {
+      "title": "Hazırlanmaya hazır mısınız?",
+      "start": "Hemen başlayın"
+    }
+  },
+  "faq": {
+    "title": "Sıkça sorulan sorular",
+    "intro": "Yanıtınızı bulamadınız mı? Gizlilik politikasındaki adrese yazın.",
+    "items": {
+      "different": {
+        "q": "prepza'nın bilgi kartlarından veya soru bankalarından farkı ne?",
+        "a": "Prepza, soruları iş ilanınızdan veya hedefinizden yola çıkarak tam olarak hazırlandığınız şey için oluşturur. Turlar yanlış yaptıklarınızı geri getirir, bir yapay zekâ eğitmeni her yanıtı açıklar ve sertifikalar bir konuda ne zaman ustalaştığınızı gösterir."
+      },
+      "topics": {
+        "q": "Neye hazırlanabilirim?",
+        "a": "Her alanda iş mülakatlarına, sertifikalara, sınavlara, testlere, bir terfiye veya öğrenmek istediğiniz her şeye. Tarif edebiliyorsanız prepza onun için bir set oluşturabilir."
+      },
+      "certificates": {
+        "q": "Sertifikalar nasıl çalışır?",
+        "a": "Her konunun kendi sertifikası vardır. Konunun tüm sorularını yeterince doğru yanıtla tamamlayın, sertifika sizin olsun. Her soruya verdiğiniz son yanıt sayılır, bu yüzden başarana kadar çalışmaya devam edebilirsiniz."
+      },
+      "cost": {
+        "q": "Ücreti ne kadar?",
+        "a": "Kullandıkça kredilerle ödersiniz. Yeni bir set {kit} krediye mal olur ve her yeni hesap, ilk set için yeterli olan {welcome} ücretsiz kredi alır. Fiyatlar sayfası tüm fiyatları listeler."
+      },
+      "expire": {
+        "q": "Kredilerin süresi dolar mı?",
+        "a": "Hayır. Kredilerin süresi asla dolmaz; abonelik veya yenileme yoktur."
+      },
+      "failed": {
+        "q": "Bir set başarısız olursa ne olur?",
+        "a": "Yalnızca set hazır olduğunda ücret alınır. Oluşturma başarısız olursa veya iptal ederseniz krediler size geri döner."
+      },
+      "refunds": {
+        "q": "Para iadesi alabilir miyim?",
+        "a": "Evet, son 14 gün içinde satın aldığınız ve harcamadığınız krediler için: Paddle üzerinden veya bize yazarak. Hoş geldin hediyesi gibi ücretsiz krediler iade edilmez. Ayrıntılar koşullarda yer alır."
+      },
+      "privacy": {
+        "q": "Yapıştırdıklarım ve yanıtlarım ne oluyor?",
+        "a": "Bunları setlerinizi oluşturmak ve ilerlemenizi takip etmek için kullanırız. Özel setleri yalnızca siz ve paylaştığınız kişiler görür. Gizlilik politikası neyi, ne kadar süre sakladığımızı ve haklarınızı açıklar."
+      },
+      "delete": {
+        "q": "Hesabımı silebilir miyim?",
+        "a": "Evet, Ayarlar'dan. Hesabınız ve verileriniz silinir; öncesinde verilerinizin bir kopyasını indirebilirsiniz."
+      },
+      "languages": {
+        "q": "Hangi diller destekleniyor?",
+        "a": "Site, setler ve e-postalar için {count} dil. Metniniz hangi dilde olursa olsun, setin oluşturulacağı dili seçin."
+      },
+      "hiring": {
+        "q": "prepza ile işe alım nasıl çalışır?",
+        "a": "Bir şirket oluşturun, bir iş ilanından mülakat oluşturun ve adayları e-postayla davet edin. Her aday {candidate} krediye mal olur ve bu yalnızca aday mülakatı bitirdiğinde düşülür; yeni bir şirket {company} ücretsiz kredi alır."
+      },
+      "scorecards": {
+        "q": "Raporlar neyi gösterir?",
+        "a": "Her yanıtı, doğru olup olmadığını ve ne kadar sürdüğünü. Ayrıca soruyu okumak için fazla hızlı verilen yanıtları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler."
+      },
+      "candidates": {
+        "q": "Adaylar ne görür?",
+        "a": "Başlamadan önce neyle karşılaşacaklarını, ardından her seferinde tek bir süreli soruyu. Puanlarını veya bir yanıtın doğru olup olmadığını asla görmezler."
+      }
+    }
   }
 }
