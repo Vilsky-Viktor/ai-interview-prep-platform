@@ -69,10 +69,7 @@ async def list_credits(user: CurrentUser, page: PageParams) -> list[CompanyBalan
     rows = await companies.list_for_user(user.uid, page.offset, page.limit)
     credits = await billing.companies_credits([item.id for item in rows]) if rows else {}
 
-    return [
-        CompanyBalanceOut(id=item.id, name=item.name, available=credits.get(str(item.id), 0))
-        for item in rows
-    ]
+    return [CompanyBalanceOut(id=item.id, name=item.name, **credits[str(item.id)]) for item in rows]
 
 
 @router.delete("/{company_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -91,7 +88,7 @@ async def get_credits(company_id: UUID, user: CurrentUser) -> CompanyCreditsOut:
     """Candidates the company can still invite; any member may see it."""
     await require_company(user, company_id)
 
-    return CompanyCreditsOut(available=await billing.available_credits(company_id))
+    return CompanyCreditsOut(**await billing.company_credits(company_id))
 
 
 @router.get("/{company_id}")

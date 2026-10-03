@@ -51,6 +51,8 @@ class BalanceOut(BaseModel):
     balance: int
     reserved: int
     available: int
+    # Running low: time to suggest a top-up.
+    low: bool
 
 
 class OwnersIn(BaseModel):

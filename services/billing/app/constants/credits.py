@@ -8,6 +8,9 @@ AUTHOR_SHARE_CREDITS = 20
 CHAT_TURN_CREDITS = 1
 WELCOME_USER = 500
 WELCOME_COMPANY = 1_500
+# Below this, a balance is shown as running low, so a learner's chat doesn't stop by surprise
+# and a company sees it before it can't invite the next candidate.
+LOW_BALANCE = {"user": 100, "company": CANDIDATE_CREDITS}
 
 NOT_ENOUGH = "Not enough credits. Top up to continue."
 

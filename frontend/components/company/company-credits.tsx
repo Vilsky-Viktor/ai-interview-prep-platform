@@ -10,11 +10,13 @@ export function CompanyCredits({
   companyId,
   companyName,
   credits,
+  low,
   catalog,
 }: {
   companyId: string
   companyName: string
   credits: number
+  low: boolean
   catalog: Catalog
 }) {
   const t = useTranslations("company")
@@ -22,17 +24,24 @@ export function CompanyCredits({
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border px-6 py-4">
-      <p className="text-base">
-        <span className="font-heading text-2xl font-medium tabular-nums">
-          {credits.toLocaleString(locale)}
-        </span>{" "}
-        <span className="text-muted-foreground">
-          {t("creditsLeft", {
-            count: credits,
-            candidate: catalog.candidate_credits,
-          })}
-        </span>
-      </p>
+      <div>
+        <p className="text-base">
+          <span className="font-heading text-2xl font-medium tabular-nums">
+            {credits.toLocaleString(locale)}
+          </span>{" "}
+          <span className="text-muted-foreground">
+            {t("creditsLeft", {
+              count: credits,
+              candidate: catalog.candidate_credits,
+            })}
+          </span>
+        </p>
+        {low && (
+          <p className="text-sm text-amber-600 dark:text-amber-400">
+            {t("creditsLow")}
+          </p>
+        )}
+      </div>
       <TopUpDialog
         catalog={catalog}
         title={companyName}

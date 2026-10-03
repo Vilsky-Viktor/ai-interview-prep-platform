@@ -10,11 +10,13 @@ export function BalanceRow({
   catalog,
   name,
   available,
+  low,
   companyId,
 }: {
   catalog: Catalog
   name: string
   available: number
+  low: boolean
   companyId?: string
 }) {
   const t = useTranslations("billing")
@@ -22,7 +24,14 @@ export function BalanceRow({
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5">
-      <p className="min-w-0 flex-1 truncate text-lg font-medium">{name}</p>
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-lg font-medium">{name}</p>
+        {low && (
+          <p className="text-sm text-amber-600 dark:text-amber-400">
+            {t("low")}
+          </p>
+        )}
+      </div>
       <div className="flex items-center gap-6">
         <p className="text-right">
           <span className="font-heading text-3xl font-medium tabular-nums">

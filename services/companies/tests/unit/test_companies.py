@@ -123,7 +123,9 @@ def test_lists_the_users_companies_with_their_credits(client, monkeypatch):
         return [company]
 
     async def credits(company_ids):
-        return {str(company.id): 1_200}
+        return {
+            str(company.id): {"balance": 1_400, "reserved": 200, "available": 1_200, "low": False}
+        }
 
     monkeypatch.setattr(companies, "list_for_user", mine)
     monkeypatch.setattr(billing, "companies_credits", credits)
@@ -132,4 +134,6 @@ def test_lists_the_users_companies_with_their_credits(client, monkeypatch):
     response = client.get("/companies/credits")
 
     assert response.status_code == 200
-    assert response.json() == [{"id": str(company.id), "name": "Acme", "available": 1_200}]
+    assert response.json() == [
+        {"id": str(company.id), "name": "Acme", "available": 1_200, "low": False}
+    ]

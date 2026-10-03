@@ -674,6 +674,8 @@ export interface components {
       name: string
       /** Available */
       available: number
+      /** Low */
+      low: boolean
     }
     /** CompanyCreate */
     CompanyCreate: {
@@ -684,6 +686,8 @@ export interface components {
     CompanyCreditsOut: {
       /** Available */
       available: number
+      /** Low */
+      low: boolean
     }
     /** CompanyOut */
     CompanyOut: {

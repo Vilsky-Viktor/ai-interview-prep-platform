@@ -38,6 +38,7 @@ class MemberIn(BaseModel):
 
 class CompanyCreditsOut(BaseModel):
     available: int
+    low: bool
 
 
 class CompanyBalanceOut(BaseModel):
@@ -46,3 +47,4 @@ class CompanyBalanceOut(BaseModel):
     id: UUID
     name: str
     available: int
+    low: bool

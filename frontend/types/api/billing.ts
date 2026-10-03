@@ -437,6 +437,8 @@ export interface components {
       reserved: number
       /** Available */
       available: number
+      /** Low */
+      low: boolean
     }
     /**
      * CatalogOut

@@ -62,6 +62,7 @@ export default async function TopUpPage() {
               catalog={catalog}
               name={t("yours")}
               available={balance.available}
+              low={balance.low}
             />
           </div>
         </section>
@@ -77,6 +78,7 @@ export default async function TopUpPage() {
                 catalog={catalog}
                 name={company.name}
                 available={company.available}
+                low={company.low}
                 companyId={company.id}
               />
             ))}

@@ -1,10 +1,16 @@
+from app.constants.credits import LOW_BALANCE
 from app.models.billing import Entry, Wallet
 from app.schemas.billing import BalanceOut, EntryOut
 
 
 def balance_out(row: Wallet) -> BalanceOut:
+    available = row.balance - row.reserved
+
     return BalanceOut(
-        balance=row.balance, reserved=row.reserved, available=row.balance - row.reserved
+        balance=row.balance,
+        reserved=row.reserved,
+        available=available,
+        low=available < LOW_BALANCE[row.owner_type],
     )
 
 

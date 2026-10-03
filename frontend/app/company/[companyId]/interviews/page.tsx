@@ -78,6 +78,7 @@ export default async function InterviewsPage({
           companyId={companyId}
           companyName={company.name}
           credits={credits.available}
+          low={credits.low}
           catalog={catalog}
         />
       )}

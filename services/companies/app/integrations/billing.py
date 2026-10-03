@@ -56,7 +56,8 @@ async def welcome_company(company_id: UUID, owner_email: str) -> None:
     response.raise_for_status()
 
 
-async def available_credits(company_id: UUID) -> int:
+async def company_credits(company_id: UUID) -> dict:
+    """The company's available credits, and whether they're running low."""
     response = await http.get_client().get(
         f"{settings.billing_url}/internal/companies/{company_id}/credits",
         headers=_headers(),
@@ -64,7 +65,7 @@ async def available_credits(company_id: UUID) -> int:
 
     response.raise_for_status()
 
-    return response.json()["available"]
+    return response.json()
 
 
 async def delete_company(company_id: UUID) -> None:
@@ -77,8 +78,8 @@ async def delete_company(company_id: UUID) -> None:
     response.raise_for_status()
 
 
-async def companies_credits(company_ids: list[UUID]) -> dict[str, int]:
-    """Available credits of each company, by id."""
+async def companies_credits(company_ids: list[UUID]) -> dict[str, dict]:
+    """Each company's balance, by id."""
     response = await http.get_client().post(
         f"{settings.billing_url}/internal/companies/credits",
         json={"owner_ids": [str(company_id) for company_id in company_ids]},
@@ -87,4 +88,4 @@ async def companies_credits(company_ids: list[UUID]) -> dict[str, int]:
 
     response.raise_for_status()
 
-    return {owner_id: row["available"] for owner_id, row in response.json().items()}
+    return response.json()
