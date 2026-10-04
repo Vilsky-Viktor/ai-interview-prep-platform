@@ -149,6 +149,7 @@ Then point `DATABASE_URL` at the clone, or copy the needed data back.
   - Public services accept everyone and check users themselves.
   - Calls between services carry signed service tokens.
   - Pub/Sub, Cloud Tasks and Scheduler sign as the `prepza-invoker` account, which the services check.
+- **App settings:** Terraform passes `DAILY_GENERATION_LIMIT` (from `daily_generation_limit`) but none of the other settings in `.env.example`: the AI models and reasoning efforts (`INTERVIEW_MODEL`, `FREE_KIT_MODEL`, `KIT_MODEL`, `HARD_KIT_MODEL`, `VERIFY_MODEL`, `TITLE_CHECK_MODEL`, `TUTOR_MODEL`, `HELP_MODEL` and their `*_REASONING_EFFORT`), `QUESTIONS_PER_TOPIC`, `MAX_TOPICS`, `MAX_SUBTOPICS`, `LLM_REQUESTS_PER_SECOND` and the per-user limits. The services run on their code defaults, which match `.env.example`. To change one in production, add it to the service's entry in `env.tf`.
 - **Generation jobs:** a job may run up to 25 minutes, under Cloud Tasks' 30-minute limit. The queue never retries; a failed generation is retried by the user.
 - **Database connections:** Cloud SQL starts at `db-g1-small` with 200 connections allowed. Each API process holds up to 10 connections, so raise `db_tier`, or add PgBouncer, before allowing many instances.
 - **High availability:** `db_high_availability = true` adds a standby in another zone, at about double the database cost.
