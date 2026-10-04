@@ -221,7 +221,7 @@ cd frontend && pnpm api-types
 python3 scripts/tests/e2e.py
 ```
 
-CI runs all of these on every push and pull request, except the end-to-end test, which needs an OpenAI key; it also builds every production image and starts the whole stack for the smoke test.
+CI runs all of these on every pull request push and every push to main, except the end-to-end test, which needs an OpenAI key; it also builds every production image and starts the whole stack for the smoke test. On main it pushes the production images, and a `v*` tag deploys them (see [infra/README.md](infra/README.md#deploys)).
 
 ## Project conventions
 

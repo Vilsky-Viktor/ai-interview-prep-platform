@@ -45,7 +45,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    terraform init -backend-config="bucket=prepza-prod-terraform"
    ```
    `alert_email`, `billing_account` and `monthly_budget` set up the alerts in `monitoring.tf`: an uptime check every minute on the site and each API's `/ready`, an email when one fails, and budget emails at 50%, 90% and 100% of the month (and when the forecast passes it). Creating the budget needs the Billing Account Costs Manager role on the billing account, which its administrator already has.
-6. **Create the image registry first,** then push the first images. The deploy pipeline does this on every push afterwards.
+6. **Create the image registry first,** then push the first images. CI pushes them on every push to `main` afterwards.
    - Cloud Run runs `linux/amd64`, so build for it even on an Apple-silicon Mac.
    - Use the same tag as `image_tag` in `terraform.tfvars`.
 
@@ -103,19 +103,26 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
     - **From Firebase:** `NEXT_PUBLIC_FIREBASE_API_KEY` and `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`, from the web app in step 2.
     - **Optionally:** `NEXT_PUBLIC_SENTRY_DSN` for the frontend.
 
-    These are variables, not secrets: none of them grants access. GitHub's signed token is what lets the pipeline in, and only for `main` of this repository.
+    These are variables, not secrets: none of them grants access. GitHub's signed token is what lets the pipeline in, and only for `main` and the `v*` tags of this repository.
+13. **Protect the version tags.** A tag deploys, so only you should be able to make one. In **Settings → Rules → Rulesets**, add a **tag ruleset**:
+    - **Target tags:** include by pattern `v*`.
+    - **Rules:** restrict creations, restrict updates and restrict deletions.
+    - **Bypass list:** Repository admin, so you can still create them.
+14. **Optionally, require an approval for deploys.** Deploys run in the `production` environment, which GitHub creates on the first deploy. In **Settings → Environments → production**, add yourself under **Required reviewers**; each deploy then waits for your click. Rulesets and required reviewers on a private repository need a paid GitHub plan.
 
 ## Deploys
 
-Every push to `main` that passes CI deploys through [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml):
-1. Builds the 7 images for `linux/amd64`, tagged with the commit.
-2. Runs the 5 migration jobs.
-3. Moves every service to the new images.
-4. Smoke-tests the site.
+- **Pull requests:** CI (lint, tests, image builds, and the smoke, integration and page tests on the whole stack) runs on every push, and a new push cancels the previous run.
+- **Merging to `main`:** the same CI runs again on the merged code, and pushes the 7 production images for `linux/amd64`, tagged with the commit. Nothing is deployed.
+- **Releasing:** tag a commit on `main` that CI passed on, the last commit of a push, and push the tag:
+  ```bash
+  git tag v1.4.0 && git push origin v1.4.0
+  ```
+  [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) then checks that the tag is on `main` and CI passed on it, gives that commit's images the version as a tag (nothing is rebuilt), runs the 5 migration jobs, moves every service to the images, smoke-tests the site and creates a GitHub release with the changes since the last tag.
 
 A failed step stops the deploy, and the services keep running the previous images.
 
-- **Rolling back:** move a service to an earlier revision in the Cloud Run console, or rerun the workflow for an earlier commit.
+- **Rolling back:** in **Actions → Deploy → Run workflow**, enter an earlier version, for example `v1.3.2`. It redeploys that version's images in about a minute. Migrations only go forward, so this is safe only while the newer migrations didn't remove anything the older code needs: keep migrations additive. For one service, you can also move it to an earlier revision in the Cloud Run console.
 - **Terraform never touches image tags,** so applying an infrastructure change doesn't roll anything back.
 
 ## Restore drill

@@ -1,12 +1,17 @@
 name: Deploy
 
-# Ships main to Google Cloud once CI has passed on it. Infrastructure changes go through Terraform
-# (infra/); this only builds images, runs migrations and moves services to the new images.
+# Releases a version: a v* tag on a commit of main that passed CI. CI already built and pushed that
+# commit's images, so nothing is rebuilt: the images get the version as a tag and ship. Running it
+# by hand with an earlier tag redeploys that version, which is how to roll back. Infrastructure
+# changes go through Terraform (infra/); this only runs migrations and moves services to images.
 on:
-  workflow_run:
-    workflows: [CI]
-    types: [completed]
-    branches: [main]
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Version to deploy, for example v1.4.0
+        required: true
 
 # One deploy at a time, in order.
 concurrency:
@@ -15,82 +20,94 @@ concurrency:
 
 permissions:
   contents: read
-  # Lets GitHub sign the token Google exchanges for the deploy account (no stored key).
-  id-token: write
 
 env:
   REGISTRY: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/prepza
-  TAG: ${{ github.event.workflow_run.head_sha }}
+  VERSION: ${{ inputs.tag || github.ref_name }}
+  SERVICES: library generation rounds companies billing notifications frontend
 
 jobs:
-  images:
-    name: ${{ matrix.name }} image
-    if: github.event.workflow_run.conclusion == 'success'
+  verify:
+    name: check the version
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - { name: library, context: ., file: services/library/Dockerfile }
-          - { name: generation, context: ., file: services/generation/Dockerfile }
-          - { name: rounds, context: ., file: services/rounds/Dockerfile }
-          - { name: companies, context: ., file: services/companies/Dockerfile }
-          - { name: billing, context: ., file: services/billing/Dockerfile }
-          - { name: notifications, context: ., file: services/notifications/Dockerfile }
-          - { name: frontend, context: frontend, file: frontend/Dockerfile }
+    permissions:
+      contents: read
+      # Reads CI's runs for the commit.
+      actions: read
+    outputs:
+      sha: ${{ steps.commit.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
-      - uses: google-github-actions/auth@v2
-        with:
-          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
-      - uses: google-github-actions/setup-gcloud@v2
-      - run: gcloud auth configure-docker ${{ vars.GCP_REGION }}-docker.pkg.dev --quiet
-      - uses: docker/setup-buildx-action@v3
-      - uses: docker/build-push-action@v6
-        with:
-          context: ${{ matrix.context }}
-          file: ${{ matrix.file }}
-          target: prod
-          # Cloud Run runs x86.
-          platforms: linux/amd64
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ matrix.name }}:${{ env.TAG }}
-          cache-from: type=gha,scope=deploy-${{ matrix.name }}
-          cache-to: type=gha,mode=max,scope=deploy-${{ matrix.name }}
-          # The frontend bakes its public settings in at build time.
-          build-args: |
-            NEXT_PUBLIC_FIREBASE_API_KEY=${{ vars.NEXT_PUBLIC_FIREBASE_API_KEY }}
-            NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${{ vars.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
-            NEXT_PUBLIC_FIREBASE_PROJECT_ID=${{ vars.GCP_PROJECT_ID }}
-            NEXT_PUBLIC_SENTRY_DSN=${{ vars.NEXT_PUBLIC_SENTRY_DSN }}
-            NEXT_PUBLIC_SENTRY_ENVIRONMENT=production
+          fetch-depth: 0
+      - id: commit
+        name: The version is a tag on main that passed CI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "$VERSION is not a version like v1.4.0" >&2
+
+            exit 1
+          fi
+
+          sha="$(git rev-parse "refs/tags/$VERSION^{commit}")"
+
+          if ! git merge-base --is-ancestor "$sha" origin/main; then
+            echo "$VERSION ($sha) is not on main" >&2
+
+            exit 1
+          fi
+
+          # CI pushes images only for the commit a push to main ends on, so that's what to tag.
+          passed="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$sha&event=push&status=success" --jq .total_count)"
+
+          if [[ "$passed" == "0" ]]; then
+            echo "CI hasn't passed on $sha after a push to main: tag a commit it passed on" >&2
+
+            exit 1
+          fi
+
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
 
   deploy:
     name: migrate and deploy
-    needs: images
+    needs: verify
     runs-on: ubuntu-latest
+    # Settings → Environments → production can require an approval before this runs.
+    environment: production
+    permissions:
+      contents: read
+      # Lets GitHub sign the token Google exchanges for the deploy account (no stored key).
+      id-token: write
+    env:
+      SHA: ${{ needs.verify.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ env.VERSION }}
       - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
       - uses: google-github-actions/setup-gcloud@v2
+      # The images CI built for the commit also get the version's name; adding it again is harmless.
+      - name: Version the images
+        run: |
+          for name in $SERVICES; do
+            gcloud artifacts docker tags add "$REGISTRY/$name:$SHA" "$REGISTRY/$name:$VERSION" --quiet
+          done
       # Migrations run before any service moves, so new code never meets an old schema.
       - name: Migrations
         run: |
           for db in library generation rounds companies billing; do
-            gcloud run jobs update "$db-migrate" --image="$REGISTRY/$db:$TAG" --region="${{ vars.GCP_REGION }}" --quiet
+            gcloud run jobs update "$db-migrate" --image="$REGISTRY/$db:$VERSION" --region="${{ vars.GCP_REGION }}" --quiet
             gcloud run jobs execute "$db-migrate" --region="${{ vars.GCP_REGION }}" --wait --quiet
           done
       - name: Services
         run: |
           deploy() {
-            gcloud run services update "$1" --image="$REGISTRY/$2:$TAG" --region="${{ vars.GCP_REGION }}" --quiet
+            gcloud run services update "$1" --image="$REGISTRY/$2:$VERSION" --region="${{ vars.GCP_REGION }}" --quiet
           }
 
           deploy library library
@@ -103,3 +120,16 @@ jobs:
           deploy frontend frontend
       - name: Smoke test
         run: ./scripts/tests/smoke.sh "${{ vars.SITE_URL }}"
+
+  release:
+    name: GitHub release
+    needs: deploy
+    # A new tag gets its release notes; redeploying an earlier version (a rollback) doesn't.
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$VERSION" --repo "$GITHUB_REPOSITORY" --verify-tag --generate-notes

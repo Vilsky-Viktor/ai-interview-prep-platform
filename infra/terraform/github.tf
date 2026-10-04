@@ -1,5 +1,5 @@
-# GitHub Actions deploys without a stored key: GitHub's signed token for a push to main of this
-# repository is exchanged for the deploy account's (Workload Identity Federation).
+# GitHub Actions deploys without a stored key: GitHub's signed token for main or a version tag of
+# this repository is exchanged for the deploy account's (Workload Identity Federation).
 resource "google_iam_workload_identity_pool" "github" {
   workload_identity_pool_id = "github"
   display_name              = "GitHub Actions"
@@ -18,8 +18,9 @@ resource "google_iam_workload_identity_pool_provider" "github" {
     "attribute.ref"        = "assertion.ref"
   }
 
-  # Only this repository's main branch.
-  attribute_condition = "assertion.repository == '${var.github_repository}' && assertion.ref == 'refs/heads/main'"
+  # Only this repository's main branch (CI pushes images, a manual run rolls back) and its version
+  # tags (deploys). Version tags are protected by a ruleset, so only admins can make them.
+  attribute_condition = "assertion.repository == '${var.github_repository}' && (assertion.ref == 'refs/heads/main' || assertion.ref.startsWith('refs/tags/v'))"
 
   oidc {
     issuer_uri = "https://token.actions.githubusercontent.com"
