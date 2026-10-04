@@ -1,6 +1,8 @@
 from prepza_common.settings import ServiceSettings
 from pydantic import Field
 
+from app.constants.generation import ReasoningEffort
+
 
 class Settings(ServiceSettings):
     # The API description (/docs, /openapi.json) lists every route, internal ones too, so it's
@@ -19,6 +21,11 @@ class Settings(ServiceSettings):
     service_secret: str
     questions_per_topic: int = Field(default=100, gt=0)
     llm_model: str = "gpt-6-luna"
+    # How hard the model thinks: for generation (topics, questions, a re-generated question, the
+    # public-title check), and for the verifier's key check, which is rare and must be right.
+    # Only reasoning models take an effort.
+    llm_reasoning_effort: ReasoningEffort = "low"
+    verify_reasoning_effort: ReasoningEffort = "medium"
     generation_limit: int = Field(default=20, ge=0)
     generation_window_seconds: int = Field(default=86_400, gt=0)
     regeneration_limit: int = Field(default=100, ge=0)

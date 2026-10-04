@@ -175,11 +175,12 @@ Errors go to Sentry when `SENTRY_DSN` (backend services) and `NEXT_PUBLIC_SENTRY
 
 ### Generation settings
 
-Three settings in `.env` shape every generation:
+These settings in `.env` shape every generation:
 
 - `QUESTIONS_PER_TOPIC` (default 100): questions per topic. Topics never grow after generation, so a certificate always means the same set of questions.
 - `LLM_REQUESTS_PER_SECOND` (default 8): generation's LLM requests a second, shared by the API and every worker through Redis; 0 turns it off. Chat isn't limited by it, so it stays responsive during big generations.
 - `LLM_MODEL` (default `gpt-6-luna`): used for generation and the follow-up chat.
+- `LLM_REASONING_EFFORT` (default `low`) and `VERIFY_REASONING_EFFORT` (default `medium`): how hard the model thinks, for generation and for the verifier's answer-key checks; `none`, `minimal`, `low`, `medium` or `high`. Only reasoning models take them. The tutor and help chats always use `none`, which their temperature needs.
 
 Per-user rate limits (`GENERATION_LIMIT`, `LLM_LIMIT`) cap how much a single account can generate and chat.
 

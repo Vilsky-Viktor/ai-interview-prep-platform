@@ -1,3 +1,5 @@
+from typing import Literal
+
 from prepza_common.constants import MAX_GOAL_LENGTH  # noqa: F401 (re-exported)
 
 MAX_CONCURRENCY = 8
@@ -30,7 +32,8 @@ QUESTION_ATTEMPTS = 3
 MAX_OUTPUT_TOKENS = 16_000
 # Writing MAX_OUTPUT_TOKENS can take a few minutes; a call silent for longer has hung.
 LLM_TIMEOUT_SECONDS = 300
-REASONING_EFFORT = "low"
+# What OpenAI accepts for a reasoning model's effort; the settings pick one (see config).
+ReasoningEffort = Literal["none", "minimal", "low", "medium", "high"]
 DISTRACTORS = 3
 # Upper bound for any answer option; most are much shorter. Longer options are rejected.
 MAX_OPTION_CHARS = 250

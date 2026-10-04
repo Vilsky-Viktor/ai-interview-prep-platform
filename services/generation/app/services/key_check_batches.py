@@ -4,7 +4,7 @@ from pydantic import ValidationError
 
 from app.config.settings import settings
 from app.constants.generation import MAX_OUTPUT_TOKENS
-from app.constants.quality import BATCH_RETRY_STATUSES, VERIFY_REASONING_EFFORT
+from app.constants.quality import BATCH_RETRY_STATUSES
 from app.integrations import library, openai_batch
 from app.models.key_checks import KeyCheck as KeyCheckRow
 from app.schemas.verify import KeyCheck
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 def request_body(prompt: str) -> dict:
     return {
         "model": settings.llm_model,
-        "reasoning_effort": VERIFY_REASONING_EFFORT,
+        "reasoning_effort": settings.verify_reasoning_effort,
         "max_completion_tokens": MAX_OUTPUT_TOKENS,
         "messages": [{"role": "user", "content": prompt}],
         "response_format": {
