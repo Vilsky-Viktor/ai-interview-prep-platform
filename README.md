@@ -179,8 +179,8 @@ These settings in `.env` shape every generation:
 
 - `QUESTIONS_PER_TOPIC` (default 100): questions per topic. Topics never grow after generation, so a certificate always means the same set of questions.
 - `LLM_REQUESTS_PER_SECOND` (default 8): generation's LLM requests a second, shared by the API and every worker through Redis; 0 turns it off. Chat isn't limited by it, so it stays responsive during big generations.
-- `GENERATION_MODEL` (default `gpt-6.1-sol`): writes kits and interviews, fixes flagged questions and checks public titles. `LLM_MODEL` (default `gpt-6-luna`, in rounds) answers the tutor and help chats, where every turn is billed by the credit.
-- `LLM_REASONING_EFFORT` (default `low`) and `VERIFY_REASONING_EFFORT` (default `medium`): how hard the model thinks, for generation and for the verifier's answer-key checks; `none`, `minimal`, `low`, `medium` or `high`. Only reasoning models take them. The tutor and help chats always use `none`, which their temperature needs.
+- `GENERATION_MODEL` (default `gpt-6.1-sol`): writes kits and interviews, fixes flagged questions and checks public titles. `TUTOR_MODEL` (a paid turn is 2 credits; default `gpt-6.1-sol`, at `TUTOR_REASONING_EFFORT` `low`) answers the tutor: in testing it got every complex follow-up on hard questions right, where `gpt-6-luna` got some wrong. `LLM_MODEL` (default `gpt-6-luna`) answers the FAQ's help chat.
+- `LLM_REASONING_EFFORT` (default `low`) and `VERIFY_REASONING_EFFORT` (default `medium`): how hard the model thinks, for generation and for the verifier's answer-key checks; `none`, `minimal`, `low`, `medium` or `high`. Only reasoning models take them. The help chat uses `none`, which its temperature needs.
 
 Per-user rate limits (`GENERATION_LIMIT`, `LLM_LIMIT`) cap how much a single account can generate and chat.
 
@@ -214,7 +214,7 @@ Each Python service (and `packages/common`) keeps `tests/unit` (fakes, no servic
 cd services/rounds && uv sync && uv run pytest
 
 # Python lint and format, as CI runs them (ruff's version is pinned in CI)
-uvx ruff@0.16.10 check services packages && uvx ruff@0.16.10 format --check services packages
+uvx ruff@0.16.10 check services packages evals && uvx ruff@0.16.10 format --check services packages evals
 
 # Frontend
 cd frontend && pnpm install && pnpm lint && pnpm typecheck
@@ -241,6 +241,8 @@ docker compose exec frontend pnpm check:messages
 # takes it from the invite link; the company sees the scorecard and pays for that candidate
 python3 scripts/tests/e2e.py
 ```
+
+Model and prompt quality is tested offline with the prepared datasets, judge prompts and metrics in [evals/](evals/README.md).
 
 CI runs all of these except the end-to-end test, which needs an OpenAI key. It also builds every production image and starts the whole stack for the smoke, integration and page tests.
 

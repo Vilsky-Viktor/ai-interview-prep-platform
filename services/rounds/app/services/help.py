@@ -41,6 +41,6 @@ def build_messages(
 
 
 async def stream_reply(messages: list[BaseMessage]) -> AsyncIterator[str]:
-    async for chunk in llm.get_chat_llm().astream(messages):
+    async for chunk in llm.get_help_llm().astream(messages):
         if chunk.content:
             yield chunk.content

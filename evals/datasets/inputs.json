@@ -1,0 +1,232 @@
+{
+ "about": "Inputs for offline tests. `text` feeds the full generation pipeline (extraction, topics, questions); `topics` and `level` feed question-only tests, skipping extraction so they are cheap and stable.",
+ "domains": [
+  {
+   "id": "python_backend",
+   "kind": "job",
+   "level": "medium",
+   "text": "Python Backend Developer (Remote, EU)\n\nWe build the API behind a logistics platform used by 300 warehouses. You'll write and maintain\nPython services that track parcels in real time.\n\nWhat you'll do\n- Build REST APIs with FastAPI and async Python; design data models with Pydantic.\n- Write SQL for PostgreSQL, tune slow queries and design indexes.\n- Write unit and integration tests with pytest; keep CI green.\n- Process events from a message queue and handle retries and idempotency.\n- Review pull requests and improve performance and reliability.\n\nWhat you bring\n- 4+ years of Python, including generators, decorators, context managers and asyncio.\n- Strong SQL: joins, window functions, transactions and isolation levels.\n- Experience with Docker, Git and Linux.\n- Understanding of HTTP, caching and API design.",
+   "topics": [
+    {
+     "topic": "Python Language",
+     "subtopics": [
+      "Generators, closures and decorators",
+      "Exceptions and context managers",
+      "Data structures and their costs"
+     ]
+    },
+    {
+     "topic": "Asynchronous Python",
+     "subtopics": [
+      "asyncio tasks and cancellation"
+     ]
+    },
+    {
+     "topic": "PostgreSQL and SQL",
+     "subtopics": [
+      "Joins, window functions and NULL handling",
+      "Indexes and query plans"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marketing_manager",
+   "kind": "job",
+   "level": "hard",
+   "text": "Marketing Manager, B2B SaaS (Berlin, hybrid)\n\nWe're a 60-person company selling scheduling software to clinics across Europe. You'll own our\ndemand generation: plan and run campaigns across paid search, LinkedIn ads, email nurture and\nwebinars, and turn them into qualified pipeline for a sales team of eight.\n\nWhat you'll do\n- Build and manage the quarterly marketing plan and a budget of about EUR 400k.\n- Run paid campaigns on Google Ads and LinkedIn; test audiences, creative and landing pages.\n- Write and automate email nurture flows in HubSpot; keep lead scoring and lifecycle stages clean.\n- Work with sales on the definition of an MQL and SQL, and report funnel conversion every week.\n- Brief freelancers and an agency on content: case studies, guides and webinar programmes.\n- Measure attribution and CAC payback, and decide where the next euro goes.\n\nWhat you bring\n- 5+ years in B2B marketing, at least 2 owning a pipeline target.\n- Hands-on with Google Ads, LinkedIn Campaign Manager, HubSpot and Google Analytics 4.\n- Comfortable with spreadsheets and basic SQL for funnel analysis.\n- Clear writing in English; German is a plus.\n- Experience with GDPR-compliant email marketing and consent management.",
+   "topics": [
+    {
+     "topic": "Paid Campaigns",
+     "subtopics": [
+      "Google Ads bidding and budgets",
+      "LinkedIn ads targeting"
+     ]
+    },
+    {
+     "topic": "Marketing Analytics",
+     "subtopics": [
+      "Funnel conversion and attribution",
+      "CAC payback and budget allocation"
+     ]
+    },
+    {
+     "topic": "Email Marketing",
+     "subtopics": [
+      "Nurture flows and lead scoring",
+      "GDPR consent for email"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "registered_nurse",
+   "kind": "job",
+   "level": "medium",
+   "text": "Registered Nurse, Medical-Surgical Unit (full time, day and night shifts)\n\nOur 32-bed medical-surgical unit cares for adults recovering from surgery and acute illness.\n\nResponsibilities\n- Assess patients, monitor vital signs and recognise early signs of deterioration.\n- Give medications safely: oral, IV and subcutaneous, including insulin and anticoagulants;\n  calculate doses and infusion rates.\n- Care for surgical wounds, drains and urinary catheters; prevent infection and pressure injuries.\n- Manage pain, fluid balance and post-operative complications.\n- Document care and hand over using SBAR; educate patients and families before discharge.\n- Delegate to nursing assistants and work with physicians, pharmacists and physiotherapists.\n\nRequirements\n- Nursing licence and 2+ years of acute-care experience.\n- Current basic life support certification.",
+   "topics": [
+    {
+     "topic": "Medication Safety",
+     "subtopics": [
+      "Dose and infusion rate calculations",
+      "High-alert medications: insulin and anticoagulants"
+     ]
+    },
+    {
+     "topic": "Patient Assessment",
+     "subtopics": [
+      "Recognising early deterioration",
+      "Post-operative complications"
+     ]
+    },
+    {
+     "topic": "Infection Prevention",
+     "subtopics": [
+      "Catheter and wound care"
+     ]
+    },
+    {
+     "topic": "Communication",
+     "subtopics": [
+      "SBAR handover and delegation"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "senior_accountant",
+   "kind": "job",
+   "level": "hard",
+   "text": "Senior Accountant (manufacturing company, 200 employees)\n\nYou will own the month-end close and support the yearly audit.\n\nResponsibilities\n- Prepare journal entries, accruals and prepayments; reconcile bank and balance sheet accounts.\n- Account for inventory and cost of goods sold, fixed assets and depreciation, and leases.\n- Recognise revenue under IFRS 15 and handle foreign-currency transactions.\n- Prepare the income statement, balance sheet and cash flow statement, and explain variances\n  against budget.\n- Prepare VAT returns and support corporate income tax filings.\n- Improve internal controls and work with external auditors.\n\nRequirements\n- Degree in accounting or finance; 5+ years of experience, ACCA or CPA progress welcome.\n- Strong Excel; experience with an ERP system.",
+   "topics": [
+    {
+     "topic": "Month-End Close",
+     "subtopics": [
+      "Accruals, prepayments and reversals",
+      "Bank and balance sheet reconciliations"
+     ]
+    },
+    {
+     "topic": "Financial Reporting",
+     "subtopics": [
+      "Revenue recognition under IFRS 15",
+      "Foreign-currency transactions"
+     ]
+    },
+    {
+     "topic": "Fixed Assets and Leases",
+     "subtopics": [
+      "Depreciation and disposals",
+      "IFRS 16 lease liabilities"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "spanish_travel",
+   "kind": "goal",
+   "level": "basic",
+   "text": "I'm travelling around Spain and Mexico for two months next spring and I want to\nget by in Spanish. I know a few words only. I want to learn the grammar and vocabulary I need for\neveryday situations: ordering food, asking for directions, booking rooms and transport, shopping\nand prices, small talk, and dealing with problems like a lost bag or feeling ill. Present, past\nand near-future tenses, ser vs estar, gender and articles, numbers, dates and time.",
+   "topics": [
+    {
+     "topic": "Spanish Grammar",
+     "subtopics": [
+      "Ser vs estar",
+      "Present, preterite and ir a + infinitive",
+      "Gender, articles and agreement"
+     ]
+    },
+    {
+     "topic": "Travel Situations",
+     "subtopics": [
+      "Ordering food and paying",
+      "Directions, transport and hotels",
+      "Problems: lost items and feeling ill"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "high_school_chemistry",
+   "kind": "goal",
+   "level": "medium",
+   "text": "I'm in my last year of high school and have a chemistry exam in two months. I need to\npractise stoichiometry and moles, balancing equations, acids and bases with pH, gas laws,\nreaction rates and equilibrium, and redox. I'm fine with definitions but lose marks on\ncalculations and on explaining what happens in an experiment.",
+   "topics": [
+    {
+     "topic": "Quantitative Chemistry",
+     "subtopics": [
+      "Moles, molar mass and stoichiometry",
+      "Gas laws",
+      "Solution concentration and titration"
+     ]
+    },
+    {
+     "topic": "Reactions",
+     "subtopics": [
+      "Balancing equations and redox",
+      "Acids, bases and pH",
+      "Rates and equilibrium"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "electrician_apprentice",
+   "kind": "job",
+   "level": "basic",
+   "text": "Electrician Apprentice (residential and small commercial)\n\nYou'll work alongside licensed electricians installing and repairing wiring in homes and shops.\n\nWhat you'll do\n- Run cable, fit sockets, switches and lighting, and wire consumer units under supervision.\n- Measure voltage, current and resistance with a multimeter; test circuits before handover.\n- Follow safe isolation procedures and lock-off before any work.\n- Read wiring diagrams and help choose cable sizes and circuit breakers.\n\nWhat you bring\n- Interest in electrical work and basic maths.\n- Willingness to learn wiring regulations and safety rules.",
+   "topics": [
+    {
+     "topic": "Electrical Basics",
+     "subtopics": [
+      "Ohm's law and power calculations",
+      "Series and parallel circuits"
+     ]
+    },
+    {
+     "topic": "Safety and Testing",
+     "subtopics": [
+      "Safe isolation and lock-off",
+      "Using a multimeter"
+     ]
+    },
+    {
+     "topic": "Installation",
+     "subtopics": [
+      "Cable sizing and circuit protection",
+      "Wiring sockets, switches and lighting"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "project_manager",
+   "kind": "job",
+   "level": "medium",
+   "text": "Project Manager, Construction Fit-Out (offices and retail)\n\nYou'll run interior fit-out projects from contract to handover, typically 8 to 16 weeks and\nEUR 0.5 to 3 million.\n\nWhat you'll do\n- Build and keep the programme: critical path, dependencies, lead times and float.\n- Track budget, cost to complete, variations and change orders.\n- Manage subcontractors, site meetings, risks and issues.\n- Report progress to the client and handle disputes and delays.\n\nWhat you bring\n- 4+ years managing fit-out or construction projects.\n- Comfortable with scheduling tools and earned value basics.",
+   "topics": [
+    {
+     "topic": "Planning and Scheduling",
+     "subtopics": [
+      "Critical path and float",
+      "Lead times and dependencies"
+     ]
+    },
+    {
+     "topic": "Cost Control",
+     "subtopics": [
+      "Earned value and cost to complete",
+      "Variations and change orders"
+     ]
+    },
+    {
+     "topic": "Stakeholders and Risk",
+     "subtopics": [
+      "Managing subcontractors and site meetings",
+      "Delays, risks and claims"
+     ]
+    }
+   ]
+  }
+ ]
+}

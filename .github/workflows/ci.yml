@@ -29,8 +29,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
-      - run: uvx ruff@${{ env.RUFF_VERSION }} check services packages
-      - run: uvx ruff@${{ env.RUFF_VERSION }} format --check services packages
+      - run: uvx ruff@${{ env.RUFF_VERSION }} check services packages evals
+      - run: uvx ruff@${{ env.RUFF_VERSION }} format --check services packages evals
 
   tests:
     name: ${{ matrix.path }} tests

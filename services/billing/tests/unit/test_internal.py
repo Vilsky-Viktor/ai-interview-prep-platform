@@ -1,5 +1,6 @@
 from types import SimpleNamespace
 
+from app.constants.credits import CHAT_TURN_CREDITS
 from app.service_auth import service_token
 from app.storage import ledger
 
@@ -63,7 +64,7 @@ def test_a_certificate_on_a_public_kit_shares_with_its_author(client, monkeypatc
     assert spent == [("ann", 100, "certificate:topic-1", "certificate", "Ledgers", ("bob", 20))]
 
 
-def test_a_paid_chat_turn_costs_one_credit(client, monkeypatch):
+def test_a_paid_chat_turn_costs_its_credits(client, monkeypatch):
     spent = []
 
     async def fake_spend(owner_type, owner_id, amount, key, reason, note=None, share=None):
@@ -79,7 +80,7 @@ def test_a_paid_chat_turn_costs_one_credit(client, monkeypatch):
 
     assert first.status_code == 204
     assert broke.status_code == 402
-    assert spent[0] == ("ann", 1, "chat:answer-1:4")
+    assert spent[0] == ("ann", CHAT_TURN_CREDITS, "chat:answer-1:4")
 
 
 def test_internal_routes_need_a_service_token(client):

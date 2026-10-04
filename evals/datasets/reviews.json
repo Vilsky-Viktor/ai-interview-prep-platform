@@ -1,0 +1,2165 @@
+{
+ "about": "Reference verdicts on datasets/questions.json by gpt-6.1-sol (high).",
+ "reviews": [
+  {
+   "id": "q0000",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0001",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0002",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0003",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 5,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0004",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0005",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0006",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0007",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0008",
+   "key_correct": false,
+   "single_correct": false,
+   "distractors": 1,
+   "clarity": 1,
+   "relevance": 1,
+   "issue": "Invalid, incomplete code and placeholder options; no defensible answer."
+  },
+  {
+   "id": "q0009",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0010",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0011",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0012",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0013",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0014",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0015",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0016",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0017",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Two distractors use \"outer completed\", which the code never prints."
+  },
+  {
+   "id": "q0018",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0019",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0020",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0021",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0022",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 5,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0023",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0024",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0025",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0026",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0027",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0028",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0029",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0030",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too basic for hard level"
+  },
+  {
+   "id": "q0031",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Simple proportional scaling; easy for hard level"
+  },
+  {
+   "id": "q0032",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too basic for hard level"
+  },
+  {
+   "id": "q0033",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too easy for hard level; distractors explicitly violate requirements."
+  },
+  {
+   "id": "q0034",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Explicit lag clue and weak distractors make this easy for hard-level learners."
+  },
+  {
+   "id": "q0035",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too basic for hard level"
+  },
+  {
+   "id": "q0036",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too easy for hard-level practice"
+  },
+  {
+   "id": "q0037",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too basic for hard level; weak distractors."
+  },
+  {
+   "id": "q0038",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too easy for hard-level practice; weak distractors."
+  },
+  {
+   "id": "q0039",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too basic for a hard-level learner."
+  },
+  {
+   "id": "q0040",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too straightforward for hard-level practice."
+  },
+  {
+   "id": "q0041",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0042",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too easy for hard-level practice."
+  },
+  {
+   "id": "q0043",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too easy for a hard-level learner"
+  },
+  {
+   "id": "q0044",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too easy for hard-level practice; distractors are weak."
+  },
+  {
+   "id": "q0045",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too easy for hard level; basic cumulative-cost recovery."
+  },
+  {
+   "id": "q0046",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too easy for hard level"
+  },
+  {
+   "id": "q0047",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": ""
+  },
+  {
+   "id": "q0048",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0049",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0050",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too easy for hard level; weak distractors."
+  },
+  {
+   "id": "q0051",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too easy for a hard-level learner."
+  },
+  {
+   "id": "q0052",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too straightforward for hard-level practice."
+  },
+  {
+   "id": "q0053",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too easy for a hard-level learner."
+  },
+  {
+   "id": "q0054",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too basic for a hard-level learner."
+  },
+  {
+   "id": "q0055",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too straightforward for hard level."
+  },
+  {
+   "id": "q0056",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too easy for hard level"
+  },
+  {
+   "id": "q0057",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too straightforward for hard-level practice."
+  },
+  {
+   "id": "q0058",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Tests a basic withdrawal rule; too easy for hard level."
+  },
+  {
+   "id": "q0059",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too straightforward for hard level"
+  },
+  {
+   "id": "q0060",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0061",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0062",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0063",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0064",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0065",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Distractors use easily rejected overstatements."
+  },
+  {
+   "id": "q0066",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0067",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0068",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0069",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0070",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Mostly implausible distractors make the answer obvious."
+  },
+  {
+   "id": "q0071",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0072",
+   "key_correct": true,
+   "single_correct": false,
+   "distractors": 4,
+   "clarity": 2,
+   "relevance": 4,
+   "issue": "First and fourth options describe the same concerning trend."
+  },
+  {
+   "id": "q0073",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Weak distractors make the answer obvious."
+  },
+  {
+   "id": "q0074",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Weak, repetitive distractors"
+  },
+  {
+   "id": "q0075",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Mostly weak distractors"
+  },
+  {
+   "id": "q0076",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0077",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0078",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0079",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0080",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0081",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0082",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0083",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0084",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Two distractors are implausible, making the answer easy."
+  },
+  {
+   "id": "q0085",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0086",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Distractors are easy to eliminate."
+  },
+  {
+   "id": "q0087",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Weak distractors; easy for medium level"
+  },
+  {
+   "id": "q0088",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Weak distractors"
+  },
+  {
+   "id": "q0089",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Weak distractors; correct answer closely mirrors the stem."
+  },
+  {
+   "id": "q0090",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too basic for a hard-level learner."
+  },
+  {
+   "id": "q0091",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Limited difficulty for a hard-level learner."
+  },
+  {
+   "id": "q0092",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Straightforward for hard level"
+  },
+  {
+   "id": "q0093",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Limited challenge for a hard-level learner."
+  },
+  {
+   "id": "q0094",
+   "key_correct": false,
+   "single_correct": false,
+   "distractors": 4,
+   "clarity": 2,
+   "relevance": 4,
+   "issue": "December payment rate is unspecified: $1.10 appears tied to January 1. The keyed answer requires a December rate of $1.10; the first option works at $1.20."
+  },
+  {
+   "id": "q0095",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0096",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0097",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too straightforward for hard-level practice"
+  },
+  {
+   "id": "q0098",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too easy for hard level."
+  },
+  {
+   "id": "q0099",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too basic for hard-level practice."
+  },
+  {
+   "id": "q0100",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0101",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0102",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0103",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Principal status is explicit; two distractors are implausible."
+  },
+  {
+   "id": "q0104",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0105",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 2,
+   "issue": "Too basic for a hard-level learner."
+  },
+  {
+   "id": "q0106",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0107",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 5,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0108",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0109",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0110",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Routine calculation for a hard-level learner"
+  },
+  {
+   "id": "q0111",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too straightforward for hard level."
+  },
+  {
+   "id": "q0112",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0113",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Routine calculation rather than hard-level application."
+  },
+  {
+   "id": "q0114",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too straightforward for hard level."
+  },
+  {
+   "id": "q0115",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0116",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0117",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0118",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0119",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too straightforward for a hard-level learner"
+  },
+  {
+   "id": "q0120",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Weak, implausible distractors"
+  },
+  {
+   "id": "q0121",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0122",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0123",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0124",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0125",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0126",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "“Ayer” makes the distractors obvious."
+  },
+  {
+   "id": "q0127",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Distractors use obviously mismatched time references."
+  },
+  {
+   "id": "q0128",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0129",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0130",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0131",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0132",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0133",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0134",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0135",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0136",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0137",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0138",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Distractors obviously contradict splitting equally."
+  },
+  {
+   "id": "q0139",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Weak distractors."
+  },
+  {
+   "id": "q0140",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0141",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0142",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0143",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Distractors are obviously wrong."
+  },
+  {
+   "id": "q0144",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0145",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Distractors are obviously unrelated."
+  },
+  {
+   "id": "q0146",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Distractors are too obvious."
+  },
+  {
+   "id": "q0147",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Distractors are obviously wrong."
+  },
+  {
+   "id": "q0148",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0149",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Mostly obvious distractors"
+  },
+  {
+   "id": "q0150",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0151",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 5,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0152",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0153",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0154",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0155",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0156",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0157",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0158",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0159",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0160",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0161",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0162",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0163",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0164",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Weak distractors"
+  },
+  {
+   "id": "q0165",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0166",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0167",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0168",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0169",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0170",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0171",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0172",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0173",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0174",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0175",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0176",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0177",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0178",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0179",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0180",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0181",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0182",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0183",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0184",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0185",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0186",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0187",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0188",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0189",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0190",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0191",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0192",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Distractors are too obviously unsafe."
+  },
+  {
+   "id": "q0193",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Distractors are too obviously wrong."
+  },
+  {
+   "id": "q0194",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0195",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0196",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0197",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0198",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Weak distractors"
+  },
+  {
+   "id": "q0199",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Voltage and polarity distractors are weak."
+  },
+  {
+   "id": "q0200",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0201",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": "Distractors are obviously wrong."
+  },
+  {
+   "id": "q0202",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0203",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0204",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0205",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0206",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0207",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0208",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0209",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0210",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0211",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0212",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0213",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0214",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0215",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too basic for medium level"
+  },
+  {
+   "id": "q0216",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0217",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0218",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0219",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Mostly weak distractors."
+  },
+  {
+   "id": "q0220",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0221",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0222",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0223",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0224",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 5,
+   "issue": ""
+  },
+  {
+   "id": "q0225",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too easy for medium level; the stem explicitly states the required procedure."
+  },
+  {
+   "id": "q0226",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0227",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Weak distractors; distinction is heavily signposted."
+  },
+  {
+   "id": "q0228",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0229",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Weak distractors; primarily time-entitlement administration."
+  },
+  {
+   "id": "q0230",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Weak distractors make the answer obvious."
+  },
+  {
+   "id": "q0231",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Obvious distractors; too easy for medium level."
+  },
+  {
+   "id": "q0232",
+   "key_correct": false,
+   "single_correct": false,
+   "distractors": 3,
+   "clarity": 3,
+   "relevance": 3,
+   "issue": "No fully correct option: Saturday morning is two days later than the planned Thursday start, not three."
+  },
+  {
+   "id": "q0233",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 1,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too easy for medium level; distractors are obviously unsafe."
+  },
+  {
+   "id": "q0234",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": "Correct answer heavily signposted; weak distractors."
+  },
+  {
+   "id": "q0235",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 4,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0236",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Answer is explicit in the stem; weak distractors for medium level."
+  },
+  {
+   "id": "q0237",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 4,
+   "issue": ""
+  },
+  {
+   "id": "q0238",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 3,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too easy for medium level"
+  },
+  {
+   "id": "q0239",
+   "key_correct": true,
+   "single_correct": true,
+   "distractors": 2,
+   "clarity": 5,
+   "relevance": 3,
+   "issue": "Too easy for medium level; weak distractors."
+  }
+ ]
+}

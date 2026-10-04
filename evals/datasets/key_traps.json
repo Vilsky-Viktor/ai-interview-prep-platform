@@ -1,0 +1,1625 @@
+{
+ "about": "Questions from questions.json with the answer key moved to a wrong option on purpose (expected_key_correct is false). Ground truth for judges and the verifier.",
+ "items": [
+  {
+   "domain": "registered_nurse",
+   "level": "medium",
+   "topic": "Infection Prevention",
+   "subtopic": "Catheter and wound care",
+   "question": "An adult inpatient has a central venous catheter covered by a transparent dressing. The dressing was changed yesterday but is now damp and lifting at the edges. The insertion site has no redness or drainage. What is the appropriate next action?",
+   "options": [
+    {
+     "answer": "Reinforce the edges and keep the scheduled change date.",
+     "correct": true
+    },
+    {
+     "answer": "Replace the dressing now using aseptic technique.",
+     "correct": false
+    },
+    {
+     "answer": "Remove the catheter because the dressing is damp.",
+     "correct": false
+    },
+    {
+     "answer": "Leave the dressing in place until redness develops.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0082",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "marketing_manager",
+   "level": "hard",
+   "topic": "Paid Campaigns",
+   "subtopic": "LinkedIn ads targeting",
+   "question": "A LinkedIn advertiser needs senior leaders, including recently promoted executives with short careers, while excluding long-tenured individual contributors. It currently uses Years of Experience as its only career-level filter. Which change most directly aligns targeting with the requirement?",
+   "options": [
+    {
+     "answer": "Replace the experience filter with the relevant Member Age categories.",
+     "correct": false
+    },
+    {
+     "answer": "Replace the experience filter with the relevant Job Seniority categories.",
+     "correct": false
+    },
+    {
+     "answer": "Replace the experience filter with the relevant Company Size categories.",
+     "correct": false
+    },
+    {
+     "answer": "Increase the experience threshold to remove long-tenured individual contributors.",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0038",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "senior_accountant",
+   "level": "hard",
+   "topic": "Financial Reporting",
+   "subtopic": "Revenue recognition under IFRS 15",
+   "question": "A construction contract qualifies for revenue recognition over time under IFRS 15. The contract price is $5 million and expected total costs are $4 million. Costs incurred include $1 million of equipment and $1 million of installation work. The equipment is not distinct, its cost is significant, and the customer already controls it well before receiving the related installation services. The contractor procured it from a third party without significant involvement in its design or manufacture. All installation costs faithfully depict progress. Using the cost-based input method with the required adjustment for this equipment, what is cumulative revenue, rounded to the nearest dollar?",
+   "options": [
+    {
+     "answer": "$2,500,000",
+     "correct": true
+    },
+    {
+     "answer": "$3,000,000",
+     "correct": false
+    },
+    {
+     "answer": "$2,333,333",
+     "correct": false
+    },
+    {
+     "answer": "$1,666,667",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0101",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "high_school_chemistry",
+   "level": "medium",
+   "topic": "Reactions",
+   "subtopic": "Balancing equations and redox",
+   "question": "In the reaction Zn + Cu²⁺ → Zn²⁺ + Cu, which reactant is the oxidizing agent, and what happens to it?",
+   "options": [
+    {
+     "answer": "Zn; it gains two electrons.",
+     "correct": false
+    },
+    {
+     "answer": "Zn; it loses two electrons.",
+     "correct": true
+    },
+    {
+     "answer": "Cu²⁺; it gains two electrons.",
+     "correct": false
+    },
+    {
+     "answer": "Cu²⁺; it loses two electrons.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0166",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "Python Language",
+   "subtopic": "Data structures and their costs",
+   "question": "A Python program maintains a large FIFO queue, repeatedly adding items at the back and removing them from the front. It does not need indexing or slicing. Which approach provides approximately O(1) cost for both operations without shifting the remaining items?",
+   "options": [
+    {
+     "answer": "Use collections.deque with appendleft() and pop(0).",
+     "correct": false
+    },
+    {
+     "answer": "Use collections.deque with append() and popleft().",
+     "correct": false
+    },
+    {
+     "answer": "Use a list with insert(0, item) and pop().",
+     "correct": false
+    },
+    {
+     "answer": "Use a list with append() and pop(0).",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0012",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "Asynchronous Python",
+   "subtopic": "asyncio tasks and cancellation",
+   "question": "In Python 3.11, a service calls an async function and stores the returned coroutine object without awaiting it. It must let that operation progress while the service awaits unrelated I/O, and retain a handle for later cancellation. Which action meets both requirements?",
+   "options": [
+    {
+     "answer": "Pass the coroutine to asyncio.create_task and retain the returned task.",
+     "correct": false
+    },
+    {
+     "answer": "Call the coroutine object's close method before awaiting unrelated I/O.",
+     "correct": false
+    },
+    {
+     "answer": "Keep the coroutine object unchanged and cancel it after the unrelated I/O.",
+     "correct": false
+    },
+    {
+     "answer": "Await the coroutine directly before starting the unrelated I/O operation.",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0018",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "project_manager",
+   "level": "medium",
+   "topic": "Planning and Scheduling",
+   "subtopic": "Critical path and float",
+   "question": "A project starts on day 0. Activity A takes 3 days and is followed by B, which takes 5 days. In parallel, C takes 6 days and is followed by D, which takes 4 days. E takes 2 days and starts only after both B and D finish. With no resource limits or imposed dates, what is B's total float?",
+   "options": [
+    {
+     "answer": "2 days",
+     "correct": false
+    },
+    {
+     "answer": "5 days",
+     "correct": false
+    },
+    {
+     "answer": "0 days",
+     "correct": true
+    },
+    {
+     "answer": "4 days",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0210",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Ordering food and paying",
+   "question": "Your restaurant bill is $40, including all taxes and charges. You want to add a tip of 15% of that amount. How much should you pay in total?",
+   "options": [
+    {
+     "answer": "$46",
+     "correct": false
+    },
+    {
+     "answer": "$44",
+     "correct": false
+    },
+    {
+     "answer": "$42",
+     "correct": true
+    },
+    {
+     "answer": "$55",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0137",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "PostgreSQL and SQL",
+   "subtopic": "Joins, window functions and NULL handling",
+   "question": "A PostgreSQL report needs one row per customer with total order value and total payment value. Orders and payments each have multiple rows per customer and no direct relationship to each other. Joining both detail tables to customers inflates both sums. Which approach correctly preserves customers with no orders or payments and produces zero for each missing total?",
+   "options": [
+    {
+     "answer": "Aggregate each detail table by customer, inner join both totals to customers, and COALESCE missing totals to zero.",
+     "correct": false
+    },
+    {
+     "answer": "Aggregate each detail table by customer, left join both totals to customers, and COALESCE missing totals to zero.",
+     "correct": false
+    },
+    {
+     "answer": "Group each detail table by customer and monetary value, left join both groups, and sum the joined amounts by customer.",
+     "correct": true
+    },
+    {
+     "answer": "Join both detail tables to customers, sum DISTINCT monetary values by customer, and COALESCE missing totals to zero.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0024",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "senior_accountant",
+   "level": "hard",
+   "topic": "Month-End Close",
+   "subtopic": "Accruals, prepayments and reversals",
+   "question": "An IFRS reporter accrues $40,000 for consulting services at December 31. Before the annual financial statements are authorized, it receives a $52,000 invoice supported by records showing $46,000 of services delivered by December 31 and $6,000 delivered in January. No additional December services or liabilities arose in January. How should the service expense be allocated?",
+   "options": [
+    {
+     "answer": "December: $52,000; January: $0.",
+     "correct": false
+    },
+    {
+     "answer": "December: $40,000; January: $6,000.",
+     "correct": false
+    },
+    {
+     "answer": "December: $46,000; January: $6,000.",
+     "correct": false
+    },
+    {
+     "answer": "December: $40,000; January: $12,000.",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0093",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Problems: lost items and feeling ill",
+   "question": "You feel ill while traveling and want a pharmacist to recommend a nonprescription medicine. You have a known medication allergy. What should you do before accepting a recommendation?",
+   "options": [
+    {
+     "answer": "Take a small dose first to test for an allergic reaction.",
+     "correct": false
+    },
+    {
+     "answer": "Tell the pharmacist which medicine you are allergic to.",
+     "correct": false
+    },
+    {
+     "answer": "Ask the pharmacist for the strongest medicine available.",
+     "correct": true
+    },
+    {
+     "answer": "Choose a familiar package without checking its ingredients.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0149",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "Python Language",
+   "subtopic": "Data structures and their costs",
+   "question": "Which exception does this Python 3 code raise when it attempts to create the dictionary?\n```\nkey = ('region', [4, 5])\nlookup = {key: 'active'}\n```",
+   "options": [
+    {
+     "answer": "ValueError",
+     "correct": false
+    },
+    {
+     "answer": "AttributeError",
+     "correct": true
+    },
+    {
+     "answer": "TypeError",
+     "correct": false
+    },
+    {
+     "answer": "KeyError",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0014",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Spanish Grammar",
+   "subtopic": "Present, preterite and ir a + infinitive",
+   "question": "A speaker says, “El sábado pasado comieron en casa.” There is no additional context identifying the people. Which subject agrees with the preterite verb comieron?",
+   "options": [
+    {
+     "answer": "They, or you when addressing a group as ustedes.",
+     "correct": false
+    },
+    {
+     "answer": "He, or you when addressing one person as usted.",
+     "correct": false
+    },
+    {
+     "answer": "We, or you when addressing a group as vosotros.",
+     "correct": true
+    },
+    {
+     "answer": "I, or you when addressing one person as tú.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0129",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "marketing_manager",
+   "level": "hard",
+   "topic": "Email Marketing",
+   "subtopic": "Nurture flows and lead scoring",
+   "question": "A team wants the causal effect of a nurture flow on purchases among eligible leads. Sales follow-up must continue unchanged. Eligibility is determined before enrollment, and purchases are tracked for every eligible lead for 60 days. Which evaluation design best answers the question?",
+   "options": [
+    {
+     "answer": "Compare purchases among nurture clickers and nonclickers while keeping sales follow-up unchanged.",
+     "correct": true
+    },
+    {
+     "answer": "Compare this month's nurtured leads with last month's leads who received no nurture.",
+     "correct": false
+    },
+    {
+     "answer": "Randomly assign eligible leads to nurture or no nurture and compare purchases by assigned group.",
+     "correct": false
+    },
+    {
+     "answer": "Compare purchases among high-scoring nurtured leads and low-scoring leads receiving no nurture.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0054",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "Python Language",
+   "subtopic": "Exceptions and context managers",
+   "question": "In Python 3, what does this code print about the exception raised using explicit suppression of chaining?\n```\ntry:\n    try:\n        raise ValueError(\"original\")\n    except ValueError:\n        raise RuntimeError(\"replacement\") from None\nexcept RuntimeError as exc:\n    print(type(exc.__context__).__name__)\n    print(exc.__cause__ is None)\n    print(exc.__suppress_context__)\n```",
+   "options": [
+    {
+     "answer": "ValueError True False",
+     "correct": true
+    },
+    {
+     "answer": "NoneType True True",
+     "correct": false
+    },
+    {
+     "answer": "ValueError True True",
+     "correct": false
+    },
+    {
+     "answer": "ValueError False True",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0009",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "PostgreSQL and SQL",
+   "subtopic": "Joins, window functions and NULL handling",
+   "question": "In PostgreSQL, what rows does this query return, shown as id, last_amount pairs, with the default window frame?\n```\n-- payments\n-- id | amount\n-- 1  | 10\n-- 2  | 20\n-- 3  | 30\n\nSELECT id, LAST_VALUE(amount) OVER (ORDER BY id) AS last_amount\nFROM payments\nORDER BY id;\n```",
+   "options": [
+    {
+     "answer": "(1, 30) (2, 30) (3, 30)",
+     "correct": false
+    },
+    {
+     "answer": "(1, 10) (2, 20) (3, 30)",
+     "correct": false
+    },
+    {
+     "answer": "(1, NULL) (2, 10) (3, 20)",
+     "correct": false
+    },
+    {
+     "answer": "(1, 10) (2, 10) (3, 10)",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0022",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "senior_accountant",
+   "level": "hard",
+   "topic": "Fixed Assets and Leases",
+   "subtopic": "Depreciation and disposals",
+   "question": "Under IFRS, equipment has a carrying amount of $600,000 on January 1 and annual straight-line depreciation of $120,000. On March 31, after three months of depreciation, it meets all IFRS 5 held-for-sale criteria. Its fair value less costs to sell is $520,000 and remains unchanged until it is sold on December 31 for net proceeds of $535,000. What depreciation expense, write-down, and disposal gain should be recognized for the year?",
+   "options": [
+    {
+     "answer": "Depreciation $30,000; write-down $50,000; gain $15,000.",
+     "correct": false
+    },
+    {
+     "answer": "Depreciation $120,000; write-down $0; gain $55,000.",
+     "correct": true
+    },
+    {
+     "answer": "Depreciation $30,000; write-down $80,000; gain $45,000.",
+     "correct": false
+    },
+    {
+     "answer": "Depreciation $30,000; write-down $50,000; gain $105,000.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0111",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "senior_accountant",
+   "level": "hard",
+   "topic": "Financial Reporting",
+   "subtopic": "Foreign-currency transactions",
+   "question": "An entity with a US dollar functional currency applies IAS 2 and IAS 21. Inventory cost €100,000 when €1 equaled $1.20. At year-end, its net realizable value is €95,000 and €1 equals $1.30. The inventory remains unsold and is carried at the lower of cost and net realizable value. What carrying amount and inventory write-down should the entity recognize in US dollars?",
+   "options": [
+    {
+     "answer": "Carrying amount $123,500; write-down $6,500.",
+     "correct": true
+    },
+    {
+     "answer": "Carrying amount $123,500; write-down $0.",
+     "correct": false
+    },
+    {
+     "answer": "Carrying amount $120,000; write-down $0.",
+     "correct": false
+    },
+    {
+     "answer": "Carrying amount $114,000; write-down $6,000.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0107",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "Asynchronous Python",
+   "subtopic": "asyncio tasks and cancellation",
+   "question": "In Python 3.11, what does this program print after cancelling the future returned by asyncio.shield?\n```\nimport asyncio\n\nasync def worker():\n    return 7\n\nasync def main():\n    task = asyncio.create_task(worker())\n    protected = asyncio.shield(task)\n    protected.cancel()\n    try:\n        await protected\n    except asyncio.CancelledError:\n        print(\"outer cancelled\")\n    print(await task)\n\nasyncio.run(main())\n```",
+   "options": [
+    {
+     "answer": "outer completed 7",
+     "correct": false
+    },
+    {
+     "answer": "outer cancelled CancelledError",
+     "correct": false
+    },
+    {
+     "answer": "outer completed CancelledError",
+     "correct": true
+    },
+    {
+     "answer": "outer cancelled 7",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0017",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "registered_nurse",
+   "level": "medium",
+   "topic": "Medication Safety",
+   "subtopic": "Dose and infusion rate calculations",
+   "question": "A child weighing 18 kg is prescribed 30 mg/kg/day of a medication, divided into three equal doses. The oral suspension contains 90 mg per 5 mL. What volume should be administered per dose?",
+   "options": [
+    {
+     "answer": "10 mL per dose",
+     "correct": false
+    },
+    {
+     "answer": "15 mL per dose",
+     "correct": false
+    },
+    {
+     "answer": "3.3 mL per dose",
+     "correct": true
+    },
+    {
+     "answer": "30 mL per dose",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0061",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "PostgreSQL and SQL",
+   "subtopic": "Joins, window functions and NULL handling",
+   "question": "In PostgreSQL, which IDs does this query return when the exclusion subquery contains a NULL?\n```\n-- candidates\n-- id\n-- 1\n-- 2\n-- 3\n\n-- exclusions\n-- id\n-- 2\n-- NULL\n\nSELECT id\nFROM candidates\nWHERE id NOT IN (SELECT id FROM exclusions)\nORDER BY id;\n```",
+   "options": [
+    {
+     "answer": "IDs 1, 2 and 3",
+     "correct": false
+    },
+    {
+     "answer": "IDs 1 and 3",
+     "correct": false
+    },
+    {
+     "answer": "ID 2 only",
+     "correct": true
+    },
+    {
+     "answer": "No rows",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0023",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Directions, transport and hotels",
+   "question": "A train ticket is marked \"one-way\" from the airport to the city center. What journey does this ticket cover?",
+   "options": [
+    {
+     "answer": "A trip from the airport to the city center only.",
+     "correct": false
+    },
+    {
+     "answer": "Unlimited trips between the airport and city center.",
+     "correct": false
+    },
+    {
+     "answer": "A trip to the city center and back to the airport.",
+     "correct": true
+    },
+    {
+     "answer": "A trip from the city center to the airport only.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0141",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "senior_accountant",
+   "level": "hard",
+   "topic": "Financial Reporting",
+   "subtopic": "Foreign-currency transactions",
+   "question": "A parent with a US dollar functional currency lends €2 million to its subsidiary, whose functional currency is the euro. Settlement is neither planned nor likely in the foreseeable future, so the principal qualifies as part of the parent's net investment under IAS 21. The parent recognizes a $100,000 exchange loss on the principal in its separate financial statements. With no disposal or hedge, where is that loss recognized in the parent's separate and the group's consolidated financial statements?",
+   "options": [
+    {
+     "answer": "Separate: other comprehensive income; consolidated: other comprehensive income.",
+     "correct": false
+    },
+    {
+     "answer": "Separate: profit or loss; consolidated: other comprehensive income.",
+     "correct": false
+    },
+    {
+     "answer": "Separate: other comprehensive income; consolidated: profit or loss.",
+     "correct": true
+    },
+    {
+     "answer": "Separate: profit or loss; consolidated: profit or loss.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0108",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "Asynchronous Python",
+   "subtopic": "asyncio tasks and cancellation",
+   "question": "In Python 3.11, what does this program print when cancellation reaches the suspended worker?\n```\nimport asyncio\n\nasync def worker(ready):\n    try:\n        ready.set()\n        await asyncio.Future()\n    finally:\n        print(\"cleanup\")\n\nasync def main():\n    ready = asyncio.Event()\n    task = asyncio.create_task(worker(ready))\n    await ready.wait()\n    task.cancel()\n    try:\n        await task\n    except asyncio.CancelledError:\n        print(\"cancelled\")\n\nasyncio.run(main())\n```",
+   "options": [
+    {
+     "answer": "cancelled cleanup",
+     "correct": false
+    },
+    {
+     "answer": "cleanup completed",
+     "correct": false
+    },
+    {
+     "answer": "cancelled completed",
+     "correct": true
+    },
+    {
+     "answer": "cleanup cancelled",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0015",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "project_manager",
+   "level": "medium",
+   "topic": "Planning and Scheduling",
+   "subtopic": "Critical path and float",
+   "question": "An activity has an early finish of day 7 and a late finish of day 12. Its only successor has an early start of day 10 because it also waits for another predecessor. The dependency is finish-to-start with zero lag. What is the activity's free float?",
+   "options": [
+    {
+     "answer": "5 days",
+     "correct": false
+    },
+    {
+     "answer": "3 days",
+     "correct": false
+    },
+    {
+     "answer": "0 days",
+     "correct": true
+    },
+    {
+     "answer": "2 days",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0211",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Directions, transport and hotels",
+   "question": "Two travelers want to share one hotel room but sleep in separate beds. The hotel's booking page defines a double room as having one double bed and a twin room as having two single beds. Which booking meets their needs?",
+   "options": [
+    {
+     "answer": "Two double rooms for two guests.",
+     "correct": false
+    },
+    {
+     "answer": "One single room for one guest.",
+     "correct": true
+    },
+    {
+     "answer": "One twin room for two guests.",
+     "correct": false
+    },
+    {
+     "answer": "One double room for two guests.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0144",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "marketing_manager",
+   "level": "hard",
+   "topic": "Paid Campaigns",
+   "subtopic": "Google Ads bidding and budgets",
+   "question": "A campaign uses Target ROAS at 400%. Its conversion values previously represented revenue, but a tracking change now reports exactly 75% of revenue for every conversion. The advertiser wants to preserve the same required revenue-to-ad-spend ratio. What should the new Target ROAS be?",
+   "options": [
+    {
+     "answer": "700%",
+     "correct": false
+    },
+    {
+     "answer": "400%",
+     "correct": false
+    },
+    {
+     "answer": "300%",
+     "correct": false
+    },
+    {
+     "answer": "533%",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0031",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "marketing_manager",
+   "level": "hard",
+   "topic": "Email Marketing",
+   "subtopic": "GDPR consent for email",
+   "question": "Customers gave valid consent specifically to receive email offers from an EU retailer, Alder Ltd. Alder sells its customer database to Birch Ltd, an independent controller that was not identified when consent was obtained. Assume Birch has no other lawful route to send marketing emails under applicable law. What must Birch do before using the database for its own email offers?",
+   "options": [
+    {
+     "answer": "Rely on Alder's consent because the offers concern the same products.",
+     "correct": true
+    },
+    {
+     "answer": "Obtain valid consent covering Birch before sending its marketing emails.",
+     "correct": false
+    },
+    {
+     "answer": "Treat the database sale agreement as transferring each subscriber's consent.",
+     "correct": false
+    },
+    {
+     "answer": "Announce the database purchase in Birch's first promotional email to subscribers.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0057",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "high_school_chemistry",
+   "level": "medium",
+   "topic": "Quantitative Chemistry",
+   "subtopic": "Solution concentration and titration",
+   "question": "A 20.00 mL sample of sulfuric acid requires 30.00 mL of 0.1000 mol/L sodium hydroxide for complete neutralization of both acidic protons. What is the sulfuric acid concentration?",
+   "options": [
+    {
+     "answer": "0.3000 mol/L",
+     "correct": true
+    },
+    {
+     "answer": "0.06667 mol/L",
+     "correct": false
+    },
+    {
+     "answer": "0.07500 mol/L",
+     "correct": false
+    },
+    {
+     "answer": "0.1500 mol/L",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0161",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "high_school_chemistry",
+   "level": "medium",
+   "topic": "Quantitative Chemistry",
+   "subtopic": "Solution concentration and titration",
+   "question": "A technician dilutes 25.0 mL of a 0.800 mol/L sodium chloride solution to a final volume of 200.0 mL. What is the concentration of the diluted solution?",
+   "options": [
+    {
+     "answer": "6.40 mol/L",
+     "correct": false
+    },
+    {
+     "answer": "0.0250 mol/L",
+     "correct": false
+    },
+    {
+     "answer": "0.114 mol/L",
+     "correct": true
+    },
+    {
+     "answer": "0.100 mol/L",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0160",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "project_manager",
+   "level": "medium",
+   "topic": "Cost Control",
+   "subtopic": "Variations and change orders",
+   "question": "An owner approves the price of a change but leaves its time impact unresolved. The contractor’s schedule analysis shows the changed work delays the critical path by five days, with no concurrent delay. The contract requires separate notice for time extensions. What should the contractor do to preserve its time entitlement?",
+   "options": [
+    {
+     "answer": "Submit the required time-extension notice with supporting schedule analysis.",
+     "correct": false
+    },
+    {
+     "answer": "Wait until project completion before submitting the time-extension notice.",
+     "correct": false
+    },
+    {
+     "answer": "Deduct five days of delay costs from the approved change price.",
+     "correct": true
+    },
+    {
+     "answer": "Assume price approval automatically extends the completion date by five days.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0229",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "project_manager",
+   "level": "medium",
+   "topic": "Planning and Scheduling",
+   "subtopic": "Lead times and dependencies",
+   "question": "A team can start installing flooring only after concrete pouring finishes and a mandatory seven-calendar-day curing period passes. Which dependency most accurately represents this constraint?",
+   "options": [
+    {
+     "answer": "Finish-to-start with a seven-day lag.",
+     "correct": false
+    },
+    {
+     "answer": "Finish-to-start with a seven-day lead.",
+     "correct": true
+    },
+    {
+     "answer": "Finish-to-finish with a seven-day lag.",
+     "correct": false
+    },
+    {
+     "answer": "Start-to-start with a seven-day lag.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0216",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Problems: lost items and feeling ill",
+   "question": "While sightseeing, your companion suddenly develops severe chest pain and has difficulty breathing. What should you do first?",
+   "options": [
+    {
+     "answer": "Return to the hotel to let them sleep quietly.",
+     "correct": false
+    },
+    {
+     "answer": "Call the local emergency number for medical help.",
+     "correct": false
+    },
+    {
+     "answer": "Find a pharmacy to buy ordinary cold medicine.",
+     "correct": true
+    },
+    {
+     "answer": "Arrange a routine appointment for next week.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0147",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "electrician_apprentice",
+   "level": "basic",
+   "topic": "Installation",
+   "subtopic": "Wiring sockets, switches and lighting",
+   "question": "Two lamps are connected in parallel to a suitable supply, each on its own branch. One lamp fails open-circuit, and no protective device trips. What happens to the other lamp?",
+   "options": [
+    {
+     "answer": "It becomes brighter because its supply voltage doubles.",
+     "correct": true
+    },
+    {
+     "answer": "It becomes dimmer because its supply voltage halves.",
+     "correct": false
+    },
+    {
+     "answer": "It stays lit with the same voltage across it.",
+     "correct": false
+    },
+    {
+     "answer": "It goes out because the shared circuit is broken.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0209",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "project_manager",
+   "level": "medium",
+   "topic": "Stakeholders and Risk",
+   "subtopic": "Delays, risks and claims",
+   "question": "An employer-caused delay and a contractor-caused delay occur during the same 5 working days. Each independently prevents completion throughout that period. The contract explicitly grants an extension for concurrent delay but excludes compensation for the concurrent period. What is the contractor entitled to for these 5 days?",
+   "options": [
+    {
+     "answer": "A 10-day extension with full delay compensation",
+     "correct": false
+    },
+    {
+     "answer": "A 5-day extension with no delay compensation",
+     "correct": false
+    },
+    {
+     "answer": "A 5-day extension with full delay compensation",
+     "correct": true
+    },
+    {
+     "answer": "No extension and no delay compensation",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0237",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "project_manager",
+   "level": "medium",
+   "topic": "Stakeholders and Risk",
+   "subtopic": "Delays, risks and claims",
+   "question": "A construction activity has 4 working days of total float. A client instruction delays it by 7 working days. No other delays occur, and the contractor cannot recover the lost time. The contract grants an extension only for the resulting delay to project completion. How much extension is due?",
+   "options": [
+    {
+     "answer": "7 working days",
+     "correct": false
+    },
+    {
+     "answer": "3 working days",
+     "correct": false
+    },
+    {
+     "answer": "4 working days",
+     "correct": true
+    },
+    {
+     "answer": "11 working days",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0235",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "marketing_manager",
+   "level": "hard",
+   "topic": "Email Marketing",
+   "subtopic": "GDPR consent for email",
+   "question": "An EU online shop requires customers to accept promotional emails before they can buy ordinary goods. Those emails are unnecessary to complete or fulfil the purchase, and refusing them prevents checkout. The shop wants to rely on GDPR consent for marketing. Which redesign addresses the consent defect?",
+   "options": [
+    {
+     "answer": "Make marketing preselected, with acceptance recorded when customers complete checkout.",
+     "correct": true
+    },
+    {
+     "answer": "Keep marketing mandatory, but explain the requirement prominently before checkout.",
+     "correct": false
+    },
+    {
+     "answer": "Make marketing an optional, unticked choice that does not affect checkout.",
+     "correct": false
+    },
+    {
+     "answer": "Keep marketing mandatory, but offer an unsubscribe link after the first email.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0056",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "Python Language",
+   "subtopic": "Data structures and their costs",
+   "question": "What does this Python 3 code print when numerically equal values are used as dictionary keys?\n```\ncounts = {}\ncounts[1] = 'first'\ncounts[True] = 'second'\ncounts[1.0] = 'third'\nprint(len(counts), counts[1])\n```",
+   "options": [
+    {
+     "answer": "2 second",
+     "correct": false
+    },
+    {
+     "answer": "1 third",
+     "correct": false
+    },
+    {
+     "answer": "3 first",
+     "correct": false
+    },
+    {
+     "answer": "1 first",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0011",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Directions, transport and hotels",
+   "question": "Your bus leaves at 14:35, and the journey takes 45 minutes with no delays. What time will you arrive?",
+   "options": [
+    {
+     "answer": "15:10",
+     "correct": true
+    },
+    {
+     "answer": "15:35",
+     "correct": false
+    },
+    {
+     "answer": "14:50",
+     "correct": false
+    },
+    {
+     "answer": "15:20",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0142",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "marketing_manager",
+   "level": "hard",
+   "topic": "Paid Campaigns",
+   "subtopic": "Google Ads bidding and budgets",
+   "question": "A Target CPA campaign's reported CPA rose from $50 to $100 when comparing the latest three interaction dates with an older, fully mature period. Spend and traffic mix are unchanged. Historically, only half of eventual conversions are reported within three days, and tracking checks reveal no fault. There is no urgent spending constraint. What is the best first action before changing the target?",
+   "options": [
+    {
+     "answer": "Double the CPA target immediately to recover the missing conversions.",
+     "correct": false
+    },
+    {
+     "answer": "Halve the daily budget immediately to restore the historical reported CPA.",
+     "correct": false
+    },
+    {
+     "answer": "Halve the CPA target immediately to reverse the apparent efficiency loss.",
+     "correct": true
+    },
+    {
+     "answer": "Assess lag-adjusted performance or wait for the recent cohort to mature.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0034",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "registered_nurse",
+   "level": "medium",
+   "topic": "Patient Assessment",
+   "subtopic": "Recognising early deterioration",
+   "question": "An adult patient's aggregate early warning score is below the local escalation threshold, but they have developed new chest pain and look markedly unwell. What is the most appropriate response?",
+   "options": [
+    {
+     "answer": "Seek urgent clinical review based on the new symptoms and concern.",
+     "correct": false
+    },
+    {
+     "answer": "Treat the low score as reassurance and arrange review tomorrow.",
+     "correct": false
+    },
+    {
+     "answer": "Repeat observations at the usual interval before considering review.",
+     "correct": false
+    },
+    {
+     "answer": "Wait until the score reaches the threshold before seeking review.",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0074",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "project_manager",
+   "level": "medium",
+   "topic": "Cost Control",
+   "subtopic": "Earned value and cost to complete",
+   "question": "A project has spent $75,000. Its team has produced a new bottom-up estimate of $110,000 for all remaining work, including expected rework. The remaining work differs substantially from completed work, so the manager chooses this estimate rather than extrapolating historical cost efficiency. What are the estimate to complete and estimate at completion?",
+   "options": [
+    {
+     "answer": "Estimate to complete: $75,000; estimate at completion: $185,000.",
+     "correct": false
+    },
+    {
+     "answer": "Estimate to complete: $35,000; estimate at completion: $110,000.",
+     "correct": true
+    },
+    {
+     "answer": "Estimate to complete: $185,000; estimate at completion: $260,000.",
+     "correct": false
+    },
+    {
+     "answer": "Estimate to complete: $110,000; estimate at completion: $185,000.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0222",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "marketing_manager",
+   "level": "hard",
+   "topic": "Paid Campaigns",
+   "subtopic": "LinkedIn ads targeting",
+   "question": "An advertiser uploads a company list containing 200 target accounts to LinkedIn Matched Audiences. The campaign should reach IT decision-makers employed at those accounts, not everyone employed there. With audience expansion disabled, which targeting setup best meets that requirement?",
+   "options": [
+    {
+     "answer": "Broaden the matched company audience with IT job function and the required seniorities.",
+     "correct": false
+    },
+    {
+     "answer": "Replace the matched company audience with its industries and the required seniorities.",
+     "correct": true
+    },
+    {
+     "answer": "Narrow the matched company audience by IT job function and the required seniorities.",
+     "correct": false
+    },
+    {
+     "answer": "Target the matched company audience alone because account matching identifies decision-makers.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0036",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Ordering food and paying",
+   "question": "You and a friend want to split a restaurant bill equally. The server asks, \"Together or separate?\" Which reply clearly communicates how you want to pay?",
+   "options": [
+    {
+     "answer": "Separate, please. We'd each like to pay half.",
+     "correct": false
+    },
+    {
+     "answer": "Together, please. I'll pay the whole bill.",
+     "correct": false
+    },
+    {
+     "answer": "Separate, please. I'll pay the whole bill.",
+     "correct": false
+    },
+    {
+     "answer": "Together, please. My friend will pay it all.",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0138",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "marketing_manager",
+   "level": "hard",
+   "topic": "Paid Campaigns",
+   "subtopic": "Google Ads bidding and budgets",
+   "question": "A standard Google Search campaign has an average daily budget of $100 that remains unchanged throughout a 31-day month. It runs every day, is not using pay for conversions, and records $3,200 in served costs. No other credits or adjustments apply. What is the maximum amount Google can bill for that month?",
+   "options": [
+    {
+     "answer": "$3,040",
+     "correct": false
+    },
+    {
+     "answer": "$3,200",
+     "correct": false
+    },
+    {
+     "answer": "$3,100",
+     "correct": true
+    },
+    {
+     "answer": "$6,200",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0030",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Problems: lost items and feeling ill",
+   "question": "At an airport, a traveler says, \"My suitcase hasn't arrived on the baggage carousel.\" What problem are they reporting?",
+   "options": [
+    {
+     "answer": "Their checked luggage is missing.",
+     "correct": false
+    },
+    {
+     "answer": "Their cabin luggage is too heavy.",
+     "correct": false
+    },
+    {
+     "answer": "Their checked luggage is damaged.",
+     "correct": false
+    },
+    {
+     "answer": "Their cabin luggage is too large.",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0146",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "registered_nurse",
+   "level": "medium",
+   "topic": "Patient Assessment",
+   "subtopic": "Post-operative complications",
+   "question": "On the fifth day after open abdominal surgery, a patient coughs and the incision opens, exposing loops of bowel. Emergency surgical help has been summoned. What is the most appropriate immediate wound care?",
+   "options": [
+    {
+     "answer": "Cover the bowel with sterile saline-moistened dressings without pushing it back.",
+     "correct": false
+    },
+    {
+     "answer": "Push the bowel gently into the abdomen and secure the wound with tape.",
+     "correct": false
+    },
+    {
+     "answer": "Leave the bowel uncovered and cleanse it thoroughly with antiseptic solution.",
+     "correct": true
+    },
+    {
+     "answer": "Cover the bowel with dry sterile gauze and apply firm downward pressure.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0078",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Directions, transport and hotels",
+   "question": "You have a confirmed hotel reservation and have just arrived for your stay. You need to register and collect your room key. Where should you go first?",
+   "options": [
+    {
+     "answer": "To the reception desk to check in.",
+     "correct": false
+    },
+    {
+     "answer": "To the business center to book transport.",
+     "correct": false
+    },
+    {
+     "answer": "To the luggage room to check out.",
+     "correct": false
+    },
+    {
+     "answer": "To the restaurant to order dinner.",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0143",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "high_school_chemistry",
+   "level": "medium",
+   "topic": "Reactions",
+   "subtopic": "Acids, bases and pH",
+   "question": "At a temperature where pKw = 13.60, an aqueous solution has pH = 6.80. Assuming ideal behavior, how should the solution be classified?",
+   "options": [
+    {
+     "answer": "Acidic, because its pH is below 7.00.",
+     "correct": false
+    },
+    {
+     "answer": "Basic, because its pOH is below 7.00.",
+     "correct": true
+    },
+    {
+     "answer": "Neutral, because [H⁺] equals [OH⁻].",
+     "correct": false
+    },
+    {
+     "answer": "Acidic, because [H⁺] exceeds [OH⁻].",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0174",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "marketing_manager",
+   "level": "hard",
+   "topic": "Marketing Analytics",
+   "subtopic": "CAC payback and budget allocation",
+   "question": "A company must allocate one additional $10,000 acquisition block entirely to channel A or B. Historical average CAC payback is four months for A and eight months for B. However, the next block would generate $1,000 in monthly contribution in A or $2,000 in B, beginning in month one and remaining constant for six months. There are no other costs or spillovers. Which allocation maximizes incremental contribution minus acquisition spending over those six months?",
+   "options": [
+    {
+     "answer": "Channel A, producing a $4,000 net gain.",
+     "correct": true
+    },
+    {
+     "answer": "Channel B, producing a $2,500 net loss.",
+     "correct": false
+    },
+    {
+     "answer": "Channel A, producing a $5,000 net gain.",
+     "correct": false
+    },
+    {
+     "answer": "Channel B, producing a $2,000 net gain.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0046",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "PostgreSQL and SQL",
+   "subtopic": "Indexes and query plans",
+   "question": "In PostgreSQL 15, what does the final SELECT return when these statements run successfully in a fresh schema?\n```\nCREATE TABLE contacts (\n    email text UNIQUE\n);\nINSERT INTO contacts (email) VALUES (NULL);\nINSERT INTO contacts (email) VALUES (NULL);\nSELECT count(*) FROM contacts;\n```",
+   "options": [
+    {
+     "answer": "1",
+     "correct": true
+    },
+    {
+     "answer": "0",
+     "correct": false
+    },
+    {
+     "answer": "2",
+     "correct": false
+    },
+    {
+     "answer": "NULL",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0026",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Problems: lost items and feeling ill",
+   "question": "You are abroad and discover that your passport is missing. You have already checked your bags and contacted the places you visited. Which organization should you contact about an emergency travel document?",
+   "options": [
+    {
+     "answer": "Your country's embassy or consulate.",
+     "correct": false
+    },
+    {
+     "answer": "Your destination's tourist information office.",
+     "correct": false
+    },
+    {
+     "answer": "Your hotel's reception or concierge.",
+     "correct": true
+    },
+    {
+     "answer": "Your airline's ticket sales office.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0148",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "electrician_apprentice",
+   "level": "basic",
+   "topic": "Safety and Testing",
+   "subtopic": "Safe isolation and lock-off",
+   "question": "A suitable voltage indicator works on a proving unit before an isolated circuit is tested. It shows no voltage on the circuit, but fails the proving-unit check immediately afterward. What should the electrician do?",
+   "options": [
+    {
+     "answer": "Treat the dead test as invalid and repeat it with a proven indicator.",
+     "correct": false
+    },
+    {
+     "answer": "Begin work because a locked isolator guarantees that voltage is absent.",
+     "correct": false
+    },
+    {
+     "answer": "Unlock the isolator because the failed check proves the circuit is safe.",
+     "correct": true
+    },
+    {
+     "answer": "Treat the dead test as valid because the indicator worked beforehand.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0194",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "high_school_chemistry",
+   "level": "medium",
+   "topic": "Quantitative Chemistry",
+   "subtopic": "Solution concentration and titration",
+   "question": "A solution is prepared by dissolving 10.0 g of sodium chloride in 90.0 g of water. Its final volume is 95.0 mL. What is its sodium chloride concentration as a mass percentage?",
+   "options": [
+    {
+     "answer": "10.0% by mass",
+     "correct": false
+    },
+    {
+     "answer": "9.00% by mass",
+     "correct": false
+    },
+    {
+     "answer": "11.1% by mass",
+     "correct": false
+    },
+    {
+     "answer": "10.5% by mass",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0163",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "marketing_manager",
+   "level": "hard",
+   "topic": "Marketing Analytics",
+   "subtopic": "CAC payback and budget allocation",
+   "question": "In a randomized acquisition experiment, equally sized treatment and control groups produce 600 and 480 new customers, respectively. Only the treatment group receives advertising, costing $60,000; there are no other acquisition costs. The attribution platform credits 300 customers to advertising. Each incremental customer contributes $50 monthly from month one, with no churn. Using the experiment's point estimate of incremental customers, what is the advertising's CAC payback period?",
+   "options": [
+    {
+     "answer": "4 months.",
+     "correct": false
+    },
+    {
+     "answer": "10 months.",
+     "correct": false
+    },
+    {
+     "answer": "12 months.",
+     "correct": false
+    },
+    {
+     "answer": "2 months.",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0048",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "senior_accountant",
+   "level": "hard",
+   "topic": "Month-End Close",
+   "subtopic": "Bank and balance sheet reconciliations",
+   "question": "At month-end, the bank statement shows $120,000 and the cash ledger shows $115,000. Deposits in transit total $18,000 and outstanding checks total $25,000. The bank confirms an erroneous $4,000 debit that it will reverse. Unrecorded bank charges are $2,000, unrecorded interest earned is $1,000, and an $8,000 customer receipt was recorded as $5,000. What are the reconciled cash balance and the net adjustment required to the cash ledger?",
+   "options": [
+    {
+     "answer": "$121,000 balance; increase cash by $6,000.",
+     "correct": true
+    },
+    {
+     "answer": "$117,000 balance; decrease cash by $2,000.",
+     "correct": false
+    },
+    {
+     "answer": "$117,000 balance; increase cash by $2,000.",
+     "correct": false
+    },
+    {
+     "answer": "$113,000 balance; decrease cash by $2,000.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0095",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "project_manager",
+   "level": "medium",
+   "topic": "Stakeholders and Risk",
+   "subtopic": "Managing subcontractors and site meetings",
+   "question": "A site meeting records that the concrete subcontractor must provide a revised pour sequence, but no responsible person or deadline is recorded. At the next meeting, the sequence is still missing. Which change to the meeting record most directly addresses this failure?",
+   "options": [
+    {
+     "answer": "Record all attendees, the meeting duration, and the discussion sequence.",
+     "correct": true
+    },
+    {
+     "answer": "Record a named action owner, a due date, and a status review.",
+     "correct": false
+    },
+    {
+     "answer": "Record the agenda heading, the concern raised, and the previous minutes.",
+     "correct": false
+    },
+    {
+     "answer": "Record the subcontractor's staffing level, equipment list, and daily output.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0231",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "spanish_travel",
+   "level": "basic",
+   "topic": "Travel Situations",
+   "subtopic": "Directions, transport and hotels",
+   "question": "You ask for directions to a hotel. Someone says, \"Go straight past the bank, then take the second left.\" What should you do after passing the bank?",
+   "options": [
+    {
+     "answer": "Turn left at the second street on your left.",
+     "correct": false
+    },
+    {
+     "answer": "Turn left at the first street on your left.",
+     "correct": false
+    },
+    {
+     "answer": "Turn right at the second street on your right.",
+     "correct": false
+    },
+    {
+     "answer": "Turn back at the first street behind you.",
+     "correct": true
+    }
+   ],
+   "id": "trap-q0140",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "python_backend",
+   "level": "medium",
+   "topic": "Asynchronous Python",
+   "subtopic": "asyncio tasks and cancellation",
+   "question": "In Python 3.11, what does this program print after the worker catches the cancellation request and returns normally?\n```\nimport asyncio\n\nasync def worker(ready):\n    ready.set()\n    try:\n        await asyncio.Future()\n    except asyncio.CancelledError:\n        return 42\n\nasync def main():\n    ready = asyncio.Event()\n    task = asyncio.create_task(worker(ready))\n    await ready.wait()\n    task.cancel()\n    result = await task\n    print(result, task.cancelled())\n\nasyncio.run(main())\n```",
+   "options": [
+    {
+     "answer": "42 True",
+     "correct": false
+    },
+    {
+     "answer": "None False",
+     "correct": false
+    },
+    {
+     "answer": "None True",
+     "correct": true
+    },
+    {
+     "answer": "42 False",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0016",
+   "expected_key_correct": false
+  },
+  {
+   "domain": "project_manager",
+   "level": "medium",
+   "topic": "Planning and Scheduling",
+   "subtopic": "Critical path and float",
+   "question": "A project has two independent paths: A followed by B, and C followed by D. Both paths must finish to complete the project. A takes 4 days, B takes 6 days, C takes 5 days, and D takes 5 days. With no resource limits or imposed dates, which duration reduction shortens the project by exactly 1 day?",
+   "options": [
+    {
+     "answer": "Reduce A and B by 1 day each.",
+     "correct": false
+    },
+    {
+     "answer": "Reduce A and C by 1 day each.",
+     "correct": false
+    },
+    {
+     "answer": "Reduce only C by 2 full days.",
+     "correct": true
+    },
+    {
+     "answer": "Reduce only A by 2 full days.",
+     "correct": false
+    }
+   ],
+   "id": "trap-q0214",
+   "expected_key_correct": false
+  }
+ ]
+}

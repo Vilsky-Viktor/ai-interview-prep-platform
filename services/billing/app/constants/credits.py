@@ -5,7 +5,7 @@ CANDIDATE_CREDITS = 400
 CERTIFICATE_CREDITS = 100
 AUTHOR_SHARE_CREDITS = 20
 # A tutor turn after the free ones on a question.
-CHAT_TURN_CREDITS = 1
+CHAT_TURN_CREDITS = 2
 # A new learner gets one free kit and 100 credits; a new company its first 3 candidates.
 WELCOME_USER = 100
 WELCOME_USER_KITS = 1
