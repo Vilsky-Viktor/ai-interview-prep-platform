@@ -1,5 +1,5 @@
-# The FAQ in fr; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in fr; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "Combien ça coûte ?",
         "answer": "Vous payez à l'usage, avec des crédits. Un nouveau kit coûte {kit} crédits. Votre premier kit est gratuit, avec jusqu'à {free_topics} sujets, et chaque nouveau compte reçoit aussi {welcome} crédits gratuits. La page des tarifs indique tous les prix.",
+    },
+    {
+        "key": "compare",
+        "question": "Est-ce moins cher qu'un abonnement ?",
+        "answer": "Pour préparer un entretien, en général oui. Un kit pour un poste coûte {kit} crédits ({kit_dollars} $) une seule fois et reste à vous, sans rien à résilier. Les applis de préparation aux entretiens qui créent des exercices à partir d'une offre d'emploi coûtent souvent 25–40 $ par mois, soit 75–100 $ pour trois mois de préparation. Si vous préparez plusieurs nouveaux sujets chaque mois, un abonnement peut revenir moins cher.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "Comment recruter avec prepza ?",
         "answer": "Créez une entreprise, générez un entretien à partir d'une offre d'emploi et invitez les candidats par e-mail. Chaque candidat coûte {candidate} crédits, débités seulement quand il termine l'entretien, et une nouvelle entreprise reçoit {company} crédits offerts.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Comment le prix se compare-t-il aux autres outils d'évaluation ?",
+        "answer": "La plupart des plateformes d'évaluation coûtent 100–215 $ par mois en formule annuelle, ou 7–20 $ par candidat. Avec prepza, un candidat coûte {candidate} crédits ({candidate_dollars} $), sans contrat, sans frais par utilisateur et sans rien à payer pour générer un entretien. Une entreprise qui invite {example_candidates} candidats par mois paie environ {example_year_dollars} $ par an, contre 1 200–2 580 $ pour une formule annuelle. À partir d'environ 40 candidats par mois, certaines formules illimitées coûtent moins cher.",
     },
     {
         "key": "scorecards",

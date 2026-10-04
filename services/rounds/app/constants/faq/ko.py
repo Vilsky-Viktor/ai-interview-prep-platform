@@ -1,5 +1,5 @@
-# The FAQ in ko; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in ko; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "비용은 얼마인가요?",
         "answer": "크레딧으로 사용한 만큼 결제합니다. 새 키트는 {kit} 크레딧입니다. 첫 키트는 무료이며 주제는 최대 {free_topics}개이고, 새 계정마다 {welcome} 무료 크레딧도 드립니다. 모든 가격은 가격 페이지에서 확인할 수 있습니다.",
+    },
+    {
+        "key": "compare",
+        "question": "구독보다 저렴한가요?",
+        "answer": "면접 준비라면 대개 그렇습니다. 한 직무용 키트는 {kit} 크레딧({kit_dollars}달러)을 한 번만 내면 계속 내 것이 되고, 해지할 것도 없습니다. 채용 공고로 연습 문제를 만드는 면접 준비 앱은 보통 월 25~40달러라서, 3개월 준비하면 75~100달러가 듭니다. 매달 여러 새로운 주제를 준비한다면 구독이 더 저렴할 수 있습니다.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "prepza로 채용은 어떻게 하나요?",
         "answer": "회사를 만들고, 채용 공고로 면접을 생성하고, 지원자를 이메일로 초대하세요. 지원자 한 명당 {candidate} 크레딧이며 면접을 마칠 때만 차감되고, 새 회사에는 무료 크레딧 {company}개를 드립니다.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "다른 평가 도구와 비교하면 가격이 어떤가요?",
+        "answer": "대부분의 평가 플랫폼은 연간 요금제로 월 100~215달러, 또는 지원자당 7~20달러입니다. prepza에서는 지원자 한 명당 {candidate} 크레딧({candidate_dollars}달러)이며, 계약도, 사용자별 요금도, 면접 생성 비용도 없습니다. 매달 지원자 {example_candidates}명을 초대하는 회사는 1년에 약 {example_year_dollars}달러를 내며, 연간 요금제는 1,200~2,580달러입니다. 매달 지원자가 40명 정도를 넘으면 일부 무제한 요금제가 더 저렴할 수 있습니다.",
     },
     {
         "key": "scorecards",

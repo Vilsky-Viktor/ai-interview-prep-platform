@@ -1,5 +1,5 @@
-# The FAQ in ja; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in ja; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "料金はいくらですか？",
         "answer": "クレジットによる従量課金です。新しいキットは {kit} クレジットです。最初のキットは無料で、トピックは最大 {free_topics} 件です。さらに新しいアカウントには {welcome} 無料クレジットが付きます。すべての料金は料金ページで確認できます。",
+    },
+    {
+        "key": "compare",
+        "question": "サブスクリプションより安いですか？",
+        "answer": "面接対策なら、たいていは安くなります。1つの職種のキットは {kit} クレジット（{kit_dollars} ドル）の1回払いで、そのまま手元に残り、解約の手続きもありません。求人票から練習問題を作る面接対策アプリは月25〜40ドルが一般的で、3か月の準備で75〜100ドルかかります。毎月いくつもの新しい分野を学ぶなら、サブスクリプションのほうが安くなることもあります。",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "prepza での採用はどう進めますか？",
         "answer": "会社を作成し、求人票から面接を作り、候補者をメールで招待します。候補者1人あたり {candidate} クレジットで、面接を終えたときにだけ差し引かれます。新しい会社には {company} 無料クレジットが付きます。",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "ほかの適性検査ツールと比べて料金はどうですか？",
+        "answer": "多くの適性検査プラットフォームは年間プランで月100〜215ドル、または候補者1人あたり7〜20ドルです。prepzaでは候補者1人あたり {candidate} クレジット（{candidate_dollars} ドル）で、契約もユーザーごとの料金も、面接の作成費用もかかりません。月に{example_candidates}人を招待する会社なら年間約{example_year_dollars}ドルで、年間プランの1,200〜2,580ドルを大きく下回ります。月40人前後を超えると、無制限プランのほうが安い場合もあります。",
     },
     {
         "key": "scorecards",

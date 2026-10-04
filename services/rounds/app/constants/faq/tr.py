@@ -1,5 +1,5 @@
-# The FAQ in tr; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in tr; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "Ücreti ne kadar?",
         "answer": "Kullandıkça kredilerle ödersiniz. Yeni bir set {kit} kredi tutar. İlk setiniz ücretsizdir, en fazla {free_topics} konuyla, ve her yeni hesap ayrıca {welcome} ücretsiz kredi alır. Fiyatlar sayfasında tüm fiyatlar yer alır.",
+    },
+    {
+        "key": "compare",
+        "question": "Abonelikten daha ucuz mu?",
+        "answer": "Mülakata hazırlık için genellikle evet. Bir pozisyon için set bir kez {kit} kredi ({kit_dollars} $) tutar ve sizde kalır; iptal edilecek bir şey yoktur. İş ilanından alıştırma hazırlayan mülakat hazırlık uygulamaları genellikle ayda 25–40 $ tutar, yani üç aylık hazırlık 75–100 $ eder. Her ay birkaç yeni konuya hazırlanıyorsanız abonelik daha ucuza gelebilir.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "prepza ile işe alım nasıl çalışır?",
         "answer": "Bir şirket oluşturun, bir iş ilanından mülakat oluşturun ve adayları e-postayla davet edin. Her aday {candidate} krediye mal olur ve bu yalnızca aday mülakatı bitirdiğinde düşülür; yeni bir şirket {company} ücretsiz kredi alır.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Fiyat diğer değerlendirme araçlarıyla nasıl karşılaştırılır?",
+        "answer": "Değerlendirme platformlarının çoğu yıllık planda ayda 100–215 $ ya da aday başına 7–20 $ tutar. prepza'da bir aday {candidate} kredi ({candidate_dollars} $) tutar; sözleşme, kullanıcı başı ücret ve mülakat oluşturma ücreti yoktur. Ayda {example_candidates} aday davet eden bir şirket yılda yaklaşık {example_year_dollars} $ öder; yıllık bir plan ise 1.200–2.580 $ tutar. Ayda yaklaşık 40 adaydan itibaren bazı sınırsız planlar daha ucuz olabilir.",
     },
     {
         "key": "scorecards",

@@ -1,5 +1,5 @@
-# The FAQ in pt; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in pt; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "Quanto custa?",
         "answer": "Você paga conforme usa, com créditos. Um kit novo custa {kit} créditos. Seu primeiro kit é grátis, com até {free_topics} tópicos, e cada conta nova também recebe {welcome} créditos grátis. A página de preços mostra todos os preços.",
+    },
+    {
+        "key": "compare",
+        "question": "É mais barato que uma assinatura?",
+        "answer": "Para se preparar para uma entrevista, geralmente sim. Um kit para uma vaga custa {kit} créditos (US$ {kit_dollars}) uma única vez e continua seu, sem nada para cancelar. Apps de preparação para entrevistas que criam prática a partir de uma descrição de vaga costumam custar US$ 25–40 por mês, então três meses de preparação saem por US$ 75–100. Se você se prepara para vários assuntos novos todo mês, uma assinatura pode sair mais barata.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "Como funciona a contratação com o prepza?",
         "answer": "Crie uma empresa, gere uma entrevista a partir de uma descrição de vaga e convide candidatos por e-mail. Cada candidato custa {candidate} créditos, cobrados só quando ele termina a entrevista, e uma empresa nova recebe {company} créditos grátis.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Como o preço se compara a outras ferramentas de avaliação?",
+        "answer": "A maioria das plataformas de avaliação custa US$ 100–215 por mês no plano anual, ou US$ 7–20 por candidato. No prepza, um candidato custa {candidate} créditos (US$ {candidate_dollars}), sem contrato, sem taxa por usuário e sem pagar para gerar uma entrevista. Uma empresa que convida {example_candidates} candidatos por mês paga cerca de US$ {example_year_dollars} por ano, contra US$ 1.200–2.580 de um plano anual. A partir de cerca de 40 candidatos por mês, alguns planos ilimitados custam menos.",
     },
     {
         "key": "scorecards",

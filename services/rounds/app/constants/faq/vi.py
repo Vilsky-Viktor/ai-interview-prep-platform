@@ -1,5 +1,5 @@
-# The FAQ in vi; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in vi; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "Chi phí là bao nhiêu?",
         "answer": "Bạn trả theo mức dùng, bằng tín dụng. Một bộ ôn luyện mới có giá {kit} tín dụng. Bộ đầu tiên của bạn miễn phí, với tối đa {free_topics} chủ đề, và mỗi tài khoản mới còn nhận {welcome} tín dụng miễn phí. Trang giá liệt kê mọi mức giá.",
+    },
+    {
+        "key": "compare",
+        "question": "Có rẻ hơn gói đăng ký không?",
+        "answer": "Với việc chuẩn bị phỏng vấn thì thường là có. Một bộ ôn luyện cho một vị trí có giá {kit} tín dụng ({kit_dollars} $), trả một lần và thuộc về bạn, không có gì phải hủy. Các ứng dụng luyện phỏng vấn tạo bài luyện từ mô tả công việc thường có giá 25–40 $ mỗi tháng, nên ba tháng chuẩn bị tốn 75–100 $. Nếu mỗi tháng bạn ôn nhiều chủ đề mới, gói đăng ký có thể rẻ hơn.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "Tuyển dụng với prepza diễn ra thế nào?",
         "answer": "Tạo công ty, tạo buổi phỏng vấn từ mô tả công việc và mời ứng viên qua email. Mỗi ứng viên tốn {candidate} tín dụng, chỉ bị trừ khi họ hoàn thành phỏng vấn, và công ty mới nhận {company} tín dụng miễn phí.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Giá so với các công cụ đánh giá khác thế nào?",
+        "answer": "Phần lớn nền tảng đánh giá có giá 100–215 $ mỗi tháng theo gói năm, hoặc 7–20 $ mỗi ứng viên. Với prepza, mỗi ứng viên tốn {candidate} tín dụng ({candidate_dollars} $), không hợp đồng, không phí theo người dùng và không tốn phí tạo buổi phỏng vấn. Một công ty mời {example_candidates} ứng viên mỗi tháng trả khoảng {example_year_dollars} $ mỗi năm, so với 1.200–2.580 $ cho một gói năm. Từ khoảng 40 ứng viên mỗi tháng, một số gói không giới hạn có thể rẻ hơn.",
     },
     {
         "key": "scorecards",

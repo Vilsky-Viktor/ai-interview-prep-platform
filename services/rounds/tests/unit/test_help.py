@@ -52,6 +52,17 @@ def test_faq_comes_in_the_page_language_with_todays_prices(client, monkeypatch):
     assert "500" in cost["answer"] and "{" not in cost["answer"]
 
 
+def test_faq_compares_prices_in_dollars_from_billing(client, monkeypatch):
+    monkeypatch.setattr("app.routers.help.billing.catalog", fake_catalog(CATALOG))
+
+    items = {item["key"]: item["answer"] for item in client.get("/help/faq").json()}
+
+    # 500 credits a kit is $5; 300 a candidate is $3, and 5 candidates a month are $180 a year.
+    assert "500 credits ($5)" in items["compare"]
+    assert "300 credits ($3)" in items["compare_hiring"]
+    assert "$180 a year" in items["compare_hiring"]
+
+
 def test_faq_still_shows_when_billing_is_down(client, monkeypatch):
     monkeypatch.setattr("app.routers.help.billing.catalog", fake_catalog(None))
 

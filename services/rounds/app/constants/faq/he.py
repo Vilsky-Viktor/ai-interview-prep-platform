@@ -1,5 +1,5 @@
-# The FAQ in he; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in he; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "כמה זה עולה?",
         "answer": "משלמים לפי שימוש, בקרדיטים. ערכה חדשה עולה {kit} קרדיטים. הערכה הראשונה שלכם בחינם, עם עד {free_topics} נושאים, וכל חשבון חדש מקבל גם {welcome} קרדיטים בחינם. בדף המחירים מופיעים כל המחירים.",
+    },
+    {
+        "key": "compare",
+        "question": "זה זול יותר ממנוי?",
+        "answer": "להכנה לראיון עבודה, בדרך כלל כן. ערכה לתפקיד אחד עולה {kit} קרדיטים ({kit_dollars} דולר) פעם אחת ונשארת שלכם, בלי מנוי לבטל. אפליקציות הכנה לראיונות שבונות תרגול מתיאור משרה עולות בדרך כלל 25–40 דולר לחודש, כך ששלושה חודשי הכנה עולים 75–100 דולר. אם אתם מתכוננים לכמה נושאים חדשים בכל חודש, מנוי עשוי לצאת זול יותר.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "איך עובד גיוס עם prepza?",
         "answer": "צרו חברה, צרו ראיון מתיאור משרה והזמינו מועמדים במייל. כל מועמד עולה {candidate} קרדיטים, שמחויבים רק כשהוא מסיים את הראיון, וחברה חדשה מקבלת {company} קרדיטים חינם.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "איך המחיר בהשוואה לכלי הערכה אחרים?",
+        "answer": "רוב פלטפורמות ההערכה עולות 100–215 דולר לחודש בתוכנית שנתית, או 7–20 דולר למועמד. ב-prepza מועמד עולה {candidate} קרדיטים ({candidate_dollars} דולר), בלי חוזה, בלי תשלום לפי משתמש ובלי תשלום על יצירת ראיון. חברה שמזמינה {example_candidates} מועמדים בחודש משלמת כ-{example_year_dollars} דולר בשנה, לעומת 1,200–2,580 דולר לתוכנית שנתית. מכ-40 מועמדים בחודש, חלק מהתוכניות ללא הגבלה עשויות לעלות פחות.",
     },
     {
         "key": "scorecards",

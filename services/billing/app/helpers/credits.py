@@ -1,4 +1,6 @@
-from app.constants.products import BONUS_TIERS, CREDITS_PER_DOLLAR
+from prepza_common.constants import CREDITS_PER_DOLLAR
+
+from app.constants.products import BONUS_TIERS
 
 
 def credits_for(price_cents: int) -> int:

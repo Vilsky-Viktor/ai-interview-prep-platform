@@ -1,5 +1,5 @@
-# The FAQ in en; {kit}, {free_topics}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in en; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "How much does it cost?",
         "answer": "You pay as you go with credits. A new kit costs {kit} credits. Your first kit is free, with up to {free_topics} topics, and every new account also gets {welcome} free credits. The pricing page lists every price.",
+    },
+    {
+        "key": "compare",
+        "question": "Is it cheaper than a subscription?",
+        "answer": "For interview preparation, usually yes. A kit for one role costs {kit} credits (${kit_dollars}) once, and it stays yours, with nothing to cancel. Interview prep apps that build practice from a job description usually cost $25–40 a month, so three months of preparation comes to $75–100. If you prepare for several new subjects every month, a subscription can come out cheaper.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "How does hiring with prepza work?",
         "answer": "Create a company, generate an interview from a job description, and invite candidates by email. Each candidate costs {candidate} credits, charged only when they finish the interview, and a new company gets {company} free credits.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "How does the price compare with other assessment tools?",
+        "answer": "Most assessment platforms cost $100–215 a month on an annual plan, or $7–20 per candidate. With prepza a candidate costs {candidate} credits (${candidate_dollars}), with no contract, no seat fees and nothing to pay for generating an interview. A company inviting {example_candidates} candidates a month pays about ${example_year_dollars} a year, against $1,200–2,580 for an annual plan. From about 40 candidates a month, some unlimited plans cost less.",
     },
     {
         "key": "scorecards",

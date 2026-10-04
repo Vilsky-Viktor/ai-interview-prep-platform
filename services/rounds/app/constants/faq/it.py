@@ -1,5 +1,5 @@
-# The FAQ in it; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in it; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "Quanto costa?",
         "answer": "Paghi a consumo, con i crediti. Un nuovo kit costa {kit} crediti. Il tuo primo kit è gratuito, con fino a {free_topics} argomenti, e ogni nuovo account riceve anche {welcome} crediti gratuiti. La pagina dei prezzi elenca tutti i prezzi.",
+    },
+    {
+        "key": "compare",
+        "question": "Costa meno di un abbonamento?",
+        "answer": "Per prepararti a un colloquio, di solito sì. Un kit per un ruolo costa {kit} crediti ({kit_dollars} $) una sola volta e resta tuo, senza nulla da disdire. Le app di preparazione ai colloqui che creano esercizi da un annuncio di lavoro costano in genere 25–40 $ al mese, quindi tre mesi di preparazione costano 75–100 $. Se ogni mese ti prepari su diversi argomenti nuovi, un abbonamento può costare meno.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "Come funziona l’assunzione con prepza?",
         "answer": "Crea un’azienda, genera un colloquio da un annuncio di lavoro e invita i candidati via email. Ogni candidato costa {candidate} crediti, addebitati solo quando completa il colloquio, e una nuova azienda riceve {company} crediti gratuiti.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Com’è il prezzo rispetto ad altri strumenti di valutazione?",
+        "answer": "La maggior parte delle piattaforme di valutazione costa 100–215 $ al mese con piano annuale, oppure 7–20 $ per candidato. Con prepza un candidato costa {candidate} crediti ({candidate_dollars} $), senza contratto, senza costi per utente e senza pagare per generare un colloquio. Un’azienda che invita {example_candidates} candidati al mese paga circa {example_year_dollars} $ all’anno, contro 1.200–2.580 $ di un piano annuale. Da circa 40 candidati al mese, alcuni piani illimitati costano meno.",
     },
     {
         "key": "scorecards",

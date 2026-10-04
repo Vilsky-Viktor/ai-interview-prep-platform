@@ -1,5 +1,5 @@
-# The FAQ in nl; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in nl; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "Wat kost het?",
         "answer": "Je betaalt naar gebruik, met credits. Een nieuwe kit kost {kit} credits. Je eerste kit is gratis, met maximaal {free_topics} onderwerpen, en elk nieuw account krijgt ook {welcome} gratis credits. De prijspagina toont alle prijzen.",
+    },
+    {
+        "key": "compare",
+        "question": "Is het goedkoper dan een abonnement?",
+        "answer": "Voor de voorbereiding op een sollicitatiegesprek meestal wel. Een kit voor één functie kost eenmalig {kit} credits ({kit_dollars} $) en blijft van jou, zonder iets op te zeggen. Apps voor sollicitatievoorbereiding die oefeningen maken van een vacaturetekst kosten meestal 25–40 $ per maand, dus drie maanden voorbereiding kost 75–100 $. Bereid je je elke maand voor op meerdere nieuwe onderwerpen, dan kan een abonnement goedkoper uitvallen.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "Hoe werkt werven met prepza?",
         "answer": "Maak een bedrijf aan, maak een sollicitatiegesprek van een vacaturetekst en nodig kandidaten uit per e-mail. Elke kandidaat kost {candidate} credits, die pas worden afgeschreven als hij het gesprek afrondt, en een nieuw bedrijf krijgt {company} gratis credits.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Hoe verhoudt de prijs zich tot andere assessmenttools?",
+        "answer": "De meeste assessmentplatforms kosten 100–215 $ per maand met een jaarabonnement, of 7–20 $ per kandidaat. Bij prepza kost een kandidaat {candidate} credits ({candidate_dollars} $), zonder contract, zonder kosten per gebruiker en zonder te betalen voor het maken van een gesprek. Een bedrijf dat {example_candidates} kandidaten per maand uitnodigt, betaalt ongeveer {example_year_dollars} $ per jaar, tegenover 1.200–2.580 $ voor een jaarabonnement. Vanaf ongeveer 40 kandidaten per maand zijn sommige onbeperkte abonnementen goedkoper.",
     },
     {
         "key": "scorecards",

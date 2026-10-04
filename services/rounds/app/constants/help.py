@@ -20,3 +20,6 @@ MAX_HELP_MESSAGES = 200
 HELP_HISTORY_MESSAGES = 10
 LAST_NOT_QUESTION = "The conversation must end with a question."
 QUESTION_TOO_LONG = "The question is too long."
+
+# The FAQ's example of a small company's hiring, in candidates a month, priced over a year.
+FAQ_EXAMPLE_CANDIDATES = 5

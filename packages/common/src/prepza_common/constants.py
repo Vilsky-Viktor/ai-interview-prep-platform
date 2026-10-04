@@ -86,6 +86,8 @@ MAX_OWNED_COMPANIES = 3
 # keeps up to generation's MAX_TOPICS).
 FREE_KIT_TOPICS = 3
 INTERVIEWS_PER_DAY = 10
+# $1 buys this many credits (billing sells them; the FAQ shows prices in dollars too).
+CREDITS_PER_DOLLAR = 100
 # Generating an interview is free and paid for by its candidates: a company can have only this many
 # interviews waiting without one before it generates another.
 MAX_INTERVIEWS_WITHOUT_CANDIDATES = 3

@@ -1,5 +1,5 @@
-# The FAQ in id; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in id; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "Berapa biayanya?",
         "answer": "Kamu bayar sesuai pemakaian, dengan kredit. Kit baru seharga {kit} kredit. Kit pertamamu gratis, dengan hingga {free_topics} topik, dan setiap akun baru juga mendapat {welcome} kredit gratis. Halaman harga mencantumkan semua harga.",
+    },
+    {
+        "key": "compare",
+        "question": "Apakah lebih murah daripada langganan?",
+        "answer": "Untuk persiapan wawancara, biasanya ya. Kit untuk satu posisi seharga {kit} kredit (${kit_dollars}) sekali bayar dan tetap jadi milikmu, tanpa ada yang perlu dibatalkan. Aplikasi persiapan wawancara yang membuat latihan dari deskripsi pekerjaan biasanya $25–40 per bulan, jadi tiga bulan persiapan menghabiskan $75–100. Kalau setiap bulan kamu belajar beberapa topik baru, langganan bisa lebih murah.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "Bagaimana merekrut dengan prepza?",
         "answer": "Buat perusahaan, buat wawancara dari deskripsi pekerjaan, dan undang kandidat lewat email. Setiap kandidat seharga {candidate} kredit, yang hanya dipotong saat kandidat menyelesaikan wawancara, dan perusahaan baru mendapat {company} kredit gratis.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Bagaimana harganya dibanding alat asesmen lain?",
+        "answer": "Kebanyakan platform asesmen seharga $100–215 per bulan dengan paket tahunan, atau $7–20 per kandidat. Di prepza, satu kandidat seharga {candidate} kredit (${candidate_dollars}), tanpa kontrak, tanpa biaya per pengguna, dan tanpa biaya untuk membuat wawancara. Perusahaan yang mengundang {example_candidates} kandidat per bulan membayar sekitar ${example_year_dollars} per tahun, dibanding $1.200–2.580 untuk paket tahunan. Mulai sekitar 40 kandidat per bulan, beberapa paket tanpa batas bisa lebih murah.",
     },
     {
         "key": "scorecards",

@@ -1,5 +1,5 @@
-# The FAQ in de; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in de; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "Was kostet es?",
         "answer": "Du zahlst nach Nutzung, mit Credits. Ein neues Kit kostet {kit} Credits. Dein erstes Kit ist kostenlos, mit bis zu {free_topics} Themen, und jedes neue Konto bekommt zusätzlich {welcome} Gratis-Credits. Die Preisseite listet alle Preise.",
+    },
+    {
+        "key": "compare",
+        "question": "Ist das günstiger als ein Abo?",
+        "answer": "Für die Vorbereitung auf ein Vorstellungsgespräch meistens ja. Ein Kit für eine Stelle kostet einmalig {kit} Credits ({kit_dollars} $) und gehört danach dir, ohne dass du etwas kündigen musst. Apps zur Interviewvorbereitung, die aus einer Stellenbeschreibung Übungen erstellen, kosten meist 25–40 $ im Monat, drei Monate Vorbereitung also 75–100 $. Wenn du dich jeden Monat auf mehrere neue Themen vorbereitest, kann ein Abo günstiger sein.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "Wie funktioniert Recruiting mit prepza?",
         "answer": "Leg ein Unternehmen an, erstelle ein Interview aus einer Stellenbeschreibung und lade Kandidaten per E-Mail ein. Jeder Kandidat kostet {candidate} Credits, die erst abgebucht werden, wenn er das Interview beendet, und ein neues Unternehmen bekommt {company} Gratis-Credits.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Wie ist der Preis im Vergleich zu anderen Testplattformen?",
+        "answer": "Die meisten Plattformen für Eignungstests kosten 100–215 $ im Monat im Jahresabo oder 7–20 $ pro Kandidat. Bei prepza kostet ein Kandidat {candidate} Credits ({candidate_dollars} $), ohne Vertrag, ohne Gebühren pro Nutzer und ohne Kosten für das Erstellen eines Interviews. Ein Unternehmen, das {example_candidates} Kandidaten im Monat einlädt, zahlt etwa {example_year_dollars} $ im Jahr, gegenüber 1.200–2.580 $ für ein Jahresabo. Ab etwa 40 Kandidaten im Monat können manche Flatrates günstiger sein.",
     },
     {
         "key": "scorecards",

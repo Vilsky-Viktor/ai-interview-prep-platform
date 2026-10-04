@@ -1,5 +1,5 @@
-# The FAQ in et; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in et; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "Kui palju see maksab?",
         "answer": "Maksad kasutuse järgi, krediidiga. Uus komplekt maksab {kit} krediiti. Sinu esimene komplekt on tasuta, kuni {free_topics} teemaga, ja iga uus konto saab lisaks {welcome} tasuta krediiti. Hinnakirja lehel on kõik hinnad.",
+    },
+    {
+        "key": "compare",
+        "question": "Kas see on odavam kui tellimus?",
+        "answer": "Tööintervjuuks valmistumisel tavaliselt jah. Ühe ametikoha komplekt maksab ühe korra {kit} krediiti ({kit_dollars} $) ja jääb sulle, midagi pole vaja tühistada. Intervjuuks valmistumise rakendused, mis koostavad harjutused töökuulutuse põhjal, maksavad tavaliselt 25–40 $ kuus, nii et kolm kuud valmistumist maksab 75–100 $. Kui valmistud igal kuul mitmeks uueks teemaks, võib tellimus tulla odavam.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "Kuidas prepzaga värbamine käib?",
         "answer": "Loo ettevõte, koosta töökuulutusest intervjuu ja kutsu kandidaadid e-postiga. Iga kandidaat maksab {candidate} krediiti, mis võetakse alles siis, kui ta intervjuu lõpetab, ja uus ettevõte saab {company} tasuta krediiti.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Kuidas hind teiste hindamistööriistadega võrreldes on?",
+        "answer": "Enamik hindamisplatvorme maksab aastaplaaniga 100–215 $ kuus või 7–20 $ kandidaadi kohta. prepzas maksab kandidaat {candidate} krediiti ({candidate_dollars} $), ilma lepingu, kasutajatasude ja intervjuu koostamise tasuta. Ettevõte, kes kutsub {example_candidates} kandidaati kuus, maksab umbes {example_year_dollars} $ aastas, aastaplaani 1 200–2 580 $ asemel. Alates umbes 40 kandidaadist kuus võivad mõned piiramatud plaanid olla odavamad.",
     },
     {
         "key": "scorecards",

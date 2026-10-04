@@ -1,5 +1,5 @@
-# The FAQ in zh; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in zh; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "收费多少？",
         "answer": "按使用付费，使用点数。新学习包需要 {kit} 点数。你的第一个学习包免费，最多 {free_topics} 个主题，每个新账号还会获得 {welcome} 免费点数。价格页面列出了所有价格。",
+    },
+    {
+        "key": "compare",
+        "question": "比订阅更便宜吗？",
+        "answer": "如果是准备面试，通常是的。一个职位的学习包只需一次性支付 {kit} 点数（{kit_dollars} 美元），之后一直归你，无需取消任何订阅。根据职位描述生成练习的面试准备应用通常每月 25–40 美元，准备三个月就要 75–100 美元。如果你每个月都要准备好几个新主题，订阅可能更划算。",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "用 prepza 招聘是怎样的？",
         "answer": "创建公司，根据职位描述生成面试，并通过邮件邀请候选人。每位候选人 {candidate} 点数，只在其完成面试时扣除，新公司获赠 {company} 免费点数。",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "和其他测评工具相比，价格如何？",
+        "answer": "大多数测评平台按年付费每月 100–215 美元，或每位候选人 7–20 美元。在 prepza，每位候选人 {candidate} 点数（{candidate_dollars} 美元），无需签约，不按用户收费，生成面试也不收费。每月邀请 {example_candidates} 位候选人的公司每年约支付 {example_year_dollars} 美元，而年度套餐需要 1,200–2,580 美元。每月超过约 40 位候选人时，一些不限量套餐可能更便宜。",
     },
     {
         "key": "scorecards",

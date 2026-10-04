@@ -1,5 +1,5 @@
-# The FAQ in fil; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
-# helpers/help.py with billing's prices and the number of languages.
+# The FAQ in fil; the {placeholders} are filled in by helpers/help.py (faq_values) with
+# billing's prices and the number of languages.
 FAQ = [
     {
         "key": "different",
@@ -20,6 +20,11 @@ FAQ = [
         "key": "cost",
         "question": "Magkano ito?",
         "answer": "Magbabayad ka ayon sa paggamit, gamit ang credits. Ang bagong kit ay {kit} credits. Libre ang una mong kit, hanggang {free_topics} topic, at bawat bagong account ay may {welcome} libreng credits din. Nasa pricing page ang lahat ng presyo.",
+    },
+    {
+        "key": "compare",
+        "question": "Mas mura ba ito kaysa sa subscription?",
+        "answer": "Para sa paghahanda sa interview, kadalasan oo. Ang kit para sa isang posisyon ay {kit} credits (${kit_dollars}) nang isang beses at sa iyo na ito, walang kailangang i-cancel. Ang mga interview prep app na gumagawa ng practice mula sa job description ay karaniwang $25–40 kada buwan, kaya ang tatlong buwang paghahanda ay $75–100. Kung naghahanda ka sa ilang bagong paksa bawat buwan, puwedeng mas mura ang subscription.",
     },
     {
         "key": "expire",
@@ -55,6 +60,11 @@ FAQ = [
         "key": "hiring",
         "question": "Paano gumagana ang hiring sa prepza?",
         "answer": "Gumawa ng kompanya, gumawa ng interview mula sa job description, at imbitahan ang mga kandidato sa email. Nagkakahalaga ng {candidate} credits ang bawat kandidato, na sinisingil lang kapag natapos nila ang interview, at nakakakuha ang bagong kompanya ng {company} libreng credits.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Paano ihahambing ang presyo sa ibang assessment tool?",
+        "answer": "Karamihan sa mga assessment platform ay $100–215 kada buwan sa annual plan, o $7–20 bawat kandidato. Sa prepza, ang isang kandidato ay {candidate} credits (${candidate_dollars}), walang kontrata, walang bayad kada user, at walang bayad sa paggawa ng interview. Ang kompanyang nag-iimbita ng {example_candidates} kandidato kada buwan ay nagbabayad ng mga ${example_year_dollars} kada taon, kumpara sa $1,200–2,580 para sa annual plan. Mula mga 40 kandidato kada buwan, may ilang unlimited plan na mas mura.",
     },
     {
         "key": "scorecards",

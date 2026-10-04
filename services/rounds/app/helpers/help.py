@@ -1,6 +1,7 @@
 import json
 
 from prepza_common.constants import (
+    CREDITS_PER_DOLLAR,
     DEFAULT_QUESTION_SECONDS,
     FREE_KIT_TOPICS,
     INTERVIEWS_PER_DAY,
@@ -10,6 +11,7 @@ from prepza_common.constants import (
     MAX_SHARES,
 )
 
+from app.constants.help import FAQ_EXAMPLE_CANDIDATES
 from app.constants.rounds import PUBLIC_TOPICS_PER_DAY
 from app.prompts.help import PLATFORM_GUIDE
 
@@ -31,16 +33,29 @@ def guide() -> str:
     )
 
 
+def dollars(credits: int | str) -> str:
+    """A price in credits as whole dollars ("8"), or empty when billing didn't answer."""
+    if credits == "":
+        return ""
+
+    return f"{credits / CREDITS_PER_DOLLAR:g}"
+
+
 def faq_values(catalog: dict | None) -> dict:
     """What the FAQ's answers name: prices from billing, and the number of languages."""
     prices = catalog or {}
+    candidate = prices.get("candidate_credits", "")
 
     return {
         "count": len(LANGUAGES),
         "kit": prices.get("kit_credits", ""),
+        "kit_dollars": dollars(prices.get("kit_credits", "")),
         "welcome": prices.get("welcome_user", ""),
         "free_topics": FREE_KIT_TOPICS,
-        "candidate": prices.get("candidate_credits", ""),
+        "candidate": candidate,
+        "candidate_dollars": dollars(candidate),
+        "example_candidates": FAQ_EXAMPLE_CANDIDATES,
+        "example_year_dollars": dollars(candidate * FAQ_EXAMPLE_CANDIDATES * 12 if candidate else ""),
         "company": prices.get("welcome_company", ""),
     }
 

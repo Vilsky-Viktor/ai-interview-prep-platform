@@ -30,8 +30,8 @@ CUSTOM_TOP_UP = "topup_custom"
 CUSTOM_MIN_DOLLARS = 10
 CUSTOM_MAX_DOLLARS = 500
 
-# $1 buys 100 credits, plus a bonus percent from these amounts up (in cents), largest first.
-CREDITS_PER_DOLLAR = 100
+# $1 buys CREDITS_PER_DOLLAR credits, plus a bonus percent from these amounts up (in cents),
+# largest first.
 BONUS_TIERS = [(50_000, 10), (25_000, 5), (10_000, 2)]
 
 CURRENCY = "USD"
