@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "选择此原因时需要填写详细信息。",
     "The question is too long.": "问题太长了。",
     "A company with this name already exists.": "已有同名公司。",
+    "A public kit's title can't include a company name. Remove it and try again.": "公开学习包的标题不能包含公司名称。请删除后重试。",
+    "Couldn't check the title. Please try again.": "无法检查标题，请重试。",
 }

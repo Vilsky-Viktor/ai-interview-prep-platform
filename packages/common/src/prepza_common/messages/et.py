@@ -33,4 +33,6 @@ MESSAGES = {
     "Details are required for this reason.": "Selle põhjuse puhul on üksikasjad kohustuslikud.",
     "The question is too long.": "Küsimus on liiga pikk.",
     "A company with this name already exists.": "Sellise nimega ettevõte on juba olemas.",
+    "A public kit's title can't include a company name. Remove it and try again.": "Avaliku komplekti pealkirjas ei tohi olla ettevõtte nime. Eemalda see ja proovi uuesti.",
+    "Couldn't check the title. Please try again.": "Pealkirja ei õnnestunud kontrollida. Proovi uuesti.",
 }

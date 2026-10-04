@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "לסיבה זו נדרשים פרטים.",
     "The question is too long.": "השאלה ארוכה מדי.",
     "A company with this name already exists.": "כבר קיימת חברה בשם הזה.",
+    "A public kit's title can't include a company name. Remove it and try again.": "כותרת של ערכה ציבורית לא יכולה לכלול שם של חברה. הסירו אותו ונסו שוב.",
+    "Couldn't check the title. Please try again.": "לא ניתן היה לבדוק את הכותרת. נסו שוב.",
 }

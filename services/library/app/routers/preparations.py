@@ -5,6 +5,7 @@ from prepza_common.auth import CurrentUser, OptionalUser
 from prepza_common.paging import PageParams
 
 from app.constants.feedback import MAX_RATING
+from app.constants.sets import Visibility
 from app.helpers.preparations import summary_out
 from app.integrations import rounds
 from app.schemas.preparations import (
@@ -18,6 +19,7 @@ from app.schemas.preparations import (
 from app.services.access import access_for, require_owner
 from app.services.done import done_ids
 from app.services.questions import question_texts
+from app.services.titles import require_no_company
 from app.storage import feedback, preparations
 
 router = APIRouter(prefix="/preparations", tags=["preparations"])
@@ -88,14 +90,23 @@ async def get_preparation(preparation_id: UUID, user: OptionalUser) -> Preparati
 
 @router.patch("/{preparation_id}/title", status_code=status.HTTP_204_NO_CONTENT)
 async def update_title(preparation_id: UUID, body: TitleIn, user: CurrentUser) -> None:
-    """Only the preparation's owner can rename it."""
-    require_owner(await preparations.get(preparation_id), user.uid)
+    """Only the preparation's owner can rename it; a public one's title can't name a company."""
+    preparation = require_owner(await preparations.get(preparation_id), user.uid)
+
+    if preparation.visibility == Visibility.PUBLIC:
+        await require_no_company(body.title, user.uid)
+
     await preparations.set_title(preparation_id, body.title)
 
 
 @router.patch("/{preparation_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def update_visibility(preparation_id: UUID, body: VisibilityIn, user: CurrentUser) -> None:
-    require_owner(await preparations.get(preparation_id), user.uid)
+    """Going public needs a title that names no company."""
+    preparation = require_owner(await preparations.get(preparation_id), user.uid)
+
+    if body.visibility == Visibility.PUBLIC and preparation.visibility != Visibility.PUBLIC:
+        await require_no_company(preparation.title, user.uid)
+
     await preparations.set_visibility(preparation_id, body.visibility)
 
 

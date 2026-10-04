@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "برای این دلیل، جزئیات لازم است.",
     "The question is too long.": "پرسش خیلی طولانی است.",
     "A company with this name already exists.": "شرکتی با این نام از قبل وجود دارد.",
+    "A public kit's title can't include a company name. Remove it and try again.": "عنوان یک مجموعهٔ عمومی نمی‌تواند نام شرکت داشته باشد. آن را حذف کنید و دوباره امتحان کنید.",
+    "Couldn't check the title. Please try again.": "بررسی عنوان ممکن نشد. لطفاً دوباره امتحان کنید.",
 }

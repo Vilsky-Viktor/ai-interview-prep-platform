@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "この理由には詳細が必要です。",
     "The question is too long.": "質問が長すぎます。",
     "A company with this name already exists.": "この名前の会社はすでに存在します。",
+    "A public kit's title can't include a company name. Remove it and try again.": "公開キットのタイトルには会社名を含められません。削除してからもう一度お試しください。",
+    "Couldn't check the title. Please try again.": "タイトルを確認できませんでした。もう一度お試しください。",
 }

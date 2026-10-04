@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
 import { MAX_TITLE_LENGTH } from "@/constants/limits"
-import { apiFetch } from "@/lib/api"
+import { apiErrorMessage, apiFetch } from "@/lib/api"
 
 const titleClass =
   "font-heading text-3xl font-medium tracking-tight text-balance normal-case"
@@ -68,8 +68,9 @@ export function EditableTitle({
       })
       setEditing(false)
       router.refresh()
-    } catch {
-      toast.error(t("titleFailed"))
+    } catch (error) {
+      // Says why, when a public kit's new title names a company.
+      toast.error(apiErrorMessage(error, t("titleFailed")))
     } finally {
       savingRef.current = false
       setSaving(false)

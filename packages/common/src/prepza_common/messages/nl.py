@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "Voor deze reden zijn details nodig.",
     "The question is too long.": "De vraag is te lang.",
     "A company with this name already exists.": "Er bestaat al een bedrijf met deze naam.",
+    "A public kit's title can't include a company name. Remove it and try again.": "De titel van een openbare kit mag geen bedrijfsnaam bevatten. Haal die weg en probeer het opnieuw.",
+    "Couldn't check the title. Please try again.": "De titel kon niet worden gecontroleerd. Probeer het opnieuw.",
 }

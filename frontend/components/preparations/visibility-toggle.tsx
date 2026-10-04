@@ -6,7 +6,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { Switch } from "@/components/ui/switch"
-import { apiFetch } from "@/lib/api"
+import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { PreparationSummary } from "@/types/preparation"
 
 export function VisibilityToggle({
@@ -28,8 +28,9 @@ export function VisibilityToggle({
       })
       toast.success(isPublic ? t("nowPublic") : t("nowPrivate"))
       router.refresh()
-    } catch {
-      toast.error(t("visibilityFailed"))
+    } catch (error) {
+      // Says why a title can't go public (it names a company), when that's the reason.
+      toast.error(apiErrorMessage(error, t("visibilityFailed")))
     } finally {
       setSaving(false)
     }

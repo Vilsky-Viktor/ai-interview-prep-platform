@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "Для цієї причини потрібні подробиці.",
     "The question is too long.": "Питання задовге.",
     "A company with this name already exists.": "Компанія з такою назвою вже існує.",
+    "A public kit's title can't include a company name. Remove it and try again.": "Назва публічного набору не може містити назву компанії. Приберіть її та спробуйте знову.",
+    "Couldn't check the title. Please try again.": "Не вдалося перевірити назву. Спробуйте ще раз.",
 }

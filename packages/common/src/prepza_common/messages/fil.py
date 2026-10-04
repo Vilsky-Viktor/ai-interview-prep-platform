@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "Kailangan ng detalye para sa dahilang ito.",
     "The question is too long.": "Masyadong mahaba ang tanong.",
     "A company with this name already exists.": "May kompanya nang may ganitong pangalan.",
+    "A public kit's title can't include a company name. Remove it and try again.": "Hindi puwedeng may pangalan ng kumpanya ang title ng public kit. Tanggalin ito at subukan ulit.",
+    "Couldn't check the title. Please try again.": "Hindi ma-check ang title. Pakisubukan ulit.",
 }

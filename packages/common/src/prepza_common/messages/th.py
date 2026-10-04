@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "เหตุผลนี้ต้องระบุรายละเอียด",
     "The question is too long.": "คำถามยาวเกินไป",
     "A company with this name already exists.": "มีบริษัทชื่อนี้อยู่แล้ว",
+    "A public kit's title can't include a company name. Remove it and try again.": "ชื่อชุดสาธารณะต้องไม่มีชื่อบริษัท โปรดลบออกแล้วลองอีกครั้ง",
+    "Couldn't check the title. Please try again.": "ตรวจสอบชื่อไม่ได้ โปรดลองอีกครั้ง",
 }

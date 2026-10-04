@@ -10,7 +10,7 @@ from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
 from app.integrations.redis import get_redis
-from app.routers import generations, internal, internal_accounts, languages
+from app.routers import generations, internal, internal_accounts, internal_titles, languages
 from app.storage.db import ping as ping_database
 
 configure_logging()
@@ -38,6 +38,7 @@ app.include_router(generations.router)
 app.include_router(languages.router)
 app.include_router(internal.router)
 app.include_router(internal_accounts.router)
+app.include_router(internal_titles.router)
 
 
 @app.get("/health")

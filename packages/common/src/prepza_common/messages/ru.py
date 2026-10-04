@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "Для этой причины нужны подробности.",
     "The question is too long.": "Вопрос слишком длинный.",
     "A company with this name already exists.": "Компания с таким названием уже существует.",
+    "A public kit's title can't include a company name. Remove it and try again.": "Название публичного набора не может содержать название компании. Уберите его и попробуйте снова.",
+    "Couldn't check the title. Please try again.": "Не удалось проверить название. Попробуйте ещё раз.",
 }

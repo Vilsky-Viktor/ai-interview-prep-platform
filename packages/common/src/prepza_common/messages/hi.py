@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "इस कारण के लिए विवरण आवश्यक है।",
     "The question is too long.": "सवाल बहुत लंबा है।",
     "A company with this name already exists.": "इस नाम की कंपनी पहले से मौजूद है।",
+    "A public kit's title can't include a company name. Remove it and try again.": "सार्वजनिक किट के शीर्षक में किसी कंपनी का नाम नहीं हो सकता। उसे हटाकर फिर से कोशिश करें।",
+    "Couldn't check the title. Please try again.": "शीर्षक की जाँच नहीं हो सकी। कृपया फिर से कोशिश करें।",
 }

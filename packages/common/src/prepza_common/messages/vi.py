@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "Lý do này cần có chi tiết.",
     "The question is too long.": "Câu hỏi quá dài.",
     "A company with this name already exists.": "Đã có công ty mang tên này.",
+    "A public kit's title can't include a company name. Remove it and try again.": "Tiêu đề của bộ ôn luyện công khai không được chứa tên công ty. Hãy xóa tên đó và thử lại.",
+    "Couldn't check the title. Please try again.": "Không thể kiểm tra tiêu đề. Vui lòng thử lại.",
 }

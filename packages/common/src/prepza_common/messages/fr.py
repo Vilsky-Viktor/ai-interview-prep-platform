@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "Des détails sont nécessaires pour ce motif.",
     "The question is too long.": "La question est trop longue.",
     "A company with this name already exists.": "Une entreprise porte déjà ce nom.",
+    "A public kit's title can't include a company name. Remove it and try again.": "Le titre d'un kit public ne peut pas contenir de nom d'entreprise. Supprimez-le et réessayez.",
+    "Couldn't check the title. Please try again.": "Impossible de vérifier le titre. Veuillez réessayer.",
 }

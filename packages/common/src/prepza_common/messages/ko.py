@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "이 사유에는 세부 내용이 필요합니다.",
     "The question is too long.": "질문이 너무 깁니다.",
     "A company with this name already exists.": "이 이름의 회사가 이미 있습니다.",
+    "A public kit's title can't include a company name. Remove it and try again.": "공개 키트의 제목에는 회사 이름을 넣을 수 없습니다. 이름을 지우고 다시 시도해 주세요.",
+    "Couldn't check the title. Please try again.": "제목을 확인하지 못했습니다. 다시 시도해 주세요.",
 }

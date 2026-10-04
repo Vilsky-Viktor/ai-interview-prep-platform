@@ -16,4 +16,6 @@ MESSAGES = {
     "Details are required for this reason.": "Alasan ini memerlukan detail.",
     "The question is too long.": "Pertanyaannya terlalu panjang.",
     "A company with this name already exists.": "Perusahaan dengan nama ini sudah ada.",
+    "A public kit's title can't include a company name. Remove it and try again.": "Judul kit publik tidak boleh memuat nama perusahaan. Hapus dan coba lagi.",
+    "Couldn't check the title. Please try again.": "Judul tidak dapat diperiksa. Coba lagi.",
 }
