@@ -42,7 +42,8 @@
     "myKits": "mis kits",
     "hiring": "contratación",
     "pricingLink": "precios",
-    "faq": "Preguntas frecuentes"
+    "faq": "Preguntas frecuentes",
+    "contact": "Contacto"
   },
   "signIn": {
     "with": "Iniciar sesión con",
@@ -723,5 +724,17 @@
       "placeholder": "Haz una pregunta sobre prepza…",
       "failed": "No se pudo obtener una respuesta. Inténtalo de nuevo."
     }
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "intro": "¿Tienes una pregunta, una idea, una propuesta de colaboración o algo no funciona? Escríbenos y te responderemos por correo electrónico.",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "messagePlaceholder": "Escribe tu mensaje aquí…",
+    "send": "Enviar",
+    "thanks": "¡Gracias!",
+    "sent": "Tu mensaje está en camino. Te responderemos a {email}.",
+    "failed": "No se pudo enviar tu mensaje. Inténtalo de nuevo."
   }
 }

@@ -70,7 +70,7 @@ TERMS_SECTIONS = [
     {
         "heading": "Law",
         "paragraphs": [
-            f"Estonian law applies, without taking away the mandatory protections of the country you live in. Questions about these terms: {COMPANY['privacy_email']}.",
+            f"Estonian law applies, without taking away the mandatory protections of the country you live in. Questions about these terms: {COMPANY['email']}.",
         ],
     },
 ]

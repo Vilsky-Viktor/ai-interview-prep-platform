@@ -21,6 +21,9 @@ export async function SiteFooter() {
           <Link href="/faq" className="hover:text-foreground">
             {t("faq")}
           </Link>
+          <Link href="/contact" className="hover:text-foreground">
+            {t("contact")}
+          </Link>
         </nav>
       </div>
     </footer>

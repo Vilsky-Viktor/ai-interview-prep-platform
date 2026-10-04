@@ -42,7 +42,8 @@
     "myKits": "我的学习包",
     "hiring": "招聘",
     "pricingLink": "价格",
-    "faq": "常见问题"
+    "faq": "常见问题",
+    "contact": "联系我们"
   },
   "signIn": {
     "with": "登录方式：",
@@ -717,5 +718,17 @@
       "placeholder": "提一个关于 prepza 的问题…",
       "failed": "暂时无法获得回答，请重试。"
     }
+  },
+  "contact": {
+    "title": "联系我们",
+    "intro": "有问题、想法、合作意向，或者遇到故障？给我们留言，我们会通过电子邮件回复。",
+    "name": "姓名",
+    "email": "电子邮件",
+    "message": "留言",
+    "messagePlaceholder": "在这里输入你的留言…",
+    "send": "发送",
+    "thanks": "谢谢！",
+    "sent": "你的留言已发送。我们会回复到 {email}。",
+    "failed": "留言发送失败，请重试。"
   }
 }

@@ -1,8 +1,8 @@
 import logging
 
 from app.config.settings import settings
-from app.constants.events import CANDIDATE_INVITED, PREPARATION_SHARED
-from app.helpers.emails import candidate_invite_email, share_invite_email
+from app.constants.events import CANDIDATE_INVITED, CONTACT_SENT, PREPARATION_SHARED
+from app.helpers.emails import candidate_invite_email, contact_email, share_invite_email
 from app.integrations import resend, smtp
 from app.models.email import Email
 from app.services.webhooks import report_undelivered
@@ -32,3 +32,6 @@ async def handle(event_type: str, data: dict, message_id: str) -> None:
 
     if event_type == CANDIDATE_INVITED:
         await deliver(candidate_invite_email(data, settings.site_url), message_id)
+
+    if event_type == CONTACT_SENT:
+        await deliver(contact_email(data, settings.contact_email), message_id)

@@ -42,7 +42,8 @@
     "myKits": "mijn kits",
     "hiring": "werving",
     "pricingLink": "prijzen",
-    "faq": "Veelgestelde vragen"
+    "faq": "Veelgestelde vragen",
+    "contact": "Contact"
   },
   "signIn": {
     "with": "Inloggen met",
@@ -723,5 +724,17 @@
       "placeholder": "Stel een vraag over prepza…",
       "failed": "Er kon nu geen antwoord worden opgehaald. Probeer het opnieuw."
     }
+  },
+  "contact": {
+    "title": "Neem contact op",
+    "intro": "Een vraag, een idee, een samenwerking of werkt er iets niet? Schrijf ons en we antwoorden per e-mail.",
+    "name": "Naam",
+    "email": "E-mail",
+    "message": "Bericht",
+    "messagePlaceholder": "Typ hier je bericht…",
+    "send": "Versturen",
+    "thanks": "Bedankt!",
+    "sent": "Je bericht is onderweg. We antwoorden naar {email}.",
+    "failed": "Je bericht kon niet worden verstuurd. Probeer het opnieuw."
   }
 }

@@ -3,3 +3,5 @@ ANSWER_RECORDED = "answer.recorded"
 # Every section of a candidate's interview is finished; companies charges the company for the
 # candidate when they picked at least one answer, and gives the credits back otherwise.
 INTERVIEW_FINISHED = "interview.finished"
+# A visitor wrote through the contact page; notifications emails it to prepza's inbox.
+CONTACT_SENT = "contact.sent"

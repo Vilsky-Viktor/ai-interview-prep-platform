@@ -21,7 +21,7 @@ def build_messages(
     """The system prompt holds everything the chat may answer from, in English; it replies in
     the page's language."""
     system = HELP_SYSTEM.format(
-        email=COMPANY["privacy_email"],
+        email=COMPANY["email"],
         guide=guide(),
         faq=faq_text(FAQS[DEFAULT_LANGUAGE], catalog),
         prices=prices_text(catalog),

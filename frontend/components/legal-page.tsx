@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server"
 
+import { EmailText } from "@/components/email-text"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import type { LegalDocument } from "@/types/help"
 
@@ -33,25 +34,28 @@ export async function LegalPage({
       {/* The documents are English only, so they read left to right in every interface. */}
       <div lang="en" dir="ltr" className="space-y-10">
         <p className="text-base leading-relaxed text-muted-foreground">
-          {intro}
+          <EmailText text={intro} />
         </p>
         {sections.map((section) => (
           <section key={section.heading} className="space-y-3">
             <h2 className="font-heading text-2xl font-medium">
               {section.heading}
             </h2>
-            {section.paragraphs?.map((paragraph) => (
+            {/* Index keys: a text as a key would put its email address in the page's data. */}
+            {section.paragraphs?.map((paragraph, index) => (
               <p
-                key={paragraph}
+                key={index}
                 className="text-base leading-relaxed text-muted-foreground"
               >
-                {paragraph}
+                <EmailText text={paragraph} />
               </p>
             ))}
             {section.items && (
               <ul className="list-disc space-y-2 ps-5 text-base leading-relaxed text-muted-foreground">
-                {section.items.map((item) => (
-                  <li key={item}>{item}</li>
+                {section.items.map((item, index) => (
+                  <li key={index}>
+                    <EmailText text={item} />
+                  </li>
                 ))}
               </ul>
             )}

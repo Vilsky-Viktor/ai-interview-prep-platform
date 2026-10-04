@@ -42,7 +42,8 @@
     "myKits": "setlerim",
     "hiring": "işe alım",
     "pricingLink": "fiyatlar",
-    "faq": "SSS"
+    "faq": "SSS",
+    "contact": "Bize ulaşın"
   },
   "signIn": {
     "with": "Şununla giriş yap:",
@@ -723,5 +724,17 @@
       "placeholder": "prepza hakkında bir soru sorun…",
       "failed": "Şu anda yanıt alınamadı. Lütfen tekrar deneyin."
     }
+  },
+  "contact": {
+    "title": "Bize ulaşın",
+    "intro": "Bir sorunuz, fikriniz, iş birliği teklifiniz mi var ya da bir şey çalışmıyor mu? Bize yazın, e-postayla yanıtlayalım.",
+    "name": "Ad",
+    "email": "E-posta",
+    "message": "Mesaj",
+    "messagePlaceholder": "Mesajınızı buraya yazın…",
+    "send": "Gönder",
+    "thanks": "Teşekkürler!",
+    "sent": "Mesajınız gönderildi. {email} adresine yanıt vereceğiz.",
+    "failed": "Mesajınız gönderilemedi. Lütfen tekrar deneyin."
   }
 }

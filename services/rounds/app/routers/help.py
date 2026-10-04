@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, status
 from fastapi.responses import StreamingResponse
 from prepza_common.analytics import track
 from prepza_common.auth import OptionalUser
@@ -19,8 +19,11 @@ from app.helpers.help import faq_items
 from app.helpers.sse import sse_event
 from app.integrations import billing
 from app.integrations.redis import get_redis
+from app.schemas.contact import ContactRequest
 from app.schemas.help import FaqItemOut, HelpChatRequest, LegalOut
+from app.services import outbox as outbox_service
 from app.services.help import build_messages, stream_reply
+from app.storage import contact as contact_store
 
 logger = logging.getLogger(__name__)
 
@@ -84,3 +87,11 @@ async def help_chat(
         # Tells nginx not to buffer the stream.
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
+
+
+@router.post("/contact", status_code=status.HTTP_204_NO_CONTENT)
+async def contact(body: ContactRequest, request: Request) -> None:
+    """The contact page's message; notifications emails it to prepza's inbox. Public."""
+    await hit(get_redis(), "rate:contact:all", settings.contact_daily_limit, DAY_SECONDS)
+    await contact_store.save({**body.model_dump(), "language": request_language(request)})
+    await outbox_service.flush_quietly()

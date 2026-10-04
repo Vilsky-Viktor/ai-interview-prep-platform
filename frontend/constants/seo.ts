@@ -23,6 +23,7 @@ export const PUBLIC_PATHS = [
   "/privacy",
   "/terms",
   "/faq",
+  "/contact",
 ]
 
 // Public preparations in the sitemap, read a page of 100 at a time.

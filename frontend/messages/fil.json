@@ -42,7 +42,8 @@
     "myKits": "aking mga kit",
     "hiring": "hiring",
     "pricingLink": "presyo",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "contact": "Makipag-ugnayan"
   },
   "signIn": {
     "with": "Mag-sign in gamit ang",
@@ -723,5 +724,17 @@
       "placeholder": "Magtanong tungkol sa prepza…",
       "failed": "Hindi makakuha ng sagot ngayon. Pakisubukang muli."
     }
+  },
+  "contact": {
+    "title": "Makipag-ugnayan sa amin",
+    "intro": "May tanong, ideya, alok na partnership, o may hindi gumagana? Sumulat sa amin at sasagot kami sa email.",
+    "name": "Pangalan",
+    "email": "Email",
+    "message": "Mensahe",
+    "messagePlaceholder": "I-type ang mensahe mo rito…",
+    "send": "Ipadala",
+    "thanks": "Salamat!",
+    "sent": "Naipadala na ang mensahe mo. Sasagot kami sa {email}.",
+    "failed": "Hindi naipadala ang mensahe mo. Pakisubukan ulit."
   }
 }

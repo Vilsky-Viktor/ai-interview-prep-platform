@@ -9,3 +9,5 @@ class Email:
     text: str
     # Sent with the email; Resend's webhooks carry them back.
     tags: dict[str, str] = field(default_factory=dict)
+    # Where a reply goes, when not to the sender: the visitor who wrote through the contact page.
+    reply_to: str | None = None

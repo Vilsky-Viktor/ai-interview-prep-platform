@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     smtp_port: int = 25
     # Resend sends only from a domain verified in its dashboard.
     mail_from: str = "prepza. <no-reply@prepza.local>"
+    # prepza's inbox: the contact page's messages go here.
+    contact_email: str = "hello@prepza.ai"
     # Public address of the site, used for links in emails.
     site_url: str
     # The services that own invites, told when an invite's email wasn't delivered.

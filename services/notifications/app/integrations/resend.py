@@ -25,6 +25,7 @@ async def send(email: Email, idempotency_key: str) -> None:
                 "html": email.html,
                 "text": email.text,
                 "tags": [{"name": name, "value": value} for name, value in email.tags.items()],
+                **({"reply_to": email.reply_to} if email.reply_to else {}),
             },
         )
 

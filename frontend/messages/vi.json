@@ -42,7 +42,8 @@
     "myKits": "bộ của tôi",
     "hiring": "tuyển dụng",
     "pricingLink": "bảng giá",
-    "faq": "Câu hỏi thường gặp"
+    "faq": "Câu hỏi thường gặp",
+    "contact": "Liên hệ"
   },
   "signIn": {
     "with": "Đăng nhập bằng",
@@ -723,5 +724,17 @@
       "placeholder": "Đặt câu hỏi về prepza…",
       "failed": "Hiện chưa lấy được câu trả lời. Vui lòng thử lại."
     }
+  },
+  "contact": {
+    "title": "Liên hệ với chúng tôi",
+    "intro": "Bạn có câu hỏi, ý tưởng, đề xuất hợp tác hoặc có gì đó không hoạt động? Hãy viết cho chúng tôi, chúng tôi sẽ trả lời qua email.",
+    "name": "Tên",
+    "email": "Email",
+    "message": "Tin nhắn",
+    "messagePlaceholder": "Nhập tin nhắn của bạn tại đây…",
+    "send": "Gửi",
+    "thanks": "Cảm ơn!",
+    "sent": "Tin nhắn của bạn đã được gửi. Chúng tôi sẽ trả lời đến {email}.",
+    "failed": "Không gửi được tin nhắn. Vui lòng thử lại."
   }
 }

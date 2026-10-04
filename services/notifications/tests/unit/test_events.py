@@ -7,7 +7,7 @@ import pytest
 from prepza_common.constants import LANGUAGES
 
 from app.config.settings import settings
-from app.helpers.emails import candidate_invite_email, share_invite_email
+from app.helpers.emails import candidate_invite_email, contact_email, share_invite_email
 from app.integrations import companies, resend, smtp
 
 DATA = {"email": "bob@example.com", "token": "abc", "title": "Backend", "inviter": "Ann"}
@@ -192,3 +192,35 @@ def test_every_content_language_has_both_emails(language):
         assert f'lang="{language}"' in email.html
 
     assert language == "en" or share.subject != "Ann shared “Backend” with you"
+
+
+CONTACT = {
+    "name": "<b>Ann</b>",
+    "email": "ann@example.com",
+    "message": "Hi\nthere",
+    "language": "de",
+}
+
+
+def test_contact_email_goes_to_the_inbox_and_replies_to_the_visitor():
+    email = contact_email(CONTACT, "hello@prepza.ai")
+
+    assert email.to == "hello@prepza.ai"
+    assert email.reply_to == "ann@example.com"
+    assert email.subject == "Contact form: <b>Ann</b>"
+    assert "From: <b>Ann</b> <ann@example.com>" in email.text
+    assert "Hi\nthere" in email.text
+    assert "<b>Ann</b>" not in email.html
+    assert "&lt;b&gt;Ann&lt;/b&gt;" in email.html
+
+
+def test_a_contact_event_sends_its_email(client, monkeypatch):
+    sent = []
+
+    async def fake_send(email):
+        sent.append((email.to, email.reply_to))
+
+    monkeypatch.setattr(smtp, "send", fake_send)
+
+    assert client.post("/internal/events", json=push("contact.sent", CONTACT)).status_code == 204
+    assert sent == [(settings.contact_email, "ann@example.com")]

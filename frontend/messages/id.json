@@ -42,7 +42,8 @@
     "myKits": "kit saya",
     "hiring": "rekrutmen",
     "pricingLink": "harga",
-    "faq": "Tanya jawab"
+    "faq": "Tanya jawab",
+    "contact": "Hubungi kami"
   },
   "signIn": {
     "with": "Masuk dengan",
@@ -717,5 +718,17 @@
       "placeholder": "Ajukan pertanyaan tentang prepza…",
       "failed": "Jawaban tidak bisa didapat sekarang. Coba lagi."
     }
+  },
+  "contact": {
+    "title": "Hubungi kami",
+    "intro": "Ada pertanyaan, ide, tawaran kemitraan, atau sesuatu tidak berfungsi? Tulis kepada kami dan kami akan membalas lewat email.",
+    "name": "Nama",
+    "email": "Email",
+    "message": "Pesan",
+    "messagePlaceholder": "Tulis pesan Anda di sini…",
+    "send": "Kirim",
+    "thanks": "Terima kasih!",
+    "sent": "Pesan Anda sudah terkirim. Kami akan membalas ke {email}.",
+    "failed": "Pesan Anda tidak dapat dikirim. Silakan coba lagi."
   }
 }

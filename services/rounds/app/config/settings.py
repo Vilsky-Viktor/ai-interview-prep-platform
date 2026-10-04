@@ -18,6 +18,9 @@ class Settings(ServiceSettings):
     # hour, and in all a day, which caps what it can cost. Cloud Armor limits each visitor's IP.
     help_user_limit: int = Field(default=30, ge=0)
     help_daily_limit: int = Field(default=5_000, ge=0)
+    # Contact page messages a day in all, so a flood can't bury the inbox. Cloud Armor limits
+    # each visitor's IP.
+    contact_daily_limit: int = Field(default=200, ge=0)
 
     @property
     def sqlalchemy_url(self) -> str:

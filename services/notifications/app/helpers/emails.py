@@ -4,6 +4,7 @@ from prepza_common.constants import DEFAULT_LANGUAGE, RTL_LANGUAGES
 
 from app.constants.webhooks import CANDIDATE_INVITE_KIND, ID_TAG, KIND_TAG, SHARE_KIND
 from app.models.email import Email
+from app.templates.contact import CONTACT_HTML, CONTACT_SUBJECT, CONTACT_TEXT
 from app.templates.emails import EMAILS
 from app.templates.layout import (
     HTML_LAYOUT,
@@ -77,3 +78,17 @@ def candidate_invite_email(data: dict, site_url: str) -> Email:
     email.tags = invite_tags(CANDIDATE_INVITE_KIND, data.get("invite_id"))
 
     return email
+
+
+def contact_email(data: dict, inbox: str) -> Email:
+    """The contact page's message, to prepza's inbox; replying answers the visitor."""
+    safe = {key: escape(str(value)) for key, value in data.items()}
+
+    return Email(
+        to=inbox,
+        # One line, whatever the visitor typed as their name.
+        subject=CONTACT_SUBJECT.format(name=" ".join(data["name"].split())),
+        html=CONTACT_HTML.format(**safe),
+        text=CONTACT_TEXT.format(**data),
+        reply_to=data["email"],
+    )

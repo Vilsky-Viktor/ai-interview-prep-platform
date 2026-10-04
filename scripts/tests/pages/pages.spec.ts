@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test"
 
 // The signed-out pages. Signed-in ones are checked by hand: sign-in isn't automated.
-const PAGES = ["/", "/library", "/pricing", "/terms", "/privacy", "/faq"]
+const PAGES = ["/", "/library", "/pricing", "/terms", "/privacy", "/faq", "/contact"]
 // The width every page's <main> has: max-w-5xl (CLAUDE.md, rule 6).
 const MAIN_MAX_WIDTH = 1024
 

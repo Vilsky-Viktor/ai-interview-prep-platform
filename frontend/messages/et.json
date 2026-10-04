@@ -42,7 +42,8 @@
     "myKits": "minu komplektid",
     "hiring": "värbamine",
     "pricingLink": "hinnad",
-    "faq": "KKK"
+    "faq": "KKK",
+    "contact": "Võta ühendust"
   },
   "signIn": {
     "with": "Logi sisse kontoga",
@@ -723,5 +724,17 @@
       "placeholder": "Esita küsimus prepza kohta…",
       "failed": "Praegu ei õnnestunud vastust saada. Proovi uuesti."
     }
+  },
+  "contact": {
+    "title": "Võta meiega ühendust",
+    "intro": "Küsimus, idee, koostööpakkumine või midagi ei tööta? Kirjuta meile ja vastame e-postiga.",
+    "name": "Nimi",
+    "email": "E-post",
+    "message": "Sõnum",
+    "messagePlaceholder": "Kirjuta oma sõnum siia…",
+    "send": "Saada",
+    "thanks": "Aitäh!",
+    "sent": "Sinu sõnum on teel. Vastame aadressile {email}.",
+    "failed": "Sõnumit ei õnnestunud saata. Proovi uuesti."
   }
 }

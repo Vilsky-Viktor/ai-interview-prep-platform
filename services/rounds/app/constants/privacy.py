@@ -8,7 +8,7 @@ PRIVACY_SECTIONS = [
     {
         "heading": "Who is responsible",
         "paragraphs": [
-            f"For your own account, preparations and practice, {COMPANY['name']} is the controller of your data. Write to {COMPANY['privacy_email']} with any question or request.",
+            f"For your own account, preparations and practice, {COMPANY['name']} is the controller of your data. Write to {COMPANY['email']} with any question or request.",
             "When a company invites you to an interview on prepza, that company decides why and how your interview results are used and is the controller of them; we process them on its behalf. You can contact the company directly, or us, and we will pass your request on.",
         ],
     },
@@ -17,6 +17,7 @@ PRIVACY_SECTIONS = [
         "items": [
             "Account: your name, email address, profile photo and account id, from your Google sign-in.",
             "What you give us: job descriptions and goals you paste, the preparations made from them, your ratings, reports, shares, and messages to the AI tutor. Questions you ask the help chat on the FAQ page are used only to answer them and aren't stored.",
+            "Contact messages: the name, email address and message you send through the contact page.",
             "Practice: your answers, scores, progress and certificates. A certificate shows your name and score to anyone with its link.",
             "Interviews: the email you were invited with, your answers, how long each answer took, and when you left the interview page or copied text during it. You are told about this before you start.",
             "Technical: error reports without your IP address or email, and short-lived server logs needed to run and secure the service.",
@@ -41,7 +42,7 @@ PRIVACY_SECTIONS = [
         "items": [
             "Google (Firebase Authentication): sign-in.",
             "OpenAI: writing questions, tutor replies and help chat answers from the text you provide. Under OpenAI's API terms, this data is not used to train their models.",
-            "Resend: sending invite emails.",
+            "Resend: sending invite emails and contact messages.",
             "Sentry: error reports, with emails removed.",
             "Our hosting provider, which stores the data.",
             "Paddle: payments and taxes, as the reseller.",
@@ -59,6 +60,7 @@ PRIVACY_SECTIONS = [
             "Your account and everything in it: until you delete your account.",
             "Interview results, timings and page-leave signals: 12 months after the invitation was sent, then deleted automatically.",
             "Pasted job descriptions in our generation records: 90 days after the generation finishes. The preparation made from them stays in your account until you delete it.",
+            "Contact messages: as long as we need them to answer you, at most 2 years.",
             "Error reports: up to 90 days.",
             "Usage statistics: 25 months, then deleted automatically.",
             "A one-way hash of your email after you delete your account, only so that signing up again doesn't repeat the welcome credits. It can't be turned back into your email.",
@@ -87,6 +89,12 @@ PRIVACY_SECTIONS = [
         "heading": "Changes",
         "paragraphs": [
             "We will update this page when our practices change and tell you about significant changes by email or in the app.",
+        ],
+    },
+    {
+        "heading": "Contact us",
+        "paragraphs": [
+            f"Questions about this policy or your data: write to {COMPANY['email']}, or use the contact page linked at the bottom of every page.",
         ],
     },
 ]
