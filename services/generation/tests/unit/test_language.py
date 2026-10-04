@@ -28,7 +28,7 @@ class Recorder:
 
 def test_questions_are_asked_for_in_the_users_language(monkeypatch):
     recorder = Recorder()
-    monkeypatch.setattr(llm, "get_generation_llm", lambda: recorder)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: recorder)
 
     asyncio.run(
         generate_questions(

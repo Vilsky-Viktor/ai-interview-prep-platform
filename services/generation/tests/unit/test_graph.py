@@ -96,12 +96,13 @@ def reusable(texts):
     return find
 
 
-async def run_graph(review=None):
+async def run_graph(review=None, kind=None):
     graph = build_graph(InMemorySaver())
     config = {"configurable": {"thread_id": "test"}}
     interrupts = []
+    start = {"input_text": "Job", "kind": kind}
 
-    async for chunk in graph.astream({"input_text": "Job"}, config, stream_mode="updates"):
+    async for chunk in graph.astream(start, config, stream_mode="updates"):
         interrupts.extend(chunk.get("__interrupt__", ()))
 
     assert len(interrupts[0].value["topics"]) == 2
@@ -116,7 +117,7 @@ async def run_graph(review=None):
 
 @pytest.mark.parametrize("per_topic", [100, 12])
 def test_full_graph(monkeypatch, per_topic):
-    monkeypatch.setattr(llm, "get_generation_llm", FakeLLM)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: FakeLLM())
     monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
     monkeypatch.setattr(library, "find_reusable", reusable([]))
     monkeypatch.setattr(settings, "questions_per_topic", per_topic)
@@ -133,8 +134,32 @@ def test_full_graph(monkeypatch, per_topic):
     )
 
 
+@pytest.mark.parametrize(
+    ("kind", "later"),
+    [("preparation", {("preparation", "medium")}), ("interview", {("interview", "medium")})],
+)
+def test_every_call_chooses_its_model_by_who_its_for_and_the_level(monkeypatch, kind, later):
+    calls = []
+
+    def choose(*args):
+        calls.append(args)
+
+        return FakeLLM()
+
+    monkeypatch.setattr(llm, "get_generation_llm", choose)
+    monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
+    monkeypatch.setattr(library, "find_reusable", reusable([]))
+    monkeypatch.setattr(settings, "questions_per_topic", 10)
+
+    asyncio.run(run_graph(kind=kind))
+
+    # Extraction comes before the level is known; topics, questions and fill-ups know both.
+    assert calls[0] == (kind, None)
+    assert set(calls[1:]) == later
+
+
 def test_reused_questions_come_first_and_new_ones_fill_the_rest(monkeypatch):
-    monkeypatch.setattr(llm, "get_generation_llm", FakeLLM)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: FakeLLM())
     monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
     monkeypatch.setattr(library, "find_reusable", reusable(["Proven 1", "Proven 2"]))
     monkeypatch.setattr(settings, "questions_per_topic", 10)
@@ -158,7 +183,7 @@ def test_generation_goes_on_without_reuse_when_embedding_fails(monkeypatch):
         async def aembed_documents(self, texts):
             raise ConnectionError("OpenAI is down")
 
-    monkeypatch.setattr(llm, "get_generation_llm", FakeLLM)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: FakeLLM())
     monkeypatch.setattr(llm, "get_embeddings", BrokenEmbeddings)
     monkeypatch.setattr(settings, "questions_per_topic", 10)
 
@@ -169,7 +194,7 @@ def test_generation_goes_on_without_reuse_when_embedding_fails(monkeypatch):
 
 
 def test_topics_edited_by_hand_are_used_without_a_revision(monkeypatch):
-    monkeypatch.setattr(llm, "get_generation_llm", FakeLLM)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: FakeLLM())
     monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
     monkeypatch.setattr(library, "find_reusable", reusable([]))
     monkeypatch.setattr(settings, "questions_per_topic", 10)

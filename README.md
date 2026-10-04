@@ -183,7 +183,9 @@ These settings in `.env` shape every generation:
 
   | Task | Model | Effort |
   |---|---|---|
-  | Generation: kits, interviews, re-generated questions | `GENERATION_MODEL` (`gpt-6.1-sol`) | `GENERATION_REASONING_EFFORT` (`low`) |
+  | Generation of a company's interview, at any level | `INTERVIEW_MODEL` (`gpt-6.1-sol`) | `INTERVIEW_REASONING_EFFORT` (`low`) |
+  | Generation of a learner's basic or medium kit | `KIT_MODEL` (`gpt-6-luna`) | `KIT_REASONING_EFFORT` (`high`) |
+  | Generation of a learner's hard kit, and reading a learner's text before its level is known | `HARD_KIT_MODEL` (`gpt-6.1-sol`) | `HARD_KIT_REASONING_EFFORT` (`low`) |
   | Verifier: answer-key checks, at once and in batches | `VERIFY_MODEL` (`gpt-6.1-sol`) | `VERIFY_REASONING_EFFORT` (`medium`) |
   | Public-title check | `TITLE_CHECK_MODEL` (`gpt-6.1-sol`) | `TITLE_CHECK_REASONING_EFFORT` (`low`) |
   | Tutor (a paid turn is 2 credits) | `TUTOR_MODEL` (`gpt-6.1-sol`) | `TUTOR_REASONING_EFFORT` (`low`) |

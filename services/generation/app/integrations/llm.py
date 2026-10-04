@@ -3,7 +3,8 @@ from functools import cache
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 from app.config.settings import settings
-from app.constants.generation import LLM_TIMEOUT_SECONDS, MAX_OUTPUT_TOKENS
+from app.constants.generation import HARD_LEVEL, LLM_TIMEOUT_SECONDS, MAX_OUTPUT_TOKENS
+from app.constants.kinds import GenerationKind
 from app.constants.reuse import EMBEDDING_DIMENSIONS, EMBEDDING_MODEL
 from app.integrations.llm_limiter import SharedRateLimiter
 
@@ -21,8 +22,17 @@ def build_llm(model: str, reasoning_effort: str) -> ChatOpenAI:
     )
 
 
-def get_generation_llm() -> ChatOpenAI:
-    return build_llm(settings.generation_model, settings.generation_reasoning_effort)
+def get_generation_llm(kind: str | None, level: str | None) -> ChatOpenAI:
+    """Interviews on INTERVIEW_MODEL; a learner's kit on KIT_MODEL, or HARD_KIT_MODEL when it's
+    hard. Before the level is known, and for a run started before the kind was passed, the
+    hard-kit model, so nothing gets the cheaper model by mistake."""
+    if kind == GenerationKind.INTERVIEW:
+        return build_llm(settings.interview_model, settings.interview_reasoning_effort)
+
+    if kind == GenerationKind.PREPARATION and level is not None and level != HARD_LEVEL:
+        return build_llm(settings.kit_model, settings.kit_reasoning_effort)
+
+    return build_llm(settings.hard_kit_model, settings.hard_kit_reasoning_effort)
 
 
 def get_verifier_llm() -> ChatOpenAI:

@@ -12,13 +12,13 @@ async def extract_info(state: State) -> dict:
     """Title, requirements and level; the same pasted text reuses its earlier result."""
     system = EXTRACTION_SYSTEM.format(language=language_name(state.get("language")))
     source = system + state["input_text"]
-    cached = await draft_cache.get("extraction", source)
+    model = llm.get_generation_llm(state.get("kind"), None)
+    cached = await draft_cache.get("extraction", source, model)
 
     if cached is not None:
         return cached
 
-    structured_llm = llm.get_generation_llm().with_structured_output(JobExtraction)
-    result: JobExtraction = await structured_llm.ainvoke(
+    result: JobExtraction = await model.with_structured_output(JobExtraction).ainvoke(
         [
             SystemMessage(content=system),
             HumanMessage(content=state["input_text"]),
@@ -30,6 +30,6 @@ async def extract_info(state: State) -> dict:
         "requirements": result.requirements,
         "level": result.level,
     }
-    await draft_cache.put("extraction", source, extracted)
+    await draft_cache.put("extraction", source, extracted, model)
 
     return extracted

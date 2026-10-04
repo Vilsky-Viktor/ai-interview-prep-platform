@@ -48,12 +48,24 @@ For comparison, `gpt-6-luna` at low reasoning: about $0.006 and 17 s a topic, bu
 miscalculations on hard topics, questions judged too easy for the level, and the correct option
 the longest 26–46% of the time.
 
+`gpt-6-luna` at **high** reasoning (2026-10-04, 236 questions on the same subtopics, same judge;
+price and time from full Python backend and senior accountant kits):
+
+| Clarity | Relevance | One answer | Key correct | Code answers | Distractors | Correct is longest | Per topic |
+|---|---|---|---|---|---|---|---|
+| 4.91 | 3.97 (hard level 2.40, Sol 3.10) | 97% | 99% | 8 of 8 | 2.87 | 25% | $0.030–0.035, 87–92 s |
+
+As accurate as Sol and 7–8 times cheaper, but about 1.6 times slower, and its hard-level
+questions are too easy: relevance on hard topics is the gap, and it misses the relevance,
+distractor and time targets.
+
 **Tutor**, on `follow_ups.json` (45):
 
 | Setting | Correct | Helpful | First word, median / slowest | Per turn |
 |---|---|---|---|---|
 | `gpt-6-luna` low | 40 of 45 | 4.82 | 1.4 s / 5.7 s | $0.00015 |
 | **`gpt-6.1-sol` low** (in use) | 44 of 45 | 4.96 | 1.5 s / 4.9 s | $0.0029 |
+| `gpt-6-luna` high | 38 of 45 | 4.73 | 3.8 s / 21.9 s | $0.00026 |
 
 **Title check**, on `titles.json` (114):
 
@@ -66,6 +78,10 @@ the longest 26–46% of the time.
 Luna blocked the same fine titles every run: "HubSpot inbound marketing", "Puma behavior and
 habitat", "Big Four audit associate interview". Sol costs about $0.50 a thousand checks, so the
 saving isn't worth an author's title being refused.
+
+**Verifier** (`verify_test.py`, the service's key-check prompt on the 60 traps and the same 60
+questions with their real key): `gpt-6.1-sol` at low and at medium both fixed 60 of 60 traps and
+kept 60 of 60 real keys, at $0.0009 a check and 1.8 s; medium is in use.
 
 **Judge**, `gpt-6.1-sol` at high reasoning: caught 60 of 60 planted wrong keys.
 
@@ -98,7 +114,11 @@ evals/run.sh generation generate_kits.py python_backend senior_accountant --labe
 evals/run.sh generation review_questions.py results/kit_python_backend_new-prompt.json --sample 40
 evals/run.sh generation check_code.py results/kit_python_backend_new-prompt.json
 
-# Another generation model or effort
+# Another model or effort on the reference subtopics, then the same review as the baseline
+MODEL=gpt-6-luna EFFORT=high evals/run.sh generation build_questions.py --label luna-high
+evals/run.sh generation review_questions.py results/questions_luna-high.json
+
+# Another generation model or effort, on full kits
 MODEL=gpt-6-luna EFFORT=low evals/run.sh generation generate_kits.py --all --label luna-low
 
 # Tutor settings, cheapest first, stopping at the first that gets everything right
@@ -106,6 +126,9 @@ evals/run.sh rounds tutor_test.py gpt-6-luna/low gpt-6-luna/medium gpt-6.1-sol/l
 
 # Public-title check settings, scored against the hand labels
 evals/run.sh generation titles_test.py gpt-6-luna/none gpt-6.1-sol/low
+
+# Verifier settings, on the traps and the same questions with their real key
+evals/run.sh generation verify_test.py gpt-6.1-sol/low gpt-6.1-sol/medium
 
 # A cheaper judge, tested against the reference and the traps
 JUDGE_MODEL=gpt-6-luna JUDGE_EFFORT=medium evals/run.sh generation review_questions.py datasets/questions.json --compare-reference

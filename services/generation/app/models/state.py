@@ -18,6 +18,8 @@ class QuestionTask(TypedDict):
     subtopic_index: int
     subtopic: str
     count: int
+    # GenerationKind and level choose the model (integrations/llm.py).
+    kind: str | None
     level: str
     # Questions the topic already has, reused from other preparations.
     existing: list[str]
@@ -33,12 +35,15 @@ class AnswerTask(TypedDict):
     topic: str
     start: int
     questions: list[str]
+    kind: str | None
     level: str
     language: str
 
 
 class State(TypedDict):
     input_text: str
+    # GenerationKind: a learner's kit or a company's interview.
+    kind: str
     # The code of the language content is written in (prepza_common.constants.LANGUAGES).
     language: str
     title: str

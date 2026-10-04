@@ -51,7 +51,11 @@ async def run_pipeline(graph, generation: Generation, resume: dict | None) -> No
         # A checkpoint exists, so continue from it after a crash or a retry.
         graph_input = None
     else:
-        graph_input = {"input_text": generation.text, "language": generation.language}
+        graph_input = {
+            "input_text": generation.text,
+            "language": generation.language,
+            "kind": generation.kind,
+        }
 
     await generations.update(generation.id, status=Status.RUNNING, error=None)
     await stream_graph(graph, generation, graph_input, config)

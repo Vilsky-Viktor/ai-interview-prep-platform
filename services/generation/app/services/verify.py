@@ -90,6 +90,7 @@ async def new_options(
             "topic": context.topic,
             "start": 0,
             "questions": [question.text],
+            "kind": context.kind,
             "level": context.level,
             "language": context.language,
         }

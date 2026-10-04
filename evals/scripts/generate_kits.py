@@ -10,11 +10,10 @@ about $1.60-2.30 a kit on gpt-6.1-sol (7-10 topics), $0.05 on gpt-6-luna."""
 
 import argparse
 import asyncio
-import os
 import time
 import uuid
 
-from common import DATASETS, RESULTS, cost, load, save
+from common import DATASETS, RESULTS, cost, generation_models, load, save
 from langchain_core.callbacks import get_usage_metadata_callback
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.types import Command
@@ -22,6 +21,7 @@ from langgraph.types import Command
 import app.services.graph as graph_module
 from app.config.settings import settings
 from app.constants.generation import MAX_CONCURRENCY, RECURSION_LIMIT
+from app.constants.kinds import GenerationKind
 from app.storage import draft_cache
 
 
@@ -43,7 +43,10 @@ async def generate(domain: dict) -> tuple[list[dict], dict]:
     started = time.monotonic()
 
     with get_usage_metadata_callback() as usage:
-        await graph.ainvoke({"input_text": domain["text"], "language": "en"}, config)
+        await graph.ainvoke(
+            {"input_text": domain["text"], "language": "en", "kind": GenerationKind.PREPARATION},
+            config,
+        )
         topics = (await graph.aget_state(config)).values["topics"]
         state = await graph.ainvoke(
             Command(resume={"selected": list(range(len(topics))), "instructions": ""}), config
@@ -86,11 +89,7 @@ async def generate(domain: dict) -> tuple[list[dict], dict]:
 
 
 async def main(domain_ids: list[str], label: str) -> None:
-    # The model and effort under test, unless the service's own settings are what's tested.
-    settings.generation_model = os.environ.get("MODEL", settings.generation_model)
-    settings.generation_reasoning_effort = os.environ.get(
-        "EFFORT", settings.generation_reasoning_effort
-    )
+    models = generation_models(settings)
     graph_module.find_reused = no_reuse
     draft_cache.get = no_cache
     draft_cache.put = no_cache
@@ -98,7 +97,7 @@ async def main(domain_ids: list[str], label: str) -> None:
 
     for domain_id in domain_ids:
         items, run = await generate(domains[domain_id])
-        run["model"] = f"{settings.generation_model} ({settings.generation_reasoning_effort})"
+        run["model"] = models
         save(RESULTS / f"kit_{domain_id}_{label}.json", {"run": run, "items": items})
         print(
             f"{domain_id}: {run['topics']} topics, {run['questions']} questions, {run['seconds']}s, "

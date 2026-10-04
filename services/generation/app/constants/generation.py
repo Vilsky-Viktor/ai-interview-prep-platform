@@ -2,6 +2,9 @@ from typing import Literal
 
 from prepza_common.constants import MAX_GOAL_LENGTH  # noqa: F401 (re-exported)
 
+# The level whose learner kits are written by HARD_KIT_MODEL (see integrations/llm.py).
+HARD_LEVEL = "hard"
+
 MAX_CONCURRENCY = 8
 RECURSION_LIMIT = 200
 

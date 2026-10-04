@@ -15,7 +15,9 @@ def usable(item: dict) -> int:
     return sum(1 for options in item["answer_options"] if options)
 
 
-async def new_questions(item: dict, missing: int, level: str, language: str) -> list[dict]:
+async def new_questions(
+    item: dict, missing: int, kind: str | None, level: str, language: str
+) -> list[dict]:
     """Questions with options on the topic, different from every one it already has."""
     result = await generate_questions(
         {
@@ -24,6 +26,7 @@ async def new_questions(item: dict, missing: int, level: str, language: str) -> 
             "subtopic_index": 0,
             "subtopic": ", ".join(item["subtopics"]) or item["topic"],
             "count": math.ceil(missing * QUESTION_OVERSAMPLE),
+            "kind": kind,
             "level": level,
             "existing": item["questions"],
             "language": language,
@@ -62,7 +65,7 @@ async def fill_topics(state: State) -> dict:
                 break
 
             for question in await new_questions(
-                item, missing, state["level"], state.get("language")
+                item, missing, state.get("kind"), state["level"], state.get("language")
             ):
                 item["questions"].append(question["text"])
                 item["answer_options"].append(question["options"])

@@ -13,9 +13,9 @@ from app.schemas.topics import TopicList
 from app.storage import draft_cache
 
 
-async def plan_topics(prompt: str) -> list[dict]:
+async def plan_topics(prompt: str, model) -> list[dict]:
     """Ask for topics; when the model goes over the limit, send the list back to merge."""
-    structured_llm = llm.get_generation_llm().with_structured_output(TopicList)
+    structured_llm = model.with_structured_output(TopicList)
     messages = [HumanMessage(content=prompt)]
 
     for _ in range(TOPIC_ATTEMPTS):
@@ -42,11 +42,12 @@ async def generate_topics(state: State) -> dict:
         max_name=MAX_TOPIC_NAME_LENGTH,
         language=language_name(state.get("language")),
     )
-    topics = await draft_cache.get("topics", prompt)
+    model = llm.get_generation_llm(state.get("kind"), state["level"])
+    topics = await draft_cache.get("topics", prompt, model)
 
     if topics is None:
-        topics = await plan_topics(prompt)
-        await draft_cache.put("topics", prompt, topics)
+        topics = await plan_topics(prompt, model)
+        await draft_cache.put("topics", prompt, topics, model)
 
     # Drafts cached before the names had a limit are fitted too.
     return {"topics": fit_topics(topics)}
@@ -80,7 +81,9 @@ async def revise_topics(state: State) -> dict:
     )
 
     return {
-        "topics": await plan_topics(prompt),
+        "topics": await plan_topics(
+            prompt, llm.get_generation_llm(state.get("kind"), state["level"])
+        ),
         "feedback": "",
         "approved": False,
     }

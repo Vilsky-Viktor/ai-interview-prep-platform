@@ -71,7 +71,7 @@ def ten_per_topic(monkeypatch):
 def test_a_short_topic_is_filled_to_exactly_its_size(monkeypatch):
     # One returned question repeats an existing one, so only three are new.
     fake = FakeLLM(["Question 0", "New 1", "New 2", "New 3"])
-    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: fake)
     values = state(usable=7, dropped=2)
 
     values.update(asyncio.run(fill_topics(values)))
@@ -84,7 +84,7 @@ def test_a_short_topic_is_filled_to_exactly_its_size(monkeypatch):
 
 def test_a_full_topic_is_left_alone(monkeypatch):
     fake = FakeLLM(["Never asked"])
-    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: fake)
     values = state(usable=10)
 
     assert asyncio.run(fill_topics(values))["final"] == values["final"]
@@ -93,7 +93,7 @@ def test_a_full_topic_is_left_alone(monkeypatch):
 
 def test_a_topic_that_cannot_be_filled_fails_the_generation(monkeypatch):
     fake = FakeLLM(["Question 0", "Question 1"])
-    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: fake)
 
     with pytest.raises(TopicShortError):
         asyncio.run(fill_topics(state(usable=8)))

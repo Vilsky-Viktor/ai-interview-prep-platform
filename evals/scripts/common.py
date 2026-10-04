@@ -47,6 +47,24 @@ def model(name: str, effort: str, timeout: int = 300) -> ChatOpenAI:
     return ChatOpenAI(model=name, reasoning_effort=effort, max_retries=3, timeout=timeout)
 
 
+def generation_models(settings) -> str:
+    """With MODEL and EFFORT set, the model under test writes interviews and every kit; without
+    them the service's own split is tested. Returns what writes what, for the results."""
+    names = ("interview", "kit", "hard_kit")
+
+    for name in names:
+        if "MODEL" in os.environ:
+            setattr(settings, f"{name}_model", os.environ["MODEL"])
+
+        if "EFFORT" in os.environ:
+            setattr(settings, f"{name}_reasoning_effort", os.environ["EFFORT"])
+
+    return ", ".join(
+        f"{name} {getattr(settings, f'{name}_model')} ({getattr(settings, f'{name}_reasoning_effort')})"
+        for name in names
+    )
+
+
 def judge() -> ChatOpenAI:
     return model(JUDGE_MODEL, JUDGE_EFFORT)
 

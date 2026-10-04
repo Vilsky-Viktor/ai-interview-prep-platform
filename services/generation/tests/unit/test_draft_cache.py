@@ -1,4 +1,5 @@
 import asyncio
+from types import SimpleNamespace
 
 from app.integrations import llm
 from app.schemas.extraction import JobExtraction
@@ -25,6 +26,9 @@ class FakeRedis:
 
 
 class CountingLLM:
+    model_name = "model-a"
+    reasoning_effort = "low"
+
     def __init__(self):
         self.calls = 0
 
@@ -39,7 +43,7 @@ class CountingLLM:
 
 def run_twice(monkeypatch, redis):
     fake = CountingLLM()
-    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: fake)
     monkeypatch.setattr(draft_cache, "get_redis", lambda: redis)
 
     first = asyncio.run(extract_info({"input_text": "Junior accountant"}))
@@ -63,9 +67,13 @@ def test_without_redis_every_generation_calls_the_model(monkeypatch):
     assert calls == 2
 
 
-def test_another_model_or_prompt_gets_another_key(monkeypatch):
-    key = draft_cache.cache_key("topics", "prompt A")
+def test_another_model_effort_or_prompt_gets_another_key():
+    def model(name, effort):
+        return SimpleNamespace(model_name=name, reasoning_effort=effort)
 
-    assert key != draft_cache.cache_key("topics", "prompt B")
-    monkeypatch.setattr(draft_cache.settings, "generation_model", "another-model")
-    assert key != draft_cache.cache_key("topics", "prompt A")
+    key = draft_cache.cache_key("topics", "prompt A", model("sol", "low"))
+
+    assert key != draft_cache.cache_key("topics", "prompt B", model("sol", "low"))
+    # A learner's draft on another model never serves a company's interview.
+    assert key != draft_cache.cache_key("topics", "prompt A", model("luna", "low"))
+    assert key != draft_cache.cache_key("topics", "prompt A", model("sol", "high"))
