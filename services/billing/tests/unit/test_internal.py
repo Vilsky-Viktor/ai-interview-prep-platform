@@ -7,15 +7,40 @@ AUTH = {"Authorization": f"Bearer {service_token('billing')}"}
 
 
 def test_a_kit_without_enough_credits_is_refused_with_a_message(client, monkeypatch):
+    async def none(user_id, key):
+        return False
+
     async def too_low(owner_type, owner_id, amount, key, reason):
         return False
 
+    monkeypatch.setattr(ledger, "reserve_free_kit", none)
     monkeypatch.setattr(ledger, "reserve", too_low)
 
     response = client.post("/internal/kits/gen-1/hold", params={"user_id": "ann"}, headers=AUTH)
 
     assert response.status_code == 402
     assert response.json() == {"detail": "Not enough credits. Top up to continue."}
+
+
+def test_a_free_kit_holds_no_credits_and_says_so(client, monkeypatch):
+    held = []
+
+    async def free(user_id, key):
+        return True
+
+    async def reserve(owner_type, owner_id, amount, key, reason):
+        held.append(key)
+
+        return True
+
+    monkeypatch.setattr(ledger, "reserve_free_kit", free)
+    monkeypatch.setattr(ledger, "reserve", reserve)
+
+    response = client.post("/internal/kits/gen-1/hold", params={"user_id": "ann"}, headers=AUTH)
+
+    assert response.status_code == 200
+    assert response.json() == {"free": True}
+    assert held == []
 
 
 def test_a_certificate_on_a_public_kit_shares_with_its_author(client, monkeypatch):
@@ -63,7 +88,7 @@ def test_internal_routes_need_a_service_token(client):
 
 def test_several_companies_balances_at_once(client, monkeypatch):
     async def found(owner_type, owner_ids):
-        return {"a": SimpleNamespace(owner_type="company", balance=900, reserved=300)}
+        return {"a": SimpleNamespace(owner_type="company", balance=900, reserved=300, free_kits=0)}
 
     monkeypatch.setattr(ledger, "wallets", found)
 
@@ -72,6 +97,6 @@ def test_several_companies_balances_at_once(client, monkeypatch):
     )
 
     assert response.json() == {
-        "a": {"balance": 900, "reserved": 300, "available": 600, "low": False},
-        "b": {"balance": 0, "reserved": 0, "available": 0, "low": True},
+        "a": {"balance": 900, "reserved": 300, "available": 600, "low": False, "free_kits": 0},
+        "b": {"balance": 0, "reserved": 0, "available": 0, "low": True, "free_kits": 0},
     }

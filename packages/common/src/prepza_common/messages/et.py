@@ -35,4 +35,5 @@ MESSAGES = {
     "A company with this name already exists.": "Sellise nimega ettevõte on juba olemas.",
     "A public kit's title can't include a company name. Remove it and try again.": "Avaliku komplekti pealkirjas ei tohi olla ettevõtte nime. Eemalda see ja proovi uuesti.",
     "Couldn't check the title. Please try again.": "Pealkirja ei õnnestunud kontrollida. Proovi uuesti.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Kutsu enne uue intervjuu loomist kandidaat mõnele oma intervjuule: ilma kandidaatideta saab oodata kuni 3 intervjuud.",
 }

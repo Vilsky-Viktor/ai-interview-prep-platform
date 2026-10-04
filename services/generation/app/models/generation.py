@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 
 from prepza_common.constants import DEFAULT_LANGUAGE
-from sqlalchemy import DateTime, String, Text, func
+from sqlalchemy import Boolean, DateTime, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -20,6 +20,8 @@ class Generation(Base):
     text: Mapped[str] = mapped_column(Text)
     language: Mapped[str] = mapped_column(String(8), default=DEFAULT_LANGUAGE)
     status: Mapped[str] = mapped_column(String(32), default=Status.QUEUED)
+    # A learner's first kit: free, with fewer topics (FREE_KIT_TOPICS).
+    free_kit: Mapped[bool] = mapped_column(Boolean, default=False)
     topics: Mapped[list | None] = mapped_column(JSONB)
     progress: Mapped[dict | None] = mapped_column(JSONB)
     preparation_id: Mapped[uuid.UUID | None]

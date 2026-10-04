@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Wat kost het?",
-        "answer": "Je betaalt naar gebruik, met credits. Een nieuwe kit kost {kit} credits, en elk nieuw account krijgt {welcome} gratis credits, genoeg voor een eerste kit. De prijspagina toont alle prijzen.",
+        "answer": "Je betaalt naar gebruik, met credits. Een nieuwe kit kost {kit} credits. Je eerste kit is gratis, met maximaal {free_topics} onderwerpen, en elk nieuw account krijgt ook {welcome} gratis credits. De prijspagina toont alle prijzen.",
     },
     {
         "key": "expire",

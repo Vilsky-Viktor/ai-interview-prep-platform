@@ -47,7 +47,8 @@ Hiring (companies):
 - Under "hiring", create a company (one person can own up to {max_companies}). A company has \
 an owner and admins; the owner invites admins on its members page.
 - Generate an interview from a job description and set how many questions each topic asks; a \
-company can generate up to {interviews_per_day} interviews a day, free.
+company can generate up to {interviews_per_day} interviews a day, free, as long as at most \
+{waiting_interviews} of its interviews have no candidate invited yet.
 - Invite candidates by email, resend an invite, or revoke one not used yet. The invite page \
 tells candidates what to expect.
 - Each candidate gets a random subset of each topic, with their own question and option order, \
@@ -65,8 +66,10 @@ having answered at least one question (see prices).
 Credits and billing:
 - prepza is pay as you go with credits: 1 US dollar buys 100 credits. Credits never expire. \
 There are no subscriptions or plans.
-- Every user has a wallet, and every company has its own. New accounts and a person's first \
-company get free welcome credits (see prices).
+- Every user has a wallet, and every company has its own. A new account gets its first prep kit \
+free, with up to {free_topics} topics (it can keep at most {free_topics} at topic review; later \
+kits are paid and keep up to 10), plus a few free welcome credits for the tutor and \
+certificates. A person's first company gets free welcome credits (see prices).
 - Only what works is charged: credits are set aside when something starts and come back if it \
 fails or is cancelled, or if a candidate never answers.
 - Top up on the top-up page (account menu → Top up) with a fixed amount or any whole amount \

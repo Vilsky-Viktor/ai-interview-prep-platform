@@ -5,7 +5,7 @@ import pytest
 from fastapi import HTTPException
 
 from app.config.settings import settings
-from app.constants.credits import KIT_CREDITS, Reason
+from app.constants.credits import Reason
 from app.constants.products import AUTO_TOP_UP_COOLDOWN, OwnerType
 from app.helpers.credits import credits_for
 from app.integrations import paddle
@@ -49,17 +49,17 @@ def test_turning_on_waits_for_the_checkout_then_refills_under_the_threshold_once
     async def scenario():
         await ledger.welcome_user(ann, f"{ann}@example.com")
         waiting = await auto_top_ups.turn_on(
-            USER, ann, AutoTopUpIn(product="topup_25", threshold=300), ann
+            USER, ann, AutoTopUpIn(product="topup_25", threshold=100), ann
         )
         # Someone else's checkout can't start it; the owner's does, once.
         await auto_top_ups.start(checkout_data(ann, "mallory"), "sub_other")
         await auto_top_ups.start(checkout_data(ann, ann), sub)
         await auto_top_ups.start(checkout_data(ann, ann), sub)
         started = await auto_top_ups.out(USER, ann)
-        # 500 available: above 300, nothing is charged. A kit leaves 0: one charge, however
-        # often it's checked within the cooldown.
+        # The welcome credits aren't under 100, so nothing is charged. A chat turn takes them
+        # under: one charge, however often it's checked within the cooldown.
         await auto_top_ups.check(USER, ann)
-        await ledger.reserve(USER, ann, KIT_CREDITS, f"kit:{uuid.uuid4()}", Reason.KIT)
+        await ledger.spend(USER, ann, 1, f"chat:{uuid.uuid4()}", Reason.CHAT)
         await auto_top_ups.check(USER, ann)
         await auto_top_ups.check(USER, ann)
         later = await rows.claim_charge(USER, ann, datetime.now(UTC) + AUTO_TOP_UP_COOLDOWN * 2)
@@ -70,7 +70,7 @@ def test_turning_on_waits_for_the_checkout_then_refills_under_the_threshold_once
 
     assert waiting.checkout.price_id == "pri_plan" and not waiting.on and waiting.waiting
     assert waiting.checkout.custom_data == checkout_data(ann, ann)
-    assert started.on and started.product == "topup_25" and started.threshold == 300
+    assert started.on and started.product == "topup_25" and started.threshold == 100
     assert paddle_calls == [("cancel", "sub_other"), ("charge", sub, "pri_25")]
     assert later is not None
 

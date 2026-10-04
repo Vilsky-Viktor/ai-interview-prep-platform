@@ -6,6 +6,7 @@ from app.constants.credits import (
     KIT_CREDITS,
     WELCOME_COMPANY,
     WELCOME_USER,
+    WELCOME_USER_KITS,
     Reason,
 )
 from app.constants.products import DELETED_OWNER, TOP_UPS, OwnerType
@@ -26,6 +27,7 @@ def test_a_learner_starts_with_a_welcome_gift_and_a_kit_is_charged_only_when_rea
     async def scenario():
         await ledger.welcome_user(ann, f"{ann}@example.com")
         opened = await ledger.wallet(OwnerType.USER, ann)
+        await ledger.adjust(OwnerType.USER, ann, KIT_CREDITS, "adjustment:k1", Reason.TOPUP)
         held = await ledger.reserve(OwnerType.USER, ann, KIT_CREDITS, "kit:1", Reason.KIT)
         again = await ledger.reserve(OwnerType.USER, ann, KIT_CREDITS, "kit:2", Reason.KIT)
         await ledger.charge("kit:1")
@@ -38,12 +40,17 @@ def test_a_learner_starts_with_a_welcome_gift_and_a_kit_is_charged_only_when_rea
 
     opened, held, again, done, history = run(scenario())
 
-    assert (opened.balance, opened.reserved) == (WELCOME_USER, 0)
+    assert (opened.balance, opened.reserved, opened.free_kits) == (
+        WELCOME_USER,
+        0,
+        WELCOME_USER_KITS,
+    )
     assert (held, again) == (True, False)
-    assert (done.balance, done.reserved) == (0, 0)
-    # A repeated charge counts once; the history holds the gift and the kit.
+    assert (done.balance, done.reserved) == (WELCOME_USER, 0)
+    # A repeated charge counts once; the history holds the gift, the top-up and the kit.
     assert sorted((row.reason, row.amount) for row in history) == [
         (Reason.KIT, -KIT_CREDITS),
+        (Reason.TOPUP, KIT_CREDITS),
         (Reason.WELCOME, WELCOME_USER),
     ]
 
@@ -118,9 +125,11 @@ def test_credits_set_aside_cant_be_spent_twice(run):
 
     async def scenario():
         await ledger.welcome_user(ann, f"{ann}@example.com")
+        await ledger.adjust(OwnerType.USER, ann, KIT_CREDITS, "adjustment:k3", Reason.TOPUP)
         await ledger.reserve(OwnerType.USER, ann, KIT_CREDITS, "kit:3", Reason.KIT)
 
-        return await ledger.spend(OwnerType.USER, ann, 1, "chat:1", Reason.CHAT)
+        # One credit more than the kit left free: the welcome credits.
+        return await ledger.spend(OwnerType.USER, ann, WELCOME_USER + 1, "chat:1", Reason.CHAT)
 
     assert run(scenario()) is False
 
@@ -179,7 +188,7 @@ def test_signing_up_again_or_a_new_company_doesnt_repeat_the_gifts(run):
 
     learner, new_company = run(scenario())
 
-    assert (learner.balance, new_company.balance) == (0, 0)
+    assert (learner.balance, learner.free_kits, new_company.balance) == (0, 0, 0)
 
 
 def test_a_refund_of_spent_credits_leaves_the_balance_negative(run):

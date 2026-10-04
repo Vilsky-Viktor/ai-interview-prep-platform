@@ -355,6 +355,8 @@
     "changesPlaceholder": "Không bắt buộc: mô tả thay đổi, ví dụ “Thêm một chủ đề về lãnh đạo nhóm”",
     "changes": "Thay đổi chủ đề",
     "tooMany": "Chọn tối đa {max} chủ đề, hoặc mô tả cách gộp chúng.",
+    "freeKit": "Bộ ôn luyện đầu tiên của bạn miễn phí và có tối đa {max} chủ đề. Hãy chọn những chủ đề quan trọng nhất; các bộ sau có nhiều hơn.",
+    "freeTooMany": "Bộ miễn phí của bạn có tối đa {max} chủ đề. Bỏ chọn bớt hoặc mô tả cách gộp chúng.",
     "apply": "Áp dụng thay đổi",
     "approve": "Duyệt và tạo",
     "unfinished": "Chưa hoàn thành"
@@ -504,6 +506,7 @@
     "intro": "Chỉ trả cho những gì bạn dùng: $1 mua được 100 tín dụng, và tín dụng không bao giờ hết hạn. Không có gói thuê bao.",
     "learners": "Cho người học",
     "welcome": "Khi đăng ký",
+    "freeKit": "Bộ ôn luyện đầu tiên của bạn, tối đa {topics} chủ đề",
     "referrals": "Lời mời",
     "referralsNote": "Chia sẻ liên kết của bạn trong Cài đặt, hoặc liên kết của công ty trong thẻ Lời mời của công ty đó.",
     "referral": "Người bạn bạn mời nạp tiền lần đầu",

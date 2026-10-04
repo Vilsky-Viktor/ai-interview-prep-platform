@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "شرکتی با این نام از قبل وجود دارد.",
     "A public kit's title can't include a company name. Remove it and try again.": "عنوان یک مجموعهٔ عمومی نمی‌تواند نام شرکت داشته باشد. آن را حذف کنید و دوباره امتحان کنید.",
     "Couldn't check the title. Please try again.": "بررسی عنوان ممکن نشد. لطفاً دوباره امتحان کنید.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "پیش از ساختن مصاحبهٔ جدید، یک نامزد را به یکی از مصاحبه‌های خود دعوت کنید: حداکثر ۳ مصاحبه می‌توانند بدون نامزد بمانند.",
 }

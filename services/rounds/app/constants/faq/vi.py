@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Chi phí là bao nhiêu?",
-        "answer": "Bạn trả theo mức dùng, bằng tín dụng. Một bộ mới có giá {kit} tín dụng, và mỗi tài khoản mới nhận {welcome} tín dụng miễn phí, đủ cho bộ đầu tiên. Trang bảng giá liệt kê mọi mức giá.",
+        "answer": "Bạn trả theo mức dùng, bằng tín dụng. Một bộ ôn luyện mới có giá {kit} tín dụng. Bộ đầu tiên của bạn miễn phí, với tối đa {free_topics} chủ đề, và mỗi tài khoản mới còn nhận {welcome} tín dụng miễn phí. Trang giá liệt kê mọi mức giá.",
     },
     {
         "key": "expire",

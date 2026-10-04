@@ -10,7 +10,9 @@ from prepza_common.rate_limit import hit
 
 from app.constants.invites import (
     INTERVIEWS_PER_DAY,
+    MAX_INTERVIEWS_WITHOUT_CANDIDATES,
     TOO_MANY_INTERVIEWS,
+    TOO_MANY_WITHOUT_CANDIDATES,
 )
 from app.constants.roles import Role
 from app.helpers.interviews import (
@@ -40,6 +42,17 @@ async def create_interview(
     body: InterviewCreate, company_id: UUID, user: CurrentUser
 ) -> InterviewOut:
     company, _ = await require_company(user, company_id)
+
+    # Checked first, so a refused attempt doesn't count towards the day's limit.
+    if await interviews.without_candidates(company.id) >= MAX_INTERVIEWS_WITHOUT_CANDIDATES:
+        await track(
+            "limit_hit",
+            user_id=user.uid,
+            company_id=company.id,
+            which="interviews_without_candidates",
+        )
+
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, TOO_MANY_WITHOUT_CANDIDATES)
 
     try:
         await hit(

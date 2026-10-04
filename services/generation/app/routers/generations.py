@@ -53,7 +53,7 @@ async def create_generation(
     )
     # Credits first: a refused attempt mustn't use up the day's cap for everyone.
     generation_id = uuid4()
-    await billing.hold_kit(user.uid, generation_id)
+    free_kit = await billing.hold_kit(user.uid, generation_id)
 
     try:
         await use_daily_budget()
@@ -67,7 +67,7 @@ async def create_generation(
 
     try:
         generation = await generations.create(
-            user.uid, body.text, body.kind, body.company_id, language, generation_id
+            user.uid, body.text, body.kind, body.company_id, language, generation_id, free_kit
         )
     except Exception:
         await billing.release_kit(generation_id)

@@ -21,6 +21,7 @@ async def create(
     company_id=None,
     language: str = DEFAULT_LANGUAGE,
     generation_id: uuid.UUID | None = None,
+    free_kit: bool = False,
 ) -> Generation:
     async with Session() as session:
         generation = Generation(
@@ -31,6 +32,7 @@ async def create(
             text=text,
             language=language,
             status=Status.QUEUED,
+            free_kit=free_kit,
         )
         session.add(generation)
         await session.commit()

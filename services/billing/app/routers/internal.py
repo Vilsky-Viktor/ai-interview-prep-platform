@@ -18,6 +18,7 @@ from app.helpers.wallets import balance_out, entry_out
 from app.schemas.billing import (
     BalanceOut,
     EntryOut,
+    HoldOut,
     OwnersIn,
     ReferralOut,
     SpendIn,
@@ -46,10 +47,18 @@ async def take(owner_type: str, owner_id: str, amount: int, key: str, reason: st
     await auto_top_ups.check(owner_type, owner_id)
 
 
-@router.post("/kits/{generation_id}/hold", status_code=status.HTTP_204_NO_CONTENT)
-async def hold_kit(generation_id: str, user_id: str, caller: ServiceCaller) -> None:
-    """A learner's prep kit. Charged when it's ready, given back if it fails or is cancelled."""
-    await take(OwnerType.USER, user_id, KIT_CREDITS, f"kit:{generation_id}", Reason.KIT)
+@router.post("/kits/{generation_id}/hold")
+async def hold_kit(generation_id: str, user_id: str, caller: ServiceCaller) -> HoldOut:
+    """A learner's prep kit. Charged when it's ready, given back if it fails or is cancelled.
+    A free kit is used first, if the learner has one; otherwise its credits are held."""
+    key = f"kit:{generation_id}"
+
+    if await ledger.reserve_free_kit(user_id, key):
+        return HoldOut(free=True)
+
+    await take(OwnerType.USER, user_id, KIT_CREDITS, key, Reason.KIT)
+
+    return HoldOut(free=False)
 
 
 @router.post("/kits/{generation_id}/charge", status_code=status.HTTP_204_NO_CONTENT)
@@ -138,7 +147,7 @@ async def company_credits(company_id: str, caller: ServiceCaller) -> BalanceOut:
 async def companies_credits(body: OwnersIn, caller: ServiceCaller) -> dict[str, BalanceOut]:
     """Several companies' balances at once, for the top-up page."""
     found = await ledger.wallets(OwnerType.COMPANY, body.owner_ids)
-    empty = BalanceOut(balance=0, reserved=0, available=0, low=True)
+    empty = BalanceOut(balance=0, reserved=0, available=0, low=True, free_kits=0)
 
     return {
         owner_id: balance_out(found[owner_id]) if owner_id in found else empty
@@ -176,6 +185,7 @@ async def export_user(user_id: str, caller: ServiceCaller) -> dict:
         {
             "balance": row.balance,
             "reserved": row.reserved,
+            "free_kits": row.free_kits,
             "history": [entry_out(item).model_dump() for item in history],
             "purchases": [
                 {

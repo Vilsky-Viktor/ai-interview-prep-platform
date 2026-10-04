@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Magkano ito?",
-        "answer": "Magbabayad ka habang ginagamit, gamit ang credits. Nagkakahalaga ng {kit} credits ang bagong kit, at nakakakuha ang bawat bagong account ng {welcome} libreng credits, sapat para sa unang kit. Nakalista ang lahat ng presyo sa pricing page.",
+        "answer": "Magbabayad ka ayon sa paggamit, gamit ang credits. Ang bagong kit ay {kit} credits. Libre ang una mong kit, hanggang {free_topics} topic, at bawat bagong account ay may {welcome} libreng credits din. Nasa pricing page ang lahat ng presyo.",
     },
     {
         "key": "expire",

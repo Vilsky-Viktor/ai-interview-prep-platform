@@ -16,6 +16,7 @@ from app.constants.events import GENERATION_COMPLETED
 from app.constants.generation import (
     CHARGE_ATTEMPTS,
     CHARGE_RETRY_SECONDS,
+    FREE_KIT_TOO_MANY_TOPICS,
     MAX_CONCURRENCY,
     RECURSION_LIMIT,
 )
@@ -23,6 +24,7 @@ from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
 from app.helpers.payload import build_preparation
 from app.helpers.progress import track_progress
+from app.helpers.topics import too_many_for_free_kit
 from app.integrations import billing, library
 from app.models.generation import Generation
 from app.services import outbox as outbox_service
@@ -38,6 +40,10 @@ async def run_pipeline(graph, generation: Generation, resume: dict | None) -> No
         "max_concurrency": MAX_CONCURRENCY,
         "recursion_limit": RECURSION_LIMIT,
     }
+
+    # The API refuses this already; a free kit never gets more topics than it includes.
+    if resume is not None and too_many_for_free_kit(generation.free_kit, resume):
+        raise ValueError(FREE_KIT_TOO_MANY_TOPICS)
 
     if resume is not None:
         graph_input = Command(resume=resume)

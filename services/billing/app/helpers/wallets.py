@@ -11,6 +11,7 @@ def balance_out(row: Wallet) -> BalanceOut:
         reserved=row.reserved,
         available=available,
         low=available < LOW_BALANCE[row.owner_type],
+        free_kits=row.free_kits,
     )
 
 

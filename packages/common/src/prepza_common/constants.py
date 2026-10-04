@@ -82,7 +82,13 @@ MAX_SHARES = 30
 # Companies one person may own; the welcome credits come with the first one only (companies).
 MAX_OWNED_COMPANIES = 3
 # Interviews are free to generate, so each company may start this many a day (companies).
+# A new learner's welcome gift includes one free kit, of at most this many topics (a paid kit
+# keeps up to generation's MAX_TOPICS).
+FREE_KIT_TOPICS = 3
 INTERVIEWS_PER_DAY = 10
+# Generating an interview is free and paid for by its candidates: a company can have only this many
+# interviews waiting without one before it generates another.
+MAX_INTERVIEWS_WITHOUT_CANDIDATES = 3
 # Seconds each timed interview question starts with; an admin can change it (companies).
 DEFAULT_QUESTION_SECONDS = 60
 

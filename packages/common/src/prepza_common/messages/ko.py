@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "이 이름의 회사가 이미 있습니다.",
     "A public kit's title can't include a company name. Remove it and try again.": "공개 키트의 제목에는 회사 이름을 넣을 수 없습니다. 이름을 지우고 다시 시도해 주세요.",
     "Couldn't check the title. Please try again.": "제목을 확인하지 못했습니다. 다시 시도해 주세요.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "새 면접을 만들기 전에 기존 면접 중 하나에 지원자를 초대해 주세요. 지원자가 없는 면접은 최대 3개까지 둘 수 있습니다.",
 }

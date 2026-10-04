@@ -1,4 +1,4 @@
-# The FAQ in en; {kit}, {welcome}, {candidate}, {company} and {count} are filled in by
+# The FAQ in en; {kit}, {free_topics}, {welcome}, {candidate}, {company} and {count} are filled in by
 # helpers/help.py with billing's prices and the number of languages.
 FAQ = [
     {
@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "How much does it cost?",
-        "answer": "You pay as you go with credits. A new kit costs {kit} credits, and every new account gets {welcome} free credits, enough for a first kit. The pricing page lists every price.",
+        "answer": "You pay as you go with credits. A new kit costs {kit} credits. Your first kit is free, with up to {free_topics} topics, and every new account also gets {welcome} free credits. The pricing page lists every price.",
     },
     {
         "key": "expire",

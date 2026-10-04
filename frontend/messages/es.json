@@ -355,6 +355,8 @@
     "changesPlaceholder": "Opcional: describe cambios, p. ej. «Añade un tema sobre liderazgo de equipos»",
     "changes": "Cambios en los temas",
     "tooMany": "Elige como máximo {max} temas o describe cómo combinarlos.",
+    "freeKit": "Tu primer kit es gratis e incluye hasta {max} temas. Elige los más importantes; los siguientes kits incluyen más.",
+    "freeTooMany": "Tu kit gratis incluye hasta {max} temas. Desmarca algunos o describe cómo combinarlos.",
     "apply": "Aplicar cambios",
     "approve": "Aprobar y generar",
     "unfinished": "Sin terminar"
@@ -504,6 +506,7 @@
     "intro": "Paga solo por lo que usas: $1 equivale a 100 créditos y los créditos no caducan. Sin suscripciones.",
     "learners": "Para quienes estudian",
     "welcome": "Al registrarte",
+    "freeKit": "Tu primer kit, hasta {topics} temas",
     "referrals": "Invitaciones",
     "referralsNote": "Comparte tu enlace desde Ajustes, o el de una empresa desde su pestaña de invitaciones.",
     "referral": "Un amigo al que invitaste recarga por primera vez",

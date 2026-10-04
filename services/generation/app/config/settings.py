@@ -20,7 +20,9 @@ class Settings(ServiceSettings):
     invoker_service_account: str = ""
     service_secret: str
     questions_per_topic: int = Field(default=100, gt=0)
-    llm_model: str = "gpt-6-luna"
+    # Writes the kits and interviews, fixes flagged questions and checks public titles. The
+    # tutor and help chats run in rounds, on their own (cheaper) LLM_MODEL.
+    generation_model: str = "gpt-6.1-sol"
     # How hard the model thinks: for generation (topics, questions, a re-generated question, the
     # public-title check), and for the verifier's key check, which is rare and must be right.
     # Only reasoning models take an effort.
@@ -29,9 +31,9 @@ class Settings(ServiceSettings):
     generation_limit: int = Field(default=20, ge=0)
     generation_window_seconds: int = Field(default=86_400, gt=0)
     regeneration_limit: int = Field(default=100, ge=0)
-    # New generations a day, for everyone together: a ceiling on LLM spending (about $0.03
+    # New generations a day, for everyone together: a ceiling on LLM spending (about $1.60
     # each). 0 turns it off.
-    daily_generation_limit: int = Field(default=0, ge=0)
+    daily_generation_limit: int = Field(default=200, ge=0)
     # LLM requests a second across the API and every worker; 0 turns the limit off. The default
     # stays under OpenAI's 500 requests a minute on its first tier.
     llm_requests_per_second: int = Field(default=8, ge=0)

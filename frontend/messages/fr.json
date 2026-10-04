@@ -355,6 +355,8 @@
     "changesPlaceholder": "Facultatif : décrivez des changements, par ex. « Ajoute un sujet sur le leadership d'équipe »",
     "changes": "Changements des sujets",
     "tooMany": "Choisissez au plus {max} sujets, ou décrivez comment les regrouper.",
+    "freeKit": "Votre premier kit est gratuit et comprend jusqu'à {max} sujets. Choisissez les plus importants ; les kits suivants en comprennent davantage.",
+    "freeTooMany": "Votre kit gratuit comprend jusqu'à {max} sujets. Décochez-en ou décrivez comment les regrouper.",
     "apply": "Appliquer les changements",
     "approve": "Valider et générer",
     "unfinished": "Inachevées"
@@ -504,6 +506,7 @@
     "intro": "Ne payez que ce que vous utilisez : 1 $ donne 100 crédits, et les crédits n'expirent jamais. Sans abonnement.",
     "learners": "Pour les apprenants",
     "welcome": "À l'inscription",
+    "freeKit": "Votre premier kit, jusqu'à {topics} sujets",
     "referrals": "Parrainage",
     "referralsNote": "Partagez votre lien depuis les Paramètres, ou celui d'une entreprise depuis son onglet Parrainage.",
     "referral": "Un ami que vous avez invité recharge pour la première fois",

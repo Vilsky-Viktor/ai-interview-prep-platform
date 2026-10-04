@@ -355,6 +355,8 @@
     "changesPlaceholder": "Opcional: descreva mudanças, por ex. “Adicione um tópico sobre liderança de equipes”",
     "changes": "Mudanças nos tópicos",
     "tooMany": "Escolha no máximo {max} tópicos ou descreva como juntá-los.",
+    "freeKit": "Seu primeiro kit é grátis e inclui até {max} tópicos. Escolha os mais importantes; os próximos kits incluem mais.",
+    "freeTooMany": "Seu kit grátis inclui até {max} tópicos. Desmarque alguns ou descreva como combiná-los.",
     "apply": "Aplicar mudanças",
     "approve": "Aprovar e gerar",
     "unfinished": "Não concluídas"
@@ -504,6 +506,7 @@
     "intro": "Pague só pelo que usar: $1 compra 100 créditos, e os créditos não expiram. Sem assinaturas.",
     "learners": "Para quem estuda",
     "welcome": "Ao se cadastrar",
+    "freeKit": "Seu primeiro kit, até {topics} tópicos",
     "referrals": "Convites",
     "referralsNote": "Compartilhe seu link em Configurações, ou o link de uma empresa na aba de convites dela.",
     "referral": "Um amigo que você convidou faz a primeira recarga",

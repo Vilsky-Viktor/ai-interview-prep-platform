@@ -6,6 +6,7 @@ from sqlalchemy import delete, func, select, update
 from sqlalchemy.orm import selectinload
 
 from app.models.interviews import Interview
+from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
 from app.schemas.interviews import InterviewSettings
 from app.storage.db import Session
@@ -51,6 +52,19 @@ async def counts(company_ids: list) -> dict:
         rows = await session.execute(query)
 
     return {company_id: count for company_id, count in rows}
+
+
+async def without_candidates(company_id) -> int:
+    """The company's interviews no candidate is invited to (yet, or any more)."""
+    invited = select(CandidateInvite.id).where(CandidateInvite.interview_id == Interview.id)
+    query = (
+        select(func.count())
+        .select_from(Interview)
+        .where(Interview.company_id == company_id, ~invited.exists())
+    )
+
+    async with Session() as session:
+        return await session.scalar(query) or 0
 
 
 async def list_for_company(

@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "כבר קיימת חברה בשם הזה.",
     "A public kit's title can't include a company name. Remove it and try again.": "כותרת של ערכה ציבורית לא יכולה לכלול שם של חברה. הסירו אותו ונסו שוב.",
     "Couldn't check the title. Please try again.": "לא ניתן היה לבדוק את הכותרת. נסו שוב.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "הזמינו מועמד לאחד הראיונות שלכם לפני שתיצרו ראיון נוסף: עד 3 ראיונות יכולים להמתין ללא מועמדים.",
 }

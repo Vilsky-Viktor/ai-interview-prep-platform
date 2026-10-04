@@ -13,7 +13,7 @@ def cache_key(kind: str, source: str) -> str:
     """`source` holds the whole prompt, so a changed prompt or model never reuses old results."""
     digest = hashlib.sha256(source.encode()).hexdigest()
 
-    return f"draft:{kind}:{settings.llm_model}:{digest}"
+    return f"draft:{kind}:{settings.generation_model}:{digest}"
 
 
 async def get(kind: str, source: str) -> dict | list | None:

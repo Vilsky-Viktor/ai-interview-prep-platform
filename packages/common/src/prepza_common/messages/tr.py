@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "Bu adla bir şirket zaten var.",
     "A public kit's title can't include a company name. Remove it and try again.": "Herkese açık bir setin başlığında şirket adı olamaz. Kaldırıp tekrar deneyin.",
     "Couldn't check the title. Please try again.": "Başlık kontrol edilemedi. Lütfen tekrar deneyin.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Yeni bir mülakat oluşturmadan önce mevcut mülakatlarınızdan birine aday davet edin: adaysız en fazla 3 mülakat bekleyebilir.",
 }

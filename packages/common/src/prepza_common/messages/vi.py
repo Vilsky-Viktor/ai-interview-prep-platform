@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "Đã có công ty mang tên này.",
     "A public kit's title can't include a company name. Remove it and try again.": "Tiêu đề của bộ ôn luyện công khai không được chứa tên công ty. Hãy xóa tên đó và thử lại.",
     "Couldn't check the title. Please try again.": "Không thể kiểm tra tiêu đề. Vui lòng thử lại.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Hãy mời một ứng viên vào một trong các buổi phỏng vấn của bạn trước khi tạo buổi mới: tối đa 3 buổi phỏng vấn có thể chờ mà chưa có ứng viên.",
 }

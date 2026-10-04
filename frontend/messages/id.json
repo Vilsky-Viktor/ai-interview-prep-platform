@@ -349,6 +349,8 @@
     "changesPlaceholder": "Opsional: jelaskan perubahan, mis. “Tambahkan topik tentang kepemimpinan tim”",
     "changes": "Perubahan topik",
     "tooMany": "Pilih maksimal {max} topik, atau jelaskan cara menggabungkannya.",
+    "freeKit": "Kit pertamamu gratis dan berisi hingga {max} topik. Pilih yang paling penting; kit berikutnya berisi lebih banyak.",
+    "freeTooMany": "Kit gratismu berisi hingga {max} topik. Hapus centang beberapa atau jelaskan cara menggabungkannya.",
     "apply": "Terapkan perubahan",
     "approve": "Setujui dan buat",
     "unfinished": "Belum selesai"
@@ -498,6 +500,7 @@
     "intro": "Bayar hanya yang kamu pakai: $1 = 100 kredit, dan kredit tidak pernah kedaluwarsa. Tanpa langganan.",
     "learners": "Untuk individu",
     "welcome": "Saat mendaftar",
+    "freeKit": "Kit pertamamu, hingga {topics} topik",
     "referrals": "Undangan",
     "referralsNote": "Bagikan tautanmu dari Pengaturan, atau tautan perusahaan dari tab Undangan miliknya.",
     "referral": "Teman yang kamu undang mengisi ulang untuk pertama kali",

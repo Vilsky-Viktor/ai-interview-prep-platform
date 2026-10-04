@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "Er bestaat al een bedrijf met deze naam.",
     "A public kit's title can't include a company name. Remove it and try again.": "De titel van een openbare kit mag geen bedrijfsnaam bevatten. Haal die weg en probeer het opnieuw.",
     "Couldn't check the title. Please try again.": "De titel kon niet worden gecontroleerd. Probeer het opnieuw.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Nodig een kandidaat uit voor een van je sollicitatiegesprekken voordat je een nieuw maakt: maximaal 3 gesprekken kunnen zonder kandidaten wachten.",
 }

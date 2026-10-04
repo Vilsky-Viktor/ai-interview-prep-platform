@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Ile to kosztuje?",
-        "answer": "Płacisz za użycie, kredytami. Nowy zestaw kosztuje {kit} kredytów, a każde nowe konto dostaje {welcome} darmowych kredytów, wystarczająco na pierwszy zestaw. Wszystkie ceny są w cenniku.",
+        "answer": "Płacisz za użycie, kredytami. Nowy zestaw kosztuje {kit} kredytów. Twój pierwszy zestaw jest darmowy, do {free_topics} tematów, a każde nowe konto dostaje też {welcome} darmowych kredytów. Wszystkie ceny są na stronie cennika.",
     },
     {
         "key": "expire",

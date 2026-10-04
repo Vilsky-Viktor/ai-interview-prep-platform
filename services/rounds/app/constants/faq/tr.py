@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Ücreti ne kadar?",
-        "answer": "Kullandıkça kredilerle ödersiniz. Yeni bir set {kit} krediye mal olur ve her yeni hesap, ilk set için yeterli olan {welcome} ücretsiz kredi alır. Fiyatlar sayfası tüm fiyatları listeler.",
+        "answer": "Kullandıkça kredilerle ödersiniz. Yeni bir set {kit} kredi tutar. İlk setiniz ücretsizdir, en fazla {free_topics} konuyla, ve her yeni hesap ayrıca {welcome} ücretsiz kredi alır. Fiyatlar sayfasında tüm fiyatlar yer alır.",
     },
     {
         "key": "expire",

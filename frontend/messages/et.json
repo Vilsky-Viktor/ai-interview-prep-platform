@@ -355,6 +355,8 @@
     "changesPlaceholder": "Valikuline: kirjelda muudatusi, nt „Lisa teema meeskonna juhtimisest“",
     "changes": "Teemade muudatused",
     "tooMany": "Vali kuni {max} teemat või kirjelda, kuidas neid ühendada.",
+    "freeKit": "Sinu esimene komplekt on tasuta ja sisaldab kuni {max} teemat. Vali kõige olulisemad; järgmised komplektid sisaldavad rohkem.",
+    "freeTooMany": "Tasuta komplekt sisaldab kuni {max} teemat. Eemalda mõned või kirjelda, kuidas need ühendada.",
     "apply": "Rakenda muudatused",
     "approve": "Kinnita ja loo",
     "unfinished": "Lõpetamata"
@@ -504,6 +506,7 @@
     "intro": "Maksa ainult selle eest, mida kasutad: 1 $ eest saad 100 krediiti ja krediidid ei aegu. Tellimusi pole.",
     "learners": "Õppijatele",
     "welcome": "Registreerumisel",
+    "freeKit": "Sinu esimene komplekt, kuni {topics} teemat",
     "referrals": "Kutsed",
     "referralsNote": "Jaga oma linki seadetest või ettevõtte linki selle kutsete vahekaardilt.",
     "referral": "Sinu kutsutud sõber laeb esimest korda juurde",

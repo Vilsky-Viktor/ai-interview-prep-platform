@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "توجد شركة بهذا الاسم بالفعل.",
     "A public kit's title can't include a company name. Remove it and try again.": "لا يمكن أن يتضمن عنوان الحزمة العامة اسم شركة. احذفه وحاول مرة أخرى.",
     "Couldn't check the title. Please try again.": "تعذّر التحقق من العنوان. حاول مرة أخرى.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "ادعُ مرشحًا إلى إحدى مقابلاتك قبل إنشاء مقابلة أخرى: يمكن أن تنتظر 3 مقابلات على الأكثر دون مرشحين.",
 }

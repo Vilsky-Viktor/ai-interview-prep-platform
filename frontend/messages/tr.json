@@ -355,6 +355,8 @@
     "changesPlaceholder": "İsteğe bağlı: değişiklikleri anlatın, ör. “Ekip liderliği hakkında bir konu ekle”",
     "changes": "Konulardaki değişiklikler",
     "tooMany": "En fazla {max} konu seçin veya nasıl birleştirileceklerini anlatın.",
+    "freeKit": "İlk setiniz ücretsizdir ve en fazla {max} konu içerir. En önemlilerini seçin; sonraki setler daha fazlasını içerir.",
+    "freeTooMany": "Ücretsiz setiniz en fazla {max} konu içerir. Bazılarının işaretini kaldırın veya nasıl birleştirileceğini yazın.",
     "apply": "Değişiklikleri uygula",
     "approve": "Onayla ve oluştur",
     "unfinished": "Tamamlanmamış"
@@ -504,6 +506,7 @@
     "intro": "Yalnızca kullandığınız kadar ödeyin: $1 ile 100 kredi alırsınız ve krediler hiç sona ermez. Abonelik yok.",
     "learners": "Öğrenenler için",
     "welcome": "Kaydolduğunuzda",
+    "freeKit": "İlk setiniz, en fazla {topics} konu",
     "referrals": "Davetler",
     "referralsNote": "Kendi bağlantınızı Ayarlar'dan, bir şirketin bağlantısını da onun Davetler sekmesinden paylaşın.",
     "referral": "Davet ettiğiniz bir arkadaş ilk kez yükleme yapar",

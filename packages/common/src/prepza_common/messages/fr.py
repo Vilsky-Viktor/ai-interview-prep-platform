@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "Une entreprise porte déjà ce nom.",
     "A public kit's title can't include a company name. Remove it and try again.": "Le titre d'un kit public ne peut pas contenir de nom d'entreprise. Supprimez-le et réessayez.",
     "Couldn't check the title. Please try again.": "Impossible de vérifier le titre. Veuillez réessayer.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Invitez un candidat à l'un de vos entretiens avant d'en générer un autre : 3 entretiens au plus peuvent attendre sans candidat.",
 }

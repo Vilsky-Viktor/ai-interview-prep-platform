@@ -11,8 +11,9 @@ def _headers() -> dict:
     return {"Authorization": f"Bearer {service_token('billing')}"}
 
 
-async def hold_kit(user_id: str, generation_id: UUID) -> None:
-    """Sets a kit's credits aside. Billing's 402 and its message reach the user unchanged."""
+async def hold_kit(user_id: str, generation_id: UUID) -> bool:
+    """Sets a kit's credits aside; True when it's the learner's free kit. Billing's 402 and its
+    message reach the user unchanged."""
     response = await http.get_client().post(
         f"{settings.billing_url}/internal/kits/{generation_id}/hold",
         params={"user_id": user_id},
@@ -23,6 +24,12 @@ async def hold_kit(user_id: str, generation_id: UUID) -> None:
         raise HTTPException(status.HTTP_402_PAYMENT_REQUIRED, response.json()["detail"])
 
     response.raise_for_status()
+
+    # A billing that doesn't tell yet answers 204 with no body: not free.
+    if response.status_code == status.HTTP_204_NO_CONTENT:
+        return False
+
+    return response.json()["free"]
 
 
 async def charge_kit(generation_id: UUID) -> None:

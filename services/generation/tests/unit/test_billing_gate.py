@@ -25,7 +25,13 @@ def queue(monkeypatch):
     created = []
 
     async def fake_create(
-        owner_uid, text, kind="preparation", company_id=None, language="en", generation_id=None
+        owner_uid,
+        text,
+        kind="preparation",
+        company_id=None,
+        language="en",
+        generation_id=None,
+        free_kit=False,
     ):
         created.append((owner_uid, kind, company_id, language))
 
@@ -36,6 +42,7 @@ def queue(monkeypatch):
             kind=kind,
             status="queued",
             language=language,
+            free_kit=free_kit,
         )
 
     monkeypatch.setattr(settings, "generation_limit", 0)
@@ -92,7 +99,7 @@ def test_the_daily_cap_gives_the_kits_credits_back(client, queue, monkeypatch):
     released = []
 
     async def hold(user_id, generation_id):
-        pass
+        return False
 
     async def paused():
         raise HTTPException(503, "Paused")
@@ -115,6 +122,8 @@ def test_a_learners_preparation_uses_one_from_billing(client, queue, monkeypatch
     async def hold(user_id, generation_id):
         charged.append(user_id)
 
+        return False
+
     monkeypatch.setattr(billing, "hold_kit", hold)
 
     response = client.post("/generations", json={"text": "Senior Python developer"})
@@ -126,7 +135,7 @@ def test_a_learners_preparation_uses_one_from_billing(client, queue, monkeypatch
 
 def test_a_kit_is_written_in_its_texts_language_not_the_interfaces(client, queue, monkeypatch):
     async def hold(user_id, generation_id):
-        pass
+        return False
 
     monkeypatch.setattr(billing, "hold_kit", hold)
     # A Russian interface, hiring for an English-speaking role.
@@ -181,7 +190,7 @@ def test_a_billing_hiccup_doesnt_fail_a_finished_kit(monkeypatch):
 
 def test_a_chosen_language_wins_over_the_texts_own(client, queue, monkeypatch):
     async def hold(user_id, generation_id):
-        pass
+        return False
 
     monkeypatch.setattr(billing, "hold_kit", hold)
 

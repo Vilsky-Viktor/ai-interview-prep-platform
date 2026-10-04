@@ -10,7 +10,7 @@ import type { Catalog } from "@/types/billing"
 // in the loop, so the two don't count at once.
 const LEARNER_CREDITS = 1240
 const COMPANY_CREDITS = 860
-const COMPANY_THRESHOLD = 900
+const COMPANY_THRESHOLD = 1200
 const LEARNER_AT = 1800
 const COMPANY_AT = 3600
 

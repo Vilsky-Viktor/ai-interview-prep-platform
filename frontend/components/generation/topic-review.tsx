@@ -16,6 +16,8 @@ import type { DraftTopic } from "@/types/generation"
 type TopicReviewProps = {
   topics: DraftTopic[]
   maxTopics: number
+  // The learner's free first kit, which keeps fewer topics.
+  freeKit: boolean
   back: ReactNode
   // Shown at the left of the submit row.
   cancel?: ReactNode
@@ -30,13 +32,15 @@ type TopicReviewProps = {
 export function TopicReview({
   topics,
   maxTopics,
+  freeKit,
   back,
   cancel,
   onSubmit,
 }: TopicReviewProps) {
   const t = useTranslations("generation")
+  // A free kit starts with the first topics it can keep; the learner can swap them.
   const [selected, setSelected] = useState(() =>
-    topics.map((_, index) => index)
+    topics.map((_, index) => index).slice(0, freeKit ? maxTopics : undefined)
   )
   const [draft, setDraft] = useState(topics)
   const [editing, setEditing] = useState<number | null>(null)
@@ -75,6 +79,11 @@ export function TopicReview({
           </h1>
         </div>
         <p className="text-muted-foreground">{t("reviewText")}</p>
+        {freeKit && (
+          <p className="text-muted-foreground">
+            {t("freeKit", { max: maxTopics })}
+          </p>
+        )}
       </div>
 
       <ul className="divide-y rounded-2xl border">
@@ -150,7 +159,7 @@ export function TopicReview({
         <div className="flex items-center gap-4">
           {tooMany && (
             <p className="text-sm text-destructive">
-              {t("tooMany", { max: maxTopics })}
+              {t(freeKit ? "freeTooMany" : "tooMany", { max: maxTopics })}
             </p>
           )}
           <Button

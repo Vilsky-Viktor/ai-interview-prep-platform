@@ -2,6 +2,7 @@ from enum import StrEnum
 
 from prepza_common.constants import (  # noqa: F401 (re-exported)
     INTERVIEWS_PER_DAY,
+    MAX_INTERVIEWS_WITHOUT_CANDIDATES,
     MAX_OWNED_COMPANIES,
 )
 
@@ -37,3 +38,7 @@ TOO_MANY_COMPANIES = "You can own at most 3 companies."
 MAX_COMPANY_NAME_LENGTH = 45
 COMPANY_NAME_TAKEN = "A company with this name already exists."
 TOO_MANY_INTERVIEWS = "Your company can generate up to 10 interviews a day. Try again tomorrow."
+TOO_MANY_WITHOUT_CANDIDATES = (
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews "
+    "can wait without candidates."
+)

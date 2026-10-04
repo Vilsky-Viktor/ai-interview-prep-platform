@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Was kostet es?",
-        "answer": "Du zahlst nach Nutzung, mit Credits. Ein neues Kit kostet {kit} Credits, und jedes neue Konto bekommt {welcome} Gratis-Credits, genug für ein erstes Kit. Die Preisseite listet alle Preise.",
+        "answer": "Du zahlst nach Nutzung, mit Credits. Ein neues Kit kostet {kit} Credits. Dein erstes Kit ist kostenlos, mit bis zu {free_topics} Themen, und jedes neue Konto bekommt zusätzlich {welcome} Gratis-Credits. Die Preisseite listet alle Preise.",
     },
     {
         "key": "expire",

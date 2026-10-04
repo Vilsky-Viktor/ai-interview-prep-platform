@@ -110,3 +110,7 @@ def test_the_catalog_lists_every_product_and_which_are_on_sale(client):
         "topup_10"
     ] == "pri_topup_10"
     assert products[1]["price_id"] is None
+
+
+def test_the_catalog_says_how_many_topics_a_free_kit_has(client):
+    assert client.get("/catalog").json()["free_kit_topics"] == 3

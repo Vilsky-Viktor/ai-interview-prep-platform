@@ -73,3 +73,20 @@ def test_an_invite_moves_from_invited_to_in_process_to_finished(run):
 
     assert (started.status, started.user_id) == (InviteStatus.IN_PROCESS, "dave-uid")
     assert finished.status == InviteStatus.FINISHED
+
+
+def test_only_interviews_without_a_candidate_count_as_waiting(run):
+    async def scenario():
+        company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
+        first = await interviews.create(company.id, uuid.uuid4(), "en")
+        await interviews.create(company.id, uuid.uuid4(), "en")
+        before = await interviews.without_candidates(company.id)
+        invite = await invites.upsert(first.id, "dan@example.com", "Backend", "Acme", "en")
+        invited = await interviews.without_candidates(company.id)
+        await invites.remove(invite.id)
+        revoked = await interviews.without_candidates(company.id)
+
+        return before, invited, revoked
+
+    # Two waiting; an invite takes one out; revoking the invite puts it back.
+    assert run(scenario()) == (2, 1, 2)

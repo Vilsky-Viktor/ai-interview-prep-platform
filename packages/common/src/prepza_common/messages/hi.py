@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "इस नाम की कंपनी पहले से मौजूद है।",
     "A public kit's title can't include a company name. Remove it and try again.": "सार्वजनिक किट के शीर्षक में किसी कंपनी का नाम नहीं हो सकता। उसे हटाकर फिर से कोशिश करें।",
     "Couldn't check the title. Please try again.": "शीर्षक की जाँच नहीं हो सकी। कृपया फिर से कोशिश करें।",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "नया इंटरव्यू बनाने से पहले अपने किसी इंटरव्यू में एक उम्मीदवार को आमंत्रित करें: ज़्यादा से ज़्यादा 3 इंटरव्यू बिना उम्मीदवारों के रह सकते हैं।",
 }

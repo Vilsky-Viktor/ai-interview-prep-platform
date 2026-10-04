@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Kui palju see maksab?",
-        "answer": "Maksad kasutuse järgi, krediitidega. Uus komplekt maksab {kit} krediiti ja iga uus konto saab {welcome} tasuta krediiti, millest piisab esimeseks komplektiks. Hinnaleht näitab kõiki hindu.",
+        "answer": "Maksad kasutuse järgi, krediidiga. Uus komplekt maksab {kit} krediiti. Sinu esimene komplekt on tasuta, kuni {free_topics} teemaga, ja iga uus konto saab lisaks {welcome} tasuta krediiti. Hinnakirja lehel on kõik hinnad.",
     },
     {
         "key": "expire",

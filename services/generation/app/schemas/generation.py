@@ -2,9 +2,16 @@ from datetime import datetime
 from typing import Annotated
 from uuid import UUID
 
-from prepza_common.constants import DEFAULT_LANGUAGE
+from prepza_common.constants import DEFAULT_LANGUAGE, FREE_KIT_TOPICS
 from prepza_common.user import Language
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StringConstraints,
+    computed_field,
+    model_validator,
+)
 
 from app.constants.generation import (
     GOAL_PREVIEW_LENGTH,
@@ -105,7 +112,16 @@ class GenerationOut(BaseModel):
     error: str | None
     # What it's generated in, from the pasted text (helpers/language.py).
     language: str
-    max_topics: int = MAX_TOPICS
+    free_kit: bool
+
+    @computed_field
+    @property
+    def max_topics(self) -> int:
+        """How many topics the review may approve without instructions."""
+        if self.free_kit:
+            return FREE_KIT_TOPICS
+
+        return MAX_TOPICS
 
 
 class GenerationSummary(BaseModel):

@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Berapa biayanya?",
-        "answer": "Kamu membayar sesuai pemakaian, dengan kredit. Kit baru seharga {kit} kredit, dan setiap akun baru mendapat {welcome} kredit gratis, cukup untuk kit pertama. Halaman harga mencantumkan semua harga.",
+        "answer": "Kamu bayar sesuai pemakaian, dengan kredit. Kit baru seharga {kit} kredit. Kit pertamamu gratis, dengan hingga {free_topics} topik, dan setiap akun baru juga mendapat {welcome} kredit gratis. Halaman harga mencantumkan semua harga.",
     },
     {
         "key": "expire",

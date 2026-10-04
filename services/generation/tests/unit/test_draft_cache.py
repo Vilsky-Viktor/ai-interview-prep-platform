@@ -67,5 +67,5 @@ def test_another_model_or_prompt_gets_another_key(monkeypatch):
     key = draft_cache.cache_key("topics", "prompt A")
 
     assert key != draft_cache.cache_key("topics", "prompt B")
-    monkeypatch.setattr(draft_cache.settings, "llm_model", "another-model")
+    monkeypatch.setattr(draft_cache.settings, "generation_model", "another-model")
     assert key != draft_cache.cache_key("topics", "prompt A")

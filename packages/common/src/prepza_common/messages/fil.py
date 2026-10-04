@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "May kompanya nang may ganitong pangalan.",
     "A public kit's title can't include a company name. Remove it and try again.": "Hindi puwedeng may pangalan ng kumpanya ang title ng public kit. Tanggalin ito at subukan ulit.",
     "Couldn't check the title. Please try again.": "Hindi ma-check ang title. Pakisubukan ulit.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Mag-imbita muna ng kandidato sa isa sa mga interview mo bago gumawa ng bago: hanggang 3 interview lang ang puwedeng maghintay nang walang kandidato.",
 }

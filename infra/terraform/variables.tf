@@ -40,9 +40,9 @@ variable "db_high_availability" {
 }
 
 variable "daily_generation_limit" {
-  description = "New generations a day for everyone together: a ceiling on LLM spending (about $0.03 each); 0 turns it off."
+  description = "New generations a day for everyone together: a ceiling on LLM spending (about $1.60 each with gpt-6.1-sol); 0 turns it off."
   type        = number
-  default     = 300
+  default     = 200
 }
 
 variable "mail_from" {

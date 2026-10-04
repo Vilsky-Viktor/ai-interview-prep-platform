@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "この名前の会社はすでに存在します。",
     "A public kit's title can't include a company name. Remove it and try again.": "公開キットのタイトルには会社名を含められません。削除してからもう一度お試しください。",
     "Couldn't check the title. Please try again.": "タイトルを確認できませんでした。もう一度お試しください。",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "新しい面接を作成する前に、既存の面接のいずれかに候補者を招待してください。候補者のいない面接は最大 3 件までです。",
 }

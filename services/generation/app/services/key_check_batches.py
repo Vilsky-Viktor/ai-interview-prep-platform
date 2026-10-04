@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 def request_body(prompt: str) -> dict:
     return {
-        "model": settings.llm_model,
+        "model": settings.generation_model,
         "reasoning_effort": settings.verify_reasoning_effort,
         "max_completion_tokens": MAX_OUTPUT_TOKENS,
         "messages": [{"role": "user", "content": prompt}],

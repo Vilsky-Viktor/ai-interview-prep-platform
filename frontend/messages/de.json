@@ -355,6 +355,8 @@
     "changesPlaceholder": "Optional: Beschreibe Änderungen, z. B. „Füge ein Thema zu Teamführung hinzu“",
     "changes": "Änderungen an den Themen",
     "tooMany": "Wähle höchstens {max} Themen oder beschreibe, wie sie zusammengefasst werden sollen.",
+    "freeKit": "Dein erstes Kit ist kostenlos und umfasst bis zu {max} Themen. Wähle die wichtigsten; spätere Kits umfassen mehr.",
+    "freeTooMany": "Dein kostenloses Kit umfasst bis zu {max} Themen. Entferne einige oder beschreibe, wie sie zusammengefasst werden sollen.",
     "apply": "Änderungen übernehmen",
     "approve": "Bestätigen und generieren",
     "unfinished": "Unvollständig"
@@ -504,6 +506,7 @@
     "intro": "Zahle nur, was du nutzt: Für $1 gibt es 100 Credits, und Credits verfallen nie. Keine Abos.",
     "learners": "Für Lernende",
     "welcome": "Bei der Registrierung",
+    "freeKit": "Dein erstes Kit, bis zu {topics} Themen",
     "referrals": "Einladungen",
     "referralsNote": "Teile deinen Link aus den Einstellungen oder den Link eines Unternehmens aus dessen Einladungs-Tab.",
     "referral": "Ein eingeladener Freund lädt zum ersten Mal auf",

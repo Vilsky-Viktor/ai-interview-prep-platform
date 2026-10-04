@@ -13,7 +13,7 @@ from app.integrations.llm_limiter import SharedRateLimiter
 def get_llm(reasoning_effort: str | None = None) -> ChatOpenAI:
     """Generation's model, at LLM_REASONING_EFFORT unless told otherwise."""
     return ChatOpenAI(
-        model=settings.llm_model,
+        model=settings.generation_model,
         reasoning_effort=reasoning_effort or settings.llm_reasoning_effort,
         max_retries=5,
         max_tokens=MAX_OUTPUT_TOKENS,

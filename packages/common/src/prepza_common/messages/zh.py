@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "已有同名公司。",
     "A public kit's title can't include a company name. Remove it and try again.": "公开学习包的标题不能包含公司名称。请删除后重试。",
     "Couldn't check the title. Please try again.": "无法检查标题，请重试。",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "请先邀请一位候选人参加您现有的某场面试，再创建新的面试：最多可有 3 场面试暂无候选人。",
 }

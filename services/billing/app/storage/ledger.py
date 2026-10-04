@@ -2,7 +2,14 @@ from sqlalchemy import select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.constants.credits import WELCOME_COMPANY, WELCOME_USER, GiftKind, HoldStatus, Reason
+from app.constants.credits import (
+    WELCOME_COMPANY,
+    WELCOME_USER,
+    WELCOME_USER_KITS,
+    GiftKind,
+    HoldStatus,
+    Reason,
+)
 from app.constants.products import OwnerType
 from app.helpers.gifts import gift_key
 from app.models.billing import Entry, Gift, Hold, Wallet
@@ -40,10 +47,12 @@ async def history(owner_type: str, owner_id: str, offset: int, limit: int) -> li
         return list(await session.scalars(query))
 
 
-async def welcome(owner_type: str, owner_id: str, kind: str, email: str, amount: int) -> bool:
-    """Creates the wallet with the welcome gift, once per email and kind: a learner's first
-    account, a person's first company. Deleting and signing up again doesn't repeat it. True
-    when the gift is new."""
+async def welcome(
+    owner_type: str, owner_id: str, kind: str, email: str, amount: int, kits: int
+) -> bool:
+    """Creates the wallet with the welcome gift (credits and free kits), once per email and
+    kind: a learner's first account, a person's first company. Deleting and signing up again
+    doesn't repeat it. True when the gift is new."""
     async with Session() as session:
         await ensure(session, owner_type, owner_id)
         new = await session.scalar(
@@ -55,6 +64,11 @@ async def welcome(owner_type: str, owner_id: str, kind: str, email: str, amount:
 
         if new:
             await add(session, owner_type, owner_id, amount, f"welcome:{owner_id}", Reason.WELCOME)
+            await session.execute(
+                update(Wallet)
+                .where(Wallet.owner_type == owner_type, Wallet.owner_id == owner_id)
+                .values(free_kits=Wallet.free_kits + kits)
+            )
 
         await session.commit()
 
@@ -62,12 +76,14 @@ async def welcome(owner_type: str, owner_id: str, kind: str, email: str, amount:
 
 
 async def welcome_user(user_id: str, email: str) -> bool:
-    return await welcome(OwnerType.USER, user_id, GiftKind.USER, email, WELCOME_USER)
+    return await welcome(
+        OwnerType.USER, user_id, GiftKind.USER, email, WELCOME_USER, WELCOME_USER_KITS
+    )
 
 
 async def welcome_company(company_id: str, owner_email: str) -> bool:
     return await welcome(
-        OwnerType.COMPANY, company_id, GiftKind.COMPANY, owner_email, WELCOME_COMPANY
+        OwnerType.COMPANY, company_id, GiftKind.COMPANY, owner_email, WELCOME_COMPANY, 0
     )
 
 
@@ -91,29 +107,61 @@ async def reserve(owner_type: str, owner_id: str, amount: int, key: str, reason:
             return False
 
         row.reserved += amount
-
-        if hold is None:
-            session.add(
-                Hold(
-                    key=key,
-                    owner_type=owner_type,
-                    owner_id=owner_id,
-                    amount=amount,
-                    reason=reason,
-                    status=HoldStatus.OPEN,
-                )
+        # A new hold, or the released one with this key opened again.
+        await session.merge(
+            Hold(
+                key=key,
+                owner_type=owner_type,
+                owner_id=owner_id,
+                amount=amount,
+                reason=reason,
+                status=HoldStatus.OPEN,
             )
-        else:
-            hold.status = HoldStatus.OPEN
-            hold.amount = amount
+        )
+        await session.commit()
 
+        return True
+
+
+async def reserve_free_kit(user_id: str, key: str) -> bool:
+    """Holds a kit with one of the learner's free kits: a hold of 0 credits, so charging it
+    moves none and releasing it gives the free kit back. Repeating the same key uses one. False
+    when the hold is a paid one or there's no free kit left; then credits are held instead."""
+    async with Session() as session:
+        await ensure(session, OwnerType.USER, user_id)
+        row = await session.get(Wallet, (OwnerType.USER, user_id), with_for_update=True)
+        hold = await session.get(Hold, key)
+
+        if hold is not None and hold.status != HoldStatus.RELEASED:
+            await session.commit()
+
+            return hold.amount == 0
+
+        if row.free_kits < 1:
+            await session.commit()
+
+            return False
+
+        row.free_kits -= 1
+        # A new hold, or the released one with this key opened again.
+        await session.merge(
+            Hold(
+                key=key,
+                owner_type=OwnerType.USER,
+                owner_id=user_id,
+                amount=0,
+                reason=Reason.KIT,
+                status=HoldStatus.OPEN,
+            )
+        )
         await session.commit()
 
         return True
 
 
 async def charge(key: str) -> None:
-    """Takes the credits a hold set aside. Safe to repeat; does nothing without an open hold."""
+    """Takes the credits a hold set aside. Safe to repeat; does nothing without an open hold.
+    A free kit's hold takes nothing and shows in the history as a kit of 0 credits."""
     async with Session() as session:
         hold = await session.get(Hold, key, with_for_update=True)
 
@@ -131,17 +179,19 @@ async def charge(key: str) -> None:
 
 
 async def release(key: str) -> None:
-    """Gives back credits a hold set aside. Safe to repeat."""
+    """Gives back credits a hold set aside, or the free kit a free kit's hold used. Safe to
+    repeat."""
     async with Session() as session:
         hold = await session.get(Hold, key, with_for_update=True)
 
         if hold is None or hold.status != HoldStatus.OPEN:
             return
 
+        free = 1 if hold.amount == 0 else 0
         await session.execute(
             update(Wallet)
             .where(Wallet.owner_type == hold.owner_type, Wallet.owner_id == hold.owner_id)
-            .values(reserved=Wallet.reserved - hold.amount)
+            .values(reserved=Wallet.reserved - hold.amount, free_kits=Wallet.free_kits + free)
         )
         hold.status = HoldStatus.RELEASED
         await session.commit()

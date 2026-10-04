@@ -1,13 +1,15 @@
 # $1 = 100 credits. Amounts are whole credits.
-KIT_CREDITS = 500
-CANDIDATE_CREDITS = 300
+KIT_CREDITS = 800
+CANDIDATE_CREDITS = 400
 # A certificate on someone else's public kit; its author gets a share of it.
 CERTIFICATE_CREDITS = 100
 AUTHOR_SHARE_CREDITS = 20
 # A tutor turn after the free ones on a question.
 CHAT_TURN_CREDITS = 1
-WELCOME_USER = 500
-WELCOME_COMPANY = 1_500
+# A new learner gets one free kit and 100 credits; a new company its first 3 candidates.
+WELCOME_USER = 100
+WELCOME_USER_KITS = 1
+WELCOME_COMPANY = 1_200
 # Below this, a balance is shown as running low, so a learner's chat doesn't stop by surprise
 # and a company sees it before it can't invite the next candidate.
 LOW_BALANCE = {"user": 100, "company": CANDIDATE_CREDITS}

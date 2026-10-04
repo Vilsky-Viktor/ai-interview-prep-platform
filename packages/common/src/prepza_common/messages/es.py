@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "Ya existe una empresa con este nombre.",
     "A public kit's title can't include a company name. Remove it and try again.": "El título de un kit público no puede incluir el nombre de una empresa. Quítalo e inténtalo de nuevo.",
     "Couldn't check the title. Please try again.": "No se pudo comprobar el título. Inténtalo de nuevo.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Invita a un candidato a una de tus entrevistas antes de generar otra: hasta 3 entrevistas pueden esperar sin candidatos.",
 }

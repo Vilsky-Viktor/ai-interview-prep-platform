@@ -355,6 +355,8 @@
     "changesPlaceholder": "Opcjonalnie: opisz zmiany, np. „Dodaj temat o przywództwie w zespole”",
     "changes": "Zmiany w tematach",
     "tooMany": "Wybierz najwyżej {max} tematów albo opisz, jak je połączyć.",
+    "freeKit": "Twój pierwszy zestaw jest darmowy i obejmuje do {max} tematów. Wybierz najważniejsze; kolejne zestawy obejmują więcej.",
+    "freeTooMany": "Darmowy zestaw obejmuje do {max} tematów. Odznacz część lub opisz, jak je połączyć.",
     "apply": "Zastosuj zmiany",
     "approve": "Zatwierdź i wygeneruj",
     "unfinished": "Niedokończone"
@@ -504,6 +506,7 @@
     "intro": "Płacisz tylko za to, z czego korzystasz: za $1 otrzymujesz 100 kredytów, a kredyty nie wygasają. Bez subskrypcji.",
     "learners": "Dla uczących się",
     "welcome": "Przy rejestracji",
+    "freeKit": "Twój pierwszy zestaw, do {topics} tematów",
     "referrals": "Polecenia",
     "referralsNote": "Udostępnij swój link z Ustawień albo link firmy z jej karty Polecenia.",
     "referral": "Zaproszony przez Ciebie znajomy pierwszy raz doładowuje konto",

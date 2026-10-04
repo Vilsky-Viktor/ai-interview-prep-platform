@@ -355,6 +355,8 @@
     "changesPlaceholder": "Optioneel: beschrijf wijzigingen, bijv. “Voeg een onderwerp over teamleiderschap toe”",
     "changes": "Wijzigingen in de onderwerpen",
     "tooMany": "Kies maximaal {max} onderwerpen of beschrijf hoe ze samengevoegd moeten worden.",
+    "freeKit": "Je eerste kit is gratis en bevat maximaal {max} onderwerpen. Kies de belangrijkste; volgende kits bevatten er meer.",
+    "freeTooMany": "Je gratis kit bevat maximaal {max} onderwerpen. Vink er een paar uit of beschrijf hoe je ze wilt samenvoegen.",
     "apply": "Wijzigingen toepassen",
     "approve": "Goedkeuren en genereren",
     "unfinished": "Onvoltooid"
@@ -504,6 +506,7 @@
     "intro": "Betaal alleen voor wat je gebruikt: voor $1 krijg je 100 credits, en credits verlopen nooit. Geen abonnementen.",
     "learners": "Voor wie leert",
     "welcome": "Bij aanmelding",
+    "freeKit": "Je eerste kit, maximaal {topics} onderwerpen",
     "referrals": "Uitnodigingen",
     "referralsNote": "Deel je link vanuit Instellingen, of de link van een bedrijf vanuit het tabblad Uitnodigingen.",
     "referral": "Een vriend die je hebt uitgenodigd waardeert voor het eerst op",

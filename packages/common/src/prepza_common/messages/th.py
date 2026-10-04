@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "มีบริษัทชื่อนี้อยู่แล้ว",
     "A public kit's title can't include a company name. Remove it and try again.": "ชื่อชุดสาธารณะต้องไม่มีชื่อบริษัท โปรดลบออกแล้วลองอีกครั้ง",
     "Couldn't check the title. Please try again.": "ตรวจสอบชื่อไม่ได้ โปรดลองอีกครั้ง",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "โปรดเชิญผู้สมัครเข้าร่วมการสัมภาษณ์ที่มีอยู่ก่อนสร้างการสัมภาษณ์ใหม่ การสัมภาษณ์ที่ยังไม่มีผู้สมัครรอได้สูงสุด 3 รายการ",
 }

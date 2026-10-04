@@ -18,4 +18,5 @@ MESSAGES = {
     "A company with this name already exists.": "Perusahaan dengan nama ini sudah ada.",
     "A public kit's title can't include a company name. Remove it and try again.": "Judul kit publik tidak boleh memuat nama perusahaan. Hapus dan coba lagi.",
     "Couldn't check the title. Please try again.": "Judul tidak dapat diperiksa. Coba lagi.",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Undang kandidat ke salah satu wawancaramu sebelum membuat yang baru: maksimal 3 wawancara boleh menunggu tanpa kandidat.",
 }

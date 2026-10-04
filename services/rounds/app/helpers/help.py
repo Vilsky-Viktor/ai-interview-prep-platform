@@ -2,8 +2,10 @@ import json
 
 from prepza_common.constants import (
     DEFAULT_QUESTION_SECONDS,
+    FREE_KIT_TOPICS,
     INTERVIEWS_PER_DAY,
     LANGUAGES,
+    MAX_INTERVIEWS_WITHOUT_CANDIDATES,
     MAX_OWNED_COMPANIES,
     MAX_SHARES,
 )
@@ -21,6 +23,8 @@ def guide() -> str:
         public_topics=PUBLIC_TOPICS_PER_DAY,
         max_companies=MAX_OWNED_COMPANIES,
         interviews_per_day=INTERVIEWS_PER_DAY,
+        waiting_interviews=MAX_INTERVIEWS_WITHOUT_CANDIDATES,
+        free_topics=FREE_KIT_TOPICS,
         question_seconds=DEFAULT_QUESTION_SECONDS,
         language_count=len(LANGUAGES),
         languages=", ".join(LANGUAGES.values()),
@@ -35,6 +39,7 @@ def faq_values(catalog: dict | None) -> dict:
         "count": len(LANGUAGES),
         "kit": prices.get("kit_credits", ""),
         "welcome": prices.get("welcome_user", ""),
+        "free_topics": FREE_KIT_TOPICS,
         "candidate": prices.get("candidate_credits", ""),
         "company": prices.get("welcome_company", ""),
     }

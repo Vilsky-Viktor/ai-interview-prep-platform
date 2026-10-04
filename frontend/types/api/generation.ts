@@ -293,6 +293,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/titles/check": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Check
+     * @description For library, before a kit is public: whether its title names a company.
+     */
+    post: operations["check_internal_titles_check_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/health": {
     parameters: {
       query?: never
@@ -373,6 +393,15 @@ export interface components {
             | "ar"
             | "he"
             | "fa"
+            | "ja"
+            | "zh"
+            | "ko"
+            | "hi"
+            | "id"
+            | "th"
+            | "vi"
+            | "fil"
+            | "et"
           )
         | null
     }
@@ -401,11 +430,13 @@ export interface components {
       error: string | null
       /** Language */
       language: string
+      /** Free Kit */
+      free_kit: boolean
       /**
        * Max Topics
-       * @default 10
+       * @description How many topics the review may approve without instructions.
        */
-      max_topics: number
+      readonly max_topics: number
     }
     /**
      * GenerationProgress
@@ -464,7 +495,30 @@ export interface components {
        * @default en
        * @enum {string}
        */
-      language: "en" | "ru"
+      language:
+        | "en"
+        | "ru"
+        | "uk"
+        | "es"
+        | "pt"
+        | "de"
+        | "fr"
+        | "it"
+        | "pl"
+        | "nl"
+        | "tr"
+        | "ar"
+        | "he"
+        | "fa"
+        | "ja"
+        | "zh"
+        | "ko"
+        | "hi"
+        | "id"
+        | "th"
+        | "vi"
+        | "fil"
+        | "et"
       /** Generate In */
       generate_in?:
         | (
@@ -482,6 +536,15 @@ export interface components {
             | "ar"
             | "he"
             | "fa"
+            | "ja"
+            | "zh"
+            | "ko"
+            | "hi"
+            | "id"
+            | "th"
+            | "vi"
+            | "fil"
+            | "et"
           )
         | null
     }
@@ -529,6 +592,19 @@ export interface components {
      */
     Status:
       "queued" | "running" | "awaiting_review" | "done" | "failed" | "cancelled"
+    /** TitleCheckIn */
+    TitleCheckIn: {
+      /** Title */
+      title: string
+    }
+    /** TitleCheckOut */
+    TitleCheckOut: {
+      /**
+       * Has Company
+       * @description True when the title names a company or organization, not just its products
+       */
+      has_company: boolean
+    }
     /** ValidationError */
     ValidationError: {
       /** Location */
@@ -1056,6 +1132,39 @@ export interface operations {
           "application/json": {
             [key: string]: unknown
           }
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  check_internal_titles_check_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["TitleCheckIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["TitleCheckOut"]
         }
       }
       /** @description Validation Error */

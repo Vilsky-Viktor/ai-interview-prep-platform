@@ -12,6 +12,8 @@ os.environ.setdefault("GOOGLE_CLOUD_PROJECT", "demo-test")
 os.environ.setdefault("BILLING_URL", "http://billing:8000")
 os.environ.setdefault("DATABASE_URL", "postgresql://test:test@localhost/test")
 os.environ.setdefault("REDIS_URL", "redis://localhost")
+# The daily cap is on by default; tests that check it turn it on themselves.
+os.environ.setdefault("DAILY_GENERATION_LIMIT", "0")
 os.environ.setdefault("LIBRARY_URL", "http://library")
 os.environ.setdefault("SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("LIBRARY_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
