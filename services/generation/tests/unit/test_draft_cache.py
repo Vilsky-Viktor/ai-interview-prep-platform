@@ -39,7 +39,7 @@ class CountingLLM:
 
 def run_twice(monkeypatch, redis):
     fake = CountingLLM()
-    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
     monkeypatch.setattr(draft_cache, "get_redis", lambda: redis)
 
     first = asyncio.run(extract_info({"input_text": "Junior accountant"}))

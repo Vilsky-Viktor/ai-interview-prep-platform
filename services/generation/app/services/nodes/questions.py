@@ -77,7 +77,7 @@ def fan_out_questions(state: State):
 
 async def generate_questions(task: QuestionTask) -> dict:
     """Questions with their options in one call; ambiguous or incomplete ones are dropped."""
-    structured_llm = llm.get_llm().with_structured_output(QuestionItemList)
+    structured_llm = llm.get_generation_llm().with_structured_output(QuestionItemList)
     prompt = QUESTIONS_PROMPT.format(
         level=task["level"],
         topic=task["topic"],

@@ -17,7 +17,7 @@ async def extract_info(state: State) -> dict:
     if cached is not None:
         return cached
 
-    structured_llm = llm.get_llm().with_structured_output(JobExtraction)
+    structured_llm = llm.get_generation_llm().with_structured_output(JobExtraction)
     result: JobExtraction = await structured_llm.ainvoke(
         [
             SystemMessage(content=system),

@@ -15,7 +15,7 @@ WELCOME_COMPANY = 1_200
 LOW_BALANCE = {"user": 100, "company": CANDIDATE_CREDITS}
 # Both sides get it once the new learner first tops up any amount, or the new company first
 # tops up REFERRAL_MIN_CENTS or more; a referrer is rewarded for at most REFERRALS_PER_YEAR.
-REFERRAL_REWARD = {"user": 200, "company": 600}
+REFERRAL_REWARD = {"user": 200, "company": 500}
 REFERRAL_MIN_CENTS = {"user": 0, "company": 2_500}
 REFERRALS_PER_YEAR = 25
 REFERRAL_CODE_BYTES = 6

@@ -37,7 +37,7 @@ class FakeLLM:
 
 def test_correct_option_over_the_limit_is_retried(monkeypatch):
     fake = FakeLLM()
-    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
 
     result = asyncio.run(
         generate_answers(
@@ -82,7 +82,7 @@ class AmbiguousStructured:
 def test_ambiguous_question_is_dropped_without_retry(monkeypatch):
     fake = FakeLLM()
     fake.structured = AmbiguousStructured()
-    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
 
     result = asyncio.run(
         generate_answers(

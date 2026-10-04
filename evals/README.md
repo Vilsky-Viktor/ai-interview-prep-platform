@@ -24,6 +24,8 @@ are what the current setup (October 2026) reaches; a change that misses one need
 | | Tutor: USD per turn | Token usage × list price | ≤ $0.004 (a paid turn sells for $0.02) |
 | **Tutor quality** | Every claim and calculation in the reply is correct | Judge (`judges/tutor_review.md`) | ≥ 97% |
 | | Helpful, 1–5 | Judge | ≥ 4.8 |
+| **Title check** | Right verdicts on `titles.json` (labelled by hand) | `titles_test.py` | 100% |
+| | Fine titles blocked; companies let through | Counted | 0; 0 |
 | **Judge reliability** | Planted wrong keys it catches (`key_traps.json`) | `review_questions.py` | 100% |
 | | Agreement with the reference verdicts (`reviews.json`) | `review_questions.py --compare-reference` | ≥ 95% |
 
@@ -53,6 +55,18 @@ the longest 26–46% of the time.
 | `gpt-6-luna` low | 40 of 45 | 4.82 | 1.4 s / 5.7 s | $0.00015 |
 | **`gpt-6.1-sol` low** (in use) | 44 of 45 | 4.96 | 1.5 s / 4.9 s | $0.0029 |
 
+**Title check**, on `titles.json` (114):
+
+| Setting | Right | Fine titles blocked | Companies let through | Median | Per check |
+|---|---|---|---|---|---|
+| `gpt-6-luna` none (2 runs) | 111–112 | 2–3 | 0 | 1.1 s | $0.000026 |
+| `gpt-6-luna` low | 111 | 3 | 0 | 1.2 s | $0.000027 |
+| **`gpt-6.1-sol` low** (in use) | 114 | 0 | 0 | 1.7 s | $0.00053 |
+
+Luna blocked the same fine titles every run: "HubSpot inbound marketing", "Puma behavior and
+habitat", "Big Four audit associate interview". Sol costs about $0.50 a thousand checks, so the
+saving isn't worth an author's title being refused.
+
 **Judge**, `gpt-6.1-sol` at high reasoning: caught 60 of 60 planted wrong keys.
 
 ## Datasets
@@ -66,6 +80,7 @@ note the date, and re-run the baselines on it.
 | `questions.json` | 240 reference questions, 5 per subtopic, written with the generation prompt of the date inside | `build_questions.py` | about $0.50 |
 | `reviews.json` | The reference judge's verdict on each of those questions | `review_questions.py --save-reference` | about $3 |
 | `key_traps.json` | 60 of those questions with the key moved to a wrong option on purpose | `build_traps.py` | free |
+| `titles.json` | 114 public kit titles labelled by hand: companies and organizations as employers or subjects (some lowercase, some in other languages), and fine ones: products, exams, generic titles, and company names in their everyday meaning ("Apple pie", "Shell scripting", "Visa application") | By hand | — |
 | `follow_ups.json` | 45 hard tutor follow-ups (defending a wrong pick, a "what if", a step-by-step request) | `build_follow_ups.py` | about $0.50 |
 
 `reviews.json` flags 4 questions as flawed (q0008, q0072, q0094, q0232). They're kept on purpose:
@@ -89,6 +104,9 @@ MODEL=gpt-6-luna EFFORT=low evals/run.sh generation generate_kits.py --all --lab
 # Tutor settings, cheapest first, stopping at the first that gets everything right
 evals/run.sh rounds tutor_test.py gpt-6-luna/low gpt-6-luna/medium gpt-6.1-sol/low --stop-when-all-correct
 
+# Public-title check settings, scored against the hand labels
+evals/run.sh generation titles_test.py gpt-6-luna/none gpt-6.1-sol/low
+
 # A cheaper judge, tested against the reference and the traps
 JUDGE_MODEL=gpt-6-luna JUDGE_EFFORT=medium evals/run.sh generation review_questions.py datasets/questions.json --compare-reference
 JUDGE_MODEL=gpt-6-luna JUDGE_EFFORT=medium evals/run.sh generation review_questions.py datasets/key_traps.json
@@ -100,6 +118,7 @@ JUDGE_MODEL=gpt-6-luna JUDGE_EFFORT=medium evals/run.sh generation review_questi
 | A full kit, `gpt-6-luna` | about $0.05 |
 | Reviewing 40 questions (Sol judge, high) | about $0.50 |
 | A tutor setting on all 45 follow-ups, with the judge | about $0.60 on Sol, $0.45 on Luna |
+| A title-check setting on all 114 titles | under $0.01 on Luna, about $0.06 on Sol |
 | Code check, measurements, traps | free |
 
 Use `--sample` to review part of a kit, and judge first with the reference only when a cheaper

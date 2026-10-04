@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 async def generate_answers(task: AnswerTask) -> dict:
     """Options for questions that already exist: a re-generated question, or new options for one."""
-    structured_llm = llm.get_llm().with_structured_output(AnswerList)
+    structured_llm = llm.get_generation_llm().with_structured_output(AnswerList)
     questions = task["questions"]
     done: dict = {}
     pending = list(range(len(questions)))

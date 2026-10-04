@@ -152,7 +152,7 @@ def test_weak_options_are_written_again_for_the_same_question(monkeypatch):
             )
         ]
     )
-    monkeypatch.setattr(llm, "get_llm", lambda: FakeLLM(answers))
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: FakeLLM(answers))
 
     asyncio.run(verify(QUESTION_ID, QualityFlag.WEAK_OPTIONS))
 

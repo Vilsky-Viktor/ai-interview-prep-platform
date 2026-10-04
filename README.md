@@ -41,7 +41,7 @@ Turn a job description or a learning goal into a structured practice path: revie
 - Only what works is charged: credits are set aside when something starts and given back if it fails, is cancelled, or a candidate never answers.
 - Top up a fixed amount or any whole amount from $10 to $500 on the top-up page, for yourself or any company you belong to. The header shows your balance and turns amber when it runs low. Balances follow a payment as it lands, rechecked for 40 seconds after checkout, and catch up when the tab is back in view (an automatic top-up, a payment in another tab); a balance that goes up counts up to its new value, in the header, on the top-up page and on a company's interviews page.
 - **Automatic top-up:** on the top-up page, under each balance ("Automatic top-up: off"), choose a top-up and a balance to refill under; the card is saved through Paddle once. Shown only when Paddle's API key and the $0 price are set (see [Payments](#payments)).
-- **Referrals:** a learner's link in Settings → referral, a company's in its referrals tab. Both sides get credits on the newcomer's first top-up (200 each for learners; 600 each for companies, from $25).
+- **Referrals:** a learner's link in Settings → referral, a company's in its referrals tab. Both sides get credits on the newcomer's first top-up (200 each for learners; 500 each for companies, from $25).
 - Settings → billing lists every credit in and out. Refunds and chargebacks in Paddle take the credits they bought back.
 
 **Site and help**
@@ -179,8 +179,17 @@ These settings in `.env` shape every generation:
 
 - `QUESTIONS_PER_TOPIC` (default 100): questions per topic. Topics never grow after generation, so a certificate always means the same set of questions.
 - `LLM_REQUESTS_PER_SECOND` (default 8): generation's LLM requests a second, shared by the API and every worker through Redis; 0 turns it off. Chat isn't limited by it, so it stays responsive during big generations.
-- `GENERATION_MODEL` (default `gpt-6.1-sol`): writes kits and interviews, fixes flagged questions and checks public titles. `TUTOR_MODEL` (a paid turn is 2 credits; default `gpt-6.1-sol`, at `TUTOR_REASONING_EFFORT` `low`) answers the tutor: in testing it got every complex follow-up on hard questions right, where `gpt-6-luna` got some wrong. `LLM_MODEL` (default `gpt-6-luna`) answers the FAQ's help chat.
-- `LLM_REASONING_EFFORT` (default `low`) and `VERIFY_REASONING_EFFORT` (default `medium`): how hard the model thinks, for generation and for the verifier's answer-key checks; `none`, `minimal`, `low`, `medium` or `high`. Only reasoning models take them. The help chat uses `none`, which its temperature needs.
+- Each AI task has its own model and reasoning effort (`none`, `minimal`, `low`, `medium` or `high`; only reasoning models take an effort):
+
+  | Task | Model | Effort |
+  |---|---|---|
+  | Generation: kits, interviews, re-generated questions | `GENERATION_MODEL` (`gpt-6.1-sol`) | `GENERATION_REASONING_EFFORT` (`low`) |
+  | Verifier: answer-key checks, at once and in batches | `VERIFY_MODEL` (`gpt-6.1-sol`) | `VERIFY_REASONING_EFFORT` (`medium`) |
+  | Public-title check | `TITLE_CHECK_MODEL` (`gpt-6.1-sol`) | `TITLE_CHECK_REASONING_EFFORT` (`low`) |
+  | Tutor (a paid turn is 2 credits) | `TUTOR_MODEL` (`gpt-6.1-sol`) | `TUTOR_REASONING_EFFORT` (`low`) |
+  | FAQ help chat | `HELP_MODEL` (`gpt-6-luna`) | `HELP_REASONING_EFFORT` (`none`, which also lets it take a temperature) |
+
+  In testing, `gpt-6.1-sol` at low got every complex tutor follow-up on hard questions right, where `gpt-6-luna` got some wrong; see [evals/README.md](evals/README.md).
 
 Per-user rate limits (`GENERATION_LIMIT`, `LLM_LIMIT`) cap how much a single account can generate and chat.
 

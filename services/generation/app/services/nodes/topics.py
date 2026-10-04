@@ -15,7 +15,7 @@ from app.storage import draft_cache
 
 async def plan_topics(prompt: str) -> list[dict]:
     """Ask for topics; when the model goes over the limit, send the list back to merge."""
-    structured_llm = llm.get_llm().with_structured_output(TopicList)
+    structured_llm = llm.get_generation_llm().with_structured_output(TopicList)
     messages = [HumanMessage(content=prompt)]
 
     for _ in range(TOPIC_ATTEMPTS):

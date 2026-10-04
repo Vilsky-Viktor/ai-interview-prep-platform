@@ -10,16 +10,27 @@ from app.integrations.llm_limiter import SharedRateLimiter
 
 # Reasoning models reject temperature unless reasoning_effort is "none".
 @cache
-def get_llm(reasoning_effort: str | None = None) -> ChatOpenAI:
-    """Generation's model, at LLM_REASONING_EFFORT unless told otherwise."""
+def build_llm(model: str, reasoning_effort: str) -> ChatOpenAI:
     return ChatOpenAI(
-        model=settings.generation_model,
-        reasoning_effort=reasoning_effort or settings.llm_reasoning_effort,
+        model=model,
+        reasoning_effort=reasoning_effort,
         max_retries=5,
         max_tokens=MAX_OUTPUT_TOKENS,
         timeout=LLM_TIMEOUT_SECONDS,
         rate_limiter=get_rate_limiter(),
     )
+
+
+def get_generation_llm() -> ChatOpenAI:
+    return build_llm(settings.generation_model, settings.generation_reasoning_effort)
+
+
+def get_verifier_llm() -> ChatOpenAI:
+    return build_llm(settings.verify_model, settings.verify_reasoning_effort)
+
+
+def get_title_check_llm() -> ChatOpenAI:
+    return build_llm(settings.title_check_model, settings.title_check_reasoning_effort)
 
 
 @cache
@@ -28,10 +39,6 @@ def get_rate_limiter() -> SharedRateLimiter | None:
         return None
 
     return SharedRateLimiter(settings.llm_requests_per_second)
-
-
-def get_verifier_llm() -> ChatOpenAI:
-    return get_llm(settings.verify_reasoning_effort)
 
 
 @cache

@@ -61,7 +61,7 @@ def question_task(count=3):
 
 def test_looping_question_call_is_retried_and_trimmed_to_the_count(monkeypatch):
     fake = FakeLLM([too_long(), items("Q1", "Q2", "Q3", "Q4", "Q5")])
-    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
 
     result = asyncio.run(generate_questions(question_task(count=3)))
 
@@ -74,7 +74,7 @@ def test_looping_question_call_is_retried_and_trimmed_to_the_count(monkeypatch):
 
 def test_subtopic_that_always_loops_adds_nothing_instead_of_failing(monkeypatch):
     fake = FakeLLM([too_long(), too_long(), too_long()])
-    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
 
     result = asyncio.run(generate_questions(question_task()))
 
@@ -89,7 +89,7 @@ def test_looping_options_call_is_retried(monkeypatch):
         ]
     )
     fake = FakeLLM([too_long(), answers])
-    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
 
     result = asyncio.run(
         generate_answers(

@@ -22,7 +22,6 @@ from langgraph.types import Command
 import app.services.graph as graph_module
 from app.config.settings import settings
 from app.constants.generation import MAX_CONCURRENCY, RECURSION_LIMIT
-from app.integrations import llm
 from app.storage import draft_cache
 
 
@@ -89,8 +88,9 @@ async def generate(domain: dict) -> tuple[list[dict], dict]:
 async def main(domain_ids: list[str], label: str) -> None:
     # The model and effort under test, unless the service's own settings are what's tested.
     settings.generation_model = os.environ.get("MODEL", settings.generation_model)
-    settings.llm_reasoning_effort = os.environ.get("EFFORT", settings.llm_reasoning_effort)
-    llm.get_llm.cache_clear()
+    settings.generation_reasoning_effort = os.environ.get(
+        "EFFORT", settings.generation_reasoning_effort
+    )
     graph_module.find_reused = no_reuse
     draft_cache.get = no_cache
     draft_cache.put = no_cache
@@ -98,7 +98,7 @@ async def main(domain_ids: list[str], label: str) -> None:
 
     for domain_id in domain_ids:
         items, run = await generate(domains[domain_id])
-        run["model"] = f"{settings.generation_model} ({settings.llm_reasoning_effort})"
+        run["model"] = f"{settings.generation_model} ({settings.generation_reasoning_effort})"
         save(RESULTS / f"kit_{domain_id}_{label}.json", {"run": run, "items": items})
         print(
             f"{domain_id}: {run['topics']} topics, {run['questions']} questions, {run['seconds']}s, "

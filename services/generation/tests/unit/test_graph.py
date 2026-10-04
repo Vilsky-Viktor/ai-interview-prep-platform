@@ -116,7 +116,7 @@ async def run_graph(review=None):
 
 @pytest.mark.parametrize("per_topic", [100, 12])
 def test_full_graph(monkeypatch, per_topic):
-    monkeypatch.setattr(llm, "get_llm", FakeLLM)
+    monkeypatch.setattr(llm, "get_generation_llm", FakeLLM)
     monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
     monkeypatch.setattr(library, "find_reusable", reusable([]))
     monkeypatch.setattr(settings, "questions_per_topic", per_topic)
@@ -134,7 +134,7 @@ def test_full_graph(monkeypatch, per_topic):
 
 
 def test_reused_questions_come_first_and_new_ones_fill_the_rest(monkeypatch):
-    monkeypatch.setattr(llm, "get_llm", FakeLLM)
+    monkeypatch.setattr(llm, "get_generation_llm", FakeLLM)
     monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
     monkeypatch.setattr(library, "find_reusable", reusable(["Proven 1", "Proven 2"]))
     monkeypatch.setattr(settings, "questions_per_topic", 10)
@@ -158,7 +158,7 @@ def test_generation_goes_on_without_reuse_when_embedding_fails(monkeypatch):
         async def aembed_documents(self, texts):
             raise ConnectionError("OpenAI is down")
 
-    monkeypatch.setattr(llm, "get_llm", FakeLLM)
+    monkeypatch.setattr(llm, "get_generation_llm", FakeLLM)
     monkeypatch.setattr(llm, "get_embeddings", BrokenEmbeddings)
     monkeypatch.setattr(settings, "questions_per_topic", 10)
 
@@ -169,7 +169,7 @@ def test_generation_goes_on_without_reuse_when_embedding_fails(monkeypatch):
 
 
 def test_topics_edited_by_hand_are_used_without_a_revision(monkeypatch):
-    monkeypatch.setattr(llm, "get_llm", FakeLLM)
+    monkeypatch.setattr(llm, "get_generation_llm", FakeLLM)
     monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
     monkeypatch.setattr(library, "find_reusable", reusable([]))
     monkeypatch.setattr(settings, "questions_per_topic", 10)

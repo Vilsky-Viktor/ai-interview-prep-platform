@@ -35,7 +35,7 @@ class FakeLLM:
 
 def test_revision_over_the_limit_is_sent_back_to_merge(monkeypatch):
     calls = []
-    monkeypatch.setattr(llm, "get_llm", lambda: FakeLLM(calls))
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: FakeLLM(calls))
     state = {
         "level": "medium",
         "requirements": ["Python"],

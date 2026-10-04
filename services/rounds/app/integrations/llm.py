@@ -17,14 +17,15 @@ def get_tutor_llm() -> ChatOpenAI:
     )
 
 
-# Reasoning models accept temperature only with reasoning_effort "none", which also keeps replies fast.
 @cache
 def get_help_llm() -> ChatOpenAI:
-    """The FAQ's help chat."""
+    """The FAQ's help chat. Reasoning models accept a temperature only at effort "none"."""
+    effort = settings.help_reasoning_effort
+
     return ChatOpenAI(
-        model=settings.llm_model,
-        reasoning_effort="none",
-        temperature=0.3,
+        model=settings.help_model,
+        reasoning_effort=effort,
+        temperature=0.3 if effort == "none" else None,
         max_retries=3,
         timeout=CHAT_TIMEOUT_SECONDS,
     )

@@ -80,7 +80,7 @@ def test_skips_duplicates_and_saves_new_question(monkeypatch):
         saved["id"] = question_id
         saved["question"] = question
 
-    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
     monkeypatch.setattr(library, "replace_question", fake_replace)
 
     result = asyncio.run(regenerate(QUESTION_ID, context()))
@@ -97,7 +97,7 @@ def test_skips_a_rephrased_existing_question(monkeypatch):
     async def fake_replace(question_id, question):
         saved["question"] = question
 
-    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
     monkeypatch.setattr(library, "replace_question", fake_replace)
 
     result = asyncio.run(regenerate(QUESTION_ID, context()))
@@ -113,7 +113,7 @@ def test_ambiguous_question_is_replaced_by_another(monkeypatch):
     async def fake_replace(question_id, question):
         saved["question"] = question
 
-    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
     monkeypatch.setattr(library, "replace_question", fake_replace)
 
     result = asyncio.run(regenerate(QUESTION_ID, context()))
@@ -128,7 +128,7 @@ def test_gives_up_when_every_attempt_duplicates(monkeypatch):
     async def fake_replace(question_id, question):
         raise AssertionError("must not save a duplicate")
 
-    monkeypatch.setattr(llm, "get_llm", lambda: fake)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda: fake)
     monkeypatch.setattr(library, "replace_question", fake_replace)
 
     assert asyncio.run(regenerate(QUESTION_ID, context())) is None

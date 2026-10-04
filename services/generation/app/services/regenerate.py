@@ -15,7 +15,7 @@ from app.services.nodes.answers import generate_answers
 
 async def new_question(context: QuestionContext) -> str | None:
     """A question that neither repeats nor rephrases any existing one in the topic."""
-    structured_llm = llm.get_llm().with_structured_output(NewQuestion)
+    structured_llm = llm.get_generation_llm().with_structured_output(NewQuestion)
     existing = list(context.existing)
     taken = {normalize(text) for text in existing}
 

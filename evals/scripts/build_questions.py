@@ -1,5 +1,5 @@
 """Builds datasets/questions.json: reference questions for every subtopic in datasets/inputs.json,
-written by the generation service's own prompt and model (GENERATION_MODEL, LLM_REASONING_EFFORT).
+written by the generation service's own prompt and model (GENERATION_MODEL, GENERATION_REASONING_EFFORT).
 
 Run in the generation container: evals/run.sh generation build_questions.py [--per-subtopic 5]
 Costs about $0.02 per subtopic on gpt-6.1-sol (48 subtopics: about $1)."""
@@ -33,7 +33,7 @@ async def subtopic_questions(domain: dict, topic: str, subtopic: str, count: int
         existing="None",
         language="English",
     )
-    structured = llm.get_llm().with_structured_output(QuestionItemList)
+    structured = llm.get_generation_llm().with_structured_output(QuestionItemList)
     result = await structured.ainvoke([HumanMessage(content=prompt)])
     items = []
 
@@ -84,7 +84,7 @@ async def main(per_subtopic: int) -> None:
             "about": "Reference questions, frozen: build_questions.py writes them with the "
             "generation prompt of the date below. Reviewed in reviews.json; altered in "
             "key_traps.json.",
-            "model": f"{settings.generation_model} ({settings.llm_reasoning_effort})",
+            "model": f"{settings.generation_model} ({settings.generation_reasoning_effort})",
             "built": datetime.now(UTC).date().isoformat(),
             "items": items,
         },

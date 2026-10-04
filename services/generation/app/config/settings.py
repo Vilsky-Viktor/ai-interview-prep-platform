@@ -20,14 +20,18 @@ class Settings(ServiceSettings):
     invoker_service_account: str = ""
     service_secret: str
     questions_per_topic: int = Field(default=100, gt=0)
-    # Writes the kits and interviews, fixes flagged questions and checks public titles. The
-    # tutor and help chats run in rounds, on their own (cheaper) LLM_MODEL.
+    # Each AI task has its own model and effort, so one can change without the others. Effort is
+    # how hard a reasoning model thinks: "none", "minimal", "low", "medium" or "high".
+    # Writes the kits and interviews (extraction, topics, questions, answers) and re-generates a
+    # flagged question.
     generation_model: str = "gpt-6.1-sol"
-    # How hard the model thinks: for generation (topics, questions, a re-generated question, the
-    # public-title check), and for the verifier's key check, which is rare and must be right.
-    # Only reasoning models take an effort.
-    llm_reasoning_effort: ReasoningEffort = "low"
+    generation_reasoning_effort: ReasoningEffort = "low"
+    # Checks answer keys, at once and in batches: rare, and it must be right.
+    verify_model: str = "gpt-6.1-sol"
     verify_reasoning_effort: ReasoningEffort = "medium"
+    # Checks that a public kit's title names no company.
+    title_check_model: str = "gpt-6.1-sol"
+    title_check_reasoning_effort: ReasoningEffort = "low"
     generation_limit: int = Field(default=20, ge=0)
     generation_window_seconds: int = Field(default=86_400, gt=0)
     regeneration_limit: int = Field(default=100, ge=0)
