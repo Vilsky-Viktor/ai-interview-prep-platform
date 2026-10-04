@@ -56,6 +56,7 @@ def test_every_service_is_cleaned_before_the_sign_in_goes(steps):
         ("service", "rounds"),
         ("service", "generation"),
         ("service", "billing"),
+        ("service", "notifications"),
         ("practice", SET_ID),
         ("preparation", SET_ID),
         ("library", "ann"),
@@ -108,4 +109,5 @@ def test_the_export_holds_every_service_and_downloads_as_a_file(client, monkeypa
         "rounds": {"from": "rounds"},
         "generation": {"from": "generation"},
         "billing": {"from": "billing"},
+        "notifications": {"from": "notifications"},
     }

@@ -11,6 +11,7 @@ def services() -> dict[str, str]:
         "rounds": settings.rounds_url,
         "generation": settings.generation_url,
         "billing": settings.billing_url,
+        "notifications": settings.notifications_url,
     }
 
 

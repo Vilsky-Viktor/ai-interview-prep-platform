@@ -756,5 +756,22 @@
       "quote": "Elke keer dat ik me voorbereidde op een sollicitatiegesprek of iets nieuws probeerde te leren, was ik meer tijd kwijt aan zoeken naar goed materiaal dan aan echt leren. Elke site behandelde een stukje, en geen enkele paste bij wat ik nodig had. Dus bouwde ik prepza: de tool die ik zelf had willen hebben, die begint bij jouw doel en je er naartoe leidt. Ik hoop dat het jou de uren bespaart die het mij had bespaard.",
       "role": "Solo-oprichter van prepza"
     }
+  },
+  "notifications": {
+    "title": "Meldingen",
+    "unread": "{count, plural, one {# ongelezen melding} other {# ongelezen meldingen}}",
+    "empty": "Nog niets nieuws.",
+    "kinds": {
+      "question_flagged": "{count, plural, one {Een vraag over “{topic}” in “{title}” is gemarkeerd voor controle.} other {# vragen in “{title}” zijn gemarkeerd voor controle.}}",
+      "question_fixed": "{count, plural, one {De AI heeft een gemarkeerde vraag over “{topic}” in “{title}” verbeterd.} other {De AI heeft # gemarkeerde vragen in “{title}” verbeterd.}}",
+      "kit_ready": "Je kit “{title}” is klaar.",
+      "referral_rewarded": "Iemand die je hebt uitgenodigd heeft opgewaardeerd. Je hebt {credits} credits gekregen.",
+      "auto_top_up_charged": "Automatisch opwaarderen heeft {credits} credits toegevoegd.",
+      "auto_top_up_failed": "Automatisch opwaarderen kon de kaart niet belasten. Waardeer op zodat je saldo niet opraakt.",
+      "candidate_finished": "{count, plural, one {{email} heeft “{title}” afgerond{grade, select, none {.} other {: {grade}%.}}} other {# kandidaten hebben “{title}” afgerond.}}",
+      "invite_undelivered": "{count, plural, one {De uitnodiging voor “{title}” aan {email} is niet bezorgd.} other {# uitnodigingen voor “{title}” zijn niet bezorgd.}}",
+      "interview_ready": "Het sollicitatiegesprek “{title}” is klaar.",
+      "interview_cancelled": "{title, select, none {Een sollicitatiegesprek} other {Het sollicitatiegesprek “{title}”}} is geannuleerd: de controle van de onderwerpen bleef te lang liggen."
+    }
   }
 }

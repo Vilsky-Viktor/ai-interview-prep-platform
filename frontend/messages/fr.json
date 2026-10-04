@@ -760,5 +760,22 @@
       "quote": "Chaque fois que je me préparais à un entretien ou que j'essayais d'apprendre quelque chose de nouveau, je passais plus de temps à chercher de bonnes ressources qu'à vraiment étudier. Chaque site en couvrait une partie, et aucun ne correspondait à ce dont j'avais besoin. Alors j'ai créé prepza : l'outil que j'aurais aimé avoir, qui part de votre objectif et vous guide jusqu'à lui. J'espère qu'il vous fera gagner les heures qu'il m'aurait fait gagner.",
       "role": "Fondateur de prepza, en solo"
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "unread": "{count, plural, one {# notification non lue} other {# notifications non lues}}",
+    "empty": "Rien de nouveau pour l'instant.",
+    "kinds": {
+      "question_flagged": "{count, plural, one {Une question sur « {topic} » de « {title} » a été signalée pour vérification.} other {# questions de « {title} » ont été signalées pour vérification.}}",
+      "question_fixed": "{count, plural, one {L'IA a corrigé une question signalée sur « {topic} » de « {title} ».} other {L'IA a corrigé # questions signalées de « {title} ».}}",
+      "kit_ready": "Votre kit « {title} » est prêt.",
+      "referral_rewarded": "Une personne que vous avez invitée a rechargé. Vous avez reçu {credits} crédits.",
+      "auto_top_up_charged": "La recharge automatique a ajouté {credits} crédits.",
+      "auto_top_up_failed": "La recharge automatique n'a pas pu débiter la carte. Rechargez pour ne pas manquer de solde.",
+      "candidate_finished": "{count, plural, one {{email} a terminé « {title} »{grade, select, none {.} other { : {grade} %.}}} other {# candidats ont terminé « {title} ».}}",
+      "invite_undelivered": "{count, plural, one {L'invitation envoyée à {email} pour « {title} » n'a pas été remise.} other {# invitations pour « {title} » n'ont pas été remises.}}",
+      "interview_ready": "L'entretien « {title} » est prêt.",
+      "interview_cancelled": "{title, select, none {Un entretien} other {L'entretien « {title} »}} a été annulé : la validation de ses sujets a trop attendu."
+    }
   }
 }

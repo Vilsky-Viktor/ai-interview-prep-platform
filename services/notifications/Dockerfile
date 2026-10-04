@@ -22,12 +22,18 @@ FROM base AS dev
 # .pyc that a reloading container then fails to import. Polling sees changes from the host.
 ENV PYTHONPYCACHEPREFIX=/tmp/pycache WATCHFILES_FORCE_POLLING=true
 
+# Open live streams (the bell) would hold a reload or a shutdown forever: after 5 seconds they're
+# closed, and the browsers reconnect by themselves.
 CMD ["uv", "run", "--no-sync", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", \
+    "--timeout-graceful-shutdown", "5", \
     "--reload", "--reload-dir", "app", "--reload-dir", "/packages/common/src"]
 
-# Production: the source is part of the image.
+# Production: the source is part of the image. Migrations run in a one-off container
+# (alembic upgrade head) before the API starts.
 FROM base AS prod
 
+COPY services/notifications/alembic.ini ./
+COPY services/notifications/migrations ./migrations
 COPY services/notifications/app ./app
 
 # An unprivileged user that can read the code but not change it. Bytecode is compiled now, as
@@ -36,4 +42,5 @@ RUN python -m compileall -q app && adduser -D -H -u 10001 app
 ENV UV_CACHE_DIR=/tmp/uv-cache
 USER app
 
-CMD ["uv", "run", "--no-sync", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uv", "run", "--no-sync", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", \
+    "--timeout-graceful-shutdown", "5"]

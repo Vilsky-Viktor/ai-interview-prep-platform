@@ -3,11 +3,14 @@ import uuid
 from datetime import UTC, datetime, timedelta
 from types import SimpleNamespace
 
+import httpx
 import pytest
+from prepza_common.notifications import notification
 
 from app.constants.invites import INVITE_EXPIRY_DAYS, InviteStatus
-from app.integrations import billing
+from app.integrations import billing, rounds
 from app.services import candidate_billing
+from app.services import outbox as outbox_service
 from app.storage import interviews, invites
 
 INTERVIEW_ID = uuid.uuid4()
@@ -29,31 +32,42 @@ def ledger(monkeypatch):
     return calls
 
 
+COMPANY_ID = uuid.uuid4()
+
+
 def finished(monkeypatch, status=InviteStatus.IN_PROCESS):
+    """The invite, and the notifications saved as it's finished."""
     invite = SimpleNamespace(
         id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="carol@example.com", status=status
     )
-    statuses = []
+    notices = []
 
     async def fake_get(invite_id):
         return invite
 
-    async def fake_set(ids, value):
-        statuses.append(value)
-
-    monkeypatch.setattr(invites, "get", fake_get)
+    async def fake_finish(invite_id, notice):
+        notices.append(notice)
 
     async def fake_interview(interview_id):
-        return SimpleNamespace(id=interview_id, company_id=uuid.uuid4())
+        return SimpleNamespace(id=interview_id, company_id=COMPANY_ID, title="Backend")
 
-    monkeypatch.setattr(invites, "set_status", fake_set)
+    async def fake_scores(invite_ids):
+        return {str(invite.id): {"progress": 100, "grade": 85, "finished": True}}
+
+    async def no_flush():
+        pass
+
+    monkeypatch.setattr(invites, "get", fake_get)
+    monkeypatch.setattr(invites, "finish", fake_finish)
     monkeypatch.setattr(interviews, "get", fake_interview)
+    monkeypatch.setattr(rounds, "invite_scores", fake_scores)
+    monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
 
-    return invite, statuses
+    return invite, notices
 
 
-def test_a_finished_interview_with_an_answer_charges_the_company(ledger, monkeypatch):
-    invite, statuses = finished(monkeypatch)
+def test_a_finished_interview_with_an_answer_charges_and_tells_the_company(ledger, monkeypatch):
+    invite, notices = finished(monkeypatch)
 
     asyncio.run(
         candidate_billing.handle(
@@ -61,12 +75,41 @@ def test_a_finished_interview_with_an_answer_charges_the_company(ledger, monkeyp
         )
     )
 
-    assert statuses == [InviteStatus.FINISHED]
+    assert notices == [
+        notification(
+            "company",
+            COMPANY_ID,
+            "candidate_finished",
+            f"/company/{COMPANY_ID}/interviews/{INTERVIEW_ID}",
+            # One per invite, however often the event comes.
+            key=str(invite.id),
+            email="carol@example.com",
+            title="Backend",
+            grade=85,
+        )
+    ]
+    assert ledger == [("charge", f"{INTERVIEW_ID}:carol@example.com")]
+
+
+def test_rounds_being_down_doesnt_hold_up_the_charge(ledger, monkeypatch):
+    invite, notices = finished(monkeypatch)
+
+    async def down(invite_ids):
+        raise httpx.ConnectError("rounds is down")
+
+    monkeypatch.setattr(rounds, "invite_scores", down)
+    asyncio.run(
+        candidate_billing.handle(
+            "interview.finished", {"candidate_invite_id": str(invite.id), "answered": 2}
+        )
+    )
+
+    assert "grade" not in notices[0]["data"]
     assert ledger == [("charge", f"{INTERVIEW_ID}:carol@example.com")]
 
 
 def test_a_finished_interview_without_an_answer_gives_the_credits_back(ledger, monkeypatch):
-    invite, _ = finished(monkeypatch)
+    invite, notices = finished(monkeypatch)
 
     asyncio.run(
         candidate_billing.handle(
@@ -74,11 +117,13 @@ def test_a_finished_interview_without_an_answer_gives_the_credits_back(ledger, m
         )
     )
 
+    # Finished, but nobody is told.
+    assert notices == [None]
     assert ledger == [("release", f"{INTERVIEW_ID}:carol@example.com")]
 
 
 def test_a_deleted_candidate_is_left_alone(ledger, monkeypatch):
-    invite, statuses = finished(monkeypatch, InviteStatus.DELETED)
+    invite, notices = finished(monkeypatch, InviteStatus.DELETED)
 
     asyncio.run(
         candidate_billing.handle(
@@ -86,7 +131,7 @@ def test_a_deleted_candidate_is_left_alone(ledger, monkeypatch):
         )
     )
 
-    assert (statuses, ledger) == ([], [])
+    assert (notices, ledger) == ([], [])
 
 
 def test_invites_never_started_expire_and_give_their_credits_back(ledger, monkeypatch):

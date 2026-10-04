@@ -760,5 +760,22 @@
       "quote": "Ogni volta che mi preparavo a un colloquio o cercavo di imparare qualcosa di nuovo, passavo più tempo a cercare buon materiale che a studiare davvero. Ogni sito copriva un pezzo, e nessuno era adatto a quello che mi serviva. Così ho creato prepza: lo strumento che avrei voluto avere, che parte dal tuo obiettivo e ti guida fino a raggiungerlo. Spero che ti faccia risparmiare le ore che avrebbe fatto risparmiare a me.",
       "role": "Fondatore unico di prepza"
     }
+  },
+  "notifications": {
+    "title": "Notifiche",
+    "unread": "{count, plural, one {# notifica non letta} other {# notifiche non lette}}",
+    "empty": "Ancora niente di nuovo.",
+    "kinds": {
+      "question_flagged": "{count, plural, one {Una domanda su «{topic}» in «{title}» è stata segnalata per la revisione.} other {# domande in «{title}» sono state segnalate per la revisione.}}",
+      "question_fixed": "{count, plural, one {L'IA ha corretto una domanda segnalata su «{topic}» in «{title}».} other {L'IA ha corretto # domande segnalate in «{title}».}}",
+      "kit_ready": "Il tuo kit «{title}» è pronto.",
+      "referral_rewarded": "Una persona che hai invitato ha ricaricato. Hai ricevuto {credits} crediti.",
+      "auto_top_up_charged": "La ricarica automatica ha aggiunto {credits} crediti.",
+      "auto_top_up_failed": "La ricarica automatica non è riuscita ad addebitare la carta. Ricarica per non restare senza saldo.",
+      "candidate_finished": "{count, plural, one {{email} ha completato «{title}»{grade, select, none {.} other {: {grade}%.}}} other {# candidati hanno completato «{title}».}}",
+      "invite_undelivered": "{count, plural, one {L'invito a {email} per «{title}» non è stato consegnato.} other {# inviti per «{title}» non sono stati consegnati.}}",
+      "interview_ready": "Il colloquio «{title}» è pronto.",
+      "interview_cancelled": "{title, select, none {Un colloquio} other {Il colloquio «{title}»}} è stato annullato: la revisione degli argomenti ha atteso troppo."
+    }
   }
 }

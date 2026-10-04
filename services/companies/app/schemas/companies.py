@@ -59,3 +59,9 @@ class CompanyBalanceOut(BaseModel):
     name: str
     available: int
     low: bool
+
+
+class UserCompaniesOut(BaseModel):
+    """Every company the user is a member of, for the notifications service."""
+
+    company_ids: list[str]

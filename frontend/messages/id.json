@@ -754,5 +754,22 @@
       "quote": "Setiap kali aku bersiap untuk wawancara atau mencoba mempelajari hal baru, aku lebih banyak menghabiskan waktu mencari materi yang bagus daripada benar-benar belajar. Setiap situs hanya membahas sebagian, dan tak satu pun cocok dengan yang kubutuhkan. Jadi aku membangun prepza: alat yang dulu ingin kumiliki, yang berangkat dari tujuanmu dan membimbingmu sampai ke sana. Semoga prepza menghemat waktumu sebanyak yang seharusnya bisa dihematnya untukku.",
       "role": "Pendiri tunggal prepza"
     }
+  },
+  "notifications": {
+    "title": "Notifikasi",
+    "unread": "{count, plural, other {# notifikasi belum dibaca}}",
+    "empty": "Belum ada yang baru.",
+    "kinds": {
+      "question_flagged": "{count, plural, =1 {Sebuah soal tentang “{topic}” di “{title}” ditandai untuk ditinjau.} other {# soal di “{title}” ditandai untuk ditinjau.}}",
+      "question_fixed": "{count, plural, =1 {AI memperbaiki soal yang ditandai tentang “{topic}” di “{title}”.} other {AI memperbaiki # soal yang ditandai di “{title}”.}}",
+      "kit_ready": "Kit “{title}” milikmu sudah siap.",
+      "referral_rewarded": "Seseorang yang kamu undang sudah isi ulang. Kamu dapat {credits} kredit.",
+      "auto_top_up_charged": "Isi ulang otomatis menambahkan {credits} kredit.",
+      "auto_top_up_failed": "Isi ulang otomatis gagal menagih kartu. Isi ulang agar saldomu tidak habis.",
+      "candidate_finished": "{count, plural, =1 {{email} menyelesaikan “{title}”{grade, select, none {.} other {: {grade}%.}}} other {# kandidat menyelesaikan “{title}”.}}",
+      "invite_undelivered": "{count, plural, =1 {Undangan “{title}” ke {email} tidak terkirim.} other {# undangan “{title}” tidak terkirim.}}",
+      "interview_ready": "Wawancara “{title}” sudah siap.",
+      "interview_cancelled": "{title, select, none {Sebuah wawancara} other {Wawancara “{title}”}} dibatalkan: tinjauan topiknya menunggu terlalu lama."
+    }
   }
 }

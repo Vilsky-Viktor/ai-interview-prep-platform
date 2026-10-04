@@ -1,6 +1,10 @@
 import os
 
 os.environ.setdefault("SMTP_HOST", "localhost")
+os.environ.setdefault("FIREBASE_PROJECT_ID", "demo-test")
+os.environ.setdefault("DATABASE_URL", "postgresql://test:test@localhost/test")
+os.environ.setdefault("REDIS_URL", "redis://localhost:6379")
+os.environ.setdefault("SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("SITE_URL", "http://localhost:8090")
 os.environ.setdefault("COMPANIES_URL", "http://companies")
 os.environ.setdefault("LIBRARY_URL", "http://library")

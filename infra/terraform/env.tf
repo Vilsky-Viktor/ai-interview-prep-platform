@@ -11,6 +11,7 @@ locals {
     ROUNDS_URL              = local.run_url["rounds"]
     COMPANIES_URL           = local.run_url["companies"]
     BILLING_URL             = local.run_url["billing"]
+    NOTIFICATIONS_URL       = local.run_url["notifications"]
   }
 
   # And each service its own; INVOKER_AUDIENCE is the service's address, which Google's signed

@@ -764,5 +764,22 @@
       "quote": "Ne zaman bir mülakata hazırlansam ya da yeni bir şey öğrenmeye çalışsam, gerçekten çalışmaktan çok iyi kaynak aramaya zaman harcıyordum. Her site bir parçayı ele alıyordu ama hiçbiri ihtiyacıma uymuyordu. Ben de prepza'yı geliştirdim: keşke elimde olsaydı dediğim, hedefinizden yola çıkıp sizi oraya götüren bir araç. Umarım bana kazandıracağı saatleri size kazandırır.",
       "role": "prepza'nın tek kurucusu"
     }
+  },
+  "notifications": {
+    "title": "Bildirimler",
+    "unread": "{count, plural, one {# okunmamış bildirim} other {# okunmamış bildirim}}",
+    "empty": "Henüz yeni bir şey yok.",
+    "kinds": {
+      "question_flagged": "{count, plural, one {“{title}” setinde “{topic}” konusundaki bir soru inceleme için işaretlendi.} other {“{title}” setindeki # soru inceleme için işaretlendi.}}",
+      "question_fixed": "{count, plural, one {Yapay zekâ “{title}” setinde “{topic}” konusundaki işaretlenen bir soruyu düzeltti.} other {Yapay zekâ “{title}” setindeki işaretlenen # soruyu düzeltti.}}",
+      "kit_ready": "“{title}” setiniz hazır.",
+      "referral_rewarded": "Davet ettiğiniz biri yükleme yaptı. {credits} kredi kazandınız.",
+      "auto_top_up_charged": "Otomatik yükleme {credits} kredi ekledi.",
+      "auto_top_up_failed": "Otomatik yükleme karttan ödeme alamadı. Bakiyenizin bitmemesi için yükleme yapın.",
+      "candidate_finished": "{count, plural, one {{email}, “{title}” mülakatını tamamladı{grade, select, none {.} other {: %{grade}.}}} other {# aday “{title}” mülakatını tamamladı.}}",
+      "invite_undelivered": "{count, plural, one {{email} adresine gönderilen “{title}” daveti iletilemedi.} other {“{title}” için gönderilen # davet iletilemedi.}}",
+      "interview_ready": "“{title}” mülakatı hazır.",
+      "interview_cancelled": "{title, select, none {Bir mülakat} other {“{title}” mülakatı}} iptal edildi: konu incelemesi çok uzun süre bekledi."
+    }
   }
 }

@@ -1,11 +1,18 @@
 import logging
 
 from app.config.settings import settings
-from app.constants.events import CANDIDATE_INVITED, CONTACT_SENT, PREPARATION_SHARED
+from app.constants.events import (
+    CANDIDATE_INVITED,
+    CONTACT_SENT,
+    NOTIFICATION_REQUESTED,
+    PREPARATION_SHARED,
+)
 from app.helpers.emails import candidate_invite_email, contact_email, share_invite_email
 from app.integrations import resend, smtp
 from app.models.email import Email
+from app.services.feed import announce
 from app.services.webhooks import report_undelivered
+from app.storage import notifications
 
 logger = logging.getLogger(__name__)
 
@@ -25,8 +32,23 @@ async def deliver(email: Email, message_id: str) -> None:
     await smtp.send(email)
 
 
+async def notify(data: dict, message_id: str) -> None:
+    """Stores a requested notification and tells the recipient's open tabs. A retried event is
+    stored once and announced once; if announcing fails, the tabs see it on their next load."""
+    if not await notifications.add(message_id, data):
+        return
+
+    try:
+        await announce(data["recipient"], data["recipient_id"])
+    except Exception:
+        logger.exception("Couldn't announce a %s notification", data["kind"])
+
+
 async def handle(event_type: str, data: dict, message_id: str) -> None:
-    """Sends the email an event asks for; other events aren't ours."""
+    """Sends the email or stores the notification an event asks for; other events aren't ours."""
+    if event_type == NOTIFICATION_REQUESTED:
+        await notify(data, message_id)
+
     if event_type == PREPARATION_SHARED:
         await deliver(share_invite_email(data, settings.site_url), message_id)
 

@@ -3,6 +3,7 @@ import uuid
 from datetime import UTC, datetime
 
 from prepza_common import outbox
+from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
@@ -136,17 +137,39 @@ async def start(invite: CandidateInvite, user_id: str) -> None:
         await session.commit()
 
 
-async def mark_undelivered(invite_id: uuid.UUID) -> None:
-    """Only an unused invite: a candidate who has started got the email after all."""
+async def mark_undelivered(invite_id: uuid.UUID, notice: dict) -> None:
+    """Only an unused invite: a candidate who has started got the email after all. The
+    company's notification is saved only when the invite changes, so a repeat sends none."""
     async with Session() as session:
-        await session.execute(
+        marked = await session.scalar(
             update(CandidateInvite)
             .where(
                 CandidateInvite.id == invite_id,
                 CandidateInvite.status == InviteStatus.INVITED,
             )
             .values(status=InviteStatus.UNDELIVERED)
+            .returning(CandidateInvite.id)
         )
+
+        if marked is not None:
+            outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+
+        await session.commit()
+
+
+async def finish(invite_id: uuid.UUID, notice: dict | None) -> None:
+    """Marks the invite finished (the candidates list may have already), with the company's
+    notification, if any."""
+    async with Session() as session:
+        await session.execute(
+            update(CandidateInvite)
+            .where(CandidateInvite.id == invite_id)
+            .values(status=InviteStatus.FINISHED)
+        )
+
+        if notice:
+            outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+
         await session.commit()
 
 

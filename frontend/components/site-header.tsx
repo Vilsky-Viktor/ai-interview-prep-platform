@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 
 import { useAuth } from "@/components/auth-provider"
 import { CreditsBadge } from "@/components/billing/credits-badge"
+import { NotificationBell } from "@/components/notification-bell"
 import { SiteNav } from "@/components/site-nav"
 import { ThemeModes } from "@/components/theme-toggle"
 import { UserMenu } from "@/components/user-menu"
@@ -40,6 +41,7 @@ export function SiteHeader() {
             </div>
           )}
           <CreditsBadge />
+          <NotificationBell />
           <UserMenu />
         </div>
       </div>

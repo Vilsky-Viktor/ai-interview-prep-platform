@@ -1,10 +1,13 @@
 import uuid
 
+from prepza_common import outbox
+from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, func, select, text
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.feedback import QuestionRating, QuestionReport
+from app.models.outbox import OutboxEvent
 from app.models.quality import QuestionRevision, QuestionStats
 from app.models.sets import Question
 from app.storage.db import Session
@@ -83,8 +86,11 @@ async def load(
         )
 
 
-async def save_flag(question_id: uuid.UUID, flag: str | None, kept: bool = False) -> None:
-    """Also for a question nobody has answered yet: reports alone can flag it."""
+async def save_flag(
+    question_id: uuid.UUID, flag: str | None, kept: bool = False, notice: dict | None = None
+) -> None:
+    """Also for a question nobody has answered yet: reports alone can flag it. `notice` is the
+    owner's notification, saved with the flag."""
     statement = (
         insert(QuestionStats)
         .values(
@@ -103,6 +109,10 @@ async def save_flag(question_id: uuid.UUID, flag: str | None, kept: bool = False
 
     async with Session() as session:
         await session.execute(statement)
+
+        if notice is not None:
+            outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+
         await session.commit()
 
 

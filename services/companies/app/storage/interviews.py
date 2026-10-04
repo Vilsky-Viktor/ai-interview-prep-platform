@@ -1,9 +1,12 @@
 import uuid
 
+from prepza_common import outbox
+from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, func, select, update
 from sqlalchemy.orm import selectinload
 
 from app.models.interviews import Interview
+from app.models.outbox import OutboxEvent
 from app.schemas.interviews import InterviewSettings
 from app.storage.db import Session
 
@@ -103,25 +106,41 @@ async def set_set_id(interview_id, set_id: uuid.UUID) -> None:
         await session.commit()
 
 
-async def set_generated(generation_id: uuid.UUID, set_id: uuid.UUID, title: str) -> None:
-    """Stores the set and title a finished generation produced for its interview."""
+async def get_for_generation(generation_id: uuid.UUID) -> Interview | None:
+    query = select(Interview).where(Interview.generation_id == generation_id)
+
+    async with Session() as session:
+        return await session.scalar(query)
+
+
+async def set_generated(
+    generation_id: uuid.UUID, set_id: uuid.UUID, title: str, notice: dict
+) -> None:
+    """Stores the set and title a finished generation produced for its interview, and the
+    company's notification with them."""
     async with Session() as session:
         await session.execute(
             update(Interview)
             .where(Interview.generation_id == generation_id)
             .values(set_id=set_id, title=title)
         )
+        outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
         await session.commit()
 
 
-async def remove_for_generation(generation_id: uuid.UUID) -> None:
-    """Removes the interview of a generation that was cancelled before producing questions."""
+async def remove_for_generation(generation_id: uuid.UUID, notice: dict) -> None:
+    """Removes the interview of a generation that was cancelled before producing questions;
+    the company's notification is saved only when one is removed."""
     async with Session() as session:
-        await session.execute(
-            delete(Interview).where(
-                Interview.generation_id == generation_id, Interview.set_id.is_(None)
-            )
+        removed = await session.scalar(
+            delete(Interview)
+            .where(Interview.generation_id == generation_id, Interview.set_id.is_(None))
+            .returning(Interview.id)
         )
+
+        if removed is not None:
+            outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+
         await session.commit()
 
 

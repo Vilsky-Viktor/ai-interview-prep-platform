@@ -746,5 +746,22 @@
       "quote": "בכל פעם שהתכוננתי לראיון עבודה או ניסיתי ללמוד משהו חדש, ביליתי יותר זמן בחיפוש אחר חומר טוב מאשר בלמידה עצמה. כל אתר כיסה חלק, ואף אחד לא התאים למה שהייתי צריך. אז בניתי את prepza: הכלי שהלוואי שהיה לי, כזה שמתחיל מהמטרה שלכם ומוביל אתכם אליה. אני מקווה שהוא יחסוך לכם את השעות שהיה חוסך לי.",
       "role": "המייסד היחיד של prepza"
     }
+  },
+  "notifications": {
+    "title": "התראות",
+    "unread": "{count, plural, one {התראה אחת שלא נקראה} two {# התראות שלא נקראו} other {# התראות שלא נקראו}}",
+    "empty": "אין עדיין שום דבר חדש.",
+    "kinds": {
+      "question_flagged": "{count, plural, one {שאלה בנושא \"{topic}\" ב\"{title}\" סומנה לבדיקה.} two {שתי שאלות ב\"{title}\" סומנו לבדיקה.} other {# שאלות ב\"{title}\" סומנו לבדיקה.}}",
+      "question_fixed": "{count, plural, one {ה-AI תיקן שאלה שסומנה בנושא \"{topic}\" ב\"{title}\".} two {ה-AI תיקן שתי שאלות שסומנו ב\"{title}\".} other {ה-AI תיקן # שאלות שסומנו ב\"{title}\".}}",
+      "kit_ready": "הערכה שלכם \"{title}\" מוכנה.",
+      "referral_rewarded": "מישהו שהזמנתם טען קרדיטים. קיבלתם {credits} קרדיטים.",
+      "auto_top_up_charged": "הטעינה האוטומטית הוסיפה {credits} קרדיטים.",
+      "auto_top_up_failed": "הטעינה האוטומטית לא הצליחה לחייב את הכרטיס. טענו קרדיטים כדי שהיתרה לא תיגמר.",
+      "candidate_finished": "{count, plural, one {{email} השלים/ה את \"{title}\"{grade, select, none {.} other {: {grade}%.}}} two {שני מועמדים השלימו את \"{title}\".} other {# מועמדים השלימו את \"{title}\".}}",
+      "invite_undelivered": "{count, plural, one {ההזמנה ל-{email} עבור \"{title}\" לא נמסרה.} two {שתי הזמנות עבור \"{title}\" לא נמסרו.} other {# הזמנות עבור \"{title}\" לא נמסרו.}}",
+      "interview_ready": "הראיון \"{title}\" מוכן.",
+      "interview_cancelled": "{title, select, none {ראיון בוטל} other {הראיון \"{title}\" בוטל}}: בדיקת הנושאים שלו חיכתה יותר מדי זמן."
+    }
   }
 }

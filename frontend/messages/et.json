@@ -764,5 +764,22 @@
       "quote": "Iga kord, kui valmistusin tööintervjuuks või püüdsin midagi uut õppida, kulus mul rohkem aega hea materjali otsimisele kui päris õppimisele. Iga sait kattis vaid tüki ja ükski ei sobinud sellega, mida vajasin. Nii ehitasingi prepza: tööriista, mida ise oleksin tahtnud, mis alustab sinu eesmärgist ja juhatab sind selleni. Loodan, et see säästab sulle need tunnid, mis oleks säästnud mulle.",
       "role": "prepza ainuasutaja"
     }
+  },
+  "notifications": {
+    "title": "Teavitused",
+    "unread": "{count, plural, one {# lugemata teavitus} other {# lugemata teavitust}}",
+    "empty": "Veel pole midagi uut.",
+    "kinds": {
+      "question_flagged": "{count, plural, one {Komplekti „{title}“ teema „{topic}“ küsimus märgiti ülevaatamiseks.} other {Komplekti „{title}“ # küsimust märgiti ülevaatamiseks.}}",
+      "question_fixed": "{count, plural, one {Tehisaru parandas komplekti „{title}“ teema „{topic}“ märgitud küsimuse.} other {Tehisaru parandas komplekti „{title}“ # märgitud küsimust.}}",
+      "kit_ready": "Sinu komplekt „{title}“ on valmis.",
+      "referral_rewarded": "Sinu kutsutud inimene laadis juurde. Said {credits} krediiti.",
+      "auto_top_up_charged": "Automaatne juurdelaadimine lisas {credits} krediiti.",
+      "auto_top_up_failed": "Automaatne juurdelaadimine ei saanud kaardilt makset võtta. Lae juurde, et saldo otsa ei saaks.",
+      "candidate_finished": "{count, plural, one {{email} lõpetas intervjuu „{title}“{grade, select, none {.} other {: {grade}%.}}} other {# kandidaati lõpetasid intervjuu „{title}“.}}",
+      "invite_undelivered": "{count, plural, one {Kutset intervjuule „{title}“ aadressile {email} ei õnnestunud kohale toimetada.} other {# kutset intervjuule „{title}“ ei õnnestunud kohale toimetada.}}",
+      "interview_ready": "Intervjuu „{title}“ on valmis.",
+      "interview_cancelled": "{title, select, none {Intervjuu} other {Intervjuu „{title}“}} tühistati: teemade ülevaatus ootas liiga kaua."
+    }
   }
 }

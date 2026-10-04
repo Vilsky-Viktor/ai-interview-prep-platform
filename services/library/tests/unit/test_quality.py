@@ -5,8 +5,9 @@ from types import SimpleNamespace
 from app.constants.quality import QualityFlag
 from app.helpers.quality import flag_for
 from app.integrations import generation
+from app.services import outbox
 from app.services.quality import review
-from app.storage import quality
+from app.storage import preparations, quality
 
 QUESTION_ID = uuid.uuid4()
 OPTIONS = [
@@ -63,7 +64,7 @@ def test_dead_or_too_easy_options_are_weak():
 
 
 def stored(flag=None, kept=False, answers=0):
-    question = SimpleNamespace(options=OPTIONS)
+    question = SimpleNamespace(text="Which entry records a cash sale?", options=OPTIONS)
     stats = SimpleNamespace(answers=answers, correct=0, option_picks={}, flag=flag, kept=kept)
 
     return question, stats, {"wrong_answer": 2}, 0, 0
@@ -81,12 +82,24 @@ def record(monkeypatch, found, generation_down=False):
 
         calls.append(("verify", flag))
 
-    async def fake_save(question_id, flag, kept=False):
+    async def fake_save(question_id, flag, kept=False, notice=None):
         calls.append(("save", flag))
+
+    async def fake_set(_question_id):
+        return SimpleNamespace(id=uuid.uuid4(), owner_type="user", owner_id="u1", title="Kit")
+
+    async def fake_topic(_question_id):
+        return "Bookkeeping"
+
+    async def fake_flush():
+        pass
 
     monkeypatch.setattr(quality, "load", fake_load)
     monkeypatch.setattr(generation, "verify_question", fake_verify)
     monkeypatch.setattr(quality, "save_flag", fake_save)
+    monkeypatch.setattr(preparations, "get_for_question", fake_set)
+    monkeypatch.setattr(preparations, "topic_of_question", fake_topic)
+    monkeypatch.setattr(outbox, "flush_quietly", fake_flush)
 
     return calls
 

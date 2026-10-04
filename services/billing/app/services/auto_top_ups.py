@@ -3,8 +3,10 @@ from datetime import UTC, datetime
 
 from fastapi import HTTPException, status
 from prepza_common.analytics import track
+from prepza_common.notifications import NotificationKind, notification, publish_quietly
 
 from app.config.settings import settings
+from app.constants.notifications import TOP_UP_LINK
 from app.constants.products import AUTO_TOP_UP_FLAG, AUTO_TOP_UP_THRESHOLDS
 from app.helpers.owners import owner_of
 from app.integrations import paddle
@@ -113,7 +115,10 @@ async def ended(subscription_id: str) -> None:
 
 async def check(owner_type: str, owner_id: str) -> None:
     """After credits are used: if the balance is now under the threshold, buys the chosen
-    top-up with the saved card. Never fails the request that used the credits."""
+    top-up with the saved card. Never fails the request that used the credits; a charge that
+    fails (a declined card) is told to the owner."""
+    row = None
+
     try:
         row = await auto_top_ups.claim_charge(owner_type, owner_id, datetime.now(UTC))
 
@@ -123,3 +128,8 @@ async def check(owner_type: str, owner_id: str) -> None:
         await paddle.charge(row.subscription_id, price_ids()[row.product])
     except Exception:
         logger.exception("Automatic top-up failed for %s %s", owner_type, owner_id)
+
+        if row is not None:
+            await publish_quietly(
+                notification(owner_type, owner_id, NotificationKind.AUTO_TOP_UP_FAILED, TOP_UP_LINK)
+            )

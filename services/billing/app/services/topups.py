@@ -2,8 +2,10 @@ import logging
 from datetime import UTC, datetime
 
 from prepza_common.analytics import track
+from prepza_common.notifications import NotificationKind, notification, publish_quietly
 
 from app.config.settings import settings
+from app.constants.notifications import TOP_UP_LINK
 from app.constants.products import OwnerType
 from app.helpers.credits import credits_for
 from app.helpers.owners import owner_of
@@ -50,10 +52,11 @@ async def handle_completed(data: dict) -> None:
             continue
 
         key, paid_cents = found
+        credits = credits_for(paid_cents)
         granted = await purchases.grant(
             owner_type,
             owner_id,
-            credits_for(paid_cents),
+            credits,
             quantity,
             data["id"],
             key,
@@ -73,3 +76,14 @@ async def handle_completed(data: dict) -> None:
                 currency=data["currency_code"],
                 automatic=subscription_id is not None,
             )
+
+            if subscription_id:
+                await publish_quietly(
+                    notification(
+                        owner_type,
+                        owner_id,
+                        NotificationKind.AUTO_TOP_UP_CHARGED,
+                        TOP_UP_LINK,
+                        credits=credits,
+                    )
+                )

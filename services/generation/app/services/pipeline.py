@@ -5,6 +5,12 @@ from contextlib import aclosing
 
 from langgraph.types import Command
 from prepza_common.analytics import track
+from prepza_common.notifications import (
+    NOTIFICATION_REQUESTED,
+    NotificationKind,
+    Recipient,
+    notification,
+)
 
 from app.constants.events import GENERATION_COMPLETED
 from app.constants.generation import (
@@ -85,9 +91,10 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
     else:
         set_id = await library.create_preparation(payload)
 
-    # Companies stores an interview's set and title, so its pages don't have to ask for them.
-    completed = (
-        (
+    # Companies stores an interview's set and title, so its pages don't have to ask for them;
+    # a learner hears that the kit is ready.
+    if generation.kind == GenerationKind.INTERVIEW:
+        completed = (
             GENERATION_COMPLETED,
             {
                 "generation_id": str(generation.id),
@@ -96,9 +103,18 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
                 "title": payload.title,
             },
         )
-        if generation.kind == GenerationKind.INTERVIEW
-        else None
-    )
+    else:
+        completed = (
+            NOTIFICATION_REQUESTED,
+            notification(
+                Recipient.USER,
+                generation.owner_uid,
+                NotificationKind.KIT_READY,
+                f"/preparations/{set_id}",
+                title=payload.title,
+            ),
+        )
+
     await generations.update(
         generation.id, event=completed, status=Status.DONE, preparation_id=set_id
     )

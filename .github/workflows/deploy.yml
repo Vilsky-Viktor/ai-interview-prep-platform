@@ -100,7 +100,7 @@ jobs:
       # Migrations run before any service moves, so new code never meets an old schema.
       - name: Migrations
         run: |
-          for db in library generation rounds companies billing; do
+          for db in library generation rounds companies billing notifications; do
             gcloud run jobs update "$db-migrate" --image="$REGISTRY/$db:$VERSION" --region="${{ vars.GCP_REGION }}" --quiet
             gcloud run jobs execute "$db-migrate" --region="${{ vars.GCP_REGION }}" --wait --quiet
           done

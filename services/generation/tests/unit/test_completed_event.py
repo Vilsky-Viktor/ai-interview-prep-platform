@@ -97,7 +97,18 @@ def test_finished_interview_is_announced_to_companies(published):
     ]
 
 
-def test_finished_preparation_is_not_announced(published):
+def test_finished_preparation_notifies_its_learner(published):
     run("preparation")
 
-    assert published == []
+    assert published == [
+        (
+            "notification.requested",
+            {
+                "recipient": "user",
+                "recipient_id": "alice",
+                "kind": "kit_ready",
+                "link": f"/preparations/{SET_ID}",
+                "data": {"title": "Bookkeeper interview"},
+            },
+        )
+    ]

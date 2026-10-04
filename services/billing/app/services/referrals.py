@@ -1,6 +1,8 @@
 from prepza_common.analytics import track
+from prepza_common.notifications import NotificationKind, notification, publish_quietly
 
 from app.constants.credits import REFERRAL_MIN_CENTS, REFERRAL_REWARD
+from app.constants.notifications import REFERRAL_LINKS
 from app.helpers.owners import owner_of
 from app.schemas.billing import ReferralOut
 from app.storage import referrals
@@ -16,7 +18,8 @@ async def referral_out(owner_type: str, owner_id: str) -> ReferralOut:
 
 
 async def reward_after_top_up(owner_type: str, owner_id: str, paid_cents: int) -> None:
-    """A top-up big enough pays the referral its owner came through, once."""
+    """A top-up big enough pays the referral its owner came through, once, and tells the
+    referrer (who has the same owner type)."""
     if paid_cents < REFERRAL_MIN_CENTS[owner_type]:
         return
 
@@ -24,3 +27,12 @@ async def reward_after_top_up(owner_type: str, owner_id: str, paid_cents: int) -
 
     if referrer_id is not None:
         await track("referral_rewarded", **owner_of(owner_type, owner_id))
+        await publish_quietly(
+            notification(
+                owner_type,
+                referrer_id,
+                NotificationKind.REFERRAL_REWARDED,
+                REFERRAL_LINKS[owner_type].format(owner_id=referrer_id),
+                credits=REFERRAL_REWARD[owner_type],
+            )
+        )

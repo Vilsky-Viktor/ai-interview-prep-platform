@@ -1,9 +1,13 @@
 import logging
 import uuid
 
+from prepza_common.notifications import NotificationKind
+
+from app.helpers.notifications import question_notification
 from app.helpers.quality import flag_for
 from app.integrations import generation
-from app.storage import quality
+from app.services import outbox
+from app.storage import preparations, quality
 
 logger = logging.getLogger(__name__)
 
@@ -34,13 +38,26 @@ async def review(question_id: uuid.UUID) -> None:
             dislikes,
         )
 
-        if flag == (stats.flag if stats else None):
+        previous = stats.flag if stats else None
+
+        if flag == previous:
             return
 
         # Saved only once the verifier has it, so a failed call is tried again next time.
         if flag is not None:
             await generation.verify_question(question_id, flag)
 
-        await quality.save_flag(question_id, flag)
+        # The owner hears only of a newly flagged question, not of a flag that changes.
+        notice = None
+
+        if flag is not None and previous is None:
+            question_set = await preparations.get_for_question(question_id)
+            topic = await preparations.topic_of_question(question_id)
+            notice = question_notification(question_set, topic, NotificationKind.QUESTION_FLAGGED)
+
+        await quality.save_flag(question_id, flag, notice=notice)
+
+        if notice is not None:
+            await outbox.flush_quietly()
     except Exception:
         logger.exception("Couldn't review question %s", question_id)

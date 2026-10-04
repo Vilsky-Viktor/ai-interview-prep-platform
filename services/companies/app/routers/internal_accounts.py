@@ -1,9 +1,10 @@
 from fastapi import APIRouter, status
 from fastapi.encoders import jsonable_encoder
 
+from app.schemas.companies import UserCompaniesOut
 from app.service_auth import ServiceCaller
 from app.services import accounts as account_service
-from app.storage import accounts
+from app.storage import accounts, companies
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -17,3 +18,9 @@ async def delete_user(user_id: str, email: str, caller: ServiceCaller) -> None:
 @router.get("/users/{user_id}/export")
 async def export_user(user_id: str, email: str, caller: ServiceCaller) -> dict:
     return jsonable_encoder(await accounts.export(user_id, email))
+
+
+@router.get("/users/{user_id}/companies")
+async def user_companies(user_id: str, caller: ServiceCaller) -> UserCompaniesOut:
+    """Every company the user is a member of, in any role; notifications sends them theirs."""
+    return UserCompaniesOut(company_ids=await companies.ids_for_user(user_id))

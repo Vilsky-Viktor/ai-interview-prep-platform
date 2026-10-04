@@ -760,5 +760,22 @@
       "quote": "Jedes Mal, wenn ich mich auf ein Vorstellungsgespräch vorbereitet oder etwas Neues lernen wollte, habe ich mehr Zeit mit der Suche nach gutem Material verbracht als mit dem eigentlichen Lernen. Jede Seite deckte nur ein Stück ab, und keine passte zu dem, was ich brauchte. Also habe ich prepza gebaut: das Tool, das ich mir damals gewünscht hätte, eines, das bei deinem Ziel ansetzt und dich dorthin führt. Ich hoffe, es spart dir die Stunden, die es mir erspart hätte.",
       "role": "Solo-Gründer von prepza"
     }
+  },
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "unread": "{count, plural, one {# ungelesene Benachrichtigung} other {# ungelesene Benachrichtigungen}}",
+    "empty": "Noch nichts Neues.",
+    "kinds": {
+      "question_flagged": "{count, plural, one {Eine Frage zu „{topic}“ in „{title}“ wurde zur Prüfung gemeldet.} other {# Fragen in „{title}“ wurden zur Prüfung gemeldet.}}",
+      "question_fixed": "{count, plural, one {Die KI hat eine gemeldete Frage zu „{topic}“ in „{title}“ korrigiert.} other {Die KI hat # gemeldete Fragen in „{title}“ korrigiert.}}",
+      "kit_ready": "Dein Kit „{title}“ ist fertig.",
+      "referral_rewarded": "Jemand, den du eingeladen hast, hat aufgeladen. Du hast {credits} Credits bekommen.",
+      "auto_top_up_charged": "Automatisches Aufladen hat {credits} Credits hinzugefügt.",
+      "auto_top_up_failed": "Automatisches Aufladen konnte die Karte nicht belasten. Lade auf, damit dein Guthaben nicht ausgeht.",
+      "candidate_finished": "{count, plural, one {{email} hat „{title}“ abgeschlossen{grade, select, none {.} other {: {grade} %.}}} other {# Kandidaten haben „{title}“ abgeschlossen.}}",
+      "invite_undelivered": "{count, plural, one {Die Einladung an {email} für „{title}“ wurde nicht zugestellt.} other {# Einladungen für „{title}“ wurden nicht zugestellt.}}",
+      "interview_ready": "Das Interview „{title}“ ist fertig.",
+      "interview_cancelled": "{title, select, none {Ein Interview} other {Das Interview „{title}“}} wurde abgebrochen: Die Themenprüfung hat zu lange gewartet."
+    }
   }
 }

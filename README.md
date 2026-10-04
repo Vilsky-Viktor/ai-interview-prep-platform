@@ -51,6 +51,9 @@ Turn a job description or a learning goal into a structured practice path: revie
 - **Contact us** (`/contact`): a name, email and message form. The message is emailed to hello@prepza.ai (`CONTACT_EMAIL` in notifications), with the visitor's address as the reply-to, so answering the email answers them. At most 200 messages a day in all (`CONTACT_DAILY_LIMIT`).
 - **About us** (`/about`): why prepza exists, and its solo founder.
 - The footer links pricing, the privacy policy, the terms, the FAQ, About us and Contact us.
+- **Notifications:** a bell next to the account menu, live (it updates within a second, without reloading), with a badge of unread ones; it shows the latest 10. Each person or company keeps at most 100, none older than 90 days. Bursts are grouped: another finished candidate, undelivered invite, or flagged or fixed question about the same interview or kit within 24 hours adds to the last one ("3 candidates finished …") instead of a new one. Only what matters gets one:
+  - learners: a question in their kit flagged for review, and fixed by the AI; their kit ready; a referral reward; an automatic top-up charged, or failed;
+  - companies, for every member: a candidate finished (with their grade), an invite not delivered, an interview ready or cancelled, a flagged and fixed interview question, a referral reward, an automatic top-up charged or failed.
 
 ## Architecture
 
@@ -82,6 +85,7 @@ flowchart LR
     library -- preparation.shared --> pubsub
     companies -- candidate.invited --> pubsub
     rounds -- contact.sent --> pubsub
+    library & generation & companies & billing -- notification.requested --> pubsub
     pubsub -- push --> library
     pubsub -- push --> companies
     pubsub -- push --> notifications -- email --> smtp[Resend / mailpit]
@@ -95,7 +99,7 @@ flowchart LR
 | `rounds` | Practice rounds, progress and certificates, the follow-up chat, candidate interview sessions; the FAQ, the help chat, the legal texts and the contact form (`/help/...`) |
 | `companies` | Companies (unique names), admins, interviews and candidate invites |
 | `billing` | Credit wallets for learners and companies (holds, charges, history), welcome gifts, referrals, Paddle top-ups, automatic top-ups, refunds and chargebacks (webhooks); other services set credits aside or charge them through it |
-| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): share and candidate invites, and contact messages to prepza's inbox |
+| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): share and candidate invites, and contact messages to prepza's inbox. Also the bell: stores the notifications other services ask for (`notification.requested`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
 Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed). Long jobs (a generation, a question check) are Cloud Tasks that call the generation worker's `/internal/jobs/...`; periodic work (stuck-generation sweeps, key-check batches, retention) is Cloud Scheduler calling `/internal/schedules/...`. Google signs those calls, and pushes, as one invoker service account, which each service checks. Locally there is no queue: the API calls the worker directly, and a small `scheduler` container runs `scripts/local/crontab`. Domain events are saved in an `outbox` table in the same transaction as the change they announce, published right after, and published by a per-minute scheduled flush if that failed, so a change never loses its event. They go to one Pub/Sub topic, `events`, which pushes each event to the `/internal/events` endpoint of library, companies and notifications; each ignores events that aren't its own. Locally, Google's Pub/Sub emulator runs in docker-compose and `scripts/local/pubsub-setup.sh` creates the topic and subscriptions. The services also publish small `funnel.*` events (signed up, kit ready, topped up and so on) to the same topic; a filtered BigQuery subscription stores them for the dashboards and the push subscriptions skip them. They carry counts and a salted hash of the user id (`ANALYTICS_SALT`), never emails or text; see [docs/measurement.md](docs/measurement.md). Locally nothing stores them.
@@ -145,7 +149,7 @@ docker compose up --build
 
 Without `RESEND_API_KEY`, emails go to Mailpit instead of real inboxes. See [Emails](#emails) to send real ones.
 
-Each API's database migrations run once in a short-lived `*-migrate` container before the API starts, and Docker marks an API healthy only when `/ready` confirms its database and Redis answer.
+Each API's database migrations run once in a short-lived `*-migrate` container before the API starts (a Postgres volume made before a database was added needs it created once, for example `docker compose exec postgres createdb -U prepza notifications`), and Docker marks an API healthy only when `/ready` confirms its database and Redis answer.
 
 `docker-compose.yml` is for local development only. It builds each image's `dev` target, mounts the source so servers reload on change, and enables the Firebase emulator. The frontend keeps its `node_modules` in a volume, so after a frontend dependency changes, run `docker compose build frontend`, remove the `prepza_frontend-modules` volume and start again.
 

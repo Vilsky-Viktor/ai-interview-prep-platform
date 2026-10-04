@@ -17,6 +17,7 @@ from app.schemas.preparations import (
 from app.schemas.regenerate import QuestionContext, QuestionReplace
 from app.schemas.sets import SetContent, SetOut, SetTopicOut
 from app.service_auth import ServiceCaller
+from app.services import outbox as outbox_service
 from app.services.access import require_member
 from app.services.questions import question_texts
 from app.storage import feedback, preparations, shares
@@ -183,6 +184,7 @@ async def replace_question(question_id: UUID, body: QuestionReplace, caller: Ser
         body.text,
         [option.model_dump() for option in body.options],
     )
+    await outbox_service.flush_quietly()
 
 
 @router.get("/topics/{topic_id}")

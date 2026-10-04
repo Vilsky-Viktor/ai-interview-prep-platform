@@ -768,5 +768,22 @@
       "quote": "Tuwing naghahanda ako para sa interview o sinusubukang matuto ng bago, mas matagal ang ginugugol ko sa paghahanap ng magandang materyal kaysa sa mismong pag-aaral. Bawat site ay may isang bahagi lang, at wala ni isang tumugma sa kailangan ko. Kaya ginawa ko ang prepza: ang tool na sana ay meron ako noon, na nagsisimula sa layunin mo at gagabay sa iyo papunta roon. Sana ay matipid nito ang mga oras mo na natipid sana nito para sa akin.",
       "role": "Solo founder ng prepza"
     }
+  },
+  "notifications": {
+    "title": "Mga notification",
+    "unread": "{count, plural, one {# hindi pa nababasang notification} other {# hindi pa nababasang notification}}",
+    "empty": "Wala pang bago.",
+    "kinds": {
+      "question_flagged": "{count, plural, =1 {Na-flag para i-review ang isang tanong tungkol sa “{topic}” sa “{title}”.} other {Na-flag para i-review ang # tanong sa “{title}”.}}",
+      "question_fixed": "{count, plural, =1 {Inayos ng AI ang na-flag na tanong tungkol sa “{topic}” sa “{title}”.} other {Inayos ng AI ang # na-flag na tanong sa “{title}”.}}",
+      "kit_ready": "Handa na ang iyong kit na “{title}”.",
+      "referral_rewarded": "Nag-top up ang isang inimbitahan mo. Nakatanggap ka ng {credits} credits.",
+      "auto_top_up_charged": "Nagdagdag ang awtomatikong top-up ng {credits} credits.",
+      "auto_top_up_failed": "Hindi ma-charge ng awtomatikong top-up ang card. Mag-top up para hindi maubos ang iyong balance.",
+      "candidate_finished": "{count, plural, =1 {Natapos ni {email} ang “{title}”{grade, select, none {.} other {: {grade}%.}}} other {# kandidato ang nakatapos ng “{title}”.}}",
+      "invite_undelivered": "{count, plural, =1 {Hindi naihatid ang imbitasyon kay {email} para sa “{title}”.} other {Hindi naihatid ang # imbitasyon para sa “{title}”.}}",
+      "interview_ready": "Handa na ang interview na “{title}”.",
+      "interview_cancelled": "{title, select, none {Kinansela ang isang interview} other {Kinansela ang interview na “{title}”}}: masyadong natagal ang paghihintay sa review ng mga paksa."
+    }
   }
 }

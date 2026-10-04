@@ -1,13 +1,17 @@
 import base64
 import json
 import uuid
+from types import SimpleNamespace
 
 import pytest
+from prepza_common.notifications import notification
 
+from app.services import outbox as outbox_service
 from app.storage import interviews
 
 GENERATION_ID = uuid.uuid4()
 SET_ID = uuid.uuid4()
+INTERVIEW = SimpleNamespace(id=uuid.uuid4(), company_id=uuid.uuid4(), title=None)
 
 
 def push(event_type, data):
@@ -36,31 +40,67 @@ def emulator(monkeypatch):
     monkeypatch.setenv("GOOGLE_CLOUD_PROJECT", "demo-test")
 
 
-def test_finished_generation_is_stored_on_its_interview(client, monkeypatch):
+@pytest.fixture(autouse=True)
+def interview(monkeypatch):
+    async def found(generation_id):
+        return INTERVIEW
+
+    async def no_flush():
+        pass
+
+    monkeypatch.setattr(interviews, "get_for_generation", found)
+    monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
+
+
+def test_finished_generation_is_stored_on_its_interview_and_the_company_told(client, monkeypatch):
     stored = []
 
-    async def set_generated(generation_id, set_id, title):
-        stored.append((generation_id, set_id, title))
+    async def set_generated(generation_id, set_id, title, notice):
+        stored.append((generation_id, set_id, title, notice))
 
     monkeypatch.setattr(interviews, "set_generated", set_generated)
 
     response = client.post("/internal/events", json=push("generation.completed", COMPLETED))
 
+    company = INTERVIEW.company_id
+    ready = notification(
+        "company",
+        company,
+        "interview_ready",
+        f"/company/{company}/interviews/{INTERVIEW.id}",
+        key=str(INTERVIEW.id),
+        title="Bookkeeper interview",
+    )
     assert response.status_code == 204
-    assert stored == [(GENERATION_ID, SET_ID, "Bookkeeper interview")]
+    assert stored == [(GENERATION_ID, SET_ID, "Bookkeeper interview", ready)]
 
 
-def test_a_cancelled_generation_removes_its_interview(client, monkeypatch):
+def test_a_cancelled_generation_removes_its_interview_and_tells_the_company(client, monkeypatch):
     removed = []
 
-    async def remove_for_generation(generation_id):
-        removed.append(generation_id)
+    async def remove_for_generation(generation_id, notice):
+        removed.append((generation_id, notice))
 
     monkeypatch.setattr(interviews, "remove_for_generation", remove_for_generation)
     event = push("generation.cancelled", {"generation_id": str(GENERATION_ID)})
 
+    company = INTERVIEW.company_id
+    cancelled = notification(
+        "company", company, "interview_cancelled", f"/company/{company}/interviews"
+    )
     assert client.post("/internal/events", json=event).status_code == 204
-    assert removed == [GENERATION_ID]
+    assert removed == [(GENERATION_ID, cancelled)]
+
+
+def test_an_interview_already_removed_is_left_alone(client, monkeypatch):
+    async def gone(generation_id):
+        return None
+
+    monkeypatch.setattr(interviews, "get_for_generation", gone)
+
+    response = client.post("/internal/events", json=push("generation.completed", COMPLETED))
+
+    assert response.status_code == 204
 
 
 def test_other_events_are_accepted_without_action(client):

@@ -1,24 +1,49 @@
 import uuid
+from types import SimpleNamespace
 
+from prepza_common.notifications import notification
 from prepza_common.service_auth import issue_token
 
-from app.storage import invites
+from app.services import outbox as outbox_service
+from app.storage import interviews, invites
 
 INVITE_ID = uuid.uuid4()
 URL = f"/internal/invites/{INVITE_ID}/undelivered"
+INTERVIEW = SimpleNamespace(id=uuid.uuid4(), company_id=uuid.uuid4(), title="Backend")
 
 
-def test_notifications_marks_an_invite_undelivered(client, monkeypatch):
+def test_notifications_marks_an_invite_undelivered_and_the_company_is_told(client, monkeypatch):
     marked = []
 
-    async def fake_mark(invite_id):
-        marked.append(invite_id)
+    async def fake_get(invite_id):
+        return SimpleNamespace(id=invite_id, interview_id=INTERVIEW.id, email="erin@example.com")
 
+    async def fake_interview(interview_id):
+        return INTERVIEW
+
+    async def fake_mark(invite_id, notice):
+        marked.append((invite_id, notice))
+
+    async def no_flush():
+        pass
+
+    monkeypatch.setattr(invites, "get", fake_get)
+    monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(invites, "mark_undelivered", fake_mark)
+    monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
     token = issue_token("notifications", "companies", "test-secret-that-is-at-least-32-bytes")
 
+    company = INTERVIEW.company_id
+    undelivered = notification(
+        "company",
+        company,
+        "invite_undelivered",
+        f"/company/{company}/interviews/{INTERVIEW.id}",
+        email="erin@example.com",
+        title="Backend",
+    )
     assert client.post(URL, headers={"Authorization": f"Bearer {token}"}).status_code == 204
-    assert marked == [INVITE_ID]
+    assert marked == [(INVITE_ID, undelivered)]
 
 
 def test_marking_needs_a_service_token(client):

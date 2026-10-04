@@ -752,5 +752,22 @@
       "quote": "면접을 준비하거나 새로운 것을 배우려 할 때마다, 정작 공부보다 좋은 자료를 찾는 데 더 많은 시간을 썼습니다. 사이트마다 일부만 다루고 있었고, 제게 필요한 것에 딱 맞는 곳은 없었습니다. 그래서 prepza를 만들었습니다. 제가 그때 갖고 싶었던 도구, 여러분의 목표에서 출발해 그곳까지 안내하는 도구입니다. 제가 아낄 수 있었을 그 시간을 여러분은 아끼실 수 있기를 바랍니다.",
       "role": "prepza 1인 창업자"
     }
+  },
+  "notifications": {
+    "title": "알림",
+    "unread": "{count, plural, other {읽지 않은 알림 #개}}",
+    "empty": "아직 새로운 알림이 없습니다.",
+    "kinds": {
+      "question_flagged": "{count, plural, =1 {“{title}”의 “{topic}” 문제가 검토 대상으로 표시되었습니다.} other {“{title}”의 문제 #개가 검토 대상으로 표시되었습니다.}}",
+      "question_fixed": "{count, plural, =1 {AI가 “{title}”의 “{topic}”에서 표시된 문제를 수정했습니다.} other {AI가 “{title}”에서 표시된 문제 #개를 수정했습니다.}}",
+      "kit_ready": "키트 “{title}” 준비가 완료되었습니다.",
+      "referral_rewarded": "초대한 사람이 충전했습니다. {credits} 크레딧을 받았습니다.",
+      "auto_top_up_charged": "자동 충전으로 {credits} 크레딧이 추가되었습니다.",
+      "auto_top_up_failed": "자동 충전 중 카드 결제에 실패했습니다. 잔액이 부족하지 않도록 충전해 주세요.",
+      "candidate_finished": "{count, plural, =1 {{email} 님이 “{title}”을(를) 완료했습니다{grade, select, none {.} other {: {grade}%.}}} other {지원자 #명이 “{title}”을(를) 완료했습니다.}}",
+      "invite_undelivered": "{count, plural, =1 {{email} 님에게 보낸 “{title}” 초대가 전달되지 않았습니다.} other {“{title}” 초대 #건이 전달되지 않았습니다.}}",
+      "interview_ready": "면접 “{title}” 준비가 완료되었습니다.",
+      "interview_cancelled": "{title, select, none {면접이} other {면접 “{title}”이(가)}} 취소되었습니다: 주제 검토 대기 시간이 너무 길었습니다."
+    }
   }
 }

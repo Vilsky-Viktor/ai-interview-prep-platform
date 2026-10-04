@@ -756,5 +756,22 @@
       "quote": "Mỗi lần chuẩn bị cho một buổi phỏng vấn hay cố học một điều mới, tôi mất nhiều thời gian tìm tài liệu tốt hơn là thật sự học. Mỗi trang chỉ có một phần, và không trang nào hợp với điều tôi cần. Vì vậy tôi đã xây dựng prepza: công cụ mà tôi từng ước mình có, bắt đầu từ mục tiêu của bạn và dẫn bạn đến đó. Mong rằng nó sẽ giúp bạn tiết kiệm những giờ mà lẽ ra nó đã giúp tôi tiết kiệm.",
       "role": "Nhà sáng lập duy nhất của prepza"
     }
+  },
+  "notifications": {
+    "title": "Thông báo",
+    "unread": "{count, plural, other {# thông báo chưa đọc}}",
+    "empty": "Chưa có gì mới.",
+    "kinds": {
+      "question_flagged": "{count, plural, =1 {Một câu hỏi về “{topic}” trong “{title}” đã bị đánh dấu để xem xét.} other {# câu hỏi trong “{title}” đã bị đánh dấu để xem xét.}}",
+      "question_fixed": "{count, plural, =1 {AI đã sửa một câu hỏi bị đánh dấu về “{topic}” trong “{title}”.} other {AI đã sửa # câu hỏi bị đánh dấu trong “{title}”.}}",
+      "kit_ready": "Bộ ôn luyện “{title}” của bạn đã sẵn sàng.",
+      "referral_rewarded": "Một người bạn mời đã nạp tiền. Bạn nhận được {credits} tín dụng.",
+      "auto_top_up_charged": "Tự động nạp đã thêm {credits} tín dụng.",
+      "auto_top_up_failed": "Tự động nạp không trừ tiền được từ thẻ. Hãy nạp tiền để không bị hết số dư.",
+      "candidate_finished": "{count, plural, =1 {{email} đã hoàn thành “{title}”{grade, select, none {.} other {: {grade}%.}}} other {# ứng viên đã hoàn thành “{title}”.}}",
+      "invite_undelivered": "{count, plural, =1 {Lời mời gửi tới {email} cho “{title}” chưa được chuyển đến.} other {# lời mời cho “{title}” chưa được chuyển đến.}}",
+      "interview_ready": "Buổi phỏng vấn “{title}” đã sẵn sàng.",
+      "interview_cancelled": "{title, select, none {Một buổi phỏng vấn} other {Buổi phỏng vấn “{title}”}} đã bị hủy: phần xem xét chủ đề phải chờ quá lâu."
+    }
   }
 }

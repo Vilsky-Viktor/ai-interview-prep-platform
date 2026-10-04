@@ -764,5 +764,22 @@
       "quote": "Cada vez que me preparaba para una entrevista o intentaba aprender algo nuevo, pasaba más tiempo buscando buen material que estudiando de verdad. Cada sitio cubría una parte y ninguno se ajustaba a lo que necesitaba. Por eso creé prepza: la herramienta que me habría encantado tener, una que parte de tu objetivo y te guía hasta él. Ojalá te ahorre las horas que me habría ahorrado a mí.",
       "role": "Fundador en solitario de prepza"
     }
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "unread": "{count, plural, one {# notificación sin leer} other {# notificaciones sin leer}}",
+    "empty": "Nada nuevo por ahora.",
+    "kinds": {
+      "question_flagged": "{count, plural, one {Se marcó para revisión una pregunta sobre «{topic}» de «{title}».} other {# preguntas de «{title}» se marcaron para revisión.}}",
+      "question_fixed": "{count, plural, one {La IA corrigió una pregunta marcada sobre «{topic}» de «{title}».} other {La IA corrigió # preguntas marcadas de «{title}».}}",
+      "kit_ready": "Tu kit «{title}» está listo.",
+      "referral_rewarded": "Alguien a quien invitaste recargó. Recibiste {credits} créditos.",
+      "auto_top_up_charged": "La recarga automática añadió {credits} créditos.",
+      "auto_top_up_failed": "La recarga automática no pudo cobrar a la tarjeta. Recarga para no quedarte sin saldo.",
+      "candidate_finished": "{count, plural, one {{email} terminó «{title}»{grade, select, none {.} other {: {grade} %.}}} other {# candidatos terminaron «{title}».}}",
+      "invite_undelivered": "{count, plural, one {No se pudo entregar la invitación a {email} para «{title}».} other {No se pudieron entregar # invitaciones para «{title}».}}",
+      "interview_ready": "La entrevista «{title}» está lista.",
+      "interview_cancelled": "{title, select, none {Se canceló una entrevista} other {Se canceló la entrevista «{title}»}}: la revisión de sus temas esperó demasiado."
+    }
   }
 }

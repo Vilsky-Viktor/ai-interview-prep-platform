@@ -746,5 +746,22 @@
       "quote": "每次准备面试或想学点新东西时，我花在寻找好资料上的时间都比真正学习的时间还多。每个网站只讲一部分，没有一个真正符合我的需要。所以我做了 prepza：一个我曾经多么希望拥有的工具，从你的目标出发，一步步带你抵达。希望它能为你省下那些本可以为我省下的时间。",
       "role": "prepza 独立创始人"
     }
+  },
+  "notifications": {
+    "title": "通知",
+    "unread": "{count, plural, other {# 条未读通知}}",
+    "empty": "暂无新消息。",
+    "kinds": {
+      "question_flagged": "{count, plural, =1 {“{title}”中关于“{topic}”的一道题目被标记待审核。} other {“{title}”中有 # 道题目被标记待审核。}}",
+      "question_fixed": "{count, plural, =1 {AI 修正了“{title}”中关于“{topic}”的被标记题目。} other {AI 修正了“{title}”中 # 道被标记的题目。}}",
+      "kit_ready": "你的学习包“{title}”已就绪。",
+      "referral_rewarded": "你邀请的人完成了充值，你获得了 {credits} 点数。",
+      "auto_top_up_charged": "自动充值已添加 {credits} 点数。",
+      "auto_top_up_failed": "自动充值无法从银行卡扣款。请充值，以免余额不足。",
+      "candidate_finished": "{count, plural, =1 {{email} 已完成“{title}”{grade, select, none {。} other {，得分 {grade}%。}}} other {# 位候选人已完成“{title}”。}}",
+      "invite_undelivered": "{count, plural, =1 {发送给 {email} 的“{title}”邀请未能送达。} other {“{title}”的 # 份邀请未能送达。}}",
+      "interview_ready": "面试“{title}”已就绪。",
+      "interview_cancelled": "{title, select, none {一场面试} other {面试“{title}”}}已取消：主题审核等待时间过长。"
+    }
   }
 }

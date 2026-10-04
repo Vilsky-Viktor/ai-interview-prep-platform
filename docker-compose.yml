@@ -16,6 +16,7 @@ x-firebase-env: &firebase-env
   ROUNDS_SERVICE_SECRET: ${SERVICE_SECRET}
   COMPANIES_SERVICE_SECRET: ${SERVICE_SECRET}
   BILLING_SERVICE_SECRET: ${SERVICE_SECRET}
+  NOTIFICATIONS_SERVICE_SECRET: ${SERVICE_SECRET}
   # Events go through the Pub/Sub emulator locally; Google Cloud uses the real service.
   GOOGLE_CLOUD_PROJECT: ${FIREBASE_PROJECT_ID}
   PUBSUB_EMULATOR_HOST: pubsub:8085
@@ -53,6 +54,7 @@ x-library-env: &library-env
   GENERATION_URL: http://generation:8000
   COMPANIES_URL: http://companies:8000
   BILLING_URL: http://billing:8000
+  NOTIFICATIONS_URL: http://notifications:8000
 
 x-rounds-env: &rounds-env
   <<: *firebase-env
@@ -125,6 +127,26 @@ x-companies-source: &companies-source
   - ./services/companies/app:/services/companies/app
   - ./services/companies/migrations:/services/companies/migrations
   - ./services/companies/alembic.ini:/services/companies/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+x-notifications-env: &notifications-env
+  <<: *firebase-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/notifications
+  REDIS_URL: redis://redis:6379
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  RESEND_API_KEY: ${RESEND_API_KEY:-}
+  RESEND_WEBHOOK_SECRET: ${RESEND_WEBHOOK_SECRET:-}
+  MAIL_FROM: ${MAIL_FROM:-prepza. <no-reply@prepza.local>}
+  COMPANIES_URL: http://companies:8000
+  LIBRARY_URL: http://library:8000
+  SMTP_HOST: ${SMTP_HOST:-mailpit}
+  SMTP_PORT: ${SMTP_PORT:-1025}
+  SITE_URL: ${SITE_URL:-http://localhost:8090}
+
+x-notifications-source: &notifications-source
+  - ./services/notifications/app:/services/notifications/app
+  - ./services/notifications/migrations:/services/notifications/migrations
+  - ./services/notifications/alembic.ini:/services/notifications/alembic.ini:ro
   - ./packages/common/src:/packages/common/src
 
 # Runs a service's migrations once, before its API starts, so replicas never race on them.
@@ -200,26 +222,28 @@ services:
       redis:
         condition: service_healthy
 
+  notifications-migrate:
+    <<: *migrate
+    build:
+      context: .
+      dockerfile: services/notifications/Dockerfile
+      target: dev
+    volumes: *notifications-source
+    environment: *notifications-env
+
   notifications:
     <<: *service
     build:
       context: .
       dockerfile: services/notifications/Dockerfile
       target: dev
-    volumes:
-      - ./services/notifications/app:/services/notifications/app
-      - ./packages/common/src:/packages/common/src
-    environment:
-      <<: *firebase-env
-      RESEND_API_KEY: ${RESEND_API_KEY:-}
-      RESEND_WEBHOOK_SECRET: ${RESEND_WEBHOOK_SECRET:-}
-      MAIL_FROM: ${MAIL_FROM:-prepza. <no-reply@prepza.local>}
-      COMPANIES_URL: http://companies:8000
-      LIBRARY_URL: http://library:8000
-      SMTP_HOST: ${SMTP_HOST:-mailpit}
-      SMTP_PORT: ${SMTP_PORT:-1025}
-      SITE_URL: ${SITE_URL:-http://localhost:8090}
+    volumes: *notifications-source
+    environment: *notifications-env
     depends_on:
+      notifications-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
       mailpit:
         condition: service_started
 

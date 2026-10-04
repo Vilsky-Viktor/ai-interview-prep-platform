@@ -760,5 +760,22 @@
       "quote": "Za każdym razem, gdy przygotowywałem się do rozmowy kwalifikacyjnej albo próbowałem nauczyć się czegoś nowego, więcej czasu spędzałem na szukaniu dobrych materiałów niż na samej nauce. Każda strona obejmowała tylko kawałek i żadna nie pasowała do tego, czego potrzebowałem. Dlatego zbudowałem prepza: narzędzie, którego mi brakowało, które zaczyna od Twojego celu i prowadzi Cię do niego. Mam nadzieję, że oszczędzi Ci godziny, które oszczędziłoby mi.",
       "role": "Jedyny założyciel prepza"
     }
+  },
+  "notifications": {
+    "title": "Powiadomienia",
+    "unread": "{count, plural, one {# nieprzeczytane powiadomienie} few {# nieprzeczytane powiadomienia} many {# nieprzeczytanych powiadomień} other {# nieprzeczytanego powiadomienia}}",
+    "empty": "Na razie nic nowego.",
+    "kinds": {
+      "question_flagged": "{count, plural, one {Pytanie z tematu „{topic}” w „{title}” zgłoszono do weryfikacji.} few {# pytania w „{title}” zgłoszono do weryfikacji.} many {# pytań w „{title}” zgłoszono do weryfikacji.} other {# pytania w „{title}” zgłoszono do weryfikacji.}}",
+      "question_fixed": "{count, plural, one {AI poprawiła zgłoszone pytanie z tematu „{topic}” w „{title}”.} few {AI poprawiła # zgłoszone pytania w „{title}”.} many {AI poprawiła # zgłoszonych pytań w „{title}”.} other {AI poprawiła # zgłoszonego pytania w „{title}”.}}",
+      "kit_ready": "Twój zestaw „{title}” jest gotowy.",
+      "referral_rewarded": "Zaproszona przez Ciebie osoba doładowała konto. Otrzymujesz kredyty: {credits}.",
+      "auto_top_up_charged": "Automatyczne doładowanie dodało kredyty: {credits}.",
+      "auto_top_up_failed": "Automatyczne doładowanie nie mogło obciążyć karty. Doładuj konto, aby nie zabrakło Ci kredytów.",
+      "candidate_finished": "{count, plural, one {Kandydat {email} ukończył „{title}”{grade, select, none {.} other {: {grade}%.}}} few {# kandydaci ukończyli „{title}”.} many {# kandydatów ukończyło „{title}”.} other {# kandydata ukończyło „{title}”.}}",
+      "invite_undelivered": "{count, plural, one {Zaproszenie dla {email} do „{title}” nie zostało dostarczone.} few {# zaproszenia do „{title}” nie zostały dostarczone.} many {# zaproszeń do „{title}” nie zostało dostarczonych.} other {# zaproszenia do „{title}” nie zostało dostarczone.}}",
+      "interview_ready": "Rozmowa „{title}” jest gotowa.",
+      "interview_cancelled": "{title, select, none {Rozmowa została anulowana} other {Rozmowa „{title}” została anulowana}}: tematy zbyt długo czekały na weryfikację."
+    }
   }
 }

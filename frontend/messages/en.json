@@ -756,5 +756,22 @@
       "quote": "Whenever I prepared for an interview or tried to learn something new, I spent more time searching for good material than actually studying. Every site covered a piece, and none fit what I needed. So I built prepza: the tool I wished I'd had, one that starts from your goal and guides you to it. I hope it saves you the hours it would have saved me.",
       "role": "Solo founder of prepza"
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "unread": "{count, plural, one {# unread notification} other {# unread notifications}}",
+    "empty": "Nothing new yet.",
+    "kinds": {
+      "question_flagged": "{count, plural, one {A question on “{topic}” in “{title}” was flagged for review.} other {# questions in “{title}” were flagged for review.}}",
+      "question_fixed": "{count, plural, one {The AI fixed a flagged question on “{topic}” in “{title}”.} other {The AI fixed # flagged questions in “{title}”.}}",
+      "kit_ready": "Your prep kit “{title}” is ready.",
+      "referral_rewarded": "Someone you invited topped up. You got {credits} credits.",
+      "auto_top_up_charged": "Automatic top-up added {credits} credits.",
+      "auto_top_up_failed": "Automatic top-up couldn't charge the card. Top up to keep your balance going.",
+      "candidate_finished": "{count, plural, one {{email} finished “{title}”{grade, select, none {.} other {: {grade}%.}}} other {# candidates finished “{title}”.}}",
+      "invite_undelivered": "{count, plural, one {The invite to {email} for “{title}” wasn't delivered.} other {# invites for “{title}” weren't delivered.}}",
+      "interview_ready": "The interview “{title}” is ready.",
+      "interview_cancelled": "{title, select, none {An interview} other {The interview “{title}”}} was cancelled: its topic review waited too long."
+    }
   }
 }

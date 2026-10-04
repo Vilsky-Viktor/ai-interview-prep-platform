@@ -1,10 +1,15 @@
 import uuid
 
+from prepza_common import outbox
+from prepza_common.notifications import NOTIFICATION_REQUESTED, NotificationKind
 from prepza_common.sets import PreparationIn
 from sqlalchemy import Row, delete, func, select, update
 from sqlalchemy.orm import selectinload
 
 from app.constants.sets import OwnerType, SetKind, Visibility
+from app.helpers.notifications import question_notification
+from app.models.outbox import OutboxEvent
+from app.models.quality import QuestionStats
 from app.models.sets import Question, QuestionSet, Topic
 from app.models.sharing import JoinedPreparation
 from app.storage import quality, reuse
@@ -187,16 +192,32 @@ async def get_topic_with_question_texts(
         return tuple(row) if row else None
 
 
-async def get_for_question(question_id: uuid.UUID) -> QuestionSet | None:
-    query = (
+def _set_of_question(question_id: uuid.UUID):
+    return (
         select(QuestionSet)
         .join(Topic, Topic.set_id == QuestionSet.id)
         .join(Question, Question.topic_id == Topic.id)
         .where(Question.id == question_id)
     )
 
+
+async def get_for_question(question_id: uuid.UUID) -> QuestionSet | None:
     async with Session() as session:
-        return await session.scalar(query)
+        return await session.scalar(_set_of_question(question_id))
+
+
+def _topic_of_question(question_id: uuid.UUID):
+    return (
+        select(Topic.title)
+        .join(Question, Question.topic_id == Topic.id)
+        .where(Question.id == question_id)
+    )
+
+
+async def topic_of_question(question_id: uuid.UUID) -> str | None:
+    """The title of the topic the question is in."""
+    async with Session() as session:
+        return await session.scalar(_topic_of_question(question_id))
 
 
 async def get_question_context(
@@ -218,12 +239,29 @@ async def get_question_context(
 
 
 async def replace_question(question_id: uuid.UUID, text: str, options: list[dict]) -> None:
-    """New content in the same slot. The old content and its feedback are kept as a revision."""
+    """New content in the same slot. The old content and its feedback are kept as a revision.
+
+    Replacing a flagged question fixes it, and its set's owner hears of that.
+    """
     async with Session() as session:
+        flagged = await session.scalar(
+            select(QuestionStats.flag).where(QuestionStats.question_id == question_id)
+        )
         await quality.archive(session, question_id)
         await session.execute(
             update(Question).where(Question.id == question_id).values(text=text, options=options)
         )
+
+        if flagged is not None:
+            question_set = await session.scalar(_set_of_question(question_id))
+            topic = await session.scalar(_topic_of_question(question_id))
+            outbox.add(
+                session,
+                OutboxEvent,
+                NOTIFICATION_REQUESTED,
+                question_notification(question_set, topic, NotificationKind.QUESTION_FIXED),
+            )
+
         await session.commit()
 
 

@@ -754,5 +754,22 @@
       "quote": "面接の準備をするときも、何か新しいことを学ぼうとするときも、実際に勉強するより良い教材を探す時間のほうが長くかかっていました。どのサイトも一部しか扱っておらず、自分に必要なものにぴったり合うものはありませんでした。だから prepza を作りました。あのころの自分が欲しかった、目標から出発してそこまで導いてくれるツールです。私が費やした時間を、あなたが節約できますように。",
       "role": "prepza の一人創業者"
     }
+  },
+  "notifications": {
+    "title": "お知らせ",
+    "unread": "{count, plural, other {未読のお知らせ # 件}}",
+    "empty": "新しいお知らせはまだありません。",
+    "kinds": {
+      "question_flagged": "{count, plural, =1 {「{title}」の「{topic}」に関する問題がレビュー対象として報告されました。} other {「{title}」の問題 # 件がレビュー対象として報告されました。}}",
+      "question_fixed": "{count, plural, =1 {AI が「{title}」の「{topic}」に関する報告された問題を修正しました。} other {AI が「{title}」の報告された問題 # 件を修正しました。}}",
+      "kit_ready": "キット「{title}」の準備ができました。",
+      "referral_rewarded": "招待した人がチャージしました。{credits} クレジットを獲得しました。",
+      "auto_top_up_charged": "自動チャージで {credits} クレジットが追加されました。",
+      "auto_top_up_failed": "自動チャージでカードに請求できませんでした。残高が不足しないようチャージしてください。",
+      "candidate_finished": "{count, plural, =1 {{email} さんが「{title}」を完了しました{grade, select, none {。} other {（{grade}%）。}}} other {# 人の候補者が「{title}」を完了しました。}}",
+      "invite_undelivered": "{count, plural, =1 {{email} さんへの「{title}」の招待を届けられませんでした。} other {「{title}」の招待 # 件を届けられませんでした。}}",
+      "interview_ready": "面接「{title}」の準備ができました。",
+      "interview_cancelled": "{title, select, none {面接} other {面接「{title}」}}はキャンセルされました：トピックの確認待ちが長すぎました。"
+    }
   }
 }

@@ -80,7 +80,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    Services read `latest` when they start, so redeploy (step 9) after setting secrets.
 9. **Run the migrations, then restart the services** so they pick up the secrets.
    ```bash
-   for db in library generation rounds companies billing; do
+   for db in library generation rounds companies billing notifications; do
      gcloud run jobs execute $db-migrate --region=europe-west1 --wait
    done
    # A new revision of each service reads the secrets you just set.
