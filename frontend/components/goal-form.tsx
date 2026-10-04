@@ -64,7 +64,7 @@ export function GoalForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full rounded-3xl border border-transparent bg-card p-3 transition-colors focus-within:border-ring"
+      className="w-full rounded-3xl border border-transparent bg-muted p-3 transition-colors focus-within:border-ring dark:bg-card"
     >
       <Textarea
         value={goal}

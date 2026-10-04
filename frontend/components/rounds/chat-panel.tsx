@@ -115,7 +115,7 @@ export function ChatPanel({ answerId }: { answerId: string }) {
           onKeyDown={handleKeyDown}
           placeholder={t("followUpPlaceholder")}
           aria-label={t("followUp")}
-          className="max-h-40 min-h-16 resize-none rounded-[2rem] border-0 bg-transparent px-6 py-4 pe-20 text-lg shadow-none focus-visible:border-transparent focus-visible:ring-0 md:text-lg dark:bg-input/30"
+          className="max-h-40 min-h-16 resize-none rounded-[2rem] border-0 bg-muted px-6 py-4 pe-20 text-lg shadow-none focus-visible:border-transparent focus-visible:ring-0 md:text-lg dark:bg-input/30"
         />
         <Button
           type="submit"

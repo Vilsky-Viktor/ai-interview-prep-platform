@@ -39,7 +39,7 @@ function PillSelect({
         <select
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          className="h-14 w-full appearance-none rounded-full border-0 bg-transparent px-6 pe-16 text-lg outline-none dark:bg-input/30"
+          className="h-14 w-full appearance-none rounded-full border-0 bg-muted px-6 pe-16 text-lg outline-none dark:bg-input/30"
         >
           {options.map((option) => (
             <option key={option.value} value={option.value}>

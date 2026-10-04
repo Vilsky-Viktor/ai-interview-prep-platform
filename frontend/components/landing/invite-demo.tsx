@@ -76,7 +76,7 @@ export function InviteDemo({
 
   return (
     <>
-      <div className="relative rounded-full bg-muted/50">
+      <div className="relative rounded-full bg-muted">
         <p className="px-6 py-4 pe-20">
           {draft ? (
             <span>

@@ -41,10 +41,11 @@ export function LanguagePicker({
       <Combobox.Trigger
         aria-label={label}
         className={cn(
-          "flex items-center justify-between gap-3 rounded-full bg-muted/50 normal-case transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50",
+          "flex items-center justify-between gap-3 rounded-full normal-case transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50",
+          // Compact, it sits inside a grey input card: white stands out there in light mode.
           compact
-            ? "h-9 w-48 px-4 text-sm"
-            : "h-12 w-full max-w-xs px-5 text-base"
+            ? "h-9 w-48 bg-background px-4 text-sm dark:bg-muted/50"
+            : "h-12 w-full max-w-xs bg-muted/50 px-5 text-base"
         )}
       >
         <Combobox.Value />

@@ -78,7 +78,8 @@ export function TutorChatDemo({
   }, [ask, answer])
 
   const sent = ["thinking", "streaming", "shown"].includes(step)
-  const draft = step === "typing" || step === "send" ? ask.slice(0, letters) : ""
+  const draft =
+    step === "typing" || step === "send" ? ask.slice(0, letters) : ""
 
   return (
     <div className="space-y-4">
@@ -93,7 +94,7 @@ export function TutorChatDemo({
           />
         )}
       </ul>
-      <div className="relative rounded-[2rem] bg-muted/50">
+      <div className="relative rounded-[2rem] bg-muted">
         <p className="px-6 py-4 pe-20 text-lg">
           {draft ? (
             <span>

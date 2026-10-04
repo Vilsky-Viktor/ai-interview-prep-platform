@@ -54,7 +54,7 @@ export function NewInterview({ companyId }: { companyId: string }) {
   return (
     <form
       onSubmit={create}
-      className="rounded-3xl border border-transparent bg-card p-3 transition-colors focus-within:border-ring"
+      className="rounded-3xl border border-transparent bg-muted p-3 transition-colors focus-within:border-ring dark:bg-card"
     >
       <Textarea
         required
