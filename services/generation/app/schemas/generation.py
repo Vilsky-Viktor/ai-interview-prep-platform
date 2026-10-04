@@ -9,6 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_vali
 from app.constants.generation import (
     GOAL_PREVIEW_LENGTH,
     MAX_GOAL_LENGTH,
+    MAX_INSTRUCTIONS_LENGTH,
     MAX_SUBTOPICS,
     MAX_TOPIC_NAME_LENGTH,
     MAX_TOPICS,
@@ -60,7 +61,7 @@ class EditedTopic(BaseModel):
 
 class ReviewRequest(BaseModel):
     selected: list[int] = Field(min_length=1)
-    instructions: str = ""
+    instructions: str = Field(default="", max_length=MAX_INSTRUCTIONS_LENGTH)
     # Every drafted topic, in order, with the reviewer's own edits; `selected` indexes this list.
     topics: list[EditedTopic] | None = None
 

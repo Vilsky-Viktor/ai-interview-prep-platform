@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
 import { FEEDBACK_HOVER_CLASS, REPORT_REASONS } from "@/constants/feedback"
+import { MAX_REPORT_COMMENT_LENGTH } from "@/constants/limits"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { ReportReason } from "@/types/feedback"
 
@@ -131,6 +132,7 @@ export function ReportDialog({ basePath }: { basePath: string }) {
           </div>
           <div className="rounded-xl border border-transparent transition-colors focus-within:border-ring">
             <Textarea
+              maxLength={MAX_REPORT_COMMENT_LENGTH}
               placeholder={t("details")}
               aria-label={t("details")}
               value={comment}

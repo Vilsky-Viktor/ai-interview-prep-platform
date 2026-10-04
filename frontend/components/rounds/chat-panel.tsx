@@ -9,6 +9,7 @@ import { toast } from "sonner"
 import { ChatBubble, ThinkingBubble } from "@/components/chat-bubble"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
+import { MAX_CHAT_MESSAGE_LENGTH } from "@/constants/limits"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { streamChat } from "@/lib/chat"
 import { announceCreditsChanged, topUpAction } from "@/lib/credits"
@@ -110,6 +111,7 @@ export function ChatPanel({ answerId }: { answerId: string }) {
         className="relative rounded-[2rem] border border-transparent transition-colors focus-within:border-ring"
       >
         <Textarea
+          maxLength={MAX_CHAT_MESSAGE_LENGTH}
           value={input}
           onChange={(event) => setInput(event.target.value)}
           onKeyDown={handleKeyDown}

@@ -6,6 +6,7 @@ import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { MAX_TOPIC_NAME_LENGTH } from "@/constants/limits"
 import type { DraftTopic } from "@/types/generation"
 
 type TopicEditorProps = {
@@ -40,6 +41,7 @@ export function TopicEditor({ topic, onChange, onDone }: TopicEditorProps) {
   return (
     <div className="space-y-4 p-6">
       <Input
+        maxLength={MAX_TOPIC_NAME_LENGTH}
         value={topic.main_topic}
         onChange={(event) =>
           onChange({ ...topic, main_topic: event.target.value })
@@ -73,6 +75,7 @@ export function TopicEditor({ topic, onChange, onDone }: TopicEditorProps) {
 
       <div className="flex items-center gap-2">
         <Input
+          maxLength={MAX_TOPIC_NAME_LENGTH}
           value={newSubtopic}
           onChange={(event) => setNewSubtopic(event.target.value)}
           onKeyDown={(event) => {

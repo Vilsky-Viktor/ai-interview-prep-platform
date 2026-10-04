@@ -17,6 +17,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { MAX_EMAIL_LENGTH } from "@/constants/limits"
 import { ApiError, apiFetch } from "@/lib/api"
 import type { Share } from "@/types/sharing"
 
@@ -78,6 +79,7 @@ export function ShareDialog({
             </DialogHeader>
             <form onSubmit={send} className="flex">
               <InputAction
+                maxLength={MAX_EMAIL_LENGTH}
                 type="email"
                 required
                 placeholder="name@example.com"

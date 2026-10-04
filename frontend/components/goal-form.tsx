@@ -11,6 +11,7 @@ import { GenerateIn } from "@/components/generate-in"
 import { Button } from "@/components/ui/button"
 import type { Locale } from "@/constants/i18n"
 import { Textarea } from "@/components/ui/textarea"
+import { MAX_GOAL_LENGTH } from "@/constants/limits"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { signIn } from "@/lib/auth"
 import { topUpAction } from "@/lib/credits"
@@ -67,6 +68,7 @@ export function GoalForm() {
       className="w-full rounded-3xl border border-transparent bg-muted p-3 transition-colors focus-within:border-ring dark:bg-card"
     >
       <Textarea
+        maxLength={MAX_GOAL_LENGTH}
         value={goal}
         onChange={(event) => setGoal(event.target.value)}
         onKeyDown={handleKeyDown}

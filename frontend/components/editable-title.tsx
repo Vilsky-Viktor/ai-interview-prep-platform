@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
+import { MAX_TITLE_LENGTH } from "@/constants/limits"
 import { apiFetch } from "@/lib/api"
 
 const titleClass =
@@ -86,7 +87,7 @@ export function EditableTitle({
       <h1 className={titleClass}>
         <button
           type="button"
-          className="cursor-text text-start normal-case"
+          className="inline cursor-text text-start normal-case"
           onClick={() => {
             setValue(title)
             setEditing(true)
@@ -101,7 +102,7 @@ export function EditableTitle({
   return (
     <input
       ref={inputRef}
-      maxLength={200}
+      maxLength={MAX_TITLE_LENGTH}
       aria-label={t("title")}
       disabled={saving}
       value={value}

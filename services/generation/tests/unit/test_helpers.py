@@ -191,3 +191,19 @@ def test_worker_skips_a_generation_cancelled_while_queued(monkeypatch):
     asyncio.run(jobs.run_generation(None, uuid.uuid4(), None))
 
     assert started == []
+
+
+def test_drafted_names_are_fitted_to_the_review_limit_at_a_word():
+    from app.constants.generation import MAX_TOPIC_NAME_LENGTH
+    from app.helpers.topics import fit_name, fit_topics
+
+    long_name = "Leading and motivating cross-functional engineering teams through change"
+    fitted = fit_name(long_name)
+
+    assert len(long_name) > MAX_TOPIC_NAME_LENGTH
+    assert len(fitted) <= MAX_TOPIC_NAME_LENGTH
+    assert long_name.startswith(fitted) and not fitted.endswith(" ")
+    assert fit_name("x" * 100) == "x" * MAX_TOPIC_NAME_LENGTH
+    assert fit_topics([{"main_topic": " SQL ", "subtopics": [long_name]}]) == [
+        {"main_topic": "SQL", "subtopics": [fitted]}
+    ]

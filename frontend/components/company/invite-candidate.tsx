@@ -7,6 +7,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { InputAction } from "@/components/input-action"
+import { MAX_EMAIL_LENGTH } from "@/constants/limits"
 import { ApiError, apiFetch } from "@/lib/api"
 import type { Candidate } from "@/types/company"
 
@@ -48,6 +49,7 @@ export function InviteCandidate({ interviewId }: { interviewId: string }) {
   return (
     <form onSubmit={send} className="flex">
       <InputAction
+        maxLength={MAX_EMAIL_LENGTH}
         type="email"
         required
         placeholder="candidate@example.com"

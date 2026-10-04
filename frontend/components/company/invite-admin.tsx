@@ -7,6 +7,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { InputAction } from "@/components/input-action"
+import { MAX_EMAIL_LENGTH } from "@/constants/limits"
 import { apiFetch } from "@/lib/api"
 import type { CompanyMember } from "@/types/company"
 
@@ -40,6 +41,7 @@ export function InviteAdmin({ companyId }: { companyId: string }) {
   return (
     <form onSubmit={send} className="flex">
       <InputAction
+        maxLength={MAX_EMAIL_LENGTH}
         type="email"
         required
         placeholder="admin@example.com"

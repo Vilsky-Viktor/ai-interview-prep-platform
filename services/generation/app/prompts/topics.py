@@ -17,8 +17,8 @@ Rules:
 - Do not limit the number of subtopics. Use as many as needed for full coverage.
 - At most {max_topics} main topics. If the requirements need more, group related ones under a
   shared topic.
-- Keep every main topic and subtopic name to about 10 words at most. If a subtopic would list
-  several things, split it into separate subtopics instead.
+- Keep every main topic and subtopic name to {max_name} characters at most (about 6 words). If a
+  subtopic would list several things, split it into separate subtopics instead.
 - Do not add numbering.
 - Write every main topic and subtopic in {language}, whatever language the requirements are in.
 
@@ -49,8 +49,9 @@ Rules:
 - Subtopics are testable knowledge (concepts, tools, methods, practices), never copied
   requirement wording, years of experience or commitment. Rewrite any current subtopic that
   reads like a requirement into the knowledge behind it.
-- Use specific named subtopics. Keep every main topic and subtopic name to about 10 words at
-  most; split a longer subtopic that lists several things into separate subtopics.
+- Use specific named subtopics. Keep every main topic and subtopic name to {max_name} characters
+  at most (about 6 words); split a longer subtopic that lists several things into separate
+  subtopics.
 - Do not add numbering.
 - Write every main topic and subtopic in {language}, whatever language the requirements are in.
 

@@ -19,6 +19,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
+import { MAX_COMPANY_NAME_LENGTH } from "@/constants/limits"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { Company } from "@/types/company"
 
@@ -98,7 +99,7 @@ export function CreateCompany() {
           >
             <Input
               required
-              maxLength={200}
+              maxLength={MAX_COMPANY_NAME_LENGTH}
               placeholder={t("name")}
               aria-label={t("name")}
               value={name}

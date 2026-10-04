@@ -6,6 +6,7 @@ import { CheckIcon, ChevronDownIcon, SearchIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { LANGUAGE_NAMES, type Locale } from "@/constants/i18n"
+import { MAX_LANGUAGE_SEARCH_LENGTH } from "@/constants/limits"
 
 /** A dropdown of languages with a search field, each named in its own language. `compact` is
  * the small trigger that sits next to a text box's send button. */
@@ -59,6 +60,7 @@ export function LanguagePicker({
             <div className="flex items-center gap-2 border-b px-3">
               <SearchIcon className="size-4 text-muted-foreground" />
               <Combobox.Input
+                maxLength={MAX_LANGUAGE_SEARCH_LENGTH}
                 placeholder={t("searchLanguage")}
                 className="h-11 w-full bg-transparent text-base outline-none placeholder:text-muted-foreground"
               />

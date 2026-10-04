@@ -1,6 +1,7 @@
 from datetime import datetime
 from uuid import UUID
 
+from prepza_common.constants import MAX_GOAL_LENGTH, MAX_TITLE_LENGTH
 from prepza_common.user import Language
 from pydantic import BaseModel, Field, field_validator
 
@@ -12,7 +13,7 @@ from app.constants.interviews import (
 
 
 class InterviewCreate(BaseModel):
-    text: str = Field(min_length=1, max_length=20_000)
+    text: str = Field(min_length=1, max_length=MAX_GOAL_LENGTH)
     # The language to generate the interview in; none means the job description's own.
     generate_in: Language | None = None
 
@@ -74,7 +75,7 @@ class InterviewSettings(BaseModel):
 
 
 class TitleIn(BaseModel):
-    title: str = Field(min_length=1, max_length=200)
+    title: str = Field(min_length=1, max_length=MAX_TITLE_LENGTH)
 
     @field_validator("title")
     @classmethod

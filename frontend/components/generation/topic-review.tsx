@@ -10,6 +10,7 @@ import { RoundFooter } from "@/components/rounds/round-footer"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
+import { MAX_INSTRUCTIONS_LENGTH } from "@/constants/limits"
 import type { DraftTopic } from "@/types/generation"
 
 type TopicReviewProps = {
@@ -135,6 +136,7 @@ export function TopicReview({
       {/* Same card as the goal input on the home page. */}
       <div className="w-full rounded-3xl border border-transparent bg-muted p-3 transition-colors focus-within:border-ring dark:bg-card">
         <Textarea
+          maxLength={MAX_INSTRUCTIONS_LENGTH}
           value={instructions}
           onChange={(event) => setInstructions(event.target.value)}
           placeholder={t("changesPlaceholder")}

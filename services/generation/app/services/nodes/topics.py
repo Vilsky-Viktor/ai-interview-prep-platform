@@ -3,8 +3,9 @@ import json
 from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.types import interrupt
 
-from app.constants.generation import MAX_TOPICS, TOPIC_ATTEMPTS
+from app.constants.generation import MAX_TOPIC_NAME_LENGTH, MAX_TOPICS, TOPIC_ATTEMPTS
 from app.helpers.prompts import bullet_list, language_name
+from app.helpers.topics import fit_topics
 from app.integrations import llm
 from app.models.state import State
 from app.prompts.topics import REVISION_PROMPT, TOO_MANY_TOPICS, TOPICS_PROMPT
@@ -29,7 +30,7 @@ async def plan_topics(prompt: str) -> list[dict]:
             HumanMessage(content=TOO_MANY_TOPICS.format(count=len(topics), max_topics=MAX_TOPICS)),
         ]
 
-    return topics
+    return fit_topics(topics)
 
 
 async def generate_topics(state: State) -> dict:
@@ -38,6 +39,7 @@ async def generate_topics(state: State) -> dict:
         level=state["level"],
         requirements=bullet_list(state["requirements"]),
         max_topics=MAX_TOPICS,
+        max_name=MAX_TOPIC_NAME_LENGTH,
         language=language_name(state.get("language")),
     )
     topics = await draft_cache.get("topics", prompt)
@@ -46,7 +48,8 @@ async def generate_topics(state: State) -> dict:
         topics = await plan_topics(prompt)
         await draft_cache.put("topics", prompt, topics)
 
-    return {"topics": topics}
+    # Drafts cached before the names had a limit are fitted too.
+    return {"topics": fit_topics(topics)}
 
 
 def human_review(state: State) -> dict:
@@ -72,6 +75,7 @@ async def revise_topics(state: State) -> dict:
         current=json.dumps(state["topics"], indent=2, ensure_ascii=False),
         feedback=state["feedback"],
         max_topics=MAX_TOPICS,
+        max_name=MAX_TOPIC_NAME_LENGTH,
         language=language_name(state.get("language")),
     )
 

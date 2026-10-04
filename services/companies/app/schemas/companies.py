@@ -3,9 +3,11 @@ from uuid import UUID
 
 from pydantic import BaseModel, EmailStr, Field
 
+from app.constants.invites import MAX_COMPANY_NAME_LENGTH
+
 
 class CompanyCreate(BaseModel):
-    name: str = Field(min_length=1, max_length=200)
+    name: str = Field(min_length=1, max_length=MAX_COMPANY_NAME_LENGTH)
 
 
 class MemberOut(BaseModel):

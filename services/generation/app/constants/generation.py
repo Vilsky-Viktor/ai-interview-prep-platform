@@ -1,9 +1,11 @@
+from prepza_common.constants import MAX_GOAL_LENGTH  # noqa: F401 (re-exported)
+
 MAX_CONCURRENCY = 8
 RECURSION_LIMIT = 200
 
 MAX_TOPICS = 10
 # Limits for topics edited by hand during review.
-MAX_TOPIC_NAME_LENGTH = 200
+MAX_TOPIC_NAME_LENGTH = 50
 MAX_SUBTOPICS = 30
 TOPIC_ATTEMPTS = 2
 # Questions are written for this many times a topic's size, so the ones dropped as ambiguous or
@@ -36,7 +38,8 @@ REGENERATE_ATTEMPTS = 3
 # Rounds of extra questions for a topic that ended short, before the generation fails.
 FILL_ATTEMPTS = 3
 
-MAX_GOAL_LENGTH = 20_000
+# The changes a reviewer describes in words during topic review.
+MAX_INSTRUCTIONS_LENGTH = 500
 # How much of the pasted goal a list shows to tell generations apart.
 GOAL_PREVIEW_LENGTH = 120
 

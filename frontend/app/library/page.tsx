@@ -8,6 +8,7 @@ import {
   LibraryFilterBar,
 } from "@/components/preparations/library-filters"
 import { PreparationList } from "@/components/preparations/preparation-list"
+import { MAX_SEARCH_LENGTH } from "@/constants/limits"
 import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
 import type { LibraryFilters, PreparationSummary } from "@/types/preparation"
@@ -86,6 +87,7 @@ export default async function LibraryPage({
       <div className="space-y-4">
         <form action="/library" className="flex">
           <InputAction
+            maxLength={MAX_SEARCH_LENGTH}
             name="q"
             defaultValue={choice?.q}
             placeholder={t("search")}

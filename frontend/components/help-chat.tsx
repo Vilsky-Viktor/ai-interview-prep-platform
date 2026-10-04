@@ -8,6 +8,7 @@ import { toast } from "sonner"
 import { ChatBubble, ThinkingBubble } from "@/components/chat-bubble"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
+import { MAX_HELP_QUESTION_LENGTH } from "@/constants/limits"
 import { apiErrorMessage } from "@/lib/api"
 import { streamHelp } from "@/lib/chat"
 import { isSubmitShortcut } from "@/lib/keys"
@@ -85,6 +86,7 @@ export function HelpChat() {
           className="relative rounded-[2rem] border border-transparent transition-colors focus-within:border-ring"
         >
           <Textarea
+            maxLength={MAX_HELP_QUESTION_LENGTH}
             value={input}
             onChange={(event) => setInput(event.target.value)}
             onKeyDown={handleKeyDown}

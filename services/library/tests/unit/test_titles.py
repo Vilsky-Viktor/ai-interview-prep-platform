@@ -2,6 +2,7 @@ import uuid
 
 import pytest
 from prepza_common.auth import current_user
+from prepza_common.constants import MAX_TITLE_LENGTH
 from prepza_common.user import User
 
 from app.constants.sets import SetKind, Visibility
@@ -62,3 +63,12 @@ def test_member_cannot_rename_preparation(client, monkeypatch):
     assert (
         client.patch(f"/preparations/{SET_ID}/title", json={"title": "New name"}).status_code == 404
     )
+
+
+def test_a_title_longer_than_a_heading_is_refused(client):
+    sign_in("owner")
+    long_title = "x" * (MAX_TITLE_LENGTH + 1)
+
+    response = client.patch(f"/preparations/{SET_ID}/title", json={"title": long_title})
+
+    assert response.status_code == 422

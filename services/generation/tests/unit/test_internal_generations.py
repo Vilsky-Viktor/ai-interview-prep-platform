@@ -3,7 +3,7 @@ import uuid
 import pytest
 from pydantic import ValidationError
 
-from app.constants.generation import RUN_GENERATION
+from app.constants.generation import MAX_INSTRUCTIONS_LENGTH, RUN_GENERATION
 from app.main import app
 from app.models.generation import Generation
 from app.routers import internal
@@ -267,3 +267,10 @@ def test_a_blank_edited_topic_is_rejected():
     review = ReviewRequest(selected=[0], topics=[{"main_topic": " SQL ", "subtopics": [" Joins "]}])
 
     assert review.topics[0].model_dump() == {"main_topic": "SQL", "subtopics": ["Joins"]}
+
+
+def test_review_instructions_are_capped():
+    with pytest.raises(ValidationError):
+        ReviewRequest(selected=[0], instructions="x" * (MAX_INSTRUCTIONS_LENGTH + 1))
+
+    assert ReviewRequest(selected=[0], instructions="x" * MAX_INSTRUCTIONS_LENGTH)

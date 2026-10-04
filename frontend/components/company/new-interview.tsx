@@ -10,6 +10,7 @@ import { GenerateIn } from "@/components/generate-in"
 import { Button } from "@/components/ui/button"
 import type { Locale } from "@/constants/i18n"
 import { Textarea } from "@/components/ui/textarea"
+import { MAX_GOAL_LENGTH } from "@/constants/limits"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { isSubmitShortcut } from "@/lib/keys"
 import type { Interview } from "@/types/company"
@@ -57,6 +58,7 @@ export function NewInterview({ companyId }: { companyId: string }) {
       className="rounded-3xl border border-transparent bg-muted p-3 transition-colors focus-within:border-ring dark:bg-card"
     >
       <Textarea
+        maxLength={MAX_GOAL_LENGTH}
         required
         value={text}
         onChange={(event) => setText(event.target.value)}

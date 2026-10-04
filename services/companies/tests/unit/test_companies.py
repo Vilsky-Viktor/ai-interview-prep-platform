@@ -5,6 +5,7 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.constants.invites import MAX_COMPANY_NAME_LENGTH
 from app.integrations import billing
 from app.main import app
 from app.models.companies import Company, Member
@@ -155,3 +156,11 @@ def test_a_taken_company_name_is_refused(client, monkeypatch):
 
     assert response.status_code == 409
     assert "Namen" in response.json()["detail"]
+
+
+def test_a_company_name_longer_than_a_heading_is_refused(client):
+    sign_in()
+
+    response = client.post("/companies", json={"name": "x" * (MAX_COMPANY_NAME_LENGTH + 1)})
+
+    assert response.status_code == 422

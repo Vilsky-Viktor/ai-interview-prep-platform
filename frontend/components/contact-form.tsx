@@ -11,7 +11,8 @@ import { Textarea } from "@/components/ui/textarea"
 import {
   MAX_CONTACT_MESSAGE_LENGTH,
   MAX_CONTACT_NAME_LENGTH,
-} from "@/constants/contact"
+  MAX_EMAIL_LENGTH,
+} from "@/constants/limits"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { isSubmitShortcut } from "@/lib/keys"
 
@@ -77,6 +78,7 @@ export function ContactForm() {
         <Input
           required
           type="email"
+          maxLength={MAX_EMAIL_LENGTH}
           autoComplete="email"
           placeholder={t("email")}
           aria-label={t("email")}

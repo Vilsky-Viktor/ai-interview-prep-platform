@@ -92,3 +92,9 @@ FUNNEL_PREFIX = "funnel."
 
 # Holds the referral code from a ?ref= link until the new person signs up or makes a company.
 REFERRAL_COOKIE = "prepza_ref"
+
+# A kit's or an interview's title, as its owner can rename it; generated titles aim for 60.
+MAX_TITLE_LENGTH = 70
+
+# A learner's goal or a job description, as pasted to generate a kit or an interview.
+MAX_GOAL_LENGTH = 10_000
