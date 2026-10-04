@@ -382,7 +382,7 @@
     "signInJoin": "Masuk dengan email undangan untuk bergabung dengan perusahaan ini.",
     "open": "Buka perusahaan",
     "join": "Gabung ke perusahaan",
-    "creditsLeft": "{count, plural, other {kredit tersedia}} · satu kandidat {candidate}",
+    "creditsLeft": "{count, plural, other {kredit tersedia}}",
     "creditsLow": "Hampir habis: isi ulang untuk terus mengundang kandidat.",
     "timeLeft": "Sisa waktu: {time}",
     "removeLabel": "Hapus {name}",

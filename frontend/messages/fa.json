@@ -388,7 +388,7 @@
     "signInJoin": "برای پیوستن به این شرکت با ایمیل دعوت وارد شوید.",
     "open": "باز کردن شرکت",
     "join": "پیوستن به شرکت",
-    "creditsLeft": "{count, plural, one {اعتبار در دسترس} other {اعتبار در دسترس}} · هر نامزد {candidate}",
+    "creditsLeft": "{count, plural, one {اعتبار در دسترس} other {اعتبار در دسترس}}",
     "creditsLow": "رو به اتمام: برای ادامه دعوت از نامزدها شارژ کنید.",
     "timeLeft": "زمان باقی‌مانده: {time}",
     "removeLabel": "حذف {name}",

@@ -388,7 +388,7 @@
     "signInJoin": "Melde dich mit der E-Mail-Adresse aus der Einladung an, um diesem Unternehmen beizutreten.",
     "open": "Unternehmen öffnen",
     "join": "Unternehmen beitreten",
-    "creditsLeft": "{count, plural, one {Credit verfügbar} other {Credits verfügbar}} · ein Kandidat kostet {candidate}",
+    "creditsLeft": "{count, plural, one {Credit verfügbar} other {Credits verfügbar}}",
     "creditsLow": "Bald aufgebraucht: Lade auf, um weiter Kandidaten einzuladen.",
     "timeLeft": "Verbleibende Zeit: {time}",
     "removeLabel": "{name} entfernen",

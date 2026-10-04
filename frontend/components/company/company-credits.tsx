@@ -30,10 +30,7 @@ export function CompanyCredits({
             {credits.toLocaleString(locale)}
           </span>{" "}
           <span className="text-muted-foreground">
-            {t("creditsLeft", {
-              count: credits,
-              candidate: catalog.candidate_credits,
-            })}
+            {t("creditsLeft", { count: credits })}
           </span>
         </p>
         {low && (

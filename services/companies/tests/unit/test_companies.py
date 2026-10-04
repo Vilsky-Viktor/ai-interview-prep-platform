@@ -137,3 +137,21 @@ def test_lists_the_users_companies_with_their_credits(client, monkeypatch):
     assert response.json() == [
         {"id": str(company.id), "name": "Acme", "available": 1_200, "low": False}
     ]
+
+
+def test_a_taken_company_name_is_refused(client, monkeypatch):
+    sign_in()
+
+    async def none_owned(user_id):
+        return 0
+
+    async def name_taken(name, user_id, email):
+        return None
+
+    monkeypatch.setattr(companies, "owned_count", none_owned)
+    monkeypatch.setattr(companies, "create", name_taken)
+
+    response = client.post("/companies", json={"name": "Acme"}, headers={"Accept-Language": "de"})
+
+    assert response.status_code == 409
+    assert "Namen" in response.json()["detail"]

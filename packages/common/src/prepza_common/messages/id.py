@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "Judul wajib diisi",
     "Details are required for this reason.": "Alasan ini memerlukan detail.",
     "The question is too long.": "Pertanyaannya terlalu panjang.",
+    "A company with this name already exists.": "Perusahaan dengan nama ini sudah ada.",
 }

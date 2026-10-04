@@ -6,7 +6,7 @@ from prepza_common.auth import CurrentUser
 from prepza_common.constants import REFERRAL_COOKIE
 from prepza_common.paging import PageParams
 
-from app.constants.invites import MAX_OWNED_COMPANIES, TOO_MANY_COMPANIES
+from app.constants.invites import COMPANY_NAME_TAKEN, MAX_OWNED_COMPANIES, TOO_MANY_COMPANIES
 from app.constants.roles import Role
 from app.integrations import billing
 from app.models.companies import Company
@@ -44,6 +44,10 @@ async def create_company(body: CompanyCreate, user: CurrentUser, request: Reques
         raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, TOO_MANY_COMPANIES)
 
     company = await companies.create(body.name.strip(), user.uid, user.email)
+
+    if company is None:
+        raise HTTPException(status.HTTP_409_CONFLICT, COMPANY_NAME_TAKEN)
+
     await billing.welcome_company(
         company.id,
         user.email,

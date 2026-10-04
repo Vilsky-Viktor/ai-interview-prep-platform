@@ -388,7 +388,7 @@
     "signInJoin": "Đăng nhập bằng email được mời để tham gia công ty này.",
     "open": "Mở công ty",
     "join": "Tham gia công ty",
-    "creditsLeft": "{count, plural, other {tín dụng khả dụng}} · mỗi ứng viên tốn {candidate}",
+    "creditsLeft": "{count, plural, other {tín dụng khả dụng}}",
     "creditsLow": "Sắp hết: hãy nạp thêm để tiếp tục mời ứng viên.",
     "timeLeft": "Thời gian còn lại: {time}",
     "removeLabel": "Xóa {name}",

@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "Bắt buộc phải có tiêu đề",
     "Details are required for this reason.": "Lý do này cần có chi tiết.",
     "The question is too long.": "Câu hỏi quá dài.",
+    "A company with this name already exists.": "Đã có công ty mang tên này.",
 }

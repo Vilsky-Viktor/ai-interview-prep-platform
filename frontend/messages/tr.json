@@ -388,7 +388,7 @@
     "signInJoin": "Bu şirkete katılmak için davetteki e-postayla giriş yapın.",
     "open": "Şirketi aç",
     "join": "Şirkete katıl",
-    "creditsLeft": "{count, plural, one {kredi kullanılabilir} other {kredi kullanılabilir}} · bir aday {candidate}",
+    "creditsLeft": "{count, plural, one {kredi kullanılabilir} other {kredi kullanılabilir}}",
     "creditsLow": "Azalıyor: aday davet etmeye devam etmek için yükleyin.",
     "timeLeft": "Kalan süre: {time}",
     "removeLabel": "{name} öğesini kaldır",

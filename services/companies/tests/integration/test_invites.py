@@ -5,7 +5,7 @@ from app.storage import companies, interviews, invites
 
 
 async def interview():
-    company = await companies.create("Acme", "owner", "owner@example.com")
+    company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
 
     return await interviews.create(company.id, uuid.uuid4(), "en")
 

@@ -388,7 +388,7 @@
     "signInJoin": "Log in met het e-mailadres van de uitnodiging om lid te worden van dit bedrijf.",
     "open": "Bedrijf openen",
     "join": "Lid worden van het bedrijf",
-    "creditsLeft": "{count, plural, one {credit beschikbaar} other {credits beschikbaar}} · een kandidaat kost {candidate}",
+    "creditsLeft": "{count, plural, one {credit beschikbaar} other {credits beschikbaar}}",
     "creditsLow": "Bijna op: waardeer op om kandidaten te blijven uitnodigen.",
     "timeLeft": "Resterende tijd: {time}",
     "removeLabel": "{name} verwijderen",

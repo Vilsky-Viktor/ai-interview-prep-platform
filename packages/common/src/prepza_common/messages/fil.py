@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "Kailangan ang pamagat",
     "Details are required for this reason.": "Kailangan ng detalye para sa dahilang ito.",
     "The question is too long.": "Masyadong mahaba ang tanong.",
+    "A company with this name already exists.": "May kompanya nang may ganitong pangalan.",
 }

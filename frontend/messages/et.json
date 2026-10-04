@@ -388,7 +388,7 @@
     "signInJoin": "Selle ettevõttega liitumiseks logi sisse kutses olnud e-posti aadressiga.",
     "open": "Ava ettevõte",
     "join": "Liitu ettevõttega",
-    "creditsLeft": "{count, plural, one {krediit saadaval} other {krediiti saadaval}} · üks kandidaat maksab {candidate}",
+    "creditsLeft": "{count, plural, one {krediit saadaval} other {krediiti saadaval}}",
     "creditsLow": "Hakkavad otsa saama: kandidaatide kutsumise jätkamiseks laadi juurde.",
     "timeLeft": "Aega jäänud: {time}",
     "removeLabel": "Eemalda {name}",

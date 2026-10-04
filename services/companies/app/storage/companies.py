@@ -1,14 +1,20 @@
 # Aliased: this module's own delete() would otherwise shadow it.
 from sqlalchemy import delete as sql_delete
 from sqlalchemy import func, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
 from app.constants.roles import Role
 from app.models.companies import Company, Member
 from app.storage.db import Session
 
+# The unique index on company names (see models/companies.py).
+NAME_INDEX = "uq_companies_lower_name"
 
-async def create(name: str, user_id: str, email: str) -> Company:
+
+async def create(name: str, user_id: str, email: str) -> Company | None:
+    """None when another company already has the name, in any case; the database decides, so
+    two people creating the same name at once can't both get it."""
     company = Company(
         name=name,
         members=[Member(user_id=user_id, invited_email=email.lower(), role=Role.OWNER)],
@@ -16,7 +22,14 @@ async def create(name: str, user_id: str, email: str) -> Company:
 
     async with Session() as session:
         session.add(company)
-        await session.commit()
+
+        try:
+            await session.commit()
+        except IntegrityError as error:
+            if NAME_INDEX in str(error.orig):
+                return None
+
+            raise
 
     return company
 

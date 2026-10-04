@@ -195,7 +195,9 @@ def learner() -> None:
 
 def company() -> None:
     _, owner = sign_up("owner")
-    company_id = api("POST", "/companies/companies", owner, {"name": "E2E Inc"})["id"]
+    # Company names are unique across prepza, so each run gets its own.
+    name = f"E2E Inc {uuid.uuid4().hex[:8]}"
+    company_id = api("POST", "/companies/companies", owner, {"name": name})["id"]
     credits = f"/companies/companies/{company_id}/credits"
     check(
         api("GET", credits, owner)["available"] == 1_500,

@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "cn"
 import { PlusIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
@@ -18,7 +19,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import { apiErrorMessage, apiFetch } from "@/lib/api"
+import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { Company } from "@/types/company"
 
 export function CreateCompany() {
@@ -28,6 +29,8 @@ export function CreateCompany() {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState("")
   const [saving, setSaving] = useState(false)
+  // The server's reason the name can't be used (it's taken), shown under the field.
+  const [nameError, setNameError] = useState<string | null>(null)
 
   function handleOpen(next: boolean) {
     if (saving) {
@@ -38,6 +41,7 @@ export function CreateCompany() {
 
     if (!next) {
       setName("")
+      setNameError(null)
     }
   }
 
@@ -57,7 +61,12 @@ export function CreateCompany() {
       })
       router.replace(`/company/${company.id}/interviews`)
     } catch (error) {
-      toast.error(apiErrorMessage(error, t("createFailed")))
+      if (error instanceof ApiError && error.status === 409) {
+        setNameError(error.message)
+      } else {
+        toast.error(apiErrorMessage(error, t("createFailed")))
+      }
+
       setSaving(false)
     }
   }
@@ -81,17 +90,36 @@ export function CreateCompany() {
           <DialogDescription>{t("newText")}</DialogDescription>
         </DialogHeader>
         <form id="create-company-form" onSubmit={create}>
-          <div className="rounded-full border border-transparent transition-colors focus-within:border-ring">
+          <div
+            className={cn(
+              "rounded-full border border-transparent transition-colors focus-within:border-ring",
+              nameError && "border-destructive focus-within:border-destructive"
+            )}
+          >
             <Input
               required
               maxLength={200}
               placeholder={t("name")}
               aria-label={t("name")}
               value={name}
-              onChange={(event) => setName(event.target.value)}
+              onChange={(event) => {
+                setName(event.target.value)
+                setNameError(null)
+              }}
+              aria-invalid={nameError !== null}
+              aria-describedby={nameError ? "company-name-error" : undefined}
               className="h-16 border-0 px-6 text-lg focus-visible:ring-0 md:text-lg"
             />
           </div>
+          {nameError && (
+            <p
+              id="company-name-error"
+              role="alert"
+              className="px-6 pt-2 text-sm text-destructive"
+            >
+              {nameError}
+            </p>
+          )}
         </form>
         <DialogFooter>
           <DialogClose

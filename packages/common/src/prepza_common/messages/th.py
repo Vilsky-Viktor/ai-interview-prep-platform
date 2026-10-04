@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "ต้องระบุชื่อ",
     "Details are required for this reason.": "เหตุผลนี้ต้องระบุรายละเอียด",
     "The question is too long.": "คำถามยาวเกินไป",
+    "A company with this name already exists.": "มีบริษัทชื่อนี้อยู่แล้ว",
 }

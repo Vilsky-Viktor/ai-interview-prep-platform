@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "נדרשת כותרת",
     "Details are required for this reason.": "לסיבה זו נדרשים פרטים.",
     "The question is too long.": "השאלה ארוכה מדי.",
+    "A company with this name already exists.": "כבר קיימת חברה בשם הזה.",
 }

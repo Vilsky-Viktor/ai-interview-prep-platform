@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "عنوان لازم است",
     "Details are required for this reason.": "برای این دلیل، جزئیات لازم است.",
     "The question is too long.": "پرسش خیلی طولانی است.",
+    "A company with this name already exists.": "شرکتی با این نام از قبل وجود دارد.",
 }

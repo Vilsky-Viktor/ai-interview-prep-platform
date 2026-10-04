@@ -27,4 +27,6 @@ CANDIDATE_RETENTION_DAYS = 365
 # An invite never started this long after it was last sent expires, and its credits come back.
 INVITE_EXPIRY_DAYS = 30
 TOO_MANY_COMPANIES = "You can own at most 3 companies."
+# Company names are unique across prepza, ignoring case.
+COMPANY_NAME_TAKEN = "A company with this name already exists."
 TOO_MANY_INTERVIEWS = "Your company can generate up to 10 interviews a day. Try again tomorrow."

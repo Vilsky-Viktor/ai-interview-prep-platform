@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "标题为必填项",
     "Details are required for this reason.": "选择此原因时需要填写详细信息。",
     "The question is too long.": "问题太长了。",
+    "A company with this name already exists.": "已有同名公司。",
 }

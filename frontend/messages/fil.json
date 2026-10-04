@@ -388,7 +388,7 @@
     "signInJoin": "Mag-sign in gamit ang email ng imbitasyon para sumali sa kumpanyang ito.",
     "open": "Buksan ang kumpanya",
     "join": "Sumali sa kumpanya",
-    "creditsLeft": "{count, plural, one {credit ang available} other {credits ang available}} · ang isang kandidato ay {candidate}",
+    "creditsLeft": "{count, plural, one {credit ang available} other {credits ang available}}",
     "creditsLow": "Paubos na: mag-top up para patuloy na makapag-imbita ng kandidato.",
     "timeLeft": "Natitirang oras: {time}",
     "removeLabel": "Alisin ang {name}",

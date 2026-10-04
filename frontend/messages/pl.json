@@ -388,7 +388,7 @@
     "signInJoin": "Zaloguj się adresem z zaproszenia, aby dołączyć do tej firmy.",
     "open": "Otwórz firmę",
     "join": "Dołącz do firmy",
-    "creditsLeft": "{count, plural, one {kredyt dostępny} few {kredyty dostępne} many {kredytów dostępnych} other {kredytu dostępne}} · kandydat kosztuje {candidate}",
+    "creditsLeft": "{count, plural, one {kredyt dostępny} few {kredyty dostępne} many {kredytów dostępnych} other {kredytu dostępne}}",
     "creditsLow": "Kredyty się kończą: doładuj, aby dalej zapraszać kandydatów.",
     "timeLeft": "Pozostały czas: {time}",
     "removeLabel": "Usuń {name}",

@@ -1,7 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, ForeignKey, String, UniqueConstraint
+from sqlalchemy import DateTime, ForeignKey, Index, String, UniqueConstraint, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.constants.roles import Role
@@ -10,6 +10,8 @@ from app.models.base import Base
 
 class Company(Base):
     __tablename__ = "companies"
+    # Names are unique across prepza, ignoring case (migration 0012).
+    __table_args__ = (Index("uq_companies_lower_name", text("lower(name)"), unique=True),)
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     name: Mapped[str] = mapped_column(String(200))

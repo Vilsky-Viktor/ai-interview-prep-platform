@@ -382,7 +382,7 @@
     "signInJoin": "この会社に参加するには、招待されたメールアドレスでサインインしてください。",
     "open": "会社を開く",
     "join": "会社に参加",
-    "creditsLeft": "{count, plural, other {クレジット利用可能}} · 候補者 1 人あたり {candidate}",
+    "creditsLeft": "{count, plural, other {クレジット利用可能}}",
     "creditsLow": "残りわずか：候補者の招待を続けるにはチャージしてください。",
     "timeLeft": "残り時間：{time}",
     "removeLabel": "{name} を削除",

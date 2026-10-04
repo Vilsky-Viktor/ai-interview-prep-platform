@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "Başlık gerekli",
     "Details are required for this reason.": "Bu neden için ayrıntı gerekli.",
     "The question is too long.": "Soru çok uzun.",
+    "A company with this name already exists.": "Bu adla bir şirket zaten var.",
 }

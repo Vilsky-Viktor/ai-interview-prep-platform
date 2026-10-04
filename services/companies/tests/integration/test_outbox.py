@@ -9,7 +9,7 @@ from app.storage.db import Session
 
 def test_a_candidate_invite_and_its_email_event_are_saved_together(run):
     async def scenario():
-        company = await companies.create("Acme", "owner", "owner@example.com")
+        company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         # A Russian interview: its invite email goes out in Russian.
         interview = await interviews.create(company.id, uuid.uuid4(), "ru")
         invite = await invites.upsert(

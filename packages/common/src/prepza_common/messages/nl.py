@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "Een titel is verplicht",
     "Details are required for this reason.": "Voor deze reden zijn details nodig.",
     "The question is too long.": "De vraag is te lang.",
+    "A company with this name already exists.": "Er bestaat al een bedrijf met deze naam.",
 }

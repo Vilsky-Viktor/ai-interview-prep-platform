@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "शीर्षक आवश्यक है",
     "Details are required for this reason.": "इस कारण के लिए विवरण आवश्यक है।",
     "The question is too long.": "सवाल बहुत लंबा है।",
+    "A company with this name already exists.": "इस नाम की कंपनी पहले से मौजूद है।",
 }

@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "제목은 필수입니다",
     "Details are required for this reason.": "이 사유에는 세부 내용이 필요합니다.",
     "The question is too long.": "질문이 너무 깁니다.",
+    "A company with this name already exists.": "이 이름의 회사가 이미 있습니다.",
 }

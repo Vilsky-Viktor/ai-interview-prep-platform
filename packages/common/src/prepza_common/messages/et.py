@@ -32,4 +32,5 @@ MESSAGES = {
     "Title is required": "Pealkiri on kohustuslik",
     "Details are required for this reason.": "Selle põhjuse puhul on üksikasjad kohustuslikud.",
     "The question is too long.": "Küsimus on liiga pikk.",
+    "A company with this name already exists.": "Sellise nimega ettevõte on juba olemas.",
 }

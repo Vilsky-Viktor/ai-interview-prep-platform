@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "Нужно название",
     "Details are required for this reason.": "Для этой причины нужны подробности.",
     "The question is too long.": "Вопрос слишком длинный.",
+    "A company with this name already exists.": "Компания с таким названием уже существует.",
 }

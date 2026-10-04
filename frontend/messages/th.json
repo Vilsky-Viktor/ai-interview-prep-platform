@@ -388,7 +388,7 @@
     "signInJoin": "ลงชื่อเข้าใช้ด้วยอีเมลที่ได้รับคำเชิญเพื่อเข้าร่วมบริษัทนี้",
     "open": "เปิดบริษัท",
     "join": "เข้าร่วมบริษัท",
-    "creditsLeft": "{count, plural, other {เครดิตที่ใช้ได้}} · ผู้สมัครหนึ่งคนใช้ {candidate}",
+    "creditsLeft": "{count, plural, other {เครดิตที่ใช้ได้}}",
     "creditsLow": "ใกล้หมดแล้ว: เติมเครดิตเพื่อเชิญผู้สมัครต่อ",
     "timeLeft": "เวลาที่เหลือ: {time}",
     "removeLabel": "ลบ {name}",

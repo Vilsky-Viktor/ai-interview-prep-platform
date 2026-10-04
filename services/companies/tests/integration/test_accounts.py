@@ -7,7 +7,7 @@ from app.storage import accounts, companies, interviews, invites
 
 def test_a_deleted_candidate_keeps_a_row_without_their_email(run):
     async def scenario():
-        company = await companies.create("Acme", "owner", "owner@example.com")
+        company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         interview = await interviews.create(company.id, uuid.uuid4(), "en")
         first = await invites.upsert(interview.id, "gone@example.com", "Backend", "Acme", "en")
         await invites.start(first, "gone")
@@ -41,7 +41,7 @@ def test_memberships_report_how_many_owners_each_company_has(run):
 
 def test_only_invites_older_than_the_cutoff_expire(run):
     async def scenario():
-        company = await companies.create("Acme", "owner", "owner@example.com")
+        company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         interview = await interviews.create(company.id, uuid.uuid4(), "en")
         invite = await invites.upsert(interview.id, "carol@example.com", "Backend", "Acme", "en")
         recent = await accounts.expired_invites(datetime.now(UTC) - timedelta(days=365))

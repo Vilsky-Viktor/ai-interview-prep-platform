@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "Tytuł jest wymagany",
     "Details are required for this reason.": "Dla tego powodu potrzebne są szczegóły.",
     "The question is too long.": "Pytanie jest za długie.",
+    "A company with this name already exists.": "Firma o tej nazwie już istnieje.",
 }

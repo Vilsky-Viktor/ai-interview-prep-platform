@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "タイトルは必須です",
     "Details are required for this reason.": "この理由には詳細が必要です。",
     "The question is too long.": "質問が長すぎます。",
+    "A company with this name already exists.": "この名前の会社はすでに存在します。",
 }

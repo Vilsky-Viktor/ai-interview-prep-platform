@@ -388,7 +388,7 @@
     "signInJoin": "Sign in with the invitation email to join this company.",
     "open": "Open company",
     "join": "Join company",
-    "creditsLeft": "{count, plural, one {credit} other {credits}} available · a candidate is {candidate}",
+    "creditsLeft": "{count, plural, one {credit} other {credits}} available",
     "creditsLow": "Running low: top up to keep inviting candidates.",
     "timeLeft": "Time left: {time}",
     "removeLabel": "Remove {name}",

@@ -382,7 +382,7 @@
     "signInJoin": "יש להתחבר עם כתובת ההזמנה כדי להצטרף לחברה הזו.",
     "open": "פתיחת החברה",
     "join": "הצטרפות לחברה",
-    "creditsLeft": "{count, plural, one {קרדיט זמין} two {קרדיטים זמינים} other {קרדיטים זמינים}} · מועמד עולה {candidate}",
+    "creditsLeft": "{count, plural, one {קרדיט זמין} two {קרדיטים זמינים} other {קרדיטים זמינים}}",
     "creditsLow": "הקרדיטים עומדים להיגמר: טענו כדי להמשיך להזמין מועמדים.",
     "timeLeft": "זמן שנותר: {time}",
     "removeLabel": "הסרת {name}",

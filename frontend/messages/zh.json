@@ -382,7 +382,7 @@
     "signInJoin": "请使用受邀邮箱登录以加入此公司。",
     "open": "打开公司",
     "join": "加入公司",
-    "creditsLeft": "{count, plural, other {点数可用}} · 每位候选人消耗 {candidate}",
+    "creditsLeft": "{count, plural, other {点数可用}}",
     "creditsLow": "即将用完：充值后才能继续邀请候选人。",
     "timeLeft": "剩余时间：{time}",
     "removeLabel": "移除 {name}",

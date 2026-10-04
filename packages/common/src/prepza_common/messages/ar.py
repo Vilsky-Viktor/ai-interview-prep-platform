@@ -15,4 +15,5 @@ MESSAGES = {
     "Title is required": "العنوان مطلوب",
     "Details are required for this reason.": "هذا السبب يتطلب تفاصيل.",
     "The question is too long.": "السؤال طويل جدًا.",
+    "A company with this name already exists.": "توجد شركة بهذا الاسم بالفعل.",
 }

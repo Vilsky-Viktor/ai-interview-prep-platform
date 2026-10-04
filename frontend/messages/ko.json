@@ -388,7 +388,7 @@
     "signInJoin": "이 회사에 참여하려면 초대받은 이메일로 로그인하세요.",
     "open": "회사 열기",
     "join": "회사 참여",
-    "creditsLeft": "{count, plural, other {크레딧 사용 가능}} · 지원자 1명당 {candidate}",
+    "creditsLeft": "{count, plural, other {크레딧 사용 가능}}",
     "creditsLow": "곧 소진: 지원자를 계속 초대하려면 충전하세요.",
     "timeLeft": "남은 시간: {time}",
     "removeLabel": "{name} 삭제",

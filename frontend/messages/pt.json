@@ -388,7 +388,7 @@
     "signInJoin": "Entre com o e-mail do convite para participar desta empresa.",
     "open": "Abrir empresa",
     "join": "Participar da empresa",
-    "creditsLeft": "{count, plural, one {crédito disponível} other {créditos disponíveis}} · um candidato custa {candidate}",
+    "creditsLeft": "{count, plural, one {crédito disponível} other {créditos disponíveis}}",
     "creditsLow": "Acabando: recarregue para continuar convidando candidatos.",
     "timeLeft": "Tempo restante: {time}",
     "removeLabel": "Remover {name}",
