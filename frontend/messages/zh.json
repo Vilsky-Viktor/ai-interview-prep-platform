@@ -590,28 +590,46 @@
         "behavior": "行为面试题",
         "basics": "编程基础"
       },
-      "change": "多加一些缓存相关内容"
+      "change": "多加一些缓存相关内容",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "找出薄弱点的练习",
       "text": "每一轮都先出你还没答过的题，再把答错的题拿回来。你的时间花在最重要的地方。",
-      "questions": {
-        "first": "索引什么时候会让查询变慢？",
-        "second": "服务器宕机时，负载均衡器会做什么？",
-        "third": "讲讲团队中的一次冲突"
-      },
-      "fresh": "新题",
-      "missed": "错了两次",
-      "right": "正确"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "每道题都有辅导",
       "text": "每次作答后，你会立刻看到正确选项。不明白为什么对？问问 AI 辅导老师，想问多深都可以。",
       "question": "哪种索引能帮助按日期过滤的查询？",
       "options": {
-        "first": "日期上的哈希索引",
-        "second": "日期上的 B-tree 索引",
-        "third": "主键上的索引"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "为什么不用哈希索引？",
       "answer": "哈希索引只能查找精确值。按日期过滤需要范围查询，而 B-tree 会让日期保持有序。"
@@ -619,17 +637,18 @@
     "proof": {
       "title": "清楚知道自己何时准备好",
       "text": "每个主题都有一条通往证书的进度条。拿到证书，这个主题就算掌握了。",
-      "rules": "获得证书的条件",
-      "certificate": "证书"
+      "again": "Start again"
     },
     "quality": {
       "title": "自动变好的题目",
       "text": "每道题有一个正确选项和三个看似合理的错误选项。评分、举报和作答会暴露质量差的题目，校验器会在后台修正或替换它们。",
-      "steps": {
-        "flagged": "学习者标记",
-        "checked": "校验器检查",
-        "fixed": "已修正或替换"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "分享或公开",
@@ -660,11 +679,10 @@
     "pricing": {
       "title": "只为有效的结果付费",
       "text": "没有订阅，也没有套餐。需要时充值，点数只花在你用到的地方。",
-      "welcome": "每个新账户赠送{count, plural, other {# 免费点数}}",
-      "company": "每家新公司赠送{count, plural, other {# 免费点数}}",
-      "never": "点数永不过期",
-      "failed": "生成失败的学习包不收费",
-      "see": "查看价格"
+      "see": "查看价格",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "还有疑问？",

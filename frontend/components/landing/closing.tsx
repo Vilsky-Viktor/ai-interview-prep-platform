@@ -18,7 +18,9 @@ export async function Closing() {
       <div className="space-y-3">
         <h3 className="font-heading text-2xl font-medium">{t("faq.title")}</h3>
         <p className="text-lg text-muted-foreground">{t("faq.text")}</p>
-        <MoreLink href="/faq">{t("faq.read")}</MoreLink>
+        <MoreLink href="/faq" keepCase>
+          {t("faq.read")}
+        </MoreLink>
       </div>
     </section>
   )

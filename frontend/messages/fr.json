@@ -596,28 +596,46 @@
         "behavior": "Questions comportementales",
         "basics": "Bases de la programmation"
       },
-      "change": "Ajouter plus sur le cache"
+      "change": "Ajouter plus sur le cache",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Un entraînement qui trouve vos lacunes",
       "text": "Chaque session commence par les questions auxquelles vous n'avez pas encore répondu, puis revient sur celles que vous avez ratées. Votre temps va là où il compte.",
-      "questions": {
-        "first": "Quand un index ralentit-il une requête ?",
-        "second": "Que fait un répartiteur de charge quand un serveur tombe ?",
-        "third": "Parlez d'un conflit dans votre équipe"
-      },
-      "fresh": "Nouvelle",
-      "missed": "Ratée deux fois",
-      "right": "Juste"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Un tuteur pour chaque question",
       "text": "Après chaque réponse, vous voyez tout de suite la bonne option. Vous ne comprenez pas pourquoi ? Demandez au tuteur IA et creusez autant que nécessaire.",
       "question": "Quel index aide une requête qui filtre par date ?",
       "options": {
-        "first": "Un index de hachage sur la date",
-        "second": "Un index B-tree sur la date",
-        "third": "Un index sur la clé primaire"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Pourquoi pas l'index de hachage ?",
       "answer": "Un index de hachage ne trouve que des valeurs exactes. Un filtre par date cherche une plage, et un B-tree garde les dates dans l'ordre."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "Sachez quand vous êtes prêt",
       "text": "Chaque thème a une barre de progression vers son certificat. Obtenez-le, et le thème est considéré comme maîtrisé.",
-      "rules": "Ce qu'il faut pour le certificat",
-      "certificate": "Certificat"
+      "again": "Start again"
     },
     "quality": {
       "title": "Des questions qui s'améliorent seules",
       "text": "Chaque question a une bonne option et trois mauvaises mais plausibles. Les votes, les signalements et les réponses repèrent les questions faibles, et un vérificateur les corrige ou les remplace en arrière-plan.",
-      "steps": {
-        "flagged": "Signalée par les apprenants",
-        "checked": "Contrôlée par le vérificateur",
-        "fixed": "Corrigée ou remplacée"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Partagez ou publiez",
@@ -666,16 +685,15 @@
     "pricing": {
       "title": "Ne payez que ce qui fonctionne",
       "text": "Ni abonnement ni formule. Rechargez quand vous en avez besoin et ne dépensez des crédits que pour ce que vous utilisez.",
-      "welcome": "{count, plural, one {# crédit offert} other {# crédits offerts}} à chaque nouveau compte",
-      "company": "{count, plural, one {# crédit offert} other {# crédits offerts}} à chaque nouvelle entreprise",
-      "never": "Les crédits n'expirent jamais",
-      "failed": "Un kit qui échoue ne coûte rien",
-      "see": "Voir les tarifs"
+      "see": "Voir les tarifs",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Encore des questions ?",
       "text": "Des réponses sur les tarifs, les certificats, la confidentialité et le recrutement.",
-      "read": "Lire la FAQ"
+      "read": "lire la FAQ"
     },
     "ready": {
       "title": "Prêt à vous préparer ?",

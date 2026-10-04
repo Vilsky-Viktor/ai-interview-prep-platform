@@ -590,28 +590,46 @@
         "behavior": "שאלות התנהגותיות",
         "basics": "יסודות התכנות"
       },
-      "change": "הוסיפו עוד על מטמון"
+      "change": "הוסיפו עוד על מטמון",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "תרגול שמוצא את הפערים שלכם",
       "text": "כל סבב מתחיל בשאלות שעוד לא עניתם עליהן, ואז מחזיר את אלה שטעיתם בהן. הזמן שלכם הולך למקום שבו הוא הכי חשוב.",
-      "questions": {
-        "first": "מתי אינדקס מאט שאילתה?",
-        "second": "מה עושה מאזן עומסים כששרת נופל?",
-        "third": "ספרו על קונפליקט בצוות שלכם"
-      },
-      "fresh": "חדשה",
-      "missed": "שגיאה פעמיים",
-      "right": "נכון"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "מורה לכל שאלה",
       "text": "אחרי כל תשובה אתם רואים מיד את האפשרות הנכונה. לא בטוחים למה היא נכונה? שאלו את מורה ה-AI והעמיקו כמה שצריך.",
       "question": "איזה אינדקס עוזר לשאילתה שמסננת לפי תאריך?",
       "options": {
-        "first": "אינדקס גיבוב על התאריך",
-        "second": "אינדקס B-tree על התאריך",
-        "third": "אינדקס על המפתח הראשי"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "למה לא אינדקס הגיבוב?",
       "answer": "אינדקס גיבוב מוצא רק ערכים מדויקים. סינון לפי תאריך מחפש טווח, ו-B-tree שומר את התאריכים לפי הסדר."
@@ -619,17 +637,18 @@
     "proof": {
       "title": "דעו מתי אתם מוכנים",
       "text": "לכל נושא יש פס התקדמות לקראת התעודה שלו. השיגו אותה, והנושא נחשב לנושא שאתם שולטים בו.",
-      "rules": "מה צריך כדי לקבל תעודה",
-      "certificate": "תעודה"
+      "again": "Start again"
     },
     "quality": {
       "title": "שאלות שמשתפרות מעצמן",
       "text": "לכל שאלה יש אפשרות נכונה אחת ושלוש שגויות אך סבירות. דירוגים, דיווחים ותשובות מצביעים על שאלות חלשות, ובודק מתקן או מחליף אותן ברקע.",
-      "steps": {
-        "flagged": "סומנה על ידי לומדים",
-        "checked": "נבדקה על ידי הבודק",
-        "fixed": "תוקנה או הוחלפה"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "שתפו או פרסמו",
@@ -660,11 +679,10 @@
     "pricing": {
       "title": "שלמו רק על מה שעובד",
       "text": "בלי מנויים ובלי חבילות. טענו כשצריך, והוציאו קרדיטים רק על מה שאתם משתמשים בו.",
-      "welcome": "{count, plural, one {קרדיט חינם אחד} two {# קרדיטים חינם} other {# קרדיטים חינם}} לכל חשבון חדש",
-      "company": "{count, plural, one {קרדיט חינם אחד} two {# קרדיטים חינם} other {# קרדיטים חינם}} לכל חברה חדשה",
-      "never": "קרדיטים אף פעם לא פגים",
-      "failed": "ערכה שנכשלה לא עולה כלום",
-      "see": "לצפייה במחירים"
+      "see": "לצפייה במחירים",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "עדיין יש לכם שאלות?",

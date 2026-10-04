@@ -13,17 +13,17 @@ export async function HowItWorks() {
       <h2 className="text-center font-heading text-4xl font-medium tracking-tight sm:text-5xl">
         {t("title")}
       </h2>
-      <ol className="mx-auto w-full max-w-2xl space-y-8">
+      <ol className="mx-auto w-full max-w-3xl space-y-8">
         {STEPS.map((key, index) => (
-          <li key={key} className="flex gap-6 border-t pt-6">
-            <span className="font-heading text-2xl text-primary tabular-nums">
+          <li key={key} className="flex gap-4 border-t pt-6 sm:gap-6">
+            <span className="w-14 shrink-0 font-heading text-4xl leading-none font-medium text-primary tabular-nums sm:w-20 sm:text-5xl">
               {String(index + 1).padStart(2, "0")}
             </span>
             <div className="space-y-2">
               <h3 className="font-heading text-2xl font-medium">
                 {t(`${key}.title`)}
               </h3>
-              <p className="text-lg leading-relaxed text-muted-foreground">
+              <p className="text-lg leading-relaxed whitespace-pre-line text-muted-foreground">
                 {t(`${key}.text`)}
               </p>
             </div>

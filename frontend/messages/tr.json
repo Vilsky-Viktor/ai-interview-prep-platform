@@ -596,28 +596,46 @@
         "behavior": "Davranışsal sorular",
         "basics": "Programlamanın temelleri"
       },
-      "change": "Önbellekleme hakkında daha fazla ekle"
+      "change": "Önbellekleme hakkında daha fazla ekle",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Eksiklerinizi bulan çalışma",
       "text": "Her tur henüz yanıtlamadığınız sorularla başlar, ardından yanlış yaptıklarınızı geri getirir. Zamanınız en önemli yere gider.",
-      "questions": {
-        "first": "Bir indeks sorguyu ne zaman yavaşlatır?",
-        "second": "Bir sunucu çöktüğünde yük dengeleyici ne yapar?",
-        "third": "Ekibinizdeki bir anlaşmazlığı anlatın"
-      },
-      "fresh": "Yeni",
-      "missed": "İki kez yanlış",
-      "right": "Doğru"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Her soru için bir eğitmen",
       "text": "Her yanıttan sonra doğru seçeneği hemen görürsünüz. Neden doğru olduğundan emin değil misiniz? Yapay zekâ eğitmenine sorun ve gerektiği kadar derine inin.",
       "question": "Tarihe göre filtreleyen bir sorguya hangi indeks yardımcı olur?",
       "options": {
-        "first": "Tarih üzerinde bir hash indeksi",
-        "second": "Tarih üzerinde bir B-tree indeksi",
-        "third": "Birincil anahtar üzerinde bir indeks"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Neden hash indeksi değil?",
       "answer": "Hash indeksi yalnızca tam değerleri bulur. Tarih filtresi bir aralık ister ve B-tree tarihleri sıralı tutar."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "Ne zaman hazır olduğunuzu bilin",
       "text": "Her konunun sertifikasına giden bir ilerleme çubuğu vardır. Sertifikayı kazanın, konu ustalaşılmış sayılsın.",
-      "rules": "Sertifika için gerekenler",
-      "certificate": "Sertifika"
+      "again": "Start again"
     },
     "quality": {
       "title": "Kendi kendine iyileşen sorular",
       "text": "Her sorunun bir doğru ve üç inandırıcı yanlış seçeneği vardır. Oylar, bildirimler ve yanıtlar zayıf soruları gösterir; bir doğrulayıcı da onları arka planda düzeltir veya değiştirir.",
-      "steps": {
-        "flagged": "Öğrenenler tarafından işaretlendi",
-        "checked": "Doğrulayıcı tarafından kontrol edildi",
-        "fixed": "Düzeltildi veya değiştirildi"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Paylaşın veya yayımlayın",
@@ -666,11 +685,10 @@
     "pricing": {
       "title": "Yalnızca işe yarayana ödeyin",
       "text": "Abonelik veya paket yok. İhtiyacınız olduğunda bakiye yükleyin ve krediyi yalnızca kullandığınız şeye harcayın.",
-      "welcome": "Her yeni hesaba {count, plural, one {# ücretsiz kredi} other {# ücretsiz kredi}}",
-      "company": "Her yeni şirkete {count, plural, one {# ücretsiz kredi} other {# ücretsiz kredi}}",
-      "never": "Kredilerin süresi asla dolmaz",
-      "failed": "Başarısız bir set hiçbir şeye mal olmaz",
-      "see": "Fiyatları görün"
+      "see": "Fiyatları görün",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Hâlâ sorunuz mu var?",

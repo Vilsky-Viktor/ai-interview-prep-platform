@@ -38,10 +38,10 @@ export default async function HomePage() {
         </div>
         <a
           href="#how"
-          className="absolute bottom-8 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+          className="absolute bottom-8 flex items-center gap-2 text-lg text-muted-foreground lowercase hover:text-foreground"
         >
           {landing("more")}
-          <ArrowDownIcon className="size-4" />
+          <ArrowDownIcon className="size-5" />
         </a>
       </div>
       <HowItWorks />

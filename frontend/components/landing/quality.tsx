@@ -1,32 +1,35 @@
-import { getTranslations } from "next-intl/server"
+import { getLocale, getNow, getTranslations } from "next-intl/server"
 
-import { LandingSection, PANEL, Stage } from "@/components/landing/section"
+import { QualityDemo } from "@/components/landing/quality-demo"
+import { LandingSection, Stage } from "@/components/landing/section"
+import { formatDate } from "@/lib/format"
 
-const STEPS = ["flagged", "checked", "fixed"] as const
-
+/** A topic's questions as their owner sees them, playing a short demo of a weak question's
+ * report opened and the question re-generated. */
 export async function QualitySection() {
   const t = await getTranslations("landing.quality")
+  const questions = await getTranslations("questions")
+  const reasons = await getTranslations("reportReasons")
+  const reported = formatDate((await getNow()).toISOString(), await getLocale())
 
   return (
     <LandingSection title={t("title")} text={t("text")}>
       <Stage>
-        <ol className={`${PANEL} p-6 text-base`}>
-          {STEPS.map((key, index) => (
-            <li key={key} className="relative flex gap-4 pb-8 last:pb-0">
-              {index < STEPS.length - 1 && (
-                <span className="absolute start-[4.5px] top-5 bottom-1 w-px bg-border" />
-              )}
-              <span
-                className={
-                  index === STEPS.length - 1
-                    ? "mt-2 size-2.5 shrink-0 rounded-full bg-primary"
-                    : "mt-2 size-2.5 shrink-0 rounded-full border-2 border-primary bg-background"
-                }
-              />
-              <span>{t(`steps.${key}`)}</span>
-            </li>
-          ))}
-        </ol>
+        <QualityDemo
+          title={t("list")}
+          good={t("items.good")}
+          weak={t("items.weak")}
+          better={t("items.better")}
+          report={{
+            reason: reasons("unclear"),
+            date: reported,
+            comment: t("comment"),
+          }}
+          labels={{
+            regenerate: questions("regenerate"),
+            regenerating: questions("regenerating"),
+          }}
+        />
       </Stage>
     </LandingSection>
   )

@@ -596,28 +596,46 @@
         "behavior": "Câu hỏi hành vi",
         "basics": "Lập trình cơ bản"
       },
-      "change": "Thêm về bộ nhớ đệm"
+      "change": "Thêm về bộ nhớ đệm",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Luyện tập tìm ra lỗ hổng của bạn",
       "text": "Mỗi lượt bắt đầu với những câu bạn chưa trả lời, rồi đưa lại những câu bạn trả lời sai. Thời gian của bạn dành cho chỗ quan trọng nhất.",
-      "questions": {
-        "first": "Khi nào chỉ mục làm truy vấn chậm đi?",
-        "second": "Bộ cân bằng tải làm gì khi một máy chủ gặp sự cố?",
-        "third": "Kể về một mâu thuẫn trong nhóm của bạn"
-      },
-      "fresh": "Mới",
-      "missed": "Sai hai lần",
-      "right": "Đúng"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Gia sư cho mọi câu hỏi",
       "text": "Sau mỗi câu trả lời, bạn thấy ngay đáp án đúng. Chưa hiểu vì sao đúng? Hỏi gia sư AI và tìm hiểu sâu đến mức bạn cần.",
       "question": "Chỉ mục nào giúp truy vấn lọc theo ngày?",
       "options": {
-        "first": "Chỉ mục băm trên cột ngày",
-        "second": "Chỉ mục B-tree trên cột ngày",
-        "third": "Chỉ mục trên khóa chính"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Sao không dùng chỉ mục băm?",
       "answer": "Chỉ mục băm chỉ tìm được giá trị khớp chính xác. Lọc theo ngày cần một khoảng, còn B-tree giữ các ngày theo thứ tự."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "Biết khi nào bạn đã sẵn sàng",
       "text": "Mỗi chủ đề có một thanh tiến độ hướng tới chứng chỉ. Đạt được chứng chỉ, chủ đề đó được tính là đã thành thạo.",
-      "rules": "Điều kiện để nhận chứng chỉ",
-      "certificate": "Chứng chỉ"
+      "again": "Start again"
     },
     "quality": {
       "title": "Câu hỏi tự tốt lên",
       "text": "Mỗi câu hỏi có một đáp án đúng và ba đáp án sai nhưng hợp lý. Lượt bình chọn, báo cáo và câu trả lời chỉ ra câu hỏi yếu, và một bộ kiểm tra sửa hoặc thay chúng ở chế độ nền.",
-      "steps": {
-        "flagged": "Người học đánh dấu",
-        "checked": "Bộ kiểm tra xem xét",
-        "fixed": "Đã sửa hoặc thay"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Chia sẻ hoặc công khai",
@@ -666,16 +685,15 @@
     "pricing": {
       "title": "Chỉ trả cho những gì hiệu quả",
       "text": "Không gói đăng ký hay gói cước. Nạp khi cần, và chỉ dùng tín dụng cho những gì bạn sử dụng.",
-      "welcome": "{count, plural, other {# tín dụng miễn phí}} cho mỗi tài khoản mới",
-      "company": "{count, plural, other {# tín dụng miễn phí}} cho mỗi công ty mới",
-      "never": "Tín dụng không bao giờ hết hạn",
-      "failed": "Bộ tạo thất bại không mất phí",
-      "see": "Xem bảng giá"
+      "see": "Xem bảng giá",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Vẫn còn thắc mắc?",
       "text": "Giải đáp về giá, chứng chỉ, quyền riêng tư và tuyển dụng.",
-      "read": "Đọc câu hỏi thường gặp"
+      "read": "đọc câu hỏi thường gặp"
     },
     "ready": {
       "title": "Sẵn sàng chuẩn bị chưa?",

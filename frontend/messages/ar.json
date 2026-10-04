@@ -590,28 +590,46 @@
         "behavior": "الأسئلة السلوكية",
         "basics": "أساسيات البرمجة"
       },
-      "change": "أضف المزيد عن التخزين المؤقت"
+      "change": "أضف المزيد عن التخزين المؤقت",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "تدريب يكشف ثغراتك",
       "text": "تبدأ كل جولة بالأسئلة التي لم تُجب عنها بعد، ثم تعيد الأسئلة التي أخطأت فيها. يذهب وقتك إلى حيث يهم أكثر.",
-      "questions": {
-        "first": "متى يُبطئ الفهرس الاستعلام؟",
-        "second": "ماذا يفعل موزّع الأحمال عندما يتعطل خادم؟",
-        "third": "حدّثنا عن خلاف في فريقك"
-      },
-      "fresh": "جديد",
-      "missed": "خطأ مرتين",
-      "right": "صحيح"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "معلّم لكل سؤال",
       "text": "بعد كل إجابة ترى الخيار الصحيح فورًا. لست متأكدًا لماذا هو صحيح؟ اسأل المعلّم الذكي وتعمّق بقدر ما تحتاج.",
       "question": "أي فهرس يساعد استعلامًا يصفّي حسب التاريخ؟",
       "options": {
-        "first": "فهرس تجزئة على التاريخ",
-        "second": "فهرس B-tree على التاريخ",
-        "third": "فهرس على المفتاح الأساسي"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "لماذا ليس فهرس التجزئة؟",
       "answer": "فهرس التجزئة يجد القيم المطابقة تمامًا فقط. تصفية التاريخ تطلب نطاقًا، وفهرس B-tree يحفظ التواريخ مرتبة."
@@ -619,17 +637,18 @@
     "proof": {
       "title": "اعرف متى تكون جاهزًا",
       "text": "لكل موضوع شريط تقدّم نحو شهادته. احصل عليها، ويُعدّ الموضوع متقنًا.",
-      "rules": "ما المطلوب للحصول على الشهادة",
-      "certificate": "شهادة"
+      "again": "Start again"
     },
     "quality": {
       "title": "أسئلة تتحسّن من تلقاء نفسها",
       "text": "لكل سؤال خيار صحيح واحد وثلاثة خيارات خاطئة معقولة. تكشف التقييمات والبلاغات والإجابات الأسئلة الضعيفة، ويصلحها مدقّق أو يستبدلها في الخلفية.",
-      "steps": {
-        "flagged": "أبلغ عنه المتعلّمون",
-        "checked": "راجعه المدقّق",
-        "fixed": "أُصلح أو استُبدل"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "شاركها أو انشرها",
@@ -660,11 +679,10 @@
     "pricing": {
       "title": "ادفع فقط مقابل ما ينجح",
       "text": "لا اشتراكات ولا باقات. اشحن رصيدك متى احتجت، وأنفق الأرصدة فقط على ما تستخدمه.",
-      "welcome": "{count, plural, zero {لا أرصدة مجانية} one {رصيد مجاني واحد} two {رصيدان مجانيان} few {# أرصدة مجانية} many {# رصيدًا مجانيًا} other {# رصيد مجاني}} لكل حساب جديد",
-      "company": "{count, plural, zero {لا أرصدة مجانية} one {رصيد مجاني واحد} two {رصيدان مجانيان} few {# أرصدة مجانية} many {# رصيدًا مجانيًا} other {# رصيد مجاني}} لكل شركة جديدة",
-      "never": "الأرصدة لا تنتهي صلاحيتها أبدًا",
-      "failed": "الحزمة التي تفشل لا تكلّف شيئًا",
-      "see": "اطّلع على الأسعار"
+      "see": "اطّلع على الأسعار",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "هل لديك أسئلة أخرى؟",

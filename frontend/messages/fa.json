@@ -596,28 +596,46 @@
         "behavior": "پرسش‌های رفتاری",
         "basics": "مبانی برنامه‌نویسی"
       },
-      "change": "دربارهٔ کش بیشتر اضافه کن"
+      "change": "دربارهٔ کش بیشتر اضافه کن",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "تمرینی که کمبودهایتان را پیدا می‌کند",
       "text": "هر دور با پرسش‌هایی شروع می‌شود که هنوز به آن‌ها پاسخ نداده‌اید و بعد آن‌هایی را برمی‌گرداند که اشتباه زدید. وقتتان صرف جایی می‌شود که مهم‌تر است.",
-      "questions": {
-        "first": "ایندکس کی کوئری را کند می‌کند؟",
-        "second": "وقتی سروری از کار می‌افتد، متعادل‌کنندهٔ بار چه می‌کند؟",
-        "third": "از یک اختلاف در تیمتان بگویید"
-      },
-      "fresh": "جدید",
-      "missed": "دو بار اشتباه",
-      "right": "درست"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "یک معلم برای هر پرسش",
       "text": "بعد از هر پاسخ، گزینهٔ درست را فوراً می‌بینید. مطمئن نیستید چرا درست است؟ از معلم هوش مصنوعی بپرسید و هر قدر لازم است عمیق شوید.",
       "question": "کدام ایندکس به کوئری‌ای که بر اساس تاریخ فیلتر می‌کند کمک می‌کند؟",
       "options": {
-        "first": "ایندکس هش روی تاریخ",
-        "second": "ایندکس B-tree روی تاریخ",
-        "third": "ایندکس روی کلید اصلی"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "چرا ایندکس هش نه؟",
       "answer": "ایندکس هش فقط مقدارهای دقیق را پیدا می‌کند. فیلتر تاریخ یک بازه می‌خواهد و B-tree تاریخ‌ها را مرتب نگه می‌دارد."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "بدانید کی آماده‌اید",
       "text": "هر موضوع یک نوار پیشرفت تا گواهی‌اش دارد. آن را بگیرید تا موضوع تسلط‌یافته حساب شود.",
-      "rules": "برای گواهی چه لازم است",
-      "certificate": "گواهی"
+      "again": "Start again"
     },
     "quality": {
       "title": "پرسش‌هایی که خودبه‌خود بهتر می‌شوند",
       "text": "هر پرسش یک گزینهٔ درست و سه گزینهٔ نادرستِ باورپذیر دارد. رأی‌ها، گزارش‌ها و پاسخ‌ها پرسش‌های ضعیف را نشان می‌دهند و یک بررسی‌کننده آن‌ها را در پس‌زمینه اصلاح یا جایگزین می‌کند.",
-      "steps": {
-        "flagged": "علامت‌خورده توسط یادگیرندگان",
-        "checked": "بررسی‌شده توسط بررسی‌کننده",
-        "fixed": "اصلاح یا جایگزین شد"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "به اشتراک بگذارید یا منتشر کنید",
@@ -666,11 +685,10 @@
     "pricing": {
       "title": "فقط برای آنچه کار می‌کند بپردازید",
       "text": "نه اشتراکی، نه طرحی. هر وقت لازم شد شارژ کنید و اعتبار را فقط برای آنچه استفاده می‌کنید خرج کنید.",
-      "welcome": "{count, plural, one {# اعتبار رایگان} other {# اعتبار رایگان}} برای هر حساب جدید",
-      "company": "{count, plural, one {# اعتبار رایگان} other {# اعتبار رایگان}} برای هر شرکت جدید",
-      "never": "اعتبارها هرگز منقضی نمی‌شوند",
-      "failed": "مجموعه‌ای که ناموفق باشد هزینه‌ای ندارد",
-      "see": "دیدن قیمت‌ها"
+      "see": "دیدن قیمت‌ها",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "هنوز پرسشی دارید؟",

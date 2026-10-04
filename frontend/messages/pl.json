@@ -596,28 +596,46 @@
         "behavior": "Pytania behawioralne",
         "basics": "Podstawy programowania"
       },
-      "change": "Dodaj więcej o cache"
+      "change": "Dodaj więcej o cache",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Ćwiczenia, które znajdują luki",
       "text": "Każda runda zaczyna się od pytań, na które jeszcze nie odpowiedziałeś, a potem wraca do tych, w których się pomyliłeś. Twój czas idzie tam, gdzie jest najbardziej potrzebny.",
-      "questions": {
-        "first": "Kiedy indeks spowalnia zapytanie?",
-        "second": "Co robi load balancer, gdy serwer pada?",
-        "third": "Opowiedz o konflikcie w zespole"
-      },
-      "fresh": "Nowe",
-      "missed": "Dwa razy źle",
-      "right": "Dobrze"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Korepetytor do każdego pytania",
       "text": "Po każdej odpowiedzi od razu widzisz poprawną opcję. Nie wiesz, dlaczego jest poprawna? Zapytaj korepetytora AI i zgłębiaj temat, ile chcesz.",
       "question": "Który indeks pomoże zapytaniu filtrującemu po dacie?",
       "options": {
-        "first": "Indeks haszujący na dacie",
-        "second": "Indeks B-tree na dacie",
-        "third": "Indeks na kluczu głównym"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Dlaczego nie indeks haszujący?",
       "answer": "Indeks haszujący znajduje tylko dokładne wartości. Filtr po dacie szuka zakresu, a B-tree przechowuje daty w kolejności."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "Wiedz, kiedy jesteś gotowy",
       "text": "Każdy temat ma pasek postępu do swojego certyfikatu. Zdobądź go, a temat liczy się jako opanowany.",
-      "rules": "Co trzeba zrobić, by dostać certyfikat",
-      "certificate": "Certyfikat"
+      "again": "Start again"
     },
     "quality": {
       "title": "Pytania, które same stają się lepsze",
       "text": "Każde pytanie ma jedną poprawną opcję i trzy wiarygodne błędne. Oceny, zgłoszenia i odpowiedzi wskazują słabe pytania, a weryfikator poprawia je lub wymienia w tle.",
-      "steps": {
-        "flagged": "Zgłoszone przez uczących się",
-        "checked": "Sprawdzone przez weryfikatora",
-        "fixed": "Poprawione lub wymienione"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Udostępnij lub opublikuj",
@@ -666,16 +685,15 @@
     "pricing": {
       "title": "Płać tylko za to, co działa",
       "text": "Bez subskrypcji i planów. Doładuj, kiedy potrzebujesz, i wydawaj kredyty tylko na to, z czego korzystasz.",
-      "welcome": "{count, plural, one {# darmowy kredyt} few {# darmowe kredyty} many {# darmowych kredytów} other {# darmowego kredytu}} dla każdego nowego konta",
-      "company": "{count, plural, one {# darmowy kredyt} few {# darmowe kredyty} many {# darmowych kredytów} other {# darmowego kredytu}} dla każdej nowej firmy",
-      "never": "Kredyty nigdy nie wygasają",
-      "failed": "Nieudany zestaw nic nie kosztuje",
-      "see": "Zobacz cennik"
+      "see": "Zobacz cennik",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Masz jeszcze pytania?",
       "text": "Odpowiedzi o cenach, certyfikatach, prywatności i rekrutacji.",
-      "read": "Przeczytaj częste pytania"
+      "read": "przeczytaj częste pytania"
     },
     "ready": {
       "title": "Gotowy, by się przygotować?",

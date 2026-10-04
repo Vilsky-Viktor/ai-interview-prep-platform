@@ -596,28 +596,46 @@
         "behavior": "Verhaltensfragen",
         "basics": "Programmiergrundlagen"
       },
-      "change": "Mehr zu Caching hinzufügen"
+      "change": "Mehr zu Caching hinzufügen",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Üben, das deine Lücken findet",
       "text": "Jede Runde beginnt mit Fragen, die du noch nicht beantwortet hast, und bringt dann die zurück, die du falsch hattest. So geht deine Zeit dorthin, wo es zählt.",
-      "questions": {
-        "first": "Wann macht ein Index eine Abfrage langsamer?",
-        "second": "Was tut ein Load Balancer, wenn ein Server ausfällt?",
-        "third": "Erzähl von einem Konflikt in deinem Team"
-      },
-      "fresh": "Neu",
-      "missed": "Zweimal falsch",
-      "right": "Richtig"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Ein Tutor für jede Frage",
       "text": "Nach jeder Antwort siehst du sofort die richtige Option. Unklar, warum sie stimmt? Frag den KI-Tutor und geh so tief, wie du willst.",
       "question": "Welcher Index hilft einer Abfrage, die nach Datum filtert?",
       "options": {
-        "first": "Ein Hash-Index auf dem Datum",
-        "second": "Ein B-Tree-Index auf dem Datum",
-        "third": "Ein Index auf dem Primärschlüssel"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Warum nicht der Hash-Index?",
       "answer": "Ein Hash-Index findet nur exakte Werte. Ein Datumsfilter sucht einen Bereich, und ein B-Tree hält die Daten sortiert."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "Wisse, wann du bereit bist",
       "text": "Jedes Thema hat einen Fortschrittsbalken bis zu seinem Zertifikat. Erreichst du es, gilt das Thema als gemeistert.",
-      "rules": "Was du für ein Zertifikat brauchst",
-      "certificate": "Zertifikat"
+      "again": "Start again"
     },
     "quality": {
       "title": "Fragen, die von selbst besser werden",
       "text": "Jede Frage hat eine richtige und drei plausible falsche Optionen. Bewertungen, Meldungen und Antworten zeigen schwache Fragen auf, und ein Prüfer korrigiert oder ersetzt sie im Hintergrund.",
-      "steps": {
-        "flagged": "Von Lernenden markiert",
-        "checked": "Vom Prüfer kontrolliert",
-        "fixed": "Korrigiert oder ersetzt"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Teilen oder veröffentlichen",
@@ -666,16 +685,15 @@
     "pricing": {
       "title": "Zahl nur für das, was funktioniert",
       "text": "Keine Abos, keine Tarife. Lade auf, wenn du es brauchst, und gib Credits nur für das aus, was du nutzt.",
-      "welcome": "{count, plural, one {# Gratis-Credit} other {# Gratis-Credits}} für jedes neue Konto",
-      "company": "{count, plural, one {# Gratis-Credit} other {# Gratis-Credits}} für jedes neue Unternehmen",
-      "never": "Credits verfallen nie",
-      "failed": "Ein fehlgeschlagenes Kit kostet nichts",
-      "see": "Preise ansehen"
+      "see": "Preise ansehen",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Noch Fragen?",
       "text": "Antworten zu Preisen, Zertifikaten, Datenschutz und Recruiting.",
-      "read": "Zur FAQ"
+      "read": "zur FAQ"
     },
     "ready": {
       "title": "Bereit für die Vorbereitung?",

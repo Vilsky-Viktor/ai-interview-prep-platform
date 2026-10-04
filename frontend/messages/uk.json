@@ -590,28 +590,46 @@
         "behavior": "Поведінкові питання",
         "basics": "Основи програмування"
       },
-      "change": "Додати більше про кешування"
+      "change": "Додати більше про кешування",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Тренування, що знаходить прогалини",
       "text": "Кожен раунд починається з питань, на які ви ще не відповідали, а потім повертає ті, де ви помилилися. Час іде туди, де це найважливіше.",
-      "questions": {
-        "first": "Коли індекс сповільнює запит?",
-        "second": "Що робить балансувальник навантаження, коли сервер падає?",
-        "third": "Розкажіть про конфлікт у команді"
-      },
-      "fresh": "Нове",
-      "missed": "Помилка двічі",
-      "right": "Правильно"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Репетитор для кожного питання",
       "text": "Після кожної відповіді ви одразу бачите правильний варіант. Незрозуміло, чому він правильний? Запитайте ШІ-репетитора й розберіться так глибоко, як потрібно.",
       "question": "Який індекс допоможе запиту з фільтром за датою?",
       "options": {
-        "first": "Хеш-індекс за датою",
-        "second": "B-tree індекс за датою",
-        "third": "Індекс за первинним ключем"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Чому не хеш-індекс?",
       "answer": "Хеш-індекс знаходить лише точні значення. Фільтр за датою шукає діапазон, а B-tree зберігає дати впорядковано."
@@ -619,17 +637,18 @@
     "proof": {
       "title": "Знайте, коли ви готові",
       "text": "Кожна тема має шкалу прогресу до сертифіката. Отримайте його, і тема вважається опанованою.",
-      "rules": "Що потрібно для сертифіката",
-      "certificate": "Сертифікат"
+      "again": "Start again"
     },
     "quality": {
       "title": "Питання, що покращуються самі",
       "text": "Кожне питання має один правильний варіант і три правдоподібні неправильні. Оцінки, скарги й відповіді вказують на слабкі питання, а агент-перевіряльник виправляє або замінює їх у фоні.",
-      "steps": {
-        "flagged": "Позначене учнями",
-        "checked": "Перевірене агентом",
-        "fixed": "Виправлене або замінене"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Поділіться або опублікуйте",
@@ -660,16 +679,15 @@
     "pricing": {
       "title": "Платіть лише за те, що працює",
       "text": "Без підписок і тарифів. Поповнюйте баланс, коли потрібно, і витрачайте кредити лише на те, чим користуєтеся.",
-      "welcome": "{count, plural, one {# безкоштовний кредит} few {# безкоштовні кредити} many {# безкоштовних кредитів} other {# безкоштовного кредиту}} кожному новому акаунту",
-      "company": "{count, plural, one {# безкоштовний кредит} few {# безкоштовні кредити} many {# безкоштовних кредитів} other {# безкоштовного кредиту}} кожній новій компанії",
-      "never": "Кредити не згорають",
-      "failed": "Невдалий набір нічого не коштує",
-      "see": "Переглянути ціни"
+      "see": "Переглянути ціни",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Залишилися питання?",
       "text": "Відповіді про ціни, сертифікати, конфіденційність і найм.",
-      "read": "Читати питання й відповіді"
+      "read": "читати питання й відповіді"
     },
     "ready": {
       "title": "Готові почати підготовку?",

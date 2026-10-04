@@ -596,28 +596,46 @@
         "behavior": "คำถามเชิงพฤติกรรม",
         "basics": "พื้นฐานการเขียนโปรแกรม"
       },
-      "change": "เพิ่มเรื่องแคชอีก"
+      "change": "เพิ่มเรื่องแคชอีก",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "การฝึกที่หาจุดอ่อนของคุณ",
       "text": "ทุกรอบเริ่มจากคำถามที่คุณยังไม่ได้ตอบ แล้วนำคำถามที่คุณตอบผิดกลับมาอีก เวลาของคุณจึงถูกใช้ในจุดที่สำคัญที่สุด",
-      "questions": {
-        "first": "ดัชนีทำให้คิวรีช้าลงเมื่อไร",
-        "second": "โหลดบาลานเซอร์ทำอะไรเมื่อเซิร์ฟเวอร์ล่ม",
-        "third": "เล่าถึงความขัดแย้งในทีมของคุณ"
-      },
-      "fresh": "ใหม่",
-      "missed": "ผิดสองครั้ง",
-      "right": "ถูก"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "ติวเตอร์สำหรับทุกคำถาม",
       "text": "หลังตอบแต่ละข้อ คุณจะเห็นตัวเลือกที่ถูกทันที ไม่แน่ใจว่าทำไมถึงถูก ถามติวเตอร์ AI และเจาะลึกได้เท่าที่ต้องการ",
       "question": "ดัชนีแบบไหนช่วยคิวรีที่กรองตามวันที่",
       "options": {
-        "first": "ดัชนีแฮชบนวันที่",
-        "second": "ดัชนี B-tree บนวันที่",
-        "third": "ดัชนีบนคีย์หลัก"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "ทำไมไม่ใช่ดัชนีแฮช",
       "answer": "ดัชนีแฮชหาได้เฉพาะค่าที่ตรงกันทุกตัว การกรองวันที่ต้องการช่วง และ B-tree เก็บวันที่เรียงตามลำดับ"
@@ -625,17 +643,18 @@
     "proof": {
       "title": "รู้ว่าเมื่อไรคุณพร้อม",
       "text": "ทุกหัวข้อมีแถบความก้าวหน้าไปสู่ใบรับรอง ได้ใบรับรองแล้ว หัวข้อนั้นจะนับว่าเชี่ยวชาญ",
-      "rules": "เงื่อนไขการได้ใบรับรอง",
-      "certificate": "ใบรับรอง"
+      "again": "Start again"
     },
     "quality": {
       "title": "คำถามที่ดีขึ้นได้เอง",
       "text": "ทุกคำถามมีตัวเลือกที่ถูกหนึ่งข้อและตัวเลือกผิดที่ดูน่าเชื่อสามข้อ การโหวต การรายงาน และคำตอบช่วยชี้คำถามที่อ่อน แล้วตัวตรวจสอบจะแก้ไขหรือแทนที่ในเบื้องหลัง",
-      "steps": {
-        "flagged": "ผู้เรียนแจ้งปัญหา",
-        "checked": "ตัวตรวจสอบตรวจแล้ว",
-        "fixed": "แก้ไขหรือแทนที่แล้ว"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "แชร์หรือเผยแพร่",
@@ -666,11 +685,10 @@
     "pricing": {
       "title": "จ่ายเฉพาะสิ่งที่ได้ผล",
       "text": "ไม่มีการสมัครสมาชิกหรือแพ็กเกจ เติมเงินเมื่อต้องการ และใช้เครดิตเฉพาะกับสิ่งที่คุณใช้",
-      "welcome": "{count, plural, other {# เครดิตฟรี}} สำหรับทุกบัญชีใหม่",
-      "company": "{count, plural, other {# เครดิตฟรี}} สำหรับทุกบริษัทใหม่",
-      "never": "เครดิตไม่มีวันหมดอายุ",
-      "failed": "ชุดที่สร้างไม่สำเร็จไม่มีค่าใช้จ่าย",
-      "see": "ดูราคา"
+      "see": "ดูราคา",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "ยังมีคำถามอยู่ไหม",

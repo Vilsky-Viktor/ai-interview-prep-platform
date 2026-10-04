@@ -590,28 +590,46 @@
         "behavior": "Pertanyaan perilaku",
         "basics": "Dasar pemrograman"
       },
-      "change": "Tambah lagi soal caching"
+      "change": "Tambah lagi soal caching",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Latihan yang menemukan kelemahanmu",
       "text": "Setiap ronde dimulai dengan soal yang belum kamu jawab, lalu mengulang soal yang kamu salah. Waktumu dipakai di tempat yang paling penting.",
-      "questions": {
-        "first": "Kapan indeks memperlambat kueri?",
-        "second": "Apa yang dilakukan load balancer saat server mati?",
-        "third": "Ceritakan konflik di timmu"
-      },
-      "fresh": "Baru",
-      "missed": "Salah dua kali",
-      "right": "Benar"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Tutor untuk setiap soal",
       "text": "Setelah setiap jawaban, kamu langsung melihat pilihan yang benar. Belum paham kenapa benar? Tanya tutor AI dan gali sedalam yang kamu perlu.",
       "question": "Indeks mana yang membantu kueri yang memfilter berdasarkan tanggal?",
       "options": {
-        "first": "Indeks hash pada tanggal",
-        "second": "Indeks B-tree pada tanggal",
-        "third": "Indeks pada kunci primer"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Kenapa bukan indeks hash?",
       "answer": "Indeks hash hanya menemukan nilai yang persis sama. Filter tanggal mencari rentang, dan B-tree menyimpan tanggal secara berurutan."
@@ -619,17 +637,18 @@
     "proof": {
       "title": "Ketahui kapan kamu siap",
       "text": "Setiap topik punya bilah kemajuan menuju sertifikatnya. Raih sertifikatnya, dan topik itu dianggap dikuasai.",
-      "rules": "Syarat mendapatkan sertifikat",
-      "certificate": "Sertifikat"
+      "again": "Start again"
     },
     "quality": {
       "title": "Soal yang membaik dengan sendirinya",
       "text": "Setiap soal punya satu pilihan benar dan tiga pilihan salah yang masuk akal. Vote, laporan, dan jawaban menunjukkan soal yang lemah, dan pemeriksa memperbaiki atau menggantinya di latar belakang.",
-      "steps": {
-        "flagged": "Ditandai oleh pelajar",
-        "checked": "Diperiksa oleh pemeriksa",
-        "fixed": "Diperbaiki atau diganti"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Bagikan atau terbitkan",
@@ -660,16 +679,15 @@
     "pricing": {
       "title": "Bayar hanya untuk yang berhasil",
       "text": "Tanpa langganan atau paket. Isi saldo saat perlu, dan pakai kredit hanya untuk yang kamu gunakan.",
-      "welcome": "{count, plural, other {# kredit gratis}} untuk setiap akun baru",
-      "company": "{count, plural, other {# kredit gratis}} untuk setiap perusahaan baru",
-      "never": "Kredit tidak pernah kedaluwarsa",
-      "failed": "Kit yang gagal tidak dikenai biaya",
-      "see": "Lihat harga"
+      "see": "Lihat harga",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Masih ada pertanyaan?",
       "text": "Jawaban tentang harga, sertifikat, privasi, dan rekrutmen.",
-      "read": "Baca tanya jawab"
+      "read": "baca tanya jawab"
     },
     "ready": {
       "title": "Siap untuk bersiap?",

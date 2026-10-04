@@ -1,5 +1,8 @@
+import { cn } from "cn"
 import { ArrowRightIcon } from "lucide-react"
 import Link from "next/link"
+
+import { buttonVariants } from "@/components/ui/button"
 
 /** One landing section, a screen of its own: a large title and a short text, centered, and
  * its picture below. */
@@ -21,11 +24,11 @@ export function LandingSection({
       id={id}
       className="flex min-h-[calc(100svh-3.5rem)] scroll-mt-14 flex-col justify-center gap-8 py-12"
     >
-      <div className="mx-auto max-w-2xl space-y-4 text-center">
+      <div className="mx-auto max-w-3xl space-y-4 text-center">
         <h2 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
           {title}
         </h2>
-        <p className="text-lg leading-relaxed text-balance text-muted-foreground sm:text-xl">
+        <p className="mx-auto max-w-2xl text-lg leading-relaxed text-balance text-muted-foreground sm:text-xl">
           {text}
         </p>
         {extra}
@@ -35,14 +38,25 @@ export function LandingSection({
   )
 }
 
-/** The soft panel a section's picture sits on; screen readers skip the picture. */
-export function Stage({ children }: { children: React.ReactNode }) {
+/** The soft panel a section's picture sits on. Screen readers skip the picture unless it holds
+ * real links (`decorative={false}`); `wide` gives room for two pictures side by side. */
+export function Stage({
+  wide = false,
+  decorative = true,
+  children,
+}: {
+  wide?: boolean
+  decorative?: boolean
+  children: React.ReactNode
+}) {
   return (
     <div
-      aria-hidden
-      className="flex justify-center rounded-[2rem] bg-muted/60 px-5 py-8 sm:px-12 dark:bg-muted/30"
+      aria-hidden={decorative}
+      className="flex justify-center rounded-[2rem] bg-muted/60 px-5 py-10 sm:px-12 dark:bg-muted/30"
     >
-      <div className="w-full max-w-lg">{children}</div>
+      <div className={wide ? "w-full max-w-4xl" : "w-full max-w-2xl"}>
+        {children}
+      </div>
     </div>
   )
 }
@@ -50,18 +64,25 @@ export function Stage({ children }: { children: React.ReactNode }) {
 /** A piece of interface inside a stage: plain, with a hairline edge. */
 export const PANEL = "rounded-2xl border border-border/70 bg-background"
 
-/** A quiet link onwards from a section, its arrow facing the reading direction. */
+/** A link onwards from a section, as an outline button; its arrow faces the reading direction. */
 export function MoreLink({
   href,
+  keepCase = false,
   children,
 }: {
   href: string
+  // For a label written in lowercase already, with an abbreviation to keep ("go to FAQ").
+  keepCase?: boolean
   children: React.ReactNode
 }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center gap-1.5 text-lg text-primary underline-offset-4 hover:underline"
+      className={cn(
+        buttonVariants({ variant: "outline" }),
+        "h-11 gap-2 border-foreground/20 px-6 text-base dark:border-input",
+        keepCase ? "normal-case" : "lowercase"
+      )}
     >
       {children}
       <ArrowRightIcon className="size-4 rtl:-scale-x-100" />

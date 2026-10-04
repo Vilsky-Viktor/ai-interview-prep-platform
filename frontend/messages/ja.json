@@ -590,28 +590,46 @@
         "behavior": "行動面接の質問",
         "basics": "プログラミングの基礎"
       },
-      "change": "キャッシュについてもっと追加"
+      "change": "キャッシュについてもっと追加",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "弱点を見つける練習",
       "text": "各ラウンドはまだ答えていない問題から始まり、そのあと間違えた問題を出し直します。時間を一番大事なところに使えます。",
-      "questions": {
-        "first": "インデックスがクエリを遅くするのはどんなとき？",
-        "second": "サーバーが落ちたとき、ロードバランサーは何をする？",
-        "third": "チーム内の対立について話してください"
-      },
-      "fresh": "新規",
-      "missed": "2回間違い",
-      "right": "正解"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "すべての問題にチューター",
       "text": "答えるたびに、正しい選択肢がすぐにわかります。なぜ正しいのかわからなければ、AI チューターに聞いて、必要なだけ深く学べます。",
       "question": "日付で絞り込むクエリに役立つインデックスは？",
       "options": {
-        "first": "日付のハッシュインデックス",
-        "second": "日付の B-tree インデックス",
-        "third": "主キーのインデックス"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "なぜハッシュインデックスではだめ？",
       "answer": "ハッシュインデックスは完全一致しか探せません。日付の絞り込みは範囲を求めるので、日付を順序どおりに保つ B-tree が向いています。"
@@ -619,17 +637,18 @@
     "proof": {
       "title": "準備ができたかがわかる",
       "text": "トピックごとに修了証までの進捗バーがあります。修了証を取れば、そのトピックは習得済みになります。",
-      "rules": "修了証の条件",
-      "certificate": "修了証"
+      "again": "Start again"
     },
     "quality": {
       "title": "自然に良くなる問題",
       "text": "どの問題にも正解が1つと、もっともらしい不正解が3つあります。評価、報告、回答から弱い問題が見つかり、検証役がバックグラウンドで修正または差し替えます。",
-      "steps": {
-        "flagged": "学習者が報告",
-        "checked": "検証役が確認",
-        "fixed": "修正または差し替え"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "共有も公開も",
@@ -660,11 +679,10 @@
     "pricing": {
       "title": "うまくいったものだけにお支払い",
       "text": "サブスクリプションもプランもありません。必要なときにチャージして、使った分だけクレジットを使います。",
-      "welcome": "新しいアカウントごとに{count, plural, other {# 無料クレジット}}",
-      "company": "新しい会社ごとに{count, plural, other {# 無料クレジット}}",
-      "never": "クレジットに有効期限はありません",
-      "failed": "作成に失敗したキットは無料",
-      "see": "料金を見る"
+      "see": "料金を見る",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "ほかに質問はありますか？",

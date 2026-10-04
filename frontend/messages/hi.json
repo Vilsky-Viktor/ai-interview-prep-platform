@@ -596,28 +596,46 @@
         "behavior": "व्यवहार संबंधी सवाल",
         "basics": "प्रोग्रामिंग की बुनियाद"
       },
-      "change": "कैशिंग पर और जोड़ें"
+      "change": "कैशिंग पर और जोड़ें",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "अभ्यास जो आपकी कमियाँ ढूँढे",
       "text": "हर राउंड उन सवालों से शुरू होता है जिनका आपने अभी तक जवाब नहीं दिया, फिर उन्हें वापस लाता है जिनमें आप गलत थे। आपका समय वहीं लगता है जहाँ सबसे ज़रूरी है।",
-      "questions": {
-        "first": "इंडेक्स कब क्वेरी को धीमा करता है?",
-        "second": "सर्वर बंद होने पर लोड बैलेंसर क्या करता है?",
-        "third": "अपनी टीम के किसी विवाद के बारे में बताएँ"
-      },
-      "fresh": "नया",
-      "missed": "दो बार गलत",
-      "right": "सही"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "हर सवाल के लिए एक ट्यूटर",
       "text": "हर जवाब के बाद आपको सही विकल्प तुरंत दिखता है। समझ नहीं आया कि वह सही क्यों है? AI ट्यूटर से पूछें और जितना चाहें उतनी गहराई में जाएँ।",
       "question": "तारीख से फ़िल्टर करने वाली क्वेरी में कौन-सा इंडेक्स मदद करता है?",
       "options": {
-        "first": "तारीख पर हैश इंडेक्स",
-        "second": "तारीख पर B-tree इंडेक्स",
-        "third": "प्राइमरी की पर इंडेक्स"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "हैश इंडेक्स क्यों नहीं?",
       "answer": "हैश इंडेक्स सिर्फ़ सटीक मान ढूँढता है। तारीख का फ़िल्टर एक सीमा माँगता है, और B-tree तारीखों को क्रम में रखता है।"
@@ -625,17 +643,18 @@
     "proof": {
       "title": "जानें कि आप कब तैयार हैं",
       "text": "हर विषय में उसके सर्टिफ़िकेट तक एक प्रगति पट्टी होती है। सर्टिफ़िकेट पाएँ, और वह विषय महारत वाला गिना जाता है।",
-      "rules": "सर्टिफ़िकेट के लिए क्या चाहिए",
-      "certificate": "सर्टिफ़िकेट"
+      "again": "Start again"
     },
     "quality": {
       "title": "सवाल जो खुद बेहतर होते हैं",
       "text": "हर सवाल में एक सही और तीन विश्वसनीय लगने वाले गलत विकल्प होते हैं। वोट, रिपोर्ट और जवाब कमज़ोर सवालों की ओर इशारा करते हैं, और एक जाँचकर्ता उन्हें पृष्ठभूमि में ठीक करता है या बदल देता है।",
-      "steps": {
-        "flagged": "सीखने वालों ने चिह्नित किया",
-        "checked": "जाँचकर्ता ने जाँचा",
-        "fixed": "ठीक किया या बदला"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "शेयर करें या प्रकाशित करें",
@@ -666,11 +685,10 @@
     "pricing": {
       "title": "सिर्फ़ उसके लिए भुगतान करें जो काम करे",
       "text": "न सब्सक्रिप्शन, न प्लान। ज़रूरत हो तब टॉप अप करें, और क्रेडिट सिर्फ़ उसी पर खर्च करें जो आप इस्तेमाल करते हैं।",
-      "welcome": "हर नए खाते के लिए {count, plural, one {# मुफ़्त क्रेडिट} other {# मुफ़्त क्रेडिट}}",
-      "company": "हर नई कंपनी के लिए {count, plural, one {# मुफ़्त क्रेडिट} other {# मुफ़्त क्रेडिट}}",
-      "never": "क्रेडिट कभी खत्म नहीं होते",
-      "failed": "जो किट नहीं बन पाती, उसका कोई शुल्क नहीं",
-      "see": "कीमतें देखें"
+      "see": "कीमतें देखें",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "अब भी सवाल हैं?",

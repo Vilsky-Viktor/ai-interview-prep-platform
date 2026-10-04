@@ -596,28 +596,46 @@
         "behavior": "Gedragsvragen",
         "basics": "Basis van programmeren"
       },
-      "change": "Meer over caching toevoegen"
+      "change": "Meer over caching toevoegen",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Oefenen dat je zwakke plekken vindt",
       "text": "Elke ronde begint met vragen die je nog niet hebt beantwoord en brengt daarna de vragen terug die je fout had. Je tijd gaat naar waar het telt.",
-      "questions": {
-        "first": "Wanneer maakt een index een query trager?",
-        "second": "Wat doet een load balancer als een server uitvalt?",
-        "third": "Vertel over een conflict in je team"
-      },
-      "fresh": "Nieuw",
-      "missed": "Twee keer fout",
-      "right": "Goed"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Een tutor voor elke vraag",
       "text": "Na elk antwoord zie je meteen de juiste optie. Niet zeker waarom die klopt? Vraag het de AI-tutor en ga zo diep als je wilt.",
       "question": "Welke index helpt een query die op datum filtert?",
       "options": {
-        "first": "Een hash-index op de datum",
-        "second": "Een B-tree-index op de datum",
-        "third": "Een index op de primaire sleutel"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Waarom niet de hash-index?",
       "answer": "Een hash-index vindt alleen exacte waarden. Een datumfilter zoekt een bereik, en een B-tree houdt datums op volgorde."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "Weet wanneer je klaar bent",
       "text": "Elk onderwerp heeft een voortgangsbalk naar zijn certificaat. Haal het, en het onderwerp telt als beheerst.",
-      "rules": "Wat je nodig hebt voor een certificaat",
-      "certificate": "Certificaat"
+      "again": "Start again"
     },
     "quality": {
       "title": "Vragen die vanzelf beter worden",
       "text": "Elke vraag heeft één juiste optie en drie geloofwaardige foute. Stemmen, meldingen en antwoorden wijzen zwakke vragen aan, en een controleur verbetert of vervangt ze op de achtergrond.",
-      "steps": {
-        "flagged": "Gemarkeerd door leerlingen",
-        "checked": "Gecontroleerd door de controleur",
-        "fixed": "Verbeterd of vervangen"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Deel of publiceer het",
@@ -666,16 +685,15 @@
     "pricing": {
       "title": "Betaal alleen voor wat werkt",
       "text": "Geen abonnementen of pakketten. Waardeer op wanneer je wilt en besteed credits alleen aan wat je gebruikt.",
-      "welcome": "{count, plural, one {# gratis credit} other {# gratis credits}} voor elk nieuw account",
-      "company": "{count, plural, one {# gratis credit} other {# gratis credits}} voor elk nieuw bedrijf",
-      "never": "Credits verlopen nooit",
-      "failed": "Een mislukte kit kost niets",
-      "see": "Bekijk prijzen"
+      "see": "Bekijk prijzen",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Nog vragen?",
       "text": "Antwoorden over prijzen, certificaten, privacy en werving.",
-      "read": "Lees de veelgestelde vragen"
+      "read": "lees de veelgestelde vragen"
     },
     "ready": {
       "title": "Klaar om je voor te bereiden?",

@@ -596,28 +596,46 @@
         "behavior": "Mga behavioral na tanong",
         "basics": "Mga batayan ng programming"
       },
-      "change": "Magdagdag pa tungkol sa caching"
+      "change": "Magdagdag pa tungkol sa caching",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Practice na hinahanap ang kahinaan mo",
       "text": "Nagsisimula ang bawat round sa mga tanong na hindi mo pa nasasagot, saka ibinabalik ang mga mali mo. Napupunta ang oras mo kung saan pinakamahalaga.",
-      "questions": {
-        "first": "Kailan pinababagal ng index ang isang query?",
-        "second": "Ano ang ginagawa ng load balancer kapag bumagsak ang isang server?",
-        "third": "Magkuwento tungkol sa isang alitan sa team mo"
-      },
-      "fresh": "Bago",
-      "missed": "Dalawang beses mali",
-      "right": "Tama"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Isang tutor para sa bawat tanong",
       "text": "Pagkatapos ng bawat sagot, makikita mo agad ang tamang opsyon. Hindi sigurado kung bakit ito tama? Tanungin ang AI tutor at lumalim hangga't kailangan mo.",
       "question": "Aling index ang tumutulong sa query na nagfi-filter ayon sa petsa?",
       "options": {
-        "first": "Isang hash index sa petsa",
-        "second": "Isang B-tree index sa petsa",
-        "third": "Isang index sa primary key"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Bakit hindi ang hash index?",
       "answer": "Eksaktong value lang ang nahahanap ng hash index. Range ang hinahanap ng filter sa petsa, at nakaayos ang mga petsa sa B-tree."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "Alamin kung kailan ka handa",
       "text": "May progress bar ang bawat topic papunta sa certificate nito. Kunin ito, at maituturing na master mo na ang topic.",
-      "rules": "Ano ang kailangan para sa certificate",
-      "certificate": "Certificate"
+      "again": "Start again"
     },
     "quality": {
       "title": "Mga tanong na kusang gumaganda",
       "text": "May isang tamang opsyon at tatlong kapani-paniwalang maling opsyon ang bawat tanong. Itinuturo ng mga boto, report, at sagot ang mahihinang tanong, at inaayos o pinapalitan ang mga ito ng isang verifier sa background.",
-      "steps": {
-        "flagged": "Na-flag ng mga nag-aaral",
-        "checked": "Sinuri ng verifier",
-        "fixed": "Inayos o pinalitan"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "I-share o i-publish",
@@ -666,16 +685,15 @@
     "pricing": {
       "title": "Magbayad lang para sa gumagana",
       "text": "Walang subscription o plan. Mag-top up kapag kailangan mo, at gumastos ng credits sa ginagamit mo lang.",
-      "welcome": "{count, plural, one {# libreng credit} other {# libreng credits}} para sa bawat bagong account",
-      "company": "{count, plural, one {# libreng credit} other {# libreng credits}} para sa bawat bagong kompanya",
-      "never": "Hindi kailanman nag-e-expire ang credits",
-      "failed": "Walang bayad ang kit na pumalya",
-      "see": "Tingnan ang presyo"
+      "see": "Tingnan ang presyo",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "May tanong pa?",
       "text": "Mga sagot tungkol sa presyo, certificate, privacy, at hiring.",
-      "read": "Basahin ang FAQ"
+      "read": "basahin ang FAQ"
     },
     "ready": {
       "title": "Handa ka nang maghanda?",

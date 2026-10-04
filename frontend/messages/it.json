@@ -596,28 +596,46 @@
         "behavior": "Domande comportamentali",
         "basics": "Basi di programmazione"
       },
-      "change": "Aggiungi altro sulla cache"
+      "change": "Aggiungi altro sulla cache",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Esercizi che trovano le tue lacune",
       "text": "Ogni turno inizia con le domande a cui non hai ancora risposto, poi riprende quelle sbagliate. Il tuo tempo va dove conta di più.",
-      "questions": {
-        "first": "Quando un indice rallenta una query?",
-        "second": "Cosa fa un bilanciatore di carico quando un server si guasta?",
-        "third": "Racconta un conflitto nel tuo team"
-      },
-      "fresh": "Nuova",
-      "missed": "Sbagliata due volte",
-      "right": "Giusta"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Un tutor per ogni domanda",
       "text": "Dopo ogni risposta vedi subito l’opzione giusta. Non ti è chiaro perché? Chiedi al tutor IA e approfondisci quanto ti serve.",
       "question": "Quale indice aiuta una query che filtra per data?",
       "options": {
-        "first": "Un indice hash sulla data",
-        "second": "Un indice B-tree sulla data",
-        "third": "Un indice sulla chiave primaria"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Perché non l’indice hash?",
       "answer": "Un indice hash trova solo valori esatti. Un filtro per data cerca un intervallo, e un B-tree tiene le date in ordine."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "Sai quando sei pronto",
       "text": "Ogni argomento ha una barra di avanzamento verso il suo certificato. Ottienilo, e l’argomento conta come padroneggiato.",
-      "rules": "Cosa serve per il certificato",
-      "certificate": "Certificato"
+      "again": "Start again"
     },
     "quality": {
       "title": "Domande che migliorano da sole",
       "text": "Ogni domanda ha un’opzione corretta e tre sbagliate ma plausibili. Voti, segnalazioni e risposte indicano le domande deboli, e un verificatore le corregge o le sostituisce in background.",
-      "steps": {
-        "flagged": "Segnalata dagli studenti",
-        "checked": "Controllata dal verificatore",
-        "fixed": "Corretta o sostituita"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Condividi o pubblica",
@@ -666,16 +685,15 @@
     "pricing": {
       "title": "Paga solo ciò che funziona",
       "text": "Niente abbonamenti né piani. Ricarica quando ti serve e spendi crediti solo per ciò che usi.",
-      "welcome": "{count, plural, one {# credito gratuito} other {# crediti gratuiti}} per ogni nuovo account",
-      "company": "{count, plural, one {# credito gratuito} other {# crediti gratuiti}} per ogni nuova azienda",
-      "never": "I crediti non scadono mai",
-      "failed": "Un kit non riuscito non costa nulla",
-      "see": "Vedi i prezzi"
+      "see": "Vedi i prezzi",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Hai ancora domande?",
       "text": "Risposte su prezzi, certificati, privacy e assunzioni.",
-      "read": "Leggi le domande frequenti"
+      "read": "leggi le domande frequenti"
     },
     "ready": {
       "title": "Pronto a prepararti?",

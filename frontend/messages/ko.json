@@ -596,28 +596,46 @@
         "behavior": "인성 면접 질문",
         "basics": "프로그래밍 기초"
       },
-      "change": "캐싱 내용 더 추가"
+      "change": "캐싱 내용 더 추가",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "약점을 찾아 주는 연습",
       "text": "각 라운드는 아직 풀지 않은 문제부터 시작하고, 이어서 틀린 문제를 다시 보여 줍니다. 가장 중요한 곳에 시간을 쓰세요.",
-      "questions": {
-        "first": "인덱스가 쿼리를 느리게 만드는 때는?",
-        "second": "서버가 다운되면 로드 밸런서는 무엇을 하나요?",
-        "third": "팀에서 겪은 갈등에 대해 말해 주세요"
-      },
-      "fresh": "새 문제",
-      "missed": "두 번 틀림",
-      "right": "정답"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "모든 문제에 튜터",
       "text": "답할 때마다 정답을 바로 확인할 수 있습니다. 왜 정답인지 모르겠다면 AI 튜터에게 물어보고 필요한 만큼 깊이 파고드세요.",
       "question": "날짜로 필터링하는 쿼리에 도움이 되는 인덱스는?",
       "options": {
-        "first": "날짜에 대한 해시 인덱스",
-        "second": "날짜에 대한 B-tree 인덱스",
-        "third": "기본 키에 대한 인덱스"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "해시 인덱스는 왜 안 되나요?",
       "answer": "해시 인덱스는 정확히 일치하는 값만 찾습니다. 날짜 필터는 범위를 찾고, B-tree는 날짜를 순서대로 유지합니다."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "준비가 됐는지 알 수 있어요",
       "text": "주제마다 수료증까지의 진행 막대가 있습니다. 수료증을 받으면 그 주제는 마스터한 것으로 표시됩니다.",
-      "rules": "수료증을 받는 조건",
-      "certificate": "수료증"
+      "again": "Start again"
     },
     "quality": {
       "title": "스스로 좋아지는 문제",
       "text": "모든 문제에는 정답 하나와 그럴듯한 오답 세 개가 있습니다. 평가, 신고, 답변이 약한 문제를 찾아내고, 검증기가 백그라운드에서 이를 고치거나 교체합니다.",
-      "steps": {
-        "flagged": "학습자가 신고",
-        "checked": "검증기가 확인",
-        "fixed": "수정 또는 교체"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "공유하거나 공개하세요",
@@ -666,11 +685,10 @@
     "pricing": {
       "title": "효과가 있는 것에만 비용을 내세요",
       "text": "구독도 요금제도 없습니다. 필요할 때 충전하고, 사용하는 것에만 크레딧을 쓰세요.",
-      "welcome": "새 계정마다 {count, plural, other {무료 크레딧 #개}}",
-      "company": "새 회사마다 {count, plural, other {무료 크레딧 #개}}",
-      "never": "크레딧은 만료되지 않습니다",
-      "failed": "생성에 실패한 키트는 무료입니다",
-      "see": "요금 보기"
+      "see": "요금 보기",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "궁금한 점이 더 있나요?",

@@ -1,54 +1,48 @@
-import { ArrowUpIcon, CheckIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { LandingSection, PANEL, Stage } from "@/components/landing/section"
+import { ReviewDemo } from "@/components/landing/review-demo"
+import { LandingSection, Stage } from "@/components/landing/section"
 
+// The picture's topics: the last one unchecked, as if the learner doesn't need it; the second
+// one is edited by hand in the demo.
 const TOPICS = [
   { key: "design", checked: true },
   { key: "sql", checked: true },
-  { key: "behavior", checked: true },
   { key: "basics", checked: false },
 ] as const
+const EDITED = "sql"
 
+/** The topic review, with its own labels, playing a short demo of editing it. */
 export async function ControlSection() {
   const t = await getTranslations("landing.control")
+  const review = await getTranslations("generation")
 
   return (
     <LandingSection title={t("title")} text={t("text")}>
       <Stage>
-        <div className="space-y-3">
-          <ul className={`${PANEL} divide-y divide-border/70`}>
-            {TOPICS.map(({ key, checked }) => (
-              <li
-                key={key}
-                className="flex items-center gap-4 px-6 py-4 text-base"
-              >
-                {checked ? (
-                  <span className="flex size-4 items-center justify-center rounded-[5px] bg-primary text-primary-foreground">
-                    <CheckIcon className="size-3" />
-                  </span>
-                ) : (
-                  <span className="size-4 rounded-[5px] border border-input" />
-                )}
-                <span
-                  className={
-                    checked ? "" : "text-muted-foreground line-through"
-                  }
-                >
-                  {t(`topics.${key}`)}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <div
-            className={`${PANEL} flex items-center justify-between gap-3 rounded-full py-2 ps-6 pe-2 text-base text-muted-foreground`}
-          >
-            <span>{t("change")}</span>
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <ArrowUpIcon className="size-4" />
-            </span>
-          </div>
-        </div>
+        <ReviewDemo
+          title={review("reviewTitle")}
+          topics={TOPICS.map(({ key, checked }) => ({
+            key,
+            checked,
+            name: t(`topics.${key}`),
+            subtopics: t.raw(`subtopics.${key}`) as string[],
+          }))}
+          editing={EDITED}
+          added={t("added")}
+          change={t("change")}
+          newTopic={{
+            name: t("newTopic"),
+            subtopics: t.raw("newSubtopics") as string[],
+          }}
+          labels={{
+            addSubtopic: review("addSubtopic"),
+            add: review("add"),
+            done: review("done"),
+            placeholder: review("changesPlaceholder"),
+            apply: review("apply"),
+          }}
+        />
       </Stage>
     </LandingSection>
   )

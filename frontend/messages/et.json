@@ -596,28 +596,46 @@
         "behavior": "Käitumisküsimused",
         "basics": "Programmeerimise alused"
       },
-      "change": "Lisa rohkem vahemälu kohta"
+      "change": "Lisa rohkem vahemälu kohta",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Harjutamine, mis leiab lüngad",
       "text": "Iga voor algab küsimustega, millele sa pole veel vastanud, ja toob siis tagasi need, milles eksisid. Sinu aeg läheb sinna, kus see loeb.",
-      "questions": {
-        "first": "Millal indeks päringut aeglustab?",
-        "second": "Mida teeb koormusjaotur, kui server langeb?",
-        "third": "Räägi konfliktist oma meeskonnas"
-      },
-      "fresh": "Uus",
-      "missed": "Kaks korda vale",
-      "right": "Õige"
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "Juhendaja iga küsimuse jaoks",
       "text": "Pärast iga vastust näed kohe õiget valikut. Pole kindel, miks see õige on? Küsi tehisaru juhendajalt ja süvene nii palju, kui vaja.",
       "question": "Milline indeks aitab päringut, mis filtreerib kuupäeva järgi?",
       "options": {
-        "first": "Räsiindeks kuupäeval",
-        "second": "B-tree indeks kuupäeval",
-        "third": "Indeks primaarvõtmel"
+        "first": "Explain why it was late",
+        "second": "Acknowledge the problem and apologize",
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Miks mitte räsiindeks?",
       "answer": "Räsiindeks leiab ainult täpseid väärtusi. Kuupäevafilter otsib vahemikku ja B-tree hoiab kuupäevi järjekorras."
@@ -625,17 +643,18 @@
     "proof": {
       "title": "Tea, millal oled valmis",
       "text": "Igal teemal on edenemisriba kuni sertifikaadini. Teeni see välja ja teema loetakse omandatuks.",
-      "rules": "Mida sertifikaadiks vaja on",
-      "certificate": "Sertifikaat"
+      "again": "Start again"
     },
     "quality": {
       "title": "Küsimused, mis paranevad ise",
       "text": "Igal küsimusel on üks õige ja kolm usutavat vale valikut. Hinnangud, teated ja vastused näitavad nõrku küsimusi ning kontrollija parandab või asendab need taustal.",
-      "steps": {
-        "flagged": "Õppijate märgitud",
-        "checked": "Kontrollija üle vaadatud",
-        "fixed": "Parandatud või asendatud"
-      }
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Jaga või avalda",
@@ -666,16 +685,15 @@
     "pricing": {
       "title": "Maksa ainult selle eest, mis töötab",
       "text": "Ei mingeid tellimusi ega pakette. Lae kontot, kui vaja, ja kuluta krediite ainult sellele, mida kasutad.",
-      "welcome": "{count, plural, one {# tasuta krediit} other {# tasuta krediiti}} igale uuele kontole",
-      "company": "{count, plural, one {# tasuta krediit} other {# tasuta krediiti}} igale uuele ettevõttele",
-      "never": "Krediidid ei aegu kunagi",
-      "failed": "Ebaõnnestunud komplekt ei maksa midagi",
-      "see": "Vaata hindu"
+      "see": "Vaata hindu",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Küsimusi veel?",
       "text": "Vastused hindade, sertifikaatide, privaatsuse ja värbamise kohta.",
-      "read": "Loe KKK-d"
+      "read": "loe KKK-d"
     },
     "ready": {
       "title": "Valmis valmistuma?",

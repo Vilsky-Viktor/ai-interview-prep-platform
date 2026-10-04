@@ -576,39 +576,56 @@
       "title": "Three steps to ready",
       "paste": {
         "title": "Paste or describe",
-        "text": "A job description, a syllabus, or a few words about your goal."
+        "text": "A job description, a syllabus, or the skills and technologies you want to learn."
       },
       "review": {
         "title": "Review the plan",
-        "text": "AI agents pick out what matters and propose topics. Keep, rename or change them."
+        "text": "AI agents pick out what matters and propose topics.\nKeep, rename or change them."
       },
       "practice": {
         "title": "Practice until confident",
-        "text": "Every topic gets its own questions. Practice in rounds and watch your progress grow."
+        "text": "Every topic gets its own questions.\nPractice in rounds and watch your progress grow."
       }
     },
     "control": {
       "title": "You decide what to study",
-      "text": "No questions are written until you approve the topics. Uncheck what you already know, rename a topic, edit its subtopics, or describe bigger changes in plain words.",
+      "text": "No questions are written until you approve the topics. Uncheck what you already know, rename a topic, edit its subtopics, or just tell the AI what to change and let it do the rest.",
       "topics": {
-        "design": "Customer communication",
-        "sql": "Negotiation",
+        "design": "System design",
+        "sql": "Content marketing",
         "behavior": "Time management",
         "basics": "Team leadership"
       },
-      "change": "Add more on handling complaints"
+      "change": "Add a topic on YouTube ads",
+      "subtopics": {
+        "design": ["Scalability", "Caching", "Load balancing"],
+        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "behavior": [
+          "Prioritizing",
+          "Planning the week",
+          "Avoiding distractions"
+        ],
+        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+      },
+      "added": "Email campaigns",
+      "newTopic": "YouTube ads",
+      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
     "gaps": {
       "title": "Practice that finds your gaps",
-      "text": "Every round asks all of the topic's questions: the ones you haven't answered first, then the ones you got wrong last time. Your effort goes where it matters most.",
-      "questions": {
-        "first": "What should a good meeting agenda include?",
-        "second": "How do you choose between two urgent tasks?",
-        "third": "Tell about a time you handled a disagreement"
-      },
-      "fresh": "New",
-      "missed": "Wrong last time",
-      "right": "Right"
+      "text": "Each round asks all of the topic's questions again, starting with the ones you got wrong last time. Compare rounds and watch your gaps close.",
+      "items": {
+        "first": {
+          "question": "Which metric shows who watched an ad to the end?",
+          "wrong": "Click-through rate",
+          "right": "View-through rate"
+        },
+        "second": {
+          "question": "What does a cache mainly reduce?",
+          "wrong": "Storage costs",
+          "right": "Response time"
+        }
+      }
     },
     "tutor": {
       "title": "A tutor for every question",
@@ -617,41 +634,43 @@
       "options": {
         "first": "Explain why it was late",
         "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away"
+        "third": "Offer a discount right away",
+        "fourth": "Pass the case to a manager"
       },
       "ask": "Why not explain first?",
-      "answer": "People listen to reasons once they feel heard. Acknowledge the problem first, then explain and offer a fix."
+      "answer": "Acknowledge first: people listen to reasons once they feel heard."
     },
     "proof": {
       "title": "Know when you're ready",
       "text": "Each topic has a progress bar towards its certificate. Earn it, and the topic counts as mastered.",
-      "rules": "What earns a certificate",
-      "certificate": "Certificate"
+      "again": "Start again"
     },
     "quality": {
       "title": "Questions that get better on their own",
-      "text": "Every question has one correct option and three plausible wrong ones. Votes, reports and answers point out weak questions, and a verifier fixes or replaces them in the background.",
-      "steps": {
-        "flagged": "Flagged by learners",
-        "checked": "Checked by the verifier",
-        "fixed": "Fixed or replaced"
-      }
+      "text": "Likes, dislikes and reports reveal weak questions. An AI verifier fixes or replaces them automatically, and kit owners can re-generate any question themselves.",
+      "items": {
+        "good": "What does a database index speed up?",
+        "weak": "Which programming language is the best?",
+        "better": "Which language is most widely used for frontend development?"
+      },
+      "comment": "It depends on the project, so there's no single right answer.",
+      "list": "Topic questions"
     },
     "share": {
       "title": "Share it or publish it",
-      "text": "Send a kit privately to friends or colleagues by email, or publish it to the public library for everyone preparing for the same thing.",
-      "private": "Shared privately",
-      "public": "In the public library",
+      "text": "Invite friends or colleagues by email to practice your kit with you, or publish it to the public library for everyone preparing for the same thing.",
+      "private": "Share privately",
+      "public": "Share publicly",
       "browse": "Explore the library"
     },
     "companies": {
       "title": "Hiring? Test candidates fairly",
-      "text": "Turn a job description into a timed interview and invite candidates by email.",
+      "text": "Turn a job description into a timed interview and invite candidates to evaluate them.",
       "points": {
-        "own": "Each candidate gets their own questions, in their own order.",
-        "timed": "Every question has its own countdown, kept by the server.",
-        "flags": "Scorecards flag rushed answers, leaving the page and copy attempts.",
-        "private": "Candidates never see their score or which answers were right."
+        "own": "Unique questions for each candidate",
+        "timed": "A countdown on every question",
+        "flags": "Flags for rushing, leaving or copying",
+        "private": "Scores stay hidden from candidates"
       },
       "candidate": "Candidate",
       "score": "Score",
@@ -661,21 +680,20 @@
     },
     "languages": {
       "title": "In your language",
-      "text": "The site and everything it generates work in {count} languages, right to left too. Paste a job description in one language and practice in another."
+      "text": "Use prepza in any of {count} languages. Paste a job description in one language and practice in another."
     },
     "pricing": {
       "title": "Pay only for what works",
-      "text": "No subscriptions or plans. Top up when you need to, and spend credits only on what you use.",
-      "welcome": "{count, plural, one {# free credit} other {# free credits}} for every new account",
-      "company": "{count, plural, one {# free credit} other {# free credits}} for every new company",
-      "never": "Credits never expire",
-      "failed": "A kit that fails costs nothing",
-      "see": "See pricing"
+      "text": "No subscriptions or plans. Top up when you need to: credits never expire, and anything that fails costs nothing.",
+      "see": "See pricing",
+      "company": "Acme Inc.",
+      "personal": "For your prep kits and the AI tutor.",
+      "learner": "Learner credits"
     },
     "faq": {
       "title": "Still have questions?",
-      "text": "Answers about pricing, certificates, privacy and hiring.",
-      "read": "Read the FAQ"
+      "text": "Find answers in the FAQ, or ask our AI assistant.",
+      "read": "go to FAQ"
     },
     "ready": {
       "title": "Ready to prepare?",
