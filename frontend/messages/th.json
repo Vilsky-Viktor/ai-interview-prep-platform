@@ -138,7 +138,16 @@
     "search": "ค้นหาชื่อและหัวข้อ",
     "searchAction": "ค้นหา",
     "noMatches": "ไม่พบชุดเตรียมตัวที่ตรงกัน",
-    "empty": "ยังไม่มีชุดเตรียมตัวสาธารณะ"
+    "empty": "ยังไม่มีชุดเตรียมตัวสาธารณะ",
+    "level": "ระดับ: {level}",
+    "anyLevel": "ทั้งหมด",
+    "languages": "{count, plural, other {# ภาษา}}",
+    "sortBy": "เรียงตาม: {sort}",
+    "sort": {
+      "date": "วันที่",
+      "rating": "คะแนน",
+      "joiners": "ผู้เข้าร่วม"
+    }
   },
   "preparations": {
     "title": "ชุดของฉัน",

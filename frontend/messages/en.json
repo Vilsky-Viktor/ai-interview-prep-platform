@@ -138,7 +138,16 @@
     "search": "Search titles and topics",
     "searchAction": "Search",
     "noMatches": "No matching preparations.",
-    "empty": "No public preparations yet."
+    "empty": "No public preparations yet.",
+    "level": "Level: {level}",
+    "anyLevel": "Any",
+    "languages": "{count, plural, one {# language} other {# languages}}",
+    "sortBy": "Sort by: {sort}",
+    "sort": {
+      "date": "Date",
+      "rating": "Rating",
+      "joiners": "Joiners"
+    }
   },
   "preparations": {
     "title": "My prep kits",

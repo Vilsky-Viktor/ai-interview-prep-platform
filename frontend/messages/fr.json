@@ -138,7 +138,16 @@
     "search": "Rechercher des titres et des sujets",
     "searchAction": "Rechercher",
     "noMatches": "Aucune préparation correspondante.",
-    "empty": "Aucune préparation publique pour l'instant."
+    "empty": "Aucune préparation publique pour l'instant.",
+    "level": "Niveau : {level}",
+    "anyLevel": "Tous",
+    "languages": "{count, plural, one {# langue} other {# langues}}",
+    "sortBy": "Trier par : {sort}",
+    "sort": {
+      "date": "Date",
+      "rating": "Note",
+      "joiners": "Participants"
+    }
   },
   "preparations": {
     "title": "Mes kits",

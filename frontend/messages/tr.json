@@ -138,7 +138,16 @@
     "search": "Başlık ve konu ara",
     "searchAction": "Ara",
     "noMatches": "Eşleşen hazırlık yok.",
-    "empty": "Henüz herkese açık hazırlık yok."
+    "empty": "Henüz herkese açık hazırlık yok.",
+    "level": "Seviye: {level}",
+    "anyLevel": "Tümü",
+    "languages": "{count, plural, one {# dil} other {# dil}}",
+    "sortBy": "Sırala: {sort}",
+    "sort": {
+      "date": "Tarih",
+      "rating": "Puan",
+      "joiners": "Katılımcılar"
+    }
   },
   "preparations": {
     "title": "Setlerim",

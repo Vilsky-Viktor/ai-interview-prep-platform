@@ -16,7 +16,7 @@ from app.storage import preparations, search
 def test_library_search_is_public_and_paged(client, monkeypatch):
     asked = []
 
-    async def fake_search(text, offset, limit):
+    async def fake_search(text, offset, limit, level, languages, sort):
         asked.append((text, offset, limit))
 
         return []
@@ -27,6 +27,44 @@ def test_library_search_is_public_and_paged(client, monkeypatch):
     assert client.get("/library", params={"offset": 20, "limit": 21}).status_code == 200
     assert client.get("/library", params={"limit": 500}).status_code == 422
     assert asked == [("python", 0, MAX_PAGE_SIZE), ("", 20, 21)]
+
+
+def test_library_filters_and_sorts_with_the_readers_languages_by_default(client, monkeypatch):
+    asked = []
+
+    async def fake_search(text, offset, limit, level, languages, sort):
+        asked.append((level, languages, sort))
+
+        return []
+
+    monkeypatch.setattr(search, "search_public", fake_search)
+
+    client.get("/library", headers={"Accept-Language": "de"})
+    client.get("/library")
+    client.get(
+        "/library",
+        params={"level": "hard", "language": ["ru", "uk"], "sort": "joiners"},
+        headers={"Accept-Language": "de"},
+    )
+
+    assert asked == [
+        (None, ["de", "en"], "rating"),
+        (None, ["en"], "rating"),
+        ("hard", ["ru", "uk"], "joiners"),
+    ]
+    assert client.get("/library", params={"level": "expert"}).status_code == 422
+    assert client.get("/library", params={"language": "xx"}).status_code == 422
+    assert client.get("/library", params={"sort": "views"}).status_code == 422
+
+
+def test_library_filters_list_the_choices_and_the_readers_defaults(client):
+    filters = client.get("/library/filters", headers={"Accept-Language": "fil"}).json()
+
+    assert filters["levels"] == ["basic", "medium", "hard"]
+    assert filters["default_languages"] == ["fil", "en"]
+    assert filters["sorts"] == ["date", "rating", "joiners"]
+    assert filters["default_sort"] == "rating"
+    assert "et" in filters["languages"]
 
 
 def test_search_matches_title():

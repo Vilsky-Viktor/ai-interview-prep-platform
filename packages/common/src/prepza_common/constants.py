@@ -64,6 +64,9 @@ LANGUAGES = {
     "fil": "Filipino",
     "et": "Estonian",
 }
+# How hard a preparation or interview is, from its requirements; generation decides it and
+# library filters by it.
+LEVELS = ("basic", "medium", "hard")
 # Of those, the ones written right to left.
 RTL_LANGUAGES = {"ar", "he", "fa"}
 DEFAULT_LANGUAGE = "en"

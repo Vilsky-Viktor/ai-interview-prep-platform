@@ -132,7 +132,16 @@
     "search": "タイトルとトピックを検索",
     "searchAction": "検索",
     "noMatches": "一致する準備キットはありません。",
-    "empty": "公開されている準備キットはまだありません。"
+    "empty": "公開されている準備キットはまだありません。",
+    "level": "レベル: {level}",
+    "anyLevel": "すべて",
+    "languages": "{count, plural, other {# 言語}}",
+    "sortBy": "並べ替え: {sort}",
+    "sort": {
+      "date": "日付",
+      "rating": "評価",
+      "joiners": "参加者数"
+    }
   },
   "preparations": {
     "title": "マイキット",

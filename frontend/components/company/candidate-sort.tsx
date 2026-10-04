@@ -43,7 +43,7 @@ export function CandidateSortMenu({ current }: { current: CandidateSort }) {
             <DropdownMenuRadioItem
               key={sort}
               value={sort}
-              className="px-3 py-2"
+              className="px-3 py-2 lowercase"
             >
               {t(`sort.${sort}`)}
             </DropdownMenuRadioItem>

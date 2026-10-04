@@ -138,7 +138,16 @@
     "search": "Otsi pealkirju ja teemasid",
     "searchAction": "Otsi",
     "noMatches": "Sobivaid ettevalmistusi ei leitud.",
-    "empty": "Avalikke ettevalmistusi veel pole."
+    "empty": "Avalikke ettevalmistusi veel pole.",
+    "level": "Tase: {level}",
+    "anyLevel": "Kõik",
+    "languages": "{count, plural, one {# keel} other {# keelt}}",
+    "sortBy": "Järjesta: {sort}",
+    "sort": {
+      "date": "Kuupäev",
+      "rating": "Hinnang",
+      "joiners": "Liitujad"
+    }
   },
   "preparations": {
     "title": "Minu komplektid",

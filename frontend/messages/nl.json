@@ -138,7 +138,16 @@
     "search": "Titels en onderwerpen zoeken",
     "searchAction": "Zoeken",
     "noMatches": "Geen passende voorbereidingen.",
-    "empty": "Nog geen openbare voorbereidingen."
+    "empty": "Nog geen openbare voorbereidingen.",
+    "level": "Niveau: {level}",
+    "anyLevel": "Alle",
+    "languages": "{count, plural, one {# taal} other {# talen}}",
+    "sortBy": "Sorteren op: {sort}",
+    "sort": {
+      "date": "Datum",
+      "rating": "Beoordeling",
+      "joiners": "Deelnemers"
+    }
   },
   "preparations": {
     "title": "Mijn kits",

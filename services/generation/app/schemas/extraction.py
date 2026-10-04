@@ -1,5 +1,4 @@
-from typing import Literal
-
+from prepza_common.user import Level
 from pydantic import BaseModel, Field
 
 
@@ -11,6 +10,4 @@ class JobExtraction(BaseModel):
     requirements: list[str] = Field(
         description="Concrete, distinct requirements/qualifications extracted from the text."
     )
-    level: Literal["basic", "medium", "hard"] = Field(
-        description="Level of complexity based on required seniority."
-    )
+    level: Level = Field(description="Level of complexity based on required seniority.")

@@ -132,7 +132,16 @@
     "search": "搜索标题和主题",
     "searchAction": "搜索",
     "noMatches": "没有匹配的学习包。",
-    "empty": "还没有公开的学习包。"
+    "empty": "还没有公开的学习包。",
+    "level": "难度：{level}",
+    "anyLevel": "全部",
+    "languages": "{count, plural, other {# 种语言}}",
+    "sortBy": "排序方式：{sort}",
+    "sort": {
+      "date": "日期",
+      "rating": "评分",
+      "joiners": "加入人数"
+    }
   },
   "preparations": {
     "title": "我的学习包",

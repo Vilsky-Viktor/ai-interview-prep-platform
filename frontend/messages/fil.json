@@ -138,7 +138,16 @@
     "search": "Maghanap ng pamagat at paksa",
     "searchAction": "Maghanap",
     "noMatches": "Walang tugmang paghahanda.",
-    "empty": "Wala pang pampublikong paghahanda."
+    "empty": "Wala pang pampublikong paghahanda.",
+    "level": "Antas: {level}",
+    "anyLevel": "Kahit ano",
+    "languages": "{count, plural, one {# wika} other {# wika}}",
+    "sortBy": "Ayusin ayon sa: {sort}",
+    "sort": {
+      "date": "Petsa",
+      "rating": "Rating",
+      "joiners": "Mga sumali"
+    }
   },
   "preparations": {
     "title": "Aking mga kit",

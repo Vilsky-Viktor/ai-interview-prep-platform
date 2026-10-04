@@ -138,7 +138,16 @@
     "search": "शीर्षक और विषय खोजें",
     "searchAction": "खोजें",
     "noMatches": "कोई मिलती-जुलती तैयारी नहीं मिली।",
-    "empty": "अभी कोई सार्वजनिक तैयारी नहीं है।"
+    "empty": "अभी कोई सार्वजनिक तैयारी नहीं है।",
+    "level": "स्तर: {level}",
+    "anyLevel": "कोई भी",
+    "languages": "{count, plural, one {# भाषा} other {# भाषाएँ}}",
+    "sortBy": "क्रम: {sort}",
+    "sort": {
+      "date": "तारीख",
+      "rating": "रेटिंग",
+      "joiners": "जुड़ने वाले"
+    }
   },
   "preparations": {
     "title": "मेरी किट",

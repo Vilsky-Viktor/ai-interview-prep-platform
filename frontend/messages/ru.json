@@ -138,7 +138,16 @@
     "search": "Поиск по названиям и темам",
     "searchAction": "Найти",
     "noMatches": "Ничего не найдено.",
-    "empty": "Публичных подготовок пока нет."
+    "empty": "Публичных подготовок пока нет.",
+    "level": "Уровень: {level}",
+    "anyLevel": "Любой",
+    "languages": "{count, plural, one {# язык} few {# языка} many {# языков} other {# языка}}",
+    "sortBy": "Сортировка: {sort}",
+    "sort": {
+      "date": "Дата",
+      "rating": "Рейтинг",
+      "joiners": "Участники"
+    }
   },
   "preparations": {
     "title": "Мои наборы",

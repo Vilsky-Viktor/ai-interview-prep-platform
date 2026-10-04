@@ -132,7 +132,16 @@
     "search": "Cari judul dan topik",
     "searchAction": "Cari",
     "noMatches": "Tidak ada persiapan yang cocok.",
-    "empty": "Belum ada persiapan publik."
+    "empty": "Belum ada persiapan publik.",
+    "level": "Tingkat: {level}",
+    "anyLevel": "Semua",
+    "languages": "{count, plural, other {# bahasa}}",
+    "sortBy": "Urutkan: {sort}",
+    "sort": {
+      "date": "Tanggal",
+      "rating": "Rating",
+      "joiners": "Peserta"
+    }
   },
   "preparations": {
     "title": "Kit saya",

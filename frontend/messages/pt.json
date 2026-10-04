@@ -138,7 +138,16 @@
     "search": "Buscar títulos e tópicos",
     "searchAction": "Buscar",
     "noMatches": "Nenhuma preparação encontrada.",
-    "empty": "Ainda não há preparações públicas."
+    "empty": "Ainda não há preparações públicas.",
+    "level": "Nível: {level}",
+    "anyLevel": "Qualquer",
+    "languages": "{count, plural, one {# idioma} other {# idiomas}}",
+    "sortBy": "Ordenar por: {sort}",
+    "sort": {
+      "date": "Data",
+      "rating": "Avaliação",
+      "joiners": "Participantes"
+    }
   },
   "preparations": {
     "title": "Meus kits",

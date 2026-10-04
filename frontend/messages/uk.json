@@ -132,7 +132,16 @@
     "search": "Пошук за назвами та темами",
     "searchAction": "Шукати",
     "noMatches": "Нічого не знайдено.",
-    "empty": "Публічних підготовок поки немає."
+    "empty": "Публічних підготовок поки немає.",
+    "level": "Рівень: {level}",
+    "anyLevel": "Будь-який",
+    "languages": "{count, plural, one {# мова} few {# мови} many {# мов} other {# мови}}",
+    "sortBy": "Сортування: {sort}",
+    "sort": {
+      "date": "Дата",
+      "rating": "Рейтинг",
+      "joiners": "Учасники"
+    }
   },
   "preparations": {
     "title": "Мої набори",

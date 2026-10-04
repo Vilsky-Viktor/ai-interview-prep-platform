@@ -1,6 +1,7 @@
 from sqlalchemy import Row, exists, func, or_, select
 
 from app.constants.feedback import RATING_PRIOR_MEAN, RATING_PRIOR_WEIGHT
+from app.constants.library import DEFAULT_LIBRARY_SORT, LibrarySort
 from app.constants.search import SEARCH_LANGUAGE
 from app.constants.sets import SetKind, Visibility
 from app.models.sets import QuestionSet, Topic
@@ -17,8 +18,16 @@ def _matches(text: str):
     return or_(QuestionSet.title.ilike(f"%{text}%"), topic_hit)
 
 
-async def search_public(text: str, offset: int, limit: int) -> list[Row]:
-    """Public preparations whose title or topics match, best rated and most joined first."""
+async def search_public(
+    text: str,
+    offset: int,
+    limit: int,
+    level: str | None = None,
+    languages: list[str] | None = None,
+    sort: LibrarySort = DEFAULT_LIBRARY_SORT,
+) -> list[Row]:
+    """Public preparations whose title or topics match, of one level and in some languages if
+    asked, in the order asked."""
     # Bayesian average: few ratings stay close to the prior, many ratings speak for themselves.
     ranked_rating = (QuestionSet.rating_sum + RATING_PRIOR_MEAN * RATING_PRIOR_WEIGHT) / (
         QuestionSet.rating_count + RATING_PRIOR_WEIGHT
@@ -30,14 +39,20 @@ async def search_public(text: str, offset: int, limit: int) -> list[Row]:
     if text:
         query = query.where(_matches(text))
 
-    # The id breaks ties, so pages never overlap or skip a preparation.
+    if level:
+        query = query.where(QuestionSet.level == level)
+
+    if languages:
+        query = query.where(QuestionSet.language.in_(languages))
+
+    orders = {
+        LibrarySort.DATE: [QuestionSet.created_at.desc()],
+        LibrarySort.RATING: [ranked_rating.desc(), QuestionSet.join_count.desc()],
+        LibrarySort.JOINERS: [QuestionSet.join_count.desc(), ranked_rating.desc()],
+    }
+    # Newest, then the id break ties, so pages never overlap or skip a preparation.
     query = (
-        query.order_by(
-            ranked_rating.desc(),
-            QuestionSet.join_count.desc(),
-            QuestionSet.created_at.desc(),
-            QuestionSet.id,
-        )
+        query.order_by(*orders[sort], QuestionSet.created_at.desc(), QuestionSet.id)
         .offset(offset)
         .limit(limit)
     )

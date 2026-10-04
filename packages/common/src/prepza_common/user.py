@@ -1,10 +1,12 @@
 from typing import Literal
 
-from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGES
+from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGES, LEVELS
 from pydantic import BaseModel
 
 # A supported language's code (LANGUAGES).
 Language = Literal[tuple(LANGUAGES)]
+# A preparation's level (LEVELS).
+Level = Literal[LEVELS]
 
 
 class User(BaseModel):

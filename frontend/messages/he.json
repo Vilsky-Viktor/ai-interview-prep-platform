@@ -132,7 +132,16 @@
     "search": "חיפוש כותרות ונושאים",
     "searchAction": "חיפוש",
     "noMatches": "אין הכנות תואמות.",
-    "empty": "עדיין אין הכנות ציבוריות."
+    "empty": "עדיין אין הכנות ציבוריות.",
+    "level": "רמה: {level}",
+    "anyLevel": "כל רמה",
+    "languages": "{count, plural, one {שפה אחת} two {# שפות} other {# שפות}}",
+    "sortBy": "מיון לפי: {sort}",
+    "sort": {
+      "date": "תאריך",
+      "rating": "דירוג",
+      "joiners": "מצטרפים"
+    }
   },
   "preparations": {
     "title": "הערכות שלי",

@@ -138,7 +138,16 @@
     "search": "제목과 주제 검색",
     "searchAction": "검색",
     "noMatches": "일치하는 준비 키트가 없습니다.",
-    "empty": "아직 공개된 준비 키트가 없습니다."
+    "empty": "아직 공개된 준비 키트가 없습니다.",
+    "level": "난이도: {level}",
+    "anyLevel": "전체",
+    "languages": "{count, plural, other {#개 언어}}",
+    "sortBy": "정렬: {sort}",
+    "sort": {
+      "date": "날짜",
+      "rating": "평점",
+      "joiners": "참여자 수"
+    }
   },
   "preparations": {
     "title": "내 키트",

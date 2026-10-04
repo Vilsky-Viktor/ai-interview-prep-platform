@@ -132,7 +132,16 @@
     "search": "ابحث في العناوين والمواضيع",
     "searchAction": "بحث",
     "noMatches": "لا توجد إعدادات مطابقة.",
-    "empty": "لا توجد إعدادات عامة بعد."
+    "empty": "لا توجد إعدادات عامة بعد.",
+    "level": "المستوى: {level}",
+    "anyLevel": "أي مستوى",
+    "languages": "{count, plural, zero {# لغة} one {لغة واحدة} two {لغتان} few {# لغات} many {# لغة} other {# لغة}}",
+    "sortBy": "الترتيب حسب: {sort}",
+    "sort": {
+      "date": "التاريخ",
+      "rating": "التقييم",
+      "joiners": "المنضمّون"
+    }
   },
   "preparations": {
     "title": "حزمي",

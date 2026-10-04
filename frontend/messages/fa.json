@@ -138,7 +138,16 @@
     "search": "جست‌وجوی عنوان‌ها و موضوع‌ها",
     "searchAction": "جست‌وجو",
     "noMatches": "آمادگی مطابقی پیدا نشد.",
-    "empty": "هنوز آمادگی عمومی وجود ندارد."
+    "empty": "هنوز آمادگی عمومی وجود ندارد.",
+    "level": "سطح: {level}",
+    "anyLevel": "همه",
+    "languages": "{count, plural, one {# زبان} other {# زبان}}",
+    "sortBy": "مرتب‌سازی بر اساس: {sort}",
+    "sort": {
+      "date": "تاریخ",
+      "rating": "امتیاز",
+      "joiners": "شرکت‌کنندگان"
+    }
   },
   "preparations": {
     "title": "مجموعه‌های من",

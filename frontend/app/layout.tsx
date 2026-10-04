@@ -15,7 +15,10 @@ import { SITE_NAME } from "@/constants/seo"
 import { siteUrl } from "@/lib/site"
 import { cn } from "cn"
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist" })
+const geist = Geist({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-geist",
+})
 
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
 

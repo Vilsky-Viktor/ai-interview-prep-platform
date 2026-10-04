@@ -138,7 +138,16 @@
     "search": "Cerca titoli e argomenti",
     "searchAction": "Cerca",
     "noMatches": "Nessuna preparazione corrispondente.",
-    "empty": "Ancora nessuna preparazione pubblica."
+    "empty": "Ancora nessuna preparazione pubblica.",
+    "level": "Livello: {level}",
+    "anyLevel": "Qualsiasi",
+    "languages": "{count, plural, one {# lingua} other {# lingue}}",
+    "sortBy": "Ordina per: {sort}",
+    "sort": {
+      "date": "Data",
+      "rating": "Valutazione",
+      "joiners": "Partecipanti"
+    }
   },
   "preparations": {
     "title": "I miei kit",

@@ -7,7 +7,7 @@ import {
 } from "@/constants/seo"
 import { serverFetch } from "@/lib/server-api"
 import { siteUrl } from "@/lib/site"
-import type { PreparationSummary } from "@/types/preparation"
+import type { LibraryFilters, PreparationSummary } from "@/types/preparation"
 
 /** The public pages, and the public library's preparations, best rated first. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -15,9 +15,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${siteUrl()}${path}`,
   }))
 
+  // Every language: without them the library lists only the reader's own and English.
+  const filters = await serverFetch<LibraryFilters>("/library/library/filters")
+  const languages = (filters?.languages ?? [])
+    .map((language) => `&language=${language}`)
+    .join("")
+
   for (let offset = 0; offset < SITEMAP_PREPARATIONS; offset += SITEMAP_PAGE) {
     const batch = await serverFetch<PreparationSummary[]>(
-      `/library/library?q=&offset=${offset}&limit=${SITEMAP_PAGE}`
+      `/library/library?q=${languages}&offset=${offset}&limit=${SITEMAP_PAGE}`
     )
 
     for (const preparation of batch ?? []) {

@@ -5,7 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: var(--font-poppins);
+  /* Poppins has no Cyrillic: those letters fall back to Geist, never to a serif. */
+  --font-heading: var(--font-poppins), var(--font-geist), sans-serif;
   --font-sans: var(--font-geist);
   --font-mono: var(--font-mono);
   --color-sidebar-ring: var(--sidebar-ring);

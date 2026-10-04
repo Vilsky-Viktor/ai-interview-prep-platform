@@ -138,7 +138,16 @@
     "search": "Tìm tiêu đề và chủ đề",
     "searchAction": "Tìm",
     "noMatches": "Không có bộ ôn luyện phù hợp.",
-    "empty": "Chưa có bộ ôn luyện công khai nào."
+    "empty": "Chưa có bộ ôn luyện công khai nào.",
+    "level": "Cấp độ: {level}",
+    "anyLevel": "Tất cả",
+    "languages": "{count, plural, other {# ngôn ngữ}}",
+    "sortBy": "Sắp xếp theo: {sort}",
+    "sort": {
+      "date": "Ngày",
+      "rating": "Đánh giá",
+      "joiners": "Người tham gia"
+    }
   },
   "preparations": {
     "title": "Bộ của tôi",

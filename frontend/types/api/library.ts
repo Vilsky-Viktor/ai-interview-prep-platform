@@ -327,6 +327,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/library/filters": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Library Filters
+     * @description What the library can be filtered and sorted by, and the reader's defaults; public.
+     */
+    get: operations["library_filters_library_filters_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/library": {
     parameters: {
       query?: never
@@ -336,7 +356,8 @@ export interface paths {
     }
     /**
      * Search Library
-     * @description Public preparations, a page at a time; no login needed.
+     * @description Public preparations, a page at a time; no login needed. Without `language`, the reader's
+     *     language and English.
      */
     get: operations["search_library_library_get"]
     put?: never
@@ -861,6 +882,26 @@ export interface components {
       /** User Id */
       user_id: string
     }
+    /**
+     * LibraryFiltersOut
+     * @description What the library page can filter and sort by, and what it starts with.
+     */
+    LibraryFiltersOut: {
+      /** Levels */
+      levels: string[]
+      /** Languages */
+      languages: string[]
+      /** Default Languages */
+      default_languages: string[]
+      /** Sorts */
+      sorts: components["schemas"]["LibrarySort"][]
+      default_sort: components["schemas"]["LibrarySort"]
+    }
+    /**
+     * LibrarySort
+     * @enum {string}
+     */
+    LibrarySort: "date" | "rating" | "joiners"
     /** MyPreparation */
     MyPreparation: {
       /**
@@ -1248,7 +1289,30 @@ export interface components {
        * Language
        * @enum {string}
        */
-      language: "en" | "ru"
+      language:
+        | "en"
+        | "ru"
+        | "uk"
+        | "es"
+        | "pt"
+        | "de"
+        | "fr"
+        | "it"
+        | "pl"
+        | "nl"
+        | "tr"
+        | "ar"
+        | "he"
+        | "fa"
+        | "ja"
+        | "zh"
+        | "ko"
+        | "hi"
+        | "id"
+        | "th"
+        | "vi"
+        | "fil"
+        | "et"
     }
     /** ShareIn */
     ShareIn: {
@@ -1381,7 +1445,30 @@ export interface components {
        * @default en
        * @enum {string}
        */
-      language: "en" | "ru"
+      language:
+        | "en"
+        | "ru"
+        | "uk"
+        | "es"
+        | "pt"
+        | "de"
+        | "fr"
+        | "it"
+        | "pl"
+        | "nl"
+        | "tr"
+        | "ar"
+        | "he"
+        | "fa"
+        | "ja"
+        | "zh"
+        | "ko"
+        | "hi"
+        | "id"
+        | "th"
+        | "vi"
+        | "fil"
+        | "et"
     }
     /** ValidationError */
     ValidationError: {
@@ -2111,10 +2198,59 @@ export interface operations {
       }
     }
   }
+  library_filters_library_filters_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LibraryFiltersOut"]
+        }
+      }
+    }
+  }
   search_library_library_get: {
     parameters: {
       query?: {
         q?: string
+        level?: ("basic" | "medium" | "hard") | null
+        language?:
+          | (
+              | "en"
+              | "ru"
+              | "uk"
+              | "es"
+              | "pt"
+              | "de"
+              | "fr"
+              | "it"
+              | "pl"
+              | "nl"
+              | "tr"
+              | "ar"
+              | "he"
+              | "fa"
+              | "ja"
+              | "zh"
+              | "ko"
+              | "hi"
+              | "id"
+              | "th"
+              | "vi"
+              | "fil"
+              | "et"
+            )[]
+          | null
+        sort?: components["schemas"]["LibrarySort"]
         offset?: number
         limit?: number
       }

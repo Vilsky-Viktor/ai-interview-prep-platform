@@ -138,7 +138,16 @@
     "search": "Szukaj tytułów i tematów",
     "searchAction": "Szukaj",
     "noMatches": "Brak pasujących przygotowań.",
-    "empty": "Nie ma jeszcze publicznych przygotowań."
+    "empty": "Nie ma jeszcze publicznych przygotowań.",
+    "level": "Poziom: {level}",
+    "anyLevel": "Dowolny",
+    "languages": "{count, plural, one {# język} few {# języki} many {# języków} other {# języka}}",
+    "sortBy": "Sortuj według: {sort}",
+    "sort": {
+      "date": "Data",
+      "rating": "Ocena",
+      "joiners": "Uczestnicy"
+    }
   },
   "preparations": {
     "title": "Moje zestawy",
