@@ -25,16 +25,16 @@ export default async function HomePage() {
     <main className="mx-auto max-w-5xl px-6">
       {/* The input fills the first screen, under the 3.5rem header. */}
       <div className="relative flex min-h-[calc(100svh-3.5rem)] flex-col items-center justify-center pb-24">
-        <div className="inline-grid max-w-full gap-16">
-          <div className="space-y-4 text-center">
+        {/* One column, as wide in every language as the English title: the title starts where
+            the input does, and a longer title wraps inside it. */}
+        <div className="w-full max-w-176 space-y-16">
+          <div className="space-y-4">
             <HomeTitle key={locale} />
-            <p className="text-start text-base text-balance text-muted-foreground">
+            <p className="text-base text-balance text-muted-foreground">
               {t("tagline")}
             </p>
           </div>
-          <div className="min-w-0">
-            <GoalForm />
-          </div>
+          <GoalForm />
         </div>
         <a
           href="#how"

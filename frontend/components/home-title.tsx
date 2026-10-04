@@ -61,7 +61,7 @@ export function HomeTitle() {
   return (
     <h1
       aria-label={`${t("preparingFor")} ${words[index]}${t("mark")}`}
-      className="no-dot text-center font-heading text-3xl font-medium tracking-tight sm:text-5xl sm:whitespace-nowrap"
+      className="no-dot text-start font-heading text-3xl font-medium tracking-tight sm:text-5xl"
     >
       <span aria-hidden>
         {t("preparingFor")}{" "}
