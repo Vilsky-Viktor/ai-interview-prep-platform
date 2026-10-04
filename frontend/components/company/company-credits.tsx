@@ -1,8 +1,11 @@
 "use client"
 
+import { cn } from "cn"
 import { useLocale, useTranslations } from "next-intl"
 
+import { RefreshOnFocus } from "@/components/billing/refresh-on-focus"
 import { TopUpDialog } from "@/components/billing/top-up-dialog"
+import { useCountUp } from "@/hooks/use-count-up"
 import type { Catalog } from "@/types/billing"
 
 /** The company's credits for candidates, with a top-up next to them. */
@@ -21,13 +24,20 @@ export function CompanyCredits({
 }) {
   const t = useTranslations("company")
   const locale = useLocale()
+  // A top-up arriving counts up, as in the header.
+  const { shown, rising } = useCountUp(credits)
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border px-6 py-4">
       <div>
         <p className="text-base">
-          <span className="font-heading text-2xl font-medium tabular-nums">
-            {credits.toLocaleString(locale)}
+          <span
+            className={cn(
+              "font-heading text-2xl font-medium tabular-nums transition-colors duration-500",
+              rising && "text-primary"
+            )}
+          >
+            {shown.toLocaleString(locale)}
           </span>{" "}
           <span className="text-muted-foreground">
             {t("creditsLeft", { count: credits })}
@@ -44,6 +54,7 @@ export function CompanyCredits({
         title={companyName}
         companyId={companyId}
       />
+      <RefreshOnFocus />
     </div>
   )
 }

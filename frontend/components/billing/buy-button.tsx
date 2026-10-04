@@ -13,6 +13,9 @@ import { announceCreditsChanged } from "@/lib/credits"
 import { openCheckout } from "@/lib/paddle"
 import type { Catalog } from "@/types/billing"
 
+// When to look for the new balance after a payment, in seconds.
+const RECHECK_SECONDS = [2, 5, 10, 20, 40]
+
 /** Buys a top-up for the signed-in user, or for `companyId` when given: Paddle's `priceId`,
 `quantity` times. */
 export function BuyButton({
@@ -73,11 +76,14 @@ export function BuyButton({
         user.email,
         () => {
           toast.success(t("paid"))
-          // The webhook usually lands within seconds; show the new balance then.
-          window.setTimeout(() => {
-            router.refresh()
-            announceCreditsChanged()
-          }, 4000)
+          // Paddle's webhook usually lands within seconds, sometimes later: look again a few
+          // times, and the balances count up when it has.
+          for (const seconds of RECHECK_SECONDS) {
+            window.setTimeout(() => {
+              router.refresh()
+              announceCreditsChanged()
+            }, seconds * 1000)
+          }
         },
         quantity
       )

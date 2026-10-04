@@ -3,6 +3,7 @@ import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 
 import { BalanceRow } from "@/components/billing/balance-row"
+import { RefreshOnFocus } from "@/components/billing/refresh-on-focus"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { TOKEN_COOKIE } from "@/constants/auth"
@@ -35,6 +36,7 @@ export default async function TopUpPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-12 px-6 py-12">
+      <RefreshOnFocus />
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-4">
           <h1 className="font-heading text-4xl font-medium tracking-tight">

@@ -1,9 +1,11 @@
 "use client"
 
+import { cn } from "cn"
 import { useLocale, useTranslations } from "next-intl"
 
 import { AutoTopUpSetting } from "@/components/billing/auto-top-up"
 import { TopUpDialog } from "@/components/billing/top-up-dialog"
+import { useCountUp } from "@/hooks/use-count-up"
 import type { Catalog } from "@/types/billing"
 
 /** One balance on the top-up page: whose it is, how much, and a top-up next to it. */
@@ -22,6 +24,8 @@ export function BalanceRow({
 }) {
   const t = useTranslations("billing")
   const locale = useLocale()
+  // A top-up arriving counts up, as in the header.
+  const { shown, rising } = useCountUp(available)
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5">
@@ -36,8 +40,13 @@ export function BalanceRow({
       </div>
       <div className="flex items-center gap-6">
         <p className="text-end">
-          <span className="font-heading text-3xl font-medium tabular-nums">
-            {available.toLocaleString(locale)}
+          <span
+            className={cn(
+              "font-heading text-3xl font-medium tabular-nums transition-colors duration-500",
+              rising && "text-primary"
+            )}
+          >
+            {shown.toLocaleString(locale)}
           </span>{" "}
           <span className="text-sm text-muted-foreground">
             {t("creditsWord", { count: available })}
