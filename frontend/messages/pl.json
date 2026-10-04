@@ -418,7 +418,12 @@
     "revokeFailed": "Nie udało się wycofać zaproszenia.",
     "revokeTitle": "Wycofać zaproszenie?",
     "revokeText": "Link wysłany na {email} przestanie działać. Możesz zaprosić tę osobę ponownie później.",
-    "revokeConfirm": "Wycofaj"
+    "revokeConfirm": "Wycofaj",
+    "sortBy": "Sortuj według: {sort}",
+    "sort": {
+      "grade": "Ocena",
+      "date": "Data"
+    }
   },
   "interviews": {
     "title": "Rozmowy",

@@ -9,9 +9,10 @@ from prepza_common.rate_limit import hit_emails
 from app.config.settings import settings
 from app.constants.invites import (
     NOT_STARTED,
+    CandidateSort,
     InviteStatus,
 )
-from app.helpers.candidates import candidate_key
+from app.helpers.candidates import by_grade, candidate_key
 from app.helpers.interviews import (
     attach_set,
     interview_title,
@@ -82,17 +83,26 @@ async def invite_candidate(
 
 @router.get("/{interview_id}/candidates")
 async def list_candidates(
-    interview_id: UUID, user: CurrentUser, page: PageParams
+    interview_id: UUID,
+    user: CurrentUser,
+    page: PageParams,
+    sort: CandidateSort = CandidateSort.GRADE,
 ) -> list[CandidateOut]:
-    """Newest first, a page at a time; scores come from rounds for this page only."""
+    """A page at a time, best grade first or newest first. Grades come from rounds: for every
+    candidate when sorting by them, otherwise for this page only."""
     interview = await interviews.get(interview_id)
 
     if interview is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
     await require_company(user, interview.company_id)
-    listed = await invites.list_for_interview(interview.id, page.offset, page.limit)
-    totals = await rounds.invite_scores([invite.id for invite in listed])
+    if sort == CandidateSort.GRADE:
+        every = await invites.list_all_for_interview(interview.id)
+        totals = await rounds.invite_scores([invite.id for invite in every])
+        listed = by_grade(every, totals)[page.offset : page.offset + page.limit]
+    else:
+        listed = await invites.list_for_interview(interview.id, page.offset, page.limit)
+        totals = await rounds.invite_scores([invite.id for invite in listed])
     finished = [
         invite.id
         for invite in listed

@@ -418,7 +418,12 @@
     "revokeFailed": "Davet geri alınamadı.",
     "revokeTitle": "Davet geri alınsın mı?",
     "revokeText": "{email} adresine gönderilen bağlantı artık çalışmaz. Daha sonra yeniden davet edebilirsiniz.",
-    "revokeConfirm": "Geri al"
+    "revokeConfirm": "Geri al",
+    "sortBy": "Sırala: {sort}",
+    "sort": {
+      "grade": "Not",
+      "date": "Tarih"
+    }
   },
   "interviews": {
     "title": "Mülakatlar",

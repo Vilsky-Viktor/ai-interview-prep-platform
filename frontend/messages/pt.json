@@ -418,7 +418,12 @@
     "revokeFailed": "Não foi possível revogar o convite.",
     "revokeTitle": "Revogar o convite?",
     "revokeText": "O link enviado para {email} deixa de funcionar. Você pode convidar de novo depois.",
-    "revokeConfirm": "Revogar"
+    "revokeConfirm": "Revogar",
+    "sortBy": "Ordenar por: {sort}",
+    "sort": {
+      "grade": "Nota",
+      "date": "Data"
+    }
   },
   "interviews": {
     "title": "Entrevistas",

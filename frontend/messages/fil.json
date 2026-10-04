@@ -418,7 +418,12 @@
     "revokeFailed": "Hindi mabawi ang imbitasyon.",
     "revokeTitle": "Bawiin ang imbitasyon?",
     "revokeText": "Hindi na gagana ang link na ipinadala sa {email}. Puwede mo silang imbitahan ulit mamaya.",
-    "revokeConfirm": "Bawiin"
+    "revokeConfirm": "Bawiin",
+    "sortBy": "Ayusin ayon sa: {sort}",
+    "sort": {
+      "grade": "Grado",
+      "date": "Petsa"
+    }
   },
   "interviews": {
     "title": "Mga interview",

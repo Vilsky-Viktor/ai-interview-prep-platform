@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { CandidateList } from "@/components/company/candidate-list"
+import { CandidateSortMenu } from "@/components/company/candidate-sort"
 import { DeleteInterview } from "@/components/company/delete-interview"
 import { InterviewNav } from "@/components/company/interview-nav"
 import { EditableTitle } from "@/components/editable-title"
@@ -13,6 +14,7 @@ import { PageHeader } from "@/components/page-header"
 import { SubtopicList } from "@/components/questions/subtopic-list"
 import { TopicQuestionLimit } from "@/components/questions/topic-question-limit"
 import { Button } from "@/components/ui/button"
+import { CANDIDATE_SORTS } from "@/constants/interviews"
 import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
@@ -25,16 +27,18 @@ export default async function InterviewPage({
   searchParams,
 }: {
   params: Promise<{ companyId: string; id: string }>
-  searchParams: Promise<{ tab?: string }>
+  searchParams: Promise<{ tab?: string; sort?: string }>
 }) {
   const { companyId, id } = await params
-  const { tab } = await searchParams
+  const { tab, sort: asked } = await searchParams
+  const sort =
+    CANDIDATE_SORTS.find((option) => option === asked) ?? CANDIDATE_SORTS[0]
   const t = await getTranslations("interviews")
   const [interview, candidates] = await Promise.all([
     serverFetch<InterviewDetail>(`/companies/interviews/${id}`),
     // The first page renders on the server; the rest load as the user scrolls.
     serverFetch<Candidate[]>(
-      `/companies/interviews/${id}/candidates?limit=${PAGE_SIZE}`
+      `/companies/interviews/${id}/candidates?sort=${sort}&limit=${PAGE_SIZE}`
     ),
   ])
 
@@ -100,10 +104,17 @@ export default async function InterviewPage({
 
       {current === "candidates" ? (
         <div className="space-y-6">
-          <InviteCandidate interviewId={interview.id} />
+          {/* The invite takes the row; the sort sits at its end, and wraps under it on phones. */}
+          <div className="flex flex-wrap items-center justify-end gap-3">
+            <div className="min-w-64 flex-1">
+              <InviteCandidate interviewId={interview.id} />
+            </div>
+            <CandidateSortMenu current={sort} />
+          </div>
           <CandidateList
             interviewId={id}
             interviewHref={interviewHref}
+            sort={sort}
             initial={candidates ?? []}
           />
         </div>

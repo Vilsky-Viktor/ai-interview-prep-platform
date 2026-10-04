@@ -412,7 +412,12 @@
     "revokeFailed": "Undangan tidak bisa dicabut.",
     "revokeTitle": "Cabut undangan?",
     "revokeText": "Tautan yang dikirim ke {email} tidak akan berfungsi lagi. Kamu bisa mengundangnya lagi nanti.",
-    "revokeConfirm": "Cabut"
+    "revokeConfirm": "Cabut",
+    "sortBy": "Urutkan: {sort}",
+    "sort": {
+      "grade": "Nilai",
+      "date": "Tanggal"
+    }
   },
   "interviews": {
     "title": "Wawancara",

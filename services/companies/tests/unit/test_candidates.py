@@ -95,7 +95,7 @@ def test_finished_interview_status(client, monkeypatch):
 
     monkeypatch.setattr(invite_store, "list_for_interview", fake_invites)
 
-    response = client.get(f"/interviews/{INTERVIEW_ID}/candidates?offset=20&limit=20")
+    response = client.get(f"/interviews/{INTERVIEW_ID}/candidates?sort=date&offset=20&limit=20")
 
     assert response.status_code == 200
     assert response.json()[0]["status"] == "finished"
@@ -155,3 +155,55 @@ def test_an_unused_invite_is_revoked(client, monkeypatch):
 
 def test_a_started_invite_is_kept(client, monkeypatch):
     assert revoke(client, monkeypatch, InviteStatus.IN_PROCESS) == (409, [])
+
+
+def test_candidates_are_sorted_by_grade_by_default(client, monkeypatch):
+    sign_in()
+    interview = Interview(
+        id=INTERVIEW_ID, company_id=COMPANY_ID, generation_id=uuid.uuid4(), set_id=uuid.uuid4()
+    )
+    company = Company(id=COMPANY_ID, name="Arcolabs", created_at=datetime.now(UTC))
+    company.members = [
+        Member(company_id=COMPANY_ID, user_id="bob", invited_email="bob@example.com", role="owner")
+    ]
+    # Newest first, as storage lists them: Cleo has no grade yet, Ben 60, Ada 90.
+    grades = {"cleo": None, "ben": 60, "ada": 90}
+    everyone = [
+        CandidateInvite(
+            id=uuid.uuid4(),
+            interview_id=INTERVIEW_ID,
+            email=f"{name}@example.com",
+            token=f"token-{name}",
+            status="in_process",
+            created_at=datetime.now(UTC),
+        )
+        for name in grades
+    ]
+    totals = {
+        str(invite.id): {"progress": 50, "grade": grade, "finished": False}
+        for invite, grade in zip(everyone, grades.values(), strict=True)
+    }
+
+    async def fake_interview(_interview_id):
+        return interview
+
+    async def fake_company(_company_id):
+        return company
+
+    async def fake_all(_interview_id):
+        return everyone
+
+    async def fake_scores(invite_ids):
+        return {str(invite_id): totals[str(invite_id)] for invite_id in invite_ids}
+
+    monkeypatch.setattr(interviews, "get", fake_interview)
+    monkeypatch.setattr(companies, "get", fake_company)
+    monkeypatch.setattr(invite_store, "list_all_for_interview", fake_all)
+    monkeypatch.setattr(rounds, "invite_scores", fake_scores)
+
+    first = client.get(f"/interviews/{INTERVIEW_ID}/candidates?offset=0&limit=2").json()
+    second = client.get(f"/interviews/{INTERVIEW_ID}/candidates?offset=2&limit=2").json()
+
+    assert [row["email"] for row in first] == ["ada@example.com", "ben@example.com"]
+    assert [row["email"] for row in second] == ["cleo@example.com"]
+    assert second[0]["grade"] is None

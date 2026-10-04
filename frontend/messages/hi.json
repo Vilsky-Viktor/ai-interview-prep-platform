@@ -418,7 +418,12 @@
     "revokeFailed": "आमंत्रण वापस नहीं लिया जा सका।",
     "revokeTitle": "आमंत्रण वापस लें?",
     "revokeText": "{email} पर भेजा गया लिंक काम करना बंद कर देगा। आप बाद में फिर से आमंत्रित कर सकते हैं।",
-    "revokeConfirm": "वापस लें"
+    "revokeConfirm": "वापस लें",
+    "sortBy": "क्रम: {sort}",
+    "sort": {
+      "grade": "ग्रेड",
+      "date": "तारीख"
+    }
   },
   "interviews": {
     "title": "इंटरव्यू",

@@ -412,7 +412,12 @@
     "revokeFailed": "无法撤销邀请。",
     "revokeTitle": "撤销邀请？",
     "revokeText": "发送给 {email} 的链接将失效。你之后可以再次邀请。",
-    "revokeConfirm": "撤销"
+    "revokeConfirm": "撤销",
+    "sortBy": "排序方式：{sort}",
+    "sort": {
+      "grade": "成绩",
+      "date": "日期"
+    }
   },
   "interviews": {
     "title": "面试",

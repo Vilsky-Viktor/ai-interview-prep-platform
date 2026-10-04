@@ -418,7 +418,12 @@
     "revokeFailed": "เพิกถอนคำเชิญไม่สำเร็จ",
     "revokeTitle": "เพิกถอนคำเชิญ?",
     "revokeText": "ลิงก์ที่ส่งไปที่ {email} จะใช้ไม่ได้อีก คุณเชิญใหม่ได้ภายหลัง",
-    "revokeConfirm": "เพิกถอน"
+    "revokeConfirm": "เพิกถอน",
+    "sortBy": "เรียงตาม: {sort}",
+    "sort": {
+      "grade": "คะแนน",
+      "date": "วันที่"
+    }
   },
   "interviews": {
     "title": "การสัมภาษณ์",

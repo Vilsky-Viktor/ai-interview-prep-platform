@@ -412,7 +412,12 @@
     "revokeFailed": "招待を取り消せませんでした。",
     "revokeTitle": "招待を取り消しますか？",
     "revokeText": "{email} に送ったリンクは使えなくなります。あとで再度招待できます。",
-    "revokeConfirm": "取り消す"
+    "revokeConfirm": "取り消す",
+    "sortBy": "並べ替え: {sort}",
+    "sort": {
+      "grade": "評価",
+      "date": "日付"
+    }
   },
   "interviews": {
     "title": "面接",

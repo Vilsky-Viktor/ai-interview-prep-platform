@@ -418,7 +418,12 @@
     "revokeFailed": "Die Einladung konnte nicht widerrufen werden.",
     "revokeTitle": "Einladung widerrufen?",
     "revokeText": "Der an {email} gesendete Link funktioniert nicht mehr. Du kannst die Person später erneut einladen.",
-    "revokeConfirm": "Widerrufen"
+    "revokeConfirm": "Widerrufen",
+    "sortBy": "Sortieren nach: {sort}",
+    "sort": {
+      "grade": "Note",
+      "date": "Datum"
+    }
   },
   "interviews": {
     "title": "Interviews",

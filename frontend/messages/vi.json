@@ -418,7 +418,12 @@
     "revokeFailed": "Không thể thu hồi lời mời.",
     "revokeTitle": "Thu hồi lời mời?",
     "revokeText": "Liên kết đã gửi tới {email} sẽ không còn dùng được. Bạn có thể mời lại sau.",
-    "revokeConfirm": "Thu hồi"
+    "revokeConfirm": "Thu hồi",
+    "sortBy": "Sắp xếp theo: {sort}",
+    "sort": {
+      "grade": "Điểm",
+      "date": "Ngày"
+    }
   },
   "interviews": {
     "title": "Phỏng vấn",

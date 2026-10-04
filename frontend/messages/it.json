@@ -418,7 +418,12 @@
     "revokeFailed": "Impossibile revocare l'invito.",
     "revokeTitle": "Revocare l'invito?",
     "revokeText": "Il link inviato a {email} smette di funzionare. Potrai invitarlo di nuovo più tardi.",
-    "revokeConfirm": "Revoca"
+    "revokeConfirm": "Revoca",
+    "sortBy": "Ordina per: {sort}",
+    "sort": {
+      "grade": "Voto",
+      "date": "Data"
+    }
   },
   "interviews": {
     "title": "Colloqui",

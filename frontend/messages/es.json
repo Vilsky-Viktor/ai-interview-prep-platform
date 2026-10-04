@@ -418,7 +418,12 @@
     "revokeFailed": "No se pudo revocar la invitación.",
     "revokeTitle": "¿Revocar la invitación?",
     "revokeText": "El enlace enviado a {email} deja de funcionar. Puedes volver a invitarlo más adelante.",
-    "revokeConfirm": "Revocar"
+    "revokeConfirm": "Revocar",
+    "sortBy": "Ordenar por: {sort}",
+    "sort": {
+      "grade": "Nota",
+      "date": "Fecha"
+    }
   },
   "interviews": {
     "title": "Entrevistas",

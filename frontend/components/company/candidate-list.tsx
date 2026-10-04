@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { formatDate } from "@/lib/format"
+import type { CandidateSort } from "@/constants/interviews"
 import type { Candidate } from "@/types/company"
 
 /** An interview's candidates, newest first, a page at a time; `initial` is the server's
@@ -15,17 +16,19 @@ first page. */
 export function CandidateList({
   interviewId,
   interviewHref,
+  sort,
   initial,
 }: {
   interviewId: string
   interviewHref: string
+  sort: CandidateSort
   initial: Candidate[]
 }) {
   const t = useTranslations("candidates")
   const statuses = useTranslations("candidateStatus")
   const locale = useLocale()
   const { items, loadMore } = usePagedList(
-    `/companies/interviews/${interviewId}/candidates`,
+    `/companies/interviews/${interviewId}/candidates?sort=${sort}`,
     initial
   )
 

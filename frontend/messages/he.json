@@ -412,7 +412,12 @@
     "revokeFailed": "לא ניתן לבטל את ההזמנה.",
     "revokeTitle": "לבטל את ההזמנה?",
     "revokeText": "הקישור שנשלח אל {email} יפסיק לעבוד. אפשר להזמין שוב מאוחר יותר.",
-    "revokeConfirm": "ביטול"
+    "revokeConfirm": "ביטול",
+    "sortBy": "מיון לפי: {sort}",
+    "sort": {
+      "grade": "ציון",
+      "date": "תאריך"
+    }
   },
   "interviews": {
     "title": "ראיונות",

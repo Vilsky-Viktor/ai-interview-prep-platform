@@ -418,7 +418,12 @@
     "revokeFailed": "لغو دعوت ممکن نشد.",
     "revokeTitle": "دعوت لغو شود؟",
     "revokeText": "پیوندی که به {email} فرستاده شده کار نخواهد کرد. بعداً می‌توانید دوباره دعوت کنید.",
-    "revokeConfirm": "لغو"
+    "revokeConfirm": "لغو",
+    "sortBy": "مرتب‌سازی بر اساس: {sort}",
+    "sort": {
+      "grade": "نمره",
+      "date": "تاریخ"
+    }
   },
   "interviews": {
     "title": "مصاحبه‌ها",

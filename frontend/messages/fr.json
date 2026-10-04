@@ -418,7 +418,12 @@
     "revokeFailed": "Impossible de révoquer l'invitation.",
     "revokeTitle": "Révoquer l'invitation ?",
     "revokeText": "Le lien envoyé à {email} cesse de fonctionner. Vous pourrez l'inviter à nouveau plus tard.",
-    "revokeConfirm": "Révoquer"
+    "revokeConfirm": "Révoquer",
+    "sortBy": "Trier par : {sort}",
+    "sort": {
+      "grade": "Note",
+      "date": "Date"
+    }
   },
   "interviews": {
     "title": "Entretiens",

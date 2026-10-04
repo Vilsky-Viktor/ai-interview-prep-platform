@@ -418,7 +418,12 @@
     "revokeFailed": "Couldn't revoke the invite.",
     "revokeTitle": "Revoke the invite?",
     "revokeText": "The link sent to {email} stops working. You can invite them again later.",
-    "revokeConfirm": "Revoke"
+    "revokeConfirm": "Revoke",
+    "sortBy": "Sort by: {sort}",
+    "sort": {
+      "grade": "Grade",
+      "date": "Date"
+    }
   },
   "interviews": {
     "title": "Interviews",

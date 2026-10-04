@@ -412,7 +412,12 @@
     "revokeFailed": "تعذّر إلغاء الدعوة.",
     "revokeTitle": "إلغاء الدعوة؟",
     "revokeText": "سيتوقف الرابط المرسَل إلى {email} عن العمل. يمكنك دعوته مرة أخرى لاحقًا.",
-    "revokeConfirm": "إلغاء"
+    "revokeConfirm": "إلغاء",
+    "sortBy": "الترتيب حسب: {sort}",
+    "sort": {
+      "grade": "الدرجة",
+      "date": "التاريخ"
+    }
   },
   "interviews": {
     "title": "المقابلات",

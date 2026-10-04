@@ -418,7 +418,12 @@
     "revokeFailed": "초대를 취소하지 못했습니다.",
     "revokeTitle": "초대를 취소할까요?",
     "revokeText": "{email}(으)로 보낸 링크가 더 이상 작동하지 않습니다. 나중에 다시 초대할 수 있습니다.",
-    "revokeConfirm": "취소"
+    "revokeConfirm": "취소",
+    "sortBy": "정렬: {sort}",
+    "sort": {
+      "grade": "점수",
+      "date": "날짜"
+    }
   },
   "interviews": {
     "title": "면접",

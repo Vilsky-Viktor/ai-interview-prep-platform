@@ -6,6 +6,12 @@ from prepza_common.constants import (  # noqa: F401 (re-exported)
 )
 
 
+# How an interview's candidates are listed: best grade first, or newest invite first.
+class CandidateSort(StrEnum):
+    GRADE = "grade"
+    DATE = "date"
+
+
 class InviteStatus(StrEnum):
     INVITED = "invited"
     # The invite email bounced or was marked as spam, before the candidate opened the invite.

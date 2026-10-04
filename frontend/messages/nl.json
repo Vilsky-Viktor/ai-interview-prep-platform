@@ -418,7 +418,12 @@
     "revokeFailed": "De uitnodiging kon niet worden ingetrokken.",
     "revokeTitle": "Uitnodiging intrekken?",
     "revokeText": "De link die naar {email} is gestuurd, werkt niet meer. Je kunt later opnieuw uitnodigen.",
-    "revokeConfirm": "Intrekken"
+    "revokeConfirm": "Intrekken",
+    "sortBy": "Sorteren op: {sort}",
+    "sort": {
+      "grade": "Cijfer",
+      "date": "Datum"
+    }
   },
   "interviews": {
     "title": "Sollicitatiegesprekken",

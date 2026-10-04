@@ -168,6 +168,18 @@ async def remove(invite_id: uuid.UUID) -> None:
         await session.commit()
 
 
+async def list_all_for_interview(interview_id) -> list[CandidateInvite]:
+    """Every candidate of an interview, newest first, for sorting by grade."""
+    query = (
+        select(CandidateInvite)
+        .where(CandidateInvite.interview_id == interview_id)
+        .order_by(CandidateInvite.created_at.desc(), CandidateInvite.id)
+    )
+
+    async with Session() as session:
+        return list(await session.scalars(query))
+
+
 async def list_for_interview(interview_id, offset: int, limit: int) -> list[CandidateInvite]:
     query = (
         select(CandidateInvite)

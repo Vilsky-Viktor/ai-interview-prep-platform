@@ -418,7 +418,12 @@
     "revokeFailed": "Kutset ei õnnestunud tühistada.",
     "revokeTitle": "Tühistada kutse?",
     "revokeText": "Aadressile {email} saadetud link lakkab töötamast. Saad hiljem uuesti kutsuda.",
-    "revokeConfirm": "Tühista"
+    "revokeConfirm": "Tühista",
+    "sortBy": "Järjesta: {sort}",
+    "sort": {
+      "grade": "Hinne",
+      "date": "Kuupäev"
+    }
   },
   "interviews": {
     "title": "Intervjuud",
