@@ -27,7 +27,7 @@ Turn a job description or a learning goal into a structured practice path: revie
 **For companies**
 
 - Company names are unique across prepza, ignoring case.
-- Generate an interview from a job description and set how many questions each topic asks.
+- Generate an interview from a job description and set how many questions each topic asks: 10 by default, drawn from the topic's 70.
 - Invite candidates by email, resend an invite, or revoke one the candidate hasn't used yet. The invite page tells candidates what to expect before they start.
 - Each candidate gets a random subset of each topic, with their own question and option order, in a single pass. Answers can't be changed, and unanswered questions count as wrong.
 - Every interview is **timed**: each question gets its own countdown (60 seconds by default, adjustable per interview), and a question still open when it reaches zero counts as wrong. The server enforces it, so closing the tab doesn't stop the clock. An interview the candidate leaves finishes by itself once its total time, plus 10%, has passed; unanswered questions count as wrong.
@@ -142,6 +142,8 @@ cp .env.example .env
 docker compose up --build
 ```
 
+The other values work locally as they are: `POSTGRES_PASSWORD` is the local Postgres password, `SERVICE_SECRET` signs calls between services (at least 32 characters), and `FIREBASE_PROJECT_ID` is a `demo-` project, which lets the services (`FIREBASE_AUTH_EMULATOR_HOST`) and the browser (`NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL`) use the Auth emulator.
+
 | URL | What |
 |---|---|
 | http://localhost:8090 | The app |
@@ -171,11 +173,11 @@ docker build --target prod -t prepza-frontend \
 
 Run each API's migrations (`uv run --no-sync alembic upgrade head`; every API but the frontend has them, notifications included) once before it starts, and never set `FIREBASE_AUTH_EMULATOR_HOST` in production.
 
-Errors go to Sentry when `SENTRY_DSN` (backend services) and `NEXT_PUBLIC_SENTRY_DSN` (frontend, a build argument) are set; empty, nothing is sent. Events carry user ids only, with emails scrubbed. To see the original code in frontend stack traces, also pass `SENTRY_AUTH_TOKEN`, `SENTRY_ORG` and `SENTRY_PROJECT` to the frontend build.
+Errors go to Sentry when `SENTRY_DSN` (backend services) and `NEXT_PUBLIC_SENTRY_DSN` (frontend, a build argument) are set; empty, nothing is sent. `SENTRY_ENVIRONMENT` names the environment (`development` locally) and `SENTRY_TRACES_SAMPLE_RATE` (default 0.1) the share of requests traced. Events carry user ids only, with emails scrubbed. To see the original code in frontend stack traces, also pass `SENTRY_AUTH_TOKEN`, `SENTRY_ORG` and `SENTRY_PROJECT` to the frontend build.
 
 ### Generation settings
 
-These settings in `.env` shape every generation:
+These settings in `.env` shape every generation (Terraform passes none of them to Google Cloud, so production runs on the defaults below; see [infra/README.md](infra/README.md#notes)):
 
 - `MAX_TOPICS` and `MAX_SUBTOPICS` (default 10 each): main topics a kit or an interview has, and subtopics per topic; every subtopic is at least one model call. The review page follows them.
 - `QUESTIONS_PER_TOPIC` (default 70): questions per topic. Topics never grow after generation, so a certificate always means the same set of questions.
@@ -193,9 +195,10 @@ These settings in `.env` shape every generation:
   | Tutor (a paid turn is 2 credits) | `TUTOR_MODEL` (`gpt-6.1-sol`) | `TUTOR_REASONING_EFFORT` (`low`) |
   | FAQ help chat | `HELP_MODEL` (`gpt-6-luna`) | `HELP_REASONING_EFFORT` (`none`, which also lets it take a temperature) |
 
-  In testing, `gpt-6.1-sol` at low got every complex tutor follow-up on hard questions right, where `gpt-6-luna` got some wrong; see [evals/README.md](evals/README.md).
+  In testing ([evals/README.md](evals/README.md)), `gpt-6-luna` at high wrote basic and medium questions as accurately as `gpt-6.1-sol` at a fraction of the price, but its hard questions came out too easy, so hard kits and interviews stay on Sol. As a tutor, Luna got some follow-ups wrong at every level, so the tutor stays on Sol; the verifier did as well at low as at medium and stays at medium.
+- `LANGSMITH_TRACING`, `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT` (off by default) trace generation and chat calls to LangSmith.
 
-Per-user rate limits (`GENERATION_LIMIT`, `LLM_LIMIT`) cap how much a single account can generate and chat. `DAILY_GENERATION_LIMIT` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off. Invite emails are limited per user (`EMAIL_HOURLY_LIMIT`, `EMAIL_DAILY_LIMIT`) and per address (`EMAIL_RECIPIENT_DAILY_LIMIT`).
+Per-user rate limits cap how much a single account can generate (`GENERATION_LIMIT`, 20 per `GENERATION_WINDOW_SECONDS`, a day) and chat (`LLM_LIMIT`, 400 per `LLM_WINDOW_SECONDS`, an hour); 0 turns one off. `DAILY_GENERATION_LIMIT` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off. Invite emails are limited per user (`EMAIL_HOURLY_LIMIT`, `EMAIL_DAILY_LIMIT`) and per address (`EMAIL_RECIPIENT_DAILY_LIMIT`).
 
 ### Payments
 
@@ -213,6 +216,8 @@ Share and candidate invites are sent by the `notifications` service, as HTML wit
 1. Verify your domain at resend.com/domains.
 2. In `.env`, set `RESEND_API_KEY` (a sending-only key is enough) and `MAIL_FROM` with an address on that domain, for example `prepza. <no-reply@yourdomain.com>`.
 3. Restart the service: it reads `.env` only when it starts.
+
+`SITE_URL` is the site address that links in emails point to. Without `RESEND_API_KEY`, emails go to `SMTP_HOST` and `SMTP_PORT`, Mailpit locally.
 
 A failed send answers Pub/Sub's push with an error, so Pub/Sub retries it and, after the subscription's maximum attempts, moves it to the dead-letter topic; the error from Resend is in the logs. Retries never send an email twice.
 
