@@ -591,101 +591,105 @@
       "title": "Trzy kroki do gotowości",
       "paste": {
         "title": "Wklej lub opisz",
-        "text": "Ogłoszenie o pracę, program nauki albo kilka słów o tym, czego chcesz się nauczyć."
+        "text": "Ogłoszenie o pracę, program nauczania albo umiejętności i technologie, które chcesz opanować."
       },
       "review": {
         "title": "Sprawdź plan",
-        "text": "Agenci AI wyłapują to, co ważne, i proponują tematy. Zostaw je, zmień nazwę albo je zmodyfikuj."
+        "text": "Agenci AI wyłapują to, co ważne, i proponują tematy.\nZostaw je, zmień ich nazwy lub je zmodyfikuj."
       },
       "practice": {
         "title": "Ćwicz, aż poczujesz się pewnie",
-        "text": "Każdy temat dostaje własną bazę pytań. Ćwicz w rundach i patrz, jak rosną postępy."
+        "text": "Każdy temat dostaje własne pytania.\nĆwicz w sesjach i patrz, jak rosną Twoje postępy."
       }
     },
     "control": {
       "title": "Ty decydujesz, czego się uczysz",
-      "text": "Nic nie powstaje, dopóki nie zaakceptujesz planu. Odznacz to, co już umiesz, zmień nazwę tematu, edytuj podtematy albo opisz większe zmiany własnymi słowami.",
+      "text": "Żadne pytania nie powstają, dopóki nie zatwierdzisz tematów. Odznacz to, co już umiesz, zmień nazwę tematu, edytuj podtematy albo po prostu powiedz AI, co zmienić, a ono zajmie się resztą.",
       "topics": {
         "design": "Projektowanie systemów",
-        "sql": "SQL i indeksy",
-        "behavior": "Pytania behawioralne",
-        "basics": "Podstawy programowania"
+        "sql": "Content marketing",
+        "behavior": "Zarządzanie czasem",
+        "basics": "Kierowanie zespołem"
       },
-      "change": "Dodaj więcej o cache",
+      "change": "Dodaj temat o reklamach na YouTube",
       "subtopics": {
-        "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "design": ["Skalowalność", "Cache", "Równoważenie obciążenia"],
+        "sql": ["Badanie odbiorców", "Podstawy SEO", "Mierzenie wyników"],
         "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
+          "Ustalanie priorytetów",
+          "Planowanie tygodnia",
+          "Unikanie rozpraszaczy"
         ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "basics": ["Udzielanie feedbacku", "Delegowanie", "Motywowanie ludzi"]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "Kampanie e-mailowe",
+      "newTopic": "Reklamy na YouTube",
+      "newSubtopics": [
+        "Formaty reklam",
+        "Targetowanie odbiorców",
+        "Mierzenie wyświetleń"
+      ]
     },
     "gaps": {
       "title": "Ćwiczenia, które znajdują luki",
-      "text": "Każda runda zaczyna się od pytań, na które jeszcze nie odpowiedziałeś, a potem wraca do tych, w których się pomyliłeś. Twój czas idzie tam, gdzie jest najbardziej potrzebny.",
+      "text": "Każda sesja zadaje ponownie wszystkie pytania z tematu, zaczynając od tych, w których ostatnio się pomyliłeś. Porównuj sesje i patrz, jak luki znikają.",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
+          "question": "Który wskaźnik pokazuje, kto obejrzał reklamę do końca?",
+          "wrong": "Współczynnik klikalności",
+          "right": "Współczynnik obejrzeń"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
+          "question": "Co przede wszystkim zmniejsza cache?",
+          "wrong": "Koszty przechowywania",
+          "right": "Czas odpowiedzi"
         }
       }
     },
     "tutor": {
-      "title": "Korepetytor do każdego pytania",
-      "text": "Po każdej odpowiedzi od razu widzisz poprawną opcję. Nie wiesz, dlaczego jest poprawna? Zapytaj korepetytora AI i zgłębiaj temat, ile chcesz.",
-      "question": "Który indeks pomoże zapytaniu filtrującemu po dacie?",
+      "title": "Tutor do każdego pytania",
+      "text": "Po każdej odpowiedzi od razu widzisz poprawną opcję. Nie wiesz, dlaczego jest poprawna? Zapytaj tutora AI i zgłębiaj temat, ile chcesz.",
+      "question": "Klient jest zdenerwowany opóźnioną dostawą. Co robisz najpierw?",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "Wyjaśniam przyczynę opóźnienia",
+        "second": "Przyznaję problem i przepraszam",
+        "third": "Od razu proponuję rabat",
+        "fourth": "Przekazuję sprawę kierownikowi"
       },
-      "ask": "Dlaczego nie indeks haszujący?",
-      "answer": "Indeks haszujący znajduje tylko dokładne wartości. Filtr po dacie szuka zakresu, a B-tree przechowuje daty w kolejności."
+      "ask": "Czemu nie zacząć od wyjaśnienia?",
+      "answer": "Najpierw przyznaj problem: ludzie słuchają wyjaśnień, gdy czują się wysłuchani."
     },
     "proof": {
       "title": "Wiedz, kiedy jesteś gotowy",
       "text": "Każdy temat ma pasek postępu do swojego certyfikatu. Zdobądź go, a temat liczy się jako opanowany.",
-      "again": "Start again"
+      "again": "Zacznij od nowa"
     },
     "quality": {
       "title": "Pytania, które same stają się lepsze",
-      "text": "Każde pytanie ma jedną poprawną opcję i trzy wiarygodne błędne. Oceny, zgłoszenia i odpowiedzi wskazują słabe pytania, a weryfikator poprawia je lub wymienia w tle.",
+      "text": "Polubienia, niepolubienia i zgłoszenia wskazują słabe pytania. Weryfikator AI automatycznie je poprawia lub wymienia, a właściciele zestawów mogą sami wygenerować ponownie dowolne pytanie.",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "Co przyspiesza indeks w bazie danych?",
+        "weak": "Który język programowania jest najlepszy?",
+        "better": "Który język jest najczęściej używany we frontendzie?"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "To zależy od projektu, więc nie ma jednej poprawnej odpowiedzi.",
+      "list": "Pytania z tematu"
     },
     "share": {
       "title": "Udostępnij lub opublikuj",
-      "text": "Wyślij zestaw prywatnie znajomym lub współpracownikom e-mailem albo opublikuj go w publicznej bibliotece dla wszystkich, którzy przygotowują się do tego samego.",
-      "private": "Udostępnione prywatnie",
-      "public": "W publicznej bibliotece",
+      "text": "Zaproś znajomych lub współpracowników e-mailem, by ćwiczyli z Twoim zestawem, albo opublikuj go w publicznej bibliotece dla wszystkich, którzy przygotowują się do tego samego.",
+      "private": "Udostępnij prywatnie",
+      "public": "Udostępnij publicznie",
       "browse": "Przeglądaj bibliotekę"
     },
     "companies": {
       "title": "Rekrutujesz? Sprawdzaj kandydatów uczciwie",
-      "text": "Zamień ogłoszenie o pracę w rozmowę z limitem czasu i zaproś kandydatów e-mailem.",
+      "text": "Zamień ogłoszenie o pracę w rozmowę z limitem czasu i zaproś kandydatów, by ich ocenić.",
       "points": {
-        "own": "Każdy kandydat dostaje własne pytania, we własnej kolejności.",
-        "timed": "Każde pytanie ma własne odliczanie, pilnowane przez serwer.",
-        "flags": "Raporty oznaczają pośpieszne odpowiedzi, opuszczanie strony i próby kopiowania.",
-        "private": "Kandydaci nigdy nie widzą swojego wyniku ani tego, które odpowiedzi były poprawne."
+        "own": "Unikalne pytania dla każdego kandydata",
+        "timed": "Odliczanie przy każdym pytaniu",
+        "flags": "Flagi za pośpiech, wyjście ze strony i kopiowanie",
+        "private": "Kandydaci nie widzą swoich wyników"
       },
       "candidate": "Kandydat",
       "score": "Wynik",
@@ -694,24 +698,24 @@
       "start": "Zacznij rekrutować"
     },
     "languages": {
-      "title": "W twoim języku",
-      "text": "Strona i wszystko, co tworzy, działają w {count} językach, także od prawej do lewej. Wklej ogłoszenie w jednym języku i ćwicz w innym."
+      "title": "W Twoim języku",
+      "text": "Korzystaj z prepza w dowolnym z {count} języków. Wklej ogłoszenie w jednym języku i ćwicz w innym."
     },
     "pricing": {
       "title": "Płać tylko za to, co działa",
-      "text": "Bez subskrypcji i planów. Doładuj, kiedy potrzebujesz, i wydawaj kredyty tylko na to, z czego korzystasz.",
+      "text": "Bez subskrypcji i planów. Doładuj, kiedy potrzebujesz: kredyty nie wygasają, a to, co się nie uda, nic nie kosztuje.",
       "see": "Zobacz cennik",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "Na Twoje zestawy i tutora AI.",
+      "learner": "Kredyty ucznia"
     },
     "faq": {
       "title": "Masz jeszcze pytania?",
-      "text": "Odpowiedzi o cenach, certyfikatach, prywatności i rekrutacji.",
-      "read": "przeczytaj częste pytania"
+      "text": "Znajdź odpowiedzi w częstych pytaniach albo zapytaj naszego asystenta AI.",
+      "read": "przejdź do częstych pytań"
     },
     "ready": {
-      "title": "Gotowy, by się przygotować?",
+      "title": "Gotowy na przygotowania?",
       "start": "Zacznij teraz"
     }
   },
@@ -734,7 +738,7 @@
     "messagePlaceholder": "Wpisz tutaj swoją wiadomość…",
     "send": "Wyślij",
     "thanks": "Dziękujemy!",
-    "sent": "Wiadomość została wysłana. Odpowiemy na {email}.",
+    "sent": "Twoja wiadomość jest w drodze. Odpowiemy na {email}.",
     "failed": "Nie udało się wysłać wiadomości. Spróbuj ponownie."
   }
 }

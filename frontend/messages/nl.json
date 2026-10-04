@@ -591,101 +591,101 @@
       "title": "In drie stappen klaar",
       "paste": {
         "title": "Plak of beschrijf",
-        "text": "Een vacaturetekst, een lesprogramma of een paar woorden over wat je wilt leren."
+        "text": "Een vacaturetekst, een lesprogramma of de vaardigheden en technologieën die je wilt leren."
       },
       "review": {
         "title": "Bekijk het plan",
-        "text": "AI-agents halen eruit wat telt en stellen onderwerpen voor. Houd ze, hernoem ze of pas ze aan."
+        "text": "AI-agents halen eruit wat telt en stellen onderwerpen voor.\nHoud ze, hernoem ze of pas ze aan."
       },
       "practice": {
         "title": "Oefen tot je zeker bent",
-        "text": "Elk onderwerp krijgt een eigen vragenbank. Oefen in rondes en zie je voortgang groeien."
+        "text": "Elk onderwerp krijgt eigen vragen.\nOefen in rondes en zie je voortgang groeien."
       }
     },
     "control": {
       "title": "Jij bepaalt wat je leert",
-      "text": "Er wordt niets gemaakt tot je het eens bent met het plan. Vink uit wat je al weet, hernoem een onderwerp, bewerk de subonderwerpen of beschrijf grotere wijzigingen in je eigen woorden.",
+      "text": "Er worden geen vragen geschreven tot je de onderwerpen goedkeurt. Vink uit wat je al weet, hernoem een onderwerp, bewerk de subonderwerpen of vertel de AI gewoon wat er anders moet en laat hem de rest doen.",
       "topics": {
         "design": "Systeemontwerp",
-        "sql": "SQL en indexen",
-        "behavior": "Gedragsvragen",
-        "basics": "Basis van programmeren"
+        "sql": "Contentmarketing",
+        "behavior": "Timemanagement",
+        "basics": "Teamleiderschap"
       },
-      "change": "Meer over caching toevoegen",
+      "change": "Voeg een onderwerp over YouTube-advertenties toe",
       "subtopics": {
-        "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
-        "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
-        ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "design": ["Schaalbaarheid", "Caching", "Load balancing"],
+        "sql": ["Doelgroeponderzoek", "SEO-basis", "Resultaten meten"],
+        "behavior": ["Prioriteren", "De week plannen", "Afleiding vermijden"],
+        "basics": ["Feedback geven", "Delegeren", "Mensen motiveren"]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "E-mailcampagnes",
+      "newTopic": "YouTube-advertenties",
+      "newSubtopics": [
+        "Advertentievormen",
+        "Doelgroeptargeting",
+        "Weergaven meten"
+      ]
     },
     "gaps": {
       "title": "Oefenen dat je zwakke plekken vindt",
-      "text": "Elke ronde begint met vragen die je nog niet hebt beantwoord en brengt daarna de vragen terug die je fout had. Je tijd gaat naar waar het telt.",
+      "text": "Elke ronde stelt alle vragen van het onderwerp opnieuw, te beginnen met de vragen die je de vorige keer fout had. Vergelijk rondes en zie je zwakke plekken verdwijnen.",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
+          "question": "Welke metriek laat zien wie een advertentie tot het eind bekeek?",
+          "wrong": "Klikfrequentie",
+          "right": "Voltooiingspercentage"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
+          "question": "Wat vermindert een cache vooral?",
+          "wrong": "Opslagkosten",
+          "right": "Responstijd"
         }
       }
     },
     "tutor": {
       "title": "Een tutor voor elke vraag",
       "text": "Na elk antwoord zie je meteen de juiste optie. Niet zeker waarom die klopt? Vraag het de AI-tutor en ga zo diep als je wilt.",
-      "question": "Welke index helpt een query die op datum filtert?",
+      "question": "Een klant is boos over een te late levering. Wat doe je eerst?",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "Uitleggen waarom het laat is",
+        "second": "Het probleem erkennen en sorry zeggen",
+        "third": "Meteen korting aanbieden",
+        "fourth": "De zaak doorgeven aan een manager"
       },
-      "ask": "Waarom niet de hash-index?",
-      "answer": "Een hash-index vindt alleen exacte waarden. Een datumfilter zoekt een bereik, en een B-tree houdt datums op volgorde."
+      "ask": "Waarom niet eerst uitleggen?",
+      "answer": "Eerst erkennen: mensen luisteren pas naar redenen als ze zich gehoord voelen."
     },
     "proof": {
       "title": "Weet wanneer je klaar bent",
       "text": "Elk onderwerp heeft een voortgangsbalk naar zijn certificaat. Haal het, en het onderwerp telt als beheerst.",
-      "again": "Start again"
+      "again": "Opnieuw beginnen"
     },
     "quality": {
       "title": "Vragen die vanzelf beter worden",
-      "text": "Elke vraag heeft één juiste optie en drie geloofwaardige foute. Stemmen, meldingen en antwoorden wijzen zwakke vragen aan, en een controleur verbetert of vervangt ze op de achtergrond.",
+      "text": "Likes, dislikes en meldingen brengen zwakke vragen aan het licht. Een AI-controleur verbetert of vervangt ze automatisch, en eigenaars van een kit kunnen elke vraag zelf opnieuw genereren.",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "Wat versnelt een database-index?",
+        "weak": "Wat is de beste programmeertaal?",
+        "better": "Welke taal wordt het meest gebruikt voor frontendontwikkeling?"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "Het hangt van het project af, dus er is niet één juist antwoord.",
+      "list": "Vragen van het onderwerp"
     },
     "share": {
       "title": "Deel of publiceer het",
-      "text": "Stuur een kit privé per e-mail naar vrienden of collega's, of publiceer hem in de openbare bibliotheek voor iedereen die zich op hetzelfde voorbereidt.",
-      "private": "Privé gedeeld",
-      "public": "In de openbare bibliotheek",
+      "text": "Nodig vrienden of collega's per e-mail uit om je kit samen met je te oefenen, of publiceer hem in de openbare bibliotheek voor iedereen die zich op hetzelfde voorbereidt.",
+      "private": "Privé delen",
+      "public": "Openbaar delen",
       "browse": "Ontdek de bibliotheek"
     },
     "companies": {
       "title": "Werven? Test kandidaten eerlijk",
-      "text": "Maak van een vacaturetekst een sollicitatiegesprek met tijdslimiet en nodig kandidaten uit per e-mail.",
+      "text": "Maak van een vacaturetekst een sollicitatiegesprek met tijdslimiet en nodig kandidaten uit om ze te beoordelen.",
       "points": {
-        "own": "Elke kandidaat krijgt eigen vragen, in een eigen volgorde.",
-        "timed": "Elke vraag heeft een eigen afteltimer, bijgehouden door de server.",
-        "flags": "Rapporten markeren overhaaste antwoorden, het verlaten van de pagina en kopieerpogingen.",
-        "private": "Kandidaten zien nooit hun score of welke antwoorden goed waren."
+        "own": "Unieke vragen voor elke kandidaat",
+        "timed": "Een afteltimer bij elke vraag",
+        "flags": "Signalen bij haasten, weggaan of kopiëren",
+        "private": "Scores blijven verborgen voor kandidaten"
       },
       "candidate": "Kandidaat",
       "score": "Score",
@@ -695,20 +695,20 @@
     },
     "languages": {
       "title": "In jouw taal",
-      "text": "De site en alles wat hij maakt werken in {count} talen, ook van rechts naar links. Plak een vacature in de ene taal en oefen in een andere."
+      "text": "Gebruik prepza in een van de {count} talen. Plak een vacaturetekst in de ene taal en oefen in een andere."
     },
     "pricing": {
       "title": "Betaal alleen voor wat werkt",
-      "text": "Geen abonnementen of pakketten. Waardeer op wanneer je wilt en besteed credits alleen aan wat je gebruikt.",
+      "text": "Geen abonnementen of pakketten. Waardeer op wanneer je wilt: credits verlopen nooit en wat mislukt, kost niets.",
       "see": "Bekijk prijzen",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "Voor je kits en de AI-tutor.",
+      "learner": "Persoonlijke credits"
     },
     "faq": {
       "title": "Nog vragen?",
-      "text": "Antwoorden over prijzen, certificaten, privacy en werving.",
-      "read": "lees de veelgestelde vragen"
+      "text": "Vind antwoorden bij de veelgestelde vragen of vraag het onze AI-assistent.",
+      "read": "Naar veelgestelde vragen"
     },
     "ready": {
       "title": "Klaar om je voor te bereiden?",
@@ -727,7 +727,7 @@
   },
   "contact": {
     "title": "Neem contact op",
-    "intro": "Een vraag, een idee, een samenwerking of werkt er iets niet? Schrijf ons en we antwoorden per e-mail.",
+    "intro": "Vragen, ideeën, samenwerking of werkt er iets niet? Schrijf ons en we antwoorden per e-mail.",
     "name": "Naam",
     "email": "E-mail",
     "message": "Bericht",

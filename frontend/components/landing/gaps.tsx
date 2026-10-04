@@ -31,7 +31,8 @@ function Cell({
       >
         {label}
       </p>
-      <p>{text}</p>
+      {/* Some languages' answers are one long word: it breaks rather than leaves the card. */}
+      <p className="wrap-break-word hyphens-auto">{text}</p>
     </div>
   )
 }

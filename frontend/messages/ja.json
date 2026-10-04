@@ -582,104 +582,108 @@
   "landing": {
     "more": "使い方",
     "how": {
-      "title": "準備完了までの3ステップ",
+      "title": "3ステップで準備完了",
       "paste": {
-        "title": "貼り付けるか説明する",
-        "text": "求人票、シラバス、または学びたいことをひと言で。"
+        "title": "貼り付けるか、説明する",
+        "text": "求人票、シラバス、または学びたいスキルや技術。"
       },
       "review": {
         "title": "プランを確認する",
-        "text": "AI エージェントが大事な点を見つけてトピックを提案します。そのまま使うことも、名前を変えたり修正したりすることもできます。"
+        "text": "AI エージェントが大事な点を見つけてトピックを提案します。\nそのまま使うことも、名前を変えたり修正したりすることもできます。"
       },
       "practice": {
-        "title": "自信が持てるまで練習する",
-        "text": "トピックごとに専用の問題集ができます。ラウンドで練習して、進み具合を確かめましょう。"
+        "title": "自信がつくまで練習する",
+        "text": "トピックごとに専用の問題が作られます。\nラウンドで練習して、上達を実感しましょう。"
       }
     },
     "control": {
       "title": "何を学ぶかはあなたが決める",
-      "text": "プランに同意するまで何も作成されません。もう知っていることはチェックを外し、トピック名を変え、サブトピックを編集し、大きな変更は自分の言葉で伝えられます。",
+      "text": "トピックを承認するまで、問題は作成されません。知っていることはチェックを外し、トピック名を変え、サブトピックを編集できます。変更したい内容を AI に伝えれば、あとは任せられます。",
       "topics": {
         "design": "システム設計",
-        "sql": "SQL とインデックス",
-        "behavior": "行動面接の質問",
-        "basics": "プログラミングの基礎"
+        "sql": "コンテンツマーケティング",
+        "behavior": "時間管理",
+        "basics": "チームリーダーシップ"
       },
-      "change": "キャッシュについてもっと追加",
+      "change": "YouTube 広告のトピックを追加して",
       "subtopics": {
-        "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
-        "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
-        ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "design": ["スケーラビリティ", "キャッシュ", "負荷分散"],
+        "sql": ["オーディエンス調査", "SEO の基本", "効果測定"],
+        "behavior": ["優先順位づけ", "1週間の計画", "集中を妨げるものを減らす"],
+        "basics": [
+          "フィードバックの伝え方",
+          "権限委譲",
+          "モチベーションを高める"
+        ]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "メールキャンペーン",
+      "newTopic": "YouTube 広告",
+      "newSubtopics": [
+        "広告フォーマット",
+        "オーディエンスのターゲティング",
+        "視聴数の測定"
+      ]
     },
     "gaps": {
       "title": "弱点を見つける練習",
-      "text": "各ラウンドはまだ答えていない問題から始まり、そのあと間違えた問題を出し直します。時間を一番大事なところに使えます。",
+      "text": "ラウンドごとにトピックの全問題をもう一度出題し、前回間違えた問題から始めます。ラウンドを比べて、弱点が埋まっていくのを確かめましょう。",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
+          "question": "広告を最後まで見た人がわかる指標は？",
+          "wrong": "クリック率",
+          "right": "視聴完了率"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
+          "question": "キャッシュが主に減らすものは？",
+          "wrong": "ストレージ費用",
+          "right": "応答時間"
         }
       }
     },
     "tutor": {
       "title": "すべての問題にチューター",
-      "text": "答えるたびに、正しい選択肢がすぐにわかります。なぜ正しいのかわからなければ、AI チューターに聞いて、必要なだけ深く学べます。",
-      "question": "日付で絞り込むクエリに役立つインデックスは？",
+      "text": "答えるとすぐに正解がわかります。なぜ正しいのか気になったら、AI チューターに聞いて、納得いくまで深く学べます。",
+      "question": "配送の遅れにお客様が怒っています。まず何をしますか？",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "遅れた理由を説明する",
+        "second": "問題を認めて謝罪する",
+        "third": "すぐに割引を提案する",
+        "fourth": "上司に対応を引き継ぐ"
       },
-      "ask": "なぜハッシュインデックスではだめ？",
-      "answer": "ハッシュインデックスは完全一致しか探せません。日付の絞り込みは範囲を求めるので、日付を順序どおりに保つ B-tree が向いています。"
+      "ask": "先に説明するのはなぜだめ？",
+      "answer": "まず受け止めること。人は気持ちをわかってもらえたと感じて、はじめて理由に耳を傾けます。"
     },
     "proof": {
       "title": "準備ができたかがわかる",
       "text": "トピックごとに修了証までの進捗バーがあります。修了証を取れば、そのトピックは習得済みになります。",
-      "again": "Start again"
+      "again": "やり直す"
     },
     "quality": {
       "title": "自然に良くなる問題",
-      "text": "どの問題にも正解が1つと、もっともらしい不正解が3つあります。評価、報告、回答から弱い問題が見つかり、検証役がバックグラウンドで修正または差し替えます。",
+      "text": "高評価、低評価、報告から弱い問題が見つかります。AI の検証役が自動で修正または差し替え、キットのオーナーはどの問題も自分で作り直せます。",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "データベースのインデックスで速くなるのは？",
+        "weak": "最高のプログラミング言語は？",
+        "better": "フロントエンド開発で最も広く使われている言語は？"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "プロジェクトによるので、正解はひとつに決まりません。",
+      "list": "トピックの問題"
     },
     "share": {
       "title": "共有も公開も",
-      "text": "キットをメールで友人や同僚に非公開で送ることも、同じ目標で準備するみんなのために公開ライブラリに載せることもできます。",
+      "text": "友人や同僚をメールで招待してキットを一緒に練習したり、同じ目標に向けて準備するみんなのために公開ライブラリに載せたりできます。",
       "private": "非公開で共有",
-      "public": "公開ライブラリに掲載",
+      "public": "公開で共有",
       "browse": "ライブラリを見る"
     },
     "companies": {
       "title": "採用中？候補者を公平に評価",
-      "text": "求人票を制限時間つきの面接に変えて、候補者をメールで招待できます。",
+      "text": "求人票を制限時間つきの面接に変え、候補者を招待して評価できます。",
       "points": {
-        "own": "候補者ごとに、問題も順番も異なります。",
-        "timed": "問題ごとにカウントダウンがあり、サーバーが時間を管理します。",
-        "flags": "スコアカードは、急ぎすぎた回答、ページからの離脱、コピーの試みを示します。",
-        "private": "候補者には自分のスコアも、どの回答が正しかったかも表示されません。"
+        "own": "候補者ごとに異なる問題",
+        "timed": "すべての問題にカウントダウン",
+        "flags": "急ぎすぎ・離脱・コピーを検知",
+        "private": "スコアは候補者に非公開"
       },
       "candidate": "候補者",
       "score": "スコア",
@@ -689,20 +693,20 @@
     },
     "languages": {
       "title": "あなたの言語で",
-      "text": "サイトと生成されるすべてのものが、右から左に書く言語も含めて {count} の言語に対応しています。ある言語で求人票を貼り付け、別の言語で練習できます。"
+      "text": "prepza は {count} の言語で使えます。求人票をある言語で貼り付けて、別の言語で練習できます。"
     },
     "pricing": {
-      "title": "うまくいったものだけにお支払い",
-      "text": "サブスクリプションもプランもありません。必要なときにチャージして、使った分だけクレジットを使います。",
+      "title": "うまくいった分だけお支払い",
+      "text": "サブスクリプションもプランもありません。必要なときにチャージするだけ。クレジットに有効期限はなく、失敗した処理には料金がかかりません。",
       "see": "料金を見る",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "準備キットと AI チューターに。",
+      "learner": "学習者クレジット"
     },
     "faq": {
       "title": "ほかに質問はありますか？",
-      "text": "料金、修了証、プライバシー、採用についての答え。",
-      "read": "よくある質問を読む"
+      "text": "よくある質問で答えを探すか、AI アシスタントに聞いてください。",
+      "read": "よくある質問へ"
     },
     "ready": {
       "title": "準備を始めますか？",
@@ -721,13 +725,13 @@
   },
   "contact": {
     "title": "お問い合わせ",
-    "intro": "ご質問やご意見、提携のご相談、不具合などがあればお送りください。メールでお返事します。",
+    "intro": "ご質問、アイデア、提携のご相談、不具合など、お気軽にお送りください。メールでお返事します。",
     "name": "お名前",
     "email": "メールアドレス",
     "message": "メッセージ",
-    "messagePlaceholder": "ここにメッセージを入力してください…",
+    "messagePlaceholder": "ここにメッセージを入力…",
     "send": "送信",
-    "thanks": "ありがとうございます。",
+    "thanks": "ありがとうございます！",
     "sent": "メッセージを送信しました。{email} 宛てにお返事します。",
     "failed": "メッセージを送信できませんでした。もう一度お試しください。"
   }

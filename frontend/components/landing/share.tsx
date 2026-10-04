@@ -74,7 +74,7 @@ export async function ShareSection() {
     <LandingSection title={t("title")} text={t("text")} extra={browse}>
       <Stage wide>
         <div className="grid gap-8 md:grid-cols-2 md:gap-5">
-          <div className="space-y-4">
+          <div className="min-w-0 space-y-4">
             <VisibilitySwitch on={false} label={t("private")} />
             <div className={CARD}>
               <p className="text-sm text-muted-foreground">
@@ -87,7 +87,7 @@ export async function ShareSection() {
               />
             </div>
           </div>
-          <div className="space-y-4">
+          <div className="min-w-0 space-y-4">
             <VisibilitySwitch on label={t("public")} />
             <div className={CARD}>
               <p className="text-sm text-muted-foreground">{share("public")}</p>

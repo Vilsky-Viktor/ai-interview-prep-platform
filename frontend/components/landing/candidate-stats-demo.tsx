@@ -58,13 +58,13 @@ export function CandidateStatsDemo({
 
   return (
     <>
-      <span className="w-20 text-center">
+      <span className="w-20 text-center sm:w-24">
         <span className={number}>{progress}%</span>
         <span className="block text-sm text-muted-foreground">
           {labels.progress}
         </span>
       </span>
-      <span className="w-20 text-center">
+      <span className="w-20 text-center sm:w-24">
         <span className={number}>{grade}%</span>
         <span className="block text-sm text-muted-foreground">
           {labels.grade}

@@ -94,7 +94,7 @@ export async function CompaniesSection() {
                   />
                 ) : (
                   <>
-                    <span className="w-20 text-center">
+                    <span className="w-20 text-center sm:w-24">
                       <span className="block text-2xl font-light tabular-nums">
                         {progress}%
                       </span>
@@ -102,7 +102,7 @@ export async function CompaniesSection() {
                         {candidates("progress")}
                       </span>
                     </span>
-                    <span className="w-20 text-center">
+                    <span className="w-20 text-center sm:w-24">
                       <span
                         className={
                           grade == null

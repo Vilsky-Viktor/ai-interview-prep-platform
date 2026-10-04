@@ -591,101 +591,109 @@
       "title": "Hazır olmak için üç adım",
       "paste": {
         "title": "Yapıştırın veya anlatın",
-        "text": "Bir iş ilanı, bir müfredat ya da öğrenmek istediğiniz şey hakkında birkaç kelime."
+        "text": "Bir iş ilanı, bir müfredat ya da öğrenmek istediğiniz beceriler ve teknolojiler."
       },
       "review": {
         "title": "Planı inceleyin",
-        "text": "Yapay zekâ ajanları önemli olanı bulur ve konular önerir. Onları tutun, yeniden adlandırın veya değiştirin."
+        "text": "Yapay zekâ ajanları önemli olanı seçer ve konular önerir.\nKonuları tutun, yeniden adlandırın veya değiştirin."
       },
       "practice": {
         "title": "Kendinize güvenene kadar çalışın",
-        "text": "Her konu kendi soru bankasını alır. Turlar hâlinde çalışın ve ilerlemenizin büyüdüğünü görün."
+        "text": "Her konunun kendi soruları olur.\nTurlar hâlinde çalışın ve ilerlemenizi izleyin."
       }
     },
     "control": {
       "title": "Ne çalışacağınıza siz karar verirsiniz",
-      "text": "Plana onay vermeden hiçbir şey oluşturulmaz. Bildiklerinizin işaretini kaldırın, bir konuyu yeniden adlandırın, alt konularını düzenleyin ya da büyük değişiklikleri kendi kelimelerinizle anlatın.",
+      "text": "Konuları onaylamadan hiçbir soru yazılmaz. Bildiklerinizin işaretini kaldırın, bir konuyu yeniden adlandırın, alt konularını düzenleyin ya da yapay zekâya neyi değiştireceğini söyleyin, gerisini o halletsin.",
       "topics": {
         "design": "Sistem tasarımı",
-        "sql": "SQL ve indeksler",
-        "behavior": "Davranışsal sorular",
-        "basics": "Programlamanın temelleri"
+        "sql": "İçerik pazarlaması",
+        "behavior": "Zaman yönetimi",
+        "basics": "Ekip liderliği"
       },
-      "change": "Önbellekleme hakkında daha fazla ekle",
+      "change": "YouTube reklamları hakkında bir konu ekle",
       "subtopics": {
-        "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "design": ["Ölçeklenebilirlik", "Önbellekleme", "Yük dengeleme"],
+        "sql": ["Hedef kitle araştırması", "SEO temelleri", "Sonuçları ölçme"],
         "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
+          "Önceliklendirme",
+          "Haftayı planlama",
+          "Dikkat dağıtıcılardan kaçınma"
         ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "basics": [
+          "Geri bildirim verme",
+          "Görev devretme",
+          "İnsanları motive etme"
+        ]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "E-posta kampanyaları",
+      "newTopic": "YouTube reklamları",
+      "newSubtopics": [
+        "Reklam biçimleri",
+        "Hedef kitle belirleme",
+        "İzlenmeleri ölçme"
+      ]
     },
     "gaps": {
       "title": "Eksiklerinizi bulan çalışma",
-      "text": "Her tur henüz yanıtlamadığınız sorularla başlar, ardından yanlış yaptıklarınızı geri getirir. Zamanınız en önemli yere gider.",
+      "text": "Her tur, konunun tüm sorularını yeniden sorar ve geçen sefer yanlış yaptıklarınızla başlar. Turları karşılaştırın ve eksiklerinizin kapandığını görün.",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
+          "question": "Bir reklamı sonuna kadar kimin izlediğini hangi metrik gösterir?",
+          "wrong": "Tıklama oranı",
+          "right": "Tamamlanma oranı"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
+          "question": "Önbellek esas olarak neyi azaltır?",
+          "wrong": "Depolama maliyetini",
+          "right": "Yanıt süresini"
         }
       }
     },
     "tutor": {
       "title": "Her soru için bir eğitmen",
       "text": "Her yanıttan sonra doğru seçeneği hemen görürsünüz. Neden doğru olduğundan emin değil misiniz? Yapay zekâ eğitmenine sorun ve gerektiği kadar derine inin.",
-      "question": "Tarihe göre filtreleyen bir sorguya hangi indeks yardımcı olur?",
+      "question": "Bir müşteri geciken teslimat yüzünden üzgün. İlk olarak ne yaparsınız?",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "Gecikmenin nedenini açıklarım",
+        "second": "Sorunu kabul edip özür dilerim",
+        "third": "Hemen indirim teklif ederim",
+        "fourth": "Konuyu yöneticiye aktarırım"
       },
-      "ask": "Neden hash indeksi değil?",
-      "answer": "Hash indeksi yalnızca tam değerleri bulur. Tarih filtresi bir aralık ister ve B-tree tarihleri sıralı tutar."
+      "ask": "Neden önce açıklama yapmıyoruz?",
+      "answer": "Önce sorunu kabul edin: insanlar dinlendiklerini hissedince nedenleri dinler."
     },
     "proof": {
       "title": "Ne zaman hazır olduğunuzu bilin",
       "text": "Her konunun sertifikasına giden bir ilerleme çubuğu vardır. Sertifikayı kazanın, konu ustalaşılmış sayılsın.",
-      "again": "Start again"
+      "again": "Yeniden başla"
     },
     "quality": {
       "title": "Kendi kendine iyileşen sorular",
-      "text": "Her sorunun bir doğru ve üç inandırıcı yanlış seçeneği vardır. Oylar, bildirimler ve yanıtlar zayıf soruları gösterir; bir doğrulayıcı da onları arka planda düzeltir veya değiştirir.",
+      "text": "Beğeniler, beğenmemeler ve bildirimler zayıf soruları ortaya çıkarır. Yapay zekâ doğrulayıcı bunları otomatik olarak düzeltir veya değiştirir; set sahipleri de istedikleri soruyu kendileri yeniden oluşturabilir.",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "Veritabanı indeksi neyi hızlandırır?",
+        "weak": "En iyi programlama dili hangisi?",
+        "better": "Ön yüz geliştirmede en yaygın kullanılan dil hangisi?"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "Projeye göre değişir, yani tek bir doğru cevap yok.",
+      "list": "Konu soruları"
     },
     "share": {
       "title": "Paylaşın veya yayımlayın",
-      "text": "Bir seti arkadaşlarınıza veya iş arkadaşlarınıza e-postayla özel olarak gönderin ya da aynı şeye hazırlanan herkes için herkese açık kitaplıkta yayımlayın.",
-      "private": "Özel olarak paylaşıldı",
-      "public": "Herkese açık kitaplıkta",
+      "text": "Arkadaşlarınızı veya iş arkadaşlarınızı setinizle birlikte çalışmaları için e-postayla davet edin ya da aynı şeye hazırlanan herkes için herkese açık kitaplıkta yayımlayın.",
+      "private": "Özel paylaşın",
+      "public": "Herkese açık paylaşın",
       "browse": "Kitaplığı keşfedin"
     },
     "companies": {
       "title": "İşe alım mı yapıyorsunuz? Adayları adil ölçün",
-      "text": "Bir iş ilanını süreli bir mülakata dönüştürün ve adayları e-postayla davet edin.",
+      "text": "Bir iş ilanını süreli bir mülakata dönüştürün ve adayları değerlendirmek için davet edin.",
       "points": {
-        "own": "Her aday kendi sorularını, kendi sırasıyla alır.",
-        "timed": "Her sorunun sunucunun tuttuğu kendi geri sayımı vardır.",
-        "flags": "Raporlar aceleyle verilen yanıtları, sayfadan ayrılmaları ve kopyalama girişimlerini işaretler.",
-        "private": "Adaylar puanlarını veya hangi yanıtların doğru olduğunu asla görmez."
+        "own": "Her adaya özel sorular",
+        "timed": "Her soruda geri sayım",
+        "flags": "Acele, sayfadan ayrılma ve kopyalama işaretleri",
+        "private": "Puanlar adaylardan gizli kalır"
       },
       "candidate": "Aday",
       "score": "Puan",
@@ -695,20 +703,20 @@
     },
     "languages": {
       "title": "Kendi dilinizde",
-      "text": "Site ve oluşturduğu her şey, sağdan sola yazılanlar dahil {count} dilde çalışır. Bir ilanı bir dilde yapıştırın, başka bir dilde çalışın."
+      "text": "prepza'yı {count} dilin herhangi birinde kullanın. Bir iş ilanını bir dilde yapıştırın, başka bir dilde çalışın."
     },
     "pricing": {
       "title": "Yalnızca işe yarayana ödeyin",
-      "text": "Abonelik veya paket yok. İhtiyacınız olduğunda bakiye yükleyin ve krediyi yalnızca kullandığınız şeye harcayın.",
+      "text": "Abonelik veya paket yok. İhtiyacınız olduğunda yükleyin: krediler hiç sona ermez ve başarısız olan hiçbir şey ücretlendirilmez.",
       "see": "Fiyatları görün",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "Setleriniz ve yapay zekâ eğitmeni için.",
+      "learner": "Öğrenci kredileri"
     },
     "faq": {
       "title": "Hâlâ sorunuz mu var?",
-      "text": "Fiyatlar, sertifikalar, gizlilik ve işe alım hakkında yanıtlar.",
-      "read": "SSS'yi okuyun"
+      "text": "Yanıtları SSS'de bulun veya yapay zekâ asistanımıza sorun.",
+      "read": "SSS'ye git"
     },
     "ready": {
       "title": "Hazırlanmaya hazır mısınız?",
@@ -727,14 +735,14 @@
   },
   "contact": {
     "title": "Bize ulaşın",
-    "intro": "Bir sorunuz, fikriniz, iş birliği teklifiniz mi var ya da bir şey çalışmıyor mu? Bize yazın, e-postayla yanıtlayalım.",
+    "intro": "Bir sorunuz, fikriniz veya iş birliği teklifiniz mi var, ya da bir şey çalışmıyor mu? Bize yazın, size e-postayla yanıt verelim.",
     "name": "Ad",
     "email": "E-posta",
     "message": "Mesaj",
     "messagePlaceholder": "Mesajınızı buraya yazın…",
     "send": "Gönder",
     "thanks": "Teşekkürler!",
-    "sent": "Mesajınız gönderildi. {email} adresine yanıt vereceğiz.",
+    "sent": "Mesajınız yola çıktı. {email} adresine yanıt vereceğiz.",
     "failed": "Mesajınız gönderilemedi. Lütfen tekrar deneyin."
   }
 }

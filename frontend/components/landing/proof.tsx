@@ -6,7 +6,7 @@ import { LandingSection, Stage } from "@/components/landing/section"
 import { buttonVariants } from "@/components/ui/button"
 import { serverFetch } from "@/lib/server-api"
 
-// The picture's topics on a kit page (on phones the bar takes its own line, as there): one with its certificate earned, one under way.
+// The picture's topics on a kit page (on phones the button and the bar take their own lines, as there): one with its certificate earned, one under way.
 const TOPICS = [
   { key: "design", questions: 24, progress: 100, done: true },
   { key: "sql", questions: 18, progress: 64, done: false },
@@ -35,7 +35,7 @@ export async function ProofSection() {
           <ul className="divide-y rounded-2xl border bg-background">
             {TOPICS.map(({ key, questions: count, progress, done }) => (
               <li key={key} className="space-y-4 p-5">
-                <div className="flex items-start justify-between gap-6">
+                <div className="flex flex-col items-start gap-4 sm:flex-row sm:justify-between sm:gap-6">
                   <span className="min-w-0 space-y-1">
                     <span className="block text-xl font-medium">
                       {control(`topics.${key}`)}

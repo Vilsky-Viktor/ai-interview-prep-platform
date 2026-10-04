@@ -580,106 +580,102 @@
     "pricing": "价格"
   },
   "landing": {
-    "more": "如何使用",
+    "more": "如何运作",
     "how": {
       "title": "三步就绪",
       "paste": {
         "title": "粘贴或描述",
-        "text": "一份职位描述、一份教学大纲，或几句话说说你想学什么。"
+        "text": "一份职位描述、一份教学大纲，或你想学的技能和技术。"
       },
       "review": {
         "title": "确认计划",
-        "text": "AI 智能体找出重点并提出主题。你可以保留、重命名或修改。"
+        "text": "AI 智能体找出重点并提出主题。\n你可以保留、重命名或修改。"
       },
       "practice": {
         "title": "练到有信心为止",
-        "text": "每个主题都有自己的题库。按轮次练习，看着进度不断增长。"
+        "text": "每个主题都有专属题目。\n按轮次练习，看着进度不断提升。"
       }
     },
     "control": {
       "title": "学什么由你决定",
-      "text": "在你认可计划之前，不会生成任何内容。取消勾选你已掌握的内容，重命名主题，编辑子主题，或用自己的话描述更大的改动。",
+      "text": "在你确认主题之前，不会生成任何题目。取消勾选已经掌握的内容，重命名主题，编辑子主题，或者直接告诉 AI 要改什么，剩下的交给它。",
       "topics": {
         "design": "系统设计",
-        "sql": "SQL 与索引",
-        "behavior": "行为面试题",
-        "basics": "编程基础"
+        "sql": "内容营销",
+        "behavior": "时间管理",
+        "basics": "团队领导力"
       },
-      "change": "多加一些缓存相关内容",
+      "change": "加一个 YouTube 广告主题",
       "subtopics": {
-        "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
-        "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
-        ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "design": ["可扩展性", "缓存", "负载均衡"],
+        "sql": ["受众调研", "SEO 基础", "效果衡量"],
+        "behavior": ["确定优先级", "规划一周", "避免分心"],
+        "basics": ["给出反馈", "分派任务", "激励团队"]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "邮件营销",
+      "newTopic": "YouTube 广告",
+      "newSubtopics": ["广告格式", "受众定向", "衡量观看量"]
     },
     "gaps": {
       "title": "找出薄弱点的练习",
-      "text": "每一轮都先出你还没答过的题，再把答错的题拿回来。你的时间花在最重要的地方。",
+      "text": "每一轮都会把这个主题的所有题目重新出一遍，并从上次答错的题开始。对比各轮成绩，看着薄弱点逐渐补上。",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
+          "question": "哪个指标显示谁把广告看完了？",
+          "wrong": "点击率",
+          "right": "完整观看率"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
+          "question": "缓存主要能减少什么？",
+          "wrong": "存储成本",
+          "right": "响应时间"
         }
       }
     },
     "tutor": {
       "title": "每道题都有辅导",
       "text": "每次作答后，你会立刻看到正确选项。不明白为什么对？问问 AI 辅导老师，想问多深都可以。",
-      "question": "哪种索引能帮助按日期过滤的查询？",
+      "question": "客户因为发货延迟很不满。你首先该做什么？",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "解释延迟的原因",
+        "second": "承认问题并道歉",
+        "third": "马上提供折扣",
+        "fourth": "把问题转给经理"
       },
-      "ask": "为什么不用哈希索引？",
-      "answer": "哈希索引只能查找精确值。按日期过滤需要范围查询，而 B-tree 会让日期保持有序。"
+      "ask": "为什么不先解释？",
+      "answer": "先表示理解：客户觉得自己被倾听后，才愿意听你解释原因。"
     },
     "proof": {
       "title": "清楚知道自己何时准备好",
       "text": "每个主题都有一条通往证书的进度条。拿到证书，这个主题就算掌握了。",
-      "again": "Start again"
+      "again": "重新开始"
     },
     "quality": {
       "title": "自动变好的题目",
-      "text": "每道题有一个正确选项和三个看似合理的错误选项。评分、举报和作答会暴露质量差的题目，校验器会在后台修正或替换它们。",
+      "text": "赞、踩和举报会暴露质量差的题目。AI 校验器会自动修正或替换它们，学习包的所有者也可以亲自重新生成任何题目。",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "数据库索引能加快什么？",
+        "weak": "哪种编程语言最好？",
+        "better": "前端开发中使用最广泛的是哪种语言？"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "这要看项目，没有唯一的正确答案。",
+      "list": "主题题目"
     },
     "share": {
       "title": "分享或公开",
-      "text": "通过邮件私下把学习包发给朋友或同事，或者把它发布到公开库，让所有为同一目标准备的人都能使用。",
+      "text": "通过邮件邀请朋友或同事和你一起练习学习包，或者把它发布到公开资料库，让所有为同一目标做准备的人都能使用。",
       "private": "私下分享",
-      "public": "已在公开库",
-      "browse": "浏览公开库"
+      "public": "公开分享",
+      "browse": "浏览资料库"
     },
     "companies": {
       "title": "在招聘？公平地考核候选人",
-      "text": "把职位描述变成限时面试，并通过邮件邀请候选人。",
+      "text": "把职位描述变成限时面试，邀请候选人参加并评估他们。",
       "points": {
-        "own": "每位候选人拿到自己的题目，顺序也各不相同。",
-        "timed": "每道题都有自己的倒计时，由服务器计时。",
-        "flags": "评分卡会标记作答过快、离开页面和尝试复制的情况。",
-        "private": "候选人永远看不到自己的分数，也看不到哪些答案正确。"
+        "own": "每位候选人题目各不相同",
+        "timed": "每道题都有倒计时",
+        "flags": "标记作答过快、离开页面或复制",
+        "private": "候选人看不到分数"
       },
       "candidate": "候选人",
       "score": "分数",
@@ -689,20 +685,20 @@
     },
     "languages": {
       "title": "用你的语言",
-      "text": "网站及其生成的所有内容支持 {count} 种语言，包括从右向左书写的语言。用一种语言粘贴职位描述，用另一种语言练习。"
+      "text": "prepza 支持 {count} 种语言。用一种语言粘贴职位描述，用另一种语言练习。"
     },
     "pricing": {
       "title": "只为有效的结果付费",
-      "text": "没有订阅，也没有套餐。需要时充值，点数只花在你用到的地方。",
+      "text": "没有订阅，也没有套餐。需要时再充值：点数永不过期，失败的操作不收费。",
       "see": "查看价格",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "用于你的学习包和 AI 辅导老师。",
+      "learner": "学员点数"
     },
     "faq": {
       "title": "还有疑问？",
-      "text": "关于价格、证书、隐私和招聘的解答。",
-      "read": "阅读常见问题"
+      "text": "在常见问题里找答案，或者问问我们的 AI 助手。",
+      "read": "前往常见问题"
     },
     "ready": {
       "title": "准备好开始了吗？",
@@ -728,7 +724,7 @@
     "messagePlaceholder": "在这里输入你的留言…",
     "send": "发送",
     "thanks": "谢谢！",
-    "sent": "你的留言已发送。我们会回复到 {email}。",
+    "sent": "你的留言已发出。我们会回复到 {email}。",
     "failed": "留言发送失败，请重试。"
   }
 }

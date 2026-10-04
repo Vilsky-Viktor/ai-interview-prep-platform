@@ -95,10 +95,7 @@ export default async function PreparationPage({ params }: PageProps) {
               >
                 {levels(preparation.level)}
               </Badge>
-              <Badge
-                variant="outline"
-                className="h-7 px-3 text-sm font-light"
-              >
+              <Badge variant="outline" className="h-7 px-3 text-sm font-light">
                 {visibility(preparation.visibility)}
               </Badge>
               {done && <DoneBadge />}
@@ -146,7 +143,8 @@ export default async function PreparationPage({ params }: PageProps) {
 
           return (
             <li key={topic.id} className="space-y-4 p-4 sm:p-6">
-              <div className="flex items-start justify-between gap-8">
+              {/* On phones the button goes under the name, so a long name keeps its width. */}
+              <div className="flex flex-col items-start gap-4 sm:flex-row sm:justify-between sm:gap-8">
                 <span className="min-w-0 space-y-2">
                   <span className="block text-2xl font-medium">
                     {topic.title}

@@ -591,101 +591,105 @@
       "title": "Prêt en trois étapes",
       "paste": {
         "title": "Collez ou décrivez",
-        "text": "Une offre d'emploi, un programme ou quelques mots sur ce que vous voulez apprendre."
+        "text": "Une offre d'emploi, un programme, ou les compétences et technologies que vous voulez apprendre."
       },
       "review": {
         "title": "Validez le plan",
-        "text": "Des agents d'IA repèrent l'essentiel et proposent des thèmes. Gardez-les, renommez-les ou modifiez-les."
+        "text": "Des agents d'IA repèrent l'essentiel et proposent des sujets.\nGardez-les, renommez-les ou modifiez-les."
       },
       "practice": {
         "title": "Entraînez-vous jusqu'à être sûr de vous",
-        "text": "Chaque thème a sa propre banque de questions. Entraînez-vous par sessions et suivez vos progrès."
+        "text": "Chaque sujet a ses propres questions.\nEntraînez-vous par séances et suivez vos progrès."
       }
     },
     "control": {
-      "title": "Vous décidez de ce que vous étudiez",
-      "text": "Rien n'est généré tant que vous n'avez pas validé le plan. Décochez ce que vous savez déjà, renommez un thème, modifiez ses sous-thèmes ou décrivez de plus gros changements avec vos mots.",
+      "title": "Vous choisissez quoi étudier",
+      "text": "Aucune question n'est rédigée avant que vous ayez validé les sujets. Décochez ce que vous savez déjà, renommez un sujet, modifiez ses sous-sujets, ou dites simplement à l'IA quoi changer et laissez-la faire le reste.",
       "topics": {
         "design": "Conception de systèmes",
-        "sql": "SQL et index",
-        "behavior": "Questions comportementales",
-        "basics": "Bases de la programmation"
+        "sql": "Marketing de contenu",
+        "behavior": "Gestion du temps",
+        "basics": "Management d'équipe"
       },
-      "change": "Ajouter plus sur le cache",
+      "change": "Ajoute un sujet sur les publicités YouTube",
       "subtopics": {
-        "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "design": ["Scalabilité", "Mise en cache", "Répartition de charge"],
+        "sql": ["Étude d'audience", "Bases du SEO", "Mesure des résultats"],
         "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
+          "Prioriser",
+          "Planifier sa semaine",
+          "Éviter les distractions"
         ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "basics": ["Faire un retour", "Déléguer", "Motiver l'équipe"]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "Campagnes e-mail",
+      "newTopic": "Publicités YouTube",
+      "newSubtopics": [
+        "Formats publicitaires",
+        "Ciblage d'audience",
+        "Mesure des vues"
+      ]
     },
     "gaps": {
       "title": "Un entraînement qui trouve vos lacunes",
-      "text": "Chaque session commence par les questions auxquelles vous n'avez pas encore répondu, puis revient sur celles que vous avez ratées. Votre temps va là où il compte.",
+      "text": "Chaque séance repose toutes les questions du sujet, en commençant par celles que vous avez ratées la dernière fois. Comparez les séances et voyez vos lacunes se combler.",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
+          "question": "Quel indicateur montre qui a regardé une pub jusqu'au bout ?",
+          "wrong": "Taux de clics",
+          "right": "Taux de complétion"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
+          "question": "Que réduit surtout un cache ?",
+          "wrong": "Coût de stockage",
+          "right": "Temps de réponse"
         }
       }
     },
     "tutor": {
       "title": "Un tuteur pour chaque question",
       "text": "Après chaque réponse, vous voyez tout de suite la bonne option. Vous ne comprenez pas pourquoi ? Demandez au tuteur IA et creusez autant que nécessaire.",
-      "question": "Quel index aide une requête qui filtre par date ?",
+      "question": "Un client est mécontent d'une livraison en retard. Que faites-vous d'abord ?",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "Expliquer la cause du retard",
+        "second": "Reconnaître le problème et s'excuser",
+        "third": "Proposer tout de suite une remise",
+        "fourth": "Transmettre le cas à un responsable"
       },
-      "ask": "Pourquoi pas l'index de hachage ?",
-      "answer": "Un index de hachage ne trouve que des valeurs exactes. Un filtre par date cherche une plage, et un B-tree garde les dates dans l'ordre."
+      "ask": "Pourquoi ne pas expliquer d'abord ?",
+      "answer": "Reconnaissez d'abord le problème : on écoute les raisons une fois qu'on se sent entendu."
     },
     "proof": {
       "title": "Sachez quand vous êtes prêt",
-      "text": "Chaque thème a une barre de progression vers son certificat. Obtenez-le, et le thème est considéré comme maîtrisé.",
-      "again": "Start again"
+      "text": "Chaque sujet a une barre de progression vers son certificat. Obtenez-le, et le sujet est considéré comme maîtrisé.",
+      "again": "Recommencer"
     },
     "quality": {
       "title": "Des questions qui s'améliorent seules",
-      "text": "Chaque question a une bonne option et trois mauvaises mais plausibles. Les votes, les signalements et les réponses repèrent les questions faibles, et un vérificateur les corrige ou les remplace en arrière-plan.",
+      "text": "Les « J'aime », les « Je n'aime pas » et les signalements révèlent les questions faibles. Un vérificateur IA les corrige ou les remplace automatiquement, et les propriétaires du kit peuvent régénérer eux-mêmes n'importe quelle question.",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "Qu'accélère un index de base de données ?",
+        "weak": "Quel est le meilleur langage de programmation ?",
+        "better": "Quel langage est le plus utilisé en développement frontend ?"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "Ça dépend du projet, il n'y a donc pas une seule bonne réponse.",
+      "list": "Questions du sujet"
     },
     "share": {
       "title": "Partagez ou publiez",
-      "text": "Envoyez un kit en privé à des amis ou collègues par e-mail, ou publiez-le dans la bibliothèque publique pour tous ceux qui préparent la même chose.",
-      "private": "Partagé en privé",
-      "public": "Dans la bibliothèque publique",
+      "text": "Invitez des amis ou des collègues par e-mail à s'entraîner avec votre kit, ou publiez-le dans la bibliothèque publique pour tous ceux qui préparent la même chose.",
+      "private": "Partage privé",
+      "public": "Partage public",
       "browse": "Explorer la bibliothèque"
     },
     "companies": {
       "title": "Vous recrutez ? Évaluez les candidats équitablement",
-      "text": "Transformez une offre d'emploi en entretien chronométré et invitez les candidats par e-mail.",
+      "text": "Transformez une offre d'emploi en entretien chronométré et invitez des candidats pour les évaluer.",
       "points": {
-        "own": "Chaque candidat reçoit ses propres questions, dans son propre ordre.",
-        "timed": "Chaque question a son propre compte à rebours, tenu par le serveur.",
-        "flags": "Les rapports signalent les réponses trop rapides, les sorties de la page et les tentatives de copie.",
-        "private": "Les candidats ne voient jamais leur score ni quelles réponses étaient justes."
+        "own": "Des questions uniques par candidat",
+        "timed": "Un compte à rebours par question",
+        "flags": "Alertes : précipitation, sortie, copie",
+        "private": "Scores cachés aux candidats"
       },
       "candidate": "Candidat",
       "score": "Score",
@@ -695,20 +699,20 @@
     },
     "languages": {
       "title": "Dans votre langue",
-      "text": "Le site et tout ce qu'il génère fonctionnent en {count} langues, y compris de droite à gauche. Collez une offre dans une langue et entraînez-vous dans une autre."
+      "text": "Utilisez prepza dans l'une des {count} langues disponibles. Collez une offre d'emploi dans une langue et entraînez-vous dans une autre."
     },
     "pricing": {
       "title": "Ne payez que ce qui fonctionne",
-      "text": "Ni abonnement ni formule. Rechargez quand vous en avez besoin et ne dépensez des crédits que pour ce que vous utilisez.",
+      "text": "Ni abonnement ni formule. Rechargez quand vous en avez besoin : les crédits n'expirent jamais, et ce qui échoue ne coûte rien.",
       "see": "Voir les tarifs",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "Pour vos kits et le tuteur IA.",
+      "learner": "Crédits personnels"
     },
     "faq": {
       "title": "Encore des questions ?",
-      "text": "Des réponses sur les tarifs, les certificats, la confidentialité et le recrutement.",
-      "read": "lire la FAQ"
+      "text": "Trouvez la réponse dans la FAQ ou demandez à notre assistant IA.",
+      "read": "Voir la FAQ"
     },
     "ready": {
       "title": "Prêt à vous préparer ?",
@@ -727,14 +731,14 @@
   },
   "contact": {
     "title": "Contactez-nous",
-    "intro": "Une question, une idée, un partenariat ou quelque chose ne fonctionne pas ? Écrivez-nous, nous vous répondrons par e-mail.",
+    "intro": "Une question, une idée, un partenariat ou quelque chose qui ne fonctionne pas ? Écrivez-nous, nous vous répondrons par e-mail.",
     "name": "Nom",
     "email": "E-mail",
     "message": "Message",
     "messagePlaceholder": "Écrivez votre message ici…",
     "send": "Envoyer",
     "thanks": "Merci !",
-    "sent": "Votre message est envoyé. Nous répondrons à {email}.",
+    "sent": "Votre message est en route. Nous vous répondrons à {email}.",
     "failed": "Impossible d'envoyer votre message. Veuillez réessayer."
   }
 }

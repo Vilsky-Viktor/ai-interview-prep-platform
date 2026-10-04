@@ -591,101 +591,105 @@
       "title": "In drei Schritten bereit",
       "paste": {
         "title": "Einfügen oder beschreiben",
-        "text": "Eine Stellenbeschreibung, ein Lehrplan oder ein paar Worte darüber, was du lernen willst."
+        "text": "Eine Stellenbeschreibung, ein Lehrplan oder die Skills und Technologien, die du lernen willst."
       },
       "review": {
         "title": "Plan prüfen",
-        "text": "KI-Agenten erkennen, worauf es ankommt, und schlagen Themen vor. Behalte, benenne oder ändere sie."
+        "text": "KI-Agenten erkennen, worauf es ankommt, und schlagen Themen vor.\nBehalte, benenne oder ändere sie."
       },
       "practice": {
         "title": "Üben, bis du sicher bist",
-        "text": "Jedes Thema bekommt eigene Fragen. Übe in Runden und sieh, wie dein Fortschritt wächst."
+        "text": "Jedes Thema bekommt eigene Fragen.\nÜbe in Runden und sieh, wie dein Fortschritt wächst."
       }
     },
     "control": {
       "title": "Du entscheidest, was du lernst",
-      "text": "Nichts wird erstellt, bevor du dem Plan zustimmst. Entferne, was du schon kannst, benenne ein Thema um, bearbeite seine Unterthemen oder beschreibe größere Änderungen in eigenen Worten.",
+      "text": "Keine Frage wird geschrieben, bevor du die Themen freigibst. Entferne, was du schon kannst, benenne ein Thema um, bearbeite seine Unterthemen oder sag der KI einfach, was sie ändern soll, und sie erledigt den Rest.",
       "topics": {
         "design": "Systemdesign",
-        "sql": "SQL und Indizes",
-        "behavior": "Verhaltensfragen",
-        "basics": "Programmiergrundlagen"
+        "sql": "Content-Marketing",
+        "behavior": "Zeitmanagement",
+        "basics": "Teamführung"
       },
-      "change": "Mehr zu Caching hinzufügen",
+      "change": "Füge ein Thema zu YouTube-Werbung hinzu",
       "subtopics": {
-        "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "design": ["Skalierbarkeit", "Caching", "Lastverteilung"],
+        "sql": ["Zielgruppenanalyse", "SEO-Grundlagen", "Erfolgsmessung"],
         "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
+          "Prioritäten setzen",
+          "Die Woche planen",
+          "Ablenkungen vermeiden"
         ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "basics": ["Feedback geben", "Delegieren", "Menschen motivieren"]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "E-Mail-Kampagnen",
+      "newTopic": "YouTube-Werbung",
+      "newSubtopics": [
+        "Anzeigenformate",
+        "Zielgruppen-Targeting",
+        "Aufrufe messen"
+      ]
     },
     "gaps": {
       "title": "Üben, das deine Lücken findet",
-      "text": "Jede Runde beginnt mit Fragen, die du noch nicht beantwortet hast, und bringt dann die zurück, die du falsch hattest. So geht deine Zeit dorthin, wo es zählt.",
+      "text": "Jede Runde stellt alle Fragen des Themas erneut, angefangen mit denen, die du zuletzt falsch hattest. Vergleiche Runden und sieh, wie sich deine Lücken schließen.",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
+          "question": "Welche Kennzahl zeigt, wer eine Anzeige bis zum Ende gesehen hat?",
+          "wrong": "Klickrate",
+          "right": "View-Through-Rate"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
+          "question": "Was verringert ein Cache vor allem?",
+          "wrong": "Speicherkosten",
+          "right": "Antwortzeit"
         }
       }
     },
     "tutor": {
       "title": "Ein Tutor für jede Frage",
       "text": "Nach jeder Antwort siehst du sofort die richtige Option. Unklar, warum sie stimmt? Frag den KI-Tutor und geh so tief, wie du willst.",
-      "question": "Welcher Index hilft einer Abfrage, die nach Datum filtert?",
+      "question": "Ein Kunde ärgert sich über eine verspätete Lieferung. Was tust du zuerst?",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "Den Grund der Verspätung erklären",
+        "second": "Das Problem anerkennen und mich entschuldigen",
+        "third": "Sofort einen Rabatt anbieten",
+        "fourth": "Den Fall an eine Führungskraft abgeben"
       },
-      "ask": "Warum nicht der Hash-Index?",
-      "answer": "Ein Hash-Index findet nur exakte Werte. Ein Datumsfilter sucht einen Bereich, und ein B-Tree hält die Daten sortiert."
+      "ask": "Warum nicht zuerst erklären?",
+      "answer": "Erst anerkennen: Menschen hören Gründe zu, wenn sie sich gehört fühlen."
     },
     "proof": {
       "title": "Wisse, wann du bereit bist",
       "text": "Jedes Thema hat einen Fortschrittsbalken bis zu seinem Zertifikat. Erreichst du es, gilt das Thema als gemeistert.",
-      "again": "Start again"
+      "again": "Neu starten"
     },
     "quality": {
       "title": "Fragen, die von selbst besser werden",
-      "text": "Jede Frage hat eine richtige und drei plausible falsche Optionen. Bewertungen, Meldungen und Antworten zeigen schwache Fragen auf, und ein Prüfer korrigiert oder ersetzt sie im Hintergrund.",
+      "text": "Likes, Dislikes und Meldungen decken schwache Fragen auf. Ein KI-Prüfer korrigiert oder ersetzt sie automatisch, und Kit-Besitzer können jede Frage selbst neu generieren.",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "Was beschleunigt ein Datenbankindex?",
+        "weak": "Welche Programmiersprache ist die beste?",
+        "better": "Welche Sprache wird in der Frontend-Entwicklung am häufigsten genutzt?"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "Das hängt vom Projekt ab, also gibt es keine eindeutig richtige Antwort.",
+      "list": "Fragen zum Thema"
     },
     "share": {
       "title": "Teilen oder veröffentlichen",
-      "text": "Schick ein Kit privat per E-Mail an Freunde oder Kollegen, oder veröffentliche es in der öffentlichen Bibliothek für alle, die sich auf dasselbe vorbereiten.",
-      "private": "Privat geteilt",
-      "public": "In der öffentlichen Bibliothek",
+      "text": "Lade Freunde oder Kollegen per E-Mail ein, mit deinem Kit zu üben, oder veröffentliche es in der öffentlichen Bibliothek für alle, die sich auf dasselbe vorbereiten.",
+      "private": "Privat teilen",
+      "public": "Öffentlich teilen",
       "browse": "Bibliothek entdecken"
     },
     "companies": {
       "title": "Du stellst ein? Prüfe Kandidaten fair",
-      "text": "Mach aus einer Stellenbeschreibung ein Interview mit Zeitlimit und lade Kandidaten per E-Mail ein.",
+      "text": "Mach aus einer Stellenbeschreibung ein Interview mit Zeitlimit und lade Kandidaten ein, um sie zu bewerten.",
       "points": {
-        "own": "Jeder Kandidat bekommt eigene Fragen in eigener Reihenfolge.",
-        "timed": "Jede Frage hat ihren eigenen Countdown, den der Server führt.",
-        "flags": "Auswertungen markieren überhastete Antworten, das Verlassen der Seite und Kopierversuche.",
-        "private": "Kandidaten sehen nie ihre Punktzahl oder welche Antworten richtig waren."
+        "own": "Eigene Fragen für jeden Kandidaten",
+        "timed": "Ein Countdown bei jeder Frage",
+        "flags": "Hinweise auf Eile, Seitenwechsel oder Kopieren",
+        "private": "Kandidaten sehen ihre Ergebnisse nicht"
       },
       "candidate": "Kandidat",
       "score": "Ergebnis",
@@ -695,19 +699,19 @@
     },
     "languages": {
       "title": "In deiner Sprache",
-      "text": "Die Seite und alles, was sie erstellt, funktionieren in {count} Sprachen, auch von rechts nach links. Füge eine Stellenbeschreibung in einer Sprache ein und übe in einer anderen."
+      "text": "Nutze prepza in einer von {count} Sprachen. Füge eine Stellenbeschreibung in einer Sprache ein und übe in einer anderen."
     },
     "pricing": {
       "title": "Zahl nur für das, was funktioniert",
-      "text": "Keine Abos, keine Tarife. Lade auf, wenn du es brauchst, und gib Credits nur für das aus, was du nutzt.",
+      "text": "Keine Abos, keine Tarife. Lade auf, wenn du es brauchst: Credits verfallen nie, und was fehlschlägt, kostet nichts.",
       "see": "Preise ansehen",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "Für deine Kits und den KI-Tutor.",
+      "learner": "Lern-Credits"
     },
     "faq": {
       "title": "Noch Fragen?",
-      "text": "Antworten zu Preisen, Zertifikaten, Datenschutz und Recruiting.",
+      "text": "Finde Antworten in der FAQ oder frag unseren KI-Assistenten.",
       "read": "zur FAQ"
     },
     "ready": {
@@ -731,7 +735,7 @@
     "name": "Name",
     "email": "E-Mail",
     "message": "Nachricht",
-    "messagePlaceholder": "Schreib deine Nachricht hier…",
+    "messagePlaceholder": "Schreib hier deine Nachricht…",
     "send": "Senden",
     "thanks": "Danke!",
     "sent": "Deine Nachricht ist unterwegs. Wir antworten an {email}.",

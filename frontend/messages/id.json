@@ -585,101 +585,105 @@
       "title": "Tiga langkah menuju siap",
       "paste": {
         "title": "Tempel atau jelaskan",
-        "text": "Deskripsi pekerjaan, silabus, atau beberapa kata tentang apa yang ingin kamu pelajari."
+        "text": "Deskripsi pekerjaan, silabus, atau keterampilan dan teknologi yang ingin kamu pelajari."
       },
       "review": {
         "title": "Tinjau rencananya",
-        "text": "Agen AI memilih hal yang penting dan mengusulkan topik. Pertahankan, ganti namanya, atau ubah."
+        "text": "Agen AI memilih hal yang penting dan mengusulkan topik.\nPertahankan, ganti namanya, atau ubah."
       },
       "practice": {
         "title": "Berlatih sampai percaya diri",
-        "text": "Setiap topik punya bank soalnya sendiri. Berlatih per ronde dan lihat kemajuanmu bertambah."
+        "text": "Setiap topik punya soalnya sendiri.\nBerlatih per sesi dan lihat kemajuanmu bertambah."
       }
     },
     "control": {
       "title": "Kamu yang memutuskan apa yang dipelajari",
-      "text": "Tidak ada yang dibuat sampai kamu setuju dengan rencananya. Hapus centang pada yang sudah kamu kuasai, ganti nama topik, edit subtopiknya, atau jelaskan perubahan besar dengan kata-katamu sendiri.",
+      "text": "Tidak ada soal yang ditulis sebelum kamu menyetujui topiknya. Hapus centang pada yang sudah kamu kuasai, ganti nama topik, edit subtopiknya, atau cukup beri tahu AI apa yang perlu diubah dan biarkan AI mengerjakan sisanya.",
       "topics": {
         "design": "Desain sistem",
-        "sql": "SQL dan indeks",
-        "behavior": "Pertanyaan perilaku",
-        "basics": "Dasar pemrograman"
+        "sql": "Pemasaran konten",
+        "behavior": "Manajemen waktu",
+        "basics": "Kepemimpinan tim"
       },
-      "change": "Tambah lagi soal caching",
+      "change": "Tambahkan topik tentang iklan YouTube",
       "subtopics": {
-        "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "design": ["Skalabilitas", "Caching", "Load balancing"],
+        "sql": ["Riset audiens", "Dasar-dasar SEO", "Mengukur hasil"],
         "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
+          "Menentukan prioritas",
+          "Merencanakan minggu",
+          "Menghindari distraksi"
         ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "basics": ["Memberi masukan", "Mendelegasikan tugas", "Memotivasi tim"]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "Kampanye email",
+      "newTopic": "Iklan YouTube",
+      "newSubtopics": [
+        "Format iklan",
+        "Penargetan audiens",
+        "Mengukur tayangan"
+      ]
     },
     "gaps": {
       "title": "Latihan yang menemukan kelemahanmu",
-      "text": "Setiap ronde dimulai dengan soal yang belum kamu jawab, lalu mengulang soal yang kamu salah. Waktumu dipakai di tempat yang paling penting.",
+      "text": "Setiap sesi menanyakan ulang semua soal topik, dimulai dari yang kamu jawab salah terakhir kali. Bandingkan sesi-sesimu dan lihat kelemahanmu makin berkurang.",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
+          "question": "Metrik mana yang menunjukkan siapa yang menonton iklan sampai habis?",
+          "wrong": "Rasio klik (CTR)",
+          "right": "Rasio tayang penuh (VTR)"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
+          "question": "Apa yang terutama dikurangi oleh cache?",
+          "wrong": "Biaya penyimpanan",
+          "right": "Waktu respons"
         }
       }
     },
     "tutor": {
       "title": "Tutor untuk setiap soal",
       "text": "Setelah setiap jawaban, kamu langsung melihat pilihan yang benar. Belum paham kenapa benar? Tanya tutor AI dan gali sedalam yang kamu perlu.",
-      "question": "Indeks mana yang membantu kueri yang memfilter berdasarkan tanggal?",
+      "question": "Pelanggan kesal karena pesanannya terlambat. Apa yang kamu lakukan pertama kali?",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "Menjelaskan alasan keterlambatan",
+        "second": "Mengakui masalah dan minta maaf",
+        "third": "Langsung menawarkan diskon",
+        "fourth": "Meneruskan kasus ke manajer"
       },
-      "ask": "Kenapa bukan indeks hash?",
-      "answer": "Indeks hash hanya menemukan nilai yang persis sama. Filter tanggal mencari rentang, dan B-tree menyimpan tanggal secara berurutan."
+      "ask": "Kenapa tidak menjelaskan dulu?",
+      "answer": "Akui masalahnya dulu: orang mau mendengar alasan setelah merasa didengar."
     },
     "proof": {
       "title": "Ketahui kapan kamu siap",
       "text": "Setiap topik punya bilah kemajuan menuju sertifikatnya. Raih sertifikatnya, dan topik itu dianggap dikuasai.",
-      "again": "Start again"
+      "again": "Mulai lagi"
     },
     "quality": {
       "title": "Soal yang membaik dengan sendirinya",
-      "text": "Setiap soal punya satu pilihan benar dan tiga pilihan salah yang masuk akal. Vote, laporan, dan jawaban menunjukkan soal yang lemah, dan pemeriksa memperbaiki atau menggantinya di latar belakang.",
+      "text": "Suka, tidak suka, dan laporan mengungkap soal yang lemah. Pemeriksa AI memperbaiki atau menggantinya secara otomatis, dan pemilik kit bisa membuat ulang soal apa pun sendiri.",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "Apa yang dipercepat oleh indeks database?",
+        "weak": "Bahasa pemrograman apa yang terbaik?",
+        "better": "Bahasa apa yang paling banyak dipakai untuk pengembangan frontend?"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "Tergantung proyeknya, jadi tidak ada satu jawaban yang benar.",
+      "list": "Soal topik"
     },
     "share": {
       "title": "Bagikan atau terbitkan",
-      "text": "Kirim kit secara pribadi ke teman atau rekan kerja lewat email, atau terbitkan di perpustakaan publik untuk semua yang sedang menyiapkan hal yang sama.",
-      "private": "Dibagikan secara pribadi",
-      "public": "Di perpustakaan publik",
+      "text": "Undang teman atau rekan kerja lewat email untuk berlatih bersama dengan kitmu, atau terbitkan di perpustakaan publik untuk semua yang sedang menyiapkan hal yang sama.",
+      "private": "Bagikan privat",
+      "public": "Bagikan publik",
       "browse": "Jelajahi perpustakaan"
     },
     "companies": {
       "title": "Sedang merekrut? Uji kandidat secara adil",
-      "text": "Ubah deskripsi pekerjaan menjadi wawancara berbatas waktu dan undang kandidat lewat email.",
+      "text": "Ubah deskripsi pekerjaan menjadi wawancara berbatas waktu dan undang kandidat untuk menilai mereka.",
       "points": {
-        "own": "Setiap kandidat mendapat soalnya sendiri, dengan urutannya sendiri.",
-        "timed": "Setiap soal punya hitung mundurnya sendiri, dijaga oleh server.",
-        "flags": "Kartu skor menandai jawaban yang terburu-buru, keluar dari halaman, dan upaya menyalin.",
-        "private": "Kandidat tidak pernah melihat skornya atau jawaban mana yang benar."
+        "own": "Soal unik untuk tiap kandidat",
+        "timed": "Hitung mundur di setiap soal",
+        "flags": "Tanda untuk terburu-buru, keluar, atau menyalin",
+        "private": "Skor tidak terlihat oleh kandidat"
       },
       "candidate": "Kandidat",
       "score": "Skor",
@@ -689,20 +693,20 @@
     },
     "languages": {
       "title": "Dalam bahasamu",
-      "text": "Situs dan semua yang dibuatnya bekerja dalam {count} bahasa, termasuk yang ditulis dari kanan ke kiri. Tempel deskripsi pekerjaan dalam satu bahasa dan berlatih dalam bahasa lain."
+      "text": "Gunakan prepza dalam salah satu dari {count} bahasa. Tempel deskripsi pekerjaan dalam satu bahasa dan berlatih dalam bahasa lain."
     },
     "pricing": {
       "title": "Bayar hanya untuk yang berhasil",
-      "text": "Tanpa langganan atau paket. Isi saldo saat perlu, dan pakai kredit hanya untuk yang kamu gunakan.",
+      "text": "Tanpa langganan atau paket. Isi ulang saat perlu: kredit tidak pernah kedaluwarsa, dan yang gagal tidak dikenai biaya.",
       "see": "Lihat harga",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "Untuk kit dan tutor AI-mu.",
+      "learner": "Kredit pelajar"
     },
     "faq": {
       "title": "Masih ada pertanyaan?",
-      "text": "Jawaban tentang harga, sertifikat, privasi, dan rekrutmen.",
-      "read": "baca tanya jawab"
+      "text": "Temukan jawabannya di Tanya jawab, atau tanyakan ke asisten AI kami.",
+      "read": "buka tanya jawab"
     },
     "ready": {
       "title": "Siap untuk bersiap?",
@@ -721,14 +725,14 @@
   },
   "contact": {
     "title": "Hubungi kami",
-    "intro": "Ada pertanyaan, ide, tawaran kemitraan, atau sesuatu tidak berfungsi? Tulis kepada kami dan kami akan membalas lewat email.",
+    "intro": "Ada pertanyaan, ide, tawaran kemitraan, atau ada yang tidak berfungsi? Tulis pesan untuk kami dan kami akan membalas lewat email.",
     "name": "Nama",
     "email": "Email",
     "message": "Pesan",
-    "messagePlaceholder": "Tulis pesan Anda di sini…",
+    "messagePlaceholder": "Tulis pesanmu di sini…",
     "send": "Kirim",
     "thanks": "Terima kasih!",
-    "sent": "Pesan Anda sudah terkirim. Kami akan membalas ke {email}.",
-    "failed": "Pesan Anda tidak dapat dikirim. Silakan coba lagi."
+    "sent": "Pesanmu sudah terkirim. Kami akan membalas ke {email}.",
+    "failed": "Pesanmu tidak bisa dikirim. Coba lagi."
   }
 }

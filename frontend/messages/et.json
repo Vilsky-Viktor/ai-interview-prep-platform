@@ -591,101 +591,109 @@
       "title": "Kolm sammu valmisolekuni",
       "paste": {
         "title": "Kleebi või kirjelda",
-        "text": "Töökuulutus, õppekava või paar sõna sellest, mida tahad õppida."
+        "text": "Töökuulutus, õppekava või oskused ja tehnoloogiad, mida tahad õppida."
       },
       "review": {
         "title": "Vaata plaan üle",
-        "text": "Tehisaru agendid leiavad olulise ja pakuvad teemasid. Jäta need alles, nimeta ümber või muuda."
+        "text": "Tehisaru agendid leiavad olulise ja pakuvad teemasid.\nJäta alles, nimeta ümber või muuda."
       },
       "practice": {
         "title": "Harjuta, kuni oled kindel",
-        "text": "Iga teema saab oma küsimuste panga. Harjuta voorudes ja vaata, kuidas edusammud kasvavad."
+        "text": "Iga teema saab oma küsimused.\nHarjuta voorudes ja vaata, kuidas edusammud kasvavad."
       }
     },
     "control": {
       "title": "Sina otsustad, mida õppida",
-      "text": "Midagi ei looda enne, kui oled plaaniga nõus. Eemalda linnuke sellelt, mida juba oskad, nimeta teema ümber, muuda alateemasid või kirjelda suuremaid muudatusi oma sõnadega.",
+      "text": "Ühtegi küsimust ei kirjutata enne, kui oled teemad kinnitanud. Eemalda linnuke sellelt, mida juba oskad, nimeta teema ümber, muuda alateemasid või lihtsalt ütle tehisarule, mida muuta, ja las see teeb ülejäänu.",
       "topics": {
         "design": "Süsteemide disain",
-        "sql": "SQL ja indeksid",
-        "behavior": "Käitumisküsimused",
-        "basics": "Programmeerimise alused"
+        "sql": "Sisuturundus",
+        "behavior": "Ajajuhtimine",
+        "basics": "Meeskonna juhtimine"
       },
-      "change": "Lisa rohkem vahemälu kohta",
+      "change": "Lisa teema YouTube'i reklaamidest",
       "subtopics": {
-        "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "design": ["Skaleeritavus", "Vahemälu", "Koormuse jaotamine"],
+        "sql": ["Sihtrühma uurimine", "SEO alused", "Tulemuste mõõtmine"],
         "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
+          "Prioriteetide seadmine",
+          "Nädala planeerimine",
+          "Segajate vältimine"
         ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "basics": [
+          "Tagasiside andmine",
+          "Delegeerimine",
+          "Inimeste motiveerimine"
+        ]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "E-posti kampaaniad",
+      "newTopic": "YouTube'i reklaamid",
+      "newSubtopics": [
+        "Reklaamivormingud",
+        "Sihtrühma valimine",
+        "Vaatamiste mõõtmine"
+      ]
     },
     "gaps": {
       "title": "Harjutamine, mis leiab lüngad",
-      "text": "Iga voor algab küsimustega, millele sa pole veel vastanud, ja toob siis tagasi need, milles eksisid. Sinu aeg läheb sinna, kus see loeb.",
+      "text": "Iga voor küsib uuesti kõik teema küsimused, alustades nendest, milles eelmisel korral eksisid. Võrdle voore ja vaata, kuidas lüngad sulguvad.",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
+          "question": "Milline mõõdik näitab, kes vaatas reklaami lõpuni?",
+          "wrong": "Klikkimise määr",
+          "right": "Lõpuni vaatamise määr"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
+          "question": "Mida vahemälu peamiselt vähendab?",
+          "wrong": "Salvestuskulusid",
+          "right": "Vastuse aega"
         }
       }
     },
     "tutor": {
       "title": "Juhendaja iga küsimuse jaoks",
       "text": "Pärast iga vastust näed kohe õiget valikut. Pole kindel, miks see õige on? Küsi tehisaru juhendajalt ja süvene nii palju, kui vaja.",
-      "question": "Milline indeks aitab päringut, mis filtreerib kuupäeva järgi?",
+      "question": "Klient on hilinenud tarne pärast pahane. Mida teed kõigepealt?",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "Selgitan hilinemise põhjust",
+        "second": "Tunnistan probleemi ja vabandan",
+        "third": "Pakun kohe allahindlust",
+        "fourth": "Annan juhtumi juhatajale"
       },
-      "ask": "Miks mitte räsiindeks?",
-      "answer": "Räsiindeks leiab ainult täpseid väärtusi. Kuupäevafilter otsib vahemikku ja B-tree hoiab kuupäevi järjekorras."
+      "ask": "Miks mitte kõigepealt selgitada?",
+      "answer": "Tunnista enne probleemi: põhjuseid kuulatakse, kui inimene tunneb end ärakuulatuna."
     },
     "proof": {
       "title": "Tea, millal oled valmis",
       "text": "Igal teemal on edenemisriba kuni sertifikaadini. Teeni see välja ja teema loetakse omandatuks.",
-      "again": "Start again"
+      "again": "Alusta uuesti"
     },
     "quality": {
       "title": "Küsimused, mis paranevad ise",
-      "text": "Igal küsimusel on üks õige ja kolm usutavat vale valikut. Hinnangud, teated ja vastused näitavad nõrku küsimusi ning kontrollija parandab või asendab need taustal.",
+      "text": "Meeldimised, mittemeeldimised ja teated toovad välja nõrgad küsimused. Tehisaru kontrollija parandab või asendab need automaatselt ja komplekti omanik saab iga küsimuse ka ise uuesti luua.",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "Mida andmebaasi indeks kiirendab?",
+        "weak": "Milline programmeerimiskeel on parim?",
+        "better": "Millist keelt kasutatakse esiliidese arenduses kõige rohkem?"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "See sõltub projektist, nii et üht õiget vastust pole.",
+      "list": "Teema küsimused"
     },
     "share": {
       "title": "Jaga või avalda",
-      "text": "Saada komplekt e-postiga privaatselt sõpradele või kolleegidele või avalda see avalikus raamatukogus kõigile, kes valmistuvad sama asja jaoks.",
-      "private": "Jagatud privaatselt",
-      "public": "Avalikus raamatukogus",
+      "text": "Kutsu sõbrad või kolleegid e-postiga oma komplektiga koos harjutama või avalda see avalikus raamatukogus kõigile, kes valmistuvad sama asja jaoks.",
+      "private": "Jaga privaatselt",
+      "public": "Jaga avalikult",
       "browse": "Avasta raamatukogu"
     },
     "companies": {
       "title": "Värbad? Testi kandidaate ausalt",
-      "text": "Tee töökuulutusest ajapiiranguga intervjuu ja kutsu kandidaadid e-postiga.",
+      "text": "Tee töökuulutusest ajapiiranguga intervjuu ja kutsu kandidaadid seda tegema, et neid hinnata.",
       "points": {
-        "own": "Iga kandidaat saab oma küsimused, omas järjekorras.",
-        "timed": "Igal küsimusel on oma taimer, mida peab server.",
-        "flags": "Aruanded märgivad kiirustatud vastused, lehelt lahkumised ja kopeerimiskatsed.",
-        "private": "Kandidaadid ei näe kunagi oma tulemust ega seda, millised vastused olid õiged."
+        "own": "Igale kandidaadile oma küsimused",
+        "timed": "Taimer iga küsimuse juures",
+        "flags": "Märked kiirustamise, lahkumise ja kopeerimise kohta",
+        "private": "Kandidaadid ei näe oma tulemusi"
       },
       "candidate": "Kandidaat",
       "score": "Tulemus",
@@ -695,20 +703,20 @@
     },
     "languages": {
       "title": "Sinu keeles",
-      "text": "Sait ja kõik, mida see loob, töötavad {count} keeles, ka paremalt vasakule. Kleebi kuulutus ühes keeles ja harjuta teises."
+      "text": "Kasuta prepza't ükskõik millises {count} keelest. Kleebi töökuulutus ühes keeles ja harjuta teises."
     },
     "pricing": {
       "title": "Maksa ainult selle eest, mis töötab",
-      "text": "Ei mingeid tellimusi ega pakette. Lae kontot, kui vaja, ja kuluta krediite ainult sellele, mida kasutad.",
+      "text": "Ei mingeid tellimusi ega pakette. Laadi juurde, kui vaja: krediidid ei aegu ja kõik, mis ebaõnnestub, on tasuta.",
       "see": "Vaata hindu",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "Sinu komplektide ja tehisaru juhendaja jaoks.",
+      "learner": "Õppija krediidid"
     },
     "faq": {
       "title": "Küsimusi veel?",
-      "text": "Vastused hindade, sertifikaatide, privaatsuse ja värbamise kohta.",
-      "read": "loe KKK-d"
+      "text": "Leia vastused KKK-st või küsi meie tehisaru assistendilt.",
+      "read": "ava KKK"
     },
     "ready": {
       "title": "Valmis valmistuma?",

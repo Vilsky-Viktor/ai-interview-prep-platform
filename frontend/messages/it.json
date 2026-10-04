@@ -418,7 +418,7 @@
     "copies": "{count, plural, one {# tentativo di copia} other {# tentativi di copia}}",
     "fastAnswers": "{count, plural, one {# risposta rapida} other {# risposte rapide}}",
     "empty": "Ancora nessun candidato invitato.",
-    "progress": "Avanzamento",
+    "progress": "Progresso",
     "grade": "Voto",
     "resend": "Invia di nuovo l'invito",
     "resent": "Invito inviato di nuovo a {email}",
@@ -591,101 +591,105 @@
       "title": "Pronto in tre passi",
       "paste": {
         "title": "Incolla o descrivi",
-        "text": "Un annuncio di lavoro, un programma o qualche parola su cosa vuoi imparare."
+        "text": "Un annuncio di lavoro, un programma di studio o le competenze e tecnologie che vuoi imparare."
       },
       "review": {
         "title": "Rivedi il piano",
-        "text": "Gli agenti di IA individuano ciò che conta e propongono gli argomenti. Tienili, rinominali o cambiali."
+        "text": "Gli agenti di IA individuano ciò che conta e propongono gli argomenti.\nTienili, rinominali o cambiali."
       },
       "practice": {
         "title": "Esercitati finché sei sicuro",
-        "text": "Ogni argomento ha la sua banca di domande. Esercitati a turni e guarda crescere i tuoi progressi."
+        "text": "Ogni argomento ha le sue domande.\nEsercitati in sessioni e guarda crescere i tuoi progressi."
       }
     },
     "control": {
       "title": "Decidi tu cosa studiare",
-      "text": "Non viene generato nulla finché non approvi il piano. Togli la spunta a ciò che sai già, rinomina un argomento, modifica i sotto-argomenti o descrivi cambiamenti più grandi con parole tue.",
+      "text": "Nessuna domanda viene scritta finché non approvi gli argomenti. Togli la spunta a ciò che sai già, rinomina un argomento, modifica i suoi sottoargomenti o di' semplicemente all'IA cosa cambiare e lascia che faccia il resto.",
       "topics": {
         "design": "Progettazione di sistemi",
-        "sql": "SQL e indici",
-        "behavior": "Domande comportamentali",
-        "basics": "Basi di programmazione"
+        "sql": "Content marketing",
+        "behavior": "Gestione del tempo",
+        "basics": "Leadership del team"
       },
-      "change": "Aggiungi altro sulla cache",
+      "change": "Aggiungi un argomento sugli annunci YouTube",
       "subtopics": {
-        "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
+        "design": ["Scalabilità", "Caching", "Bilanciamento del carico"],
+        "sql": ["Analisi del pubblico", "Basi di SEO", "Misurare i risultati"],
         "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
+          "Stabilire le priorità",
+          "Pianificare la settimana",
+          "Evitare le distrazioni"
         ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "basics": ["Dare feedback", "Delegare", "Motivare le persone"]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "Campagne email",
+      "newTopic": "Annunci YouTube",
+      "newSubtopics": [
+        "Formati degli annunci",
+        "Targeting del pubblico",
+        "Misurare le visualizzazioni"
+      ]
     },
     "gaps": {
       "title": "Esercizi che trovano le tue lacune",
-      "text": "Ogni turno inizia con le domande a cui non hai ancora risposto, poi riprende quelle sbagliate. Il tuo tempo va dove conta di più.",
+      "text": "Ogni sessione ripropone tutte le domande dell'argomento, partendo da quelle che hai sbagliato l'ultima volta. Confronta le sessioni e guarda le tue lacune colmarsi.",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
+          "question": "Quale metrica mostra chi ha guardato un annuncio fino alla fine?",
+          "wrong": "Tasso di clic",
+          "right": "Tasso di completamento"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
+          "question": "Cosa riduce soprattutto una cache?",
+          "wrong": "Costi di archiviazione",
+          "right": "Tempo di risposta"
         }
       }
     },
     "tutor": {
       "title": "Un tutor per ogni domanda",
-      "text": "Dopo ogni risposta vedi subito l’opzione giusta. Non ti è chiaro perché? Chiedi al tutor IA e approfondisci quanto ti serve.",
-      "question": "Quale indice aiuta una query che filtra per data?",
+      "text": "Dopo ogni risposta vedi subito l'opzione giusta. Non ti è chiaro perché? Chiedi al tutor IA e approfondisci quanto ti serve.",
+      "question": "Un cliente è arrabbiato per una consegna in ritardo. Cosa fai per prima cosa?",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "Spiegare il motivo del ritardo",
+        "second": "Riconoscere il problema e scusarsi",
+        "third": "Offrire subito uno sconto",
+        "fourth": "Passare il caso a un responsabile"
       },
-      "ask": "Perché non l’indice hash?",
-      "answer": "Un indice hash trova solo valori esatti. Un filtro per data cerca un intervallo, e un B-tree tiene le date in ordine."
+      "ask": "Perché non spiegare prima?",
+      "answer": "Prima riconosci il problema: le persone ascoltano le spiegazioni quando si sentono ascoltate."
     },
     "proof": {
-      "title": "Sai quando sei pronto",
-      "text": "Ogni argomento ha una barra di avanzamento verso il suo certificato. Ottienilo, e l’argomento conta come padroneggiato.",
-      "again": "Start again"
+      "title": "Scopri quando sei pronto",
+      "text": "Ogni argomento ha una barra di avanzamento verso il suo certificato. Ottienilo, e l'argomento conta come padroneggiato.",
+      "again": "Ricomincia"
     },
     "quality": {
       "title": "Domande che migliorano da sole",
-      "text": "Ogni domanda ha un’opzione corretta e tre sbagliate ma plausibili. Voti, segnalazioni e risposte indicano le domande deboli, e un verificatore le corregge o le sostituisce in background.",
+      "text": "Mi piace, non mi piace e segnalazioni rivelano le domande deboli. Un verificatore IA le corregge o le sostituisce automaticamente, e i proprietari del kit possono rigenerare qualsiasi domanda da soli.",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "Cosa velocizza un indice di database?",
+        "weak": "Qual è il miglior linguaggio di programmazione?",
+        "better": "Quale linguaggio è il più usato per lo sviluppo frontend?"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "Dipende dal progetto, quindi non c'è un'unica risposta giusta.",
+      "list": "Domande dell'argomento"
     },
     "share": {
       "title": "Condividi o pubblica",
-      "text": "Invia un kit in privato ad amici o colleghi via email, oppure pubblicalo nella libreria pubblica per tutti quelli che si preparano alla stessa cosa.",
-      "private": "Condiviso in privato",
-      "public": "Nella libreria pubblica",
+      "text": "Invita amici o colleghi via email a esercitarsi con il tuo kit, oppure pubblicalo nella libreria pubblica per tutti quelli che si preparano alla stessa cosa.",
+      "private": "Condividi in privato",
+      "public": "Condividi in pubblico",
       "browse": "Esplora la libreria"
     },
     "companies": {
       "title": "Assumi? Valuta i candidati in modo equo",
-      "text": "Trasforma un annuncio di lavoro in un colloquio a tempo e invita i candidati via email.",
+      "text": "Trasforma un annuncio di lavoro in un colloquio a tempo e invita i candidati per valutarli.",
       "points": {
-        "own": "Ogni candidato riceve domande sue, nel suo ordine.",
-        "timed": "Ogni domanda ha il suo conto alla rovescia, gestito dal server.",
-        "flags": "I report segnalano risposte affrettate, uscite dalla pagina e tentativi di copia.",
-        "private": "I candidati non vedono mai il punteggio né quali risposte erano giuste."
+        "own": "Domande uniche per ogni candidato",
+        "timed": "Un conto alla rovescia per domanda",
+        "flags": "Segnali di fretta, uscite o copie",
+        "private": "Punteggi nascosti ai candidati"
       },
       "candidate": "Candidato",
       "score": "Punteggio",
@@ -695,20 +699,20 @@
     },
     "languages": {
       "title": "Nella tua lingua",
-      "text": "Il sito e tutto ciò che genera funzionano in {count} lingue, anche da destra a sinistra. Incolla un annuncio in una lingua ed esercitati in un’altra."
+      "text": "Usa prepza in una qualsiasi delle {count} lingue. Incolla un annuncio di lavoro in una lingua ed esercitati in un'altra."
     },
     "pricing": {
       "title": "Paga solo ciò che funziona",
-      "text": "Niente abbonamenti né piani. Ricarica quando ti serve e spendi crediti solo per ciò che usi.",
+      "text": "Niente abbonamenti né piani. Ricarica quando ti serve: i crediti non scadono mai e ciò che non va a buon fine non costa nulla.",
       "see": "Vedi i prezzi",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "Per i tuoi kit e il tutor IA.",
+      "learner": "Crediti personali"
     },
     "faq": {
       "title": "Hai ancora domande?",
-      "text": "Risposte su prezzi, certificati, privacy e assunzioni.",
-      "read": "leggi le domande frequenti"
+      "text": "Trova le risposte nelle domande frequenti o chiedi al nostro assistente IA.",
+      "read": "Vai alle domande frequenti"
     },
     "ready": {
       "title": "Pronto a prepararti?",
@@ -727,14 +731,14 @@
   },
   "contact": {
     "title": "Contattaci",
-    "intro": "Hai una domanda, un'idea, una proposta di partnership o qualcosa non funziona? Scrivici e ti risponderemo via email.",
+    "intro": "Domande, idee, partnership o qualcosa non funziona? Scrivici e ti risponderemo via email.",
     "name": "Nome",
     "email": "Email",
     "message": "Messaggio",
     "messagePlaceholder": "Scrivi qui il tuo messaggio…",
     "send": "Invia",
     "thanks": "Grazie!",
-    "sent": "Il tuo messaggio è stato inviato. Risponderemo a {email}.",
+    "sent": "Il tuo messaggio è stato inviato. Ti risponderemo a {email}.",
     "failed": "Impossibile inviare il messaggio. Riprova."
   }
 }

@@ -591,53 +591,65 @@
       "title": "Tatlong hakbang para maging handa",
       "paste": {
         "title": "I-paste o ilarawan",
-        "text": "Isang job description, syllabus, o ilang salita tungkol sa gusto mong matutunan."
+        "text": "Isang job description, syllabus, o mga skill at teknolohiyang gusto mong matutunan."
       },
       "review": {
         "title": "Suriin ang plano",
-        "text": "Hinahanap ng mga AI agent ang mahalaga at nagmumungkahi ng mga topic. Panatilihin, palitan ang pangalan, o baguhin ang mga ito."
+        "text": "Hinahanap ng mga AI agent ang mahalaga at nagmumungkahi ng mga topic.\nPanatilihin, palitan ang pangalan, o baguhin ang mga ito."
       },
       "practice": {
         "title": "Mag-practice hanggang kumpiyansa ka",
-        "text": "May sariling bangko ng tanong ang bawat topic. Mag-practice nang pa-round at panoorin ang paglago ng progreso mo."
+        "text": "May sariling mga tanong ang bawat topic.\nMag-practice nang pa-round at panoorin ang paglago ng progreso mo."
       }
     },
     "control": {
       "title": "Ikaw ang magpapasya kung ano ang pag-aaralan",
-      "text": "Walang gagawin hangga't hindi ka sang-ayon sa plano. Alisin ang check sa alam mo na, palitan ang pangalan ng topic, i-edit ang mga subtopic nito, o ilarawan ang mas malalaking pagbabago sa sarili mong salita.",
+      "text": "Walang tanong na isusulat hangga't hindi mo inaaprubahan ang mga topic. Alisin ang check sa alam mo na, palitan ang pangalan ng topic, i-edit ang mga subtopic nito, o sabihin lang sa AI kung ano ang babaguhin at hayaan itong gawin ang iba.",
       "topics": {
         "design": "System design",
-        "sql": "SQL at mga index",
-        "behavior": "Mga behavioral na tanong",
-        "basics": "Mga batayan ng programming"
+        "sql": "Content marketing",
+        "behavior": "Time management",
+        "basics": "Pamumuno sa team"
       },
-      "change": "Magdagdag pa tungkol sa caching",
+      "change": "Magdagdag ng topic tungkol sa YouTube ads",
       "subtopics": {
         "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
-        "behavior": [
-          "Prioritizing",
-          "Planning the week",
-          "Avoiding distractions"
+        "sql": [
+          "Pag-aaral sa audience",
+          "Basics ng SEO",
+          "Pagsukat ng resulta"
         ],
-        "basics": ["Giving feedback", "Delegating", "Motivating people"]
+        "behavior": [
+          "Pag-prioritize",
+          "Pagpaplano ng linggo",
+          "Pag-iwas sa distractions"
+        ],
+        "basics": [
+          "Pagbibigay ng feedback",
+          "Pag-delegate",
+          "Pag-motivate sa team"
+        ]
       },
       "added": "Email campaigns",
       "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "newSubtopics": [
+        "Mga ad format",
+        "Audience targeting",
+        "Pagsukat ng views"
+      ]
     },
     "gaps": {
       "title": "Practice na hinahanap ang kahinaan mo",
-      "text": "Nagsisimula ang bawat round sa mga tanong na hindi mo pa nasasagot, saka ibinabalik ang mga mali mo. Napupunta ang oras mo kung saan pinakamahalaga.",
+      "text": "Itinatanong ulit ng bawat round ang lahat ng tanong ng topic, simula sa mga nagkamali ka noong huli. Ikumpara ang mga round at panoorin ang pagliit ng mga kahinaan mo.",
       "items": {
         "first": {
-          "question": "Which metric shows who watched an ad to the end?",
+          "question": "Aling metric ang nagpapakita kung sino ang nanood ng ad hanggang dulo?",
           "wrong": "Click-through rate",
           "right": "View-through rate"
         },
         "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
+          "question": "Ano ang pangunahing binabawasan ng cache?",
+          "wrong": "Gastos sa storage",
           "right": "Response time"
         }
       }
@@ -645,47 +657,47 @@
     "tutor": {
       "title": "Isang tutor para sa bawat tanong",
       "text": "Pagkatapos ng bawat sagot, makikita mo agad ang tamang opsyon. Hindi sigurado kung bakit ito tama? Tanungin ang AI tutor at lumalim hangga't kailangan mo.",
-      "question": "Aling index ang tumutulong sa query na nagfi-filter ayon sa petsa?",
+      "question": "Galit ang isang customer dahil na-late ang delivery niya. Ano ang una mong gagawin?",
       "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
+        "first": "Ipaliwanag kung bakit na-late",
+        "second": "Kilalanin ang problema at mag-sorry",
+        "third": "Mag-alok agad ng discount",
+        "fourth": "Ipasa ang kaso sa manager"
       },
-      "ask": "Bakit hindi ang hash index?",
-      "answer": "Eksaktong value lang ang nahahanap ng hash index. Range ang hinahanap ng filter sa petsa, at nakaayos ang mga petsa sa B-tree."
+      "ask": "Bakit hindi muna magpaliwanag?",
+      "answer": "Kilalanin muna ang problema: nakikinig ang tao sa paliwanag kapag ramdam niyang pinakikinggan siya."
     },
     "proof": {
       "title": "Alamin kung kailan ka handa",
       "text": "May progress bar ang bawat topic papunta sa certificate nito. Kunin ito, at maituturing na master mo na ang topic.",
-      "again": "Start again"
+      "again": "Magsimula ulit"
     },
     "quality": {
       "title": "Mga tanong na kusang gumaganda",
-      "text": "May isang tamang opsyon at tatlong kapani-paniwalang maling opsyon ang bawat tanong. Itinuturo ng mga boto, report, at sagot ang mahihinang tanong, at inaayos o pinapalitan ang mga ito ng isang verifier sa background.",
+      "text": "Ipinapakita ng mga like, dislike at report ang mahihinang tanong. Awtomatikong inaayos o pinapalitan ng isang AI verifier ang mga ito, at puwedeng ipagawang muli ng mga may-ari ng kit ang kahit anong tanong.",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "Ano ang pinapabilis ng database index?",
+        "weak": "Aling programming language ang pinakamagaling?",
+        "better": "Aling language ang pinakaginagamit sa frontend development?"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "Depende sa project, kaya walang iisang tamang sagot.",
+      "list": "Mga tanong sa topic"
     },
     "share": {
       "title": "I-share o i-publish",
-      "text": "Ipadala nang pribado ang isang kit sa mga kaibigan o katrabaho sa email, o i-publish ito sa pampublikong library para sa lahat ng naghahanda para sa parehong bagay.",
-      "private": "Pribadong naka-share",
-      "public": "Nasa pampublikong library",
+      "text": "Imbitahan sa email ang mga kaibigan o katrabaho para mag-practice ng kit mo kasama ka, o i-publish ito sa pampublikong library para sa lahat ng naghahanda para sa parehong bagay.",
+      "private": "Pribadong pag-share",
+      "public": "Pampublikong pag-share",
       "browse": "Tuklasin ang library"
     },
     "companies": {
       "title": "Nagha-hire? Subukin nang patas ang mga kandidato",
-      "text": "Gawing may oras na interview ang isang job description at imbitahan ang mga kandidato sa email.",
+      "text": "Gawing may oras na interview ang isang job description at imbitahan ang mga kandidato para masuri sila.",
       "points": {
-        "own": "May sariling mga tanong ang bawat kandidato, sa sarili nitong pagkakasunod.",
-        "timed": "May sariling countdown ang bawat tanong, na binabantayan ng server.",
-        "flags": "Mina-mark ng mga scorecard ang mga minadaling sagot, pag-alis sa page, at pagtatangkang mangopya.",
-        "private": "Hindi kailanman nakikita ng mga kandidato ang score nila o kung aling sagot ang tama."
+        "own": "Ibang mga tanong sa bawat kandidato",
+        "timed": "May countdown ang bawat tanong",
+        "flags": "Flag sa pagmamadali, pag-alis o pangongopya",
+        "private": "Nakatago ang score sa mga kandidato"
       },
       "candidate": "Kandidato",
       "score": "Score",
@@ -695,20 +707,20 @@
     },
     "languages": {
       "title": "Sa wika mo",
-      "text": "Gumagana ang site at lahat ng ginagawa nito sa {count} wika, pati mula kanan pakaliwa. Mag-paste ng job description sa isang wika at mag-practice sa iba."
+      "text": "Gamitin ang prepza sa alinman sa {count} wika. Mag-paste ng job description sa isang wika at mag-practice sa iba."
     },
     "pricing": {
       "title": "Magbayad lang para sa gumagana",
-      "text": "Walang subscription o plan. Mag-top up kapag kailangan mo, at gumastos ng credits sa ginagamit mo lang.",
+      "text": "Walang subscription o plan. Mag-top up kapag kailangan mo: hindi nag-e-expire ang credits, at walang bayad ang anumang pumalya.",
       "see": "Tingnan ang presyo",
       "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
+      "personal": "Para sa iyong mga kit at sa AI tutor.",
+      "learner": "Credits ng learner"
     },
     "faq": {
       "title": "May tanong pa?",
-      "text": "Mga sagot tungkol sa presyo, certificate, privacy, at hiring.",
-      "read": "basahin ang FAQ"
+      "text": "Hanapin ang sagot sa FAQ, o magtanong sa aming AI assistant.",
+      "read": "pumunta sa FAQ"
     },
     "ready": {
       "title": "Handa ka nang maghanda?",
@@ -734,7 +746,7 @@
     "messagePlaceholder": "I-type ang mensahe mo rito…",
     "send": "Ipadala",
     "thanks": "Salamat!",
-    "sent": "Naipadala na ang mensahe mo. Sasagot kami sa {email}.",
+    "sent": "Papunta na sa amin ang mensahe mo. Sasagot kami sa {email}.",
     "failed": "Hindi naipadala ang mensahe mo. Pakisubukan ulit."
   }
 }
