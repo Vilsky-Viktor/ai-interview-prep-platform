@@ -10,6 +10,7 @@ import { GapsSection } from "@/components/landing/gaps"
 import { HowItWorks } from "@/components/landing/how-it-works"
 import { LanguagesSection } from "@/components/landing/languages"
 import { PricingSection } from "@/components/landing/pricing"
+import { ReferralsSection } from "@/components/landing/referrals"
 import { ProofSection } from "@/components/landing/proof"
 import { QualitySection } from "@/components/landing/quality"
 import { ShareSection } from "@/components/landing/share"
@@ -54,6 +55,7 @@ export default async function HomePage() {
       <CompaniesSection />
       <LanguagesSection />
       <PricingSection />
+      <ReferralsSection />
       <Closing />
     </main>
   )

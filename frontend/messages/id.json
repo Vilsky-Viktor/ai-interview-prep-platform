@@ -565,7 +565,7 @@
     "title": "Undang teman",
     "note": "Kalian berdua mendapat {reward, number} kredit saat temanmu mengisi ulang untuk pertama kali.",
     "companyTitle": "Undang perusahaan lain",
-    "companyNote": "Kedua perusahaan mendapat {reward, number} kredit saat perusahaan baru mengisi ulang ${min} atau lebih untuk pertama kali.",
+    "companyNote": "Kedua perusahaan mendapat {reward, number} kredit saat perusahaan baru mengisi ulang ${min} atau lebih.",
     "rewarded": "{count, plural, =0 {Belum ada hadiah.} other {Sudah # kali mendapat hadiah.}}"
   },
   "topUp": {
@@ -702,6 +702,12 @@
       "company": "Acme Inc.",
       "personal": "Untuk kit dan tutor AI-mu.",
       "learner": "Kredit pelajar"
+    },
+    "referrals": {
+      "title": "Dapatkan kredit sebagai afiliasi",
+      "text": "Undang teman atau perusahaan lain dengan tautanmu. Saat mereka isi ulang pertama kali, kalian berdua dapat kredit.",
+      "whereLearner": "Tautanmu ada di {settings} → {referral}.",
+      "whereCompany": "Tautan perusahaanmu ada di {hiring} → perusahaanmu → {referrals}."
     },
     "faq": {
       "title": "Masih ada pertanyaan?",

@@ -571,7 +571,7 @@
     "title": "Mời bạn bè",
     "note": "Cả hai bạn đều nhận {reward, number} tín dụng khi bạn của bạn nạp tiền lần đầu.",
     "companyTitle": "Mời công ty khác",
-    "companyNote": "Cả hai công ty đều nhận {reward, number} tín dụng khi công ty mới nạp từ ${min} trở lên lần đầu.",
+    "companyNote": "Cả hai công ty đều nhận {reward, number} tín dụng khi công ty mới nạp từ ${min} trở lên.",
     "rewarded": "{count, plural, =0 {Chưa có phần thưởng.} other {Đã nhận thưởng # lần.}}"
   },
   "topUp": {
@@ -704,6 +704,12 @@
       "company": "Acme Inc.",
       "personal": "Dùng cho bộ ôn luyện và gia sư AI.",
       "learner": "Tín dụng học viên"
+    },
+    "referrals": {
+      "title": "Nhận tín dụng khi làm đối tác giới thiệu",
+      "text": "Mời bạn bè hoặc công ty khác bằng liên kết của bạn. Khi họ nạp tiền lần đầu, cả hai đều nhận được tín dụng.",
+      "whereLearner": "Liên kết của bạn nằm trong {settings} → {referral}.",
+      "whereCompany": "Liên kết của công ty bạn nằm trong {hiring} → công ty của bạn → {referrals}."
     },
     "faq": {
       "title": "Vẫn còn thắc mắc?",

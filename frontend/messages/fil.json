@@ -571,7 +571,7 @@
     "title": "Mag-imbita ng mga kaibigan",
     "note": "Pareho kayong makakakuha ng {reward, number} credits kapag unang nag-top up ang kaibigan mo.",
     "companyTitle": "Mag-imbita ng ibang kumpanya",
-    "companyNote": "Parehong makakakuha ng {reward, number} credits ang dalawang kumpanya kapag unang nag-top up ng ${min} o higit pa ang bagong kumpanya.",
+    "companyNote": "Parehong makakakuha ng {reward, number} credits ang dalawang kumpanya kapag nag-top up ng ${min} o higit pa ang bagong kumpanya.",
     "rewarded": "{count, plural, =0 {Wala pang gantimpala.} one {Nagantimpalaan nang # beses.} other {Nagantimpalaan nang # beses.}}"
   },
   "topUp": {
@@ -716,6 +716,12 @@
       "company": "Acme Inc.",
       "personal": "Para sa iyong mga kit at sa AI tutor.",
       "learner": "Credits ng learner"
+    },
+    "referrals": {
+      "title": "Kumita ng credits bilang affiliate",
+      "text": "Imbitahan ang mga kaibigan o ibang kumpanya gamit ang link mo. Pagka-top up nila sa unang beses, pareho kayong makakakuha ng credits.",
+      "whereLearner": "Nasa {settings} → {referral} ang link mo.",
+      "whereCompany": "Nasa {hiring} → ang kumpanya mo → {referrals} ang link ng kumpanya mo."
     },
     "faq": {
       "title": "May tanong pa?",

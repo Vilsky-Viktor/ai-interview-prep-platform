@@ -571,7 +571,7 @@
     "title": "친구 초대",
     "note": "친구가 처음 충전하면 두 사람 모두 {reward, number} 크레딧을 받습니다.",
     "companyTitle": "다른 회사 초대",
-    "companyNote": "새 회사가 처음 ${min} 이상 충전하면 두 회사 모두 {reward, number} 크레딧을 받습니다.",
+    "companyNote": "새 회사가 ${min} 이상 충전하면 두 회사 모두 {reward, number} 크레딧을 받습니다.",
     "rewarded": "{count, plural, =0 {아직 보상이 없습니다.} other {지금까지 #회 보상을 받았습니다.}}"
   },
   "topUp": {
@@ -700,6 +700,12 @@
       "company": "Acme Inc.",
       "personal": "준비 키트와 AI 튜터에 사용됩니다.",
       "learner": "학습자 크레딧"
+    },
+    "referrals": {
+      "title": "제휴 파트너로 크레딧 받기",
+      "text": "내 링크로 친구나 다른 회사를 초대하세요. 상대가 처음 충전하면 두 사람 모두 크레딧을 받아요.",
+      "whereLearner": "내 링크는 {settings} → {referral}에 있어요.",
+      "whereCompany": "회사 링크는 {hiring} → 내 회사 → {referrals}에 있어요."
     },
     "faq": {
       "title": "궁금한 점이 더 있나요?",

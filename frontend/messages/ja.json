@@ -565,7 +565,7 @@
     "title": "友人を招待",
     "note": "友人が初めてチャージすると、二人とも {reward, number} クレジットを受け取れます。",
     "companyTitle": "他の会社を招待",
-    "companyNote": "新しい会社が初めて ${min} 以上チャージすると、両社とも {reward, number} クレジットを受け取れます。",
+    "companyNote": "新しい会社が ${min} 以上チャージすると、両社とも {reward, number} クレジットを受け取れます。",
     "rewarded": "{count, plural, =0 {特典はまだありません。} other {これまでに # 回特典を受け取りました。}}"
   },
   "topUp": {
@@ -702,6 +702,12 @@
       "company": "Acme Inc.",
       "personal": "準備キットと AI チューターに。",
       "learner": "学習者クレジット"
+    },
+    "referrals": {
+      "title": "アフィリエイトでクレジットを獲得",
+      "text": "あなたのリンクで友だちや他の企業を招待しましょう。相手が初めてチャージすると、お互いにクレジットがもらえます。",
+      "whereLearner": "リンクは {settings} → {referral} にあります。",
+      "whereCompany": "会社のリンクは {hiring} → あなたの会社 → {referrals} にあります。"
     },
     "faq": {
       "title": "ほかに質問はありますか？",

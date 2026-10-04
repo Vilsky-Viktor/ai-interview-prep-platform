@@ -571,7 +571,7 @@
     "title": "Arkadaşlarınızı davet edin",
     "note": "Arkadaşınız ilk kez yükleme yaptığında ikiniz de {reward, number} kredi alırsınız.",
     "companyTitle": "Başka bir şirketi davet edin",
-    "companyNote": "Yeni şirket ilk kez ${min} veya daha fazla yükleme yaptığında iki şirket de {reward, number} kredi alır.",
+    "companyNote": "Yeni şirket ${min} veya daha fazla yükleme yaptığında iki şirket de {reward, number} kredi alır.",
     "rewarded": "{count, plural, =0 {Henüz ödül yok.} one {Şimdiye kadar # kez ödüllendirildi.} other {Şimdiye kadar # kez ödüllendirildi.}}"
   },
   "topUp": {
@@ -712,6 +712,12 @@
       "company": "Acme Inc.",
       "personal": "Setleriniz ve yapay zekâ eğitmeni için.",
       "learner": "Öğrenci kredileri"
+    },
+    "referrals": {
+      "title": "Ortak olarak kredi kazanın",
+      "text": "Arkadaşlarınızı veya diğer şirketleri bağlantınızla davet edin. İlk kez yükleme yaptıklarında ikiniz de kredi kazanırsınız.",
+      "whereLearner": "Bağlantınız {settings} → {referral} bölümünde.",
+      "whereCompany": "Şirketinizin bağlantısı {hiring} → şirketiniz → {referrals} bölümünde."
     },
     "faq": {
       "title": "Hâlâ sorunuz mu var?",

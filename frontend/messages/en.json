@@ -571,7 +571,7 @@
     "title": "Invite friends",
     "note": "You both get {reward, number} credits when they first top up.",
     "companyTitle": "Invite another company",
-    "companyNote": "Both companies get {reward, number} credits when the new one first tops up ${min} or more.",
+    "companyNote": "You both get {reward, number} credits when they top up ${min} or more.",
     "rewarded": "{count, plural, =0 {No rewards yet.} one {Rewarded # time so far.} other {Rewarded # times so far.}}"
   },
   "topUp": {
@@ -704,6 +704,12 @@
       "company": "Acme Inc.",
       "personal": "For your prep kits and the AI tutor.",
       "learner": "Learner credits"
+    },
+    "referrals": {
+      "title": "Earn credits as an affiliate",
+      "text": "Invite friends or other companies with your link. When they top up for the first time, you both get credits.",
+      "whereLearner": "Your link is in {settings} → {referral}.",
+      "whereCompany": "Your company's link is in {hiring} → your company → {referrals}."
     },
     "faq": {
       "title": "Still have questions?",

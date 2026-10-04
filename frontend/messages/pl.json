@@ -571,7 +571,7 @@
     "title": "Zaproś znajomych",
     "note": "Oboje dostaniecie {reward, number} kredytów, gdy znajomy pierwszy raz doładuje konto.",
     "companyTitle": "Zaproś inną firmę",
-    "companyNote": "Obie firmy dostaną {reward, number} kredytów, gdy nowa pierwszy raz doładuje konto kwotą ${min} lub wyższą.",
+    "companyNote": "Obie firmy dostaną {reward, number} kredytów, gdy nowa doładuje konto kwotą ${min} lub wyższą.",
     "rewarded": "{count, plural, =0 {Brak nagród.} one {Nagroda przyznana # raz.} few {Nagroda przyznana # razy.} many {Nagroda przyznana # razy.} other {Nagroda przyznana # razy.}}"
   },
   "topUp": {
@@ -708,6 +708,12 @@
       "company": "Acme Inc.",
       "personal": "Na Twoje zestawy i tutora AI.",
       "learner": "Kredyty ucznia"
+    },
+    "referrals": {
+      "title": "Zarabiaj kredyty jako partner",
+      "text": "Zaproś znajomych lub inne firmy swoim linkiem. Gdy po raz pierwszy doładują konto, oboje dostaniecie kredyty.",
+      "whereLearner": "Twój link znajdziesz w {settings} → {referral}.",
+      "whereCompany": "Link Twojej firmy znajdziesz w {hiring} → Twoja firma → {referrals}."
     },
     "faq": {
       "title": "Masz jeszcze pytania?",

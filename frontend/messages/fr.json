@@ -571,7 +571,7 @@
     "title": "Invitez vos amis",
     "note": "Vous recevez chacun {reward, number} crédits quand votre ami recharge pour la première fois.",
     "companyTitle": "Invitez une autre entreprise",
-    "companyNote": "Les deux entreprises reçoivent {reward, number} crédits quand la nouvelle recharge pour la première fois ${min} ou plus.",
+    "companyNote": "Les deux entreprises reçoivent {reward, number} crédits quand la nouvelle recharge ${min} ou plus.",
     "rewarded": "{count, plural, =0 {Aucune récompense pour l'instant.} one {Récompensé # fois jusqu'ici.} other {Récompensé # fois jusqu'ici.}}"
   },
   "topUp": {
@@ -708,6 +708,12 @@
       "company": "Acme Inc.",
       "personal": "Pour vos kits et le tuteur IA.",
       "learner": "Crédits personnels"
+    },
+    "referrals": {
+      "title": "Gagnez des crédits en tant qu'affilié",
+      "text": "Invitez des amis ou d'autres entreprises avec votre lien. Lors de leur première recharge, vous recevez tous les deux des crédits.",
+      "whereLearner": "Votre lien se trouve dans {settings} → {referral}.",
+      "whereCompany": "Le lien de votre entreprise se trouve dans {hiring} → votre entreprise → {referrals}."
     },
     "faq": {
       "title": "Encore des questions ?",

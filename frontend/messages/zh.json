@@ -565,7 +565,7 @@
     "title": "邀请朋友",
     "note": "朋友首次充值后，你们双方各得 {reward, number} 点数。",
     "companyTitle": "邀请其他公司",
-    "companyNote": "新公司首次充值 ${min} 或以上后，两家公司各得 {reward, number} 点数。",
+    "companyNote": "新公司充值 ${min} 或以上后，两家公司各得 {reward, number} 点数。",
     "rewarded": "{count, plural, =0 {还没有奖励。} other {目前已获得 # 次奖励。}}"
   },
   "topUp": {
@@ -694,6 +694,12 @@
       "company": "Acme Inc.",
       "personal": "用于你的学习包和 AI 辅导老师。",
       "learner": "学员点数"
+    },
+    "referrals": {
+      "title": "成为推广伙伴，赚取点数",
+      "text": "用你的链接邀请朋友或其他公司。对方首次充值后，你们双方都能获得点数。",
+      "whereLearner": "你的链接在 {settings} → {referral}。",
+      "whereCompany": "公司的链接在 {hiring} → 你的公司 → {referrals}。"
     },
     "faq": {
       "title": "还有疑问？",

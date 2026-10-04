@@ -571,7 +571,7 @@
     "title": "Kutsu sõpru",
     "note": "Mõlemad saate {reward, number} krediiti, kui sõber esimest korda juurde laeb.",
     "companyTitle": "Kutsu teine ettevõte",
-    "companyNote": "Mõlemad ettevõtted saavad {reward, number} krediiti, kui uus ettevõte laeb esimest korda juurde vähemalt ${min}.",
+    "companyNote": "Mõlemad ettevõtted saavad {reward, number} krediiti, kui uus ettevõte laeb juurde vähemalt ${min}.",
     "rewarded": "{count, plural, =0 {Tasusid veel pole.} one {Tasu saadud # kord.} other {Tasu saadud # korda.}}"
   },
   "topUp": {
@@ -712,6 +712,12 @@
       "company": "Acme Inc.",
       "personal": "Sinu komplektide ja tehisaru juhendaja jaoks.",
       "learner": "Õppija krediidid"
+    },
+    "referrals": {
+      "title": "Teeni partnerina krediiti",
+      "text": "Kutsu oma lingiga sõpru või teisi ettevõtteid. Kui nad esimest korda raha juurde laadivad, saate mõlemad krediiti.",
+      "whereLearner": "Sinu link on jaotises {settings} → {referral}.",
+      "whereCompany": "Ettevõtte link on jaotises {hiring} → sinu ettevõte → {referrals}."
     },
     "faq": {
       "title": "Küsimusi veel?",

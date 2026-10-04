@@ -571,7 +571,7 @@
     "title": "Nodig vrienden uit",
     "note": "Jullie krijgen allebei {reward, number} credits als je vriend voor het eerst opwaardeert.",
     "companyTitle": "Nodig een ander bedrijf uit",
-    "companyNote": "Beide bedrijven krijgen {reward, number} credits als het nieuwe voor het eerst ${min} of meer opwaardeert.",
+    "companyNote": "Beide bedrijven krijgen {reward, number} credits als het nieuwe ${min} of meer opwaardeert.",
     "rewarded": "{count, plural, =0 {Nog geen beloningen.} one {Tot nu toe # keer beloond.} other {Tot nu toe # keer beloond.}}"
   },
   "topUp": {
@@ -704,6 +704,12 @@
       "company": "Acme Inc.",
       "personal": "Voor je kits en de AI-tutor.",
       "learner": "Persoonlijke credits"
+    },
+    "referrals": {
+      "title": "Verdien credits als affiliate",
+      "text": "Nodig vrienden of andere bedrijven uit met je link. Als ze voor het eerst opwaarderen, krijgen jullie allebei credits.",
+      "whereLearner": "Je link staat onder {settings} → {referral}.",
+      "whereCompany": "De link van je bedrijf staat onder {hiring} → je bedrijf → {referrals}."
     },
     "faq": {
       "title": "Nog vragen?",

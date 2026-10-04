@@ -571,7 +571,7 @@
     "title": "Lade Freunde ein",
     "note": "Ihr bekommt beide {reward, number} Credits, wenn dein Freund zum ersten Mal auflädt.",
     "companyTitle": "Lade ein anderes Unternehmen ein",
-    "companyNote": "Beide Unternehmen bekommen {reward, number} Credits, wenn das neue zum ersten Mal ${min} oder mehr auflädt.",
+    "companyNote": "Beide Unternehmen bekommen {reward, number} Credits, wenn das neue ${min} oder mehr auflädt.",
     "rewarded": "{count, plural, =0 {Noch keine Prämien.} one {Bisher # Mal belohnt.} other {Bisher # Mal belohnt.}}"
   },
   "topUp": {
@@ -708,6 +708,12 @@
       "company": "Acme Inc.",
       "personal": "Für deine Kits und den KI-Tutor.",
       "learner": "Lern-Credits"
+    },
+    "referrals": {
+      "title": "Verdiene Credits als Affiliate",
+      "text": "Lade Freunde oder andere Unternehmen mit deinem Link ein. Wenn sie zum ersten Mal aufladen, bekommt ihr beide Credits.",
+      "whereLearner": "Dein Link ist unter {settings} → {referral}.",
+      "whereCompany": "Der Link deines Unternehmens ist unter {hiring} → dein Unternehmen → {referrals}."
     },
     "faq": {
       "title": "Noch Fragen?",
