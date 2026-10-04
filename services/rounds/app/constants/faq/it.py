@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Quanto costa?",
-        "answer": "Paghi a consumo, con i crediti. Un nuovo kit costa {kit} crediti. Il tuo primo kit è gratuito, con fino a {free_topics} argomenti, e ogni nuovo account riceve anche {welcome} crediti gratuiti. La pagina dei prezzi elenca tutti i prezzi.",
+        "answer": "Paghi a consumo, con i crediti. Vedere gli argomenti proposti per il tuo annuncio di lavoro o il tuo obiettivo è gratuito; un kit costa {kit} crediti, pagati solo quando approvi i suoi argomenti. Esercitarsi nella biblioteca pubblica è gratuito, e ogni nuovo account riceve {welcome} crediti gratuiti. La pagina dei prezzi elenca tutti i prezzi.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Com’è il prezzo rispetto ad altri strumenti di valutazione?",
-        "answer": "La maggior parte delle piattaforme di valutazione costa 100–215 $ al mese con piano annuale, oppure 7–20 $ per candidato. Con prepza un candidato costa {candidate} crediti ({candidate_dollars} $), senza contratto, senza costi per utente e senza pagare per generare un colloquio. Un’azienda che invita {example_candidates} candidati al mese paga circa {example_year_dollars} $ all’anno, contro 1.200–2.580 $ di un piano annuale. Da circa 40 candidati al mese, alcuni piani illimitati costano meno.",
+        "answer": "La maggior parte delle piattaforme di valutazione costa 100–215 $ al mese con piano annuale, oppure 7–20 $ per candidato. Con prepza un candidato costa {candidate} crediti ({candidate_dollars} $), senza contratto, senza costi per utente e senza pagare per generare un colloquio. Un’azienda che invita {example_candidates} candidati al mese paga circa {example_year_dollars} $ all’anno, contro 1.200–2.580 $ di un piano annuale. Da circa 50 candidati al mese, alcuni piani illimitati costano meno.",
     },
     {
         "key": "scorecards",

@@ -8,7 +8,7 @@ MESSAGES = {
     "Choose one of the balances": "잔액 기준 중 하나를 선택해 주세요",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "오늘의 새 생성 한도에 도달했습니다. 내일 다시 시도해 주세요. 연습과 면접은 계속 이용할 수 있습니다.",
     "Couldn't get a reply right now. Please try again.": "지금은 답변을 받을 수 없습니다. 다시 시도해 주세요.",
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": "오늘 이미 새 공개 주제를 3개 시작했습니다. 내일 다시 오거나 지금 나만의 키트를 만들어 보세요.",
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "오늘 시작할 수 있는 새 공개 주제 한도에 도달했습니다. 내일 다시 오거나 지금 나만의 키트를 만드세요.",
     "You can own at most 3 companies.": "회사는 최대 3개까지 소유할 수 있습니다.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "회사는 하루에 최대 10개의 면접을 생성할 수 있습니다. 내일 다시 시도해 주세요.",
     "A kit can be shared with at most 30 people.": "키트는 최대 30명과 공유할 수 있습니다.",

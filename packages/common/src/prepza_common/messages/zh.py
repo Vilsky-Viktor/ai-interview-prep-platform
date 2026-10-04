@@ -8,7 +8,7 @@ MESSAGES = {
     "Choose one of the balances": "请选择一个余额阈值",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "今日的新生成次数已达上限，请明天再试；练习和面试仍可正常使用。",
     "Couldn't get a reply right now. Please try again.": "暂时无法获取回复，请重试。",
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": "你今天已经开始了 3 个新的公开主题。请明天再来，或者现在就生成你自己的学习包。",
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "你已达到今天新公共主题的上限。请明天再来，或现在就生成你自己的学习包。",
     "You can own at most 3 companies.": "你最多可以拥有 3 家公司。",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "你的公司每天最多可以生成 10 场面试，请明天再试。",
     "A kit can be shared with at most 30 people.": "一个学习包最多可以分享给 30 个人。",

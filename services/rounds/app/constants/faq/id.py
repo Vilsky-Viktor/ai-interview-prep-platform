@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Berapa biayanya?",
-        "answer": "Kamu bayar sesuai pemakaian, dengan kredit. Kit baru seharga {kit} kredit. Kit pertamamu gratis, dengan hingga {free_topics} topik, dan setiap akun baru juga mendapat {welcome} kredit gratis. Halaman harga mencantumkan semua harga.",
+        "answer": "Kamu bayar sesuai pemakaian, dengan kredit. Melihat topik yang disusun untuk deskripsi pekerjaan atau tujuanmu gratis; satu kit seharga {kit} kredit, dibayar hanya saat kamu menyetujui topiknya. Berlatih di perpustakaan publik gratis, dan setiap akun baru mendapat {welcome} kredit gratis. Halaman harga mencantumkan semua harga.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Bagaimana harganya dibanding alat asesmen lain?",
-        "answer": "Kebanyakan platform asesmen seharga $100–215 per bulan dengan paket tahunan, atau $7–20 per kandidat. Di prepza, satu kandidat seharga {candidate} kredit (${candidate_dollars}), tanpa kontrak, tanpa biaya per pengguna, dan tanpa biaya untuk membuat wawancara. Perusahaan yang mengundang {example_candidates} kandidat per bulan membayar sekitar ${example_year_dollars} per tahun, dibanding $1.200–2.580 untuk paket tahunan. Mulai sekitar 40 kandidat per bulan, beberapa paket tanpa batas bisa lebih murah.",
+        "answer": "Kebanyakan platform asesmen seharga $100–215 per bulan dengan paket tahunan, atau $7–20 per kandidat. Di prepza, satu kandidat seharga {candidate} kredit (${candidate_dollars}), tanpa kontrak, tanpa biaya per pengguna, dan tanpa biaya untuk membuat wawancara. Perusahaan yang mengundang {example_candidates} kandidat per bulan membayar sekitar ${example_year_dollars} per tahun, dibanding $1.200–2.580 untuk paket tahunan. Mulai sekitar 50 kandidat per bulan, beberapa paket tanpa batas bisa lebih murah.",
     },
     {
         "key": "scorecards",

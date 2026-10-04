@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Quanto custa?",
-        "answer": "Você paga conforme usa, com créditos. Um kit novo custa {kit} créditos. Seu primeiro kit é grátis, com até {free_topics} tópicos, e cada conta nova também recebe {welcome} créditos grátis. A página de preços mostra todos os preços.",
+        "answer": "Você paga conforme usa, com créditos. Ver os tópicos propostos para a sua vaga ou objetivo é grátis; um kit custa {kit} créditos, pagos só quando você aprova os tópicos. Praticar na biblioteca pública é grátis, e cada conta nova recebe {welcome} créditos grátis. A página de preços mostra todos os preços.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Como o preço se compara a outras ferramentas de avaliação?",
-        "answer": "A maioria das plataformas de avaliação custa US$ 100–215 por mês no plano anual, ou US$ 7–20 por candidato. No prepza, um candidato custa {candidate} créditos (US$ {candidate_dollars}), sem contrato, sem taxa por usuário e sem pagar para gerar uma entrevista. Uma empresa que convida {example_candidates} candidatos por mês paga cerca de US$ {example_year_dollars} por ano, contra US$ 1.200–2.580 de um plano anual. A partir de cerca de 40 candidatos por mês, alguns planos ilimitados custam menos.",
+        "answer": "A maioria das plataformas de avaliação custa US$ 100–215 por mês no plano anual, ou US$ 7–20 por candidato. No prepza, um candidato custa {candidate} créditos (US$ {candidate_dollars}), sem contrato, sem taxa por usuário e sem pagar para gerar uma entrevista. Uma empresa que convida {example_candidates} candidatos por mês paga cerca de US$ {example_year_dollars} por ano, contra US$ 1.200–2.580 de um plano anual. A partir de cerca de 50 candidatos por mês, alguns planos ilimitados custam menos.",
     },
     {
         "key": "scorecards",

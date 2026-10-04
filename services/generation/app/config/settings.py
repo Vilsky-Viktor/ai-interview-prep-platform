@@ -30,15 +30,12 @@ class Settings(ServiceSettings):
     # a company's interview, whatever its level, since candidates are judged on it;
     interview_model: str = "gpt-6.1-sol"
     interview_reasoning_effort: ReasoningEffort = "low"
-    # a learner's free kit, at any level, since it's given away;
-    free_kit_model: str = "gpt-6-luna"
-    free_kit_reasoning_effort: ReasoningEffort = "high"
-    # a learner's paid basic or medium kit, where Luna at high reasoning was as accurate as Sol in
-    # testing at about a seventh of the price, though slower (evals/README.md);
-    kit_model: str = "gpt-6-luna"
-    kit_reasoning_effort: ReasoningEffort = "high"
-    # and a learner's paid hard kit, where Luna's questions came out too easy, plus reading a paid
-    # kit's text before its level is known.
+    # a learner's basic or medium kit (Luna at high reasoning was as accurate there, cheaper but
+    # slower; see evals/README.md);
+    kit_model: str = "gpt-6.1-sol"
+    kit_reasoning_effort: ReasoningEffort = "low"
+    # and a learner's hard kit, where Luna's questions came out too easy, plus reading a learner's
+    # text before its level is known.
     hard_kit_model: str = "gpt-6.1-sol"
     hard_kit_reasoning_effort: ReasoningEffort = "low"
     # Checks answer keys, at once and in batches: rare, and it must be right.

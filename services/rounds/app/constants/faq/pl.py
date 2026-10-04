@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Ile to kosztuje?",
-        "answer": "Płacisz za użycie, kredytami. Nowy zestaw kosztuje {kit} kredytów. Twój pierwszy zestaw jest darmowy, do {free_topics} tematów, a każde nowe konto dostaje też {welcome} darmowych kredytów. Wszystkie ceny są na stronie cennika.",
+        "answer": "Płacisz za użycie, kredytami. Podgląd tematów przygotowanych dla twojego ogłoszenia lub celu jest darmowy; zestaw kosztuje {kit} kredytów, płatnych dopiero po zatwierdzeniu jego tematów. Ćwiczenie w publicznej bibliotece jest darmowe, a każde nowe konto dostaje {welcome} darmowych kredytów. Wszystkie ceny są na stronie cennika.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Jak cena wypada na tle innych narzędzi do oceny kandydatów?",
-        "answer": "Większość platform do oceny kandydatów kosztuje 100–215 $ miesięcznie w planie rocznym albo 7–20 $ za kandydata. W prepza kandydat kosztuje {candidate} kredytów ({candidate_dollars} $), bez umowy, bez opłat za użytkowników i bez płacenia za wygenerowanie rozmowy. Firma, która zaprasza {example_candidates} kandydatów miesięcznie, płaci około {example_year_dollars} $ rocznie, wobec 1 200–2 580 $ za plan roczny. Od około 40 kandydatów miesięcznie niektóre plany bez limitu wychodzą taniej.",
+        "answer": "Większość platform do oceny kandydatów kosztuje 100–215 $ miesięcznie w planie rocznym albo 7–20 $ za kandydata. W prepza kandydat kosztuje {candidate} kredytów ({candidate_dollars} $), bez umowy, bez opłat za użytkowników i bez płacenia za wygenerowanie rozmowy. Firma, która zaprasza {example_candidates} kandydatów miesięcznie, płaci około {example_year_dollars} $ rocznie, wobec 1 200–2 580 $ za plan roczny. Od około 50 kandydatów miesięcznie niektóre plany bez limitu wychodzą taniej.",
     },
     {
         "key": "scorecards",

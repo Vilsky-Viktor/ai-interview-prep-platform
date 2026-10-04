@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
 
 import { GenerationView } from "@/components/generation/generation-view"
+import { serverFetch } from "@/lib/server-api"
+import type { Catalog } from "@/types/billing"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("generation")
@@ -22,6 +24,7 @@ export default async function GeneratePage({
   const raw = (await searchParams).next
   const next = raw?.startsWith("/company/") ? raw : undefined
   const companyMatch = next?.match(/^\/company\/([^/]+)\/interviews\/([^/?]+)/)
+  const catalog = await serverFetch<Catalog>("/billing/catalog")
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col space-y-8 px-6 py-12">
@@ -39,6 +42,7 @@ export default async function GeneratePage({
             : "/preparations"
         }
         backLabel={companyMatch ? t("interviews") : preparations("title")}
+        kitCredits={catalog?.kit_credits ?? null}
       />
     </main>
   )

@@ -2,8 +2,9 @@ from datetime import UTC, datetime, time
 
 from fastapi import HTTPException, status
 from prepza_common.analytics import track
+from prepza_common.constants import PUBLIC_TOPICS_PER_DAY
 
-from app.constants.rounds import PUBLIC_TOPICS_LIMIT, PUBLIC_TOPICS_PER_DAY
+from app.constants.rounds import PUBLIC_TOPICS_LIMIT
 from app.schemas.library import TopicQuestions
 from app.storage import rounds
 

@@ -8,7 +8,7 @@ MESSAGES = {
     "Choose one of the balances": "یکی از آستانه\u200cهای موجودی را انتخاب کنید",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "به سقف تولیدهای جدید امروز رسیده\u200cایم. فردا دوباره امتحان کنید؛ تمرین و مصاحبه\u200cها همچنان کار می\u200cکنند.",
     "Couldn't get a reply right now. Please try again.": "فعلاً پاسخی دریافت نشد. دوباره امتحان کنید.",
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": "امروز ۳ موضوع عمومی جدید را شروع کرده\u200cاید. فردا برگردید یا همین حالا مجموعهٔ خودتان را بسازید.",
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "به سقف امروز موضوع‌های عمومی جدید رسیده‌اید. فردا برگردید یا همین حالا مجموعهٔ خودتان را بسازید.",
     "You can own at most 3 companies.": "حداکثر می\u200cتوانید مالک ۳ شرکت باشید.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "شرکت شما می\u200cتواند روزانه حداکثر ۱۰ مصاحبه بسازد. فردا دوباره امتحان کنید.",
     "A kit can be shared with at most 30 people.": "یک مجموعه را می\u200cتوان حداکثر با ۳۰ نفر به اشتراک گذاشت.",

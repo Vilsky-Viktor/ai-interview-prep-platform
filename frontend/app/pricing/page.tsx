@@ -60,11 +60,11 @@ export default async function PricingPage() {
             what={t("publicCertificate")}
             price={credits(catalog.certificate_credits)}
           />
-          <PriceRow what={t("publicPractice")} price={t("free")} />
           <PriceRow
-            what={t("freeKit", { topics: catalog.free_kit_topics })}
+            what={t("publicPractice", { count: catalog.public_topics_per_day })}
             price={t("free")}
           />
+          <PriceRow what={t("draftTopics")} price={t("free")} />
           <PriceRow
             what={t("welcome")}
             price={t("gift", { count: catalog.welcome_user })}

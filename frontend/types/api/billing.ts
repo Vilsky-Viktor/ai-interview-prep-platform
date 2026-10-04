@@ -123,8 +123,8 @@ export interface paths {
     put?: never
     /**
      * Hold Kit
-     * @description A learner's prep kit. Charged when it's ready, given back if it fails or is cancelled.
-     *     A free kit is used first, if the learner has one; otherwise its credits are held.
+     * @description A learner's prep kit, held when its topics are approved. Charged when it's ready, given
+     *     back if it fails or is cancelled.
      */
     post: operations["hold_kit_internal_kits__generation_id__hold_post"]
     delete?: never
@@ -545,8 +545,6 @@ export interface components {
       available: number
       /** Low */
       low: boolean
-      /** Free Kits */
-      free_kits: number
     }
     /**
      * CatalogOut
@@ -569,12 +567,12 @@ export interface components {
       chat_turn_credits: number
       /** Chat Free Turns */
       chat_free_turns: number
+      /** Public Topics Per Day */
+      public_topics_per_day: number
       /** Welcome User */
       welcome_user: number
       /** Welcome Company */
       welcome_company: number
-      /** Free Kit Topics */
-      free_kit_topics: number
       /** Referral User */
       referral_user: number
       /** Referral Company */
@@ -630,14 +628,6 @@ export interface components {
     HTTPValidationError: {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
-    }
-    /**
-     * HoldOut
-     * @description A kit's hold: whether it uses a free kit instead of credits.
-     */
-    HoldOut: {
-      /** Free */
-      free: boolean
     }
     /** OwnersIn */
     OwnersIn: {
@@ -892,13 +882,11 @@ export interface operations {
     requestBody?: never
     responses: {
       /** @description Successful Response */
-      200: {
+      204: {
         headers: {
           [name: string]: unknown
         }
-        content: {
-          "application/json": components["schemas"]["HoldOut"]
-        }
+        content?: never
       }
       /** @description Validation Error */
       422: {

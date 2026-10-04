@@ -28,7 +28,7 @@ def company_generation():
         text="Job description",
         language="en",
         status="awaiting_review",
-        free_kit=False,
+        approved=False,
         topics=[{"main_topic": "Python", "subtopics": ["asyncio"]}],
         progress=None,
         preparation_id=None,

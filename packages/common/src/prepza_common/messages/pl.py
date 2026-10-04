@@ -8,7 +8,7 @@ MESSAGES = {
     "Choose one of the balances": "Wybierz jeden z progów salda",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "Osiągnęliśmy dzisiejszy limit nowych generowań. Spróbuj jutro; ćwiczenia i rozmowy działają dalej.",
     "Couldn't get a reply right now. Please try again.": "Nie udało się uzyskać odpowiedzi. Spróbuj ponownie.",
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": "Dziś rozpoczęto już 3 nowe publiczne tematy. Wróć jutro albo wygeneruj własny zestaw teraz.",
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "Osiągnięto dzisiejszy limit nowych publicznych tematów. Wróć jutro albo wygeneruj teraz własny zestaw.",
     "You can own at most 3 companies.": "Możesz być właścicielem najwyżej 3 firm.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "Twoja firma może generować do 10 rozmów dziennie. Spróbuj jutro.",
     "A kit can be shared with at most 30 people.": "Zestaw można udostępnić najwyżej 30 osobom.",

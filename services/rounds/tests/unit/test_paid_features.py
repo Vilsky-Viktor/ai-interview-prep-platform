@@ -4,7 +4,7 @@ import uuid
 import pytest
 from fastapi import HTTPException
 from firebase_admin import auth as firebase_auth
-from prepza_common.constants import CHAT_FREE_TURNS, CHAT_TURN_CREDITS
+from prepza_common.constants import CHAT_FREE_TURNS, CHAT_TURN_CREDITS, PUBLIC_TOPICS_PER_DAY
 from prepza_common.user import User
 
 from app.integrations import billing
@@ -42,8 +42,8 @@ def started(monkeypatch, already=False, today=0):
     monkeypatch.setattr(rounds, "public_topics_started_since", count)
 
 
-def test_a_fourth_new_public_topic_a_day_is_refused(monkeypatch):
-    started(monkeypatch, today=3)
+def test_a_new_public_topic_past_the_days_limit_is_refused(monkeypatch):
+    started(monkeypatch, today=PUBLIC_TOPICS_PER_DAY)
 
     with pytest.raises(HTTPException) as refused:
         asyncio.run(check_daily_limit("ann", topic(author="bob")))
@@ -54,8 +54,8 @@ def test_a_fourth_new_public_topic_a_day_is_refused(monkeypatch):
 @pytest.mark.parametrize(
     ("author", "already", "today"),
     [
-        ("bob", False, 2),  # still within the day's three
-        ("bob", True, 3),  # continuing a topic already started
+        ("bob", False, PUBLIC_TOPICS_PER_DAY - 1),  # still within the day's limit
+        ("bob", True, PUBLIC_TOPICS_PER_DAY),  # continuing a topic already started
         (None, False, 9),  # own or shared kits aren't limited
     ],
 )
@@ -130,7 +130,9 @@ def test_the_first_paid_turn_is_charged_once_the_reply_arrived(client, monkeypat
 
 def test_a_paid_turn_without_credits_is_refused_before_the_reply(client, monkeypatch):
     # One credit short of a turn's price, so billing couldn't charge it after the reply.
-    answer_id, charged = chat_setup(monkeypatch, turns_so_far=CHAT_FREE_TURNS, available=CHAT_TURN_CREDITS - 1)
+    answer_id, charged = chat_setup(
+        monkeypatch, turns_so_far=CHAT_FREE_TURNS, available=CHAT_TURN_CREDITS - 1
+    )
 
     response = send(client, answer_id)
 

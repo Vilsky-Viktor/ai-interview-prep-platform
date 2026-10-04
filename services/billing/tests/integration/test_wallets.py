@@ -6,7 +6,6 @@ from app.constants.credits import (
     KIT_CREDITS,
     WELCOME_COMPANY,
     WELCOME_USER,
-    WELCOME_USER_KITS,
     Reason,
 )
 from app.constants.products import DELETED_OWNER, TOP_UPS, OwnerType
@@ -40,11 +39,7 @@ def test_a_learner_starts_with_a_welcome_gift_and_a_kit_is_charged_only_when_rea
 
     opened, held, again, done, history = run(scenario())
 
-    assert (opened.balance, opened.reserved, opened.free_kits) == (
-        WELCOME_USER,
-        0,
-        WELCOME_USER_KITS,
-    )
+    assert (opened.balance, opened.reserved) == (WELCOME_USER, 0)
     assert (held, again) == (True, False)
     assert (done.balance, done.reserved) == (WELCOME_USER, 0)
     # A repeated charge counts once; the history holds the gift, the top-up and the kit.
@@ -188,7 +183,7 @@ def test_signing_up_again_or_a_new_company_doesnt_repeat_the_gifts(run):
 
     learner, new_company = run(scenario())
 
-    assert (learner.balance, learner.free_kits, new_company.balance) == (0, 0, 0)
+    assert (learner.balance, new_company.balance) == (0, 0)
 
 
 def test_a_refund_of_spent_credits_leaves_the_balance_negative(run):

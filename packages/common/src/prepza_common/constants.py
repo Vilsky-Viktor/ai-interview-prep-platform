@@ -74,7 +74,10 @@ DEFAULT_LANGUAGE = "en"
 LANGUAGE_CLAIM = "language"
 
 # Tutor turns free on each answered question; rounds enforces it, billing's catalog shows it.
-CHAT_FREE_TURNS = 2
+CHAT_FREE_TURNS = 1
+# New topics of other people's public kits a learner may start a day (UTC), free; continuing a
+# topic already started is never limited. Rounds enforces it, billing's catalog shows it.
+PUBLIC_TOPICS_PER_DAY = 1
 # Credits a tutor turn after the free ones costs: billing charges it, rounds checks the balance first.
 CHAT_TURN_CREDITS = 2
 
@@ -83,9 +86,6 @@ CHAT_TURN_CREDITS = 2
 MAX_SHARES = 30
 # Companies one person may own; the welcome credits come with the first one only (companies).
 MAX_OWNED_COMPANIES = 3
-# A new learner's welcome gift includes one free kit, of at most this many topics: for now as many
-# as a paid kit (generation's MAX_TOPICS), since a free kit is written by the cheaper FREE_KIT_MODEL.
-FREE_KIT_TOPICS = 10
 # Interviews are free to generate, so each company may start this many a day (companies).
 INTERVIEWS_PER_DAY = 10
 # $1 buys this many credits (billing sells them; the FAQ shows prices in dollars too).

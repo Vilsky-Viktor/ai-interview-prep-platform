@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from datetime import timedelta
 from enum import StrEnum
 
+from app.constants.credits import CANDIDATE_CREDITS, KIT_CREDITS
+
 
 class OwnerType(StrEnum):
     COMPANY = "company"
@@ -47,8 +49,11 @@ DELETED_OWNER = "deleted-user"
 
 # Automatic top-up: the balances (in credits) it can refill under, and the least time between two
 # automatic charges, so a webhook still on its way can't cause a second one.
-# A learner's top one is a kit (800 credits); a company's cover 1, 3 and 5 candidates (400 each).
-AUTO_TOP_UP_THRESHOLDS = {"user": [100, 400, 800], "company": [400, 1_200, 2_000]}
+# A learner's top one is a kit; a company's cover 1, 3 and 5 candidates.
+AUTO_TOP_UP_THRESHOLDS = {
+    "user": [100, 300, KIT_CREDITS],
+    "company": [CANDIDATE_CREDITS, 3 * CANDIDATE_CREDITS, 5 * CANDIDATE_CREDITS],
+}
 AUTO_TOP_UP_COOLDOWN = timedelta(minutes=10)
 # Turning it on is a checkout for a $0 monthly subscription, which saves the card; Paddle tells
 # us when it starts and when it ends (cancelled in Paddle, or after failed payments).

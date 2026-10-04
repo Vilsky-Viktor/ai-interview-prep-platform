@@ -18,10 +18,7 @@ MESSAGES = {
     "Couldn't get a reply right now. Please try again.": (
         "Praegu ei õnnestunud vastust saada. Proovi uuesti."
     ),
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": (
-        "Oled täna alustanud juba 3 uut avalikku teemat. Tule homme tagasi või loo kohe oma "
-        "komplekt."
-    ),
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "Oled jõudnud tänase uute avalike teemade piirini. Tule homme tagasi või loo kohe oma komplekt.",
     "You can own at most 3 companies.": "Sul võib olla kõige rohkem 3 ettevõtet.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": (
         "Sinu ettevõte saab luua kuni 10 intervjuud päevas. Proovi homme uuesti."

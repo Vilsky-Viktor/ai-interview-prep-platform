@@ -66,10 +66,13 @@ having answered at least one question (see prices).
 Credits and billing:
 - prepza is pay as you go with credits: 1 US dollar buys 100 credits. Credits never expire. \
 There are no subscriptions or plans.
-- Every user has a wallet, and every company has its own. A new account gets its first prep kit \
-free, with up to {free_topics} topics (it can keep at most {free_topics} at topic review; later \
-kits are paid and keep up to 10), plus a few free welcome credits for the tutor and \
-certificates. A person's first company gets free welcome credits (see prices).
+- Every user has a wallet, and every company has its own. A new account gets a few free welcome \
+credits for the tutor and certificates; there is no free kit. A person's first company gets free \
+welcome credits (see prices).
+- A prep kit is paid when its topics are approved: pasting a job description or goal and seeing \
+the drafted topics, editing them or asking for changes is free. Approving them sets the kit's \
+credits aside; without enough, the draft waits until the learner tops up. Practice in the public \
+library is free.
 - Only what works is charged: credits are set aside when something starts and come back if it \
 fails or is cancelled, or if a candidate never answers.
 - Top up on the top-up page (account menu → Top up) with a fixed amount or any whole amount \

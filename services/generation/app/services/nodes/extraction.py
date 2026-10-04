@@ -12,7 +12,7 @@ async def extract_info(state: State) -> dict:
     """Title, requirements and level; the same pasted text reuses its earlier result."""
     system = EXTRACTION_SYSTEM.format(language=language_name(state.get("language")))
     source = system + state["input_text"]
-    model = llm.get_generation_llm(state.get("kind"), None, state.get("free_kit", False))
+    model = llm.get_generation_llm(state.get("kind"), None)
     cached = await draft_cache.get("extraction", source, model)
 
     if cached is not None:

@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "收费多少？",
-        "answer": "按使用付费，使用点数。新学习包需要 {kit} 点数。你的第一个学习包免费，最多 {free_topics} 个主题，每个新账号还会获得 {welcome} 免费点数。价格页面列出了所有价格。",
+        "answer": "按使用付费，使用点数。查看根据你的职位描述或目标拟定的主题是免费的；一个学习包需要 {kit} 点数，只在你批准其主题时支付。在公共资料库中练习免费，每个新账号还会获得 {welcome} 免费点数。价格页面列出了所有价格。",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "和其他测评工具相比，价格如何？",
-        "answer": "大多数测评平台按年付费每月 100–215 美元，或每位候选人 7–20 美元。在 prepza，每位候选人 {candidate} 点数（{candidate_dollars} 美元），无需签约，不按用户收费，生成面试也不收费。每月邀请 {example_candidates} 位候选人的公司每年约支付 {example_year_dollars} 美元，而年度套餐需要 1,200–2,580 美元。每月超过约 40 位候选人时，一些不限量套餐可能更便宜。",
+        "answer": "大多数测评平台按年付费每月 100–215 美元，或每位候选人 7–20 美元。在 prepza，每位候选人 {candidate} 点数（{candidate_dollars} 美元），无需签约，不按用户收费，生成面试也不收费。每月邀请 {example_candidates} 位候选人的公司每年约支付 {example_year_dollars} 美元，而年度套餐需要 1,200–2,580 美元。每月超过约 50 位候选人时，一些不限量套餐可能更便宜。",
     },
     {
         "key": "scorecards",

@@ -430,8 +430,6 @@ export interface components {
       error: string | null
       /** Language */
       language: string
-      /** Free Kit */
-      free_kit: boolean
       /**
        * Max Topics
        * @description How many topics the review may approve without instructions.

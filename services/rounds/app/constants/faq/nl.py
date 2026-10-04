@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Wat kost het?",
-        "answer": "Je betaalt naar gebruik, met credits. Een nieuwe kit kost {kit} credits. Je eerste kit is gratis, met maximaal {free_topics} onderwerpen, en elk nieuw account krijgt ook {welcome} gratis credits. De prijspagina toont alle prijzen.",
+        "answer": "Je betaalt naar gebruik, met credits. De onderwerpen zien die voor je vacature of doel zijn opgesteld is gratis; een kit kost {kit} credits, die je pas betaalt als je de onderwerpen goedkeurt. Oefenen in de openbare bibliotheek is gratis, en elk nieuw account krijgt {welcome} gratis credits. De prijzenpagina toont alle prijzen.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Hoe verhoudt de prijs zich tot andere assessmenttools?",
-        "answer": "De meeste assessmentplatforms kosten 100–215 $ per maand met een jaarabonnement, of 7–20 $ per kandidaat. Bij prepza kost een kandidaat {candidate} credits ({candidate_dollars} $), zonder contract, zonder kosten per gebruiker en zonder te betalen voor het maken van een gesprek. Een bedrijf dat {example_candidates} kandidaten per maand uitnodigt, betaalt ongeveer {example_year_dollars} $ per jaar, tegenover 1.200–2.580 $ voor een jaarabonnement. Vanaf ongeveer 40 kandidaten per maand zijn sommige onbeperkte abonnementen goedkoper.",
+        "answer": "De meeste assessmentplatforms kosten 100–215 $ per maand met een jaarabonnement, of 7–20 $ per kandidaat. Bij prepza kost een kandidaat {candidate} credits ({candidate_dollars} $), zonder contract, zonder kosten per gebruiker en zonder te betalen voor het maken van een gesprek. Een bedrijf dat {example_candidates} kandidaten per maand uitnodigt, betaalt ongeveer {example_year_dollars} $ per jaar, tegenover 1.200–2.580 $ voor een jaarabonnement. Vanaf ongeveer 50 kandidaten per maand zijn sommige onbeperkte abonnementen goedkoper.",
     },
     {
         "key": "scorecards",

@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Chi phí là bao nhiêu?",
-        "answer": "Bạn trả theo mức dùng, bằng tín dụng. Một bộ ôn luyện mới có giá {kit} tín dụng. Bộ đầu tiên của bạn miễn phí, với tối đa {free_topics} chủ đề, và mỗi tài khoản mới còn nhận {welcome} tín dụng miễn phí. Trang giá liệt kê mọi mức giá.",
+        "answer": "Bạn trả theo mức dùng, bằng tín dụng. Xem các chủ đề được đề xuất cho mô tả công việc hoặc mục tiêu của bạn là miễn phí; một bộ ôn luyện có giá {kit} tín dụng, chỉ trả khi bạn duyệt các chủ đề. Luyện tập trong thư viện công khai là miễn phí, và mỗi tài khoản mới nhận {welcome} tín dụng miễn phí. Trang giá liệt kê mọi mức giá.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Giá so với các công cụ đánh giá khác thế nào?",
-        "answer": "Phần lớn nền tảng đánh giá có giá 100–215 $ mỗi tháng theo gói năm, hoặc 7–20 $ mỗi ứng viên. Với prepza, mỗi ứng viên tốn {candidate} tín dụng ({candidate_dollars} $), không hợp đồng, không phí theo người dùng và không tốn phí tạo buổi phỏng vấn. Một công ty mời {example_candidates} ứng viên mỗi tháng trả khoảng {example_year_dollars} $ mỗi năm, so với 1.200–2.580 $ cho một gói năm. Từ khoảng 40 ứng viên mỗi tháng, một số gói không giới hạn có thể rẻ hơn.",
+        "answer": "Phần lớn nền tảng đánh giá có giá 100–215 $ mỗi tháng theo gói năm, hoặc 7–20 $ mỗi ứng viên. Với prepza, mỗi ứng viên tốn {candidate} tín dụng ({candidate_dollars} $), không hợp đồng, không phí theo người dùng và không tốn phí tạo buổi phỏng vấn. Một công ty mời {example_candidates} ứng viên mỗi tháng trả khoảng {example_year_dollars} $ mỗi năm, so với 1.200–2.580 $ cho một gói năm. Từ khoảng 50 ứng viên mỗi tháng, một số gói không giới hạn có thể rẻ hơn.",
     },
     {
         "key": "scorecards",

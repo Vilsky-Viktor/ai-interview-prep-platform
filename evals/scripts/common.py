@@ -50,7 +50,7 @@ def model(name: str, effort: str, timeout: int = 300) -> ChatOpenAI:
 def generation_models(settings) -> str:
     """With MODEL and EFFORT set, the model under test writes interviews and every kit; without
     them the service's own split is tested. Returns what writes what, for the results."""
-    names = ("interview", "free_kit", "kit", "hard_kit")
+    names = ("interview", "kit", "hard_kit")
 
     for name in names:
         if "MODEL" in os.environ:

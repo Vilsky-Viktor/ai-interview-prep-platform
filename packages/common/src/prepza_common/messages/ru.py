@@ -8,7 +8,7 @@ MESSAGES = {
     "Choose one of the balances": "Выберите один из порогов баланса",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "Сегодняшний лимит новых генераций исчерпан. Попробуйте завтра; тренировки и собеседования работают.",
     "Couldn't get a reply right now. Please try again.": "Не удалось получить ответ. Попробуйте ещё раз.",
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": "Сегодня вы начали уже 3 новые публичные темы. Возвращайтесь завтра или создайте свой набор прямо сейчас.",
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "Вы достигли сегодняшнего лимита новых публичных тем. Возвращайтесь завтра или создайте свой набор прямо сейчас.",
     "You can own at most 3 companies.": "Можно владеть не более чем 3 компаниями.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "Компания может создавать не больше 10 собеседований в день. Попробуйте завтра.",
     "A kit can be shared with at most 30 people.": "Набором можно поделиться не более чем с 30 людьми.",

@@ -8,7 +8,7 @@ MESSAGES = {
     "Choose one of the balances": "Pilih salah satu batas saldo",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "Batas pembuatan baru hari ini sudah tercapai. Coba lagi besok; latihan dan wawancara tetap berjalan.",
     "Couldn't get a reply right now. Please try again.": "Belum bisa mendapatkan balasan saat ini. Coba lagi.",
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": "Hari ini kamu sudah memulai 3 topik publik baru. Kembali besok, atau buat kit milikmu sendiri sekarang.",
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "Kamu sudah mencapai batas topik publik baru hari ini. Kembali besok, atau buat kit milikmu sekarang.",
     "You can own at most 3 companies.": "Kamu bisa memiliki paling banyak 3 perusahaan.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "Perusahaanmu bisa membuat hingga 10 wawancara per hari. Coba lagi besok.",
     "A kit can be shared with at most 30 people.": "Sebuah kit bisa dibagikan kepada paling banyak 30 orang.",

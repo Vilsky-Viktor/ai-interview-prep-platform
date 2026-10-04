@@ -61,8 +61,8 @@ price and time from full Python backend and senior accountant kits):
 
 As accurate as Sol and 7–8 times cheaper, but about 1.6 times slower, and its hard-level
 questions are too easy: relevance on hard topics is the gap, and it misses the relevance,
-distractor and time targets. So it writes free kits and paid basic and medium kits, and paid hard
-kits and interviews stay on Sol. At 70 questions a topic (the oversampling runs below, Python
+distractor and time targets. It wrote basic and medium kits for a while; since free kits ended
+(2026-10-04) every generation runs on Sol at low. At 70 questions a topic (the oversampling runs below, Python
 backend and Spanish for travel): $0.015–0.024 and 51–66 s a topic; a 7-topic kit $0.16 in under
 8 minutes.
 

@@ -8,7 +8,7 @@ MESSAGES = {
     "Choose one of the balances": "יש לבחור אחד מספי היתרה",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "הגענו למגבלת היצירות החדשות של היום. נסו שוב מחר; התרגול והראיונות ממשיכים לפעול.",
     "Couldn't get a reply right now. Please try again.": "לא ניתן לקבל תשובה כרגע. נסו שוב.",
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": "כבר התחלתם היום 3 נושאים ציבוריים חדשים. חזרו מחר, או צרו ערכה משלכם עכשיו.",
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "הגעתם למגבלה של היום לנושאים ציבוריים חדשים. חזרו מחר, או צרו עכשיו ערכה משלכם.",
     "You can own at most 3 companies.": "ניתן להחזיק לכל היותר 3 חברות.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "החברה יכולה ליצור עד 10 ראיונות ביום. נסו שוב מחר.",
     "A kit can be shared with at most 30 people.": "ניתן לשתף ערכה עם 30 אנשים לכל היותר.",

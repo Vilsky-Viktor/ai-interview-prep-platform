@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Kui palju see maksab?",
-        "answer": "Maksad kasutuse järgi, krediidiga. Uus komplekt maksab {kit} krediiti. Sinu esimene komplekt on tasuta, kuni {free_topics} teemaga, ja iga uus konto saab lisaks {welcome} tasuta krediiti. Hinnakirja lehel on kõik hinnad.",
+        "answer": "Maksad kasutuse järgi, krediidiga. Sinu töökuulutuse või eesmärgi jaoks koostatud teemade nägemine on tasuta; komplekt maksab {kit} krediiti ja selle eest maksad alles siis, kui kinnitad selle teemad. Avalikus raamatukogus harjutamine on tasuta ja iga uus konto saab {welcome} tasuta krediiti. Hinnalehel on kõik hinnad.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Kuidas hind teiste hindamistööriistadega võrreldes on?",
-        "answer": "Enamik hindamisplatvorme maksab aastaplaaniga 100–215 $ kuus või 7–20 $ kandidaadi kohta. prepzas maksab kandidaat {candidate} krediiti ({candidate_dollars} $), ilma lepingu, kasutajatasude ja intervjuu koostamise tasuta. Ettevõte, kes kutsub {example_candidates} kandidaati kuus, maksab umbes {example_year_dollars} $ aastas, aastaplaani 1 200–2 580 $ asemel. Alates umbes 40 kandidaadist kuus võivad mõned piiramatud plaanid olla odavamad.",
+        "answer": "Enamik hindamisplatvorme maksab aastaplaaniga 100–215 $ kuus või 7–20 $ kandidaadi kohta. prepzas maksab kandidaat {candidate} krediiti ({candidate_dollars} $), ilma lepingu, kasutajatasude ja intervjuu koostamise tasuta. Ettevõte, kes kutsub {example_candidates} kandidaati kuus, maksab umbes {example_year_dollars} $ aastas, aastaplaani 1 200–2 580 $ asemel. Alates umbes 50 kandidaadist kuus võivad mõned piiramatud plaanid olla odavamad.",
     },
     {
         "key": "scorecards",

@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Was kostet es?",
-        "answer": "Du zahlst nach Nutzung, mit Credits. Ein neues Kit kostet {kit} Credits. Dein erstes Kit ist kostenlos, mit bis zu {free_topics} Themen, und jedes neue Konto bekommt zusätzlich {welcome} Gratis-Credits. Die Preisseite listet alle Preise.",
+        "answer": "Du zahlst nach Nutzung, mit Credits. Die Themen für deine Stellenbeschreibung oder dein Ziel zu sehen, ist kostenlos; ein Kit kostet {kit} Credits und wird erst bezahlt, wenn du seine Themen bestätigst. Üben in der öffentlichen Bibliothek ist kostenlos, und jedes neue Konto bekommt {welcome} Gratis-Credits. Die Preisseite listet alle Preise.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Wie ist der Preis im Vergleich zu anderen Testplattformen?",
-        "answer": "Die meisten Plattformen für Eignungstests kosten 100–215 $ im Monat im Jahresabo oder 7–20 $ pro Kandidat. Bei prepza kostet ein Kandidat {candidate} Credits ({candidate_dollars} $), ohne Vertrag, ohne Gebühren pro Nutzer und ohne Kosten für das Erstellen eines Interviews. Ein Unternehmen, das {example_candidates} Kandidaten im Monat einlädt, zahlt etwa {example_year_dollars} $ im Jahr, gegenüber 1.200–2.580 $ für ein Jahresabo. Ab etwa 40 Kandidaten im Monat können manche Flatrates günstiger sein.",
+        "answer": "Die meisten Plattformen für Eignungstests kosten 100–215 $ im Monat im Jahresabo oder 7–20 $ pro Kandidat. Bei prepza kostet ein Kandidat {candidate} Credits ({candidate_dollars} $), ohne Vertrag, ohne Gebühren pro Nutzer und ohne Kosten für das Erstellen eines Interviews. Ein Unternehmen, das {example_candidates} Kandidaten im Monat einlädt, zahlt etwa {example_year_dollars} $ im Jahr, gegenüber 1.200–2.580 $ für ein Jahresabo. Ab etwa 50 Kandidaten im Monat können manche Flatrates günstiger sein.",
     },
     {
         "key": "scorecards",

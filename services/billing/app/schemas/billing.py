@@ -41,10 +41,10 @@ class CatalogOut(BaseModel):
     certificate_credits: int
     chat_turn_credits: int
     chat_free_turns: int
+    # New public topics a learner may start a day, free.
+    public_topics_per_day: int
     welcome_user: int
     welcome_company: int
-    # How many topics a free kit (the learner's welcome gift) has.
-    free_kit_topics: int
     referral_user: int
     referral_company: int
     referral_company_min_dollars: int
@@ -58,14 +58,6 @@ class BalanceOut(BaseModel):
     available: int
     # Running low: time to suggest a top-up.
     low: bool
-    # Prep kits still free to make, without credits.
-    free_kits: int
-
-
-class HoldOut(BaseModel):
-    """A kit's hold: whether it uses a free kit instead of credits."""
-
-    free: bool
 
 
 class OwnersIn(BaseModel):

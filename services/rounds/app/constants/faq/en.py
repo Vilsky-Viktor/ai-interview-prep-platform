@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "How much does it cost?",
-        "answer": "You pay as you go with credits. A new kit costs {kit} credits. Your first kit is free, with up to {free_topics} topics, and every new account also gets {welcome} free credits. The pricing page lists every price.",
+        "answer": "You pay as you go with credits. Seeing the topics drafted for your job description or goal is free; a kit costs {kit} credits, paid only when you approve its topics. Practice in the public library is free, and every new account gets {welcome} free credits. The pricing page lists every price.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "How does the price compare with other assessment tools?",
-        "answer": "Most assessment platforms cost $100–215 a month on an annual plan, or $7–20 per candidate. With prepza a candidate costs {candidate} credits (${candidate_dollars}), with no contract, no seat fees and nothing to pay for generating an interview. A company inviting {example_candidates} candidates a month pays about ${example_year_dollars} a year, against $1,200–2,580 for an annual plan. From about 40 candidates a month, some unlimited plans cost less.",
+        "answer": "Most assessment platforms cost $100–215 a month on an annual plan, or $7–20 per candidate. With prepza a candidate costs {candidate} credits (${candidate_dollars}), with no contract, no seat fees and nothing to pay for generating an interview. A company inviting {example_candidates} candidates a month pays about ${example_year_dollars} a year, against $1,200–2,580 for an annual plan. From about 50 candidates a month, some unlimited plans cost less.",
     },
     {
         "key": "scorecards",

@@ -8,7 +8,7 @@ MESSAGES = {
     "Choose one of the balances": "शेष राशि की कोई एक सीमा चुनें",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "आज की नई जनरेशन की सीमा पूरी हो गई है। कृपया कल फिर से प्रयास करें; अभ्यास और इंटरव्यू चलते रहेंगे।",
     "Couldn't get a reply right now. Please try again.": "अभी जवाब नहीं मिल सका। कृपया फिर से प्रयास करें।",
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": "आपने आज पहले ही 3 नए सार्वजनिक विषय शुरू कर दिए हैं। कल फिर आएँ, या अभी अपनी किट बनाएँ।",
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "आज के नए सार्वजनिक विषयों की सीमा पूरी हो गई है। कल फिर आएँ, या अभी अपनी किट बनाएँ।",
     "You can own at most 3 companies.": "आप अधिकतम 3 कंपनियों के मालिक हो सकते हैं।",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "आपकी कंपनी दिन में अधिकतम 10 इंटरव्यू बना सकती है। कृपया कल फिर से प्रयास करें।",
     "A kit can be shared with at most 30 people.": "किसी किट को अधिकतम 30 लोगों के साथ साझा किया जा सकता है।",

@@ -9,7 +9,7 @@ Turn a job description or a learning goal into a structured practice path: revie
 **For learners**
 
 - Paste a job description or describe a goal; the AI extracts the requirements and proposes topics.
-- Review the topics before anything expensive runs: uncheck what you don't need, rename a topic or edit its subtopics in place, or describe bigger changes in plain text.
+- Review the topics before anything expensive runs, for free: uncheck what you don't need, rename a topic or edit its subtopics in place, or describe bigger changes in plain text. The kit is paid when you approve them; without enough credits the draft waits while you top up.
 - Every topic gets a bank of multiple-choice questions, each with one correct option and three plausible wrong ones.
 - Practice in rounds. After each answer you see the correct option, and you can ask an AI tutor follow-up questions about it.
 - Rounds show unanswered questions first, then your weakest ones.
@@ -37,7 +37,7 @@ Turn a job description or a learning goal into a structured practice path: revie
 
 **Credits and payments** (see [docs/monetization.md](docs/monetization.md))
 
-- Pay as you go: $1 buys 100 credits, with a bonus on large top-ups, and credits never expire. Learners pay for their own prep kits, tutor turns after 2 free ones per question, and certificates on someone else's public kit; companies pay per candidate who answers at least one question. A kit costs 800 credits ($8) and a candidate 400 ($4). A new learner's first kit is free (up to 10 topics, written by `FREE_KIT_MODEL`) and comes with 100 credits; a person's first company gets 1,200 credits, enough for 3 candidates. A company can have at most 3 interviews waiting without a candidate before it generates another.
+- Pay as you go: $1 buys 100 credits, with a bonus on large top-ups, and credits never expire. Learners pay for their own prep kits (when they approve the topics), tutor turns after the first free one on each question, and certificates on someone else's public kit; practice in public kits is free, 1 new public topic a day; companies pay per candidate who answers at least one question. A kit costs 500 credits ($5) and a candidate 300 ($3). There are no free kits: the public library, seeded before launch, is where a learner tries prepza, and a new learner gets 100 credits for the tutor and certificates; a person's first company gets 900 credits, enough for 3 candidates. A company can have at most 3 interviews waiting without a candidate before it generates another.
 - Only what works is charged: credits are set aside when something starts and given back if it fails, is cancelled, or a candidate never answers.
 - Top up a fixed amount or any whole amount from $10 to $500 on the top-up page, for yourself or any company you belong to. The header shows your balance and turns amber when it runs low. Balances follow a payment as it lands, rechecked for 40 seconds after checkout, and catch up when the tab is back in view (an automatic top-up, a payment in another tab); a balance that goes up counts up to its new value, in the header, on the top-up page and on a company's interviews page.
 - **Automatic top-up:** on the top-up page, under each balance ("Automatic top-up: off"), choose a top-up and a balance to refill under; the card is saved through Paddle once. Shown only when Paddle's API key and the $0 price are set (see [Payments](#payments)).
@@ -187,15 +187,14 @@ These settings in `.env` shape every generation (Terraform passes none of them t
   | Task | Model | Effort |
   |---|---|---|
   | Generation of a company's interview, at any level | `INTERVIEW_MODEL` (`gpt-6.1-sol`) | `INTERVIEW_REASONING_EFFORT` (`low`) |
-  | Generation of a learner's free kit, at any level | `FREE_KIT_MODEL` (`gpt-6-luna`) | `FREE_KIT_REASONING_EFFORT` (`high`) |
-  | Generation of a learner's paid basic or medium kit | `KIT_MODEL` (`gpt-6-luna`) | `KIT_REASONING_EFFORT` (`high`) |
-  | Generation of a learner's paid hard kit, and reading a paid kit's text before its level is known | `HARD_KIT_MODEL` (`gpt-6.1-sol`) | `HARD_KIT_REASONING_EFFORT` (`low`) |
+  | Generation of a learner's basic or medium kit | `KIT_MODEL` (`gpt-6.1-sol`) | `KIT_REASONING_EFFORT` (`low`) |
+  | Generation of a learner's hard kit, and reading a learner's text before its level is known | `HARD_KIT_MODEL` (`gpt-6.1-sol`) | `HARD_KIT_REASONING_EFFORT` (`low`) |
   | Verifier: answer-key checks, at once and in batches | `VERIFY_MODEL` (`gpt-6.1-sol`) | `VERIFY_REASONING_EFFORT` (`medium`) |
   | Public-title check | `TITLE_CHECK_MODEL` (`gpt-6.1-sol`) | `TITLE_CHECK_REASONING_EFFORT` (`low`) |
   | Tutor (a paid turn is 2 credits) | `TUTOR_MODEL` (`gpt-6.1-sol`) | `TUTOR_REASONING_EFFORT` (`low`) |
   | FAQ help chat | `HELP_MODEL` (`gpt-6-luna`) | `HELP_REASONING_EFFORT` (`none`, which also lets it take a temperature) |
 
-  In testing ([evals/README.md](evals/README.md)), `gpt-6-luna` at high wrote basic and medium questions as accurately as `gpt-6.1-sol` at a fraction of the price, but its hard questions came out too easy, so hard kits and interviews stay on Sol. As a tutor, Luna got some follow-ups wrong at every level, so the tutor stays on Sol; the verifier did as well at low as at medium and stays at medium.
+  Every generation runs on `gpt-6.1-sol` at low. In testing ([evals/README.md](evals/README.md)), `gpt-6-luna` at high wrote basic and medium questions as accurately at a fraction of the price but more slowly, and its hard questions came out too easy; since every kit is now paid, `KIT_MODEL` stays on Sol for one quality everywhere. As a tutor, Luna got some follow-ups wrong at every level, so the tutor stays on Sol; the verifier did as well at low as at medium and stays at medium.
 - `LANGSMITH_TRACING`, `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT` (off by default) trace generation and chat calls to LangSmith.
 
 Per-user rate limits cap how much a single account can generate (`GENERATION_LIMIT`, 20 per `GENERATION_WINDOW_SECONDS`, a day; `REGENERATION_LIMIT`, 100 re-generated questions in the same window) and chat (`LLM_LIMIT`, 400 per `LLM_WINDOW_SECONDS`, an hour); 0 turns one off. `DAILY_GENERATION_LIMIT` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off. Invite emails are limited per user (`EMAIL_HOURLY_LIMIT`, `EMAIL_DAILY_LIMIT`) and per address (`EMAIL_RECIPIENT_DAILY_LIMIT`).

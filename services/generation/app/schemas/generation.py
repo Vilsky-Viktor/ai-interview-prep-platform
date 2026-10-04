@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Annotated
 from uuid import UUID
 
-from prepza_common.constants import DEFAULT_LANGUAGE, FREE_KIT_TOPICS
+from prepza_common.constants import DEFAULT_LANGUAGE
 from prepza_common.user import Language
 from pydantic import (
     BaseModel,
@@ -111,15 +111,11 @@ class GenerationOut(BaseModel):
     error: str | None
     # What it's generated in, from the pasted text (helpers/language.py).
     language: str
-    free_kit: bool
 
     @computed_field
     @property
     def max_topics(self) -> int:
         """How many topics the review may approve without instructions."""
-        if self.free_kit:
-            return min(FREE_KIT_TOPICS, settings.max_topics)
-
         return settings.max_topics
 
     @computed_field

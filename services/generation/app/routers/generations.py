@@ -1,4 +1,4 @@
-from uuid import UUID, uuid4
+from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.analytics import track
@@ -10,7 +10,7 @@ from app.config.settings import settings
 from app.constants.generation import RUN_GENERATION
 from app.constants.kinds import GenerationKind
 from app.helpers.language import text_language
-from app.integrations import billing, tasks
+from app.integrations import tasks
 from app.integrations.redis import get_redis
 from app.models.generation import Generation
 from app.schemas.generation import (
@@ -19,7 +19,6 @@ from app.schemas.generation import (
     GenerationSummary,
     ReviewRequest,
 )
-from app.services.budget import use_daily_budget
 from app.services.cancel import cancel_generation
 from app.services.retry import retry_generation
 from app.services.review import submit_review
@@ -51,27 +50,11 @@ async def create_generation(
         settings.generation_limit,
         settings.generation_window_seconds,
     )
-    # Credits first: a refused attempt mustn't use up the day's cap for everyone.
-    generation_id = uuid4()
-    free_kit = await billing.hold_kit(user.uid, generation_id)
-
-    try:
-        await use_daily_budget()
-    except HTTPException:
-        await billing.release_kit(generation_id)
-        raise
-
+    # Drafting the topics is free; the kit is paid when they're approved (services/review.py).
     # The chosen language, or else the pasted text's (the interface's only when it has no
     # letters).
     language = body.generate_in or text_language(body.text, user.language)
-
-    try:
-        generation = await generations.create(
-            user.uid, body.text, body.kind, body.company_id, language, generation_id, free_kit
-        )
-    except Exception:
-        await billing.release_kit(generation_id)
-        raise
+    generation = await generations.create(user.uid, body.text, body.kind, body.company_id, language)
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
     await track("kit_started", user_id=user.uid, kind=body.kind, language=language)
 

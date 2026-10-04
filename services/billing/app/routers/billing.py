@@ -6,7 +6,7 @@ from prepza_common.auth import CurrentUser
 from prepza_common.constants import (
     CHAT_FREE_TURNS,
     CHAT_TURN_CREDITS,
-    FREE_KIT_TOPICS,
+    PUBLIC_TOPICS_PER_DAY,
     REFERRAL_COOKIE,
 )
 from prepza_common.paging import PageParams
@@ -62,9 +62,9 @@ def catalog() -> CatalogOut:
         certificate_credits=CERTIFICATE_CREDITS,
         chat_turn_credits=CHAT_TURN_CREDITS,
         chat_free_turns=CHAT_FREE_TURNS,
+        public_topics_per_day=PUBLIC_TOPICS_PER_DAY,
         welcome_user=WELCOME_USER,
         welcome_company=WELCOME_COMPANY,
-        free_kit_topics=FREE_KIT_TOPICS,
         referral_user=REFERRAL_REWARD[OwnerType.USER],
         referral_company=REFERRAL_REWARD[OwnerType.COMPANY],
         referral_company_min_dollars=REFERRAL_MIN_CENTS[OwnerType.COMPANY] // 100,

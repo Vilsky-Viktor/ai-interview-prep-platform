@@ -9,7 +9,6 @@ from app.integrations import llm
 def models(monkeypatch):
     monkeypatch.setenv("OPENAI_API_KEY", "test")
     monkeypatch.setattr(settings, "interview_model", "interview-model")
-    monkeypatch.setattr(settings, "free_kit_model", "free-kit-model")
     monkeypatch.setattr(settings, "kit_model", "kit-model")
     monkeypatch.setattr(settings, "hard_kit_model", "hard-kit-model")
     llm.build_llm.cache_clear()
@@ -38,14 +37,6 @@ def test_llm_calls_time_out():
 )
 def test_generation_model_follows_who_its_for_and_the_level(kind, level, model):
     assert llm.get_generation_llm(kind, level).model_name == model
-
-
-@pytest.mark.parametrize("level", [None, "basic", "hard"])
-def test_a_free_kit_is_always_on_the_free_kit_model_but_an_interview_never(level):
-    assert (
-        llm.get_generation_llm("preparation", level, free_kit=True).model_name == "free-kit-model"
-    )
-    assert llm.get_generation_llm("interview", level, free_kit=True).model_name == "interview-model"
 
 
 def test_each_task_uses_its_own_model_and_effort(monkeypatch):

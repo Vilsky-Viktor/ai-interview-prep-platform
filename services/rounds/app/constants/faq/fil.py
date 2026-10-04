@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Magkano ito?",
-        "answer": "Magbabayad ka ayon sa paggamit, gamit ang credits. Ang bagong kit ay {kit} credits. Libre ang una mong kit, hanggang {free_topics} topic, at bawat bagong account ay may {welcome} libreng credits din. Nasa pricing page ang lahat ng presyo.",
+        "answer": "Magbabayad ka ayon sa paggamit, gamit ang credits. Libre ang pagtingin sa mga topic na binuo para sa iyong job description o layunin; ang isang kit ay {kit} credits, na binabayaran lang kapag inaprubahan mo ang mga topic nito. Libre ang pag-practice sa public library, at bawat bagong account ay may {welcome} libreng credits. Nasa pricing page ang lahat ng presyo.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Paano ihahambing ang presyo sa ibang assessment tool?",
-        "answer": "Karamihan sa mga assessment platform ay $100–215 kada buwan sa annual plan, o $7–20 bawat kandidato. Sa prepza, ang isang kandidato ay {candidate} credits (${candidate_dollars}), walang kontrata, walang bayad kada user, at walang bayad sa paggawa ng interview. Ang kompanyang nag-iimbita ng {example_candidates} kandidato kada buwan ay nagbabayad ng mga ${example_year_dollars} kada taon, kumpara sa $1,200–2,580 para sa annual plan. Mula mga 40 kandidato kada buwan, may ilang unlimited plan na mas mura.",
+        "answer": "Karamihan sa mga assessment platform ay $100–215 kada buwan sa annual plan, o $7–20 bawat kandidato. Sa prepza, ang isang kandidato ay {candidate} credits (${candidate_dollars}), walang kontrata, walang bayad kada user, at walang bayad sa paggawa ng interview. Ang kompanyang nag-iimbita ng {example_candidates} kandidato kada buwan ay nagbabayad ng mga ${example_year_dollars} kada taon, kumpara sa $1,200–2,580 para sa annual plan. Mula mga 50 kandidato kada buwan, may ilang unlimited plan na mas mura.",
     },
     {
         "key": "scorecards",

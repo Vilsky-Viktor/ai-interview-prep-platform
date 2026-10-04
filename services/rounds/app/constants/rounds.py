@@ -22,11 +22,9 @@ CERTIFICATE_MIN_SCORE = 70
 CHAT_FAILED = "Couldn't get a reply right now. Please try again."
 # Chat replies are short; a call silent for longer has hung.
 CHAT_TIMEOUT_SECONDS = 60
-# New topics of other people's public kits a learner may start a day (UTC); continuing a topic
-# already started is never limited.
-PUBLIC_TOPICS_PER_DAY = 3
 PUBLIC_TOPICS_LIMIT = (
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now."
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own "
+    "kit now."
 )
 NOT_ENOUGH_CREDITS = "Not enough credits. Top up to continue."
 

@@ -8,7 +8,7 @@ MESSAGES = {
     "Choose one of the balances": "โปรดเลือกเกณฑ์ยอดคงเหลือหนึ่งรายการ",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "ถึงขีดจำกัดการสร้างใหม่ของวันนี้แล้ว โปรดลองอีกครั้งพรุ่งนี้ การฝึกซ้อมและการสัมภาษณ์ยังใช้งานได้ตามปกติ",
     "Couldn't get a reply right now. Please try again.": "ยังไม่สามารถรับคำตอบได้ในขณะนี้ โปรดลองอีกครั้ง",
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": "วันนี้คุณเริ่มหัวข้อสาธารณะใหม่ไปแล้ว 3 หัวข้อ กลับมาใหม่พรุ่งนี้ หรือสร้างชุดของคุณเองตอนนี้เลย",
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "คุณเริ่มหัวข้อสาธารณะใหม่ครบโควตาของวันนี้แล้ว กลับมาใหม่พรุ่งนี้ หรือสร้างชุดของคุณเองตอนนี้",
     "You can own at most 3 companies.": "คุณเป็นเจ้าของบริษัทได้สูงสุด 3 บริษัท",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "บริษัทของคุณสร้างการสัมภาษณ์ได้สูงสุด 10 รายการต่อวัน โปรดลองอีกครั้งพรุ่งนี้",
     "A kit can be shared with at most 30 people.": "แชร์ชุดได้กับคนสูงสุด 30 คน",

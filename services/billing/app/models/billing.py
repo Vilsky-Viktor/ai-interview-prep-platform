@@ -8,8 +8,7 @@ from app.models.base import Base
 
 
 class Wallet(Base):
-    """One credit balance. `reserved` is set aside for something that hasn't finished;
-    `free_kits` are prep kits the owner can still make without credits (the welcome gift)."""
+    """One credit balance. `reserved` is set aside for something that hasn't finished."""
 
     __tablename__ = "wallets"
 
@@ -17,7 +16,6 @@ class Wallet(Base):
     owner_id: Mapped[str] = mapped_column(String(128), primary_key=True)
     balance: Mapped[int] = mapped_column(default=0)
     reserved: Mapped[int] = mapped_column(default=0)
-    free_kits: Mapped[int] = mapped_column(default=0)
     # The code in the owner's referral link; made the first time they ask for it.
     referral_code: Mapped[str | None] = mapped_column(String(16), unique=True)
 

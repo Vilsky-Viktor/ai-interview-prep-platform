@@ -23,11 +23,14 @@ export function GenerationView({
   next,
   backHref,
   backLabel,
+  kitCredits,
 }: {
   path: string
   next?: string
   backHref: string
   backLabel: string
+  // A kit's price from billing, shown on the approve button; null when billing didn't answer.
+  kitCredits: number | null
 }) {
   const t = useTranslations("generation")
   const billing = useTranslations("billing")
@@ -92,8 +95,12 @@ export function GenerationView({
       })
       setGeneration(next)
       setRound((value) => value + 1)
-    } catch {
-      toast.error(t("reviewFailed"))
+    } catch (error) {
+      // Without enough credits the draft waits; the toast offers the top-up page.
+      toast.error(
+        apiErrorMessage(error, t("reviewFailed")),
+        topUpAction(error, billing("topUp"), () => router.push("/top-up"))
+      )
     }
   }
 
@@ -154,7 +161,7 @@ export function GenerationView({
         topics={generation.topics}
         maxTopics={generation.max_topics}
         maxSubtopics={generation.max_subtopics}
-        freeKit={generation.free_kit}
+        price={generation.kind === "preparation" ? kitCredits : null}
         back={<BackLink href={backHref}>{backLabel}</BackLink>}
         cancel={cancel}
         onSubmit={submitReview}

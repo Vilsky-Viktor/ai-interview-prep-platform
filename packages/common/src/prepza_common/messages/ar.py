@@ -8,7 +8,7 @@ MESSAGES = {
     "Choose one of the balances": "اختر أحد حدود الرصيد",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "بلغنا حد التوليدات الجديدة لهذا اليوم. حاول مرة أخرى غدًا؛ التدريب والمقابلات تعمل كالمعتاد.",
     "Couldn't get a reply right now. Please try again.": "تعذّر الحصول على رد الآن. حاول مرة أخرى.",
-    "You've started 3 new public topics today. Come back tomorrow, or generate your own kit now.": "بدأت اليوم 3 مواضيع عامة جديدة. عد غدًا أو أنشئ حزمتك الخاصة الآن.",
+    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "وصلت إلى حد اليوم من المواضيع العامة الجديدة. عد غدًا، أو أنشئ حزمتك الخاصة الآن.",
     "You can own at most 3 companies.": "يمكنك امتلاك 3 شركات على الأكثر.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "يمكن لشركتك إنشاء 10 مقابلات يوميًا كحد أقصى. حاول مرة أخرى غدًا.",
     "A kit can be shared with at most 30 people.": "يمكن مشاركة الحزمة مع 30 شخصًا على الأكثر.",

@@ -18,8 +18,9 @@ type TopicReviewProps = {
   maxTopics: number
   // Subtopics a topic may have when edited by hand.
   maxSubtopics: number
-  // The learner's free first kit, which keeps fewer topics.
-  freeKit: boolean
+  // Credits approving costs: a learner's kit, paid when its topics are approved. Null for an
+  // interview, or when billing didn't answer.
+  price: number | null
   back: ReactNode
   // Shown at the left of the submit row.
   cancel?: ReactNode
@@ -35,15 +36,14 @@ export function TopicReview({
   topics,
   maxTopics,
   maxSubtopics,
-  freeKit,
+  price,
   back,
   cancel,
   onSubmit,
 }: TopicReviewProps) {
   const t = useTranslations("generation")
-  // A free kit starts with the first topics it can keep; the learner can swap them.
   const [selected, setSelected] = useState(() =>
-    topics.map((_, index) => index).slice(0, freeKit ? maxTopics : undefined)
+    topics.map((_, index) => index)
   )
   const [draft, setDraft] = useState(topics)
   const [editing, setEditing] = useState<number | null>(null)
@@ -82,11 +82,6 @@ export function TopicReview({
           </h1>
         </div>
         <p className="text-muted-foreground">{t("reviewText")}</p>
-        {freeKit && (
-          <p className="text-muted-foreground">
-            {t("freeKit", { max: maxTopics })}
-          </p>
-        )}
       </div>
 
       <ul className="divide-y rounded-2xl border">
@@ -163,7 +158,7 @@ export function TopicReview({
         <div className="flex items-center gap-4">
           {tooMany && (
             <p className="text-sm text-destructive">
-              {t(freeKit ? "freeTooMany" : "tooMany", { max: maxTopics })}
+              {t("tooMany", { max: maxTopics })}
             </p>
           )}
           <Button
@@ -171,7 +166,11 @@ export function TopicReview({
             className="h-12 px-6 text-base"
             disabled={selected.length === 0 || tooMany || unnamed || submitting}
           >
-            {revising ? t("apply") : t("approve")}
+            {revising
+              ? t("apply")
+              : price == null
+                ? t("approve")
+                : t("approvePrice", { count: price })}
           </Button>
         </div>
       </RoundFooter>

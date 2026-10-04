@@ -1,5 +1,3 @@
-from prepza_common.constants import FREE_KIT_TOPICS
-
 from app.config.settings import settings
 from app.constants.generation import MAX_TOPIC_NAME_LENGTH
 
@@ -36,8 +34,6 @@ def fit_topics(topics: list[dict]) -> list[dict]:
     ]
 
 
-def too_many_for_free_kit(free_kit: bool, review: dict) -> bool:
-    """A free kit approves at most FREE_KIT_TOPICS; instructions may still ask to merge more."""
-    approving = not (review.get("instructions") or "").strip()
-
-    return free_kit and approving and len(review["selected"]) > FREE_KIT_TOPICS
+def approves(review: dict) -> bool:
+    """A review without instructions approves the selected topics; with them, it revises."""
+    return not (review.get("instructions") or "").strip()

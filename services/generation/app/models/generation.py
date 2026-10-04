@@ -20,8 +20,9 @@ class Generation(Base):
     text: Mapped[str] = mapped_column(Text)
     language: Mapped[str] = mapped_column(String(8), default=DEFAULT_LANGUAGE)
     status: Mapped[str] = mapped_column(String(32), default=Status.QUEUED)
-    # A learner's first kit: free, with fewer topics (FREE_KIT_TOPICS).
-    free_kit: Mapped[bool] = mapped_column(Boolean, default=False)
+    # The topics were approved: for a learner's kit that's when its credits are set aside, so a
+    # retry sets them aside again only then.
+    approved: Mapped[bool] = mapped_column(Boolean, default=False)
     topics: Mapped[list | None] = mapped_column(JSONB)
     progress: Mapped[dict | None] = mapped_column(JSONB)
     preparation_id: Mapped[uuid.UUID | None]

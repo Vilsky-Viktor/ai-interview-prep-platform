@@ -26,7 +26,6 @@ async def new_questions(item: dict, missing: int, state: State) -> list[dict]:
             "count": missing + FILL_SPARE_QUESTIONS,
             "kind": state.get("kind"),
             "level": state["level"],
-            "free_kit": state.get("free_kit", False),
             "existing": item["questions"],
             "language": state.get("language"),
         }

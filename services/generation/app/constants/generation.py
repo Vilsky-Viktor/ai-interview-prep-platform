@@ -1,6 +1,5 @@
 from typing import Literal
 
-from prepza_common.constants import FREE_KIT_TOPICS
 from prepza_common.constants import MAX_GOAL_LENGTH  # noqa: F401 (re-exported)
 
 # The level whose learner kits are written by HARD_KIT_MODEL (see integrations/llm.py).
@@ -84,11 +83,6 @@ BUDGET_KEY_SECONDS = 2 * 24 * 60 * 60
 GENERATIONS_PAUSED = (
     "We've reached today's limit for new generations. Please try again tomorrow; practice and "
     "interviews keep working."
-)
-# Approving more topics than a free kit includes.
-FREE_KIT_TOO_MANY_TOPICS = (
-    f"Your free kit includes up to {FREE_KIT_TOPICS} topics. Choose {FREE_KIT_TOPICS}, or "
-    "generate a full kit with credits."
 )
 # Charging a finished kit: attempts, and the pause between them.
 CHARGE_ATTEMPTS = 3

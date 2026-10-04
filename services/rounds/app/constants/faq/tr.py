@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Ücreti ne kadar?",
-        "answer": "Kullandıkça kredilerle ödersiniz. Yeni bir set {kit} kredi tutar. İlk setiniz ücretsizdir, en fazla {free_topics} konuyla, ve her yeni hesap ayrıca {welcome} ücretsiz kredi alır. Fiyatlar sayfasında tüm fiyatlar yer alır.",
+        "answer": "Kullandıkça kredilerle ödersiniz. İş ilanınız veya hedefiniz için hazırlanan konuları görmek ücretsizdir; bir set {kit} kredi tutar ve yalnızca konularını onayladığınızda ödenir. Herkese açık kütüphanede pratik yapmak ücretsizdir ve her yeni hesap {welcome} ücretsiz kredi alır. Fiyatlar sayfası tüm fiyatları listeler.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Fiyat diğer değerlendirme araçlarıyla nasıl karşılaştırılır?",
-        "answer": "Değerlendirme platformlarının çoğu yıllık planda ayda 100–215 $ ya da aday başına 7–20 $ tutar. prepza'da bir aday {candidate} kredi ({candidate_dollars} $) tutar; sözleşme, kullanıcı başı ücret ve mülakat oluşturma ücreti yoktur. Ayda {example_candidates} aday davet eden bir şirket yılda yaklaşık {example_year_dollars} $ öder; yıllık bir plan ise 1.200–2.580 $ tutar. Ayda yaklaşık 40 adaydan itibaren bazı sınırsız planlar daha ucuz olabilir.",
+        "answer": "Değerlendirme platformlarının çoğu yıllık planda ayda 100–215 $ ya da aday başına 7–20 $ tutar. prepza'da bir aday {candidate} kredi ({candidate_dollars} $) tutar; sözleşme, kullanıcı başı ücret ve mülakat oluşturma ücreti yoktur. Ayda {example_candidates} aday davet eden bir şirket yılda yaklaşık {example_year_dollars} $ öder; yıllık bir plan ise 1.200–2.580 $ tutar. Ayda yaklaşık 50 adaydan itibaren bazı sınırsız planlar daha ucuz olabilir.",
     },
     {
         "key": "scorecards",

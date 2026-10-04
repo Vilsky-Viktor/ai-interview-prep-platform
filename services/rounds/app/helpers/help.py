@@ -3,16 +3,15 @@ import json
 from prepza_common.constants import (
     CREDITS_PER_DOLLAR,
     DEFAULT_QUESTION_SECONDS,
-    FREE_KIT_TOPICS,
     INTERVIEWS_PER_DAY,
     LANGUAGES,
     MAX_INTERVIEWS_WITHOUT_CANDIDATES,
     MAX_OWNED_COMPANIES,
     MAX_SHARES,
+    PUBLIC_TOPICS_PER_DAY,
 )
 
 from app.constants.help import FAQ_EXAMPLE_CANDIDATES
-from app.constants.rounds import PUBLIC_TOPICS_PER_DAY
 from app.prompts.help import PLATFORM_GUIDE
 
 # Catalog fields only Paddle.js needs; they say nothing about prices.
@@ -26,7 +25,6 @@ def guide() -> str:
         max_companies=MAX_OWNED_COMPANIES,
         interviews_per_day=INTERVIEWS_PER_DAY,
         waiting_interviews=MAX_INTERVIEWS_WITHOUT_CANDIDATES,
-        free_topics=FREE_KIT_TOPICS,
         question_seconds=DEFAULT_QUESTION_SECONDS,
         language_count=len(LANGUAGES),
         languages=", ".join(LANGUAGES.values()),
@@ -51,11 +49,12 @@ def faq_values(catalog: dict | None) -> dict:
         "kit": prices.get("kit_credits", ""),
         "kit_dollars": dollars(prices.get("kit_credits", "")),
         "welcome": prices.get("welcome_user", ""),
-        "free_topics": FREE_KIT_TOPICS,
         "candidate": candidate,
         "candidate_dollars": dollars(candidate),
         "example_candidates": FAQ_EXAMPLE_CANDIDATES,
-        "example_year_dollars": dollars(candidate * FAQ_EXAMPLE_CANDIDATES * 12 if candidate else ""),
+        "example_year_dollars": dollars(
+            candidate * FAQ_EXAMPLE_CANDIDATES * 12 if candidate else ""
+        ),
         "company": prices.get("welcome_company", ""),
     }
 

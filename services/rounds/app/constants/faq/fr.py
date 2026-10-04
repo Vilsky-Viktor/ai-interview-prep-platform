@@ -19,7 +19,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Combien ça coûte ?",
-        "answer": "Vous payez à l'usage, avec des crédits. Un nouveau kit coûte {kit} crédits. Votre premier kit est gratuit, avec jusqu'à {free_topics} sujets, et chaque nouveau compte reçoit aussi {welcome} crédits gratuits. La page des tarifs indique tous les prix.",
+        "answer": "Vous payez à l'usage, avec des crédits. Voir les sujets proposés pour votre offre d'emploi ou votre objectif est gratuit ; un kit coûte {kit} crédits, payés seulement quand vous validez ses sujets. S'entraîner dans la bibliothèque publique est gratuit, et chaque nouveau compte reçoit {welcome} crédits gratuits. La page des tarifs indique tous les prix.",
     },
     {
         "key": "compare",
@@ -64,7 +64,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Comment le prix se compare-t-il aux autres outils d'évaluation ?",
-        "answer": "La plupart des plateformes d'évaluation coûtent 100–215 $ par mois en formule annuelle, ou 7–20 $ par candidat. Avec prepza, un candidat coûte {candidate} crédits ({candidate_dollars} $), sans contrat, sans frais par utilisateur et sans rien à payer pour générer un entretien. Une entreprise qui invite {example_candidates} candidats par mois paie environ {example_year_dollars} $ par an, contre 1 200–2 580 $ pour une formule annuelle. À partir d'environ 40 candidats par mois, certaines formules illimitées coûtent moins cher.",
+        "answer": "La plupart des plateformes d'évaluation coûtent 100–215 $ par mois en formule annuelle, ou 7–20 $ par candidat. Avec prepza, un candidat coûte {candidate} crédits ({candidate_dollars} $), sans contrat, sans frais par utilisateur et sans rien à payer pour générer un entretien. Une entreprise qui invite {example_candidates} candidats par mois paie environ {example_year_dollars} $ par an, contre 1 200–2 580 $ pour une formule annuelle. À partir d'environ 50 candidats par mois, certaines formules illimitées coûtent moins cher.",
     },
     {
         "key": "scorecards",
