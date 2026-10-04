@@ -68,7 +68,8 @@
     "title": "Judul",
     "titleFailed": "Judul tidak bisa disimpan.",
     "loading": "Memuat…",
-    "send": "Kirim"
+    "send": "Kirim",
+    "thinking": "Sedang berpikir…"
   },
   "errors": {
     "title": "Terjadi kesalahan",

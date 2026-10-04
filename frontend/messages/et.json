@@ -68,7 +68,8 @@
     "title": "Pealkiri",
     "titleFailed": "Pealkirja ei õnnestunud salvestada.",
     "loading": "Laadimine…",
-    "send": "Saada"
+    "send": "Saada",
+    "thinking": "Mõtleb…"
   },
   "errors": {
     "title": "Midagi läks valesti",

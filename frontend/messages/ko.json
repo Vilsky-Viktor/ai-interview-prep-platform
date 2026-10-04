@@ -68,7 +68,8 @@
     "title": "제목",
     "titleFailed": "제목을 저장하지 못했습니다.",
     "loading": "불러오는 중…",
-    "send": "보내기"
+    "send": "보내기",
+    "thinking": "생각 중…"
   },
   "errors": {
     "title": "문제가 발생했습니다",

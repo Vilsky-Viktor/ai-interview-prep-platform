@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
-import { ChatBubble } from "@/components/chat-bubble"
+import { ChatBubble, ThinkingBubble } from "@/components/chat-bubble"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { apiErrorMessage } from "@/lib/api"
@@ -72,9 +72,12 @@ export function HelpChat() {
                 content={message.content}
               />
             ))}
-            {streaming && (
-              <ChatBubble role="assistant" content={reply || "…"} />
-            )}
+            {streaming &&
+              (reply ? (
+                <ChatBubble role="assistant" content={reply} />
+              ) : (
+                <ThinkingBubble label={common("thinking")} />
+              ))}
           </ul>
         )}
         <form

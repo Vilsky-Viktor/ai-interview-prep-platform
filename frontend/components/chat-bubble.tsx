@@ -19,3 +19,20 @@ export function ChatBubble({
     </li>
   )
 }
+
+/** The AI's bubble before its first words arrive: three dots rising in turn. */
+export function ThinkingBubble({ label }: { label: string }) {
+  return (
+    <li className="flex w-fit items-center gap-1 rounded-2xl bg-card px-4 py-4">
+      <span className="sr-only">{label}</span>
+      {[0, 150, 300].map((delay) => (
+        <span
+          key={delay}
+          aria-hidden
+          className="size-1.5 animate-[thinking_1.2s_ease-in-out_infinite] rounded-full bg-muted-foreground"
+          style={{ animationDelay: `${delay}ms` }}
+        />
+      ))}
+    </li>
+  )
+}

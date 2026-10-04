@@ -68,7 +68,8 @@
     "title": "Titel",
     "titleFailed": "De titel kon niet worden opgeslagen.",
     "loading": "Laden…",
-    "send": "Verzenden"
+    "send": "Verzenden",
+    "thinking": "Denkt na…"
   },
   "errors": {
     "title": "Er ging iets mis",

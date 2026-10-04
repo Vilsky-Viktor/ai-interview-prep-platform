@@ -68,7 +68,8 @@
     "title": "Titre",
     "titleFailed": "Impossible d'enregistrer le titre.",
     "loading": "Chargement…",
-    "send": "Envoyer"
+    "send": "Envoyer",
+    "thinking": "Réflexion…"
   },
   "errors": {
     "title": "Une erreur s'est produite",

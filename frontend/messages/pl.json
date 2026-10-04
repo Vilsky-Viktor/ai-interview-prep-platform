@@ -68,7 +68,8 @@
     "title": "Tytuł",
     "titleFailed": "Nie udało się zapisać tytułu.",
     "loading": "Wczytywanie…",
-    "send": "Wyślij"
+    "send": "Wyślij",
+    "thinking": "Myśli…"
   },
   "errors": {
     "title": "Coś poszło nie tak",

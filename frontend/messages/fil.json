@@ -68,7 +68,8 @@
     "title": "Pamagat",
     "titleFailed": "Hindi ma-save ang pamagat.",
     "loading": "Naglo-load…",
-    "send": "Ipadala"
+    "send": "Ipadala",
+    "thinking": "Nag-iisip…"
   },
   "errors": {
     "title": "Nagkaproblema",

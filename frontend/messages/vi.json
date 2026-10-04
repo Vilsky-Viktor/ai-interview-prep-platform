@@ -68,7 +68,8 @@
     "title": "Tiêu đề",
     "titleFailed": "Không thể lưu tiêu đề.",
     "loading": "Đang tải…",
-    "send": "Gửi"
+    "send": "Gửi",
+    "thinking": "Đang suy nghĩ…"
   },
   "errors": {
     "title": "Đã xảy ra lỗi",

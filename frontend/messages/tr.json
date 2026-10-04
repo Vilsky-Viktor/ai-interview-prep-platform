@@ -68,7 +68,8 @@
     "title": "Başlık",
     "titleFailed": "Başlık kaydedilemedi.",
     "loading": "Yükleniyor…",
-    "send": "Gönder"
+    "send": "Gönder",
+    "thinking": "Düşünüyor…"
   },
   "errors": {
     "title": "Bir şeyler ters gitti",

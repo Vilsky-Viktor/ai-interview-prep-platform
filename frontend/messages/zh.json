@@ -68,7 +68,8 @@
     "title": "标题",
     "titleFailed": "无法保存标题。",
     "loading": "正在加载…",
-    "send": "发送"
+    "send": "发送",
+    "thinking": "思考中…"
   },
   "errors": {
     "title": "出了点问题",

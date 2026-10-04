@@ -68,7 +68,8 @@
     "title": "Título",
     "titleFailed": "Não foi possível salvar o título.",
     "loading": "Carregando…",
-    "send": "Enviar"
+    "send": "Enviar",
+    "thinking": "Pensando…"
   },
   "errors": {
     "title": "Algo deu errado",

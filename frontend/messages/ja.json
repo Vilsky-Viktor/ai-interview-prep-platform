@@ -68,7 +68,8 @@
     "title": "タイトル",
     "titleFailed": "タイトルを保存できませんでした。",
     "loading": "読み込み中…",
-    "send": "送信"
+    "send": "送信",
+    "thinking": "考え中…"
   },
   "errors": {
     "title": "問題が発生しました",
