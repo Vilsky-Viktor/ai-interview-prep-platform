@@ -346,6 +346,7 @@
     "topicName": "Topic name",
     "removeSubtopic": "Remove {subtopic}",
     "addSubtopic": "Add a subtopic",
+    "subtopicsFull": "At most {count} subtopics",
     "newSubtopic": "New subtopic",
     "add": "Add",
     "done": "Done",

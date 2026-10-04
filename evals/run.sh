@@ -2,9 +2,10 @@
 # Runs an offline test script inside a service container of the local stack, which has the
 # service's code, packages and OpenAI key, then copies new datasets and results back.
 #
-#   evals/run.sh <generation|rounds> <script.py> [arguments]
+#   evals/run.sh <generation|generation-worker|rounds> <script.py> [arguments]
 #
-# MODEL, EFFORT, JUDGE_MODEL and JUDGE_EFFORT are passed through when set.
+# generation-worker has generation's code too: a second container, so two tests can run at once.
+# MODEL, EFFORT, JUDGE_MODEL, JUDGE_EFFORT and OVERSAMPLE are passed through when set.
 set -euo pipefail
 
 service="$1"
@@ -13,19 +14,22 @@ shift 2
 
 here="$(cd "$(dirname "$0")" && pwd)"
 container="prepza-${service}-1"
+code="${service%-worker}"
 
 docker exec "$container" rm -rf /tmp/evals
 docker cp "$here" "$container:/tmp/evals"
 
 env_args=()
 
-for name in MODEL EFFORT JUDGE_MODEL JUDGE_EFFORT; do
+for name in MODEL EFFORT JUDGE_MODEL JUDGE_EFFORT OVERSAMPLE; do
   if [[ -n "${!name:-}" ]]; then
     env_args+=(-e "$name=${!name}")
   fi
 done
 
-docker exec -w "/services/$service" -e "PYTHONPATH=/services/$service:/tmp/evals/scripts" \
+# Tracing off: test runs would use up LangSmith's monthly trace quota.
+docker exec -w "/services/$code" -e "PYTHONPATH=/services/$code:/tmp/evals/scripts" \
+  -e LANGSMITH_TRACING=false \
   "${env_args[@]+"${env_args[@]}"}" "$container" \
   uv run --no-sync python "/tmp/evals/scripts/$script" "$@"
 

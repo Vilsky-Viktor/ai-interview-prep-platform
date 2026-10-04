@@ -51,7 +51,7 @@ async def set_topic_limit(
     if topic is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Topic not found")
 
-    if body.limit is not None and body.limit > topic["question_count"]:
+    if body.limit > topic["question_count"]:
         raise HTTPException(
             status.HTTP_422_UNPROCESSABLE_CONTENT,
             f"The topic has only {topic['question_count']} questions",

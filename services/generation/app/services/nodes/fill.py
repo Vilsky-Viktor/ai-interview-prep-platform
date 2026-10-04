@@ -1,9 +1,8 @@
-import math
-
 from app.config.settings import settings
-from app.constants.generation import FILL_ATTEMPTS, QUESTION_OVERSAMPLE
+from app.constants.generation import FILL_ATTEMPTS, FILL_SPARE_QUESTIONS
 from app.helpers.questions import normalize
 from app.models.state import State
+from app.services.dedupe import distinct_by_meaning
 from app.services.nodes.questions import generate_questions
 
 
@@ -15,21 +14,21 @@ def usable(item: dict) -> int:
     return sum(1 for options in item["answer_options"] if options)
 
 
-async def new_questions(
-    item: dict, missing: int, kind: str | None, level: str, language: str
-) -> list[dict]:
-    """Questions with options on the topic, different from every one it already has."""
+async def new_questions(item: dict, missing: int, state: State) -> list[dict]:
+    """Questions with options on the topic, different from every one it already has, in words
+    and in meaning, as the pipeline's own are."""
     result = await generate_questions(
         {
             "topic_index": 0,
             "topic": item["topic"],
             "subtopic_index": 0,
             "subtopic": ", ".join(item["subtopics"]) or item["topic"],
-            "count": math.ceil(missing * QUESTION_OVERSAMPLE),
-            "kind": kind,
-            "level": level,
+            "count": missing + FILL_SPARE_QUESTIONS,
+            "kind": state.get("kind"),
+            "level": state["level"],
+            "free_kit": state.get("free_kit", False),
             "existing": item["questions"],
-            "language": language,
+            "language": state.get("language"),
         }
     )
     taken = {normalize(text) for text in item["questions"]}
@@ -40,7 +39,12 @@ async def new_questions(
             taken.add(normalize(question["text"]))
             fresh.append(question)
 
-    return fresh
+    existing = len(item["questions"])
+    kept = await distinct_by_meaning(
+        item["questions"] + [question["text"] for question in fresh], keep_first=existing
+    )
+
+    return [fresh[index - existing] for index in kept[existing:]]
 
 
 async def fill_topics(state: State) -> dict:
@@ -64,9 +68,8 @@ async def fill_topics(state: State) -> dict:
             if missing <= 0:
                 break
 
-            for question in await new_questions(
-                item, missing, state.get("kind"), state["level"], state.get("language")
-            ):
+            # The spares asked for beyond what's missing are left out.
+            for question in (await new_questions(item, missing, state))[:missing]:
                 item["questions"].append(question["text"])
                 item["answer_options"].append(question["options"])
 

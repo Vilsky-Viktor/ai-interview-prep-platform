@@ -340,6 +340,7 @@
     "topicName": "اسم الموضوع",
     "removeSubtopic": "إزالة {subtopic}",
     "addSubtopic": "إضافة موضوع فرعي",
+    "subtopicsFull": "{count} مواضيع فرعية على الأكثر",
     "newSubtopic": "موضوع فرعي جديد",
     "add": "إضافة",
     "done": "تم",

@@ -346,6 +346,7 @@
     "topicName": "주제 이름",
     "removeSubtopic": "{subtopic} 삭제",
     "addSubtopic": "하위 주제 추가",
+    "subtopicsFull": "하위 주제는 최대 {count}개",
     "newSubtopic": "새 하위 주제",
     "add": "추가",
     "done": "완료",

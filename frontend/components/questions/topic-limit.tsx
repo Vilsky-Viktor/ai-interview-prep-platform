@@ -37,14 +37,12 @@ export function TopicLimit({
       return
     }
 
-    const next = number === count ? null : number
-
     setSaving(true)
 
     try {
       await apiFetch(path, {
         method: "PUT",
-        body: JSON.stringify({ limit: next }),
+        body: JSON.stringify({ limit: number }),
       })
       router.refresh()
     } catch (error) {

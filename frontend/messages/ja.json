@@ -340,6 +340,7 @@
     "topicName": "トピック名",
     "removeSubtopic": "{subtopic} を削除",
     "addSubtopic": "サブトピックを追加",
+    "subtopicsFull": "サブトピックは最大 {count} 件",
     "newSubtopic": "新しいサブトピック",
     "add": "追加",
     "done": "完了",

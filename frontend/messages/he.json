@@ -340,6 +340,7 @@
     "topicName": "שם הנושא",
     "removeSubtopic": "הסרת {subtopic}",
     "addSubtopic": "הוספת תת-נושא",
+    "subtopicsFull": "לכל היותר {count} תת-נושאים",
     "newSubtopic": "תת-נושא חדש",
     "add": "הוספה",
     "done": "סיום",

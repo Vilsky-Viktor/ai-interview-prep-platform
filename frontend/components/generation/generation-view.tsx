@@ -153,6 +153,7 @@ export function GenerationView({
         key={round}
         topics={generation.topics}
         maxTopics={generation.max_topics}
+        maxSubtopics={generation.max_subtopics}
         freeKit={generation.free_kit}
         back={<BackLink href={backHref}>{backLabel}</BackLink>}
         cancel={cancel}

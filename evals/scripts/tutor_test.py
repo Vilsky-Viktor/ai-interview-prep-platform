@@ -90,14 +90,15 @@ def report(setting: str, results: list[dict]) -> bool:
     return not wrong
 
 
-async def main(settings: list[str], stop: bool) -> None:
-    items = load(DATASETS / "follow_ups.json")["items"]
+async def main(settings: list[str], stop: bool, dataset: str) -> None:
+    items = load(DATASETS / dataset)["items"]
     judge_llm = judge().with_structured_output(Verdict)
     print(f"{len(items)} follow-ups, judged by {JUDGE_MODEL}")
 
     for setting in settings:
         results = await run_setting(setting, items, judge_llm)
-        save(RESULTS / f"tutor_{setting.replace('/', '_')}.json", results)
+        name = dataset.removesuffix(".json").removeprefix("follow_ups")
+        save(RESULTS / f"tutor{name}_{setting.replace('/', '_')}.json", results)
 
         if report(setting, results) and stop:
             print(f"Stopping: {setting} answered every follow-up correctly.")
@@ -109,5 +110,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("settings", nargs="+", help="model/effort, cheapest first")
     parser.add_argument("--stop-when-all-correct", action="store_true")
+    parser.add_argument("--dataset", default="follow_ups.json", help="a file in datasets/")
     args = parser.parse_args()
-    asyncio.run(main(args.settings, args.stop_when_all_correct))
+    asyncio.run(main(args.settings, args.stop_when_all_correct, args.dataset))

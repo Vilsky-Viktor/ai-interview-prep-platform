@@ -340,6 +340,7 @@
     "topicName": "主题名称",
     "removeSubtopic": "移除 {subtopic}",
     "addSubtopic": "添加子主题",
+    "subtopicsFull": "最多 {count} 个子主题",
     "newSubtopic": "新子主题",
     "add": "添加",
     "done": "完成",

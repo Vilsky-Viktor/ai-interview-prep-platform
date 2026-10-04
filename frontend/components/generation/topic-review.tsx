@@ -16,6 +16,8 @@ import type { DraftTopic } from "@/types/generation"
 type TopicReviewProps = {
   topics: DraftTopic[]
   maxTopics: number
+  // Subtopics a topic may have when edited by hand.
+  maxSubtopics: number
   // The learner's free first kit, which keeps fewer topics.
   freeKit: boolean
   back: ReactNode
@@ -32,6 +34,7 @@ type TopicReviewProps = {
 export function TopicReview({
   topics,
   maxTopics,
+  maxSubtopics,
   freeKit,
   back,
   cancel,
@@ -92,6 +95,7 @@ export function TopicReview({
             <li key={index}>
               <TopicEditor
                 topic={topic}
+                maxSubtopics={maxSubtopics}
                 onChange={(changed) =>
                   setDraft((current) =>
                     current.map((item, itemIndex) =>

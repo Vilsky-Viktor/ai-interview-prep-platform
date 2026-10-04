@@ -55,6 +55,7 @@ async def run_pipeline(graph, generation: Generation, resume: dict | None) -> No
             "input_text": generation.text,
             "language": generation.language,
             "kind": generation.kind,
+            "free_kit": generation.free_kit,
         }
 
     await generations.update(generation.id, status=Status.RUNNING, error=None)

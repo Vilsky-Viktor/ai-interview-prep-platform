@@ -1,5 +1,6 @@
 from prepza_common.constants import FREE_KIT_TOPICS
 
+from app.config.settings import settings
 from app.constants.generation import MAX_TOPIC_NAME_LENGTH
 
 
@@ -21,11 +22,15 @@ def fit_name(name: str) -> str:
 
 
 def fit_topics(topics: list[dict]) -> list[dict]:
+    """Names within their limit, and at most MAX_SUBTOPICS subtopics: approving a draft never
+    fails on what the model made too long."""
     return [
         {
             **topic,
             "main_topic": fit_name(topic["main_topic"]),
-            "subtopics": [fit_name(subtopic) for subtopic in topic["subtopics"]],
+            "subtopics": [
+                fit_name(subtopic) for subtopic in topic["subtopics"][: settings.max_subtopics]
+            ],
         }
         for topic in topics
     ]

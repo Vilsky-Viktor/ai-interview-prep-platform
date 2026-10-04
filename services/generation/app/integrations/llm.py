@@ -22,12 +22,15 @@ def build_llm(model: str, reasoning_effort: str) -> ChatOpenAI:
     )
 
 
-def get_generation_llm(kind: str | None, level: str | None) -> ChatOpenAI:
-    """Interviews on INTERVIEW_MODEL; a learner's kit on KIT_MODEL, or HARD_KIT_MODEL when it's
-    hard. Before the level is known, and for a run started before the kind was passed, the
-    hard-kit model, so nothing gets the cheaper model by mistake."""
+def get_generation_llm(kind: str | None, level: str | None, free_kit: bool = False) -> ChatOpenAI:
+    """Interviews on INTERVIEW_MODEL; a learner's free kit on FREE_KIT_MODEL; a paid kit on
+    KIT_MODEL, or HARD_KIT_MODEL when it's hard. Before the level is known, and for a run started
+    before the kind was passed, the hard-kit model, so nothing gets a cheaper model by mistake."""
     if kind == GenerationKind.INTERVIEW:
         return build_llm(settings.interview_model, settings.interview_reasoning_effort)
+
+    if kind == GenerationKind.PREPARATION and free_kit:
+        return build_llm(settings.free_kit_model, settings.free_kit_reasoning_effort)
 
     if kind == GenerationKind.PREPARATION and level is not None and level != HARD_LEVEL:
         return build_llm(settings.kit_model, settings.kit_reasoning_effort)

@@ -346,6 +346,7 @@
     "topicName": "विषय का नाम",
     "removeSubtopic": "{subtopic} हटाएँ",
     "addSubtopic": "उप-विषय जोड़ें",
+    "subtopicsFull": "ज़्यादा से ज़्यादा {count} उप-विषय",
     "newSubtopic": "नया उप-विषय",
     "add": "जोड़ें",
     "done": "हो गया",

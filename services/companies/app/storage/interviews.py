@@ -92,17 +92,10 @@ async def update_settings(interview_id, settings: InterviewSettings) -> None:
         await session.commit()
 
 
-async def set_topic_limit(interview_id, topic_id: uuid.UUID, limit: int | None) -> None:
+async def set_topic_limit(interview_id, topic_id: uuid.UUID, limit: int) -> None:
     async with Session() as session:
         interview = await session.get(Interview, interview_id)
-        limits = {
-            key: value for key, value in interview.topic_limits.items() if key != str(topic_id)
-        }
-
-        if limit is not None:
-            limits[str(topic_id)] = limit
-
-        interview.topic_limits = limits
+        interview.topic_limits = {**interview.topic_limits, str(topic_id): limit}
         await session.commit()
 
 

@@ -346,6 +346,7 @@
     "topicName": "نام موضوع",
     "removeSubtopic": "حذف {subtopic}",
     "addSubtopic": "افزودن زیرموضوع",
+    "subtopicsFull": "حداکثر {count} زیرموضوع",
     "newSubtopic": "زیرموضوع جدید",
     "add": "افزودن",
     "done": "انجام شد",

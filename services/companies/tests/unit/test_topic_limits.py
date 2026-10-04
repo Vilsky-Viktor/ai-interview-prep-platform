@@ -4,7 +4,8 @@ from datetime import UTC, datetime
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.helpers.interviews import pick_questions
+from app.constants.interviews import DEFAULT_TOPIC_QUESTIONS
+from app.helpers.interviews import pick_questions, topics_out
 from app.integrations import library
 from app.main import app
 from app.models.companies import Company, Member
@@ -63,9 +64,11 @@ def test_limit_cannot_exceed_topic_questions(client, monkeypatch):
 
     assert client.put(url, json={"limit": 11}).status_code == 422
     assert client.put(url, json={"limit": 0}).status_code == 422
+    assert client.put(url, json={"limit": None}).status_code == 422
     assert client.put(url, json={"limit": 5}).status_code == 204
-    assert client.put(url, json={"limit": None}).status_code == 204
-    assert saved == [(TOPIC_ID, 5), (TOPIC_ID, None)]
+    # The whole topic: every candidate gets every question.
+    assert client.put(url, json={"limit": 10}).status_code == 204
+    assert saved == [(TOPIC_ID, 5), (TOPIC_ID, 10)]
 
     app.dependency_overrides.clear()
 
@@ -86,4 +89,21 @@ def test_pick_questions_takes_a_random_subset():
     assert len(picked) == 5
     assert len(set(picked)) == 5
     assert set(picked) <= set(questions)
-    assert pick_questions(questions, None) == questions
+    assert pick_questions(questions, 100) == questions
+    assert pick_questions(questions[:7], 10) == questions[:7]
+
+
+def test_a_topic_without_a_limit_asks_the_default_number():
+    ids = [str(uuid.uuid4()) for _ in range(3)]
+    found = {
+        "topics": [
+            {"id": ids[0], "title": "SQL", "question_count": 70},
+            {"id": ids[1], "title": "Git", "question_count": 6},
+            {"id": ids[2], "title": "APIs", "question_count": 70},
+        ]
+    }
+
+    topics = topics_out(found, {ids[2]: 25})
+
+    assert [topic.question_limit for topic in topics] == [DEFAULT_TOPIC_QUESTIONS, 6, 25]
+    assert DEFAULT_TOPIC_QUESTIONS == 10

@@ -346,6 +346,7 @@
     "topicName": "Pangalan ng paksa",
     "removeSubtopic": "Alisin ang {subtopic}",
     "addSubtopic": "Magdagdag ng subtopic",
+    "subtopicsFull": "Hanggang {count} subtopic lang",
     "newSubtopic": "Bagong subtopic",
     "add": "Idagdag",
     "done": "Tapos na",

@@ -13,13 +13,12 @@ from pydantic import (
     model_validator,
 )
 
+from app.config.settings import settings
 from app.constants.generation import (
     GOAL_PREVIEW_LENGTH,
     MAX_GOAL_LENGTH,
     MAX_INSTRUCTIONS_LENGTH,
-    MAX_SUBTOPICS,
     MAX_TOPIC_NAME_LENGTH,
-    MAX_TOPICS,
 )
 from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
@@ -63,7 +62,7 @@ TopicName = Annotated[
 
 class EditedTopic(BaseModel):
     main_topic: TopicName
-    subtopics: list[TopicName] = Field(max_length=MAX_SUBTOPICS)
+    subtopics: list[TopicName] = Field(max_length=settings.max_subtopics)
 
 
 class ReviewRequest(BaseModel):
@@ -78,8 +77,8 @@ class ReviewRequest(BaseModel):
 
         With instructions the topics are revised first, so the reviewer may ask to merge.
         """
-        if not self.instructions.strip() and len(self.selected) > MAX_TOPICS:
-            raise ValueError(f"Choose at most {MAX_TOPICS} topics")
+        if not self.instructions.strip() and len(self.selected) > settings.max_topics:
+            raise ValueError(f"Choose at most {settings.max_topics} topics")
 
         return self
 
@@ -119,9 +118,15 @@ class GenerationOut(BaseModel):
     def max_topics(self) -> int:
         """How many topics the review may approve without instructions."""
         if self.free_kit:
-            return FREE_KIT_TOPICS
+            return min(FREE_KIT_TOPICS, settings.max_topics)
 
-        return MAX_TOPICS
+        return settings.max_topics
+
+    @computed_field
+    @property
+    def max_subtopics(self) -> int:
+        """How many subtopics a topic may have when edited by hand during review."""
+        return settings.max_subtopics
 
 
 class GenerationSummary(BaseModel):

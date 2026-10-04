@@ -346,6 +346,7 @@
     "topicName": "Konu adı",
     "removeSubtopic": "{subtopic} öğesini kaldır",
     "addSubtopic": "Alt konu ekle",
+    "subtopicsFull": "En fazla {count} alt konu",
     "newSubtopic": "Yeni alt konu",
     "add": "Ekle",
     "done": "Tamam",

@@ -14,7 +14,8 @@ Rules:
 - Every requirement's skill must be covered by at least one subtopic. Never drop one.
 - Group related requirements under one topic. Keep each specific tool, method, or concept
   that a requirement names as its own subtopic.
-- Do not limit the number of subtopics. Use as many as needed for full coverage.
+- At most {max_subtopics} subtopics per main topic. When more would be needed, merge closely
+  related ones into a broader subtopic rather than dropping a requirement.
 - At most {max_topics} main topics. If the requirements need more, group related ones under a
   shared topic.
 - Keep every main topic and subtopic name to {max_name} characters at most (about 6 words). If a
@@ -42,6 +43,7 @@ Rules:
   broader topics on their shared subject. Never return more than {max_topics} main topics.
 - Every main topic covers one coherent subject, and every subtopic belongs to its main topic.
   Never put unrelated subjects under one title.
+- At most {max_subtopics} subtopics per main topic; merge closely related ones to fit.
 - Regroup only as much as needed to fit the limit, and drop only duplicated or overly narrow
   subtopics. If everything fits, keep the current topics as they are.
 - Keep the coverage of the current topics unless the instructions remove something. Do not

@@ -340,6 +340,7 @@
     "topicName": "Назва теми",
     "removeSubtopic": "Прибрати {subtopic}",
     "addSubtopic": "Додати підтему",
+    "subtopicsFull": "Не більше {count} підтем",
     "newSubtopic": "Нова підтема",
     "add": "Додати",
     "done": "Готово",

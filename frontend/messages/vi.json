@@ -346,6 +346,7 @@
     "topicName": "Tên chủ đề",
     "removeSubtopic": "Xóa {subtopic}",
     "addSubtopic": "Thêm chủ đề con",
+    "subtopicsFull": "Tối đa {count} chủ đề con",
     "newSubtopic": "Chủ đề con mới",
     "add": "Thêm",
     "done": "Xong",

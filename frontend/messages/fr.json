@@ -346,6 +346,7 @@
     "topicName": "Nom du sujet",
     "removeSubtopic": "Retirer {subtopic}",
     "addSubtopic": "Ajouter un sous-sujet",
+    "subtopicsFull": "{count} sous-thèmes au maximum",
     "newSubtopic": "Nouveau sous-sujet",
     "add": "Ajouter",
     "done": "Terminé",

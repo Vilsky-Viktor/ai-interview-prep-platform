@@ -18,9 +18,10 @@ class QuestionTask(TypedDict):
     subtopic_index: int
     subtopic: str
     count: int
-    # GenerationKind and level choose the model (integrations/llm.py).
+    # GenerationKind, level and a free kit choose the model (integrations/llm.py).
     kind: str | None
     level: str
+    free_kit: bool
     # Questions the topic already has, reused from other preparations.
     existing: list[str]
     # Which angle this call mostly asks about.
@@ -42,8 +43,9 @@ class AnswerTask(TypedDict):
 
 class State(TypedDict):
     input_text: str
-    # GenerationKind: a learner's kit or a company's interview.
+    # GenerationKind: a learner's kit or a company's interview; a learner's first kit is free.
     kind: str
+    free_kit: bool
     # The code of the language content is written in (prepza_common.constants.LANGUAGES).
     language: str
     title: str

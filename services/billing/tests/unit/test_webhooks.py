@@ -2,6 +2,7 @@ import asyncio
 import time
 
 import pytest
+from prepza_common.constants import FREE_KIT_TOPICS
 
 from app.constants.products import WEBHOOK_TOLERANCE_SECONDS
 from app.helpers.paddle import signature_valid
@@ -113,4 +114,4 @@ def test_the_catalog_lists_every_product_and_which_are_on_sale(client):
 
 
 def test_the_catalog_says_how_many_topics_a_free_kit_has(client):
-    assert client.get("/catalog").json()["free_kit_topics"] == 3
+    assert client.get("/catalog").json()["free_kit_topics"] == FREE_KIT_TOPICS

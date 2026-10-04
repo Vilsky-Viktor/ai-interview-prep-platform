@@ -346,6 +346,7 @@
     "topicName": "Naam van het onderwerp",
     "removeSubtopic": "{subtopic} verwijderen",
     "addSubtopic": "Subonderwerp toevoegen",
+    "subtopicsFull": "Maximaal {count} subonderwerpen",
     "newSubtopic": "Nieuw subonderwerp",
     "add": "Toevoegen",
     "done": "Klaar",

@@ -83,10 +83,10 @@ CHAT_TURN_CREDITS = 2
 MAX_SHARES = 30
 # Companies one person may own; the welcome credits come with the first one only (companies).
 MAX_OWNED_COMPANIES = 3
+# A new learner's welcome gift includes one free kit, of at most this many topics: for now as many
+# as a paid kit (generation's MAX_TOPICS), since a free kit is written by the cheaper FREE_KIT_MODEL.
+FREE_KIT_TOPICS = 10
 # Interviews are free to generate, so each company may start this many a day (companies).
-# A new learner's welcome gift includes one free kit, of at most this many topics (a paid kit
-# keeps up to generation's MAX_TOPICS).
-FREE_KIT_TOPICS = 3
 INTERVIEWS_PER_DAY = 10
 # $1 buys this many credits (billing sells them; the FAQ shows prices in dollars too).
 CREDITS_PER_DOLLAR = 100

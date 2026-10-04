@@ -60,6 +60,9 @@ class FakeStructured:
 
 
 class FakeLLM:
+    model_name = "fake"
+    reasoning_effort = "low"
+
     def with_structured_output(self, schema):
         return FakeStructured(schema)
 
@@ -96,11 +99,11 @@ def reusable(texts):
     return find
 
 
-async def run_graph(review=None, kind=None):
+async def run_graph(review=None, kind=None, free_kit=False):
     graph = build_graph(InMemorySaver())
     config = {"configurable": {"thread_id": "test"}}
     interrupts = []
-    start = {"input_text": "Job", "kind": kind}
+    start = {"input_text": "Job", "kind": kind, "free_kit": free_kit}
 
     async for chunk in graph.astream(start, config, stream_mode="updates"):
         interrupts.extend(chunk.get("__interrupt__", ()))
@@ -135,10 +138,9 @@ def test_full_graph(monkeypatch, per_topic):
 
 
 @pytest.mark.parametrize(
-    ("kind", "later"),
-    [("preparation", {("preparation", "medium")}), ("interview", {("interview", "medium")})],
+    ("kind", "free_kit"), [("preparation", False), ("preparation", True), ("interview", False)]
 )
-def test_every_call_chooses_its_model_by_who_its_for_and_the_level(monkeypatch, kind, later):
+def test_every_call_chooses_its_model_by_who_its_for_and_the_level(monkeypatch, kind, free_kit):
     calls = []
 
     def choose(*args):
@@ -151,11 +153,11 @@ def test_every_call_chooses_its_model_by_who_its_for_and_the_level(monkeypatch, 
     monkeypatch.setattr(library, "find_reusable", reusable([]))
     monkeypatch.setattr(settings, "questions_per_topic", 10)
 
-    asyncio.run(run_graph(kind=kind))
+    asyncio.run(run_graph(kind=kind, free_kit=free_kit))
 
-    # Extraction comes before the level is known; topics, questions and fill-ups know both.
-    assert calls[0] == (kind, None)
-    assert set(calls[1:]) == later
+    # Extraction comes before the level is known; topics, questions and fill-ups know it too.
+    assert calls[0] == (kind, None, free_kit)
+    assert set(calls[1:]) == {(kind, "medium", free_kit)}
 
 
 def test_reused_questions_come_first_and_new_ones_fill_the_rest(monkeypatch):

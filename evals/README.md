@@ -67,6 +67,10 @@ distractor and time targets.
 | **`gpt-6.1-sol` low** (in use) | 44 of 45 | 4.96 | 1.5 s / 4.9 s | $0.0029 |
 | `gpt-6-luna` high | 38 of 45 | 4.73 | 3.8 s / 21.9 s | $0.00026 |
 
+By level, a cheaper tutor isn't enough anywhere: on `follow_ups.json` `gpt-6-luna` low got 13 of 14
+hard and 27 of 31 medium follow-ups right (Sol 14 and 30), and on `follow_ups_basic.json` 25 of 30
+(Sol 30 of 30, at $0.0023 a turn). So the tutor isn't routed by level.
+
 **Title check**, on `titles.json` (114):
 
 | Setting | Right | Fine titles blocked | Companies let through | Median | Per check |
@@ -85,6 +89,10 @@ kept 60 of 60 real keys, at $0.0009 a check and 1.8 s; medium is in use.
 
 **Judge**, `gpt-6.1-sol` at high reasoning: caught 60 of 60 planted wrong keys.
 
+**Oversampling** (`generate_kits.py` with `OVERSAMPLE`, Luna high, 70 questions a topic, Python
+backend and Spanish for travel): at 1.1 and at 1.0 no topic of 12 came up short, so no fill-up
+call was made; 1.0 saves about 9% of question generation and is in use.
+
 ## Datasets
 
 All in `datasets/`, frozen: rebuild one only on purpose (a new domain, a new prompt generation),
@@ -97,6 +105,7 @@ note the date, and re-run the baselines on it.
 | `reviews.json` | The reference judge's verdict on each of those questions | `review_questions.py --save-reference` | about $3 |
 | `key_traps.json` | 60 of those questions with the key moved to a wrong option on purpose | `build_traps.py` | free |
 | `titles.json` | 114 public kit titles labelled by hand: companies and organizations as employers or subjects (some lowercase, some in other languages), and fine ones: products, exams, generic titles, and company names in their everyday meaning ("Apple pie", "Shell scripting", "Visa application") | By hand | — |
+| `follow_ups_basic.json` | 30 tutor follow-ups on basic-level questions, the same three kinds | `build_follow_ups.py --basic` | about $0.30 |
 | `follow_ups.json` | 45 hard tutor follow-ups (defending a wrong pick, a "what if", a step-by-step request) | `build_follow_ups.py` | about $0.50 |
 
 `reviews.json` flags 4 questions as flawed (q0008, q0072, q0094, q0232). They're kept on purpose:
@@ -129,6 +138,9 @@ evals/run.sh generation titles_test.py gpt-6-luna/none gpt-6.1-sol/low
 
 # Verifier settings, on the traps and the same questions with their real key
 evals/run.sh generation verify_test.py gpt-6.1-sol/low gpt-6.1-sol/medium
+
+# The tutor on basic-level questions
+evals/run.sh rounds tutor_test.py gpt-6-luna/low gpt-6.1-sol/low --dataset follow_ups_basic.json
 
 # A cheaper judge, tested against the reference and the traps
 JUDGE_MODEL=gpt-6-luna JUDGE_EFFORT=medium evals/run.sh generation review_questions.py datasets/questions.json --compare-reference

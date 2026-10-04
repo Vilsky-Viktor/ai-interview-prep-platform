@@ -3,7 +3,8 @@ import json
 from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.types import interrupt
 
-from app.constants.generation import MAX_TOPIC_NAME_LENGTH, MAX_TOPICS, TOPIC_ATTEMPTS
+from app.config.settings import settings
+from app.constants.generation import MAX_TOPIC_NAME_LENGTH, TOPIC_ATTEMPTS
 from app.helpers.prompts import bullet_list, language_name
 from app.helpers.topics import fit_topics
 from app.integrations import llm
@@ -22,12 +23,14 @@ async def plan_topics(prompt: str, model) -> list[dict]:
         result: TopicList = await structured_llm.ainvoke(messages)
         topics = [topic.model_dump() for topic in result.topics]
 
-        if len(topics) <= MAX_TOPICS:
+        if len(topics) <= settings.max_topics:
             break
 
         messages += [
             AIMessage(content=json.dumps(topics, ensure_ascii=False)),
-            HumanMessage(content=TOO_MANY_TOPICS.format(count=len(topics), max_topics=MAX_TOPICS)),
+            HumanMessage(
+                content=TOO_MANY_TOPICS.format(count=len(topics), max_topics=settings.max_topics)
+            ),
         ]
 
     return fit_topics(topics)
@@ -38,11 +41,12 @@ async def generate_topics(state: State) -> dict:
     prompt = TOPICS_PROMPT.format(
         level=state["level"],
         requirements=bullet_list(state["requirements"]),
-        max_topics=MAX_TOPICS,
+        max_topics=settings.max_topics,
+        max_subtopics=settings.max_subtopics,
         max_name=MAX_TOPIC_NAME_LENGTH,
         language=language_name(state.get("language")),
     )
-    model = llm.get_generation_llm(state.get("kind"), state["level"])
+    model = llm.get_generation_llm(state.get("kind"), state["level"], state.get("free_kit", False))
     topics = await draft_cache.get("topics", prompt, model)
 
     if topics is None:
@@ -75,14 +79,16 @@ async def revise_topics(state: State) -> dict:
         requirements=bullet_list(state["requirements"]),
         current=json.dumps(state["topics"], indent=2, ensure_ascii=False),
         feedback=state["feedback"],
-        max_topics=MAX_TOPICS,
+        max_topics=settings.max_topics,
+        max_subtopics=settings.max_subtopics,
         max_name=MAX_TOPIC_NAME_LENGTH,
         language=language_name(state.get("language")),
     )
 
     return {
         "topics": await plan_topics(
-            prompt, llm.get_generation_llm(state.get("kind"), state["level"])
+            prompt,
+            llm.get_generation_llm(state.get("kind"), state["level"], state.get("free_kit", False)),
         ),
         "feedback": "",
         "approved": False,

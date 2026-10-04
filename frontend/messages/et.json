@@ -346,6 +346,7 @@
     "topicName": "Teema nimi",
     "removeSubtopic": "Eemalda {subtopic}",
     "addSubtopic": "Lisa alateema",
+    "subtopicsFull": "Kõige rohkem {count} alamteemat",
     "newSubtopic": "Uus alateema",
     "add": "Lisa",
     "done": "Valmis",

@@ -48,7 +48,8 @@ class TopicOut(BaseModel):
     title: str
     subtopics: list[str] = []
     question_count: int
-    question_limit: int | None
+    # Questions each candidate gets from the topic.
+    question_limit: int
 
 
 class InterviewDetail(InterviewOut):
@@ -65,7 +66,8 @@ class ReviewIn(BaseModel):
 
 
 class TopicLimitIn(BaseModel):
-    limit: int | None = Field(default=None, ge=1)
+    # The topic's whole size gives every candidate every question.
+    limit: int = Field(ge=1)
 
 
 class InterviewSettings(BaseModel):

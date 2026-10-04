@@ -346,6 +346,7 @@
     "topicName": "ชื่อหัวข้อ",
     "removeSubtopic": "ลบ {subtopic}",
     "addSubtopic": "เพิ่มหัวข้อย่อย",
+    "subtopicsFull": "หัวข้อย่อยได้สูงสุด {count} หัวข้อ",
     "newSubtopic": "หัวข้อย่อยใหม่",
     "add": "เพิ่ม",
     "done": "เสร็จ",

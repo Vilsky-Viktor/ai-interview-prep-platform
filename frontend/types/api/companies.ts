@@ -263,7 +263,8 @@ export interface paths {
     }
     /**
      * List Candidates
-     * @description Newest first, a page at a time; scores come from rounds for this page only.
+     * @description A page at a time, best grade first or newest first. Grades come from rounds: for every
+     *     candidate when sorting by them, otherwise for this page only.
      */
     get: operations["list_candidates_interviews__interview_id__candidates_get"]
     put?: never
@@ -512,6 +513,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/users/{user_id}/companies": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * User Companies
+     * @description Every company the user is a member of, in any role; notifications sends them theirs.
+     */
+    get: operations["user_companies_internal_users__user_id__companies_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/invites/{invite_id}/undelivered": {
     parameters: {
       query?: never
@@ -523,7 +544,8 @@ export interface paths {
     put?: never
     /**
      * Invite Undelivered
-     * @description Notifications reports a bounced or spam-flagged invite email; safe to repeat.
+     * @description Notifications reports a bounced or spam-flagged invite email; safe to repeat. The
+     *     company is told.
      */
     post: operations["invite_undelivered_internal_invites__invite_id__undelivered_post"]
     delete?: never
@@ -731,6 +753,11 @@ export interface components {
       created_at: string
     }
     /**
+     * CandidateSort
+     * @enum {string}
+     */
+    CandidateSort: "grade" | "date"
+    /**
      * CheckoutOut
      * @description The Paddle checkout to open: its price and the custom data to send with it.
      */
@@ -816,6 +843,15 @@ export interface components {
             | "ar"
             | "he"
             | "fa"
+            | "ja"
+            | "zh"
+            | "ko"
+            | "hi"
+            | "id"
+            | "th"
+            | "vi"
+            | "fil"
+            | "et"
           )
         | null
     }
@@ -1040,7 +1076,7 @@ export interface components {
     /** TopicLimitIn */
     TopicLimitIn: {
       /** Limit */
-      limit?: number | null
+      limit: number
     }
     /** TopicOut */
     TopicOut: {
@@ -1059,7 +1095,15 @@ export interface components {
       /** Question Count */
       question_count: number
       /** Question Limit */
-      question_limit: number | null
+      question_limit: number
+    }
+    /**
+     * UserCompaniesOut
+     * @description Every company the user is a member of, for the notifications service.
+     */
+    UserCompaniesOut: {
+      /** Company Ids */
+      company_ids: string[]
     }
     /** ValidationError */
     ValidationError: {
@@ -1722,6 +1766,7 @@ export interface operations {
   list_candidates_interviews__interview_id__candidates_get: {
     parameters: {
       query?: {
+        sort?: components["schemas"]["CandidateSort"]
         offset?: number
         limit?: number
       }
@@ -2238,6 +2283,37 @@ export interface operations {
           "application/json": {
             [key: string]: unknown
           }
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  user_companies_internal_users__user_id__companies_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["UserCompaniesOut"]
         }
       }
       /** @description Validation Error */

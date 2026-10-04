@@ -19,19 +19,26 @@ class Settings(ServiceSettings):
     tasks_queue: str = ""
     invoker_service_account: str = ""
     service_secret: str
-    questions_per_topic: int = Field(default=100, gt=0)
+    questions_per_topic: int = Field(default=70, gt=0)
+    # Main topics a kit or an interview has, and subtopics each topic has. Every subtopic is at
+    # least one model call, so fewer of them cost less.
+    max_topics: int = Field(default=10, gt=0)
+    max_subtopics: int = Field(default=10, gt=0)
     # Each AI task has its own model and effort, so one can change without the others. Effort is
     # how hard a reasoning model thinks: "none", "minimal", "low", "medium" or "high".
     # Generation (extraction, topics, questions, answers, a re-generated question) by who it's for:
     # a company's interview, whatever its level, since candidates are judged on it;
     interview_model: str = "gpt-6.1-sol"
     interview_reasoning_effort: ReasoningEffort = "low"
-    # a learner's basic or medium kit, where Luna at high reasoning was as accurate as Sol in
+    # a learner's free kit, at any level, since it's given away;
+    free_kit_model: str = "gpt-6-luna"
+    free_kit_reasoning_effort: ReasoningEffort = "high"
+    # a learner's paid basic or medium kit, where Luna at high reasoning was as accurate as Sol in
     # testing at about a seventh of the price, though slower (evals/README.md);
     kit_model: str = "gpt-6-luna"
     kit_reasoning_effort: ReasoningEffort = "high"
-    # and a learner's hard kit, where Luna's questions came out too easy, plus reading a learner's
-    # text before its level is known.
+    # and a learner's paid hard kit, where Luna's questions came out too easy, plus reading a paid
+    # kit's text before its level is known.
     hard_kit_model: str = "gpt-6.1-sol"
     hard_kit_reasoning_effort: ReasoningEffort = "low"
     # Checks answer keys, at once and in batches: rare, and it must be right.

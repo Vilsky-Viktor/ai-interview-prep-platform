@@ -49,6 +49,13 @@ def test_billing_tells_whether_a_kit_is_free(monkeypatch, response, free):
     assert asyncio.run(billing.hold_kit("ann", uuid.uuid4())) is free
 
 
+@pytest.fixture(autouse=True)
+def three_free_topics(monkeypatch):
+    """The limit's mechanism, whatever FREE_KIT_TOPICS is set to: 3 here, under MAX_TOPICS."""
+    monkeypatch.setattr("app.schemas.generation.FREE_KIT_TOPICS", 3)
+    monkeypatch.setattr("app.helpers.topics.FREE_KIT_TOPICS", 3)
+
+
 def preparation(free_kit: bool):
     generation = company_generation()
     generation.kind = "preparation"

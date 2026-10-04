@@ -437,6 +437,11 @@ export interface components {
        * @description How many topics the review may approve without instructions.
        */
       readonly max_topics: number
+      /**
+       * Max Subtopics
+       * @description How many subtopics a topic may have when edited by hand during review.
+       */
+      readonly max_subtopics: number
     }
     /**
      * GenerationProgress

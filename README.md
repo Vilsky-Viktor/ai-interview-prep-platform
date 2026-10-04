@@ -37,7 +37,7 @@ Turn a job description or a learning goal into a structured practice path: revie
 
 **Credits and payments** (see [docs/monetization.md](docs/monetization.md))
 
-- Pay as you go: $1 buys 100 credits, with a bonus on large top-ups, and credits never expire. Learners pay for their own prep kits, tutor turns after 3 free ones per question, and certificates on someone else's public kit; companies pay per candidate who answers at least one question. A kit costs 800 credits ($8) and a candidate 400 ($4). A new learner's first kit is free (up to 3 topics) and comes with 100 credits; a person's first company gets 1,200 credits, enough for 3 candidates. A company can have at most 3 interviews waiting without a candidate before it generates another.
+- Pay as you go: $1 buys 100 credits, with a bonus on large top-ups, and credits never expire. Learners pay for their own prep kits, tutor turns after 3 free ones per question, and certificates on someone else's public kit; companies pay per candidate who answers at least one question. A kit costs 800 credits ($8) and a candidate 400 ($4). A new learner's first kit is free (up to 10 topics, written by `FREE_KIT_MODEL`) and comes with 100 credits; a person's first company gets 1,200 credits, enough for 3 candidates. A company can have at most 3 interviews waiting without a candidate before it generates another.
 - Only what works is charged: credits are set aside when something starts and given back if it fails, is cancelled, or a candidate never answers.
 - Top up a fixed amount or any whole amount from $10 to $500 on the top-up page, for yourself or any company you belong to. The header shows your balance and turns amber when it runs low. Balances follow a payment as it lands, rechecked for 40 seconds after checkout, and catch up when the tab is back in view (an automatic top-up, a payment in another tab); a balance that goes up counts up to its new value, in the header, on the top-up page and on a company's interviews page.
 - **Automatic top-up:** on the top-up page, under each balance ("Automatic top-up: off"), choose a top-up and a balance to refill under; the card is saved through Paddle once. Shown only when Paddle's API key and the $0 price are set (see [Payments](#payments)).
@@ -118,7 +118,7 @@ job text -> extract requirements and level -> draft topics          (both cached
 
 The graph is checkpointed in Postgres, so a failed run can be retried from where it stopped, and a generation can be cancelled at any step.
 
-Every LLM call of the pipeline shares one rate limit across the API and all workers (`LLM_REQUESTS_PER_SECOND`). Reused questions fill at most half of a topic, and only questions that have been answered and never flagged qualify. Topics saved before embeddings existed get them from a one-off job: `docker compose exec generation uv run --no-sync python -m app.jobs.backfill_embeddings`.
+Every LLM call of the pipeline shares one rate limit across the API and all workers (`LLM_REQUESTS_PER_SECOND`). Reused questions fill at most 80% of a learner's topic and half of an interview's, and only questions that have been answered and never flagged qualify. Topics saved before embeddings existed get them from a one-off job: `docker compose exec generation uv run --no-sync python -m app.jobs.backfill_embeddings`.
 
 ### Question quality
 
@@ -177,15 +177,17 @@ Errors go to Sentry when `SENTRY_DSN` (backend services) and `NEXT_PUBLIC_SENTRY
 
 These settings in `.env` shape every generation:
 
-- `QUESTIONS_PER_TOPIC` (default 100): questions per topic. Topics never grow after generation, so a certificate always means the same set of questions.
+- `MAX_TOPICS` and `MAX_SUBTOPICS` (default 10 each): main topics a kit or an interview has, and subtopics per topic; every subtopic is at least one model call. The review page follows them.
+- `QUESTIONS_PER_TOPIC` (default 70): questions per topic. Topics never grow after generation, so a certificate always means the same set of questions.
 - `LLM_REQUESTS_PER_SECOND` (default 8): generation's LLM requests a second, shared by the API and every worker through Redis; 0 turns it off. Chat isn't limited by it, so it stays responsive during big generations.
 - Each AI task has its own model and reasoning effort (`none`, `minimal`, `low`, `medium` or `high`; only reasoning models take an effort):
 
   | Task | Model | Effort |
   |---|---|---|
   | Generation of a company's interview, at any level | `INTERVIEW_MODEL` (`gpt-6.1-sol`) | `INTERVIEW_REASONING_EFFORT` (`low`) |
-  | Generation of a learner's basic or medium kit | `KIT_MODEL` (`gpt-6-luna`) | `KIT_REASONING_EFFORT` (`high`) |
-  | Generation of a learner's hard kit, and reading a learner's text before its level is known | `HARD_KIT_MODEL` (`gpt-6.1-sol`) | `HARD_KIT_REASONING_EFFORT` (`low`) |
+  | Generation of a learner's free kit, at any level | `FREE_KIT_MODEL` (`gpt-6-luna`) | `FREE_KIT_REASONING_EFFORT` (`high`) |
+  | Generation of a learner's paid basic or medium kit | `KIT_MODEL` (`gpt-6-luna`) | `KIT_REASONING_EFFORT` (`high`) |
+  | Generation of a learner's paid hard kit, and reading a paid kit's text before its level is known | `HARD_KIT_MODEL` (`gpt-6.1-sol`) | `HARD_KIT_REASONING_EFFORT` (`low`) |
   | Verifier: answer-key checks, at once and in batches | `VERIFY_MODEL` (`gpt-6.1-sol`) | `VERIFY_REASONING_EFFORT` (`medium`) |
   | Public-title check | `TITLE_CHECK_MODEL` (`gpt-6.1-sol`) | `TITLE_CHECK_REASONING_EFFORT` (`low`) |
   | Tutor (a paid turn is 2 credits) | `TUTOR_MODEL` (`gpt-6.1-sol`) | `TUTOR_REASONING_EFFORT` (`low`) |

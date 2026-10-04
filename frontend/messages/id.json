@@ -340,6 +340,7 @@
     "topicName": "Nama topik",
     "removeSubtopic": "Hapus {subtopic}",
     "addSubtopic": "Tambah subtopik",
+    "subtopicsFull": "Paling banyak {count} subtopik",
     "newSubtopic": "Subtopik baru",
     "add": "Tambah",
     "done": "Selesai",

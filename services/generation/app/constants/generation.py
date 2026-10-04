@@ -8,14 +8,14 @@ HARD_LEVEL = "hard"
 MAX_CONCURRENCY = 8
 RECURSION_LIMIT = 200
 
-MAX_TOPICS = 10
-# Limits for topics edited by hand during review.
+# A topic's or subtopic's name, drafted or edited by hand during review. How many topics and
+# subtopics a kit has are settings (MAX_TOPICS, MAX_SUBTOPICS).
 MAX_TOPIC_NAME_LENGTH = 50
-MAX_SUBTOPICS = 30
 TOPIC_ATTEMPTS = 2
-# Questions are written for this many times a topic's size, so the ones dropped as ambiguous or
-# duplicate are replaced; fill_topics covers whatever is still missing.
-QUESTION_OVERSAMPLE = 1.1
+# Questions are written for this many times a topic's size, to replace the ones dropped as
+# ambiguous or duplicate. 1.0 since testing (evals/README.md): rounding each subtopic's count up
+# left enough spares, and fill_topics covers whatever is still missing.
+QUESTION_OVERSAMPLE = 1.0
 # Questions, each with its options, per call. A subtopic needing more is split into calls.
 QUESTION_BATCH_SIZE = 20
 # Each call for the same subtopic takes the next angle, so parallel calls don't write the same
@@ -43,6 +43,9 @@ MAX_OPTION_CHARS = 250
 REGENERATE_ATTEMPTS = 3
 # Rounds of extra questions for a topic that ended short, before the generation fails.
 FILL_ATTEMPTS = 3
+# Extra questions a fill-up asks for beyond what's missing: it runs one round after another, so a
+# spare saves a round when one comes back a duplicate.
+FILL_SPARE_QUESTIONS = 2
 
 # The changes a reviewer describes in words during topic review.
 MAX_INSTRUCTIONS_LENGTH = 500

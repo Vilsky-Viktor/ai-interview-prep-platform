@@ -1,5 +1,6 @@
 import random
 
+from app.constants.interviews import DEFAULT_TOPIC_QUESTIONS
 from app.integrations import generation as generation_api
 from app.integrations import library
 from app.models.interviews import Interview
@@ -50,6 +51,11 @@ async def interview_out(interview: Interview) -> InterviewOut:
     )
 
 
+def topic_limit(limits: dict[str, int], topic_id) -> int:
+    """Questions a candidate gets from the topic: the manager's number, or the default."""
+    return limits.get(str(topic_id), DEFAULT_TOPIC_QUESTIONS)
+
+
 def topics_out(found: dict, limits: dict[str, int]) -> list[TopicOut]:
     return [
         TopicOut(
@@ -57,15 +63,15 @@ def topics_out(found: dict, limits: dict[str, int]) -> list[TopicOut]:
             title=topic["title"],
             subtopics=topic.get("subtopics", []),
             question_count=topic["question_count"],
-            question_limit=limits.get(str(topic["id"])),
+            question_limit=min(topic_limit(limits, topic["id"]), topic["question_count"]),
         )
         for topic in found.get("topics", [])
     ]
 
 
-def pick_questions(questions: list, limit: int | None) -> list:
-    """Each candidate gets a fresh random subset when the topic is limited."""
-    if limit is None or limit >= len(questions):
+def pick_questions(questions: list, limit: int) -> list:
+    """Each candidate gets a fresh random subset, or every question when the topic has no more."""
+    if limit >= len(questions):
         return questions
 
     return random.sample(questions, limit)

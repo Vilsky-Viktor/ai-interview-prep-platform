@@ -128,7 +128,10 @@ export interface paths {
     delete: operations["delete_preparation_preparations__preparation_id__delete"]
     options?: never
     head?: never
-    /** Update Visibility */
+    /**
+     * Update Visibility
+     * @description Going public needs a title that names no company.
+     */
     patch: operations["update_visibility_preparations__preparation_id__patch"]
     trace?: never
   }
@@ -147,7 +150,7 @@ export interface paths {
     head?: never
     /**
      * Update Title
-     * @description Only the preparation's owner can rename it.
+     * @description Only the preparation's owner can rename it; a public one's title can't name a company.
      */
     patch: operations["update_title_preparations__preparation_id__title_patch"]
     trace?: never

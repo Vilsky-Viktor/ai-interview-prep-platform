@@ -11,20 +11,27 @@ import type { DraftTopic } from "@/types/generation"
 
 type TopicEditorProps = {
   topic: DraftTopic
+  maxSubtopics: number
   onChange: (topic: DraftTopic) => void
   onDone: () => void
 }
 
 /** Rename a topic and change its subtopics by hand, without asking the model. */
-export function TopicEditor({ topic, onChange, onDone }: TopicEditorProps) {
+export function TopicEditor({
+  topic,
+  maxSubtopics,
+  onChange,
+  onDone,
+}: TopicEditorProps) {
   const t = useTranslations("generation")
   const [newSubtopic, setNewSubtopic] = useState("")
   const name = topic.main_topic.trim()
+  const full = topic.subtopics.length >= maxSubtopics
 
   function addSubtopic() {
     const subtopic = newSubtopic.trim()
 
-    if (subtopic && !topic.subtopics.includes(subtopic)) {
+    if (subtopic && !full && !topic.subtopics.includes(subtopic)) {
       onChange({ ...topic, subtopics: [...topic.subtopics, subtopic] })
     }
 
@@ -85,15 +92,20 @@ export function TopicEditor({ topic, onChange, onDone }: TopicEditorProps) {
               addSubtopic()
             }
           }}
-          placeholder={t("addSubtopic")}
+          placeholder={
+            full
+              ? t("subtopicsFull", { count: maxSubtopics })
+              : t("addSubtopic")
+          }
           aria-label={t("newSubtopic")}
+          disabled={full}
           className="h-10"
         />
         <Button
           type="button"
           variant="outline"
           className="h-10 px-3"
-          disabled={!newSubtopic.trim()}
+          disabled={full || !newSubtopic.trim()}
           onClick={addSubtopic}
         >
           <PlusIcon />

@@ -3,7 +3,8 @@ each with a wrong option as the learner's pick, written once by Sol with judges/
 so every tutor setting is tested on the same set.
 
 Run in the generation container: evals/run.sh generation build_follow_ups.py [--count 45]
-Costs about $0.01 per follow-up."""
+With --basic it writes datasets/follow_ups_basic.json from basic-level questions instead, to test
+whether a cheaper tutor is enough there. Costs about $0.01 per follow-up."""
 
 import argparse
 import asyncio
@@ -36,8 +37,12 @@ def hard(item: dict) -> bool:
     return item["level"] != "basic" and ("```" in item["question"] or numbers)
 
 
-async def main(count: int) -> None:
-    items = [item for item in load(DATASETS / "questions.json")["items"] if hard(item)]
+async def main(count: int, basic: bool) -> None:
+    items = [
+        item
+        for item in load(DATASETS / "questions.json")["items"]
+        if (item["level"] == "basic" if basic else hard(item))
+    ]
     rng = random.Random(11)
     chosen = rng.sample(items, min(count, len(items)))
     writer = model("gpt-6.1-sol", "medium").with_structured_output(FollowUp)
@@ -66,10 +71,10 @@ async def main(count: int) -> None:
 
     follow_ups = await asyncio.gather(*(one(index, item) for index, item in enumerate(chosen)))
     save(
-        DATASETS / "follow_ups.json",
+        DATASETS / ("follow_ups_basic.json" if basic else "follow_ups.json"),
         {
-            "about": "Hard tutor follow-ups on questions from questions.json, written by "
-            "gpt-6.1-sol (medium). The learner picked a wrong option.",
+            "about": f"{'Basic-level' if basic else 'Hard'} tutor follow-ups on questions from "
+            "questions.json, written by gpt-6.1-sol (medium). The learner picked a wrong option.",
             "items": follow_ups,
         },
     )
@@ -79,4 +84,6 @@ async def main(count: int) -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--count", type=int, default=45)
-    asyncio.run(main(parser.parse_args().count))
+    parser.add_argument("--basic", action="store_true", help="basic-level questions instead")
+    args = parser.parse_args()
+    asyncio.run(main(args.count, args.basic))

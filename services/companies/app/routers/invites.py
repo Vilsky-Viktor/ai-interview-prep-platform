@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 
 from app.constants.invites import InviteStatus
-from app.helpers.interviews import attach_set, interview_title, pick_questions
+from app.helpers.interviews import attach_set, interview_title, pick_questions, topic_limit
 from app.integrations import library, rounds
 from app.schemas.invites import InviteStartOut, InviteView, SessionSummary
 from app.storage import companies
@@ -75,7 +75,7 @@ async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
                     "preparation_id": content["id"],
                     "title": topic["title"],
                     "questions": pick_questions(
-                        topic["questions"], interview.topic_limits.get(str(topic["id"]))
+                        topic["questions"], topic_limit(interview.topic_limits, topic["id"])
                     ),
                 }
                 for topic in content["topics"]
