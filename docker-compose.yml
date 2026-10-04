@@ -9,7 +9,7 @@ x-firebase-env: &firebase-env
   # Development only: serves /docs and /openapi.json, which `pnpm api-types` reads.
   API_DOCS: "true"
   # Salts user ids in funnel events; in Google Cloud it's a secret.
-  ANALYTICS_SALT: local-analytics-salt
+  ANALYTICS_SALT: ${ANALYTICS_SALT:-local-analytics-salt}
   # The key of each service, for tokens calling it; in Google Cloud each service has its own.
   LIBRARY_SERVICE_SECRET: ${SERVICE_SECRET}
   GENERATION_SERVICE_SECRET: ${SERVICE_SECRET}
@@ -73,6 +73,9 @@ x-rounds-env: &rounds-env
   HELP_MODEL: ${HELP_MODEL:-gpt-6-luna}
   HELP_REASONING_EFFORT: ${HELP_REASONING_EFFORT:-none}
   LLM_WINDOW_SECONDS: ${LLM_WINDOW_SECONDS:-3600}
+  HELP_USER_LIMIT: ${HELP_USER_LIMIT:-30}
+  HELP_DAILY_LIMIT: ${HELP_DAILY_LIMIT:-5000}
+  CONTACT_DAILY_LIMIT: ${CONTACT_DAILY_LIMIT:-200}
 
 x-billing-env: &billing-env
   <<: *firebase-env
@@ -145,6 +148,7 @@ x-notifications-env: &notifications-env
   SMTP_HOST: ${SMTP_HOST:-mailpit}
   SMTP_PORT: ${SMTP_PORT:-1025}
   SITE_URL: ${SITE_URL:-http://localhost:8090}
+  CONTACT_EMAIL: ${CONTACT_EMAIL:-hello@prepza.ai}
 
 x-notifications-source: &notifications-source
   - ./services/notifications/app:/services/notifications/app
@@ -187,6 +191,7 @@ x-generation-env: &generation-env
   TITLE_CHECK_REASONING_EFFORT: ${TITLE_CHECK_REASONING_EFFORT:-low}
   GENERATION_LIMIT: ${GENERATION_LIMIT:-20}
   GENERATION_WINDOW_SECONDS: ${GENERATION_WINDOW_SECONDS:-86400}
+  REGENERATION_LIMIT: ${REGENERATION_LIMIT:-100}
   DAILY_GENERATION_LIMIT: ${DAILY_GENERATION_LIMIT:-200}
   LLM_REQUESTS_PER_SECOND: ${LLM_REQUESTS_PER_SECOND:-8}
 

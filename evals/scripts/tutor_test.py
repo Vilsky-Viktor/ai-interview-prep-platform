@@ -26,7 +26,7 @@ class Verdict(BaseModel):
     issue: str = Field(description="The error or weakness in a few words, or empty")
 
 
-async def ask(tutor, item: dict) -> dict:
+async def ask(tutor, item: dict, extra_rule: str) -> dict:
     """The tutor's reply, the seconds to its first word, and its cost."""
     system = CHAT_SYSTEM.format(
         question=item["question"],
@@ -35,6 +35,10 @@ async def ask(tutor, item: dict) -> dict:
         result="Result: incorrect.",
         language="English",
     )
+
+    if extra_rule:
+        system = system.rstrip() + f"\n- {extra_rule}\n"
+
     started = time.monotonic()
     first, reply, usage = None, "", {}
 
@@ -47,17 +51,22 @@ async def ask(tutor, item: dict) -> dict:
         reply += chunk.content or ""
         usage = chunk.usage_metadata or usage
 
-    return {"reply": reply, "first_word": first or 0.0, "cost": cost(tutor.model_name, usage)}
+    return {
+        "reply": reply,
+        "words": len(reply.split()),
+        "first_word": first or 0.0,
+        "cost": cost(tutor.model_name, usage),
+    }
 
 
-async def run_setting(setting: str, items: list[dict], judge_llm) -> list[dict]:
+async def run_setting(setting: str, items: list[dict], judge_llm, extra_rule: str) -> list[dict]:
     name, effort = setting.split("/")
     tutor = model(name, effort, timeout=120)
     limit = asyncio.Semaphore(6)
 
     async def one(item):
         async with limit:
-            answer = await ask(tutor, item)
+            answer = await ask(tutor, item, extra_rule)
             text = prompt("tutor_review").format(
                 question=item["question"],
                 correct=item["correct"],
@@ -77,10 +86,11 @@ def report(setting: str, results: list[dict]) -> bool:
     firsts = sorted(r["first_word"] for r in results)
     helpful = sum(r["helpful"] for r in results) / len(results)
     per_turn = sum(r["cost"] for r in results) / len(results)
+    words = sorted(r["words"] for r in results)
     print(
         f"{setting}: {len(results) - len(wrong)} of {len(results)} correct; helpful {helpful:.2f}; "
         f"first word median {firsts[len(firsts) // 2]:.1f}s, slowest {firsts[-1]:.1f}s; "
-        f"${per_turn:.5f} a turn",
+        f"${per_turn:.5f} a turn; median reply {words[len(words) // 2]} words",
         flush=True,
     )
 
@@ -90,15 +100,15 @@ def report(setting: str, results: list[dict]) -> bool:
     return not wrong
 
 
-async def main(settings: list[str], stop: bool, dataset: str) -> None:
+async def main(settings: list[str], stop: bool, dataset: str, extra_rule: str, label: str) -> None:
     items = load(DATASETS / dataset)["items"]
     judge_llm = judge().with_structured_output(Verdict)
     print(f"{len(items)} follow-ups, judged by {JUDGE_MODEL}")
 
     for setting in settings:
-        results = await run_setting(setting, items, judge_llm)
+        results = await run_setting(setting, items, judge_llm, extra_rule)
         name = dataset.removesuffix(".json").removeprefix("follow_ups")
-        save(RESULTS / f"tutor{name}_{setting.replace('/', '_')}.json", results)
+        save(RESULTS / f"tutor{name}_{setting.replace('/', '_')}{label}.json", results)
 
         if report(setting, results) and stop:
             print(f"Stopping: {setting} answered every follow-up correctly.")
@@ -111,5 +121,9 @@ if __name__ == "__main__":
     parser.add_argument("settings", nargs="+", help="model/effort, cheapest first")
     parser.add_argument("--stop-when-all-correct", action="store_true")
     parser.add_argument("--dataset", default="follow_ups.json", help="a file in datasets/")
+    parser.add_argument("--extra-rule", default="", help="a rule added to the tutor's prompt")
+    parser.add_argument("--label", default="", help="added to the result file's name")
     args = parser.parse_args()
-    asyncio.run(main(args.settings, args.stop_when_all_correct, args.dataset))
+    asyncio.run(
+        main(args.settings, args.stop_when_all_correct, args.dataset, args.extra_rule, args.label)
+    )

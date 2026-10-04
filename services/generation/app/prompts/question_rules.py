@@ -9,6 +9,10 @@ LEVEL_GUIDE = """How hard the questions are, by level:
 - hard: what a senior person is tested on: trade-offs, edge cases, diagnosing a problem from
   its symptoms, multi-step reasoning and decisions under constraints. Few questions are plain
   recall of a definition or a fact; most give a situation or an example and ask about it.
+  A scenario alone doesn't make a question hard: if one known rule, fact or single calculation
+  answers it, it is medium. A hard question needs two or more steps, or weighing factors that
+  pull in different directions, and its wrong options are what a capable mid-level person
+  would pick.
 Most questions are at the given level; a few are one level easier or harder."""
 
 PRACTICE_GUIDE = """Make them practice, not trivia. Mix these kinds, as the subtopic allows:

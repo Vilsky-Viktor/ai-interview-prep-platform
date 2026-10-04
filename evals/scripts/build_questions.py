@@ -3,11 +3,12 @@ written by the generation service's own prompt and the model its settings give a
 of that level (KIT_MODEL, HARD_KIT_MODEL).
 
 Run in the generation container: evals/run.sh generation build_questions.py [--per-subtopic 5]
-Costs about $0.02 per subtopic on gpt-6.1-sol (48 subtopics: about $1).
+Costs about $0.50-1 on gpt-6.1-sol (48 subtopics), $0.09 on gpt-6-luna at high.
 
 To test another model or effort on the same subtopics, without touching the frozen dataset:
     MODEL=gpt-6-luna EFFORT=high evals/run.sh generation build_questions.py --label luna-high
-writes results/questions_<label>.json, which review_questions.py and check_code.py read."""
+writes results/questions_<label>.json, which review_questions.py and check_code.py read; --level hard
+builds only the hard domains' questions."""
 
 import argparse
 import asyncio
@@ -64,12 +65,13 @@ async def subtopic_questions(domain: dict, topic: str, subtopic: str, count: int
     return items[:count]
 
 
-async def main(per_subtopic: int, label: str | None) -> None:
+async def main(per_subtopic: int, label: str | None, level: str | None) -> None:
     models = generation_models(settings)
     domains = load(DATASETS / "inputs.json")["domains"]
     calls = [
         (domain, topic["topic"], subtopic)
         for domain in domains
+        if level is None or domain["level"] == level
         for topic in domain["topics"]
         for subtopic in topic["subtopics"]
     ]
@@ -109,5 +111,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--per-subtopic", type=int, default=5)
     parser.add_argument("--label", help="write results/questions_<label>.json instead")
+    parser.add_argument("--level", help="only the domains of this level (with --label)")
     args = parser.parse_args()
-    asyncio.run(main(args.per_subtopic, args.label))
+    asyncio.run(main(args.per_subtopic, args.label, args.level))

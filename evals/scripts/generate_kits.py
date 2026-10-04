@@ -6,8 +6,9 @@ library. Question reuse and the draft cache are off, so every run makes every ca
     MODEL=gpt-6-luna EFFORT=low evals/run.sh generation generate_kits.py --all --label luna
     OVERSAMPLE=1.0 evals/run.sh generation generate_kits.py python_backend --label oversample-1.0
 
-Writes results/kit_<domain>_<label>.json in the question format the other scripts read. Costs
-about $1.60-2.30 a kit on gpt-6.1-sol (7-10 topics), $0.05 on gpt-6-luna."""
+Writes results/kit_<domain>_<label>.json in the question format the other scripts read. At 70
+questions a topic a kit costs about $0.07-0.20 on gpt-6-luna at high, about $1.00 on
+gpt-6.1-sol (7 topics)."""
 
 import argparse
 import asyncio

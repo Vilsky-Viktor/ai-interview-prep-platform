@@ -5,7 +5,7 @@ their real key it should keep the key. Questions the reference judge found flawe
     evals/run.sh generation verify_test.py gpt-6.1-sol/low gpt-6.1-sol/medium
 
 Each question is checked as the verifier sees it after two "wrong answer" reports. Costs about
-$0.01 a check on gpt-6.1-sol at medium (about 110 checks a setting); the service's batched checks
+$0.001 a check on gpt-6.1-sol (120 checks a setting, about $0.11); the service's batched checks
 cost half."""
 
 import argparse

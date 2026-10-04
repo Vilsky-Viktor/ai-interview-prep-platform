@@ -50,8 +50,8 @@ class Settings(ServiceSettings):
     generation_limit: int = Field(default=20, ge=0)
     generation_window_seconds: int = Field(default=86_400, gt=0)
     regeneration_limit: int = Field(default=100, ge=0)
-    # New generations a day, for everyone together: a ceiling on LLM spending (about $1.60
-    # each). 0 turns it off.
+    # New generations a day, for everyone together: a ceiling on LLM spending (about $0.15 a
+    # Luna kit, $1.00 a Sol kit or interview, so roughly $30–200 a day). 0 turns it off.
     daily_generation_limit: int = Field(default=200, ge=0)
     # LLM requests a second across the API and every worker; 0 turns the limit off. The default
     # stays under OpenAI's 500 requests a minute on its first tier.

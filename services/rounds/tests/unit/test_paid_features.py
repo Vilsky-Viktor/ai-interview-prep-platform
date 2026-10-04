@@ -4,7 +4,7 @@ import uuid
 import pytest
 from fastapi import HTTPException
 from firebase_admin import auth as firebase_auth
-from prepza_common.constants import CHAT_TURN_CREDITS
+from prepza_common.constants import CHAT_FREE_TURNS, CHAT_TURN_CREDITS
 from prepza_common.user import User
 
 from app.integrations import billing
@@ -114,23 +114,23 @@ def send(client, answer_id):
     )
 
 
-def test_the_first_three_turns_on_a_question_are_free(client, monkeypatch):
-    answer_id, charged = chat_setup(monkeypatch, turns_so_far=2)
+def test_the_first_turns_on_a_question_are_free(client, monkeypatch):
+    answer_id, charged = chat_setup(monkeypatch, turns_so_far=CHAT_FREE_TURNS - 1)
 
     assert send(client, answer_id).status_code == 200
     assert charged == []
 
 
-def test_the_fourth_turn_costs_a_credit_once_the_reply_arrived(client, monkeypatch):
-    answer_id, charged = chat_setup(monkeypatch, turns_so_far=3, available=5)
+def test_the_first_paid_turn_is_charged_once_the_reply_arrived(client, monkeypatch):
+    answer_id, charged = chat_setup(monkeypatch, turns_so_far=CHAT_FREE_TURNS, available=5)
 
     assert send(client, answer_id).status_code == 200
-    assert charged == [f"{answer_id}:4"]
+    assert charged == [f"{answer_id}:{CHAT_FREE_TURNS + 1}"]
 
 
 def test_a_paid_turn_without_credits_is_refused_before_the_reply(client, monkeypatch):
     # One credit short of a turn's price, so billing couldn't charge it after the reply.
-    answer_id, charged = chat_setup(monkeypatch, turns_so_far=3, available=CHAT_TURN_CREDITS - 1)
+    answer_id, charged = chat_setup(monkeypatch, turns_so_far=CHAT_FREE_TURNS, available=CHAT_TURN_CREDITS - 1)
 
     response = send(client, answer_id)
 
