@@ -4,6 +4,7 @@ import uuid
 import pytest
 from fastapi import HTTPException
 from firebase_admin import auth as firebase_auth
+from prepza_common.constants import CHAT_TURN_CREDITS
 from prepza_common.user import User
 
 from app.integrations import billing
@@ -128,12 +129,21 @@ def test_the_fourth_turn_costs_a_credit_once_the_reply_arrived(client, monkeypat
 
 
 def test_a_paid_turn_without_credits_is_refused_before_the_reply(client, monkeypatch):
-    answer_id, charged = chat_setup(monkeypatch, turns_so_far=3, available=0)
+    # One credit short of a turn's price, so billing couldn't charge it after the reply.
+    answer_id, charged = chat_setup(monkeypatch, turns_so_far=3, available=CHAT_TURN_CREDITS - 1)
 
     response = send(client, answer_id)
 
     assert response.status_code == 402
     assert charged == []
+
+
+def test_the_chat_shows_the_price_billing_charges(client, monkeypatch):
+    answer_id, _ = chat_setup(monkeypatch, turns_so_far=0)
+
+    response = client.get(f"/answers/{answer_id}/chat", headers={"Authorization": "Bearer token"})
+
+    assert response.json()["turn_credits"] == CHAT_TURN_CREDITS == 2
 
 
 def test_an_earned_certificate_on_a_public_kit_is_charged_then_issued(monkeypatch):

@@ -3,14 +3,18 @@ import time
 from fastapi import APIRouter, HTTPException, Query, Request, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
-from prepza_common.constants import CHAT_FREE_TURNS, FREE_KIT_TOPICS, REFERRAL_COOKIE
+from prepza_common.constants import (
+    CHAT_FREE_TURNS,
+    CHAT_TURN_CREDITS,
+    FREE_KIT_TOPICS,
+    REFERRAL_COOKIE,
+)
 from prepza_common.paging import PageParams
 
 from app.config.settings import settings
 from app.constants.credits import (
     CANDIDATE_CREDITS,
     CERTIFICATE_CREDITS,
-    CHAT_TURN_CREDITS,
     KIT_CREDITS,
     REFERRAL_MIN_CENTS,
     REFERRAL_REWARD,

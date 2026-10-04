@@ -22,8 +22,6 @@ CERTIFICATE_MIN_SCORE = 70
 CHAT_FAILED = "Couldn't get a reply right now. Please try again."
 # Chat replies are short; a call silent for longer has hung.
 CHAT_TIMEOUT_SECONDS = 60
-# What a paid turn needs available; billing charges it.
-CHAT_TURN_CREDITS = 1
 # New topics of other people's public kits a learner may start a day (UTC); continuing a topic
 # already started is never limited.
 PUBLIC_TOPICS_PER_DAY = 3

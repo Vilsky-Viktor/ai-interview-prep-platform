@@ -5,11 +5,12 @@ from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import StreamingResponse
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
+from prepza_common.constants import CHAT_TURN_CREDITS
 from prepza_common.i18n import translate
 from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
-from app.constants.rounds import CHAT_FAILED, CHAT_TURN_CREDITS, NOT_ENOUGH_CREDITS
+from app.constants.rounds import CHAT_FAILED, NOT_ENOUGH_CREDITS
 from app.helpers.chat import free_turns_left, user_turns
 from app.helpers.sse import sse_event
 from app.integrations import billing

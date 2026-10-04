@@ -1,6 +1,7 @@
 from types import SimpleNamespace
 
-from app.constants.credits import CHAT_TURN_CREDITS
+from prepza_common.constants import CHAT_TURN_CREDITS
+
 from app.service_auth import service_token
 from app.storage import ledger
 

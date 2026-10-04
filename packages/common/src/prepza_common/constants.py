@@ -75,6 +75,8 @@ LANGUAGE_CLAIM = "language"
 
 # Tutor turns free on each answered question; rounds enforces it, billing's catalog shows it.
 CHAT_FREE_TURNS = 3
+# Credits a tutor turn after the free ones costs: billing charges it, rounds checks the balance first.
+CHAT_TURN_CREDITS = 2
 
 # Limits a service enforces and the help chat explains, so both read the same numbers.
 # People a private kit can be shared with, counting accepted and pending invites (library).

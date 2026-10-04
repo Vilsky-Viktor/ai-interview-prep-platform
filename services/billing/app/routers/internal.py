@@ -1,13 +1,13 @@
 from fastapi import APIRouter, HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from prepza_common.analytics import track
+from prepza_common.constants import CHAT_TURN_CREDITS
 from prepza_common.paging import PageParams
 
 from app.constants.credits import (
     AUTHOR_SHARE_CREDITS,
     CANDIDATE_CREDITS,
     CERTIFICATE_CREDITS,
-    CHAT_TURN_CREDITS,
     KIT_CREDITS,
     NOT_ENOUGH,
     Reason,
