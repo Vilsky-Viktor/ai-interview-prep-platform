@@ -12,6 +12,8 @@ from app.constants.generation import (
 
 # A line starting with "A." or "A)" begins choices the model listed in the question itself.
 LISTED_CHOICES = re.compile(r"\n\s*A[.)]\s.*", re.DOTALL)
+# A Markdown fence the model put around an example itself.
+EXAMPLE_FENCE = re.compile(r"^```[\w+-]*\n?|\n?```$")
 
 
 def normalize(text: str) -> str:
@@ -20,6 +22,18 @@ def normalize(text: str) -> str:
 
 def strip_choices(question: str) -> str:
     return LISTED_CHOICES.sub("", question).strip()
+
+
+def with_example(question: str, example: str | None) -> str:
+    """The question as it's stored and shown: its sentences, then its example in a fenced block.
+    A question that already holds a block keeps it as it is."""
+    question = strip_choices(question)
+    example = EXAMPLE_FENCE.sub("", (example or "").strip()).strip("\n")
+
+    if not question or not example.strip() or "```" in question:
+        return question
+
+    return f"{question}\n```\n{example}\n```"
 
 
 def merge_buckets(buckets: list[list[dict]]) -> list[dict]:

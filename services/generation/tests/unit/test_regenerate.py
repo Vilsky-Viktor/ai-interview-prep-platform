@@ -30,7 +30,7 @@ class FakeStructured:
 
     async def ainvoke(self, messages):
         if self.schema is NewQuestion:
-            return NewQuestion(question=self.questions.pop(0))
+            return NewQuestion(question=self.questions.pop(0), example=None)
 
         ambiguous = "[0] Which keyword" in messages[0].content
 

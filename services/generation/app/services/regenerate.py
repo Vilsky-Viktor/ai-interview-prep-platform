@@ -4,7 +4,7 @@ from langchain_core.messages import HumanMessage
 
 from app.constants.generation import REGENERATE_ATTEMPTS
 from app.helpers.prompts import bullet_list, language_name
-from app.helpers.questions import normalize, strip_choices
+from app.helpers.questions import normalize, with_example
 from app.integrations import library, llm
 from app.prompts.regenerate import REGENERATE_PROMPT
 from app.schemas.questions import NewQuestion
@@ -28,7 +28,7 @@ async def new_question(context: QuestionContext) -> str | None:
             language=language_name(context.language),
         )
         result: NewQuestion = await structured_llm.ainvoke([HumanMessage(content=prompt)])
-        text = strip_choices(result.question)
+        text = with_example(result.question, result.example)
 
         if text and normalize(text) not in taken:
             texts = [*context.existing, text]

@@ -9,6 +9,7 @@ from app.helpers.questions import (
     merge_buckets,
     split_count,
     strip_choices,
+    with_example,
 )
 
 
@@ -207,3 +208,18 @@ def test_drafted_names_are_fitted_to_the_review_limit_at_a_word():
     assert fit_topics([{"main_topic": " SQL ", "subtopics": [long_name]}]) == [
         {"main_topic": "SQL", "subtopics": [fitted]}
     ]
+
+
+def test_an_example_goes_under_its_question_in_a_block():
+    text = with_example("What does this print?", "print(1)\nprint(2)")
+
+    assert text == "What does this print?\n```\nprint(1)\nprint(2)\n```"
+    # The model's own fence around the example isn't doubled.
+    assert with_example("What does this print?", "```python\nprint(1)\n```") == (
+        "What does this print?\n```\nprint(1)\n```"
+    )
+    assert with_example("What is a vowel?", None) == "What is a vowel?"
+    assert with_example("What is a vowel?", "  ") == "What is a vowel?"
+    # A question that already shows a block keeps it, and one with nothing left isn't kept.
+    assert with_example("See:\n```\nx\n```", "y") == "See:\n```\nx\n```"
+    assert with_example("", "print(1)") == ""

@@ -2,16 +2,28 @@ from pydantic import BaseModel, Field
 
 from app.constants.generation import DISTRACTORS, MAX_OPTION_CHARS
 
+EXAMPLE = (
+    "The program, query, command, formula or file the question is about, exactly as it would be "
+    "typed, with real line breaks and indentation and without a Markdown fence; for a query, the "
+    "table's few rows first. Null when the question shows none. Never null when the question "
+    'refers to one, such as "this query" or "the file below".'
+)
+
 
 class QuestionItem(BaseModel):
-    question: str = Field(description="The question itself, without numbering or listed choices.")
+    question: str = Field(
+        description="The question itself in plain sentences, without numbering, listed choices "
+        "or the example."
+    )
+    example: str | None = Field(description=EXAMPLE)
     correct_option: str = Field(
         description="The correct answer, as concise as possible while complete and accurate, "
         f"never longer than {MAX_OPTION_CHARS} characters."
     )
     distractors: list[str] = Field(
         description=f"Exactly {DISTRACTORS} plausible but incorrect options, each at most "
-        f"{MAX_OPTION_CHARS} characters, similar in length and style to correct_option."
+        f"{MAX_OPTION_CHARS} characters, in the same form as correct_option and about as long "
+        "as it, never noticeably shorter."
     )
     ambiguous: bool = Field(
         description="True if more than one of the options could be defended as a correct "
@@ -24,7 +36,11 @@ class QuestionItemList(BaseModel):
 
 
 class NewQuestion(BaseModel):
-    question: str = Field(description="One new interview question, without numbering.")
+    question: str = Field(
+        description="One new interview question in plain sentences, without numbering or the "
+        "example."
+    )
+    example: str | None = Field(description=EXAMPLE)
 
 
 class AnswerItem(BaseModel):
@@ -35,8 +51,8 @@ class AnswerItem(BaseModel):
     )
     distractors: list[str] = Field(
         description=f"Exactly {DISTRACTORS} plausible but incorrect options, each at most "
-        f"{MAX_OPTION_CHARS} characters, similar in "
-        "length and style to correct_option."
+        f"{MAX_OPTION_CHARS} characters, in the same form as correct_option and about as long "
+        "as it, never noticeably shorter."
     )
     ambiguous: bool = Field(
         description="True if more than one of the options could be defended as a correct "

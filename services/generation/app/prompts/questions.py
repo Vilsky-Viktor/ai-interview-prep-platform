@@ -1,9 +1,13 @@
-QUESTIONS_PROMPT = """Write multiple-choice interview questions on the subtopic below, each with
+from app.prompts.question_rules import DISTRACTOR_RULES, LEVEL_GUIDE, PRACTICE_GUIDE
+
+QUESTIONS_PROMPT = (
+    """Write multiple-choice interview questions on the subtopic below, each with
 its answer options. The candidate sees the question with four short options and answers by
 picking one of them.
 
 For each question produce:
 - question: the question itself.
+- example: what the question shows, if anything (see the question rules); otherwise null.
 - correct_option: the correct answer, as concise as possible while complete and accurate.
   Never longer than {max_chars} characters.
 - distractors: exactly {distractors} incorrect options, each also at most {max_chars} characters.
@@ -17,29 +21,31 @@ Question rules:
 - Never ask the candidate to write, explain, describe, list, give an example, or walk through
   steps in their own words. Ask what is true, which choice is best, what happens next, what
   something means, or what to do first in a situation.
-- Vary difficulty around the given level (some easier, most at level, some harder).
 - Every question covers a different angle; no rephrasings of the same question.
-- Each question is self-contained and answerable without extra context.
+- Each question is self-contained and answerable without extra context: it states everything
+  the answer depends on, such as the starting situation, the goal being optimized, and the
+  version or standard in use when the answer differs between them.
 - Never list choices (A., B., C., D.) in the question text, and do not add numbering.
-- Write questions as plain sentences. Only when a question must show multi-line text whose
-  layout matters, such as a program, query or config file, put it after the sentence in a
-  fenced Markdown block (``` ... ```) with real line breaks and indentation.
-- A program with more than one statement, or any if/elif/else, loop or function, always goes
-  in a fenced block with one statement per line, even when it is short. Never squeeze it onto
-  one line of the sentence.
+- Write questions as plain sentences. Text whose layout matters, such as a program, a query,
+  a command, a formula or a file, never goes into the sentences: it goes into example, exactly
+  as it would be typed, one statement per line, with real line breaks and indentation. It is
+  shown under the question. A question that refers to an example ("this query", "the command
+  below") always has one in example.
 - Write formulas and short expressions inline in plain text with proper symbols
   (for example a² + b² = c², ≤, √, π), not in a block.
 - Mostly ask about the given focus.
 - The topic already has the questions listed at the end. Do not repeat or rephrase them.
 
+"""
+    + LEVEL_GUIDE
+    + "\n\n"
+    + PRACTICE_GUIDE
+    + """
+
 Option rules:
-- Distractors are plausible: common misconceptions or near-misses, not absurd or joke answers.
-- Distractors are clearly wrong to someone who knows the topic; exactly one option is correct.
-- Similar length, tone, and specificity as correct_option; the correct option must not be
-  recognizable by being the longest or most detailed.
-- No "all of the above", "none of the above", or options that overlap with the correct one.
-- A distractor must be wrong for the question exactly as written, not merely less precise. If
-  an expert could defend it as a correct answer, it is not a distractor.
+"""
+    + DISTRACTOR_RULES
+    + """
 
 Write every question and option in {language}. Keep formulas, commands and the names of tools and
 products as they are.
@@ -53,3 +59,4 @@ Number of questions: {count}
 Questions the topic already has:
 {existing}
 """
+)

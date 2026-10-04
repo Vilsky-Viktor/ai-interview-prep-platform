@@ -20,7 +20,7 @@ from app.helpers.questions import (
     normalize,
     question_calls,
     split_count,
-    strip_choices,
+    with_example,
 )
 from app.integrations import llm
 from app.models.state import QuestionTask, State
@@ -107,7 +107,7 @@ async def generate_questions(task: QuestionTask) -> dict:
     questions = []
 
     for item in items:
-        text = strip_choices(item.question)
+        text = with_example(item.question, item.example)
         options = None if item.ambiguous else build_options(item.correct_option, item.distractors)
 
         if text and options:

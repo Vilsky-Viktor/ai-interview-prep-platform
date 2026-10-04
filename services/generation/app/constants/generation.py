@@ -18,10 +18,10 @@ QUESTION_BATCH_SIZE = 20
 # Each call for the same subtopic takes the next angle, so parallel calls don't write the same
 # obvious questions.
 QUESTION_FOCUSES = (
-    "core concepts, terms and facts",
-    "applying it in everyday practice",
-    "situations: what happens next, or what to do first",
-    "trade-offs, comparisons and common mistakes",
+    "core concepts: what they mean in practice and how they differ",
+    "applying it to a concrete case: working out the result or choosing the right approach",
+    "situations: what happens next, what went wrong, or what to do first",
+    "trade-offs, edge cases and common mistakes",
 )
 # Questions whose embeddings are this close (cosine distance) ask the same thing in other words.
 DUPLICATE_DISTANCE = 0.08

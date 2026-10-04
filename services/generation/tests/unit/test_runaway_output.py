@@ -37,7 +37,11 @@ def items(*texts):
     return QuestionItemList(
         items=[
             QuestionItem(
-                question=text, correct_option="Right", distractors=["A", "B", "C"], ambiguous=False
+                question=text,
+                example=None,
+                correct_option="Right",
+                distractors=["A", "B", "C"],
+                ambiguous=False,
             )
             for text in texts
         ]

@@ -49,6 +49,7 @@ class FakeStructured:
             items=[
                 QuestionItem(
                     question=text,
+                    example=None,
                     correct_option="Right",
                     distractors=["W1", "W2", "W3"],
                     ambiguous=False,
