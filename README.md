@@ -191,7 +191,7 @@ These settings in `.env` shape every generation:
 
   In testing, `gpt-6.1-sol` at low got every complex tutor follow-up on hard questions right, where `gpt-6-luna` got some wrong; see [evals/README.md](evals/README.md).
 
-Per-user rate limits (`GENERATION_LIMIT`, `LLM_LIMIT`) cap how much a single account can generate and chat.
+Per-user rate limits (`GENERATION_LIMIT`, `LLM_LIMIT`) cap how much a single account can generate and chat. `DAILY_GENERATION_LIMIT` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off. Invite emails are limited per user (`EMAIL_HOURLY_LIMIT`, `EMAIL_DAILY_LIMIT`) and per address (`EMAIL_RECIPIENT_DAILY_LIMIT`).
 
 ### Payments
 

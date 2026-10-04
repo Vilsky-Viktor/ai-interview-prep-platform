@@ -13,7 +13,7 @@ Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) be
   - a Cloud Armor rule that blocks `/api/*/internal/`.
 - **Secret Manager** for secrets, and **Artifact Registry** for images.
 
-Outside Google Cloud: Redis on **Upstash** (rate limits, the LLM limiter, the draft cache), **Firebase Authentication** (same project), **Resend**, **Sentry** and **Paddle**.
+Outside Google Cloud: Redis on **Upstash** (rate limits, the LLM limiter, the draft cache, live notifications), **Firebase Authentication** (same project), **Resend**, **Sentry** and **Paddle**.
 
 ## Bootstrap (once)
 
@@ -44,7 +44,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    cp terraform.tfvars.example terraform.tfvars   # fill it in
    terraform init -backend-config="bucket=prepza-prod-terraform"
    ```
-   `alert_email`, `billing_account` and `monthly_budget` set up the alerts in `monitoring.tf`: an uptime check every minute on the site and each API's `/ready`, an email when one fails, and budget emails at 50%, 90% and 100% of the month (and when the forecast passes it). Creating the budget needs the Billing Account Costs Manager role on the billing account, which its administrator already has.
+   `alert_email`, `billing_account` and `monthly_budget` set up the alerts in `monitoring.tf`: an uptime check every minute on the site and each API's `/ready`, an email when one fails, and budget emails at 50%, 90% and 100% of the month (and when the forecast passes it). Creating the budget needs the Billing Account Costs Manager role on the billing account, which its administrator already has. `daily_generation_limit` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off.
 6. **Create the image registry first,** then push the first images. CI pushes them on every push to `main` afterwards.
    - Cloud Run runs `linux/amd64`, so build for it even on an Apple-silicon Mac.
    - Use the same tag as `image_tag` in `terraform.tfvars`.
@@ -118,7 +118,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
   ```bash
   git tag v1.4.0 && git push origin v1.4.0
   ```
-  [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) then checks that the tag is on `main` and CI passed on it, gives that commit's images the version as a tag (nothing is rebuilt), runs the 5 migration jobs, moves every service to the images, smoke-tests the site and creates a GitHub release with the changes since the last tag.
+  [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) then checks that the tag is on `main` and CI passed on it, gives that commit's images the version as a tag (nothing is rebuilt), runs the 6 migration jobs, moves every service to the images, smoke-tests the site and creates a GitHub release with the changes since the last tag.
 
 A failed step stops the deploy, and the services keep running the previous images.
 
