@@ -43,7 +43,8 @@
     "hiring": "rekrutacja",
     "pricingLink": "cennik",
     "faq": "Częste pytania",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "about": "O nas"
   },
   "signIn": {
     "with": "Zaloguj się przez",
@@ -746,5 +747,18 @@
     "thanks": "Dziękujemy!",
     "sent": "Twoja wiadomość jest w drodze. Odpowiemy na {email}.",
     "failed": "Nie udało się wysłać wiadomości. Spróbuj ponownie."
+  },
+  "about": {
+    "title": "O nas",
+    "intro": "prepza pomaga przygotować się z pewnością siebie, a firmom daje prosty i niedrogi sposób na sprawdzanie kandydatów.",
+    "company": {
+      "title": "Po co istniejemy",
+      "learners": "Przygotowania do rozmowy rekrutacyjnej, egzaminu czy nowej umiejętności nie powinny zaczynać się od godzin szukania. Powiedz prepza, do czego dążysz, a zamieni to w jasny plan: tematy, które się liczą, pytania do ćwiczeń z każdego z nich i tutora, który wyjaśni każdą odpowiedź, aż wszystko stanie się jasne.",
+      "companies": "Chcemy, by rekrutacja była uczciwa i dostępna dla każdego zespołu, nie tylko dla dużych firm. Zamień ogłoszenie o pracę w rozmowę na czas w kilka minut, daj każdemu kandydatowi jego własne pytania i płać tylko za kandydatów, którzy naprawdę ją odbyli."
+    },
+    "founder": {
+      "quote": "Za każdym razem, gdy przygotowywałem się do rozmowy kwalifikacyjnej albo próbowałem nauczyć się czegoś nowego, więcej czasu spędzałem na szukaniu dobrych materiałów niż na samej nauce. Każda strona obejmowała tylko kawałek i żadna nie pasowała do tego, czego potrzebowałem. Dlatego zbudowałem prepza: narzędzie, którego mi brakowało, które zaczyna od Twojego celu i prowadzi Cię do niego. Mam nadzieję, że oszczędzi Ci godziny, które oszczędziłoby mi.",
+      "role": "Jedyny założyciel prepza"
+    }
   }
 }

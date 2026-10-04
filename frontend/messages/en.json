@@ -43,7 +43,8 @@
     "hiring": "hiring",
     "pricingLink": "pricing",
     "faq": "FAQ",
-    "contact": "Contact us"
+    "contact": "Contact us",
+    "about": "About us"
   },
   "signIn": {
     "with": "Sign in with",
@@ -742,5 +743,18 @@
     "thanks": "Thanks!",
     "sent": "Your message is on its way. We'll reply to {email}.",
     "failed": "Couldn't send your message. Please try again."
+  },
+  "about": {
+    "title": "About us",
+    "intro": "prepza helps people prepare with confidence, and gives companies a simple, affordable way to test candidates.",
+    "company": {
+      "title": "Why we exist",
+      "learners": "Getting ready for an interview, an exam or a new skill shouldn't start with hours of searching. Tell prepza what you're aiming for, and it turns that into a clear plan: the topics that matter, practice questions for each, and a tutor that explains every answer until it clicks.",
+      "companies": "For companies, we want hiring to be fair and within reach of any team, not only big ones. Turn a job description into a timed interview in minutes, give every candidate their own questions, and pay only for candidates who actually take it."
+    },
+    "founder": {
+      "quote": "Whenever I prepared for an interview or tried to learn something new, I spent more time searching for good material than actually studying. Every site covered a piece, and none fit what I needed. So I built prepza: the tool I wished I'd had, one that starts from your goal and guides you to it. I hope it saves you the hours it would have saved me.",
+      "role": "Solo founder of prepza"
+    }
   }
 }

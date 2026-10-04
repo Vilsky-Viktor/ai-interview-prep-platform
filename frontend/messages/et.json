@@ -43,7 +43,8 @@
     "hiring": "värbamine",
     "pricingLink": "hinnad",
     "faq": "KKK",
-    "contact": "Võta ühendust"
+    "contact": "Võta ühendust",
+    "about": "Meist"
   },
   "signIn": {
     "with": "Logi sisse kontoga",
@@ -750,5 +751,18 @@
     "thanks": "Aitäh!",
     "sent": "Sinu sõnum on teel. Vastame aadressile {email}.",
     "failed": "Sõnumit ei õnnestunud saata. Proovi uuesti."
+  },
+  "about": {
+    "title": "Meist",
+    "intro": "prepza aitab sul enesekindlalt valmistuda ja annab ettevõtetele lihtsa ning soodsa viisi kandidaate proovile panna.",
+    "company": {
+      "title": "Miks me olemas oleme",
+      "learners": "Valmistumine intervjuuks, eksamiks või uue oskuse omandamiseks ei peaks algama tundidepikkuse otsimisega. Räägi prepzale, mille poole püüdled, ja see teeb sellest selge plaani: olulised teemad, harjutusküsimused igaühe kohta ja juhendaja, kes selgitab iga vastust seni, kuni asi on selge.",
+      "companies": "Ettevõtete puhul tahame, et värbamine oleks õiglane ja jõukohane igale meeskonnale, mitte ainult suurtele. Tee töökuulutusest mõne minutiga ajapiiranguga intervjuu, anna igale kandidaadile oma küsimused ja maksa ainult nende kandidaatide eest, kes selle tegelikult läbivad."
+    },
+    "founder": {
+      "quote": "Iga kord, kui valmistusin tööintervjuuks või püüdsin midagi uut õppida, kulus mul rohkem aega hea materjali otsimisele kui päris õppimisele. Iga sait kattis vaid tüki ja ükski ei sobinud sellega, mida vajasin. Nii ehitasingi prepza: tööriista, mida ise oleksin tahtnud, mis alustab sinu eesmärgist ja juhatab sind selleni. Loodan, et see säästab sulle need tunnid, mis oleks säästnud mulle.",
+      "role": "prepza ainuasutaja"
+    }
   }
 }

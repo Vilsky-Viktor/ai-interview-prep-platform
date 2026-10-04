@@ -23,6 +23,7 @@ export const PUBLIC_PATHS = [
   "/privacy",
   "/terms",
   "/faq",
+  "/about",
   "/contact",
 ]
 

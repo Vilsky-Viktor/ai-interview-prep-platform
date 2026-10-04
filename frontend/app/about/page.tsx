@@ -1,0 +1,70 @@
+import Image from "next/image"
+import { getTranslations } from "next-intl/server"
+
+import { LinkedInIcon } from "@/components/preparations/share-icons"
+import { FOUNDER } from "@/constants/about"
+import { pageMetadata } from "@/lib/site"
+
+export async function generateMetadata() {
+  const t = await getTranslations("about")
+
+  return pageMetadata(t("title"), t("intro"), "/about")
+}
+
+export default async function AboutPage() {
+  const t = await getTranslations("about")
+
+  return (
+    <main className="mx-auto max-w-5xl space-y-16 px-6 py-12">
+      <header className="space-y-4">
+        <h1 className="font-heading text-4xl font-medium tracking-tight">
+          {t("title")}
+        </h1>
+        <p className="text-lg text-muted-foreground">{t("intro")}</p>
+      </header>
+      <section className="space-y-4">
+        <h2 className="font-heading text-2xl font-medium tracking-tight">
+          {t("company.title")}
+        </h2>
+        <p className="text-base leading-relaxed text-muted-foreground">
+          {t("company.learners")}
+        </p>
+        <p className="text-base leading-relaxed text-muted-foreground">
+          {t("company.companies")}
+        </p>
+      </section>
+      <figure className="grid items-center gap-8 rounded-3xl border p-6 sm:p-10 md:grid-cols-[16rem_1fr] md:gap-12">
+        <Image
+          src={FOUNDER.photo}
+          width={FOUNDER.width}
+          height={FOUNDER.height}
+          alt={FOUNDER.name}
+          className="aspect-[3/4] w-56 rounded-3xl object-cover md:w-64"
+        />
+        <div className="space-y-6">
+          <blockquote className="text-xl leading-relaxed italic sm:text-2xl">
+            {/* <q> takes the quotation marks of the page's language: “…”, «…», „…“, 「…」. */}
+            <q>{t("founder.quote")}</q>
+          </blockquote>
+          <figcaption className="flex items-center justify-between gap-4">
+            <span>
+              <span className="block font-medium">{FOUNDER.name}</span>
+              <span className="block text-sm text-muted-foreground">
+                {t("founder.role")}
+              </span>
+            </span>
+            <a
+              href={FOUNDER.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="flex size-12 items-center justify-center rounded-xl border transition-colors hover:bg-muted [&_svg]:size-6"
+            >
+              <LinkedInIcon />
+            </a>
+          </figcaption>
+        </div>
+      </figure>
+    </main>
+  )
+}

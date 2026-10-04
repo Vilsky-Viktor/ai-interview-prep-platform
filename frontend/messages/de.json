@@ -43,7 +43,8 @@
     "hiring": "recruiting",
     "pricingLink": "preise",
     "faq": "FAQ",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "about": "Über uns"
   },
   "signIn": {
     "with": "Anmelden mit",
@@ -746,5 +747,18 @@
     "thanks": "Danke!",
     "sent": "Deine Nachricht ist unterwegs. Wir antworten an {email}.",
     "failed": "Deine Nachricht konnte nicht gesendet werden. Bitte versuch es noch einmal."
+  },
+  "about": {
+    "title": "Über uns",
+    "intro": "prepza hilft dir, dich mit Selbstvertrauen vorzubereiten, und bietet Unternehmen eine einfache, bezahlbare Möglichkeit, Kandidaten zu prüfen.",
+    "company": {
+      "title": "Warum es uns gibt",
+      "learners": "Die Vorbereitung auf ein Interview, eine Prüfung oder eine neue Fähigkeit sollte nicht mit stundenlanger Suche beginnen. Sag prepza, was du erreichen willst, und es macht daraus einen klaren Plan: die Themen, auf die es ankommt, Übungsfragen zu jedem davon und einen Tutor, der dir jede Antwort erklärt, bis es Klick macht.",
+      "companies": "Für Unternehmen wollen wir, dass Einstellen fair ist und für jedes Team erreichbar, nicht nur für große. Mach aus einer Stellenanzeige in wenigen Minuten ein Interview mit Zeitlimit, gib jedem Kandidaten eigene Fragen und zahl nur für Kandidaten, die es wirklich absolvieren."
+    },
+    "founder": {
+      "quote": "Jedes Mal, wenn ich mich auf ein Vorstellungsgespräch vorbereitet oder etwas Neues lernen wollte, habe ich mehr Zeit mit der Suche nach gutem Material verbracht als mit dem eigentlichen Lernen. Jede Seite deckte nur ein Stück ab, und keine passte zu dem, was ich brauchte. Also habe ich prepza gebaut: das Tool, das ich mir damals gewünscht hätte, eines, das bei deinem Ziel ansetzt und dich dorthin führt. Ich hoffe, es spart dir die Stunden, die es mir erspart hätte.",
+      "role": "Solo-Gründer von prepza"
+    }
   }
 }

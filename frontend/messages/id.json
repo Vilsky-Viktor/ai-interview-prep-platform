@@ -43,7 +43,8 @@
     "hiring": "rekrutmen",
     "pricingLink": "harga",
     "faq": "Tanya jawab",
-    "contact": "Hubungi kami"
+    "contact": "Hubungi kami",
+    "about": "Tentang kami"
   },
   "signIn": {
     "with": "Masuk dengan",
@@ -740,5 +741,18 @@
     "thanks": "Terima kasih!",
     "sent": "Pesanmu sudah terkirim. Kami akan membalas ke {email}.",
     "failed": "Pesanmu tidak bisa dikirim. Coba lagi."
+  },
+  "about": {
+    "title": "Tentang kami",
+    "intro": "prepza membantumu bersiap dengan percaya diri, dan memberi perusahaan cara yang sederhana dan terjangkau untuk menguji kandidat.",
+    "company": {
+      "title": "Mengapa kami ada",
+      "learners": "Bersiap untuk wawancara, ujian, atau keterampilan baru seharusnya tidak dimulai dengan berjam-jam mencari. Ceritakan pada prepza apa yang ingin kamu capai, dan prepza akan mengubahnya menjadi rencana yang jelas: topik-topik penting, soal latihan untuk setiap topik, dan tutor yang menjelaskan setiap jawaban sampai kamu benar-benar paham.",
+      "companies": "Untuk perusahaan, kami ingin rekrutmen terasa adil dan terjangkau bagi tim mana pun, bukan hanya tim besar. Ubah deskripsi pekerjaan menjadi wawancara berbatas waktu dalam hitungan menit, beri setiap kandidat soalnya sendiri, dan bayar hanya untuk kandidat yang benar-benar mengikutinya."
+    },
+    "founder": {
+      "quote": "Setiap kali aku bersiap untuk wawancara atau mencoba mempelajari hal baru, aku lebih banyak menghabiskan waktu mencari materi yang bagus daripada benar-benar belajar. Setiap situs hanya membahas sebagian, dan tak satu pun cocok dengan yang kubutuhkan. Jadi aku membangun prepza: alat yang dulu ingin kumiliki, yang berangkat dari tujuanmu dan membimbingmu sampai ke sana. Semoga prepza menghemat waktumu sebanyak yang seharusnya bisa dihematnya untukku.",
+      "role": "Pendiri tunggal prepza"
+    }
   }
 }

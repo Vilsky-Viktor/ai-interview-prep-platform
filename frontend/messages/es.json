@@ -43,7 +43,8 @@
     "hiring": "contratación",
     "pricingLink": "precios",
     "faq": "Preguntas frecuentes",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "about": "Sobre nosotros"
   },
   "signIn": {
     "with": "Iniciar sesión con",
@@ -750,5 +751,18 @@
     "thanks": "¡Gracias!",
     "sent": "Tu mensaje está en camino. Te responderemos a {email}.",
     "failed": "No se pudo enviar tu mensaje. Inténtalo de nuevo."
+  },
+  "about": {
+    "title": "Sobre nosotros",
+    "intro": "prepza te ayuda a prepararte con confianza y ofrece a las empresas una forma sencilla y asequible de evaluar a sus candidatos.",
+    "company": {
+      "title": "Por qué existimos",
+      "learners": "Prepararte para una entrevista, un examen o una nueva habilidad no debería empezar con horas de búsqueda. Cuéntale a prepza qué quieres lograr y lo convertirá en un plan claro: los temas que importan, preguntas de práctica para cada uno y un tutor que te explica cada respuesta hasta que todo encaje.",
+      "companies": "Para las empresas, queremos que contratar sea justo y esté al alcance de cualquier equipo, no solo de los grandes. Convierte una oferta de empleo en una entrevista cronometrada en minutos, da a cada candidato sus propias preguntas y paga solo por quienes realmente la hacen."
+    },
+    "founder": {
+      "quote": "Cada vez que me preparaba para una entrevista o intentaba aprender algo nuevo, pasaba más tiempo buscando buen material que estudiando de verdad. Cada sitio cubría una parte y ninguno se ajustaba a lo que necesitaba. Por eso creé prepza: la herramienta que me habría encantado tener, una que parte de tu objetivo y te guía hasta él. Ojalá te ahorre las horas que me habría ahorrado a mí.",
+      "role": "Fundador en solitario de prepza"
+    }
   }
 }

@@ -43,7 +43,8 @@
     "hiring": "assunzioni",
     "pricingLink": "prezzi",
     "faq": "Domande frequenti",
-    "contact": "Contatti"
+    "contact": "Contatti",
+    "about": "Chi siamo"
   },
   "signIn": {
     "with": "Accedi con",
@@ -746,5 +747,18 @@
     "thanks": "Grazie!",
     "sent": "Il tuo messaggio è stato inviato. Ti risponderemo a {email}.",
     "failed": "Impossibile inviare il messaggio. Riprova."
+  },
+  "about": {
+    "title": "Chi siamo",
+    "intro": "prepza ti aiuta a prepararti con sicurezza e offre alle aziende un modo semplice ed economico per valutare i candidati.",
+    "company": {
+      "title": "Perché esistiamo",
+      "learners": "Prepararsi a un colloquio, a un esame o a una nuova competenza non dovrebbe iniziare con ore di ricerche. Di' a prepza qual è il tuo obiettivo e lo trasformerà in un piano chiaro: gli argomenti che contano, domande di pratica per ciascuno e un tutor che ti spiega ogni risposta finché tutto non ti è chiaro.",
+      "companies": "Per le aziende, vogliamo che assumere sia equo e alla portata di qualsiasi team, non solo di quelli grandi. Trasforma un annuncio di lavoro in un colloquio a tempo in pochi minuti, dai a ogni candidato le sue domande e paga solo per i candidati che lo svolgono davvero."
+    },
+    "founder": {
+      "quote": "Ogni volta che mi preparavo a un colloquio o cercavo di imparare qualcosa di nuovo, passavo più tempo a cercare buon materiale che a studiare davvero. Ogni sito copriva un pezzo, e nessuno era adatto a quello che mi serviva. Così ho creato prepza: lo strumento che avrei voluto avere, che parte dal tuo obiettivo e ti guida fino a raggiungerlo. Spero che ti faccia risparmiare le ore che avrebbe fatto risparmiare a me.",
+      "role": "Fondatore unico di prepza"
+    }
   }
 }

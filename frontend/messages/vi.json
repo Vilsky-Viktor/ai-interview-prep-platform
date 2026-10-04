@@ -43,7 +43,8 @@
     "hiring": "tuyển dụng",
     "pricingLink": "bảng giá",
     "faq": "Câu hỏi thường gặp",
-    "contact": "Liên hệ"
+    "contact": "Liên hệ",
+    "about": "Về chúng tôi"
   },
   "signIn": {
     "with": "Đăng nhập bằng",
@@ -742,5 +743,18 @@
     "thanks": "Cảm ơn bạn!",
     "sent": "Tin nhắn của bạn đang trên đường đến chúng tôi. Chúng tôi sẽ trả lời qua {email}.",
     "failed": "Không gửi được tin nhắn. Vui lòng thử lại."
+  },
+  "about": {
+    "title": "Về chúng tôi",
+    "intro": "prepza giúp bạn chuẩn bị thật tự tin, đồng thời mang đến cho các công ty một cách đơn giản, tiết kiệm để đánh giá ứng viên.",
+    "company": {
+      "title": "Vì sao chúng tôi tồn tại",
+      "learners": "Chuẩn bị cho một buổi phỏng vấn, một kỳ thi hay một kỹ năng mới không nên bắt đầu bằng hàng giờ tìm kiếm. Hãy cho prepza biết mục tiêu của bạn, và prepza sẽ biến nó thành một kế hoạch rõ ràng: những chủ đề quan trọng, câu hỏi luyện tập cho từng chủ đề và một gia sư giải thích từng câu trả lời cho đến khi bạn thật sự hiểu.",
+      "companies": "Với các công ty, chúng tôi muốn việc tuyển dụng công bằng và trong tầm tay của mọi đội ngũ, không chỉ các công ty lớn. Biến mô tả công việc thành một buổi phỏng vấn có giới hạn thời gian chỉ trong vài phút, cho mỗi ứng viên bộ câu hỏi riêng và chỉ trả tiền cho những ứng viên thực sự tham gia."
+    },
+    "founder": {
+      "quote": "Mỗi lần chuẩn bị cho một buổi phỏng vấn hay cố học một điều mới, tôi mất nhiều thời gian tìm tài liệu tốt hơn là thật sự học. Mỗi trang chỉ có một phần, và không trang nào hợp với điều tôi cần. Vì vậy tôi đã xây dựng prepza: công cụ mà tôi từng ước mình có, bắt đầu từ mục tiêu của bạn và dẫn bạn đến đó. Mong rằng nó sẽ giúp bạn tiết kiệm những giờ mà lẽ ra nó đã giúp tôi tiết kiệm.",
+      "role": "Nhà sáng lập duy nhất của prepza"
+    }
   }
 }

@@ -43,7 +43,8 @@
     "hiring": "işe alım",
     "pricingLink": "fiyatlar",
     "faq": "SSS",
-    "contact": "Bize ulaşın"
+    "contact": "Bize ulaşın",
+    "about": "Hakkımızda"
   },
   "signIn": {
     "with": "Şununla giriş yap:",
@@ -750,5 +751,18 @@
     "thanks": "Teşekkürler!",
     "sent": "Mesajınız yola çıktı. {email} adresine yanıt vereceğiz.",
     "failed": "Mesajınız gönderilemedi. Lütfen tekrar deneyin."
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "intro": "prepza, kendinize güvenerek hazırlanmanıza yardımcı olur; şirketlere de adayları değerlendirmek için basit ve uygun fiyatlı bir yol sunar.",
+    "company": {
+      "title": "Neden varız",
+      "learners": "Bir mülakata, sınava ya da yeni bir beceriye hazırlanmak saatlerce aramayla başlamamalı. prepza'ya hedefinizi anlatın, o da bunu net bir plana dönüştürsün: önemli konular, her biri için alıştırma soruları ve her cevabı tam oturana kadar açıklayan bir eğitmen.",
+      "companies": "Şirketler için işe alımın adil olmasını ve yalnızca büyük ekiplerin değil, her ekibin ulaşabileceği bir şey olmasını istiyoruz. Bir iş ilanını dakikalar içinde süreli bir mülakata dönüştürün, her adaya kendine özel sorular verin ve yalnızca mülakatı gerçekten yapan adaylar için ödeme yapın."
+    },
+    "founder": {
+      "quote": "Ne zaman bir mülakata hazırlansam ya da yeni bir şey öğrenmeye çalışsam, gerçekten çalışmaktan çok iyi kaynak aramaya zaman harcıyordum. Her site bir parçayı ele alıyordu ama hiçbiri ihtiyacıma uymuyordu. Ben de prepza'yı geliştirdim: keşke elimde olsaydı dediğim, hedefinizden yola çıkıp sizi oraya götüren bir araç. Umarım bana kazandıracağı saatleri size kazandırır.",
+      "role": "prepza'nın tek kurucusu"
+    }
   }
 }

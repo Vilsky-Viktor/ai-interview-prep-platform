@@ -43,7 +43,8 @@
     "hiring": "werving",
     "pricingLink": "prijzen",
     "faq": "Veelgestelde vragen",
-    "contact": "Contact"
+    "contact": "Contact",
+    "about": "Over ons"
   },
   "signIn": {
     "with": "Inloggen met",
@@ -742,5 +743,18 @@
     "thanks": "Bedankt!",
     "sent": "Je bericht is onderweg. We antwoorden naar {email}.",
     "failed": "Je bericht kon niet worden verstuurd. Probeer het opnieuw."
+  },
+  "about": {
+    "title": "Over ons",
+    "intro": "prepza helpt je om je met vertrouwen voor te bereiden en geeft bedrijven een eenvoudige, betaalbare manier om kandidaten te testen.",
+    "company": {
+      "title": "Waarom we bestaan",
+      "learners": "Je voorbereiden op een sollicitatiegesprek, een examen of een nieuwe vaardigheid zou niet moeten beginnen met urenlang zoeken. Vertel prepza wat je wilt bereiken en het maakt er een helder plan van: de onderwerpen die ertoe doen, oefenvragen voor elk onderwerp en een tutor die elk antwoord uitlegt tot het kwartje valt.",
+      "companies": "Voor bedrijven willen we dat werven eerlijk is en binnen bereik van elk team, niet alleen van de grote. Maak van een vacaturetekst binnen enkele minuten een gesprek met tijdslimiet, geef elke kandidaat eigen vragen en betaal alleen voor kandidaten die het echt afleggen."
+    },
+    "founder": {
+      "quote": "Elke keer dat ik me voorbereidde op een sollicitatiegesprek of iets nieuws probeerde te leren, was ik meer tijd kwijt aan zoeken naar goed materiaal dan aan echt leren. Elke site behandelde een stukje, en geen enkele paste bij wat ik nodig had. Dus bouwde ik prepza: de tool die ik zelf had willen hebben, die begint bij jouw doel en je er naartoe leidt. Ik hoop dat het jou de uren bespaart die het mij had bespaard.",
+      "role": "Solo-oprichter van prepza"
+    }
   }
 }

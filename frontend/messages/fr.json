@@ -43,7 +43,8 @@
     "hiring": "recrutement",
     "pricingLink": "tarifs",
     "faq": "FAQ",
-    "contact": "Contact"
+    "contact": "Contact",
+    "about": "À propos"
   },
   "signIn": {
     "with": "Se connecter avec",
@@ -746,5 +747,18 @@
     "thanks": "Merci !",
     "sent": "Votre message est en route. Nous vous répondrons à {email}.",
     "failed": "Impossible d'envoyer votre message. Veuillez réessayer."
+  },
+  "about": {
+    "title": "À propos de nous",
+    "intro": "prepza vous aide à vous préparer en toute confiance et offre aux entreprises un moyen simple et abordable d'évaluer leurs candidats.",
+    "company": {
+      "title": "Pourquoi nous existons",
+      "learners": "Se préparer à un entretien, à un examen ou à une nouvelle compétence ne devrait pas commencer par des heures de recherche. Dites à prepza ce que vous visez, et il en fait un plan clair : les sujets qui comptent, des questions d'entraînement pour chacun et un tuteur qui vous explique chaque réponse jusqu'à ce que tout devienne évident.",
+      "companies": "Pour les entreprises, nous voulons un recrutement équitable et à la portée de toutes les équipes, pas seulement des grandes. Transformez une offre d'emploi en entretien chronométré en quelques minutes, donnez à chaque candidat ses propres questions et ne payez que pour les candidats qui le passent réellement."
+    },
+    "founder": {
+      "quote": "Chaque fois que je me préparais à un entretien ou que j'essayais d'apprendre quelque chose de nouveau, je passais plus de temps à chercher de bonnes ressources qu'à vraiment étudier. Chaque site en couvrait une partie, et aucun ne correspondait à ce dont j'avais besoin. Alors j'ai créé prepza : l'outil que j'aurais aimé avoir, qui part de votre objectif et vous guide jusqu'à lui. J'espère qu'il vous fera gagner les heures qu'il m'aurait fait gagner.",
+      "role": "Fondateur de prepza, en solo"
+    }
   }
 }

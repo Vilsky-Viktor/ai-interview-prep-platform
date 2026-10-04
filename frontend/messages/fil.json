@@ -43,7 +43,8 @@
     "hiring": "hiring",
     "pricingLink": "presyo",
     "faq": "FAQ",
-    "contact": "Makipag-ugnayan"
+    "contact": "Makipag-ugnayan",
+    "about": "Tungkol sa amin"
   },
   "signIn": {
     "with": "Mag-sign in gamit ang",
@@ -754,5 +755,18 @@
     "thanks": "Salamat!",
     "sent": "Papunta na sa amin ang mensahe mo. Sasagot kami sa {email}.",
     "failed": "Hindi naipadala ang mensahe mo. Pakisubukan ulit."
+  },
+  "about": {
+    "title": "Tungkol sa amin",
+    "intro": "Tinutulungan ka ng prepza na maghanda nang may kumpiyansa, at binibigyan nito ang mga kumpanya ng simple at abot-kayang paraan para subukan ang mga kandidato.",
+    "company": {
+      "title": "Bakit kami narito",
+      "learners": "Ang paghahanda para sa interview, exam, o bagong skill ay hindi dapat magsimula sa ilang oras ng paghahanap. Sabihin sa prepza ang gusto mong maabot, at gagawin nito itong malinaw na plano: ang mga paksang mahalaga, mga practice question para sa bawat isa, at isang tutor na nagpapaliwanag ng bawat sagot hanggang sa tuluyan mo itong maintindihan.",
+      "companies": "Para sa mga kumpanya, gusto naming maging patas ang hiring at abot-kamay ng kahit anong team, hindi lang ng malalaki. Gawing timed interview ang isang job description sa loob ng ilang minuto, bigyan ang bawat kandidato ng sarili niyang mga tanong, at magbayad lang para sa mga kandidatong talagang kumuha nito."
+    },
+    "founder": {
+      "quote": "Tuwing naghahanda ako para sa interview o sinusubukang matuto ng bago, mas matagal ang ginugugol ko sa paghahanap ng magandang materyal kaysa sa mismong pag-aaral. Bawat site ay may isang bahagi lang, at wala ni isang tumugma sa kailangan ko. Kaya ginawa ko ang prepza: ang tool na sana ay meron ako noon, na nagsisimula sa layunin mo at gagabay sa iyo papunta roon. Sana ay matipid nito ang mga oras mo na natipid sana nito para sa akin.",
+      "role": "Solo founder ng prepza"
+    }
   }
 }
