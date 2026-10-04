@@ -16,12 +16,13 @@ Turn a job description or a learning goal into a structured practice path: revie
 - Each topic shows a progress bar towards its **certificate**: answer every question of the topic (your latest answer to each counts), with at least 70% correct. A topic with a certificate counts as *mastered*.
 - After answering, rate the question (thumbs up or down, changeable) or report a problem; rate preparations with stars. Owners can re-generate individual questions.
 - Questions improve on their own: answers, votes and reports flag weak ones, and a background verifier fixes or replaces them (see [Question quality](#question-quality)).
-- Share a preparation privately by email, or publish it to the public library.
+- Share a preparation privately by email, or publish it to the public library. A public kit's title can't name a company (products such as AWS or Excel are fine): the AI checks it when the kit is published or a public kit is renamed, and refuses it with a message to remove the name.
 - The public library filters by level (one) and language (several; by default your interface language and English), and sorts by rating (the default), date or how many people joined.
 - Everything works in 23 languages: English, Russian, Ukrainian, Spanish, Portuguese, German, French, Italian, Polish, Dutch, Turkish, Arabic, Hebrew, Persian, Japanese, Chinese, Korean, Hindi, Indonesian, Thai, Vietnamese, Filipino and Estonian. That covers the interface, error messages, generated kits and interviews, and emails.
 - On a first visit the site opens in the browser's preferred language if it's supported, otherwise in English. A new account keeps the language it signed up in; it can be changed in Settings.
 - Kits and interviews are generated in the language chosen in "generate in" next to the text box (the interface language by default), whatever language the pasted text is in. Invite emails follow the interview's language. Arabic, Hebrew and Persian read right to left on the site and in emails.
 - Every list loads more as you scroll and renders only what's on screen, however long it gets.
+- Every text field stops at the length its service accepts (titles 70 characters, company names 45, topic names 50, a goal or job description 10,000, emails 254), so nothing is refused on sending; the limits live in the services and `frontend/constants/limits.ts` mirrors them.
 
 **For companies**
 
@@ -38,7 +39,7 @@ Turn a job description or a learning goal into a structured practice path: revie
 
 - Pay as you go: $1 buys 100 credits, with a bonus on large top-ups, and credits never expire. Learners pay for their own prep kits, tutor turns after 3 free ones per question, and certificates on someone else's public kit; companies pay per candidate who answers at least one question. A new learner gets 500 credits, a person's first company 1,500.
 - Only what works is charged: credits are set aside when something starts and given back if it fails, is cancelled, or a candidate never answers.
-- Top up a fixed amount or any whole amount from $10 to $500 on the top-up page, for yourself or any company you belong to. The header shows your balance and turns amber when it runs low.
+- Top up a fixed amount or any whole amount from $10 to $500 on the top-up page, for yourself or any company you belong to. The header shows your balance and turns amber when it runs low. Balances follow a payment as it lands, rechecked for 40 seconds after checkout, and catch up when the tab is back in view (an automatic top-up, a payment in another tab); a balance that goes up counts up to its new value, in the header, on the top-up page and on a company's interviews page.
 - **Automatic top-up:** on the top-up page, under each balance ("Automatic top-up: off"), choose a top-up and a balance to refill under; the card is saved through Paddle once. Shown only when Paddle's API key and the $0 price are set (see [Payments](#payments)).
 - **Referrals:** a learner's link in Settings → referral, a company's in its referrals tab. Both sides get credits on the newcomer's first top-up (200 each for learners; 600 each for companies, from $25).
 - Settings → billing lists every credit in and out. Refunds and chargebacks in Paddle take the credits they bought back.
@@ -94,7 +95,7 @@ flowchart LR
 
 | Service | Responsibility |
 |---|---|
-| `library` | Preparations and interviews (question sets), sharing, joining, ratings and reports, public library search, question quality flags and reuse |
+| `library` | Preparations and interviews (question sets), sharing, joining, ratings and reports, public library search (and the company-name check of public titles, through generation), question quality flags and reuse |
 | `generation` | The generation pipeline (LangGraph), run by its worker (`app/worker_main.py`) as Cloud Tasks jobs; topic review, re-generating single questions, the question verifier, and scheduled sweeps |
 | `rounds` | Practice rounds, progress and certificates, the follow-up chat, candidate interview sessions; the FAQ, the help chat, the legal texts and the contact form (`/help/...`) |
 | `companies` | Companies (unique names), admins, interviews and candidate invites |
@@ -162,14 +163,13 @@ Production runs on Google Cloud in `europe-west1`, set up by Terraform in [`infr
 Every app Dockerfile (on Alpine) has a `prod` target with the code built in and no reload. The API images are built from the repo root, because they include `packages/common`:
 
 ```bash
-docker build --target prod -f services/library/Dockerfile -t prepza-library .   # also generation, rounds, companies
-docker build --target prod -t prepza-notifications services/notifications
+docker build --target prod -f services/library/Dockerfile -t prepza-library .   # also generation, rounds, companies, billing, notifications
 docker build --target prod -t prepza-frontend \
   --build-arg NEXT_PUBLIC_FIREBASE_API_KEY=... --build-arg NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=... \
   --build-arg NEXT_PUBLIC_FIREBASE_PROJECT_ID=... frontend
 ```
 
-Run each API's migrations (`uv run --no-sync alembic upgrade head`) once before it starts, and never set `FIREBASE_AUTH_EMULATOR_HOST` in production.
+Run each API's migrations (`uv run --no-sync alembic upgrade head`; every API but the frontend has them, notifications included) once before it starts, and never set `FIREBASE_AUTH_EMULATOR_HOST` in production.
 
 Errors go to Sentry when `SENTRY_DSN` (backend services) and `NEXT_PUBLIC_SENTRY_DSN` (frontend, a build argument) are set; empty, nothing is sent. Events carry user ids only, with emails scrubbed. To see the original code in frontend stack traces, also pass `SENTRY_AUTH_TOKEN`, `SENTRY_ORG` and `SENTRY_PROJECT` to the frontend build.
 
