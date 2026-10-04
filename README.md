@@ -17,6 +17,7 @@ Turn a job description or a learning goal into a structured practice path: revie
 - After answering, rate the question (thumbs up or down, changeable) or report a problem; rate preparations with stars. Owners can re-generate individual questions.
 - Questions improve on their own: answers, votes and reports flag weak ones, and a background verifier fixes or replaces them (see [Question quality](#question-quality)).
 - Share a preparation privately by email, or publish it to the public library.
+- The public library filters by level (one) and language (several; by default your interface language and English), and sorts by rating (the default), date or how many people joined.
 - Everything works in 23 languages: English, Russian, Ukrainian, Spanish, Portuguese, German, French, Italian, Polish, Dutch, Turkish, Arabic, Hebrew, Persian, Japanese, Chinese, Korean, Hindi, Indonesian, Thai, Vietnamese, Filipino and Estonian. That covers the interface, error messages, generated kits and interviews, and emails.
 - On a first visit the site opens in the browser's preferred language if it's supported, otherwise in English. A new account keeps the language it signed up in; it can be changed in Settings.
 - Kits and interviews are generated in the language chosen in "generate in" next to the text box (the interface language by default), whatever language the pasted text is in. Invite emails follow the interview's language. Arabic, Hebrew and Persian read right to left on the site and in emails.
@@ -24,12 +25,14 @@ Turn a job description or a learning goal into a structured practice path: revie
 
 **For companies**
 
+- Company names are unique across prepza, ignoring case.
 - Generate an interview from a job description and set how many questions each topic asks.
 - Invite candidates by email, resend an invite, or revoke one the candidate hasn't used yet. The invite page tells candidates what to expect before they start.
 - Each candidate gets a random subset of each topic, with their own question and option order, in a single pass. Answers can't be changed, and unanswered questions count as wrong.
 - Every interview is **timed**: each question gets its own countdown (60 seconds by default, adjustable per interview), and a question still open when it reaches zero counts as wrong. The server enforces it, so closing the tab doesn't stop the clock. An interview the candidate leaves finishes by itself once its total time, plus 10%, has passed; unanswered questions count as wrong.
 - Scorecards show every answer, whether it was right and how long it took. They flag answers too fast to have read the question, times the candidate left the page, and copy attempts.
 - Candidates never see their scores or whether an answer was right.
+- The candidate list is sorted by grade by default (best first, candidates without a grade yet last), or by invite date.
 
 **Credits and payments** (see [docs/monetization.md](docs/monetization.md))
 
@@ -39,6 +42,15 @@ Turn a job description or a learning goal into a structured practice path: revie
 - **Automatic top-up:** on the top-up page, under each balance ("Automatic top-up: off"), choose a top-up and a balance to refill under; the card is saved through Paddle once. Shown only when Paddle's API key and the $0 price are set (see [Payments](#payments)).
 - **Referrals:** a learner's link in Settings → referral, a company's in its referrals tab. Both sides get credits on the newcomer's first top-up (200 each for learners; 600 each for companies, from $25).
 - Settings → billing lists every credit in and out. Refunds and chargebacks in Paddle take the credits they bought back.
+
+**Site and help**
+
+- **Home page:** the goal box first, then a landing page that walks through prepza, one section per screen: the three steps, topic review, rounds, the tutor, certificates, question quality, sharing, hiring, languages, pricing and referrals. Each section has a picture of the real interface, several of them animated; prices and rewards come from billing, so they follow any change. Signed-in users see it too.
+- **FAQ** (`/faq`): the common questions, in the interface language with today's prices, and at the end an AI help chat about prepza, open to visitors too. It answers only from the platform guide, the FAQ, the prices, the certificate rules, the terms and the privacy policy, in the page's language; nothing of the conversation is stored. Limits: 30 messages an hour per account (`HELP_USER_LIMIT`), 5,000 a day in all (`HELP_DAILY_LIMIT`), and in Google Cloud 20 questions per 10 minutes per IP at the edge.
+- **Legal pages:** the privacy policy and terms are served by the rounds service (English only), which the help chat answers from too. The contact address in them, hello@prepza.ai, is put together in the browser, so the page's HTML doesn't hold it for bots to collect.
+- **Contact us** (`/contact`): a name, email and message form. The message is emailed to hello@prepza.ai (`CONTACT_EMAIL` in notifications), with the visitor's address as the reply-to, so answering the email answers them. At most 200 messages a day in all (`CONTACT_DAILY_LIMIT`).
+- **About us** (`/about`): why prepza exists, and its solo founder.
+- The footer links pricing, the privacy policy, the terms, the FAQ, About us and Contact us.
 
 ## Architecture
 
@@ -69,6 +81,7 @@ flowchart LR
     worker -- generation.completed / cancelled --> pubsub
     library -- preparation.shared --> pubsub
     companies -- candidate.invited --> pubsub
+    rounds -- contact.sent --> pubsub
     pubsub -- push --> library
     pubsub -- push --> companies
     pubsub -- push --> notifications -- email --> smtp[Resend / mailpit]
@@ -79,10 +92,10 @@ flowchart LR
 |---|---|
 | `library` | Preparations and interviews (question sets), sharing, joining, ratings and reports, public library search, question quality flags and reuse |
 | `generation` | The generation pipeline (LangGraph), run by its worker (`app/worker_main.py`) as Cloud Tasks jobs; topic review, re-generating single questions, the question verifier, and scheduled sweeps |
-| `rounds` | Practice rounds, progress and certificates, the follow-up chat, candidate interview sessions |
-| `companies` | Companies, admins, interviews and candidate invites |
+| `rounds` | Practice rounds, progress and certificates, the follow-up chat, candidate interview sessions; the FAQ, the help chat, the legal texts and the contact form (`/help/...`) |
+| `companies` | Companies (unique names), admins, interviews and candidate invites |
 | `billing` | Credit wallets for learners and companies (holds, charges, history), welcome gifts, referrals, Paddle top-ups, automatic top-ups, refunds and chargebacks (webhooks); other services set credits aside or charge them through it |
-| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key) |
+| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): share and candidate invites, and contact messages to prepza's inbox |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
 Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed). Long jobs (a generation, a question check) are Cloud Tasks that call the generation worker's `/internal/jobs/...`; periodic work (stuck-generation sweeps, key-check batches, retention) is Cloud Scheduler calling `/internal/schedules/...`. Google signs those calls, and pushes, as one invoker service account, which each service checks. Locally there is no queue: the API calls the worker directly, and a small `scheduler` container runs `scripts/local/crontab`. Domain events are saved in an `outbox` table in the same transaction as the change they announce, published right after, and published by a per-minute scheduled flush if that failed, so a change never loses its event. They go to one Pub/Sub topic, `events`, which pushes each event to the `/internal/events` endpoint of library, companies and notifications; each ignores events that aren't its own. Locally, Google's Pub/Sub emulator runs in docker-compose and `scripts/local/pubsub-setup.sh` creates the topic and subscriptions. The services also publish small `funnel.*` events (signed up, kit ready, topped up and so on) to the same topic; a filtered BigQuery subscription stores them for the dashboards and the push subscriptions skip them. They carry counts and a salted hash of the user id (`ANALYTICS_SALT`), never emails or text; see [docs/measurement.md](docs/measurement.md). Locally nothing stores them.
@@ -177,7 +190,7 @@ Per-user rate limits (`GENERATION_LIMIT`, `LLM_LIMIT`) cap how much a single acc
 
 ### Emails
 
-Share and candidate invites are sent by the `notifications` service, as HTML with a plain-text version. To send real emails through [Resend](https://resend.com):
+Share and candidate invites are sent by the `notifications` service, as HTML with a plain-text version, and so are contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default). Note that with `RESEND_API_KEY` set, a message sent from the local contact page reaches that real inbox. To send real emails through [Resend](https://resend.com):
 
 1. Verify your domain at resend.com/domains.
 2. In `.env`, set `RESEND_API_KEY` (a sending-only key is enough) and `MAIL_FROM` with an address on that domain, for example `prepza. <no-reply@yourdomain.com>`.
@@ -210,10 +223,13 @@ cd frontend && pnpm api-types
 # and Redis, in a "<service>_test" database created and dropped for the run
 ./scripts/tests/integration.sh            # or: ./scripts/tests/integration.sh rounds library
 
-# Browser tests of the signed-out pages (home, explore, pricing, terms, privacy) on desktop and
-# phone sizes, in Playwright's Docker image: no console errors, no sideways scroll, the same page
-# width everywhere, the footer at the end, lowercase titles
+# Browser tests of the signed-out pages (home, explore, pricing, terms, privacy, FAQ, about,
+# contact) on desktop and phone sizes, in Playwright's Docker image: no console errors, no sideways
+# scroll, the same page width everywhere, the footer at the end, lowercase titles
 ./scripts/tests/pages.sh
+
+# Translations: every language has every key of en.json, with the same placeholders and plurals
+docker compose exec frontend pnpm check:messages
 
 # End-to-end, with real generations (needs OPENAI_API_KEY; a few cents and a few minutes): a learner
 # generates a kit and practises; a company generates an interview and invites a candidate, who
@@ -221,7 +237,24 @@ cd frontend && pnpm api-types
 python3 scripts/tests/e2e.py
 ```
 
-CI runs all of these on every pull request push and every push to main, except the end-to-end test, which needs an OpenAI key; it also builds every production image and starts the whole stack for the smoke test. On main it pushes the production images, and a `v*` tag deploys them (see [infra/README.md](infra/README.md#deploys)).
+CI runs all of these except the end-to-end test, which needs an OpenAI key. It also builds every production image and starts the whole stack for the smoke, integration and page tests.
+
+## CI/CD
+
+| When | What runs |
+|---|---|
+| A push to a pull request | CI ([`ci.yml`](.github/workflows/ci.yml)); a newer push cancels the run for the previous one |
+| A merge to `main` | CI again on the merged code, then the production images are pushed, tagged with the commit. Nothing is deployed |
+| A `v*` tag on such a commit | [`deploy.yml`](.github/workflows/deploy.yml): checks the tag is on `main` and CI passed on it, tags that commit's images with the version (no rebuild), runs the migrations, deploys every service, smoke-tests the site and creates a GitHub release |
+| Actions → Deploy → Run workflow with an earlier tag | Redeploys that version: a rollback |
+
+To release, tag the last commit of a push to `main` once CI has passed on it:
+
+```bash
+git tag v1.4.0 && git push origin v1.4.0
+```
+
+Migrations only go forward, so keep them additive for rollbacks to stay safe. The one-time GitHub setup (tag protection, an optional approval for deploys) is in [infra/README.md](infra/README.md#deploys).
 
 ## Project conventions
 
