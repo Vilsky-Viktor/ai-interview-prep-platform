@@ -1,43 +1,53 @@
 # prepza.
 
-Timed knowledge tests for hiring, made from a job description. A company pastes the role, reviews the topics, and invites candidates; each candidate gets their own random questions with a countdown on every one, and the company sees their scores and integrity signals. Any role, 23 languages, from $1 per candidate.
+Timed knowledge interviews for hiring, made from a job description or a ready-made template. A company pastes the role, reviews the topics, and invites candidates; each candidate gets their own random questions with a countdown on every one, and the company sees their scores and integrity signals. People preparing for a role practise free on the templates. Any role, 23 languages, from $1 per candidate.
 
 ![prepza](screenshot.png)
 
 ## Features
 
-**Making a test**
+**Making an interview**
 
 - Paste a job description or describe the role; the AI extracts the requirements and proposes topics.
 - Review the topics before anything expensive runs, for free: uncheck what you don't need, rename a topic or edit its subtopics in place, or describe bigger changes in plain text.
 - Every topic gets a bank of multiple-choice questions, each with one correct option and three plausible wrong ones. Admins can re-generate individual questions.
 - Questions improve on their own: candidates' answers, votes and reports flag weak ones, and a background verifier fixes or replaces them (see [Question quality](#question-quality)).
-- Everything works in 23 languages: English, Russian, Ukrainian, Spanish, Portuguese, German, French, Italian, Polish, Dutch, Turkish, Arabic, Hebrew, Persian, Japanese, Chinese, Korean, Hindi, Indonesian, Thai, Vietnamese, Filipino and Estonian. That covers the interface, error messages, generated tests and emails.
+- Everything works in 23 languages: English, Russian, Ukrainian, Spanish, Portuguese, German, French, Italian, Polish, Dutch, Turkish, Arabic, Hebrew, Persian, Japanese, Chinese, Korean, Hindi, Indonesian, Thai, Vietnamese, Filipino and Estonian. That covers the interface, error messages, generated interviews and emails.
 - On a first visit the site opens in the browser's preferred language if it's supported, otherwise in English. A new account keeps the language it signed up in; it can be changed in Settings.
-- Tests are generated in the language chosen in "generate in" next to the text box (the interface language by default), whatever language the pasted text is in. Invite emails follow the test's language. Arabic, Hebrew and Persian read right to left on the site and in emails.
+- Interviews are generated in the language chosen in "generate in" next to the text box (the interface language by default), whatever language the pasted text is in. Invite emails follow the interview's language. Arabic, Hebrew and Persian read right to left on the site and in emails.
 - Every list loads more as you scroll and renders only what's on screen, however long it gets.
-- Every text field stops at the length its service accepts (titles 70 characters, company names 45, topic names 50, a job description 10,000, emails 254), so nothing is refused on sending; the limits live in the services and `frontend/constants/limits.ts` mirrors them.
+- Every text field stops at the length its service accepts (titles 70 characters, company names 45, topic names 50, a job description 10,000, emails 254, a pasted or uploaded list of emails 50,000), so nothing is refused on sending; the limits live in the services and `frontend/constants/limits.ts` mirrors them.
 
 **For companies**
 
-- Company names are unique across prepza, ignoring case.
+- Company names are unique across prepza, ignoring case, and a company can be renamed. One person can own at most 3 companies.
+- A company can upload its logo (PNG, JPEG or WebP, up to 500 KB), shown on invite emails, the interview candidates take and PDF reports. It is **verified** for its website's domain once an owner or admin signs in with a verified email on that domain (free mail services don't count); a check next to its name shows it.
 - Start an interview from a ready-made template (searchable by role, level and language: copied at once, free) or generate one from a job description, and set how many questions each topic asks: 10 by default, drawn from the topic's 70.
-- Invite candidates by email, resend an invite, or revoke one the candidate hasn't used yet. The invite page tells candidates what to expect before they start.
+- Invite candidates by email, paste a list or upload a file (up to 100 emails at once, only the emails in it count), resend an invite, or revoke one the candidate hasn't used yet. The invite page tells candidates what to expect before they start. An invite not started after 3 days gets one reminder email (daily, `/internal/schedules/invite-reminders`); one not started within 30 days expires and its credits come back.
+- **Shareable link** (`/apply/{token}`): owners and admins turn on one link per interview for a job ad. Anyone who opens it signs in and takes the interview, once per verified email, and is charged like an invited candidate. Turning it off, or marking the interview as hired, stops it at once.
 - Each candidate gets a random subset of each topic, with their own question and option order, in a single pass. Answers can't be changed, and unanswered questions count as wrong.
 - Every interview is **timed**: each question gets its own countdown (60 seconds by default, adjustable per interview), and a question still open when it reaches zero counts as wrong. The server enforces it, so closing the tab doesn't stop the clock. An interview the candidate leaves finishes by itself once its total time, plus 10%, has passed; unanswered questions count as wrong.
 - Scorecards show every answer, whether it was right and how long it took. They flag answers too fast to have read the question, times the candidate left the page, and copy attempts.
 - Candidates never see their scores or whether an answer was right.
-- Any company member can try a test as a candidate (the play button on the interview list or page): the same timed questions, free, kept out of the candidate list, and its answers out of the questions' statistics.
+- Each interview has a pass mark (70% by default, 1–100); grades show green or red against it.
+- **Reports:** a PDF for one candidate or for all of an interview's candidates, made in the browser. Download it, email it from prepza (the PDF attached; it counts towards the member's email limits), or share a short summary on WhatsApp or Telegram.
+- **Suggested talents:** a tab on each interview, free, lists up to 10 people who agreed to be suggested (with their LinkedIn link) and scored at least 70% on their first practice round of a similar template (one the interview took questions from, or one sharing at least 60% of its topics both ways). A company can hide a talent from an interview's suggestions.
+- Any company member can preview an interview as a candidate (the play button on the interview list or page): the same timed questions, free, kept out of the candidate list, and its answers out of the questions' statistics.
 - Each interview shows its status: new (no candidates yet), in process (candidates invited), or hired ("Mark as hired" in its settings).
-- The candidate list is sorted by grade by default (best first, candidates without a grade yet last), or by invite date.
+- The candidate list is sorted by grade by default (best first, candidates without a grade yet last), or by invite date. It can be searched by email and filtered by status (invited, in process, finished, passed, flagged, not delivered, expired).
+
+**For talents**
+
+- **Free practice** (`/practice`): timed practice interviews on the templates' revealed questions, 10 a topic, then the grade and every right answer. Each template keeps the person's rounds and progress.
+- Before the first round, a one-time question: share a LinkedIn link to be suggested to companies hiring for similar roles, or decline. It can be changed or withdrawn in Settings.
 
 **Superadmin**
 
-- Superadmins are prepza's own team, not a company's admins: the accounts in `SUPERADMIN_EMAILS` (verified Google emails). Only they see Templates in the account menu: ready-made tests by role, generated from a role description through the same topic review as a company's test, then renamed, checked question by question, re-generated or deleted. Their topics keep embeddings, so the question bank (planned) can find them. Everyone else gets "not found" from those pages and routes.
+- Superadmins are prepza's own team, not a company's admins: the accounts in `SUPERADMIN_EMAILS` (verified Google emails). Only they see the Admin zone in the account menu: **Templates**, ready-made interviews by role, generated from a role description through the same topic review as a company's interview (titles never name a company), then renamed, checked question by question, re-generated or deleted; and **Quality**, the flagged questions (fix now or dismiss) and the replaced ones. Templates are the question bank (see [Generation pipeline](#generation-pipeline)); their topics keep embeddings, so similar templates and their proven questions can be found. Everyone else gets "not found" from those pages and routes.
 
 **Credits and payments** (see [docs/monetization.md](docs/monetization.md))
 
-- Pay as you go: $1 buys 100 credits, and credits never expire. A company pays 300 credits per candidate who answers at least one question; generating a test is free. Large top-ups buy more credits per dollar: 50% more from $250 and three times as many from $1,000, so a candidate costs $3, $2 or $1. A person's first company gets 900 credits, enough for 3 candidates. A company can have at most 3 tests waiting without a candidate before it generates another.
+- Pay as you go: $1 buys 100 credits, and credits never expire. A company pays 300 credits per candidate who answers at least one question; generating an interview is free. Large top-ups buy more credits per dollar: 50% more from $250 and three times as many from $1,000, so a candidate costs $3, $2 or $1. A person's first company gets 900 credits, enough for 3 candidates. A company can have at most 3 interviews waiting without a candidate before it generates another, and generates at most 10 a day.
 - Only what works is charged: a candidate's credits are set aside on invite and given back if they never answer.
 - Top up on the top-up page, for any company you belong to: $30 for 10 candidates, $150 for 50, $250 for 125 ($2 each) or $1,000 for 1,000 ($1 each). Balances follow a payment as it lands, rechecked for 40 seconds after checkout, and catch up when the tab is back in view (an automatic top-up, a payment in another tab); a balance that goes up counts up to its new value, on the top-up page and on a company's interviews page.
 - **Automatic top-up:** on the top-up page, under each balance ("Automatic top-up: off"), choose a top-up and a balance to refill under; the card is saved through Paddle once. Shown only when Paddle's API key and the $0 price are set (see [Payments](#payments)).
@@ -46,12 +56,12 @@ Timed knowledge tests for hiring, made from a job description. A company pastes 
 
 **Site and help**
 
-- **Home page:** "Test every candidate. Hire real talent." and the box to paste a job description; submitting it signs you in if needed, asks which company the test is for (or its name, for a first company), and starts the generation. Below, a landing page walks through prepza, one section per screen: the three steps, topic review, candidates and their scores, talent suggestions (coming soon), question quality, languages, pricing and a closing call to action. Each section has a picture of the real interface, several of them animated; prices come from billing, so they follow any change. Signed-in users see it too.
+- **Home page:** "Interview everyone. Hire real talent." and the box to paste a job description; submitting it signs you in if needed, asks which company the interview is for (or its name, for a first company), and starts the generation. Below, a landing page walks through prepza, one section per screen: how it works, seeing who knows the job, trying it before your candidates do (free practice and a preview), sharing results, topic review, questions that fix themselves, one link for a job ad, a verified brand, talent suggestions, languages, pricing and a closing call to action. Each section has a picture of the real interface, several of them animated; prices come from billing, so they follow any change. Signed-in users see it too.
 - **FAQ** (`/faq`): the common questions, in the interface language with today's prices, and at the end an AI help chat about prepza, open to visitors too. It answers only from the platform guide, the FAQ, the prices, the terms and the privacy policy, in the page's language; nothing of the conversation is stored. Limits: 30 messages an hour per account (`HELP_USER_LIMIT`), 5,000 a day in all (`HELP_DAILY_LIMIT`), and in Google Cloud 20 questions per 10 minutes per IP at the edge.
 - **Legal pages:** the privacy policy and terms are served by the rounds service (English only), which the help chat answers from too. The contact address in them, hello@prepza.ai, is put together in the browser, so the page's HTML doesn't hold it for bots to collect.
 - **Contact us** (`/contact`): a name, email and message form. The message is emailed to hello@prepza.ai (`CONTACT_EMAIL` in notifications), with the visitor's address as the reply-to, so answering the email answers them. At most 200 messages a day in all (`CONTACT_DAILY_LIMIT`).
-- **About us** (`/about`): why prepza exists, and its solo founder.
-- The footer links pricing, the privacy policy, the terms, the FAQ, About us and Contact us.
+- **About us** (`/about`): why prepza exists for companies, free practice for people preparing, and its solo founder.
+- The footer links free practice, pricing, the privacy policy, the terms, the FAQ, About us and Contact us.
 - **Notifications:** a bell next to the account menu, live (it updates within a second, without reloading), with a badge of unread ones; it shows the latest 10. Each person or company keeps at most 100, none older than 90 days. Bursts are grouped: another finished candidate, undelivered invite, or flagged or fixed question about the same interview within 24 hours adds to the last one ("3 candidates finished …") instead of a new one. Only what matters gets one, for every member of a company: a candidate finished (with their grade), an invite not delivered, an interview ready or cancelled, a flagged and fixed interview question, a referral reward, an automatic top-up charged or failed.
 
 ## Architecture
@@ -77,11 +87,11 @@ flowchart LR
     companies --> rounds
     companies -- candidate credits --> billing
 
-    rounds -- answer.recorded --> pubsub[(Pub/Sub topic: events)]
+    rounds -- answer.recorded / session.scored / interview.finished --> pubsub[(Pub/Sub topic: events)]
     worker -- generation.completed / cancelled --> pubsub
-    companies -- candidate.invited --> pubsub
+    companies -- candidate.invited / reminded, report.shared --> pubsub
     rounds -- contact.sent --> pubsub
-    library & generation & companies & billing -- notification.requested --> pubsub
+    library & companies & billing -- notification.requested --> pubsub
     pubsub -- push --> library
     pubsub -- push --> companies
     pubsub -- push --> notifications -- email --> smtp[Resend / mailpit]
@@ -90,15 +100,15 @@ flowchart LR
 
 | Service | Responsibility |
 |---|---|
-| `library` | Tests (question sets: topics and questions), candidates' votes and reports, question quality flags and reuse; also account deletion and export across services |
+| `library` | Question sets (topics and questions) of interviews and templates: the template catalog, the question bank's stages, revealed questions for practice and similar templates for talent suggestions; candidates' votes and reports, question quality flags and reuse; also account deletion and export across services |
 | `generation` | The generation pipeline (LangGraph), run by its worker (`app/worker_main.py`) as Cloud Tasks jobs; topic review, re-generating single questions, the question verifier, and scheduled sweeps |
-| `rounds` | Candidate test sessions and their answers (the name is historical); the FAQ, the help chat, the legal texts and the contact form (`/help/...`) |
-| `companies` | Companies (unique names), admins, interviews and candidate invites |
+| `rounds` | Candidates' interview sessions and their answers, free practice rounds, and talents' consent to be suggested (`/talent-link`); the FAQ, the help chat, the legal texts and the contact form (`/help/...`) |
+| `companies` | Companies (unique names, logos, verification), admins, interviews, candidate invites (one by one, in bulk, through a shareable link, with reminders), reports and talent suggestions |
 | `billing` | Companies' credit wallets (holds and charges), welcome credits, referrals, Paddle top-ups, automatic top-ups, refunds and chargebacks (webhooks); companies sets a candidate's credits aside and charges them through it |
-| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites, and contact messages to prepza's inbox. Also the bell: stores the notifications other services ask for (`notification.requested`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them |
+| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites and reminders, emailed PDF reports, and contact messages to prepza's inbox. Also the bell: stores the notifications other services ask for (`notification.requested`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
-Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed). Long jobs (a generation, a question check) are Cloud Tasks that call the generation worker's `/internal/jobs/...`; periodic work (stuck-generation sweeps, key-check batches, retention) is Cloud Scheduler calling `/internal/schedules/...`. Google signs those calls, and pushes, as one invoker service account, which each service checks. Locally there is no queue: the API calls the worker directly, and a small `scheduler` container runs `scripts/local/crontab`. Domain events are saved in an `outbox` table in the same transaction as the change they announce, published right after, and published by a per-minute scheduled flush if that failed, so a change never loses its event. They go to one Pub/Sub topic, `events`, which pushes each event to the `/internal/events` endpoint of library, companies and notifications; each ignores events that aren't its own. Locally, Google's Pub/Sub emulator runs in docker-compose and `scripts/local/pubsub-setup.sh` creates the topic and subscriptions. The services also publish small `funnel.*` events (signed up, company created, topped up and so on) to the same topic; a filtered BigQuery subscription stores them for the dashboards and the push subscriptions skip them. They carry counts and a salted hash of the user id (`ANALYTICS_SALT`), never emails or text; see [docs/measurement.md](docs/measurement.md). Locally nothing stores them.
+Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed). Long jobs (a generation, a question check) are Cloud Tasks that call the generation worker's `/internal/jobs/...`; periodic work (stuck-generation sweeps, key-check batches, invite reminders and expiry, retention) is Cloud Scheduler calling `/internal/schedules/...`. Google signs those calls, and pushes, as one invoker service account, which each service checks. Locally there is no queue: the API calls the worker directly, and a small `scheduler` container runs `scripts/local/crontab`. Domain events are saved in an `outbox` table in the same transaction as the change they announce, published right after, and published by a per-minute scheduled flush if that failed, so a change never loses its event. They go to one Pub/Sub topic, `events`, which pushes each event to the `/internal/events` endpoint of library, companies and notifications; each ignores events that aren't its own. Locally, Google's Pub/Sub emulator runs in docker-compose and `scripts/local/pubsub-setup.sh` creates the topic and subscriptions. The services also publish small `funnel.*` events (signed up, company created, candidate invited, results viewed, topped up and so on) to the same topic; a filtered BigQuery subscription stores them for the dashboards and the push subscriptions skip them. They carry counts and a salted hash of the user id (`ANALYTICS_SALT`), never emails or text; see [docs/measurement.md](docs/measurement.md). Locally nothing stores them.
 
 ### Generation pipeline
 
@@ -113,11 +123,11 @@ job text -> extract requirements and level -> draft topics          (both cached
 
 The graph is checkpointed in Postgres, so a failed run can be retried from where it stopped, and a generation can be cancelled at any step.
 
-Every LLM call of the pipeline shares one rate limit across the API and all workers (`LLM_REQUESTS_PER_SECOND`). The question bank is the superadmins' templates. Each template question has a stage that only moves forward: **private** (company tests only), **retiring** (after 100 answers across every test using it, new tests stop taking it), **revealed** (once no test has used a copy for 90 days: free practice, shown with its answer). A new template reveals a third of each topic at once. Reused questions fill at most half of a new test's topic, and only proven private ones qualify (answered at least 5 times, never flagged). A test's copy remembers its original, so its answers count there too. Copying a template into a company's test takes only its private questions. A daily job (`/internal/schedules/bank`) moves the stages; template topics without an embedding get one from `docker compose exec generation uv run --no-sync python -m app.jobs.embed_templates`.
+Every LLM call of the pipeline shares one rate limit across the API and all workers (`LLM_REQUESTS_PER_SECOND`). The question bank is the superadmins' templates. Each template question has a stage that only moves forward: **private** (company interviews only), **retiring** (after 100 answers across every interview using it, new interviews stop taking it), **revealed** (once no interview has used a copy for 90 days: free practice, shown with its answer). A new template reveals a third of each topic at once. Reused questions fill at most half of a new interview's topic, and only proven private ones qualify (answered at least 5 times, never flagged). An interview's copy remembers its original, so its answers count there too. Copying a template into a company's interview takes only its private questions. A daily job (`/internal/schedules/bank`) moves the stages; template topics without an embedding get one from `docker compose exec generation uv run --no-sync python -m app.jobs.embed_templates`.
 
 ### Question quality
 
-Before a new test or template is ready, the verifier checks one random answer key a topic and fixes or replaces what's wrong (`KEY_CHECKS_PER_TOPIC`, about $0.001 a check). A company's owners and admins can also mark a question's answer wrong in one click, which sends it to the verifier at once.
+Before a new interview or template is ready, the verifier checks one random answer key a topic and fixes or replaces what's wrong (`KEY_CHECKS_PER_TOPIC`, about $0.001 a check). A company's owners and admins can also mark a question's answer wrong in one click, which sends it to the verifier at once.
 
 Rounds publish every answer; library keeps per-question stats (answers, correct, picks per option) next to thumbs and reports, and flags a question when they show a problem:
 
@@ -176,22 +186,22 @@ Errors go to Sentry when `SENTRY_DSN` (backend services) and `NEXT_PUBLIC_SENTRY
 
 These settings in `.env` shape every generation (Terraform passes none of them to Google Cloud, so production runs on the defaults below; see [infra/README.md](infra/README.md#notes)):
 
-- `MAX_TOPICS` and `MAX_SUBTOPICS` (default 10 each): main topics a test has, and subtopics per topic; every subtopic is at least one model call. The review page follows them.
-- `INTERVIEW_QUESTIONS_PER_TOPIC` (default 70): questions per topic of a company's test, from which each candidate gets a random subset.
-- `TEMPLATE_QUESTIONS_PER_TOPIC` (default 90): questions per topic of a template; a third is revealed for free practice, the rest is copied into companies' tests.
+- `MAX_TOPICS` and `MAX_SUBTOPICS` (default 10 each): main topics an interview or template has, and subtopics per topic; every subtopic is at least one model call. The review page follows them.
+- `INTERVIEW_QUESTIONS_PER_TOPIC` (default 70): questions per topic of a company's interview, from which each candidate gets a random subset.
+- `TEMPLATE_QUESTIONS_PER_TOPIC` (default 90): questions per topic of a template; a third is revealed for free practice, the rest is copied into companies' interviews.
 - `LLM_REQUESTS_PER_SECOND` (default 8): generation's LLM requests a second, shared by the API and every worker through Redis; 0 turns it off. The help chat isn't limited by it, so it stays responsive during big generations.
 - Each AI task has its own model and reasoning effort (`none`, `minimal`, `low`, `medium` or `high`; only reasoning models take an effort):
 
   | Task | Model | Effort |
   |---|---|---|
-  | Generation of a test, at any level | `INTERVIEW_MODEL` (`gpt-6.1-sol`) | `INTERVIEW_REASONING_EFFORT` (`low`) |
+  | Generation of an interview or template, at any level | `INTERVIEW_MODEL` (`gpt-6.1-sol`) | `INTERVIEW_REASONING_EFFORT` (`low`) |
   | Verifier: answer-key checks, at once and in batches | `VERIFY_MODEL` (`gpt-6.1-sol`) | `VERIFY_REASONING_EFFORT` (`medium`) |
   | FAQ help chat | `HELP_MODEL` (`gpt-6-luna`) | `HELP_REASONING_EFFORT` (`none`, which also lets it take a temperature) |
 
   Every generation runs on `gpt-6.1-sol` at low. In testing ([evals/README.md](evals/README.md)), `gpt-6-luna` at high wrote basic and medium questions as accurately at a fraction of the price but more slowly, and its hard questions came out too easy, so generation stays on Sol for one quality everywhere. The verifier did as well at low as at medium and stays at medium.
 - `LANGSMITH_TRACING`, `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT` (off by default) trace generation and help chat calls to LangSmith.
 
-Per-user rate limits cap how much a single account can generate (`GENERATION_LIMIT`, 20 per `GENERATION_WINDOW_SECONDS`, a day; `REGENERATION_LIMIT`, 100 re-generated questions in the same window); 0 turns one off. `DAILY_GENERATION_LIMIT` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off. Candidate invite emails are limited per user (`EMAIL_HOURLY_LIMIT`, `EMAIL_DAILY_LIMIT`) and per address (`EMAIL_RECIPIENT_DAILY_LIMIT`).
+Per-user rate limits cap how much a single account can generate (`GENERATION_LIMIT`, 20 per `GENERATION_WINDOW_SECONDS`, a day; `REGENERATION_LIMIT`, 100 re-generated questions in the same window); 0 turns one off. `DAILY_GENERATION_LIMIT` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off. Candidate invite and report emails are limited per user (`EMAIL_HOURLY_LIMIT`, 100; `EMAIL_DAILY_LIMIT`, 200) and per address (`EMAIL_RECIPIENT_DAILY_LIMIT`, 3).
 
 ### Payments
 
@@ -200,11 +210,11 @@ Per-user rate limits cap how much a single account can generate (`GENERATION_LIM
 1. In Paddle (start with the sandbox), create a product with a USD price for each top-up in `services/billing/app/constants/products.py` ($30, $150, $250, $1,000), and a client-side token.
 2. Under Developer tools → Notifications, add a webhook destination at `https://<your domain>/api/billing/webhooks/paddle` for `transaction.completed`, `adjustment.created`, `adjustment.updated`, `subscription.created` and `subscription.canceled` (the adjustments are refunds and chargebacks, which take credits back; the subscriptions start and end automatic top-ups). Copy its secret key.
 3. For automatic top-up, create a $0 monthly price (its checkout saves the card) and a server-side API key with permission to read and update subscriptions. Without both, automatic top-up isn't offered.
-4. Set `PADDLE_ENVIRONMENT`, `PADDLE_CLIENT_TOKEN`, `PADDLE_WEBHOOK_SECRET`, `PADDLE_PRICE_TOPUP_10` … `PADDLE_PRICE_TOPUP_1000`, `PADDLE_PRICE_TOPUP_CUSTOM`, `PADDLE_PRICE_AUTO_TOP_UP` and `PADDLE_API_KEY` in `.env`, then restart billing (in Google Cloud the webhook secret and the API key go into the `paddle-webhook-secret` and `paddle-api-key` secrets, see [infra/README.md](infra/README.md)). Until a price is set, its top-up button is disabled; until both automatic top-up values are set, its line on the top-up page is hidden. Locally, Paddle reaches the webhook only through a tunnel (for example `cloudflared tunnel --url http://localhost:8090`).
+4. Set `PADDLE_ENVIRONMENT`, `PADDLE_CLIENT_TOKEN`, `PADDLE_WEBHOOK_SECRET`, `PADDLE_PRICE_TOPUP_30`, `PADDLE_PRICE_TOPUP_150`, `PADDLE_PRICE_TOPUP_250`, `PADDLE_PRICE_TOPUP_1000`, `PADDLE_PRICE_AUTO_TOP_UP` and `PADDLE_API_KEY` in `.env`, then restart billing (in Google Cloud the webhook secret and the API key go into the `paddle-webhook-secret` and `paddle-api-key` secrets, see [infra/README.md](infra/README.md)). Until a price is set, its top-up button is disabled; until both automatic top-up values are set, its line on the top-up page is hidden. Locally, Paddle reaches the webhook only through a tunnel (for example `cloudflared tunnel --url http://localhost:8090`).
 
 ### Emails
 
-Candidate invites are sent by the `notifications` service, as HTML with a plain-text version, and so are contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default). Note that with `RESEND_API_KEY` set, a message sent from the local contact page reaches that real inbox. To send real emails through [Resend](https://resend.com):
+Candidate invites, reminders and emailed reports (the PDF attached) are sent by the `notifications` service, as HTML with a plain-text version, and so are contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default). Note that with `RESEND_API_KEY` set, a message sent from the local contact page reaches that real inbox. To send real emails through [Resend](https://resend.com):
 
 1. Verify your domain at resend.com/domains.
 2. In `.env`, set `RESEND_API_KEY` (a sending-only key is enough) and `MAIL_FROM` with an address on that domain, for example `prepza. <no-reply@yourdomain.com>`.
@@ -239,8 +249,8 @@ cd frontend && pnpm api-types
 # and Redis, in a "<service>_test" database created and dropped for the run
 ./scripts/tests/integration.sh            # or: ./scripts/tests/integration.sh rounds library
 
-# Browser tests of the signed-out pages (home, explore, pricing, terms, privacy, FAQ, about,
-# contact) on desktop and phone sizes, in Playwright's Docker image: no console errors, no sideways
+# Browser tests of the signed-out pages (home, companies, pricing, terms, privacy, FAQ, about,
+# contact, practice) on desktop and phone sizes, in Playwright's Docker image: no console errors, no sideways
 # scroll, the same page width everywhere, the footer at the end, lowercase titles
 ./scripts/tests/pages.sh
 
@@ -248,7 +258,7 @@ cd frontend && pnpm api-types
 docker compose exec frontend pnpm check:messages
 
 # End-to-end, with a real generation (needs OPENAI_API_KEY; a few cents and a few minutes): a company
-# generates a test and invites a candidate, who
+# generates an interview and invites a candidate, who
 # takes it from the invite link; the company sees the scorecard and pays for that candidate
 python3 scripts/tests/e2e.py
 ```

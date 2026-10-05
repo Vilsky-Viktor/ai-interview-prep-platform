@@ -122,7 +122,7 @@ def test_a_test_without_practice_questions_says_so(client, monkeypatch):
     response = client.post(f"/practice/{TEMPLATE_ID}")
 
     assert response.status_code == 409
-    assert response.json()["detail"] == "This test has no practice questions yet."
+    assert response.json()["detail"] == "This interview has no practice questions yet."
 
 
 def test_a_finished_round_shows_every_right_answer_an_open_one_none(client, monkeypatch):

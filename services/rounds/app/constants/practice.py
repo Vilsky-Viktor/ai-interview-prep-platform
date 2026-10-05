@@ -2,4 +2,4 @@
 # revealed questions), and the seconds each has, as in a company's test by default.
 PRACTICE_TOPIC_QUESTIONS = 10
 PRACTICE_QUESTION_SECONDS = 60
-NO_PRACTICE_QUESTIONS = "This test has no practice questions yet."
+NO_PRACTICE_QUESTIONS = "This interview has no practice questions yet."

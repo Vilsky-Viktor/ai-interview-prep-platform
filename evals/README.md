@@ -24,30 +24,30 @@ are what the current setup (October 2026) reaches; a change that misses one need
 | | Agreement with the reference verdicts (`reviews.json`) | `review_questions.py --compare-reference` | ≥ 95% |
 
 Questions also report their average length and the share that show an example (code, a query,
-a formula); a programming test should have at least a third with one.
+a formula); a programming interview should have at least a third with one.
 
-**Judges have noise.** The same test's scores move by up to about 0.3 between judge runs, and a
+**Judges have noise.** The same run's scores move by up to about 0.3 between judge runs, and a
 40-question sample can't separate small differences. Compare large differences, or review more.
 
 ## Baselines (2026-10-04)
 
 **Generation**, `gpt-6.1-sol` at low reasoning, current prompts, on `questions.json` (240 questions,
 8 domains), judged by `gpt-6.1-sol` at high reasoning; price and time per topic measured at 100
-questions a topic, before tests went to 70:
+questions a topic, before interviews went to 70:
 
 | Clarity | Relevance | One answer | Key correct | Code answers | Distractors | Correct is longest | Per topic |
 |---|---|---|---|---|---|---|---|
 | 4.95 | 4.23 | 98% | 99% | 13 of 13 | 3.03 | 11% | $0.21–0.25, 49–61 s |
 
 At 70 questions a topic and oversample 1.0 that comes to about $0.13–0.16 a topic, and about $1.00
-for a 7-topic test (estimated from these runs, not measured).
+for a 7-topic interview (estimated from these runs, not measured).
 
 For comparison, `gpt-6-luna` at low reasoning: about $0.006 and 17 s a topic, but more
 miscalculations on hard topics, questions judged too easy for the level, and the correct option
 the longest 26–46% of the time.
 
 `gpt-6-luna` at **high** reasoning (2026-10-04, 236 questions on the same subtopics, same judge;
-price and time from full Python backend and senior accountant tests):
+price and time from full Python backend and senior accountant interviews):
 
 | Clarity | Relevance | One answer | Key correct | Code answers | Distractors | Correct is longest | Per topic |
 |---|---|---|---|---|---|---|---|
@@ -55,9 +55,9 @@ price and time from full Python backend and senior accountant tests):
 
 As accurate as Sol and 7–8 times cheaper, but about 1.6 times slower, and its hard-level
 questions are too easy: relevance on hard topics is the gap, and it misses the relevance,
-distractor and time targets, so every test is generated on Sol at low. At 70 questions a topic
+distractor and time targets, so every interview and template is generated on Sol at low. At 70 questions a topic
 (the oversampling runs below, Python backend and Spanish for travel): $0.015–0.024 and 51–66 s a
-topic; a 7-topic test $0.16 in under 8 minutes.
+topic; a 7-topic interview $0.16 in under 8 minutes.
 
 **Verifier** (`verify_test.py`, the service's key-check prompt on the 60 traps and the same 60
 questions with their real key): `gpt-6.1-sol` at low and at medium both fixed 60 of 60 traps and
@@ -68,8 +68,8 @@ kept 60 of 60 real keys, at $0.0009 a check and 1.8 s; medium is in use.
 **Hard-level prompt** (2026-10-04: "a scenario alone doesn't make a question hard: two or more
 steps, or factors that pull in different directions"), 60 hard reference subtopics' questions, Sol
 judge: `gpt-6.1-sol` low relevance 3.10 → 3.67, distractors 3.15 → 3.53, key correct 100%, but
-questions about 75% longer, so a hard Sol test costs roughly 50–70% more; `gpt-6-luna` high 2.40 →
-2.68, still too easy for hard tests. Basic and medium on Luna unchanged within judge noise
+questions about 75% longer, so a hard Sol interview costs roughly 50–70% more; `gpt-6-luna` high 2.40 →
+2.68, still too easy for hard interviews. Basic and medium on Luna unchanged within judge noise
 (medium relevance 4.29 → 4.17, basic distractors 2.80 → 2.60).
 
 **Oversampling** (`generate_tests.py` with `OVERSAMPLE`, Luna high, 70 questions a topic, Python
@@ -101,7 +101,7 @@ generation test at the same time. LangSmith tracing is off for test runs. `MODEL
 `MODEL` and `EFFORT`, generation tests use the service's own model.
 
 ```bash
-# New tests from the full pipeline: price, time, tokens; then review and check them
+# New interviews from the full pipeline: price, time, tokens; then review and check them
 evals/run.sh generation generate_tests.py python_backend senior_accountant --label new-prompt
 evals/run.sh generation review_questions.py results/test_python_backend_new-prompt.json --sample 40
 evals/run.sh generation check_code.py results/test_python_backend_new-prompt.json
@@ -110,10 +110,10 @@ evals/run.sh generation check_code.py results/test_python_backend_new-prompt.jso
 MODEL=gpt-6-luna EFFORT=high evals/run.sh generation build_questions.py --label luna-high
 evals/run.sh generation review_questions.py results/questions_luna-high.json
 
-# Another generation model or effort, on full tests
+# Another generation model or effort, on full interviews
 MODEL=gpt-6-luna EFFORT=low evals/run.sh generation generate_tests.py --all --label luna-low
 
-# Another oversample, on full tests; each result counts the fill-up calls it needed
+# Another oversample, on full interviews; each result counts the fill-up calls it needed
 OVERSAMPLE=1.1 evals/run.sh generation-worker generate_tests.py python_backend --label os-1.1
 
 # Verifier settings, on the traps and the same questions with their real key
@@ -126,14 +126,14 @@ JUDGE_MODEL=gpt-6-luna JUDGE_EFFORT=medium evals/run.sh generation review_questi
 
 | Test | Cost |
 |---|---|
-| A full test, `gpt-6.1-sol` low | $1.60–2.30 at 100 questions a topic (7–10 topics); about $1.00 for 7 topics at 70 (estimated) |
-| A full test, `gpt-6-luna` high, 70 questions a topic | $0.07–0.20 (4–9 topics) |
-| A full test, `gpt-6-luna` low | about $0.05 at 100 questions a topic |
+| A full interview, `gpt-6.1-sol` low | $1.60–2.30 at 100 questions a topic (7–10 topics); about $1.00 for 7 topics at 70 (estimated) |
+| A full interview, `gpt-6-luna` high, 70 questions a topic | $0.07–0.20 (4–9 topics) |
+| A full interview, `gpt-6-luna` low | about $0.05 at 100 questions a topic |
 | A verifier setting on 120 checks (`verify_test.py`) | about $0.11 on Sol |
 | Reviewing 40 questions (Sol judge, high) | about $0.50 |
 | Code check, measurements, traps | free |
 
-Use `--sample` to review part of a test, and judge first with the reference only when a cheaper
+Use `--sample` to review part of an interview, and judge first with the reference only when a cheaper
 judge hasn't been shown to agree.
 
 ## Lessons so far

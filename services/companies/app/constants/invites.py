@@ -78,7 +78,7 @@ TOO_MANY_WITHOUT_CANDIDATES = (
     "can wait without candidates."
 )
 # A shareable link whose company has no credits left for another candidate.
-LINK_CLOSED = "This test isn't taking new candidates right now."
+LINK_CLOSED = "This interview isn't taking new candidates right now."
 # Random bytes in a shareable link's code.
 LINK_TOKEN_BYTES = 12
 

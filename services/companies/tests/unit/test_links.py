@@ -84,7 +84,7 @@ def test_one_attempt_each_and_a_closed_or_broke_link_says_so(client, linked):
     linked["status"], linked["broke"] = None, True
     refused = client.post("/links/abc/start")
     assert refused.status_code == 409
-    assert refused.json()["detail"] == "This test isn't taking new candidates right now."
+    assert refused.json()["detail"] == "This interview isn't taking new candidates right now."
 
     assert client.post("/links/nope/start").status_code == 404
     assert linked["started"] == []

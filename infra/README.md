@@ -5,7 +5,7 @@ Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) be
 - **Cloud Run:** the frontend, five APIs, the generation worker and notifications. Billed per request, and idle services cost nothing.
 - **Cloud SQL Postgres 17:** one database per service, with daily backups and point-in-time recovery.
 - **Pub/Sub:** domain events. One `events` topic is pushed to library, companies and notifications, with a dead-letter topic after 5 attempts.
-- **Cloud Tasks:** generation jobs on the worker. **Cloud Scheduler:** sweeps and retention.
+- **Cloud Tasks:** generation jobs on the worker. **Cloud Scheduler:** sweeps, retention, the question bank's stages, and candidate invite reminders and expiry.
 - **The global load balancer:**
   - HTTPS with a Google-managed certificate;
   - `/api/<service>/` routes to each API, and everything else to the frontend;
