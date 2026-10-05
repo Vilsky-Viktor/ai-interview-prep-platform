@@ -65,18 +65,15 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/preparations": {
+  "/superadmin/templates": {
     parameters: {
       query?: never
       header?: never
       path?: never
       cookie?: never
     }
-    /**
-     * List Mine
-     * @description The user's own and joined preparations together, newest first, a page at a time.
-     */
-    get: operations["list_mine_preparations_get"]
+    /** List Templates */
+    get: operations["list_templates_superadmin_templates_get"]
     put?: never
     post?: never
     delete?: never
@@ -85,7 +82,42 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/preparations/topics/{topic_id}/questions": {
+  "/superadmin/templates/{template_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Template Detail */
+    get: operations["get_template_detail_superadmin_templates__template_id__get"]
+    put?: never
+    post?: never
+    /** Delete Template */
+    delete: operations["delete_template_superadmin_templates__template_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/templates/{template_id}/title": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /** Rename Template */
+    patch: operations["rename_template_superadmin_templates__template_id__title_patch"]
+    trace?: never
+  }
+  "/superadmin/templates/{template_id}/topics/{topic_id}/questions": {
     parameters: {
       query?: never
       header?: never
@@ -94,9 +126,9 @@ export interface paths {
     }
     /**
      * List Topic Questions
-     * @description Question text for a topic the viewer can already open.
+     * @description A topic's questions with their options and feedback counts.
      */
-    get: operations["list_topic_questions_preparations_topics__topic_id__questions_get"]
+    get: operations["list_topic_questions_superadmin_templates__template_id__topics__topic_id__questions_get"]
     put?: never
     post?: never
     delete?: never
@@ -105,37 +137,24 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/preparations/{preparation_id}": {
+  "/superadmin/templates/{template_id}/questions/{question_id}/reports": {
     parameters: {
       query?: never
       header?: never
       path?: never
       cookie?: never
     }
-    /**
-     * Get Preparation
-     * @description Owners and joined users see their preparation; anyone sees a public one.
-     */
-    get: operations["get_preparation_preparations__preparation_id__get"]
+    /** List Question Reports */
+    get: operations["list_question_reports_superadmin_templates__template_id__questions__question_id__reports_get"]
     put?: never
     post?: never
-    /**
-     * Delete Preparation
-     * @description Only the owner deletes a preparation; everyone who joined it loses access too.
-     *
-     *     Practice data goes first, so a failure there leaves the preparation in place to retry.
-     */
-    delete: operations["delete_preparation_preparations__preparation_id__delete"]
+    delete?: never
     options?: never
     head?: never
-    /**
-     * Update Visibility
-     * @description Going public needs a title that names no company.
-     */
-    patch: operations["update_visibility_preparations__preparation_id__patch"]
+    patch?: never
     trace?: never
   }
-  "/preparations/{preparation_id}/title": {
+  "/superadmin/templates/{template_id}/questions/{question_id}/wrong": {
     parameters: {
       query?: never
       header?: never
@@ -144,88 +163,23 @@ export interface paths {
     }
     get?: never
     put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    /**
-     * Update Title
-     * @description Only the preparation's owner can rename it; a public one's title can't name a company.
-     */
-    patch: operations["update_title_preparations__preparation_id__title_patch"]
-    trace?: never
-  }
-  "/preparations/{preparation_id}/join": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Join
-     * @description Joins a public preparation; owners and members are already in.
-     */
-    post: operations["join_preparations__preparation_id__join_post"]
-    /** Leave */
-    delete: operations["leave_preparations__preparation_id__join_delete"]
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/preparations/{preparation_id}/rating": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    /**
-     * Rate
-     * @description Joined users rate the preparation; owners can't rate their own.
-     */
-    put: operations["rate_preparations__preparation_id__rating_put"]
-    post?: never
+    /** Mark Wrong */
+    post: operations["mark_wrong_superadmin_templates__template_id__questions__question_id__wrong_post"]
     delete?: never
     options?: never
     head?: never
     patch?: never
     trace?: never
   }
-  "/preparations/{preparation_id}/shares": {
+  "/superadmin/quality/flagged": {
     parameters: {
       query?: never
       header?: never
       path?: never
       cookie?: never
     }
-    /** List Shares */
-    get: operations["list_shares_preparations__preparation_id__shares_get"]
-    put?: never
-    /**
-     * Share
-     * @description Invites one email; sharing the same email again resends the invite.
-     */
-    post: operations["share_preparations__preparation_id__shares_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/shares/{token}": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Get Share */
-    get: operations["get_share_shares__token__get"]
+    /** List Flagged */
+    get: operations["list_flagged_superadmin_quality_flagged_get"]
     put?: never
     post?: never
     delete?: never
@@ -234,7 +188,24 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/shares/{token}/accept": {
+  "/superadmin/quality/replaced": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** List Replaced */
+    get: operations["list_replaced_superadmin_quality_replaced_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/quality/{question_id}/fix": {
     parameters: {
       query?: never
       header?: never
@@ -244,17 +215,17 @@ export interface paths {
     get?: never
     put?: never
     /**
-     * Accept Share
-     * @description Only the invited email can accept, so a forwarded link is useless to anyone else.
+     * Fix Now
+     * @description Sends the question to the verifier at once; it fixes or replaces it in the background.
      */
-    post: operations["accept_share_shares__token__accept_post"]
+    post: operations["fix_now_superadmin_quality__question_id__fix_post"]
     delete?: never
     options?: never
     head?: never
     patch?: never
     trace?: never
   }
-  "/questions/{question_id}/regenerate": {
+  "/superadmin/quality/{question_id}/dismiss": {
     parameters: {
       query?: never
       header?: never
@@ -264,35 +235,17 @@ export interface paths {
     get?: never
     put?: never
     /**
-     * Regenerate
-     * @description Only the owner of a preparation replaces its questions; generation writes the new one.
+     * Dismiss
+     * @description The flag is wrong: the question stays, and isn't flagged again until it changes.
      */
-    post: operations["regenerate_questions__question_id__regenerate_post"]
+    post: operations["dismiss_superadmin_quality__question_id__dismiss_post"]
     delete?: never
     options?: never
     head?: never
     patch?: never
     trace?: never
   }
-  "/questions/{question_id}/rating": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Get Rating */
-    get: operations["get_rating_questions__question_id__rating_get"]
-    /** Rate */
-    put: operations["rate_questions__question_id__rating_put"]
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/questions/{question_id}/reports": {
+  "/superadmin/quality/{question_id}/reports": {
     parameters: {
       query?: never
       header?: never
@@ -301,27 +254,9 @@ export interface paths {
     }
     /**
      * List Reports
-     * @description Only the preparation owner reads reports; interview reports go through companies.
+     * @description A flagged question's reports, newest first.
      */
-    get: operations["list_reports_questions__question_id__reports_get"]
-    put?: never
-    /** Report */
-    post: operations["report_questions__question_id__reports_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/questions/{question_id}/reports/mine": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** My Report */
-    get: operations["my_report_questions__question_id__reports_mine_get"]
+    get: operations["list_reports_superadmin_quality__question_id__reports_get"]
     put?: never
     post?: never
     delete?: never
@@ -330,7 +265,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/library/filters": {
+  "/superadmin/quality/revisions/{revision_id}/reports": {
     parameters: {
       query?: never
       header?: never
@@ -338,10 +273,10 @@ export interface paths {
       cookie?: never
     }
     /**
-     * Library Filters
-     * @description What the library can be filtered and sorted by, and the reader's defaults; public.
+     * List Revision Reports
+     * @description The reports a replaced question had, as kept with its old content, newest first.
      */
-    get: operations["library_filters_library_filters_get"]
+    get: operations["list_revision_reports_superadmin_quality_revisions__revision_id__reports_get"]
     put?: never
     post?: never
     delete?: never
@@ -350,19 +285,15 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/library": {
+  "/templates/filters": {
     parameters: {
       query?: never
       header?: never
       path?: never
       cookie?: never
     }
-    /**
-     * Search Library
-     * @description Public preparations, a page at a time; no login needed. Without `language`, the reader's
-     *     language and English.
-     */
-    get: operations["search_library_library_get"]
+    /** Template Filters */
+    get: operations["template_filters_templates_filters_get"]
     put?: never
     post?: never
     delete?: never
@@ -371,20 +302,37 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/preparations": {
+  "/templates": {
     parameters: {
       query?: never
       header?: never
       path?: never
       cookie?: never
     }
-    get?: never
+    /** List Templates */
+    get: operations["list_templates_templates_get"]
     put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/templates/{template_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
     /**
-     * Create Preparation
-     * @description A retried save from the same generation returns the set it already made.
+     * Get Template
+     * @description A template's topics and subtopics, to review before using it; its questions stay hidden.
      */
-    post: operations["create_preparation_internal_preparations_post"]
+    get: operations["get_template_templates__template_id__get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -411,6 +359,46 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/templates": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create Template
+     * @description A retried save from the same generation returns the template it already made.
+     */
+    post: operations["create_template_internal_templates_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/templates/{template_id}/copy": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Copy Template
+     * @description For companies: a company's own test made from a template, with no generation.
+     */
+    post: operations["copy_template_internal_templates__template_id__copy_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/interviews/{set_id}": {
     parameters: {
       query?: never
@@ -423,7 +411,7 @@ export interface paths {
     post?: never
     /**
      * Delete Interview
-     * @description Deletes an interview set; safe to repeat. Never deletes a user's preparation.
+     * @description Deletes an interview set; safe to repeat.
      */
     delete: operations["delete_interview_internal_interviews__set_id__delete"]
     options?: never
@@ -482,26 +470,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/sets/{set_id}/question-texts": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * List Question Texts
-     * @description Current text per question id, so callers can tell a re-generated question apart.
-     */
-    get: operations["list_question_texts_internal_sets__set_id__question_texts_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/internal/sets/{set_id}/topics/{topic_id}/questions": {
     parameters: {
       query?: never
@@ -511,7 +479,7 @@ export interface paths {
     }
     /**
      * List Topic Questions
-     * @description Question text and feedback counts of one topic in a set, without answers.
+     * @description One topic's questions in a set, with their options and feedback counts.
      */
     get: operations["list_topic_questions_internal_sets__set_id__topics__topic_id__questions_get"]
     put?: never
@@ -573,26 +541,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/topics/{topic_id}": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Get Topic Questions
-     * @description Questions of a topic the user owns or joined, for starting a round.
-     */
-    get: operations["get_topic_questions_internal_topics__topic_id__get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/internal/schedules/outbox": {
     parameters: {
       query?: never
@@ -608,6 +556,27 @@ export interface paths {
      *     their change.
      */
     post: operations["flush_outbox_internal_schedules_outbox_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/schedules/bank": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Move Bank Stages
+     * @description Daily, from Cloud Scheduler: bank questions move one way, private to retiring to
+     *     revealed (constants/sets.py Stage).
+     */
+    post: operations["move_bank_stages_internal_schedules_bank_post"]
     delete?: never
     options?: never
     head?: never
@@ -690,6 +659,48 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/sets/{set_id}/similar-templates": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Similar Templates
+     * @description The templates for roles like a company's test, closest first: whose talents it's
+     *     suggested.
+     */
+    get: operations["similar_templates_internal_sets__set_id__similar_templates_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/templates/{template_id}/practice": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Practice Content
+     * @description The template's revealed questions, with answers, by topic; topics without any are left
+     *     out. Rounds picks each practice round's questions from them.
+     */
+    get: operations["practice_content_internal_templates__template_id__practice_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/questions/{question_id}/quality": {
     parameters: {
       query?: never
@@ -727,6 +738,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/questions/{question_id}/wrong": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Mark Wrong
+     * @description For companies, once it has checked the question is in the company's test.
+     */
+    post: operations["mark_wrong_internal_questions__question_id__wrong_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/reuse": {
     parameters: {
       query?: never
@@ -738,7 +769,7 @@ export interface paths {
     put?: never
     /**
      * Find Reusable
-     * @description Proven questions from public preparations on a similar topic, for a new generation.
+     * @description Proven private bank questions on a similar topic, for a new generation.
      */
     post: operations["find_reusable_internal_reuse_post"]
     delete?: never
@@ -756,7 +787,7 @@ export interface paths {
     }
     /**
      * List Missing Embeddings
-     * @description Preparation topics saved before embeddings existed, for the one-off backfill.
+     * @description Template topics without an embedding, for generation's embed_templates job.
      */
     get: operations["list_missing_embeddings_internal_embeddings_missing_get"]
     put?: never
@@ -778,26 +809,6 @@ export interface paths {
     /** Save Embeddings */
     put: operations["save_embeddings_internal_embeddings_put"]
     post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/internal/shares/{share_id}/undelivered": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Share Undelivered
-     * @description Notifications reports a bounced or spam-flagged share email; safe to repeat.
-     */
-    post: operations["share_undelivered_internal_shares__share_id__undelivered_post"]
     delete?: never
     options?: never
     head?: never
@@ -845,12 +856,6 @@ export interface paths {
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
-    /**
-     * Access
-     * @description How the current user relates to a preparation.
-     * @enum {string}
-     */
-    Access: "owner" | "joined" | "public"
     /** CreatedOut */
     CreatedOut: {
       /**
@@ -858,6 +863,40 @@ export interface components {
        * Format: uuid
        */
       id: string
+    }
+    /**
+     * FlaggedQuestionOut
+     * @description A question flagged now, for the admin zone's quality tab.
+     */
+    FlaggedQuestionOut: {
+      /**
+       * Question Id
+       * Format: uuid
+       */
+      question_id: string
+      /** Text */
+      text: string
+      /** Options */
+      options: components["schemas"]["OptionIn"][]
+      /** Flag */
+      flag: string
+      /** Actionable */
+      actionable: boolean
+      /** Answers */
+      answers: number
+      /** Correct */
+      correct: number
+      /** Reports */
+      reports: number
+      /** Set Title */
+      set_title: string
+      /** Set Kind */
+      set_kind: string
+      /**
+       * At
+       * Format: date-time
+       */
+      at: string
     }
     /** HTTPValidationError */
     HTTPValidationError: {
@@ -886,55 +925,49 @@ export interface components {
       user_id: string
     }
     /**
-     * LibraryFiltersOut
-     * @description What the library page can filter and sort by, and what it starts with.
+     * MeOut
+     * @description The signed-in user, and whether they may open the superadmin pages.
      */
-    LibraryFiltersOut: {
-      /** Levels */
-      levels: string[]
-      /** Languages */
-      languages: string[]
-      /** Default Languages */
-      default_languages: string[]
-      /** Sorts */
-      sorts: components["schemas"]["LibrarySort"][]
-      default_sort: components["schemas"]["LibrarySort"]
-    }
-    /**
-     * LibrarySort
-     * @enum {string}
-     */
-    LibrarySort: "date" | "rating" | "joiners"
-    /** MyPreparation */
-    MyPreparation: {
+    MeOut: {
+      /** Uid */
+      uid: string
+      /** Email */
+      email: string
+      /** Email Verified */
+      email_verified: boolean
+      /** Name */
+      name?: string | null
       /**
-       * Id
-       * Format: uuid
+       * Language
+       * @default en
+       * @enum {string}
        */
-      id: string
-      /** Title */
-      title: string
-      /** Level */
-      level: string
-      /** Visibility */
-      visibility: string
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string
-      /** Topic Count */
-      topic_count: number
-      /** Rating Avg */
-      rating_avg: number | null
-      /** Rating Count */
-      rating_count: number
-      /** Join Count */
-      join_count: number
-      /** Owned */
-      owned: boolean
-      /** Done */
-      done: boolean
+      language:
+        | "en"
+        | "ru"
+        | "uk"
+        | "es"
+        | "pt"
+        | "de"
+        | "fr"
+        | "it"
+        | "pl"
+        | "nl"
+        | "tr"
+        | "ar"
+        | "he"
+        | "fa"
+        | "ja"
+        | "zh"
+        | "ko"
+        | "hi"
+        | "id"
+        | "th"
+        | "vi"
+        | "fil"
+        | "et"
+      /** Is Superadmin */
+      is_superadmin: boolean
     }
     /** MyReportOut */
     MyReportOut: {
@@ -948,47 +981,9 @@ export interface components {
       /** Correct */
       correct: boolean
     }
-    /** PreparationDetail */
-    PreparationDetail: {
-      /**
-       * Id
-       * Format: uuid
-       */
-      id: string
-      /** Title */
-      title: string
-      /** Level */
-      level: string
-      /** Visibility */
-      visibility: string
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string
-      /** Topic Count */
-      topic_count: number
-      /** Rating Avg */
-      rating_avg: number | null
-      /** Rating Count */
-      rating_count: number
-      /** Join Count */
-      join_count: number
-      /** Requirements */
-      requirements: string[]
-      /** Topics */
-      topics: components["schemas"]["TopicOut"][]
-      access: components["schemas"]["Access"]
-      /** My Rating */
-      my_rating: number | null
-      /** Done */
-      done: boolean
-      /** Rating Scale */
-      rating_scale: number
-    }
     /**
      * PreparationIn
-     * @description A generated preparation or interview, as generation saves it in library.
+     * @description A generated test, as generation saves it in library.
      */
     PreparationIn: {
       /**
@@ -1013,38 +1008,6 @@ export interface components {
        * @default en
        */
       language: string
-    }
-    /** PreparationRatingIn */
-    PreparationRatingIn: {
-      /** Value */
-      value: number
-    }
-    /** PreparationSummary */
-    PreparationSummary: {
-      /**
-       * Id
-       * Format: uuid
-       */
-      id: string
-      /** Title */
-      title: string
-      /** Level */
-      level: string
-      /** Visibility */
-      visibility: string
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string
-      /** Topic Count */
-      topic_count: number
-      /** Rating Avg */
-      rating_avg: number | null
-      /** Rating Count */
-      rating_count: number
-      /** Join Count */
-      join_count: number
     }
     /**
      * PushBody
@@ -1103,6 +1066,8 @@ export interface components {
       text: string
       /** Options */
       options: components["schemas"]["OptionIn"][]
+      /** Source Id */
+      source_id?: string | null
     }
     /** QuestionOut */
     QuestionOut: {
@@ -1134,14 +1099,6 @@ export interface components {
       /** Reports */
       reports: components["schemas"]["ReportNote"][]
     }
-    /** QuestionRatingIn */
-    QuestionRatingIn: {
-      /**
-       * Value
-       * @enum {integer}
-       */
-      value: -1 | 1
-    }
     /** QuestionRatingOut */
     QuestionRatingOut: {
       /** Value */
@@ -1154,7 +1111,10 @@ export interface components {
       /** Options */
       options: components["schemas"]["OptionIn"][]
     }
-    /** QuestionText */
+    /**
+     * QuestionText
+     * @description A question as its owner manages it: text, answer options and feedback counts.
+     */
     QuestionText: {
       /**
        * Id
@@ -1163,6 +1123,8 @@ export interface components {
       id: string
       /** Text */
       text: string
+      /** Options */
+      options: components["schemas"]["OptionIn"][]
       /**
        * Likes
        * @default 0
@@ -1179,14 +1141,40 @@ export interface components {
        */
       reports: number
     }
-    /** ReportIn */
-    ReportIn: {
-      reason: components["schemas"]["ReportReason"]
+    /**
+     * ReplacedQuestionOut
+     * @description A question's old content, kept when it was replaced.
+     */
+    ReplacedQuestionOut: {
       /**
-       * Comment
-       * @default
+       * Revision Id
+       * Format: uuid
        */
-      comment: string
+      revision_id: string
+      /**
+       * Question Id
+       * Format: uuid
+       */
+      question_id: string
+      /** Text */
+      text: string
+      /** Options */
+      options: components["schemas"]["OptionIn"][]
+      /** Answers */
+      answers: number
+      /** Correct */
+      correct: number
+      /** Reports */
+      reports: number
+      /** Set Title */
+      set_title: string
+      /** Set Kind */
+      set_kind: string
+      /**
+       * At
+       * Format: date-time
+       */
+      at: string
     }
     /** ReportNote */
     ReportNote: {
@@ -1236,6 +1224,11 @@ export interface components {
     }
     /** ReusedQuestion */
     ReusedQuestion: {
+      /**
+       * Source Id
+       * Format: uuid
+       */
+      source_id: string
       /** Text */
       text: string
       /** Options */
@@ -1317,42 +1310,77 @@ export interface components {
         | "fil"
         | "et"
     }
-    /** ShareIn */
-    ShareIn: {
-      /**
-       * Email
-       * Format: email
-       */
-      email: string
+    /** TemplateCopyIn */
+    TemplateCopyIn: {
+      /** Company Id */
+      company_id: string
     }
     /**
-     * ShareInviteOut
-     * @description What the invited person sees before accepting.
+     * TemplateCopyOut
+     * @description The company's new test set.
      */
-    ShareInviteOut: {
+    TemplateCopyOut: {
       /**
-       * Preparation Id
+       * Id
        * Format: uuid
        */
-      preparation_id: string
+      id: string
       /** Title */
       title: string
-      /** Email */
-      email: string
-      /** Accepted */
-      accepted: boolean
+      /** Language */
+      language: string
     }
-    /** ShareOut */
-    ShareOut: {
-      /** Email */
-      email: string
-      /** Accepted */
-      accepted: boolean
+    /**
+     * TemplateFiltersOut
+     * @description What the template list can be filtered by.
+     */
+    TemplateFiltersOut: {
+      /** Levels */
+      levels: string[]
+      /** Languages */
+      languages: string[]
+    }
+    /** TemplateOut */
+    TemplateOut: {
       /**
-       * Undelivered
-       * @default false
+       * Id
+       * Format: uuid
        */
-      undelivered: boolean
+      id: string
+      /** Title */
+      title: string
+      /** Level */
+      level: string
+      /** Language */
+      language: string
+      /** Topic Count */
+      topic_count: number
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /** Topics */
+      topics: components["schemas"]["TopicOut"][]
+    }
+    /**
+     * TemplateSummary
+     * @description A template in the admin's list.
+     */
+    TemplateSummary: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Title */
+      title: string
+      /** Level */
+      level: string
+      /** Language */
+      language: string
+      /** Topic Count */
+      topic_count: number
       /**
        * Created At
        * Format: date-time
@@ -1399,28 +1427,6 @@ export interface components {
       /** Question Count */
       question_count: number
     }
-    /**
-     * TopicQuestionsOut
-     * @description Internal only: a topic with its questions' correct flags.
-     */
-    TopicQuestionsOut: {
-      /**
-       * Id
-       * Format: uuid
-       */
-      id: string
-      /**
-       * Preparation Id
-       * Format: uuid
-       */
-      preparation_id: string
-      /** Title */
-      title: string
-      /** Questions */
-      questions: components["schemas"]["QuestionOut"][]
-      /** Public Author Id */
-      public_author_id?: string | null
-    }
     /** TopicToEmbed */
     TopicToEmbed: {
       /**
@@ -1432,46 +1438,6 @@ export interface components {
       title: string
       /** Subtopics */
       subtopics: string[]
-    }
-    /** User */
-    User: {
-      /** Uid */
-      uid: string
-      /** Email */
-      email: string
-      /** Email Verified */
-      email_verified: boolean
-      /** Name */
-      name?: string | null
-      /**
-       * Language
-       * @default en
-       * @enum {string}
-       */
-      language:
-        | "en"
-        | "ru"
-        | "uk"
-        | "es"
-        | "pt"
-        | "de"
-        | "fr"
-        | "it"
-        | "pl"
-        | "nl"
-        | "tr"
-        | "ar"
-        | "he"
-        | "fa"
-        | "ja"
-        | "zh"
-        | "ko"
-        | "hi"
-        | "id"
-        | "th"
-        | "vi"
-        | "fil"
-        | "et"
     }
     /** ValidationError */
     ValidationError: {
@@ -1485,15 +1451,6 @@ export interface components {
       input?: unknown
       /** Context */
       ctx?: Record<string, never>
-    }
-    /**
-     * Visibility
-     * @enum {string}
-     */
-    Visibility: "private" | "public"
-    /** VisibilityIn */
-    VisibilityIn: {
-      visibility: components["schemas"]["Visibility"]
     }
   }
   responses: never
@@ -1519,7 +1476,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["User"]
+          "application/json": components["schemas"]["MeOut"]
         }
       }
     }
@@ -1595,9 +1552,38 @@ export interface operations {
       }
     }
   }
-  list_mine_preparations_get: {
+  list_templates_superadmin_templates_get: {
     parameters: {
       query?: {
+        q?: string
+        level?: ("basic" | "medium" | "hard") | null
+        language?:
+          | (
+              | "en"
+              | "ru"
+              | "uk"
+              | "es"
+              | "pt"
+              | "de"
+              | "fr"
+              | "it"
+              | "pl"
+              | "nl"
+              | "tr"
+              | "ar"
+              | "he"
+              | "fa"
+              | "ja"
+              | "zh"
+              | "ko"
+              | "hi"
+              | "id"
+              | "th"
+              | "vi"
+              | "fil"
+              | "et"
+            )[]
+          | null
         offset?: number
         limit?: number
       }
@@ -1613,7 +1599,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["MyPreparation"][]
+          "application/json": components["schemas"]["TemplateSummary"][]
         }
       }
       /** @description Validation Error */
@@ -1627,12 +1613,12 @@ export interface operations {
       }
     }
   }
-  list_topic_questions_preparations_topics__topic_id__questions_get: {
+  get_template_detail_superadmin_templates__template_id__get: {
     parameters: {
       query?: never
       header?: never
       path: {
-        topic_id: string
+        template_id: string
       }
       cookie?: never
     }
@@ -1644,7 +1630,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["QuestionText"][]
+          "application/json": components["schemas"]["TemplateOut"]
         }
       }
       /** @description Validation Error */
@@ -1658,43 +1644,12 @@ export interface operations {
       }
     }
   }
-  get_preparation_preparations__preparation_id__get: {
+  delete_template_superadmin_templates__template_id__delete: {
     parameters: {
       query?: never
       header?: never
       path: {
-        preparation_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["PreparationDetail"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  delete_preparation_preparations__preparation_id__delete: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        preparation_id: string
+        template_id: string
       }
       cookie?: never
     }
@@ -1718,45 +1673,12 @@ export interface operations {
       }
     }
   }
-  update_visibility_preparations__preparation_id__patch: {
+  rename_template_superadmin_templates__template_id__title_patch: {
     parameters: {
       query?: never
       header?: never
       path: {
-        preparation_id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["VisibilityIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  update_title_preparations__preparation_id__title_patch: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        preparation_id: string
+        template_id: string
       }
       cookie?: never
     }
@@ -1784,23 +1706,26 @@ export interface operations {
       }
     }
   }
-  join_preparations__preparation_id__join_post: {
+  list_topic_questions_superadmin_templates__template_id__topics__topic_id__questions_get: {
     parameters: {
       query?: never
       header?: never
       path: {
-        preparation_id: string
+        template_id: string
+        topic_id: string
       }
       cookie?: never
     }
     requestBody?: never
     responses: {
       /** @description Successful Response */
-      204: {
+      200: {
         headers: {
           [name: string]: unknown
         }
-        content?: never
+        content: {
+          "application/json": components["schemas"]["QuestionText"][]
+        }
       }
       /** @description Validation Error */
       422: {
@@ -1813,69 +1738,7 @@ export interface operations {
       }
     }
   }
-  leave_preparations__preparation_id__join_delete: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        preparation_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  rate_preparations__preparation_id__rating_put: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        preparation_id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["PreparationRatingIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  list_shares_preparations__preparation_id__shares_get: {
+  list_question_reports_superadmin_templates__template_id__questions__question_id__reports_get: {
     parameters: {
       query?: {
         offset?: number
@@ -1883,7 +1746,8 @@ export interface operations {
       }
       header?: never
       path: {
-        preparation_id: string
+        template_id: string
+        question_id: string
       }
       cookie?: never
     }
@@ -1895,7 +1759,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["ShareOut"][]
+          "application/json": components["schemas"]["ReportOut"][]
         }
       }
       /** @description Validation Error */
@@ -1909,78 +1773,13 @@ export interface operations {
       }
     }
   }
-  share_preparations__preparation_id__shares_post: {
+  mark_wrong_superadmin_templates__template_id__questions__question_id__wrong_post: {
     parameters: {
       query?: never
       header?: never
       path: {
-        preparation_id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ShareIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["ShareOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  get_share_shares__token__get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        token: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["ShareInviteOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  accept_share_shares__token__accept_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        token: string
+        template_id: string
+        question_id: string
       }
       cookie?: never
     }
@@ -2004,13 +1803,14 @@ export interface operations {
       }
     }
   }
-  regenerate_questions__question_id__regenerate_post: {
+  list_flagged_superadmin_quality_flagged_get: {
     parameters: {
-      query?: never
-      header?: never
-      path: {
-        question_id: string
+      query?: {
+        offset?: number
+        limit?: number
       }
+      header?: never
+      path?: never
       cookie?: never
     }
     requestBody?: never
@@ -2021,9 +1821,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": {
-            [key: string]: unknown
-          }
+          "application/json": components["schemas"]["FlaggedQuestionOut"][]
         }
       }
       /** @description Validation Error */
@@ -2037,13 +1835,14 @@ export interface operations {
       }
     }
   }
-  get_rating_questions__question_id__rating_get: {
+  list_replaced_superadmin_quality_replaced_get: {
     parameters: {
-      query?: never
-      header?: never
-      path: {
-        question_id: string
+      query?: {
+        offset?: number
+        limit?: number
       }
+      header?: never
+      path?: never
       cookie?: never
     }
     requestBody?: never
@@ -2054,7 +1853,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["QuestionRatingOut"]
+          "application/json": components["schemas"]["ReplacedQuestionOut"][]
         }
       }
       /** @description Validation Error */
@@ -2068,7 +1867,7 @@ export interface operations {
       }
     }
   }
-  rate_questions__question_id__rating_put: {
+  fix_now_superadmin_quality__question_id__fix_post: {
     parameters: {
       query?: never
       header?: never
@@ -2077,11 +1876,38 @@ export interface operations {
       }
       cookie?: never
     }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["QuestionRatingIn"]
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      202: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
       }
     }
+  }
+  dismiss_superadmin_quality__question_id__dismiss_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        question_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
     responses: {
       /** @description Successful Response */
       204: {
@@ -2101,7 +1927,7 @@ export interface operations {
       }
     }
   }
-  list_reports_questions__question_id__reports_get: {
+  list_reports_superadmin_quality__question_id__reports_get: {
     parameters: {
       query?: {
         offset?: number
@@ -2135,47 +1961,15 @@ export interface operations {
       }
     }
   }
-  report_questions__question_id__reports_post: {
+  list_revision_reports_superadmin_quality_revisions__revision_id__reports_get: {
     parameters: {
-      query?: never
+      query?: {
+        offset?: number
+        limit?: number
+      }
       header?: never
       path: {
-        question_id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ReportIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": unknown
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  my_report_questions__question_id__reports_mine_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        question_id: string
+        revision_id: string
       }
       cookie?: never
     }
@@ -2187,7 +1981,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["MyReportOut"]
+          "application/json": components["schemas"]["ReportOut"][]
         }
       }
       /** @description Validation Error */
@@ -2201,7 +1995,7 @@ export interface operations {
       }
     }
   }
-  library_filters_library_filters_get: {
+  template_filters_templates_filters_get: {
     parameters: {
       query?: never
       header?: never
@@ -2216,12 +2010,12 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["LibraryFiltersOut"]
+          "application/json": components["schemas"]["TemplateFiltersOut"]
         }
       }
     }
   }
-  search_library_library_get: {
+  list_templates_templates_get: {
     parameters: {
       query?: {
         q?: string
@@ -2253,7 +2047,6 @@ export interface operations {
               | "et"
             )[]
           | null
-        sort?: components["schemas"]["LibrarySort"]
         offset?: number
         limit?: number
       }
@@ -2269,7 +2062,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["PreparationSummary"][]
+          "application/json": components["schemas"]["TemplateSummary"][]
         }
       }
       /** @description Validation Error */
@@ -2283,26 +2076,24 @@ export interface operations {
       }
     }
   }
-  create_preparation_internal_preparations_post: {
+  get_template_templates__template_id__get: {
     parameters: {
       query?: never
       header?: never
-      path?: never
+      path: {
+        template_id: string
+      }
       cookie?: never
     }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["PreparationIn"]
-      }
-    }
+    requestBody?: never
     responses: {
       /** @description Successful Response */
-      201: {
+      200: {
         headers: {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["CreatedOut"]
+          "application/json": components["schemas"]["TemplateOut"]
         }
       }
       /** @description Validation Error */
@@ -2336,6 +2127,74 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["CreatedOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  create_template_internal_templates_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["PreparationIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CreatedOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  copy_template_internal_templates__template_id__copy_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["TemplateCopyIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["TemplateCopyOut"]
         }
       }
       /** @description Validation Error */
@@ -2460,39 +2319,6 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["SetContent"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  list_question_texts_internal_sets__set_id__question_texts_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        set_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: string
-          }
         }
       }
       /** @description Validation Error */
@@ -2637,40 +2463,25 @@ export interface operations {
       }
     }
   }
-  get_topic_questions_internal_topics__topic_id__get: {
+  flush_outbox_internal_schedules_outbox_post: {
     parameters: {
-      query: {
-        user_id: string
-      }
+      query?: never
       header?: never
-      path: {
-        topic_id: string
-      }
+      path?: never
       cookie?: never
     }
     requestBody?: never
     responses: {
       /** @description Successful Response */
-      200: {
+      204: {
         headers: {
           [name: string]: unknown
         }
-        content: {
-          "application/json": components["schemas"]["TopicQuestionsOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
+        content?: never
       }
     }
   }
-  flush_outbox_internal_schedules_outbox_post: {
+  move_bank_stages_internal_schedules_bank_post: {
     parameters: {
       query?: never
       header?: never
@@ -2853,6 +2664,68 @@ export interface operations {
       }
     }
   }
+  similar_templates_internal_sets__set_id__similar_templates_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        set_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": string[]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  practice_content_internal_templates__template_id__practice_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SetContent"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   get_quality_internal_questions__question_id__quality_get: {
     parameters: {
       query?: never
@@ -2885,6 +2758,35 @@ export interface operations {
     }
   }
   keep_internal_questions__question_id__keep_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        question_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  mark_wrong_internal_questions__question_id__wrong_post: {
     parameters: {
       query?: never
       header?: never
@@ -2989,35 +2891,6 @@ export interface operations {
         "application/json": components["schemas"]["TopicEmbedding"][]
       }
     }
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  share_undelivered_internal_shares__share_id__undelivered_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        share_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
     responses: {
       /** @description Successful Response */
       204: {

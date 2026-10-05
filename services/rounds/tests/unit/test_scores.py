@@ -1,9 +1,11 @@
+from types import SimpleNamespace as Row
+
 from app.helpers.scores import (
     candidate_progress,
     current_score,
-    earns_certificate,
     final_score,
     interview_finished,
+    signal_counts,
 )
 
 
@@ -30,7 +32,54 @@ def test_interview_finished_needs_every_topic():
     assert interview_finished(["finished", "finished"]) is True
 
 
-def test_certificate_needs_full_coverage_and_70_percent():
-    assert earns_certificate(None) is False
-    assert earns_certificate(69) is False
-    assert earns_certificate(70) is True
+def test_a_finished_section_reports_each_shown_questions_result():
+    from types import SimpleNamespace
+    from uuid import uuid4
+
+    from app.helpers.scores import scored
+
+    answered, timed_out, unseen = uuid4(), uuid4(), uuid4()
+    row = SimpleNamespace(
+        final_score=50,
+        questions=[
+            {"id": str(answered), "text": "Q1?"},
+            {"id": str(timed_out), "text": "Q2?"},
+            {"id": str(unseen), "text": "Q3?"},
+        ],
+        answers=[
+            SimpleNamespace(question_id=answered, option_index=1, correct=True),
+            SimpleNamespace(question_id=timed_out, option_index=None, correct=False),
+        ],
+    )
+
+    assert scored(row) == {
+        "final_score": 50,
+        "answers": [
+            {
+                "question_id": str(answered),
+                "question_text": "Q1?",
+                "correct": True,
+                "timed_out": False,
+            },
+            {
+                "question_id": str(timed_out),
+                "question_text": "Q2?",
+                "correct": False,
+                "timed_out": True,
+            },
+        ],
+    }
+
+
+def test_signal_counts_add_up_every_section():
+    def answer(option_index, seconds):
+        return Row(option_index=option_index, seconds=seconds)
+
+    first = Row(
+        signals=[Row(kind="tab_leave"), Row(kind="tab_leave"), Row(kind="copy")],
+        # Picked in 1 second: too fast. Timed out (nothing picked): not fast.
+        answers=[answer(0, 1), answer(None, 0)],
+    )
+    second = Row(signals=[Row(kind="tab_leave")], answers=[answer(1, 20), answer(2, 2)])
+
+    assert signal_counts([first, second]) == {"tab_leaves": 3, "copies": 1, "fast_answers": 2}

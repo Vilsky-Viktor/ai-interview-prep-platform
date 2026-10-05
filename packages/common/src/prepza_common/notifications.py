@@ -12,11 +12,9 @@ NOTIFICATION_REQUESTED = "notification.requested"
 
 
 class NotificationKind(StrEnum):
-    # A question in the owner's kit or interview was flagged, then fixed or replaced by the AI.
+    # A question in the company's test was flagged, then fixed or replaced by the AI.
     QUESTION_FLAGGED = "question_flagged"
     QUESTION_FIXED = "question_fixed"
-    # A learner's kit finished generating.
-    KIT_READY = "kit_ready"
     # Someone who came through the owner's referral link topped up.
     REFERRAL_REWARDED = "referral_rewarded"
     # An automatic top-up charged the card, or couldn't.

@@ -3,7 +3,7 @@ from uuid import UUID
 from prepza_common.constants import DEFAULT_LANGUAGE
 from prepza_common.sets import PreparationIn, QuestionIn, TopicIn
 
-from app.config.settings import settings
+from app.helpers.questions import topic_size
 
 
 def build_preparation(
@@ -17,16 +17,20 @@ def build_preparation(
     embeddings = values.get("topic_embeddings") or []
 
     for index, item in enumerate(values["final"]):
+        # Bank questions come first; fill-ups added later, and runs saved before the bank, have
+        # no source id.
+        sources = item.get("source_ids") or []
+        sources = sources + [None] * (len(item["questions"]) - len(sources))
         questions = [
-            QuestionIn(text=text, options=options)
-            for text, options in zip(item["questions"], item["answer_options"])
+            QuestionIn(text=text, options=options, source_id=source)
+            for text, options, source in zip(item["questions"], item["answer_options"], sources)
             if options
         ]
         topics.append(
             TopicIn(
                 title=item["topic"],
                 subtopics=item["subtopics"],
-                questions=questions[: settings.questions_per_topic],
+                questions=questions[: topic_size(values.get("template", False))],
                 embedding=embeddings[index] if embeddings else None,
             )
         )

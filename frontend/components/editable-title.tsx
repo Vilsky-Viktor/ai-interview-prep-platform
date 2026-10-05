@@ -6,17 +6,21 @@ import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
 import { MAX_TITLE_LENGTH } from "@/constants/limits"
-import { apiErrorMessage, apiFetch } from "@/lib/api"
+import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 
 const titleClass =
   "font-heading text-3xl font-medium tracking-tight text-balance normal-case"
 
+/** A page's title, edited in place: `path` takes {"title"}. `maxLength` defaults to a test's
+ * title limit (a company's name is shorter). */
 export function EditableTitle({
   title,
   path,
+  maxLength = MAX_TITLE_LENGTH,
 }: {
   title: string
   path: string
+  maxLength?: number
 }) {
   const t = useTranslations("common")
   const router = useRouter()
@@ -69,8 +73,11 @@ export function EditableTitle({
       setEditing(false)
       router.refresh()
     } catch (error) {
-      // Says why, when a public kit's new title names a company.
-      toast.error(apiErrorMessage(error, t("titleFailed")))
+      // Says why, e.g. when another company already has the name.
+      const refused = error instanceof ApiError && error.status === 409
+      toast.error(
+        refused ? error.message : apiErrorMessage(error, t("titleFailed"))
+      )
     } finally {
       savingRef.current = false
       setSaving(false)
@@ -103,7 +110,7 @@ export function EditableTitle({
   return (
     <input
       ref={inputRef}
-      maxLength={MAX_TITLE_LENGTH}
+      maxLength={maxLength}
       aria-label={t("title")}
       disabled={saving}
       value={value}

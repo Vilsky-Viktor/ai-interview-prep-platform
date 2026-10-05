@@ -14,14 +14,13 @@ TERMS_SECTIONS = [
     {
         "heading": "The service and its limits",
         "items": [
-            "Questions, answers and tutor replies are written by AI and can be wrong. We check and improve them continuously, but don't rely on them as professional advice.",
-            "A prepza certificate shows that you answered every question of a topic on prepza with the required score. It is not an accredited qualification.",
+            "Questions and answers are written by AI and can be wrong. We check and improve them continuously, and a company reviews its interviews before inviting candidates, but a result is one input for a hiring decision, not a qualification.",
         ],
     },
     {
         "heading": "Your content",
         "paragraphs": [
-            "You keep the rights to what you paste and create. You let us store and process it to run prepza, including sending it to our AI provider. When you make a preparation public, anyone can see and practise with it, and its proven questions may help write new preparations.",
+            "You keep the rights to what you paste and create. You let us store and process it to run prepza, including sending it to our AI provider.",
             "Don't paste anything you aren't allowed to share, such as someone else's confidential information.",
         ],
     },
@@ -30,26 +29,41 @@ TERMS_SECTIONS = [
         "items": [
             "Don't use prepza to send unwanted email, to scrape it, or to overload or attack it.",
             "Don't try to get around limits, security or another user's access.",
-            "In an interview, answer on your own and follow the interview's rules; the company sees how long each answer took and when you left the page.",
+            "In an interview, answer on your own and follow its rules; the company sees how long each answer took and when you left the page.",
         ],
     },
     {
         "heading": "Companies",
         "paragraphs": [
-            "A company using prepza for interviews is responsible for inviting candidates lawfully, for telling them how their results are used, and for its hiring decisions. We process candidates' data on the company's behalf; ask us for our data processing terms.",
+            "A company using prepza to interview candidates is responsible for inviting candidates lawfully, for telling them how their results are used, and for its hiring decisions. We process candidates' data on the company's behalf; ask us for our data processing terms.",
+        ],
+        "items": [
+            "A company's logo must be one it has the right to use.",
+            "The verified check means that an owner or admin signed in with a work email on the company's website. It doesn't mean we vouch for the company.",
+            "Anyone with an interview's shareable link can take the interview, and each person who does is charged like an invited candidate. The company decides where it shares the link.",
+            "A company that sends a report is responsible for whom it sends it to.",
+            "Suggested talents may be contacted only about jobs, and their details may not be copied into other lists or sold.",
+        ],
+    },
+    {
+        "heading": "Practice and talent suggestions",
+        "items": [
+            "Practice interviews are free, and their results are private to you.",
+            "If you agree to be suggested, companies hiring for a similar role see your name, your LinkedIn link and the grade of your first round on a similar practice interview. Only a LinkedIn profile link is accepted, and it must be your own.",
+            "Being suggested doesn't mean a company will contact you. You can stop being suggested at any time in Settings.",
         ],
     },
     {
         "heading": "Credits and payments",
         "items": [
-            "prepza is paid with credits: 1 US dollar buys 100 credits, with a bonus on larger top-ups. What each thing costs in credits is on the pricing page and is shown before you use it.",
+            "prepza is paid with credits: 1 US dollar buys 100 credits, and larger top-ups buy more credits per dollar. What each thing costs in credits is on the pricing page and is shown before you use it.",
             "Top-ups are sold by Paddle, who acts as the reseller (merchant of record): Paddle takes the payment, charges any VAT or sales tax, and issues the receipt or invoice.",
-            "Your credits are for your own use on prepza. A company's credits belong to the company and are used for its candidates; any of its admins can top them up. Credits can't be transferred between accounts or companies, sold, or paid out as money.",
+            "Credits belong to a company and are used for its candidates; any of its admins can top them up. Credits can't be transferred between accounts or companies, sold, or paid out as money.",
             "Automatic top-up is optional and off unless you turn it on. When you turn it on, you authorise Paddle to save your card and to charge it the top-up amount you chose each time the available balance falls under the level you chose, without asking again. Paddle emails a receipt for every charge. You can change or turn it off at any time on the top-up page, which also cancels the saved card's authorisation; charges already made follow the refund rules below.",
-            "Credits don't expire. Deleting your account or a company deletes its credits.",
-            "Referrals: when someone who signs up through your link, or a company created through your company's link, first tops up the amount shown on the pricing page, both of you get the referral credits shown there, for up to 25 referrals a year. Referring yourself or your own companies doesn't count, and we may withhold referral credits obtained by abuse.",
+            "Credits don't expire. Deleting a company deletes its credits.",
+            "Referrals: when a company created through your company's link first tops up the amount shown on the pricing page, both companies get the referral credits shown there, for up to 25 referrals a year. Referring your own companies doesn't count, and we may withhold referral credits obtained by abuse.",
             "Some credits are free: the welcome credits, top-up bonuses, referral credits and similar gifts. They are given once, as described on the pricing page, and are never refunded or paid out. Free credits are used before paid ones.",
-            "Credits are only charged for what works: a prep kit that fails or is cancelled, a candidate who never starts or answers nothing, or a tutor reply that fails costs nothing, and credits set aside for them come back.",
+            "Credits are only charged for what works: a candidate who never starts or answers nothing costs nothing, and the credits set aside for them come back. Generating interviews is free.",
             "Refunds: you can ask for a refund of credits you bought in the last 14 days and haven't spent, through Paddle or by writing to us. Once you start using credits you bought, you agree that the service begins at once, and spent credits can't be refunded.",
             "If a payment is refunded or reversed by your bank, the credits it bought are removed. If they were already spent, your balance can go below zero, and credits can't be used until a top-up brings it back up.",
             "We may change prices in credits or the top-up amounts. Changes apply from when they are shown on the pricing page and never take away credits you already have.",

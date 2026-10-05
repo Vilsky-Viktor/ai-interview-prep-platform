@@ -6,8 +6,7 @@ from sqlalchemy import create_engine
 import app.models.feedback  # registers the tables on Base.metadata
 import app.models.outbox
 import app.models.quality
-import app.models.sets
-import app.models.sharing  # noqa: F401
+import app.models.sets  # noqa: F401
 from app.config.settings import settings
 from app.models.base import Base
 

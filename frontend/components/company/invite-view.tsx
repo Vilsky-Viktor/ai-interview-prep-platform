@@ -1,13 +1,12 @@
 "use client"
 
-import { cn } from "cn"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
+import { InviteIntro } from "@/components/company/invite-intro"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { ApiError, apiFetch } from "@/lib/api"
@@ -77,69 +76,26 @@ export function InviteView({ token }: { token: string }) {
   const matches = user?.email?.toLowerCase() === invite.email
 
   return (
-    <div className="w-full space-y-8 text-center">
-      <div className="space-y-4">
-        {invite.company && (
-          <p className="text-base text-muted-foreground">
-            {t.rich("invitedYou", {
-              company: invite.company,
-              b: (chunks) => (
-                <span className="font-medium text-foreground">{chunks}</span>
-              ),
-            })}
-          </p>
-        )}
-        <h1
-          className={cn(
-            "font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl",
-            invite.title && "normal-case"
-          )}
-        >
-          {invite.title ?? t("fallbackTitle")}
-        </h1>
-        {invite.status !== "finished" && (
-          <p className="pt-6 text-base text-muted-foreground">
-            {t("timePerQuestion")}
-            <span className="block">
-              <span className="text-3xl font-medium text-foreground tabular-nums">
-                {invite.question_seconds}
-              </span>{" "}
-              {t("secondsUnit")}
-            </span>
-          </p>
-        )}
-      </div>
-      {invite.status !== "finished" && (
-        <ul className="mx-auto max-w-lg list-disc space-y-2 ps-5 text-start text-base text-muted-foreground">
-          <li>{t("pickOne")}</li>
-          <li>{t("noChange")}</li>
-          <li>{t("timeRunsOut")}</li>
-          <li>{t("unanswered")}</li>
-          <li>{t("saved")}</li>
-          <li>
-            {t.rich("stay", {
-              link: (chunks) => (
-                <Link href="/privacy" className="underline underline-offset-4">
-                  {chunks}
-                </Link>
-              ),
-            })}
-          </li>
-        </ul>
-      )}
-      {invite.status === "finished" ? (
-        <p className="text-base text-muted-foreground">{t("finished")}</p>
-      ) : matches ? (
-        <Button
-          className="h-12 px-6 text-base"
-          disabled={starting}
-          onClick={start}
-        >
-          {invite.status === "in_process" ? t("continue") : t("start")}
-        </Button>
-      ) : (
-        <p className="text-base text-muted-foreground">{t("mismatch")}</p>
-      )}
-    </div>
+    <InviteIntro
+      company={invite.company}
+      logoUrl={invite.logo_url}
+      verifiedDomain={invite.verified_domain}
+      title={invite.title}
+      questionSeconds={invite.question_seconds}
+      finished={invite.status === "finished"}
+      action={
+        matches ? (
+          <Button
+            className="h-12 px-6 text-base"
+            disabled={starting}
+            onClick={start}
+          >
+            {invite.status === "in_process" ? t("continue") : t("start")}
+          </Button>
+        ) : (
+          <p className="text-base text-muted-foreground">{t("mismatch")}</p>
+        )
+      }
+    />
   )
 }

@@ -2,9 +2,6 @@
   "settings": {
     "title": "Configurações",
     "signIn": "Entre para alterar suas configurações.",
-    "general": "Geral",
-    "billing": "Cobrança",
-    "referral": "Convites",
     "language": "Idioma",
     "languageNote": "Para a interface e as respostas do tutor, e o idioma em que novos kits e entrevistas começam. Você pode gerá-los em qualquer idioma disponível.",
     "languageFailed": "Não foi possível alterar o idioma. Tente novamente.",
@@ -14,13 +11,12 @@
     "downloadFailed": "Não foi possível preparar seus dados. Tente novamente.",
     "delete": "Excluir conta",
     "searchLanguage": "Buscar idiomas",
-    "noLanguage": "Nenhum idioma encontrado.",
-    "history": "Histórico de cobrança",
-    "historyNote": "Todos os créditos que entram e saem, os mais recentes primeiro."
+    "noLanguage": "Nenhum idioma encontrado."
   },
   "userMenu": {
     "signIn": "Entrar",
     "account": "Conta",
+    "adminZone": "Área de administração",
     "settings": "Configurações",
     "signOut": "Sair",
     "theme": "Tema",
@@ -34,17 +30,15 @@
     "main": "Principal",
     "legal": "Jurídico",
     "pricing": "Preços",
-    "privacy": "Política de privacidade",
+    "privacy": "Privacidade",
     "terms": "Termos",
     "back": "Voltar",
-    "create": "criar",
-    "explore": "explorar",
-    "myKits": "meus kits",
     "hiring": "contratação",
     "pricingLink": "preços",
     "faq": "Perguntas frequentes",
     "contact": "Contato",
-    "about": "Sobre nós"
+    "about": "Sobre nós",
+    "practice": "Prática gratuita"
   },
   "signIn": {
     "with": "Entrar com",
@@ -80,43 +74,89 @@
     "notFoundText": "Essa página não existe ou foi removida."
   },
   "home": {
-    "tagline": "Agentes de IA praticam com você até você se sentir confiante.",
-    "preparingFor": "Se preparando para",
-    "words": [
-      "uma entrevista",
-      "uma certificação",
-      "um exame",
-      "um teste",
-      "uma promoção"
-    ],
-    "widest": "uma certificação",
-    "mark": "?"
+    "title": "Entreviste todos\nContrate talentos de verdade",
+    "text": "Entrevistas cronometradas criadas a partir da sua descrição de vaga. Questões únicas para cada candidato, e sem tempo para perguntar a uma IA. A partir de $1 por candidato."
   },
-  "goal": {
-    "placeholder": "Cole uma descrição de vaga ou descreva o que você quer aprender…",
-    "label": "Para o que você está se preparando?",
-    "submit": "Gerar preparação",
-    "failed": "Não foi possível iniciar a geração. Tente novamente.",
-    "seePlans": "Recarregar"
+  "start": {
+    "placeholder": "Cole uma descrição de vaga ou descreva a função e o que um candidato deve saber",
+    "description": "Descrição da vaga",
+    "submit": "Criar uma entrevista",
+    "whichCompany": "Para qual empresa é esta entrevista?",
+    "firstCompany": "Qual é o nome da sua empresa?",
+    "newCompany": "Uma nova empresa",
+    "companyName": "Nome da empresa",
+    "freeCandidates": "Sua primeira empresa entrevista {count, plural, one {o primeiro candidato} other {os primeiros # candidatos}} de graça.",
+    "back": "Editar a descrição",
+    "continue": "Continuar",
+    "starting": "Iniciando…",
+    "failed": "Não foi possível iniciar a entrevista. Tente novamente."
   },
-  "membership": {
-    "signIn": "Entre para participar",
-    "leave": "Sair",
-    "join": "Participar para praticar"
+  "superadmin": {
+    "fixNow": "Corrigir agora",
+    "fixing": "Corrigindo…",
+    "dismiss": "Descartar",
+    "fixSent": "Enviado ao verificador. Será corrigida ou substituída em instantes.",
+    "actionFailed": "Não funcionou. Tente novamente.",
+    "quality": "Qualidade",
+    "flagged": "Sinalizadas",
+    "replaced": "Substituídas",
+    "noFlagged": "Nada sinalizado no momento.",
+    "noReplaced": "Nada foi substituído ainda.",
+    "answers": "{count, plural, one {# resposta} other {# respostas}}",
+    "right": "{percent}% de acertos",
+    "reports": "{count, plural, =0 {nenhuma denúncia} one {# denúncia} other {# denúncias}}",
+    "kinds": {
+      "template": "modelo",
+      "interview": "entrevista de empresa"
+    },
+    "flags": {
+      "wrong_key": "a resposta pode estar errada",
+      "rewrite": "precisa de uma nova questão",
+      "weak_options": "precisa de opções melhores"
+    },
+    "zone": "Área de administração",
+    "templates": "Modelos",
+    "new": "Novo modelo",
+    "createTitle": "Criar um modelo",
+    "placeholder": "Cole uma descrição da função ou descreva a função e o que uma pessoa nela deve saber",
+    "description": "Descrição da função",
+    "create": "Gerar",
+    "createFailed": "Não foi possível iniciar o modelo. Tente novamente.",
+    "text": "Entrevistas prontas por função, para empresas e talentos.",
+    "deleteLabel": "Excluir {title}",
+    "deleteTitle": "Excluir este modelo?",
+    "deleteText": "Seus tópicos e questões são excluídos. As entrevistas que as empresas já criaram a partir dele continuam.",
+    "deleteFailed": "Não foi possível excluir o modelo. Tente novamente."
+  },
+  "templates": {
+    "title": "Modelos",
+    "empty": "Ainda não há modelos.",
+    "topics": "{count, plural, one {# tópico} other {# tópicos}}",
+    "search": "Buscar por função ou tópico",
+    "searchAction": "Buscar",
+    "level": "Nível: {level}",
+    "anyLevel": "Qualquer nível",
+    "allLanguages": "Todos os idiomas",
+    "languages": "{count, plural, one {# idioma} other {# idiomas}}",
+    "noMatches": "Nenhum modelo encontrado.",
+    "use": "Usar modelo",
+    "using": "Iniciando…",
+    "useFailed": "Não foi possível iniciar uma entrevista a partir deste modelo. Tente novamente.",
+    "warningTitle": "Os modelos servem para experimentar o prepza.",
+    "warning": "Talentos praticam com eles, então os candidatos podem já conhecer as questões. Para contratações reais, crie uma entrevista a partir da sua descrição de vaga.",
+    "text": "Entrevistas prontas por função. Escolha uma para começar sua entrevista; você pode alterá-la depois."
   },
   "billing": {
     "paid": "Pagamento recebido. Ele aparece aqui em instantes.",
     "checkoutFailed": "Não foi possível abrir o pagamento. Tente novamente.",
     "credits": "{count, plural, one {# crédito} other {# créditos}}",
-    "bonus": "+{count, number} de bônus",
     "topUp": "Recarregar",
-    "balance": "{count} créditos disponíveis. Recarregar",
-    "balanceLow": "{count} créditos disponíveis, acabando. Recarregar",
     "low": "Acabando",
     "creditsWord": "{count, plural, one {crédito} other {créditos}}",
     "topUpTitle": "Recarregar: {name}",
-    "topUpNote": "$1 compra 100 créditos, com bônus em valores maiores. Os créditos não expiram.",
-    "customAmount": "Outro valor"
+    "topUpNote": "Cada recarga compra candidatos inteiros; as maiores custam menos por candidato. Os créditos não expiram.",
+    "candidates": "{count, plural, one {# candidato} other {# candidatos}}",
+    "each": "{price} cada"
   },
   "deleteAccount": {
     "title": "Excluir sua conta?",
@@ -126,83 +166,15 @@
     "deleted": "Sua conta foi excluída.",
     "failed": "Não foi possível excluir sua conta. Tente novamente."
   },
-  "levels": {
-    "basic": "básico",
-    "medium": "intermediário",
-    "hard": "difícil"
-  },
-  "visibility": {
-    "public": "público",
-    "private": "privado"
-  },
-  "library": {
-    "title": "Kits públicos",
-    "search": "Buscar títulos e tópicos",
-    "searchAction": "Buscar",
-    "noMatches": "Nenhuma preparação encontrada.",
-    "empty": "Ainda não há preparações públicas.",
-    "level": "Nível: {level}",
-    "anyLevel": "Qualquer",
-    "languages": "{count, plural, one {# idioma} other {# idiomas}}",
-    "sortBy": "Ordenar por: {sort}",
-    "sort": {
-      "date": "Data",
-      "rating": "Avaliação",
-      "joiners": "Participantes"
-    }
-  },
-  "preparations": {
-    "title": "Meus kits",
-    "new": "Nova preparação",
-    "signIn": "Entre para ver suas preparações.",
-    "empty": "Ainda não há preparações. Crie a primeira ou escolha uma na biblioteca pública.",
-    "topics": "{count, plural, one {# tópico} other {# tópicos}}",
-    "created": "Criado em {date}",
-    "metaTitle": "Preparação",
-    "metaDescription": "Preparação para entrevista de {title}: {count, plural, one {# tópico} other {# tópicos}} de questões de múltipla escolha, com rodadas de prática e certificados.",
-    "history": "Histórico",
-    "page": "Página da preparação",
-    "rounds": "Rodadas",
-    "deleteLabel": "Excluir {title}",
-    "deleteTitle": "Excluir {title}?",
-    "deleteText": "Os tópicos e as questões são excluídos, e todos que participam perdem o acesso. Isso não pode ser desfeito.",
-    "deleteFailed": "Não foi possível excluir a preparação. Tente novamente.",
-    "mastered": "Dominado",
-    "masteredTitle": "Dominado: todos os tópicos têm certificado",
-    "owner": "Dono",
-    "ratingTitle": "Nota média e número de avaliações",
-    "rated": "Obrigado pela avaliação",
-    "ratingUpdated": "Avaliação atualizada",
-    "ratingFailed": "Não foi possível salvar sua avaliação. Tente novamente.",
-    "rateIt": "Avalie",
-    "rate": "Avaliar com {value} de {scale}",
-    "public": "Pública",
-    "nowPublic": "Agora listada na biblioteca pública",
-    "nowPrivate": "Agora é privada",
-    "visibilityFailed": "Não foi possível alterar a visibilidade. Tente novamente."
-  },
   "share": {
-    "share": "Compartilhar",
-    "title": "Compartilhar preparação",
-    "public": "Qualquer pessoa com o link pode ver esta preparação.",
-    "private": "Vamos enviar um link de convite por e-mail. Só esse endereço pode aceitá-lo.",
-    "email": "E-mail",
-    "send": "Enviar",
     "sent": "Convite enviado para {email}",
     "checkEmail": "Confira o endereço de e-mail e tente novamente.",
     "failed": "Não foi possível enviar o convite.",
-    "joined": "Participando",
-    "undelivered": "Não entregue",
-    "invited": "Convidado",
     "wrongEmail": "Este convite foi enviado para outro endereço de e-mail.",
     "acceptFailed": "Não foi possível aceitar o convite. Tente novamente.",
-    "signIn": "Entre com o e-mail do convite para participar desta preparação.",
     "invalid": "Este convite não é mais válido.",
     "invitedToJoin": "Você foi convidado a participar.",
-    "open": "Abrir preparação",
-    "join": "Participar da preparação",
-    "mismatch": "O e-mail não confere. Entre com o e-mail do convite para participar.",
-    "inviteTitle": "Convite de compartilhamento"
+    "mismatch": "O e-mail não confere. Entre com o e-mail do convite para participar."
   },
   "reportReasons": {
     "wrong_answer": "A resposta marcada está errada",
@@ -221,6 +193,18 @@
     "reports": "Denúncias",
     "showReports": "Mostrar denúncias ({count})",
     "regenerate": "Gerar novamente",
+    "manage": "Gerenciar questões",
+    "wrongAnswer": "Resposta errada",
+    "checking": "Verificando…",
+    "markedWrong": "Obrigado. Está sendo verificada e será corrigida ou substituída.",
+    "markWrongFailed": "Não foi possível enviar para verificação. Tente novamente.",
+    "ofCount": "de {count, number}",
+    "per": "por",
+    "candidate": "candidato",
+    "showOptions": "Mostrar opções de resposta",
+    "hideOptions": "Ocultar opções de resposta",
+    "correct": "Resposta correta",
+    "wrong": "Resposta errada",
     "regenerating": "Gerando novamente…",
     "regenerated": "Questão gerada novamente",
     "regenerateFailed": "Não foi possível gerar a questão novamente. Tente novamente.",
@@ -233,79 +217,27 @@
     "selectReason": "Escolha um motivo",
     "details": "Detalhes",
     "showLess": "Mostrar menos",
+    "more": "+{count, number} mais",
     "showAll": "Mostrar tudo",
     "limitRange": "Digite um número de 1 a {count}.",
     "limitFailed": "Não foi possível salvar o limite.",
     "limit": "Limite de questões",
-    "of": "de",
     "count": "{count, plural, one {questão} other {questões}}",
-    "loadFailed": "Não foi possível carregar as questões."
-  },
-  "certificate": {
-    "title": "Certificado",
-    "metaDescription": "{name} concluiu {topic} com nota de {score}%.",
-    "heading": "Certificado de conquista",
-    "for": "Por concluir com sucesso:",
-    "finalScore": "Nota final",
-    "issued": "Emitido",
-    "howTo": "Como conquistar o certificado"
+    "loadFailed": "Não foi possível carregar as questões.",
+    "yourAnswer": "sua resposta"
   },
   "rounds": {
-    "title": "Rodada",
-    "rounds": "Rodadas",
-    "compare": "Comparar",
-    "compareTitle": "Comparar rodadas",
     "answered": "Respondidas",
     "correct": "Correta",
     "incorrect": "Incorreta",
     "notAnswered": "Não respondida",
-    "correctAnswer": "Resposta correta",
-    "yourAnswer": "Sua resposta",
-    "askFollowUp": "Fazer uma pergunta complementar",
-    "followUp": "Pergunta complementar",
-    "followUpPlaceholder": "Faça uma pergunta complementar…",
-    "replyFailed": "Não foi possível obter uma resposta. Tente novamente.",
-    "firstRound": "Sua primeira rodada neste tópico",
-    "sameAsLast": "Igual à sua última rodada",
-    "change": "{change} pontos desde sua última rodada",
-    "topicAnswered": "Tópico: {answered} de {total} questões respondidas",
-    "answeredOf": "{answered} de {total} respondidas",
-    "finalScore": "Nota final",
-    "certificate": "Certificado",
-    "history": "Histórico",
-    "preparationPage": "Página da preparação",
-    "noRounds": "Ainda não há rodadas.",
-    "selectToCompare": "Selecionar para comparar",
-    "grade": "nota",
-    "continue": "Continuar",
-    "start": "Começar",
     "finish": "Concluir",
     "finishing": "Concluindo…",
-    "finishRound": "Concluir rodada",
-    "deleteRound": "Excluir rodada",
-    "finishTitle": "Concluir esta rodada?",
-    "deleteTitle": "Excluir esta rodada?",
-    "unscored": "Questões não respondidas não serão pontuadas.",
-    "noMore": "Você não poderá responder mais questões.",
-    "cantUndo": "Isso não pode ser desfeito.",
-    "deleteFailed": "Não foi possível excluir a rodada. Tente novamente.",
-    "finishFailed": "Não foi possível concluir a rodada. Tente novamente.",
-    "startFailed": "Não foi possível começar a rodada. Tente novamente.",
-    "answerFailed": "Não foi possível salvar sua resposta. Tente novamente.",
-    "signIn": "Entre para continuar esta rodada.",
-    "missing": "Esta rodada não existe.",
-    "allAnswered": "Você respondeu todas as questões desta rodada.",
     "next": "Próxima questão",
-    "progress": "Questões respondidas rumo ao certificado",
-    "nextFailed": "Não foi possível carregar a próxima questão. Tente novamente.",
-    "submitFailed": "Não foi possível enviar sua resposta. Tente novamente.",
-    "freeTurns": "{count, plural, one {Resta # interação gratuita} other {Restam # interações gratuitas}} com o tutor nesta questão",
-    "paidTurns": "Cada nova interação nesta questão custa {count, plural, one {# crédito} other {# créditos}}",
-    "buyCertificate": "Obter certificado · {count} créditos",
-    "makeItYours": "Se preparando para uma vaga específica? Cole o texto da vaga e receba um kit feito para ela.",
-    "makeItYoursAction": "Faça o seu"
+    "submitFailed": "Não foi possível enviar sua resposta. Tente novamente."
   },
   "session": {
+    "toTest": "Ir para as entrevistas",
     "startFailed": "Não foi possível começar a entrevista. Tente novamente.",
     "finishFailed": "Não foi possível concluir a entrevista. Tente novamente.",
     "continueFailed": "Não foi possível continuar. Tente novamente.",
@@ -357,17 +289,7 @@
     "changes": "Mudanças nos tópicos",
     "tooMany": "Escolha no máximo {max} tópicos ou descreva como juntá-los.",
     "apply": "Aplicar mudanças",
-    "approve": "Aprovar e gerar",
-    "approvePrice": "Aprovar e gerar · {count} créditos",
-    "unfinished": "Não concluídas"
-  },
-  "generationStatus": {
-    "queued": "Gerando",
-    "running": "Gerando",
-    "awaiting_review": "Revisar tópicos",
-    "done": "Pronto",
-    "failed": "Falhou",
-    "cancelled": "Cancelada"
+    "approve": "Aprovar e gerar"
   },
   "candidateStatus": {
     "invited": "convidado",
@@ -375,7 +297,9 @@
     "in_process": "em andamento",
     "finished": "concluído",
     "deleted": "excluído",
-    "expired": "expirado"
+    "expired": "expirado",
+    "passed": "aprovado",
+    "flagged": "sinalizado"
   },
   "roles": {
     "owner": "dono",
@@ -391,17 +315,17 @@
     "owner": "Dono",
     "interviewCount": "{count, plural, one {# entrevista} other {# entrevistas}}",
     "interviews": "Entrevistas",
+    "templates": "Modelos",
     "admins": "Administradores",
     "referrals": "Convites",
     "new": "Nova empresa",
-    "newText": "Crie uma empresa para gerar entrevistas e convidar candidatos.",
     "name": "Nome da empresa",
     "create": "Criar",
     "createFailed": "Não foi possível criar a empresa. Tente novamente.",
     "signInJoin": "Entre com o e-mail do convite para participar desta empresa.",
     "open": "Abrir empresa",
     "join": "Participar da empresa",
-    "creditsLeft": "{count, plural, one {crédito disponível} other {créditos disponíveis}}",
+    "creditsLeft": "{count, plural, one {crédito} other {créditos}}",
     "creditsLow": "Acabando: recarregue para continuar convidando candidatos.",
     "timeLeft": "Tempo restante: {time}",
     "removeLabel": "Remover {name}",
@@ -409,7 +333,12 @@
     "removeText": "Suas entrevistas e convites serão excluídos.",
     "remove": "Remover",
     "removeFailed": "Não foi possível remover a empresa.",
-    "page": "Empresa"
+    "page": "Empresa",
+    "logo": "Logotipo",
+    "uploadLogo": "Enviar logotipo",
+    "changeLogo": "Trocar logotipo",
+    "removeLogo": "Remover logotipo",
+    "logoFailed": "Não foi possível salvar o logotipo."
   },
   "candidates": {
     "scorecard": "Resultados",
@@ -421,6 +350,11 @@
     "copies": "{count, plural, one {# tentativa de cópia} other {# tentativas de cópia}}",
     "fastAnswers": "{count, plural, one {# resposta rápida} other {# respostas rápidas}}",
     "empty": "Nenhum candidato convidado ainda.",
+    "noMatches": "Nenhum candidato encontrado.",
+    "search": "Buscar candidatos por e-mail",
+    "searchAction": "Buscar",
+    "status": "Status: {status}",
+    "anyStatus": "qualquer status",
     "progress": "Progresso",
     "grade": "Nota",
     "resend": "Reenviar convite",
@@ -438,11 +372,27 @@
       "date": "Data"
     }
   },
+  "interviewStatus": {
+    "new": "Novo",
+    "in_process": "Em andamento",
+    "hired": "Contratado"
+  },
   "interviews": {
     "title": "Entrevistas",
     "interview": "Entrevista",
     "candidates": "Candidatos",
     "new": "Nova entrevista",
+    "createTitle": "Criar uma entrevista",
+    "try": "Experimentar como candidato",
+    "newCandidate": "Novo(s) candidato(s)",
+    "linkTitle": "Link compartilhável",
+    "linkText": "Para um anúncio de vaga: qualquer pessoa com o link pode fazer a entrevista. Cada pessoa é cobrada como um candidato convidado.",
+    "linkFailed": "Não foi possível alterar o link. Tente novamente.",
+    "passMark": "Nota de aprovação",
+    "passMarkLabel": "Nota de aprovação em porcentagem",
+    "markHired": "Marcar como contratado",
+    "tryLabel": "Experimentar {title} como candidato",
+    "tryFailed": "Não foi possível iniciar a prévia. Tente novamente.",
     "generating": "Gerando…",
     "fallbackTitle": "entrevista",
     "continueGeneration": "Continuar geração",
@@ -461,12 +411,22 @@
     "adminEmail": "E-mail do administrador",
     "addAdmin": "Adicionar administrador",
     "adminFailed": "Não foi possível convidar esse administrador. Tente novamente.",
-    "candidateEmail": "E-mail do candidato",
     "invite": "Convidar",
     "jobDescription": "Descrição da vaga",
     "pasteJob": "Cole a descrição da vaga: a função, os requisitos e os diferenciais…",
     "generate": "Gerar entrevista",
-    "startFailed": "Não foi possível começar a entrevista. Tente novamente."
+    "startFailed": "Não foi possível começar a entrevista. Tente novamente.",
+    "candidateEmails": "E-mails dos candidatos",
+    "emailsHint": "Um ou vários e-mails, separados por vírgulas ou quebras de linha",
+    "uploadFile": "Enviar arquivo",
+    "invitedMany": "{count} candidatos convidados",
+    "skip": {
+      "invalid": "{count, plural, one {# e-mail não é válido} other {# e-mails não são válidos}}.",
+      "limit": "{count, plural, one {# e-mail ultrapassa} other {# e-mails ultrapassam}} seu limite de e-mails por enquanto. Tente novamente em uma hora.",
+      "no_credits": "{count, plural, one {# candidato não foi convidado} other {# candidatos não foram convidados}}: créditos esgotados. Recarregue para convidá-los.",
+      "failed": "{count, plural, one {# convite não pôde ser enviado} other {# convites não puderam ser enviados}}. Tente novamente."
+    },
+    "talents": "Talentos sugeridos"
   },
   "invite": {
     "signIn": "Entre com o e-mail do convite para fazer esta entrevista.",
@@ -479,7 +439,7 @@
     "timeRunsOut": "Quando o tempo de uma questão acaba, ela conta como errada e a próxima abre. O relógio continua correndo se você sair.",
     "unanswered": "Questões não respondidas contam como erradas.",
     "saved": "O progresso é salvo: use este link de novo para continuar.",
-    "stay": "Fique nesta página: sair dela ou copiar é registrado (<link>como tratamos isso</link>).",
+    "stay": "Fique nesta página: sair dela ou copiar é registrado (<link>privacidade</link>).",
     "finished": "Esta entrevista já foi concluída.",
     "continue": "Continuar",
     "start": "Aceitar e começar",
@@ -503,29 +463,18 @@
   },
   "pricing": {
     "title": "Preços",
-    "intro": "Pague só pelo que usar: $1 compra 100 créditos, e os créditos não expiram. Sem assinaturas.",
-    "learners": "Para quem estuda",
-    "welcome": "Ao se cadastrar",
-    "referrals": "Convites",
-    "referralsNote": "Compartilhe seu link em Configurações, ou o link de uma empresa na aba de convites dela.",
-    "referral": "Um amigo que você convidou faz a primeira recarga",
-    "companyReferral": "Uma empresa que você convidou faz a primeira recarga de ${min} ou mais",
-    "each": "{count, number} créditos para cada",
-    "credits": "{count, plural, one {# crédito} other {# créditos}}",
-    "companies": "Para empresas",
-    "kit": "Seu próprio kit, criado a partir de uma descrição de vaga",
-    "chat": "Tutor de IA: {free, plural, one {# interação grátis} other {# interações grátis}} por questão, depois",
-    "perTurn": "{count, plural, one {# crédito} other {# créditos}} por interação",
-    "ownCertificate": "Certificado no seu kit ou em um kit compartilhado",
-    "publicCertificate": "Certificado em um kit público",
-    "publicPractice": "Prática em kits públicos ({count, plural, one {# novo tópico} other {# novos tópicos}} por dia)",
-    "draftTopics": "Tópicos propostos para a sua vaga ou objetivo",
-    "gift": "{count, number} créditos grátis",
+    "intro": "Pague por candidato. Gerar entrevistas é grátis, e não há assinaturas.",
+    "test": "Gerar uma entrevista",
     "free": "Grátis",
-    "interview": "Gerar uma entrevista",
-    "candidate": "Cada candidato que conclui e responde pelo menos uma questão",
-    "companyWelcome": "Sua primeira empresa",
-    "openCompanies": "Empresas",
+    "candidate": "Cada candidato que responde pelo menos uma questão",
+    "candidateVolume": "Com créditos de uma recarga de ${from, number} ou mais",
+    "perCandidate": "${dollars, number} por candidato",
+    "welcome": "{count, plural, one {Seu primeiro candidato} other {Seus primeiros # candidatos}}",
+    "credits": "$1 = 100 créditos, e os créditos não expiram.",
+    "referrals": "Convites",
+    "referralsNote": "Compartilhe o link da sua empresa na aba de convites dela.",
+    "companyReferral": "Uma empresa que você convidou faz sua primeira recarga",
+    "each": "{count, number} créditos para cada",
     "topUp": "Recarregar"
   },
   "site": {
@@ -534,22 +483,6 @@
   "legal": {
     "updated": "Última atualização",
     "englishOnly": "Este documento está disponível apenas em inglês."
-  },
-  "credits": {
-    "noHistory": "Nada ainda.",
-    "reasons": {
-      "welcome": "Presente de boas-vindas",
-      "topup": "Recarga",
-      "kit": "Kit",
-      "candidate": "Candidato",
-      "certificate": "Certificado",
-      "author_share": "Seu kit público gerou um certificado",
-      "chat": "Interação com o tutor",
-      "refund": "Reembolso",
-      "chargeback": "Pagamento estornado pelo banco",
-      "chargeback_reversed": "Pagamento estornado restaurado",
-      "referral": "Recompensa por convite"
-    }
   },
   "autoTopUp": {
     "title": "Recarga automática",
@@ -572,43 +505,42 @@
     "label": "Gerar em"
   },
   "referral": {
-    "title": "Convide amigos",
-    "note": "Vocês dois ganham {reward, number} créditos quando seu amigo fizer a primeira recarga.",
     "companyTitle": "Convide outra empresa",
-    "companyNote": "As duas empresas ganham {reward, number} créditos quando a nova fizer uma recarga de ${min} ou mais.",
+    "companyNote": "Vocês dois recebem {reward, number} créditos quando ela fizer a primeira recarga, de qualquer valor.",
+    "deletedCompany": "Uma empresa excluída",
+    "credits": "+{count, number} créditos",
     "rewarded": "{count, plural, =0 {Nenhuma recompensa ainda.} one {Recompensado # vez até agora.} other {Recompensado # vezes até agora.}}"
   },
   "topUp": {
     "title": "Recarregar",
     "intro": "$1 compra 100 créditos, e os créditos não expiram.",
     "signIn": "Entre para recarregar seus créditos.",
-    "yours": "Saldo pessoal",
-    "personal": "Créditos pessoais",
-    "personalNote": "Para seus kits, o tutor de IA e os certificados.",
     "companies": "Créditos das empresas",
     "companiesNote": "Para os candidatos de cada empresa.",
+    "noCompany": "Os créditos pertencem a uma empresa. Crie sua empresa primeiro e depois recarregue aqui.",
+    "createCompany": "Criar uma empresa",
     "pricing": "Preços"
   },
   "landing": {
     "more": "Como funciona",
     "how": {
-      "title": "Três passos até estar pronto",
+      "title": "Três passos até os primeiros resultados",
       "paste": {
-        "title": "Cole ou descreva",
-        "text": "Uma descrição de vaga, um programa de estudos ou as habilidades e tecnologias que você quer aprender."
+        "title": "Cole a descrição da vaga",
+        "text": "Qualquer função, qualquer idioma.\nO prepza identifica o que um candidato precisa saber e propõe tópicos."
       },
       "review": {
-        "title": "Revise o plano",
-        "text": "Agentes de IA destacam o que importa e propõem tópicos.\nMantenha, renomeie ou altere."
+        "title": "Confira os tópicos",
+        "text": "Mantenha, renomeie ou altere.\nNenhuma questão é escrita até você aprovar."
       },
-      "practice": {
-        "title": "Pratique até se sentir confiante",
-        "text": "Cada tópico ganha suas próprias questões.\nPratique em rodadas e veja seu progresso crescer."
+      "invite": {
+        "title": "Convide candidatos",
+        "text": "Cole uma lista, envie um arquivo ou compartilhe um link.\nOs lembretes são enviados sozinhos. Você vê quem conhece o trabalho, ordenado pela pontuação."
       }
     },
     "control": {
-      "title": "Você decide o que estudar",
-      "text": "Nenhuma questão é escrita até você aprovar os tópicos. Desmarque o que já sabe, renomeie um tópico, edite seus subtópicos ou simplesmente diga à IA o que mudar e deixe que ela faça o resto.",
+      "title": "Você decide o que é avaliado",
+      "text": "Nenhuma questão é escrita até você aprovar os tópicos. Desmarque o que a função não exige, renomeie um tópico, edite seus subtópicos ou diga à IA o que mudar.",
       "topics": {
         "design": "Design de sistemas",
         "sql": "Marketing de conteúdo",
@@ -634,43 +566,9 @@
         "Medição de visualizações"
       ]
     },
-    "gaps": {
-      "title": "Prática que encontra suas lacunas",
-      "text": "Cada rodada traz de novo todas as questões do tópico, começando pelas que você errou da última vez. Compare rodadas e veja suas lacunas se fecharem.",
-      "items": {
-        "first": {
-          "question": "Qual métrica mostra quem assistiu a um anúncio até o fim?",
-          "wrong": "Taxa de cliques",
-          "right": "Taxa de visualização"
-        },
-        "second": {
-          "question": "O que um cache reduz principalmente?",
-          "wrong": "Custos de armazenamento",
-          "right": "Tempo de resposta"
-        }
-      }
-    },
-    "tutor": {
-      "title": "Um tutor para cada questão",
-      "text": "Depois de cada resposta você vê na hora a opção certa. Não sabe por que ela está certa? Pergunte ao tutor de IA e aprofunde o quanto precisar.",
-      "question": "Um cliente está chateado com uma entrega atrasada. O que você faz primeiro?",
-      "options": {
-        "first": "Explicar o motivo do atraso",
-        "second": "Reconhecer o problema e pedir desculpas",
-        "third": "Oferecer um desconto na hora",
-        "fourth": "Passar o caso para um gerente"
-      },
-      "ask": "Por que não explicar primeiro?",
-      "answer": "Reconheça primeiro: as pessoas ouvem os motivos quando se sentem ouvidas."
-    },
-    "proof": {
-      "title": "Saiba quando você está pronto",
-      "text": "Cada tópico tem uma barra de progresso até o certificado. Conquiste-o e o tópico conta como dominado.",
-      "again": "Recomeçar"
-    },
     "quality": {
-      "title": "Questões que melhoram sozinhas",
-      "text": "Curtidas, descurtidas e denúncias revelam questões fracas. Um verificador de IA as corrige ou substitui automaticamente, e os donos do kit podem gerar qualquer questão novamente por conta própria.",
+      "title": "Questões que se corrigem sozinhas",
+      "text": "As respostas, avaliações e denúncias dos candidatos revelam questões fracas. Um verificador de IA as corrige ou substitui automaticamente, e você mesmo pode gerar qualquer questão novamente.",
       "items": {
         "good": "O que um índice de banco de dados acelera?",
         "weak": "Qual é a melhor linguagem de programação?",
@@ -679,45 +577,89 @@
       "comment": "Depende do projeto, então não existe uma única resposta certa.",
       "list": "Questões do tópico"
     },
-    "share": {
-      "title": "Compartilhe ou publique",
-      "text": "Convide amigos ou colegas por e-mail para praticar seu kit com você, ou publique-o na biblioteca pública para todos que se preparam para o mesmo.",
-      "private": "Compartilhar em particular",
-      "public": "Compartilhar publicamente",
-      "browse": "Explorar a biblioteca"
+    "try": {
+      "title": "Experimente antes dos seus candidatos",
+      "text": "Faça uma entrevista de prática gratuita para uma função parecida ou abra sua própria entrevista como candidato antes de convidar alguém.",
+      "browse": "Ver entrevistas de prática",
+      "topic": "Design de sistemas",
+      "question": "O que um cache na frente de um banco de dados reduz principalmente?",
+      "options": {
+        "a": "O tamanho do banco de dados",
+        "b": "A frequência de leituras do banco de dados",
+        "c": "O número de tabelas",
+        "d": "O tempo que os backups levam"
+      },
+      "points": {
+        "practice": "Entrevistas de prática gratuitas para muitas funções",
+        "preview": "Sua própria entrevista como candidato"
+      }
+    },
+    "link": {
+      "title": "Um link para o seu anúncio de vaga",
+      "text": "Coloque o link da entrevista no seu anúncio de vaga. Quem se candidatar faz a entrevista na hora e aparece na sua lista de candidatos, ordenada pela pontuação.",
+      "note": "Qualquer pessoa com o link pode fazer a entrevista.",
+      "points": {
+        "anywhere": "Em sites de vagas, no LinkedIn ou no seu site",
+        "off": "Desative quando a vaga for preenchida"
+      }
     },
     "companies": {
-      "title": "Contratando? Avalie candidatos com justiça",
-      "text": "Transforme uma descrição de vaga em uma entrevista cronometrada e convide candidatos para avaliá-los.",
+      "title": "Veja quem conhece o trabalho",
+      "text": "Os candidatos fazem a entrevista a partir do seu convite por e-mail. As pontuações chegam conforme eles respondem, em verde ou vermelho conforme a sua nota de aprovação.",
       "points": {
         "own": "Questões únicas para cada candidato",
         "timed": "Contagem regressiva em cada questão",
         "flags": "Alertas de pressa, saída ou cópia",
-        "private": "Candidatos não veem a pontuação"
+        "private": "Os candidatos nunca veem suas pontuações"
       },
       "candidate": "Candidato",
       "score": "Pontuação",
       "rushed": "Respostas apressadas",
       "left": "Saiu da página",
-      "start": "Começar a contratar"
+      "role": "Desenvolvedor backend · nota de aprovação {mark}%"
+    },
+    "reports": {
+      "title": "Compartilhe resultados com um clique",
+      "text": "Um relatório em PDF claro para um candidato ou para a lista inteira. Baixe-o ou envie-o a um gestor de contratação direto do prepza.",
+      "points": {
+        "pdf": "Um candidato ou todos eles",
+        "share": "PDF por e-mail ou compartilhamento em mensageiros"
+      }
+    },
+    "brand": {
+      "title": "Sua marca, verificada",
+      "text": "Os candidatos veem seu logotipo do primeiro e-mail à última questão, com um selo que mostra que sua empresa é real.",
+      "role": "Desenvolvedor backend",
+      "points": {
+        "email": "Seu logotipo no e-mail de convite",
+        "interview": "Na entrevista que os candidatos fazem",
+        "report": "Em todo relatório em PDF",
+        "verified": "Verificada pelo e-mail corporativo da sua equipe"
+      }
+    },
+    "talent": {
+      "title": "Receba sugestões de talentos",
+      "text": "Os melhores colocados nas nossas entrevistas de prática gratuitas, sugeridos para a sua vaga. De graça.",
+      "suggested": "Sugeridos para Desenvolvedor backend",
+      "score": "Pontuação",
+      "points": {
+        "free": "Grátis para você e para os talentos",
+        "practice": "Pontuados em entrevistas cronometradas",
+        "first": "Só a primeira tentativa conta",
+        "link": "Eles escolhem ser sugeridos"
+      }
     },
     "languages": {
-      "title": "No seu idioma",
-      "text": "Use o prepza em qualquer um dos {count} idiomas. Cole uma descrição de vaga em um idioma e pratique em outro."
+      "title": "Qualquer função, qualquer idioma",
+      "text": "O prepza funciona em {count} idiomas. Cole uma descrição de vaga em um idioma e entreviste candidatos em outro."
     },
     "pricing": {
-      "title": "Pague só pelo que funciona",
-      "text": "Sem assinaturas nem planos. Recarregue quando precisar: os créditos não expiram, e o que falhar não custa nada.",
+      "title": "Pague por candidato",
+      "text": "As entrevistas e {free, plural, one {seu primeiro candidato} other {seus primeiros # candidatos}} são grátis. Depois, pague só pelos candidatos que respondem, sem assinatura.",
       "see": "Ver preços",
-      "company": "Acme Inc.",
-      "personal": "Para seus kits e o tutor de IA.",
-      "learner": "Créditos pessoais"
-    },
-    "referrals": {
-      "title": "Ganhe créditos como afiliado",
-      "text": "Convide amigos ou outras empresas com o seu link. Quando eles recarregarem pela primeira vez, vocês dois ganham créditos.",
-      "whereLearner": "Seu link fica em {settings} → {referral}.",
-      "whereCompany": "O link da sua empresa fica em {hiring} → sua empresa → {referrals}."
+      "perCandidate": "por candidato",
+      "base": "Pague conforme o uso",
+      "volume": "Com uma recarga a partir de ${from, number}"
     },
     "faq": {
       "title": "Ainda tem dúvidas?",
@@ -725,8 +667,8 @@
       "read": "Ver perguntas frequentes"
     },
     "ready": {
-      "title": "Pronto para se preparar?",
-      "start": "Começar agora"
+      "title": "Pronto para entrevistar seus primeiros candidatos?",
+      "start": "Criar uma entrevista"
     }
   },
   "faq": {
@@ -753,14 +695,15 @@
   },
   "about": {
     "title": "Sobre nós",
-    "intro": "O prepza ajuda você a se preparar com confiança e oferece às empresas uma forma simples e acessível de avaliar candidatos.",
+    "intro": "O prepza ajuda empresas a encontrar pessoas que realmente conhecem o trabalho: uma entrevista justa e cronometrada, criada a partir da sua descrição de vaga, por um preço que qualquer equipe pode pagar. E quem está se preparando para uma entrevista pode praticar de graça.",
     "company": {
       "title": "Por que existimos",
-      "learners": "Se preparar para uma entrevista, uma prova ou uma nova habilidade não deveria começar com horas de pesquisa. Conte ao prepza aonde você quer chegar, e ele transforma isso em um plano claro: os tópicos que importam, questões de prática para cada um e um tutor que explica cada resposta até tudo fazer sentido.",
-      "companies": "Para as empresas, queremos que contratar seja justo e esteja ao alcance de qualquer equipe, não só das grandes. Transforme uma descrição de vaga em uma entrevista cronometrada em minutos, dê a cada candidato suas próprias questões e pague apenas pelos candidatos que realmente a fizerem."
+      "problem": "Contratar muitas vezes depende de um currículo e de uma boa conversa, e os dois podem enganar. As ferramentas de avaliação que ajudam têm preços pensados para grandes empresas, com planos anuais e cobrança por usuário, então a maioria das equipes fica sem elas.",
+      "approach": "O prepza transforma uma descrição de vaga em uma entrevista cronometrada em minutos, para qualquer função. Cada candidato recebe suas próprias questões, você vê quem conhece o trabalho e por quê, e paga só pelos candidatos que realmente fazem a entrevista.",
+      "practice": "Também queremos que se preparar para uma entrevista seja gratuito para todos. Qualquer pessoa pode fazer nossas entrevistas de prática para uma função, ver sua nota e todas as respostas certas e praticar de novo, sem custo. Quem vai bem pode escolher ser sugerido a empresas que contratam para uma função parecida."
     },
     "founder": {
-      "quote": "Sempre que eu me preparava para uma entrevista ou tentava aprender algo novo, passava mais tempo procurando um bom material do que estudando de fato. Cada site cobria uma parte, e nenhum se encaixava no que eu precisava. Então criei o prepza: a ferramenta que eu queria ter tido, que parte do seu objetivo e guia você até ele. Espero que ele poupe a você as horas que teria me poupado.",
+      "quote": "Contratar bem não deveria ser privilégio de grandes empresas com grandes orçamentos. Criei o prepza para que qualquer equipe possa transformar uma descrição de vaga em uma entrevista justa em minutos, ver quem realmente conhece o trabalho e pagar só pelos candidatos que fazem a entrevista. Espero que ele ajude você a encontrar as pessoas certas mais rápido.",
       "role": "Fundador solo do prepza"
     }
   },
@@ -771,7 +714,6 @@
     "kinds": {
       "question_flagged": "{count, plural, one {Uma questão sobre “{topic}” de “{title}” foi sinalizada para revisão.} other {# questões de “{title}” foram sinalizadas para revisão.}}",
       "question_fixed": "{count, plural, one {A IA corrigiu uma questão sinalizada sobre “{topic}” de “{title}”.} other {A IA corrigiu # questões sinalizadas de “{title}”.}}",
-      "kit_ready": "Seu kit “{title}” está pronto.",
       "referral_rewarded": "Alguém que você convidou fez uma recarga. Você ganhou {credits} créditos.",
       "auto_top_up_charged": "A recarga automática adicionou {credits} créditos.",
       "auto_top_up_failed": "A recarga automática não conseguiu cobrar o cartão. Recarregue para não ficar sem saldo.",
@@ -780,5 +722,77 @@
       "interview_ready": "A entrevista “{title}” está pronta.",
       "interview_cancelled": "{title, select, none {Uma entrevista} other {A entrevista “{title}”}} foi cancelada: a revisão dos tópicos esperou demais."
     }
+  },
+  "report": {
+    "download": "Baixar PDF",
+    "passed": "aprovado · nota de aprovação {mark}%",
+    "notPassed": "não aprovado · nota de aprovação {mark}%",
+    "notFinished": "ainda não concluído",
+    "share": "Compartilhar relatório",
+    "fileName": "Relatório {email}",
+    "failed": "Não foi possível gerar o relatório em PDF.",
+    "shareTitle": "Compartilhar relatório",
+    "recipient": "E-mail do destinatário",
+    "send": "Enviar <name>PDF</name>",
+    "sent": "Relatório enviado para {email}",
+    "sendFailed": "Não foi possível enviar o relatório.",
+    "orSummary": "Ou envie por",
+    "via": "Enviado pelo prepza",
+    "candidatesFileName": "Candidatos {title}",
+    "candidateCount": "{count, plural, one {# candidato} other {# candidatos}}",
+    "passMark": "nota de aprovação {mark}%",
+    "progressOf": "{progress}% concluído"
+  },
+  "practice": {
+    "title": "Prática de entrevista gratuita",
+    "intro": "Pratique para uma função com uma entrevista cronometrada e depois veja sua nota e todas as respostas certas. Sem custo.",
+    "about": "Entrevista de prática cronometrada. Ao terminar, veja sua nota e todas as respostas certas. Privada e gratuita.",
+    "pageTitle": "{title}: entrevista de prática gratuita",
+    "pageDescription": "Uma entrevista de prática gratuita de nível {level} para {title}: {count, plural, one {# tópico} other {# tópicos}}, cronometrada, com sua nota e todas as respostas certas no final. É prática, não uma entrevista de emprego real.",
+    "start": "Começar a prática",
+    "again": "Praticar de novo",
+    "continue": "Continuar",
+    "history": "Suas rodadas",
+    "results": "Resultados da prática",
+    "grade": "das questões certas",
+    "notFinished": "não concluída",
+    "noRounds": "Ainda não há rodadas.",
+    "signIn": "Entre para ver suas rodadas de prática.",
+    "startFailed": "Não foi possível iniciar a prática. Tente novamente.",
+    "gradeLabel": "Nota",
+    "questions": "{count, plural, one {# questão} other {# questões}}",
+    "progressLabel": "Progresso",
+    "answeredLabel": "questões respondidas"
+  },
+  "suggest": {
+    "title": "Seja sugerido para empresas",
+    "consent": "Opcional. Empresas contratando para funções parecidas podem ver seu nome, seu LinkedIn e a pontuação da sua primeira rodada. Altere ou retire a qualquer momento nas configurações.",
+    "link": "Link do LinkedIn",
+    "share": "Compartilhar",
+    "saved": "Agora você pode ser sugerido para empresas.",
+    "withdraw": "Retirar",
+    "withdrawn": "Você não será mais sugerido para empresas.",
+    "invalid": "Use o link do seu perfil do LinkedIn, como https://www.linkedin.com/in/your-name",
+    "failed": "Não foi possível salvar. Tente novamente.",
+    "shareAndStart": "Aceitar e começar",
+    "startWithout": "Recusar e começar"
+  },
+  "talents": {
+    "about": "Talentos que foram bem praticando uma entrevista para uma função como esta e aceitaram ser sugeridos.",
+    "empty": "Ainda não há talentos sugeridos.",
+    "score": "Pontuação",
+    "hide": "Ocultar",
+    "hideFailed": "Não foi possível ocultar o talento. Tente novamente."
+  },
+  "verify": {
+    "verify": "Verificar",
+    "verified": "Verificada: {domain}",
+    "title": "Verificar empresa",
+    "text": "Informe o site da empresa. Ela é verificada quando um dono ou administrador entra com um e-mail corporativo desse domínio, como you@acme.com: na hora, se for você.",
+    "website": "Site da empresa",
+    "save": "Salvar",
+    "done": "Verificada: {domain}",
+    "pending": "Salvo. Verificada quando um dono ou administrador entrar com um e-mail em {domain}.",
+    "failed": "Não foi possível salvar o site."
   }
 }

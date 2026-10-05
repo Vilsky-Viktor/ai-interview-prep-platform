@@ -1,4 +1,8 @@
 CANDIDATE_INVITED = "candidate.invited"
+# A member emails a candidate's PDF report to someone; notifications sends it, attached.
+REPORT_SHARED = "report.shared"
+# A candidate who hasn't started is reminded once; the event carries what the invite did.
+CANDIDATE_REMINDED = "candidate.reminded"
 # A company interview's questions are saved; the event carries the set and its title.
 GENERATION_COMPLETED = "generation.completed"
 # Generation cancelled an interview's topic review that waited too long; the interview goes too.

@@ -8,6 +8,23 @@ from app.config.settings import settings
 from app.service_auth import service_token
 
 
+async def copy_template(template_id: UUID, company_id: UUID) -> dict | None:
+    """The company's own test set made from a template: {"id", "title", "language"}, or None
+    when there's no such template."""
+    response = await http.get_client().post(
+        f"{settings.library_url}/internal/templates/{template_id}/copy",
+        json={"company_id": str(company_id)},
+        headers={"Authorization": f"Bearer {service_token('library')}"},
+    )
+
+    if response.status_code == httpx.codes.NOT_FOUND:
+        return None
+
+    response.raise_for_status()
+
+    return response.json()
+
+
 async def get_set(set_id: UUID) -> dict | None:
     response = await http.get_client().get(
         f"{settings.library_url}/internal/sets/{set_id}",
@@ -82,3 +99,38 @@ async def get_content(set_id: UUID) -> dict | None:
     response.raise_for_status()
 
     return response.json()
+
+
+async def mark_wrong(question_id: UUID) -> None:
+    response = await http.get_client().post(
+        f"{settings.library_url}/internal/questions/{question_id}/wrong",
+        headers={"Authorization": f"Bearer {service_token('library')}"},
+    )
+
+    response.raise_for_status()
+
+
+async def get_question_context(question_id: UUID) -> dict | None:
+    """The question's set and topic: {"set_id", ...}, or None when there's no such question."""
+    response = await http.get_client().get(
+        f"{settings.library_url}/internal/questions/{question_id}/context",
+        headers={"Authorization": f"Bearer {service_token('library')}"},
+    )
+
+    if response.status_code == httpx.codes.NOT_FOUND:
+        return None
+
+    response.raise_for_status()
+
+    return response.json()
+
+
+async def similar_templates(set_id: UUID) -> list[UUID]:
+    """The templates for roles like the test's, closest first; whose talents it's suggested."""
+    response = await http.get_client().get(
+        f"{settings.library_url}/internal/sets/{set_id}/similar-templates",
+        headers={"Authorization": f"Bearer {service_token('library')}"},
+    )
+    response.raise_for_status()
+
+    return [UUID(template_id) for template_id in response.json()]

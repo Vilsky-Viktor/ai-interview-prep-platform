@@ -14,16 +14,14 @@ from app.routers import (
     internal,
     internal_events,
     internal_feedback,
+    internal_practice,
     internal_quality,
     internal_reuse,
-    internal_shares,
-    joins,
-    library,
     me,
-    preparations,
-    questions,
     schedules,
-    shares,
+    superadmin,
+    superadmin_quality,
+    templates,
 )
 from app.storage.db import ping as ping_database
 
@@ -48,18 +46,16 @@ app = FastAPI(
 add_localized_errors(app)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(me.router)
-app.include_router(preparations.router)
-app.include_router(joins.router)
-app.include_router(shares.router)
-app.include_router(questions.router)
-app.include_router(library.router)
+app.include_router(superadmin.router)
+app.include_router(superadmin_quality.router)
+app.include_router(templates.router)
 app.include_router(internal.router)
 app.include_router(schedules.router)
 app.include_router(internal_events.router)
 app.include_router(internal_feedback.router)
+app.include_router(internal_practice.router)
 app.include_router(internal_quality.router)
 app.include_router(internal_reuse.router)
-app.include_router(internal_shares.router)
 
 
 @app.get("/health")

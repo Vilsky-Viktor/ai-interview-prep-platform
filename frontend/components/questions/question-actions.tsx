@@ -6,11 +6,10 @@ import { QuestionRating } from "@/components/questions/question-rating"
 import { ReportDialog } from "@/components/questions/report-dialog"
 
 export function QuestionActions({
-  questionId,
-  basePath = `/library/questions/${questionId}`,
+  basePath,
 }: {
-  questionId: string
-  basePath?: string
+  // The question's rating and reports, under the session it was asked in.
+  basePath: string
 }) {
   const t = useTranslations("questions")
 

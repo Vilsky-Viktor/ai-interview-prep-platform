@@ -1,7 +1,6 @@
 import asyncio
 import uuid
 from datetime import UTC, datetime, timedelta
-from types import SimpleNamespace
 
 from sqlalchemy.dialects import postgresql
 
@@ -148,40 +147,14 @@ def test_worker_skips_a_generation_the_sweeper_already_failed(monkeypatch):
     started = []
 
     async def get(_generation_id):
-        return Generation(id=uuid.uuid4(), status="failed", kind="preparation")
+        return Generation(id=uuid.uuid4(), status="failed", kind="interview")
 
     async def run_pipeline(*args):
         started.append(args)
 
-    async def release(_generation_id):
-        return None
-
     monkeypatch.setattr(generations, "get", get)
     monkeypatch.setattr(jobs, "run_pipeline", run_pipeline)
-    monkeypatch.setattr(jobs.billing, "release_kit", release)
 
     asyncio.run(jobs.run_generation(None, uuid.uuid4(), None))
 
     assert started == []
-
-
-def test_kits_failed_by_the_sweep_or_expired_in_review_give_their_credits_back(monkeypatch):
-    stuck_kit = SimpleNamespace(id=uuid.uuid4(), kind="preparation", owner_uid="ann")
-    stuck_interview = SimpleNamespace(id=uuid.uuid4(), kind="interview")
-    expired_kit = SimpleNamespace(id=uuid.uuid4(), kind="preparation", owner_uid="ann")
-    released = []
-
-    async def fake_fail_stuck(before, error):
-        return [stuck_kit, stuck_interview]
-
-    async def release(generation_id):
-        released.append(generation_id)
-
-    monkeypatch.setattr(generations, "fail_stuck", fake_fail_stuck)
-    monkeypatch.setattr(jobs.billing, "release_kit", release)
-    no_finished_threads(monkeypatch, expired=[expired_kit])
-
-    asyncio.run(schedules.sweep(FakeCheckpointer()))
-
-    # Interviews aren't charged, so only the kits get credits back.
-    assert sorted(released) == sorted([stuck_kit.id, expired_kit.id])

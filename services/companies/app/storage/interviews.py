@@ -33,6 +33,44 @@ async def create(company_id, generation_id, language: str) -> Interview:
     return loaded
 
 
+async def create_from_template(company_id, set_id, title: str, language: str) -> Interview:
+    """A test whose questions were copied from a template: ready at once, with no generation."""
+    interview = Interview(
+        company_id=company_id,
+        generation_id=None,
+        set_id=set_id,
+        title=title,
+        language=language,
+    )
+
+    async with Session() as session:
+        session.add(interview)
+        await session.commit()
+        loaded = await session.get(
+            Interview,
+            interview.id,
+            options=[selectinload(Interview.invites)],
+            populate_existing=True,
+        )
+
+    return loaded
+
+
+async def get_by_link(token: str) -> Interview | None:
+    query = select(Interview).where(Interview.link_token == token)
+
+    async with Session() as session:
+        return await session.scalar(query)
+
+
+async def set_link(interview_id, token: str | None) -> None:
+    async with Session() as session:
+        await session.execute(
+            update(Interview).where(Interview.id == interview_id).values(link_token=token)
+        )
+        await session.commit()
+
+
 async def get(interview_id) -> Interview | None:
     async with Session() as session:
         return await session.get(Interview, interview_id, options=[selectinload(Interview.invites)])
@@ -85,9 +123,16 @@ async def list_for_company(
 
 
 async def update_settings(interview_id, settings: InterviewSettings) -> None:
+    """Saves the test's settings; marking it hired also turns its shareable link off, so a job
+    ad left online stops bringing in candidates."""
+    values = settings.model_dump()
+
+    if settings.hired:
+        values["link_token"] = None
+
     async with Session() as session:
         await session.execute(
-            update(Interview).where(Interview.id == interview_id).values(**settings.model_dump())
+            update(Interview).where(Interview.id == interview_id).values(**values)
         )
         await session.commit()
 

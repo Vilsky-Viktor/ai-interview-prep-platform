@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  CircleAlertIcon,
   FlagIcon,
   RefreshCwIcon,
   ThumbsDownIcon,
@@ -9,17 +10,27 @@ import {
 import { cn } from "cn"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
+import { toast } from "sonner"
 
+import { AnswerOptions } from "@/components/questions/answer-options"
 import { QuestionReports } from "@/components/questions/question-reports"
 import { QuestionText } from "@/components/questions/question-text"
 import { Button } from "@/components/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { apiFetch } from "@/lib/api"
 import { FEEDBACK_HOVER_CLASS } from "@/constants/feedback"
 import type { QuestionStats } from "@/types/feedback"
 
 export function QuestionRow({
   question,
   number,
+  showOptions,
   canRegenerate,
+  wrongPath,
   reportsPath,
   regenerating,
   busy,
@@ -27,7 +38,10 @@ export function QuestionRow({
 }: {
   question: QuestionStats
   number: number
+  showOptions: boolean
   canRegenerate: boolean
+  // Where to say the marked answer is wrong (owners and admins, superadmins).
+  wrongPath?: string
   reportsPath?: string
   regenerating: boolean
   busy: boolean
@@ -35,6 +49,20 @@ export function QuestionRow({
 }) {
   const t = useTranslations("questions")
   const [showReports, setShowReports] = useState(false)
+  const [markedWrong, setMarkedWrong] = useState(false)
+
+  // One click: the verifier checks the marked answer and fixes or replaces the question.
+  async function markWrong() {
+    setMarkedWrong(true)
+
+    try {
+      await apiFetch(`${wrongPath}/${question.id}/wrong`, { method: "POST" })
+      toast.success(t("markedWrong"))
+    } catch {
+      setMarkedWrong(false)
+      toast.error(t("markWrongFailed"))
+    }
+  }
   const canViewReports = Boolean(reportsPath)
 
   return (
@@ -50,37 +78,62 @@ export function QuestionRow({
         )}
       >
         <QuestionText text={question.text} />
+        {showOptions && (
+          <AnswerOptions options={question.options} className="mt-3" />
+        )}
       </div>
       <div className="self-center py-5 ps-5 pe-6 text-sm whitespace-nowrap text-muted-foreground tabular-nums">
         <span className="flex flex-col items-end gap-3">
           <span className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5" title={t("likes")}>
-              <ThumbsUpIcon className="size-4" />
-              {question.likes}
-            </span>
-            <span className="flex items-center gap-1.5" title={t("dislikes")}>
-              <ThumbsDownIcon className="size-4" />
-              {question.dislikes}
-            </span>
-            {canViewReports ? (
-              <button
-                type="button"
-                aria-expanded={showReports}
-                onClick={() => setShowReports((shown) => !shown)}
-                aria-label={t("showReports", { count: question.reports })}
-                className={cn(
-                  "-mx-2 -my-1 flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 aria-expanded:bg-foreground/10 aria-expanded:text-foreground",
-                  FEEDBACK_HOVER_CLASS
-                )}
+            <Tooltip>
+              <TooltipTrigger
+                render={<span className="flex items-center gap-1.5" />}
               >
-                <FlagIcon className="size-4" />
-                {question.reports}
-              </button>
+                <ThumbsUpIcon className="size-4" />
+                {question.likes}
+              </TooltipTrigger>
+              <TooltipContent>{t("likes")}</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger
+                render={<span className="flex items-center gap-1.5" />}
+              >
+                <ThumbsDownIcon className="size-4" />
+                {question.dislikes}
+              </TooltipTrigger>
+              <TooltipContent>{t("dislikes")}</TooltipContent>
+            </Tooltip>
+            {canViewReports ? (
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <button
+                      type="button"
+                      aria-expanded={showReports}
+                      onClick={() => setShowReports((shown) => !shown)}
+                      aria-label={t("showReports", { count: question.reports })}
+                      className={cn(
+                        "-mx-2 -my-1 flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 aria-expanded:bg-foreground/10 aria-expanded:text-foreground",
+                        FEEDBACK_HOVER_CLASS
+                      )}
+                    />
+                  }
+                >
+                  <FlagIcon className="size-4" />
+                  {question.reports}
+                </TooltipTrigger>
+                <TooltipContent>{t("reports")}</TooltipContent>
+              </Tooltip>
             ) : (
-              <span className="flex items-center gap-1.5" title={t("reports")}>
-                <FlagIcon className="size-4" />
-                {question.reports}
-              </span>
+              <Tooltip>
+                <TooltipTrigger
+                  render={<span className="flex items-center gap-1.5" />}
+                >
+                  <FlagIcon className="size-4" />
+                  {question.reports}
+                </TooltipTrigger>
+                <TooltipContent>{t("reports")}</TooltipContent>
+              </Tooltip>
             )}
           </span>
           {canRegenerate && (
@@ -90,6 +143,16 @@ export function QuestionRow({
                 className={cn(regenerating && "animate-spin")}
               />
               {regenerating ? t("regenerating") : t("regenerate")}
+            </Button>
+          )}
+          {wrongPath && (
+            <Button
+              variant="outline"
+              disabled={busy || markedWrong}
+              onClick={markWrong}
+            >
+              <CircleAlertIcon data-icon="inline-start" />
+              {markedWrong ? t("checking") : t("wrongAnswer")}
             </Button>
           )}
         </span>

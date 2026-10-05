@@ -9,20 +9,16 @@ import { toast } from "sonner"
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { signIn } from "@/lib/auth"
-import { announceCreditsChanged } from "@/lib/credits"
 import { openCheckout } from "@/lib/paddle"
 import type { Catalog } from "@/types/billing"
 
 // When to look for the new balance after a payment, in seconds.
 const RECHECK_SECONDS = [2, 5, 10, 20, 40]
 
-/** Buys a top-up for the signed-in user, or for `companyId` when given: Paddle's `priceId`,
-`quantity` times. */
+/** Buys a top-up for `companyId`: Paddle's `priceId`. */
 export function BuyButton({
   catalog,
   priceId,
-  quantity = 1,
-  disabled = false,
   companyId,
   label,
   variant = "default",
@@ -31,10 +27,7 @@ export function BuyButton({
   catalog: Catalog
   // None while the price isn't on sale yet.
   priceId: string | null
-  quantity?: number
-  // A custom amount not quoted yet, or out of range.
-  disabled?: boolean
-  companyId?: string
+  companyId: string
   label?: string
   variant?: "default" | "outline"
   className?: string
@@ -70,22 +63,16 @@ export function BuyButton({
       await openCheckout(
         catalog,
         priceId!,
-        companyId
-          ? { owner_type: "company", owner_id: companyId, buyer_id: user.uid }
-          : { owner_type: "user", owner_id: user.uid, buyer_id: user.uid },
+        { owner_type: "company", owner_id: companyId, buyer_id: user.uid },
         user.email,
         () => {
           toast.success(t("paid"))
           // Paddle's webhook usually lands within seconds, sometimes later: look again a few
           // times, and the balances count up when it has.
           for (const seconds of RECHECK_SECONDS) {
-            window.setTimeout(() => {
-              router.refresh()
-              announceCreditsChanged()
-            }, seconds * 1000)
+            window.setTimeout(() => router.refresh(), seconds * 1000)
           }
-        },
-        quantity
+        }
       )
     } catch {
       toast.error(t("checkoutFailed"))
@@ -98,7 +85,7 @@ export function BuyButton({
     <Button
       variant={variant}
       className={cn("h-12 px-6 text-base", className)}
-      disabled={opening || disabled}
+      disabled={opening}
       onClick={buy}
     >
       {label ?? t("topUp")}

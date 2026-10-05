@@ -1,10 +1,12 @@
-import { MinusIcon } from "lucide-react"
 import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 import { cn } from "cn"
 
 import { BackLink } from "@/components/back-link"
 import { CandidateActions } from "@/components/company/candidate-actions"
+import { CandidateReport } from "@/components/company/candidate-report"
+import { IntegrityLine } from "@/components/company/integrity-line"
+import { CandidateReportActions } from "@/components/company/candidate-report-actions"
 import { ScorecardReview } from "@/components/company/scorecard-review"
 import { PageHeader } from "@/components/page-header"
 import { Badge } from "@/components/ui/badge"
@@ -18,50 +20,26 @@ type Scorecard = {
   id: string
   email: string
   status: string
+  // For the PDF report: the test, the company and the overall result.
+  title: string | null
+  company: string
+  logo_url: string | null
+  verified_domain: string | null
+  grade: number | null
+  passed: boolean | null
+  pass_mark: number
   sessions: {
     id: string
     topic_title: string
     status: string
     final_score: number | null
+    // Against the test's passing grade; null while the section is still going.
+    passed: boolean | null
     tab_leaves: number
     copies: number
     fast_answers: number
     review: ReviewItem[]
   }[]
-}
-
-/** What the candidate's browser and timing showed; counts above zero stand out. */
-async function IntegrityLine({
-  session,
-}: {
-  session: { tab_leaves: number; copies: number; fast_answers: number }
-}) {
-  const t = await getTranslations("candidates")
-  const signals = [
-    t("pageLeaves", { count: session.tab_leaves }),
-    t("copies", { count: session.copies }),
-    t("fastAnswers", { count: session.fast_answers }),
-  ]
-  const counts = [session.tab_leaves, session.copies, session.fast_answers]
-
-  return (
-    <p className="flex flex-wrap items-center gap-x-1.5 text-sm text-muted-foreground tabular-nums">
-      {signals.map((signal, index) => (
-        <span key={signal} className="flex items-center gap-x-1.5">
-          {index > 0 && (
-            <MinusIcon aria-hidden className="size-3.5 text-foreground" />
-          )}
-          <span
-            className={cn(
-              counts[index] > 0 && "text-amber-600 dark:text-amber-400"
-            )}
-          >
-            {signal}
-          </span>
-        </span>
-      ))}
-    </p>
-  )
 }
 
 export default async function ScorecardPage({
@@ -82,8 +60,31 @@ export default async function ScorecardPage({
 
   const deleted = card.status === "deleted"
 
+  const reportable = !deleted && card.sessions.length > 0
+  const report = {
+    company: card.company,
+    logoUrl: card.logo_url,
+    verifiedDomain: card.verified_domain,
+    title: card.title,
+    email: card.email,
+    grade: card.grade,
+    passed: card.passed,
+    passMark: card.pass_mark,
+    // Without the questions: the report never shows them.
+    sections: card.sessions.map((session) => ({
+      id: session.id,
+      topic_title: session.topic_title,
+      final_score: session.final_score,
+      passed: session.passed,
+      tab_leaves: session.tab_leaves,
+      copies: session.copies,
+      fast_answers: session.fast_answers,
+    })),
+  }
+
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
+      {reportable && <CandidateReport report={report} />}
       {/* The actions sit beside the email and status, centered on both. */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <PageHeader
@@ -94,27 +95,39 @@ export default async function ScorecardPage({
               {t("interview")}
             </BackLink>
           }
+          tags={
+            <Badge
+              variant={
+                card.status === "undelivered" ? "destructive" : "outline"
+              }
+              className="h-7 px-3 text-sm font-light"
+            >
+              {statuses(card.status)}
+            </Badge>
+          }
           title={
             <h1 className="font-heading text-3xl font-medium tracking-tight">
               {deleted ? t("deleted") : card.email}
             </h1>
           }
-        >
-          <Badge
-            variant={card.status === "undelivered" ? "destructive" : "outline"}
-            className="h-7 px-3 text-sm font-light"
-          >
-            {statuses(card.status)}
-          </Badge>
-        </PageHeader>
+        />
         {!deleted && (
-          <CandidateActions
-            interviewId={id}
-            inviteId={inviteId}
-            email={card.email}
-            status={card.status}
-            backHref={`/company/${companyId}/interviews/${id}?tab=candidates`}
-          />
+          <div className="flex items-center gap-3">
+            <CandidateActions
+              interviewId={id}
+              inviteId={inviteId}
+              email={card.email}
+              status={card.status}
+              backHref={`/company/${companyId}/interviews/${id}?tab=candidates`}
+            />
+            {reportable && (
+              <CandidateReportActions
+                interviewId={id}
+                inviteId={inviteId}
+                report={report}
+              />
+            )}
+          </div>
         )}
       </div>
 
@@ -127,9 +140,11 @@ export default async function ScorecardPage({
       {card.sessions.map((session) => {
         const score = session.final_score
         const tone =
-          score == null
-            ? "text-muted-foreground"
-            : "text-blue-600 dark:text-blue-400"
+          session.passed === true
+            ? "text-green-600 dark:text-green-400"
+            : session.passed === false
+              ? "text-red-600 dark:text-red-400"
+              : "text-muted-foreground"
 
         return (
           <section key={session.id} className="space-y-4">

@@ -7,7 +7,6 @@ os.environ.setdefault("REDIS_URL", "redis://localhost:6379")
 os.environ.setdefault("SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("SITE_URL", "http://localhost:8090")
 os.environ.setdefault("COMPANIES_URL", "http://companies")
-os.environ.setdefault("LIBRARY_URL", "http://library")
 os.environ.setdefault("COMPANIES_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("LIBRARY_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 # A demo- project: no Google Cloud, so calls from Pub/Sub, Cloud Tasks and Scheduler aren't

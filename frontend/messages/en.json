@@ -2,9 +2,6 @@
   "settings": {
     "title": "Settings",
     "signIn": "Sign in to change your settings.",
-    "general": "General",
-    "billing": "Billing",
-    "referral": "Referral",
     "language": "Language",
     "languageNote": "For the interface and tutor replies, and the language new prep kits and interviews start in. You can generate them in any supported language.",
     "languageFailed": "Couldn't change the language. Please try again.",
@@ -14,13 +11,12 @@
     "downloadFailed": "Couldn't prepare your data. Please try again.",
     "delete": "Delete account",
     "searchLanguage": "Search languages",
-    "noLanguage": "No language found.",
-    "history": "Billing history",
-    "historyNote": "Every credit in and out, newest first."
+    "noLanguage": "No language found."
   },
   "userMenu": {
     "signIn": "Sign in",
     "account": "Account",
+    "adminZone": "Admin zone",
     "settings": "Settings",
     "signOut": "Sign out",
     "theme": "Theme",
@@ -34,17 +30,15 @@
     "main": "Main",
     "legal": "Legal",
     "pricing": "Pricing",
-    "privacy": "Privacy policy",
+    "privacy": "Privacy",
     "terms": "Terms",
     "back": "Back",
-    "create": "create",
-    "explore": "explore",
-    "myKits": "my kits",
     "hiring": "hiring",
     "pricingLink": "pricing",
     "faq": "FAQ",
     "contact": "Contact us",
-    "about": "About us"
+    "about": "About us",
+    "practice": "Free practice"
   },
   "signIn": {
     "with": "Sign in with",
@@ -80,43 +74,89 @@
     "notFoundText": "That page doesn't exist or was removed."
   },
   "home": {
-    "tagline": "AI agents practice with you until you're confident.",
-    "preparingFor": "Preparing for",
-    "words": [
-      "an interview",
-      "a certification",
-      "an exam",
-      "a test",
-      "a promotion"
-    ],
-    "widest": "self-education",
-    "mark": "?"
+    "title": "Interview everyone\nHire real talent",
+    "text": "Timed interviews made from your job description. Unique questions for every candidate, and no time to ask an AI. From $1 per candidate."
   },
-  "goal": {
-    "placeholder": "Paste a job description or describe what you want to learn…",
-    "label": "What are you preparing for?",
-    "submit": "Generate preparation",
-    "failed": "Couldn't start the generation. Please try again.",
-    "seePlans": "Top up"
+  "start": {
+    "placeholder": "Paste a job description, or describe the role and what a candidate should know",
+    "description": "Job description",
+    "submit": "Create an interview",
+    "whichCompany": "Which company is this interview for?",
+    "firstCompany": "What's your company called?",
+    "newCompany": "A new company",
+    "companyName": "Company name",
+    "freeCandidates": "Your first company interviews its first {count, plural, one {candidate} other {# candidates}} free.",
+    "back": "Edit the description",
+    "continue": "Continue",
+    "starting": "Starting…",
+    "failed": "Couldn't start the interview. Please try again."
   },
-  "membership": {
-    "signIn": "Sign in to join",
-    "leave": "Leave",
-    "join": "Join to practice"
+  "superadmin": {
+    "fixNow": "Fix now",
+    "fixing": "Fixing…",
+    "dismiss": "Dismiss",
+    "fixSent": "Sent to the verifier. It's fixed or replaced in a moment.",
+    "actionFailed": "That didn't work. Please try again.",
+    "quality": "Quality",
+    "flagged": "Flagged",
+    "replaced": "Replaced",
+    "noFlagged": "Nothing is flagged right now.",
+    "noReplaced": "Nothing has been replaced yet.",
+    "answers": "{count, plural, one {# answer} other {# answers}}",
+    "right": "{percent}% right",
+    "reports": "{count, plural, =0 {no reports} one {# report} other {# reports}}",
+    "kinds": {
+      "template": "template",
+      "interview": "company interview"
+    },
+    "flags": {
+      "wrong_key": "answer may be wrong",
+      "rewrite": "needs a new question",
+      "weak_options": "needs better options"
+    },
+    "zone": "Admin zone",
+    "templates": "Templates",
+    "new": "New template",
+    "createTitle": "Create a template",
+    "placeholder": "Paste a role description, or describe the role and what a person in it should know",
+    "description": "Role description",
+    "create": "Generate",
+    "createFailed": "Couldn't start the template. Please try again.",
+    "text": "Ready-made interviews by role, for companies and talents.",
+    "deleteLabel": "Delete {title}",
+    "deleteTitle": "Delete this template?",
+    "deleteText": "Its topics and questions are deleted. Interviews companies already made from it stay.",
+    "deleteFailed": "Couldn't delete the template. Please try again."
+  },
+  "templates": {
+    "title": "Templates",
+    "empty": "No templates yet.",
+    "topics": "{count, plural, one {# topic} other {# topics}}",
+    "search": "Search by role or topic",
+    "searchAction": "Search",
+    "level": "Level: {level}",
+    "anyLevel": "Any level",
+    "allLanguages": "All languages",
+    "languages": "{count, plural, one {# language} other {# languages}}",
+    "noMatches": "No templates match.",
+    "use": "Use template",
+    "using": "Starting…",
+    "useFailed": "Couldn't start an interview from this template. Please try again.",
+    "warningTitle": "Templates are for trying prepza.",
+    "warning": "Talents practice on them, so candidates may already know the questions. For real hiring, create an interview from your job description.",
+    "text": "Ready-made interviews by role. Pick one to start your interview from; you can change it afterwards."
   },
   "billing": {
     "paid": "Payment received. It shows up here in a moment.",
     "checkoutFailed": "Couldn't open the checkout. Please try again.",
     "credits": "{count, plural, one {# credit} other {# credits}}",
-    "bonus": "+{count, number} bonus",
     "topUp": "Top up",
-    "balance": "{count} credits available. Top up",
-    "balanceLow": "{count} credits available, running low. Top up",
     "low": "Running low",
     "creditsWord": "{count, plural, one {credit} other {credits}}",
     "topUpTitle": "Top up: {name}",
-    "topUpNote": "$1 buys 100 credits, with a bonus on larger amounts. Credits never expire.",
-    "customAmount": "Custom"
+    "topUpNote": "Each top-up buys whole candidates; larger ones cost less per candidate. Credits never expire.",
+    "candidates": "{count, plural, one {# candidate} other {# candidates}}",
+    "each": "{price} each"
   },
   "deleteAccount": {
     "title": "Delete your account?",
@@ -126,83 +166,15 @@
     "deleted": "Your account was deleted.",
     "failed": "Couldn't delete your account. Please try again."
   },
-  "levels": {
-    "basic": "basic",
-    "medium": "medium",
-    "hard": "hard"
-  },
-  "visibility": {
-    "public": "public",
-    "private": "private"
-  },
-  "library": {
-    "title": "Public prep kits",
-    "search": "Search titles and topics",
-    "searchAction": "Search",
-    "noMatches": "No matching preparations.",
-    "empty": "No public preparations yet.",
-    "level": "Level: {level}",
-    "anyLevel": "Any",
-    "languages": "{count, plural, one {# language} other {# languages}}",
-    "sortBy": "Sort by: {sort}",
-    "sort": {
-      "date": "Date",
-      "rating": "Rating",
-      "joiners": "Joiners"
-    }
-  },
-  "preparations": {
-    "title": "My prep kits",
-    "new": "New preparation",
-    "signIn": "Sign in to see your preparations.",
-    "empty": "No preparations yet. Create your first one or pick from the public library.",
-    "topics": "{count, plural, one {# topic} other {# topics}}",
-    "created": "Created {date}",
-    "metaTitle": "Preparation",
-    "metaDescription": "Interview preparation for {title}: {count, plural, one {# topic} other {# topics}} of multiple-choice questions, with practice rounds and certificates.",
-    "history": "History",
-    "page": "Preparation page",
-    "rounds": "Rounds",
-    "deleteLabel": "Delete {title}",
-    "deleteTitle": "Delete {title}?",
-    "deleteText": "Its topics and questions are deleted, and everyone who joined it loses access. This can't be undone.",
-    "deleteFailed": "Couldn't delete the preparation. Please try again.",
-    "mastered": "Mastered",
-    "masteredTitle": "Mastered: every topic has a certificate",
-    "owner": "Owner",
-    "ratingTitle": "Average rating and number of ratings",
-    "rated": "Thanks for rating",
-    "ratingUpdated": "Rating updated",
-    "ratingFailed": "Couldn't save your rating. Please try again.",
-    "rateIt": "Rate it",
-    "rate": "Rate {value} of {scale}",
-    "public": "Public",
-    "nowPublic": "Now listed in the public library",
-    "nowPrivate": "Now private",
-    "visibilityFailed": "Couldn't change the visibility. Please try again."
-  },
   "share": {
-    "share": "Share",
-    "title": "Share preparation",
-    "public": "Anyone with the link can view this preparation.",
-    "private": "We'll email an invite link. Only that email address can accept it.",
-    "email": "Email",
-    "send": "Send",
     "sent": "Invite sent to {email}",
     "checkEmail": "Check the email address and try again.",
     "failed": "Couldn't send the invite.",
-    "joined": "Joined",
-    "undelivered": "Undelivered",
-    "invited": "Invited",
     "wrongEmail": "This invite was sent to a different email address.",
     "acceptFailed": "Couldn't accept the invite. Please try again.",
-    "signIn": "Sign in with the invitation email to join this preparation.",
     "invalid": "This invite isn't valid anymore.",
     "invitedToJoin": "You were invited to join.",
-    "open": "Open preparation",
-    "join": "Join preparation",
-    "mismatch": "The email does not match. Sign in with the invitation email to join.",
-    "inviteTitle": "Share invite"
+    "mismatch": "The email does not match. Sign in with the invitation email to join."
   },
   "reportReasons": {
     "wrong_answer": "The marked answer is wrong",
@@ -221,6 +193,18 @@
     "reports": "Reports",
     "showReports": "Show reports ({count})",
     "regenerate": "Re-generate",
+    "manage": "Manage questions",
+    "wrongAnswer": "Wrong answer",
+    "checking": "Checking…",
+    "markedWrong": "Thanks. It's being checked, and will be fixed or replaced.",
+    "markWrongFailed": "Couldn't send it for checking. Please try again.",
+    "ofCount": "of {count, number}",
+    "per": "per",
+    "candidate": "candidate",
+    "showOptions": "Show answer options",
+    "hideOptions": "Hide answer options",
+    "correct": "Correct answer",
+    "wrong": "Wrong answer",
     "regenerating": "Re-generating…",
     "regenerated": "Question re-generated",
     "regenerateFailed": "Couldn't re-generate the question. Please try again.",
@@ -233,79 +217,27 @@
     "selectReason": "Select a reason",
     "details": "Details",
     "showLess": "Show less",
+    "more": "+{count, number} more",
     "showAll": "Show all",
     "limitRange": "Enter a number from 1 to {count}.",
     "limitFailed": "Couldn't save the limit.",
     "limit": "Question limit",
-    "of": "of",
     "count": "{count, plural, one {question} other {questions}}",
-    "loadFailed": "Couldn't load the questions."
-  },
-  "certificate": {
-    "title": "Certificate",
-    "metaDescription": "{name} completed {topic} with a score of {score}%.",
-    "heading": "Certificate of achievement",
-    "for": "For successfully completing:",
-    "finalScore": "Final score",
-    "issued": "Issued",
-    "howTo": "How to earn the certificate"
+    "loadFailed": "Couldn't load the questions.",
+    "yourAnswer": "your answer"
   },
   "rounds": {
-    "title": "Round",
-    "rounds": "Rounds",
-    "compare": "Compare",
-    "compareTitle": "Compare rounds",
     "answered": "Answered",
     "correct": "Correct",
     "incorrect": "Incorrect",
     "notAnswered": "Not answered",
-    "correctAnswer": "Correct answer",
-    "yourAnswer": "Your answer",
-    "askFollowUp": "Ask a follow-up",
-    "followUp": "Follow-up question",
-    "followUpPlaceholder": "Ask a follow-up question…",
-    "replyFailed": "Couldn't get a reply. Please try again.",
-    "firstRound": "Your first round on this topic",
-    "sameAsLast": "Same as your last round",
-    "change": "{change} points since your last round",
-    "topicAnswered": "Topic: {answered} of {total} questions answered",
-    "answeredOf": "{answered} of {total} answered",
-    "finalScore": "Final score",
-    "certificate": "Certificate",
-    "history": "History",
-    "preparationPage": "Preparation page",
-    "noRounds": "No rounds yet.",
-    "selectToCompare": "Select for comparison",
-    "grade": "grade",
-    "continue": "Continue",
-    "start": "Start",
     "finish": "Finish",
     "finishing": "Finishing…",
-    "finishRound": "Finish round",
-    "deleteRound": "Delete round",
-    "finishTitle": "Finish this round?",
-    "deleteTitle": "Delete this round?",
-    "unscored": "Unanswered questions won't be scored.",
-    "noMore": "You won't be able to answer more questions.",
-    "cantUndo": "This can't be undone.",
-    "deleteFailed": "Couldn't delete the round. Please try again.",
-    "finishFailed": "Couldn't finish the round. Please try again.",
-    "startFailed": "Couldn't start the round. Please try again.",
-    "answerFailed": "Couldn't save your answer. Please try again.",
-    "signIn": "Sign in to continue this round.",
-    "missing": "This round doesn't exist.",
-    "allAnswered": "You answered every question in this round.",
     "next": "Next question",
-    "progress": "Questions answered towards the certificate",
-    "nextFailed": "Couldn't load the next question. Please try again.",
-    "submitFailed": "Couldn't submit your answer. Please try again.",
-    "freeTurns": "{count, plural, one {# free tutor turn} other {# free tutor turns}} left on this question",
-    "paidTurns": "Further turns on this question cost {count, plural, one {# credit} other {# credits}} each",
-    "buyCertificate": "Get certificate · {count} credits",
-    "makeItYours": "Preparing for a specific job? Paste the vacancy text and get a kit made for it.",
-    "makeItYoursAction": "Make it yours"
+    "submitFailed": "Couldn't submit your answer. Please try again."
   },
   "session": {
+    "toTest": "Go to interviews",
     "startFailed": "Couldn't start the interview. Please try again.",
     "finishFailed": "Couldn't finish the interview. Please try again.",
     "continueFailed": "Couldn't continue. Please try again.",
@@ -357,17 +289,7 @@
     "changes": "Changes to the topics",
     "tooMany": "Choose at most {max} topics, or describe how to merge them.",
     "apply": "Apply changes",
-    "approve": "Approve and generate",
-    "approvePrice": "Approve and generate · {count} credits",
-    "unfinished": "Unfinished"
-  },
-  "generationStatus": {
-    "queued": "Generating",
-    "running": "Generating",
-    "awaiting_review": "Review topics",
-    "done": "Done",
-    "failed": "Failed",
-    "cancelled": "Cancelled"
+    "approve": "Approve and generate"
   },
   "candidateStatus": {
     "invited": "invited",
@@ -375,7 +297,9 @@
     "in_process": "in process",
     "finished": "finished",
     "deleted": "deleted",
-    "expired": "expired"
+    "expired": "expired",
+    "passed": "passed",
+    "flagged": "flagged"
   },
   "roles": {
     "owner": "owner",
@@ -391,17 +315,17 @@
     "owner": "Owner",
     "interviewCount": "{count, plural, one {# interview} other {# interviews}}",
     "interviews": "Interviews",
+    "templates": "Templates",
     "admins": "Admins",
     "referrals": "Referrals",
     "new": "New company",
-    "newText": "Create a company to generate interviews and invite candidates.",
     "name": "Company name",
     "create": "Create",
     "createFailed": "Couldn't create the company. Please try again.",
     "signInJoin": "Sign in with the invitation email to join this company.",
     "open": "Open company",
     "join": "Join company",
-    "creditsLeft": "{count, plural, one {credit} other {credits}} available",
+    "creditsLeft": "{count, plural, one {credit} other {credits}}",
     "creditsLow": "Running low: top up to keep inviting candidates.",
     "timeLeft": "Time left: {time}",
     "removeLabel": "Remove {name}",
@@ -409,7 +333,12 @@
     "removeText": "Its interviews and invites will be deleted.",
     "remove": "Remove",
     "removeFailed": "Couldn't remove the company.",
-    "page": "Company"
+    "page": "Company",
+    "logo": "Logo",
+    "uploadLogo": "Upload logo",
+    "changeLogo": "Change logo",
+    "removeLogo": "Remove logo",
+    "logoFailed": "Couldn't save the logo."
   },
   "candidates": {
     "scorecard": "Scorecard",
@@ -421,6 +350,11 @@
     "copies": "{count, plural, one {# copy attempt} other {# copy attempts}}",
     "fastAnswers": "{count, plural, one {# fast answer} other {# fast answers}}",
     "empty": "No candidates invited yet.",
+    "noMatches": "No candidates match.",
+    "search": "Search candidates by email",
+    "searchAction": "Search",
+    "status": "Status: {status}",
+    "anyStatus": "any status",
     "progress": "Progress",
     "grade": "Grade",
     "resend": "Resend invite",
@@ -438,11 +372,27 @@
       "date": "Date"
     }
   },
+  "interviewStatus": {
+    "new": "New",
+    "in_process": "In process",
+    "hired": "Hired"
+  },
   "interviews": {
     "title": "Interviews",
     "interview": "Interview",
     "candidates": "Candidates",
     "new": "New interview",
+    "createTitle": "Create an interview",
+    "try": "Try as a candidate",
+    "newCandidate": "New candidate(s)",
+    "linkTitle": "Shareable link",
+    "linkText": "For a job ad: anyone with the link can take the interview. Each person is charged like an invited candidate.",
+    "linkFailed": "Couldn't change the link. Please try again.",
+    "passMark": "Passing grade",
+    "passMarkLabel": "Passing grade in percent",
+    "markHired": "Mark as hired",
+    "tryLabel": "Try {title} as a candidate",
+    "tryFailed": "Couldn't start the preview. Please try again.",
     "generating": "Generating…",
     "fallbackTitle": "interview",
     "continueGeneration": "Continue generation",
@@ -461,12 +411,22 @@
     "adminEmail": "Admin email",
     "addAdmin": "Add admin",
     "adminFailed": "Couldn't invite that admin. Please try again.",
-    "candidateEmail": "Candidate email",
     "invite": "Invite",
     "jobDescription": "Job description",
     "pasteJob": "Paste the job description: the role, its requirements and nice-to-haves…",
     "generate": "Generate interview",
-    "startFailed": "Couldn't start the interview. Please try again."
+    "startFailed": "Couldn't start the interview. Please try again.",
+    "candidateEmails": "Candidate emails",
+    "emailsHint": "One email or many, separated by commas or new lines",
+    "uploadFile": "Upload file",
+    "invitedMany": "Invited {count} candidates",
+    "skip": {
+      "invalid": "{count, plural, one {# email isn't valid} other {# emails aren't valid}}.",
+      "limit": "{count, plural, one {# email is} other {# emails are}} over your email limit for now. Try again in an hour.",
+      "no_credits": "{count, plural, one {# candidate wasn't invited} other {# candidates weren't invited}}: out of credits. Top up to invite them.",
+      "failed": "{count, plural, one {# invite} other {# invites}} couldn't be sent. Try again."
+    },
+    "talents": "Suggested talents"
   },
   "invite": {
     "signIn": "Sign in with the invitation email to take this interview.",
@@ -479,7 +439,7 @@
     "timeRunsOut": "When a question's time runs out, it counts as wrong and the next one opens. The clock keeps running if you leave.",
     "unanswered": "Unanswered questions count as wrong.",
     "saved": "Progress is saved: use this link again to continue.",
-    "stay": "Stay on this page: leaving it or copying is recorded (<link>how we handle it</link>).",
+    "stay": "Stay on this page: leaving it or copying is recorded (<link>privacy</link>).",
     "finished": "This interview is already finished.",
     "continue": "Continue",
     "start": "Accept & Start",
@@ -503,29 +463,18 @@
   },
   "pricing": {
     "title": "Pricing",
-    "intro": "Pay only for what you use: $1 buys 100 credits, and credits never expire. No subscriptions.",
-    "learners": "For learners",
-    "welcome": "When you sign up",
-    "referrals": "Referrals",
-    "referralsNote": "Share your link from Settings, or a company's link from its referrals tab.",
-    "referral": "A friend you invited first tops up",
-    "companyReferral": "A company you invited first tops up ${min} or more",
-    "each": "{count, number} credits each",
-    "credits": "{count, plural, one {# credit} other {# credits}}",
-    "companies": "For companies",
-    "kit": "Your own prep kit, built from a job description",
-    "chat": "AI tutor: {free, plural, one {# free turn} other {# free turns}} on each question, then",
-    "perTurn": "{count, plural, one {# credit} other {# credits}} a turn",
-    "ownCertificate": "Certificate on your own or a shared kit",
-    "publicCertificate": "Certificate on a public kit",
-    "publicPractice": "Practice in public kits ({count, plural, one {# new topic} other {# new topics}} a day)",
-    "draftTopics": "Topics drafted for your job description or goal",
-    "gift": "{count, number} credits free",
+    "intro": "Pay per candidate. Generating interviews is free, and there are no subscriptions.",
+    "test": "Generating an interview",
     "free": "Free",
-    "interview": "Generating an interview",
-    "candidate": "Each candidate who finishes and answers at least one question",
-    "companyWelcome": "Your first company",
-    "openCompanies": "Companies",
+    "candidate": "Each candidate who answers at least one question",
+    "candidateVolume": "With credits from a top-up of ${from, number} or more",
+    "perCandidate": "${dollars, number} a candidate",
+    "welcome": "Your first {count, plural, one {candidate} other {# candidates}}",
+    "credits": "$1 = 100 credits, credits never expire.",
+    "referrals": "Referrals",
+    "referralsNote": "Share your company's link from its referrals tab.",
+    "companyReferral": "A company you invited makes its first top-up",
+    "each": "{count, number} credits each",
     "topUp": "Top up"
   },
   "site": {
@@ -534,22 +483,6 @@
   "legal": {
     "updated": "Last updated",
     "englishOnly": ""
-  },
-  "credits": {
-    "noHistory": "Nothing yet.",
-    "reasons": {
-      "welcome": "Welcome gift",
-      "topup": "Top-up",
-      "kit": "Prep kit",
-      "candidate": "Candidate",
-      "certificate": "Certificate",
-      "author_share": "Your public kit earned a certificate",
-      "chat": "Tutor turn",
-      "refund": "Refund",
-      "chargeback": "Payment reversed by the bank",
-      "chargeback_reversed": "Reversed payment restored",
-      "referral": "Referral reward"
-    }
   },
   "autoTopUp": {
     "title": "Automatic top-up",
@@ -572,43 +505,42 @@
     "label": "Generate in"
   },
   "referral": {
-    "title": "Invite friends",
-    "note": "You both get {reward, number} credits when they first top up.",
     "companyTitle": "Invite another company",
-    "companyNote": "You both get {reward, number} credits when they top up ${min} or more.",
+    "companyNote": "You both get {reward, number} credits when they make their first top-up, of any amount.",
+    "deletedCompany": "A deleted company",
+    "credits": "+{count, number} credits",
     "rewarded": "{count, plural, =0 {No rewards yet.} one {Rewarded # time so far.} other {Rewarded # times so far.}}"
   },
   "topUp": {
     "title": "Top up",
     "intro": "$1 buys 100 credits, and credits never expire.",
     "signIn": "Sign in to top up your credits.",
-    "yours": "Learner balance",
-    "personal": "Personal credits",
-    "personalNote": "For your prep kits, the AI tutor and certificates.",
     "companies": "Company credits",
     "companiesNote": "For each company's candidates.",
+    "noCompany": "Credits belong to a company. Create your company first, then top it up here.",
+    "createCompany": "Create a company",
     "pricing": "Pricing"
   },
   "landing": {
     "more": "How it works",
     "how": {
-      "title": "Three steps to ready",
+      "title": "Three steps to your first results",
       "paste": {
-        "title": "Paste or describe",
-        "text": "A job description, a syllabus, or the skills and technologies you want to learn."
+        "title": "Paste the job description",
+        "text": "Any role, any language.\nprepza picks out what a candidate must know and proposes topics."
       },
       "review": {
-        "title": "Review the plan",
-        "text": "AI agents pick out what matters and propose topics.\nKeep, rename or change them."
+        "title": "Check the topics",
+        "text": "Keep, rename or change them.\nNo questions are written until you approve."
       },
-      "practice": {
-        "title": "Practice until confident",
-        "text": "Every topic gets its own questions.\nPractice in rounds and watch your progress grow."
+      "invite": {
+        "title": "Invite candidates",
+        "text": "Paste a list, upload a file or share one link.\nReminders go out on their own. You see who knows the job, ranked by score."
       }
     },
     "control": {
-      "title": "You decide what to study",
-      "text": "No questions are written until you approve the topics. Uncheck what you already know, rename a topic, edit its subtopics, or just tell the AI what to change and let it do the rest.",
+      "title": "You decide what's tested",
+      "text": "No questions are written until you approve the topics. Uncheck what the role doesn't need, rename a topic, edit its subtopics, or tell the AI what to change.",
       "topics": {
         "design": "System design",
         "sql": "Content marketing",
@@ -630,43 +562,9 @@
       "newTopic": "YouTube ads",
       "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
     },
-    "gaps": {
-      "title": "Practice that finds your gaps",
-      "text": "Each round asks all of the topic's questions again, starting with the ones you got wrong last time. Compare rounds and watch your gaps close.",
-      "items": {
-        "first": {
-          "question": "Which metric shows who watched an ad to the end?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
-        },
-        "second": {
-          "question": "What does a cache mainly reduce?",
-          "wrong": "Storage costs",
-          "right": "Response time"
-        }
-      }
-    },
-    "tutor": {
-      "title": "A tutor for every question",
-      "text": "After each answer you see the right option at once. Not sure why it's right? Ask the AI tutor and go as deep as you need.",
-      "question": "A customer is upset about a late delivery. What do you do first?",
-      "options": {
-        "first": "Explain why it was late",
-        "second": "Acknowledge the problem and apologize",
-        "third": "Offer a discount right away",
-        "fourth": "Pass the case to a manager"
-      },
-      "ask": "Why not explain first?",
-      "answer": "Acknowledge first: people listen to reasons once they feel heard."
-    },
-    "proof": {
-      "title": "Know when you're ready",
-      "text": "Each topic has a progress bar towards its certificate. Earn it, and the topic counts as mastered.",
-      "again": "Start again"
-    },
     "quality": {
-      "title": "Questions that get better on their own",
-      "text": "Likes, dislikes and reports reveal weak questions. An AI verifier fixes or replaces them automatically, and kit owners can re-generate any question themselves.",
+      "title": "Questions that fix themselves",
+      "text": "Candidates' answers, ratings and reports reveal weak questions. An AI verifier fixes or replaces them automatically, and you can re-generate any question yourself.",
       "items": {
         "good": "What does a database index speed up?",
         "weak": "Which programming language is the best?",
@@ -675,45 +573,89 @@
       "comment": "It depends on the project, so there's no single right answer.",
       "list": "Topic questions"
     },
-    "share": {
-      "title": "Share it or publish it",
-      "text": "Invite friends or colleagues by email to practice your kit with you, or publish it to the public library for everyone preparing for the same thing.",
-      "private": "Share privately",
-      "public": "Share publicly",
-      "browse": "Explore the library"
+    "try": {
+      "title": "Try it before your candidates do",
+      "text": "Take a free practice interview for a similar role, or open your own interview as a candidate before you invite anyone.",
+      "browse": "Browse practice interviews",
+      "topic": "System design",
+      "question": "What does a cache in front of a database mainly reduce?",
+      "options": {
+        "a": "The size of the database",
+        "b": "How often the database is read",
+        "c": "The number of tables",
+        "d": "How long backups take"
+      },
+      "points": {
+        "practice": "Free practice interviews for many roles",
+        "preview": "Your own interview as a candidate"
+      }
+    },
+    "link": {
+      "title": "One link for your job ad",
+      "text": "Put the interview's link in your job ad. Anyone who applies takes the interview right away and shows up in your candidates list, ranked by score.",
+      "note": "Anyone with the link can take the interview.",
+      "points": {
+        "anywhere": "On job boards, LinkedIn or your site",
+        "off": "Turn it off once the role is filled"
+      }
     },
     "companies": {
-      "title": "Hiring? Test candidates fairly",
-      "text": "Turn a job description into a timed interview and invite candidates to evaluate them.",
+      "title": "See who knows the job",
+      "text": "Candidates take the interview from your email invite. Their scores come in as they answer, green or red against your passing grade.",
       "points": {
         "own": "Unique questions for each candidate",
         "timed": "A countdown on every question",
         "flags": "Flags for rushing, leaving or copying",
-        "private": "Scores stay hidden from candidates"
+        "private": "Candidates never see their scores"
       },
       "candidate": "Candidate",
       "score": "Score",
       "rushed": "Rushed answers",
       "left": "Left the page",
-      "start": "Start hiring"
+      "role": "Backend developer · passing grade {mark}%"
+    },
+    "reports": {
+      "title": "Share results in one click",
+      "text": "A clear PDF report for one candidate or the whole list. Download it, or send it to a hiring manager straight from prepza.",
+      "points": {
+        "pdf": "One candidate or all of them",
+        "share": "Email PDF or share on messengers"
+      }
+    },
+    "brand": {
+      "title": "Your brand, verified",
+      "text": "Candidates see your logo from the first email to the last question, with a check that shows your company is real.",
+      "role": "Backend developer",
+      "points": {
+        "email": "Your logo in the invite email",
+        "interview": "On the interview candidates take",
+        "report": "On every PDF report",
+        "verified": "Verified by your team's work email"
+      }
+    },
+    "talent": {
+      "title": "Get talent suggestions",
+      "text": "Top scorers from our free practice interviews, suggested for your role. Free.",
+      "suggested": "Suggested for Backend developer",
+      "score": "Score",
+      "points": {
+        "free": "Free for you and for talent",
+        "practice": "Scored on timed interviews",
+        "first": "Only their first try counts",
+        "link": "They choose to be suggested"
+      }
     },
     "languages": {
-      "title": "In your language",
-      "text": "Use prepza in any of {count} languages. Paste a job description in one language and practice in another."
+      "title": "Any role, any language",
+      "text": "prepza works in {count} languages. Paste a job description in one language and interview candidates in another."
     },
     "pricing": {
-      "title": "Pay only for what works",
-      "text": "No subscriptions or plans. Top up when you need to: credits never expire, and anything that fails costs nothing.",
+      "title": "Pay per candidate",
+      "text": "Interviews and your first {free, plural, one {candidate} other {# candidates}} are free. After that, pay only for candidates who answer, with no subscription.",
       "see": "See pricing",
-      "company": "Acme Inc.",
-      "personal": "For your prep kits and the AI tutor.",
-      "learner": "Learner credits"
-    },
-    "referrals": {
-      "title": "Earn credits as an affiliate",
-      "text": "Invite friends or other companies with your link. When they top up for the first time, you both get credits.",
-      "whereLearner": "Your link is in {settings} → {referral}.",
-      "whereCompany": "Your company's link is in {hiring} → your company → {referrals}."
+      "perCandidate": "per candidate",
+      "base": "Pay as you go",
+      "volume": "With a top-up from ${from, number}"
     },
     "faq": {
       "title": "Still have questions?",
@@ -721,8 +663,8 @@
       "read": "go to FAQ"
     },
     "ready": {
-      "title": "Ready to prepare?",
-      "start": "Start now"
+      "title": "Ready to interview your first candidates?",
+      "start": "Create an interview"
     }
   },
   "faq": {
@@ -749,14 +691,15 @@
   },
   "about": {
     "title": "About us",
-    "intro": "prepza helps people prepare with confidence, and gives companies a simple, affordable way to test candidates.",
+    "intro": "prepza helps companies find people who really know the job: a fair, timed interview made from your job description, at a price any team can afford. And anyone preparing for an interview can practise for free.",
     "company": {
       "title": "Why we exist",
-      "learners": "Getting ready for an interview, an exam or a new skill shouldn't start with hours of searching. Tell prepza what you're aiming for, and it turns that into a clear plan: the topics that matter, practice questions for each, and a tutor that explains every answer until it clicks.",
-      "companies": "For companies, we want hiring to be fair and within reach of any team, not only big ones. Turn a job description into a timed interview in minutes, give every candidate their own questions, and pay only for candidates who actually take it."
+      "problem": "Hiring often rests on a CV and a good conversation, and both can mislead. The assessment tools that help are priced for big companies, with annual plans and seat fees, so most teams go without.",
+      "approach": "prepza turns a job description into a timed interview in minutes, for any role. Every candidate gets their own questions, you see who knows the job and why, and you pay only for candidates who actually take it.",
+      "practice": "We also want preparing for an interview to be free for everyone. Anyone can take our practice interviews for a role, see their grade and every right answer, and practise again, at no cost. Those who do well can choose to be suggested to companies hiring for a similar role."
     },
     "founder": {
-      "quote": "Whenever I prepared for an interview or tried to learn something new, I spent more time searching for good material than actually studying. Every site covered a piece, and none fit what I needed. So I built prepza: the tool I wished I'd had, one that starts from your goal and guides you to it. I hope it saves you the hours it would have saved me.",
+      "quote": "Hiring well shouldn't be a privilege of big companies with big budgets. I built prepza so that any team can turn a job description into a fair interview in minutes, see who really knows the job, and pay only for the candidates who take it. I hope it helps you find the right people faster.",
       "role": "Solo founder of prepza"
     }
   },
@@ -767,7 +710,6 @@
     "kinds": {
       "question_flagged": "{count, plural, one {A question on “{topic}” in “{title}” was flagged for review.} other {# questions in “{title}” were flagged for review.}}",
       "question_fixed": "{count, plural, one {The AI fixed a flagged question on “{topic}” in “{title}”.} other {The AI fixed # flagged questions in “{title}”.}}",
-      "kit_ready": "Your prep kit “{title}” is ready.",
       "referral_rewarded": "Someone you invited topped up. You got {credits} credits.",
       "auto_top_up_charged": "Automatic top-up added {credits} credits.",
       "auto_top_up_failed": "Automatic top-up couldn't charge the card. Top up to keep your balance going.",
@@ -776,5 +718,77 @@
       "interview_ready": "The interview “{title}” is ready.",
       "interview_cancelled": "{title, select, none {An interview} other {The interview “{title}”}} was cancelled: its topic review waited too long."
     }
+  },
+  "report": {
+    "download": "Download PDF",
+    "passed": "passed · passing grade {mark}%",
+    "notPassed": "not passed · passing grade {mark}%",
+    "notFinished": "not finished yet",
+    "share": "Share report",
+    "fileName": "Report {email}",
+    "failed": "Couldn't make the PDF report.",
+    "shareTitle": "Share report",
+    "recipient": "Recipient's email",
+    "send": "Send <name>PDF</name>",
+    "sent": "Report sent to {email}",
+    "sendFailed": "Couldn't send the report.",
+    "orSummary": "Or send via",
+    "via": "Sent from prepza",
+    "candidatesFileName": "Candidates {title}",
+    "candidateCount": "{count, plural, one {# candidate} other {# candidates}}",
+    "passMark": "passing grade {mark}%",
+    "progressOf": "{progress}% done"
+  },
+  "practice": {
+    "title": "Free interview practice",
+    "intro": "Practise for a role with a timed interview, then see your grade and every right answer. Free of charge.",
+    "about": "Timed practice interview. Once you're done, see your grade and every right answer. Private and free.",
+    "pageTitle": "{title}: free practice interview",
+    "pageDescription": "A free {level} practice interview for {title}: {count, plural, one {# topic} other {# topics}}, timed, with your grade and every right answer after. Practice, not a real job interview.",
+    "start": "Start practice",
+    "again": "Practice again",
+    "continue": "Continue",
+    "history": "Your rounds",
+    "results": "Practice results",
+    "grade": "of the questions right",
+    "notFinished": "not finished",
+    "noRounds": "No rounds yet.",
+    "signIn": "Sign in to see your practice rounds.",
+    "startFailed": "Couldn't start the practice. Please try again.",
+    "gradeLabel": "Grade",
+    "questions": "{count, plural, one {# question} other {# questions}}",
+    "progressLabel": "Progress",
+    "answeredLabel": "questions answered"
+  },
+  "suggest": {
+    "title": "Get suggested to companies",
+    "consent": "Optional. Companies hiring for similar roles may see your name, LinkedIn and first-round score. Change or withdraw it any time in settings.",
+    "link": "LinkedIn link",
+    "share": "Share",
+    "saved": "You can now be suggested to companies.",
+    "withdraw": "Withdraw",
+    "withdrawn": "You won't be suggested to companies anymore.",
+    "invalid": "Use your LinkedIn profile link, like https://www.linkedin.com/in/your-name",
+    "failed": "Couldn't save. Please try again.",
+    "shareAndStart": "Agree & start",
+    "startWithout": "Disagree & start"
+  },
+  "talents": {
+    "about": "Talents who did well practising an interview for a role like this one, and agreed to be suggested.",
+    "empty": "No suggested talents yet.",
+    "score": "Score",
+    "hide": "Hide",
+    "hideFailed": "Couldn't hide the talent. Please try again."
+  },
+  "verify": {
+    "verify": "Verify",
+    "verified": "Verified: {domain}",
+    "title": "Verify company",
+    "text": "Enter the company's website. It's verified once an owner or admin signs in with a work email on it, like you@acme.com: right away if that's you.",
+    "website": "Company website",
+    "save": "Save",
+    "done": "Verified: {domain}",
+    "pending": "Saved. Verified once an owner or admin signs in with an email on {domain}.",
+    "failed": "Couldn't save the website."
   }
 }

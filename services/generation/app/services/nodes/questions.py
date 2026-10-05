@@ -5,7 +5,6 @@ from langchain_core.messages import HumanMessage
 from langgraph.types import Send
 from openai import LengthFinishReasonError
 
-from app.config.settings import settings
 from app.constants.generation import (
     DISTRACTORS,
     MAX_OPTION_CHARS,
@@ -20,6 +19,7 @@ from app.helpers.questions import (
     normalize,
     question_calls,
     split_count,
+    topic_size,
     with_example,
 )
 from app.integrations import llm
@@ -51,9 +51,9 @@ def fan_out_questions(state: State):
     for ti, topic in enumerate(state["topics"]):
         subtopics = topic["subtopics"] or [topic["main_topic"]]
         reused = reused_questions(state, ti)
-        needed = settings.questions_per_topic - len(reused)
+        needed = topic_size(state.get("template", False)) - len(reused)
         per_subtopic = math.ceil(needed * QUESTION_OVERSAMPLE / len(subtopics))
-        calls = question_calls(len(subtopics))
+        calls = question_calls(len(subtopics), topic_size(state.get("template", False)))
         bucket = 0
 
         for si, subtopic in enumerate(subtopics):
@@ -64,7 +64,6 @@ def fan_out_questions(state: State):
                     "subtopic_index": bucket,
                     "subtopic": subtopic,
                     "count": count,
-                    "kind": state.get("kind"),
                     "level": state["level"],
                     "existing": [question["text"] for question in reused],
                     "focus": focus_for(call, calls),
@@ -78,9 +77,7 @@ def fan_out_questions(state: State):
 
 async def generate_questions(task: QuestionTask) -> dict:
     """Questions with their options in one call; ambiguous or incomplete ones are dropped."""
-    structured_llm = llm.get_generation_llm(task.get("kind"), task["level"]).with_structured_output(
-        QuestionItemList
-    )
+    structured_llm = llm.get_generation_llm().with_structured_output(QuestionItemList)
     prompt = QUESTIONS_PROMPT.format(
         level=task["level"],
         topic=task["topic"],
@@ -145,6 +142,6 @@ async def merge_questions(state: State) -> dict:
         texts = [question["text"] for question in reused + merged]
         kept = await distinct_by_meaning(texts, keep_first=len(reused))
         distinct = [merged[index - len(reused)] for index in kept if index >= len(reused)]
-        topic_questions.append(distinct[: settings.questions_per_topic - len(reused)])
+        topic_questions.append(distinct[: topic_size(state.get("template", False)) - len(reused)])
 
     return {"topic_questions": topic_questions}

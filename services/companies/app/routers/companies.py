@@ -8,6 +8,7 @@ from prepza_common.paging import PageParams
 
 from app.constants.invites import COMPANY_NAME_TAKEN, MAX_OWNED_COMPANIES, TOO_MANY_COMPANIES
 from app.constants.roles import Role
+from app.helpers.logos import logo_path
 from app.integrations import billing
 from app.models.companies import Company
 from app.schemas.companies import (
@@ -15,10 +16,13 @@ from app.schemas.companies import (
     CompanyCreate,
     CompanyCreditsOut,
     CompanyOut,
+    CompanyRename,
     ReferralOut,
+    ReferralRewardOut,
 )
 from app.services import company_deletion
 from app.services.access import require_company
+from app.services.verification import verify_by_email
 from app.storage import companies, interviews
 
 router = APIRouter(prefix="/companies", tags=["companies"])
@@ -32,6 +36,9 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
         name=company.name,
         role=member.role,
         interview_count=interview_count,
+        logo_url=logo_path(company),
+        website_domain=company.website_domain,
+        verified_domain=company.verified_domain,
         created_at=company.created_at,
     )
 
@@ -107,12 +114,38 @@ async def get_referral(company_id: UUID, user: CurrentUser) -> ReferralOut:
     """The company's referral link; any member may share it."""
     await require_company(user, company_id)
 
-    return ReferralOut(**await billing.company_referral(company_id))
+    found = await billing.company_referral(company_id)
+    names = await companies.names([row["company_id"] for row in found["rewards"]])
+
+    return ReferralOut(
+        code=found["code"],
+        reward=found["reward"],
+        rewarded=found["rewarded"],
+        rewards=[
+            ReferralRewardOut(name=names.get(row["company_id"]), rewarded_at=row["rewarded_at"])
+            for row in found["rewards"]
+        ],
+    )
 
 
 @router.get("/{company_id}")
 async def get_company(company_id: UUID, user: CurrentUser) -> CompanyOut:
     company, _ = await require_company(user, company_id)
+    # Opening the company is enough: an admin with a work email on its website verifies it.
+    await verify_by_email(company, user)
     totals = await interviews.counts([company.id])
 
     return company_out(company, user.uid, totals.get(company.id, 0))
+
+
+@router.patch("/{company_id}/name", status_code=status.HTTP_204_NO_CONTENT)
+async def rename_company(company_id: UUID, body: CompanyRename, user: CurrentUser) -> None:
+    """Owners and admins rename the company; names stay unique across prepza, ignoring case."""
+    company, _ = await require_company(user, company_id)
+    name = body.title.strip()
+
+    if not name:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "Name the company")
+
+    if name != company.name and not await companies.rename(company.id, name):
+        raise HTTPException(status.HTTP_409_CONFLICT, COMPANY_NAME_TAKEN)

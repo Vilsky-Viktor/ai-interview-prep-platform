@@ -2,9 +2,6 @@
   "settings": {
     "title": "Pengaturan",
     "signIn": "Masuk untuk mengubah pengaturan.",
-    "general": "Umum",
-    "billing": "Tagihan",
-    "referral": "Undangan",
     "language": "Bahasa",
     "languageNote": "Untuk antarmuka dan balasan tutor, serta bahasa awal kit dan wawancara baru. Kamu bisa membuatnya dalam bahasa apa pun yang didukung.",
     "languageFailed": "Bahasa tidak bisa diubah. Coba lagi.",
@@ -14,13 +11,12 @@
     "downloadFailed": "Datamu tidak bisa disiapkan. Coba lagi.",
     "delete": "Hapus akun",
     "searchLanguage": "Cari bahasa",
-    "noLanguage": "Bahasa tidak ditemukan.",
-    "history": "Riwayat tagihan",
-    "historyNote": "Setiap kredit yang masuk dan keluar, terbaru di atas."
+    "noLanguage": "Bahasa tidak ditemukan."
   },
   "userMenu": {
     "signIn": "Masuk",
     "account": "Akun",
+    "adminZone": "Zona admin",
     "settings": "Pengaturan",
     "signOut": "Keluar",
     "theme": "Tema",
@@ -34,17 +30,15 @@
     "main": "Menu utama",
     "legal": "Hukum",
     "pricing": "Harga",
-    "privacy": "Kebijakan privasi",
+    "privacy": "Privasi",
     "terms": "Ketentuan",
     "back": "Kembali",
-    "create": "buat",
-    "explore": "jelajahi",
-    "myKits": "kit saya",
     "hiring": "rekrutmen",
     "pricingLink": "harga",
     "faq": "Tanya jawab",
     "contact": "Hubungi kami",
-    "about": "Tentang kami"
+    "about": "Tentang kami",
+    "practice": "Latihan gratis"
   },
   "signIn": {
     "with": "Masuk dengan",
@@ -80,37 +74,89 @@
     "notFoundText": "Halaman itu tidak ada atau sudah dihapus."
   },
   "home": {
-    "tagline": "Agen AI berlatih bersamamu sampai kamu percaya diri.",
-    "preparingFor": "Bersiap untuk",
-    "words": ["wawancara kerja", "sertifikasi", "ujian", "tes", "promosi"],
-    "widest": "wawancara kerja",
-    "mark": "?"
+    "title": "Wawancarai semua orang\nRekrut talenta sejati",
+    "text": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu. Soal unik untuk setiap kandidat, dan tidak ada waktu untuk bertanya ke AI. Mulai $1 per kandidat."
   },
-  "goal": {
-    "placeholder": "Tempel deskripsi pekerjaan atau jelaskan apa yang ingin kamu pelajari…",
-    "label": "Kamu sedang bersiap untuk apa?",
-    "submit": "Buat persiapan",
-    "failed": "Tidak bisa memulai pembuatan. Coba lagi.",
-    "seePlans": "Isi ulang"
+  "start": {
+    "placeholder": "Tempel deskripsi pekerjaan, atau jelaskan perannya dan apa yang perlu diketahui kandidat",
+    "description": "Deskripsi pekerjaan",
+    "submit": "Buat wawancara",
+    "whichCompany": "Wawancara ini untuk perusahaan mana?",
+    "firstCompany": "Apa nama perusahaanmu?",
+    "newCompany": "Perusahaan baru",
+    "companyName": "Nama perusahaan",
+    "freeCandidates": "Perusahaan pertamamu mewawancarai {count, plural, other {# kandidat}} pertamanya secara gratis.",
+    "back": "Ubah deskripsi",
+    "continue": "Lanjutkan",
+    "starting": "Memulai…",
+    "failed": "Wawancara tidak bisa dimulai. Coba lagi."
   },
-  "membership": {
-    "signIn": "Masuk untuk bergabung",
-    "leave": "Keluar",
-    "join": "Gabung untuk berlatih"
+  "superadmin": {
+    "fixNow": "Perbaiki sekarang",
+    "fixing": "Memperbaiki…",
+    "dismiss": "Abaikan",
+    "fixSent": "Dikirim ke pemeriksa. Soal akan diperbaiki atau diganti sebentar lagi.",
+    "actionFailed": "Tidak berhasil. Coba lagi.",
+    "quality": "Kualitas",
+    "flagged": "Ditandai",
+    "replaced": "Diganti",
+    "noFlagged": "Tidak ada yang ditandai saat ini.",
+    "noReplaced": "Belum ada yang diganti.",
+    "answers": "{count, plural, other {# jawaban}}",
+    "right": "{percent}% benar",
+    "reports": "{count, plural, =0 {tidak ada laporan} other {# laporan}}",
+    "kinds": {
+      "template": "templat",
+      "interview": "wawancara perusahaan"
+    },
+    "flags": {
+      "wrong_key": "jawaban mungkin salah",
+      "rewrite": "perlu soal baru",
+      "weak_options": "perlu opsi yang lebih baik"
+    },
+    "zone": "Zona admin",
+    "templates": "Templat",
+    "new": "Templat baru",
+    "createTitle": "Buat templat",
+    "placeholder": "Tempel deskripsi peran, atau jelaskan perannya dan apa yang perlu diketahui orang di peran itu",
+    "description": "Deskripsi peran",
+    "create": "Buat",
+    "createFailed": "Templat tidak bisa dimulai. Coba lagi.",
+    "text": "Wawancara siap pakai per peran, untuk perusahaan dan talenta.",
+    "deleteLabel": "Hapus {title}",
+    "deleteTitle": "Hapus templat ini?",
+    "deleteText": "Topik dan soalnya akan dihapus. Wawancara yang sudah dibuat perusahaan dari templat ini tetap ada.",
+    "deleteFailed": "Templat tidak bisa dihapus. Coba lagi."
+  },
+  "templates": {
+    "title": "Templat",
+    "empty": "Belum ada templat.",
+    "topics": "{count, plural, other {# topik}}",
+    "search": "Cari berdasarkan peran atau topik",
+    "searchAction": "Cari",
+    "level": "Level: {level}",
+    "anyLevel": "Semua level",
+    "allLanguages": "Semua bahasa",
+    "languages": "{count, plural, other {# bahasa}}",
+    "noMatches": "Tidak ada templat yang cocok.",
+    "use": "Pakai templat",
+    "using": "Memulai…",
+    "useFailed": "Wawancara tidak bisa dimulai dari templat ini. Coba lagi.",
+    "warningTitle": "Templat untuk mencoba prepza.",
+    "warning": "Talenta berlatih dengan templat ini, jadi kandidat mungkin sudah tahu soalnya. Untuk rekrutmen sungguhan, buat wawancara dari deskripsi pekerjaanmu.",
+    "text": "Wawancara siap pakai per peran. Pilih satu sebagai awal wawancaramu; kamu bisa mengubahnya nanti."
   },
   "billing": {
     "paid": "Pembayaran diterima. Sebentar lagi akan muncul di sini.",
     "checkoutFailed": "Halaman pembayaran tidak bisa dibuka. Coba lagi.",
     "credits": "{count, plural, other {# kredit}}",
-    "bonus": "+{count, number} bonus",
     "topUp": "Isi ulang",
-    "balance": "{count} kredit tersedia. Isi ulang",
-    "balanceLow": "{count} kredit tersedia, hampir habis. Isi ulang",
     "low": "Hampir habis",
     "creditsWord": "{count, plural, other {kredit}}",
     "topUpTitle": "Isi ulang: {name}",
-    "topUpNote": "$1 = 100 kredit, dengan bonus untuk jumlah yang lebih besar. Kredit tidak pernah kedaluwarsa.",
-    "customAmount": "Jumlah lain"
+    "topUpNote": "Setiap isi ulang membeli kandidat utuh; makin besar isi ulangnya, makin murah per kandidat. Kredit tidak pernah kedaluwarsa.",
+    "candidates": "{count, plural, other {# kandidat}}",
+    "each": "{price} per kandidat"
   },
   "deleteAccount": {
     "title": "Hapus akunmu?",
@@ -120,83 +166,15 @@
     "deleted": "Akunmu sudah dihapus.",
     "failed": "Akunmu tidak bisa dihapus. Coba lagi."
   },
-  "levels": {
-    "basic": "dasar",
-    "medium": "menengah",
-    "hard": "sulit"
-  },
-  "visibility": {
-    "public": "publik",
-    "private": "pribadi"
-  },
-  "library": {
-    "title": "Kit publik",
-    "search": "Cari judul dan topik",
-    "searchAction": "Cari",
-    "noMatches": "Tidak ada persiapan yang cocok.",
-    "empty": "Belum ada persiapan publik.",
-    "level": "Tingkat: {level}",
-    "anyLevel": "Semua",
-    "languages": "{count, plural, other {# bahasa}}",
-    "sortBy": "Urutkan: {sort}",
-    "sort": {
-      "date": "Tanggal",
-      "rating": "Rating",
-      "joiners": "Peserta"
-    }
-  },
-  "preparations": {
-    "title": "Kit saya",
-    "new": "Persiapan baru",
-    "signIn": "Masuk untuk melihat persiapanmu.",
-    "empty": "Belum ada persiapan. Buat yang pertama atau pilih dari perpustakaan publik.",
-    "topics": "{count, plural, other {# topik}}",
-    "created": "Dibuat {date}",
-    "metaTitle": "Persiapan",
-    "metaDescription": "Persiapan wawancara untuk {title}: {count, plural, other {# topik}} soal pilihan ganda, dengan sesi latihan dan sertifikat.",
-    "history": "Riwayat",
-    "page": "Halaman persiapan",
-    "rounds": "Sesi",
-    "deleteLabel": "Hapus {title}",
-    "deleteTitle": "Hapus {title}?",
-    "deleteText": "Topik dan soalnya akan dihapus, dan semua yang bergabung kehilangan akses. Tindakan ini tidak bisa dibatalkan.",
-    "deleteFailed": "Persiapan tidak bisa dihapus. Coba lagi.",
-    "mastered": "Dikuasai",
-    "masteredTitle": "Dikuasai: setiap topik punya sertifikat",
-    "owner": "Pemilik",
-    "ratingTitle": "Rata-rata penilaian dan jumlah penilaian",
-    "rated": "Terima kasih atas penilaianmu",
-    "ratingUpdated": "Penilaian diperbarui",
-    "ratingFailed": "Penilaianmu tidak bisa disimpan. Coba lagi.",
-    "rateIt": "Beri nilai",
-    "rate": "Beri nilai {value} dari {scale}",
-    "public": "Publik",
-    "nowPublic": "Sekarang ada di perpustakaan publik",
-    "nowPrivate": "Sekarang pribadi",
-    "visibilityFailed": "Visibilitas tidak bisa diubah. Coba lagi."
-  },
   "share": {
-    "share": "Bagikan",
-    "title": "Bagikan persiapan",
-    "public": "Siapa pun yang punya tautan bisa melihat persiapan ini.",
-    "private": "Kami akan mengirim tautan undangan lewat email. Hanya alamat itu yang bisa menerimanya.",
-    "email": "Email",
-    "send": "Kirim",
     "sent": "Undangan dikirim ke {email}",
     "checkEmail": "Periksa alamat email lalu coba lagi.",
     "failed": "Undangan tidak bisa dikirim.",
-    "joined": "Bergabung",
-    "undelivered": "Tidak terkirim",
-    "invited": "Diundang",
     "wrongEmail": "Undangan ini dikirim ke alamat email lain.",
     "acceptFailed": "Undangan tidak bisa diterima. Coba lagi.",
-    "signIn": "Masuk dengan email undangan untuk bergabung dengan persiapan ini.",
     "invalid": "Undangan ini sudah tidak berlaku.",
     "invitedToJoin": "Kamu diundang untuk bergabung.",
-    "open": "Buka persiapan",
-    "join": "Gabung ke persiapan",
-    "mismatch": "Email tidak cocok. Masuk dengan email undangan untuk bergabung.",
-    "inviteTitle": "Undangan berbagi"
+    "mismatch": "Email tidak cocok. Masuk dengan email undangan untuk bergabung."
   },
   "reportReasons": {
     "wrong_answer": "Jawaban yang ditandai salah",
@@ -215,6 +193,18 @@
     "reports": "Laporan",
     "showReports": "Tampilkan laporan ({count})",
     "regenerate": "Buat ulang",
+    "manage": "Kelola soal",
+    "wrongAnswer": "Jawaban salah",
+    "checking": "Memeriksa…",
+    "markedWrong": "Terima kasih. Soal ini sedang diperiksa dan akan diperbaiki atau diganti.",
+    "markWrongFailed": "Tidak bisa dikirim untuk diperiksa. Coba lagi.",
+    "ofCount": "dari {count, number}",
+    "per": "per",
+    "candidate": "kandidat",
+    "showOptions": "Tampilkan opsi jawaban",
+    "hideOptions": "Sembunyikan opsi jawaban",
+    "correct": "Jawaban benar",
+    "wrong": "Jawaban salah",
     "regenerating": "Membuat ulang…",
     "regenerated": "Soal dibuat ulang",
     "regenerateFailed": "Soal tidak bisa dibuat ulang. Coba lagi.",
@@ -227,79 +217,27 @@
     "selectReason": "Pilih alasan",
     "details": "Detail",
     "showLess": "Tampilkan lebih sedikit",
+    "more": "+{count, number} lagi",
     "showAll": "Tampilkan semua",
     "limitRange": "Masukkan angka dari 1 sampai {count}.",
     "limitFailed": "Batas tidak bisa disimpan.",
     "limit": "Batas soal",
-    "of": "dari",
     "count": "{count, plural, other {soal}}",
-    "loadFailed": "Soal tidak bisa dimuat."
-  },
-  "certificate": {
-    "title": "Sertifikat",
-    "metaDescription": "{name} menyelesaikan {topic} dengan skor {score}%.",
-    "heading": "Sertifikat pencapaian",
-    "for": "Atas keberhasilan menyelesaikan:",
-    "finalScore": "Skor akhir",
-    "issued": "Diterbitkan",
-    "howTo": "Cara mendapatkan sertifikat"
+    "loadFailed": "Soal tidak bisa dimuat.",
+    "yourAnswer": "jawabanmu"
   },
   "rounds": {
-    "title": "Sesi",
-    "rounds": "Sesi",
-    "compare": "Bandingkan",
-    "compareTitle": "Bandingkan sesi",
     "answered": "Dijawab",
     "correct": "Benar",
     "incorrect": "Salah",
     "notAnswered": "Belum dijawab",
-    "correctAnswer": "Jawaban benar",
-    "yourAnswer": "Jawabanmu",
-    "askFollowUp": "Ajukan pertanyaan lanjutan",
-    "followUp": "Pertanyaan lanjutan",
-    "followUpPlaceholder": "Ajukan pertanyaan lanjutan…",
-    "replyFailed": "Tidak bisa mendapatkan balasan. Coba lagi.",
-    "firstRound": "Sesi pertamamu di topik ini",
-    "sameAsLast": "Sama seperti sesi terakhirmu",
-    "change": "{change} poin sejak sesi terakhirmu",
-    "topicAnswered": "Topik: {answered} dari {total} soal dijawab",
-    "answeredOf": "{answered} dari {total} dijawab",
-    "finalScore": "Skor akhir",
-    "certificate": "Sertifikat",
-    "history": "Riwayat",
-    "preparationPage": "Halaman persiapan",
-    "noRounds": "Belum ada sesi.",
-    "selectToCompare": "Pilih untuk dibandingkan",
-    "grade": "nilai",
-    "continue": "Lanjutkan",
-    "start": "Mulai",
     "finish": "Selesai",
     "finishing": "Menyelesaikan…",
-    "finishRound": "Selesaikan sesi",
-    "deleteRound": "Hapus sesi",
-    "finishTitle": "Selesaikan sesi ini?",
-    "deleteTitle": "Hapus sesi ini?",
-    "unscored": "Soal yang belum dijawab tidak akan dinilai.",
-    "noMore": "Kamu tidak bisa menjawab soal lagi.",
-    "cantUndo": "Tindakan ini tidak bisa dibatalkan.",
-    "deleteFailed": "Sesi tidak bisa dihapus. Coba lagi.",
-    "finishFailed": "Sesi tidak bisa diselesaikan. Coba lagi.",
-    "startFailed": "Sesi tidak bisa dimulai. Coba lagi.",
-    "answerFailed": "Jawabanmu tidak bisa disimpan. Coba lagi.",
-    "signIn": "Masuk untuk melanjutkan sesi ini.",
-    "missing": "Sesi ini tidak ada.",
-    "allAnswered": "Kamu sudah menjawab semua soal di sesi ini.",
     "next": "Soal berikutnya",
-    "progress": "Soal yang dijawab menuju sertifikat",
-    "nextFailed": "Soal berikutnya tidak bisa dimuat. Coba lagi.",
-    "submitFailed": "Jawabanmu tidak bisa dikirim. Coba lagi.",
-    "freeTurns": "Sisa {count, plural, other {# pertanyaan gratis}} ke tutor untuk soal ini",
-    "paidTurns": "Setiap pertanyaan berikutnya untuk soal ini membutuhkan {count, plural, other {# kredit}}",
-    "buyCertificate": "Dapatkan sertifikat · {count} kredit",
-    "makeItYours": "Bersiap untuk pekerjaan tertentu? Tempel teks lowongannya dan dapatkan kit khusus untuk itu.",
-    "makeItYoursAction": "Jadikan milikmu"
+    "submitFailed": "Jawabanmu tidak bisa dikirim. Coba lagi."
   },
   "session": {
+    "toTest": "Ke wawancara",
     "startFailed": "Wawancara tidak bisa dimulai. Coba lagi.",
     "finishFailed": "Wawancara tidak bisa diselesaikan. Coba lagi.",
     "continueFailed": "Tidak bisa melanjutkan. Coba lagi.",
@@ -351,17 +289,7 @@
     "changes": "Perubahan topik",
     "tooMany": "Pilih maksimal {max} topik, atau jelaskan cara menggabungkannya.",
     "apply": "Terapkan perubahan",
-    "approve": "Setujui dan buat",
-    "approvePrice": "Setujui dan buat · {count} kredit",
-    "unfinished": "Belum selesai"
-  },
-  "generationStatus": {
-    "queued": "Sedang dibuat",
-    "running": "Sedang dibuat",
-    "awaiting_review": "Tinjau topik",
-    "done": "Selesai",
-    "failed": "Gagal",
-    "cancelled": "Dibatalkan"
+    "approve": "Setujui dan buat"
   },
   "candidateStatus": {
     "invited": "diundang",
@@ -369,7 +297,9 @@
     "in_process": "berlangsung",
     "finished": "selesai",
     "deleted": "dihapus",
-    "expired": "kedaluwarsa"
+    "expired": "kedaluwarsa",
+    "passed": "lulus",
+    "flagged": "ditandai"
   },
   "roles": {
     "owner": "pemilik",
@@ -385,17 +315,17 @@
     "owner": "Pemilik",
     "interviewCount": "{count, plural, other {# wawancara}}",
     "interviews": "Wawancara",
+    "templates": "Templat",
     "admins": "Admin",
     "referrals": "Undangan",
     "new": "Perusahaan baru",
-    "newText": "Buat perusahaan untuk membuat wawancara dan mengundang kandidat.",
     "name": "Nama perusahaan",
     "create": "Buat",
     "createFailed": "Perusahaan tidak bisa dibuat. Coba lagi.",
     "signInJoin": "Masuk dengan email undangan untuk bergabung dengan perusahaan ini.",
     "open": "Buka perusahaan",
     "join": "Gabung ke perusahaan",
-    "creditsLeft": "{count, plural, other {kredit tersedia}}",
+    "creditsLeft": "{count, plural, other {kredit}}",
     "creditsLow": "Hampir habis: isi ulang untuk terus mengundang kandidat.",
     "timeLeft": "Sisa waktu: {time}",
     "removeLabel": "Hapus {name}",
@@ -403,7 +333,12 @@
     "removeText": "Wawancara dan undangannya akan dihapus.",
     "remove": "Hapus",
     "removeFailed": "Perusahaan tidak bisa dihapus.",
-    "page": "Perusahaan"
+    "page": "Perusahaan",
+    "logo": "Logo",
+    "uploadLogo": "Unggah logo",
+    "changeLogo": "Ganti logo",
+    "removeLogo": "Hapus logo",
+    "logoFailed": "Logo tidak bisa disimpan."
   },
   "candidates": {
     "scorecard": "Hasil",
@@ -415,6 +350,11 @@
     "copies": "{count, plural, other {# percobaan menyalin}}",
     "fastAnswers": "{count, plural, other {# jawaban cepat}}",
     "empty": "Belum ada kandidat yang diundang.",
+    "noMatches": "Tidak ada kandidat yang cocok.",
+    "search": "Cari kandidat berdasarkan email",
+    "searchAction": "Cari",
+    "status": "Status: {status}",
+    "anyStatus": "semua status",
     "progress": "Kemajuan",
     "grade": "Nilai",
     "resend": "Kirim ulang undangan",
@@ -432,11 +372,27 @@
       "date": "Tanggal"
     }
   },
+  "interviewStatus": {
+    "new": "Baru",
+    "in_process": "Dalam proses",
+    "hired": "Diterima"
+  },
   "interviews": {
     "title": "Wawancara",
     "interview": "Wawancara",
     "candidates": "Kandidat",
     "new": "Wawancara baru",
+    "createTitle": "Buat wawancara",
+    "try": "Coba sebagai kandidat",
+    "newCandidate": "Kandidat baru",
+    "linkTitle": "Tautan yang bisa dibagikan",
+    "linkText": "Untuk iklan lowongan: siapa pun yang punya tautan bisa mengikuti wawancara. Setiap orang dikenai biaya seperti kandidat yang diundang.",
+    "linkFailed": "Tautan tidak bisa diubah. Coba lagi.",
+    "passMark": "Nilai lulus",
+    "passMarkLabel": "Nilai lulus dalam persen",
+    "markHired": "Tandai diterima",
+    "tryLabel": "Coba {title} sebagai kandidat",
+    "tryFailed": "Pratinjau tidak bisa dimulai. Coba lagi.",
     "generating": "Sedang dibuat…",
     "fallbackTitle": "wawancara",
     "continueGeneration": "Lanjutkan pembuatan",
@@ -455,12 +411,22 @@
     "adminEmail": "Email admin",
     "addAdmin": "Tambah admin",
     "adminFailed": "Admin itu tidak bisa diundang. Coba lagi.",
-    "candidateEmail": "Email kandidat",
     "invite": "Undang",
     "jobDescription": "Deskripsi pekerjaan",
     "pasteJob": "Tempel deskripsi pekerjaan: peran, persyaratan, dan nilai tambahnya…",
     "generate": "Buat wawancara",
-    "startFailed": "Wawancara tidak bisa dimulai. Coba lagi."
+    "startFailed": "Wawancara tidak bisa dimulai. Coba lagi.",
+    "candidateEmails": "Email kandidat",
+    "emailsHint": "Satu email atau banyak, dipisahkan koma atau baris baru",
+    "uploadFile": "Unggah file",
+    "invitedMany": "{count} kandidat diundang",
+    "skip": {
+      "invalid": "{count, plural, other {# email tidak valid}}.",
+      "limit": "{count, plural, other {# email}} melebihi batas emailmu untuk saat ini. Coba lagi dalam satu jam.",
+      "no_credits": "{count, plural, other {# kandidat tidak diundang}}: kredit habis. Isi ulang untuk mengundang mereka.",
+      "failed": "{count, plural, other {# undangan}} tidak bisa dikirim. Coba lagi."
+    },
+    "talents": "Talenta yang disarankan"
   },
   "invite": {
     "signIn": "Masuk dengan email undangan untuk mengikuti wawancara ini.",
@@ -473,7 +439,7 @@
     "timeRunsOut": "Saat waktu sebuah soal habis, soal itu dihitung salah dan soal berikutnya terbuka. Waktu tetap berjalan meski kamu pergi.",
     "unanswered": "Soal yang tidak dijawab dihitung salah.",
     "saved": "Kemajuan disimpan: buka tautan ini lagi untuk melanjutkan.",
-    "stay": "Tetap di halaman ini: meninggalkannya atau menyalin akan dicatat (<link>cara kami menanganinya</link>).",
+    "stay": "Tetap di halaman ini: meninggalkannya atau menyalin akan dicatat (<link>privasi</link>).",
     "finished": "Wawancara ini sudah selesai.",
     "continue": "Lanjutkan",
     "start": "Terima dan mulai",
@@ -497,29 +463,18 @@
   },
   "pricing": {
     "title": "Harga",
-    "intro": "Bayar hanya yang kamu pakai: $1 = 100 kredit, dan kredit tidak pernah kedaluwarsa. Tanpa langganan.",
-    "learners": "Untuk individu",
-    "welcome": "Saat mendaftar",
-    "referrals": "Undangan",
-    "referralsNote": "Bagikan tautanmu dari Pengaturan, atau tautan perusahaan dari tab Undangan miliknya.",
-    "referral": "Teman yang kamu undang mengisi ulang untuk pertama kali",
-    "companyReferral": "Perusahaan yang kamu undang mengisi ulang ${min} atau lebih untuk pertama kali",
-    "each": "masing-masing {count, number} kredit",
-    "credits": "{count, plural, other {# kredit}}",
-    "companies": "Untuk perusahaan",
-    "kit": "Kit milikmu sendiri, dibuat dari deskripsi pekerjaan",
-    "chat": "Tutor AI: {free, plural, other {# pertanyaan gratis}} per soal, lalu",
-    "perTurn": "{count, plural, other {# kredit}} per pertanyaan",
-    "ownCertificate": "Sertifikat untuk kit sendiri atau kit yang dibagikan",
-    "publicCertificate": "Sertifikat untuk kit publik",
-    "publicPractice": "Latihan di kit publik ({count, plural, other {# topik baru}} per hari)",
-    "draftTopics": "Topik yang disusun untuk deskripsi pekerjaan atau tujuanmu",
-    "gift": "{count, number} kredit gratis",
+    "intro": "Bayar per kandidat. Membuat wawancara gratis, dan tidak ada langganan.",
+    "test": "Membuat wawancara",
     "free": "Gratis",
-    "interview": "Membuat wawancara",
-    "candidate": "Setiap kandidat yang menyelesaikan wawancara dan menjawab setidaknya satu soal",
-    "companyWelcome": "Perusahaan pertamamu",
-    "openCompanies": "Perusahaan",
+    "candidate": "Setiap kandidat yang menjawab minimal satu soal",
+    "candidateVolume": "Dengan kredit dari isi ulang ${from, number} atau lebih",
+    "perCandidate": "${dollars, number} per kandidat",
+    "welcome": "{count, plural, other {# kandidat}} pertamamu",
+    "credits": "$1 = 100 kredit, kredit tidak pernah kedaluwarsa.",
+    "referrals": "Undangan",
+    "referralsNote": "Bagikan tautan perusahaanmu dari tab undangan perusahaan.",
+    "companyReferral": "Perusahaan yang kamu undang melakukan isi ulang pertama",
+    "each": "masing-masing {count, number} kredit",
     "topUp": "Isi ulang"
   },
   "site": {
@@ -528,22 +483,6 @@
   "legal": {
     "updated": "Terakhir diperbarui",
     "englishOnly": "Dokumen ini hanya tersedia dalam bahasa Inggris."
-  },
-  "credits": {
-    "noHistory": "Belum ada apa-apa.",
-    "reasons": {
-      "welcome": "Hadiah selamat datang",
-      "topup": "Isi ulang",
-      "kit": "Kit",
-      "candidate": "Kandidat",
-      "certificate": "Sertifikat",
-      "author_share": "Kit publikmu menghasilkan sertifikat",
-      "chat": "Pertanyaan ke tutor",
-      "refund": "Pengembalian dana",
-      "chargeback": "Pembayaran dibatalkan oleh bank",
-      "chargeback_reversed": "Pembayaran yang dibatalkan dipulihkan",
-      "referral": "Hadiah undangan"
-    }
   },
   "autoTopUp": {
     "title": "Isi ulang otomatis",
@@ -566,43 +505,42 @@
     "label": "Buat dalam"
   },
   "referral": {
-    "title": "Undang teman",
-    "note": "Kalian berdua mendapat {reward, number} kredit saat temanmu mengisi ulang untuk pertama kali.",
     "companyTitle": "Undang perusahaan lain",
-    "companyNote": "Kedua perusahaan mendapat {reward, number} kredit saat perusahaan baru mengisi ulang ${min} atau lebih.",
+    "companyNote": "Kalian berdua mendapat {reward, number} kredit saat mereka melakukan isi ulang pertama, berapa pun jumlahnya.",
+    "deletedCompany": "Perusahaan yang dihapus",
+    "credits": "+{count, number} kredit",
     "rewarded": "{count, plural, =0 {Belum ada hadiah.} other {Sudah # kali mendapat hadiah.}}"
   },
   "topUp": {
     "title": "Isi ulang",
     "intro": "$1 = 100 kredit, dan kredit tidak pernah kedaluwarsa.",
     "signIn": "Masuk untuk mengisi ulang kreditmu.",
-    "yours": "Saldo pribadi",
-    "personal": "Kredit pribadi",
-    "personalNote": "Untuk kit, tutor AI, dan sertifikatmu.",
     "companies": "Kredit perusahaan",
     "companiesNote": "Untuk kandidat setiap perusahaan.",
+    "noCompany": "Kredit milik perusahaan. Buat perusahaanmu dulu, lalu isi ulang di sini.",
+    "createCompany": "Buat perusahaan",
     "pricing": "Harga"
   },
   "landing": {
     "more": "Cara kerjanya",
     "how": {
-      "title": "Tiga langkah menuju siap",
+      "title": "Tiga langkah menuju hasil pertamamu",
       "paste": {
-        "title": "Tempel atau jelaskan",
-        "text": "Deskripsi pekerjaan, silabus, atau keterampilan dan teknologi yang ingin kamu pelajari."
+        "title": "Tempel deskripsi pekerjaan",
+        "text": "Peran apa pun, bahasa apa pun.\nprepza menentukan apa yang wajib diketahui kandidat dan mengusulkan topik."
       },
       "review": {
-        "title": "Tinjau rencananya",
-        "text": "Agen AI memilih hal yang penting dan mengusulkan topik.\nPertahankan, ganti namanya, atau ubah."
+        "title": "Periksa topiknya",
+        "text": "Pertahankan, ganti nama, atau ubah.\nSoal baru ditulis setelah kamu menyetujuinya."
       },
-      "practice": {
-        "title": "Berlatih sampai percaya diri",
-        "text": "Setiap topik punya soalnya sendiri.\nBerlatih per sesi dan lihat kemajuanmu bertambah."
+      "invite": {
+        "title": "Undang kandidat",
+        "text": "Tempel daftar, unggah file, atau bagikan satu tautan.\nPengingat terkirim otomatis. Kamu melihat siapa yang menguasai pekerjaan, diurutkan berdasarkan skor."
       }
     },
     "control": {
-      "title": "Kamu yang memutuskan apa yang dipelajari",
-      "text": "Tidak ada soal yang ditulis sebelum kamu menyetujui topiknya. Hapus centang pada yang sudah kamu kuasai, ganti nama topik, edit subtopiknya, atau cukup beri tahu AI apa yang perlu diubah dan biarkan AI mengerjakan sisanya.",
+      "title": "Kamu yang menentukan materi wawancara",
+      "text": "Tidak ada soal yang ditulis sampai kamu menyetujui topiknya. Hapus centang yang tidak dibutuhkan peran, ganti nama topik, ubah subtopiknya, atau beri tahu AI apa yang perlu diubah.",
       "topics": {
         "design": "Desain sistem",
         "sql": "Pemasaran konten",
@@ -628,43 +566,9 @@
         "Mengukur tayangan"
       ]
     },
-    "gaps": {
-      "title": "Latihan yang menemukan kelemahanmu",
-      "text": "Setiap sesi menanyakan ulang semua soal topik, dimulai dari yang kamu jawab salah terakhir kali. Bandingkan sesi-sesimu dan lihat kelemahanmu makin berkurang.",
-      "items": {
-        "first": {
-          "question": "Metrik mana yang menunjukkan siapa yang menonton iklan sampai habis?",
-          "wrong": "Rasio klik (CTR)",
-          "right": "Rasio tayang penuh (VTR)"
-        },
-        "second": {
-          "question": "Apa yang terutama dikurangi oleh cache?",
-          "wrong": "Biaya penyimpanan",
-          "right": "Waktu respons"
-        }
-      }
-    },
-    "tutor": {
-      "title": "Tutor untuk setiap soal",
-      "text": "Setelah setiap jawaban, kamu langsung melihat pilihan yang benar. Belum paham kenapa benar? Tanya tutor AI dan gali sedalam yang kamu perlu.",
-      "question": "Pelanggan kesal karena pesanannya terlambat. Apa yang kamu lakukan pertama kali?",
-      "options": {
-        "first": "Menjelaskan alasan keterlambatan",
-        "second": "Mengakui masalah dan minta maaf",
-        "third": "Langsung menawarkan diskon",
-        "fourth": "Meneruskan kasus ke manajer"
-      },
-      "ask": "Kenapa tidak menjelaskan dulu?",
-      "answer": "Akui masalahnya dulu: orang mau mendengar alasan setelah merasa didengar."
-    },
-    "proof": {
-      "title": "Ketahui kapan kamu siap",
-      "text": "Setiap topik punya bilah kemajuan menuju sertifikatnya. Raih sertifikatnya, dan topik itu dianggap dikuasai.",
-      "again": "Mulai lagi"
-    },
     "quality": {
-      "title": "Soal yang membaik dengan sendirinya",
-      "text": "Suka, tidak suka, dan laporan mengungkap soal yang lemah. Pemeriksa AI memperbaiki atau menggantinya secara otomatis, dan pemilik kit bisa membuat ulang soal apa pun sendiri.",
+      "title": "Soal yang memperbaiki dirinya sendiri",
+      "text": "Jawaban, penilaian, dan laporan kandidat mengungkap soal yang lemah. Pemeriksa AI memperbaiki atau menggantinya secara otomatis, dan kamu bisa membuat ulang soal mana pun sendiri.",
       "items": {
         "good": "Apa yang dipercepat oleh indeks database?",
         "weak": "Bahasa pemrograman apa yang terbaik?",
@@ -673,45 +577,89 @@
       "comment": "Tergantung proyeknya, jadi tidak ada satu jawaban yang benar.",
       "list": "Soal topik"
     },
-    "share": {
-      "title": "Bagikan atau terbitkan",
-      "text": "Undang teman atau rekan kerja lewat email untuk berlatih bersama dengan kitmu, atau terbitkan di perpustakaan publik untuk semua yang sedang menyiapkan hal yang sama.",
-      "private": "Bagikan privat",
-      "public": "Bagikan publik",
-      "browse": "Jelajahi perpustakaan"
+    "try": {
+      "title": "Coba dulu sebelum kandidatmu",
+      "text": "Ikuti wawancara latihan gratis untuk peran serupa, atau buka wawancaramu sendiri sebagai kandidat sebelum mengundang siapa pun.",
+      "browse": "Lihat wawancara latihan",
+      "topic": "Desain sistem",
+      "question": "Apa yang terutama dikurangi oleh cache di depan database?",
+      "options": {
+        "a": "Ukuran database",
+        "b": "Seberapa sering database dibaca",
+        "c": "Jumlah tabel",
+        "d": "Lama waktu pencadangan"
+      },
+      "points": {
+        "practice": "Wawancara latihan gratis untuk banyak peran",
+        "preview": "Wawancaramu sendiri sebagai kandidat"
+      }
+    },
+    "link": {
+      "title": "Satu tautan untuk lowonganmu",
+      "text": "Pasang tautan wawancara di iklan lowonganmu. Siapa pun yang melamar langsung mengikuti wawancara dan muncul di daftar kandidatmu, diurutkan berdasarkan skor.",
+      "note": "Siapa pun yang punya tautan bisa mengikuti wawancara.",
+      "points": {
+        "anywhere": "Di situs lowongan kerja, LinkedIn, atau situsmu",
+        "off": "Matikan setelah posisinya terisi"
+      }
     },
     "companies": {
-      "title": "Sedang merekrut? Uji kandidat secara adil",
-      "text": "Ubah deskripsi pekerjaan menjadi wawancara berbatas waktu dan undang kandidat untuk menilai mereka.",
+      "title": "Lihat siapa yang menguasai pekerjaan",
+      "text": "Kandidat mengikuti wawancara dari undangan email-mu. Skor mereka masuk seiring mereka menjawab, hijau atau merah dibanding nilai lulusmu.",
       "points": {
         "own": "Soal unik untuk tiap kandidat",
         "timed": "Hitung mundur di setiap soal",
         "flags": "Tanda untuk terburu-buru, keluar, atau menyalin",
-        "private": "Skor tidak terlihat oleh kandidat"
+        "private": "Kandidat tidak pernah melihat skornya"
       },
       "candidate": "Kandidat",
       "score": "Skor",
       "rushed": "Jawaban terburu-buru",
       "left": "Keluar dari halaman",
-      "start": "Mulai merekrut"
+      "role": "Pengembang backend · nilai lulus {mark}%"
+    },
+    "reports": {
+      "title": "Bagikan hasil dengan satu klik",
+      "text": "Laporan PDF yang jelas untuk satu kandidat atau seluruh daftar. Unduh, atau kirim ke manajer perekrutan langsung dari prepza.",
+      "points": {
+        "pdf": "Satu kandidat atau semuanya",
+        "share": "Kirim PDF lewat email atau bagikan di aplikasi pesan"
+      }
+    },
+    "brand": {
+      "title": "Merekmu, terverifikasi",
+      "text": "Kandidat melihat logomu dari email pertama hingga soal terakhir, dengan tanda centang yang menunjukkan perusahaanmu nyata.",
+      "role": "Pengembang backend",
+      "points": {
+        "email": "Logomu di email undangan",
+        "interview": "Di wawancara yang diikuti kandidat",
+        "report": "Di setiap laporan PDF",
+        "verified": "Diverifikasi lewat email kerja timmu"
+      }
+    },
+    "talent": {
+      "title": "Dapatkan saran talenta",
+      "text": "Pencetak skor tertinggi dari wawancara latihan gratis kami, disarankan untuk peranmu. Gratis.",
+      "suggested": "Disarankan untuk Backend developer",
+      "score": "Skor",
+      "points": {
+        "free": "Gratis untukmu dan untuk talenta",
+        "practice": "Dinilai lewat wawancara berbatas waktu",
+        "first": "Hanya percobaan pertama yang dihitung",
+        "link": "Mereka sendiri yang memilih untuk disarankan"
+      }
     },
     "languages": {
-      "title": "Dalam bahasamu",
-      "text": "Gunakan prepza dalam salah satu dari {count} bahasa. Tempel deskripsi pekerjaan dalam satu bahasa dan berlatih dalam bahasa lain."
+      "title": "Peran apa pun, bahasa apa pun",
+      "text": "prepza tersedia dalam {count} bahasa. Tempel deskripsi pekerjaan dalam satu bahasa dan wawancarai kandidat dalam bahasa lain."
     },
     "pricing": {
-      "title": "Bayar hanya untuk yang berhasil",
-      "text": "Tanpa langganan atau paket. Isi ulang saat perlu: kredit tidak pernah kedaluwarsa, dan yang gagal tidak dikenai biaya.",
+      "title": "Bayar per kandidat",
+      "text": "Membuat wawancara gratis, begitu pula {free, plural, other {# kandidat}} pertamamu. Setelah itu, kamu hanya membayar kandidat yang menjawab, tanpa langganan.",
       "see": "Lihat harga",
-      "company": "Acme Inc.",
-      "personal": "Untuk kit dan tutor AI-mu.",
-      "learner": "Kredit pelajar"
-    },
-    "referrals": {
-      "title": "Dapatkan kredit sebagai afiliasi",
-      "text": "Undang teman atau perusahaan lain dengan tautanmu. Saat mereka isi ulang pertama kali, kalian berdua dapat kredit.",
-      "whereLearner": "Tautanmu ada di {settings} → {referral}.",
-      "whereCompany": "Tautan perusahaanmu ada di {hiring} → perusahaanmu → {referrals}."
+      "perCandidate": "per kandidat",
+      "base": "Bayar sesuai pemakaian",
+      "volume": "Dengan isi ulang mulai ${from, number}"
     },
     "faq": {
       "title": "Masih ada pertanyaan?",
@@ -719,8 +667,8 @@
       "read": "buka tanya jawab"
     },
     "ready": {
-      "title": "Siap untuk bersiap?",
-      "start": "Mulai sekarang"
+      "title": "Siap mewawancarai kandidat pertamamu?",
+      "start": "Buat wawancara"
     }
   },
   "faq": {
@@ -747,14 +695,15 @@
   },
   "about": {
     "title": "Tentang kami",
-    "intro": "prepza membantumu bersiap dengan percaya diri, dan memberi perusahaan cara yang sederhana dan terjangkau untuk menguji kandidat.",
+    "intro": "prepza membantu perusahaan menemukan orang yang benar-benar menguasai pekerjaannya: wawancara yang adil dan berbatas waktu, dibuat dari deskripsi pekerjaanmu, dengan harga yang terjangkau bagi tim mana pun. Dan siapa pun yang sedang bersiap untuk wawancara bisa berlatih gratis.",
     "company": {
       "title": "Mengapa kami ada",
-      "learners": "Bersiap untuk wawancara, ujian, atau keterampilan baru seharusnya tidak dimulai dengan berjam-jam mencari. Ceritakan pada prepza apa yang ingin kamu capai, dan prepza akan mengubahnya menjadi rencana yang jelas: topik-topik penting, soal latihan untuk setiap topik, dan tutor yang menjelaskan setiap jawaban sampai kamu benar-benar paham.",
-      "companies": "Untuk perusahaan, kami ingin rekrutmen terasa adil dan terjangkau bagi tim mana pun, bukan hanya tim besar. Ubah deskripsi pekerjaan menjadi wawancara berbatas waktu dalam hitungan menit, beri setiap kandidat soalnya sendiri, dan bayar hanya untuk kandidat yang benar-benar mengikutinya."
+      "problem": "Rekrutmen sering bergantung pada CV dan percakapan yang menyenangkan, dan keduanya bisa menyesatkan. Alat asesmen yang membantu dihargai untuk perusahaan besar, dengan paket tahunan dan biaya per pengguna, sehingga kebanyakan tim tidak memakainya.",
+      "approach": "prepza mengubah deskripsi pekerjaan menjadi wawancara berbatas waktu dalam hitungan menit, untuk peran apa pun. Setiap kandidat mendapat soalnya sendiri, kamu melihat siapa yang menguasai pekerjaan dan alasannya, dan kamu hanya membayar untuk kandidat yang benar-benar mengikutinya.",
+      "practice": "Kami juga ingin persiapan wawancara gratis untuk semua orang. Siapa pun bisa mengikuti wawancara latihan kami untuk suatu peran, melihat nilainya dan semua jawaban yang benar, lalu berlatih lagi, tanpa biaya. Mereka yang berhasil baik bisa memilih untuk disarankan ke perusahaan yang merekrut untuk peran serupa."
     },
     "founder": {
-      "quote": "Setiap kali aku bersiap untuk wawancara atau mencoba mempelajari hal baru, aku lebih banyak menghabiskan waktu mencari materi yang bagus daripada benar-benar belajar. Setiap situs hanya membahas sebagian, dan tak satu pun cocok dengan yang kubutuhkan. Jadi aku membangun prepza: alat yang dulu ingin kumiliki, yang berangkat dari tujuanmu dan membimbingmu sampai ke sana. Semoga prepza menghemat waktumu sebanyak yang seharusnya bisa dihematnya untukku.",
+      "quote": "Merekrut dengan baik seharusnya bukan hak istimewa perusahaan besar dengan anggaran besar. Aku membangun prepza agar tim mana pun bisa mengubah deskripsi pekerjaan menjadi wawancara yang adil dalam hitungan menit, melihat siapa yang benar-benar menguasai pekerjaan, dan hanya membayar untuk kandidat yang mengikutinya. Semoga prepza membantumu menemukan orang yang tepat lebih cepat.",
       "role": "Pendiri tunggal prepza"
     }
   },
@@ -765,7 +714,6 @@
     "kinds": {
       "question_flagged": "{count, plural, =1 {Sebuah soal tentang “{topic}” di “{title}” ditandai untuk ditinjau.} other {# soal di “{title}” ditandai untuk ditinjau.}}",
       "question_fixed": "{count, plural, =1 {AI memperbaiki soal yang ditandai tentang “{topic}” di “{title}”.} other {AI memperbaiki # soal yang ditandai di “{title}”.}}",
-      "kit_ready": "Kit “{title}” milikmu sudah siap.",
       "referral_rewarded": "Seseorang yang kamu undang sudah isi ulang. Kamu dapat {credits} kredit.",
       "auto_top_up_charged": "Isi ulang otomatis menambahkan {credits} kredit.",
       "auto_top_up_failed": "Isi ulang otomatis gagal menagih kartu. Isi ulang agar saldomu tidak habis.",
@@ -774,5 +722,77 @@
       "interview_ready": "Wawancara “{title}” sudah siap.",
       "interview_cancelled": "{title, select, none {Sebuah wawancara} other {Wawancara “{title}”}} dibatalkan: tinjauan topiknya menunggu terlalu lama."
     }
+  },
+  "report": {
+    "download": "Unduh PDF",
+    "passed": "lulus · nilai lulus {mark}%",
+    "notPassed": "tidak lulus · nilai lulus {mark}%",
+    "notFinished": "belum selesai",
+    "share": "Bagikan laporan",
+    "fileName": "Laporan {email}",
+    "failed": "Laporan PDF tidak bisa dibuat.",
+    "shareTitle": "Bagikan laporan",
+    "recipient": "Email penerima",
+    "send": "Kirim <name>PDF</name>",
+    "sent": "Laporan dikirim ke {email}",
+    "sendFailed": "Laporan tidak bisa dikirim.",
+    "orSummary": "Atau kirim lewat",
+    "via": "Dikirim dari prepza",
+    "candidatesFileName": "Kandidat {title}",
+    "candidateCount": "{count, plural, other {# kandidat}}",
+    "passMark": "nilai lulus {mark}%",
+    "progressOf": "{progress}% selesai"
+  },
+  "practice": {
+    "title": "Latihan wawancara gratis",
+    "intro": "Berlatih untuk suatu peran dengan wawancara berbatas waktu, lalu lihat nilaimu dan semua jawaban yang benar. Gratis.",
+    "about": "Wawancara latihan berbatas waktu. Setelah selesai, lihat nilaimu dan semua jawaban yang benar. Privat dan gratis.",
+    "pageTitle": "{title}: wawancara latihan gratis",
+    "pageDescription": "Wawancara latihan {level} gratis untuk {title}: {count, plural, other {# topik}}, berbatas waktu, dengan nilai dan semua jawaban yang benar setelahnya. Latihan, bukan wawancara kerja sungguhan.",
+    "start": "Mulai latihan",
+    "again": "Latihan lagi",
+    "continue": "Lanjutkan",
+    "history": "Sesi latihanmu",
+    "results": "Hasil latihan",
+    "grade": "soal dijawab benar",
+    "notFinished": "belum selesai",
+    "noRounds": "Belum ada sesi.",
+    "signIn": "Masuk untuk melihat sesi latihanmu.",
+    "startFailed": "Latihan tidak bisa dimulai. Coba lagi.",
+    "gradeLabel": "Nilai",
+    "questions": "{count, plural, other {# soal}}",
+    "progressLabel": "Kemajuan",
+    "answeredLabel": "soal dijawab"
+  },
+  "suggest": {
+    "title": "Disarankan ke perusahaan",
+    "consent": "Opsional. Perusahaan yang merekrut untuk peran serupa bisa melihat nama, LinkedIn, dan skor sesi pertamamu. Ubah atau tarik kapan saja di pengaturan.",
+    "link": "Tautan LinkedIn",
+    "share": "Bagikan",
+    "saved": "Sekarang kamu bisa disarankan ke perusahaan.",
+    "withdraw": "Tarik",
+    "withdrawn": "Kamu tidak akan disarankan ke perusahaan lagi.",
+    "invalid": "Gunakan tautan profil LinkedIn-mu, seperti https://www.linkedin.com/in/your-name",
+    "failed": "Tidak bisa disimpan. Coba lagi.",
+    "shareAndStart": "Setuju & mulai",
+    "startWithout": "Tidak setuju & mulai"
+  },
+  "talents": {
+    "about": "Talenta yang berhasil baik saat berlatih wawancara untuk peran seperti ini, dan setuju untuk disarankan.",
+    "empty": "Belum ada talenta yang disarankan.",
+    "score": "Skor",
+    "hide": "Sembunyikan",
+    "hideFailed": "Talenta tidak bisa disembunyikan. Coba lagi."
+  },
+  "verify": {
+    "verify": "Verifikasi",
+    "verified": "Terverifikasi: {domain}",
+    "title": "Verifikasi perusahaan",
+    "text": "Masukkan situs web perusahaan. Perusahaan terverifikasi setelah pemilik atau admin masuk dengan email kerja di domain itu, seperti you@acme.com: langsung jika itu kamu.",
+    "website": "Situs web perusahaan",
+    "save": "Simpan",
+    "done": "Terverifikasi: {domain}",
+    "pending": "Tersimpan. Terverifikasi setelah pemilik atau admin masuk dengan email di {domain}.",
+    "failed": "Situs web tidak bisa disimpan."
   }
 }

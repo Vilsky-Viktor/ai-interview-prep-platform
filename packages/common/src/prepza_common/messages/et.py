@@ -18,19 +18,26 @@ MESSAGES = {
     "Couldn't get a reply right now. Please try again.": (
         "Praegu ei õnnestunud vastust saada. Proovi uuesti."
     ),
-    "You've reached today's limit of new public topics. Come back tomorrow, or generate your own kit now.": "Oled jõudnud tänase uute avalike teemade piirini. Tule homme tagasi või loo kohe oma komplekt.",
     "You can own at most 3 companies.": "Sul võib olla kõige rohkem 3 ettevõtet.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": (
         "Sinu ettevõte saab luua kuni 10 intervjuud päevas. Proovi homme uuesti."
-    ),
-    "A kit can be shared with at most 30 people.": (
-        "Komplekti saab jagada kõige rohkem 30 inimesega."
     ),
     "Title is required": "Pealkiri on kohustuslik",
     "Details are required for this reason.": "Selle põhjuse puhul on üksikasjad kohustuslikud.",
     "The question is too long.": "Küsimus on liiga pikk.",
     "A company with this name already exists.": "Sellise nimega ettevõte on juba olemas.",
-    "A public kit's title can't include a company name. Remove it and try again.": "Avaliku komplekti pealkirjas ei tohi olla ettevõtte nime. Eemalda see ja proovi uuesti.",
-    "Couldn't check the title. Please try again.": "Pealkirja ei õnnestunud kontrollida. Proovi uuesti.",
     "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Kutsu enne uue intervjuu loomist kandidaat mõnele oma intervjuule: ilma kandidaatideta saab oodata kuni 3 intervjuud.",
+    "This interview is already finished": "See intervjuu on juba lõppenud",
+    "This test isn't taking new candidates right now.": "See test ei võta praegu uusi kandidaate vastu.",
+    "This test has no practice questions yet.": "Selles testis pole veel harjutusküsimusi.",
+    "No emails found.": "E-posti aadresse ei leitud.",
+    "At most 100 emails at once.": "Korraga kuni 100 e-posti aadressi.",
+    "Use a PNG, JPEG or WebP image up to 500 KB": "Kasuta PNG-, JPEG- või WebP-pilti suurusega kuni 500 KB",
+    "Enter the company's website, like acme.com": "Sisesta ettevõtte veebisait, näiteks acme.com",
+    "That's a free mail service, not a company's website.": "See on tasuta e-posti teenus, mitte ettevõtte veebisait.",
+    "Generation failed. Please try again.": "Loomine ebaõnnestus. Proovi uuesti.",
+    "Generation stopped unexpectedly. Please try again.": "Loomine peatus ootamatult. Proovi uuesti.",
+    "Time is up for this question.": "Selle küsimuse aeg sai otsa.",
+    "Name the company": "Sisesta ettevõtte nimi",
+    "The report isn't a PDF": "Aruanne pole PDF",
 }

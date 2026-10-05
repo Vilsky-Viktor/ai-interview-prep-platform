@@ -52,6 +52,7 @@ export function RemoveCompany({
         size="icon"
         className="size-12 text-muted-foreground hover:text-destructive"
         aria-label={t("removeLabel", { name })}
+        tooltip={t("remove")}
         onClick={() => setOpen(true)}
       >
         <Trash2Icon className="size-6" />

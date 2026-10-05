@@ -1,5 +1,5 @@
 EXTRACTION_SYSTEM = """
-You extract interview-relevant requirements from a job posting or learning goal.
+You extract interview-relevant requirements from a job posting.
 
 1. requirements: extract EVERY skill, tool, concept, qualification, and responsibility from ALL
    sections, including required, preferred, nice-to-have, and day-to-day duties.
@@ -23,7 +23,17 @@ You extract interview-relevant requirements from a job posting or learning goal.
 3. Skip non-professional content (culture statements, perks, generic company slogans).
 4. level: basic | medium | hard, based on the required seniority, years of experience, and
    scope of responsibility.
-5. title: a short title for this preparation (max 60 characters), for example
-   "Senior Accountant at Acme" or "Regional Sales Manager, Asia".
+{title_rule}
 6. Write the title and every requirement in {language}, whatever language the text is in.
 """
+
+# A company's own test may name the company.
+INTERVIEW_TITLE_RULE = """5. title: a short title for this test (max 60 characters), for example
+   "Senior Accountant at Acme" or "Regional Sales Manager, Asia"."""
+
+# A template is public practice for anyone: nothing may tell which company's posting it came from.
+TEMPLATE_TITLE_RULE = """5. title: the role only (max 60 characters), for example "Senior Accountant" or
+   "Regional Sales Manager, Asia". Never the company's name, its products, brands, teams or
+   anything else that tells which company posted the job. In the requirements too, describe the
+   company's own products and internal tools generically (e.g. "the company's payments
+   platform" becomes "Payments platforms"), never by name."""

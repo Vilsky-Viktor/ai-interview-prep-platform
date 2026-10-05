@@ -108,7 +108,7 @@ def test_only_owner_or_admin_reads_reports(client, monkeypatch):
     app.dependency_overrides.clear()
 
 
-def test_topic_questions_are_text_only(client, monkeypatch):
+def test_topic_questions_come_with_their_options(client, monkeypatch):
     sign_in()
     interview = Interview(
         id=INTERVIEW_ID,
@@ -140,6 +140,7 @@ def test_topic_questions_are_text_only(client, monkeypatch):
             {
                 "id": str(QUESTION_ID),
                 "text": "Explain indexes.",
+                "options": [{"answer": "Faster reads", "correct": True}],
                 "likes": 3,
                 "dislikes": 1,
                 "reports": 0,
@@ -157,10 +158,55 @@ def test_topic_questions_are_text_only(client, monkeypatch):
         {
             "id": str(QUESTION_ID),
             "text": "Explain indexes.",
+            "options": [{"answer": "Faster reads", "correct": True}],
             "likes": 3,
             "dislikes": 1,
             "reports": 0,
         }
     ]
+
+    app.dependency_overrides.clear()
+
+
+def test_a_manager_marks_a_questions_answer_wrong_in_one_click(client, monkeypatch):
+    sign_in()
+    marked = []
+
+    async def context(_question_id, set_id=None):
+        return {"set_id": str(set_id)}
+
+    async def mark_wrong(question_id):
+        marked.append(question_id)
+
+    monkeypatch.setattr(library, "mark_wrong", mark_wrong)
+    url = f"/interviews/{INTERVIEW_ID}/questions/{QUESTION_ID}/wrong"
+
+    for role, expected in (("viewer", 403), ("admin", 204)):
+        interview, company = interview_and_company(role)
+
+        async def fake_interview(_interview_id, interview=interview):
+            return interview
+
+        async def fake_company(_company_id, company=company):
+            return company
+
+        async def fake_context(question_id, interview=interview):
+            return await context(question_id, interview.set_id)
+
+        monkeypatch.setattr(interviews, "get", fake_interview)
+        monkeypatch.setattr(companies, "get", fake_company)
+        monkeypatch.setattr(library, "get_question_context", fake_context)
+
+        assert client.post(url).status_code == expected
+
+    assert marked == [QUESTION_ID]
+
+    # A question from someone else's test isn't found.
+    async def elsewhere(_question_id):
+        return {"set_id": str(uuid.uuid4())}
+
+    monkeypatch.setattr(library, "get_question_context", elsewhere)
+
+    assert client.post(url).status_code == 404
 
     app.dependency_overrides.clear()

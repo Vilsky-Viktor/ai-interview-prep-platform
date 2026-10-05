@@ -2,9 +2,6 @@
   "settings": {
     "title": "設定",
     "signIn": "設定を変更するにはサインインしてください。",
-    "general": "一般",
-    "billing": "お支払い",
-    "referral": "招待",
     "language": "言語",
     "languageNote": "インターフェースとチューターの返信、そして新しいキットや面接の初期言語に使われます。キットや面接はサポートされているどの言語でも作成できます。",
     "languageFailed": "言語を変更できませんでした。もう一度お試しください。",
@@ -14,13 +11,12 @@
     "downloadFailed": "データを準備できませんでした。もう一度お試しください。",
     "delete": "アカウントを削除",
     "searchLanguage": "言語を検索",
-    "noLanguage": "言語が見つかりません。",
-    "history": "お支払い履歴",
-    "historyNote": "クレジットの入出金をすべて、新しい順に表示します。"
+    "noLanguage": "言語が見つかりません。"
   },
   "userMenu": {
     "signIn": "サインイン",
     "account": "アカウント",
+    "adminZone": "管理エリア",
     "settings": "設定",
     "signOut": "サインアウト",
     "theme": "テーマ",
@@ -34,17 +30,15 @@
     "main": "メインメニュー",
     "legal": "法的情報",
     "pricing": "料金",
-    "privacy": "プライバシーポリシー",
+    "privacy": "プライバシー",
     "terms": "利用規約",
     "back": "戻る",
-    "create": "作成",
-    "explore": "探す",
-    "myKits": "マイキット",
     "hiring": "採用",
     "pricingLink": "料金",
     "faq": "よくある質問",
     "contact": "お問い合わせ",
-    "about": "私たちについて"
+    "about": "私たちについて",
+    "practice": "無料の練習"
   },
   "signIn": {
     "with": "サインイン：",
@@ -80,37 +74,89 @@
     "notFoundText": "このページは存在しないか、削除されました。"
   },
   "home": {
-    "tagline": "AI エージェントが、自信が持てるまで一緒に練習します。",
-    "preparingFor": "目指すのは",
-    "words": ["面接", "資格取得", "試験", "テスト", "昇進"],
-    "widest": "資格取得",
-    "mark": "？"
+    "title": "全員を面接し\n本物の人材を採用",
+    "text": "求人票から作る時間制限付きの面接。候補者ごとに異なる問題で、AI に聞く時間はありません。候補者 1 人あたり $1 から。"
   },
-  "goal": {
-    "placeholder": "求人票を貼り付けるか、学びたいことを書いてください…",
-    "label": "何に向けて準備していますか？",
-    "submit": "準備キットを作成",
-    "failed": "作成を開始できませんでした。もう一度お試しください。",
-    "seePlans": "チャージ"
+  "start": {
+    "placeholder": "求人票を貼り付けるか、職種と候補者が知っておくべきことを説明してください",
+    "description": "求人票",
+    "submit": "面接を作成",
+    "whichCompany": "どの会社の面接ですか？",
+    "firstCompany": "会社名を教えてください",
+    "newCompany": "新しい会社",
+    "companyName": "会社名",
+    "freeCandidates": "最初の会社は、最初の {count, plural, other {# 人の候補者}}を無料で面接できます。",
+    "back": "説明を編集",
+    "continue": "続ける",
+    "starting": "開始中…",
+    "failed": "面接を開始できませんでした。もう一度お試しください。"
   },
-  "membership": {
-    "signIn": "参加するにはサインイン",
-    "leave": "退出",
-    "join": "参加して練習"
+  "superadmin": {
+    "fixNow": "今すぐ修正",
+    "fixing": "修正中…",
+    "dismiss": "却下",
+    "fixSent": "検証担当に送りました。まもなく修正または差し替えられます。",
+    "actionFailed": "うまくいきませんでした。もう一度お試しください。",
+    "quality": "品質",
+    "flagged": "報告あり",
+    "replaced": "差し替え済み",
+    "noFlagged": "現在、報告された問題はありません。",
+    "noReplaced": "差し替えられた問題はまだありません。",
+    "answers": "{count, plural, other {回答 # 件}}",
+    "right": "正答率 {percent}%",
+    "reports": "{count, plural, =0 {報告なし} other {報告 # 件}}",
+    "kinds": {
+      "template": "テンプレート",
+      "interview": "会社の面接"
+    },
+    "flags": {
+      "wrong_key": "正解が誤っている可能性",
+      "rewrite": "新しい問題が必要",
+      "weak_options": "選択肢の改善が必要"
+    },
+    "zone": "管理エリア",
+    "templates": "テンプレート",
+    "new": "新しいテンプレート",
+    "createTitle": "テンプレートを作成",
+    "placeholder": "職種の説明を貼り付けるか、職種とその担当者が知っておくべきことを説明してください",
+    "description": "職種の説明",
+    "create": "生成",
+    "createFailed": "テンプレートを開始できませんでした。もう一度お試しください。",
+    "text": "職種別の既製の面接。企業と人材向けです。",
+    "deleteLabel": "{title} を削除",
+    "deleteTitle": "このテンプレートを削除しますか？",
+    "deleteText": "トピックと問題は削除されます。これをもとに企業がすでに作成した面接は残ります。",
+    "deleteFailed": "テンプレートを削除できませんでした。もう一度お試しください。"
+  },
+  "templates": {
+    "title": "テンプレート",
+    "empty": "テンプレートはまだありません。",
+    "topics": "{count, plural, other {トピック # 件}}",
+    "search": "職種やトピックで検索",
+    "searchAction": "検索",
+    "level": "レベル: {level}",
+    "anyLevel": "すべてのレベル",
+    "allLanguages": "すべての言語",
+    "languages": "{count, plural, other {# 言語}}",
+    "noMatches": "一致するテンプレートはありません。",
+    "use": "テンプレートを使う",
+    "using": "開始中…",
+    "useFailed": "このテンプレートから面接を開始できませんでした。もう一度お試しください。",
+    "warningTitle": "テンプレートは prepza のお試し用です。",
+    "warning": "人材がテンプレートで練習しているため、候補者がすでに問題を知っている可能性があります。実際の採用には、求人票から面接を作成してください。",
+    "text": "職種別の既製の面接。ひとつ選んで面接を始められます。あとから変更できます。"
   },
   "billing": {
     "paid": "お支払いを受け付けました。まもなくここに反映されます。",
     "checkoutFailed": "支払い画面を開けませんでした。もう一度お試しください。",
     "credits": "{count, plural, other {# クレジット}}",
-    "bonus": "+{count, number} ボーナス",
     "topUp": "チャージ",
-    "balance": "利用可能なクレジット：{count}。チャージ",
-    "balanceLow": "利用可能なクレジット：{count}（残りわずか）。チャージ",
     "low": "残りわずか",
     "creditsWord": "{count, plural, other {クレジット}}",
     "topUpTitle": "チャージ：{name}",
-    "topUpNote": "$1 で 100 クレジット。高額のチャージにはボーナスがつきます。クレジットに有効期限はありません。",
-    "customAmount": "金額を指定"
+    "topUpNote": "チャージは候補者単位で購入します。金額が大きいほど候補者 1 人あたりの料金が安くなります。クレジットに有効期限はありません。",
+    "candidates": "{count, plural, other {候補者 # 人}}",
+    "each": "1 人あたり {price}"
   },
   "deleteAccount": {
     "title": "アカウントを削除しますか？",
@@ -120,83 +166,15 @@
     "deleted": "アカウントを削除しました。",
     "failed": "アカウントを削除できませんでした。もう一度お試しください。"
   },
-  "levels": {
-    "basic": "初級",
-    "medium": "中級",
-    "hard": "上級"
-  },
-  "visibility": {
-    "public": "公開",
-    "private": "非公開"
-  },
-  "library": {
-    "title": "公開キット",
-    "search": "タイトルとトピックを検索",
-    "searchAction": "検索",
-    "noMatches": "一致する準備キットはありません。",
-    "empty": "公開されている準備キットはまだありません。",
-    "level": "レベル: {level}",
-    "anyLevel": "すべて",
-    "languages": "{count, plural, other {# 言語}}",
-    "sortBy": "並べ替え: {sort}",
-    "sort": {
-      "date": "日付",
-      "rating": "評価",
-      "joiners": "参加者数"
-    }
-  },
-  "preparations": {
-    "title": "マイキット",
-    "new": "新しい準備キット",
-    "signIn": "準備キットを見るにはサインインしてください。",
-    "empty": "準備キットはまだありません。最初のキットを作成するか、公開ライブラリから選んでください。",
-    "topics": "{count, plural, other {# トピック}}",
-    "created": "{date} に作成",
-    "metaTitle": "準備キット",
-    "metaDescription": "{title} の面接対策：選択式問題の{count, plural, other {# トピック}}と、練習ラウンドと修了証。",
-    "history": "履歴",
-    "page": "準備キットのページ",
-    "rounds": "ラウンド",
-    "deleteLabel": "{title} を削除",
-    "deleteTitle": "{title} を削除しますか？",
-    "deleteText": "トピックと問題が削除され、参加している全員がアクセスできなくなります。この操作は取り消せません。",
-    "deleteFailed": "準備キットを削除できませんでした。もう一度お試しください。",
-    "mastered": "習得済み",
-    "masteredTitle": "習得済み：すべてのトピックに修了証があります",
-    "owner": "所有者",
-    "ratingTitle": "平均評価と評価数",
-    "rated": "評価ありがとうございます",
-    "ratingUpdated": "評価を更新しました",
-    "ratingFailed": "評価を保存できませんでした。もう一度お試しください。",
-    "rateIt": "評価する",
-    "rate": "{scale} 点中 {value} 点で評価",
-    "public": "公開",
-    "nowPublic": "公開ライブラリに掲載されました",
-    "nowPrivate": "非公開になりました",
-    "visibilityFailed": "公開設定を変更できませんでした。もう一度お試しください。"
-  },
   "share": {
-    "share": "共有",
-    "title": "準備キットを共有",
-    "public": "リンクを知っている人なら誰でもこの準備キットを見られます。",
-    "private": "招待リンクをメールで送ります。承認できるのはそのメールアドレスだけです。",
-    "email": "メールアドレス",
-    "send": "送信",
     "sent": "{email} に招待を送りました",
     "checkEmail": "メールアドレスを確認して、もう一度お試しください。",
     "failed": "招待を送れませんでした。",
-    "joined": "参加済み",
-    "undelivered": "未配信",
-    "invited": "招待済み",
     "wrongEmail": "この招待は別のメールアドレス宛てに送られています。",
     "acceptFailed": "招待を承認できませんでした。もう一度お試しください。",
-    "signIn": "この準備キットに参加するには、招待されたメールアドレスでサインインしてください。",
     "invalid": "この招待はもう有効ではありません。",
     "invitedToJoin": "参加するよう招待されています。",
-    "open": "準備キットを開く",
-    "join": "準備キットに参加",
-    "mismatch": "メールアドレスが一致しません。招待されたメールアドレスでサインインしてください。",
-    "inviteTitle": "共有の招待"
+    "mismatch": "メールアドレスが一致しません。招待されたメールアドレスでサインインしてください。"
   },
   "reportReasons": {
     "wrong_answer": "正解とされている答えが間違っている",
@@ -215,6 +193,18 @@
     "reports": "報告",
     "showReports": "報告を表示（{count}）",
     "regenerate": "作り直す",
+    "manage": "問題を管理",
+    "wrongAnswer": "正解が違う",
+    "checking": "確認中…",
+    "markedWrong": "ありがとうございます。確認のうえ、修正または差し替えます。",
+    "markWrongFailed": "確認に送れませんでした。もう一度お試しください。",
+    "ofCount": "/ {count, number}",
+    "per": "/",
+    "candidate": "候補者",
+    "showOptions": "選択肢を表示",
+    "hideOptions": "選択肢を隠す",
+    "correct": "正解",
+    "wrong": "不正解",
     "regenerating": "作り直し中…",
     "regenerated": "問題を作り直しました",
     "regenerateFailed": "問題を作り直せませんでした。もう一度お試しください。",
@@ -227,79 +217,27 @@
     "selectReason": "理由を選択",
     "details": "詳細",
     "showLess": "閉じる",
+    "more": "ほか {count, number} 件",
     "showAll": "すべて表示",
     "limitRange": "1 から {count} までの数字を入力してください。",
     "limitFailed": "上限を保存できませんでした。",
     "limit": "問題数の上限",
-    "of": "/",
     "count": "{count, plural, other {問}}",
-    "loadFailed": "問題を読み込めませんでした。"
-  },
-  "certificate": {
-    "title": "修了証",
-    "metaDescription": "{name} さんは {topic} をスコア {score}% で修了しました。",
-    "heading": "修了証",
-    "for": "以下を修了したことを証します：",
-    "finalScore": "最終スコア",
-    "issued": "発行日",
-    "howTo": "修了証の取得方法"
+    "loadFailed": "問題を読み込めませんでした。",
+    "yourAnswer": "あなたの回答"
   },
   "rounds": {
-    "title": "ラウンド",
-    "rounds": "ラウンド",
-    "compare": "比較",
-    "compareTitle": "ラウンドを比較",
     "answered": "回答済み",
     "correct": "正解",
     "incorrect": "不正解",
     "notAnswered": "未回答",
-    "correctAnswer": "正解",
-    "yourAnswer": "あなたの回答",
-    "askFollowUp": "追加で質問する",
-    "followUp": "追加の質問",
-    "followUpPlaceholder": "追加で質問する…",
-    "replyFailed": "返信を取得できませんでした。もう一度お試しください。",
-    "firstRound": "このトピックで初めてのラウンド",
-    "sameAsLast": "前回のラウンドと同じ",
-    "change": "前回のラウンドから {change} ポイント",
-    "topicAnswered": "トピック：{total} 問中 {answered} 問に回答",
-    "answeredOf": "{total} 問中 {answered} 問に回答",
-    "finalScore": "最終スコア",
-    "certificate": "修了証",
-    "history": "履歴",
-    "preparationPage": "準備キットのページ",
-    "noRounds": "ラウンドはまだありません。",
-    "selectToCompare": "比較対象に選ぶ",
-    "grade": "評価",
-    "continue": "続ける",
-    "start": "開始",
     "finish": "終了",
     "finishing": "終了中…",
-    "finishRound": "ラウンドを終了",
-    "deleteRound": "ラウンドを削除",
-    "finishTitle": "このラウンドを終了しますか？",
-    "deleteTitle": "このラウンドを削除しますか？",
-    "unscored": "未回答の問題は採点されません。",
-    "noMore": "これ以上問題に回答できなくなります。",
-    "cantUndo": "この操作は取り消せません。",
-    "deleteFailed": "ラウンドを削除できませんでした。もう一度お試しください。",
-    "finishFailed": "ラウンドを終了できませんでした。もう一度お試しください。",
-    "startFailed": "ラウンドを開始できませんでした。もう一度お試しください。",
-    "answerFailed": "回答を保存できませんでした。もう一度お試しください。",
-    "signIn": "このラウンドを続けるにはサインインしてください。",
-    "missing": "このラウンドは存在しません。",
-    "allAnswered": "このラウンドの問題にすべて回答しました。",
     "next": "次の問題",
-    "progress": "修了証に向けて回答した問題",
-    "nextFailed": "次の問題を読み込めませんでした。もう一度お試しください。",
-    "submitFailed": "回答を送信できませんでした。もう一度お試しください。",
-    "freeTurns": "この問題でチューターに無料で質問できる残り回数：{count, plural, other {# 回}}",
-    "paidTurns": "この問題での追加の質問は 1 回 {count, plural, other {# クレジット}} です",
-    "buyCertificate": "修了証を取得 · {count} クレジット",
-    "makeItYours": "特定の仕事に向けて準備していますか？求人票を貼り付けて、その仕事専用のキットを作りましょう。",
-    "makeItYoursAction": "自分用にする"
+    "submitFailed": "回答を送信できませんでした。もう一度お試しください。"
   },
   "session": {
+    "toTest": "面接へ移動",
     "startFailed": "面接を開始できませんでした。もう一度お試しください。",
     "finishFailed": "面接を終了できませんでした。もう一度お試しください。",
     "continueFailed": "続けられませんでした。もう一度お試しください。",
@@ -351,25 +289,17 @@
     "changes": "トピックの変更",
     "tooMany": "トピックは最大 {max} 件まで選ぶか、まとめ方を書いてください。",
     "apply": "変更を反映",
-    "approve": "承認して作成",
-    "approvePrice": "承認して作成 · {count} クレジット",
-    "unfinished": "未完了"
-  },
-  "generationStatus": {
-    "queued": "作成中",
-    "running": "作成中",
-    "awaiting_review": "トピックを確認",
-    "done": "完了",
-    "failed": "失敗",
-    "cancelled": "キャンセル済み"
+    "approve": "承認して作成"
   },
   "candidateStatus": {
     "invited": "招待済み",
     "undelivered": "未配信",
-    "in_process": "受験中",
+    "in_process": "面接中",
     "finished": "完了",
     "deleted": "削除済み",
-    "expired": "期限切れ"
+    "expired": "期限切れ",
+    "passed": "合格",
+    "flagged": "要注意"
   },
   "roles": {
     "owner": "所有者",
@@ -385,17 +315,17 @@
     "owner": "所有者",
     "interviewCount": "{count, plural, other {面接 # 件}}",
     "interviews": "面接",
+    "templates": "テンプレート",
     "admins": "管理者",
     "referrals": "招待",
     "new": "新しい会社",
-    "newText": "会社を作成して、面接を作り、候補者を招待しましょう。",
     "name": "会社名",
     "create": "作成",
     "createFailed": "会社を作成できませんでした。もう一度お試しください。",
     "signInJoin": "この会社に参加するには、招待されたメールアドレスでサインインしてください。",
     "open": "会社を開く",
     "join": "会社に参加",
-    "creditsLeft": "{count, plural, other {クレジット利用可能}}",
+    "creditsLeft": "{count, plural, other {クレジット}}",
     "creditsLow": "残りわずか：候補者の招待を続けるにはチャージしてください。",
     "timeLeft": "残り時間：{time}",
     "removeLabel": "{name} を削除",
@@ -403,7 +333,12 @@
     "removeText": "この会社の面接と招待は削除されます。",
     "remove": "削除",
     "removeFailed": "会社を削除できませんでした。",
-    "page": "会社"
+    "page": "会社",
+    "logo": "ロゴ",
+    "uploadLogo": "ロゴをアップロード",
+    "changeLogo": "ロゴを変更",
+    "removeLogo": "ロゴを削除",
+    "logoFailed": "ロゴを保存できませんでした。"
   },
   "candidates": {
     "scorecard": "結果",
@@ -415,6 +350,11 @@
     "copies": "{count, plural, other {コピー試行 # 回}}",
     "fastAnswers": "{count, plural, other {速すぎる回答 # 件}}",
     "empty": "まだ候補者を招待していません。",
+    "noMatches": "一致する候補者はいません。",
+    "search": "メールアドレスで候補者を検索",
+    "searchAction": "検索",
+    "status": "ステータス: {status}",
+    "anyStatus": "すべてのステータス",
     "progress": "進捗",
     "grade": "評価",
     "resend": "招待を再送",
@@ -432,11 +372,27 @@
       "date": "日付"
     }
   },
+  "interviewStatus": {
+    "new": "新規",
+    "in_process": "選考中",
+    "hired": "採用済み"
+  },
   "interviews": {
     "title": "面接",
     "interview": "面接",
     "candidates": "候補者",
     "new": "新しい面接",
+    "createTitle": "面接を作成",
+    "try": "候補者として試す",
+    "newCandidate": "新しい候補者",
+    "linkTitle": "共有リンク",
+    "linkText": "求人広告用: リンクを知っている人は誰でも面接を受けられます。1 人ごとに、招待した候補者と同じ料金がかかります。",
+    "linkFailed": "リンクを変更できませんでした。もう一度お試しください。",
+    "passMark": "合格ライン",
+    "passMarkLabel": "合格ライン（％）",
+    "markHired": "採用済みにする",
+    "tryLabel": "{title} を候補者として試す",
+    "tryFailed": "プレビューを開始できませんでした。もう一度お試しください。",
     "generating": "作成中…",
     "fallbackTitle": "面接",
     "continueGeneration": "作成を続ける",
@@ -455,12 +411,22 @@
     "adminEmail": "管理者のメールアドレス",
     "addAdmin": "管理者を追加",
     "adminFailed": "その管理者を招待できませんでした。もう一度お試しください。",
-    "candidateEmail": "候補者のメールアドレス",
     "invite": "招待",
     "jobDescription": "職務内容",
     "pasteJob": "職務内容を貼り付けてください：役割、必須要件、歓迎要件…",
     "generate": "面接を作成",
-    "startFailed": "面接を開始できませんでした。もう一度お試しください。"
+    "startFailed": "面接を開始できませんでした。もう一度お試しください。",
+    "candidateEmails": "候補者のメールアドレス",
+    "emailsHint": "1 件でも複数でも可。カンマまたは改行で区切ってください",
+    "uploadFile": "ファイルをアップロード",
+    "invitedMany": "{count} 人の候補者を招待しました",
+    "skip": {
+      "invalid": "{count, plural, other {# 件のメールアドレスが無効です}}。",
+      "limit": "{count, plural, other {# 件のメールアドレスが}}現在の送信上限を超えています。1 時間後にもう一度お試しください。",
+      "no_credits": "{count, plural, other {# 人の候補者を招待できませんでした}}: クレジットが不足しています。チャージすると招待できます。",
+      "failed": "{count, plural, other {# 件の招待}}を送信できませんでした。もう一度お試しください。"
+    },
+    "talents": "おすすめの人材"
   },
   "invite": {
     "signIn": "この面接を受けるには、招待されたメールアドレスでサインインしてください。",
@@ -473,7 +439,7 @@
     "timeRunsOut": "問題の制限時間が過ぎると不正解となり、次の問題が開きます。ページを離れても時間は進みます。",
     "unanswered": "未回答の問題は不正解として扱われます。",
     "saved": "進捗は保存されます。続けるにはこのリンクをもう一度開いてください。",
-    "stay": "このページから離れないでください。ページの離脱とコピーは記録されます（<link>記録の扱いについて</link>）。",
+    "stay": "このページから離れないでください。ページの離脱とコピーは記録されます（<link>プライバシー</link>）。",
     "finished": "この面接はすでに終了しています。",
     "continue": "続ける",
     "start": "承諾して開始",
@@ -497,29 +463,18 @@
   },
   "pricing": {
     "title": "料金",
-    "intro": "使った分だけのお支払い：$1 で 100 クレジット、クレジットに有効期限はありません。サブスクリプションはありません。",
-    "learners": "学習者向け",
-    "welcome": "登録時",
-    "referrals": "招待",
-    "referralsNote": "自分のリンクは設定から、会社のリンクはその会社の招待タブから共有できます。",
-    "referral": "招待した友人が初めてチャージしたとき",
-    "companyReferral": "招待した会社が初めて ${min} 以上チャージしたとき",
-    "each": "それぞれ {count, number} クレジット",
-    "credits": "{count, plural, other {# クレジット}}",
-    "companies": "企業向け",
-    "kit": "求人票から作るあなた専用のキット",
-    "chat": "AI チューター：各問題で {free, plural, other {# 回}}まで無料、その後は",
-    "perTurn": "1 回 {count, plural, other {# クレジット}}",
-    "ownCertificate": "自分のキットまたは共有キットの修了証",
-    "publicCertificate": "公開キットの修了証",
-    "publicPractice": "公開キットで練習（1 日に新しいトピック {count, plural, other {# 件}}まで）",
-    "draftTopics": "求人票や目標から作るトピック案",
-    "gift": "{count, number} クレジット無料",
+    "intro": "候補者ごとのお支払い。面接の生成は無料で、サブスクリプションはありません。",
+    "test": "面接の生成",
     "free": "無料",
-    "interview": "面接の作成",
-    "candidate": "面接を終了し、1 問以上に回答した候補者 1 人ごと",
-    "companyWelcome": "最初の会社",
-    "openCompanies": "会社",
+    "candidate": "1 問以上回答した候補者 1 人ごと",
+    "candidateVolume": "${from, number} 以上のチャージによるクレジットの場合",
+    "perCandidate": "候補者 1 人あたり ${dollars, number}",
+    "welcome": "最初の {count, plural, other {# 人の候補者}}",
+    "credits": "$1 = 100 クレジット。クレジットに有効期限はありません。",
+    "referrals": "招待",
+    "referralsNote": "会社の招待タブから会社のリンクを共有できます。",
+    "companyReferral": "招待した会社が初めてチャージしたとき",
+    "each": "それぞれ {count, number} クレジット",
     "topUp": "チャージ"
   },
   "site": {
@@ -528,22 +483,6 @@
   "legal": {
     "updated": "最終更新日",
     "englishOnly": "この文書は英語版のみです。"
-  },
-  "credits": {
-    "noHistory": "まだ何もありません。",
-    "reasons": {
-      "welcome": "ウェルカムギフト",
-      "topup": "チャージ",
-      "kit": "キット",
-      "candidate": "候補者",
-      "certificate": "修了証",
-      "author_share": "あなたの公開キットで修了証が発行されました",
-      "chat": "チューターへの質問",
-      "refund": "返金",
-      "chargeback": "銀行による支払いの取り消し",
-      "chargeback_reversed": "取り消された支払いの復元",
-      "referral": "招待の特典"
-    }
   },
   "autoTopUp": {
     "title": "自動チャージ",
@@ -566,43 +505,42 @@
     "label": "生成する言語"
   },
   "referral": {
-    "title": "友人を招待",
-    "note": "友人が初めてチャージすると、二人とも {reward, number} クレジットを受け取れます。",
     "companyTitle": "他の会社を招待",
-    "companyNote": "新しい会社が ${min} 以上チャージすると、両社とも {reward, number} クレジットを受け取れます。",
+    "companyNote": "相手が金額を問わず初めてチャージすると、双方に {reward, number} クレジットが付与されます。",
+    "deletedCompany": "削除された会社",
+    "credits": "+{count, number} クレジット",
     "rewarded": "{count, plural, =0 {特典はまだありません。} other {これまでに # 回特典を受け取りました。}}"
   },
   "topUp": {
     "title": "チャージ",
     "intro": "$1 で 100 クレジット、クレジットに有効期限はありません。",
     "signIn": "クレジットをチャージするにはサインインしてください。",
-    "yours": "個人の残高",
-    "personal": "個人のクレジット",
-    "personalNote": "キット、AI チューター、修了証に使えます。",
     "companies": "会社のクレジット",
     "companiesNote": "各社の候補者に使います。",
+    "noCompany": "クレジットは会社に属します。まず会社を作成してから、ここでチャージしてください。",
+    "createCompany": "会社を作成",
     "pricing": "料金"
   },
   "landing": {
     "more": "使い方",
     "how": {
-      "title": "3ステップで準備完了",
+      "title": "最初の結果まで 3 ステップ",
       "paste": {
-        "title": "貼り付けるか、説明する",
-        "text": "求人票、シラバス、または学びたいスキルや技術。"
+        "title": "求人票を貼り付ける",
+        "text": "どんな職種でも、どんな言語でも。\nprepza が候補者に必要な知識を抽出し、トピックを提案します。"
       },
       "review": {
-        "title": "プランを確認する",
-        "text": "AI エージェントが大事な点を見つけてトピックを提案します。\nそのまま使うことも、名前を変えたり修正したりすることもできます。"
+        "title": "トピックを確認する",
+        "text": "そのまま使う、名前を変える、内容を変える。\n承認するまで問題は作成されません。"
       },
-      "practice": {
-        "title": "自信がつくまで練習する",
-        "text": "トピックごとに専用の問題が作られます。\nラウンドで練習して、上達を実感しましょう。"
+      "invite": {
+        "title": "候補者を招待する",
+        "text": "リストを貼り付けるか、ファイルをアップロードするか、リンクを 1 つ共有するだけ。\nリマインダーは自動で送られます。仕事をわかっている人がスコア順にわかります。"
       }
     },
     "control": {
-      "title": "何を学ぶかはあなたが決める",
-      "text": "トピックを承認するまで、問題は作成されません。知っていることはチェックを外し、トピック名を変え、サブトピックを編集できます。変更したい内容を AI に伝えれば、あとは任せられます。",
+      "title": "何を問うかはあなたが決める",
+      "text": "トピックを承認するまで問題は作成されません。職種に不要なものはチェックを外し、トピック名を変え、サブトピックを編集し、変更点を AI に伝えましょう。",
       "topics": {
         "design": "システム設計",
         "sql": "コンテンツマーケティング",
@@ -628,43 +566,9 @@
         "視聴数の測定"
       ]
     },
-    "gaps": {
-      "title": "弱点を見つける練習",
-      "text": "ラウンドごとにトピックの全問題をもう一度出題し、前回間違えた問題から始めます。ラウンドを比べて、弱点が埋まっていくのを確かめましょう。",
-      "items": {
-        "first": {
-          "question": "広告を最後まで見た人がわかる指標は？",
-          "wrong": "クリック率",
-          "right": "視聴完了率"
-        },
-        "second": {
-          "question": "キャッシュが主に減らすものは？",
-          "wrong": "ストレージ費用",
-          "right": "応答時間"
-        }
-      }
-    },
-    "tutor": {
-      "title": "すべての問題にチューター",
-      "text": "答えるとすぐに正解がわかります。なぜ正しいのか気になったら、AI チューターに聞いて、納得いくまで深く学べます。",
-      "question": "配送の遅れにお客様が怒っています。まず何をしますか？",
-      "options": {
-        "first": "遅れた理由を説明する",
-        "second": "問題を認めて謝罪する",
-        "third": "すぐに割引を提案する",
-        "fourth": "上司に対応を引き継ぐ"
-      },
-      "ask": "先に説明するのはなぜだめ？",
-      "answer": "まず受け止めること。人は気持ちをわかってもらえたと感じて、はじめて理由に耳を傾けます。"
-    },
-    "proof": {
-      "title": "準備ができたかがわかる",
-      "text": "トピックごとに修了証までの進捗バーがあります。修了証を取れば、そのトピックは習得済みになります。",
-      "again": "やり直す"
-    },
     "quality": {
-      "title": "自然に良くなる問題",
-      "text": "高評価、低評価、報告から弱い問題が見つかります。AI の検証役が自動で修正または差し替え、キットのオーナーはどの問題も自分で作り直せます。",
+      "title": "自動で直る問題",
+      "text": "候補者の回答、評価、報告から弱い問題が見つかります。AI の検証担当が自動で修正または差し替え、どの問題もご自身で作り直せます。",
       "items": {
         "good": "データベースのインデックスで速くなるのは？",
         "weak": "最高のプログラミング言語は？",
@@ -673,45 +577,89 @@
       "comment": "プロジェクトによるので、正解はひとつに決まりません。",
       "list": "トピックの問題"
     },
-    "share": {
-      "title": "共有も公開も",
-      "text": "友人や同僚をメールで招待してキットを一緒に練習したり、同じ目標に向けて準備するみんなのために公開ライブラリに載せたりできます。",
-      "private": "非公開で共有",
-      "public": "公開で共有",
-      "browse": "ライブラリを見る"
+    "try": {
+      "title": "候補者より先に試してみましょう",
+      "text": "似た職種の無料の練習面接を受けるか、誰かを招待する前に自分の面接を候補者として開いてみましょう。",
+      "browse": "練習面接を見る",
+      "topic": "システム設計",
+      "question": "データベースの前に置くキャッシュが主に減らすものは？",
+      "options": {
+        "a": "データベースのサイズ",
+        "b": "データベースが読み取られる回数",
+        "c": "テーブルの数",
+        "d": "バックアップにかかる時間"
+      },
+      "points": {
+        "practice": "多くの職種の無料の練習面接",
+        "preview": "候補者として自分の面接を体験"
+      }
+    },
+    "link": {
+      "title": "求人広告にはリンクを 1 つだけ",
+      "text": "面接のリンクを求人広告に載せましょう。応募した人はすぐに面接を受け、スコア順に候補者リストに表示されます。",
+      "note": "リンクを知っている人は誰でも面接を受けられます。",
+      "points": {
+        "anywhere": "求人サイト、LinkedIn、自社サイトに",
+        "off": "採用が決まったらオフに"
+      }
     },
     "companies": {
-      "title": "採用中？候補者を公平に評価",
-      "text": "求人票を制限時間つきの面接に変え、候補者を招待して評価できます。",
+      "title": "仕事をわかっている人が見える",
+      "text": "候補者はメールの招待から面接を受けます。スコアは回答ごとに届き、合格ラインに対して緑か赤で表示されます。",
       "points": {
         "own": "候補者ごとに異なる問題",
         "timed": "すべての問題にカウントダウン",
         "flags": "急ぎすぎ・離脱・コピーを検知",
-        "private": "スコアは候補者に非公開"
+        "private": "候補者が自分のスコアを見ることはありません"
       },
       "candidate": "候補者",
       "score": "スコア",
       "rushed": "急ぎすぎた回答",
       "left": "ページを離脱",
-      "start": "採用を始める"
+      "role": "バックエンド開発者 · 合格ライン {mark}%"
+    },
+    "reports": {
+      "title": "ワンクリックで結果を共有",
+      "text": "候補者 1 人分でもリスト全体でも、わかりやすい PDF レポートに。ダウンロードするか、prepza から採用責任者に直接送れます。",
+      "points": {
+        "pdf": "候補者 1 人でも全員でも",
+        "share": "PDF をメールで送るか、メッセンジャーで共有"
+      }
+    },
+    "brand": {
+      "title": "認証済みのあなたのブランド",
+      "text": "候補者は最初のメールから最後の問題まであなたのロゴを目にし、会社が実在することを示す認証マークも表示されます。",
+      "role": "バックエンド開発者",
+      "points": {
+        "email": "招待メールにあなたのロゴ",
+        "interview": "候補者が受ける面接に",
+        "report": "すべての PDF レポートに",
+        "verified": "チームの仕事用メールで認証"
+      }
+    },
+    "talent": {
+      "title": "人材の提案を受け取る",
+      "text": "無料の練習面接の高得点者を、あなたの職種向けに提案します。無料です。",
+      "suggested": "バックエンド開発者へのおすすめ",
+      "score": "スコア",
+      "points": {
+        "free": "あなたにも人材にも無料",
+        "practice": "時間制限付きの面接で採点",
+        "first": "最初の挑戦だけがカウント",
+        "link": "提案されるかは本人が選択"
+      }
     },
     "languages": {
-      "title": "あなたの言語で",
-      "text": "prepza は {count} の言語で使えます。求人票をある言語で貼り付けて、別の言語で練習できます。"
+      "title": "どんな職種でも、どんな言語でも",
+      "text": "prepza は {count} 言語に対応しています。ある言語で求人票を貼り付け、別の言語で候補者を面接できます。"
     },
     "pricing": {
-      "title": "うまくいった分だけお支払い",
-      "text": "サブスクリプションもプランもありません。必要なときにチャージするだけ。クレジットに有効期限はなく、失敗した処理には料金がかかりません。",
+      "title": "候補者ごとのお支払い",
+      "text": "面接と最初の {free, plural, other {# 人の候補者}}は無料です。その後は回答した候補者の分だけお支払いいただき、サブスクリプションはありません。",
       "see": "料金を見る",
-      "company": "Acme Inc.",
-      "personal": "準備キットと AI チューターに。",
-      "learner": "学習者クレジット"
-    },
-    "referrals": {
-      "title": "アフィリエイトでクレジットを獲得",
-      "text": "あなたのリンクで友だちや他の企業を招待しましょう。相手が初めてチャージすると、お互いにクレジットがもらえます。",
-      "whereLearner": "リンクは {settings} → {referral} にあります。",
-      "whereCompany": "会社のリンクは {hiring} → あなたの会社 → {referrals} にあります。"
+      "perCandidate": "候補者 1 人あたり",
+      "base": "従量課金",
+      "volume": "${from, number} からのチャージで"
     },
     "faq": {
       "title": "ほかに質問はありますか？",
@@ -719,8 +667,8 @@
       "read": "よくある質問へ"
     },
     "ready": {
-      "title": "準備を始めますか？",
-      "start": "今すぐ始める"
+      "title": "最初の候補者を面接してみませんか？",
+      "start": "面接を作成"
     }
   },
   "faq": {
@@ -747,14 +695,15 @@
   },
   "about": {
     "title": "私たちについて",
-    "intro": "prepza は、自信を持って準備できるようあなたをサポートし、企業には候補者をシンプルかつ手頃な価格で評価する方法を提供します。",
+    "intro": "prepza は、本当に仕事ができる人を企業が見つけられるようにします。求人票から作る公平な時間制限付きの面接を、どんなチームでも払える価格で。そして面接の準備をする人は誰でも無料で練習できます。",
     "company": {
-      "title": "prepza が目指すもの",
-      "learners": "面接や試験、新しいスキルの準備を、何時間もの検索から始める必要はありません。目指していることを prepza に伝えるだけで、わかりやすいプランに変わります。押さえるべきトピック、それぞれの練習問題、そしてすべての答えを腑に落ちるまで解説してくれるチューターです。",
-      "companies": "企業に向けては、採用を公平にし、大企業だけでなくどんなチームにも手の届くものにしたいと考えています。求人票から数分で制限時間付きの面接を作成し、候補者ごとに異なる問題を出題でき、料金は実際に受験した候補者の分だけです。"
+      "title": "prepza が存在する理由",
+      "problem": "採用は履歴書と好印象の会話に頼りがちですが、どちらも判断を誤らせることがあります。役に立つ適性検査ツールは、年間プランやユーザーごとの料金など大企業向けの価格設定で、ほとんどのチームは使えずにいます。",
+      "approach": "prepza は、どんな職種でも求人票を数分で時間制限付きの面接に変えます。候補者一人ひとりに専用の問題が出され、誰が仕事をわかっているかとその理由がわかり、お支払いは実際に受けた候補者の分だけです。",
+      "practice": "面接の準備も、誰もが無料でできるようにしたいと考えています。誰でも職種ごとの練習面接を受け、評価とすべての正解を確認し、無料で何度でも練習できます。好成績を収めた人は、似た職種で採用中の企業に提案されることを選べます。"
     },
     "founder": {
-      "quote": "面接の準備をするときも、何か新しいことを学ぼうとするときも、実際に勉強するより良い教材を探す時間のほうが長くかかっていました。どのサイトも一部しか扱っておらず、自分に必要なものにぴったり合うものはありませんでした。だから prepza を作りました。あのころの自分が欲しかった、目標から出発してそこまで導いてくれるツールです。私が費やした時間を、あなたが節約できますように。",
+      "quote": "良い採用は、大きな予算を持つ大企業だけの特権であってはなりません。私が prepza を作ったのは、どんなチームでも求人票を数分で公平な面接に変え、本当に仕事をわかっている人を見極め、受けた候補者の分だけ支払えるようにするためです。あなたがふさわしい人をより早く見つける助けになれば幸いです。",
       "role": "prepza の一人創業者"
     }
   },
@@ -765,7 +714,6 @@
     "kinds": {
       "question_flagged": "{count, plural, =1 {「{title}」の「{topic}」に関する問題がレビュー対象として報告されました。} other {「{title}」の問題 # 件がレビュー対象として報告されました。}}",
       "question_fixed": "{count, plural, =1 {AI が「{title}」の「{topic}」に関する報告された問題を修正しました。} other {AI が「{title}」の報告された問題 # 件を修正しました。}}",
-      "kit_ready": "キット「{title}」の準備ができました。",
       "referral_rewarded": "招待した人がチャージしました。{credits} クレジットを獲得しました。",
       "auto_top_up_charged": "自動チャージで {credits} クレジットが追加されました。",
       "auto_top_up_failed": "自動チャージでカードに請求できませんでした。残高が不足しないようチャージしてください。",
@@ -774,5 +722,77 @@
       "interview_ready": "面接「{title}」の準備ができました。",
       "interview_cancelled": "{title, select, none {面接} other {面接「{title}」}}はキャンセルされました：トピックの確認待ちが長すぎました。"
     }
+  },
+  "report": {
+    "download": "PDF をダウンロード",
+    "passed": "合格 · 合格ライン {mark}%",
+    "notPassed": "不合格 · 合格ライン {mark}%",
+    "notFinished": "まだ完了していません",
+    "share": "レポートを共有",
+    "fileName": "レポート {email}",
+    "failed": "PDF レポートを作成できませんでした。",
+    "shareTitle": "レポートを共有",
+    "recipient": "受信者のメールアドレス",
+    "send": "<name>PDF</name> を送信",
+    "sent": "{email} にレポートを送信しました",
+    "sendFailed": "レポートを送信できませんでした。",
+    "orSummary": "または次で送信",
+    "via": "prepza から送信",
+    "candidatesFileName": "候補者 {title}",
+    "candidateCount": "{count, plural, other {候補者 # 人}}",
+    "passMark": "合格ライン {mark}%",
+    "progressOf": "{progress}% 完了"
+  },
+  "practice": {
+    "title": "無料の面接練習",
+    "intro": "時間制限付きの面接で職種に向けて練習し、評価とすべての正解を確認できます。無料です。",
+    "about": "時間制限付きの練習面接。終わったら評価とすべての正解を確認できます。非公開で無料です。",
+    "pageTitle": "{title}: 無料の練習面接",
+    "pageDescription": "{title} の無料 {level} 練習面接: {count, plural, other {トピック # 件}}、時間制限付きで、終了後に評価とすべての正解を確認できます。本番の採用面接ではなく練習です。",
+    "start": "練習を始める",
+    "again": "もう一度練習",
+    "continue": "続ける",
+    "history": "あなたのラウンド",
+    "results": "練習の結果",
+    "grade": "の問題に正解",
+    "notFinished": "未完了",
+    "noRounds": "ラウンドはまだありません。",
+    "signIn": "練習ラウンドを見るにはサインインしてください。",
+    "startFailed": "練習を開始できませんでした。もう一度お試しください。",
+    "gradeLabel": "評価",
+    "questions": "{count, plural, other {# 問}}",
+    "progressLabel": "進捗",
+    "answeredLabel": "問に回答済み"
+  },
+  "suggest": {
+    "title": "企業に提案してもらう",
+    "consent": "任意です。似た職種を採用中の企業が、あなたの名前、LinkedIn、最初のラウンドのスコアを見られるようになります。設定でいつでも変更・取り消しできます。",
+    "link": "LinkedIn のリンク",
+    "share": "共有",
+    "saved": "企業に提案されるようになりました。",
+    "withdraw": "取り消す",
+    "withdrawn": "今後、企業に提案されることはありません。",
+    "invalid": "LinkedIn のプロフィールリンクを使ってください（例: https://www.linkedin.com/in/your-name）",
+    "failed": "保存できませんでした。もう一度お試しください。",
+    "shareAndStart": "同意して開始",
+    "startWithout": "同意せずに開始"
+  },
+  "talents": {
+    "about": "この職種に似た面接の練習で好成績を収め、提案されることに同意した人材です。",
+    "empty": "おすすめの人材はまだいません。",
+    "score": "スコア",
+    "hide": "非表示",
+    "hideFailed": "人材を非表示にできませんでした。もう一度お試しください。"
+  },
+  "verify": {
+    "verify": "認証",
+    "verified": "認証済み: {domain}",
+    "title": "会社を認証",
+    "text": "会社のウェブサイトを入力してください。所有者または管理者がそのドメインの仕事用メール（例: you@acme.com）でサインインすると認証されます。あなたがそうなら、すぐに認証されます。",
+    "website": "会社のウェブサイト",
+    "save": "保存",
+    "done": "認証済み: {domain}",
+    "pending": "保存しました。所有者または管理者が {domain} のメールでサインインすると認証されます。",
+    "failed": "ウェブサイトを保存できませんでした。"
   }
 }

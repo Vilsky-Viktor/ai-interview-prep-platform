@@ -5,10 +5,15 @@ import { useLocale, useTranslations } from "next-intl"
 
 import { RefreshOnFocus } from "@/components/billing/refresh-on-focus"
 import { TopUpDialog } from "@/components/billing/top-up-dialog"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { useCountUp } from "@/hooks/use-count-up"
 import type { Catalog } from "@/types/billing"
 
-/** The company's credits for candidates, with a top-up next to them. */
+/** The company's credits for candidates, with a top-up next to them, in the page header. */
 export function CompanyCredits({
   companyId,
   companyName,
@@ -27,34 +32,36 @@ export function CompanyCredits({
   // A top-up arriving counts up, as in the header.
   const { shown, rising } = useCountUp(credits)
 
+  // A small card in the page header: the balance (amber when it runs low); it opens the top-up.
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border px-6 py-4">
-      <div>
-        <p className="text-base">
-          <span
-            className={cn(
-              "font-heading text-2xl font-medium tabular-nums transition-colors duration-500",
-              rising && "text-primary"
-            )}
-          >
-            {shown.toLocaleString(locale)}
-          </span>{" "}
-          <span className="text-muted-foreground">
-            {t("creditsLeft", { count: credits })}
-          </span>
-        </p>
-        {low && (
-          <p className="text-sm text-amber-600 dark:text-amber-400">
-            {t("creditsLow")}
-          </p>
-        )}
-      </div>
+    <>
       <TopUpDialog
         catalog={catalog}
         title={companyName}
         companyId={companyId}
+        card={
+          <span className="text-base text-muted-foreground">
+            <Tooltip disabled={!low}>
+              <TooltipTrigger
+                render={
+                  <span
+                    className={cn(
+                      "font-medium text-foreground tabular-nums transition-colors duration-500",
+                      rising && "text-primary",
+                      low && "text-amber-600 dark:text-amber-400"
+                    )}
+                  />
+                }
+              >
+                {shown.toLocaleString(locale)}
+              </TooltipTrigger>
+              <TooltipContent>{t("creditsLow")}</TooltipContent>
+            </Tooltip>{" "}
+            {t("creditsLeft", { count: credits })}
+          </span>
+        }
       />
       <RefreshOnFocus />
-    </div>
+    </>
   )
 }

@@ -4,7 +4,6 @@ from datetime import UTC, datetime, timedelta
 from app.constants.accounts import TEXT_RETENTION_DAYS
 from app.constants.generation import GENERATION_STOPPED, REVIEW_EXPIRY_DAYS, STUCK_AFTER_SECONDS
 from app.services import outbox as outbox_service
-from app.services.jobs import give_back
 from app.services.key_check_batches import collect_finished, submit_pending
 from app.storage import accounts, generations
 
@@ -21,14 +20,11 @@ async def key_check_batches() -> None:
 
 
 async def expire_reviews() -> None:
-    """Cancels topic reviews left open for REVIEW_EXPIRY_DAYS; an interview's event, saved with
-    the cancellation, removes it in companies."""
+    """Cancels topic reviews left open for REVIEW_EXPIRY_DAYS; the event saved with each
+    cancellation removes its test in companies."""
     before = datetime.now(UTC) - timedelta(days=REVIEW_EXPIRY_DAYS)
 
-    # A learner's kit that expired in review gives its credits back.
-    for generation in await generations.expire_reviews(before):
-        await give_back(generation, "review_expired")
-
+    await generations.expire_reviews(before)
     await outbox_service.flush_quietly()
 
 
@@ -40,10 +36,6 @@ async def sweep(checkpointer) -> None:
 
     if failed:
         logger.warning("Marked %d stuck generations as failed", len(failed))
-
-    # Their credits come back; a retry sets them aside again.
-    for generation in failed:
-        await give_back(generation, "stuck")
 
     await expire_reviews()
 

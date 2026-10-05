@@ -8,6 +8,8 @@ x-firebase-env: &firebase-env
   FIREBASE_AUTH_EMULATOR_HOST: ${FIREBASE_AUTH_EMULATOR_HOST}
   # Development only: serves /docs and /openapi.json, which `pnpm api-types` reads.
   API_DOCS: "true"
+  # Superadmins, prepza's own team (templates, the question bank): verified Google emails, comma-separated.
+  SUPERADMIN_EMAILS: ${SUPERADMIN_EMAILS:-}
   # Salts user ids in funnel events; in Google Cloud it's a secret.
   ANALYTICS_SALT: ${ANALYTICS_SALT:-local-analytics-salt}
   # The key of each service, for tokens calling it; in Google Cloud each service has its own.
@@ -39,14 +41,8 @@ x-service: &service
     timeout: 3s
     retries: 3
 
-# Invite email limits, shared by library (shares) and companies (candidate invites).
-x-email-limits: &email-limits
-  EMAIL_HOURLY_LIMIT: ${EMAIL_HOURLY_LIMIT:-30}
-  EMAIL_DAILY_LIMIT: ${EMAIL_DAILY_LIMIT:-200}
-  EMAIL_RECIPIENT_DAILY_LIMIT: ${EMAIL_RECIPIENT_DAILY_LIMIT:-3}
-
 x-library-env: &library-env
-  <<: [*firebase-env, *email-limits]
+  <<: *firebase-env
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/library
   REDIS_URL: redis://redis:6379
   SERVICE_SECRET: ${SERVICE_SECRET}
@@ -67,12 +63,8 @@ x-rounds-env: &rounds-env
   LANGSMITH_TRACING: ${LANGSMITH_TRACING}
   LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
   LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
-  LLM_LIMIT: ${LLM_LIMIT:-400}
-  TUTOR_MODEL: ${TUTOR_MODEL:-gpt-6.1-sol}
-  TUTOR_REASONING_EFFORT: ${TUTOR_REASONING_EFFORT:-low}
   HELP_MODEL: ${HELP_MODEL:-gpt-6-luna}
   HELP_REASONING_EFFORT: ${HELP_REASONING_EFFORT:-none}
-  LLM_WINDOW_SECONDS: ${LLM_WINDOW_SECONDS:-3600}
   HELP_USER_LIMIT: ${HELP_USER_LIMIT:-30}
   HELP_DAILY_LIMIT: ${HELP_DAILY_LIMIT:-5000}
   CONTACT_DAILY_LIMIT: ${CONTACT_DAILY_LIMIT:-200}
@@ -84,13 +76,10 @@ x-billing-env: &billing-env
   PADDLE_ENVIRONMENT: ${PADDLE_ENVIRONMENT:-sandbox}
   PADDLE_CLIENT_TOKEN: ${PADDLE_CLIENT_TOKEN:-}
   PADDLE_WEBHOOK_SECRET: ${PADDLE_WEBHOOK_SECRET:-}
-  PADDLE_PRICE_TOPUP_10: ${PADDLE_PRICE_TOPUP_10:-}
-  PADDLE_PRICE_TOPUP_25: ${PADDLE_PRICE_TOPUP_25:-}
-  PADDLE_PRICE_TOPUP_50: ${PADDLE_PRICE_TOPUP_50:-}
-  PADDLE_PRICE_TOPUP_100: ${PADDLE_PRICE_TOPUP_100:-}
+  PADDLE_PRICE_TOPUP_30: ${PADDLE_PRICE_TOPUP_30:-}
+  PADDLE_PRICE_TOPUP_150: ${PADDLE_PRICE_TOPUP_150:-}
   PADDLE_PRICE_TOPUP_250: ${PADDLE_PRICE_TOPUP_250:-}
-  PADDLE_PRICE_TOPUP_500: ${PADDLE_PRICE_TOPUP_500:-}
-  PADDLE_PRICE_TOPUP_CUSTOM: ${PADDLE_PRICE_TOPUP_CUSTOM:-}
+  PADDLE_PRICE_TOPUP_1000: ${PADDLE_PRICE_TOPUP_1000:-}
   PADDLE_PRICE_AUTO_TOP_UP: ${PADDLE_PRICE_AUTO_TOP_UP:-}
   PADDLE_API_KEY: ${PADDLE_API_KEY:-}
 
@@ -101,7 +90,11 @@ x-billing-source: &billing-source
   - ./packages/common/src:/packages/common/src
 
 x-companies-env: &companies-env
-  <<: [*firebase-env, *email-limits]
+  <<: *firebase-env
+  # Candidate invite email limits.
+  EMAIL_HOURLY_LIMIT: ${EMAIL_HOURLY_LIMIT:-100}
+  EMAIL_DAILY_LIMIT: ${EMAIL_DAILY_LIMIT:-200}
+  EMAIL_RECIPIENT_DAILY_LIMIT: ${EMAIL_RECIPIENT_DAILY_LIMIT:-3}
   BILLING_URL: http://billing:8000
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/companies
   REDIS_URL: redis://redis:6379
@@ -144,7 +137,6 @@ x-notifications-env: &notifications-env
   RESEND_WEBHOOK_SECRET: ${RESEND_WEBHOOK_SECRET:-}
   MAIL_FROM: ${MAIL_FROM:-prepza. <no-reply@prepza.local>}
   COMPANIES_URL: http://companies:8000
-  LIBRARY_URL: http://library:8000
   SMTP_HOST: ${SMTP_HOST:-mailpit}
   SMTP_PORT: ${SMTP_PORT:-1025}
   SITE_URL: ${SITE_URL:-http://localhost:8090}
@@ -172,21 +164,15 @@ x-generation-env: &generation-env
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/generation
   REDIS_URL: redis://redis:6379
   LIBRARY_URL: http://library:8000
-  BILLING_URL: http://billing:8000
   SERVICE_SECRET: ${SERVICE_SECRET}
-  QUESTIONS_PER_TOPIC: ${QUESTIONS_PER_TOPIC:-70}
+  INTERVIEW_QUESTIONS_PER_TOPIC: ${INTERVIEW_QUESTIONS_PER_TOPIC:-70}
+  TEMPLATE_QUESTIONS_PER_TOPIC: ${TEMPLATE_QUESTIONS_PER_TOPIC:-90}
   MAX_TOPICS: ${MAX_TOPICS:-10}
   MAX_SUBTOPICS: ${MAX_SUBTOPICS:-10}
   INTERVIEW_MODEL: ${INTERVIEW_MODEL:-gpt-6.1-sol}
   INTERVIEW_REASONING_EFFORT: ${INTERVIEW_REASONING_EFFORT:-low}
-  KIT_MODEL: ${KIT_MODEL:-gpt-6.1-sol}
-  KIT_REASONING_EFFORT: ${KIT_REASONING_EFFORT:-low}
-  HARD_KIT_MODEL: ${HARD_KIT_MODEL:-gpt-6.1-sol}
-  HARD_KIT_REASONING_EFFORT: ${HARD_KIT_REASONING_EFFORT:-low}
   VERIFY_MODEL: ${VERIFY_MODEL:-gpt-6.1-sol}
   VERIFY_REASONING_EFFORT: ${VERIFY_REASONING_EFFORT:-medium}
-  TITLE_CHECK_MODEL: ${TITLE_CHECK_MODEL:-gpt-6.1-sol}
-  TITLE_CHECK_REASONING_EFFORT: ${TITLE_CHECK_REASONING_EFFORT:-low}
   GENERATION_LIMIT: ${GENERATION_LIMIT:-20}
   GENERATION_WINDOW_SECONDS: ${GENERATION_WINDOW_SECONDS:-86400}
   REGENERATION_LIMIT: ${REGENERATION_LIMIT:-100}

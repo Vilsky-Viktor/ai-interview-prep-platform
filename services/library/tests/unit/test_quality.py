@@ -65,7 +65,18 @@ def test_dead_or_too_easy_options_are_weak():
 
 def stored(flag=None, kept=False, answers=0):
     question = SimpleNamespace(text="Which entry records a cash sale?", options=OPTIONS)
-    stats = SimpleNamespace(answers=answers, correct=0, option_picks={}, flag=flag, kept=kept)
+    stats = SimpleNamespace(
+        strong_answers=0,
+        strong_correct=0,
+        weak_answers=0,
+        weak_correct=0,
+        timeouts=0,
+        answers=answers,
+        correct=0,
+        option_picks={},
+        flag=flag,
+        kept=kept,
+    )
 
     return question, stats, {"wrong_answer": 2}, 0, 0
 
@@ -134,3 +145,54 @@ def test_flag_is_not_saved_when_the_verifier_is_unreachable(monkeypatch):
     asyncio.run(review(QUESTION_ID))
 
     assert calls == []
+
+
+def stats_of(**counts):
+    base = {
+        "answers": 0,
+        "timeouts": 0,
+        "strong_answers": 0,
+        "strong_correct": 0,
+        "weak_answers": 0,
+        "weak_correct": 0,
+    }
+
+    return SimpleNamespace(**(base | counts))
+
+
+def test_a_question_strong_and_weak_candidates_get_right_alike_says_nothing():
+    from app.helpers.quality import no_separation
+
+    # Strong get it right 80% of the time, weak 75%: no real difference.
+    assert no_separation(
+        stats_of(strong_answers=20, strong_correct=16, weak_answers=20, weak_correct=15)
+    )
+    # 80% against 40%: it tells them apart.
+    assert not no_separation(
+        stats_of(strong_answers=20, strong_correct=16, weak_answers=20, weak_correct=8)
+    )
+    # Too few answers in a group to judge.
+    assert not no_separation(
+        stats_of(strong_answers=20, strong_correct=16, weak_answers=5, weak_correct=5)
+    )
+
+
+def test_a_question_time_runs_out_on_too_often_is_too_slow():
+    from app.helpers.quality import too_slow
+
+    assert too_slow(stats_of(answers=30, timeouts=10))
+    assert not too_slow(stats_of(answers=36, timeouts=4))
+    assert not too_slow(stats_of(answers=5, timeouts=5))
+
+
+def test_a_candidates_group_follows_their_topic_score():
+    from app.helpers.quality import score_group
+
+    assert [score_group(score) for score in (90, 70, 55, 40, 10, None)] == [
+        "strong",
+        "strong",
+        None,
+        "weak",
+        "weak",
+        None,
+    ]

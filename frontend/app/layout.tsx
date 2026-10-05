@@ -9,6 +9,7 @@ import { AuthProvider } from "@/components/auth-provider"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner"
 import { RTL_LOCALES, type Locale } from "@/constants/i18n"
 import { SITE_NAME } from "@/constants/seo"
@@ -71,12 +72,14 @@ export default async function RootLayout({
         <NextIntlClientProvider>
           <ThemeProvider nonce={nonce}>
             <AuthProvider>
-              <SiteHeader />
-              <div className="flex flex-1 flex-col [&>*]:w-full">
-                {children}
-              </div>
-              <SiteFooter />
-              <Toaster />
+              <TooltipProvider>
+                <SiteHeader />
+                <div className="flex flex-1 flex-col [&>*]:w-full">
+                  {children}
+                </div>
+                <SiteFooter />
+                <Toaster />
+              </TooltipProvider>
             </AuthProvider>
           </ThemeProvider>
         </NextIntlClientProvider>

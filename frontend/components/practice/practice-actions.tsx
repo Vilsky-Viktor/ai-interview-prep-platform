@@ -1,0 +1,40 @@
+"use client"
+
+import { HistoryIcon } from "lucide-react"
+import Link from "next/link"
+import { useTranslations } from "next-intl"
+
+import { useAuth } from "@/components/auth-provider"
+import { StartPractice } from "@/components/practice/start-practice"
+import { Button } from "@/components/ui/button"
+
+/** A practice test's actions beside its title: the talent's past rounds (signed in), and
+ * starting a new round. */
+export function PracticeActions({
+  templateId,
+  startLabel,
+}: {
+  templateId: string
+  startLabel: string
+}) {
+  const t = useTranslations("practice")
+  const { user } = useAuth()
+
+  return (
+    <div className="flex shrink-0 items-center gap-3">
+      {user && (
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-12 shrink-0 text-muted-foreground hover:text-foreground"
+          aria-label={t("history")}
+          render={<Link href={`/practice/history/${templateId}`} />}
+          nativeButton={false}
+        >
+          <HistoryIcon className="size-6" />
+        </Button>
+      )}
+      <StartPractice templateId={templateId} label={startLabel} />
+    </div>
+  )
+}

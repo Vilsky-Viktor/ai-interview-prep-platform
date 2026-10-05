@@ -8,7 +8,7 @@ from prepza_common.user import User
 
 from app.helpers.review import add_signals, build_review
 from app.main import app
-from app.models.rounds import Answer
+from app.models.answers import Answer
 from app.models.sessions import Session
 from app.models.signals import Signal
 from app.schemas.library import TopicQuestions

@@ -90,7 +90,6 @@ async def new_options(
             "topic": context.topic,
             "start": 0,
             "questions": [question.text],
-            "kind": context.kind,
             "level": context.level,
             "language": context.language,
         }
@@ -107,8 +106,9 @@ async def new_options(
     )
 
 
-async def verify(question_id: UUID, flag: QualityFlag) -> None:
-    """Acts on a question the library flagged from its answers and feedback."""
+async def verify(question_id: UUID, flag: QualityFlag, now: bool = False) -> None:
+    """Acts on a question the library flagged from its answers and feedback; `now` checks a
+    wrong key right away (a superadmin's "Fix now")."""
     context = await library.get_question_context(question_id)
     question = await library.get_question_quality(question_id)
 
@@ -116,7 +116,9 @@ async def verify(question_id: UUID, flag: QualityFlag) -> None:
     if context is None or question is None:
         return
 
-    if flag == QualityFlag.WRONG_KEY:
+    if flag == QualityFlag.WRONG_KEY and now:
+        await check_key(question_id, question, context)
+    elif flag == QualityFlag.WRONG_KEY:
         # Nobody waits on it, so it goes in the next OpenAI batch at half price.
         await key_checks.add(question_id, question.text)
     elif flag == QualityFlag.WEAK_OPTIONS:

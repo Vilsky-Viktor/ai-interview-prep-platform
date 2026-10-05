@@ -1,4 +1,3 @@
-import { PlusIcon } from "lucide-react"
 import { cookies } from "next/headers"
 import Link from "next/link"
 import { getTranslations } from "next-intl/server"
@@ -59,29 +58,31 @@ export default async function InterviewsPage({
       <CompanyHeader
         companyId={companyId}
         name={company.name}
+        logoUrl={company.logo_url ?? null}
+        verifiedDomain={company.verified_domain ?? null}
+        websiteDomain={company.website_domain ?? null}
         current="interviews"
         action={
-          <Button
-            render={<Link href={`/company/${companyId}/interviews/new`} />}
-            nativeButton={false}
-            size="icon"
-            className="size-14 rounded-full"
-            aria-label={t("new")}
-          >
-            <PlusIcon className="size-6" />
-          </Button>
+          <div className="flex shrink-0 items-center gap-6">
+            {credits != null && catalog && (
+              <CreditsPanel
+                companyId={companyId}
+                companyName={company.name}
+                credits={credits.available}
+                low={credits.low}
+                catalog={catalog}
+              />
+            )}
+            <Button
+              render={<Link href={`/company/${companyId}/interviews/new`} />}
+              nativeButton={false}
+              className="h-12 px-6 text-base"
+            >
+              {t("new")}
+            </Button>
+          </div>
         }
       />
-
-      {credits != null && catalog && (
-        <CreditsPanel
-          companyId={companyId}
-          companyName={company.name}
-          credits={credits.available}
-          low={credits.low}
-          catalog={catalog}
-        />
-      )}
 
       {interviews && (
         <InterviewList companyId={companyId} initial={interviews} />

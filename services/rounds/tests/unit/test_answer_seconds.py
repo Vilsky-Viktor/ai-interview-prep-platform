@@ -72,3 +72,32 @@ def test_answer_records_the_seconds_since_the_question_was_shown(monkeypatch):
     assert 29 <= saved[0].seconds <= 31
     row.answers = saved
     assert build_review(row)[0].answer.seconds == saved[0].seconds
+
+
+def test_only_a_candidates_answer_tells_library_about_the_question(monkeypatch):
+    events = []
+
+    async def fake_add(answer, event=None):
+        answer.id = uuid4()
+        events.append(event)
+
+        return True
+
+    async def no_flush():
+        return None
+
+    monkeypatch.setattr(sessions, "add_answer", fake_add)
+    monkeypatch.setattr(session_answers.outbox_service, "flush_quietly", no_flush)
+
+    for preview in (False, True):
+        row = session(datetime.now(UTC))
+        row.preview = preview
+        asyncio.run(
+            session_answers.submit_session_answer(
+                row, AnswerCreate(question_id=QUESTION_ID, option_index=0)
+            )
+        )
+
+    # A company member trying their own test says nothing about the question's quality.
+    assert events[0][0] == "answer.recorded"
+    assert events[1] is None

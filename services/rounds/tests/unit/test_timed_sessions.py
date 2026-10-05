@@ -7,7 +7,7 @@ from fastapi import HTTPException
 from prepza_common.user import User
 
 from app.constants.rounds import TIME_UP
-from app.models.rounds import Answer
+from app.models.answers import Answer
 from app.models.sessions import Session
 from app.schemas.rounds import AnswerCreate
 from app.service_auth import service_token
@@ -52,8 +52,9 @@ def test_starting_a_timed_interview_passes_the_seconds_per_question(client, monk
     async def no_sessions(invite_id):
         return []
 
-    async def fake_create(user_id, invite_id, topics, question_seconds):
+    async def fake_create(user_id, invite_id, topics, question_seconds, preview):
         created["question_seconds"] = question_seconds
+        created["preview"] = preview
 
         return []
 
@@ -74,6 +75,7 @@ def test_starting_a_timed_interview_passes_the_seconds_per_question(client, monk
 
     assert response.status_code == 201
     assert created["question_seconds"] == 45
+    assert created["preview"] is False
 
 
 def test_a_question_past_its_time_counts_as_wrong(monkeypatch):

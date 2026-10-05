@@ -23,7 +23,6 @@ export const NOTIFICATION_LOOKS: Record<
 > = {
   question_flagged: { icon: FlagIcon, alert: false },
   question_fixed: { icon: SparklesIcon, alert: false },
-  kit_ready: { icon: PackageCheckIcon, alert: false },
   referral_rewarded: { icon: DollarSignIcon, alert: false },
   auto_top_up_charged: { icon: DollarSignIcon, alert: false },
   auto_top_up_failed: { icon: DollarSignIcon, alert: true },

@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException, status
 
 from app.schemas.quality import QuestionQuality, ReportNote
 from app.service_auth import ServiceCaller
+from app.services import quality as quality_service
 from app.storage import feedback, quality
 
 router = APIRouter(prefix="/internal/questions", tags=["internal"])
@@ -32,3 +33,9 @@ async def get_quality(question_id: UUID, caller: ServiceCaller) -> QuestionQuali
 async def keep(question_id: UUID, caller: ServiceCaller) -> None:
     """The verifier found nothing wrong: serve the question again and stop flagging it."""
     await quality.save_flag(question_id, None, kept=True)
+
+
+@router.post("/{question_id}/wrong", status_code=status.HTTP_204_NO_CONTENT)
+async def mark_wrong(question_id: UUID, caller: ServiceCaller) -> None:
+    """For companies, once it has checked the question is in the company's test."""
+    await quality_service.mark_wrong(question_id)

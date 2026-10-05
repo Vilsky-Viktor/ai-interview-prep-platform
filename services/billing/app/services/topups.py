@@ -8,7 +8,6 @@ from app.config.settings import settings
 from app.constants.notifications import TOP_UP_LINK
 from app.constants.products import OwnerType
 from app.helpers.credits import credits_for
-from app.helpers.owners import owner_of
 from app.services import auto_top_ups
 from app.services.catalog import price_cents_for
 from app.services.referrals import reward_after_top_up
@@ -67,10 +66,10 @@ async def handle_completed(data: dict) -> None:
         )
 
         if granted:
-            await reward_after_top_up(owner_type, owner_id, paid_cents)
+            await reward_after_top_up(owner_type, owner_id)
             await track(
                 "topped_up",
-                **owner_of(owner_type, owner_id),
+                company_id=owner_id,
                 amount_cents=paid_cents,
                 product=key,
                 currency=data["currency_code"],

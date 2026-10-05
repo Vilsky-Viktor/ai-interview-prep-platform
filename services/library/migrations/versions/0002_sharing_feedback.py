@@ -9,8 +9,6 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects import postgresql
 
-from app.constants.search import TOPIC_SEARCH_EXPRESSION
-
 revision = "0002"
 down_revision = "0001"
 branch_labels = None
@@ -39,7 +37,7 @@ def upgrade() -> None:
         sa.Column(
             "search",
             postgresql.TSVECTOR(),
-            sa.Computed(TOPIC_SEARCH_EXPRESSION, persisted=True),
+            sa.Computed("to_tsvector('english', title || ' ' || subtopics::text)", persisted=True),
         ),
     )
     op.create_index("ix_topics_search", "topics", ["search"], postgresql_using="gin")

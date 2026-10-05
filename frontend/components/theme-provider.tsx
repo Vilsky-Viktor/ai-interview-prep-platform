@@ -13,6 +13,12 @@ function ThemeProvider({
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange
+      // The theme script only needs to run in the server's HTML, before the page paints. Created
+      // in the browser (a "not found" page renders the layout there), React warns about it, so
+      // there it's marked as data.
+      scriptProps={
+        typeof window === "undefined" ? undefined : { type: "application/json" }
+      }
       {...props}
     >
       <ThemeHotkey />

@@ -48,9 +48,16 @@ export default async function MembersPage({
       <CompanyHeader
         companyId={companyId}
         name={company.name}
+        logoUrl={company.logo_url ?? null}
+        verifiedDomain={company.verified_domain ?? null}
+        websiteDomain={company.website_domain ?? null}
         current="members"
+        action={
+          company.role === "owner" ? (
+            <InviteAdmin companyId={companyId} />
+          ) : undefined
+        }
       />
-      {company.role === "owner" && <InviteAdmin companyId={companyId} />}
       <MemberList companyId={companyId} initial={members ?? []} />
     </main>
   )

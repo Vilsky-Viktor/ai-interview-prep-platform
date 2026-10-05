@@ -2,12 +2,13 @@ from dataclasses import dataclass
 from datetime import timedelta
 from enum import StrEnum
 
-from app.constants.credits import CANDIDATE_CREDITS, KIT_CREDITS
+from app.constants.credits import CANDIDATE_CREDITS
 
 
 class OwnerType(StrEnum):
+    """Whose wallet; only companies have one."""
+
     COMPANY = "company"
-    USER = "user"
 
 
 @dataclass(frozen=True)
@@ -18,23 +19,18 @@ class TopUp:
 
 
 # Fixed amounts; what each buys comes from helpers/credits.py.
+# Each buys whole candidates at its volume price: 10 and 50 at $3, 125 at $2, 1,000 at $1.
 TOP_UPS = [
-    TopUp("topup_10", "$10", 1_000),
-    TopUp("topup_25", "$25", 2_500),
-    TopUp("topup_50", "$50", 5_000),
-    TopUp("topup_100", "$100", 10_000),
+    TopUp("topup_30", "$30", 3_000),
+    TopUp("topup_150", "$150", 15_000),
     TopUp("topup_250", "$250", 25_000),
-    TopUp("topup_500", "$500", 50_000),
+    TopUp("topup_1000", "$1,000", 100_000),
 ]
 
-# A top-up of any whole-dollar amount in this range: Paddle's $1 price bought in that quantity.
-CUSTOM_TOP_UP = "topup_custom"
-CUSTOM_MIN_DOLLARS = 10
-CUSTOM_MAX_DOLLARS = 500
-
 # $1 buys CREDITS_PER_DOLLAR credits, plus a bonus percent from these amounts up (in cents),
-# largest first.
-BONUS_TIERS = [(50_000, 10), (25_000, 5), (10_000, 2)]
+# largest first: volume prices, so a candidate (CANDIDATE_CREDITS) costs $3, $2 when bought in a
+# top-up from $250, and $1 from $1,000.
+BONUS_TIERS = [(100_000, 200), (25_000, 50)]
 
 CURRENCY = "USD"
 # Paddle signs each webhook with a timestamp; older ones are refused, so a captured one can't be
@@ -49,11 +45,8 @@ DELETED_OWNER = "deleted-user"
 
 # Automatic top-up: the balances (in credits) it can refill under, and the least time between two
 # automatic charges, so a webhook still on its way can't cause a second one.
-# A learner's top one is a kit; a company's cover 1, 3 and 5 candidates.
-AUTO_TOP_UP_THRESHOLDS = {
-    "user": [100, 300, KIT_CREDITS],
-    "company": [CANDIDATE_CREDITS, 3 * CANDIDATE_CREDITS, 5 * CANDIDATE_CREDITS],
-}
+# They cover 1, 3 and 5 candidates.
+AUTO_TOP_UP_THRESHOLDS = [CANDIDATE_CREDITS, 3 * CANDIDATE_CREDITS, 5 * CANDIDATE_CREDITS]
 AUTO_TOP_UP_COOLDOWN = timedelta(minutes=10)
 # Turning it on is a checkout for a $0 monthly subscription, which saves the card; Paddle tells
 # us when it starts and when it ends (cancelled in Paddle, or after failed payments).

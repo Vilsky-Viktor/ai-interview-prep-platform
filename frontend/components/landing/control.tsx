@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { ReviewDemo } from "@/components/landing/review-demo"
 import { LandingSection, Stage } from "@/components/landing/section"
 
-// The picture's topics: the last one unchecked, as if the learner doesn't need it; the second
+// The picture's topics: the last one unchecked, as if the role doesn't need it; the second
 // one is edited by hand in the demo.
 const TOPICS = [
   { key: "design", checked: true },

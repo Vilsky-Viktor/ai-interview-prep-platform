@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import { getTranslations } from "next-intl/server"
 
-import { SettingsNav } from "@/components/settings/settings-nav"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { TOKEN_COOKIE } from "@/constants/auth"
 
@@ -27,10 +26,7 @@ export default async function SettingsLayout({
       </h1>
 
       {signedIn ? (
-        <div className="grid gap-8 md:grid-cols-[12rem_minmax(0,1fr)]">
-          <SettingsNav />
-          <div className="space-y-8">{children}</div>
-        </div>
+        <div className="space-y-8">{children}</div>
       ) : (
         <SignInPrompt message={t("signIn")} />
       )}

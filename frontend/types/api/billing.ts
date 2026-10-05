@@ -21,77 +21,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/topups/quote": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Quote
-     * @description What a custom amount buys, bonus included, so the client shows it without the rule.
-     */
-    get: operations["quote_topups_quote_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/me": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** My Balance */
-    get: operations["my_balance_me_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/me/referral": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** My Referral */
-    get: operations["my_referral_me_referral_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/me/history": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** My History */
-    get: operations["my_history_me_history_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/webhooks/paddle": {
     parameters: {
       query?: never
@@ -106,61 +35,6 @@ export interface paths {
      * @description Paddle retries until it gets a 2xx, and granting is idempotent, so retries are safe.
      */
     post: operations["paddle_webhook_webhooks_paddle_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/internal/kits/{generation_id}/hold": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Hold Kit
-     * @description A learner's prep kit, held when its topics are approved. Charged when it's ready, given
-     *     back if it fails or is cancelled.
-     */
-    post: operations["hold_kit_internal_kits__generation_id__hold_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/internal/kits/{generation_id}/charge": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /** Charge Kit */
-    post: operations["charge_kit_internal_kits__generation_id__charge_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/internal/kits/{generation_id}/release": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /** Release Kit */
-    post: operations["release_kit_internal_kits__generation_id__release_post"]
     delete?: never
     options?: never
     head?: never
@@ -215,66 +89,6 @@ export interface paths {
     put?: never
     /** Release Candidate */
     post: operations["release_candidate_internal_candidates_release_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/internal/certificates": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Charge Certificate
-     * @description A certificate on someone else's public kit; its author gets a share.
-     */
-    post: operations["charge_certificate_internal_certificates_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/internal/chat-turns": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Charge Chat Turn
-     * @description A tutor turn after the free ones on a question.
-     */
-    post: operations["charge_chat_turn_internal_chat_turns_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/internal/users/{user_id}/credits": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * User Credits
-     * @description For a check before work starts, such as a chat turn.
-     */
-    get: operations["user_credits_internal_users__user_id__credits_get"]
-    put?: never
-    post?: never
     delete?: never
     options?: never
     head?: never
@@ -356,23 +170,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/companies/{company_id}/history": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Company History */
-    get: operations["company_history_internal_companies__company_id__history_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/internal/companies/{company_id}": {
     parameters: {
       query?: never
@@ -400,7 +197,10 @@ export interface paths {
     get?: never
     put?: never
     post?: never
-    /** Delete User */
+    /**
+     * Delete User
+     * @description The user's purchases for their companies stay for bookkeeping, without their id.
+     */
     delete: operations["delete_user_internal_users__user_id__delete"]
     options?: never
     head?: never
@@ -414,30 +214,14 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** Export User */
+    /**
+     * Export User
+     * @description What the user bought for their companies.
+     */
     get: operations["export_user_internal_users__user_id__export_get"]
     put?: never
     post?: never
     delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/me/auto-top-up": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** My Auto Top Up */
-    get: operations["my_auto_top_up_me_auto_top_up_get"]
-    /** Turn On Mine */
-    put: operations["turn_on_mine_me_auto_top_up_put"]
-    post?: never
-    /** Turn Off Mine */
-    delete: operations["turn_off_mine_me_auto_top_up_delete"]
     options?: never
     head?: never
     patch?: never
@@ -547,6 +331,16 @@ export interface components {
       low: boolean
     }
     /**
+     * CandidatePriceOut
+     * @description A candidate's price when credits are bought in a top-up from this many dollars.
+     */
+    CandidatePriceOut: {
+      /** From Dollars */
+      from_dollars: number
+      /** Cents */
+      cents: number
+    }
+    /**
      * CatalogOut
      * @description What the pricing page and Paddle.js need. Prices are decided here, not in the client.
      */
@@ -557,31 +351,16 @@ export interface components {
       client_token: string
       /** Currency */
       currency: string
-      /** Kit Credits */
-      kit_credits: number
       /** Candidate Credits */
       candidate_credits: number
-      /** Certificate Credits */
-      certificate_credits: number
-      /** Chat Turn Credits */
-      chat_turn_credits: number
-      /** Chat Free Turns */
-      chat_free_turns: number
-      /** Public Topics Per Day */
-      public_topics_per_day: number
-      /** Welcome User */
-      welcome_user: number
+      /** Candidate Prices */
+      candidate_prices: components["schemas"]["CandidatePriceOut"][]
       /** Welcome Company */
       welcome_company: number
-      /** Referral User */
-      referral_user: number
       /** Referral Company */
       referral_company: number
-      /** Referral Company Min Dollars */
-      referral_company_min_dollars: number
       /** Products */
       products: components["schemas"]["TopUpOut"][]
-      custom: components["schemas"]["CustomTopUpOut"]
     }
     /**
      * CheckoutOut
@@ -595,35 +374,6 @@ export interface components {
         [key: string]: string
       }
     }
-    /**
-     * CustomTopUpOut
-     * @description Any whole-dollar amount in the range: Paddle's $1 price in that quantity.
-     */
-    CustomTopUpOut: {
-      /** Price Id */
-      price_id: string | null
-      /** Min Dollars */
-      min_dollars: number
-      /** Max Dollars */
-      max_dollars: number
-    }
-    /**
-     * EntryOut
-     * @description One line of a wallet's history.
-     */
-    EntryOut: {
-      /** Amount */
-      amount: number
-      /** Reason */
-      reason: string
-      /** Note */
-      note: string | null
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string
-    }
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
@@ -635,18 +385,6 @@ export interface components {
       owner_ids: string[]
     }
     /**
-     * QuoteOut
-     * @description What a custom amount buys.
-     */
-    QuoteOut: {
-      /** Price Cents */
-      price_cents: number
-      /** Credits */
-      credits: number
-      /** Bonus Credits */
-      bonus_credits: number
-    }
-    /**
      * ReferralOut
      * @description The owner's referral link code, what it earns, and how many it has earned for.
      */
@@ -655,24 +393,23 @@ export interface components {
       code: string
       /** Reward */
       reward: number
-      /** Min Dollars */
-      min_dollars: number
       /** Rewarded */
       rewarded: number
+      /** Rewards */
+      rewards: components["schemas"]["ReferralRewardOut"][]
     }
     /**
-     * SpendIn
-     * @description A charge for something delivered at once. `key` makes a repeat count once.
+     * ReferralRewardOut
+     * @description A company that came through the link and topped up, so both got the reward.
      */
-    SpendIn: {
-      /** Owner Id */
-      owner_id: string
-      /** Key */
-      key: string
-      /** Note */
-      note?: string | null
-      /** Author Id */
-      author_id?: string | null
+    ReferralRewardOut: {
+      /** Company Id */
+      company_id: string
+      /**
+       * Rewarded At
+       * Format: date-time
+       */
+      rewarded_at: string
     }
     /** TopUpOut */
     TopUpOut: {
@@ -684,8 +421,10 @@ export interface components {
       price_cents: number
       /** Credits */
       credits: number
-      /** Bonus Credits */
-      bonus_credits: number
+      /** Candidates */
+      candidates: number
+      /** Candidate Cents */
+      candidate_cents: number
       /** Price Id */
       price_id: string | null
     }
@@ -743,109 +482,6 @@ export interface operations {
       }
     }
   }
-  quote_topups_quote_get: {
-    parameters: {
-      query: {
-        dollars: number
-      }
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["QuoteOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  my_balance_me_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["BalanceOut"]
-        }
-      }
-    }
-  }
-  my_referral_me_referral_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["ReferralOut"]
-        }
-      }
-    }
-  }
-  my_history_me_history_get: {
-    parameters: {
-      query?: {
-        offset?: number
-        limit?: number
-      }
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["EntryOut"][]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
   paddle_webhook_webhooks_paddle_post: {
     parameters: {
       query?: never
@@ -864,95 +500,6 @@ export interface operations {
           "application/json": {
             [key: string]: unknown
           }
-        }
-      }
-    }
-  }
-  hold_kit_internal_kits__generation_id__hold_post: {
-    parameters: {
-      query: {
-        user_id: string
-      }
-      header?: never
-      path: {
-        generation_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  charge_kit_internal_kits__generation_id__charge_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        generation_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  release_kit_internal_kits__generation_id__release_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        generation_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }
@@ -1033,99 +580,6 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  charge_certificate_internal_certificates_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["SpendIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  charge_chat_turn_internal_chat_turns_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["SpendIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  user_credits_internal_users__user_id__credits_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        user_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["BalanceOut"]
-        }
       }
       /** @description Validation Error */
       422: {
@@ -1268,40 +722,6 @@ export interface operations {
       }
     }
   }
-  company_history_internal_companies__company_id__history_get: {
-    parameters: {
-      query?: {
-        offset?: number
-        limit?: number
-      }
-      header?: never
-      path: {
-        company_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["EntryOut"][]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
   delete_company_internal_companies__company_id__delete: {
     parameters: {
       query?: never
@@ -1390,77 +810,6 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
         }
-      }
-    }
-  }
-  my_auto_top_up_me_auto_top_up_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["AutoTopUpOut"]
-        }
-      }
-    }
-  }
-  turn_on_mine_me_auto_top_up_put: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["AutoTopUpIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["AutoTopUpOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  turn_off_mine_me_auto_top_up_delete: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
       }
     }
   }

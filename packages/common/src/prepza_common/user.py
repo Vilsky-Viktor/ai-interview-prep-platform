@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 # A supported language's code (LANGUAGES).
 Language = Literal[tuple(LANGUAGES)]
-# A preparation's level (LEVELS).
+# A test's level (LEVELS).
 Level = Literal[LEVELS]
 
 

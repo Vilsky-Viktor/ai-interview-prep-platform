@@ -17,6 +17,8 @@ def collect_results(state: State) -> dict:
                 "subtopics": topic["subtopics"],
                 "questions": [question["text"] for question in questions],
                 "answer_options": [question["options"] for question in questions],
+                # Bank questions keep their original; new ones have none.
+                "source_ids": [question.get("source_id") for question in questions],
             }
         )
 

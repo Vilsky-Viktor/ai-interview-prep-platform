@@ -9,5 +9,4 @@ WEBHOOK_TOLERANCE_SECONDS = 5 * 60
 # Tags on every invite email, which Resend's webhooks carry back: what it is and its id.
 KIND_TAG = "kind"
 ID_TAG = "id"
-SHARE_KIND = "share"
 CANDIDATE_INVITE_KIND = "candidate_invite"

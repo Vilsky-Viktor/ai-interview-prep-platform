@@ -4,6 +4,7 @@ locals {
     GOOGLE_CLOUD_PROJECT    = var.project_id
     FIREBASE_PROJECT_ID     = var.project_id
     SENTRY_DSN              = var.sentry_dsn
+    SUPERADMIN_EMAILS       = join(",", var.superadmin_emails)
     SENTRY_ENVIRONMENT      = "production"
     INVOKER_SERVICE_ACCOUNT = google_service_account.invoker.email
     LIBRARY_URL             = local.run_url["library"]

@@ -4,7 +4,6 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.paging import PageParams
 from prepza_common.sets import PreparationIn
 
-from app.constants.sets import SetKind, Visibility
 from app.schemas.feedback import ReportOut
 from app.schemas.preparations import (
     CreatedOut,
@@ -12,25 +11,16 @@ from app.schemas.preparations import (
     QuestionText,
     TitleIn,
     TopicOut,
-    TopicQuestionsOut,
 )
 from app.schemas.regenerate import QuestionContext, QuestionReplace
 from app.schemas.sets import SetContent, SetOut, SetTopicOut
+from app.schemas.templates import TemplateCopyIn, TemplateCopyOut
 from app.service_auth import ServiceCaller
 from app.services import outbox as outbox_service
-from app.services.access import require_member
 from app.services.questions import question_texts
-from app.storage import feedback, preparations, shares
+from app.storage import feedback, preparations, templates
 
 router = APIRouter(prefix="/internal", tags=["internal"])
-
-
-@router.post("/preparations", status_code=status.HTTP_201_CREATED)
-async def create_preparation(body: PreparationIn, caller: ServiceCaller) -> CreatedOut:
-    """A retried save from the same generation returns the set it already made."""
-    existing = await preparations.find_by_generation(body.generation_id)
-
-    return CreatedOut(id=existing or await preparations.create(body))
 
 
 @router.post("/interviews", status_code=status.HTTP_201_CREATED)
@@ -41,18 +31,32 @@ async def create_interview(body: PreparationIn, caller: ServiceCaller) -> Create
     return CreatedOut(id=existing or await preparations.create_interview(body))
 
 
+@router.post("/templates", status_code=status.HTTP_201_CREATED)
+async def create_template(body: PreparationIn, caller: ServiceCaller) -> CreatedOut:
+    """A retried save from the same generation returns the template it already made."""
+    existing = await preparations.find_by_generation(body.generation_id)
+
+    return CreatedOut(id=existing or await templates.create_template(body))
+
+
+@router.post("/templates/{template_id}/copy", status_code=status.HTTP_201_CREATED)
+async def copy_template(
+    template_id: UUID, body: TemplateCopyIn, caller: ServiceCaller
+) -> TemplateCopyOut:
+    """For companies: a company's own test made from a template, with no generation."""
+    copy = await templates.copy_template(template_id, body.company_id)
+
+    if copy is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Template not found")
+
+    return TemplateCopyOut(id=copy.id, title=copy.title, language=copy.language)
+
+
 @router.delete("/interviews/{set_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_interview(set_id: UUID, caller: ServiceCaller) -> None:
-    """Deletes an interview set; safe to repeat. Never deletes a user's preparation."""
-    question_set = await preparations.get(set_id)
-
-    if question_set is None:
-        return
-
-    if question_set.kind != SetKind.INTERVIEW:
-        raise HTTPException(status.HTTP_409_CONFLICT, "Not an interview")
-
-    await preparations.remove(set_id)
+    """Deletes an interview set; safe to repeat."""
+    if await preparations.get(set_id) is not None:
+        await preparations.remove(set_id)
 
 
 @router.patch("/sets/{set_id}/title", status_code=status.HTTP_204_NO_CONTENT)
@@ -118,22 +122,11 @@ async def get_set_content(set_id: UUID, caller: ServiceCaller) -> SetContent:
     )
 
 
-@router.get("/sets/{set_id}/question-texts")
-async def list_question_texts(set_id: UUID, caller: ServiceCaller) -> dict[str, str]:
-    """Current text per question id, so callers can tell a re-generated question apart."""
-    if await preparations.get(set_id) is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Set not found")
-
-    return {
-        str(question_id): text for question_id, text in await preparations.question_texts(set_id)
-    }
-
-
 @router.get("/sets/{set_id}/topics/{topic_id}/questions")
 async def list_topic_questions(
     set_id: UUID, topic_id: UUID, caller: ServiceCaller
 ) -> list[QuestionText]:
-    """Question text and feedback counts of one topic in a set, without answers."""
+    """One topic's questions in a set, with their options and feedback counts."""
     found = await preparations.get_topic_with_question_texts(topic_id)
 
     if found is None or found[0].id != set_id:
@@ -185,38 +178,3 @@ async def replace_question(question_id: UUID, body: QuestionReplace, caller: Ser
         [option.model_dump() for option in body.options],
     )
     await outbox_service.flush_quietly()
-
-
-@router.get("/topics/{topic_id}")
-async def get_topic_questions(
-    topic_id: UUID, user_id: str, caller: ServiceCaller
-) -> TopicQuestionsOut:
-    """Questions of a topic the user owns or joined, for starting a round."""
-    found = await preparations.get_topic_with_questions(topic_id)
-
-    if found is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Topic not found")
-
-    question_set, topic = found
-    await require_member(question_set, user_id)
-    # Someone else's public kit, unless the owner shared it with the user: shared kits are free.
-    public = (
-        question_set.visibility == Visibility.PUBLIC
-        and question_set.owner_id != user_id
-        and not await shares.accepted_by(question_set.id, user_id)
-    )
-
-    return TopicQuestionsOut(
-        id=topic.id,
-        preparation_id=question_set.id,
-        title=topic.title,
-        public_author_id=question_set.owner_id if public else None,
-        questions=[
-            QuestionOut(
-                id=question.id,
-                text=question.text,
-                options=question.options,
-            )
-            for question in topic.questions
-        ],
-    )

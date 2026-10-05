@@ -1,25 +1,14 @@
 "use client"
 
-import { LinkIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { toast } from "sonner"
 
+import { CopyField } from "@/components/copy-field"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { useOrigin } from "@/lib/origin"
 import type { CompanyMember } from "@/types/company"
 
 export function MemberRow({ member }: { member: CompanyMember }) {
   const t = useTranslations("members")
-  const common = useTranslations("common")
   const roles = useTranslations("roles")
-  const origin = useOrigin()
-  const url = origin && member.token ? `${origin}/join/${member.token}` : ""
-
-  async function copy() {
-    await navigator.clipboard.writeText(url)
-    toast.success(common("linkCopied"))
-  }
 
   return (
     <div className="space-y-3 p-6">
@@ -34,16 +23,9 @@ export function MemberRow({ member }: { member: CompanyMember }) {
           {roles(member.role)}
         </Badge>
       </div>
-      {!member.joined && url && (
-        <div className="flex items-center gap-2">
-          <p className="min-w-0 flex-1 rounded-xl border px-2.5 py-2 font-mono text-xs break-all">
-            {url}
-          </p>
-          <Button type="button" variant="outline" onClick={copy}>
-            <LinkIcon />
-            {t("copy")}
-          </Button>
-        </div>
+      {/* The join link in the site's copy field, like the test's shareable link. */}
+      {!member.joined && member.token && (
+        <CopyField path={`/join/${member.token}`} />
       )}
     </div>
   )

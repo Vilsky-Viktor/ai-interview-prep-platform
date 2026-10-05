@@ -5,4 +5,10 @@ MAX_TOPIC_DISTANCE = 0.35
 # A question is proven, and can be reused, once answered this many times without a flag.
 MIN_REUSE_ANSWERS = 5
 MAX_REUSE_COUNT = 100
+# Topics per request when embedding template topics that have none.
 MAX_EMBEDDING_BATCH = 100
+# The bank's one-way stages (constants/sets.py Stage): a private question retires after this many
+# answers across every test that uses it, and is revealed for practice once no test has used a
+# copy of it for this many days.
+RETIRE_AFTER_ANSWERS = 100
+REVEAL_AFTER_IDLE_DAYS = 90

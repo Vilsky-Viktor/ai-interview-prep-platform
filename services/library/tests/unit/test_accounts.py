@@ -1,5 +1,4 @@
 import asyncio
-import uuid
 
 import httpx
 import pytest
@@ -7,13 +6,11 @@ from prepza_common.auth import current_user
 from prepza_common.user import User
 
 from app.integrations import accounts as account_services
-from app.integrations import rounds
 from app.main import app
 from app.services import accounts as account_service
-from app.storage import accounts, preparations
+from app.storage import accounts
 
 USER = User(uid="ann", email="Ann@Example.com", email_verified=True, name="Ann")
-SET_ID = uuid.uuid4()
 
 
 @pytest.fixture
@@ -24,22 +21,10 @@ def steps(monkeypatch):
     async def delete_in(service, user_id, email):
         done.append(("service", service))
 
-    async def owned(user_id):
-        return [SET_ID]
-
-    async def delete_practice(set_id):
-        done.append(("practice", set_id))
-
-    async def remove(set_id):
-        done.append(("preparation", set_id))
-
-    async def delete_library(user_id, email):
+    async def delete_library(user_id):
         done.append(("library", user_id))
 
     monkeypatch.setattr(account_services, "delete_user", delete_in)
-    monkeypatch.setattr(accounts, "owned_preparations", owned)
-    monkeypatch.setattr(rounds, "delete_preparation_data", delete_practice)
-    monkeypatch.setattr(preparations, "remove", remove)
     monkeypatch.setattr(accounts, "delete_user", delete_library)
     monkeypatch.setattr(
         account_service, "delete_sign_in", lambda uid: done.append(("sign-in", uid))
@@ -57,8 +42,6 @@ def test_every_service_is_cleaned_before_the_sign_in_goes(steps):
         ("service", "generation"),
         ("service", "billing"),
         ("service", "notifications"),
-        ("practice", SET_ID),
-        ("preparation", SET_ID),
         ("library", "ann"),
         ("sign-in", "ann"),
     ]
@@ -83,8 +66,8 @@ def test_the_export_holds_every_service_and_downloads_as_a_file(client, monkeypa
     async def export_from(service, user_id, email):
         return {"from": service}
 
-    async def library_export(user_id, email):
-        return {"own_preparations": []}
+    async def library_export(user_id):
+        return {"question_votes": [], "question_reports": []}
 
     monkeypatch.setattr(account_services, "export_user", export_from)
     monkeypatch.setattr(accounts, "export", library_export)
@@ -104,7 +87,7 @@ def test_the_export_holds_every_service_and_downloads_as_a_file(client, monkeypa
             "name": "Ann",
             "language": "en",
         },
-        "library": {"own_preparations": []},
+        "library": {"question_votes": [], "question_reports": []},
         "companies": {"from": "companies"},
         "rounds": {"from": "rounds"},
         "generation": {"from": "generation"},

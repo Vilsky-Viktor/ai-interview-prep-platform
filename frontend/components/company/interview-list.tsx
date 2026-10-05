@@ -5,6 +5,13 @@ import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
 
 import { DeleteInterview } from "@/components/company/delete-interview"
+import { InterviewStatus } from "@/components/company/interview-status"
+import { TryInterview } from "@/components/company/try-interview"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { formatDate } from "@/lib/format"
@@ -55,19 +62,39 @@ export function InterviewList({
                 </time>
               </span>
             </span>
-            <span
-              className="flex shrink-0 items-center gap-1.5 text-sm text-muted-foreground tabular-nums"
-              aria-label={t("candidateCount", {
-                count: interview.candidate_count,
-              })}
-            >
-              <UsersIcon aria-hidden className="size-5" />
-              {interview.candidate_count}
+            <span className="flex shrink-0 items-center gap-6">
+              {interview.set_id && (
+                <InterviewStatus status={interview.status} />
+              )}
+              <Tooltip>
+                {/* Above the row's link overlay, so hovering it shows the tooltip. */}
+                <TooltipTrigger
+                  render={
+                    <span
+                      className="relative z-10 flex w-12 shrink-0 items-center justify-end gap-1.5 text-sm text-muted-foreground tabular-nums"
+                      aria-label={t("candidateCount", {
+                        count: interview.candidate_count,
+                      })}
+                    />
+                  }
+                >
+                  <UsersIcon aria-hidden className="size-5" />
+                  {interview.candidate_count}
+                </TooltipTrigger>
+                <TooltipContent>
+                  {t("candidateCount", { count: interview.candidate_count })}
+                </TooltipContent>
+              </Tooltip>
             </span>
           </Link>
           {/* Still generating: cancelling it, on its page, is the way to remove it. */}
           {interview.set_id && (
-            <div className="relative z-10">
+            <div className="relative z-10 flex">
+              <TryInterview
+                companyId={companyId}
+                interviewId={interview.id}
+                title={interview.title ?? t("fallbackTitle")}
+              />
               <DeleteInterview
                 interviewId={interview.id}
                 title={interview.title ?? t("fallbackTitle")}

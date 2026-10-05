@@ -10,7 +10,7 @@ from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
-from app.routers import candidates as candidates_router
+from app.services import candidate_invites
 from app.services import outbox as outbox_service
 from app.storage import companies, interviews, invites
 from tests.unit.fake_redis import FakeRedis
@@ -54,7 +54,7 @@ def invite_setup(monkeypatch):
     async def fake_company(_company_id):
         return company
 
-    async def fake_upsert(_interview_id, email, title, company, language):
+    async def fake_upsert(_interview_id, email, title, company, language, logo_path=None):
         # The storage saves the email's event in the invite's transaction.
         sent.append(email)
         invited.add(email)
@@ -79,7 +79,7 @@ def invite_setup(monkeypatch):
     monkeypatch.setattr(billing, "hold_candidate", fake_hold)
     monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
     redis = FakeRedis()
-    monkeypatch.setattr(candidates_router, "get_redis", lambda: redis)
+    monkeypatch.setattr(candidate_invites, "get_redis", lambda: redis)
 
     return sent, used
 
@@ -137,7 +137,7 @@ def test_an_email_limit_refusal_sets_no_credits_aside(client, monkeypatch):
     async def limited(*args):
         raise HTTPException(429, "Too many requests. Try again later.")
 
-    monkeypatch.setattr(candidates_router, "hit_emails", limited)
+    monkeypatch.setattr(candidate_invites, "hit_emails", limited)
 
     response = client.post(URL, json={"email": "frank@example.com"})
     app.dependency_overrides.clear()

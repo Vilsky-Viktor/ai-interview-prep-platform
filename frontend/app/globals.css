@@ -2,7 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+/* Dark, except inside .light-scope: the candidate PDF report keeps the light design. */
+@custom-variant dark (&:is(.dark *):not(.light-scope *));
 
 @theme inline {
   /* Poppins has no Cyrillic: those letters fall back to Geist, never to a serif. */
@@ -49,7 +50,9 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-:root {
+/* Light tokens; .light-scope sets them again inside a dark page. */
+:root,
+.light-scope {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -154,15 +157,17 @@
   [data-slot="button"],
   [data-slot="dropdown-menu-item"],
   [data-slot="badge"],
+  nav[data-slot="footer-nav"] a,
   ::placeholder {
     text-transform: lowercase;
   }
-  /* Titles and main menu links end with the logo's blue dot; as text, it scales with their font.
+  /* Titles and the header's and footer's menu links end with the logo's blue dot; as text, it scales with their font.
      Titles that end with a question mark opt out with .no-dot. */
   h1:not(.no-dot)::after,
   h2:not(.no-dot)::after,
   [data-slot="dialog-title"]:not(.no-dot)::after,
-  nav[data-slot="main-nav"] a::after {
+  nav[data-slot="main-nav"] a::after,
+  nav[data-slot="footer-nav"] a::after {
     content: ".";
     color: var(--primary);
   }

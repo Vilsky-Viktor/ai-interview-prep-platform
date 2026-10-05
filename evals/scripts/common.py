@@ -48,9 +48,9 @@ def model(name: str, effort: str, timeout: int = 300) -> ChatOpenAI:
 
 
 def generation_models(settings) -> str:
-    """With MODEL and EFFORT set, the model under test writes interviews and every kit; without
-    them the service's own split is tested. Returns what writes what, for the results."""
-    names = ("interview", "kit", "hard_kit")
+    """With MODEL and EFFORT set, the model under test writes the tests; without them the
+    service's own setting is tested. Returns what writes them, for the results."""
+    names = ("interview",)
 
     for name in names:
         if "MODEL" in os.environ:
@@ -91,7 +91,7 @@ def options_text(item: dict) -> str:
 
 def question_items(path: Path) -> list[dict]:
     """Questions as a list of {id, domain, level, topic, question, options, ...}, from a dataset
-    or from a results file of generate_kits.py, which use the same format."""
+    or from a results file of generate_tests.py, which use the same format."""
     data = load(path)
 
     return data["items"] if isinstance(data, dict) else data

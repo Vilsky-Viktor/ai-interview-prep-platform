@@ -20,7 +20,7 @@ export function BalanceRow({
   name: string
   available: number
   low: boolean
-  companyId?: string
+  companyId: string
 }) {
   const t = useTranslations("billing")
   const locale = useLocale()

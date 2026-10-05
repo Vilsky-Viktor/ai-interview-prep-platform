@@ -3,7 +3,6 @@ from collections.abc import AsyncIterator
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
 from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGES
 
-from app.constants.certificate_rules import CERTIFICATE_RULES
 from app.constants.faq import FAQS
 from app.constants.help import HELP_HISTORY_MESSAGES, HelpRole
 from app.constants.legal import COMPANY
@@ -25,7 +24,6 @@ def build_messages(
         guide=guide(),
         faq=faq_text(FAQS[DEFAULT_LANGUAGE], catalog),
         prices=prices_text(catalog),
-        certificate_rules="\n".join(CERTIFICATE_RULES[DEFAULT_LANGUAGE]),
         terms=legal_text(TERMS_INTRO, TERMS_SECTIONS),
         privacy=legal_text(PRIVACY_INTRO, PRIVACY_SECTIONS),
         language=LANGUAGES[language],

@@ -1,7 +1,7 @@
 import asyncio
 import uuid
 
-from app.models.rounds import Answer
+from app.models.answers import Answer
 from app.storage import sessions
 from tests.integration.factories import topic
 
@@ -76,8 +76,55 @@ def test_scores_show_progress_and_the_grade_of_answers_so_far(run):
 
         return await sessions.scores_for_invites([invite_id])
 
-    progress, grade, finished = run(scenario())[invite_id]
+    totals = run(scenario())[invite_id]
 
     # One of four answered, and right: 25% through, 100% correct so far. Unanswered questions
     # count as wrong only in the final score, once the interview ends.
-    assert (progress, grade, finished) == (25, 100, False)
+    assert (totals["progress"], totals["grade"], totals["finished"]) == (25, 100, False)
+    assert (totals["tab_leaves"], totals["copies"], totals["fast_answers"]) == (0, 0, 0)
+
+
+def test_a_finished_interview_grades_unanswered_questions_as_wrong(run):
+    invite_id = uuid.uuid4()
+
+    async def scenario():
+        [row] = await sessions.create_many("cand", invite_id, [topic(4)], 60)
+        question = row.questions[0]
+        correct = next(i for i, option in enumerate(question["options"]) if option["correct"])
+        await sessions.add_answer(
+            Answer(
+                session_id=row.id,
+                question_id=uuid.UUID(question["id"]),
+                option_index=correct,
+                correct=True,
+                score=100,
+            )
+        )
+        await sessions.finish(row.id, 25)
+
+        return await sessions.scores_for_invites([invite_id])
+
+    totals = run(scenario())[invite_id]
+
+    # One right of four, the rest never answered: 25%, not the 100% of the answered one.
+    assert (totals["grade"], totals["finished"]) == (25, True)
+
+
+def test_a_talents_practice_rounds_on_a_template_are_found_and_kept_apart(run):
+    user = f"talent-{uuid.uuid4()}"
+
+    async def scenario():
+        practice_topic = topic(2)
+        first = uuid.uuid4()
+        second = uuid.uuid4()
+        await sessions.create_many(user, first, [practice_topic], 60, practice=True)
+        await sessions.create_many(user, second, [practice_topic], 60, practice=True)
+        # A company's interview on the same set isn't practice.
+        await sessions.create_many(user, uuid.uuid4(), [practice_topic], 60)
+
+        return first, second, await sessions.practice_for_user(user, practice_topic.preparation_id)
+
+    first, second, rows = run(scenario())
+
+    assert {row.candidate_invite_id for row in rows} == {first, second}
+    assert all(row.practice for row in rows)

@@ -1,16 +1,6 @@
 # Email texts in Portuguese. Values are filled in with str.format; the HTML version escapes them.
 
 TEXTS = {
-    "share": {
-        "subject": "{inviter} convida você para “{title}”",
-        "preheader": "Entre com {email} para começar a se preparar.",
-        "heading": "Uma preparação para você",
-        "lines": [
-            "{inviter} convida você a se preparar com “{title}” no prepza.",
-            "Entre com {email} para participar. Só este endereço pode aceitar o convite.",
-        ],
-        "button": "Abrir o convite",
-    },
     "candidate": {
         "subject": "{company} convida você para uma entrevista",
         "preheader": "Faça “{title}” no prepza. Entre com {email} para começar.",
@@ -23,6 +13,53 @@ TEXTS = {
             ),
         ],
         "button": "Abrir o convite",
+    },
+    "reminder": {
+        "subject": "Lembrete: {company} está esperando sua entrevista",
+        "preheader": "“{title}” ainda está aberta. Entre com {email} para começar.",
+        "heading": "Sua entrevista está esperando",
+        "lines": [
+            (
+                "{company} convidou você para a entrevista “{title}” no prepza há alguns dias, e "
+                "você ainda não começou."
+            ),
+            (
+                "Entre com {email} para começar. Só este endereço pode fazer a entrevista, e você "
+                "tem uma única tentativa. O convite expira 30 dias depois de enviado."
+            ),
+        ],
+        "button": "Abrir o convite",
+    },
+    "report": {
+        "subject": "{sender} compartilhou um relatório de candidato: {candidate}",
+        "preheader": "{candidate} fez “{title}” na {company}. O relatório está anexado.",
+        "heading": "Relatório do candidato",
+        "lines": [
+            "{sender}, da {company}, compartilhou o relatório de {candidate} na entrevista “{title}”.",
+            (
+                "Ele está anexado como um PDF de uma página: a nota geral, a pontuação de cada "
+                "tópico e o que o navegador do candidato registrou. Responda a este e-mail para "
+                "falar com {sender}."
+            ),
+        ],
+        "button": "Visitar o prepza",
+        "footer": "Este e-mail foi enviado para {email} porque {sender} compartilhou um relatório "
+        "de candidato com este endereço no prepza. Se você não esperava por ele, pode ignorá-lo.",
+    },
+    "candidates": {
+        "subject": "{sender} compartilhou um relatório de todos os candidatos: {title}",
+        "preheader": "Todos os candidatos de “{title}” na {company}. O relatório está anexado.",
+        "heading": "Relatório de candidatos",
+        "lines": [
+            "{sender}, da {company}, compartilhou o relatório de todos os candidatos da entrevista “{title}”.",
+            (
+                "Ele está anexado como PDF: a nota, o progresso e o que o navegador de cada candidato "
+                "registrou, dos melhores para os demais. Responda a este e-mail para falar com {sender}."
+            ),
+        ],
+        "button": "Visitar o prepza",
+        "footer": "Este e-mail foi enviado para {email} porque {sender} compartilhou um relatório "
+        "de candidatos com este endereço no prepza. Se você não esperava por ele, pode ignorá-lo.",
     },
     "footer": "Este e-mail foi enviado para {email} porque alguém convidou este endereço no "
     "prepza. Se você não esperava por ele, pode ignorá-lo.",

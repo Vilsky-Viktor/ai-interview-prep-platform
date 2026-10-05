@@ -1,10 +1,9 @@
 "use client"
 
 import { useLocale, useTranslations } from "next-intl"
+import type { ReactNode } from "react"
 
 import { BuyButton } from "@/components/billing/buy-button"
-import { CustomTopUp } from "@/components/billing/custom-top-up"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -18,24 +17,38 @@ import {
 import { formatPrice } from "@/lib/format"
 import type { Catalog } from "@/types/billing"
 
-/** The top-up button and its dialog of amounts, for the user's credits or `companyId`'s. */
+/** The top-up button and its dialog of amounts, for `companyId`'s credits. */
 export function TopUpDialog({
   catalog,
   title,
   companyId,
+  card,
 }: {
   catalog: Catalog
   // Whose credits: "Your credits" or the company's name.
   title: string
-  companyId?: string
+  companyId: string
+  // Opens from this card (a balance in a page header) instead of a button.
+  card?: ReactNode
 }) {
   const t = useTranslations("billing")
   const locale = useLocale()
 
   return (
     <Dialog>
-      <DialogTrigger render={<Button className="h-10 px-5" />}>
-        {t("topUp")}
+      <DialogTrigger
+        render={
+          card ? (
+            <button
+              type="button"
+              className="cursor-pointer rounded-xl border px-4 py-2 text-end whitespace-nowrap transition-colors hover:bg-muted"
+            />
+          ) : (
+            <Button className="h-10 px-5" />
+          )
+        }
+      >
+        {card ?? t("topUp")}
       </DialogTrigger>
       <DialogContent showCloseButton={false} className="sm:max-w-2xl">
         <DialogHeader>
@@ -54,14 +67,18 @@ export function TopUpDialog({
                 <p className="font-heading text-2xl font-medium tabular-nums">
                   {formatPrice(product.price_cents, catalog.currency, locale)}
                 </p>
-                <p className="text-sm text-muted-foreground tabular-nums">
-                  {t("credits", { count: product.credits })}
+                <p className="text-base tabular-nums">
+                  {t("candidates", { count: product.candidates })}
                 </p>
-                {product.bonus_credits > 0 && (
-                  <Badge className="font-light">
-                    {t("bonus", { count: product.bonus_credits })}
-                  </Badge>
-                )}
+                <p className="text-sm text-muted-foreground tabular-nums">
+                  {t("each", {
+                    price: formatPrice(
+                      product.candidate_cents,
+                      catalog.currency,
+                      locale
+                    ),
+                  })}
+                </p>
               </div>
               <BuyButton
                 catalog={catalog}
@@ -72,7 +89,6 @@ export function TopUpDialog({
             </div>
           ))}
         </div>
-        <CustomTopUp catalog={catalog} companyId={companyId} />
         <DialogFooter showCloseButton />
       </DialogContent>
     </Dialog>

@@ -21,7 +21,7 @@ class Wallet(Base):
 
 
 class Referral(Base):
-    """A new learner or company that came through someone's link. `rewarded_at` is set when
+    """A new company that came through another company's link. `rewarded_at` is set when
     their first big enough top-up pays both sides."""
 
     __tablename__ = "referrals"
@@ -91,8 +91,6 @@ class Entry(Base):
     owner_id: Mapped[str] = mapped_column(String(128), index=True)
     amount: Mapped[int]
     reason: Mapped[str] = mapped_column(String(64))
-    # What it was for, for example a certificate's topic; never personal data.
-    note: Mapped[str | None] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )

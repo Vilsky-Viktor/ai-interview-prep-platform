@@ -4,11 +4,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field, model_validator
 
-from app.constants.feedback import MAX_RATING, MAX_REPORT_COMMENT_LENGTH, MIN_RATING, ReportReason
-
-
-class PreparationRatingIn(BaseModel):
-    value: int = Field(ge=MIN_RATING, le=MAX_RATING)
+from app.constants.feedback import MAX_REPORT_COMMENT_LENGTH, ReportReason
 
 
 class QuestionRatingIn(BaseModel):

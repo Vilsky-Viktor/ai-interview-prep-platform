@@ -1,7 +1,12 @@
 import Image from "next/image"
 import { getTranslations } from "next-intl/server"
 
-import { LinkedInIcon } from "@/components/preparations/share-icons"
+import { LinkedInIcon } from "@/components/linkedin-icon"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { FOUNDER } from "@/constants/about"
 import { pageMetadata } from "@/lib/site"
 
@@ -27,10 +32,13 @@ export default async function AboutPage() {
           {t("company.title")}
         </h2>
         <p className="text-base leading-relaxed text-muted-foreground">
-          {t("company.learners")}
+          {t("company.problem")}
         </p>
         <p className="text-base leading-relaxed text-muted-foreground">
-          {t("company.companies")}
+          {t("company.approach")}
+        </p>
+        <p className="text-base leading-relaxed text-muted-foreground">
+          {t("company.practice")}
         </p>
       </section>
       <figure className="grid items-center gap-8 rounded-3xl border p-6 sm:p-10 md:grid-cols-[16rem_1fr] md:gap-12">
@@ -53,15 +61,22 @@ export default async function AboutPage() {
                 {t("founder.role")}
               </span>
             </span>
-            <a
-              href={FOUNDER.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="flex size-12 items-center justify-center rounded-xl border transition-colors hover:bg-muted [&_svg]:size-6"
-            >
-              <LinkedInIcon />
-            </a>
+            <Tooltip>
+              <TooltipTrigger
+                render={
+                  <a
+                    href={FOUNDER.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="flex size-12 items-center justify-center rounded-xl border transition-colors hover:bg-muted [&_svg]:size-6"
+                  />
+                }
+              >
+                <LinkedInIcon />
+              </TooltipTrigger>
+              <TooltipContent>LinkedIn</TooltipContent>
+            </Tooltip>
           </figcaption>
         </div>
       </figure>

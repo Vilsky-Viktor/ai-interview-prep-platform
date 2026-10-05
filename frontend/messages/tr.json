@@ -2,9 +2,6 @@
   "settings": {
     "title": "Ayarlar",
     "signIn": "Ayarlarınızı değiştirmek için giriş yapın.",
-    "general": "Genel",
-    "billing": "Ödemeler",
-    "referral": "Davetler",
     "language": "Dil",
     "languageNote": "Arayüz ve eğitmen yanıtları için; ayrıca yeni setlerin ve mülakatların başlangıç dili. Bunları desteklenen herhangi bir dilde oluşturabilirsiniz.",
     "languageFailed": "Dil değiştirilemedi. Lütfen tekrar deneyin.",
@@ -14,13 +11,12 @@
     "downloadFailed": "Verileriniz hazırlanamadı. Lütfen tekrar deneyin.",
     "delete": "Hesabı sil",
     "searchLanguage": "Dil ara",
-    "noLanguage": "Dil bulunamadı.",
-    "history": "Ödeme geçmişi",
-    "historyNote": "Gelen ve harcanan her kredi, en yenisi önce."
+    "noLanguage": "Dil bulunamadı."
   },
   "userMenu": {
     "signIn": "Giriş yap",
     "account": "Hesap",
+    "adminZone": "Yönetici alanı",
     "settings": "Ayarlar",
     "signOut": "Çıkış yap",
     "theme": "Tema",
@@ -34,17 +30,15 @@
     "main": "Ana menü",
     "legal": "Yasal",
     "pricing": "Fiyatlar",
-    "privacy": "Gizlilik politikası",
+    "privacy": "Gizlilik",
     "terms": "Koşullar",
     "back": "Geri",
-    "create": "oluştur",
-    "explore": "keşfet",
-    "myKits": "setlerim",
     "hiring": "işe alım",
     "pricingLink": "fiyatlar",
     "faq": "SSS",
     "contact": "Bize ulaşın",
-    "about": "Hakkımızda"
+    "about": "Hakkımızda",
+    "practice": "Ücretsiz pratik"
   },
   "signIn": {
     "with": "Şununla giriş yap:",
@@ -80,43 +74,89 @@
     "notFoundText": "Bu sayfa yok ya da kaldırıldı."
   },
   "home": {
-    "tagline": "Yapay zekâ ajanları, kendinizi hazır hissedene kadar sizinle çalışır.",
-    "preparingFor": "Hedefiniz",
-    "words": [
-      "bir mülakat mı",
-      "bir sertifika mı",
-      "bir sınav mı",
-      "bir test mi",
-      "bir terfi mi"
-    ],
-    "widest": "bir sertifika mı",
-    "mark": "?"
+    "title": "Herkesle mülakat yapın\nGerçek yeteneği işe alın",
+    "text": "İş tanımınızdan hazırlanan süreli mülakatlar. Her adaya özel sorular ve yapay zekâya sormaya zaman yok. Aday başına $1'dan başlar."
   },
-  "goal": {
-    "placeholder": "Bir iş ilanı yapıştırın veya ne öğrenmek istediğinizi anlatın…",
-    "label": "Neye hazırlanıyorsunuz?",
-    "submit": "Hazırlık oluştur",
-    "failed": "Oluşturma başlatılamadı. Lütfen tekrar deneyin.",
-    "seePlans": "Yükle"
+  "start": {
+    "placeholder": "Bir iş tanımı yapıştırın ya da pozisyonu ve adayın bilmesi gerekenleri anlatın",
+    "description": "İş tanımı",
+    "submit": "Mülakat oluştur",
+    "whichCompany": "Bu mülakat hangi şirket için?",
+    "firstCompany": "Şirketinizin adı ne?",
+    "newCompany": "Yeni bir şirket",
+    "companyName": "Şirket adı",
+    "freeCandidates": "İlk şirketiniz {count, plural, one {ilk adayıyla} other {ilk # adayıyla}} ücretsiz mülakat yapar.",
+    "back": "Açıklamayı düzenle",
+    "continue": "Devam et",
+    "starting": "Başlatılıyor…",
+    "failed": "Mülakat başlatılamadı. Lütfen tekrar deneyin."
   },
-  "membership": {
-    "signIn": "Katılmak için giriş yapın",
-    "leave": "Ayrıl",
-    "join": "Pratik için katıl"
+  "superadmin": {
+    "fixNow": "Şimdi düzelt",
+    "fixing": "Düzeltiliyor…",
+    "dismiss": "Yok say",
+    "fixSent": "Doğrulayıcıya gönderildi. Birazdan düzeltilir veya değiştirilir.",
+    "actionFailed": "Bu işe yaramadı. Lütfen tekrar deneyin.",
+    "quality": "Kalite",
+    "flagged": "İşaretlenenler",
+    "replaced": "Değiştirilenler",
+    "noFlagged": "Şu anda işaretli bir şey yok.",
+    "noReplaced": "Henüz hiçbir şey değiştirilmedi.",
+    "answers": "{count, plural, one {# cevap} other {# cevap}}",
+    "right": "%{percent} doğru",
+    "reports": "{count, plural, =0 {bildirim yok} one {# bildirim} other {# bildirim}}",
+    "kinds": {
+      "template": "şablon",
+      "interview": "şirket mülakatı"
+    },
+    "flags": {
+      "wrong_key": "cevap yanlış olabilir",
+      "rewrite": "yeni bir soru gerekiyor",
+      "weak_options": "daha iyi seçenekler gerekiyor"
+    },
+    "zone": "Yönetici alanı",
+    "templates": "Şablonlar",
+    "new": "Yeni şablon",
+    "createTitle": "Şablon oluştur",
+    "placeholder": "Bir rol tanımı yapıştırın ya da rolü ve bu roldeki kişinin bilmesi gerekenleri anlatın",
+    "description": "Rol tanımı",
+    "create": "Oluştur",
+    "createFailed": "Şablon başlatılamadı. Lütfen tekrar deneyin.",
+    "text": "Şirketler ve yetenekler için role göre hazır mülakatlar.",
+    "deleteLabel": "{title} öğesini sil",
+    "deleteTitle": "Bu şablon silinsin mi?",
+    "deleteText": "Konuları ve soruları silinir. Şirketlerin bundan oluşturduğu mülakatlar kalır.",
+    "deleteFailed": "Şablon silinemedi. Lütfen tekrar deneyin."
+  },
+  "templates": {
+    "title": "Şablonlar",
+    "empty": "Henüz şablon yok.",
+    "topics": "{count, plural, one {# konu} other {# konu}}",
+    "search": "Role veya konuya göre ara",
+    "searchAction": "Ara",
+    "level": "Seviye: {level}",
+    "anyLevel": "Her seviye",
+    "allLanguages": "Tüm diller",
+    "languages": "{count, plural, one {# dil} other {# dil}}",
+    "noMatches": "Eşleşen şablon yok.",
+    "use": "Şablonu kullan",
+    "using": "Başlatılıyor…",
+    "useFailed": "Bu şablondan mülakat başlatılamadı. Lütfen tekrar deneyin.",
+    "warningTitle": "Şablonlar prepza'yı denemek içindir.",
+    "warning": "Yetenekler bunlarla pratik yapar, bu yüzden adaylar soruları zaten biliyor olabilir. Gerçek işe alım için iş tanımınızdan bir mülakat oluşturun.",
+    "text": "Role göre hazır mülakatlar. Mülakatınıza başlamak için birini seçin; sonradan değiştirebilirsiniz."
   },
   "billing": {
     "paid": "Ödeme alındı. Birazdan burada görünecek.",
     "checkoutFailed": "Ödeme açılamadı. Lütfen tekrar deneyin.",
     "credits": "{count, plural, one {# kredi} other {# kredi}}",
-    "bonus": "+{count, number} bonus",
     "topUp": "Yükle",
-    "balance": "{count} kredi kullanılabilir. Yükle",
-    "balanceLow": "{count} kredi kullanılabilir, azalıyor. Yükle",
     "low": "Azalıyor",
     "creditsWord": "{count, plural, one {kredi} other {kredi}}",
     "topUpTitle": "Yükle: {name}",
-    "topUpNote": "$1 ile 100 kredi alırsınız; büyük tutarlarda bonus vardır. Krediler hiç sona ermez.",
-    "customAmount": "Özel tutar"
+    "topUpNote": "Her yükleme tam sayıda aday satın alır; büyük yüklemelerde aday başına maliyet düşer. Krediler hiç sona ermez.",
+    "candidates": "{count, plural, one {# aday} other {# aday}}",
+    "each": "tanesi {price}"
   },
   "deleteAccount": {
     "title": "Hesabınız silinsin mi?",
@@ -126,83 +166,15 @@
     "deleted": "Hesabınız silindi.",
     "failed": "Hesabınız silinemedi. Lütfen tekrar deneyin."
   },
-  "levels": {
-    "basic": "temel",
-    "medium": "orta",
-    "hard": "zor"
-  },
-  "visibility": {
-    "public": "herkese açık",
-    "private": "özel"
-  },
-  "library": {
-    "title": "Herkese açık setler",
-    "search": "Başlık ve konu ara",
-    "searchAction": "Ara",
-    "noMatches": "Eşleşen hazırlık yok.",
-    "empty": "Henüz herkese açık hazırlık yok.",
-    "level": "Seviye: {level}",
-    "anyLevel": "Tümü",
-    "languages": "{count, plural, one {# dil} other {# dil}}",
-    "sortBy": "Sırala: {sort}",
-    "sort": {
-      "date": "Tarih",
-      "rating": "Puan",
-      "joiners": "Katılımcılar"
-    }
-  },
-  "preparations": {
-    "title": "Setlerim",
-    "new": "Yeni hazırlık",
-    "signIn": "Hazırlıklarınızı görmek için giriş yapın.",
-    "empty": "Henüz hazırlık yok. İlkini oluşturun veya herkese açık kütüphaneden seçin.",
-    "topics": "{count, plural, one {# konu} other {# konu}}",
-    "created": "{date} tarihinde oluşturuldu",
-    "metaTitle": "Hazırlık",
-    "metaDescription": "{title} için mülakat hazırlığı: çoktan seçmeli sorulardan oluşan {count, plural, one {# konu} other {# konu}}, pratik turları ve sertifikalar.",
-    "history": "Geçmiş",
-    "page": "Hazırlık sayfası",
-    "rounds": "Turlar",
-    "deleteLabel": "{title} öğesini sil",
-    "deleteTitle": "{title} silinsin mi?",
-    "deleteText": "Konuları ve soruları silinir; katılan herkes erişimini kaybeder. Bu işlem geri alınamaz.",
-    "deleteFailed": "Hazırlık silinemedi. Lütfen tekrar deneyin.",
-    "mastered": "Ustalaşıldı",
-    "masteredTitle": "Ustalaşıldı: her konunun sertifikası var",
-    "owner": "Sahibi",
-    "ratingTitle": "Ortalama puan ve puan sayısı",
-    "rated": "Puanınız için teşekkürler",
-    "ratingUpdated": "Puan güncellendi",
-    "ratingFailed": "Puanınız kaydedilemedi. Lütfen tekrar deneyin.",
-    "rateIt": "Puan verin",
-    "rate": "{scale} üzerinden {value} puan ver",
-    "public": "Herkese açık",
-    "nowPublic": "Artık herkese açık kütüphanede",
-    "nowPrivate": "Artık özel",
-    "visibilityFailed": "Görünürlük değiştirilemedi. Lütfen tekrar deneyin."
-  },
   "share": {
-    "share": "Paylaş",
-    "title": "Hazırlığı paylaş",
-    "public": "Bağlantıya sahip herkes bu hazırlığı görebilir.",
-    "private": "E-postayla bir davet bağlantısı göndereceğiz. Yalnızca o adres kabul edebilir.",
-    "email": "E-posta",
-    "send": "Gönder",
     "sent": "Davet {email} adresine gönderildi",
     "checkEmail": "E-posta adresini kontrol edip tekrar deneyin.",
     "failed": "Davet gönderilemedi.",
-    "joined": "Katıldı",
-    "undelivered": "Teslim edilmedi",
-    "invited": "Davet edildi",
     "wrongEmail": "Bu davet başka bir e-posta adresine gönderildi.",
     "acceptFailed": "Davet kabul edilemedi. Lütfen tekrar deneyin.",
-    "signIn": "Bu hazırlığa katılmak için davetteki e-postayla giriş yapın.",
     "invalid": "Bu davet artık geçerli değil.",
     "invitedToJoin": "Katılmaya davet edildiniz.",
-    "open": "Hazırlığı aç",
-    "join": "Hazırlığa katıl",
-    "mismatch": "E-posta eşleşmiyor. Katılmak için davetteki e-postayla giriş yapın.",
-    "inviteTitle": "Paylaşım daveti"
+    "mismatch": "E-posta eşleşmiyor. Katılmak için davetteki e-postayla giriş yapın."
   },
   "reportReasons": {
     "wrong_answer": "İşaretli cevap yanlış",
@@ -221,6 +193,18 @@
     "reports": "Bildirimler",
     "showReports": "Bildirimleri göster ({count})",
     "regenerate": "Yeniden oluştur",
+    "manage": "Soruları yönet",
+    "wrongAnswer": "Yanlış cevap",
+    "checking": "Kontrol ediliyor…",
+    "markedWrong": "Teşekkürler. Kontrol ediliyor; düzeltilecek veya değiştirilecek.",
+    "markWrongFailed": "Kontrole gönderilemedi. Lütfen tekrar deneyin.",
+    "ofCount": "/ {count, number}",
+    "per": "her",
+    "candidate": "aday",
+    "showOptions": "Cevap seçeneklerini göster",
+    "hideOptions": "Cevap seçeneklerini gizle",
+    "correct": "Doğru cevap",
+    "wrong": "Yanlış cevap",
     "regenerating": "Yeniden oluşturuluyor…",
     "regenerated": "Soru yeniden oluşturuldu",
     "regenerateFailed": "Soru yeniden oluşturulamadı. Lütfen tekrar deneyin.",
@@ -233,79 +217,27 @@
     "selectReason": "Bir neden seçin",
     "details": "Ayrıntılar",
     "showLess": "Daha az göster",
+    "more": "+{count, number} daha",
     "showAll": "Tümünü göster",
     "limitRange": "1 ile {count} arasında bir sayı girin.",
     "limitFailed": "Sınır kaydedilemedi.",
     "limit": "Soru sınırı",
-    "of": "/",
     "count": "{count, plural, one {soru} other {soru}}",
-    "loadFailed": "Sorular yüklenemedi."
-  },
-  "certificate": {
-    "title": "Sertifika",
-    "metaDescription": "{name}, {topic} konusunu %{score} puanla tamamladı.",
-    "heading": "Başarı sertifikası",
-    "for": "Başarıyla tamamlanan:",
-    "finalScore": "Son puan",
-    "issued": "Veriliş tarihi",
-    "howTo": "Sertifika nasıl kazanılır"
+    "loadFailed": "Sorular yüklenemedi.",
+    "yourAnswer": "cevabınız"
   },
   "rounds": {
-    "title": "Tur",
-    "rounds": "Turlar",
-    "compare": "Karşılaştır",
-    "compareTitle": "Turları karşılaştır",
     "answered": "Cevaplanan",
     "correct": "Doğru",
     "incorrect": "Yanlış",
     "notAnswered": "Cevaplanmadı",
-    "correctAnswer": "Doğru cevap",
-    "yourAnswer": "Cevabınız",
-    "askFollowUp": "Ek soru sor",
-    "followUp": "Ek soru",
-    "followUpPlaceholder": "Ek bir soru sorun…",
-    "replyFailed": "Yanıt alınamadı. Lütfen tekrar deneyin.",
-    "firstRound": "Bu konudaki ilk turunuz",
-    "sameAsLast": "Son turunuzla aynı",
-    "change": "Son turunuzdan bu yana {change} puan",
-    "topicAnswered": "Konu: {total} sorudan {answered} tanesi cevaplandı",
-    "answeredOf": "{total} sorudan {answered} cevaplandı",
-    "finalScore": "Son puan",
-    "certificate": "Sertifika",
-    "history": "Geçmiş",
-    "preparationPage": "Hazırlık sayfası",
-    "noRounds": "Henüz tur yok.",
-    "selectToCompare": "Karşılaştırmak için seç",
-    "grade": "not",
-    "continue": "Devam et",
-    "start": "Başla",
     "finish": "Bitir",
     "finishing": "Bitiriliyor…",
-    "finishRound": "Turu bitir",
-    "deleteRound": "Turu sil",
-    "finishTitle": "Bu tur bitirilsin mi?",
-    "deleteTitle": "Bu tur silinsin mi?",
-    "unscored": "Cevaplanmayan sorular puanlanmaz.",
-    "noMore": "Artık soru cevaplayamazsınız.",
-    "cantUndo": "Bu işlem geri alınamaz.",
-    "deleteFailed": "Tur silinemedi. Lütfen tekrar deneyin.",
-    "finishFailed": "Tur bitirilemedi. Lütfen tekrar deneyin.",
-    "startFailed": "Tur başlatılamadı. Lütfen tekrar deneyin.",
-    "answerFailed": "Cevabınız kaydedilemedi. Lütfen tekrar deneyin.",
-    "signIn": "Bu tura devam etmek için giriş yapın.",
-    "missing": "Bu tur yok.",
-    "allAnswered": "Bu turdaki tüm soruları cevapladınız.",
     "next": "Sonraki soru",
-    "progress": "Sertifikaya doğru cevaplanan sorular",
-    "nextFailed": "Sonraki soru yüklenemedi. Lütfen tekrar deneyin.",
-    "submitFailed": "Cevabınız gönderilemedi. Lütfen tekrar deneyin.",
-    "freeTurns": "Bu soru için eğitmene {count, plural, one {# ücretsiz mesaj hakkınız} other {# ücretsiz mesaj hakkınız}} kaldı",
-    "paidTurns": "Bu sorudaki her ek mesaj {count, plural, one {# kredi} other {# kredi}}",
-    "buyCertificate": "Sertifikayı al · {count} kredi",
-    "makeItYours": "Belirli bir işe mi hazırlanıyorsunuz? İlan metnini yapıştırın, ona özel bir set alın.",
-    "makeItYoursAction": "Kendine uyarla"
+    "submitFailed": "Cevabınız gönderilemedi. Lütfen tekrar deneyin."
   },
   "session": {
+    "toTest": "Mülakatlara git",
     "startFailed": "Mülakat başlatılamadı. Lütfen tekrar deneyin.",
     "finishFailed": "Mülakat bitirilemedi. Lütfen tekrar deneyin.",
     "continueFailed": "Devam edilemedi. Lütfen tekrar deneyin.",
@@ -357,17 +289,7 @@
     "changes": "Konulardaki değişiklikler",
     "tooMany": "En fazla {max} konu seçin veya nasıl birleştirileceklerini anlatın.",
     "apply": "Değişiklikleri uygula",
-    "approve": "Onayla ve oluştur",
-    "approvePrice": "Onayla ve oluştur · {count} kredi",
-    "unfinished": "Tamamlanmamış"
-  },
-  "generationStatus": {
-    "queued": "Oluşturuluyor",
-    "running": "Oluşturuluyor",
-    "awaiting_review": "Konuları incele",
-    "done": "Tamam",
-    "failed": "Başarısız",
-    "cancelled": "İptal edildi"
+    "approve": "Onayla ve oluştur"
   },
   "candidateStatus": {
     "invited": "davet edildi",
@@ -375,7 +297,9 @@
     "in_process": "devam ediyor",
     "finished": "bitti",
     "deleted": "silindi",
-    "expired": "süresi doldu"
+    "expired": "süresi doldu",
+    "passed": "geçti",
+    "flagged": "işaretlendi"
   },
   "roles": {
     "owner": "sahip",
@@ -391,17 +315,17 @@
     "owner": "Sahibi",
     "interviewCount": "{count, plural, one {# mülakat} other {# mülakat}}",
     "interviews": "Mülakatlar",
+    "templates": "Şablonlar",
     "admins": "Yöneticiler",
     "referrals": "Davetler",
     "new": "Yeni şirket",
-    "newText": "Mülakat oluşturmak ve aday davet etmek için bir şirket oluşturun.",
     "name": "Şirket adı",
     "create": "Oluştur",
     "createFailed": "Şirket oluşturulamadı. Lütfen tekrar deneyin.",
     "signInJoin": "Bu şirkete katılmak için davetteki e-postayla giriş yapın.",
     "open": "Şirketi aç",
     "join": "Şirkete katıl",
-    "creditsLeft": "{count, plural, one {kredi kullanılabilir} other {kredi kullanılabilir}}",
+    "creditsLeft": "{count, plural, one {kredi} other {kredi}}",
     "creditsLow": "Azalıyor: aday davet etmeye devam etmek için yükleyin.",
     "timeLeft": "Kalan süre: {time}",
     "removeLabel": "{name} öğesini kaldır",
@@ -409,7 +333,12 @@
     "removeText": "Mülakatları ve davetleri silinecek.",
     "remove": "Kaldır",
     "removeFailed": "Şirket kaldırılamadı.",
-    "page": "Şirket"
+    "page": "Şirket",
+    "logo": "Logo",
+    "uploadLogo": "Logo yükle",
+    "changeLogo": "Logoyu değiştir",
+    "removeLogo": "Logoyu kaldır",
+    "logoFailed": "Logo kaydedilemedi."
   },
   "candidates": {
     "scorecard": "Sonuçlar",
@@ -421,6 +350,11 @@
     "copies": "{count, plural, one {# kopyalama girişimi} other {# kopyalama girişimi}}",
     "fastAnswers": "{count, plural, one {# hızlı cevap} other {# hızlı cevap}}",
     "empty": "Henüz davet edilen aday yok.",
+    "noMatches": "Eşleşen aday yok.",
+    "search": "Adayları e-postaya göre ara",
+    "searchAction": "Ara",
+    "status": "Durum: {status}",
+    "anyStatus": "her durum",
     "progress": "İlerleme",
     "grade": "Not",
     "resend": "Daveti yeniden gönder",
@@ -438,11 +372,27 @@
       "date": "Tarih"
     }
   },
+  "interviewStatus": {
+    "new": "Yeni",
+    "in_process": "Süreçte",
+    "hired": "İşe alındı"
+  },
   "interviews": {
     "title": "Mülakatlar",
     "interview": "Mülakat",
     "candidates": "Adaylar",
     "new": "Yeni mülakat",
+    "createTitle": "Mülakat oluştur",
+    "try": "Aday olarak dene",
+    "newCandidate": "Yeni aday(lar)",
+    "linkTitle": "Paylaşılabilir bağlantı",
+    "linkText": "İş ilanı için: bağlantıya sahip herkes mülakata girebilir. Her kişi, davet edilen bir aday gibi ücretlendirilir.",
+    "linkFailed": "Bağlantı değiştirilemedi. Lütfen tekrar deneyin.",
+    "passMark": "Geçme notu",
+    "passMarkLabel": "Yüzde olarak geçme notu",
+    "markHired": "İşe alındı olarak işaretle",
+    "tryLabel": "{title} mülakatını aday olarak dene",
+    "tryFailed": "Önizleme başlatılamadı. Lütfen tekrar deneyin.",
     "generating": "Oluşturuluyor…",
     "fallbackTitle": "mülakat",
     "continueGeneration": "Oluşturmaya devam et",
@@ -461,12 +411,22 @@
     "adminEmail": "Yönetici e-postası",
     "addAdmin": "Yönetici ekle",
     "adminFailed": "Bu yönetici davet edilemedi. Lütfen tekrar deneyin.",
-    "candidateEmail": "Aday e-postası",
     "invite": "Davet et",
     "jobDescription": "İş tanımı",
     "pasteJob": "İş tanımını yapıştırın: pozisyon, gereksinimler ve tercih sebepleri…",
     "generate": "Mülakat oluştur",
-    "startFailed": "Mülakat başlatılamadı. Lütfen tekrar deneyin."
+    "startFailed": "Mülakat başlatılamadı. Lütfen tekrar deneyin.",
+    "candidateEmails": "Aday e-postaları",
+    "emailsHint": "Bir veya birden çok e-posta; virgülle ya da yeni satırla ayırın",
+    "uploadFile": "Dosya yükle",
+    "invitedMany": "{count} aday davet edildi",
+    "skip": {
+      "invalid": "{count, plural, one {# e-posta geçerli değil} other {# e-posta geçerli değil}}.",
+      "limit": "{count, plural, one {# e-posta} other {# e-posta}} şimdilik e-posta sınırınızı aşıyor. Bir saat sonra tekrar deneyin.",
+      "no_credits": "{count, plural, one {# aday davet edilmedi} other {# aday davet edilmedi}}: krediniz bitti. Onları davet etmek için yükleme yapın.",
+      "failed": "{count, plural, one {# davet} other {# davet}} gönderilemedi. Tekrar deneyin."
+    },
+    "talents": "Önerilen yetenekler"
   },
   "invite": {
     "signIn": "Bu mülakata girmek için davetteki e-postayla giriş yapın.",
@@ -479,7 +439,7 @@
     "timeRunsOut": "Bir sorunun süresi dolduğunda yanlış sayılır ve sonraki açılır. Sayfadan ayrılsanız da süre işlemeye devam eder.",
     "unanswered": "Cevaplanmayan sorular yanlış sayılır.",
     "saved": "İlerlemeniz kaydedilir: devam etmek için bu bağlantıyı yeniden kullanın.",
-    "stay": "Bu sayfada kalın: ayrılmak veya kopyalamak kaydedilir (<link>bunu nasıl ele alıyoruz</link>).",
+    "stay": "Bu sayfada kalın: ayrılmak veya kopyalamak kaydedilir (<link>gizlilik</link>).",
     "finished": "Bu mülakat zaten bitti.",
     "continue": "Devam et",
     "start": "Kabul et ve başla",
@@ -503,29 +463,18 @@
   },
   "pricing": {
     "title": "Fiyatlar",
-    "intro": "Yalnızca kullandığınız kadar ödeyin: $1 ile 100 kredi alırsınız ve krediler hiç sona ermez. Abonelik yok.",
-    "learners": "Öğrenenler için",
-    "welcome": "Kaydolduğunuzda",
-    "referrals": "Davetler",
-    "referralsNote": "Kendi bağlantınızı Ayarlar'dan, bir şirketin bağlantısını da onun Davetler sekmesinden paylaşın.",
-    "referral": "Davet ettiğiniz bir arkadaş ilk kez yükleme yapar",
-    "companyReferral": "Davet ettiğiniz bir şirket ilk kez ${min} veya daha fazla yükleme yapar",
-    "each": "her birine {count, number} kredi",
-    "credits": "{count, plural, one {# kredi} other {# kredi}}",
-    "companies": "Şirketler için",
-    "kit": "İş ilanından oluşturulan size özel set",
-    "chat": "Yapay zekâ eğitmeni: her soru için {free, plural, one {# ücretsiz mesaj} other {# ücretsiz mesaj}}, ardından",
-    "perTurn": "mesaj başına {count, plural, one {# kredi} other {# kredi}}",
-    "ownCertificate": "Kendi setiniz veya paylaşılan bir set için sertifika",
-    "publicCertificate": "Herkese açık bir set için sertifika",
-    "publicPractice": "Herkese açık setlerde pratik (günde {count, plural, one {# yeni konu} other {# yeni konu}})",
-    "draftTopics": "İş ilanınız veya hedefiniz için hazırlanan konular",
-    "gift": "{count, number} kredi hediye",
+    "intro": "Aday başına ödeyin. Mülakat oluşturmak ücretsizdir ve abonelik yoktur.",
+    "test": "Mülakat oluşturma",
     "free": "Ücretsiz",
-    "interview": "Mülakat oluşturma",
-    "candidate": "Mülakatı bitirip en az bir soruyu cevaplayan her aday",
-    "companyWelcome": "İlk şirketiniz",
-    "openCompanies": "Şirketler",
+    "candidate": "En az bir soruyu cevaplayan her aday",
+    "candidateVolume": "${from, number} veya üzeri bir yüklemeden gelen kredilerle",
+    "perCandidate": "Aday başına ${dollars, number}",
+    "welcome": "{count, plural, one {İlk adayınız} other {İlk # adayınız}}",
+    "credits": "$1 = 100 kredi, krediler hiç sona ermez.",
+    "referrals": "Davetler",
+    "referralsNote": "Şirketinizin bağlantısını şirketin davetler sekmesinden paylaşın.",
+    "companyReferral": "Davet ettiğiniz bir şirket ilk yüklemesini yapar",
+    "each": "her birine {count, number} kredi",
     "topUp": "Yükle"
   },
   "site": {
@@ -534,22 +483,6 @@
   "legal": {
     "updated": "Son güncelleme",
     "englishOnly": "Bu belge yalnızca İngilizce olarak mevcuttur."
-  },
-  "credits": {
-    "noHistory": "Henüz bir şey yok.",
-    "reasons": {
-      "welcome": "Hoş geldin hediyesi",
-      "topup": "Yükleme",
-      "kit": "Set",
-      "candidate": "Aday",
-      "certificate": "Sertifika",
-      "author_share": "Herkese açık setiniz bir sertifika kazandırdı",
-      "chat": "Eğitmen mesajı",
-      "refund": "İade",
-      "chargeback": "Ödeme banka tarafından geri alındı",
-      "chargeback_reversed": "Geri alınan ödeme iade edildi",
-      "referral": "Davet ödülü"
-    }
   },
   "autoTopUp": {
     "title": "Otomatik yükleme",
@@ -572,43 +505,42 @@
     "label": "Oluşturma dili"
   },
   "referral": {
-    "title": "Arkadaşlarınızı davet edin",
-    "note": "Arkadaşınız ilk kez yükleme yaptığında ikiniz de {reward, number} kredi alırsınız.",
     "companyTitle": "Başka bir şirketi davet edin",
-    "companyNote": "Yeni şirket ${min} veya daha fazla yükleme yaptığında iki şirket de {reward, number} kredi alır.",
+    "companyNote": "İlk yüklemelerini yaptıklarında, tutar ne olursa olsun, ikiniz de {reward, number} kredi kazanırsınız.",
+    "deletedCompany": "Silinmiş bir şirket",
+    "credits": "+{count, number} kredi",
     "rewarded": "{count, plural, =0 {Henüz ödül yok.} one {Şimdiye kadar # kez ödüllendirildi.} other {Şimdiye kadar # kez ödüllendirildi.}}"
   },
   "topUp": {
     "title": "Yükle",
     "intro": "$1 ile 100 kredi alırsınız ve krediler hiç sona ermez.",
     "signIn": "Kredi yüklemek için giriş yapın.",
-    "yours": "Kişisel bakiye",
-    "personal": "Kişisel krediler",
-    "personalNote": "Setleriniz, yapay zekâ eğitmeni ve sertifikalar için.",
     "companies": "Şirket kredileri",
     "companiesNote": "Her şirketin adayları için.",
+    "noCompany": "Krediler bir şirkete aittir. Önce şirketinizi oluşturun, sonra burada kredi yükleyin.",
+    "createCompany": "Şirket oluştur",
     "pricing": "Fiyatlar"
   },
   "landing": {
     "more": "Nasıl çalışır",
     "how": {
-      "title": "Hazır olmak için üç adım",
+      "title": "İlk sonuçlarınıza üç adım",
       "paste": {
-        "title": "Yapıştırın veya anlatın",
-        "text": "Bir iş ilanı, bir müfredat ya da öğrenmek istediğiniz beceriler ve teknolojiler."
+        "title": "İş tanımını yapıştırın",
+        "text": "Her rol, her dil.\nprepza adayın bilmesi gerekenleri çıkarır ve konular önerir."
       },
       "review": {
-        "title": "Planı inceleyin",
-        "text": "Yapay zekâ ajanları önemli olanı seçer ve konular önerir.\nKonuları tutun, yeniden adlandırın veya değiştirin."
+        "title": "Konuları kontrol edin",
+        "text": "Saklayın, yeniden adlandırın veya değiştirin.\nSiz onaylayana kadar hiçbir soru yazılmaz."
       },
-      "practice": {
-        "title": "Kendinize güvenene kadar çalışın",
-        "text": "Her konunun kendi soruları olur.\nTurlar hâlinde çalışın ve ilerlemenizi izleyin."
+      "invite": {
+        "title": "Adayları davet edin",
+        "text": "Bir liste yapıştırın, dosya yükleyin ya da tek bir bağlantı paylaşın.\nHatırlatmalar kendiliğinden gider. İşi kimin bildiğini puana göre sıralı görürsünüz."
       }
     },
     "control": {
-      "title": "Ne çalışacağınıza siz karar verirsiniz",
-      "text": "Konuları onaylamadan hiçbir soru yazılmaz. Bildiklerinizin işaretini kaldırın, bir konuyu yeniden adlandırın, alt konularını düzenleyin ya da yapay zekâya neyi değiştireceğini söyleyin, gerisini o halletsin.",
+      "title": "Neyin ölçüleceğine siz karar verirsiniz",
+      "text": "Siz konuları onaylamadan hiçbir soru yazılmaz. Rolün ihtiyaç duymadığı şeylerin işaretini kaldırın, bir konuyu yeniden adlandırın, alt konularını düzenleyin ya da yapay zekâya neyi değiştireceğini söyleyin.",
       "topics": {
         "design": "Sistem tasarımı",
         "sql": "İçerik pazarlaması",
@@ -638,43 +570,9 @@
         "İzlenmeleri ölçme"
       ]
     },
-    "gaps": {
-      "title": "Eksiklerinizi bulan çalışma",
-      "text": "Her tur, konunun tüm sorularını yeniden sorar ve geçen sefer yanlış yaptıklarınızla başlar. Turları karşılaştırın ve eksiklerinizin kapandığını görün.",
-      "items": {
-        "first": {
-          "question": "Bir reklamı sonuna kadar kimin izlediğini hangi metrik gösterir?",
-          "wrong": "Tıklama oranı",
-          "right": "Tamamlanma oranı"
-        },
-        "second": {
-          "question": "Önbellek esas olarak neyi azaltır?",
-          "wrong": "Depolama maliyetini",
-          "right": "Yanıt süresini"
-        }
-      }
-    },
-    "tutor": {
-      "title": "Her soru için bir eğitmen",
-      "text": "Her yanıttan sonra doğru seçeneği hemen görürsünüz. Neden doğru olduğundan emin değil misiniz? Yapay zekâ eğitmenine sorun ve gerektiği kadar derine inin.",
-      "question": "Bir müşteri geciken teslimat yüzünden üzgün. İlk olarak ne yaparsınız?",
-      "options": {
-        "first": "Gecikmenin nedenini açıklarım",
-        "second": "Sorunu kabul edip özür dilerim",
-        "third": "Hemen indirim teklif ederim",
-        "fourth": "Konuyu yöneticiye aktarırım"
-      },
-      "ask": "Neden önce açıklama yapmıyoruz?",
-      "answer": "Önce sorunu kabul edin: insanlar dinlendiklerini hissedince nedenleri dinler."
-    },
-    "proof": {
-      "title": "Ne zaman hazır olduğunuzu bilin",
-      "text": "Her konunun sertifikasına giden bir ilerleme çubuğu vardır. Sertifikayı kazanın, konu ustalaşılmış sayılsın.",
-      "again": "Yeniden başla"
-    },
     "quality": {
-      "title": "Kendi kendine iyileşen sorular",
-      "text": "Beğeniler, beğenmemeler ve bildirimler zayıf soruları ortaya çıkarır. Yapay zekâ doğrulayıcı bunları otomatik olarak düzeltir veya değiştirir; set sahipleri de istedikleri soruyu kendileri yeniden oluşturabilir.",
+      "title": "Kendini düzelten sorular",
+      "text": "Adayların cevapları, puanlamaları ve bildirimleri zayıf soruları ortaya çıkarır. Yapay zekâ doğrulayıcı bunları otomatik olarak düzeltir ya da değiştirir; herhangi bir soruyu kendiniz de yeniden oluşturabilirsiniz.",
       "items": {
         "good": "Veritabanı indeksi neyi hızlandırır?",
         "weak": "En iyi programlama dili hangisi?",
@@ -683,45 +581,89 @@
       "comment": "Projeye göre değişir, yani tek bir doğru cevap yok.",
       "list": "Konu soruları"
     },
-    "share": {
-      "title": "Paylaşın veya yayımlayın",
-      "text": "Arkadaşlarınızı veya iş arkadaşlarınızı setinizle birlikte çalışmaları için e-postayla davet edin ya da aynı şeye hazırlanan herkes için herkese açık kitaplıkta yayımlayın.",
-      "private": "Özel paylaşın",
-      "public": "Herkese açık paylaşın",
-      "browse": "Kitaplığı keşfedin"
+    "try": {
+      "title": "Adaylarınızdan önce siz deneyin",
+      "text": "Benzer bir rol için ücretsiz bir pratik mülakata girin ya da kimseyi davet etmeden önce kendi mülakatınızı aday olarak açın.",
+      "browse": "Pratik mülakatlara göz atın",
+      "topic": "Sistem tasarımı",
+      "question": "Veritabanının önündeki bir önbellek esas olarak neyi azaltır?",
+      "options": {
+        "a": "Veritabanının boyutunu",
+        "b": "Veritabanından ne sıklıkla okunduğunu",
+        "c": "Tablo sayısını",
+        "d": "Yedeklemelerin ne kadar sürdüğünü"
+      },
+      "points": {
+        "practice": "Birçok rol için ücretsiz pratik mülakatlar",
+        "preview": "Kendi mülakatınız, aday gözünden"
+      }
+    },
+    "link": {
+      "title": "İş ilanınız için tek bağlantı",
+      "text": "Mülakatın bağlantısını iş ilanınıza koyun. Başvuran herkes mülakata hemen girer ve aday listenizde puana göre sıralı olarak görünür.",
+      "note": "Bağlantıya sahip herkes mülakata girebilir.",
+      "points": {
+        "anywhere": "İş ilanı sitelerinde, LinkedIn'de ya da kendi sitenizde",
+        "off": "Pozisyon dolunca kapatın"
+      }
     },
     "companies": {
-      "title": "İşe alım mı yapıyorsunuz? Adayları adil ölçün",
-      "text": "Bir iş ilanını süreli bir mülakata dönüştürün ve adayları değerlendirmek için davet edin.",
+      "title": "İşi kimin bildiğini görün",
+      "text": "Adaylar mülakata e-posta davetinizden girer. Puanları cevapladıkça gelir; geçme notunuza göre yeşil ya da kırmızı.",
       "points": {
         "own": "Her adaya özel sorular",
         "timed": "Her soruda geri sayım",
         "flags": "Acele, sayfadan ayrılma ve kopyalama işaretleri",
-        "private": "Puanlar adaylardan gizli kalır"
+        "private": "Adaylar puanlarını asla görmez"
       },
       "candidate": "Aday",
       "score": "Puan",
       "rushed": "Aceleci yanıtlar",
       "left": "Sayfadan ayrıldı",
-      "start": "İşe almaya başlayın"
+      "role": "Backend geliştirici · geçme notu %{mark}"
+    },
+    "reports": {
+      "title": "Sonuçları tek tıkla paylaşın",
+      "text": "Tek bir aday ya da tüm liste için anlaşılır bir PDF raporu. İndirin ya da doğrudan prepza'dan işe alım yöneticisine gönderin.",
+      "points": {
+        "pdf": "Tek bir aday ya da hepsi",
+        "share": "PDF'i e-postayla gönderin ya da mesajlaşma uygulamalarında paylaşın"
+      }
+    },
+    "brand": {
+      "title": "Markanız, doğrulanmış",
+      "text": "Adaylar ilk e-postadan son soruya kadar logonuzu, şirketinizin gerçek olduğunu gösteren bir onay işaretiyle birlikte görür.",
+      "role": "Backend geliştirici",
+      "points": {
+        "email": "Davet e-postasında logonuz",
+        "interview": "Adayların girdiği mülakatta",
+        "report": "Her PDF raporunda",
+        "verified": "Ekibinizin iş e-postasıyla doğrulanır"
+      }
+    },
+    "talent": {
+      "title": "Yetenek önerileri alın",
+      "text": "Ücretsiz pratik mülakatlarımızda en yüksek puanı alanlar, rolünüz için önerilir. Ücretsiz.",
+      "suggested": "Backend geliştirici için önerilenler",
+      "score": "Puan",
+      "points": {
+        "free": "Sizin ve yetenekler için ücretsiz",
+        "practice": "Süreli mülakatlarla puanlanır",
+        "first": "Yalnızca ilk denemeleri sayılır",
+        "link": "Önerilmeyi kendileri seçer"
+      }
     },
     "languages": {
-      "title": "Kendi dilinizde",
-      "text": "prepza'yı {count} dilin herhangi birinde kullanın. Bir iş ilanını bir dilde yapıştırın, başka bir dilde çalışın."
+      "title": "Her rol, her dil",
+      "text": "prepza {count} dilde çalışır. İş tanımını bir dilde yapıştırın, adaylarla başka bir dilde mülakat yapın."
     },
     "pricing": {
-      "title": "Yalnızca işe yarayana ödeyin",
-      "text": "Abonelik veya paket yok. İhtiyacınız olduğunda yükleyin: krediler hiç sona ermez ve başarısız olan hiçbir şey ücretlendirilmez.",
-      "see": "Fiyatları görün",
-      "company": "Acme Inc.",
-      "personal": "Setleriniz ve yapay zekâ eğitmeni için.",
-      "learner": "Öğrenci kredileri"
-    },
-    "referrals": {
-      "title": "Ortak olarak kredi kazanın",
-      "text": "Arkadaşlarınızı veya diğer şirketleri bağlantınızla davet edin. İlk kez yükleme yaptıklarında ikiniz de kredi kazanırsınız.",
-      "whereLearner": "Bağlantınız {settings} → {referral} bölümünde.",
-      "whereCompany": "Şirketinizin bağlantısı {hiring} → şirketiniz → {referrals} bölümünde."
+      "title": "Aday başına ödeyin",
+      "text": "Mülakatlar ve {free, plural, one {ilk adayınız} other {ilk # adayınız}} ücretsizdir. Sonrasında yalnızca cevap veren adaylar için, abonelik olmadan ödersiniz.",
+      "see": "Fiyatları gör",
+      "perCandidate": "aday başına",
+      "base": "Kullandıkça öde",
+      "volume": "${from, number} ve üzeri yüklemeyle"
     },
     "faq": {
       "title": "Hâlâ sorunuz mu var?",
@@ -729,8 +671,8 @@
       "read": "SSS'ye git"
     },
     "ready": {
-      "title": "Hazırlanmaya hazır mısınız?",
-      "start": "Hemen başlayın"
+      "title": "İlk adaylarınızla mülakat yapmaya hazır mısınız?",
+      "start": "Mülakat oluştur"
     }
   },
   "faq": {
@@ -757,14 +699,15 @@
   },
   "about": {
     "title": "Hakkımızda",
-    "intro": "prepza, kendinize güvenerek hazırlanmanıza yardımcı olur; şirketlere de adayları değerlendirmek için basit ve uygun fiyatlı bir yol sunar.",
+    "intro": "prepza, şirketlerin işi gerçekten bilen kişileri bulmasına yardımcı olur: iş tanımınızdan hazırlanan adil, süreli bir mülakat, her ekibin karşılayabileceği bir fiyata. Mülakata hazırlanan herkes de ücretsiz pratik yapabilir.",
     "company": {
       "title": "Neden varız",
-      "learners": "Bir mülakata, sınava ya da yeni bir beceriye hazırlanmak saatlerce aramayla başlamamalı. prepza'ya hedefinizi anlatın, o da bunu net bir plana dönüştürsün: önemli konular, her biri için alıştırma soruları ve her cevabı tam oturana kadar açıklayan bir eğitmen.",
-      "companies": "Şirketler için işe alımın adil olmasını ve yalnızca büyük ekiplerin değil, her ekibin ulaşabileceği bir şey olmasını istiyoruz. Bir iş ilanını dakikalar içinde süreli bir mülakata dönüştürün, her adaya kendine özel sorular verin ve yalnızca mülakatı gerçekten yapan adaylar için ödeme yapın."
+      "problem": "İşe alım çoğu zaman bir özgeçmişe ve iyi geçen bir sohbete dayanır; ikisi de yanıltabilir. İşe yarayan değerlendirme araçları ise yıllık planlar ve kullanıcı başı ücretlerle büyük şirketlere göre fiyatlanır, bu yüzden çoğu ekip onlarsız idare eder.",
+      "approach": "prepza, bir iş tanımını dakikalar içinde her rol için süreli bir mülakata dönüştürür. Her aday kendi sorularını alır, işi kimin bildiğini ve nedenini görürsünüz ve yalnızca mülakata gerçekten giren adaylar için ödersiniz.",
+      "practice": "Mülakata hazırlanmanın da herkes için ücretsiz olmasını istiyoruz. Herkes bir rol için pratik mülakatlarımıza girebilir, notunu ve tüm doğru cevapları görebilir ve hiçbir ücret ödemeden tekrar pratik yapabilir. Başarılı olanlar, benzer bir rol için işe alım yapan şirketlere önerilmeyi seçebilir."
     },
     "founder": {
-      "quote": "Ne zaman bir mülakata hazırlansam ya da yeni bir şey öğrenmeye çalışsam, gerçekten çalışmaktan çok iyi kaynak aramaya zaman harcıyordum. Her site bir parçayı ele alıyordu ama hiçbiri ihtiyacıma uymuyordu. Ben de prepza'yı geliştirdim: keşke elimde olsaydı dediğim, hedefinizden yola çıkıp sizi oraya götüren bir araç. Umarım bana kazandıracağı saatleri size kazandırır.",
+      "quote": "İyi işe alım, büyük bütçeli büyük şirketlerin ayrıcalığı olmamalı. prepza'yı, her ekip bir iş tanımını dakikalar içinde adil bir mülakata dönüştürebilsin, işi gerçekten kimin bildiğini görebilsin ve yalnızca mülakata giren adaylar için ödesin diye geliştirdim. Umarım doğru kişileri daha hızlı bulmanıza yardımcı olur.",
       "role": "prepza'nın tek kurucusu"
     }
   },
@@ -775,7 +718,6 @@
     "kinds": {
       "question_flagged": "{count, plural, one {“{title}” setinde “{topic}” konusundaki bir soru inceleme için işaretlendi.} other {“{title}” setindeki # soru inceleme için işaretlendi.}}",
       "question_fixed": "{count, plural, one {Yapay zekâ “{title}” setinde “{topic}” konusundaki işaretlenen bir soruyu düzeltti.} other {Yapay zekâ “{title}” setindeki işaretlenen # soruyu düzeltti.}}",
-      "kit_ready": "“{title}” setiniz hazır.",
       "referral_rewarded": "Davet ettiğiniz biri yükleme yaptı. {credits} kredi kazandınız.",
       "auto_top_up_charged": "Otomatik yükleme {credits} kredi ekledi.",
       "auto_top_up_failed": "Otomatik yükleme karttan ödeme alamadı. Bakiyenizin bitmemesi için yükleme yapın.",
@@ -784,5 +726,77 @@
       "interview_ready": "“{title}” mülakatı hazır.",
       "interview_cancelled": "{title, select, none {Bir mülakat} other {“{title}” mülakatı}} iptal edildi: konu incelemesi çok uzun süre bekledi."
     }
+  },
+  "report": {
+    "download": "PDF indir",
+    "passed": "geçti · geçme notu %{mark}",
+    "notPassed": "geçemedi · geçme notu %{mark}",
+    "notFinished": "henüz bitmedi",
+    "share": "Raporu paylaş",
+    "fileName": "Rapor {email}",
+    "failed": "PDF raporu oluşturulamadı.",
+    "shareTitle": "Raporu paylaş",
+    "recipient": "Alıcının e-postası",
+    "send": "<name>PDF</name> gönder",
+    "sent": "Rapor {email} adresine gönderildi",
+    "sendFailed": "Rapor gönderilemedi.",
+    "orSummary": "Ya da şununla gönderin",
+    "via": "prepza'dan gönderildi",
+    "candidatesFileName": "Adaylar {title}",
+    "candidateCount": "{count, plural, one {# aday} other {# aday}}",
+    "passMark": "geçme notu %{mark}",
+    "progressOf": "%{progress} tamamlandı"
+  },
+  "practice": {
+    "title": "Ücretsiz mülakat pratiği",
+    "intro": "Bir rol için süreli bir mülakatla pratik yapın, sonra notunuzu ve tüm doğru cevapları görün. Ücretsiz.",
+    "about": "Süreli pratik mülakat. Bitirdiğinizde notunuzu ve tüm doğru cevapları görün. Gizli ve ücretsiz.",
+    "pageTitle": "{title}: ücretsiz pratik mülakat",
+    "pageDescription": "{title} için ücretsiz {level} pratik mülakat: {count, plural, one {# konu} other {# konu}}, süreli, sonunda notunuz ve tüm doğru cevaplarla. Gerçek bir iş mülakatı değil, pratik.",
+    "start": "Pratiğe başla",
+    "again": "Tekrar pratik yap",
+    "continue": "Devam et",
+    "history": "Denemeleriniz",
+    "results": "Pratik sonuçları",
+    "grade": "doğru cevaplanan sorular",
+    "notFinished": "bitmedi",
+    "noRounds": "Henüz deneme yok.",
+    "signIn": "Pratik denemelerinizi görmek için giriş yapın.",
+    "startFailed": "Pratik başlatılamadı. Lütfen tekrar deneyin.",
+    "gradeLabel": "Not",
+    "questions": "{count, plural, one {# soru} other {# soru}}",
+    "progressLabel": "İlerleme",
+    "answeredLabel": "cevaplanan soru"
+  },
+  "suggest": {
+    "title": "Şirketlere önerilin",
+    "consent": "İsteğe bağlı. Benzer roller için işe alım yapan şirketler adınızı, LinkedIn'inizi ve ilk deneme puanınızı görebilir. Bunu istediğiniz zaman ayarlardan değiştirebilir veya geri çekebilirsiniz.",
+    "link": "LinkedIn bağlantısı",
+    "share": "Paylaş",
+    "saved": "Artık şirketlere önerilebilirsiniz.",
+    "withdraw": "Geri çek",
+    "withdrawn": "Artık şirketlere önerilmeyeceksiniz.",
+    "invalid": "LinkedIn profil bağlantınızı kullanın, örneğin https://www.linkedin.com/in/your-name",
+    "failed": "Kaydedilemedi. Lütfen tekrar deneyin.",
+    "shareAndStart": "Kabul et ve başla",
+    "startWithout": "Reddet ve başla"
+  },
+  "talents": {
+    "about": "Buna benzer bir rol için mülakat pratiğinde başarılı olan ve önerilmeyi kabul eden yetenekler.",
+    "empty": "Henüz önerilen yetenek yok.",
+    "score": "Puan",
+    "hide": "Gizle",
+    "hideFailed": "Yetenek gizlenemedi. Lütfen tekrar deneyin."
+  },
+  "verify": {
+    "verify": "Doğrula",
+    "verified": "Doğrulandı: {domain}",
+    "title": "Şirketi doğrula",
+    "text": "Şirketin web sitesini girin. Bir sahip veya yönetici bu alan adındaki bir iş e-postasıyla (ör. you@acme.com) giriş yaptığında doğrulanır; bu sizseniz hemen.",
+    "website": "Şirket web sitesi",
+    "save": "Kaydet",
+    "done": "Doğrulandı: {domain}",
+    "pending": "Kaydedildi. Bir sahip veya yönetici {domain} alan adındaki bir e-postayla giriş yaptığında doğrulanır.",
+    "failed": "Web sitesi kaydedilemedi."
   }
 }

@@ -5,8 +5,8 @@ from sqlalchemy import select, update
 
 from app.constants.events import INTERVIEW_FINISHED
 from app.constants.rounds import RoundStatus
+from app.models.answers import Answer
 from app.models.outbox import OutboxEvent
-from app.models.rounds import Answer
 from app.models.sessions import Session
 from app.services import session_expiry
 from app.storage import sessions

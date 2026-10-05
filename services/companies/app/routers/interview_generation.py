@@ -16,7 +16,8 @@ router = APIRouter(prefix="/interviews", tags=["interviews"])
 async def get_interview(interview_id: UUID) -> Interview:
     interview = await interviews.get(interview_id)
 
-    if interview is None:
+    # A test made from a template has no generation to follow.
+    if interview is None or interview.generation_id is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
     return interview

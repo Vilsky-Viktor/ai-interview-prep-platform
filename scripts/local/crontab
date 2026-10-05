@@ -4,6 +4,8 @@
 0 3 * * * curl -s -X POST http://generation-worker:8000/internal/schedules/retention
 15 3 * * * curl -s -X POST http://companies:8000/internal/schedules/retention
 30 3 * * * curl -s -X POST http://companies:8000/internal/schedules/invite-expiry
+0 9 * * * curl -s -X POST http://companies:8000/internal/schedules/invite-reminders
+45 3 * * * curl -s -X POST http://library:8000/internal/schedules/bank
 # Events not published right after their change (the outbox), every minute.
 * * * * * curl -s -X POST http://library:8000/internal/schedules/outbox
 * * * * * curl -s -X POST http://companies:8000/internal/schedules/outbox

@@ -1,0 +1,135 @@
+import { InfoIcon } from "lucide-react"
+import { cookies } from "next/headers"
+import { notFound } from "next/navigation"
+import { getTranslations } from "next-intl/server"
+
+import { BackLink } from "@/components/back-link"
+import { PageHeader } from "@/components/page-header"
+import { PracticeActions } from "@/components/practice/practice-actions"
+import { SubtopicList } from "@/components/questions/subtopic-list"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
+import { TOKEN_COOKIE } from "@/constants/auth"
+import { pageMetadata } from "@/lib/site"
+import { serverFetch } from "@/lib/server-api"
+import type { PracticeSize, PracticeTopicProgress } from "@/types/round"
+import type { Template } from "@/types/superadmin"
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
+  const t = await getTranslations("practice")
+  const template = await serverFetch<Template>(`/library/templates/${id}`)
+
+  return template
+    ? pageMetadata(
+        t("pageTitle", { title: template.title }),
+        t("pageDescription", {
+          title: template.title,
+          level: template.level,
+          count: template.topic_count,
+        }),
+        `/practice/${id}`
+      )
+    : {}
+}
+
+/** One free practice test, public for search engines: the role, its level and language, and
+ * the topics it covers. Its questions are never shown here. */
+export default async function PracticeTestPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
+  const t = await getTranslations("practice")
+  const signedIn = (await cookies()).has(TOKEN_COOKIE)
+  const [template, size, progress] = await Promise.all([
+    serverFetch<Template>(`/library/templates/${id}`),
+    serverFetch<PracticeSize>(`/rounds/practice/${id}/size`),
+    // The talent's latest score on each topic; nothing before their first round.
+    signedIn
+      ? serverFetch<PracticeTopicProgress[]>(`/rounds/practice/${id}/progress`)
+      : null,
+  ])
+
+  if (!template) {
+    notFound()
+  }
+
+  const reached = new Map((progress ?? []).map((item) => [item.topic_id, item]))
+
+  return (
+    <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
+      <PageHeader
+        back={<BackLink href="/practice">{t("title")}</BackLink>}
+        tags={
+          <>
+            <Badge variant="outline" className="h-7 px-3 text-sm font-light">
+              {template.level}
+            </Badge>
+            <Badge
+              variant="outline"
+              className="h-7 px-3 text-sm font-light uppercase"
+            >
+              {template.language}
+            </Badge>
+          </>
+        }
+        title={
+          <div className="flex items-start justify-between gap-4">
+            <h1 className="min-w-0 flex-1 font-heading text-3xl font-medium tracking-tight text-balance normal-case">
+              {template.title}
+            </h1>
+            <PracticeActions templateId={id} startLabel={t("start")} />
+          </div>
+        }
+      />
+
+      {/* One full-width card: the note on gray with an info icon, like the pricing page's,
+          continued by a round's length on the transparent part at the end. */}
+      <div className="flex flex-wrap items-stretch overflow-hidden rounded-2xl border text-base text-muted-foreground">
+        <div className="flex flex-1 items-center gap-3 bg-muted px-5 py-4">
+          <InfoIcon aria-hidden className="size-6 shrink-0 text-primary" />
+          <p>{t("about")}</p>
+        </div>
+        {size && (
+          <p className="flex items-center px-5 py-4">
+            {t("questions", { count: size.questions })}
+          </p>
+        )}
+      </div>
+
+      <ul className="divide-y rounded-2xl border">
+        {template.topics.map((topic) => {
+          const step = reached.get(topic.id)
+
+          return (
+            <li key={topic.id} className="p-4 sm:p-6">
+              <span className="block min-w-0 space-y-3">
+                <span className="block text-lg font-medium">{topic.title}</span>
+                <SubtopicList subtopics={topic.subtopics} />
+                {/* Signed in: empty until the talent's first round, then how far their latest
+                    round got on the topic. */}
+                {signedIn && (
+                  <span className="flex items-center gap-4">
+                    <Progress
+                      value={step ? (step.answered / step.total) * 100 : 0}
+                      className="flex-1"
+                    />
+                    <span className="shrink-0 text-base text-muted-foreground tabular-nums">
+                      {step ? `${step.answered} / ${step.total}` : "—"}
+                    </span>
+                  </span>
+                )}
+              </span>
+            </li>
+          )
+        })}
+      </ul>
+    </main>
+  )
+}

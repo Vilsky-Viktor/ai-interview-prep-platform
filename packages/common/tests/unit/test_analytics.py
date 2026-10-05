@@ -14,15 +14,15 @@ def test_events_carry_a_pseudonym_and_never_break_the_caller(monkeypatch):
 
     monkeypatch.setenv("ANALYTICS_SALT", "salt")
     monkeypatch.setattr(analytics, "publish", fake_publish)
-    asyncio.run(analytics.track("kit_ready", user_id="ann", topics=7))
+    asyncio.run(analytics.track("test_ready", user_id="ann", topics=7))
 
     [(event_type, data)] = sent
-    assert event_type == "funnel.kit_ready"
+    assert event_type == "funnel.test_ready"
     assert data["user"] == analytics.pseudonym("ann") != "ann"
     assert data["props"] == {"topics": 7}
 
     monkeypatch.setattr(analytics, "publish", broken)
-    asyncio.run(analytics.track("kit_ready", user_id="ann"))
+    asyncio.run(analytics.track("test_ready", user_id="ann"))
 
 
 def test_the_same_user_gets_the_same_pseudonym_only_with_the_same_salt(monkeypatch):

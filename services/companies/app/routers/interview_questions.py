@@ -72,6 +72,21 @@ async def regenerate_question(interview_id: UUID, question_id: UUID, user: Curre
     return response.json()
 
 
+@router.post(
+    "/{interview_id}/questions/{question_id}/wrong", status_code=status.HTTP_204_NO_CONTENT
+)
+async def mark_wrong(interview_id: UUID, question_id: UUID, user: CurrentUser) -> None:
+    """One click: the marked answer is wrong. The verifier checks it and fixes or replaces it."""
+    interview = await generated_interview(interview_id)
+    await require_manager(user, interview)
+    context = await library.get_question_context(question_id)
+
+    if context is None or str(context["set_id"]) != str(interview.set_id):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Question not found")
+
+    await library.mark_wrong(question_id)
+
+
 @router.get("/{interview_id}/questions/{question_id}/reports")
 async def list_question_reports(
     interview_id: UUID, question_id: UUID, user: CurrentUser, page: PageParams

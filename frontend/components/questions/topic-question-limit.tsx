@@ -1,49 +1,73 @@
 "use client"
 
+import { UserIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
-import type { ComponentProps } from "react"
 
+import { QuestionMarkIcon } from "@/components/question-mark-icon"
 import { TopicLimit } from "@/components/questions/topic-limit"
-import { TopicQuestions } from "@/components/questions/topic-questions"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
+/** A topic's question count, in one short line under its "manage questions" button: how many
+ * each candidate gets (editable with `limitPath`) of how many the topic has; just the count
+ * when there's no limit. */
 export function TopicQuestionLimit({
+  count,
   limit,
   limitPath,
-  caption,
-  ...questions
-}: ComponentProps<typeof TopicQuestions> & {
+}: {
+  count: number
   limit: number | null
   limitPath?: string
-  caption: string
 }) {
   const t = useTranslations("questions")
 
   if (!limitPath && limit == null) {
-    return <TopicQuestions {...questions} />
+    return (
+      <p className="shrink-0 text-sm whitespace-nowrap text-muted-foreground tabular-nums">
+        {count} {t("count", { count })}
+      </p>
+    )
   }
 
   return (
-    <span className="flex shrink-0 items-center gap-2">
+    <p className="flex shrink-0 items-center gap-2 text-sm whitespace-nowrap text-muted-foreground tabular-nums">
       {limitPath ? (
         // Remounts with the saved value after each change.
         <TopicLimit
           key={limit ?? "all"}
           path={limitPath}
-          count={questions.count}
+          count={count}
           limit={limit}
         />
       ) : (
-        <span className="text-lg tabular-nums">{limit}</span>
+        <span className="text-foreground">{limit}</span>
       )}
-      <span className="flex flex-col items-end leading-none">
-        <span className="flex items-baseline gap-1 text-sm text-muted-foreground">
-          {t("of")}
-          <TopicQuestions {...questions} alignCount />
-        </span>
-        <span className="-mt-0.5 text-xs text-muted-foreground/60">
-          {caption}
-        </span>
+      <span className="flex items-center gap-1.5">
+        {/* "of 100 ? per 👤": icons stand for questions and candidate, named in tooltips. */}
+        {t("ofCount", { count })}
+        <Tooltip>
+          <TooltipTrigger
+            render={
+              <QuestionMarkIcon
+                aria-label={t("count", { count })}
+                className="h-4 w-2"
+              />
+            }
+          />
+          <TooltipContent>{t("count", { count })}</TooltipContent>
+        </Tooltip>
+        {t("per")}
+        <Tooltip>
+          <TooltipTrigger
+            render={<UserIcon aria-label={t("candidate")} className="size-4" />}
+          />
+          <TooltipContent>{t("candidate")}</TooltipContent>
+        </Tooltip>
       </span>
-    </span>
+    </p>
   )
 }

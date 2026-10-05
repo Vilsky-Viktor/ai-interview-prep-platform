@@ -6,7 +6,7 @@ from prepza_common.user import User
 
 from app.constants.rounds import RoundStatus
 from app.helpers.sessions import next_session_question, time_is_up
-from app.models.rounds import Answer
+from app.models.answers import Answer
 from app.models.sessions import Session
 from app.services.session_expiry import finish_if_expired
 from app.storage import sessions

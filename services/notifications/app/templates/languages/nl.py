@@ -1,16 +1,6 @@
 # Email texts in Dutch. Values are filled in with str.format; the HTML version escapes them.
 
 TEXTS = {
-    "share": {
-        "subject": "{inviter} nodigt je uit voor “{title}”",
-        "preheader": "Log in met {email} om te beginnen met voorbereiden.",
-        "heading": "Een voorbereiding voor jou",
-        "lines": [
-            "{inviter} nodigt je uit om je voor te bereiden met “{title}” op prepza.",
-            "Log in met {email} om mee te doen. Alleen dit adres kan de uitnodiging accepteren.",
-        ],
-        "button": "Uitnodiging openen",
-    },
     "candidate": {
         "subject": "{company} nodigt je uit voor een sollicitatiegesprek",
         "preheader": "Doe “{title}” op prepza. Log in met {email} om te beginnen.",
@@ -23,6 +13,55 @@ TEXTS = {
             ),
         ],
         "button": "Uitnodiging openen",
+    },
+    "reminder": {
+        "subject": "Herinnering: {company} wacht op je sollicitatiegesprek",
+        "preheader": "“{title}” staat nog open. Log in met {email} om te beginnen.",
+        "heading": "Je gesprek wacht op je",
+        "lines": [
+            (
+                "{company} heeft je een paar dagen geleden uitgenodigd voor het gesprek “{title}” "
+                "op prepza, en je bent nog niet begonnen."
+            ),
+            (
+                "Log in met {email} om te beginnen. Alleen dit adres kan het gesprek doen, en je "
+                "hebt één poging. De uitnodiging verloopt 30 dagen na verzending."
+            ),
+        ],
+        "button": "Uitnodiging openen",
+    },
+    "report": {
+        "subject": "{sender} heeft een kandidaatrapport gedeeld: {candidate}",
+        "preheader": "{candidate} deed “{title}” bij {company}. Het rapport zit in de bijlage.",
+        "heading": "Kandidaatrapport",
+        "lines": [
+            "{sender} van {company} heeft het rapport van {candidate} voor het sollicitatiegesprek “{title}” gedeeld.",
+            (
+                "Het zit als PDF van één pagina in de bijlage: het totaalcijfer, de score per "
+                "onderwerp en wat de browser van de kandidaat liet zien. Beantwoord deze e-mail om "
+                "{sender} te antwoorden."
+            ),
+        ],
+        "button": "Naar prepza",
+        "footer": "Deze e-mail is naar {email} gestuurd omdat {sender} op prepza een "
+        "kandidaatrapport met dit adres heeft gedeeld. Verwachtte je hem niet, dan kun je hem "
+        "negeren.",
+    },
+    "candidates": {
+        "subject": "{sender} heeft een rapport van alle kandidaten gedeeld: {title}",
+        "preheader": "Alle kandidaten voor “{title}” bij {company}. Het rapport zit in de bijlage.",
+        "heading": "Kandidatenrapport",
+        "lines": [
+            "{sender} van {company} heeft het rapport van alle kandidaten voor het sollicitatiegesprek “{title}” gedeeld.",
+            (
+                "Het zit als PDF in de bijlage: het cijfer, de voortgang en wat de browser van elke "
+                "kandidaat liet zien, beste eerst. Beantwoord deze e-mail om {sender} te antwoorden."
+            ),
+        ],
+        "button": "Naar prepza",
+        "footer": "Deze e-mail is naar {email} gestuurd omdat {sender} op prepza een "
+        "kandidatenrapport met dit adres heeft gedeeld. Verwachtte je hem niet, dan kun je hem "
+        "negeren.",
     },
     "footer": "Deze e-mail is naar {email} gestuurd omdat iemand dit adres op prepza heeft "
     "uitgenodigd. Verwachtte je hem niet, dan kun je hem negeren.",

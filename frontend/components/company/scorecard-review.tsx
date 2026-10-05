@@ -39,7 +39,7 @@ export function ScorecardReview({ items }: { items: ReviewItem[] }) {
   )
 }
 
-function ScorecardMark({ item }: { item: ReviewItem }) {
+export function ScorecardMark({ item }: { item: ReviewItem }) {
   const t = useTranslations("scorecard")
   const rounds = useTranslations("rounds")
   const answer = item.answer

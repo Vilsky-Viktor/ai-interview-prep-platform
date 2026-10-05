@@ -1,65 +1,46 @@
 # The FAQ in nl; the {placeholders} are filled in by helpers/help.py (faq_values) with
-# billing's prices and the number of languages.
+# billing's prices and the number of languages. Questions not translated yet show in English
+# (constants/faq/__init__.py).
 FAQ = [
     {
-        "key": "different",
-        "question": "Wat is het verschil tussen prepza en flashcards of vragenbanken?",
-        "answer": "Prepza maakt de vragen precies voor waar jij je op voorbereidt, op basis van je vacature of doel. Rondes brengen terug wat je fout had, een AI-tutor legt elk antwoord uit, en certificaten laten zien wanneer je een onderwerp beheerst.",
+        "key": "what",
+        "question": "Wat is prepza?",
+        "answer": "Een sollicitatiegesprek met tijdslimiet, gemaakt van je functieomschrijving, voor elke rol. Gebruik het om kandidaten te screenen voordat je ze ontmoet, of als stap in de werving zelf: hoe dan ook zie je wie het vak echt kent.",
     },
     {
-        "key": "topics",
-        "question": "Waarop kan ik me voorbereiden?",
-        "answer": "Sollicitatiegesprekken in elk vakgebied, certificeringen, examens, toetsen, een promotie of alles wat je wilt leren. Als je het kunt beschrijven, kan prepza er een kit voor maken.",
+        "key": "roles",
+        "question": "Voor welke rollen kan ik werven?",
+        "answer": "Elke rol waarin kennis telt: support, sales, financiën, zorg, technische vakken, engineering, marketing en meer. Als je de functie kunt beschrijven, kan prepza er een sollicitatiegesprek voor maken.",
     },
     {
-        "key": "certificates",
-        "question": "Hoe werken certificaten?",
-        "answer": "Elk onderwerp heeft een eigen certificaat. Beantwoord alle vragen van het onderwerp met genoeg goede antwoorden, en het is van jou. Je laatste antwoord op elke vraag telt, dus je kunt blijven oefenen tot het lukt.",
+        "key": "hiring",
+        "question": "Hoe werkt het?",
+        "answer": "Plak een functieomschrijving op de startpagina, geef je bedrijf een naam en controleer de onderwerpen die prepza voorstelt. Nodig daarna kandidaten uit: typ hun e-mailadressen, plak een lijst of upload een bestand. Kandidaten die na een paar dagen nog niet zijn begonnen, krijgen één herinnering. Elke kandidaat krijgt eigen vragen met een timer bij elke vraag, en je ziet hun score en elk antwoord zodra ze klaar zijn.",
+    },
+    {
+        "key": "link",
+        "question": "Kan ik een sollicitatiegesprek in een vacature zetten?",
+        "answer": "Ja. Zet de deelbare link van het sollicitatiegesprek aan op het tabblad met kandidaten en plak hem in je vacature. Iedereen die hem opent, logt in en doet het gesprek, en elke persoon wordt in rekening gebracht als een uitgenodigde kandidaat. De link gaat uit wanneer je het gesprek markeert als aangenomen.",
+    },
+    {
+        "key": "preview",
+        "question": "Kan ik een sollicitatiegesprek proberen voordat ik iemand uitnodig?",
+        "answer": "Ja. Open je sollicitatiegesprek als kandidaat vanaf de pagina ervan, gratis: voorbeeldweergaven verschijnen niet tussen je kandidaten of in de vraagstatistieken. Je kunt ook elk gratis oefengesprek doen.",
+    },
+    {
+        "key": "cheating",
+        "question": "Kunnen kandidaten AI gebruiken of de antwoorden opzoeken?",
+        "answer": "Elke kandidaat krijgt eigen willekeurige vragen in een eigen volgorde, met een timer bij elke vraag die onze server bijhoudt, dus er is geen tijd om het een AI te vragen. De resultaten laten ook zien wanneer een kandidaat de pagina verliet, tekst kopieerde of te snel antwoordde om de vraag te hebben gelezen.",
     },
     {
         "key": "cost",
         "question": "Wat kost het?",
-        "answer": "Je betaalt naar gebruik, met credits. De onderwerpen zien die voor je vacature of doel zijn opgesteld is gratis; een kit kost {kit} credits, die je pas betaalt als je de onderwerpen goedkeurt. Oefenen in de openbare bibliotheek is gratis, en elk nieuw account krijgt {welcome} gratis credits. De prijzenpagina toont alle prijzen.",
+        "answer": "Sollicitatiegesprekken genereren is gratis. Elke kandidaat die minstens één vraag beantwoordt, kost {candidate} credits ({candidate_dollars} $), en minder met credits uit grotere opwaarderingen, tot 1 $. Je eerste bedrijf krijgt {company} gratis credits, genoeg voor de eerste {company_candidates} kandidaten. De prijzenpagina toont elke prijs.",
     },
     {
-        "key": "compare",
-        "question": "Is het goedkoper dan een abonnement?",
-        "answer": "Voor de voorbereiding op een sollicitatiegesprek meestal wel. Een kit voor één functie kost eenmalig {kit} credits ({kit_dollars} $) en blijft van jou, zonder iets op te zeggen. Apps voor sollicitatievoorbereiding die oefeningen maken van een vacaturetekst kosten meestal 25–40 $ per maand, dus drie maanden voorbereiding kost 75–100 $. Bereid je je elke maand voor op meerdere nieuwe onderwerpen, dan kan een abonnement goedkoper uitvallen.",
-    },
-    {
-        "key": "expire",
-        "question": "Verlopen credits?",
-        "answer": "Nee. Credits verlopen nooit, en er zijn geen abonnementen of verlengingen.",
-    },
-    {
-        "key": "failed",
-        "question": "Wat als een kit mislukt?",
-        "answer": "Je betaalt pas als een kit klaar is. Mislukt het maken of annuleer je het, dan krijg je de credits terug.",
-    },
-    {
-        "key": "refunds",
-        "question": "Kan ik mijn geld terugkrijgen?",
-        "answer": "Ja, voor credits die je de afgelopen 14 dagen hebt gekocht en nog niet hebt besteed: via Paddle of door ons te schrijven. Gratis credits, zoals het welkomstcadeau, worden niet terugbetaald. De voorwaarden geven de details.",
-    },
-    {
-        "key": "privacy",
-        "question": "Wat gebeurt er met wat ik plak en beantwoord?",
-        "answer": "We gebruiken het om je kits te maken en je voortgang bij te houden. Privé-kits zijn alleen zichtbaar voor jou en de mensen met wie je ze deelt. Het privacybeleid legt uit wat we bewaren, hoe lang, en wat je rechten zijn.",
-    },
-    {
-        "key": "delete",
-        "question": "Kan ik mijn account verwijderen?",
-        "answer": "Ja, in Instellingen. Je account en je gegevens worden verwijderd, en vooraf kun je een kopie van je gegevens downloaden.",
-    },
-    {
-        "key": "languages",
-        "question": "Welke talen worden ondersteund?",
-        "answer": "{count} talen, voor de site, de kits en de e-mails. Kies de taal waarin een kit wordt gemaakt, in welke taal je tekst ook is.",
-    },
-    {
-        "key": "hiring",
-        "question": "Hoe werkt werven met prepza?",
-        "answer": "Maak een bedrijf aan, maak een sollicitatiegesprek van een vacaturetekst en nodig kandidaten uit per e-mail. Elke kandidaat kost {candidate} credits, die pas worden afgeschreven als hij het gesprek afrondt, en een nieuw bedrijf krijgt {company} gratis credits.",
+        "key": "charged",
+        "question": "Wanneer wordt er voor een kandidaat betaald?",
+        "answer": "Alleen wanneer de kandidaat het sollicitatiegesprek afrondt en minstens één vraag heeft beantwoord. De credits worden gereserveerd wanneer je iemand uitnodigt en komen terug als je de uitnodiging intrekt, als de kandidaat nooit begint of niets beantwoordt.",
     },
     {
         "key": "compare_hiring",
@@ -67,13 +48,53 @@ FAQ = [
         "answer": "De meeste assessmentplatforms kosten 100–215 $ per maand met een jaarabonnement, of 7–20 $ per kandidaat. Bij prepza kost een kandidaat {candidate} credits ({candidate_dollars} $), zonder contract, zonder kosten per gebruiker en zonder te betalen voor het maken van een gesprek. Een bedrijf dat {example_candidates} kandidaten per maand uitnodigt, betaalt ongeveer {example_year_dollars} $ per jaar, tegenover 1.200–2.580 $ voor een jaarabonnement. Vanaf ongeveer 50 kandidaten per maand zijn sommige onbeperkte abonnementen goedkoper.",
     },
     {
+        "key": "expire",
+        "question": "Verlopen credits?",
+        "answer": "Nee. Credits verlopen nooit, en er zijn geen abonnementen of verlengingen.",
+    },
+    {
+        "key": "refunds",
+        "question": "Kan ik mijn geld terugkrijgen?",
+        "answer": "Ja, voor credits die je de afgelopen 14 dagen hebt gekocht en nog niet hebt besteed: via Paddle of door ons te schrijven. Gratis credits, zoals het welkomstcadeau, worden niet terugbetaald. De voorwaarden geven de details.",
+    },
+    {
         "key": "scorecards",
-        "question": "Wat laten rapporten zien?",
-        "answer": "Elk antwoord, of het goed was en hoe lang het duurde. Ze markeren ook antwoorden die te snel waren om de vraag te hebben gelezen, keren dat de kandidaat de pagina verliet, en kopieerpogingen.",
+        "question": "Wat laten kandidaatresultaten zien?",
+        "answer": "Elk antwoord, of het goed was en hoe lang het duurde. Cijfers zijn groen of rood ten opzichte van de slaaggrens die je voor het sollicitatiegesprek hebt ingesteld. De resultaten markeren ook antwoorden die te snel waren om de vraag te hebben gelezen, keren dat de kandidaat de pagina verliet, en kopieerpogingen.",
+    },
+    {
+        "key": "reports",
+        "question": "Kan ik resultaten delen met een hiring manager?",
+        "answer": "Ja. Download een PDF-rapport voor één kandidaat of voor alle kandidaten van een sollicitatiegesprek, mail het rechtstreeks vanuit prepza, of stuur een korte samenvatting via WhatsApp of Telegram.",
     },
     {
         "key": "candidates",
         "question": "Wat zien kandidaten?",
-        "answer": "Wat ze kunnen verwachten voordat ze beginnen, en daarna één vraag met tijdslimiet tegelijk. Ze zien nooit hun score of of een antwoord goed was.",
+        "answer": "De naam en het logo van je bedrijf, wat ze kunnen verwachten voordat ze beginnen, en daarna één vraag met tijdslimiet tegelijk. Ze zien nooit hun score of of een antwoord goed was.",
+    },
+    {
+        "key": "talent",
+        "question": "Wat zijn talentsuggesties?",
+        "answer": "Mensen oefenen met de gratis oefengesprekken van prepza, en wie ervoor kiest om voorgesteld te worden, laat een LinkedIn-link achter. Wanneer je een sollicitatiegesprek maakt, verschijnen de topscorers voor een vergelijkbare rol op het tabblad met voorgestelde talenten, met hun naam, score en LinkedIn. Alleen hun eerste poging telt, je kunt iedereen verbergen die niet past, en suggesties zijn gratis.",
+    },
+    {
+        "key": "verified",
+        "question": "Wat betekent het verificatievinkje?",
+        "answer": "Dat een eigenaar of beheerder van het bedrijf heeft ingelogd met een zakelijk e-mailadres op de website van het bedrijf, zoals you@acme.com. Voeg de website toe met Verifiëren in de kop van je bedrijf; gratis e-maildiensten tellen niet mee. Het vinkje staat naast de naam van je bedrijf, ook in uitnodigingen.",
+    },
+    {
+        "key": "languages",
+        "question": "Welke talen worden ondersteund?",
+        "answer": "{count} talen, voor de site, de sollicitatiegesprekken en de e-mails. Kies de taal waarin een gesprek wordt geschreven, in welke taal de functieomschrijving ook is.",
+    },
+    {
+        "key": "privacy",
+        "question": "Wat gebeurt er met functieomschrijvingen en antwoorden?",
+        "answer": "Functieomschrijvingen worden gebruikt om je sollicitatiegesprekken te maken, en de antwoorden van kandidaten om ze te beoordelen, alleen voor jouw bedrijf. Het privacybeleid legt uit wat we bewaren, hoe lang en welke rechten iedereen heeft.",
+    },
+    {
+        "key": "delete",
+        "question": "Kan ik mijn account verwijderen?",
+        "answer": "Ja, in Instellingen. Je account en je gegevens worden verwijderd, en vooraf kun je een kopie van je gegevens downloaden.",
     },
 ]

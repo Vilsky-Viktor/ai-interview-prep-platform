@@ -62,7 +62,7 @@ export function TopicLimit({
       value={value}
       disabled={saving}
       aria-label={t("limit")}
-      className="h-9 w-14 [appearance:textfield] border-0 bg-muted px-1 text-center text-lg text-foreground tabular-nums md:text-lg dark:bg-muted [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+      className="h-8 w-12 [appearance:textfield] border-0 bg-muted px-1 text-center text-sm text-foreground tabular-nums md:text-sm dark:bg-muted [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       onChange={(event) => setValue(event.target.value)}
       onBlur={save}
       onKeyDown={(event) => {

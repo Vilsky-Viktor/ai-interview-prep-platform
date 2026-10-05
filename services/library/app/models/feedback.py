@@ -8,18 +8,6 @@ from app.constants.feedback import ReportStatus
 from app.models.base import Base
 
 
-class PreparationRating(Base):
-    """One 1-5 rating per user and preparation."""
-
-    __tablename__ = "preparation_ratings"
-
-    set_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("sets.id", ondelete="CASCADE"), primary_key=True
-    )
-    user_id: Mapped[str] = mapped_column(String(128), primary_key=True)
-    value: Mapped[int] = mapped_column(SmallInteger)
-
-
 class QuestionRating(Base):
     """A thumbs up (1) or down (-1) per user and question."""
 

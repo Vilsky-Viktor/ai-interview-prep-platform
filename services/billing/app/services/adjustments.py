@@ -3,8 +3,7 @@ import logging
 from prepza_common.analytics import track
 
 from app.constants.credits import Reason
-from app.constants.products import ADJUSTMENT_APPROVED, DELETED_OWNER
-from app.helpers.owners import owner_of
+from app.constants.products import ADJUSTMENT_APPROVED
 from app.storage import ledger, purchases
 
 logger = logging.getLogger(__name__)
@@ -48,10 +47,6 @@ async def handle_adjustment(data: dict) -> None:
 
     owner_type, owner_id, granted, paid_total = bought
 
-    # The buyer deleted their account; their wallet is gone.
-    if owner_id == DELETED_OWNER:
-        return
-
     credits = share(granted, data["totals"]["total"], paid_total)
 
     if credits:
@@ -60,7 +55,7 @@ async def handle_adjustment(data: dict) -> None:
         )
         await track(
             "credits_taken_back",
-            **owner_of(owner_type, owner_id),
+            company_id=owner_id,
             why=reason,
             credits=sign * credits,
         )

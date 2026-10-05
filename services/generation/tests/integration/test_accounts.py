@@ -6,27 +6,20 @@ from app.constants.statuses import Status
 from app.storage import accounts, generations
 
 
-def test_deleting_a_user_keeps_company_interviews_without_their_id(run):
+def test_deleting_a_user_keeps_company_tests_without_their_id(run):
     async def scenario():
-        own = await generations.create("gone", "my job text")
-        interview = await generations.create("gone", "company job", "interview", uuid.uuid4())
-        other = await generations.create("stays", "someone else")
+        mine = await generations.create("gone", "company job", uuid.uuid4())
+        other = await generations.create("stays", "someone else", uuid.uuid4())
         exported = await accounts.export("gone")
 
         await accounts.delete_user("gone")
 
-        return (
-            exported,
-            await generations.get(own.id),
-            await generations.get(interview.id),
-            await generations.get(other.id),
-        )
+        return exported, await generations.get(mine.id), await generations.get(other.id)
 
-    exported, own, interview, other = run(scenario())
+    exported, mine, other = run(scenario())
 
-    assert [item["pasted_text"] for item in exported] == ["my job text"]
-    assert own is None
-    assert interview.owner_uid == DELETED_OWNER
+    assert [item["pasted_text"] for item in exported] == ["company job"]
+    assert mine.owner_uid == DELETED_OWNER
     assert other.owner_uid == "stays"
 
 

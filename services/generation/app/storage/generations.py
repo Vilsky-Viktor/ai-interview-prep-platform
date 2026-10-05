@@ -17,10 +17,10 @@ from app.storage.db import Session
 async def create(
     owner_uid: str,
     text: str,
-    kind: str = "preparation",
     company_id=None,
     language: str = DEFAULT_LANGUAGE,
     generation_id: uuid.UUID | None = None,
+    kind: str = GenerationKind.INTERVIEW,
 ) -> Generation:
     async with Session() as session:
         generation = Generation(
@@ -106,13 +106,15 @@ async def expire_reviews(before: datetime) -> list[Generation]:
 
         # Companies removes the interview of an expired review.
         for generation in expired:
-            if generation.kind == GenerationKind.INTERVIEW:
-                outbox.add(
-                    session,
-                    OutboxEvent,
-                    GENERATION_CANCELLED,
-                    {"generation_id": str(generation.id)},
-                )
+            if generation.kind != GenerationKind.INTERVIEW:
+                continue
+
+            outbox.add(
+                session,
+                OutboxEvent,
+                GENERATION_CANCELLED,
+                {"generation_id": str(generation.id)},
+            )
 
         await session.commit()
 
@@ -166,21 +168,3 @@ async def claim_retry(generation_id: uuid.UUID) -> bool:
         await session.commit()
 
         return result.rowcount == 1
-
-
-async def list_unfinished(owner_uid: str, offset: int, limit: int) -> list[Generation]:
-    """The user's preparation generations that haven't produced a preparation or been cancelled."""
-    query = (
-        select(Generation)
-        .where(
-            Generation.owner_uid == owner_uid,
-            Generation.kind == GenerationKind.PREPARATION,
-            Generation.status.not_in([Status.DONE, Status.CANCELLED]),
-        )
-        .order_by(Generation.created_at.desc(), Generation.id)
-        .offset(offset)
-        .limit(limit)
-    )
-
-    async with Session() as session:
-        return list(await session.scalars(query))

@@ -1,12 +1,12 @@
 import asyncio
 
 from firebase_admin import auth as firebase_auth
+from prepza_common.analytics import track
 from prepza_common.constants import LANGUAGE_CLAIM
 from prepza_common.user import Language, User
 
 from app.integrations import accounts as services
-from app.integrations import rounds
-from app.storage import accounts, preparations
+from app.storage import accounts
 
 
 def delete_sign_in(user_id: str) -> None:
@@ -17,10 +17,15 @@ def delete_sign_in(user_id: str) -> None:
 
 
 async def set_language(user: User, language: Language) -> None:
-    """Stored on the sign-in, so every service reads it from the user's next ID token."""
+    """Stored on the sign-in, so every service reads it from the user's next ID token. A new
+    account sets it on its first sign-in (the frontend does), which counts as signing up."""
+    record = await asyncio.to_thread(firebase_auth.get_user, user.uid)
     await asyncio.to_thread(
         firebase_auth.set_custom_user_claims, user.uid, {LANGUAGE_CLAIM: language}
     )
+
+    if LANGUAGE_CLAIM not in (record.custom_claims or {}):
+        await track("signed_up", user_id=user.uid, language=language)
 
 
 async def delete_account(user: User) -> None:
@@ -32,12 +37,7 @@ async def delete_account(user: User) -> None:
     for service in services.services():
         await services.delete_user(service, user.uid, user.email)
 
-    # Their own preparations, with everyone's practice on them.
-    for set_id in await accounts.owned_preparations(user.uid):
-        await rounds.delete_preparation_data(set_id)
-        await preparations.remove(set_id)
-
-    await accounts.delete_user(user.uid, user.email)
+    await accounts.delete_user(user.uid)
     await asyncio.to_thread(delete_sign_in, user.uid)
 
 
@@ -53,6 +53,6 @@ async def export_account(user: User) -> dict:
             "name": user.name,
             "language": user.language,
         },
-        "library": await accounts.export(user.uid, user.email),
+        "library": await accounts.export(user.uid),
         **dict(zip(services.services(), exports, strict=True)),
     }

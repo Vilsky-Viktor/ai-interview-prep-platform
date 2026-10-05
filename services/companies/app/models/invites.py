@@ -28,3 +28,5 @@ class CandidateInvite(Base):
     sent_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
+    # When the one reminder went out; sending the invite again clears it.
+    reminded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

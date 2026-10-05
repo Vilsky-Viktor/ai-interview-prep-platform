@@ -1,6 +1,5 @@
 """Builds datasets/questions.json: reference questions for every subtopic in datasets/inputs.json,
-written by the generation service's own prompt and the model its settings give a learner's kit
-of that level (KIT_MODEL, HARD_KIT_MODEL).
+written by the generation service's own prompt and model (INTERVIEW_MODEL).
 
 Run in the generation container: evals/run.sh generation build_questions.py [--per-subtopic 5]
 Costs about $0.50-1 on gpt-6.1-sol (48 subtopics), $0.09 on gpt-6-luna at high.
@@ -21,7 +20,6 @@ from langchain_core.messages import HumanMessage
 
 from app.config.settings import settings
 from app.constants.generation import DISTRACTORS, MAX_OPTION_CHARS
-from app.constants.kinds import GenerationKind
 from app.helpers.questions import build_options, with_example
 from app.integrations import llm
 from app.prompts.questions import QUESTIONS_PROMPT
@@ -41,9 +39,7 @@ async def subtopic_questions(domain: dict, topic: str, subtopic: str, count: int
         existing="None",
         language="English",
     )
-    structured = llm.get_generation_llm(
-        GenerationKind.PREPARATION, domain["level"]
-    ).with_structured_output(QuestionItemList)
+    structured = llm.get_generation_llm().with_structured_output(QuestionItemList)
     result = await structured.ainvoke([HumanMessage(content=prompt)])
     items = []
 

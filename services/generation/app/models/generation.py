@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 
 from prepza_common.constants import DEFAULT_LANGUAGE
-from sqlalchemy import Boolean, DateTime, String, Text, func
+from sqlalchemy import DateTime, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -15,14 +15,11 @@ class Generation(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     owner_uid: Mapped[str] = mapped_column(String(128), index=True)
-    kind: Mapped[str] = mapped_column(String(32), default="preparation")
+    kind: Mapped[str] = mapped_column(String(32), default="interview")
     company_id: Mapped[uuid.UUID | None]
     text: Mapped[str] = mapped_column(Text)
     language: Mapped[str] = mapped_column(String(8), default=DEFAULT_LANGUAGE)
     status: Mapped[str] = mapped_column(String(32), default=Status.QUEUED)
-    # The topics were approved: for a learner's kit that's when its credits are set aside, so a
-    # retry sets them aside again only then.
-    approved: Mapped[bool] = mapped_column(Boolean, default=False)
     topics: Mapped[list | None] = mapped_column(JSONB)
     progress: Mapped[dict | None] = mapped_column(JSONB)
     preparation_id: Mapped[uuid.UUID | None]

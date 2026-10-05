@@ -1,8 +1,14 @@
 "use client"
 
-import { DollarSignIcon, LogOutIcon, SettingsIcon } from "lucide-react"
+import {
+  DollarSignIcon,
+  ShieldCogCornerIcon,
+  LogOutIcon,
+  SettingsIcon,
+} from "lucide-react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
+import { useEffect, useState } from "react"
 
 import { useAuth } from "@/components/auth-provider"
 import { ThemeModes } from "@/components/theme-toggle"
@@ -17,12 +23,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { apiFetch } from "@/lib/api"
 import { signIn, signOut } from "@/lib/auth"
 
 export function UserMenu() {
   const t = useTranslations("userMenu")
   const signInText = useTranslations("signIn")
   const { user, loading } = useAuth()
+  // The backend says whether this account may open the superadmin pages; kept by account, so a
+  // different sign-in never inherits it.
+  const [superadminUid, setSuperadminUid] = useState<string | null>(null)
+  const superadmin = user !== null && superadminUid === user.uid
+
+  useEffect(() => {
+    if (!user) {
+      return
+    }
+
+    apiFetch<{ is_superadmin: boolean }>("/library/me")
+      .then((me) => setSuperadminUid(me.is_superadmin ? user.uid : null))
+      .catch(() => setSuperadminUid(null))
+  }, [user])
 
   if (loading) {
     return <div className="size-8" />
@@ -50,7 +71,7 @@ export function UserMenu() {
           />
         }
       >
-        <Avatar size="sm">
+        <Avatar size="sm" className="data-[size=sm]:size-7">
           <AvatarImage src={user.photoURL ?? undefined} alt="" />
           <AvatarFallback>{initial}</AvatarFallback>
         </Avatar>
@@ -72,6 +93,15 @@ export function UserMenu() {
           <DollarSignIcon />
           {t("topUp")}
         </DropdownMenuItem>
+        {superadmin && (
+          <DropdownMenuItem
+            className="px-3 py-2"
+            render={<Link href="/superadmin/templates" />}
+          >
+            <ShieldCogCornerIcon />
+            {t("adminZone")}
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem
           className="px-3 py-2"
           render={<Link href="/settings" />}

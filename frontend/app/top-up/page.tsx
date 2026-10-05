@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
-import type { Balance, Catalog } from "@/types/billing"
+import type { Catalog } from "@/types/billing"
 import type { CompanyBalance } from "@/types/company"
 
 export const generateMetadata = () => translatedTitle("topUp", "title")
@@ -26,13 +26,12 @@ function SectionTitle({ title, note }: { title: string; note: string }) {
 export default async function TopUpPage() {
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const t = await getTranslations("topUp")
-  const [catalog, balance, companies] = signedIn
+  const [catalog, companies] = signedIn
     ? await Promise.all([
         serverFetch<Catalog>("/billing/catalog"),
-        serverFetch<Balance>("/billing/me"),
         serverFetch<CompanyBalance[]>("/companies/companies/credits?limit=100"),
       ])
-    : [null, null, null]
+    : [null, null]
 
   return (
     <main className="mx-auto max-w-5xl space-y-12 px-6 py-12">
@@ -56,18 +55,17 @@ export default async function TopUpPage() {
 
       {!signedIn && <SignInPrompt message={t("signIn")} />}
 
-      {catalog && balance && (
-        <section className="space-y-4">
-          <SectionTitle title={t("personal")} note={t("personalNote")} />
-          <div className="rounded-2xl border">
-            <BalanceRow
-              catalog={catalog}
-              name={t("yours")}
-              available={balance.available}
-              low={balance.low}
-            />
-          </div>
-        </section>
+      {signedIn && companies && companies.length === 0 && (
+        <div className="flex flex-col items-start gap-4 rounded-2xl border p-6">
+          <p className="text-base text-muted-foreground">{t("noCompany")}</p>
+          <Button
+            className="h-12 px-6 text-base"
+            render={<Link href="/company" />}
+            nativeButton={false}
+          >
+            {t("createCompany")}
+          </Button>
+        </div>
       )}
 
       {catalog && companies && companies.length > 0 && (

@@ -1,6 +1,6 @@
 import random
 
-from app.constants.interviews import DEFAULT_TOPIC_QUESTIONS
+from app.constants.interviews import DEFAULT_TOPIC_QUESTIONS, InterviewStatus
 from app.integrations import generation as generation_api
 from app.integrations import library
 from app.models.interviews import Interview
@@ -36,6 +36,13 @@ async def interview_title(interview: Interview) -> str | None:
     return interview.title
 
 
+def interview_status(hired: bool, candidate_count: int) -> InterviewStatus:
+    if hired:
+        return InterviewStatus.HIRED
+
+    return InterviewStatus.IN_PROCESS if candidate_count else InterviewStatus.NEW
+
+
 async def interview_out(interview: Interview) -> InterviewOut:
     interview = await attach_set(interview)
     title = await interview_title(interview)
@@ -47,6 +54,10 @@ async def interview_out(interview: Interview) -> InterviewOut:
         title=title,
         question_seconds=interview.question_seconds,
         candidate_count=len(interview.invites),
+        hired=interview.hired,
+        pass_mark=interview.pass_mark,
+        link_token=interview.link_token,
+        status=interview_status(interview.hired, len(interview.invites)),
         created_at=interview.created_at,
     )
 
@@ -75,3 +86,18 @@ def pick_questions(questions: list, limit: int) -> list:
         return questions
 
     return random.sample(questions, limit)
+
+
+def session_topics(interview: Interview, content: dict) -> list[dict]:
+    """Each topic with a fresh random subset of its questions, as rounds starts sessions."""
+    return [
+        {
+            "id": topic["id"],
+            "preparation_id": content["id"],
+            "title": topic["title"],
+            "questions": pick_questions(
+                topic["questions"], topic_limit(interview.topic_limits, topic["id"])
+            ),
+        }
+        for topic in content["topics"]
+    ]

@@ -1,7 +1,7 @@
 "use client"
 
-import { ArrowDownWideNarrowIcon, ChevronDownIcon } from "lucide-react"
-import { usePathname, useRouter } from "next/navigation"
+import { ChevronDownIcon } from "lucide-react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 
 import { Button } from "@/components/ui/button"
@@ -20,25 +20,31 @@ export function CandidateSortMenu({ current }: { current: CandidateSort }) {
   const t = useTranslations("candidates")
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  // A new order keeps the search and the status filter.
+  function choose(sort: string) {
+    const params = new URLSearchParams(searchParams)
+    params.set("sort", sort)
+    router.replace(`${pathname}?${params}`, { scroll: false })
+  }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={<Button variant="outline" className="h-10 gap-2 px-4" />}
+        render={
+          <Button
+            type="button"
+            variant="ghost"
+            className="h-10 shrink-0 gap-1.5 px-3 text-sm"
+          />
+        }
       >
-        <ArrowDownWideNarrowIcon />
         {t("sortBy", { sort: t(`sort.${current}`) })}
         <ChevronDownIcon className="text-muted-foreground" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48 p-2">
-        <DropdownMenuRadioGroup
-          value={current}
-          onValueChange={(sort) =>
-            router.replace(`${pathname}?tab=candidates&sort=${sort}`, {
-              scroll: false,
-            })
-          }
-        >
+        <DropdownMenuRadioGroup value={current} onValueChange={choose}>
           {CANDIDATE_SORTS.map((sort) => (
             <DropdownMenuRadioItem
               key={sort}

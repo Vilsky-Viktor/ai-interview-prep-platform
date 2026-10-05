@@ -17,8 +17,7 @@ os.environ.setdefault("ROUNDS_SERVICE_SECRET", "test-secret-that-is-at-least-32-
 os.environ.setdefault("COMPANIES_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("BILLING_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("PADDLE_WEBHOOK_SECRET", "pdl_ntfset_test_secret")
-os.environ.setdefault("PADDLE_PRICE_TOPUP_10", "pri_topup_10")
-os.environ.setdefault("PADDLE_PRICE_TOPUP_CUSTOM", "pri_topup_custom")
+os.environ.setdefault("PADDLE_PRICE_TOPUP_30", "pri_topup_30")
 
 import pytest
 from fastapi.testclient import TestClient

@@ -14,8 +14,38 @@ export default getRequestConfig(async () => {
       : (preferredLocale((await headers()).get("accept-language")) ??
         DEFAULT_LOCALE)
 
-  return {
-    locale,
-    messages: (await import(`../messages/${locale}.json`)).default,
-  }
+  const english = (await import("../messages/en.json")).default
+  const messages =
+    locale === DEFAULT_LOCALE
+      ? english
+      : withFallback(
+          english,
+          (await import(`../messages/${locale}.json`)).default
+        )
+
+  return { locale, messages }
 })
+
+type Messages = { [key: string]: string | string[] | Messages }
+
+/** The translation, with English for any text it doesn't have yet: new text is written in English
+ *  first and translated later (`pnpm check:messages` lists what's missing). */
+function withFallback(english: Messages, translated: Messages): Messages {
+  const merged: Messages = { ...english }
+
+  for (const [key, value] of Object.entries(translated)) {
+    const base = english[key]
+
+    merged[key] =
+      value &&
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      base &&
+      typeof base === "object" &&
+      !Array.isArray(base)
+        ? withFallback(base, value)
+        : value
+  }
+
+  return merged
+}

@@ -5,6 +5,7 @@ from prepza_common.google import Invoker
 
 from app.services import outbox as outbox_service
 from app.services.candidate_billing import expire_unstarted
+from app.services.reminders import remind_unstarted
 from app.services.retention import delete_expired_candidates
 
 logger = logging.getLogger(__name__)
@@ -28,6 +29,15 @@ async def invite_expiry() -> None:
 
     if count:
         logger.info("Expired %d invites never started", count)
+
+
+@router.post("/invite-reminders", status_code=status.HTTP_204_NO_CONTENT)
+async def invite_reminders() -> None:
+    """Daily, from Cloud Scheduler: candidates who haven't started get one reminder."""
+    count = await remind_unstarted()
+
+    if count:
+        logger.info("Reminded %d candidates who haven't started", count)
 
 
 @router.post("/outbox", status_code=status.HTTP_204_NO_CONTENT)

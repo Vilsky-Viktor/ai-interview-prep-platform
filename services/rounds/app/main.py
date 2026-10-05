@@ -12,17 +12,14 @@ from prepza_common.sentry import init_sentry
 from app.config.settings import settings
 from app.integrations.redis import get_redis
 from app.routers import (
-    certificates,
-    chat,
     help,
     internal,
     internal_accounts,
-    preparations,
-    rounds,
+    practice,
     schedules,
     session_feedback,
     sessions,
-    topics,
+    talents,
 )
 from app.storage.db import ping as ping_database
 
@@ -51,13 +48,10 @@ app = FastAPI(
 )
 add_localized_errors(app)
 app.add_middleware(RequestLogMiddleware)
-app.include_router(rounds.router)
 app.include_router(sessions.router)
+app.include_router(practice.router)
+app.include_router(talents.router)
 app.include_router(session_feedback.router)
-app.include_router(topics.router)
-app.include_router(preparations.router)
-app.include_router(chat.router)
-app.include_router(certificates.router)
 app.include_router(help.router)
 app.include_router(internal.router)
 app.include_router(schedules.router)

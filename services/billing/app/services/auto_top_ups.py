@@ -8,7 +8,6 @@ from prepza_common.notifications import NotificationKind, notification, publish_
 from app.config.settings import settings
 from app.constants.notifications import TOP_UP_LINK
 from app.constants.products import AUTO_TOP_UP_FLAG, AUTO_TOP_UP_THRESHOLDS
-from app.helpers.owners import owner_of
 from app.integrations import paddle
 from app.schemas.billing import AutoTopUpIn, AutoTopUpOut, CheckoutOut
 from app.services.catalog import price_ids
@@ -37,7 +36,7 @@ async def out(owner_type: str, owner_id: str) -> AutoTopUpOut:
         product=row.product if row else None,
         threshold=row.threshold if row else None,
         products=products(),
-        thresholds=AUTO_TOP_UP_THRESHOLDS[owner_type],
+        thresholds=AUTO_TOP_UP_THRESHOLDS,
     )
 
 
@@ -47,7 +46,7 @@ async def turn_on(owner_type: str, owner_id: str, body: AutoTopUpIn, buyer_id: s
     if not offered() or body.product not in products():
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "This top-up isn't available")
 
-    if body.threshold not in AUTO_TOP_UP_THRESHOLDS[owner_type]:
+    if body.threshold not in AUTO_TOP_UP_THRESHOLDS:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Choose one of the balances")
 
     row = await auto_top_ups.save(owner_type, owner_id, body.product, body.threshold, buyer_id)
@@ -98,7 +97,7 @@ async def start(custom: dict, subscription_id: str) -> None:
 
         return
 
-    await track("auto_top_up_on", **owner_of(*owner))
+    await track("auto_top_up_on", company_id=owner[1])
     # The balance may already be under the threshold.
     await check(*owner)
 

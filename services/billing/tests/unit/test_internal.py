@@ -1,27 +1,26 @@
 from types import SimpleNamespace
 
-from prepza_common.constants import CHAT_TURN_CREDITS
-
-from app.constants.credits import KIT_CREDITS
+from app.constants.credits import CANDIDATE_CREDITS
 from app.service_auth import service_token
 from app.storage import ledger
 
 AUTH = {"Authorization": f"Bearer {service_token('billing')}"}
+HOLD = {"company_id": "acme", "key": "session-1"}
 
 
-def test_a_kit_without_enough_credits_is_refused_with_a_message(client, monkeypatch):
+def test_a_candidate_without_enough_credits_is_refused_with_a_message(client, monkeypatch):
     async def too_low(owner_type, owner_id, amount, key, reason):
         return False
 
     monkeypatch.setattr(ledger, "reserve", too_low)
 
-    response = client.post("/internal/kits/gen-1/hold", params={"user_id": "ann"}, headers=AUTH)
+    response = client.post("/internal/candidates/hold", params=HOLD, headers=AUTH)
 
     assert response.status_code == 402
     assert response.json() == {"detail": "Not enough credits. Top up to continue."}
 
 
-def test_a_kit_holds_its_credits(client, monkeypatch):
+def test_a_candidate_holds_its_credits(client, monkeypatch):
     held = []
 
     async def reserve(owner_type, owner_id, amount, key, reason):
@@ -31,53 +30,14 @@ def test_a_kit_holds_its_credits(client, monkeypatch):
 
     monkeypatch.setattr(ledger, "reserve", reserve)
 
-    response = client.post("/internal/kits/gen-1/hold", params={"user_id": "ann"}, headers=AUTH)
+    response = client.post("/internal/candidates/hold", params=HOLD, headers=AUTH)
 
     assert response.status_code == 204
-    assert held == [("ann", KIT_CREDITS, "kit:gen-1")]
-
-
-def test_a_certificate_on_a_public_kit_shares_with_its_author(client, monkeypatch):
-    spent = []
-
-    async def fake_spend(owner_type, owner_id, amount, key, reason, note=None, share=None):
-        spent.append((owner_id, amount, key, reason, note, share))
-
-        return True
-
-    monkeypatch.setattr(ledger, "spend", fake_spend)
-
-    response = client.post(
-        "/internal/certificates",
-        json={"owner_id": "ann", "key": "topic-1", "note": "Ledgers", "author_id": "bob"},
-        headers=AUTH,
-    )
-
-    assert response.status_code == 204
-    assert spent == [("ann", 100, "certificate:topic-1", "certificate", "Ledgers", ("bob", 20))]
-
-
-def test_a_paid_chat_turn_costs_its_credits(client, monkeypatch):
-    spent = []
-
-    async def fake_spend(owner_type, owner_id, amount, key, reason, note=None, share=None):
-        spent.append((owner_id, amount, key))
-
-        return len(spent) == 1
-
-    monkeypatch.setattr(ledger, "spend", fake_spend)
-    body = {"owner_id": "ann", "key": "answer-1:4"}
-
-    first = client.post("/internal/chat-turns", json=body, headers=AUTH)
-    broke = client.post("/internal/chat-turns", json=body, headers=AUTH)
-
-    assert first.status_code == 204
-    assert broke.status_code == 402
-    assert spent[0] == ("ann", CHAT_TURN_CREDITS, "chat:answer-1:4")
+    assert held == [("acme", CANDIDATE_CREDITS, "candidate:session-1")]
 
 
 def test_internal_routes_need_a_service_token(client):
-    assert client.post("/internal/kits/gen-1/hold", params={"user_id": "ann"}).status_code == 401
+    assert client.post("/internal/candidates/hold", params=HOLD).status_code == 401
 
 
 def test_several_companies_balances_at_once(client, monkeypatch):

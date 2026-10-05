@@ -50,9 +50,17 @@ def merge_buckets(buckets: list[list[dict]]) -> list[dict]:
     return merged
 
 
-def question_calls(subtopic_count: int) -> int:
+def topic_size(template: bool) -> int:
+    """Questions each topic gets: more for a template than for a company's test."""
+    if template:
+        return settings.template_questions_per_topic
+
+    return settings.interview_questions_per_topic
+
+
+def question_calls(subtopic_count: int, size: int) -> int:
     """Calls each subtopic's questions are split into; reuse lowers their size, not their number."""
-    per_subtopic = math.ceil(settings.questions_per_topic * QUESTION_OVERSAMPLE / subtopic_count)
+    per_subtopic = math.ceil(size * QUESTION_OVERSAMPLE / subtopic_count)
 
     return math.ceil(per_subtopic / QUESTION_BATCH_SIZE)
 

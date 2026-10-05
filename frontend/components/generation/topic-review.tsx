@@ -6,7 +6,7 @@ import type { ReactNode } from "react"
 import { useState } from "react"
 
 import { TopicEditor } from "@/components/generation/topic-editor"
-import { RoundFooter } from "@/components/rounds/round-footer"
+import { RoundFooter } from "@/components/session/round-footer"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
@@ -18,9 +18,6 @@ type TopicReviewProps = {
   maxTopics: number
   // Subtopics a topic may have when edited by hand.
   maxSubtopics: number
-  // Credits approving costs: a learner's kit, paid when its topics are approved. Null for an
-  // interview, or when billing didn't answer.
-  price: number | null
   back: ReactNode
   // Shown at the left of the submit row.
   cancel?: ReactNode
@@ -36,12 +33,12 @@ export function TopicReview({
   topics,
   maxTopics,
   maxSubtopics,
-  price,
   back,
   cancel,
   onSubmit,
 }: TopicReviewProps) {
   const t = useTranslations("generation")
+  const common = useTranslations("common")
   const [selected, setSelected] = useState(() =>
     topics.map((_, index) => index)
   )
@@ -132,6 +129,7 @@ export function TopicReview({
                 size="icon"
                 className="absolute end-4 top-1/2 -translate-y-1/2"
                 aria-label={t("editTopic", { topic: topic.main_topic })}
+                tooltip={common("edit")}
                 onClick={() => setEditing(index)}
               >
                 <PencilIcon />
@@ -166,11 +164,7 @@ export function TopicReview({
             className="h-12 px-6 text-base"
             disabled={selected.length === 0 || tooMany || unnamed || submitting}
           >
-            {revising
-              ? t("apply")
-              : price == null
-                ? t("approve")
-                : t("approvePrice", { count: price })}
+            {revising ? t("apply") : t("approve")}
           </Button>
         </div>
       </RoundFooter>

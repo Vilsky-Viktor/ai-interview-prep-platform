@@ -2,9 +2,6 @@
   "settings": {
     "title": "Cài đặt",
     "signIn": "Đăng nhập để thay đổi cài đặt.",
-    "general": "Chung",
-    "billing": "Thanh toán",
-    "referral": "Lời mời",
     "language": "Ngôn ngữ",
     "languageNote": "Dùng cho giao diện và câu trả lời của gia sư, đồng thời là ngôn ngữ mặc định của bộ ôn luyện và buổi phỏng vấn mới. Bạn có thể tạo chúng bằng bất kỳ ngôn ngữ nào được hỗ trợ.",
     "languageFailed": "Không thể đổi ngôn ngữ. Vui lòng thử lại.",
@@ -14,13 +11,12 @@
     "downloadFailed": "Không thể chuẩn bị dữ liệu của bạn. Vui lòng thử lại.",
     "delete": "Xóa tài khoản",
     "searchLanguage": "Tìm ngôn ngữ",
-    "noLanguage": "Không tìm thấy ngôn ngữ.",
-    "history": "Lịch sử thanh toán",
-    "historyNote": "Mọi khoản tín dụng vào và ra, mới nhất trước."
+    "noLanguage": "Không tìm thấy ngôn ngữ."
   },
   "userMenu": {
     "signIn": "Đăng nhập",
     "account": "Tài khoản",
+    "adminZone": "Khu quản trị",
     "settings": "Cài đặt",
     "signOut": "Đăng xuất",
     "theme": "Giao diện",
@@ -34,17 +30,15 @@
     "main": "Menu chính",
     "legal": "Pháp lý",
     "pricing": "Bảng giá",
-    "privacy": "Chính sách quyền riêng tư",
+    "privacy": "Quyền riêng tư",
     "terms": "Điều khoản",
     "back": "Quay lại",
-    "create": "tạo",
-    "explore": "khám phá",
-    "myKits": "bộ của tôi",
     "hiring": "tuyển dụng",
     "pricingLink": "bảng giá",
     "faq": "Câu hỏi thường gặp",
     "contact": "Liên hệ",
-    "about": "Về chúng tôi"
+    "about": "Về chúng tôi",
+    "practice": "Luyện tập miễn phí"
   },
   "signIn": {
     "with": "Đăng nhập bằng",
@@ -80,43 +74,89 @@
     "notFoundText": "Trang này không tồn tại hoặc đã bị xóa."
   },
   "home": {
-    "tagline": "Các tác tử AI luyện tập cùng bạn cho đến khi bạn tự tin.",
-    "preparingFor": "Bạn đang chuẩn bị cho",
-    "words": [
-      "một buổi phỏng vấn",
-      "một chứng chỉ",
-      "một kỳ thi",
-      "một bài kiểm tra",
-      "một lần thăng chức"
-    ],
-    "widest": "một buổi phỏng vấn",
-    "mark": "?"
+    "title": "Phỏng vấn mọi người\nTuyển đúng nhân tài",
+    "text": "Phỏng vấn có tính giờ, tạo từ mô tả công việc của bạn. Câu hỏi riêng cho mỗi ứng viên, và không có thời gian để hỏi AI. Từ 1 $ mỗi ứng viên."
   },
-  "goal": {
-    "placeholder": "Dán mô tả công việc hoặc mô tả điều bạn muốn học…",
-    "label": "Bạn đang chuẩn bị cho điều gì?",
-    "submit": "Tạo bộ ôn luyện",
-    "failed": "Không thể bắt đầu tạo. Vui lòng thử lại.",
-    "seePlans": "Nạp tiền"
+  "start": {
+    "placeholder": "Dán mô tả công việc, hoặc mô tả vị trí và những gì ứng viên cần biết",
+    "description": "Mô tả công việc",
+    "submit": "Tạo buổi phỏng vấn",
+    "whichCompany": "Buổi phỏng vấn này dành cho công ty nào?",
+    "firstCompany": "Công ty của bạn tên là gì?",
+    "newCompany": "Một công ty mới",
+    "companyName": "Tên công ty",
+    "freeCandidates": "Công ty đầu tiên của bạn được phỏng vấn miễn phí {count, plural, other {# ứng viên}} đầu tiên.",
+    "back": "Sửa mô tả",
+    "continue": "Tiếp tục",
+    "starting": "Đang bắt đầu…",
+    "failed": "Không thể bắt đầu buổi phỏng vấn. Vui lòng thử lại."
   },
-  "membership": {
-    "signIn": "Đăng nhập để tham gia",
-    "leave": "Rời khỏi",
-    "join": "Tham gia để luyện tập"
+  "superadmin": {
+    "fixNow": "Sửa ngay",
+    "fixing": "Đang sửa…",
+    "dismiss": "Bỏ qua",
+    "fixSent": "Đã gửi cho bộ kiểm duyệt. Câu hỏi sẽ được sửa hoặc thay thế trong giây lát.",
+    "actionFailed": "Không thành công. Vui lòng thử lại.",
+    "quality": "Chất lượng",
+    "flagged": "Bị đánh dấu",
+    "replaced": "Đã thay thế",
+    "noFlagged": "Hiện không có gì bị đánh dấu.",
+    "noReplaced": "Chưa có gì được thay thế.",
+    "answers": "{count, plural, other {# câu trả lời}}",
+    "right": "{percent}% đúng",
+    "reports": "{count, plural, =0 {không có báo cáo} other {# báo cáo}}",
+    "kinds": {
+      "template": "mẫu",
+      "interview": "phỏng vấn của công ty"
+    },
+    "flags": {
+      "wrong_key": "đáp án có thể sai",
+      "rewrite": "cần câu hỏi mới",
+      "weak_options": "cần phương án tốt hơn"
+    },
+    "zone": "Khu quản trị",
+    "templates": "Mẫu",
+    "new": "Mẫu mới",
+    "createTitle": "Tạo mẫu",
+    "placeholder": "Dán mô tả vị trí, hoặc mô tả vị trí và những gì người đảm nhận cần biết",
+    "description": "Mô tả vị trí",
+    "create": "Tạo",
+    "createFailed": "Không thể bắt đầu tạo mẫu. Vui lòng thử lại.",
+    "text": "Buổi phỏng vấn có sẵn theo vị trí, cho công ty và nhân tài.",
+    "deleteLabel": "Xóa {title}",
+    "deleteTitle": "Xóa mẫu này?",
+    "deleteText": "Các chủ đề và câu hỏi của mẫu sẽ bị xóa. Những buổi phỏng vấn mà công ty đã tạo từ mẫu vẫn được giữ lại.",
+    "deleteFailed": "Không thể xóa mẫu. Vui lòng thử lại."
+  },
+  "templates": {
+    "title": "Mẫu",
+    "empty": "Chưa có mẫu nào.",
+    "topics": "{count, plural, other {# chủ đề}}",
+    "search": "Tìm theo vị trí hoặc chủ đề",
+    "searchAction": "Tìm",
+    "level": "Cấp độ: {level}",
+    "anyLevel": "Mọi cấp độ",
+    "allLanguages": "Mọi ngôn ngữ",
+    "languages": "{count, plural, other {# ngôn ngữ}}",
+    "noMatches": "Không có mẫu phù hợp.",
+    "use": "Dùng mẫu",
+    "using": "Đang bắt đầu…",
+    "useFailed": "Không thể tạo buổi phỏng vấn từ mẫu này. Vui lòng thử lại.",
+    "warningTitle": "Mẫu dùng để dùng thử prepza.",
+    "warning": "Nhân tài luyện tập trên các mẫu, nên ứng viên có thể đã biết trước câu hỏi. Để tuyển dụng thật, hãy tạo buổi phỏng vấn từ mô tả công việc của bạn.",
+    "text": "Buổi phỏng vấn có sẵn theo vị trí. Chọn một mẫu để bắt đầu buổi phỏng vấn của bạn; bạn có thể thay đổi sau."
   },
   "billing": {
     "paid": "Đã nhận thanh toán. Sẽ hiển thị ở đây trong giây lát.",
     "checkoutFailed": "Không thể mở trang thanh toán. Vui lòng thử lại.",
     "credits": "{count, plural, other {# tín dụng}}",
-    "bonus": "+{count, number} thưởng",
     "topUp": "Nạp tiền",
-    "balance": "Còn {count} tín dụng. Nạp tiền",
-    "balanceLow": "Còn {count} tín dụng, sắp hết. Nạp tiền",
     "low": "Sắp hết",
     "creditsWord": "{count, plural, other {tín dụng}}",
     "topUpTitle": "Nạp tiền: {name}",
-    "topUpNote": "$1 mua được 100 tín dụng, có thưởng khi nạp nhiều hơn. Tín dụng không bao giờ hết hạn.",
-    "customAmount": "Số tiền khác"
+    "topUpNote": "Mỗi lần nạp mua trọn số ứng viên; nạp càng nhiều, giá mỗi ứng viên càng rẻ. Tín dụng không bao giờ hết hạn.",
+    "candidates": "{count, plural, other {# ứng viên}}",
+    "each": "{price} mỗi ứng viên"
   },
   "deleteAccount": {
     "title": "Xóa tài khoản của bạn?",
@@ -126,83 +166,15 @@
     "deleted": "Tài khoản của bạn đã bị xóa.",
     "failed": "Không thể xóa tài khoản. Vui lòng thử lại."
   },
-  "levels": {
-    "basic": "cơ bản",
-    "medium": "trung bình",
-    "hard": "khó"
-  },
-  "visibility": {
-    "public": "công khai",
-    "private": "riêng tư"
-  },
-  "library": {
-    "title": "Bộ công khai",
-    "search": "Tìm tiêu đề và chủ đề",
-    "searchAction": "Tìm",
-    "noMatches": "Không có bộ ôn luyện phù hợp.",
-    "empty": "Chưa có bộ ôn luyện công khai nào.",
-    "level": "Cấp độ: {level}",
-    "anyLevel": "Tất cả",
-    "languages": "{count, plural, other {# ngôn ngữ}}",
-    "sortBy": "Sắp xếp theo: {sort}",
-    "sort": {
-      "date": "Ngày",
-      "rating": "Đánh giá",
-      "joiners": "Người tham gia"
-    }
-  },
-  "preparations": {
-    "title": "Bộ của tôi",
-    "new": "Bộ ôn luyện mới",
-    "signIn": "Đăng nhập để xem các bộ ôn luyện của bạn.",
-    "empty": "Chưa có bộ ôn luyện nào. Hãy tạo bộ đầu tiên hoặc chọn từ thư viện công khai.",
-    "topics": "{count, plural, other {# chủ đề}}",
-    "created": "Tạo ngày {date}",
-    "metaTitle": "Bộ ôn luyện",
-    "metaDescription": "Ôn luyện phỏng vấn cho {title}: {count, plural, other {# chủ đề}} câu hỏi trắc nghiệm, kèm các vòng luyện tập và chứng chỉ.",
-    "history": "Lịch sử",
-    "page": "Trang bộ ôn luyện",
-    "rounds": "Vòng luyện",
-    "deleteLabel": "Xóa {title}",
-    "deleteTitle": "Xóa {title}?",
-    "deleteText": "Các chủ đề và câu hỏi sẽ bị xóa, và mọi người đã tham gia sẽ mất quyền truy cập. Không thể hoàn tác.",
-    "deleteFailed": "Không thể xóa bộ ôn luyện. Vui lòng thử lại.",
-    "mastered": "Đã thành thạo",
-    "masteredTitle": "Đã thành thạo: chủ đề nào cũng có chứng chỉ",
-    "owner": "Chủ sở hữu",
-    "ratingTitle": "Điểm đánh giá trung bình và số lượt đánh giá",
-    "rated": "Cảm ơn bạn đã đánh giá",
-    "ratingUpdated": "Đã cập nhật đánh giá",
-    "ratingFailed": "Không thể lưu đánh giá. Vui lòng thử lại.",
-    "rateIt": "Đánh giá",
-    "rate": "Đánh giá {value}/{scale}",
-    "public": "Công khai",
-    "nowPublic": "Đã có trong thư viện công khai",
-    "nowPrivate": "Đã chuyển sang riêng tư",
-    "visibilityFailed": "Không thể thay đổi chế độ hiển thị. Vui lòng thử lại."
-  },
   "share": {
-    "share": "Chia sẻ",
-    "title": "Chia sẻ bộ ôn luyện",
-    "public": "Bất kỳ ai có liên kết đều xem được bộ ôn luyện này.",
-    "private": "Chúng tôi sẽ gửi liên kết mời qua email. Chỉ địa chỉ đó mới chấp nhận được.",
-    "email": "Email",
-    "send": "Gửi",
     "sent": "Đã gửi lời mời tới {email}",
     "checkEmail": "Kiểm tra lại địa chỉ email và thử lại.",
     "failed": "Không thể gửi lời mời.",
-    "joined": "Đã tham gia",
-    "undelivered": "Chưa gửi được",
-    "invited": "Đã mời",
     "wrongEmail": "Lời mời này được gửi tới một địa chỉ email khác.",
     "acceptFailed": "Không thể chấp nhận lời mời. Vui lòng thử lại.",
-    "signIn": "Đăng nhập bằng email được mời để tham gia bộ ôn luyện này.",
     "invalid": "Lời mời này không còn hiệu lực.",
     "invitedToJoin": "Bạn được mời tham gia.",
-    "open": "Mở bộ ôn luyện",
-    "join": "Tham gia bộ ôn luyện",
-    "mismatch": "Email không khớp. Đăng nhập bằng email được mời để tham gia.",
-    "inviteTitle": "Lời mời chia sẻ"
+    "mismatch": "Email không khớp. Đăng nhập bằng email được mời để tham gia."
   },
   "reportReasons": {
     "wrong_answer": "Đáp án được đánh dấu là sai",
@@ -221,6 +193,18 @@
     "reports": "Báo cáo",
     "showReports": "Xem báo cáo ({count})",
     "regenerate": "Tạo lại",
+    "manage": "Quản lý câu hỏi",
+    "wrongAnswer": "Đáp án sai",
+    "checking": "Đang kiểm tra…",
+    "markedWrong": "Cảm ơn bạn. Câu hỏi đang được kiểm tra và sẽ được sửa hoặc thay thế.",
+    "markWrongFailed": "Không thể gửi đi kiểm tra. Vui lòng thử lại.",
+    "ofCount": "trên {count, number}",
+    "per": "mỗi",
+    "candidate": "ứng viên",
+    "showOptions": "Hiện các phương án",
+    "hideOptions": "Ẩn các phương án",
+    "correct": "Đáp án đúng",
+    "wrong": "Đáp án sai",
     "regenerating": "Đang tạo lại…",
     "regenerated": "Đã tạo lại câu hỏi",
     "regenerateFailed": "Không thể tạo lại câu hỏi. Vui lòng thử lại.",
@@ -233,79 +217,27 @@
     "selectReason": "Chọn lý do",
     "details": "Chi tiết",
     "showLess": "Thu gọn",
+    "more": "+{count, number} nữa",
     "showAll": "Xem tất cả",
     "limitRange": "Nhập một số từ 1 đến {count}.",
     "limitFailed": "Không thể lưu giới hạn.",
     "limit": "Giới hạn câu hỏi",
-    "of": "trên",
     "count": "{count, plural, other {câu hỏi}}",
-    "loadFailed": "Không thể tải câu hỏi."
-  },
-  "certificate": {
-    "title": "Chứng chỉ",
-    "metaDescription": "{name} đã hoàn thành {topic} với điểm {score}%.",
-    "heading": "Chứng chỉ thành tích",
-    "for": "Vì đã hoàn thành xuất sắc:",
-    "finalScore": "Điểm cuối cùng",
-    "issued": "Ngày cấp",
-    "howTo": "Cách nhận chứng chỉ"
+    "loadFailed": "Không thể tải câu hỏi.",
+    "yourAnswer": "câu trả lời của bạn"
   },
   "rounds": {
-    "title": "Vòng luyện",
-    "rounds": "Vòng luyện",
-    "compare": "So sánh",
-    "compareTitle": "So sánh các vòng luyện",
     "answered": "Đã trả lời",
     "correct": "Đúng",
     "incorrect": "Sai",
     "notAnswered": "Chưa trả lời",
-    "correctAnswer": "Đáp án đúng",
-    "yourAnswer": "Câu trả lời của bạn",
-    "askFollowUp": "Hỏi thêm",
-    "followUp": "Câu hỏi thêm",
-    "followUpPlaceholder": "Đặt câu hỏi thêm…",
-    "replyFailed": "Không nhận được câu trả lời. Vui lòng thử lại.",
-    "firstRound": "Vòng luyện đầu tiên của bạn ở chủ đề này",
-    "sameAsLast": "Giống vòng trước",
-    "change": "{change} điểm so với vòng trước",
-    "topicAnswered": "Chủ đề: đã trả lời {answered}/{total} câu",
-    "answeredOf": "Đã trả lời {answered}/{total}",
-    "finalScore": "Điểm cuối cùng",
-    "certificate": "Chứng chỉ",
-    "history": "Lịch sử",
-    "preparationPage": "Trang bộ ôn luyện",
-    "noRounds": "Chưa có vòng luyện nào.",
-    "selectToCompare": "Chọn để so sánh",
-    "grade": "xếp loại",
-    "continue": "Tiếp tục",
-    "start": "Bắt đầu",
     "finish": "Kết thúc",
     "finishing": "Đang kết thúc…",
-    "finishRound": "Kết thúc vòng",
-    "deleteRound": "Xóa vòng",
-    "finishTitle": "Kết thúc vòng này?",
-    "deleteTitle": "Xóa vòng này?",
-    "unscored": "Các câu chưa trả lời sẽ không được chấm điểm.",
-    "noMore": "Bạn sẽ không thể trả lời thêm câu hỏi.",
-    "cantUndo": "Không thể hoàn tác.",
-    "deleteFailed": "Không thể xóa vòng. Vui lòng thử lại.",
-    "finishFailed": "Không thể kết thúc vòng. Vui lòng thử lại.",
-    "startFailed": "Không thể bắt đầu vòng. Vui lòng thử lại.",
-    "answerFailed": "Không thể lưu câu trả lời. Vui lòng thử lại.",
-    "signIn": "Đăng nhập để tiếp tục vòng này.",
-    "missing": "Vòng luyện này không tồn tại.",
-    "allAnswered": "Bạn đã trả lời mọi câu hỏi trong vòng này.",
     "next": "Câu tiếp theo",
-    "progress": "Số câu đã trả lời trên đường tới chứng chỉ",
-    "nextFailed": "Không thể tải câu tiếp theo. Vui lòng thử lại.",
-    "submitFailed": "Không thể gửi câu trả lời. Vui lòng thử lại.",
-    "freeTurns": "Còn {count, plural, other {# lượt hỏi gia sư miễn phí}} cho câu này",
-    "paidTurns": "Mỗi lượt hỏi thêm ở câu này tốn {count, plural, other {# tín dụng}}",
-    "buyCertificate": "Nhận chứng chỉ · {count} tín dụng",
-    "makeItYours": "Đang chuẩn bị cho một công việc cụ thể? Dán tin tuyển dụng để nhận bộ ôn luyện dành riêng cho nó.",
-    "makeItYoursAction": "Biến thành của bạn"
+    "submitFailed": "Không thể gửi câu trả lời. Vui lòng thử lại."
   },
   "session": {
+    "toTest": "Đến buổi phỏng vấn",
     "startFailed": "Không thể bắt đầu buổi phỏng vấn. Vui lòng thử lại.",
     "finishFailed": "Không thể kết thúc buổi phỏng vấn. Vui lòng thử lại.",
     "continueFailed": "Không thể tiếp tục. Vui lòng thử lại.",
@@ -357,17 +289,7 @@
     "changes": "Thay đổi chủ đề",
     "tooMany": "Chọn tối đa {max} chủ đề, hoặc mô tả cách gộp chúng.",
     "apply": "Áp dụng thay đổi",
-    "approve": "Duyệt và tạo",
-    "approvePrice": "Duyệt và tạo · {count} tín dụng",
-    "unfinished": "Chưa hoàn thành"
-  },
-  "generationStatus": {
-    "queued": "Đang tạo",
-    "running": "Đang tạo",
-    "awaiting_review": "Duyệt chủ đề",
-    "done": "Xong",
-    "failed": "Thất bại",
-    "cancelled": "Đã hủy"
+    "approve": "Duyệt và tạo"
   },
   "candidateStatus": {
     "invited": "đã mời",
@@ -375,7 +297,9 @@
     "in_process": "đang làm",
     "finished": "đã xong",
     "deleted": "đã xóa",
-    "expired": "đã hết hạn"
+    "expired": "đã hết hạn",
+    "passed": "đạt",
+    "flagged": "bị đánh dấu"
   },
   "roles": {
     "owner": "chủ sở hữu",
@@ -391,17 +315,17 @@
     "owner": "Chủ sở hữu",
     "interviewCount": "{count, plural, other {# buổi phỏng vấn}}",
     "interviews": "Phỏng vấn",
+    "templates": "Mẫu",
     "admins": "Quản trị viên",
     "referrals": "Lời mời",
     "new": "Công ty mới",
-    "newText": "Tạo công ty để tạo buổi phỏng vấn và mời ứng viên.",
     "name": "Tên công ty",
     "create": "Tạo",
     "createFailed": "Không thể tạo công ty. Vui lòng thử lại.",
     "signInJoin": "Đăng nhập bằng email được mời để tham gia công ty này.",
     "open": "Mở công ty",
     "join": "Tham gia công ty",
-    "creditsLeft": "{count, plural, other {tín dụng khả dụng}}",
+    "creditsLeft": "{count, plural, other {tín dụng}}",
     "creditsLow": "Sắp hết: hãy nạp thêm để tiếp tục mời ứng viên.",
     "timeLeft": "Thời gian còn lại: {time}",
     "removeLabel": "Xóa {name}",
@@ -409,7 +333,12 @@
     "removeText": "Các buổi phỏng vấn và lời mời của công ty sẽ bị xóa.",
     "remove": "Xóa",
     "removeFailed": "Không thể xóa công ty.",
-    "page": "Công ty"
+    "page": "Công ty",
+    "logo": "Logo",
+    "uploadLogo": "Tải logo lên",
+    "changeLogo": "Đổi logo",
+    "removeLogo": "Xóa logo",
+    "logoFailed": "Không thể lưu logo."
   },
   "candidates": {
     "scorecard": "Kết quả",
@@ -421,6 +350,11 @@
     "copies": "{count, plural, other {# lần thử sao chép}}",
     "fastAnswers": "{count, plural, other {# câu trả lời quá nhanh}}",
     "empty": "Chưa mời ứng viên nào.",
+    "noMatches": "Không có ứng viên phù hợp.",
+    "search": "Tìm ứng viên theo email",
+    "searchAction": "Tìm",
+    "status": "Trạng thái: {status}",
+    "anyStatus": "mọi trạng thái",
     "progress": "Tiến độ",
     "grade": "Xếp loại",
     "resend": "Gửi lại lời mời",
@@ -438,11 +372,27 @@
       "date": "Ngày"
     }
   },
+  "interviewStatus": {
+    "new": "Mới",
+    "in_process": "Đang xử lý",
+    "hired": "Đã tuyển"
+  },
   "interviews": {
     "title": "Phỏng vấn",
     "interview": "Phỏng vấn",
     "candidates": "Ứng viên",
     "new": "Buổi phỏng vấn mới",
+    "createTitle": "Tạo buổi phỏng vấn",
+    "try": "Thử với vai trò ứng viên",
+    "newCandidate": "Ứng viên mới",
+    "linkTitle": "Liên kết chia sẻ",
+    "linkText": "Dành cho tin tuyển dụng: bất kỳ ai có liên kết đều có thể tham gia buổi phỏng vấn. Mỗi người được tính phí như một ứng viên được mời.",
+    "linkFailed": "Không thể thay đổi liên kết. Vui lòng thử lại.",
+    "passMark": "Điểm đạt",
+    "passMarkLabel": "Điểm đạt tính bằng phần trăm",
+    "markHired": "Đánh dấu đã tuyển",
+    "tryLabel": "Thử {title} với vai trò ứng viên",
+    "tryFailed": "Không thể bắt đầu bản xem trước. Vui lòng thử lại.",
     "generating": "Đang tạo…",
     "fallbackTitle": "phỏng vấn",
     "continueGeneration": "Tiếp tục tạo",
@@ -461,12 +411,22 @@
     "adminEmail": "Email quản trị viên",
     "addAdmin": "Thêm quản trị viên",
     "adminFailed": "Không thể mời quản trị viên đó. Vui lòng thử lại.",
-    "candidateEmail": "Email ứng viên",
     "invite": "Mời",
     "jobDescription": "Mô tả công việc",
     "pasteJob": "Dán mô tả công việc: vị trí, yêu cầu và điểm cộng…",
     "generate": "Tạo buổi phỏng vấn",
-    "startFailed": "Không thể bắt đầu buổi phỏng vấn. Vui lòng thử lại."
+    "startFailed": "Không thể bắt đầu buổi phỏng vấn. Vui lòng thử lại.",
+    "candidateEmails": "Email ứng viên",
+    "emailsHint": "Một hoặc nhiều email, cách nhau bằng dấu phẩy hoặc xuống dòng",
+    "uploadFile": "Tải tệp lên",
+    "invitedMany": "Đã mời {count} ứng viên",
+    "skip": {
+      "invalid": "{count, plural, other {# email không hợp lệ}}.",
+      "limit": "{count, plural, other {# email}} vượt giới hạn email hiện tại của bạn. Hãy thử lại sau một giờ.",
+      "no_credits": "{count, plural, other {# ứng viên chưa được mời}}: hết tín dụng. Hãy nạp thêm để mời họ.",
+      "failed": "{count, plural, other {# lời mời}} không gửi được. Hãy thử lại."
+    },
+    "talents": "Nhân tài được gợi ý"
   },
   "invite": {
     "signIn": "Đăng nhập bằng email được mời để làm bài phỏng vấn này.",
@@ -479,7 +439,7 @@
     "timeRunsOut": "Khi hết thời gian của một câu, câu đó tính là sai và câu tiếp theo mở ra. Đồng hồ vẫn chạy nếu bạn rời đi.",
     "unanswered": "Câu chưa trả lời được tính là sai.",
     "saved": "Tiến độ được lưu: mở lại liên kết này để tiếp tục.",
-    "stay": "Hãy ở lại trang này: việc rời trang hoặc sao chép sẽ được ghi nhận (<link>cách chúng tôi xử lý</link>).",
+    "stay": "Hãy ở lại trang này: việc rời trang hoặc sao chép sẽ được ghi nhận (<link>quyền riêng tư</link>).",
     "finished": "Buổi phỏng vấn này đã kết thúc.",
     "continue": "Tiếp tục",
     "start": "Chấp nhận và bắt đầu",
@@ -503,29 +463,18 @@
   },
   "pricing": {
     "title": "Bảng giá",
-    "intro": "Chỉ trả cho những gì bạn dùng: $1 mua được 100 tín dụng, và tín dụng không bao giờ hết hạn. Không có gói thuê bao.",
-    "learners": "Cho người học",
-    "welcome": "Khi đăng ký",
-    "referrals": "Lời mời",
-    "referralsNote": "Chia sẻ liên kết của bạn trong Cài đặt, hoặc liên kết của công ty trong thẻ Lời mời của công ty đó.",
-    "referral": "Người bạn bạn mời nạp tiền lần đầu",
-    "companyReferral": "Công ty bạn mời nạp từ ${min} trở lên lần đầu",
-    "each": "mỗi bên {count, number} tín dụng",
-    "credits": "{count, plural, other {# tín dụng}}",
-    "companies": "Cho công ty",
-    "kit": "Bộ ôn luyện riêng, tạo từ mô tả công việc",
-    "chat": "Gia sư AI: {free, plural, other {# lượt hỏi miễn phí}} mỗi câu, sau đó",
-    "perTurn": "{count, plural, other {# tín dụng}} mỗi lượt",
-    "ownCertificate": "Chứng chỉ trên bộ của bạn hoặc bộ được chia sẻ",
-    "publicCertificate": "Chứng chỉ trên bộ công khai",
-    "publicPractice": "Luyện tập với bộ công khai ({count, plural, other {# chủ đề mới}} mỗi ngày)",
-    "draftTopics": "Chủ đề được đề xuất cho mô tả công việc hoặc mục tiêu của bạn",
-    "gift": "Miễn phí {count, number} tín dụng",
+    "intro": "Trả tiền theo ứng viên. Tạo buổi phỏng vấn là miễn phí, và không có gói đăng ký.",
+    "test": "Tạo một buổi phỏng vấn",
     "free": "Miễn phí",
-    "interview": "Tạo buổi phỏng vấn",
-    "candidate": "Mỗi ứng viên hoàn thành và trả lời ít nhất một câu hỏi",
-    "companyWelcome": "Công ty đầu tiên của bạn",
-    "openCompanies": "Công ty",
+    "candidate": "Mỗi ứng viên trả lời ít nhất một câu hỏi",
+    "candidateVolume": "Với tín dụng từ lần nạp ${from, number} trở lên",
+    "perCandidate": "${dollars, number} mỗi ứng viên",
+    "welcome": "{count, plural, other {# ứng viên}} đầu tiên của bạn",
+    "credits": "$1 = 100 tín dụng, tín dụng không bao giờ hết hạn.",
+    "referrals": "Lời mời",
+    "referralsNote": "Chia sẻ liên kết của công ty bạn từ thẻ lời mời của công ty.",
+    "companyReferral": "Một công ty bạn mời nạp tiền lần đầu",
+    "each": "mỗi bên {count, number} tín dụng",
     "topUp": "Nạp tiền"
   },
   "site": {
@@ -534,22 +483,6 @@
   "legal": {
     "updated": "Cập nhật lần cuối",
     "englishOnly": "Tài liệu này chỉ có bằng tiếng Anh."
-  },
-  "credits": {
-    "noHistory": "Chưa có gì.",
-    "reasons": {
-      "welcome": "Quà chào mừng",
-      "topup": "Nạp tiền",
-      "kit": "Bộ ôn luyện",
-      "candidate": "Ứng viên",
-      "certificate": "Chứng chỉ",
-      "author_share": "Bộ công khai của bạn mang về một chứng chỉ",
-      "chat": "Lượt hỏi gia sư",
-      "refund": "Hoàn tiền",
-      "chargeback": "Ngân hàng đã hoàn khoản thanh toán",
-      "chargeback_reversed": "Khoản thanh toán bị hoàn đã được khôi phục",
-      "referral": "Phần thưởng mời bạn"
-    }
   },
   "autoTopUp": {
     "title": "Tự động nạp",
@@ -572,43 +505,42 @@
     "label": "Tạo bằng"
   },
   "referral": {
-    "title": "Mời bạn bè",
-    "note": "Cả hai bạn đều nhận {reward, number} tín dụng khi bạn của bạn nạp tiền lần đầu.",
     "companyTitle": "Mời công ty khác",
-    "companyNote": "Cả hai công ty đều nhận {reward, number} tín dụng khi công ty mới nạp từ ${min} trở lên.",
+    "companyNote": "Cả hai bên đều nhận {reward, number} tín dụng khi họ nạp tiền lần đầu, với bất kỳ số tiền nào.",
+    "deletedCompany": "Một công ty đã xóa",
+    "credits": "+{count, number} tín dụng",
     "rewarded": "{count, plural, =0 {Chưa có phần thưởng.} other {Đã nhận thưởng # lần.}}"
   },
   "topUp": {
     "title": "Nạp tiền",
     "intro": "$1 mua được 100 tín dụng, và tín dụng không bao giờ hết hạn.",
     "signIn": "Đăng nhập để nạp tín dụng.",
-    "yours": "Số dư cá nhân",
-    "personal": "Tín dụng cá nhân",
-    "personalNote": "Cho các bộ ôn luyện, gia sư AI và chứng chỉ của bạn.",
     "companies": "Tín dụng công ty",
     "companiesNote": "Cho ứng viên của từng công ty.",
+    "noCompany": "Tín dụng thuộc về công ty. Hãy tạo công ty trước, rồi nạp tiền tại đây.",
+    "createCompany": "Tạo công ty",
     "pricing": "Bảng giá"
   },
   "landing": {
     "more": "Cách hoạt động",
     "how": {
-      "title": "Ba bước để sẵn sàng",
+      "title": "Ba bước đến kết quả đầu tiên",
       "paste": {
-        "title": "Dán hoặc mô tả",
-        "text": "Một mô tả công việc, một đề cương, hoặc những kỹ năng và công nghệ bạn muốn học."
+        "title": "Dán mô tả công việc",
+        "text": "Mọi vị trí, mọi ngôn ngữ.\nprepza chọn ra những gì ứng viên phải biết và đề xuất chủ đề."
       },
       "review": {
-        "title": "Xem lại kế hoạch",
-        "text": "Các tác tử AI chọn ra điều quan trọng và đề xuất chủ đề.\nGiữ nguyên, đổi tên hoặc chỉnh sửa tùy bạn."
+        "title": "Kiểm tra các chủ đề",
+        "text": "Giữ, đổi tên hoặc chỉnh sửa.\nChưa có câu hỏi nào được viết cho đến khi bạn duyệt."
       },
-      "practice": {
-        "title": "Luyện tập đến khi tự tin",
-        "text": "Mỗi chủ đề có bộ câu hỏi riêng.\nLuyện theo từng vòng và xem tiến độ tăng lên."
+      "invite": {
+        "title": "Mời ứng viên",
+        "text": "Dán danh sách, tải tệp lên hoặc chia sẻ một liên kết.\nLời nhắc được gửi tự động. Bạn thấy ai thạo việc, xếp hạng theo điểm."
       }
     },
     "control": {
-      "title": "Bạn quyết định học gì",
-      "text": "Chưa có câu hỏi nào được tạo cho đến khi bạn duyệt các chủ đề. Bỏ chọn những gì bạn đã biết, đổi tên chủ đề, sửa các chủ đề con, hoặc chỉ cần nói với AI cần thay đổi gì và để AI lo phần còn lại.",
+      "title": "Bạn quyết định nội dung phỏng vấn",
+      "text": "Không câu hỏi nào được viết cho đến khi bạn duyệt các chủ đề. Bỏ chọn những gì vị trí không cần, đổi tên chủ đề, chỉnh sửa chủ đề con, hoặc bảo AI cần thay đổi gì.",
       "topics": {
         "design": "Thiết kế hệ thống",
         "sql": "Marketing nội dung",
@@ -630,43 +562,9 @@
         "Đo lượt xem"
       ]
     },
-    "gaps": {
-      "title": "Luyện tập tìm ra lỗ hổng của bạn",
-      "text": "Mỗi vòng hỏi lại tất cả câu hỏi của chủ đề, bắt đầu từ những câu bạn sai lần trước. So sánh các vòng và xem lỗ hổng dần được lấp đầy.",
-      "items": {
-        "first": {
-          "question": "Chỉ số nào cho biết ai đã xem quảng cáo đến hết?",
-          "wrong": "Tỷ lệ nhấp",
-          "right": "Tỷ lệ xem hết"
-        },
-        "second": {
-          "question": "Bộ nhớ đệm chủ yếu giúp giảm gì?",
-          "wrong": "Chi phí lưu trữ",
-          "right": "Thời gian phản hồi"
-        }
-      }
-    },
-    "tutor": {
-      "title": "Gia sư cho mọi câu hỏi",
-      "text": "Sau mỗi câu trả lời, bạn thấy ngay đáp án đúng. Chưa hiểu vì sao đúng? Hỏi gia sư AI và tìm hiểu sâu đến mức bạn cần.",
-      "question": "Khách hàng đang bực vì giao hàng trễ. Bạn làm gì đầu tiên?",
-      "options": {
-        "first": "Giải thích lý do giao trễ",
-        "second": "Thừa nhận vấn đề và xin lỗi",
-        "third": "Đề nghị giảm giá ngay",
-        "fourth": "Chuyển cho quản lý"
-      },
-      "ask": "Sao không giải thích trước?",
-      "answer": "Hãy thừa nhận trước: khi thấy mình được lắng nghe, người ta mới chịu nghe lý do."
-    },
-    "proof": {
-      "title": "Biết khi nào bạn đã sẵn sàng",
-      "text": "Mỗi chủ đề có một thanh tiến độ hướng tới chứng chỉ. Đạt được chứng chỉ, chủ đề đó được tính là đã thành thạo.",
-      "again": "Bắt đầu lại"
-    },
     "quality": {
-      "title": "Câu hỏi tự tốt lên",
-      "text": "Lượt thích, không thích và báo cáo chỉ ra câu hỏi yếu. Trình kiểm tra AI tự động sửa hoặc thay thế chúng, và chủ sở hữu bộ ôn luyện có thể tự tạo lại bất kỳ câu hỏi nào.",
+      "title": "Câu hỏi tự hoàn thiện",
+      "text": "Câu trả lời, đánh giá và báo cáo của ứng viên giúp phát hiện câu hỏi yếu. Bộ kiểm duyệt AI tự động sửa hoặc thay thế chúng, và bạn có thể tự tạo lại bất kỳ câu hỏi nào.",
       "items": {
         "good": "Chỉ mục cơ sở dữ liệu giúp tăng tốc điều gì?",
         "weak": "Ngôn ngữ lập trình nào tốt nhất?",
@@ -675,45 +573,89 @@
       "comment": "Còn tùy dự án, nên không có một đáp án đúng duy nhất.",
       "list": "Câu hỏi của chủ đề"
     },
-    "share": {
-      "title": "Chia sẻ hoặc công khai",
-      "text": "Mời bạn bè hoặc đồng nghiệp qua email cùng luyện bộ ôn luyện của bạn, hoặc đăng lên thư viện công khai cho mọi người đang chuẩn bị cùng mục tiêu.",
-      "private": "Chia sẻ riêng",
-      "public": "Chia sẻ công khai",
-      "browse": "Khám phá thư viện"
+    "try": {
+      "title": "Thử trước khi ứng viên của bạn làm",
+      "text": "Làm miễn phí một buổi phỏng vấn luyện tập cho vị trí tương tự, hoặc mở buổi phỏng vấn của chính bạn với tư cách ứng viên trước khi mời bất kỳ ai.",
+      "browse": "Xem các buổi phỏng vấn luyện tập",
+      "topic": "Thiết kế hệ thống",
+      "question": "Bộ nhớ đệm (cache) đặt trước cơ sở dữ liệu chủ yếu giúp giảm điều gì?",
+      "options": {
+        "a": "Kích thước cơ sở dữ liệu",
+        "b": "Số lần đọc cơ sở dữ liệu",
+        "c": "Số lượng bảng",
+        "d": "Thời gian sao lưu"
+      },
+      "points": {
+        "practice": "Phỏng vấn luyện tập miễn phí cho nhiều vị trí",
+        "preview": "Buổi phỏng vấn của chính bạn, với tư cách ứng viên"
+      }
+    },
+    "link": {
+      "title": "Một liên kết cho tin tuyển dụng",
+      "text": "Đặt liên kết của buổi phỏng vấn vào tin tuyển dụng. Ai ứng tuyển cũng tham gia phỏng vấn ngay và xuất hiện trong danh sách ứng viên của bạn, xếp hạng theo điểm.",
+      "note": "Bất kỳ ai có liên kết đều có thể tham gia phỏng vấn.",
+      "points": {
+        "anywhere": "Trên các trang việc làm, LinkedIn hoặc website của bạn",
+        "off": "Tắt liên kết khi đã tuyển được người"
+      }
     },
     "companies": {
-      "title": "Đang tuyển dụng? Đánh giá ứng viên công bằng",
-      "text": "Biến mô tả công việc thành buổi phỏng vấn tính giờ và mời ứng viên để đánh giá họ.",
+      "title": "Biết ai thạo việc",
+      "text": "Ứng viên tham gia phỏng vấn từ email mời của bạn. Điểm hiện ra ngay khi họ trả lời, xanh hoặc đỏ so với điểm đạt bạn đặt.",
       "points": {
         "own": "Câu hỏi riêng cho từng ứng viên",
         "timed": "Đếm ngược ở mỗi câu hỏi",
         "flags": "Cảnh báo trả lời vội, rời trang, sao chép",
-        "private": "Ứng viên không thấy điểm"
+        "private": "Ứng viên không bao giờ thấy điểm của mình"
       },
       "candidate": "Ứng viên",
       "score": "Điểm",
       "rushed": "Trả lời vội",
       "left": "Rời trang",
-      "start": "Bắt đầu tuyển"
+      "role": "Lập trình viên backend · điểm đạt {mark}%"
+    },
+    "reports": {
+      "title": "Chia sẻ kết quả chỉ với một cú nhấp",
+      "text": "Báo cáo PDF rõ ràng cho một ứng viên hoặc cả danh sách. Tải xuống, hoặc gửi thẳng cho quản lý tuyển dụng từ prepza.",
+      "points": {
+        "pdf": "Một ứng viên hoặc tất cả",
+        "share": "Gửi PDF qua email hoặc chia sẻ qua ứng dụng nhắn tin"
+      }
+    },
+    "brand": {
+      "title": "Thương hiệu của bạn, đã xác minh",
+      "text": "Ứng viên thấy logo của bạn từ email đầu tiên đến câu hỏi cuối cùng, kèm dấu xác minh cho thấy công ty bạn là thật.",
+      "role": "Lập trình viên backend",
+      "points": {
+        "email": "Logo của bạn trong email mời",
+        "interview": "Trên buổi phỏng vấn ứng viên tham gia",
+        "report": "Trên mọi báo cáo PDF",
+        "verified": "Xác minh bằng email công việc của nhóm bạn"
+      }
+    },
+    "talent": {
+      "title": "Nhận gợi ý nhân tài",
+      "text": "Những người đạt điểm cao nhất trong các buổi phỏng vấn luyện tập miễn phí của chúng tôi, được gợi ý cho vị trí của bạn. Miễn phí.",
+      "suggested": "Gợi ý cho Lập trình viên backend",
+      "score": "Điểm",
+      "points": {
+        "free": "Miễn phí cho bạn và cho nhân tài",
+        "practice": "Chấm điểm qua phỏng vấn có tính giờ",
+        "first": "Chỉ tính lần thử đầu tiên",
+        "link": "Họ tự chọn được gợi ý"
+      }
     },
     "languages": {
-      "title": "Bằng ngôn ngữ của bạn",
-      "text": "Dùng prepza bằng {count} ngôn ngữ. Dán mô tả công việc bằng một ngôn ngữ và luyện tập bằng ngôn ngữ khác."
+      "title": "Mọi vị trí, mọi ngôn ngữ",
+      "text": "prepza hoạt động bằng {count} ngôn ngữ. Dán mô tả công việc bằng một ngôn ngữ và phỏng vấn ứng viên bằng ngôn ngữ khác."
     },
     "pricing": {
-      "title": "Chỉ trả cho những gì hiệu quả",
-      "text": "Không thuê bao, không gói cước. Nạp tiền khi cần: tín dụng không bao giờ hết hạn, và những gì thất bại đều không tốn phí.",
+      "title": "Trả tiền theo ứng viên",
+      "text": "Tạo buổi phỏng vấn miễn phí, và {free, plural, other {# ứng viên}} đầu tiên cũng vậy. Sau đó, bạn chỉ trả tiền cho ứng viên có trả lời, không cần gói đăng ký.",
       "see": "Xem bảng giá",
-      "company": "Acme Inc.",
-      "personal": "Dùng cho bộ ôn luyện và gia sư AI.",
-      "learner": "Tín dụng học viên"
-    },
-    "referrals": {
-      "title": "Nhận tín dụng khi làm đối tác giới thiệu",
-      "text": "Mời bạn bè hoặc công ty khác bằng liên kết của bạn. Khi họ nạp tiền lần đầu, cả hai đều nhận được tín dụng.",
-      "whereLearner": "Liên kết của bạn nằm trong {settings} → {referral}.",
-      "whereCompany": "Liên kết của công ty bạn nằm trong {hiring} → công ty của bạn → {referrals}."
+      "perCandidate": "mỗi ứng viên",
+      "base": "Dùng bao nhiêu trả bấy nhiêu",
+      "volume": "Khi nạp từ ${from, number}"
     },
     "faq": {
       "title": "Vẫn còn thắc mắc?",
@@ -721,8 +663,8 @@
       "read": "Xem câu hỏi thường gặp"
     },
     "ready": {
-      "title": "Sẵn sàng chuẩn bị chưa?",
-      "start": "Bắt đầu ngay"
+      "title": "Sẵn sàng phỏng vấn những ứng viên đầu tiên?",
+      "start": "Tạo buổi phỏng vấn"
     }
   },
   "faq": {
@@ -749,14 +691,15 @@
   },
   "about": {
     "title": "Về chúng tôi",
-    "intro": "prepza giúp bạn chuẩn bị thật tự tin, đồng thời mang đến cho các công ty một cách đơn giản, tiết kiệm để đánh giá ứng viên.",
+    "intro": "prepza giúp các công ty tìm được người thật sự thạo việc: một buổi phỏng vấn công bằng, có tính giờ, tạo từ mô tả công việc của bạn, với mức giá nhóm nào cũng chi trả được. Và ai đang chuẩn bị phỏng vấn cũng có thể luyện tập miễn phí.",
     "company": {
       "title": "Vì sao chúng tôi tồn tại",
-      "learners": "Chuẩn bị cho một buổi phỏng vấn, một kỳ thi hay một kỹ năng mới không nên bắt đầu bằng hàng giờ tìm kiếm. Hãy cho prepza biết mục tiêu của bạn, và prepza sẽ biến nó thành một kế hoạch rõ ràng: những chủ đề quan trọng, câu hỏi luyện tập cho từng chủ đề và một gia sư giải thích từng câu trả lời cho đến khi bạn thật sự hiểu.",
-      "companies": "Với các công ty, chúng tôi muốn việc tuyển dụng công bằng và trong tầm tay của mọi đội ngũ, không chỉ các công ty lớn. Biến mô tả công việc thành một buổi phỏng vấn có giới hạn thời gian chỉ trong vài phút, cho mỗi ứng viên bộ câu hỏi riêng và chỉ trả tiền cho những ứng viên thực sự tham gia."
+      "problem": "Tuyển dụng thường dựa vào CV và một cuộc trò chuyện tốt, và cả hai đều có thể gây hiểu lầm. Các công cụ đánh giá hữu ích lại có giá dành cho công ty lớn, với gói năm và phí theo người dùng, nên phần lớn các nhóm đành bỏ qua.",
+      "approach": "prepza biến mô tả công việc thành buổi phỏng vấn có tính giờ chỉ trong vài phút, cho mọi vị trí. Mỗi ứng viên nhận bộ câu hỏi riêng, bạn thấy ai thạo việc và vì sao, và bạn chỉ trả tiền cho những ứng viên thật sự tham gia.",
+      "practice": "Chúng tôi cũng muốn việc chuẩn bị phỏng vấn là miễn phí cho tất cả mọi người. Ai cũng có thể làm các buổi phỏng vấn luyện tập của chúng tôi cho một vị trí, xem điểm và mọi đáp án đúng, rồi luyện tập lại, hoàn toàn miễn phí. Những người làm tốt có thể chọn được gợi ý cho các công ty đang tuyển vị trí tương tự."
     },
     "founder": {
-      "quote": "Mỗi lần chuẩn bị cho một buổi phỏng vấn hay cố học một điều mới, tôi mất nhiều thời gian tìm tài liệu tốt hơn là thật sự học. Mỗi trang chỉ có một phần, và không trang nào hợp với điều tôi cần. Vì vậy tôi đã xây dựng prepza: công cụ mà tôi từng ước mình có, bắt đầu từ mục tiêu của bạn và dẫn bạn đến đó. Mong rằng nó sẽ giúp bạn tiết kiệm những giờ mà lẽ ra nó đã giúp tôi tiết kiệm.",
+      "quote": "Tuyển dụng tốt không nên là đặc quyền của các công ty lớn với ngân sách lớn. Tôi xây dựng prepza để bất kỳ nhóm nào cũng có thể biến mô tả công việc thành một buổi phỏng vấn công bằng trong vài phút, thấy ai thật sự thạo việc và chỉ trả tiền cho những ứng viên tham gia. Mong rằng nó giúp bạn tìm được đúng người nhanh hơn.",
       "role": "Nhà sáng lập duy nhất của prepza"
     }
   },
@@ -767,7 +710,6 @@
     "kinds": {
       "question_flagged": "{count, plural, =1 {Một câu hỏi về “{topic}” trong “{title}” đã bị đánh dấu để xem xét.} other {# câu hỏi trong “{title}” đã bị đánh dấu để xem xét.}}",
       "question_fixed": "{count, plural, =1 {AI đã sửa một câu hỏi bị đánh dấu về “{topic}” trong “{title}”.} other {AI đã sửa # câu hỏi bị đánh dấu trong “{title}”.}}",
-      "kit_ready": "Bộ ôn luyện “{title}” của bạn đã sẵn sàng.",
       "referral_rewarded": "Một người bạn mời đã nạp tiền. Bạn nhận được {credits} tín dụng.",
       "auto_top_up_charged": "Tự động nạp đã thêm {credits} tín dụng.",
       "auto_top_up_failed": "Tự động nạp không trừ tiền được từ thẻ. Hãy nạp tiền để không bị hết số dư.",
@@ -776,5 +718,77 @@
       "interview_ready": "Buổi phỏng vấn “{title}” đã sẵn sàng.",
       "interview_cancelled": "{title, select, none {Một buổi phỏng vấn} other {Buổi phỏng vấn “{title}”}} đã bị hủy: phần xem xét chủ đề phải chờ quá lâu."
     }
+  },
+  "report": {
+    "download": "Tải PDF",
+    "passed": "đạt · điểm đạt {mark}%",
+    "notPassed": "chưa đạt · điểm đạt {mark}%",
+    "notFinished": "chưa hoàn thành",
+    "share": "Chia sẻ báo cáo",
+    "fileName": "Báo cáo {email}",
+    "failed": "Không thể tạo báo cáo PDF.",
+    "shareTitle": "Chia sẻ báo cáo",
+    "recipient": "Email người nhận",
+    "send": "Gửi <name>PDF</name>",
+    "sent": "Đã gửi báo cáo tới {email}",
+    "sendFailed": "Không thể gửi báo cáo.",
+    "orSummary": "Hoặc gửi qua",
+    "via": "Gửi từ prepza",
+    "candidatesFileName": "Ứng viên {title}",
+    "candidateCount": "{count, plural, other {# ứng viên}}",
+    "passMark": "điểm đạt {mark}%",
+    "progressOf": "Đã làm {progress}%"
+  },
+  "practice": {
+    "title": "Luyện phỏng vấn miễn phí",
+    "intro": "Luyện tập cho một vị trí với buổi phỏng vấn có tính giờ, rồi xem điểm và mọi đáp án đúng. Hoàn toàn miễn phí.",
+    "about": "Phỏng vấn luyện tập có tính giờ. Khi làm xong, bạn xem được điểm và mọi đáp án đúng. Riêng tư và miễn phí.",
+    "pageTitle": "{title}: phỏng vấn luyện tập miễn phí",
+    "pageDescription": "Buổi phỏng vấn luyện tập {level} miễn phí cho {title}: {count, plural, other {# chủ đề}}, tính giờ, kèm điểm và mọi đáp án đúng sau khi làm. Đây là luyện tập, không phải phỏng vấn tuyển dụng thật.",
+    "start": "Bắt đầu luyện tập",
+    "again": "Luyện tập lại",
+    "continue": "Tiếp tục",
+    "history": "Các lượt của bạn",
+    "results": "Kết quả luyện tập",
+    "grade": "số câu trả lời đúng",
+    "notFinished": "chưa hoàn thành",
+    "noRounds": "Chưa có lượt nào.",
+    "signIn": "Đăng nhập để xem các lượt luyện tập của bạn.",
+    "startFailed": "Không thể bắt đầu luyện tập. Vui lòng thử lại.",
+    "gradeLabel": "Điểm",
+    "questions": "{count, plural, other {# câu hỏi}}",
+    "progressLabel": "Tiến độ",
+    "answeredLabel": "câu đã trả lời"
+  },
+  "suggest": {
+    "title": "Được gợi ý cho các công ty",
+    "consent": "Không bắt buộc. Các công ty tuyển vị trí tương tự có thể thấy tên, LinkedIn và điểm lượt đầu của bạn. Bạn có thể thay đổi hoặc rút lại bất cứ lúc nào trong cài đặt.",
+    "link": "Liên kết LinkedIn",
+    "share": "Chia sẻ",
+    "saved": "Giờ bạn có thể được gợi ý cho các công ty.",
+    "withdraw": "Rút lại",
+    "withdrawn": "Bạn sẽ không được gợi ý cho các công ty nữa.",
+    "invalid": "Hãy dùng liên kết hồ sơ LinkedIn, ví dụ https://www.linkedin.com/in/your-name",
+    "failed": "Không thể lưu. Vui lòng thử lại.",
+    "shareAndStart": "Đồng ý và bắt đầu",
+    "startWithout": "Không đồng ý và bắt đầu"
+  },
+  "talents": {
+    "about": "Những nhân tài đã làm tốt khi luyện tập phỏng vấn cho vị trí tương tự và đồng ý được gợi ý.",
+    "empty": "Chưa có nhân tài được gợi ý.",
+    "score": "Điểm",
+    "hide": "Ẩn",
+    "hideFailed": "Không thể ẩn nhân tài này. Vui lòng thử lại."
+  },
+  "verify": {
+    "verify": "Xác minh",
+    "verified": "Đã xác minh: {domain}",
+    "title": "Xác minh công ty",
+    "text": "Nhập website của công ty. Công ty được xác minh khi chủ sở hữu hoặc quản trị viên đăng nhập bằng email công việc thuộc website đó, ví dụ you@acme.com: ngay lập tức nếu đó là bạn.",
+    "website": "Website công ty",
+    "save": "Lưu",
+    "done": "Đã xác minh: {domain}",
+    "pending": "Đã lưu. Sẽ được xác minh khi chủ sở hữu hoặc quản trị viên đăng nhập bằng email thuộc {domain}.",
+    "failed": "Không thể lưu website."
   }
 }

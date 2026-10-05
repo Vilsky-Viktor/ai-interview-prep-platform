@@ -14,11 +14,6 @@ class ReuseIn(BaseModel):
     count: int = Field(ge=1, le=MAX_REUSE_COUNT)
 
 
-class ReusedQuestion(BaseModel):
-    text: str
-    options: list[OptionIn]
-
-
 class TopicToEmbed(BaseModel):
     id: UUID
     title: str
@@ -28,3 +23,10 @@ class TopicToEmbed(BaseModel):
 class TopicEmbedding(BaseModel):
     id: UUID
     embedding: list[float]
+
+
+class ReusedQuestion(BaseModel):
+    # The bank question it's taken from.
+    source_id: UUID
+    text: str
+    options: list[OptionIn]

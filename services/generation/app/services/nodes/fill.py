@@ -1,6 +1,5 @@
-from app.config.settings import settings
 from app.constants.generation import FILL_ATTEMPTS, FILL_SPARE_QUESTIONS
-from app.helpers.questions import normalize
+from app.helpers.questions import normalize, topic_size
 from app.models.state import State
 from app.services.dedupe import distinct_by_meaning
 from app.services.nodes.questions import generate_questions
@@ -24,7 +23,6 @@ async def new_questions(item: dict, missing: int, state: State) -> list[dict]:
             "subtopic_index": 0,
             "subtopic": ", ".join(item["subtopics"]) or item["topic"],
             "count": missing + FILL_SPARE_QUESTIONS,
-            "kind": state.get("kind"),
             "level": state["level"],
             "existing": item["questions"],
             "language": state.get("language"),
@@ -60,9 +58,11 @@ async def fill_topics(state: State) -> dict:
         for item in state["final"]
     ]
 
+    size = topic_size(state.get("template", False))
+
     for item in final:
         for _ in range(FILL_ATTEMPTS):
-            missing = settings.questions_per_topic - usable(item)
+            missing = size - usable(item)
 
             if missing <= 0:
                 break
@@ -72,7 +72,7 @@ async def fill_topics(state: State) -> dict:
                 item["questions"].append(question["text"])
                 item["answer_options"].append(question["options"])
 
-        if usable(item) < settings.questions_per_topic:
+        if usable(item) < size:
             raise TopicShortError(f"Topic {item['topic']!r} has only {usable(item)} questions")
 
     return {"final": final}

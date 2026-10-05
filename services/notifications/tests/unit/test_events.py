@@ -7,13 +7,13 @@ import pytest
 from prepza_common.constants import LANGUAGES
 
 from app.config.settings import settings
-from app.helpers.emails import candidate_invite_email, contact_email, share_invite_email
+from app.helpers.emails import candidate_invite_email, contact_email
 from app.integrations import companies, resend, smtp
 
-DATA = {"email": "bob@example.com", "token": "abc", "title": "Backend", "inviter": "Ann"}
+DATA = {"email": "bob@example.com", "token": "abc", "title": "Backend", "company": "Acme"}
 
 
-def push(event_type="preparation.shared", data=DATA, message_id="m-1"):
+def push(event_type="candidate.invited", data=DATA, message_id="m-1"):
     """A Pub/Sub push of one event, as the emulator sends it (no token)."""
     return {
         "message": {
@@ -48,24 +48,15 @@ def test_candidate_invite_email():
     assert ">Acme</strong> invited you" in email.html
 
 
-def test_share_invite_email():
-    email = share_invite_email(DATA, "http://localhost:8090/")
-
-    assert email.to == "bob@example.com"
-    assert email.subject == "Ann shared “Backend” with you"
-    assert "http://localhost:8090/share/abc" in email.text
-    assert ">Ann</strong> invited you to prepare with “Backend”" in email.html
-
-
 def test_html_escapes_names_and_titles():
-    email = share_invite_email({**DATA, "inviter": "<b>Ann</b>"}, "http://localhost:8090")
+    email = candidate_invite_email({**DATA, "company": "<b>Acme</b>"}, "http://localhost:8090")
 
-    assert "<b>Ann</b>" not in email.html
-    assert "&lt;b&gt;Ann&lt;/b&gt;" in email.html
-    assert "<b>Ann</b> invited you" in email.text
+    assert "<b>Acme</b>" not in email.html
+    assert "&lt;b&gt;Acme&lt;/b&gt;" in email.html
+    assert "<b>Acme</b> invited you" in email.text
 
 
-def test_a_share_event_sends_its_email(client, monkeypatch):
+def test_an_invite_event_sends_its_email(client, monkeypatch):
     sent = []
 
     async def fake_send(email):
@@ -163,11 +154,11 @@ def test_an_invite_is_emailed_in_the_interviews_language():
     assert "«Backend»" in email.text
 
 
-def test_a_share_in_a_language_without_texts_is_emailed_in_english():
+def test_an_invite_in_a_language_without_texts_is_emailed_in_english():
     for language in ("xx", None):
-        email = share_invite_email({**DATA, "language": language}, "http://localhost:8090")
+        email = candidate_invite_email({**DATA, "language": language}, "http://localhost:8090")
 
-        assert email.subject == "Ann shared “Backend” with you"
+        assert email.subject == "Acme invited you to an interview"
         assert '<html lang="en" dir="ltr">' in email.html
 
 
@@ -182,16 +173,13 @@ def test_an_arabic_invite_reads_right_to_left():
 
 
 @pytest.mark.parametrize("language", sorted(LANGUAGES))
-def test_every_content_language_has_both_emails(language):
-    share = share_invite_email({**DATA, "language": language}, "http://localhost:8090")
-    invite = candidate_invite_email({**DATA, "company": "Acme", "language": language}, "")
+def test_every_content_language_has_the_invite_email(language):
+    email = candidate_invite_email({**DATA, "language": language}, "")
 
     # Every placeholder is filled in, and the texts aren't English stand-ins.
-    for email in (share, invite):
-        assert "{" not in email.html and "{" not in email.text
-        assert f'lang="{language}"' in email.html
-
-    assert language == "en" or share.subject != "Ann shared “Backend” with you"
+    assert "{" not in email.html and "{" not in email.text
+    assert f'lang="{language}"' in email.html
+    assert language == "en" or email.subject != "Acme invited you to an interview"
 
 
 CONTACT = {

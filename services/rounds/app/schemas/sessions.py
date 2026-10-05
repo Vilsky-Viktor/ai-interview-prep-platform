@@ -23,6 +23,8 @@ class SessionsCreate(BaseModel):
     topics: list[TopicQuestions]
     # Every interview is timed: the seconds each question has.
     question_seconds: int = Field(ge=1)
+    # A company member trying their own test (see models/sessions.py).
+    preview: bool = False
 
 
 class SessionTopicOut(BaseModel):
@@ -36,8 +38,12 @@ class SessionTopicOut(BaseModel):
 class SessionOut(BaseModel):
     id: UUID
     topic_id: UUID
+    # The candidate's invite in companies, which knows the company and its logo.
+    candidate_invite_id: UUID
     topic_title: str
     interview_title: str | None = None
+    # A talent's practice round: its results page shows every answer.
+    practice: bool = False
     status: RoundStatus
     total: int
     answered: int
@@ -68,8 +74,3 @@ class ScorecardSession(BaseModel):
 
 class SignalIn(BaseModel):
     kind: IntegritySignal
-
-
-class MasteredCountsIn(BaseModel):
-    user_id: str
-    preparation_ids: list[UUID]

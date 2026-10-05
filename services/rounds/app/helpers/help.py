@@ -7,8 +7,6 @@ from prepza_common.constants import (
     LANGUAGES,
     MAX_INTERVIEWS_WITHOUT_CANDIDATES,
     MAX_OWNED_COMPANIES,
-    MAX_SHARES,
-    PUBLIC_TOPICS_PER_DAY,
 )
 
 from app.constants.help import FAQ_EXAMPLE_CANDIDATES
@@ -20,8 +18,6 @@ CATALOG_INTERNALS = {"environment", "client_token"}
 
 def guide() -> str:
     return PLATFORM_GUIDE.format(
-        max_shares=MAX_SHARES,
-        public_topics=PUBLIC_TOPICS_PER_DAY,
         max_companies=MAX_OWNED_COMPANIES,
         interviews_per_day=INTERVIEWS_PER_DAY,
         waiting_interviews=MAX_INTERVIEWS_WITHOUT_CANDIDATES,
@@ -46,9 +42,6 @@ def faq_values(catalog: dict | None) -> dict:
 
     return {
         "count": len(LANGUAGES),
-        "kit": prices.get("kit_credits", ""),
-        "kit_dollars": dollars(prices.get("kit_credits", "")),
-        "welcome": prices.get("welcome_user", ""),
         "candidate": candidate,
         "candidate_dollars": dollars(candidate),
         "example_candidates": FAQ_EXAMPLE_CANDIDATES,
@@ -56,6 +49,12 @@ def faq_values(catalog: dict | None) -> dict:
             candidate * FAQ_EXAMPLE_CANDIDATES * 12 if candidate else ""
         ),
         "company": prices.get("welcome_company", ""),
+        # The candidates a new company's welcome credits cover.
+        "company_candidates": (
+            prices["welcome_company"] // candidate
+            if candidate and "welcome_company" in prices
+            else ""
+        ),
     }
 
 

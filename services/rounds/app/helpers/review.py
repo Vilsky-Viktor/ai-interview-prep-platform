@@ -19,8 +19,9 @@ def add_signals(items: list[ReviewItem], signals: list) -> None:
             item.copies += 1
 
 
-def build_review(round_) -> list[ReviewItem]:
-    """Every question of the round in order; answers are only revealed for answered ones."""
+def build_review(round_, reveal_all: bool = False) -> list[ReviewItem]:
+    """Every question of the round in order; the right answer only for answered ones, or for
+    every one with `reveal_all` (a practice round)."""
     answers = {str(answer.question_id): answer for answer in round_.answers}
     items = []
 
@@ -32,7 +33,9 @@ def build_review(round_) -> list[ReviewItem]:
                 number=number,
                 text=question["text"],
                 options=[option["answer"] for option in question["options"]],
-                correct_option_index=correct_option_index(question) if answer else None,
+                correct_option_index=(
+                    correct_option_index(question) if answer or reveal_all else None
+                ),
                 answer=(
                     AnswerView(
                         answer_id=answer.id,

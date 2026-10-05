@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 def cache_key(kind: str, source: str, model: ChatOpenAI) -> str:
     """`source` holds the whole prompt, and the key the model and its effort, so a changed prompt
-    or model never reuses old results: a learner's draft never serves a company's interview."""
+    or model never reuses old results."""
     digest = hashlib.sha256(source.encode()).hexdigest()
 
     return f"draft:{kind}:{model.model_name}:{model.reasoning_effort}:{digest}"

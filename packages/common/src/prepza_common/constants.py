@@ -37,8 +37,8 @@ OUTBOX_BATCH = 100
 OUTBOX_KEEP_DAYS = 7
 
 # Languages the interface and generated content come in, by code, with the name prompts use.
-# Every language prepza supports: the interface, its messages and emails, and the prep kits and
-# interviews it generates. Names are as prompts use them.
+# Every language prepza supports: the interface, its messages and emails, and the tests it
+# generates. Names are as prompts use them.
 LANGUAGES = {
     "en": "English",
     "ru": "Russian",
@@ -64,7 +64,7 @@ LANGUAGES = {
     "fil": "Filipino",
     "et": "Estonian",
 }
-# How hard a preparation or interview is, from its requirements; generation decides it and
+# How hard a test is, from its requirements; generation decides it and
 # library filters by it.
 LEVELS = ("basic", "medium", "hard")
 # Of those, the ones written right to left.
@@ -73,17 +73,7 @@ DEFAULT_LANGUAGE = "en"
 # The Firebase custom claim that carries the user's language in every ID token.
 LANGUAGE_CLAIM = "language"
 
-# Tutor turns free on each answered question; rounds enforces it, billing's catalog shows it.
-CHAT_FREE_TURNS = 1
-# New topics of other people's public kits a learner may start a day (UTC), free; continuing a
-# topic already started is never limited. Rounds enforces it, billing's catalog shows it.
-PUBLIC_TOPICS_PER_DAY = 1
-# Credits a tutor turn after the free ones costs: billing charges it, rounds checks the balance first.
-CHAT_TURN_CREDITS = 2
-
 # Limits a service enforces and the help chat explains, so both read the same numbers.
-# People a private kit can be shared with, counting accepted and pending invites (library).
-MAX_SHARES = 30
 # Companies one person may own; the welcome credits come with the first one only (companies).
 MAX_OWNED_COMPANIES = 3
 # Interviews are free to generate, so each company may start this many a day (companies).
@@ -103,8 +93,8 @@ FUNNEL_PREFIX = "funnel."
 # Holds the referral code from a ?ref= link until the new person signs up or makes a company.
 REFERRAL_COOKIE = "prepza_ref"
 
-# A kit's or an interview's title, as its owner can rename it; generated titles aim for 60.
+# A test's title, as its company can rename it; generated titles aim for 60.
 MAX_TITLE_LENGTH = 70
 
-# A learner's goal or a job description, as pasted to generate a kit or an interview.
+# A job description, as pasted to generate a test.
 MAX_GOAL_LENGTH = 10_000

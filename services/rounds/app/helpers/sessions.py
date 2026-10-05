@@ -54,8 +54,10 @@ def session_out(row: Session, interview_title: str | None = None) -> SessionOut:
     return SessionOut(
         id=row.id,
         topic_id=row.topic_id,
+        candidate_invite_id=row.candidate_invite_id,
         topic_title=row.topic_title,
         interview_title=interview_title,
+        practice=bool(row.practice),
         status=row.status,
         total=len(row.questions),
         answered=len(row.answers),

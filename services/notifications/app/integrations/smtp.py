@@ -1,4 +1,5 @@
 import asyncio
+import base64
 import smtplib
 from email.message import EmailMessage
 
@@ -18,6 +19,11 @@ def send_sync(email: Email) -> None:
 
     message.set_content(email.text)
     message.add_alternative(email.html, subtype="html")
+
+    for name, content in email.attachments:
+        message.add_attachment(
+            base64.b64decode(content), maintype="application", subtype="pdf", filename=name
+        )
 
     with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=SEND_TIMEOUT_S) as client:
         client.send_message(message)

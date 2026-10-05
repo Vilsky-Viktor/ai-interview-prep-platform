@@ -6,5 +6,5 @@ router = APIRouter(tags=["languages"])
 
 @router.get("/languages")
 async def list_languages() -> list[str]:
-    """The languages kits and interviews can be generated in, for the "generate in" choice."""
+    """The languages tests can be generated in, for the "generate in" choice."""
     return list(LANGUAGES)

@@ -1,17 +1,17 @@
 from fastapi import APIRouter, Response, status
 from fastapi.encoders import jsonable_encoder
 from prepza_common.auth import CurrentUser
-from prepza_common.user import User
+from prepza_common.superadmin import is_superadmin
 
-from app.schemas.me import SettingsIn
+from app.schemas.me import MeOut, SettingsIn
 from app.services.accounts import delete_account, export_account, set_language
 
 router = APIRouter()
 
 
 @router.get("/me")
-def me(user: CurrentUser) -> User:
-    return user
+def me(user: CurrentUser) -> MeOut:
+    return MeOut(**user.model_dump(), is_superadmin=is_superadmin(user))
 
 
 @router.put("/me/settings", status_code=status.HTTP_204_NO_CONTENT)

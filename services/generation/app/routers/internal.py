@@ -5,7 +5,6 @@ from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
 from app.constants.generation import RUN_GENERATION, VERIFY_QUESTION
-from app.constants.kinds import GenerationKind
 from app.helpers.language import text_language
 from app.integrations import library, tasks
 from app.integrations.redis import get_redis
@@ -37,7 +36,7 @@ async def get_company_generation(generation_id: UUID, company_id: UUID) -> Gener
 async def create_interview_generation(
     body: InterviewGenerationCreate, caller: ServiceCaller, request: Request
 ) -> GenerationOut:
-    """A company's interview; companies pays per candidate, so this one is free."""
+    """A company's test; companies charges per candidate, so generating it is free."""
     await hit(
         get_redis(),
         f"rate:generations:{body.owner_uid}",
@@ -48,7 +47,6 @@ async def create_interview_generation(
     generation = await generations.create(
         body.owner_uid,
         body.text,
-        GenerationKind.INTERVIEW,
         body.company_id,
         body.generate_in or text_language(body.text, body.language),
     )
@@ -128,4 +126,6 @@ async def verify_question(
     question_id: UUID, body: VerifyIn, caller: ServiceCaller, request: Request
 ) -> None:
     """The library flagged the question; the worker checks it and fixes or replaces it."""
-    await tasks.enqueue(VERIFY_QUESTION, {"question_id": str(question_id), "flag": body.flag})
+    await tasks.enqueue(
+        VERIFY_QUESTION, {"question_id": str(question_id), "flag": body.flag, "now": body.now}
+    )

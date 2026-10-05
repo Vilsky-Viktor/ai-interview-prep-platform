@@ -3,11 +3,17 @@ import logging
 from app.config.settings import settings
 from app.constants.events import (
     CANDIDATE_INVITED,
+    CANDIDATE_REMINDED,
     CONTACT_SENT,
     NOTIFICATION_REQUESTED,
-    PREPARATION_SHARED,
+    REPORT_SHARED,
 )
-from app.helpers.emails import candidate_invite_email, contact_email, share_invite_email
+from app.helpers.emails import (
+    candidate_invite_email,
+    candidate_reminder_email,
+    contact_email,
+    report_email,
+)
 from app.integrations import resend, smtp
 from app.models.email import Email
 from app.services.feed import announce
@@ -49,11 +55,14 @@ async def handle(event_type: str, data: dict, message_id: str) -> None:
     if event_type == NOTIFICATION_REQUESTED:
         await notify(data, message_id)
 
-    if event_type == PREPARATION_SHARED:
-        await deliver(share_invite_email(data, settings.site_url), message_id)
-
     if event_type == CANDIDATE_INVITED:
         await deliver(candidate_invite_email(data, settings.site_url), message_id)
+
+    if event_type == CANDIDATE_REMINDED:
+        await deliver(candidate_reminder_email(data, settings.site_url), message_id)
+
+    if event_type == REPORT_SHARED:
+        await deliver(report_email(data, settings.site_url), message_id)
 
     if event_type == CONTACT_SENT:
         await deliver(contact_email(data, settings.contact_email), message_id)

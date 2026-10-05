@@ -11,3 +11,5 @@ class Email:
     tags: dict[str, str] = field(default_factory=dict)
     # Where a reply goes, when not to the sender: the visitor who wrote through the contact page.
     reply_to: str | None = None
+    # Files sent with it: (file name, base64 content).
+    attachments: list[tuple[str, str]] = field(default_factory=list)

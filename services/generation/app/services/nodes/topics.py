@@ -46,7 +46,7 @@ async def generate_topics(state: State) -> dict:
         max_name=MAX_TOPIC_NAME_LENGTH,
         language=language_name(state.get("language")),
     )
-    model = llm.get_generation_llm(state.get("kind"), state["level"])
+    model = llm.get_generation_llm()
     topics = await draft_cache.get("topics", prompt, model)
 
     if topics is None:
@@ -88,7 +88,7 @@ async def revise_topics(state: State) -> dict:
     return {
         "topics": await plan_topics(
             prompt,
-            llm.get_generation_llm(state.get("kind"), state["level"]),
+            llm.get_generation_llm(),
         ),
         "feedback": "",
         "approved": False,

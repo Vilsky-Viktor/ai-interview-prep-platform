@@ -62,6 +62,7 @@ export function DeleteInterview({
         size="icon"
         className="size-12 shrink-0 text-muted-foreground hover:text-destructive"
         aria-label={t("deleteLabel", { title })}
+        tooltip={common("delete")}
         onClick={() => setOpen(true)}
       >
         <Trash2Icon className="size-6" />

@@ -7,8 +7,10 @@ from app.helpers.questions import (
     build_options,
     clean_distractors,
     merge_buckets,
+    question_calls,
     split_count,
     strip_choices,
+    topic_size,
     with_example,
 )
 
@@ -51,46 +53,68 @@ def test_clean_distractors_drops_options_over_the_length_limit():
 
 
 def test_track_progress(monkeypatch):
-    monkeypatch.setattr(settings, "questions_per_topic", 100)
+    monkeypatch.setattr(settings, "interview_questions_per_topic", 100)
     progress = {}
     # 110 questions over two subtopics: 55 each, written in 3 calls of up to 20.
     topics = [{"main_topic": "T", "subtopics": ["a", "b"]}]
 
-    assert not track_progress(progress, {"generate_topics": {"topics": topics}})
-    assert track_progress(progress, {"human_review": {"topics": topics, "approved": True}})
+    assert not track_progress(
+        progress, {"generate_topics": {"topics": topics}}, settings.interview_questions_per_topic
+    )
+    assert track_progress(
+        progress,
+        {"human_review": {"topics": topics, "approved": True}},
+        settings.interview_questions_per_topic,
+    )
     assert progress["done"] == 0
     assert progress["total"] == 6
     assert progress["topics"] == 1
     assert progress["topics_ready"] == 0
 
     call = {"generate_questions": {"question_pool": [{"topic_index": 0}]}}
-    track_progress(progress, call)
+    track_progress(progress, call, settings.interview_questions_per_topic)
 
     assert progress["done"] == 1
 
     for _ in range(5):
-        track_progress(progress, call)
+        track_progress(progress, call, settings.interview_questions_per_topic)
 
     assert progress["topics_ready"] == 1
 
-    track_progress(progress, {"merge_questions": {"topic_questions": [[]]}})
+    track_progress(
+        progress,
+        {"merge_questions": {"topic_questions": [[]]}},
+        settings.interview_questions_per_topic,
+    )
 
     assert progress["done"] == progress["total"] == 6
 
 
 def test_progress_never_passes_100_percent_when_a_retry_replays_steps(monkeypatch):
-    monkeypatch.setattr(settings, "questions_per_topic", 10)
+    monkeypatch.setattr(settings, "interview_questions_per_topic", 10)
     topics = [{"main_topic": "T", "subtopics": ["a", "b"]}]
     progress = {}
-    track_progress(progress, {"human_review": {"topics": topics, "approved": True}})
+    track_progress(
+        progress,
+        {"human_review": {"topics": topics, "approved": True}},
+        settings.interview_questions_per_topic,
+    )
 
     # A retry replays question steps that had already finished.
     for _ in range(5):
-        track_progress(progress, {"generate_questions": {"question_pool": [{"topic_index": 0}]}})
+        track_progress(
+            progress,
+            {"generate_questions": {"question_pool": [{"topic_index": 0}]}},
+            settings.interview_questions_per_topic,
+        )
 
     assert (progress["done"], progress["total"], progress["topic_done"]) == (1, 2, [2])
 
-    track_progress(progress, {"merge_questions": {"topic_questions": [[]]}})
+    track_progress(
+        progress,
+        {"merge_questions": {"topic_questions": [[]]}},
+        settings.interview_questions_per_topic,
+    )
 
     assert (progress["done"], progress["total"], progress["topics_ready"]) == (2, 2, 1)
 
@@ -120,7 +144,7 @@ def test_build_preparation_skips_incomplete_questions():
 
 
 def test_spare_questions_replace_dropped_ones_up_to_the_count(monkeypatch):
-    monkeypatch.setattr(settings, "questions_per_topic", 2)
+    monkeypatch.setattr(settings, "interview_questions_per_topic", 2)
     options = [{"answer": "x", "correct": True}]
     values = {
         "title": "Title",
@@ -177,17 +201,13 @@ def test_worker_skips_a_generation_cancelled_while_queued(monkeypatch):
     started = []
 
     async def get(_generation_id):
-        return Generation(id=uuid.uuid4(), status="cancelled", kind="preparation")
+        return Generation(id=uuid.uuid4(), status="cancelled", kind="interview")
 
     async def run_pipeline(*args):
         started.append(args)
 
-    async def release(_generation_id):
-        return None
-
     monkeypatch.setattr(generations, "get", get)
     monkeypatch.setattr(jobs, "run_pipeline", run_pipeline)
-    monkeypatch.setattr(jobs.billing, "release_kit", release)
 
     asyncio.run(jobs.run_generation(None, uuid.uuid4(), None))
 
@@ -223,3 +243,13 @@ def test_an_example_goes_under_its_question_in_a_block():
     # A question that already shows a block keeps it, and one with nothing left isn't kept.
     assert with_example("See:\n```\nx\n```", "y") == "See:\n```\nx\n```"
     assert with_example("", "print(1)") == ""
+
+
+def test_templates_get_more_questions_per_topic(monkeypatch):
+    monkeypatch.setattr(settings, "interview_questions_per_topic", 70)
+    monkeypatch.setattr(settings, "template_questions_per_topic", 90)
+
+    assert topic_size(False) == 70
+    assert topic_size(True) == 90
+    # More questions per subtopic can take more calls.
+    assert question_calls(1, topic_size(True)) == 5

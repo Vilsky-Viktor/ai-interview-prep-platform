@@ -59,6 +59,10 @@ def generate(client, monkeypatch, waiting):
             "title": None,
             "question_seconds": 60,
             "candidate_count": 0,
+            "hired": False,
+            "pass_mark": 70,
+            "link_token": None,
+            "status": "new",
             "created_at": "2026-10-04T09:00:00Z",
         }
 

@@ -25,7 +25,7 @@ def moved(monkeypatch):
 
     async def bought(transaction_id):
         # $10 paid for 1,000 credits.
-        return ("user", "ann", 1_000, "1000")
+        return ("company", "acme", 1_000, "1000")
 
     async def adjust(owner_type, owner_id, amount, key, reason):
         calls.append((owner_id, amount, key, reason))
@@ -39,13 +39,13 @@ def moved(monkeypatch):
 def test_an_approved_refund_takes_the_credits_back(moved):
     asyncio.run(webhooks.handle(adjustment()))
 
-    assert moved == [("ann", -1_000, "adjustment:adj_01", "refund")]
+    assert moved == [("acme", -1_000, "adjustment:adj_01", "refund")]
 
 
 def test_a_partial_refund_takes_back_its_share(moved):
     asyncio.run(webhooks.handle(adjustment(total="250")))
 
-    assert moved == [("ann", -250, "adjustment:adj_01", "refund")]
+    assert moved == [("acme", -250, "adjustment:adj_01", "refund")]
 
 
 def test_a_chargeback_takes_back_and_its_reversal_returns(moved):

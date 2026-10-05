@@ -20,3 +20,12 @@ DEAD_OPTION_SHARE = 0.02
 REPORTS_TO_FLAG = 2
 # Thumbs down that flag a question, when they're also at least twice its thumbs up.
 DISLIKES_TO_FLAG = 3
+# A candidate whose topic score is at least STRONG_SCORE counts as strong there, one at most
+# WEAK_SCORE as weak. A question needs MIN_GROUP_ANSWERS from each before it's judged, and
+# separates them when strong candidates get it right at least MIN_SEPARATION more often.
+STRONG_SCORE = 70
+WEAK_SCORE = 40
+MIN_GROUP_ANSWERS = 10
+MIN_SEPARATION = 0.1
+# Too slow to read: time ran out on at least this share of the times it was shown.
+TOO_SLOW_SHARE = 0.25

@@ -9,6 +9,7 @@ from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.events import CANDIDATE_INVITED
 from app.constants.invites import InviteStatus
+from app.helpers.search import escape_like
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
@@ -16,7 +17,7 @@ from app.storage.db import Session
 
 
 async def upsert(
-    interview_id, email: str, title: str, company: str, language: str
+    interview_id, email: str, title: str, company: str, language: str, logo_path: str | None = None
 ) -> CandidateInvite:
     """Creates the invite, or returns the existing one so it can be sent again, and saves the
     email's event with it."""
@@ -48,6 +49,7 @@ async def upsert(
             invite.status = InviteStatus.INVITED
 
         invite.sent_at = datetime.now(UTC)
+        invite.reminded_at = None
 
         outbox.add(
             session,
@@ -60,7 +62,39 @@ async def upsert(
                 "title": title,
                 "company": company,
                 "language": language,
+                # The company's logo for the top of the email, when it has one.
+                "logo_path": logo_path,
             },
+        )
+        await session.commit()
+
+        return invite
+
+
+async def for_link(interview_id, email: str) -> CandidateInvite:
+    """The candidate who came through the test's link: their invite, made now if it's new. No
+    email goes out: they're already here."""
+    email = email.lower()
+    statement = (
+        insert(CandidateInvite)
+        .values(
+            id=uuid.uuid4(),
+            interview_id=interview_id,
+            email=email,
+            token=secrets.token_urlsafe(32),
+            status=InviteStatus.INVITED,
+            created_at=datetime.now(UTC),
+            sent_at=datetime.now(UTC),
+        )
+        .on_conflict_do_nothing(index_elements=["interview_id", "email"])
+    )
+
+    async with Session() as session:
+        await session.execute(statement)
+        invite = await session.scalar(
+            select(CandidateInvite).where(
+                CandidateInvite.interview_id == interview_id, CandidateInvite.email == email
+            )
         )
         await session.commit()
 
@@ -191,11 +225,26 @@ async def remove(invite_id: uuid.UUID) -> None:
         await session.commit()
 
 
-async def list_all_for_interview(interview_id) -> list[CandidateInvite]:
+def candidate_filters(interview_id, q: str, status: str | None) -> list:
+    """An interview's candidates, narrowed to an email containing `q` and a status."""
+    filters = [CandidateInvite.interview_id == interview_id]
+
+    if q:
+        filters.append(CandidateInvite.email.ilike(f"%{escape_like(q.lower())}%", escape="\\"))
+
+    if status:
+        filters.append(CandidateInvite.status == status)
+
+    return filters
+
+
+async def list_all_for_interview(
+    interview_id, q: str = "", status: str | None = None
+) -> list[CandidateInvite]:
     """Every candidate of an interview, newest first, for sorting by grade."""
     query = (
         select(CandidateInvite)
-        .where(CandidateInvite.interview_id == interview_id)
+        .where(*candidate_filters(interview_id, q, status))
         .order_by(CandidateInvite.created_at.desc(), CandidateInvite.id)
     )
 
@@ -203,10 +252,12 @@ async def list_all_for_interview(interview_id) -> list[CandidateInvite]:
         return list(await session.scalars(query))
 
 
-async def list_for_interview(interview_id, offset: int, limit: int) -> list[CandidateInvite]:
+async def list_for_interview(
+    interview_id, offset: int, limit: int, q: str = "", status: str | None = None
+) -> list[CandidateInvite]:
     query = (
         select(CandidateInvite)
-        .where(CandidateInvite.interview_id == interview_id)
+        .where(*candidate_filters(interview_id, q, status))
         .order_by(CandidateInvite.created_at.desc(), CandidateInvite.id)
         .offset(offset)
         .limit(limit)

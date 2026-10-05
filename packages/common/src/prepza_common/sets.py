@@ -12,18 +12,20 @@ class OptionIn(BaseModel):
 class QuestionIn(BaseModel):
     text: str
     options: list[OptionIn]
+    # A question taken from the bank: its original, whose statistics its answers add to.
+    source_id: UUID | None = None
 
 
 class TopicIn(BaseModel):
     title: str
     subtopics: list[str]
     questions: list[QuestionIn]
-    # Lets later generations find this topic when it's public (library's storage/reuse.py).
+    # Lets the question bank find this topic by meaning (library's storage/reuse.py).
     embedding: list[float] | None = None
 
 
 class PreparationIn(BaseModel):
-    """A generated preparation or interview, as generation saves it in library."""
+    """A generated test, as generation saves it in library."""
 
     # Lets library return the same set when a save is retried.
     generation_id: UUID

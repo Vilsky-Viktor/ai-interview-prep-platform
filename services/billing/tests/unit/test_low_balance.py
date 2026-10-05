@@ -3,11 +3,6 @@ from app.helpers.wallets import balance_out
 from app.models.billing import Wallet
 
 
-def test_a_learner_runs_low_under_100_credits():
-    assert balance_out(Wallet(owner_type="user", owner_id="ann", balance=250, reserved=200)).low
-    assert not balance_out(Wallet(owner_type="user", owner_id="ann", balance=100, reserved=0)).low
-
-
 def test_a_company_runs_low_when_the_next_candidate_isnt_covered():
     short = CANDIDATE_CREDITS - 2
     covered = CANDIDATE_CREDITS

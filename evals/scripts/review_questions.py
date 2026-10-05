@@ -2,7 +2,7 @@
 
     evals/run.sh generation review_questions.py datasets/questions.json [--sample 40]
     evals/run.sh generation review_questions.py datasets/key_traps.json        # catch rate
-    evals/run.sh generation review_questions.py results/kit_x.json --sample 40  # a new kit
+    evals/run.sh generation review_questions.py results/test_x.json --sample 40  # a new test
     evals/run.sh generation review_questions.py datasets/questions.json --save-reference
     JUDGE_MODEL=gpt-6-luna evals/run.sh generation review_questions.py datasets/questions.json \\
         --compare-reference                                                    # test a judge

@@ -9,4 +9,4 @@ COMPANY = {
 }
 
 # When the privacy policy and terms last changed.
-LEGAL_UPDATED = "2026-10-04"
+LEGAL_UPDATED = "2026-10-05"

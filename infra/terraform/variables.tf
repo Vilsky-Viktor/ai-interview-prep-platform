@@ -40,7 +40,7 @@ variable "db_high_availability" {
 }
 
 variable "daily_generation_limit" {
-  description = "New generations a day for everyone together: a ceiling on LLM spending (about $0.15 a Luna kit, $1.00 a Sol kit or interview); 0 turns it off."
+  description = "New generations a day for everyone together: a ceiling on LLM spending (about $1.00 a test); 0 turns it off."
   type        = number
   default     = 200
 }
@@ -89,4 +89,10 @@ variable "monthly_budget" {
   description = "Monthly Google Cloud budget, in the billing account's currency; alerts only, nothing stops."
   type        = number
   default     = 300
+}
+
+variable "superadmin_emails" {
+  description = "Superadmins, prepza's own team (templates, the question bank): verified Google emails."
+  type        = list(string)
+  default     = []
 }

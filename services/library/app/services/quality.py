@@ -3,13 +3,21 @@ import uuid
 
 from prepza_common.notifications import NotificationKind
 
+from app.constants.quality import QualityFlag
 from app.helpers.notifications import question_notification
-from app.helpers.quality import flag_for
+from app.helpers.quality import flag_for, no_separation, too_slow
 from app.integrations import generation
 from app.services import outbox
 from app.storage import preparations, quality
 
 logger = logging.getLogger(__name__)
+
+
+async def mark_wrong(question_id: uuid.UUID) -> None:
+    """The test's owner says the marked answer is wrong: flagged at once, and the verifier
+    checks it and fixes or replaces the question, as for a flag from answers."""
+    await generation.verify_question(question_id, QualityFlag.WRONG_KEY)
+    await quality.save_flag(question_id, QualityFlag.WRONG_KEY)
 
 
 async def review(question_id: uuid.UUID) -> None:
@@ -36,6 +44,7 @@ async def review(question_id: uuid.UUID) -> None:
             reports,
             likes,
             dislikes,
+            stats is not None and (no_separation(stats) or too_slow(stats)),
         )
 
         previous = stats.flag if stats else None

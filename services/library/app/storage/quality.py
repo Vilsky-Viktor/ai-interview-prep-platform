@@ -48,6 +48,61 @@ async def record_answer(
         await session.commit()
 
 
+RECORD_RESULT_SQL = text(
+    """
+    INSERT INTO question_stats (
+        question_id, answers, correct, option_picks, updated_at,
+        strong_answers, strong_correct, weak_answers, weak_correct, timeouts
+    )
+    SELECT id, 0, 0, '{}'::jsonb, now(),
+        CAST(:strong AS integer), CAST(:strong_correct AS integer),
+        CAST(:weak AS integer), CAST(:weak_correct AS integer), CAST(:timed_out AS integer)
+    FROM questions
+    WHERE id = :question_id AND text = :question_text
+    ON CONFLICT (question_id) DO UPDATE SET
+        strong_answers = question_stats.strong_answers + EXCLUDED.strong_answers,
+        strong_correct = question_stats.strong_correct + EXCLUDED.strong_correct,
+        weak_answers = question_stats.weak_answers + EXCLUDED.weak_answers,
+        weak_correct = question_stats.weak_correct + EXCLUDED.weak_correct,
+        timeouts = question_stats.timeouts + EXCLUDED.timeouts,
+        updated_at = now()
+    """
+)
+
+
+async def record_result(
+    question_id: uuid.UUID,
+    question_text: str,
+    group: str | None,
+    correct: bool,
+    timed_out: bool,
+) -> None:
+    """Counts one candidate's result on the question: in the strong or weak group (None: in
+    between, not counted there), and whether their time ran out."""
+    async with Session() as session:
+        await session.execute(
+            RECORD_RESULT_SQL,
+            {
+                "question_id": question_id,
+                "question_text": question_text,
+                "strong": int(group == "strong"),
+                "strong_correct": int(group == "strong" and correct),
+                "weak": int(group == "weak"),
+                "weak_correct": int(group == "weak" and correct),
+                "timed_out": int(timed_out),
+            },
+        )
+        await session.commit()
+
+
+async def source_of(question_id: uuid.UUID) -> uuid.UUID | None:
+    """The bank question a test's question was copied from, if any."""
+    async with Session() as session:
+        return await session.scalar(
+            select(Question.source_question_id).where(Question.id == question_id)
+        )
+
+
 async def rating_counts(session: AsyncSession, question_id: uuid.UUID) -> tuple[int, int]:
     """Likes and dislikes."""
     query = select(

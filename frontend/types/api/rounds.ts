@@ -4,112 +4,6 @@
  */
 
 export interface paths {
-  "/rounds": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /** Create Round */
-    post: operations["create_round_rounds_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/rounds/{round_id}": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Get Round */
-    get: operations["get_round_rounds__round_id__get"]
-    put?: never
-    post?: never
-    /** Delete Round */
-    delete: operations["delete_round_rounds__round_id__delete"]
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/rounds/{round_id}/next": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Get Next Question
-     * @description The next unanswered question, or null when every question is answered.
-     */
-    get: operations["get_next_question_rounds__round_id__next_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/rounds/{round_id}/answers": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /** Answer Question */
-    post: operations["answer_question_rounds__round_id__answers_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/rounds/{round_id}/review": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Review Round */
-    get: operations["review_round_rounds__round_id__review_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/rounds/{round_id}/finish": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /** Finish */
-    post: operations["finish_rounds__round_id__finish_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/sessions/{session_id}": {
     parameters: {
       query?: never
@@ -239,6 +133,125 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/practice/{template_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Start Practice */
+    post: operations["start_practice_practice__template_id__post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/practice/{template_id}/size": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Practice Size
+     * @description Public, for the test's page: how many questions a round has.
+     */
+    get: operations["practice_size_practice__template_id__size_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/practice/rounds/{round_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Round
+     * @description The talent's own round only.
+     */
+    get: operations["get_round_practice_rounds__round_id__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/practice/{template_id}/rounds": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Rounds
+     * @description The talent's rounds on the template, newest first, to see their progress.
+     */
+    get: operations["list_rounds_practice__template_id__rounds_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/practice/{template_id}/progress": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Topic Progress Route
+     * @description How far the talent got on each of the template's topics in their latest round.
+     */
+    get: operations["topic_progress_route_practice__template_id__progress_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/talent-link": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Link */
+    get: operations["get_link_talent_link_get"]
+    /**
+     * Save Link
+     * @description A link is the consent: companies may see the talent's name, this link and their first
+     *     practice score on templates for roles like theirs. No link declines, or withdraws at once.
+     */
+    put: operations["save_link_talent_link_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/sessions/{session_id}/questions/{question_id}/rating": {
     parameters: {
       query?: never
@@ -285,129 +298,6 @@ export interface paths {
     put?: never
     /** Report */
     post: operations["report_sessions__session_id__questions__question_id__reports_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/topics/{topic_id}/rounds": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * List Rounds
-     * @description The user's rounds on a topic, newest first, a page at a time.
-     */
-    get: operations["list_rounds_topics__topic_id__rounds_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/preparations/{preparation_id}/progress": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * List Progress
-     * @description Per topic the user has practiced: answered questions, percent correct, certificate and
-     *     whether a round is still open.
-     */
-    get: operations["list_progress_preparations__preparation_id__progress_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/answers/{answer_id}/chat": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** List Chat */
-    get: operations["list_chat_answers__answer_id__chat_get"]
-    put?: never
-    /**
-     * Send Chat
-     * @description Streams the reply as server-sent events: {"delta"}..., then {"done"} or {"error"}.
-     */
-    post: operations["send_chat_answers__answer_id__chat_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/certificates/rules": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Get Rules
-     * @description What earns a topic's certificate; public, shown before practicing. Declared before
-     *     /{certificate_id}, which would otherwise take "rules" as an id.
-     */
-    get: operations["get_rules_certificates_rules_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/certificates/topics/{topic_id}": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Buy
-     * @description Charges and issues an earned certificate on someone else's public kit.
-     */
-    post: operations["buy_certificates_topics__topic_id__post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/certificates/{certificate_id}": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Get Certificate
-     * @description Public, no auth: certificates are shared by link.
-     */
-    get: operations["get_certificate_certificates__certificate_id__get"]
-    put?: never
-    post?: never
     delete?: never
     options?: never
     head?: never
@@ -532,46 +422,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/mastered-counts": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Mastered Counts
-     * @description Topics with a certificate per preparation, so library can tell which ones are done.
-     */
-    post: operations["mastered_counts_internal_mastered_counts_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/internal/preparations/{preparation_id}": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post?: never
-    /**
-     * Delete Preparation Data
-     * @description Called by library before it deletes a preparation; safe to repeat.
-     */
-    delete: operations["delete_preparation_data_internal_preparations__preparation_id__delete"]
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/internal/interviews/{interview_set_id}": {
     parameters: {
       query?: never
@@ -603,6 +453,27 @@ export interface paths {
     get: operations["invite_scorecard_internal_invites__invite_id__scorecard_get"]
     put?: never
     post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/suggestions": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Talent Suggestions
+     * @description For a company's test: talents who agreed to be suggested and did well in their first
+     *     round on one of these templates (the ones for similar roles, closest first).
+     */
+    post: operations["talent_suggestions_internal_suggestions_post"]
     delete?: never
     options?: never
     head?: never
@@ -759,26 +630,6 @@ export interface components {
       /** Option Index */
       option_index: number
     }
-    /** AnswerResult */
-    AnswerResult: {
-      /**
-       * Answer Id
-       * Format: uuid
-       */
-      answer_id: string
-      /** Correct */
-      correct: boolean
-      /** Correct Option Index */
-      correct_option_index: number
-      /** Current Score */
-      current_score: number
-      /** Passed */
-      passed: boolean
-      /** Answered */
-      answered: number
-      /** Total */
-      total: number
-    }
     /** AnswerView */
     AnswerView: {
       /**
@@ -798,63 +649,6 @@ export interface components {
        */
       fast: boolean
     }
-    /**
-     * CertificateOut
-     * @description Public: anyone with the link can see it.
-     */
-    CertificateOut: {
-      /**
-       * Id
-       * Format: uuid
-       */
-      id: string
-      /** User Name */
-      user_name: string
-      /** Topic Title */
-      topic_title: string
-      /** Score */
-      score: number
-      /**
-       * Issued At
-       * Format: date-time
-       */
-      issued_at: string
-      /**
-       * Preparation Id
-       * Format: uuid
-       */
-      preparation_id: string
-    }
-    /** ChatMessageOut */
-    ChatMessageOut: {
-      role: components["schemas"]["ChatRole"]
-      /** Content */
-      content: string
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string
-    }
-    /** ChatOut */
-    ChatOut: {
-      /** Messages */
-      messages: components["schemas"]["ChatMessageOut"][]
-      /** Free Turns Left */
-      free_turns_left: number
-      /** Turn Credits */
-      turn_credits: number
-    }
-    /** ChatRequest */
-    ChatRequest: {
-      /** Message */
-      message: string
-    }
-    /**
-     * ChatRole
-     * @enum {string}
-     */
-    ChatRole: "user" | "assistant"
     /** ContactRequest */
     ContactRequest: {
       /** Name */
@@ -945,13 +739,6 @@ export interface components {
        */
       items: string[]
     }
-    /** MasteredCountsIn */
-    MasteredCountsIn: {
-      /** User Id */
-      user_id: string
-      /** Preparation Ids */
-      preparation_ids: string[]
-    }
     /**
      * NextQuestion
      * @description The next unanswered question, without the correct flags.
@@ -977,6 +764,113 @@ export interface components {
       answer: string
       /** Correct */
       correct: boolean
+    }
+    /**
+     * PracticeRoundOut
+     * @description A talent's round, with every question's right answer once it's finished.
+     */
+    PracticeRoundOut: {
+      /**
+       * Round Id
+       * Format: uuid
+       */
+      round_id: string
+      /**
+       * Template Id
+       * Format: uuid
+       */
+      template_id: string
+      /** Title */
+      title: string | null
+      /** Finished */
+      finished: boolean
+      /** Grade */
+      grade: number | null
+      /** Answered */
+      answered: number
+      /** Total */
+      total: number
+      /**
+       * Started At
+       * Format: date-time
+       */
+      started_at: string
+      /** Open Session Id */
+      open_session_id: string | null
+      /** Topics */
+      topics: components["schemas"]["PracticeTopicResult"][]
+    }
+    /** PracticeRoundSummary */
+    PracticeRoundSummary: {
+      /**
+       * Round Id
+       * Format: uuid
+       */
+      round_id: string
+      /**
+       * Started At
+       * Format: date-time
+       */
+      started_at: string
+      /** Finished */
+      finished: boolean
+      /** Progress */
+      progress: number
+      /** Grade */
+      grade: number | null
+    }
+    /**
+     * PracticeSizeOut
+     * @description How many questions a practice round on the template has.
+     */
+    PracticeSizeOut: {
+      /** Questions */
+      questions: number
+    }
+    /**
+     * PracticeStartOut
+     * @description A new practice round: its id, and the first section to open.
+     */
+    PracticeStartOut: {
+      /**
+       * Round Id
+       * Format: uuid
+       */
+      round_id: string
+      /**
+       * Session Id
+       * Format: uuid
+       */
+      session_id: string
+    }
+    /**
+     * PracticeTopicProgress
+     * @description How far the talent got on one of the template's topics in their latest round.
+     */
+    PracticeTopicProgress: {
+      /**
+       * Topic Id
+       * Format: uuid
+       */
+      topic_id: string
+      /** Answered */
+      answered: number
+      /** Total */
+      total: number
+    }
+    /** PracticeTopicResult */
+    PracticeTopicResult: {
+      /**
+       * Session Id
+       * Format: uuid
+       */
+      session_id: string
+      /** Title */
+      title: string
+      /** Score */
+      score: number | null
+      /** Review */
+      review: components["schemas"]["ReviewItem"][]
     }
     /** Question */
     Question: {
@@ -1038,59 +932,6 @@ export interface components {
        */
       copies: number
     }
-    /** RoundCreate */
-    RoundCreate: {
-      /**
-       * Topic Id
-       * Format: uuid
-       */
-      topic_id: string
-    }
-    /** RoundOut */
-    RoundOut: {
-      /**
-       * Id
-       * Format: uuid
-       */
-      id: string
-      /**
-       * Topic Id
-       * Format: uuid
-       */
-      topic_id: string
-      /**
-       * Preparation Id
-       * Format: uuid
-       */
-      preparation_id: string
-      /** Topic Title */
-      topic_title: string
-      /**
-       * Public Kit
-       * @default false
-       */
-      public_kit: boolean
-      status: components["schemas"]["RoundStatus"]
-      /** Total */
-      total: number
-      /** Answered */
-      answered: number
-      /** Current Score */
-      current_score: number | null
-      /** Final Score */
-      final_score: number | null
-      /** Passed */
-      passed: boolean | null
-      /**
-       * Started At
-       * Format: date-time
-       */
-      started_at: string
-      /** Finished At */
-      finished_at: string | null
-      /** Certificate Id */
-      certificate_id: string | null
-    }
     /**
      * RoundStatus
      * @enum {string}
@@ -1141,10 +982,20 @@ export interface components {
        * Format: uuid
        */
       topic_id: string
+      /**
+       * Candidate Invite Id
+       * Format: uuid
+       */
+      candidate_invite_id: string
       /** Topic Title */
       topic_title: string
       /** Interview Title */
       interview_title?: string | null
+      /**
+       * Practice
+       * @default false
+       */
+      practice: boolean
       status: components["schemas"]["RoundStatus"]
       /** Total */
       total: number
@@ -1188,44 +1039,59 @@ export interface components {
       topics: components["schemas"]["TopicQuestions"][]
       /** Question Seconds */
       question_seconds: number
+      /**
+       * Preview
+       * @default false
+       */
+      preview: boolean
     }
     /** SignalIn */
     SignalIn: {
       kind: components["schemas"]["IntegritySignal"]
     }
     /**
-     * TopicProgressOut
-     * @description How far the user is towards the topic's certificate.
-     *
-     *     `answered` counts distinct current questions; `score` is the percent of them answered
-     *     correctly, by the latest answer to each. `in_progress` is true while a round is unfinished.
+     * SuggestedTalent
+     * @description What a company sees of a talent: name, LinkedIn, and their first-round grade on the
+     *     closest template they practised.
      */
-    TopicProgressOut: {
+    SuggestedTalent: {
+      /** Name */
+      name: string
+      /** Url */
+      url: string
+      /** Grade */
+      grade: number
       /**
-       * Topic Id
+       * Template Id
        * Format: uuid
        */
-      topic_id: string
-      /** Answered */
-      answered: number
-      /** Score */
-      score: number | null
-      /** Complete */
-      complete: boolean
-      /** Passed */
-      passed: boolean
-      /** Certificate Id */
-      certificate_id?: string | null
-      /**
-       * In Progress
-       * @default false
-       */
-      in_progress: boolean
-      /**
-       * Certificate For Sale
-       * @default false
-       */
-      certificate_for_sale: boolean
+      template_id: string
+    }
+    /**
+     * SuggestionsIn
+     * @description The templates for roles like a company's test.
+     */
+    SuggestionsIn: {
+      /** Template Ids */
+      template_ids: string[]
+    }
+    /**
+     * TalentLinkIn
+     * @description A LinkedIn link is the talent's consent to be suggested; none declines (or withdraws).
+     */
+    TalentLinkIn: {
+      /** Url */
+      url?: string | null
+    }
+    /**
+     * TalentLinkOut
+     * @description Whether the talent has answered yet, and their link while they agree to be suggested.
+     */
+    TalentLinkOut: {
+      /** Decided */
+      decided: boolean
+      /** Url */
+      url: string | null
     }
     /** TopicQuestions */
     TopicQuestions: {
@@ -1243,8 +1109,6 @@ export interface components {
       title: string
       /** Questions */
       questions: components["schemas"]["Question"][]
-      /** Public Author Id */
-      public_author_id?: string | null
     }
     /** ValidationError */
     ValidationError: {
@@ -1268,227 +1132,6 @@ export interface components {
 }
 export type $defs = Record<string, never>
 export interface operations {
-  create_round_rounds_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["RoundCreate"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["RoundOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  get_round_rounds__round_id__get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        round_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["RoundOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  delete_round_rounds__round_id__delete: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        round_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  get_next_question_rounds__round_id__next_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        round_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["NextQuestion"] | null
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  answer_question_rounds__round_id__answers_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        round_id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["AnswerCreate"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["AnswerResult"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  review_round_rounds__round_id__review_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        round_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["ReviewItem"][]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  finish_rounds__round_id__finish_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        round_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["RoundOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
   get_session_sessions__session_id__get: {
     parameters: {
       query?: never
@@ -1712,6 +1355,214 @@ export interface operations {
       }
     }
   }
+  start_practice_practice__template_id__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PracticeStartOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  practice_size_practice__template_id__size_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PracticeSizeOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_round_practice_rounds__round_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        round_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PracticeRoundOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_rounds_practice__template_id__rounds_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PracticeRoundSummary"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  topic_progress_route_practice__template_id__progress_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PracticeTopicProgress"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_link_talent_link_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["TalentLinkOut"]
+        }
+      }
+    }
+  }
+  save_link_talent_link_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["TalentLinkIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["TalentLinkOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   get_rating_sessions__session_id__questions__question_id__rating_get: {
     parameters: {
       query?: never
@@ -1835,219 +1686,6 @@ export interface operations {
         }
         content: {
           "application/json": unknown
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  list_rounds_topics__topic_id__rounds_get: {
-    parameters: {
-      query?: {
-        offset?: number
-        limit?: number
-      }
-      header?: never
-      path: {
-        topic_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["RoundOut"][]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  list_progress_preparations__preparation_id__progress_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        preparation_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["TopicProgressOut"][]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  list_chat_answers__answer_id__chat_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        answer_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["ChatOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  send_chat_answers__answer_id__chat_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        answer_id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ChatRequest"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": unknown
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  get_rules_certificates_rules_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": string[]
-        }
-      }
-    }
-  }
-  buy_certificates_topics__topic_id__post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        topic_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["CertificateOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  get_certificate_certificates__certificate_id__get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        certificate_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["CertificateOut"]
         }
       }
       /** @description Validation Error */
@@ -2246,70 +1884,6 @@ export interface operations {
       }
     }
   }
-  mastered_counts_internal_mastered_counts_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["MasteredCountsIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: number
-          }
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  delete_preparation_data_internal_preparations__preparation_id__delete: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        preparation_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
   delete_interview_data_internal_interviews__interview_set_id__delete: {
     parameters: {
       query?: never
@@ -2357,6 +1931,39 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["ScorecardSession"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  talent_suggestions_internal_suggestions_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SuggestionsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SuggestedTalent"][]
         }
       }
       /** @description Validation Error */

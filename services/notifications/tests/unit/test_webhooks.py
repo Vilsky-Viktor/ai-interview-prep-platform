@@ -7,9 +7,9 @@ import time
 import pytest
 
 from app.config.settings import settings
-from app.helpers.emails import candidate_invite_email, share_invite_email
+from app.helpers.emails import candidate_invite_email
 from app.helpers.webhooks import signature_valid
-from app.integrations import companies, library
+from app.integrations import companies
 
 # Svix's published example (docs.svix.com, "Verifying Webhooks Manually").
 SVIX_SECRET = "whsec_plJ3nmyCDGBKInavdOK15jsl"
@@ -64,12 +64,8 @@ def reported(monkeypatch):
     async def fake_invite(invite_id):
         calls.append(("companies", invite_id))
 
-    async def fake_share(share_id):
-        calls.append(("library", share_id))
-
     monkeypatch.setattr(settings, "resend_webhook_secret", SECRET)
     monkeypatch.setattr(companies, "invite_undelivered", fake_invite)
-    monkeypatch.setattr(library, "share_undelivered", fake_share)
 
     return calls
 
@@ -85,19 +81,19 @@ def test_a_bounced_candidate_invite_is_reported_to_companies(client, reported):
     assert reported == [("companies", INVITE_ID)]
 
 
-def test_a_spam_complaint_on_a_share_is_reported_to_library(client, reported):
-    assert signed_post(client, event("email.complained", "share")).status_code == 204
-    assert reported == [("library", INVITE_ID)]
+def test_a_spam_complaint_on_an_invite_is_reported_to_companies(client, reported):
+    assert signed_post(client, event("email.complained", "candidate_invite")).status_code == 204
+    assert reported == [("companies", INVITE_ID)]
 
 
 def test_other_events_and_untagged_emails_are_ignored(client, reported):
-    assert signed_post(client, event("email.delivered", "share")).status_code == 204
+    assert signed_post(client, event("email.delivered", "candidate_invite")).status_code == 204
     assert signed_post(client, event("email.bounced")).status_code == 204
     assert reported == []
 
 
 def test_an_unsigned_webhook_is_refused(client, reported):
-    response = client.post("/webhooks/resend", json=event("email.bounced", "share"))
+    response = client.post("/webhooks/resend", json=event("email.bounced", "candidate_invite"))
 
     assert response.status_code == 401
     assert reported == []
@@ -105,10 +101,8 @@ def test_an_unsigned_webhook_is_refused(client, reported):
 
 def test_invite_emails_are_tagged_with_what_they_are():
     base = {"email": "bob@example.com", "token": "t", "title": "Backend"}
-    share = share_invite_email({**base, "inviter": "Ann", "share_id": INVITE_ID}, "http://x")
     invite = candidate_invite_email({**base, "company": "Acme", "invite_id": INVITE_ID}, "http://x")
-    untagged = share_invite_email({**base, "inviter": "Ann"}, "http://x")
+    untagged = candidate_invite_email({**base, "company": "Acme"}, "http://x")
 
-    assert share.tags == {"kind": "share", "id": INVITE_ID}
     assert invite.tags == {"kind": "candidate_invite", "id": INVITE_ID}
     assert untagged.tags == {}

@@ -12,14 +12,10 @@ class Settings(ServiceSettings):
     paddle_client_token: str = ""
     paddle_webhook_secret: str = ""
     # Paddle's price id of each top-up (see constants/products.py); one without an id isn't sold.
-    paddle_price_topup_10: str = ""
-    paddle_price_topup_25: str = ""
-    paddle_price_topup_50: str = ""
-    paddle_price_topup_100: str = ""
+    paddle_price_topup_30: str = ""
+    paddle_price_topup_150: str = ""
     paddle_price_topup_250: str = ""
-    paddle_price_topup_500: str = ""
-    # Paddle's $1 price; a custom amount buys it in a quantity of 10 to 500.
-    paddle_price_topup_custom: str = ""
+    paddle_price_topup_1000: str = ""
     # Automatic top-up: the server-side API key that charges the saved card, and the $0
     # monthly price whose checkout saves it. Without both, it isn't offered.
     paddle_api_key: str = ""

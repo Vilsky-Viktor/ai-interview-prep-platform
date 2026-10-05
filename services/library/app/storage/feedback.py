@@ -4,35 +4,8 @@ from sqlalchemy import func, select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import IntegrityError
 
-from app.models.feedback import PreparationRating, QuestionRating, QuestionReport
-from app.storage import stats
+from app.models.feedback import QuestionRating, QuestionReport
 from app.storage.db import Session
-
-
-async def rate_preparation(set_id: uuid.UUID, user_id: str, value: int) -> None:
-    """Sets the user's rating; rating again changes it."""
-    statement = (
-        insert(PreparationRating)
-        .values(set_id=set_id, user_id=user_id, value=value)
-        .on_conflict_do_update(
-            index_elements=[PreparationRating.set_id, PreparationRating.user_id],
-            set_={"value": value},
-        )
-    )
-
-    async with Session() as session:
-        await session.execute(statement)
-        await stats.recount(session, set_id)
-        await session.commit()
-
-
-async def my_preparation_rating(set_id: uuid.UUID, user_id: str) -> int | None:
-    query = select(PreparationRating.value).where(
-        PreparationRating.set_id == set_id, PreparationRating.user_id == user_id
-    )
-
-    async with Session() as session:
-        return await session.scalar(query)
 
 
 async def rate_question(question_id: uuid.UUID, user_id: str, value: int) -> None:

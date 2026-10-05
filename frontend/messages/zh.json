@@ -2,9 +2,6 @@
   "settings": {
     "title": "设置",
     "signIn": "登录后即可更改设置。",
-    "general": "通用",
-    "billing": "账单",
-    "referral": "邀请",
     "language": "语言",
     "languageNote": "用于界面和导师回复，也是新学习包和面试的默认语言。你可以用任何受支持的语言生成它们。",
     "languageFailed": "无法更改语言，请重试。",
@@ -14,13 +11,12 @@
     "downloadFailed": "无法准备你的数据，请重试。",
     "delete": "删除账户",
     "searchLanguage": "搜索语言",
-    "noLanguage": "未找到语言。",
-    "history": "账单记录",
-    "historyNote": "每一笔点数收支，最新的在前。"
+    "noLanguage": "未找到语言。"
   },
   "userMenu": {
     "signIn": "登录",
     "account": "账户",
+    "adminZone": "管理区",
     "settings": "设置",
     "signOut": "退出登录",
     "theme": "主题",
@@ -34,17 +30,15 @@
     "main": "主菜单",
     "legal": "法律信息",
     "pricing": "价格",
-    "privacy": "隐私政策",
+    "privacy": "隐私",
     "terms": "条款",
     "back": "返回",
-    "create": "创建",
-    "explore": "探索",
-    "myKits": "我的学习包",
     "hiring": "招聘",
     "pricingLink": "价格",
     "faq": "常见问题",
     "contact": "联系我们",
-    "about": "关于我们"
+    "about": "关于我们",
+    "practice": "免费练习"
   },
   "signIn": {
     "with": "登录方式：",
@@ -80,37 +74,89 @@
     "notFoundText": "该页面不存在或已被删除。"
   },
   "home": {
-    "tagline": "AI 智能体陪你练习，直到你充满信心。",
-    "preparingFor": "正在准备",
-    "words": ["面试", "认证考试", "考试", "测试", "晋升"],
-    "widest": "认证考试",
-    "mark": "？"
+    "title": "面试每一位候选人\n招到真正的人才",
+    "text": "根据你的职位描述生成限时面试。每位候选人的题目都不同，也没有时间去问 AI。每位候选人 $1 起。"
   },
-  "goal": {
-    "placeholder": "粘贴职位描述，或说说你想学什么…",
-    "label": "你在为什么做准备？",
-    "submit": "生成学习包",
-    "failed": "无法开始生成，请重试。",
-    "seePlans": "充值"
+  "start": {
+    "placeholder": "粘贴职位描述，或描述这个职位以及候选人应该掌握的内容",
+    "description": "职位描述",
+    "submit": "创建面试",
+    "whichCompany": "这个面试是为哪家公司创建的？",
+    "firstCompany": "你的公司叫什么？",
+    "newCompany": "新公司",
+    "companyName": "公司名称",
+    "freeCandidates": "你的第一家公司可以免费面试前 {count, plural, other {# 位候选人}}。",
+    "back": "编辑描述",
+    "continue": "继续",
+    "starting": "正在开始…",
+    "failed": "无法开始面试，请重试。"
   },
-  "membership": {
-    "signIn": "登录后加入",
-    "leave": "退出",
-    "join": "加入练习"
+  "superadmin": {
+    "fixNow": "立即修正",
+    "fixing": "正在修正…",
+    "dismiss": "忽略",
+    "fixSent": "已发送给校验程序，稍后将被修正或替换。",
+    "actionFailed": "操作失败，请重试。",
+    "quality": "质量",
+    "flagged": "已标记",
+    "replaced": "已替换",
+    "noFlagged": "目前没有被标记的题目。",
+    "noReplaced": "还没有被替换的题目。",
+    "answers": "{count, plural, other {# 次作答}}",
+    "right": "正确率 {percent}%",
+    "reports": "{count, plural, =0 {无举报} other {# 条举报}}",
+    "kinds": {
+      "template": "模板",
+      "interview": "公司面试"
+    },
+    "flags": {
+      "wrong_key": "答案可能有误",
+      "rewrite": "需要新题目",
+      "weak_options": "选项需要改进"
+    },
+    "zone": "管理区",
+    "templates": "模板",
+    "new": "新模板",
+    "createTitle": "创建模板",
+    "placeholder": "粘贴职位说明，或描述这个职位以及该职位的人应该掌握的内容",
+    "description": "职位说明",
+    "create": "生成",
+    "createFailed": "无法开始创建模板，请重试。",
+    "text": "按职位划分的现成面试，适用于公司和人才。",
+    "deleteLabel": "删除 {title}",
+    "deleteTitle": "删除此模板？",
+    "deleteText": "其主题和题目将被删除。公司已基于它创建的面试会保留。",
+    "deleteFailed": "无法删除模板，请重试。"
+  },
+  "templates": {
+    "title": "模板",
+    "empty": "还没有模板。",
+    "topics": "{count, plural, other {# 个主题}}",
+    "search": "按职位或主题搜索",
+    "searchAction": "搜索",
+    "level": "级别：{level}",
+    "anyLevel": "所有级别",
+    "allLanguages": "所有语言",
+    "languages": "{count, plural, other {# 种语言}}",
+    "noMatches": "没有匹配的模板。",
+    "use": "使用模板",
+    "using": "正在开始…",
+    "useFailed": "无法从此模板开始面试，请重试。",
+    "warningTitle": "模板用于试用 prepza。",
+    "warning": "人才会用模板练习，因此候选人可能已经知道这些题目。正式招聘时，请根据你的职位描述创建面试。",
+    "text": "按职位划分的现成面试。选一个作为面试的起点，之后可以修改。"
   },
   "billing": {
     "paid": "已收到付款，稍后会显示在这里。",
     "checkoutFailed": "无法打开付款页面，请重试。",
     "credits": "{count, plural, other {# 点数}}",
-    "bonus": "+{count, number} 赠送",
     "topUp": "充值",
-    "balance": "可用点数：{count}。充值",
-    "balanceLow": "可用点数：{count}，即将用完。充值",
     "low": "即将用完",
     "creditsWord": "{count, plural, other {点数}}",
     "topUpTitle": "充值：{name}",
-    "topUpNote": "$1 可购买 100 点数，金额越大赠送越多。点数永不过期。",
-    "customAmount": "自定义金额"
+    "topUpNote": "每次充值按整位候选人购买；充值越多，每位候选人越便宜。点数永不过期。",
+    "candidates": "{count, plural, other {# 位候选人}}",
+    "each": "每位 {price}"
   },
   "deleteAccount": {
     "title": "删除你的账户？",
@@ -120,83 +166,15 @@
     "deleted": "你的账户已删除。",
     "failed": "无法删除你的账户，请重试。"
   },
-  "levels": {
-    "basic": "基础",
-    "medium": "中等",
-    "hard": "困难"
-  },
-  "visibility": {
-    "public": "公开",
-    "private": "私密"
-  },
-  "library": {
-    "title": "公开学习包",
-    "search": "搜索标题和主题",
-    "searchAction": "搜索",
-    "noMatches": "没有匹配的学习包。",
-    "empty": "还没有公开的学习包。",
-    "level": "难度：{level}",
-    "anyLevel": "全部",
-    "languages": "{count, plural, other {# 种语言}}",
-    "sortBy": "排序方式：{sort}",
-    "sort": {
-      "date": "日期",
-      "rating": "评分",
-      "joiners": "加入人数"
-    }
-  },
-  "preparations": {
-    "title": "我的学习包",
-    "new": "新学习包",
-    "signIn": "登录后查看你的学习包。",
-    "empty": "还没有学习包。创建第一个，或从公开资料库中挑选一个。",
-    "topics": "{count, plural, other {# 个主题}}",
-    "created": "创建于 {date}",
-    "metaTitle": "学习包",
-    "metaDescription": "{title} 面试准备：{count, plural, other {# 个主题}}的选择题，并提供练习轮次和证书。",
-    "history": "历史",
-    "page": "学习包页面",
-    "rounds": "练习轮次",
-    "deleteLabel": "删除 {title}",
-    "deleteTitle": "删除 {title}？",
-    "deleteText": "其主题和题目将被删除，所有加入者都将失去访问权限。此操作无法撤销。",
-    "deleteFailed": "无法删除学习包，请重试。",
-    "mastered": "已掌握",
-    "masteredTitle": "已掌握：每个主题都有证书",
-    "owner": "所有者",
-    "ratingTitle": "平均评分和评分人数",
-    "rated": "感谢你的评分",
-    "ratingUpdated": "评分已更新",
-    "ratingFailed": "无法保存你的评分，请重试。",
-    "rateIt": "评分",
-    "rate": "评 {value} 分（满分 {scale}）",
-    "public": "公开",
-    "nowPublic": "已加入公开资料库",
-    "nowPrivate": "已设为私密",
-    "visibilityFailed": "无法更改可见性，请重试。"
-  },
   "share": {
-    "share": "分享",
-    "title": "分享学习包",
-    "public": "任何拥有链接的人都可以查看此学习包。",
-    "private": "我们会通过邮件发送邀请链接，只有该邮箱地址可以接受。",
-    "email": "邮箱",
-    "send": "发送",
     "sent": "邀请已发送至 {email}",
     "checkEmail": "请检查邮箱地址后重试。",
     "failed": "无法发送邀请。",
-    "joined": "已加入",
-    "undelivered": "未送达",
-    "invited": "已邀请",
     "wrongEmail": "此邀请发送给了另一个邮箱地址。",
     "acceptFailed": "无法接受邀请，请重试。",
-    "signIn": "请使用受邀邮箱登录以加入此学习包。",
     "invalid": "此邀请已失效。",
     "invitedToJoin": "你受邀加入。",
-    "open": "打开学习包",
-    "join": "加入学习包",
-    "mismatch": "邮箱不匹配。请使用受邀邮箱登录后加入。",
-    "inviteTitle": "分享邀请"
+    "mismatch": "邮箱不匹配。请使用受邀邮箱登录后加入。"
   },
   "reportReasons": {
     "wrong_answer": "标记的答案是错误的",
@@ -215,6 +193,18 @@
     "reports": "举报",
     "showReports": "查看举报（{count}）",
     "regenerate": "重新生成",
+    "manage": "管理题目",
+    "wrongAnswer": "答案有误",
+    "checking": "正在检查…",
+    "markedWrong": "谢谢。我们正在检查，之后会修正或替换。",
+    "markWrongFailed": "无法提交检查，请重试。",
+    "ofCount": "/ {count, number}",
+    "per": "每",
+    "candidate": "候选人",
+    "showOptions": "显示答案选项",
+    "hideOptions": "隐藏答案选项",
+    "correct": "正确答案",
+    "wrong": "错误答案",
     "regenerating": "正在重新生成…",
     "regenerated": "题目已重新生成",
     "regenerateFailed": "无法重新生成题目，请重试。",
@@ -227,79 +217,27 @@
     "selectReason": "选择原因",
     "details": "详细说明",
     "showLess": "收起",
+    "more": "还有 {count, number} 个",
     "showAll": "显示全部",
     "limitRange": "请输入 1 到 {count} 之间的数字。",
     "limitFailed": "无法保存上限。",
     "limit": "题目上限",
-    "of": "/",
     "count": "{count, plural, other {道题}}",
-    "loadFailed": "无法加载题目。"
-  },
-  "certificate": {
-    "title": "证书",
-    "metaDescription": "{name} 以 {score}% 的成绩完成了 {topic}。",
-    "heading": "成就证书",
-    "for": "表彰其成功完成：",
-    "finalScore": "最终成绩",
-    "issued": "颁发日期",
-    "howTo": "如何获得证书"
+    "loadFailed": "无法加载题目。",
+    "yourAnswer": "你的答案"
   },
   "rounds": {
-    "title": "练习轮次",
-    "rounds": "练习轮次",
-    "compare": "比较",
-    "compareTitle": "比较练习轮次",
     "answered": "已回答",
     "correct": "正确",
     "incorrect": "错误",
     "notAnswered": "未回答",
-    "correctAnswer": "正确答案",
-    "yourAnswer": "你的答案",
-    "askFollowUp": "继续提问",
-    "followUp": "追问",
-    "followUpPlaceholder": "继续提问…",
-    "replyFailed": "无法获取回复，请重试。",
-    "firstRound": "你在这个主题的第一轮练习",
-    "sameAsLast": "与上一轮相同",
-    "change": "比上一轮 {change} 分",
-    "topicAnswered": "主题：已回答 {answered}/{total} 道题",
-    "answeredOf": "已回答 {answered}/{total}",
-    "finalScore": "最终成绩",
-    "certificate": "证书",
-    "history": "历史",
-    "preparationPage": "学习包页面",
-    "noRounds": "还没有练习轮次。",
-    "selectToCompare": "选择以比较",
-    "grade": "等级",
-    "continue": "继续",
-    "start": "开始",
     "finish": "结束",
     "finishing": "正在结束…",
-    "finishRound": "结束本轮",
-    "deleteRound": "删除本轮",
-    "finishTitle": "结束本轮练习？",
-    "deleteTitle": "删除本轮练习？",
-    "unscored": "未回答的题目不计分。",
-    "noMore": "你将无法继续回答题目。",
-    "cantUndo": "此操作无法撤销。",
-    "deleteFailed": "无法删除本轮，请重试。",
-    "finishFailed": "无法结束本轮，请重试。",
-    "startFailed": "无法开始本轮，请重试。",
-    "answerFailed": "无法保存你的答案，请重试。",
-    "signIn": "登录后继续本轮练习。",
-    "missing": "此练习轮次不存在。",
-    "allAnswered": "你已回答本轮的所有题目。",
     "next": "下一题",
-    "progress": "为获得证书已回答的题目",
-    "nextFailed": "无法加载下一题，请重试。",
-    "submitFailed": "无法提交你的答案，请重试。",
-    "freeTurns": "此题还可免费向导师提问 {count, plural, other {# 次}}",
-    "paidTurns": "此题之后每次提问消耗 {count, plural, other {# 点数}}",
-    "buyCertificate": "获取证书 · {count} 点数",
-    "makeItYours": "在为特定职位做准备？粘贴职位描述，获取为它量身定制的学习包。",
-    "makeItYoursAction": "定制专属学习包"
+    "submitFailed": "无法提交你的答案，请重试。"
   },
   "session": {
+    "toTest": "前往面试",
     "startFailed": "无法开始面试，请重试。",
     "finishFailed": "无法结束面试，请重试。",
     "continueFailed": "无法继续，请重试。",
@@ -351,17 +289,7 @@
     "changes": "主题修改",
     "tooMany": "最多选择 {max} 个主题，或描述如何合并它们。",
     "apply": "应用修改",
-    "approve": "确认并生成",
-    "approvePrice": "批准并生成 · {count} 点数",
-    "unfinished": "未完成"
-  },
-  "generationStatus": {
-    "queued": "生成中",
-    "running": "生成中",
-    "awaiting_review": "审阅主题",
-    "done": "完成",
-    "failed": "失败",
-    "cancelled": "已取消"
+    "approve": "确认并生成"
   },
   "candidateStatus": {
     "invited": "已邀请",
@@ -369,7 +297,9 @@
     "in_process": "进行中",
     "finished": "已完成",
     "deleted": "已删除",
-    "expired": "已过期"
+    "expired": "已过期",
+    "passed": "已通过",
+    "flagged": "已标记"
   },
   "roles": {
     "owner": "所有者",
@@ -385,17 +315,17 @@
     "owner": "所有者",
     "interviewCount": "{count, plural, other {# 场面试}}",
     "interviews": "面试",
+    "templates": "模板",
     "admins": "管理员",
     "referrals": "邀请",
     "new": "新公司",
-    "newText": "创建公司以生成面试并邀请候选人。",
     "name": "公司名称",
     "create": "创建",
     "createFailed": "无法创建公司，请重试。",
     "signInJoin": "请使用受邀邮箱登录以加入此公司。",
     "open": "打开公司",
     "join": "加入公司",
-    "creditsLeft": "{count, plural, other {点数可用}}",
+    "creditsLeft": "{count, plural, other {点数}}",
     "creditsLow": "即将用完：充值后才能继续邀请候选人。",
     "timeLeft": "剩余时间：{time}",
     "removeLabel": "移除 {name}",
@@ -403,7 +333,12 @@
     "removeText": "其面试和邀请将被删除。",
     "remove": "移除",
     "removeFailed": "无法移除公司。",
-    "page": "公司"
+    "page": "公司",
+    "logo": "标志",
+    "uploadLogo": "上传标志",
+    "changeLogo": "更换标志",
+    "removeLogo": "移除标志",
+    "logoFailed": "无法保存标志。"
   },
   "candidates": {
     "scorecard": "结果",
@@ -415,6 +350,11 @@
     "copies": "{count, plural, other {尝试复制 # 次}}",
     "fastAnswers": "{count, plural, other {过快作答 # 次}}",
     "empty": "还没有邀请候选人。",
+    "noMatches": "没有匹配的候选人。",
+    "search": "按邮箱搜索候选人",
+    "searchAction": "搜索",
+    "status": "状态：{status}",
+    "anyStatus": "所有状态",
     "progress": "进度",
     "grade": "等级",
     "resend": "重新发送邀请",
@@ -432,11 +372,27 @@
       "date": "日期"
     }
   },
+  "interviewStatus": {
+    "new": "新",
+    "in_process": "进行中",
+    "hired": "已录用"
+  },
   "interviews": {
     "title": "面试",
     "interview": "面试",
     "candidates": "候选人",
     "new": "新面试",
+    "createTitle": "创建面试",
+    "try": "以候选人身份试用",
+    "newCandidate": "新候选人",
+    "linkTitle": "分享链接",
+    "linkText": "用于招聘广告：任何拥有链接的人都可以参加面试。每人按受邀候选人同样计费。",
+    "linkFailed": "无法更改链接，请重试。",
+    "passMark": "及格线",
+    "passMarkLabel": "及格线（百分比）",
+    "markHired": "标记为已录用",
+    "tryLabel": "以候选人身份试用 {title}",
+    "tryFailed": "无法开始预览，请重试。",
     "generating": "正在生成…",
     "fallbackTitle": "面试",
     "continueGeneration": "继续生成",
@@ -455,12 +411,22 @@
     "adminEmail": "管理员邮箱",
     "addAdmin": "添加管理员",
     "adminFailed": "无法邀请该管理员，请重试。",
-    "candidateEmail": "候选人邮箱",
     "invite": "邀请",
     "jobDescription": "职位描述",
     "pasteJob": "粘贴职位描述：岗位、任职要求和加分项…",
     "generate": "生成面试",
-    "startFailed": "无法开始面试，请重试。"
+    "startFailed": "无法开始面试，请重试。",
+    "candidateEmails": "候选人邮箱",
+    "emailsHint": "一个或多个邮箱，用逗号或换行分隔",
+    "uploadFile": "上传文件",
+    "invitedMany": "已邀请 {count} 位候选人",
+    "skip": {
+      "invalid": "{count, plural, other {# 个邮箱无效}}。",
+      "limit": "{count, plural, other {# 个邮箱}}暂时超出了你的发送上限。请一小时后重试。",
+      "no_credits": "{count, plural, other {# 位候选人未被邀请}}：点数不足。充值后即可邀请。",
+      "failed": "{count, plural, other {# 份邀请}}无法发送。请重试。"
+    },
+    "talents": "推荐人才"
   },
   "invite": {
     "signIn": "请使用受邀邮箱登录以参加此面试。",
@@ -473,7 +439,7 @@
     "timeRunsOut": "题目时间用完后将计为错误，并自动进入下一题。即使离开页面，计时也会继续。",
     "unanswered": "未回答的题目计为错误。",
     "saved": "进度会自动保存：再次打开此链接即可继续。",
-    "stay": "请停留在此页面：离开页面或复制内容都会被记录（<link>我们如何处理</link>）。",
+    "stay": "请停留在此页面：离开页面或复制内容都会被记录（<link>隐私</link>）。",
     "finished": "此面试已结束。",
     "continue": "继续",
     "start": "接受并开始",
@@ -497,29 +463,18 @@
   },
   "pricing": {
     "title": "价格",
-    "intro": "按需付费：$1 可购买 100 点数，点数永不过期。无需订阅。",
-    "learners": "面向学习者",
-    "welcome": "注册时",
-    "referrals": "邀请",
-    "referralsNote": "在设置中分享你的链接，或在公司的“邀请”标签页分享公司链接。",
-    "referral": "你邀请的朋友首次充值",
-    "companyReferral": "你邀请的公司首次充值 ${min} 或以上",
-    "each": "每方 {count, number} 点数",
-    "credits": "{count, plural, other {# 点数}}",
-    "companies": "面向公司",
-    "kit": "根据职位描述生成的专属学习包",
-    "chat": "AI 导师：每道题可免费提问 {free, plural, other {# 次}}，之后",
-    "perTurn": "每次 {count, plural, other {# 点数}}",
-    "ownCertificate": "自己的或共享学习包的证书",
-    "publicCertificate": "公开学习包的证书",
-    "publicPractice": "在公开学习包中练习（每天 {count, plural, other {# 个新主题}}）",
-    "draftTopics": "根据你的职位描述或目标拟定的主题",
-    "gift": "免费 {count, number} 点数",
+    "intro": "按候选人付费。生成面试免费，没有订阅。",
+    "test": "生成面试",
     "free": "免费",
-    "interview": "生成面试",
-    "candidate": "每位完成面试并至少回答一道题的候选人",
-    "companyWelcome": "你的第一家公司",
-    "openCompanies": "公司",
+    "candidate": "每位至少回答一道题的候选人",
+    "candidateVolume": "使用 ${from, number} 及以上充值所得的点数",
+    "perCandidate": "每位候选人 ${dollars, number}",
+    "welcome": "你的前 {count, plural, other {# 位候选人}}",
+    "credits": "$1 = 100 点数，点数永不过期。",
+    "referrals": "邀请",
+    "referralsNote": "在公司的邀请标签页中分享公司链接。",
+    "companyReferral": "你邀请的公司首次充值",
+    "each": "每方 {count, number} 点数",
     "topUp": "充值"
   },
   "site": {
@@ -528,22 +483,6 @@
   "legal": {
     "updated": "最后更新",
     "englishOnly": "本文件仅提供英文版本。"
-  },
-  "credits": {
-    "noHistory": "暂无记录。",
-    "reasons": {
-      "welcome": "欢迎礼",
-      "topup": "充值",
-      "kit": "学习包",
-      "candidate": "候选人",
-      "certificate": "证书",
-      "author_share": "你的公开学习包带来了一份证书",
-      "chat": "向导师提问",
-      "refund": "退款",
-      "chargeback": "银行撤销了付款",
-      "chargeback_reversed": "被撤销的付款已恢复",
-      "referral": "邀请奖励"
-    }
   },
   "autoTopUp": {
     "title": "自动充值",
@@ -566,43 +505,42 @@
     "label": "生成语言"
   },
   "referral": {
-    "title": "邀请朋友",
-    "note": "朋友首次充值后，你们双方各得 {reward, number} 点数。",
     "companyTitle": "邀请其他公司",
-    "companyNote": "新公司充值 ${min} 或以上后，两家公司各得 {reward, number} 点数。",
+    "companyNote": "对方首次充值（任意金额）后，你们双方各得 {reward, number} 点数。",
+    "deletedCompany": "已删除的公司",
+    "credits": "+{count, number} 点数",
     "rewarded": "{count, plural, =0 {还没有奖励。} other {目前已获得 # 次奖励。}}"
   },
   "topUp": {
     "title": "充值",
     "intro": "$1 可购买 100 点数，点数永不过期。",
     "signIn": "登录后为你的点数充值。",
-    "yours": "个人余额",
-    "personal": "个人点数",
-    "personalNote": "用于你的学习包、AI 导师和证书。",
     "companies": "公司点数",
     "companiesNote": "用于各公司的候选人。",
+    "noCompany": "点数属于公司。请先创建公司，再在这里充值。",
+    "createCompany": "创建公司",
     "pricing": "价格"
   },
   "landing": {
     "more": "如何运作",
     "how": {
-      "title": "三步就绪",
+      "title": "三步获得首批结果",
       "paste": {
-        "title": "粘贴或描述",
-        "text": "一份职位描述、一份教学大纲，或你想学的技能和技术。"
+        "title": "粘贴职位描述",
+        "text": "任何职位，任何语言。\nprepza 会找出候选人必须掌握的内容并建议主题。"
       },
       "review": {
-        "title": "确认计划",
-        "text": "AI 智能体找出重点并提出主题。\n你可以保留、重命名或修改。"
+        "title": "检查主题",
+        "text": "保留、重命名或修改它们。\n在你批准之前不会生成任何题目。"
       },
-      "practice": {
-        "title": "练到有信心为止",
-        "text": "每个主题都有专属题目。\n按轮次练习，看着进度不断提升。"
+      "invite": {
+        "title": "邀请候选人",
+        "text": "粘贴名单、上传文件或分享一个链接。\n提醒会自动发出。按分数排名，看出谁真正懂这份工作。"
       }
     },
     "control": {
-      "title": "学什么由你决定",
-      "text": "在你确认主题之前，不会生成任何题目。取消勾选已经掌握的内容，重命名主题，编辑子主题，或者直接告诉 AI 要改什么，剩下的交给它。",
+      "title": "考察什么由你决定",
+      "text": "在你批准主题之前不会生成任何题目。取消职位不需要的主题，重命名主题，编辑子主题，或者告诉 AI 要改什么。",
       "topics": {
         "design": "系统设计",
         "sql": "内容营销",
@@ -620,43 +558,9 @@
       "newTopic": "YouTube 广告",
       "newSubtopics": ["广告格式", "受众定向", "衡量观看量"]
     },
-    "gaps": {
-      "title": "找出薄弱点的练习",
-      "text": "每一轮都会把这个主题的所有题目重新出一遍，并从上次答错的题开始。对比各轮成绩，看着薄弱点逐渐补上。",
-      "items": {
-        "first": {
-          "question": "哪个指标显示谁把广告看完了？",
-          "wrong": "点击率",
-          "right": "完整观看率"
-        },
-        "second": {
-          "question": "缓存主要能减少什么？",
-          "wrong": "存储成本",
-          "right": "响应时间"
-        }
-      }
-    },
-    "tutor": {
-      "title": "每道题都有辅导",
-      "text": "每次作答后，你会立刻看到正确选项。不明白为什么对？问问 AI 辅导老师，想问多深都可以。",
-      "question": "客户因为发货延迟很不满。你首先该做什么？",
-      "options": {
-        "first": "解释延迟的原因",
-        "second": "承认问题并道歉",
-        "third": "马上提供折扣",
-        "fourth": "把问题转给经理"
-      },
-      "ask": "为什么不先解释？",
-      "answer": "先表示理解：客户觉得自己被倾听后，才愿意听你解释原因。"
-    },
-    "proof": {
-      "title": "清楚知道自己何时准备好",
-      "text": "每个主题都有一条通往证书的进度条。拿到证书，这个主题就算掌握了。",
-      "again": "重新开始"
-    },
     "quality": {
-      "title": "自动变好的题目",
-      "text": "赞、踩和举报会暴露质量差的题目。AI 校验器会自动修正或替换它们，学习包的所有者也可以亲自重新生成任何题目。",
+      "title": "会自我修正的题目",
+      "text": "候选人的作答、评分和举报会暴露有问题的题目。AI 校验程序会自动修正或替换它们，你也可以自己重新生成任何题目。",
       "items": {
         "good": "数据库索引能加快什么？",
         "weak": "哪种编程语言最好？",
@@ -665,45 +569,89 @@
       "comment": "这要看项目，没有唯一的正确答案。",
       "list": "主题题目"
     },
-    "share": {
-      "title": "分享或公开",
-      "text": "通过邮件邀请朋友或同事和你一起练习学习包，或者把它发布到公开资料库，让所有为同一目标做准备的人都能使用。",
-      "private": "私下分享",
-      "public": "公开分享",
-      "browse": "浏览资料库"
+    "try": {
+      "title": "在候选人之前亲自试一试",
+      "text": "参加类似职位的免费练习面试，或者在邀请任何人之前，以候选人身份打开你自己的面试。",
+      "browse": "浏览练习面试",
+      "topic": "系统设计",
+      "question": "放在数据库前面的缓存主要减少了什么？",
+      "options": {
+        "a": "数据库的大小",
+        "b": "数据库被读取的频率",
+        "c": "表的数量",
+        "d": "备份所需的时间"
+      },
+      "points": {
+        "practice": "多种职位的免费练习面试",
+        "preview": "以候选人身份体验你自己的面试"
+      }
+    },
+    "link": {
+      "title": "招聘广告只需一个链接",
+      "text": "把面试链接放进你的招聘广告。每位申请者都会立即参加面试，并按分数排名出现在你的候选人列表中。",
+      "note": "任何拥有该链接的人都可以参加面试。",
+      "points": {
+        "anywhere": "放在招聘网站、LinkedIn 或你的网站上",
+        "off": "职位招满后即可关闭"
+      }
     },
     "companies": {
-      "title": "在招聘？公平地考核候选人",
-      "text": "把职位描述变成限时面试，邀请候选人参加并评估他们。",
+      "title": "看出谁真正懂这份工作",
+      "text": "候选人通过你的邮件邀请参加面试。他们边答题，分数边更新，并按你的及格线显示为绿色或红色。",
       "points": {
         "own": "每位候选人题目各不相同",
         "timed": "每道题都有倒计时",
         "flags": "标记作答过快、离开页面或复制",
-        "private": "候选人看不到分数"
+        "private": "候选人永远看不到自己的分数"
       },
       "candidate": "候选人",
       "score": "分数",
       "rushed": "作答过快",
       "left": "离开过页面",
-      "start": "开始招聘"
+      "role": "后端开发者 · 及格线 {mark}%"
+    },
+    "reports": {
+      "title": "一键分享结果",
+      "text": "为一位候选人或整个列表生成清晰的 PDF 报告。可以下载，也可以直接从 prepza 发送给招聘经理。",
+      "points": {
+        "pdf": "一位候选人或全部候选人",
+        "share": "通过邮件发送 PDF 或在聊天应用中分享"
+      }
+    },
+    "brand": {
+      "title": "你的品牌，经过验证",
+      "text": "从第一封邮件到最后一道题，候选人都能看到你的标志，还有一个表明你的公司真实存在的认证标记。",
+      "role": "后端开发者",
+      "points": {
+        "email": "邀请邮件中有你的标志",
+        "interview": "显示在候选人参加的面试上",
+        "report": "显示在每份 PDF 报告上",
+        "verified": "通过团队的工作邮箱验证"
+      }
+    },
+    "talent": {
+      "title": "获取人才推荐",
+      "text": "我们免费练习面试中的高分者，按你的职位推荐给你。免费。",
+      "suggested": "为后端开发者推荐",
+      "score": "分数",
+      "points": {
+        "free": "对你和人才都免费",
+        "practice": "通过限时面试评分",
+        "first": "只计算第一次尝试",
+        "link": "由他们自己选择是否被推荐"
+      }
     },
     "languages": {
-      "title": "用你的语言",
-      "text": "prepza 支持 {count} 种语言。用一种语言粘贴职位描述，用另一种语言练习。"
+      "title": "任何职位，任何语言",
+      "text": "prepza 支持 {count} 种语言。用一种语言粘贴职位描述，用另一种语言面试候选人。"
     },
     "pricing": {
-      "title": "只为有效的结果付费",
-      "text": "没有订阅，也没有套餐。需要时再充值：点数永不过期，失败的操作不收费。",
+      "title": "按候选人付费",
+      "text": "面试和你的前 {free, plural, other {# 位候选人}}都免费。之后只为作答的候选人付费，没有订阅。",
       "see": "查看价格",
-      "company": "Acme Inc.",
-      "personal": "用于你的学习包和 AI 辅导老师。",
-      "learner": "学员点数"
-    },
-    "referrals": {
-      "title": "成为推广伙伴，赚取点数",
-      "text": "用你的链接邀请朋友或其他公司。对方首次充值后，你们双方都能获得点数。",
-      "whereLearner": "你的链接在 {settings} → {referral}。",
-      "whereCompany": "公司的链接在 {hiring} → 你的公司 → {referrals}。"
+      "perCandidate": "每位候选人",
+      "base": "按量付费",
+      "volume": "充值 ${from, number} 起"
     },
     "faq": {
       "title": "还有疑问？",
@@ -711,8 +659,8 @@
       "read": "前往常见问题"
     },
     "ready": {
-      "title": "准备好开始了吗？",
-      "start": "立即开始"
+      "title": "准备好面试你的第一批候选人了吗？",
+      "start": "创建面试"
     }
   },
   "faq": {
@@ -739,14 +687,15 @@
   },
   "about": {
     "title": "关于我们",
-    "intro": "prepza 帮助你充满信心地做好准备，也为企业提供一种简单、实惠的候选人考核方式。",
+    "intro": "prepza 帮助公司找到真正懂这份工作的人：根据你的职位描述生成公平的限时面试，价格任何团队都负担得起。任何准备面试的人也都可以免费练习。",
     "company": {
       "title": "我们为何而做",
-      "learners": "准备面试、考试或学习一项新技能，不该从几个小时的搜索开始。告诉 prepza 你的目标，它会帮你变成一份清晰的计划：真正重要的主题、每个主题的练习题，还有一位导师，把每个答案讲到你彻底明白为止。",
-      "companies": "对企业来说，我们希望招聘公平，并且任何团队都用得起，而不只是大公司。几分钟内就能把职位描述变成一场限时面试，为每位候选人生成专属题目，只为真正参加面试的候选人付费。"
+      "problem": "招聘往往依赖一份简历和一次愉快的交谈，而两者都可能误导人。真正有用的测评工具按大公司定价，要签年度套餐、按席位收费，所以大多数团队只能放弃。",
+      "approach": "prepza 能在几分钟内把任何职位的职位描述变成限时面试。每位候选人都有自己的题目，你能看出谁懂这份工作以及原因，而且只为真正参加面试的候选人付费。",
+      "practice": "我们也希望每个人都能免费准备面试。任何人都可以参加我们针对某个职位的练习面试，查看自己的成绩和所有正确答案，并免费再次练习。表现出色的人可以选择被推荐给招聘类似职位的公司。"
     },
     "founder": {
-      "quote": "每次准备面试或想学点新东西时，我花在寻找好资料上的时间都比真正学习的时间还多。每个网站只讲一部分，没有一个真正符合我的需要。所以我做了 prepza：一个我曾经多么希望拥有的工具，从你的目标出发，一步步带你抵达。希望它能为你省下那些本可以为我省下的时间。",
+      "quote": "好的招聘不应该是预算充足的大公司的特权。我做 prepza，是为了让任何团队都能在几分钟内把职位描述变成公平的面试，看出谁真正懂这份工作，并且只为参加面试的候选人付费。希望它能帮你更快找到合适的人。",
       "role": "prepza 独立创始人"
     }
   },
@@ -757,7 +706,6 @@
     "kinds": {
       "question_flagged": "{count, plural, =1 {“{title}”中关于“{topic}”的一道题目被标记待审核。} other {“{title}”中有 # 道题目被标记待审核。}}",
       "question_fixed": "{count, plural, =1 {AI 修正了“{title}”中关于“{topic}”的被标记题目。} other {AI 修正了“{title}”中 # 道被标记的题目。}}",
-      "kit_ready": "你的学习包“{title}”已就绪。",
       "referral_rewarded": "你邀请的人完成了充值，你获得了 {credits} 点数。",
       "auto_top_up_charged": "自动充值已添加 {credits} 点数。",
       "auto_top_up_failed": "自动充值无法从银行卡扣款。请充值，以免余额不足。",
@@ -766,5 +714,77 @@
       "interview_ready": "面试“{title}”已就绪。",
       "interview_cancelled": "{title, select, none {一场面试} other {面试“{title}”}}已取消：主题审核等待时间过长。"
     }
+  },
+  "report": {
+    "download": "下载 PDF",
+    "passed": "已通过 · 及格线 {mark}%",
+    "notPassed": "未通过 · 及格线 {mark}%",
+    "notFinished": "尚未完成",
+    "share": "分享报告",
+    "fileName": "报告 {email}",
+    "failed": "无法生成 PDF 报告。",
+    "shareTitle": "分享报告",
+    "recipient": "收件人邮箱",
+    "send": "发送 <name>PDF</name>",
+    "sent": "报告已发送至 {email}",
+    "sendFailed": "无法发送报告。",
+    "orSummary": "或通过以下方式发送",
+    "via": "由 prepza 发送",
+    "candidatesFileName": "候选人 {title}",
+    "candidateCount": "{count, plural, other {# 位候选人}}",
+    "passMark": "及格线 {mark}%",
+    "progressOf": "已完成 {progress}%"
+  },
+  "practice": {
+    "title": "免费面试练习",
+    "intro": "通过限时面试为职位做练习，然后查看你的成绩和所有正确答案。完全免费。",
+    "about": "限时练习面试。完成后可查看你的成绩和所有正确答案。私密且免费。",
+    "pageTitle": "{title}：免费练习面试",
+    "pageDescription": "{title} 的免费 {level} 练习面试：{count, plural, other {# 个主题}}，限时作答，结束后查看你的成绩和所有正确答案。这是练习，不是真正的求职面试。",
+    "start": "开始练习",
+    "again": "再练一次",
+    "continue": "继续",
+    "history": "你的轮次",
+    "results": "练习结果",
+    "grade": "的题目答对",
+    "notFinished": "未完成",
+    "noRounds": "还没有轮次。",
+    "signIn": "登录后查看你的练习轮次。",
+    "startFailed": "无法开始练习，请重试。",
+    "gradeLabel": "成绩",
+    "questions": "{count, plural, other {# 道题}}",
+    "progressLabel": "进度",
+    "answeredLabel": "道题已作答"
+  },
+  "suggest": {
+    "title": "获得公司推荐",
+    "consent": "可选。招聘类似职位的公司可能会看到你的姓名、LinkedIn 和第一轮分数。你可以随时在设置中更改或撤回。",
+    "link": "LinkedIn 链接",
+    "share": "分享",
+    "saved": "你现在可以被推荐给公司了。",
+    "withdraw": "撤回",
+    "withdrawn": "你将不再被推荐给公司。",
+    "invalid": "请使用你的 LinkedIn 个人主页链接，例如 https://www.linkedin.com/in/your-name",
+    "failed": "无法保存，请重试。",
+    "shareAndStart": "同意并开始",
+    "startWithout": "不同意并开始"
+  },
+  "talents": {
+    "about": "在类似职位的面试练习中表现出色并同意被推荐的人才。",
+    "empty": "还没有推荐人才。",
+    "score": "分数",
+    "hide": "隐藏",
+    "hideFailed": "无法隐藏该人才，请重试。"
+  },
+  "verify": {
+    "verify": "验证",
+    "verified": "已验证：{domain}",
+    "title": "验证公司",
+    "text": "输入公司网站。所有者或管理员使用该网站域名的工作邮箱（例如 you@acme.com）登录后即完成验证；如果就是你，会立即验证。",
+    "website": "公司网站",
+    "save": "保存",
+    "done": "已验证：{domain}",
+    "pending": "已保存。所有者或管理员使用 {domain} 的邮箱登录后即完成验证。",
+    "failed": "无法保存网站。"
   }
 }

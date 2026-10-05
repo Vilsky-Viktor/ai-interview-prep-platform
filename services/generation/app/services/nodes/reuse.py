@@ -3,9 +3,8 @@ import math
 
 from prepza_common.constants import DEFAULT_LANGUAGE
 
-from app.config.settings import settings
-from app.constants.kinds import GenerationKind
 from app.constants.reuse import MAX_REUSE_SHARE
+from app.helpers.questions import topic_size
 from app.integrations import library, llm
 from app.models.state import State
 from app.schemas.library import ReuseIn
@@ -26,8 +25,8 @@ async def find_reused(state: State) -> dict:
     Reuse only saves cost, so any failure here means generating every question instead.
     """
     topics = state["topics"]
-    share = MAX_REUSE_SHARE.get(state.get("kind"), MAX_REUSE_SHARE[GenerationKind.INTERVIEW])
-    count = math.floor(settings.questions_per_topic * share)
+    share = MAX_REUSE_SHARE
+    count = math.floor(topic_size(state.get("template", False)) * share)
 
     try:
         embeddings = await llm.get_embeddings().aembed_documents(
@@ -58,6 +57,6 @@ async def find_reused(state: State) -> dict:
             logger.exception("Couldn't find questions to reuse")
             found = []
 
-        reused.append([question.model_dump() for question in found])
+        reused.append([question.model_dump(mode="json") for question in found])
 
     return {"topic_embeddings": embeddings, "reused": reused}

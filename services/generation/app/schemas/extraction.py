@@ -4,8 +4,8 @@ from pydantic import BaseModel, Field
 
 class JobExtraction(BaseModel):
     title: str = Field(
-        description="Short title for this preparation (max 60 characters), for example the "
-        "role and company, or the learning goal."
+        description="Short title for this test (max 60 characters), for example the role and "
+        "company."
     )
     requirements: list[str] = Field(
         description="Concrete, distinct requirements/qualifications extracted from the text."

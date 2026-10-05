@@ -1,0 +1,166 @@
+import base64
+import uuid
+from datetime import UTC, datetime
+
+import pytest
+from prepza_common.auth import current_user
+from prepza_common.user import User
+
+from app.integrations import rounds
+from app.main import app
+from app.models.companies import Company, Member
+from app.models.interviews import Interview
+from app.models.invites import CandidateInvite
+from app.routers import reports as reports_router
+from app.services import outbox as outbox_service
+from app.storage import companies, interviews, invites, reports
+
+COMPANY_ID = uuid.uuid4()
+INTERVIEW_ID = uuid.uuid4()
+INVITE_ID = uuid.uuid4()
+URL = f"/interviews/{INTERVIEW_ID}/candidates/{INVITE_ID}/report/email"
+PDF = base64.b64encode(b"%PDF-1.3 a report").decode()
+
+
+@pytest.fixture(autouse=True)
+def clear_overrides():
+    yield
+    app.dependency_overrides.clear()
+
+
+@pytest.fixture
+def queued(monkeypatch):
+    """A member's candidate; returns the events queued for notifications."""
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="bob", email="bob@example.com", email_verified=True, name="Bob"
+    )
+    invite = CandidateInvite(
+        id=INVITE_ID,
+        interview_id=INTERVIEW_ID,
+        email="ann@example.com",
+        token="token-ann",
+        status="finished",
+        created_at=datetime.now(UTC),
+    )
+    interview = Interview(
+        pass_mark=70,
+        id=INTERVIEW_ID,
+        company_id=COMPANY_ID,
+        generation_id=uuid.uuid4(),
+        set_id=uuid.uuid4(),
+        title="Backend",
+        language="en",
+    )
+    interview.invites = [invite]
+    company = Company(id=COMPANY_ID, name="Arcolabs", created_at=datetime.now(UTC))
+    company.members = [
+        Member(company_id=COMPANY_ID, user_id="bob", invited_email="bob@example.com", role="member")
+    ]
+    events = []
+
+    async def fake_interview(_interview_id):
+        return interview
+
+    async def fake_company(_company_id):
+        return company
+
+    async def fake_queue(data):
+        events.append(data)
+
+    async def allowed(*args):
+        return None
+
+    async def no_flush():
+        return None
+
+    monkeypatch.setattr(interviews, "get", fake_interview)
+    monkeypatch.setattr(companies, "get", fake_company)
+    monkeypatch.setattr(reports, "queue_email", fake_queue)
+    monkeypatch.setattr(reports_router, "hit_emails", allowed)
+    monkeypatch.setattr(reports_router, "get_redis", lambda: None)
+    monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
+
+    return events
+
+
+def test_a_member_emails_the_pdf_report_and_replies_go_to_them(client, queued):
+    response = client.post(URL, json={"email": "Boss@Example.com", "pdf": PDF})
+
+    assert response.status_code == 202
+    [event] = queued
+    assert (event["email"], event["sender"], event["reply_to"]) == (
+        "boss@example.com",
+        "Bob",
+        "bob@example.com",
+    )
+    assert (event["candidate"], event["company"], event["title"]) == (
+        "ann@example.com",
+        "Arcolabs",
+        "Backend",
+    )
+    assert event["pdf"] == PDF
+
+
+def test_only_a_pdf_is_emailed(client, queued):
+    not_pdf = base64.b64encode(b"<html>hello</html>").decode()
+
+    assert client.post(URL, json={"email": "boss@example.com", "pdf": not_pdf}).status_code == 422
+    assert client.post(URL, json={"email": "boss@example.com", "pdf": "%%%"}).status_code == 422
+    assert queued == []
+
+
+def test_the_tests_report_lists_every_candidate_best_first_without_deleted_ones(
+    client, queued, monkeypatch
+):
+    def invite(email, status):
+        return CandidateInvite(
+            id=uuid.uuid4(),
+            interview_id=INTERVIEW_ID,
+            email=email,
+            token=f"t-{email}",
+            status=status,
+            created_at=datetime.now(UTC),
+        )
+
+    everyone = [
+        invite("low@example.com", "finished"),
+        invite("gone@example.com", "deleted"),
+        invite("top@example.com", "finished"),
+    ]
+    grades = {"low@example.com": 40, "top@example.com": 90}
+
+    async def fake_all(_interview_id):
+        return everyone
+
+    async def fake_scores(invite_ids):
+        return {
+            str(row.id): {"progress": 100, "grade": grades[row.email], "finished": True}
+            for row in everyone
+            if row.id in invite_ids
+        }
+
+    monkeypatch.setattr(invites, "list_all_for_interview", fake_all)
+    monkeypatch.setattr(rounds, "invite_scores", fake_scores)
+
+    report = client.get(f"/interviews/{INTERVIEW_ID}/report").json()
+
+    assert (report["company"], report["pass_mark"]) == ("Arcolabs", 70)
+    assert [(row["email"], row["passed"]) for row in report["candidates"]] == [
+        ("top@example.com", True),
+        ("low@example.com", False),
+    ]
+
+
+def test_the_tests_report_is_emailed_as_a_candidates_report(client, queued):
+    response = client.post(
+        f"/interviews/{INTERVIEW_ID}/report/email", json={"email": "boss@example.com", "pdf": PDF}
+    )
+
+    assert response.status_code == 202
+    [event] = queued
+    assert (event["kind"], event["title"], event["filename"]) == (
+        "candidates",
+        "Backend",
+        "Candidates Backend.pdf",
+    )
+    assert "candidate" not in event

@@ -1,53 +1,37 @@
 import uuid
 
-from prepza_common.auth import current_user
-from prepza_common.user import User
-
-from app.constants.sets import SetKind, Visibility
-from app.main import app
-from app.models.sets import QuestionSet
-from app.storage import feedback, preparations
+from app.storage import feedback
+from tests.unit.test_internal import token
 
 QUESTION_ID = uuid.uuid4()
+AUTH = {"Authorization": f"Bearer {token()}"}
 
 
-def sign_in(uid="owner"):
-    app.dependency_overrides[current_user] = lambda: User(
-        uid=uid, email=f"{uid}@example.com", email_verified=True, name="Ann"
-    )
-
-
-def question_set():
-    return QuestionSet(
-        id=uuid.uuid4(), kind=SetKind.PREPARATION, owner_id="owner", visibility=Visibility.PRIVATE
-    )
-
-
-def test_owner_can_rate_and_read_question(client, monkeypatch):
+def test_a_candidate_rates_a_question_and_reads_it_back(client, monkeypatch):
     stored = {}
-
-    async def fake_get(question_id):
-        return question_set()
+    reviewed = []
 
     async def fake_rate(question_id, user_id, value):
-        stored["value"] = value
+        stored[user_id] = value
 
     async def fake_mine(question_id, user_id):
-        return stored.get("value")
+        return stored.get(user_id)
 
-    monkeypatch.setattr(preparations, "get_for_question", fake_get)
+    async def fake_review(question_id):
+        reviewed.append(question_id)
+
     monkeypatch.setattr(feedback, "rate_question", fake_rate)
     monkeypatch.setattr(feedback, "my_question_rating", fake_mine)
-    sign_in()
+    monkeypatch.setattr("app.routers.internal_feedback.review", fake_review)
+    url = f"/internal/questions/{QUESTION_ID}/rating"
 
-    empty = client.get(f"/questions/{QUESTION_ID}/rating")
-    put = client.put(f"/questions/{QUESTION_ID}/rating", json={"value": 1})
-    again = client.put(f"/questions/{QUESTION_ID}/rating", json={"value": -1})
-    saved = client.get(f"/questions/{QUESTION_ID}/rating")
+    empty = client.get(url, params={"user_id": "ann"}, headers=AUTH)
+    put = client.put(url, json={"user_id": "ann", "value": 1}, headers=AUTH)
+    again = client.put(url, json={"user_id": "ann", "value": -1}, headers=AUTH)
+    saved = client.get(url, params={"user_id": "ann"}, headers=AUTH)
 
     assert empty.json() == {"value": None}
-    assert put.status_code == 204
-    assert again.status_code == 204
+    assert (put.status_code, again.status_code) == (204, 204)
     assert saved.json() == {"value": -1}
-
-    app.dependency_overrides.clear()
+    # Every vote goes to the quality review, which may flag the question.
+    assert reviewed == [QUESTION_ID, QUESTION_ID]

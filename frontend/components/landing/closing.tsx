@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { MoreLink } from "@/components/landing/section"
 import { StartButton } from "@/components/landing/start-button"
 
-/** The landing page's last screen: a way back to the input, and a link to the FAQ. */
+/** The landing page's last screen: back to the job description box, and a link to the FAQ. */
 export async function Closing() {
   const t = await getTranslations("landing")
 

@@ -2,9 +2,6 @@
   "settings": {
     "title": "Impostazioni",
     "signIn": "Accedi per modificare le impostazioni.",
-    "general": "Generali",
-    "billing": "Fatturazione",
-    "referral": "Inviti",
     "language": "Lingua",
     "languageNote": "Per l'interfaccia e le risposte del tutor, e la lingua con cui iniziano i nuovi kit e colloqui. Puoi generarli in qualsiasi lingua disponibile.",
     "languageFailed": "Impossibile cambiare la lingua. Riprova.",
@@ -14,13 +11,12 @@
     "downloadFailed": "Impossibile preparare i tuoi dati. Riprova.",
     "delete": "Elimina account",
     "searchLanguage": "Cerca lingue",
-    "noLanguage": "Nessuna lingua trovata.",
-    "history": "Cronologia di fatturazione",
-    "historyNote": "Ogni credito in entrata e in uscita, dal più recente."
+    "noLanguage": "Nessuna lingua trovata."
   },
   "userMenu": {
     "signIn": "Accedi",
     "account": "Account",
+    "adminZone": "Area admin",
     "settings": "Impostazioni",
     "signOut": "Esci",
     "theme": "Tema",
@@ -34,17 +30,15 @@
     "main": "Principale",
     "legal": "Note legali",
     "pricing": "Prezzi",
-    "privacy": "Informativa sulla privacy",
+    "privacy": "Privacy",
     "terms": "Termini",
     "back": "Indietro",
-    "create": "crea",
-    "explore": "esplora",
-    "myKits": "i miei kit",
     "hiring": "assunzioni",
     "pricingLink": "prezzi",
     "faq": "Domande frequenti",
     "contact": "Contatti",
-    "about": "Chi siamo"
+    "about": "Chi siamo",
+    "practice": "Pratica gratuita"
   },
   "signIn": {
     "with": "Accedi con",
@@ -80,43 +74,89 @@
     "notFoundText": "Questa pagina non esiste o è stata rimossa."
   },
   "home": {
-    "tagline": "Agenti di IA si esercitano con te finché non ti senti sicuro.",
-    "preparingFor": "Ti prepari per",
-    "words": [
-      "un colloquio",
-      "una certificazione",
-      "un esame",
-      "un test",
-      "una promozione"
-    ],
-    "widest": "una certificazione",
-    "mark": "?"
+    "title": "Un colloquio per tutti\nAssumi veri talenti",
+    "text": "Colloqui a tempo creati dalla tua descrizione del ruolo. Domande uniche per ogni candidato e nessun tempo per chiedere a un'IA. Da $1 per candidato."
   },
-  "goal": {
-    "placeholder": "Incolla un annuncio di lavoro o descrivi cosa vuoi imparare…",
-    "label": "Per cosa ti stai preparando?",
-    "submit": "Genera preparazione",
-    "failed": "Impossibile avviare la generazione. Riprova.",
-    "seePlans": "Ricarica"
+  "start": {
+    "placeholder": "Incolla una descrizione del ruolo, oppure descrivi il ruolo e cosa dovrebbe sapere un candidato",
+    "description": "Descrizione del ruolo",
+    "submit": "Crea un colloquio",
+    "whichCompany": "Per quale azienda è questo colloquio?",
+    "firstCompany": "Come si chiama la tua azienda?",
+    "newCompany": "Una nuova azienda",
+    "companyName": "Nome dell'azienda",
+    "freeCandidates": "La tua prima azienda fa il colloquio gratis a {count, plural, one {il suo primo candidato} other {i suoi primi # candidati}}.",
+    "back": "Modifica la descrizione",
+    "continue": "Continua",
+    "starting": "Avvio…",
+    "failed": "Impossibile avviare il colloquio. Riprova."
   },
-  "membership": {
-    "signIn": "Accedi per partecipare",
-    "leave": "Esci",
-    "join": "Partecipa per esercitarti"
+  "superadmin": {
+    "fixNow": "Correggi ora",
+    "fixing": "Correzione…",
+    "dismiss": "Ignora",
+    "fixSent": "Inviata al verificatore. Verrà corretta o sostituita tra poco.",
+    "actionFailed": "Non ha funzionato. Riprova.",
+    "quality": "Qualità",
+    "flagged": "Segnalate",
+    "replaced": "Sostituite",
+    "noFlagged": "Al momento non c'è nulla di segnalato.",
+    "noReplaced": "Non è stato ancora sostituito nulla.",
+    "answers": "{count, plural, one {# risposta} other {# risposte}}",
+    "right": "{percent}% corrette",
+    "reports": "{count, plural, =0 {nessuna segnalazione} one {# segnalazione} other {# segnalazioni}}",
+    "kinds": {
+      "template": "modello",
+      "interview": "colloquio aziendale"
+    },
+    "flags": {
+      "wrong_key": "la risposta potrebbe essere sbagliata",
+      "rewrite": "serve una nuova domanda",
+      "weak_options": "servono opzioni migliori"
+    },
+    "zone": "Area admin",
+    "templates": "Modelli",
+    "new": "Nuovo modello",
+    "createTitle": "Crea un modello",
+    "placeholder": "Incolla una descrizione del ruolo, oppure descrivi il ruolo e cosa dovrebbe sapere chi lo ricopre",
+    "description": "Descrizione del ruolo",
+    "create": "Genera",
+    "createFailed": "Impossibile avviare il modello. Riprova.",
+    "text": "Colloqui pronti per ruolo, per aziende e talenti.",
+    "deleteLabel": "Elimina {title}",
+    "deleteTitle": "Eliminare questo modello?",
+    "deleteText": "I suoi argomenti e le sue domande vengono eliminati. I colloqui che le aziende ne hanno già ricavato restano.",
+    "deleteFailed": "Impossibile eliminare il modello. Riprova."
+  },
+  "templates": {
+    "title": "Modelli",
+    "empty": "Ancora nessun modello.",
+    "topics": "{count, plural, one {# argomento} other {# argomenti}}",
+    "search": "Cerca per ruolo o argomento",
+    "searchAction": "Cerca",
+    "level": "Livello: {level}",
+    "anyLevel": "Qualsiasi livello",
+    "allLanguages": "Tutte le lingue",
+    "languages": "{count, plural, one {# lingua} other {# lingue}}",
+    "noMatches": "Nessun modello corrisponde.",
+    "use": "Usa modello",
+    "using": "Avvio…",
+    "useFailed": "Impossibile avviare un colloquio da questo modello. Riprova.",
+    "warningTitle": "I modelli servono a provare prepza.",
+    "warning": "I talenti ci si esercitano, quindi i candidati potrebbero già conoscere le domande. Per assunzioni reali, crea un colloquio dalla tua descrizione del ruolo.",
+    "text": "Colloqui pronti per ruolo. Scegline uno come base per il tuo colloquio; potrai modificarlo dopo."
   },
   "billing": {
     "paid": "Pagamento ricevuto. Comparirà qui tra un attimo.",
     "checkoutFailed": "Impossibile aprire il pagamento. Riprova.",
     "credits": "{count, plural, one {# credito} other {# crediti}}",
-    "bonus": "+{count, number} di bonus",
     "topUp": "Ricarica",
-    "balance": "{count} crediti disponibili. Ricarica",
-    "balanceLow": "{count} crediti disponibili, stanno finendo. Ricarica",
     "low": "Stanno finendo",
     "creditsWord": "{count, plural, one {credito} other {crediti}}",
     "topUpTitle": "Ricarica: {name}",
-    "topUpNote": "Con $1 ottieni 100 crediti, con un bonus sugli importi più alti. I crediti non scadono.",
-    "customAmount": "Altro importo"
+    "topUpNote": "Ogni ricarica acquista candidati interi; quelle più grandi costano meno per candidato. I crediti non scadono.",
+    "candidates": "{count, plural, one {# candidato} other {# candidati}}",
+    "each": "{price} ciascuno"
   },
   "deleteAccount": {
     "title": "Eliminare il tuo account?",
@@ -126,83 +166,15 @@
     "deleted": "Il tuo account è stato eliminato.",
     "failed": "Impossibile eliminare il tuo account. Riprova."
   },
-  "levels": {
-    "basic": "base",
-    "medium": "intermedio",
-    "hard": "difficile"
-  },
-  "visibility": {
-    "public": "pubblico",
-    "private": "privato"
-  },
-  "library": {
-    "title": "Kit pubblici",
-    "search": "Cerca titoli e argomenti",
-    "searchAction": "Cerca",
-    "noMatches": "Nessuna preparazione corrispondente.",
-    "empty": "Ancora nessuna preparazione pubblica.",
-    "level": "Livello: {level}",
-    "anyLevel": "Qualsiasi",
-    "languages": "{count, plural, one {# lingua} other {# lingue}}",
-    "sortBy": "Ordina per: {sort}",
-    "sort": {
-      "date": "Data",
-      "rating": "Valutazione",
-      "joiners": "Partecipanti"
-    }
-  },
-  "preparations": {
-    "title": "I miei kit",
-    "new": "Nuova preparazione",
-    "signIn": "Accedi per vedere le tue preparazioni.",
-    "empty": "Ancora nessuna preparazione. Crea la prima o scegline una dalla libreria pubblica.",
-    "topics": "{count, plural, one {# argomento} other {# argomenti}}",
-    "created": "Creato il {date}",
-    "metaTitle": "Preparazione",
-    "metaDescription": "Preparazione al colloquio per {title}: {count, plural, one {# argomento} other {# argomenti}} di domande a scelta multipla, con sessioni di esercitazione e certificati.",
-    "history": "Cronologia",
-    "page": "Pagina della preparazione",
-    "rounds": "Sessioni",
-    "deleteLabel": "Elimina {title}",
-    "deleteTitle": "Eliminare {title}?",
-    "deleteText": "I suoi argomenti e le sue domande vengono eliminati, e chi vi partecipa perde l'accesso. L'operazione non può essere annullata.",
-    "deleteFailed": "Impossibile eliminare la preparazione. Riprova.",
-    "mastered": "Padroneggiato",
-    "masteredTitle": "Padroneggiato: ogni argomento ha un certificato",
-    "owner": "Proprietario",
-    "ratingTitle": "Valutazione media e numero di valutazioni",
-    "rated": "Grazie per la valutazione",
-    "ratingUpdated": "Valutazione aggiornata",
-    "ratingFailed": "Impossibile salvare la valutazione. Riprova.",
-    "rateIt": "Valutalo",
-    "rate": "Valuta {value} su {scale}",
-    "public": "Pubblica",
-    "nowPublic": "Ora nella libreria pubblica",
-    "nowPrivate": "Ora è privata",
-    "visibilityFailed": "Impossibile cambiare la visibilità. Riprova."
-  },
   "share": {
-    "share": "Condividi",
-    "title": "Condividi la preparazione",
-    "public": "Chiunque abbia il link può vedere questa preparazione.",
-    "private": "Invieremo un link d'invito via email. Solo quell'indirizzo potrà accettarlo.",
-    "email": "Email",
-    "send": "Invia",
     "sent": "Invito inviato a {email}",
     "checkEmail": "Controlla l'indirizzo email e riprova.",
     "failed": "Impossibile inviare l'invito.",
-    "joined": "Partecipa",
-    "undelivered": "Non recapitato",
-    "invited": "Invitato",
     "wrongEmail": "Questo invito è stato inviato a un altro indirizzo email.",
     "acceptFailed": "Impossibile accettare l'invito. Riprova.",
-    "signIn": "Accedi con l'email dell'invito per partecipare a questa preparazione.",
     "invalid": "Questo invito non è più valido.",
     "invitedToJoin": "Sei stato invitato a partecipare.",
-    "open": "Apri la preparazione",
-    "join": "Partecipa alla preparazione",
-    "mismatch": "L'email non corrisponde. Accedi con l'email dell'invito per partecipare.",
-    "inviteTitle": "Invito alla condivisione"
+    "mismatch": "L'email non corrisponde. Accedi con l'email dell'invito per partecipare."
   },
   "reportReasons": {
     "wrong_answer": "La risposta indicata è sbagliata",
@@ -221,6 +193,18 @@
     "reports": "Segnalazioni",
     "showReports": "Mostra segnalazioni ({count})",
     "regenerate": "Rigenera",
+    "manage": "Gestisci domande",
+    "wrongAnswer": "Risposta sbagliata",
+    "checking": "Verifica…",
+    "markedWrong": "Grazie. È in verifica e verrà corretta o sostituita.",
+    "markWrongFailed": "Impossibile inviarla in verifica. Riprova.",
+    "ofCount": "di {count, number}",
+    "per": "per",
+    "candidate": "candidato",
+    "showOptions": "Mostra le opzioni di risposta",
+    "hideOptions": "Nascondi le opzioni di risposta",
+    "correct": "Risposta corretta",
+    "wrong": "Risposta sbagliata",
     "regenerating": "Rigenerazione…",
     "regenerated": "Domanda rigenerata",
     "regenerateFailed": "Impossibile rigenerare la domanda. Riprova.",
@@ -233,79 +217,27 @@
     "selectReason": "Scegli un motivo",
     "details": "Dettagli",
     "showLess": "Mostra meno",
+    "more": "+{count, number} altre",
     "showAll": "Mostra tutto",
     "limitRange": "Inserisci un numero da 1 a {count}.",
     "limitFailed": "Impossibile salvare il limite.",
     "limit": "Limite di domande",
-    "of": "di",
     "count": "{count, plural, one {domanda} other {domande}}",
-    "loadFailed": "Impossibile caricare le domande."
-  },
-  "certificate": {
-    "title": "Certificato",
-    "metaDescription": "{name} ha completato {topic} con un punteggio del {score}%.",
-    "heading": "Certificato di risultato",
-    "for": "Per aver completato con successo:",
-    "finalScore": "Punteggio finale",
-    "issued": "Rilasciato il",
-    "howTo": "Come ottenere il certificato"
+    "loadFailed": "Impossibile caricare le domande.",
+    "yourAnswer": "la tua risposta"
   },
   "rounds": {
-    "title": "Sessione",
-    "rounds": "Sessioni",
-    "compare": "Confronta",
-    "compareTitle": "Confronta le sessioni",
     "answered": "Risposte",
     "correct": "Corretta",
     "incorrect": "Sbagliata",
     "notAnswered": "Senza risposta",
-    "correctAnswer": "Risposta corretta",
-    "yourAnswer": "La tua risposta",
-    "askFollowUp": "Fai una domanda di approfondimento",
-    "followUp": "Domanda di approfondimento",
-    "followUpPlaceholder": "Fai una domanda di approfondimento…",
-    "replyFailed": "Impossibile ottenere una risposta. Riprova.",
-    "firstRound": "La tua prima sessione su questo argomento",
-    "sameAsLast": "Come nella tua ultima sessione",
-    "change": "{change} punti rispetto alla tua ultima sessione",
-    "topicAnswered": "Argomento: {answered} domande risposte su {total}",
-    "answeredOf": "{answered} su {total} risposte",
-    "finalScore": "Punteggio finale",
-    "certificate": "Certificato",
-    "history": "Cronologia",
-    "preparationPage": "Pagina della preparazione",
-    "noRounds": "Ancora nessuna sessione.",
-    "selectToCompare": "Seleziona per il confronto",
-    "grade": "voto",
-    "continue": "Continua",
-    "start": "Inizia",
     "finish": "Termina",
     "finishing": "Chiusura…",
-    "finishRound": "Termina sessione",
-    "deleteRound": "Elimina sessione",
-    "finishTitle": "Terminare questa sessione?",
-    "deleteTitle": "Eliminare questa sessione?",
-    "unscored": "Le domande senza risposta non verranno valutate.",
-    "noMore": "Non potrai rispondere ad altre domande.",
-    "cantUndo": "L'operazione non può essere annullata.",
-    "deleteFailed": "Impossibile eliminare la sessione. Riprova.",
-    "finishFailed": "Impossibile terminare la sessione. Riprova.",
-    "startFailed": "Impossibile iniziare la sessione. Riprova.",
-    "answerFailed": "Impossibile salvare la risposta. Riprova.",
-    "signIn": "Accedi per continuare questa sessione.",
-    "missing": "Questa sessione non esiste.",
-    "allAnswered": "Hai risposto a tutte le domande di questa sessione.",
     "next": "Domanda successiva",
-    "progress": "Domande risposte verso il certificato",
-    "nextFailed": "Impossibile caricare la domanda successiva. Riprova.",
-    "submitFailed": "Impossibile inviare la risposta. Riprova.",
-    "freeTurns": "{count, plural, one {Ti resta # messaggio gratuito} other {Ti restano # messaggi gratuiti}} al tutor su questa domanda",
-    "paidTurns": "Ogni messaggio successivo su questa domanda costa {count, plural, one {# credito} other {# crediti}}",
-    "buyCertificate": "Ottieni il certificato · {count} crediti",
-    "makeItYours": "Ti prepari per un lavoro specifico? Incolla l'annuncio e ricevi un kit fatto apposta.",
-    "makeItYoursAction": "Rendilo tuo"
+    "submitFailed": "Impossibile inviare la risposta. Riprova."
   },
   "session": {
+    "toTest": "Vai ai colloqui",
     "startFailed": "Impossibile iniziare il colloquio. Riprova.",
     "finishFailed": "Impossibile terminare il colloquio. Riprova.",
     "continueFailed": "Impossibile continuare. Riprova.",
@@ -357,17 +289,7 @@
     "changes": "Modifiche agli argomenti",
     "tooMany": "Scegli al massimo {max} argomenti o descrivi come unirli.",
     "apply": "Applica le modifiche",
-    "approve": "Approva e genera",
-    "approvePrice": "Approva e genera · {count} crediti",
-    "unfinished": "Non completate"
-  },
-  "generationStatus": {
-    "queued": "In generazione",
-    "running": "In generazione",
-    "awaiting_review": "Rivedi gli argomenti",
-    "done": "Fatto",
-    "failed": "Non riuscita",
-    "cancelled": "Annullata"
+    "approve": "Approva e genera"
   },
   "candidateStatus": {
     "invited": "invitato",
@@ -375,7 +297,9 @@
     "in_process": "in corso",
     "finished": "terminato",
     "deleted": "eliminato",
-    "expired": "scaduto"
+    "expired": "scaduto",
+    "passed": "superato",
+    "flagged": "segnalato"
   },
   "roles": {
     "owner": "proprietario",
@@ -391,17 +315,17 @@
     "owner": "Proprietario",
     "interviewCount": "{count, plural, one {# colloquio} other {# colloqui}}",
     "interviews": "Colloqui",
+    "templates": "Modelli",
     "admins": "Amministratori",
     "referrals": "Inviti",
     "new": "Nuova azienda",
-    "newText": "Crea un'azienda per generare colloqui e invitare candidati.",
     "name": "Nome dell'azienda",
     "create": "Crea",
     "createFailed": "Impossibile creare l'azienda. Riprova.",
     "signInJoin": "Accedi con l'email dell'invito per entrare in questa azienda.",
     "open": "Apri l'azienda",
     "join": "Entra nell'azienda",
-    "creditsLeft": "{count, plural, one {credito disponibile} other {crediti disponibili}}",
+    "creditsLeft": "{count, plural, one {credito} other {crediti}}",
     "creditsLow": "Stanno finendo: ricarica per continuare a invitare candidati.",
     "timeLeft": "Tempo rimasto: {time}",
     "removeLabel": "Rimuovi {name}",
@@ -409,7 +333,12 @@
     "removeText": "I suoi colloqui e inviti verranno eliminati.",
     "remove": "Rimuovi",
     "removeFailed": "Impossibile rimuovere l'azienda.",
-    "page": "Azienda"
+    "page": "Azienda",
+    "logo": "Logo",
+    "uploadLogo": "Carica logo",
+    "changeLogo": "Cambia logo",
+    "removeLogo": "Rimuovi logo",
+    "logoFailed": "Impossibile salvare il logo."
   },
   "candidates": {
     "scorecard": "Risultati",
@@ -421,6 +350,11 @@
     "copies": "{count, plural, one {# tentativo di copia} other {# tentativi di copia}}",
     "fastAnswers": "{count, plural, one {# risposta rapida} other {# risposte rapide}}",
     "empty": "Ancora nessun candidato invitato.",
+    "noMatches": "Nessun candidato corrisponde.",
+    "search": "Cerca candidati per email",
+    "searchAction": "Cerca",
+    "status": "Stato: {status}",
+    "anyStatus": "qualsiasi stato",
     "progress": "Progresso",
     "grade": "Voto",
     "resend": "Invia di nuovo l'invito",
@@ -438,11 +372,27 @@
       "date": "Data"
     }
   },
+  "interviewStatus": {
+    "new": "Nuovo",
+    "in_process": "In corso",
+    "hired": "Assunto"
+  },
   "interviews": {
     "title": "Colloqui",
     "interview": "Colloquio",
     "candidates": "Candidati",
     "new": "Nuovo colloquio",
+    "createTitle": "Crea un colloquio",
+    "try": "Prova come candidato",
+    "newCandidate": "Nuovo/i candidato/i",
+    "linkTitle": "Link condivisibile",
+    "linkText": "Per un annuncio di lavoro: chiunque abbia il link può svolgere il colloquio. Ogni persona viene addebitata come un candidato invitato.",
+    "linkFailed": "Impossibile modificare il link. Riprova.",
+    "passMark": "Soglia di superamento",
+    "passMarkLabel": "Soglia di superamento in percentuale",
+    "markHired": "Segna come assunto",
+    "tryLabel": "Prova {title} come candidato",
+    "tryFailed": "Impossibile avviare l'anteprima. Riprova.",
     "generating": "In generazione…",
     "fallbackTitle": "colloquio",
     "continueGeneration": "Continua la generazione",
@@ -461,12 +411,22 @@
     "adminEmail": "Email dell'amministratore",
     "addAdmin": "Aggiungi amministratore",
     "adminFailed": "Impossibile invitare questo amministratore. Riprova.",
-    "candidateEmail": "Email del candidato",
     "invite": "Invita",
     "jobDescription": "Descrizione del ruolo",
     "pasteJob": "Incolla la descrizione del ruolo: la posizione, i requisiti e i plus…",
     "generate": "Genera colloquio",
-    "startFailed": "Impossibile iniziare il colloquio. Riprova."
+    "startFailed": "Impossibile iniziare il colloquio. Riprova.",
+    "candidateEmails": "Email dei candidati",
+    "emailsHint": "Una o più email, separate da virgole o a capo",
+    "uploadFile": "Carica file",
+    "invitedMany": "{count} candidati invitati",
+    "skip": {
+      "invalid": "{count, plural, one {# email non è valida} other {# email non sono valide}}.",
+      "limit": "{count, plural, one {# email supera} other {# email superano}} per ora il tuo limite di email. Riprova tra un'ora.",
+      "no_credits": "{count, plural, one {# candidato non è stato invitato} other {# candidati non sono stati invitati}}: crediti esauriti. Ricarica per invitarli.",
+      "failed": "{count, plural, one {# invito non è stato inviato} other {# inviti non sono stati inviati}}. Riprova."
+    },
+    "talents": "Talenti suggeriti"
   },
   "invite": {
     "signIn": "Accedi con l'email dell'invito per sostenere questo colloquio.",
@@ -479,7 +439,7 @@
     "timeRunsOut": "Quando il tempo di una domanda scade, conta come sbagliata e si apre la successiva. Il tempo continua a scorrere anche se esci.",
     "unanswered": "Le domande senza risposta contano come sbagliate.",
     "saved": "I progressi vengono salvati: usa di nuovo questo link per continuare.",
-    "stay": "Resta su questa pagina: uscire o copiare viene registrato (<link>come lo gestiamo</link>).",
+    "stay": "Resta su questa pagina: uscire o copiare viene registrato (<link>privacy</link>).",
     "finished": "Questo colloquio è già terminato.",
     "continue": "Continua",
     "start": "Accetta e inizia",
@@ -503,29 +463,18 @@
   },
   "pricing": {
     "title": "Prezzi",
-    "intro": "Paghi solo ciò che usi: con $1 ottieni 100 crediti, e i crediti non scadono. Nessun abbonamento.",
-    "learners": "Per chi studia",
-    "welcome": "Alla registrazione",
-    "referrals": "Inviti",
-    "referralsNote": "Condividi il tuo link dalle Impostazioni, o quello di un'azienda dalla sua scheda Inviti.",
-    "referral": "Un amico che hai invitato ricarica per la prima volta",
-    "companyReferral": "Un'azienda che hai invitato ricarica per la prima volta ${min} o più",
-    "each": "{count, number} crediti ciascuno",
-    "credits": "{count, plural, one {# credito} other {# crediti}}",
-    "companies": "Per le aziende",
-    "kit": "Il tuo kit personale, creato da un annuncio di lavoro",
-    "chat": "Tutor IA: {free, plural, one {# messaggio gratuito} other {# messaggi gratuiti}} per domanda, poi",
-    "perTurn": "{count, plural, one {# credito} other {# crediti}} a messaggio",
-    "ownCertificate": "Certificato sul tuo kit o su un kit condiviso",
-    "publicCertificate": "Certificato su un kit pubblico",
-    "publicPractice": "Esercitazione sui kit pubblici ({count, plural, one {# nuovo argomento} other {# nuovi argomenti}} al giorno)",
-    "draftTopics": "Argomenti proposti per il tuo annuncio o obiettivo",
-    "gift": "{count, number} crediti in regalo",
+    "intro": "Paghi per candidato. Generare colloqui è gratis e non ci sono abbonamenti.",
+    "test": "Generare un colloquio",
     "free": "Gratis",
-    "interview": "Generare un colloquio",
-    "candidate": "Ogni candidato che termina e risponde ad almeno una domanda",
-    "companyWelcome": "La tua prima azienda",
-    "openCompanies": "Aziende",
+    "candidate": "Ogni candidato che risponde ad almeno una domanda",
+    "candidateVolume": "Con crediti da una ricarica di ${from, number} o più",
+    "perCandidate": "${dollars, number} a candidato",
+    "welcome": "{count, plural, one {Il tuo primo candidato} other {I tuoi primi # candidati}}",
+    "credits": "$1 = 100 crediti, i crediti non scadono.",
+    "referrals": "Inviti",
+    "referralsNote": "Condividi il link della tua azienda dalla sua scheda Inviti.",
+    "companyReferral": "Un'azienda che hai invitato fa la sua prima ricarica",
+    "each": "{count, number} crediti ciascuno",
     "topUp": "Ricarica"
   },
   "site": {
@@ -534,22 +483,6 @@
   "legal": {
     "updated": "Ultimo aggiornamento",
     "englishOnly": "Questo documento è disponibile solo in inglese."
-  },
-  "credits": {
-    "noHistory": "Ancora niente.",
-    "reasons": {
-      "welcome": "Regalo di benvenuto",
-      "topup": "Ricarica",
-      "kit": "Kit",
-      "candidate": "Candidato",
-      "certificate": "Certificato",
-      "author_share": "Il tuo kit pubblico ha fruttato un certificato",
-      "chat": "Messaggio al tutor",
-      "refund": "Rimborso",
-      "chargeback": "Pagamento stornato dalla banca",
-      "chargeback_reversed": "Storno annullato",
-      "referral": "Premio per l'invito"
-    }
   },
   "autoTopUp": {
     "title": "Ricarica automatica",
@@ -572,43 +505,42 @@
     "label": "Genera in"
   },
   "referral": {
-    "title": "Invita i tuoi amici",
-    "note": "Ricevete entrambi {reward, number} crediti quando il tuo amico ricarica per la prima volta.",
     "companyTitle": "Invita un'altra azienda",
-    "companyNote": "Entrambe le aziende ricevono {reward, number} crediti quando la nuova ricarica ${min} o più.",
+    "companyNote": "Ricevete entrambi {reward, number} crediti quando fa la sua prima ricarica, di qualsiasi importo.",
+    "deletedCompany": "Un'azienda eliminata",
+    "credits": "+{count, number} crediti",
     "rewarded": "{count, plural, =0 {Ancora nessun premio.} one {Premiato # volta finora.} other {Premiato # volte finora.}}"
   },
   "topUp": {
     "title": "Ricarica",
     "intro": "Con $1 ottieni 100 crediti, e i crediti non scadono.",
     "signIn": "Accedi per ricaricare i tuoi crediti.",
-    "yours": "Saldo personale",
-    "personal": "Crediti personali",
-    "personalNote": "Per i tuoi kit, il tutor IA e i certificati.",
     "companies": "Crediti delle aziende",
     "companiesNote": "Per i candidati di ogni azienda.",
+    "noCompany": "I crediti appartengono a un'azienda. Crea prima la tua azienda, poi ricaricala qui.",
+    "createCompany": "Crea un'azienda",
     "pricing": "Prezzi"
   },
   "landing": {
     "more": "Come funziona",
     "how": {
-      "title": "Pronto in tre passi",
+      "title": "Tre passi verso i primi risultati",
       "paste": {
-        "title": "Incolla o descrivi",
-        "text": "Un annuncio di lavoro, un programma di studio o le competenze e tecnologie che vuoi imparare."
+        "title": "Incolla la descrizione del ruolo",
+        "text": "Qualsiasi ruolo, qualsiasi lingua.\nprepza individua cosa deve sapere un candidato e propone gli argomenti."
       },
       "review": {
-        "title": "Rivedi il piano",
-        "text": "Gli agenti di IA individuano ciò che conta e propongono gli argomenti.\nTienili, rinominali o cambiali."
+        "title": "Controlla gli argomenti",
+        "text": "Mantienili, rinominali o modificali.\nNessuna domanda viene scritta finché non approvi."
       },
-      "practice": {
-        "title": "Esercitati finché sei sicuro",
-        "text": "Ogni argomento ha le sue domande.\nEsercitati in sessioni e guarda crescere i tuoi progressi."
+      "invite": {
+        "title": "Invita i candidati",
+        "text": "Incolla un elenco, carica un file o condividi un link.\nI promemoria partono da soli. Vedi chi conosce il lavoro, in ordine di punteggio."
       }
     },
     "control": {
-      "title": "Decidi tu cosa studiare",
-      "text": "Nessuna domanda viene scritta finché non approvi gli argomenti. Togli la spunta a ciò che sai già, rinomina un argomento, modifica i suoi sottoargomenti o di' semplicemente all'IA cosa cambiare e lascia che faccia il resto.",
+      "title": "Decidi tu cosa valutare",
+      "text": "Nessuna domanda viene scritta finché non approvi gli argomenti. Togli la spunta a ciò che il ruolo non richiede, rinomina un argomento, modifica i suoi sottoargomenti o di' all'IA cosa cambiare.",
       "topics": {
         "design": "Progettazione di sistemi",
         "sql": "Content marketing",
@@ -634,43 +566,9 @@
         "Misurare le visualizzazioni"
       ]
     },
-    "gaps": {
-      "title": "Esercizi che trovano le tue lacune",
-      "text": "Ogni sessione ripropone tutte le domande dell'argomento, partendo da quelle che hai sbagliato l'ultima volta. Confronta le sessioni e guarda le tue lacune colmarsi.",
-      "items": {
-        "first": {
-          "question": "Quale metrica mostra chi ha guardato un annuncio fino alla fine?",
-          "wrong": "Tasso di clic",
-          "right": "Tasso di completamento"
-        },
-        "second": {
-          "question": "Cosa riduce soprattutto una cache?",
-          "wrong": "Costi di archiviazione",
-          "right": "Tempo di risposta"
-        }
-      }
-    },
-    "tutor": {
-      "title": "Un tutor per ogni domanda",
-      "text": "Dopo ogni risposta vedi subito l'opzione giusta. Non ti è chiaro perché? Chiedi al tutor IA e approfondisci quanto ti serve.",
-      "question": "Un cliente è arrabbiato per una consegna in ritardo. Cosa fai per prima cosa?",
-      "options": {
-        "first": "Spiegare il motivo del ritardo",
-        "second": "Riconoscere il problema e scusarsi",
-        "third": "Offrire subito uno sconto",
-        "fourth": "Passare il caso a un responsabile"
-      },
-      "ask": "Perché non spiegare prima?",
-      "answer": "Prima riconosci il problema: le persone ascoltano le spiegazioni quando si sentono ascoltate."
-    },
-    "proof": {
-      "title": "Scopri quando sei pronto",
-      "text": "Ogni argomento ha una barra di avanzamento verso il suo certificato. Ottienilo, e l'argomento conta come padroneggiato.",
-      "again": "Ricomincia"
-    },
     "quality": {
-      "title": "Domande che migliorano da sole",
-      "text": "Mi piace, non mi piace e segnalazioni rivelano le domande deboli. Un verificatore IA le corregge o le sostituisce automaticamente, e i proprietari del kit possono rigenerare qualsiasi domanda da soli.",
+      "title": "Domande che si correggono da sole",
+      "text": "Risposte, valutazioni e segnalazioni dei candidati rivelano le domande deboli. Un verificatore IA le corregge o le sostituisce automaticamente, e puoi rigenerare tu stesso qualsiasi domanda.",
       "items": {
         "good": "Cosa velocizza un indice di database?",
         "weak": "Qual è il miglior linguaggio di programmazione?",
@@ -679,45 +577,89 @@
       "comment": "Dipende dal progetto, quindi non c'è un'unica risposta giusta.",
       "list": "Domande dell'argomento"
     },
-    "share": {
-      "title": "Condividi o pubblica",
-      "text": "Invita amici o colleghi via email a esercitarsi con il tuo kit, oppure pubblicalo nella libreria pubblica per tutti quelli che si preparano alla stessa cosa.",
-      "private": "Condividi in privato",
-      "public": "Condividi in pubblico",
-      "browse": "Esplora la libreria"
+    "try": {
+      "title": "Provalo prima dei tuoi candidati",
+      "text": "Fai un colloquio di pratica gratuito per un ruolo simile, oppure apri il tuo colloquio come candidato prima di invitare qualcuno.",
+      "browse": "Sfoglia i colloqui di pratica",
+      "topic": "Progettazione di sistemi",
+      "question": "Cosa riduce principalmente una cache davanti a un database?",
+      "options": {
+        "a": "Le dimensioni del database",
+        "b": "Quanto spesso viene letto il database",
+        "c": "Il numero di tabelle",
+        "d": "Quanto durano i backup"
+      },
+      "points": {
+        "practice": "Colloqui di pratica gratuiti per molti ruoli",
+        "preview": "Il tuo colloquio visto da candidato"
+      }
+    },
+    "link": {
+      "title": "Un link per il tuo annuncio di lavoro",
+      "text": "Metti il link del colloquio nel tuo annuncio di lavoro. Chi si candida svolge subito il colloquio e compare nel tuo elenco di candidati, in ordine di punteggio.",
+      "note": "Chiunque abbia il link può svolgere il colloquio.",
+      "points": {
+        "anywhere": "Su siti di lavoro, LinkedIn o il tuo sito",
+        "off": "Disattivalo quando il ruolo è coperto"
+      }
     },
     "companies": {
-      "title": "Assumi? Valuta i candidati in modo equo",
-      "text": "Trasforma un annuncio di lavoro in un colloquio a tempo e invita i candidati per valutarli.",
+      "title": "Scopri chi conosce il lavoro",
+      "text": "I candidati svolgono il colloquio dal tuo invito via email. I loro punteggi arrivano man mano che rispondono, in verde o in rosso rispetto alla tua soglia.",
       "points": {
         "own": "Domande uniche per ogni candidato",
         "timed": "Un conto alla rovescia per domanda",
         "flags": "Segnali di fretta, uscite o copie",
-        "private": "Punteggi nascosti ai candidati"
+        "private": "I candidati non vedono mai i loro punteggi"
       },
       "candidate": "Candidato",
       "score": "Punteggio",
       "rushed": "Risposte affrettate",
       "left": "Ha lasciato la pagina",
-      "start": "Inizia ad assumere"
+      "role": "Sviluppatore backend · soglia {mark}%"
+    },
+    "reports": {
+      "title": "Condividi i risultati in un clic",
+      "text": "Un report PDF chiaro per un candidato o per tutto l'elenco. Scaricalo oppure invialo a un responsabile delle assunzioni direttamente da prepza.",
+      "points": {
+        "pdf": "Un candidato o tutti",
+        "share": "PDF via email o condivisione su app di messaggistica"
+      }
+    },
+    "brand": {
+      "title": "Il tuo brand, verificato",
+      "text": "I candidati vedono il tuo logo dalla prima email all'ultima domanda, con una spunta che mostra che la tua azienda è reale.",
+      "role": "Sviluppatore backend",
+      "points": {
+        "email": "Il tuo logo nell'email d'invito",
+        "interview": "Sul colloquio che svolgono i candidati",
+        "report": "Su ogni report PDF",
+        "verified": "Verificato tramite l'email di lavoro del tuo team"
+      }
+    },
+    "talent": {
+      "title": "Ricevi suggerimenti di talenti",
+      "text": "I migliori punteggi dei nostri colloqui di pratica gratuiti, suggeriti per il tuo ruolo. Gratis.",
+      "suggested": "Suggeriti per Sviluppatore backend",
+      "score": "Punteggio",
+      "points": {
+        "free": "Gratis per te e per i talenti",
+        "practice": "Valutati su colloqui a tempo",
+        "first": "Conta solo il loro primo tentativo",
+        "link": "Scelgono loro di essere suggeriti"
+      }
     },
     "languages": {
-      "title": "Nella tua lingua",
-      "text": "Usa prepza in una qualsiasi delle {count} lingue. Incolla un annuncio di lavoro in una lingua ed esercitati in un'altra."
+      "title": "Qualsiasi ruolo, qualsiasi lingua",
+      "text": "prepza funziona in {count} lingue. Incolla una descrizione del ruolo in una lingua e fai il colloquio ai candidati in un'altra."
     },
     "pricing": {
-      "title": "Paga solo ciò che funziona",
-      "text": "Niente abbonamenti né piani. Ricarica quando ti serve: i crediti non scadono mai e ciò che non va a buon fine non costa nulla.",
+      "title": "Paghi per candidato",
+      "text": "I colloqui e {free, plural, one {il tuo primo candidato} other {i tuoi primi # candidati}} sono gratis. Dopo paghi solo per i candidati che rispondono, senza abbonamento.",
       "see": "Vedi i prezzi",
-      "company": "Acme Inc.",
-      "personal": "Per i tuoi kit e il tutor IA.",
-      "learner": "Crediti personali"
-    },
-    "referrals": {
-      "title": "Guadagna crediti come affiliato",
-      "text": "Invita amici o altre aziende con il tuo link. Quando ricaricano per la prima volta, ricevete crediti entrambi.",
-      "whereLearner": "Il tuo link è in {settings} → {referral}.",
-      "whereCompany": "Il link della tua azienda è in {hiring} → la tua azienda → {referrals}."
+      "perCandidate": "per candidato",
+      "base": "A consumo",
+      "volume": "Con una ricarica da ${from, number}"
     },
     "faq": {
       "title": "Hai ancora domande?",
@@ -725,8 +667,8 @@
       "read": "Vai alle domande frequenti"
     },
     "ready": {
-      "title": "Pronto a prepararti?",
-      "start": "Inizia ora"
+      "title": "Pronto a fare il colloquio ai tuoi primi candidati?",
+      "start": "Crea un colloquio"
     }
   },
   "faq": {
@@ -753,14 +695,15 @@
   },
   "about": {
     "title": "Chi siamo",
-    "intro": "prepza ti aiuta a prepararti con sicurezza e offre alle aziende un modo semplice ed economico per valutare i candidati.",
+    "intro": "prepza aiuta le aziende a trovare persone che conoscono davvero il lavoro: un colloquio equo e a tempo, creato dalla tua descrizione del ruolo, a un prezzo alla portata di qualsiasi team. E chiunque si prepari a un colloquio può esercitarsi gratis.",
     "company": {
       "title": "Perché esistiamo",
-      "learners": "Prepararsi a un colloquio, a un esame o a una nuova competenza non dovrebbe iniziare con ore di ricerche. Di' a prepza qual è il tuo obiettivo e lo trasformerà in un piano chiaro: gli argomenti che contano, domande di pratica per ciascuno e un tutor che ti spiega ogni risposta finché tutto non ti è chiaro.",
-      "companies": "Per le aziende, vogliamo che assumere sia equo e alla portata di qualsiasi team, non solo di quelli grandi. Trasforma un annuncio di lavoro in un colloquio a tempo in pochi minuti, dai a ogni candidato le sue domande e paga solo per i candidati che lo svolgono davvero."
+      "problem": "Le assunzioni si basano spesso su un CV e una buona conversazione, ed entrambi possono ingannare. Gli strumenti di valutazione che aiutano hanno prezzi pensati per le grandi aziende, con piani annuali e costi per utente, così la maggior parte dei team ne fa a meno.",
+      "approach": "prepza trasforma una descrizione del ruolo in un colloquio a tempo in pochi minuti, per qualsiasi ruolo. Ogni candidato riceve domande tutte sue, vedi chi conosce il lavoro e perché, e paghi solo per i candidati che lo svolgono davvero.",
+      "practice": "Vogliamo anche che prepararsi a un colloquio sia gratis per tutti. Chiunque può fare i nostri colloqui di pratica per un ruolo, vedere il proprio voto e ogni risposta corretta, ed esercitarsi di nuovo, senza costi. Chi va bene può scegliere di essere suggerito alle aziende che assumono per un ruolo simile."
     },
     "founder": {
-      "quote": "Ogni volta che mi preparavo a un colloquio o cercavo di imparare qualcosa di nuovo, passavo più tempo a cercare buon materiale che a studiare davvero. Ogni sito copriva un pezzo, e nessuno era adatto a quello che mi serviva. Così ho creato prepza: lo strumento che avrei voluto avere, che parte dal tuo obiettivo e ti guida fino a raggiungerlo. Spero che ti faccia risparmiare le ore che avrebbe fatto risparmiare a me.",
+      "quote": "Assumere bene non dovrebbe essere un privilegio delle grandi aziende con grandi budget. Ho creato prepza perché qualsiasi team possa trasformare una descrizione del ruolo in un colloquio equo in pochi minuti, vedere chi conosce davvero il lavoro e pagare solo per i candidati che lo svolgono. Spero che ti aiuti a trovare prima le persone giuste.",
       "role": "Fondatore unico di prepza"
     }
   },
@@ -771,7 +714,6 @@
     "kinds": {
       "question_flagged": "{count, plural, one {Una domanda su «{topic}» in «{title}» è stata segnalata per la revisione.} other {# domande in «{title}» sono state segnalate per la revisione.}}",
       "question_fixed": "{count, plural, one {L'IA ha corretto una domanda segnalata su «{topic}» in «{title}».} other {L'IA ha corretto # domande segnalate in «{title}».}}",
-      "kit_ready": "Il tuo kit «{title}» è pronto.",
       "referral_rewarded": "Una persona che hai invitato ha ricaricato. Hai ricevuto {credits} crediti.",
       "auto_top_up_charged": "La ricarica automatica ha aggiunto {credits} crediti.",
       "auto_top_up_failed": "La ricarica automatica non è riuscita ad addebitare la carta. Ricarica per non restare senza saldo.",
@@ -780,5 +722,77 @@
       "interview_ready": "Il colloquio «{title}» è pronto.",
       "interview_cancelled": "{title, select, none {Un colloquio} other {Il colloquio «{title}»}} è stato annullato: la revisione degli argomenti ha atteso troppo."
     }
+  },
+  "report": {
+    "download": "Scarica PDF",
+    "passed": "superato · soglia {mark}%",
+    "notPassed": "non superato · soglia {mark}%",
+    "notFinished": "non ancora terminato",
+    "share": "Condividi report",
+    "fileName": "Report {email}",
+    "failed": "Impossibile creare il report PDF.",
+    "shareTitle": "Condividi report",
+    "recipient": "Email del destinatario",
+    "send": "Invia <name>PDF</name>",
+    "sent": "Report inviato a {email}",
+    "sendFailed": "Impossibile inviare il report.",
+    "orSummary": "Oppure invia tramite",
+    "via": "Inviato da prepza",
+    "candidatesFileName": "Candidati {title}",
+    "candidateCount": "{count, plural, one {# candidato} other {# candidati}}",
+    "passMark": "soglia {mark}%",
+    "progressOf": "{progress}% completato"
+  },
+  "practice": {
+    "title": "Pratica gratuita per colloqui",
+    "intro": "Esercitati per un ruolo con un colloquio a tempo, poi vedi il tuo voto e tutte le risposte corrette. Gratis.",
+    "about": "Colloquio di pratica a tempo. Alla fine vedi il tuo voto e tutte le risposte corrette. Privato e gratuito.",
+    "pageTitle": "{title}: colloquio di pratica gratuito",
+    "pageDescription": "Un colloquio di pratica gratuito di livello {level} per {title}: {count, plural, one {# argomento} other {# argomenti}}, a tempo, con il tuo voto e tutte le risposte corrette alla fine. Pratica, non un vero colloquio di lavoro.",
+    "start": "Inizia la pratica",
+    "again": "Esercitati di nuovo",
+    "continue": "Continua",
+    "history": "I tuoi round",
+    "results": "Risultati della pratica",
+    "grade": "delle domande corrette",
+    "notFinished": "non terminato",
+    "noRounds": "Ancora nessun round.",
+    "signIn": "Accedi per vedere i tuoi round di pratica.",
+    "startFailed": "Impossibile avviare la pratica. Riprova.",
+    "gradeLabel": "Voto",
+    "questions": "{count, plural, one {# domanda} other {# domande}}",
+    "progressLabel": "Avanzamento",
+    "answeredLabel": "domande risposte"
+  },
+  "suggest": {
+    "title": "Fatti suggerire alle aziende",
+    "consent": "Facoltativo. Le aziende che assumono per ruoli simili potrebbero vedere il tuo nome, il tuo LinkedIn e il punteggio del primo round. Puoi modificarlo o revocarlo quando vuoi nelle impostazioni.",
+    "link": "Link LinkedIn",
+    "share": "Condividi",
+    "saved": "Ora puoi essere suggerito alle aziende.",
+    "withdraw": "Revoca",
+    "withdrawn": "Non sarai più suggerito alle aziende.",
+    "invalid": "Usa il link del tuo profilo LinkedIn, ad esempio https://www.linkedin.com/in/your-name",
+    "failed": "Impossibile salvare. Riprova.",
+    "shareAndStart": "Accetta e inizia",
+    "startWithout": "Rifiuta e inizia"
+  },
+  "talents": {
+    "about": "Talenti che sono andati bene esercitandosi su un colloquio per un ruolo come questo e hanno accettato di essere suggeriti.",
+    "empty": "Ancora nessun talento suggerito.",
+    "score": "Punteggio",
+    "hide": "Nascondi",
+    "hideFailed": "Impossibile nascondere il talento. Riprova."
+  },
+  "verify": {
+    "verify": "Verifica",
+    "verified": "Verificata: {domain}",
+    "title": "Verifica l'azienda",
+    "text": "Inserisci il sito web dell'azienda. Viene verificata quando un proprietario o un amministratore accede con un'email di lavoro di quel dominio, come you@acme.com: subito, se sei tu.",
+    "website": "Sito web dell'azienda",
+    "save": "Salva",
+    "done": "Verificata: {domain}",
+    "pending": "Salvato. Verrà verificata quando un proprietario o un amministratore accederà con un'email su {domain}.",
+    "failed": "Impossibile salvare il sito web."
   }
 }

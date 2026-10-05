@@ -1,63 +1,44 @@
 "use client"
 
-import { cn } from "cn"
-import { MinusIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 
+import { Badge } from "@/components/ui/badge"
+
+// Tags shown before "+N more".
+const SHOWN = 3
+const TAG = "h-7 px-3 text-sm font-light text-muted-foreground"
+
+/** A topic's subtopics as quiet tags: the first few, then a "+N more" tag that shows the rest. */
 export function SubtopicList({ subtopics }: { subtopics: string[] }) {
   const t = useTranslations("questions")
-  const listRef = useRef<HTMLSpanElement>(null)
   const [expanded, setExpanded] = useState(false)
-  const [overflows, setOverflows] = useState(false)
-
-  useEffect(() => {
-    const list = listRef.current
-
-    if (!list || expanded) {
-      return
-    }
-
-    const observer = new ResizeObserver(() =>
-      setOverflows(list.scrollHeight > list.clientHeight + 1)
-    )
-    observer.observe(list)
-
-    return () => observer.disconnect()
-  }, [expanded])
+  const hidden = subtopics.length - SHOWN
+  const shown = expanded || hidden <= 0 ? subtopics : subtopics.slice(0, SHOWN)
 
   if (subtopics.length === 0) {
     return null
   }
 
   return (
-    <span className="block space-y-1">
-      <span
-        ref={listRef}
-        className={cn(
-          "block text-sm text-muted-foreground",
-          !expanded && "line-clamp-2"
-        )}
-      >
-        {subtopics.map((subtopic, index) => (
-          <span key={subtopic}>
-            {index > 0 && (
-              <MinusIcon
-                aria-hidden
-                className="mx-1.5 inline size-3.5 align-[-2px] text-foreground/55"
-              />
-            )}
-            {subtopic}
-          </span>
-        ))}
-      </span>
-      {(overflows || expanded) && (
+    <span className="flex flex-wrap gap-2">
+      {shown.map((subtopic) => (
+        <Badge
+          key={subtopic}
+          variant="outline"
+          className={`${TAG} normal-case`}
+        >
+          {subtopic}
+        </Badge>
+      ))}
+      {hidden > 0 && (
         <button
           type="button"
+          className="h-7 cursor-pointer px-1 text-sm text-primary transition-opacity hover:opacity-70"
+          aria-expanded={expanded}
           onClick={() => setExpanded((current) => !current)}
-          className="cursor-pointer text-sm text-foreground transition-colors hover:text-primary"
         >
-          {expanded ? t("showLess") : t("showAll")}
+          {expanded ? t("showLess") : t("more", { count: hidden })}
         </button>
       )}
     </span>

@@ -5,6 +5,11 @@ import { TimerIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { COUNTDOWN_WARNING_SECONDS } from "@/constants/interviews"
 
 function secondsUntil(end: number) {
@@ -49,16 +54,24 @@ export function Countdown({
   }, [left, onExpire])
 
   return (
-    <span
-      role="timer"
-      aria-label={t("timeLeft", { time: clock(left) })}
-      className={cn(
-        "flex items-center gap-1.5 font-medium tabular-nums",
-        left <= COUNTDOWN_WARNING_SECONDS && "text-red-600 dark:text-red-400"
-      )}
-    >
-      <TimerIcon aria-hidden className="size-4" />
-      {clock(left)}
-    </span>
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <span
+            role="timer"
+            aria-label={t("timeLeft", { time: clock(left) })}
+            className={cn(
+              "flex items-center gap-1.5 font-medium tabular-nums",
+              left <= COUNTDOWN_WARNING_SECONDS &&
+                "text-red-600 dark:text-red-400"
+            )}
+          />
+        }
+      >
+        <TimerIcon aria-hidden className="size-4" />
+        {clock(left)}
+      </TooltipTrigger>
+      <TooltipContent>{t("timeLeft", { time: clock(left) })}</TooltipContent>
+    </Tooltip>
   )
 }

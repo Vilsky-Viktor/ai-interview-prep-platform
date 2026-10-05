@@ -1,0 +1,62 @@
+"use client"
+
+import { LinkIcon } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
+import { useState } from "react"
+import { toast } from "sonner"
+
+import { CopyField } from "@/components/copy-field"
+import { Switch } from "@/components/ui/switch"
+import { apiErrorMessage, apiFetch } from "@/lib/api"
+
+/** One link for many candidates, for a job ad: on or off, and the link to copy while it's on. */
+export function ShareLink({
+  interviewId,
+  linkToken,
+}: {
+  interviewId: string
+  linkToken: string | null
+}) {
+  const t = useTranslations("interviews")
+  const router = useRouter()
+  const [token, setToken] = useState(linkToken)
+  const [saving, setSaving] = useState(false)
+
+  async function toggle(on: boolean) {
+    setSaving(true)
+
+    try {
+      const saved = await apiFetch<{ link_token: string | null }>(
+        `/companies/interviews/${interviewId}/link`,
+        { method: "PUT", body: JSON.stringify({ on }) }
+      )
+      setToken(saved.link_token)
+      router.refresh()
+    } catch (error) {
+      toast.error(apiErrorMessage(error, t("linkFailed")))
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <div className="space-y-4 rounded-2xl border p-5">
+      <label className="flex cursor-pointer items-center gap-4 text-base">
+        <LinkIcon aria-hidden className="size-7 shrink-0 text-primary" />
+        <span className="min-w-0 flex-1 space-y-1">
+          <span className="block font-medium">{t("linkTitle")}</span>
+          <span className="block text-sm text-muted-foreground">
+            {t("linkText")}
+          </span>
+        </span>
+        <Switch
+          checked={token !== null}
+          disabled={saving}
+          onCheckedChange={toggle}
+        />
+      </label>
+      {token && <CopyField path={`/apply/${token}`} />}
+    </div>
+  )
+}

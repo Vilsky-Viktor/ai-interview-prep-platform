@@ -6,8 +6,11 @@ from prepza_common.user import Language
 from pydantic import BaseModel, Field, field_validator
 
 from app.constants.interviews import (
+    DEFAULT_PASS_MARK,
     DEFAULT_QUESTION_SECONDS,
+    MAX_PASS_MARK,
     MAX_QUESTION_SECONDS,
+    MIN_PASS_MARK,
     MIN_QUESTION_SECONDS,
 )
 
@@ -18,19 +21,44 @@ class InterviewCreate(BaseModel):
     generate_in: Language | None = None
 
 
+class InterviewFromTemplate(BaseModel):
+    template_id: UUID
+
+
+class PreviewOut(BaseModel):
+    """The first session of a member's preview, to open in the player."""
+
+    session_id: UUID
+
+
 class InterviewOut(BaseModel):
     id: UUID
-    generation_id: UUID
+    # None for a test made from a template.
+    generation_id: UUID | None
     set_id: UUID | None
     title: str | None
     question_seconds: int
     candidate_count: int
+    hired: bool
+    pass_mark: int
+    # The shareable link's code while it's on.
+    link_token: str | None
+    # New, in process or hired (constants/interviews.py).
+    status: str
     created_at: datetime
 
 
+class QuestionOption(BaseModel):
+    answer: str
+    correct: bool
+
+
 class QuestionText(BaseModel):
+    """A question as the company manages it: text, answer options and feedback counts."""
+
     id: UUID
     text: str
+    options: list[QuestionOption]
     likes: int
     dislikes: int
     reports: int
@@ -74,6 +102,8 @@ class InterviewSettings(BaseModel):
     question_seconds: int = Field(
         default=DEFAULT_QUESTION_SECONDS, ge=MIN_QUESTION_SECONDS, le=MAX_QUESTION_SECONDS
     )
+    hired: bool = False
+    pass_mark: int = Field(default=DEFAULT_PASS_MARK, ge=MIN_PASS_MARK, le=MAX_PASS_MARK)
 
 
 class TitleIn(BaseModel):

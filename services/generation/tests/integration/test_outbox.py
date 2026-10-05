@@ -27,24 +27,19 @@ def test_an_expired_interview_review_saves_its_event_and_the_flush_publishes_it(
     monkeypatch.setattr(pubsub, "publish", publish)
 
     async def scenario():
-        interview = await generations.create("ann", "job", "interview", uuid.uuid4())
-        preparation = await generations.create("ann", "goal")
-
-        for generation in (interview, preparation):
-            await generations.update(generation.id, status=Status.AWAITING_REVIEW)
+        interview = await generations.create("ann", "job", uuid.uuid4())
+        await generations.update(interview.id, status=Status.AWAITING_REVIEW)
 
         await generations.expire_reviews(datetime.now(UTC) + timedelta(seconds=1))
         saved = [(row.event_type, row.data) for row in await waiting()]
         published = await outbox_service.flush()
 
-        return interview.id, preparation.id, saved, published, await waiting()
+        return interview.id, saved, published, await waiting()
 
-    interview_id, preparation_id, saved, published, left = run(scenario())
+    interview_id, saved, published, left = run(scenario())
 
     expected = ("generation.cancelled", {"generation_id": str(interview_id)})
     assert expected in saved
-    # A learner's preparation has no company to tell.
-    assert all(data.get("generation_id") != str(preparation_id) for _, data in saved)
     assert expected in sent
     assert published == len(saved)
     assert left == []

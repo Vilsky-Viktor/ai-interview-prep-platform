@@ -63,16 +63,14 @@ export function AutoTopUpSetting({
   companyId,
 }: {
   catalog: Catalog
-  companyId?: string
+  companyId: string
 }) {
   const t = useTranslations("autoTopUp")
   const common = useTranslations("common")
   const locale = useLocale()
   const router = useRouter()
   const { user } = useAuth()
-  const path = companyId
-    ? `/companies/companies/${companyId}/auto-top-up`
-    : "/billing/me/auto-top-up"
+  const path = `/companies/companies/${companyId}/auto-top-up`
   const [setting, setSetting] = useState<AutoTopUp | null>(null)
   const [open, setOpen] = useState(false)
   const [product, setProduct] = useState("")

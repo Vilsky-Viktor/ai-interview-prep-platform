@@ -4,7 +4,7 @@ from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.credits import Reason
-from app.constants.products import DELETED_OWNER, OwnerType
+from app.constants.products import OwnerType
 from app.models.billing import Entry, Hold, Purchase, Wallet
 from app.storage import referrals
 from app.storage.db import Session
@@ -84,30 +84,15 @@ async def for_transaction(transaction_id: str) -> tuple[str, str, int, str] | No
 
 
 async def purchases_of(user_id: str) -> list[Purchase]:
-    query = (
-        select(Purchase)
-        .where(
-            (Purchase.buyer_id == user_id)
-            | ((Purchase.owner_type == OwnerType.USER) & (Purchase.owner_id == user_id))
-        )
-        .order_by(Purchase.created_at)
-    )
+    query = select(Purchase).where(Purchase.buyer_id == user_id).order_by(Purchase.created_at)
 
     async with Session() as session:
         return list(await session.scalars(query))
 
 
-async def delete_user(user_id: str) -> None:
-    """The learner's wallet, holds and history go; purchases stay for the accounts, without
-    them."""
-    is_user = {"owner_type": OwnerType.USER, "owner_id": user_id}
-
+async def forget_buyer(user_id: str) -> None:
+    """Purchases stay with their companies for the accounts, without who paid."""
     async with Session() as session:
-        await session.execute(delete(Wallet).filter_by(**is_user))
-        await session.execute(delete(Hold).filter_by(**is_user))
-        await session.execute(delete(Entry).filter_by(**is_user))
-        await referrals.forget(session, OwnerType.USER, user_id)
-        await session.execute(update(Purchase).filter_by(**is_user).values(owner_id=DELETED_OWNER))
         await session.execute(
             update(Purchase).where(Purchase.buyer_id == user_id).values(buyer_id=None)
         )

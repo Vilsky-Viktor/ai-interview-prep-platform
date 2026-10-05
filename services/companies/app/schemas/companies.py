@@ -10,6 +10,12 @@ class CompanyCreate(BaseModel):
     name: str = Field(min_length=1, max_length=MAX_COMPANY_NAME_LENGTH)
 
 
+class CompanyRename(BaseModel):
+    """A new name, edited in place like a test's title (hence `title`)."""
+
+    title: str = Field(min_length=1, max_length=MAX_COMPANY_NAME_LENGTH)
+
+
 class MemberOut(BaseModel):
     email: str
     role: str
@@ -31,6 +37,11 @@ class CompanyOut(BaseModel):
     name: str
     role: str
     interview_count: int
+    # The logo's address on the site; None until one is set.
+    logo_url: str | None = None
+    # The website's domain, and the same once verified by an admin's work email (the badge).
+    website_domain: str | None = None
+    verified_domain: str | None = None
     created_at: datetime
 
 
@@ -38,13 +49,21 @@ class MemberIn(BaseModel):
     email: EmailStr
 
 
+class ReferralRewardOut(BaseModel):
+    """A company that came through the link and topped up; no name once it's deleted."""
+
+    name: str | None
+    rewarded_at: datetime
+
+
 class ReferralOut(BaseModel):
-    """The company's referral link code, what it earns, and how many it has earned for."""
+    """The company's referral link code, what it earns, how many it has earned for, and the latest
+    of those, newest first."""
 
     code: str
     reward: int
-    min_dollars: int
     rewarded: int
+    rewards: list[ReferralRewardOut]
 
 
 class CompanyCreditsOut(BaseModel):

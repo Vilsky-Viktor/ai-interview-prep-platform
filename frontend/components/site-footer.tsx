@@ -7,10 +7,18 @@ export async function SiteFooter() {
   return (
     <footer className="border-t">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-6 text-sm text-muted-foreground">
-        <span>© {new Date().getFullYear()} prepza</span>
-        <nav aria-label={t("legal")} className="flex flex-wrap gap-x-6 gap-y-2">
-          <Link href="/pricing" className="hover:text-foreground">
-            {t("pricing")}
+        <span>
+          © {new Date().getFullYear()} prepza
+          <span className="text-primary">.</span>
+        </span>
+        {/* Lowercase with the blue dot, like the header's menu (globals.css, by data-slot). */}
+        <nav
+          data-slot="footer-nav"
+          aria-label={t("legal")}
+          className="flex flex-wrap gap-x-6 gap-y-2"
+        >
+          <Link href="/practice" className="hover:text-foreground">
+            {t("practice")}
           </Link>
           <Link href="/privacy" className="hover:text-foreground">
             {t("privacy")}

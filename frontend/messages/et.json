@@ -2,9 +2,6 @@
   "settings": {
     "title": "Seaded",
     "signIn": "Seadete muutmiseks logi sisse.",
-    "general": "Üldine",
-    "billing": "Arveldus",
-    "referral": "Kutsed",
     "language": "Keel",
     "languageNote": "Liidese ja juhendaja vastuste jaoks ning keel, millega uued komplektid ja intervjuud algavad. Saad neid luua igas toetatud keeles.",
     "languageFailed": "Keelt ei õnnestunud muuta. Proovi uuesti.",
@@ -14,13 +11,12 @@
     "downloadFailed": "Sinu andmeid ei õnnestunud ette valmistada. Proovi uuesti.",
     "delete": "Kustuta konto",
     "searchLanguage": "Otsi keelt",
-    "noLanguage": "Keelt ei leitud.",
-    "history": "Arveldusajalugu",
-    "historyNote": "Iga laekunud ja kulutatud krediit, uusimad eespool."
+    "noLanguage": "Keelt ei leitud."
   },
   "userMenu": {
     "signIn": "Logi sisse",
     "account": "Konto",
+    "adminZone": "Administraatori ala",
     "settings": "Seaded",
     "signOut": "Logi välja",
     "theme": "Teema",
@@ -34,17 +30,15 @@
     "main": "Peamenüü",
     "legal": "Õigusteave",
     "pricing": "Hinnad",
-    "privacy": "Privaatsuspoliitika",
+    "privacy": "Privaatsus",
     "terms": "Tingimused",
     "back": "Tagasi",
-    "create": "loo",
-    "explore": "avasta",
-    "myKits": "minu komplektid",
     "hiring": "värbamine",
     "pricingLink": "hinnad",
     "faq": "KKK",
     "contact": "Võta ühendust",
-    "about": "Meist"
+    "about": "Meist",
+    "practice": "Tasuta harjutamine"
   },
   "signIn": {
     "with": "Logi sisse kontoga",
@@ -80,43 +74,89 @@
     "notFoundText": "Seda lehte pole olemas või see on eemaldatud."
   },
   "home": {
-    "tagline": "Tehisaru agendid harjutavad sinuga, kuni tunned end kindlalt.",
-    "preparingFor": "Valmistud",
-    "words": [
-      "tööintervjuuks",
-      "sertifitseerimiseks",
-      "eksamiks",
-      "testiks",
-      "edutamiseks"
-    ],
-    "widest": "sertifitseerimiseks",
-    "mark": "?"
+    "title": "Intervjueeri kõiki\nPalka tõelised talendid",
+    "text": "Ajapiiranguga intervjuud sinu töökuulutuse põhjal. Igale kandidaadile oma küsimused ja pole aega tehisarult küsida. Alates 1 $ kandidaadi kohta."
   },
-  "goal": {
-    "placeholder": "Kleebi töökuulutus või kirjelda, mida soovid õppida…",
-    "label": "Milleks sa valmistud?",
-    "submit": "Loo ettevalmistus",
-    "failed": "Loomist ei õnnestunud alustada. Proovi uuesti.",
-    "seePlans": "Laadi juurde"
+  "start": {
+    "placeholder": "Kleebi töökuulutus või kirjelda rolli ja seda, mida kandidaat peaks teadma",
+    "description": "Töö kirjeldus",
+    "submit": "Loo intervjuu",
+    "whichCompany": "Millise ettevõtte jaoks see intervjuu on?",
+    "firstCompany": "Mis on sinu ettevõtte nimi?",
+    "newCompany": "Uus ettevõte",
+    "companyName": "Ettevõtte nimi",
+    "freeCandidates": "Sinu esimene ettevõte intervjueerib {count, plural, one {oma esimest kandidaati} other {oma esimest # kandidaati}} tasuta.",
+    "back": "Muuda kirjeldust",
+    "continue": "Jätka",
+    "starting": "Alustamine…",
+    "failed": "Intervjuud ei õnnestunud alustada. Proovi uuesti."
   },
-  "membership": {
-    "signIn": "Liitumiseks logi sisse",
-    "leave": "Lahku",
-    "join": "Liitu, et harjutada"
+  "superadmin": {
+    "fixNow": "Paranda kohe",
+    "fixing": "Parandamine…",
+    "dismiss": "Jäta kõrvale",
+    "fixSent": "Saadetud kontrollijale. See parandatakse või asendatakse hetke pärast.",
+    "actionFailed": "See ei õnnestunud. Proovi uuesti.",
+    "quality": "Kvaliteet",
+    "flagged": "Märgitud",
+    "replaced": "Asendatud",
+    "noFlagged": "Praegu pole midagi märgitud.",
+    "noReplaced": "Midagi pole veel asendatud.",
+    "answers": "{count, plural, one {# vastus} other {# vastust}}",
+    "right": "{percent}% õigesti",
+    "reports": "{count, plural, =0 {teateid pole} one {# teade} other {# teadet}}",
+    "kinds": {
+      "template": "mall",
+      "interview": "ettevõtte intervjuu"
+    },
+    "flags": {
+      "wrong_key": "vastus võib olla vale",
+      "rewrite": "vaja on uut küsimust",
+      "weak_options": "vaja on paremaid variante"
+    },
+    "zone": "Administraatori ala",
+    "templates": "Mallid",
+    "new": "Uus mall",
+    "createTitle": "Loo mall",
+    "placeholder": "Kleebi rolli kirjeldus või kirjelda rolli ja seda, mida selles rollis inimene peaks teadma",
+    "description": "Rolli kirjeldus",
+    "create": "Loo",
+    "createFailed": "Malli ei õnnestunud alustada. Proovi uuesti.",
+    "text": "Valmis intervjuud rollide kaupa ettevõtetele ja talentidele.",
+    "deleteLabel": "Kustuta {title}",
+    "deleteTitle": "Kustutada see mall?",
+    "deleteText": "Selle teemad ja küsimused kustutatakse. Intervjuud, mille ettevõtted on selle põhjal juba teinud, jäävad alles.",
+    "deleteFailed": "Malli ei õnnestunud kustutada. Proovi uuesti."
+  },
+  "templates": {
+    "title": "Mallid",
+    "empty": "Malle veel pole.",
+    "topics": "{count, plural, one {# teema} other {# teemat}}",
+    "search": "Otsi rolli või teema järgi",
+    "searchAction": "Otsi",
+    "level": "Tase: {level}",
+    "anyLevel": "Iga tase",
+    "allLanguages": "Kõik keeled",
+    "languages": "{count, plural, one {# keel} other {# keelt}}",
+    "noMatches": "Sobivaid malle pole.",
+    "use": "Kasuta malli",
+    "using": "Alustamine…",
+    "useFailed": "Sellest mallist ei õnnestunud intervjuud alustada. Proovi uuesti.",
+    "warningTitle": "Mallid on prepza proovimiseks.",
+    "warning": "Talendid harjutavad nendega, nii et kandidaadid võivad küsimusi juba teada. Päris värbamiseks loo intervjuu oma töökuulutuse põhjal.",
+    "text": "Valmis intervjuud rollide kaupa. Vali üks, et sellest oma intervjuud alustada; hiljem saad seda muuta."
   },
   "billing": {
     "paid": "Makse laekus. See ilmub siia hetke pärast.",
     "checkoutFailed": "Makselehte ei õnnestunud avada. Proovi uuesti.",
     "credits": "{count, plural, one {# krediit} other {# krediiti}}",
-    "bonus": "+{count, number} boonust",
     "topUp": "Laadi juurde",
-    "balance": "Saadaval {count} krediiti. Laadi juurde",
-    "balanceLow": "Saadaval {count} krediiti, hakkavad otsa saama. Laadi juurde",
     "low": "Hakkavad otsa saama",
     "creditsWord": "{count, plural, one {krediit} other {krediiti}}",
     "topUpTitle": "Laadi juurde: {name}",
-    "topUpNote": "1 $ eest saad 100 krediiti, suurematelt summadelt boonusega. Krediidid ei aegu.",
-    "customAmount": "Muu summa"
+    "topUpNote": "Iga juurdelaadimine ostab terve arvu kandidaate; suuremate puhul on kandidaat odavam. Krediidid ei aegu.",
+    "candidates": "{count, plural, one {# kandidaat} other {# kandidaati}}",
+    "each": "{price} tükk"
   },
   "deleteAccount": {
     "title": "Kustutada sinu konto?",
@@ -126,83 +166,15 @@
     "deleted": "Sinu konto kustutati.",
     "failed": "Kontot ei õnnestunud kustutada. Proovi uuesti."
   },
-  "levels": {
-    "basic": "algtase",
-    "medium": "kesktase",
-    "hard": "keeruline"
-  },
-  "visibility": {
-    "public": "avalik",
-    "private": "privaatne"
-  },
-  "library": {
-    "title": "Avalikud komplektid",
-    "search": "Otsi pealkirju ja teemasid",
-    "searchAction": "Otsi",
-    "noMatches": "Sobivaid ettevalmistusi ei leitud.",
-    "empty": "Avalikke ettevalmistusi veel pole.",
-    "level": "Tase: {level}",
-    "anyLevel": "Kõik",
-    "languages": "{count, plural, one {# keel} other {# keelt}}",
-    "sortBy": "Järjesta: {sort}",
-    "sort": {
-      "date": "Kuupäev",
-      "rating": "Hinnang",
-      "joiners": "Liitujad"
-    }
-  },
-  "preparations": {
-    "title": "Minu komplektid",
-    "new": "Uus ettevalmistus",
-    "signIn": "Oma ettevalmistuste nägemiseks logi sisse.",
-    "empty": "Ettevalmistusi veel pole. Loo esimene või vali avalikust kogust.",
-    "topics": "{count, plural, one {# teema} other {# teemat}}",
-    "created": "Loodud {date}",
-    "metaTitle": "Ettevalmistus",
-    "metaDescription": "Intervjuuks valmistumine ametikohale {title}: {count, plural, one {# teema} other {# teemat}} valikvastustega küsimusi, harjutusvoorud ja sertifikaadid.",
-    "history": "Ajalugu",
-    "page": "Ettevalmistuse leht",
-    "rounds": "Voorud",
-    "deleteLabel": "Kustuta {title}",
-    "deleteTitle": "Kustutada {title}?",
-    "deleteText": "Selle teemad ja küsimused kustutatakse ning kõik liitunud kaotavad juurdepääsu. Seda ei saa tagasi võtta.",
-    "deleteFailed": "Ettevalmistust ei õnnestunud kustutada. Proovi uuesti.",
-    "mastered": "Omandatud",
-    "masteredTitle": "Omandatud: igal teemal on sertifikaat",
-    "owner": "Omanik",
-    "ratingTitle": "Keskmine hinne ja hinnangute arv",
-    "rated": "Aitäh hinnangu eest",
-    "ratingUpdated": "Hinnang uuendatud",
-    "ratingFailed": "Hinnangut ei õnnestunud salvestada. Proovi uuesti.",
-    "rateIt": "Hinda",
-    "rate": "Hinda {value} punktiga {scale}-st",
-    "public": "Avalik",
-    "nowPublic": "Nüüd avalikus kogus",
-    "nowPrivate": "Nüüd privaatne",
-    "visibilityFailed": "Nähtavust ei õnnestunud muuta. Proovi uuesti."
-  },
   "share": {
-    "share": "Jaga",
-    "title": "Jaga ettevalmistust",
-    "public": "Igaüks, kellel on link, saab seda ettevalmistust vaadata.",
-    "private": "Saadame kutselingi e-postiga. Selle saab vastu võtta ainult see aadress.",
-    "email": "E-post",
-    "send": "Saada",
     "sent": "Kutse saadeti aadressile {email}",
     "checkEmail": "Kontrolli e-posti aadressi ja proovi uuesti.",
     "failed": "Kutset ei õnnestunud saata.",
-    "joined": "Liitunud",
-    "undelivered": "Kohale toimetamata",
-    "invited": "Kutsutud",
     "wrongEmail": "See kutse saadeti teisele e-posti aadressile.",
     "acceptFailed": "Kutset ei õnnestunud vastu võtta. Proovi uuesti.",
-    "signIn": "Selle ettevalmistusega liitumiseks logi sisse kutses olnud e-posti aadressiga.",
     "invalid": "See kutse ei kehti enam.",
     "invitedToJoin": "Sind kutsuti liituma.",
-    "open": "Ava ettevalmistus",
-    "join": "Liitu ettevalmistusega",
-    "mismatch": "E-posti aadress ei ühti. Liitumiseks logi sisse kutses olnud aadressiga.",
-    "inviteTitle": "Jagamiskutse"
+    "mismatch": "E-posti aadress ei ühti. Liitumiseks logi sisse kutses olnud aadressiga."
   },
   "reportReasons": {
     "wrong_answer": "Märgitud vastus on vale",
@@ -221,6 +193,18 @@
     "reports": "Teated",
     "showReports": "Näita teateid ({count})",
     "regenerate": "Loo uuesti",
+    "manage": "Halda küsimusi",
+    "wrongAnswer": "Vale vastus",
+    "checking": "Kontrollimine…",
+    "markedWrong": "Aitäh. Seda kontrollitakse ja see parandatakse või asendatakse.",
+    "markWrongFailed": "Kontrolli saatmine ei õnnestunud. Proovi uuesti.",
+    "ofCount": "/ {count, number}",
+    "per": "iga",
+    "candidate": "kandidaat",
+    "showOptions": "Näita vastusevariante",
+    "hideOptions": "Peida vastusevariandid",
+    "correct": "Õige vastus",
+    "wrong": "Vale vastus",
     "regenerating": "Luuakse uuesti…",
     "regenerated": "Küsimus loodi uuesti",
     "regenerateFailed": "Küsimust ei õnnestunud uuesti luua. Proovi uuesti.",
@@ -233,79 +217,27 @@
     "selectReason": "Vali põhjus",
     "details": "Üksikasjad",
     "showLess": "Näita vähem",
+    "more": "+{count, number} veel",
     "showAll": "Näita kõiki",
     "limitRange": "Sisesta arv vahemikus 1 kuni {count}.",
     "limitFailed": "Piirangut ei õnnestunud salvestada.",
     "limit": "Küsimuste piirang",
-    "of": "/",
     "count": "{count, plural, one {küsimus} other {küsimust}}",
-    "loadFailed": "Küsimusi ei õnnestunud laadida."
-  },
-  "certificate": {
-    "title": "Sertifikaat",
-    "metaDescription": "{name} läbis teema {topic} tulemusega {score}%.",
-    "heading": "Saavutuse sertifikaat",
-    "for": "Edukalt läbitud:",
-    "finalScore": "Lõpptulemus",
-    "issued": "Väljastatud",
-    "howTo": "Kuidas sertifikaati saada"
+    "loadFailed": "Küsimusi ei õnnestunud laadida.",
+    "yourAnswer": "sinu vastus"
   },
   "rounds": {
-    "title": "Voor",
-    "rounds": "Voorud",
-    "compare": "Võrdle",
-    "compareTitle": "Võrdle voore",
     "answered": "Vastatud",
     "correct": "Õige",
     "incorrect": "Vale",
     "notAnswered": "Vastamata",
-    "correctAnswer": "Õige vastus",
-    "yourAnswer": "Sinu vastus",
-    "askFollowUp": "Esita täpsustav küsimus",
-    "followUp": "Täpsustav küsimus",
-    "followUpPlaceholder": "Esita täpsustav küsimus…",
-    "replyFailed": "Vastust ei õnnestunud saada. Proovi uuesti.",
-    "firstRound": "Sinu esimene voor sellel teemal",
-    "sameAsLast": "Sama mis eelmises voorus",
-    "change": "{change} punkti võrreldes eelmise vooruga",
-    "topicAnswered": "Teema: vastatud {answered} küsimusele {total}-st",
-    "answeredOf": "Vastatud {answered}/{total}",
-    "finalScore": "Lõpptulemus",
-    "certificate": "Sertifikaat",
-    "history": "Ajalugu",
-    "preparationPage": "Ettevalmistuse leht",
-    "noRounds": "Voore veel pole.",
-    "selectToCompare": "Vali võrdlemiseks",
-    "grade": "hinne",
-    "continue": "Jätka",
-    "start": "Alusta",
     "finish": "Lõpeta",
     "finishing": "Lõpetamine…",
-    "finishRound": "Lõpeta voor",
-    "deleteRound": "Kustuta voor",
-    "finishTitle": "Lõpetada see voor?",
-    "deleteTitle": "Kustutada see voor?",
-    "unscored": "Vastamata küsimusi ei hinnata.",
-    "noMore": "Rohkem küsimustele vastata ei saa.",
-    "cantUndo": "Seda ei saa tagasi võtta.",
-    "deleteFailed": "Vooru ei õnnestunud kustutada. Proovi uuesti.",
-    "finishFailed": "Vooru ei õnnestunud lõpetada. Proovi uuesti.",
-    "startFailed": "Vooru ei õnnestunud alustada. Proovi uuesti.",
-    "answerFailed": "Vastust ei õnnestunud salvestada. Proovi uuesti.",
-    "signIn": "Selle vooru jätkamiseks logi sisse.",
-    "missing": "Seda vooru pole olemas.",
-    "allAnswered": "Vastasid selle vooru kõigile küsimustele.",
     "next": "Järgmine küsimus",
-    "progress": "Sertifikaadi jaoks vastatud küsimused",
-    "nextFailed": "Järgmist küsimust ei õnnestunud laadida. Proovi uuesti.",
-    "submitFailed": "Vastust ei õnnestunud saata. Proovi uuesti.",
-    "freeTurns": "Selle küsimuse juures on juhendajalt veel {count, plural, one {# tasuta küsimus} other {# tasuta küsimust}}",
-    "paidTurns": "Iga järgmine küsimus selle küsimuse juures maksab {count, plural, one {# krediit} other {# krediiti}}",
-    "buyCertificate": "Saa sertifikaat · {count} krediiti",
-    "makeItYours": "Valmistud kindlaks töökohaks? Kleebi kuulutus ja saa just selle jaoks tehtud komplekt.",
-    "makeItYoursAction": "Tee see omaks"
+    "submitFailed": "Vastust ei õnnestunud saata. Proovi uuesti."
   },
   "session": {
+    "toTest": "Mine intervjuude juurde",
     "startFailed": "Intervjuud ei õnnestunud alustada. Proovi uuesti.",
     "finishFailed": "Intervjuud ei õnnestunud lõpetada. Proovi uuesti.",
     "continueFailed": "Jätkata ei õnnestunud. Proovi uuesti.",
@@ -357,17 +289,7 @@
     "changes": "Teemade muudatused",
     "tooMany": "Vali kuni {max} teemat või kirjelda, kuidas neid ühendada.",
     "apply": "Rakenda muudatused",
-    "approve": "Kinnita ja loo",
-    "approvePrice": "Kinnita ja loo · {count} krediiti",
-    "unfinished": "Lõpetamata"
-  },
-  "generationStatus": {
-    "queued": "Loomisel",
-    "running": "Loomisel",
-    "awaiting_review": "Vaata teemad üle",
-    "done": "Valmis",
-    "failed": "Ebaõnnestus",
-    "cancelled": "Tühistatud"
+    "approve": "Kinnita ja loo"
   },
   "candidateStatus": {
     "invited": "kutsutud",
@@ -375,7 +297,9 @@
     "in_process": "pooleli",
     "finished": "lõpetatud",
     "deleted": "kustutatud",
-    "expired": "aegunud"
+    "expired": "aegunud",
+    "passed": "läbitud",
+    "flagged": "märgitud"
   },
   "roles": {
     "owner": "omanik",
@@ -391,17 +315,17 @@
     "owner": "Omanik",
     "interviewCount": "{count, plural, one {# intervjuu} other {# intervjuud}}",
     "interviews": "Intervjuud",
+    "templates": "Mallid",
     "admins": "Administraatorid",
     "referrals": "Kutsed",
     "new": "Uus ettevõte",
-    "newText": "Loo ettevõte, et luua intervjuusid ja kutsuda kandidaate.",
     "name": "Ettevõtte nimi",
     "create": "Loo",
     "createFailed": "Ettevõtet ei õnnestunud luua. Proovi uuesti.",
     "signInJoin": "Selle ettevõttega liitumiseks logi sisse kutses olnud e-posti aadressiga.",
     "open": "Ava ettevõte",
     "join": "Liitu ettevõttega",
-    "creditsLeft": "{count, plural, one {krediit saadaval} other {krediiti saadaval}}",
+    "creditsLeft": "{count, plural, one {krediit} other {krediiti}}",
     "creditsLow": "Hakkavad otsa saama: kandidaatide kutsumise jätkamiseks laadi juurde.",
     "timeLeft": "Aega jäänud: {time}",
     "removeLabel": "Eemalda {name}",
@@ -409,7 +333,12 @@
     "removeText": "Selle intervjuud ja kutsed kustutatakse.",
     "remove": "Eemalda",
     "removeFailed": "Ettevõtet ei õnnestunud eemaldada.",
-    "page": "Ettevõte"
+    "page": "Ettevõte",
+    "logo": "Logo",
+    "uploadLogo": "Laadi logo üles",
+    "changeLogo": "Muuda logo",
+    "removeLogo": "Eemalda logo",
+    "logoFailed": "Logo ei õnnestunud salvestada."
   },
   "candidates": {
     "scorecard": "Tulemused",
@@ -421,6 +350,11 @@
     "copies": "{count, plural, one {# kopeerimiskatse} other {# kopeerimiskatset}}",
     "fastAnswers": "{count, plural, one {# kiire vastus} other {# kiiret vastust}}",
     "empty": "Kandidaate pole veel kutsutud.",
+    "noMatches": "Sobivaid kandidaate pole.",
+    "search": "Otsi kandidaate e-posti järgi",
+    "searchAction": "Otsi",
+    "status": "Olek: {status}",
+    "anyStatus": "iga olek",
     "progress": "Edenemine",
     "grade": "Hinne",
     "resend": "Saada kutse uuesti",
@@ -438,11 +372,27 @@
       "date": "Kuupäev"
     }
   },
+  "interviewStatus": {
+    "new": "Uus",
+    "in_process": "Pooleli",
+    "hired": "Palgatud"
+  },
   "interviews": {
     "title": "Intervjuud",
     "interview": "Intervjuu",
     "candidates": "Kandidaadid",
     "new": "Uus intervjuu",
+    "createTitle": "Loo intervjuu",
+    "try": "Proovi kandidaadina",
+    "newCandidate": "Uued kandidaadid",
+    "linkTitle": "Jagatav link",
+    "linkText": "Töökuulutuse jaoks: intervjuu saab teha igaüks, kellel on link. Iga inimese eest võetakse tasu nagu kutsutud kandidaadi eest.",
+    "linkFailed": "Linki ei õnnestunud muuta. Proovi uuesti.",
+    "passMark": "Läbimise lävi",
+    "passMarkLabel": "Läbimise lävi protsentides",
+    "markHired": "Märgi palgatuks",
+    "tryLabel": "Proovi intervjuud {title} kandidaadina",
+    "tryFailed": "Eelvaadet ei õnnestunud alustada. Proovi uuesti.",
     "generating": "Loomisel…",
     "fallbackTitle": "intervjuu",
     "continueGeneration": "Jätka loomist",
@@ -461,12 +411,22 @@
     "adminEmail": "Administraatori e-post",
     "addAdmin": "Lisa administraator",
     "adminFailed": "Seda administraatorit ei õnnestunud kutsuda. Proovi uuesti.",
-    "candidateEmail": "Kandidaadi e-post",
     "invite": "Kutsu",
     "jobDescription": "Töö kirjeldus",
     "pasteJob": "Kleebi töö kirjeldus: roll, nõuded ja mis tuleb kasuks…",
     "generate": "Loo intervjuu",
-    "startFailed": "Intervjuud ei õnnestunud alustada. Proovi uuesti."
+    "startFailed": "Intervjuud ei õnnestunud alustada. Proovi uuesti.",
+    "candidateEmails": "Kandidaatide e-posti aadressid",
+    "emailsHint": "Üks või mitu aadressi, eraldatuna komade või reavahetustega",
+    "uploadFile": "Laadi fail üles",
+    "invitedMany": "Kutsutud {count} kandidaati",
+    "skip": {
+      "invalid": "{count, plural, one {# e-posti aadress pole kehtiv} other {# e-posti aadressi pole kehtivad}}.",
+      "limit": "{count, plural, one {# aadress ületab} other {# aadressi ületavad}} praegu sinu e-kirjade piirangu. Proovi tunni pärast uuesti.",
+      "no_credits": "{count, plural, one {# kandidaati ei kutsutud} other {# kandidaati ei kutsutud}}: krediidid said otsa. Nende kutsumiseks laadi juurde.",
+      "failed": "{count, plural, one {# kutset} other {# kutset}} ei õnnestunud saata. Proovi uuesti."
+    },
+    "talents": "Soovitatud talendid"
   },
   "invite": {
     "signIn": "Selle intervjuu tegemiseks logi sisse kutses olnud e-posti aadressiga.",
@@ -479,7 +439,7 @@
     "timeRunsOut": "Kui küsimuse aeg saab otsa, loetakse see valeks ja avaneb järgmine. Kell käib edasi ka siis, kui lahkud.",
     "unanswered": "Vastamata küsimused loetakse valeks.",
     "saved": "Edenemine salvestatakse: jätkamiseks ava see link uuesti.",
-    "stay": "Jää sellele lehele: lehelt lahkumine ja kopeerimine registreeritakse (<link>kuidas me sellega ümber käime</link>).",
+    "stay": "Jää sellele lehele: lehelt lahkumine ja kopeerimine registreeritakse (<link>privaatsus</link>).",
     "finished": "See intervjuu on juba lõppenud.",
     "continue": "Jätka",
     "start": "Nõustu ja alusta",
@@ -503,29 +463,18 @@
   },
   "pricing": {
     "title": "Hinnad",
-    "intro": "Maksa ainult selle eest, mida kasutad: 1 $ eest saad 100 krediiti ja krediidid ei aegu. Tellimusi pole.",
-    "learners": "Õppijatele",
-    "welcome": "Registreerumisel",
-    "referrals": "Kutsed",
-    "referralsNote": "Jaga oma linki seadetest või ettevõtte linki selle kutsete vahekaardilt.",
-    "referral": "Sinu kutsutud sõber laeb esimest korda juurde",
-    "companyReferral": "Sinu kutsutud ettevõte laeb esimest korda juurde vähemalt ${min}",
-    "each": "kummalegi {count, number} krediiti",
-    "credits": "{count, plural, one {# krediit} other {# krediiti}}",
-    "companies": "Ettevõtetele",
-    "kit": "Sinu oma komplekt, loodud töökirjelduse põhjal",
-    "chat": "Tehisaru juhendaja: iga küsimuse juures {free, plural, one {# tasuta küsimus} other {# tasuta küsimust}}, seejärel",
-    "perTurn": "{count, plural, one {# krediit} other {# krediiti}} küsimuse kohta",
-    "ownCertificate": "Sertifikaat oma või jagatud komplekti põhjal",
-    "publicCertificate": "Sertifikaat avaliku komplekti põhjal",
-    "publicPractice": "Harjutamine avalikes komplektides ({count, plural, one {# uus teema} other {# uut teemat}} päevas)",
-    "draftTopics": "Sinu töökuulutuse või eesmärgi jaoks koostatud teemad",
-    "gift": "{count, number} krediiti tasuta",
+    "intro": "Maksa kandidaadi kohta. Intervjuude loomine on tasuta ja tellimusi pole.",
+    "test": "Intervjuu loomine",
     "free": "Tasuta",
-    "interview": "Intervjuu loomine",
-    "candidate": "Iga kandidaat, kes lõpetab ja vastab vähemalt ühele küsimusele",
-    "companyWelcome": "Sinu esimene ettevõte",
-    "openCompanies": "Ettevõtted",
+    "candidate": "Iga kandidaat, kes vastab vähemalt ühele küsimusele",
+    "candidateVolume": "Krediitidega vähemalt {from, number} $ juurdelaadimisest",
+    "perCandidate": "{dollars, number} $ kandidaadi kohta",
+    "welcome": "{count, plural, one {Sinu esimene kandidaat} other {Sinu esimesed # kandidaati}}",
+    "credits": "1 $ = 100 krediiti, krediidid ei aegu.",
+    "referrals": "Kutsed",
+    "referralsNote": "Jaga oma ettevõtte linki selle kutsete vahekaardil.",
+    "companyReferral": "Sinu kutsutud ettevõte teeb esimese juurdelaadimise",
+    "each": "kummalegi {count, number} krediiti",
     "topUp": "Laadi juurde"
   },
   "site": {
@@ -534,22 +483,6 @@
   "legal": {
     "updated": "Viimati uuendatud",
     "englishOnly": "See dokument on saadaval ainult inglise keeles."
-  },
-  "credits": {
-    "noHistory": "Veel midagi pole.",
-    "reasons": {
-      "welcome": "Tervituskink",
-      "topup": "Juurdelaadimine",
-      "kit": "Komplekt",
-      "candidate": "Kandidaat",
-      "certificate": "Sertifikaat",
-      "author_share": "Sinu avalik komplekt tõi sertifikaadi",
-      "chat": "Küsimus juhendajale",
-      "refund": "Tagasimakse",
-      "chargeback": "Pank tühistas makse",
-      "chargeback_reversed": "Tühistatud makse taastati",
-      "referral": "Kutsetasu"
-    }
   },
   "autoTopUp": {
     "title": "Automaatne juurdelaadimine",
@@ -572,43 +505,42 @@
     "label": "Loo keeles"
   },
   "referral": {
-    "title": "Kutsu sõpru",
-    "note": "Mõlemad saate {reward, number} krediiti, kui sõber esimest korda juurde laeb.",
     "companyTitle": "Kutsu teine ettevõte",
-    "companyNote": "Mõlemad ettevõtted saavad {reward, number} krediiti, kui uus ettevõte laeb juurde vähemalt ${min}.",
+    "companyNote": "Te mõlemad saate {reward, number} krediiti, kui nad teevad esimese juurdelaadimise mis tahes summas.",
+    "deletedCompany": "Kustutatud ettevõte",
+    "credits": "+{count, number} krediiti",
     "rewarded": "{count, plural, =0 {Tasusid veel pole.} one {Tasu saadud # kord.} other {Tasu saadud # korda.}}"
   },
   "topUp": {
     "title": "Laadi juurde",
     "intro": "1 $ eest saad 100 krediiti ja krediidid ei aegu.",
     "signIn": "Krediitide juurdelaadimiseks logi sisse.",
-    "yours": "Isiklik saldo",
-    "personal": "Isiklikud krediidid",
-    "personalNote": "Sinu komplektide, tehisaru juhendaja ja sertifikaatide jaoks.",
     "companies": "Ettevõtete krediidid",
     "companiesNote": "Iga ettevõtte kandidaatide jaoks.",
+    "noCompany": "Krediidid kuuluvad ettevõttele. Loo esmalt oma ettevõte ja laadi siis siin juurde.",
+    "createCompany": "Loo ettevõte",
     "pricing": "Hinnad"
   },
   "landing": {
     "more": "Kuidas see töötab",
     "how": {
-      "title": "Kolm sammu valmisolekuni",
+      "title": "Kolm sammu esimeste tulemusteni",
       "paste": {
-        "title": "Kleebi või kirjelda",
-        "text": "Töökuulutus, õppekava või oskused ja tehnoloogiad, mida tahad õppida."
+        "title": "Kleebi töökuulutus",
+        "text": "Iga roll, iga keel.\nprepza toob välja, mida kandidaat peab teadma, ja pakub teemasid."
       },
       "review": {
-        "title": "Vaata plaan üle",
-        "text": "Tehisaru agendid leiavad olulise ja pakuvad teemasid.\nJäta alles, nimeta ümber või muuda."
+        "title": "Vaata teemad üle",
+        "text": "Jäta alles, nimeta ümber või muuda.\nÜhtegi küsimust ei kirjutata enne sinu heakskiitu."
       },
-      "practice": {
-        "title": "Harjuta, kuni oled kindel",
-        "text": "Iga teema saab oma küsimused.\nHarjuta voorudes ja vaata, kuidas edusammud kasvavad."
+      "invite": {
+        "title": "Kutsu kandidaadid",
+        "text": "Kleebi nimekiri, laadi üles fail või jaga üht linki.\nMeeldetuletused lähevad ise teele. Näed tulemuste järjekorras, kes tööd tunneb."
       }
     },
     "control": {
-      "title": "Sina otsustad, mida õppida",
-      "text": "Ühtegi küsimust ei kirjutata enne, kui oled teemad kinnitanud. Eemalda linnuke sellelt, mida juba oskad, nimeta teema ümber, muuda alateemasid või lihtsalt ütle tehisarule, mida muuta, ja las see teeb ülejäänu.",
+      "title": "Sina otsustad, mida kontrollitakse",
+      "text": "Küsimusi ei kirjutata enne, kui oled teemad heaks kiitnud. Eemalda linnuke sellelt, mida roll ei vaja, nimeta teema ümber, muuda selle alateemasid või ütle tehisarule, mida muuta.",
       "topics": {
         "design": "Süsteemide disain",
         "sql": "Sisuturundus",
@@ -638,43 +570,9 @@
         "Vaatamiste mõõtmine"
       ]
     },
-    "gaps": {
-      "title": "Harjutamine, mis leiab lüngad",
-      "text": "Iga voor küsib uuesti kõik teema küsimused, alustades nendest, milles eelmisel korral eksisid. Võrdle voore ja vaata, kuidas lüngad sulguvad.",
-      "items": {
-        "first": {
-          "question": "Milline mõõdik näitab, kes vaatas reklaami lõpuni?",
-          "wrong": "Klikkimise määr",
-          "right": "Lõpuni vaatamise määr"
-        },
-        "second": {
-          "question": "Mida vahemälu peamiselt vähendab?",
-          "wrong": "Salvestuskulusid",
-          "right": "Vastuse aega"
-        }
-      }
-    },
-    "tutor": {
-      "title": "Juhendaja iga küsimuse jaoks",
-      "text": "Pärast iga vastust näed kohe õiget valikut. Pole kindel, miks see õige on? Küsi tehisaru juhendajalt ja süvene nii palju, kui vaja.",
-      "question": "Klient on hilinenud tarne pärast pahane. Mida teed kõigepealt?",
-      "options": {
-        "first": "Selgitan hilinemise põhjust",
-        "second": "Tunnistan probleemi ja vabandan",
-        "third": "Pakun kohe allahindlust",
-        "fourth": "Annan juhtumi juhatajale"
-      },
-      "ask": "Miks mitte kõigepealt selgitada?",
-      "answer": "Tunnista enne probleemi: põhjuseid kuulatakse, kui inimene tunneb end ärakuulatuna."
-    },
-    "proof": {
-      "title": "Tea, millal oled valmis",
-      "text": "Igal teemal on edenemisriba kuni sertifikaadini. Teeni see välja ja teema loetakse omandatuks.",
-      "again": "Alusta uuesti"
-    },
     "quality": {
-      "title": "Küsimused, mis paranevad ise",
-      "text": "Meeldimised, mittemeeldimised ja teated toovad välja nõrgad küsimused. Tehisaru kontrollija parandab või asendab need automaatselt ja komplekti omanik saab iga küsimuse ka ise uuesti luua.",
+      "title": "Küsimused, mis parandavad end ise",
+      "text": "Kandidaatide vastused, hinnangud ja teated toovad välja nõrgad küsimused. Tehisaru kontrollija parandab või asendab need automaatselt ja iga küsimuse saad ka ise uuesti luua.",
       "items": {
         "good": "Mida andmebaasi indeks kiirendab?",
         "weak": "Milline programmeerimiskeel on parim?",
@@ -683,45 +581,89 @@
       "comment": "See sõltub projektist, nii et üht õiget vastust pole.",
       "list": "Teema küsimused"
     },
-    "share": {
-      "title": "Jaga või avalda",
-      "text": "Kutsu sõbrad või kolleegid e-postiga oma komplektiga koos harjutama või avalda see avalikus raamatukogus kõigile, kes valmistuvad sama asja jaoks.",
-      "private": "Jaga privaatselt",
-      "public": "Jaga avalikult",
-      "browse": "Avasta raamatukogu"
+    "try": {
+      "title": "Proovi enne oma kandidaate",
+      "text": "Tee sarnase rolli tasuta harjutusintervjuu või ava oma intervjuu kandidaadina, enne kui kedagi kutsud.",
+      "browse": "Sirvi harjutusintervjuusid",
+      "topic": "Süsteemidisain",
+      "question": "Mida andmebaasi ees olev vahemälu peamiselt vähendab?",
+      "options": {
+        "a": "Andmebaasi suurust",
+        "b": "Seda, kui sageli andmebaasist loetakse",
+        "c": "Tabelite arvu",
+        "d": "Varukoopiate tegemise aega"
+      },
+      "points": {
+        "practice": "Tasuta harjutusintervjuud paljudele rollidele",
+        "preview": "Sinu oma intervjuu kandidaadi pilgu läbi"
+      }
+    },
+    "link": {
+      "title": "Üks link sinu töökuulutusse",
+      "text": "Pane intervjuu link oma töökuulutusse. Igaüks, kes kandideerib, teeb intervjuu kohe ja ilmub sinu kandidaatide nimekirja tulemuste järjekorras.",
+      "note": "Intervjuu saab teha igaüks, kellel on link.",
+      "points": {
+        "anywhere": "Tööportaalides, LinkedInis või sinu veebilehel",
+        "off": "Lülita see välja, kui koht on täidetud"
+      }
     },
     "companies": {
-      "title": "Värbad? Testi kandidaate ausalt",
-      "text": "Tee töökuulutusest ajapiiranguga intervjuu ja kutsu kandidaadid seda tegema, et neid hinnata.",
+      "title": "Vaata, kes tööd tunneb",
+      "text": "Kandidaadid teevad intervjuu sinu e-posti kutse kaudu. Nende tulemused saabuvad vastamise käigus, rohelised või punased vastavalt sinu läbimise lävele.",
       "points": {
         "own": "Igale kandidaadile oma küsimused",
         "timed": "Taimer iga küsimuse juures",
         "flags": "Märked kiirustamise, lahkumise ja kopeerimise kohta",
-        "private": "Kandidaadid ei näe oma tulemusi"
+        "private": "Kandidaadid ei näe kunagi oma tulemusi"
       },
       "candidate": "Kandidaat",
       "score": "Tulemus",
       "rushed": "Kiirustatud vastused",
       "left": "Lahkus lehelt",
-      "start": "Alusta värbamist"
+      "role": "Backend-arendaja · läbimise lävi {mark}%"
+    },
+    "reports": {
+      "title": "Jaga tulemusi ühe klõpsuga",
+      "text": "Selge PDF-aruanne ühe kandidaadi või kogu nimekirja kohta. Laadi see alla või saada otse prepzast värbamisjuhile.",
+      "points": {
+        "pdf": "Üks kandidaat või kõik korraga",
+        "share": "Saada PDF e-postiga või jaga sõnumirakendustes"
+      }
+    },
+    "brand": {
+      "title": "Sinu bränd, kinnitatud",
+      "text": "Kandidaadid näevad sinu logo esimesest e-kirjast viimase küsimuseni koos märgiga, mis näitab, et sinu ettevõte on päris.",
+      "role": "Backend-arendaja",
+      "points": {
+        "email": "Sinu logo kutsekirjas",
+        "interview": "Intervjuul, mida kandidaadid teevad",
+        "report": "Igas PDF-aruandes",
+        "verified": "Kinnitatud sinu meeskonna töömeiliga"
+      }
+    },
+    "talent": {
+      "title": "Saa talentide soovitusi",
+      "text": "Meie tasuta harjutusintervjuude parimad, soovitatud sinu rolli jaoks. Tasuta.",
+      "suggested": "Soovitatud rollile Backend-arendaja",
+      "score": "Tulemus",
+      "points": {
+        "free": "Tasuta sulle ja talentidele",
+        "practice": "Hinnatud ajapiiranguga intervjuudel",
+        "first": "Arvesse läheb ainult esimene katse",
+        "link": "Nad ise otsustavad, kas neid soovitatakse"
+      }
     },
     "languages": {
-      "title": "Sinu keeles",
-      "text": "Kasuta prepza't ükskõik millises {count} keelest. Kleebi töökuulutus ühes keeles ja harjuta teises."
+      "title": "Iga roll, iga keel",
+      "text": "prepza töötab {count} keeles. Kleebi töökuulutus ühes keeles ja intervjueeri kandidaate teises."
     },
     "pricing": {
-      "title": "Maksa ainult selle eest, mis töötab",
-      "text": "Ei mingeid tellimusi ega pakette. Laadi juurde, kui vaja: krediidid ei aegu ja kõik, mis ebaõnnestub, on tasuta.",
+      "title": "Maksa kandidaadi eest",
+      "text": "Intervjuud ja {free, plural, one {sinu esimene kandidaat} other {sinu esimesed # kandidaati}} on tasuta. Edaspidi maksad ainult nende kandidaatide eest, kes vastavad, ilma tellimuseta.",
       "see": "Vaata hindu",
-      "company": "Acme Inc.",
-      "personal": "Sinu komplektide ja tehisaru juhendaja jaoks.",
-      "learner": "Õppija krediidid"
-    },
-    "referrals": {
-      "title": "Teeni partnerina krediiti",
-      "text": "Kutsu oma lingiga sõpru või teisi ettevõtteid. Kui nad esimest korda raha juurde laadivad, saate mõlemad krediiti.",
-      "whereLearner": "Sinu link on jaotises {settings} → {referral}.",
-      "whereCompany": "Ettevõtte link on jaotises {hiring} → sinu ettevõte → {referrals}."
+      "perCandidate": "kandidaadi kohta",
+      "base": "Maksa kasutuse järgi",
+      "volume": "Juurdelaadimisega alates {from, number} $"
     },
     "faq": {
       "title": "Küsimusi veel?",
@@ -729,8 +671,8 @@
       "read": "ava KKK"
     },
     "ready": {
-      "title": "Valmis valmistuma?",
-      "start": "Alusta kohe"
+      "title": "Valmis oma esimesi kandidaate intervjueerima?",
+      "start": "Loo intervjuu"
     }
   },
   "faq": {
@@ -757,14 +699,15 @@
   },
   "about": {
     "title": "Meist",
-    "intro": "prepza aitab sul enesekindlalt valmistuda ja annab ettevõtetele lihtsa ning soodsa viisi kandidaate proovile panna.",
+    "intro": "prepza aitab ettevõtetel leida inimesi, kes tööd päriselt tunnevad: õiglane ajapiiranguga intervjuu sinu töökuulutuse põhjal, hinnaga, mida iga meeskond saab endale lubada. Ja igaüks, kes intervjuuks valmistub, saab tasuta harjutada.",
     "company": {
       "title": "Miks me olemas oleme",
-      "learners": "Valmistumine intervjuuks, eksamiks või uue oskuse omandamiseks ei peaks algama tundidepikkuse otsimisega. Räägi prepzale, mille poole püüdled, ja see teeb sellest selge plaani: olulised teemad, harjutusküsimused igaühe kohta ja juhendaja, kes selgitab iga vastust seni, kuni asi on selge.",
-      "companies": "Ettevõtete puhul tahame, et värbamine oleks õiglane ja jõukohane igale meeskonnale, mitte ainult suurtele. Tee töökuulutusest mõne minutiga ajapiiranguga intervjuu, anna igale kandidaadile oma küsimused ja maksa ainult nende kandidaatide eest, kes selle tegelikult läbivad."
+      "problem": "Värbamine toetub sageli CV-le ja heale vestlusele, ning mõlemad võivad eksitada. Abiks olevad hindamisvahendid on hinnastatud suurtele ettevõtetele, aastaplaanide ja kasutajatasudega, nii et enamik meeskondi jääb neist ilma.",
+      "approach": "prepza teeb töökuulutusest mõne minutiga ajapiiranguga intervjuu, mis tahes rolli jaoks. Iga kandidaat saab oma küsimused, sina näed, kes tööd tunneb ja miks, ning maksad ainult nende kandidaatide eest, kes intervjuu tegelikult teevad.",
+      "practice": "Tahame ka, et intervjuuks valmistumine oleks kõigile tasuta. Igaüks saab teha meie harjutusintervjuusid mõne rolli jaoks, näha oma hinnet ja kõiki õigeid vastuseid ning uuesti harjutada, ilma et see midagi maksaks. Need, kes saavad hästi hakkama, võivad valida, et neid soovitatakse ettevõtetele, kes värbavad sarnasesse rolli."
     },
     "founder": {
-      "quote": "Iga kord, kui valmistusin tööintervjuuks või püüdsin midagi uut õppida, kulus mul rohkem aega hea materjali otsimisele kui päris õppimisele. Iga sait kattis vaid tüki ja ükski ei sobinud sellega, mida vajasin. Nii ehitasingi prepza: tööriista, mida ise oleksin tahtnud, mis alustab sinu eesmärgist ja juhatab sind selleni. Loodan, et see säästab sulle need tunnid, mis oleks säästnud mulle.",
+      "quote": "Hea värbamine ei tohiks olla suurte eelarvetega suurettevõtete privileeg. Lõin prepza, et iga meeskond saaks mõne minutiga teha töökuulutusest õiglase intervjuu, näha, kes tööd päriselt tunneb, ja maksta ainult nende kandidaatide eest, kes intervjuu teevad. Loodan, et see aitab sul õiged inimesed kiiremini üles leida.",
       "role": "prepza ainuasutaja"
     }
   },
@@ -775,7 +718,6 @@
     "kinds": {
       "question_flagged": "{count, plural, one {Komplekti „{title}“ teema „{topic}“ küsimus märgiti ülevaatamiseks.} other {Komplekti „{title}“ # küsimust märgiti ülevaatamiseks.}}",
       "question_fixed": "{count, plural, one {Tehisaru parandas komplekti „{title}“ teema „{topic}“ märgitud küsimuse.} other {Tehisaru parandas komplekti „{title}“ # märgitud küsimust.}}",
-      "kit_ready": "Sinu komplekt „{title}“ on valmis.",
       "referral_rewarded": "Sinu kutsutud inimene laadis juurde. Said {credits} krediiti.",
       "auto_top_up_charged": "Automaatne juurdelaadimine lisas {credits} krediiti.",
       "auto_top_up_failed": "Automaatne juurdelaadimine ei saanud kaardilt makset võtta. Lae juurde, et saldo otsa ei saaks.",
@@ -784,5 +726,77 @@
       "interview_ready": "Intervjuu „{title}“ on valmis.",
       "interview_cancelled": "{title, select, none {Intervjuu} other {Intervjuu „{title}“}} tühistati: teemade ülevaatus ootas liiga kaua."
     }
+  },
+  "report": {
+    "download": "Laadi PDF alla",
+    "passed": "läbitud · läbimise lävi {mark}%",
+    "notPassed": "läbimata · läbimise lävi {mark}%",
+    "notFinished": "pole veel lõpetatud",
+    "share": "Jaga aruannet",
+    "fileName": "Aruanne {email}",
+    "failed": "PDF-aruannet ei õnnestunud koostada.",
+    "shareTitle": "Jaga aruannet",
+    "recipient": "Saaja e-posti aadress",
+    "send": "Saada <name>PDF</name>",
+    "sent": "Aruanne saadeti aadressile {email}",
+    "sendFailed": "Aruannet ei õnnestunud saata.",
+    "orSummary": "Või saada:",
+    "via": "Saadetud prepzast",
+    "candidatesFileName": "Kandidaadid {title}",
+    "candidateCount": "{count, plural, one {# kandidaat} other {# kandidaati}}",
+    "passMark": "läbimise lävi {mark}%",
+    "progressOf": "{progress}% tehtud"
+  },
+  "practice": {
+    "title": "Tasuta intervjuu harjutamine",
+    "intro": "Harjuta rolli jaoks ajapiiranguga intervjuuga ning vaata siis oma hinnet ja kõiki õigeid vastuseid. Tasuta.",
+    "about": "Ajapiiranguga harjutusintervjuu. Kui oled valmis, näed oma hinnet ja kõiki õigeid vastuseid. Privaatne ja tasuta.",
+    "pageTitle": "{title}: tasuta harjutusintervjuu",
+    "pageDescription": "Tasuta {level} taseme harjutusintervjuu rollile {title}: {count, plural, one {# teema} other {# teemat}}, ajapiiranguga, lõpus hinne ja kõik õiged vastused. Harjutus, mitte päris tööintervjuu.",
+    "start": "Alusta harjutamist",
+    "again": "Harjuta uuesti",
+    "continue": "Jätka",
+    "history": "Sinu katsed",
+    "results": "Harjutuse tulemused",
+    "grade": "küsimustest õigesti",
+    "notFinished": "lõpetamata",
+    "noRounds": "Katseid veel pole.",
+    "signIn": "Oma harjutuskatsete nägemiseks logi sisse.",
+    "startFailed": "Harjutamist ei õnnestunud alustada. Proovi uuesti.",
+    "gradeLabel": "Hinne",
+    "questions": "{count, plural, one {# küsimus} other {# küsimust}}",
+    "progressLabel": "Edenemine",
+    "answeredLabel": "küsimust vastatud"
+  },
+  "suggest": {
+    "title": "Lase end ettevõtetele soovitada",
+    "consent": "Vabatahtlik. Sarnastesse rollidesse värbavad ettevõtted võivad näha sinu nime, LinkedIni ja esimese katse tulemust. Saad seda igal ajal seadetes muuta või tagasi võtta.",
+    "link": "LinkedIni link",
+    "share": "Jaga",
+    "saved": "Nüüd võidakse sind ettevõtetele soovitada.",
+    "withdraw": "Võta tagasi",
+    "withdrawn": "Sind ei soovitata enam ettevõtetele.",
+    "invalid": "Kasuta oma LinkedIni profiili linki, näiteks https://www.linkedin.com/in/your-name",
+    "failed": "Salvestamine ei õnnestunud. Proovi uuesti.",
+    "shareAndStart": "Nõustu ja alusta",
+    "startWithout": "Keeldu ja alusta"
+  },
+  "talents": {
+    "about": "Talendid, kes said sarnase rolli intervjuu harjutamisel hästi hakkama ja nõustusid, et neid soovitatakse.",
+    "empty": "Soovitatud talente veel pole.",
+    "score": "Tulemus",
+    "hide": "Peida",
+    "hideFailed": "Talenti ei õnnestunud peita. Proovi uuesti."
+  },
+  "verify": {
+    "verify": "Kinnita",
+    "verified": "Kinnitatud: {domain}",
+    "title": "Kinnita ettevõte",
+    "text": "Sisesta ettevõtte veebisait. See kinnitatakse, kui omanik või administraator logib sisse sellel domeenil oleva tööaadressiga, näiteks you@acme.com: kui see oled sina, siis kohe.",
+    "website": "Ettevõtte veebisait",
+    "save": "Salvesta",
+    "done": "Kinnitatud: {domain}",
+    "pending": "Salvestatud. Kinnitatakse, kui omanik või administraator logib sisse domeeni {domain} aadressiga.",
+    "failed": "Veebisaiti ei õnnestunud salvestada."
   }
 }

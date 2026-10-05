@@ -63,7 +63,21 @@ def test_updates_the_time_per_question(client, monkeypatch):
     response = client.patch(url, json={"question_seconds": 45})
 
     assert response.status_code == 204
-    assert saved == {"question_seconds": 45}
+    assert saved == {"question_seconds": 45, "hired": False, "pass_mark": 70}
+
+    client.patch(url, json={"question_seconds": 45, "hired": True, "pass_mark": 70})
+
+    assert saved == {"question_seconds": 45, "hired": True, "pass_mark": 70}
     too_short = client.patch(url, json={"question_seconds": 5})
 
     assert too_short.status_code == 422
+
+
+def test_a_tests_status_follows_its_candidates_and_the_hired_mark():
+    from app.helpers.interviews import interview_status
+
+    assert interview_status(False, 0) == "new"
+    assert interview_status(False, 3) == "in_process"
+    # Marked as hired wins, with or without candidates.
+    assert interview_status(True, 3) == "hired"
+    assert interview_status(True, 0) == "hired"

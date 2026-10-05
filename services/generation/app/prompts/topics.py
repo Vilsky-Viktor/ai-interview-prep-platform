@@ -1,4 +1,4 @@
-TOPICS_PROMPT = """Generate interview preparation topics.
+TOPICS_PROMPT = """Generate the topics of a test for this job.
 
 Rules:
 - Requirements are not subtopics. Turn each one into the knowledge an interview would test:
@@ -29,7 +29,7 @@ Requirements:
 {requirements}
 """
 
-REVISION_PROMPT = """You are re-planning interview preparation topics after a reviewer's feedback.
+REVISION_PROMPT = """You are re-planning a job test's topics after a reviewer's feedback.
 
 Produce the complete, best set of topics that covers the current topics plus everything the
 instructions ask for, in at most {max_topics} main topics. Re-plan the whole list rather than

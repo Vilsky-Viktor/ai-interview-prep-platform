@@ -1,10 +1,7 @@
-from app.constants.kinds import GenerationKind
-
 EMBEDDING_MODEL = "text-embedding-3-small"
 # Shortened embeddings: plenty to tell topics apart, and small to store. Library's column matches.
 EMBEDDING_DIMENSIONS = 256
-# Reused questions fill at most this share of a topic, by GenerationKind; the rest are always new.
-# A learner's kit takes more, which saves generation; a company's interview stays mostly new.
-MAX_REUSE_SHARE = {GenerationKind.PREPARATION: 0.8, GenerationKind.INTERVIEW: 0.5}
-# Topics per request when embedding old topics; library accepts at most 100.
+# Reused questions fill at most this share of a topic; the rest are always new.
+MAX_REUSE_SHARE = 0.5
+# Topics per request when embedding template topics that have none; library accepts at most 100.
 EMBEDDING_BATCH_SIZE = 100

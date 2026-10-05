@@ -1,8 +1,7 @@
-"""End-to-end test against the running local stack, with real generations (needs OPENAI_API_KEY
-in .env; one kit and one interview of a single topic each, a few cents and a few minutes).
+"""End-to-end test against the running local stack, with a real generation (needs OPENAI_API_KEY
+in .env; one test of a single topic, a few cents and a few minutes).
 
-A learner signs up, generates a prep kit and practises a round; a company generates an interview
-and invites a candidate, who opens the invite and takes it; the company then sees the scorecard
+A company generates an interview and invites a candidate, who opens the invite and takes it; the company then sees the scorecard
 and pays for that candidate. Users come from the Firebase Auth emulator. The candidate uses
 Resend's test address, which both Resend and mailpit accept; their invite link is read from the
 companies database, since Resend's test inbox can't be read.
@@ -59,6 +58,11 @@ def call(method: str, url: str, token: str | None = None, body=None, headers=Non
             return json.loads(raw) if raw else None
     except urllib.error.HTTPError as error:
         sys.exit(f"FAIL {method} {url} -> {error.code} {error.read().decode()[:300]}")
+
+
+# Billing's prices (services/billing/app/constants/credits.py).
+CANDIDATE_CREDITS = 300
+WELCOME_COMPANY = 3 * CANDIDATE_CREDITS
 
 
 def api(method: str, path: str, token: str, body=None):
@@ -149,50 +153,6 @@ def answer_all(kind: str, item_id: str, token: str) -> int:
     return answered
 
 
-def learner() -> None:
-    _, token = sign_up("learner")
-    check(
-        api("GET", "/billing/me", token)["available"] == 500,
-        "a new learner starts with 500 credits",
-    )
-    step("learner signed up with 500 credits")
-
-    generation = api(
-        "POST", "/generate/generations", token, {"text": KIT_TEXT, "kind": "preparation"}
-    )
-    path = f"/generate/generations/{generation['id']}"
-    review = wait(
-        "the kit's topics",
-        lambda: (row := api("GET", path, token))["status"] == "awaiting_review" and row,
-    )
-    check(api("GET", "/billing/me", token)["reserved"] == 500, "the kit's credits are set aside")
-    api("POST", f"{path}/review", token, {"selected": [0]})
-    step(f"topics proposed ({len(review['topics'])}); generating the first")
-
-    done = wait(
-        "the kit", lambda: (row := api("GET", path, token))["status"] in ("done", "failed") and row
-    )
-    check(done["status"] == "done", f"the kit was generated ({done.get('error')})")
-    balance = wait(
-        "the charge",
-        lambda: (row := api("GET", "/billing/me", token))["reserved"] == 0 and row,
-        30,
-        2,
-    )
-    check(balance["available"] == 0, "the ready kit is charged")
-    step("kit ready and charged")
-
-    preparation = api("GET", f"/library/preparations/{done['preparation_id']}", token)
-    round_ = api("POST", "/rounds/rounds", token, {"topic_id": preparation["topics"][0]["id"]})
-    answered = answer_all("rounds", round_["id"], token)
-    finished = api("POST", f"/rounds/rounds/{round_['id']}/finish", token)
-    check(
-        finished["status"] == "finished" and finished["final_score"] is not None,
-        "the round finishes with a score",
-    )
-    step(f"round finished: {answered} answers, score {finished['final_score']}%")
-
-
 def company() -> None:
     _, owner = sign_up("owner")
     # Company names are unique across prepza, so each run gets its own.
@@ -200,10 +160,10 @@ def company() -> None:
     company_id = api("POST", "/companies/companies", owner, {"name": name})["id"]
     credits = f"/companies/companies/{company_id}/credits"
     check(
-        api("GET", credits, owner)["available"] == 1_500,
-        "a first company starts with 1,500 credits",
+        api("GET", credits, owner)["available"] == WELCOME_COMPANY,
+        f"a first company starts with {WELCOME_COMPANY} credits",
     )
-    step("company created with 1,500 credits")
+    step(f"company created with {WELCOME_COMPANY} credits")
 
     interview = api(
         "POST", f"/companies/interviews?company_id={company_id}", owner, {"text": INTERVIEW_TEXT}
@@ -219,8 +179,9 @@ def company() -> None:
 
     email, candidate = sign_up("candidate", verified=True)
     invite = api("POST", f"{path}/candidates", owner, {"email": email})
-    check(api("GET", credits, owner)["available"] == 1_200, "the candidate's credits are set aside")
-    step("candidate invited; 300 credits set aside")
+    left = WELCOME_COMPANY - CANDIDATE_CREDITS
+    check(api("GET", credits, owner)["available"] == left, "the candidate's credits are set aside")
+    step(f"candidate invited; {CANDIDATE_CREDITS} credits set aside")
 
     token = invite_token(invite["id"])
     sessions = api("POST", f"/companies/invites/{token}/start", candidate)["sessions"]
@@ -247,20 +208,18 @@ def company() -> None:
         "the charge",
         lambda: (
             (row := api("GET", f"/companies/companies/{company_id}/credits", owner))["available"]
-            == 1_200
+            == left
             and row
         ),
         30,
         2,
     )
-    check(balance["available"] == 1_200, "the answered candidate is charged")
+    check(balance["available"] == left, "the answered candidate is charged")
     step("scorecard ready; candidate charged")
 
 
 if __name__ == "__main__":
     started = time.monotonic()
-    print("learner:")
-    learner()
     print("company:")
     company()
     print(f"e2e ok in {time.monotonic() - started:.0f}s")

@@ -4,7 +4,6 @@ import Link from "next/link"
 import { useTranslations } from "next-intl"
 
 import { useAuth } from "@/components/auth-provider"
-import { CreditsBadge } from "@/components/billing/credits-badge"
 import { NotificationBell } from "@/components/notification-bell"
 import { SiteNav } from "@/components/site-nav"
 import { ThemeModes } from "@/components/theme-toggle"
@@ -40,7 +39,6 @@ export function SiteHeader() {
               <ThemeModes />
             </div>
           )}
-          <CreditsBadge />
           <NotificationBell />
           <UserMenu />
         </div>

@@ -23,14 +23,12 @@ export function GenerationView({
   next,
   backHref,
   backLabel,
-  kitCredits,
 }: {
   path: string
-  next?: string
+  // Where to go once the test is ready.
+  next: string
   backHref: string
   backLabel: string
-  // A kit's price from billing, shown on the approve button; null when billing didn't answer.
-  kitCredits: number | null
 }) {
   const t = useTranslations("generation")
   const billing = useTranslations("billing")
@@ -79,7 +77,7 @@ export function GenerationView({
 
   useEffect(() => {
     if (generation?.status === "done") {
-      router.replace(next ?? `/preparations/${generation.preparation_id}`)
+      router.replace(next)
     }
   }, [generation, next, router])
 
@@ -130,7 +128,7 @@ export function GenerationView({
   if (missing) {
     return (
       <WithBack href={backHref} label={backLabel}>
-        <Message text={t("missing")} />
+        <Message back={backHref} text={t("missing")} />
       </WithBack>
     )
   }
@@ -138,7 +136,7 @@ export function GenerationView({
   if (generation?.status === "cancelled") {
     return (
       <WithBack href={backHref} label={backLabel}>
-        <Message text={t("cancelled")} />
+        <Message back={backHref} text={t("cancelled")} />
       </WithBack>
     )
   }
@@ -148,7 +146,7 @@ export function GenerationView({
   if (generation?.status === "failed") {
     return (
       <WithBack href={backHref} label={backLabel}>
-        <Message text={t("failed")} onRetry={retry} />
+        <Message back={backHref} text={t("failed")} onRetry={retry} />
         {cancel && <div className="flex justify-center">{cancel}</div>}
       </WithBack>
     )
@@ -161,7 +159,6 @@ export function GenerationView({
         topics={generation.topics}
         maxTopics={generation.max_topics}
         maxSubtopics={generation.max_subtopics}
-        price={generation.kind === "preparation" ? kitCredits : null}
         back={<BackLink href={backHref}>{backLabel}</BackLink>}
         cancel={cancel}
         onSubmit={submitReview}
@@ -201,9 +198,12 @@ function WithBack({
 }
 
 function Message({
+  back,
   text,
   onRetry,
 }: {
+  // The company's tests, where a new one can be started.
+  back: string
   text: string
   onRetry?: () => Promise<void>
 }) {
@@ -232,7 +232,7 @@ function Message({
         <Button
           variant="outline"
           className="h-12 px-6 text-base"
-          render={<Link href="/" />}
+          render={<Link href={back} />}
           nativeButton={false}
         >
           {t("startOver")}

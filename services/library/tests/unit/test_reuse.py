@@ -3,6 +3,7 @@ import uuid
 from app.storage import reuse
 from tests.unit.test_internal import token
 
+SOURCE_ID = uuid.uuid4()
 OPTIONS = [{"answer": "Debit cash", "correct": True}, {"answer": "Credit cash", "correct": False}]
 
 
@@ -16,7 +17,7 @@ def test_proven_questions_are_offered_for_a_similar_topic(client, monkeypatch):
     async def fake_find(embedding, level, language, count):
         asked.update(embedding=embedding, level=level, language=language, count=count)
 
-        return [("A customer pays cash. Which entry is recorded?", OPTIONS)]
+        return [(SOURCE_ID, "A customer pays cash. Which entry is recorded?", OPTIONS)]
 
     monkeypatch.setattr(reuse, "find", fake_find)
 
@@ -26,7 +27,11 @@ def test_proven_questions_are_offered_for_a_similar_topic(client, monkeypatch):
 
     assert response.status_code == 200
     assert response.json() == [
-        {"text": "A customer pays cash. Which entry is recorded?", "options": OPTIONS}
+        {
+            "source_id": str(SOURCE_ID),
+            "text": "A customer pays cash. Which entry is recorded?",
+            "options": OPTIONS,
+        }
     ]
     assert asked == {"embedding": [0.1, 0.2], "level": "basic", "language": "ru", "count": 5}
 
@@ -38,29 +43,3 @@ def test_count_is_bounded(client):
 
 def test_vectors_are_written_the_way_pgvector_reads_them():
     assert reuse.as_vector([0.5, -1.0, 2e-05]) == "[0.5,-1.0,2e-05]"
-
-
-def test_backfill_lists_topics_and_saves_their_embeddings(client, monkeypatch):
-    topic_id = uuid.uuid4()
-    saved = {}
-
-    async def fake_missing(limit):
-        return [(topic_id, "Bookkeeping", ["Cash accounts"])]
-
-    async def fake_save(embeddings):
-        saved.update(embeddings)
-
-    monkeypatch.setattr(reuse, "missing", fake_missing)
-    monkeypatch.setattr(reuse, "save", fake_save)
-    headers = {"Authorization": f"Bearer {token()}"}
-
-    listed = client.get("/internal/embeddings/missing?limit=10", headers=headers)
-    stored = client.put(
-        "/internal/embeddings", json=[{"id": str(topic_id), "embedding": [0.1]}], headers=headers
-    )
-
-    assert listed.json() == [
-        {"id": str(topic_id), "title": "Bookkeeping", "subtopics": ["Cash accounts"]}
-    ]
-    assert stored.status_code == 204
-    assert saved == {topic_id: [0.1]}

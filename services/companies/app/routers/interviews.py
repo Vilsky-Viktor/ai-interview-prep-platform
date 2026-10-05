@@ -1,4 +1,4 @@
-from uuid import UUID
+from uuid import UUID, uuid4
 
 import httpx
 from fastapi import APIRouter, HTTPException, status
@@ -18,6 +18,7 @@ from app.constants.roles import Role
 from app.helpers.interviews import (
     attach_set,
     interview_out,
+    session_topics,
     topics_out,
 )
 from app.integrations import generation as generation_api
@@ -26,8 +27,10 @@ from app.integrations.redis import get_redis
 from app.schemas.interviews import (
     InterviewCreate,
     InterviewDetail,
+    InterviewFromTemplate,
     InterviewOut,
     InterviewSettings,
+    PreviewOut,
     TitleIn,
 )
 from app.services.access import require_company, require_manager
@@ -80,6 +83,29 @@ async def create_interview(
 
     # Generation picks the language from the job description, not from the recruiter's interface.
     interview = await interviews.create(company.id, created["id"], created["language"])
+
+    return await interview_out(interview)
+
+
+@router.post("/from-template", status_code=status.HTTP_201_CREATED)
+async def create_from_template(
+    body: InterviewFromTemplate, company_id: UUID, user: CurrentUser
+) -> InterviewOut:
+    """A test copied from a template: free and ready at once, so no generation limits apply."""
+    company, _ = await require_company(user, company_id)
+    copy = await library.copy_template(body.template_id, company.id)
+
+    if copy is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Template not found")
+
+    interview = await interviews.create_from_template(
+        company.id, copy["id"], copy["title"], copy["language"]
+    )
+    await track(
+        "interview_from_template", user_id=user.uid, company_id=company.id, set_id=copy["id"]
+    )
+    # Ready at once: no generation to wait for.
+    await track("test_ready", user_id=user.uid, company_id=company.id, how="template")
 
     return await interview_out(interview)
 
@@ -164,3 +190,34 @@ async def delete_interview(interview_id: UUID, user: CurrentUser) -> None:
     await library.delete_interview(interview.set_id)
     await release_unfinished(await invites.unfinished(interview.id))
     await interviews.remove(interview.id)
+
+
+@router.post("/{interview_id}/preview", status_code=status.HTTP_201_CREATED)
+async def preview_interview(interview_id: UUID, user: CurrentUser) -> PreviewOut:
+    """A company member takes their own test as a candidate would: free, kept out of the
+    candidate list, and its answers out of the questions' statistics. Each preview is new."""
+    interview = await interviews.get(interview_id)
+
+    if interview is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
+
+    await require_company(user, interview.company_id)
+    interview = await attach_set(interview)
+    content = await library.get_content(interview.set_id) if interview.set_id else None
+
+    if content is None or not content["topics"]:
+        raise HTTPException(status.HTTP_409_CONFLICT, "Interview is not ready yet")
+
+    # No invite stands behind a preview, so finishing it charges nothing.
+    created = await rounds.create_sessions(
+        {
+            "user_id": user.uid,
+            "candidate_invite_id": str(uuid4()),
+            "question_seconds": interview.question_seconds,
+            "topics": session_topics(interview, content),
+            "preview": True,
+        }
+    )
+    await track("interview_previewed", user_id=user.uid, company_id=interview.company_id)
+
+    return PreviewOut(session_id=created[0]["id"])

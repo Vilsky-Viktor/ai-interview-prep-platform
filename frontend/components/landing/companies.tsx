@@ -1,14 +1,16 @@
-import Link from "next/link"
+import { cn } from "cn"
 import { getLocale, getNow, getTranslations } from "next-intl/server"
 
+import { CandidateSignals } from "@/components/company/candidate-signals"
 import { CandidateStatsDemo } from "@/components/landing/candidate-stats-demo"
 import { LandingSection, Stage } from "@/components/landing/section"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { formatDate } from "@/lib/format"
+import type { Candidate } from "@/types/company"
 
 const POINTS = ["own", "timed", "flags", "private"] as const
 const DAY_MS = 24 * 60 * 60 * 1000
+const PASS_MARK = 70
 
 // The in-process candidate's progress and grade after each answer, as the demo plays them.
 const LIVE = [
@@ -17,7 +19,7 @@ const LIVE = [
   { progress: 42, grade: 74 },
 ]
 
-// The picture's candidates: one finished, one under way, one not started yet.
+// The picture's candidates: one passed, one under way, one below the passing grade.
 const CANDIDATES = [
   {
     email: "anna@example.com",
@@ -25,6 +27,7 @@ const CANDIDATES = [
     progress: 100,
     grade: 86,
     status: "finished",
+    signals: { tab_leaves: 0, copies: 0, fast_answers: 0 },
   },
   {
     email: "mark@example.com",
@@ -32,13 +35,16 @@ const CANDIDATES = [
     progress: 40,
     grade: null,
     status: "in_process",
+    signals: { tab_leaves: 0, copies: 0, fast_answers: 0 },
   },
   {
     email: "lee@example.com",
-    daysAgo: 0,
-    progress: 0,
-    grade: null,
-    status: "invited",
+    daysAgo: 2,
+    progress: 100,
+    grade: 58,
+    status: "finished",
+    // Left the page, copied text and answered too fast, each a different number of times.
+    signals: { tab_leaves: 2, copies: 1, fast_answers: 3 },
   },
 ] as const
 
@@ -51,85 +57,86 @@ export async function CompaniesSection() {
   const locale = await getLocale()
   const now = (await getNow()).getTime()
 
-  const start = (
-    <div className="pt-2">
-      <Button
-        className="h-11 px-6 text-base"
-        render={<Link href="/company" />}
-        nativeButton={false}
-      >
-        {t("start")}
-      </Button>
-    </div>
-  )
-
   return (
-    <LandingSection title={t("title")} text={t("text")} extra={start}>
+    <LandingSection title={t("title")} text={t("text")}>
       <Stage>
-        <ul className="divide-y rounded-2xl border bg-background text-start">
-          {CANDIDATES.map(({ email, daysAgo, progress, grade, status }) => (
-            <li
-              key={email}
-              className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between"
-            >
-              <span className="min-w-0 space-y-1">
-                <span className="block text-lg font-medium break-all">
-                  {email}
-                </span>
-                <span className="block text-sm text-muted-foreground">
-                  {formatDate(
-                    new Date(now - daysAgo * DAY_MS).toISOString(),
-                    locale
-                  )}
-                </span>
-              </span>
-              <span className="flex shrink-0 items-center gap-6">
-                {status === "in_process" ? (
-                  <CandidateStatsDemo
-                    steps={LIVE}
-                    labels={{
-                      progress: candidates("progress"),
-                      grade: candidates("grade"),
-                    }}
-                  />
-                ) : (
-                  <>
-                    <span className="w-20 text-center sm:w-24">
-                      <span className="block text-2xl font-light tabular-nums">
-                        {progress}%
-                      </span>
-                      <span className="block text-sm text-muted-foreground">
-                        {candidates("progress")}
-                      </span>
+        <div className="rounded-2xl border bg-background text-start">
+          {/* The test and its passing grade, which colors each finished grade. */}
+          <p className="border-b p-5 text-sm text-muted-foreground">
+            {t("role", { mark: PASS_MARK })}
+          </p>
+          <ul className="divide-y">
+            {CANDIDATES.map(
+              ({ email, daysAgo, progress, grade, status, signals }) => (
+                <li
+                  key={email}
+                  className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <span className="min-w-0 space-y-1">
+                    <span className="block text-lg font-medium break-all">
+                      {email}
                     </span>
-                    <span className="w-20 text-center sm:w-24">
-                      <span
-                        className={
-                          grade == null
-                            ? "block text-2xl font-light text-muted-foreground tabular-nums"
-                            : "block text-2xl font-light tabular-nums"
-                        }
+                    {/* The date, then any signals, as in the real list. */}
+                    <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+                      {formatDate(
+                        new Date(now - daysAgo * DAY_MS).toISOString(),
+                        locale
+                      )}
+                      <CandidateSignals candidate={signals as Candidate} />
+                    </span>
+                  </span>
+                  <span className="flex shrink-0 items-center gap-6">
+                    {status === "in_process" ? (
+                      <CandidateStatsDemo
+                        steps={LIVE}
+                        labels={{
+                          progress: candidates("progress"),
+                          grade: candidates("grade"),
+                        }}
+                      />
+                    ) : (
+                      <>
+                        <span className="w-20 text-center sm:w-24">
+                          <span className="block text-2xl font-light tabular-nums">
+                            {progress}%
+                          </span>
+                          <span className="block text-sm text-muted-foreground">
+                            {candidates("progress")}
+                          </span>
+                        </span>
+                        <span className="w-20 text-center sm:w-24">
+                          <span
+                            className={cn(
+                              "block text-2xl font-light tabular-nums",
+                              grade == null && "text-muted-foreground",
+                              grade != null &&
+                                (grade >= PASS_MARK
+                                  ? "text-green-600 dark:text-green-400"
+                                  : "text-red-600 dark:text-red-400")
+                            )}
+                          >
+                            {grade == null ? "—" : `${grade}%`}
+                          </span>
+                          <span className="block text-sm text-muted-foreground">
+                            {candidates("grade")}
+                          </span>
+                        </span>
+                      </>
+                    )}
+                    <span className="flex w-28 justify-end">
+                      <Badge
+                        variant="outline"
+                        className="h-7 px-3 text-sm font-light"
                       >
-                        {grade == null ? "—" : `${grade}%`}
-                      </span>
-                      <span className="block text-sm text-muted-foreground">
-                        {candidates("grade")}
-                      </span>
+                        {statuses(status)}
+                      </Badge>
                     </span>
-                  </>
-                )}
-                <span className="flex w-28 justify-end">
-                  <Badge
-                    variant="outline"
-                    className="h-7 px-3 text-sm font-light"
-                  >
-                    {statuses(status)}
-                  </Badge>
-                </span>
-              </span>
-            </li>
-          ))}
-        </ul>
+                  </span>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
       </Stage>
       <ul className="mx-auto grid w-full max-w-2xl gap-x-8 gap-y-3 text-muted-foreground sm:grid-cols-2">
         {POINTS.map((point) => (

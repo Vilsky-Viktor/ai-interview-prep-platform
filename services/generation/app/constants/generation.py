@@ -2,14 +2,11 @@ from typing import Literal
 
 from prepza_common.constants import MAX_GOAL_LENGTH  # noqa: F401 (re-exported)
 
-# The level whose learner kits are written by HARD_KIT_MODEL (see integrations/llm.py).
-HARD_LEVEL = "hard"
-
 MAX_CONCURRENCY = 8
 RECURSION_LIMIT = 200
 
 # A topic's or subtopic's name, drafted or edited by hand during review. How many topics and
-# subtopics a kit has are settings (MAX_TOPICS, MAX_SUBTOPICS).
+# subtopics a test has are settings (MAX_TOPICS, MAX_SUBTOPICS).
 MAX_TOPIC_NAME_LENGTH = 50
 TOPIC_ATTEMPTS = 2
 # Questions are written for this many times a topic's size, to replace the ones dropped as
@@ -49,8 +46,6 @@ FILL_SPARE_QUESTIONS = 2
 
 # The changes a reviewer describes in words during topic review.
 MAX_INSTRUCTIONS_LENGTH = 500
-# How much of the pasted goal a list shows to tell generations apart.
-GOAL_PREVIEW_LENGTH = 120
 
 # A generation stops after this long: Cloud Tasks gives one request at most 30 minutes.
 JOB_TIMEOUT_SECONDS = 25 * 60
@@ -84,6 +79,3 @@ GENERATIONS_PAUSED = (
     "We've reached today's limit for new generations. Please try again tomorrow; practice and "
     "interviews keep working."
 )
-# Charging a finished kit: attempts, and the pause between them.
-CHARGE_ATTEMPTS = 3
-CHARGE_RETRY_SECONDS = 2

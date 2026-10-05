@@ -171,7 +171,10 @@ export function ReviewDemo({
             <Caret />
           </span>
         ) : (
-          <span className="text-muted-foreground">{labels.placeholder}</span>
+          // Lowercase, like every placeholder on the site.
+          <span className="text-muted-foreground lowercase">
+            {labels.placeholder}
+          </span>
         )}
       </div>
       <div className="flex justify-end">

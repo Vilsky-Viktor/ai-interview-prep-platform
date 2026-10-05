@@ -1,0 +1,93 @@
+import uuid
+from uuid import UUID
+
+from fastapi import APIRouter, HTTPException, status
+from prepza_common.auth import CurrentUser
+
+from app.constants.practice import NO_PRACTICE_QUESTIONS, PRACTICE_QUESTION_SECONDS
+from app.helpers.practice import (
+    practice_topics,
+    round_out,
+    round_size,
+    round_summaries,
+    topic_progress,
+)
+from app.integrations import library
+from app.schemas.practice import (
+    PracticeRoundOut,
+    PracticeRoundSummary,
+    PracticeSizeOut,
+    PracticeStartOut,
+    PracticeTopicProgress,
+)
+from app.storage import sessions
+
+# Free practice for talents: timed rounds on a template's revealed questions, as many as they
+# like, each with fresh random questions and every right answer shown after.
+router = APIRouter(prefix="/practice", tags=["practice"])
+
+
+@router.post("/{template_id}", status_code=status.HTTP_201_CREATED)
+async def start_practice(template_id: UUID, user: CurrentUser) -> PracticeStartOut:
+    content = await library.practice_content(template_id)
+
+    if content is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Test not found")
+
+    if not content["topics"]:
+        raise HTTPException(status.HTTP_409_CONFLICT, NO_PRACTICE_QUESTIONS)
+
+    round_id = uuid.uuid4()
+    # Only a talent's first round counts in the questions' statistics: later rounds repeat
+    # questions whose answers were shown, so they measure memory, not knowledge.
+    repeat = bool(await sessions.practice_for_user(user.uid, template_id))
+    rows = await sessions.create_many(
+        user.uid,
+        round_id,
+        practice_topics(content),
+        PRACTICE_QUESTION_SECONDS,
+        preview=repeat,
+        practice=True,
+    )
+
+    return PracticeStartOut(round_id=round_id, session_id=rows[0].id)
+
+
+@router.get("/{template_id}/size")
+async def practice_size(template_id: UUID) -> PracticeSizeOut:
+    """Public, for the test's page: how many questions a round has."""
+    content = await library.practice_content(template_id)
+
+    if content is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Test not found")
+
+    return PracticeSizeOut(questions=round_size(content))
+
+
+@router.get("/rounds/{round_id}")
+async def get_round(round_id: UUID, user: CurrentUser) -> PracticeRoundOut:
+    """The talent's own round only."""
+    rows = [
+        row
+        for row in await sessions.list_for_invite(round_id)
+        if row.user_id == user.uid and row.practice
+    ]
+
+    if not rows:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Round not found")
+
+    found = await library.get_set(rows[0].interview_set_id)
+
+    return round_out(rows, found["title"] if found else None)
+
+
+@router.get("/{template_id}/rounds")
+async def list_rounds(template_id: UUID, user: CurrentUser) -> list[PracticeRoundSummary]:
+    """The talent's rounds on the template, newest first, to see their progress."""
+    return round_summaries(await sessions.practice_for_user(user.uid, template_id))
+
+
+@router.get("/{template_id}/progress")
+async def topic_progress_route(template_id: UUID, user: CurrentUser) -> list[PracticeTopicProgress]:
+    """How far the talent got on each of the template's topics in their latest round."""
+    return topic_progress(await sessions.practice_for_user(user.uid, template_id))

@@ -14,17 +14,25 @@ export default async function NewInterviewPage({
   const { companyId } = await params
   const t = await getTranslations("interviews")
 
+  // Laid out like the home page's start: a title and the box, nothing else.
   return (
-    <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
-      <div className="relative">
-        <BackLink href={`/company/${companyId}/interviews`}>
-          {t("title")}
-        </BackLink>
-        <h1 className="font-heading text-3xl font-medium tracking-tight">
-          {t("new")}
-        </h1>
+    <main className="mx-auto max-w-5xl px-6">
+      <div className="flex min-h-[calc(100svh-3.5rem)] flex-col items-center justify-center pb-24">
+        <div className="w-full max-w-176 space-y-10">
+          <div className="relative">
+            <BackLink
+              href={`/company/${companyId}/interviews`}
+              className="xl:top-2.5"
+            >
+              {t("title")}
+            </BackLink>
+            <h1 className="font-heading text-5xl font-medium tracking-tight text-balance sm:text-6xl">
+              {t("createTitle")}
+            </h1>
+          </div>
+          <NewInterview companyId={companyId} />
+        </div>
       </div>
-      <NewInterview companyId={companyId} />
     </main>
   )
 }

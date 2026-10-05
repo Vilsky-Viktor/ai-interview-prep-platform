@@ -9,25 +9,17 @@ class TopUpOut(BaseModel):
     title: str
     price_cents: int
     credits: int
-    # Credits above the plain rate of 100 per dollar: the bonus on large top-ups.
-    bonus_credits: int
+    # The whole candidates it buys, and what each costs at its volume price.
+    candidates: int
+    candidate_cents: int
     price_id: str | None
 
 
-class CustomTopUpOut(BaseModel):
-    """Any whole-dollar amount in the range: Paddle's $1 price in that quantity."""
+class CandidatePriceOut(BaseModel):
+    """A candidate's price when credits are bought in a top-up from this many dollars."""
 
-    price_id: str | None
-    min_dollars: int
-    max_dollars: int
-
-
-class QuoteOut(BaseModel):
-    """What a custom amount buys."""
-
-    price_cents: int
-    credits: int
-    bonus_credits: int
+    from_dollars: int
+    cents: int
 
 
 class CatalogOut(BaseModel):
@@ -36,20 +28,12 @@ class CatalogOut(BaseModel):
     environment: str
     client_token: str
     currency: str
-    kit_credits: int
     candidate_credits: int
-    certificate_credits: int
-    chat_turn_credits: int
-    chat_free_turns: int
-    # New public topics a learner may start a day, free.
-    public_topics_per_day: int
-    welcome_user: int
+    # A candidate's price at each volume tier, cheapest last.
+    candidate_prices: list[CandidatePriceOut]
     welcome_company: int
-    referral_user: int
     referral_company: int
-    referral_company_min_dollars: int
     products: list[TopUpOut]
-    custom: CustomTopUpOut
 
 
 class BalanceOut(BaseModel):
@@ -64,25 +48,6 @@ class OwnersIn(BaseModel):
     owner_ids: list[str] = Field(max_length=MAX_PAGE_SIZE)
 
 
-class EntryOut(BaseModel):
-    """One line of a wallet's history."""
-
-    amount: int
-    reason: str
-    note: str | None
-    created_at: datetime
-
-
-class SpendIn(BaseModel):
-    """A charge for something delivered at once. `key` makes a repeat count once."""
-
-    owner_id: str
-    key: str
-    note: str | None = None
-    # A certificate on a public kit: the kit's author, who gets a share.
-    author_id: str | None = None
-
-
 class WelcomeIn(BaseModel):
     owner_email: str
     # The code of the link the owner came through, and their other companies, which can't
@@ -91,13 +56,21 @@ class WelcomeIn(BaseModel):
     related: list[str] = Field(default=[], max_length=MAX_PAGE_SIZE)
 
 
+class ReferralRewardOut(BaseModel):
+    """A company that came through the link and topped up, so both got the reward."""
+
+    company_id: str
+    rewarded_at: datetime
+
+
 class ReferralOut(BaseModel):
     """The owner's referral link code, what it earns, and how many it has earned for."""
 
     code: str
     reward: int
-    min_dollars: int
     rewarded: int
+    # The latest rewards, newest first.
+    rewards: list[ReferralRewardOut]
 
 
 class AutoTopUpIn(BaseModel):

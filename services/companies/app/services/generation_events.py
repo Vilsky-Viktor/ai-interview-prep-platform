@@ -1,5 +1,7 @@
 import uuid
 
+from prepza_common.analytics import track
+
 from app.constants.events import GENERATION_CANCELLED, GENERATION_COMPLETED
 from app.helpers.notifications import interview_cancelled, interview_ready
 from app.services import outbox as outbox_service
@@ -26,6 +28,7 @@ async def handle(event_type: str, data: dict) -> None:
             data["title"],
             interview_ready(interview, data["title"]),
         )
+        await track("test_ready", company_id=interview.company_id, how="generated")
     else:
         await interviews.remove_for_generation(generation_id, interview_cancelled(interview))
 

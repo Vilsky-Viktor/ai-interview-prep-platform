@@ -1,7 +1,8 @@
 "use client"
 
-import type { ReactNode } from "react"
+import { cn } from "cn"
 import { ArrowLeftIcon } from "lucide-react"
+import type { ReactNode } from "react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
 
@@ -9,9 +10,12 @@ import { Button } from "@/components/ui/button"
 
 export function BackLink({
   href,
+  className,
   children,
 }: {
   href: string
+  // For a title much larger than usual, to line the arrow up with its lowercase letters.
+  className?: string
   children: ReactNode
 }) {
   const t = useTranslations("nav")
@@ -25,7 +29,10 @@ export function BackLink({
       // Beside the title only when the page margin fits it; above the title otherwise.
       // Centred with auto margins: the button's press effect replaces any translate, so a
       // translate-based centre would jump away from the cursor mid-click.
-      className="-ms-3 mb-2 size-11 rounded-xl text-muted-foreground xl:absolute xl:inset-y-0 xl:end-[calc(100%+0.25rem)] xl:my-auto xl:ms-0 xl:size-14"
+      className={cn(
+        "-ms-3 mb-2 size-11 rounded-xl text-muted-foreground xl:absolute xl:inset-y-0 xl:end-[calc(100%+0.25rem)] xl:my-auto xl:ms-0 xl:size-14",
+        className
+      )}
       render={<Link href={href} />}
       nativeButton={false}
     >

@@ -7,7 +7,7 @@ from sqlalchemy import DateTime, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.constants.interviews import DEFAULT_QUESTION_SECONDS
+from app.constants.interviews import DEFAULT_PASS_MARK, DEFAULT_QUESTION_SECONDS
 from app.models.base import Base
 
 # For the relationship's annotation only; the class is resolved by name at runtime.
@@ -25,9 +25,18 @@ class Interview(Base):
     set_id: Mapped[uuid.UUID | None]
     # Copied from the generated set (and renames), so pages don't ask library for it.
     title: Mapped[str | None] = mapped_column(Text)
-    generation_id: Mapped[uuid.UUID]
+    # None for a test made from a template, which needs no generation.
+    generation_id: Mapped[uuid.UUID | None]
     # What the interview is generated in, as its set in library; invites are emailed in it.
     language: Mapped[str] = mapped_column(String(8), default=DEFAULT_LANGUAGE)
+    # The company marked the test as hired; it stays usable.
+    hired: Mapped[bool] = mapped_column(default=False)
+    # The grade, in percent, a finished candidate needs to pass.
+    pass_mark: Mapped[int] = mapped_column(
+        default=DEFAULT_PASS_MARK, server_default=str(DEFAULT_PASS_MARK)
+    )
+    # The shareable link's code while it's on: anyone who opens it can take the test.
+    link_token: Mapped[str | None] = mapped_column(String(64), unique=True)
     # Every interview is timed: each question has question_seconds, and one left unanswered is
     # wrong. Candidates never see their scores.
     question_seconds: Mapped[int] = mapped_column(

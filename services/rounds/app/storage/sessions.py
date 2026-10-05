@@ -7,12 +7,18 @@ from sqlalchemy import delete, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
-from app.constants.events import INTERVIEW_FINISHED
+from app.constants.events import INTERVIEW_FINISHED, SESSION_SCORED
 from app.constants.integrity import IntegritySignal
 from app.constants.rounds import RoundStatus
-from app.helpers.scores import candidate_progress, interview_finished
+from app.helpers.scores import (
+    candidate_progress,
+    final_score,
+    interview_finished,
+    scored,
+    signal_counts,
+)
+from app.models.answers import Answer
 from app.models.outbox import OutboxEvent
-from app.models.rounds import Answer
 from app.models.sessions import Session
 from app.models.signals import Signal
 from app.schemas.library import TopicQuestions
@@ -26,6 +32,8 @@ async def create_many(
     candidate_invite_id: uuid.UUID,
     topics: list[TopicQuestions],
     question_seconds: int,
+    preview: bool = False,
+    practice: bool = False,
 ) -> list[Session]:
     rows = [
         Session(
@@ -39,6 +47,8 @@ async def create_many(
             final_score=None,
             finished_at=None,
             question_seconds=question_seconds,
+            preview=preview,
+            practice=practice,
             answers=[],
         )
         for topic in topics
@@ -75,16 +85,13 @@ async def list_for_invite(candidate_invite_id: uuid.UUID) -> list[Session]:
         return list(await session.scalars(query))
 
 
-async def scores_for_invites(
-    invite_ids: list[uuid.UUID],
-) -> dict[uuid.UUID, tuple[int, int | None, bool]]:
+async def scores_for_invites(invite_ids: list[uuid.UUID]) -> dict[uuid.UUID, dict]:
+    """Each candidate's progress, grade, whether they finished, and their integrity signals."""
     if not invite_ids:
         return {}
 
     query = (
-        select(Session)
-        .where(Session.candidate_invite_id.in_(invite_ids))
-        .options(selectinload(Session.answers))
+        select(Session).where(Session.candidate_invite_id.in_(invite_ids)).options(*LOAD_SESSION)
     )
 
     async with Db() as session:
@@ -101,11 +108,14 @@ async def scores_for_invites(
         scores = [answer.score for topic in topics for answer in topic.answers]
         total = sum(len(topic.questions) for topic in topics)
         progress, grade = candidate_progress(scores, total)
-        result[invite_id] = (
-            progress,
-            grade,
-            interview_finished([topic.status for topic in topics]),
-        )
+        finished = interview_finished([topic.status for topic in topics])
+        result[invite_id] = {
+            "progress": progress,
+            # Once finished, unanswered questions count as wrong, as in each section's score.
+            "grade": final_score(scores, total) if finished else grade,
+            "finished": finished,
+            **signal_counts(topics),
+        }
 
     return result
 
@@ -188,6 +198,11 @@ async def finish(session_id: uuid.UUID, final_score: int) -> None:
         finishing.final_score = final_score
         finishing.finished_at = datetime.now(UTC)
 
+        # A preview says nothing about the questions; nor does a talent's practice round after
+        # their first on a template, which is started as one (routers/practice.py).
+        if not finishing.preview:
+            outbox.add(session, OutboxEvent, SESSION_SCORED, scored(finishing))
+
         if all(row.status == RoundStatus.FINISHED for row in sections):
             picked = sum(
                 1 for row in sections for answer in row.answers if answer.option_index is not None
@@ -219,3 +234,19 @@ async def remove_for_interview(interview_set_id: uuid.UUID) -> None:
     async with Db() as session:
         await session.execute(delete(Session).where(Session.interview_set_id == interview_set_id))
         await session.commit()
+
+
+async def practice_for_user(user_id: str, template_id: uuid.UUID) -> list[Session]:
+    """Every practice section the talent took on the template, with answers."""
+    query = (
+        select(Session)
+        .where(
+            Session.user_id == user_id,
+            Session.interview_set_id == template_id,
+            Session.practice.is_(True),
+        )
+        .options(selectinload(Session.answers))
+    )
+
+    async with Db() as session:
+        return list(await session.scalars(query))

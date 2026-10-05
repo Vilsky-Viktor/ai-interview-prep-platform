@@ -2,9 +2,6 @@
   "settings": {
     "title": "Mga setting",
     "signIn": "Mag-sign in para baguhin ang iyong mga setting.",
-    "general": "Pangkalahatan",
-    "billing": "Pagsingil",
-    "referral": "Mga imbitasyon",
     "language": "Wika",
     "languageNote": "Para sa interface at sa mga sagot ng tutor, at ang wikang ginagamit sa simula ng mga bagong kit at interview. Puwede mo silang gawin sa alinmang suportadong wika.",
     "languageFailed": "Hindi mabago ang wika. Pakisubukang muli.",
@@ -14,13 +11,12 @@
     "downloadFailed": "Hindi maihanda ang iyong data. Pakisubukang muli.",
     "delete": "Burahin ang account",
     "searchLanguage": "Maghanap ng wika",
-    "noLanguage": "Walang nahanap na wika.",
-    "history": "Kasaysayan ng pagsingil",
-    "historyNote": "Bawat credit na pumasok at lumabas, pinakabago muna."
+    "noLanguage": "Walang nahanap na wika."
   },
   "userMenu": {
     "signIn": "Mag-sign in",
     "account": "Account",
+    "adminZone": "Admin zone",
     "settings": "Mga setting",
     "signOut": "Mag-sign out",
     "theme": "Tema",
@@ -34,17 +30,15 @@
     "main": "Pangunahing menu",
     "legal": "Legal",
     "pricing": "Presyo",
-    "privacy": "Patakaran sa privacy",
+    "privacy": "Privacy",
     "terms": "Mga tuntunin",
     "back": "Bumalik",
-    "create": "gumawa",
-    "explore": "tumuklas",
-    "myKits": "aking mga kit",
     "hiring": "hiring",
     "pricingLink": "presyo",
     "faq": "FAQ",
     "contact": "Makipag-ugnayan",
-    "about": "Tungkol sa amin"
+    "about": "Tungkol sa amin",
+    "practice": "Libreng practice"
   },
   "signIn": {
     "with": "Mag-sign in gamit ang",
@@ -80,43 +74,89 @@
     "notFoundText": "Wala ang page na iyon o inalis na."
   },
   "home": {
-    "tagline": "Ang mga AI agent ay nagpa-practice kasama mo hanggang maging kumpiyansa ka.",
-    "preparingFor": "Naghahanda para sa",
-    "words": [
-      "isang interview",
-      "isang certification",
-      "isang exam",
-      "isang test",
-      "isang promotion"
-    ],
-    "widest": "isang certification",
-    "mark": "?"
+    "title": "I-interview ang lahat\nMag-hire ng tunay na talento",
+    "text": "Mga timed interview mula sa iyong job description. Ibang mga tanong sa bawat kandidato, at walang oras para magtanong sa AI. Mula $1 bawat kandidato."
   },
-  "goal": {
-    "placeholder": "I-paste ang job description o ilarawan kung ano ang gusto mong matutunan…",
-    "label": "Para saan ka naghahanda?",
-    "submit": "Gumawa ng paghahanda",
-    "failed": "Hindi masimulan ang paggawa. Pakisubukang muli.",
-    "seePlans": "Mag-top up"
+  "start": {
+    "placeholder": "Mag-paste ng job description, o ilarawan ang role at ang dapat malaman ng kandidato",
+    "description": "Job description",
+    "submit": "Gumawa ng interview",
+    "whichCompany": "Para sa aling kumpanya ang interview na ito?",
+    "firstCompany": "Ano ang pangalan ng iyong kumpanya?",
+    "newCompany": "Bagong kumpanya",
+    "companyName": "Pangalan ng kumpanya",
+    "freeCandidates": "Libreng mai-interview ng iyong unang kumpanya ang {count, plural, one {unang kandidato nito} other {unang # kandidato nito}}.",
+    "back": "I-edit ang description",
+    "continue": "Magpatuloy",
+    "starting": "Sinisimulan…",
+    "failed": "Hindi masimulan ang interview. Pakisubukang muli."
   },
-  "membership": {
-    "signIn": "Mag-sign in para sumali",
-    "leave": "Umalis",
-    "join": "Sumali para mag-practice"
+  "superadmin": {
+    "fixNow": "Ayusin ngayon",
+    "fixing": "Inaayos…",
+    "dismiss": "Balewalain",
+    "fixSent": "Naipadala sa verifier. Maaayos o mapapalitan ito sa ilang sandali.",
+    "actionFailed": "Hindi iyon gumana. Pakisubukang muli.",
+    "quality": "Kalidad",
+    "flagged": "Naka-flag",
+    "replaced": "Napalitan",
+    "noFlagged": "Walang naka-flag ngayon.",
+    "noReplaced": "Wala pang napapalitan.",
+    "answers": "{count, plural, one {# sagot} other {# sagot}}",
+    "right": "{percent}% tama",
+    "reports": "{count, plural, =0 {walang report} one {# report} other {# report}}",
+    "kinds": {
+      "template": "template",
+      "interview": "interview ng kumpanya"
+    },
+    "flags": {
+      "wrong_key": "baka mali ang sagot",
+      "rewrite": "kailangan ng bagong tanong",
+      "weak_options": "kailangan ng mas magandang opsyon"
+    },
+    "zone": "Admin zone",
+    "templates": "Mga template",
+    "new": "Bagong template",
+    "createTitle": "Gumawa ng template",
+    "placeholder": "Mag-paste ng role description, o ilarawan ang role at ang dapat malaman ng taong nasa role na iyon",
+    "description": "Role description",
+    "create": "Gawin",
+    "createFailed": "Hindi masimulan ang template. Pakisubukang muli.",
+    "text": "Mga handang interview ayon sa role, para sa mga kumpanya at talento.",
+    "deleteLabel": "Burahin ang {title}",
+    "deleteTitle": "Burahin ang template na ito?",
+    "deleteText": "Mabubura ang mga topic at tanong nito. Mananatili ang mga interview na nagawa na ng mga kumpanya mula rito.",
+    "deleteFailed": "Hindi mabura ang template. Pakisubukang muli."
+  },
+  "templates": {
+    "title": "Mga template",
+    "empty": "Wala pang template.",
+    "topics": "{count, plural, one {# topic} other {# topic}}",
+    "search": "Maghanap ayon sa role o topic",
+    "searchAction": "Maghanap",
+    "level": "Level: {level}",
+    "anyLevel": "Kahit anong level",
+    "allLanguages": "Lahat ng wika",
+    "languages": "{count, plural, one {# wika} other {# wika}}",
+    "noMatches": "Walang tugmang template.",
+    "use": "Gamitin ang template",
+    "using": "Sinisimulan…",
+    "useFailed": "Hindi makapagsimula ng interview mula sa template na ito. Pakisubukang muli.",
+    "warningTitle": "Ang mga template ay para subukan ang prepza.",
+    "warning": "Nagpa-practice dito ang mga talento, kaya baka alam na ng mga kandidato ang mga tanong. Para sa totoong hiring, gumawa ng interview mula sa iyong job description.",
+    "text": "Mga handang interview ayon sa role. Pumili ng isa para simulan ang iyong interview; puwede mo itong baguhin pagkatapos."
   },
   "billing": {
     "paid": "Natanggap ang bayad. Lalabas ito rito sa ilang sandali.",
     "checkoutFailed": "Hindi mabuksan ang checkout. Pakisubukang muli.",
     "credits": "{count, plural, one {# credit} other {# credits}}",
-    "bonus": "+{count, number} bonus",
     "topUp": "Mag-top up",
-    "balance": "{count} credits ang available. Mag-top up",
-    "balanceLow": "{count} credits ang available, paubos na. Mag-top up",
     "low": "Paubos na",
     "creditsWord": "{count, plural, one {credit} other {credits}}",
     "topUpTitle": "Mag-top up: {name}",
-    "topUpNote": "Ang $1 ay 100 credits, may bonus sa mas malalaking halaga. Hindi nag-e-expire ang credits.",
-    "customAmount": "Ibang halaga"
+    "topUpNote": "Bawat top-up ay bumibili ng buong bilang ng kandidato; mas mura bawat kandidato sa mas malalaking top-up. Hindi nag-e-expire ang credits.",
+    "candidates": "{count, plural, one {# kandidato} other {# kandidato}}",
+    "each": "{price} bawat isa"
   },
   "deleteAccount": {
     "title": "Burahin ang iyong account?",
@@ -126,83 +166,15 @@
     "deleted": "Nabura na ang iyong account.",
     "failed": "Hindi mabura ang iyong account. Pakisubukang muli."
   },
-  "levels": {
-    "basic": "basic",
-    "medium": "katamtaman",
-    "hard": "mahirap"
-  },
-  "visibility": {
-    "public": "pampubliko",
-    "private": "pribado"
-  },
-  "library": {
-    "title": "Mga pampublikong kit",
-    "search": "Maghanap ng pamagat at paksa",
-    "searchAction": "Maghanap",
-    "noMatches": "Walang tugmang paghahanda.",
-    "empty": "Wala pang pampublikong paghahanda.",
-    "level": "Antas: {level}",
-    "anyLevel": "Kahit ano",
-    "languages": "{count, plural, one {# wika} other {# wika}}",
-    "sortBy": "Ayusin ayon sa: {sort}",
-    "sort": {
-      "date": "Petsa",
-      "rating": "Rating",
-      "joiners": "Mga sumali"
-    }
-  },
-  "preparations": {
-    "title": "Aking mga kit",
-    "new": "Bagong paghahanda",
-    "signIn": "Mag-sign in para makita ang iyong mga paghahanda.",
-    "empty": "Wala ka pang paghahanda. Gumawa ng una o pumili mula sa pampublikong library.",
-    "topics": "{count, plural, one {# paksa} other {# paksa}}",
-    "created": "Ginawa noong {date}",
-    "metaTitle": "Paghahanda",
-    "metaDescription": "Paghahanda sa interview para sa {title}: {count, plural, one {# paksa} other {# paksa}} ng multiple-choice na tanong, may practice round at certificate.",
-    "history": "Kasaysayan",
-    "page": "Page ng paghahanda",
-    "rounds": "Mga round",
-    "deleteLabel": "Burahin ang {title}",
-    "deleteTitle": "Burahin ang {title}?",
-    "deleteText": "Mabubura ang mga paksa at tanong nito, at mawawalan ng access ang lahat ng sumali. Hindi na ito maibabalik.",
-    "deleteFailed": "Hindi mabura ang paghahanda. Pakisubukang muli.",
-    "mastered": "Na-master",
-    "masteredTitle": "Na-master: may certificate ang bawat paksa",
-    "owner": "May-ari",
-    "ratingTitle": "Average na rating at bilang ng rating",
-    "rated": "Salamat sa iyong rating",
-    "ratingUpdated": "Na-update ang rating",
-    "ratingFailed": "Hindi ma-save ang iyong rating. Pakisubukang muli.",
-    "rateIt": "I-rate",
-    "rate": "I-rate ng {value} sa {scale}",
-    "public": "Pampubliko",
-    "nowPublic": "Nasa pampublikong library na",
-    "nowPrivate": "Pribado na ngayon",
-    "visibilityFailed": "Hindi mabago ang visibility. Pakisubukang muli."
-  },
   "share": {
-    "share": "I-share",
-    "title": "I-share ang paghahanda",
-    "public": "Makikita ng sinumang may link ang paghahandang ito.",
-    "private": "Magpapadala kami ng invite link sa email. Ang address na iyon lang ang puwedeng tumanggap nito.",
-    "email": "Email",
-    "send": "Ipadala",
     "sent": "Naipadala ang imbitasyon sa {email}",
     "checkEmail": "Suriin ang email address at subukang muli.",
     "failed": "Hindi maipadala ang imbitasyon.",
-    "joined": "Sumali na",
-    "undelivered": "Hindi naihatid",
-    "invited": "Inimbitahan",
     "wrongEmail": "Ipinadala ang imbitasyong ito sa ibang email address.",
     "acceptFailed": "Hindi matanggap ang imbitasyon. Pakisubukang muli.",
-    "signIn": "Mag-sign in gamit ang email ng imbitasyon para sumali sa paghahandang ito.",
     "invalid": "Hindi na valid ang imbitasyong ito.",
     "invitedToJoin": "Inimbitahan kang sumali.",
-    "open": "Buksan ang paghahanda",
-    "join": "Sumali sa paghahanda",
-    "mismatch": "Hindi tugma ang email. Mag-sign in gamit ang email ng imbitasyon para sumali.",
-    "inviteTitle": "Imbitasyon sa pag-share"
+    "mismatch": "Hindi tugma ang email. Mag-sign in gamit ang email ng imbitasyon para sumali."
   },
   "reportReasons": {
     "wrong_answer": "Mali ang minarkahang sagot",
@@ -221,6 +193,18 @@
     "reports": "Mga report",
     "showReports": "Ipakita ang mga report ({count})",
     "regenerate": "Gawin muli",
+    "manage": "Pamahalaan ang mga tanong",
+    "wrongAnswer": "Maling sagot",
+    "checking": "Sinusuri…",
+    "markedWrong": "Salamat. Sinusuri na ito, at aayusin o papalitan.",
+    "markWrongFailed": "Hindi maipadala para suriin. Pakisubukang muli.",
+    "ofCount": "sa {count, number}",
+    "per": "bawat",
+    "candidate": "kandidato",
+    "showOptions": "Ipakita ang mga opsyon sa sagot",
+    "hideOptions": "Itago ang mga opsyon sa sagot",
+    "correct": "Tamang sagot",
+    "wrong": "Maling sagot",
     "regenerating": "Ginagawa muli…",
     "regenerated": "Nagawa muli ang tanong",
     "regenerateFailed": "Hindi magawa muli ang tanong. Pakisubukang muli.",
@@ -233,79 +217,27 @@
     "selectReason": "Pumili ng dahilan",
     "details": "Mga detalye",
     "showLess": "Ipakita ang mas kaunti",
+    "more": "+{count, number} pa",
     "showAll": "Ipakita lahat",
     "limitRange": "Maglagay ng numero mula 1 hanggang {count}.",
     "limitFailed": "Hindi ma-save ang limit.",
     "limit": "Limit ng tanong",
-    "of": "sa",
     "count": "{count, plural, one {tanong} other {tanong}}",
-    "loadFailed": "Hindi ma-load ang mga tanong."
-  },
-  "certificate": {
-    "title": "Certificate",
-    "metaDescription": "Natapos ni {name} ang {topic} na may score na {score}%.",
-    "heading": "Certificate ng tagumpay",
-    "for": "Para sa matagumpay na pagtatapos ng:",
-    "finalScore": "Huling score",
-    "issued": "Inilabas noong",
-    "howTo": "Paano makuha ang certificate"
+    "loadFailed": "Hindi ma-load ang mga tanong.",
+    "yourAnswer": "iyong sagot"
   },
   "rounds": {
-    "title": "Round",
-    "rounds": "Mga round",
-    "compare": "Ikumpara",
-    "compareTitle": "Ikumpara ang mga round",
     "answered": "Nasagot",
     "correct": "Tama",
     "incorrect": "Mali",
     "notAnswered": "Hindi nasagot",
-    "correctAnswer": "Tamang sagot",
-    "yourAnswer": "Iyong sagot",
-    "askFollowUp": "Magtanong pa",
-    "followUp": "Karagdagang tanong",
-    "followUpPlaceholder": "Magtanong pa…",
-    "replyFailed": "Hindi makakuha ng sagot. Pakisubukang muli.",
-    "firstRound": "Ang una mong round sa paksang ito",
-    "sameAsLast": "Pareho sa huli mong round",
-    "change": "{change} puntos mula sa huli mong round",
-    "topicAnswered": "Paksa: nasagot ang {answered} sa {total} tanong",
-    "answeredOf": "Nasagot ang {answered} sa {total}",
-    "finalScore": "Huling score",
-    "certificate": "Certificate",
-    "history": "Kasaysayan",
-    "preparationPage": "Page ng paghahanda",
-    "noRounds": "Wala pang round.",
-    "selectToCompare": "Piliin para ikumpara",
-    "grade": "grado",
-    "continue": "Magpatuloy",
-    "start": "Magsimula",
     "finish": "Tapusin",
     "finishing": "Tinatapos…",
-    "finishRound": "Tapusin ang round",
-    "deleteRound": "Burahin ang round",
-    "finishTitle": "Tapusin ang round na ito?",
-    "deleteTitle": "Burahin ang round na ito?",
-    "unscored": "Hindi mabibigyan ng score ang mga hindi nasagot na tanong.",
-    "noMore": "Hindi ka na makakasagot ng iba pang tanong.",
-    "cantUndo": "Hindi na ito maibabalik.",
-    "deleteFailed": "Hindi mabura ang round. Pakisubukang muli.",
-    "finishFailed": "Hindi matapos ang round. Pakisubukang muli.",
-    "startFailed": "Hindi masimulan ang round. Pakisubukang muli.",
-    "answerFailed": "Hindi ma-save ang iyong sagot. Pakisubukang muli.",
-    "signIn": "Mag-sign in para ipagpatuloy ang round na ito.",
-    "missing": "Wala ang round na ito.",
-    "allAnswered": "Nasagot mo na ang lahat ng tanong sa round na ito.",
     "next": "Susunod na tanong",
-    "progress": "Mga nasagot na tanong patungo sa certificate",
-    "nextFailed": "Hindi ma-load ang susunod na tanong. Pakisubukang muli.",
-    "submitFailed": "Hindi maipadala ang iyong sagot. Pakisubukang muli.",
-    "freeTurns": "{count, plural, one {May # libreng tanong} other {May # libreng tanong}} ka pa sa tutor para sa tanong na ito",
-    "paidTurns": "Bawat karagdagang tanong dito ay {count, plural, one {# credit} other {# credits}}",
-    "buyCertificate": "Kunin ang certificate · {count} credits",
-    "makeItYours": "Naghahanda para sa isang partikular na trabaho? I-paste ang job posting at kumuha ng kit na ginawa para rito.",
-    "makeItYoursAction": "Gawin itong iyo"
+    "submitFailed": "Hindi maipadala ang iyong sagot. Pakisubukang muli."
   },
   "session": {
+    "toTest": "Pumunta sa mga interview",
     "startFailed": "Hindi masimulan ang interview. Pakisubukang muli.",
     "finishFailed": "Hindi matapos ang interview. Pakisubukang muli.",
     "continueFailed": "Hindi makapagpatuloy. Pakisubukang muli.",
@@ -357,17 +289,7 @@
     "changes": "Mga pagbabago sa paksa",
     "tooMany": "Pumili ng hanggang {max} paksa, o ilarawan kung paano sila pagsasamahin.",
     "apply": "Ilapat ang mga pagbabago",
-    "approve": "Aprubahan at gawin",
-    "approvePrice": "Aprubahan at gumawa · {count} credits",
-    "unfinished": "Hindi pa tapos"
-  },
-  "generationStatus": {
-    "queued": "Ginagawa",
-    "running": "Ginagawa",
-    "awaiting_review": "I-review ang mga paksa",
-    "done": "Tapos na",
-    "failed": "Nabigo",
-    "cancelled": "Nakansela"
+    "approve": "Aprubahan at gawin"
   },
   "candidateStatus": {
     "invited": "inimbitahan",
@@ -375,7 +297,9 @@
     "in_process": "kasalukuyan",
     "finished": "tapos na",
     "deleted": "nabura",
-    "expired": "nag-expire"
+    "expired": "nag-expire",
+    "passed": "pumasa",
+    "flagged": "naka-flag"
   },
   "roles": {
     "owner": "may-ari",
@@ -391,17 +315,17 @@
     "owner": "May-ari",
     "interviewCount": "{count, plural, one {# interview} other {# interview}}",
     "interviews": "Mga interview",
+    "templates": "Mga template",
     "admins": "Mga admin",
     "referrals": "Mga imbitasyon",
     "new": "Bagong kumpanya",
-    "newText": "Gumawa ng kumpanya para gumawa ng interview at mag-imbita ng mga kandidato.",
     "name": "Pangalan ng kumpanya",
     "create": "Gumawa",
     "createFailed": "Hindi magawa ang kumpanya. Pakisubukang muli.",
     "signInJoin": "Mag-sign in gamit ang email ng imbitasyon para sumali sa kumpanyang ito.",
     "open": "Buksan ang kumpanya",
     "join": "Sumali sa kumpanya",
-    "creditsLeft": "{count, plural, one {credit ang available} other {credits ang available}}",
+    "creditsLeft": "{count, plural, one {credit} other {credits}}",
     "creditsLow": "Paubos na: mag-top up para patuloy na makapag-imbita ng kandidato.",
     "timeLeft": "Natitirang oras: {time}",
     "removeLabel": "Alisin ang {name}",
@@ -409,7 +333,12 @@
     "removeText": "Mabubura ang mga interview at imbitasyon nito.",
     "remove": "Alisin",
     "removeFailed": "Hindi maalis ang kumpanya.",
-    "page": "Kumpanya"
+    "page": "Kumpanya",
+    "logo": "Logo",
+    "uploadLogo": "Mag-upload ng logo",
+    "changeLogo": "Palitan ang logo",
+    "removeLogo": "Alisin ang logo",
+    "logoFailed": "Hindi ma-save ang logo."
   },
   "candidates": {
     "scorecard": "Resulta",
@@ -421,6 +350,11 @@
     "copies": "{count, plural, one {# pagtatangkang kumopya} other {# pagtatangkang kumopya}}",
     "fastAnswers": "{count, plural, one {# mabilis na sagot} other {# mabilis na sagot}}",
     "empty": "Wala pang inimbitahang kandidato.",
+    "noMatches": "Walang tugmang kandidato.",
+    "search": "Maghanap ng kandidato ayon sa email",
+    "searchAction": "Maghanap",
+    "status": "Status: {status}",
+    "anyStatus": "kahit anong status",
     "progress": "Progreso",
     "grade": "Grado",
     "resend": "Ipadala muli ang imbitasyon",
@@ -438,11 +372,27 @@
       "date": "Petsa"
     }
   },
+  "interviewStatus": {
+    "new": "Bago",
+    "in_process": "Kasalukuyan",
+    "hired": "Na-hire"
+  },
   "interviews": {
     "title": "Mga interview",
     "interview": "Interview",
     "candidates": "Mga kandidato",
     "new": "Bagong interview",
+    "createTitle": "Gumawa ng interview",
+    "try": "Subukan bilang kandidato",
+    "newCandidate": "Bagong kandidato",
+    "linkTitle": "Link na puwedeng i-share",
+    "linkText": "Para sa job ad: puwedeng sagutan ng sinumang may link ang interview. Sinisingil ang bawat tao tulad ng isang inimbitahang kandidato.",
+    "linkFailed": "Hindi mabago ang link. Pakisubukang muli.",
+    "passMark": "Passing grade",
+    "passMarkLabel": "Passing grade sa porsiyento",
+    "markHired": "Markahan bilang na-hire",
+    "tryLabel": "Subukan ang {title} bilang kandidato",
+    "tryFailed": "Hindi masimulan ang preview. Pakisubukang muli.",
     "generating": "Ginagawa…",
     "fallbackTitle": "interview",
     "continueGeneration": "Ituloy ang paggawa",
@@ -461,12 +411,22 @@
     "adminEmail": "Email ng admin",
     "addAdmin": "Magdagdag ng admin",
     "adminFailed": "Hindi maimbitahan ang admin na iyon. Pakisubukang muli.",
-    "candidateEmail": "Email ng kandidato",
     "invite": "Imbitahan",
     "jobDescription": "Job description",
     "pasteJob": "I-paste ang job description: ang role, ang mga requirement at ang mga bentahe…",
     "generate": "Gumawa ng interview",
-    "startFailed": "Hindi masimulan ang interview. Pakisubukang muli."
+    "startFailed": "Hindi masimulan ang interview. Pakisubukang muli.",
+    "candidateEmails": "Mga email ng kandidato",
+    "emailsHint": "Isa o maraming email, hinihiwalay ng kuwit o bagong linya",
+    "uploadFile": "Mag-upload ng file",
+    "invitedMany": "Naimbitahan ang {count} kandidato",
+    "skip": {
+      "invalid": "{count, plural, one {Hindi valid ang # email} other {Hindi valid ang # email}}.",
+      "limit": "{count, plural, one {Lampas ang # email} other {Lampas ang # email}} sa iyong email limit sa ngayon. Subukang muli pagkalipas ng isang oras.",
+      "no_credits": "{count, plural, one {Hindi naimbitahan ang # kandidato} other {Hindi naimbitahan ang # kandidato}}: ubos na ang credits. Mag-top up para maimbitahan sila.",
+      "failed": "{count, plural, one {Hindi maipadala ang # imbitasyon} other {Hindi maipadala ang # imbitasyon}}. Subukang muli."
+    },
+    "talents": "Mga iminumungkahing talento"
   },
   "invite": {
     "signIn": "Mag-sign in gamit ang email ng imbitasyon para sagutan ang interview na ito.",
@@ -479,7 +439,7 @@
     "timeRunsOut": "Kapag naubos ang oras ng isang tanong, mabibilang itong mali at magbubukas ang susunod. Tuloy ang oras kahit umalis ka.",
     "unanswered": "Ang mga hindi nasagot na tanong ay mabibilang na mali.",
     "saved": "Naka-save ang progreso: gamitin ulit ang link na ito para magpatuloy.",
-    "stay": "Manatili sa page na ito: nire-record ang pag-alis dito o pagkopya (<link>paano namin ito hinahawakan</link>).",
+    "stay": "Manatili sa page na ito: nire-record ang pag-alis dito o pagkopya (<link>privacy</link>).",
     "finished": "Tapos na ang interview na ito.",
     "continue": "Magpatuloy",
     "start": "Tanggapin at simulan",
@@ -503,29 +463,18 @@
   },
   "pricing": {
     "title": "Presyo",
-    "intro": "Magbayad lang sa ginagamit mo: ang $1 ay 100 credits, at hindi nag-e-expire ang credits. Walang subscription.",
-    "learners": "Para sa mga nag-aaral",
-    "welcome": "Pagka-sign up",
-    "referrals": "Mga imbitasyon",
-    "referralsNote": "I-share ang iyong link mula sa Mga setting, o ang link ng kumpanya mula sa tab nitong Mga imbitasyon.",
-    "referral": "Unang nag-top up ang kaibigang inimbitahan mo",
-    "companyReferral": "Unang nag-top up ng ${min} o higit pa ang kumpanyang inimbitahan mo",
-    "each": "{count, number} credits bawat isa",
-    "credits": "{count, plural, one {# credit} other {# credits}}",
-    "companies": "Para sa mga kumpanya",
-    "kit": "Sarili mong kit, gawa mula sa job description",
-    "chat": "AI tutor: {free, plural, one {# libreng tanong} other {# libreng tanong}} bawat tanong, pagkatapos",
-    "perTurn": "{count, plural, one {# credit} other {# credits}} bawat tanong",
-    "ownCertificate": "Certificate sa sarili mong kit o sa naka-share na kit",
-    "publicCertificate": "Certificate sa pampublikong kit",
-    "publicPractice": "Pag-practice sa mga pampublikong kit ({count, plural, one {# bagong paksa} other {# bagong paksa}} bawat araw)",
-    "draftTopics": "Mga topic na binuo para sa iyong job description o layunin",
-    "gift": "{count, number} credits nang libre",
+    "intro": "Magbayad bawat kandidato. Libre ang paggawa ng interview, at walang subscription.",
+    "test": "Paggawa ng interview",
     "free": "Libre",
-    "interview": "Paggawa ng interview",
-    "candidate": "Bawat kandidatong natapos at sumagot ng kahit isang tanong",
-    "companyWelcome": "Ang una mong kumpanya",
-    "openCompanies": "Mga kumpanya",
+    "candidate": "Bawat kandidatong sumagot ng kahit isang tanong",
+    "candidateVolume": "Gamit ang credits mula sa top-up na ${from, number} o higit pa",
+    "perCandidate": "${dollars, number} bawat kandidato",
+    "welcome": "{count, plural, one {Ang iyong unang kandidato} other {Ang iyong unang # kandidato}}",
+    "credits": "$1 = 100 credits, hindi nag-e-expire ang credits.",
+    "referrals": "Mga imbitasyon",
+    "referralsNote": "I-share ang link ng iyong kumpanya mula sa tab na Mga imbitasyon nito.",
+    "companyReferral": "Unang top-up ng kumpanyang inimbitahan mo",
+    "each": "{count, number} credits bawat isa",
     "topUp": "Mag-top up"
   },
   "site": {
@@ -534,22 +483,6 @@
   "legal": {
     "updated": "Huling na-update",
     "englishOnly": "Available lang ang dokumentong ito sa English."
-  },
-  "credits": {
-    "noHistory": "Wala pa.",
-    "reasons": {
-      "welcome": "Welcome gift",
-      "topup": "Top-up",
-      "kit": "Kit",
-      "candidate": "Kandidato",
-      "certificate": "Certificate",
-      "author_share": "Nakakuha ng certificate ang iyong pampublikong kit",
-      "chat": "Tanong sa tutor",
-      "refund": "Refund",
-      "chargeback": "Binawi ng bangko ang bayad",
-      "chargeback_reversed": "Naibalik ang binawing bayad",
-      "referral": "Gantimpala sa imbitasyon"
-    }
   },
   "autoTopUp": {
     "title": "Awtomatikong top-up",
@@ -572,43 +505,42 @@
     "label": "Gawin sa wikang"
   },
   "referral": {
-    "title": "Mag-imbita ng mga kaibigan",
-    "note": "Pareho kayong makakakuha ng {reward, number} credits kapag unang nag-top up ang kaibigan mo.",
     "companyTitle": "Mag-imbita ng ibang kumpanya",
-    "companyNote": "Parehong makakakuha ng {reward, number} credits ang dalawang kumpanya kapag nag-top up ng ${min} o higit pa ang bagong kumpanya.",
+    "companyNote": "Pareho kayong makakakuha ng {reward, number} credits kapag ginawa nila ang kanilang unang top-up, anumang halaga.",
+    "deletedCompany": "Binurang kumpanya",
+    "credits": "+{count, number} credits",
     "rewarded": "{count, plural, =0 {Wala pang gantimpala.} one {Nagantimpalaan nang # beses.} other {Nagantimpalaan nang # beses.}}"
   },
   "topUp": {
     "title": "Mag-top up",
     "intro": "Ang $1 ay 100 credits, at hindi nag-e-expire ang credits.",
     "signIn": "Mag-sign in para mag-top up ng credits.",
-    "yours": "Personal na balance",
-    "personal": "Personal na credits",
-    "personalNote": "Para sa iyong mga kit, sa AI tutor at sa mga certificate.",
     "companies": "Credits ng mga kumpanya",
     "companiesNote": "Para sa mga kandidato ng bawat kumpanya.",
+    "noCompany": "Ang credits ay pag-aari ng isang kumpanya. Gumawa muna ng iyong kumpanya, saka ito i-top up dito.",
+    "createCompany": "Gumawa ng kumpanya",
     "pricing": "Presyo"
   },
   "landing": {
     "more": "Paano ito gumagana",
     "how": {
-      "title": "Tatlong hakbang para maging handa",
+      "title": "Tatlong hakbang sa iyong unang resulta",
       "paste": {
-        "title": "I-paste o ilarawan",
-        "text": "Isang job description, syllabus, o mga skill at teknolohiyang gusto mong matutunan."
+        "title": "I-paste ang job description",
+        "text": "Anumang role, anumang wika.\nKinukuha ng prepza ang dapat malaman ng kandidato at nagmumungkahi ng mga topic."
       },
       "review": {
-        "title": "Suriin ang plano",
-        "text": "Hinahanap ng mga AI agent ang mahalaga at nagmumungkahi ng mga topic.\nPanatilihin, palitan ang pangalan, o baguhin ang mga ito."
+        "title": "Suriin ang mga topic",
+        "text": "Panatilihin, palitan ang pangalan, o baguhin ang mga ito.\nWalang tanong na isusulat hangga't hindi mo inaaprubahan."
       },
-      "practice": {
-        "title": "Mag-practice hanggang kumpiyansa ka",
-        "text": "May sariling mga tanong ang bawat topic.\nMag-practice nang pa-round at panoorin ang paglago ng progreso mo."
+      "invite": {
+        "title": "Mag-imbita ng mga kandidato",
+        "text": "Mag-paste ng listahan, mag-upload ng file o mag-share ng isang link.\nKusang naipapadala ang mga paalala. Makikita mo kung sino ang marunong sa trabaho, naka-rank ayon sa score."
       }
     },
     "control": {
-      "title": "Ikaw ang magpapasya kung ano ang pag-aaralan",
-      "text": "Walang tanong na isusulat hangga't hindi mo inaaprubahan ang mga topic. Alisin ang check sa alam mo na, palitan ang pangalan ng topic, i-edit ang mga subtopic nito, o sabihin lang sa AI kung ano ang babaguhin at hayaan itong gawin ang iba.",
+      "title": "Ikaw ang magpapasya kung ano ang susukatin",
+      "text": "Walang tanong na isusulat hangga't hindi mo inaaprubahan ang mga topic. Alisin ang check sa hindi kailangan ng role, palitan ang pangalan ng topic, i-edit ang mga subtopic nito, o sabihin sa AI kung ano ang babaguhin.",
       "topics": {
         "design": "System design",
         "sql": "Content marketing",
@@ -642,43 +574,9 @@
         "Pagsukat ng views"
       ]
     },
-    "gaps": {
-      "title": "Practice na hinahanap ang kahinaan mo",
-      "text": "Itinatanong ulit ng bawat round ang lahat ng tanong ng topic, simula sa mga nagkamali ka noong huli. Ikumpara ang mga round at panoorin ang pagliit ng mga kahinaan mo.",
-      "items": {
-        "first": {
-          "question": "Aling metric ang nagpapakita kung sino ang nanood ng ad hanggang dulo?",
-          "wrong": "Click-through rate",
-          "right": "View-through rate"
-        },
-        "second": {
-          "question": "Ano ang pangunahing binabawasan ng cache?",
-          "wrong": "Gastos sa storage",
-          "right": "Response time"
-        }
-      }
-    },
-    "tutor": {
-      "title": "Isang tutor para sa bawat tanong",
-      "text": "Pagkatapos ng bawat sagot, makikita mo agad ang tamang opsyon. Hindi sigurado kung bakit ito tama? Tanungin ang AI tutor at lumalim hangga't kailangan mo.",
-      "question": "Galit ang isang customer dahil na-late ang delivery niya. Ano ang una mong gagawin?",
-      "options": {
-        "first": "Ipaliwanag kung bakit na-late",
-        "second": "Kilalanin ang problema at mag-sorry",
-        "third": "Mag-alok agad ng discount",
-        "fourth": "Ipasa ang kaso sa manager"
-      },
-      "ask": "Bakit hindi muna magpaliwanag?",
-      "answer": "Kilalanin muna ang problema: nakikinig ang tao sa paliwanag kapag ramdam niyang pinakikinggan siya."
-    },
-    "proof": {
-      "title": "Alamin kung kailan ka handa",
-      "text": "May progress bar ang bawat topic papunta sa certificate nito. Kunin ito, at maituturing na master mo na ang topic.",
-      "again": "Magsimula ulit"
-    },
     "quality": {
-      "title": "Mga tanong na kusang gumaganda",
-      "text": "Ipinapakita ng mga like, dislike at report ang mahihinang tanong. Awtomatikong inaayos o pinapalitan ng isang AI verifier ang mga ito, at puwedeng ipagawang muli ng mga may-ari ng kit ang kahit anong tanong.",
+      "title": "Mga tanong na kusang naaayos",
+      "text": "Ipinapakita ng mga sagot, rating at report ng mga kandidato ang mahihinang tanong. Awtomatikong inaayos o pinapalitan ng isang AI verifier ang mga ito, at puwede mong i-generate ulit ang kahit anong tanong.",
       "items": {
         "good": "Ano ang pinapabilis ng database index?",
         "weak": "Aling programming language ang pinakamagaling?",
@@ -687,45 +585,89 @@
       "comment": "Depende sa project, kaya walang iisang tamang sagot.",
       "list": "Mga tanong sa topic"
     },
-    "share": {
-      "title": "I-share o i-publish",
-      "text": "Imbitahan sa email ang mga kaibigan o katrabaho para mag-practice ng kit mo kasama ka, o i-publish ito sa pampublikong library para sa lahat ng naghahanda para sa parehong bagay.",
-      "private": "Pribadong pag-share",
-      "public": "Pampublikong pag-share",
-      "browse": "Tuklasin ang library"
+    "try": {
+      "title": "Subukan ito bago ang iyong mga kandidato",
+      "text": "Sumagot ng isang libreng practice interview para sa katulad na role, o buksan ang sarili mong interview bilang kandidato bago ka mag-imbita ng kahit sino.",
+      "browse": "Tingnan ang mga practice interview",
+      "topic": "System design",
+      "question": "Ano ang pangunahing binabawasan ng cache na nasa harap ng database?",
+      "options": {
+        "a": "Ang laki ng database",
+        "b": "Kung gaano kadalas binabasa ang database",
+        "c": "Ang bilang ng mga table",
+        "d": "Kung gaano katagal ang mga backup"
+      },
+      "points": {
+        "practice": "Libreng practice interview para sa maraming role",
+        "preview": "Ang sarili mong interview bilang kandidato"
+      }
+    },
+    "link": {
+      "title": "Isang link para sa iyong job ad",
+      "text": "Ilagay ang link ng interview sa iyong job ad. Agad na sinasagutan ng bawat nag-a-apply ang interview at lumalabas sila sa iyong listahan ng mga kandidato, naka-rank ayon sa score.",
+      "note": "Puwedeng sagutan ng sinumang may link ang interview.",
+      "points": {
+        "anywhere": "Sa mga job board, LinkedIn o sa iyong site",
+        "off": "I-off ito kapag napunan na ang role"
+      }
     },
     "companies": {
-      "title": "Nagha-hire? Subukin nang patas ang mga kandidato",
-      "text": "Gawing may oras na interview ang isang job description at imbitahan ang mga kandidato para masuri sila.",
+      "title": "Alamin kung sino ang marunong sa trabaho",
+      "text": "Sinasagutan ng mga kandidato ang interview mula sa iyong email invite. Dumarating ang kanilang score habang sumasagot sila, berde o pula batay sa iyong passing grade.",
       "points": {
         "own": "Ibang mga tanong sa bawat kandidato",
         "timed": "May countdown ang bawat tanong",
         "flags": "Flag sa pagmamadali, pag-alis o pangongopya",
-        "private": "Nakatago ang score sa mga kandidato"
+        "private": "Hindi kailanman nakikita ng mga kandidato ang kanilang score"
       },
       "candidate": "Kandidato",
       "score": "Score",
       "rushed": "Minadaling sagot",
       "left": "Umalis sa page",
-      "start": "Magsimulang mag-hire"
+      "role": "Backend developer · passing grade {mark}%"
+    },
+    "reports": {
+      "title": "I-share ang mga resulta sa isang click",
+      "text": "Isang malinaw na PDF report para sa isang kandidato o sa buong listahan. I-download ito, o ipadala sa isang hiring manager direkta mula sa prepza.",
+      "points": {
+        "pdf": "Isang kandidato o lahat sila",
+        "share": "I-email ang PDF o i-share sa mga messenger"
+      }
+    },
+    "brand": {
+      "title": "Ang iyong brand, verified",
+      "text": "Nakikita ng mga kandidato ang iyong logo mula sa unang email hanggang sa huling tanong, kasama ang check na nagpapakitang totoo ang iyong kumpanya.",
+      "role": "Backend developer",
+      "points": {
+        "email": "Ang iyong logo sa invite email",
+        "interview": "Sa interview na sinasagutan ng mga kandidato",
+        "report": "Sa bawat PDF report",
+        "verified": "Verified gamit ang work email ng iyong team"
+      }
+    },
+    "talent": {
+      "title": "Makakuha ng mga mungkahing talento",
+      "text": "Ang mga may pinakamataas na score sa aming libreng practice interview, iminumungkahi para sa iyong role. Libre.",
+      "suggested": "Iminumungkahi para sa Backend developer",
+      "score": "Score",
+      "points": {
+        "free": "Libre para sa iyo at sa talento",
+        "practice": "Na-score sa mga timed interview",
+        "first": "Ang unang subok lang nila ang bilang",
+        "link": "Sila ang pumipili kung imumungkahi sila"
+      }
     },
     "languages": {
-      "title": "Sa wika mo",
-      "text": "Gamitin ang prepza sa alinman sa {count} wika. Mag-paste ng job description sa isang wika at mag-practice sa iba."
+      "title": "Anumang role, anumang wika",
+      "text": "Gumagana ang prepza sa {count} wika. Mag-paste ng job description sa isang wika at i-interview ang mga kandidato sa iba."
     },
     "pricing": {
-      "title": "Magbayad lang para sa gumagana",
-      "text": "Walang subscription o plan. Mag-top up kapag kailangan mo: hindi nag-e-expire ang credits, at walang bayad ang anumang pumalya.",
+      "title": "Magbayad bawat kandidato",
+      "text": "Libre ang mga interview at ang {free, plural, one {iyong unang kandidato} other {iyong unang # kandidato}}. Pagkatapos noon, magbabayad ka lang para sa mga kandidatong sumasagot, walang subscription.",
       "see": "Tingnan ang presyo",
-      "company": "Acme Inc.",
-      "personal": "Para sa iyong mga kit at sa AI tutor.",
-      "learner": "Credits ng learner"
-    },
-    "referrals": {
-      "title": "Kumita ng credits bilang affiliate",
-      "text": "Imbitahan ang mga kaibigan o ibang kumpanya gamit ang link mo. Pagka-top up nila sa unang beses, pareho kayong makakakuha ng credits.",
-      "whereLearner": "Nasa {settings} → {referral} ang link mo.",
-      "whereCompany": "Nasa {hiring} → ang kumpanya mo → {referrals} ang link ng kumpanya mo."
+      "perCandidate": "bawat kandidato",
+      "base": "Pay as you go",
+      "volume": "Sa top-up mula ${from, number}"
     },
     "faq": {
       "title": "May tanong pa?",
@@ -733,8 +675,8 @@
       "read": "pumunta sa FAQ"
     },
     "ready": {
-      "title": "Handa ka nang maghanda?",
-      "start": "Magsimula na"
+      "title": "Handa ka na bang i-interview ang iyong mga unang kandidato?",
+      "start": "Gumawa ng interview"
     }
   },
   "faq": {
@@ -761,14 +703,15 @@
   },
   "about": {
     "title": "Tungkol sa amin",
-    "intro": "Tinutulungan ka ng prepza na maghanda nang may kumpiyansa, at binibigyan nito ang mga kumpanya ng simple at abot-kayang paraan para subukan ang mga kandidato.",
+    "intro": "Tinutulungan ng prepza ang mga kumpanya na makahanap ng mga taong talagang marunong sa trabaho: isang patas na timed interview mula sa iyong job description, sa presyong kaya ng kahit anong team. At ang sinumang naghahanda para sa interview ay puwedeng mag-practice nang libre.",
     "company": {
       "title": "Bakit kami narito",
-      "learners": "Ang paghahanda para sa interview, exam, o bagong skill ay hindi dapat magsimula sa ilang oras ng paghahanap. Sabihin sa prepza ang gusto mong maabot, at gagawin nito itong malinaw na plano: ang mga paksang mahalaga, mga practice question para sa bawat isa, at isang tutor na nagpapaliwanag ng bawat sagot hanggang sa tuluyan mo itong maintindihan.",
-      "companies": "Para sa mga kumpanya, gusto naming maging patas ang hiring at abot-kamay ng kahit anong team, hindi lang ng malalaki. Gawing timed interview ang isang job description sa loob ng ilang minuto, bigyan ang bawat kandidato ng sarili niyang mga tanong, at magbayad lang para sa mga kandidatong talagang kumuha nito."
+      "problem": "Madalas nakasalalay ang hiring sa isang CV at isang magandang usapan, at puwedeng makapanlinlang ang dalawa. Ang mga assessment tool na nakakatulong ay naka-presyo para sa malalaking kumpanya, may annual plan at bayad bawat seat, kaya karamihan ng team ay wala nito.",
+      "approach": "Ginagawang timed interview ng prepza ang isang job description sa loob ng ilang minuto, para sa kahit anong role. Bawat kandidato ay may sariling mga tanong, nakikita mo kung sino ang marunong sa trabaho at bakit, at magbabayad ka lang para sa mga kandidatong talagang sumagot nito.",
+      "practice": "Gusto rin naming maging libre para sa lahat ang paghahanda para sa interview. Kahit sino ay puwedeng sumagot ng aming mga practice interview para sa isang role, makita ang kanilang grado at bawat tamang sagot, at mag-practice ulit, nang walang bayad. Ang mga mahusay ay puwedeng piliing maimungkahi sa mga kumpanyang nagha-hire para sa katulad na role."
     },
     "founder": {
-      "quote": "Tuwing naghahanda ako para sa interview o sinusubukang matuto ng bago, mas matagal ang ginugugol ko sa paghahanap ng magandang materyal kaysa sa mismong pag-aaral. Bawat site ay may isang bahagi lang, at wala ni isang tumugma sa kailangan ko. Kaya ginawa ko ang prepza: ang tool na sana ay meron ako noon, na nagsisimula sa layunin mo at gagabay sa iyo papunta roon. Sana ay matipid nito ang mga oras mo na natipid sana nito para sa akin.",
+      "quote": "Hindi dapat pribilehiyo lang ng malalaking kumpanya na may malaking budget ang mahusay na hiring. Ginawa ko ang prepza para kahit anong team ay magawang patas na interview ang isang job description sa loob ng ilang minuto, makita kung sino ang talagang marunong sa trabaho, at magbayad lang para sa mga kandidatong sumagot nito. Sana ay matulungan ka nitong mahanap nang mas mabilis ang mga tamang tao.",
       "role": "Solo founder ng prepza"
     }
   },
@@ -779,7 +722,6 @@
     "kinds": {
       "question_flagged": "{count, plural, =1 {Na-flag para i-review ang isang tanong tungkol sa “{topic}” sa “{title}”.} other {Na-flag para i-review ang # tanong sa “{title}”.}}",
       "question_fixed": "{count, plural, =1 {Inayos ng AI ang na-flag na tanong tungkol sa “{topic}” sa “{title}”.} other {Inayos ng AI ang # na-flag na tanong sa “{title}”.}}",
-      "kit_ready": "Handa na ang iyong kit na “{title}”.",
       "referral_rewarded": "Nag-top up ang isang inimbitahan mo. Nakatanggap ka ng {credits} credits.",
       "auto_top_up_charged": "Nagdagdag ang awtomatikong top-up ng {credits} credits.",
       "auto_top_up_failed": "Hindi ma-charge ng awtomatikong top-up ang card. Mag-top up para hindi maubos ang iyong balance.",
@@ -788,5 +730,77 @@
       "interview_ready": "Handa na ang interview na “{title}”.",
       "interview_cancelled": "{title, select, none {Kinansela ang isang interview} other {Kinansela ang interview na “{title}”}}: masyadong natagal ang paghihintay sa review ng mga paksa."
     }
+  },
+  "report": {
+    "download": "I-download ang PDF",
+    "passed": "pumasa · passing grade {mark}%",
+    "notPassed": "hindi pumasa · passing grade {mark}%",
+    "notFinished": "hindi pa tapos",
+    "share": "I-share ang report",
+    "fileName": "Report {email}",
+    "failed": "Hindi magawa ang PDF report.",
+    "shareTitle": "I-share ang report",
+    "recipient": "Email ng tatanggap",
+    "send": "Ipadala ang <name>PDF</name>",
+    "sent": "Naipadala ang report sa {email}",
+    "sendFailed": "Hindi maipadala ang report.",
+    "orSummary": "O ipadala gamit ang",
+    "via": "Ipinadala mula sa prepza",
+    "candidatesFileName": "Mga kandidato {title}",
+    "candidateCount": "{count, plural, one {# kandidato} other {# kandidato}}",
+    "passMark": "passing grade {mark}%",
+    "progressOf": "{progress}% tapos"
+  },
+  "practice": {
+    "title": "Libreng practice sa interview",
+    "intro": "Mag-practice para sa isang role gamit ang timed interview, saka tingnan ang iyong grado at bawat tamang sagot. Libre.",
+    "about": "Timed na practice interview. Pagkatapos mo, makikita mo ang iyong grado at bawat tamang sagot. Pribado at libre.",
+    "pageTitle": "{title}: libreng practice interview",
+    "pageDescription": "Libreng {level} practice interview para sa {title}: {count, plural, one {# topic} other {# topic}}, timed, kasama ang iyong grado at bawat tamang sagot pagkatapos. Practice, hindi totoong job interview.",
+    "start": "Simulan ang practice",
+    "again": "Mag-practice ulit",
+    "continue": "Magpatuloy",
+    "history": "Iyong mga round",
+    "results": "Resulta ng practice",
+    "grade": "ng mga tanong ang tama",
+    "notFinished": "hindi tapos",
+    "noRounds": "Wala pang round.",
+    "signIn": "Mag-sign in para makita ang iyong mga practice round.",
+    "startFailed": "Hindi masimulan ang practice. Pakisubukang muli.",
+    "gradeLabel": "Grado",
+    "questions": "{count, plural, one {# tanong} other {# tanong}}",
+    "progressLabel": "Progreso",
+    "answeredLabel": "tanong ang nasagot"
+  },
+  "suggest": {
+    "title": "Maimungkahi sa mga kumpanya",
+    "consent": "Opsyonal. Puwedeng makita ng mga kumpanyang nagha-hire para sa katulad na role ang iyong pangalan, LinkedIn at score sa unang round. Puwede mo itong baguhin o bawiin anumang oras sa settings.",
+    "link": "LinkedIn link",
+    "share": "I-share",
+    "saved": "Puwede ka nang imungkahi sa mga kumpanya.",
+    "withdraw": "Bawiin",
+    "withdrawn": "Hindi ka na imumungkahi sa mga kumpanya.",
+    "invalid": "Gamitin ang link ng iyong LinkedIn profile, tulad ng https://www.linkedin.com/in/your-name",
+    "failed": "Hindi ma-save. Pakisubukang muli.",
+    "shareAndStart": "Pumayag at simulan",
+    "startWithout": "Tumanggi at simulan"
+  },
+  "talents": {
+    "about": "Mga talentong mahusay sa pag-practice ng interview para sa role na katulad nito, at pumayag na maimungkahi.",
+    "empty": "Wala pang iminumungkahing talento.",
+    "score": "Score",
+    "hide": "Itago",
+    "hideFailed": "Hindi maitago ang talento. Pakisubukang muli."
+  },
+  "verify": {
+    "verify": "I-verify",
+    "verified": "Verified: {domain}",
+    "title": "I-verify ang kumpanya",
+    "text": "Ilagay ang website ng kumpanya. Mave-verify ito kapag nag-sign in ang isang owner o admin gamit ang work email dito, tulad ng you@acme.com: agad-agad kung ikaw iyon.",
+    "website": "Website ng kumpanya",
+    "save": "I-save",
+    "done": "Verified: {domain}",
+    "pending": "Na-save. Mave-verify ito kapag nag-sign in ang isang owner o admin gamit ang email sa {domain}.",
+    "failed": "Hindi ma-save ang website."
   }
 }

@@ -25,6 +25,7 @@ export function ThemeModes() {
           variant={theme === value ? "secondary" : "ghost"}
           className="h-8 flex-1 shrink"
           aria-label={t(value)}
+          tooltip={t(value)}
           aria-pressed={theme === value}
           onClick={() => setTheme(value)}
         >

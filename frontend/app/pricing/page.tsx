@@ -1,3 +1,4 @@
+import { InfoIcon } from "lucide-react"
 import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 
@@ -27,10 +28,14 @@ export default async function PricingPage() {
     return null
   }
 
-  const credits = (count: number) => t("credits", { count })
+  // The candidates a first company's welcome credits cover.
+  const freeCandidates = Math.floor(
+    catalog.welcome_company / catalog.candidate_credits
+  )
+  const [standard, ...volume] = catalog.candidate_prices
 
   return (
-    <main className="mx-auto max-w-5xl space-y-12 px-6 py-12">
+    <main className="mx-auto max-w-5xl space-y-16 px-6 py-12">
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-4">
           <h1 className="font-heading text-4xl font-medium tracking-tight">
@@ -47,56 +52,30 @@ export default async function PricingPage() {
         <p className="text-base text-muted-foreground">{t("intro")}</p>
       </div>
 
-      <section className="space-y-4">
-        <h2 className="font-heading text-2xl font-medium">{t("learners")}</h2>
+      <section className="space-y-10">
         <ul className="divide-y rounded-xl border">
-          <PriceRow what={t("kit")} price={credits(catalog.kit_credits)} />
+          <PriceRow what={t("test")} price={t("free")} />
           <PriceRow
-            what={t("chat", { free: catalog.chat_free_turns })}
-            price={t("perTurn", { count: catalog.chat_turn_credits })}
-          />
-          <PriceRow what={t("ownCertificate")} price={t("free")} />
-          <PriceRow
-            what={t("publicCertificate")}
-            price={credits(catalog.certificate_credits)}
-          />
-          <PriceRow
-            what={t("publicPractice", { count: catalog.public_topics_per_day })}
+            what={t("welcome", { count: freeCandidates })}
             price={t("free")}
           />
-          <PriceRow what={t("draftTopics")} price={t("free")} />
-          <PriceRow
-            what={t("welcome")}
-            price={t("gift", { count: catalog.welcome_user })}
-          />
-        </ul>
-      </section>
-
-      <section className="space-y-4">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="font-heading text-2xl font-medium">
-            {t("companies")}
-          </h2>
-          <Button
-            variant="outline"
-            className="h-12 px-6 text-base"
-            render={<Link href="/company" />}
-            nativeButton={false}
-          >
-            {t("openCompanies")}
-          </Button>
-        </div>
-        <ul className="divide-y rounded-xl border">
-          <PriceRow what={t("interview")} price={t("free")} />
           <PriceRow
             what={t("candidate")}
-            price={credits(catalog.candidate_credits)}
+            price={t("perCandidate", { dollars: standard.cents / 100 })}
           />
-          <PriceRow
-            what={t("companyWelcome")}
-            price={t("gift", { count: catalog.welcome_company })}
-          />
+          {/* Volume prices: large top-ups buy more credits per dollar (billing decides). */}
+          {volume.map((tier) => (
+            <PriceRow
+              key={tier.from_dollars}
+              what={t("candidateVolume", { from: tier.from_dollars })}
+              price={t("perCandidate", { dollars: tier.cents / 100 })}
+            />
+          ))}
         </ul>
+        <div className="mx-auto flex w-fit items-center gap-3 rounded-2xl bg-muted px-5 py-4 text-base text-muted-foreground">
+          <InfoIcon aria-hidden className="size-6 shrink-0 text-primary" />
+          <p>{t("credits")}</p>
+        </div>
       </section>
 
       <section className="space-y-4">
@@ -110,13 +89,7 @@ export default async function PricingPage() {
         </div>
         <ul className="divide-y rounded-xl border">
           <PriceRow
-            what={t("referral")}
-            price={t("each", { count: catalog.referral_user })}
-          />
-          <PriceRow
-            what={t("companyReferral", {
-              min: catalog.referral_company_min_dollars,
-            })}
+            what={t("companyReferral")}
             price={t("each", { count: catalog.referral_company })}
           />
         </ul>

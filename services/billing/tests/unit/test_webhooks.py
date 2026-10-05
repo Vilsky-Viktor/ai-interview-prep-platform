@@ -65,14 +65,7 @@ def granted(monkeypatch):
 def test_a_completed_transaction_grants_what_its_prices_bought(granted):
     asyncio.run(webhooks.handle(completed(quantity=2)))
 
-    assert granted == [("txn_01", "topup_10", 2, 2_000, "acme", "ann")]
-
-
-def test_a_custom_amount_buys_its_dollars_in_credits_with_the_bonus(granted):
-    asyncio.run(webhooks.handle(completed(price_id="pri_topup_custom", quantity=120)))
-
-    # $120 is over $100, so it gets the 2% bonus.
-    assert granted == [("txn_01", "topup_custom", 120, 12_240, "acme", "ann")]
+    assert granted == [("txn_01", "topup_30", 2, 6_000, "acme", "ann")]
 
 
 @pytest.mark.parametrize(
@@ -107,6 +100,6 @@ def test_the_catalog_lists_every_product_and_which_are_on_sale(client):
     products = client.get("/catalog").json()["products"]
 
     assert {product["key"]: product["price_id"] for product in products}[
-        "topup_10"
-    ] == "pri_topup_10"
+        "topup_30"
+    ] == "pri_topup_30"
     assert products[1]["price_id"] is None

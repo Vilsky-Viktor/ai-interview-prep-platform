@@ -1,32 +1,28 @@
+import uuid
+
+from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import select
 
 from app.models.outbox import OutboxEvent
-from app.storage import shares
+from app.storage import quality
 from app.storage.db import Session
-from tests.integration.factories import preparation
+from tests.integration.factories import interview, question_ids
 
 
-def test_a_share_invite_and_its_email_event_are_saved_together(run):
+def test_a_flag_and_its_notification_are_saved_together(run):
+    notice = {"recipient": "company", "recipient_id": "company-1", "marker": str(uuid.uuid4())}
+
     async def scenario():
-        set_id = await preparation("Shared")
-        invite = await shares.upsert(set_id, "bob@example.com", "owner", "Shared", "Ann", "en")
+        [question_id, *_] = await question_ids(await interview())
+        await quality.save_flag(question_id, "wrong_key", notice=notice)
 
         async with Session() as session:
             events = list(
                 await session.scalars(
-                    select(OutboxEvent).where(OutboxEvent.event_type == "preparation.shared")
+                    select(OutboxEvent).where(OutboxEvent.event_type == NOTIFICATION_REQUESTED)
                 )
             )
 
-        return invite, [event.data for event in events]
+        return [event.data for event in events]
 
-    invite, events = run(scenario())
-
-    assert {
-        "share_id": str(invite.id),
-        "email": "bob@example.com",
-        "token": invite.token,
-        "title": "Shared",
-        "inviter": "Ann",
-        "language": "en",
-    } in events
+    assert notice in run(scenario())

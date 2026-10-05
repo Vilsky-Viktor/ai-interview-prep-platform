@@ -2,9 +2,10 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 
 from app.constants.invites import InviteStatus
-from app.helpers.interviews import attach_set, interview_title, pick_questions, topic_limit
-from app.integrations import library, rounds
-from app.schemas.invites import InviteStartOut, InviteView, SessionSummary
+from app.helpers.interviews import attach_set, interview_title
+from app.helpers.logos import logo_path
+from app.schemas.invites import InviteStartOut, InviteView
+from app.services.candidate_start import start_sessions
 from app.storage import companies
 from app.storage import invites as invite_store
 
@@ -29,6 +30,8 @@ async def get_invite(token: str, user: CurrentUser) -> InviteView:
         interview_id=interview.id,
         title=title,
         company=company.name if company else "",
+        logo_url=logo_path(company),
+        verified_domain=company.verified_domain if company else None,
         email=invite.email,
         status=invite.status,
         question_seconds=interview.question_seconds,
@@ -53,43 +56,4 @@ async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
     if invite.status == InviteStatus.FINISHED:
         raise HTTPException(status.HTTP_409_CONFLICT, "This interview is already finished")
 
-    interview = await attach_set(interview)
-
-    if interview.set_id is None:
-        raise HTTPException(status.HTTP_409_CONFLICT, "Interview is not ready yet")
-
-    content = await library.get_content(interview.set_id)
-
-    if content is None or not content["topics"]:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview content not found")
-
-    await invite_store.start(invite, user.uid)
-    created = await rounds.create_sessions(
-        {
-            "user_id": user.uid,
-            "candidate_invite_id": str(invite.id),
-            "question_seconds": interview.question_seconds,
-            "topics": [
-                {
-                    "id": topic["id"],
-                    "preparation_id": content["id"],
-                    "title": topic["title"],
-                    "questions": pick_questions(
-                        topic["questions"], topic_limit(interview.topic_limits, topic["id"])
-                    ),
-                }
-                for topic in content["topics"]
-            ],
-        }
-    )
-
-    return InviteStartOut(
-        sessions=[
-            SessionSummary(
-                id=row["id"],
-                topic_title=row["topic_title"],
-                status=row["status"],
-            )
-            for row in created
-        ]
-    )
+    return await start_sessions(invite, interview, user.uid)

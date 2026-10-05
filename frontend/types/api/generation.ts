@@ -4,98 +4,6 @@
  */
 
 export interface paths {
-  "/generations": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * List Unfinished
-     * @description Preparations still generating, waiting for topic review, or failed, newest first.
-     */
-    get: operations["list_unfinished_generations_get"]
-    put?: never
-    /** Create Generation */
-    post: operations["create_generation_generations_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/generations/{generation_id}": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Get Generation */
-    get: operations["get_generation_generations__generation_id__get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/generations/{generation_id}/review": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /** Review Generation */
-    post: operations["review_generation_generations__generation_id__review_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/generations/{generation_id}/retry": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /** Retry */
-    post: operations["retry_generations__generation_id__retry_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/generations/{generation_id}/cancel": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Cancel
-     * @description Interviews are cancelled through companies, which also removes the interview.
-     */
-    post: operations["cancel_generations__generation_id__cancel_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/languages": {
     parameters: {
       query?: never
@@ -105,11 +13,113 @@ export interface paths {
     }
     /**
      * List Languages
-     * @description The languages kits and interviews can be generated in, for the "generate in" choice.
+     * @description The languages tests can be generated in, for the "generate in" choice.
      */
     get: operations["list_languages_languages_get"]
     put?: never
     post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/templates": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Create Template */
+    post: operations["create_template_superadmin_templates_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/generations/{generation_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Generation */
+    get: operations["get_generation_superadmin_generations__generation_id__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/generations/{generation_id}/review": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Review Generation */
+    post: operations["review_generation_superadmin_generations__generation_id__review_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/generations/{generation_id}/retry": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Retry */
+    post: operations["retry_superadmin_generations__generation_id__retry_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/generations/{generation_id}/cancel": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Cancel */
+    post: operations["cancel_superadmin_generations__generation_id__cancel_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/templates/{template_id}/questions/{question_id}/regenerate": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Regenerate Question */
+    post: operations["regenerate_question_superadmin_templates__template_id__questions__question_id__regenerate_post"]
     delete?: never
     options?: never
     head?: never
@@ -127,7 +137,7 @@ export interface paths {
     put?: never
     /**
      * Create Interview Generation
-     * @description A company's interview; companies pays per candidate, so this one is free.
+     * @description A company's test; companies charges per candidate, so generating it is free.
      */
     post: operations["create_interview_generation_internal_generations_post"]
     delete?: never
@@ -293,26 +303,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/titles/check": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Check
-     * @description For library, before a kit is public: whether its title names a company.
-     */
-    post: operations["check_internal_titles_check_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/health": {
     parameters: {
       query?: never
@@ -368,48 +358,11 @@ export interface components {
       /** Subtopics */
       subtopics: string[]
     }
-    /** GenerationCreate */
-    GenerationCreate: {
-      /** Text */
-      text: string
-      /** @default preparation */
-      kind: components["schemas"]["GenerationKind"]
-      /** Company Id */
-      company_id?: string | null
-      /** Generate In */
-      generate_in?:
-        | (
-            | "en"
-            | "ru"
-            | "uk"
-            | "es"
-            | "pt"
-            | "de"
-            | "fr"
-            | "it"
-            | "pl"
-            | "nl"
-            | "tr"
-            | "ar"
-            | "he"
-            | "fa"
-            | "ja"
-            | "zh"
-            | "ko"
-            | "hi"
-            | "id"
-            | "th"
-            | "vi"
-            | "fil"
-            | "et"
-          )
-        | null
-    }
     /**
      * GenerationKind
      * @enum {string}
      */
-    GenerationKind: "preparation" | "interview"
+    GenerationKind: "interview" | "template"
     /** GenerationOut */
     GenerationOut: {
       /**
@@ -454,25 +407,6 @@ export interface components {
       topics?: number | null
       /** Topics Ready */
       topics_ready?: number | null
-    }
-    /**
-     * GenerationSummary
-     * @description An unfinished generation in a list, with the start of the goal it was made from.
-     */
-    GenerationSummary: {
-      /**
-       * Id
-       * Format: uuid
-       */
-      id: string
-      status: components["schemas"]["Status"]
-      /** Preview */
-      preview: string
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string
     }
     /** HTTPValidationError */
     HTTPValidationError: {
@@ -595,18 +529,41 @@ export interface components {
      */
     Status:
       "queued" | "running" | "awaiting_review" | "done" | "failed" | "cancelled"
-    /** TitleCheckIn */
-    TitleCheckIn: {
-      /** Title */
-      title: string
-    }
-    /** TitleCheckOut */
-    TitleCheckOut: {
-      /**
-       * Has Company
-       * @description True when the title names a company or organization, not just its products
-       */
-      has_company: boolean
+    /**
+     * TemplateGenerationCreate
+     * @description An admin's template, from a role description.
+     */
+    TemplateGenerationCreate: {
+      /** Text */
+      text: string
+      /** Generate In */
+      generate_in?:
+        | (
+            | "en"
+            | "ru"
+            | "uk"
+            | "es"
+            | "pt"
+            | "de"
+            | "fr"
+            | "it"
+            | "pl"
+            | "nl"
+            | "tr"
+            | "ar"
+            | "he"
+            | "fa"
+            | "ja"
+            | "zh"
+            | "ko"
+            | "hi"
+            | "id"
+            | "th"
+            | "vi"
+            | "fil"
+            | "et"
+          )
+        | null
     }
     /** ValidationError */
     ValidationError: {
@@ -624,6 +581,11 @@ export interface components {
     /** VerifyIn */
     VerifyIn: {
       flag: components["schemas"]["QualityFlag"]
+      /**
+       * Now
+       * @default false
+       */
+      now: boolean
     }
   }
   responses: never
@@ -634,12 +596,9 @@ export interface components {
 }
 export type $defs = Record<string, never>
 export interface operations {
-  list_unfinished_generations_get: {
+  list_languages_languages_get: {
     parameters: {
-      query?: {
-        offset?: number
-        limit?: number
-      }
+      query?: never
       header?: never
       path?: never
       cookie?: never
@@ -652,21 +611,12 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["GenerationSummary"][]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
+          "application/json": string[]
         }
       }
     }
   }
-  create_generation_generations_post: {
+  create_template_superadmin_templates_post: {
     parameters: {
       query?: never
       header?: never
@@ -675,7 +625,7 @@ export interface operations {
     }
     requestBody: {
       content: {
-        "application/json": components["schemas"]["GenerationCreate"]
+        "application/json": components["schemas"]["TemplateGenerationCreate"]
       }
     }
     responses: {
@@ -699,7 +649,7 @@ export interface operations {
       }
     }
   }
-  get_generation_generations__generation_id__get: {
+  get_generation_superadmin_generations__generation_id__get: {
     parameters: {
       query?: never
       header?: never
@@ -730,7 +680,7 @@ export interface operations {
       }
     }
   }
-  review_generation_generations__generation_id__review_post: {
+  review_generation_superadmin_generations__generation_id__review_post: {
     parameters: {
       query?: never
       header?: never
@@ -765,7 +715,7 @@ export interface operations {
       }
     }
   }
-  retry_generations__generation_id__retry_post: {
+  retry_superadmin_generations__generation_id__retry_post: {
     parameters: {
       query?: never
       header?: never
@@ -796,7 +746,7 @@ export interface operations {
       }
     }
   }
-  cancel_generations__generation_id__cancel_post: {
+  cancel_superadmin_generations__generation_id__cancel_post: {
     parameters: {
       query?: never
       header?: never
@@ -827,11 +777,14 @@ export interface operations {
       }
     }
   }
-  list_languages_languages_get: {
+  regenerate_question_superadmin_templates__template_id__questions__question_id__regenerate_post: {
     parameters: {
       query?: never
       header?: never
-      path?: never
+      path: {
+        template_id: string
+        question_id: string
+      }
       cookie?: never
     }
     requestBody?: never
@@ -842,7 +795,16 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": string[]
+          "application/json": components["schemas"]["RegeneratedOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }
@@ -1135,39 +1097,6 @@ export interface operations {
           "application/json": {
             [key: string]: unknown
           }
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  check_internal_titles_check_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["TitleCheckIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["TitleCheckOut"]
         }
       }
       /** @description Validation Error */

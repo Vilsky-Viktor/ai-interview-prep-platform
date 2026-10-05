@@ -4,7 +4,6 @@ import pytest
 from pydantic import ValidationError
 
 from app.constants.generation import MAX_INSTRUCTIONS_LENGTH, RUN_GENERATION
-from app.main import app
 from app.models.generation import Generation
 from app.routers import internal
 from app.schemas.generation import ReviewRequest
@@ -28,7 +27,6 @@ def company_generation():
         text="Job description",
         language="en",
         status="awaiting_review",
-        approved=False,
         topics=[{"main_topic": "Python", "subtopics": ["asyncio"]}],
         progress=None,
         preparation_id=None,
@@ -147,95 +145,6 @@ def test_more_than_max_topics_is_fine_with_instructions_to_revise(client, monkey
     assert response.status_code == 200
     assert response.json()["max_topics"] == 10
     assert revised == [11]
-
-
-def test_lists_unfinished_preparations_with_a_short_preview(client, monkeypatch):
-    from datetime import UTC, datetime
-
-    from prepza_common.auth import current_user
-    from prepza_common.user import User
-
-    waiting = company_generation()
-    waiting.kind = "preparation"
-    waiting.text = "  Senior accountant\n\nat Acme. " + "x" * 300
-    waiting.created_at = datetime.now(UTC)
-
-    async def fake_list(owner_uid, offset, limit):
-        assert owner_uid == "alice"
-
-        return [waiting]
-
-    monkeypatch.setattr(generations, "list_unfinished", fake_list)
-    app.dependency_overrides[current_user] = lambda: User(
-        uid="alice", email="alice@example.com", email_verified=True
-    )
-
-    [row] = client.get("/generations").json()
-
-    assert row["status"] == "awaiting_review"
-    assert row["preview"].startswith("Senior accountant at Acme. xx")
-    assert row["preview"].endswith("…")
-    assert len(row["preview"]) == 121
-
-    app.dependency_overrides.clear()
-
-
-def owned_preparation(monkeypatch, status="running"):
-    from prepza_common.auth import current_user
-    from prepza_common.user import User
-
-    generation = company_generation()
-    generation.kind = "preparation"
-    generation.company_id = None
-    generation.status = status
-
-    async def get(_generation_id):
-        return generation
-
-    monkeypatch.setattr(generations, "get", get)
-    app.dependency_overrides[current_user] = lambda: User(
-        uid="alice", email="alice@example.com", email_verified=True
-    )
-
-    return generation
-
-
-def test_owner_cancels_an_unfinished_preparation(client, monkeypatch):
-    generation = owned_preparation(monkeypatch)
-    claims = iter([True, False])
-
-    async def fake_cancel(_generation_id):
-        claimed = next(claims)
-
-        if claimed:
-            generation.status = "cancelled"
-
-        return claimed
-
-    async def release(_generation_id):
-        return None
-
-    monkeypatch.setattr(generations, "cancel", fake_cancel)
-    monkeypatch.setattr("app.services.cancel.billing.release_kit", release)
-    url = f"/generations/{GENERATION_ID}/cancel"
-
-    first = client.post(url)
-    again = client.post(url)
-
-    assert first.status_code == 200
-    assert first.json()["status"] == "cancelled"
-    assert again.status_code == 409
-
-    app.dependency_overrides.clear()
-
-
-def test_interview_generations_are_not_cancelled_here(client, monkeypatch):
-    generation = owned_preparation(monkeypatch)
-    generation.kind = "interview"
-
-    assert client.post(f"/generations/{GENERATION_ID}/cancel").status_code == 409
-
-    app.dependency_overrides.clear()
 
 
 def test_company_cancels_its_interview_generation(client, monkeypatch):

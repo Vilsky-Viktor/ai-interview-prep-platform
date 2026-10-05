@@ -34,7 +34,6 @@ add_localized_errors(app)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(billing.router)
 app.include_router(internal.router)
-app.include_router(auto_top_ups.router)
 app.include_router(auto_top_ups.internal)
 
 

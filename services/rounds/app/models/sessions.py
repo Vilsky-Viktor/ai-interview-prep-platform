@@ -12,7 +12,7 @@ from app.models.signals import Signal
 
 # For the relationship's annotation only; the class is resolved by name at runtime.
 if TYPE_CHECKING:
-    from app.models.rounds import Answer
+    from app.models.answers import Answer
 
 
 class Session(Base):
@@ -36,6 +36,12 @@ class Session(Base):
     # The seconds each question has before it counts as wrong; None only for sessions from
     # before every interview was timed.
     question_seconds: Mapped[int | None]
+    # Answers that stay out of the questions' statistics: a company member trying their own test,
+    # or a talent's practice round after their first on the template.
+    preview: Mapped[bool] = mapped_column(default=False)
+    # A talent's free practice round on a template: candidate_invite_id is the round's id, it
+    # belongs to no company, and every right answer is shown after it.
+    practice: Mapped[bool] = mapped_column(default=False)
     # When the question now waiting for an answer was first shown; cleared by the answer.
     question_shown_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 

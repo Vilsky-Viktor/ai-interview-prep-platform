@@ -65,7 +65,7 @@ def state(usable, dropped=0):
 
 @pytest.fixture(autouse=True)
 def ten_per_topic(monkeypatch):
-    monkeypatch.setattr(settings, "questions_per_topic", 10)
+    monkeypatch.setattr(settings, "interview_questions_per_topic", 10)
 
 
 def test_a_short_topic_is_filled_to_exactly_its_size(monkeypatch):

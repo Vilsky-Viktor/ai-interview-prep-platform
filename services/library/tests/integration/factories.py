@@ -2,7 +2,7 @@ import uuid
 
 from prepza_common.sets import PreparationIn
 
-from app.storage import preparations
+from app.storage import preparations, templates
 
 DIMENSIONS = 256
 
@@ -14,17 +14,23 @@ def direction(*values: float) -> list[float]:
     return [value / length for value in values] + [0.0] * (DIMENSIONS - len(values))
 
 
-async def preparation(
+async def interview(
     title="Backend",
     topic="Python",
+    subtopics=(),
     level="mid",
     embedding=None,
-    public=True,
     questions=3,
     language="en",
-    owner="owner",
+    owner="company-1",
+    template=False,
+    topic_embeddings=None,
 ):
-    set_id = await preparations.create(
+    """A company's test set, or a template, with one topic of `questions` questions, or one
+    topic per embedding in `topic_embeddings`."""
+    create = templates.create_template if template else preparations.create_interview
+
+    return await create(
         PreparationIn.model_validate(
             {
                 "generation_id": str(uuid.uuid4()),
@@ -36,9 +42,9 @@ async def preparation(
                 "requirements": [],
                 "topics": [
                     {
-                        "title": topic,
-                        "subtopics": [],
-                        "embedding": embedding,
+                        "title": f"{topic} {number}" if topic_embeddings else topic,
+                        "subtopics": list(subtopics),
+                        "embedding": topic_embedding,
                         "questions": [
                             {
                                 "text": f"{title} question {index}?",
@@ -50,15 +56,11 @@ async def preparation(
                             for index in range(questions)
                         ],
                     }
+                    for number, topic_embedding in enumerate(topic_embeddings or [embedding])
                 ],
             }
         )
     )
-
-    if public:
-        await preparations.set_visibility(set_id, "public")
-
-    return set_id
 
 
 async def question_ids(set_id):

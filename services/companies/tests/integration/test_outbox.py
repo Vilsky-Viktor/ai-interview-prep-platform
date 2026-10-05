@@ -34,4 +34,6 @@ def test_a_candidate_invite_and_its_email_event_are_saved_together(run):
         "title": "Backend",
         "company": "Acme",
         "language": "ru",
+        # No logo set: the email shows none.
+        "logo_path": None,
     } in events

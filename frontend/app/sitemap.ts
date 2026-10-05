@@ -1,42 +1,40 @@
 import type { MetadataRoute } from "next"
 
-import {
-  PUBLIC_PATHS,
-  SITEMAP_PAGE,
-  SITEMAP_PREPARATIONS,
-} from "@/constants/seo"
-import { serverFetch } from "@/lib/server-api"
+import { PUBLIC_PATHS } from "@/constants/seo"
 import { siteUrl } from "@/lib/site"
-import type { LibraryFilters, PreparationSummary } from "@/types/preparation"
 
-/** The public pages, and the public library's preparations, best rated first. */
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const pages: MetadataRoute.Sitemap = PUBLIC_PATHS.map((path) => ({
-    url: `${siteUrl()}${path}`,
-  }))
+// The API's largest page, and how many pages of practice tests the sitemap reads at most.
+const PAGE = 100
+const MAX_PAGES = 50
 
-  // Every language: without them the library lists only the reader's own and English.
-  const filters = await serverFetch<LibraryFilters>("/library/library/filters")
-  const languages = (filters?.languages ?? [])
-    .map((language) => `&language=${language}`)
-    .join("")
+/** Every free practice test's page, read from the public template list a page at a time. */
+async function practicePaths(): Promise<string[]> {
+  const paths: string[] = []
 
-  for (let offset = 0; offset < SITEMAP_PREPARATIONS; offset += SITEMAP_PAGE) {
-    const batch = await serverFetch<PreparationSummary[]>(
-      `/library/library?q=${languages}&offset=${offset}&limit=${SITEMAP_PAGE}`
+  for (let page = 0; page < MAX_PAGES; page++) {
+    const response = await fetch(
+      `${process.env.API_URL}/api/library/templates?offset=${page * PAGE}&limit=${PAGE}`,
+      { cache: "no-store" }
     )
 
-    for (const preparation of batch ?? []) {
-      pages.push({
-        url: `${siteUrl()}/preparations/${preparation.id}`,
-        lastModified: preparation.created_at,
-      })
+    if (!response.ok) {
+      break
     }
 
-    if (!batch || batch.length < SITEMAP_PAGE) {
+    const rows: { id: string }[] = await response.json()
+    paths.push(...rows.map((row) => `/practice/${row.id}`))
+
+    if (rows.length < PAGE) {
       break
     }
   }
 
-  return pages
+  return paths
+}
+
+/** The public pages, and one page per free practice test. */
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const paths = [...PUBLIC_PATHS, ...(await practicePaths())]
+
+  return paths.map((path) => ({ url: `${siteUrl()}${path}` }))
 }

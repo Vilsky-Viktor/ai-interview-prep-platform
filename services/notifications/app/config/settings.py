@@ -21,10 +21,9 @@ class Settings(ServiceSettings):
     contact_email: str = "hello@prepza.ai"
     # Public address of the site, used for links in emails.
     site_url: str
-    # The services that own invites, told when an invite's email wasn't delivered; companies also
-    # says which companies a user belongs to, whose notifications they see.
+    # Companies owns the invites, told when an invite's email wasn't delivered, and says which
+    # companies a user belongs to, whose notifications they see.
     companies_url: str
-    library_url: str
 
     @property
     def sqlalchemy_url(self) -> str:

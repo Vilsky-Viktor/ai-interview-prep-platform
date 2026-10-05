@@ -16,4 +16,4 @@ async def run_generation_job(body: RunGeneration, request: Request) -> None:
 
 @router.post("/verify-question", status_code=status.HTTP_204_NO_CONTENT)
 async def verify_question_job(body: VerifyQuestion) -> None:
-    await verify(body.question_id, body.flag)
+    await verify(body.question_id, body.flag, body.now)

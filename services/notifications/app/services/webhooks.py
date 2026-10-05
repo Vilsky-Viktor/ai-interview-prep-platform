@@ -1,11 +1,5 @@
-from app.constants.webhooks import (
-    CANDIDATE_INVITE_KIND,
-    ID_TAG,
-    KIND_TAG,
-    SHARE_KIND,
-    UNDELIVERED_EVENTS,
-)
-from app.integrations import companies, library
+from app.constants.webhooks import CANDIDATE_INVITE_KIND, ID_TAG, KIND_TAG, UNDELIVERED_EVENTS
+from app.integrations import companies
 
 
 async def handle(event: dict) -> None:
@@ -18,7 +12,7 @@ async def handle(event: dict) -> None:
 
 
 async def report_undelivered(tags: dict[str, str]) -> None:
-    """Marks the invite or share the email was for as undelivered, from its tags."""
+    """Marks the invite the email was for as undelivered, from its tags."""
     kind, invite_id = tags.get(KIND_TAG), tags.get(ID_TAG)
 
     if not invite_id:
@@ -26,6 +20,3 @@ async def report_undelivered(tags: dict[str, str]) -> None:
 
     if kind == CANDIDATE_INVITE_KIND:
         await companies.invite_undelivered(invite_id)
-
-    if kind == SHARE_KIND:
-        await library.share_undelivered(invite_id)

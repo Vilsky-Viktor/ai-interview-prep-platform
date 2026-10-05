@@ -32,8 +32,3 @@ def fit_topics(topics: list[dict]) -> list[dict]:
         }
         for topic in topics
     ]
-
-
-def approves(review: dict) -> bool:
-    """A review without instructions approves the selected topics; with them, it revises."""
-    return not (review.get("instructions") or "").strip()

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import delete, select, update
+from sqlalchemy import select, update
 
 from app.constants.accounts import DELETED_OWNER
 from app.constants.statuses import Status
@@ -12,13 +12,9 @@ FINISHED = (Status.DONE, Status.FAILED, Status.CANCELLED)
 
 
 async def delete_user(user_id: str) -> None:
-    """Deletes the user's own generations and their checkpoints. A company's interview
-    generations stay with the company, without the user's id. Safe to repeat."""
-    own = (Generation.owner_uid == user_id, Generation.company_id.is_(None))
-
+    """Every generation belongs to a company, so it stays, without the user's id. Safe to
+    repeat."""
     async with Session() as session:
-        ids = list(await session.scalars(select(Generation.id).where(*own)))
-        await session.execute(delete(Generation).where(*own))
         await session.execute(
             update(Generation)
             .where(Generation.owner_uid == user_id)
@@ -26,14 +22,10 @@ async def delete_user(user_id: str) -> None:
         )
         await session.commit()
 
-    await delete_threads([str(item) for item in ids])
-
 
 async def export(user_id: str) -> list[dict]:
     query = (
-        select(Generation)
-        .where(Generation.owner_uid == user_id, Generation.company_id.is_(None))
-        .order_by(Generation.created_at)
+        select(Generation).where(Generation.owner_uid == user_id).order_by(Generation.created_at)
     )
 
     async with Session() as session:
@@ -50,7 +42,7 @@ async def export(user_id: str) -> list[dict]:
 
 async def forget_texts(before: datetime, checkpointer) -> int:
     """Blanks the pasted texts of generations finished before `before`, and deletes the
-    checkpoints still holding them; the saved preparations stay. Returns how many."""
+    checkpoints still holding them; the saved tests stay. Returns how many."""
     async with Session() as session:
         ids = list(
             await session.scalars(

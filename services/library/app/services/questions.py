@@ -4,10 +4,15 @@ from app.storage import feedback
 
 
 async def question_texts(questions: list[Question]) -> list[QuestionText]:
-    """Question text with feedback counts, without answers."""
+    """Questions with their options and feedback counts."""
     stats = await feedback.question_stats([question.id for question in questions])
 
     return [
-        QuestionText(id=question.id, text=question.text, **stats.get(question.id, {}))
+        QuestionText(
+            id=question.id,
+            text=question.text,
+            options=question.options,
+            **stats.get(question.id, {}),
+        )
         for question in questions
     ]

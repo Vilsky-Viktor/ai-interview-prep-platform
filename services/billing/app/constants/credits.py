@@ -1,20 +1,13 @@
 # $1 = 100 credits. Amounts are whole credits.
-KIT_CREDITS = 500
 CANDIDATE_CREDITS = 300
-# A certificate on someone else's public kit; its author gets a share of it.
-CERTIFICATE_CREDITS = 100
-AUTHOR_SHARE_CREDITS = 20
-# A new learner gets 100 credits (kits are paid when their topics are approved); a new company
-# its first 3 candidates.
-WELCOME_USER = 100
+# A new company gets its first 3 candidates.
 WELCOME_COMPANY = 3 * CANDIDATE_CREDITS
-# Below this, a balance is shown as running low, so a learner's chat doesn't stop by surprise
-# and a company sees it before it can't invite the next candidate.
-LOW_BALANCE = {"user": 100, "company": CANDIDATE_CREDITS}
-# Both sides get it once the new learner first tops up any amount, or the new company first
-# tops up REFERRAL_MIN_CENTS or more; a referrer is rewarded for at most REFERRALS_PER_YEAR.
-REFERRAL_REWARD = {"user": 200, "company": 500}
-REFERRAL_MIN_CENTS = {"user": 0, "company": 2_500}
+# Below this, a balance is shown as running low, so a company sees it before it can't invite the
+# next candidate.
+LOW_BALANCE = CANDIDATE_CREDITS
+# Both sides get it once the new company first tops up, any amount; a referrer is rewarded for at
+# most REFERRALS_PER_YEAR.
+REFERRAL_REWARD = 500
 REFERRALS_PER_YEAR = 25
 REFERRAL_CODE_BYTES = 6
 
@@ -26,11 +19,7 @@ class Reason:
 
     WELCOME = "welcome"
     TOPUP = "topup"
-    KIT = "kit"
     CANDIDATE = "candidate"
-    CERTIFICATE = "certificate"
-    AUTHOR_SHARE = "author_share"
-    CHAT = "chat"
     # Paddle refunded a top-up, or the bank reversed it: the credits it bought go back.
     REFUND = "refund"
     CHARGEBACK = "chargeback"
@@ -39,9 +28,8 @@ class Reason:
     REFERRAL = "referral"
 
 
-class GiftKind:
-    USER = "user"
-    COMPANY = "company"
+# Names the welcome gift (helpers/gifts.py): a person's first company.
+WELCOME_GIFT = "company"
 
 
 class HoldStatus:

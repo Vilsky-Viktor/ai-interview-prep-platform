@@ -8,29 +8,33 @@ PRIVACY_SECTIONS = [
     {
         "heading": "Who is responsible",
         "paragraphs": [
-            f"For your own account, preparations and practice, {COMPANY['name']} is the controller of your data. Write to {COMPANY['email']} with any question or request.",
-            "When a company invites you to an interview on prepza, that company decides why and how your interview results are used and is the controller of them; we process them on its behalf. You can contact the company directly, or us, and we will pass your request on.",
+            f"For your own account and your company's account, {COMPANY['name']} is the controller of your data. Write to {COMPANY['email']} with any question or request.",
+            "When a company invites you to an interview on prepza, that company decides why and how your results are used and is the controller of them; we process them on its behalf. You can contact the company directly, or us, and we will pass your request on.",
         ],
     },
     {
         "heading": "What we collect",
         "items": [
             "Account: your name, email address, profile photo and account id, from your Google sign-in.",
-            "What you give us: job descriptions and goals you paste, the preparations made from them, your ratings, reports, shares, and messages to the AI tutor. Questions you ask the help chat on the FAQ page are used only to answer them and aren't stored.",
+            "What you give us: job descriptions you paste and the interviews made from them, the emails of the candidates you invite and of the people you send a report to, and your ratings and reports of questions. Questions you ask the help chat on the FAQ page are used only to answer them and aren't stored.",
+            "Companies: the company's name, logo and website, the email domain it was verified with, and the suggested talents it hid.",
+            "Practice: if you take free practice interviews, your answers, grades and how long each answer took. Only you see them, unless you agree to be suggested to companies.",
+            "Talent suggestions: if you agree to be suggested, your name from your account and the LinkedIn link you give us, and your answer either way so that we ask only once.",
             "Contact messages: the name, email address and message you send through the contact page.",
-            "Practice: your answers, scores, progress and certificates. A certificate shows your name and score to anyone with its link.",
-            "Interviews: the email you were invited with, your answers, how long each answer took, and when you left the interview page or copied text during it. You are told about this before you start.",
+            "Interviews, if a company invites you: the email you were invited with, your answers, how long each answer took, when you left the interview page or copied text during it, and your ratings and reports of questions. You are told about this before you start.",
             "Technical: error reports without your IP address or email, and short-lived server logs needed to run and secure the service.",
             "Referrals: whose referral link you or your company came through, and whether it has been rewarded.",
-            "Usage statistics: steps such as signing up, a prep kit being ready, a round finished or a top-up, with counts like a score or an amount. Your account id is replaced by a code that can't be traced back to you, and no names, emails or texts are included.",
+            "Usage statistics: steps such as signing up, a company being created, a candidate invited or a top-up, with counts like a score or an amount. Your account id is replaced by a code that can't be traced back to you, and no names, emails or texts are included.",
         ],
     },
     {
         "heading": "Why we use it",
         "items": [
-            "To provide prepza: generating preparations and interviews, running practice and interviews, issuing certificates and sending the emails you ask for (contract).",
+            "To provide prepza: generating interviews, running them for invited candidates, showing companies the results and sending the emails you ask for (contract).",
             "To keep prepza secure and working: preventing abuse, rate limits, error reports, and statistics that improve question quality (our legitimate interest).",
             "Usage statistics show which parts of prepza help people and which prices and limits work, so we can improve them (our legitimate interest).",
+            "Suggesting you to companies hiring for a similar role, only if you agreed (your consent). You can withdraw it at any time in Settings.",
+            "Showing a company as verified, by checking its website against the email domains of its owners and admins (our legitimate interest).",
             "Interview results, timings and page-leave signals help the hiring company assess your answers fairly (the company's legitimate interest). People at the company make the hiring decision; prepza makes no decision about you on its own.",
         ],
     },
@@ -41,11 +45,17 @@ PRIVACY_SECTIONS = [
         ],
         "items": [
             "Google (Firebase Authentication): sign-in.",
-            "OpenAI: writing questions, tutor replies and help chat answers from the text you provide. Under OpenAI's API terms, this data is not used to train their models.",
-            "Resend: sending invite emails and contact messages.",
+            "OpenAI: writing questions and help chat answers from the text you provide. Under OpenAI's API terms, this data is not used to train their models.",
+            "Resend: sending invite, reminder and report emails and contact messages.",
             "Sentry: error reports, with emails removed.",
             "Our hosting provider, which stores the data.",
             "Paddle: payments and taxes, as the reseller.",
+        ],
+    },
+    {
+        "heading": "What companies see of talents",
+        "paragraphs": [
+            "If you agree to be suggested, companies hiring for a similar role see your name, your LinkedIn link and the grade of your first round on a similar practice interview. They don't see your answers or your other rounds. If you withdraw, you stop being suggested at once.",
         ],
     },
     {
@@ -59,7 +69,10 @@ PRIVACY_SECTIONS = [
         "items": [
             "Your account and everything in it: until you delete your account.",
             "Interview results, timings and page-leave signals: 12 months after the invitation was sent, then deleted automatically.",
-            "Pasted job descriptions in our generation records: 90 days after the generation finishes. The preparation made from them stays in your account until you delete it.",
+            "Practice rounds: until you delete your account.",
+            "Your LinkedIn link and your answer about being suggested: until you change them in Settings or delete your account.",
+            "A report emailed from prepza: the PDF is kept only to send the email, and deleted at most 7 days later.",
+            "Pasted job descriptions in our generation records: 90 days after the generation finishes. The interview made from them stays in the company's account until it's deleted.",
             "Contact messages: as long as we need them to answer you, at most 2 years.",
             "Error reports: up to 90 days.",
             "Usage statistics: 25 months, then deleted automatically.",

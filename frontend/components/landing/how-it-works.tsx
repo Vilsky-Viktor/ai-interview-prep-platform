@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server"
 
-const STEPS = ["paste", "review", "practice"] as const
+const STEPS = ["paste", "review", "invite"] as const
 
 export async function HowItWorks() {
   const t = await getTranslations("landing.how")

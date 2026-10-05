@@ -1,13 +1,12 @@
 import { MinusIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useState } from "react"
-import { toast } from "sonner"
+import { type ReactNode, useState } from "react"
 
 import { Countdown } from "@/components/company/countdown"
 import { QuestionActions } from "@/components/questions/question-actions"
 import { QuestionText } from "@/components/questions/question-text"
-import { ChoiceOptions } from "@/components/rounds/choice-options"
-import { RoundFooter } from "@/components/rounds/round-footer"
+import { ChoiceOptions } from "@/components/session/choice-options"
+import { RoundFooter } from "@/components/session/round-footer"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -34,6 +33,10 @@ type SessionPlayProps = {
   onAdvance: () => void
   onFinish: () => void
   finishing: boolean
+  // A company member's preview: the way back, beside the header.
+  back?: ReactNode
+  // The company's logo, small, before the section's title.
+  brand?: ReactNode
 }
 
 export function SessionPlay({
@@ -46,6 +49,8 @@ export function SessionPlay({
   onAdvance,
   onFinish,
   finishing,
+  back,
+  brand,
 }: SessionPlayProps) {
   const t = useTranslations("session")
   const rounds = useTranslations("rounds")
@@ -56,16 +61,18 @@ export function SessionPlay({
 
   return (
     <div className="space-y-8 pb-28">
-      <SessionHeader
-        session={session}
-        progress={progress}
-        section={section}
-        question={result ? null : question}
-        onTimeUp={() => {
-          toast.error(t("timeUp"))
-          onAdvance()
-        }}
-      />
+      <div className="relative">
+        {back}
+        <SessionHeader
+          brand={brand}
+          session={session}
+          progress={progress}
+          section={section}
+          question={result ? null : question}
+          // Quietly on to the next question: a message would only distract.
+          onTimeUp={onAdvance}
+        />
+      </div>
       {question && (
         <div key={question.question_id} className="space-y-6">
           <QuestionText
@@ -76,13 +83,11 @@ export function SessionPlay({
           {/* Candidates never learn whether they were right: their pick only stays marked. */}
           <ChoiceOptions
             options={question.options}
-            result={null}
             onAnswer={(option_index) => onAnswer({ option_index })}
           />
           {/* Judged once answered, not mid-question. */}
           {result && (
             <QuestionActions
-              questionId={question.question_id}
               basePath={`/rounds/sessions/${session.id}/questions/${question.question_id}`}
             />
           )}
@@ -151,12 +156,14 @@ export function SessionPlay({
 }
 
 function SessionHeader({
+  brand,
   session,
   progress,
   section,
   question,
   onTimeUp,
 }: {
+  brand?: ReactNode
   session: InterviewSession
   progress: { answered: number; total: number }
   section: { number: number; count: number }
@@ -168,43 +175,52 @@ function SessionHeader({
 }) {
   const t = useTranslations("session")
 
+  // The company's logo on the left of the section's title and the progress bar.
   return (
-    <div className="space-y-3">
-      <div className="flex min-w-0 items-center justify-between gap-4">
-        <p className="flex min-w-0 items-center text-sm text-muted-foreground">
-          <span className="truncate">{session.topic_title}</span>
-          {section.count > 1 && (
-            <>
-              <MinusIcon
-                aria-hidden
-                className="mx-1.5 size-3.5 shrink-0 text-foreground/55"
-              />
-              <span className="shrink-0 tabular-nums">
-                {t("section", { number: section.number, count: section.count })}
-              </span>
-            </>
-          )}
-        </p>
-        <p className="flex shrink-0 items-center text-sm text-muted-foreground tabular-nums">
-          {question?.seconds_left != null && (
-            <>
-              <Countdown
-                key={question.question_id}
-                seconds={question.seconds_left}
-                onExpire={onTimeUp}
-              />
-              <MinusIcon
-                aria-hidden
-                className="mx-1.5 size-3.5 text-foreground/55"
-              />
-            </>
-          )}
-          {progress.answered} / {progress.total}
-        </p>
+    <div className="flex items-center gap-4">
+      {brand}
+      <div className="min-w-0 flex-1 space-y-3">
+        <div className="flex min-w-0 items-center justify-between gap-4">
+          <p className="flex min-w-0 items-center text-sm text-muted-foreground">
+            <span className="truncate">{session.topic_title}</span>
+            {section.count > 1 && (
+              <>
+                <MinusIcon
+                  aria-hidden
+                  className="mx-1.5 size-3.5 shrink-0 text-foreground/55"
+                />
+                <span className="shrink-0 tabular-nums">
+                  {t("section", {
+                    number: section.number,
+                    count: section.count,
+                  })}
+                </span>
+              </>
+            )}
+          </p>
+          <p className="flex shrink-0 items-center text-sm text-muted-foreground tabular-nums">
+            {question?.seconds_left != null && (
+              <>
+                <Countdown
+                  key={question.question_id}
+                  seconds={question.seconds_left}
+                  onExpire={onTimeUp}
+                />
+                <MinusIcon
+                  aria-hidden
+                  className="mx-1.5 size-3.5 text-foreground/55"
+                />
+              </>
+            )}
+            {progress.answered} / {progress.total}
+          </p>
+        </div>
+        <Progress
+          value={
+            progress.total ? (progress.answered / progress.total) * 100 : 0
+          }
+        />
       </div>
-      <Progress
-        value={progress.total ? (progress.answered / progress.total) * 100 : 0}
-      />
     </div>
   )
 }

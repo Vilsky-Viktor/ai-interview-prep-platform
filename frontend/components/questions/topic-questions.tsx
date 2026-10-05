@@ -1,11 +1,11 @@
 "use client"
 
-import { cn } from "cn"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
 import { QuestionRow } from "@/components/questions/question-row"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -20,19 +20,16 @@ import type { QuestionStats } from "@/types/feedback"
 
 export function TopicQuestions({
   title,
-  count,
   path,
   regeneratePath,
+  wrongPath,
   reportsPath,
-  alignCount = false,
 }: {
   title: string
-  count: number
   path: string
   regeneratePath?: string
+  wrongPath?: string
   reportsPath?: string
-  // Reserve room for three digits, so rows with 99 and 100 questions line up.
-  alignCount?: boolean
 }) {
   const t = useTranslations("questions")
   const common = useTranslations("common")
@@ -40,6 +37,7 @@ export function TopicQuestions({
   const [questions, setQuestions] = useState<QuestionStats[] | null>(null)
   const [missing, setMissing] = useState(false)
   const [regeneratingId, setRegeneratingId] = useState<string | null>(null)
+  const [showOptions, setShowOptions] = useState(false)
 
   useEffect(() => {
     if (!open || questions) {
@@ -95,29 +93,24 @@ export function TopicQuestions({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
-        render={
-          <button
-            type="button"
-            className="shrink-0 cursor-pointer text-sm text-foreground transition-colors hover:text-primary"
-          />
-        }
+        render={<Button variant="outline" className="h-9 shrink-0 px-4" />}
       >
-        <span
-          className={cn(
-            "text-lg tabular-nums",
-            alignCount && "inline-block min-w-[3ch] text-end"
-          )}
-        >
-          {count}
-        </span>{" "}
-        {t("count", { count })}
+        {t("manage")}
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}
         className={regeneratePath ? "sm:max-w-4xl" : "sm:max-w-3xl"}
       >
-        <DialogHeader>
+        <DialogHeader className="flex-row items-center justify-between gap-4">
           <DialogTitle className="normal-case">{title}</DialogTitle>
+          <Button
+            size="sm"
+            className="h-8 shrink-0 px-3 text-sm"
+            aria-pressed={showOptions}
+            onClick={() => setShowOptions((shown) => !shown)}
+          >
+            {showOptions ? t("hideOptions") : t("showOptions")}
+          </Button>
         </DialogHeader>
         {questions ? (
           <VirtualList
@@ -130,7 +123,9 @@ export function TopicQuestions({
               <QuestionRow
                 question={question}
                 number={index + 1}
+                showOptions={showOptions}
                 canRegenerate={Boolean(regeneratePath)}
+                wrongPath={wrongPath}
                 reportsPath={reportsPath}
                 regenerating={regeneratingId === question.id}
                 busy={regeneratingId !== null}

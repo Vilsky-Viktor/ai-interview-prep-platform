@@ -6,6 +6,8 @@ from app.schemas.regenerate import RegeneratedOption
 
 class VerifyIn(BaseModel):
     flag: QualityFlag
+    # A superadmin's "Fix now": a wrong key is checked at once, not in the next batch.
+    now: bool = False
 
 
 class ReportNote(BaseModel):

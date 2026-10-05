@@ -1,34 +1,20 @@
-import asyncio
-import logging
 import uuid
 from contextlib import aclosing
 
 from langgraph.types import Command
-from prepza_common.analytics import track
-from prepza_common.notifications import (
-    NOTIFICATION_REQUESTED,
-    NotificationKind,
-    Recipient,
-    notification,
-)
 
 from app.constants.events import GENERATION_COMPLETED
-from app.constants.generation import (
-    CHARGE_ATTEMPTS,
-    CHARGE_RETRY_SECONDS,
-    MAX_CONCURRENCY,
-    RECURSION_LIMIT,
-)
+from app.constants.generation import MAX_CONCURRENCY, RECURSION_LIMIT
 from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
 from app.helpers.payload import build_preparation
 from app.helpers.progress import track_progress
-from app.integrations import billing, library
+from app.helpers.questions import topic_size
+from app.integrations import library
 from app.models.generation import Generation
 from app.services import outbox as outbox_service
+from app.services.sample_checks import check_sample
 from app.storage import generations
-
-logger = logging.getLogger(__name__)
 
 
 async def run_pipeline(graph, generation: Generation, resume: dict | None) -> None:
@@ -48,7 +34,7 @@ async def run_pipeline(graph, generation: Generation, resume: dict | None) -> No
         graph_input = {
             "input_text": generation.text,
             "language": generation.language,
-            "kind": generation.kind,
+            "template": generation.kind == GenerationKind.TEMPLATE,
         }
 
     await generations.update(generation.id, status=Status.RUNNING, error=None)
@@ -76,75 +62,39 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
 
                 continue
 
-            if track_progress(progress, chunk):
+            if track_progress(
+                progress, chunk, topic_size(generation.kind == GenerationKind.TEMPLATE)
+            ):
                 await generations.update(generation.id, progress=progress)
 
     if paused or await generations.is_cancelled(generation.id):
         return
 
     values = (await graph.aget_state(config)).values
-    owner_id = (
-        str(generation.company_id)
-        if generation.kind == GenerationKind.INTERVIEW
-        else generation.owner_uid
+
+    if generation.kind == GenerationKind.TEMPLATE:
+        payload = build_preparation(generation.id, generation.owner_uid, generation.text, values)
+        set_id = await library.create_template(payload)
+        await check_sample(set_id)
+        await generations.update(generation.id, status=Status.DONE, preparation_id=set_id)
+
+        return
+
+    payload = build_preparation(generation.id, str(generation.company_id), generation.text, values)
+    set_id: uuid.UUID = await library.create_interview(payload)
+    # Checked before companies hears it's ready, so no candidate sees an unchecked key.
+    await check_sample(set_id)
+    # Companies stores the test's set and title, so its pages don't have to ask for them.
+    completed = (
+        GENERATION_COMPLETED,
+        {
+            "generation_id": str(generation.id),
+            "company_id": str(generation.company_id),
+            "set_id": str(set_id),
+            "title": payload.title,
+        },
     )
-    payload = build_preparation(generation.id, owner_id, generation.text, values)
-
-    if generation.kind == GenerationKind.INTERVIEW:
-        set_id: uuid.UUID = await library.create_interview(payload)
-    else:
-        set_id = await library.create_preparation(payload)
-
-    # Companies stores an interview's set and title, so its pages don't have to ask for them;
-    # a learner hears that the kit is ready.
-    if generation.kind == GenerationKind.INTERVIEW:
-        completed = (
-            GENERATION_COMPLETED,
-            {
-                "generation_id": str(generation.id),
-                "company_id": str(generation.company_id),
-                "set_id": str(set_id),
-                "title": payload.title,
-            },
-        )
-    else:
-        completed = (
-            NOTIFICATION_REQUESTED,
-            notification(
-                Recipient.USER,
-                generation.owner_uid,
-                NotificationKind.KIT_READY,
-                f"/preparations/{set_id}",
-                title=payload.title,
-            ),
-        )
-
     await generations.update(
         generation.id, event=completed, status=Status.DONE, preparation_id=set_id
     )
     await outbox_service.flush_quietly()
-
-    if generation.kind == GenerationKind.PREPARATION:
-        await charge_finished_kit(generation.id)
-        await track(
-            "kit_ready",
-            user_id=generation.owner_uid,
-            topics=len(payload.topics),
-            language=generation.language,
-        )
-
-
-async def charge_finished_kit(generation_id: uuid.UUID) -> None:
-    """The kit is saved and done, so a billing hiccup mustn't turn it into a failure (which
-    would also give its credits back). Charging is safe to repeat: try a few times, then report
-    the open hold for a person to charge."""
-    for attempt in range(CHARGE_ATTEMPTS):
-        try:
-            await billing.charge_kit(generation_id)
-
-            return
-        except Exception:
-            if attempt == CHARGE_ATTEMPTS - 1:
-                logger.exception("Couldn't charge finished kit %s", generation_id)
-            else:
-                await asyncio.sleep(CHARGE_RETRY_SECONDS)

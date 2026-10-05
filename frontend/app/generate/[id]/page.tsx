@@ -1,9 +1,8 @@
 import type { Metadata } from "next"
+import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { GenerationView } from "@/components/generation/generation-view"
-import { serverFetch } from "@/lib/server-api"
-import type { Catalog } from "@/types/billing"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("generation")
@@ -11,6 +10,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t("title") }
 }
 
+/** A test being generated: its topic review, then its progress. Reached from a company's test,
+ *  whose page `next` points back to, or from the superadmin's templates. */
 export default async function GeneratePage({
   params,
   searchParams,
@@ -18,31 +19,38 @@ export default async function GeneratePage({
   params: Promise<{ id: string }>
   searchParams: Promise<{ next?: string }>
 }) {
-  const { id } = await params
   const t = await getTranslations("generation")
-  const preparations = await getTranslations("preparations")
-  const raw = (await searchParams).next
-  const next = raw?.startsWith("/company/") ? raw : undefined
-  const companyMatch = next?.match(/^\/company\/([^/]+)\/interviews\/([^/?]+)/)
-  const catalog = await serverFetch<Catalog>("/billing/catalog")
+  const superadmin = await getTranslations("superadmin")
+  const { id } = await params
+  const next = (await searchParams).next
+
+  if (next === "/superadmin/templates") {
+    return (
+      <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col space-y-8 px-6 py-12">
+        <GenerationView
+          path={`/generate/superadmin/generations/${id}`}
+          next={next}
+          backHref={next}
+          backLabel={superadmin("templates")}
+        />
+      </main>
+    )
+  }
+
+  const company = next?.match(/^\/company\/([^/]+)\/interviews\/([^/?]+)/)
+
+  if (!next || !company) {
+    notFound()
+  }
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col space-y-8 px-6 py-12">
       <GenerationView
-        // Interview generations go through companies, so every admin can follow them.
-        path={
-          companyMatch
-            ? `/companies/interviews/${companyMatch[2]}/generation`
-            : `/generate/generations/${id}`
-        }
+        // Generations go through companies, so every admin can follow them.
+        path={`/companies/interviews/${company[2]}/generation`}
         next={next}
-        backHref={
-          companyMatch
-            ? `/company/${companyMatch[1]}/interviews`
-            : "/preparations"
-        }
-        backLabel={companyMatch ? t("interviews") : preparations("title")}
-        kitCredits={catalog?.kit_credits ?? null}
+        backHref={`/company/${company[1]}/interviews`}
+        backLabel={t("interviews")}
       />
     </main>
   )

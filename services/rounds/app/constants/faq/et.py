@@ -1,30 +1,51 @@
 # The FAQ in et; the {placeholders} are filled in by helpers/help.py (faq_values) with
-# billing's prices and the number of languages.
+# billing's prices and the number of languages. Questions not translated yet show in English
+# (constants/faq/__init__.py).
 FAQ = [
     {
-        "key": "different",
-        "question": "Mille poolest erineb prepza mälukaartidest või küsimustepankadest?",
-        "answer": "Prepza loob küsimused täpselt selle jaoks, milleks valmistud, sinu töökuulutuse või eesmärgi põhjal. Voorud toovad tagasi, milles eksisid, tehisaru juhendaja selgitab iga vastust ja sertifikaadid näitavad, millal teema on omandatud.",
+        "key": "what",
+        "question": "Mis on prepza?",
+        "answer": "Ajapiiranguga intervjuu sinu töökuulutuse põhjal, mis tahes rolli jaoks. Kasuta seda kandidaatide sõelumiseks enne, kui nendega kohtud, või värbamise omaette sammuna: mõlemal juhul näed, kes tööd päriselt tunneb.",
     },
     {
-        "key": "topics",
-        "question": "Milleks saan valmistuda?",
-        "answer": "Tööintervjuudeks mis tahes valdkonnas, sertifitseerimisteks, eksamiteks, testideks, edutamiseks või millekski muuks, mida tahad õppida. Kui suudad seda kirjeldada, suudab prepza selle jaoks komplekti luua.",
+        "key": "roles",
+        "question": "Milliste rollide jaoks saan värvata?",
+        "answer": "Iga rolli jaoks, kus teadmised loevad: klienditugi, müük, rahandus, tervishoid, oskustööd, inseneeria, turundus ja palju muud. Kui oskad tööd kirjeldada, oskab prepza selle jaoks intervjuu teha.",
     },
     {
-        "key": "certificates",
-        "question": "Kuidas sertifikaadid töötavad?",
-        "answer": "Igal teemal on oma sertifikaat. Vasta kõigile teema küsimustele piisavalt paljude õigete vastustega ja see on sinu. Arvesse läheb viimane vastus igale küsimusele, nii et võid harjutada, kuni see õnnestub.",
+        "key": "hiring",
+        "question": "Kuidas see töötab?",
+        "answer": "Kleebi avalehele töökuulutus, anna oma ettevõttele nimi ja vaata üle teemad, mida prepza pakub. Seejärel kutsu kandidaadid: kirjuta nende e-posti aadressid, kleebi nimekiri või laadi üles fail. Kandidaadid, kes pole mõne päeva jooksul alustanud, saavad ühe meeldetuletuse. Iga kandidaat saab oma küsimused, igal küsimusel on ajapiirang, ja sa näed tema tulemust ning kõiki vastuseid kohe, kui ta lõpetab.",
+    },
+    {
+        "key": "link",
+        "question": "Kas saan intervjuu töökuulutusse panna?",
+        "answer": "Jah. Lülita intervjuu vahekaardil Kandidaadid sisse jagatav link ja kleebi see oma kuulutusse. Igaüks, kes selle avab, logib sisse ja teeb intervjuu, ning iga inimese eest võetakse tasu nagu kutsutud kandidaadi eest. Link lülitub välja, kui märgid intervjuu palgatuks.",
+    },
+    {
+        "key": "preview",
+        "question": "Kas saan intervjuud proovida enne, kui kedagi kutsun?",
+        "answer": "Jah. Ava oma intervjuu selle lehelt kandidaadina, tasuta: eelvaated ei ilmu sinu kandidaatide hulka ega küsimuste statistikasse. Võid teha ka ükskõik millise tasuta harjutusintervjuu.",
+    },
+    {
+        "key": "cheating",
+        "question": "Kas kandidaadid saavad kasutada tehisaru või vastuseid otsida?",
+        "answer": "Iga kandidaat saab oma juhuslikud küsimused oma järjekorras ja igal küsimusel on ajapiirang, mida jälgib meie server, nii et tehisarult küsimiseks pole aega. Kandidaadi tulemused näitavad ka, millal kandidaat lehelt lahkus, teksti kopeeris või vastas liiga kiiresti, et küsimust lugeda.",
     },
     {
         "key": "cost",
         "question": "Kui palju see maksab?",
-        "answer": "Maksad kasutuse järgi, krediidiga. Sinu töökuulutuse või eesmärgi jaoks koostatud teemade nägemine on tasuta; komplekt maksab {kit} krediiti ja selle eest maksad alles siis, kui kinnitad selle teemad. Avalikus raamatukogus harjutamine on tasuta ja iga uus konto saab {welcome} tasuta krediiti. Hinnalehel on kõik hinnad.",
+        "answer": "Intervjuude loomine on tasuta. Iga kandidaat, kes vastab vähemalt ühele küsimusele, maksab {candidate} krediiti ({candidate_dollars} $), ja suuremate laadimiste krediitidega vähem, kuni 1 $. Sinu esimene ettevõte saab {company} tasuta krediiti, millest piisab tema esimese {company_candidates} kandidaadi jaoks. Hinnalehel on kõik hinnad.",
     },
     {
-        "key": "compare",
-        "question": "Kas see on odavam kui tellimus?",
-        "answer": "Tööintervjuuks valmistumisel tavaliselt jah. Ühe ametikoha komplekt maksab ühe korra {kit} krediiti ({kit_dollars} $) ja jääb sulle, midagi pole vaja tühistada. Intervjuuks valmistumise rakendused, mis koostavad harjutused töökuulutuse põhjal, maksavad tavaliselt 25–40 $ kuus, nii et kolm kuud valmistumist maksab 75–100 $. Kui valmistud igal kuul mitmeks uueks teemaks, võib tellimus tulla odavam.",
+        "key": "charged",
+        "question": "Millal kandidaadi eest tasu võetakse?",
+        "answer": "Ainult siis, kui ta lõpetab intervjuu ja on vastanud vähemalt ühele küsimusele. Tema krediidid pannakse kõrvale, kui ta kutsud, ja tulevad tagasi, kui tühistad kutse, kui ta kunagi ei alusta või kui ta ei vasta millelegi.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Kuidas hind võrdub teiste hindamisvahenditega?",
+        "answer": "Enamik hindamisplatvorme maksab aastaplaaniga 100–215 $ kuus või 7–20 $ kandidaadi kohta. prepzas maksab kandidaat {candidate} krediiti ({candidate_dollars} $), ilma lepingu, kasutajatasude ja intervjuu loomise tasuta. Ettevõte, kes kutsub {example_candidates} kandidaati kuus, maksab umbes {example_year_dollars} $ aastas, aastaplaani 1 200–2 580 $ asemel. Alates umbes 50 kandidaadist kuus võivad mõned piiramatud plaanid olla odavamad.",
     },
     {
         "key": "expire",
@@ -32,48 +53,48 @@ FAQ = [
         "answer": "Ei. Krediidid ei aegu kunagi ning tellimusi ega pikendamisi pole.",
     },
     {
-        "key": "failed",
-        "question": "Mis siis, kui komplekt ebaõnnestub?",
-        "answer": "Tasu võetakse alles siis, kui komplekt on valmis. Kui loomine ebaõnnestub või tühistad selle, saad krediidid tagasi.",
-    },
-    {
         "key": "refunds",
         "question": "Kas saan raha tagasi?",
         "answer": "Jah, viimase 14 päeva jooksul ostetud ja kulutamata krediitide eest: Paddle'i kaudu või meile kirjutades. Tasuta krediite, näiteks tervituskingitust, ei hüvitata. Üksikasjad on tingimustes.",
     },
     {
+        "key": "scorecards",
+        "question": "Mida kandidaatide tulemused näitavad?",
+        "answer": "Iga vastust, kas see oli õige ja kui kaua see aega võttis. Hinded on rohelised või punased vastavalt läbimise lävele, mille intervjuule määrasid. Tulemused märgivad ka vastused, mis anti liiga kiiresti, et küsimust lugeda, korrad, kui kandidaat lehelt lahkus, ja kopeerimiskatsed.",
+    },
+    {
+        "key": "reports",
+        "question": "Kas saan tulemusi värbamisjuhiga jagada?",
+        "answer": "Jah. Laadi alla PDF-aruanne ühe kandidaadi või intervjuu kõigi kandidaatide kohta, saada see e-postiga otse prepzast või saada lühike kokkuvõte WhatsAppis või Telegramis.",
+    },
+    {
+        "key": "candidates",
+        "question": "Mida kandidaadid näevad?",
+        "answer": "Sinu ettevõtte nime ja logo, enne alustamist seda, mida oodata, ja seejärel ühe ajapiiranguga küsimuse korraga. Nad ei näe kunagi oma tulemust ega seda, kas vastus oli õige.",
+    },
+    {
+        "key": "talent",
+        "question": "Mis on talentide soovitused?",
+        "answer": "Inimesed harjutavad prepza tasuta harjutusintervjuudel ja need, kes soovivad, et neid soovitataks, jätavad LinkedIni lingi. Kui lood intervjuu, ilmuvad sarnase rolli parimad intervjuu vahekaardile Soovitatud talendid koos nime, tulemuse ja LinkedIniga. Arvesse läheb ainult esimene katse, saad peita igaühe, kes ei sobi, ja soovitused on tasuta.",
+    },
+    {
+        "key": "verified",
+        "question": "Mida kinnitusmärk tähendab?",
+        "answer": "Seda, et ettevõtte omanik või administraator logis sisse ettevõtte veebilehe domeeni töömeiliga, näiteks you@acme.com. Lisa veebileht oma ettevõtte päises nupuga Kinnita; tasuta e-postiteenused ei sobi. Märk on näha ettevõtte nime kõrval, ka kutsetes.",
+    },
+    {
+        "key": "languages",
+        "question": "Milliseid keeli toetatakse?",
+        "answer": "{count} keelt saidi, intervjuude ja e-kirjade jaoks. Vali, mis keeles intervjuu kirjutatakse, olenemata sellest, mis keeles on töökuulutus.",
+    },
+    {
         "key": "privacy",
-        "question": "Mis saab sellest, mida kleebin ja vastan?",
-        "answer": "Kasutame seda sinu komplektide loomiseks ja edusammude jälgimiseks. Privaatseid komplekte näevad ainult sina ja need, kellega neid jagad. Privaatsuspoliitika selgitab, mida me hoiame, kui kaua ja millised on sinu õigused.",
+        "question": "Mis saab töökuulutustest ja vastustest?",
+        "answer": "Töökuulutusi kasutatakse sinu intervjuude loomiseks ja kandidaatide vastuseid nende hindamiseks, ainult sinu ettevõtte jaoks. Privaatsuspoliitika selgitab, mida me säilitame, kui kaua ja millised on kõigi õigused.",
     },
     {
         "key": "delete",
         "question": "Kas saan oma konto kustutada?",
         "answer": "Jah, seadetes. Sinu konto ja andmed kustutatakse ning enne seda saad oma andmetest koopia alla laadida.",
-    },
-    {
-        "key": "languages",
-        "question": "Milliseid keeli toetatakse?",
-        "answer": "{count} keelt saidi, komplektide ja e-kirjade jaoks. Vali keel, milles komplekt luuakse, olenemata sellest, mis keeles on sinu tekst.",
-    },
-    {
-        "key": "hiring",
-        "question": "Kuidas prepzaga värbamine käib?",
-        "answer": "Loo ettevõte, koosta töökuulutusest intervjuu ja kutsu kandidaadid e-postiga. Iga kandidaat maksab {candidate} krediiti, mis võetakse alles siis, kui ta intervjuu lõpetab, ja uus ettevõte saab {company} tasuta krediiti.",
-    },
-    {
-        "key": "compare_hiring",
-        "question": "Kuidas hind teiste hindamistööriistadega võrreldes on?",
-        "answer": "Enamik hindamisplatvorme maksab aastaplaaniga 100–215 $ kuus või 7–20 $ kandidaadi kohta. prepzas maksab kandidaat {candidate} krediiti ({candidate_dollars} $), ilma lepingu, kasutajatasude ja intervjuu koostamise tasuta. Ettevõte, kes kutsub {example_candidates} kandidaati kuus, maksab umbes {example_year_dollars} $ aastas, aastaplaani 1 200–2 580 $ asemel. Alates umbes 50 kandidaadist kuus võivad mõned piiramatud plaanid olla odavamad.",
-    },
-    {
-        "key": "scorecards",
-        "question": "Mida aruanded näitavad?",
-        "answer": "Iga vastust, kas see oli õige ja kui kaua see aega võttis. Need märgivad ka vastused, mis olid küsimuse lugemiseks liiga kiired, lehelt lahkumised ja kopeerimiskatsed.",
-    },
-    {
-        "key": "candidates",
-        "question": "Mida kandidaadid näevad?",
-        "answer": "Enne algust, mida oodata, ja siis ühe ajapiiranguga küsimuse korraga. Nad ei näe kunagi oma tulemust ega seda, kas vastus oli õige.",
     },
 ]

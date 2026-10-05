@@ -28,12 +28,12 @@ locals {
   calls = {
     frontend          = []
     library           = ["rounds", "generation", "companies", "billing", "notifications"]
-    generation        = ["library", "billing"]
-    generation-worker = ["library", "billing"]
-    rounds            = ["library", "billing"]
+    generation        = ["library"]
+    generation-worker = ["library"]
+    rounds            = ["library"]
     companies         = ["generation", "library", "rounds", "billing"]
     billing           = []
-    notifications     = ["companies", "library"]
+    notifications     = ["companies"]
   }
 
   # Each service's own key checks calls to it. The worker shares generation's settings, so it

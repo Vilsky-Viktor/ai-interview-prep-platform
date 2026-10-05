@@ -2,9 +2,6 @@
   "settings": {
     "title": "Einstellungen",
     "signIn": "Melde dich an, um deine Einstellungen zu ändern.",
-    "general": "Allgemein",
-    "billing": "Abrechnung",
-    "referral": "Einladungen",
     "language": "Sprache",
     "languageNote": "Für die Oberfläche und die Antworten des Tutors sowie die Sprache, mit der neue Kits und Interviews beginnen. Du kannst sie in jeder unterstützten Sprache erstellen.",
     "languageFailed": "Die Sprache konnte nicht geändert werden. Bitte versuche es erneut.",
@@ -14,13 +11,12 @@
     "downloadFailed": "Deine Daten konnten nicht vorbereitet werden. Bitte versuche es erneut.",
     "delete": "Konto löschen",
     "searchLanguage": "Sprachen suchen",
-    "noLanguage": "Keine Sprache gefunden.",
-    "history": "Abrechnungsverlauf",
-    "historyNote": "Jeder Credit, der hinzukam oder verbraucht wurde, die neuesten zuerst."
+    "noLanguage": "Keine Sprache gefunden."
   },
   "userMenu": {
     "signIn": "Anmelden",
     "account": "Konto",
+    "adminZone": "Adminbereich",
     "settings": "Einstellungen",
     "signOut": "Abmelden",
     "theme": "Design",
@@ -34,17 +30,15 @@
     "main": "Hauptmenü",
     "legal": "Rechtliches",
     "pricing": "Preise",
-    "privacy": "Datenschutzerklärung",
+    "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
     "back": "Zurück",
-    "create": "erstellen",
-    "explore": "entdecken",
-    "myKits": "meine kits",
     "hiring": "recruiting",
     "pricingLink": "preise",
     "faq": "FAQ",
     "contact": "Kontakt",
-    "about": "Über uns"
+    "about": "Über uns",
+    "practice": "Kostenlos üben"
   },
   "signIn": {
     "with": "Anmelden mit",
@@ -80,43 +74,89 @@
     "notFoundText": "Diese Seite existiert nicht oder wurde entfernt."
   },
   "home": {
-    "tagline": "KI-Agenten üben mit dir, bis du dich sicher fühlst.",
-    "preparingFor": "Vorbereitung auf",
-    "words": [
-      "ein Vorstellungsgespräch",
-      "eine Zertifizierung",
-      "eine Prüfung",
-      "einen Test",
-      "eine Beförderung"
-    ],
-    "widest": "ein Vorstellungsgespräch",
-    "mark": "?"
+    "title": "Interviewe jeden\nStelle echte Talente ein",
+    "text": "Interviews mit Zeitlimit aus deiner Stellenbeschreibung. Eigene Fragen für jeden Kandidaten und keine Zeit, eine KI zu fragen. Ab $1 pro Kandidat."
   },
-  "goal": {
-    "placeholder": "Füge eine Stellenanzeige ein oder beschreibe, was du lernen möchtest…",
-    "label": "Worauf bereitest du dich vor?",
-    "submit": "Vorbereitung erstellen",
-    "failed": "Die Generierung konnte nicht gestartet werden. Bitte versuche es erneut.",
-    "seePlans": "Aufladen"
+  "start": {
+    "placeholder": "Füge eine Stellenbeschreibung ein oder beschreibe die Rolle und was ein Kandidat wissen sollte",
+    "description": "Stellenbeschreibung",
+    "submit": "Interview erstellen",
+    "whichCompany": "Für welches Unternehmen ist dieses Interview?",
+    "firstCompany": "Wie heißt dein Unternehmen?",
+    "newCompany": "Ein neues Unternehmen",
+    "companyName": "Name des Unternehmens",
+    "freeCandidates": "Dein erstes Unternehmen führt Interviews mit {count, plural, one {seinem ersten Kandidaten} other {seinen ersten # Kandidaten}} kostenlos.",
+    "back": "Beschreibung bearbeiten",
+    "continue": "Weiter",
+    "starting": "Wird gestartet…",
+    "failed": "Das Interview konnte nicht gestartet werden. Bitte versuche es erneut."
   },
-  "membership": {
-    "signIn": "Melde dich an, um beizutreten",
-    "leave": "Verlassen",
-    "join": "Beitreten und üben"
+  "superadmin": {
+    "fixNow": "Jetzt korrigieren",
+    "fixing": "Wird korrigiert…",
+    "dismiss": "Verwerfen",
+    "fixSent": "An den Prüfer gesendet. Sie wird gleich korrigiert oder ersetzt.",
+    "actionFailed": "Das hat nicht funktioniert. Bitte versuche es erneut.",
+    "quality": "Qualität",
+    "flagged": "Gemeldet",
+    "replaced": "Ersetzt",
+    "noFlagged": "Gerade ist nichts gemeldet.",
+    "noReplaced": "Noch wurde nichts ersetzt.",
+    "answers": "{count, plural, one {# Antwort} other {# Antworten}}",
+    "right": "{percent} % richtig",
+    "reports": "{count, plural, =0 {keine Meldungen} one {# Meldung} other {# Meldungen}}",
+    "kinds": {
+      "template": "Vorlage",
+      "interview": "Unternehmensinterview"
+    },
+    "flags": {
+      "wrong_key": "Antwort ist eventuell falsch",
+      "rewrite": "braucht eine neue Frage",
+      "weak_options": "braucht bessere Optionen"
+    },
+    "zone": "Adminbereich",
+    "templates": "Vorlagen",
+    "new": "Neue Vorlage",
+    "createTitle": "Vorlage erstellen",
+    "placeholder": "Füge eine Rollenbeschreibung ein oder beschreibe die Rolle und was jemand darin wissen sollte",
+    "description": "Rollenbeschreibung",
+    "create": "Generieren",
+    "createFailed": "Die Vorlage konnte nicht gestartet werden. Bitte versuche es erneut.",
+    "text": "Fertige Interviews nach Rolle, für Unternehmen und Talente.",
+    "deleteLabel": "{title} löschen",
+    "deleteTitle": "Diese Vorlage löschen?",
+    "deleteText": "Ihre Themen und Fragen werden gelöscht. Interviews, die Unternehmen daraus erstellt haben, bleiben erhalten.",
+    "deleteFailed": "Die Vorlage konnte nicht gelöscht werden. Bitte versuche es erneut."
+  },
+  "templates": {
+    "title": "Vorlagen",
+    "empty": "Noch keine Vorlagen.",
+    "topics": "{count, plural, one {# Thema} other {# Themen}}",
+    "search": "Nach Rolle oder Thema suchen",
+    "searchAction": "Suchen",
+    "level": "Level: {level}",
+    "anyLevel": "Jedes Level",
+    "allLanguages": "Alle Sprachen",
+    "languages": "{count, plural, one {# Sprache} other {# Sprachen}}",
+    "noMatches": "Keine passenden Vorlagen.",
+    "use": "Vorlage verwenden",
+    "using": "Wird gestartet…",
+    "useFailed": "Mit dieser Vorlage konnte kein Interview gestartet werden. Bitte versuche es erneut.",
+    "warningTitle": "Vorlagen sind zum Ausprobieren von prepza.",
+    "warning": "Talente üben damit, daher kennen Kandidaten die Fragen vielleicht schon. Für echte Einstellungen erstelle ein Interview aus deiner Stellenbeschreibung.",
+    "text": "Fertige Interviews nach Rolle. Wähle eines als Grundlage für dein Interview; du kannst es danach ändern."
   },
   "billing": {
     "paid": "Zahlung erhalten. Sie erscheint gleich hier.",
     "checkoutFailed": "Die Bezahlung konnte nicht geöffnet werden. Bitte versuche es erneut.",
     "credits": "{count, plural, one {# Credit} other {# Credits}}",
-    "bonus": "+{count, number} Bonus",
     "topUp": "Aufladen",
-    "balance": "{count} Credits verfügbar. Aufladen",
-    "balanceLow": "{count} Credits verfügbar, bald aufgebraucht. Aufladen",
     "low": "Bald aufgebraucht",
     "creditsWord": "{count, plural, one {Credit} other {Credits}}",
     "topUpTitle": "Aufladen: {name}",
-    "topUpNote": "Für $1 gibt es 100 Credits, mit Bonus bei größeren Beträgen. Credits verfallen nie.",
-    "customAmount": "Eigener Betrag"
+    "topUpNote": "Jede Aufladung kauft ganze Kandidaten; größere kosten weniger pro Kandidat. Credits verfallen nie.",
+    "candidates": "{count, plural, one {# Kandidat} other {# Kandidaten}}",
+    "each": "je {price}"
   },
   "deleteAccount": {
     "title": "Dein Konto löschen?",
@@ -126,83 +166,15 @@
     "deleted": "Dein Konto wurde gelöscht.",
     "failed": "Dein Konto konnte nicht gelöscht werden. Bitte versuche es erneut."
   },
-  "levels": {
-    "basic": "einfach",
-    "medium": "mittel",
-    "hard": "schwer"
-  },
-  "visibility": {
-    "public": "öffentlich",
-    "private": "privat"
-  },
-  "library": {
-    "title": "Öffentliche Kits",
-    "search": "Titel und Themen durchsuchen",
-    "searchAction": "Suchen",
-    "noMatches": "Keine passenden Vorbereitungen.",
-    "empty": "Noch keine öffentlichen Vorbereitungen.",
-    "level": "Niveau: {level}",
-    "anyLevel": "Alle",
-    "languages": "{count, plural, one {# Sprache} other {# Sprachen}}",
-    "sortBy": "Sortieren nach: {sort}",
-    "sort": {
-      "date": "Datum",
-      "rating": "Bewertung",
-      "joiners": "Teilnehmende"
-    }
-  },
-  "preparations": {
-    "title": "Meine Kits",
-    "new": "Neue Vorbereitung",
-    "signIn": "Melde dich an, um deine Vorbereitungen zu sehen.",
-    "empty": "Noch keine Vorbereitungen. Erstelle deine erste oder wähle eine aus der öffentlichen Bibliothek.",
-    "topics": "{count, plural, one {# Thema} other {# Themen}}",
-    "created": "Erstellt am {date}",
-    "metaTitle": "Vorbereitung",
-    "metaDescription": "Interviewvorbereitung für {title}: {count, plural, one {# Thema} other {# Themen}} mit Multiple-Choice-Fragen, Übungsrunden und Zertifikaten.",
-    "history": "Verlauf",
-    "page": "Seite der Vorbereitung",
-    "rounds": "Runden",
-    "deleteLabel": "{title} löschen",
-    "deleteTitle": "{title} löschen?",
-    "deleteText": "Ihre Themen und Fragen werden gelöscht, und alle Beigetretenen verlieren den Zugriff. Das kann nicht rückgängig gemacht werden.",
-    "deleteFailed": "Die Vorbereitung konnte nicht gelöscht werden. Bitte versuche es erneut.",
-    "mastered": "Gemeistert",
-    "masteredTitle": "Gemeistert: Jedes Thema hat ein Zertifikat",
-    "owner": "Inhaber",
-    "ratingTitle": "Durchschnittsbewertung und Anzahl der Bewertungen",
-    "rated": "Danke für deine Bewertung",
-    "ratingUpdated": "Bewertung aktualisiert",
-    "ratingFailed": "Deine Bewertung konnte nicht gespeichert werden. Bitte versuche es erneut.",
-    "rateIt": "Bewerten",
-    "rate": "Mit {value} von {scale} bewerten",
-    "public": "Öffentlich",
-    "nowPublic": "Jetzt in der öffentlichen Bibliothek",
-    "nowPrivate": "Jetzt privat",
-    "visibilityFailed": "Die Sichtbarkeit konnte nicht geändert werden. Bitte versuche es erneut."
-  },
   "share": {
-    "share": "Teilen",
-    "title": "Vorbereitung teilen",
-    "public": "Alle mit dem Link können diese Vorbereitung ansehen.",
-    "private": "Wir schicken einen Einladungslink per E-Mail. Nur diese Adresse kann ihn annehmen.",
-    "email": "E-Mail",
-    "send": "Senden",
     "sent": "Einladung an {email} gesendet",
     "checkEmail": "Prüfe die E-Mail-Adresse und versuche es erneut.",
     "failed": "Die Einladung konnte nicht gesendet werden.",
-    "joined": "Beigetreten",
-    "undelivered": "Nicht zugestellt",
-    "invited": "Eingeladen",
     "wrongEmail": "Diese Einladung wurde an eine andere E-Mail-Adresse gesendet.",
     "acceptFailed": "Die Einladung konnte nicht angenommen werden. Bitte versuche es erneut.",
-    "signIn": "Melde dich mit der E-Mail-Adresse aus der Einladung an, um dieser Vorbereitung beizutreten.",
     "invalid": "Diese Einladung ist nicht mehr gültig.",
     "invitedToJoin": "Du wurdest zum Beitreten eingeladen.",
-    "open": "Vorbereitung öffnen",
-    "join": "Vorbereitung beitreten",
-    "mismatch": "Die E-Mail-Adresse stimmt nicht überein. Melde dich mit der Adresse aus der Einladung an, um beizutreten.",
-    "inviteTitle": "Einladung zum Teilen"
+    "mismatch": "Die E-Mail-Adresse stimmt nicht überein. Melde dich mit der Adresse aus der Einladung an, um beizutreten."
   },
   "reportReasons": {
     "wrong_answer": "Die markierte Antwort ist falsch",
@@ -221,6 +193,18 @@
     "reports": "Meldungen",
     "showReports": "Meldungen anzeigen ({count})",
     "regenerate": "Neu generieren",
+    "manage": "Fragen verwalten",
+    "wrongAnswer": "Falsche Antwort",
+    "checking": "Wird geprüft…",
+    "markedWrong": "Danke. Sie wird geprüft und korrigiert oder ersetzt.",
+    "markWrongFailed": "Konnte nicht zur Prüfung gesendet werden. Bitte versuche es erneut.",
+    "ofCount": "von {count, number}",
+    "per": "pro",
+    "candidate": "Kandidat",
+    "showOptions": "Antwortoptionen anzeigen",
+    "hideOptions": "Antwortoptionen ausblenden",
+    "correct": "Richtige Antwort",
+    "wrong": "Falsche Antwort",
     "regenerating": "Wird neu generiert…",
     "regenerated": "Frage neu generiert",
     "regenerateFailed": "Die Frage konnte nicht neu generiert werden. Bitte versuche es erneut.",
@@ -233,79 +217,27 @@
     "selectReason": "Grund auswählen",
     "details": "Details",
     "showLess": "Weniger anzeigen",
+    "more": "+{count, number} weitere",
     "showAll": "Alle anzeigen",
     "limitRange": "Gib eine Zahl von 1 bis {count} ein.",
     "limitFailed": "Das Limit konnte nicht gespeichert werden.",
     "limit": "Fragenlimit",
-    "of": "von",
     "count": "{count, plural, one {Frage} other {Fragen}}",
-    "loadFailed": "Die Fragen konnten nicht geladen werden."
-  },
-  "certificate": {
-    "title": "Zertifikat",
-    "metaDescription": "{name} hat {topic} mit {score} % abgeschlossen.",
-    "heading": "Leistungszertifikat",
-    "for": "Für den erfolgreichen Abschluss von:",
-    "finalScore": "Endergebnis",
-    "issued": "Ausgestellt",
-    "howTo": "So erhältst du das Zertifikat"
+    "loadFailed": "Die Fragen konnten nicht geladen werden.",
+    "yourAnswer": "deine Antwort"
   },
   "rounds": {
-    "title": "Runde",
-    "rounds": "Runden",
-    "compare": "Vergleichen",
-    "compareTitle": "Runden vergleichen",
     "answered": "Beantwortet",
     "correct": "Richtig",
     "incorrect": "Falsch",
     "notAnswered": "Nicht beantwortet",
-    "correctAnswer": "Richtige Antwort",
-    "yourAnswer": "Deine Antwort",
-    "askFollowUp": "Rückfrage stellen",
-    "followUp": "Rückfrage",
-    "followUpPlaceholder": "Stell eine Rückfrage…",
-    "replyFailed": "Es konnte keine Antwort geladen werden. Bitte versuche es erneut.",
-    "firstRound": "Deine erste Runde zu diesem Thema",
-    "sameAsLast": "Wie in deiner letzten Runde",
-    "change": "{change} Punkte seit deiner letzten Runde",
-    "topicAnswered": "Thema: {answered} von {total} Fragen beantwortet",
-    "answeredOf": "{answered} von {total} beantwortet",
-    "finalScore": "Endergebnis",
-    "certificate": "Zertifikat",
-    "history": "Verlauf",
-    "preparationPage": "Seite der Vorbereitung",
-    "noRounds": "Noch keine Runden.",
-    "selectToCompare": "Zum Vergleichen auswählen",
-    "grade": "note",
-    "continue": "Fortsetzen",
-    "start": "Starten",
     "finish": "Beenden",
     "finishing": "Wird beendet…",
-    "finishRound": "Runde beenden",
-    "deleteRound": "Runde löschen",
-    "finishTitle": "Diese Runde beenden?",
-    "deleteTitle": "Diese Runde löschen?",
-    "unscored": "Unbeantwortete Fragen werden nicht gewertet.",
-    "noMore": "Du kannst danach keine Fragen mehr beantworten.",
-    "cantUndo": "Das kann nicht rückgängig gemacht werden.",
-    "deleteFailed": "Die Runde konnte nicht gelöscht werden. Bitte versuche es erneut.",
-    "finishFailed": "Die Runde konnte nicht beendet werden. Bitte versuche es erneut.",
-    "startFailed": "Die Runde konnte nicht gestartet werden. Bitte versuche es erneut.",
-    "answerFailed": "Deine Antwort konnte nicht gespeichert werden. Bitte versuche es erneut.",
-    "signIn": "Melde dich an, um diese Runde fortzusetzen.",
-    "missing": "Diese Runde existiert nicht.",
-    "allAnswered": "Du hast alle Fragen dieser Runde beantwortet.",
     "next": "Nächste Frage",
-    "progress": "Beantwortete Fragen auf dem Weg zum Zertifikat",
-    "nextFailed": "Die nächste Frage konnte nicht geladen werden. Bitte versuche es erneut.",
-    "submitFailed": "Deine Antwort konnte nicht gesendet werden. Bitte versuche es erneut.",
-    "freeTurns": "{count, plural, one {Noch # kostenlose Tutor-Nachricht} other {Noch # kostenlose Tutor-Nachrichten}} zu dieser Frage",
-    "paidTurns": "Jede weitere Nachricht zu dieser Frage kostet {count, plural, one {# Credit} other {# Credits}}",
-    "buyCertificate": "Zertifikat erhalten · {count} Credits",
-    "makeItYours": "Bereitest du dich auf eine bestimmte Stelle vor? Füge die Stellenanzeige ein und erhalte ein Kit genau dafür.",
-    "makeItYoursAction": "Mach es zu deinem"
+    "submitFailed": "Deine Antwort konnte nicht gesendet werden. Bitte versuche es erneut."
   },
   "session": {
+    "toTest": "Zu den Interviews",
     "startFailed": "Das Interview konnte nicht gestartet werden. Bitte versuche es erneut.",
     "finishFailed": "Das Interview konnte nicht beendet werden. Bitte versuche es erneut.",
     "continueFailed": "Es konnte nicht fortgesetzt werden. Bitte versuche es erneut.",
@@ -357,17 +289,7 @@
     "changes": "Änderungen an den Themen",
     "tooMany": "Wähle höchstens {max} Themen oder beschreibe, wie sie zusammengefasst werden sollen.",
     "apply": "Änderungen übernehmen",
-    "approve": "Bestätigen und generieren",
-    "approvePrice": "Bestätigen und erstellen · {count} Credits",
-    "unfinished": "Unvollständig"
-  },
-  "generationStatus": {
-    "queued": "Wird generiert",
-    "running": "Wird generiert",
-    "awaiting_review": "Themen prüfen",
-    "done": "Fertig",
-    "failed": "Fehlgeschlagen",
-    "cancelled": "Abgebrochen"
+    "approve": "Bestätigen und generieren"
   },
   "candidateStatus": {
     "invited": "eingeladen",
@@ -375,7 +297,9 @@
     "in_process": "läuft",
     "finished": "beendet",
     "deleted": "gelöscht",
-    "expired": "abgelaufen"
+    "expired": "abgelaufen",
+    "passed": "bestanden",
+    "flagged": "auffällig"
   },
   "roles": {
     "owner": "inhaber",
@@ -391,17 +315,17 @@
     "owner": "Inhaber",
     "interviewCount": "{count, plural, one {# Interview} other {# Interviews}}",
     "interviews": "Interviews",
+    "templates": "Vorlagen",
     "admins": "Admins",
     "referrals": "Einladungen",
     "new": "Neues Unternehmen",
-    "newText": "Lege ein Unternehmen an, um Interviews zu generieren und Kandidaten einzuladen.",
     "name": "Name des Unternehmens",
     "create": "Erstellen",
     "createFailed": "Das Unternehmen konnte nicht erstellt werden. Bitte versuche es erneut.",
     "signInJoin": "Melde dich mit der E-Mail-Adresse aus der Einladung an, um diesem Unternehmen beizutreten.",
     "open": "Unternehmen öffnen",
     "join": "Unternehmen beitreten",
-    "creditsLeft": "{count, plural, one {Credit verfügbar} other {Credits verfügbar}}",
+    "creditsLeft": "{count, plural, one {Credit} other {Credits}}",
     "creditsLow": "Bald aufgebraucht: Lade auf, um weiter Kandidaten einzuladen.",
     "timeLeft": "Verbleibende Zeit: {time}",
     "removeLabel": "{name} entfernen",
@@ -409,7 +333,12 @@
     "removeText": "Seine Interviews und Einladungen werden gelöscht.",
     "remove": "Entfernen",
     "removeFailed": "Das Unternehmen konnte nicht entfernt werden.",
-    "page": "Unternehmen"
+    "page": "Unternehmen",
+    "logo": "Logo",
+    "uploadLogo": "Logo hochladen",
+    "changeLogo": "Logo ändern",
+    "removeLogo": "Logo entfernen",
+    "logoFailed": "Das Logo konnte nicht gespeichert werden."
   },
   "candidates": {
     "scorecard": "Auswertung",
@@ -421,6 +350,11 @@
     "copies": "{count, plural, one {# Kopierversuch} other {# Kopierversuche}}",
     "fastAnswers": "{count, plural, one {# schnelle Antwort} other {# schnelle Antworten}}",
     "empty": "Noch keine Kandidaten eingeladen.",
+    "noMatches": "Keine passenden Kandidaten.",
+    "search": "Kandidaten nach E-Mail suchen",
+    "searchAction": "Suchen",
+    "status": "Status: {status}",
+    "anyStatus": "jeder Status",
     "progress": "Fortschritt",
     "grade": "Note",
     "resend": "Einladung erneut senden",
@@ -438,11 +372,27 @@
       "date": "Datum"
     }
   },
+  "interviewStatus": {
+    "new": "Neu",
+    "in_process": "Läuft",
+    "hired": "Eingestellt"
+  },
   "interviews": {
     "title": "Interviews",
     "interview": "Interview",
     "candidates": "Kandidaten",
     "new": "Neues Interview",
+    "createTitle": "Interview erstellen",
+    "try": "Als Kandidat ausprobieren",
+    "newCandidate": "Neue(r) Kandidat(en)",
+    "linkTitle": "Teilbarer Link",
+    "linkText": "Für eine Stellenanzeige: Jeder mit dem Link kann das Interview machen. Jede Person wird wie ein eingeladener Kandidat berechnet.",
+    "linkFailed": "Der Link konnte nicht geändert werden. Bitte versuche es erneut.",
+    "passMark": "Bestehensgrenze",
+    "passMarkLabel": "Bestehensgrenze in Prozent",
+    "markHired": "Als eingestellt markieren",
+    "tryLabel": "{title} als Kandidat ausprobieren",
+    "tryFailed": "Die Vorschau konnte nicht gestartet werden. Bitte versuche es erneut.",
     "generating": "Wird generiert…",
     "fallbackTitle": "interview",
     "continueGeneration": "Generierung fortsetzen",
@@ -461,12 +411,22 @@
     "adminEmail": "E-Mail des Admins",
     "addAdmin": "Admin hinzufügen",
     "adminFailed": "Dieser Admin konnte nicht eingeladen werden. Bitte versuche es erneut.",
-    "candidateEmail": "E-Mail des Kandidaten",
     "invite": "Einladen",
     "jobDescription": "Stellenbeschreibung",
     "pasteJob": "Füge die Stellenbeschreibung ein: die Rolle, ihre Anforderungen und was ein Plus ist…",
     "generate": "Interview generieren",
-    "startFailed": "Das Interview konnte nicht gestartet werden. Bitte versuche es erneut."
+    "startFailed": "Das Interview konnte nicht gestartet werden. Bitte versuche es erneut.",
+    "candidateEmails": "E-Mails der Kandidaten",
+    "emailsHint": "Eine oder mehrere E-Mails, getrennt durch Kommas oder Zeilenumbrüche",
+    "uploadFile": "Datei hochladen",
+    "invitedMany": "{count} Kandidaten eingeladen",
+    "skip": {
+      "invalid": "{count, plural, one {# E-Mail ist ungültig} other {# E-Mails sind ungültig}}.",
+      "limit": "{count, plural, one {# E-Mail liegt} other {# E-Mails liegen}} vorerst über deinem E-Mail-Limit. Versuche es in einer Stunde erneut.",
+      "no_credits": "{count, plural, one {# Kandidat wurde nicht eingeladen} other {# Kandidaten wurden nicht eingeladen}}: keine Credits mehr. Lade auf, um sie einzuladen.",
+      "failed": "{count, plural, one {# Einladung konnte} other {# Einladungen konnten}} nicht gesendet werden. Versuche es erneut."
+    },
+    "talents": "Vorgeschlagene Talente"
   },
   "invite": {
     "signIn": "Melde dich mit der E-Mail-Adresse aus der Einladung an, um dieses Interview zu absolvieren.",
@@ -479,7 +439,7 @@
     "timeRunsOut": "Wenn die Zeit einer Frage abläuft, zählt sie als falsch und die nächste öffnet sich. Die Uhr läuft weiter, auch wenn du die Seite verlässt.",
     "unanswered": "Unbeantwortete Fragen zählen als falsch.",
     "saved": "Der Fortschritt wird gespeichert: Öffne diesen Link erneut, um fortzufahren.",
-    "stay": "Bleib auf dieser Seite: Verlassen und Kopieren werden erfasst (<link>wie wir damit umgehen</link>).",
+    "stay": "Bleib auf dieser Seite: Verlassen und Kopieren werden erfasst (<link>Datenschutz</link>).",
     "finished": "Dieses Interview ist bereits beendet.",
     "continue": "Fortsetzen",
     "start": "Annehmen und starten",
@@ -503,29 +463,18 @@
   },
   "pricing": {
     "title": "Preise",
-    "intro": "Zahle nur, was du nutzt: Für $1 gibt es 100 Credits, und Credits verfallen nie. Keine Abos.",
-    "learners": "Für Lernende",
-    "welcome": "Bei der Registrierung",
-    "referrals": "Einladungen",
-    "referralsNote": "Teile deinen Link aus den Einstellungen oder den Link eines Unternehmens aus dessen Einladungs-Tab.",
-    "referral": "Ein eingeladener Freund lädt zum ersten Mal auf",
-    "companyReferral": "Ein eingeladenes Unternehmen lädt zum ersten Mal ${min} oder mehr auf",
-    "each": "je {count, number} Credits",
-    "credits": "{count, plural, one {# Credit} other {# Credits}}",
-    "companies": "Für Unternehmen",
-    "kit": "Dein eigenes Kit, erstellt aus einer Stellenbeschreibung",
-    "chat": "KI-Tutor: {free, plural, one {# kostenlose Nachricht} other {# kostenlose Nachrichten}} pro Frage, danach",
-    "perTurn": "{count, plural, one {# Credit} other {# Credits}} pro Nachricht",
-    "ownCertificate": "Zertifikat für ein eigenes oder geteiltes Kit",
-    "publicCertificate": "Zertifikat für ein öffentliches Kit",
-    "publicPractice": "Üben mit öffentlichen Kits ({count, plural, one {# neues Thema} other {# neue Themen}} pro Tag)",
-    "draftTopics": "Themen für deine Stellenbeschreibung oder dein Ziel",
-    "gift": "{count, number} Credits gratis",
+    "intro": "Zahl pro Kandidat. Interviews zu generieren ist kostenlos, und es gibt keine Abos.",
+    "test": "Ein Interview generieren",
     "free": "Kostenlos",
-    "interview": "Ein Interview generieren",
-    "candidate": "Jeder Kandidat, der das Interview beendet und mindestens eine Frage beantwortet",
-    "companyWelcome": "Dein erstes Unternehmen",
-    "openCompanies": "Unternehmen",
+    "candidate": "Jeder Kandidat, der mindestens eine Frage beantwortet",
+    "candidateVolume": "Mit Credits aus einer Aufladung ab ${from, number}",
+    "perCandidate": "${dollars, number} pro Kandidat",
+    "welcome": "{count, plural, one {Dein erster Kandidat} other {Deine ersten # Kandidaten}}",
+    "credits": "$1 = 100 Credits, Credits verfallen nie.",
+    "referrals": "Einladungen",
+    "referralsNote": "Teile den Link deines Unternehmens im Tab Einladungen.",
+    "companyReferral": "Ein von dir eingeladenes Unternehmen lädt zum ersten Mal auf",
+    "each": "je {count, number} Credits",
     "topUp": "Aufladen"
   },
   "site": {
@@ -534,22 +483,6 @@
   "legal": {
     "updated": "Zuletzt aktualisiert",
     "englishOnly": "Dieses Dokument ist nur auf Englisch verfügbar."
-  },
-  "credits": {
-    "noHistory": "Noch nichts.",
-    "reasons": {
-      "welcome": "Willkommensgeschenk",
-      "topup": "Aufladung",
-      "kit": "Kit",
-      "candidate": "Kandidat",
-      "certificate": "Zertifikat",
-      "author_share": "Dein öffentliches Kit hat ein Zertifikat eingebracht",
-      "chat": "Tutor-Nachricht",
-      "refund": "Rückerstattung",
-      "chargeback": "Zahlung von der Bank zurückgebucht",
-      "chargeback_reversed": "Rückbuchung aufgehoben",
-      "referral": "Einladungsprämie"
-    }
   },
   "autoTopUp": {
     "title": "Automatisches Aufladen",
@@ -572,43 +505,42 @@
     "label": "Erstellen auf"
   },
   "referral": {
-    "title": "Lade Freunde ein",
-    "note": "Ihr bekommt beide {reward, number} Credits, wenn dein Freund zum ersten Mal auflädt.",
     "companyTitle": "Lade ein anderes Unternehmen ein",
-    "companyNote": "Beide Unternehmen bekommen {reward, number} Credits, wenn das neue ${min} oder mehr auflädt.",
+    "companyNote": "Ihr bekommt beide {reward, number} Credits, wenn es zum ersten Mal auflädt, egal mit welchem Betrag.",
+    "deletedCompany": "Ein gelöschtes Unternehmen",
+    "credits": "+{count, number} Credits",
     "rewarded": "{count, plural, =0 {Noch keine Prämien.} one {Bisher # Mal belohnt.} other {Bisher # Mal belohnt.}}"
   },
   "topUp": {
     "title": "Aufladen",
     "intro": "Für $1 gibt es 100 Credits, und Credits verfallen nie.",
     "signIn": "Melde dich an, um deine Credits aufzuladen.",
-    "yours": "Persönliches Guthaben",
-    "personal": "Persönliche Credits",
-    "personalNote": "Für deine Kits, den KI-Tutor und Zertifikate.",
     "companies": "Credits der Unternehmen",
     "companiesNote": "Für die Kandidaten jedes Unternehmens.",
+    "noCompany": "Credits gehören einem Unternehmen. Erstelle zuerst dein Unternehmen und lade es dann hier auf.",
+    "createCompany": "Unternehmen erstellen",
     "pricing": "Preise"
   },
   "landing": {
     "more": "So funktioniert's",
     "how": {
-      "title": "In drei Schritten bereit",
+      "title": "Drei Schritte zu deinen ersten Ergebnissen",
       "paste": {
-        "title": "Einfügen oder beschreiben",
-        "text": "Eine Stellenbeschreibung, ein Lehrplan oder die Skills und Technologien, die du lernen willst."
+        "title": "Füge die Stellenbeschreibung ein",
+        "text": "Jede Rolle, jede Sprache.\nprepza erkennt, was ein Kandidat wissen muss, und schlägt Themen vor."
       },
       "review": {
-        "title": "Plan prüfen",
-        "text": "KI-Agenten erkennen, worauf es ankommt, und schlagen Themen vor.\nBehalte, benenne oder ändere sie."
+        "title": "Prüfe die Themen",
+        "text": "Behalte, benenne um oder ändere sie.\nFragen werden erst geschrieben, wenn du zustimmst."
       },
-      "practice": {
-        "title": "Üben, bis du sicher bist",
-        "text": "Jedes Thema bekommt eigene Fragen.\nÜbe in Runden und sieh, wie dein Fortschritt wächst."
+      "invite": {
+        "title": "Lade Kandidaten ein",
+        "text": "Füge eine Liste ein, lade eine Datei hoch oder teile einen Link.\nErinnerungen gehen von selbst raus. Du siehst, wer den Job beherrscht, nach Ergebnis sortiert."
       }
     },
     "control": {
-      "title": "Du entscheidest, was du lernst",
-      "text": "Keine Frage wird geschrieben, bevor du die Themen freigibst. Entferne, was du schon kannst, benenne ein Thema um, bearbeite seine Unterthemen oder sag der KI einfach, was sie ändern soll, und sie erledigt den Rest.",
+      "title": "Du entscheidest, was geprüft wird",
+      "text": "Fragen werden erst geschrieben, wenn du die Themen bestätigst. Entferne den Haken bei allem, was die Rolle nicht braucht, benenne ein Thema um, bearbeite seine Unterthemen oder sag der KI, was sie ändern soll.",
       "topics": {
         "design": "Systemdesign",
         "sql": "Content-Marketing",
@@ -634,43 +566,9 @@
         "Aufrufe messen"
       ]
     },
-    "gaps": {
-      "title": "Üben, das deine Lücken findet",
-      "text": "Jede Runde stellt alle Fragen des Themas erneut, angefangen mit denen, die du zuletzt falsch hattest. Vergleiche Runden und sieh, wie sich deine Lücken schließen.",
-      "items": {
-        "first": {
-          "question": "Welche Kennzahl zeigt, wer eine Anzeige bis zum Ende gesehen hat?",
-          "wrong": "Klickrate",
-          "right": "View-Through-Rate"
-        },
-        "second": {
-          "question": "Was verringert ein Cache vor allem?",
-          "wrong": "Speicherkosten",
-          "right": "Antwortzeit"
-        }
-      }
-    },
-    "tutor": {
-      "title": "Ein Tutor für jede Frage",
-      "text": "Nach jeder Antwort siehst du sofort die richtige Option. Unklar, warum sie stimmt? Frag den KI-Tutor und geh so tief, wie du willst.",
-      "question": "Ein Kunde ärgert sich über eine verspätete Lieferung. Was tust du zuerst?",
-      "options": {
-        "first": "Den Grund der Verspätung erklären",
-        "second": "Das Problem anerkennen und mich entschuldigen",
-        "third": "Sofort einen Rabatt anbieten",
-        "fourth": "Den Fall an eine Führungskraft abgeben"
-      },
-      "ask": "Warum nicht zuerst erklären?",
-      "answer": "Erst anerkennen: Menschen hören Gründe zu, wenn sie sich gehört fühlen."
-    },
-    "proof": {
-      "title": "Wisse, wann du bereit bist",
-      "text": "Jedes Thema hat einen Fortschrittsbalken bis zu seinem Zertifikat. Erreichst du es, gilt das Thema als gemeistert.",
-      "again": "Neu starten"
-    },
     "quality": {
-      "title": "Fragen, die von selbst besser werden",
-      "text": "Likes, Dislikes und Meldungen decken schwache Fragen auf. Ein KI-Prüfer korrigiert oder ersetzt sie automatisch, und Kit-Besitzer können jede Frage selbst neu generieren.",
+      "title": "Fragen, die sich selbst verbessern",
+      "text": "Antworten, Bewertungen und Meldungen der Kandidaten decken schwache Fragen auf. Ein KI-Prüfer korrigiert oder ersetzt sie automatisch, und du kannst jede Frage selbst neu generieren.",
       "items": {
         "good": "Was beschleunigt ein Datenbankindex?",
         "weak": "Welche Programmiersprache ist die beste?",
@@ -679,45 +577,89 @@
       "comment": "Das hängt vom Projekt ab, also gibt es keine eindeutig richtige Antwort.",
       "list": "Fragen zum Thema"
     },
-    "share": {
-      "title": "Teilen oder veröffentlichen",
-      "text": "Lade Freunde oder Kollegen per E-Mail ein, mit deinem Kit zu üben, oder veröffentliche es in der öffentlichen Bibliothek für alle, die sich auf dasselbe vorbereiten.",
-      "private": "Privat teilen",
-      "public": "Öffentlich teilen",
-      "browse": "Bibliothek entdecken"
+    "try": {
+      "title": "Probier es aus, bevor deine Kandidaten es tun",
+      "text": "Mach ein kostenloses Übungsinterview für eine ähnliche Rolle oder öffne dein eigenes Interview als Kandidat, bevor du jemanden einlädst.",
+      "browse": "Übungsinterviews ansehen",
+      "topic": "Systemdesign",
+      "question": "Was reduziert ein Cache vor einer Datenbank hauptsächlich?",
+      "options": {
+        "a": "Die Größe der Datenbank",
+        "b": "Wie oft die Datenbank gelesen wird",
+        "c": "Die Anzahl der Tabellen",
+        "d": "Wie lange Backups dauern"
+      },
+      "points": {
+        "practice": "Kostenlose Übungsinterviews für viele Rollen",
+        "preview": "Dein eigenes Interview als Kandidat"
+      }
+    },
+    "link": {
+      "title": "Ein Link für deine Stellenanzeige",
+      "text": "Setz den Link des Interviews in deine Stellenanzeige. Wer sich bewirbt, macht das Interview sofort und erscheint in deiner Kandidatenliste, nach Ergebnis sortiert.",
+      "note": "Jeder mit dem Link kann das Interview machen.",
+      "points": {
+        "anywhere": "Auf Jobbörsen, LinkedIn oder deiner Website",
+        "off": "Schalte ihn ab, sobald die Stelle besetzt ist"
+      }
     },
     "companies": {
-      "title": "Du stellst ein? Prüfe Kandidaten fair",
-      "text": "Mach aus einer Stellenbeschreibung ein Interview mit Zeitlimit und lade Kandidaten ein, um sie zu bewerten.",
+      "title": "Sieh, wer den Job beherrscht",
+      "text": "Kandidaten machen das Interview über deine E-Mail-Einladung. Ihre Ergebnisse kommen herein, während sie antworten, grün oder rot gemessen an deiner Bestehensgrenze.",
       "points": {
         "own": "Eigene Fragen für jeden Kandidaten",
         "timed": "Ein Countdown bei jeder Frage",
         "flags": "Hinweise auf Eile, Seitenwechsel oder Kopieren",
-        "private": "Kandidaten sehen ihre Ergebnisse nicht"
+        "private": "Kandidaten sehen ihre Ergebnisse nie"
       },
       "candidate": "Kandidat",
       "score": "Ergebnis",
       "rushed": "Überhastete Antworten",
       "left": "Seite verlassen",
-      "start": "Jetzt einstellen"
+      "role": "Backend-Entwickler · Bestehensgrenze {mark} %"
+    },
+    "reports": {
+      "title": "Ergebnisse mit einem Klick teilen",
+      "text": "Ein klarer PDF-Bericht für einen Kandidaten oder die ganze Liste. Lade ihn herunter oder sende ihn direkt aus prepza an eine Führungskraft im Recruiting.",
+      "points": {
+        "pdf": "Ein Kandidat oder alle",
+        "share": "PDF per E-Mail oder über Messenger teilen"
+      }
+    },
+    "brand": {
+      "title": "Deine Marke, verifiziert",
+      "text": "Kandidaten sehen dein Logo von der ersten E-Mail bis zur letzten Frage, mit einem Häkchen, das zeigt, dass dein Unternehmen echt ist.",
+      "role": "Backend-Entwickler",
+      "points": {
+        "email": "Dein Logo in der Einladungs-E-Mail",
+        "interview": "Im Interview, das Kandidaten machen",
+        "report": "In jedem PDF-Bericht",
+        "verified": "Verifiziert über die Arbeits-E-Mail deines Teams"
+      }
+    },
+    "talent": {
+      "title": "Erhalte Talentvorschläge",
+      "text": "Die Besten aus unseren kostenlosen Übungsinterviews, vorgeschlagen für deine Rolle. Kostenlos.",
+      "suggested": "Vorgeschlagen für Backend-Entwickler",
+      "score": "Ergebnis",
+      "points": {
+        "free": "Kostenlos für dich und für Talente",
+        "practice": "Bewertet in Interviews mit Zeitlimit",
+        "first": "Nur ihr erster Versuch zählt",
+        "link": "Sie entscheiden selbst, ob sie vorgeschlagen werden"
+      }
     },
     "languages": {
-      "title": "In deiner Sprache",
-      "text": "Nutze prepza in einer von {count} Sprachen. Füge eine Stellenbeschreibung in einer Sprache ein und übe in einer anderen."
+      "title": "Jede Rolle, jede Sprache",
+      "text": "prepza funktioniert in {count} Sprachen. Füge eine Stellenbeschreibung in einer Sprache ein und führe Interviews mit Kandidaten in einer anderen."
     },
     "pricing": {
-      "title": "Zahl nur für das, was funktioniert",
-      "text": "Keine Abos, keine Tarife. Lade auf, wenn du es brauchst: Credits verfallen nie, und was fehlschlägt, kostet nichts.",
+      "title": "Zahl pro Kandidat",
+      "text": "Interviews und {free, plural, one {dein erster Kandidat} other {deine ersten # Kandidaten}} sind kostenlos. Danach zahlst du nur für Kandidaten, die antworten, ohne Abo.",
       "see": "Preise ansehen",
-      "company": "Acme Inc.",
-      "personal": "Für deine Kits und den KI-Tutor.",
-      "learner": "Lern-Credits"
-    },
-    "referrals": {
-      "title": "Verdiene Credits als Affiliate",
-      "text": "Lade Freunde oder andere Unternehmen mit deinem Link ein. Wenn sie zum ersten Mal aufladen, bekommt ihr beide Credits.",
-      "whereLearner": "Dein Link ist unter {settings} → {referral}.",
-      "whereCompany": "Der Link deines Unternehmens ist unter {hiring} → dein Unternehmen → {referrals}."
+      "perCandidate": "pro Kandidat",
+      "base": "Nach Verbrauch",
+      "volume": "Mit einer Aufladung ab ${from, number}"
     },
     "faq": {
       "title": "Noch Fragen?",
@@ -725,8 +667,8 @@
       "read": "zur FAQ"
     },
     "ready": {
-      "title": "Bereit für die Vorbereitung?",
-      "start": "Jetzt starten"
+      "title": "Bereit für Interviews mit deinen ersten Kandidaten?",
+      "start": "Interview erstellen"
     }
   },
   "faq": {
@@ -753,14 +695,15 @@
   },
   "about": {
     "title": "Über uns",
-    "intro": "prepza hilft dir, dich mit Selbstvertrauen vorzubereiten, und bietet Unternehmen eine einfache, bezahlbare Möglichkeit, Kandidaten zu prüfen.",
+    "intro": "prepza hilft Unternehmen, Menschen zu finden, die den Job wirklich beherrschen: ein faires Interview mit Zeitlimit, erstellt aus deiner Stellenbeschreibung, zu einem Preis, den sich jedes Team leisten kann. Und wer sich auf ein Interview vorbereitet, kann kostenlos üben.",
     "company": {
       "title": "Warum es uns gibt",
-      "learners": "Die Vorbereitung auf ein Interview, eine Prüfung oder eine neue Fähigkeit sollte nicht mit stundenlanger Suche beginnen. Sag prepza, was du erreichen willst, und es macht daraus einen klaren Plan: die Themen, auf die es ankommt, Übungsfragen zu jedem davon und einen Tutor, der dir jede Antwort erklärt, bis es Klick macht.",
-      "companies": "Für Unternehmen wollen wir, dass Einstellen fair ist und für jedes Team erreichbar, nicht nur für große. Mach aus einer Stellenanzeige in wenigen Minuten ein Interview mit Zeitlimit, gib jedem Kandidaten eigene Fragen und zahl nur für Kandidaten, die es wirklich absolvieren."
+      "problem": "Einstellungen stützen sich oft auf einen Lebenslauf und ein gutes Gespräch, und beides kann täuschen. Die Bewertungstools, die helfen, sind für große Unternehmen bepreist, mit Jahresverträgen und Lizenzgebühren pro Platz, also verzichten die meisten Teams darauf.",
+      "approach": "prepza macht aus einer Stellenbeschreibung in wenigen Minuten ein Interview mit Zeitlimit, für jede Rolle. Jeder Kandidat bekommt eigene Fragen, du siehst, wer den Job beherrscht und warum, und du zahlst nur für Kandidaten, die es wirklich machen.",
+      "practice": "Außerdem wollen wir, dass die Vorbereitung auf ein Interview für alle kostenlos ist. Jeder kann unsere Übungsinterviews für eine Rolle machen, seine Note und jede richtige Antwort sehen und erneut üben, ohne Kosten. Wer gut abschneidet, kann sich Unternehmen vorschlagen lassen, die für eine ähnliche Rolle einstellen."
     },
     "founder": {
-      "quote": "Jedes Mal, wenn ich mich auf ein Vorstellungsgespräch vorbereitet oder etwas Neues lernen wollte, habe ich mehr Zeit mit der Suche nach gutem Material verbracht als mit dem eigentlichen Lernen. Jede Seite deckte nur ein Stück ab, und keine passte zu dem, was ich brauchte. Also habe ich prepza gebaut: das Tool, das ich mir damals gewünscht hätte, eines, das bei deinem Ziel ansetzt und dich dorthin führt. Ich hoffe, es spart dir die Stunden, die es mir erspart hätte.",
+      "quote": "Gut einzustellen sollte kein Privileg großer Unternehmen mit großen Budgets sein. Ich habe prepza gebaut, damit jedes Team aus einer Stellenbeschreibung in wenigen Minuten ein faires Interview machen, sehen kann, wer den Job wirklich beherrscht, und nur für die Kandidaten zahlt, die es machen. Ich hoffe, es hilft dir, schneller die richtigen Leute zu finden.",
       "role": "Solo-Gründer von prepza"
     }
   },
@@ -771,7 +714,6 @@
     "kinds": {
       "question_flagged": "{count, plural, one {Eine Frage zu „{topic}“ in „{title}“ wurde zur Prüfung gemeldet.} other {# Fragen in „{title}“ wurden zur Prüfung gemeldet.}}",
       "question_fixed": "{count, plural, one {Die KI hat eine gemeldete Frage zu „{topic}“ in „{title}“ korrigiert.} other {Die KI hat # gemeldete Fragen in „{title}“ korrigiert.}}",
-      "kit_ready": "Dein Kit „{title}“ ist fertig.",
       "referral_rewarded": "Jemand, den du eingeladen hast, hat aufgeladen. Du hast {credits} Credits bekommen.",
       "auto_top_up_charged": "Automatisches Aufladen hat {credits} Credits hinzugefügt.",
       "auto_top_up_failed": "Automatisches Aufladen konnte die Karte nicht belasten. Lade auf, damit dein Guthaben nicht ausgeht.",
@@ -780,5 +722,77 @@
       "interview_ready": "Das Interview „{title}“ ist fertig.",
       "interview_cancelled": "{title, select, none {Ein Interview} other {Das Interview „{title}“}} wurde abgebrochen: Die Themenprüfung hat zu lange gewartet."
     }
+  },
+  "report": {
+    "download": "PDF herunterladen",
+    "passed": "bestanden · Bestehensgrenze {mark} %",
+    "notPassed": "nicht bestanden · Bestehensgrenze {mark} %",
+    "notFinished": "noch nicht beendet",
+    "share": "Bericht teilen",
+    "fileName": "Bericht {email}",
+    "failed": "Der PDF-Bericht konnte nicht erstellt werden.",
+    "shareTitle": "Bericht teilen",
+    "recipient": "E-Mail des Empfängers",
+    "send": "<name>PDF</name> senden",
+    "sent": "Bericht an {email} gesendet",
+    "sendFailed": "Der Bericht konnte nicht gesendet werden.",
+    "orSummary": "Oder senden über",
+    "via": "Gesendet von prepza",
+    "candidatesFileName": "Kandidaten {title}",
+    "candidateCount": "{count, plural, one {# Kandidat} other {# Kandidaten}}",
+    "passMark": "Bestehensgrenze {mark} %",
+    "progressOf": "{progress} % erledigt"
+  },
+  "practice": {
+    "title": "Kostenlose Interview-Übung",
+    "intro": "Übe für eine Rolle mit einem Interview mit Zeitlimit und sieh dann deine Note und jede richtige Antwort. Kostenlos.",
+    "about": "Übungsinterview mit Zeitlimit. Wenn du fertig bist, siehst du deine Note und jede richtige Antwort. Privat und kostenlos.",
+    "pageTitle": "{title}: kostenloses Übungsinterview",
+    "pageDescription": "Ein kostenloses Übungsinterview ({level}) für {title}: {count, plural, one {# Thema} other {# Themen}}, mit Zeitlimit, danach deine Note und jede richtige Antwort. Übung, kein echtes Vorstellungsgespräch.",
+    "start": "Übung starten",
+    "again": "Erneut üben",
+    "continue": "Fortsetzen",
+    "history": "Deine Runden",
+    "results": "Übungsergebnisse",
+    "grade": "der Fragen richtig",
+    "notFinished": "nicht beendet",
+    "noRounds": "Noch keine Runden.",
+    "signIn": "Melde dich an, um deine Übungsrunden zu sehen.",
+    "startFailed": "Die Übung konnte nicht gestartet werden. Bitte versuche es erneut.",
+    "gradeLabel": "Note",
+    "questions": "{count, plural, one {# Frage} other {# Fragen}}",
+    "progressLabel": "Fortschritt",
+    "answeredLabel": "Fragen beantwortet"
+  },
+  "suggest": {
+    "title": "Lass dich Unternehmen vorschlagen",
+    "consent": "Optional. Unternehmen, die für ähnliche Rollen einstellen, sehen eventuell deinen Namen, dein LinkedIn und dein Ergebnis der ersten Runde. Du kannst das jederzeit in den Einstellungen ändern oder widerrufen.",
+    "link": "LinkedIn-Link",
+    "share": "Teilen",
+    "saved": "Du kannst jetzt Unternehmen vorgeschlagen werden.",
+    "withdraw": "Widerrufen",
+    "withdrawn": "Du wirst Unternehmen nicht mehr vorgeschlagen.",
+    "invalid": "Verwende den Link zu deinem LinkedIn-Profil, z. B. https://www.linkedin.com/in/your-name",
+    "failed": "Konnte nicht gespeichert werden. Bitte versuche es erneut.",
+    "shareAndStart": "Zustimmen & starten",
+    "startWithout": "Ablehnen & starten"
+  },
+  "talents": {
+    "about": "Talente, die beim Üben eines Interviews für eine Rolle wie diese gut abgeschnitten und einem Vorschlag zugestimmt haben.",
+    "empty": "Noch keine vorgeschlagenen Talente.",
+    "score": "Ergebnis",
+    "hide": "Ausblenden",
+    "hideFailed": "Das Talent konnte nicht ausgeblendet werden. Bitte versuche es erneut."
+  },
+  "verify": {
+    "verify": "Verifizieren",
+    "verified": "Verifiziert: {domain}",
+    "title": "Unternehmen verifizieren",
+    "text": "Gib die Website des Unternehmens ein. Es ist verifiziert, sobald sich ein Inhaber oder Admin mit einer geschäftlichen E-Mail dieser Domain anmeldet, z. B. you@acme.com: sofort, wenn du das bist.",
+    "website": "Website des Unternehmens",
+    "save": "Speichern",
+    "done": "Verifiziert: {domain}",
+    "pending": "Gespeichert. Verifiziert, sobald sich ein Inhaber oder Admin mit einer E-Mail von {domain} anmeldet.",
+    "failed": "Die Website konnte nicht gespeichert werden."
   }
 }

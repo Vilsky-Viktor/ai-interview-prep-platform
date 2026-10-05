@@ -1,15 +1,16 @@
+import { GiftIcon } from "lucide-react"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 
 import { ReferralLink } from "@/components/billing/referral-link"
 import { CompanyHeader } from "@/components/company/company-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { TOKEN_COOKIE } from "@/constants/auth"
+import { formatDate } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
-import type { Referral } from "@/types/billing"
-import type { Company } from "@/types/company"
+import type { Company, CompanyReferral } from "@/types/company"
 
 export const generateMetadata = () => translatedTitle("company", "referrals")
 
@@ -21,12 +22,15 @@ export default async function ReferralsPage({
   const { companyId } = await params
   const t = await getTranslations("company")
   const referralText = await getTranslations("referral")
+  const locale = await getLocale()
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
     : null
   const referral = company
-    ? await serverFetch<Referral>(`/companies/companies/${companyId}/referral`)
+    ? await serverFetch<CompanyReferral>(
+        `/companies/companies/${companyId}/referral`
+      )
     : null
 
   if (!signedIn) {
@@ -46,23 +50,50 @@ export default async function ReferralsPage({
       <CompanyHeader
         companyId={companyId}
         name={company.name}
+        logoUrl={company.logo_url ?? null}
+        verifiedDomain={company.verified_domain ?? null}
+        websiteDomain={company.website_domain ?? null}
         current="referrals"
       />
       {referral && (
-        <section className="space-y-4">
-          <div className="space-y-1">
-            <h2 className="text-lg font-medium">
-              {referralText("companyTitle")}
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              {referralText("companyNote", {
-                reward: referral.reward,
-                min: referral.min_dollars,
-              })}
-            </p>
+        <>
+          {/* What a referral earns, and the link to share. */}
+          <div className="space-y-4 rounded-2xl border p-5">
+            <div className="flex items-center gap-4 text-base">
+              <GiftIcon aria-hidden className="size-7 shrink-0 text-primary" />
+              <p className="text-muted-foreground">
+                {referralText("companyNote", { reward: referral.reward })}
+              </p>
+            </div>
+            <ReferralLink referral={referral} path="/company" />
           </div>
-          <ReferralLink referral={referral} path="/company" />
-        </section>
+          {referral.rewards.length === 0 ? (
+            <p className="py-16 text-center text-muted-foreground">
+              {referralText("rewarded", { count: 0 })}
+            </p>
+          ) : (
+            <ul className="divide-y rounded-2xl border">
+              {referral.rewards.map((reward, index) => (
+                <li
+                  key={index}
+                  className="flex items-center justify-between gap-4 p-6"
+                >
+                  <span className="min-w-0 space-y-1">
+                    <span className="block truncate text-lg font-medium normal-case">
+                      {reward.name ?? referralText("deletedCompany")}
+                    </span>
+                    <span className="block text-sm text-muted-foreground">
+                      {formatDate(reward.rewarded_at, locale)}
+                    </span>
+                  </span>
+                  <span className="shrink-0 text-primary tabular-nums">
+                    {referralText("credits", { count: referral.reward })}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
       )}
     </main>
   )

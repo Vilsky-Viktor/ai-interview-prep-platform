@@ -2,9 +2,6 @@
   "settings": {
     "title": "Instellingen",
     "signIn": "Log in om je instellingen te wijzigen.",
-    "general": "Algemeen",
-    "billing": "Facturering",
-    "referral": "Uitnodigingen",
     "language": "Taal",
     "languageNote": "Voor de interface en de antwoorden van de tutor, en de taal waarin nieuwe kits en sollicitatiegesprekken beginnen. Je kunt ze in elke beschikbare taal genereren.",
     "languageFailed": "De taal kon niet worden gewijzigd. Probeer het opnieuw.",
@@ -14,13 +11,12 @@
     "downloadFailed": "Je gegevens konden niet worden voorbereid. Probeer het opnieuw.",
     "delete": "Account verwijderen",
     "searchLanguage": "Talen zoeken",
-    "noLanguage": "Geen taal gevonden.",
-    "history": "Factureringsgeschiedenis",
-    "historyNote": "Elke credit die binnenkwam of werd gebruikt, nieuwste eerst."
+    "noLanguage": "Geen taal gevonden."
   },
   "userMenu": {
     "signIn": "Inloggen",
     "account": "Account",
+    "adminZone": "Beheeromgeving",
     "settings": "Instellingen",
     "signOut": "Uitloggen",
     "theme": "Thema",
@@ -34,17 +30,15 @@
     "main": "Hoofdmenu",
     "legal": "Juridisch",
     "pricing": "Prijzen",
-    "privacy": "Privacybeleid",
+    "privacy": "Privacy",
     "terms": "Voorwaarden",
     "back": "Terug",
-    "create": "maken",
-    "explore": "ontdekken",
-    "myKits": "mijn kits",
     "hiring": "werving",
     "pricingLink": "prijzen",
     "faq": "Veelgestelde vragen",
     "contact": "Contact",
-    "about": "Over ons"
+    "about": "Over ons",
+    "practice": "Gratis oefenen"
   },
   "signIn": {
     "with": "Inloggen met",
@@ -80,43 +74,89 @@
     "notFoundText": "Deze pagina bestaat niet of is verwijderd."
   },
   "home": {
-    "tagline": "AI-agents oefenen met je tot je je zeker voelt.",
-    "preparingFor": "Bereid je je voor op",
-    "words": [
-      "een sollicitatiegesprek",
-      "een certificering",
-      "een examen",
-      "een toets",
-      "een promotie"
-    ],
-    "widest": "een sollicitatiegesprek",
-    "mark": "?"
+    "title": "Spreek iedereen\nNeem echt talent aan",
+    "text": "Sollicitatiegesprekken met tijdslimiet, gemaakt van je functieomschrijving. Unieke vragen voor elke kandidaat, en geen tijd om een AI te vragen. Vanaf $1 per kandidaat."
   },
-  "goal": {
-    "placeholder": "Plak een vacaturetekst of beschrijf wat je wilt leren…",
-    "label": "Waar bereid je je op voor?",
-    "submit": "Voorbereiding genereren",
-    "failed": "Het genereren kon niet worden gestart. Probeer het opnieuw.",
-    "seePlans": "Opwaarderen"
+  "start": {
+    "placeholder": "Plak een functieomschrijving, of beschrijf de rol en wat een kandidaat moet weten",
+    "description": "Functieomschrijving",
+    "submit": "Sollicitatiegesprek maken",
+    "whichCompany": "Voor welk bedrijf is dit sollicitatiegesprek?",
+    "firstCompany": "Hoe heet je bedrijf?",
+    "newCompany": "Een nieuw bedrijf",
+    "companyName": "Bedrijfsnaam",
+    "freeCandidates": "Je eerste bedrijf spreekt {count, plural, one {de eerste kandidaat} other {de eerste # kandidaten}} gratis.",
+    "back": "Omschrijving bewerken",
+    "continue": "Doorgaan",
+    "starting": "Wordt gestart…",
+    "failed": "Het sollicitatiegesprek kon niet worden gestart. Probeer het opnieuw."
   },
-  "membership": {
-    "signIn": "Log in om mee te doen",
-    "leave": "Verlaten",
-    "join": "Meedoen om te oefenen"
+  "superadmin": {
+    "fixNow": "Nu herstellen",
+    "fixing": "Wordt hersteld…",
+    "dismiss": "Negeren",
+    "fixSent": "Naar de controleur gestuurd. Zo meteen hersteld of vervangen.",
+    "actionFailed": "Dat lukte niet. Probeer het opnieuw.",
+    "quality": "Kwaliteit",
+    "flagged": "Gemarkeerd",
+    "replaced": "Vervangen",
+    "noFlagged": "Er is nu niets gemarkeerd.",
+    "noReplaced": "Er is nog niets vervangen.",
+    "answers": "{count, plural, one {# antwoord} other {# antwoorden}}",
+    "right": "{percent}% goed",
+    "reports": "{count, plural, =0 {geen meldingen} one {# melding} other {# meldingen}}",
+    "kinds": {
+      "template": "sjabloon",
+      "interview": "bedrijfsgesprek"
+    },
+    "flags": {
+      "wrong_key": "antwoord is mogelijk fout",
+      "rewrite": "nieuwe vraag nodig",
+      "weak_options": "betere opties nodig"
+    },
+    "zone": "Beheeromgeving",
+    "templates": "Sjablonen",
+    "new": "Nieuw sjabloon",
+    "createTitle": "Sjabloon maken",
+    "placeholder": "Plak een rolomschrijving, of beschrijf de rol en wat iemand in die rol moet weten",
+    "description": "Rolomschrijving",
+    "create": "Genereren",
+    "createFailed": "Het sjabloon kon niet worden gestart. Probeer het opnieuw.",
+    "text": "Kant-en-klare sollicitatiegesprekken per rol, voor bedrijven en talenten.",
+    "deleteLabel": "{title} verwijderen",
+    "deleteTitle": "Dit sjabloon verwijderen?",
+    "deleteText": "De onderwerpen en vragen worden verwijderd. Sollicitatiegesprekken die bedrijven er al van hebben gemaakt, blijven bestaan.",
+    "deleteFailed": "Het sjabloon kon niet worden verwijderd. Probeer het opnieuw."
+  },
+  "templates": {
+    "title": "Sjablonen",
+    "empty": "Nog geen sjablonen.",
+    "topics": "{count, plural, one {# onderwerp} other {# onderwerpen}}",
+    "search": "Zoeken op rol of onderwerp",
+    "searchAction": "Zoeken",
+    "level": "Niveau: {level}",
+    "anyLevel": "Elk niveau",
+    "allLanguages": "Alle talen",
+    "languages": "{count, plural, one {# taal} other {# talen}}",
+    "noMatches": "Geen sjablonen gevonden.",
+    "use": "Sjabloon gebruiken",
+    "using": "Wordt gestart…",
+    "useFailed": "Er kon geen sollicitatiegesprek van dit sjabloon worden gestart. Probeer het opnieuw.",
+    "warningTitle": "Sjablonen zijn om prepza uit te proberen.",
+    "warning": "Talenten oefenen ermee, dus kandidaten kennen de vragen misschien al. Maak voor echte werving een sollicitatiegesprek van je functieomschrijving.",
+    "text": "Kant-en-klare sollicitatiegesprekken per rol. Kies er een om je gesprek mee te beginnen; je kunt het daarna aanpassen."
   },
   "billing": {
     "paid": "Betaling ontvangen. Die verschijnt hier zo.",
     "checkoutFailed": "De betaling kon niet worden geopend. Probeer het opnieuw.",
     "credits": "{count, plural, one {# credit} other {# credits}}",
-    "bonus": "+{count, number} bonus",
     "topUp": "Opwaarderen",
-    "balance": "{count} credits beschikbaar. Opwaarderen",
-    "balanceLow": "{count} credits beschikbaar, bijna op. Opwaarderen",
     "low": "Bijna op",
     "creditsWord": "{count, plural, one {credit} other {credits}}",
     "topUpTitle": "Opwaarderen: {name}",
-    "topUpNote": "Voor $1 krijg je 100 credits, met een bonus bij grotere bedragen. Credits verlopen nooit.",
-    "customAmount": "Eigen bedrag"
+    "topUpNote": "Elke opwaardering koopt hele kandidaten; grotere kosten minder per kandidaat. Credits verlopen nooit.",
+    "candidates": "{count, plural, one {# kandidaat} other {# kandidaten}}",
+    "each": "{price} per stuk"
   },
   "deleteAccount": {
     "title": "Je account verwijderen?",
@@ -126,83 +166,15 @@
     "deleted": "Je account is verwijderd.",
     "failed": "Je account kon niet worden verwijderd. Probeer het opnieuw."
   },
-  "levels": {
-    "basic": "basis",
-    "medium": "gemiddeld",
-    "hard": "moeilijk"
-  },
-  "visibility": {
-    "public": "openbaar",
-    "private": "privé"
-  },
-  "library": {
-    "title": "Openbare kits",
-    "search": "Titels en onderwerpen zoeken",
-    "searchAction": "Zoeken",
-    "noMatches": "Geen passende voorbereidingen.",
-    "empty": "Nog geen openbare voorbereidingen.",
-    "level": "Niveau: {level}",
-    "anyLevel": "Alle",
-    "languages": "{count, plural, one {# taal} other {# talen}}",
-    "sortBy": "Sorteren op: {sort}",
-    "sort": {
-      "date": "Datum",
-      "rating": "Beoordeling",
-      "joiners": "Deelnemers"
-    }
-  },
-  "preparations": {
-    "title": "Mijn kits",
-    "new": "Nieuwe voorbereiding",
-    "signIn": "Log in om je voorbereidingen te zien.",
-    "empty": "Nog geen voorbereidingen. Maak je eerste of kies er een uit de openbare bibliotheek.",
-    "topics": "{count, plural, one {# onderwerp} other {# onderwerpen}}",
-    "created": "Gemaakt op {date}",
-    "metaTitle": "Voorbereiding",
-    "metaDescription": "Voorbereiding op het sollicitatiegesprek voor {title}: {count, plural, one {# onderwerp} other {# onderwerpen}} met meerkeuzevragen, oefenrondes en certificaten.",
-    "history": "Geschiedenis",
-    "page": "Pagina van de voorbereiding",
-    "rounds": "Rondes",
-    "deleteLabel": "{title} verwijderen",
-    "deleteTitle": "{title} verwijderen?",
-    "deleteText": "De onderwerpen en vragen worden verwijderd, en iedereen die meedoet verliest de toegang. Dit kan niet ongedaan worden gemaakt.",
-    "deleteFailed": "De voorbereiding kon niet worden verwijderd. Probeer het opnieuw.",
-    "mastered": "Beheerst",
-    "masteredTitle": "Beheerst: elk onderwerp heeft een certificaat",
-    "owner": "Eigenaar",
-    "ratingTitle": "Gemiddelde beoordeling en aantal beoordelingen",
-    "rated": "Bedankt voor je beoordeling",
-    "ratingUpdated": "Beoordeling bijgewerkt",
-    "ratingFailed": "Je beoordeling kon niet worden opgeslagen. Probeer het opnieuw.",
-    "rateIt": "Beoordeel",
-    "rate": "Beoordeel met {value} van {scale}",
-    "public": "Openbaar",
-    "nowPublic": "Nu te vinden in de openbare bibliotheek",
-    "nowPrivate": "Nu privé",
-    "visibilityFailed": "De zichtbaarheid kon niet worden gewijzigd. Probeer het opnieuw."
-  },
   "share": {
-    "share": "Delen",
-    "title": "Voorbereiding delen",
-    "public": "Iedereen met de link kan deze voorbereiding bekijken.",
-    "private": "We e-mailen een uitnodigingslink. Alleen dat e-mailadres kan hem accepteren.",
-    "email": "E-mail",
-    "send": "Verzenden",
     "sent": "Uitnodiging verzonden naar {email}",
     "checkEmail": "Controleer het e-mailadres en probeer het opnieuw.",
     "failed": "De uitnodiging kon niet worden verzonden.",
-    "joined": "Doet mee",
-    "undelivered": "Niet afgeleverd",
-    "invited": "Uitgenodigd",
     "wrongEmail": "Deze uitnodiging is naar een ander e-mailadres gestuurd.",
     "acceptFailed": "De uitnodiging kon niet worden geaccepteerd. Probeer het opnieuw.",
-    "signIn": "Log in met het e-mailadres van de uitnodiging om mee te doen aan deze voorbereiding.",
     "invalid": "Deze uitnodiging is niet meer geldig.",
     "invitedToJoin": "Je bent uitgenodigd om mee te doen.",
-    "open": "Voorbereiding openen",
-    "join": "Meedoen aan voorbereiding",
-    "mismatch": "Het e-mailadres komt niet overeen. Log in met het adres van de uitnodiging om mee te doen.",
-    "inviteTitle": "Uitnodiging om te delen"
+    "mismatch": "Het e-mailadres komt niet overeen. Log in met het adres van de uitnodiging om mee te doen."
   },
   "reportReasons": {
     "wrong_answer": "Het aangegeven antwoord is fout",
@@ -221,6 +193,18 @@
     "reports": "Meldingen",
     "showReports": "Meldingen tonen ({count})",
     "regenerate": "Opnieuw genereren",
+    "manage": "Vragen beheren",
+    "wrongAnswer": "Fout antwoord",
+    "checking": "Wordt gecontroleerd…",
+    "markedWrong": "Bedankt. Het wordt gecontroleerd en daarna hersteld of vervangen.",
+    "markWrongFailed": "Kon niet ter controle worden verzonden. Probeer het opnieuw.",
+    "ofCount": "van {count, number}",
+    "per": "per",
+    "candidate": "kandidaat",
+    "showOptions": "Antwoordopties tonen",
+    "hideOptions": "Antwoordopties verbergen",
+    "correct": "Juist antwoord",
+    "wrong": "Fout antwoord",
     "regenerating": "Opnieuw genereren…",
     "regenerated": "Vraag opnieuw gegenereerd",
     "regenerateFailed": "De vraag kon niet opnieuw worden gegenereerd. Probeer het opnieuw.",
@@ -233,79 +217,27 @@
     "selectReason": "Kies een reden",
     "details": "Details",
     "showLess": "Minder tonen",
+    "more": "+{count, number} meer",
     "showAll": "Alles tonen",
     "limitRange": "Voer een getal van 1 tot {count} in.",
     "limitFailed": "De limiet kon niet worden opgeslagen.",
     "limit": "Vragenlimiet",
-    "of": "van",
     "count": "{count, plural, one {vraag} other {vragen}}",
-    "loadFailed": "De vragen konden niet worden geladen."
-  },
-  "certificate": {
-    "title": "Certificaat",
-    "metaDescription": "{name} heeft {topic} afgerond met een score van {score}%.",
-    "heading": "Certificaat van prestatie",
-    "for": "Voor het succesvol afronden van:",
-    "finalScore": "Eindscore",
-    "issued": "Uitgegeven",
-    "howTo": "Zo verdien je het certificaat"
+    "loadFailed": "De vragen konden niet worden geladen.",
+    "yourAnswer": "jouw antwoord"
   },
   "rounds": {
-    "title": "Ronde",
-    "rounds": "Rondes",
-    "compare": "Vergelijken",
-    "compareTitle": "Rondes vergelijken",
     "answered": "Beantwoord",
     "correct": "Goed",
     "incorrect": "Fout",
     "notAnswered": "Niet beantwoord",
-    "correctAnswer": "Juiste antwoord",
-    "yourAnswer": "Jouw antwoord",
-    "askFollowUp": "Vervolgvraag stellen",
-    "followUp": "Vervolgvraag",
-    "followUpPlaceholder": "Stel een vervolgvraag…",
-    "replyFailed": "Er kon geen antwoord worden opgehaald. Probeer het opnieuw.",
-    "firstRound": "Je eerste ronde over dit onderwerp",
-    "sameAsLast": "Hetzelfde als je vorige ronde",
-    "change": "{change} punten sinds je vorige ronde",
-    "topicAnswered": "Onderwerp: {answered} van {total} vragen beantwoord",
-    "answeredOf": "{answered} van {total} beantwoord",
-    "finalScore": "Eindscore",
-    "certificate": "Certificaat",
-    "history": "Geschiedenis",
-    "preparationPage": "Pagina van de voorbereiding",
-    "noRounds": "Nog geen rondes.",
-    "selectToCompare": "Selecteren om te vergelijken",
-    "grade": "cijfer",
-    "continue": "Doorgaan",
-    "start": "Starten",
     "finish": "Afronden",
     "finishing": "Afronden…",
-    "finishRound": "Ronde afronden",
-    "deleteRound": "Ronde verwijderen",
-    "finishTitle": "Deze ronde afronden?",
-    "deleteTitle": "Deze ronde verwijderen?",
-    "unscored": "Onbeantwoorde vragen worden niet beoordeeld.",
-    "noMore": "Je kunt daarna geen vragen meer beantwoorden.",
-    "cantUndo": "Dit kan niet ongedaan worden gemaakt.",
-    "deleteFailed": "De ronde kon niet worden verwijderd. Probeer het opnieuw.",
-    "finishFailed": "De ronde kon niet worden afgerond. Probeer het opnieuw.",
-    "startFailed": "De ronde kon niet worden gestart. Probeer het opnieuw.",
-    "answerFailed": "Je antwoord kon niet worden opgeslagen. Probeer het opnieuw.",
-    "signIn": "Log in om deze ronde voort te zetten.",
-    "missing": "Deze ronde bestaat niet.",
-    "allAnswered": "Je hebt alle vragen van deze ronde beantwoord.",
     "next": "Volgende vraag",
-    "progress": "Beantwoorde vragen op weg naar het certificaat",
-    "nextFailed": "De volgende vraag kon niet worden geladen. Probeer het opnieuw.",
-    "submitFailed": "Je antwoord kon niet worden verzonden. Probeer het opnieuw.",
-    "freeTurns": "{count, plural, one {Nog # gratis bericht} other {Nog # gratis berichten}} aan de tutor bij deze vraag",
-    "paidTurns": "Elk volgend bericht bij deze vraag kost {count, plural, one {# credit} other {# credits}}",
-    "buyCertificate": "Certificaat krijgen · {count} credits",
-    "makeItYours": "Bereid je je voor op een specifieke baan? Plak de vacaturetekst en krijg een kit die erbij past.",
-    "makeItYoursAction": "Maak het van jou"
+    "submitFailed": "Je antwoord kon niet worden verzonden. Probeer het opnieuw."
   },
   "session": {
+    "toTest": "Naar de sollicitatiegesprekken",
     "startFailed": "Het sollicitatiegesprek kon niet worden gestart. Probeer het opnieuw.",
     "finishFailed": "Het sollicitatiegesprek kon niet worden afgerond. Probeer het opnieuw.",
     "continueFailed": "Doorgaan lukte niet. Probeer het opnieuw.",
@@ -357,17 +289,7 @@
     "changes": "Wijzigingen in de onderwerpen",
     "tooMany": "Kies maximaal {max} onderwerpen of beschrijf hoe ze samengevoegd moeten worden.",
     "apply": "Wijzigingen toepassen",
-    "approve": "Goedkeuren en genereren",
-    "approvePrice": "Goedkeuren en genereren · {count} credits",
-    "unfinished": "Onvoltooid"
-  },
-  "generationStatus": {
-    "queued": "Wordt gegenereerd",
-    "running": "Wordt gegenereerd",
-    "awaiting_review": "Onderwerpen controleren",
-    "done": "Klaar",
-    "failed": "Mislukt",
-    "cancelled": "Geannuleerd"
+    "approve": "Goedkeuren en genereren"
   },
   "candidateStatus": {
     "invited": "uitgenodigd",
@@ -375,7 +297,9 @@
     "in_process": "bezig",
     "finished": "afgerond",
     "deleted": "verwijderd",
-    "expired": "verlopen"
+    "expired": "verlopen",
+    "passed": "geslaagd",
+    "flagged": "gemarkeerd"
   },
   "roles": {
     "owner": "eigenaar",
@@ -391,17 +315,17 @@
     "owner": "Eigenaar",
     "interviewCount": "{count, plural, one {# sollicitatiegesprek} other {# sollicitatiegesprekken}}",
     "interviews": "Gesprekken",
+    "templates": "Sjablonen",
     "admins": "Beheerders",
     "referrals": "Uitnodigingen",
     "new": "Nieuw bedrijf",
-    "newText": "Maak een bedrijf aan om sollicitatiegesprekken te genereren en kandidaten uit te nodigen.",
     "name": "Bedrijfsnaam",
     "create": "Aanmaken",
     "createFailed": "Het bedrijf kon niet worden aangemaakt. Probeer het opnieuw.",
     "signInJoin": "Log in met het e-mailadres van de uitnodiging om lid te worden van dit bedrijf.",
     "open": "Bedrijf openen",
     "join": "Lid worden van het bedrijf",
-    "creditsLeft": "{count, plural, one {credit beschikbaar} other {credits beschikbaar}}",
+    "creditsLeft": "{count, plural, one {credit} other {credits}}",
     "creditsLow": "Bijna op: waardeer op om kandidaten te blijven uitnodigen.",
     "timeLeft": "Resterende tijd: {time}",
     "removeLabel": "{name} verwijderen",
@@ -409,7 +333,12 @@
     "removeText": "De sollicitatiegesprekken en uitnodigingen worden verwijderd.",
     "remove": "Verwijderen",
     "removeFailed": "Het bedrijf kon niet worden verwijderd.",
-    "page": "Bedrijf"
+    "page": "Bedrijf",
+    "logo": "Logo",
+    "uploadLogo": "Logo uploaden",
+    "changeLogo": "Logo wijzigen",
+    "removeLogo": "Logo verwijderen",
+    "logoFailed": "Het logo kon niet worden opgeslagen."
   },
   "candidates": {
     "scorecard": "Resultaten",
@@ -421,6 +350,11 @@
     "copies": "{count, plural, one {# kopieerpoging} other {# kopieerpogingen}}",
     "fastAnswers": "{count, plural, one {# snel antwoord} other {# snelle antwoorden}}",
     "empty": "Nog geen kandidaten uitgenodigd.",
+    "noMatches": "Geen kandidaten gevonden.",
+    "search": "Kandidaten zoeken op e-mailadres",
+    "searchAction": "Zoeken",
+    "status": "Status: {status}",
+    "anyStatus": "elke status",
     "progress": "Voortgang",
     "grade": "Cijfer",
     "resend": "Uitnodiging opnieuw verzenden",
@@ -438,11 +372,27 @@
       "date": "Datum"
     }
   },
+  "interviewStatus": {
+    "new": "Nieuw",
+    "in_process": "Bezig",
+    "hired": "Aangenomen"
+  },
   "interviews": {
     "title": "Sollicitatiegesprekken",
     "interview": "Sollicitatiegesprek",
     "candidates": "Kandidaten",
     "new": "Nieuw sollicitatiegesprek",
+    "createTitle": "Sollicitatiegesprek maken",
+    "try": "Proberen als kandidaat",
+    "newCandidate": "Nieuwe kandidaat/kandidaten",
+    "linkTitle": "Deelbare link",
+    "linkText": "Voor een vacature: iedereen met de link kan het sollicitatiegesprek doen. Elke persoon wordt in rekening gebracht als een uitgenodigde kandidaat.",
+    "linkFailed": "De link kon niet worden gewijzigd. Probeer het opnieuw.",
+    "passMark": "Slaaggrens",
+    "passMarkLabel": "Slaaggrens in procenten",
+    "markHired": "Markeren als aangenomen",
+    "tryLabel": "{title} proberen als kandidaat",
+    "tryFailed": "De voorbeeldweergave kon niet worden gestart. Probeer het opnieuw.",
     "generating": "Wordt gegenereerd…",
     "fallbackTitle": "sollicitatiegesprek",
     "continueGeneration": "Genereren voortzetten",
@@ -461,12 +411,22 @@
     "adminEmail": "E-mailadres beheerder",
     "addAdmin": "Beheerder toevoegen",
     "adminFailed": "Die beheerder kon niet worden uitgenodigd. Probeer het opnieuw.",
-    "candidateEmail": "E-mailadres kandidaat",
     "invite": "Uitnodigen",
     "jobDescription": "Functieomschrijving",
     "pasteJob": "Plak de functieomschrijving: de rol, de eisen en wat een pre is…",
     "generate": "Sollicitatiegesprek genereren",
-    "startFailed": "Het sollicitatiegesprek kon niet worden gestart. Probeer het opnieuw."
+    "startFailed": "Het sollicitatiegesprek kon niet worden gestart. Probeer het opnieuw.",
+    "candidateEmails": "E-mailadressen van kandidaten",
+    "emailsHint": "Eén of meer e-mailadressen, gescheiden door komma's of nieuwe regels",
+    "uploadFile": "Bestand uploaden",
+    "invitedMany": "{count} kandidaten uitgenodigd",
+    "skip": {
+      "invalid": "{count, plural, one {# e-mailadres is ongeldig} other {# e-mailadressen zijn ongeldig}}.",
+      "limit": "{count, plural, one {# e-mailadres valt} other {# e-mailadressen vallen}} voorlopig buiten je e-maillimiet. Probeer het over een uur opnieuw.",
+      "no_credits": "{count, plural, one {# kandidaat is niet uitgenodigd} other {# kandidaten zijn niet uitgenodigd}}: credits op. Waardeer op om ze uit te nodigen.",
+      "failed": "{count, plural, one {# uitnodiging kon} other {# uitnodigingen konden}} niet worden verzonden. Probeer het opnieuw."
+    },
+    "talents": "Voorgestelde talenten"
   },
   "invite": {
     "signIn": "Log in met het e-mailadres van de uitnodiging om dit gesprek te doen.",
@@ -479,7 +439,7 @@
     "timeRunsOut": "Als de tijd van een vraag om is, telt die als fout en opent de volgende. De klok loopt door als je weggaat.",
     "unanswered": "Onbeantwoorde vragen tellen als fout.",
     "saved": "Je voortgang wordt bewaard: gebruik deze link opnieuw om verder te gaan.",
-    "stay": "Blijf op deze pagina: weggaan of kopiëren wordt vastgelegd (<link>hoe we daarmee omgaan</link>).",
+    "stay": "Blijf op deze pagina: weggaan of kopiëren wordt vastgelegd (<link>privacy</link>).",
     "finished": "Dit sollicitatiegesprek is al afgerond.",
     "continue": "Doorgaan",
     "start": "Accepteren en starten",
@@ -503,29 +463,18 @@
   },
   "pricing": {
     "title": "Prijzen",
-    "intro": "Betaal alleen voor wat je gebruikt: voor $1 krijg je 100 credits, en credits verlopen nooit. Geen abonnementen.",
-    "learners": "Voor wie leert",
-    "welcome": "Bij aanmelding",
-    "referrals": "Uitnodigingen",
-    "referralsNote": "Deel je link vanuit Instellingen, of de link van een bedrijf vanuit het tabblad Uitnodigingen.",
-    "referral": "Een vriend die je hebt uitgenodigd waardeert voor het eerst op",
-    "companyReferral": "Een bedrijf dat je hebt uitgenodigd waardeert voor het eerst ${min} of meer op",
-    "each": "elk {count, number} credits",
-    "credits": "{count, plural, one {# credit} other {# credits}}",
-    "companies": "Voor bedrijven",
-    "kit": "Je eigen kit, gemaakt op basis van een vacaturetekst",
-    "chat": "AI-tutor: {free, plural, one {# gratis bericht} other {# gratis berichten}} per vraag, daarna",
-    "perTurn": "{count, plural, one {# credit} other {# credits}} per bericht",
-    "ownCertificate": "Certificaat op je eigen of een gedeelde kit",
-    "publicCertificate": "Certificaat op een openbare kit",
-    "publicPractice": "Oefenen met openbare kits ({count, plural, one {# nieuw onderwerp} other {# nieuwe onderwerpen}} per dag)",
-    "draftTopics": "Onderwerpen opgesteld voor je vacature of doel",
-    "gift": "{count, number} credits gratis",
+    "intro": "Betaal per kandidaat. Sollicitatiegesprekken genereren is gratis, en er zijn geen abonnementen.",
+    "test": "Een sollicitatiegesprek genereren",
     "free": "Gratis",
-    "interview": "Een sollicitatiegesprek genereren",
-    "candidate": "Elke kandidaat die het gesprek afrondt en minstens één vraag beantwoordt",
-    "companyWelcome": "Je eerste bedrijf",
-    "openCompanies": "Bedrijven",
+    "candidate": "Elke kandidaat die minstens één vraag beantwoordt",
+    "candidateVolume": "Met credits uit een opwaardering van ${from, number} of meer",
+    "perCandidate": "${dollars, number} per kandidaat",
+    "welcome": "{count, plural, one {Je eerste kandidaat} other {Je eerste # kandidaten}}",
+    "credits": "$1 = 100 credits, credits verlopen nooit.",
+    "referrals": "Uitnodigingen",
+    "referralsNote": "Deel de link van je bedrijf via het tabblad Uitnodigingen.",
+    "companyReferral": "Een bedrijf dat je hebt uitgenodigd, waardeert voor het eerst op",
+    "each": "elk {count, number} credits",
     "topUp": "Opwaarderen"
   },
   "site": {
@@ -534,22 +483,6 @@
   "legal": {
     "updated": "Laatst bijgewerkt",
     "englishOnly": "Dit document is alleen in het Engels beschikbaar."
-  },
-  "credits": {
-    "noHistory": "Nog niets.",
-    "reasons": {
-      "welcome": "Welkomstcadeau",
-      "topup": "Opwaardering",
-      "kit": "Kit",
-      "candidate": "Kandidaat",
-      "certificate": "Certificaat",
-      "author_share": "Je openbare kit leverde een certificaat op",
-      "chat": "Bericht aan de tutor",
-      "refund": "Terugbetaling",
-      "chargeback": "Betaling teruggeboekt door de bank",
-      "chargeback_reversed": "Terugboeking ongedaan gemaakt",
-      "referral": "Beloning voor uitnodiging"
-    }
   },
   "autoTopUp": {
     "title": "Automatisch opwaarderen",
@@ -572,43 +505,42 @@
     "label": "Genereren in"
   },
   "referral": {
-    "title": "Nodig vrienden uit",
-    "note": "Jullie krijgen allebei {reward, number} credits als je vriend voor het eerst opwaardeert.",
     "companyTitle": "Nodig een ander bedrijf uit",
-    "companyNote": "Beide bedrijven krijgen {reward, number} credits als het nieuwe ${min} of meer opwaardeert.",
+    "companyNote": "Jullie krijgen allebei {reward, number} credits wanneer zij voor het eerst opwaarderen, met welk bedrag ook.",
+    "deletedCompany": "Een verwijderd bedrijf",
+    "credits": "+{count, number} credits",
     "rewarded": "{count, plural, =0 {Nog geen beloningen.} one {Tot nu toe # keer beloond.} other {Tot nu toe # keer beloond.}}"
   },
   "topUp": {
     "title": "Opwaarderen",
     "intro": "Voor $1 krijg je 100 credits, en credits verlopen nooit.",
     "signIn": "Log in om je credits op te waarderen.",
-    "yours": "Persoonlijk saldo",
-    "personal": "Persoonlijke credits",
-    "personalNote": "Voor je kits, de AI-tutor en certificaten.",
     "companies": "Credits van bedrijven",
     "companiesNote": "Voor de kandidaten van elk bedrijf.",
+    "noCompany": "Credits horen bij een bedrijf. Maak eerst je bedrijf aan en waardeer het dan hier op.",
+    "createCompany": "Bedrijf aanmaken",
     "pricing": "Prijzen"
   },
   "landing": {
     "more": "Hoe het werkt",
     "how": {
-      "title": "In drie stappen klaar",
+      "title": "In drie stappen naar je eerste resultaten",
       "paste": {
-        "title": "Plak of beschrijf",
-        "text": "Een vacaturetekst, een lesprogramma of de vaardigheden en technologieën die je wilt leren."
+        "title": "Plak de functieomschrijving",
+        "text": "Elke rol, elke taal.\nprepza haalt eruit wat een kandidaat moet weten en stelt onderwerpen voor."
       },
       "review": {
-        "title": "Bekijk het plan",
-        "text": "AI-agents halen eruit wat telt en stellen onderwerpen voor.\nHoud ze, hernoem ze of pas ze aan."
+        "title": "Controleer de onderwerpen",
+        "text": "Houd ze, hernoem ze of pas ze aan.\nEr worden geen vragen geschreven tot je ze goedkeurt."
       },
-      "practice": {
-        "title": "Oefen tot je zeker bent",
-        "text": "Elk onderwerp krijgt eigen vragen.\nOefen in rondes en zie je voortgang groeien."
+      "invite": {
+        "title": "Nodig kandidaten uit",
+        "text": "Plak een lijst, upload een bestand of deel één link.\nHerinneringen gaan vanzelf de deur uit. Je ziet wie het vak kent, gerangschikt op score."
       }
     },
     "control": {
-      "title": "Jij bepaalt wat je leert",
-      "text": "Er worden geen vragen geschreven tot je de onderwerpen goedkeurt. Vink uit wat je al weet, hernoem een onderwerp, bewerk de subonderwerpen of vertel de AI gewoon wat er anders moet en laat hem de rest doen.",
+      "title": "Jij bepaalt wat er getoetst wordt",
+      "text": "Er worden geen vragen geschreven tot je de onderwerpen goedkeurt. Vink uit wat de rol niet nodig heeft, hernoem een onderwerp, bewerk de subonderwerpen of vertel de AI wat er anders moet.",
       "topics": {
         "design": "Systeemontwerp",
         "sql": "Contentmarketing",
@@ -630,43 +562,9 @@
         "Weergaven meten"
       ]
     },
-    "gaps": {
-      "title": "Oefenen dat je zwakke plekken vindt",
-      "text": "Elke ronde stelt alle vragen van het onderwerp opnieuw, te beginnen met de vragen die je de vorige keer fout had. Vergelijk rondes en zie je zwakke plekken verdwijnen.",
-      "items": {
-        "first": {
-          "question": "Welke metriek laat zien wie een advertentie tot het eind bekeek?",
-          "wrong": "Klikfrequentie",
-          "right": "Voltooiingspercentage"
-        },
-        "second": {
-          "question": "Wat vermindert een cache vooral?",
-          "wrong": "Opslagkosten",
-          "right": "Responstijd"
-        }
-      }
-    },
-    "tutor": {
-      "title": "Een tutor voor elke vraag",
-      "text": "Na elk antwoord zie je meteen de juiste optie. Niet zeker waarom die klopt? Vraag het de AI-tutor en ga zo diep als je wilt.",
-      "question": "Een klant is boos over een te late levering. Wat doe je eerst?",
-      "options": {
-        "first": "Uitleggen waarom het laat is",
-        "second": "Het probleem erkennen en sorry zeggen",
-        "third": "Meteen korting aanbieden",
-        "fourth": "De zaak doorgeven aan een manager"
-      },
-      "ask": "Waarom niet eerst uitleggen?",
-      "answer": "Eerst erkennen: mensen luisteren pas naar redenen als ze zich gehoord voelen."
-    },
-    "proof": {
-      "title": "Weet wanneer je klaar bent",
-      "text": "Elk onderwerp heeft een voortgangsbalk naar zijn certificaat. Haal het, en het onderwerp telt als beheerst.",
-      "again": "Opnieuw beginnen"
-    },
     "quality": {
-      "title": "Vragen die vanzelf beter worden",
-      "text": "Likes, dislikes en meldingen brengen zwakke vragen aan het licht. Een AI-controleur verbetert of vervangt ze automatisch, en eigenaars van een kit kunnen elke vraag zelf opnieuw genereren.",
+      "title": "Vragen die zichzelf verbeteren",
+      "text": "Antwoorden, beoordelingen en meldingen van kandidaten brengen zwakke vragen aan het licht. Een AI-controleur herstelt of vervangt ze automatisch, en je kunt elke vraag zelf opnieuw genereren.",
       "items": {
         "good": "Wat versnelt een database-index?",
         "weak": "Wat is de beste programmeertaal?",
@@ -675,45 +573,89 @@
       "comment": "Het hangt van het project af, dus er is niet één juist antwoord.",
       "list": "Vragen van het onderwerp"
     },
-    "share": {
-      "title": "Deel of publiceer het",
-      "text": "Nodig vrienden of collega's per e-mail uit om je kit samen met je te oefenen, of publiceer hem in de openbare bibliotheek voor iedereen die zich op hetzelfde voorbereidt.",
-      "private": "Privé delen",
-      "public": "Openbaar delen",
-      "browse": "Ontdek de bibliotheek"
+    "try": {
+      "title": "Probeer het voordat je kandidaten het doen",
+      "text": "Doe een gratis oefengesprek voor een vergelijkbare rol, of open je eigen sollicitatiegesprek als kandidaat voordat je iemand uitnodigt.",
+      "browse": "Oefengesprekken bekijken",
+      "topic": "Systeemontwerp",
+      "question": "Wat vermindert een cache vóór een database vooral?",
+      "options": {
+        "a": "De grootte van de database",
+        "b": "Hoe vaak de database wordt gelezen",
+        "c": "Het aantal tabellen",
+        "d": "Hoe lang back-ups duren"
+      },
+      "points": {
+        "practice": "Gratis oefengesprekken voor veel rollen",
+        "preview": "Je eigen sollicitatiegesprek als kandidaat"
+      }
+    },
+    "link": {
+      "title": "Eén link voor je vacature",
+      "text": "Zet de link van het sollicitatiegesprek in je vacature. Iedereen die solliciteert, doet meteen het gesprek en verschijnt in je kandidatenlijst, gerangschikt op score.",
+      "note": "Iedereen met de link kan het sollicitatiegesprek doen.",
+      "points": {
+        "anywhere": "Op vacaturesites, LinkedIn of je eigen website",
+        "off": "Zet hem uit zodra de functie vervuld is"
+      }
     },
     "companies": {
-      "title": "Werven? Test kandidaten eerlijk",
-      "text": "Maak van een vacaturetekst een sollicitatiegesprek met tijdslimiet en nodig kandidaten uit om ze te beoordelen.",
+      "title": "Zie wie het vak kent",
+      "text": "Kandidaten doen het sollicitatiegesprek via je uitnodiging per e-mail. Hun scores komen binnen terwijl ze antwoorden, groen of rood ten opzichte van je slaaggrens.",
       "points": {
         "own": "Unieke vragen voor elke kandidaat",
         "timed": "Een afteltimer bij elke vraag",
         "flags": "Signalen bij haasten, weggaan of kopiëren",
-        "private": "Scores blijven verborgen voor kandidaten"
+        "private": "Kandidaten zien hun scores nooit"
       },
       "candidate": "Kandidaat",
       "score": "Score",
       "rushed": "Overhaaste antwoorden",
       "left": "Pagina verlaten",
-      "start": "Begin met werven"
+      "role": "Backend-ontwikkelaar · slaaggrens {mark}%"
+    },
+    "reports": {
+      "title": "Deel resultaten met één klik",
+      "text": "Een overzichtelijk PDF-rapport voor één kandidaat of de hele lijst. Download het, of stuur het rechtstreeks vanuit prepza naar een hiring manager.",
+      "points": {
+        "pdf": "Eén kandidaat of allemaal",
+        "share": "PDF per e-mail of delen via chatapps"
+      }
+    },
+    "brand": {
+      "title": "Je merk, geverifieerd",
+      "text": "Kandidaten zien je logo van de eerste e-mail tot de laatste vraag, met een vinkje dat laat zien dat je bedrijf echt is.",
+      "role": "Backend-ontwikkelaar",
+      "points": {
+        "email": "Je logo in de uitnodigingsmail",
+        "interview": "In het gesprek dat kandidaten doen",
+        "report": "Op elk PDF-rapport",
+        "verified": "Geverifieerd via het zakelijke e-mailadres van je team"
+      }
+    },
+    "talent": {
+      "title": "Krijg talentsuggesties",
+      "text": "Topscorers uit onze gratis oefengesprekken, voorgesteld voor jouw rol. Gratis.",
+      "suggested": "Voorgesteld voor Backend-ontwikkelaar",
+      "score": "Score",
+      "points": {
+        "free": "Gratis voor jou en voor talenten",
+        "practice": "Gescoord in gesprekken met tijdslimiet",
+        "first": "Alleen hun eerste poging telt",
+        "link": "Ze kiezen zelf om voorgesteld te worden"
+      }
     },
     "languages": {
-      "title": "In jouw taal",
-      "text": "Gebruik prepza in een van de {count} talen. Plak een vacaturetekst in de ene taal en oefen in een andere."
+      "title": "Elke rol, elke taal",
+      "text": "prepza werkt in {count} talen. Plak een functieomschrijving in de ene taal en spreek kandidaten in een andere."
     },
     "pricing": {
-      "title": "Betaal alleen voor wat werkt",
-      "text": "Geen abonnementen of pakketten. Waardeer op wanneer je wilt: credits verlopen nooit en wat mislukt, kost niets.",
-      "see": "Bekijk prijzen",
-      "company": "Acme Inc.",
-      "personal": "Voor je kits en de AI-tutor.",
-      "learner": "Persoonlijke credits"
-    },
-    "referrals": {
-      "title": "Verdien credits als affiliate",
-      "text": "Nodig vrienden of andere bedrijven uit met je link. Als ze voor het eerst opwaarderen, krijgen jullie allebei credits.",
-      "whereLearner": "Je link staat onder {settings} → {referral}.",
-      "whereCompany": "De link van je bedrijf staat onder {hiring} → je bedrijf → {referrals}."
+      "title": "Betaal per kandidaat",
+      "text": "Sollicitatiegesprekken en {free, plural, one {je eerste kandidaat} other {je eerste # kandidaten}} zijn gratis. Daarna betaal je alleen voor kandidaten die antwoorden, zonder abonnement.",
+      "see": "Prijzen bekijken",
+      "perCandidate": "per kandidaat",
+      "base": "Betalen naar gebruik",
+      "volume": "Met een opwaardering vanaf ${from, number}"
     },
     "faq": {
       "title": "Nog vragen?",
@@ -721,8 +663,8 @@
       "read": "Naar veelgestelde vragen"
     },
     "ready": {
-      "title": "Klaar om je voor te bereiden?",
-      "start": "Nu beginnen"
+      "title": "Klaar om je eerste kandidaten te spreken?",
+      "start": "Sollicitatiegesprek maken"
     }
   },
   "faq": {
@@ -749,14 +691,15 @@
   },
   "about": {
     "title": "Over ons",
-    "intro": "prepza helpt je om je met vertrouwen voor te bereiden en geeft bedrijven een eenvoudige, betaalbare manier om kandidaten te testen.",
+    "intro": "prepza helpt bedrijven mensen te vinden die het vak echt kennen: een eerlijk sollicitatiegesprek met tijdslimiet, gemaakt van je functieomschrijving, voor een prijs die elk team kan betalen. En wie zich voorbereidt op een sollicitatiegesprek, kan gratis oefenen.",
     "company": {
       "title": "Waarom we bestaan",
-      "learners": "Je voorbereiden op een sollicitatiegesprek, een examen of een nieuwe vaardigheid zou niet moeten beginnen met urenlang zoeken. Vertel prepza wat je wilt bereiken en het maakt er een helder plan van: de onderwerpen die ertoe doen, oefenvragen voor elk onderwerp en een tutor die elk antwoord uitlegt tot het kwartje valt.",
-      "companies": "Voor bedrijven willen we dat werven eerlijk is en binnen bereik van elk team, niet alleen van de grote. Maak van een vacaturetekst binnen enkele minuten een gesprek met tijdslimiet, geef elke kandidaat eigen vragen en betaal alleen voor kandidaten die het echt afleggen."
+      "problem": "Werving leunt vaak op een cv en een goed gesprek, en allebei kunnen ze misleiden. De beoordelingstools die wel helpen, zijn geprijsd voor grote bedrijven, met jaarabonnementen en kosten per gebruiker, dus de meeste teams doen het zonder.",
+      "approach": "prepza maakt in een paar minuten van een functieomschrijving een sollicitatiegesprek met tijdslimiet, voor elke rol. Elke kandidaat krijgt eigen vragen, je ziet wie het vak kent en waarom, en je betaalt alleen voor kandidaten die het gesprek echt doen.",
+      "practice": "We willen ook dat voorbereiden op een sollicitatiegesprek voor iedereen gratis is. Iedereen kan onze oefengesprekken voor een rol doen, het eigen cijfer en elk juist antwoord zien en opnieuw oefenen, zonder kosten. Wie het goed doet, kan ervoor kiezen om voorgesteld te worden aan bedrijven die voor een vergelijkbare rol werven."
     },
     "founder": {
-      "quote": "Elke keer dat ik me voorbereidde op een sollicitatiegesprek of iets nieuws probeerde te leren, was ik meer tijd kwijt aan zoeken naar goed materiaal dan aan echt leren. Elke site behandelde een stukje, en geen enkele paste bij wat ik nodig had. Dus bouwde ik prepza: de tool die ik zelf had willen hebben, die begint bij jouw doel en je er naartoe leidt. Ik hoop dat het jou de uren bespaart die het mij had bespaard.",
+      "quote": "Goed aannemen zou geen voorrecht moeten zijn van grote bedrijven met grote budgetten. Ik heb prepza gebouwd zodat elk team in een paar minuten van een functieomschrijving een eerlijk sollicitatiegesprek kan maken, kan zien wie het vak echt kent en alleen betaalt voor de kandidaten die het gesprek doen. Ik hoop dat het je helpt sneller de juiste mensen te vinden.",
       "role": "Solo-oprichter van prepza"
     }
   },
@@ -767,7 +710,6 @@
     "kinds": {
       "question_flagged": "{count, plural, one {Een vraag over “{topic}” in “{title}” is gemarkeerd voor controle.} other {# vragen in “{title}” zijn gemarkeerd voor controle.}}",
       "question_fixed": "{count, plural, one {De AI heeft een gemarkeerde vraag over “{topic}” in “{title}” verbeterd.} other {De AI heeft # gemarkeerde vragen in “{title}” verbeterd.}}",
-      "kit_ready": "Je kit “{title}” is klaar.",
       "referral_rewarded": "Iemand die je hebt uitgenodigd heeft opgewaardeerd. Je hebt {credits} credits gekregen.",
       "auto_top_up_charged": "Automatisch opwaarderen heeft {credits} credits toegevoegd.",
       "auto_top_up_failed": "Automatisch opwaarderen kon de kaart niet belasten. Waardeer op zodat je saldo niet opraakt.",
@@ -776,5 +718,77 @@
       "interview_ready": "Het sollicitatiegesprek “{title}” is klaar.",
       "interview_cancelled": "{title, select, none {Een sollicitatiegesprek} other {Het sollicitatiegesprek “{title}”}} is geannuleerd: de controle van de onderwerpen bleef te lang liggen."
     }
+  },
+  "report": {
+    "download": "PDF downloaden",
+    "passed": "geslaagd · slaaggrens {mark}%",
+    "notPassed": "niet geslaagd · slaaggrens {mark}%",
+    "notFinished": "nog niet afgerond",
+    "share": "Rapport delen",
+    "fileName": "Rapport {email}",
+    "failed": "Het PDF-rapport kon niet worden gemaakt.",
+    "shareTitle": "Rapport delen",
+    "recipient": "E-mailadres ontvanger",
+    "send": "<name>PDF</name> versturen",
+    "sent": "Rapport verstuurd naar {email}",
+    "sendFailed": "Het rapport kon niet worden verstuurd.",
+    "orSummary": "Of verstuur via",
+    "via": "Verstuurd vanuit prepza",
+    "candidatesFileName": "Kandidaten {title}",
+    "candidateCount": "{count, plural, one {# kandidaat} other {# kandidaten}}",
+    "passMark": "slaaggrens {mark}%",
+    "progressOf": "{progress}% afgerond"
+  },
+  "practice": {
+    "title": "Gratis sollicitatiegesprek oefenen",
+    "intro": "Oefen voor een rol met een gesprek met tijdslimiet en zie daarna je cijfer en elk juist antwoord. Kosteloos.",
+    "about": "Oefengesprek met tijdslimiet. Als je klaar bent, zie je je cijfer en elk juist antwoord. Privé en gratis.",
+    "pageTitle": "{title}: gratis oefengesprek",
+    "pageDescription": "Een gratis oefengesprek op {level}-niveau voor {title}: {count, plural, one {# onderwerp} other {# onderwerpen}}, met tijdslimiet, met je cijfer en elk juist antwoord achteraf. Oefening, geen echt sollicitatiegesprek.",
+    "start": "Oefenen starten",
+    "again": "Opnieuw oefenen",
+    "continue": "Doorgaan",
+    "history": "Je rondes",
+    "results": "Oefenresultaten",
+    "grade": "van de vragen goed",
+    "notFinished": "niet afgerond",
+    "noRounds": "Nog geen rondes.",
+    "signIn": "Log in om je oefenrondes te zien.",
+    "startFailed": "Het oefenen kon niet worden gestart. Probeer het opnieuw.",
+    "gradeLabel": "Cijfer",
+    "questions": "{count, plural, one {# vraag} other {# vragen}}",
+    "progressLabel": "Voortgang",
+    "answeredLabel": "vragen beantwoord"
+  },
+  "suggest": {
+    "title": "Word voorgesteld aan bedrijven",
+    "consent": "Optioneel. Bedrijven die voor vergelijkbare rollen werven, kunnen je naam, LinkedIn en score van je eerste ronde zien. Wijzig of trek dit op elk moment in via instellingen.",
+    "link": "LinkedIn-link",
+    "share": "Delen",
+    "saved": "Je kunt nu aan bedrijven worden voorgesteld.",
+    "withdraw": "Intrekken",
+    "withdrawn": "Je wordt niet meer aan bedrijven voorgesteld.",
+    "invalid": "Gebruik de link naar je LinkedIn-profiel, zoals https://www.linkedin.com/in/your-name",
+    "failed": "Opslaan lukte niet. Probeer het opnieuw.",
+    "shareAndStart": "Akkoord en starten",
+    "startWithout": "Niet akkoord en starten"
+  },
+  "talents": {
+    "about": "Talenten die het goed deden bij het oefenen van een gesprek voor een rol als deze, en die akkoord gingen om voorgesteld te worden.",
+    "empty": "Nog geen voorgestelde talenten.",
+    "score": "Score",
+    "hide": "Verbergen",
+    "hideFailed": "Het talent kon niet worden verborgen. Probeer het opnieuw."
+  },
+  "verify": {
+    "verify": "Verifiëren",
+    "verified": "Geverifieerd: {domain}",
+    "title": "Bedrijf verifiëren",
+    "text": "Voer de website van het bedrijf in. Het is geverifieerd zodra een eigenaar of beheerder inlogt met een zakelijk e-mailadres daarop, zoals you@acme.com: meteen, als jij dat bent.",
+    "website": "Website van het bedrijf",
+    "save": "Opslaan",
+    "done": "Geverifieerd: {domain}",
+    "pending": "Opgeslagen. Geverifieerd zodra een eigenaar of beheerder inlogt met een e-mailadres op {domain}.",
+    "failed": "De website kon niet worden opgeslagen."
   }
 }

@@ -1,8 +1,10 @@
 import uuid
+from datetime import UTC, datetime, timedelta
 
 from app.constants.invites import InviteStatus
 from app.helpers.notifications import invite_undelivered
-from app.storage import companies, interviews, invites
+from app.schemas.interviews import InterviewSettings
+from app.storage import companies, interviews, invites, reminders
 
 
 async def interview():
@@ -90,3 +92,124 @@ def test_only_interviews_without_a_candidate_count_as_waiting(run):
 
     # Two waiting; an invite takes one out; revoking the invite puts it back.
     assert run(scenario()) == (2, 1, 2)
+
+
+def test_a_link_finds_its_test_and_makes_one_invite_per_email_without_an_email(run):
+    async def scenario():
+        found = await interview()
+        await interviews.set_link(found.id, "link-code")
+        linked = await interviews.get_by_link("link-code")
+        first = await invites.for_link(found.id, "Ann@Example.com")
+        again = await invites.for_link(found.id, "ann@example.com")
+        await interviews.set_link(found.id, None)
+
+        return (
+            linked.id == found.id,
+            first.id == again.id,
+            first,
+            await interviews.get_by_link("link-code"),
+        )
+
+    same_test, same_invite, invite, after_off = run(scenario())
+
+    assert same_test and same_invite
+    assert (invite.email, invite.status) == ("ann@example.com", "invited")
+    # Turned off, the link finds nothing.
+    assert after_off is None
+
+
+def test_marking_a_test_hired_turns_its_link_off(run):
+    async def scenario():
+        found = await interview()
+        await interviews.set_link(found.id, "hired-code")
+        await interviews.update_settings(found.id, InterviewSettings(hired=False))
+        kept = await interviews.get_by_link("hired-code")
+        await interviews.update_settings(found.id, InterviewSettings(hired=True))
+
+        return kept, await interviews.get_by_link("hired-code")
+
+    kept, after_hired = run(scenario())
+
+    assert kept is not None
+    assert after_hired is None
+
+
+def test_candidates_are_found_by_part_of_their_email_and_by_status(run):
+    async def scenario():
+        found = await interview()
+
+        for email in ("ann_lee@example.com", "annlee@example.com", "bob@example.com"):
+            await invites.upsert(found.id, email, "Backend", "Acme", "en")
+
+        bob = await invites.for_link(found.id, "bob@example.com")
+        await invites.set_status([bob.id], InviteStatus.FINISHED)
+
+        def emails(rows):
+            return sorted(row.email for row in rows)
+
+        return (
+            emails(await invites.list_all_for_interview(found.id, "ANN")),
+            emails(await invites.list_for_interview(found.id, 0, 10, "ann_")),
+            emails(await invites.list_for_interview(found.id, 0, 10, "", InviteStatus.FINISHED)),
+        )
+
+    by_text, underscore, finished = run(scenario())
+
+    assert by_text == ["ann_lee@example.com", "annlee@example.com"]
+    # An underscore is matched as typed, not as any character.
+    assert underscore == ["ann_lee@example.com"]
+    assert finished == ["bob@example.com"]
+
+
+def test_a_candidate_who_has_not_started_is_reminded_once_until_invited_again(run):
+    async def scenario():
+        found = await interview()
+        invite = await invites.upsert(found.id, "rita@example.com", "Backend", "Acme", "en")
+        later = datetime.now(UTC) + timedelta(seconds=1)
+        first = await reminders.remind_unstarted(later)
+        again = await reminders.remind_unstarted(later)
+        await invites.upsert(found.id, "rita@example.com", "Backend", "Acme", "en")
+        after_resend = await reminders.remind_unstarted(datetime.now(UTC) + timedelta(seconds=1))
+
+        return invite.id, first, again, after_resend
+
+    _, first, again, after_resend = run(scenario())
+
+    # Other tests' invites may be reminded too: at least this one, then none, then this one.
+    assert first >= 1
+    assert again == 0
+    assert after_resend == 1
+
+
+def test_a_logo_is_saved_served_and_removed_with_a_new_address_each_time(run):
+    png = b"\x89PNG\r\n\x1a\n" + b"0" * 20
+
+    async def scenario():
+        company = await companies.create(f"Logo {uuid.uuid4()}", "owner", "owner@example.com")
+        await companies.set_logo(company.id, png, "image/png")
+        saved = await companies.get_logo(company.id)
+        version = (await companies.get(company.id)).logo_version
+        await companies.set_logo(company.id, None, None)
+
+        return saved, version, await companies.get_logo(company.id)
+
+    saved, version, removed = run(scenario())
+
+    assert saved == (png, "image/png")
+    assert version == 1
+    assert removed is None
+
+
+def test_a_company_cant_take_another_companys_name_in_any_case(run):
+    async def scenario():
+        word = uuid.uuid4().hex[:8]
+        first = await companies.create(f"First {word}", "owner", "owner@example.com")
+        second = await companies.create(f"Second {word}", "owner", "owner@example.com")
+        taken = await companies.rename(second.id, f"FIRST {word}")
+        free = await companies.rename(second.id, f"Third {word}")
+
+        return first, taken, free, (await companies.get(second.id)).name, word
+
+    _, taken, free, name, word = run(scenario())
+
+    assert (taken, free, name) == (False, True, f"Third {word}")

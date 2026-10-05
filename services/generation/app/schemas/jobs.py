@@ -14,3 +14,4 @@ class RunGeneration(BaseModel):
 class VerifyQuestion(BaseModel):
     question_id: UUID
     flag: QualityFlag
+    now: bool = False

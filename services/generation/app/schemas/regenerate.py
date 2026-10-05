@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 class QuestionContext(BaseModel):
     set_id: UUID
+    # The set's kind in library: an interview or a template.
     kind: str
     owner_id: str
     level: str

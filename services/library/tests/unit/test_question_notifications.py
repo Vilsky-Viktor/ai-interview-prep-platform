@@ -19,7 +19,7 @@ OPTIONS = [
 TOPIC = "Double-entry bookkeeping"
 
 
-def kit(owner_type="user", owner_id="u1"):
+def kit(owner_type="company", owner_id="u1"):
     return SimpleNamespace(id=SET_ID, owner_type=owner_type, owner_id=owner_id, title="Accounting")
 
 
@@ -27,7 +27,18 @@ def run_review(monkeypatch, previous_flag, question_set):
     """Reviews a question with two wrong-answer reports; returns saved notices and flushes."""
     saved, flushes = [], []
     question = SimpleNamespace(text="Which entry records a sale?", options=OPTIONS)
-    stats = SimpleNamespace(answers=0, correct=0, option_picks={}, flag=previous_flag, kept=False)
+    stats = SimpleNamespace(
+        strong_answers=0,
+        strong_correct=0,
+        weak_answers=0,
+        weak_correct=0,
+        timeouts=0,
+        answers=0,
+        correct=0,
+        option_picks={},
+        flag=previous_flag,
+        kept=False,
+    )
 
     async def fake_load(_question_id):
         return question, stats, {"wrong_answer": 2}, 0, 0
@@ -57,21 +68,6 @@ def run_review(monkeypatch, previous_flag, question_set):
     asyncio.run(review(QUESTION_ID))
 
     return saved, flushes
-
-
-def test_a_newly_flagged_kit_question_notifies_its_learner(monkeypatch):
-    saved, flushes = run_review(monkeypatch, None, kit())
-
-    assert saved == [
-        {
-            "recipient": "user",
-            "recipient_id": "u1",
-            "kind": "question_flagged",
-            "link": f"/preparations/{SET_ID}",
-            "data": {"title": "Accounting", "topic": TOPIC},
-        }
-    ]
-    assert flushes == [True]
 
 
 def test_a_newly_flagged_interview_question_notifies_the_company(monkeypatch):
@@ -131,10 +127,10 @@ def test_fixing_a_flagged_question_notifies_its_owner(monkeypatch):
         (
             NOTIFICATION_REQUESTED,
             {
-                "recipient": "user",
+                "recipient": "company",
                 "recipient_id": "u1",
                 "kind": "question_fixed",
-                "link": f"/preparations/{SET_ID}",
+                "link": "/company/u1/interviews",
                 "data": {"title": "Accounting", "topic": TOPIC},
             },
         )

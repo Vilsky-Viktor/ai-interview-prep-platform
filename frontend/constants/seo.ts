@@ -3,30 +3,29 @@ export const SITE_NAME = "prepza."
 // Private areas search engines shouldn't crawl; they need sign-in or a personal link anyway.
 export const PRIVATE_PATHS = [
   "/api/",
+  "/apply",
   "/company",
   "/generate",
   "/invite",
   "/join",
   "/monitoring",
-  "/rounds",
+  "/practice/history",
+  "/practice/rounds",
+  "/practice/*/start",
   "/sessions",
   "/settings",
+  "/superadmin",
   "/top-up",
-  "/share",
 ]
 
-// Public pages listed in the sitemap, besides public preparations.
+// Public pages listed in the sitemap.
 export const PUBLIC_PATHS = [
   "/",
-  "/library",
   "/pricing",
   "/privacy",
   "/terms",
   "/faq",
   "/about",
   "/contact",
+  "/practice",
 ]
-
-// Public preparations in the sitemap, read a page of 100 at a time.
-export const SITEMAP_PREPARATIONS = 1000
-export const SITEMAP_PAGE = 100

@@ -2,13 +2,7 @@ from sqlalchemy import select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.constants.credits import (
-    WELCOME_COMPANY,
-    WELCOME_USER,
-    GiftKind,
-    HoldStatus,
-    Reason,
-)
+from app.constants.credits import WELCOME_COMPANY, WELCOME_GIFT, HoldStatus, Reason
 from app.constants.products import OwnerType
 from app.helpers.gifts import gift_key
 from app.models.billing import Entry, Gift, Hold, Wallet
@@ -32,49 +26,31 @@ async def wallets(owner_type: str, owner_ids: list[str]) -> dict[str, Wallet]:
         return {row.owner_id: row for row in await session.scalars(query)}
 
 
-async def history(owner_type: str, owner_id: str, offset: int, limit: int) -> list[Entry]:
-    """Every gift, top-up and charge, newest first."""
-    query = (
-        select(Entry)
-        .where(Entry.owner_type == owner_type, Entry.owner_id == owner_id)
-        .order_by(Entry.created_at.desc(), Entry.id)
-        .offset(offset)
-        .limit(limit)
-    )
-
+async def welcome_company(company_id: str, owner_email: str) -> bool:
+    """Creates the company's wallet with the welcome credits, once per owner's email: a person's
+    first company. Deleting and creating one again doesn't repeat it. True when the gift is new."""
     async with Session() as session:
-        return list(await session.scalars(query))
-
-
-async def welcome(owner_type: str, owner_id: str, kind: str, email: str, amount: int) -> bool:
-    """Creates the wallet with the welcome credits, once per email and
-    kind: a learner's first account, a person's first company. Deleting and signing up again
-    doesn't repeat it. True when the gift is new."""
-    async with Session() as session:
-        await ensure(session, owner_type, owner_id)
+        await ensure(session, OwnerType.COMPANY, company_id)
         new = await session.scalar(
             insert(Gift)
-            .values(key=gift_key(kind, email))
+            .values(key=gift_key(WELCOME_GIFT, owner_email))
             .on_conflict_do_nothing()
             .returning(Gift.key)
         )
 
         if new:
-            await add(session, owner_type, owner_id, amount, f"welcome:{owner_id}", Reason.WELCOME)
+            await add(
+                session,
+                OwnerType.COMPANY,
+                company_id,
+                WELCOME_COMPANY,
+                f"welcome:{company_id}",
+                Reason.WELCOME,
+            )
 
         await session.commit()
 
         return bool(new)
-
-
-async def welcome_user(user_id: str, email: str) -> bool:
-    return await welcome(OwnerType.USER, user_id, GiftKind.USER, email, WELCOME_USER)
-
-
-async def welcome_company(company_id: str, owner_email: str) -> bool:
-    return await welcome(
-        OwnerType.COMPANY, company_id, GiftKind.COMPANY, owner_email, WELCOME_COMPANY
-    )
 
 
 async def reserve(owner_type: str, owner_id: str, amount: int, key: str, reason: str) -> bool:
@@ -148,50 +124,6 @@ async def release(key: str) -> None:
         await session.commit()
 
 
-async def spend(
-    owner_type: str,
-    owner_id: str,
-    amount: int,
-    key: str,
-    reason: str,
-    note: str | None = None,
-    share: tuple[str, int] | None = None,
-) -> bool:
-    """Charges right away, for what is delivered at once (a chat turn, a certificate). Safe to
-    repeat with the same key. `share` gives (user id, credits) of it to another learner, the
-    author of a public kit, in the same transaction. False when the balance is too low."""
-    async with Session() as session:
-        if await session.scalar(select(Entry.id).where(Entry.key == key)):
-            return True
-
-        await ensure(session, owner_type, owner_id)
-        row = await session.get(Wallet, (owner_type, owner_id), with_for_update=True)
-
-        if row.balance - row.reserved < amount:
-            await session.commit()
-
-            return False
-
-        await add(session, owner_type, owner_id, -amount, key, reason, note)
-
-        if share:
-            author_id, credits = share
-            await ensure(session, OwnerType.USER, author_id)
-            await add(
-                session,
-                OwnerType.USER,
-                author_id,
-                credits,
-                f"{key}:share",
-                Reason.AUTHOR_SHARE,
-                note,
-            )
-
-        await session.commit()
-
-        return True
-
-
 async def adjust(owner_type: str, owner_id: str, amount: int, key: str, reason: str) -> None:
     """Moves credits whatever the balance: a refund or chargeback may leave it negative."""
     async with Session() as session:
@@ -216,7 +148,6 @@ async def add(
     amount: int,
     key: str,
     reason: str,
-    note: str | None = None,
 ) -> bool:
     """Records one movement and applies it to the balance, once per key."""
     new = await session.scalar(
@@ -227,7 +158,6 @@ async def add(
             owner_id=owner_id,
             amount=amount,
             reason=reason,
-            note=note,
         )
         .on_conflict_do_nothing()
         .returning(Entry.id)

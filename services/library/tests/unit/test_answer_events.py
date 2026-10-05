@@ -35,6 +35,16 @@ def emulator(monkeypatch):
     monkeypatch.setenv("GOOGLE_CLOUD_PROJECT", "demo-test")
 
 
+@pytest.fixture(autouse=True)
+def no_source(monkeypatch):
+    """Questions aren't copies of a bank question unless a test says so."""
+
+    async def source_of(_question_id):
+        return None
+
+    monkeypatch.setattr(quality, "source_of", source_of)
+
+
 def test_recorded_answer_goes_into_the_question_statistics(client, monkeypatch):
     stored = []
 
@@ -72,3 +82,21 @@ def test_pushes_without_a_google_token_are_refused_in_google_cloud(client, monke
     response = client.post("/internal/events", json=push("answer.recorded", RECORDED))
 
     assert response.status_code == 401
+
+
+def test_an_answer_to_a_copy_counts_for_its_bank_original_too(client, monkeypatch):
+    original = uuid.uuid4()
+    stored = []
+
+    async def source_of(_question_id):
+        return original
+
+    async def record_answer(question_id, question_text, option, correct):
+        stored.append(question_id)
+
+    monkeypatch.setattr(quality, "source_of", source_of)
+    monkeypatch.setattr(quality, "record_answer", record_answer)
+
+    client.post("/internal/events", json=push("answer.recorded", RECORDED))
+
+    assert stored == [QUESTION_ID, original]

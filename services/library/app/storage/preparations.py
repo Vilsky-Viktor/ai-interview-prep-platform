@@ -3,21 +3,20 @@ import uuid
 from prepza_common import outbox
 from prepza_common.notifications import NOTIFICATION_REQUESTED, NotificationKind
 from prepza_common.sets import PreparationIn
-from sqlalchemy import Row, delete, func, select, update
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.orm import selectinload
 
-from app.constants.sets import OwnerType, SetKind, Visibility
+from app.constants.sets import OwnerType, SetKind
 from app.helpers.notifications import question_notification
 from app.models.outbox import OutboxEvent
 from app.models.quality import QuestionStats
 from app.models.sets import Question, QuestionSet, Topic
-from app.models.sharing import JoinedPreparation
 from app.storage import quality, reuse
 from app.storage.db import Session
-from app.storage.stats import summary_columns
 
 
-def _topics(preparation: PreparationIn) -> list[Topic]:
+def new_topics(preparation: PreparationIn) -> list[Topic]:
+    """The topics and questions of a generated set, ready to save."""
     return [
         Topic(
             position=ti,
@@ -28,6 +27,7 @@ def _topics(preparation: PreparationIn) -> list[Topic]:
                     position=qi,
                     text=question.text,
                     options=[option.model_dump() for option in question.options],
+                    source_question_id=question.source_id,
                 )
                 for qi, question in enumerate(topic.questions)
             ],
@@ -43,38 +43,9 @@ async def find_by_generation(generation_id: uuid.UUID) -> uuid.UUID | None:
         return await session.scalar(query)
 
 
-async def create(preparation: PreparationIn) -> uuid.UUID:
-    question_set = QuestionSet(
-        generation_id=preparation.generation_id,
-        kind=SetKind.PREPARATION,
-        owner_type=OwnerType.USER,
-        owner_id=preparation.owner_uid,
-        title=preparation.title,
-        source_text=preparation.source_text,
-        level=preparation.level,
-        language=preparation.language,
-        requirements=preparation.requirements,
-        topics=_topics(preparation),
-        topic_count=len(preparation.topics),
-        join_count=1,
-    )
-
-    async with Session() as session:
-        session.add(question_set)
-        await session.flush()
-        session.add(JoinedPreparation(set_id=question_set.id, user_id=preparation.owner_uid))
-        await reuse.save_embeddings(
-            session,
-            [topic.id for topic in question_set.topics],
-            [topic.embedding for topic in preparation.topics],
-        )
-        await session.commit()
-
-    return question_set.id
-
-
 async def create_interview(payload: PreparationIn) -> uuid.UUID:
-    """Company interviews are always private."""
+    """Company interviews are always private. Their topics' embeddings are kept to find the
+    templates for similar roles, whose talents a company is suggested."""
     question_set = QuestionSet(
         generation_id=payload.generation_id,
         kind=SetKind.INTERVIEW,
@@ -85,13 +56,18 @@ async def create_interview(payload: PreparationIn) -> uuid.UUID:
         level=payload.level,
         language=payload.language,
         requirements=payload.requirements,
-        visibility=Visibility.PRIVATE,
-        topics=_topics(payload),
+        topics=new_topics(payload),
         topic_count=len(payload.topics),
     )
 
     async with Session() as session:
         session.add(question_set)
+        await session.flush()
+        await reuse.save_embeddings(
+            session,
+            [topic.id for topic in question_set.topics],
+            [topic.embedding for topic in payload.topics],
+        )
         await session.commit()
 
     return question_set.id
@@ -109,45 +85,9 @@ async def get_content(set_id: uuid.UUID) -> QuestionSet | None:
         return await session.scalar(query)
 
 
-async def question_texts(set_id: uuid.UUID) -> list[tuple[uuid.UUID, str]]:
-    """Id and text of every question in a set, without answers or options."""
-    query = (
-        select(Question.id, Question.text)
-        .join(Topic, Topic.id == Question.topic_id)
-        .where(Topic.set_id == set_id)
-    )
-
-    async with Session() as session:
-        return [(question_id, text) for question_id, text in await session.execute(query)]
-
-
-async def list_mine(user_id: str, offset: int, limit: int) -> list[Row]:
-    """Preparations the user owns or joined (owners are joined to their own), newest first."""
-    query = (
-        select(QuestionSet, *summary_columns())
-        .join(JoinedPreparation, JoinedPreparation.set_id == QuestionSet.id)
-        .where(JoinedPreparation.user_id == user_id, QuestionSet.kind == SetKind.PREPARATION)
-        .order_by(QuestionSet.created_at.desc(), QuestionSet.id)
-        .offset(offset)
-        .limit(limit)
-    )
-
-    async with Session() as session:
-        return list(await session.execute(query))
-
-
 async def get(set_id: uuid.UUID) -> QuestionSet | None:
     async with Session() as session:
         return await session.get(QuestionSet, set_id)
-
-
-async def get_summary(set_id: uuid.UUID) -> Row | None:
-    query = select(QuestionSet, *summary_columns()).where(
-        QuestionSet.id == set_id, QuestionSet.kind == SetKind.PREPARATION
-    )
-
-    async with Session() as session:
-        return (await session.execute(query)).first()
 
 
 async def get_topics(set_id: uuid.UUID) -> list[tuple[Topic, int]]:
@@ -161,29 +101,17 @@ async def get_topics(set_id: uuid.UUID) -> list[tuple[Topic, int]]:
         return [tuple(row) for row in await session.execute(query)]
 
 
-async def get_topic_with_questions(topic_id: uuid.UUID) -> tuple[QuestionSet, Topic] | None:
-    query = (
-        select(QuestionSet, Topic)
-        .join(Topic, Topic.set_id == QuestionSet.id)
-        .where(Topic.id == topic_id)
-        .options(selectinload(Topic.questions))
-    )
-
-    async with Session() as session:
-        row = (await session.execute(query)).first()
-
-        return tuple(row) if row else None
-
-
 async def get_topic_with_question_texts(
     topic_id: uuid.UUID,
 ) -> tuple[QuestionSet, Topic] | None:
-    """Like get_topic_with_questions, but its questions carry only their id and text."""
+    """A topic's set and its questions, with only what managing them needs."""
     query = (
         select(QuestionSet, Topic)
         .join(Topic, Topic.set_id == QuestionSet.id)
         .where(Topic.id == topic_id)
-        .options(selectinload(Topic.questions).load_only(Question.id, Question.text))
+        .options(
+            selectinload(Topic.questions).load_only(Question.id, Question.text, Question.options)
+        )
     )
 
     async with Session() as session:
@@ -269,14 +197,6 @@ async def set_title(set_id: uuid.UUID, title: str) -> None:
     async with Session() as session:
         await session.execute(
             update(QuestionSet).where(QuestionSet.id == set_id).values(title=title)
-        )
-        await session.commit()
-
-
-async def set_visibility(set_id: uuid.UUID, visibility: str) -> None:
-    async with Session() as session:
-        await session.execute(
-            update(QuestionSet).where(QuestionSet.id == set_id).values(visibility=visibility)
         )
         await session.commit()
 

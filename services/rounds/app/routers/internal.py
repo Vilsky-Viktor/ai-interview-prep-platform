@@ -5,15 +5,16 @@ from fastapi import APIRouter, HTTPException, status
 from app.constants.integrity import IntegritySignal
 from app.helpers.review import add_signals, build_review
 from app.helpers.sessions import session_out
+from app.helpers.talents import suggestions
 from app.schemas.sessions import (
     InviteScoresIn,
-    MasteredCountsIn,
     ScorecardSession,
     SessionOut,
     SessionsCreate,
 )
+from app.schemas.talents import SuggestedTalent, SuggestionsIn
 from app.service_auth import ServiceCaller
-from app.storage import certificates, rounds, sessions
+from app.storage import sessions, talents
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -31,6 +32,7 @@ async def create_sessions(body: SessionsCreate, caller: ServiceCaller) -> list[S
         body.candidate_invite_id,
         body.topics,
         body.question_seconds,
+        body.preview,
     )
 
     return [session_out(row) for row in rows]
@@ -42,24 +44,7 @@ async def invite_scores(
 ) -> dict[str, dict[str, int | None]]:
     found = await sessions.scores_for_invites(body.invite_ids)
 
-    return {
-        str(invite_id): {"progress": progress, "grade": grade, "finished": finished}
-        for invite_id, (progress, grade, finished) in found.items()
-    }
-
-
-@router.post("/mastered-counts")
-async def mastered_counts(body: MasteredCountsIn, caller: ServiceCaller) -> dict[str, int]:
-    """Topics with a certificate per preparation, so library can tell which ones are done."""
-    found = await certificates.mastered_counts(body.user_id, body.preparation_ids)
-
-    return {str(preparation_id): count for preparation_id, count in found.items()}
-
-
-@router.delete("/preparations/{preparation_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_preparation_data(preparation_id: UUID, caller: ServiceCaller) -> None:
-    """Called by library before it deletes a preparation; safe to repeat."""
-    await rounds.remove_for_preparation(preparation_id)
+    return {str(invite_id): totals for invite_id, totals in found.items()}
 
 
 @router.delete("/interviews/{interview_set_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -95,3 +80,12 @@ async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[Score
         )
 
     return cards
+
+
+@router.post("/suggestions")
+async def talent_suggestions(body: SuggestionsIn, caller: ServiceCaller) -> list[SuggestedTalent]:
+    """For a company's test: talents who agreed to be suggested and did well in their first
+    round on one of these templates (the ones for similar roles, closest first)."""
+    rows, links = await talents.practice_of_consenting(body.template_ids)
+
+    return suggestions(rows, links, body.template_ids)

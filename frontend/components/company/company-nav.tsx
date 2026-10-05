@@ -1,16 +1,15 @@
 "use client"
 
-import Link from "next/link"
 import { useTranslations } from "next-intl"
 
-import { Button } from "@/components/ui/button"
+import { TabNav } from "@/components/tab-nav"
 
 export function CompanyNav({
   companyId,
   current,
 }: {
   companyId: string
-  current: "interviews" | "members" | "referrals"
+  current: "interviews" | "templates" | "members" | "referrals"
 }) {
   const t = useTranslations("company")
   const items = [
@@ -18,6 +17,11 @@ export function CompanyNav({
       id: "interviews",
       href: `/company/${companyId}/interviews`,
       label: t("interviews"),
+    },
+    {
+      id: "templates",
+      href: `/company/${companyId}/templates`,
+      label: t("templates"),
     },
     {
       id: "members",
@@ -31,20 +35,5 @@ export function CompanyNav({
     },
   ] as const
 
-  return (
-    <nav className="flex w-full rounded-lg border p-2">
-      {items.map((item) => (
-        <Button
-          key={item.id}
-          variant={item.id === current ? "secondary" : "ghost"}
-          className="h-12 flex-1 px-6 text-base"
-          nativeButton={false}
-          render={<Link href={item.href} />}
-          aria-current={item.id === current ? "page" : undefined}
-        >
-          {item.label}
-        </Button>
-      ))}
-    </nav>
-  )
+  return <TabNav items={items} current={current} />
 }

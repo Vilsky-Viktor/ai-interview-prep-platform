@@ -3,9 +3,14 @@ from app.constants.quality import (
     DEAD_OPTION_SHARE,
     DISLIKES_TO_FLAG,
     MIN_ANSWERS,
+    MIN_GROUP_ANSWERS,
+    MIN_SEPARATION,
     REPORTS_TO_FLAG,
+    STRONG_SCORE,
     TOO_EASY_RATE,
     TOO_HARD_RATE,
+    TOO_SLOW_SHARE,
+    WEAK_SCORE,
     QualityFlag,
 )
 
@@ -27,6 +32,35 @@ def dead_option(options: list[dict], answers: int, option_picks: dict[str, int])
     )
 
 
+def score_group(final_score: int | None) -> str | None:
+    """A candidate's group on a topic by their score: strong, weak, or None in between."""
+    if final_score is None:
+        return None
+
+    if final_score >= STRONG_SCORE:
+        return "strong"
+
+    return "weak" if final_score <= WEAK_SCORE else None
+
+
+def no_separation(stats) -> bool:
+    """Strong and weak candidates get it right about as often: it says nothing about them."""
+    if stats.strong_answers < MIN_GROUP_ANSWERS or stats.weak_answers < MIN_GROUP_ANSWERS:
+        return False
+
+    strong = stats.strong_correct / stats.strong_answers
+    weak = stats.weak_correct / stats.weak_answers
+
+    return strong - weak < MIN_SEPARATION
+
+
+def too_slow(stats) -> bool:
+    """Time runs out on it too often: too long to read in its time."""
+    shown = stats.answers + stats.timeouts
+
+    return shown >= MIN_ANSWERS and stats.timeouts >= shown * TOO_SLOW_SHARE
+
+
 def flag_for(
     options: list[dict],
     answers: int,
@@ -35,8 +69,11 @@ def flag_for(
     reports: dict[str, int],
     likes: int,
     dislikes: int,
+    unhelpful: bool = False,
 ) -> QualityFlag | None:
-    """The most serious problem the answers and feedback show, or None."""
+    """The most serious problem the answers and feedback show, or None. `unhelpful`: it doesn't
+    separate strong candidates from weak ones, or it's too slow to read (no_separation,
+    too_slow); both ask for a rewrite."""
     answered = answers >= MIN_ANSWERS
 
     if reports.get(ReportReason.WRONG_ANSWER, 0) >= REPORTS_TO_FLAG or (
@@ -49,6 +86,7 @@ def flag_for(
         or reports.get(ReportReason.OFF_TOPIC, 0) >= REPORTS_TO_FLAG
         or (dislikes >= DISLIKES_TO_FLAG and dislikes >= 2 * likes)
         or (answered and correct <= answers * TOO_HARD_RATE)
+        or unhelpful
     ):
         return QualityFlag.REWRITE
 

@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import Annotated
 from uuid import UUID
 
@@ -15,7 +14,6 @@ from pydantic import (
 
 from app.config.settings import settings
 from app.constants.generation import (
-    GOAL_PREVIEW_LENGTH,
     MAX_GOAL_LENGTH,
     MAX_INSTRUCTIONS_LENGTH,
     MAX_TOPIC_NAME_LENGTH,
@@ -37,22 +35,12 @@ class InterviewGenerationCreate(BaseModel):
     generate_in: Language | None = None
 
 
-class GenerationCreate(BaseModel):
+class TemplateGenerationCreate(BaseModel):
+    """An admin's template, from a role description."""
+
     text: str = Field(min_length=1, max_length=MAX_GOAL_LENGTH)
-    kind: GenerationKind = GenerationKind.PREPARATION
-    company_id: UUID | None = None
-    # The language the learner chose to generate in; none means the text's own.
+    # The language to generate in; none means the text's own.
     generate_in: Language | None = None
-
-    @model_validator(mode="after")
-    def interview_needs_company(self):
-        if self.kind == GenerationKind.INTERVIEW and self.company_id is None:
-            raise ValueError("company_id is required for an interview")
-
-        if self.kind == GenerationKind.PREPARATION and self.company_id is not None:
-            raise ValueError("company_id is only used for interviews")
-
-        return self
 
 
 TopicName = Annotated[
@@ -123,24 +111,3 @@ class GenerationOut(BaseModel):
     def max_subtopics(self) -> int:
         """How many subtopics a topic may have when edited by hand during review."""
         return settings.max_subtopics
-
-
-class GenerationSummary(BaseModel):
-    """An unfinished generation in a list, with the start of the goal it was made from."""
-
-    id: UUID
-    status: Status
-    preview: str
-    created_at: datetime
-
-    @classmethod
-    def of(cls, generation) -> "GenerationSummary":
-        text = " ".join(generation.text.split())
-        preview = text[:GOAL_PREVIEW_LENGTH] + ("…" if len(text) > GOAL_PREVIEW_LENGTH else "")
-
-        return cls(
-            id=generation.id,
-            status=generation.status,
-            preview=preview,
-            created_at=generation.created_at,
-        )

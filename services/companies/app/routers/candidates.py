@@ -1,25 +1,35 @@
+from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Query, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
-from prepza_common.rate_limit import hit_emails
 
-from app.config.settings import settings
 from app.constants.invites import (
+    MAX_SEARCH_LENGTH,
     NOT_STARTED,
+    RESULT_FILTERS,
+    CandidateFilter,
     CandidateSort,
     InviteStatus,
 )
-from app.helpers.candidates import by_grade, candidate_key
+from app.helpers.candidates import (
+    by_grade,
+    candidate_key,
+    candidate_out,
+    flagged,
+    passed,
+    section_passed,
+)
 from app.helpers.interviews import (
     attach_set,
     interview_title,
 )
+from app.helpers.logos import logo_path
 from app.integrations import billing, rounds
-from app.integrations.redis import get_redis
-from app.schemas.invites import CandidateIn, CandidateOut
+from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateOut
+from app.services import candidate_invites
 from app.services import outbox as outbox_service
 from app.services.access import require_company
 from app.storage import interviews, invites
@@ -43,42 +53,18 @@ async def invite_candidate(
     if interview.set_id is None:
         raise HTTPException(status.HTTP_409_CONFLICT, "Interview is still being generated")
 
-    email = str(body.email).lower()
-
-    # Email limits first, so a refused invite never leaves credits set aside.
-    await hit_emails(
-        get_redis(),
-        user.uid,
-        f"{interview.id}:{email}",
-        settings.email_hourly_limit,
-        settings.email_daily_limit,
-        settings.email_recipient_daily_limit,
-    )
-    current = await invites.status_of(interview.id, email)
-    key = candidate_key(interview.id, email)
-    # A candidate who hasn't started has credits set aside: new, or sent again after expiring.
-    if current is None or current in NOT_STARTED:
-        await billing.hold_candidate(company.id, key)
-
-    title = await interview_title(interview) or "an interview"
-
-    try:
-        invite = await invites.upsert(interview.id, email, title, company.name, interview.language)
-    except Exception:
-        # A brand-new invite that couldn't be saved gives its credits back.
-        if current is None:
-            await billing.release_candidate(key)
-
-        raise
-
+    invite = await candidate_invites.invite(interview, company, user, str(body.email))
     await outbox_service.flush_quietly()
-
-    if current is None:
-        await track("candidate_invited", user_id=user.uid, company_id=company.id)
 
     return CandidateOut(
         id=invite.id, email=invite.email, status=invite.status, created_at=invite.created_at
     )
+
+
+@router.get("/candidates/filters")
+def candidate_filters() -> CandidateFiltersOut:
+    """What candidates can be filtered by."""
+    return CandidateFiltersOut(filters=list(CandidateFilter))
 
 
 @router.get("/{interview_id}/candidates")
@@ -87,21 +73,41 @@ async def list_candidates(
     user: CurrentUser,
     page: PageParams,
     sort: CandidateSort = CandidateSort.GRADE,
+    q: Annotated[str, Query(max_length=MAX_SEARCH_LENGTH)] = "",
+    filter_by: Annotated[CandidateFilter | None, Query(alias="status")] = None,
 ) -> list[CandidateOut]:
-    """A page at a time, best grade first or newest first. Grades come from rounds: for every
-    candidate when sorting by them, otherwise for this page only."""
+    """A page at a time, best grade first or newest first, narrowed to an email containing `q`
+    and a status or result. Results come from rounds: for every candidate when sorting or
+    filtering by them, otherwise for this page only."""
     interview = await interviews.get(interview_id)
 
     if interview is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
     await require_company(user, interview.company_id)
-    if sort == CandidateSort.GRADE:
-        every = await invites.list_all_for_interview(interview.id)
+    status_is = None if filter_by in RESULT_FILTERS else filter_by
+
+    if sort == CandidateSort.GRADE or filter_by in RESULT_FILTERS:
+        every = await invites.list_all_for_interview(interview.id, q.strip(), status_is)
         totals = await rounds.invite_scores([invite.id for invite in every])
-        listed = by_grade(every, totals)[page.offset : page.offset + page.limit]
+
+        if filter_by == CandidateFilter.PASSED:
+            every = [
+                invite
+                for invite in every
+                if passed(totals.get(str(invite.id)) or {}, interview.pass_mark)
+            ]
+        elif filter_by == CandidateFilter.FLAGGED:
+            every = [invite for invite in every if flagged(totals.get(str(invite.id)) or {})]
+
+        if sort == CandidateSort.GRADE:
+            every = by_grade(every, totals)
+
+        listed = every[page.offset : page.offset + page.limit]
     else:
-        listed = await invites.list_for_interview(interview.id, page.offset, page.limit)
+        listed = await invites.list_for_interview(
+            interview.id, page.offset, page.limit, q.strip(), status_is
+        )
         totals = await rounds.invite_scores([invite.id for invite in listed])
     finished = [
         invite.id
@@ -117,17 +123,7 @@ async def list_candidates(
             if invite.id in finished:
                 invite.status = InviteStatus.FINISHED
 
-    return [
-        CandidateOut(
-            id=invite.id,
-            email=invite.email,
-            status=invite.status,
-            progress=(totals.get(str(invite.id)) or {}).get("progress", 0),
-            grade=(totals.get(str(invite.id)) or {}).get("grade"),
-            created_at=invite.created_at,
-        )
-        for invite in listed
-    ]
+    return [candidate_out(invite, totals.get(str(invite.id)) or {}, interview) for invite in listed]
 
 
 @router.delete("/{interview_id}/candidates/{invite_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -160,9 +156,9 @@ async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: Current
     if interview is None or invite is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
 
-    await require_company(user, interview.company_id)
-
+    company, _ = await require_company(user, interview.company_id)
     card = await rounds.scorecard(invite.id) or []
+    totals = (await rounds.invite_scores([invite.id])).get(str(invite.id)) or {}
 
     finished = card and all(item["status"] == "finished" for item in card)
 
@@ -170,9 +166,23 @@ async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: Current
         await invites.set_status([invite.id], InviteStatus.FINISHED)
         invite.status = InviteStatus.FINISHED
 
+    # The funnel's "first results viewed": a finished candidate's results, opened by a member.
+    if invite.status == InviteStatus.FINISHED:
+        await track("results_viewed", user_id=user.uid, company_id=company.id)
+
     return {
         "id": str(invite.id),
         "email": invite.email,
         "status": invite.status,
-        "sessions": card,
+        # For the PDF report: the test, the company, and the overall result.
+        "title": await interview_title(interview),
+        "company": company.name,
+        "logo_url": logo_path(company),
+        "verified_domain": company.verified_domain,
+        "grade": totals.get("grade"),
+        "passed": passed(totals, interview.pass_mark),
+        "pass_mark": interview.pass_mark,
+        "sessions": [
+            {**section, "passed": section_passed(section, interview.pass_mark)} for section in card
+        ],
     }

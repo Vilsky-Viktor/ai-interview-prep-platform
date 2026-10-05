@@ -13,19 +13,22 @@ import {
 } from "@/constants/auth"
 import { auth } from "@/lib/firebase"
 
-/** `failed` is the message shown when sign-in fails, in the interface language. */
+/** `failed` is the message shown when sign-in fails, in the interface language. True once
+ *  signed in, so a flow can carry on. */
 export async function signIn(failed: string) {
   try {
     await signInWithPopup(auth, new GoogleAuthProvider())
+
+    return true
   } catch (error) {
     if (
-      error instanceof FirebaseError &&
-      POPUP_CLOSED_CODES.includes(error.code)
+      !(error instanceof FirebaseError) ||
+      !POPUP_CLOSED_CODES.includes(error.code)
     ) {
-      return
+      toast.error(failed)
     }
 
-    toast.error(failed)
+    return false
   }
 }
 

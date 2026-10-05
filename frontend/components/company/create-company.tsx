@@ -1,7 +1,6 @@
 "use client"
 
 import { cn } from "cn"
-import { PlusIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
@@ -12,7 +11,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -74,21 +72,12 @@ export function CreateCompany() {
 
   return (
     <Dialog open={open} onOpenChange={handleOpen}>
-      <DialogTrigger
-        render={
-          <Button
-            size="icon"
-            className="size-14 rounded-full"
-            aria-label={t("new")}
-          />
-        }
-      >
-        <PlusIcon className="size-6" />
+      <DialogTrigger render={<Button className="h-12 px-6 text-base" />}>
+        {t("new")}
       </DialogTrigger>
       <DialogContent showCloseButton={false} className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>{t("new")}</DialogTitle>
-          <DialogDescription>{t("newText")}</DialogDescription>
         </DialogHeader>
         <form id="create-company-form" onSubmit={create}>
           <div

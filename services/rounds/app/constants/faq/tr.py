@@ -1,30 +1,51 @@
 # The FAQ in tr; the {placeholders} are filled in by helpers/help.py (faq_values) with
-# billing's prices and the number of languages.
+# billing's prices and the number of languages. Questions not translated yet show in English
+# (constants/faq/__init__.py).
 FAQ = [
     {
-        "key": "different",
-        "question": "prepza'nın bilgi kartlarından veya soru bankalarından farkı ne?",
-        "answer": "Prepza, soruları iş ilanınızdan veya hedefinizden yola çıkarak tam olarak hazırlandığınız şey için oluşturur. Turlar yanlış yaptıklarınızı geri getirir, bir yapay zekâ eğitmeni her yanıtı açıklar ve sertifikalar bir konuda ne zaman ustalaştığınızı gösterir.",
+        "key": "what",
+        "question": "prepza nedir?",
+        "answer": "İş tanımınızdan hazırlanan, her rol için süreli bir mülakat. Adayları onlarla tanışmadan önce elemek için ya da işe alımın bir adımı olarak kullanın: her iki durumda da işi gerçekten kimin bildiğini görürsünüz.",
     },
     {
-        "key": "topics",
-        "question": "Neye hazırlanabilirim?",
-        "answer": "Her alanda iş mülakatlarına, sertifikalara, sınavlara, testlere, bir terfiye veya öğrenmek istediğiniz her şeye. Tarif edebiliyorsanız prepza onun için bir set oluşturabilir.",
+        "key": "roles",
+        "question": "Hangi roller için işe alım yapabilirim?",
+        "answer": "Bilginin önemli olduğu her rol için: destek, satış, finans, sağlık, zanaat ve teknik meslekler, mühendislik, pazarlama ve daha fazlası. İşi tarif edebiliyorsanız prepza onun için bir mülakat hazırlayabilir.",
     },
     {
-        "key": "certificates",
-        "question": "Sertifikalar nasıl çalışır?",
-        "answer": "Her konunun kendi sertifikası vardır. Konunun tüm sorularını yeterince doğru yanıtla tamamlayın, sertifika sizin olsun. Her soruya verdiğiniz son yanıt sayılır, bu yüzden başarana kadar çalışmaya devam edebilirsiniz.",
+        "key": "hiring",
+        "question": "Nasıl çalışır?",
+        "answer": "Ana sayfaya bir iş tanımı yapıştırın, şirketinize ad verin ve prepza'nın önerdiği konuları kontrol edin. Ardından adayları davet edin: e-postalarını yazın, bir liste yapıştırın ya da dosya yükleyin. Birkaç gün içinde başlamayan adaylara bir hatırlatma gider. Her aday kendi sorularını alır ve her sorunun bir süresi vardır; adaylar bitirir bitirmez puanlarını ve tüm cevaplarını görürsünüz.",
+    },
+    {
+        "key": "link",
+        "question": "Bir mülakatı iş ilanına koyabilir miyim?",
+        "answer": "Evet. Mülakatın Adaylar sekmesinden paylaşılabilir bağlantısını açın ve ilanınıza yapıştırın. Bağlantıyı açan herkes giriş yapar ve mülakata girer; her kişi, davet edilen bir aday gibi ücretlendirilir. Mülakatı İşe alındı olarak işaretlediğinizde bağlantı kapanır.",
+    },
+    {
+        "key": "preview",
+        "question": "Kimseyi davet etmeden önce bir mülakatı deneyebilir miyim?",
+        "answer": "Evet. Mülakatınızı kendi sayfasından ücretsiz olarak aday gibi açın: önizlemeler adaylarınız arasında ya da soru istatistiklerinde görünmez. Ücretsiz pratik mülakatlardan herhangi birine de girebilirsiniz.",
+    },
+    {
+        "key": "cheating",
+        "question": "Adaylar yapay zekâ kullanabilir ya da cevapları arayabilir mi?",
+        "answer": "Her aday kendi sırasında kendi rastgele sorularını alır ve her sorunun sunucumuzun tuttuğu bir süresi vardır, bu yüzden yapay zekâya sormaya zaman kalmaz. Aday sonuçları ayrıca adayın sayfadan ne zaman ayrıldığını, metin kopyaladığını ya da soruyu okumuş olamayacak kadar hızlı cevap verdiğini gösterir.",
     },
     {
         "key": "cost",
         "question": "Ücreti ne kadar?",
-        "answer": "Kullandıkça kredilerle ödersiniz. İş ilanınız veya hedefiniz için hazırlanan konuları görmek ücretsizdir; bir set {kit} kredi tutar ve yalnızca konularını onayladığınızda ödenir. Herkese açık kütüphanede pratik yapmak ücretsizdir ve her yeni hesap {welcome} ücretsiz kredi alır. Fiyatlar sayfası tüm fiyatları listeler.",
+        "answer": "Mülakat oluşturmak ücretsizdir. En az bir soruyu cevaplayan her aday {candidate} kredi ({candidate_dollars} $) tutar; daha büyük yüklemelerden gelen kredilerle daha az, 1 $'a kadar. İlk şirketiniz {company} ücretsiz kredi alır; bu, ilk {company_candidates} adayı için yeterlidir. Fiyatlandırma sayfasında tüm fiyatlar yer alır.",
     },
     {
-        "key": "compare",
-        "question": "Abonelikten daha ucuz mu?",
-        "answer": "Mülakata hazırlık için genellikle evet. Bir pozisyon için set bir kez {kit} kredi ({kit_dollars} $) tutar ve sizde kalır; iptal edilecek bir şey yoktur. İş ilanından alıştırma hazırlayan mülakat hazırlık uygulamaları genellikle ayda 25–40 $ tutar, yani üç aylık hazırlık 75–100 $ eder. Her ay birkaç yeni konuya hazırlanıyorsanız abonelik daha ucuza gelebilir.",
+        "key": "charged",
+        "question": "Bir aday için ne zaman ücret alınır?",
+        "answer": "Yalnızca en az bir soruyu cevaplayıp mülakatı bitirdiğinde. Krediler, adayı davet ettiğinizde ayrılır; daveti geri alırsanız, aday hiç başlamazsa ya da hiçbir şeyi cevaplamazsa geri gelir.",
+    },
+    {
+        "key": "compare_hiring",
+        "question": "Fiyat, diğer değerlendirme araçlarıyla nasıl karşılaştırılır?",
+        "answer": "Değerlendirme platformlarının çoğu yıllık planda ayda 100–215 $ ya da aday başına 7–20 $ tutar. prepza'da bir aday {candidate} kredi ({candidate_dollars} $) tutar; sözleşme, kullanıcı başı ücret ve mülakat oluşturma ücreti yoktur. Ayda {example_candidates} aday davet eden bir şirket yılda yaklaşık {example_year_dollars} $ öder; yıllık bir plan ise 1.200–2.580 $ tutar. Ayda yaklaşık 50 adaydan itibaren bazı sınırsız planlar daha ucuz olabilir.",
     },
     {
         "key": "expire",
@@ -32,48 +53,48 @@ FAQ = [
         "answer": "Hayır. Kredilerin süresi asla dolmaz; abonelik veya yenileme yoktur.",
     },
     {
-        "key": "failed",
-        "question": "Bir set başarısız olursa ne olur?",
-        "answer": "Yalnızca set hazır olduğunda ücret alınır. Oluşturma başarısız olursa veya iptal ederseniz krediler size geri döner.",
-    },
-    {
         "key": "refunds",
         "question": "Para iadesi alabilir miyim?",
         "answer": "Evet, son 14 gün içinde satın aldığınız ve harcamadığınız krediler için: Paddle üzerinden veya bize yazarak. Hoş geldin hediyesi gibi ücretsiz krediler iade edilmez. Ayrıntılar koşullarda yer alır.",
     },
     {
+        "key": "scorecards",
+        "question": "Aday sonuçları neleri gösterir?",
+        "answer": "Her cevabı, doğru olup olmadığını ve ne kadar sürdüğünü. Notlar, mülakat için belirlediğiniz geçme notuna göre yeşil ya da kırmızı görünür. Sonuçlar ayrıca okunamayacak kadar hızlı verilen cevapları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler.",
+    },
+    {
+        "key": "reports",
+        "question": "Sonuçları işe alım yöneticisiyle paylaşabilir miyim?",
+        "answer": "Evet. Tek bir aday ya da bir mülakatın tüm adayları için PDF raporu indirin, doğrudan prepza'dan e-postayla gönderin ya da WhatsApp veya Telegram'da kısa bir özet gönderin.",
+    },
+    {
+        "key": "candidates",
+        "question": "Adaylar ne görür?",
+        "answer": "Şirketinizin adını ve logosunu, başlamadan önce neyle karşılaşacaklarını, ardından her seferinde bir süreli soru. Puanlarını ya da bir cevabın doğru olup olmadığını asla görmezler.",
+    },
+    {
+        "key": "talent",
+        "question": "Yetenek önerileri nedir?",
+        "answer": "Kişiler prepza'nın ücretsiz pratik mülakatlarıyla pratik yapar; önerilmeyi seçenler bir LinkedIn bağlantısı bırakır. Bir mülakat oluşturduğunuzda, benzer bir rolde en yüksek puanı alanlar mülakatın Önerilen yetenekler sekmesinde adları, puanları ve LinkedIn bağlantılarıyla görünür. Yalnızca ilk denemeleri sayılır, uymayan herkesi gizleyebilirsiniz ve öneriler ücretsizdir.",
+    },
+    {
+        "key": "verified",
+        "question": "Doğrulandı işareti ne anlama gelir?",
+        "answer": "Şirketin bir sahibinin ya da yöneticisinin, şirketin web sitesine ait bir iş e-postasıyla (ör. you@acme.com) giriş yaptığı anlamına gelir. Web sitesini şirketinizin başlığındaki Doğrula ile ekleyin; ücretsiz e-posta servisleri sayılmaz. İşaret, davetler dahil şirketinizin adının yanında görünür.",
+    },
+    {
+        "key": "languages",
+        "question": "Hangi diller destekleniyor?",
+        "answer": "Site, mülakatlar ve e-postalar için {count} dil. İş tanımı hangi dilde olursa olsun, mülakatın hangi dilde yazılacağını siz seçersiniz.",
+    },
+    {
         "key": "privacy",
-        "question": "Yapıştırdıklarım ve yanıtlarım ne oluyor?",
-        "answer": "Bunları setlerinizi oluşturmak ve ilerlemenizi takip etmek için kullanırız. Özel setleri yalnızca siz ve paylaştığınız kişiler görür. Gizlilik politikası neyi, ne kadar süre sakladığımızı ve haklarınızı açıklar.",
+        "question": "İş tanımları ve cevaplara ne olur?",
+        "answer": "İş tanımları mülakatlarınızı hazırlamak, adayların cevapları ise onları puanlamak için yalnızca şirketiniz adına kullanılır. Gizlilik politikası neleri, ne kadar süre sakladığımızı ve herkesin haklarını açıklar.",
     },
     {
         "key": "delete",
         "question": "Hesabımı silebilir miyim?",
         "answer": "Evet, Ayarlar'dan. Hesabınız ve verileriniz silinir; öncesinde verilerinizin bir kopyasını indirebilirsiniz.",
-    },
-    {
-        "key": "languages",
-        "question": "Hangi diller destekleniyor?",
-        "answer": "Site, setler ve e-postalar için {count} dil. Metniniz hangi dilde olursa olsun, setin oluşturulacağı dili seçin.",
-    },
-    {
-        "key": "hiring",
-        "question": "prepza ile işe alım nasıl çalışır?",
-        "answer": "Bir şirket oluşturun, bir iş ilanından mülakat oluşturun ve adayları e-postayla davet edin. Her aday {candidate} krediye mal olur ve bu yalnızca aday mülakatı bitirdiğinde düşülür; yeni bir şirket {company} ücretsiz kredi alır.",
-    },
-    {
-        "key": "compare_hiring",
-        "question": "Fiyat diğer değerlendirme araçlarıyla nasıl karşılaştırılır?",
-        "answer": "Değerlendirme platformlarının çoğu yıllık planda ayda 100–215 $ ya da aday başına 7–20 $ tutar. prepza'da bir aday {candidate} kredi ({candidate_dollars} $) tutar; sözleşme, kullanıcı başı ücret ve mülakat oluşturma ücreti yoktur. Ayda {example_candidates} aday davet eden bir şirket yılda yaklaşık {example_year_dollars} $ öder; yıllık bir plan ise 1.200–2.580 $ tutar. Ayda yaklaşık 50 adaydan itibaren bazı sınırsız planlar daha ucuz olabilir.",
-    },
-    {
-        "key": "scorecards",
-        "question": "Raporlar neyi gösterir?",
-        "answer": "Her yanıtı, doğru olup olmadığını ve ne kadar sürdüğünü. Ayrıca soruyu okumak için fazla hızlı verilen yanıtları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler.",
-    },
-    {
-        "key": "candidates",
-        "question": "Adaylar ne görür?",
-        "answer": "Başlamadan önce neyle karşılaşacaklarını, ardından her seferinde tek bir süreli soruyu. Puanlarını veya bir yanıtın doğru olup olmadığını asla görmezler.",
     },
 ]

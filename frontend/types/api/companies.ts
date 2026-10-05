@@ -104,6 +104,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/companies/{company_id}/name": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * Rename Company
+     * @description Owners and admins rename the company; names stay unique across prepza, ignoring case.
+     */
+    patch: operations["rename_company_companies__company_id__name_patch"]
+    trace?: never
+  }
   "/companies/{company_id}/auto-top-up": {
     parameters: {
       query?: never
@@ -196,6 +216,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/interviews/from-template": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create From Template
+     * @description A test copied from a template: free and ready at once, so no generation limits apply.
+     */
+    post: operations["create_from_template_interviews_from_template_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/interviews/{interview_id}": {
     parameters: {
       query?: never
@@ -254,6 +294,27 @@ export interface paths {
     patch: operations["rename_interview_interviews__interview_id__title_patch"]
     trace?: never
   }
+  "/interviews/{interview_id}/preview": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Preview Interview
+     * @description A company member takes their own test as a candidate would: free, kept out of the
+     *     candidate list, and its answers out of the questions' statistics. Each preview is new.
+     */
+    post: operations["preview_interview_interviews__interview_id__preview_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/interviews/{interview_id}/candidates": {
     parameters: {
       query?: never
@@ -263,13 +324,34 @@ export interface paths {
     }
     /**
      * List Candidates
-     * @description A page at a time, best grade first or newest first. Grades come from rounds: for every
-     *     candidate when sorting by them, otherwise for this page only.
+     * @description A page at a time, best grade first or newest first, narrowed to an email containing `q`
+     *     and a status or result. Results come from rounds: for every candidate when sorting or
+     *     filtering by them, otherwise for this page only.
      */
     get: operations["list_candidates_interviews__interview_id__candidates_get"]
     put?: never
     /** Invite Candidate */
     post: operations["invite_candidate_interviews__interview_id__candidates_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/interviews/candidates/filters": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Candidate Filters
+     * @description What candidates can be filtered by.
+     */
+    get: operations["candidate_filters_interviews_candidates_filters_get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -292,6 +374,27 @@ export interface paths {
      * @description Withdraws an invite the candidate hasn't used yet; later it would discard their answers.
      */
     delete: operations["revoke_candidate_interviews__interview_id__candidates__invite_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/interviews/{interview_id}/candidates/bulk": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Invite Many
+     * @description Invites every email in a pasted or uploaded list, one by one as a single invite would,
+     *     and says who was invited and why the others weren't.
+     */
+    post: operations["invite_many_interviews__interview_id__candidates_bulk_post"]
+    delete?: never
     options?: never
     head?: never
     patch?: never
@@ -422,6 +525,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/interviews/{interview_id}/questions/{question_id}/wrong": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Mark Wrong
+     * @description One click: the marked answer is wrong. The verifier checks it and fixes or replaces it.
+     */
+    post: operations["mark_wrong_interviews__interview_id__questions__question_id__wrong_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/interviews/{interview_id}/questions/{question_id}/reports": {
     parameters: {
       query?: never
@@ -470,6 +593,225 @@ export interface paths {
      * @description Only the invited, verified email can start; a forwarded link is useless to anyone else.
      */
     post: operations["start_invite_invites__token__start_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/interviews/{interview_id}/link": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Set Link
+     * @description Owners and admins turn the link on (a new code) or off (it stops working at once).
+     */
+    put: operations["set_link_interviews__interview_id__link_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/links/{token}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Link
+     * @description Shown to anyone with the link, signed in or not, before they start. Signed in, it also
+     *     says how far they got, so a finished test is never offered again.
+     */
+    get: operations["get_link_links__token__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/links/{token}/start": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Start Link
+     * @description The signed-in person becomes a candidate (their verified email, one attempt each) and
+     *     starts, with credits set aside as for an email invite.
+     */
+    post: operations["start_link_links__token__start_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/companies/{company_id}/logo": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Logo
+     * @description Public: candidates' pages and email clients load it without signing in.
+     */
+    get: operations["get_logo_companies__company_id__logo_get"]
+    /**
+     * Set Logo
+     * @description Any of the company's owners and admins sets the logo: PNG, JPEG or WebP, up to 500 KB.
+     */
+    put: operations["set_logo_companies__company_id__logo_put"]
+    post?: never
+    /** Remove Logo */
+    delete: operations["remove_logo_companies__company_id__logo_delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/candidates/{invite_id}/brand": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Candidate Brand
+     * @description The company and logo for the candidate taking the interview, or a member previewing it.
+     */
+    get: operations["candidate_brand_candidates__invite_id__brand_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/interviews/{interview_id}/candidates/{invite_id}/report/email": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Email Report
+     * @description Emails the candidate's PDF report, made on their page, to someone such as a hiring
+     *     manager. A reply goes to the member who sent it. Counts towards the member's email limits.
+     */
+    post: operations["email_report_interviews__interview_id__candidates__invite_id__report_email_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/interviews/{interview_id}/report": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Interview Report */
+    get: operations["interview_report_interviews__interview_id__report_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/interviews/{interview_id}/report/email": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Email Interview Report
+     * @description Emails the test's candidates report, made on its candidates tab, like a candidate's.
+     */
+    post: operations["email_interview_report_interviews__interview_id__report_email_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/interviews/{interview_id}/suggestions": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Suggested Talents */
+    get: operations["suggested_talents_interviews__interview_id__suggestions_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/interviews/{interview_id}/suggestions/hide": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Hide Talent
+     * @description Hides a talent who doesn't fit from this test's suggestions, for everyone in the company.
+     */
+    post: operations["hide_talent_interviews__interview_id__suggestions_hide_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/companies/{company_id}/website": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Set Website */
+    put: operations["set_website_companies__company_id__website_put"]
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -615,6 +957,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/schedules/invite-reminders": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Invite Reminders
+     * @description Daily, from Cloud Scheduler: candidates who haven't started get one reminder.
+     */
+    post: operations["invite_reminders_internal_schedules_invite_reminders_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/schedules/outbox": {
     parameters: {
       query?: never
@@ -720,6 +1082,51 @@ export interface components {
       thresholds: number[]
       checkout?: components["schemas"]["CheckoutOut"] | null
     }
+    /**
+     * BrandOut
+     * @description Who a candidate's interview is for, shown while they take it.
+     */
+    BrandOut: {
+      /** Company */
+      company: string
+      /** Logo Url */
+      logo_url: string | null
+    }
+    /**
+     * BulkInviteIn
+     * @description A list of emails as pasted or read from a file; any other text around them is ignored.
+     */
+    BulkInviteIn: {
+      /** Text */
+      text: string
+    }
+    /** BulkInviteOut */
+    BulkInviteOut: {
+      /** Invited */
+      invited: string[]
+      /** Skipped */
+      skipped: components["schemas"]["SkippedInvite"][]
+    }
+    /**
+     * CandidateFilter
+     * @enum {string}
+     */
+    CandidateFilter:
+      | "invited"
+      | "in_process"
+      | "finished"
+      | "passed"
+      | "flagged"
+      | "undelivered"
+      | "expired"
+    /**
+     * CandidateFiltersOut
+     * @description What a company can narrow its candidates to: statuses and results.
+     */
+    CandidateFiltersOut: {
+      /** Filters */
+      filters: string[]
+    }
     /** CandidateIn */
     CandidateIn: {
       /**
@@ -746,6 +1153,23 @@ export interface components {
       progress: number
       /** Grade */
       grade?: number | null
+      /** Passed */
+      passed?: boolean | null
+      /**
+       * Tab Leaves
+       * @default 0
+       */
+      tab_leaves: number
+      /**
+       * Copies
+       * @default 0
+       */
+      copies: number
+      /**
+       * Fast Answers
+       * @default 0
+       */
+      fast_answers: number
       /**
        * Created At
        * Format: date-time
@@ -811,16 +1235,35 @@ export interface components {
       role: string
       /** Interview Count */
       interview_count: number
+      /** Logo Url */
+      logo_url?: string | null
+      /** Website Domain */
+      website_domain?: string | null
+      /** Verified Domain */
+      verified_domain?: string | null
       /**
        * Created At
        * Format: date-time
        */
       created_at: string
     }
+    /**
+     * CompanyRename
+     * @description A new name, edited in place like a test's title (hence `title`).
+     */
+    CompanyRename: {
+      /** Title */
+      title: string
+    }
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
+    }
+    /** HideTalentIn */
+    HideTalentIn: {
+      /** Url */
+      url: string
     }
     /** InterviewCreate */
     InterviewCreate: {
@@ -862,11 +1305,8 @@ export interface components {
        * Format: uuid
        */
       id: string
-      /**
-       * Generation Id
-       * Format: uuid
-       */
-      generation_id: string
+      /** Generation Id */
+      generation_id: string | null
       /** Set Id */
       set_id: string | null
       /** Title */
@@ -875,6 +1315,14 @@ export interface components {
       question_seconds: number
       /** Candidate Count */
       candidate_count: number
+      /** Hired */
+      hired: boolean
+      /** Pass Mark */
+      pass_mark: number
+      /** Link Token */
+      link_token: string | null
+      /** Status */
+      status: string
       /**
        * Created At
        * Format: date-time
@@ -883,6 +1331,14 @@ export interface components {
       /** Topics */
       topics: components["schemas"]["TopicOut"][]
     }
+    /** InterviewFromTemplate */
+    InterviewFromTemplate: {
+      /**
+       * Template Id
+       * Format: uuid
+       */
+      template_id: string
+    }
     /** InterviewOut */
     InterviewOut: {
       /**
@@ -890,11 +1346,8 @@ export interface components {
        * Format: uuid
        */
       id: string
-      /**
-       * Generation Id
-       * Format: uuid
-       */
-      generation_id: string
+      /** Generation Id */
+      generation_id: string | null
       /** Set Id */
       set_id: string | null
       /** Title */
@@ -903,11 +1356,38 @@ export interface components {
       question_seconds: number
       /** Candidate Count */
       candidate_count: number
+      /** Hired */
+      hired: boolean
+      /** Pass Mark */
+      pass_mark: number
+      /** Link Token */
+      link_token: string | null
+      /** Status */
+      status: string
       /**
        * Created At
        * Format: date-time
        */
       created_at: string
+    }
+    /**
+     * InterviewReportOut
+     * @description Every candidate of a test with their totals, as its candidates tab lists them, for the
+     *     test's PDF report: best grade first.
+     */
+    InterviewReportOut: {
+      /** Title */
+      title: string | null
+      /** Company */
+      company: string
+      /** Logo Url */
+      logo_url: string | null
+      /** Verified Domain */
+      verified_domain: string | null
+      /** Pass Mark */
+      pass_mark: number
+      /** Candidates */
+      candidates: components["schemas"]["CandidateOut"][]
     }
     /** InterviewSettings */
     InterviewSettings: {
@@ -916,6 +1396,16 @@ export interface components {
        * @default 60
        */
       question_seconds: number
+      /**
+       * Hired
+       * @default false
+       */
+      hired: boolean
+      /**
+       * Pass Mark
+       * @default 70
+       */
+      pass_mark: number
     }
     /** InviteStartOut */
     InviteStartOut: {
@@ -933,12 +1423,60 @@ export interface components {
       title: string | null
       /** Company */
       company: string
+      /** Logo Url */
+      logo_url?: string | null
+      /** Verified Domain */
+      verified_domain?: string | null
       /** Email */
       email: string
       /** Status */
       status: string
       /** Question Seconds */
       question_seconds: number
+    }
+    /** LinkIn */
+    LinkIn: {
+      /** On */
+      on: boolean
+    }
+    /**
+     * LinkOut
+     * @description The test's shareable link code, or None while it's off.
+     */
+    LinkOut: {
+      /** Link Token */
+      link_token: string | null
+    }
+    /**
+     * LinkView
+     * @description What a test's shareable link shows before anyone starts.
+     */
+    LinkView: {
+      /** Title */
+      title: string | null
+      /** Company */
+      company: string
+      /** Logo Url */
+      logo_url?: string | null
+      /** Verified Domain */
+      verified_domain?: string | null
+      /** Question Seconds */
+      question_seconds: number
+      /** Status */
+      status?: string | null
+    }
+    /**
+     * LogoIn
+     * @description The logo image, base64-encoded.
+     */
+    LogoIn: {
+      /** Image */
+      image: string
+    }
+    /** LogoOut */
+    LogoOut: {
+      /** Logo Url */
+      logo_url: string | null
     }
     /** MemberIn */
     MemberIn: {
@@ -963,6 +1501,17 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+    }
+    /**
+     * PreviewOut
+     * @description The first session of a member's preview, to open in the player.
+     */
+    PreviewOut: {
+      /**
+       * Session Id
+       * Format: uuid
+       */
+      session_id: string
     }
     /**
      * PushBody
@@ -990,7 +1539,17 @@ export interface components {
       /** Messageid */
       messageId: string
     }
-    /** QuestionText */
+    /** QuestionOption */
+    QuestionOption: {
+      /** Answer */
+      answer: string
+      /** Correct */
+      correct: boolean
+    }
+    /**
+     * QuestionText
+     * @description A question as the company manages it: text, answer options and feedback counts.
+     */
     QuestionText: {
       /**
        * Id
@@ -999,6 +1558,8 @@ export interface components {
       id: string
       /** Text */
       text: string
+      /** Options */
+      options: components["schemas"]["QuestionOption"][]
       /** Likes */
       likes: number
       /** Dislikes */
@@ -1008,17 +1569,44 @@ export interface components {
     }
     /**
      * ReferralOut
-     * @description The company's referral link code, what it earns, and how many it has earned for.
+     * @description The company's referral link code, what it earns, how many it has earned for, and the latest
+     *     of those, newest first.
      */
     ReferralOut: {
       /** Code */
       code: string
       /** Reward */
       reward: number
-      /** Min Dollars */
-      min_dollars: number
       /** Rewarded */
       rewarded: number
+      /** Rewards */
+      rewards: components["schemas"]["ReferralRewardOut"][]
+    }
+    /**
+     * ReferralRewardOut
+     * @description A company that came through the link and topped up; no name once it's deleted.
+     */
+    ReferralRewardOut: {
+      /** Name */
+      name: string | null
+      /**
+       * Rewarded At
+       * Format: date-time
+       */
+      rewarded_at: string
+    }
+    /**
+     * ReportEmailIn
+     * @description Who gets the candidate's report, and the PDF the page made, base64-encoded.
+     */
+    ReportEmailIn: {
+      /**
+       * Email
+       * Format: email
+       */
+      email: string
+      /** Pdf */
+      pdf: string
     }
     /** ReportOut */
     ReportOut: {
@@ -1067,6 +1655,26 @@ export interface components {
       topic_title: string
       /** Status */
       status: string
+    }
+    /** SkippedInvite */
+    SkippedInvite: {
+      /** Email */
+      email: string
+      /** Reason */
+      reason: string
+    }
+    /**
+     * SuggestedTalentOut
+     * @description What a company sees of a suggested talent: their name, LinkedIn and first-round grade on
+     *     a practice test for a similar role. Nothing else.
+     */
+    SuggestedTalentOut: {
+      /** Name */
+      name: string
+      /** Url */
+      url: string
+      /** Grade */
+      grade: number
     }
     /** TitleIn */
     TitleIn: {
@@ -1117,6 +1725,24 @@ export interface components {
       input?: unknown
       /** Context */
       ctx?: Record<string, never>
+    }
+    /** VerificationOut */
+    VerificationOut: {
+      /** Website Domain */
+      website_domain: string | null
+      /** Verified Domain */
+      verified_domain: string | null
+    }
+    /**
+     * WebsiteIn
+     * @description The company's website as typed; empty removes it, and the verification with it.
+     */
+    WebsiteIn: {
+      /**
+       * Website
+       * @default
+       */
+      website: string
     }
   }
   responses: never
@@ -1334,6 +1960,39 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["ReferralOut"]
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  rename_company_companies__company_id__name_patch: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CompanyRename"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {
@@ -1637,6 +2296,41 @@ export interface operations {
       }
     }
   }
+  create_from_template_interviews_from_template_post: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["InterviewFromTemplate"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InterviewOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   get_interview_interviews__interview_id__get: {
     parameters: {
       query?: never
@@ -1763,10 +2457,43 @@ export interface operations {
       }
     }
   }
+  preview_interview_interviews__interview_id__preview_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PreviewOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   list_candidates_interviews__interview_id__candidates_get: {
     parameters: {
       query?: {
         sort?: components["schemas"]["CandidateSort"]
+        q?: string
+        status?: components["schemas"]["CandidateFilter"] | null
         offset?: number
         limit?: number
       }
@@ -1833,6 +2560,26 @@ export interface operations {
       }
     }
   }
+  candidate_filters_interviews_candidates_filters_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CandidateFiltersOut"]
+        }
+      }
+    }
+  }
   candidate_scorecard_interviews__interview_id__candidates__invite_id__get: {
     parameters: {
       query?: never
@@ -1885,6 +2632,41 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  invite_many_interviews__interview_id__candidates_bulk_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["BulkInviteIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["BulkInviteOut"]
+        }
       }
       /** @description Validation Error */
       422: {
@@ -2133,6 +2915,36 @@ export interface operations {
       }
     }
   }
+  mark_wrong_interviews__interview_id__questions__question_id__wrong_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+        question_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   list_question_reports_interviews__interview_id__questions__question_id__reports_get: {
     parameters: {
       query?: {
@@ -2217,6 +3029,430 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["InviteStartOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  set_link_interviews__interview_id__link_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["LinkIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LinkOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_link_links__token__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        token: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LinkView"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  start_link_links__token__start_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        token: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InviteStartOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_logo_companies__company_id__logo_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  set_logo_companies__company_id__logo_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["LogoIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LogoOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  remove_logo_companies__company_id__logo_delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  candidate_brand_candidates__invite_id__brand_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["BrandOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  email_report_interviews__interview_id__candidates__invite_id__report_email_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ReportEmailIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      202: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  interview_report_interviews__interview_id__report_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InterviewReportOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  email_interview_report_interviews__interview_id__report_email_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ReportEmailIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      202: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  suggested_talents_interviews__interview_id__suggestions_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SuggestedTalentOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  hide_talent_interviews__interview_id__suggestions_hide_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["HideTalentIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  set_website_companies__company_id__website_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["WebsiteIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["VerificationOut"]
         }
       }
       /** @description Validation Error */
@@ -2406,6 +3642,24 @@ export interface operations {
     }
   }
   invite_expiry_internal_schedules_invite_expiry_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  invite_reminders_internal_schedules_invite_reminders_post: {
     parameters: {
       query?: never
       header?: never

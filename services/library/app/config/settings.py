@@ -1,5 +1,4 @@
 from prepza_common.settings import ServiceSettings
-from pydantic import Field
 
 
 class Settings(ServiceSettings):
@@ -9,11 +8,6 @@ class Settings(ServiceSettings):
     database_url: str
     redis_url: str
     service_secret: str
-    # Invite emails a user may send (shares and candidate invites together), and invites one
-    # address may get a day for the same thing; 0 turns a limit off.
-    email_hourly_limit: int = Field(default=30, ge=0)
-    email_daily_limit: int = Field(default=200, ge=0)
-    email_recipient_daily_limit: int = Field(default=3, ge=0)
     rounds_url: str
     generation_url: str
     companies_url: str

@@ -32,8 +32,8 @@ async def code_of(owner_type: str, owner_id: str) -> str:
 
 
 async def record(code: str, owner_type: str, owner_id: str, related: list[str]) -> bool:
-    """Notes that a new learner or company came through a link of its own kind. Not from
-    yourself or a related company; the first link counts."""
+    """Notes that a new company came through another company's link. Not from itself or a
+    related company; the first link counts."""
     async with Session() as session:
         referrer_id = await session.scalar(
             select(Wallet.owner_id).where(
@@ -56,10 +56,10 @@ async def record(code: str, owner_type: str, owner_id: str, related: list[str]) 
 
 
 async def reward(owner_type: str, owner_id: str) -> str | None:
-    """Pays a referral once its new learner or company has topped up enough: both sides get
+    """Pays a referral once its new company has topped up enough: both sides get
     the reward, the referrer only within their yearly limit and while their wallet exists.
     The referrer's id when it was paid."""
-    amount = REFERRAL_REWARD[owner_type]
+    amount = REFERRAL_REWARD
     now = datetime.now(UTC)
 
     async with Session() as session:
@@ -98,7 +98,7 @@ async def reward(owner_type: str, owner_id: str) -> str | None:
 
 
 async def rewarded_count(owner_type: str, owner_id: str) -> int:
-    """How many people or companies the owner brought in that have been rewarded."""
+    """How many companies the owner brought in that have been rewarded."""
     async with Session() as session:
         return await session.scalar(
             select(func.count()).where(
@@ -107,6 +107,23 @@ async def rewarded_count(owner_type: str, owner_id: str) -> int:
                 Referral.rewarded_at.is_not(None),
             )
         )
+
+
+async def rewards(owner_type: str, owner_id: str, limit: int) -> list[Referral]:
+    """The companies the owner brought in that have been rewarded, newest first."""
+    query = (
+        select(Referral)
+        .where(
+            Referral.owner_type == owner_type,
+            Referral.referrer_id == owner_id,
+            Referral.rewarded_at.is_not(None),
+        )
+        .order_by(Referral.rewarded_at.desc())
+        .limit(limit)
+    )
+
+    async with Session() as session:
+        return list(await session.scalars(query))
 
 
 async def forget(session: AsyncSession, owner_type: str, owner_id: str) -> None:

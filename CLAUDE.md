@@ -35,3 +35,14 @@
    `mx-auto max-w-5xl px-6`, the width of the header, so content lines up with the
    logo and the menu on every page. No page is narrower or wider. Cards, forms and
    prompts inside a page may be narrower, but the page itself never is.
+
+7. **One design language across the app.** Build a new page or piece of UI from the
+   patterns the app already has, never from scratch. Before writing it, find the
+   closest existing page and copy its layout, sizes and components: a list page looks
+   like the companies list (a `text-3xl` title with its main action button on the
+   right, rows in one `divide-y rounded-2xl border` list), a page that starts a test
+   looks like the home page's start (a large title and the shared `DescriptionBox`),
+   and a detail page looks like a company's test page. Reuse the shared components
+   (`DescriptionBox`, `BackLink`, `PageHeader`, `EditableTitle`, `TopicQuestions`)
+   instead of new look-alikes. Keep it minimal: no new colors, shadows, gradients or
+   effects unless asked.

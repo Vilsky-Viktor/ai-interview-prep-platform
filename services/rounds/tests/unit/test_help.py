@@ -2,9 +2,10 @@ import json
 import string
 
 from firebase_admin import auth as firebase_auth
-from prepza_common.constants import LANGUAGES, MAX_SHARES
+from prepza_common.constants import LANGUAGES, MAX_OWNED_COMPANIES
 
-from app.constants.faq import FAQS
+from app.constants.faq import FAQS, with_english
+from app.constants.faq.de import FAQ as GERMAN
 from app.constants.help import HELP_HISTORY_MESSAGES, MAX_HELP_QUESTION_LENGTH
 from app.constants.terms import TERMS_SECTIONS
 from app.helpers.help import guide
@@ -14,10 +15,8 @@ from app.services.help import build_messages
 CATALOG = {
     "environment": "sandbox",
     "client_token": "secret-token",
-    "kit_credits": 500,
-    "welcome_user": 500,
     "candidate_credits": 300,
-    "welcome_company": 1500,
+    "welcome_company": 900,
 }
 
 
@@ -28,7 +27,7 @@ def fake_catalog(catalog):
     return get
 
 
-def test_every_faq_has_the_same_questions_and_placeholders():
+def test_every_faq_asks_the_english_questions_with_the_same_placeholders():
     def shape(faq):
         return [
             (
@@ -42,25 +41,34 @@ def test_every_faq_has_the_same_questions_and_placeholders():
     assert all(shape(faq) == shape(FAQS["en"]) for faq in FAQS.values())
 
 
-def test_faq_comes_in_the_page_language_with_todays_prices(client, monkeypatch):
+def test_a_question_not_translated_yet_shows_in_english(client, monkeypatch):
     monkeypatch.setattr("app.routers.help.billing.catalog", fake_catalog(CATALOG))
+    # German as it would be with its "cost" answer not translated yet.
+    partly = [item for item in GERMAN if item["key"] != "cost"]
+    monkeypatch.setitem(FAQS, "de", with_english(partly, FAQS["en"]))
 
-    items = client.get("/help/faq", headers={"Accept-Language": "de"}).json()
-    cost = next(item for item in items if item["key"] == "cost")
+    items = {
+        item["key"]: item
+        for item in client.get("/help/faq", headers={"Accept-Language": "de"}).json()
+    }
+    english = {item["key"]: item for item in FAQS["en"]}
+    translated = {item["key"]: item for item in partly}
 
-    assert cost["question"] == next(i["question"] for i in FAQS["de"] if i["key"] == "cost")
-    assert "500" in cost["answer"] and "{" not in cost["answer"]
+    assert items["expire"]["question"] == translated["expire"]["question"]
+    assert items["cost"]["question"] == english["cost"]["question"]
+    assert "300" in items["cost"]["answer"] and "{" not in items["cost"]["answer"]
 
 
-def test_faq_compares_prices_in_dollars_from_billing(client, monkeypatch):
+def test_faq_names_prices_in_dollars_from_billing(client, monkeypatch):
     monkeypatch.setattr("app.routers.help.billing.catalog", fake_catalog(CATALOG))
 
     items = {item["key"]: item["answer"] for item in client.get("/help/faq").json()}
 
-    # 500 credits a kit is $5; 300 a candidate is $3, and 5 candidates a month are $180 a year.
-    assert "500 credits ($5)" in items["compare"]
+    # 300 credits a candidate is $3, and 5 candidates a month are $180 a year.
     assert "300 credits ($3)" in items["compare_hiring"]
     assert "$180 a year" in items["compare_hiring"]
+    # 900 welcome credits cover 3 candidates.
+    assert "900 free credits, enough for its first 3 candidates" in items["cost"]
 
 
 def test_faq_still_shows_when_billing_is_down(client, monkeypatch):
@@ -86,10 +94,10 @@ def test_the_chat_knows_the_platform_prices_and_documents():
     question = [HelpMessage(role="user", content="How do refunds work?")]
     system = build_messages(question, "de", CATALOG)[0].content
 
-    assert f"up to {MAX_SHARES} people" in system
+    assert f"can own up to {MAX_OWNED_COMPANIES}" in system
     assert "Refunds: you can ask for a refund" in system
     assert "Who is responsible" in system
-    assert '"kit_credits": 500' in system
+    assert '"candidate_credits": 300' in system
     assert "secret-token" not in system
     assert system.endswith(
         "Reply in German, the language of the page, unless the user writes in another language."

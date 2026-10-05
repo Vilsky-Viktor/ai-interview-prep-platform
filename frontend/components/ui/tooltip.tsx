@@ -35,7 +35,7 @@ function TooltipContent({
       >
         <TooltipPrimitive.Popup
           className={cn(
-            "rounded-md bg-foreground px-2 py-1 text-xs text-background",
+            "rounded-md bg-muted px-2 py-1 text-xs text-foreground",
             className
           )}
           {...props}

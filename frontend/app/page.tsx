@@ -1,41 +1,53 @@
 import { ArrowDownIcon } from "lucide-react"
-import { getLocale, getTranslations } from "next-intl/server"
+import { getTranslations } from "next-intl/server"
 
-import { GoalForm } from "@/components/goal-form"
-import { HomeTitle } from "@/components/home-title"
+import { BrandSection } from "@/components/landing/brand"
 import { Closing } from "@/components/landing/closing"
 import { CompaniesSection } from "@/components/landing/companies"
 import { ControlSection } from "@/components/landing/control"
-import { GapsSection } from "@/components/landing/gaps"
 import { HowItWorks } from "@/components/landing/how-it-works"
+import { JobAdLinkSection } from "@/components/landing/job-ad-link"
 import { LanguagesSection } from "@/components/landing/languages"
 import { PricingSection } from "@/components/landing/pricing"
-import { ReferralsSection } from "@/components/landing/referrals"
-import { ProofSection } from "@/components/landing/proof"
 import { QualitySection } from "@/components/landing/quality"
-import { ShareSection } from "@/components/landing/share"
-import { TutorSection } from "@/components/landing/tutor"
+import { ReportsSection } from "@/components/landing/reports"
+import { TalentPoolSection } from "@/components/landing/talent-pool"
+import { TryFirstSection } from "@/components/landing/try-first"
+import { StartTest } from "@/components/start-test"
+import { serverFetch } from "@/lib/server-api"
+import type { Catalog } from "@/types/billing"
 
 export default async function HomePage() {
   const t = await getTranslations("home")
   const landing = await getTranslations("landing")
-  // A new language restarts the typing animation with its own words.
-  const locale = await getLocale()
+  const catalog = await serverFetch<Catalog>("/billing/catalog")
+  // The candidates a first company's welcome credits cover.
+  const freeCandidates = catalog
+    ? Math.floor(catalog.welcome_company / catalog.candidate_credits)
+    : null
 
   return (
     <main className="mx-auto max-w-5xl px-6">
-      {/* The input fills the first screen, under the 3.5rem header. */}
+      {/* The promise and the box to start in fill the first screen, under the 3.5rem header. */}
       <div className="relative flex min-h-[calc(100svh-3.5rem)] flex-col items-center justify-center pb-24">
-        {/* One column, as wide in every language as the English title: the title starts where
-            the input does, and a longer title wraps inside it. */}
-        <div className="w-full max-w-176 space-y-16">
+        <div className="w-full max-w-176 space-y-10">
           <div className="space-y-4">
-            <HomeTitle key={locale} />
-            <p className="text-base text-balance text-muted-foreground">
-              {t("tagline")}
+            {/* Two lines, each ending with the logo's blue dot. */}
+            <h1 className="no-dot font-heading text-5xl font-medium tracking-tight text-balance sm:text-6xl">
+              {t("title")
+                .split("\n")
+                .map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                    <span className="text-primary">.</span>
+                  </span>
+                ))}
+            </h1>
+            <p className="text-lg text-balance text-muted-foreground">
+              {t("text")}
             </p>
           </div>
-          <GoalForm />
+          <StartTest freeCandidates={freeCandidates} />
         </div>
         <a
           href="#how"
@@ -46,16 +58,16 @@ export default async function HomePage() {
         </a>
       </div>
       <HowItWorks />
-      <ControlSection />
-      <GapsSection />
-      <TutorSection />
-      <ProofSection />
-      <QualitySection />
-      <ShareSection />
       <CompaniesSection />
+      <TryFirstSection />
+      <ReportsSection />
+      <ControlSection />
+      <QualitySection />
+      <JobAdLinkSection />
+      <BrandSection />
+      <TalentPoolSection />
       <LanguagesSection />
       <PricingSection />
-      <ReferralsSection />
       <Closing />
     </main>
   )

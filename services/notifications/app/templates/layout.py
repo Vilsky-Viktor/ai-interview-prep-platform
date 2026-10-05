@@ -15,6 +15,11 @@ prepza.
 """
 
 # Who sent the invite, in the body: bold, so it stands out.
+# The inviting company's logo, at the top of the card, when it has one.
+HTML_LOGO = (
+    '<img src="{url}" alt="{alt}" height="40" style="display:block;height:40px;width:auto;'
+    'max-width:200px;margin:0 0 24px;border:0;">'
+)
 HTML_NAME = '<strong style="font-weight:600;color:#0a0a0a;">{name}</strong>'
 
 HTML_PARAGRAPH = (
@@ -48,7 +53,7 @@ letter-spacing:-0.5px;color:#0a0a0a;">prepza<span style="color:#0071e0;">.</span
 <tr><td style="padding:40px 32px;background-color:#ffffff;border:1px solid #e5e5e5;\
 border-radius:16px;text-align:{align};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,\
 sans-serif;">
-<h1 style="margin:0 0 24px;font-size:24px;line-height:32px;font-weight:600;color:#0a0a0a;">\
+{logo}<h1 style="margin:0 0 24px;font-size:24px;line-height:32px;font-weight:600;color:#0a0a0a;">\
 {heading}<span style="color:#0071e0;">.</span></h1>
 {lines}
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 32px;">

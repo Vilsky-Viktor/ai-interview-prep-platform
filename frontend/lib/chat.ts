@@ -50,15 +50,6 @@ async function streamReply(
   }
 }
 
-/** Sends a follow-up message to the tutor about an answer. */
-export function streamChat(
-  answerId: string,
-  message: string,
-  onDelta: (delta: string) => void
-) {
-  return streamReply(`/rounds/answers/${answerId}/chat`, { message }, onDelta)
-}
-
 /** Asks the FAQ page's help chat; the page keeps the conversation and sends it whole. */
 export function streamHelp(
   messages: HelpMessage[],

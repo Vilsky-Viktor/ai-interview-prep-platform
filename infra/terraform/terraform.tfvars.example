@@ -15,14 +15,13 @@ monthly_budget  = 300
 paddle_environment  = "sandbox"
 paddle_client_token = ""
 paddle_prices = {
-  topup_10     = ""
-  topup_25     = ""
-  topup_50     = ""
-  topup_100    = ""
-  topup_250    = ""
-  topup_500    = ""
-  # A $1 price, with quantity 10 to 500 allowed: custom top-ups.
-  topup_custom = ""
+  topup_30   = ""
+  topup_150  = ""
+  topup_250  = ""
+  topup_1000 = ""
   # A $0 monthly price: its checkout saves the card for automatic top-ups.
   auto_top_up = ""
 }
+
+# Who may open the superadmin pages (templates, the question bank).
+superadmin_emails = []

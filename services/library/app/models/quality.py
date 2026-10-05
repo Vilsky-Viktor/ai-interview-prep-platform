@@ -9,7 +9,7 @@ from app.models.base import Base
 
 
 class QuestionStats(Base):
-    """How a question has been answered, from answer.recorded events (rounds and sessions)."""
+    """How a question has been answered, from rounds' answer.recorded and session.scored events."""
 
     __tablename__ = "question_stats"
 
@@ -20,6 +20,14 @@ class QuestionStats(Base):
     correct: Mapped[int] = mapped_column(default=0)
     # Times each option was picked, keyed by its text: {"option text": count}.
     option_picks: Mapped[dict] = mapped_column(JSONB, default=dict)
+    # Answers by candidates who scored well on the topic, and by ones who scored poorly, and how
+    # many of each were right: a question both get right as often doesn't separate them.
+    strong_answers: Mapped[int] = mapped_column(default=0)
+    strong_correct: Mapped[int] = mapped_column(default=0)
+    weak_answers: Mapped[int] = mapped_column(default=0)
+    weak_correct: Mapped[int] = mapped_column(default=0)
+    # Times a candidate ran out of time on it.
+    timeouts: Mapped[int] = mapped_column(default=0)
     # A QualityFlag while the question waits for the verifier.
     flag: Mapped[str | None] = mapped_column(String(32))
     # The verifier checked the flag and found nothing wrong: not flagged again until replaced.
