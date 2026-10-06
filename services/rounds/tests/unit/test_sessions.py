@@ -37,3 +37,15 @@ def test_topic_out_counts_questions():
     assert topic.topic_title == "Python"
     assert topic.total == 2
     assert topic.answered == 0
+
+
+def test_the_data_export_shows_right_and_wrong_only_for_practice():
+    from app.helpers.export import answer_export
+    from app.models.answers import Answer
+
+    question_id = uuid4()
+    questions = [{"id": str(question_id), "text": "Q?", "options": [{"answer": "A"}]}]
+    answer = Answer(question_id=question_id, option_index=0, correct=True)
+
+    assert "correct" not in answer_export(questions, answer, practice=False)
+    assert answer_export(questions, answer, practice=True)["correct"] is True

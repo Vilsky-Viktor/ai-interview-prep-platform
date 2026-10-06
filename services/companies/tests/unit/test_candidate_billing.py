@@ -135,15 +135,22 @@ def test_a_deleted_candidate_is_left_alone(ledger, monkeypatch):
 
 
 def test_invites_never_started_expire_and_give_their_credits_back(ledger, monkeypatch):
-    stale = SimpleNamespace(interview_id=INTERVIEW_ID, email="dave@example.com")
+    stale = SimpleNamespace(id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="dave@example.com")
+    waiting = [stale]
     asked = []
 
-    async def fake_expire(before):
+    async def fake_expiring(before, limit):
         asked.append(before)
 
-        return [stale]
+        return list(waiting)
 
-    monkeypatch.setattr(invites, "expire_unstarted", fake_expire)
+    async def fake_mark(invite_id):
+        # Released first, then marked: a release that fails leaves it for the next run.
+        assert ledger == [("release", f"{INTERVIEW_ID}:dave@example.com")]
+        waiting.clear()
+
+    monkeypatch.setattr(invites, "expiring", fake_expiring)
+    monkeypatch.setattr(invites, "mark_expired", fake_mark)
 
     assert asyncio.run(candidate_billing.expire_unstarted()) == 1
     expected = datetime.now(UTC) - timedelta(days=INVITE_EXPIRY_DAYS)

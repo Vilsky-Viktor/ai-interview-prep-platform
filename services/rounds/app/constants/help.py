@@ -10,6 +10,7 @@ class HelpRole(StrEnum):
 class LegalDocument(StrEnum):
     TERMS = "terms"
     PRIVACY = "privacy"
+    DPA = "dpa"
 
 
 # The page keeps the conversation and sends it whole; nothing of it is stored. A new question's

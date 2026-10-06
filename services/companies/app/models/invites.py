@@ -30,3 +30,6 @@ class CandidateInvite(Base):
     )
     # When the one reminder went out; sending the invite again clears it.
     reminded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # Extra time for a candidate who needs it (an accommodation), in percent of each question's
+    # time; set before they start.
+    extra_time: Mapped[int] = mapped_column(default=0, server_default="0")

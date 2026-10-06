@@ -5,7 +5,7 @@ import { LegalPage } from "@/components/legal-page"
 import { serverFetch } from "@/lib/server-api"
 import type { LegalDocument } from "@/types/help"
 
-export const metadata: Metadata = { title: "Privacy policy" }
+export const metadata: Metadata = { title: "Privacy" }
 
 export default async function PrivacyPage() {
   const document = await serverFetch<LegalDocument>(
@@ -16,5 +16,5 @@ export default async function PrivacyPage() {
     notFound()
   }
 
-  return <LegalPage title="Privacy policy" document={document} />
+  return <LegalPage title="Privacy" document={document} />
 }

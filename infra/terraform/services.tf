@@ -1,18 +1,31 @@
 resource "google_cloud_run_v2_service" "service" {
-  for_each            = local.services
-  name                = each.key
-  location            = var.region
-  ingress             = "INGRESS_TRAFFIC_ALL"
+  for_each = local.services
+  name     = each.key
+  location = var.region
+  # Public services only through the load balancer, so Cloud Armor's rules always apply; the
+  # worker only from Google (Cloud Tasks). Both still take Pub/Sub, Scheduler and Tasks, and
+  # calls from the other services over the private network below.
+  ingress             = each.value.public ? "INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER" : "INGRESS_TRAFFIC_INTERNAL_ONLY"
   deletion_protection = false
 
   template {
-    service_account                  = google_service_account.runtime.email
+    service_account                  = google_service_account.service[each.key].email
     timeout                          = "${each.value.timeout}s"
     max_instance_request_concurrency = each.value.concurrency
 
     scaling {
       min_instance_count = each.value.min
       max_instance_count = each.value.max
+    }
+
+    # All outgoing traffic goes through the private network: calls to the other services arrive
+    # as internal, and the internet (OpenAI, Resend, Paddle, Upstash) through its NAT.
+    vpc_access {
+      network_interfaces {
+        network    = google_compute_network.main.id
+        subnetwork = google_compute_subnetwork.run.id
+      }
+      egress = "ALL_TRAFFIC"
     }
 
     dynamic "volumes" {
@@ -127,7 +140,9 @@ resource "google_cloud_run_v2_service" "service" {
   }
 
   depends_on = [
-    google_project_iam_member.runtime,
+    google_project_iam_member.service,
+    google_secret_manager_secret_iam_member.service,
+    google_compute_router_nat.main,
     google_secret_manager_secret_version.manual,
     google_secret_manager_secret_version.database_url,
     google_secret_manager_secret_version.service_secret,
@@ -162,7 +177,7 @@ resource "google_cloud_run_v2_job" "migrate" {
 
   template {
     template {
-      service_account = google_service_account.runtime.email
+      service_account = google_service_account.service[each.value].email
       max_retries     = 0
 
       volumes {

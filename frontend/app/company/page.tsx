@@ -29,7 +29,7 @@ export default async function CompanyPage() {
         {signedIn && <CreateCompany />}
       </div>
 
-      {!signedIn && <SignInPrompt message={t("signIn")} />}
+      {!signedIn && <SignInPrompt />}
 
       {signedIn && <CompanyList initial={companies ?? []} />}
     </main>

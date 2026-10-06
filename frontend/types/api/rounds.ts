@@ -105,7 +105,9 @@ export interface paths {
     }
     /**
      * Review Session
-     * @description Candidates see their questions and picks, never whether they were right or the key.
+     * @description Once a section is finished, candidates see the questions they answered and their picks,
+     *     never whether they were right or the key. Never while it runs: that would show questions
+     *     before their clock starts.
      */
     get: operations["review_session_sessions__session_id__review_get"]
     put?: never

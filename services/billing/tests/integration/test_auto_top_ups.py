@@ -137,3 +137,29 @@ def test_an_automatic_charge_credits_the_wallet_its_subscription_belongs_to(run,
 
     assert opened == 0
     assert after == credits_for(3_000)
+
+
+def test_the_same_subscription_twice_stays_attached_and_a_deleted_buyer_turns_it_off(
+    run, paddle_calls
+):
+    ann = f"user-{uuid.uuid4()}"
+    acme = str(uuid.uuid4())
+    sub = f"sub_{uuid.uuid4().hex[:12]}"
+
+    async def scenario():
+        await auto_top_ups.turn_on(
+            COMPANY, acme, AutoTopUpIn(product="topup_30", threshold=300), ann
+        )
+        # Paddle's two events for one checkout, handled at the same moment.
+        first = await rows.start(COMPANY, acme, ann, sub)
+        second = await rows.start(COMPANY, acme, ann, sub)
+        # The buyer deletes their account: their card is never charged again.
+        await auto_top_ups.forget_buyer(ann)
+
+        return first, second, await auto_top_ups.out(COMPANY, acme)
+
+    first, second, after = run(scenario())
+
+    assert first and second
+    assert not after.on and not after.waiting
+    assert paddle_calls == [("cancel", sub)]

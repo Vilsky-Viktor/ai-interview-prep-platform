@@ -28,10 +28,14 @@ async def create_template(payload: PreparationIn) -> uuid.UUID:
         topic_count=len(payload.topics),
     )
 
-    # About a third of each topic goes straight to practice; the rest start private.
+    # About a third of each topic's own new questions goes straight to practice; the rest start
+    # private. Questions reused from the bank stay private: they may still be in companies'
+    # interviews, and practice shows the answers.
     for topic in question_set.topics:
-        for question in topic.questions:
-            if question.position % REVEALED_EVERY == REVEALED_EVERY - 1:
+        fresh = [question for question in topic.questions if question.source_question_id is None]
+
+        for index, question in enumerate(fresh):
+            if index % REVEALED_EVERY == REVEALED_EVERY - 1:
                 question.stage = Stage.REVEALED
 
     async with Session() as session:

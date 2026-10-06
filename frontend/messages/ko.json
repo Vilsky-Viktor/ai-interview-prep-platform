@@ -41,9 +41,12 @@
     "practice": "무료 연습"
   },
   "signIn": {
-    "with": "로그인:",
+    "title": "로그인",
+    "continueWith": "<name>{provider}</name> 계정으로 계속",
+    "link": "이 이메일에는 이미 prepza 계정이 있습니다. 이전에 로그인한 방법으로 계속하면 {provider}이(가) 해당 계정에 연결됩니다.",
     "consent": "로그인하면 <terms>이용약관</terms> 및 <privacy>개인정보처리방침</privacy>에 동의하는 것으로 간주됩니다.",
-    "failed": "로그인하지 못했습니다. 다시 시도해 주세요."
+    "failed": "로그인하지 못했습니다. 다시 시도해 주세요.",
+    "verify": "이메일 인증 링크를 보냈습니다. 링크를 연 다음 다시 로그인하면 면접을 볼 수 있습니다."
   },
   "common": {
     "copyLink": "링크 복사",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "회사",
-    "signIn": "회사 면접을 만들고 지원자를 초대하려면 로그인하세요.",
     "signInInterviews": "회사 면접을 보려면 로그인하세요.",
     "signInAdmins": "회사 관리자를 보려면 로그인하세요.",
     "signInReferrals": "회사 초대 링크를 보려면 로그인하세요.",
@@ -366,11 +368,21 @@
     "revokeTitle": "초대를 취소할까요?",
     "revokeText": "{email}(으)로 보낸 링크가 더 이상 작동하지 않습니다. 나중에 다시 초대할 수 있습니다.",
     "revokeConfirm": "취소",
+    "erase": "지원자 삭제",
+    "erased": "{email}을(를) 삭제했습니다",
+    "eraseFailed": "지원자를 삭제하지 못했습니다.",
+    "eraseTitle": "이 지원자를 삭제할까요?",
+    "eraseText": "{email}의 답변과 결과가 영구적으로 삭제됩니다. 예를 들어 지원자가 데이터 삭제를 요청할 때 사용하세요. 이 작업은 되돌릴 수 없습니다.",
+    "eraseConfirm": "삭제",
     "sortBy": "정렬: {sort}",
     "sort": {
       "grade": "점수",
       "date": "날짜"
-    }
+    },
+    "extraTimeNone": "추가 시간 없음",
+    "extraTimeSome": "시간 +{percent}%",
+    "extraTimeNote": "장애 등의 이유로 시간이 더 필요한 지원자를 위한 설정입니다. 지원자가 시작하기 전에 설정하세요.",
+    "extraTimeFailed": "추가 시간을 변경하지 못했습니다. 다시 시도해 주세요."
   },
   "interviewStatus": {
     "new": "신규",
@@ -439,12 +451,15 @@
     "timeRunsOut": "문제의 제한 시간이 끝나면 오답 처리되고 다음 문제가 열립니다. 페이지를 나가도 시간은 계속 흐릅니다.",
     "unanswered": "답하지 않은 문제는 오답으로 처리됩니다.",
     "saved": "진행 상황은 저장됩니다. 이 링크를 다시 열면 이어서 할 수 있습니다.",
+    "extraTime": "장애 등의 이유로 시간이 더 필요하신가요? 시작하기 전에 {company} 측에 문의하세요.",
+    "people": "문제는 AI가 작성합니다. 결과는 {company} 측 담당자가 검토하고 결정하며, 내 결과의 검토를 요청할 수 있습니다.",
     "stay": "이 페이지에 머물러 주세요. 페이지 이탈과 복사는 기록됩니다(<link>개인정보</link>).",
     "finished": "이 면접은 이미 종료되었습니다.",
     "continue": "계속",
     "start": "수락하고 시작",
     "mismatch": "이메일이 일치하지 않습니다. 초대받은 이메일로 로그인해서 시작하세요.",
-    "title": "면접 초대"
+    "title": "면접 초대",
+    "theCompany": "회사"
   },
   "members": {
     "joined": "참여함",
@@ -733,7 +748,8 @@
     "candidatesFileName": "지원자 {title}",
     "candidateCount": "{count, plural, other {지원자 #명}}",
     "passMark": "합격 기준 {mark}%",
-    "progressOf": "{progress}% 완료"
+    "progressOf": "{progress}% 완료",
+    "humanReview": "점수는 결정을 돕는 것이지 결정을 대신하지 않습니다. 답변을 읽어 보고, 지원자가 요청하면 사람이 결과를 검토하도록 하세요."
   },
   "practice": {
     "title": "무료 면접 연습",

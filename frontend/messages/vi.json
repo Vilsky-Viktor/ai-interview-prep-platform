@@ -41,9 +41,12 @@
     "practice": "Luyện tập miễn phí"
   },
   "signIn": {
-    "with": "Đăng nhập bằng",
+    "title": "Đăng nhập",
+    "continueWith": "Tiếp tục với <name>{provider}</name>",
+    "link": "Email này đã có tài khoản prepza. Hãy tiếp tục theo cách bạn đã đăng nhập trước đây, và {provider} sẽ được liên kết với tài khoản đó.",
     "consent": "Khi đăng nhập, bạn đồng ý với <terms>Điều khoản</terms> và <privacy>Chính sách quyền riêng tư</privacy>.",
-    "failed": "Đăng nhập không thành công. Vui lòng thử lại."
+    "failed": "Đăng nhập không thành công. Vui lòng thử lại.",
+    "verify": "Chúng tôi đã gửi cho bạn một liên kết để xác minh email. Hãy mở liên kết, rồi đăng nhập lại để tham gia phỏng vấn."
   },
   "common": {
     "copyLink": "Sao chép liên kết",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Công ty",
-    "signIn": "Đăng nhập để tạo buổi phỏng vấn cho công ty và mời ứng viên.",
     "signInInterviews": "Đăng nhập để xem các buổi phỏng vấn của công ty.",
     "signInAdmins": "Đăng nhập để xem quản trị viên của công ty.",
     "signInReferrals": "Đăng nhập để xem liên kết mời của công ty.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Thu hồi lời mời?",
     "revokeText": "Liên kết đã gửi tới {email} sẽ không còn dùng được. Bạn có thể mời lại sau.",
     "revokeConfirm": "Thu hồi",
+    "erase": "Xóa ứng viên",
+    "erased": "Đã xóa {email}",
+    "eraseFailed": "Không thể xóa ứng viên.",
+    "eraseTitle": "Xóa ứng viên này?",
+    "eraseText": "Câu trả lời và kết quả của {email} sẽ bị xóa vĩnh viễn, ví dụ khi họ yêu cầu xóa dữ liệu của mình. Không thể hoàn tác.",
+    "eraseConfirm": "Xóa",
     "sortBy": "Sắp xếp theo: {sort}",
     "sort": {
       "grade": "Điểm",
       "date": "Ngày"
-    }
+    },
+    "extraTimeNone": "Không thêm thời gian",
+    "extraTimeSome": "+{percent}% thời gian",
+    "extraTimeNote": "Dành cho ứng viên cần thêm thời gian, ví dụ vì khuyết tật. Hãy đặt trước khi họ bắt đầu.",
+    "extraTimeFailed": "Không thể thay đổi thời gian thêm. Vui lòng thử lại."
   },
   "interviewStatus": {
     "new": "Mới",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Khi hết thời gian của một câu, câu đó tính là sai và câu tiếp theo mở ra. Đồng hồ vẫn chạy nếu bạn rời đi.",
     "unanswered": "Câu chưa trả lời được tính là sai.",
     "saved": "Tiến độ được lưu: mở lại liên kết này để tiếp tục.",
+    "extraTime": "Bạn cần thêm thời gian, ví dụ vì khuyết tật? Hãy hỏi {company} trước khi bắt đầu.",
+    "people": "Các câu hỏi do AI viết. Người của {company} sẽ xem xét kết quả và đưa ra quyết định; bạn có thể yêu cầu họ xem xét kết quả của bạn.",
     "stay": "Hãy ở lại trang này: việc rời trang hoặc sao chép sẽ được ghi nhận (<link>quyền riêng tư</link>).",
     "finished": "Buổi phỏng vấn này đã kết thúc.",
     "continue": "Tiếp tục",
     "start": "Chấp nhận và bắt đầu",
     "mismatch": "Email không khớp. Đăng nhập bằng email được mời để bắt đầu.",
-    "title": "Lời mời phỏng vấn"
+    "title": "Lời mời phỏng vấn",
+    "theCompany": "công ty"
   },
   "members": {
     "joined": "Đã tham gia",
@@ -737,7 +752,8 @@
     "candidatesFileName": "Ứng viên {title}",
     "candidateCount": "{count, plural, other {# ứng viên}}",
     "passMark": "điểm đạt {mark}%",
-    "progressOf": "Đã làm {progress}%"
+    "progressOf": "Đã làm {progress}%",
+    "humanReview": "Điểm số hỗ trợ quyết định của bạn, chứ không thay bạn quyết định. Hãy đọc các câu trả lời, và nếu ứng viên yêu cầu, hãy để một người xem xét kết quả của họ."
   },
   "practice": {
     "title": "Luyện phỏng vấn miễn phí",

@@ -41,9 +41,12 @@
     "practice": "Gratis oefenen"
   },
   "signIn": {
-    "with": "Inloggen met",
+    "title": "Inloggen",
+    "continueWith": "Doorgaan met <name>{provider}</name>",
+    "link": "Dit e-mailadres heeft al een prepza-account. Ga verder zoals je eerder hebt ingelogd, dan wordt {provider} eraan gekoppeld.",
     "consent": "Door in te loggen ga je akkoord met de <terms>Voorwaarden</terms> en het <privacy>Privacybeleid</privacy>.",
-    "failed": "Inloggen is mislukt. Probeer het opnieuw."
+    "failed": "Inloggen is mislukt. Probeer het opnieuw.",
+    "verify": "We hebben je een link gestuurd om je e-mailadres te verifiëren. Open hem en log daarna opnieuw in om sollicitatiegesprekken te doen."
   },
   "common": {
     "copyLink": "Link kopiëren",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Bedrijven",
-    "signIn": "Log in om sollicitatiegesprekken voor je bedrijf te maken en kandidaten uit te nodigen.",
     "signInInterviews": "Log in om de sollicitatiegesprekken van het bedrijf te zien.",
     "signInAdmins": "Log in om de beheerders van het bedrijf te zien.",
     "signInReferrals": "Log in om de uitnodigingslink van het bedrijf te zien.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Uitnodiging intrekken?",
     "revokeText": "De link die naar {email} is gestuurd, werkt niet meer. Je kunt later opnieuw uitnodigen.",
     "revokeConfirm": "Intrekken",
+    "erase": "Kandidaat verwijderen",
+    "erased": "{email} verwijderd",
+    "eraseFailed": "De kandidaat kon niet worden verwijderd.",
+    "eraseTitle": "Deze kandidaat verwijderen?",
+    "eraseText": "De antwoorden en resultaten van {email} worden definitief verwijderd, bijvoorbeeld wanneer iemand vraagt om zijn gegevens te wissen. Dit kan niet ongedaan worden gemaakt.",
+    "eraseConfirm": "Verwijderen",
     "sortBy": "Sorteren op: {sort}",
     "sort": {
       "grade": "Cijfer",
       "date": "Datum"
-    }
+    },
+    "extraTimeNone": "Geen extra tijd",
+    "extraTimeSome": "+{percent}% tijd",
+    "extraTimeNote": "Voor een kandidaat die meer tijd nodig heeft, bijvoorbeeld door een beperking. Stel het in voordat de kandidaat begint.",
+    "extraTimeFailed": "De extra tijd kon niet worden gewijzigd. Probeer het opnieuw."
   },
   "interviewStatus": {
     "new": "Nieuw",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Als de tijd van een vraag om is, telt die als fout en opent de volgende. De klok loopt door als je weggaat.",
     "unanswered": "Onbeantwoorde vragen tellen als fout.",
     "saved": "Je voortgang wordt bewaard: gebruik deze link opnieuw om verder te gaan.",
+    "extraTime": "Heb je meer tijd nodig, bijvoorbeeld door een beperking? Vraag het aan {company} voordat je begint.",
+    "people": "De vragen zijn door AI geschreven. Mensen bij {company} bekijken de resultaten en beslissen; je kunt hen vragen jouw resultaat te beoordelen.",
     "stay": "Blijf op deze pagina: weggaan of kopiëren wordt vastgelegd (<link>privacy</link>).",
     "finished": "Dit sollicitatiegesprek is al afgerond.",
     "continue": "Doorgaan",
     "start": "Accepteren en starten",
     "mismatch": "Het e-mailadres komt niet overeen. Log in met het adres van de uitnodiging om te starten.",
-    "title": "Uitnodiging voor een sollicitatiegesprek"
+    "title": "Uitnodiging voor een sollicitatiegesprek",
+    "theCompany": "het bedrijf"
   },
   "members": {
     "joined": "Doet mee",
@@ -737,7 +752,8 @@
     "candidatesFileName": "Kandidaten {title}",
     "candidateCount": "{count, plural, one {# kandidaat} other {# kandidaten}}",
     "passMark": "slaaggrens {mark}%",
-    "progressOf": "{progress}% afgerond"
+    "progressOf": "{progress}% afgerond",
+    "humanReview": "De score ondersteunt je beslissing, maar neemt die niet. Lees de antwoorden, en laat een mens het resultaat beoordelen als de kandidaat daarom vraagt."
   },
   "practice": {
     "title": "Gratis sollicitatiegesprek oefenen",

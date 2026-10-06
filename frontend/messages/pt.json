@@ -41,9 +41,12 @@
     "practice": "Prática gratuita"
   },
   "signIn": {
-    "with": "Entrar com",
+    "title": "Entrar",
+    "continueWith": "Continuar com <name>{provider}</name>",
+    "link": "Este e-mail já tem uma conta no prepza. Continue da forma como você entrou antes, e o {provider} será vinculado a ela.",
     "consent": "Ao entrar, você concorda com os <terms>Termos</terms> e a <privacy>Política de privacidade</privacy>.",
-    "failed": "Não foi possível entrar. Tente novamente."
+    "failed": "Não foi possível entrar. Tente novamente.",
+    "verify": "Enviamos um link para verificar seu e-mail. Abra-o e depois entre de novo para fazer entrevistas."
   },
   "common": {
     "copyLink": "Copiar link",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Empresas",
-    "signIn": "Entre para criar entrevistas para sua empresa e convidar candidatos.",
     "signInInterviews": "Entre para ver as entrevistas da empresa.",
     "signInAdmins": "Entre para ver os administradores da empresa.",
     "signInReferrals": "Entre para ver o link de convite da empresa.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Revogar o convite?",
     "revokeText": "O link enviado para {email} deixa de funcionar. Você pode convidar de novo depois.",
     "revokeConfirm": "Revogar",
+    "erase": "Excluir candidato",
+    "erased": "{email} excluído",
+    "eraseFailed": "Não foi possível excluir o candidato.",
+    "eraseTitle": "Excluir este candidato?",
+    "eraseText": "As respostas e os resultados de {email} são excluídos para sempre, por exemplo quando a pessoa pede que seus dados sejam apagados. Isso não pode ser desfeito.",
+    "eraseConfirm": "Excluir",
     "sortBy": "Ordenar por: {sort}",
     "sort": {
       "grade": "Nota",
       "date": "Data"
-    }
+    },
+    "extraTimeNone": "Sem tempo extra",
+    "extraTimeSome": "+{percent}% de tempo",
+    "extraTimeNote": "Para um candidato que precisa de mais tempo, por exemplo por causa de uma deficiência. Defina antes que ele comece.",
+    "extraTimeFailed": "Não foi possível alterar o tempo extra. Tente novamente."
   },
   "interviewStatus": {
     "new": "Novo",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Quando o tempo de uma questão acaba, ela conta como errada e a próxima abre. O relógio continua correndo se você sair.",
     "unanswered": "Questões não respondidas contam como erradas.",
     "saved": "O progresso é salvo: use este link de novo para continuar.",
+    "extraTime": "Precisa de mais tempo, por exemplo por causa de uma deficiência? Peça à equipe da {company} antes de começar.",
+    "people": "As questões são escritas por IA. Pessoas da {company} analisam os resultados e decidem; você pode pedir que revisem o seu.",
     "stay": "Fique nesta página: sair dela ou copiar é registrado (<link>privacidade</link>).",
     "finished": "Esta entrevista já foi concluída.",
     "continue": "Continuar",
     "start": "Aceitar e começar",
     "mismatch": "O e-mail não confere. Entre com o e-mail do convite para começar.",
-    "title": "Convite para entrevista"
+    "title": "Convite para entrevista",
+    "theCompany": "empresa"
   },
   "members": {
     "joined": "Participando",
@@ -741,7 +756,8 @@
     "candidatesFileName": "Candidatos {title}",
     "candidateCount": "{count, plural, one {# candidato} other {# candidatos}}",
     "passMark": "nota de aprovação {mark}%",
-    "progressOf": "{progress}% concluído"
+    "progressOf": "{progress}% concluído",
+    "humanReview": "A pontuação apoia sua decisão; ela não decide por você. Leia as respostas e, se o candidato pedir, peça a uma pessoa que revise o resultado dele."
   },
   "practice": {
     "title": "Prática de entrevista gratuita",

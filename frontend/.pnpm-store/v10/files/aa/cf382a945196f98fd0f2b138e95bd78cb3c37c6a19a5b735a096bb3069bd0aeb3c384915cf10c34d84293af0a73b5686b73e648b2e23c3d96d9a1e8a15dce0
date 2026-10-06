@@ -1,7 +1,0 @@
-import type { RawAttributes, Span } from '@sentry/core';
-/**
- * Forks the isolation scope for `BaseServer.handleRequest` / `Middleware.execute` root spans so that request-scoped
- * data (e.g. `normalizedRequest`) stays isolated per request.
- */
-export declare function maybeForkIsolationScopeForRootSpan(span: Span, spanAttributes: RawAttributes<Record<string, unknown>> | undefined): void;
-//# sourceMappingURL=forkIsolationScopeForRootSpan.d.ts.map

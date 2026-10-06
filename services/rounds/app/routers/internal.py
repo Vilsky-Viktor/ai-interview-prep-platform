@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from sqlalchemy.exc import IntegrityError
 
 from app.constants.integrity import IntegritySignal
 from app.helpers.review import add_signals, build_review
@@ -8,13 +9,14 @@ from app.helpers.sessions import session_out
 from app.helpers.talents import suggestions
 from app.schemas.sessions import (
     InviteScoresIn,
+    RescoreIn,
     ScorecardSession,
     SessionOut,
     SessionsCreate,
 )
 from app.schemas.talents import SuggestedTalent, SuggestionsIn
 from app.service_auth import ServiceCaller
-from app.storage import sessions, talents
+from app.storage import rescore, sessions, talents
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -27,13 +29,17 @@ async def create_sessions(body: SessionsCreate, caller: ServiceCaller) -> list[S
     if existing:
         return [session_out(row) for row in existing]
 
-    rows = await sessions.create_many(
-        body.user_id,
-        body.candidate_invite_id,
-        body.topics,
-        body.question_seconds,
-        body.preview,
-    )
+    try:
+        rows = await sessions.create_many(
+            body.user_id,
+            body.candidate_invite_id,
+            body.topics,
+            body.question_seconds,
+            body.preview,
+        )
+    except IntegrityError:
+        # Another start for the same invite got there first: theirs are the sections.
+        rows = await sessions.list_for_invite(body.candidate_invite_id)
 
     return [session_out(row) for row in rows]
 
@@ -89,3 +95,9 @@ async def talent_suggestions(body: SuggestionsIn, caller: ServiceCaller) -> list
     rows, links = await talents.practice_of_consenting(body.template_ids)
 
     return suggestions(rows, links, body.template_ids)
+
+
+@router.post("/questions/{question_id}/rescore")
+async def rescore_question(question_id: UUID, body: RescoreIn, caller: ServiceCaller) -> dict:
+    """The question's answer key was corrected: candidates who answered it are marked again."""
+    return {"sessions": await rescore.rescore_question(question_id, body.text, body.options)}

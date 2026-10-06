@@ -40,7 +40,8 @@ resource "google_compute_security_policy" "edge" {
 
     match {
       expr {
-        expression = "request.path.matches('^/api/[^/]+/internal/')"
+        # Decoded and lowercased, so /api/x/%69nternal/ or doubled slashes don't slip past.
+        expression = "request.path.urlDecode().lower().matches('^/+api/+[^/]+/+internal(/|$)')"
       }
     }
   }
@@ -54,7 +55,7 @@ resource "google_compute_security_policy" "edge" {
 
     match {
       expr {
-        expression = "request.path == '/api/rounds/help/chat'"
+        expression = "request.path.urlDecode().lower().matches('^/+api/+rounds/+help/+chat/*$')"
       }
     }
 

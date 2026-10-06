@@ -41,9 +41,12 @@
     "practice": "Free practice"
   },
   "signIn": {
-    "with": "Sign in with",
+    "title": "Sign in",
+    "continueWith": "Continue with <name>{provider}</name>",
+    "link": "This email already has a prepza account. Continue the way you signed in before, and {provider} will be linked to it.",
     "consent": "By signing in, you agree to the <terms>Terms</terms> and the <privacy>Privacy policy</privacy>.",
-    "failed": "Sign-in failed. Please try again."
+    "failed": "Sign-in failed. Please try again.",
+    "verify": "We sent you a link to verify your email. Open it, then sign in again to take interviews."
   },
   "common": {
     "copyLink": "Copy link",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Companies",
-    "signIn": "Sign in to create interviews for your company and invite candidates.",
     "signInInterviews": "Sign in to see company interviews.",
     "signInAdmins": "Sign in to see company admins.",
     "signInReferrals": "Sign in to see the company's referral link.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Revoke the invite?",
     "revokeText": "The link sent to {email} stops working. You can invite them again later.",
     "revokeConfirm": "Revoke",
+    "erase": "Delete candidate",
+    "erased": "{email} deleted",
+    "eraseFailed": "Couldn't delete the candidate.",
+    "eraseTitle": "Delete this candidate?",
+    "eraseText": "{email}'s answers and results are deleted for good, for example when they ask to have their data erased. This can't be undone.",
+    "eraseConfirm": "Delete",
     "sortBy": "Sort by: {sort}",
     "sort": {
       "grade": "Grade",
       "date": "Date"
-    }
+    },
+    "extraTimeNone": "No extra time",
+    "extraTimeSome": "+{percent}% time",
+    "extraTimeNote": "For a candidate who needs more time, for example because of a disability. Set it before they start.",
+    "extraTimeFailed": "Couldn't change the extra time. Please try again."
   },
   "interviewStatus": {
     "new": "New",
@@ -439,12 +451,15 @@
     "timeRunsOut": "When a question's time runs out, it counts as wrong and the next one opens. The clock keeps running if you leave.",
     "unanswered": "Unanswered questions count as wrong.",
     "saved": "Progress is saved: use this link again to continue.",
+    "extraTime": "Need more time, for example because of a disability? Ask {company} before you start.",
+    "people": "The questions are written by AI. People at {company} review the results and decide; you can ask them to review yours.",
     "stay": "Stay on this page: leaving it or copying is recorded (<link>privacy</link>).",
     "finished": "This interview is already finished.",
     "continue": "Continue",
     "start": "Accept & Start",
     "mismatch": "The email does not match. Sign in with the invitation email to start.",
-    "title": "Interview invite"
+    "title": "Interview invite",
+    "theCompany": "the company"
   },
   "members": {
     "joined": "Joined",
@@ -737,7 +752,8 @@
     "candidatesFileName": "Candidates {title}",
     "candidateCount": "{count, plural, one {# candidate} other {# candidates}}",
     "passMark": "passing grade {mark}%",
-    "progressOf": "{progress}% done"
+    "progressOf": "{progress}% done",
+    "humanReview": "The score supports your decision; it doesn't make it. Read the answers, and if the candidate asks, have a person review their result."
   },
   "practice": {
     "title": "Free interview practice",

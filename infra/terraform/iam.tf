@@ -1,8 +1,10 @@
-# What every service runs as: it reads its secrets, connects to Cloud SQL, publishes events and
-# queues tasks.
-resource "google_service_account" "runtime" {
-  account_id   = "prepza-runtime"
-  display_name = "prepza services"
+# Each service runs as its own account, with only what it uses: its own secrets, its own
+# database, publishing events, and (generation only) queuing tasks. The frontend has none. So a
+# flaw in one service can't read another's keys or the payment and AI keys.
+resource "google_service_account" "service" {
+  for_each     = local.services
+  account_id   = "prepza-${each.key}"
+  display_name = "prepza ${each.key}"
 }
 
 # What Google signs as when it calls our services: Pub/Sub pushes, Cloud Tasks, Cloud Scheduler.
@@ -12,24 +14,52 @@ resource "google_service_account" "invoker" {
   display_name = "Pub/Sub, Cloud Tasks and Scheduler calling prepza"
 }
 
-resource "google_project_iam_member" "runtime" {
-  for_each = toset([
-    "roles/cloudsql.client",
-    "roles/cloudtasks.enqueuer",
-    "roles/pubsub.publisher",
-    "roles/secretmanager.secretAccessor",
-  ])
+locals {
+  # Project roles each service needs: Cloud SQL for those with a database, Pub/Sub for the
+  # backend services (the outbox and funnel events), Cloud Tasks for the generation services.
+  service_roles = merge([
+    for name, service in local.services : merge(
+      service.database == null ? {} : { "${name}/cloudsql.client" = { service = name, role = "roles/cloudsql.client" } },
+      contains(keys(local.own_key), name) ? { "${name}/pubsub.publisher" = { service = name, role = "roles/pubsub.publisher" } } : {},
+      contains(local.task_services, name) ? { "${name}/cloudtasks.enqueuer" = { service = name, role = "roles/cloudtasks.enqueuer" } } : {},
+    )
+  ]...)
 
-  project = var.project_id
-  role    = each.value
-  member  = "serviceAccount:${google_service_account.runtime.email}"
+  # The services that queue generation jobs and verifier checks.
+  task_services = ["generation", "generation-worker"]
+
+  # Each secret a service reads, granted on that secret alone: its keys, and its database's URL.
+  secret_grants = merge([
+    for name, service in local.services : merge(
+      { for secret in keys(local.secrets[name]) : "${name}/${secret}" => { service = name, secret = local.secret_ids[secret] } },
+      service.database == null ? {} : {
+        "${name}/database-url" = { service = name, secret = google_secret_manager_secret.database_url[service.database].secret_id }
+      },
+    )
+  ]...)
 }
 
-# Creating a Cloud Task that carries the invoker's token requires acting as the invoker.
-resource "google_service_account_iam_member" "runtime_acts_as_invoker" {
+resource "google_project_iam_member" "service" {
+  for_each = local.service_roles
+  project  = var.project_id
+  role     = each.value.role
+  member   = "serviceAccount:${google_service_account.service[each.value.service].email}"
+}
+
+resource "google_secret_manager_secret_iam_member" "service" {
+  for_each  = local.secret_grants
+  secret_id = each.value.secret
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.service[each.value.service].email}"
+}
+
+# Creating a Cloud Task that carries the invoker's token requires acting as the invoker; only the
+# services that queue tasks may.
+resource "google_service_account_iam_member" "queues_as_invoker" {
+  for_each           = toset(local.task_services)
   service_account_id = google_service_account.invoker.name
   role               = "roles/iam.serviceAccountUser"
-  member             = "serviceAccount:${google_service_account.runtime.email}"
+  member             = "serviceAccount:${google_service_account.service[each.value].email}"
 }
 
 # Pub/Sub signs push requests as the invoker.

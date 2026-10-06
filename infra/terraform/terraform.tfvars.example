@@ -25,3 +25,10 @@ paddle_prices = {
 
 # Who may open the superadmin pages (templates, the question bank).
 superadmin_emails = []
+
+# Sign in with GitHub and LinkedIn (README.md): empty leaves them off. Put the secrets in a
+# terraform.tfvars that's never committed, or pass them as TF_VAR_* environment variables.
+github_client_id       = ""
+github_client_secret   = ""
+linkedin_client_id     = ""
+linkedin_client_secret = ""

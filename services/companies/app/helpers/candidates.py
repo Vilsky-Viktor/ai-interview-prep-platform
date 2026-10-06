@@ -52,3 +52,8 @@ def by_grade(listed: list, totals: dict[str, dict]) -> list:
         return (grade is None, -(grade or 0))
 
     return sorted(listed, key=key)
+
+
+def candidate_seconds(question_seconds: int, extra_time: int | None) -> int:
+    """Each question's time for a candidate, with any extra time they were given."""
+    return round(question_seconds * (100 + (extra_time or 0)) / 100)

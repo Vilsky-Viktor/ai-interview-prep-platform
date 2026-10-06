@@ -85,7 +85,9 @@ async def delete_company(company_id: str, caller: ServiceCaller) -> None:
 
 @router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_user(user_id: str, caller: ServiceCaller) -> None:
-    """The user's purchases for their companies stay for bookkeeping, without their id."""
+    """The user's purchases for their companies stay for bookkeeping, without their id; any
+    automatic top-up paid with their card goes off."""
+    await auto_top_ups.forget_buyer(user_id)
     await purchases.forget_buyer(user_id)
 
 

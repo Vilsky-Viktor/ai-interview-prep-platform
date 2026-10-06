@@ -41,9 +41,12 @@
     "practice": "Ücretsiz pratik"
   },
   "signIn": {
-    "with": "Şununla giriş yap:",
+    "title": "Giriş yap",
+    "continueWith": "<name>{provider}</name> ile devam et",
+    "link": "Bu e-postanın zaten bir prepza hesabı var. Daha önce giriş yaptığınız yolla devam edin; {provider} bu hesaba bağlanacak.",
     "consent": "Giriş yaparak <terms>Koşulları</terms> ve <privacy>Gizlilik politikasını</privacy> kabul etmiş olursunuz.",
-    "failed": "Giriş yapılamadı. Lütfen tekrar deneyin."
+    "failed": "Giriş yapılamadı. Lütfen tekrar deneyin.",
+    "verify": "E-postanızı doğrulamanız için bir bağlantı gönderdik. Bağlantıyı açın, ardından mülakatlara girmek için yeniden giriş yapın."
   },
   "common": {
     "copyLink": "Bağlantıyı kopyala",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Şirketler",
-    "signIn": "Şirketiniz için mülakat oluşturmak ve aday davet etmek için giriş yapın.",
     "signInInterviews": "Şirketin mülakatlarını görmek için giriş yapın.",
     "signInAdmins": "Şirket yöneticilerini görmek için giriş yapın.",
     "signInReferrals": "Şirketin davet bağlantısını görmek için giriş yapın.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Davet geri alınsın mı?",
     "revokeText": "{email} adresine gönderilen bağlantı artık çalışmaz. Daha sonra yeniden davet edebilirsiniz.",
     "revokeConfirm": "Geri al",
+    "erase": "Adayı sil",
+    "erased": "{email} silindi",
+    "eraseFailed": "Aday silinemedi.",
+    "eraseTitle": "Bu aday silinsin mi?",
+    "eraseText": "{email} adresli adayın cevapları ve sonuçları kalıcı olarak silinir; örneğin aday verilerinin silinmesini istediğinde. Bu işlem geri alınamaz.",
+    "eraseConfirm": "Sil",
     "sortBy": "Sırala: {sort}",
     "sort": {
       "grade": "Not",
       "date": "Tarih"
-    }
+    },
+    "extraTimeNone": "Ek süre yok",
+    "extraTimeSome": "+%{percent} süre",
+    "extraTimeNote": "Daha fazla süreye ihtiyaç duyan bir aday için, örneğin bir engel nedeniyle. Aday başlamadan önce ayarlayın.",
+    "extraTimeFailed": "Ek süre değiştirilemedi. Lütfen tekrar deneyin."
   },
   "interviewStatus": {
     "new": "Yeni",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Bir sorunun süresi dolduğunda yanlış sayılır ve sonraki açılır. Sayfadan ayrılsanız da süre işlemeye devam eder.",
     "unanswered": "Cevaplanmayan sorular yanlış sayılır.",
     "saved": "İlerlemeniz kaydedilir: devam etmek için bu bağlantıyı yeniden kullanın.",
+    "extraTime": "Örneğin bir engel nedeniyle daha fazla süreye mi ihtiyacınız var? Başlamadan önce {company} ekibinden isteyin.",
+    "people": "Sorular yapay zekâ tarafından yazılır. Sonuçları {company} ekibindeki kişiler inceler ve karar verir; sizinkini incelemelerini isteyebilirsiniz.",
     "stay": "Bu sayfada kalın: ayrılmak veya kopyalamak kaydedilir (<link>gizlilik</link>).",
     "finished": "Bu mülakat zaten bitti.",
     "continue": "Devam et",
     "start": "Kabul et ve başla",
     "mismatch": "E-posta eşleşmiyor. Başlamak için davetteki e-postayla giriş yapın.",
-    "title": "Mülakat daveti"
+    "title": "Mülakat daveti",
+    "theCompany": "şirketin"
   },
   "members": {
     "joined": "Katıldı",
@@ -745,7 +760,8 @@
     "candidatesFileName": "Adaylar {title}",
     "candidateCount": "{count, plural, one {# aday} other {# aday}}",
     "passMark": "geçme notu %{mark}",
-    "progressOf": "%{progress} tamamlandı"
+    "progressOf": "%{progress} tamamlandı",
+    "humanReview": "Puan kararınızı destekler, kararı sizin yerinize vermez. Cevapları okuyun ve aday isterse sonucunu bir kişiye inceletin."
   },
   "practice": {
     "title": "Ücretsiz mülakat pratiği",

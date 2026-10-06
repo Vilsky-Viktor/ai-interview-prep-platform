@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { createContext, useContext, useEffect, useState } from "react"
 
 import { apiFetch } from "@/lib/api"
-import { writeTokenCookie } from "@/lib/auth"
+import { readTokenCookie, writeTokenCookie } from "@/lib/auth"
 import { auth } from "@/lib/firebase"
 import { isLocale, readLocaleCookie, writeLocaleCookie } from "@/lib/locale"
 import type { AuthState } from "@/types/auth"
@@ -19,7 +19,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     return onIdTokenChanged(auth, async (user) => {
-      writeTokenCookie(user ? await user.getIdToken() : null)
+      const token = user ? await user.getIdToken() : null
+      // Firebase reports the restored session on every page load; the pages were already
+      // rendered with that token, so they re-render only when the token or language changes.
+      let changed = token !== readTokenCookie()
+
+      if (changed) {
+        writeTokenCookie(token)
+      }
 
       // The interface follows the account's language, also on a new device.
       if (user) {
@@ -28,6 +35,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         if (isLocale(language) && language !== readLocaleCookie()) {
           writeLocaleCookie(language)
+          changed = true
         }
 
         // A new account keeps the language it signed up in, for the interface and its emails.
@@ -46,7 +54,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       Sentry.setUser(user ? { id: user.uid } : null)
       setState({ user, loading: false })
       // Server-rendered pages read the token cookie, so re-render them with the new one.
-      router.refresh()
+      if (changed) {
+        router.refresh()
+      }
     })
   }, [router])
 

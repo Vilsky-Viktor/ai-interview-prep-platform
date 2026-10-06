@@ -8,7 +8,8 @@ export function LegalConsent() {
   const t = useTranslations("signIn")
 
   return (
-    <p className="text-sm text-muted-foreground">
+    <p className="text-center text-sm text-balance text-muted-foreground">
+      {/* Two even lines, in any language. */}
       {t.rich("consent", {
         terms: (chunks) => (
           <Link href="/terms" className="underline underline-offset-4">

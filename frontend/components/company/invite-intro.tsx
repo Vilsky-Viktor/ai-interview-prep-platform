@@ -110,6 +110,9 @@ export function InviteIntro({
           t("timeRunsOut"),
           t("unanswered"),
           t("saved"),
+          // Accommodations, and the human decision behind the score.
+          t("extraTime", { company: company || t("theCompany") }),
+          t("people", { company: company || t("theCompany") }),
           t.rich("stay", {
             link: (chunks) => (
               <Link href="/privacy" className="underline underline-offset-4">

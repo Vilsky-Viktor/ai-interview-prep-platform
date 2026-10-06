@@ -15,13 +15,13 @@ PRIVACY_SECTIONS = [
     {
         "heading": "What we collect",
         "items": [
-            "Account: your name, email address, profile photo and account id, from your Google sign-in.",
+            "Account: your name, email address, profile photo and account id, from the Google, LinkedIn or GitHub account you sign in with, and which of them are linked to your account.",
             "What you give us: job descriptions you paste and the interviews made from them, the emails of the candidates you invite and of the people you send a report to, and your ratings and reports of questions. Questions you ask the help chat on the FAQ page are used only to answer them and aren't stored.",
             "Companies: the company's name, logo and website, the email domain it was verified with, and the suggested talents it hid.",
             "Practice: if you take free practice interviews, your answers, grades and how long each answer took. Only you see them, unless you agree to be suggested to companies.",
             "Talent suggestions: if you agree to be suggested, your name from your account and the LinkedIn link you give us, and your answer either way so that we ask only once.",
             "Contact messages: the name, email address and message you send through the contact page.",
-            "Interviews, if a company invites you: the email you were invited with, your answers, how long each answer took, when you left the interview page or copied text during it, and your ratings and reports of questions. You are told about this before you start.",
+            "Interviews, if a company invites you: the email you were invited with, your answers, how long each answer took, when you left the interview page or copied text during it, any extra time the company gave you (no reason is recorded), and your ratings and reports of questions. You are told about this before you start.",
             "Technical: error reports without your IP address or email, and short-lived server logs needed to run and secure the service.",
             "Referrals: whose referral link you or your company came through, and whether it has been rewarded.",
             "Usage statistics: steps such as signing up, a company being created, a candidate invited or a top-up, with counts like a score or an amount. Your account id is replaced by a code that can't be traced back to you, and no names, emails or texts are included.",
@@ -35,7 +35,7 @@ PRIVACY_SECTIONS = [
             "Usage statistics show which parts of prepza help people and which prices and limits work, so we can improve them (our legitimate interest).",
             "Suggesting you to companies hiring for a similar role, only if you agreed (your consent). You can withdraw it at any time in Settings.",
             "Showing a company as verified, by checking its website against the email domains of its owners and admins (our legitimate interest).",
-            "Interview results, timings and page-leave signals help the hiring company assess your answers fairly (the company's legitimate interest). People at the company make the hiring decision; prepza makes no decision about you on its own.",
+            "Interview results, timings and page-leave signals help the hiring company assess your answers fairly (the company's legitimate interest). People at the company make the hiring decision; prepza makes no decision about you on its own. You can ask the company for a person to review your result, and for an accommodation such as extra time before you start.",
         ],
     },
     {
@@ -44,8 +44,8 @@ PRIVACY_SECTIONS = [
             "We share data only with the service providers that run prepza for us, under agreements that protect it:",
         ],
         "items": [
-            "Google (Firebase Authentication): sign-in.",
-            "OpenAI: writing questions and help chat answers from the text you provide. Under OpenAI's API terms, this data is not used to train their models.",
+            "Google (Firebase Authentication): sign-in. LinkedIn and GitHub only confirm who you are when you sign in with them; we don't receive anything else from them.",
+            "OpenAI: writing questions and help chat answers from the text you provide, and checking reported questions (only the reasons given, never the comments). Under OpenAI's API terms, this data is not used to train their models.",
             "Resend: sending invite, reminder and report emails and contact messages.",
             "Sentry: error reports, with emails removed.",
             "Our hosting provider, which stores the data.",
@@ -75,6 +75,7 @@ PRIVACY_SECTIONS = [
             "Pasted job descriptions in our generation records: 90 days after the generation finishes. The interview made from them stays in the company's account until it's deleted.",
             "Contact messages: as long as we need them to answer you, at most 2 years.",
             "Error reports: up to 90 days.",
+            "Database backups: 14 days, then overwritten; anything deleted is gone from them by then.",
             "Usage statistics: 25 months, then deleted automatically.",
             "A one-way hash of your email after you delete your account, only so that signing up again doesn't repeat the welcome credits. It can't be turned back into your email.",
         ],

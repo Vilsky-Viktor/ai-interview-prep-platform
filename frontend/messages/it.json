@@ -41,9 +41,12 @@
     "practice": "Pratica gratuita"
   },
   "signIn": {
-    "with": "Accedi con",
+    "title": "Accedi",
+    "continueWith": "Continua con <name>{provider}</name>",
+    "link": "Questa email ha già un account prepza. Continua come hai fatto l'ultima volta e {provider} verrà collegato.",
     "consent": "Accedendo, accetti i <terms>Termini</terms> e l’<privacy>Informativa sulla privacy</privacy>.",
-    "failed": "Accesso non riuscito. Riprova."
+    "failed": "Accesso non riuscito. Riprova.",
+    "verify": "Ti abbiamo inviato un link per verificare la tua email. Aprilo, poi accedi di nuovo per svolgere i colloqui."
   },
   "common": {
     "copyLink": "Copia link",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Aziende",
-    "signIn": "Accedi per creare colloqui per la tua azienda e invitare candidati.",
     "signInInterviews": "Accedi per vedere i colloqui dell'azienda.",
     "signInAdmins": "Accedi per vedere gli amministratori dell'azienda.",
     "signInReferrals": "Accedi per vedere il link d'invito dell'azienda.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Revocare l'invito?",
     "revokeText": "Il link inviato a {email} smette di funzionare. Potrai invitarlo di nuovo più tardi.",
     "revokeConfirm": "Revoca",
+    "erase": "Elimina candidato",
+    "erased": "{email} eliminato",
+    "eraseFailed": "Impossibile eliminare il candidato.",
+    "eraseTitle": "Eliminare questo candidato?",
+    "eraseText": "Le risposte e i risultati di {email} vengono eliminati definitivamente, ad esempio quando la persona chiede la cancellazione dei propri dati. L'operazione non può essere annullata.",
+    "eraseConfirm": "Elimina",
     "sortBy": "Ordina per: {sort}",
     "sort": {
       "grade": "Voto",
       "date": "Data"
-    }
+    },
+    "extraTimeNone": "Nessun tempo extra",
+    "extraTimeSome": "+{percent}% di tempo",
+    "extraTimeNote": "Per un candidato che ha bisogno di più tempo, ad esempio a causa di una disabilità. Impostalo prima che inizi.",
+    "extraTimeFailed": "Impossibile modificare il tempo extra. Riprova."
   },
   "interviewStatus": {
     "new": "Nuovo",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Quando il tempo di una domanda scade, conta come sbagliata e si apre la successiva. Il tempo continua a scorrere anche se esci.",
     "unanswered": "Le domande senza risposta contano come sbagliate.",
     "saved": "I progressi vengono salvati: usa di nuovo questo link per continuare.",
+    "extraTime": "Ti serve più tempo, ad esempio a causa di una disabilità? Contatta {company} prima di iniziare.",
+    "people": "Le domande sono scritte dall'IA. I risultati vengono esaminati da persone e decide {company}; puoi chiedere che il tuo venga riesaminato.",
     "stay": "Resta su questa pagina: uscire o copiare viene registrato (<link>privacy</link>).",
     "finished": "Questo colloquio è già terminato.",
     "continue": "Continua",
     "start": "Accetta e inizia",
     "mismatch": "L'email non corrisponde. Accedi con l'email dell'invito per iniziare.",
-    "title": "Invito al colloquio"
+    "title": "Invito al colloquio",
+    "theCompany": "l'azienda"
   },
   "members": {
     "joined": "Entrato",
@@ -741,7 +756,8 @@
     "candidatesFileName": "Candidati {title}",
     "candidateCount": "{count, plural, one {# candidato} other {# candidati}}",
     "passMark": "soglia {mark}%",
-    "progressOf": "{progress}% completato"
+    "progressOf": "{progress}% completato",
+    "humanReview": "Il punteggio supporta la tua decisione, non la prende al posto tuo. Leggi le risposte e, se il candidato lo chiede, fai esaminare il suo risultato da una persona."
   },
   "practice": {
     "title": "Pratica gratuita per colloqui",

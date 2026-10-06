@@ -9,6 +9,7 @@ from prepza_common.i18n import request_language, translate
 from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
+from app.constants.dpa import DPA_INTRO, DPA_SECTIONS
 from app.constants.faq import FAQS
 from app.constants.help import LegalDocument
 from app.constants.legal import LEGAL_UPDATED
@@ -32,6 +33,7 @@ router = APIRouter(prefix="/help", tags=["help"])
 DOCUMENTS = {
     LegalDocument.TERMS: (TERMS_INTRO, TERMS_SECTIONS),
     LegalDocument.PRIVACY: (PRIVACY_INTRO, PRIVACY_SECTIONS),
+    LegalDocument.DPA: (DPA_INTRO, DPA_SECTIONS),
 }
 
 

@@ -54,9 +54,11 @@ resource "google_artifact_registry_repository_iam_member" "deploy_pushes" {
   member     = "serviceAccount:${google_service_account.deploy.email}"
 }
 
-# Services run as the runtime account; deploying one means acting as it.
-resource "google_service_account_iam_member" "deploy_acts_as_runtime" {
-  service_account_id = google_service_account.runtime.name
+# Each service runs as its own account; deploying one (and running its migrations) means acting
+# as it.
+resource "google_service_account_iam_member" "deploy_acts_as_service" {
+  for_each           = local.services
+  service_account_id = google_service_account.service[each.key].name
   role               = "roles/iam.serviceAccountUser"
   member             = "serviceAccount:${google_service_account.deploy.email}"
 }

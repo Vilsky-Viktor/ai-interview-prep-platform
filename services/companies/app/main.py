@@ -11,6 +11,7 @@ from prepza_common.sentry import init_sentry
 from app.config.settings import settings
 from app.integrations.redis import get_redis
 from app.routers import (
+    accommodations,
     auto_top_ups,
     bulk_invites,
     candidates,
@@ -57,6 +58,7 @@ app.include_router(auto_top_ups.router)
 app.include_router(members.router)
 app.include_router(interviews.router)
 app.include_router(candidates.router)
+app.include_router(accommodations.router)
 app.include_router(bulk_invites.router)
 app.include_router(interview_generation.router)
 app.include_router(interview_questions.router)

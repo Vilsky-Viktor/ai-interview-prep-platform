@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 
 from app.constants.invites import InviteStatus
+from app.helpers.candidates import candidate_seconds
 from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
 from app.schemas.invites import InviteStartOut, InviteView
@@ -34,7 +35,7 @@ async def get_invite(token: str, user: CurrentUser) -> InviteView:
         verified_domain=company.verified_domain if company else None,
         email=invite.email,
         status=invite.status,
-        question_seconds=interview.question_seconds,
+        question_seconds=candidate_seconds(interview.question_seconds, invite.extra_time),
     )
 
 

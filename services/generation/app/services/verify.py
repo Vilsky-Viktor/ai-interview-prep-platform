@@ -1,4 +1,5 @@
 import logging
+from collections import Counter
 from uuid import UUID
 
 from langchain_core.messages import HumanMessage
@@ -38,7 +39,14 @@ def key_check_prompt(question: QuestionQuality, context: QuestionContext) -> str
             f"(picked {question.option_picks.get(question.options[i].answer, 0)} times)"
             for number, i in enumerate(option_order(question))
         ),
-        reports=bullet_list([f"{report.reason}: {report.comment}" for report in question.reports])
+        # Reasons only, counted: a reporter's free-text comment never reaches the model, so it
+        # can't steer which answer counts as correct.
+        reports=bullet_list(
+            [
+                f"{reason}: {count}"
+                for reason, count in Counter(r.reason for r in question.reports).items()
+            ]
+        )
         or "None",
     )
 

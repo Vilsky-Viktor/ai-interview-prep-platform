@@ -41,9 +41,12 @@
     "practice": "Kostenlos üben"
   },
   "signIn": {
-    "with": "Anmelden mit",
+    "title": "Anmelden",
+    "continueWith": "Weiter mit <name>{provider}</name>",
+    "link": "Für diese E-Mail-Adresse gibt es bereits ein prepza-Konto. Melde dich so an wie beim letzten Mal, dann wird {provider} damit verknüpft.",
     "consent": "Mit der Anmeldung akzeptierst du die <terms>Nutzungsbedingungen</terms> und die <privacy>Datenschutzerklärung</privacy>.",
-    "failed": "Die Anmeldung ist fehlgeschlagen. Bitte versuche es erneut."
+    "failed": "Die Anmeldung ist fehlgeschlagen. Bitte versuche es erneut.",
+    "verify": "Wir haben dir einen Link zur Bestätigung deiner E-Mail-Adresse geschickt. Öffne ihn und melde dich dann erneut an, um Interviews zu machen."
   },
   "common": {
     "copyLink": "Link kopieren",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Unternehmen",
-    "signIn": "Melde dich an, um Interviews für dein Unternehmen zu erstellen und Kandidaten einzuladen.",
     "signInInterviews": "Melde dich an, um die Interviews des Unternehmens zu sehen.",
     "signInAdmins": "Melde dich an, um die Admins des Unternehmens zu sehen.",
     "signInReferrals": "Melde dich an, um den Einladungslink des Unternehmens zu sehen.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Einladung widerrufen?",
     "revokeText": "Der an {email} gesendete Link funktioniert nicht mehr. Du kannst die Person später erneut einladen.",
     "revokeConfirm": "Widerrufen",
+    "erase": "Kandidat löschen",
+    "erased": "{email} gelöscht",
+    "eraseFailed": "Der Kandidat konnte nicht gelöscht werden.",
+    "eraseTitle": "Diesen Kandidaten löschen?",
+    "eraseText": "Die Antworten und Ergebnisse von {email} werden endgültig gelöscht, zum Beispiel wenn die Person die Löschung ihrer Daten verlangt. Das kann nicht rückgängig gemacht werden.",
+    "eraseConfirm": "Löschen",
     "sortBy": "Sortieren nach: {sort}",
     "sort": {
       "grade": "Note",
       "date": "Datum"
-    }
+    },
+    "extraTimeNone": "Keine zusätzliche Zeit",
+    "extraTimeSome": "+{percent} % Zeit",
+    "extraTimeNote": "Für einen Kandidaten, der mehr Zeit braucht, zum Beispiel wegen einer Behinderung. Lege sie fest, bevor er beginnt.",
+    "extraTimeFailed": "Die zusätzliche Zeit konnte nicht geändert werden. Bitte versuche es erneut."
   },
   "interviewStatus": {
     "new": "Neu",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Wenn die Zeit einer Frage abläuft, zählt sie als falsch und die nächste öffnet sich. Die Uhr läuft weiter, auch wenn du die Seite verlässt.",
     "unanswered": "Unbeantwortete Fragen zählen als falsch.",
     "saved": "Der Fortschritt wird gespeichert: Öffne diesen Link erneut, um fortzufahren.",
+    "extraTime": "Brauchst du mehr Zeit, zum Beispiel wegen einer Behinderung? Frag {company}, bevor du beginnst.",
+    "people": "Die Fragen werden von KI geschrieben. Die Ergebnisse prüfen Menschen, und {company} entscheidet; du kannst darum bitten, dass deines geprüft wird.",
     "stay": "Bleib auf dieser Seite: Verlassen und Kopieren werden erfasst (<link>Datenschutz</link>).",
     "finished": "Dieses Interview ist bereits beendet.",
     "continue": "Fortsetzen",
     "start": "Annehmen und starten",
     "mismatch": "Die E-Mail-Adresse stimmt nicht überein. Melde dich mit der Adresse aus der Einladung an, um zu starten.",
-    "title": "Einladung zum Interview"
+    "title": "Einladung zum Interview",
+    "theCompany": "das Unternehmen"
   },
   "members": {
     "joined": "Beigetreten",
@@ -741,7 +756,8 @@
     "candidatesFileName": "Kandidaten {title}",
     "candidateCount": "{count, plural, one {# Kandidat} other {# Kandidaten}}",
     "passMark": "Bestehensgrenze {mark} %",
-    "progressOf": "{progress} % erledigt"
+    "progressOf": "{progress} % erledigt",
+    "humanReview": "Das Ergebnis unterstützt deine Entscheidung, es trifft sie nicht. Lies die Antworten, und wenn der Kandidat darum bittet, lass sein Ergebnis von einem Menschen prüfen."
   },
   "practice": {
     "title": "Kostenlose Interview-Übung",

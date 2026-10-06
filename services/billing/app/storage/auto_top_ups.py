@@ -32,7 +32,9 @@ async def save(
 
 
 async def start(owner_type: str, owner_id: str, buyer_id: str, subscription_id: str) -> bool:
-    """Attaches the subscription from the checkout of whoever turned it on; once only."""
+    """Attaches the subscription from the checkout of whoever turned it on; once only. Paddle's
+    two events for one checkout can arrive together, so finding it already attached counts as
+    started too."""
     async with Session() as session:
         started = await session.scalar(
             update(AutoTopUp)
@@ -40,7 +42,10 @@ async def start(owner_type: str, owner_id: str, buyer_id: str, subscription_id: 
                 AutoTopUp.owner_type == owner_type,
                 AutoTopUp.owner_id == owner_id,
                 AutoTopUp.buyer_id == buyer_id,
-                AutoTopUp.subscription_id.is_(None),
+                or_(
+                    AutoTopUp.subscription_id.is_(None),
+                    AutoTopUp.subscription_id == subscription_id,
+                ),
             )
             .values(subscription_id=subscription_id)
             .returning(AutoTopUp.owner_id)
@@ -102,6 +107,21 @@ async def remove(owner_type: str, owner_id: str) -> str | None:
         await session.commit()
 
         return subscription_id
+
+
+async def remove_for_buyer(buyer_id: str) -> list[str]:
+    """Turns off every automatic top-up paid with this person's card; the subscriptions to
+    cancel."""
+    async with Session() as session:
+        rows = await session.scalars(
+            delete(AutoTopUp)
+            .where(AutoTopUp.buyer_id == buyer_id)
+            .returning(AutoTopUp.subscription_id)
+        )
+        subscriptions = [row for row in rows if row]
+        await session.commit()
+
+        return subscriptions
 
 
 async def remove_subscription(subscription_id: str) -> None:

@@ -199,7 +199,8 @@ export interface paths {
     post?: never
     /**
      * Delete User
-     * @description The user's purchases for their companies stay for bookkeeping, without their id.
+     * @description The user's purchases for their companies stay for bookkeeping, without their id; any
+     *     automatic top-up paid with their card goes off.
      */
     delete: operations["delete_user_internal_users__user_id__delete"]
     options?: never

@@ -106,8 +106,11 @@ def test_finished_interview_status(client, monkeypatch):
 
 
 def revoke(client, monkeypatch, status):
+    """Revokes the candidate; what was removed, whose sessions were erased, what was released."""
     sign_in()
     removed = []
+    erased = []
+    released = []
     invite = CandidateInvite(
         id=INVITE_ID,
         interview_id=INTERVIEW_ID,
@@ -144,20 +147,42 @@ def revoke(client, monkeypatch, status):
     async def fake_remove(invite_id):
         removed.append(invite_id)
 
+    async def fake_erase(invite_ids):
+        erased.extend(invite_ids)
+
+    async def fake_release(key):
+        released.append(key)
+
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(invite_store, "remove", fake_remove)
+    monkeypatch.setattr(rounds, "delete_invite_sessions", fake_erase)
+    monkeypatch.setattr(billing, "release_candidate", fake_release)
     response = client.delete(f"/interviews/{INTERVIEW_ID}/candidates/{INVITE_ID}")
 
-    return response.status_code, removed
+    return response.status_code, removed, erased, len(released)
 
 
 def test_an_unused_invite_is_revoked(client, monkeypatch):
-    assert revoke(client, monkeypatch, InviteStatus.INVITED) == (204, [INVITE_ID])
+    assert revoke(client, monkeypatch, InviteStatus.INVITED) == (204, [INVITE_ID], [], 1)
 
 
-def test_a_started_invite_is_kept(client, monkeypatch):
-    assert revoke(client, monkeypatch, InviteStatus.IN_PROCESS) == (409, [])
+def test_a_started_candidate_is_erased_and_their_credits_come_back(client, monkeypatch):
+    assert revoke(client, monkeypatch, InviteStatus.IN_PROCESS) == (
+        204,
+        [INVITE_ID],
+        [INVITE_ID],
+        1,
+    )
+
+
+def test_a_finished_candidate_is_erased_and_stays_charged(client, monkeypatch):
+    assert revoke(client, monkeypatch, InviteStatus.FINISHED) == (
+        204,
+        [INVITE_ID],
+        [INVITE_ID],
+        0,
+    )
 
 
 def test_candidates_are_sorted_by_grade_by_default(client, monkeypatch):

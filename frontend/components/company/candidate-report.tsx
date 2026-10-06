@@ -92,6 +92,7 @@ export async function CandidateReport({
           </li>
         ))}
       </ul>
+      <p className="text-xs text-muted-foreground">{t("humanReview")}</p>
     </div>
   )
 }

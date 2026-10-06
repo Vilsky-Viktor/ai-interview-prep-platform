@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { useSignIn } from "@/components/sign-in-dialog"
 import { useAuth } from "@/components/auth-provider"
 import { GenerateIn } from "@/components/generate-in"
 import { Button } from "@/components/ui/button"
@@ -15,7 +16,6 @@ import { Textarea } from "@/components/ui/textarea"
 import type { Locale } from "@/constants/i18n"
 import { MAX_COMPANY_NAME_LENGTH, MAX_GOAL_LENGTH } from "@/constants/limits"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
-import { signIn } from "@/lib/auth"
 import { isSubmitShortcut } from "@/lib/keys"
 import type { Company, Interview } from "@/types/company"
 
@@ -32,7 +32,7 @@ export function StartTest({
 }) {
   const t = useTranslations("start")
   const common = useTranslations("common")
-  const signInText = useTranslations("signIn")
+  const signIn = useSignIn()
   const router = useRouter()
   const { user } = useAuth()
   const [text, setText] = useState("")
@@ -50,7 +50,7 @@ export function StartTest({
     event.preventDefault()
     setBusy(true)
 
-    if (!user && !(await signIn(signInText("failed")))) {
+    if (!user && !(await signIn())) {
       setBusy(false)
 
       return

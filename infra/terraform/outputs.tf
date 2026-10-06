@@ -12,8 +12,8 @@ output "service_urls" {
   value = local.run_url
 }
 
-output "runtime_service_account" {
-  value = google_service_account.runtime.email
+output "service_accounts" {
+  value = { for name, account in google_service_account.service : name => account.email }
 }
 
 output "github_variables" {

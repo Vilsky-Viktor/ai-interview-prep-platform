@@ -198,3 +198,55 @@ def test_finished_topics_count_strong_weak_and_timeouts_for_copies_and_originals
         assert (stats.strong_answers, stats.strong_correct) == (1, 1)
         assert (stats.weak_answers, stats.weak_correct) == (1, 0)
         assert stats.timeouts == 1
+
+
+def test_a_new_template_never_reveals_questions_reused_from_the_bank(run):
+    from prepza_common.sets import PreparationIn
+    from sqlalchemy import select
+
+    from app.constants.sets import Stage
+    from app.models.sets import Question, Topic
+    from app.storage.db import Session
+
+    async def questions_of(set_id):
+        async with Session() as session:
+            rows = await session.scalars(
+                select(Question)
+                .join(Topic, Topic.id == Question.topic_id)
+                .where(Topic.set_id == set_id)
+                .order_by(Question.position)
+            )
+
+            return list(rows)
+
+    async def scenario():
+        older = await interview("Older template", template=True, questions=6)
+        private = [row for row in await questions_of(older) if row.stage == Stage.PRIVATE]
+        option = [{"answer": "right", "correct": True}, {"answer": "wrong", "correct": False}]
+        reused = [
+            {"text": row.text, "options": option, "source_id": str(row.id)} for row in private[:3]
+        ]
+        fresh = [{"text": f"New question {index}?", "options": option} for index in range(3)]
+        newer = await templates.create_template(
+            PreparationIn.model_validate(
+                {
+                    "generation_id": str(uuid.uuid4()),
+                    "owner_uid": "prepza",
+                    "source_text": "job text",
+                    "title": "Newer template",
+                    "level": "mid",
+                    "language": "en",
+                    "requirements": [],
+                    "topics": [{"title": "Python", "subtopics": [], "questions": reused + fresh}],
+                }
+            )
+        )
+
+        return await questions_of(newer)
+
+    rows = run(scenario())
+    revealed = [row for row in rows if row.stage == Stage.REVEALED]
+
+    # A third of its own new questions go to practice; the reused ones stay private.
+    assert [row.source_question_id for row in revealed] == [None]
+    assert all(row.stage == Stage.PRIVATE for row in rows if row.source_question_id)

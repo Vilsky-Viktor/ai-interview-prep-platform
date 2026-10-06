@@ -8,7 +8,7 @@ TERMS_SECTIONS = [
     {
         "heading": "Your account",
         "paragraphs": [
-            "You sign in with Google and are responsible for what happens in your account. You can delete it at any time in Settings.",
+            "You sign in with Google, LinkedIn or GitHub (one account per email, whichever you use) and are responsible for what happens in your account. You can delete it at any time in Settings.",
         ],
     },
     {
@@ -35,13 +35,16 @@ TERMS_SECTIONS = [
     {
         "heading": "Companies",
         "paragraphs": [
-            "A company using prepza to interview candidates is responsible for inviting candidates lawfully, for telling them how their results are used, and for its hiring decisions. We process candidates' data on the company's behalf; ask us for our data processing terms.",
+            "A company using prepza to interview candidates is responsible for inviting candidates lawfully, for telling them how their results are used, and for its hiring decisions. We process candidates' data on the company's behalf, under the data processing agreement at prepza.ai/dpa.",
         ],
         "items": [
             "A company's logo must be one it has the right to use.",
             "The verified check means that an owner or admin signed in with a work email on the company's website. It doesn't mean we vouch for the company.",
             "Anyone with an interview's shareable link can take the interview, and each person who does is charged like an invited candidate. The company decides where it shares the link.",
             "A company that sends a report is responsible for whom it sends it to.",
+            "Results support a company's decision; they don't make it. A company reviews them before deciding, doesn't reject a candidate on the score alone, and lets a candidate ask for a person to review their result.",
+            "A company gives a candidate who needs it an accommodation, such as extra time, which it can set for each candidate before they start.",
+            "The data processing agreement at prepza.ai/dpa forms part of these terms for every company that uses prepza for candidates.",
             "Suggested talents may be contacted only about jobs, and their details may not be copied into other lists or sold.",
         ],
     },

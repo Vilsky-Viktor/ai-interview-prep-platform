@@ -213,3 +213,26 @@ def test_a_company_cant_take_another_companys_name_in_any_case(run):
     _, taken, free, name, word = run(scenario())
 
     assert (taken, free, name) == (False, True, f"Third {word}")
+
+
+def test_only_stale_unstarted_invites_are_expiring_and_marking_one_expires_it(run):
+    async def scenario():
+        found = await interview()
+        stale = await invites.upsert(found.id, "old@example.com", "Backend", "Acme", "en")
+        await invites.upsert(found.id, "new@example.com", "Backend", "Acme", "en")
+        later = datetime.now(UTC) + timedelta(seconds=1)
+        due = [
+            row.email for row in await invites.expiring(later, 500) if row.interview_id == found.id
+        ]
+        await invites.mark_expired(stale.id)
+        after = [
+            row.email for row in await invites.expiring(later, 500) if row.interview_id == found.id
+        ]
+
+        return due, after, (await invites.get(stale.id)).status
+
+    due, after, status = run(scenario())
+
+    assert sorted(due) == ["new@example.com", "old@example.com"]
+    assert after == ["new@example.com"]
+    assert status == InviteStatus.EXPIRED

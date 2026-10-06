@@ -1,9 +1,11 @@
+import logging
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.paging import PageParams
 from prepza_common.sets import PreparationIn
 
+from app.integrations import rounds
 from app.schemas.feedback import ReportOut
 from app.schemas.preparations import (
     CreatedOut,
@@ -19,6 +21,8 @@ from app.service_auth import ServiceCaller
 from app.services import outbox as outbox_service
 from app.services.questions import question_texts
 from app.storage import feedback, preparations, templates
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -172,9 +176,12 @@ async def get_question_context(question_id: UUID, caller: ServiceCaller) -> Ques
 
 @router.put("/questions/{question_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def replace_question(question_id: UUID, body: QuestionReplace, caller: ServiceCaller) -> None:
-    await preparations.replace_question(
-        question_id,
-        body.text,
-        [option.model_dump() for option in body.options],
-    )
+    options = [option.model_dump() for option in body.options]
+    await preparations.replace_question(question_id, body.text, options)
     await outbox_service.flush_quietly()
+    # A moved key changes past answers' marks too; rounds leaves rewritten questions alone. Its
+    # failure doesn't undo the fix, so it's logged rather than raised.
+    try:
+        await rounds.rescore_question(question_id, body.text, options)
+    except Exception:
+        logger.exception("Couldn't rescore answers to question %s", question_id)

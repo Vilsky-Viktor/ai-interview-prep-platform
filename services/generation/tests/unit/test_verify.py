@@ -97,7 +97,9 @@ def test_a_wrong_key_is_moved_to_the_right_option(monkeypatch):
 
     assert calls == [("replace", TEXT, [True, False, False, False])]
     assert "0. Credit cash (picked 6 times)" in fake_llm.prompts[0]
-    assert "wrong_answer: Cash comes in" in fake_llm.prompts[0]
+    # The reason is counted; the reporter's own words never reach the model.
+    assert "wrong_answer: 1" in fake_llm.prompts[0]
+    assert "Cash comes in" not in fake_llm.prompts[0]
 
 
 def test_a_confirmed_key_keeps_the_question(monkeypatch):

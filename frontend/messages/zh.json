@@ -41,9 +41,12 @@
     "practice": "免费练习"
   },
   "signIn": {
-    "with": "登录方式：",
+    "title": "登录",
+    "continueWith": "继续使用 <name>{provider}</name>",
+    "link": "此邮箱已有 prepza 账户。请用你之前的登录方式继续，{provider} 将关联到该账户。",
     "consent": "登录即表示你同意<terms>条款</terms>和<privacy>隐私政策</privacy>。",
-    "failed": "登录失败，请重试。"
+    "failed": "登录失败，请重试。",
+    "verify": "我们已向你发送一个验证邮箱的链接。打开链接后重新登录，即可参加面试。"
   },
   "common": {
     "copyLink": "复制链接",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "公司",
-    "signIn": "登录后为你的公司创建面试并邀请候选人。",
     "signInInterviews": "登录后查看公司的面试。",
     "signInAdmins": "登录后查看公司的管理员。",
     "signInReferrals": "登录后查看公司的邀请链接。",
@@ -366,11 +368,21 @@
     "revokeTitle": "撤销邀请？",
     "revokeText": "发送给 {email} 的链接将失效。你之后可以再次邀请。",
     "revokeConfirm": "撤销",
+    "erase": "删除候选人",
+    "erased": "已删除 {email}",
+    "eraseFailed": "无法删除该候选人。",
+    "eraseTitle": "删除此候选人？",
+    "eraseText": "{email} 的答案和结果将被永久删除，例如在对方要求删除其数据时使用。此操作无法撤销。",
+    "eraseConfirm": "删除",
     "sortBy": "排序方式：{sort}",
     "sort": {
       "grade": "成绩",
       "date": "日期"
-    }
+    },
+    "extraTimeNone": "无额外时间",
+    "extraTimeSome": "时间 +{percent}%",
+    "extraTimeNote": "适用于需要更多时间的候选人，例如因残障原因。请在候选人开始前设置。",
+    "extraTimeFailed": "无法更改额外时间，请重试。"
   },
   "interviewStatus": {
     "new": "新",
@@ -439,12 +451,15 @@
     "timeRunsOut": "题目时间用完后将计为错误，并自动进入下一题。即使离开页面，计时也会继续。",
     "unanswered": "未回答的题目计为错误。",
     "saved": "进度会自动保存：再次打开此链接即可继续。",
+    "extraTime": "需要更多时间吗，例如因残障原因？请在开始前联系 {company}。",
+    "people": "题目由 AI 编写。{company} 的工作人员会审核结果并做出决定；你可以请他们审核你的结果。",
     "stay": "请停留在此页面：离开页面或复制内容都会被记录（<link>隐私</link>）。",
     "finished": "此面试已结束。",
     "continue": "继续",
     "start": "接受并开始",
     "mismatch": "邮箱不匹配。请使用受邀邮箱登录后开始。",
-    "title": "面试邀请"
+    "title": "面试邀请",
+    "theCompany": "该公司"
   },
   "members": {
     "joined": "已加入",
@@ -733,7 +748,8 @@
     "candidatesFileName": "候选人 {title}",
     "candidateCount": "{count, plural, other {# 位候选人}}",
     "passMark": "及格线 {mark}%",
-    "progressOf": "已完成 {progress}%"
+    "progressOf": "已完成 {progress}%",
+    "humanReview": "分数用于辅助你的决定，而不是替你做决定。请阅读答案，如果候选人提出要求，请安排人工审核其结果。"
   },
   "practice": {
     "title": "免费面试练习",

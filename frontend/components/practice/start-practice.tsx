@@ -5,10 +5,10 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { useSignIn } from "@/components/sign-in-dialog"
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { ApiError, apiErrorMessage } from "@/lib/api"
-import { signIn } from "@/lib/auth"
 import { answeredSuggest, startPracticeRound } from "@/lib/practice"
 
 /** Starts a free practice round on the template: signs in with Google first when needed. A
@@ -23,7 +23,7 @@ export function StartPractice({
   label: string
 }) {
   const t = useTranslations("practice")
-  const signInText = useTranslations("signIn")
+  const signIn = useSignIn()
   const router = useRouter()
   const { user } = useAuth()
   const [starting, setStarting] = useState(false)
@@ -31,7 +31,7 @@ export function StartPractice({
   async function start() {
     setStarting(true)
 
-    if (!user && !(await signIn(signInText("failed")))) {
+    if (!user && !(await signIn())) {
       setStarting(false)
 
       return

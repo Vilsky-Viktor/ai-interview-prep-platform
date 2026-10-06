@@ -41,9 +41,12 @@
     "practice": "Entraînement gratuit"
   },
   "signIn": {
-    "with": "Se connecter avec",
+    "title": "Se connecter",
+    "continueWith": "Continuer avec <name>{provider}</name>",
+    "link": "Cet e-mail a déjà un compte prepza. Continuez comme lors de votre dernière connexion, et {provider} y sera associé.",
     "consent": "En vous connectant, vous acceptez les <terms>Conditions</terms> et la <privacy>Politique de confidentialité</privacy>.",
-    "failed": "La connexion a échoué. Veuillez réessayer."
+    "failed": "La connexion a échoué. Veuillez réessayer.",
+    "verify": "Nous vous avons envoyé un lien pour vérifier votre e-mail. Ouvrez-le, puis reconnectez-vous pour passer des entretiens."
   },
   "common": {
     "copyLink": "Copier le lien",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Entreprises",
-    "signIn": "Connectez-vous pour créer des entretiens pour votre entreprise et inviter des candidats.",
     "signInInterviews": "Connectez-vous pour voir les entretiens de l'entreprise.",
     "signInAdmins": "Connectez-vous pour voir les administrateurs de l'entreprise.",
     "signInReferrals": "Connectez-vous pour voir le lien de parrainage de l'entreprise.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Révoquer l'invitation ?",
     "revokeText": "Le lien envoyé à {email} cesse de fonctionner. Vous pourrez l'inviter à nouveau plus tard.",
     "revokeConfirm": "Révoquer",
+    "erase": "Supprimer le candidat",
+    "erased": "{email} supprimé",
+    "eraseFailed": "Impossible de supprimer le candidat.",
+    "eraseTitle": "Supprimer ce candidat ?",
+    "eraseText": "Les réponses et les résultats de {email} sont supprimés définitivement, par exemple quand la personne demande l'effacement de ses données. Cette action est irréversible.",
+    "eraseConfirm": "Supprimer",
     "sortBy": "Trier par : {sort}",
     "sort": {
       "grade": "Note",
       "date": "Date"
-    }
+    },
+    "extraTimeNone": "Pas de temps supplémentaire",
+    "extraTimeSome": "+{percent} % de temps",
+    "extraTimeNote": "Pour un candidat qui a besoin de plus de temps, par exemple en raison d'un handicap. À définir avant qu'il ne commence.",
+    "extraTimeFailed": "Impossible de modifier le temps supplémentaire. Veuillez réessayer."
   },
   "interviewStatus": {
     "new": "Nouveau",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Quand le temps d'une question est écoulé, elle compte comme fausse et la suivante s'ouvre. Le chronomètre continue si vous quittez la page.",
     "unanswered": "Les questions sans réponse comptent comme fausses.",
     "saved": "Votre progression est enregistrée : utilisez à nouveau ce lien pour continuer.",
+    "extraTime": "Besoin de plus de temps, par exemple en raison d'un handicap ? Contactez {company} avant de commencer.",
+    "people": "Les questions sont rédigées par une IA. Des personnes examinent les résultats et {company} décide ; vous pouvez demander que le vôtre soit examiné.",
     "stay": "Restez sur cette page : la quitter ou copier est enregistré (<link>confidentialité</link>).",
     "finished": "Cet entretien est déjà terminé.",
     "continue": "Continuer",
     "start": "Accepter et commencer",
     "mismatch": "L'adresse ne correspond pas. Connectez-vous avec l'adresse de l'invitation pour commencer.",
-    "title": "Invitation à un entretien"
+    "title": "Invitation à un entretien",
+    "theCompany": "l'entreprise"
   },
   "members": {
     "joined": "A rejoint",
@@ -741,7 +756,8 @@
     "candidatesFileName": "Candidats {title}",
     "candidateCount": "{count, plural, one {# candidat} other {# candidats}}",
     "passMark": "note de réussite {mark} %",
-    "progressOf": "{progress} % effectué"
+    "progressOf": "{progress} % effectué",
+    "humanReview": "Le score appuie votre décision, il ne la prend pas. Lisez les réponses et, si le candidat le demande, faites examiner son résultat par une personne."
   },
   "practice": {
     "title": "Entraînement gratuit aux entretiens",

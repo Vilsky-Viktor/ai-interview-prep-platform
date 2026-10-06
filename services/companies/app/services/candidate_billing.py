@@ -5,7 +5,7 @@ from datetime import UTC, datetime, timedelta
 from prepza_common.analytics import track
 
 from app.constants.events import INTERVIEW_FINISHED
-from app.constants.invites import INVITE_EXPIRY_DAYS, NOT_STARTED, InviteStatus
+from app.constants.invites import EXPIRIES_PER_BATCH, INVITE_EXPIRY_DAYS, NOT_STARTED, InviteStatus
 from app.helpers.candidates import candidate_key
 from app.helpers.notifications import candidate_finished
 from app.integrations import billing, rounds
@@ -71,12 +71,18 @@ async def expire_unstarted() -> int:
     """Daily: invites never started within INVITE_EXPIRY_DAYS of being sent expire, and their
     credits come back."""
     before = datetime.now(UTC) - timedelta(days=INVITE_EXPIRY_DAYS)
-    expired = await invites.expire_unstarted(before)
+    count = 0
 
-    for invite in expired:
-        await billing.release_candidate(candidate_key(invite.interview_id, invite.email))
+    # Each invite's credits are released before it's marked expired: if billing fails, the
+    # rest stay unexpired and the next run tries them again, so no hold is left open.
+    while rows := await invites.expiring(before, EXPIRIES_PER_BATCH):
+        for invite in rows:
+            await billing.release_candidate(candidate_key(invite.interview_id, invite.email))
+            await invites.mark_expired(invite.id)
 
-    return len(expired)
+        count += len(rows)
+
+    return count
 
 
 async def release_unfinished(rows: list) -> None:

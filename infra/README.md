@@ -31,6 +31,11 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
 2. **Add Firebase to the project** in the [Firebase console](https://console.firebase.google.com) ("Add project", then choose `prepza-prod`).
    - **Authentication → Sign-in method:** enable Google.
    - **Authentication → Settings → Authorized domains:** add `prepza.ai`.
+   - **Authentication → Settings → User account linking:** keep "Link accounts that use the same email" (the default): the site links GitHub or LinkedIn to an existing account with the same email after the person signs in the way they did before.
+   - **GitHub and LinkedIn sign-in (optional):**
+     - GitHub: create an OAuth app (GitHub → Settings → Developer settings → OAuth Apps) with the callback URL `https://<authDomain>/__/auth/handler`. Set `github_client_id` and `github_client_secret` in `terraform.tfvars`.
+     - LinkedIn: first upgrade the project to Identity Platform (Firebase console → Authentication → Settings; OpenID Connect providers are free for 50 monthly users, then about $0.015 each). Create a LinkedIn app with the product "Sign In with LinkedIn using OpenID Connect" and the same callback URL. Set `linkedin_client_id` and `linkedin_client_secret`.
+     - Terraform (`auth.tf`) creates each provider once its client id is set.
    - **Project settings → Your apps:** add a Web app. Note its `apiKey` and `authDomain` for the frontend build.
 3. **Create the bucket for Terraform's state.**
    ```bash
@@ -146,9 +151,12 @@ Then point `DATABASE_URL` at the clone, or copy the needed data back.
 
 - **Service addresses:** services reach each other at their Cloud Run addresses, which are known in advance (`https://<service>-<project number>.europe-west1.run.app`).
 - **Who can call what:**
-  - Public services accept everyone and check users themselves.
-  - Calls between services carry signed service tokens.
+  - Public services take outside traffic only through the load balancer (ingress "internal and Cloud Load Balancing"), so Cloud Armor's rules always apply; their `run.app` addresses refuse the internet. The generation worker takes only Google's calls.
+  - Calls between services go out through the private network in `network.tf` (Direct VPC egress, all traffic), so they arrive as internal; the internet (OpenAI, Resend, Paddle, Upstash) is reached through its Cloud NAT, about $1–5 a month at this size.
+  - Calls between services also carry signed service tokens.
   - Pub/Sub, Cloud Tasks and Scheduler sign as the `prepza-invoker` account, which the services check.
+- **Database users:** each service connects as its own Postgres user (named after its database) that owns only that database; other users can't even connect to it. The `prepza` user is the instance's admin and is used only by the `db-roles` job (`db_roles.tf`, `services/library/app/jobs/db_roles.py`), which creates those users and moves ownership to them. The deploy pipeline runs it before migrations; it's safe to repeat. **When first applying this over an existing database,** run it right after `terraform apply`, before any service restarts: `gcloud run jobs execute db-roles --region=europe-west1 --wait`. Until it has run, new instances can't connect, since their URLs already name the new users. Locally, Docker Compose keeps the one `prepza` user.
+- **Least privilege:** each service runs as its own account (`prepza-<service>`, see `iam.tf`) that can read only its own secrets and its own database's URL. The frontend has no permissions; only the backend services publish events, and only the generation services queue tasks. Migrations run as their service's account. Applying this over the old shared `prepza-runtime` account moves every service to its own account, then deletes the old one.
 - **App settings:** Terraform passes `DAILY_GENERATION_LIMIT` (from `daily_generation_limit`) but none of the other settings in `.env.example`: the AI models and reasoning efforts (`INTERVIEW_MODEL`, `VERIFY_MODEL`, `HELP_MODEL` and their `*_REASONING_EFFORT`), `INTERVIEW_QUESTIONS_PER_TOPIC`, `TEMPLATE_QUESTIONS_PER_TOPIC`, `MAX_TOPICS`, `MAX_SUBTOPICS`, `LLM_REQUESTS_PER_SECOND` and the per-user limits. The services run on their code defaults, which match `.env.example`. To change one in production, add it to the service's entry in `env.tf`.
 - **Generation jobs:** a job may run up to 25 minutes, under Cloud Tasks' 30-minute limit. The queue never retries; a failed generation is retried by the user.
 - **Database connections:** Cloud SQL starts at `db-g1-small` with 200 connections allowed. Each API process holds up to 10 connections, so raise `db_tier`, or add PgBouncer, before allowing many instances.

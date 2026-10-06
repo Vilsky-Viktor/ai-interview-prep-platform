@@ -41,9 +41,12 @@
     "practice": "無料の練習"
   },
   "signIn": {
-    "with": "サインイン：",
+    "title": "サインイン",
+    "continueWith": "<name>{provider}</name> で続行",
+    "link": "このメールアドレスにはすでに prepza のアカウントがあります。以前と同じ方法で続行すると、{provider} がそのアカウントに連携されます。",
     "consent": "サインインすると、<terms>利用規約</terms>と<privacy>プライバシーポリシー</privacy>に同意したものとみなされます。",
-    "failed": "サインインできませんでした。もう一度お試しください。"
+    "failed": "サインインできませんでした。もう一度お試しください。",
+    "verify": "メールアドレスを確認するためのリンクを送信しました。リンクを開いてから、もう一度サインインすると面接を受けられます。"
   },
   "common": {
     "copyLink": "リンクをコピー",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "会社",
-    "signIn": "会社の面接を作成して候補者を招待するには、サインインしてください。",
     "signInInterviews": "会社の面接を見るにはサインインしてください。",
     "signInAdmins": "会社の管理者を見るにはサインインしてください。",
     "signInReferrals": "会社の招待リンクを見るにはサインインしてください。",
@@ -366,11 +368,21 @@
     "revokeTitle": "招待を取り消しますか？",
     "revokeText": "{email} に送ったリンクは使えなくなります。あとで再度招待できます。",
     "revokeConfirm": "取り消す",
+    "erase": "候補者を削除",
+    "erased": "{email} を削除しました",
+    "eraseFailed": "候補者を削除できませんでした。",
+    "eraseTitle": "この候補者を削除しますか？",
+    "eraseText": "{email} の回答と結果は完全に削除されます。たとえば、データの消去を求められた場合に使います。この操作は取り消せません。",
+    "eraseConfirm": "削除",
     "sortBy": "並べ替え: {sort}",
     "sort": {
       "grade": "評価",
       "date": "日付"
-    }
+    },
+    "extraTimeNone": "追加時間なし",
+    "extraTimeSome": "時間 +{percent}%",
+    "extraTimeNote": "障がいなどの理由で、より多くの時間が必要な候補者向けです。候補者が開始する前に設定してください。",
+    "extraTimeFailed": "追加時間を変更できませんでした。もう一度お試しください。"
   },
   "interviewStatus": {
     "new": "新規",
@@ -439,12 +451,15 @@
     "timeRunsOut": "問題の制限時間が過ぎると不正解となり、次の問題が開きます。ページを離れても時間は進みます。",
     "unanswered": "未回答の問題は不正解として扱われます。",
     "saved": "進捗は保存されます。続けるにはこのリンクをもう一度開いてください。",
+    "extraTime": "障がいなどの理由で、もっと時間が必要ですか？開始する前に{company}にお問い合わせください。",
+    "people": "問題は AI が作成しています。結果は{company}の担当者が確認して判断します。あなたの結果の確認を依頼することもできます。",
     "stay": "このページから離れないでください。ページの離脱とコピーは記録されます（<link>プライバシー</link>）。",
     "finished": "この面接はすでに終了しています。",
     "continue": "続ける",
     "start": "承諾して開始",
     "mismatch": "メールアドレスが一致しません。開始するには招待されたメールアドレスでサインインしてください。",
-    "title": "面接の招待"
+    "title": "面接の招待",
+    "theCompany": "企業"
   },
   "members": {
     "joined": "参加済み",
@@ -741,7 +756,8 @@
     "candidatesFileName": "候補者 {title}",
     "candidateCount": "{count, plural, other {候補者 # 人}}",
     "passMark": "合格ライン {mark}%",
-    "progressOf": "{progress}% 完了"
+    "progressOf": "{progress}% 完了",
+    "humanReview": "スコアは判断を助けるものであり、判断を下すものではありません。回答を読み、候補者から求められた場合は、担当者に結果を確認してもらってください。"
   },
   "practice": {
     "title": "無料の面接練習",

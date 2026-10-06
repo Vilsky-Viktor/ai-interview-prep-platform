@@ -83,3 +83,25 @@ def test_signal_counts_add_up_every_section():
     second = Row(signals=[Row(kind="tab_leave")], answers=[answer(1, 20), answer(2, 2)])
 
     assert signal_counts([first, second]) == {"tab_leaves": 3, "copies": 1, "fast_answers": 2}
+
+
+def test_only_the_same_question_with_the_same_options_is_rekeyed():
+    from app.helpers.rescore import rekeyed
+
+    def copy():
+        return {
+            "text": "Q?",
+            "options": [{"answer": "b", "correct": True}, {"answer": "a", "correct": False}],
+        }
+
+    fixed = [{"answer": "a", "correct": True}, {"answer": "b", "correct": False}]
+    question = copy()
+
+    assert rekeyed(question, "Q?", fixed)
+    # The candidate's option order stays; only the key moves.
+    assert question["options"] == [
+        {"answer": "b", "correct": False},
+        {"answer": "a", "correct": True},
+    ]
+    assert not rekeyed(copy(), "Other?", fixed)
+    assert not rekeyed(copy(), "Q?", [{"answer": "c", "correct": True}])

@@ -6,9 +6,9 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { useSignIn } from "@/components/sign-in-dialog"
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
-import { signIn } from "@/lib/auth"
 import { openCheckout } from "@/lib/paddle"
 import type { Catalog } from "@/types/billing"
 
@@ -33,7 +33,7 @@ export function BuyButton({
   className?: string
 }) {
   const t = useTranslations("billing")
-  const signInText = useTranslations("signIn")
+  const signIn = useSignIn()
   const router = useRouter()
   const { user } = useAuth()
   const [opening, setOpening] = useState(false)
@@ -52,7 +52,7 @@ export function BuyButton({
 
   async function buy() {
     if (!user) {
-      await signIn(signInText("failed"))
+      await signIn()
 
       return
     }

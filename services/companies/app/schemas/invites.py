@@ -1,9 +1,9 @@
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
 
-from app.constants.invites import MAX_BULK_TEXT_LENGTH
+from app.constants.invites import EXTRA_TIME_OPTIONS, MAX_BULK_TEXT_LENGTH
 
 
 class CandidateIn(BaseModel):
@@ -91,3 +91,17 @@ class SkippedInvite(BaseModel):
 class BulkInviteOut(BaseModel):
     invited: list[str]
     skipped: list[SkippedInvite]
+
+
+class ExtraTimeIn(BaseModel):
+    """Extra time for a candidate who needs it, in percent of each question's time."""
+
+    extra_time: int
+
+    @field_validator("extra_time")
+    @classmethod
+    def offered(cls, value: int) -> int:
+        if value not in EXTRA_TIME_OPTIONS:
+            raise ValueError(f"Extra time must be one of {EXTRA_TIME_OPTIONS}")
+
+        return value

@@ -5,11 +5,11 @@ import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
+import { useSignIn } from "@/components/sign-in-dialog"
 import { useAuth } from "@/components/auth-provider"
 import { InviteIntro } from "@/components/company/invite-intro"
 import { Button } from "@/components/ui/button"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
-import { signIn } from "@/lib/auth"
 import type { SessionSummary } from "@/types/company"
 
 type Link = {
@@ -28,7 +28,7 @@ export function LinkView({ token }: { token: string }) {
   const t = useTranslations("invite")
   const share = useTranslations("share")
   const session = useTranslations("session")
-  const signInText = useTranslations("signIn")
+  const signIn = useSignIn()
   const router = useRouter()
   const { user, loading } = useAuth()
   const [link, setLink] = useState<Link | null>(null)
@@ -47,7 +47,7 @@ export function LinkView({ token }: { token: string }) {
   async function start() {
     setStarting(true)
 
-    if (!user && !(await signIn(signInText("failed")))) {
+    if (!user && !(await signIn())) {
       setStarting(false)
 
       return

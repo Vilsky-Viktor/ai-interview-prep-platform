@@ -35,10 +35,11 @@ async def export(user_id: str) -> dict:
                 {
                     "topic": row.topic_title,
                     "status": row.status,
-                    "final_score": row.final_score,
+                    # A company's interview score isn't the candidate's to see; practice is.
+                    "final_score": row.final_score if row.practice else None,
                     "started_at": row.started_at,
                     "answers": [
-                        {**answer_export(row.questions, a), "seconds": a.seconds}
+                        {**answer_export(row.questions, a, row.practice), "seconds": a.seconds}
                         for a in row.answers
                     ],
                     "page_leaves_and_copies": [

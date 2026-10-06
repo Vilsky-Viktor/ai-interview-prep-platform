@@ -41,9 +41,12 @@
     "practice": "Latihan gratis"
   },
   "signIn": {
-    "with": "Masuk dengan",
+    "title": "Masuk",
+    "continueWith": "Lanjutkan dengan <name>{provider}</name>",
+    "link": "Email ini sudah punya akun prepza. Lanjutkan dengan cara kamu masuk sebelumnya, dan {provider} akan ditautkan ke akun tersebut.",
     "consent": "Dengan masuk, kamu menyetujui <terms>Ketentuan</terms> dan <privacy>Kebijakan privasi</privacy>.",
-    "failed": "Gagal masuk. Coba lagi."
+    "failed": "Gagal masuk. Coba lagi.",
+    "verify": "Kami mengirimkan tautan untuk memverifikasi email-mu. Buka tautannya, lalu masuk lagi untuk mengikuti wawancara."
   },
   "common": {
     "copyLink": "Salin tautan",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Perusahaan",
-    "signIn": "Masuk untuk membuat wawancara bagi perusahaanmu dan mengundang kandidat.",
     "signInInterviews": "Masuk untuk melihat wawancara perusahaan.",
     "signInAdmins": "Masuk untuk melihat admin perusahaan.",
     "signInReferrals": "Masuk untuk melihat tautan undangan perusahaan.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Cabut undangan?",
     "revokeText": "Tautan yang dikirim ke {email} tidak akan berfungsi lagi. Kamu bisa mengundangnya lagi nanti.",
     "revokeConfirm": "Cabut",
+    "erase": "Hapus kandidat",
+    "erased": "{email} dihapus",
+    "eraseFailed": "Kandidat tidak bisa dihapus.",
+    "eraseTitle": "Hapus kandidat ini?",
+    "eraseText": "Jawaban dan hasil {email} dihapus permanen, misalnya saat mereka meminta datanya dihapus. Tindakan ini tidak bisa dibatalkan.",
+    "eraseConfirm": "Hapus",
     "sortBy": "Urutkan: {sort}",
     "sort": {
       "grade": "Nilai",
       "date": "Tanggal"
-    }
+    },
+    "extraTimeNone": "Tanpa waktu tambahan",
+    "extraTimeSome": "+{percent}% waktu",
+    "extraTimeNote": "Untuk kandidat yang butuh waktu lebih, misalnya karena disabilitas. Atur sebelum mereka mulai.",
+    "extraTimeFailed": "Waktu tambahan tidak bisa diubah. Coba lagi."
   },
   "interviewStatus": {
     "new": "Baru",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Saat waktu sebuah soal habis, soal itu dihitung salah dan soal berikutnya terbuka. Waktu tetap berjalan meski kamu pergi.",
     "unanswered": "Soal yang tidak dijawab dihitung salah.",
     "saved": "Kemajuan disimpan: buka tautan ini lagi untuk melanjutkan.",
+    "extraTime": "Butuh waktu lebih, misalnya karena disabilitas? Tanyakan ke {company} sebelum kamu mulai.",
+    "people": "Soal-soalnya ditulis oleh AI. Orang-orang di {company} meninjau hasilnya dan memutuskan; kamu bisa meminta mereka meninjau hasilmu.",
     "stay": "Tetap di halaman ini: meninggalkannya atau menyalin akan dicatat (<link>privasi</link>).",
     "finished": "Wawancara ini sudah selesai.",
     "continue": "Lanjutkan",
     "start": "Terima dan mulai",
     "mismatch": "Email tidak cocok. Masuk dengan email undangan untuk memulai.",
-    "title": "Undangan wawancara"
+    "title": "Undangan wawancara",
+    "theCompany": "perusahaan"
   },
   "members": {
     "joined": "Bergabung",
@@ -741,7 +756,8 @@
     "candidatesFileName": "Kandidat {title}",
     "candidateCount": "{count, plural, other {# kandidat}}",
     "passMark": "nilai lulus {mark}%",
-    "progressOf": "{progress}% selesai"
+    "progressOf": "{progress}% selesai",
+    "humanReview": "Skor mendukung keputusanmu, bukan menggantikannya. Baca jawabannya, dan jika kandidat meminta, minta seseorang meninjau hasilnya."
   },
   "practice": {
     "title": "Latihan wawancara gratis",

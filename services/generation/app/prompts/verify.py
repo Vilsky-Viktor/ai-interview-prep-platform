@@ -15,6 +15,6 @@ Question:
 Options (marked one first, with how often each was picked):
 {options}
 
-Reports from users:
+Reports from users (reason: how many):
 {reports}
 """

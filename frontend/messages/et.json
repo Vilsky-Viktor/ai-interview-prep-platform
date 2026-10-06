@@ -41,9 +41,12 @@
     "practice": "Tasuta harjutamine"
   },
   "signIn": {
-    "with": "Logi sisse kontoga",
+    "title": "Logi sisse",
+    "continueWith": "Jätka kontoga <name>{provider}</name>",
+    "link": "Selle e-posti aadressiga on juba prepza konto. Jätka samal viisil nagu varem ja {provider} seotakse selle kontoga.",
     "consent": "Sisse logides nõustud <terms>tingimustega</terms> ja <privacy>privaatsuspoliitikaga</privacy>.",
-    "failed": "Sisselogimine ebaõnnestus. Proovi uuesti."
+    "failed": "Sisselogimine ebaõnnestus. Proovi uuesti.",
+    "verify": "Saatsime sulle lingi e-posti aadressi kinnitamiseks. Ava see ja logi siis uuesti sisse, et intervjuusid teha."
   },
   "common": {
     "copyLink": "Kopeeri link",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Ettevõtted",
-    "signIn": "Logi sisse, et luua oma ettevõttele intervjuusid ja kutsuda kandidaate.",
     "signInInterviews": "Ettevõtte intervjuude nägemiseks logi sisse.",
     "signInAdmins": "Ettevõtte administraatorite nägemiseks logi sisse.",
     "signInReferrals": "Ettevõtte kutselingi nägemiseks logi sisse.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Tühistada kutse?",
     "revokeText": "Aadressile {email} saadetud link lakkab töötamast. Saad hiljem uuesti kutsuda.",
     "revokeConfirm": "Tühista",
+    "erase": "Kustuta kandidaat",
+    "erased": "{email} kustutati",
+    "eraseFailed": "Kandidaati ei õnnestunud kustutada.",
+    "eraseTitle": "Kustutada see kandidaat?",
+    "eraseText": "Aadressi {email} vastused ja tulemused kustutatakse jäädavalt, näiteks kui kandidaat palub oma andmed kustutada. Seda ei saa tagasi võtta.",
+    "eraseConfirm": "Kustuta",
     "sortBy": "Järjesta: {sort}",
     "sort": {
       "grade": "Hinne",
       "date": "Kuupäev"
-    }
+    },
+    "extraTimeNone": "Lisaaega pole",
+    "extraTimeSome": "+{percent}% aega",
+    "extraTimeNote": "Kandidaadile, kes vajab rohkem aega, näiteks puude tõttu. Määra see enne, kui ta alustab.",
+    "extraTimeFailed": "Lisaaega ei õnnestunud muuta. Proovi uuesti."
   },
   "interviewStatus": {
     "new": "Uus",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Kui küsimuse aeg saab otsa, loetakse see valeks ja avaneb järgmine. Kell käib edasi ka siis, kui lahkud.",
     "unanswered": "Vastamata küsimused loetakse valeks.",
     "saved": "Edenemine salvestatakse: jätkamiseks ava see link uuesti.",
+    "extraTime": "Vajad rohkem aega, näiteks puude tõttu? Küsi seda enne alustamist: lisaaega saab anda {company}.",
+    "people": "Küsimused kirjutab tehisaru, kuid tulemused vaatavad üle ja otsuse teevad inimesed. Võid paluda, et {company} laseks sinu tulemuse inimesel üle vaadata.",
     "stay": "Jää sellele lehele: lehelt lahkumine ja kopeerimine registreeritakse (<link>privaatsus</link>).",
     "finished": "See intervjuu on juba lõppenud.",
     "continue": "Jätka",
     "start": "Nõustu ja alusta",
     "mismatch": "E-posti aadress ei ühti. Alustamiseks logi sisse kutses olnud aadressiga.",
-    "title": "Intervjuu kutse"
+    "title": "Intervjuu kutse",
+    "theCompany": "ettevõte"
   },
   "members": {
     "joined": "Liitunud",
@@ -745,7 +760,8 @@
     "candidatesFileName": "Kandidaadid {title}",
     "candidateCount": "{count, plural, one {# kandidaat} other {# kandidaati}}",
     "passMark": "läbimise lävi {mark}%",
-    "progressOf": "{progress}% tehtud"
+    "progressOf": "{progress}% tehtud",
+    "humanReview": "Tulemus toetab sinu otsust, aga ei tee seda sinu eest. Loe vastused läbi ja kui kandidaat palub, lase tema tulemus inimesel üle vaadata."
   },
   "practice": {
     "title": "Tasuta intervjuu harjutamine",

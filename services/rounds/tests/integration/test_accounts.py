@@ -34,6 +34,8 @@ def test_deleting_a_user_removes_their_interview_sessions(run):
     [answer] = section["answers"]
 
     assert answer["your_answer"] == "right"
-    assert answer["correct"] is True
+    # Whether a company interview's answer was right isn't the candidate's to see.
+    assert "correct" not in answer
+    assert section["final_score"] is None
     assert session is None
     assert kept is not None

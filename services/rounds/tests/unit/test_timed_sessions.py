@@ -166,3 +166,25 @@ def test_coming_back_after_the_interview_ran_out_finishes_it(monkeypatch):
     assert asyncio.run(get_owned_session(row.id, CANDIDATE)).status == "finished"
     # Nothing answered: every question counts as wrong.
     assert finished == [(row.id, 0)]
+
+
+def test_a_running_section_shows_no_review_and_a_finished_one_no_new_question(monkeypatch):
+    from app.routers import sessions as routes
+
+    running = timed(5)
+    finished = timed(5)
+    finished.status = "finished"
+
+    async def owned(session_id, user, grace=0):
+        return {running.id: running, finished.id: finished}[session_id]
+
+    monkeypatch.setattr(routes, "get_owned_session", owned)
+
+    # While it runs, the review would show every question before its clock starts.
+    with pytest.raises(HTTPException) as refused:
+        asyncio.run(routes.review_session(running.id, CANDIDATE))
+
+    assert refused.value.status_code == 409
+    # Once finished, an unanswered question is never shown, and the review lists none.
+    assert asyncio.run(routes.get_next_question(finished.id, CANDIDATE)) is None
+    assert asyncio.run(routes.review_session(finished.id, CANDIDATE)) == []

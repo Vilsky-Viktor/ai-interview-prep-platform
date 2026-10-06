@@ -26,7 +26,9 @@ type CandidateActionsProps = {
   backHref: string
 }
 
-/** Resend the invite email, or revoke an invite the candidate hasn't used yet. */
+/** Resend the invite email, or revoke an invite the candidate hasn't used yet. A candidate who
+ * started or finished can be deleted for good instead, for example when they ask to have their
+ * data erased. */
 export function CandidateActions({
   interviewId,
   inviteId,
@@ -40,6 +42,8 @@ export function CandidateActions({
   const [busy, setBusy] = useState(false)
   const [confirmRevoke, setConfirmRevoke] = useState(false)
   const path = `/companies/interviews/${interviewId}/candidates`
+  // An invite not used yet is revoked; a candidate who started is deleted with their results.
+  const unused = ["invited", "undelivered", "expired"].includes(status)
 
   async function resend() {
     setBusy(true)
@@ -61,36 +65,32 @@ export function CandidateActions({
 
     try {
       await apiFetch(`${path}/${inviteId}`, { method: "DELETE" })
-      toast.success(t("revoked", { email }))
+      toast.success(t(unused ? "revoked" : "erased", { email }))
       router.push(backHref)
       router.refresh()
     } catch (error) {
-      toast.error(apiErrorMessage(error, t("revokeFailed")))
+      toast.error(
+        apiErrorMessage(error, t(unused ? "revokeFailed" : "eraseFailed"))
+      )
       setBusy(false)
       setConfirmRevoke(false)
     }
   }
 
-  if (status === "finished") {
-    return null
-  }
-
   return (
     <div className="flex items-center gap-2">
-      <Button variant="outline" disabled={busy} onClick={resend}>
-        {t("resend")}
-      </Button>
-      {(status === "invited" ||
-        status === "undelivered" ||
-        status === "expired") && (
-        <Button
-          variant="destructive"
-          disabled={busy}
-          onClick={() => setConfirmRevoke(true)}
-        >
-          {t("revoke")}
+      {status !== "finished" && (
+        <Button variant="outline" disabled={busy} onClick={resend}>
+          {t("resend")}
         </Button>
       )}
+      <Button
+        variant="destructive"
+        disabled={busy}
+        onClick={() => setConfirmRevoke(true)}
+      >
+        {t(unused ? "revoke" : "erase")}
+      </Button>
       <Dialog
         open={confirmRevoke}
         onOpenChange={(open) => {
@@ -101,8 +101,12 @@ export function CandidateActions({
       >
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="no-dot">{t("revokeTitle")}</DialogTitle>
-            <DialogDescription>{t("revokeText", { email })}</DialogDescription>
+            <DialogTitle className="no-dot">
+              {t(unused ? "revokeTitle" : "eraseTitle")}
+            </DialogTitle>
+            <DialogDescription>
+              {t(unused ? "revokeText" : "eraseText", { email })}
+            </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose
@@ -122,7 +126,7 @@ export function CandidateActions({
               disabled={busy}
               onClick={revoke}
             >
-              {t("revokeConfirm")}
+              {t(unused ? "revokeConfirm" : "eraseConfirm")}
             </Button>
           </DialogFooter>
         </DialogContent>

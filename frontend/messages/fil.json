@@ -41,9 +41,12 @@
     "practice": "Libreng practice"
   },
   "signIn": {
-    "with": "Mag-sign in gamit ang",
+    "title": "Mag-sign in",
+    "continueWith": "Magpatuloy gamit ang <name>{provider}</name>",
+    "link": "May prepza account na ang email na ito. Magpatuloy sa paraang ginamit mo dati, at maili-link dito ang {provider}.",
     "consent": "Sa pag-sign in, sumasang-ayon ka sa <terms>Mga tuntunin</terms> at sa <privacy>Patakaran sa privacy</privacy>.",
-    "failed": "Hindi nakapag-sign in. Pakisubukang muli."
+    "failed": "Hindi nakapag-sign in. Pakisubukang muli.",
+    "verify": "Nagpadala kami sa iyo ng link para i-verify ang iyong email. Buksan ito, saka mag-sign in ulit para makasagot ng mga interview."
   },
   "common": {
     "copyLink": "Kopyahin ang link",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Mga kumpanya",
-    "signIn": "Mag-sign in para gumawa ng interview para sa iyong kumpanya at mag-imbita ng mga kandidato.",
     "signInInterviews": "Mag-sign in para makita ang mga interview ng kumpanya.",
     "signInAdmins": "Mag-sign in para makita ang mga admin ng kumpanya.",
     "signInReferrals": "Mag-sign in para makita ang referral link ng kumpanya.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Bawiin ang imbitasyon?",
     "revokeText": "Hindi na gagana ang link na ipinadala sa {email}. Puwede mo silang imbitahan ulit mamaya.",
     "revokeConfirm": "Bawiin",
+    "erase": "Burahin ang kandidato",
+    "erased": "Binura si {email}",
+    "eraseFailed": "Hindi mabura ang kandidato.",
+    "eraseTitle": "Burahin ang kandidatong ito?",
+    "eraseText": "Permanenteng mabubura ang mga sagot at resulta ni {email}, halimbawa kapag hiniling nilang burahin ang kanilang data. Hindi na ito maibabalik.",
+    "eraseConfirm": "Burahin",
     "sortBy": "Ayusin ayon sa: {sort}",
     "sort": {
       "grade": "Grado",
       "date": "Petsa"
-    }
+    },
+    "extraTimeNone": "Walang dagdag na oras",
+    "extraTimeSome": "+{percent}% oras",
+    "extraTimeNote": "Para sa kandidatong kailangan ng mas maraming oras, halimbawa dahil sa kapansanan. Itakda ito bago siya magsimula.",
+    "extraTimeFailed": "Hindi mabago ang dagdag na oras. Pakisubukang muli."
   },
   "interviewStatus": {
     "new": "Bago",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Kapag naubos ang oras ng isang tanong, mabibilang itong mali at magbubukas ang susunod. Tuloy ang oras kahit umalis ka.",
     "unanswered": "Ang mga hindi nasagot na tanong ay mabibilang na mali.",
     "saved": "Naka-save ang progreso: gamitin ulit ang link na ito para magpatuloy.",
+    "extraTime": "Kailangan mo ba ng mas maraming oras, halimbawa dahil sa kapansanan? Magtanong sa {company} bago ka magsimula.",
+    "people": "AI ang sumusulat ng mga tanong. Mga tao sa {company} ang nagre-review ng mga resulta at nagpapasya; puwede mo silang hilingin na i-review ang sa iyo.",
     "stay": "Manatili sa page na ito: nire-record ang pag-alis dito o pagkopya (<link>privacy</link>).",
     "finished": "Tapos na ang interview na ito.",
     "continue": "Magpatuloy",
     "start": "Tanggapin at simulan",
     "mismatch": "Hindi tugma ang email. Mag-sign in gamit ang email ng imbitasyon para magsimula.",
-    "title": "Imbitasyon sa interview"
+    "title": "Imbitasyon sa interview",
+    "theCompany": "kumpanya"
   },
   "members": {
     "joined": "Sumali na",
@@ -749,7 +764,8 @@
     "candidatesFileName": "Mga kandidato {title}",
     "candidateCount": "{count, plural, one {# kandidato} other {# kandidato}}",
     "passMark": "passing grade {mark}%",
-    "progressOf": "{progress}% tapos"
+    "progressOf": "{progress}% tapos",
+    "humanReview": "Tumutulong ang score sa iyong desisyon; hindi ito ang nagpapasya. Basahin ang mga sagot, at kung hihilingin ng kandidato, ipa-review sa isang tao ang kanyang resulta."
   },
   "practice": {
     "title": "Libreng practice sa interview",

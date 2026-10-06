@@ -46,13 +46,37 @@ resource "random_password" "database" {
   special = false
 }
 
+# The instance's admin. No service uses it: only the db-roles job, which gives each service its
+# own user owning only its own database (services/library/app/jobs/db_roles.py).
 resource "google_sql_user" "prepza" {
   name     = "prepza"
   instance = google_sql_database_instance.main.name
   password = random_password.database.result
 }
 
-# Each service's connection string, with the password, kept in Secret Manager.
+resource "google_secret_manager_secret" "database_admin_url" {
+  secret_id = "database-admin-url"
+
+  replication {
+    auto {}
+  }
+
+  depends_on = [google_project_service.apis]
+}
+
+resource "google_secret_manager_secret_version" "database_admin_url" {
+  secret      = google_secret_manager_secret.database_admin_url.id
+  secret_data = "postgresql://prepza:${random_password.database.result}@/postgres?host=/cloudsql/${google_sql_database_instance.main.connection_name}"
+}
+
+# Each service's own Postgres user, named after its database; db-roles creates it.
+resource "random_password" "service_database" {
+  for_each = toset(local.databases)
+  length   = 32
+  special  = false
+}
+
+# Each service's connection string, as its own user, kept in Secret Manager.
 resource "google_secret_manager_secret" "database_url" {
   for_each  = toset(local.databases)
   secret_id = "database-url-${each.value}"
@@ -67,7 +91,7 @@ resource "google_secret_manager_secret" "database_url" {
 resource "google_secret_manager_secret_version" "database_url" {
   for_each    = toset(local.databases)
   secret      = google_secret_manager_secret.database_url[each.value].id
-  secret_data = "postgresql://prepza:${random_password.database.result}@/${each.value}?host=/cloudsql/${google_sql_database_instance.main.connection_name}"
+  secret_data = "postgresql://${each.value}:${random_password.service_database[each.value].result}@/${each.value}?host=/cloudsql/${google_sql_database_instance.main.connection_name}"
 }
 
 locals {

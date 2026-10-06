@@ -1,5 +1,6 @@
 from fastapi import HTTPException, status
 
+from app.helpers.candidates import candidate_seconds
 from app.helpers.interviews import attach_set, session_topics
 from app.integrations import library, rounds
 from app.models.interviews import Interview
@@ -27,7 +28,7 @@ async def start_sessions(
         {
             "user_id": user_id,
             "candidate_invite_id": str(invite.id),
-            "question_seconds": interview.question_seconds,
+            "question_seconds": candidate_seconds(interview.question_seconds, invite.extra_time),
             "topics": session_topics(interview, content),
         }
     )

@@ -129,22 +129,34 @@ async def get(invite_id: uuid.UUID) -> CandidateInvite | None:
         return await session.get(CandidateInvite, invite_id)
 
 
-async def expire_unstarted(before: datetime) -> list[CandidateInvite]:
-    """Marks invites never started and last sent before `before` as expired; returns them."""
+async def expiring(before: datetime, limit: int) -> list[CandidateInvite]:
+    """Up to `limit` invites never started and last sent before `before`."""
     async with Session() as session:
-        expired = await session.scalars(
-            update(CandidateInvite)
+        rows = await session.scalars(
+            select(CandidateInvite)
             .where(
                 CandidateInvite.status.in_([InviteStatus.INVITED, InviteStatus.UNDELIVERED]),
                 CandidateInvite.sent_at < before,
             )
-            .values(status=InviteStatus.EXPIRED)
-            .returning(CandidateInvite)
+            .order_by(CandidateInvite.sent_at)
+            .limit(limit)
         )
-        expired = list(expired)
-        await session.commit()
 
-        return expired
+        return list(rows)
+
+
+async def mark_expired(invite_id: uuid.UUID) -> None:
+    """Expires an invite that still hasn't started."""
+    async with Session() as session:
+        await session.execute(
+            update(CandidateInvite)
+            .where(
+                CandidateInvite.id == invite_id,
+                CandidateInvite.status.in_([InviteStatus.INVITED, InviteStatus.UNDELIVERED]),
+            )
+            .values(status=InviteStatus.EXPIRED)
+        )
+        await session.commit()
 
 
 async def get_by_token(token: str) -> tuple[CandidateInvite, Interview] | None:
@@ -265,3 +277,13 @@ async def list_for_interview(
 
     async with Session() as session:
         return list(await session.scalars(query))
+
+
+async def set_extra_time(invite_id: uuid.UUID, extra_time: int) -> None:
+    async with Session() as session:
+        await session.execute(
+            update(CandidateInvite)
+            .where(CandidateInvite.id == invite_id)
+            .values(extra_time=extra_time)
+        )
+        await session.commit()

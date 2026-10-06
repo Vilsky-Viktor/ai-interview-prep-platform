@@ -2,7 +2,7 @@ import uuid
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import DateTime, String, Text, func
+from sqlalchemy import DateTime, Index, String, Text, UniqueConstraint, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -19,11 +19,19 @@ class Session(Base):
     """One pass by a candidate through an interview topic. Single pass, no reveal."""
 
     __tablename__ = "sessions"
+    __table_args__ = (
+        UniqueConstraint("candidate_invite_id", "topic_id", name="uq_sessions_invite_topic"),
+        Index(
+            "ix_sessions_running_invite",
+            "candidate_invite_id",
+            postgresql_where="status = 'in_progress'",
+        ),
+    )
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     user_id: Mapped[str] = mapped_column(String(128), index=True)
     topic_id: Mapped[uuid.UUID] = mapped_column(index=True)
-    interview_set_id: Mapped[uuid.UUID]
+    interview_set_id: Mapped[uuid.UUID] = mapped_column(index=True)
     candidate_invite_id: Mapped[uuid.UUID] = mapped_column(index=True)
     topic_title: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column(String(32), default=RoundStatus.IN_PROGRESS)

@@ -10,6 +10,7 @@ import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 
+import { useSignIn } from "@/components/sign-in-dialog"
 import { useAuth } from "@/components/auth-provider"
 import { ThemeModes } from "@/components/theme-toggle"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -24,11 +25,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { apiFetch } from "@/lib/api"
-import { signIn, signOut } from "@/lib/auth"
+import { signOut } from "@/lib/auth"
 
 export function UserMenu() {
   const t = useTranslations("userMenu")
-  const signInText = useTranslations("signIn")
+  const signIn = useSignIn()
   const { user, loading } = useAuth()
   // The backend says whether this account may open the superadmin pages; kept by account, so a
   // different sign-in never inherits it.
@@ -51,7 +52,7 @@ export function UserMenu() {
 
   if (!user) {
     return (
-      <Button variant="outline" onClick={() => signIn(signInText("failed"))}>
+      <Button variant="outline" onClick={() => signIn()}>
         {t("signIn")}
       </Button>
     )

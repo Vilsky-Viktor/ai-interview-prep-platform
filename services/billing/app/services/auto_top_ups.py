@@ -74,6 +74,12 @@ async def turn_off(owner_type: str, owner_id: str) -> None:
         await cancel_quietly(subscription_id)
 
 
+async def forget_buyer(buyer_id: str) -> None:
+    """A deleted account's card is never charged again: its automatic top-ups go off."""
+    for subscription_id in await auto_top_ups.remove_for_buyer(buyer_id):
+        await cancel_quietly(subscription_id)
+
+
 async def cancel_quietly(subscription_id: str) -> None:
     try:
         await paddle.cancel(subscription_id)

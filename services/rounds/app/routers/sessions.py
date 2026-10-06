@@ -1,10 +1,10 @@
 from datetime import UTC, datetime
 from uuid import UUID
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 
-from app.constants.rounds import TIME_GRACE_SECONDS, RoundStatus
+from app.constants.rounds import SECTION_IN_PROGRESS, TIME_GRACE_SECONDS, RoundStatus
 from app.helpers.review import build_review
 from app.helpers.scores import final_score
 from app.helpers.sessions import (
@@ -41,10 +41,15 @@ async def list_topics(session_id: UUID, user: CurrentUser) -> list[SessionTopicO
 @router.get("/{session_id}/next")
 async def get_next_question(session_id: UUID, user: CurrentUser) -> NextQuestion | None:
     row = await get_owned_session(session_id, user)
+
+    # A finished section shows nothing more: its unanswered questions stay unseen.
+    if row.status != RoundStatus.IN_PROGRESS:
+        return None
+
     question = next_session_question(row)
 
-    if question is None or row.status != RoundStatus.IN_PROGRESS:
-        return question
+    if question is None:
+        return None
 
     if row.question_shown_at is None:
         row.question_shown_at = await sessions.mark_shown(row.id)
@@ -79,9 +84,15 @@ async def answer_question(
 
 @router.get("/{session_id}/review")
 async def review_session(session_id: UUID, user: CurrentUser) -> list[ReviewItem]:
-    """Candidates see their questions and picks, never whether they were right or the key."""
+    """Once a section is finished, candidates see the questions they answered and their picks,
+    never whether they were right or the key. Never while it runs: that would show questions
+    before their clock starts."""
     row = await get_owned_session(session_id, user)
-    items = build_review(row)
+
+    if row.status == RoundStatus.IN_PROGRESS:
+        raise HTTPException(status.HTTP_409_CONFLICT, SECTION_IN_PROGRESS)
+
+    items = [item for item in build_review(row) if item.answer]
 
     for item in items:
         item.correct_option_index = None

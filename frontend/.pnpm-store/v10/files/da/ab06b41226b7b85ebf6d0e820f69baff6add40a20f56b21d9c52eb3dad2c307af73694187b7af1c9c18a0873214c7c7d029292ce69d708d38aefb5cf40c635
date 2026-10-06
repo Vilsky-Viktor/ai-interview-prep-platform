@@ -1,1 +1,0 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/config/withSentryConfig/index.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAwD,kBAAkB,EAAE,MAAM,UAAU,CAAC;AACzG,OAAO,EAAE,gCAAgC,EAAE,MAAM,aAAa,CAAC;AAG/D,OAAO,EAAE,gCAAgC,EAAE,CAAC;AAE5C;;;;;;;;GAQG;AACH,wBAAgB,gBAAgB,CAAC,CAAC,EAAE,UAAU,CAAC,EAAE,CAAC,EAAE,kBAAkB,GAAE,kBAAuB,GAAG,CAAC,CAwBlG"}

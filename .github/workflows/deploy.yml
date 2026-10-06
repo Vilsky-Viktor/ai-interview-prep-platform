@@ -97,6 +97,12 @@ jobs:
           for name in $SERVICES; do
             gcloud artifacts docker tags add "$REGISTRY/$name:$SHA" "$REGISTRY/$name:$VERSION" --quiet
           done
+      # Each service's own database user, owning only its database; safe to repeat. Runs before
+      # migrations, which connect as those users.
+      - name: Database users
+        run: |
+          gcloud run jobs update db-roles --image="$REGISTRY/library:$VERSION" --region="${{ vars.GCP_REGION }}" --quiet
+          gcloud run jobs execute db-roles --region="${{ vars.GCP_REGION }}" --wait --quiet
       # Migrations run before any service moves, so new code never meets an old schema.
       - name: Migrations
         run: |

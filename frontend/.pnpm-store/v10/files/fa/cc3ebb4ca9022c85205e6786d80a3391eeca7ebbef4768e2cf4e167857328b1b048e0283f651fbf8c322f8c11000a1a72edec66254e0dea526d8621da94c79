@@ -1,4 +1,0 @@
-const LIB_VERSION = "11.2.0";
-
-export { LIB_VERSION };
-//# sourceMappingURL=version.js.map

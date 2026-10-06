@@ -6,6 +6,7 @@ import { getLocale, getTranslations } from "next-intl/server"
 
 import "./globals.css"
 import { AuthProvider } from "@/components/auth-provider"
+import { SignInProvider } from "@/components/sign-in-dialog"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -73,12 +74,14 @@ export default async function RootLayout({
           <ThemeProvider nonce={nonce}>
             <AuthProvider>
               <TooltipProvider>
-                <SiteHeader />
-                <div className="flex flex-1 flex-col [&>*]:w-full">
-                  {children}
-                </div>
-                <SiteFooter />
-                <Toaster />
+                <SignInProvider>
+                  <SiteHeader />
+                  <div className="flex flex-1 flex-col [&>*]:w-full">
+                    {children}
+                  </div>
+                  <SiteFooter />
+                  <Toaster />
+                </SignInProvider>
               </TooltipProvider>
             </AuthProvider>
           </ThemeProvider>

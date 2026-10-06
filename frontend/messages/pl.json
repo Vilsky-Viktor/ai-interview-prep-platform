@@ -41,9 +41,12 @@
     "practice": "Darmowe ćwiczenia"
   },
   "signIn": {
-    "with": "Zaloguj się przez",
+    "title": "Zaloguj się",
+    "continueWith": "Kontynuuj przez <name>{provider}</name>",
+    "link": "Ten adres e-mail ma już konto w prepza. Kontynuuj tak, jak logowałeś się wcześniej, a {provider} zostanie z nim połączony.",
     "consent": "Logując się, akceptujesz <terms>Regulamin</terms> i <privacy>Politykę prywatności</privacy>.",
-    "failed": "Nie udało się zalogować. Spróbuj ponownie."
+    "failed": "Nie udało się zalogować. Spróbuj ponownie.",
+    "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, a potem zaloguj się ponownie, aby przechodzić rozmowy."
   },
   "common": {
     "copyLink": "Kopiuj link",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Firmy",
-    "signIn": "Zaloguj się, aby tworzyć rozmowy dla swojej firmy i zapraszać kandydatów.",
     "signInInterviews": "Zaloguj się, aby zobaczyć rozmowy firmy.",
     "signInAdmins": "Zaloguj się, aby zobaczyć administratorów firmy.",
     "signInReferrals": "Zaloguj się, aby zobaczyć link polecający firmy.",
@@ -366,11 +368,21 @@
     "revokeTitle": "Wycofać zaproszenie?",
     "revokeText": "Link wysłany na {email} przestanie działać. Możesz zaprosić tę osobę ponownie później.",
     "revokeConfirm": "Wycofaj",
+    "erase": "Usuń kandydata",
+    "erased": "Usunięto {email}",
+    "eraseFailed": "Nie udało się usunąć kandydata.",
+    "eraseTitle": "Usunąć tego kandydata?",
+    "eraseText": "Odpowiedzi i wyniki {email} zostaną trwale usunięte, np. gdy ta osoba poprosi o usunięcie swoich danych. Tej operacji nie można cofnąć.",
+    "eraseConfirm": "Usuń",
     "sortBy": "Sortuj według: {sort}",
     "sort": {
       "grade": "Ocena",
       "date": "Data"
-    }
+    },
+    "extraTimeNone": "Bez dodatkowego czasu",
+    "extraTimeSome": "+{percent}% czasu",
+    "extraTimeNote": "Dla kandydata, który potrzebuje więcej czasu, np. z powodu niepełnosprawności. Ustaw to, zanim zacznie.",
+    "extraTimeFailed": "Nie udało się zmienić dodatkowego czasu. Spróbuj ponownie."
   },
   "interviewStatus": {
     "new": "Nowy",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Gdy czas na pytanie minie, liczy się ono jako błędne i otwiera się następne. Czas płynie, nawet jeśli wyjdziesz.",
     "unanswered": "Pytania bez odpowiedzi liczą się jako błędne.",
     "saved": "Postęp jest zapisywany: otwórz ten link ponownie, aby kontynuować.",
+    "extraTime": "Potrzebujesz więcej czasu, np. z powodu niepełnosprawności? Przed startem zapytaj, czy {company} może go przyznać.",
+    "people": "Pytania pisze AI. Wyniki sprawdzają ludzie, a decyzję podejmuje {company}; możesz poprosić o sprawdzenie swojego wyniku.",
     "stay": "Zostań na tej stronie: opuszczenie jej i kopiowanie są rejestrowane (<link>prywatność</link>).",
     "finished": "Ta rozmowa jest już zakończona.",
     "continue": "Kontynuuj",
     "start": "Akceptuj i rozpocznij",
     "mismatch": "Adres e-mail się nie zgadza. Zaloguj się adresem z zaproszenia, aby rozpocząć.",
-    "title": "Zaproszenie na rozmowę"
+    "title": "Zaproszenie na rozmowę",
+    "theCompany": "firma"
   },
   "members": {
     "joined": "Dołączył(a)",
@@ -741,7 +756,8 @@
     "candidatesFileName": "Kandydaci {title}",
     "candidateCount": "{count, plural, one {# kandydat} few {# kandydaci} many {# kandydatów} other {# kandydata}}",
     "passMark": "próg zaliczenia {mark}%",
-    "progressOf": "ukończono {progress}%"
+    "progressOf": "ukończono {progress}%",
+    "humanReview": "Wynik wspiera Twoją decyzję, ale jej nie podejmuje. Przeczytaj odpowiedzi, a jeśli kandydat poprosi, zleć sprawdzenie jego wyniku człowiekowi."
   },
   "practice": {
     "title": "Darmowe ćwiczenia przed rozmową",

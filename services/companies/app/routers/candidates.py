@@ -7,6 +7,7 @@ from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 
 from app.constants.invites import (
+    EXTRA_TIME_OPTIONS,
     MAX_SEARCH_LENGTH,
     NOT_STARTED,
     RESULT_FILTERS,
@@ -128,7 +129,9 @@ async def list_candidates(
 
 @router.delete("/{interview_id}/candidates/{invite_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUser) -> None:
-    """Withdraws an invite the candidate hasn't used yet; later it would discard their answers."""
+    """Withdraws an invite the candidate hasn't used yet. Once they've started, it erases them for
+    good, answers and results included, for example when they ask to have their data deleted;
+    credits still held come back, and a finished candidate stays charged."""
     interview = await interviews.get(interview_id)
     invite = next(
         (item for item in (interview.invites if interview else []) if item.id == invite_id), None
@@ -139,10 +142,12 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
 
     await require_company(user, interview.company_id)
 
-    if invite.status not in NOT_STARTED:
-        raise HTTPException(status.HTTP_409_CONFLICT, "The candidate has already started")
+    if invite.status != InviteStatus.FINISHED:
+        await billing.release_candidate(candidate_key(interview.id, invite.email))
 
-    await billing.release_candidate(candidate_key(interview.id, invite.email))
+    if invite.status not in NOT_STARTED:
+        await rounds.delete_invite_sessions([invite.id])
+
     await invites.remove(invite.id)
 
 
@@ -174,6 +179,9 @@ async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: Current
         "id": str(invite.id),
         "email": invite.email,
         "status": invite.status,
+        "extra_time": invite.extra_time,
+        # What extra time can still be given: only before the candidate starts.
+        "extra_time_options": list(EXTRA_TIME_OPTIONS) if invite.status in NOT_STARTED else [],
         # For the PDF report: the test, the company, and the overall result.
         "title": await interview_title(interview),
         "company": company.name,

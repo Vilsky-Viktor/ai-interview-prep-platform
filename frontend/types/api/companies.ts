@@ -379,6 +379,23 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/interviews/{interview_id}/candidates/{invite_id}/extra-time": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Set Extra Time */
+    put: operations["set_extra_time_interviews__interview_id__candidates__invite_id__extra_time_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/interviews/{interview_id}/candidates/bulk": {
     parameters: {
       query?: never
@@ -1254,6 +1271,14 @@ export interface components {
     CompanyRename: {
       /** Title */
       title: string
+    }
+    /**
+     * ExtraTimeIn
+     * @description Extra time for a candidate who needs it, in percent of each question's time.
+     */
+    ExtraTimeIn: {
+      /** Extra Time */
+      extra_time: number
     }
     /** HTTPValidationError */
     HTTPValidationError: {
@@ -2625,6 +2650,40 @@ export interface operations {
       cookie?: never
     }
     requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  set_extra_time_interviews__interview_id__candidates__invite_id__extra_time_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ExtraTimeIn"]
+      }
+    }
     responses: {
       /** @description Successful Response */
       204: {

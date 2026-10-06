@@ -1,3 +1,4 @@
+import { InfoIcon } from "lucide-react"
 import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 import { cn } from "cn"
@@ -5,6 +6,7 @@ import { cn } from "cn"
 import { BackLink } from "@/components/back-link"
 import { CandidateActions } from "@/components/company/candidate-actions"
 import { CandidateReport } from "@/components/company/candidate-report"
+import { ExtraTime } from "@/components/company/extra-time"
 import { IntegrityLine } from "@/components/company/integrity-line"
 import { CandidateReportActions } from "@/components/company/candidate-report-actions"
 import { ScorecardReview } from "@/components/company/scorecard-review"
@@ -20,6 +22,9 @@ type Scorecard = {
   id: string
   email: string
   status: string
+  // Extra time on each question, in percent, and the amounts still offered (none once started).
+  extra_time: number
+  extra_time_options: number[]
   // For the PDF report: the test, the company and the overall result.
   title: string | null
   company: string
@@ -48,6 +53,7 @@ export default async function ScorecardPage({
   params: Promise<{ companyId: string; id: string; inviteId: string }>
 }) {
   const { companyId, id, inviteId } = await params
+  const reportT = await getTranslations("report")
   const t = await getTranslations("candidates")
   const statuses = await getTranslations("candidateStatus")
   const card = await serverFetch<Scorecard>(
@@ -113,6 +119,12 @@ export default async function ScorecardPage({
         />
         {!deleted && (
           <div className="flex items-center gap-3">
+            <ExtraTime
+              interviewId={id}
+              inviteId={inviteId}
+              current={card.extra_time}
+              options={card.extra_time_options}
+            />
             <CandidateActions
               interviewId={id}
               inviteId={inviteId}
@@ -130,6 +142,15 @@ export default async function ScorecardPage({
           </div>
         )}
       </div>
+
+      {/* The score supports a decision people make; in the gray info card, like the practice
+          test page's. */}
+      {card.sessions.length > 0 && (
+        <div className="flex items-center gap-3 rounded-2xl border bg-muted px-5 py-4 text-base text-muted-foreground">
+          <InfoIcon aria-hidden className="size-6 shrink-0 text-primary" />
+          <p>{reportT("humanReview")}</p>
+        </div>
+      )}
 
       {card.sessions.length === 0 && (
         <p className="py-16 text-center text-muted-foreground">

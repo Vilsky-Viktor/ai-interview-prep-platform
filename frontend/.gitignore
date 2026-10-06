@@ -35,3 +35,6 @@ pnpm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# pnpm's local package store (created when installing inside the container)
+/.pnpm-store/

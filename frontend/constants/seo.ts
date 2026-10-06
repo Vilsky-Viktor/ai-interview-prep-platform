@@ -24,6 +24,7 @@ export const PUBLIC_PATHS = [
   "/pricing",
   "/privacy",
   "/terms",
+  "/dpa",
   "/faq",
   "/about",
   "/contact",

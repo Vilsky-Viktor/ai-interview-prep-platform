@@ -65,8 +65,11 @@ async def handle_completed(data: dict) -> None:
             datetime.now(UTC),
         )
 
+        # Paid once (it's idempotent), also on Paddle's retry after a failure right after the
+        # grant, so the referral is never lost.
+        await reward_after_top_up(owner_type, owner_id)
+
         if granted:
-            await reward_after_top_up(owner_type, owner_id)
             await track(
                 "topped_up",
                 company_id=owner_id,

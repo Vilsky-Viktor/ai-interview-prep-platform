@@ -41,9 +41,12 @@
     "practice": "Práctica gratis"
   },
   "signIn": {
-    "with": "Iniciar sesión con",
+    "title": "Iniciar sesión",
+    "continueWith": "Continuar con <name>{provider}</name>",
+    "link": "Este correo ya tiene una cuenta de prepza. Continúa como iniciaste sesión la otra vez y {provider} se vinculará a ella.",
     "consent": "Al iniciar sesión, aceptas los <terms>Términos</terms> y la <privacy>Política de privacidad</privacy>.",
-    "failed": "No se pudo iniciar sesión. Inténtalo de nuevo."
+    "failed": "No se pudo iniciar sesión. Inténtalo de nuevo.",
+    "verify": "Te enviamos un enlace para verificar tu correo. Ábrelo y vuelve a iniciar sesión para hacer entrevistas."
   },
   "common": {
     "copyLink": "Copiar enlace",
@@ -307,7 +310,6 @@
   },
   "company": {
     "title": "Empresas",
-    "signIn": "Inicia sesión para crear entrevistas para tu empresa e invitar a candidatos.",
     "signInInterviews": "Inicia sesión para ver las entrevistas de la empresa.",
     "signInAdmins": "Inicia sesión para ver los administradores de la empresa.",
     "signInReferrals": "Inicia sesión para ver el enlace de invitación de la empresa.",
@@ -366,11 +368,21 @@
     "revokeTitle": "¿Revocar la invitación?",
     "revokeText": "El enlace enviado a {email} deja de funcionar. Puedes volver a invitarlo más adelante.",
     "revokeConfirm": "Revocar",
+    "erase": "Eliminar candidato",
+    "erased": "{email} eliminado",
+    "eraseFailed": "No se pudo eliminar el candidato.",
+    "eraseTitle": "¿Eliminar este candidato?",
+    "eraseText": "Las respuestas y los resultados de {email} se eliminan para siempre, por ejemplo cuando la persona pide que se borren sus datos. Esto no se puede deshacer.",
+    "eraseConfirm": "Eliminar",
     "sortBy": "Ordenar por: {sort}",
     "sort": {
       "grade": "Nota",
       "date": "Fecha"
-    }
+    },
+    "extraTimeNone": "Sin tiempo extra",
+    "extraTimeSome": "+{percent} % de tiempo",
+    "extraTimeNote": "Para un candidato que necesita más tiempo, por ejemplo por una discapacidad. Configúralo antes de que empiece.",
+    "extraTimeFailed": "No se pudo cambiar el tiempo extra. Inténtalo de nuevo."
   },
   "interviewStatus": {
     "new": "Nueva",
@@ -439,12 +451,15 @@
     "timeRunsOut": "Cuando se acaba el tiempo de una pregunta, cuenta como incorrecta y se abre la siguiente. El reloj sigue corriendo aunque salgas.",
     "unanswered": "Las preguntas sin responder cuentan como incorrectas.",
     "saved": "El progreso se guarda: vuelve a usar este enlace para continuar.",
+    "extraTime": "¿Necesitas más tiempo, por ejemplo por una discapacidad? Pídeselo a {company} antes de empezar.",
+    "people": "Las preguntas las escribe una IA. Personas de {company} revisan los resultados y deciden; puedes pedirles que revisen el tuyo.",
     "stay": "Quédate en esta página: salir de ella o copiar queda registrado (<link>privacidad</link>).",
     "finished": "Esta entrevista ya terminó.",
     "continue": "Continuar",
     "start": "Aceptar y empezar",
     "mismatch": "El correo no coincide. Inicia sesión con el correo de la invitación para empezar.",
-    "title": "Invitación a entrevista"
+    "title": "Invitación a entrevista",
+    "theCompany": "la empresa"
   },
   "members": {
     "joined": "Se unió",
@@ -745,7 +760,8 @@
     "candidatesFileName": "Candidatos {title}",
     "candidateCount": "{count, plural, one {# candidato} other {# candidatos}}",
     "passMark": "nota de aprobado {mark} %",
-    "progressOf": "{progress} % completado"
+    "progressOf": "{progress} % completado",
+    "humanReview": "La puntuación apoya tu decisión, no la toma por ti. Lee las respuestas y, si el candidato lo pide, haz que una persona revise su resultado."
   },
   "practice": {
     "title": "Práctica de entrevistas gratis",

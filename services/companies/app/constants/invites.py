@@ -68,6 +68,8 @@ SKIP_REASONS = {
 REMINDER_AFTER_DAYS = 3
 # Reminders queued per daily run; the rest go the next day.
 REMINDERS_PER_RUN = 500
+# Invites expired per batch of the daily expiry run.
+EXPIRIES_PER_BATCH = 200
 TOO_MANY_COMPANIES = "You can own at most 3 companies."
 # Company names are unique across prepza, ignoring case, and short enough for a heading.
 MAX_COMPANY_NAME_LENGTH = 45
@@ -99,3 +101,8 @@ class CandidateFilter(StrEnum):
 RESULT_FILTERS = (CandidateFilter.PASSED, CandidateFilter.FLAGGED)
 # The integrity signals rounds counts per candidate.
 SIGNAL_KEYS = ("tab_leaves", "copies", "fast_answers")
+
+# Extra time a company can give a candidate who needs it, in percent of each question's time.
+EXTRA_TIME_OPTIONS = (0, 25, 50, 100)
+# Extra time is set before the candidate starts: their questions' time is fixed then.
+EXTRA_TIME_STARTED = "Extra time can only be changed before the candidate starts."
