@@ -1,18 +1,13 @@
 import uuid
 from datetime import UTC, datetime
-from typing import TYPE_CHECKING
 
 from prepza_common.constants import DEFAULT_LANGUAGE
 from sqlalchemy import DateTime, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.constants.interviews import DEFAULT_PASS_MARK, DEFAULT_QUESTION_SECONDS
 from app.models.base import Base
-
-# For the relationship's annotation only; the class is resolved by name at runtime.
-if TYPE_CHECKING:
-    from app.models.invites import CandidateInvite
 
 
 class Interview(Base):
@@ -26,7 +21,7 @@ class Interview(Base):
     # Copied from the generated set (and renames), so pages don't ask library for it.
     title: Mapped[str | None] = mapped_column(Text)
     # None for a test made from a template, which needs no generation.
-    generation_id: Mapped[uuid.UUID | None]
+    generation_id: Mapped[uuid.UUID | None] = mapped_column(index=True)
     # What the interview is generated in, as its set in library; invites are emailed in it.
     language: Mapped[str] = mapped_column(String(8), default=DEFAULT_LANGUAGE)
     # The company marked the test as hired; it stays usable.
@@ -46,5 +41,3 @@ class Interview(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
-
-    invites: Mapped[list["CandidateInvite"]] = relationship(cascade="all, delete-orphan")

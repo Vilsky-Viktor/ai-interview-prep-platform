@@ -1,5 +1,6 @@
-# Generation jobs: one task runs one generation on the worker. No retries: a failure is saved on
-# the generation for the user to retry, so a generation never runs twice.
+# Generation jobs: one task runs one generation on the worker. A delivery that fails before the
+# job starts (a worker restarting) is tried again; a started generation is claimed once, so a
+# repeated delivery does nothing (services/generation/app/services/jobs.py).
 resource "google_cloud_tasks_queue" "generation" {
   name     = "generation"
   location = var.region
@@ -10,7 +11,10 @@ resource "google_cloud_tasks_queue" "generation" {
   }
 
   retry_config {
-    max_attempts = 1
+    max_attempts  = 3
+    min_backoff   = "10s"
+    max_backoff   = "120s"
+    max_doublings = 3
   }
 
   depends_on = [google_project_service.apis]

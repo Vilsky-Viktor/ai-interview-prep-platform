@@ -2,8 +2,11 @@ name: Deploy
 
 # Releases a version: a v* tag on a commit of main that passed CI. CI already built and pushed that
 # commit's images, so nothing is rebuilt: the images get the version as a tag and ship. Running it
-# by hand with an earlier tag redeploys that version, which is how to roll back. Infrastructure
-# changes go through Terraform (infra/); this only runs migrations and moves services to images.
+# by hand with an earlier tag redeploys that version, which is how to roll back: a manual run skips
+# migrations unless asked, as an older version's `alembic upgrade head` fails on a database a newer
+# one migrated. So migrations only add (columns, tables) and the previous version keeps working on
+# the new schema; dropping or renaming comes in a later release. Infrastructure changes go through
+# Terraform (infra/); this only runs migrations and moves services to images.
 on:
   push:
     tags: ["v*"]
@@ -12,6 +15,10 @@ on:
       tag:
         description: Version to deploy, for example v1.4.0
         required: true
+      migrate:
+        description: Run migrations (leave off to roll back to an earlier version)
+        type: boolean
+        default: false
 
 # One deploy at a time, in order.
 concurrency:
@@ -37,7 +44,7 @@ jobs:
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
       - id: commit
@@ -83,14 +90,14 @@ jobs:
     env:
       SHA: ${{ needs.verify.outputs.sha }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: ${{ env.VERSION }}
-      - uses: google-github-actions/auth@v2
+      - uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
         with:
           workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
-      - uses: google-github-actions/setup-gcloud@v2
+      - uses: google-github-actions/setup-gcloud@e427ad8a34f8676edf47cf7d7925499adf3eb74f # v2.2.1
       # The images CI built for the commit also get the version's name; adding it again is harmless.
       - name: Version the images
         run: |
@@ -105,6 +112,7 @@ jobs:
           gcloud run jobs execute db-roles --region="${{ vars.GCP_REGION }}" --wait --quiet
       # Migrations run before any service moves, so new code never meets an old schema.
       - name: Migrations
+        if: github.event_name == 'push' || inputs.migrate
         run: |
           for db in library generation rounds companies billing notifications; do
             gcloud run jobs update "$db-migrate" --image="$REGISTRY/$db:$VERSION" --region="${{ vars.GCP_REGION }}" --quiet
@@ -123,6 +131,7 @@ jobs:
           deploy companies companies
           deploy billing billing
           deploy notifications notifications
+          deploy notifications-stream notifications
           deploy frontend frontend
       - name: Smoke test
         run: ./scripts/tests/smoke.sh "${{ vars.SITE_URL }}"

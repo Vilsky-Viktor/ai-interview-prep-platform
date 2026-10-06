@@ -20,9 +20,17 @@ async def add(question_id: uuid.UUID, question_text: str) -> None:
         await session.commit()
 
 
-async def unsent() -> list[KeyCheck]:
+async def unsent(limit: int) -> list[KeyCheck]:
+    """Up to `limit` checks waiting to be sent, oldest first."""
+    query = (
+        select(KeyCheck)
+        .where(KeyCheck.batch_id.is_(None))
+        .order_by(KeyCheck.created_at)
+        .limit(limit)
+    )
+
     async with Session() as session:
-        return list(await session.scalars(select(KeyCheck).where(KeyCheck.batch_id.is_(None))))
+        return list(await session.scalars(query))
 
 
 async def sent_batches() -> list[str]:

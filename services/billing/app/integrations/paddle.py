@@ -37,3 +37,14 @@ async def cancel(subscription_id: str) -> None:
     )
 
     response.raise_for_status()
+
+
+async def subscription_status(subscription_id: str) -> str:
+    """The subscription's status now: active, canceled and so on."""
+    response = await http.get_client().get(
+        _url(f"/subscriptions/{subscription_id}"), headers=_headers()
+    )
+
+    response.raise_for_status()
+
+    return response.json()["data"]["status"]

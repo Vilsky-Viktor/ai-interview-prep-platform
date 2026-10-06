@@ -37,7 +37,6 @@ async def run_pipeline(graph, generation: Generation, resume: dict | None) -> No
             "template": generation.kind == GenerationKind.TEMPLATE,
         }
 
-    await generations.update(generation.id, status=Status.RUNNING, error=None)
     await stream_graph(graph, generation, graph_input, config)
 
 
@@ -76,7 +75,7 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
         payload = build_preparation(generation.id, generation.owner_uid, generation.text, values)
         set_id = await library.create_template(payload)
         await check_sample(set_id)
-        await generations.update(generation.id, status=Status.DONE, preparation_id=set_id)
+        await finish(generation.id, set_id)
 
         return
 
@@ -94,7 +93,14 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
             "title": payload.title,
         },
     )
-    await generations.update(
-        generation.id, event=completed, status=Status.DONE, preparation_id=set_id
-    )
+    await finish(generation.id, set_id, completed)
     await outbox_service.flush_quietly()
+
+
+async def finish(generation_id: uuid.UUID, set_id: uuid.UUID, event=None) -> None:
+    """Marks the generation done with its saved set. Cancelled while the set was being saved,
+    it stays cancelled, and the set nobody will use is deleted."""
+    if not await generations.update(
+        generation_id, event=event, status=Status.DONE, preparation_id=set_id
+    ):
+        await library.delete_set(set_id)

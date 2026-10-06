@@ -1,15 +1,20 @@
 import uuid
 
 from prepza_common.sets import PreparationIn
-from sqlalchemy import Text, cast, or_, select
+from sqlalchemy import Text, cast, or_, select, text
 from sqlalchemy.orm import selectinload
 
+from app.constants.reuse import MIN_COPY_QUESTIONS
 from app.constants.sets import PLATFORM_OWNER, REVEALED_EVERY, OwnerType, SetKind, Stage
 from app.helpers.search import escape_like
 from app.models.sets import Question, QuestionSet, Topic
 from app.storage import reuse
 from app.storage.db import Session
 from app.storage.preparations import new_topics
+
+COPY_EMBEDDING_SQL = text(
+    "UPDATE topics SET embedding = (SELECT embedding FROM topics WHERE id = :source) WHERE id = :id"
+)
 
 
 async def create_template(payload: PreparationIn) -> uuid.UUID:
@@ -52,9 +57,10 @@ async def create_template(payload: PreparationIn) -> uuid.UUID:
 
 
 async def copy_template(template_id: uuid.UUID, company_id: str) -> QuestionSet | None:
-    """A company's own test made from a template, with no generation: its topics and their
-    private questions, each remembering its original so its answers count there too. None when
-    there's no such template."""
+    """A company's own test made from a template, with no generation: its topics with their
+    private questions and embeddings, each question remembering its original so its answers
+    count there too. Topics with fewer than MIN_COPY_QUESTIONS private questions left are
+    skipped. None when there's no such template, or none of its topics is left."""
     query = (
         select(QuestionSet)
         .where(QuestionSet.id == template_id, QuestionSet.kind == SetKind.TEMPLATE)
@@ -67,6 +73,17 @@ async def copy_template(template_id: uuid.UUID, company_id: str) -> QuestionSet 
         if template is None:
             return None
 
+        kept = []
+
+        for topic in template.topics:
+            private = [q for q in topic.questions if q.stage == Stage.PRIVATE]
+
+            if len(private) >= MIN_COPY_QUESTIONS:
+                kept.append((topic, private))
+
+        if not kept:
+            return None
+
         copy = QuestionSet(
             kind=SetKind.INTERVIEW,
             owner_type=OwnerType.COMPANY,
@@ -76,10 +93,10 @@ async def copy_template(template_id: uuid.UUID, company_id: str) -> QuestionSet 
             level=template.level,
             language=template.language,
             requirements=template.requirements,
-            topic_count=template.topic_count,
+            topic_count=len(kept),
             topics=[
                 Topic(
-                    position=topic.position,
+                    position=position,
                     title=topic.title,
                     subtopics=topic.subtopics,
                     questions=[
@@ -89,14 +106,18 @@ async def copy_template(template_id: uuid.UUID, company_id: str) -> QuestionSet 
                             options=q.options,
                             source_question_id=q.id,
                         )
-                        for q in topic.questions
-                        if q.stage == Stage.PRIVATE
+                        for q in private
                     ],
                 )
-                for topic in template.topics
+                for position, (topic, private) in enumerate(kept)
             ],
         )
         session.add(copy)
+        await session.flush()
+
+        for new, (topic, _) in zip(copy.topics, kept):
+            await session.execute(COPY_EMBEDDING_SQL, {"id": new.id, "source": topic.id})
+
         await session.commit()
 
         return copy

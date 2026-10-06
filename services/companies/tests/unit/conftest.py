@@ -1,7 +1,8 @@
 import pytest
 
 from app.integrations import billing
-from app.storage import accounts, audit, invites
+from app.storage import accounts, audit, candidates, invites
+from tests.unit import fake_candidates
 
 
 @pytest.fixture(autouse=True)
@@ -35,3 +36,15 @@ def audited(monkeypatch):
     monkeypatch.setattr(audit, "record", record)
 
     return events
+
+
+@pytest.fixture(autouse=True)
+def stored_candidates(monkeypatch):
+    """Candidates in memory (tests.unit.fake_candidates), emptied for each test."""
+    fake_candidates.ROWS.clear()
+    fake_candidates.SAVED.clear()
+
+    for name in ("get", "counts", "any_finished", "unscored", "save_results", "for_report"):
+        monkeypatch.setattr(candidates, name, getattr(fake_candidates, name))
+
+    return fake_candidates

@@ -20,3 +20,5 @@ class OutboxEvent(Base):
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), index=True)
+    # Times Pub/Sub refused it; parked past prepza_common's OUTBOX_MAX_ATTEMPTS.
+    attempts: Mapped[int] = mapped_column(default=0, server_default="0")

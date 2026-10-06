@@ -53,3 +53,34 @@ def run():
         return asyncio.run(wrapped())
 
     return run
+
+
+@pytest.fixture
+def paddle_calls(monkeypatch):
+    """Paddle's API, faked: what was charged and cancelled. A subscription whose id starts
+    with sub_ended has ended in Paddle; one starting with sub_declined has a declined card."""
+    from app.config.settings import settings
+    from app.integrations import paddle
+
+    calls = []
+
+    async def charge(subscription_id, price_id):
+        calls.append(("charge", subscription_id, price_id))
+
+        if subscription_id.startswith("sub_declined"):
+            raise RuntimeError("declined")
+
+    async def cancel(subscription_id):
+        calls.append(("cancel", subscription_id))
+
+    async def subscription_status(subscription_id):
+        return "canceled" if subscription_id.startswith("sub_ended") else "active"
+
+    monkeypatch.setattr(paddle, "charge", charge)
+    monkeypatch.setattr(paddle, "cancel", cancel)
+    monkeypatch.setattr(paddle, "subscription_status", subscription_status)
+    monkeypatch.setattr(settings, "paddle_api_key", "key")
+    monkeypatch.setattr(settings, "paddle_price_auto_top_up", "pri_plan")
+    monkeypatch.setattr(settings, "paddle_price_topup_30", "pri_30")
+
+    return calls

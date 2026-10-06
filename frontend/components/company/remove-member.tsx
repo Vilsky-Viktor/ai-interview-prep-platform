@@ -1,5 +1,6 @@
 "use client"
 
+import { Trash2Icon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -17,7 +18,7 @@ import {
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { CompanyMember } from "@/types/company"
 
-/** Removes an admin, or withdraws an invite they haven't accepted yet, after a confirmation. */
+/** Removes a member, or withdraws an invite they haven't accepted yet, after a confirmation. */
 export function RemoveMember({
   companyId,
   member,
@@ -52,12 +53,16 @@ export function RemoveMember({
 
   return (
     <>
+      {/* An icon, like removing a candidate; the confirmation names the member. */}
       <Button
-        variant="destructive"
+        variant="ghost"
+        size="icon"
+        className="size-12 shrink-0 text-muted-foreground hover:text-destructive"
+        aria-label={t("remove")}
         disabled={busy}
         onClick={() => setConfirming(true)}
       >
-        {t("remove")}
+        <Trash2Icon className="size-6" />
       </Button>
       <Dialog
         open={confirming}

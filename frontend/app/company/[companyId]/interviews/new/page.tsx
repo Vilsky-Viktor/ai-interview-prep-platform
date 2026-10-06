@@ -1,8 +1,11 @@
+import { redirect } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { NewInterview } from "@/components/company/new-interview"
+import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
+import type { Company } from "@/types/company"
 
 export const generateMetadata = () => translatedTitle("interviews", "new")
 
@@ -13,6 +16,14 @@ export default async function NewInterviewPage({
 }) {
   const { companyId } = await params
   const t = await getTranslations("interviews")
+  const company = await serverFetch<Company>(
+    `/companies/companies/${companyId}`
+  )
+
+  // Viewers don't create tests: back to the company's tests.
+  if (company && !company.can_edit) {
+    redirect(`/company/${companyId}/interviews`)
+  }
 
   // Laid out like the home page's start: a title and the box, nothing else.
   return (

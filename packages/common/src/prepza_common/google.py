@@ -1,7 +1,9 @@
 import os
 from functools import cache
 
+import cachecontrol
 import google.auth
+import requests
 from fastapi import Depends, HTTPException, Request, status
 from google.auth.transport.requests import Request as GoogleRequest
 from google.oauth2 import id_token
@@ -35,6 +37,14 @@ def access_token() -> str:
     return current.token
 
 
+@cache
+def certificate_request() -> GoogleRequest:
+    """Google's transport with an HTTP cache, so its token-signing certificates are downloaded
+    once per their Cache-Control lifetime, not on every call (cachecontrol comes with
+    firebase-admin, which checks sign-in tokens the same way)."""
+    return GoogleRequest(session=cachecontrol.CacheControl(requests.Session()))
+
+
 def verify_invoker(request: Request) -> None:
     """Admits only Google's calls on our behalf: Pub/Sub pushes, Cloud Tasks and Cloud
     Scheduler, all signed as the invoker service account for this service's address
@@ -46,7 +56,7 @@ def verify_invoker(request: Request) -> None:
 
     try:
         claims = id_token.verify_oauth2_token(
-            token, GoogleRequest(), os.environ["INVOKER_AUDIENCE"]
+            token, certificate_request(), os.environ["INVOKER_AUDIENCE"]
         )
     except (ValueError, KeyError):
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid invoker token")

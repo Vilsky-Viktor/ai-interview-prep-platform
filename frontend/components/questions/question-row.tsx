@@ -28,7 +28,6 @@ import type { QuestionStats } from "@/types/feedback"
 export function QuestionRow({
   question,
   number,
-  showOptions,
   canRegenerate,
   wrongPath,
   reportsPath,
@@ -38,7 +37,6 @@ export function QuestionRow({
 }: {
   question: QuestionStats
   number: number
-  showOptions: boolean
   canRegenerate: boolean
   // Where to say the marked answer is wrong (owners and admins, superadmins).
   wrongPath?: string
@@ -78,9 +76,7 @@ export function QuestionRow({
         )}
       >
         <QuestionText text={question.text} />
-        {showOptions && (
-          <AnswerOptions options={question.options} className="mt-3" />
-        )}
+        <AnswerOptions options={question.options} className="mt-3" />
       </div>
       <div className="self-center py-5 ps-5 pe-6 text-sm whitespace-nowrap text-muted-foreground tabular-nums">
         <span className="flex flex-col items-end gap-3">

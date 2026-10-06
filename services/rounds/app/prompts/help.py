@@ -14,7 +14,10 @@ Companies:
 - The home page starts with the box for a job description; submitting it signs you in if \
 needed and asks which company the test is for, or its name for a first company. Companies are \
 also under "hiring" (one person can own up to {max_companies}). A company has an owner and \
-admins; the owner invites admins on its members page.
+members: on its Team tab the owner invites each one as an admin or a viewer and can change the \
+role later. Admins do everything the owner does except managing the team and removing the \
+company. Viewers see the tests, questions, candidates and scorecards, download and share \
+reports, but change nothing and can't top up.
 
 Creating a test (an interview in the menus):
 - Or start from a template: a company's "templates" tab lists ready-made tests by role, \

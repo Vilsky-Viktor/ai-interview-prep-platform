@@ -1,8 +1,9 @@
 # One Postgres instance holding each service's database. Cloud Run reaches it through the
 # built-in Cloud SQL connector (a Unix socket), so it needs no private network.
 resource "google_sql_database_instance" "main" {
-  name             = "prepza"
-  database_version = "POSTGRES_17"
+  name = "prepza"
+  # The major version local development runs (database/Dockerfile).
+  database_version = "POSTGRES_18"
   region           = var.region
 
   settings {

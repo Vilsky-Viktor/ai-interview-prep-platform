@@ -1,22 +1,16 @@
-import random
 import uuid
 from datetime import UTC, datetime
 
 from prepza_common import outbox
-from sqlalchemy import delete, select, update
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
 from app.constants.events import INTERVIEW_FINISHED, SESSION_SCORED
-from app.constants.integrity import IntegritySignal
+from app.constants.integrity import FAST_ANSWER_SECONDS, IntegritySignal
 from app.constants.rounds import RoundStatus
-from app.helpers.scores import (
-    candidate_progress,
-    final_score,
-    interview_finished,
-    scored,
-    signal_counts,
-)
+from app.helpers.rounds import shuffled
+from app.helpers.scores import final_score, invite_grade, scored
 from app.models.answers import Answer
 from app.models.outbox import OutboxEvent
 from app.models.sessions import Session
@@ -43,7 +37,7 @@ async def create_many(
             candidate_invite_id=candidate_invite_id,
             topic_title=topic.title,
             status=RoundStatus.IN_PROGRESS,
-            questions=[question.model_dump(mode="json") for question in topic.questions],
+            questions=shuffled([question.model_dump(mode="json") for question in topic.questions]),
             final_score=None,
             finished_at=None,
             question_seconds=question_seconds,
@@ -53,13 +47,6 @@ async def create_many(
         )
         for topic in topics
     ]
-
-    # Each candidate gets their own question and option order, so answers can't be passed on.
-    for row in rows:
-        random.shuffle(row.questions)
-
-        for question in row.questions:
-            random.shuffle(question["options"])
 
     async with Db() as session:
         session.add_all(rows)
@@ -86,53 +73,79 @@ async def list_for_invite(candidate_invite_id: uuid.UUID) -> list[Session]:
 
 
 async def scores_for_invites(invite_ids: list[uuid.UUID]) -> dict[uuid.UUID, dict]:
-    """Each candidate's progress, grade, whether they finished, and their integrity signals."""
+    """Each candidate's progress, grade, whether they finished, and their integrity signals,
+    counted in the database rather than from every session's questions and answers."""
     if not invite_ids:
         return {}
 
-    query = (
-        select(Session).where(Session.candidate_invite_id.in_(invite_ids)).options(*LOAD_SESSION)
+    invite = Session.candidate_invite_id
+    chosen = invite.in_(invite_ids)
+    sections_query = (
+        select(
+            invite,
+            func.sum(func.jsonb_array_length(Session.questions)),
+            func.bool_and(Session.status == RoundStatus.FINISHED),
+        )
+        .where(chosen)
+        .group_by(invite)
+    )
+    answers_query = (
+        select(
+            invite,
+            func.count(Answer.id),
+            func.sum(Answer.score),
+            func.count(Answer.id).filter(
+                Answer.option_index.is_not(None), Answer.seconds < FAST_ANSWER_SECONDS
+            ),
+        )
+        .join(Answer, Answer.session_id == Session.id)
+        .where(chosen)
+        .group_by(invite)
+    )
+    signals_query = (
+        select(
+            invite,
+            func.count(Signal.id).filter(Signal.kind == IntegritySignal.TAB_LEAVE),
+            func.count(Signal.id).filter(Signal.kind == IntegritySignal.COPY),
+        )
+        .join(Signal, Signal.session_id == Session.id)
+        .where(chosen)
+        .group_by(invite)
     )
 
     async with Db() as session:
-        rows = list(await session.scalars(query))
-
-    grouped: dict[uuid.UUID, list[Session]] = {}
-
-    for row in rows:
-        grouped.setdefault(row.candidate_invite_id, []).append(row)
+        sections = (await session.execute(sections_query)).all()
+        answers = {row[0]: row[1:] for row in await session.execute(answers_query)}
+        signals = {row[0]: row[1:] for row in await session.execute(signals_query)}
 
     result = {}
 
-    for invite_id, topics in grouped.items():
-        scores = [answer.score for topic in topics for answer in topic.answers]
-        total = sum(len(topic.questions) for topic in topics)
-        progress, grade = candidate_progress(scores, total)
-        finished = interview_finished([topic.status for topic in topics])
+    for invite_id, total, finished in sections:
+        answered, score_sum, fast_answers = answers.get(invite_id, (0, 0, 0))
+        tab_leaves, copies = signals.get(invite_id, (0, 0))
         result[invite_id] = {
-            "progress": progress,
-            # Once finished, unanswered questions count as wrong, as in each section's score.
-            "grade": final_score(scores, total) if finished else grade,
-            "finished": finished,
-            **signal_counts(topics),
+            **invite_grade(answered, score_sum or 0, total, finished),
+            "tab_leaves": tab_leaves,
+            "copies": copies,
+            "fast_answers": fast_answers,
         }
 
     return result
 
 
 async def mark_shown(session_id: uuid.UUID) -> datetime:
-    """Starts the clock on the waiting question; reloading the page doesn't restart it."""
-    now = datetime.now(UTC)
-
+    """Starts the clock on the waiting question and returns when it started; reloading the
+    page, or a second tab asking at the same moment, gets the same time."""
     async with Db() as session:
-        await session.execute(
+        shown_at = await session.scalar(
             update(Session)
-            .where(Session.id == session_id, Session.question_shown_at.is_(None))
-            .values(question_shown_at=now)
+            .where(Session.id == session_id)
+            .values(question_shown_at=func.coalesce(Session.question_shown_at, datetime.now(UTC)))
+            .returning(Session.question_shown_at)
         )
         await session.commit()
 
-    return now
+    return shown_at
 
 
 async def add_signal(
@@ -147,22 +160,30 @@ async def add_answer(answer: Answer, event: tuple[str, dict] | None = None) -> b
     """Saves the answer (and its event, when it has one) and stops the clock, so the next
     question starts its own. A question that timed out has no event: nothing was picked.
 
-    False when the question already has an answer, e.g. two requests timing out the same
-    question at once.
+    False when the section is no longer running, or the question already has an answer, e.g.
+    two requests timing out the same question at once.
     """
     async with Db() as session:
+        # Stopping the clock locks the section, so it can't finish (see finish) while the answer
+        # is saved; one that already finished is left alone.
+        running = await session.scalar(
+            update(Session)
+            .where(Session.id == answer.session_id, Session.status == RoundStatus.IN_PROGRESS)
+            .values(question_shown_at=None)
+            .returning(Session.id)
+        )
+
+        if running is None:
+            await session.rollback()
+
+            return False
+
         session.add(answer)
 
         if event:
             outbox.add(session, OutboxEvent, *event)
 
         try:
-            await session.flush()
-            await session.execute(
-                update(Session)
-                .where(Session.id == answer.session_id)
-                .values(question_shown_at=None)
-            )
             await session.commit()
         except IntegrityError:
             return False
@@ -170,9 +191,11 @@ async def add_answer(answer: Answer, event: tuple[str, dict] | None = None) -> b
     return True
 
 
-async def finish(session_id: uuid.UUID, final_score: int) -> None:
-    """Finishes one section. When it was the interview's last open one, the interview.finished
-    event is saved with it, carrying how many answers the candidate picked."""
+async def finish(session_id: uuid.UUID) -> None:
+    """Finishes one section, scored from the answers saved by the time it's locked; unanswered
+    questions count as wrong. When it was the interview's last open one, the
+    interview.finished event is saved with it, carrying how many answers the candidate
+    picked."""
     async with Db() as session:
         invite_id = await session.scalar(
             select(Session.candidate_invite_id).where(Session.id == session_id)
@@ -195,7 +218,9 @@ async def finish(session_id: uuid.UUID, final_score: int) -> None:
             return
 
         finishing.status = RoundStatus.FINISHED
-        finishing.final_score = final_score
+        finishing.final_score = final_score(
+            [answer.score for answer in finishing.answers], len(finishing.questions)
+        )
         finishing.finished_at = datetime.now(UTC)
 
         # A preview says nothing about the questions; nor does a talent's practice round after

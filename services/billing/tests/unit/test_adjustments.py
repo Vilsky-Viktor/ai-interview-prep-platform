@@ -3,7 +3,7 @@ import asyncio
 import pytest
 
 from app.services import adjustments, webhooks
-from app.storage import ledger, purchases
+from app.storage import ledger, purchases, referrals
 
 
 def adjustment(action="refund", status="approved", total="1000", adjustment_id="adj_01"):
@@ -30,8 +30,14 @@ def moved(monkeypatch):
     async def adjust(owner_type, owner_id, amount, key, reason):
         calls.append((owner_id, amount, key, reason))
 
+    async def take_back(transaction_id):
+        calls.append(("referral taken back", transaction_id))
+
+        return False
+
     monkeypatch.setattr(purchases, "for_transaction", bought)
     monkeypatch.setattr(ledger, "adjust", adjust)
+    monkeypatch.setattr(referrals, "take_back", take_back)
 
     return calls
 
@@ -39,7 +45,10 @@ def moved(monkeypatch):
 def test_an_approved_refund_takes_the_credits_back(moved):
     asyncio.run(webhooks.handle(adjustment()))
 
-    assert moved == [("acme", -1_000, "adjustment:adj_01", "refund")]
+    assert moved == [
+        ("acme", -1_000, "adjustment:adj_01", "refund"),
+        ("referral taken back", "txn_01"),
+    ]
 
 
 def test_a_partial_refund_takes_back_its_share(moved):
@@ -52,7 +61,7 @@ def test_a_chargeback_takes_back_and_its_reversal_returns(moved):
     asyncio.run(webhooks.handle(adjustment(action="chargeback", adjustment_id="adj_cb")))
     asyncio.run(webhooks.handle(adjustment(action="chargeback_reverse", adjustment_id="adj_rv")))
 
-    assert [amount for _, amount, _, _ in moved] == [-1_000, 1_000]
+    assert [call[1] for call in moved] == [-1_000, "txn_01", 1_000]
 
 
 @pytest.mark.parametrize(

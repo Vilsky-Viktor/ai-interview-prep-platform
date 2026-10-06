@@ -16,14 +16,7 @@ from app.constants.invites import (
     CandidateSort,
     InviteStatus,
 )
-from app.helpers.candidates import (
-    by_grade,
-    candidate_key,
-    candidate_out,
-    flagged,
-    passed,
-    section_passed,
-)
+from app.helpers.candidates import candidate_key, candidate_out, passed, section_passed
 from app.helpers.interviews import (
     attach_set,
     interview_title,
@@ -31,10 +24,10 @@ from app.helpers.interviews import (
 from app.helpers.logos import logo_path
 from app.integrations import billing, rounds
 from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateOut
-from app.services import candidate_invites
+from app.services import candidate_invites, candidate_results
 from app.services import outbox as outbox_service
-from app.services.access import require_company
-from app.storage import audit, interviews, invites
+from app.services.access import can_edit, require_company, require_editor
+from app.storage import audit, candidates, interviews, invites
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
 
@@ -48,8 +41,7 @@ async def invite_candidate(
     if interview is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
-    company, _ = await require_company(user, interview.company_id)
-
+    company, _ = await require_editor(user, interview.company_id)
     interview = await attach_set(interview)
 
     if interview.set_id is None:
@@ -79,51 +71,24 @@ async def list_candidates(
     filter_by: Annotated[CandidateFilter | None, Query(alias="status")] = None,
 ) -> list[CandidateOut]:
     """A page at a time, best grade first or newest first, narrowed to an email containing `q`
-    and a status or result. Results come from rounds: for every candidate when sorting or
-    filtering by them, otherwise for this page only."""
+    and a status or result, all in SQL on the results stored when candidates finish. Progress
+    and signals come from rounds for this page only."""
     interview = await interviews.get(interview_id)
 
     if interview is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
     await require_company(user, interview.company_id)
-    status_is = None if filter_by in RESULT_FILTERS else filter_by
+    by_grade = sort == CandidateSort.GRADE
 
-    if sort == CandidateSort.GRADE or filter_by in RESULT_FILTERS:
-        every = await invites.list_all_for_interview(interview.id, q.strip(), status_is)
-        totals = await rounds.invite_scores([invite.id for invite in every])
+    if by_grade or filter_by in RESULT_FILTERS:
+        await candidate_results.backfill(interview.id)
 
-        if filter_by == CandidateFilter.PASSED:
-            every = [
-                invite
-                for invite in every
-                if passed(totals.get(str(invite.id)) or {}, interview.pass_mark)
-            ]
-        elif filter_by == CandidateFilter.FLAGGED:
-            every = [invite for invite in every if flagged(totals.get(str(invite.id)) or {})]
-
-        if sort == CandidateSort.GRADE:
-            every = by_grade(every, totals)
-
-        listed = every[page.offset : page.offset + page.limit]
-    else:
-        listed = await invites.list_for_interview(
-            interview.id, page.offset, page.limit, q.strip(), status_is
-        )
-        totals = await rounds.invite_scores([invite.id for invite in listed])
-    finished = [
-        invite.id
-        for invite in listed
-        if (totals.get(str(invite.id)) or {}).get("finished")
-        and invite.status != InviteStatus.FINISHED
-    ]
-
-    if finished:
-        await invites.set_status(finished, InviteStatus.FINISHED)
-
-        for invite in listed:
-            if invite.id in finished:
-                invite.status = InviteStatus.FINISHED
+    listed = await candidates.page(
+        interview.id, page.offset, page.limit, by_grade, q.strip(), filter_by, interview.pass_mark
+    )
+    totals = await rounds.invite_scores([invite.id for invite in listed])
+    await candidate_results.sync(listed, totals)
 
     return [candidate_out(invite, totals.get(str(invite.id)) or {}, interview) for invite in listed]
 
@@ -134,14 +99,12 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
     good, answers and results included, for example when they ask to have their data deleted;
     credits still held come back, and a finished candidate stays charged."""
     interview = await interviews.get(interview_id)
-    invite = next(
-        (item for item in (interview.invites if interview else []) if item.id == invite_id), None
-    )
+    invite = await candidates.get(interview_id, invite_id) if interview else None
 
     if interview is None or invite is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
 
-    await require_company(user, interview.company_id)
+    await require_editor(user, interview.company_id)
 
     if invite.status != InviteStatus.FINISHED:
         await billing.release_candidate(candidate_key(interview.id, invite.email))
@@ -158,22 +121,15 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
 @router.get("/{interview_id}/candidates/{invite_id}")
 async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: CurrentUser) -> dict:
     interview = await interviews.get(interview_id)
-    invite = next(
-        (item for item in (interview.invites if interview else []) if item.id == invite_id), None
-    )
+    invite = await candidates.get(interview_id, invite_id) if interview else None
 
     if interview is None or invite is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
 
-    company, _ = await require_company(user, interview.company_id)
+    company, member = await require_company(user, interview.company_id)
     card = await rounds.scorecard(invite.id) or []
     totals = (await rounds.invite_scores([invite.id])).get(str(invite.id)) or {}
-
-    finished = card and all(item["status"] == "finished" for item in card)
-
-    if finished and invite.status != InviteStatus.FINISHED:
-        await invites.set_status([invite.id], InviteStatus.FINISHED)
-        invite.status = InviteStatus.FINISHED
+    await candidate_results.sync([invite], {str(invite.id): totals})
 
     # The funnel's "first results viewed": a finished candidate's results, opened by a member.
     if invite.status == InviteStatus.FINISHED:
@@ -185,8 +141,13 @@ async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: Current
         "email": invite.email,
         "status": invite.status,
         "extra_time": invite.extra_time,
-        # What extra time can still be given: only before the candidate starts.
-        "extra_time_options": list(EXTRA_TIME_OPTIONS) if invite.status in NOT_STARTED else [],
+        # Whether the user may change the candidate (extra time, revoke): not a viewer.
+        "can_edit": can_edit(member),
+        # What extra time can still be given: only before the candidate starts, and not by a
+        # viewer.
+        "extra_time_options": (
+            list(EXTRA_TIME_OPTIONS) if invite.status in NOT_STARTED and can_edit(member) else []
+        ),
         # For the PDF report: the test, the company, and the overall result.
         "title": await interview_title(interview),
         "company": company.name,

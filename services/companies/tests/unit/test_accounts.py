@@ -6,12 +6,15 @@ import httpx
 import pytest
 
 from app.constants.audit import AUDIT_RETENTION_DAYS
+from app.constants.invites import InviteStatus
 from app.constants.roles import Role
-from app.integrations import rounds
+from app.integrations import billing, rounds
 from app.models.companies import Company, Member
 from app.services import accounts as account_service
 from app.services import company_deletion, retention
 from app.storage import accounts, audit
+
+INTERVIEW_ID = uuid.uuid4()
 
 
 def membership(role, owners):
@@ -61,12 +64,19 @@ def test_a_company_goes_with_its_only_owner_other_memberships_just_end(calls, mo
     ]
 
 
-def test_retention_deletes_results_in_rounds_before_the_invites(monkeypatch):
+def test_retention_deletes_results_and_holds_before_the_invites_in_batches(monkeypatch):
     done = []
-    expired = [uuid.uuid4()]
+    expired = uuid.uuid4()
+    batches = [
+        [(expired, INTERVIEW_ID, "ann@example.com", InviteStatus.IN_PROCESS)],
+        [],
+    ]
 
-    async def expired_invites(before):
-        return expired
+    async def expired_invites(before, limit):
+        return batches.pop(0)
+
+    async def release(key):
+        done.append(("billing", key))
 
     async def delete_sessions(invite_ids):
         done.append(("rounds", invite_ids))
@@ -77,16 +87,22 @@ def test_retention_deletes_results_in_rounds_before_the_invites(monkeypatch):
     monkeypatch.setattr(accounts, "expired_invites", expired_invites)
     monkeypatch.setattr(rounds, "delete_invite_sessions", delete_sessions)
     monkeypatch.setattr(accounts, "delete_invites", delete_invites)
+    monkeypatch.setattr(billing, "release_candidate", release)
 
     assert asyncio.run(retention.delete_expired_candidates()) == 1
-    assert done == [("rounds", expired), ("invites", expired)]
+    # A candidate stuck in process gives their credits back as they go.
+    assert done == [
+        ("rounds", [expired]),
+        ("billing", f"{INTERVIEW_ID}:ann@example.com"),
+        ("invites", [expired]),
+    ]
 
 
 def test_retention_keeps_the_invites_when_rounds_fails(monkeypatch):
     deleted = []
 
-    async def expired_invites(before):
-        return [uuid.uuid4()]
+    async def expired_invites(before, limit):
+        return [(uuid.uuid4(), INTERVIEW_ID, "ann@example.com", InviteStatus.INVITED)]
 
     async def rounds_down(invite_ids):
         raise httpx.ConnectError("rounds is down")
@@ -105,7 +121,7 @@ def test_retention_keeps_the_invites_when_rounds_fails(monkeypatch):
 
 
 def test_cloud_scheduler_runs_retention_through_its_route(client, monkeypatch):
-    async def expired_invites(before):
+    async def expired_invites(before, limit):
         return []
 
     cutoffs = []

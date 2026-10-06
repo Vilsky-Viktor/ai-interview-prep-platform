@@ -20,7 +20,7 @@ def test_a_corrected_key_marks_past_answers_again_and_updates_finished_scores(ru
             ),
             ("answer.recorded", {"question_id": question["id"]}),
         )
-        await sessions.finish(session.id, 0)
+        await sessions.finish(session.id)
         corrected = [{"answer": "right", "correct": False}, {"answer": "wrong", "correct": True}]
         changed = await rescore.rescore_question(question["id"], question["text"], corrected)
         # A rewritten question was a different question: its answers stay as they were.

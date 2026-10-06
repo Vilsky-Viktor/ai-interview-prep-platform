@@ -1,0 +1,32 @@
+# Weekly pull requests that update the pinned base images (tag and digest) and GitHub Actions
+# (pinned by commit). Merge after CI passes; close to skip a version.
+version: 2
+updates:
+  - package-ecosystem: docker
+    directories:
+      - /database
+      - /firebase
+      - /frontend
+      - /services/billing
+      - /services/companies
+      - /services/generation
+      - /services/library
+      - /services/notifications
+      - /services/rounds
+    schedule:
+      interval: weekly
+    groups:
+      base-images:
+        patterns: ["*"]
+    # Minor and patch updates only: a new major (Node 26, Python 3.14, Postgres 19) is planned by hand.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]

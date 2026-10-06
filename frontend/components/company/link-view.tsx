@@ -10,17 +10,7 @@ import { useAuth } from "@/components/auth-provider"
 import { InviteIntro } from "@/components/company/invite-intro"
 import { Button } from "@/components/ui/button"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
-import type { SessionSummary } from "@/types/company"
-
-type Link = {
-  title: string | null
-  company: string
-  logo_url?: string | null
-  verified_domain?: string | null
-  question_seconds: number
-  // The signed-in person's progress on this test; null before they start it.
-  status?: string | null
-}
+import type { JobLink, SessionSummary } from "@/types/company"
 
 /** What someone sees from a test's shareable link: the same intro as an invite; starting signs
  * them in with Google first, which gives their name and verified email. */
@@ -31,14 +21,14 @@ export function LinkView({ token }: { token: string }) {
   const signIn = useSignIn()
   const router = useRouter()
   const { user, loading } = useAuth()
-  const [link, setLink] = useState<Link | null>(null)
+  const [link, setLink] = useState<JobLink | null>(null)
   const [missing, setMissing] = useState(false)
   const [starting, setStarting] = useState(false)
 
   // Once sign-in is known, and again after signing in, so a finished test is never offered.
   useEffect(() => {
     if (!loading) {
-      apiFetch<Link>(`/companies/links/${token}`)
+      apiFetch<JobLink>(`/companies/links/${token}`)
         .then(setLink)
         .catch(() => setMissing(true))
     }

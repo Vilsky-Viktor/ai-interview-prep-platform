@@ -15,7 +15,8 @@ from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.services import outbox as outbox_service
 from app.services import report_emails
-from app.storage import companies, interviews, invites, reports
+from app.storage import companies, interviews, reports
+from tests.unit import fake_candidates
 from tests.unit.fake_redis import FakeRedis
 
 COMPANY_ID = uuid.uuid4()
@@ -54,7 +55,7 @@ def queued(monkeypatch):
         title="Backend",
         language="en",
     )
-    interview.invites = [invite]
+    fake_candidates.add(invite)
     company = Company(id=COMPANY_ID, name="Arcolabs", created_at=datetime.now(UTC))
     company.members = [
         Member(company_id=COMPANY_ID, user_id="bob", invited_email="bob@example.com", role="member")
@@ -109,9 +110,7 @@ def test_only_a_pdf_is_emailed(client, queued):
     assert queued == []
 
 
-def test_the_tests_report_lists_every_candidate_best_first_without_deleted_ones(
-    client, queued, monkeypatch
-):
+def test_the_tests_report_lists_candidates_as_storage_orders_them(client, queued, monkeypatch):
     def invite(email, status):
         return CandidateInvite(
             id=uuid.uuid4(),
@@ -122,15 +121,10 @@ def test_the_tests_report_lists_every_candidate_best_first_without_deleted_ones(
             created_at=datetime.now(UTC),
         )
 
-    everyone = [
-        invite("low@example.com", "finished"),
-        invite("gone@example.com", "deleted"),
-        invite("top@example.com", "finished"),
-    ]
+    # Best grade first, deleted ones left out: storage's order (see the integration tests).
+    everyone = [invite("top@example.com", "finished"), invite("low@example.com", "finished")]
+    fake_candidates.ROWS[:] = everyone
     grades = {"low@example.com": 40, "top@example.com": 90}
-
-    async def fake_all(_interview_id):
-        return everyone
 
     async def fake_scores(invite_ids):
         return {
@@ -139,7 +133,6 @@ def test_the_tests_report_lists_every_candidate_best_first_without_deleted_ones(
             if row.id in invite_ids
         }
 
-    monkeypatch.setattr(invites, "list_all_for_interview", fake_all)
     monkeypatch.setattr(rounds, "invite_scores", fake_scores)
 
     report = client.get(f"/interviews/{INTERVIEW_ID}/report").json()
@@ -176,7 +169,7 @@ def test_no_report_is_emailed_before_a_candidate_finishes(client, queued, monkey
         created_at=datetime.now(UTC),
     )
     interview = Interview(id=INTERVIEW_ID, company_id=COMPANY_ID, title="Backend", language="en")
-    interview.invites = [unfinished]
+    fake_candidates.ROWS[:] = [unfinished]
 
     async def fake_interview(_interview_id):
         return interview

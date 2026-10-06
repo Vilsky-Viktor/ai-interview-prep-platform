@@ -1,14 +1,11 @@
 import uuid
 from datetime import UTC, datetime
 
-import pytest
 from fastapi import HTTPException
 
-from app.config.settings import settings
 from app.constants.credits import WELCOME_COMPANY, Reason
 from app.constants.products import AUTO_TOP_UP_COOLDOWN, OwnerType
 from app.helpers.credits import credits_for
-from app.integrations import paddle
 from app.schemas.billing import AutoTopUpIn
 from app.services import auto_top_ups
 from app.services.topups import handle_completed
@@ -16,26 +13,6 @@ from app.storage import auto_top_ups as rows
 from app.storage import ledger
 
 COMPANY = OwnerType.COMPANY
-
-
-@pytest.fixture
-def paddle_calls(monkeypatch):
-    """Paddle's API, faked: what was charged and cancelled."""
-    calls = []
-
-    async def charge(subscription_id, price_id):
-        calls.append(("charge", subscription_id, price_id))
-
-    async def cancel(subscription_id):
-        calls.append(("cancel", subscription_id))
-
-    monkeypatch.setattr(paddle, "charge", charge)
-    monkeypatch.setattr(paddle, "cancel", cancel)
-    monkeypatch.setattr(settings, "paddle_api_key", "key")
-    monkeypatch.setattr(settings, "paddle_price_auto_top_up", "pri_plan")
-    monkeypatch.setattr(settings, "paddle_price_topup_30", "pri_30")
-
-    return calls
 
 
 def checkout_data(owner_id, buyer_id):

@@ -8,7 +8,7 @@ from app.integrations import generation as generation_api
 from app.integrations import library
 from app.models.interviews import Interview
 from app.schemas.interviews import QuestionText, ReportOut, TopicLimitIn
-from app.services.access import require_company, require_manager
+from app.services.access import require_company, require_editor
 from app.storage import interviews
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
@@ -42,7 +42,7 @@ async def set_topic_limit(
     interview_id: UUID, topic_id: UUID, body: TopicLimitIn, user: CurrentUser
 ) -> None:
     interview = await generated_interview(interview_id)
-    await require_manager(user, interview)
+    await require_editor(user, interview.company_id)
     found = await library.get_set(interview.set_id) or {}
     topic = next(
         (item for item in found.get("topics", []) if str(item["id"]) == str(topic_id)), None
@@ -63,7 +63,7 @@ async def set_topic_limit(
 @router.post("/{interview_id}/questions/{question_id}/regenerate")
 async def regenerate_question(interview_id: UUID, question_id: UUID, user: CurrentUser) -> dict:
     interview = await generated_interview(interview_id)
-    await require_manager(user, interview)
+    await require_editor(user, interview.company_id)
     response = await generation_api.regenerate_question(question_id, interview.set_id, user.uid)
 
     if response.is_error:
@@ -78,7 +78,7 @@ async def regenerate_question(interview_id: UUID, question_id: UUID, user: Curre
 async def mark_wrong(interview_id: UUID, question_id: UUID, user: CurrentUser) -> None:
     """One click: the marked answer is wrong. The verifier checks it and fixes or replaces it."""
     interview = await generated_interview(interview_id)
-    await require_manager(user, interview)
+    await require_editor(user, interview.company_id)
     context = await library.get_question_context(question_id)
 
     if context is None or str(context["set_id"]) != str(interview.set_id):
@@ -91,8 +91,9 @@ async def mark_wrong(interview_id: UUID, question_id: UUID, user: CurrentUser) -
 async def list_question_reports(
     interview_id: UUID, question_id: UUID, user: CurrentUser, page: PageParams
 ) -> list[ReportOut]:
+    """Candidates' reports on a question, read where it's fixed: owners and admins."""
     interview = await generated_interview(interview_id)
-    await require_manager(user, interview)
+    await require_editor(user, interview.company_id)
     reports = await library.get_question_reports(interview.set_id, question_id, page)
 
     if reports is None:

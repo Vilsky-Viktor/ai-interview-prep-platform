@@ -26,6 +26,7 @@ export function SessionView({
 }) {
   const t = useTranslations("session")
   const interviews = useTranslations("interviews")
+  const common = useTranslations("common")
   const back = testHref && (
     <BackLink href={testHref.slice(0, testHref.lastIndexOf("/"))}>
       {interviews("title")}
@@ -36,9 +37,10 @@ export function SessionView({
     session,
     question,
     topics,
-    topicsLoaded,
-    playing,
+    done,
     missing,
+    failed,
+    retry,
     finishing,
     answer,
     advance,
@@ -48,14 +50,8 @@ export function SessionView({
   const inviteId = session?.candidate_invite_id
   const practice = Boolean(session?.practice)
   const router = useRouter()
-  // A practice round, once every section is finished, opens its results with every answer.
-  const practiceDone =
-    practice &&
-    !playing &&
-    topicsLoaded &&
-    (topics.length
-      ? topics.every((topic) => topic.status === "finished")
-      : session?.status === "finished")
+  // A practice round, once finished, opens its results with every answer.
+  const practiceDone = practice && done
 
   useEffect(() => {
     if (practiceDone) {
@@ -87,40 +83,40 @@ export function SessionView({
     return <SignInPrompt message={t("signIn")} />
   }
 
-  if (missing || !session) {
-    return missing ? (
+  if (missing) {
+    return (
       <p className="py-24 text-center text-base text-muted-foreground">
         {t("missing")}
       </p>
-    ) : null
+    )
   }
 
-  const sections = topics.length
-    ? topics
-    : [
-        {
-          id: session.id,
-          topic_title: session.topic_title,
-          status: session.status,
-          total: session.total,
-          answered: session.answered,
-        },
-      ]
-  const finished =
-    topicsLoaded && sections.every((topic) => topic.status === "finished")
-  const progress = sections.reduce(
+  if (failed) {
+    return (
+      <div className="flex flex-col items-center gap-6 py-24 text-center">
+        <p className="text-base text-muted-foreground">{t("startFailed")}</p>
+        <Button className="h-12 px-6 text-base" onClick={retry}>
+          {common("retry")}
+        </Button>
+      </div>
+    )
+  }
+
+  if (!session) {
+    return null
+  }
+
+  const progress = topics.reduce(
     (sum, topic) => ({
-      answered:
-        sum.answered +
-        (topic.id === session.id ? session.answered : topic.answered),
+      answered: sum.answered + topic.answered,
       total: sum.total + topic.total,
     }),
     { answered: 0, total: 0 }
   )
 
-  if (!playing) {
+  if (!question) {
     // A practice round goes on to its results instead.
-    if (!finished || practice) {
+    if (!done || practice) {
       return null
     }
 
@@ -149,8 +145,8 @@ export function SessionView({
   }
 
   const section = {
-    number: sections.findIndex((topic) => topic.id === session.id) + 1,
-    count: sections.length,
+    number: topics.findIndex((topic) => topic.id === session.id) + 1,
+    count: topics.length,
   }
 
   return (

@@ -77,7 +77,7 @@
     "notFoundText": "このページは存在しないか、削除されました。"
   },
   "home": {
-    "title": "全員を面接し\n最高の人材を採用",
+    "title": "全員をテストし\n最高の人材を採用",
     "text": "求人票から作る時間制限付きの面接。候補者ごとに異なる問題と、各問題のタイマー。候補者 1 人あたり $1 から。"
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "/ {count, number}",
     "per": "/",
     "candidate": "候補者",
-    "showOptions": "選択肢を表示",
-    "hideOptions": "選択肢を隠す",
     "correct": "正解",
     "wrong": "不正解",
     "regenerating": "作り直し中…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "所有者",
-    "admin": "管理者"
+    "admin": "管理者",
+    "viewer": "閲覧者",
+    "adminNote": "面接の作成と変更、候補者の招待、チャージができます。",
+    "viewerNote": "面接と結果の閲覧、レポートの共有ができます。変更はできません。"
   },
   "company": {
     "title": "会社",
     "signInInterviews": "会社の面接を見るにはサインインしてください。",
-    "signInAdmins": "会社の管理者を見るにはサインインしてください。",
+    "signInTeam": "会社のチームを見るにはサインインしてください。",
     "signInReferrals": "会社の招待リンクを見るにはサインインしてください。",
     "empty": "会社はまだありません。",
     "owner": "所有者",
     "interviewCount": "{count, plural, other {面接 # 件}}",
     "interviews": "面接",
     "templates": "テンプレート",
-    "admins": "管理者",
+    "team": "チーム",
     "referrals": "招待",
     "new": "新しい会社",
     "name": "会社名",
@@ -420,9 +421,9 @@
     "timePerQuestion": "1 問あたりの時間",
     "secondsLabel": "1 問あたりの時間（秒）",
     "secondsUnit": "秒",
-    "adminEmail": "管理者のメールアドレス",
-    "addAdmin": "管理者を追加",
-    "adminFailed": "その管理者を招待できませんでした。もう一度お試しください。",
+    "memberEmail": "メンバーのメールアドレス",
+    "addMember": "メンバーを追加",
+    "memberFailed": "招待できませんでした。もう一度お試しください。",
     "invite": "招待",
     "jobDescription": "職務内容",
     "pasteJob": "職務内容を貼り付けてください：役割、必須要件、歓迎要件…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, other {# 件のメールアドレスが無効です}}。",
       "limit": "{count, plural, other {# 件のメールアドレスが}}現在の送信上限を超えています。1 時間後にもう一度お試しください。",
       "no_credits": "{count, plural, other {# 人の候補者を招待できませんでした}}: クレジットが不足しています。チャージすると招待できます。",
+      "started": "{count, plural, other {# 人の候補者}}はすでに開始しているため、再度メールは送られませんでした。",
       "failed": "{count, plural, other {# 件の招待}}を送信できませんでした。もう一度お試しください。"
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "参加済み",
     "invited": "招待済み",
+    "role": "役割",
+    "roleFailed": "役割を変更できませんでした。",
     "copy": "コピー",
     "inviteTitle": "会社への招待",
     "remove": "削除",
@@ -595,7 +599,22 @@
         "better": "一定期間の利益を示す財務諸表は？"
       },
       "comment": "会社によるので、正解はひとつではありません。",
-      "list": "会計の基礎"
+      "list": "会計の基礎",
+      "options": {
+        "good": [
+          "ある時点の資産・負債・純資産",
+          "1 年間の利益",
+          "1 か月の現金の出入り",
+          "来年の予算"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "貸借対照表",
+          "損益計算書",
+          "キャッシュフロー計算書",
+          "試算表"
+        ]
+      }
     },
     "try": {
       "title": "候補者より先に試してみましょう",

@@ -4,7 +4,13 @@ from prepza_common.notifications import Recipient
 from sqlalchemy import delete, func, select, tuple_
 from sqlalchemy.dialects.postgresql import insert
 
-from app.constants.notifications import GROUP_HOURS, GROUPED_KINDS, KEEP_DAYS, MAX_PER_RECIPIENT
+from app.constants.notifications import (
+    EXPIRED_PER_PRUNE,
+    GROUP_HOURS,
+    GROUPED_KINDS,
+    KEEP_DAYS,
+    MAX_PER_RECIPIENT,
+)
 from app.models.notifications import Notification, Received, Seen
 from app.storage.db import Session
 
@@ -90,7 +96,9 @@ async def add_to_group(session, event: dict, now: datetime) -> bool:
 
 
 async def prune(session, event: dict, now: datetime) -> None:
-    """The recipient keeps their newest MAX_PER_RECIPIENT; nothing is kept past KEEP_DAYS."""
+    """The recipient keeps their newest MAX_PER_RECIPIENT; nothing is kept past KEEP_DAYS. Each
+    call removes at most EXPIRED_PER_PRUNE expired rows of each table, skipping rows another
+    call is removing, so it stays quick and never waits."""
     oldest_kept = now - timedelta(days=KEEP_DAYS)
     beyond_limit = (
         select(Notification.id)
@@ -101,9 +109,21 @@ async def prune(session, event: dict, now: datetime) -> None:
         .order_by(Notification.created_at.desc())
         .offset(MAX_PER_RECIPIENT)
     )
+    expired = (
+        select(Notification.id)
+        .where(Notification.created_at < oldest_kept)
+        .limit(EXPIRED_PER_PRUNE)
+        .with_for_update(skip_locked=True)
+    )
+    expired_events = (
+        select(Received.event_id)
+        .where(Received.received_at < oldest_kept)
+        .limit(EXPIRED_PER_PRUNE)
+        .with_for_update(skip_locked=True)
+    )
     await session.execute(delete(Notification).where(Notification.id.in_(beyond_limit)))
-    await session.execute(delete(Notification).where(Notification.created_at < oldest_kept))
-    await session.execute(delete(Received).where(Received.received_at < oldest_kept))
+    await session.execute(delete(Notification).where(Notification.id.in_(expired)))
+    await session.execute(delete(Received).where(Received.event_id.in_(expired_events)))
 
 
 async def latest(recipients: Recipients, limit: int | None) -> list[Notification]:

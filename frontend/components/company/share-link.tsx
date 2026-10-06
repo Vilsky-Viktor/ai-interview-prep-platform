@@ -10,13 +10,16 @@ import { CopyField } from "@/components/copy-field"
 import { Switch } from "@/components/ui/switch"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 
-/** One link for many candidates, for a job ad: on or off, and the link to copy while it's on. */
+/** One link for many candidates, for a job ad: on or off, and the link to copy while it's on.
+ * Without `canEdit` (a viewer) the switch only shows whether it's on. */
 export function ShareLink({
   interviewId,
   linkToken,
+  canEdit,
 }: {
   interviewId: string
   linkToken: string | null
+  canEdit: boolean
 }) {
   const t = useTranslations("interviews")
   const router = useRouter()
@@ -52,7 +55,7 @@ export function ShareLink({
         </span>
         <Switch
           checked={token !== null}
-          disabled={saving}
+          disabled={saving || !canEdit}
           onCheckedChange={toggle}
         />
       </label>

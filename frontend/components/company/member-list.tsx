@@ -5,7 +5,11 @@ import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import type { CompanyMember } from "@/types/company"
 
-/** A company's owner and admins, a page at a time; `initial` is the server's first page. */
+function byEmail(member: CompanyMember) {
+  return member.email
+}
+
+/** A company's owner, admins and viewers, a page at a time; `initial` is the server's first page. */
 export function MemberList({
   companyId,
   initial,
@@ -15,13 +19,14 @@ export function MemberList({
 }) {
   const { items, setItems, loadMore } = usePagedList(
     `/companies/members?company_id=${companyId}`,
+    byEmail,
     initial
   )
 
   return (
     <VirtualList
       items={items}
-      getKey={(member) => member.email}
+      getKey={byEmail}
       estimateSize={89}
       onEndReached={loadMore}
       className="divide-y rounded-2xl border"

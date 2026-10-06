@@ -55,3 +55,14 @@ def test_only_the_invoker_for_this_service_is_admitted(production, claims, statu
             assert refused.value.status_code == status
 
     assert check.call_args.args[2] == AUDIENCE
+
+
+def test_certificates_are_fetched_through_one_cached_transport(production):
+    claims = {"email": INVOKER, "email_verified": True}
+
+    with mock.patch.object(google.id_token, "verify_oauth2_token", return_value=claims) as check:
+        verify_invoker(request_with("signed"))
+        verify_invoker(request_with("signed"))
+
+    first, second = (call.args[1] for call in check.call_args_list)
+    assert first is second

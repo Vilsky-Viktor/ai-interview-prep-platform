@@ -1,3 +1,5 @@
+import base64
+import json
 import uuid
 from datetime import UTC, datetime, timedelta
 
@@ -21,10 +23,13 @@ async def waiting():
 def test_an_expired_interview_review_saves_its_event_and_the_flush_publishes_it(run, monkeypatch):
     sent = []
 
-    async def publish(event_type, data):
-        sent.append((event_type, data))
+    async def publish_batch(messages, timeout):
+        sent.extend(
+            (message["attributes"]["type"], json.loads(base64.b64decode(message["data"])))
+            for message in messages
+        )
 
-    monkeypatch.setattr(pubsub, "publish", publish)
+    monkeypatch.setattr(pubsub, "publish_batch", publish_batch)
 
     async def scenario():
         interview = await generations.create("ann", "job", uuid.uuid4())
@@ -46,10 +51,10 @@ def test_an_expired_interview_review_saves_its_event_and_the_flush_publishes_it(
 
 
 def test_a_failed_publish_leaves_the_event_for_the_next_flush(run, monkeypatch):
-    async def down(event_type, data):
+    async def down(messages, timeout):
         raise ConnectionError("Pub/Sub is down")
 
-    monkeypatch.setattr(pubsub, "publish", down)
+    monkeypatch.setattr(pubsub, "publish_batch", down)
 
     async def scenario():
         async with Session() as session:

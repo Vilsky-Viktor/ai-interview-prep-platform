@@ -1,9 +1,11 @@
 from datetime import datetime
+from typing import Literal
 from uuid import UUID
 
 from pydantic import BaseModel, EmailStr, Field
 
 from app.constants.invites import MAX_COMPANY_NAME_LENGTH
+from app.constants.roles import Role
 
 
 class CompanyCreate(BaseModel):
@@ -22,13 +24,14 @@ class MemberOut(BaseModel):
     role: str
     joined: bool
     token: str | None = None
-    # Whether the user can remove this member or pending invite: the owner, any row but their own.
+    # Whether the user can remove this member or pending invite, or change its role: the owner,
+    # any row but their own.
     removable: bool = False
     created_at: datetime
 
 
 class AdminInviteOut(BaseModel):
-    """What the invited admin sees before accepting."""
+    """What the invited member sees before accepting."""
 
     company_name: str
     email: str
@@ -39,6 +42,8 @@ class CompanyOut(BaseModel):
     id: UUID
     name: str
     role: str
+    # Owners and admins change things and spend credits; viewers only look and share reports.
+    can_edit: bool
     interview_count: int
     # The logo's address on the site; None until one is set.
     logo_url: str | None = None
@@ -48,8 +53,17 @@ class CompanyOut(BaseModel):
     created_at: datetime
 
 
+# The roles the owner gives a member.
+MemberRole = Literal[Role.ADMIN, Role.VIEWER]
+
+
 class MemberIn(BaseModel):
     email: EmailStr
+    role: MemberRole = Role.ADMIN
+
+
+class MemberRoleIn(BaseModel):
+    role: MemberRole
 
 
 class ReferralRewardOut(BaseModel):

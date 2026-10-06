@@ -3,13 +3,13 @@ from uuid import UUID
 from fastapi import HTTPException, Request, status
 from prepza_common.auth import CurrentUser
 
-from app.constants.roles import Role
+from app.constants.roles import EDITORS
 from app.models.companies import Company, Member
-from app.models.interviews import Interview
 from app.storage import companies
 
 
 async def require_company(user: CurrentUser, company_id: UUID) -> tuple[Company, Member]:
+    """Any member: owners, admins and viewers. Enough for reading."""
     company = await companies.get(company_id)
 
     if company is None:
@@ -23,11 +23,18 @@ async def require_company(user: CurrentUser, company_id: UUID) -> tuple[Company,
     return company, member
 
 
-async def require_manager(user: CurrentUser, interview: Interview) -> None:
-    _, member = await require_company(user, interview.company_id)
+def can_edit(member: Member) -> bool:
+    return member.role in EDITORS
 
-    if member.role not in (Role.OWNER, Role.ADMIN):
-        raise HTTPException(status.HTTP_403_FORBIDDEN, "You can't change this interview")
+
+async def require_editor(user: CurrentUser, company_id: UUID) -> tuple[Company, Member]:
+    """An owner or admin: everything that changes the company or spends its credits."""
+    company, member = await require_company(user, company_id)
+
+    if not can_edit(member):
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Viewers can't change anything here")
+
+    return company, member
 
 
 def bearer_token(request: Request) -> str:

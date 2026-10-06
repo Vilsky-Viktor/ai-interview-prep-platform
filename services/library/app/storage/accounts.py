@@ -1,6 +1,6 @@
 from sqlalchemy import delete, select
 
-from app.models.feedback import QuestionRating, QuestionReport
+from app.models.feedback import QuestionRating, QuestionReport, QuestionReporter
 from app.models.sets import Question
 from app.storage.db import Session
 
@@ -8,7 +8,7 @@ from app.storage.db import Session
 async def delete_user(user_id: str) -> None:
     """The user's ratings and reports of questions, given as a candidate."""
     async with Session() as session:
-        for model in (QuestionRating, QuestionReport):
+        for model in (QuestionRating, QuestionReport, QuestionReporter):
             await session.execute(delete(model).where(model.user_id == user_id))
 
         await session.commit()

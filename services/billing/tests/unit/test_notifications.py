@@ -26,12 +26,12 @@ def notified(monkeypatch):
 
 
 def test_a_rewarded_referrer_is_told_with_the_reward(monkeypatch, notified):
-    async def rewarded(owner_type, owner_id):
+    async def rewarded(owner_type, owner_id, transaction_id):
         return "bob"
 
     monkeypatch.setattr(referrals_storage, "reward", rewarded)
 
-    asyncio.run(referrals.reward_after_top_up("company", "ann"))
+    asyncio.run(referrals.reward_after_top_up("company", "ann", "txn_01"))
 
     assert notified == [
         notification("company", "bob", "referral_rewarded", "/company/bob/referrals", credits=500)
@@ -43,7 +43,7 @@ def granted(monkeypatch):
     async def fake_grant(*args):
         return True
 
-    async def no_referral(owner_type, owner_id):
+    async def no_referral(owner_type, owner_id, transaction_id):
         return None
 
     async def owner(subscription_id):
@@ -78,9 +78,16 @@ def test_a_declined_automatic_charge_tells_the_owner(monkeypatch, notified):
     async def declined(subscription_id, price_id):
         raise RuntimeError("declined")
 
+    marked = []
+
+    async def failed(owner_type, owner_id, now):
+        marked.append(owner_id)
+
     monkeypatch.setattr(auto_top_ups_storage, "claim_charge", claimed)
+    monkeypatch.setattr(auto_top_ups_storage, "failed", failed)
     monkeypatch.setattr(paddle, "charge", declined)
 
     asyncio.run(auto_top_ups.check("company", "acme"))
 
     assert notified == [notification("company", "acme", "auto_top_up_failed", "/top-up")]
+    assert marked == ["acme"]

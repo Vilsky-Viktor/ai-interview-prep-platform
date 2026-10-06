@@ -6,7 +6,7 @@ from prepza_common.auth import CurrentUser
 from app.constants.audit import AuditAction
 from app.constants.invites import EXTRA_TIME_STARTED, NOT_STARTED
 from app.schemas.invites import ExtraTimeIn
-from app.services.access import require_company
+from app.services.access import require_editor
 from app.storage import audit, interviews, invites
 
 # Accommodations for candidates who need them: extra time on each question.
@@ -23,7 +23,7 @@ async def set_extra_time(
     if interview is None or invite is None or invite.interview_id != interview.id:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
 
-    await require_company(user, interview.company_id)
+    await require_editor(user, interview.company_id)
 
     if invite.status not in NOT_STARTED:
         raise HTTPException(status.HTTP_409_CONFLICT, EXTRA_TIME_STARTED)

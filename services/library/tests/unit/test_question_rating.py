@@ -1,10 +1,22 @@
 import uuid
 
+import pytest
+
 from app.storage import feedback
+from tests.unit.fake_redis import FakeRedis
 from tests.unit.test_internal import token
 
 QUESTION_ID = uuid.uuid4()
 AUTH = {"Authorization": f"Bearer {token()}"}
+
+
+@pytest.fixture(autouse=True)
+def redis(monkeypatch):
+    """Rate limits count in memory."""
+    fake = FakeRedis()
+    monkeypatch.setattr("app.routers.internal_feedback.get_redis", lambda: fake)
+
+    return fake
 
 
 def test_a_candidate_rates_a_question_and_reads_it_back(client, monkeypatch):

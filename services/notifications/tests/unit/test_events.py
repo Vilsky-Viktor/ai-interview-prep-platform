@@ -83,6 +83,23 @@ def test_resend_gets_the_message_id_so_a_retry_never_sends_twice(client, monkeyp
     assert sent == [("bob@example.com", "events/m-7")] * 2
 
 
+def test_an_event_re_sent_from_the_outbox_keeps_its_key(client, monkeypatch):
+    sent = []
+
+    async def fake_send(email, idempotency_key):
+        sent.append(idempotency_key)
+
+    monkeypatch.setattr(settings, "resend_api_key", "re_test")
+    monkeypatch.setattr(resend, "send", fake_send)
+
+    for message_id in ("m-8", "m-9"):
+        body = push(message_id=message_id)
+        body["message"]["attributes"]["event_id"] = "row-1"
+        client.post("/internal/events", json=body)
+
+    assert sent == ["events/row-1"] * 2
+
+
 def test_a_failed_send_answers_with_an_error_so_pubsub_retries(client, monkeypatch):
     async def failing_send(email):
         raise ConnectionError("SMTP is down")
@@ -102,10 +119,7 @@ def test_other_events_are_accepted_without_an_email(client):
 def resend_answering(monkeypatch, status_code):
     """Resend's API, answering every send with `status_code`."""
     transport = httpx.MockTransport(lambda request: httpx.Response(status_code, text="no"))
-    real_client = httpx.AsyncClient
-    monkeypatch.setattr(
-        resend.httpx, "AsyncClient", lambda **kwargs: real_client(transport=transport, **kwargs)
-    )
+    monkeypatch.setattr(resend.http, "get_client", lambda: httpx.AsyncClient(transport=transport))
 
 
 @pytest.mark.parametrize("status_code", [400, 422])

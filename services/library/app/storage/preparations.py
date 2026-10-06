@@ -4,15 +4,28 @@ from prepza_common import outbox
 from prepza_common.notifications import NOTIFICATION_REQUESTED, NotificationKind
 from prepza_common.sets import PreparationIn
 from sqlalchemy import delete, func, select, update
-from sqlalchemy.orm import selectinload
+from sqlalchemy.orm import aliased, selectinload
 
-from app.constants.sets import OwnerType, SetKind
+from app.constants.sets import OwnerType, SetKind, Stage
 from app.helpers.notifications import question_notification
 from app.models.outbox import OutboxEvent
 from app.models.quality import QuestionStats
 from app.models.sets import Question, QuestionSet, Topic
 from app.storage import quality, reuse
 from app.storage.db import Session
+
+
+def served():
+    """A question candidates can be given: not a copy of a bank question that has since been
+    revealed, with its answer, in free practice. The bank reveals one only after no test has used
+    it for a long time, but a test can stay open longer than that."""
+    source = aliased(Question)
+
+    return ~(
+        select(source.id)
+        .where(source.id == Question.source_question_id, source.stage == Stage.REVEALED)
+        .exists()
+    )
 
 
 def new_topics(preparation: PreparationIn) -> list[Topic]:
@@ -74,11 +87,12 @@ async def create_interview(payload: PreparationIn) -> uuid.UUID:
 
 
 async def get_content(set_id: uuid.UUID) -> QuestionSet | None:
-    """A set with every topic and question, for starting candidate sessions."""
+    """A set with every topic and the questions candidates can be given (served), for starting
+    candidate sessions."""
     query = (
         select(QuestionSet)
         .where(QuestionSet.id == set_id)
-        .options(selectinload(QuestionSet.topics).selectinload(Topic.questions))
+        .options(selectinload(QuestionSet.topics).selectinload(Topic.questions.and_(served())))
     )
 
     async with Session() as session:
@@ -91,9 +105,11 @@ async def get(set_id: uuid.UUID) -> QuestionSet | None:
 
 
 async def get_topics(set_id: uuid.UUID) -> list[tuple[Topic, int]]:
-    """Topics with question counts, without loading the questions."""
+    """Topics with counts of the questions candidates can be given, without loading them."""
     question_count = (
-        select(func.count(Question.id)).where(Question.topic_id == Topic.id).scalar_subquery()
+        select(func.count(Question.id))
+        .where(Question.topic_id == Topic.id, served())
+        .scalar_subquery()
     )
     query = select(Topic, question_count).where(Topic.set_id == set_id).order_by(Topic.position)
 

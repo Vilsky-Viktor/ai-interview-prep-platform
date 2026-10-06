@@ -2,7 +2,14 @@ import logging
 from datetime import UTC, datetime, timedelta
 
 from app.constants.accounts import TEXT_RETENTION_DAYS
-from app.constants.generation import GENERATION_STOPPED, REVIEW_EXPIRY_DAYS, STUCK_AFTER_SECONDS
+from app.constants.generation import (
+    GENERATION_STOPPED,
+    QUEUED_STUCK_AFTER_SECONDS,
+    REVIEW_EXPIRY_DAYS,
+    STUCK_AFTER_SECONDS,
+)
+from app.constants.quality import KEY_CHECK_LOCK_KEY, KEY_CHECK_LOCK_SECONDS
+from app.integrations.redis import get_redis
 from app.services import outbox as outbox_service
 from app.services.key_check_batches import collect_finished, submit_pending
 from app.storage import accounts, generations
@@ -14,9 +21,20 @@ logger = logging.getLogger(__name__)
 
 
 async def key_check_batches() -> None:
-    """Applies finished OpenAI batches of key checks, then sends the waiting ones."""
-    await collect_finished()
-    await submit_pending()
+    """Applies finished OpenAI batches of key checks, then sends the waiting ones; skipped while
+    an earlier run is still going."""
+    redis = get_redis()
+
+    if not await redis.set(KEY_CHECK_LOCK_KEY, 1, nx=True, ex=KEY_CHECK_LOCK_SECONDS):
+        logger.warning("Key checks are still running from the last time; skipped")
+
+        return
+
+    try:
+        await collect_finished()
+        await submit_pending()
+    finally:
+        await redis.delete(KEY_CHECK_LOCK_KEY)
 
 
 async def expire_reviews() -> None:
@@ -29,10 +47,15 @@ async def expire_reviews() -> None:
 
 
 async def sweep(checkpointer) -> None:
-    """Fails generations whose worker died mid-job, so the user can Retry them, and deletes
+    """Fails generations whose worker died mid-job, or whose job never came, so the user can
+    Retry them (a job that comes after all finds them no longer queued), and deletes
     checkpoints nothing will resume. Failed and in-review generations keep theirs."""
-    before = datetime.now(UTC) - timedelta(seconds=STUCK_AFTER_SECONDS)
-    failed = await generations.fail_stuck(before, GENERATION_STOPPED)
+    now = datetime.now(UTC)
+    failed = await generations.fail_stuck(
+        now - timedelta(seconds=STUCK_AFTER_SECONDS),
+        now - timedelta(seconds=QUEUED_STUCK_AFTER_SECONDS),
+        GENERATION_STOPPED,
+    )
 
     if failed:
         logger.warning("Marked %d stuck generations as failed", len(failed))

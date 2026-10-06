@@ -54,6 +54,7 @@ export default async function ReferralsPage({
         verifiedDomain={company.verified_domain ?? null}
         websiteDomain={company.website_domain ?? null}
         current="referrals"
+        canEdit={company.can_edit}
       />
       {referral && (
         <>

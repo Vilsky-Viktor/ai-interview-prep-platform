@@ -5,15 +5,16 @@ from prepza_common.auth import CurrentUser
 
 from app.constants.audit import AuditAction
 from app.constants.invites import InviteStatus
-from app.helpers.candidates import by_grade, candidate_out
+from app.helpers.candidates import candidate_out
 from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
 from app.integrations import rounds
 from app.schemas.reports import InterviewReportOut, ReportEmailIn
+from app.services import candidate_results
 from app.services import outbox as outbox_service
 from app.services.access import require_company
 from app.services.report_emails import allow_report_email
-from app.storage import audit, interviews, invites, reports
+from app.storage import audit, candidates, interviews, reports
 
 router = APIRouter(prefix="/interviews", tags=["reports"])
 
@@ -28,9 +29,7 @@ async def email_report(
     manager. A reply goes to the member who sent it. Counts towards the member's email limits
     and the company's daily reports."""
     interview = await interviews.get(interview_id)
-    invite = next(
-        (item for item in (interview.invites if interview else []) if item.id == invite_id), None
-    )
+    invite = await candidates.get(interview_id, invite_id) if interview else None
 
     if interview is None or invite is None or invite.status == InviteStatus.DELETED:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
@@ -64,12 +63,8 @@ async def interview_report(interview_id: UUID, user: CurrentUser) -> InterviewRe
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
     company, _ = await require_company(user, interview.company_id)
-    # Deleted candidates have no email to show.
-    every = [
-        invite
-        for invite in await invites.list_all_for_interview(interview.id)
-        if invite.status != InviteStatus.DELETED
-    ]
+    await candidate_results.backfill(interview.id)
+    every = await candidates.for_report(interview.id)
     totals = await rounds.invite_scores([invite.id for invite in every])
 
     return InterviewReportOut(
@@ -79,8 +74,7 @@ async def interview_report(interview_id: UUID, user: CurrentUser) -> InterviewRe
         verified_domain=company.verified_domain,
         pass_mark=interview.pass_mark,
         candidates=[
-            candidate_out(invite, totals.get(str(invite.id)) or {}, interview)
-            for invite in by_grade(every, totals)
+            candidate_out(invite, totals.get(str(invite.id)) or {}, interview) for invite in every
         ],
     )
 

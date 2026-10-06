@@ -135,6 +135,44 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/sessions/{session_id}/step": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Next Step
+     * @description Opens the candidate's interview, or moves it on after an answer or a time-out: the
+     *     server decides which section and question come next, and when the interview is done.
+     */
+    post: operations["next_step_sessions__session_id__step_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/sessions/{session_id}/finish-interview": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Finish Interview */
+    post: operations["finish_interview_sessions__session_id__finish_interview_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/practice/{template_id}": {
     parameters: {
       query?: never
@@ -679,6 +717,19 @@ export interface components {
      * @enum {string}
      */
     IntegritySignal: "tab_leave" | "copy"
+    /**
+     * InterviewStep
+     * @description Where a candidate's interview stands: the section on screen and its waiting question,
+     *     every section, and whether the whole interview is finished.
+     */
+    InterviewStep: {
+      session: components["schemas"]["SessionOut"]
+      question: components["schemas"]["NextQuestion"] | null
+      /** Topics */
+      topics: components["schemas"]["SessionTopicOut"][]
+      /** Done */
+      done: boolean
+    }
     /** InviteIdsIn */
     InviteIdsIn: {
       /** Invite Ids */
@@ -1291,6 +1342,68 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["SessionOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  next_step_sessions__session_id__step_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        session_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InterviewStep"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  finish_interview_sessions__session_id__finish_interview_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        session_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InterviewStep"]
         }
       }
       /** @description Validation Error */

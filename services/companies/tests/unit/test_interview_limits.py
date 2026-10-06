@@ -26,7 +26,7 @@ def signed_in_manager(monkeypatch):
     async def no_track(*args, **kwargs):
         return None
 
-    monkeypatch.setattr(route, "require_company", fake_company)
+    monkeypatch.setattr(route, "require_editor", fake_company)
     monkeypatch.setattr(route, "track", no_track)
     yield
     app.dependency_overrides.clear()

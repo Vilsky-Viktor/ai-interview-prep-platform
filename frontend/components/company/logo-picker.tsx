@@ -21,19 +21,23 @@ import {
 import { ApiError, apiFetch } from "@/lib/api"
 import { fileBase64 } from "@/lib/files"
 
-const SPOT =
-  "flex size-12 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-muted transition-colors hover:bg-muted/70 disabled:cursor-default"
+const BOX =
+  "flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-muted"
+const SPOT = `${BOX} cursor-pointer transition-colors hover:bg-muted/70 disabled:cursor-default`
 
 /** The company's logo beside its name: without one, its first letter, and a click picks an
- * image; with one, a click offers to change or remove it. */
+ * image; with one, a click offers to change or remove it. Not `editable` (a viewer), it only
+ * shows. */
 export function LogoPicker({
   companyId,
   name,
   logoUrl,
+  editable,
 }: {
   companyId: string
   name: string
   logoUrl: string | null
+  editable: boolean
 }) {
   const t = useTranslations("company")
   const router = useRouter()
@@ -80,6 +84,28 @@ export function LogoPicker({
     />
   )
 
+  const letter = (
+    <span className="font-heading text-2xl font-medium text-muted-foreground uppercase">
+      {name.slice(0, 1)}
+    </span>
+  )
+
+  if (!editable) {
+    return (
+      <span className={BOX}>
+        {logoUrl ? (
+          <CompanyLogo
+            url={logoUrl}
+            name={name}
+            className="size-full object-contain"
+          />
+        ) : (
+          letter
+        )}
+      </span>
+    )
+  }
+
   if (!logoUrl) {
     return (
       <>
@@ -95,9 +121,7 @@ export function LogoPicker({
               />
             }
           >
-            <span className="font-heading text-2xl font-medium text-muted-foreground uppercase">
-              {name.slice(0, 1)}
-            </span>
+            {letter}
           </TooltipTrigger>
           <TooltipContent>{t("uploadLogo")}</TooltipContent>
         </Tooltip>

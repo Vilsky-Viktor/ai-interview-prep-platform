@@ -20,6 +20,18 @@ class QuestionRating(Base):
     value: Mapped[int] = mapped_column(SmallInteger)
 
 
+class QuestionReporter(Base):
+    """Who has reported a question, kept when it's replaced: one report per user and question,
+    whatever its revision, so the same users can't send it to the verifier again and again."""
+
+    __tablename__ = "question_reporters"
+
+    question_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("questions.id", ondelete="CASCADE"), primary_key=True
+    )
+    user_id: Mapped[str] = mapped_column(String(128), primary_key=True, index=True)
+
+
 class QuestionReport(Base):
     """At most one report per user and question."""
 

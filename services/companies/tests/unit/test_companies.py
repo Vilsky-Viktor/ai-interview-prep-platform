@@ -6,6 +6,7 @@ from prepza_common.auth import current_user
 from prepza_common.user import User
 
 from app.constants.invites import MAX_COMPANY_NAME_LENGTH
+from app.constants.roles import EDITORS
 from app.integrations import billing
 from app.main import app
 from app.models.companies import Company, Member
@@ -47,7 +48,7 @@ def two_companies(monkeypatch):
     owned = company(OWNED_ID, "My company", "owner")
     joined = company(JOINED_ID, "Arcolabs", "admin")
 
-    async def fake_list(user_id, offset, limit):
+    async def fake_list(user_id, offset, limit, roles=None):
         return [owned, joined]
 
     async def fake_get(company_id):
@@ -120,7 +121,11 @@ def test_admin_cannot_remove_company(client, two_companies):
 def test_lists_the_users_companies_with_their_credits(client, monkeypatch):
     company = Company(id=uuid.uuid4(), name="Acme", created_at=datetime.now(UTC), members=[])
 
-    async def mine(user_id, offset, limit):
+    asked = []
+
+    async def mine(user_id, offset, limit, roles):
+        asked.append(roles)
+
         return [company]
 
     async def credits(company_ids):
@@ -138,6 +143,8 @@ def test_lists_the_users_companies_with_their_credits(client, monkeypatch):
     assert response.json() == [
         {"id": str(company.id), "name": "Acme", "available": 1_200, "low": False}
     ]
+    # Only companies the user may top up: viewers spend no credits.
+    assert asked == [EDITORS]
 
 
 def test_a_taken_company_name_is_refused(client, monkeypatch):
@@ -164,3 +171,36 @@ def test_a_company_name_longer_than_a_heading_is_refused(client):
     response = client.post("/companies", json={"name": "x" * (MAX_COMPANY_NAME_LENGTH + 1)})
 
     assert response.status_code == 422
+
+
+def test_a_company_without_its_welcome_credits_is_removed_again(client, monkeypatch):
+    sign_in()
+    created = Company(id=uuid.uuid4(), name="Acme", created_at=datetime.now(UTC))
+    removed = []
+
+    async def none_owned(user_id):
+        return 0
+
+    async def create(name, user_id, email):
+        return created
+
+    async def no_ids(user_id):
+        return []
+
+    async def billing_down(*args):
+        raise RuntimeError("billing is down")
+
+    async def remove(company_id):
+        removed.append(company_id)
+
+    monkeypatch.setattr(companies, "owned_count", none_owned)
+    monkeypatch.setattr(companies, "create", create)
+    monkeypatch.setattr(companies, "ids_for_user", no_ids)
+    monkeypatch.setattr(billing, "welcome_company", billing_down)
+    monkeypatch.setattr(companies, "delete", remove)
+
+    with pytest.raises(RuntimeError):
+        client.post("/companies", json={"name": "Acme"})
+
+    # Trying again doesn't find the name taken.
+    assert removed == [created.id]

@@ -77,7 +77,7 @@
     "notFoundText": "Questa pagina non esiste o è stata rimossa."
   },
   "home": {
-    "title": "Un colloquio per tutti\nAssumi i migliori",
+    "title": "Metti alla prova tutti\nAssumi i migliori",
     "text": "Colloqui a tempo creati dalla tua descrizione del ruolo. Domande uniche per ogni candidato e un timer su ognuna. Da $1 per candidato."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "di {count, number}",
     "per": "per",
     "candidate": "candidato",
-    "showOptions": "Mostra le opzioni di risposta",
-    "hideOptions": "Nascondi le opzioni di risposta",
     "correct": "Risposta corretta",
     "wrong": "Risposta sbagliata",
     "regenerating": "Rigenerazione…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "proprietario",
-    "admin": "amministratore"
+    "admin": "amministratore",
+    "viewer": "osservatore",
+    "adminNote": "Crea e modifica i colloqui, invita i candidati, ricarica i crediti.",
+    "viewerNote": "Vede colloqui e risultati, condivide i report. Non modifica nulla."
   },
   "company": {
     "title": "Aziende",
     "signInInterviews": "Accedi per vedere i colloqui dell'azienda.",
-    "signInAdmins": "Accedi per vedere gli amministratori dell'azienda.",
+    "signInTeam": "Accedi per vedere il team dell'azienda.",
     "signInReferrals": "Accedi per vedere il link d'invito dell'azienda.",
     "empty": "Ancora nessuna azienda.",
     "owner": "Proprietario",
     "interviewCount": "{count, plural, one {# colloquio} other {# colloqui}}",
     "interviews": "Colloqui",
     "templates": "Modelli",
-    "admins": "Amministratori",
+    "team": "Team",
     "referrals": "Inviti",
     "new": "Nuova azienda",
     "name": "Nome dell'azienda",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Tempo per domanda",
     "secondsLabel": "Tempo per domanda in secondi",
     "secondsUnit": "s",
-    "adminEmail": "Email dell'amministratore",
-    "addAdmin": "Aggiungi amministratore",
-    "adminFailed": "Impossibile invitare questo amministratore. Riprova.",
+    "memberEmail": "Email del membro",
+    "addMember": "Aggiungi membro",
+    "memberFailed": "Impossibile invitare questa persona. Riprova.",
     "invite": "Invita",
     "jobDescription": "Descrizione del ruolo",
     "pasteJob": "Incolla la descrizione del ruolo: la posizione, i requisiti e i plus…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, one {# email non è valida} other {# email non sono valide}}.",
       "limit": "{count, plural, one {# email supera} other {# email superano}} per ora il tuo limite di email. Riprova tra un'ora.",
       "no_credits": "{count, plural, one {# candidato non è stato invitato} other {# candidati non sono stati invitati}}: crediti esauriti. Ricarica per invitarli.",
+      "started": "{count, plural, one {# candidato ha} other {# candidati hanno}} già iniziato, quindi non sono stati ricontattati.",
       "failed": "{count, plural, one {# invito non è stato inviato} other {# inviti non sono stati inviati}}. Riprova."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Entrato",
     "invited": "Invitato",
+    "role": "Ruolo",
+    "roleFailed": "Impossibile cambiare il ruolo.",
     "copy": "Copia",
     "inviteTitle": "Invito nell'azienda",
     "remove": "Rimuovi",
@@ -591,7 +595,22 @@
         "better": "Quale prospetto mostra l'utile di un periodo?"
       },
       "comment": "Dipende dall'azienda, quindi non c'è un'unica risposta giusta.",
-      "list": "Basi di contabilità"
+      "list": "Basi di contabilità",
+      "options": {
+        "good": [
+          "Attività, passività e patrimonio netto a una data",
+          "L'utile di un anno",
+          "Entrate e uscite di cassa in un mese",
+          "Il budget dell'anno prossimo"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Stato patrimoniale",
+          "Conto economico",
+          "Rendiconto finanziario",
+          "Bilancio di verifica"
+        ]
+      }
     },
     "try": {
       "title": "Provalo prima dei candidati",

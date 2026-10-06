@@ -2,9 +2,9 @@
 
 Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) behind Google's global load balancer:
 
-- **Cloud Run:** the frontend, five APIs, the generation worker and notifications. Billed per request, and idle services cost nothing.
-- **Cloud SQL Postgres 17:** one database per service, with daily backups and point-in-time recovery.
-- **Pub/Sub:** domain events. One `events` topic is pushed to library, companies and notifications, with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
+- **Cloud Run:** the frontend, five APIs, the generation worker and notifications, whose bell stream runs as its own service (`notifications-stream`, same image) so open tabs never take the capacity event pushes need. Billed per request, and idle services cost nothing.
+- **Cloud SQL Postgres 18** (as locally): one database per service, with daily backups and point-in-time recovery.
+- **Pub/Sub:** domain events. One `events` topic is pushed to library, companies and notifications, each getting only the event types it handles (`pubsub.tf`; add a type there when a consumer starts handling it), with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
 - **Cloud Tasks:** generation jobs on the worker. **Cloud Scheduler:** sweeps, retention, the question bank's stages, and candidate invite reminders and expiry; a failed daily job is retried 3 times.
 - **The global load balancer:**
   - HTTPS with a Google-managed certificate;
@@ -89,7 +89,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
      gcloud run jobs execute $db-migrate --region=europe-west1 --wait
    done
    # A new revision of each service reads the secrets you just set.
-   for service in frontend library generation rounds companies billing notifications generation-worker; do
+   for service in frontend library generation rounds companies billing notifications notifications-stream generation-worker; do
      gcloud run services update $service --region=europe-west1 --update-labels=restarted=$(date +%s)
    done
    ```
@@ -127,7 +127,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
 
 A failed step stops the deploy, and the services keep running the previous images.
 
-- **Rolling back:** in **Actions → Deploy → Run workflow**, enter an earlier version, for example `v1.3.2`. It redeploys that version's images in about a minute. Migrations only go forward, so this is safe only while the newer migrations didn't remove anything the older code needs: keep migrations additive. For one service, you can also move it to an earlier revision in the Cloud Run console.
+- **Rolling back:** in **Actions → Deploy → Run workflow**, enter an earlier version, for example `v1.3.2`, and leave **Run migrations** off. It redeploys that version's images in about a minute, on the newer schema (an older version's migrations would fail on it). So this is safe only while the newer migrations didn't remove anything the older code needs: keep migrations additive. Tick **Run migrations** only to redeploy a version whose migrations haven't run. For one service, you can also move it to an earlier revision in the Cloud Run console.
 - **Terraform never touches image tags,** so applying an infrastructure change doesn't roll anything back.
 
 ## Restore drill
@@ -169,8 +169,8 @@ Then point `DATABASE_URL` at the clone, or copy the needed data back.
   done
   ```
 
-  The replay goes to every consumer again, not only the one that failed: each ignores the types that aren't its own, but a type two consumers handle reaches the one that succeeded a second time.
+  The replay goes to every consumer subscribed to that type, not only the one that failed: today each type has one consumer, but a type two consumers handle would reach the one that succeeded a second time.
 - **Generation jobs:** a job may run up to 25 minutes, under Cloud Tasks' 30-minute limit. The queue never retries; a failed generation is retried by the user.
-- **Database connections:** Cloud SQL starts at `db-g1-small` with 200 connections allowed. Each API process holds up to 10 connections, so raise `db_tier`, or add PgBouncer, before allowing many instances.
+- **Database connections:** Cloud SQL starts at `db-g1-small` with 200 connections allowed, 20 kept free. Each API process holds up to 10 connections (generation and the worker 14, notifications 4); the services' `max` instances fit within the rest, and the plan fails if they don't (`database.tf`). A deploy briefly runs old and new instances side by side, so near the instance limits it can exceed the budget: raise `db_tier`, or add PgBouncer, before allowing more instances.
 - **High availability:** `db_high_availability = true` adds a standby in another zone, at about double the database cost.
 - **Not yet tried on a real project:** `terraform validate` passes, but some settings may need a small adjustment on the first `apply`. The ones most likely to need it are the load balancer's backend protocol for Cloud Run, and Cloud Armor on the CDN backend.

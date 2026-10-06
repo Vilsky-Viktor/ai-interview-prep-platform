@@ -116,13 +116,16 @@ async def new_options(
 
 async def verify(question_id: UUID, flag: QualityFlag, now: bool = False) -> None:
     """Acts on a question the library flagged from its answers and feedback; `now` checks a
-    wrong key right away (a superadmin's "Fix now")."""
+    wrong key right away (a superadmin's "Fix now"). The library's current flag wins over the
+    one sent: the question may have been kept, replaced or flagged otherwise since."""
     context = await library.get_question_context(question_id)
     question = await library.get_question_quality(question_id)
 
-    # Deleted since it was flagged.
-    if context is None or question is None:
+    # Deleted, kept or replaced since it was flagged.
+    if context is None or question is None or question.flag is None:
         return
+
+    flag = question.flag
 
     if flag == QualityFlag.WRONG_KEY and now:
         await check_key(question_id, question, context)

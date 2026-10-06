@@ -6,7 +6,7 @@ from prepza_common.analytics import track
 
 from app.constants.events import INTERVIEW_FINISHED
 from app.constants.invites import EXPIRIES_PER_BATCH, INVITE_EXPIRY_DAYS, NOT_STARTED, InviteStatus
-from app.helpers.candidates import candidate_key
+from app.helpers.candidates import candidate_key, stored_results
 from app.helpers.notifications import candidate_finished
 from app.integrations import billing, rounds
 from app.services import outbox as outbox_service
@@ -15,16 +15,17 @@ from app.storage import interviews, invites
 logger = logging.getLogger(__name__)
 
 
-async def grade_of(invite_id: uuid.UUID) -> int | None:
-    """The candidate's grade for the company's notification; none when rounds can't say now."""
+async def results_of(invite_id: uuid.UUID) -> dict:
+    """The candidate's results from rounds; none when rounds can't say now (the candidates list
+    stores them later)."""
     try:
         scores = await rounds.invite_scores([invite_id])
     except Exception:
-        logger.warning("No grade for invite %s: rounds didn't answer", invite_id, exc_info=True)
+        logger.warning("No results for invite %s: rounds didn't answer", invite_id, exc_info=True)
 
-        return None
+        return {}
 
-    return (scores.get(str(invite_id)) or {}).get("grade")
+    return scores.get(str(invite_id)) or {}
 
 
 async def handle(event_type: str, data: dict) -> None:
@@ -43,13 +44,14 @@ async def handle(event_type: str, data: dict) -> None:
     interview = await interviews.get(invite.interview_id)
     charged = data["answered"] > 0
     notice = None
+    # Results from rounds when it answers; they never hold up the charge.
+    grade, flagged = stored_results(await results_of(invite.id))
 
-    # The company hears of candidates who answered something, with their grade from rounds when
-    # it answers; the notification never holds up the charge.
+    # The company hears of candidates who answered something, with their grade.
     if charged:
-        notice = candidate_finished(interview, invite.id, invite.email, await grade_of(invite.id))
+        notice = candidate_finished(interview, invite.id, invite.email, grade)
 
-    await invites.finish(invite.id, notice)
+    await invites.finish(invite.id, grade, flagged, notice)
     await outbox_service.flush_quietly()
 
     key = candidate_key(invite.interview_id, invite.email)
@@ -77,12 +79,26 @@ async def expire_unstarted() -> int:
     # rest stay unexpired and the next run tries them again, so no hold is left open.
     while rows := await invites.expiring(before, EXPIRIES_PER_BATCH):
         for invite in rows:
-            await billing.release_candidate(candidate_key(invite.interview_id, invite.email))
-            await invites.mark_expired(invite.id)
+            key = candidate_key(invite.interview_id, invite.email)
+            await billing.release_candidate(key)
+
+            # Started or sent again since it was read: it keeps its credits after all.
+            if not await invites.mark_expired(invite.id, before):
+                await hold_again(invite, key)
 
         count += len(rows)
 
     return count
+
+
+async def hold_again(invite, key: str) -> None:
+    """Sets aside again the credits of an invite revived while it was expiring; the run goes on
+    if billing refuses."""
+    try:
+        interview = await interviews.get(invite.interview_id)
+        await billing.hold_candidate(interview.company_id, key)
+    except Exception:
+        logger.warning("Couldn't hold credits again for invite %s", invite.id, exc_info=True)
 
 
 async def release_unfinished(rows: list) -> None:

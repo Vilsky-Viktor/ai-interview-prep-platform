@@ -4,7 +4,7 @@ from pydantic import ValidationError
 
 from app.config.settings import settings
 from app.constants.generation import MAX_OUTPUT_TOKENS
-from app.constants.quality import BATCH_RETRY_STATUSES
+from app.constants.quality import BATCH_RETRY_STATUSES, MAX_BATCH_KEY_CHECKS
 from app.integrations import library, openai_batch
 from app.models.key_checks import KeyCheck as KeyCheckRow
 from app.schemas.verify import KeyCheck
@@ -39,12 +39,13 @@ async def current(check: KeyCheckRow):
 
 
 async def submit_pending() -> None:
-    """Sends every waiting key check as one batch."""
+    """Sends the waiting key checks, up to MAX_BATCH_KEY_CHECKS, as one batch; the rest go in
+    the next run's."""
     requests = {}
     sent = []
     gone = []
 
-    for check in await key_checks.unsent():
+    for check in await key_checks.unsent(MAX_BATCH_KEY_CHECKS):
         found = await current(check)
 
         if found is None:

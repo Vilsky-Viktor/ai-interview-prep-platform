@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from sqlalchemy import delete, or_, select, update
+from sqlalchemy import case, delete, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from app.constants.products import AUTO_TOP_UP_COOLDOWN
+from app.constants.products import AUTO_TOP_UP_COOLDOWN, AUTO_TOP_UP_RETRY_AFTER
 from app.models.billing import AutoTopUp, Wallet
 from app.storage.db import Session
 
@@ -16,15 +16,25 @@ async def get(owner_type: str, owner_id: str) -> AutoTopUp | None:
 async def save(
     owner_type: str, owner_id: str, product: str, threshold: int, buyer_id: str
 ) -> AutoTopUp:
-    """Sets what to buy and when. A running one keeps its subscription; a new one waits for
-    its checkout."""
+    """Sets what to buy and when, and allows a declined charge to be tried again at once. A
+    running one keeps its subscription and the card it charges; one still waiting for its
+    checkout waits for this person's, whoever turned it on before."""
     values = {"product": product, "threshold": threshold}
+    upsert = insert(AutoTopUp).values(
+        owner_type=owner_type, owner_id=owner_id, buyer_id=buyer_id, **values
+    )
+    waiting = AutoTopUp.subscription_id.is_(None)
 
     async with Session() as session:
         await session.execute(
-            insert(AutoTopUp)
-            .values(owner_type=owner_type, owner_id=owner_id, buyer_id=buyer_id, **values)
-            .on_conflict_do_update(index_elements=["owner_type", "owner_id"], set_=values)
+            upsert.on_conflict_do_update(
+                index_elements=["owner_type", "owner_id"],
+                set_={
+                    **values,
+                    "buyer_id": case((waiting, upsert.excluded.buyer_id), else_=AutoTopUp.buyer_id),
+                    "failed_at": None,
+                },
+            )
         )
         await session.commit()
 
@@ -68,9 +78,9 @@ async def owner_of(subscription_id: str) -> tuple[str, str] | None:
 
 
 async def claim_charge(owner_type: str, owner_id: str, now: datetime) -> AutoTopUp | None:
-    """The running automatic top-up, if the available balance is under its threshold and it
-    hasn't charged within the cooldown; marks it charged now. Atomic, so two requests at once
-    charge once."""
+    """The running automatic top-up, if the available balance is under its threshold, it
+    hasn't charged within the cooldown and the card hasn't declined within the retry wait;
+    marks it charged now. Atomic, so two requests at once charge once."""
     query = (
         update(AutoTopUp)
         .where(
@@ -80,6 +90,10 @@ async def claim_charge(owner_type: str, owner_id: str, now: datetime) -> AutoTop
             or_(
                 AutoTopUp.charged_at.is_(None),
                 AutoTopUp.charged_at < now - AUTO_TOP_UP_COOLDOWN,
+            ),
+            or_(
+                AutoTopUp.failed_at.is_(None),
+                AutoTopUp.failed_at < now - AUTO_TOP_UP_RETRY_AFTER,
             ),
             Wallet.owner_type == AutoTopUp.owner_type,
             Wallet.owner_id == AutoTopUp.owner_id,
@@ -94,6 +108,17 @@ async def claim_charge(owner_type: str, owner_id: str, now: datetime) -> AutoTop
         await session.commit()
 
         return row
+
+
+async def failed(owner_type: str, owner_id: str, now: datetime) -> None:
+    """The card declined the charge: the next try waits (claim_charge)."""
+    async with Session() as session:
+        await session.execute(
+            update(AutoTopUp)
+            .where(AutoTopUp.owner_type == owner_type, AutoTopUp.owner_id == owner_id)
+            .values(failed_at=now)
+        )
+        await session.commit()
 
 
 async def remove(owner_type: str, owner_id: str, buyer_id: str | None = None) -> str | None:

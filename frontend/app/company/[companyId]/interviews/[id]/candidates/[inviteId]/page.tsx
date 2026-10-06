@@ -14,38 +14,9 @@ import { PageHeader } from "@/components/page-header"
 import { Badge } from "@/components/ui/badge"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
-import type { ReviewItem } from "@/types/round"
+import type { Scorecard } from "@/types/company"
 
 export const generateMetadata = () => translatedTitle("candidates", "scorecard")
-
-type Scorecard = {
-  id: string
-  email: string
-  status: string
-  // Extra time on each question, in percent, and the amounts still offered (none once started).
-  extra_time: number
-  extra_time_options: number[]
-  // For the PDF report: the test, the company and the overall result.
-  title: string | null
-  company: string
-  logo_url: string | null
-  verified_domain: string | null
-  grade: number | null
-  passed: boolean | null
-  pass_mark: number
-  sessions: {
-    id: string
-    topic_title: string
-    status: string
-    final_score: number | null
-    // Against the test's passing grade; null while the section is still going.
-    passed: boolean | null
-    tab_leaves: number
-    copies: number
-    fast_answers: number
-    review: ReviewItem[]
-  }[]
-}
 
 export default async function ScorecardPage({
   params,
@@ -125,13 +96,15 @@ export default async function ScorecardPage({
               current={card.extra_time}
               options={card.extra_time_options}
             />
-            <CandidateActions
-              interviewId={id}
-              inviteId={inviteId}
-              email={card.email}
-              status={card.status}
-              backHref={`/company/${companyId}/interviews/${id}?tab=candidates`}
-            />
+            {card.can_edit && (
+              <CandidateActions
+                interviewId={id}
+                inviteId={inviteId}
+                email={card.email}
+                status={card.status}
+                backHref={`/company/${companyId}/interviews/${id}?tab=candidates`}
+              />
+            )}
             {reportable && (
               <CandidateReportActions
                 interviewId={id}

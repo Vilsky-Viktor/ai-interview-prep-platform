@@ -8,6 +8,7 @@ import { CandidateSignals } from "@/components/company/candidate-signals"
 import { Badge } from "@/components/ui/badge"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
+import { byId } from "@/lib/paged-list"
 import { formatDate } from "@/lib/format"
 import type { Candidate } from "@/types/company"
 
@@ -27,7 +28,7 @@ export function CandidateList({
   const t = useTranslations("candidates")
   const statuses = useTranslations("candidateStatus")
   const locale = useLocale()
-  const { items, loadMore } = usePagedList(path, initial)
+  const { items, loadMore } = usePagedList(path, byId, initial)
 
   if (items.length === 0) {
     return (
@@ -41,7 +42,7 @@ export function CandidateList({
   return (
     <VirtualList
       items={items}
-      getKey={(candidate) => candidate.id}
+      getKey={byId}
       estimateSize={97}
       onEndReached={loadMore}
       className="divide-y rounded-2xl border"

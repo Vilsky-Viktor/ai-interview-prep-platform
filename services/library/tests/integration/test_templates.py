@@ -2,7 +2,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 from app.constants.reuse import MIN_REUSE_ANSWERS, RETIRE_AFTER_ANSWERS
-from app.storage import bank, preparations, quality, reuse, templates
+from app.storage import answer_stats, bank, preparations, quality, reuse, templates
 from tests.integration.factories import direction, interview
 
 
@@ -65,7 +65,7 @@ def test_templates_are_found_by_a_topic_or_a_subtopic_too(run):
 
 def test_a_template_is_copied_into_a_company_test_and_stays_a_template(run):
     async def scenario():
-        template = await interview("Bookkeeper", template=True, questions=4)
+        template = await interview("Bookkeeper", template=True, questions=15)
         copy = await templates.copy_template(template, "company-9")
         missing = await templates.copy_template(copy.id, "company-9")
 
@@ -81,15 +81,15 @@ def test_a_template_is_copied_into_a_company_test_and_stays_a_template(run):
     assert template.kind == "template"
     assert (copy.kind, copy.owner_type, copy.owner_id) == ("interview", "company", "company-9")
     assert copy.title == "Bookkeeper"
-    # Of the template's 4 questions, the third went straight to practice: 3 private ones copied.
-    assert [count for _, count in topics] == [3]
+    # Of the template's 15 questions, every third went straight to practice: 10 private copied.
+    assert [count for _, count in topics] == [10]
     # A company's test isn't a template, so it can't be copied in turn.
     assert missing is None
 
 
 def test_a_template_reveals_a_third_and_its_copies_remember_their_originals(run):
     async def scenario():
-        template = await interview("Nurse", template=True, questions=6)
+        template = await interview("Nurse", template=True, questions=15)
         copy = await templates.copy_template(template, "company-3")
         original = await preparations.get_content(template)
         copied = await preparations.get_content(copy.id)
@@ -98,14 +98,7 @@ def test_a_template_reveals_a_third_and_its_copies_remember_their_originals(run)
 
     original, copied = run(scenario())
 
-    assert [question.stage for question in original] == [
-        "private",
-        "private",
-        "revealed",
-        "private",
-        "private",
-        "revealed",
-    ]
+    assert [question.stage for question in original] == ["private", "private", "revealed"] * 5
     private = [question.id for question in original if question.stage == "private"]
     assert [question.source_question_id for question in copied] == private
 
@@ -122,7 +115,9 @@ def test_the_bank_offers_only_proven_private_template_questions(run):
 
         for question in (private, revealed):
             for _ in range(MIN_REUSE_ANSWERS):
-                await quality.record_answer(question.id, question.text, "right", True)
+                await answer_stats.record_answer(
+                    str(uuid.uuid4()), question.id, question.text, "right", True
+                )
 
         found = await reuse.find(direction(1), "hard", "en", 10)
 
@@ -137,14 +132,16 @@ def test_the_bank_offers_only_proven_private_template_questions(run):
 
 def test_bank_questions_retire_after_enough_answers_and_are_revealed_once_idle(run):
     async def scenario():
-        template = await interview("Electrician", template=True, questions=2)
-        busy, quiet = (await preparations.get_content(template)).topics[0].questions
+        template = await interview("Electrician", template=True, questions=15)
+        busy, quiet = (await preparations.get_content(template)).topics[0].questions[:2]
         # One company's test has a copy of each.
         await templates.copy_template(template, "company-7")
 
         for question in (busy, quiet):
             for _ in range(RETIRE_AFTER_ANSWERS):
-                await quality.record_answer(question.id, question.text, "right", True)
+                await answer_stats.record_answer(
+                    str(uuid.uuid4()), question.id, question.text, "right", True
+                )
 
         now = datetime.now(UTC)
         # Both have served enough candidates; the copies were used just now.
@@ -156,9 +153,9 @@ def test_bank_questions_retire_after_enough_answers_and_are_revealed_once_idle(r
 
         return (
             first,
-            [q.stage for q in after_first.topics[0].questions],
+            [q.stage for q in after_first.topics[0].questions[:2]],
             second,
-            [q.stage for q in after_second.topics[0].questions],
+            [q.stage for q in after_second.topics[0].questions[:2]],
         )
 
     first, stages_first, second, stages_second = run(scenario())
@@ -172,7 +169,7 @@ def test_finished_topics_count_strong_weak_and_timeouts_for_copies_and_originals
     from app.services.answer_events import handle
 
     async def scenario():
-        template = await interview("Chemist", template=True, questions=2)
+        template = await interview("Chemist", template=True, questions=15)
         copy = await templates.copy_template(template, "company-8")
         question = (await preparations.get_content(copy.id)).topics[0].questions[0]
         result = {
@@ -181,8 +178,9 @@ def test_finished_topics_count_strong_weak_and_timeouts_for_copies_and_originals
             "correct": True,
             "timed_out": False,
         }
-        await handle("session.scored", {"final_score": 90, "answers": [result]})
+        await handle(str(uuid.uuid4()), "session.scored", {"final_score": 90, "answers": [result]})
         await handle(
+            str(uuid.uuid4()),
             "session.scored",
             {"final_score": 20, "answers": [result | {"correct": False, "timed_out": True}]},
         )

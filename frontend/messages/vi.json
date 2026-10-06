@@ -77,7 +77,7 @@
     "notFoundText": "Trang này không tồn tại hoặc đã bị xóa."
   },
   "home": {
-    "title": "Phỏng vấn mọi người\nTuyển người giỏi nhất",
+    "title": "Kiểm tra mọi người\nTuyển người giỏi nhất",
     "text": "Phỏng vấn có tính giờ, tạo từ mô tả công việc của bạn. Câu hỏi riêng cho mỗi ứng viên và giới hạn thời gian cho từng câu. Từ 1 $ mỗi ứng viên."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "trên {count, number}",
     "per": "mỗi",
     "candidate": "ứng viên",
-    "showOptions": "Hiện các phương án",
-    "hideOptions": "Ẩn các phương án",
     "correct": "Đáp án đúng",
     "wrong": "Đáp án sai",
     "regenerating": "Đang tạo lại…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "chủ sở hữu",
-    "admin": "quản trị viên"
+    "admin": "quản trị viên",
+    "viewer": "người xem",
+    "adminNote": "Tạo và thay đổi buổi phỏng vấn, mời ứng viên, nạp tín dụng.",
+    "viewerNote": "Xem buổi phỏng vấn và kết quả, chia sẻ báo cáo. Không thay đổi gì."
   },
   "company": {
     "title": "Công ty",
     "signInInterviews": "Đăng nhập để xem các buổi phỏng vấn của công ty.",
-    "signInAdmins": "Đăng nhập để xem quản trị viên của công ty.",
+    "signInTeam": "Đăng nhập để xem nhóm của công ty.",
     "signInReferrals": "Đăng nhập để xem liên kết mời của công ty.",
     "empty": "Chưa có công ty nào.",
     "owner": "Chủ sở hữu",
     "interviewCount": "{count, plural, other {# buổi phỏng vấn}}",
     "interviews": "Phỏng vấn",
     "templates": "Mẫu",
-    "admins": "Quản trị viên",
+    "team": "Nhóm",
     "referrals": "Lời mời",
     "new": "Công ty mới",
     "name": "Tên công ty",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Thời gian mỗi câu",
     "secondsLabel": "Thời gian mỗi câu tính bằng giây",
     "secondsUnit": "giây",
-    "adminEmail": "Email quản trị viên",
-    "addAdmin": "Thêm quản trị viên",
-    "adminFailed": "Không thể mời quản trị viên đó. Vui lòng thử lại.",
+    "memberEmail": "Email thành viên",
+    "addMember": "Thêm thành viên",
+    "memberFailed": "Không thể mời người này. Vui lòng thử lại.",
     "invite": "Mời",
     "jobDescription": "Mô tả công việc",
     "pasteJob": "Dán mô tả công việc: vị trí, yêu cầu và điểm cộng…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, other {# email không hợp lệ}}.",
       "limit": "{count, plural, other {# email}} vượt giới hạn email hiện tại của bạn. Hãy thử lại sau một giờ.",
       "no_credits": "{count, plural, other {# ứng viên chưa được mời}}: hết tín dụng. Hãy nạp thêm để mời họ.",
+      "started": "{count, plural, other {# ứng viên}} đã bắt đầu nên không được gửi email lại.",
       "failed": "{count, plural, other {# lời mời}} không gửi được. Hãy thử lại."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Đã tham gia",
     "invited": "Đã mời",
+    "role": "Vai trò",
+    "roleFailed": "Không thể thay đổi vai trò.",
     "copy": "Sao chép",
     "inviteTitle": "Lời mời vào công ty",
     "remove": "Xóa",
@@ -587,7 +591,22 @@
         "better": "Báo cáo nào cho thấy lợi nhuận trong một kỳ?"
       },
       "comment": "Tùy công ty, nên không có một đáp án đúng duy nhất.",
-      "list": "Kế toán cơ bản"
+      "list": "Kế toán cơ bản",
+      "options": {
+        "good": [
+          "Tài sản, nợ phải trả và vốn chủ sở hữu tại một ngày",
+          "Lợi nhuận trong một năm",
+          "Tiền vào và ra trong một tháng",
+          "Ngân sách năm sau"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Bảng cân đối kế toán",
+          "Báo cáo kết quả kinh doanh",
+          "Báo cáo lưu chuyển tiền tệ",
+          "Bảng cân đối thử"
+        ]
+      }
     },
     "try": {
       "title": "Thử trước khi ứng viên làm",

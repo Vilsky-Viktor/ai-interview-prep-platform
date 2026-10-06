@@ -4,14 +4,30 @@ import json
 import os
 
 from prepza_common import http
-from prepza_common.constants import EVENTS_TOPIC, PUBSUB_URL
+from prepza_common.constants import (
+    EVENT_ID_ATTRIBUTE,
+    EVENTS_TOPIC,
+    HTTP_TIMEOUT_SECONDS,
+    PUBSUB_URL,
+)
 from prepza_common.google import access_token, project, running_locally
 from pydantic import BaseModel
 
 
-async def publish(event_type: str, data: dict) -> None:
-    """Publishes a domain event to the `events` topic; each consumer gets it pushed to its
-    /internal/events, and Pub/Sub retries until it's handled. Locally it goes to the emulator."""
+def message(event_type: str, data: dict, event_id: str | None = None) -> dict:
+    """One event as Pub/Sub takes it; `event_id`, when given, stays the same on a re-send."""
+    attributes = {"type": event_type}
+
+    if event_id is not None:
+        attributes[EVENT_ID_ATTRIBUTE] = event_id
+
+    return {"data": base64.b64encode(json.dumps(data).encode()).decode(), "attributes": attributes}
+
+
+async def publish_batch(messages: list[dict], timeout: float = HTTP_TIMEOUT_SECONDS) -> None:
+    """Publishes events to the `events` topic in one call; Pub/Sub takes all or none. Each
+    consumer gets them pushed to its /internal/events, and Pub/Sub retries until they're handled.
+    Locally they go to the emulator."""
     headers = {}
 
     if running_locally():
@@ -20,17 +36,19 @@ async def publish(event_type: str, data: dict) -> None:
         base = PUBSUB_URL
         headers["Authorization"] = f"Bearer {await asyncio.to_thread(access_token)}"
 
-    message = {
-        "data": base64.b64encode(json.dumps(data).encode()).decode(),
-        "attributes": {"type": event_type},
-    }
     response = await http.get_client().post(
         f"{base}/v1/projects/{project()}/topics/{EVENTS_TOPIC}:publish",
-        json={"messages": [message]},
+        json={"messages": messages},
         headers=headers,
+        timeout=timeout,
     )
 
     response.raise_for_status()
+
+
+async def publish(event_type: str, data: dict, timeout: float = HTTP_TIMEOUT_SECONDS) -> None:
+    """Publishes one domain event (see publish_batch)."""
+    await publish_batch([message(event_type, data)], timeout)
 
 
 class PushMessage(BaseModel):
@@ -47,7 +65,10 @@ class PushBody(BaseModel):
 
 
 def event_of(body: PushBody) -> tuple[str, dict, str]:
-    """The event's type, its data, and Pub/Sub's id for it (stable across retries)."""
+    """The event's type, its data, and its id: the outbox's id, the same however often the event
+    is re-sent, or else Pub/Sub's (the same across Pub/Sub's own retries)."""
     data = json.loads(base64.b64decode(body.message.data)) if body.message.data else {}
+    attributes = body.message.attributes
+    event_id = attributes.get(EVENT_ID_ATTRIBUTE) or body.message.messageId
 
-    return body.message.attributes.get("type", ""), data, body.message.messageId
+    return attributes.get("type", ""), data, event_id

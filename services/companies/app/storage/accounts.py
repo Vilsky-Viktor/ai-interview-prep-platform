@@ -87,15 +87,24 @@ async def export(user_id: str, email: str) -> dict:
         }
 
 
-async def expired_invites(before: datetime) -> list:
-    """Invites last sent before `before`: kept CANDIDATE_RETENTION_DAYS after the latest send,
-    as the privacy policy says, so sending one again keeps its results longer."""
-    async with Session() as session:
-        return list(
-            await session.scalars(
-                select(CandidateInvite.id).where(CandidateInvite.sent_at < before)
-            )
+async def expired_invites(before: datetime, limit: int) -> list[tuple]:
+    """(id, interview id, email, status) of up to `limit` invites last sent before `before`:
+    kept CANDIDATE_RETENTION_DAYS after the latest send, as the privacy policy says, so sending
+    one again keeps its results longer."""
+    query = (
+        select(
+            CandidateInvite.id,
+            CandidateInvite.interview_id,
+            CandidateInvite.email,
+            CandidateInvite.status,
         )
+        .where(CandidateInvite.sent_at < before)
+        .order_by(CandidateInvite.sent_at)
+        .limit(limit)
+    )
+
+    async with Session() as session:
+        return [tuple(row) for row in await session.execute(query)]
 
 
 async def delete_invites(invite_ids: list) -> None:

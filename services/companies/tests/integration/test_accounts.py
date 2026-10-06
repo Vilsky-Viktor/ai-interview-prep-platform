@@ -2,7 +2,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 from app.constants.invites import InviteStatus
-from app.storage import accounts, companies, interviews, invites
+from app.storage import accounts, candidates, companies, interviews, invites
 
 
 def test_a_deleted_candidate_keeps_a_row_without_their_email(run):
@@ -10,13 +10,13 @@ def test_a_deleted_candidate_keeps_a_row_without_their_email(run):
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         interview = await interviews.create(company.id, uuid.uuid4(), "en")
         first = await invites.upsert(interview.id, "gone@example.com", "Backend", "Acme", "en")
-        await invites.start(first, "gone")
+        await invites.start(first.id, "gone")
         # A second address of the same person, never started: matched by email.
         await invites.upsert(interview.id, "Gone2@Example.com", "Backend", "Acme", "en")
         await accounts.forget_candidate("gone", "gone2@example.com")
 
         return (
-            await invites.list_for_interview(interview.id, 0, 10),
+            await candidates.page(interview.id, 0, 10, False),
             await invites.get_by_token(first.token),
         )
 
@@ -44,14 +44,16 @@ def test_only_invites_older_than_the_cutoff_expire(run):
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         interview = await interviews.create(company.id, uuid.uuid4(), "en")
         invite = await invites.upsert(interview.id, "carol@example.com", "Backend", "Acme", "en")
-        recent = await accounts.expired_invites(datetime.now(UTC) - timedelta(days=365))
-        everything = await accounts.expired_invites(datetime.now(UTC) + timedelta(seconds=1))
+        recent = await accounts.expired_invites(datetime.now(UTC) - timedelta(days=365), 1000)
+        everything = await accounts.expired_invites(datetime.now(UTC) + timedelta(seconds=1), 1000)
         await accounts.delete_invites([invite.id])
 
         return invite.id, recent, everything, await invites.get_by_token(invite.token)
 
     invite_id, recent, everything, after = run(scenario())
 
-    assert invite_id not in recent
-    assert invite_id in everything
+    assert invite_id not in [row[0] for row in recent]
+    assert (invite_id, "carol@example.com", InviteStatus.INVITED) in [
+        (row[0], row[2], row[3]) for row in everything
+    ]
     assert after is None

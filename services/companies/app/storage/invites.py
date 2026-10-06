@@ -8,8 +8,7 @@ from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.events import CANDIDATE_INVITED
-from app.constants.invites import InviteStatus
-from app.helpers.search import escape_like
+from app.constants.invites import NOT_STARTED, InviteStatus
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
@@ -145,18 +144,23 @@ async def expiring(before: datetime, limit: int) -> list[CandidateInvite]:
         return list(rows)
 
 
-async def mark_expired(invite_id: uuid.UUID) -> None:
-    """Expires an invite that still hasn't started."""
+async def mark_expired(invite_id: uuid.UUID, before: datetime) -> bool:
+    """Expires an invite that still hasn't started and wasn't sent again since `before`; False
+    when it was started or sent again meanwhile."""
     async with Session() as session:
-        await session.execute(
+        marked = await session.scalar(
             update(CandidateInvite)
             .where(
                 CandidateInvite.id == invite_id,
                 CandidateInvite.status.in_([InviteStatus.INVITED, InviteStatus.UNDELIVERED]),
+                CandidateInvite.sent_at < before,
             )
             .values(status=InviteStatus.EXPIRED)
+            .returning(CandidateInvite.id)
         )
         await session.commit()
+
+    return marked is not None
 
 
 async def get_by_token(token: str) -> tuple[CandidateInvite, Interview] | None:
@@ -172,15 +176,23 @@ async def get_by_token(token: str) -> tuple[CandidateInvite, Interview] | None:
         return tuple(row) if row else None
 
 
-async def start(invite: CandidateInvite, user_id: str) -> None:
+async def start(invite_id: uuid.UUID, user_id: str) -> bool:
+    """Marks the invite in process, an expired one too (a candidate back through the test's
+    link). False when it's gone: revoked meanwhile."""
     async with Session() as session:
-        stored = await session.get(CandidateInvite, invite.id)
+        stored = await session.get(CandidateInvite, invite_id, with_for_update=True)
+
+        if stored is None:
+            return False
+
         stored.user_id = user_id
 
-        if stored.status in (InviteStatus.INVITED, InviteStatus.UNDELIVERED):
+        if stored.status in NOT_STARTED:
             stored.status = InviteStatus.IN_PROCESS
 
         await session.commit()
+
+    return True
 
 
 async def mark_undelivered(invite_id: uuid.UUID, notice: dict) -> None:
@@ -203,14 +215,16 @@ async def mark_undelivered(invite_id: uuid.UUID, notice: dict) -> None:
         await session.commit()
 
 
-async def finish(invite_id: uuid.UUID, notice: dict | None) -> None:
-    """Marks the invite finished (the candidates list may have already), with the company's
-    notification, if any."""
+async def finish(
+    invite_id: uuid.UUID, grade: int | None, flagged: bool, notice: dict | None
+) -> None:
+    """Marks the invite finished (the candidates list may have already) with the candidate's
+    grade and integrity flag, and the company's notification, if any."""
     async with Session() as session:
         await session.execute(
             update(CandidateInvite)
             .where(CandidateInvite.id == invite_id)
-            .values(status=InviteStatus.FINISHED)
+            .values(status=InviteStatus.FINISHED, grade=grade, flagged=flagged)
         )
 
         if notice:
@@ -219,64 +233,11 @@ async def finish(invite_id: uuid.UUID, notice: dict | None) -> None:
         await session.commit()
 
 
-async def set_status(invite_ids: list, status: str) -> None:
-    if not invite_ids:
-        return
-
-    async with Session() as session:
-        await session.execute(
-            update(CandidateInvite).where(CandidateInvite.id.in_(invite_ids)).values(status=status)
-        )
-        await session.commit()
-
-
 async def remove(invite_id: uuid.UUID) -> None:
     """Deletes the invite; its link stops working."""
     async with Session() as session:
         await session.execute(delete(CandidateInvite).where(CandidateInvite.id == invite_id))
         await session.commit()
-
-
-def candidate_filters(interview_id, q: str, status: str | None) -> list:
-    """An interview's candidates, narrowed to an email containing `q` and a status."""
-    filters = [CandidateInvite.interview_id == interview_id]
-
-    if q:
-        filters.append(CandidateInvite.email.ilike(f"%{escape_like(q.lower())}%", escape="\\"))
-
-    if status:
-        filters.append(CandidateInvite.status == status)
-
-    return filters
-
-
-async def list_all_for_interview(
-    interview_id, q: str = "", status: str | None = None
-) -> list[CandidateInvite]:
-    """Every candidate of an interview, newest first, for sorting by grade."""
-    query = (
-        select(CandidateInvite)
-        .where(*candidate_filters(interview_id, q, status))
-        .order_by(CandidateInvite.created_at.desc(), CandidateInvite.id)
-    )
-
-    async with Session() as session:
-        return list(await session.scalars(query))
-
-
-async def list_for_interview(
-    interview_id, offset: int, limit: int, q: str = "", status: str | None = None
-) -> list[CandidateInvite]:
-    query = (
-        select(CandidateInvite)
-        .where(*candidate_filters(interview_id, q, status))
-        .order_by(CandidateInvite.created_at.desc(), CandidateInvite.id)
-        .offset(offset)
-        .limit(limit)
-    )
-
-    async with Session() as session:
-        return list(await session.scalars(query))
 
 
 async def set_extra_time(invite_id: uuid.UUID, extra_time: int) -> None:

@@ -26,7 +26,6 @@ def interview(generation_id, set_id):
         company_id=COMPANY_ID,
         generation_id=generation_id,
         set_id=set_id,
-        invites=[],
     )
 
 

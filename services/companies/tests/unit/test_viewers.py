@@ -1,0 +1,146 @@
+import uuid
+from datetime import UTC, datetime
+
+import pytest
+from prepza_common.auth import current_user
+from prepza_common.user import User
+
+from app.constants.roles import Role
+from app.integrations import billing, library
+from app.main import app
+from app.models.companies import Company, Member
+from app.models.interviews import Interview
+from app.models.invites import CandidateInvite
+from app.routers import companies as companies_route
+from app.services.access import can_edit
+from app.storage import companies, interviews, invites, members
+from tests.unit import fake_candidates
+
+COMPANY_ID = uuid.uuid4()
+INTERVIEW_ID = uuid.uuid4()
+INVITE_ID = uuid.uuid4()
+TOPIC_ID = uuid.uuid4()
+QUESTION_ID = uuid.uuid4()
+INTERVIEW = f"/interviews/{INTERVIEW_ID}"
+CANDIDATE = f"{INTERVIEW}/candidates/{INVITE_ID}"
+COMPANY = f"/companies/{COMPANY_ID}"
+
+# Every route that changes the company, its tests or candidates, or spends credits.
+FORBIDDEN = [
+    ("post", f"/interviews?company_id={COMPANY_ID}", {"text": "A Python developer"}),
+    ("post", f"/interviews/from-template?company_id={COMPANY_ID}", {"template_id": str(TOPIC_ID)}),
+    ("patch", f"{INTERVIEW}/settings", {"hired": True}),
+    ("patch", f"{INTERVIEW}/title", {"title": "New title"}),
+    ("delete", INTERVIEW, None),
+    ("put", f"{INTERVIEW}/topics/{TOPIC_ID}/limit", {"limit": 1}),
+    ("post", f"{INTERVIEW}/questions/{QUESTION_ID}/regenerate", None),
+    ("post", f"{INTERVIEW}/questions/{QUESTION_ID}/wrong", None),
+    ("post", f"{INTERVIEW}/generation/review", {"selected": [0]}),
+    ("post", f"{INTERVIEW}/generation/retry", None),
+    ("post", f"{INTERVIEW}/generation/cancel", None),
+    ("post", f"{INTERVIEW}/candidates", {"email": "cid@example.com"}),
+    ("post", f"{INTERVIEW}/candidates/bulk", {"text": "cid@example.com"}),
+    ("delete", CANDIDATE, None),
+    ("put", f"{CANDIDATE}/extra-time", {"extra_time": 25}),
+    ("put", f"{INTERVIEW}/link", {"on": True}),
+    ("patch", f"{COMPANY}/name", {"title": "New name"}),
+    ("put", f"{COMPANY}/logo", {"image": "aGVsbG8="}),
+    ("delete", f"{COMPANY}/logo", None),
+    ("put", f"{COMPANY}/website", {"website": "example.com"}),
+    ("put", f"{COMPANY}/auto-top-up", {"product": "small", "threshold": 10}),
+    ("delete", f"{COMPANY}/auto-top-up", None),
+    ("post", f"/members?company_id={COMPANY_ID}", {"email": "cid@example.com"}),
+]
+
+
+@pytest.fixture
+def viewer(monkeypatch):
+    """Bob is a viewer of a company with one generated test and one invited candidate."""
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="bob", email="bob@example.com", email_verified=True, name="Bob"
+    )
+    company = Company(id=COMPANY_ID, name="Arcolabs", created_at=datetime.now(UTC))
+    company.members = [
+        Member(
+            id=uuid.uuid4(),
+            company_id=COMPANY_ID,
+            user_id="bob",
+            invited_email="bob@example.com",
+            role=Role.VIEWER,
+            created_at=datetime.now(UTC),
+        )
+    ]
+    interview = Interview(
+        id=INTERVIEW_ID, company_id=COMPANY_ID, generation_id=uuid.uuid4(), set_id=uuid.uuid4()
+    )
+    invite = CandidateInvite(
+        id=INVITE_ID, interview_id=INTERVIEW_ID, email="cid@example.com", status="invited"
+    )
+    fake_candidates.add(invite)
+
+    async def fake_company(_company_id):
+        return company
+
+    async def fake_interview(_interview_id):
+        return interview
+
+    async def fake_invite(_invite_id):
+        return invite
+
+    monkeypatch.setattr(companies, "get", fake_company)
+    monkeypatch.setattr(interviews, "get", fake_interview)
+    monkeypatch.setattr(invites, "get", fake_invite)
+    yield company
+    app.dependency_overrides.clear()
+
+
+@pytest.mark.parametrize(("method", "url", "body"), FORBIDDEN)
+def test_a_viewer_changes_nothing(client, viewer, method, url, body):
+    response = client.request(method.upper(), url, json=body)
+
+    assert response.status_code == 403
+
+
+def test_a_viewer_reads_the_company_without_verifying_it(client, viewer, monkeypatch):
+    verified = []
+
+    async def fake_counts(company_ids):
+        return {}
+
+    async def fake_verify(company, user):
+        verified.append(user.uid)
+
+    async def fake_credits(company_id):
+        return {"available": 10, "low": False}
+
+    async def fake_list(company_id, offset, limit):
+        return viewer.members
+
+    monkeypatch.setattr(interviews, "counts", fake_counts)
+    monkeypatch.setattr(companies_route, "verify_by_email", fake_verify)
+    monkeypatch.setattr(billing, "company_credits", fake_credits)
+    monkeypatch.setattr(members, "list_for_company", fake_list)
+
+    company = client.get(COMPANY)
+
+    assert company.status_code == 200
+    assert (company.json()["role"], company.json()["can_edit"]) == ("viewer", False)
+    assert verified == []
+    assert client.get(f"{COMPANY}/credits").status_code == 200
+    assert client.get(f"/members?company_id={COMPANY_ID}").status_code == 200
+
+
+def test_a_viewer_reads_questions(client, viewer, monkeypatch):
+    async def fake_questions(set_id, topic_id):
+        return []
+
+    monkeypatch.setattr(library, "get_topic_questions", fake_questions)
+
+    assert client.get(f"{INTERVIEW}/topics/{TOPIC_ID}/questions").status_code == 200
+
+
+@pytest.mark.parametrize(
+    ("role", "editor"), [(Role.OWNER, True), (Role.ADMIN, True), (Role.VIEWER, False)]
+)
+def test_only_owners_and_admins_edit(role, editor):
+    assert can_edit(Member(role=role)) is editor

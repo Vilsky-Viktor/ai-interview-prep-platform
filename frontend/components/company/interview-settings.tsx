@@ -16,13 +16,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
-
-type Settings = {
-  question_seconds: number
-  hired: boolean
-  // The grade a finished candidate needs to pass.
-  pass_mark: number
-}
+import type { InterviewSettingsData } from "@/types/company"
 
 /** The interview's settings: the time each question has, the pass mark, and whether the
 company hired. Every interview is timed, and candidates never see their scores. */
@@ -39,7 +33,7 @@ export function InterviewSettings({
 }) {
   const t = useTranslations("interviews")
   const router = useRouter()
-  const [saved, setSaved] = useState<Settings>({
+  const [saved, setSaved] = useState<InterviewSettingsData>({
     question_seconds: questionSeconds,
     hired,
     pass_mark: passMark,
@@ -50,7 +44,7 @@ export function InterviewSettings({
 
   // Every setting goes together, so saving one never resets the others. The API checks the
   // ranges; its message shows if a value doesn't fit, and the field goes back.
-  async function save(change: Partial<Settings>) {
+  async function save(change: Partial<InterviewSettingsData>) {
     const next = { ...saved, ...change }
 
     if (saving || JSON.stringify(next) === JSON.stringify(saved)) {

@@ -77,7 +77,7 @@
     "notFoundText": "Seda lehte pole olemas või see on eemaldatud."
   },
   "home": {
-    "title": "Intervjueeri kõiki\nPalka parimad",
+    "title": "Testi kõiki\nPalka parimad",
     "text": "Ajapiiranguga intervjuud sinu töökuulutuse põhjal. Igale kandidaadile oma küsimused ja igal küsimusel taimer. Alates 1 $ kandidaadi kohta."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "/ {count, number}",
     "per": "iga",
     "candidate": "kandidaat",
-    "showOptions": "Näita vastusevariante",
-    "hideOptions": "Peida vastusevariandid",
     "correct": "Õige vastus",
     "wrong": "Vale vastus",
     "regenerating": "Luuakse uuesti…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "omanik",
-    "admin": "administraator"
+    "admin": "administraator",
+    "viewer": "vaataja",
+    "adminNote": "Loob ja muudab intervjuusid, kutsub kandidaate, laeb krediiti.",
+    "viewerNote": "Näeb intervjuusid ja tulemusi, jagab aruandeid. Ei muuda midagi."
   },
   "company": {
     "title": "Ettevõtted",
     "signInInterviews": "Ettevõtte intervjuude nägemiseks logi sisse.",
-    "signInAdmins": "Ettevõtte administraatorite nägemiseks logi sisse.",
+    "signInTeam": "Ettevõtte meeskonna nägemiseks logi sisse.",
     "signInReferrals": "Ettevõtte kutselingi nägemiseks logi sisse.",
     "empty": "Ettevõtteid veel pole.",
     "owner": "Omanik",
     "interviewCount": "{count, plural, one {# intervjuu} other {# intervjuud}}",
     "interviews": "Intervjuud",
     "templates": "Mallid",
-    "admins": "Administraatorid",
+    "team": "Meeskond",
     "referrals": "Kutsed",
     "new": "Uus ettevõte",
     "name": "Ettevõtte nimi",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Aeg küsimuse kohta",
     "secondsLabel": "Aeg küsimuse kohta sekundites",
     "secondsUnit": "s",
-    "adminEmail": "Administraatori e-post",
-    "addAdmin": "Lisa administraator",
-    "adminFailed": "Seda administraatorit ei õnnestunud kutsuda. Proovi uuesti.",
+    "memberEmail": "Liikme e-post",
+    "addMember": "Lisa liige",
+    "memberFailed": "Kutset ei õnnestunud saata. Proovi uuesti.",
     "invite": "Kutsu",
     "jobDescription": "Töö kirjeldus",
     "pasteJob": "Kleebi töö kirjeldus: roll, nõuded ja mis tuleb kasuks…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, one {# e-posti aadress pole kehtiv} other {# e-posti aadressi pole kehtivad}}.",
       "limit": "{count, plural, one {# aadress ületab} other {# aadressi ületavad}} praegu sinu e-kirjade piirangu. Proovi tunni pärast uuesti.",
       "no_credits": "{count, plural, one {# kandidaati ei kutsutud} other {# kandidaati ei kutsutud}}: krediidid said otsa. Nende kutsumiseks laadi juurde.",
+      "started": "{count, plural, one {# kandidaat on} other {# kandidaati on}} juba alustanud, seega neile uuesti ei kirjutatud.",
       "failed": "{count, plural, one {# kutset} other {# kutset}} ei õnnestunud saata. Proovi uuesti."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Liitunud",
     "invited": "Kutsutud",
+    "role": "Roll",
+    "roleFailed": "Rolli ei õnnestunud muuta.",
     "copy": "Kopeeri",
     "inviteTitle": "Ettevõtte kutse",
     "remove": "Eemalda",
@@ -595,7 +599,22 @@
         "better": "Milline aruanne näitab perioodi kasumit?"
       },
       "comment": "See sõltub ettevõttest, nii et ühte õiget vastust pole.",
-      "list": "Raamatupidamise alused"
+      "list": "Raamatupidamise alused",
+      "options": {
+        "good": [
+          "Varad, kohustused ja omakapital kuupäeva seisuga",
+          "Aasta kasum",
+          "Kuu raha sissetulek ja väljaminek",
+          "Järgmise aasta eelarve"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Bilanss",
+          "Kasumiaruanne",
+          "Rahavoogude aruanne",
+          "Proovibilanss"
+        ]
+      }
     },
     "try": {
       "title": "Proovi enne kandidaate",

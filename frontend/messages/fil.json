@@ -77,7 +77,7 @@
     "notFoundText": "Wala ang page na iyon o inalis na."
   },
   "home": {
-    "title": "I-interview ang lahat\nI-hire ang pinakamahusay",
+    "title": "I-test ang lahat\nI-hire ang pinakamahusay",
     "text": "Mga timed interview mula sa iyong job description. Ibang mga tanong sa bawat kandidato at timer sa bawat isa. Mula $1 bawat kandidato."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "sa {count, number}",
     "per": "bawat",
     "candidate": "kandidato",
-    "showOptions": "Ipakita ang mga opsyon sa sagot",
-    "hideOptions": "Itago ang mga opsyon sa sagot",
     "correct": "Tamang sagot",
     "wrong": "Maling sagot",
     "regenerating": "Ginagawa muli…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "may-ari",
-    "admin": "admin"
+    "admin": "admin",
+    "viewer": "viewer",
+    "adminNote": "Gumagawa at nagbabago ng mga interview, nag-iimbita ng mga kandidato, nagto-top up.",
+    "viewerNote": "Nakikita ang mga interview at resulta, nagbabahagi ng mga ulat. Walang binabago."
   },
   "company": {
     "title": "Mga kumpanya",
     "signInInterviews": "Mag-sign in para makita ang mga interview ng kumpanya.",
-    "signInAdmins": "Mag-sign in para makita ang mga admin ng kumpanya.",
+    "signInTeam": "Mag-sign in para makita ang team ng kumpanya.",
     "signInReferrals": "Mag-sign in para makita ang referral link ng kumpanya.",
     "empty": "Wala pang kumpanya.",
     "owner": "May-ari",
     "interviewCount": "{count, plural, one {# interview} other {# interview}}",
     "interviews": "Mga interview",
     "templates": "Mga template",
-    "admins": "Mga admin",
+    "team": "Team",
     "referrals": "Mga imbitasyon",
     "new": "Bagong kumpanya",
     "name": "Pangalan ng kumpanya",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Oras bawat tanong",
     "secondsLabel": "Oras bawat tanong sa segundo",
     "secondsUnit": "s",
-    "adminEmail": "Email ng admin",
-    "addAdmin": "Magdagdag ng admin",
-    "adminFailed": "Hindi maimbitahan ang admin na iyon. Pakisubukang muli.",
+    "memberEmail": "Email ng miyembro",
+    "addMember": "Magdagdag ng miyembro",
+    "memberFailed": "Hindi sila maimbitahan. Pakisubukang muli.",
     "invite": "Imbitahan",
     "jobDescription": "Job description",
     "pasteJob": "I-paste ang job description: ang role, ang mga requirement at ang mga bentahe…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, one {Hindi valid ang # email} other {Hindi valid ang # email}}.",
       "limit": "{count, plural, one {Lampas ang # email} other {Lampas ang # email}} sa iyong email limit sa ngayon. Subukang muli pagkalipas ng isang oras.",
       "no_credits": "{count, plural, one {Hindi naimbitahan ang # kandidato} other {Hindi naimbitahan ang # kandidato}}: ubos na ang credits. Mag-top up para maimbitahan sila.",
+      "started": "{count, plural, one {# kandidato ang} other {# kandidato ang}} nakapagsimula na, kaya hindi na sila pinadalhan ulit ng email.",
       "failed": "{count, plural, one {Hindi maipadala ang # imbitasyon} other {Hindi maipadala ang # imbitasyon}}. Subukang muli."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Sumali na",
     "invited": "Inimbitahan",
+    "role": "Tungkulin",
+    "roleFailed": "Hindi mapalitan ang tungkulin.",
     "copy": "Kopyahin",
     "inviteTitle": "Imbitasyon sa kumpanya",
     "remove": "Alisin",
@@ -595,7 +599,22 @@
         "better": "Aling statement ang nagpapakita ng kita sa isang panahon?"
       },
       "comment": "Depende ito sa kumpanya, kaya walang iisang tamang sagot.",
-      "list": "Mga batayan ng accounting"
+      "list": "Mga batayan ng accounting",
+      "options": {
+        "good": [
+          "Assets, liabilities at equity sa isang petsa",
+          "Kita sa loob ng isang taon",
+          "Pumasok at lumabas na pera sa isang buwan",
+          "Budget sa susunod na taon"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Balance sheet",
+          "Income statement",
+          "Cash flow statement",
+          "Trial balance"
+        ]
+      }
     },
     "try": {
       "title": "Subukan ito bago ang mga kandidato",

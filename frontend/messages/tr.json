@@ -77,7 +77,7 @@
     "notFoundText": "Bu sayfa yok ya da kaldırıldı."
   },
   "home": {
-    "title": "Herkesle mülakat yapın\nEn iyisini işe alın",
+    "title": "Herkesi test edin\nEn iyisini işe alın",
     "text": "İş tanımınızdan hazırlanan süreli mülakatlar. Her adaya özel sorular ve her soruda bir süre. Aday başına $1'dan başlar."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "/ {count, number}",
     "per": "her",
     "candidate": "aday",
-    "showOptions": "Cevap seçeneklerini göster",
-    "hideOptions": "Cevap seçeneklerini gizle",
     "correct": "Doğru cevap",
     "wrong": "Yanlış cevap",
     "regenerating": "Yeniden oluşturuluyor…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "sahip",
-    "admin": "yönetici"
+    "admin": "yönetici",
+    "viewer": "izleyici",
+    "adminNote": "Mülakatları oluşturur ve değiştirir, aday davet eder, kredi yükler.",
+    "viewerNote": "Mülakatları ve sonuçları görür, raporları paylaşır. Hiçbir şeyi değiştirmez."
   },
   "company": {
     "title": "Şirketler",
     "signInInterviews": "Şirketin mülakatlarını görmek için giriş yapın.",
-    "signInAdmins": "Şirket yöneticilerini görmek için giriş yapın.",
+    "signInTeam": "Şirket ekibini görmek için giriş yapın.",
     "signInReferrals": "Şirketin davet bağlantısını görmek için giriş yapın.",
     "empty": "Henüz şirket yok.",
     "owner": "Sahibi",
     "interviewCount": "{count, plural, one {# mülakat} other {# mülakat}}",
     "interviews": "Mülakatlar",
     "templates": "Şablonlar",
-    "admins": "Yöneticiler",
+    "team": "Ekip",
     "referrals": "Davetler",
     "new": "Yeni şirket",
     "name": "Şirket adı",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Soru başına süre",
     "secondsLabel": "Saniye cinsinden soru başına süre",
     "secondsUnit": "sn",
-    "adminEmail": "Yönetici e-postası",
-    "addAdmin": "Yönetici ekle",
-    "adminFailed": "Bu yönetici davet edilemedi. Lütfen tekrar deneyin.",
+    "memberEmail": "Üye e-postası",
+    "addMember": "Üye ekle",
+    "memberFailed": "Davet edilemedi. Lütfen tekrar deneyin.",
     "invite": "Davet et",
     "jobDescription": "İş tanımı",
     "pasteJob": "İş tanımını yapıştırın: pozisyon, gereksinimler ve tercih sebepleri…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, one {# e-posta geçerli değil} other {# e-posta geçerli değil}}.",
       "limit": "{count, plural, one {# e-posta} other {# e-posta}} şimdilik e-posta sınırınızı aşıyor. Bir saat sonra tekrar deneyin.",
       "no_credits": "{count, plural, one {# aday davet edilmedi} other {# aday davet edilmedi}}: krediniz bitti. Onları davet etmek için yükleme yapın.",
+      "started": "{count, plural, other {# aday}} zaten başladığı için yeniden e-posta gönderilmedi.",
       "failed": "{count, plural, one {# davet} other {# davet}} gönderilemedi. Tekrar deneyin."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Katıldı",
     "invited": "Davet edildi",
+    "role": "Rol",
+    "roleFailed": "Rol değiştirilemedi.",
     "copy": "Kopyala",
     "inviteTitle": "Şirket daveti",
     "remove": "Çıkar",
@@ -595,7 +599,17 @@
         "better": "Hangi tablo bir dönemin kârını gösterir?"
       },
       "comment": "Şirkete göre değişir, yani tek bir doğru cevap yok.",
-      "list": "Muhasebenin temelleri"
+      "list": "Muhasebenin temelleri",
+      "options": {
+        "good": [
+          "Bir tarihteki varlıklar, borçlar ve özkaynak",
+          "Bir yıllık kâr",
+          "Bir aydaki nakit giriş ve çıkışı",
+          "Gelecek yılın bütçesi"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": ["Bilanço", "Gelir tablosu", "Nakit akış tablosu", "Mizan"]
+      }
     },
     "try": {
       "title": "Adaylardan önce siz deneyin",

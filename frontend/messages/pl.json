@@ -77,7 +77,7 @@
     "notFoundText": "Ta strona nie istnieje albo została usunięta."
   },
   "home": {
-    "title": "Rozmawiaj z każdym\nZatrudniaj najlepszych",
+    "title": "Sprawdź każdego\nZatrudniaj najlepszych",
     "text": "Rozmowy na czas tworzone z Twojego opisu stanowiska. Unikalne pytania dla każdego kandydata i limit czasu na każde z nich. Od $1 za kandydata."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "z {count, number}",
     "per": "na",
     "candidate": "kandydata",
-    "showOptions": "Pokaż odpowiedzi do wyboru",
-    "hideOptions": "Ukryj odpowiedzi do wyboru",
     "correct": "Poprawna odpowiedź",
     "wrong": "Błędna odpowiedź",
     "regenerating": "Generowanie ponownie…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "właściciel",
-    "admin": "administrator"
+    "admin": "administrator",
+    "viewer": "obserwator",
+    "adminNote": "Tworzy i zmienia rozmowy, zaprasza kandydatów, doładowuje kredyty.",
+    "viewerNote": "Widzi rozmowy i wyniki, udostępnia raporty. Niczego nie zmienia."
   },
   "company": {
     "title": "Firmy",
     "signInInterviews": "Zaloguj się, aby zobaczyć rozmowy firmy.",
-    "signInAdmins": "Zaloguj się, aby zobaczyć administratorów firmy.",
+    "signInTeam": "Zaloguj się, aby zobaczyć zespół firmy.",
     "signInReferrals": "Zaloguj się, aby zobaczyć link polecający firmy.",
     "empty": "Nie ma jeszcze firm.",
     "owner": "Właściciel",
     "interviewCount": "{count, plural, one {# rozmowa} few {# rozmowy} many {# rozmów} other {# rozmowy}}",
     "interviews": "Rozmowy",
     "templates": "Szablony",
-    "admins": "Administratorzy",
+    "team": "Zespół",
     "referrals": "Polecenia",
     "new": "Nowa firma",
     "name": "Nazwa firmy",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Czas na pytanie",
     "secondsLabel": "Czas na pytanie w sekundach",
     "secondsUnit": "s",
-    "adminEmail": "E-mail administratora",
-    "addAdmin": "Dodaj administratora",
-    "adminFailed": "Nie udało się zaprosić tego administratora. Spróbuj ponownie.",
+    "memberEmail": "E-mail członka",
+    "addMember": "Dodaj członka",
+    "memberFailed": "Nie udało się zaprosić tej osoby. Spróbuj ponownie.",
     "invite": "Zaproś",
     "jobDescription": "Opis stanowiska",
     "pasteJob": "Wklej opis stanowiska: rolę, wymagania i mile widziane umiejętności…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, one {# adres e-mail jest nieprawidłowy} few {# adresy e-mail są nieprawidłowe} many {# adresów e-mail jest nieprawidłowych} other {# adresu e-mail jest nieprawidłowe}}.",
       "limit": "{count, plural, one {# adres e-mail przekracza} few {# adresy e-mail przekraczają} many {# adresów e-mail przekracza} other {# adresu e-mail przekracza}} na razie Twój limit e-maili. Spróbuj ponownie za godzinę.",
       "no_credits": "{count, plural, one {# kandydat nie został zaproszony} few {# kandydatów nie zostało zaproszonych} many {# kandydatów nie zostało zaproszonych} other {# kandydata nie zostało zaproszone}}: brak kredytów. Doładuj, aby ich zaprosić.",
+      "started": "{count, plural, one {# kandydat już zaczął} few {# kandydatów już zaczęło} many {# kandydatów już zaczęło} other {# kandydata już zaczęło}}, więc nie wysłano ponownie e-maila.",
       "failed": "{count, plural, one {# zaproszenia nie udało się wysłać} few {# zaproszeń nie udało się wysłać} many {# zaproszeń nie udało się wysłać} other {# zaproszenia nie udało się wysłać}}. Spróbuj ponownie."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Dołączył(a)",
     "invited": "Zaproszono",
+    "role": "Rola",
+    "roleFailed": "Nie udało się zmienić roli.",
     "copy": "Kopiuj",
     "inviteTitle": "Zaproszenie do firmy",
     "remove": "Usuń",
@@ -591,7 +595,22 @@
         "better": "Które sprawozdanie pokazuje zysk za okres?"
       },
       "comment": "To zależy od firmy, więc nie ma jednej dobrej odpowiedzi.",
-      "list": "Podstawy rachunkowości"
+      "list": "Podstawy rachunkowości",
+      "options": {
+        "good": [
+          "Aktywa, zobowiązania i kapitał na dany dzień",
+          "Zysk za rok",
+          "Wpływy i wydatki gotówki w miesiącu",
+          "Budżet na przyszły rok"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Bilans",
+          "Rachunek zysków i strat",
+          "Rachunek przepływów pieniężnych",
+          "Zestawienie obrotów i sald"
+        ]
+      }
     },
     "try": {
       "title": "Wypróbuj, zanim zrobią to kandydaci",

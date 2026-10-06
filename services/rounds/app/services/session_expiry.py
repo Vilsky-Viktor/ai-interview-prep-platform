@@ -2,7 +2,6 @@ import uuid
 from datetime import UTC, datetime
 
 from app.constants.rounds import EXPIRY_BATCH, RoundStatus
-from app.helpers.scores import final_score
 from app.services import outbox as outbox_service
 from app.storage import session_expiry, sessions
 
@@ -11,8 +10,7 @@ async def finish_invite(invite_id: uuid.UUID) -> None:
     """Finishes every open section of the interview; unanswered questions count as wrong."""
     for row in await sessions.list_for_invite(invite_id):
         if row.status == RoundStatus.IN_PROGRESS:
-            scores = [answer.score for answer in row.answers]
-            await sessions.finish(row.id, final_score(scores, len(row.questions)))
+            await sessions.finish(row.id)
 
     await outbox_service.flush_quietly()
 

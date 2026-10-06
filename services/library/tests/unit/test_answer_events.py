@@ -4,7 +4,8 @@ import uuid
 
 import pytest
 
-from app.storage import quality
+from app.services import answer_events
+from app.storage import answer_stats
 
 QUESTION_ID = uuid.uuid4()
 
@@ -36,27 +37,61 @@ def emulator(monkeypatch):
 
 
 @pytest.fixture(autouse=True)
-def no_source(monkeypatch):
-    """Questions aren't copies of a bank question unless a test says so."""
+def no_reviews(monkeypatch):
+    reviewed = []
 
-    async def source_of(_question_id):
-        return None
+    async def review(question_id):
+        reviewed.append(question_id)
 
-    monkeypatch.setattr(quality, "source_of", source_of)
+    monkeypatch.setattr(answer_events, "review", review)
+
+    return reviewed
 
 
-def test_recorded_answer_goes_into_the_question_statistics(client, monkeypatch):
+def test_recorded_answer_goes_into_the_question_statistics(client, monkeypatch, no_reviews):
     stored = []
 
-    async def record_answer(question_id, question_text, option, correct):
-        stored.append((question_id, question_text, option, correct))
+    async def record_answer(event_id, question_id, question_text, option, correct):
+        stored.append((event_id, question_id, question_text, option, correct))
 
-    monkeypatch.setattr(quality, "record_answer", record_answer)
+        return [question_id]
+
+    monkeypatch.setattr(answer_stats, "record_answer", record_answer)
 
     response = client.post("/internal/events", json=push("answer.recorded", RECORDED))
 
     assert response.status_code == 204
-    assert stored == [(QUESTION_ID, "Which account is debited?", "Cash", True)]
+    assert stored == [("1", QUESTION_ID, "Which account is debited?", "Cash", True)]
+    assert no_reviews == [QUESTION_ID]
+
+
+def test_an_event_counted_before_isnt_reviewed_again(client, monkeypatch, no_reviews):
+    async def counted_before(*args):
+        return None
+
+    monkeypatch.setattr(answer_stats, "record_answer", counted_before)
+
+    response = client.post("/internal/events", json=push("answer.recorded", RECORDED))
+
+    assert response.status_code == 204
+    assert no_reviews == []
+
+
+def test_a_scored_topic_counts_each_result_in_the_candidates_group(client, monkeypatch):
+    stored = []
+
+    async def record_results(event_id, group, results):
+        stored.append((event_id, group, [result["question_id"] for result in results]))
+
+        return []
+
+    monkeypatch.setattr(answer_stats, "record_results", record_results)
+    result = {"question_id": str(QUESTION_ID), "question_text": "Q?", "correct": True}
+    scored = {"final_score": 90, "answers": [result | {"timed_out": False}]}
+
+    client.post("/internal/events", json=push("session.scored", scored))
+
+    assert stored == [("1", "strong", [str(QUESTION_ID)])]
 
 
 def test_other_events_are_accepted_without_action(client):
@@ -69,7 +104,7 @@ def test_a_failure_answers_with_an_error_so_pubsub_retries(client, monkeypatch):
     async def database_down(*args):
         raise ConnectionError("database is down")
 
-    monkeypatch.setattr(quality, "record_answer", database_down)
+    monkeypatch.setattr(answer_stats, "record_answer", database_down)
 
     with pytest.raises(ConnectionError):
         client.post("/internal/events", json=push("answer.recorded", RECORDED))
@@ -82,21 +117,3 @@ def test_pushes_without_a_google_token_are_refused_in_google_cloud(client, monke
     response = client.post("/internal/events", json=push("answer.recorded", RECORDED))
 
     assert response.status_code == 401
-
-
-def test_an_answer_to_a_copy_counts_for_its_bank_original_too(client, monkeypatch):
-    original = uuid.uuid4()
-    stored = []
-
-    async def source_of(_question_id):
-        return original
-
-    async def record_answer(question_id, question_text, option, correct):
-        stored.append(question_id)
-
-    monkeypatch.setattr(quality, "source_of", source_of)
-    monkeypatch.setattr(quality, "record_answer", record_answer)
-
-    client.post("/internal/events", json=push("answer.recorded", RECORDED))
-
-    assert stored == [QUESTION_ID, original]

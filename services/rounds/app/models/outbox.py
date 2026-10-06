@@ -1,7 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, String
+from sqlalchemy import DateTime, Integer, String
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -20,3 +20,5 @@ class OutboxEvent(Base):
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), index=True)
+    # Times Pub/Sub refused this event; the outbox parks it after a few.
+    attempts: Mapped[int] = mapped_column(Integer, default=0, server_default="0")

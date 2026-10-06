@@ -31,10 +31,13 @@ class InviteStatus(StrEnum):
 
 # Statuses of an invite the candidate hasn't started: its credits are set aside, not charged.
 NOT_STARTED = (InviteStatus.INVITED, InviteStatus.UNDELIVERED, InviteStatus.EXPIRED)
+STARTED = (InviteStatus.IN_PROCESS, InviteStatus.FINISHED)
 
 
 # Candidate invites, with the candidate's results, are kept this long after they're sent.
 CANDIDATE_RETENTION_DAYS = 365
+# Invites deleted per batch of the daily retention run.
+RETENTION_BATCH = 200
 # An invite never started this long after it was last sent expires, and its credits come back.
 INVITE_EXPIRY_DAYS = 30
 # Inviting many at once: the most emails one list may hold, and the longest text pasted or
@@ -54,6 +57,8 @@ class SkipReason(StrEnum):
     LIMIT = "limit"
     # The company ran out of credits; the rest of the list wasn't tried.
     NO_CREDITS = "no_credits"
+    # The candidate already started or finished: a list doesn't email them again.
+    STARTED = "started"
     FAILED = "failed"
 
 

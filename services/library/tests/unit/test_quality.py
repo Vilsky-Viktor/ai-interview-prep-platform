@@ -115,12 +115,13 @@ def record(monkeypatch, found, generation_down=False):
     return calls
 
 
-def test_a_new_flag_goes_to_the_verifier_then_is_saved(monkeypatch):
+def test_a_new_flag_is_saved_then_goes_to_the_verifier(monkeypatch):
+    """Saved first, so the verifier finds the flag it's asked to act on."""
     calls = record(monkeypatch, stored())
 
     asyncio.run(review(QUESTION_ID))
 
-    assert calls == [("verify", QualityFlag.WRONG_KEY), ("save", QualityFlag.WRONG_KEY)]
+    assert calls == [("save", QualityFlag.WRONG_KEY), ("verify", QualityFlag.WRONG_KEY)]
 
 
 def test_a_known_flag_is_not_sent_again(monkeypatch):
@@ -139,12 +140,60 @@ def test_a_kept_question_is_never_flagged(monkeypatch):
     assert calls == []
 
 
-def test_flag_is_not_saved_when_the_verifier_is_unreachable(monkeypatch):
+def test_a_flag_stays_saved_when_the_verifier_is_unreachable(monkeypatch):
+    """The daily sweep (resend_stale_flags) sends it again."""
     calls = record(monkeypatch, stored(), generation_down=True)
 
     asyncio.run(review(QUESTION_ID))
 
-    assert calls == []
+    assert calls == [("save", QualityFlag.WRONG_KEY)]
+
+
+def test_marking_wrong_again_while_the_check_waits_changes_nothing(monkeypatch):
+    from app.services.quality import mark_wrong
+
+    calls = record(monkeypatch, stored())
+    current = {"flag": None}
+
+    async def current_flag(_question_id):
+        return current["flag"]
+
+    async def save(question_id, flag, kept=False, notice=None):
+        current["flag"] = flag
+        calls.append(("save", flag))
+
+    monkeypatch.setattr(quality, "current_flag", current_flag)
+    monkeypatch.setattr(quality, "save_flag", save)
+
+    asyncio.run(mark_wrong(QUESTION_ID))
+    asyncio.run(mark_wrong(QUESTION_ID))
+
+    assert calls == [("save", QualityFlag.WRONG_KEY), ("verify", QualityFlag.WRONG_KEY)]
+
+
+def test_flags_left_unfixed_go_to_the_verifier_again(monkeypatch):
+    from datetime import UTC, datetime, timedelta
+
+    from app.constants.quality import FLAG_RESEND_AFTER_HOURS, MAX_FLAG_RESENDS
+    from app.services.quality import resend_stale_flags
+
+    calls = record(monkeypatch, stored(), generation_down=False)
+    asked = []
+
+    async def take_stale_flags(before, limit):
+        asked.append((before, limit))
+
+        return [(QUESTION_ID, QualityFlag.REWRITE)]
+
+    monkeypatch.setattr(quality, "take_stale_flags", take_stale_flags)
+
+    assert asyncio.run(resend_stale_flags()) == 1
+
+    [(before, limit)] = asked
+    expected = datetime.now(UTC) - timedelta(hours=FLAG_RESEND_AFTER_HOURS)
+    assert abs((before - expected).total_seconds()) < 5
+    assert limit == MAX_FLAG_RESENDS
+    assert calls == [("verify", QualityFlag.REWRITE)]
 
 
 def stats_of(**counts):

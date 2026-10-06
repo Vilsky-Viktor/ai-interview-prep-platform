@@ -62,6 +62,7 @@ export default async function InterviewsPage({
         verifiedDomain={company.verified_domain ?? null}
         websiteDomain={company.website_domain ?? null}
         current="interviews"
+        canEdit={company.can_edit}
         action={
           <div className="flex shrink-0 items-center gap-6">
             {credits != null && catalog && (
@@ -71,21 +72,28 @@ export default async function InterviewsPage({
                 credits={credits.available}
                 low={credits.low}
                 catalog={catalog}
+                canEdit={company.can_edit}
               />
             )}
-            <Button
-              render={<Link href={`/company/${companyId}/interviews/new`} />}
-              nativeButton={false}
-              className="h-12 px-6 text-base"
-            >
-              {t("new")}
-            </Button>
+            {company.can_edit && (
+              <Button
+                render={<Link href={`/company/${companyId}/interviews/new`} />}
+                nativeButton={false}
+                className="h-12 px-6 text-base"
+              >
+                {t("new")}
+              </Button>
+            )}
           </div>
         }
       />
 
       {interviews && (
-        <InterviewList companyId={companyId} initial={interviews} />
+        <InterviewList
+          companyId={companyId}
+          initial={interviews}
+          canEdit={company.can_edit}
+        />
       )}
     </main>
   )

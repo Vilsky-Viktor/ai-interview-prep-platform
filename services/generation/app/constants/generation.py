@@ -44,8 +44,11 @@ FILL_ATTEMPTS = 3
 # spare saves a round when one comes back a duplicate.
 FILL_SPARE_QUESTIONS = 2
 
-# The changes a reviewer describes in words during topic review.
+# The changes a reviewer describes in words during topic review, and how many times one
+# generation's topics may be revised that way.
 MAX_INSTRUCTIONS_LENGTH = 500
+MAX_TOPIC_REVISIONS = 10
+TOO_MANY_REVISIONS = "These topics can't be changed in words any more. Choose the topics to keep."
 
 # A generation stops after this long: Cloud Tasks gives one request at most 30 minutes.
 JOB_TIMEOUT_SECONDS = 25 * 60
@@ -58,6 +61,9 @@ VERIFY_QUESTION = "/internal/jobs/verify-question"
 # A running job updates its row as it goes; one untouched for longer than a job may run has lost
 # its worker. The margin covers the last update coming a little before the timeout.
 STUCK_AFTER_SECONDS = JOB_TIMEOUT_SECONDS + 10 * 60
+# A queued generation may only be waiting for a free worker; one queued this long has lost its
+# job (the queue failed to take it).
+QUEUED_STUCK_AFTER_SECONDS = 2 * 60 * 60
 
 GENERATION_FAILED = "Generation failed. Please try again."
 GENERATION_STOPPED = "Generation stopped unexpectedly. Please try again."

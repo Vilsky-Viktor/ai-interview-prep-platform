@@ -77,7 +77,7 @@
     "notFoundText": "Essa página não existe ou foi removida."
   },
   "home": {
-    "title": "Entreviste todos\nContrate os melhores",
+    "title": "Teste todos\nContrate os melhores",
     "text": "Entrevistas cronometradas criadas a partir da sua descrição de vaga. Questões únicas para cada candidato e um cronômetro em cada uma. A partir de $1 por candidato."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "de {count, number}",
     "per": "por",
     "candidate": "candidato",
-    "showOptions": "Mostrar opções de resposta",
-    "hideOptions": "Ocultar opções de resposta",
     "correct": "Resposta correta",
     "wrong": "Resposta errada",
     "regenerating": "Gerando novamente…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "dono",
-    "admin": "administrador"
+    "admin": "administrador",
+    "viewer": "observador",
+    "adminNote": "Cria e altera entrevistas, convida candidatos, recarrega créditos.",
+    "viewerNote": "Vê entrevistas e resultados, compartilha relatórios. Não altera nada."
   },
   "company": {
     "title": "Empresas",
     "signInInterviews": "Entre para ver as entrevistas da empresa.",
-    "signInAdmins": "Entre para ver os administradores da empresa.",
+    "signInTeam": "Entre para ver a equipe da empresa.",
     "signInReferrals": "Entre para ver o link de convite da empresa.",
     "empty": "Ainda não há empresas.",
     "owner": "Dono",
     "interviewCount": "{count, plural, one {# entrevista} other {# entrevistas}}",
     "interviews": "Entrevistas",
     "templates": "Modelos",
-    "admins": "Administradores",
+    "team": "Equipe",
     "referrals": "Convites",
     "new": "Nova empresa",
     "name": "Nome da empresa",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Tempo por questão",
     "secondsLabel": "Tempo por questão em segundos",
     "secondsUnit": "s",
-    "adminEmail": "E-mail do administrador",
-    "addAdmin": "Adicionar administrador",
-    "adminFailed": "Não foi possível convidar esse administrador. Tente novamente.",
+    "memberEmail": "E-mail do membro",
+    "addMember": "Adicionar membro",
+    "memberFailed": "Não foi possível convidar essa pessoa. Tente novamente.",
     "invite": "Convidar",
     "jobDescription": "Descrição da vaga",
     "pasteJob": "Cole a descrição da vaga: a função, os requisitos e os diferenciais…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, one {# e-mail não é válido} other {# e-mails não são válidos}}.",
       "limit": "{count, plural, one {# e-mail ultrapassa} other {# e-mails ultrapassam}} seu limite de e-mails por enquanto. Tente novamente em uma hora.",
       "no_credits": "{count, plural, one {# candidato não foi convidado} other {# candidatos não foram convidados}}: créditos esgotados. Recarregue para convidá-los.",
+      "started": "{count, plural, one {# candidato já começou} other {# candidatos já começaram}}, então não receberam outro e-mail.",
       "failed": "{count, plural, one {# convite não pôde ser enviado} other {# convites não puderam ser enviados}}. Tente novamente."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Participando",
     "invited": "Convidado",
+    "role": "Função",
+    "roleFailed": "Não foi possível alterar a função.",
     "copy": "Copiar",
     "inviteTitle": "Convite para a empresa",
     "remove": "Remover",
@@ -587,7 +591,22 @@
         "better": "Qual demonstração mostra o lucro de um período?"
       },
       "comment": "Depende da empresa, então não há uma única resposta certa.",
-      "list": "Fundamentos de contabilidade"
+      "list": "Fundamentos de contabilidade",
+      "options": {
+        "good": [
+          "Ativos, passivos e patrimônio em uma data",
+          "O lucro de um ano",
+          "Entradas e saídas de caixa em um mês",
+          "O orçamento do próximo ano"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Balanço patrimonial",
+          "Demonstração de resultados",
+          "Demonstração dos fluxos de caixa",
+          "Balancete"
+        ]
+      }
     },
     "try": {
       "title": "Experimente antes dos candidatos",

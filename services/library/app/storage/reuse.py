@@ -9,18 +9,21 @@ from app.storage.db import Session
 
 # The bank: proven private questions of templates of the level whose topic is close to the new
 # one. The same text can sit in several templates; each is offered once, from its closest topic.
+# The templates of the level and language are found first (ix_sets_kind_level_language), so
+# distances are measured only to their topics, never to every company test's.
 FIND_SQL = text(
     """
+    WITH templates AS MATERIALIZED (
+        SELECT id FROM sets WHERE kind = :kind AND level = :level AND language = :language
+    )
     SELECT id, text, options FROM (
         SELECT DISTINCT ON (q.text) q.id, q.text, q.options, qs.answers,
             t.embedding <=> CAST(:embedding AS vector) AS distance
-        FROM topics t
-        JOIN sets s ON s.id = t.set_id
+        FROM templates s
+        JOIN topics t ON t.set_id = s.id
         JOIN questions q ON q.topic_id = t.id
         JOIN question_stats qs ON qs.question_id = q.id
-        WHERE s.kind = :kind AND s.level = :level
-            AND s.language = :language
-            AND t.embedding <=> CAST(:embedding AS vector) <= :max_distance
+        WHERE t.embedding <=> CAST(:embedding AS vector) <= :max_distance
             AND q.stage = :stage AND qs.flag IS NULL AND qs.answers >= :min_answers
         ORDER BY q.text, distance
     ) candidates

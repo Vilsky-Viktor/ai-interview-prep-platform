@@ -54,7 +54,6 @@ def setup(monkeypatch):
             question_seconds=60,
             hired=False,
             link_token=None,
-            invites=[],
             created_at=datetime.now(UTC),
         )
 

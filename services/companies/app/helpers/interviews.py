@@ -43,7 +43,7 @@ def interview_status(hired: bool, candidate_count: int) -> InterviewStatus:
     return InterviewStatus.IN_PROCESS if candidate_count else InterviewStatus.NEW
 
 
-async def interview_out(interview: Interview) -> InterviewOut:
+async def interview_out(interview: Interview, candidate_count: int = 0) -> InterviewOut:
     interview = await attach_set(interview)
     title = await interview_title(interview)
 
@@ -53,11 +53,11 @@ async def interview_out(interview: Interview) -> InterviewOut:
         set_id=interview.set_id,
         title=title,
         question_seconds=interview.question_seconds,
-        candidate_count=len(interview.invites),
+        candidate_count=candidate_count,
         hired=interview.hired,
         pass_mark=interview.pass_mark,
         link_token=interview.link_token,
-        status=interview_status(interview.hired, len(interview.invites)),
+        status=interview_status(interview.hired, candidate_count),
         created_at=interview.created_at,
     )
 

@@ -20,7 +20,8 @@ export function ChoiceOptions({
   return (
     <ul className="space-y-2">
       {options.map((option, index) => (
-        <li key={option}>
+        // By place: two options can read the same, and the list never reorders.
+        <li key={index}>
           <button
             type="button"
             disabled={disabled}

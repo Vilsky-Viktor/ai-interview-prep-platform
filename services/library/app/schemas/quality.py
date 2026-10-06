@@ -15,3 +15,5 @@ class QuestionQuality(BaseModel):
     answers: int
     option_picks: dict[str, int]
     reports: list[ReportNote]
+    # The flag the verifier acts on; None once the question was kept or replaced since.
+    flag: str | None = None

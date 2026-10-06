@@ -18,7 +18,7 @@ class Notification(Base):
     )
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    # Pub/Sub's message id: a retried event is stored once.
+    # The event's id (pubsub.event_of): a retried or re-sent event is stored once.
     event_id: Mapped[str] = mapped_column(String(128), unique=True)
     recipient: Mapped[str] = mapped_column(String(16))
     recipient_id: Mapped[str] = mapped_column(String(128))

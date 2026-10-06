@@ -11,7 +11,7 @@ from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
 from app.integrations import billing
 from app.schemas.invites import InviteStartOut, LinkIn, LinkOut, LinkView
-from app.services.access import require_manager
+from app.services.access import require_editor
 from app.services.candidate_start import start_sessions
 from app.storage import companies, interviews, invites
 
@@ -37,7 +37,7 @@ async def set_link(interview_id: UUID, body: LinkIn, user: CurrentUser) -> LinkO
     if interview is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
-    await require_manager(user, interview)
+    await require_editor(user, interview.company_id)
     token = (interview.link_token or secrets.token_urlsafe(LINK_TOKEN_BYTES)) if body.on else None
     await interviews.set_link(interview.id, token)
 

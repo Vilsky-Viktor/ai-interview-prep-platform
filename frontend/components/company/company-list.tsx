@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/tooltip"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
+import { byId } from "@/lib/paged-list"
 import type { Company } from "@/types/company"
 
 const PATH = "/companies/companies"
@@ -23,7 +24,7 @@ const PATH = "/companies/companies"
 export function CompanyList({ initial }: { initial: Company[] }) {
   const t = useTranslations("company")
   const roles = useTranslations("roles")
-  const { items, loadMore } = usePagedList(PATH, initial)
+  const { items, loadMore } = usePagedList(PATH, byId, initial)
 
   if (items.length === 0) {
     return (
@@ -36,7 +37,7 @@ export function CompanyList({ initial }: { initial: Company[] }) {
   return (
     <VirtualList
       items={items}
-      getKey={(company) => company.id}
+      getKey={byId}
       estimateSize={77}
       onEndReached={loadMore}
       className="divide-y overflow-hidden rounded-2xl border"

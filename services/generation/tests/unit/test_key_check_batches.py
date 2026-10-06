@@ -18,7 +18,7 @@ class FakeStore:
         self.rows = dict(rows)
 
     def install(self, monkeypatch):
-        async def unsent():
+        async def unsent(limit):
             return [row(qid) for qid, batch in self.rows.items() if batch is None]
 
         async def sent_batches():

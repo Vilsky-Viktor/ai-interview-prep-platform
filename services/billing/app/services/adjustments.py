@@ -4,6 +4,7 @@ from prepza_common.analytics import track
 
 from app.constants.credits import Reason
 from app.constants.products import ADJUSTMENT_APPROVED
+from app.services.referrals import take_back_reward
 from app.storage import ledger, purchases
 
 logger = logging.getLogger(__name__)
@@ -31,7 +32,8 @@ async def handle_adjustment(data: dict) -> None:
     """Takes back the credits of an approved refund or a chargeback, and returns them when a
     chargeback is reversed. Each adjustment counts once, however often Paddle sends it. The
     balance may go negative if the credits were spent; then nothing can be spent until a
-    top-up covers it."""
+    top-up covers it. Taking back all of a top-up also takes back the referral rewards it paid
+    (not returned by a chargeback's reversal: the company's next top-up pays them again)."""
     found = ACTIONS.get(data.get("action"))
 
     if found is None or data.get("status") != ADJUSTMENT_APPROVED:
@@ -59,3 +61,6 @@ async def handle_adjustment(data: dict) -> None:
             why=reason,
             credits=sign * credits,
         )
+
+    if sign < 0 and granted and credits >= granted:
+        await take_back_reward(owner_id, data["transaction_id"])

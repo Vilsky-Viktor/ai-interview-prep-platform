@@ -77,7 +77,7 @@
     "notFoundText": "Deze pagina bestaat niet of is verwijderd."
   },
   "home": {
-    "title": "Spreek iedereen\nNeem de besten aan",
+    "title": "Test iedereen\nNeem de besten aan",
     "text": "Sollicitatiegesprekken met tijdslimiet, gemaakt van je functieomschrijving. Unieke vragen voor elke kandidaat en een timer bij elke vraag. Vanaf $1 per kandidaat."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "van {count, number}",
     "per": "per",
     "candidate": "kandidaat",
-    "showOptions": "Antwoordopties tonen",
-    "hideOptions": "Antwoordopties verbergen",
     "correct": "Juist antwoord",
     "wrong": "Fout antwoord",
     "regenerating": "Opnieuw genereren…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "eigenaar",
-    "admin": "beheerder"
+    "admin": "beheerder",
+    "viewer": "kijker",
+    "adminNote": "Maakt en wijzigt sollicitatiegesprekken, nodigt kandidaten uit, waardeert op.",
+    "viewerNote": "Ziet sollicitatiegesprekken en resultaten, deelt rapporten. Wijzigt niets."
   },
   "company": {
     "title": "Bedrijven",
     "signInInterviews": "Log in om de sollicitatiegesprekken van het bedrijf te zien.",
-    "signInAdmins": "Log in om de beheerders van het bedrijf te zien.",
+    "signInTeam": "Log in om het team van het bedrijf te zien.",
     "signInReferrals": "Log in om de uitnodigingslink van het bedrijf te zien.",
     "empty": "Nog geen bedrijven.",
     "owner": "Eigenaar",
     "interviewCount": "{count, plural, one {# sollicitatiegesprek} other {# sollicitatiegesprekken}}",
     "interviews": "Gesprekken",
     "templates": "Sjablonen",
-    "admins": "Beheerders",
+    "team": "Team",
     "referrals": "Uitnodigingen",
     "new": "Nieuw bedrijf",
     "name": "Bedrijfsnaam",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Tijd per vraag",
     "secondsLabel": "Tijd per vraag in seconden",
     "secondsUnit": "s",
-    "adminEmail": "E-mailadres beheerder",
-    "addAdmin": "Beheerder toevoegen",
-    "adminFailed": "Die beheerder kon niet worden uitgenodigd. Probeer het opnieuw.",
+    "memberEmail": "E-mailadres lid",
+    "addMember": "Lid toevoegen",
+    "memberFailed": "Uitnodigen is mislukt. Probeer het opnieuw.",
     "invite": "Uitnodigen",
     "jobDescription": "Functieomschrijving",
     "pasteJob": "Plak de functieomschrijving: de rol, de eisen en wat een pre is…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, one {# e-mailadres is ongeldig} other {# e-mailadressen zijn ongeldig}}.",
       "limit": "{count, plural, one {# e-mailadres valt} other {# e-mailadressen vallen}} voorlopig buiten je e-maillimiet. Probeer het over een uur opnieuw.",
       "no_credits": "{count, plural, one {# kandidaat is niet uitgenodigd} other {# kandidaten zijn niet uitgenodigd}}: credits op. Waardeer op om ze uit te nodigen.",
+      "started": "{count, plural, one {# kandidaat is} other {# kandidaten zijn}} al begonnen en {count, plural, one {kreeg} other {kregen}} dus geen nieuwe e-mail.",
       "failed": "{count, plural, one {# uitnodiging kon} other {# uitnodigingen konden}} niet worden verzonden. Probeer het opnieuw."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Doet mee",
     "invited": "Uitgenodigd",
+    "role": "Rol",
+    "roleFailed": "De rol kon niet worden gewijzigd.",
     "copy": "Kopiëren",
     "inviteTitle": "Uitnodiging voor het bedrijf",
     "remove": "Verwijderen",
@@ -587,7 +591,22 @@
         "better": "Welk overzicht toont de winst over een periode?"
       },
       "comment": "Het hangt van het bedrijf af, dus er is geen enkel juist antwoord.",
-      "list": "Basis van boekhouden"
+      "list": "Basis van boekhouden",
+      "options": {
+        "good": [
+          "Bezittingen, schulden en eigen vermogen op een datum",
+          "De winst over een jaar",
+          "Geld in en uit in een maand",
+          "Het budget van volgend jaar"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Balans",
+          "Winst-en-verliesrekening",
+          "Kasstroomoverzicht",
+          "Proefbalans"
+        ]
+      }
     },
     "try": {
       "title": "Probeer het voordat kandidaten het doen",

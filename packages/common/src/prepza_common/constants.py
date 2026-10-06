@@ -29,12 +29,23 @@ REDACTED_EMAIL = "[email]"
 # Pub/Sub: the one topic every domain event goes to, and its REST API.
 EVENTS_TOPIC = "events"
 PUBSUB_URL = "https://pubsub.googleapis.com"
+# The attribute that carries an event's own id (its outbox row's), the same on every re-send, so
+# consumers can handle it once; events sent without an outbox go without it.
+EVENT_ID_ATTRIBUTE = "event_id"
+# Publishing from inside a user's request waits at most this long; the scheduled flush sends
+# whatever didn't make it.
+PUBLISH_IN_REQUEST_TIMEOUT_SECONDS = 5
 # Google APIs our services call with their own credentials (Pub/Sub, Cloud Tasks).
 GOOGLE_SCOPE = "https://www.googleapis.com/auth/cloud-platform"
 
-# Outbox: events published per flush, and how long published ones are kept.
+# Outbox: events published per flush (in one call), and how long published ones are kept.
 OUTBOX_BATCH = 100
 OUTBOX_KEEP_DAYS = 7
+# Pub/Sub's answers that mean it won't take a message (too large or malformed): the event is
+# tried alone, and parked after OUTBOX_MAX_ATTEMPTS of them so it can't hold up the others.
+# Outages and other errors count against no event; the events wait for the next flush.
+OUTBOX_REJECTED_STATUSES = (400, 413)
+OUTBOX_MAX_ATTEMPTS = 5
 
 # Languages the interface and generated content come in, by code, with the name prompts use.
 # Every language prepza supports: the interface, its messages and emails, and the tests it

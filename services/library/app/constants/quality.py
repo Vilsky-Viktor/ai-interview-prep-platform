@@ -29,3 +29,8 @@ MIN_GROUP_ANSWERS = 10
 MIN_SEPARATION = 0.1
 # Too slow to read: time ran out on at least this share of the times it was shown.
 TOO_SLOW_SHARE = 0.25
+# A flag the verifier hasn't acted on this long is sent to it again (a lost job, a refusal past
+# generation's daily cap); key checks wait for an OpenAI batch, which takes up to a day.
+FLAG_RESEND_AFTER_HOURS = 48
+# Flags sent again by one daily sweep, oldest first.
+MAX_FLAG_RESENDS = 100

@@ -38,6 +38,9 @@ async def find_reused(state: State) -> dict:
         return {"topic_embeddings": [], "reused": [[] for _ in topics]}
 
     reused = []
+    # A bank question goes into one topic of a test at most, even when two topics are alike; the
+    # same text can sit in several templates, so it's told by its text.
+    taken = set()
 
     for embedding in embeddings:
         try:
@@ -57,6 +60,8 @@ async def find_reused(state: State) -> dict:
             logger.exception("Couldn't find questions to reuse")
             found = []
 
+        found = [question for question in found if question.text not in taken]
+        taken.update(question.text for question in found)
         reused.append([question.model_dump(mode="json") for question in found])
 
     return {"topic_embeddings": embeddings, "reused": reused}

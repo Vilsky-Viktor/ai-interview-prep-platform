@@ -54,8 +54,8 @@ def start(client, monkeypatch):
             "topics": [{"id": str(uuid.uuid4()), "title": "T", "questions": []}],
         }
 
-    async def fake_start(item, user_id):
-        pass
+    async def fake_start(invite_id, user_id):
+        return True
 
     async def fake_create(payload):
         sent.update(payload)

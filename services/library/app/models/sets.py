@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 
 from prepza_common.constants import DEFAULT_LANGUAGE
-from sqlalchemy import DateTime, ForeignKey, String, Text, func
+from sqlalchemy import DateTime, ForeignKey, Index, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -14,6 +14,8 @@ class QuestionSet(Base):
     """A generated preparation or company interview: topics with their questions."""
 
     __tablename__ = "sets"
+    # The question bank looks up templates of one level and language (storage/reuse.py).
+    __table_args__ = (Index("ix_sets_kind_level_language", "kind", "level", "language"),)
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     # Null for sets saved before generations were tracked.

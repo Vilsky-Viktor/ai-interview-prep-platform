@@ -102,13 +102,23 @@ resource "google_compute_backend_service" "service" {
     }
   }
 
+  # The security headers the nginx gateway adds locally (gateway/nginx.conf); the frontend adds
+  # its own Content-Security-Policy.
+  custom_response_headers = [
+    "Strict-Transport-Security: max-age=31536000",
+    "X-Content-Type-Options: nosniff",
+    "X-Frame-Options: DENY",
+    "Referrer-Policy: strict-origin-when-cross-origin",
+    "Permissions-Policy: camera=(), microphone=(), geolocation=()",
+  ]
+
   backend {
     group = google_compute_region_network_endpoint_group.service[each.key].id
   }
 }
 
 # /api/<path>/... goes to that service without the prefix, as the nginx gateway does locally;
-# everything else to the frontend.
+# the bell's live stream to notifications-stream (locals.tf); everything else to the frontend.
 resource "google_compute_url_map" "site" {
   name            = "prepza"
   default_service = google_compute_backend_service.service["frontend"].id
@@ -122,11 +132,27 @@ resource "google_compute_url_map" "site" {
     name            = "routes"
     default_service = google_compute_backend_service.service["frontend"].id
 
+    # Before notifications' own prefix below.
+    route_rules {
+      priority = 1
+      service  = google_compute_backend_service.service["notifications-stream"].id
+
+      match_rules {
+        prefix_match = "/api/notifications/me/stream"
+      }
+
+      route_action {
+        url_rewrite {
+          path_prefix_rewrite = "/me/stream"
+        }
+      }
+    }
+
     dynamic "route_rules" {
       for_each = { for name, service in local.public_services : name => service if service.path != null }
 
       content {
-        priority = index(keys(local.public_services), route_rules.key) + 1
+        priority = index(keys(local.public_services), route_rules.key) + 2
         service  = google_compute_backend_service.service[route_rules.key].id
 
         match_rules {

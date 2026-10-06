@@ -75,11 +75,14 @@ async def delete(company_id) -> None:
         await session.commit()
 
 
-async def list_for_user(user_id: str, offset: int, limit: int) -> list[Company]:
+async def list_for_user(
+    user_id: str, offset: int, limit: int, roles: tuple[str, ...] = tuple(Role)
+) -> list[Company]:
+    """The user's companies, only those where their role is one of `roles`."""
     query = (
         select(Company)
         .join(Member, Member.company_id == Company.id)
-        .where(Member.user_id == user_id)
+        .where(Member.user_id == user_id, Member.role.in_(roles))
         .options(selectinload(Company.members))
         .order_by(Company.created_at, Company.id)
         .offset(offset)

@@ -29,8 +29,8 @@ type SessionPlayProps = {
   section: { number: number; count: number }
   question: NextQuestion | null
   onAnswer: (input: AnswerInput) => Promise<boolean>
-  onAdvance: () => void
-  onFinish: () => void
+  onAdvance: () => Promise<void>
+  onFinish: () => Promise<void>
   finishing: boolean
   // A company member's preview: the way back, beside the header.
   back?: ReactNode
@@ -76,24 +76,21 @@ export function SessionPlay({
     }
   }, [questionId])
 
-  // Saves the pick, if there is one; false when it couldn't be saved.
-  async function send() {
-    if (chosen === null) {
-      return true
-    }
-
+  // Saves the pick, if there is one, then does `then`. Nothing can be picked and no clock runs
+  // until the next question is on screen, so neither Next nor the clock can move on twice.
+  async function sendThen(then: () => Promise<void>) {
     setSending(true)
-    const saved = await onAnswer({ option_index: chosen })
-    setSending(false)
 
-    return saved
-  }
-
-  async function sendAndAdvance() {
-    if (await send()) {
-      onAdvance()
+    try {
+      if (chosen === null || (await onAnswer({ option_index: chosen }))) {
+        await then()
+      }
+    } finally {
+      setSending(false)
     }
   }
+
+  const sendAndAdvance = () => sendThen(onAdvance)
 
   return (
     <div className="space-y-8 pb-28">
@@ -199,11 +196,7 @@ export function SessionPlay({
               className="h-10 px-5 text-base"
               disabled={finishing}
               // The pick on screen is saved first, so it counts.
-              onClick={async () => {
-                if (await send()) {
-                  onFinish()
-                }
-              }}
+              onClick={() => sendThen(onFinish)}
             >
               {finishing ? rounds("finishing") : rounds("finish")}
             </Button>

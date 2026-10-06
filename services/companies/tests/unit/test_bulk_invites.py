@@ -3,6 +3,7 @@ from fastapi import HTTPException
 from app.helpers.email_lists import emails_in
 from app.integrations import billing
 from app.services import candidate_invites
+from app.storage import invites
 from tests.unit.test_candidate_invites import INTERVIEW_ID, invite_setup
 
 URL = f"/interviews/{INTERVIEW_ID}/candidates/bulk"
@@ -69,3 +70,18 @@ def test_a_list_without_emails_or_with_too_many_is_refused(client, monkeypatch):
 
     assert client.post(URL, json={"text": "nobody here"}).status_code == 422
     assert client.post(URL, json={"text": many}).status_code == 422
+
+
+def test_a_candidate_who_already_started_is_skipped_not_emailed_again(client, monkeypatch):
+    sent, _ = invite_setup(monkeypatch)
+
+    async def started(_interview_id, email):
+        return "in_process" if email == "ann@example.com" else None
+
+    monkeypatch.setattr(invites, "status_of", started)
+
+    result = client.post(URL, json={"text": "Ann@example.com bob@example.com"}).json()
+
+    assert result["invited"] == ["bob@example.com"]
+    assert result["skipped"] == [{"email": "ann@example.com", "reason": "started"}]
+    assert sent == ["bob@example.com"]

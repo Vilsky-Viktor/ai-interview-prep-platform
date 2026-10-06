@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/tooltip"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
+import { byId } from "@/lib/paged-list"
 import { formatDate } from "@/lib/format"
 import type { TemplateSummary } from "@/types/superadmin"
 
@@ -34,7 +35,7 @@ export function TemplateList({
 }) {
   const t = useTranslations("templates")
   const locale = useLocale()
-  const { items, loadMore } = usePagedList(path, initial)
+  const { items, loadMore } = usePagedList(path, byId, initial)
 
   if (items.length === 0) {
     return <p className="py-16 text-center text-muted-foreground">{empty}</p>
@@ -43,7 +44,7 @@ export function TemplateList({
   return (
     <VirtualList
       items={items}
-      getKey={(template) => template.id}
+      getKey={byId}
       estimateSize={89}
       onEndReached={loadMore}
       className="divide-y rounded-2xl border"

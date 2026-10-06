@@ -154,8 +154,8 @@ def test_coming_back_after_the_interview_ran_out_finishes_it(monkeypatch):
     async def fake_list(invite_id):
         return [row]
 
-    async def fake_finish(session_id, score):
-        finished.append((session_id, score))
+    async def fake_finish(session_id):
+        finished.append(session_id)
         row.status = "finished"
 
     monkeypatch.setattr(sessions, "get", fake_get)
@@ -164,8 +164,7 @@ def test_coming_back_after_the_interview_ran_out_finishes_it(monkeypatch):
     monkeypatch.setattr(sessions, "finish", fake_finish)
 
     assert asyncio.run(get_owned_session(row.id, CANDIDATE)).status == "finished"
-    # Nothing answered: every question counts as wrong.
-    assert finished == [(row.id, 0)]
+    assert finished == [row.id]
 
 
 def test_a_running_section_shows_no_review_and_a_finished_one_no_new_question(monkeypatch):

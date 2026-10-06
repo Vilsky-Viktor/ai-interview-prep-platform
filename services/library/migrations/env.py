@@ -3,7 +3,8 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import create_engine
 
-import app.models.feedback  # registers the tables on Base.metadata
+import app.models.events  # registers the tables on Base.metadata
+import app.models.feedback
 import app.models.outbox
 import app.models.quality
 import app.models.sets  # noqa: F401

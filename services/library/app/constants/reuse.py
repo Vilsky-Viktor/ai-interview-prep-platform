@@ -12,3 +12,7 @@ MAX_EMBEDDING_BATCH = 100
 # copy of it for this many days.
 RETIRE_AFTER_ANSWERS = 100
 REVEAL_AFTER_IDLE_DAYS = 90
+# A template topic is copied into a company's test only with at least this many private
+# questions left (as many as a candidate gets from a topic by default); a template with no such
+# topic can't be copied.
+MIN_COPY_QUESTIONS = 10

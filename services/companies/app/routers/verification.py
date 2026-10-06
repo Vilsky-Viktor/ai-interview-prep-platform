@@ -6,7 +6,7 @@ from prepza_common.auth import CurrentUser
 from app.constants.verification import FREE_DOMAIN, NOT_A_WEBSITE
 from app.helpers.verification import email_on_domain, is_free_domain, website_domain
 from app.schemas.verification import VerificationOut, WebsiteIn
-from app.services.access import require_company
+from app.services.access import require_editor
 from app.storage import companies
 
 # Verified companies: a company is verified for its website's domain once an owner or admin
@@ -16,7 +16,7 @@ router = APIRouter(prefix="/companies", tags=["verification"])
 
 @router.put("/{company_id}/website")
 async def set_website(company_id: UUID, body: WebsiteIn, user: CurrentUser) -> VerificationOut:
-    company, _ = await require_company(user, company_id)
+    company, _ = await require_editor(user, company_id)
 
     if not body.website.strip():
         await companies.set_website(company.id, None, verified=False)

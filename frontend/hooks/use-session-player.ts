@@ -1,163 +1,127 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { useCallback, useEffect, useEffectEvent, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
-import { fetchStep, openTopic, type Step } from "@/lib/sessions"
-import type {
-  InterviewSession,
-  SessionAnswerResult,
-  SessionTopic,
-} from "@/types/company"
-import type { AnswerInput, NextQuestion } from "@/types/round"
+import type { InterviewStep, SessionAnswerResult } from "@/types/company"
+import type { AnswerInput } from "@/types/round"
 
-/** A candidate's interview: its sections, the current question, answering, moving on through
-sections and finishing. */
+/** A candidate's interview: the server says which section and question come next and when the
+interview is done; this shows them, sends answers and asks for the next step. */
 export function useSessionPlayer(id: string) {
   const t = useTranslations("session")
   const rounds = useTranslations("rounds")
   const { user } = useAuth()
-  const [session, setSession] = useState<InterviewSession | null>(null)
-  const [question, setQuestion] = useState<NextQuestion | null>(null)
-  const [topics, setTopics] = useState<SessionTopic[]>([])
-  const [topicsLoaded, setTopicsLoaded] = useState(false)
-  const [playing, setPlaying] = useState(false)
+  const uid = user?.uid
+  const [step, setStep] = useState<InterviewStep | null>(null)
   const [missing, setMissing] = useState(false)
-  const started = useRef(false)
+  // Opening the interview failed; `attempt` counts the tries, so "Try again" opens it anew.
+  const [failed, setFailed] = useState(false)
+  const [attempt, setAttempt] = useState(0)
   const [finishing, setFinishing] = useState(false)
+  // The question on screen, so a late answer response for an earlier one is ignored.
+  const shownQuestion = useRef<string | null>(null)
+  // One move to the next step at a time.
+  const moving = useRef(false)
 
-  const showStep = useCallback(([nextSession, nextQuestion]: Step) => {
-    setSession(nextSession)
-    setQuestion(nextQuestion)
-  }, [])
-
-  useEffect(() => {
-    if (user) {
-      fetchStep(id)
-        .then(showStep)
-        .catch(() => setMissing(true))
-    }
-  }, [user, id, showStep])
-
-  const sessionId = session?.id
-
-  useEffect(() => {
-    if (!user || !sessionId) {
-      return
-    }
-
-    apiFetch<SessionTopic[]>(`/rounds/sessions/${sessionId}/topics`)
-      .then(setTopics)
-      .catch(() => setTopics([]))
-      .finally(() => setTopicsLoaded(true))
-  }, [user, sessionId])
-
-  // Starts once, when the session first loads, with the latest state.
-  const startOnce = useEffectEvent(() => {
-    if (!started.current) {
-      started.current = true
-      void begin()
-    }
-  })
-
-  useEffect(() => {
-    if (user && session) {
-      startOnce()
-    }
-  }, [user, session])
-
-  async function openSection(sectionId: string): Promise<void> {
-    const step = await fetchStep(sectionId)
-
-    if (step[1]) {
-      showStep(step)
-      setPlaying(true)
-
-      return
-    }
-
-    const finished =
-      step[0].status === "finished"
-        ? step[0]
-        : await apiFetch<InterviewSession>(
-            `/rounds/sessions/${sectionId}/finish`,
-            {
-              method: "POST",
-            }
-          )
-    const list = await apiFetch<SessionTopic[]>(
-      `/rounds/sessions/${finished.id}/topics`
-    )
-    const upcoming = openTopic(list)
-
-    setTopics(list)
-    setSession(finished)
-    setQuestion(null)
-
-    if (!upcoming || upcoming.id === sectionId) {
-      setPlaying(false)
-
-      return
-    }
-
-    await openSection(upcoming.id)
+  function show(next: InterviewStep) {
+    shownQuestion.current = next.question?.question_id ?? null
+    setStep(next)
   }
 
-  async function begin() {
-    if (!session) {
+  useEffect(() => {
+    if (!uid) {
       return
     }
 
+    let current = true
+    apiFetch<InterviewStep>(`/rounds/sessions/${id}/step`, { method: "POST" })
+      .then((next) => {
+        if (current) {
+          shownQuestion.current = next.question?.question_id ?? null
+          setStep(next)
+        }
+      })
+      .catch((error) => {
+        if (!current) {
+          return
+        }
+
+        if (error instanceof ApiError && error.status === 404) {
+          setMissing(true)
+
+          return
+        }
+
+        setFailed(true)
+      })
+
+    return () => {
+      current = false
+    }
+  }, [uid, id, attempt])
+
+  function retry() {
+    setFailed(false)
+    setAttempt((count) => count + 1)
+  }
+
+  async function advance() {
+    if (!step || moving.current) {
+      return
+    }
+
+    moving.current = true
+
     try {
-      const list = topics.length
-        ? topics
-        : await apiFetch<SessionTopic[]>(
-            `/rounds/sessions/${session.id}/topics`
-          )
-      const upcoming = openTopic(list)
-
-      setTopics(list)
-      setTopicsLoaded(true)
-
-      if (!upcoming) {
-        return
-      }
-
-      await openSection(upcoming.id)
+      show(
+        await apiFetch<InterviewStep>(
+          `/rounds/sessions/${step.session.id}/step`,
+          { method: "POST" }
+        )
+      )
     } catch {
-      toast.error(t("startFailed"))
+      toast.error(t("continueFailed"))
+    } finally {
+      moving.current = false
     }
   }
 
   async function answer(input: AnswerInput) {
-    if (!session || !question) {
+    const asked = step?.question?.question_id
+
+    if (!step || !asked) {
       return false
     }
 
     try {
       const next = await apiFetch<SessionAnswerResult>(
-        `/rounds/sessions/${session.id}/answers`,
+        `/rounds/sessions/${step.session.id}/answers`,
         {
           method: "POST",
-          body: JSON.stringify({ question_id: question.question_id, ...input }),
+          body: JSON.stringify({ question_id: asked, ...input }),
         }
       )
-      setSession(
+
+      // The screen moved on meanwhile (time ran out): this answer's counts are old news.
+      if (shownQuestion.current !== asked) {
+        return true
+      }
+
+      setStep(
         (current) =>
           current && {
             ...current,
-            answered: next.answered,
+            session: { ...current.session, answered: next.answered },
+            topics: current.topics.map((topic) =>
+              topic.id === current.session.id
+                ? { ...topic, answered: next.answered }
+                : topic
+            ),
           }
-      )
-      setTopics((current) =>
-        current.map((topic) =>
-          topic.id === session.id
-            ? { ...topic, answered: next.answered }
-            : topic
-        )
       )
 
       return true
@@ -165,7 +129,11 @@ export function useSessionPlayer(id: string) {
       toast.error(apiErrorMessage(error, rounds("submitFailed")))
 
       // Refused because the question's time ran out: the next one opens.
-      if (error instanceof ApiError && error.status === 409) {
+      if (
+        error instanceof ApiError &&
+        error.status === 409 &&
+        shownQuestion.current === asked
+      ) {
         await advance()
       }
 
@@ -174,61 +142,33 @@ export function useSessionPlayer(id: string) {
   }
 
   async function finishInterview() {
-    if (!session || finishing) {
+    if (!step || finishing) {
       return
     }
 
     setFinishing(true)
 
     try {
-      const list = topics.length
-        ? topics
-        : await apiFetch<SessionTopic[]>(
-            `/rounds/sessions/${session.id}/topics`
-          )
-      const pending = list.filter((topic) => topic.status !== "finished")
-      const ids =
-        pending.length > 0 ? pending.map((topic) => topic.id) : [session.id]
-
-      for (const sectionId of ids) {
-        await apiFetch<InterviewSession>(
-          `/rounds/sessions/${sectionId}/finish`,
-          {
-            method: "POST",
-          }
+      show(
+        await apiFetch<InterviewStep>(
+          `/rounds/sessions/${step.session.id}/finish-interview`,
+          { method: "POST" }
         )
-      }
-
-      setTopics(list.map((topic) => ({ ...topic, status: "finished" })))
-      setSession((current) => current && { ...current, status: "finished" })
-      setQuestion(null)
-      setTopicsLoaded(true)
-      setPlaying(false)
+      )
     } catch {
       toast.error(t("finishFailed"))
       setFinishing(false)
     }
   }
 
-  async function advance() {
-    if (!session) {
-      return
-    }
-
-    try {
-      await openSection(session.id)
-    } catch {
-      toast.error(t("continueFailed"))
-    }
-  }
-
   return {
-    session,
-    question,
-    topics,
-    topicsLoaded,
-    playing,
+    session: step?.session ?? null,
+    question: step?.question ?? null,
+    topics: step?.topics ?? [],
+    done: step?.done ?? false,
     missing,
+    failed,
+    retry,
     finishing,
     answer,
     advance,

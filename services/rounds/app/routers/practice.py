@@ -3,8 +3,15 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
+from prepza_common.constants import HOUR_SECONDS
+from prepza_common.rate_limit import hit
 
-from app.constants.practice import NO_PRACTICE_QUESTIONS, PRACTICE_QUESTION_SECONDS
+from app.constants.practice import (
+    NO_PRACTICE_QUESTIONS,
+    PRACTICE_QUESTION_SECONDS,
+    PRACTICE_ROUNDS_PER_HOUR,
+    PRACTICE_SIZE_CACHE_SECONDS,
+)
 from app.helpers.practice import (
     practice_topics,
     round_out,
@@ -13,6 +20,7 @@ from app.helpers.practice import (
     topic_progress,
 )
 from app.integrations import library
+from app.integrations.redis import get_redis
 from app.schemas.practice import (
     PracticeRoundOut,
     PracticeRoundSummary,
@@ -20,15 +28,16 @@ from app.schemas.practice import (
     PracticeStartOut,
     PracticeTopicProgress,
 )
-from app.storage import sessions
+from app.storage import memory_cache, sessions
 
-# Free practice for talents: timed rounds on a template's revealed questions, as many as they
-# like, each with fresh random questions and every right answer shown after.
+# Free practice for talents: timed rounds on a template's revealed questions, up to
+# PRACTICE_ROUNDS_PER_HOUR, each with fresh random questions and every right answer shown after.
 router = APIRouter(prefix="/practice", tags=["practice"])
 
 
 @router.post("/{template_id}", status_code=status.HTTP_201_CREATED)
 async def start_practice(template_id: UUID, user: CurrentUser) -> PracticeStartOut:
+    await hit(get_redis(), f"rate:practice:{user.uid}", PRACTICE_ROUNDS_PER_HOUR, HOUR_SECONDS)
     content = await library.practice_content(template_id)
 
     if content is None:
@@ -55,13 +64,20 @@ async def start_practice(template_id: UUID, user: CurrentUser) -> PracticeStartO
 
 @router.get("/{template_id}/size")
 async def practice_size(template_id: UUID) -> PracticeSizeOut:
-    """Public, for the test's page: how many questions a round has."""
-    content = await library.practice_content(template_id)
+    """Public, for the test's page: how many questions a round has, kept for a few minutes."""
+    key = f"practice-size:{template_id}"
+    size = memory_cache.get(key)
 
-    if content is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Test not found")
+    if size is None:
+        content = await library.practice_content(template_id)
 
-    return PracticeSizeOut(questions=round_size(content))
+        if content is None:
+            raise HTTPException(status.HTTP_404_NOT_FOUND, "Test not found")
+
+        size = round_size(content)
+        memory_cache.put(key, size, PRACTICE_SIZE_CACHE_SECONDS)
+
+    return PracticeSizeOut(questions=size)
 
 
 @router.get("/rounds/{round_id}")

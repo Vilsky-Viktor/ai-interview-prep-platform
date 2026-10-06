@@ -14,26 +14,10 @@ import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { formatDate } from "@/lib/format"
-
-type Row = {
-  // Replaced questions: the kept revision, whose reports are listed.
-  revision_id?: string
-  question_id: string
-  text: string
-  options: { answer: string; correct: boolean }[]
-  flag?: string
-  // A flagged template question: it can be fixed now or dismissed.
-  actionable?: boolean
-  answers: number
-  correct: number
-  reports: number
-  set_title: string
-  set_kind: string
-  at: string
-}
+import type { QualityRow } from "@/types/superadmin"
 
 // A row is a question as flagged now, or one revision of it as replaced.
-function rowKey(row: Row) {
+function rowKey(row: QualityRow) {
   return row.revision_id ?? row.question_id
 }
 
@@ -45,19 +29,19 @@ export function QualityList({
   empty,
 }: {
   path: string
-  initial: Row[]
+  initial: QualityRow[]
   empty: string
 }) {
   const t = useTranslations("superadmin")
   const locale = useLocale()
-  const { items, loadMore } = usePagedList<Row>(path, initial)
+  const { items, loadMore } = usePagedList<QualityRow>(path, rowKey, initial)
   // Dismissed here, so gone from the list; sent to the verifier, so waiting.
   const [dismissed, setDismissed] = useState<string[]>([])
   const [sent, setSent] = useState<string[]>([])
   // Rows whose reports are open below them.
   const [openReports, setOpenReports] = useState<string[]>([])
 
-  function reportsPath(row: Row) {
+  function reportsPath(row: QualityRow) {
     return row.revision_id
       ? `/library/superadmin/quality/revisions/${row.revision_id}/reports`
       : `/library/superadmin/quality/${row.question_id}/reports`
@@ -72,7 +56,7 @@ export function QualityList({
   }
   const rows = items.filter((row) => !dismissed.includes(row.question_id))
 
-  async function act(row: Row, action: "fix" | "dismiss") {
+  async function act(row: QualityRow, action: "fix" | "dismiss") {
     try {
       await apiFetch(
         `/library/superadmin/quality/${row.question_id}/${action}`,

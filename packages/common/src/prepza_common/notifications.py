@@ -5,6 +5,7 @@ import logging
 from enum import StrEnum
 
 from prepza_common import pubsub
+from prepza_common.constants import PUBLISH_IN_REQUEST_TIMEOUT_SECONDS
 
 logger = logging.getLogger(__name__)
 
@@ -60,8 +61,9 @@ def notification(
 
 
 async def publish_quietly(event: dict) -> None:
-    """For a service without an outbox: a lost notification is better than a failed request."""
+    """For a service without an outbox: a lost notification is better than a failed or slow
+    request."""
     try:
-        await pubsub.publish(NOTIFICATION_REQUESTED, event)
+        await pubsub.publish(NOTIFICATION_REQUESTED, event, PUBLISH_IN_REQUEST_TIMEOUT_SECONDS)
     except Exception:
         logger.exception("Couldn't publish a %s notification", event["kind"])

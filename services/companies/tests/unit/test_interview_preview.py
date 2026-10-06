@@ -39,7 +39,6 @@ def started(monkeypatch):
             set_id=set_id,
             question_seconds=45,
             topic_limits={},
-            invites=[],
         )
 
     async def get_interview(_interview_id):

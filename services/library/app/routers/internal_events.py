@@ -11,5 +11,6 @@ router = APIRouter(prefix="/internal", tags=["internal"])
 async def receive_event(body: PushBody) -> None:
     """Pub/Sub pushes every event here. A failure answers with an error, so Pub/Sub retries it,
     and moves it to the dead-letter topic after the subscription's maximum attempts."""
-    event_type, data, _ = event_of(body)
-    await handle(event_type, data)
+    # The event's id stays the same however often it's delivered or re-sent (event_of).
+    event_type, data, event_id = event_of(body)
+    await handle(event_id, event_type, data)

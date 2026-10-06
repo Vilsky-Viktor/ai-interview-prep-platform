@@ -77,7 +77,7 @@
     "notFoundText": "Halaman itu tidak ada atau sudah dihapus."
   },
   "home": {
-    "title": "Wawancarai semua orang\nRekrut yang terbaik",
+    "title": "Uji semua orang\nRekrut yang terbaik",
     "text": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu. Soal unik untuk setiap kandidat dan batas waktu di tiap soal. Mulai $1 per kandidat."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "dari {count, number}",
     "per": "per",
     "candidate": "kandidat",
-    "showOptions": "Tampilkan opsi jawaban",
-    "hideOptions": "Sembunyikan opsi jawaban",
     "correct": "Jawaban benar",
     "wrong": "Jawaban salah",
     "regenerating": "Membuat ulang…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "pemilik",
-    "admin": "admin"
+    "admin": "admin",
+    "viewer": "pengamat",
+    "adminNote": "Membuat dan mengubah wawancara, mengundang kandidat, mengisi ulang kredit.",
+    "viewerNote": "Melihat wawancara dan hasil, membagikan laporan. Tidak mengubah apa pun."
   },
   "company": {
     "title": "Perusahaan",
     "signInInterviews": "Masuk untuk melihat wawancara perusahaan.",
-    "signInAdmins": "Masuk untuk melihat admin perusahaan.",
+    "signInTeam": "Masuk untuk melihat tim perusahaan.",
     "signInReferrals": "Masuk untuk melihat tautan undangan perusahaan.",
     "empty": "Belum ada perusahaan.",
     "owner": "Pemilik",
     "interviewCount": "{count, plural, other {# wawancara}}",
     "interviews": "Wawancara",
     "templates": "Templat",
-    "admins": "Admin",
+    "team": "Tim",
     "referrals": "Undangan",
     "new": "Perusahaan baru",
     "name": "Nama perusahaan",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Waktu per soal",
     "secondsLabel": "Waktu per soal dalam detik",
     "secondsUnit": "dtk",
-    "adminEmail": "Email admin",
-    "addAdmin": "Tambah admin",
-    "adminFailed": "Admin itu tidak bisa diundang. Coba lagi.",
+    "memberEmail": "Email anggota",
+    "addMember": "Tambah anggota",
+    "memberFailed": "Tidak bisa mengundangnya. Coba lagi.",
     "invite": "Undang",
     "jobDescription": "Deskripsi pekerjaan",
     "pasteJob": "Tempel deskripsi pekerjaan: peran, persyaratan, dan nilai tambahnya…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, other {# email tidak valid}}.",
       "limit": "{count, plural, other {# email}} melebihi batas emailmu untuk saat ini. Coba lagi dalam satu jam.",
       "no_credits": "{count, plural, other {# kandidat tidak diundang}}: kredit habis. Isi ulang untuk mengundang mereka.",
+      "started": "{count, plural, other {# kandidat}} sudah mulai, jadi tidak dikirimi email lagi.",
       "failed": "{count, plural, other {# undangan}} tidak bisa dikirim. Coba lagi."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Bergabung",
     "invited": "Diundang",
+    "role": "Peran",
+    "roleFailed": "Peran tidak bisa diubah.",
     "copy": "Salin",
     "inviteTitle": "Undangan perusahaan",
     "remove": "Keluarkan",
@@ -591,7 +595,22 @@
         "better": "Laporan mana yang menunjukkan laba suatu periode?"
       },
       "comment": "Tergantung perusahaannya, jadi tidak ada satu jawaban yang benar.",
-      "list": "Dasar-dasar akuntansi"
+      "list": "Dasar-dasar akuntansi",
+      "options": {
+        "good": [
+          "Aset, liabilitas, dan ekuitas pada suatu tanggal",
+          "Laba selama setahun",
+          "Kas masuk dan keluar dalam sebulan",
+          "Anggaran tahun depan"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Neraca",
+          "Laporan laba rugi",
+          "Laporan arus kas",
+          "Neraca saldo"
+        ]
+      }
     },
     "try": {
       "title": "Coba dulu sebelum kandidat",

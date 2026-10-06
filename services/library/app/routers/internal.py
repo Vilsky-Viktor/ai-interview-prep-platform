@@ -123,6 +123,8 @@ async def get_set_content(set_id: UUID, caller: ServiceCaller) -> SetContent:
                 ],
             )
             for topic in question_set.topics
+            # Every question of a topic can be left out (storage served()).
+            if topic.questions
         ],
     )
 

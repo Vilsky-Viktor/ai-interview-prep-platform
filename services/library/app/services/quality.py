@@ -1,9 +1,10 @@
 import logging
 import uuid
+from datetime import UTC, datetime, timedelta
 
 from prepza_common.notifications import NotificationKind
 
-from app.constants.quality import QualityFlag
+from app.constants.quality import FLAG_RESEND_AFTER_HOURS, MAX_FLAG_RESENDS, QualityFlag
 from app.helpers.notifications import question_notification
 from app.helpers.quality import flag_for, no_separation, too_slow
 from app.integrations import generation
@@ -13,11 +14,23 @@ from app.storage import preparations, quality
 logger = logging.getLogger(__name__)
 
 
+async def send_to_verifier(question_id: uuid.UUID, flag: str) -> None:
+    """Never raises: the flag is saved first, and resend_stale_flags sends it again later."""
+    try:
+        await generation.verify_question(question_id, flag)
+    except Exception:
+        logger.exception("Couldn't send question %s to the verifier", question_id)
+
+
 async def mark_wrong(question_id: uuid.UUID) -> None:
     """The test's owner says the marked answer is wrong: flagged at once, and the verifier
-    checks it and fixes or replaces the question, as for a flag from answers."""
-    await generation.verify_question(question_id, QualityFlag.WRONG_KEY)
+    checks it and fixes or replaces the question, as for a flag from answers. Marking it again
+    while that check waits changes nothing."""
+    if await quality.current_flag(question_id) == QualityFlag.WRONG_KEY:
+        return
+
     await quality.save_flag(question_id, QualityFlag.WRONG_KEY)
+    await send_to_verifier(question_id, QualityFlag.WRONG_KEY)
 
 
 async def review(question_id: uuid.UUID) -> None:
@@ -52,10 +65,6 @@ async def review(question_id: uuid.UUID) -> None:
         if flag == previous:
             return
 
-        # Saved only once the verifier has it, so a failed call is tried again next time.
-        if flag is not None:
-            await generation.verify_question(question_id, flag)
-
         # The owner hears only of a newly flagged question, not of a flag that changes.
         notice = None
 
@@ -64,9 +73,25 @@ async def review(question_id: uuid.UUID) -> None:
             topic = await preparations.topic_of_question(question_id)
             notice = question_notification(question_set, topic, NotificationKind.QUESTION_FLAGGED)
 
+        # Saved before the verifier hears of it, so the verifier finds the flag it acts on.
         await quality.save_flag(question_id, flag, notice=notice)
 
         if notice is not None:
             await outbox.flush_quietly()
+
+        if flag is not None:
+            await send_to_verifier(question_id, flag)
     except Exception:
         logger.exception("Couldn't review question %s", question_id)
+
+
+async def resend_stale_flags() -> int:
+    """Daily: flags the verifier hasn't acted on for FLAG_RESEND_AFTER_HOURS go to it again, so
+    a lost job doesn't leave a question flagged for good. How many were sent."""
+    before = datetime.now(UTC) - timedelta(hours=FLAG_RESEND_AFTER_HOURS)
+    stale = await quality.take_stale_flags(before, MAX_FLAG_RESENDS)
+
+    for question_id, flag in stale:
+        await send_to_verifier(question_id, flag)
+
+    return len(stale)

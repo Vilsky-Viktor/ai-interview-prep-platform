@@ -206,6 +206,15 @@ def test_anyone_sees_how_many_questions_a_round_has(client, monkeypatch):
 
     monkeypatch.setattr(library, "practice_content", fake_content)
     app.dependency_overrides.clear()
+    template_id = uuid.uuid4()
 
     # Ten of the first topic's 14, and all 4 of the second.
-    assert client.get(f"/practice/{TEMPLATE_ID}/size").json() == {"questions": 14}
+    assert client.get(f"/practice/{template_id}/size").json() == {"questions": 14}
+
+    async def unreachable(template_id):
+        raise AssertionError("asked library again")
+
+    monkeypatch.setattr(library, "practice_content", unreachable)
+
+    # Kept for a while: library isn't asked again.
+    assert client.get(f"/practice/{template_id}/size").json() == {"questions": 14}

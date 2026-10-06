@@ -49,7 +49,7 @@ def test_a_started_invite_is_never_marked_undelivered(run):
     async def scenario():
         found = await interview()
         invite = await invites.upsert(found.id, "fay@example.com", "Backend", "Acme", "en")
-        await invites.start(invite, "fay-uid")
+        await invites.start(invite.id, "fay-uid")
         await invites.mark_undelivered(invite.id, invite_undelivered(found, invite.email))
         stored, _ = await invites.get_by_token(invite.token)
 
@@ -62,11 +62,11 @@ def test_an_invite_moves_from_invited_to_in_process_to_finished(run):
     async def scenario():
         found = await interview()
         invite = await invites.upsert(found.id, "dave@example.com", "Backend", "Acme", "en")
-        await invites.start(invite, "dave-uid")
+        await invites.start(invite.id, "dave-uid")
         started, _ = await invites.get_by_token(invite.token)
-        await invites.set_status([invite.id], InviteStatus.FINISHED)
+        await invites.finish(invite.id, 80, False, None)
         # Starting again, e.g. reopening the link, never reopens a finished interview.
-        await invites.start(invite, "dave-uid")
+        await invites.start(invite.id, "dave-uid")
         finished, _ = await invites.get_by_token(invite.token)
 
         return started, finished
@@ -74,7 +74,7 @@ def test_an_invite_moves_from_invited_to_in_process_to_finished(run):
     started, finished = run(scenario())
 
     assert (started.status, started.user_id) == (InviteStatus.IN_PROCESS, "dave-uid")
-    assert finished.status == InviteStatus.FINISHED
+    assert (finished.status, finished.grade, finished.flagged) == (InviteStatus.FINISHED, 80, False)
 
 
 def test_only_interviews_without_a_candidate_count_as_waiting(run):
@@ -132,33 +132,6 @@ def test_marking_a_test_hired_turns_its_link_off(run):
 
     assert kept is not None
     assert after_hired is None
-
-
-def test_candidates_are_found_by_part_of_their_email_and_by_status(run):
-    async def scenario():
-        found = await interview()
-
-        for email in ("ann_lee@example.com", "annlee@example.com", "bob@example.com"):
-            await invites.upsert(found.id, email, "Backend", "Acme", "en")
-
-        bob = await invites.for_link(found.id, "bob@example.com")
-        await invites.set_status([bob.id], InviteStatus.FINISHED)
-
-        def emails(rows):
-            return sorted(row.email for row in rows)
-
-        return (
-            emails(await invites.list_all_for_interview(found.id, "ANN")),
-            emails(await invites.list_for_interview(found.id, 0, 10, "ann_")),
-            emails(await invites.list_for_interview(found.id, 0, 10, "", InviteStatus.FINISHED)),
-        )
-
-    by_text, underscore, finished = run(scenario())
-
-    assert by_text == ["ann_lee@example.com", "annlee@example.com"]
-    # An underscore is matched as typed, not as any character.
-    assert underscore == ["ann_lee@example.com"]
-    assert finished == ["bob@example.com"]
 
 
 def test_a_candidate_who_has_not_started_is_reminded_once_until_invited_again(run):
@@ -224,7 +197,7 @@ def test_only_stale_unstarted_invites_are_expiring_and_marking_one_expires_it(ru
         due = [
             row.email for row in await invites.expiring(later, 500) if row.interview_id == found.id
         ]
-        await invites.mark_expired(stale.id)
+        await invites.mark_expired(stale.id, later)
         after = [
             row.email for row in await invites.expiring(later, 500) if row.interview_id == found.id
         ]

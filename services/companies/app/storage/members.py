@@ -1,17 +1,17 @@
 import secrets
 
-from sqlalchemy import delete, select
+from sqlalchemy import delete, select, update
 
-from app.constants.roles import Role
 from app.models.companies import Company, Member
 from app.storage.db import Session
 
 
-async def add_admin(company_id, email: str) -> Member:
+async def add(company_id, email: str, role: str) -> Member:
+    """A pending invite; the role applies once it's accepted."""
     member = Member(
         company_id=company_id,
         invited_email=email.lower(),
-        role=Role.ADMIN,
+        role=role,
         token=secrets.token_urlsafe(32),
     )
 
@@ -42,7 +42,7 @@ async def accept(member: Member, user_id: str) -> None:
         if row.user_id is None:
             row.user_id = user_id
 
-        # The link works once: a joined admin no longer needs it.
+        # The link works once: a joined member no longer needs it.
         row.token = None
 
         await session.commit()
@@ -59,6 +59,12 @@ async def list_for_company(company_id, offset: int, limit: int) -> list[Member]:
 
     async with Session() as session:
         return list(await session.scalars(query))
+
+
+async def set_role(member_id, role: str) -> None:
+    async with Session() as session:
+        await session.execute(update(Member).where(Member.id == member_id).values(role=role))
+        await session.commit()
 
 
 async def remove(member_id) -> None:

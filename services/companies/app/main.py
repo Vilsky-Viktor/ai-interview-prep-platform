@@ -81,10 +81,10 @@ def health() -> dict:
 
 @app.get("/ready")
 async def ready() -> dict:
-    """Ready only once the database and Redis answer; Docker's healthcheck uses this."""
+    """Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
+    isn't checked: an outage there shouldn't stop the service from starting."""
     try:
         await ping_database()
-        await get_redis().ping()
     except Exception:
         logging.getLogger(__name__).exception("Not ready")
 

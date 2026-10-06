@@ -19,6 +19,7 @@ export function CompanyHeader({
   websiteDomain,
   current,
   action,
+  canEdit,
 }: {
   companyId: string
   name: string
@@ -28,6 +29,8 @@ export function CompanyHeader({
   websiteDomain: string | null
   current: "interviews" | "templates" | "members" | "referrals"
   action?: ReactNode
+  // Owners and admins change the logo, name and website; viewers only see them.
+  canEdit: boolean
 }) {
   const t = useTranslations("company")
 
@@ -37,7 +40,12 @@ export function CompanyHeader({
         <BackLink href="/company">{t("title")}</BackLink>
         {/* The logo candidates see; clicking it sets or changes it. */}
         <div className="me-4">
-          <LogoPicker companyId={companyId} name={name} logoUrl={logoUrl} />
+          <LogoPicker
+            companyId={companyId}
+            name={name}
+            logoUrl={logoUrl}
+            editable={canEdit}
+          />
         </div>
         {/* Renamed in place, like a test's title; the name stays unique across prepza. Then the
             verified badge, or the way to verify. */}
@@ -47,15 +55,18 @@ export function CompanyHeader({
               title={name}
               path={`/companies/companies/${companyId}/name`}
               maxLength={MAX_COMPANY_NAME_LENGTH}
+              editable={canEdit}
             />
           </div>
           {verifiedDomain ? (
             <VerifiedBadge domain={verifiedDomain} className="size-7" />
           ) : (
-            <VerifyCompany
-              companyId={companyId}
-              websiteDomain={websiteDomain}
-            />
+            canEdit && (
+              <VerifyCompany
+                companyId={companyId}
+                websiteDomain={websiteDomain}
+              />
+            )
           )}
         </div>
         {action}

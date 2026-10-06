@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/tooltip"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
+import { byId } from "@/lib/paged-list"
 import { formatDate } from "@/lib/format"
 import type { Interview } from "@/types/company"
 
@@ -21,14 +22,18 @@ import type { Interview } from "@/types/company"
 export function InterviewList({
   companyId,
   initial,
+  canEdit,
 }: {
   companyId: string
   initial: Interview[]
+  // Viewers preview a test but don't delete it.
+  canEdit: boolean
 }) {
   const t = useTranslations("interviews")
   const locale = useLocale()
   const { items, loadMore } = usePagedList(
     `/companies/interviews?company_id=${companyId}`,
+    byId,
     initial
   )
 
@@ -41,7 +46,7 @@ export function InterviewList({
   return (
     <VirtualList
       items={items}
-      getKey={(interview) => interview.id}
+      getKey={byId}
       estimateSize={89}
       onEndReached={loadMore}
       className="divide-y rounded-2xl border"
@@ -95,10 +100,12 @@ export function InterviewList({
                 interviewId={interview.id}
                 title={interview.title ?? t("fallbackTitle")}
               />
-              <DeleteInterview
-                interviewId={interview.id}
-                title={interview.title ?? t("fallbackTitle")}
-              />
+              {canEdit && (
+                <DeleteInterview
+                  interviewId={interview.id}
+                  title={interview.title ?? t("fallbackTitle")}
+                />
+              )}
             </div>
           )}
         </div>

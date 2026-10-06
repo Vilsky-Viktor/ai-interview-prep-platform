@@ -77,7 +77,7 @@
     "notFoundText": "Diese Seite existiert nicht oder wurde entfernt."
   },
   "home": {
-    "title": "Interviewe jeden\nStelle die Besten ein",
+    "title": "Teste jeden\nStelle die Besten ein",
     "text": "Interviews mit Zeitlimit aus deiner Stellenbeschreibung. Eigene Fragen für jeden Kandidaten und ein Zeitlimit für jede. Ab $1 pro Kandidat."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "von {count, number}",
     "per": "pro",
     "candidate": "Kandidat",
-    "showOptions": "Antwortoptionen anzeigen",
-    "hideOptions": "Antwortoptionen ausblenden",
     "correct": "Richtige Antwort",
     "wrong": "Falsche Antwort",
     "regenerating": "Wird neu generiert…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "inhaber",
-    "admin": "admin"
+    "admin": "admin",
+    "viewer": "betrachter",
+    "adminNote": "Erstellt und ändert Interviews, lädt Kandidaten ein, lädt Guthaben auf.",
+    "viewerNote": "Sieht Interviews und Ergebnisse, teilt Berichte. Ändert nichts."
   },
   "company": {
     "title": "Unternehmen",
     "signInInterviews": "Melde dich an, um die Interviews des Unternehmens zu sehen.",
-    "signInAdmins": "Melde dich an, um die Admins des Unternehmens zu sehen.",
+    "signInTeam": "Melde dich an, um das Team des Unternehmens zu sehen.",
     "signInReferrals": "Melde dich an, um den Einladungslink des Unternehmens zu sehen.",
     "empty": "Noch keine Unternehmen.",
     "owner": "Inhaber",
     "interviewCount": "{count, plural, one {# Interview} other {# Interviews}}",
     "interviews": "Interviews",
     "templates": "Vorlagen",
-    "admins": "Admins",
+    "team": "Team",
     "referrals": "Einladungen",
     "new": "Neues Unternehmen",
     "name": "Name des Unternehmens",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Zeit pro Frage",
     "secondsLabel": "Zeit pro Frage in Sekunden",
     "secondsUnit": "s",
-    "adminEmail": "E-Mail des Admins",
-    "addAdmin": "Admin hinzufügen",
-    "adminFailed": "Dieser Admin konnte nicht eingeladen werden. Bitte versuche es erneut.",
+    "memberEmail": "E-Mail des Mitglieds",
+    "addMember": "Mitglied hinzufügen",
+    "memberFailed": "Die Person konnte nicht eingeladen werden. Bitte versuche es erneut.",
     "invite": "Einladen",
     "jobDescription": "Stellenbeschreibung",
     "pasteJob": "Füge die Stellenbeschreibung ein: die Rolle, ihre Anforderungen und was ein Plus ist…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, one {# E-Mail ist ungültig} other {# E-Mails sind ungültig}}.",
       "limit": "{count, plural, one {# E-Mail liegt} other {# E-Mails liegen}} vorerst über deinem E-Mail-Limit. Versuche es in einer Stunde erneut.",
       "no_credits": "{count, plural, one {# Kandidat wurde nicht eingeladen} other {# Kandidaten wurden nicht eingeladen}}: keine Credits mehr. Lade auf, um sie einzuladen.",
+      "started": "{count, plural, one {# Kandidat hat} other {# Kandidaten haben}} schon begonnen und {count, plural, one {wurde} other {wurden}} nicht erneut angeschrieben.",
       "failed": "{count, plural, one {# Einladung konnte} other {# Einladungen konnten}} nicht gesendet werden. Versuche es erneut."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Beigetreten",
     "invited": "Eingeladen",
+    "role": "Rolle",
+    "roleFailed": "Die Rolle konnte nicht geändert werden.",
     "copy": "Kopieren",
     "inviteTitle": "Einladung ins Unternehmen",
     "remove": "Entfernen",
@@ -591,7 +595,22 @@
         "better": "Welcher Abschluss zeigt den Gewinn eines Zeitraums?"
       },
       "comment": "Das hängt vom Unternehmen ab, also gibt es keine eindeutig richtige Antwort.",
-      "list": "Grundlagen der Buchhaltung"
+      "list": "Grundlagen der Buchhaltung",
+      "options": {
+        "good": [
+          "Vermögen, Schulden und Eigenkapital zu einem Stichtag",
+          "Gewinn eines Jahres",
+          "Geldein- und -ausgänge eines Monats",
+          "Budget des nächsten Jahres"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Bilanz",
+          "Gewinn- und Verlustrechnung",
+          "Kapitalflussrechnung",
+          "Saldenliste"
+        ]
+      }
     },
     "try": {
       "title": "Probier es aus, bevor Kandidaten es tun",

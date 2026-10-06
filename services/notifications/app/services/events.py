@@ -23,14 +23,20 @@ from app.storage import notifications
 logger = logging.getLogger(__name__)
 
 
-async def deliver(email: Email, message_id: str) -> None:
+async def deliver(email: Email, event_id: str) -> None:
     if settings.resend_api_key:
-        # Pub/Sub's message id as the key, so a retried event never sends the email twice.
+        # The event's id as the key (the outbox's, the same on a re-send, or Pub/Sub's), so a
+        # retried or re-sent event never sends the email twice.
         try:
-            await resend.send(email, f"events/{message_id}")
+            await resend.send(email, f"events/{event_id}")
         except resend.EmailRefused:
-            # Final, like a bounce: the invite shows as undelivered and the event isn't retried.
-            logger.warning("Email for %s refused", email.tags or "an untagged event", exc_info=True)
+            # Final, like a bounce: the event isn't retried. An invite shows as undelivered; any
+            # other email (a report, a contact message) would be lost unseen, so it's an error.
+            if email.tags:
+                logger.warning("Email for %s refused", email.tags, exc_info=True)
+            else:
+                logger.exception("An untagged email was refused")
+
             await report_undelivered(email.tags)
 
         return
@@ -38,10 +44,10 @@ async def deliver(email: Email, message_id: str) -> None:
     await smtp.send(email)
 
 
-async def notify(data: dict, message_id: str) -> None:
+async def notify(data: dict, event_id: str) -> None:
     """Stores a requested notification and tells the recipient's open tabs. A retried event is
     stored once and announced once; if announcing fails, the tabs see it on their next load."""
-    if not await notifications.add(message_id, data):
+    if not await notifications.add(event_id, data):
         return
 
     try:
@@ -50,19 +56,19 @@ async def notify(data: dict, message_id: str) -> None:
         logger.exception("Couldn't announce a %s notification", data["kind"])
 
 
-async def handle(event_type: str, data: dict, message_id: str) -> None:
+async def handle(event_type: str, data: dict, event_id: str) -> None:
     """Sends the email or stores the notification an event asks for; other events aren't ours."""
     if event_type == NOTIFICATION_REQUESTED:
-        await notify(data, message_id)
+        await notify(data, event_id)
 
     if event_type == CANDIDATE_INVITED:
-        await deliver(candidate_invite_email(data, settings.site_url), message_id)
+        await deliver(candidate_invite_email(data, settings.site_url), event_id)
 
     if event_type == CANDIDATE_REMINDED:
-        await deliver(candidate_reminder_email(data, settings.site_url), message_id)
+        await deliver(candidate_reminder_email(data, settings.site_url), event_id)
 
     if event_type == REPORT_SHARED:
-        await deliver(report_email(data, settings.site_url), message_id)
+        await deliver(report_email(data, settings.site_url), event_id)
 
     if event_type == CONTACT_SENT:
-        await deliver(contact_email(data, settings.contact_email), message_id)
+        await deliver(contact_email(data, settings.contact_email), event_id)

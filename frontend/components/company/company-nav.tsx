@@ -26,7 +26,7 @@ export function CompanyNav({
     {
       id: "members",
       href: `/company/${companyId}/members`,
-      label: t("admins"),
+      label: t("team"),
     },
     {
       id: "referrals",

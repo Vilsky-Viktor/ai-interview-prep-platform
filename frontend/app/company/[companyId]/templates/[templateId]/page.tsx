@@ -8,6 +8,7 @@ import { TopicQuestionLimit } from "@/components/questions/topic-question-limit"
 import { UseTemplate } from "@/components/templates/use-template"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
+import type { Company } from "@/types/company"
 import type { Template } from "@/types/superadmin"
 
 export const generateMetadata = () => translatedTitle("templates", "title")
@@ -21,9 +22,10 @@ export default async function CompanyTemplatePage({
 }) {
   const { companyId, templateId } = await params
   const t = await getTranslations("templates")
-  const template = await serverFetch<Template>(
-    `/library/templates/${templateId}`
-  )
+  const [template, company] = await Promise.all([
+    serverFetch<Template>(`/library/templates/${templateId}`),
+    serverFetch<Company>(`/companies/companies/${companyId}`),
+  ])
 
   if (!template) {
     notFound()
@@ -42,7 +44,10 @@ export default async function CompanyTemplatePage({
             <h1 className="min-w-0 flex-1 font-heading text-3xl font-medium tracking-tight text-balance normal-case">
               {template.title}
             </h1>
-            <UseTemplate templateId={templateId} companyId={companyId} />
+            {/* Using a template creates a test: not for viewers. */}
+            {company?.can_edit && (
+              <UseTemplate templateId={templateId} companyId={companyId} />
+            )}
           </div>
         }
       />

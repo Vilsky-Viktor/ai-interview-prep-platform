@@ -55,5 +55,9 @@ locals {
       SITE_URL         = "https://${var.domain}"
       MAIL_FROM        = var.mail_from
     }
+    notifications-stream = {
+      INVOKER_AUDIENCE = local.run_url["notifications-stream"]
+      SITE_URL         = "https://${var.domain}"
+    }
   }
 }

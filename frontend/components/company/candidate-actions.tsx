@@ -85,27 +85,18 @@ export function CandidateActions({
           {t("resend")}
         </Button>
       )}
-      {unused ? (
-        <Button
-          variant="destructive"
-          disabled={busy}
-          onClick={() => setConfirmRevoke(true)}
-        >
-          {t("revoke")}
-        </Button>
-      ) : (
-        // An icon like the report's download and share beside it; its tooltip names it.
-        <Button
-          variant="ghost"
-          size="icon"
-          className="size-12 shrink-0 text-muted-foreground hover:text-destructive"
-          aria-label={t("erase")}
-          disabled={busy}
-          onClick={() => setConfirmRevoke(true)}
-        >
-          <Trash2Icon className="size-6" />
-        </Button>
-      )}
+      {/* An icon like the report's download and share beside it, for an unused invite too; its
+          label and the confirmation say which it is. */}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="size-12 shrink-0 text-muted-foreground hover:text-destructive"
+        aria-label={t(unused ? "revoke" : "erase")}
+        disabled={busy}
+        onClick={() => setConfirmRevoke(true)}
+      >
+        <Trash2Icon className="size-6" />
+      </Button>
       <Dialog
         open={confirmRevoke}
         onOpenChange={(open) => {

@@ -1,10 +1,15 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { useState } from "react"
+import { toast } from "sonner"
 
 import { RemoveMember } from "@/components/company/remove-member"
+import { RolePicker } from "@/components/company/role-picker"
 import { CopyField } from "@/components/copy-field"
 import { Badge } from "@/components/ui/badge"
+import type { MemberRole } from "@/constants/roles"
+import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { CompanyMember } from "@/types/company"
 
 export function MemberRow({
@@ -18,6 +23,29 @@ export function MemberRow({
 }) {
   const t = useTranslations("members")
   const roles = useTranslations("roles")
+  const [role, setRole] = useState(member.role)
+  const [saving, setSaving] = useState(false)
+
+  // The owner changes an admin to a viewer or back; the row shows the new role once saved.
+  async function changeRole(next: MemberRole) {
+    if (next === role) {
+      return
+    }
+
+    setSaving(true)
+
+    try {
+      await apiFetch(
+        `/companies/members/${member.id}/role?company_id=${companyId}`,
+        { method: "PUT", body: JSON.stringify({ role: next }) }
+      )
+      setRole(next)
+    } catch (error) {
+      toast.error(apiErrorMessage(error, t("roleFailed")))
+    } finally {
+      setSaving(false)
+    }
+  }
 
   return (
     <div className="space-y-3 p-6">
@@ -29,9 +57,19 @@ export function MemberRow({
           </span>
         </span>
         <span className="flex items-center gap-2">
-          <Badge variant="secondary" className="h-7 px-3 text-sm font-light">
-            {roles(member.role)}
-          </Badge>
+          {/* The owner manages every row but their own: its role and removing it. */}
+          {member.removable ? (
+            <RolePicker
+              role={role as MemberRole}
+              onChange={changeRole}
+              disabled={saving}
+              className="w-44"
+            />
+          ) : (
+            <Badge variant="secondary" className="h-7 px-3 text-sm font-light">
+              {roles(role)}
+            </Badge>
+          )}
           {member.removable && (
             <RemoveMember
               companyId={companyId}

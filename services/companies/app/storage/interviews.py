@@ -3,7 +3,6 @@ import uuid
 from prepza_common import outbox
 from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, func, select, update
-from sqlalchemy.orm import selectinload
 
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
@@ -23,14 +22,8 @@ async def create(company_id, generation_id, language: str) -> Interview:
     async with Session() as session:
         session.add(interview)
         await session.commit()
-        loaded = await session.get(
-            Interview,
-            interview.id,
-            options=[selectinload(Interview.invites)],
-            populate_existing=True,
-        )
 
-    return loaded
+    return interview
 
 
 async def create_from_template(company_id, set_id, title: str, language: str) -> Interview:
@@ -46,14 +39,8 @@ async def create_from_template(company_id, set_id, title: str, language: str) ->
     async with Session() as session:
         session.add(interview)
         await session.commit()
-        loaded = await session.get(
-            Interview,
-            interview.id,
-            options=[selectinload(Interview.invites)],
-            populate_existing=True,
-        )
 
-    return loaded
+    return interview
 
 
 async def get_by_link(token: str) -> Interview | None:
@@ -73,7 +60,7 @@ async def set_link(interview_id, token: str | None) -> None:
 
 async def get(interview_id) -> Interview | None:
     async with Session() as session:
-        return await session.get(Interview, interview_id, options=[selectinload(Interview.invites)])
+        return await session.get(Interview, interview_id)
 
 
 async def counts(company_ids: list) -> dict:
@@ -112,7 +99,6 @@ async def list_for_company(
     query = (
         select(Interview)
         .where(Interview.company_id == company_id)
-        .options(selectinload(Interview.invites))
         .order_by(Interview.created_at.desc(), Interview.id)
         .offset(offset)
         .limit(limit)

@@ -3,7 +3,7 @@
 import { cn } from "cn"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
 import { useSignIn } from "@/components/sign-in-dialog"
@@ -37,6 +37,10 @@ export function BuyButton({
   const router = useRouter()
   const { user } = useAuth()
   const [opening, setOpening] = useState(false)
+  // The balance rechecks after a payment, stopped when the button leaves the page.
+  const rechecks = useRef<number[]>([])
+
+  useEffect(() => () => rechecks.current.forEach(clearTimeout), [])
 
   if (!priceId) {
     return (
@@ -69,9 +73,9 @@ export function BuyButton({
           toast.success(t("paid"))
           // Paddle's webhook usually lands within seconds, sometimes later: look again a few
           // times, and the balances count up when it has.
-          for (const seconds of RECHECK_SECONDS) {
+          rechecks.current = RECHECK_SECONDS.map((seconds) =>
             window.setTimeout(() => router.refresh(), seconds * 1000)
-          }
+          )
         }
       )
     } catch {

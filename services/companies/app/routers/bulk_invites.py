@@ -8,6 +8,7 @@ from app.constants.invites import (
     MAX_BULK_INVITES,
     NO_EMAILS,
     SKIP_REASONS,
+    STARTED,
     TOO_MANY_EMAILS,
     SkipReason,
 )
@@ -16,8 +17,8 @@ from app.helpers.interviews import attach_set
 from app.schemas.invites import BulkInviteIn, BulkInviteOut, SkippedInvite
 from app.services import candidate_invites
 from app.services import outbox as outbox_service
-from app.services.access import require_company
-from app.storage import interviews
+from app.services.access import require_editor
+from app.storage import interviews, invites
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
     if interview is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
-    company, _ = await require_company(user, interview.company_id)
+    company, _ = await require_editor(user, interview.company_id)
     interview = await attach_set(interview)
 
     if interview.set_id is None:
@@ -58,6 +59,8 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
             reason = SkipReason.NO_CREDITS
         elif not is_email(email):
             reason = SkipReason.INVALID
+        elif await invites.status_of(interview.id, email.lower()) in STARTED:
+            reason = SkipReason.STARTED
         else:
             try:
                 await candidate_invites.invite(interview, company, user, email)

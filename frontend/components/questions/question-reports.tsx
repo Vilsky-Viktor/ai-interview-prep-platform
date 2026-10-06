@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl"
 
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
+import { byId } from "@/lib/paged-list"
 import { formatDate } from "@/lib/format"
 import type { QuestionReport } from "@/types/feedback"
 
@@ -13,7 +14,7 @@ export function QuestionReports({ path }: { path: string }) {
   const common = useTranslations("common")
   const reasons = useTranslations("reportReasons")
   const locale = useLocale()
-  const { items, loaded, loadMore } = usePagedList<QuestionReport>(path)
+  const { items, loaded, loadMore } = usePagedList<QuestionReport>(path, byId)
 
   if (!loaded) {
     return <p className="text-sm text-muted-foreground">{common("loading")}</p>
@@ -26,7 +27,7 @@ export function QuestionReports({ path }: { path: string }) {
   return (
     <VirtualList
       items={items}
-      getKey={(report) => report.id}
+      getKey={byId}
       estimateSize={52}
       onEndReached={loadMore}
       scrollClassName="max-h-64 overflow-y-auto"

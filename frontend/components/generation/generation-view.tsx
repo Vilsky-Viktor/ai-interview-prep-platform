@@ -14,7 +14,7 @@ import { TopicReview } from "@/components/generation/topic-review"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { ACTIVE_STATUSES, POLL_INTERVAL_MS } from "@/constants/generation"
-import { apiErrorMessage, apiFetch } from "@/lib/api"
+import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import { topUpAction } from "@/lib/credits"
 import type { DraftTopic, Generation } from "@/types/generation"
 
@@ -60,10 +60,23 @@ export function GenerationView({
         if (ACTIVE_STATUSES.includes(next.status)) {
           timer = setTimeout(load, POLL_INTERVAL_MS)
         }
-      } catch {
-        if (active) {
-          setMissing(true)
+      } catch (error) {
+        if (!active) {
+          return
         }
+
+        // Only an answer that it isn't there (or isn't theirs) means missing; a failed poll
+        // (network, a restart, a rate limit) tries again.
+        if (
+          error instanceof ApiError &&
+          [403, 404, 422].includes(error.status)
+        ) {
+          setMissing(true)
+
+          return
+        }
+
+        timer = setTimeout(load, POLL_INTERVAL_MS)
       }
     }
 

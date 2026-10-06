@@ -8,7 +8,7 @@ from app.constants.audit import AuditAction
 from app.integrations import generation as generation_api
 from app.models.interviews import Interview
 from app.schemas.interviews import ReviewIn
-from app.services.access import require_company, require_manager
+from app.services.access import require_company, require_editor
 from app.storage import audit, interviews
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
@@ -54,7 +54,7 @@ async def get_generation(interview_id: UUID, user: CurrentUser) -> dict:
 @router.post("/{interview_id}/generation/review")
 async def review_generation(interview_id: UUID, body: ReviewIn, user: CurrentUser) -> dict:
     interview = await get_interview(interview_id)
-    await require_manager(user, interview)
+    await require_editor(user, interview.company_id)
     response = await generation_api.review(
         interview.generation_id, interview.company_id, body.model_dump()
     )
@@ -67,7 +67,7 @@ async def review_generation(interview_id: UUID, body: ReviewIn, user: CurrentUse
 @router.post("/{interview_id}/generation/retry")
 async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
     interview = await get_interview(interview_id)
-    await require_manager(user, interview)
+    await require_editor(user, interview.company_id)
 
     return passed_through(await generation_api.retry(interview.generation_id, interview.company_id))
 
@@ -76,7 +76,7 @@ async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
 async def cancel_generation(interview_id: UUID, user: CurrentUser) -> dict:
     """Removes the interview too, so it isn't left without questions."""
     interview = await get_interview(interview_id)
-    await require_manager(user, interview)
+    await require_editor(user, interview.company_id)
     cancelled = passed_through(
         await generation_api.cancel(interview.generation_id, interview.company_id)
     )

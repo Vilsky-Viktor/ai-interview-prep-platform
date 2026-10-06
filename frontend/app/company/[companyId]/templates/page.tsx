@@ -53,7 +53,8 @@ export default async function CompanyTemplatesPage({
     listPath: "/library/templates",
     params: await searchParams,
     openBase: `/company/${companyId}/templates`,
-    companyId,
+    // Using a template creates a test: not for viewers.
+    companyId: company.can_edit ? companyId : undefined,
   })
 
   return (
@@ -65,6 +66,7 @@ export default async function CompanyTemplatesPage({
         verifiedDomain={company.verified_domain ?? null}
         websiteDomain={company.website_domain ?? null}
         current="templates"
+        canEdit={company.can_edit}
       />
       {/* Templates are generic; an interview from the job description fits the role closer. */}
       <div className="flex items-center gap-4 rounded-2xl bg-muted p-5 text-base">
@@ -77,15 +79,17 @@ export default async function CompanyTemplatesPage({
             {t("warning")}
           </p>
         </div>
-        <Button
-          size="icon"
-          aria-label={interviewsText("new")}
-          render={<Link href={`/company/${companyId}/interviews/new`} />}
-          nativeButton={false}
-          className="size-10 shrink-0"
-        >
-          <ArrowRightIcon aria-hidden className="size-5 rtl:-scale-x-100" />
-        </Button>
+        {company.can_edit && (
+          <Button
+            size="icon"
+            aria-label={interviewsText("new")}
+            render={<Link href={`/company/${companyId}/interviews/new`} />}
+            nativeButton={false}
+            className="size-10 shrink-0"
+          >
+            <ArrowRightIcon aria-hidden className="size-5 rtl:-scale-x-100" />
+          </Button>
+        )}
       </div>
       {browser}
     </main>

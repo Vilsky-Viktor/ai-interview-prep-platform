@@ -1,21 +1,4 @@
-from app.constants.integrity import FAST_ANSWER_SECONDS, IntegritySignal
 from app.constants.rounds import RoundStatus
-
-
-def current_score(scores: list[int]) -> int | None:
-    """Percent correct over the answered questions."""
-    if not scores:
-        return None
-
-    return round(sum(scores) / len(scores))
-
-
-def candidate_progress(scores: list[int], total: int) -> tuple[int, int | None]:
-    """Share of questions answered, and the percent correct of those answers."""
-    if not total:
-        return 0, None
-
-    return round(len(scores) / total * 100), current_score(scores)
 
 
 def interview_finished(statuses: list[str]) -> bool:
@@ -23,22 +6,19 @@ def interview_finished(statuses: list[str]) -> bool:
     return bool(statuses) and all(status == RoundStatus.FINISHED for status in statuses)
 
 
-def signal_counts(topics: list) -> dict[str, int]:
-    """A candidate's integrity signals over every section: page leaves, copy attempts, and
-    answers picked faster than FAST_ANSWER_SECONDS."""
-    kinds = [signal.kind for topic in topics for signal in topic.signals]
-    answers = [answer for topic in topics for answer in topic.answers]
+def invite_grade(answered: int, score_sum: int, total: int, finished: bool) -> dict:
+    """A candidate's share of questions answered, and their grade: percent correct of the
+    answers so far, or, once they finished, of every question (unanswered ones count as wrong,
+    as in each section's score)."""
+    if finished:
+        grade = round(score_sum / total) if total else 0
+    else:
+        grade = round(score_sum / answered) if answered and total else None
 
     return {
-        "tab_leaves": kinds.count(IntegritySignal.TAB_LEAVE),
-        "copies": kinds.count(IntegritySignal.COPY),
-        "fast_answers": sum(
-            1
-            for answer in answers
-            if answer.option_index is not None
-            and answer.seconds is not None
-            and answer.seconds < FAST_ANSWER_SECONDS
-        ),
+        "progress": round(answered / total * 100) if total else 0,
+        "grade": grade,
+        "finished": finished,
     }
 
 

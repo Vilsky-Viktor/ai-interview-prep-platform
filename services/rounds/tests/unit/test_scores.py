@@ -1,17 +1,4 @@
-from types import SimpleNamespace as Row
-
-from app.helpers.scores import (
-    candidate_progress,
-    current_score,
-    final_score,
-    interview_finished,
-    signal_counts,
-)
-
-
-def test_current_score_is_percent_correct_of_answered():
-    assert current_score([]) is None
-    assert current_score([100, 0, 100, 100]) == 75
+from app.helpers.scores import final_score, interview_finished, invite_grade
 
 
 def test_final_score_counts_unanswered_as_wrong():
@@ -20,10 +7,12 @@ def test_final_score_counts_unanswered_as_wrong():
     assert final_score([], 0) == 0
 
 
-def test_candidate_progress_splits_completion_and_score():
-    assert candidate_progress([], 10) == (0, None)
-    assert candidate_progress([100, 0], 10) == (20, 50)
-    assert candidate_progress([100, 100, 0, 100], 4) == (100, 75)
+def test_invite_grade_splits_completion_and_score():
+    assert invite_grade(0, 0, 10, False) == {"progress": 0, "grade": None, "finished": False}
+    # Two of ten answered, one right: 50% so far.
+    assert invite_grade(2, 100, 10, False) == {"progress": 20, "grade": 50, "finished": False}
+    # Once finished, the eight never answered count as wrong.
+    assert invite_grade(2, 100, 10, True) == {"progress": 20, "grade": 10, "finished": True}
 
 
 def test_interview_finished_needs_every_topic():
@@ -69,20 +58,6 @@ def test_a_finished_section_reports_each_shown_questions_result():
             },
         ],
     }
-
-
-def test_signal_counts_add_up_every_section():
-    def answer(option_index, seconds):
-        return Row(option_index=option_index, seconds=seconds)
-
-    first = Row(
-        signals=[Row(kind="tab_leave"), Row(kind="tab_leave"), Row(kind="copy")],
-        # Picked in 1 second: too fast. Timed out (nothing picked): not fast.
-        answers=[answer(0, 1), answer(None, 0)],
-    )
-    second = Row(signals=[Row(kind="tab_leave")], answers=[answer(1, 20), answer(2, 2)])
-
-    assert signal_counts([first, second]) == {"tab_leaves": 3, "copies": 1, "fast_answers": 2}
 
 
 def test_only_the_same_question_with_the_same_options_is_rekeyed():

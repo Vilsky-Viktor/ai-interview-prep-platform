@@ -20,10 +20,10 @@ async def referral_out(owner_type: str, owner_id: str) -> ReferralOut:
     )
 
 
-async def reward_after_top_up(owner_type: str, owner_id: str) -> None:
+async def reward_after_top_up(owner_type: str, owner_id: str, transaction_id: str) -> None:
     """The first top-up pays the referral its company came through, once, and tells the
     referrer."""
-    referrer_id = await referrals.reward(owner_type, owner_id)
+    referrer_id = await referrals.reward(owner_type, owner_id, transaction_id)
 
     if referrer_id is not None:
         await track("referral_rewarded", company_id=owner_id)
@@ -36,3 +36,9 @@ async def reward_after_top_up(owner_type: str, owner_id: str) -> None:
                 credits=REFERRAL_REWARD,
             )
         )
+
+
+async def take_back_reward(owner_id: str, transaction_id: str) -> None:
+    """A top-up refunded in full or charged back no longer pays its referral."""
+    if await referrals.take_back(transaction_id):
+        await track("referral_reversed", company_id=owner_id)

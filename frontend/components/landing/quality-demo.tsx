@@ -10,6 +10,7 @@ import {
 } from "lucide-react"
 import { useEffect, useState } from "react"
 
+import { AnswerOptions } from "@/components/questions/answer-options"
 import { buttonVariants } from "@/components/ui/button"
 
 // The demo's steps and how long each shows, in milliseconds. It starts with the weak question's
@@ -84,8 +85,29 @@ function Feedback({
   )
 }
 
+export type DemoQuestion = {
+  text: string
+  options: { answer: string; correct: boolean }[]
+}
+
+/** A question with its answer options, as question-row.tsx shows them. */
+function QuestionCell({
+  question,
+  dimmed = false,
+}: {
+  question: DemoQuestion
+  dimmed?: boolean
+}) {
+  return (
+    <span className={cn("block font-light", dimmed && "opacity-50")}>
+      {question.text}
+      <AnswerOptions options={question.options} className="mt-3" />
+    </span>
+  )
+}
+
 const ROW =
-  "grid grid-cols-[1.5rem_minmax(0,1fr)] items-center gap-x-3 gap-y-3 p-4 sm:grid-cols-[2.5rem_1fr_auto] sm:gap-x-5 sm:p-5"
+  "grid grid-cols-[1.5rem_minmax(0,1fr)] items-start gap-x-3 gap-y-3 p-4 sm:grid-cols-[2.5rem_1fr_auto] sm:gap-x-5 sm:p-5"
 
 /** A topic's questions as their owner sees them (components/questions/question-row.tsx),
  * playing on a loop: a weak question's report opened, then the question re-generated. */
@@ -98,15 +120,14 @@ export function QualityDemo({
   labels,
 }: {
   title: string
-  good: string
-  weak: string
-  better: string
+  good: DemoQuestion
+  weak: DemoQuestion
+  better: DemoQuestion
   report: { reason: string; date: string; comment: string }
   labels: {
     regenerate: string
     regenerating: string
     wrongAnswer: string
-    showOptions: string
   }
 }) {
   const [index, setIndex] = useState(0)
@@ -138,31 +159,20 @@ export function QualityDemo({
 
   return (
     <div className="space-y-4 rounded-2xl border bg-background p-6 text-start">
-      {/* The topic's name and the answer options' toggle, as the questions dialog has them
-          (components/questions/topic-questions.tsx). */}
-      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-        <p className="font-heading text-xl leading-none font-medium">
-          {title}
-          <span className="text-primary">.</span>
-        </p>
-        <span
-          className={buttonVariants({
-            size: "sm",
-            className: "h-8 shrink-0 px-3 text-sm lowercase",
-          })}
-        >
-          {labels.showOptions}
-        </span>
-      </div>
+      {/* The topic's name, as the questions dialog has it (components/questions/topic-questions.tsx). */}
+      <p className="font-heading text-xl leading-none font-medium">
+        {title}
+        <span className="text-primary">.</span>
+      </p>
       {/* Room for the open report below the list, so the card keeps its size while the demo
           plays; the list itself only grows when the report opens. */}
-      <div className="min-h-[540px] sm:min-h-[384px]">
+      <div className="min-h-[800px] sm:min-h-[436px]">
         <ul className="divide-y rounded-xl border">
           <li className={ROW}>
             <span className="font-light text-muted-foreground tabular-nums">
               1
             </span>
-            <span className="font-light">{good}</span>
+            <QuestionCell question={good} />
             <Feedback
               counts={{ likes: 14, dislikes: 0, reports: 0 }}
               button={{
@@ -178,9 +188,10 @@ export function QualityDemo({
               <span className="font-light text-muted-foreground tabular-nums">
                 2
               </span>
-              <span className={cn("font-light", regenerating && "opacity-50")}>
-                {replaced ? better : weak}
-              </span>
+              <QuestionCell
+                question={replaced ? better : weak}
+                dimmed={regenerating}
+              />
               <Feedback
                 counts={
                   replaced

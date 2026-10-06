@@ -45,6 +45,8 @@ def published(monkeypatch):
         if event:
             sent.append(event)
 
+        return True
+
     async def nothing():
         return None
 
@@ -98,3 +100,20 @@ def test_a_finished_template_is_saved_without_telling_companies(published):
     run("template")
 
     assert published == []
+
+
+def test_a_set_saved_after_a_cancel_is_deleted(published, monkeypatch):
+    deleted = []
+
+    async def cancelled(generation_id, event=None, **values):
+        return False
+
+    async def delete_set(set_id):
+        deleted.append(set_id)
+
+    monkeypatch.setattr(generations, "update", cancelled)
+    monkeypatch.setattr(library, "delete_set", delete_set)
+
+    run()
+
+    assert deleted == [SET_ID]

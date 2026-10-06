@@ -7,7 +7,7 @@ from prepza_common.constants import REFERRAL_COOKIE
 from prepza_common.paging import PageParams
 
 from app.constants.invites import COMPANY_NAME_TAKEN, MAX_OWNED_COMPANIES, TOO_MANY_COMPANIES
-from app.constants.roles import Role
+from app.constants.roles import EDITORS, Role
 from app.helpers.logos import logo_path
 from app.integrations import billing
 from app.models.companies import Company
@@ -21,7 +21,7 @@ from app.schemas.companies import (
     ReferralRewardOut,
 )
 from app.services import company_deletion
-from app.services.access import require_company
+from app.services.access import can_edit, require_company, require_editor
 from app.services.verification import verify_by_email
 from app.storage import companies, interviews
 
@@ -35,6 +35,7 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
         id=company.id,
         name=company.name,
         role=member.role,
+        can_edit=can_edit(member),
         interview_count=interview_count,
         logo_url=logo_path(company),
         website_domain=company.website_domain,
@@ -55,18 +56,27 @@ async def create_company(body: CompanyCreate, user: CurrentUser, request: Reques
     if company is None:
         raise HTTPException(status.HTTP_409_CONFLICT, COMPANY_NAME_TAKEN)
 
-    await billing.welcome_company(
-        company.id,
-        user.email,
-        request.cookies.get(REFERRAL_COOKIE),
-        await companies.ids_for_user(user.uid),
-    )
+    # Without its wallet and welcome credits the company is removed again, so trying again
+    # doesn't find its name taken.
+    try:
+        await billing.welcome_company(
+            company.id,
+            user.email,
+            request.cookies.get(REFERRAL_COOKIE),
+            await companies.ids_for_user(user.uid),
+        )
+    except Exception:
+        await companies.delete(company.id)
+
+        raise
+
     await track("company_created", user_id=user.uid, company_id=company.id)
 
     return CompanyOut(
         id=company.id,
         name=company.name,
-        role="owner",
+        role=Role.OWNER,
+        can_edit=True,
         interview_count=0,
         created_at=company.created_at,
     )
@@ -82,9 +92,9 @@ async def list_companies(user: CurrentUser, page: PageParams) -> list[CompanyOut
 
 @router.get("/credits")
 async def list_credits(user: CurrentUser, page: PageParams) -> list[CompanyBalanceOut]:
-    """The user's companies with their credits; any member may top one up. Declared before
-    /{company_id}, which would otherwise take "credits" as an id."""
-    rows = await companies.list_for_user(user.uid, page.offset, page.limit)
+    """The companies the user may top up, as an owner or admin, with their credits. Declared
+    before /{company_id}, which would otherwise take "credits" as an id."""
+    rows = await companies.list_for_user(user.uid, page.offset, page.limit, EDITORS)
     credits = await billing.companies_credits([item.id for item in rows]) if rows else {}
 
     return [CompanyBalanceOut(id=item.id, name=item.name, **credits[str(item.id)]) for item in rows]
@@ -130,9 +140,13 @@ async def get_referral(company_id: UUID, user: CurrentUser) -> ReferralOut:
 
 @router.get("/{company_id}")
 async def get_company(company_id: UUID, user: CurrentUser) -> CompanyOut:
-    company, _ = await require_company(user, company_id)
-    # Opening the company is enough: an admin with a work email on its website verifies it.
-    await verify_by_email(company, user)
+    company, member = await require_company(user, company_id)
+
+    # Opening the company is enough: an owner or admin with a work email on its website
+    # verifies it.
+    if can_edit(member):
+        await verify_by_email(company, user)
+
     totals = await interviews.counts([company.id])
 
     return company_out(company, user.uid, totals.get(company.id, 0))
@@ -141,7 +155,7 @@ async def get_company(company_id: UUID, user: CurrentUser) -> CompanyOut:
 @router.patch("/{company_id}/name", status_code=status.HTTP_204_NO_CONTENT)
 async def rename_company(company_id: UUID, body: CompanyRename, user: CurrentUser) -> None:
     """Owners and admins rename the company; names stay unique across prepza, ignoring case."""
-    company, _ = await require_company(user, company_id)
+    company, _ = await require_editor(user, company_id)
     name = body.title.strip()
 
     if not name:

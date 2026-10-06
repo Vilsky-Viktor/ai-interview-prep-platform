@@ -26,6 +26,8 @@ class Reason:
     # Paddle won a chargeback back: the credits return.
     CHARGEBACK_REVERSED = "chargeback_reversed"
     REFERRAL = "referral"
+    # The top-up that paid a referral was refunded in full or charged back: both rewards go back.
+    REFERRAL_REVERSED = "referral_reversed"
 
 
 # Names the welcome gift (helpers/gifts.py): a person's first company.

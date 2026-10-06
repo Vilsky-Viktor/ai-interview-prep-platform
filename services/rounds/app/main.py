@@ -15,6 +15,7 @@ from app.routers import (
     help,
     internal,
     internal_accounts,
+    interview_flow,
     practice,
     schedules,
     session_feedback,
@@ -48,6 +49,7 @@ app = FastAPI(
 add_localized_errors(app)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(sessions.router)
+app.include_router(interview_flow.router)
 app.include_router(practice.router)
 app.include_router(session_feedback.router)
 app.include_router(help.router)
@@ -63,10 +65,10 @@ def health() -> dict:
 
 @app.get("/ready")
 async def ready() -> dict:
-    """Ready only once the database and Redis answer; Docker's healthcheck uses this."""
+    """Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
+    isn't checked: an outage there shouldn't stop the service from starting."""
     try:
         await ping_database()
-        await get_redis().ping()
     except Exception:
         logging.getLogger(__name__).exception("Not ready")
 

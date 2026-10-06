@@ -7,7 +7,11 @@ from prepza_common.notifications import NotificationKind, notification, publish_
 
 from app.config.settings import settings
 from app.constants.notifications import TOP_UP_LINK
-from app.constants.products import AUTO_TOP_UP_FLAG, AUTO_TOP_UP_THRESHOLDS
+from app.constants.products import (
+    AUTO_TOP_UP_FLAG,
+    AUTO_TOP_UP_THRESHOLDS,
+    SUBSCRIPTION_ENDED_STATUS,
+)
 from app.integrations import paddle
 from app.schemas.billing import AutoTopUpIn, AutoTopUpOut, CheckoutOut
 from app.services.catalog import price_ids
@@ -90,13 +94,17 @@ async def cancel_quietly(subscription_id: str) -> None:
 
 async def start(custom: dict, subscription_id: str) -> None:
     """Paddle confirmed the checkout's subscription. One nobody is waiting for (turned off
-    meanwhile, or not started by whoever turned it on) is cancelled, so no card is kept."""
+    meanwhile, or not started by whoever turned it on) is cancelled, so no card is kept. One
+    that already ended (its subscription.canceled came first) isn't started."""
     if custom.get(AUTO_TOP_UP_FLAG) != "1":
         return
 
     owner = (custom.get("owner_type"), custom.get("owner_id"))
 
     if await auto_top_ups.owner_of(subscription_id) == owner:
+        return
+
+    if await paddle.subscription_status(subscription_id) == SUBSCRIPTION_ENDED_STATUS:
         return
 
     if not await auto_top_ups.start(*owner, custom.get("buyer_id"), subscription_id):
@@ -122,11 +130,13 @@ async def ended(subscription_id: str) -> None:
 async def check(owner_type: str, owner_id: str) -> None:
     """After credits are used: if the balance is now under the threshold, buys the chosen
     top-up with the saved card. Never fails the request that used the credits; a charge that
-    fails (a declined card) is told to the owner."""
+    fails (a declined card) is told to the owner and tried again only after
+    AUTO_TOP_UP_RETRY_AFTER."""
     row = None
+    now = datetime.now(UTC)
 
     try:
-        row = await auto_top_ups.claim_charge(owner_type, owner_id, datetime.now(UTC))
+        row = await auto_top_ups.claim_charge(owner_type, owner_id, now)
 
         if row is None:
             return
@@ -136,6 +146,7 @@ async def check(owner_type: str, owner_id: str) -> None:
         logger.exception("Automatic top-up failed for %s %s", owner_type, owner_id)
 
         if row is not None:
+            await auto_top_ups.failed(owner_type, owner_id, now)
             await publish_quietly(
                 notification(owner_type, owner_id, NotificationKind.AUTO_TOP_UP_FAILED, TOP_UP_LINK)
             )

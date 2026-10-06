@@ -9,13 +9,15 @@ from prepza_common.i18n import request_language, translate
 from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
+from app.constants.contact import CONTACT_IP_LIMIT
 from app.constants.dpa import DPA_INTRO, DPA_SECTIONS
 from app.constants.faq import FAQS
-from app.constants.help import LegalDocument
+from app.constants.help import HELP_IP_LIMIT, LegalDocument
 from app.constants.legal import LEGAL_UPDATED
 from app.constants.privacy import PRIVACY_INTRO, PRIVACY_SECTIONS
 from app.constants.rounds import CHAT_FAILED
 from app.constants.terms import TERMS_INTRO, TERMS_SECTIONS
+from app.helpers.client_ip import client_ip
 from app.helpers.help import faq_items
 from app.helpers.sse import sse_event
 from app.integrations import billing
@@ -64,6 +66,7 @@ async def help_chat(
     if user:
         await hit(redis, f"rate:help:{user.uid}", settings.help_user_limit, HOUR_SECONDS)
 
+    await hit(redis, f"rate:help:ip:{client_ip(request)}", HELP_IP_LIMIT, HOUR_SECONDS)
     await hit(redis, "rate:help:all", settings.help_daily_limit, DAY_SECONDS)
 
     language = request_language(request)
@@ -94,6 +97,8 @@ async def help_chat(
 @router.post("/contact", status_code=status.HTTP_204_NO_CONTENT)
 async def contact(body: ContactRequest, request: Request) -> None:
     """The contact page's message; notifications emails it to prepza's inbox. Public."""
-    await hit(get_redis(), "rate:contact:all", settings.contact_daily_limit, DAY_SECONDS)
+    redis = get_redis()
+    await hit(redis, f"rate:contact:ip:{client_ip(request)}", CONTACT_IP_LIMIT, DAY_SECONDS)
+    await hit(redis, "rate:contact:all", settings.contact_daily_limit, DAY_SECONDS)
     await contact_store.save({**body.model_dump(), "language": request_language(request)})
     await outbox_service.flush_quietly()

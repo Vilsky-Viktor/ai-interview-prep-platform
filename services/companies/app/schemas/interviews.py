@@ -82,6 +82,8 @@ class TopicOut(BaseModel):
 
 class InterviewDetail(InterviewOut):
     topics: list[TopicOut]
+    # Whether the user may change the test and its candidates: owners and admins, not viewers.
+    can_edit: bool = False
 
 
 class ReviewIn(BaseModel):

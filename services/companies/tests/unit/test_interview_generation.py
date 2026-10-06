@@ -29,7 +29,6 @@ def setup(monkeypatch, role):
         company_id=COMPANY_ID,
         generation_id=GENERATION_ID,
         set_id=None,
-        invites=[],
     )
     company = Company(id=COMPANY_ID, name="Acme", created_at=datetime.now(UTC))
     company.members = [

@@ -26,6 +26,7 @@ async def get_quality(question_id: UUID, caller: ServiceCaller) -> QuestionQuali
         answers=stats.answers if stats else 0,
         option_picks=stats.option_picks if stats else {},
         reports=[ReportNote(reason=report.reason, comment=report.comment) for report in reports],
+        flag=stats.flag if stats else None,
     )
 
 

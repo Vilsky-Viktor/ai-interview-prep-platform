@@ -31,8 +31,8 @@ export interface paths {
     }
     /**
      * List Credits
-     * @description The user's companies with their credits; any member may top one up. Declared before
-     *     /{company_id}, which would otherwise take "credits" as an id.
+     * @description The companies the user may top up, as an owner or admin, with their credits. Declared
+     *     before /{company_id}, which would otherwise take "credits" as an id.
      */
     get: operations["list_credits_companies_credits_get"]
     put?: never
@@ -173,8 +173,32 @@ export interface paths {
     /** List Members */
     get: operations["list_members_members_get"]
     put?: never
-    /** Invite Admin */
-    post: operations["invite_admin_members_post"]
+    /**
+     * Invite Member
+     * @description The owner invites an admin or a viewer; the role applies once the invite is accepted.
+     */
+    post: operations["invite_member_members_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/members/{member_id}/role": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Change Role
+     * @description The owner makes an admin a viewer or the other way round. A new viewer's automatic
+     *     top-up goes off, as viewers spend no credits.
+     */
+    put: operations["change_role_members__member_id__role_put"]
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -193,8 +217,8 @@ export interface paths {
     post?: never
     /**
      * Remove Member
-     * @description The owner removes an admin or withdraws a pending invite; never the owner. An automatic
-     *     top-up paid with the removed admin's card goes off, so it's never charged again.
+     * @description The owner removes a member or withdraws a pending invite; never the owner. An automatic
+     *     top-up paid with the removed member's card goes off, so it's never charged again.
      */
     delete: operations["remove_member_members__member_id__delete"]
     options?: never
@@ -366,8 +390,8 @@ export interface paths {
     /**
      * List Candidates
      * @description A page at a time, best grade first or newest first, narrowed to an email containing `q`
-     *     and a status or result. Results come from rounds: for every candidate when sorting or
-     *     filtering by them, otherwise for this page only.
+     *     and a status or result, all in SQL on the results stored when candidates finish. Progress
+     *     and signals come from rounds for this page only.
      */
     get: operations["list_candidates_interviews__interview_id__candidates_get"]
     put?: never
@@ -612,7 +636,10 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** List Question Reports */
+    /**
+     * List Question Reports
+     * @description Candidates' reports on a question, read where it's fixed: owners and admins.
+     */
     get: operations["list_question_reports_interviews__interview_id__questions__question_id__reports_get"]
     put?: never
     post?: never
@@ -1049,7 +1076,8 @@ export interface paths {
     }
     /**
      * Ready
-     * @description Ready only once the database and Redis answer; Docker's healthcheck uses this.
+     * @description Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
+     *     isn't checked: an outage there shouldn't stop the service from starting.
      */
     get: operations["ready_ready_get"]
     put?: never
@@ -1066,7 +1094,7 @@ export interface components {
   schemas: {
     /**
      * AdminInviteOut
-     * @description What the invited admin sees before accepting.
+     * @description What the invited member sees before accepting.
      */
     AdminInviteOut: {
       /** Company Name */
@@ -1272,6 +1300,8 @@ export interface components {
       name: string
       /** Role */
       role: string
+      /** Can Edit */
+      can_edit: boolean
       /** Interview Count */
       interview_count: number
       /** Logo Url */
@@ -1372,6 +1402,11 @@ export interface components {
       created_at: string
       /** Topics */
       topics: components["schemas"]["TopicOut"][]
+      /**
+       * Can Edit
+       * @default false
+       */
+      can_edit: boolean
     }
     /** InterviewFromTemplate */
     InterviewFromTemplate: {
@@ -1527,6 +1562,12 @@ export interface components {
        * Format: email
        */
       email: string
+      /**
+       * Role
+       * @default admin
+       * @enum {string}
+       */
+      role: "admin" | "viewer"
     }
     /** MemberOut */
     MemberOut: {
@@ -1553,6 +1594,14 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+    }
+    /** MemberRoleIn */
+    MemberRoleIn: {
+      /**
+       * Role
+       * @enum {string}
+       */
+      role: "admin" | "viewer"
     }
     /**
      * PreviewOut
@@ -2206,7 +2255,7 @@ export interface operations {
       }
     }
   }
-  invite_admin_members_post: {
+  invite_member_members_post: {
     parameters: {
       query: {
         company_id: string
@@ -2229,6 +2278,41 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["MemberOut"]
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  change_role_members__member_id__role_put: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path: {
+        member_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["MemberRoleIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {

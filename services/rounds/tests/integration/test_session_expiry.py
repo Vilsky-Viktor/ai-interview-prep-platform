@@ -82,10 +82,10 @@ def test_the_last_section_finishing_announces_the_interview_with_its_answers(run
                 score=100,
             )
         )
-        await sessions.finish(rows[0].id, 33)
+        await sessions.finish(rows[0].id)
         after_first = await announced(invite_id)
-        await sessions.finish(rows[1].id, 0)
-        await sessions.finish(rows[1].id, 0)
+        await sessions.finish(rows[1].id)
+        await sessions.finish(rows[1].id)
 
         return after_first, await announced(invite_id)
 

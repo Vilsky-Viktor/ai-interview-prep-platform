@@ -1,5 +1,7 @@
+"use client"
+
 import { cn } from "cn"
-import { getTranslations } from "next-intl/server"
+import { useTranslations } from "next-intl"
 
 import { CompanyLogo } from "@/components/company/company-logo"
 import { VerifiedBadge } from "@/components/company/verified-badge"
@@ -10,13 +12,9 @@ import type { InterviewReportData } from "@/types/company"
 /** All of a test's candidates with their totals, best first, for the PDF: like a candidate's
  * report, a row per candidate instead of a row per topic. It sits off screen, always in the
  * light design, and runs over as many A4 pages as it needs. */
-export async function InterviewReport({
-  report,
-}: {
-  report: InterviewReportData
-}) {
-  const t = await getTranslations("report")
-  const candidates = await getTranslations("candidates")
+export function InterviewReport({ report }: { report: InterviewReportData }) {
+  const t = useTranslations("report")
+  const candidates = useTranslations("candidates")
 
   return (
     <div

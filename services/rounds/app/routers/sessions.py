@@ -6,11 +6,9 @@ from prepza_common.auth import CurrentUser
 
 from app.constants.rounds import SECTION_IN_PROGRESS, TIME_GRACE_SECONDS, RoundStatus
 from app.helpers.review import build_review
-from app.helpers.scores import final_score
 from app.helpers.sessions import (
     next_session_question,
     seconds_left,
-    session_out_titled,
     topic_out,
 )
 from app.schemas.review import ReviewItem
@@ -19,6 +17,7 @@ from app.schemas.sessions import SessionAnswerResult, SessionOut, SessionTopicOu
 from app.services import outbox as outbox_service
 from app.services.session_access import get_owned_session
 from app.services.session_answers import submit_session_answer
+from app.services.session_titles import session_out_titled
 from app.storage import sessions
 
 router = APIRouter(prefix="/sessions", tags=["sessions"])
@@ -106,8 +105,7 @@ async def review_session(session_id: UUID, user: CurrentUser) -> list[ReviewItem
 @router.post("/{session_id}/finish")
 async def finish(session_id: UUID, user: CurrentUser) -> SessionOut:
     row = await get_owned_session(session_id, user)
-    final = final_score([answer.score for answer in row.answers], len(row.questions))
-    await sessions.finish(row.id, final)
+    await sessions.finish(row.id)
     await outbox_service.flush_quietly()
 
     return await session_out_titled(await sessions.get(session_id))

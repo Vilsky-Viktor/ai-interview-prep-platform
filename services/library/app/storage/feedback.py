@@ -4,7 +4,7 @@ from sqlalchemy import func, select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import IntegrityError
 
-from app.models.feedback import QuestionRating, QuestionReport
+from app.models.feedback import QuestionRating, QuestionReport, QuestionReporter
 from app.storage.db import Session
 
 
@@ -79,7 +79,18 @@ async def list_reports(
 
 
 async def report_question(question_id: uuid.UUID, user_id: str, reason: str, comment: str) -> bool:
+    """False when the user has reported the question before, in this revision or an earlier one."""
+    reporter = (
+        insert(QuestionReporter)
+        .values(question_id=question_id, user_id=user_id)
+        .on_conflict_do_nothing()
+        .returning(QuestionReporter.user_id)
+    )
+
     async with Session() as session:
+        if await session.scalar(reporter) is None:
+            return False
+
         session.add(
             QuestionReport(question_id=question_id, user_id=user_id, reason=reason, comment=comment)
         )
@@ -95,8 +106,8 @@ async def report_question(question_id: uuid.UUID, user_id: str, reason: str, com
 
 
 async def has_reported(question_id: uuid.UUID, user_id: str) -> bool:
-    query = select(QuestionReport.id).where(
-        QuestionReport.question_id == question_id, QuestionReport.user_id == user_id
+    query = select(QuestionReporter.user_id).where(
+        QuestionReporter.question_id == question_id, QuestionReporter.user_id == user_id
     )
 
     async with Session() as session:

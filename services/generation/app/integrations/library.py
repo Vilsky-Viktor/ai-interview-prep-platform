@@ -31,6 +31,16 @@ async def _create(kind: str, preparation: PreparationIn) -> UUID:
     return UUID(response.json()["id"])
 
 
+async def delete_set(set_id: UUID) -> None:
+    """Deletes a saved test or template; safe to repeat."""
+    response = await http.get_client().delete(
+        f"{settings.library_url}/internal/interviews/{set_id}",
+        headers={"Authorization": f"Bearer {service_token('library')}"},
+    )
+
+    response.raise_for_status()
+
+
 async def get_question_context(question_id: UUID) -> QuestionContext | None:
     response = await http.get_client().get(
         f"{settings.library_url}/internal/questions/{question_id}/context",

@@ -60,14 +60,15 @@ class FakeLLM:
         return self.result
 
 
-def record(monkeypatch, verdict=None):
+def record(monkeypatch, verdict=None, flag=None):
+    """Fakes the library and the models; the library's question carries `flag`."""
     calls = []
 
     async def fake_context(_question_id):
         return context()
 
     async def fake_quality(_question_id):
-        return question()
+        return question().model_copy(update={"flag": flag})
 
     async def fake_keep(question_id):
         calls.append(("keep", question_id))
@@ -119,7 +120,7 @@ def test_a_question_without_one_right_option_is_replaced(monkeypatch):
 
 
 def test_a_wrong_key_waits_for_the_next_batch(monkeypatch):
-    calls, fake_llm = record(monkeypatch, KeyCheck(correct_index=1))
+    calls, fake_llm = record(monkeypatch, KeyCheck(correct_index=1), QualityFlag.WRONG_KEY)
     queued = []
 
     async def fake_add(question_id, text):
@@ -135,7 +136,7 @@ def test_a_wrong_key_waits_for_the_next_batch(monkeypatch):
 
 
 def test_a_flagged_rewrite_replaces_the_question(monkeypatch):
-    calls, _ = record(monkeypatch)
+    calls, _ = record(monkeypatch, flag=QualityFlag.REWRITE)
 
     asyncio.run(verify(QUESTION_ID, QualityFlag.REWRITE))
 
@@ -143,7 +144,7 @@ def test_a_flagged_rewrite_replaces_the_question(monkeypatch):
 
 
 def test_weak_options_are_written_again_for_the_same_question(monkeypatch):
-    calls, _ = record(monkeypatch)
+    calls, _ = record(monkeypatch, flag=QualityFlag.WEAK_OPTIONS)
     answers = AnswerList(
         answers=[
             AnswerItem(
@@ -163,6 +164,22 @@ def test_weak_options_are_written_again_for_the_same_question(monkeypatch):
     assert sorted(calls[0][2]) == [False, False, False, True]
 
 
+def test_a_question_kept_or_replaced_since_it_was_flagged_is_skipped(monkeypatch):
+    calls, _ = record(monkeypatch, flag=None)
+
+    asyncio.run(verify(QUESTION_ID, QualityFlag.REWRITE))
+
+    assert calls == []
+
+
+def test_the_librarys_current_flag_wins_over_the_one_sent(monkeypatch):
+    calls, _ = record(monkeypatch, flag=QualityFlag.REWRITE)
+
+    asyncio.run(verify(QUESTION_ID, QualityFlag.WRONG_KEY))
+
+    assert calls == [("regenerate", QUESTION_ID)]
+
+
 def test_a_deleted_question_is_skipped(monkeypatch):
     calls, _ = record(monkeypatch)
 
@@ -176,7 +193,17 @@ def test_a_deleted_question_is_skipped(monkeypatch):
     assert calls == []
 
 
-def test_verify_endpoint_queues_the_worker_job(client, queued):
+def no_verify_budget_used(monkeypatch):
+    from app.services import budget
+
+    async def count_today(key):
+        return 1
+
+    monkeypatch.setattr(budget, "count_today", count_today)
+
+
+def test_verify_endpoint_queues_the_worker_job(client, queued, monkeypatch):
+    no_verify_budget_used(monkeypatch)
     exp = datetime.now(UTC) + timedelta(seconds=60)
     service_token = jwt.encode(
         {"iss": "library", "aud": "generation", "exp": exp},
@@ -210,7 +237,7 @@ def test_fix_now_checks_a_wrong_key_at_once_instead_of_batching(monkeypatch):
     calls = []
 
     async def context(_question_id):
-        return SimpleNamespace(text="Q?")
+        return SimpleNamespace(text="Q?", flag=QualityFlag.WRONG_KEY)
 
     async def check_key(question_id, question, found_context):
         calls.append("now")
@@ -227,3 +254,28 @@ def test_fix_now_checks_a_wrong_key_at_once_instead_of_batching(monkeypatch):
     asyncio.run(verify_service.verify(QUESTION_ID, QualityFlag.WRONG_KEY))
 
     assert calls == ["now", "batch"]
+
+
+def test_verify_jobs_past_the_daily_cap_are_refused_but_fix_now_is_not(client, queued, monkeypatch):
+    from app.constants.quality import DAILY_VERIFY_LIMIT
+    from app.services import budget
+
+    async def count_today(key):
+        return DAILY_VERIFY_LIMIT + 1
+
+    monkeypatch.setattr(budget, "count_today", count_today)
+    exp = datetime.now(UTC) + timedelta(seconds=60)
+    service_token = jwt.encode(
+        {"iss": "library", "aud": "generation", "exp": exp},
+        "test-secret-that-is-at-least-32-bytes",
+        algorithm="HS256",
+    )
+    url = f"/internal/questions/{QUESTION_ID}/verify"
+    headers = {"Authorization": f"Bearer {service_token}"}
+
+    assert client.post(url, json={"flag": "rewrite"}, headers=headers).status_code == 503
+    assert queued == []
+    assert (
+        client.post(url, json={"flag": "rewrite", "now": True}, headers=headers).status_code == 202
+    )
+    assert len(queued) == 1

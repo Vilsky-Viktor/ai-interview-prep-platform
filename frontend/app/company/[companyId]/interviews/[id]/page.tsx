@@ -3,11 +3,11 @@ import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
-import { CandidatesReport } from "@/components/company/candidates-report"
 import { CandidateList } from "@/components/company/candidate-list"
 import { CandidateSearch } from "@/components/company/candidate-search"
 import { DeleteInterview } from "@/components/company/delete-interview"
 import { InterviewNav } from "@/components/company/interview-nav"
+import { InterviewReportActions } from "@/components/company/interview-report-actions"
 import { TryInterview } from "@/components/company/try-interview"
 import { EditableTitle } from "@/components/editable-title"
 import { InterviewSettings } from "@/components/company/interview-settings"
@@ -48,29 +48,48 @@ export default async function InterviewPage({
   const sort =
     CANDIDATE_SORTS.find((option) => option === asked) ?? CANDIDATE_SORTS[0]
   const t = await getTranslations("interviews")
-  const filters = await serverFetch<CandidateFilters>(
-    "/companies/interviews/candidates/filters"
-  )
+  const search = q?.trim() ?? ""
+  const shownCandidates = tab === "candidates"
+
+  // The candidates' first page, with its sort, search and status (the API checks the status).
+  function candidatesPath(status: string | null) {
+    const query = new URLSearchParams({ sort })
+
+    if (search) {
+      query.set("q", search)
+    }
+
+    if (status) {
+      query.set("status", status)
+    }
+
+    return `/companies/interviews/${id}/candidates?${query}`
+  }
+
+  // Fetched together, and the candidates only for their tab. Their first page renders on the
+  // server; the rest load as the user scrolls.
+  const [interview, filters, firstPage] = await Promise.all([
+    serverFetch<InterviewDetail>(`/companies/interviews/${id}`),
+    shownCandidates
+      ? serverFetch<CandidateFilters>(
+          "/companies/interviews/candidates/filters"
+        )
+      : null,
+    shownCandidates
+      ? serverFetch<Candidate[]>(
+          `${candidatesPath(askedStatus ?? null)}&limit=${PAGE_SIZE}`
+        )
+      : null,
+  ])
   // Only what the API offers; anything else in the address is ignored.
   const status =
     filters?.filters.find((option) => option === askedStatus) ?? null
-  const search = q?.trim() ?? ""
-  const query = new URLSearchParams({ sort })
-
-  if (search) {
-    query.set("q", search)
-  }
-
-  if (status) {
-    query.set("status", status)
-  }
-
-  const candidatesPath = `/companies/interviews/${id}/candidates?${query}`
-  const [interview, candidates] = await Promise.all([
-    serverFetch<InterviewDetail>(`/companies/interviews/${id}`),
-    // The first page renders on the server; the rest load as the user scrolls.
-    serverFetch<Candidate[]>(`${candidatesPath}&limit=${PAGE_SIZE}`),
-  ])
+  const candidates =
+    askedStatus && !status
+      ? await serverFetch<Candidate[]>(
+          `${candidatesPath(null)}&limit=${PAGE_SIZE}`
+        )
+      : firstPage
 
   if (!interview) {
     notFound()
@@ -78,7 +97,10 @@ export default async function InterviewPage({
 
   const interviewsHref = `/company/${companyId}/interviews`
   const interviewHref = `${interviewsHref}/${id}`
+  const questionsPath = `/companies/interviews/${id}/questions`
   const ready = Boolean(interview.set_id)
+  // Viewers see everything but change nothing.
+  const canEdit = interview.can_edit
   const current = ready && tab === "candidates" ? tab : "topics"
 
   return (
@@ -94,6 +116,7 @@ export default async function InterviewPage({
                   <EditableTitle
                     title={interview.title}
                     path={`/companies/interviews/${interview.id}/title`}
+                    editable={canEdit}
                   />
                 ) : (
                   <h1 className="font-heading text-3xl font-medium tracking-tight text-balance">
@@ -114,28 +137,37 @@ export default async function InterviewPage({
                         title={interview.title ?? t("fallbackTitle")}
                       />
                     )}
-                    {ready && (
+                    {ready && canEdit && (
                       <DeleteInterview
                         interviewId={interview.id}
                         title={interview.title ?? t("fallbackTitle")}
                         leaveTo={interviewsHref}
                       />
                     )}
-                    <InterviewSettings
-                      interviewId={interview.id}
-                      questionSeconds={interview.question_seconds}
-                      passMark={interview.pass_mark}
-                      hired={interview.hired}
-                    />
+                    {canEdit && (
+                      <InterviewSettings
+                        interviewId={interview.id}
+                        questionSeconds={interview.question_seconds}
+                        passMark={interview.pass_mark}
+                        hired={interview.hired}
+                      />
+                    )}
                   </>
                 ) : (
                   current === "candidates" && (
                     <>
-                      <CandidatesReport interviewId={interview.id} />
-                      <InviteCandidate
-                        interviewId={interview.id}
-                        candidatesHref={`${interviewHref}?tab=candidates`}
-                      />
+                      {interview.candidate_count > 0 && (
+                        <InterviewReportActions
+                          interviewId={interview.id}
+                          title={interview.title ?? ""}
+                        />
+                      )}
+                      {canEdit && (
+                        <InviteCandidate
+                          interviewId={interview.id}
+                          candidatesHref={`${interviewHref}?tab=candidates`}
+                        />
+                      )}
                     </>
                   )
                 )}
@@ -143,7 +175,7 @@ export default async function InterviewPage({
             </div>
           }
         >
-          {!ready && (
+          {!ready && canEdit && (
             <Button
               variant="outline"
               className="h-12 px-6 text-base"
@@ -166,6 +198,7 @@ export default async function InterviewPage({
           <ShareLink
             interviewId={interview.id}
             linkToken={interview.link_token}
+            canEdit={canEdit}
           />
           <CandidateSearch
             action={interviewHref}
@@ -175,7 +208,7 @@ export default async function InterviewPage({
             filters={filters?.filters ?? []}
           />
           <CandidateList
-            path={candidatesPath}
+            path={candidatesPath(status)}
             interviewHref={interviewHref}
             narrowed={Boolean(search || status)}
             initial={candidates ?? []}
@@ -196,17 +229,22 @@ export default async function InterviewPage({
                   <SubtopicList subtopics={topic.subtopics} />
                 </span>
                 <span className="flex shrink-0 flex-col items-center gap-3">
+                  {/* Viewers read the questions; only owners and admins change them. */}
                   <TopicQuestions
                     title={topic.title}
                     path={`/companies/interviews/${id}/topics/${topic.id}/questions`}
-                    regeneratePath={`/companies/interviews/${id}/questions`}
-                    wrongPath={`/companies/interviews/${id}/questions`}
-                    reportsPath={`/companies/interviews/${id}/questions`}
+                    regeneratePath={canEdit ? questionsPath : undefined}
+                    wrongPath={canEdit ? questionsPath : undefined}
+                    reportsPath={canEdit ? questionsPath : undefined}
                   />
                   <TopicQuestionLimit
                     count={topic.question_count}
                     limit={topic.question_limit}
-                    limitPath={`/companies/interviews/${id}/topics/${topic.id}/limit`}
+                    limitPath={
+                      canEdit
+                        ? `/companies/interviews/${id}/topics/${topic.id}/limit`
+                        : undefined
+                    }
                   />
                 </span>
               </li>

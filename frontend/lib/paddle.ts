@@ -43,5 +43,7 @@ export async function openCheckout(
     items: [{ priceId, quantity: 1 }],
     customData,
     ...(email ? { customer: { email } } : {}),
+    // No discount codes are issued for now, so checkout doesn't offer to enter one.
+    settings: { showAddDiscounts: false },
   })
 }

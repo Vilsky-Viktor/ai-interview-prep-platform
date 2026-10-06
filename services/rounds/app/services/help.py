@@ -4,7 +4,7 @@ from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, System
 from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGES
 
 from app.constants.faq import FAQS
-from app.constants.help import HELP_HISTORY_MESSAGES, HelpRole
+from app.constants.help import HELP_HISTORY_CHARACTERS, HELP_HISTORY_MESSAGES, HelpRole
 from app.constants.legal import COMPANY
 from app.constants.privacy import PRIVACY_INTRO, PRIVACY_SECTIONS
 from app.constants.terms import TERMS_INTRO, TERMS_SECTIONS
@@ -28,10 +28,22 @@ def build_messages(
         privacy=legal_text(PRIVACY_INTRO, PRIVACY_SECTIONS),
         language=LANGUAGES[language],
     )
+    question = conversation[-1]
+    earlier = []
+    room = HELP_HISTORY_CHARACTERS
+
+    # The latest messages before the question, while they fit.
+    for item in reversed(conversation[-(HELP_HISTORY_MESSAGES + 1) : -1]):
+        room -= len(item.content)
+
+        if room < 0:
+            break
+
+        earlier.insert(0, item)
+
     messages: list[BaseMessage] = [SystemMessage(content=system)]
 
-    # The question, and the latest messages before it.
-    for item in conversation[-(HELP_HISTORY_MESSAGES + 1) :]:
+    for item in [*earlier, question]:
         message_class = HumanMessage if item.role == HelpRole.USER else AIMessage
         messages.append(message_class(content=item.content))
 

@@ -4,8 +4,11 @@ from datetime import UTC, datetime, timedelta
 
 from sqlalchemy.dialects import postgresql
 
-from app.constants.generation import GENERATION_STOPPED, STUCK_AFTER_SECONDS
-from app.models.generation import Generation
+from app.constants.generation import (
+    GENERATION_STOPPED,
+    QUEUED_STUCK_AFTER_SECONDS,
+    STUCK_AFTER_SECONDS,
+)
 from app.services import jobs, schedules
 from app.storage import generations
 
@@ -32,8 +35,8 @@ def no_finished_threads(monkeypatch, threads=(), expired=()):
 def test_sweep_fails_generations_untouched_for_longer_than_a_job_may_run(monkeypatch):
     calls = []
 
-    async def fake_fail_stuck(before, error):
-        calls.append((before, error))
+    async def fake_fail_stuck(running_before, queued_before, error):
+        calls.append((running_before, queued_before, error))
 
         return []
 
@@ -42,14 +45,20 @@ def test_sweep_fails_generations_untouched_for_longer_than_a_job_may_run(monkeyp
 
     asyncio.run(schedules.sweep(FakeCheckpointer()))
 
-    [(before, error)] = calls
-    expected = datetime.now(UTC) - timedelta(seconds=STUCK_AFTER_SECONDS)
-    assert abs((before - expected).total_seconds()) < 5
+    [(running_before, queued_before, error)] = calls
+    now = datetime.now(UTC)
+    assert (
+        abs((running_before - (now - timedelta(seconds=STUCK_AFTER_SECONDS))).total_seconds()) < 5
+    )
+    # A queued one may only be waiting for a free worker, so it gets longer.
+    queued_after = timedelta(seconds=QUEUED_STUCK_AFTER_SECONDS)
+    assert abs((queued_before - (now - queued_after)).total_seconds()) < 5
+    assert QUEUED_STUCK_AFTER_SECONDS > STUCK_AFTER_SECONDS
     assert error == GENERATION_STOPPED
 
 
 def test_sweep_deletes_checkpoints_of_finished_generations(monkeypatch):
-    async def fake_fail_stuck(before, error):
+    async def fake_fail_stuck(running_before, queued_before, error):
         return []
 
     checkpointer = FakeCheckpointer()
@@ -100,11 +109,11 @@ def test_only_queued_and_running_rows_are_swept(monkeypatch):
     statements = []
     fake_session(monkeypatch, statements)
 
-    asyncio.run(generations.fail_stuck(datetime.now(UTC), GENERATION_STOPPED))
+    asyncio.run(generations.fail_stuck(datetime.now(UTC), datetime.now(UTC), GENERATION_STOPPED))
 
     sql = compiled(statements[0])
-    assert "status IN ('queued', 'running')" in sql
-    assert "updated_at <" in sql
+    assert "status = 'running' AND generations.updated_at <" in sql
+    assert "status = 'queued' AND generations.updated_at <" in sql
     assert "'failed'" in sql
 
 
@@ -143,18 +152,40 @@ def test_the_worker_runs_schedules_and_jobs_through_its_routes(monkeypatch):
     assert called == [("sweep",), ("key_check_batches",), ("retention",)]
 
 
-def test_worker_skips_a_generation_the_sweeper_already_failed(monkeypatch):
+def test_worker_runs_only_a_generation_it_claims_from_the_queue(monkeypatch):
+    """Failed by the sweeper, cancelled while it waited, or claimed by another delivery of the
+    same job: it isn't queued any more, so this job doesn't run it."""
     started = []
 
-    async def get(_generation_id):
-        return Generation(id=uuid.uuid4(), status="failed", kind="interview")
+    async def not_queued(_generation_id):
+        return False
 
     async def run_pipeline(*args):
         started.append(args)
 
-    monkeypatch.setattr(generations, "get", get)
+    monkeypatch.setattr(generations, "claim_run", not_queued)
     monkeypatch.setattr(jobs, "run_pipeline", run_pipeline)
 
     asyncio.run(jobs.run_generation(None, uuid.uuid4(), None))
 
     assert started == []
+
+
+def test_claiming_a_run_moves_only_a_queued_generation(monkeypatch):
+    statements = []
+    fake_session(monkeypatch, statements, rowcount=1)
+
+    assert asyncio.run(generations.claim_run(uuid.uuid4())) is True
+
+    sql = compiled(statements[0])
+    assert "status='running'" in sql.replace(" ", "")
+    assert "generations.status = 'queued'" in sql
+
+
+def test_updates_never_touch_a_finished_generation(monkeypatch):
+    statements = []
+    fake_session(monkeypatch, statements, rowcount=0)
+
+    assert asyncio.run(generations.update(uuid.uuid4(), status="failed")) is False
+
+    assert "NOT IN ('done', 'cancelled')" in compiled(statements[0])

@@ -12,7 +12,8 @@ from app.storage import invites
 async def start_sessions(
     invite: CandidateInvite, interview: Interview, user_id: str
 ) -> InviteStartOut:
-    """Starts (or returns) the candidate's sessions: one per topic, with fresh random questions."""
+    """Starts (or returns) the candidate's sessions: one per topic, with fresh random questions,
+    and marks the invite in process."""
     interview = await attach_set(interview)
 
     if interview.set_id is None:
@@ -23,7 +24,8 @@ async def start_sessions(
     if content is None or not content["topics"]:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview content not found")
 
-    await invites.start(invite, user_id)
+    # Sessions first: if rounds fails, the invite stays unstarted, so expiry gives its credits
+    # back. Starting again returns the sessions already made.
     created = await rounds.create_sessions(
         {
             "user_id": user_id,
@@ -32,6 +34,12 @@ async def start_sessions(
             "topics": session_topics(interview, content),
         }
     )
+
+    # Revoked meanwhile: its sessions go too.
+    if not await invites.start(invite.id, user_id):
+        await rounds.delete_invite_sessions([invite.id])
+
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
 
     return InviteStartOut(
         sessions=[

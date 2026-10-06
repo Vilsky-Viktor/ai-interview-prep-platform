@@ -12,7 +12,7 @@ from app.constants.credits import (
     Reason,
 )
 from app.constants.products import DELETED_OWNER
-from app.models.billing import Referral, Wallet
+from app.models.billing import Entry, Referral, Wallet
 from app.storage.db import Session
 from app.storage.ledger import add, ensure
 
@@ -55,8 +55,12 @@ async def record(code: str, owner_type: str, owner_id: str, related: list[str]) 
         return new is not None
 
 
-async def reward(owner_type: str, owner_id: str) -> str | None:
-    """Pays a referral once its new company has topped up enough: both sides get
+def reward_key(owner_type: str, owner_id: str, transaction_id: str) -> str:
+    return f"referral:{owner_type}:{owner_id}:{transaction_id}"
+
+
+async def reward(owner_type: str, owner_id: str, transaction_id: str) -> str | None:
+    """Pays a referral once its new company has topped up (`transaction_id`): both sides get
     the reward, the referrer only within their yearly limit and while their wallet exists.
     The referrer's id when it was paid."""
     amount = REFERRAL_REWARD
@@ -70,14 +74,14 @@ async def reward(owner_type: str, owner_id: str) -> str | None:
                 Referral.owner_id == owner_id,
                 Referral.rewarded_at.is_(None),
             )
-            .values(rewarded_at=now)
+            .values(rewarded_at=now, rewarded_by=transaction_id)
             .returning(Referral.referrer_id)
         )
 
         if referrer_id is None:
             return None
 
-        key = f"referral:{owner_type}:{owner_id}"
+        key = reward_key(owner_type, owner_id, transaction_id)
         await add(session, owner_type, owner_id, amount, key, Reason.REFERRAL)
         rewarded_this_year = await session.scalar(
             select(func.count()).where(
@@ -95,6 +99,40 @@ async def reward(owner_type: str, owner_id: str) -> str | None:
         await session.commit()
 
         return referrer_id
+
+
+async def take_back(transaction_id: str) -> bool:
+    """The top-up that paid a referral was refunded in full or charged back: both sides' rewards
+    go back (from wallets that still exist), and the referral waits for the company's next
+    top-up. Once per transaction, however often Paddle sends the adjustment. True when there
+    was a reward to take back."""
+    async with Session() as session:
+        referral = await session.scalar(
+            update(Referral)
+            .where(Referral.rewarded_by == transaction_id)
+            .values(rewarded_at=None, rewarded_by=None)
+            .returning(Referral)
+        )
+
+        if referral is None:
+            return False
+
+        key = reward_key(referral.owner_type, referral.owner_id, transaction_id)
+        paid = await session.scalars(select(Entry).where(Entry.key.in_([key, f"{key}:referrer"])))
+
+        for entry in list(paid):
+            await add(
+                session,
+                entry.owner_type,
+                entry.owner_id,
+                -entry.amount,
+                f"{entry.key}:reversed",
+                Reason.REFERRAL_REVERSED,
+            )
+
+        await session.commit()
+
+        return True
 
 
 async def rewarded_count(owner_type: str, owner_id: str) -> int:

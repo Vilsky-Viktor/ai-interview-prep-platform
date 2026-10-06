@@ -2,7 +2,7 @@
 
 import { ArrowUpIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
 import { ChatBubble, ThinkingBubble } from "@/components/chat-bubble"
@@ -21,6 +21,10 @@ export function HelpChat() {
   const [messages, setMessages] = useState<HelpMessage[]>([])
   const [input, setInput] = useState("")
   const [reply, setReply] = useState<string | null>(null)
+  // Stops a reply still streaming when the page is left.
+  const stream = useRef<AbortController | null>(null)
+
+  useEffect(() => () => stream.current?.abort(), [])
 
   async function send(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -30,14 +34,24 @@ export function HelpChat() {
     setMessages(conversation)
     setInput("")
     setReply("")
+    stream.current = new AbortController()
+    const { signal } = stream.current
 
     try {
-      await streamHelp(conversation, (delta) => {
-        full += delta
-        setReply(full)
-      })
+      await streamHelp(
+        conversation,
+        (delta) => {
+          full += delta
+          setReply(full)
+        },
+        signal
+      )
       setMessages([...conversation, { role: "assistant", content: full }])
     } catch (error) {
+      if (signal.aborted) {
+        return
+      }
+
       toast.error(apiErrorMessage(error, t("failed")))
       setMessages(messages)
       setInput(question.content)
@@ -54,6 +68,9 @@ export function HelpChat() {
   }
 
   const streaming = reply !== null
+  const last = messages.at(-1)
+  // Screen readers hear each reply once, whole, not every streamed piece of it.
+  const answered = !streaming && last?.role === "assistant" ? last.content : ""
 
   return (
     <section className="space-y-6">
@@ -65,7 +82,7 @@ export function HelpChat() {
       </div>
       <div className="space-y-6 rounded-3xl bg-card p-4 shadow-sm ring-1 ring-foreground/5 sm:p-6">
         {(messages.length > 0 || streaming) && (
-          <ul className="space-y-3" aria-live="polite">
+          <ul className="space-y-3">
             {messages.map((message, index) => (
               <ChatBubble
                 key={index}
@@ -81,6 +98,9 @@ export function HelpChat() {
               ))}
           </ul>
         )}
+        <p aria-live="polite" className="sr-only">
+          {answered}
+        </p>
         <form
           onSubmit={send}
           className="relative rounded-[2rem] border border-transparent transition-colors focus-within:border-ring"

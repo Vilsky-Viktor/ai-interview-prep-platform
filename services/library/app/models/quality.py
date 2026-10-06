@@ -32,6 +32,8 @@ class QuestionStats(Base):
     flag: Mapped[str | None] = mapped_column(String(32))
     # The verifier checked the flag and found nothing wrong: not flagged again until replaced.
     kept: Mapped[bool] = mapped_column(default=False)
+    # When the flag was set, or last sent to the verifier again (services/quality.py).
+    flagged_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )

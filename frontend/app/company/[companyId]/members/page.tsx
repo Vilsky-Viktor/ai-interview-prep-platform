@@ -12,7 +12,7 @@ import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Company, CompanyMember } from "@/types/company"
 
-export const generateMetadata = () => translatedTitle("company", "admins")
+export const generateMetadata = () => translatedTitle("company", "team")
 
 export default async function MembersPage({
   params,
@@ -34,7 +34,7 @@ export default async function MembersPage({
   if (!signedIn) {
     return (
       <main className="mx-auto max-w-5xl px-6 py-12">
-        <SignInPrompt message={t("signInAdmins")} />
+        <SignInPrompt message={t("signInTeam")} />
       </main>
     )
   }
@@ -52,6 +52,7 @@ export default async function MembersPage({
         verifiedDomain={company.verified_domain ?? null}
         websiteDomain={company.website_domain ?? null}
         current="members"
+        canEdit={company.can_edit}
         action={
           company.role === "owner" ? (
             <InviteAdmin companyId={companyId} />

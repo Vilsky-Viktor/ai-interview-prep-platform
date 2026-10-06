@@ -16,6 +16,15 @@ def test_a_signature_from_paddle_is_valid():
     assert signature_valid(header, body, SECRET, time.time(), WEBHOOK_TOLERANCE_SECONDS)
 
 
+def test_during_a_secret_rotation_one_matching_signature_is_enough():
+    body, header = signed(completed())
+    timestamp, h1 = header.split(";")
+
+    assert signature_valid(
+        f"{timestamp};h1=from-the-other-secret;{h1}", body, SECRET, time.time(), 300
+    )
+
+
 @pytest.mark.parametrize(
     "case", ["wrong secret", "old", "tampered body", "no secret configured", "garbage header"]
 )
@@ -53,7 +62,7 @@ def granted(monkeypatch):
 
         return True
 
-    async def no_referral(owner_type, owner_id):
+    async def no_referral(owner_type, owner_id, transaction_id):
         return None
 
     monkeypatch.setattr(purchases, "grant", fake_grant)

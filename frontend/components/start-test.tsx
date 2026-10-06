@@ -57,7 +57,10 @@ export function StartTest({
     }
 
     try {
-      const found = await apiFetch<Company[]>("/companies/companies?limit=100")
+      // Only companies where the user may create a test: not those they only view.
+      const found = (
+        await apiFetch<Company[]>("/companies/companies?limit=100")
+      ).filter((company) => company.can_edit)
       setCompanies(found)
       // The newest company is the likeliest; the list is oldest first.
       setChosen(found.at(-1)?.id ?? NEW)
@@ -134,6 +137,7 @@ export function StartTest({
           onKeyDown={handleKeyDown}
           placeholder={t("placeholder")}
           aria-label={t("description")}
+          autoFocus
           className="max-h-72 min-h-40 resize-none border-0 bg-transparent p-2 text-base shadow-none focus-visible:ring-0 md:text-base dark:bg-transparent"
         />
         <div className="flex flex-wrap items-center justify-between gap-4 ps-2 pt-2">

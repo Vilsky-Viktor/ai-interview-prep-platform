@@ -1,12 +1,12 @@
 "use client"
 
-import { ChevronDownIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
+import { PillSelect } from "@/components/pill-select"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -20,41 +20,6 @@ import {
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { openCheckout } from "@/lib/paddle"
 import type { AutoTopUp, Catalog } from "@/types/billing"
-
-function PillSelect({
-  label,
-  value,
-  options,
-  onChange,
-}: {
-  label: string
-  value: string
-  options: { value: string; label: string }[]
-  onChange: (value: string) => void
-}) {
-  return (
-    <label className="block space-y-2">
-      <span className="text-sm text-muted-foreground">{label}</span>
-      <span className="relative block rounded-full border border-transparent transition-colors focus-within:border-ring">
-        <select
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-          className="h-14 w-full appearance-none rounded-full border-0 bg-muted px-6 pe-16 text-lg outline-none dark:bg-input/30"
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <ChevronDownIcon
-          aria-hidden
-          className="pointer-events-none absolute end-6 top-1/2 size-6 -translate-y-1/2 text-muted-foreground"
-        />
-      </span>
-    </label>
-  )
-}
 
 /** A wallet's automatic top-up: what it is now, and a dialog to turn it on, change or turn
  * off. Turning it on the first time opens Paddle's checkout to save the card. */
@@ -76,12 +41,16 @@ export function AutoTopUpSetting({
   const [product, setProduct] = useState("")
   const [threshold, setThreshold] = useState("")
   const [saving, setSaving] = useState(false)
+  // The recheck after Paddle's checkout, stopped when the setting leaves the page.
+  const recheck = useRef<number | undefined>(undefined)
 
   useEffect(() => {
     apiFetch<AutoTopUp>(path)
       .then(setSetting)
       .catch(() => {})
   }, [path])
+
+  useEffect(() => () => clearTimeout(recheck.current), [])
 
   if (!setting?.offered || !user) {
     return null
@@ -128,8 +97,10 @@ export function AutoTopUpSetting({
         () => {
           toast.success(t("turnedOn"))
           // Paddle confirms the subscription within seconds.
-          window.setTimeout(() => {
-            apiFetch<AutoTopUp>(path).then(setSetting)
+          recheck.current = window.setTimeout(() => {
+            apiFetch<AutoTopUp>(path)
+              .then(setSetting)
+              .catch(() => {})
             router.refresh()
           }, 4000)
         }

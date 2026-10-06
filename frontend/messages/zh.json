@@ -77,7 +77,7 @@
     "notFoundText": "该页面不存在或已被删除。"
   },
   "home": {
-    "title": "面试每一位候选人\n招到最优秀的人才",
+    "title": "测试每一位候选人\n招到最优秀的人才",
     "text": "根据你的职位描述生成限时面试。每位候选人的题目都不同，每道题都有计时。每位候选人 $1 起。"
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "/ {count, number}",
     "per": "每",
     "candidate": "候选人",
-    "showOptions": "显示答案选项",
-    "hideOptions": "隐藏答案选项",
     "correct": "正确答案",
     "wrong": "错误答案",
     "regenerating": "正在重新生成…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "所有者",
-    "admin": "管理员"
+    "admin": "管理员",
+    "viewer": "查看者",
+    "adminNote": "创建和修改面试、邀请候选人、充值。",
+    "viewerNote": "查看面试和结果、分享报告，不能更改任何内容。"
   },
   "company": {
     "title": "公司",
     "signInInterviews": "登录后查看公司的面试。",
-    "signInAdmins": "登录后查看公司的管理员。",
+    "signInTeam": "登录后查看公司的团队。",
     "signInReferrals": "登录后查看公司的邀请链接。",
     "empty": "还没有公司。",
     "owner": "所有者",
     "interviewCount": "{count, plural, other {# 场面试}}",
     "interviews": "面试",
     "templates": "模板",
-    "admins": "管理员",
+    "team": "团队",
     "referrals": "邀请",
     "new": "新公司",
     "name": "公司名称",
@@ -420,9 +421,9 @@
     "timePerQuestion": "每题时间",
     "secondsLabel": "每题时间（秒）",
     "secondsUnit": "秒",
-    "adminEmail": "管理员邮箱",
-    "addAdmin": "添加管理员",
-    "adminFailed": "无法邀请该管理员，请重试。",
+    "memberEmail": "成员邮箱",
+    "addMember": "添加成员",
+    "memberFailed": "无法邀请，请重试。",
     "invite": "邀请",
     "jobDescription": "职位描述",
     "pasteJob": "粘贴职位描述：岗位、任职要求和加分项…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, other {# 个邮箱无效}}。",
       "limit": "{count, plural, other {# 个邮箱}}暂时超出了你的发送上限。请一小时后重试。",
       "no_credits": "{count, plural, other {# 位候选人未被邀请}}：点数不足。充值后即可邀请。",
+      "started": "{count, plural, other {# 位候选人}}已经开始，因此没有再次发送邮件。",
       "failed": "{count, plural, other {# 份邀请}}无法发送。请重试。"
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "已加入",
     "invited": "已邀请",
+    "role": "角色",
+    "roleFailed": "无法更改角色。",
     "copy": "复制",
     "inviteTitle": "公司邀请",
     "remove": "移除",
@@ -587,7 +591,17 @@
         "better": "哪张报表显示一段时期的利润？"
       },
       "comment": "这取决于公司，所以没有唯一正确的答案。",
-      "list": "会计基础"
+      "list": "会计基础",
+      "options": {
+        "good": [
+          "某一日期的资产、负债和所有者权益",
+          "一年的利润",
+          "一个月的现金收支",
+          "明年的预算"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": ["资产负债表", "利润表", "现金流量表", "试算平衡表"]
+      }
     },
     "try": {
       "title": "在候选人之前亲自试一试",

@@ -77,7 +77,7 @@
     "notFoundText": "That page doesn't exist or was removed."
   },
   "home": {
-    "title": "Interview everyone\nHire the best",
+    "title": "Test everyone\nHire the best",
     "text": "Timed interviews made from your job description. Unique questions for every candidate and a timer on each. From $1 per candidate."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "of {count, number}",
     "per": "per",
     "candidate": "candidate",
-    "showOptions": "Show answer options",
-    "hideOptions": "Hide answer options",
     "correct": "Correct answer",
     "wrong": "Wrong answer",
     "regenerating": "Re-generating…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "owner",
-    "admin": "admin"
+    "admin": "admin",
+    "viewer": "viewer",
+    "adminNote": "Creates and changes interviews, invites candidates, tops up.",
+    "viewerNote": "Sees interviews and results, shares reports. Changes nothing."
   },
   "company": {
     "title": "Companies",
     "signInInterviews": "Sign in to see company interviews.",
-    "signInAdmins": "Sign in to see company admins.",
+    "signInTeam": "Sign in to see the company's team.",
     "signInReferrals": "Sign in to see the company's referral link.",
     "empty": "No companies yet.",
     "owner": "Owner",
     "interviewCount": "{count, plural, one {# interview} other {# interviews}}",
     "interviews": "Interviews",
     "templates": "Templates",
-    "admins": "Admins",
+    "team": "Team",
     "referrals": "Referrals",
     "new": "New company",
     "name": "Company name",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Time per question",
     "secondsLabel": "Time per question in seconds",
     "secondsUnit": "s",
-    "adminEmail": "Admin email",
-    "addAdmin": "Add admin",
-    "adminFailed": "Couldn't invite that admin. Please try again.",
+    "memberEmail": "Member email",
+    "addMember": "Add member",
+    "memberFailed": "Couldn't invite them. Please try again.",
     "invite": "Invite",
     "jobDescription": "Job description",
     "pasteJob": "Paste the job description: the role, its requirements and nice-to-haves…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, one {# email isn't valid} other {# emails aren't valid}}.",
       "limit": "{count, plural, one {# email is} other {# emails are}} over your email limit for now. Try again in an hour.",
       "no_credits": "{count, plural, one {# candidate wasn't invited} other {# candidates weren't invited}}: out of credits. Top up to invite them.",
+      "started": "{count, plural, one {# candidate has} other {# candidates have}} already started, so they weren't emailed again.",
       "failed": "{count, plural, one {# invite} other {# invites}} couldn't be sent. Try again."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Joined",
     "invited": "Invited",
+    "role": "Role",
+    "roleFailed": "Couldn't change the role.",
     "copy": "Copy",
     "inviteTitle": "Company invite",
     "remove": "Remove",
@@ -591,7 +595,22 @@
         "better": "Which statement shows profit over a period?"
       },
       "comment": "It depends on the company, so there's no single right answer.",
-      "list": "Accounting basics"
+      "list": "Accounting basics",
+      "options": {
+        "good": [
+          "Assets, liabilities and equity on a date",
+          "Profit over a year",
+          "Cash in and out in a month",
+          "Next year's budget"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Balance sheet",
+          "Income statement",
+          "Cash flow statement",
+          "Trial balance"
+        ]
+      }
     },
     "try": {
       "title": "Try it before candidates do",

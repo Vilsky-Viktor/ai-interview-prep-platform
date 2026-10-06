@@ -13,7 +13,7 @@ from app.schemas.generation import GenerationOut, InterviewGenerationCreate, Rev
 from app.schemas.regenerate import RegeneratedOut, RegenerateIn
 from app.schemas.verify import VerifyIn
 from app.service_auth import ServiceCaller
-from app.services.budget import use_daily_budget
+from app.services.budget import use_daily_budget, use_verify_budget
 from app.services.cancel import cancel_generation
 from app.services.regenerate import regenerate
 from app.services.retry import retry_generation
@@ -125,7 +125,11 @@ async def regenerate_interview_question(
 async def verify_question(
     question_id: UUID, body: VerifyIn, caller: ServiceCaller, request: Request
 ) -> None:
-    """The library flagged the question; the worker checks it and fixes or replaces it."""
+    """The library flagged the question; the worker checks it and fixes or replaces it. Past
+    the daily cap the call is refused, and the library sends the flag again later."""
+    if not body.now:
+        await use_verify_budget()
+
     await tasks.enqueue(
         VERIFY_QUESTION, {"question_id": str(question_id), "flag": body.flag, "now": body.now}
     )

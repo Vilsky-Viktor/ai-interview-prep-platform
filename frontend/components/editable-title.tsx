@@ -12,15 +12,17 @@ const titleClass =
   "font-heading text-3xl font-medium tracking-tight text-balance normal-case"
 
 /** A page's title, edited in place: `path` takes {"title"}. `maxLength` defaults to a test's
- * title limit (a company's name is shorter). */
+ * title limit (a company's name is shorter). Not `editable` (a viewer), it's a plain title. */
 export function EditableTitle({
   title,
   path,
   maxLength = MAX_TITLE_LENGTH,
+  editable = true,
 }: {
   title: string
   path: string
   maxLength?: number
+  editable?: boolean
 }) {
   const t = useTranslations("common")
   const router = useRouter()
@@ -88,6 +90,10 @@ export function EditableTitle({
     skipSave.current = true
     setValue(title)
     setEditing(false)
+  }
+
+  if (!editable) {
+    return <h1 className={titleClass}>{title}</h1>
   }
 
   if (!editing) {

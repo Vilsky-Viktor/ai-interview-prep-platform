@@ -7,6 +7,9 @@ DB_MAX_OVERFLOW = 2
 DROPDOWN_LIMIT = 10
 MAX_PER_RECIPIENT = 100
 KEEP_DAYS = 90
+# Each new notification removes up to this many expired ones (and their received events), which
+# keeps up with how many arrive.
+EXPIRED_PER_PRUNE = 100
 # Kinds that can come in bursts. One about the same thing (its page and title) within
 # GROUP_HOURS of the last adds to it, "3 candidates finished …", instead of a new one.
 GROUPED_KINDS = {"candidate_finished", "invite_undelivered", "question_flagged", "question_fixed"}

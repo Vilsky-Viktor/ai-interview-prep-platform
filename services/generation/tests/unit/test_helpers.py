@@ -194,19 +194,18 @@ def test_worker_skips_a_generation_cancelled_while_queued(monkeypatch):
     import asyncio
     import uuid
 
-    from app.models.generation import Generation
     from app.services import jobs
     from app.storage import generations
 
     started = []
 
-    async def get(_generation_id):
-        return Generation(id=uuid.uuid4(), status="cancelled", kind="interview")
+    async def cancelled(_generation_id):
+        return False
 
     async def run_pipeline(*args):
         started.append(args)
 
-    monkeypatch.setattr(generations, "get", get)
+    monkeypatch.setattr(generations, "claim_run", cancelled)
     monkeypatch.setattr(jobs, "run_pipeline", run_pipeline)
 
     asyncio.run(jobs.run_generation(None, uuid.uuid4(), None))

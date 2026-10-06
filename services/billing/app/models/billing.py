@@ -22,7 +22,8 @@ class Wallet(Base):
 
 class Referral(Base):
     """A new company that came through another company's link. `rewarded_at` is set when
-    their first big enough top-up pays both sides."""
+    their first top-up pays both sides, and `rewarded_by` is that top-up's transaction; a full
+    refund of it takes the rewards back and clears both."""
 
     __tablename__ = "referrals"
 
@@ -33,12 +34,13 @@ class Referral(Base):
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     rewarded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    rewarded_by: Mapped[str | None] = mapped_column(String(64), index=True)
 
 
 class AutoTopUp(Base):
     """A wallet's automatic top-up: the top-up to buy when the available balance falls under
     `threshold`. Waiting for its checkout until `subscription_id` is set; `charged_at` is the
-    last automatic charge."""
+    last automatic charge, `failed_at` the last one the card declined."""
 
     __tablename__ = "auto_top_ups"
 
@@ -50,6 +52,7 @@ class AutoTopUp(Base):
     buyer_id: Mapped[str] = mapped_column(String(128))
     subscription_id: Mapped[str | None] = mapped_column(String(64), unique=True)
     charged_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    failed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class Gift(Base):

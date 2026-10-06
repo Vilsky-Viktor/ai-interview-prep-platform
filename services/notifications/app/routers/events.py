@@ -12,5 +12,5 @@ async def receive_event(body: PushBody) -> None:
     """Pub/Sub pushes every event here. A failed email answers with an error, so Pub/Sub
     retries it, and moves it to the dead-letter topic after the subscription's maximum
     attempts; Resend never sends the same message twice."""
-    event_type, data, message_id = event_of(body)
-    await handle(event_type, data, message_id)
+    event_type, data, event_id = event_of(body)
+    await handle(event_type, data, event_id)

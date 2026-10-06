@@ -13,20 +13,23 @@ const ICON_BUTTON =
   "size-12 shrink-0 text-muted-foreground hover:text-foreground"
 
 /** Download a PDF report, or share it by email or chat. It's made from the hidden element
- * `reportId` (over several pages with `pages`); `emailPath` emails it, `summary` is the chat
- * message. Icons like the page's other actions; their tooltips name them. */
+ * `reportId` (over several pages with `pages`), which `load`, when given, renders first;
+ * `emailPath` emails it, `summary` is the chat message. Icons like the page's other actions; their tooltips name them. */
 export function ReportActions({
   reportId,
   fileName,
   emailPath,
   summary,
   pages = false,
+  load,
 }: {
   reportId: string
   fileName: string
   emailPath: string
   summary: string
   pages?: boolean
+  // Loads the report's data, and so the hidden report, the first time it's needed.
+  load?: () => Promise<void>
 }) {
   const t = useTranslations("report")
   const [busy, setBusy] = useState(false)
@@ -43,6 +46,7 @@ export function ReportActions({
     setBusy(true)
 
     try {
+      await load?.()
       const file = await makePdf()
 
       if (file) {
@@ -54,6 +58,19 @@ export function ReportActions({
         // Released once the browser has started saving it.
         setTimeout(() => URL.revokeObjectURL(url), 1000)
       }
+    } catch {
+      toast.error(t("failed"))
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function share() {
+    setBusy(true)
+
+    try {
+      await load?.()
+      setSharing(true)
     } catch {
       toast.error(t("failed"))
     } finally {
@@ -78,7 +95,8 @@ export function ReportActions({
         size="icon"
         className={ICON_BUTTON}
         aria-label={t("share")}
-        onClick={() => setSharing(true)}
+        disabled={busy}
+        onClick={share}
       >
         <Share2Icon className="size-6" />
       </Button>

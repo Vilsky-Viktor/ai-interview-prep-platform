@@ -1,0 +1,160 @@
+import uuid
+from datetime import UTC, datetime, timedelta
+
+from app.constants.invites import CandidateFilter, InviteStatus
+from app.storage import accounts, candidates, companies, interviews, invites
+
+
+async def interview():
+    company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
+
+    return await interviews.create(company.id, uuid.uuid4(), "en")
+
+
+async def invite(found, email):
+    return await invites.upsert(found.id, email, "Backend", "Acme", "en")
+
+
+def emails(rows):
+    return [row.email for row in rows]
+
+
+def test_candidates_are_found_by_part_of_their_email_and_by_status(run):
+    async def scenario():
+        found = await interview()
+
+        for email in ("ann_lee@example.com", "annlee@example.com", "bob@example.com"):
+            await invite(found, email)
+
+        bob = await invites.for_link(found.id, "bob@example.com")
+        await invites.finish(bob.id, 50, False, None)
+
+        return (
+            sorted(emails(await candidates.page(found.id, 0, 10, False, "ANN"))),
+            emails(await candidates.page(found.id, 0, 10, False, "ann_")),
+            emails(await candidates.page(found.id, 0, 10, False, "", InviteStatus.FINISHED)),
+        )
+
+    by_text, underscore, finished = run(scenario())
+
+    assert by_text == ["ann_lee@example.com", "annlee@example.com"]
+    # An underscore is matched as typed, not as any character.
+    assert underscore == ["ann_lee@example.com"]
+    assert finished == ["bob@example.com"]
+
+
+def test_candidates_sort_by_stored_grade_filter_by_result_and_page_in_sql(run):
+    async def scenario():
+        found = await interview()
+        # Invited in this order, so newest first is cleo, ben, ada, dan.
+        dan = await invite(found, "dan@example.com")
+        ada = await invite(found, "ada@example.com")
+        ben = await invite(found, "ben@example.com")
+        await invite(found, "cleo@example.com")
+        await invites.finish(ada.id, 90, True, None)
+        await invites.finish(ben.id, 60, False, None)
+        await invites.finish(dan.id, 75, False, None)
+
+        def listed(offset, limit, filter_by=None):
+            return candidates.page(found.id, offset, limit, True, "", filter_by, 70)
+
+        return (
+            emails(await listed(0, 2)) + emails(await listed(2, 2)),
+            emails(await listed(0, 10, CandidateFilter.PASSED)),
+            emails(await listed(0, 10, CandidateFilter.FLAGGED)),
+        )
+
+    by_grade, passed, flagged = run(scenario())
+
+    # Best grade first; cleo, still to finish, comes last.
+    assert by_grade == [
+        "ada@example.com",
+        "dan@example.com",
+        "ben@example.com",
+        "cleo@example.com",
+    ]
+    assert passed == ["ada@example.com", "dan@example.com"]
+    assert flagged == ["ada@example.com"]
+
+
+def test_lookups_count_find_one_candidate_and_leave_out_deleted_ones(run):
+    async def scenario():
+        found = await interview()
+        other = await interview()
+        ann = await invite(found, "ann@example.com")
+        gone = await invite(found, "gone@example.com")
+        await invites.start(gone.id, "gone-uid")
+        await accounts.forget_candidate("gone-uid", "gone@example.com")
+        before_finish = await candidates.any_finished(found.id)
+        await invites.finish(ann.id, None, False, None)
+
+        return (
+            await candidates.counts([found.id, other.id]),
+            await candidates.get(found.id, ann.id),
+            await candidates.get(other.id, ann.id),
+            before_finish,
+            await candidates.any_finished(found.id),
+            await candidates.unscored(found.id),
+            emails(await candidates.for_report(found.id)),
+            found.id,
+            ann.id,
+        )
+
+    counts, mine, elsewhere, before, after, unscored, report, found_id, ann_id = run(scenario())
+
+    assert counts == {found_id: 2}
+    assert mine.id == ann_id
+    assert elsewhere is None
+    assert (before, after) == (False, True)
+    # Finished without a grade (rounds didn't answer): the list stores it later.
+    assert unscored == [ann_id]
+    assert report == ["ann@example.com"]
+
+
+def test_results_saved_from_the_list_finish_the_invite(run):
+    async def scenario():
+        found = await interview()
+        ann = await invite(found, "ann@example.com")
+        await invites.start(ann.id, "ann-uid")
+        await candidates.save_results({ann.id: (85, True)})
+
+        return await invites.get(ann.id)
+
+    saved = run(scenario())
+
+    assert (saved.status, saved.grade, saved.flagged) == (InviteStatus.FINISHED, 85, True)
+
+
+def test_an_expired_invite_started_through_the_link_is_in_process(run):
+    async def scenario():
+        found = await interview()
+        ann = await invite(found, "ann@example.com")
+        later = datetime.now(UTC) + timedelta(seconds=1)
+        await invites.mark_expired(ann.id, later)
+        await invites.start(ann.id, "ann-uid")
+
+        return await invites.get(ann.id), await invites.start(uuid.uuid4(), "nobody")
+
+    started, missing = run(scenario())
+
+    assert (started.status, started.user_id) == (InviteStatus.IN_PROCESS, "ann-uid")
+    # An invite revoked meanwhile isn't started.
+    assert missing is False
+
+
+def test_an_invite_sent_again_while_expiring_isnt_expired(run):
+    async def scenario():
+        found = await interview()
+        ann = await invite(found, "ann@example.com")
+        cutoff = datetime.now(UTC)
+        # Sent again after the run read it: its new send is after the cutoff.
+        await invite(found, "ann@example.com")
+        resent = await invites.mark_expired(ann.id, cutoff)
+
+        bob = await invite(found, "bob@example.com")
+        later = datetime.now(UTC) + timedelta(seconds=1)
+        expired = await invites.mark_expired(bob.id, later)
+
+        return resent, expired
+
+    assert run(scenario()) == (False, True)

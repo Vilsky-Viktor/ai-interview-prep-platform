@@ -8,7 +8,7 @@ from prepza_common.auth import CurrentUser
 from app.constants.logos import LOGO_CACHE
 from app.helpers.logos import logo_path, logo_type
 from app.schemas.logos import BrandOut, LogoIn, LogoOut
-from app.services.access import require_company
+from app.services.access import require_editor
 from app.storage import companies, interviews, invites
 
 # Company branding: the logo candidates see on their pages, emails and reports.
@@ -18,7 +18,7 @@ router = APIRouter(tags=["logos"])
 @router.put("/companies/{company_id}/logo")
 async def set_logo(company_id: UUID, body: LogoIn, user: CurrentUser) -> LogoOut:
     """Any of the company's owners and admins sets the logo: PNG, JPEG or WebP, up to 500 KB."""
-    company, _ = await require_company(user, company_id)
+    company, _ = await require_editor(user, company_id)
 
     try:
         content = base64.b64decode(body.image, validate=True)
@@ -39,7 +39,7 @@ async def set_logo(company_id: UUID, body: LogoIn, user: CurrentUser) -> LogoOut
 
 @router.delete("/companies/{company_id}/logo", status_code=status.HTTP_204_NO_CONTENT)
 async def remove_logo(company_id: UUID, user: CurrentUser) -> None:
-    company, _ = await require_company(user, company_id)
+    company, _ = await require_editor(user, company_id)
     await companies.set_logo(company.id, None, None)
 
 

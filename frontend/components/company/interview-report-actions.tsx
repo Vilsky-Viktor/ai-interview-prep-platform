@@ -1,34 +1,60 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { useState } from "react"
+import { flushSync } from "react-dom"
 
+import { InterviewReport } from "@/components/company/interview-report"
 import { ReportActions } from "@/components/company/report-actions"
 import { INTERVIEW_REPORT_ID } from "@/constants/report"
+import { apiFetch } from "@/lib/api"
 import { candidatesSummary } from "@/lib/report-summary"
 import type { InterviewReportData } from "@/types/company"
 
-/** The report of all a test's candidates: download or share it, from its candidates tab. */
+/** The report of all a test's candidates: download or share it, from its candidates tab. Its
+ * data loads on the first click, not with the page. */
 export function InterviewReportActions({
   interviewId,
-  report,
+  title,
 }: {
   interviewId: string
-  report: InterviewReportData
+  title: string
 }) {
   const t = useTranslations("report")
   const candidates = useTranslations("candidates")
+  const [report, setReport] = useState<InterviewReportData | null>(null)
+
+  // Rendered at once, so the hidden report is on the page when the PDF is made from it.
+  async function load() {
+    if (report) {
+      return
+    }
+
+    const loaded = await apiFetch<InterviewReportData>(
+      `/companies/interviews/${interviewId}/report`
+    )
+    flushSync(() => setReport(loaded))
+  }
 
   return (
-    <ReportActions
-      reportId={INTERVIEW_REPORT_ID}
-      fileName={t("candidatesFileName", { title: report.title ?? "" })}
-      emailPath={`/companies/interviews/${interviewId}/report/email`}
-      summary={candidatesSummary(report, (key, values) =>
-        ["pageLeaves", "copies", "fastAnswers"].includes(key)
-          ? candidates(key, values)
-          : t(key, values)
-      )}
-      pages
-    />
+    <>
+      {report && <InterviewReport report={report} />}
+      <ReportActions
+        reportId={INTERVIEW_REPORT_ID}
+        fileName={t("candidatesFileName", { title })}
+        emailPath={`/companies/interviews/${interviewId}/report/email`}
+        summary={
+          report
+            ? candidatesSummary(report, (key, values) =>
+                ["pageLeaves", "copies", "fastAnswers"].includes(key)
+                  ? candidates(key, values)
+                  : t(key, values)
+              )
+            : ""
+        }
+        load={load}
+        pages
+      />
+    </>
   )
 }

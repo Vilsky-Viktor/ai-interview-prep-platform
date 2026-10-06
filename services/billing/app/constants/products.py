@@ -48,10 +48,15 @@ DELETED_OWNER = "deleted-user"
 # They cover 1, 3 and 5 candidates.
 AUTO_TOP_UP_THRESHOLDS = [CANDIDATE_CREDITS, 3 * CANDIDATE_CREDITS, 5 * CANDIDATE_CREDITS]
 AUTO_TOP_UP_COOLDOWN = timedelta(minutes=10)
+# After the card declines a charge, the next try (and its notice to the owner) waits this long,
+# unless the automatic top-up is saved again first (say, after updating the card).
+AUTO_TOP_UP_RETRY_AFTER = timedelta(days=1)
 # Turning it on is a checkout for a $0 monthly subscription, which saves the card; Paddle tells
 # us when it starts and when it ends (cancelled in Paddle, or after failed payments).
 SUBSCRIPTION_CREATED = "subscription.created"
 SUBSCRIPTION_CANCELED = "subscription.canceled"
+# A subscription's status in Paddle once it has ended.
+SUBSCRIPTION_ENDED_STATUS = "canceled"
 # Marks the checkout that turns automatic top-up on.
 AUTO_TOP_UP_FLAG = "auto_top_up"
 PADDLE_API = {"sandbox": "https://sandbox-api.paddle.com", "production": "https://api.paddle.com"}

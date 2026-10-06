@@ -21,6 +21,8 @@ class QuestionQuality(BaseModel):
     answers: int
     option_picks: dict[str, int]
     reports: list[ReportNote]
+    # The flag the library has now; None once the question was kept or replaced since.
+    flag: QualityFlag | None = None
 
 
 class KeyCheck(BaseModel):

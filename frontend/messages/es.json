@@ -77,7 +77,7 @@
     "notFoundText": "Esa página no existe o se eliminó."
   },
   "home": {
-    "title": "Entrevista a todos\nContrata a los mejores",
+    "title": "Evalúa a todos\nContrata a los mejores",
     "text": "Entrevistas cronometradas creadas a partir de tu descripción del puesto. Preguntas únicas para cada candidato y un temporizador en cada una. Desde $1 por candidato."
   },
   "start": {
@@ -204,8 +204,6 @@
     "ofCount": "de {count, number}",
     "per": "por",
     "candidate": "candidato",
-    "showOptions": "Mostrar opciones de respuesta",
-    "hideOptions": "Ocultar opciones de respuesta",
     "correct": "Respuesta correcta",
     "wrong": "Respuesta incorrecta",
     "regenerating": "Regenerando…",
@@ -306,19 +304,22 @@
   },
   "roles": {
     "owner": "propietario",
-    "admin": "administrador"
+    "admin": "administrador",
+    "viewer": "observador",
+    "adminNote": "Crea y cambia entrevistas, invita a candidatos, recarga créditos.",
+    "viewerNote": "Ve las entrevistas y los resultados, comparte informes. No cambia nada."
   },
   "company": {
     "title": "Empresas",
     "signInInterviews": "Inicia sesión para ver las entrevistas de la empresa.",
-    "signInAdmins": "Inicia sesión para ver los administradores de la empresa.",
+    "signInTeam": "Inicia sesión para ver el equipo de la empresa.",
     "signInReferrals": "Inicia sesión para ver el enlace de invitación de la empresa.",
     "empty": "Aún no hay empresas.",
     "owner": "Propietario",
     "interviewCount": "{count, plural, one {# entrevista} other {# entrevistas}}",
     "interviews": "Entrevistas",
     "templates": "Plantillas",
-    "admins": "Administradores",
+    "team": "Equipo",
     "referrals": "Invitaciones",
     "new": "Nueva empresa",
     "name": "Nombre de la empresa",
@@ -420,9 +421,9 @@
     "timePerQuestion": "Tiempo por pregunta",
     "secondsLabel": "Tiempo por pregunta en segundos",
     "secondsUnit": "s",
-    "adminEmail": "Correo del administrador",
-    "addAdmin": "Añadir administrador",
-    "adminFailed": "No se pudo invitar a ese administrador. Inténtalo de nuevo.",
+    "memberEmail": "Correo del miembro",
+    "addMember": "Añadir miembro",
+    "memberFailed": "No se pudo invitar a esta persona. Inténtalo de nuevo.",
     "invite": "Invitar",
     "jobDescription": "Descripción del puesto",
     "pasteJob": "Pega la descripción del puesto: el rol, sus requisitos y lo que suma…",
@@ -436,6 +437,7 @@
       "invalid": "{count, plural, one {# correo no es válido} other {# correos no son válidos}}.",
       "limit": "{count, plural, one {# correo supera} other {# correos superan}} tu límite de correos por ahora. Inténtalo de nuevo en una hora.",
       "no_credits": "{count, plural, one {# candidato no fue invitado} other {# candidatos no fueron invitados}}: sin créditos. Recarga para invitarlos.",
+      "started": "{count, plural, one {# candidato ya empezó} other {# candidatos ya empezaron}}, así que no se les volvió a escribir.",
       "failed": "{count, plural, one {# invitación no se pudo enviar} other {# invitaciones no se pudieron enviar}}. Inténtalo de nuevo."
     }
   },
@@ -463,6 +465,8 @@
   "members": {
     "joined": "Se unió",
     "invited": "Invitado",
+    "role": "Rol",
+    "roleFailed": "No se pudo cambiar el rol.",
     "copy": "Copiar",
     "inviteTitle": "Invitación a la empresa",
     "remove": "Quitar",
@@ -591,7 +595,22 @@
         "better": "¿Qué estado muestra el beneficio de un periodo?"
       },
       "comment": "Depende de la empresa, así que no hay una única respuesta correcta.",
-      "list": "Fundamentos de contabilidad"
+      "list": "Fundamentos de contabilidad",
+      "options": {
+        "good": [
+          "Activos, pasivos y patrimonio en una fecha",
+          "El beneficio de un año",
+          "Entradas y salidas de caja en un mes",
+          "El presupuesto del próximo año"
+        ],
+        "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
+        "better": [
+          "Balance general",
+          "Estado de resultados",
+          "Estado de flujos de efectivo",
+          "Balance de comprobación"
+        ]
+      }
     },
     "try": {
       "title": "Pruébalo antes que los candidatos",

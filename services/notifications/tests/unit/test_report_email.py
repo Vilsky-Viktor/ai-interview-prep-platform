@@ -53,11 +53,10 @@ def test_resend_gets_the_attachment(monkeypatch):
 
         return httpx.Response(200, json={"id": "e-1"})
 
-    real_client = httpx.AsyncClient
     monkeypatch.setattr(
-        resend.httpx,
-        "AsyncClient",
-        lambda **kwargs: real_client(transport=httpx.MockTransport(answer), **kwargs),
+        resend.http,
+        "get_client",
+        lambda: httpx.AsyncClient(transport=httpx.MockTransport(answer)),
     )
     monkeypatch.setattr(settings, "resend_api_key", "re_test")
 

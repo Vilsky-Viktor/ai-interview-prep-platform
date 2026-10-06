@@ -13,6 +13,7 @@ from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.storage import audit, companies, interviews
+from tests.unit import fake_candidates
 from tests.unit.test_candidates import COMPANY_ID, INTERVIEW_ID, INVITE_ID, revoke
 from tests.unit.test_report_email import PDF, URL, queued  # noqa: F401 (the fixture)
 
@@ -57,7 +58,7 @@ def test_viewing_a_finished_candidates_results_is_recorded(client, monkeypatch, 
         id=INVITE_ID, interview_id=INTERVIEW_ID, email="ann@example.com", status="finished"
     )
     interview = Interview(id=INTERVIEW_ID, company_id=COMPANY_ID, pass_mark=70, title="Backend")
-    interview.invites = [invite]
+    fake_candidates.add(invite)
 
     async def fake_interview(_interview_id):
         return interview

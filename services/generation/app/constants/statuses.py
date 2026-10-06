@@ -8,3 +8,7 @@ class Status(StrEnum):
     DONE = "done"
     FAILED = "failed"
     CANCELLED = "cancelled"
+
+
+# Nothing changes a generation once it's here.
+FINISHED = (Status.DONE, Status.CANCELLED)

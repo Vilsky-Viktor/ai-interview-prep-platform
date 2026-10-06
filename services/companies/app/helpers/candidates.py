@@ -28,6 +28,11 @@ def flagged(totals: dict) -> bool:
     return any(totals.get(key) for key in SIGNAL_KEYS)
 
 
+def stored_results(totals: dict) -> tuple[int | None, bool]:
+    """What the invite keeps of a finished candidate's results: their grade and integrity flag."""
+    return totals.get("grade"), flagged(totals)
+
+
 def candidate_out(invite, totals: dict, interview) -> CandidateOut:
     """A candidate row: the invite, with their results from rounds."""
     return CandidateOut(
@@ -40,18 +45,6 @@ def candidate_out(invite, totals: dict, interview) -> CandidateOut:
         **{key: totals.get(key, 0) for key in SIGNAL_KEYS},
         created_at=invite.created_at,
     )
-
-
-def by_grade(listed: list, totals: dict[str, dict]) -> list:
-    """Best grade first; candidates without a grade yet last. Ties keep their order, which is
-    newest first."""
-
-    def key(invite):
-        grade = (totals.get(str(invite.id)) or {}).get("grade")
-
-        return (grade is None, -(grade or 0))
-
-    return sorted(listed, key=key)
 
 
 def candidate_seconds(question_seconds: int, extra_time: int | None) -> int:
