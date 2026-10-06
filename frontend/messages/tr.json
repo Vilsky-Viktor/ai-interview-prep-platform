@@ -77,8 +77,8 @@
     "notFoundText": "Bu sayfa yok ya da kaldırıldı."
   },
   "home": {
-    "title": "Herkesle mülakat yapın\nGerçek yeteneği işe alın",
-    "text": "İş tanımınızdan hazırlanan süreli mülakatlar. Her adaya özel sorular ve her soruda bir süre; cevap aramaya pek zaman kalmaz. Aday başına $1'dan başlar."
+    "title": "Herkesle mülakat yapın\nEn iyisini işe alın",
+    "text": "İş tanımınızdan hazırlanan süreli mülakatlar. Her adaya özel sorular ve her soruda bir süre. Aday başına $1'dan başlar."
   },
   "start": {
     "placeholder": "Bir iş tanımı yapıştırın ya da pozisyonu ve adayın bilmesi gerekenleri anlatın",
@@ -545,33 +545,31 @@
   "landing": {
     "more": "Nasıl çalışır",
     "how": {
-      "title": "İlk sonuçlarınıza üç adım",
+      "title": "Bir sonraki işe alımınıza üç adım",
       "paste": {
         "title": "İş tanımını yapıştırın",
         "text": "Her rol, her dil.\nprepza adayın bilmesi gerekenleri çıkarır ve konular önerir."
       },
       "review": {
         "title": "Konuları kontrol edin",
-        "text": "Saklayın, yeniden adlandırın veya değiştirin.\nSiz onaylayana kadar hiçbir soru yazılmaz."
+        "text": "Saklayın, yeniden adlandırın veya değiştirin.\nOnayladığınız anda sorular yazılır."
       },
       "invite": {
         "title": "Adayları davet edin",
-        "text": "Bir liste yapıştırın, dosya yükleyin ya da tek bir bağlantı paylaşın.\nHatırlatmalar kendiliğinden gider. İşi kimin bildiğini puana göre sıralı görürsünüz."
+        "text": "Bir liste yapıştırın, dosya yükleyin ya da tek bir bağlantı paylaşın.\nHatırlatmalar otomatik. Sonuçlar puana göre sıralı gelir."
       }
     },
     "control": {
       "title": "Neyin ölçüleceğine siz karar verirsiniz",
-      "text": "Siz konuları onaylamadan hiçbir soru yazılmaz. Rolün ihtiyaç duymadığı şeylerin işaretini kaldırın, bir konuyu yeniden adlandırın, alt konularını düzenleyin ya da yapay zekâya neyi değiştireceğini söyleyin.",
+      "text": "Konuları onayladığınızda sorular yazılır. Konuları kaldırın, yeniden adlandırın, düzenleyin ya da yapay zekâya neyi değiştireceğini söyleyin.",
       "topics": {
         "design": "Sistem tasarımı",
-        "sql": "İçerik pazarlaması",
         "behavior": "Zaman yönetimi",
         "basics": "Ekip liderliği"
       },
-      "change": "YouTube reklamları hakkında bir konu ekle",
+      "change": "Veritabanları hakkında bir konu ekle",
       "subtopics": {
         "design": ["Ölçeklenebilirlik", "Önbellekleme", "Yük dengeleme"],
-        "sql": ["Hedef kitle araştırması", "SEO temelleri", "Sonuçları ölçme"],
         "behavior": [
           "Önceliklendirme",
           "Haftayı planlama",
@@ -583,45 +581,42 @@
           "İnsanları motive etme"
         ]
       },
-      "added": "E-posta kampanyaları",
-      "newTopic": "YouTube reklamları",
-      "newSubtopics": [
-        "Reklam biçimleri",
-        "Hedef kitle belirleme",
-        "İzlenmeleri ölçme"
-      ]
+      "added": "Mesaj kuyrukları",
+      "newTopic": "Veritabanları",
+      "newSubtopics": ["İndeksler", "İşlemler", "Sorgu optimizasyonu"],
+      "placeholder": "İsteğe bağlı: değişiklikleri anlatın…"
     },
     "quality": {
       "title": "Kendini düzelten sorular",
-      "text": "Adayların cevapları, puanlamaları ve bildirimleri zayıf soruları ortaya çıkarır. Yapay zekâ doğrulayıcı bunları otomatik olarak düzeltir ya da değiştirir; herhangi bir soruyu kendiniz de yeniden oluşturabilirsiniz.",
+      "text": "Cevaplar, puanlar ve bildirimler zayıf soruları ortaya çıkarır. Yapay zekâ düzeltir; dilediğiniz soruyu kendiniz yeniden üretebilirsiniz.",
       "items": {
-        "good": "Veritabanı indeksi neyi hızlandırır?",
-        "weak": "En iyi programlama dili hangisi?",
-        "better": "Ön yüz geliştirmede en yaygın kullanılan dil hangisi?"
+        "good": "Bilanço neyi gösterir?",
+        "weak": "En iyi muhasebe yazılımı hangisi?",
+        "better": "Hangi tablo bir dönemin kârını gösterir?"
       },
-      "comment": "Projeye göre değişir, yani tek bir doğru cevap yok.",
-      "list": "Konu soruları"
+      "comment": "Şirkete göre değişir, yani tek bir doğru cevap yok.",
+      "list": "Muhasebenin temelleri"
     },
     "try": {
-      "title": "Adaylarınızdan önce siz deneyin",
+      "title": "Adaylardan önce siz deneyin",
       "text": "Benzer bir rol için ücretsiz bir pratik mülakata girin ya da kimseyi davet etmeden önce kendi mülakatınızı aday olarak açın.",
       "browse": "Pratik mülakatlara göz atın",
-      "topic": "Sistem tasarımı",
-      "question": "Veritabanının önündeki bir önbellek esas olarak neyi azaltır?",
+      "topic": "Satış",
+      "question": "Soğuk e-posta neyle başlamalı?",
       "options": {
-        "a": "Veritabanının boyutunu",
-        "b": "Veritabanından ne sıklıkla okunduğunu",
-        "c": "Tablo sayısını",
-        "d": "Yedeklemelerin ne kadar sürdüğünü"
+        "a": "Şirketinizin geçmişiyle",
+        "b": "Müşterinin sorunuyla",
+        "c": "Tam fiyat listesiyle",
+        "d": "İndirim koduyla"
       },
       "points": {
-        "practice": "Birçok rol için ücretsiz pratik mülakatlar",
-        "preview": "Kendi mülakatınız, aday gözünden"
+        "practice": "Birçok rol için ücretsiz şablonlar",
+        "preview": "Mülakatınızı aday gözüyle görün"
       }
     },
     "link": {
       "title": "İş ilanınız için tek bağlantı",
-      "text": "Mülakatın bağlantısını iş ilanınıza koyun. Başvuran herkes mülakata hemen girer ve aday listenizde puana göre sıralı olarak görünür.",
+      "text": "Mülakat bağlantısını iş ilanınıza koyun. Başvuranlar hemen girer ve puana göre listenizde görünür.",
       "note": "Bağlantıya sahip herkes mülakata girebilir.",
       "points": {
         "anywhere": "İş ilanı sitelerinde, LinkedIn'de ya da kendi sitenizde",
@@ -630,12 +625,12 @@
     },
     "companies": {
       "title": "İşi kimin bildiğini görün",
-      "text": "Adaylar mülakata e-posta davetinizden girer. Puanları cevapladıkça gelir; geçme notunuza göre yeşil ya da kırmızı.",
+      "text": "Adaylar mülakata e-posta davetinizden veya paylaşılabilir bağlantınızdan girer. Puanları ve uyarı işaretleri cevapladıkça gelir.",
       "points": {
         "own": "Her adaya özel sorular",
         "timed": "Her soruda geri sayım",
         "flags": "Acele, sayfadan ayrılma ve kopyalama işaretleri",
-        "private": "Adaylar puanlarını asla görmez"
+        "answers": "Cevaplı ve süreli puan kartları"
       },
       "candidate": "Aday",
       "score": "Puan",

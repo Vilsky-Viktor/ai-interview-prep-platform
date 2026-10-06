@@ -77,8 +77,8 @@
     "notFoundText": "Essa página não existe ou foi removida."
   },
   "home": {
-    "title": "Entreviste todos\nContrate talentos de verdade",
-    "text": "Entrevistas cronometradas criadas a partir da sua descrição de vaga. Questões únicas para cada candidato e um cronômetro em cada uma, então sobra pouco tempo para procurar respostas. A partir de $1 por candidato."
+    "title": "Entreviste todos\nContrate os melhores",
+    "text": "Entrevistas cronometradas criadas a partir da sua descrição de vaga. Questões únicas para cada candidato e um cronômetro em cada uma. A partir de $1 por candidato."
   },
   "start": {
     "placeholder": "Cole uma descrição de vaga ou descreva a função e o que um candidato deve saber",
@@ -545,79 +545,70 @@
   "landing": {
     "more": "Como funciona",
     "how": {
-      "title": "Três passos até os primeiros resultados",
+      "title": "Três passos para a sua próxima contratação",
       "paste": {
         "title": "Cole a descrição da vaga",
         "text": "Qualquer função, qualquer idioma.\nO prepza identifica o que um candidato precisa saber e propõe tópicos."
       },
       "review": {
         "title": "Confira os tópicos",
-        "text": "Mantenha, renomeie ou altere.\nNenhuma questão é escrita até você aprovar."
+        "text": "Mantenha, renomeie ou altere.\nAs questões são escritas assim que você aprova."
       },
       "invite": {
         "title": "Convide candidatos",
-        "text": "Cole uma lista, envie um arquivo ou compartilhe um link.\nOs lembretes são enviados sozinhos. Você vê quem conhece o trabalho, ordenado pela pontuação."
+        "text": "Cole uma lista, envie um arquivo ou compartilhe um link.\nOs lembretes são automáticos. Os resultados chegam ordenados por pontuação."
       }
     },
     "control": {
       "title": "Você decide o que é avaliado",
-      "text": "Nenhuma questão é escrita até você aprovar os tópicos. Desmarque o que a função não exige, renomeie um tópico, edite seus subtópicos ou diga à IA o que mudar.",
+      "text": "As questões são escritas assim que você aprova os temas. Desmarque, renomeie ou edite, ou diga à IA o que mudar.",
       "topics": {
         "design": "Design de sistemas",
-        "sql": "Marketing de conteúdo",
         "behavior": "Gestão do tempo",
         "basics": "Liderança de equipes"
       },
-      "change": "Adicione um tópico sobre anúncios no YouTube",
+      "change": "Adicione um tema sobre bancos de dados",
       "subtopics": {
         "design": ["Escalabilidade", "Cache", "Balanceamento de carga"],
-        "sql": [
-          "Pesquisa de público",
-          "Noções de SEO",
-          "Medição de resultados"
-        ],
         "behavior": ["Priorização", "Planejar a semana", "Evitar distrações"],
         "basics": ["Dar feedback", "Delegar", "Motivar pessoas"]
       },
-      "added": "Campanhas de e-mail",
-      "newTopic": "Anúncios no YouTube",
-      "newSubtopics": [
-        "Formatos de anúncio",
-        "Segmentação de público",
-        "Medição de visualizações"
-      ]
+      "added": "Filas de mensagens",
+      "newTopic": "Bancos de dados",
+      "newSubtopics": ["Índices", "Transações", "Otimização de consultas"],
+      "placeholder": "Opcional: descreva mudanças…"
     },
     "quality": {
       "title": "Questões que se corrigem sozinhas",
-      "text": "As respostas, avaliações e denúncias dos candidatos revelam questões fracas. Um verificador de IA as corrige ou substitui automaticamente, e você mesmo pode gerar qualquer questão novamente.",
+      "text": "Respostas, avaliações e denúncias revelam questões fracas. A IA as corrige, e você pode regenerar qualquer uma.",
       "items": {
-        "good": "O que um índice de banco de dados acelera?",
-        "weak": "Qual é a melhor linguagem de programação?",
-        "better": "Qual linguagem é a mais usada no desenvolvimento frontend?"
+        "good": "O que um balanço patrimonial mostra?",
+        "weak": "Qual é o melhor software de contabilidade?",
+        "better": "Qual demonstração mostra o lucro de um período?"
       },
-      "comment": "Depende do projeto, então não existe uma única resposta certa.",
-      "list": "Questões do tópico"
+      "comment": "Depende da empresa, então não há uma única resposta certa.",
+      "list": "Fundamentos de contabilidade"
     },
     "try": {
-      "title": "Experimente antes dos seus candidatos",
+      "title": "Experimente antes dos candidatos",
       "text": "Faça uma entrevista de prática gratuita para uma função parecida ou abra sua própria entrevista como candidato antes de convidar alguém.",
       "browse": "Ver entrevistas de prática",
-      "topic": "Design de sistemas",
-      "question": "O que um cache na frente de um banco de dados reduz principalmente?",
+      "topic": "Vendas",
+      "question": "Com o que um e-mail frio deve começar?",
       "options": {
-        "a": "O tamanho do banco de dados",
-        "b": "A frequência de leituras do banco de dados",
-        "c": "O número de tabelas",
-        "d": "O tempo que os backups levam"
+        "a": "A história da sua empresa",
+        "b": "O problema do cliente",
+        "c": "Uma lista de preços completa",
+        "d": "Um código de desconto"
       },
       "points": {
-        "practice": "Entrevistas de prática gratuitas para muitas funções",
-        "preview": "Sua própria entrevista como candidato"
+        "practice": "Modelos gratuitos para muitas funções",
+        "preview": "Veja sua entrevista como candidato"
       }
     },
     "link": {
       "title": "Um link para o seu anúncio de vaga",
-      "text": "Coloque o link da entrevista no seu anúncio de vaga. Quem se candidatar faz a entrevista na hora e aparece na sua lista de candidatos, ordenada pela pontuação.",
+      "text": "Coloque o link da entrevista no seu anúncio. Os candidatos fazem na hora e aparecem na sua lista, ordenados por pontuação.",
       "note": "Qualquer pessoa com o link pode fazer a entrevista.",
       "points": {
         "anywhere": "Em sites de vagas, no LinkedIn ou no seu site",
@@ -626,12 +617,12 @@
     },
     "companies": {
       "title": "Veja quem conhece o trabalho",
-      "text": "Os candidatos fazem a entrevista a partir do seu convite por e-mail. As pontuações chegam conforme eles respondem, em verde ou vermelho conforme a sua nota de aprovação.",
+      "text": "Os candidatos fazem a entrevista a partir do seu convite por e-mail ou do link compartilhável. As pontuações e os sinais de alerta chegam conforme eles respondem.",
       "points": {
         "own": "Questões únicas para cada candidato",
         "timed": "Contagem regressiva em cada questão",
         "flags": "Alertas de pressa, saída ou cópia",
-        "private": "Os candidatos nunca veem suas pontuações"
+        "answers": "Boletins com respostas e tempos"
       },
       "candidate": "Candidato",
       "score": "Pontuação",

@@ -77,8 +77,8 @@
     "notFoundText": "Ta strona nie istnieje albo została usunięta."
   },
   "home": {
-    "title": "Rozmawiaj z każdym\nZatrudniaj prawdziwe talenty",
-    "text": "Rozmowy na czas tworzone z Twojego opisu stanowiska. Unikalne pytania dla każdego kandydata i limit czasu na każde z nich, więc zostaje niewiele czasu na szukanie odpowiedzi. Od $1 za kandydata."
+    "title": "Rozmawiaj z każdym\nZatrudniaj najlepszych",
+    "text": "Rozmowy na czas tworzone z Twojego opisu stanowiska. Unikalne pytania dla każdego kandydata i limit czasu na każde z nich. Od $1 za kandydata."
   },
   "start": {
     "placeholder": "Wklej opis stanowiska albo opisz rolę i to, co kandydat powinien wiedzieć",
@@ -545,33 +545,31 @@
   "landing": {
     "more": "Jak to działa",
     "how": {
-      "title": "Trzy kroki do pierwszych wyników",
+      "title": "Trzy kroki do kolejnego zatrudnienia",
       "paste": {
         "title": "Wklej opis stanowiska",
         "text": "Dowolna rola, dowolny język.\nprepza wyłuskuje, co kandydat musi wiedzieć, i proponuje tematy."
       },
       "review": {
         "title": "Sprawdź tematy",
-        "text": "Zachowaj, zmień nazwę lub zmień je.\nŻadne pytania nie powstaną, dopóki ich nie zatwierdzisz."
+        "text": "Zachowaj, zmień nazwę lub zmień je.\nPytania powstają, gdy tylko je zatwierdzisz."
       },
       "invite": {
         "title": "Zaproś kandydatów",
-        "text": "Wklej listę, prześlij plik lub udostępnij jeden link.\nPrzypomnienia wysyłają się same. Widzisz, kto zna się na rzeczy, w kolejności wyników."
+        "text": "Wklej listę, prześlij plik lub udostępnij jeden link.\nPrzypomnienia wysyłają się same. Wyniki spływają uszeregowane według punktów."
       }
     },
     "control": {
       "title": "Ty decydujesz, co jest sprawdzane",
-      "text": "Żadne pytania nie powstaną, dopóki nie zatwierdzisz tematów. Odznacz to, czego rola nie wymaga, zmień nazwę tematu, edytuj jego podtematy albo powiedz AI, co zmienić.",
+      "text": "Pytania powstają, gdy zatwierdzisz tematy. Odznacz, zmień nazwę lub edytuj je albo powiedz AI, co zmienić.",
       "topics": {
         "design": "Projektowanie systemów",
-        "sql": "Content marketing",
         "behavior": "Zarządzanie czasem",
         "basics": "Kierowanie zespołem"
       },
-      "change": "Dodaj temat o reklamach na YouTube",
+      "change": "Dodaj temat o bazach danych",
       "subtopics": {
         "design": ["Skalowalność", "Cache", "Równoważenie obciążenia"],
-        "sql": ["Badanie odbiorców", "Podstawy SEO", "Mierzenie wyników"],
         "behavior": [
           "Ustalanie priorytetów",
           "Planowanie tygodnia",
@@ -579,45 +577,42 @@
         ],
         "basics": ["Udzielanie feedbacku", "Delegowanie", "Motywowanie ludzi"]
       },
-      "added": "Kampanie e-mailowe",
-      "newTopic": "Reklamy na YouTube",
-      "newSubtopics": [
-        "Formaty reklam",
-        "Targetowanie odbiorców",
-        "Mierzenie wyświetleń"
-      ]
+      "added": "Kolejki wiadomości",
+      "newTopic": "Bazy danych",
+      "newSubtopics": ["Indeksy", "Transakcje", "Optymalizacja zapytań"],
+      "placeholder": "Opcjonalnie: opisz zmiany…"
     },
     "quality": {
       "title": "Pytania, które same się poprawiają",
-      "text": "Odpowiedzi, oceny i zgłoszenia kandydatów ujawniają słabe pytania. Weryfikator AI automatycznie je poprawia lub zastępuje, a każde pytanie możesz też wygenerować ponownie sam.",
+      "text": "Odpowiedzi, oceny i zgłoszenia ujawniają słabe pytania. AI je poprawia, a każde możesz też wygenerować na nowo.",
       "items": {
-        "good": "Co przyspiesza indeks w bazie danych?",
-        "weak": "Który język programowania jest najlepszy?",
-        "better": "Który język jest najczęściej używany we frontendzie?"
+        "good": "Co pokazuje bilans?",
+        "weak": "Który program księgowy jest najlepszy?",
+        "better": "Które sprawozdanie pokazuje zysk za okres?"
       },
-      "comment": "To zależy od projektu, więc nie ma jednej poprawnej odpowiedzi.",
-      "list": "Pytania z tematu"
+      "comment": "To zależy od firmy, więc nie ma jednej dobrej odpowiedzi.",
+      "list": "Podstawy rachunkowości"
     },
     "try": {
       "title": "Wypróbuj, zanim zrobią to kandydaci",
       "text": "Przejdź darmową próbną rozmowę dla podobnej roli albo otwórz własną rozmowę jako kandydat, zanim kogokolwiek zaprosisz.",
       "browse": "Przeglądaj próbne rozmowy",
-      "topic": "Projektowanie systemów",
-      "question": "Co przede wszystkim ogranicza cache umieszczony przed bazą danych?",
+      "topic": "Sprzedaż",
+      "question": "Od czego zacząć zimnego maila?",
       "options": {
-        "a": "Rozmiar bazy danych",
-        "b": "Częstotliwość odczytów z bazy danych",
-        "c": "Liczbę tabel",
-        "d": "Czas tworzenia kopii zapasowych"
+        "a": "Od historii firmy",
+        "b": "Od problemu klienta",
+        "c": "Od pełnego cennika",
+        "d": "Od kodu rabatowego"
       },
       "points": {
-        "practice": "Darmowe próbne rozmowy dla wielu ról",
-        "preview": "Twoja własna rozmowa oczami kandydata"
+        "practice": "Darmowe szablony dla wielu ról",
+        "preview": "Zobacz swoją rozmowę jako kandydat"
       }
     },
     "link": {
       "title": "Jeden link do Twojego ogłoszenia o pracę",
-      "text": "Umieść link do rozmowy w ogłoszeniu o pracę. Każdy, kto aplikuje, od razu przechodzi rozmowę i pojawia się na Twojej liście kandydatów, w kolejności wyników.",
+      "text": "Wstaw link do rozmowy w ogłoszeniu. Kandydaci przechodzą ją od razu i trafiają na Twoją listę według wyniku.",
       "note": "Każdy, kto ma link, może przejść rozmowę.",
       "points": {
         "anywhere": "Na portalach z ofertami pracy, LinkedIn lub Twojej stronie",
@@ -626,12 +621,12 @@
     },
     "companies": {
       "title": "Zobacz, kto zna się na rzeczy",
-      "text": "Kandydaci przechodzą rozmowę z Twojego zaproszenia e-mailem. Ich wyniki spływają na bieżąco, na zielono lub na czerwono względem Twojego progu zaliczenia.",
+      "text": "Kandydaci przechodzą rozmowę z Twojego zaproszenia e-mailem lub linku do udostępnienia. Ich wyniki i sygnały ostrzegawcze spływają na bieżąco.",
       "points": {
         "own": "Unikalne pytania dla każdego kandydata",
         "timed": "Odliczanie przy każdym pytaniu",
         "flags": "Flagi za pośpiech, wyjście ze strony i kopiowanie",
-        "private": "Kandydaci nigdy nie widzą swoich wyników"
+        "answers": "Karty wyników z odpowiedziami i czasami"
       },
       "candidate": "Kandydat",
       "score": "Wynik",

@@ -77,8 +77,8 @@
     "notFoundText": "Deze pagina bestaat niet of is verwijderd."
   },
   "home": {
-    "title": "Spreek iedereen\nNeem echt talent aan",
-    "text": "Sollicitatiegesprekken met tijdslimiet, gemaakt van je functieomschrijving. Unieke vragen voor elke kandidaat en een timer bij elke vraag, dus er is weinig tijd om antwoorden op te zoeken. Vanaf $1 per kandidaat."
+    "title": "Spreek iedereen\nNeem de besten aan",
+    "text": "Sollicitatiegesprekken met tijdslimiet, gemaakt van je functieomschrijving. Unieke vragen voor elke kandidaat en een timer bij elke vraag. Vanaf $1 per kandidaat."
   },
   "start": {
     "placeholder": "Plak een functieomschrijving, of beschrijf de rol en wat een kandidaat moet weten",
@@ -545,75 +545,70 @@
   "landing": {
     "more": "Hoe het werkt",
     "how": {
-      "title": "In drie stappen naar je eerste resultaten",
+      "title": "Drie stappen naar je volgende aanwerving",
       "paste": {
         "title": "Plak de functieomschrijving",
         "text": "Elke rol, elke taal.\nprepza haalt eruit wat een kandidaat moet weten en stelt onderwerpen voor."
       },
       "review": {
         "title": "Controleer de onderwerpen",
-        "text": "Houd ze, hernoem ze of pas ze aan.\nEr worden geen vragen geschreven tot je ze goedkeurt."
+        "text": "Houd ze, hernoem ze of pas ze aan.\nZodra je ze goedkeurt, worden de vragen geschreven."
       },
       "invite": {
         "title": "Nodig kandidaten uit",
-        "text": "Plak een lijst, upload een bestand of deel één link.\nHerinneringen gaan vanzelf de deur uit. Je ziet wie het vak kent, gerangschikt op score."
+        "text": "Plak een lijst, upload een bestand of deel één link.\nHerinneringen gaan automatisch. Resultaten komen binnen gerangschikt op score."
       }
     },
     "control": {
       "title": "Jij bepaalt wat er getoetst wordt",
-      "text": "Er worden geen vragen geschreven tot je de onderwerpen goedkeurt. Vink uit wat de rol niet nodig heeft, hernoem een onderwerp, bewerk de subonderwerpen of vertel de AI wat er anders moet.",
+      "text": "Vragen worden geschreven zodra je de onderwerpen goedkeurt. Vink ze uit, hernoem of bewerk ze, of vertel de AI wat er moet veranderen.",
       "topics": {
         "design": "Systeemontwerp",
-        "sql": "Contentmarketing",
         "behavior": "Timemanagement",
         "basics": "Teamleiderschap"
       },
-      "change": "Voeg een onderwerp over YouTube-advertenties toe",
+      "change": "Voeg een onderwerp over databases toe",
       "subtopics": {
         "design": ["Schaalbaarheid", "Caching", "Load balancing"],
-        "sql": ["Doelgroeponderzoek", "SEO-basis", "Resultaten meten"],
         "behavior": ["Prioriteren", "De week plannen", "Afleiding vermijden"],
         "basics": ["Feedback geven", "Delegeren", "Mensen motiveren"]
       },
-      "added": "E-mailcampagnes",
-      "newTopic": "YouTube-advertenties",
-      "newSubtopics": [
-        "Advertentievormen",
-        "Doelgroeptargeting",
-        "Weergaven meten"
-      ]
+      "added": "Berichtenwachtrijen",
+      "newTopic": "Databases",
+      "newSubtopics": ["Indexen", "Transacties", "Query-optimalisatie"],
+      "placeholder": "Optioneel: beschrijf wijzigingen…"
     },
     "quality": {
       "title": "Vragen die zichzelf verbeteren",
-      "text": "Antwoorden, beoordelingen en meldingen van kandidaten brengen zwakke vragen aan het licht. Een AI-controleur herstelt of vervangt ze automatisch, en je kunt elke vraag zelf opnieuw genereren.",
+      "text": "Antwoorden, beoordelingen en meldingen tonen zwakke vragen. AI verbetert ze, en je kunt elke vraag zelf opnieuw genereren.",
       "items": {
-        "good": "Wat versnelt een database-index?",
-        "weak": "Wat is de beste programmeertaal?",
-        "better": "Welke taal wordt het meest gebruikt voor frontendontwikkeling?"
+        "good": "Wat laat een balans zien?",
+        "weak": "Welke boekhoudsoftware is de beste?",
+        "better": "Welk overzicht toont de winst over een periode?"
       },
-      "comment": "Het hangt van het project af, dus er is niet één juist antwoord.",
-      "list": "Vragen van het onderwerp"
+      "comment": "Het hangt van het bedrijf af, dus er is geen enkel juist antwoord.",
+      "list": "Basis van boekhouden"
     },
     "try": {
-      "title": "Probeer het voordat je kandidaten het doen",
+      "title": "Probeer het voordat kandidaten het doen",
       "text": "Doe een gratis oefengesprek voor een vergelijkbare rol, of open je eigen sollicitatiegesprek als kandidaat voordat je iemand uitnodigt.",
       "browse": "Oefengesprekken bekijken",
-      "topic": "Systeemontwerp",
-      "question": "Wat vermindert een cache vóór een database vooral?",
+      "topic": "Sales",
+      "question": "Waarmee open je een koude e-mail?",
       "options": {
-        "a": "De grootte van de database",
-        "b": "Hoe vaak de database wordt gelezen",
-        "c": "Het aantal tabellen",
-        "d": "Hoe lang back-ups duren"
+        "a": "De geschiedenis van je bedrijf",
+        "b": "Het probleem van de klant",
+        "c": "Een volledige prijslijst",
+        "d": "Een kortingscode"
       },
       "points": {
-        "practice": "Gratis oefengesprekken voor veel rollen",
-        "preview": "Je eigen sollicitatiegesprek als kandidaat"
+        "practice": "Gratis sjablonen voor veel rollen",
+        "preview": "Bekijk je gesprek als kandidaat"
       }
     },
     "link": {
       "title": "Eén link voor je vacature",
-      "text": "Zet de link van het sollicitatiegesprek in je vacature. Iedereen die solliciteert, doet meteen het gesprek en verschijnt in je kandidatenlijst, gerangschikt op score.",
+      "text": "Zet de link van het gesprek in je vacature. Sollicitanten doen het meteen en verschijnen in je lijst, gerangschikt op score.",
       "note": "Iedereen met de link kan het sollicitatiegesprek doen.",
       "points": {
         "anywhere": "Op vacaturesites, LinkedIn of je eigen website",
@@ -622,12 +617,12 @@
     },
     "companies": {
       "title": "Zie wie het vak kent",
-      "text": "Kandidaten doen het sollicitatiegesprek via je uitnodiging per e-mail. Hun scores komen binnen terwijl ze antwoorden, groen of rood ten opzichte van je slaaggrens.",
+      "text": "Kandidaten doen het sollicitatiegesprek via je uitnodiging per e-mail of je deelbare link. Hun scores en waarschuwingssignalen komen binnen terwijl ze antwoorden.",
       "points": {
         "own": "Unieke vragen voor elke kandidaat",
         "timed": "Een afteltimer bij elke vraag",
         "flags": "Signalen bij haasten, weggaan of kopiëren",
-        "private": "Kandidaten zien hun scores nooit"
+        "answers": "Scorekaarten met antwoorden en tijden"
       },
       "candidate": "Kandidaat",
       "score": "Score",

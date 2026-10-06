@@ -77,8 +77,8 @@
     "notFoundText": "Wala ang page na iyon o inalis na."
   },
   "home": {
-    "title": "I-interview ang lahat\nMag-hire ng tunay na talento",
-    "text": "Mga timed interview mula sa iyong job description. Ibang mga tanong sa bawat kandidato at timer sa bawat isa, kaya kaunti lang ang oras para maghanap ng sagot. Mula $1 bawat kandidato."
+    "title": "I-interview ang lahat\nI-hire ang pinakamahusay",
+    "text": "Mga timed interview mula sa iyong job description. Ibang mga tanong sa bawat kandidato at timer sa bawat isa. Mula $1 bawat kandidato."
   },
   "start": {
     "placeholder": "Mag-paste ng job description, o ilarawan ang role at ang dapat malaman ng kandidato",
@@ -545,37 +545,31 @@
   "landing": {
     "more": "Paano ito gumagana",
     "how": {
-      "title": "Tatlong hakbang sa iyong unang resulta",
+      "title": "Tatlong hakbang sa susunod mong hire",
       "paste": {
         "title": "I-paste ang job description",
         "text": "Anumang role, anumang wika.\nKinukuha ng prepza ang dapat malaman ng kandidato at nagmumungkahi ng mga topic."
       },
       "review": {
         "title": "Suriin ang mga topic",
-        "text": "Panatilihin, palitan ang pangalan, o baguhin ang mga ito.\nWalang tanong na isusulat hangga't hindi mo inaaprubahan."
+        "text": "Panatilihin, palitan ang pangalan, o baguhin ang mga ito.\nIsusulat ang mga tanong kapag inaprubahan mo na."
       },
       "invite": {
         "title": "Mag-imbita ng mga kandidato",
-        "text": "Mag-paste ng listahan, mag-upload ng file o mag-share ng isang link.\nKusang naipapadala ang mga paalala. Makikita mo kung sino ang marunong sa trabaho, naka-rank ayon sa score."
+        "text": "Mag-paste ng listahan, mag-upload ng file o mag-share ng isang link.\nAwtomatiko ang mga paalala. Dumarating ang resulta nang naka-ranggo ayon sa score."
       }
     },
     "control": {
       "title": "Ikaw ang magpapasya kung ano ang susukatin",
-      "text": "Walang tanong na isusulat hangga't hindi mo inaaprubahan ang mga topic. Alisin ang check sa hindi kailangan ng role, palitan ang pangalan ng topic, i-edit ang mga subtopic nito, o sabihin sa AI kung ano ang babaguhin.",
+      "text": "Isusulat ang mga tanong kapag inaprubahan mo ang mga paksa. I-uncheck, palitan ang pangalan o i-edit, o sabihin sa AI ang babaguhin.",
       "topics": {
         "design": "System design",
-        "sql": "Content marketing",
         "behavior": "Time management",
         "basics": "Pamumuno sa team"
       },
-      "change": "Magdagdag ng topic tungkol sa YouTube ads",
+      "change": "Magdagdag ng paksa tungkol sa database",
       "subtopics": {
         "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": [
-          "Pag-aaral sa audience",
-          "Basics ng SEO",
-          "Pagsukat ng resulta"
-        ],
         "behavior": [
           "Pag-prioritize",
           "Pagpaplano ng linggo",
@@ -587,45 +581,42 @@
           "Pag-motivate sa team"
         ]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": [
-        "Mga ad format",
-        "Audience targeting",
-        "Pagsukat ng views"
-      ]
+      "added": "Message queue",
+      "newTopic": "Mga database",
+      "newSubtopics": ["Index", "Transaction", "Pag-tune ng query"],
+      "placeholder": "Opsyonal: ilarawan ang mga pagbabago…"
     },
     "quality": {
       "title": "Mga tanong na kusang naaayos",
-      "text": "Ipinapakita ng mga sagot, rating at report ng mga kandidato ang mahihinang tanong. Awtomatikong inaayos o pinapalitan ng isang AI verifier ang mga ito, at puwede mong i-generate ulit ang kahit anong tanong.",
+      "text": "Ipinapakita ng mga sagot, rating at report ang mahihinang tanong. Inaayos ito ng AI, at puwede mong i-regenerate ang kahit alin.",
       "items": {
-        "good": "Ano ang pinapabilis ng database index?",
-        "weak": "Aling programming language ang pinakamagaling?",
-        "better": "Aling language ang pinakaginagamit sa frontend development?"
+        "good": "Ano ang ipinapakita ng balance sheet?",
+        "weak": "Aling accounting software ang pinakamahusay?",
+        "better": "Aling statement ang nagpapakita ng kita sa isang panahon?"
       },
-      "comment": "Depende sa project, kaya walang iisang tamang sagot.",
-      "list": "Mga tanong sa topic"
+      "comment": "Depende ito sa kumpanya, kaya walang iisang tamang sagot.",
+      "list": "Mga batayan ng accounting"
     },
     "try": {
-      "title": "Subukan ito bago ang iyong mga kandidato",
+      "title": "Subukan ito bago ang mga kandidato",
       "text": "Sumagot ng isang libreng practice interview para sa katulad na role, o buksan ang sarili mong interview bilang kandidato bago ka mag-imbita ng kahit sino.",
       "browse": "Tingnan ang mga practice interview",
-      "topic": "System design",
-      "question": "Ano ang pangunahing binabawasan ng cache na nasa harap ng database?",
+      "topic": "Sales",
+      "question": "Saan dapat magsimula ang cold email?",
       "options": {
-        "a": "Ang laki ng database",
-        "b": "Kung gaano kadalas binabasa ang database",
-        "c": "Ang bilang ng mga table",
-        "d": "Kung gaano katagal ang mga backup"
+        "a": "Kasaysayan ng kumpanya mo",
+        "b": "Problema ng customer",
+        "c": "Buong listahan ng presyo",
+        "d": "Discount code"
       },
       "points": {
-        "practice": "Libreng practice interview para sa maraming role",
-        "preview": "Ang sarili mong interview bilang kandidato"
+        "practice": "Libreng template para sa maraming role",
+        "preview": "Tingnan ang interview mo bilang kandidato"
       }
     },
     "link": {
       "title": "Isang link para sa iyong job ad",
-      "text": "Ilagay ang link ng interview sa iyong job ad. Agad na sinasagutan ng bawat nag-a-apply ang interview at lumalabas sila sa iyong listahan ng mga kandidato, naka-rank ayon sa score.",
+      "text": "Ilagay ang link ng interview sa job ad mo. Agad itong sasagutan ng mga aplikante at lalabas sila sa listahan mo, ayon sa score.",
       "note": "Puwedeng sagutan ng sinumang may link ang interview.",
       "points": {
         "anywhere": "Sa mga job board, LinkedIn o sa iyong site",
@@ -634,12 +625,12 @@
     },
     "companies": {
       "title": "Alamin kung sino ang marunong sa trabaho",
-      "text": "Sinasagutan ng mga kandidato ang interview mula sa iyong email invite. Dumarating ang kanilang score habang sumasagot sila, berde o pula batay sa iyong passing grade.",
+      "text": "Sinasagutan ng mga kandidato ang interview mula sa iyong email invite o shareable link. Dumarating ang kanilang score at mga babala habang sumasagot sila.",
       "points": {
         "own": "Ibang mga tanong sa bawat kandidato",
         "timed": "May countdown ang bawat tanong",
         "flags": "Flag sa pagmamadali, pag-alis o pangongopya",
-        "private": "Hindi kailanman nakikita ng mga kandidato ang kanilang score"
+        "answers": "Mga scorecard na may sagot at oras"
       },
       "candidate": "Kandidato",
       "score": "Score",

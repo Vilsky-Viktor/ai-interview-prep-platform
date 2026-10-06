@@ -77,8 +77,8 @@
     "notFoundText": "Seda lehte pole olemas või see on eemaldatud."
   },
   "home": {
-    "title": "Intervjueeri kõiki\nPalka tõelised talendid",
-    "text": "Ajapiiranguga intervjuud sinu töökuulutuse põhjal. Igale kandidaadile oma küsimused ja igal küsimusel taimer, nii et vastuste otsimiseks jääb vähe aega. Alates 1 $ kandidaadi kohta."
+    "title": "Intervjueeri kõiki\nPalka parimad",
+    "text": "Ajapiiranguga intervjuud sinu töökuulutuse põhjal. Igale kandidaadile oma küsimused ja igal küsimusel taimer. Alates 1 $ kandidaadi kohta."
   },
   "start": {
     "placeholder": "Kleebi töökuulutus või kirjelda rolli ja seda, mida kandidaat peaks teadma",
@@ -545,33 +545,31 @@
   "landing": {
     "more": "Kuidas see töötab",
     "how": {
-      "title": "Kolm sammu esimeste tulemusteni",
+      "title": "Kolm sammu järgmise töötajani",
       "paste": {
         "title": "Kleebi töökuulutus",
         "text": "Iga roll, iga keel.\nprepza toob välja, mida kandidaat peab teadma, ja pakub teemasid."
       },
       "review": {
         "title": "Vaata teemad üle",
-        "text": "Jäta alles, nimeta ümber või muuda.\nÜhtegi küsimust ei kirjutata enne sinu heakskiitu."
+        "text": "Jäta alles, nimeta ümber või muuda.\nKüsimused kirjutatakse kohe, kui need heaks kiidad."
       },
       "invite": {
         "title": "Kutsu kandidaadid",
-        "text": "Kleebi nimekiri, laadi üles fail või jaga üht linki.\nMeeldetuletused lähevad ise teele. Näed tulemuste järjekorras, kes tööd tunneb."
+        "text": "Kleebi nimekiri, laadi üles fail või jaga üht linki.\nMeeldetuletused on automaatsed. Tulemused saabuvad punktide järgi järjestatult."
       }
     },
     "control": {
       "title": "Sina otsustad, mida kontrollitakse",
-      "text": "Küsimusi ei kirjutata enne, kui oled teemad heaks kiitnud. Eemalda linnuke sellelt, mida roll ei vaja, nimeta teema ümber, muuda selle alateemasid või ütle tehisarule, mida muuta.",
+      "text": "Küsimused kirjutatakse, kui teemad heaks kiidad. Eemalda, nimeta ümber või muuda neid või ütle AI-le, mida muuta.",
       "topics": {
         "design": "Süsteemide disain",
-        "sql": "Sisuturundus",
         "behavior": "Ajajuhtimine",
         "basics": "Meeskonna juhtimine"
       },
-      "change": "Lisa teema YouTube'i reklaamidest",
+      "change": "Lisa teema andmebaaside kohta",
       "subtopics": {
         "design": ["Skaleeritavus", "Vahemälu", "Koormuse jaotamine"],
-        "sql": ["Sihtrühma uurimine", "SEO alused", "Tulemuste mõõtmine"],
         "behavior": [
           "Prioriteetide seadmine",
           "Nädala planeerimine",
@@ -583,45 +581,42 @@
           "Inimeste motiveerimine"
         ]
       },
-      "added": "E-posti kampaaniad",
-      "newTopic": "YouTube'i reklaamid",
-      "newSubtopics": [
-        "Reklaamivormingud",
-        "Sihtrühma valimine",
-        "Vaatamiste mõõtmine"
-      ]
+      "added": "Sõnumijärjekorrad",
+      "newTopic": "Andmebaasid",
+      "newSubtopics": ["Indeksid", "Tehingud", "Päringute häälestamine"],
+      "placeholder": "Valikuline: kirjelda muudatusi…"
     },
     "quality": {
       "title": "Küsimused, mis parandavad end ise",
-      "text": "Kandidaatide vastused, hinnangud ja teated toovad välja nõrgad küsimused. Tehisaru kontrollija parandab või asendab need automaatselt ja iga küsimuse saad ka ise uuesti luua.",
+      "text": "Vastused, hinnangud ja teated näitavad nõrku küsimusi. AI parandab need ja iga küsimuse saad ise uuesti luua.",
       "items": {
-        "good": "Mida andmebaasi indeks kiirendab?",
-        "weak": "Milline programmeerimiskeel on parim?",
-        "better": "Millist keelt kasutatakse esiliidese arenduses kõige rohkem?"
+        "good": "Mida näitab bilanss?",
+        "weak": "Milline raamatupidamistarkvara on parim?",
+        "better": "Milline aruanne näitab perioodi kasumit?"
       },
-      "comment": "See sõltub projektist, nii et üht õiget vastust pole.",
-      "list": "Teema küsimused"
+      "comment": "See sõltub ettevõttest, nii et ühte õiget vastust pole.",
+      "list": "Raamatupidamise alused"
     },
     "try": {
-      "title": "Proovi enne oma kandidaate",
+      "title": "Proovi enne kandidaate",
       "text": "Tee sarnase rolli tasuta harjutusintervjuu või ava oma intervjuu kandidaadina, enne kui kedagi kutsud.",
       "browse": "Sirvi harjutusintervjuusid",
-      "topic": "Süsteemidisain",
-      "question": "Mida andmebaasi ees olev vahemälu peamiselt vähendab?",
+      "topic": "Müük",
+      "question": "Millega peaks külm e-kiri algama?",
       "options": {
-        "a": "Andmebaasi suurust",
-        "b": "Seda, kui sageli andmebaasist loetakse",
-        "c": "Tabelite arvu",
-        "d": "Varukoopiate tegemise aega"
+        "a": "Ettevõtte ajalooga",
+        "b": "Kliendi probleemiga",
+        "c": "Täieliku hinnakirjaga",
+        "d": "Sooduskoodiga"
       },
       "points": {
-        "practice": "Tasuta harjutusintervjuud paljudele rollidele",
-        "preview": "Sinu oma intervjuu kandidaadi pilgu läbi"
+        "practice": "Tasuta mallid paljudele rollidele",
+        "preview": "Vaata oma intervjuud kandidaadina"
       }
     },
     "link": {
       "title": "Üks link sinu töökuulutusse",
-      "text": "Pane intervjuu link oma töökuulutusse. Igaüks, kes kandideerib, teeb intervjuu kohe ja ilmub sinu kandidaatide nimekirja tulemuste järjekorras.",
+      "text": "Lisa intervjuu link töökuulutusse. Kandideerijad teevad selle kohe ja ilmuvad sinu nimekirja punktide järjekorras.",
       "note": "Intervjuu saab teha igaüks, kellel on link.",
       "points": {
         "anywhere": "Tööportaalides, LinkedInis või sinu veebilehel",
@@ -630,12 +625,12 @@
     },
     "companies": {
       "title": "Vaata, kes tööd tunneb",
-      "text": "Kandidaadid teevad intervjuu sinu e-posti kutse kaudu. Nende tulemused saabuvad vastamise käigus, rohelised või punased vastavalt sinu läbimise lävele.",
+      "text": "Kandidaadid teevad intervjuu sinu e-posti kutse või jagatava lingi kaudu. Nende tulemused ja hoiatusmärgid saabuvad vastamise käigus.",
       "points": {
         "own": "Igale kandidaadile oma küsimused",
         "timed": "Taimer iga küsimuse juures",
         "flags": "Märked kiirustamise, lahkumise ja kopeerimise kohta",
-        "private": "Kandidaadid ei näe kunagi oma tulemusi"
+        "answers": "Tulemuskaardid vastuste ja aegadega"
       },
       "candidate": "Kandidaat",
       "score": "Tulemus",

@@ -77,8 +77,8 @@
     "notFoundText": "Trang này không tồn tại hoặc đã bị xóa."
   },
   "home": {
-    "title": "Phỏng vấn mọi người\nTuyển đúng nhân tài",
-    "text": "Phỏng vấn có tính giờ, tạo từ mô tả công việc của bạn. Câu hỏi riêng cho mỗi ứng viên và giới hạn thời gian cho từng câu, nên có rất ít thời gian để tra cứu đáp án. Từ 1 $ mỗi ứng viên."
+    "title": "Phỏng vấn mọi người\nTuyển người giỏi nhất",
+    "text": "Phỏng vấn có tính giờ, tạo từ mô tả công việc của bạn. Câu hỏi riêng cho mỗi ứng viên và giới hạn thời gian cho từng câu. Từ 1 $ mỗi ứng viên."
   },
   "start": {
     "placeholder": "Dán mô tả công việc, hoặc mô tả vị trí và những gì ứng viên cần biết",
@@ -545,75 +545,70 @@
   "landing": {
     "more": "Cách hoạt động",
     "how": {
-      "title": "Ba bước đến kết quả đầu tiên",
+      "title": "Ba bước đến người được tuyển tiếp theo",
       "paste": {
         "title": "Dán mô tả công việc",
         "text": "Mọi vị trí, mọi ngôn ngữ.\nprepza chọn ra những gì ứng viên phải biết và đề xuất chủ đề."
       },
       "review": {
         "title": "Kiểm tra các chủ đề",
-        "text": "Giữ, đổi tên hoặc chỉnh sửa.\nChưa có câu hỏi nào được viết cho đến khi bạn duyệt."
+        "text": "Giữ, đổi tên hoặc chỉnh sửa.\nCâu hỏi được viết ngay khi bạn duyệt."
       },
       "invite": {
         "title": "Mời ứng viên",
-        "text": "Dán danh sách, tải tệp lên hoặc chia sẻ một liên kết.\nLời nhắc được gửi tự động. Bạn thấy ai thạo việc, xếp hạng theo điểm."
+        "text": "Dán danh sách, tải tệp lên hoặc chia sẻ một liên kết.\nLời nhắc được gửi tự động. Kết quả được xếp hạng theo điểm."
       }
     },
     "control": {
       "title": "Bạn quyết định nội dung phỏng vấn",
-      "text": "Không câu hỏi nào được viết cho đến khi bạn duyệt các chủ đề. Bỏ chọn những gì vị trí không cần, đổi tên chủ đề, chỉnh sửa chủ đề con, hoặc bảo AI cần thay đổi gì.",
+      "text": "Câu hỏi được viết khi bạn duyệt các chủ đề. Bỏ chọn, đổi tên, chỉnh sửa, hoặc bảo AI cần thay đổi gì.",
       "topics": {
         "design": "Thiết kế hệ thống",
-        "sql": "Marketing nội dung",
         "behavior": "Quản lý thời gian",
         "basics": "Lãnh đạo nhóm"
       },
-      "change": "Thêm chủ đề về quảng cáo YouTube",
+      "change": "Thêm một chủ đề về cơ sở dữ liệu",
       "subtopics": {
         "design": ["Khả năng mở rộng", "Bộ nhớ đệm", "Cân bằng tải"],
-        "sql": ["Nghiên cứu đối tượng", "SEO cơ bản", "Đo lường kết quả"],
         "behavior": ["Sắp xếp ưu tiên", "Lên kế hoạch tuần", "Tránh xao nhãng"],
         "basics": ["Đưa ra phản hồi", "Giao việc", "Tạo động lực"]
       },
-      "added": "Chiến dịch email",
-      "newTopic": "Quảng cáo YouTube",
-      "newSubtopics": [
-        "Định dạng quảng cáo",
-        "Nhắm mục tiêu đối tượng",
-        "Đo lượt xem"
-      ]
+      "added": "Hàng đợi tin nhắn",
+      "newTopic": "Cơ sở dữ liệu",
+      "newSubtopics": ["Chỉ mục", "Giao dịch", "Tối ưu truy vấn"],
+      "placeholder": "Không bắt buộc: mô tả thay đổi…"
     },
     "quality": {
       "title": "Câu hỏi tự hoàn thiện",
-      "text": "Câu trả lời, đánh giá và báo cáo của ứng viên giúp phát hiện câu hỏi yếu. Bộ kiểm duyệt AI tự động sửa hoặc thay thế chúng, và bạn có thể tự tạo lại bất kỳ câu hỏi nào.",
+      "text": "Câu trả lời, đánh giá và báo cáo cho thấy câu hỏi yếu. AI sửa chúng, và bạn có thể tự tạo lại bất kỳ câu nào.",
       "items": {
-        "good": "Chỉ mục cơ sở dữ liệu giúp tăng tốc điều gì?",
-        "weak": "Ngôn ngữ lập trình nào tốt nhất?",
-        "better": "Ngôn ngữ nào được dùng phổ biến nhất để phát triển frontend?"
+        "good": "Bảng cân đối kế toán cho thấy điều gì?",
+        "weak": "Phần mềm kế toán nào tốt nhất?",
+        "better": "Báo cáo nào cho thấy lợi nhuận trong một kỳ?"
       },
-      "comment": "Còn tùy dự án, nên không có một đáp án đúng duy nhất.",
-      "list": "Câu hỏi của chủ đề"
+      "comment": "Tùy công ty, nên không có một đáp án đúng duy nhất.",
+      "list": "Kế toán cơ bản"
     },
     "try": {
-      "title": "Thử trước khi ứng viên của bạn làm",
+      "title": "Thử trước khi ứng viên làm",
       "text": "Làm miễn phí một buổi phỏng vấn luyện tập cho vị trí tương tự, hoặc mở buổi phỏng vấn của chính bạn với tư cách ứng viên trước khi mời bất kỳ ai.",
       "browse": "Xem các buổi phỏng vấn luyện tập",
-      "topic": "Thiết kế hệ thống",
-      "question": "Bộ nhớ đệm (cache) đặt trước cơ sở dữ liệu chủ yếu giúp giảm điều gì?",
+      "topic": "Bán hàng",
+      "question": "Email chào hàng nên mở đầu bằng gì?",
       "options": {
-        "a": "Kích thước cơ sở dữ liệu",
-        "b": "Số lần đọc cơ sở dữ liệu",
-        "c": "Số lượng bảng",
-        "d": "Thời gian sao lưu"
+        "a": "Lịch sử công ty bạn",
+        "b": "Vấn đề của khách hàng",
+        "c": "Bảng giá đầy đủ",
+        "d": "Mã giảm giá"
       },
       "points": {
-        "practice": "Phỏng vấn luyện tập miễn phí cho nhiều vị trí",
-        "preview": "Buổi phỏng vấn của chính bạn, với tư cách ứng viên"
+        "practice": "Mẫu miễn phí cho nhiều vị trí",
+        "preview": "Xem buổi phỏng vấn của bạn như ứng viên"
       }
     },
     "link": {
       "title": "Một liên kết cho tin tuyển dụng",
-      "text": "Đặt liên kết của buổi phỏng vấn vào tin tuyển dụng. Ai ứng tuyển cũng tham gia phỏng vấn ngay và xuất hiện trong danh sách ứng viên của bạn, xếp hạng theo điểm.",
+      "text": "Đặt link phỏng vấn vào tin tuyển dụng. Ứng viên làm ngay và hiện trong danh sách của bạn, xếp theo điểm.",
       "note": "Bất kỳ ai có liên kết đều có thể tham gia phỏng vấn.",
       "points": {
         "anywhere": "Trên các trang việc làm, LinkedIn hoặc website của bạn",
@@ -622,12 +617,12 @@
     },
     "companies": {
       "title": "Biết ai thạo việc",
-      "text": "Ứng viên tham gia phỏng vấn từ email mời của bạn. Điểm hiện ra ngay khi họ trả lời, xanh hoặc đỏ so với điểm đạt bạn đặt.",
+      "text": "Ứng viên tham gia phỏng vấn từ email mời hoặc đường link chia sẻ của bạn. Điểm và dấu hiệu cảnh báo hiện ra ngay khi họ trả lời.",
       "points": {
         "own": "Câu hỏi riêng cho từng ứng viên",
         "timed": "Đếm ngược ở mỗi câu hỏi",
         "flags": "Cảnh báo trả lời vội, rời trang, sao chép",
-        "private": "Ứng viên không bao giờ thấy điểm của mình"
+        "answers": "Bảng điểm kèm câu trả lời và thời gian"
       },
       "candidate": "Ứng viên",
       "score": "Điểm",

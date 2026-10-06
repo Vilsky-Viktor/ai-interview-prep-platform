@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { formatDate } from "@/lib/format"
 import type { Candidate } from "@/types/company"
 
-const POINTS = ["own", "timed", "flags", "private"] as const
+const POINTS = ["own", "timed", "flags", "answers"] as const
 const DAY_MS = 24 * 60 * 60 * 1000
 const PASS_MARK = 70
 
@@ -62,7 +62,7 @@ export async function CompaniesSection() {
       <Stage>
         <div className="rounded-2xl border bg-background text-start">
           {/* The test and its passing grade, which colors each finished grade. */}
-          <p className="border-b p-5 text-sm text-muted-foreground">
+          <p className="border-b px-8 py-5 text-sm text-muted-foreground">
             {t("role", { mark: PASS_MARK })}
           </p>
           <ul className="divide-y">
@@ -70,7 +70,7 @@ export async function CompaniesSection() {
               ({ email, daysAgo, progress, grade, status, signals }) => (
                 <li
                   key={email}
-                  className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between"
+                  className="flex flex-col gap-4 px-8 py-5 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <span className="min-w-0 space-y-1">
                     <span className="block text-lg font-medium break-all">

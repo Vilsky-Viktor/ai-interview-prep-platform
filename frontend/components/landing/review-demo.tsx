@@ -111,7 +111,7 @@ export function ReviewDemo({
 
   return (
     // Room for the open editor, so the page doesn't move while the demo plays.
-    <div className="min-h-[698px] space-y-4 text-start sm:min-h-[530px]">
+    <div className="min-h-[612px] space-y-4 text-start sm:min-h-[452px]">
       <p className="font-heading text-xl font-medium tracking-tight lowercase">
         {title}
         <span className="text-primary">.</span>

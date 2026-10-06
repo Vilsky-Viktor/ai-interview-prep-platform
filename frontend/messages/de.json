@@ -77,8 +77,8 @@
     "notFoundText": "Diese Seite existiert nicht oder wurde entfernt."
   },
   "home": {
-    "title": "Interviewe jeden\nStelle echte Talente ein",
-    "text": "Interviews mit Zeitlimit aus deiner Stellenbeschreibung. Eigene Fragen für jeden Kandidaten und ein Zeitlimit für jede, also bleibt wenig Zeit, Antworten nachzuschlagen. Ab $1 pro Kandidat."
+    "title": "Interviewe jeden\nStelle die Besten ein",
+    "text": "Interviews mit Zeitlimit aus deiner Stellenbeschreibung. Eigene Fragen für jeden Kandidaten und ein Zeitlimit für jede. Ab $1 pro Kandidat."
   },
   "start": {
     "placeholder": "Füge eine Stellenbeschreibung ein oder beschreibe die Rolle und was ein Kandidat wissen sollte",
@@ -545,33 +545,31 @@
   "landing": {
     "more": "So funktioniert's",
     "how": {
-      "title": "Drei Schritte zu deinen ersten Ergebnissen",
+      "title": "Drei Schritte zu deiner nächsten Einstellung",
       "paste": {
         "title": "Füge die Stellenbeschreibung ein",
         "text": "Jede Rolle, jede Sprache.\nprepza erkennt, was ein Kandidat wissen muss, und schlägt Themen vor."
       },
       "review": {
         "title": "Prüfe die Themen",
-        "text": "Behalte, benenne um oder ändere sie.\nFragen werden erst geschrieben, wenn du zustimmst."
+        "text": "Behalte, benenne um oder ändere sie.\nSobald du zustimmst, werden die Fragen geschrieben."
       },
       "invite": {
         "title": "Lade Kandidaten ein",
-        "text": "Füge eine Liste ein, lade eine Datei hoch oder teile einen Link.\nErinnerungen gehen von selbst raus. Du siehst, wer den Job beherrscht, nach Ergebnis sortiert."
+        "text": "Füge eine Liste ein, lade eine Datei hoch oder teile einen Link.\nErinnerungen gehen automatisch raus. Ergebnisse kommen nach Punktzahl sortiert."
       }
     },
     "control": {
       "title": "Du entscheidest, was geprüft wird",
-      "text": "Fragen werden erst geschrieben, wenn du die Themen bestätigst. Entferne den Haken bei allem, was die Rolle nicht braucht, benenne ein Thema um, bearbeite seine Unterthemen oder sag der KI, was sie ändern soll.",
+      "text": "Fragen entstehen, sobald du die Themen freigibst. Abwählen, umbenennen, bearbeiten oder der KI sagen, was sie ändern soll.",
       "topics": {
         "design": "Systemdesign",
-        "sql": "Content-Marketing",
         "behavior": "Zeitmanagement",
         "basics": "Teamführung"
       },
-      "change": "Füge ein Thema zu YouTube-Werbung hinzu",
+      "change": "Füge ein Thema zu Datenbanken hinzu",
       "subtopics": {
         "design": ["Skalierbarkeit", "Caching", "Lastverteilung"],
-        "sql": ["Zielgruppenanalyse", "SEO-Grundlagen", "Erfolgsmessung"],
         "behavior": [
           "Prioritäten setzen",
           "Die Woche planen",
@@ -579,45 +577,42 @@
         ],
         "basics": ["Feedback geben", "Delegieren", "Menschen motivieren"]
       },
-      "added": "E-Mail-Kampagnen",
-      "newTopic": "YouTube-Werbung",
-      "newSubtopics": [
-        "Anzeigenformate",
-        "Zielgruppen-Targeting",
-        "Aufrufe messen"
-      ]
+      "added": "Message Queues",
+      "newTopic": "Datenbanken",
+      "newSubtopics": ["Indizes", "Transaktionen", "Query-Optimierung"],
+      "placeholder": "Optional: Beschreibe Änderungen…"
     },
     "quality": {
       "title": "Fragen, die sich selbst verbessern",
-      "text": "Antworten, Bewertungen und Meldungen der Kandidaten decken schwache Fragen auf. Ein KI-Prüfer korrigiert oder ersetzt sie automatisch, und du kannst jede Frage selbst neu generieren.",
+      "text": "Antworten, Bewertungen und Meldungen zeigen schwache Fragen. Die KI korrigiert sie, und du kannst jede selbst neu generieren.",
       "items": {
-        "good": "Was beschleunigt ein Datenbankindex?",
-        "weak": "Welche Programmiersprache ist die beste?",
-        "better": "Welche Sprache wird in der Frontend-Entwicklung am häufigsten genutzt?"
+        "good": "Was zeigt eine Bilanz?",
+        "weak": "Welche Buchhaltungssoftware ist die beste?",
+        "better": "Welcher Abschluss zeigt den Gewinn eines Zeitraums?"
       },
-      "comment": "Das hängt vom Projekt ab, also gibt es keine eindeutig richtige Antwort.",
-      "list": "Fragen zum Thema"
+      "comment": "Das hängt vom Unternehmen ab, also gibt es keine eindeutig richtige Antwort.",
+      "list": "Grundlagen der Buchhaltung"
     },
     "try": {
-      "title": "Probier es aus, bevor deine Kandidaten es tun",
+      "title": "Probier es aus, bevor Kandidaten es tun",
       "text": "Mach ein kostenloses Übungsinterview für eine ähnliche Rolle oder öffne dein eigenes Interview als Kandidat, bevor du jemanden einlädst.",
       "browse": "Übungsinterviews ansehen",
-      "topic": "Systemdesign",
-      "question": "Was reduziert ein Cache vor einer Datenbank hauptsächlich?",
+      "topic": "Vertrieb",
+      "question": "Womit sollte eine Kaltakquise-Mail beginnen?",
       "options": {
-        "a": "Die Größe der Datenbank",
-        "b": "Wie oft die Datenbank gelesen wird",
-        "c": "Die Anzahl der Tabellen",
-        "d": "Wie lange Backups dauern"
+        "a": "Mit der Firmengeschichte",
+        "b": "Mit dem Problem des Kunden",
+        "c": "Mit einer Preisliste",
+        "d": "Mit einem Rabattcode"
       },
       "points": {
-        "practice": "Kostenlose Übungsinterviews für viele Rollen",
-        "preview": "Dein eigenes Interview als Kandidat"
+        "practice": "Kostenlose Vorlagen für viele Rollen",
+        "preview": "Sieh dein Interview als Kandidat"
       }
     },
     "link": {
       "title": "Ein Link für deine Stellenanzeige",
-      "text": "Setz den Link des Interviews in deine Stellenanzeige. Wer sich bewirbt, macht das Interview sofort und erscheint in deiner Kandidatenliste, nach Ergebnis sortiert.",
+      "text": "Setz den Link zum Interview in deine Stellenanzeige. Bewerber machen es sofort und erscheinen in deiner Liste, nach Punktzahl sortiert.",
       "note": "Jeder mit dem Link kann das Interview machen.",
       "points": {
         "anywhere": "Auf Jobbörsen, LinkedIn oder deiner Website",
@@ -626,12 +621,12 @@
     },
     "companies": {
       "title": "Sieh, wer den Job beherrscht",
-      "text": "Kandidaten machen das Interview über deine E-Mail-Einladung. Ihre Ergebnisse kommen herein, während sie antworten, grün oder rot gemessen an deiner Bestehensgrenze.",
+      "text": "Kandidaten machen das Interview über deine E-Mail-Einladung oder deinen teilbaren Link. Ihre Ergebnisse und Warnzeichen kommen herein, während sie antworten.",
       "points": {
         "own": "Eigene Fragen für jeden Kandidaten",
         "timed": "Ein Countdown bei jeder Frage",
         "flags": "Hinweise auf Eile, Seitenwechsel oder Kopieren",
-        "private": "Kandidaten sehen ihre Ergebnisse nie"
+        "answers": "Auswertungen mit Antworten und Zeiten"
       },
       "candidate": "Kandidat",
       "score": "Ergebnis",

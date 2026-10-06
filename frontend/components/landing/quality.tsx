@@ -28,6 +28,8 @@ export async function QualitySection() {
           labels={{
             regenerate: questions("regenerate"),
             regenerating: questions("regenerating"),
+            wrongAnswer: questions("wrongAnswer"),
+            showOptions: questions("showOptions"),
           }}
         />
       </Stage>

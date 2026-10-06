@@ -77,8 +77,8 @@
     "notFoundText": "That page doesn't exist or was removed."
   },
   "home": {
-    "title": "Interview everyone\nHire real talent",
-    "text": "Timed interviews made from your job description. Unique questions for every candidate and a timer on each, so there's little time to look answers up. From $1 per candidate."
+    "title": "Interview everyone\nHire the best",
+    "text": "Timed interviews made from your job description. Unique questions for every candidate and a timer on each. From $1 per candidate."
   },
   "start": {
     "placeholder": "Paste a job description, or describe the role and what a candidate should know",
@@ -545,33 +545,31 @@
   "landing": {
     "more": "How it works",
     "how": {
-      "title": "Three steps to your first results",
+      "title": "Three steps to your next hire",
       "paste": {
         "title": "Paste the job description",
         "text": "Any role, any language.\nprepza picks out what a candidate must know and proposes topics."
       },
       "review": {
         "title": "Check the topics",
-        "text": "Keep, rename or change them.\nNo questions are written until you approve."
+        "text": "Keep, rename or change them.\nQuestions are written once you approve."
       },
       "invite": {
         "title": "Invite candidates",
-        "text": "Paste a list, upload a file or share one link.\nReminders go out on their own. You see who knows the job, ranked by score."
+        "text": "Paste a list, upload a file or share one link.\nReminders are automatic. Results come in ranked by score."
       }
     },
     "control": {
       "title": "You decide what's tested",
-      "text": "No questions are written until you approve the topics. Uncheck what the role doesn't need, rename a topic, edit its subtopics, or tell the AI what to change.",
+      "text": "Questions are written once you approve the topics. Uncheck, rename or edit them, or tell the AI what to change.",
       "topics": {
         "design": "System design",
-        "sql": "Content marketing",
         "behavior": "Time management",
         "basics": "Team leadership"
       },
-      "change": "Add a topic on YouTube ads",
+      "change": "Add a topic on databases",
       "subtopics": {
         "design": ["Scalability", "Caching", "Load balancing"],
-        "sql": ["Audience research", "SEO basics", "Measuring results"],
         "behavior": [
           "Prioritizing",
           "Planning the week",
@@ -579,41 +577,42 @@
         ],
         "basics": ["Giving feedback", "Delegating", "Motivating people"]
       },
-      "added": "Email campaigns",
-      "newTopic": "YouTube ads",
-      "newSubtopics": ["Ad formats", "Audience targeting", "Measuring views"]
+      "added": "Message queues",
+      "newTopic": "Databases",
+      "newSubtopics": ["Indexes", "Transactions", "Query tuning"],
+      "placeholder": "Optional: describe changes…"
     },
     "quality": {
       "title": "Questions that fix themselves",
-      "text": "Candidates' answers, ratings and reports reveal weak questions. An AI verifier fixes or replaces them automatically, and you can re-generate any question yourself.",
+      "text": "Answers, ratings and reports reveal weak questions. AI fixes them, and you can re-generate any yourself.",
       "items": {
-        "good": "What does a database index speed up?",
-        "weak": "Which programming language is the best?",
-        "better": "Which language is most widely used for frontend development?"
+        "good": "What does a balance sheet show?",
+        "weak": "Which accounting software is the best?",
+        "better": "Which statement shows profit over a period?"
       },
-      "comment": "It depends on the project, so there's no single right answer.",
-      "list": "Topic questions"
+      "comment": "It depends on the company, so there's no single right answer.",
+      "list": "Accounting basics"
     },
     "try": {
-      "title": "Try it before your candidates do",
+      "title": "Try it before candidates do",
       "text": "Take a free practice interview for a similar role, or open your own interview as a candidate before you invite anyone.",
       "browse": "Browse practice interviews",
-      "topic": "System design",
-      "question": "What does a cache in front of a database mainly reduce?",
+      "topic": "Sales",
+      "question": "What should a cold email lead with?",
       "options": {
-        "a": "The size of the database",
-        "b": "How often the database is read",
-        "c": "The number of tables",
-        "d": "How long backups take"
+        "a": "Your company's history",
+        "b": "The customer's problem",
+        "c": "A full price list",
+        "d": "A discount code"
       },
       "points": {
-        "practice": "Free practice interviews for many roles",
-        "preview": "Your own interview as a candidate"
+        "practice": "Free templates for many roles",
+        "preview": "View your interview as a candidate"
       }
     },
     "link": {
       "title": "One link for your job ad",
-      "text": "Put the interview's link in your job ad. Anyone who applies takes the interview right away and shows up in your candidates list, ranked by score.",
+      "text": "Put the interview's link in your job ad. Applicants take it right away and appear in your list, ranked by score.",
       "note": "Anyone with the link can take the interview.",
       "points": {
         "anywhere": "On job boards, LinkedIn or your site",
@@ -622,12 +621,12 @@
     },
     "companies": {
       "title": "See who knows the job",
-      "text": "Candidates take the interview from your email invite. Their scores come in as they answer, green or red against your passing grade.",
+      "text": "Candidates take the interview from your email invite or shareable link. Their scores and warning signs come in as they answer.",
       "points": {
         "own": "Unique questions for each candidate",
         "timed": "A countdown on every question",
         "flags": "Flags for rushing, leaving or copying",
-        "private": "Candidates never see their scores"
+        "answers": "Scorecards with answers and timings"
       },
       "candidate": "Candidate",
       "score": "Score",

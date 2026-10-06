@@ -77,8 +77,8 @@
     "notFoundText": "Cette page n'existe pas ou a été supprimée."
   },
   "home": {
-    "title": "Un entretien pour tous\nRecrutez de vrais talents",
-    "text": "Des entretiens chronométrés créés à partir de votre fiche de poste. Des questions uniques pour chaque candidat et un minuteur sur chacune, il reste donc peu de temps pour chercher les réponses. À partir de 1 $ par candidat."
+    "title": "Un entretien pour tous\nRecrutez les meilleurs",
+    "text": "Des entretiens chronométrés créés à partir de votre fiche de poste. Des questions uniques pour chaque candidat et un minuteur sur chacune. À partir de 1 $ par candidat."
   },
   "start": {
     "placeholder": "Collez une offre d'emploi, ou décrivez le poste et ce qu'un candidat doit savoir",
@@ -545,33 +545,31 @@
   "landing": {
     "more": "Comment ça marche",
     "how": {
-      "title": "Trois étapes vers vos premiers résultats",
+      "title": "Trois étapes vers votre prochain recrutement",
       "paste": {
         "title": "Collez l'offre d'emploi",
         "text": "Tout poste, toute langue.\nprepza repère ce qu'un candidat doit savoir et propose des sujets."
       },
       "review": {
         "title": "Vérifiez les sujets",
-        "text": "Gardez-les, renommez-les ou modifiez-les.\nAucune question n'est rédigée avant votre validation."
+        "text": "Gardez-les, renommez-les ou modifiez-les.\nLes questions sont rédigées dès votre validation."
       },
       "invite": {
         "title": "Invitez des candidats",
-        "text": "Collez une liste, importez un fichier ou partagez un lien.\nLes rappels partent tout seuls. Vous voyez qui maîtrise le poste, classé par score."
+        "text": "Collez une liste, importez un fichier ou partagez un lien.\nLes relances sont automatiques. Les résultats arrivent classés par score."
       }
     },
     "control": {
       "title": "Vous décidez de ce qui est évalué",
-      "text": "Aucune question n'est rédigée avant que vous ne validiez les sujets. Décochez ce dont le poste n'a pas besoin, renommez un sujet, modifiez ses sous-sujets ou dites à l'IA quoi changer.",
+      "text": "Les questions sont rédigées dès que vous validez les thèmes. Décochez, renommez ou modifiez-les, ou dites à l'IA quoi changer.",
       "topics": {
         "design": "Conception de systèmes",
-        "sql": "Marketing de contenu",
         "behavior": "Gestion du temps",
         "basics": "Management d'équipe"
       },
-      "change": "Ajoute un sujet sur les publicités YouTube",
+      "change": "Ajoute un thème sur les bases de données",
       "subtopics": {
         "design": ["Scalabilité", "Mise en cache", "Répartition de charge"],
-        "sql": ["Étude d'audience", "Bases du SEO", "Mesure des résultats"],
         "behavior": [
           "Prioriser",
           "Planifier sa semaine",
@@ -579,45 +577,42 @@
         ],
         "basics": ["Faire un retour", "Déléguer", "Motiver l'équipe"]
       },
-      "added": "Campagnes e-mail",
-      "newTopic": "Publicités YouTube",
-      "newSubtopics": [
-        "Formats publicitaires",
-        "Ciblage d'audience",
-        "Mesure des vues"
-      ]
+      "added": "Files de messages",
+      "newTopic": "Bases de données",
+      "newSubtopics": ["Index", "Transactions", "Optimisation des requêtes"],
+      "placeholder": "Facultatif : décrivez des changements…"
     },
     "quality": {
       "title": "Des questions qui se corrigent seules",
-      "text": "Les réponses, les évaluations et les signalements des candidats révèlent les questions faibles. Un vérificateur IA les corrige ou les remplace automatiquement, et vous pouvez régénérer vous-même n'importe quelle question.",
+      "text": "Réponses, notes et signalements révèlent les questions faibles. L'IA les corrige, et vous pouvez en régénérer une vous-même.",
       "items": {
-        "good": "Qu'accélère un index de base de données ?",
-        "weak": "Quel est le meilleur langage de programmation ?",
-        "better": "Quel langage est le plus utilisé en développement frontend ?"
+        "good": "Que montre un bilan ?",
+        "weak": "Quel logiciel de comptabilité est le meilleur ?",
+        "better": "Quel état montre le résultat d'une période ?"
       },
-      "comment": "Ça dépend du projet, il n'y a donc pas une seule bonne réponse.",
-      "list": "Questions du sujet"
+      "comment": "Ça dépend de l'entreprise, il n'y a donc pas de réponse unique.",
+      "list": "Bases de la comptabilité"
     },
     "try": {
-      "title": "Essayez-le avant vos candidats",
+      "title": "Essayez-le avant les candidats",
       "text": "Passez un entretien d'entraînement gratuit pour un poste similaire, ou ouvrez votre propre entretien en tant que candidat avant d'inviter qui que ce soit.",
       "browse": "Parcourir les entretiens d'entraînement",
-      "topic": "Conception de systèmes",
-      "question": "Que réduit principalement un cache placé devant une base de données ?",
+      "topic": "Vente",
+      "question": "Par quoi commencer un e-mail de prospection ?",
       "options": {
-        "a": "La taille de la base de données",
-        "b": "La fréquence de lecture de la base de données",
-        "c": "Le nombre de tables",
-        "d": "La durée des sauvegardes"
+        "a": "L'histoire de votre entreprise",
+        "b": "Le problème du client",
+        "c": "Une liste de prix complète",
+        "d": "Un code de réduction"
       },
       "points": {
-        "practice": "Des entretiens d'entraînement gratuits pour de nombreux postes",
-        "preview": "Votre propre entretien, côté candidat"
+        "practice": "Des modèles gratuits pour de nombreux postes",
+        "preview": "Voyez votre entretien comme un candidat"
       }
     },
     "link": {
       "title": "Un lien pour votre offre d'emploi",
-      "text": "Ajoutez le lien de l'entretien à votre offre d'emploi. Toute personne qui postule passe l'entretien immédiatement et apparaît dans votre liste de candidats, classée par score.",
+      "text": "Mettez le lien de l'entretien dans votre annonce. Les candidats le passent aussitôt et apparaissent dans votre liste, classés par score.",
       "note": "Toute personne disposant du lien peut passer l'entretien.",
       "points": {
         "anywhere": "Sur les sites d'emploi, LinkedIn ou votre site",
@@ -626,12 +621,12 @@
     },
     "companies": {
       "title": "Voyez qui maîtrise le poste",
-      "text": "Les candidats passent l'entretien depuis votre invitation par e-mail. Leurs scores arrivent au fil de leurs réponses, en vert ou en rouge par rapport à votre note de réussite.",
+      "text": "Les candidats passent l'entretien depuis votre invitation par e-mail ou votre lien de partage. Leurs scores et les signaux d'alerte arrivent au fil de leurs réponses.",
       "points": {
         "own": "Des questions uniques par candidat",
         "timed": "Un compte à rebours par question",
         "flags": "Alertes : précipitation, sortie, copie",
-        "private": "Les candidats ne voient jamais leurs scores"
+        "answers": "Fiches avec réponses et temps"
       },
       "candidate": "Candidat",
       "score": "Score",

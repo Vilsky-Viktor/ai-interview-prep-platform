@@ -77,8 +77,8 @@
     "notFoundText": "Halaman itu tidak ada atau sudah dihapus."
   },
   "home": {
-    "title": "Wawancarai semua orang\nRekrut talenta sejati",
-    "text": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu. Soal unik untuk setiap kandidat dan batas waktu di tiap soal, jadi hanya ada sedikit waktu untuk mencari jawaban. Mulai $1 per kandidat."
+    "title": "Wawancarai semua orang\nRekrut yang terbaik",
+    "text": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu. Soal unik untuk setiap kandidat dan batas waktu di tiap soal. Mulai $1 per kandidat."
   },
   "start": {
     "placeholder": "Tempel deskripsi pekerjaan, atau jelaskan perannya dan apa yang perlu diketahui kandidat",
@@ -545,33 +545,31 @@
   "landing": {
     "more": "Cara kerjanya",
     "how": {
-      "title": "Tiga langkah menuju hasil pertamamu",
+      "title": "Tiga langkah menuju rekrutan berikutnya",
       "paste": {
         "title": "Tempel deskripsi pekerjaan",
         "text": "Peran apa pun, bahasa apa pun.\nprepza menentukan apa yang wajib diketahui kandidat dan mengusulkan topik."
       },
       "review": {
         "title": "Periksa topiknya",
-        "text": "Pertahankan, ganti nama, atau ubah.\nSoal baru ditulis setelah kamu menyetujuinya."
+        "text": "Pertahankan, ganti nama, atau ubah.\nSoal ditulis begitu kamu menyetujuinya."
       },
       "invite": {
         "title": "Undang kandidat",
-        "text": "Tempel daftar, unggah file, atau bagikan satu tautan.\nPengingat terkirim otomatis. Kamu melihat siapa yang menguasai pekerjaan, diurutkan berdasarkan skor."
+        "text": "Tempel daftar, unggah file, atau bagikan satu tautan.\nPengingat dikirim otomatis. Hasil masuk sudah diurutkan menurut skor."
       }
     },
     "control": {
       "title": "Kamu yang menentukan materi wawancara",
-      "text": "Tidak ada soal yang ditulis sampai kamu menyetujui topiknya. Hapus centang yang tidak dibutuhkan peran, ganti nama topik, ubah subtopiknya, atau beri tahu AI apa yang perlu diubah.",
+      "text": "Soal ditulis begitu kamu menyetujui topiknya. Hapus centang, ganti nama, atau edit topik, atau beri tahu AI apa yang perlu diubah.",
       "topics": {
         "design": "Desain sistem",
-        "sql": "Pemasaran konten",
         "behavior": "Manajemen waktu",
         "basics": "Kepemimpinan tim"
       },
-      "change": "Tambahkan topik tentang iklan YouTube",
+      "change": "Tambahkan topik tentang database",
       "subtopics": {
         "design": ["Skalabilitas", "Caching", "Load balancing"],
-        "sql": ["Riset audiens", "Dasar-dasar SEO", "Mengukur hasil"],
         "behavior": [
           "Menentukan prioritas",
           "Merencanakan minggu",
@@ -579,45 +577,42 @@
         ],
         "basics": ["Memberi masukan", "Mendelegasikan tugas", "Memotivasi tim"]
       },
-      "added": "Kampanye email",
-      "newTopic": "Iklan YouTube",
-      "newSubtopics": [
-        "Format iklan",
-        "Penargetan audiens",
-        "Mengukur tayangan"
-      ]
+      "added": "Antrean pesan",
+      "newTopic": "Database",
+      "newSubtopics": ["Indeks", "Transaksi", "Penyetelan kueri"],
+      "placeholder": "Opsional: jelaskan perubahan…"
     },
     "quality": {
       "title": "Soal yang memperbaiki dirinya sendiri",
-      "text": "Jawaban, penilaian, dan laporan kandidat mengungkap soal yang lemah. Pemeriksa AI memperbaiki atau menggantinya secara otomatis, dan kamu bisa membuat ulang soal mana pun sendiri.",
+      "text": "Jawaban, rating, dan laporan mengungkap soal yang lemah. AI memperbaikinya, dan kamu bisa membuat ulang soal mana pun.",
       "items": {
-        "good": "Apa yang dipercepat oleh indeks database?",
-        "weak": "Bahasa pemrograman apa yang terbaik?",
-        "better": "Bahasa apa yang paling banyak dipakai untuk pengembangan frontend?"
+        "good": "Apa yang ditunjukkan neraca?",
+        "weak": "Software akuntansi mana yang terbaik?",
+        "better": "Laporan mana yang menunjukkan laba suatu periode?"
       },
-      "comment": "Tergantung proyeknya, jadi tidak ada satu jawaban yang benar.",
-      "list": "Soal topik"
+      "comment": "Tergantung perusahaannya, jadi tidak ada satu jawaban yang benar.",
+      "list": "Dasar-dasar akuntansi"
     },
     "try": {
-      "title": "Coba dulu sebelum kandidatmu",
+      "title": "Coba dulu sebelum kandidat",
       "text": "Ikuti wawancara latihan gratis untuk peran serupa, atau buka wawancaramu sendiri sebagai kandidat sebelum mengundang siapa pun.",
       "browse": "Lihat wawancara latihan",
-      "topic": "Desain sistem",
-      "question": "Apa yang terutama dikurangi oleh cache di depan database?",
+      "topic": "Penjualan",
+      "question": "Cold email sebaiknya dibuka dengan apa?",
       "options": {
-        "a": "Ukuran database",
-        "b": "Seberapa sering database dibaca",
-        "c": "Jumlah tabel",
-        "d": "Lama waktu pencadangan"
+        "a": "Sejarah perusahaanmu",
+        "b": "Masalah pelanggan",
+        "c": "Daftar harga lengkap",
+        "d": "Kode diskon"
       },
       "points": {
-        "practice": "Wawancara latihan gratis untuk banyak peran",
-        "preview": "Wawancaramu sendiri sebagai kandidat"
+        "practice": "Templat gratis untuk banyak peran",
+        "preview": "Lihat wawancaramu sebagai kandidat"
       }
     },
     "link": {
       "title": "Satu tautan untuk lowonganmu",
-      "text": "Pasang tautan wawancara di iklan lowonganmu. Siapa pun yang melamar langsung mengikuti wawancara dan muncul di daftar kandidatmu, diurutkan berdasarkan skor.",
+      "text": "Pasang tautan wawancara di iklan lowonganmu. Pelamar langsung mengikutinya dan muncul di daftarmu, diurutkan menurut skor.",
       "note": "Siapa pun yang punya tautan bisa mengikuti wawancara.",
       "points": {
         "anywhere": "Di situs lowongan kerja, LinkedIn, atau situsmu",
@@ -626,12 +621,12 @@
     },
     "companies": {
       "title": "Lihat siapa yang menguasai pekerjaan",
-      "text": "Kandidat mengikuti wawancara dari undangan email-mu. Skor mereka masuk seiring mereka menjawab, hijau atau merah dibanding nilai lulusmu.",
+      "text": "Kandidat mengikuti wawancara dari undangan email atau tautan yang bisa dibagikan. Skor dan tanda peringatan mereka masuk seiring mereka menjawab.",
       "points": {
         "own": "Soal unik untuk tiap kandidat",
         "timed": "Hitung mundur di setiap soal",
         "flags": "Tanda untuk terburu-buru, keluar, atau menyalin",
-        "private": "Kandidat tidak pernah melihat skornya"
+        "answers": "Kartu skor dengan jawaban dan waktu"
       },
       "candidate": "Kandidat",
       "score": "Skor",

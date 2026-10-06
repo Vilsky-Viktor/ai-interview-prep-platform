@@ -77,8 +77,8 @@
     "notFoundText": "Questa pagina non esiste o è stata rimossa."
   },
   "home": {
-    "title": "Un colloquio per tutti\nAssumi veri talenti",
-    "text": "Colloqui a tempo creati dalla tua descrizione del ruolo. Domande uniche per ogni candidato e un timer su ognuna, quindi c'è poco tempo per cercare le risposte. Da $1 per candidato."
+    "title": "Un colloquio per tutti\nAssumi i migliori",
+    "text": "Colloqui a tempo creati dalla tua descrizione del ruolo. Domande uniche per ogni candidato e un timer su ognuna. Da $1 per candidato."
   },
   "start": {
     "placeholder": "Incolla una descrizione del ruolo, oppure descrivi il ruolo e cosa dovrebbe sapere un candidato",
@@ -545,33 +545,31 @@
   "landing": {
     "more": "Come funziona",
     "how": {
-      "title": "Tre passi verso i primi risultati",
+      "title": "Tre passi verso la tua prossima assunzione",
       "paste": {
         "title": "Incolla la descrizione del ruolo",
         "text": "Qualsiasi ruolo, qualsiasi lingua.\nprepza individua cosa deve sapere un candidato e propone gli argomenti."
       },
       "review": {
         "title": "Controlla gli argomenti",
-        "text": "Mantienili, rinominali o modificali.\nNessuna domanda viene scritta finché non approvi."
+        "text": "Mantienili, rinominali o modificali.\nLe domande vengono scritte appena approvi."
       },
       "invite": {
         "title": "Invita i candidati",
-        "text": "Incolla un elenco, carica un file o condividi un link.\nI promemoria partono da soli. Vedi chi conosce il lavoro, in ordine di punteggio."
+        "text": "Incolla un elenco, carica un file o condividi un link.\nI promemoria sono automatici. I risultati arrivano ordinati per punteggio."
       }
     },
     "control": {
       "title": "Decidi tu cosa valutare",
-      "text": "Nessuna domanda viene scritta finché non approvi gli argomenti. Togli la spunta a ciò che il ruolo non richiede, rinomina un argomento, modifica i suoi sottoargomenti o di' all'IA cosa cambiare.",
+      "text": "Le domande vengono scritte appena approvi gli argomenti. Deselezionali, rinominali o modificali, o di' all'IA cosa cambiare.",
       "topics": {
         "design": "Progettazione di sistemi",
-        "sql": "Content marketing",
         "behavior": "Gestione del tempo",
         "basics": "Leadership del team"
       },
-      "change": "Aggiungi un argomento sugli annunci YouTube",
+      "change": "Aggiungi un argomento sui database",
       "subtopics": {
         "design": ["Scalabilità", "Caching", "Bilanciamento del carico"],
-        "sql": ["Analisi del pubblico", "Basi di SEO", "Misurare i risultati"],
         "behavior": [
           "Stabilire le priorità",
           "Pianificare la settimana",
@@ -579,45 +577,42 @@
         ],
         "basics": ["Dare feedback", "Delegare", "Motivare le persone"]
       },
-      "added": "Campagne email",
-      "newTopic": "Annunci YouTube",
-      "newSubtopics": [
-        "Formati degli annunci",
-        "Targeting del pubblico",
-        "Misurare le visualizzazioni"
-      ]
+      "added": "Code di messaggi",
+      "newTopic": "Database",
+      "newSubtopics": ["Indici", "Transazioni", "Ottimizzazione delle query"],
+      "placeholder": "Facoltativo: descrivi le modifiche…"
     },
     "quality": {
       "title": "Domande che si correggono da sole",
-      "text": "Risposte, valutazioni e segnalazioni dei candidati rivelano le domande deboli. Un verificatore IA le corregge o le sostituisce automaticamente, e puoi rigenerare tu stesso qualsiasi domanda.",
+      "text": "Risposte, valutazioni e segnalazioni rivelano le domande deboli. L'IA le corregge e puoi rigenerarne qualsiasi da solo.",
       "items": {
-        "good": "Cosa velocizza un indice di database?",
-        "weak": "Qual è il miglior linguaggio di programmazione?",
-        "better": "Quale linguaggio è il più usato per lo sviluppo frontend?"
+        "good": "Cosa mostra uno stato patrimoniale?",
+        "weak": "Qual è il miglior software di contabilità?",
+        "better": "Quale prospetto mostra l'utile di un periodo?"
       },
-      "comment": "Dipende dal progetto, quindi non c'è un'unica risposta giusta.",
-      "list": "Domande dell'argomento"
+      "comment": "Dipende dall'azienda, quindi non c'è un'unica risposta giusta.",
+      "list": "Basi di contabilità"
     },
     "try": {
-      "title": "Provalo prima dei tuoi candidati",
+      "title": "Provalo prima dei candidati",
       "text": "Fai un colloquio di pratica gratuito per un ruolo simile, oppure apri il tuo colloquio come candidato prima di invitare qualcuno.",
       "browse": "Sfoglia i colloqui di pratica",
-      "topic": "Progettazione di sistemi",
-      "question": "Cosa riduce principalmente una cache davanti a un database?",
+      "topic": "Vendite",
+      "question": "Con cosa deve aprire un'email a freddo?",
       "options": {
-        "a": "Le dimensioni del database",
-        "b": "Quanto spesso viene letto il database",
-        "c": "Il numero di tabelle",
-        "d": "Quanto durano i backup"
+        "a": "La storia dell'azienda",
+        "b": "Il problema del cliente",
+        "c": "Un listino prezzi completo",
+        "d": "Un codice sconto"
       },
       "points": {
-        "practice": "Colloqui di pratica gratuiti per molti ruoli",
-        "preview": "Il tuo colloquio visto da candidato"
+        "practice": "Modelli gratuiti per molti ruoli",
+        "preview": "Guarda il tuo colloquio da candidato"
       }
     },
     "link": {
       "title": "Un link per il tuo annuncio di lavoro",
-      "text": "Metti il link del colloquio nel tuo annuncio di lavoro. Chi si candida svolge subito il colloquio e compare nel tuo elenco di candidati, in ordine di punteggio.",
+      "text": "Metti il link del colloquio nell'annuncio. I candidati lo svolgono subito e compaiono nella tua lista, ordinati per punteggio.",
       "note": "Chiunque abbia il link può svolgere il colloquio.",
       "points": {
         "anywhere": "Su siti di lavoro, LinkedIn o il tuo sito",
@@ -626,12 +621,12 @@
     },
     "companies": {
       "title": "Scopri chi conosce il lavoro",
-      "text": "I candidati svolgono il colloquio dal tuo invito via email. I loro punteggi arrivano man mano che rispondono, in verde o in rosso rispetto alla tua soglia.",
+      "text": "I candidati svolgono il colloquio dal tuo invito via email o dal link condivisibile. I loro punteggi e i segnali d'allarme arrivano man mano che rispondono.",
       "points": {
         "own": "Domande uniche per ogni candidato",
         "timed": "Un conto alla rovescia per domanda",
         "flags": "Segnali di fretta, uscite o copie",
-        "private": "I candidati non vedono mai i loro punteggi"
+        "answers": "Schede con risposte e tempi"
       },
       "candidate": "Candidato",
       "score": "Punteggio",
