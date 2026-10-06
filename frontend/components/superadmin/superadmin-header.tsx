@@ -10,7 +10,13 @@ export function SuperadminHeader({
   current,
   action,
 }: {
-  current: "templates" | "flagged" | "replaced" | "pass-rates" | "controls"
+  current:
+    | "templates"
+    | "flagged"
+    | "replaced"
+    | "pass-rates"
+    | "verification"
+    | "controls"
   action?: ReactNode
 }) {
   const t = useTranslations("superadmin")
@@ -40,6 +46,11 @@ export function SuperadminHeader({
             id: "pass-rates",
             href: "/superadmin/pass-rates",
             label: t("passRates"),
+          },
+          {
+            id: "verification",
+            href: "/superadmin/verification",
+            label: t("verification"),
           },
           {
             id: "controls",

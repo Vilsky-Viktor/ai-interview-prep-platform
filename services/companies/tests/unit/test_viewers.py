@@ -59,7 +59,9 @@ def viewer(monkeypatch):
     app.dependency_overrides[current_user] = lambda: User(
         uid="bob", email="bob@example.com", email_verified=True, name="Bob"
     )
-    company = Company(id=COMPANY_ID, name="Arcolabs", created_at=datetime.now(UTC))
+    company = Company(
+        id=COMPANY_ID, name="Arcolabs", created_at=datetime.now(UTC), verification_status="none"
+    )
     company.members = [
         Member(
             id=uuid.uuid4(),

@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "Impostazioni",
-    "signIn": "Accedi per modificare le impostazioni.",
     "language": "Lingua",
     "languageNote": "Per l'interfaccia e le risposte del tutor, e la lingua con cui iniziano i nuovi kit e colloqui. Puoi generarli in qualsiasi lingua disponibile.",
     "languageFailed": "Impossibile cambiare la lingua. Riprova.",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "Attivare la modalità manutenzione?",
     "maintenanceRunning": "{count, plural, =0 {Nessun candidato è in un colloquio ora.} other {Candidati in un colloquio ora: #. Potrebbero perdere tempo.}}",
     "maintenanceRunningUnknown": "Impossibile contare i candidati in un colloquio ora. Chi lo è potrebbe perdere tempo.",
-    "maintenanceTurnOn": "Attiva"
+    "maintenanceTurnOn": "Attiva",
+    "verification": "Verifica",
+    "noVerifications": "Nessuna azienda ha ancora chiesto la verifica.",
+    "approve": "Approva",
+    "decline": "Rifiuta",
+    "declineTitle": "Rifiutare «{name}»?",
+    "declineText": "I suoi proprietari e admin ricevono una notifica con il tuo motivo, se lo indichi. Possono chiedere di nuovo.",
+    "declineReason": "Motivo (facoltativo)",
+    "declinedBecause": "Motivo: {reason}",
+    "verificationStatus": {
+      "pending": "in attesa di revisione",
+      "approved": "approvata",
+      "declined": "rifiutata"
+    },
+    "requestChanged": "Questa richiesta è cambiata; controllala di nuovo."
   },
   "templates": {
     "title": "Modelli",
@@ -274,7 +287,6 @@
     "endsOne": "In questo modo il colloquio termina.",
     "unscored": "{count, plural, one {# domanda senza risposta non verrà valutata} other {# domande senza risposta non verranno valutate}}.",
     "section": "Sezione {number} di {count}",
-    "signIn": "Accedi per continuare questo colloquio.",
     "missing": "Questa sessione non esiste.",
     "done": "Hai terminato il colloquio. In bocca al lupo!",
     "title": "Colloquio"
@@ -294,7 +306,6 @@
     "topicsReady": "{ready} di {count, plural, one {# argomento} other {# argomenti}} pronti",
     "reviewFailed": "Impossibile inviare la revisione. Riprova.",
     "retryFailed": "Impossibile ripetere la generazione. Riprova.",
-    "signIn": "Accedi per vedere questa generazione.",
     "missing": "Questa generazione non esiste.",
     "cancelled": "Questa generazione è stata annullata.",
     "failed": "Generazione non riuscita.",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "Aziende",
-    "signInInterviews": "Accedi per vedere i colloqui dell'azienda.",
-    "signInTeam": "Accedi per vedere il team dell'azienda.",
-    "signInReferrals": "Accedi per vedere il link d'invito dell'azienda.",
     "empty": "Ancora nessuna azienda.",
     "owner": "Proprietario",
     "interviewCount": "{count, plural, one {# colloquio} other {# colloqui}}",
@@ -350,7 +358,6 @@
     "name": "Nome dell'azienda",
     "create": "Crea",
     "createFailed": "Impossibile creare l'azienda. Riprova.",
-    "signInJoin": "Accedi con l'email dell'invito per entrare in questa azienda.",
     "open": "Apri l'azienda",
     "join": "Entra nell'azienda",
     "creditsLeft": "{count, plural, one {credito} other {crediti}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "Accedi con l'email dell'invito per sostenere questo colloquio.",
     "invitedYou": "<b>{company}</b> ti invita a un colloquio.",
     "fallbackTitle": "un colloquio",
     "timePerQuestion": "Tempo per domanda:",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "Ricarica",
     "intro": "Con $1 ottieni 100 crediti, e i crediti non scadono.",
-    "signIn": "Accedi per ricaricare i tuoi crediti.",
     "companies": "Crediti delle aziende",
     "companiesNote": "Per i candidati di ogni azienda.",
     "noCompany": "I crediti appartengono a un'azienda. Crea prima la tua azienda, poi ricaricala qui.",
@@ -808,7 +813,9 @@
       "candidate_finished": "{count, plural, one {{email} ha completato «{title}»{grade, select, none {.} other {: {grade}%.}}} other {# candidati hanno completato «{title}».}}",
       "invite_undelivered": "{count, plural, one {L'invito a {email} per «{title}» non è stato consegnato.} other {# inviti per «{title}» non sono stati consegnati.}}",
       "interview_ready": "Il colloquio «{title}» è pronto.",
-      "interview_cancelled": "{title, select, none {Un colloquio} other {Il colloquio «{title}»}} è stato annullato: la revisione degli argomenti ha atteso troppo."
+      "interview_cancelled": "{title, select, none {Un colloquio} other {Il colloquio «{title}»}} è stato annullato: la revisione degli argomenti ha atteso troppo.",
+      "verification_approved": "«{name}» è verificata per {domain}.",
+      "verification_declined": "{reason, select, none {La verifica di «{name}» è stata rifiutata.} other {La verifica di «{name}» è stata rifiutata: {reason}}}"
     }
   },
   "report": {
@@ -846,7 +853,6 @@
     "grade": "delle domande corrette",
     "notFinished": "non terminato",
     "noRounds": "Ancora nessun round.",
-    "signIn": "Accedi per vedere i tuoi round di pratica.",
     "startFailed": "Impossibile avviare la pratica. Riprova.",
     "gradeLabel": "Voto",
     "questions": "{count, plural, one {# domanda} other {# domande}}",
@@ -860,12 +866,18 @@
     "verify": "Verifica",
     "verified": "Verificata: {domain}",
     "title": "Verifica l'azienda",
-    "text": "Inserisci il sito web dell'azienda. Viene verificata quando un proprietario o un amministratore accede con un'email di lavoro di quel dominio, come you@acme.com: subito, se sei tu.",
+    "text": "Inserisci il sito web dell'azienda. Quando un proprietario o un admin accede con un'email di lavoro su quel dominio, come you@acme.com (subito se sei tu), esaminiamo l'azienda e aggiungiamo il badge.",
     "website": "Sito web dell'azienda",
     "save": "Salva",
     "done": "Verificata: {domain}",
-    "pending": "Salvato. Verrà verificata quando un proprietario o un amministratore accederà con un'email su {domain}.",
-    "failed": "Impossibile salvare il sito web."
+    "pending": "Salvato. Verrà inviato per la revisione quando un proprietario o un admin accede con un'email su {domain}.",
+    "failed": "Impossibile salvare il sito web.",
+    "submitted": "In attesa di revisione. Riceverai una notifica appena sarà controllata.",
+    "waitingEmail": "In attesa che un proprietario o un admin acceda con un'email su {domain}.",
+    "declined": "{reason, select, none {Rifiutata.} other {Rifiutata: {reason}}}",
+    "tryAgain": "Cambia il nome o il sito web dell'azienda per inviarla di nuovo alla verifica, oppure <contact>contattaci</contact>.",
+    "pendingBadge": "Verifica in attesa",
+    "renameHint": "Rinominare l'azienda la rimanda in verifica."
   },
   "pause": {
     "notice": "I nuovi colloqui sono in pausa per ora: non si possono iniziare né creare. Un colloquio già iniziato si può completare. Torna più tardi."

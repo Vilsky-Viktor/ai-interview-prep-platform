@@ -133,7 +133,7 @@ export function GenerationView({
   if (!loading && !user) {
     return (
       <WithBack href={backHref} label={backLabel}>
-        <SignInPrompt message={t("signIn")} />
+        <SignInPrompt />
       </WithBack>
     )
   }

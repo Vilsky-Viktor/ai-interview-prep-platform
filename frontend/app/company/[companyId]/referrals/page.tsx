@@ -20,7 +20,6 @@ export default async function ReferralsPage({
   params: Promise<{ companyId: string }>
 }) {
   const { companyId } = await params
-  const t = await getTranslations("company")
   const referralText = await getTranslations("referral")
   const locale = await getLocale()
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
@@ -36,7 +35,7 @@ export default async function ReferralsPage({
   if (!signedIn) {
     return (
       <main className="mx-auto max-w-5xl px-6 py-12">
-        <SignInPrompt message={t("signInReferrals")} />
+        <SignInPrompt />
       </main>
     )
   }
@@ -53,6 +52,8 @@ export default async function ReferralsPage({
         logoUrl={company.logo_url ?? null}
         verifiedDomain={company.verified_domain ?? null}
         websiteDomain={company.website_domain ?? null}
+        verificationStatus={company.verification_status}
+        declineReason={company.decline_reason ?? null}
         current="referrals"
         canEdit={company.can_edit}
       />

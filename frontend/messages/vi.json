@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "Cài đặt",
-    "signIn": "Đăng nhập để thay đổi cài đặt.",
     "language": "Ngôn ngữ",
     "languageNote": "Dùng cho giao diện và câu trả lời của gia sư, đồng thời là ngôn ngữ mặc định của bộ ôn luyện và buổi phỏng vấn mới. Bạn có thể tạo chúng bằng bất kỳ ngôn ngữ nào được hỗ trợ.",
     "languageFailed": "Không thể đổi ngôn ngữ. Vui lòng thử lại.",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "Bật chế độ bảo trì?",
     "maintenanceRunning": "{count, plural, =0 {Hiện không có ứng viên nào đang phỏng vấn.} other {Ứng viên đang phỏng vấn lúc này: #. Họ có thể mất thời gian.}}",
     "maintenanceRunningUnknown": "Không thể đếm số ứng viên đang phỏng vấn lúc này. Ai đang phỏng vấn có thể mất thời gian.",
-    "maintenanceTurnOn": "Bật"
+    "maintenanceTurnOn": "Bật",
+    "verification": "Xác minh",
+    "noVerifications": "Chưa có công ty nào yêu cầu xác minh.",
+    "approve": "Duyệt",
+    "decline": "Từ chối",
+    "declineTitle": "Từ chối “{name}”?",
+    "declineText": "Chủ sở hữu và quản trị viên của công ty sẽ nhận thông báo kèm lý do của bạn, nếu bạn ghi. Họ có thể yêu cầu lại.",
+    "declineReason": "Lý do (không bắt buộc)",
+    "declinedBecause": "Lý do: {reason}",
+    "verificationStatus": {
+      "pending": "đang chờ xem xét",
+      "approved": "đã duyệt",
+      "declined": "đã từ chối"
+    },
+    "requestChanged": "Yêu cầu này đã thay đổi; hãy kiểm tra lại."
   },
   "templates": {
     "title": "Mẫu",
@@ -274,7 +287,6 @@
     "endsOne": "Thao tác này kết thúc buổi phỏng vấn.",
     "unscored": "{count, plural, other {# câu chưa trả lời sẽ không được chấm điểm}}.",
     "section": "Phần {number}/{count}",
-    "signIn": "Đăng nhập để tiếp tục buổi phỏng vấn này.",
     "missing": "Phiên này không tồn tại.",
     "done": "Bạn đã hoàn thành buổi phỏng vấn. Chúc may mắn!",
     "title": "Phỏng vấn"
@@ -294,7 +306,6 @@
     "topicsReady": "Đã xong {ready}/{count, plural, other {# chủ đề}}",
     "reviewFailed": "Không thể gửi phần duyệt. Vui lòng thử lại.",
     "retryFailed": "Không thể tạo lại. Vui lòng thử lại.",
-    "signIn": "Đăng nhập để xem lần tạo này.",
     "missing": "Lần tạo này không tồn tại.",
     "cancelled": "Lần tạo này đã bị hủy.",
     "failed": "Tạo không thành công.",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "Công ty",
-    "signInInterviews": "Đăng nhập để xem các buổi phỏng vấn của công ty.",
-    "signInTeam": "Đăng nhập để xem nhóm của công ty.",
-    "signInReferrals": "Đăng nhập để xem liên kết mời của công ty.",
     "empty": "Chưa có công ty nào.",
     "owner": "Chủ sở hữu",
     "interviewCount": "{count, plural, other {# buổi phỏng vấn}}",
@@ -350,7 +358,6 @@
     "name": "Tên công ty",
     "create": "Tạo",
     "createFailed": "Không thể tạo công ty. Vui lòng thử lại.",
-    "signInJoin": "Đăng nhập bằng email được mời để tham gia công ty này.",
     "open": "Mở công ty",
     "join": "Tham gia công ty",
     "creditsLeft": "{count, plural, other {tín dụng}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "Đăng nhập bằng email được mời để làm bài phỏng vấn này.",
     "invitedYou": "<b>{company}</b> mời bạn tham gia phỏng vấn.",
     "fallbackTitle": "một buổi phỏng vấn",
     "timePerQuestion": "Thời gian mỗi câu:",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "Nạp tiền",
     "intro": "$1 mua được 100 tín dụng, và tín dụng không bao giờ hết hạn.",
-    "signIn": "Đăng nhập để nạp tín dụng.",
     "companies": "Tín dụng công ty",
     "companiesNote": "Cho ứng viên của từng công ty.",
     "noCompany": "Tín dụng thuộc về công ty. Hãy tạo công ty trước, rồi nạp tiền tại đây.",
@@ -804,7 +809,9 @@
       "candidate_finished": "{count, plural, =1 {{email} đã hoàn thành “{title}”{grade, select, none {.} other {: {grade}%.}}} other {# ứng viên đã hoàn thành “{title}”.}}",
       "invite_undelivered": "{count, plural, =1 {Lời mời gửi tới {email} cho “{title}” chưa được chuyển đến.} other {# lời mời cho “{title}” chưa được chuyển đến.}}",
       "interview_ready": "Buổi phỏng vấn “{title}” đã sẵn sàng.",
-      "interview_cancelled": "{title, select, none {Một buổi phỏng vấn} other {Buổi phỏng vấn “{title}”}} đã bị hủy: phần xem xét chủ đề phải chờ quá lâu."
+      "interview_cancelled": "{title, select, none {Một buổi phỏng vấn} other {Buổi phỏng vấn “{title}”}} đã bị hủy: phần xem xét chủ đề phải chờ quá lâu.",
+      "verification_approved": "“{name}” đã được xác minh cho {domain}.",
+      "verification_declined": "{reason, select, none {Yêu cầu xác minh “{name}” đã bị từ chối.} other {Yêu cầu xác minh “{name}” đã bị từ chối: {reason}}}"
     }
   },
   "report": {
@@ -842,7 +849,6 @@
     "grade": "số câu trả lời đúng",
     "notFinished": "chưa hoàn thành",
     "noRounds": "Chưa có lượt nào.",
-    "signIn": "Đăng nhập để xem các lượt luyện tập của bạn.",
     "startFailed": "Không thể bắt đầu luyện tập. Vui lòng thử lại.",
     "gradeLabel": "Điểm",
     "questions": "{count, plural, other {# câu hỏi}}",
@@ -856,12 +862,18 @@
     "verify": "Xác minh",
     "verified": "Đã xác minh: {domain}",
     "title": "Xác minh công ty",
-    "text": "Nhập website của công ty. Công ty được xác minh khi chủ sở hữu hoặc quản trị viên đăng nhập bằng email công việc thuộc website đó, ví dụ you@acme.com: ngay lập tức nếu đó là bạn.",
+    "text": "Nhập trang web của công ty. Khi chủ sở hữu hoặc quản trị viên đăng nhập bằng email công việc thuộc tên miền đó, như you@acme.com (ngay lập tức nếu đó là bạn), chúng tôi sẽ xem xét công ty và thêm huy hiệu.",
     "website": "Website công ty",
     "save": "Lưu",
     "done": "Đã xác minh: {domain}",
-    "pending": "Đã lưu. Sẽ được xác minh khi chủ sở hữu hoặc quản trị viên đăng nhập bằng email thuộc {domain}.",
-    "failed": "Không thể lưu website."
+    "pending": "Đã lưu. Sẽ được gửi xem xét khi chủ sở hữu hoặc quản trị viên đăng nhập bằng email thuộc {domain}.",
+    "failed": "Không thể lưu website.",
+    "submitted": "Đang chờ xem xét. Bạn sẽ nhận được thông báo khi kiểm tra xong.",
+    "waitingEmail": "Đang chờ chủ sở hữu hoặc quản trị viên đăng nhập bằng email thuộc {domain}.",
+    "declined": "{reason, select, none {Đã bị từ chối.} other {Đã bị từ chối: {reason}}}",
+    "tryAgain": "Đổi tên hoặc trang web của công ty để gửi xét duyệt lại, hoặc <contact>liên hệ với chúng tôi</contact>.",
+    "pendingBadge": "Đang chờ xác minh",
+    "renameHint": "Đổi tên sẽ gửi công ty của bạn đi xác minh lại."
   },
   "pause": {
     "notice": "Phỏng vấn mới đang tạm dừng: không thể bắt đầu hay tạo. Buổi phỏng vấn đã bắt đầu vẫn có thể hoàn thành. Vui lòng quay lại sau."

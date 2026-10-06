@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "Pengaturan",
-    "signIn": "Masuk untuk mengubah pengaturan.",
     "language": "Bahasa",
     "languageNote": "Untuk antarmuka dan balasan tutor, serta bahasa awal kit dan wawancara baru. Kamu bisa membuatnya dalam bahasa apa pun yang didukung.",
     "languageFailed": "Bahasa tidak bisa diubah. Coba lagi.",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "Aktifkan mode pemeliharaan?",
     "maintenanceRunning": "{count, plural, =0 {Tidak ada kandidat yang sedang wawancara sekarang.} other {Kandidat yang sedang wawancara sekarang: #. Mereka bisa kehilangan waktu.}}",
     "maintenanceRunningUnknown": "Tidak dapat menghitung kandidat yang sedang wawancara sekarang. Yang sedang wawancara bisa kehilangan waktu.",
-    "maintenanceTurnOn": "Aktifkan"
+    "maintenanceTurnOn": "Aktifkan",
+    "verification": "Verifikasi",
+    "noVerifications": "Belum ada perusahaan yang meminta verifikasi.",
+    "approve": "Setujui",
+    "decline": "Tolak",
+    "declineTitle": "Tolak “{name}”?",
+    "declineText": "Pemilik dan admin perusahaan ini mendapat notifikasi beserta alasan Anda, jika Anda memberikannya. Mereka bisa meminta lagi.",
+    "declineReason": "Alasan (opsional)",
+    "declinedBecause": "Alasan: {reason}",
+    "verificationStatus": {
+      "pending": "menunggu peninjauan",
+      "approved": "disetujui",
+      "declined": "ditolak"
+    },
+    "requestChanged": "Permintaan ini berubah; periksa lagi."
   },
   "templates": {
     "title": "Templat",
@@ -274,7 +287,6 @@
     "endsOne": "Ini menyelesaikan wawancara.",
     "unscored": "{count, plural, other {# soal yang belum dijawab tidak akan dinilai}}.",
     "section": "Bagian {number} dari {count}",
-    "signIn": "Masuk untuk melanjutkan wawancara ini.",
     "missing": "Sesi ini tidak ada.",
     "done": "Kamu sudah menyelesaikan wawancara. Semoga sukses!",
     "title": "Wawancara"
@@ -294,7 +306,6 @@
     "topicsReady": "{ready} dari {count, plural, other {# topik}} siap",
     "reviewFailed": "Tinjauanmu tidak bisa dikirim. Coba lagi.",
     "retryFailed": "Pembuatan tidak bisa diulang. Coba lagi.",
-    "signIn": "Masuk untuk melihat pembuatan ini.",
     "missing": "Pembuatan ini tidak ada.",
     "cancelled": "Pembuatan ini dibatalkan.",
     "failed": "Pembuatan gagal.",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "Perusahaan",
-    "signInInterviews": "Masuk untuk melihat wawancara perusahaan.",
-    "signInTeam": "Masuk untuk melihat tim perusahaan.",
-    "signInReferrals": "Masuk untuk melihat tautan undangan perusahaan.",
     "empty": "Belum ada perusahaan.",
     "owner": "Pemilik",
     "interviewCount": "{count, plural, other {# wawancara}}",
@@ -350,7 +358,6 @@
     "name": "Nama perusahaan",
     "create": "Buat",
     "createFailed": "Perusahaan tidak bisa dibuat. Coba lagi.",
-    "signInJoin": "Masuk dengan email undangan untuk bergabung dengan perusahaan ini.",
     "open": "Buka perusahaan",
     "join": "Gabung ke perusahaan",
     "creditsLeft": "{count, plural, other {kredit}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "Masuk dengan email undangan untuk mengikuti wawancara ini.",
     "invitedYou": "<b>{company}</b> mengundangmu ke wawancara.",
     "fallbackTitle": "sebuah wawancara",
     "timePerQuestion": "Waktu per soal:",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "Isi ulang",
     "intro": "$1 = 100 kredit, dan kredit tidak pernah kedaluwarsa.",
-    "signIn": "Masuk untuk mengisi ulang kreditmu.",
     "companies": "Kredit perusahaan",
     "companiesNote": "Untuk kandidat setiap perusahaan.",
     "noCompany": "Kredit milik perusahaan. Buat perusahaanmu dulu, lalu isi ulang di sini.",
@@ -808,7 +813,9 @@
       "candidate_finished": "{count, plural, =1 {{email} menyelesaikan “{title}”{grade, select, none {.} other {: {grade}%.}}} other {# kandidat menyelesaikan “{title}”.}}",
       "invite_undelivered": "{count, plural, =1 {Undangan “{title}” ke {email} tidak terkirim.} other {# undangan “{title}” tidak terkirim.}}",
       "interview_ready": "Wawancara “{title}” sudah siap.",
-      "interview_cancelled": "{title, select, none {Sebuah wawancara} other {Wawancara “{title}”}} dibatalkan: tinjauan topiknya menunggu terlalu lama."
+      "interview_cancelled": "{title, select, none {Sebuah wawancara} other {Wawancara “{title}”}} dibatalkan: tinjauan topiknya menunggu terlalu lama.",
+      "verification_approved": "“{name}” terverifikasi untuk {domain}.",
+      "verification_declined": "{reason, select, none {Verifikasi “{name}” ditolak.} other {Verifikasi “{name}” ditolak: {reason}}}"
     }
   },
   "report": {
@@ -846,7 +853,6 @@
     "grade": "soal dijawab benar",
     "notFinished": "belum selesai",
     "noRounds": "Belum ada sesi.",
-    "signIn": "Masuk untuk melihat sesi latihanmu.",
     "startFailed": "Latihan tidak bisa dimulai. Coba lagi.",
     "gradeLabel": "Nilai",
     "questions": "{count, plural, other {# soal}}",
@@ -860,12 +866,18 @@
     "verify": "Verifikasi",
     "verified": "Terverifikasi: {domain}",
     "title": "Verifikasi perusahaan",
-    "text": "Masukkan situs web perusahaan. Perusahaan terverifikasi setelah pemilik atau admin masuk dengan email kerja di domain itu, seperti you@acme.com: langsung jika itu kamu.",
+    "text": "Masukkan situs web perusahaan. Setelah pemilik atau admin masuk dengan email kerja di domain itu, seperti you@acme.com (langsung jika itu Anda), kami meninjau perusahaan dan menambahkan lencananya.",
     "website": "Situs web perusahaan",
     "save": "Simpan",
     "done": "Terverifikasi: {domain}",
-    "pending": "Tersimpan. Terverifikasi setelah pemilik atau admin masuk dengan email di {domain}.",
-    "failed": "Situs web tidak bisa disimpan."
+    "pending": "Tersimpan. Dikirim untuk ditinjau setelah pemilik atau admin masuk dengan email di {domain}.",
+    "failed": "Situs web tidak bisa disimpan.",
+    "submitted": "Menunggu peninjauan. Anda akan mendapat notifikasi setelah diperiksa.",
+    "waitingEmail": "Menunggu pemilik atau admin masuk dengan email di {domain}.",
+    "declined": "{reason, select, none {Ditolak.} other {Ditolak: {reason}}}",
+    "tryAgain": "Ubah nama atau situs web perusahaan untuk mengirimkannya ditinjau lagi, atau <contact>hubungi kami</contact>.",
+    "pendingBadge": "Verifikasi tertunda",
+    "renameHint": "Mengganti nama akan mengirim perusahaanmu untuk diverifikasi lagi."
   },
   "pause": {
     "notice": "Wawancara baru dijeda untuk sementara: tidak bisa dimulai atau dibuat. Wawancara yang sudah dimulai bisa diselesaikan. Silakan kembali nanti."

@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "설정",
-    "signIn": "설정을 변경하려면 로그인하세요.",
     "language": "언어",
     "languageNote": "인터페이스와 튜터 답변, 그리고 새 키트와 면접의 기본 언어에 사용됩니다. 키트와 면접은 지원되는 어떤 언어로도 만들 수 있습니다.",
     "languageFailed": "언어를 변경하지 못했습니다. 다시 시도해 주세요.",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "점검 모드를 켤까요?",
     "maintenanceRunning": "{count, plural, =0 {지금 면접 중인 지원자가 없습니다.} other {지금 면접 중인 지원자: #명. 시간을 잃을 수 있습니다.}}",
     "maintenanceRunningUnknown": "지금 면접 중인 지원자 수를 세지 못했습니다. 면접 중인 지원자는 시간을 잃을 수 있습니다.",
-    "maintenanceTurnOn": "켜기"
+    "maintenanceTurnOn": "켜기",
+    "verification": "인증",
+    "noVerifications": "아직 인증을 요청한 회사가 없습니다.",
+    "approve": "승인",
+    "decline": "거절",
+    "declineTitle": "“{name}”을(를) 거절할까요?",
+    "declineText": "소유자와 관리자에게 알림이 가며, 사유를 적으면 함께 전달됩니다. 다시 요청할 수 있습니다.",
+    "declineReason": "사유(선택)",
+    "declinedBecause": "사유: {reason}",
+    "verificationStatus": {
+      "pending": "검토 대기 중",
+      "approved": "승인됨",
+      "declined": "거절됨"
+    },
+    "requestChanged": "이 요청이 변경되었습니다. 다시 확인하세요."
   },
   "templates": {
     "title": "템플릿",
@@ -274,7 +287,6 @@
     "endsOne": "면접이 종료됩니다.",
     "unscored": "답하지 않은 {count, plural, other {#문제}}는 채점되지 않습니다.",
     "section": "섹션 {number}/{count}",
-    "signIn": "이 면접을 계속하려면 로그인하세요.",
     "missing": "이 세션은 존재하지 않습니다.",
     "done": "면접을 마쳤습니다. 행운을 빕니다!",
     "title": "면접"
@@ -294,7 +306,6 @@
     "topicsReady": "{count, plural, other {주제 #개}} 중 {ready}개 완료",
     "reviewFailed": "검토 내용을 보내지 못했습니다. 다시 시도해 주세요.",
     "retryFailed": "생성을 다시 시도하지 못했습니다. 다시 시도해 주세요.",
-    "signIn": "이 생성을 보려면 로그인하세요.",
     "missing": "이 생성은 존재하지 않습니다.",
     "cancelled": "이 생성은 취소되었습니다.",
     "failed": "생성에 실패했습니다.",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "회사",
-    "signInInterviews": "회사 면접을 보려면 로그인하세요.",
-    "signInTeam": "회사 팀을 보려면 로그인하세요.",
-    "signInReferrals": "회사 초대 링크를 보려면 로그인하세요.",
     "empty": "아직 회사가 없습니다.",
     "owner": "소유자",
     "interviewCount": "{count, plural, other {면접 #개}}",
@@ -350,7 +358,6 @@
     "name": "회사 이름",
     "create": "만들기",
     "createFailed": "회사를 만들지 못했습니다. 다시 시도해 주세요.",
-    "signInJoin": "이 회사에 참여하려면 초대받은 이메일로 로그인하세요.",
     "open": "회사 열기",
     "join": "회사 참여",
     "creditsLeft": "{count, plural, other {크레딧}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "이 면접을 보려면 초대받은 이메일로 로그인하세요.",
     "invitedYou": "<b>{company}</b>에서 면접에 초대했습니다.",
     "fallbackTitle": "면접",
     "timePerQuestion": "문제당 시간:",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "충전",
     "intro": "$1로 100크레딧, 크레딧은 만료되지 않습니다.",
-    "signIn": "크레딧을 충전하려면 로그인하세요.",
     "companies": "회사 크레딧",
     "companiesNote": "각 회사의 지원자에게 사용됩니다.",
     "noCompany": "크레딧은 회사에 속합니다. 먼저 회사를 만든 후 여기에서 충전하세요.",
@@ -799,7 +804,9 @@
       "candidate_finished": "{count, plural, =1 {{email} 님이 “{title}”을(를) 완료했습니다{grade, select, none {.} other {: {grade}%.}}} other {지원자 #명이 “{title}”을(를) 완료했습니다.}}",
       "invite_undelivered": "{count, plural, =1 {{email} 님에게 보낸 “{title}” 초대가 전달되지 않았습니다.} other {“{title}” 초대 #건이 전달되지 않았습니다.}}",
       "interview_ready": "면접 “{title}” 준비가 완료되었습니다.",
-      "interview_cancelled": "{title, select, none {면접이} other {면접 “{title}”이(가)}} 취소되었습니다: 주제 검토 대기 시간이 너무 길었습니다."
+      "interview_cancelled": "{title, select, none {면접이} other {면접 “{title}”이(가)}} 취소되었습니다: 주제 검토 대기 시간이 너무 길었습니다.",
+      "verification_approved": "“{name}”이(가) {domain}(으)로 인증되었습니다.",
+      "verification_declined": "{reason, select, none {“{name}”의 인증이 거절되었습니다.} other {“{name}”의 인증이 거절되었습니다: {reason}}}"
     }
   },
   "report": {
@@ -837,7 +844,6 @@
     "grade": "문제 정답",
     "notFinished": "완료되지 않음",
     "noRounds": "아직 라운드가 없습니다.",
-    "signIn": "연습 라운드를 보려면 로그인하세요.",
     "startFailed": "연습을 시작하지 못했습니다. 다시 시도해 주세요.",
     "gradeLabel": "점수",
     "questions": "{count, plural, other {#문제}}",
@@ -851,12 +857,18 @@
     "verify": "인증",
     "verified": "인증됨: {domain}",
     "title": "회사 인증",
-    "text": "회사 웹사이트를 입력하세요. 소유자나 관리자가 해당 도메인의 업무용 이메일(예: you@acme.com)로 로그인하면 인증됩니다. 본인이라면 바로 인증됩니다.",
+    "text": "회사 웹사이트를 입력하세요. 소유자나 관리자가 그 도메인의 업무용 이메일(예: you@acme.com)로 로그인하면(본인이라면 바로) 회사를 검토하고 배지를 붙여 드립니다.",
     "website": "회사 웹사이트",
     "save": "저장",
     "done": "인증됨: {domain}",
-    "pending": "저장했습니다. 소유자나 관리자가 {domain} 이메일로 로그인하면 인증됩니다.",
-    "failed": "웹사이트를 저장하지 못했습니다."
+    "pending": "저장했습니다. 소유자나 관리자가 {domain} 이메일로 로그인하면 검토 요청이 전송됩니다.",
+    "failed": "웹사이트를 저장하지 못했습니다.",
+    "submitted": "검토를 기다리는 중입니다. 확인이 끝나면 알림을 받게 됩니다.",
+    "waitingEmail": "소유자나 관리자가 {domain} 이메일로 로그인하기를 기다리는 중입니다.",
+    "declined": "{reason, select, none {거절되었습니다.} other {거절되었습니다: {reason}}}",
+    "tryAgain": "회사 이름이나 웹사이트를 바꾸면 다시 검토를 요청할 수 있습니다. 또는 <contact>문의해 주세요</contact>.",
+    "pendingBadge": "인증 대기 중",
+    "renameHint": "이름을 바꾸면 회사가 다시 인증 검토를 받습니다."
   },
   "pause": {
     "notice": "새 면접이 지금은 일시 중지되었습니다. 시작하거나 만들 수 없습니다. 이미 시작한 면접은 마칠 수 있습니다. 나중에 다시 와 주세요."

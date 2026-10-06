@@ -29,7 +29,7 @@ export default async function PracticeHistoryPage({
   if (!(await cookies()).has(TOKEN_COOKIE)) {
     return (
       <main className="mx-auto max-w-5xl px-6 py-12">
-        <SignInPrompt message={t("signIn")} />
+        <SignInPrompt />
       </main>
     )
   }

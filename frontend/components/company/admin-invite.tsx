@@ -48,7 +48,7 @@ export function AdminInvite({ token }: { token: string }) {
   }
 
   if (!loading && !user) {
-    return <SignInPrompt message={t("signInJoin")} />
+    return <SignInPrompt />
   }
 
   if (missing) {

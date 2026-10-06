@@ -40,6 +40,8 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
         logo_url=logo_path(company),
         website_domain=company.website_domain,
         verified_domain=company.verified_domain,
+        verification_status=company.verification_status,
+        decline_reason=company.decline_reason,
         created_at=company.created_at,
     )
 
@@ -142,8 +144,8 @@ async def get_referral(company_id: UUID, user: CurrentUser) -> ReferralOut:
 async def get_company(company_id: UUID, user: CurrentUser) -> CompanyOut:
     company, member = await require_company(user, company_id)
 
-    # Opening the company is enough: an owner or admin with a work email on its website
-    # verifies it.
+    # Opening the company is enough: an owner or admin with a work email on its website sends
+    # it for review.
     if can_edit(member):
         await verify_by_email(company, user)
 

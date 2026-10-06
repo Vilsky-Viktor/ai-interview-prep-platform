@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Mida kinnitusmärk tähendab?",
-        "answer": "Seda, et ettevõtte omanik või administraator logis sisse ettevõtte veebilehe domeeni töömeiliga, näiteks you@acme.com. Lisa veebileht oma ettevõtte päises nupuga Kinnita; tasuta e-postiteenused ei sobi. Märk on näha ettevõtte nime kõrval, ka kutsetes.",
+        "answer": "Seda, et ettevõtte omanik või administraator logis sisse ettevõtte veebilehe domeeni töömeiliga, näiteks you@acme.com, ja meie meeskond vaatas ettevõtte seejärel üle. Lisa veebileht oma ettevõtte päises nupuga Kinnita; tasuta e-postiteenused ei sobi. Kuni ülevaatus on ootel, näeb su meeskond nime kõrval kella, ja ettevõtte ümbernimetamine saadab selle uuesti ülevaatusele. Märk on näha ettevõtte nime kõrval, ka kutsetes.",
     },
     {
         "key": "languages",

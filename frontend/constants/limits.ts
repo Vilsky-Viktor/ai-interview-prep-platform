@@ -12,6 +12,8 @@ export const MAX_TOPIC_NAME_LENGTH = 50
 export const MAX_TITLE_LENGTH = 70
 // companies MAX_COMPANY_NAME_LENGTH: a company's name.
 export const MAX_COMPANY_NAME_LENGTH = 45
+// companies MAX_DECLINE_REASON_LENGTH: why a superadmin declined a company's verification.
+export const MAX_DECLINE_REASON_LENGTH = 500
 // library MAX_REPORT_COMMENT_LENGTH: details of a question report.
 export const MAX_REPORT_COMMENT_LENGTH = 1000
 // rounds MAX_HELP_QUESTION_LENGTH: a question to the FAQ's help chat.

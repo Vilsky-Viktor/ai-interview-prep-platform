@@ -29,3 +29,6 @@ export type QualityRow = {
 
 /** A company interview's pass rate, for the monitoring tab. */
 export type PassRate = companies["schemas"]["PassRateOut"]
+
+/** A company sent for review, for the verification tab. */
+export type VerificationRequest = companies["schemas"]["VerificationRequestOut"]

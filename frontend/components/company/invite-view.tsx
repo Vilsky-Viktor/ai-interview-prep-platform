@@ -63,7 +63,7 @@ export function InviteView({ token }: { token: string }) {
   }
 
   if (!loading && !user) {
-    return <SignInPrompt message={t("signIn")} />
+    return <SignInPrompt />
   }
 
   if (missing) {

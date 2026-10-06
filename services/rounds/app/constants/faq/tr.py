@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Doğrulandı işareti ne anlama gelir?",
-        "answer": "Şirketin bir sahibinin ya da yöneticisinin, şirketin web sitesine ait bir iş e-postasıyla (ör. you@acme.com) giriş yaptığı anlamına gelir. Web sitesini şirketinizin başlığındaki Doğrula ile ekleyin; ücretsiz e-posta servisleri sayılmaz. İşaret, davetler dahil şirketinizin adının yanında görünür.",
+        "answer": "Şirketin bir sahibinin ya da yöneticisinin, şirketin web sitesine ait bir iş e-postasıyla (ör. you@acme.com) giriş yaptığı ve ardından ekibimizin şirketi incelediği anlamına gelir. Web sitesini şirketinizin başlığındaki Doğrula ile ekleyin; ücretsiz e-posta servisleri sayılmaz. İnceleme beklerken ekibiniz adın yanında bir saat görür; şirketin adını değiştirmek onu yeniden incelemeye gönderir. İşaret, davetler dahil şirketinizin adının yanında görünür.",
     },
     {
         "key": "languages",

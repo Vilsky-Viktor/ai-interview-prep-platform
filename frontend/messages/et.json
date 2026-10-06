@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "Seaded",
-    "signIn": "Seadete muutmiseks logi sisse.",
     "language": "Keel",
     "languageNote": "Liidese ja juhendaja vastuste jaoks ning keel, millega uued komplektid ja intervjuud algavad. Saad neid luua igas toetatud keeles.",
     "languageFailed": "Keelt ei õnnestunud muuta. Proovi uuesti.",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "Kas lülitada hooldusrežiim sisse?",
     "maintenanceRunning": "{count, plural, =0 {Praegu ei ole ükski kandidaat intervjuul.} other {Kandidaate praegu intervjuul: #. Nad võivad aega kaotada.}}",
     "maintenanceRunningUnknown": "Intervjuul olevaid kandidaate ei õnnestunud loendada. Need, kes on, võivad aega kaotada.",
-    "maintenanceTurnOn": "Lülita sisse"
+    "maintenanceTurnOn": "Lülita sisse",
+    "verification": "Kinnitamine",
+    "noVerifications": "Ükski ettevõte pole veel kinnitamist küsinud.",
+    "approve": "Kinnita",
+    "decline": "Lükka tagasi",
+    "declineTitle": "Kas lükata „{name}“ tagasi?",
+    "declineText": "Selle omanikud ja adminid saavad teavituse sinu põhjusega, kui selle annad. Nad saavad uuesti küsida.",
+    "declineReason": "Põhjus (valikuline)",
+    "declinedBecause": "Põhjus: {reason}",
+    "verificationStatus": {
+      "pending": "ootab ülevaatust",
+      "approved": "kinnitatud",
+      "declined": "tagasi lükatud"
+    },
+    "requestChanged": "See taotlus muutus; vaata see uuesti üle."
   },
   "templates": {
     "title": "Mallid",
@@ -274,7 +287,6 @@
     "endsOne": "See lõpetab intervjuu.",
     "unscored": "{count, plural, one {# vastamata küsimust ei hinnata} other {# vastamata küsimust ei hinnata}}.",
     "section": "Osa {number}/{count}",
-    "signIn": "Selle intervjuu jätkamiseks logi sisse.",
     "missing": "Seda seanssi pole olemas.",
     "done": "Lõpetasid intervjuu. Edu!",
     "title": "Intervjuu"
@@ -294,7 +306,6 @@
     "topicsReady": "Valmis {ready}/{count, plural, one {# teema} other {# teemat}}",
     "reviewFailed": "Ülevaatust ei õnnestunud saata. Proovi uuesti.",
     "retryFailed": "Loomist ei õnnestunud uuesti proovida. Proovi uuesti.",
-    "signIn": "Selle loomise nägemiseks logi sisse.",
     "missing": "Seda loomist pole olemas.",
     "cancelled": "See loomine tühistati.",
     "failed": "Loomine ebaõnnestus.",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "Ettevõtted",
-    "signInInterviews": "Ettevõtte intervjuude nägemiseks logi sisse.",
-    "signInTeam": "Ettevõtte meeskonna nägemiseks logi sisse.",
-    "signInReferrals": "Ettevõtte kutselingi nägemiseks logi sisse.",
     "empty": "Ettevõtteid veel pole.",
     "owner": "Omanik",
     "interviewCount": "{count, plural, one {# intervjuu} other {# intervjuud}}",
@@ -350,7 +358,6 @@
     "name": "Ettevõtte nimi",
     "create": "Loo",
     "createFailed": "Ettevõtet ei õnnestunud luua. Proovi uuesti.",
-    "signInJoin": "Selle ettevõttega liitumiseks logi sisse kutses olnud e-posti aadressiga.",
     "open": "Ava ettevõte",
     "join": "Liitu ettevõttega",
     "creditsLeft": "{count, plural, one {krediit} other {krediiti}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "Selle intervjuu tegemiseks logi sisse kutses olnud e-posti aadressiga.",
     "invitedYou": "<b>{company}</b> kutsub sind intervjuule.",
     "fallbackTitle": "intervjuu",
     "timePerQuestion": "Aeg küsimuse kohta:",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "Laadi juurde",
     "intro": "1 $ eest saad 100 krediiti ja krediidid ei aegu.",
-    "signIn": "Krediitide juurdelaadimiseks logi sisse.",
     "companies": "Ettevõtete krediidid",
     "companiesNote": "Iga ettevõtte kandidaatide jaoks.",
     "noCompany": "Krediidid kuuluvad ettevõttele. Loo esmalt oma ettevõte ja laadi siis siin juurde.",
@@ -812,7 +817,9 @@
       "candidate_finished": "{count, plural, one {{email} lõpetas intervjuu „{title}“{grade, select, none {.} other {: {grade}%.}}} other {# kandidaati lõpetasid intervjuu „{title}“.}}",
       "invite_undelivered": "{count, plural, one {Kutset intervjuule „{title}“ aadressile {email} ei õnnestunud kohale toimetada.} other {# kutset intervjuule „{title}“ ei õnnestunud kohale toimetada.}}",
       "interview_ready": "Intervjuu „{title}“ on valmis.",
-      "interview_cancelled": "{title, select, none {Intervjuu} other {Intervjuu „{title}“}} tühistati: teemade ülevaatus ootas liiga kaua."
+      "interview_cancelled": "{title, select, none {Intervjuu} other {Intervjuu „{title}“}} tühistati: teemade ülevaatus ootas liiga kaua.",
+      "verification_approved": "„{name}“ on kinnitatud domeeniga {domain}.",
+      "verification_declined": "{reason, select, none {Ettevõtte „{name}“ kinnitamine lükati tagasi.} other {Ettevõtte „{name}“ kinnitamine lükati tagasi: {reason}}}"
     }
   },
   "report": {
@@ -850,7 +857,6 @@
     "grade": "küsimustest õigesti",
     "notFinished": "lõpetamata",
     "noRounds": "Katseid veel pole.",
-    "signIn": "Oma harjutuskatsete nägemiseks logi sisse.",
     "startFailed": "Harjutamist ei õnnestunud alustada. Proovi uuesti.",
     "gradeLabel": "Hinne",
     "questions": "{count, plural, one {# küsimus} other {# küsimust}}",
@@ -864,12 +870,18 @@
     "verify": "Kinnita",
     "verified": "Kinnitatud: {domain}",
     "title": "Kinnita ettevõte",
-    "text": "Sisesta ettevõtte veebisait. See kinnitatakse, kui omanik või administraator logib sisse sellel domeenil oleva tööaadressiga, näiteks you@acme.com: kui see oled sina, siis kohe.",
+    "text": "Sisesta ettevõtte veebisait. Kui omanik või admin logib sisse selle domeeni tööaadressiga, näiteks you@acme.com (kohe, kui see oled sina), vaatame ettevõtte üle ja lisame märgi.",
     "website": "Ettevõtte veebisait",
     "save": "Salvesta",
     "done": "Kinnitatud: {domain}",
-    "pending": "Salvestatud. Kinnitatakse, kui omanik või administraator logib sisse domeeni {domain} aadressiga.",
-    "failed": "Veebisaiti ei õnnestunud salvestada."
+    "pending": "Salvestatud. Saadetakse ülevaatusele, kui omanik või admin logib sisse aadressiga domeenis {domain}.",
+    "failed": "Veebisaiti ei õnnestunud salvestada.",
+    "submitted": "Ootab ülevaatust. Saad teavituse, kui see on tehtud.",
+    "waitingEmail": "Ootab, et omanik või admin logiks sisse aadressiga domeenis {domain}.",
+    "declined": "{reason, select, none {Tagasi lükatud.} other {Tagasi lükatud: {reason}}}",
+    "tryAgain": "Muuda ettevõtte nime või veebilehte, et saata see uuesti ülevaatusele, või <contact>võta meiega ühendust</contact>.",
+    "pendingBadge": "Kinnitamine ootel",
+    "renameHint": "Ümbernimetamine saadab ettevõtte uuesti kinnitamisele."
   },
   "pause": {
     "notice": "Uued intervjuud on praegu peatatud: neid ei saa alustada ega luua. Juba alustatud intervjuu saab lõpetada. Tule hiljem tagasi."

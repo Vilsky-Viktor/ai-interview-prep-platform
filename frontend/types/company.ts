@@ -51,6 +51,7 @@ export type CandidateReportData = {
 export type BulkInviteResult = Schemas["BulkInviteOut"]
 export type Brand = Schemas["BrandOut"]
 export type Verification = Schemas["VerificationOut"]
+export type VerificationStatus = Schemas["VerificationStatus"]
 
 /** A candidate's scorecard: their result per section, with their answers. */
 export type Scorecard = {

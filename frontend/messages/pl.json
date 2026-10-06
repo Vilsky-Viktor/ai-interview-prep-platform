@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "Ustawienia",
-    "signIn": "Zaloguj się, aby zmienić ustawienia.",
     "language": "Język",
     "languageNote": "Dla interfejsu i odpowiedzi tutora oraz domyślny język nowych zestawów i rozmów. Możesz je generować w każdym obsługiwanym języku.",
     "languageFailed": "Nie udało się zmienić języka. Spróbuj ponownie.",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "Włączyć tryb konserwacji?",
     "maintenanceRunning": "{count, plural, =0 {Żaden kandydat nie jest teraz w trakcie rozmowy.} other {Kandydaci w trakcie rozmowy: #. Mogą stracić czas.}}",
     "maintenanceRunningUnknown": "Nie udało się policzyć kandydatów w trakcie rozmowy. Ci, którzy są, mogą stracić czas.",
-    "maintenanceTurnOn": "Włącz"
+    "maintenanceTurnOn": "Włącz",
+    "verification": "Weryfikacja",
+    "noVerifications": "Żadna firma nie poprosiła jeszcze o weryfikację.",
+    "approve": "Zatwierdź",
+    "decline": "Odrzuć",
+    "declineTitle": "Odrzucić „{name}”?",
+    "declineText": "Jej właściciele i administratorzy dostaną powiadomienie z Twoim powodem, jeśli go podasz. Mogą poprosić ponownie.",
+    "declineReason": "Powód (opcjonalnie)",
+    "declinedBecause": "Powód: {reason}",
+    "verificationStatus": {
+      "pending": "czeka na sprawdzenie",
+      "approved": "zatwierdzono",
+      "declined": "odrzucono"
+    },
+    "requestChanged": "To zgłoszenie się zmieniło; sprawdź je ponownie."
   },
   "templates": {
     "title": "Szablony",
@@ -274,7 +287,6 @@
     "endsOne": "To zakończy rozmowę.",
     "unscored": "{count, plural, one {# pytanie bez odpowiedzi nie zostanie ocenione} few {# pytania bez odpowiedzi nie zostaną ocenione} many {# pytań bez odpowiedzi nie zostanie ocenionych} other {# pytania bez odpowiedzi nie zostanie ocenione}}.",
     "section": "Sekcja {number} z {count}",
-    "signIn": "Zaloguj się, aby kontynuować tę rozmowę.",
     "missing": "Ta sesja nie istnieje.",
     "done": "Rozmowa zakończona. Powodzenia!",
     "title": "Rozmowa"
@@ -294,7 +306,6 @@
     "topicsReady": "Gotowe: {ready} z {count, plural, one {# tematu} few {# tematów} many {# tematów} other {# tematu}}",
     "reviewFailed": "Nie udało się wysłać przeglądu. Spróbuj ponownie.",
     "retryFailed": "Nie udało się ponowić generowania. Spróbuj ponownie.",
-    "signIn": "Zaloguj się, aby zobaczyć to generowanie.",
     "missing": "To generowanie nie istnieje.",
     "cancelled": "To generowanie zostało anulowane.",
     "failed": "Generowanie nie powiodło się.",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "Firmy",
-    "signInInterviews": "Zaloguj się, aby zobaczyć rozmowy firmy.",
-    "signInTeam": "Zaloguj się, aby zobaczyć zespół firmy.",
-    "signInReferrals": "Zaloguj się, aby zobaczyć link polecający firmy.",
     "empty": "Nie ma jeszcze firm.",
     "owner": "Właściciel",
     "interviewCount": "{count, plural, one {# rozmowa} few {# rozmowy} many {# rozmów} other {# rozmowy}}",
@@ -350,7 +358,6 @@
     "name": "Nazwa firmy",
     "create": "Utwórz",
     "createFailed": "Nie udało się utworzyć firmy. Spróbuj ponownie.",
-    "signInJoin": "Zaloguj się adresem z zaproszenia, aby dołączyć do tej firmy.",
     "open": "Otwórz firmę",
     "join": "Dołącz do firmy",
     "creditsLeft": "{count, plural, one {kredyt} few {kredyty} many {kredytów} other {kredytu}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "Zaloguj się adresem z zaproszenia, aby wziąć udział w tej rozmowie.",
     "invitedYou": "<b>{company}</b> zaprasza Cię na rozmowę.",
     "fallbackTitle": "rozmowa",
     "timePerQuestion": "Czas na pytanie:",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "Doładowanie",
     "intro": "Za $1 otrzymujesz 100 kredytów, a kredyty nie wygasają.",
-    "signIn": "Zaloguj się, aby doładować kredyty.",
     "companies": "Kredyty firm",
     "companiesNote": "Na kandydatów każdej firmy.",
     "noCompany": "Kredyty należą do firmy. Najpierw utwórz firmę, a potem doładuj ją tutaj.",
@@ -808,7 +813,9 @@
       "candidate_finished": "{count, plural, one {Kandydat {email} ukończył „{title}”{grade, select, none {.} other {: {grade}%.}}} few {# kandydaci ukończyli „{title}”.} many {# kandydatów ukończyło „{title}”.} other {# kandydata ukończyło „{title}”.}}",
       "invite_undelivered": "{count, plural, one {Zaproszenie dla {email} do „{title}” nie zostało dostarczone.} few {# zaproszenia do „{title}” nie zostały dostarczone.} many {# zaproszeń do „{title}” nie zostało dostarczonych.} other {# zaproszenia do „{title}” nie zostało dostarczone.}}",
       "interview_ready": "Rozmowa „{title}” jest gotowa.",
-      "interview_cancelled": "{title, select, none {Rozmowa została anulowana} other {Rozmowa „{title}” została anulowana}}: tematy zbyt długo czekały na weryfikację."
+      "interview_cancelled": "{title, select, none {Rozmowa została anulowana} other {Rozmowa „{title}” została anulowana}}: tematy zbyt długo czekały na weryfikację.",
+      "verification_approved": "„{name}” jest zweryfikowana dla {domain}.",
+      "verification_declined": "{reason, select, none {Weryfikacja „{name}” została odrzucona.} other {Weryfikacja „{name}” została odrzucona: {reason}}}"
     }
   },
   "report": {
@@ -846,7 +853,6 @@
     "grade": "poprawnych odpowiedzi",
     "notFinished": "nieukończona",
     "noRounds": "Nie ma jeszcze rund.",
-    "signIn": "Zaloguj się, aby zobaczyć swoje rundy ćwiczeń.",
     "startFailed": "Nie udało się rozpocząć ćwiczeń. Spróbuj ponownie.",
     "gradeLabel": "Ocena",
     "questions": "{count, plural, one {# pytanie} few {# pytania} many {# pytań} other {# pytania}}",
@@ -860,12 +866,18 @@
     "verify": "Zweryfikuj",
     "verified": "Zweryfikowano: {domain}",
     "title": "Zweryfikuj firmę",
-    "text": "Podaj stronę internetową firmy. Firma zostanie zweryfikowana, gdy właściciel lub administrator zaloguje się służbowym e-mailem w tej domenie, np. you@acme.com: od razu, jeśli to Ty.",
+    "text": "Podaj stronę firmy. Gdy właściciel lub administrator zaloguje się służbowym adresem w tej domenie, np. you@acme.com (od razu, jeśli to Ty), sprawdzimy firmę i dodamy odznakę.",
     "website": "Strona firmy",
     "save": "Zapisz",
     "done": "Zweryfikowano: {domain}",
-    "pending": "Zapisano. Weryfikacja nastąpi, gdy właściciel lub administrator zaloguje się adresem w domenie {domain}.",
-    "failed": "Nie udało się zapisać strony."
+    "pending": "Zapisano. Trafi do sprawdzenia, gdy właściciel lub administrator zaloguje się adresem w domenie {domain}.",
+    "failed": "Nie udało się zapisać strony.",
+    "submitted": "Czeka na sprawdzenie. Dostaniesz powiadomienie, gdy się zakończy.",
+    "waitingEmail": "Czeka, aż właściciel lub administrator zaloguje się adresem w domenie {domain}.",
+    "declined": "{reason, select, none {Odrzucono.} other {Odrzucono: {reason}}}",
+    "tryAgain": "Zmień nazwę lub stronę firmy, aby ponownie wysłać ją do weryfikacji, albo <contact>napisz do nas</contact>.",
+    "pendingBadge": "Weryfikacja w toku",
+    "renameHint": "Zmiana nazwy ponownie wyśle firmę do weryfikacji."
   },
   "pause": {
     "notice": "Nowe rozmowy są na razie wstrzymane: nie można ich rozpocząć ani utworzyć. Rozpoczętą już rozmowę można dokończyć. Wróć później."

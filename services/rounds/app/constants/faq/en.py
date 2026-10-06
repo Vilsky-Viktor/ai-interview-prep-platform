@@ -74,7 +74,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "What does the verified check mean?",
-        "answer": "That an owner or admin of the company signed in with a work email on the company's website, such as you@acme.com. Add the website with Verify in your company's header; free email services don't count. The check shows next to your company's name, including in invites.",
+        "answer": "That an owner or admin of the company signed in with a work email on the company's website, such as you@acme.com, and our team then reviewed the company. Add the website with Verify in your company's header; free email services don't count. While the review is pending, your team sees a clock next to the name, and renaming the company sends it for review again. The check shows next to your company's name, including in invites.",
     },
     {
         "key": "languages",

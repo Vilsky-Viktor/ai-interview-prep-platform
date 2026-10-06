@@ -5,10 +5,11 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.constants.verification import VerificationStatus
 from app.helpers.verification import email_on_domain, is_free_domain, website_domain
 from app.main import app
 from app.models.companies import Company, Member
-from app.storage import companies, interviews
+from app.storage import companies, interviews, verification
 
 COMPANY_ID = uuid.uuid4()
 URL = f"/companies/{COMPANY_ID}/website"
@@ -16,7 +17,12 @@ URL = f"/companies/{COMPANY_ID}/website"
 
 @pytest.fixture
 def company(monkeypatch):
-    found = Company(id=COMPANY_ID, name="Acme", created_at=datetime.now(UTC))
+    found = Company(
+        id=COMPANY_ID,
+        name="Acme",
+        created_at=datetime.now(UTC),
+        verification_status=VerificationStatus.NONE,
+    )
     found.members = [
         Member(company_id=COMPANY_ID, user_id="ann", invited_email="a@x.com", role="owner"),
         Member(company_id=COMPANY_ID, user_id="bob", invited_email="b@x.com", role="admin"),
@@ -25,20 +31,36 @@ def company(monkeypatch):
     async def fake_get(_id):
         return found
 
-    async def fake_set(_id, domain, verified):
+    async def fake_set(_id, domain, email):
+        """As storage.verification.set_website does it."""
         found.website_domain = domain
-        found.verified_domain = domain if verified else None
+        found.verified_domain = None
+        found.verification_email = email
+        found.decline_reason = None
+
+        if domain is None:
+            found.verification_status = VerificationStatus.NONE
+        elif email is None:
+            found.verification_status = VerificationStatus.WAITING_EMAIL
+        else:
+            found.verification_status = VerificationStatus.PENDING
 
     async def no_counts(ids):
         return {}
 
     monkeypatch.setattr(companies, "get", fake_get)
-    monkeypatch.setattr(companies, "set_website", fake_set)
+    monkeypatch.setattr(verification, "set_website", fake_set)
     monkeypatch.setattr(interviews, "counts", no_counts)
 
     yield found
 
     app.dependency_overrides.clear()
+
+
+def approve(company):
+    """As a superadmin's approval leaves it."""
+    company.verification_status = VerificationStatus.APPROVED
+    company.verified_domain = company.website_domain
 
 
 def sign_in(uid, email, verified=True):
@@ -55,34 +77,51 @@ def test_a_website_is_read_as_its_domain():
     assert not email_on_domain("ann@notacme.com", "acme.com")
 
 
-def test_an_admin_with_a_work_email_on_the_domain_verifies_at_once(client, company):
+def state(result):
+    return result["website_domain"], result["verified_domain"], result["verification_status"]
+
+
+def test_a_work_email_on_the_domain_sends_it_for_review_without_the_badge(client, company):
     sign_in("ann", "ann@acme.com")
 
     result = client.put(URL, json={"website": "https://www.acme.com"}).json()
 
-    assert result == {"website_domain": "acme.com", "verified_domain": "acme.com"}
+    assert state(result) == ("acme.com", None, "pending")
+    assert company.verification_email == "ann@acme.com"
 
 
-def test_a_personal_email_leaves_it_unverified_until_a_work_one_opens_it(client, company):
+def test_a_personal_email_waits_until_a_work_one_opens_the_company(client, company):
     sign_in("ann", "ann@gmail.com")
     first = client.put(URL, json={"website": "acme.com"}).json()
 
-    assert first == {"website_domain": "acme.com", "verified_domain": None}
+    assert state(first) == ("acme.com", None, "waiting_email")
 
     sign_in("bob", "bob@acme.com")
     opened = client.get(f"/companies/{COMPANY_ID}").json()
 
-    assert opened["verified_domain"] == "acme.com"
+    assert opened["verified_domain"] is None
+    assert opened["verification_status"] == "pending"
+    assert company.verification_email == "bob@acme.com"
 
 
-def test_free_mail_and_unverified_emails_never_verify(client, company):
+def test_free_mail_and_unverified_emails_never_prove_it(client, company):
     sign_in("ann", "ann@gmail.com")
 
     assert client.put(URL, json={"website": "gmail.com"}).status_code == 422
 
     sign_in("ann", "ann@acme.com", verified=False)
 
-    assert client.put(URL, json={"website": "acme.com"}).json()["verified_domain"] is None
+    assert client.put(URL, json={"website": "acme.com"}).json()["verification_status"] == (
+        "waiting_email"
+    )
+
+
+def test_opening_a_declined_company_doesnt_send_it_again(client, company):
+    company.website_domain = "acme.com"
+    company.verification_status = VerificationStatus.DECLINED
+    sign_in("ann", "ann@acme.com")
+
+    assert client.get(f"/companies/{COMPANY_ID}").json()["verification_status"] == "declined"
 
 
 def test_a_website_is_a_registrable_domain_never_a_public_suffix():
@@ -120,15 +159,43 @@ def test_public_suffixes_and_regional_free_mail_are_refused_as_websites(client, 
     assert company.website_domain is None
 
 
-def test_resaving_the_same_website_keeps_its_verification(client, company):
+def test_resaving_the_same_website_keeps_its_review_and_badge(client, company):
     sign_in("ann", "ann@acme.com")
     client.put(URL, json={"website": "acme.com"})
     sign_in("bob", "bob@gmail.com")
 
+    assert state(client.put(URL, json={"website": "acme.com"}).json()) == (
+        "acme.com",
+        None,
+        "pending",
+    )
+
+    approve(company)
     same = client.put(URL, json={"website": "https://www.acme.com/"}).json()
 
-    assert same == {"website_domain": "acme.com", "verified_domain": "acme.com"}
+    assert state(same) == ("acme.com", "acme.com", "approved")
 
     other = client.put(URL, json={"website": "acme.org"}).json()
 
-    assert other == {"website_domain": "acme.org", "verified_domain": None}
+    assert state(other) == ("acme.org", None, "waiting_email")
+
+
+def test_saving_a_declined_website_again_changes_nothing(client, company):
+    # A declined company goes for review again only after its name or website changes.
+    sign_in("ann", "ann@acme.com")
+    client.put(URL, json={"website": "acme.com"})
+    company.verification_status = VerificationStatus.DECLINED
+    company.decline_reason = "Not the same company"
+
+    again = client.put(URL, json={"website": "acme.com"}).json()
+
+    assert state(again) == ("acme.com", None, "declined")
+    assert again["decline_reason"] == "Not the same company"
+
+
+def test_removing_the_website_removes_the_verification(client, company):
+    sign_in("ann", "ann@acme.com")
+    client.put(URL, json={"website": "acme.com"})
+    approve(company)
+
+    assert state(client.put(URL, json={"website": " "}).json()) == (None, None, "none")

@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "Mga setting",
-    "signIn": "Mag-sign in para baguhin ang iyong mga setting.",
     "language": "Wika",
     "languageNote": "Para sa interface at sa mga sagot ng tutor, at ang wikang ginagamit sa simula ng mga bagong kit at interview. Puwede mo silang gawin sa alinmang suportadong wika.",
     "languageFailed": "Hindi mabago ang wika. Pakisubukang muli.",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "I-on ang maintenance mode?",
     "maintenanceRunning": "{count, plural, =0 {Walang kandidatong nasa interview ngayon.} other {Mga kandidatong nasa interview ngayon: #. Maaari silang mawalan ng oras.}}",
     "maintenanceRunningUnknown": "Hindi mabilang ang mga kandidatong nasa interview ngayon. Maaaring mawalan ng oras ang sinumang nasa interview.",
-    "maintenanceTurnOn": "I-on"
+    "maintenanceTurnOn": "I-on",
+    "verification": "Verification",
+    "noVerifications": "Wala pang kumpanyang humiling ng verification.",
+    "approve": "Aprubahan",
+    "decline": "Tanggihan",
+    "declineTitle": "Tanggihan ang “{name}”?",
+    "declineText": "Makakatanggap ang mga owner at admin nito ng notification kasama ang dahilan mo, kung magbibigay ka. Puwede silang humiling ulit.",
+    "declineReason": "Dahilan (opsyonal)",
+    "declinedBecause": "Dahilan: {reason}",
+    "verificationStatus": {
+      "pending": "naghihintay ng review",
+      "approved": "inaprubahan",
+      "declined": "tinanggihan"
+    },
+    "requestChanged": "Nagbago ang request na ito; suriin ulit."
   },
   "templates": {
     "title": "Mga template",
@@ -274,7 +287,6 @@
     "endsOne": "Matatapos nito ang interview.",
     "unscored": "{count, plural, one {Hindi mabibigyan ng score ang # hindi nasagot na tanong} other {Hindi mabibigyan ng score ang # hindi nasagot na tanong}}.",
     "section": "Seksyon {number} ng {count}",
-    "signIn": "Mag-sign in para ipagpatuloy ang interview na ito.",
     "missing": "Wala ang session na ito.",
     "done": "Natapos mo na ang interview. Good luck!",
     "title": "Interview"
@@ -294,7 +306,6 @@
     "topicsReady": "Handa na ang {ready} sa {count, plural, one {# paksa} other {# paksa}}",
     "reviewFailed": "Hindi maipadala ang iyong review. Pakisubukang muli.",
     "retryFailed": "Hindi maulit ang paggawa. Pakisubukang muli.",
-    "signIn": "Mag-sign in para makita ang paggawang ito.",
     "missing": "Wala ang paggawang ito.",
     "cancelled": "Nakansela ang paggawang ito.",
     "failed": "Nabigo ang paggawa.",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "Mga kumpanya",
-    "signInInterviews": "Mag-sign in para makita ang mga interview ng kumpanya.",
-    "signInTeam": "Mag-sign in para makita ang team ng kumpanya.",
-    "signInReferrals": "Mag-sign in para makita ang referral link ng kumpanya.",
     "empty": "Wala pang kumpanya.",
     "owner": "May-ari",
     "interviewCount": "{count, plural, one {# interview} other {# interview}}",
@@ -350,7 +358,6 @@
     "name": "Pangalan ng kumpanya",
     "create": "Gumawa",
     "createFailed": "Hindi magawa ang kumpanya. Pakisubukang muli.",
-    "signInJoin": "Mag-sign in gamit ang email ng imbitasyon para sumali sa kumpanyang ito.",
     "open": "Buksan ang kumpanya",
     "join": "Sumali sa kumpanya",
     "creditsLeft": "{count, plural, one {credit} other {credits}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "Mag-sign in gamit ang email ng imbitasyon para sagutan ang interview na ito.",
     "invitedYou": "Iniimbitahan ka ng <b>{company}</b> sa isang interview.",
     "fallbackTitle": "isang interview",
     "timePerQuestion": "Oras bawat tanong:",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "Mag-top up",
     "intro": "Ang $1 ay 100 credits, at hindi nag-e-expire ang credits.",
-    "signIn": "Mag-sign in para mag-top up ng credits.",
     "companies": "Credits ng mga kumpanya",
     "companiesNote": "Para sa mga kandidato ng bawat kumpanya.",
     "noCompany": "Ang credits ay pag-aari ng isang kumpanya. Gumawa muna ng iyong kumpanya, saka ito i-top up dito.",
@@ -812,7 +817,9 @@
       "candidate_finished": "{count, plural, =1 {Natapos ni {email} ang “{title}”{grade, select, none {.} other {: {grade}%.}}} other {# kandidato ang nakatapos ng “{title}”.}}",
       "invite_undelivered": "{count, plural, =1 {Hindi naihatid ang imbitasyon kay {email} para sa “{title}”.} other {Hindi naihatid ang # imbitasyon para sa “{title}”.}}",
       "interview_ready": "Handa na ang interview na “{title}”.",
-      "interview_cancelled": "{title, select, none {Kinansela ang isang interview} other {Kinansela ang interview na “{title}”}}: masyadong natagal ang paghihintay sa review ng mga paksa."
+      "interview_cancelled": "{title, select, none {Kinansela ang isang interview} other {Kinansela ang interview na “{title}”}}: masyadong natagal ang paghihintay sa review ng mga paksa.",
+      "verification_approved": "Verified na ang “{name}” para sa {domain}.",
+      "verification_declined": "{reason, select, none {Tinanggihan ang verification ng “{name}”.} other {Tinanggihan ang verification ng “{name}”: {reason}}}"
     }
   },
   "report": {
@@ -850,7 +857,6 @@
     "grade": "ng mga tanong ang tama",
     "notFinished": "hindi tapos",
     "noRounds": "Wala pang round.",
-    "signIn": "Mag-sign in para makita ang iyong mga practice round.",
     "startFailed": "Hindi masimulan ang practice. Pakisubukang muli.",
     "gradeLabel": "Grado",
     "questions": "{count, plural, one {# tanong} other {# tanong}}",
@@ -864,12 +870,18 @@
     "verify": "I-verify",
     "verified": "Verified: {domain}",
     "title": "I-verify ang kumpanya",
-    "text": "Ilagay ang website ng kumpanya. Mave-verify ito kapag nag-sign in ang isang owner o admin gamit ang work email dito, tulad ng you@acme.com: agad-agad kung ikaw iyon.",
+    "text": "Ilagay ang website ng kumpanya. Kapag nag-sign in ang isang owner o admin gamit ang work email sa domain na iyon, gaya ng you@acme.com (agad kung ikaw iyon), sinusuri namin ang kumpanya at idinadagdag ang badge.",
     "website": "Website ng kumpanya",
     "save": "I-save",
     "done": "Verified: {domain}",
-    "pending": "Na-save. Mave-verify ito kapag nag-sign in ang isang owner o admin gamit ang email sa {domain}.",
-    "failed": "Hindi ma-save ang website."
+    "pending": "Na-save. Ipapadala para sa review kapag nag-sign in ang isang owner o admin gamit ang email sa {domain}.",
+    "failed": "Hindi ma-save ang website.",
+    "submitted": "Naghihintay ng review. Makakatanggap ka ng notification kapag nasuri na.",
+    "waitingEmail": "Naghihintay na mag-sign in ang isang owner o admin gamit ang email sa {domain}.",
+    "declined": "{reason, select, none {Tinanggihan.} other {Tinanggihan: {reason}}}",
+    "tryAgain": "Palitan ang pangalan o website ng kumpanya para maipadala ulit sa review, o <contact>makipag-ugnayan sa amin</contact>.",
+    "pendingBadge": "Naghihintay ng verification",
+    "renameHint": "Ang pagpapalit ng pangalan ay magpapadala ulit ng kumpanya mo para sa verification."
   },
   "pause": {
     "notice": "Naka-pause muna ang mga bagong interview: hindi ito masisimulan o magagawa. Matatapos ang interview na nasimulan na. Bumalik ka mamaya."

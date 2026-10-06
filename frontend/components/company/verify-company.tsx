@@ -1,10 +1,12 @@
 "use client"
 
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { PendingBadge } from "@/components/company/pending-badge"
 import { InputAction } from "@/components/input-action"
 import {
   Dialog,
@@ -16,16 +18,22 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { ApiError, apiFetch } from "@/lib/api"
-import type { Verification } from "@/types/company"
+import type { Verification, VerificationStatus } from "@/types/company"
 
-/** "Verify" beside an unverified company's name: its website, verified once an owner or admin
- * signs in with a work email on that domain (right away when it's theirs). */
+/** "Verify" beside an unverified company's name (the pending clock while it's reviewed): its website, sent for a superadmin's review
+ * once an owner or admin signs in with a work email on that domain (right away when it's
+ * theirs). It says where it stands: waiting for that email, or declined and why; saving the
+ * website again asks for a new review. */
 export function VerifyCompany({
   companyId,
   websiteDomain,
+  status,
+  declineReason,
 }: {
   companyId: string
   websiteDomain: string | null
+  status: VerificationStatus
+  declineReason: string | null
 }) {
   const t = useTranslations("verify")
   const router = useRouter()
@@ -45,7 +53,9 @@ export function VerifyCompany({
       toast.success(
         result.verified_domain
           ? t("done", { domain: result.verified_domain })
-          : t("pending", { domain: result.website_domain ?? website })
+          : result.verification_status === "pending"
+            ? t("submitted")
+            : t("pending", { domain: result.website_domain ?? website })
       )
       setOpen(false)
       router.refresh()
@@ -60,21 +70,65 @@ export function VerifyCompany({
 
   return (
     <Dialog open={open} onOpenChange={(next) => !saving && setOpen(next)}>
-      <DialogTrigger
-        render={
-          <button
-            type="button"
-            className="shrink-0 cursor-pointer text-sm text-primary transition-opacity hover:opacity-70"
-          />
-        }
-      >
-        {t("verify")}
-      </DialogTrigger>
+      {status === "pending" ? (
+        <PendingBadge
+          className="size-7"
+          render={
+            <DialogTrigger
+              render={
+                <button
+                  type="button"
+                  aria-label={t("pendingBadge")}
+                  className="relative z-10 inline-flex shrink-0 cursor-pointer align-middle text-muted-foreground transition-opacity hover:opacity-70"
+                />
+              }
+            />
+          }
+        />
+      ) : (
+        <DialogTrigger
+          render={
+            <button
+              type="button"
+              className="shrink-0 cursor-pointer text-sm text-primary transition-opacity hover:opacity-70"
+            />
+          }
+        >
+          {t("verify")}
+        </DialogTrigger>
+      )}
       <DialogContent showCloseButton={false} className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription>{t("text")}</DialogDescription>
         </DialogHeader>
+        {status === "pending" && (
+          <p className="text-sm text-muted-foreground">{t("submitted")}</p>
+        )}
+        {status === "waiting_email" && websiteDomain && (
+          <p className="text-sm text-muted-foreground">
+            {t("waitingEmail", { domain: websiteDomain })}
+          </p>
+        )}
+        {status === "declined" && (
+          <div className="space-y-1 text-sm">
+            <p className="text-destructive">
+              {t("declined", { reason: declineReason ?? "none" })}
+            </p>
+            <p className="text-muted-foreground">
+              {t.rich("tryAgain", {
+                contact: (chunks) => (
+                  <Link
+                    href="/contact"
+                    className="underline underline-offset-4"
+                  >
+                    {chunks}
+                  </Link>
+                ),
+              })}
+            </p>
+          </div>
+        )}
         <form onSubmit={save} className="flex">
           <InputAction
             required

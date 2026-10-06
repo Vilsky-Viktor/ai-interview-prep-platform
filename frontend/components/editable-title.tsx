@@ -12,17 +12,20 @@ const titleClass =
   "font-heading text-3xl font-medium tracking-tight text-balance normal-case"
 
 /** A page's title, edited in place: `path` takes {"title"}. `maxLength` defaults to a test's
- * title limit (a company's name is shorter). Not `editable` (a viewer), it's a plain title. */
+ * title limit (a company's name is shorter). Not `editable` (a viewer), it's a plain title.
+ * `hint` shows under the field while editing. */
 export function EditableTitle({
   title,
   path,
   maxLength = MAX_TITLE_LENGTH,
   editable = true,
+  hint,
 }: {
   title: string
   path: string
   maxLength?: number
   editable?: boolean
+  hint?: string
 }) {
   const t = useTranslations("common")
   const router = useRouter()
@@ -113,7 +116,7 @@ export function EditableTitle({
     )
   }
 
-  return (
+  const input = (
     <input
       ref={inputRef}
       maxLength={maxLength}
@@ -143,5 +146,16 @@ export function EditableTitle({
         }
       }}
     />
+  )
+
+  if (!hint) {
+    return input
+  }
+
+  return (
+    <div className="space-y-1">
+      {input}
+      <p className="px-4 text-sm text-muted-foreground">{hint}</p>
+    </div>
   )
 }

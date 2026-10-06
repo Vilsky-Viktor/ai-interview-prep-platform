@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Wat betekent het verificatievinkje?",
-        "answer": "Dat een eigenaar of beheerder van het bedrijf heeft ingelogd met een zakelijk e-mailadres op de website van het bedrijf, zoals you@acme.com. Voeg de website toe met Verifiëren in de kop van je bedrijf; gratis e-maildiensten tellen niet mee. Het vinkje staat naast de naam van je bedrijf, ook in uitnodigingen.",
+        "answer": "Dat een eigenaar of beheerder van het bedrijf heeft ingelogd met een zakelijk e-mailadres op de website van het bedrijf, zoals you@acme.com, en dat ons team het bedrijf daarna heeft beoordeeld. Voeg de website toe met Verifiëren in de kop van je bedrijf; gratis e-maildiensten tellen niet mee. Zolang de beoordeling loopt, ziet je team een klokje naast de naam, en een nieuwe bedrijfsnaam stuurt het opnieuw ter beoordeling. Het vinkje staat naast de naam van je bedrijf, ook in uitnodigingen.",
     },
     {
         "key": "languages",

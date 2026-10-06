@@ -1,10 +1,13 @@
+from datetime import UTC, datetime
+
 # Aliased: this module's own delete() would otherwise shadow it.
+from sqlalchemy import and_, func, or_, select, update
 from sqlalchemy import delete as sql_delete
-from sqlalchemy import func, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
 from app.constants.roles import Role
+from app.constants.verification import RENAME_REVIEWED, VerificationStatus
 from app.models.companies import Company, Member
 from app.storage.db import Session
 
@@ -119,10 +122,34 @@ async def get_logo(company_id) -> tuple[bytes, str] | None:
 
 
 async def rename(company_id, name: str) -> bool:
-    """False when another company already has the name, in any case; the database decides."""
+    """False when another company already has the name, in any case; the database decides. A
+    company verified, waiting for review or declined loses its badge until a superadmin reviews
+    the new name; its domain's proof still holds (a declined one only with a proof on file)."""
     async with Session() as session:
         try:
             await session.execute(update(Company).where(Company.id == company_id).values(name=name))
+            await session.execute(
+                update(Company)
+                .where(
+                    Company.id == company_id,
+                    or_(
+                        Company.verification_status.in_(RENAME_REVIEWED),
+                        and_(
+                            Company.verification_status == VerificationStatus.DECLINED,
+                            Company.verification_email.is_not(None),
+                        ),
+                    ),
+                )
+                .values(
+                    verified_domain=None,
+                    verification_status=VerificationStatus.PENDING,
+                    verification_name=name,
+                    verification_submitted_at=datetime.now(UTC),
+                    decline_reason=None,
+                    verification_decided_by=None,
+                    verification_decided_at=None,
+                )
+            )
             await session.commit()
         except IntegrityError as error:
             if NAME_INDEX in str(error.orig):
@@ -131,14 +158,3 @@ async def rename(company_id, name: str) -> bool:
             raise
 
     return True
-
-
-async def set_website(company_id, domain: str | None, verified: bool) -> None:
-    """The company's website domain, verified or not yet; None clears both."""
-    async with Session() as session:
-        await session.execute(
-            update(Company)
-            .where(Company.id == company_id)
-            .values(website_domain=domain, verified_domain=domain if verified else None)
-        )
-        await session.commit()

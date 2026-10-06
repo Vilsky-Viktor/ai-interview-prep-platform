@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "¿Qué significa la marca de verificación?",
-        "answer": "Que un propietario o administrador de la empresa inició sesión con un correo de trabajo del sitio web de la empresa, como tu@acme.com. Añade el sitio web con Verificar en la cabecera de tu empresa; los servicios de correo gratuitos no cuentan. La marca aparece junto al nombre de tu empresa, también en las invitaciones.",
+        "answer": "Que un propietario o administrador de la empresa inició sesión con un correo de trabajo del sitio web de la empresa, como tu@acme.com, y que después nuestro equipo revisó la empresa. Añade el sitio web con Verificar en la cabecera de tu empresa; los servicios de correo gratuitos no cuentan. Mientras la revisión está pendiente, tu equipo ve un reloj junto al nombre, y cambiar el nombre de la empresa la envía de nuevo a revisión. La marca aparece junto al nombre de tu empresa, también en las invitaciones.",
     },
     {
         "key": "languages",

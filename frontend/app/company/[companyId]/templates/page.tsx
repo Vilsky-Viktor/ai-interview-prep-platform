@@ -29,7 +29,6 @@ export default async function CompanyTemplatesPage({
 }) {
   const { companyId } = await params
   const t = await getTranslations("templates")
-  const companyText = await getTranslations("company")
   const interviewsText = await getTranslations("interviews")
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const company = signedIn
@@ -39,7 +38,7 @@ export default async function CompanyTemplatesPage({
   if (!signedIn) {
     return (
       <main className="mx-auto max-w-5xl px-6 py-12">
-        <SignInPrompt message={companyText("signInInterviews")} />
+        <SignInPrompt />
       </main>
     )
   }
@@ -65,6 +64,8 @@ export default async function CompanyTemplatesPage({
         logoUrl={company.logo_url ?? null}
         verifiedDomain={company.verified_domain ?? null}
         websiteDomain={company.website_domain ?? null}
+        verificationStatus={company.verification_status}
+        declineReason={company.decline_reason ?? null}
         current="templates"
         canEdit={company.can_edit}
       />

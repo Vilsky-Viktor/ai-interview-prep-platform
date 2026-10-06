@@ -1,6 +1,5 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import { getTranslations } from "next-intl/server"
 
 import { CompanyHeader } from "@/components/company/company-header"
 import { InviteAdmin } from "@/components/company/invite-admin"
@@ -20,7 +19,6 @@ export default async function MembersPage({
   params: Promise<{ companyId: string }>
 }) {
   const { companyId } = await params
-  const t = await getTranslations("company")
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
@@ -34,7 +32,7 @@ export default async function MembersPage({
   if (!signedIn) {
     return (
       <main className="mx-auto max-w-5xl px-6 py-12">
-        <SignInPrompt message={t("signInTeam")} />
+        <SignInPrompt />
       </main>
     )
   }
@@ -51,6 +49,8 @@ export default async function MembersPage({
         logoUrl={company.logo_url ?? null}
         verifiedDomain={company.verified_domain ?? null}
         websiteDomain={company.website_domain ?? null}
+        verificationStatus={company.verification_status}
+        declineReason={company.decline_reason ?? null}
         current="members"
         canEdit={company.can_edit}
         action={

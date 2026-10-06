@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "設定",
-    "signIn": "設定を変更するにはサインインしてください。",
     "language": "言語",
     "languageNote": "インターフェースとチューターの返信、そして新しいキットや面接の初期言語に使われます。キットや面接はサポートされているどの言語でも作成できます。",
     "languageFailed": "言語を変更できませんでした。もう一度お試しください。",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "メンテナンスモードをオンにしますか？",
     "maintenanceRunning": "{count, plural, =0 {現在面接中の候補者はいません。} other {現在面接中の候補者：#人。時間を失う可能性があります。}}",
     "maintenanceRunningUnknown": "現在面接中の候補者を数えられませんでした。面接中の候補者は時間を失う可能性があります。",
-    "maintenanceTurnOn": "オンにする"
+    "maintenanceTurnOn": "オンにする",
+    "verification": "認証",
+    "noVerifications": "認証を依頼した会社はまだありません。",
+    "approve": "承認",
+    "decline": "却下",
+    "declineTitle": "「{name}」を却下しますか？",
+    "declineText": "所有者と管理者に、理由を書いた場合はその理由とともに通知が届きます。再度依頼することもできます。",
+    "declineReason": "理由（任意）",
+    "declinedBecause": "理由: {reason}",
+    "verificationStatus": {
+      "pending": "審査待ち",
+      "approved": "承認済み",
+      "declined": "却下"
+    },
+    "requestChanged": "このリクエストは変更されました。もう一度確認してください。"
   },
   "templates": {
     "title": "テンプレート",
@@ -274,7 +287,6 @@
     "endsOne": "面接が終了します。",
     "unscored": "未回答の {count, plural, other {# 問}}は採点されません。",
     "section": "セクション {number}/{count}",
-    "signIn": "この面接を続けるにはサインインしてください。",
     "missing": "このセッションは存在しません。",
     "done": "面接が終了しました。幸運を祈ります！",
     "title": "面接"
@@ -294,7 +306,6 @@
     "topicsReady": "{count, plural, other {# トピック}}中 {ready} 件が完成",
     "reviewFailed": "確認内容を送信できませんでした。もう一度お試しください。",
     "retryFailed": "作成を再試行できませんでした。もう一度お試しください。",
-    "signIn": "この作成を見るにはサインインしてください。",
     "missing": "この作成は存在しません。",
     "cancelled": "この作成はキャンセルされました。",
     "failed": "作成に失敗しました。",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "会社",
-    "signInInterviews": "会社の面接を見るにはサインインしてください。",
-    "signInTeam": "会社のチームを見るにはサインインしてください。",
-    "signInReferrals": "会社の招待リンクを見るにはサインインしてください。",
     "empty": "会社はまだありません。",
     "owner": "所有者",
     "interviewCount": "{count, plural, other {面接 # 件}}",
@@ -350,7 +358,6 @@
     "name": "会社名",
     "create": "作成",
     "createFailed": "会社を作成できませんでした。もう一度お試しください。",
-    "signInJoin": "この会社に参加するには、招待されたメールアドレスでサインインしてください。",
     "open": "会社を開く",
     "join": "会社に参加",
     "creditsLeft": "{count, plural, other {クレジット}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "この面接を受けるには、招待されたメールアドレスでサインインしてください。",
     "invitedYou": "<b>{company}</b>から面接の招待が届いています。",
     "fallbackTitle": "面接",
     "timePerQuestion": "1 問あたりの時間：",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "チャージ",
     "intro": "$1 で 100 クレジット、クレジットに有効期限はありません。",
-    "signIn": "クレジットをチャージするにはサインインしてください。",
     "companies": "会社のクレジット",
     "companiesNote": "各社の候補者に使います。",
     "noCompany": "クレジットは会社に属します。まず会社を作成してから、ここでチャージしてください。",
@@ -812,7 +817,9 @@
       "candidate_finished": "{count, plural, =1 {{email} さんが「{title}」を完了しました{grade, select, none {。} other {（{grade}%）。}}} other {# 人の候補者が「{title}」を完了しました。}}",
       "invite_undelivered": "{count, plural, =1 {{email} さんへの「{title}」の招待を届けられませんでした。} other {「{title}」の招待 # 件を届けられませんでした。}}",
       "interview_ready": "面接「{title}」の準備ができました。",
-      "interview_cancelled": "{title, select, none {面接} other {面接「{title}」}}はキャンセルされました：トピックの確認待ちが長すぎました。"
+      "interview_cancelled": "{title, select, none {面接} other {面接「{title}」}}はキャンセルされました：トピックの確認待ちが長すぎました。",
+      "verification_approved": "「{name}」は {domain} で認証されました。",
+      "verification_declined": "{reason, select, none {「{name}」の認証は却下されました。} other {「{name}」の認証は却下されました：{reason}}}"
     }
   },
   "report": {
@@ -850,7 +857,6 @@
     "grade": "の問題に正解",
     "notFinished": "未完了",
     "noRounds": "ラウンドはまだありません。",
-    "signIn": "練習ラウンドを見るにはサインインしてください。",
     "startFailed": "練習を開始できませんでした。もう一度お試しください。",
     "gradeLabel": "評価",
     "questions": "{count, plural, other {# 問}}",
@@ -864,12 +870,18 @@
     "verify": "認証",
     "verified": "認証済み: {domain}",
     "title": "会社を認証",
-    "text": "会社のウェブサイトを入力してください。所有者または管理者がそのドメインの仕事用メール（例: you@acme.com）でサインインすると認証されます。あなたがそうなら、すぐに認証されます。",
+    "text": "会社のウェブサイトを入力してください。所有者または管理者がそのドメインの仕事用メール（例: you@acme.com）でサインインすると（あなたがそうならすぐに）、会社を審査してバッジを付けます。",
     "website": "会社のウェブサイト",
     "save": "保存",
     "done": "認証済み: {domain}",
-    "pending": "保存しました。所有者または管理者が {domain} のメールでサインインすると認証されます。",
-    "failed": "ウェブサイトを保存できませんでした。"
+    "pending": "保存しました。所有者または管理者が {domain} のメールでサインインすると審査に送られます。",
+    "failed": "ウェブサイトを保存できませんでした。",
+    "submitted": "審査待ちです。確認が終わると通知が届きます。",
+    "waitingEmail": "所有者または管理者が {domain} のメールでサインインするのを待っています。",
+    "declined": "{reason, select, none {却下されました。} other {却下されました: {reason}}}",
+    "tryAgain": "会社名かウェブサイトを変更すると再審査に送られます。または<contact>お問い合わせ</contact>ください。",
+    "pendingBadge": "認証待ち",
+    "renameHint": "名前を変更すると、会社は再び認証の審査に送られます。"
   },
   "pause": {
     "notice": "新しい面接は現在一時停止中です。開始も作成もできません。すでに始まった面接は最後まで受けられます。しばらくしてからもう一度お越しください。"

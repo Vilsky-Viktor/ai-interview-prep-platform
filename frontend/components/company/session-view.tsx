@@ -80,7 +80,7 @@ export function SessionView({
   }, [inviteId, previewCompany, practice])
 
   if (!loading && !user) {
-    return <SignInPrompt message={t("signIn")} />
+    return <SignInPrompt />
   }
 
   if (missing) {

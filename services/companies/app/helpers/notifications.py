@@ -1,6 +1,8 @@
 from prepza_common.notifications import NotificationKind, Recipient, notification
 
 from app.constants.notifications import INTERVIEW_LINK, INTERVIEWS_LINK
+from app.constants.roles import EDITORS
+from app.models.companies import Company
 from app.models.interviews import Interview
 
 
@@ -60,3 +62,29 @@ def interview_cancelled(interview: Interview) -> dict:
         INTERVIEWS_LINK.format(company_id=interview.company_id),
         **data,
     )
+
+
+def verification_decided(company: Company, approved: bool, reason: str | None) -> list[dict]:
+    """One for each of the company's owners and admins (viewers can't act on it); a decline
+    says why when the superadmin did."""
+    kind = (
+        NotificationKind.VERIFICATION_APPROVED
+        if approved
+        else NotificationKind.VERIFICATION_DECLINED
+    )
+    data = {"name": company.verification_name or company.name, "domain": company.website_domain}
+
+    if reason:
+        data["reason"] = reason
+
+    return [
+        notification(
+            Recipient.USER,
+            member.user_id,
+            kind,
+            INTERVIEWS_LINK.format(company_id=company.id),
+            **data,
+        )
+        for member in company.members
+        if member.user_id and member.role in EDITORS
+    ]

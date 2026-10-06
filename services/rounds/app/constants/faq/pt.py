@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "O que significa o selo de verificação?",
-        "answer": "Que um dono ou administrador da empresa entrou com um e-mail corporativo do site da empresa, como you@acme.com. Adicione o site em Verificar, no cabeçalho da sua empresa; serviços de e-mail gratuitos não contam. O selo aparece ao lado do nome da sua empresa, inclusive nos convites.",
+        "answer": "Que um dono ou administrador da empresa entrou com um e-mail corporativo do site da empresa, como you@acme.com, e que depois a nossa equipe analisou a empresa. Adicione o site em Verificar, no cabeçalho da sua empresa; serviços de e-mail gratuitos não contam. Enquanto a análise está pendente, sua equipe vê um relógio ao lado do nome, e mudar o nome da empresa a envia para análise de novo. O selo aparece ao lado do nome da sua empresa, inclusive nos convites.",
     },
     {
         "key": "languages",

@@ -5,6 +5,7 @@ from sqlalchemy import DateTime, ForeignKey, Index, LargeBinary, String, UniqueC
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.constants.roles import Role
+from app.constants.verification import MAX_DECLINE_REASON_LENGTH, VerificationStatus
 from app.models.base import Base
 
 
@@ -21,10 +22,21 @@ class Company(Base):
     logo: Mapped[bytes | None] = mapped_column(LargeBinary, deferred=True)
     logo_type: Mapped[str | None] = mapped_column(String(32))
     logo_version: Mapped[int] = mapped_column(default=0, server_default="0")
-    # Verification by work email: the website's domain an owner or admin gave, and the same
-    # domain once one of them signed in with a verified email on it. The badge shows it.
+    # Verification: the website's domain an owner or admin gave, and the same domain once a
+    # superadmin approved it (the badge). Before that, one of them proves the domain with a
+    # verified email on it (`verification_email`), which sends the company's name
+    # (`verification_name`) for review; the superadmin's decision is kept with it.
     website_domain: Mapped[str | None] = mapped_column(String(253))
     verified_domain: Mapped[str | None] = mapped_column(String(253))
+    verification_status: Mapped[str] = mapped_column(
+        String(16), default=VerificationStatus.NONE, server_default=VerificationStatus.NONE
+    )
+    verification_email: Mapped[str | None] = mapped_column(String(320))
+    verification_name: Mapped[str | None] = mapped_column(String(200))
+    verification_submitted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    decline_reason: Mapped[str | None] = mapped_column(String(MAX_DECLINE_REASON_LENGTH))
+    verification_decided_by: Mapped[str | None] = mapped_column(String(128))
+    verification_decided_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )

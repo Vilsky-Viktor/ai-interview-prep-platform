@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Ano ang ibig sabihin ng verified check?",
-        "answer": "Na nag-sign in ang isang owner o admin ng kumpanya gamit ang work email sa website ng kumpanya, gaya ng you@acme.com. Idagdag ang website gamit ang I-verify sa header ng iyong kumpanya; hindi binibilang ang mga libreng email service. Lumalabas ang check sa tabi ng pangalan ng iyong kumpanya, pati sa mga invite.",
+        "answer": "Na nag-sign in ang isang owner o admin ng kumpanya gamit ang work email sa website ng kumpanya, gaya ng you@acme.com, at sinuri ng aming team ang kumpanya pagkatapos. Idagdag ang website gamit ang I-verify sa header ng iyong kumpanya; hindi binibilang ang mga libreng email service. Habang naghihintay ng review, may orasan sa tabi ng pangalan na nakikita ng iyong team, at ang pagpapalit ng pangalan ng kumpanya ay nagpapadala ulit nito para sa review. Lumalabas ang check sa tabi ng pangalan ng iyong kumpanya, pati sa mga invite.",
     },
     {
         "key": "languages",

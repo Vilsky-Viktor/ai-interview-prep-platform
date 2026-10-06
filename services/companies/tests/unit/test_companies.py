@@ -29,7 +29,9 @@ def clear_overrides():
 
 
 def company(company_id, name, role):
-    item = Company(id=company_id, name=name, created_at=datetime.now(UTC))
+    item = Company(
+        id=company_id, name=name, created_at=datetime.now(UTC), verification_status="none"
+    )
     item.members = [
         Member(
             company_id=company_id,

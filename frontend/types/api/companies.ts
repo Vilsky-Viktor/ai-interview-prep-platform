@@ -983,7 +983,7 @@ export interface paths {
     /**
      * Retention
      * @description Daily, from Cloud Scheduler: candidate data and audit events past their retention
-     *     periods go.
+     *     periods go, and the notes of events long processed.
      */
     post: operations["retention_internal_schedules_retention_post"]
     delete?: never
@@ -1152,6 +1152,63 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/verifications": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Requests
+     * @description Pending requests first, then those decided.
+     */
+    get: operations["list_requests_superadmin_verifications_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/verifications/{company_id}/approve": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Approve
+     * @description Only the name and domain the superadmin reviewed: a rename since sends it back.
+     */
+    post: operations["approve_superadmin_verifications__company_id__approve_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/verifications/{company_id}/decline": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Decline */
+    post: operations["decline_superadmin_verifications__company_id__decline_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/health": {
     parameters: {
       query?: never
@@ -1205,6 +1262,16 @@ export interface components {
       email: string
       /** Joined */
       joined: boolean
+    }
+    /**
+     * ApproveIn
+     * @description The name and domain the superadmin reviewed; approved only if the request still has them.
+     */
+    ApproveIn: {
+      /** Name */
+      name: string
+      /** Domain */
+      domain: string
     }
     /** AuditEventOut */
     AuditEventOut: {
@@ -1412,6 +1479,10 @@ export interface components {
       website_domain?: string | null
       /** Verified Domain */
       verified_domain?: string | null
+      /** @default none */
+      verification_status: components["schemas"]["VerificationStatus"]
+      /** Decline Reason */
+      decline_reason?: string | null
       /**
        * Created At
        * Format: date-time
@@ -1425,6 +1496,14 @@ export interface components {
     CompanyRename: {
       /** Title */
       title: string
+    }
+    /** DeclineIn */
+    DeclineIn: {
+      /**
+       * Reason
+       * @default
+       */
+      reason: string
     }
     /**
      * ExtraTimeIn
@@ -1986,7 +2065,43 @@ export interface components {
       website_domain: string | null
       /** Verified Domain */
       verified_domain: string | null
+      verification_status: components["schemas"]["VerificationStatus"]
+      /** Decline Reason */
+      decline_reason?: string | null
     }
+    /**
+     * VerificationRequestOut
+     * @description A company sent for review, for the superadmin: the name and domain to check, the work
+     *     email that proved the domain, and the decision once made.
+     */
+    VerificationRequestOut: {
+      /**
+       * Company Id
+       * Format: uuid
+       */
+      company_id: string
+      /** Name */
+      name: string
+      /** Domain */
+      domain: string
+      /** Email */
+      email: string | null
+      status: components["schemas"]["VerificationStatus"]
+      /** Submitted At */
+      submitted_at: string | null
+      /** Decided At */
+      decided_at: string | null
+      /** Decline Reason */
+      decline_reason: string | null
+    }
+    /**
+     * VerificationStatus
+     * @description Where a company's verification stands. A work email on the website's domain is the
+     *     proof; a superadmin then approves or declines it, and only approved shows the badge.
+     * @enum {string}
+     */
+    VerificationStatus:
+      "none" | "waiting_email" | "pending" | "approved" | "declined"
     /**
      * WebsiteIn
      * @description The company's website as typed; empty removes it, and the verification with it.
@@ -4166,6 +4281,104 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["PassRateOut"][]
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_requests_superadmin_verifications_get: {
+    parameters: {
+      query?: {
+        offset?: number
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["VerificationRequestOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  approve_superadmin_verifications__company_id__approve_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ApproveIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  decline_superadmin_verifications__company_id__decline_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["DeclineIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {

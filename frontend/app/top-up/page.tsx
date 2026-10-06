@@ -53,7 +53,7 @@ export default async function TopUpPage() {
         <p className="text-base text-muted-foreground">{t("intro")}</p>
       </div>
 
-      {!signedIn && <SignInPrompt message={t("signIn")} />}
+      {!signedIn && <SignInPrompt />}
 
       {signedIn && companies && companies.length === 0 && (
         <div className="flex flex-col items-start gap-4 rounded-2xl border p-6">

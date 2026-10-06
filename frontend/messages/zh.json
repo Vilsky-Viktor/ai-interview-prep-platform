@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "设置",
-    "signIn": "登录后即可更改设置。",
     "language": "语言",
     "languageNote": "用于界面和导师回复，也是新学习包和面试的默认语言。你可以用任何受支持的语言生成它们。",
     "languageFailed": "无法更改语言，请重试。",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "开启维护模式？",
     "maintenanceRunning": "{count, plural, =0 {当前没有候选人正在面试。} other {当前正在面试的候选人：# 位，他们可能会损失时间。}}",
     "maintenanceRunningUnknown": "无法统计当前正在面试的候选人。正在面试的候选人可能会损失时间。",
-    "maintenanceTurnOn": "开启"
+    "maintenanceTurnOn": "开启",
+    "verification": "验证",
+    "noVerifications": "还没有公司申请验证。",
+    "approve": "批准",
+    "decline": "拒绝",
+    "declineTitle": "拒绝“{name}”？",
+    "declineText": "其所有者和管理员会收到通知，如果你填写了原因，也会一并看到。他们可以再次申请。",
+    "declineReason": "原因（可选）",
+    "declinedBecause": "原因：{reason}",
+    "verificationStatus": {
+      "pending": "等待审核",
+      "approved": "已批准",
+      "declined": "已拒绝"
+    },
+    "requestChanged": "此申请已变更，请重新检查。"
   },
   "templates": {
     "title": "模板",
@@ -274,7 +287,6 @@
     "endsOne": "这将结束面试。",
     "unscored": "{count, plural, other {# 道未回答的题目}}将不计分。",
     "section": "第 {number}/{count} 部分",
-    "signIn": "登录后继续此面试。",
     "missing": "此会话不存在。",
     "done": "你已完成面试，祝你好运！",
     "title": "面试"
@@ -294,7 +306,6 @@
     "topicsReady": "{count, plural, other {# 个主题}}中已完成 {ready} 个",
     "reviewFailed": "无法提交你的审阅，请重试。",
     "retryFailed": "无法重试生成，请重试。",
-    "signIn": "登录后查看此次生成。",
     "missing": "此次生成不存在。",
     "cancelled": "此次生成已取消。",
     "failed": "生成失败。",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "公司",
-    "signInInterviews": "登录后查看公司的面试。",
-    "signInTeam": "登录后查看公司的团队。",
-    "signInReferrals": "登录后查看公司的邀请链接。",
     "empty": "还没有公司。",
     "owner": "所有者",
     "interviewCount": "{count, plural, other {# 场面试}}",
@@ -350,7 +358,6 @@
     "name": "公司名称",
     "create": "创建",
     "createFailed": "无法创建公司，请重试。",
-    "signInJoin": "请使用受邀邮箱登录以加入此公司。",
     "open": "打开公司",
     "join": "加入公司",
     "creditsLeft": "{count, plural, other {点数}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "请使用受邀邮箱登录以参加此面试。",
     "invitedYou": "<b>{company}</b> 邀请你参加面试。",
     "fallbackTitle": "面试",
     "timePerQuestion": "每题时间：",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "充值",
     "intro": "$1 可购买 100 点数，点数永不过期。",
-    "signIn": "登录后为你的点数充值。",
     "companies": "公司点数",
     "companiesNote": "用于各公司的候选人。",
     "noCompany": "点数属于公司。请先创建公司，再在这里充值。",
@@ -799,7 +804,9 @@
       "candidate_finished": "{count, plural, =1 {{email} 已完成“{title}”{grade, select, none {。} other {，得分 {grade}%。}}} other {# 位候选人已完成“{title}”。}}",
       "invite_undelivered": "{count, plural, =1 {发送给 {email} 的“{title}”邀请未能送达。} other {“{title}”的 # 份邀请未能送达。}}",
       "interview_ready": "面试“{title}”已就绪。",
-      "interview_cancelled": "{title, select, none {一场面试} other {面试“{title}”}}已取消：主题审核等待时间过长。"
+      "interview_cancelled": "{title, select, none {一场面试} other {面试“{title}”}}已取消：主题审核等待时间过长。",
+      "verification_approved": "“{name}”已通过 {domain} 验证。",
+      "verification_declined": "{reason, select, none {“{name}”的验证已被拒绝。} other {“{name}”的验证已被拒绝：{reason}}}"
     }
   },
   "report": {
@@ -837,7 +844,6 @@
     "grade": "的题目答对",
     "notFinished": "未完成",
     "noRounds": "还没有轮次。",
-    "signIn": "登录后查看你的练习轮次。",
     "startFailed": "无法开始练习，请重试。",
     "gradeLabel": "成绩",
     "questions": "{count, plural, other {# 道题}}",
@@ -851,12 +857,18 @@
     "verify": "验证",
     "verified": "已验证：{domain}",
     "title": "验证公司",
-    "text": "输入公司网站。所有者或管理员使用该网站域名的工作邮箱（例如 you@acme.com）登录后即完成验证；如果就是你，会立即验证。",
+    "text": "输入公司网站。所有者或管理员用该域名的工作邮箱（如 you@acme.com）登录后（如果是你，立即生效），我们会审核公司并添加徽章。",
     "website": "公司网站",
     "save": "保存",
     "done": "已验证：{domain}",
-    "pending": "已保存。所有者或管理员使用 {domain} 的邮箱登录后即完成验证。",
-    "failed": "无法保存网站。"
+    "pending": "已保存。所有者或管理员用 {domain} 的邮箱登录后，将提交审核。",
+    "failed": "无法保存网站。",
+    "submitted": "等待审核。审核完成后你会收到通知。",
+    "waitingEmail": "正在等待所有者或管理员用 {domain} 的邮箱登录。",
+    "declined": "{reason, select, none {已拒绝。} other {已拒绝：{reason}}}",
+    "tryAgain": "修改公司名称或网站即可重新提交审核，或<contact>联系我们</contact>。",
+    "pendingBadge": "等待验证",
+    "renameHint": "重命名后，你的公司需要重新验证。"
   },
   "pause": {
     "notice": "新面试暂时已暂停：无法开始或创建。已开始的面试可以完成。请稍后再来。"

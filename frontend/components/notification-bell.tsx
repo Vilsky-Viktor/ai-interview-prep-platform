@@ -32,6 +32,9 @@ function useNotificationText() {
       topic: data.topic ?? "",
       email: data.email ?? "",
       grade: data.grade ?? "none",
+      name: data.name ?? "",
+      domain: data.domain ?? "",
+      reason: data.reason ?? "none",
       // How many came together, for the kinds the service groups.
       count: typeof data.count === "number" ? data.count : 1,
       credits:

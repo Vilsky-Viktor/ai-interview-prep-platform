@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 
 import { CompanyLogo } from "@/components/company/company-logo"
 import { RemoveCompany } from "@/components/company/remove-company"
+import { PendingBadge } from "@/components/company/pending-badge"
 import { VerifiedBadge } from "@/components/company/verified-badge"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -71,6 +72,9 @@ export function CompanyList({ initial }: { initial: Company[] }) {
                   domain={company.verified_domain}
                   className="size-5"
                 />
+              )}
+              {company.verification_status === "pending" && (
+                <PendingBadge className="size-5" />
               )}
               {company.role === "owner" && (
                 <Tooltip>

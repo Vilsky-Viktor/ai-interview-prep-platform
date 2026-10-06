@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "Einstellungen",
-    "signIn": "Melde dich an, um deine Einstellungen zu ändern.",
     "language": "Sprache",
     "languageNote": "Für die Oberfläche und die Antworten des Tutors sowie die Sprache, mit der neue Kits und Interviews beginnen. Du kannst sie in jeder unterstützten Sprache erstellen.",
     "languageFailed": "Die Sprache konnte nicht geändert werden. Bitte versuche es erneut.",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "Wartungsmodus einschalten?",
     "maintenanceRunning": "{count, plural, =0 {Gerade ist kein Kandidat im Interview.} other {Kandidaten gerade im Interview: #. Sie können dabei Zeit verlieren.}}",
     "maintenanceRunningUnknown": "Die Kandidaten im Interview konnten nicht gezählt werden. Wer gerade eins macht, kann Zeit verlieren.",
-    "maintenanceTurnOn": "Einschalten"
+    "maintenanceTurnOn": "Einschalten",
+    "verification": "Verifizierung",
+    "noVerifications": "Noch hat kein Unternehmen eine Verifizierung angefragt.",
+    "approve": "Freigeben",
+    "decline": "Ablehnen",
+    "declineTitle": "„{name}“ ablehnen?",
+    "declineText": "Die Inhaber und Admins bekommen eine Benachrichtigung mit deiner Begründung, falls du eine angibst. Sie können erneut anfragen.",
+    "declineReason": "Begründung (optional)",
+    "declinedBecause": "Begründung: {reason}",
+    "verificationStatus": {
+      "pending": "wartet auf Prüfung",
+      "approved": "freigegeben",
+      "declined": "abgelehnt"
+    },
+    "requestChanged": "Diese Anfrage hat sich geändert; prüfe sie erneut."
   },
   "templates": {
     "title": "Vorlagen",
@@ -274,7 +287,6 @@
     "endsOne": "Damit endet das Interview.",
     "unscored": "{count, plural, one {# unbeantwortete Frage wird nicht gewertet} other {# unbeantwortete Fragen werden nicht gewertet}}.",
     "section": "Abschnitt {number} von {count}",
-    "signIn": "Melde dich an, um dieses Interview fortzusetzen.",
     "missing": "Diese Sitzung existiert nicht.",
     "done": "Du hast das Interview beendet. Viel Erfolg!",
     "title": "Interview"
@@ -294,7 +306,6 @@
     "topicsReady": "{ready} von {count, plural, one {# Thema} other {# Themen}} fertig",
     "reviewFailed": "Deine Prüfung konnte nicht gesendet werden. Bitte versuche es erneut.",
     "retryFailed": "Die Generierung konnte nicht wiederholt werden. Bitte versuche es erneut.",
-    "signIn": "Melde dich an, um diese Generierung zu sehen.",
     "missing": "Diese Generierung existiert nicht.",
     "cancelled": "Diese Generierung wurde abgebrochen.",
     "failed": "Die Generierung ist fehlgeschlagen.",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "Unternehmen",
-    "signInInterviews": "Melde dich an, um die Interviews des Unternehmens zu sehen.",
-    "signInTeam": "Melde dich an, um das Team des Unternehmens zu sehen.",
-    "signInReferrals": "Melde dich an, um den Einladungslink des Unternehmens zu sehen.",
     "empty": "Noch keine Unternehmen.",
     "owner": "Inhaber",
     "interviewCount": "{count, plural, one {# Interview} other {# Interviews}}",
@@ -350,7 +358,6 @@
     "name": "Name des Unternehmens",
     "create": "Erstellen",
     "createFailed": "Das Unternehmen konnte nicht erstellt werden. Bitte versuche es erneut.",
-    "signInJoin": "Melde dich mit der E-Mail-Adresse aus der Einladung an, um diesem Unternehmen beizutreten.",
     "open": "Unternehmen öffnen",
     "join": "Unternehmen beitreten",
     "creditsLeft": "{count, plural, one {Credit} other {Credits}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "Melde dich mit der E-Mail-Adresse aus der Einladung an, um dieses Interview zu absolvieren.",
     "invitedYou": "<b>{company}</b> lädt dich zu einem Interview ein.",
     "fallbackTitle": "ein Interview",
     "timePerQuestion": "Zeit pro Frage:",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "Aufladen",
     "intro": "Für $1 gibt es 100 Credits, und Credits verfallen nie.",
-    "signIn": "Melde dich an, um deine Credits aufzuladen.",
     "companies": "Credits der Unternehmen",
     "companiesNote": "Für die Kandidaten jedes Unternehmens.",
     "noCompany": "Credits gehören einem Unternehmen. Erstelle zuerst dein Unternehmen und lade es dann hier auf.",
@@ -808,7 +813,9 @@
       "candidate_finished": "{count, plural, one {{email} hat „{title}“ abgeschlossen{grade, select, none {.} other {: {grade} %.}}} other {# Kandidaten haben „{title}“ abgeschlossen.}}",
       "invite_undelivered": "{count, plural, one {Die Einladung an {email} für „{title}“ wurde nicht zugestellt.} other {# Einladungen für „{title}“ wurden nicht zugestellt.}}",
       "interview_ready": "Das Interview „{title}“ ist fertig.",
-      "interview_cancelled": "{title, select, none {Ein Interview} other {Das Interview „{title}“}} wurde abgebrochen: Die Themenprüfung hat zu lange gewartet."
+      "interview_cancelled": "{title, select, none {Ein Interview} other {Das Interview „{title}“}} wurde abgebrochen: Die Themenprüfung hat zu lange gewartet.",
+      "verification_approved": "„{name}“ ist für {domain} verifiziert.",
+      "verification_declined": "{reason, select, none {Die Verifizierung von „{name}“ wurde abgelehnt.} other {Die Verifizierung von „{name}“ wurde abgelehnt: {reason}}}"
     }
   },
   "report": {
@@ -846,7 +853,6 @@
     "grade": "der Fragen richtig",
     "notFinished": "nicht beendet",
     "noRounds": "Noch keine Runden.",
-    "signIn": "Melde dich an, um deine Übungsrunden zu sehen.",
     "startFailed": "Die Übung konnte nicht gestartet werden. Bitte versuche es erneut.",
     "gradeLabel": "Note",
     "questions": "{count, plural, one {# Frage} other {# Fragen}}",
@@ -860,12 +866,18 @@
     "verify": "Verifizieren",
     "verified": "Verifiziert: {domain}",
     "title": "Unternehmen verifizieren",
-    "text": "Gib die Website des Unternehmens ein. Es ist verifiziert, sobald sich ein Inhaber oder Admin mit einer geschäftlichen E-Mail dieser Domain anmeldet, z. B. you@acme.com: sofort, wenn du das bist.",
+    "text": "Gib die Website des Unternehmens ein. Sobald sich ein Inhaber oder Admin mit einer geschäftlichen E-Mail dieser Domain anmeldet, z. B. you@acme.com (sofort, wenn du das bist), prüfen wir das Unternehmen und vergeben das Abzeichen.",
     "website": "Website des Unternehmens",
     "save": "Speichern",
     "done": "Verifiziert: {domain}",
-    "pending": "Gespeichert. Verifiziert, sobald sich ein Inhaber oder Admin mit einer E-Mail von {domain} anmeldet.",
-    "failed": "Die Website konnte nicht gespeichert werden."
+    "pending": "Gespeichert. Zur Prüfung gesendet, sobald sich ein Inhaber oder Admin mit einer E-Mail von {domain} anmeldet.",
+    "failed": "Die Website konnte nicht gespeichert werden.",
+    "submitted": "Wartet auf Prüfung. Du bekommst eine Benachrichtigung, sobald sie erledigt ist.",
+    "waitingEmail": "Wartet darauf, dass sich ein Inhaber oder Admin mit einer E-Mail von {domain} anmeldet.",
+    "declined": "{reason, select, none {Abgelehnt.} other {Abgelehnt: {reason}}}",
+    "tryAgain": "Ändere den Namen oder die Website des Unternehmens, um es erneut prüfen zu lassen, oder <contact>schreib uns</contact>.",
+    "pendingBadge": "Verifizierung ausstehend",
+    "renameHint": "Eine Umbenennung schickt dein Unternehmen erneut zur Verifizierung."
   },
   "pause": {
     "notice": "Neue Interviews sind gerade pausiert: Sie können weder gestartet noch erstellt werden. Ein schon begonnenes Interview kann beendet werden. Bitte schau später wieder vorbei."

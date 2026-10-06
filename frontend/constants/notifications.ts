@@ -1,4 +1,6 @@
 import {
+  BadgeCheckIcon,
+  BadgeXIcon,
   DollarSignIcon,
   FlagIcon,
   MailWarningIcon,
@@ -30,4 +32,6 @@ export const NOTIFICATION_LOOKS: Record<
   invite_undelivered: { icon: MailWarningIcon, alert: true },
   interview_ready: { icon: PackageCheckIcon, alert: false },
   interview_cancelled: { icon: XCircleIcon, alert: true },
+  verification_approved: { icon: BadgeCheckIcon, alert: false },
+  verification_declined: { icon: BadgeXIcon, alert: true },
 }

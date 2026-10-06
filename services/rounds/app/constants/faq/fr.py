@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Que signifie la coche de vérification ?",
-        "answer": "Qu'un propriétaire ou un administrateur de l'entreprise s'est connecté avec un e-mail professionnel sur le site de l'entreprise, comme vous@acme.com. Ajoutez le site avec Vérifier dans l'en-tête de votre entreprise ; les services d'e-mail gratuits ne comptent pas. La coche s'affiche à côté du nom de votre entreprise, y compris dans les invitations.",
+        "answer": "Qu'un propriétaire ou un administrateur de l'entreprise s'est connecté avec un e-mail professionnel sur le site de l'entreprise, comme vous@acme.com, puis que notre équipe a examiné l'entreprise. Ajoutez le site avec Vérifier dans l'en-tête de votre entreprise ; les services d'e-mail gratuits ne comptent pas. Tant que l'examen est en attente, votre équipe voit une horloge à côté du nom, et renommer l'entreprise la renvoie en examen. La coche s'affiche à côté du nom de votre entreprise, y compris dans les invitations.",
     },
     {
         "key": "languages",

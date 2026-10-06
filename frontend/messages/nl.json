@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "Instellingen",
-    "signIn": "Log in om je instellingen te wijzigen.",
     "language": "Taal",
     "languageNote": "Voor de interface en de antwoorden van de tutor, en de taal waarin nieuwe kits en sollicitatiegesprekken beginnen. Je kunt ze in elke beschikbare taal genereren.",
     "languageFailed": "De taal kon niet worden gewijzigd. Probeer het opnieuw.",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "Onderhoudsmodus aanzetten?",
     "maintenanceRunning": "{count, plural, =0 {Er is nu geen kandidaat in een interview.} other {Kandidaten nu in een interview: #. Zij kunnen tijd verliezen.}}",
     "maintenanceRunningUnknown": "Kon de kandidaten die nu in een interview zitten niet tellen. Wie dat doet, kan tijd verliezen.",
-    "maintenanceTurnOn": "Aanzetten"
+    "maintenanceTurnOn": "Aanzetten",
+    "verification": "Verificatie",
+    "noVerifications": "Nog geen bedrijf heeft om verificatie gevraagd.",
+    "approve": "Goedkeuren",
+    "decline": "Afwijzen",
+    "declineTitle": "“{name}” afwijzen?",
+    "declineText": "De eigenaren en beheerders krijgen een melding met je reden, als je die geeft. Ze kunnen het opnieuw vragen.",
+    "declineReason": "Reden (optioneel)",
+    "declinedBecause": "Reden: {reason}",
+    "verificationStatus": {
+      "pending": "wacht op beoordeling",
+      "approved": "goedgekeurd",
+      "declined": "afgewezen"
+    },
+    "requestChanged": "Dit verzoek is gewijzigd; controleer het opnieuw."
   },
   "templates": {
     "title": "Sjablonen",
@@ -274,7 +287,6 @@
     "endsOne": "Dit beëindigt het gesprek.",
     "unscored": "{count, plural, one {# onbeantwoorde vraag wordt niet beoordeeld} other {# onbeantwoorde vragen worden niet beoordeeld}}.",
     "section": "Onderdeel {number} van {count}",
-    "signIn": "Log in om dit gesprek voort te zetten.",
     "missing": "Deze sessie bestaat niet.",
     "done": "Je hebt het gesprek afgerond. Succes!",
     "title": "Sollicitatiegesprek"
@@ -294,7 +306,6 @@
     "topicsReady": "{ready} van {count, plural, one {# onderwerp} other {# onderwerpen}} klaar",
     "reviewFailed": "Je controle kon niet worden verzonden. Probeer het opnieuw.",
     "retryFailed": "Het genereren kon niet opnieuw worden geprobeerd. Probeer het opnieuw.",
-    "signIn": "Log in om dit genereren te zien.",
     "missing": "Dit genereren bestaat niet.",
     "cancelled": "Dit genereren is geannuleerd.",
     "failed": "Genereren mislukt.",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "Bedrijven",
-    "signInInterviews": "Log in om de sollicitatiegesprekken van het bedrijf te zien.",
-    "signInTeam": "Log in om het team van het bedrijf te zien.",
-    "signInReferrals": "Log in om de uitnodigingslink van het bedrijf te zien.",
     "empty": "Nog geen bedrijven.",
     "owner": "Eigenaar",
     "interviewCount": "{count, plural, one {# sollicitatiegesprek} other {# sollicitatiegesprekken}}",
@@ -350,7 +358,6 @@
     "name": "Bedrijfsnaam",
     "create": "Aanmaken",
     "createFailed": "Het bedrijf kon niet worden aangemaakt. Probeer het opnieuw.",
-    "signInJoin": "Log in met het e-mailadres van de uitnodiging om lid te worden van dit bedrijf.",
     "open": "Bedrijf openen",
     "join": "Lid worden van het bedrijf",
     "creditsLeft": "{count, plural, one {credit} other {credits}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "Log in met het e-mailadres van de uitnodiging om dit gesprek te doen.",
     "invitedYou": "<b>{company}</b> nodigt je uit voor een sollicitatiegesprek.",
     "fallbackTitle": "een sollicitatiegesprek",
     "timePerQuestion": "Tijd per vraag:",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "Opwaarderen",
     "intro": "Voor $1 krijg je 100 credits, en credits verlopen nooit.",
-    "signIn": "Log in om je credits op te waarderen.",
     "companies": "Credits van bedrijven",
     "companiesNote": "Voor de kandidaten van elk bedrijf.",
     "noCompany": "Credits horen bij een bedrijf. Maak eerst je bedrijf aan en waardeer het dan hier op.",
@@ -804,7 +809,9 @@
       "candidate_finished": "{count, plural, one {{email} heeft “{title}” afgerond{grade, select, none {.} other {: {grade}%.}}} other {# kandidaten hebben “{title}” afgerond.}}",
       "invite_undelivered": "{count, plural, one {De uitnodiging voor “{title}” aan {email} is niet bezorgd.} other {# uitnodigingen voor “{title}” zijn niet bezorgd.}}",
       "interview_ready": "Het sollicitatiegesprek “{title}” is klaar.",
-      "interview_cancelled": "{title, select, none {Een sollicitatiegesprek} other {Het sollicitatiegesprek “{title}”}} is geannuleerd: de controle van de onderwerpen bleef te lang liggen."
+      "interview_cancelled": "{title, select, none {Een sollicitatiegesprek} other {Het sollicitatiegesprek “{title}”}} is geannuleerd: de controle van de onderwerpen bleef te lang liggen.",
+      "verification_approved": "“{name}” is geverifieerd voor {domain}.",
+      "verification_declined": "{reason, select, none {De verificatie van “{name}” is afgewezen.} other {De verificatie van “{name}” is afgewezen: {reason}}}"
     }
   },
   "report": {
@@ -842,7 +849,6 @@
     "grade": "van de vragen goed",
     "notFinished": "niet afgerond",
     "noRounds": "Nog geen rondes.",
-    "signIn": "Log in om je oefenrondes te zien.",
     "startFailed": "Het oefenen kon niet worden gestart. Probeer het opnieuw.",
     "gradeLabel": "Cijfer",
     "questions": "{count, plural, one {# vraag} other {# vragen}}",
@@ -856,12 +862,18 @@
     "verify": "Verifiëren",
     "verified": "Geverifieerd: {domain}",
     "title": "Bedrijf verifiëren",
-    "text": "Voer de website van het bedrijf in. Het is geverifieerd zodra een eigenaar of beheerder inlogt met een zakelijk e-mailadres daarop, zoals you@acme.com: meteen, als jij dat bent.",
+    "text": "Vul de website van het bedrijf in. Zodra een eigenaar of beheerder inlogt met een werkmail op dat domein, zoals you@acme.com (meteen als jij dat bent), beoordelen we het bedrijf en voegen we de badge toe.",
     "website": "Website van het bedrijf",
     "save": "Opslaan",
     "done": "Geverifieerd: {domain}",
-    "pending": "Opgeslagen. Geverifieerd zodra een eigenaar of beheerder inlogt met een e-mailadres op {domain}.",
-    "failed": "De website kon niet worden opgeslagen."
+    "pending": "Opgeslagen. Wordt ter beoordeling verstuurd zodra een eigenaar of beheerder inlogt met een e-mailadres op {domain}.",
+    "failed": "De website kon niet worden opgeslagen.",
+    "submitted": "Wacht op beoordeling. Je krijgt een melding zodra het is gecontroleerd.",
+    "waitingEmail": "Wacht tot een eigenaar of beheerder inlogt met een e-mailadres op {domain}.",
+    "declined": "{reason, select, none {Afgewezen.} other {Afgewezen: {reason}}}",
+    "tryAgain": "Wijzig de naam of website van het bedrijf om het opnieuw te laten beoordelen, of <contact>neem contact met ons op</contact>.",
+    "pendingBadge": "Verificatie in behandeling",
+    "renameHint": "Een nieuwe naam stuurt je bedrijf opnieuw ter verificatie."
   },
   "pause": {
     "notice": "Nieuwe sollicitatiegesprekken zijn voorlopig gepauzeerd: ze kunnen niet worden gestart of gemaakt. Een gesprek dat al is begonnen, kan worden afgemaakt. Kom later terug."

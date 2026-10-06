@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Dấu xác minh có nghĩa là gì?",
-        "answer": "Nghĩa là chủ sở hữu hoặc quản trị viên của công ty đã đăng nhập bằng email công việc trên website của công ty, như you@acme.com. Thêm website bằng nút Xác minh ở phần đầu trang công ty; dịch vụ email miễn phí không được tính. Dấu xác minh hiện cạnh tên công ty của bạn, kể cả trong lời mời.",
+        "answer": "Nghĩa là chủ sở hữu hoặc quản trị viên của công ty đã đăng nhập bằng email công việc trên website của công ty, như you@acme.com, và sau đó đội ngũ của chúng tôi đã xem xét công ty. Thêm website bằng nút Xác minh ở phần đầu trang công ty; dịch vụ email miễn phí không được tính. Trong khi chờ xem xét, nhóm của bạn thấy biểu tượng đồng hồ cạnh tên, và đổi tên công ty sẽ gửi công ty đi xem xét lại. Dấu xác minh hiện cạnh tên công ty của bạn, kể cả trong lời mời.",
     },
     {
         "key": "languages",

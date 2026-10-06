@@ -1,3 +1,5 @@
+from enum import StrEnum
+
 # Mail services anyone can sign up to: an address there says nothing about a company. Matched
 # against an address's registrable domain (mail.yahoo.co.uk is yahoo.co.uk).
 FREE_EMAIL_DOMAINS = frozenset(
@@ -80,3 +82,25 @@ FREE_EMAIL_NAMES = frozenset(
 MAX_WEBSITE_LENGTH = 253
 NOT_A_WEBSITE = "Enter the company's website, like acme.com"
 FREE_DOMAIN = "That's a free mail service, not a company's website."
+
+
+class VerificationStatus(StrEnum):
+    """Where a company's verification stands. A work email on the website's domain is the
+    proof; a superadmin then approves or declines it, and only approved shows the badge."""
+
+    NONE = "none"
+    WAITING_EMAIL = "waiting_email"
+    PENDING = "pending"
+    APPROVED = "approved"
+    DECLINED = "declined"
+
+
+# A rename takes the badge away until a superadmin reviews the new name.
+# Re-saving the same website changes nothing for these: a declined company goes for review
+# again only after its name or website changes.
+REVIEWED = (VerificationStatus.PENDING, VerificationStatus.APPROVED, VerificationStatus.DECLINED)
+# A rename sends these back for review.
+RENAME_REVIEWED = (VerificationStatus.PENDING, VerificationStatus.APPROVED)
+DECIDED = (VerificationStatus.APPROVED, VerificationStatus.DECLINED)
+MAX_DECLINE_REASON_LENGTH = 500
+REQUEST_CHANGED = "This request changed; check it again."

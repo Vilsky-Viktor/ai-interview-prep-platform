@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Apa arti tanda centang terverifikasi?",
-        "answer": "Artinya pemilik atau admin perusahaan masuk dengan email kerja di domain situs perusahaan, misalnya you@acme.com. Tambahkan situsnya lewat Verifikasi di header perusahaanmu; layanan email gratis tidak dihitung. Tanda centang tampil di samping nama perusahaanmu, termasuk di undangan.",
+        "answer": "Artinya pemilik atau admin perusahaan masuk dengan email kerja di domain situs perusahaan, misalnya you@acme.com, lalu tim kami meninjau perusahaan tersebut. Tambahkan situsnya lewat Verifikasi di header perusahaanmu; layanan email gratis tidak dihitung. Selama peninjauan masih tertunda, timmu melihat ikon jam di samping nama, dan mengganti nama perusahaan mengirimnya untuk ditinjau lagi. Tanda centang tampil di samping nama perusahaanmu, termasuk di undangan.",
     },
     {
         "key": "languages",

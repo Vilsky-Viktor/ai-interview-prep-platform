@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Cosa significa la spunta di verifica?",
-        "answer": "Che un proprietario o un amministratore dell'azienda ha effettuato l'accesso con un'email di lavoro sul sito dell'azienda, ad esempio tu@acme.com. Aggiungi il sito con Verifica nell'intestazione della tua azienda; i servizi email gratuiti non contano. La spunta compare accanto al nome della tua azienda, anche negli inviti.",
+        "answer": "Che un proprietario o un amministratore dell'azienda ha effettuato l'accesso con un'email di lavoro sul sito dell'azienda, ad esempio tu@acme.com, e che poi il nostro team ha esaminato l'azienda. Aggiungi il sito con Verifica nell'intestazione della tua azienda; i servizi email gratuiti non contano. Finché la revisione è in attesa, il tuo team vede un orologio accanto al nome, e rinominare l'azienda la rimanda in revisione. La spunta compare accanto al nome della tua azienda, anche negli inviti.",
     },
     {
         "key": "languages",

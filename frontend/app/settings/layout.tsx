@@ -28,7 +28,7 @@ export default async function SettingsLayout({
       {signedIn ? (
         <div className="space-y-8">{children}</div>
       ) : (
-        <SignInPrompt message={t("signIn")} />
+        <SignInPrompt />
       )}
     </main>
   )

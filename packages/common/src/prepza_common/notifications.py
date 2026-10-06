@@ -26,6 +26,9 @@ class NotificationKind(StrEnum):
     INVITE_UNDELIVERED = "invite_undelivered"
     INTERVIEW_READY = "interview_ready"
     INTERVIEW_CANCELLED = "interview_cancelled"
+    # A superadmin approved or declined the company's verification.
+    VERIFICATION_APPROVED = "verification_approved"
+    VERIFICATION_DECLINED = "verification_declined"
 
 
 # Who a notification is for: one user, or every member of a company.

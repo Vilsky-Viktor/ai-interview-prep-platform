@@ -6,6 +6,7 @@ from pydantic import BaseModel, EmailStr, Field
 
 from app.constants.invites import MAX_COMPANY_NAME_LENGTH
 from app.constants.roles import Role
+from app.constants.verification import VerificationStatus
 
 
 class CompanyCreate(BaseModel):
@@ -47,9 +48,12 @@ class CompanyOut(BaseModel):
     interview_count: int
     # The logo's address on the site; None until one is set.
     logo_url: str | None = None
-    # The website's domain, and the same once verified by an admin's work email (the badge).
+    # The website's domain, and the same once a superadmin approved it (the badge); where its
+    # verification stands, and why it was declined, when the superadmin said.
     website_domain: str | None = None
     verified_domain: str | None = None
+    verification_status: VerificationStatus = VerificationStatus.NONE
+    decline_reason: str | None = None
     created_at: datetime
 
 

@@ -1,7 +1,6 @@
 {
   "settings": {
     "title": "Ajustes",
-    "signIn": "Inicia sesión para cambiar tus ajustes.",
     "language": "Idioma",
     "languageNote": "Para la interfaz y las respuestas del tutor, y el idioma en que empiezan los nuevos kits y entrevistas. Puedes generarlos en cualquier idioma disponible.",
     "languageFailed": "No se pudo cambiar el idioma. Inténtalo de nuevo.",
@@ -153,7 +152,21 @@
     "maintenanceConfirmTitle": "¿Activar el modo de mantenimiento?",
     "maintenanceRunning": "{count, plural, =0 {Ningún candidato está en una entrevista ahora.} other {Candidatos en una entrevista ahora: #. Pueden perder tiempo en ella.}}",
     "maintenanceRunningUnknown": "No se pudo contar a los candidatos en una entrevista ahora. Quienes lo estén pueden perder tiempo.",
-    "maintenanceTurnOn": "Activar"
+    "maintenanceTurnOn": "Activar",
+    "verification": "Verificación",
+    "noVerifications": "Ninguna empresa ha pedido la verificación todavía.",
+    "approve": "Aprobar",
+    "decline": "Rechazar",
+    "declineTitle": "¿Rechazar «{name}»?",
+    "declineText": "Sus propietarios y administradores reciben una notificación con tu motivo, si lo das. Pueden volver a pedirla.",
+    "declineReason": "Motivo (opcional)",
+    "declinedBecause": "Motivo: {reason}",
+    "verificationStatus": {
+      "pending": "pendiente de revisión",
+      "approved": "aprobada",
+      "declined": "rechazada"
+    },
+    "requestChanged": "Esta solicitud ha cambiado; revísala de nuevo."
   },
   "templates": {
     "title": "Plantillas",
@@ -274,7 +287,6 @@
     "endsOne": "Esto termina la entrevista.",
     "unscored": "{count, plural, one {# pregunta sin responder no se puntuará} other {# preguntas sin responder no se puntuarán}}.",
     "section": "Sección {number} de {count}",
-    "signIn": "Inicia sesión para continuar esta entrevista.",
     "missing": "Esta sesión no existe.",
     "done": "Terminaste la entrevista. ¡Mucha suerte!",
     "title": "Entrevista"
@@ -294,7 +306,6 @@
     "topicsReady": "{ready} de {count, plural, one {# tema} other {# temas}} listos",
     "reviewFailed": "No se pudo enviar tu revisión. Inténtalo de nuevo.",
     "retryFailed": "No se pudo reintentar la generación. Inténtalo de nuevo.",
-    "signIn": "Inicia sesión para ver esta generación.",
     "missing": "Esta generación no existe.",
     "cancelled": "Esta generación se canceló.",
     "failed": "La generación falló.",
@@ -336,9 +347,6 @@
   },
   "company": {
     "title": "Empresas",
-    "signInInterviews": "Inicia sesión para ver las entrevistas de la empresa.",
-    "signInTeam": "Inicia sesión para ver el equipo de la empresa.",
-    "signInReferrals": "Inicia sesión para ver el enlace de invitación de la empresa.",
     "empty": "Aún no hay empresas.",
     "owner": "Propietario",
     "interviewCount": "{count, plural, one {# entrevista} other {# entrevistas}}",
@@ -350,7 +358,6 @@
     "name": "Nombre de la empresa",
     "create": "Crear",
     "createFailed": "No se pudo crear la empresa. Inténtalo de nuevo.",
-    "signInJoin": "Inicia sesión con el correo de la invitación para unirte a esta empresa.",
     "open": "Abrir empresa",
     "join": "Unirse a la empresa",
     "creditsLeft": "{count, plural, one {crédito} other {créditos}}",
@@ -467,7 +474,6 @@
     }
   },
   "invite": {
-    "signIn": "Inicia sesión con el correo de la invitación para hacer esta entrevista.",
     "invitedYou": "<b>{company}</b> te invita a una entrevista.",
     "fallbackTitle": "una entrevista",
     "timePerQuestion": "Tiempo por pregunta:",
@@ -589,7 +595,6 @@
   "topUp": {
     "title": "Recargar",
     "intro": "$1 equivale a 100 créditos y los créditos no caducan.",
-    "signIn": "Inicia sesión para recargar tus créditos.",
     "companies": "Créditos de empresas",
     "companiesNote": "Para los candidatos de cada empresa.",
     "noCompany": "Los créditos pertenecen a una empresa. Crea primero tu empresa y luego recárgala aquí.",
@@ -808,7 +813,9 @@
       "candidate_finished": "{count, plural, one {{email} terminó «{title}»{grade, select, none {.} other {: {grade} %.}}} other {# candidatos terminaron «{title}».}}",
       "invite_undelivered": "{count, plural, one {No se pudo entregar la invitación a {email} para «{title}».} other {No se pudieron entregar # invitaciones para «{title}».}}",
       "interview_ready": "La entrevista «{title}» está lista.",
-      "interview_cancelled": "{title, select, none {Se canceló una entrevista} other {Se canceló la entrevista «{title}»}}: la revisión de sus temas esperó demasiado."
+      "interview_cancelled": "{title, select, none {Se canceló una entrevista} other {Se canceló la entrevista «{title}»}}: la revisión de sus temas esperó demasiado.",
+      "verification_approved": "«{name}» está verificada para {domain}.",
+      "verification_declined": "{reason, select, none {Se ha rechazado la verificación de «{name}».} other {Se ha rechazado la verificación de «{name}»: {reason}}}"
     }
   },
   "report": {
@@ -846,7 +853,6 @@
     "grade": "de las preguntas correctas",
     "notFinished": "sin terminar",
     "noRounds": "Aún no hay rondas.",
-    "signIn": "Inicia sesión para ver tus rondas de práctica.",
     "startFailed": "No se pudo iniciar la práctica. Inténtalo de nuevo.",
     "gradeLabel": "Nota",
     "questions": "{count, plural, one {# pregunta} other {# preguntas}}",
@@ -860,12 +866,18 @@
     "verify": "Verificar",
     "verified": "Verificada: {domain}",
     "title": "Verificar empresa",
-    "text": "Introduce el sitio web de la empresa. Se verifica cuando un propietario o administrador inicia sesión con un correo de trabajo de ese dominio, como you@acme.com: al instante si eres tú.",
+    "text": "Introduce el sitio web de la empresa. Cuando un propietario o administrador inicie sesión con un correo de trabajo de ese dominio, como you@acme.com (al instante si eres tú), revisamos la empresa y añadimos la insignia.",
     "website": "Sitio web de la empresa",
     "save": "Guardar",
     "done": "Verificada: {domain}",
-    "pending": "Guardado. Se verificará cuando un propietario o administrador inicie sesión con un correo de {domain}.",
-    "failed": "No se pudo guardar el sitio web."
+    "pending": "Guardado. Se enviará a revisión cuando un propietario o administrador inicie sesión con un correo de {domain}.",
+    "failed": "No se pudo guardar el sitio web.",
+    "submitted": "Pendiente de revisión. Recibirás una notificación cuando se compruebe.",
+    "waitingEmail": "Esperando a que un propietario o administrador inicie sesión con un correo de {domain}.",
+    "declined": "{reason, select, none {Rechazada.} other {Rechazada: {reason}}}",
+    "tryAgain": "Cambia el nombre o el sitio web de la empresa para enviarla de nuevo a revisión, o <contact>escríbenos</contact>.",
+    "pendingBadge": "Verificación pendiente",
+    "renameHint": "Cambiar el nombre envía tu empresa de nuevo a verificación."
   },
   "pause": {
     "notice": "Las entrevistas nuevas están en pausa por ahora: no se pueden empezar ni crear. Una entrevista ya empezada se puede terminar. Vuelve más tarde."

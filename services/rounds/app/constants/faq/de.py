@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Was bedeutet das Verifiziert-Häkchen?",
-        "answer": "Dass sich ein Inhaber oder Admin des Unternehmens mit einer Arbeits-E-Mail auf der Website des Unternehmens angemeldet hat, etwa du@acme.com. Füge die Website über Verifizieren im Kopfbereich deines Unternehmens hinzu; kostenlose E-Mail-Dienste zählen nicht. Das Häkchen erscheint neben dem Namen deines Unternehmens, auch in Einladungen.",
+        "answer": "Dass sich ein Inhaber oder Admin des Unternehmens mit einer Arbeits-E-Mail auf der Website des Unternehmens angemeldet hat, etwa du@acme.com, und unser Team das Unternehmen danach geprüft hat. Füge die Website über Verifizieren im Kopfbereich deines Unternehmens hinzu; kostenlose E-Mail-Dienste zählen nicht. Solange die Prüfung aussteht, sieht dein Team eine Uhr neben dem Namen, und eine Umbenennung schickt das Unternehmen erneut zur Prüfung. Das Häkchen erscheint neben dem Namen deines Unternehmens, auch in Einladungen.",
     },
     {
         "key": "languages",

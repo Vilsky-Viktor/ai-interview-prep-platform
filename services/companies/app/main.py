@@ -33,6 +33,7 @@ from app.routers import (
     reports,
     schedules,
     superadmin,
+    superadmin_verification,
     verification,
 )
 from app.storage.db import ping as ping_database
@@ -80,6 +81,7 @@ app.include_router(schedules.router)
 app.include_router(pause.router)
 app.include_router(maintenance.router)
 app.include_router(superadmin.router)
+app.include_router(superadmin_verification.router)
 
 
 @app.get("/health")
