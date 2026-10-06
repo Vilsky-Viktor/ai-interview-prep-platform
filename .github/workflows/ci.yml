@@ -141,7 +141,7 @@ jobs:
       - name: Smoke test
         run: |
           for attempt in $(seq 1 40); do
-            if ./scripts/tests/smoke.sh; then
+            if ./e2e_tests/smoke.sh; then
               exit 0
             fi
 
@@ -151,10 +151,10 @@ jobs:
           exit 1
       # Each service's tests/integration, against the stack's real Postgres and Redis.
       - name: Integration tests
-        run: ./scripts/tests/integration.sh
+        run: ./scripts/integration.sh
       # The signed-out pages in a real browser (Playwright's image), on desktop and phone sizes.
       - name: Page tests
-        run: ./scripts/tests/pages.sh
+        run: ./e2e_tests/pages.sh
       - name: Logs on failure
         if: failure()
         run: docker compose logs --tail 100

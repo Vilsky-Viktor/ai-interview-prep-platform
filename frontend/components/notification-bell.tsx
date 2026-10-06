@@ -120,7 +120,7 @@ export function NotificationBell() {
           with a thin, quiet scrollbar. */}
       <DropdownMenuContent
         align="end"
-        className="max-h-[min(26rem,70vh)] w-80 [scrollbar-width:thin] [scrollbar-color:var(--border)_transparent] p-2"
+        className="max-h-[min(26rem,70vh)] w-80 p-2"
       >
         {items.length === 0 && (
           <p className="px-3 py-6 text-center text-sm text-muted-foreground">

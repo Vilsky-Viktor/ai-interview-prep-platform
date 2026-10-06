@@ -120,7 +120,7 @@ export function TopicQuestions({
             getKey={(question) => question.id}
             // A question with its four answer options.
             estimateSize={200}
-            scrollClassName="max-h-[60vh] [scrollbar-width:thin] [scrollbar-color:var(--color-border)_transparent] overflow-y-auto rounded-xl border"
+            scrollClassName="max-h-[60vh] overflow-y-auto rounded-xl border"
             className="divide-y"
             renderItem={(question, index) => (
               <QuestionRow

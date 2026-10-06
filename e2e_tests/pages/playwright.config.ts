@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test"
 
-// Runs in Playwright's Docker image (scripts/tests/pages.sh). The browser keeps the site's own
+// Runs in Playwright's Docker image (e2e_tests/pages.sh). The browser keeps the site's own
 // address, so Next.js sees its usual origin; HOST_RULES points it at the gateway on the compose
 // network.
 export default defineConfig({

@@ -252,16 +252,25 @@ cd frontend && pnpm install && pnpm lint && pnpm typecheck
 cd frontend && pnpm api-types
 
 # Smoke test against a running stack
-./scripts/tests/smoke.sh
+./e2e_tests/smoke.sh
 
 # Integration tests: each service's tests/integration against the running stack's real Postgres
 # and Redis, in a "<service>_test" database created and dropped for the run
-./scripts/tests/integration.sh            # or: ./scripts/tests/integration.sh rounds library
+./scripts/integration.sh            # or: ./scripts/integration.sh rounds library
 
 # Browser tests of the signed-out pages (home, companies, pricing, terms, privacy, docs, FAQ, about,
 # contact, practice) on desktop and phone sizes, in Playwright's Docker image: no console errors, no sideways
 # scroll, the same page width everywhere, the footer at the end, lowercase titles
-./scripts/tests/pages.sh
+./e2e_tests/pages.sh
+
+# Browser tests of the signed-in pages, in the same Docker image, against the running stack. Users
+# sign in through "Continue with Google" and the Firebase Auth emulator's own sign-in page (local
+# only), the superadmin as the first address in SUPERADMIN_EMAILS. Every test makes throwaway users,
+# companies and interviews (made from local templates: no OpenAI): a company owner, a candidate taking
+# an interview, the team and a viewer, verification, the admin zone's pass rates, pause and
+# maintenance mode (turned off again afterwards), and the candidates' PDF report. Screenshots land in
+# e2e_tests/signed-in/test-results/screenshots
+./e2e_tests/signed-in.sh            # or: ./e2e_tests/signed-in.sh specs/b-candidate.spec.ts
 
 # Translations: every language has every key of en.json, with the same placeholders and plurals
 docker compose exec frontend pnpm check:messages
@@ -269,7 +278,7 @@ docker compose exec frontend pnpm check:messages
 # End-to-end, with a real generation (needs OPENAI_API_KEY; a few cents and a few minutes): a company
 # generates an interview and invites a candidate, who
 # takes it from the invite link; the company sees the scorecard and pays for that candidate
-python3 scripts/tests/e2e.py
+python3 e2e_tests/flow.py
 ```
 
 Model and prompt quality is tested offline with the prepared datasets, judge prompts and metrics in [evals/](evals/README.md).

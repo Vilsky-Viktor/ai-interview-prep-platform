@@ -6,7 +6,7 @@ and pays for that candidate. Users come from the Firebase Auth emulator. The can
 Resend's test address, which both Resend and mailpit accept; their invite link is read from the
 companies database, since Resend's test inbox can't be read.
 
-Usage: python3 scripts/tests/e2e.py   (standard library only)
+Usage: python3 e2e_tests/flow.py   (standard library only)
 """
 
 import json
@@ -32,7 +32,7 @@ def env(name: str) -> str:
     if os.getenv(name):
         return os.environ[name]
 
-    for line in (Path(__file__).resolve().parents[2] / ".env").read_text().splitlines():
+    for line in (Path(__file__).resolve().parents[1] / ".env").read_text().splitlines():
         if line.startswith(f"{name}="):
             return line.split("=", 1)[1].strip()
 

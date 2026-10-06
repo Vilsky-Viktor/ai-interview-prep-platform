@@ -134,7 +134,7 @@ jobs:
           deploy notifications-stream notifications
           deploy frontend frontend
       - name: Smoke test
-        run: ./scripts/tests/smoke.sh "${{ vars.SITE_URL }}"
+        run: ./e2e_tests/smoke.sh "${{ vars.SITE_URL }}"
 
   release:
     name: GitHub release

@@ -138,6 +138,23 @@
     @apply font-sans;
     scrollbar-gutter: stable;
   }
+  /* Every scrolling area, the page included, gets the same thin, quiet scrollbar: the border's
+     grey on a clear track. Older Safari reads the -webkit- rules instead. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background: var(--border);
+  }
   /* Kits and interviews can be in a right-to-left language (Arabic, Hebrew, Persian). What people
      read and type (questions, answer options, answers, tutor chat, text boxes; marked .bidi-auto)
      takes its direction and alignment from its own text, paragraph by paragraph. Titles and the

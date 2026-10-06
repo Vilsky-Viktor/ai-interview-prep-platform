@@ -1,0 +1,9 @@
+{
+  "name": "prepza-signed-in-tests",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "pg": "8.16.3"
+  }
+}
