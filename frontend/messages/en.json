@@ -130,7 +130,30 @@
     "deleteLabel": "Delete {title}",
     "deleteTitle": "Delete this template?",
     "deleteText": "Its topics and questions are deleted. Interviews companies already made from it stay.",
-    "deleteFailed": "Couldn't delete the template. Please try again."
+    "deleteFailed": "Couldn't delete the template. Please try again.",
+    "passRates": "Pass rates",
+    "controls": "Controls",
+    "noPassRates": "No interview has finished candidates yet.",
+    "outsideTriggers": "unusual pass rate",
+    "finished": "{count, plural, one {# finished} other {# finished}}",
+    "passed": "{percent}% passed",
+    "passMark": "passing grade {percent}%",
+    "averageGrade": "average {percent}%",
+    "timedOut": "{percent}% timed out",
+    "sortBy": {
+      "pass_rate": "Lowest pass rate first",
+      "finished": "Most finished first"
+    },
+    "pauseTitle": "Emergency pause",
+    "pauseText": "While it's on, nobody can start a new interview, practice round or preview, and no questions are generated, re-generated or checked. Candidates already in an interview can finish it.",
+    "pauseFailed": "Couldn't change the pause. Please try again.",
+    "maintenanceTitle": "Maintenance mode",
+    "maintenanceText": "While it's on, every page shows that prepza is under maintenance and the services refuse every request, except from superadmins. Payments, emails and scheduled jobs keep working.",
+    "maintenanceFailed": "Couldn't change maintenance mode. Please try again.",
+    "maintenanceConfirmTitle": "Turn on maintenance mode?",
+    "maintenanceRunning": "{count, plural, =0 {No candidate is in an interview right now.} one {# candidate is in an interview right now and may lose time on it.} other {# candidates are in an interview right now and may lose time on it.}}",
+    "maintenanceRunningUnknown": "Couldn't count the candidates in an interview right now. Any who are may lose time on it.",
+    "maintenanceTurnOn": "Turn on"
   },
   "templates": {
     "title": "Templates",
@@ -226,7 +249,8 @@
     "limit": "Question limit",
     "count": "{count, plural, one {question} other {questions}}",
     "loadFailed": "Couldn't load the questions.",
-    "yourAnswer": "your answer"
+    "yourAnswer": "your answer",
+    "aiWritten": "AI-written questions and answer keys can be wrong. Mark a wrong answer or re-generate."
   },
   "rounds": {
     "answered": "Answered",
@@ -828,5 +852,13 @@
     "done": "Verified: {domain}",
     "pending": "Saved. Verified once an owner or admin signs in with an email on {domain}.",
     "failed": "Couldn't save the website."
+  },
+  "pause": {
+    "notice": "New interviews are paused for now: they can't be started or created. An interview already started can be finished. Please come back later."
+  },
+  "maintenance": {
+    "title": "Under maintenance",
+    "text": "prepza is under maintenance. We'll be back soon.",
+    "notice": "Maintenance mode is on: only superadmins can use prepza right now."
   }
 }

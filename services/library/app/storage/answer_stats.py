@@ -77,7 +77,8 @@ async def record_answer(
 
         counted = (await with_sources(session, [question_id]))[question_id]
 
-        for answered in counted:
+        # Rows are always updated in the same order, so two events never wait on each other.
+        for answered in sorted(counted):
             await session.execute(
                 RECORD_ANSWER_SQL,
                 {
@@ -106,23 +107,31 @@ async def record_results(
 
         ids = [uuid.UUID(result["question_id"]) for result in results]
         sources = await with_sources(session, ids)
+        # Rows are always updated in the same order, so two events never wait on each other.
+        rows = sorted(
+            (
+                (answered, result)
+                for question_id, result in zip(ids, results)
+                for answered in sources[question_id]
+            ),
+            key=lambda row: row[0],
+        )
         counted = []
 
-        for question_id, result in zip(ids, results):
-            for answered in sources[question_id]:
-                await session.execute(
-                    RECORD_RESULT_SQL,
-                    {
-                        "question_id": answered,
-                        "question_text": result["question_text"],
-                        "strong": int(group == "strong"),
-                        "strong_correct": int(group == "strong" and result["correct"]),
-                        "weak": int(group == "weak"),
-                        "weak_correct": int(group == "weak" and result["correct"]),
-                        "timed_out": int(result["timed_out"]),
-                    },
-                )
-                counted.append(answered)
+        for answered, result in rows:
+            await session.execute(
+                RECORD_RESULT_SQL,
+                {
+                    "question_id": answered,
+                    "question_text": result["question_text"],
+                    "strong": int(group == "strong"),
+                    "strong_correct": int(group == "strong" and result["correct"]),
+                    "weak": int(group == "weak"),
+                    "weak_correct": int(group == "weak" and result["correct"]),
+                    "timed_out": int(result["timed_out"]),
+                },
+            )
+            counted.append(answered)
 
         await session.commit()
 

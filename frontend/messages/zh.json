@@ -130,7 +130,30 @@
     "deleteLabel": "删除 {title}",
     "deleteTitle": "删除此模板？",
     "deleteText": "其主题和题目将被删除。公司已基于它创建的面试会保留。",
-    "deleteFailed": "无法删除模板，请重试。"
+    "deleteFailed": "无法删除模板，请重试。",
+    "passRates": "通过率",
+    "controls": "控制",
+    "noPassRates": "还没有面试有候选人完成。",
+    "outsideTriggers": "通过率异常",
+    "finished": "{count, plural, other {# 人完成}}",
+    "passed": "{percent}% 通过",
+    "passMark": "及格线 {percent}%",
+    "averageGrade": "平均 {percent}%",
+    "timedOut": "{percent}% 超时",
+    "sortBy": {
+      "pass_rate": "通过率最低的在前",
+      "finished": "完成人数最多的在前"
+    },
+    "pauseTitle": "紧急暂停",
+    "pauseText": "开启期间，任何人都无法开始新的面试、练习轮或预览，也不会生成、重新生成或检查任何题目。已在面试中的候选人可以完成面试。",
+    "pauseFailed": "无法更改暂停状态，请重试。",
+    "maintenanceTitle": "维护模式",
+    "maintenanceText": "开启期间，每个页面都会显示 prepza 正在维护，除超级管理员外，服务会拒绝所有请求。付款、邮件和定时任务会继续运行。",
+    "maintenanceFailed": "无法更改维护模式，请重试。",
+    "maintenanceConfirmTitle": "开启维护模式？",
+    "maintenanceRunning": "{count, plural, =0 {当前没有候选人正在面试。} other {当前正在面试的候选人：# 位，他们可能会损失时间。}}",
+    "maintenanceRunningUnknown": "无法统计当前正在面试的候选人。正在面试的候选人可能会损失时间。",
+    "maintenanceTurnOn": "开启"
   },
   "templates": {
     "title": "模板",
@@ -226,7 +249,8 @@
     "limit": "题目上限",
     "count": "{count, plural, other {道题}}",
     "loadFailed": "无法加载题目。",
-    "yourAnswer": "你的答案"
+    "yourAnswer": "你的答案",
+    "aiWritten": "AI 编写的题目和答案可能有误。请标记错误答案或重新生成。"
   },
   "rounds": {
     "answered": "已回答",
@@ -819,5 +843,13 @@
     "done": "已验证：{domain}",
     "pending": "已保存。所有者或管理员使用 {domain} 的邮箱登录后即完成验证。",
     "failed": "无法保存网站。"
+  },
+  "pause": {
+    "notice": "新面试暂时已暂停：无法开始或创建。已开始的面试可以完成。请稍后再来。"
+  },
+  "maintenance": {
+    "title": "正在维护",
+    "text": "prepza 正在维护中，我们很快回来。",
+    "notice": "维护模式已开启：目前只有超级管理员可以使用 prepza。"
   }
 }

@@ -130,7 +130,30 @@
     "deleteLabel": "Usuń {title}",
     "deleteTitle": "Usunąć ten szablon?",
     "deleteText": "Jego tematy i pytania zostaną usunięte. Rozmowy, które firmy już z niego utworzyły, pozostaną.",
-    "deleteFailed": "Nie udało się usunąć szablonu. Spróbuj ponownie."
+    "deleteFailed": "Nie udało się usunąć szablonu. Spróbuj ponownie.",
+    "passRates": "Odsetki zaliczeń",
+    "controls": "Sterowanie",
+    "noPassRates": "Żadna rozmowa nie ma jeszcze kandydatów, którzy ją ukończyli.",
+    "outsideTriggers": "nietypowy odsetek zaliczeń",
+    "finished": "{count, plural, one {# ukończył} few {# ukończyło} many {# ukończyło} other {# ukończyło}}",
+    "passed": "{percent}% zaliczyło",
+    "passMark": "próg zaliczenia {percent}%",
+    "averageGrade": "średnio {percent}%",
+    "timedOut": "{percent}% po czasie",
+    "sortBy": {
+      "pass_rate": "Najniższy odsetek zaliczeń najpierw",
+      "finished": "Najwięcej ukończonych najpierw"
+    },
+    "pauseTitle": "Awaryjne wstrzymanie",
+    "pauseText": "Gdy jest włączone, nikt nie może rozpocząć nowej rozmowy, rundy ćwiczeniowej ani podglądu, a pytania nie są generowane, generowane ponownie ani sprawdzane. Kandydaci, którzy są już w trakcie rozmowy, mogą ją dokończyć.",
+    "pauseFailed": "Nie udało się zmienić wstrzymania. Spróbuj ponownie.",
+    "maintenanceTitle": "Tryb konserwacji",
+    "maintenanceText": "Gdy jest włączony, każda strona pokazuje, że prepza jest w trakcie konserwacji, a usługi odrzucają każde żądanie, z wyjątkiem superadminów. Płatności, e-maile i zaplanowane zadania działają dalej.",
+    "maintenanceFailed": "Nie udało się zmienić trybu konserwacji. Spróbuj ponownie.",
+    "maintenanceConfirmTitle": "Włączyć tryb konserwacji?",
+    "maintenanceRunning": "{count, plural, =0 {Żaden kandydat nie jest teraz w trakcie rozmowy.} other {Kandydaci w trakcie rozmowy: #. Mogą stracić czas.}}",
+    "maintenanceRunningUnknown": "Nie udało się policzyć kandydatów w trakcie rozmowy. Ci, którzy są, mogą stracić czas.",
+    "maintenanceTurnOn": "Włącz"
   },
   "templates": {
     "title": "Szablony",
@@ -226,7 +249,8 @@
     "limit": "Limit pytań",
     "count": "{count, plural, one {pytanie} few {pytania} many {pytań} other {pytania}}",
     "loadFailed": "Nie udało się wczytać pytań.",
-    "yourAnswer": "Twoja odpowiedź"
+    "yourAnswer": "Twoja odpowiedź",
+    "aiWritten": "Pytania i odpowiedzi pisane przez AI mogą być błędne. Oznacz złą odpowiedź lub wygeneruj ponownie."
   },
   "rounds": {
     "answered": "Odpowiedzi",
@@ -828,5 +852,13 @@
     "done": "Zweryfikowano: {domain}",
     "pending": "Zapisano. Weryfikacja nastąpi, gdy właściciel lub administrator zaloguje się adresem w domenie {domain}.",
     "failed": "Nie udało się zapisać strony."
+  },
+  "pause": {
+    "notice": "Nowe rozmowy są na razie wstrzymane: nie można ich rozpocząć ani utworzyć. Rozpoczętą już rozmowę można dokończyć. Wróć później."
+  },
+  "maintenance": {
+    "title": "Trwa konserwacja",
+    "text": "prepza jest w trakcie prac konserwacyjnych. Wkrótce wracamy.",
+    "notice": "Tryb konserwacji jest włączony: teraz z prepza mogą korzystać tylko superadmini."
   }
 }

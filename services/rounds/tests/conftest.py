@@ -33,3 +33,13 @@ from app.main import app
 def client():
     with TestClient(app) as client:
         yield client
+
+
+@pytest.fixture(autouse=True)
+def not_paused(monkeypatch):
+    """The pause switch lives in Redis, which tests don't have: off, unless a test turns it on."""
+
+    async def off(redis):
+        return False
+
+    monkeypatch.setattr("prepza_common.pause.is_paused", off)

@@ -134,7 +134,9 @@ async def unscored(interview_id) -> list[uuid.UUID]:
 
 
 async def save_results(results: dict[uuid.UUID, tuple[int | None, bool]]) -> None:
-    """Marks these candidates finished with their (grade, flagged)."""
+    """Stores these candidates' (grade, flagged). Their status is left alone: only
+    interview.finished marks an invite finished, as it settles the candidate's credits, so an
+    invite removed before that event still gets its hold released."""
     if not results:
         return
 
@@ -146,7 +148,7 @@ async def save_results(results: dict[uuid.UUID, tuple[int | None, bool]]) -> Non
                     CandidateInvite.id == invite_id,
                     CandidateInvite.status != InviteStatus.DELETED,
                 )
-                .values(status=InviteStatus.FINISHED, grade=grade, flagged=flagged)
+                .values(grade=grade, flagged=flagged)
             )
 
         await session.commit()

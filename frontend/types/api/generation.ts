@@ -257,7 +257,9 @@ export interface paths {
     put?: never
     /**
      * Verify Question
-     * @description The library flagged the question; the worker checks it and fixes or replaces it.
+     * @description The library flagged the question; the worker checks it and fixes or replaces it. Past
+     *     the daily cap or while paused the call is refused, and the library sends the flag again
+     *     later.
      */
     post: operations["verify_question_internal_questions__question_id__verify_post"]
     delete?: never
@@ -329,7 +331,8 @@ export interface paths {
     }
     /**
      * Ready
-     * @description Ready only once the database and Redis answer; Docker's healthcheck uses this.
+     * @description Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
+     *     isn't checked: an outage there shouldn't stop the service from starting.
      */
     get: operations["ready_ready_get"]
     put?: never

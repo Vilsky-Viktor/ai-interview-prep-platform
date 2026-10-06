@@ -3,6 +3,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
+from prepza_common.pause import refuse_if_paused
 
 from app.constants.invites import (
     MAX_BULK_INVITES,
@@ -14,6 +15,7 @@ from app.constants.invites import (
 )
 from app.helpers.email_lists import emails_in, is_email
 from app.helpers.interviews import attach_set
+from app.integrations.redis import get_redis
 from app.schemas.invites import BulkInviteIn, BulkInviteOut, SkippedInvite
 from app.services import candidate_invites
 from app.services import outbox as outbox_service
@@ -35,6 +37,8 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
     company, _ = await require_editor(user, interview.company_id)
+    # Paused, no invite (new or sent again) goes out: its candidate couldn't start.
+    await refuse_if_paused(get_redis())
     interview = await attach_set(interview)
 
     if interview.set_id is None:

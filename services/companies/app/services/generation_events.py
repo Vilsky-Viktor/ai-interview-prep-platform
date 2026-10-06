@@ -8,9 +8,9 @@ from app.services import outbox as outbox_service
 from app.storage import interviews
 
 
-async def handle(event_type: str, data: dict) -> None:
+async def handle(event_type: str, data: dict, event_id: str) -> None:
     """Stores what an interview generation produced, or removes the interview of a cancelled
-    one, and tells the company; other events aren't ours."""
+    one, and tells the company once, however often the event comes; other events aren't ours."""
     if event_type not in (GENERATION_COMPLETED, GENERATION_CANCELLED):
         return
 
@@ -27,6 +27,7 @@ async def handle(event_type: str, data: dict) -> None:
             uuid.UUID(data["set_id"]),
             data["title"],
             interview_ready(interview, data["title"]),
+            event_id,
         )
         await track("test_ready", company_id=interview.company_id, how="generated")
     else:

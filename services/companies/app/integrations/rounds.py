@@ -35,6 +35,23 @@ async def invite_scores(invite_ids: list[UUID]) -> dict[str, dict]:
     return response.json()
 
 
+async def answer_counts(set_ids: list[UUID]) -> dict[str, list[int]]:
+    """Per interview set, its candidates' answers: [timed out, all]; sets without any are left
+    out."""
+    if not set_ids:
+        return {}
+
+    response = await http.get_client().post(
+        f"{settings.rounds_url}/internal/answer-counts",
+        json={"set_ids": [str(set_id) for set_id in set_ids]},
+        headers={"Authorization": f"Bearer {service_token('rounds')}"},
+    )
+
+    response.raise_for_status()
+
+    return response.json()
+
+
 async def delete_interview_data(set_id: UUID) -> None:
     response = await http.get_client().delete(
         f"{settings.rounds_url}/internal/interviews/{set_id}",
@@ -76,3 +93,14 @@ async def delete_user(user_id: str) -> None:
     )
 
     response.raise_for_status()
+
+
+async def running_interviews() -> int:
+    response = await http.get_client().get(
+        f"{settings.rounds_url}/internal/maintenance/running",
+        headers={"Authorization": f"Bearer {service_token('rounds')}"},
+    )
+
+    response.raise_for_status()
+
+    return response.json()["running"]

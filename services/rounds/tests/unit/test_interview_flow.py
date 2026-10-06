@@ -106,3 +106,38 @@ def test_finishing_the_interview_ends_every_open_section(interview):
     assert finished == [rows[0].id, rows[1].id]
     assert step.done is True
     assert [topic.status for topic in step.topics] == ["finished", "finished"]
+
+
+def test_a_library_failure_still_gives_the_candidate_their_question(interview, monkeypatch):
+    rows, _ = interview
+    rows.append(section())
+
+    async def library_down(set_id):
+        raise RuntimeError("library is down")
+
+    monkeypatch.setattr(library, "get_set", library_down)
+
+    step = asyncio.run(interview_flow.interview_step(rows[0], CANDIDATE))
+
+    # The clock started, so the question still comes, just without the interview's title.
+    assert step.question is not None
+    assert step.session.interview_title is None
+
+
+def test_the_interview_title_is_kept_for_the_next_steps(interview, monkeypatch):
+    rows, _ = interview
+    rows.append(section())
+    asked = []
+
+    async def fake_set(set_id):
+        asked.append(set_id)
+
+        return {"title": "Backend", "language": "en"}
+
+    monkeypatch.setattr(library, "get_set", fake_set)
+
+    first = asyncio.run(interview_flow.interview_step(rows[0], CANDIDATE))
+    again = asyncio.run(interview_flow.interview_step(rows[0], CANDIDATE))
+
+    assert first.session.interview_title == again.session.interview_title == "Backend"
+    assert asked == [rows[0].interview_set_id]

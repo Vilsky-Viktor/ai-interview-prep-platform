@@ -130,7 +130,30 @@
     "deleteLabel": "Supprimer {title}",
     "deleteTitle": "Supprimer ce modèle ?",
     "deleteText": "Ses sujets et ses questions sont supprimés. Les entretiens que des entreprises en ont déjà tirés sont conservés.",
-    "deleteFailed": "Impossible de supprimer le modèle. Veuillez réessayer."
+    "deleteFailed": "Impossible de supprimer le modèle. Veuillez réessayer.",
+    "passRates": "Taux de réussite",
+    "controls": "Contrôles",
+    "noPassRates": "Aucun entretien n'a encore de candidats ayant terminé.",
+    "outsideTriggers": "taux de réussite inhabituel",
+    "finished": "{count, plural, one {# a terminé} other {# ont terminé}}",
+    "passed": "{percent} % de réussite",
+    "passMark": "note de réussite {percent} %",
+    "averageGrade": "moyenne {percent} %",
+    "timedOut": "{percent} % de temps écoulé",
+    "sortBy": {
+      "pass_rate": "Taux de réussite le plus bas d'abord",
+      "finished": "Le plus de candidats ayant terminé d'abord"
+    },
+    "pauseTitle": "Pause d'urgence",
+    "pauseText": "Tant qu'elle est activée, personne ne peut commencer un nouvel entretien, une session d'entraînement ou un aperçu, et aucune question n'est générée, régénérée ou vérifiée. Les candidats déjà en entretien peuvent le terminer.",
+    "pauseFailed": "Impossible de modifier la pause. Veuillez réessayer.",
+    "maintenanceTitle": "Mode maintenance",
+    "maintenanceText": "Tant qu'il est activé, chaque page indique que prepza est en maintenance et les services refusent toute requête, sauf celles des superadmins. Les paiements, les e-mails et les tâches planifiées continuent de fonctionner.",
+    "maintenanceFailed": "Impossible de changer le mode maintenance. Réessayez.",
+    "maintenanceConfirmTitle": "Activer le mode maintenance ?",
+    "maintenanceRunning": "{count, plural, =0 {Aucun candidat n'est en entretien en ce moment.} other {Candidats en entretien en ce moment : #. Ils risquent de perdre du temps.}}",
+    "maintenanceRunningUnknown": "Impossible de compter les candidats en entretien en ce moment. Ceux qui le sont risquent de perdre du temps.",
+    "maintenanceTurnOn": "Activer"
   },
   "templates": {
     "title": "Modèles",
@@ -226,7 +249,8 @@
     "limit": "Limite de questions",
     "count": "{count, plural, one {question} other {questions}}",
     "loadFailed": "Impossible de charger les questions.",
-    "yourAnswer": "votre réponse"
+    "yourAnswer": "votre réponse",
+    "aiWritten": "Les questions et corrigés écrits par l'IA peuvent être faux. Signalez une erreur ou régénérez."
   },
   "rounds": {
     "answered": "Répondues",
@@ -828,5 +852,13 @@
     "done": "Vérifiée : {domain}",
     "pending": "Enregistré. Vérifiée dès qu'un propriétaire ou un admin se connecte avec un e-mail sur {domain}.",
     "failed": "Impossible d'enregistrer le site web."
+  },
+  "pause": {
+    "notice": "Les nouveaux entretiens sont en pause pour le moment : ils ne peuvent être ni commencés ni créés. Un entretien déjà commencé peut être terminé. Revenez plus tard."
+  },
+  "maintenance": {
+    "title": "En maintenance",
+    "text": "prepza est en maintenance. Nous revenons bientôt.",
+    "notice": "Le mode maintenance est activé : seuls les superadmins peuvent utiliser prepza en ce moment."
   }
 }

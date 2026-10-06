@@ -23,15 +23,18 @@ function clock(seconds: number) {
   return `${minutes}:${rest}`
 }
 
-/** Time left on a timed question; calls onExpire once when it reaches zero.
+/** Time left on a timed question; calls onExpire once when it reaches zero, or as soon as it
+stops being `paused` after that.
 
 `seconds` comes from the server as time left, not a moment, so a wrong device clock doesn't
 matter. Render it with a key per question, so each question starts its own clock. */
 export function Countdown({
   seconds,
+  paused = false,
   onExpire,
 }: {
   seconds: number
+  paused?: boolean
   onExpire: () => void
 }) {
   const t = useTranslations("company")
@@ -47,11 +50,11 @@ export function Countdown({
   }, [end])
 
   useEffect(() => {
-    if (left === 0 && !expired.current) {
+    if (left === 0 && !paused && !expired.current) {
       expired.current = true
       onExpire()
     }
-  }, [left, onExpire])
+  }, [left, paused, onExpire])
 
   // role="timer" is read only when asked; the last seconds are announced once, on reaching
   // them, not every second.

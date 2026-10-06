@@ -30,4 +30,6 @@ MESSAGES = {
     "The report isn't a PDF": "Het rapport is geen PDF",
     "A report can be emailed once a candidate has finished this interview.": "Een rapport kan worden gemaild zodra een kandidaat dit sollicitatiegesprek heeft afgerond.",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Je bedrijf heeft het daglimiet voor gemailde rapporten bereikt. Probeer het morgen opnieuw.",
+    "New interviews and AI features are paused for now. Please try again later.": "Nieuwe sollicitatiegesprekken en AI-functies zijn voorlopig gepauzeerd. Probeer het later opnieuw.",
+    "prepza is under maintenance. We'll be back soon.": "prepza is in onderhoud. We zijn snel terug.",
 }

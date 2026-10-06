@@ -2,6 +2,8 @@ import asyncio
 from datetime import UTC, datetime, timedelta
 from uuid import uuid4
 
+import pytest
+
 from app.helpers.review import build_review
 from app.helpers.sessions import answer_seconds
 from app.models.sessions import Session
@@ -38,6 +40,19 @@ def session(shown_at):
         question_shown_at=shown_at,
         answers=[],
     )
+
+
+@pytest.fixture(autouse=True)
+def finished(monkeypatch):
+    """The sections the answers finish, by id."""
+    rows = []
+
+    async def fake_finish(session_id):
+        rows.append(session_id)
+
+    monkeypatch.setattr(sessions, "finish", fake_finish)
+
+    return rows
 
 
 def test_answer_seconds():
@@ -101,3 +116,29 @@ def test_only_a_candidates_answer_tells_library_about_the_question(monkeypatch):
     # A company member trying their own test says nothing about the question's quality.
     assert events[0][0] == "answer.recorded"
     assert events[1] is None
+
+
+def test_the_last_answer_finishes_the_section_at_once(monkeypatch, finished):
+    async def fake_add(answer, event=None):
+        answer.id = uuid4()
+
+        return True
+
+    async def no_flush():
+        return None
+
+    monkeypatch.setattr(sessions, "add_answer", fake_add)
+    monkeypatch.setattr(session_answers.outbox_service, "flush_quietly", no_flush)
+    last = session(datetime.now(UTC))
+    first = session(datetime.now(UTC))
+    first.questions = [*first.questions, {**first.questions[0], "id": str(uuid4())}]
+
+    for row in (first, last):
+        asyncio.run(
+            session_answers.submit_session_answer(
+                row, AnswerCreate(question_id=QUESTION_ID, option_index=0)
+            )
+        )
+
+    # A question is still waiting in the first; the second has none left.
+    assert finished == [last.id]

@@ -5,7 +5,7 @@ from prepza_common.analytics import track
 from app.constants.credits import Reason
 from app.constants.products import ADJUSTMENT_APPROVED
 from app.services.referrals import take_back_reward
-from app.storage import ledger, purchases
+from app.storage import purchases
 
 logger = logging.getLogger(__name__)
 
@@ -48,19 +48,21 @@ async def handle_adjustment(data: dict) -> None:
         return
 
     owner_type, owner_id, granted, paid_total = bought
-
     credits = share(granted, data["totals"]["total"], paid_total)
 
-    if credits:
-        await ledger.adjust(
-            owner_type, owner_id, sign * credits, f"adjustment:{data['id']}", reason
-        )
-        await track(
-            "credits_taken_back",
-            company_id=owner_id,
-            why=reason,
-            credits=sign * credits,
-        )
+    if not credits:
+        return
 
-    if sign < 0 and granted and credits >= granted:
+    # Several partial refunds of the whole top-up count as a full one.
+    taken = await purchases.take_back(
+        owner_type, owner_id, sign * credits, data["transaction_id"], data["id"], reason
+    )
+    await track(
+        "credits_taken_back",
+        company_id=owner_id,
+        why=reason,
+        credits=sign * credits,
+    )
+
+    if sign < 0 and granted and taken >= granted:
         await take_back_reward(owner_id, data["transaction_id"])

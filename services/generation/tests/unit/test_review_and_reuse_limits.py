@@ -138,3 +138,59 @@ def test_a_key_check_run_is_skipped_while_the_last_one_is_still_going(monkeypatc
     asyncio.run(schedules.key_check_batches())
 
     assert runs == []
+
+
+def test_key_checks_wait_during_the_emergency_pause(monkeypatch):
+    runs = []
+
+    async def on(redis):
+        return True
+
+    async def collect_finished():
+        runs.append("collect")
+
+    monkeypatch.setattr("prepza_common.pause.is_paused", on)
+    monkeypatch.setattr(schedules, "get_redis", lambda: object())
+    monkeypatch.setattr(schedules, "collect_finished", collect_finished)
+
+    asyncio.run(schedules.key_check_batches())
+
+    assert runs == []
+
+
+def test_a_key_check_run_frees_only_its_own_lock(monkeypatch):
+    class Redis:
+        def __init__(self):
+            self.values = {}
+
+        async def set(self, key, value, nx, ex):
+            assert ex >= 30 * 60
+
+            if key in self.values:
+                return None
+
+            self.values[key] = value
+
+            return True
+
+        async def eval(self, script, count, key, token):
+            # What the script does: delete only when the token still matches.
+            if self.values.get(key) == token:
+                del self.values[key]
+
+    redis = Redis()
+
+    async def outlived():
+        # The lock ran out mid-run and the next run took it.
+        redis.values["lock:key-check-batches"] = "next run"
+
+    async def nothing():
+        return None
+
+    monkeypatch.setattr(schedules, "get_redis", lambda: redis)
+    monkeypatch.setattr(schedules, "collect_finished", outlived)
+    monkeypatch.setattr(schedules, "submit_pending", nothing)
+
+    asyncio.run(schedules.key_check_batches())
+
+    assert redis.values == {"lock:key-check-batches": "next run"}

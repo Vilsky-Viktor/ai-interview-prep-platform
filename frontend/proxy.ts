@@ -6,10 +6,14 @@ import {
   REFERRAL_DAYS,
   REFERRAL_PARAM,
 } from "@/constants/referral"
+import { TOKEN_COOKIE } from "@/constants/auth"
+import { MAINTENANCE_HEADER } from "@/constants/maintenance"
 import { contentSecurityPolicy } from "@/lib/csp"
+import { maintenanceState } from "@/lib/maintenance"
 
-/** A fresh nonce for every page; Next.js adds it to its own scripts from the request header. */
-export function proxy(request: NextRequest) {
+/** A fresh nonce for every page; Next.js adds it to its own scripts from the request header.
+ * While maintenance mode is on, every page is the maintenance screen, except for superadmins. */
+export async function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64")
   const policy = contentSecurityPolicy(
     nonce,
@@ -19,7 +23,18 @@ export function proxy(request: NextRequest) {
   requestHeaders.set("x-nonce", nonce)
   requestHeaders.set("Content-Security-Policy", policy)
 
-  const response = NextResponse.next({ request: { headers: requestHeaders } })
+  const maintenance = await maintenanceState(
+    request.cookies.get(TOKEN_COOKIE)?.value
+  )
+  requestHeaders.set(MAINTENANCE_HEADER, maintenance)
+
+  const response =
+    maintenance === "closed"
+      ? NextResponse.rewrite(new URL("/maintenance", request.url), {
+          status: 503,
+          request: { headers: requestHeaders },
+        })
+      : NextResponse.next({ request: { headers: requestHeaders } })
   response.headers.set("Content-Security-Policy", policy)
 
   // A referral link: kept until the visitor signs up or makes a company, where it counts.

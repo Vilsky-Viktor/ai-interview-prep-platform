@@ -30,4 +30,6 @@ MESSAGES = {
     "The report isn't a PDF": "रिपोर्ट PDF नहीं है",
     "A report can be emailed once a candidate has finished this interview.": "उम्मीदवार के यह इंटरव्यू पूरा करने के बाद ही रिपोर्ट ईमेल की जा सकती है।",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "आपकी कंपनी आज की सीमा तक रिपोर्ट ईमेल कर चुकी है। कल फिर से प्रयास करें।",
+    "New interviews and AI features are paused for now. Please try again later.": "नए इंटरव्यू और AI सुविधाएँ अभी के लिए रोकी गई हैं। कृपया बाद में फिर से प्रयास करें।",
+    "prepza is under maintenance. We'll be back soon.": "prepza का रखरखाव चल रहा है। हम जल्द ही वापस आएँगे।",
 }

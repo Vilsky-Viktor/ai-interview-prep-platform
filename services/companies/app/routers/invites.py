@@ -1,10 +1,12 @@
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
+from prepza_common.pause import refuse_if_paused
 
 from app.constants.invites import InviteStatus
 from app.helpers.candidates import candidate_seconds
 from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
+from app.integrations.redis import get_redis
 from app.schemas.invites import InviteStartOut, InviteView
 from app.services.candidate_start import start_sessions
 from app.storage import companies
@@ -56,5 +58,9 @@ async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
 
     if invite.status == InviteStatus.FINISHED:
         raise HTTPException(status.HTTP_409_CONFLICT, "This interview is already finished")
+
+    # Paused, nobody starts; a candidate already in the interview may finish it.
+    if invite.status != InviteStatus.IN_PROCESS:
+        await refuse_if_paused(get_redis())
 
     return await start_sessions(invite, interview, user.uid)

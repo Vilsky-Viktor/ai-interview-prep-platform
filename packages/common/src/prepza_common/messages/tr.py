@@ -30,4 +30,6 @@ MESSAGES = {
     "The report isn't a PDF": "Rapor bir PDF değil",
     "A report can be emailed once a candidate has finished this interview.": "Rapor, aday bu mülakatı bitirdikten sonra e-postayla gönderilebilir.",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Şirketiniz günlük rapor gönderme sınırına ulaştı. Yarın tekrar deneyin.",
+    "New interviews and AI features are paused for now. Please try again later.": "Yeni mülakatlar ve yapay zekâ özellikleri şimdilik duraklatıldı. Daha sonra tekrar deneyin.",
+    "prepza is under maintenance. We'll be back soon.": "prepza bakımda. Yakında geri döneceğiz.",
 }

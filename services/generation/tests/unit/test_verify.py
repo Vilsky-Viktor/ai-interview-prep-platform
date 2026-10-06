@@ -123,14 +123,15 @@ def test_a_wrong_key_waits_for_the_next_batch(monkeypatch):
     calls, fake_llm = record(monkeypatch, KeyCheck(correct_index=1), QualityFlag.WRONG_KEY)
     queued = []
 
-    async def fake_add(question_id, text):
-        queued.append((question_id, text))
+    async def fake_add(question_id, text, marked):
+        queued.append((question_id, text, marked))
 
     monkeypatch.setattr(key_checks, "add", fake_add)
 
     asyncio.run(verify(QUESTION_ID, QualityFlag.WRONG_KEY))
 
-    assert queued == [(QUESTION_ID, TEXT)]
+    # The key it's checked against is kept, so a result for a key moved since is dropped.
+    assert queued == [(QUESTION_ID, TEXT, "Credit cash")]
     assert calls == []
     assert fake_llm.prompts == []
 
@@ -237,23 +238,30 @@ def test_fix_now_checks_a_wrong_key_at_once_instead_of_batching(monkeypatch):
     calls = []
 
     async def context(_question_id):
-        return SimpleNamespace(text="Q?", flag=QualityFlag.WRONG_KEY)
+        options = [SimpleNamespace(answer="A", correct=True)]
+
+        return SimpleNamespace(text="Q?", flag=QualityFlag.WRONG_KEY, options=options)
 
     async def check_key(question_id, question, found_context):
         calls.append("now")
 
-    async def add(question_id, text):
+    async def add(question_id, text, marked):
         calls.append("batch")
+
+    async def remove(question_ids):
+        calls.append("dropped from the batch")
 
     monkeypatch.setattr(library, "get_question_context", context)
     monkeypatch.setattr(library, "get_question_quality", lambda _id: context(_id))
     monkeypatch.setattr(verify_service, "check_key", check_key)
     monkeypatch.setattr(key_checks, "add", add)
+    monkeypatch.setattr(key_checks, "remove", remove)
 
     asyncio.run(verify_service.verify(QUESTION_ID, QualityFlag.WRONG_KEY, now=True))
     asyncio.run(verify_service.verify(QUESTION_ID, QualityFlag.WRONG_KEY))
 
-    assert calls == ["now", "batch"]
+    # A check of the same question still waiting in a batch is dropped first.
+    assert calls == ["dropped from the batch", "now", "batch"]
 
 
 def test_verify_jobs_past_the_daily_cap_are_refused_but_fix_now_is_not(client, queued, monkeypatch):

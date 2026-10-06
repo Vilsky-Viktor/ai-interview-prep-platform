@@ -3,7 +3,7 @@ import asyncio
 import pytest
 
 from app.services import adjustments, webhooks
-from app.storage import ledger, purchases, referrals
+from app.storage import purchases, referrals
 
 
 def adjustment(action="refund", status="approved", total="1000", adjustment_id="adj_01"):
@@ -27,8 +27,15 @@ def moved(monkeypatch):
         # $10 paid for 1,000 credits.
         return ("company", "acme", 1_000, "1000")
 
-    async def adjust(owner_type, owner_id, amount, key, reason):
-        calls.append((owner_id, amount, key, reason))
+    taken = {}
+
+    async def take_back_credits(
+        owner_type, owner_id, amount, transaction_id, adjustment_id, reason
+    ):
+        calls.append((owner_id, amount, f"adjustment:{transaction_id}:{adjustment_id}", reason))
+        taken[transaction_id] = taken.get(transaction_id, 0) - amount
+
+        return taken[transaction_id]
 
     async def take_back(transaction_id):
         calls.append(("referral taken back", transaction_id))
@@ -36,7 +43,7 @@ def moved(monkeypatch):
         return False
 
     monkeypatch.setattr(purchases, "for_transaction", bought)
-    monkeypatch.setattr(ledger, "adjust", adjust)
+    monkeypatch.setattr(purchases, "take_back", take_back_credits)
     monkeypatch.setattr(referrals, "take_back", take_back)
 
     return calls
@@ -46,7 +53,7 @@ def test_an_approved_refund_takes_the_credits_back(moved):
     asyncio.run(webhooks.handle(adjustment()))
 
     assert moved == [
-        ("acme", -1_000, "adjustment:adj_01", "refund"),
+        ("acme", -1_000, "adjustment:txn_01:adj_01", "refund"),
         ("referral taken back", "txn_01"),
     ]
 
@@ -54,7 +61,18 @@ def test_an_approved_refund_takes_the_credits_back(moved):
 def test_a_partial_refund_takes_back_its_share(moved):
     asyncio.run(webhooks.handle(adjustment(total="250")))
 
-    assert moved == [("acme", -250, "adjustment:adj_01", "refund")]
+    assert moved == [("acme", -250, "adjustment:txn_01:adj_01", "refund")]
+
+
+def test_partial_refunds_adding_up_to_the_whole_top_up_take_back_the_referral(moved):
+    asyncio.run(webhooks.handle(adjustment(total="400", adjustment_id="adj_a")))
+    asyncio.run(webhooks.handle(adjustment(total="600", adjustment_id="adj_b")))
+
+    assert moved == [
+        ("acme", -400, "adjustment:txn_01:adj_a", "refund"),
+        ("acme", -600, "adjustment:txn_01:adj_b", "refund"),
+        ("referral taken back", "txn_01"),
+    ]
 
 
 def test_a_chargeback_takes_back_and_its_reversal_returns(moved):

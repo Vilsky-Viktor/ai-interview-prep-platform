@@ -130,7 +130,30 @@
     "deleteLabel": "{title} löschen",
     "deleteTitle": "Diese Vorlage löschen?",
     "deleteText": "Ihre Themen und Fragen werden gelöscht. Interviews, die Unternehmen daraus erstellt haben, bleiben erhalten.",
-    "deleteFailed": "Die Vorlage konnte nicht gelöscht werden. Bitte versuche es erneut."
+    "deleteFailed": "Die Vorlage konnte nicht gelöscht werden. Bitte versuche es erneut.",
+    "passRates": "Bestehensquoten",
+    "controls": "Steuerung",
+    "noPassRates": "Noch hat kein Interview abgeschlossene Kandidaten.",
+    "outsideTriggers": "ungewöhnliche Bestehensquote",
+    "finished": "{count, plural, one {# abgeschlossen} other {# abgeschlossen}}",
+    "passed": "{percent} % bestanden",
+    "passMark": "Bestehensgrenze {percent} %",
+    "averageGrade": "Durchschnitt {percent} %",
+    "timedOut": "{percent} % Zeit abgelaufen",
+    "sortBy": {
+      "pass_rate": "Niedrigste Bestehensquote zuerst",
+      "finished": "Meiste Abschlüsse zuerst"
+    },
+    "pauseTitle": "Notfallpause",
+    "pauseText": "Solange sie an ist, kann niemand ein neues Interview, eine Übungsrunde oder eine Vorschau starten, und es werden keine Fragen generiert, neu generiert oder geprüft. Kandidaten, die schon in einem Interview sind, können es beenden.",
+    "pauseFailed": "Die Pause konnte nicht geändert werden. Bitte versuche es erneut.",
+    "maintenanceTitle": "Wartungsmodus",
+    "maintenanceText": "Solange er an ist, zeigt jede Seite, dass prepza gewartet wird, und die Dienste lehnen jede Anfrage ab, außer von Superadmins. Zahlungen, E-Mails und geplante Aufgaben laufen weiter.",
+    "maintenanceFailed": "Der Wartungsmodus konnte nicht geändert werden. Versuche es erneut.",
+    "maintenanceConfirmTitle": "Wartungsmodus einschalten?",
+    "maintenanceRunning": "{count, plural, =0 {Gerade ist kein Kandidat im Interview.} other {Kandidaten gerade im Interview: #. Sie können dabei Zeit verlieren.}}",
+    "maintenanceRunningUnknown": "Die Kandidaten im Interview konnten nicht gezählt werden. Wer gerade eins macht, kann Zeit verlieren.",
+    "maintenanceTurnOn": "Einschalten"
   },
   "templates": {
     "title": "Vorlagen",
@@ -226,7 +249,8 @@
     "limit": "Fragenlimit",
     "count": "{count, plural, one {Frage} other {Fragen}}",
     "loadFailed": "Die Fragen konnten nicht geladen werden.",
-    "yourAnswer": "deine Antwort"
+    "yourAnswer": "deine Antwort",
+    "aiWritten": "KI-geschriebene Fragen und Lösungen können falsch sein. Melde eine falsche Antwort oder generiere neu."
   },
   "rounds": {
     "answered": "Beantwortet",
@@ -828,5 +852,13 @@
     "done": "Verifiziert: {domain}",
     "pending": "Gespeichert. Verifiziert, sobald sich ein Inhaber oder Admin mit einer E-Mail von {domain} anmeldet.",
     "failed": "Die Website konnte nicht gespeichert werden."
+  },
+  "pause": {
+    "notice": "Neue Interviews sind gerade pausiert: Sie können weder gestartet noch erstellt werden. Ein schon begonnenes Interview kann beendet werden. Bitte schau später wieder vorbei."
+  },
+  "maintenance": {
+    "title": "Wartungsarbeiten",
+    "text": "prepza wird gerade gewartet. Wir sind bald zurück.",
+    "notice": "Der Wartungsmodus ist an: Nur Superadmins können prepza gerade nutzen."
   }
 }

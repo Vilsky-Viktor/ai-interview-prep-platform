@@ -12,9 +12,11 @@ from app.schemas.sessions import (
     ScorecardSession,
     SessionOut,
     SessionsCreate,
+    SetIdsIn,
 )
 from app.service_auth import ServiceCaller
-from app.storage import rescore, sessions
+from app.services import outbox as outbox_service
+from app.storage import answer_counts, rescore, sessions
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -49,6 +51,14 @@ async def invite_scores(
     found = await sessions.scores_for_invites(body.invite_ids)
 
     return {str(invite_id): totals for invite_id, totals in found.items()}
+
+
+@router.post("/answer-counts")
+async def interview_answer_counts(body: SetIdsIn, caller: ServiceCaller) -> dict[str, list[int]]:
+    """For the superadmin's pass rates: each interview's answers, [timed out, all]."""
+    found = await answer_counts.for_sets(body.set_ids)
+
+    return {str(set_id): counts for set_id, counts in found.items()}
 
 
 @router.delete("/interviews/{interview_set_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -89,4 +99,7 @@ async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[Score
 @router.post("/questions/{question_id}/rescore")
 async def rescore_question(question_id: UUID, body: RescoreIn, caller: ServiceCaller) -> dict:
     """The question's answer key was corrected: candidates who answered it are marked again."""
-    return {"sessions": await rescore.rescore_question(question_id, body.text, body.options)}
+    changed = await rescore.rescore_question(question_id, body.text, body.options, body.set_id)
+    await outbox_service.flush_quietly()
+
+    return {"sessions": changed}

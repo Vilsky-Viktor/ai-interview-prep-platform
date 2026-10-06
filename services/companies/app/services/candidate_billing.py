@@ -28,10 +28,11 @@ async def results_of(invite_id: uuid.UUID) -> dict:
     return scores.get(str(invite_id)) or {}
 
 
-async def handle(event_type: str, data: dict) -> None:
+async def handle(event_type: str, data: dict, event_id: str) -> None:
     """A finished interview charges the company for the candidate if they picked at least one
-    answer, and tells it; one finished without an answer gives the credits back. Other events
-    aren't ours."""
+    answer, and tells it once, however often the event comes; one finished without an answer
+    gives the credits back. Billing counts each charge or release once too. Other events aren't
+    ours."""
     if event_type != INTERVIEW_FINISHED:
         return
 
@@ -51,7 +52,7 @@ async def handle(event_type: str, data: dict) -> None:
     if charged:
         notice = candidate_finished(interview, invite.id, invite.email, grade)
 
-    await invites.finish(invite.id, grade, flagged, notice)
+    await invites.finish(invite.id, grade, flagged, notice, event_id)
     await outbox_service.flush_quietly()
 
     key = candidate_key(invite.interview_id, invite.email)
@@ -93,8 +94,14 @@ async def expire_unstarted() -> int:
 
 async def hold_again(invite, key: str) -> None:
     """Sets aside again the credits of an invite revived while it was expiring; the run goes on
-    if billing refuses."""
+    if billing refuses. One expired meanwhile by an overlapping run (a retried schedule), or
+    removed, keeps nothing set aside."""
     try:
+        current = await invites.get(invite.id)
+
+        if current is None or current.status in (InviteStatus.EXPIRED, InviteStatus.DELETED):
+            return
+
         interview = await interviews.get(invite.interview_id)
         await billing.hold_candidate(interview.company_id, key)
     except Exception:

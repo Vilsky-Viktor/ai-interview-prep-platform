@@ -30,4 +30,6 @@ MESSAGES = {
     "The report isn't a PDF": "报告不是 PDF",
     "A report can be emailed once a candidate has finished this interview.": "候选人完成此面试后才能通过邮件发送报告。",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "你的公司今天通过邮件发送的报告已达上限。请明天再试。",
+    "New interviews and AI features are paused for now. Please try again later.": "新面试和 AI 功能暂时已暂停，请稍后再试。",
+    "prepza is under maintenance. We'll be back soon.": "prepza 正在维护中，我们很快回来。",
 }

@@ -2,10 +2,12 @@ from uuid import UUID, uuid5
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.paging import PageParams
+from prepza_common.pause import refuse_if_paused
 from prepza_common.superadmin import SuperadminUser
 
 from app.constants.sets import SetKind
 from app.integrations import generation
+from app.integrations.redis import get_redis
 from app.schemas.feedback import ReportOut
 from app.schemas.quality_report import FlaggedQuestionOut, ReplacedQuestionOut
 from app.storage import feedback, preparations, quality, quality_report
@@ -74,6 +76,7 @@ async def flagged_template_question(question_id: UUID) -> str:
 @router.post("/{question_id}/fix", status_code=status.HTTP_202_ACCEPTED)
 async def fix_now(question_id: UUID, superadmin: SuperadminUser) -> None:
     """Sends the question to the verifier at once; it fixes or replaces it in the background."""
+    await refuse_if_paused(get_redis())
     flag = await flagged_template_question(question_id)
     await generation.verify_question(question_id, flag, now=True)
 

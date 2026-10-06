@@ -12,6 +12,7 @@ from app.constants.invites import NOT_STARTED, InviteStatus
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
+from app.storage import processed_events
 from app.storage.db import Session
 
 
@@ -216,18 +217,23 @@ async def mark_undelivered(invite_id: uuid.UUID, notice: dict) -> None:
 
 
 async def finish(
-    invite_id: uuid.UUID, grade: int | None, flagged: bool, notice: dict | None
+    invite_id: uuid.UUID,
+    grade: int | None,
+    flagged: bool,
+    notice: dict | None,
+    event_id: str | None = None,
 ) -> None:
     """Marks the invite finished (the candidates list may have already) with the candidate's
-    grade and integrity flag, and the company's notification, if any."""
+    grade and integrity flag, and the company's notification, if any: once per event."""
     async with Session() as session:
+        new = await processed_events.claim(session, event_id)
         await session.execute(
             update(CandidateInvite)
             .where(CandidateInvite.id == invite_id)
             .values(status=InviteStatus.FINISHED, grade=grade, flagged=flagged)
         )
 
-        if notice:
+        if notice and new:
             outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
 
         await session.commit()

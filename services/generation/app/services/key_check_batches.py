@@ -4,11 +4,11 @@ from pydantic import ValidationError
 
 from app.config.settings import settings
 from app.constants.generation import MAX_OUTPUT_TOKENS
-from app.constants.quality import BATCH_RETRY_STATUSES, MAX_BATCH_KEY_CHECKS
+from app.constants.quality import BATCH_RETRY_STATUSES, MAX_BATCH_KEY_CHECKS, QualityFlag
 from app.integrations import library, openai_batch
 from app.models.key_checks import KeyCheck as KeyCheckRow
 from app.schemas.verify import KeyCheck
-from app.services.verify import apply_key_check, check_key, key_check_prompt
+from app.services.verify import apply_key_check, check_key, key_check_prompt, marked_answer
 from app.storage import key_checks
 
 logger = logging.getLogger(__name__)
@@ -28,11 +28,19 @@ def request_body(prompt: str) -> dict:
 
 
 async def current(check: KeyCheckRow):
-    """The question and its context, or None when it was deleted or changed since flagged."""
+    """The question and its context, or None when it was deleted or changed since flagged, its
+    key was moved, or it isn't flagged for its key any more (kept, fixed, or this check's result
+    was applied already)."""
     context = await library.get_question_context(check.question_id)
     question = await library.get_question_quality(check.question_id)
 
     if context is None or question is None or question.text != check.question_text:
+        return None
+
+    if question.flag != QualityFlag.WRONG_KEY:
+        return None
+
+    if check.marked_answer is not None and marked_answer(question) != check.marked_answer:
         return None
 
     return question, context

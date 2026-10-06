@@ -1,0 +1,53 @@
+import uuid
+
+import pytest
+from prepza_common.auth import current_user
+from prepza_common.constants import PAUSED
+from prepza_common.user import User
+
+from app.main import app
+from app.service_auth import service_token
+
+
+@pytest.fixture(autouse=True)
+def paused(monkeypatch):
+    """The switch on, and Ann, a superadmin, signed in."""
+
+    async def on(redis):
+        return True
+
+    monkeypatch.setattr("prepza_common.pause.is_paused", on)
+    monkeypatch.setenv("SUPERADMIN_EMAILS", "ann@example.com")
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="ann", email="ann@example.com", email_verified=True
+    )
+    yield
+    app.dependency_overrides.clear()
+
+
+@pytest.mark.parametrize(
+    "path, body",
+    [
+        ("/superadmin/templates", {"text": "Senior accountant"}),
+        (f"/superadmin/generations/{uuid.uuid4()}/review", {"selected": [0]}),
+        (f"/superadmin/generations/{uuid.uuid4()}/retry", None),
+        (f"/superadmin/templates/{uuid.uuid4()}/questions/{uuid.uuid4()}/regenerate", None),
+    ],
+)
+def test_paused_new_templates_and_regenerations_are_refused(client, queued, path, body):
+    refused = client.post(path, json=body)
+
+    assert refused.status_code == 503
+    assert refused.json()["detail"] == PAUSED
+    assert queued == []
+
+
+def test_paused_the_verifier_takes_no_new_question(client, queued):
+    refused = client.post(
+        f"/internal/questions/{uuid.uuid4()}/verify",
+        json={"flag": "wrong_key", "now": True},
+        headers={"Authorization": f"Bearer {service_token('generation')}"},
+    )
+
+    assert refused.status_code == 503
+    assert queued == []

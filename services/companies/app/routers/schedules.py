@@ -1,12 +1,17 @@
 import logging
+from datetime import UTC, datetime, timedelta
 
 from fastapi import APIRouter, status
+from prepza_common import pause
 from prepza_common.google import Invoker
 
+from app.constants.events import PROCESSED_EVENT_DAYS
+from app.integrations.redis import get_redis
 from app.services import outbox as outbox_service
 from app.services.candidate_billing import expire_unstarted
 from app.services.reminders import remind_unstarted
 from app.services.retention import delete_expired_candidates, delete_old_audit_events
+from app.storage import processed_events
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +21,7 @@ router = APIRouter(prefix="/internal/schedules", tags=["schedules"], dependencie
 @router.post("/retention", status_code=status.HTTP_204_NO_CONTENT)
 async def retention() -> None:
     """Daily, from Cloud Scheduler: candidate data and audit events past their retention
-    periods go."""
+    periods go, and the notes of events long processed."""
     count = await delete_expired_candidates()
 
     if count:
@@ -26,6 +31,9 @@ async def retention() -> None:
 
     if audited:
         logger.info("Deleted %d old audit events", audited)
+
+    # Events are remembered only while Pub/Sub may deliver them again.
+    await processed_events.forget(datetime.now(UTC) - timedelta(days=PROCESSED_EVENT_DAYS))
 
 
 @router.post("/invite-expiry", status_code=status.HTTP_204_NO_CONTENT)
@@ -39,7 +47,13 @@ async def invite_expiry() -> None:
 
 @router.post("/invite-reminders", status_code=status.HTTP_204_NO_CONTENT)
 async def invite_reminders() -> None:
-    """Daily, from Cloud Scheduler: candidates who haven't started get one reminder."""
+    """Daily, from Cloud Scheduler: candidates who haven't started get one reminder; none during
+    the emergency pause, as they couldn't start (they're reminded once it's off)."""
+    if await pause.is_paused(get_redis()):
+        logger.warning("Reminders skipped: the emergency pause is on")
+
+        return
+
     count = await remind_unstarted()
 
     if count:

@@ -1,5 +1,5 @@
 import uuid
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
 from prepza_common import outbox
 from sqlalchemy import delete, func, select, update
@@ -29,6 +29,9 @@ async def create_many(
     preview: bool = False,
     practice: bool = False,
 ) -> list[Session]:
+    # Each section starts a microsecond after the one before, so the sections keep the topics'
+    # order wherever they're listed (see list_for_invite).
+    now = datetime.now(UTC)
     rows = [
         Session(
             user_id=user_id,
@@ -43,9 +46,10 @@ async def create_many(
             question_seconds=question_seconds,
             preview=preview,
             practice=practice,
+            started_at=now + timedelta(microseconds=position),
             answers=[],
         )
-        for topic in topics
+        for position, topic in enumerate(topics)
     ]
 
     async with Db() as session:
@@ -65,7 +69,7 @@ async def list_for_invite(candidate_invite_id: uuid.UUID) -> list[Session]:
         select(Session)
         .where(Session.candidate_invite_id == candidate_invite_id)
         .options(*LOAD_SESSION)
-        .order_by(Session.started_at)
+        .order_by(Session.started_at, Session.id)
     )
 
     async with Db() as session:
@@ -207,6 +211,7 @@ async def finish(session_id: uuid.UUID) -> None:
                 select(Session)
                 .where(Session.candidate_invite_id == invite_id)
                 .options(selectinload(Session.answers))
+                .order_by(Session.id)
                 .with_for_update()
             )
         )

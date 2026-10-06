@@ -11,6 +11,7 @@ from app.models.answers import Answer
 from app.models.sessions import Session
 from app.schemas.rounds import AnswerCreate
 from app.service_auth import service_token
+from app.services import outbox as outbox_service
 from app.services.session_access import get_owned_session
 from app.services.session_answers import submit_session_answer
 from app.storage import session_expiry, sessions
@@ -91,14 +92,25 @@ def test_a_question_past_its_time_counts_as_wrong(monkeypatch):
 
         return True
 
+    async def fake_finish(session_id):
+        finished.append(session_id)
+
+    async def no_flush():
+        return None
+
+    finished = []
     monkeypatch.setattr(sessions, "get", fake_get)
     monkeypatch.setattr(sessions, "add_answer", fake_add)
+    monkeypatch.setattr(sessions, "finish", fake_finish)
+    monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
 
     asyncio.run(get_owned_session(expired.id, CANDIDATE))
 
     assert [(a.question_id, a.option_index, a.correct, a.score) for a in saved] == [
         (QUESTION_ID, None, False, 0)
     ]
+    # It was the section's last question: the section finishes at once.
+    assert finished == [expired.id]
 
 
 def test_a_question_within_its_time_is_left_alone(monkeypatch):

@@ -185,6 +185,8 @@ async def replace_question(question_id: UUID, body: QuestionReplace, caller: Ser
     # A moved key changes past answers' marks too; rounds leaves rewritten questions alone. Its
     # failure doesn't undo the fix, so it's logged rather than raised.
     try:
-        await rounds.rescore_question(question_id, body.text, options)
+        question_set = await preparations.get_for_question(question_id)
+        set_id = question_set.id if question_set else None
+        await rounds.rescore_question(question_id, body.text, options, set_id)
     except Exception:
         logger.exception("Couldn't rescore answers to question %s", question_id)

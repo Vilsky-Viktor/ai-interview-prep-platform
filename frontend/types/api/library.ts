@@ -574,7 +574,8 @@ export interface paths {
     /**
      * Move Bank Stages
      * @description Daily, from Cloud Scheduler: bank questions move one way, private to retiring to
-     *     revealed (constants/sets.py Stage).
+     *     revealed (constants/sets.py Stage). The same daily run sends flags the verifier hasn't acted
+     *     on to it again, and forgets old notes of processed events.
      */
     post: operations["move_bank_stages_internal_schedules_bank_post"]
     delete?: never
@@ -651,7 +652,10 @@ export interface paths {
     }
     get?: never
     put?: never
-    /** Report */
+    /**
+     * Report
+     * @description One report per user and question, whatever its revision.
+     */
     post: operations["report_internal_questions__question_id__reports_post"]
     delete?: never
     options?: never
@@ -820,7 +824,8 @@ export interface paths {
     }
     /**
      * Ready
-     * @description Ready only once the database and Redis answer; Docker's healthcheck uses this.
+     * @description Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
+     *     isn't checked: an outage there shouldn't stop the service from starting.
      */
     get: operations["ready_ready_get"]
     put?: never
@@ -1077,6 +1082,8 @@ export interface components {
       }
       /** Reports */
       reports: components["schemas"]["ReportNote"][]
+      /** Flag */
+      flag?: string | null
     }
     /** QuestionRatingOut */
     QuestionRatingOut: {
@@ -1243,6 +1250,8 @@ export interface components {
       title: string
       /** Level */
       level: string
+      /** Language */
+      language: string
       /** Topics */
       topics: components["schemas"]["TopicOut"][]
     }

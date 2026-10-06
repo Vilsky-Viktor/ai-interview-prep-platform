@@ -9,7 +9,7 @@ import { useAuth } from "@/components/auth-provider"
 import { InviteIntro } from "@/components/company/invite-intro"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
-import { ApiError, apiFetch } from "@/lib/api"
+import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { InviteView as Invite, SessionSummary } from "@/types/company"
 
 export function InviteView({ token }: { token: string }) {
@@ -52,7 +52,12 @@ export function InviteView({ token }: { token: string }) {
       setStarting(false)
     } catch (error) {
       const forbidden = error instanceof ApiError && error.status === 403
-      toast.error(forbidden ? share("wrongEmail") : session("startFailed"))
+      // The API's own message, such as the pause's, before the generic one.
+      toast.error(
+        forbidden
+          ? share("wrongEmail")
+          : apiErrorMessage(error, session("startFailed"))
+      )
       setStarting(false)
     }
   }

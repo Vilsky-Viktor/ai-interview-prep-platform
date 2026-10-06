@@ -1,6 +1,8 @@
 import logging
 from datetime import UTC, datetime, timedelta
 
+from prepza_common import pause
+
 from app.constants.accounts import TEXT_RETENTION_DAYS
 from app.constants.generation import (
     GENERATION_STOPPED,
@@ -12,7 +14,7 @@ from app.constants.quality import KEY_CHECK_LOCK_KEY, KEY_CHECK_LOCK_SECONDS
 from app.integrations.redis import get_redis
 from app.services import outbox as outbox_service
 from app.services.key_check_batches import collect_finished, submit_pending
-from app.storage import accounts, generations
+from app.storage import accounts, generations, locks
 
 logger = logging.getLogger(__name__)
 
@@ -22,10 +24,17 @@ logger = logging.getLogger(__name__)
 
 async def key_check_batches() -> None:
     """Applies finished OpenAI batches of key checks, then sends the waiting ones; skipped while
-    an earlier run is still going."""
+    an earlier run is still going, and during the emergency pause (they're AI)."""
     redis = get_redis()
 
-    if not await redis.set(KEY_CHECK_LOCK_KEY, 1, nx=True, ex=KEY_CHECK_LOCK_SECONDS):
+    if await pause.is_paused(redis):
+        logger.warning("Key checks skipped: the emergency pause is on")
+
+        return
+
+    token = await locks.acquire(redis, KEY_CHECK_LOCK_KEY, KEY_CHECK_LOCK_SECONDS)
+
+    if token is None:
         logger.warning("Key checks are still running from the last time; skipped")
 
         return
@@ -34,7 +43,7 @@ async def key_check_batches() -> None:
         await collect_finished()
         await submit_pending()
     finally:
-        await redis.delete(KEY_CHECK_LOCK_KEY)
+        await locks.release(redis, KEY_CHECK_LOCK_KEY, token)
 
 
 async def expire_reviews() -> None:

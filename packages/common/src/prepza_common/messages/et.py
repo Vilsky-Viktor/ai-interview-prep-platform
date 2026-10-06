@@ -42,4 +42,6 @@ MESSAGES = {
     "The report isn't a PDF": "Aruanne pole PDF",
     "A report can be emailed once a candidate has finished this interview.": "Aruande saab e-postiga saata siis, kui kandidaat on selle intervjuu lõpetanud.",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Sinu ettevõte on jõudnud aruannete saatmise päevalimiidini. Proovi homme uuesti.",
+    "New interviews and AI features are paused for now. Please try again later.": "Uued intervjuud ja tehisintellekti funktsioonid on praegu peatatud. Proovi hiljem uuesti.",
+    "prepza is under maintenance. We'll be back soon.": "prepza on hoolduses. Oleme varsti tagasi.",
 }

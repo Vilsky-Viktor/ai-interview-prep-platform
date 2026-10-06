@@ -4,6 +4,8 @@ from datetime import UTC, datetime
 from app.constants.credits import CANDIDATE_CREDITS, WELCOME_COMPANY, Reason
 from app.constants.products import TOP_UPS, OwnerType
 from app.storage import ledger, purchases
+from app.storage.db import Session
+from app.storage.ledger import add
 
 NOW = datetime(2026, 10, 3, 12, tzinfo=UTC)
 TOPUP = TOP_UPS[0]
@@ -106,11 +108,34 @@ def test_a_refund_of_spent_credits_leaves_the_balance_negative(run):
         )
         await ledger.reserve(COMPANY, acme, 600, "candidate:spent", Reason.CANDIDATE)
         await ledger.charge("candidate:spent")
-        await ledger.adjust(COMPANY, acme, -1_000, "adjustment:r1", Reason.REFUND)
+        await purchases.take_back(COMPANY, acme, -1_000, "txn-r", "r1", Reason.REFUND)
         # Paddle sends the same event again.
-        await ledger.adjust(COMPANY, acme, -1_000, "adjustment:r1", Reason.REFUND)
+        await purchases.take_back(COMPANY, acme, -1_000, "txn-r", "r1", Reason.REFUND)
         blocked = await ledger.reserve(COMPANY, acme, 1, "candidate:after", Reason.CANDIDATE)
 
         return (await ledger.wallet(COMPANY, acme)).balance, blocked
 
     assert run(scenario()) == (-600, False)
+
+
+def test_partial_refunds_add_up_and_one_counted_under_its_old_key_isnt_counted_again(run):
+    acme = company()
+
+    async def scenario():
+        await purchases.grant(
+            COMPANY, acme, TOPUP_CREDITS, 1, "txn_p%", TOPUP.key, "ann", "1000", "USD", NOW
+        )
+        first = await purchases.take_back(COMPANY, acme, -400, "txn_p%", "p1", Reason.REFUND)
+        both = await purchases.take_back(COMPANY, acme, -600, "txn_p%", "p2", Reason.REFUND)
+        # Taken back before keys carried the transaction; Paddle sends it again.
+        async with Session() as session:
+            await add(session, COMPANY, acme, -100, "adjustment:p0", Reason.REFUND)
+            await session.commit()
+
+        again = await purchases.take_back(COMPANY, acme, -100, "txn_p%", "p0", Reason.REFUND)
+        # Another transaction's refund isn't this one's.
+        other = await purchases.take_back(COMPANY, acme, -50, "txn_p", "q1", Reason.REFUND)
+
+        return first, both, again, other, (await ledger.wallet(COMPANY, acme)).balance
+
+    assert run(scenario()) == (400, 1_000, 1_000, 50, TOPUP_CREDITS - 1_150)

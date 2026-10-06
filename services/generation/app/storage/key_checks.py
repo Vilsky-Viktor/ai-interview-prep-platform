@@ -7,11 +7,11 @@ from app.models.key_checks import KeyCheck
 from app.storage.db import Session
 
 
-async def add(question_id: uuid.UUID, question_text: str) -> None:
+async def add(question_id: uuid.UUID, question_text: str, marked_answer: str) -> None:
     """Queues a check; a question already waiting keeps its place."""
     statement = (
         insert(KeyCheck)
-        .values(question_id=question_id, question_text=question_text)
+        .values(question_id=question_id, question_text=question_text, marked_answer=marked_answer)
         .on_conflict_do_nothing()
     )
 

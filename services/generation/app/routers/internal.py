@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Request, status
+from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
@@ -126,7 +127,10 @@ async def verify_question(
     question_id: UUID, body: VerifyIn, caller: ServiceCaller, request: Request
 ) -> None:
     """The library flagged the question; the worker checks it and fixes or replaces it. Past
-    the daily cap the call is refused, and the library sends the flag again later."""
+    the daily cap or while paused the call is refused, and the library sends the flag again
+    later."""
+    await refuse_if_paused(get_redis())
+
     if not body.now:
         await use_verify_budget()
 

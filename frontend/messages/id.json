@@ -130,7 +130,30 @@
     "deleteLabel": "Hapus {title}",
     "deleteTitle": "Hapus templat ini?",
     "deleteText": "Topik dan soalnya akan dihapus. Wawancara yang sudah dibuat perusahaan dari templat ini tetap ada.",
-    "deleteFailed": "Templat tidak bisa dihapus. Coba lagi."
+    "deleteFailed": "Templat tidak bisa dihapus. Coba lagi.",
+    "passRates": "Tingkat kelulusan",
+    "controls": "Kontrol",
+    "noPassRates": "Belum ada wawancara dengan kandidat yang selesai.",
+    "outsideTriggers": "tingkat kelulusan tidak biasa",
+    "finished": "{count, plural, other {# selesai}}",
+    "passed": "{percent}% lulus",
+    "passMark": "nilai lulus {percent}%",
+    "averageGrade": "rata-rata {percent}%",
+    "timedOut": "{percent}% waktu habis",
+    "sortBy": {
+      "pass_rate": "Tingkat kelulusan terendah dulu",
+      "finished": "Paling banyak selesai dulu"
+    },
+    "pauseTitle": "Jeda darurat",
+    "pauseText": "Selama aktif, tidak ada yang bisa memulai wawancara, ronde latihan, atau pratinjau baru, dan tidak ada pertanyaan yang dibuat, dibuat ulang, atau diperiksa. Kandidat yang sudah dalam wawancara bisa menyelesaikannya.",
+    "pauseFailed": "Tidak dapat mengubah jeda. Coba lagi.",
+    "maintenanceTitle": "Mode pemeliharaan",
+    "maintenanceText": "Selama aktif, setiap halaman menampilkan bahwa prepza sedang dalam pemeliharaan dan layanan menolak setiap permintaan, kecuali dari superadmin. Pembayaran, email, dan tugas terjadwal tetap berjalan.",
+    "maintenanceFailed": "Tidak dapat mengubah mode pemeliharaan. Coba lagi.",
+    "maintenanceConfirmTitle": "Aktifkan mode pemeliharaan?",
+    "maintenanceRunning": "{count, plural, =0 {Tidak ada kandidat yang sedang wawancara sekarang.} other {Kandidat yang sedang wawancara sekarang: #. Mereka bisa kehilangan waktu.}}",
+    "maintenanceRunningUnknown": "Tidak dapat menghitung kandidat yang sedang wawancara sekarang. Yang sedang wawancara bisa kehilangan waktu.",
+    "maintenanceTurnOn": "Aktifkan"
   },
   "templates": {
     "title": "Templat",
@@ -226,7 +249,8 @@
     "limit": "Batas soal",
     "count": "{count, plural, other {soal}}",
     "loadFailed": "Soal tidak bisa dimuat.",
-    "yourAnswer": "jawabanmu"
+    "yourAnswer": "jawabanmu",
+    "aiWritten": "Soal dan kunci jawaban tulisan AI bisa salah. Tandai jawaban yang salah atau buat ulang."
   },
   "rounds": {
     "answered": "Dijawab",
@@ -828,5 +852,13 @@
     "done": "Terverifikasi: {domain}",
     "pending": "Tersimpan. Terverifikasi setelah pemilik atau admin masuk dengan email di {domain}.",
     "failed": "Situs web tidak bisa disimpan."
+  },
+  "pause": {
+    "notice": "Wawancara baru dijeda untuk sementara: tidak bisa dimulai atau dibuat. Wawancara yang sudah dimulai bisa diselesaikan. Silakan kembali nanti."
+  },
+  "maintenance": {
+    "title": "Sedang dalam pemeliharaan",
+    "text": "prepza sedang dalam pemeliharaan. Kami akan segera kembali.",
+    "notice": "Mode pemeliharaan aktif: hanya superadmin yang dapat menggunakan prepza sekarang."
   }
 }

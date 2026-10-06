@@ -30,4 +30,6 @@ MESSAGES = {
     "The report isn't a PDF": "הדוח אינו PDF",
     "A report can be emailed once a candidate has finished this interview.": "אפשר לשלוח דוח באימייל אחרי שמועמד סיים את הראיון הזה.",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "החברה שלכם שלחה באימייל את המכסה היומית של דוחות. נסו שוב מחר.",
+    "New interviews and AI features are paused for now. Please try again later.": "ראיונות חדשים ותכונות AI מושהים כרגע. נסו שוב מאוחר יותר.",
+    "prepza is under maintenance. We'll be back soon.": "prepza בתחזוקה. נחזור בקרוב.",
 }

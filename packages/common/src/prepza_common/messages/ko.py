@@ -30,4 +30,6 @@ MESSAGES = {
     "The report isn't a PDF": "보고서가 PDF가 아닙니다",
     "A report can be emailed once a candidate has finished this interview.": "지원자가 이 면접을 마친 후에 보고서를 이메일로 보낼 수 있습니다.",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "회사가 오늘 이메일로 보낼 수 있는 보고서 한도에 도달했습니다. 내일 다시 시도해 주세요.",
+    "New interviews and AI features are paused for now. Please try again later.": "새 면접과 AI 기능이 지금은 일시 중지되었습니다. 잠시 후 다시 시도해 주세요.",
+    "prepza is under maintenance. We'll be back soon.": "prepza는 점검 중입니다. 곧 돌아오겠습니다.",
 }

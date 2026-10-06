@@ -126,4 +126,11 @@ processing agreement at prepza.ai/dpa, which is part of the terms.
 - Where your local law requires a works council agreement, a regulator approval or a bias audit you
   haven't done.
 
+## Reporting serious problems
+
+Tell prepza at once at hello@prepza.ai if a result may have harmed a candidate (for example a
+wrong answer key behind a rejection), you see signs of unfair results for a group of
+candidates, or anything looks like a security problem. prepza investigates, and reports serious
+incidents to the authorities when the law requires it.
+
 Questions: hello@prepza.ai.

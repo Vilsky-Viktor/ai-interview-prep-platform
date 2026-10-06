@@ -30,4 +30,6 @@ MESSAGES = {
     "The report isn't a PDF": "Hindi PDF ang report",
     "A report can be emailed once a candidate has finished this interview.": "Puwedeng i-email ang report kapag natapos na ng kandidato ang interview na ito.",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Naabot na ng iyong kumpanya ang pang-araw-araw na limit ng mga report na ma-email. Subukang muli bukas.",
+    "New interviews and AI features are paused for now. Please try again later.": "Naka-pause muna ang mga bagong interview at AI feature. Subukang muli mamaya.",
+    "prepza is under maintenance. We'll be back soon.": "Kasalukuyang nasa maintenance ang prepza. Babalik kami agad.",
 }

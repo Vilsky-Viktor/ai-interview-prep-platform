@@ -30,4 +30,6 @@ MESSAGES = {
     "The report isn't a PDF": "Il report non è un PDF",
     "A report can be emailed once a candidate has finished this interview.": "Un report può essere inviato via email quando un candidato ha terminato questo colloquio.",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "La tua azienda ha raggiunto il limite giornaliero di report inviati via email. Riprova domani.",
+    "New interviews and AI features are paused for now. Please try again later.": "I nuovi colloqui e le funzioni di IA sono in pausa per ora. Riprova più tardi.",
+    "prepza is under maintenance. We'll be back soon.": "prepza è in manutenzione. Torniamo presto.",
 }

@@ -8,6 +8,7 @@ from app.constants.rounds import RoundStatus
 from app.helpers.sessions import next_session_question, time_is_up
 from app.models.answers import Answer
 from app.models.sessions import Session
+from app.services import outbox as outbox_service
 from app.services.session_expiry import finish_if_expired
 from app.storage import sessions
 
@@ -35,6 +36,12 @@ async def get_owned_session(session_id: UUID, user: User, grace_seconds: int = 0
             )
 
         row = await sessions.get(session_id)
+
+        # That was the section's last question: it finishes now, as after a last answer.
+        if row.status == RoundStatus.IN_PROGRESS and next_session_question(row) is None:
+            await sessions.finish(row.id)
+            await outbox_service.flush_quietly()
+            row = await sessions.get(session_id)
 
     # The whole interview ran out of time while the candidate was away: it's finished.
     if row.status == RoundStatus.IN_PROGRESS and await finish_if_expired(row.candidate_invite_id):

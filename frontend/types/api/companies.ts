@@ -513,7 +513,10 @@ export interface paths {
     }
     get?: never
     put?: never
-    /** Review Generation */
+    /**
+     * Review Generation
+     * @description Approved topics resume the generation, so a pause refuses it.
+     */
     post: operations["review_generation_interviews__interview_id__generation_review_post"]
     delete?: never
     options?: never
@@ -1020,7 +1023,8 @@ export interface paths {
     put?: never
     /**
      * Invite Reminders
-     * @description Daily, from Cloud Scheduler: candidates who haven't started get one reminder.
+     * @description Daily, from Cloud Scheduler: candidates who haven't started get one reminder; none during
+     *     the emergency pause, as they couldn't start (they're reminded once it's off).
      */
     post: operations["invite_reminders_internal_schedules_invite_reminders_post"]
     delete?: never
@@ -1044,6 +1048,104 @@ export interface paths {
      *     their change.
      */
     post: operations["flush_outbox_internal_schedules_outbox_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/pause": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Pause
+     * @description Public: the candidate's invite page and the new interview page say so while it's on.
+     */
+    get: operations["get_pause_pause_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/pause": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Switch Pause
+     * @description Who switched it and when goes to the logs.
+     */
+    put: operations["switch_pause_superadmin_pause_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/maintenance": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Maintenance
+     * @description Public: every page shows the maintenance screen while it's on, except to superadmins.
+     */
+    get: operations["get_maintenance_maintenance_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/maintenance": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Switch */
+    get: operations["get_switch_superadmin_maintenance_get"]
+    /**
+     * Switch
+     * @description Who switched it and when goes to the logs.
+     */
+    put: operations["switch_superadmin_maintenance_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/pass-rates": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** List Pass Rates */
+    get: operations["list_pass_rates_superadmin_pass_rates_get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -1555,6 +1657,28 @@ export interface components {
       /** Logo Url */
       logo_url: string | null
     }
+    /** MaintenanceIn */
+    MaintenanceIn: {
+      /** On */
+      on: boolean
+    }
+    /** MaintenanceOut */
+    MaintenanceOut: {
+      /** On */
+      on: boolean
+      /**
+       * Superadmin
+       * @default false
+       */
+      superadmin: boolean
+    }
+    /** MaintenanceSwitchOut */
+    MaintenanceSwitchOut: {
+      /** On */
+      on: boolean
+      /** Running */
+      running: number | null
+    }
     /** MemberIn */
     MemberIn: {
       /**
@@ -1602,6 +1726,48 @@ export interface components {
        * @enum {string}
        */
       role: "admin" | "viewer"
+    }
+    /**
+     * PassRateOut
+     * @description One company interview with finished candidates, for the superadmin's monitoring.
+     */
+    PassRateOut: {
+      /**
+       * Interview Id
+       * Format: uuid
+       */
+      interview_id: string
+      /** Title */
+      title: string | null
+      /** Company */
+      company: string
+      /** Finished */
+      finished: number
+      /** Pass Rate */
+      pass_rate: number
+      /** Pass Mark */
+      pass_mark: number
+      /** Average Grade */
+      average_grade: number
+      /** Timeout Share */
+      timeout_share: number | null
+      /** Outside Triggers */
+      outside_triggers: boolean
+    }
+    /**
+     * PassRateSort
+     * @enum {string}
+     */
+    PassRateSort: "pass_rate" | "finished"
+    /** PauseIn */
+    PauseIn: {
+      /** Paused */
+      paused: boolean
+    }
+    /** PauseOut */
+    PauseOut: {
+      /** Paused */
+      paused: boolean
     }
     /**
      * PreviewOut
@@ -3850,6 +4016,165 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+    }
+  }
+  get_pause_pause_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PauseOut"]
+        }
+      }
+    }
+  }
+  switch_pause_superadmin_pause_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["PauseIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PauseOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_maintenance_maintenance_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["MaintenanceOut"]
+        }
+      }
+    }
+  }
+  get_switch_superadmin_maintenance_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["MaintenanceSwitchOut"]
+        }
+      }
+    }
+  }
+  switch_superadmin_maintenance_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["MaintenanceIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["MaintenanceSwitchOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_pass_rates_superadmin_pass_rates_get: {
+    parameters: {
+      query?: {
+        sort?: components["schemas"]["PassRateSort"]
+        offset?: number
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PassRateOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
       }
     }
   }

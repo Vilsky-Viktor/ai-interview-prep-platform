@@ -1,10 +1,14 @@
 import uuid
 from datetime import UTC, datetime, timedelta
 
+from sqlalchemy import func, select
+
 from app.constants.invites import InviteStatus
 from app.helpers.notifications import invite_undelivered
+from app.models.outbox import OutboxEvent
 from app.schemas.interviews import InterviewSettings
 from app.storage import companies, interviews, invites, reminders
+from app.storage.db import Session
 
 
 async def interview():
@@ -209,3 +213,22 @@ def test_only_stale_unstarted_invites_are_expiring_and_marking_one_expires_it(ru
     assert sorted(due) == ["new@example.com", "old@example.com"]
     assert after == ["new@example.com"]
     assert status == InviteStatus.EXPIRED
+
+
+def test_a_finished_interview_delivered_twice_notifies_the_company_once(run):
+    async def scenario():
+        found = await interview()
+        invite = await invites.upsert(found.id, "gus@example.com", "Backend", "Acme", "en")
+        notice = {"kind": "candidate_finished", "invite": str(invite.id)}
+        event_id = str(uuid.uuid4())
+        await invites.finish(invite.id, 70, False, notice, event_id)
+        await invites.finish(invite.id, 70, False, notice, event_id)
+
+        async with Session() as session:
+            return await session.scalar(
+                select(func.count())
+                .select_from(OutboxEvent)
+                .where(OutboxEvent.data["invite"].astext == str(invite.id))
+            )
+
+    assert run(scenario()) == 1

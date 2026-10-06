@@ -76,13 +76,17 @@ export function SessionPlay({
     }
   }, [questionId])
 
-  // Saves the pick, if there is one, then does `then`. Nothing can be picked and no clock runs
-  // until the next question is on screen, so neither Next nor the clock can move on twice.
-  async function sendThen(then: () => Promise<void>) {
+  // Saves the pick, if there is one, then does `then`; when saving fails, only if `always`.
+  // Nothing can be picked and the clock can't move on while it's sent, so neither Next nor the
+  // clock can move on twice; a failed send keeps the question's real time left.
+  async function sendThen(then: () => Promise<void>, always = false) {
     setSending(true)
 
     try {
-      if (chosen === null || (await onAnswer({ option_index: chosen }))) {
+      const saved =
+        chosen === null || (await onAnswer({ option_index: chosen }))
+
+      if (saved || always) {
         await then()
       }
     } finally {
@@ -101,11 +105,13 @@ export function SessionPlay({
           session={session}
           progress={progress}
           section={section}
-          question={sending ? null : question}
+          question={question}
+          sending={sending}
           // The pick counts, and quietly on to the next question: a message would only distract.
           onTimeUp={() => {
             setTimedOut(question?.question_id ?? null)
-            void sendAndAdvance()
+            // The question's time is over even if its pick can't be saved: the next opens.
+            void sendThen(onAdvance, true)
           }}
         />
       </div>
@@ -195,8 +201,9 @@ export function SessionPlay({
             <Button
               className="h-10 px-5 text-base"
               disabled={finishing}
-              // The pick on screen is saved first, so it counts.
-              onClick={() => sendThen(onFinish)}
+              // The pick on screen is saved first, so it counts; finishing goes ahead even when
+              // it can't be saved.
+              onClick={() => sendThen(onFinish, true)}
             >
               {finishing ? rounds("finishing") : rounds("finish")}
             </Button>
@@ -213,6 +220,7 @@ function SessionHeader({
   progress,
   section,
   question,
+  sending,
   onTimeUp,
 }: {
   brand?: ReactNode
@@ -221,6 +229,8 @@ function SessionHeader({
   section: { number: number; count: number }
   // The question waiting for an answer, with its clock.
   question: NextQuestion | null
+  // The pick is being sent: the clock runs on, but moves on only once that's done.
+  sending: boolean
   // Called when the question's clock reaches zero: the server counts it as wrong, and the
   // next one opens.
   onTimeUp: () => void
@@ -257,6 +267,7 @@ function SessionHeader({
                 <Countdown
                   key={question.question_id}
                   seconds={question.seconds_left}
+                  paused={sending}
                   onExpire={onTimeUp}
                 />
                 <MinusIcon

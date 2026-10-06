@@ -26,3 +26,5 @@ TIME_GRACE_SECONDS = 5
 INTERVIEW_TIME_MARGIN = 0.1
 # Expired interviews finished per scheduled run; the next run takes the rest.
 EXPIRY_BATCH = 100
+# How long an interview's title and language are kept in memory for its candidates' steps.
+SET_CACHE_SECONDS = 60

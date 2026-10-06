@@ -30,4 +30,6 @@ MESSAGES = {
     "The report isn't a PDF": "Звіт не у форматі PDF",
     "A report can be emailed once a candidate has finished this interview.": "Звіт можна надіслати на email, щойно кандидат завершить цю співбесіду.",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Ваша компанія вже надіслала денний ліміт звітів на email. Спробуйте завтра.",
+    "New interviews and AI features are paused for now. Please try again later.": "Нові співбесіди та функції ШІ поки призупинено. Спробуйте пізніше.",
+    "prepza is under maintenance. We'll be back soon.": "prepza на технічному обслуговуванні. Незабаром повернемося.",
 }

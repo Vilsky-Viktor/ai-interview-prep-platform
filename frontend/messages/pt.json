@@ -130,7 +130,30 @@
     "deleteLabel": "Excluir {title}",
     "deleteTitle": "Excluir este modelo?",
     "deleteText": "Seus tópicos e questões são excluídos. As entrevistas que as empresas já criaram a partir dele continuam.",
-    "deleteFailed": "Não foi possível excluir o modelo. Tente novamente."
+    "deleteFailed": "Não foi possível excluir o modelo. Tente novamente.",
+    "passRates": "Taxas de aprovação",
+    "controls": "Controlos",
+    "noPassRates": "Ainda não há entrevistas com candidatos que terminaram.",
+    "outsideTriggers": "taxa de aprovação incomum",
+    "finished": "{count, plural, one {# terminou} other {# terminaram}}",
+    "passed": "{percent}% aprovados",
+    "passMark": "nota de aprovação {percent}%",
+    "averageGrade": "média {percent}%",
+    "timedOut": "{percent}% com tempo esgotado",
+    "sortBy": {
+      "pass_rate": "Menor taxa de aprovação primeiro",
+      "finished": "Mais terminados primeiro"
+    },
+    "pauseTitle": "Pausa de emergência",
+    "pauseText": "Enquanto está ativa, ninguém pode começar uma nova entrevista, rodada de prática ou prévia, e nenhuma pergunta é gerada, regerada ou verificada. Candidatos que já estão em uma entrevista podem terminá-la.",
+    "pauseFailed": "Não foi possível alterar a pausa. Tente novamente.",
+    "maintenanceTitle": "Modo de manutenção",
+    "maintenanceText": "Enquanto estiver ativado, todas as páginas mostram que o prepza está em manutenção e os serviços recusam todos os pedidos, exceto os de superadmins. Pagamentos, e-mails e tarefas agendadas continuam a funcionar.",
+    "maintenanceFailed": "Não foi possível alterar o modo de manutenção. Tente novamente.",
+    "maintenanceConfirmTitle": "Ativar o modo de manutenção?",
+    "maintenanceRunning": "{count, plural, =0 {Nenhum candidato está numa entrevista agora.} other {Candidatos numa entrevista agora: #. Podem perder tempo.}}",
+    "maintenanceRunningUnknown": "Não foi possível contar os candidatos numa entrevista agora. Quem estiver pode perder tempo.",
+    "maintenanceTurnOn": "Ativar"
   },
   "templates": {
     "title": "Modelos",
@@ -226,7 +249,8 @@
     "limit": "Limite de questões",
     "count": "{count, plural, one {questão} other {questões}}",
     "loadFailed": "Não foi possível carregar as questões.",
-    "yourAnswer": "sua resposta"
+    "yourAnswer": "sua resposta",
+    "aiWritten": "Questões e gabaritos escritos por IA podem estar errados. Marque o erro ou gere de novo."
   },
   "rounds": {
     "answered": "Respondidas",
@@ -824,5 +848,13 @@
     "done": "Verificada: {domain}",
     "pending": "Salvo. Verificada quando um dono ou administrador entrar com um e-mail em {domain}.",
     "failed": "Não foi possível salvar o site."
+  },
+  "pause": {
+    "notice": "Novas entrevistas estão pausadas por enquanto: não podem ser iniciadas nem criadas. Uma entrevista já iniciada pode ser terminada. Volte mais tarde."
+  },
+  "maintenance": {
+    "title": "Em manutenção",
+    "text": "O prepza está em manutenção. Voltamos em breve.",
+    "notice": "O modo de manutenção está ativado: agora só os superadmins podem usar o prepza."
   }
 }

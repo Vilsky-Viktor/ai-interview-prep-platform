@@ -7,6 +7,7 @@ from fastapi import FastAPI, HTTPException, status
 from prepza_common import http
 from prepza_common.i18n import add_localized_errors
 from prepza_common.logging import RequestLogMiddleware, configure_logging
+from prepza_common.maintenance import MaintenanceMiddleware
 from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
@@ -15,6 +16,7 @@ from app.routers import (
     help,
     internal,
     internal_accounts,
+    internal_maintenance,
     interview_flow,
     practice,
     schedules,
@@ -47,6 +49,7 @@ app = FastAPI(
     openapi_url="/openapi.json" if settings.api_docs else None,
 )
 add_localized_errors(app)
+app.add_middleware(MaintenanceMiddleware, get_redis=get_redis)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(sessions.router)
 app.include_router(interview_flow.router)
@@ -56,6 +59,7 @@ app.include_router(help.router)
 app.include_router(internal.router)
 app.include_router(schedules.router)
 app.include_router(internal_accounts.router)
+app.include_router(internal_maintenance.router)
 
 
 @app.get("/health")

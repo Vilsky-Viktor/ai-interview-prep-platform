@@ -130,7 +130,30 @@
     "deleteLabel": "Elimina {title}",
     "deleteTitle": "Eliminare questo modello?",
     "deleteText": "I suoi argomenti e le sue domande vengono eliminati. I colloqui che le aziende ne hanno già ricavato restano.",
-    "deleteFailed": "Impossibile eliminare il modello. Riprova."
+    "deleteFailed": "Impossibile eliminare il modello. Riprova.",
+    "passRates": "Tassi di superamento",
+    "controls": "Controlli",
+    "noPassRates": "Nessun colloquio ha ancora candidati che l'hanno completato.",
+    "outsideTriggers": "tasso di superamento insolito",
+    "finished": "{count, plural, one {# completato} other {# completati}}",
+    "passed": "{percent}% superato",
+    "passMark": "soglia {percent}%",
+    "averageGrade": "media {percent}%",
+    "timedOut": "{percent}% tempo scaduto",
+    "sortBy": {
+      "pass_rate": "Tasso di superamento più basso prima",
+      "finished": "Più completati prima"
+    },
+    "pauseTitle": "Pausa di emergenza",
+    "pauseText": "Finché è attiva, nessuno può iniziare un nuovo colloquio, un round di pratica o un'anteprima, e nessuna domanda viene generata, rigenerata o verificata. I candidati già in un colloquio possono completarlo.",
+    "pauseFailed": "Impossibile modificare la pausa. Riprova.",
+    "maintenanceTitle": "Modalità manutenzione",
+    "maintenanceText": "Finché è attiva, ogni pagina mostra che prepza è in manutenzione e i servizi rifiutano ogni richiesta, tranne quelle dei superadmin. Pagamenti, email e attività pianificate continuano a funzionare.",
+    "maintenanceFailed": "Impossibile cambiare la modalità manutenzione. Riprova.",
+    "maintenanceConfirmTitle": "Attivare la modalità manutenzione?",
+    "maintenanceRunning": "{count, plural, =0 {Nessun candidato è in un colloquio ora.} other {Candidati in un colloquio ora: #. Potrebbero perdere tempo.}}",
+    "maintenanceRunningUnknown": "Impossibile contare i candidati in un colloquio ora. Chi lo è potrebbe perdere tempo.",
+    "maintenanceTurnOn": "Attiva"
   },
   "templates": {
     "title": "Modelli",
@@ -226,7 +249,8 @@
     "limit": "Limite di domande",
     "count": "{count, plural, one {domanda} other {domande}}",
     "loadFailed": "Impossibile caricare le domande.",
-    "yourAnswer": "la tua risposta"
+    "yourAnswer": "la tua risposta",
+    "aiWritten": "Domande e risposte scritte dall'IA possono essere sbagliate. Segnala un errore o rigenera."
   },
   "rounds": {
     "answered": "Risposte",
@@ -828,5 +852,13 @@
     "done": "Verificata: {domain}",
     "pending": "Salvato. Verrà verificata quando un proprietario o un amministratore accederà con un'email su {domain}.",
     "failed": "Impossibile salvare il sito web."
+  },
+  "pause": {
+    "notice": "I nuovi colloqui sono in pausa per ora: non si possono iniziare né creare. Un colloquio già iniziato si può completare. Torna più tardi."
+  },
+  "maintenance": {
+    "title": "In manutenzione",
+    "text": "prepza è in manutenzione. Torniamo presto.",
+    "notice": "La modalità manutenzione è attiva: ora solo i superadmin possono usare prepza."
   }
 }

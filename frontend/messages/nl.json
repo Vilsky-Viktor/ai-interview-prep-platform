@@ -130,7 +130,30 @@
     "deleteLabel": "{title} verwijderen",
     "deleteTitle": "Dit sjabloon verwijderen?",
     "deleteText": "De onderwerpen en vragen worden verwijderd. Sollicitatiegesprekken die bedrijven er al van hebben gemaakt, blijven bestaan.",
-    "deleteFailed": "Het sjabloon kon niet worden verwijderd. Probeer het opnieuw."
+    "deleteFailed": "Het sjabloon kon niet worden verwijderd. Probeer het opnieuw.",
+    "passRates": "Slagingspercentages",
+    "controls": "Bediening",
+    "noPassRates": "Nog geen sollicitatiegesprek heeft kandidaten die klaar zijn.",
+    "outsideTriggers": "ongebruikelijk slagingspercentage",
+    "finished": "{count, plural, one {# klaar} other {# klaar}}",
+    "passed": "{percent}% geslaagd",
+    "passMark": "slaaggrens {percent}%",
+    "averageGrade": "gemiddeld {percent}%",
+    "timedOut": "{percent}% tijd op",
+    "sortBy": {
+      "pass_rate": "Laagste slagingspercentage eerst",
+      "finished": "Meeste klaar eerst"
+    },
+    "pauseTitle": "Noodpauze",
+    "pauseText": "Zolang die aan staat, kan niemand een nieuw sollicitatiegesprek, oefenronde of voorbeeld starten, en worden er geen vragen gegenereerd, opnieuw gegenereerd of gecontroleerd. Kandidaten die al in een sollicitatiegesprek zitten, kunnen het afmaken.",
+    "pauseFailed": "De pauze kon niet worden gewijzigd. Probeer het opnieuw.",
+    "maintenanceTitle": "Onderhoudsmodus",
+    "maintenanceText": "Zolang die aan staat, toont elke pagina dat prepza in onderhoud is en weigeren de services elk verzoek, behalve van superadmins. Betalingen, e-mails en geplande taken blijven werken.",
+    "maintenanceFailed": "Kon de onderhoudsmodus niet wijzigen. Probeer het opnieuw.",
+    "maintenanceConfirmTitle": "Onderhoudsmodus aanzetten?",
+    "maintenanceRunning": "{count, plural, =0 {Er is nu geen kandidaat in een interview.} other {Kandidaten nu in een interview: #. Zij kunnen tijd verliezen.}}",
+    "maintenanceRunningUnknown": "Kon de kandidaten die nu in een interview zitten niet tellen. Wie dat doet, kan tijd verliezen.",
+    "maintenanceTurnOn": "Aanzetten"
   },
   "templates": {
     "title": "Sjablonen",
@@ -226,7 +249,8 @@
     "limit": "Vragenlimiet",
     "count": "{count, plural, one {vraag} other {vragen}}",
     "loadFailed": "De vragen konden niet worden geladen.",
-    "yourAnswer": "jouw antwoord"
+    "yourAnswer": "jouw antwoord",
+    "aiWritten": "Door AI geschreven vragen en antwoorden kunnen fout zijn. Markeer een fout antwoord of genereer opnieuw."
   },
   "rounds": {
     "answered": "Beantwoord",
@@ -824,5 +848,13 @@
     "done": "Geverifieerd: {domain}",
     "pending": "Opgeslagen. Geverifieerd zodra een eigenaar of beheerder inlogt met een e-mailadres op {domain}.",
     "failed": "De website kon niet worden opgeslagen."
+  },
+  "pause": {
+    "notice": "Nieuwe sollicitatiegesprekken zijn voorlopig gepauzeerd: ze kunnen niet worden gestart of gemaakt. Een gesprek dat al is begonnen, kan worden afgemaakt. Kom later terug."
+  },
+  "maintenance": {
+    "title": "In onderhoud",
+    "text": "prepza is in onderhoud. We zijn snel terug.",
+    "notice": "De onderhoudsmodus staat aan: alleen superadmins kunnen prepza nu gebruiken."
   }
 }

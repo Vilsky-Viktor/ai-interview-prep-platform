@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { NewInterview } from "@/components/company/new-interview"
+import { PausedNotice } from "@/components/paused-notice"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Company } from "@/types/company"
@@ -41,6 +42,7 @@ export default async function NewInterviewPage({
               {t("createTitle")}
             </h1>
           </div>
+          <PausedNotice />
           <NewInterview companyId={companyId} />
         </div>
       </div>

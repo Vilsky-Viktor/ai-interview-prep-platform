@@ -176,7 +176,8 @@ export interface paths {
     }
     /**
      * Ready
-     * @description Ready only once the database and Redis answer; Docker's healthcheck uses this.
+     * @description Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
+     *     isn't checked: an outage there shouldn't stop the service from starting.
      */
     get: operations["ready_ready_get"]
     put?: never

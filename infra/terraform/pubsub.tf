@@ -16,14 +16,17 @@ resource "google_pubsub_subscription" "dead_letter" {
   message_retention_duration = "604800s"
 }
 
-# The event types each consumer handles (its app/services/*events*.py and candidate_billing.py).
-# A consumer that starts handling a new type needs it added here. Changing a filter replaces the
-# subscription, dropping the messages it still holds: apply when its backlog is empty. Funnel
-# events go only to BigQuery (analytics.tf).
+# The event types each consumer handles (its app/services/*events*.py, candidate_billing.py and
+# candidate_results.py). A consumer that starts handling a new type needs it added here. Changing
+# a filter replaces the subscription, dropping the messages it still holds: apply when its backlog
+# is empty. Funnel events go only to BigQuery (analytics.tf).
+# Pub/Sub caps a filter at 256 bytes: each type adds 24 bytes plus its name (notifications' is at
+# 198 of them). Before one outgrows it, give its types a shared prefix and filter on
+# hasPrefix(attributes.type, "...") instead.
 locals {
   consumes = {
     library       = ["answer.recorded", "session.scored"]
-    companies     = ["generation.completed", "generation.cancelled", "interview.finished"]
+    companies     = ["generation.completed", "generation.cancelled", "interview.finished", "results.rescored"]
     notifications = ["notification.requested", "candidate.invited", "candidate.reminded", "report.shared", "contact.sent"]
   }
 }

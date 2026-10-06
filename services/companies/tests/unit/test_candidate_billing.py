@@ -45,7 +45,7 @@ def finished(monkeypatch, status=InviteStatus.IN_PROCESS):
     async def fake_get(invite_id):
         return invite
 
-    async def fake_finish(invite_id, grade, flagged, notice):
+    async def fake_finish(invite_id, grade, flagged, notice, event_id):
         invite.results = (grade, flagged)
         notices.append(notice)
 
@@ -72,7 +72,7 @@ def test_a_finished_interview_with_an_answer_charges_and_tells_the_company(ledge
 
     asyncio.run(
         candidate_billing.handle(
-            "interview.finished", {"candidate_invite_id": str(invite.id), "answered": 2}
+            "interview.finished", {"candidate_invite_id": str(invite.id), "answered": 2}, "event-1"
         )
     )
 
@@ -103,7 +103,7 @@ def test_rounds_being_down_doesnt_hold_up_the_charge(ledger, monkeypatch):
     monkeypatch.setattr(rounds, "invite_scores", down)
     asyncio.run(
         candidate_billing.handle(
-            "interview.finished", {"candidate_invite_id": str(invite.id), "answered": 2}
+            "interview.finished", {"candidate_invite_id": str(invite.id), "answered": 2}, "event-1"
         )
     )
 
@@ -118,7 +118,7 @@ def test_a_finished_interview_without_an_answer_gives_the_credits_back(ledger, m
 
     asyncio.run(
         candidate_billing.handle(
-            "interview.finished", {"candidate_invite_id": str(invite.id), "answered": 0}
+            "interview.finished", {"candidate_invite_id": str(invite.id), "answered": 0}, "event-1"
         )
     )
 
@@ -132,7 +132,7 @@ def test_a_deleted_candidate_is_left_alone(ledger, monkeypatch):
 
     asyncio.run(
         candidate_billing.handle(
-            "interview.finished", {"candidate_invite_id": str(invite.id), "answered": 3}
+            "interview.finished", {"candidate_invite_id": str(invite.id), "answered": 3}, "event-1"
         )
     )
 
@@ -183,8 +183,12 @@ def test_an_invite_started_or_sent_again_while_expiring_keeps_its_credits(ledger
     async def hold(company_id, key):
         ledger.append(("hold", key))
 
+    async def sent_again(invite_id):
+        return SimpleNamespace(id=invite_id, status=InviteStatus.INVITED)
+
     monkeypatch.setattr(invites, "expiring", fake_expiring)
     monkeypatch.setattr(invites, "mark_expired", not_marked)
+    monkeypatch.setattr(invites, "get", sent_again)
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(billing, "hold_candidate", hold)
 
@@ -194,6 +198,35 @@ def test_an_invite_started_or_sent_again_while_expiring_keeps_its_credits(ledger
         ("release", f"{INTERVIEW_ID}:eve@example.com"),
         ("hold", f"{INTERVIEW_ID}:eve@example.com"),
     ]
+
+
+def test_an_invite_another_run_expired_meanwhile_keeps_nothing_set_aside(ledger, monkeypatch):
+    stale = SimpleNamespace(id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="fay@example.com")
+    waiting = [stale]
+
+    async def fake_expiring(before, limit):
+        return list(waiting)
+
+    async def not_marked(invite_id, before):
+        waiting.clear()
+
+        return False
+
+    async def expired(invite_id):
+        return SimpleNamespace(id=invite_id, status=InviteStatus.EXPIRED)
+
+    async def hold(company_id, key):
+        ledger.append(("hold", key))
+
+    monkeypatch.setattr(invites, "expiring", fake_expiring)
+    monkeypatch.setattr(invites, "mark_expired", not_marked)
+    monkeypatch.setattr(invites, "get", expired)
+    monkeypatch.setattr(billing, "hold_candidate", hold)
+
+    asyncio.run(candidate_billing.expire_unstarted())
+
+    # A retried schedule overlapping the first run: its release is the only movement.
+    assert ledger == [("release", f"{INTERVIEW_ID}:fay@example.com")]
 
 
 def test_a_leaving_candidate_frees_only_unfinished_invites(ledger):

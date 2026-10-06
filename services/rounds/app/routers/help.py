@@ -6,6 +6,7 @@ from prepza_common.analytics import track
 from prepza_common.auth import OptionalUser
 from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS
 from prepza_common.i18n import request_language, translate
+from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
@@ -60,8 +61,9 @@ async def help_chat(
     body: HelpChatRequest, request: Request, user: OptionalUser
 ) -> StreamingResponse:
     """Answers questions about prepza, for visitors too. Streams server-sent events:
-    {"delta"}..., then {"done"} or {"error"}."""
+    {"delta"}..., then {"done"} or {"error"}. Refused during the emergency pause, as it's AI."""
     redis = get_redis()
+    await refuse_if_paused(redis)
 
     if user:
         await hit(redis, f"rate:help:{user.uid}", settings.help_user_limit, HOUR_SECONDS)

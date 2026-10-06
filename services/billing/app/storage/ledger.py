@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.constants.credits import WELCOME_COMPANY, WELCOME_GIFT, HoldStatus, Reason
 from app.constants.products import OwnerType
-from app.helpers.gifts import gift_key
+from app.helpers.gifts import gift_key, legacy_gift_key
 from app.models.billing import Entry, Gift, Hold, Wallet
 from app.storage.db import Session
 
@@ -31,12 +31,15 @@ async def welcome_company(company_id: str, owner_email: str) -> bool:
     first company. Deleting and creating one again doesn't repeat it. True when the gift is new."""
     async with Session() as session:
         await ensure(session, OwnerType.COMPANY, company_id)
+        given_before = await session.get(Gift, legacy_gift_key(WELCOME_GIFT, owner_email))
         new = await session.scalar(
             insert(Gift)
             .values(key=gift_key(WELCOME_GIFT, owner_email))
             .on_conflict_do_nothing()
             .returning(Gift.key)
         )
+        # Given under the key before inbox_of: not again.
+        new = new if given_before is None else None
 
         if new:
             await add(
@@ -121,14 +124,6 @@ async def release(key: str) -> None:
             .values(reserved=Wallet.reserved - hold.amount)
         )
         hold.status = HoldStatus.RELEASED
-        await session.commit()
-
-
-async def adjust(owner_type: str, owner_id: str, amount: int, key: str, reason: str) -> None:
-    """Moves credits whatever the balance: a refund or chargeback may leave it negative."""
-    async with Session() as session:
-        await ensure(session, owner_type, owner_id)
-        await add(session, owner_type, owner_id, amount, key, reason)
         await session.commit()
 
 

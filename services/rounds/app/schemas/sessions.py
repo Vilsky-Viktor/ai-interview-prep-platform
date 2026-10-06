@@ -13,6 +13,10 @@ class InviteScoresIn(BaseModel):
     invite_ids: list[UUID]
 
 
+class SetIdsIn(BaseModel):
+    set_ids: list[UUID]
+
+
 class InviteIdsIn(BaseModel):
     invite_ids: list[UUID]
 
@@ -79,7 +83,9 @@ class SignalIn(BaseModel):
 
 
 class RescoreIn(BaseModel):
-    """A question's corrected content: its text and options with the right one marked."""
+    """A question's corrected content: its text and options with the right one marked, and the
+    interview it belongs to (left out by older callers: every session is looked at)."""
 
     text: str
     options: list[dict]
+    set_id: UUID | None = None

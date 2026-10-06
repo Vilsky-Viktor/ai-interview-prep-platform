@@ -65,8 +65,14 @@ async def reward(owner_type: str, owner_id: str, transaction_id: str) -> str | N
     The referrer's id when it was paid."""
     amount = REFERRAL_REWARD
     now = datetime.now(UTC)
+    key = reward_key(owner_type, owner_id, transaction_id)
 
     async with Session() as session:
+        # A top-up pays at most once: a redelivery after its reward was taken back (refund)
+        # leaves the referral for the next real top-up.
+        if await session.scalar(select(Entry.key).where(Entry.key == key)):
+            return None
+
         referrer_id = await session.scalar(
             update(Referral)
             .where(
@@ -81,7 +87,6 @@ async def reward(owner_type: str, owner_id: str, transaction_id: str) -> str | N
         if referrer_id is None:
             return None
 
-        key = reward_key(owner_type, owner_id, transaction_id)
         await add(session, owner_type, owner_id, amount, key, Reason.REFERRAL)
         rewarded_this_year = await session.scalar(
             select(func.count()).where(

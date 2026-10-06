@@ -130,7 +130,30 @@
     "deleteLabel": "Xóa {title}",
     "deleteTitle": "Xóa mẫu này?",
     "deleteText": "Các chủ đề và câu hỏi của mẫu sẽ bị xóa. Những buổi phỏng vấn mà công ty đã tạo từ mẫu vẫn được giữ lại.",
-    "deleteFailed": "Không thể xóa mẫu. Vui lòng thử lại."
+    "deleteFailed": "Không thể xóa mẫu. Vui lòng thử lại.",
+    "passRates": "Tỷ lệ đạt",
+    "controls": "Điều khiển",
+    "noPassRates": "Chưa có buổi phỏng vấn nào có ứng viên hoàn thành.",
+    "outsideTriggers": "tỷ lệ đạt bất thường",
+    "finished": "{count, plural, other {# hoàn thành}}",
+    "passed": "{percent}% đạt",
+    "passMark": "điểm đạt {percent}%",
+    "averageGrade": "trung bình {percent}%",
+    "timedOut": "{percent}% hết giờ",
+    "sortBy": {
+      "pass_rate": "Tỷ lệ đạt thấp nhất trước",
+      "finished": "Nhiều người hoàn thành nhất trước"
+    },
+    "pauseTitle": "Tạm dừng khẩn cấp",
+    "pauseText": "Khi bật, không ai có thể bắt đầu buổi phỏng vấn, vòng luyện tập hay bản xem trước mới, và không câu hỏi nào được tạo, tạo lại hay kiểm tra. Ứng viên đang làm phỏng vấn vẫn có thể hoàn thành.",
+    "pauseFailed": "Không thể thay đổi trạng thái tạm dừng. Vui lòng thử lại.",
+    "maintenanceTitle": "Chế độ bảo trì",
+    "maintenanceText": "Khi bật, mọi trang đều hiển thị rằng prepza đang được bảo trì và các dịch vụ từ chối mọi yêu cầu, trừ của quản trị viên cấp cao. Thanh toán, email và tác vụ theo lịch vẫn hoạt động.",
+    "maintenanceFailed": "Không thể thay đổi chế độ bảo trì. Hãy thử lại.",
+    "maintenanceConfirmTitle": "Bật chế độ bảo trì?",
+    "maintenanceRunning": "{count, plural, =0 {Hiện không có ứng viên nào đang phỏng vấn.} other {Ứng viên đang phỏng vấn lúc này: #. Họ có thể mất thời gian.}}",
+    "maintenanceRunningUnknown": "Không thể đếm số ứng viên đang phỏng vấn lúc này. Ai đang phỏng vấn có thể mất thời gian.",
+    "maintenanceTurnOn": "Bật"
   },
   "templates": {
     "title": "Mẫu",
@@ -226,7 +249,8 @@
     "limit": "Giới hạn câu hỏi",
     "count": "{count, plural, other {câu hỏi}}",
     "loadFailed": "Không thể tải câu hỏi.",
-    "yourAnswer": "câu trả lời của bạn"
+    "yourAnswer": "câu trả lời của bạn",
+    "aiWritten": "Câu hỏi và đáp án do AI viết có thể sai. Hãy đánh dấu đáp án sai hoặc tạo lại."
   },
   "rounds": {
     "answered": "Đã trả lời",
@@ -824,5 +848,13 @@
     "done": "Đã xác minh: {domain}",
     "pending": "Đã lưu. Sẽ được xác minh khi chủ sở hữu hoặc quản trị viên đăng nhập bằng email thuộc {domain}.",
     "failed": "Không thể lưu website."
+  },
+  "pause": {
+    "notice": "Phỏng vấn mới đang tạm dừng: không thể bắt đầu hay tạo. Buổi phỏng vấn đã bắt đầu vẫn có thể hoàn thành. Vui lòng quay lại sau."
+  },
+  "maintenance": {
+    "title": "Đang bảo trì",
+    "text": "prepza đang được bảo trì. Chúng tôi sẽ sớm trở lại.",
+    "notice": "Chế độ bảo trì đang bật: hiện chỉ quản trị viên cấp cao mới dùng được prepza."
   }
 }

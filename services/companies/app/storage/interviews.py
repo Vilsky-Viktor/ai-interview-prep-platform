@@ -8,6 +8,7 @@ from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
 from app.schemas.interviews import InterviewSettings
+from app.storage import processed_events
 from app.storage.db import Session
 
 
@@ -152,17 +153,21 @@ async def get_for_generation(generation_id: uuid.UUID) -> Interview | None:
 
 
 async def set_generated(
-    generation_id: uuid.UUID, set_id: uuid.UUID, title: str, notice: dict
+    generation_id: uuid.UUID, set_id: uuid.UUID, title: str, notice: dict, event_id: str
 ) -> None:
     """Stores the set and title a finished generation produced for its interview, and the
-    company's notification with them."""
+    company's notification with them, once per event."""
     async with Session() as session:
+        new = await processed_events.claim(session, event_id)
         await session.execute(
             update(Interview)
             .where(Interview.generation_id == generation_id)
             .values(set_id=set_id, title=title)
         )
-        outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+
+        if new:
+            outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+
         await session.commit()
 
 

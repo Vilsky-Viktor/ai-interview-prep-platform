@@ -3,9 +3,11 @@ from uuid import UUID
 import httpx
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
+from prepza_common.pause import refuse_if_paused
 
 from app.constants.audit import AuditAction
 from app.integrations import generation as generation_api
+from app.integrations.redis import get_redis
 from app.models.interviews import Interview
 from app.schemas.interviews import ReviewIn
 from app.services.access import require_company, require_editor
@@ -53,6 +55,8 @@ async def get_generation(interview_id: UUID, user: CurrentUser) -> dict:
 
 @router.post("/{interview_id}/generation/review")
 async def review_generation(interview_id: UUID, body: ReviewIn, user: CurrentUser) -> dict:
+    """Approved topics resume the generation, so a pause refuses it."""
+    await refuse_if_paused(get_redis())
     interview = await get_interview(interview_id)
     await require_editor(user, interview.company_id)
     response = await generation_api.review(
@@ -66,6 +70,7 @@ async def review_generation(interview_id: UUID, body: ReviewIn, user: CurrentUse
 
 @router.post("/{interview_id}/generation/retry")
 async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
+    await refuse_if_paused(get_redis())
     interview = await get_interview(interview_id)
     await require_editor(user, interview.company_id)
 

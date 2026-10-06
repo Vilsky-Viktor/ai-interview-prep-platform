@@ -6,6 +6,7 @@ import { getLocale, getTranslations } from "next-intl/server"
 
 import "./globals.css"
 import { AuthProvider } from "@/components/auth-provider"
+import { MaintenanceNotice } from "@/components/maintenance-notice"
 import { SignInProvider } from "@/components/sign-in-dialog"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
@@ -77,6 +78,7 @@ export default async function RootLayout({
                 <SignInProvider>
                   <SiteHeader />
                   <div className="flex flex-1 flex-col [&>*]:w-full">
+                    <MaintenanceNotice />
                     {children}
                   </div>
                   <SiteFooter />

@@ -130,7 +130,30 @@
     "deleteLabel": "{title} öğesini sil",
     "deleteTitle": "Bu şablon silinsin mi?",
     "deleteText": "Konuları ve soruları silinir. Şirketlerin bundan oluşturduğu mülakatlar kalır.",
-    "deleteFailed": "Şablon silinemedi. Lütfen tekrar deneyin."
+    "deleteFailed": "Şablon silinemedi. Lütfen tekrar deneyin.",
+    "passRates": "Geçme oranları",
+    "controls": "Kontroller",
+    "noPassRates": "Henüz adayların bitirdiği bir mülakat yok.",
+    "outsideTriggers": "olağan dışı geçme oranı",
+    "finished": "{count, plural, one {# kişi bitirdi} other {# kişi bitirdi}}",
+    "passed": "%{percent} geçti",
+    "passMark": "geçme notu %{percent}",
+    "averageGrade": "ortalama %{percent}",
+    "timedOut": "%{percent} süre doldu",
+    "sortBy": {
+      "pass_rate": "En düşük geçme oranı önce",
+      "finished": "En çok bitiren önce"
+    },
+    "pauseTitle": "Acil duraklatma",
+    "pauseText": "Açıkken kimse yeni bir mülakat, alıştırma turu veya önizleme başlatamaz; hiçbir soru oluşturulmaz, yeniden oluşturulmaz veya kontrol edilmez. Hâlihazırda mülakatta olan adaylar onu bitirebilir.",
+    "pauseFailed": "Duraklatma değiştirilemedi. Lütfen tekrar deneyin.",
+    "maintenanceTitle": "Bakım modu",
+    "maintenanceText": "Açıkken her sayfa prepza'nın bakımda olduğunu gösterir ve hizmetler süper yöneticiler dışındaki tüm istekleri reddeder. Ödemeler, e-postalar ve zamanlanmış işler çalışmaya devam eder.",
+    "maintenanceFailed": "Bakım modu değiştirilemedi. Tekrar deneyin.",
+    "maintenanceConfirmTitle": "Bakım modu açılsın mı?",
+    "maintenanceRunning": "{count, plural, =0 {Şu anda mülakatta aday yok.} other {Şu anda mülakattaki adaylar: #. Zaman kaybedebilirler.}}",
+    "maintenanceRunningUnknown": "Şu anda mülakattaki adaylar sayılamadı. Mülakatta olanlar zaman kaybedebilir.",
+    "maintenanceTurnOn": "Aç"
   },
   "templates": {
     "title": "Şablonlar",
@@ -226,7 +249,8 @@
     "limit": "Soru sınırı",
     "count": "{count, plural, one {soru} other {soru}}",
     "loadFailed": "Sorular yüklenemedi.",
-    "yourAnswer": "cevabınız"
+    "yourAnswer": "cevabınız",
+    "aiWritten": "Yapay zekânın yazdığı sorular ve cevaplar hatalı olabilir. Yanlış cevabı işaretleyin ya da yeniden üretin."
   },
   "rounds": {
     "answered": "Cevaplanan",
@@ -827,5 +851,13 @@
     "done": "Doğrulandı: {domain}",
     "pending": "Kaydedildi. Bir sahip veya yönetici {domain} alan adındaki bir e-postayla giriş yaptığında doğrulanır.",
     "failed": "Web sitesi kaydedilemedi."
+  },
+  "pause": {
+    "notice": "Yeni mülakatlar şimdilik duraklatıldı: başlatılamaz veya oluşturulamaz. Başlamış bir mülakat bitirilebilir. Lütfen daha sonra tekrar gelin."
+  },
+  "maintenance": {
+    "title": "Bakımda",
+    "text": "prepza bakımda. Yakında geri döneceğiz.",
+    "notice": "Bakım modu açık: şu anda prepza'yı yalnızca süper yöneticiler kullanabilir."
   }
 }

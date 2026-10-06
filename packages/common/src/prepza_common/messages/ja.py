@@ -30,4 +30,6 @@ MESSAGES = {
     "The report isn't a PDF": "レポートが PDF ではありません",
     "A report can be emailed once a candidate has finished this interview.": "面接を終えた候補者のレポートのみメールで送れます。",
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "会社がメールで送れるレポートの 1 日の上限に達しました。明日もう一度お試しください。",
+    "New interviews and AI features are paused for now. Please try again later.": "新しい面接とAI機能は現在一時停止中です。しばらくしてからもう一度お試しください。",
+    "prepza is under maintenance. We'll be back soon.": "prepza はメンテナンス中です。まもなく再開します。",
 }

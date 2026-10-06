@@ -55,7 +55,7 @@ def interview(monkeypatch):
 def test_finished_generation_is_stored_on_its_interview_and_the_company_told(client, monkeypatch):
     stored = []
 
-    async def set_generated(generation_id, set_id, title, notice):
+    async def set_generated(generation_id, set_id, title, notice, event_id):
         stored.append((generation_id, set_id, title, notice))
 
     monkeypatch.setattr(interviews, "set_generated", set_generated)

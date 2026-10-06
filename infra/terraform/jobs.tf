@@ -47,7 +47,10 @@ resource "google_cloud_scheduler_job" "schedule" {
   region           = var.region
   schedule         = each.value.cron
   time_zone        = "Etc/UTC"
-  attempt_deadline = "600s"
+  # As long as the service lets the request run (Scheduler allows 15s to 30 minutes): waiting
+  # longer only delays the retry. A retry may still overlap a run Cloud Run cut off, so each job
+  # is safe to run twice at once (invite expiry re-checks before holding credits again).
+  attempt_deadline = "${max(15, min(local.services[each.value.service].timeout, 1800))}s"
 
   # The daily jobs retry a failed run; the frequent ones (cron starting with "*") just run again
   # soon.

@@ -8,3 +8,6 @@ CONTACT_SENT = "contact.sent"
 # A candidate finished one topic: its score and each shown question's result, so library can tell
 # questions that don't separate strong candidates from weak ones, and ones too slow to read.
 SESSION_SCORED = "session.scored"
+# A corrected answer key changed finished sections' scores: the candidates' invites, so companies
+# stores their new grades.
+RESULTS_RESCORED = "results.rescored"

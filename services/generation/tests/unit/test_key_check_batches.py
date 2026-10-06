@@ -1,6 +1,7 @@
 import asyncio
 import uuid
 
+from app.constants.quality import QualityFlag
 from app.integrations import library, openai_batch
 from app.models.key_checks import KeyCheck as KeyCheckRow
 from app.services import key_check_batches
@@ -44,16 +45,21 @@ class FakeStore:
             monkeypatch.setattr(key_checks, name, fake)
 
 
-def row(question_id):
-    return KeyCheckRow(question_id=question_id, question_text=TEXT)
+def row(question_id, marked_answer="Credit cash"):
+    return KeyCheckRow(question_id=question_id, question_text=TEXT, marked_answer=marked_answer)
 
 
-def library_with(monkeypatch, existing):
+def flagged(flag=QualityFlag.WRONG_KEY):
+    """The question as the library has it now: flagged for its key unless a test says not."""
+    return question().model_copy(update={"flag": flag})
+
+
+def library_with(monkeypatch, existing, flag=QualityFlag.WRONG_KEY):
     async def fake_context(question_id):
         return context() if question_id in existing else None
 
     async def fake_quality(question_id):
-        return question() if question_id in existing else None
+        return flagged(flag) if question_id in existing else None
 
     monkeypatch.setattr(library, "get_question_context", fake_context)
     monkeypatch.setattr(library, "get_question_quality", fake_quality)
@@ -137,3 +143,25 @@ def test_a_running_batch_is_left_alone(monkeypatch):
     asyncio.run(key_check_batches.collect_finished())
 
     assert store.rows == {KEPT: "batch-1"}
+
+
+def test_a_result_for_a_question_fixed_or_rekeyed_since_is_dropped(monkeypatch):
+    applied = []
+
+    async def fake_apply(question_id, question, context, result):
+        applied.append(question_id)
+
+    monkeypatch.setattr(key_check_batches, "apply_key_check", fake_apply)
+    reply = '{"correct_index": 1}'
+
+    # Kept or fixed since (or this result was applied already): no longer flagged for its key.
+    library_with(monkeypatch, {KEPT}, flag=None)
+    asyncio.run(key_check_batches.apply_reply(row(KEPT), reply))
+    # Its key moved since the check was queued.
+    library_with(monkeypatch, {KEPT})
+    asyncio.run(key_check_batches.apply_reply(row(KEPT, "Debit cash"), reply))
+    # Still as it was: the result applies; a check queued before keys were kept too.
+    asyncio.run(key_check_batches.apply_reply(row(KEPT), reply))
+    asyncio.run(key_check_batches.apply_reply(row(KEPT, None), reply))
+
+    assert applied == [KEPT, KEPT]

@@ -3,9 +3,11 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
+from prepza_common.pause import refuse_if_paused
 
 from app.integrations import generation as generation_api
 from app.integrations import library
+from app.integrations.redis import get_redis
 from app.models.interviews import Interview
 from app.schemas.interviews import QuestionText, ReportOut, TopicLimitIn
 from app.services.access import require_company, require_editor
@@ -62,6 +64,7 @@ async def set_topic_limit(
 
 @router.post("/{interview_id}/questions/{question_id}/regenerate")
 async def regenerate_question(interview_id: UUID, question_id: UUID, user: CurrentUser) -> dict:
+    await refuse_if_paused(get_redis())
     interview = await generated_interview(interview_id)
     await require_editor(user, interview.company_id)
     response = await generation_api.regenerate_question(question_id, interview.set_id, user.uid)

@@ -130,7 +130,30 @@
     "deleteLabel": "Kustuta {title}",
     "deleteTitle": "Kustutada see mall?",
     "deleteText": "Selle teemad ja küsimused kustutatakse. Intervjuud, mille ettevõtted on selle põhjal juba teinud, jäävad alles.",
-    "deleteFailed": "Malli ei õnnestunud kustutada. Proovi uuesti."
+    "deleteFailed": "Malli ei õnnestunud kustutada. Proovi uuesti.",
+    "passRates": "Läbimise määrad",
+    "controls": "Juhtimine",
+    "noPassRates": "Ühelgi intervjuul pole veel lõpetanud kandidaate.",
+    "outsideTriggers": "ebatavaline läbimise määr",
+    "finished": "{count, plural, one {# lõpetas} other {# lõpetasid}}",
+    "passed": "{percent}% läbis",
+    "passMark": "läbimise lävi {percent}%",
+    "averageGrade": "keskmine {percent}%",
+    "timedOut": "{percent}% aeg sai otsa",
+    "sortBy": {
+      "pass_rate": "Madalaim läbimise määr eespool",
+      "finished": "Enim lõpetanuid eespool"
+    },
+    "pauseTitle": "Hädapaus",
+    "pauseText": "Kui see on sees, ei saa keegi alustada uut intervjuud, harjutusvooru ega eelvaadet ning küsimusi ei looda, looda uuesti ega kontrollita. Kandidaadid, kes on juba intervjuus, saavad selle lõpetada.",
+    "pauseFailed": "Pausi ei õnnestunud muuta. Proovi uuesti.",
+    "maintenanceTitle": "Hooldusrežiim",
+    "maintenanceText": "Kui see on sees, näitab iga leht, et prepza on hoolduses, ja teenused keelduvad igast päringust, välja arvatud superadminidelt. Maksed, e-kirjad ja ajastatud tööd toimivad edasi.",
+    "maintenanceFailed": "Hooldusrežiimi ei õnnestunud muuta. Proovi uuesti.",
+    "maintenanceConfirmTitle": "Kas lülitada hooldusrežiim sisse?",
+    "maintenanceRunning": "{count, plural, =0 {Praegu ei ole ükski kandidaat intervjuul.} other {Kandidaate praegu intervjuul: #. Nad võivad aega kaotada.}}",
+    "maintenanceRunningUnknown": "Intervjuul olevaid kandidaate ei õnnestunud loendada. Need, kes on, võivad aega kaotada.",
+    "maintenanceTurnOn": "Lülita sisse"
   },
   "templates": {
     "title": "Mallid",
@@ -226,7 +249,8 @@
     "limit": "Küsimuste piirang",
     "count": "{count, plural, one {küsimus} other {küsimust}}",
     "loadFailed": "Küsimusi ei õnnestunud laadida.",
-    "yourAnswer": "sinu vastus"
+    "yourAnswer": "sinu vastus",
+    "aiWritten": "AI kirjutatud küsimused ja vastused võivad olla valed. Märgi vale vastus või loo uuesti."
   },
   "rounds": {
     "answered": "Vastatud",
@@ -832,5 +856,13 @@
     "done": "Kinnitatud: {domain}",
     "pending": "Salvestatud. Kinnitatakse, kui omanik või administraator logib sisse domeeni {domain} aadressiga.",
     "failed": "Veebisaiti ei õnnestunud salvestada."
+  },
+  "pause": {
+    "notice": "Uued intervjuud on praegu peatatud: neid ei saa alustada ega luua. Juba alustatud intervjuu saab lõpetada. Tule hiljem tagasi."
+  },
+  "maintenance": {
+    "title": "Hoolduses",
+    "text": "prepza on hoolduses. Oleme varsti tagasi.",
+    "notice": "Hooldusrežiim on sees: praegu saavad prepzat kasutada ainult superadminid."
   }
 }

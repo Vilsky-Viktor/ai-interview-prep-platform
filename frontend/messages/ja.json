@@ -130,7 +130,30 @@
     "deleteLabel": "{title} を削除",
     "deleteTitle": "このテンプレートを削除しますか？",
     "deleteText": "トピックと問題は削除されます。これをもとに企業がすでに作成した面接は残ります。",
-    "deleteFailed": "テンプレートを削除できませんでした。もう一度お試しください。"
+    "deleteFailed": "テンプレートを削除できませんでした。もう一度お試しください。",
+    "passRates": "合格率",
+    "controls": "コントロール",
+    "noPassRates": "受験を終えた候補者がいる面接はまだありません。",
+    "outsideTriggers": "合格率が異常",
+    "finished": "{count, plural, other {修了 # 人}}",
+    "passed": "合格 {percent}%",
+    "passMark": "合格ライン {percent}%",
+    "averageGrade": "平均 {percent}%",
+    "timedOut": "時間切れ {percent}%",
+    "sortBy": {
+      "pass_rate": "合格率の低い順",
+      "finished": "修了者の多い順"
+    },
+    "pauseTitle": "緊急一時停止",
+    "pauseText": "オンの間は、新しい面接、練習ラウンド、プレビューを誰も開始できず、質問の生成、再生成、確認も行われません。すでに面接中の候補者は最後まで受けられます。",
+    "pauseFailed": "一時停止を変更できませんでした。もう一度お試しください。",
+    "maintenanceTitle": "メンテナンスモード",
+    "maintenanceText": "オンの間は、すべてのページに prepza がメンテナンス中であることが表示され、スーパー管理者以外のリクエストはすべて拒否されます。支払い、メール、スケジュールされた処理は動き続けます。",
+    "maintenanceFailed": "メンテナンスモードを変更できませんでした。もう一度お試しください。",
+    "maintenanceConfirmTitle": "メンテナンスモードをオンにしますか？",
+    "maintenanceRunning": "{count, plural, =0 {現在面接中の候補者はいません。} other {現在面接中の候補者：#人。時間を失う可能性があります。}}",
+    "maintenanceRunningUnknown": "現在面接中の候補者を数えられませんでした。面接中の候補者は時間を失う可能性があります。",
+    "maintenanceTurnOn": "オンにする"
   },
   "templates": {
     "title": "テンプレート",
@@ -226,7 +249,8 @@
     "limit": "問題数の上限",
     "count": "{count, plural, other {問}}",
     "loadFailed": "問題を読み込めませんでした。",
-    "yourAnswer": "あなたの回答"
+    "yourAnswer": "あなたの回答",
+    "aiWritten": "AI が作成した問題と正解は誤っている場合があります。誤りを報告するか、再生成してください。"
   },
   "rounds": {
     "answered": "回答済み",
@@ -832,5 +856,13 @@
     "done": "認証済み: {domain}",
     "pending": "保存しました。所有者または管理者が {domain} のメールでサインインすると認証されます。",
     "failed": "ウェブサイトを保存できませんでした。"
+  },
+  "pause": {
+    "notice": "新しい面接は現在一時停止中です。開始も作成もできません。すでに始まった面接は最後まで受けられます。しばらくしてからもう一度お越しください。"
+  },
+  "maintenance": {
+    "title": "メンテナンス中",
+    "text": "prepza はメンテナンス中です。まもなく再開します。",
+    "notice": "メンテナンスモードがオンです：現在 prepza を使えるのはスーパー管理者だけです。"
   }
 }

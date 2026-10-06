@@ -5,6 +5,7 @@ from fastapi import APIRouter, HTTPException, Query, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
+from prepza_common.pause import refuse_if_paused
 
 from app.constants.audit import AuditAction
 from app.constants.invites import (
@@ -23,6 +24,7 @@ from app.helpers.interviews import (
 )
 from app.helpers.logos import logo_path
 from app.integrations import billing, rounds
+from app.integrations.redis import get_redis
 from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateOut
 from app.services import candidate_invites, candidate_results
 from app.services import outbox as outbox_service
@@ -42,6 +44,8 @@ async def invite_candidate(
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
     company, _ = await require_editor(user, interview.company_id)
+    # Paused, no invite (new or sent again) goes out: its candidate couldn't start.
+    await refuse_if_paused(get_redis())
     interview = await attach_set(interview)
 
     if interview.set_id is None:

@@ -1,3 +1,4 @@
+import type { components as companies } from "@/types/api/companies"
 import type { components } from "@/types/api/library"
 
 type Schemas = components["schemas"]
@@ -25,3 +26,6 @@ export type QualityRow = {
   set_kind: string
   at: string
 }
+
+/** A company interview's pass rate, for the monitoring tab. */
+export type PassRate = companies["schemas"]["PassRateOut"]

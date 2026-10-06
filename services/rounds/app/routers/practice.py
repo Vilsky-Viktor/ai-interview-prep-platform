@@ -4,6 +4,7 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import HOUR_SECONDS
+from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
 from app.constants.practice import (
@@ -37,6 +38,7 @@ router = APIRouter(prefix="/practice", tags=["practice"])
 
 @router.post("/{template_id}", status_code=status.HTTP_201_CREATED)
 async def start_practice(template_id: UUID, user: CurrentUser) -> PracticeStartOut:
+    await refuse_if_paused(get_redis())
     await hit(get_redis(), f"rate:practice:{user.uid}", PRACTICE_ROUNDS_PER_HOUR, HOUR_SECONDS)
     content = await library.practice_content(template_id)
 

@@ -22,6 +22,11 @@ async def replace(question_id: UUID, context: QuestionContext) -> None:
         logger.warning("Couldn't write a replacement for question %s", question_id)
 
 
+def marked_answer(question: QuestionQuality) -> str:
+    """The option the question marks as correct."""
+    return next(option.answer for option in question.options if option.correct)
+
+
 def option_order(question: QuestionQuality) -> list[int]:
     """The marked option first, so the model doesn't take a position as a hint."""
     marked = next(i for i, option in enumerate(question.options) if option.correct)
@@ -128,10 +133,13 @@ async def verify(question_id: UUID, flag: QualityFlag, now: bool = False) -> Non
     flag = question.flag
 
     if flag == QualityFlag.WRONG_KEY and now:
+        # Checked now, so a check still waiting in a batch is dropped: its result would come
+        # after this one's.
+        await key_checks.remove([question_id])
         await check_key(question_id, question, context)
     elif flag == QualityFlag.WRONG_KEY:
         # Nobody waits on it, so it goes in the next OpenAI batch at half price.
-        await key_checks.add(question_id, question.text)
+        await key_checks.add(question_id, question.text, marked_answer(question))
     elif flag == QualityFlag.WEAK_OPTIONS:
         await new_options(question_id, question, context)
     else:

@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException, status
 from prepza_common import http
 from prepza_common.i18n import add_localized_errors
 from prepza_common.logging import RequestLogMiddleware, configure_logging
+from prepza_common.maintenance import MaintenanceMiddleware
 from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
@@ -26,9 +27,12 @@ from app.routers import (
     invites,
     links,
     logos,
+    maintenance,
     members,
+    pause,
     reports,
     schedules,
+    superadmin,
     verification,
 )
 from app.storage.db import ping as ping_database
@@ -52,6 +56,7 @@ app = FastAPI(
     openapi_url="/openapi.json" if settings.api_docs else None,
 )
 add_localized_errors(app)
+app.add_middleware(MaintenanceMiddleware, get_redis=get_redis)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(companies.router)
 app.include_router(audit.router)
@@ -72,6 +77,9 @@ app.include_router(internal_accounts.router)
 app.include_router(internal_invites.router)
 app.include_router(internal_events.router)
 app.include_router(schedules.router)
+app.include_router(pause.router)
+app.include_router(maintenance.router)
+app.include_router(superadmin.router)
 
 
 @app.get("/health")

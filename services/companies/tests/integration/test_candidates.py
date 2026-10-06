@@ -111,7 +111,7 @@ def test_lookups_count_find_one_candidate_and_leave_out_deleted_ones(run):
     assert report == ["ann@example.com"]
 
 
-def test_results_saved_from_the_list_finish_the_invite(run):
+def test_results_saved_from_the_list_keep_the_status_for_the_finish_event(run):
     async def scenario():
         found = await interview()
         ann = await invite(found, "ann@example.com")
@@ -122,7 +122,8 @@ def test_results_saved_from_the_list_finish_the_invite(run):
 
     saved = run(scenario())
 
-    assert (saved.status, saved.grade, saved.flagged) == (InviteStatus.FINISHED, 85, True)
+    # Only interview.finished marks it finished, as it settles the credits.
+    assert (saved.status, saved.grade, saved.flagged) == (InviteStatus.IN_PROCESS, 85, True)
 
 
 def test_an_expired_invite_started_through_the_link_is_in_process(run):

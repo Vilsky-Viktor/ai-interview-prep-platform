@@ -130,7 +130,30 @@
     "deleteLabel": "{title} 삭제",
     "deleteTitle": "이 템플릿을 삭제할까요?",
     "deleteText": "주제와 문제가 삭제됩니다. 회사가 이미 이 템플릿으로 만든 면접은 유지됩니다.",
-    "deleteFailed": "템플릿을 삭제하지 못했습니다. 다시 시도해 주세요."
+    "deleteFailed": "템플릿을 삭제하지 못했습니다. 다시 시도해 주세요.",
+    "passRates": "합격률",
+    "controls": "제어",
+    "noPassRates": "아직 응시를 마친 후보자가 있는 면접이 없습니다.",
+    "outsideTriggers": "비정상적인 합격률",
+    "finished": "{count, plural, other {완료 #명}}",
+    "passed": "합격 {percent}%",
+    "passMark": "합격 기준 {percent}%",
+    "averageGrade": "평균 {percent}%",
+    "timedOut": "시간 초과 {percent}%",
+    "sortBy": {
+      "pass_rate": "합격률 낮은 순",
+      "finished": "완료 많은 순"
+    },
+    "pauseTitle": "긴급 일시 중지",
+    "pauseText": "켜져 있는 동안에는 누구도 새 면접, 연습 라운드, 미리보기를 시작할 수 없으며 질문 생성, 재생성, 검토도 이루어지지 않습니다. 이미 면접 중인 후보자는 끝까지 마칠 수 있습니다.",
+    "pauseFailed": "일시 중지를 변경하지 못했습니다. 다시 시도해 주세요.",
+    "maintenanceTitle": "점검 모드",
+    "maintenanceText": "켜져 있는 동안 모든 페이지에 prepza가 점검 중이라고 표시되고, 슈퍼 관리자를 제외한 모든 요청이 거부됩니다. 결제, 이메일, 예약된 작업은 계속 작동합니다.",
+    "maintenanceFailed": "점검 모드를 변경하지 못했습니다. 다시 시도하세요.",
+    "maintenanceConfirmTitle": "점검 모드를 켤까요?",
+    "maintenanceRunning": "{count, plural, =0 {지금 면접 중인 지원자가 없습니다.} other {지금 면접 중인 지원자: #명. 시간을 잃을 수 있습니다.}}",
+    "maintenanceRunningUnknown": "지금 면접 중인 지원자 수를 세지 못했습니다. 면접 중인 지원자는 시간을 잃을 수 있습니다.",
+    "maintenanceTurnOn": "켜기"
   },
   "templates": {
     "title": "템플릿",
@@ -226,7 +249,8 @@
     "limit": "문제 수 한도",
     "count": "{count, plural, other {문제}}",
     "loadFailed": "문제를 불러오지 못했습니다.",
-    "yourAnswer": "내 답변"
+    "yourAnswer": "내 답변",
+    "aiWritten": "AI가 작성한 문제와 정답은 틀릴 수 있습니다. 틀린 정답을 표시하거나 다시 생성하세요."
   },
   "rounds": {
     "answered": "답변함",
@@ -819,5 +843,13 @@
     "done": "인증됨: {domain}",
     "pending": "저장했습니다. 소유자나 관리자가 {domain} 이메일로 로그인하면 인증됩니다.",
     "failed": "웹사이트를 저장하지 못했습니다."
+  },
+  "pause": {
+    "notice": "새 면접이 지금은 일시 중지되었습니다. 시작하거나 만들 수 없습니다. 이미 시작한 면접은 마칠 수 있습니다. 나중에 다시 와 주세요."
+  },
+  "maintenance": {
+    "title": "점검 중",
+    "text": "prepza는 점검 중입니다. 곧 돌아오겠습니다.",
+    "notice": "점검 모드가 켜져 있습니다: 지금은 슈퍼 관리자만 prepza를 사용할 수 있습니다."
   }
 }

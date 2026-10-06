@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 
 import app.models.audit
 import app.models.companies
+import app.models.events
 import app.models.interviews
 import app.models.invites
 import app.models.outbox  # noqa: F401

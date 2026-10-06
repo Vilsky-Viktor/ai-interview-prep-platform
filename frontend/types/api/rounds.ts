@@ -199,7 +199,7 @@ export interface paths {
     }
     /**
      * Practice Size
-     * @description Public, for the test's page: how many questions a round has.
+     * @description Public, for the test's page: how many questions a round has, kept for a few minutes.
      */
     get: operations["practice_size_practice__template_id__size_get"]
     put?: never
@@ -374,7 +374,7 @@ export interface paths {
     /**
      * Help Chat
      * @description Answers questions about prepza, for visitors too. Streams server-sent events:
-     *     {"delta"}..., then {"done"} or {"error"}.
+     *     {"delta"}..., then {"done"} or {"error"}. Refused during the emergency pause, as it's AI.
      */
     post: operations["help_chat_help_chat_post"]
     delete?: never
@@ -434,6 +434,26 @@ export interface paths {
     put?: never
     /** Invite Scores */
     post: operations["invite_scores_internal_invite_scores_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/answer-counts": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Interview Answer Counts
+     * @description For the superadmin's pass rates: each interview's answers, [timed out, all].
+     */
+    post: operations["interview_answer_counts_internal_answer_counts_post"]
     delete?: never
     options?: never
     head?: never
@@ -596,6 +616,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/maintenance/running": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Running Interviews
+     * @description For companies' maintenance switch: the candidates who may lose time if it's turned on.
+     */
+    get: operations["running_interviews_internal_maintenance_running_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/health": {
     parameters: {
       query?: never
@@ -622,7 +662,8 @@ export interface paths {
     }
     /**
      * Ready
-     * @description Ready only once the database and Redis answer; Docker's healthcheck uses this.
+     * @description Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
+     *     isn't checked: an outage there shouldn't stop the service from starting.
      */
     get: operations["ready_ready_get"]
     put?: never
@@ -934,7 +975,8 @@ export interface components {
     }
     /**
      * RescoreIn
-     * @description A question's corrected content: its text and options with the right one marked.
+     * @description A question's corrected content: its text and options with the right one marked, and the
+     *     interview it belongs to (left out by older callers: every session is looked at).
      */
     RescoreIn: {
       /** Text */
@@ -943,6 +985,8 @@ export interface components {
       options: {
         [key: string]: unknown
       }[]
+      /** Set Id */
+      set_id?: string | null
     }
     /**
      * ReviewItem
@@ -979,6 +1023,11 @@ export interface components {
      * @enum {string}
      */
     RoundStatus: "in_progress" | "finished"
+    /** RunningOut */
+    RunningOut: {
+      /** Running */
+      running: number
+    }
     /** ScorecardSession */
     ScorecardSession: {
       /**
@@ -1088,6 +1137,11 @@ export interface components {
        * @default false
        */
       preview: boolean
+    }
+    /** SetIdsIn */
+    SetIdsIn: {
+      /** Set Ids */
+      set_ids: string[]
     }
     /** SignalIn */
     SignalIn: {
@@ -1893,6 +1947,41 @@ export interface operations {
       }
     }
   }
+  interview_answer_counts_internal_answer_counts_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SetIdsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": {
+            [key: string]: number[]
+          }
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   delete_interview_data_internal_interviews__interview_set_id__delete: {
     parameters: {
       query?: never
@@ -2115,6 +2204,26 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  running_interviews_internal_maintenance_running_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["RunningOut"]
         }
       }
     }

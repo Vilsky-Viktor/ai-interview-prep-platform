@@ -20,7 +20,7 @@ def clear_overrides():
     app.dependency_overrides.clear()
 
 
-def listed_with(client, monkeypatch, url, scores=None):
+def listed_with(client, monkeypatch, url, scores=None, flagged=False):
     """Lists candidates with storage's page in memory; what the page was asked for, and the
     rows returned."""
     sign_in()
@@ -42,6 +42,7 @@ def listed_with(client, monkeypatch, url, scores=None):
         token="token-ada",
         status=InviteStatus.FINISHED,
         grade=90,
+        flagged=flagged,
         created_at=datetime.now(UTC),
     )
     asked = []
@@ -109,6 +110,8 @@ def test_results_missing_on_finished_invites_are_stored_before_sorting(client, m
 
     monkeypatch.setattr(candidates, "unscored", unscored)
     totals = {str(INVITE_ID): {"progress": 100, "grade": 90, "finished": True, "copies": 1}}
-    listed_with(client, monkeypatch, f"/interviews/{INTERVIEW_ID}/candidates", totals)
+    # The page reads what the backfill stored.
+    url = f"/interviews/{INTERVIEW_ID}/candidates"
+    listed_with(client, monkeypatch, url, totals, flagged=True)
 
     assert fake_candidates.SAVED == [(INVITE_ID, 90, True)]

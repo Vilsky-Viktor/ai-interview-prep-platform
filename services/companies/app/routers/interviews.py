@@ -6,6 +6,7 @@ from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import DAY_SECONDS
 from prepza_common.paging import PageParams
+from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
 from app.constants.audit import AuditAction
@@ -44,6 +45,7 @@ router = APIRouter(prefix="/interviews", tags=["interviews"])
 async def create_interview(
     body: InterviewCreate, company_id: UUID, user: CurrentUser
 ) -> InterviewOut:
+    await refuse_if_paused(get_redis())
     company, _ = await require_editor(user, company_id)
 
     # Checked first, so a refused attempt doesn't count towards the day's limit.
@@ -195,6 +197,7 @@ async def delete_interview(interview_id: UUID, user: CurrentUser) -> None:
 async def preview_interview(interview_id: UUID, user: CurrentUser) -> PreviewOut:
     """A company member takes their own test as a candidate would: free, kept out of the
     candidate list, and its answers out of the questions' statistics. Each preview is new."""
+    await refuse_if_paused(get_redis())
     interview = await interviews.get(interview_id)
 
     if interview is None:

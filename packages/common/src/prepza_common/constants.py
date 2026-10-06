@@ -109,3 +109,17 @@ MAX_TITLE_LENGTH = 70
 
 # A job description, as pasted to generate a test.
 MAX_GOAL_LENGTH = 10_000
+
+# The emergency pause (pause.py): one Redis key every service reads, and the message it refuses
+# with while it's on.
+PAUSE_KEY = "pause:on"
+PAUSED = "New interviews and AI features are paused for now. Please try again later."
+
+# Maintenance mode (maintenance.py): one Redis key every service reads, the message every refused
+# request gets while it's on, and what stays open: health checks, the switch itself, calls
+# between services, Pub/Sub and Scheduler pushes (under /internal/) and Paddle's and Resend's
+# webhooks, so no event, job or payment is lost.
+MAINTENANCE_KEY = "maintenance:on"
+MAINTENANCE = "prepza is under maintenance. We'll be back soon."
+MAINTENANCE_OPEN_PATHS = {"/health", "/ready", "/maintenance", "/superadmin/maintenance"}
+MAINTENANCE_OPEN_PREFIXES = ("/internal/", "/webhooks/")

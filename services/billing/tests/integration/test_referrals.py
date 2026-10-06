@@ -1,11 +1,14 @@
 import uuid
 from datetime import UTC, datetime
 
-from app.constants.credits import REFERRAL_REWARD, WELCOME_COMPANY
+from app.constants.credits import REFERRAL_REWARD, WELCOME_COMPANY, WELCOME_GIFT
 from app.constants.products import OwnerType
+from app.helpers.gifts import legacy_gift_key
+from app.models.billing import Gift
 from app.services.adjustments import handle_adjustment
 from app.services.referrals import reward_after_top_up
 from app.storage import ledger, purchases, referrals
+from app.storage.db import Session
 
 COMPANY = OwnerType.COMPANY
 
@@ -130,13 +133,30 @@ def test_a_full_refund_of_the_rewarding_top_up_takes_both_rewards_back(run):
             await available(COMPANY, acme),
             await referrals.rewarded_count(COMPANY, acme),
         )
-        # The company's next top-up pays the referral again.
+        # Paddle sending the refunded top-up again pays nothing; the next real top-up pays.
+        await reward_after_top_up(COMPANY, newco, refunded)
+        replayed = await referrals.rewarded_count(COMPANY, acme)
         await top_up(paid)
 
-        return partly, taken_back, await available(COMPANY, acme)
+        return partly, taken_back, replayed, await available(COMPANY, acme)
 
-    partly, taken_back, again = run(scenario())
+    partly, taken_back, replayed, again = run(scenario())
 
     assert partly == WELCOME_COMPANY + REFERRAL_REWARD
     assert taken_back == (WELCOME_COMPANY, 0)
+    assert replayed == 0
     assert again == WELCOME_COMPANY + REFERRAL_REWARD
+
+
+def test_an_owner_given_the_welcome_gift_under_the_old_key_isnt_given_it_again(run):
+    first, second = company(), company()
+
+    async def scenario():
+        async with Session() as session:
+            session.add(Gift(key=legacy_gift_key(WELCOME_GIFT, "Ann.Lee+jobs@gmail.com")))
+            await session.commit()
+
+        return await ledger.welcome_company(second, "ann.lee+jobs@gmail.com")
+
+    assert run(scenario()) is False
+    assert first != second

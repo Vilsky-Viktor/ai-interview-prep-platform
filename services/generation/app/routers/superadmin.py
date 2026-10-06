@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 from prepza_common.superadmin import SuperadminUser
 
@@ -38,6 +39,7 @@ async def get_template_generation(generation_id: UUID) -> Generation:
 async def create_template(
     body: TemplateGenerationCreate, superadmin: SuperadminUser
 ) -> GenerationOut:
+    await refuse_if_paused(get_redis())
     await use_daily_budget()
     generation = await generations.create(
         superadmin.uid,
@@ -59,6 +61,7 @@ async def get_generation(generation_id: UUID, superadmin: SuperadminUser) -> Gen
 async def review_generation(
     generation_id: UUID, body: ReviewRequest, superadmin: SuperadminUser
 ) -> GenerationOut:
+    await refuse_if_paused(get_redis())
     generation = await get_template_generation(generation_id)
 
     return GenerationOut.model_validate(await submit_review(generation, body))
@@ -66,6 +69,7 @@ async def review_generation(
 
 @router.post("/generations/{generation_id}/retry")
 async def retry(generation_id: UUID, superadmin: SuperadminUser) -> GenerationOut:
+    await refuse_if_paused(get_redis())
     generation = await get_template_generation(generation_id)
 
     return GenerationOut.model_validate(await retry_generation(generation))
@@ -82,6 +86,7 @@ async def cancel(generation_id: UUID, superadmin: SuperadminUser) -> GenerationO
 async def regenerate_question(
     template_id: UUID, question_id: UUID, superadmin: SuperadminUser
 ) -> RegeneratedOut:
+    await refuse_if_paused(get_redis())
     context = await library.get_question_context(question_id)
 
     if context is None or context.set_id != template_id or context.kind != "template":

@@ -4,12 +4,14 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser, OptionalUser
+from prepza_common.pause import refuse_if_paused
 
 from app.constants.invites import LINK_CLOSED, LINK_TOKEN_BYTES, NOT_STARTED, InviteStatus
 from app.helpers.candidates import candidate_key
 from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
 from app.integrations import billing
+from app.integrations.redis import get_redis
 from app.schemas.invites import InviteStartOut, LinkIn, LinkOut, LinkView
 from app.services.access import require_editor
 from app.services.candidate_start import start_sessions
@@ -74,6 +76,10 @@ async def start_link(token: str, user: CurrentUser) -> InviteStartOut:
 
     if current == InviteStatus.FINISHED:
         raise HTTPException(status.HTTP_409_CONFLICT, "This interview is already finished")
+
+    # Paused, nobody starts; a candidate already in the interview may finish it.
+    if current != InviteStatus.IN_PROCESS:
+        await refuse_if_paused(get_redis())
 
     if current is None or current in NOT_STARTED:
         try:

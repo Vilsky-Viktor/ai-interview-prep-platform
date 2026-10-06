@@ -80,6 +80,11 @@ async def submit_session_answer(row: Session, body: AnswerCreate) -> SessionAnsw
     if not await sessions.add_answer(answer, event):
         raise HTTPException(status.HTTP_409_CONFLICT, "Question already answered")
 
+    # The section's last answer finishes it, and the interview with its last section, at once
+    # rather than on the candidate's next step.
+    if len(row.answers) + 1 >= len(row.questions):
+        await sessions.finish(row.id)
+
     await outbox_service.flush_quietly()
 
     return SessionAnswerResult(

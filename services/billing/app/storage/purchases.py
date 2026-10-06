@@ -83,6 +83,46 @@ async def for_transaction(transaction_id: str) -> tuple[str, str, int, str] | No
     return first.owner_type, first.owner_id, granted, first.total
 
 
+async def take_back(
+    owner_type: str,
+    owner_id: str,
+    amount: int,
+    transaction_id: str,
+    adjustment_id: str,
+    reason: str,
+) -> int:
+    """Moves an adjustment's credits once, whatever the balance (a refund or chargeback may leave
+    it negative), and returns how many credits the transaction's adjustments have taken back so
+    far, less what reversals returned. The transaction's lines are locked, so adjustments of one
+    transaction arriving together are counted one after the other."""
+    prefix = f"adjustment:{transaction_id}:"
+
+    async with Session() as session:
+        await session.execute(
+            select(Purchase.id)
+            .where(Purchase.transaction_id == transaction_id)
+            .order_by(Purchase.id)
+            .with_for_update()
+        )
+        # Adjustments counted before their keys carried the transaction aren't counted again.
+        counted = await session.scalar(
+            select(Entry.id).where(Entry.key == f"adjustment:{adjustment_id}")
+        )
+
+        if counted is None:
+            await ensure(session, owner_type, owner_id)
+            await add(session, owner_type, owner_id, amount, prefix + adjustment_id, reason)
+
+        taken = await session.scalar(
+            select(func.coalesce(-func.sum(Entry.amount), 0)).where(
+                Entry.key.startswith(prefix, autoescape=True)
+            )
+        )
+        await session.commit()
+
+    return taken
+
+
 async def purchases_of(user_id: str) -> list[Purchase]:
     query = select(Purchase).where(Purchase.buyer_id == user_id).order_by(Purchase.created_at)
 

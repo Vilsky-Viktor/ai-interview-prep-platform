@@ -10,3 +10,7 @@ GENERATION_CANCELLED = "generation.cancelled"
 # Rounds: every section of a candidate's interview is finished, with how many answers they
 # picked; the company is charged for the candidate, or gets the credits back without one.
 INTERVIEW_FINISHED = "interview.finished"
+# Rounds: a corrected answer key changed finished candidates' scores; their stored grades follow.
+RESULTS_RESCORED = "results.rescored"
+# Processed events are remembered this long: past Pub/Sub's 7 days of redeliveries.
+PROCESSED_EVENT_DAYS = 8

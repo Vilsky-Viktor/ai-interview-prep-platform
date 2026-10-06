@@ -130,7 +130,30 @@
     "deleteLabel": "Burahin ang {title}",
     "deleteTitle": "Burahin ang template na ito?",
     "deleteText": "Mabubura ang mga topic at tanong nito. Mananatili ang mga interview na nagawa na ng mga kumpanya mula rito.",
-    "deleteFailed": "Hindi mabura ang template. Pakisubukang muli."
+    "deleteFailed": "Hindi mabura ang template. Pakisubukang muli.",
+    "passRates": "Mga pass rate",
+    "controls": "Mga kontrol",
+    "noPassRates": "Wala pang interview na may kandidatong natapos.",
+    "outsideTriggers": "kakaibang pass rate",
+    "finished": "{count, plural, one {# ang natapos} other {# ang natapos}}",
+    "passed": "{percent}% pumasa",
+    "passMark": "passing grade {percent}%",
+    "averageGrade": "average {percent}%",
+    "timedOut": "{percent}% naubusan ng oras",
+    "sortBy": {
+      "pass_rate": "Pinakamababang pass rate muna",
+      "finished": "Pinakamaraming natapos muna"
+    },
+    "pauseTitle": "Emergency pause",
+    "pauseText": "Habang naka-on ito, walang makakapagsimula ng bagong interview, practice round o preview, at walang tanong na gagawin, gagawing muli o susuriin. Matatapos ng mga kandidatong nasa interview na ang kanila.",
+    "pauseFailed": "Hindi mabago ang pause. Pakisubukang muli.",
+    "maintenanceTitle": "Maintenance mode",
+    "maintenanceText": "Habang naka-on ito, ipinapakita ng bawat page na nasa maintenance ang prepza at tinatanggihan ng mga serbisyo ang bawat request, maliban sa mga superadmin. Patuloy na gumagana ang mga bayad, email at naka-iskedyul na gawain.",
+    "maintenanceFailed": "Hindi mabago ang maintenance mode. Subukang muli.",
+    "maintenanceConfirmTitle": "I-on ang maintenance mode?",
+    "maintenanceRunning": "{count, plural, =0 {Walang kandidatong nasa interview ngayon.} other {Mga kandidatong nasa interview ngayon: #. Maaari silang mawalan ng oras.}}",
+    "maintenanceRunningUnknown": "Hindi mabilang ang mga kandidatong nasa interview ngayon. Maaaring mawalan ng oras ang sinumang nasa interview.",
+    "maintenanceTurnOn": "I-on"
   },
   "templates": {
     "title": "Mga template",
@@ -226,7 +249,8 @@
     "limit": "Limit ng tanong",
     "count": "{count, plural, one {tanong} other {tanong}}",
     "loadFailed": "Hindi ma-load ang mga tanong.",
-    "yourAnswer": "iyong sagot"
+    "yourAnswer": "iyong sagot",
+    "aiWritten": "Puwedeng mali ang mga tanong at sagot na isinulat ng AI. Markahan ang maling sagot o i-regenerate."
   },
   "rounds": {
     "answered": "Nasagot",
@@ -832,5 +856,13 @@
     "done": "Verified: {domain}",
     "pending": "Na-save. Mave-verify ito kapag nag-sign in ang isang owner o admin gamit ang email sa {domain}.",
     "failed": "Hindi ma-save ang website."
+  },
+  "pause": {
+    "notice": "Naka-pause muna ang mga bagong interview: hindi ito masisimulan o magagawa. Matatapos ang interview na nasimulan na. Bumalik ka mamaya."
+  },
+  "maintenance": {
+    "title": "Nasa maintenance",
+    "text": "Kasalukuyang nasa maintenance ang prepza. Babalik kami agad.",
+    "notice": "Naka-on ang maintenance mode: mga superadmin lang ang makakagamit ng prepza ngayon."
   }
 }

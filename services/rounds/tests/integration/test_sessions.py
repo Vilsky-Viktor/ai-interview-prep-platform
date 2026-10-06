@@ -207,3 +207,17 @@ def test_scores_add_up_every_section_its_signals_and_fast_answers(run):
         "copies": 0,
         "fast_answers": 0,
     }
+
+
+def test_sections_keep_their_topics_order(run):
+    async def scenario():
+        invite_id = uuid.uuid4()
+        topics = [topic(size=1) for _ in range(5)]
+        await sessions.create_many("cand", invite_id, topics, 60)
+        listed = await sessions.list_for_invite(invite_id)
+
+        return [row.topic_id for row in listed], [item.id for item in topics]
+
+    listed, topics = run(scenario())
+
+    assert listed == topics
