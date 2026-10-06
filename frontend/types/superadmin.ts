@@ -32,3 +32,6 @@ export type PassRate = companies["schemas"]["PassRateOut"]
 
 /** A company sent for review, for the verification tab. */
 export type VerificationRequest = companies["schemas"]["VerificationRequestOut"]
+
+/** One service's counts in a month, for the stats tab. */
+export type Stats = companies["schemas"]["StatsOut"]

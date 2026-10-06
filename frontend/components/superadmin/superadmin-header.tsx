@@ -16,6 +16,7 @@ export function SuperadminHeader({
     | "replaced"
     | "pass-rates"
     | "verification"
+    | "stats"
     | "controls"
   action?: ReactNode
 }) {
@@ -52,6 +53,7 @@ export function SuperadminHeader({
             href: "/superadmin/verification",
             label: t("verification"),
           },
+          { id: "stats", href: "/superadmin/stats", label: t("stats") },
           {
             id: "controls",
             href: "/superadmin/controls",

@@ -1152,6 +1152,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/stats": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Stats
+     * @description Companies, interviews and candidates, in one month, for the stats tab.
+     */
+    get: operations["get_stats_superadmin_stats_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/superadmin/verifications": {
     parameters: {
       query?: never
@@ -2008,6 +2028,15 @@ export interface components {
       email: string
       /** Reason */
       reason: string
+    }
+    /** StatsOut */
+    StatsOut: {
+      /** Counts */
+      counts: {
+        [key: string]: number
+      }
+      /** Currency */
+      currency?: string | null
     }
     /** TitleIn */
     TitleIn: {
@@ -4280,6 +4309,37 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["PassRateOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_stats_superadmin_stats_get: {
+    parameters: {
+      query: {
+        month: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["StatsOut"]
         }
       }
       /** @description Validation Error */

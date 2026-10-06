@@ -32,6 +32,45 @@ test("superadmin sorts pass rates", async ({ signInSuperadmin }) => {
   await shot(superadmin, "pass-rates-by-finished")
 })
 
+test("superadmin sees a month's stats, another month and all time", async ({
+  signInSuperadmin,
+}) => {
+  const superadmin = await signInSuperadmin()
+  await visit(superadmin, "/superadmin/stats")
+  const month = superadmin.getByRole("combobox", { name: "Month" })
+  const allTime = superadmin.getByRole("button", { name: /^all time$/i })
+  // This UTC month by default; the menu has the last twelve.
+  const now = new Date().toISOString().slice(0, 7)
+  await expect(month).toHaveValue(now)
+  await expect(month.locator("option")).toHaveCount(12)
+  await expect(allTime).toHaveAttribute("aria-pressed", "false")
+  const cards = superadmin.locator("dl")
+  await expect(cards.getByRole("term")).toHaveCount(9)
+  await expect(cards.getByRole("term").filter({ hasText: "Paid" })).toBeVisible()
+  // Every service answered: no card is left as a dash.
+  await expect(cards.getByRole("definition").filter({ hasText: /^—$/ })).toHaveCount(0)
+  await shot(superadmin, "stats")
+  // The oldest month on offer.
+  const oldest = (await month.locator("option").last().getAttribute("value")) ?? ""
+  await month.selectOption(oldest)
+  await expect(superadmin).toHaveURL(new RegExp(`month=${oldest}$`))
+  // All time turns on, and off again back to the month picked before.
+  await allTime.click()
+  await expect(superadmin).toHaveURL(new RegExp(`month=${oldest}&all=1$`))
+  await expect(allTime).toHaveAttribute("aria-pressed", "true")
+  await expect(month).toHaveValue(oldest)
+  await shot(superadmin, "stats-all-time")
+  await allTime.click()
+  await expect(superadmin).toHaveURL(new RegExp(`month=${oldest}$`))
+  await expect(allTime).toHaveAttribute("aria-pressed", "false")
+  // Picking a month turns all time off too.
+  await allTime.click()
+  await expect(allTime).toHaveAttribute("aria-pressed", "true")
+  await month.selectOption(now)
+  await expect(superadmin).toHaveURL(new RegExp(`month=${now}$`))
+  await expect(allTime).toHaveAttribute("aria-pressed", "false")
+})
+
 /** Turns a switch on the controls page, opened afresh: the dev frontend may have reloaded it. */
 async function flip(page: Page, title: string, on: boolean) {
   await visit(page, "/superadmin/controls")

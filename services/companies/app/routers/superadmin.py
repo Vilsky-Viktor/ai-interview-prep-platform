@@ -1,15 +1,16 @@
 from fastapi import APIRouter
 from prepza_common.paging import PageParams
+from prepza_common.stats import Month, StatsOut
 from prepza_common.superadmin import SuperadminUser
 
 from app.constants.monitoring import PassRateSort
 from app.helpers.pass_rates import outside_triggers, percent
 from app.integrations import rounds
 from app.schemas.monitoring import PassRateOut
-from app.storage import pass_rates
+from app.storage import pass_rates, stats
 
-# The superadmin's monitoring (docs/compliance/post-market-monitoring-plan.md); everyone else
-# gets "not found".
+# The superadmin's monitoring (docs/compliance/post-market-monitoring-plan.md) and stats;
+# everyone else gets "not found".
 router = APIRouter(prefix="/superadmin", tags=["superadmin"])
 
 
@@ -34,3 +35,11 @@ async def list_pass_rates(
         )
         for row in rows
     ]
+
+
+@router.get("/stats")
+async def get_stats(superadmin: SuperadminUser, month: Month = None) -> StatsOut:
+    """Companies, interviews and candidates, all time or in one month, for the stats
+    tab."""
+
+    return StatsOut(counts=await stats.stats(month))
