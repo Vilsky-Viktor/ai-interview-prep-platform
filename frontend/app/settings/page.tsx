@@ -3,7 +3,6 @@ import { getLocale, getTranslations } from "next-intl/server"
 import { AccountData } from "@/components/settings/account-data"
 import { LanguageSetting } from "@/components/settings/language-setting"
 import { SettingsSection } from "@/components/settings/settings-section"
-import { TalentLinkSetting } from "@/components/settings/talent-link-setting"
 import type { Locale } from "@/constants/i18n"
 
 export default async function GeneralSettingsPage() {
@@ -18,7 +17,6 @@ export default async function GeneralSettingsPage() {
       <SettingsSection title={t("yourData")} description={t("yourDataNote")}>
         <AccountData />
       </SettingsSection>
-      <TalentLinkSetting />
     </>
   )
 }

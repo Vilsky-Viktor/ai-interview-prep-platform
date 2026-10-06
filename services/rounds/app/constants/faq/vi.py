@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Ứng viên có thể dùng AI hoặc tra cứu đáp án không?",
-        "answer": "Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng theo thứ tự riêng, với thời gian giới hạn cho từng câu do máy chủ của chúng tôi theo dõi, nên không có thời gian để hỏi AI. Bảng điểm cũng cho thấy khi ứng viên rời trang, sao chép văn bản hoặc trả lời quá nhanh để kịp đọc câu hỏi.",
+        "answer": "Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng theo thứ tự riêng, với thời gian giới hạn cho từng câu do máy chủ của chúng tôi theo dõi, nên có rất ít thời gian để tra cứu đáp án hay hỏi AI. Bảng điểm cũng cho thấy khi ứng viên rời trang, sao chép văn bản hoặc trả lời quá nhanh để kịp đọc câu hỏi.",
     },
     {
         "key": "cost",
@@ -71,11 +71,6 @@ FAQ = [
         "key": "candidates",
         "question": "Ứng viên thấy gì?",
         "answer": "Tên và logo công ty của bạn, những gì cần biết trước khi bắt đầu, rồi lần lượt từng câu hỏi có giới hạn thời gian. Họ không bao giờ thấy điểm của mình hay câu trả lời có đúng không.",
-    },
-    {
-        "key": "talent",
-        "question": "Gợi ý nhân tài là gì?",
-        "answer": "Mọi người luyện tập trên các buổi phỏng vấn luyện tập miễn phí của prepza, và những ai chọn được gợi ý sẽ để lại liên kết LinkedIn. Khi bạn tạo buổi phỏng vấn, những người đạt điểm cao nhất cho vị trí tương tự sẽ xuất hiện trong thẻ nhân tài được gợi ý, kèm tên, điểm và LinkedIn. Chỉ lần làm đầu tiên được tính, bạn có thể ẩn bất kỳ ai không phù hợp, và gợi ý là miễn phí.",
     },
     {
         "key": "verified",

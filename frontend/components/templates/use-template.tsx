@@ -38,6 +38,7 @@ export function UseTemplate({
 
   return (
     <Button
+      variant="outline"
       className="h-10 shrink-0 px-5 text-base"
       disabled={busy}
       onClick={use}

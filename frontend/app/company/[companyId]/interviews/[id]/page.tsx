@@ -14,7 +14,6 @@ import { InterviewSettings } from "@/components/company/interview-settings"
 import { InterviewStatus } from "@/components/company/interview-status"
 import { InviteCandidate } from "@/components/company/invite-candidate"
 import { ShareLink } from "@/components/company/share-link"
-import { SuggestedTalents } from "@/components/company/suggested-talents"
 import { PageHeader } from "@/components/page-header"
 import { SubtopicList } from "@/components/questions/subtopic-list"
 import { TopicQuestionLimit } from "@/components/questions/topic-question-limit"
@@ -80,8 +79,7 @@ export default async function InterviewPage({
   const interviewsHref = `/company/${companyId}/interviews`
   const interviewHref = `${interviewsHref}/${id}`
   const ready = Boolean(interview.set_id)
-  const current =
-    ready && (tab === "candidates" || tab === "talents") ? tab : "topics"
+  const current = ready && tab === "candidates" ? tab : "topics"
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
@@ -163,9 +161,7 @@ export default async function InterviewPage({
         {ready && <InterviewNav href={interviewHref} current={current} />}
       </div>
 
-      {current === "talents" ? (
-        <SuggestedTalents interviewId={interview.id} />
-      ) : current === "candidates" ? (
+      {current === "candidates" ? (
         <div className="space-y-6">
           <ShareLink
             interviewId={interview.id}

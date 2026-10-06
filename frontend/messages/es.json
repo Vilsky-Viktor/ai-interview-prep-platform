@@ -44,7 +44,7 @@
     "title": "Iniciar sesión",
     "continueWith": "Continuar con <name>{provider}</name>",
     "link": "Este correo ya tiene una cuenta de prepza. Continúa como iniciaste sesión la otra vez y {provider} se vinculará a ella.",
-    "consent": "Al iniciar sesión, aceptas los <terms>Términos</terms> y la <privacy>Política de privacidad</privacy>.",
+    "consent": "Al iniciar sesión, confirmas que tienes 16 años o más y aceptas los <terms>Términos</terms> y la <privacy>Política de privacidad</privacy>.",
     "failed": "No se pudo iniciar sesión. Inténtalo de nuevo.",
     "verify": "Te enviamos un enlace para verificar tu correo. Ábrelo y vuelve a iniciar sesión para hacer entrevistas."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Entrevista a todos\nContrata talento real",
-    "text": "Entrevistas cronometradas creadas a partir de tu descripción del puesto. Preguntas únicas para cada candidato y sin tiempo para preguntarle a una IA. Desde $1 por candidato."
+    "text": "Entrevistas cronometradas creadas a partir de tu descripción del puesto. Preguntas únicas para cada candidato y un temporizador en cada una, así que hay poco tiempo para buscar las respuestas. Desde $1 por candidato."
   },
   "start": {
     "placeholder": "Pega una oferta de empleo, o describe el puesto y lo que un candidato debería saber",
@@ -145,8 +145,8 @@
     "use": "Usar plantilla",
     "using": "Iniciando…",
     "useFailed": "No se pudo iniciar una entrevista con esta plantilla. Inténtalo de nuevo.",
-    "warningTitle": "Las plantillas son para probar prepza.",
-    "warning": "Los talentos practican con ellas, así que los candidatos quizá ya conozcan las preguntas. Para contratar de verdad, crea una entrevista a partir de tu oferta de empleo.",
+    "warningTitle": "Las plantillas están listas para puestos comunes.",
+    "warning": "Para un mejor ajuste, crea una entrevista a partir de tu descripción del puesto.",
     "text": "Entrevistas listas por puesto. Elige una como punto de partida para tu entrevista; puedes cambiarla después."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, one {# correo supera} other {# correos superan}} tu límite de correos por ahora. Inténtalo de nuevo en una hora.",
       "no_credits": "{count, plural, one {# candidato no fue invitado} other {# candidatos no fueron invitados}}: sin créditos. Recarga para invitarlos.",
       "failed": "{count, plural, one {# invitación no se pudo enviar} other {# invitaciones no se pudieron enviar}}. Inténtalo de nuevo."
-    },
-    "talents": "Talentos sugeridos"
+    }
   },
   "invite": {
     "signIn": "Inicia sesión con el correo de la invitación para hacer esta entrevista.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Tiempo por pregunta:",
     "secondsUnit": "s",
     "pickOne": "Elige una de cuatro opciones en cada pregunta.",
-    "noChange": "Una respuesta no se puede cambiar una vez dada.",
-    "timeRunsOut": "Cuando se acaba el tiempo de una pregunta, cuenta como incorrecta y se abre la siguiente. El reloj sigue corriendo aunque salgas.",
+    "changePick": "Puedes cambiar tu elección hasta que pulses «Siguiente pregunta».",
+    "timeRunsOut": "Cuando se acaba el tiempo de una pregunta, cuenta tu elección y se abre la siguiente; sin elección, cuenta como incorrecta. El reloj sigue corriendo aunque salgas.",
     "unanswered": "Las preguntas sin responder cuentan como incorrectas.",
     "saved": "El progreso se guarda: vuelve a usar este enlace para continuar.",
     "extraTime": "¿Necesitas más tiempo, por ejemplo por una discapacidad? Pídeselo a {company} antes de empezar.",
@@ -465,7 +464,14 @@
     "joined": "Se unió",
     "invited": "Invitado",
     "copy": "Copiar",
-    "inviteTitle": "Invitación a la empresa"
+    "inviteTitle": "Invitación a la empresa",
+    "remove": "Quitar",
+    "removed": "Acceso retirado a {email}",
+    "removeFailed": "No se pudo quitar a esta persona.",
+    "removeTitle": "¿Quitar de la empresa?",
+    "removeText": "{email} pierde el acceso a la empresa. Si su tarjeta paga las recargas automáticas, estas se detienen. Puedes volver a invitar a esta persona más adelante.",
+    "removeInviteText": "El enlace de invitación enviado a {email} deja de funcionar. Puedes volver a invitar a esta persona más adelante.",
+    "removeConfirm": "Quitar"
   },
   "scorecard": {
     "timeOut": "Tiempo agotado",
@@ -656,18 +662,6 @@
         "verified": "Verificada con el correo de trabajo de tu equipo"
       }
     },
-    "talent": {
-      "title": "Recibe sugerencias de talento",
-      "text": "Las mejores puntuaciones de nuestras entrevistas de práctica gratuitas, sugeridas para tu puesto. Gratis.",
-      "suggested": "Sugeridos para Desarrollador backend",
-      "score": "Puntuación",
-      "points": {
-        "free": "Gratis para ti y para el talento",
-        "practice": "Puntuados en entrevistas cronometradas",
-        "first": "Solo cuenta su primer intento",
-        "link": "Ellos eligen ser sugeridos"
-      }
-    },
     "languages": {
       "title": "Cualquier puesto, cualquier idioma",
       "text": "prepza funciona en {count} idiomas. Pega una descripción del puesto en un idioma y entrevista a los candidatos en otro."
@@ -719,7 +713,7 @@
       "title": "Por qué existimos",
       "problem": "Contratar suele depender de un CV y una buena conversación, y ambos pueden engañar. Las herramientas de evaluación que ayudan tienen precios para grandes empresas, con planes anuales y cuotas por usuario, así que la mayoría de los equipos prescinden de ellas.",
       "approach": "prepza convierte una descripción del puesto en una entrevista cronometrada en minutos, para cualquier puesto. Cada candidato recibe sus propias preguntas, ves quién domina el trabajo y por qué, y solo pagas por los candidatos que realmente la hacen.",
-      "practice": "También queremos que prepararse para una entrevista sea gratis para todos. Cualquiera puede hacer nuestras entrevistas de práctica para un puesto, ver su nota y cada respuesta correcta, y volver a practicar, sin coste. Quienes lo hacen bien pueden elegir ser sugeridos a empresas que contratan para un puesto similar."
+      "practice": "También queremos que prepararse para una entrevista sea gratis para todos. Cualquiera puede hacer nuestras entrevistas de práctica para un puesto, ver su nota y cada respuesta correcta, y volver a practicar, sin coste."
     },
     "founder": {
       "quote": "Contratar bien no debería ser un privilegio de las grandes empresas con grandes presupuestos. Creé prepza para que cualquier equipo pueda convertir una descripción del puesto en una entrevista justa en minutos, ver quién domina de verdad el trabajo y pagar solo por los candidatos que la hacen. Espero que te ayude a encontrar antes a las personas adecuadas.",
@@ -782,27 +776,10 @@
     "gradeLabel": "Nota",
     "questions": "{count, plural, one {# pregunta} other {# preguntas}}",
     "progressLabel": "Progreso",
-    "answeredLabel": "preguntas respondidas"
-  },
-  "suggest": {
-    "title": "Haz que te sugieran a empresas",
-    "consent": "Opcional. Las empresas que contratan para puestos similares pueden ver tu nombre, tu LinkedIn y tu puntuación de la primera ronda. Cámbialo o retíralo cuando quieras en los ajustes.",
-    "link": "Enlace de LinkedIn",
-    "share": "Compartir",
-    "saved": "Ahora pueden sugerirte a empresas.",
-    "withdraw": "Retirar",
-    "withdrawn": "Ya no se te sugerirá a empresas.",
-    "invalid": "Usa el enlace de tu perfil de LinkedIn, como https://www.linkedin.com/in/your-name",
-    "failed": "No se pudo guardar. Inténtalo de nuevo.",
-    "shareAndStart": "Aceptar y empezar",
-    "startWithout": "Rechazar y empezar"
-  },
-  "talents": {
-    "about": "Talentos a los que les fue bien practicando una entrevista para un puesto como este y que aceptaron ser sugeridos.",
-    "empty": "Aún no hay talentos sugeridos.",
-    "score": "Puntuación",
-    "hide": "Ocultar",
-    "hideFailed": "No se pudo ocultar el talento. Inténtalo de nuevo."
+    "answeredLabel": "preguntas respondidas",
+    "hireTitle": "¿Contratas para este puesto?",
+    "hireText": "Usa esta entrevista con tus candidatos o genera una para tu descripción del puesto.",
+    "hireButton": "Crear una entrevista"
   },
   "verify": {
     "verify": "Verificar",

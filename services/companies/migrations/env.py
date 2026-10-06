@@ -3,11 +3,11 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import create_engine
 
+import app.models.audit
 import app.models.companies
 import app.models.interviews
 import app.models.invites
-import app.models.outbox
-import app.models.talents  # noqa: F401
+import app.models.outbox  # noqa: F401
 from app.config.settings import settings
 from app.models.base import Base
 

@@ -66,9 +66,10 @@ async def turn_on(owner_type: str, owner_id: str, body: AutoTopUpIn, buyer_id: s
     return result
 
 
-async def turn_off(owner_type: str, owner_id: str) -> None:
-    """Off at once; the subscription that kept the card is cancelled."""
-    subscription_id = await auto_top_ups.remove(owner_type, owner_id)
+async def turn_off(owner_type: str, owner_id: str, buyer_id: str | None = None) -> None:
+    """Off at once; the subscription that kept the card is cancelled. With `buyer_id`, only if
+    that person's card pays for it (a member removed from the company)."""
+    subscription_id = await auto_top_ups.remove(owner_type, owner_id, buyer_id)
 
     if subscription_id:
         await cancel_quietly(subscription_id)

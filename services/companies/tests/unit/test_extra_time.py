@@ -5,6 +5,7 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.constants.audit import AuditAction
 from app.constants.invites import InviteStatus
 from app.helpers.candidates import candidate_seconds
 from app.main import app
@@ -66,11 +67,12 @@ def test_extra_time_lengthens_each_question():
     assert candidate_seconds(60, None) == 60
 
 
-def test_a_company_sets_extra_time_before_the_candidate_starts(client, candidate):
+def test_a_company_sets_extra_time_before_the_candidate_starts(client, candidate, audited):
     invite, saved = candidate
 
     assert client.put(url(invite), json={"extra_time": 50}).status_code == 204
     assert saved == {"extra_time": 50}
+    assert audited == [(COMPANY_ID, "bob", AuditAction.EXTRA_TIME_SET, invite.id)]
     # Only the offered amounts.
     assert client.put(url(invite), json={"extra_time": 30}).status_code == 422
 

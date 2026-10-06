@@ -32,7 +32,7 @@ TEXTS = {
         "button": "Daveti aç",
     },
     "report": {
-        "subject": "{sender} bir aday raporu paylaştı: {candidate}",
+        "subject": "Aday raporu: {candidate}",
         "preheader": "{candidate}, {company} şirketinde “{title}” mülakatına girdi. Rapor ektedir.",
         "heading": "Aday raporu",
         "lines": [
@@ -48,7 +48,7 @@ TEXTS = {
         "paylaştığı için gönderildi. Beklemiyorsanız görmezden gelebilirsiniz.",
     },
     "candidates": {
-        "subject": "{sender} tüm adayların raporunu paylaştı: {title}",
+        "subject": "Tüm adayların raporu: {title}",
         "preheader": "{company} şirketinde “{title}” için tüm adaylar. Rapor ektedir.",
         "heading": "Adaylar raporu",
         "lines": [

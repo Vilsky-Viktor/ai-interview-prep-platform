@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Können Kandidaten KI nutzen oder die Antworten nachschlagen?",
-        "answer": "Jeder Kandidat bekommt eigene, zufällige Fragen in eigener Reihenfolge, mit einem Zeitlimit für jede Frage, das unser Server überwacht, also bleibt keine Zeit, eine KI zu fragen. Die Auswertung zeigt außerdem, wann ein Kandidat die Seite verlassen, Text kopiert oder zu schnell geantwortet hat, um die Frage gelesen zu haben.",
+        "answer": "Jeder Kandidat bekommt eigene, zufällige Fragen in eigener Reihenfolge, mit einem Zeitlimit für jede Frage, das unser Server überwacht, also bleibt wenig Zeit, Antworten nachzuschlagen oder eine KI zu fragen. Die Auswertung zeigt außerdem, wann ein Kandidat die Seite verlassen, Text kopiert oder zu schnell geantwortet hat, um die Frage gelesen zu haben.",
     },
     {
         "key": "cost",
@@ -71,11 +71,6 @@ FAQ = [
         "key": "candidates",
         "question": "Was sehen Kandidaten?",
         "answer": "Den Namen und das Logo deines Unternehmens, vor dem Start, was sie erwartet, dann jeweils eine Frage mit Zeitlimit. Sie sehen nie ihr Ergebnis oder ob eine Antwort richtig war.",
-    },
-    {
-        "key": "talent",
-        "question": "Was sind Talentvorschläge?",
-        "answer": "Menschen üben mit den kostenlosen Übungsinterviews von prepza, und wer vorgeschlagen werden möchte, hinterlässt einen LinkedIn-Link. Wenn du ein Interview erstellst, erscheinen die Besten für eine ähnliche Rolle in seinem Tab Vorgeschlagene Talente, mit Name, Ergebnis und LinkedIn. Nur ihr erster Versuch zählt, du kannst jeden ausblenden, der nicht passt, und Vorschläge sind kostenlos.",
     },
     {
         "key": "verified",

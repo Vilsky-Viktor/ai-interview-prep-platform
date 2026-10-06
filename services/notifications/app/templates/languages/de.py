@@ -33,7 +33,7 @@ TEXTS = {
         "button": "Einladung öffnen",
     },
     "report": {
-        "subject": "{sender} hat einen Kandidatenbericht geteilt: {candidate}",
+        "subject": "Kandidatenbericht: {candidate}",
         "preheader": "{candidate} hat „{title}“ bei {company} absolviert. Der Bericht ist angehängt.",
         "heading": "Kandidatenbericht",
         "lines": [
@@ -50,7 +50,7 @@ TEXTS = {
         "Sie sie ignorieren.",
     },
     "candidates": {
-        "subject": "{sender} hat einen Bericht aller Kandidaten geteilt: {title}",
+        "subject": "Bericht aller Kandidaten: {title}",
         "preheader": "Alle Kandidaten für „{title}“ bei {company}. Der Bericht ist angehängt.",
         "heading": "Kandidatenbericht",
         "lines": [

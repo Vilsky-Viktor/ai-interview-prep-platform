@@ -3,21 +3,13 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 
 from app.constants.sets import SetKind, Stage
-from app.constants.talents import SIMILAR_TEMPLATES
 from app.schemas.preparations import QuestionOut
 from app.schemas.sets import SetContent, SetTopicOut
 from app.service_auth import ServiceCaller
-from app.storage import preparations, similar
+from app.storage import preparations
 
 # Free practice for talents: only a template's revealed questions, never its private ones.
 router = APIRouter(prefix="/internal", tags=["internal"])
-
-
-@router.get("/sets/{set_id}/similar-templates")
-async def similar_templates(set_id: UUID, caller: ServiceCaller) -> list[UUID]:
-    """The templates for roles like a company's test, closest first: whose talents it's
-    suggested."""
-    return await similar.similar_templates(set_id, SIMILAR_TEMPLATES)
 
 
 @router.get("/templates/{template_id}/practice")

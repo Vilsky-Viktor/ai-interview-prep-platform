@@ -42,6 +42,8 @@ class SessionOut(BaseModel):
     candidate_invite_id: UUID
     topic_title: str
     interview_title: str | None = None
+    # The language the questions are written in, which can differ from the page's.
+    language: str | None = None
     # A talent's practice round: its results page shows every answer.
     practice: bool = False
     status: RoundStatus

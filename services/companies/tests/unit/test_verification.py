@@ -5,7 +5,7 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.helpers.verification import email_on_domain, website_domain
+from app.helpers.verification import email_on_domain, is_free_domain, website_domain
 from app.main import app
 from app.models.companies import Company, Member
 from app.storage import companies, interviews
@@ -83,3 +83,52 @@ def test_free_mail_and_unverified_emails_never_verify(client, company):
     sign_in("ann", "ann@acme.com", verified=False)
 
     assert client.put(URL, json={"website": "acme.com"}).json()["verified_domain"] is None
+
+
+def test_a_website_is_a_registrable_domain_never_a_public_suffix():
+    assert website_domain("https://jobs.acme.com") == "acme.com"
+    assert website_domain("x.github.io") == "x.github.io"
+    assert website_domain("ox.ac.uk") == "ox.ac.uk"
+
+    for suffix in ("co.uk", "com.au", "github.io", "ac.uk", "https://www.co.uk"):
+        assert website_domain(suffix) is None
+
+
+def test_free_mail_is_matched_by_registrable_domain_in_any_country():
+    free = ("yahoo.co.uk", "mail.yahoo.co.uk", "hotmail.fr", "outlook.de", "live.com.au")
+    regional = ("gmx.de", "web.de", "mail.ru", "yandex.kz", "qq.com", "163.com", "naver.com")
+
+    assert all(is_free_domain(domain) for domain in free + regional)
+    assert not is_free_domain("acme.com")
+    assert not is_free_domain("acme.co.uk")
+
+
+def test_an_email_must_be_on_the_registrable_domain_itself():
+    assert email_on_domain("x@eng.acme.com", "acme.com")
+    assert email_on_domain("x@acme.co.uk", "acme.co.uk")
+    assert not email_on_domain("x@ox.ac.uk", "ac.uk")
+    assert not email_on_domain("x@eng.acme.com", "eng.acme.com")
+    assert not email_on_domain("x@yahoo.co.uk", "yahoo.co.uk")
+
+
+def test_public_suffixes_and_regional_free_mail_are_refused_as_websites(client, company):
+    sign_in("ann", "ann@ox.ac.uk")
+
+    assert client.put(URL, json={"website": "ac.uk"}).status_code == 422
+    assert client.put(URL, json={"website": "github.io"}).status_code == 422
+    assert client.put(URL, json={"website": "yahoo.co.uk"}).status_code == 422
+    assert company.website_domain is None
+
+
+def test_resaving_the_same_website_keeps_its_verification(client, company):
+    sign_in("ann", "ann@acme.com")
+    client.put(URL, json={"website": "acme.com"})
+    sign_in("bob", "bob@gmail.com")
+
+    same = client.put(URL, json={"website": "https://www.acme.com/"}).json()
+
+    assert same == {"website_domain": "acme.com", "verified_domain": "acme.com"}
+
+    other = client.put(URL, json={"website": "acme.org"}).json()
+
+    assert other == {"website_domain": "acme.org", "verified_domain": None}

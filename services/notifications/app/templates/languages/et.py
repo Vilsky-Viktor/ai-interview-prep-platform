@@ -31,7 +31,7 @@ TEXTS = {
         "button": "Ava kutse",
     },
     "report": {
-        "subject": "{sender} jagas kandidaadi aruannet: {candidate}",
+        "subject": "Kandidaadi aruanne: {candidate}",
         "preheader": "{candidate} tegi ettevõttes {company} intervjuu „{title}”. Aruanne on manuses.",
         "heading": "Kandidaadi aruanne",
         "lines": [
@@ -47,7 +47,7 @@ TEXTS = {
         "aadressiga kandidaadi aruannet. Kui sa seda ei oodanud, võid selle tähelepanuta jätta.",
     },
     "candidates": {
-        "subject": "{sender} jagas kõigi kandidaatide aruannet: {title}",
+        "subject": "Kõigi kandidaatide aruanne: {title}",
         "preheader": "Kõik intervjuu „{title}” kandidaadid ettevõttes {company}. Aruanne on manuses.",
         "heading": "Kandidaatide aruanne",
         "lines": [

@@ -29,7 +29,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Can candidates use AI or look up the answers?",
-        "answer": "Every candidate gets their own random questions in their own order, with a timer on each question that our server keeps, so there's no time to ask an AI. The scorecard also shows when a candidate left the page, copied text, or answered too fast to have read the question.",
+        "answer": "Every candidate gets their own random questions in their own order, with a timer on each question that our server keeps, so there's little time to look answers up or ask an AI. The scorecard also shows when a candidate left the page, copied text, or answered too fast to have read the question.",
     },
     {
         "key": "cost",
@@ -70,11 +70,6 @@ FAQ = [
         "key": "candidates",
         "question": "What do candidates see?",
         "answer": "Your company's name and logo, what to expect before they start, then one timed question at a time. They never see their score or whether an answer was right.",
-    },
-    {
-        "key": "talent",
-        "question": "What are talent suggestions?",
-        "answer": "People practice on prepza's free practice interviews, and those who choose to be suggested leave a LinkedIn link. When you create an interview, the top scorers for a similar role show up on its suggested talents tab, with their name, score and LinkedIn. Only their first try counts, you can hide anyone who doesn't fit, and suggestions are free.",
     },
     {
         "key": "verified",

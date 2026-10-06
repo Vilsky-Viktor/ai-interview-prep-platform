@@ -2,6 +2,7 @@ from types import SimpleNamespace
 
 from app.constants.credits import CANDIDATE_CREDITS
 from app.service_auth import service_token
+from app.services import auto_top_ups
 from app.storage import ledger
 
 AUTH = {"Authorization": f"Bearer {service_token('billing')}"}
@@ -54,3 +55,19 @@ def test_several_companies_balances_at_once(client, monkeypatch):
         "a": {"balance": 900, "reserved": 300, "available": 600, "low": False},
         "b": {"balance": 0, "reserved": 0, "available": 0, "low": True},
     }
+
+
+def test_a_removed_members_card_turns_off_only_their_auto_top_up(client, monkeypatch):
+    calls = []
+
+    async def turn_off(owner_type, owner_id, buyer_id=None):
+        calls.append((owner_type, owner_id, buyer_id))
+
+    monkeypatch.setattr(auto_top_ups, "turn_off", turn_off)
+
+    response = client.delete(
+        "/internal/companies/acme/auto-top-up", params={"buyer_id": "ann"}, headers=AUTH
+    )
+
+    assert response.status_code == 204
+    assert calls == [("company", "acme", "ann")]

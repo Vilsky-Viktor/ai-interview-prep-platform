@@ -45,15 +45,13 @@ TERMS_SECTIONS = [
             "Results support a company's decision; they don't make it. A company reviews them before deciding, doesn't reject a candidate on the score alone, and lets a candidate ask for a person to review their result.",
             "A company gives a candidate who needs it an accommodation, such as extra time, which it can set for each candidate before they start.",
             "The data processing agreement at prepza.ai/dpa forms part of these terms for every company that uses prepza for candidates.",
-            "Suggested talents may be contacted only about jobs, and their details may not be copied into other lists or sold.",
+            "Until prepza has an independent bias audit, a company may not use it to assess candidates for jobs in New York City, where Local Law 144 requires one.",
         ],
     },
     {
-        "heading": "Practice and talent suggestions",
+        "heading": "Practice",
         "items": [
             "Practice interviews are free, and their results are private to you.",
-            "If you agree to be suggested, companies hiring for a similar role see your name, your LinkedIn link and the grade of your first round on a similar practice interview. Only a LinkedIn profile link is accepted, and it must be your own.",
-            "Being suggested doesn't mean a company will contact you. You can stop being suggested at any time in Settings.",
         ],
     },
     {

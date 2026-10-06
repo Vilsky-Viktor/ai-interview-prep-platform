@@ -6,8 +6,7 @@ from sqlalchemy import create_engine
 import app.models.answers  # registers the tables on Base.metadata
 import app.models.outbox
 import app.models.sessions
-import app.models.signals
-import app.models.talents  # noqa: F401
+import app.models.signals  # noqa: F401
 from app.config.settings import settings
 from app.models.base import Base
 

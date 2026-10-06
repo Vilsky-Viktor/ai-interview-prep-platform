@@ -44,7 +44,7 @@
     "title": "Se connecter",
     "continueWith": "Continuer avec <name>{provider}</name>",
     "link": "Cet e-mail a déjà un compte prepza. Continuez comme lors de votre dernière connexion, et {provider} y sera associé.",
-    "consent": "En vous connectant, vous acceptez les <terms>Conditions</terms> et la <privacy>Politique de confidentialité</privacy>.",
+    "consent": "En vous connectant, vous confirmez avoir 16 ans ou plus et acceptez les <terms>Conditions</terms> et la <privacy>Politique de confidentialité</privacy>.",
     "failed": "La connexion a échoué. Veuillez réessayer.",
     "verify": "Nous vous avons envoyé un lien pour vérifier votre e-mail. Ouvrez-le, puis reconnectez-vous pour passer des entretiens."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Un entretien pour tous\nRecrutez de vrais talents",
-    "text": "Des entretiens chronométrés créés à partir de votre fiche de poste. Des questions uniques pour chaque candidat, et pas le temps de demander à une IA. À partir de 1 $ par candidat."
+    "text": "Des entretiens chronométrés créés à partir de votre fiche de poste. Des questions uniques pour chaque candidat et un minuteur sur chacune, il reste donc peu de temps pour chercher les réponses. À partir de 1 $ par candidat."
   },
   "start": {
     "placeholder": "Collez une offre d'emploi, ou décrivez le poste et ce qu'un candidat doit savoir",
@@ -145,8 +145,8 @@
     "use": "Utiliser le modèle",
     "using": "Démarrage…",
     "useFailed": "Impossible de démarrer un entretien à partir de ce modèle. Veuillez réessayer.",
-    "warningTitle": "Les modèles servent à essayer prepza.",
-    "warning": "Des talents s'y entraînent, donc les candidats connaissent peut-être déjà les questions. Pour un vrai recrutement, créez un entretien à partir de votre offre d'emploi.",
+    "warningTitle": "Les modèles sont prêts à l’emploi pour les postes courants.",
+    "warning": "Pour un meilleur ajustement, créez un entretien à partir de votre fiche de poste.",
     "text": "Des entretiens prêts à l'emploi par poste. Choisissez-en un comme point de départ de votre entretien ; vous pourrez le modifier ensuite."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, one {# e-mail dépasse} other {# e-mails dépassent}} votre limite d'e-mails pour le moment. Réessayez dans une heure.",
       "no_credits": "{count, plural, one {# candidat n'a pas été invité} other {# candidats n'ont pas été invités}} : crédits épuisés. Rechargez pour les inviter.",
       "failed": "{count, plural, one {# invitation n'a pas pu être envoyée} other {# invitations n'ont pas pu être envoyées}}. Réessayez."
-    },
-    "talents": "Talents suggérés"
+    }
   },
   "invite": {
     "signIn": "Connectez-vous avec l'adresse de l'invitation pour passer cet entretien.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Temps par question :",
     "secondsUnit": "s",
     "pickOne": "Choisissez une des quatre options à chaque question.",
-    "noChange": "Une réponse donnée ne peut plus être modifiée.",
-    "timeRunsOut": "Quand le temps d'une question est écoulé, elle compte comme fausse et la suivante s'ouvre. Le chronomètre continue si vous quittez la page.",
+    "changePick": "Vous pouvez changer votre choix jusqu'à ce que vous cliquiez sur « Question suivante ».",
+    "timeRunsOut": "Quand le temps d'une question est écoulé, votre choix compte et la suivante s'ouvre ; sans choix, elle compte comme fausse. Le chronomètre continue si vous quittez la page.",
     "unanswered": "Les questions sans réponse comptent comme fausses.",
     "saved": "Votre progression est enregistrée : utilisez à nouveau ce lien pour continuer.",
     "extraTime": "Besoin de plus de temps, par exemple en raison d'un handicap ? Contactez {company} avant de commencer.",
@@ -465,7 +464,14 @@
     "joined": "A rejoint",
     "invited": "Invité",
     "copy": "Copier",
-    "inviteTitle": "Invitation dans l'entreprise"
+    "inviteTitle": "Invitation dans l'entreprise",
+    "remove": "Retirer",
+    "removed": "Accès retiré pour {email}",
+    "removeFailed": "Impossible de retirer cette personne.",
+    "removeTitle": "Retirer de l'entreprise ?",
+    "removeText": "{email} perd l'accès à l'entreprise. Si sa carte paie les recharges automatiques, celles-ci s'arrêtent. Vous pourrez l'inviter à nouveau plus tard.",
+    "removeInviteText": "Le lien d'invitation envoyé à {email} cesse de fonctionner. Vous pourrez l'inviter à nouveau plus tard.",
+    "removeConfirm": "Retirer"
   },
   "scorecard": {
     "timeOut": "Temps écoulé",
@@ -652,18 +658,6 @@
         "verified": "Vérifiée par l'e-mail professionnel de votre équipe"
       }
     },
-    "talent": {
-      "title": "Recevez des suggestions de talents",
-      "text": "Les meilleurs scores de nos entretiens d'entraînement gratuits, suggérés pour votre poste. Gratuit.",
-      "suggested": "Suggérés pour Développeur backend",
-      "score": "Score",
-      "points": {
-        "free": "Gratuit pour vous et pour les talents",
-        "practice": "Évalués sur des entretiens chronométrés",
-        "first": "Seul leur premier essai compte",
-        "link": "Ils choisissent d'être suggérés"
-      }
-    },
     "languages": {
       "title": "Tout poste, toute langue",
       "text": "prepza fonctionne en {count} langues. Collez une fiche de poste dans une langue et faites passer l'entretien aux candidats dans une autre."
@@ -715,7 +709,7 @@
       "title": "Pourquoi nous existons",
       "problem": "Le recrutement repose souvent sur un CV et une bonne conversation, et les deux peuvent tromper. Les outils d'évaluation qui aident sont tarifés pour les grandes entreprises, avec des abonnements annuels et des frais par utilisateur, alors la plupart des équipes s'en passent.",
       "approach": "prepza transforme une fiche de poste en entretien chronométré en quelques minutes, pour n'importe quel poste. Chaque candidat reçoit ses propres questions, vous voyez qui maîtrise le poste et pourquoi, et vous ne payez que pour les candidats qui le passent vraiment.",
-      "practice": "Nous voulons aussi que la préparation d'un entretien soit gratuite pour tous. Chacun peut passer nos entretiens d'entraînement pour un poste, voir sa note et chaque bonne réponse, et s'entraîner à nouveau, sans frais. Ceux qui réussissent bien peuvent choisir d'être suggérés aux entreprises qui recrutent pour un poste similaire."
+      "practice": "Nous voulons aussi que la préparation d'un entretien soit gratuite pour tous. Chacun peut passer nos entretiens d'entraînement pour un poste, voir sa note et chaque bonne réponse, et s'entraîner à nouveau, sans frais."
     },
     "founder": {
       "quote": "Bien recruter ne devrait pas être le privilège des grandes entreprises aux gros budgets. J'ai créé prepza pour que toute équipe puisse transformer une fiche de poste en entretien équitable en quelques minutes, voir qui maîtrise vraiment le poste et ne payer que pour les candidats qui le passent. J'espère qu'il vous aidera à trouver plus vite les bonnes personnes.",
@@ -778,27 +772,10 @@
     "gradeLabel": "Note",
     "questions": "{count, plural, one {# question} other {# questions}}",
     "progressLabel": "Progression",
-    "answeredLabel": "questions répondues"
-  },
-  "suggest": {
-    "title": "Soyez suggéré aux entreprises",
-    "consent": "Facultatif. Les entreprises qui recrutent pour des postes similaires peuvent voir votre nom, votre LinkedIn et votre score de la première session. Modifiez ou retirez votre accord à tout moment dans les paramètres.",
-    "link": "Lien LinkedIn",
-    "share": "Partager",
-    "saved": "Vous pouvez désormais être suggéré aux entreprises.",
-    "withdraw": "Retirer",
-    "withdrawn": "Vous ne serez plus suggéré aux entreprises.",
-    "invalid": "Utilisez le lien de votre profil LinkedIn, comme https://www.linkedin.com/in/your-name",
-    "failed": "Impossible d'enregistrer. Veuillez réessayer.",
-    "shareAndStart": "Accepter et commencer",
-    "startWithout": "Refuser et commencer"
-  },
-  "talents": {
-    "about": "Des talents qui ont bien réussi un entretien d'entraînement pour un poste comme celui-ci et ont accepté d'être suggérés.",
-    "empty": "Aucun talent suggéré pour l'instant.",
-    "score": "Score",
-    "hide": "Masquer",
-    "hideFailed": "Impossible de masquer ce talent. Veuillez réessayer."
+    "answeredLabel": "questions répondues",
+    "hireTitle": "Vous recrutez pour ce poste ?",
+    "hireText": "Utilisez cet entretien avec vos candidats ou générez-en un pour votre fiche de poste.",
+    "hireButton": "Créer un entretien"
   },
   "verify": {
     "verify": "Vérifier",

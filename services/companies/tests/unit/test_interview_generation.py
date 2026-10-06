@@ -5,6 +5,7 @@ import httpx
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.constants.audit import AuditAction
 from app.integrations import generation
 from app.main import app
 from app.models.companies import Company, Member
@@ -77,7 +78,7 @@ def test_outsider_does_not_see_the_generation(client, monkeypatch):
     app.dependency_overrides.clear()
 
 
-def test_only_managers_review_topics(client, monkeypatch):
+def test_only_managers_review_topics(client, monkeypatch, audited):
     sign_in("bob")
     calls = []
 
@@ -101,11 +102,12 @@ def test_only_managers_review_topics(client, monkeypatch):
 
     # Without hand edits the topics go through as null; generation then keeps its draft.
     assert calls == [{**body, "topics": None}]
+    assert audited == [(COMPANY_ID, "bob", AuditAction.TOPICS_APPROVED, INTERVIEW_ID)]
 
     app.dependency_overrides.clear()
 
 
-def test_second_review_passes_the_conflict_through(client, monkeypatch):
+def test_second_review_passes_the_conflict_through(client, monkeypatch, audited):
     setup(monkeypatch, "admin")
     sign_in("bob")
 
@@ -117,6 +119,7 @@ def test_second_review_passes_the_conflict_through(client, monkeypatch):
 
     assert response.status_code == 409
     assert response.json()["detail"] == "Generation is not awaiting review"
+    assert audited == []
 
     app.dependency_overrides.clear()
 

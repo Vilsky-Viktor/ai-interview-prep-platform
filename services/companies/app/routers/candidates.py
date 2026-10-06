@@ -6,6 +6,7 @@ from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 
+from app.constants.audit import AuditAction
 from app.constants.invites import (
     EXTRA_TIME_OPTIONS,
     MAX_SEARCH_LENGTH,
@@ -33,7 +34,7 @@ from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateOut
 from app.services import candidate_invites
 from app.services import outbox as outbox_service
 from app.services.access import require_company
-from app.storage import interviews, invites
+from app.storage import audit, interviews, invites
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
 
@@ -149,6 +150,9 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
         await rounds.delete_invite_sessions([invite.id])
 
     await invites.remove(invite.id)
+    revoked = invite.status in NOT_STARTED
+    action = AuditAction.INVITE_REVOKED if revoked else AuditAction.CANDIDATE_DELETED
+    await audit.record(interview.company_id, user.uid, action, invite.id)
 
 
 @router.get("/{interview_id}/candidates/{invite_id}")
@@ -174,6 +178,7 @@ async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: Current
     # The funnel's "first results viewed": a finished candidate's results, opened by a member.
     if invite.status == InviteStatus.FINISHED:
         await track("results_viewed", user_id=user.uid, company_id=company.id)
+        await audit.record(company.id, user.uid, AuditAction.RESULTS_VIEWED, invite.id)
 
     return {
         "id": str(invite.id),

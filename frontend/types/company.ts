@@ -45,5 +45,4 @@ export type CandidateReportData = {
 }
 export type BulkInviteResult = Schemas["BulkInviteOut"]
 export type Brand = Schemas["BrandOut"]
-export type SuggestedTalent = Schemas["SuggestedTalentOut"]
 export type Verification = Schemas["VerificationOut"]

@@ -35,7 +35,6 @@ export function SessionView({
   const {
     session,
     question,
-    result,
     topics,
     topicsLoaded,
     playing,
@@ -160,7 +159,6 @@ export function SessionView({
       progress={progress}
       section={section}
       question={question}
-      result={result}
       onAnswer={answer}
       onAdvance={advance}
       onFinish={finishInterview}

@@ -9,12 +9,10 @@ import { useSignIn } from "@/components/sign-in-dialog"
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { ApiError, apiErrorMessage } from "@/lib/api"
-import { answeredSuggest, startPracticeRound } from "@/lib/practice"
+import { startPracticeRound } from "@/lib/practice"
 
-/** Starts a free practice round on the template: signs in with Google first when needed. A
- * talent who hasn't yet answered whether to be suggested to companies sees that page first,
- * once; after that, they go straight into the round. `label` names it (start, or practise
- * again). */
+/** Starts a free practice round on the template: signs in first when needed, then goes straight
+ * into the round. `label` names it (start, or practise again). */
 export function StartPractice({
   templateId,
   label,
@@ -38,11 +36,7 @@ export function StartPractice({
     }
 
     try {
-      router.push(
-        (await answeredSuggest())
-          ? await startPracticeRound(templateId)
-          : `/practice/${templateId}/start`
-      )
+      router.push(await startPracticeRound(templateId))
     } catch (error) {
       // No practice questions yet: the API says so.
       const refused = error instanceof ApiError && error.status === 409

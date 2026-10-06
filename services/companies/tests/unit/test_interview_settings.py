@@ -5,6 +5,7 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.constants.audit import AuditAction
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
@@ -26,7 +27,7 @@ def clear_overrides():
     app.dependency_overrides.clear()
 
 
-def test_updates_the_time_per_question(client, monkeypatch):
+def test_updates_the_time_per_question(client, monkeypatch, audited):
     sign_in()
     saved = {}
     interview = Interview(
@@ -34,6 +35,7 @@ def test_updates_the_time_per_question(client, monkeypatch):
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
         set_id=None,
+        pass_mark=70,
     )
     company = Company(id=COMPANY_ID, name="My company", created_at=datetime.now(UTC))
     company.members = [
@@ -68,6 +70,12 @@ def test_updates_the_time_per_question(client, monkeypatch):
     client.patch(url, json={"question_seconds": 45, "hired": True, "pass_mark": 70})
 
     assert saved == {"question_seconds": 45, "hired": True, "pass_mark": 70}
+    # Only a changed pass mark is recorded.
+    assert audited == []
+
+    client.patch(url, json={"question_seconds": 45, "pass_mark": 80})
+
+    assert audited == [(COMPANY_ID, "bob", AuditAction.PASS_MARK_CHANGED, INTERVIEW_ID)]
     too_short = client.patch(url, json={"question_seconds": 5})
 
     assert too_short.status_code == 422

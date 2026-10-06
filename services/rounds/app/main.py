@@ -19,7 +19,6 @@ from app.routers import (
     schedules,
     session_feedback,
     sessions,
-    talents,
 )
 from app.storage.db import ping as ping_database
 
@@ -50,7 +49,6 @@ add_localized_errors(app)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(sessions.router)
 app.include_router(practice.router)
-app.include_router(talents.router)
 app.include_router(session_feedback.router)
 app.include_router(help.router)
 app.include_router(internal.router)

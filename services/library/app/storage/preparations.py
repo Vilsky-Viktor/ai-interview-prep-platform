@@ -44,8 +44,8 @@ async def find_by_generation(generation_id: uuid.UUID) -> uuid.UUID | None:
 
 
 async def create_interview(payload: PreparationIn) -> uuid.UUID:
-    """Company interviews are always private. Their topics' embeddings are kept to find the
-    templates for similar roles, whose talents a company is suggested."""
+    """Company interviews are always private. Their topics' embeddings are kept, like a
+    template's."""
     question_set = QuestionSet(
         generation_id=payload.generation_id,
         kind=SetKind.INTERVIEW,

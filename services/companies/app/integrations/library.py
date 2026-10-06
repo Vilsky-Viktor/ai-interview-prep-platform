@@ -123,14 +123,3 @@ async def get_question_context(question_id: UUID) -> dict | None:
     response.raise_for_status()
 
     return response.json()
-
-
-async def similar_templates(set_id: UUID) -> list[UUID]:
-    """The templates for roles like the test's, closest first; whose talents it's suggested."""
-    response = await http.get_client().get(
-        f"{settings.library_url}/internal/sets/{set_id}/similar-templates",
-        headers={"Authorization": f"Bearer {service_token('library')}"},
-    )
-    response.raise_for_status()
-
-    return [UUID(template_id) for template_id in response.json()]

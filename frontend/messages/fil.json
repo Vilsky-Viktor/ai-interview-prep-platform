@@ -44,7 +44,7 @@
     "title": "Mag-sign in",
     "continueWith": "Magpatuloy gamit ang <name>{provider}</name>",
     "link": "May prepza account na ang email na ito. Magpatuloy sa paraang ginamit mo dati, at maili-link dito ang {provider}.",
-    "consent": "Sa pag-sign in, sumasang-ayon ka sa <terms>Mga tuntunin</terms> at sa <privacy>Patakaran sa privacy</privacy>.",
+    "consent": "Sa pag-sign in, kinukumpirma mong 16 taong gulang ka o higit pa at sumasang-ayon ka sa <terms>Mga tuntunin</terms> at sa <privacy>Patakaran sa privacy</privacy>.",
     "failed": "Hindi nakapag-sign in. Pakisubukang muli.",
     "verify": "Nagpadala kami sa iyo ng link para i-verify ang iyong email. Buksan ito, saka mag-sign in ulit para makasagot ng mga interview."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "I-interview ang lahat\nMag-hire ng tunay na talento",
-    "text": "Mga timed interview mula sa iyong job description. Ibang mga tanong sa bawat kandidato, at walang oras para magtanong sa AI. Mula $1 bawat kandidato."
+    "text": "Mga timed interview mula sa iyong job description. Ibang mga tanong sa bawat kandidato at timer sa bawat isa, kaya kaunti lang ang oras para maghanap ng sagot. Mula $1 bawat kandidato."
   },
   "start": {
     "placeholder": "Mag-paste ng job description, o ilarawan ang role at ang dapat malaman ng kandidato",
@@ -145,8 +145,8 @@
     "use": "Gamitin ang template",
     "using": "Sinisimulan…",
     "useFailed": "Hindi makapagsimula ng interview mula sa template na ito. Pakisubukang muli.",
-    "warningTitle": "Ang mga template ay para subukan ang prepza.",
-    "warning": "Nagpa-practice dito ang mga talento, kaya baka alam na ng mga kandidato ang mga tanong. Para sa totoong hiring, gumawa ng interview mula sa iyong job description.",
+    "warningTitle": "Handa na ang mga template para sa mga karaniwang role.",
+    "warning": "Para mas tumugma, gumawa ng interview mula sa iyong job description.",
     "text": "Mga handang interview ayon sa role. Pumili ng isa para simulan ang iyong interview; puwede mo itong baguhin pagkatapos."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, one {Lampas ang # email} other {Lampas ang # email}} sa iyong email limit sa ngayon. Subukang muli pagkalipas ng isang oras.",
       "no_credits": "{count, plural, one {Hindi naimbitahan ang # kandidato} other {Hindi naimbitahan ang # kandidato}}: ubos na ang credits. Mag-top up para maimbitahan sila.",
       "failed": "{count, plural, one {Hindi maipadala ang # imbitasyon} other {Hindi maipadala ang # imbitasyon}}. Subukang muli."
-    },
-    "talents": "Mga iminumungkahing talento"
+    }
   },
   "invite": {
     "signIn": "Mag-sign in gamit ang email ng imbitasyon para sagutan ang interview na ito.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Oras bawat tanong:",
     "secondsUnit": "s",
     "pickOne": "Pumili ng isa sa apat na opsyon sa bawat tanong.",
-    "noChange": "Hindi na mababago ang sagot kapag naibigay na.",
-    "timeRunsOut": "Kapag naubos ang oras ng isang tanong, mabibilang itong mali at magbubukas ang susunod. Tuloy ang oras kahit umalis ka.",
+    "changePick": "Mapapalitan mo ang pinili mo hanggang pindutin mo ang Susunod na tanong.",
+    "timeRunsOut": "Kapag naubos ang oras ng isang tanong, bibilangin ang pinili mo at magbubukas ang susunod; kung walang pinili, mabibilang itong mali. Tuloy ang oras kahit umalis ka.",
     "unanswered": "Ang mga hindi nasagot na tanong ay mabibilang na mali.",
     "saved": "Naka-save ang progreso: gamitin ulit ang link na ito para magpatuloy.",
     "extraTime": "Kailangan mo ba ng mas maraming oras, halimbawa dahil sa kapansanan? Magtanong sa {company} bago ka magsimula.",
@@ -465,7 +464,14 @@
     "joined": "Sumali na",
     "invited": "Inimbitahan",
     "copy": "Kopyahin",
-    "inviteTitle": "Imbitasyon sa kumpanya"
+    "inviteTitle": "Imbitasyon sa kumpanya",
+    "remove": "Alisin",
+    "removed": "Inalis si {email}",
+    "removeFailed": "Hindi sila maalis.",
+    "removeTitle": "Alisin sa kumpanya?",
+    "removeText": "Mawawalan ng access sa kumpanya si {email}. Kung card niya ang nagbabayad ng automatic top-up, titigil ang mga ito. Puwede mo silang imbitahan ulit mamaya.",
+    "removeInviteText": "Hindi na gagana ang invite link na ipinadala sa {email}. Puwede mo silang imbitahan ulit mamaya.",
+    "removeConfirm": "Alisin"
   },
   "scorecard": {
     "timeOut": "Ubos na ang oras",
@@ -660,18 +666,6 @@
         "verified": "Verified gamit ang work email ng iyong team"
       }
     },
-    "talent": {
-      "title": "Makakuha ng mga mungkahing talento",
-      "text": "Ang mga may pinakamataas na score sa aming libreng practice interview, iminumungkahi para sa iyong role. Libre.",
-      "suggested": "Iminumungkahi para sa Backend developer",
-      "score": "Score",
-      "points": {
-        "free": "Libre para sa iyo at sa talento",
-        "practice": "Na-score sa mga timed interview",
-        "first": "Ang unang subok lang nila ang bilang",
-        "link": "Sila ang pumipili kung imumungkahi sila"
-      }
-    },
     "languages": {
       "title": "Anumang role, anumang wika",
       "text": "Gumagana ang prepza sa {count} wika. Mag-paste ng job description sa isang wika at i-interview ang mga kandidato sa iba."
@@ -723,7 +717,7 @@
       "title": "Bakit kami narito",
       "problem": "Madalas nakasalalay ang hiring sa isang CV at isang magandang usapan, at puwedeng makapanlinlang ang dalawa. Ang mga assessment tool na nakakatulong ay naka-presyo para sa malalaking kumpanya, may annual plan at bayad bawat seat, kaya karamihan ng team ay wala nito.",
       "approach": "Ginagawang timed interview ng prepza ang isang job description sa loob ng ilang minuto, para sa kahit anong role. Bawat kandidato ay may sariling mga tanong, nakikita mo kung sino ang marunong sa trabaho at bakit, at magbabayad ka lang para sa mga kandidatong talagang sumagot nito.",
-      "practice": "Gusto rin naming maging libre para sa lahat ang paghahanda para sa interview. Kahit sino ay puwedeng sumagot ng aming mga practice interview para sa isang role, makita ang kanilang grado at bawat tamang sagot, at mag-practice ulit, nang walang bayad. Ang mga mahusay ay puwedeng piliing maimungkahi sa mga kumpanyang nagha-hire para sa katulad na role."
+      "practice": "Gusto rin naming maging libre para sa lahat ang paghahanda para sa interview. Kahit sino ay puwedeng sumagot ng aming mga practice interview para sa isang role, makita ang kanilang grado at bawat tamang sagot, at mag-practice ulit, nang walang bayad."
     },
     "founder": {
       "quote": "Hindi dapat pribilehiyo lang ng malalaking kumpanya na may malaking budget ang mahusay na hiring. Ginawa ko ang prepza para kahit anong team ay magawang patas na interview ang isang job description sa loob ng ilang minuto, makita kung sino ang talagang marunong sa trabaho, at magbayad lang para sa mga kandidatong sumagot nito. Sana ay matulungan ka nitong mahanap nang mas mabilis ang mga tamang tao.",
@@ -786,27 +780,10 @@
     "gradeLabel": "Grado",
     "questions": "{count, plural, one {# tanong} other {# tanong}}",
     "progressLabel": "Progreso",
-    "answeredLabel": "tanong ang nasagot"
-  },
-  "suggest": {
-    "title": "Maimungkahi sa mga kumpanya",
-    "consent": "Opsyonal. Puwedeng makita ng mga kumpanyang nagha-hire para sa katulad na role ang iyong pangalan, LinkedIn at score sa unang round. Puwede mo itong baguhin o bawiin anumang oras sa settings.",
-    "link": "LinkedIn link",
-    "share": "I-share",
-    "saved": "Puwede ka nang imungkahi sa mga kumpanya.",
-    "withdraw": "Bawiin",
-    "withdrawn": "Hindi ka na imumungkahi sa mga kumpanya.",
-    "invalid": "Gamitin ang link ng iyong LinkedIn profile, tulad ng https://www.linkedin.com/in/your-name",
-    "failed": "Hindi ma-save. Pakisubukang muli.",
-    "shareAndStart": "Pumayag at simulan",
-    "startWithout": "Tumanggi at simulan"
-  },
-  "talents": {
-    "about": "Mga talentong mahusay sa pag-practice ng interview para sa role na katulad nito, at pumayag na maimungkahi.",
-    "empty": "Wala pang iminumungkahing talento.",
-    "score": "Score",
-    "hide": "Itago",
-    "hideFailed": "Hindi maitago ang talento. Pakisubukang muli."
+    "answeredLabel": "tanong ang nasagot",
+    "hireTitle": "Nagha-hire para sa role na ito?",
+    "hireText": "Gamitin ang interview na ito sa iyong mga kandidato o gumawa ng isa para sa iyong job description.",
+    "hireButton": "Gumawa ng interview"
   },
   "verify": {
     "verify": "I-verify",

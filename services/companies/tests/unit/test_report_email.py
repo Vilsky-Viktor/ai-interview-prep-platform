@@ -6,14 +6,17 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.config.settings import settings
+from app.constants.reports import NO_FINISHED_CANDIDATES, TOO_MANY_REPORT_EMAILS
 from app.integrations import rounds
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
-from app.routers import reports as reports_router
 from app.services import outbox as outbox_service
+from app.services import report_emails
 from app.storage import companies, interviews, invites, reports
+from tests.unit.fake_redis import FakeRedis
 
 COMPANY_ID = uuid.uuid4()
 INTERVIEW_ID = uuid.uuid4()
@@ -67,17 +70,14 @@ def queued(monkeypatch):
     async def fake_queue(data):
         events.append(data)
 
-    async def allowed(*args):
-        return None
-
     async def no_flush():
         return None
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(reports, "queue_email", fake_queue)
-    monkeypatch.setattr(reports_router, "hit_emails", allowed)
-    monkeypatch.setattr(reports_router, "get_redis", lambda: None)
+    redis = FakeRedis()
+    monkeypatch.setattr(report_emails, "get_redis", lambda: redis)
     monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
 
     return events
@@ -164,3 +164,44 @@ def test_the_tests_report_is_emailed_as_a_candidates_report(client, queued):
         "Candidates Backend.pdf",
     )
     assert "candidate" not in event
+
+
+def test_no_report_is_emailed_before_a_candidate_finishes(client, queued, monkeypatch):
+    unfinished = CandidateInvite(
+        id=INVITE_ID,
+        interview_id=INTERVIEW_ID,
+        email="ann@example.com",
+        token="token-ann",
+        status="in_process",
+        created_at=datetime.now(UTC),
+    )
+    interview = Interview(id=INTERVIEW_ID, company_id=COMPANY_ID, title="Backend", language="en")
+    interview.invites = [unfinished]
+
+    async def fake_interview(_interview_id):
+        return interview
+
+    monkeypatch.setattr(interviews, "get", fake_interview)
+    body = {"email": "boss@example.com", "pdf": PDF}
+
+    refused = client.post(URL, json=body)
+    refused_all = client.post(f"/interviews/{INTERVIEW_ID}/report/email", json=body)
+
+    assert (refused.status_code, refused_all.status_code) == (409, 409)
+    assert refused.json()["detail"] == NO_FINISHED_CANDIDATES
+    assert queued == []
+
+
+def test_a_company_emails_a_limited_number_of_reports_a_day(client, queued, monkeypatch):
+    monkeypatch.setattr(settings, "report_emails_per_company_day", 2)
+
+    def send(number):
+        return client.post(URL, json={"email": f"boss{number}@example.com", "pdf": PDF})
+
+    assert [send(number).status_code for number in range(2)] == [202, 202]
+
+    refused = send(2)
+
+    assert refused.status_code == 429
+    assert refused.json()["detail"] == TOO_MANY_REPORT_EMAILS
+    assert len(queued) == 2

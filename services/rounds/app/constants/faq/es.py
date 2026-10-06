@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "¿Pueden los candidatos usar IA o buscar las respuestas?",
-        "answer": "Cada candidato recibe sus propias preguntas aleatorias en su propio orden, con un temporizador en cada pregunta que controla nuestro servidor, así que no hay tiempo para preguntar a una IA. Los resultados también muestran cuándo un candidato salió de la página, copió texto o respondió demasiado rápido para haber leído la pregunta.",
+        "answer": "Cada candidato recibe sus propias preguntas aleatorias en su propio orden, con un temporizador en cada pregunta que controla nuestro servidor, así que hay poco tiempo para buscar las respuestas o preguntar a una IA. Los resultados también muestran cuándo un candidato salió de la página, copió texto o respondió demasiado rápido para haber leído la pregunta.",
     },
     {
         "key": "cost",
@@ -71,11 +71,6 @@ FAQ = [
         "key": "candidates",
         "question": "¿Qué ven los candidatos?",
         "answer": "El nombre y el logo de tu empresa, qué esperar antes de empezar y luego una pregunta cronometrada cada vez. Nunca ven su puntuación ni si una respuesta fue correcta.",
-    },
-    {
-        "key": "talent",
-        "question": "¿Qué son las sugerencias de talento?",
-        "answer": "Hay personas que practican con las entrevistas de práctica gratuitas de prepza, y quienes eligen ser sugeridos dejan un enlace de LinkedIn. Cuando creas una entrevista, las mejores puntuaciones para un puesto similar aparecen en su pestaña Talentos sugeridos, con su nombre, puntuación y LinkedIn. Solo cuenta su primer intento, puedes ocultar a quien no encaje y las sugerencias son gratis.",
     },
     {
         "key": "verified",

@@ -1,7 +1,7 @@
 import pytest
 
 from app.integrations import billing
-from app.storage import accounts, invites
+from app.storage import accounts, audit, invites
 
 
 @pytest.fixture(autouse=True)
@@ -22,3 +22,16 @@ def no_billing_calls(monkeypatch):
 
     monkeypatch.setattr(accounts, "candidate_invites", no_invites)
     monkeypatch.setattr(invites, "unfinished", none_unfinished)
+
+
+@pytest.fixture(autouse=True)
+def audited(monkeypatch):
+    """The audit log, in memory: (company id, user id, action, target id) as recorded."""
+    events = []
+
+    async def record(company_id, user_id, action, target_id=None):
+        events.append((company_id, user_id, action, target_id))
+
+    monkeypatch.setattr(audit, "record", record)
+
+    return events

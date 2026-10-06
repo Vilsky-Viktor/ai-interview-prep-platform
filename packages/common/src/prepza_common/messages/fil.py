@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "Ubos na ang oras para sa tanong na ito.",
     "Name the company": "Pangalanan ang kumpanya",
     "The report isn't a PDF": "Hindi PDF ang report",
+    "A report can be emailed once a candidate has finished this interview.": "Puwedeng i-email ang report kapag natapos na ng kandidato ang interview na ito.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "Naabot na ng iyong kumpanya ang pang-araw-araw na limit ng mga report na ma-email. Subukang muli bukas.",
 }

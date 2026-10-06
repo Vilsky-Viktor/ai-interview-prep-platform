@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "หมดเวลาสำหรับคำถามนี้แล้ว",
     "Name the company": "ระบุชื่อบริษัท",
     "The report isn't a PDF": "รายงานไม่ใช่ PDF",
+    "A report can be emailed once a candidate has finished this interview.": "ส่งรายงานทางอีเมลได้เมื่อผู้สมัครทำการสัมภาษณ์นี้เสร็จแล้ว",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "บริษัทของคุณส่งรายงานทางอีเมลครบจำนวนสูงสุดต่อวันแล้ว โปรดลองอีกครั้งพรุ่งนี้",
 }

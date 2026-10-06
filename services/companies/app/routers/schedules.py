@@ -6,7 +6,7 @@ from prepza_common.google import Invoker
 from app.services import outbox as outbox_service
 from app.services.candidate_billing import expire_unstarted
 from app.services.reminders import remind_unstarted
-from app.services.retention import delete_expired_candidates
+from app.services.retention import delete_expired_candidates, delete_old_audit_events
 
 logger = logging.getLogger(__name__)
 
@@ -15,11 +15,17 @@ router = APIRouter(prefix="/internal/schedules", tags=["schedules"], dependencie
 
 @router.post("/retention", status_code=status.HTTP_204_NO_CONTENT)
 async def retention() -> None:
-    """Daily, from Cloud Scheduler: candidate data past its retention period goes."""
+    """Daily, from Cloud Scheduler: candidate data and audit events past their retention
+    periods go."""
     count = await delete_expired_candidates()
 
     if count:
         logger.info("Deleted %d expired candidate invites", count)
+
+    audited = await delete_old_audit_events()
+
+    if audited:
+        logger.info("Deleted %d old audit events", audited)
 
 
 @router.post("/invite-expiry", status_code=status.HTTP_204_NO_CONTENT)

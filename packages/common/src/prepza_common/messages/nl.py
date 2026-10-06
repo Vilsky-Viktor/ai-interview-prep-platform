@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "De tijd voor deze vraag is om.",
     "Name the company": "Geef het bedrijf een naam",
     "The report isn't a PDF": "Het rapport is geen PDF",
+    "A report can be emailed once a candidate has finished this interview.": "Een rapport kan worden gemaild zodra een kandidaat dit sollicitatiegesprek heeft afgerond.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "Je bedrijf heeft het daglimiet voor gemailde rapporten bereikt. Probeer het morgen opnieuw.",
 }

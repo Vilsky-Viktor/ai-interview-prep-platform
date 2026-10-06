@@ -31,7 +31,7 @@ TEXTS = {
         "button": "Open the invite",
     },
     "report": {
-        "subject": "{sender} shared a candidate report: {candidate}",
+        "subject": "Candidate report: {candidate}",
         "preheader": "{candidate} took “{title}” at {company}. The report is attached.",
         "heading": "Candidate report",
         "lines": [
@@ -46,7 +46,7 @@ TEXTS = {
         "with this address on prepza. If you weren't expecting it, you can ignore it.",
     },
     "candidates": {
-        "subject": "{sender} shared a report of all candidates: {title}",
+        "subject": "Report of all candidates: {title}",
         "preheader": "Every candidate for “{title}” at {company}. The report is attached.",
         "heading": "Candidates report",
         "lines": [

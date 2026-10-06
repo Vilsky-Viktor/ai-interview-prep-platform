@@ -22,7 +22,7 @@ TEXTS = {
         "button": "เปิดคำเชิญ",
     },
     "report": {
-        "subject": "{sender} แชร์รายงานผู้สมัคร: {candidate}",
+        "subject": "รายงานผู้สมัคร: {candidate}",
         "preheader": "{candidate} ทำการสัมภาษณ์ “{title}” ของ {company} แนบรายงานมาแล้ว",
         "heading": "รายงานผู้สมัคร",
         "lines": [
@@ -33,7 +33,7 @@ TEXTS = {
         "footer": "อีเมลนี้ส่งถึง {email} เนื่องจาก {sender} แชร์รายงานผู้สมัครกับที่อยู่นี้บน prepza หากคุณไม่ได้คาดว่าจะได้รับ ก็ไม่ต้องสนใจอีเมลนี้",
     },
     "candidates": {
-        "subject": "{sender} แชร์รายงานผู้สมัครทั้งหมด: {title}",
+        "subject": "รายงานผู้สมัครทั้งหมด: {title}",
         "preheader": "ผู้สมัครทุกคนของ “{title}” ที่ {company} แนบรายงานมาแล้ว",
         "heading": "รายงานผู้สมัครทั้งหมด",
         "lines": [

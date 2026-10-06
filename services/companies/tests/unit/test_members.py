@@ -5,9 +5,10 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.integrations import billing
 from app.main import app
 from app.models.companies import Company, Member
-from app.storage import members
+from app.storage import companies, members
 
 MEMBER_ID = uuid.uuid4()
 COMPANY_ID = uuid.uuid4()
@@ -83,3 +84,82 @@ def test_invite_view(client, stored_invite):
         "email": "bob@example.com",
         "joined": False,
     }
+
+
+@pytest.fixture
+def team(monkeypatch):
+    """Ann owns the company, Bob joined as an admin, Cid's invite is pending. Returns what was
+    removed and whose auto top-up billing was asked to turn off."""
+    company = Company(id=COMPANY_ID, name="Arcolabs", created_at=datetime.now(UTC))
+    company.members = [
+        Member(
+            id=uuid.uuid4(),
+            user_id=uid,
+            invited_email=f"{name}@example.com",
+            role=role,
+            created_at=datetime.now(UTC),
+        )
+        for uid, name, role in (
+            ("ann", "ann", "owner"),
+            ("bob", "bob", "admin"),
+            (None, "cid", "admin"),
+        )
+    ]
+    removed = []
+    turned_off = []
+
+    async def fake_company(_company_id):
+        return company
+
+    async def fake_remove(member_id):
+        removed.append(member_id)
+
+    async def fake_turn_off(company_id, buyer_id=None):
+        turned_off.append(buyer_id)
+
+    async def fake_list(company_id, offset, limit):
+        return company.members
+
+    monkeypatch.setattr(companies, "get", fake_company)
+    monkeypatch.setattr(members, "remove", fake_remove)
+    monkeypatch.setattr(members, "list_for_company", fake_list)
+    monkeypatch.setattr(billing, "turn_off_auto_top_up", fake_turn_off)
+
+    return company.members, removed, turned_off
+
+
+def remove_url(member):
+    return f"/members/{member.id}?company_id={COMPANY_ID}"
+
+
+def test_the_owner_removes_an_admin_and_their_card_stops_paying(client, team):
+    (_, bob, cid), removed, turned_off = team
+    sign_in("ann@example.com", uid="ann")
+
+    assert client.delete(remove_url(bob)).status_code == 204
+    assert client.delete(remove_url(cid)).status_code == 204
+    assert removed == [bob.id, cid.id]
+    # A pending invite has no card to stop.
+    assert turned_off == ["bob"]
+
+
+def test_nobody_removes_the_owner_and_admins_remove_nobody(client, team):
+    (owner, _, cid), removed, _ = team
+    sign_in("ann@example.com", uid="ann")
+
+    assert client.delete(remove_url(owner)).status_code == 409
+
+    sign_in("bob@example.com", uid="bob")
+
+    assert client.delete(remove_url(cid)).status_code == 403
+    assert removed == []
+
+
+def test_the_list_says_which_rows_can_be_removed(client, team):
+    sign_in("ann@example.com", uid="ann")
+    owners_view = client.get(f"/members?company_id={COMPANY_ID}").json()
+    sign_in("bob@example.com", uid="bob")
+    admins_view = client.get(f"/members?company_id={COMPANY_ID}").json()
+
+    assert [row["removable"] for row in owners_view] == [False, True, True]
+    assert [row["removable"] for row in admins_view] == [False, False, False]

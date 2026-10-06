@@ -29,7 +29,7 @@ TEXTS = {
         "button": "פתיחת ההזמנה",
     },
     "report": {
-        "subject": "{sender} שיתף/ה דוח מועמד: {candidate}",
+        "subject": "דוח מועמד: {candidate}",
         "preheader": '{candidate} ניגש/ה ל-"{title}" ב-{company}. הדוח מצורף.',
         "heading": "דוח מועמד",
         "lines": [
@@ -44,7 +44,7 @@ TEXTS = {
         "ב-prepza. אם לא ציפית לה, אפשר להתעלם ממנה.",
     },
     "candidates": {
-        "subject": "{sender} שיתף/ה דוח של כל המועמדים: {title}",
+        "subject": "דוח של כל המועמדים: {title}",
         "preheader": 'כל המועמדים ל-"{title}" ב-{company}. הדוח מצורף.',
         "heading": "דוח מועמדים",
         "lines": [

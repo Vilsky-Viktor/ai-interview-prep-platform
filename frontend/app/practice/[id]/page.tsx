@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { PageHeader } from "@/components/page-header"
+import { HireWithTemplate } from "@/components/practice/hire-with-template"
 import { PracticeActions } from "@/components/practice/practice-actions"
 import { SubtopicList } from "@/components/questions/subtopic-list"
 import { Badge } from "@/components/ui/badge"
@@ -117,6 +118,7 @@ export default async function PracticeTestPage({
                 {signedIn && (
                   <span className="flex items-center gap-4">
                     <Progress
+                      aria-label={topic.title}
                       value={step ? (step.answered / step.total) * 100 : 0}
                       className="flex-1"
                     />
@@ -130,6 +132,9 @@ export default async function PracticeTestPage({
           )
         })}
       </ul>
+
+      {/* Visitors who hire for this role can create an interview for their own candidates. */}
+      <HireWithTemplate />
     </main>
   )
 }

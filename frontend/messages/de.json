@@ -44,7 +44,7 @@
     "title": "Anmelden",
     "continueWith": "Weiter mit <name>{provider}</name>",
     "link": "Für diese E-Mail-Adresse gibt es bereits ein prepza-Konto. Melde dich so an wie beim letzten Mal, dann wird {provider} damit verknüpft.",
-    "consent": "Mit der Anmeldung akzeptierst du die <terms>Nutzungsbedingungen</terms> und die <privacy>Datenschutzerklärung</privacy>.",
+    "consent": "Mit der Anmeldung bestätigst du, dass du mindestens 16 Jahre alt bist, und akzeptierst die <terms>Nutzungsbedingungen</terms> und die <privacy>Datenschutzerklärung</privacy>.",
     "failed": "Die Anmeldung ist fehlgeschlagen. Bitte versuche es erneut.",
     "verify": "Wir haben dir einen Link zur Bestätigung deiner E-Mail-Adresse geschickt. Öffne ihn und melde dich dann erneut an, um Interviews zu machen."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Interviewe jeden\nStelle echte Talente ein",
-    "text": "Interviews mit Zeitlimit aus deiner Stellenbeschreibung. Eigene Fragen für jeden Kandidaten und keine Zeit, eine KI zu fragen. Ab $1 pro Kandidat."
+    "text": "Interviews mit Zeitlimit aus deiner Stellenbeschreibung. Eigene Fragen für jeden Kandidaten und ein Zeitlimit für jede, also bleibt wenig Zeit, Antworten nachzuschlagen. Ab $1 pro Kandidat."
   },
   "start": {
     "placeholder": "Füge eine Stellenbeschreibung ein oder beschreibe die Rolle und was ein Kandidat wissen sollte",
@@ -145,8 +145,8 @@
     "use": "Vorlage verwenden",
     "using": "Wird gestartet…",
     "useFailed": "Mit dieser Vorlage konnte kein Interview gestartet werden. Bitte versuche es erneut.",
-    "warningTitle": "Vorlagen sind zum Ausprobieren von prepza.",
-    "warning": "Talente üben damit, daher kennen Kandidaten die Fragen vielleicht schon. Für echte Einstellungen erstelle ein Interview aus deiner Stellenbeschreibung.",
+    "warningTitle": "Vorlagen sind fertige Interviews für gängige Rollen.",
+    "warning": "Für eine genauere Passung erstelle ein Interview aus deiner Stellenbeschreibung.",
     "text": "Fertige Interviews nach Rolle. Wähle eines als Grundlage für dein Interview; du kannst es danach ändern."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, one {# E-Mail liegt} other {# E-Mails liegen}} vorerst über deinem E-Mail-Limit. Versuche es in einer Stunde erneut.",
       "no_credits": "{count, plural, one {# Kandidat wurde nicht eingeladen} other {# Kandidaten wurden nicht eingeladen}}: keine Credits mehr. Lade auf, um sie einzuladen.",
       "failed": "{count, plural, one {# Einladung konnte} other {# Einladungen konnten}} nicht gesendet werden. Versuche es erneut."
-    },
-    "talents": "Vorgeschlagene Talente"
+    }
   },
   "invite": {
     "signIn": "Melde dich mit der E-Mail-Adresse aus der Einladung an, um dieses Interview zu absolvieren.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Zeit pro Frage:",
     "secondsUnit": "s",
     "pickOne": "Wähle bei jeder Frage eine von vier Optionen.",
-    "noChange": "Eine gegebene Antwort kann nicht mehr geändert werden.",
-    "timeRunsOut": "Wenn die Zeit einer Frage abläuft, zählt sie als falsch und die nächste öffnet sich. Die Uhr läuft weiter, auch wenn du die Seite verlässt.",
+    "changePick": "Du kannst deine Auswahl ändern, bis du auf „Nächste Frage“ drückst.",
+    "timeRunsOut": "Wenn die Zeit einer Frage abläuft, zählt deine Auswahl und die nächste öffnet sich; ohne Auswahl zählt sie als falsch. Die Uhr läuft weiter, auch wenn du die Seite verlässt.",
     "unanswered": "Unbeantwortete Fragen zählen als falsch.",
     "saved": "Der Fortschritt wird gespeichert: Öffne diesen Link erneut, um fortzufahren.",
     "extraTime": "Brauchst du mehr Zeit, zum Beispiel wegen einer Behinderung? Frag {company}, bevor du beginnst.",
@@ -465,7 +464,14 @@
     "joined": "Beigetreten",
     "invited": "Eingeladen",
     "copy": "Kopieren",
-    "inviteTitle": "Einladung ins Unternehmen"
+    "inviteTitle": "Einladung ins Unternehmen",
+    "remove": "Entfernen",
+    "removed": "{email} entfernt",
+    "removeFailed": "Die Person konnte nicht entfernt werden.",
+    "removeTitle": "Aus dem Unternehmen entfernen?",
+    "removeText": "{email} verliert den Zugriff auf das Unternehmen. Wenn automatische Aufladungen über ihre Karte laufen, werden sie beendet. Du kannst die Person später erneut einladen.",
+    "removeInviteText": "Der an {email} gesendete Einladungslink funktioniert nicht mehr. Du kannst die Person später erneut einladen.",
+    "removeConfirm": "Entfernen"
   },
   "scorecard": {
     "timeOut": "Zeit abgelaufen",
@@ -652,18 +658,6 @@
         "verified": "Verifiziert über die Arbeits-E-Mail deines Teams"
       }
     },
-    "talent": {
-      "title": "Erhalte Talentvorschläge",
-      "text": "Die Besten aus unseren kostenlosen Übungsinterviews, vorgeschlagen für deine Rolle. Kostenlos.",
-      "suggested": "Vorgeschlagen für Backend-Entwickler",
-      "score": "Ergebnis",
-      "points": {
-        "free": "Kostenlos für dich und für Talente",
-        "practice": "Bewertet in Interviews mit Zeitlimit",
-        "first": "Nur ihr erster Versuch zählt",
-        "link": "Sie entscheiden selbst, ob sie vorgeschlagen werden"
-      }
-    },
     "languages": {
       "title": "Jede Rolle, jede Sprache",
       "text": "prepza funktioniert in {count} Sprachen. Füge eine Stellenbeschreibung in einer Sprache ein und führe Interviews mit Kandidaten in einer anderen."
@@ -715,7 +709,7 @@
       "title": "Warum es uns gibt",
       "problem": "Einstellungen stützen sich oft auf einen Lebenslauf und ein gutes Gespräch, und beides kann täuschen. Die Bewertungstools, die helfen, sind für große Unternehmen bepreist, mit Jahresverträgen und Lizenzgebühren pro Platz, also verzichten die meisten Teams darauf.",
       "approach": "prepza macht aus einer Stellenbeschreibung in wenigen Minuten ein Interview mit Zeitlimit, für jede Rolle. Jeder Kandidat bekommt eigene Fragen, du siehst, wer den Job beherrscht und warum, und du zahlst nur für Kandidaten, die es wirklich machen.",
-      "practice": "Außerdem wollen wir, dass die Vorbereitung auf ein Interview für alle kostenlos ist. Jeder kann unsere Übungsinterviews für eine Rolle machen, seine Note und jede richtige Antwort sehen und erneut üben, ohne Kosten. Wer gut abschneidet, kann sich Unternehmen vorschlagen lassen, die für eine ähnliche Rolle einstellen."
+      "practice": "Außerdem wollen wir, dass die Vorbereitung auf ein Interview für alle kostenlos ist. Jeder kann unsere Übungsinterviews für eine Rolle machen, seine Note und jede richtige Antwort sehen und erneut üben, ohne Kosten."
     },
     "founder": {
       "quote": "Gut einzustellen sollte kein Privileg großer Unternehmen mit großen Budgets sein. Ich habe prepza gebaut, damit jedes Team aus einer Stellenbeschreibung in wenigen Minuten ein faires Interview machen, sehen kann, wer den Job wirklich beherrscht, und nur für die Kandidaten zahlt, die es machen. Ich hoffe, es hilft dir, schneller die richtigen Leute zu finden.",
@@ -778,27 +772,10 @@
     "gradeLabel": "Note",
     "questions": "{count, plural, one {# Frage} other {# Fragen}}",
     "progressLabel": "Fortschritt",
-    "answeredLabel": "Fragen beantwortet"
-  },
-  "suggest": {
-    "title": "Lass dich Unternehmen vorschlagen",
-    "consent": "Optional. Unternehmen, die für ähnliche Rollen einstellen, sehen eventuell deinen Namen, dein LinkedIn und dein Ergebnis der ersten Runde. Du kannst das jederzeit in den Einstellungen ändern oder widerrufen.",
-    "link": "LinkedIn-Link",
-    "share": "Teilen",
-    "saved": "Du kannst jetzt Unternehmen vorgeschlagen werden.",
-    "withdraw": "Widerrufen",
-    "withdrawn": "Du wirst Unternehmen nicht mehr vorgeschlagen.",
-    "invalid": "Verwende den Link zu deinem LinkedIn-Profil, z. B. https://www.linkedin.com/in/your-name",
-    "failed": "Konnte nicht gespeichert werden. Bitte versuche es erneut.",
-    "shareAndStart": "Zustimmen & starten",
-    "startWithout": "Ablehnen & starten"
-  },
-  "talents": {
-    "about": "Talente, die beim Üben eines Interviews für eine Rolle wie diese gut abgeschnitten und einem Vorschlag zugestimmt haben.",
-    "empty": "Noch keine vorgeschlagenen Talente.",
-    "score": "Ergebnis",
-    "hide": "Ausblenden",
-    "hideFailed": "Das Talent konnte nicht ausgeblendet werden. Bitte versuche es erneut."
+    "answeredLabel": "Fragen beantwortet",
+    "hireTitle": "Du stellst für diese Rolle ein?",
+    "hireText": "Nutze dieses Interview mit deinen Kandidaten oder generiere eines für deine Stellenbeschreibung.",
+    "hireButton": "Interview erstellen"
   },
   "verify": {
     "verify": "Verifizieren",

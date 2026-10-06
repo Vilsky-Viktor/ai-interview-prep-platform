@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Kas kandidaadid saavad kasutada tehisaru või vastuseid otsida?",
-        "answer": "Iga kandidaat saab oma juhuslikud küsimused oma järjekorras ja igal küsimusel on ajapiirang, mida jälgib meie server, nii et tehisarult küsimiseks pole aega. Kandidaadi tulemused näitavad ka, millal kandidaat lehelt lahkus, teksti kopeeris või vastas liiga kiiresti, et küsimust lugeda.",
+        "answer": "Iga kandidaat saab oma juhuslikud küsimused oma järjekorras ja igal küsimusel on ajapiirang, mida jälgib meie server, nii et vastuste otsimiseks või tehisarult küsimiseks jääb vähe aega. Kandidaadi tulemused näitavad ka, millal kandidaat lehelt lahkus, teksti kopeeris või vastas liiga kiiresti, et küsimust lugeda.",
     },
     {
         "key": "cost",
@@ -71,11 +71,6 @@ FAQ = [
         "key": "candidates",
         "question": "Mida kandidaadid näevad?",
         "answer": "Sinu ettevõtte nime ja logo, enne alustamist seda, mida oodata, ja seejärel ühe ajapiiranguga küsimuse korraga. Nad ei näe kunagi oma tulemust ega seda, kas vastus oli õige.",
-    },
-    {
-        "key": "talent",
-        "question": "Mis on talentide soovitused?",
-        "answer": "Inimesed harjutavad prepza tasuta harjutusintervjuudel ja need, kes soovivad, et neid soovitataks, jätavad LinkedIni lingi. Kui lood intervjuu, ilmuvad sarnase rolli parimad intervjuu vahekaardile Soovitatud talendid koos nime, tulemuse ja LinkedIniga. Arvesse läheb ainult esimene katse, saad peita igaühe, kes ei sobi, ja soovitused on tasuta.",
     },
     {
         "key": "verified",

@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "زمان این پرسش تمام شد.",
     "Name the company": "نام شرکت را وارد کنید",
     "The report isn't a PDF": "گزارش PDF نیست",
+    "A report can be emailed once a candidate has finished this interview.": "گزارش را می‌توان پس از آنکه نامزد این مصاحبه را تمام کرد ایمیل کرد.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "شرکت شما سقف روزانه ارسال گزارش با ایمیل را پر کرده است. فردا دوباره امتحان کنید.",
 }

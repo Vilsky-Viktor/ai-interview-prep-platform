@@ -16,7 +16,9 @@ export function QuestionText({
     <div
       role={heading ? "heading" : undefined}
       aria-level={heading ? 1 : undefined}
-      className={cn("space-y-3", className)}
+      // A heading takes focus when its question opens, for keyboard and screen reader users.
+      tabIndex={heading ? -1 : undefined}
+      className={cn("space-y-3", heading && "outline-none", className)}
     >
       {splitCodeBlocks(text).map((part, index) =>
         part.code ? (

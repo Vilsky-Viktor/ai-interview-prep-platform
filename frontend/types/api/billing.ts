@@ -240,7 +240,10 @@ export interface paths {
     /** Turn On Company */
     put: operations["turn_on_company_internal_companies__company_id__auto_top_up_put"]
     post?: never
-    /** Turn Off Company */
+    /**
+     * Turn Off Company
+     * @description With `buyer_id`, off only when that person's card pays for it.
+     */
     delete: operations["turn_off_company_internal_companies__company_id__auto_top_up_delete"]
     options?: never
     head?: never
@@ -884,7 +887,9 @@ export interface operations {
   }
   turn_off_company_internal_companies__company_id__auto_top_up_delete: {
     parameters: {
-      query?: never
+      query?: {
+        buyer_id?: string | null
+      }
       header?: never
       path: {
         company_id: string

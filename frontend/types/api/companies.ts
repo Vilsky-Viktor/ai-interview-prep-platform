@@ -124,6 +124,26 @@ export interface paths {
     patch: operations["rename_company_companies__company_id__name_patch"]
     trace?: never
   }
+  "/companies/{company_id}/audit": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Audit Events
+     * @description The company's recorded human decisions, newest first; for the owner only.
+     */
+    get: operations["list_audit_events_companies__company_id__audit_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/companies/{company_id}/auto-top-up": {
     parameters: {
       query?: never
@@ -156,6 +176,27 @@ export interface paths {
     /** Invite Admin */
     post: operations["invite_admin_members_post"]
     delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/members/{member_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    /**
+     * Remove Member
+     * @description The owner removes an admin or withdraws a pending invite; never the owner. An automatic
+     *     top-up paid with the removed admin's card goes off, so it's never charged again.
+     */
+    delete: operations["remove_member_members__member_id__delete"]
     options?: never
     head?: never
     patch?: never
@@ -371,7 +412,9 @@ export interface paths {
     post?: never
     /**
      * Revoke Candidate
-     * @description Withdraws an invite the candidate hasn't used yet; later it would discard their answers.
+     * @description Withdraws an invite the candidate hasn't used yet. Once they've started, it erases them for
+     *     good, answers and results included, for example when they ask to have their data deleted;
+     *     credits still held come back, and a finished candidate stays charged.
      */
     delete: operations["revoke_candidate_interviews__interview_id__candidates__invite_id__delete"]
     options?: never
@@ -735,7 +778,8 @@ export interface paths {
     /**
      * Email Report
      * @description Emails the candidate's PDF report, made on their page, to someone such as a hiring
-     *     manager. A reply goes to the member who sent it. Counts towards the member's email limits.
+     *     manager. A reply goes to the member who sent it. Counts towards the member's email limits
+     *     and the company's daily reports.
      */
     post: operations["email_report_interviews__interview_id__candidates__invite_id__report_email_post"]
     delete?: never
@@ -775,43 +819,6 @@ export interface paths {
      * @description Emails the test's candidates report, made on its candidates tab, like a candidate's.
      */
     post: operations["email_interview_report_interviews__interview_id__report_email_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/interviews/{interview_id}/suggestions": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Suggested Talents */
-    get: operations["suggested_talents_interviews__interview_id__suggestions_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/interviews/{interview_id}/suggestions/hide": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Hide Talent
-     * @description Hides a talent who doesn't fit from this test's suggestions, for everyone in the company.
-     */
-    post: operations["hide_talent_interviews__interview_id__suggestions_hide_post"]
     delete?: never
     options?: never
     head?: never
@@ -945,7 +952,8 @@ export interface paths {
     put?: never
     /**
      * Retention
-     * @description Daily, from Cloud Scheduler: candidate data past its retention period goes.
+     * @description Daily, from Cloud Scheduler: candidate data and audit events past their retention
+     *     periods go.
      */
     post: operations["retention_internal_schedules_retention_post"]
     delete?: never
@@ -1067,6 +1075,20 @@ export interface components {
       email: string
       /** Joined */
       joined: boolean
+    }
+    /** AuditEventOut */
+    AuditEventOut: {
+      /** User Id */
+      user_id: string
+      /** Action */
+      action: string
+      /** Target Id */
+      target_id: string | null
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
     }
     /**
      * AutoTopUpIn
@@ -1284,11 +1306,6 @@ export interface components {
     HTTPValidationError: {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
-    }
-    /** HideTalentIn */
-    HideTalentIn: {
-      /** Url */
-      url: string
     }
     /** InterviewCreate */
     InterviewCreate: {
@@ -1513,6 +1530,11 @@ export interface components {
     }
     /** MemberOut */
     MemberOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
       /** Email */
       email: string
       /** Role */
@@ -1521,6 +1543,11 @@ export interface components {
       joined: boolean
       /** Token */
       token?: string | null
+      /**
+       * Removable
+       * @default false
+       */
+      removable: boolean
       /**
        * Created At
        * Format: date-time
@@ -1687,19 +1714,6 @@ export interface components {
       email: string
       /** Reason */
       reason: string
-    }
-    /**
-     * SuggestedTalentOut
-     * @description What a company sees of a suggested talent: their name, LinkedIn and first-round grade on
-     *     a practice test for a similar role. Nothing else.
-     */
-    SuggestedTalentOut: {
-      /** Name */
-      name: string
-      /** Url */
-      url: string
-      /** Grade */
-      grade: number
     }
     /** TitleIn */
     TitleIn: {
@@ -2030,6 +2044,40 @@ export interface operations {
       }
     }
   }
+  list_audit_events_companies__company_id__audit_get: {
+    parameters: {
+      query?: {
+        offset?: number
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AuditEventOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   get_auto_top_up_companies__company_id__auto_top_up_get: {
     parameters: {
       query?: never
@@ -2181,6 +2229,37 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["MemberOut"]
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  remove_member_members__member_id__delete: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path: {
+        member_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {
@@ -3414,70 +3493,6 @@ export interface operations {
         content: {
           "application/json": unknown
         }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  suggested_talents_interviews__interview_id__suggestions_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        interview_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["SuggestedTalentOut"][]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  hide_talent_interviews__interview_id__suggestions_hide_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        interview_id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["HideTalentIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
       }
       /** @description Validation Error */
       422: {

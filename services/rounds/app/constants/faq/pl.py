@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Czy kandydaci mogą korzystać z AI albo szukać odpowiedzi?",
-        "answer": "Każdy kandydat dostaje własne losowe pytania we własnej kolejności, z limitem czasu na każde pytanie pilnowanym przez nasz serwer, więc nie ma czasu, by zapytać AI. Wyniki pokazują też, kiedy kandydat opuścił stronę, skopiował tekst albo odpowiedział zbyt szybko, by przeczytać pytanie.",
+        "answer": "Każdy kandydat dostaje własne losowe pytania we własnej kolejności, z limitem czasu na każde pytanie pilnowanym przez nasz serwer, więc zostaje niewiele czasu na szukanie odpowiedzi czy pytanie AI. Wyniki pokazują też, kiedy kandydat opuścił stronę, skopiował tekst albo odpowiedział zbyt szybko, by przeczytać pytanie.",
     },
     {
         "key": "cost",
@@ -71,11 +71,6 @@ FAQ = [
         "key": "candidates",
         "question": "Co widzą kandydaci?",
         "answer": "Nazwę i logo Twojej firmy, przed startem informację, czego się spodziewać, a potem po jednym pytaniu z limitem czasu. Nigdy nie widzą swojego wyniku ani tego, czy odpowiedź była poprawna.",
-    },
-    {
-        "key": "talent",
-        "question": "Czym są propozycje talentów?",
-        "answer": "Ludzie ćwiczą na darmowych próbnych rozmowach prepza, a ci, którzy chcą być proponowani, zostawiają link do LinkedIn. Gdy tworzysz rozmowę, najlepsi w podobnej roli pojawiają się na jej karcie proponowanych talentów, z imieniem, wynikiem i LinkedIn. Liczy się tylko ich pierwsza próba, możesz ukryć każdego, kto nie pasuje, a propozycje są darmowe.",
     },
     {
         "key": "verified",

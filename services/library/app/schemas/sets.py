@@ -11,6 +11,7 @@ class SetOut(BaseModel):
     owner_id: str
     title: str
     level: str
+    language: str
     topics: list[TopicOut]
 
 

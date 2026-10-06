@@ -53,25 +53,33 @@ export function Countdown({
     }
   }, [left, onExpire])
 
+  // role="timer" is read only when asked; the last seconds are announced once, on reaching
+  // them, not every second.
+  const warning = left > 0 && left <= COUNTDOWN_WARNING_SECONDS
+
   return (
-    <Tooltip>
-      <TooltipTrigger
-        render={
-          <span
-            role="timer"
-            aria-label={t("timeLeft", { time: clock(left) })}
-            className={cn(
-              "flex items-center gap-1.5 font-medium tabular-nums",
-              left <= COUNTDOWN_WARNING_SECONDS &&
-                "text-red-600 dark:text-red-400"
-            )}
-          />
-        }
-      >
-        <TimerIcon aria-hidden className="size-4" />
-        {clock(left)}
-      </TooltipTrigger>
-      <TooltipContent>{t("timeLeft", { time: clock(left) })}</TooltipContent>
-    </Tooltip>
+    <>
+      <span aria-live="polite" className="sr-only">
+        {warning && t("timeLeft", { time: clock(COUNTDOWN_WARNING_SECONDS) })}
+      </span>
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <span
+              role="timer"
+              aria-label={t("timeLeft", { time: clock(left) })}
+              className={cn(
+                "flex items-center gap-1.5 font-medium tabular-nums",
+                warning && "text-red-600 dark:text-red-400"
+              )}
+            />
+          }
+        >
+          <TimerIcon aria-hidden className="size-4" />
+          {clock(left)}
+        </TooltipTrigger>
+        <TooltipContent>{t("timeLeft", { time: clock(left) })}</TooltipContent>
+      </Tooltip>
+    </>
   )
 }

@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "הזמן לשאלה הזו נגמר.",
     "Name the company": "הזינו את שם החברה",
     "The report isn't a PDF": "הדוח אינו PDF",
+    "A report can be emailed once a candidate has finished this interview.": "אפשר לשלוח דוח באימייל אחרי שמועמד סיים את הראיון הזה.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "החברה שלכם שלחה באימייל את המכסה היומית של דוחות. נסו שוב מחר.",
 }

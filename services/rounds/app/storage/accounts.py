@@ -3,16 +3,14 @@ from sqlalchemy.orm import selectinload
 
 from app.helpers.export import answer_export
 from app.models.sessions import Session
-from app.models.talents import TalentLink
 from app.storage.db import Session as Db
 
 
 async def delete_user(user_id: str) -> None:
     """Everything rounds holds about a user: interview and practice sessions with their answers
-    and signals, and their link to be suggested. Safe to repeat."""
+    and signals. Safe to repeat."""
     async with Db() as session:
         await session.execute(delete(Session).where(Session.user_id == user_id))
-        await session.execute(delete(TalentLink).where(TalentLink.user_id == user_id))
         await session.commit()
 
 
@@ -25,12 +23,7 @@ async def export(user_id: str) -> dict:
             .options(selectinload(Session.answers), selectinload(Session.signals))
         )
 
-        link = await session.get(TalentLink, user_id)
-
         return {
-            "suggested_to_companies": (
-                {"url": link.url, "answered_at": link.decided_at} if link else None
-            ),
             "interview_sections": [
                 {
                     "topic": row.topic_title,

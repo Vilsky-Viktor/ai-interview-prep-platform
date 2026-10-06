@@ -26,7 +26,7 @@ def test_the_report_email_carries_the_pdf_and_replies_go_to_the_sender():
     email = report_email(DATA, "https://prepza.com")
 
     assert email.to == "boss@example.com"
-    assert email.subject == "Bob shared a candidate report: ann@example.com"
+    assert email.subject == "Candidate report: ann@example.com"
     assert email.reply_to == "bob@example.com"
     assert email.attachments == [("Report ann@example.com.pdf", PDF)]
     # The PDF travels as an attachment only; its own reason for being sent is in the footer.
@@ -40,7 +40,7 @@ def test_the_report_of_all_candidates_has_its_own_text():
 
     email = report_email(data, "https://prepza.com")
 
-    assert email.subject == "Bob shared a report of all candidates: Backend"
+    assert email.subject == "Report of all candidates: Backend"
     assert email.attachments == [("Candidates Backend.pdf", PDF)]
     assert "Bob shared a candidates report with this address" in email.text
 

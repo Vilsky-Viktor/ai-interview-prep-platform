@@ -1,6 +1,6 @@
 """Embeds template and company test topics that have no embedding (templates copied in by hand,
-tests saved before their embeddings were kept), so the question bank and talent suggestions can
-match them by meaning. Safe to run again: it only picks topics still missing one.
+tests saved before their embeddings were kept), so the question bank can match them by
+meaning. Safe to run again: it only picks topics still missing one.
 
 Run from the repo root:
     docker-compose exec generation uv run --no-sync python -m app.jobs.embed_templates

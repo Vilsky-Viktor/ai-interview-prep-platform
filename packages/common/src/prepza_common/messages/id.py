@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "Waktu untuk soal ini sudah habis.",
     "Name the company": "Isi nama perusahaan",
     "The report isn't a PDF": "Laporan ini bukan PDF",
+    "A report can be emailed once a candidate has finished this interview.": "Laporan bisa dikirim lewat email setelah kandidat menyelesaikan wawancara ini.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "Perusahaanmu sudah mencapai batas harian pengiriman laporan lewat email. Coba lagi besok.",
 }

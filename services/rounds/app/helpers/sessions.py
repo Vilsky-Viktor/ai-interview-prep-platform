@@ -47,16 +47,22 @@ def topic_out(row: Session) -> SessionTopicOut:
 async def session_out_titled(row: Session) -> SessionOut:
     found = await library.get_set(row.interview_set_id)
 
-    return session_out(row, found["title"] if found else None)
+    if found is None:
+        return session_out(row)
+
+    return session_out(row, found["title"], found.get("language"))
 
 
-def session_out(row: Session, interview_title: str | None = None) -> SessionOut:
+def session_out(
+    row: Session, interview_title: str | None = None, language: str | None = None
+) -> SessionOut:
     return SessionOut(
         id=row.id,
         topic_id=row.topic_id,
         candidate_invite_id=row.candidate_invite_id,
         topic_title=row.topic_title,
         interview_title=interview_title,
+        language=language,
         practice=bool(row.practice),
         status=row.status,
         total=len(row.questions),

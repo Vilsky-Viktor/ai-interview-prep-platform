@@ -28,7 +28,7 @@ TEXTS = {
         "button": "افتح الدعوة",
     },
     "report": {
-        "subject": "شارك {sender} تقرير مرشح: {candidate}",
+        "subject": "تقرير مرشح: {candidate}",
         "preheader": "أجرى {candidate} «{title}» لدى {company}. التقرير مرفق.",
         "heading": "تقرير المرشح",
         "lines": [
@@ -43,7 +43,7 @@ TEXTS = {
         "العنوان على prepza. إذا لم تكن تتوقعها، فيمكنك تجاهلها.",
     },
     "candidates": {
-        "subject": "شارك {sender} تقرير جميع المرشحين: {title}",
+        "subject": "تقرير جميع المرشحين: {title}",
         "preheader": "جميع مرشحي «{title}» لدى {company}. التقرير مرفق.",
         "heading": "تقرير المرشحين",
         "lines": [

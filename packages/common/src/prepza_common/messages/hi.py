@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "इस प्रश्न का समय खत्म हो गया।",
     "Name the company": "कंपनी का नाम दर्ज करें",
     "The report isn't a PDF": "रिपोर्ट PDF नहीं है",
+    "A report can be emailed once a candidate has finished this interview.": "उम्मीदवार के यह इंटरव्यू पूरा करने के बाद ही रिपोर्ट ईमेल की जा सकती है।",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "आपकी कंपनी आज की सीमा तक रिपोर्ट ईमेल कर चुकी है। कल फिर से प्रयास करें।",
 }

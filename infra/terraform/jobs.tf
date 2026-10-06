@@ -25,8 +25,8 @@ locals {
     candidate-retention  = { service = "companies", path = "/internal/schedules/retention", cron = "15 3 * * *" }
     invite-expiry        = { service = "companies", path = "/internal/schedules/invite-expiry", cron = "30 3 * * *" }
     # In the morning (UTC), not the night: a reminder candidates see.
-    invite-reminders     = { service = "companies", path = "/internal/schedules/invite-reminders", cron = "0 9 * * *" }
-    bank-stages          = { service = "library", path = "/internal/schedules/bank", cron = "45 3 * * *" }
+    invite-reminders = { service = "companies", path = "/internal/schedules/invite-reminders", cron = "0 9 * * *" }
+    bank-stages      = { service = "library", path = "/internal/schedules/bank", cron = "45 3 * * *" }
     # Events not published right after their change (the outbox).
     library-outbox    = { service = "library", path = "/internal/schedules/outbox", cron = "* * * * *" }
     companies-outbox  = { service = "companies", path = "/internal/schedules/outbox", cron = "* * * * *" }
@@ -44,6 +44,18 @@ resource "google_cloud_scheduler_job" "schedule" {
   schedule         = each.value.cron
   time_zone        = "Etc/UTC"
   attempt_deadline = "600s"
+
+  # The daily jobs retry a failed run; the frequent ones (cron starting with "*") just run again
+  # soon.
+  dynamic "retry_config" {
+    for_each = startswith(each.value.cron, "*") ? [] : [1]
+
+    content {
+      retry_count          = 3
+      min_backoff_duration = "60s"
+      max_backoff_duration = "600s"
+    }
+  }
 
   http_target {
     http_method = "POST"

@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "Bu sorunun süresi doldu.",
     "Name the company": "Şirkete bir ad verin",
     "The report isn't a PDF": "Rapor bir PDF değil",
+    "A report can be emailed once a candidate has finished this interview.": "Rapor, aday bu mülakatı bitirdikten sonra e-postayla gönderilebilir.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "Şirketiniz günlük rapor gönderme sınırına ulaştı. Yarın tekrar deneyin.",
 }

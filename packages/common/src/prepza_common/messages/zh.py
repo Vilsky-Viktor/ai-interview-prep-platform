@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "这道题的时间到了。",
     "Name the company": "请填写公司名称",
     "The report isn't a PDF": "报告不是 PDF",
+    "A report can be emailed once a candidate has finished this interview.": "候选人完成此面试后才能通过邮件发送报告。",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "你的公司今天通过邮件发送的报告已达上限。请明天再试。",
 }

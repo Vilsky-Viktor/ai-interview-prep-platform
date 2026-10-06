@@ -1,6 +1,6 @@
 import secrets
 
-from sqlalchemy import select
+from sqlalchemy import delete, select
 
 from app.constants.roles import Role
 from app.models.companies import Company, Member
@@ -42,6 +42,9 @@ async def accept(member: Member, user_id: str) -> None:
         if row.user_id is None:
             row.user_id = user_id
 
+        # The link works once: a joined admin no longer needs it.
+        row.token = None
+
         await session.commit()
 
 
@@ -56,3 +59,9 @@ async def list_for_company(company_id, offset: int, limit: int) -> list[Member]:
 
     async with Session() as session:
         return list(await session.scalars(query))
+
+
+async def remove(member_id) -> None:
+    async with Session() as session:
+        await session.execute(delete(Member).where(Member.id == member_id))
+        await session.commit()

@@ -22,7 +22,7 @@ TEXTS = {
         "button": "招待を開く",
     },
     "report": {
-        "subject": "{sender}さんが候補者レポートを共有しました: {candidate}",
+        "subject": "候補者レポート: {candidate}",
         "preheader": "{candidate}さんが{company}の面接「{title}」を受けました。レポートを添付しています。",
         "heading": "候補者レポート",
         "lines": [
@@ -33,7 +33,7 @@ TEXTS = {
         "footer": "このメールは、{sender}さんが prepza でこのアドレスに候補者レポートを共有したため {email} に送信されました。心当たりがない場合は無視してください。",
     },
     "candidates": {
-        "subject": "{sender}さんが全候補者のレポートを共有しました: {title}",
+        "subject": "全候補者のレポート: {title}",
         "preheader": "{company}の「{title}」の全候補者です。レポートを添付しています。",
         "heading": "全候補者レポート",
         "lines": [

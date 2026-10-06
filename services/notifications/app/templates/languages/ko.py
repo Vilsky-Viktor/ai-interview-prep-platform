@@ -22,7 +22,7 @@ TEXTS = {
         "button": "초대 열기",
     },
     "report": {
-        "subject": "{sender} 님이 지원자 보고서를 공유했습니다: {candidate}",
+        "subject": "지원자 보고서: {candidate}",
         "preheader": "{candidate} 님이 {company}의 “{title}” 면접을 봤습니다. 보고서가 첨부되어 있습니다.",
         "heading": "지원자 보고서",
         "lines": [
@@ -33,7 +33,7 @@ TEXTS = {
         "footer": "{sender} 님이 prepza에서 이 주소로 지원자 보고서를 공유하여 {email}(으)로 이 이메일이 발송되었습니다. 예상하지 못한 이메일이라면 무시하셔도 됩니다.",
     },
     "candidates": {
-        "subject": "{sender} 님이 전체 지원자 보고서를 공유했습니다: {title}",
+        "subject": "전체 지원자 보고서: {title}",
         "preheader": "{company}의 “{title}” 면접 전체 지원자입니다. 보고서가 첨부되어 있습니다.",
         "heading": "전체 지원자 보고서",
         "lines": [

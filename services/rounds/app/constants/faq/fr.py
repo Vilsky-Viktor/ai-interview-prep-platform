@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Les candidats peuvent-ils utiliser une IA ou chercher les réponses ?",
-        "answer": "Chaque candidat reçoit ses propres questions aléatoires, dans son propre ordre, avec un minuteur sur chaque question contrôlé par notre serveur, il n'a donc pas le temps de demander à une IA. Les résultats montrent aussi quand un candidat a quitté la page, copié du texte ou répondu trop vite pour avoir lu la question.",
+        "answer": "Chaque candidat reçoit ses propres questions aléatoires, dans son propre ordre, avec un minuteur sur chaque question contrôlé par notre serveur, il a donc peu de temps pour chercher les réponses ou demander à une IA. Les résultats montrent aussi quand un candidat a quitté la page, copié du texte ou répondu trop vite pour avoir lu la question.",
     },
     {
         "key": "cost",
@@ -71,11 +71,6 @@ FAQ = [
         "key": "candidates",
         "question": "Que voient les candidats ?",
         "answer": "Le nom et le logo de votre entreprise, ce qui les attend avant de commencer, puis une question chronométrée à la fois. Ils ne voient jamais leur score ni si une réponse était juste.",
-    },
-    {
-        "key": "talent",
-        "question": "Que sont les suggestions de talents ?",
-        "answer": "Des personnes s'entraînent sur les entretiens d'entraînement gratuits de prepza, et celles qui choisissent d'être suggérées laissent un lien LinkedIn. Quand vous créez un entretien, les meilleurs scores pour un poste similaire apparaissent dans son onglet Talents suggérés, avec leur nom, leur score et leur LinkedIn. Seul leur premier essai compte, vous pouvez masquer toute personne qui ne convient pas, et les suggestions sont gratuites.",
     },
     {
         "key": "verified",

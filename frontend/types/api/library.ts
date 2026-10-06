@@ -659,27 +659,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/sets/{set_id}/similar-templates": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Similar Templates
-     * @description The templates for roles like a company's test, closest first: whose talents it's
-     *     suggested.
-     */
-    get: operations["similar_templates_internal_sets__set_id__similar_templates_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/internal/templates/{template_id}/practice": {
     parameters: {
       query?: never
@@ -2651,37 +2630,6 @@ export interface operations {
         }
         content: {
           "application/json": unknown
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  similar_templates_internal_sets__set_id__similar_templates_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        set_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": string[]
         }
       }
       /** @description Validation Error */

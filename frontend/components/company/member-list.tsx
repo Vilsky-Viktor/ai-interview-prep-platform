@@ -13,7 +13,7 @@ export function MemberList({
   companyId: string
   initial: CompanyMember[]
 }) {
-  const { items, loadMore } = usePagedList(
+  const { items, setItems, loadMore } = usePagedList(
     `/companies/members?company_id=${companyId}`,
     initial
   )
@@ -25,7 +25,17 @@ export function MemberList({
       estimateSize={89}
       onEndReached={loadMore}
       className="divide-y rounded-2xl border"
-      renderItem={(member) => <MemberRow member={member} />}
+      renderItem={(member) => (
+        <MemberRow
+          companyId={companyId}
+          member={member}
+          onRemoved={() =>
+            setItems((current) =>
+              current.filter((item) => item.id !== member.id)
+            )
+          }
+        />
+      )}
     />
   )
 }

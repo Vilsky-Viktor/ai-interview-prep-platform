@@ -1,5 +1,6 @@
 "use client"
 
+import { Trash2Icon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
@@ -84,13 +85,27 @@ export function CandidateActions({
           {t("resend")}
         </Button>
       )}
-      <Button
-        variant="destructive"
-        disabled={busy}
-        onClick={() => setConfirmRevoke(true)}
-      >
-        {t(unused ? "revoke" : "erase")}
-      </Button>
+      {unused ? (
+        <Button
+          variant="destructive"
+          disabled={busy}
+          onClick={() => setConfirmRevoke(true)}
+        >
+          {t("revoke")}
+        </Button>
+      ) : (
+        // An icon like the report's download and share beside it; its tooltip names it.
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-12 shrink-0 text-muted-foreground hover:text-destructive"
+          aria-label={t("erase")}
+          disabled={busy}
+          onClick={() => setConfirmRevoke(true)}
+        >
+          <Trash2Icon className="size-6" />
+        </Button>
+      )}
       <Dialog
         open={confirmRevoke}
         onOpenChange={(open) => {

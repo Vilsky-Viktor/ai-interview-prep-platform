@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Adaylar yapay zekâ kullanabilir ya da cevapları arayabilir mi?",
-        "answer": "Her aday kendi sırasında kendi rastgele sorularını alır ve her sorunun sunucumuzun tuttuğu bir süresi vardır, bu yüzden yapay zekâya sormaya zaman kalmaz. Aday sonuçları ayrıca adayın sayfadan ne zaman ayrıldığını, metin kopyaladığını ya da soruyu okumuş olamayacak kadar hızlı cevap verdiğini gösterir.",
+        "answer": "Her aday kendi sırasında kendi rastgele sorularını alır ve her sorunun sunucumuzun tuttuğu bir süresi vardır, bu yüzden cevapları aramaya ya da yapay zekâya sormaya pek zaman kalmaz. Aday sonuçları ayrıca adayın sayfadan ne zaman ayrıldığını, metin kopyaladığını ya da soruyu okumuş olamayacak kadar hızlı cevap verdiğini gösterir.",
     },
     {
         "key": "cost",
@@ -71,11 +71,6 @@ FAQ = [
         "key": "candidates",
         "question": "Adaylar ne görür?",
         "answer": "Şirketinizin adını ve logosunu, başlamadan önce neyle karşılaşacaklarını, ardından her seferinde bir süreli soru. Puanlarını ya da bir cevabın doğru olup olmadığını asla görmezler.",
-    },
-    {
-        "key": "talent",
-        "question": "Yetenek önerileri nedir?",
-        "answer": "Kişiler prepza'nın ücretsiz pratik mülakatlarıyla pratik yapar; önerilmeyi seçenler bir LinkedIn bağlantısı bırakır. Bir mülakat oluşturduğunuzda, benzer bir rolde en yüksek puanı alanlar mülakatın Önerilen yetenekler sekmesinde adları, puanları ve LinkedIn bağlantılarıyla görünür. Yalnızca ilk denemeleri sayılır, uymayan herkesi gizleyebilirsiniz ve öneriler ücretsizdir.",
     },
     {
         "key": "verified",

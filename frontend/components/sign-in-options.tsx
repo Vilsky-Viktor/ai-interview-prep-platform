@@ -54,7 +54,7 @@ export function SignInOptions({ onSignedIn }: { onSignedIn?: () => void }) {
     <div className="w-full space-y-4">
       {/* Only when the email already has an account under another way. */}
       {linking && (
-        <p className="text-sm text-muted-foreground">
+        <p role="status" className="text-sm text-muted-foreground">
           {t("link", { provider: NAMES[linking] })}
         </p>
       )}

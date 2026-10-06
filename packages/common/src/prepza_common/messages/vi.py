@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "Đã hết thời gian cho câu này.",
     "Name the company": "Hãy nhập tên công ty",
     "The report isn't a PDF": "Báo cáo không phải là tệp PDF",
+    "A report can be emailed once a candidate has finished this interview.": "Chỉ có thể gửi báo cáo qua email khi ứng viên đã hoàn thành buổi phỏng vấn này.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "Công ty của bạn đã gửi đủ số báo cáo qua email cho phép trong ngày. Vui lòng thử lại vào ngày mai.",
 }

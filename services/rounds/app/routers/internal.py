@@ -6,7 +6,6 @@ from sqlalchemy.exc import IntegrityError
 from app.constants.integrity import IntegritySignal
 from app.helpers.review import add_signals, build_review
 from app.helpers.sessions import session_out
-from app.helpers.talents import suggestions
 from app.schemas.sessions import (
     InviteScoresIn,
     RescoreIn,
@@ -14,9 +13,8 @@ from app.schemas.sessions import (
     SessionOut,
     SessionsCreate,
 )
-from app.schemas.talents import SuggestedTalent, SuggestionsIn
 from app.service_auth import ServiceCaller
-from app.storage import rescore, sessions, talents
+from app.storage import rescore, sessions
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -86,15 +84,6 @@ async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[Score
         )
 
     return cards
-
-
-@router.post("/suggestions")
-async def talent_suggestions(body: SuggestionsIn, caller: ServiceCaller) -> list[SuggestedTalent]:
-    """For a company's test: talents who agreed to be suggested and did well in their first
-    round on one of these templates (the ones for similar roles, closest first)."""
-    rows, links = await talents.practice_of_consenting(body.template_ids)
-
-    return suggestions(rows, links, body.template_ids)
 
 
 @router.post("/questions/{question_id}/rescore")

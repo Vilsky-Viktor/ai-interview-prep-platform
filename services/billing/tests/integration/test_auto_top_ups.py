@@ -163,3 +163,28 @@ def test_the_same_subscription_twice_stays_attached_and_a_deleted_buyer_turns_it
     assert first and second
     assert not after.on and not after.waiting
     assert paddle_calls == [("cancel", sub)]
+
+
+def test_a_removed_member_turns_it_off_only_when_their_card_pays(run, paddle_calls):
+    ann = f"user-{uuid.uuid4()}"
+    bob = f"user-{uuid.uuid4()}"
+    acme = str(uuid.uuid4())
+    sub = f"sub_{uuid.uuid4().hex[:12]}"
+
+    async def scenario():
+        await auto_top_ups.turn_on(
+            COMPANY, acme, AutoTopUpIn(product="topup_30", threshold=300), ann
+        )
+        await auto_top_ups.start(checkout_data(acme, ann), sub)
+        # Bob didn't turn it on: removing him leaves it running.
+        await auto_top_ups.turn_off(COMPANY, acme, bob)
+        kept = await auto_top_ups.out(COMPANY, acme)
+        await auto_top_ups.turn_off(COMPANY, acme, ann)
+
+        return kept, await auto_top_ups.out(COMPANY, acme)
+
+    kept, after = run(scenario())
+
+    assert kept.on
+    assert not after.on and not after.waiting
+    assert paddle_calls == [("cancel", sub)]

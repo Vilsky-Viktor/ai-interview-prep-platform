@@ -59,7 +59,7 @@ MISSING_SQL = text(
 
 async def missing(limit: int) -> list[tuple[uuid.UUID, str, list[str]]]:
     """Template and company test topics without an embedding: templates copied in by hand, and
-    tests saved before their embeddings were kept (needed to suggest talents)."""
+    tests saved before their embeddings were kept."""
     params = {"template": SetKind.TEMPLATE, "interview": SetKind.INTERVIEW, "limit": limit}
 
     async with Session() as session:

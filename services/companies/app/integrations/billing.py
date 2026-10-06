@@ -137,7 +137,11 @@ async def turn_on_auto_top_up(company_id: UUID, body: dict, buyer_id: str) -> di
     return response.json()
 
 
-async def turn_off_auto_top_up(company_id: UUID) -> None:
-    response = await http.get_client().delete(_auto_top_up_url(company_id), headers=_headers())
+async def turn_off_auto_top_up(company_id: UUID, buyer_id: str | None = None) -> None:
+    """With `buyer_id`, off only when that person's card pays for it."""
+    params = {"buyer_id": buyer_id} if buyer_id else None
+    response = await http.get_client().delete(
+        _auto_top_up_url(company_id), params=params, headers=_headers()
+    )
 
     response.raise_for_status()

@@ -113,3 +113,66 @@ resource "google_billing_budget" "monthly" {
 
   depends_on = [google_project_service.apis]
 }
+
+# Dead letters: an event a consumer kept failing on for hours (pubsub.tf). Fires while any wait
+# in the dead-letter subscription; replay them as infra/README.md (Notes) shows.
+resource "google_monitoring_alert_policy" "dead_letters" {
+  display_name = "prepza events dead-lettered"
+  combiner     = "OR"
+
+  conditions {
+    display_name = "events-dead-letter has messages"
+
+    condition_threshold {
+      filter          = "metric.type=\"pubsub.googleapis.com/subscription/num_undelivered_messages\" AND resource.type=\"pubsub_subscription\" AND resource.label.subscription_id=\"${google_pubsub_subscription.dead_letter.name}\""
+      duration        = "0s"
+      comparison      = "COMPARISON_GT"
+      threshold_value = 0
+
+      aggregations {
+        alignment_period   = "300s"
+        per_series_aligner = "ALIGN_MAX"
+      }
+    }
+  }
+
+  documentation {
+    content   = "Events failed 50 deliveries and wait in the events-dead-letter subscription. Fix the consumer (Cloud Run logs, Sentry), then replay them as infra/README.md (Notes) shows."
+    mime_type = "text/markdown"
+  }
+
+  notification_channels = [google_monitoring_notification_channel.email.id]
+}
+
+# Scheduler: a periodic job (jobs.tf) whose run failed, from Cloud Scheduler's own error logs.
+resource "google_monitoring_alert_policy" "scheduler_failed" {
+  display_name = "prepza scheduled job failed"
+  combiner     = "OR"
+
+  conditions {
+    display_name = "Cloud Scheduler logged a failed run"
+
+    condition_matched_log {
+      filter = "resource.type=\"cloud_scheduler_job\" AND severity>=ERROR"
+
+      label_extractors = {
+        job = "EXTRACT(resource.labels.job_id)"
+      }
+    }
+  }
+
+  alert_strategy {
+    notification_rate_limit {
+      period = "3600s"
+    }
+
+    auto_close = "86400s"
+  }
+
+  documentation {
+    content   = "A scheduled job failed. Check the job in Cloud Scheduler and its service's Cloud Run logs."
+    mime_type = "text/markdown"
+  }
+
+  notification_channels = [google_monitoring_notification_channel.email.id]
+}

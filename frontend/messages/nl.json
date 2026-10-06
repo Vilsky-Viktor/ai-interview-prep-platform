@@ -44,7 +44,7 @@
     "title": "Inloggen",
     "continueWith": "Doorgaan met <name>{provider}</name>",
     "link": "Dit e-mailadres heeft al een prepza-account. Ga verder zoals je eerder hebt ingelogd, dan wordt {provider} eraan gekoppeld.",
-    "consent": "Door in te loggen ga je akkoord met de <terms>Voorwaarden</terms> en het <privacy>Privacybeleid</privacy>.",
+    "consent": "Door in te loggen bevestig je dat je 16 jaar of ouder bent en ga je akkoord met de <terms>Voorwaarden</terms> en het <privacy>Privacybeleid</privacy>.",
     "failed": "Inloggen is mislukt. Probeer het opnieuw.",
     "verify": "We hebben je een link gestuurd om je e-mailadres te verifiëren. Open hem en log daarna opnieuw in om sollicitatiegesprekken te doen."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Spreek iedereen\nNeem echt talent aan",
-    "text": "Sollicitatiegesprekken met tijdslimiet, gemaakt van je functieomschrijving. Unieke vragen voor elke kandidaat, en geen tijd om een AI te vragen. Vanaf $1 per kandidaat."
+    "text": "Sollicitatiegesprekken met tijdslimiet, gemaakt van je functieomschrijving. Unieke vragen voor elke kandidaat en een timer bij elke vraag, dus er is weinig tijd om antwoorden op te zoeken. Vanaf $1 per kandidaat."
   },
   "start": {
     "placeholder": "Plak een functieomschrijving, of beschrijf de rol en wat een kandidaat moet weten",
@@ -145,8 +145,8 @@
     "use": "Sjabloon gebruiken",
     "using": "Wordt gestart…",
     "useFailed": "Er kon geen sollicitatiegesprek van dit sjabloon worden gestart. Probeer het opnieuw.",
-    "warningTitle": "Sjablonen zijn om prepza uit te proberen.",
-    "warning": "Talenten oefenen ermee, dus kandidaten kennen de vragen misschien al. Maak voor echte werving een sollicitatiegesprek van je functieomschrijving.",
+    "warningTitle": "Sjablonen zijn kant-en-klaar voor veelvoorkomende functies.",
+    "warning": "Voor een betere match maak je een sollicitatiegesprek van je functieomschrijving.",
     "text": "Kant-en-klare sollicitatiegesprekken per rol. Kies er een om je gesprek mee te beginnen; je kunt het daarna aanpassen."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, one {# e-mailadres valt} other {# e-mailadressen vallen}} voorlopig buiten je e-maillimiet. Probeer het over een uur opnieuw.",
       "no_credits": "{count, plural, one {# kandidaat is niet uitgenodigd} other {# kandidaten zijn niet uitgenodigd}}: credits op. Waardeer op om ze uit te nodigen.",
       "failed": "{count, plural, one {# uitnodiging kon} other {# uitnodigingen konden}} niet worden verzonden. Probeer het opnieuw."
-    },
-    "talents": "Voorgestelde talenten"
+    }
   },
   "invite": {
     "signIn": "Log in met het e-mailadres van de uitnodiging om dit gesprek te doen.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Tijd per vraag:",
     "secondsUnit": "s",
     "pickOne": "Kies bij elke vraag een van de vier opties.",
-    "noChange": "Een gegeven antwoord kan niet meer worden gewijzigd.",
-    "timeRunsOut": "Als de tijd van een vraag om is, telt die als fout en opent de volgende. De klok loopt door als je weggaat.",
+    "changePick": "Je kunt je keuze wijzigen tot je op ‘Volgende vraag’ drukt.",
+    "timeRunsOut": "Als de tijd van een vraag om is, telt je keuze en opent de volgende; zonder keuze telt die als fout. De klok loopt door als je weggaat.",
     "unanswered": "Onbeantwoorde vragen tellen als fout.",
     "saved": "Je voortgang wordt bewaard: gebruik deze link opnieuw om verder te gaan.",
     "extraTime": "Heb je meer tijd nodig, bijvoorbeeld door een beperking? Vraag het aan {company} voordat je begint.",
@@ -465,7 +464,14 @@
     "joined": "Doet mee",
     "invited": "Uitgenodigd",
     "copy": "Kopiëren",
-    "inviteTitle": "Uitnodiging voor het bedrijf"
+    "inviteTitle": "Uitnodiging voor het bedrijf",
+    "remove": "Verwijderen",
+    "removed": "{email} verwijderd",
+    "removeFailed": "Verwijderen is mislukt.",
+    "removeTitle": "Uit het bedrijf verwijderen?",
+    "removeText": "{email} verliest de toegang tot het bedrijf. Als automatisch opwaarderen met diens kaart wordt betaald, stopt dat. Je kunt deze persoon later opnieuw uitnodigen.",
+    "removeInviteText": "De uitnodigingslink die naar {email} is gestuurd, werkt niet meer. Je kunt later opnieuw uitnodigen.",
+    "removeConfirm": "Verwijderen"
   },
   "scorecard": {
     "timeOut": "Tijd om",
@@ -648,18 +654,6 @@
         "verified": "Geverifieerd via het zakelijke e-mailadres van je team"
       }
     },
-    "talent": {
-      "title": "Krijg talentsuggesties",
-      "text": "Topscorers uit onze gratis oefengesprekken, voorgesteld voor jouw rol. Gratis.",
-      "suggested": "Voorgesteld voor Backend-ontwikkelaar",
-      "score": "Score",
-      "points": {
-        "free": "Gratis voor jou en voor talenten",
-        "practice": "Gescoord in gesprekken met tijdslimiet",
-        "first": "Alleen hun eerste poging telt",
-        "link": "Ze kiezen zelf om voorgesteld te worden"
-      }
-    },
     "languages": {
       "title": "Elke rol, elke taal",
       "text": "prepza werkt in {count} talen. Plak een functieomschrijving in de ene taal en spreek kandidaten in een andere."
@@ -711,7 +705,7 @@
       "title": "Waarom we bestaan",
       "problem": "Werving leunt vaak op een cv en een goed gesprek, en allebei kunnen ze misleiden. De beoordelingstools die wel helpen, zijn geprijsd voor grote bedrijven, met jaarabonnementen en kosten per gebruiker, dus de meeste teams doen het zonder.",
       "approach": "prepza maakt in een paar minuten van een functieomschrijving een sollicitatiegesprek met tijdslimiet, voor elke rol. Elke kandidaat krijgt eigen vragen, je ziet wie het vak kent en waarom, en je betaalt alleen voor kandidaten die het gesprek echt doen.",
-      "practice": "We willen ook dat voorbereiden op een sollicitatiegesprek voor iedereen gratis is. Iedereen kan onze oefengesprekken voor een rol doen, het eigen cijfer en elk juist antwoord zien en opnieuw oefenen, zonder kosten. Wie het goed doet, kan ervoor kiezen om voorgesteld te worden aan bedrijven die voor een vergelijkbare rol werven."
+      "practice": "We willen ook dat voorbereiden op een sollicitatiegesprek voor iedereen gratis is. Iedereen kan onze oefengesprekken voor een rol doen, het eigen cijfer en elk juist antwoord zien en opnieuw oefenen, zonder kosten."
     },
     "founder": {
       "quote": "Goed aannemen zou geen voorrecht moeten zijn van grote bedrijven met grote budgetten. Ik heb prepza gebouwd zodat elk team in een paar minuten van een functieomschrijving een eerlijk sollicitatiegesprek kan maken, kan zien wie het vak echt kent en alleen betaalt voor de kandidaten die het gesprek doen. Ik hoop dat het je helpt sneller de juiste mensen te vinden.",
@@ -774,27 +768,10 @@
     "gradeLabel": "Cijfer",
     "questions": "{count, plural, one {# vraag} other {# vragen}}",
     "progressLabel": "Voortgang",
-    "answeredLabel": "vragen beantwoord"
-  },
-  "suggest": {
-    "title": "Word voorgesteld aan bedrijven",
-    "consent": "Optioneel. Bedrijven die voor vergelijkbare rollen werven, kunnen je naam, LinkedIn en score van je eerste ronde zien. Wijzig of trek dit op elk moment in via instellingen.",
-    "link": "LinkedIn-link",
-    "share": "Delen",
-    "saved": "Je kunt nu aan bedrijven worden voorgesteld.",
-    "withdraw": "Intrekken",
-    "withdrawn": "Je wordt niet meer aan bedrijven voorgesteld.",
-    "invalid": "Gebruik de link naar je LinkedIn-profiel, zoals https://www.linkedin.com/in/your-name",
-    "failed": "Opslaan lukte niet. Probeer het opnieuw.",
-    "shareAndStart": "Akkoord en starten",
-    "startWithout": "Niet akkoord en starten"
-  },
-  "talents": {
-    "about": "Talenten die het goed deden bij het oefenen van een gesprek voor een rol als deze, en die akkoord gingen om voorgesteld te worden.",
-    "empty": "Nog geen voorgestelde talenten.",
-    "score": "Score",
-    "hide": "Verbergen",
-    "hideFailed": "Het talent kon niet worden verborgen. Probeer het opnieuw."
+    "answeredLabel": "vragen beantwoord",
+    "hireTitle": "Werf je voor deze rol?",
+    "hireText": "Gebruik dit sollicitatiegesprek met je kandidaten of genereer er een voor je functieomschrijving.",
+    "hireButton": "Sollicitatiegesprek maken"
   },
   "verify": {
     "verify": "Verifiëren",

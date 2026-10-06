@@ -40,4 +40,6 @@ MESSAGES = {
     "Time is up for this question.": "Selle küsimuse aeg sai otsa.",
     "Name the company": "Sisesta ettevõtte nimi",
     "The report isn't a PDF": "Aruanne pole PDF",
+    "A report can be emailed once a candidate has finished this interview.": "Aruande saab e-postiga saata siis, kui kandidaat on selle intervjuu lõpetanud.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "Sinu ettevõte on jõudnud aruannete saatmise päevalimiidini. Proovi homme uuesti.",
 }

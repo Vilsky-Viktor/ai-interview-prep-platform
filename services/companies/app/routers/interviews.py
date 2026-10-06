@@ -8,6 +8,7 @@ from prepza_common.constants import DAY_SECONDS
 from prepza_common.paging import PageParams
 from prepza_common.rate_limit import hit
 
+from app.constants.audit import AuditAction
 from app.constants.invites import (
     INTERVIEWS_PER_DAY,
     MAX_INTERVIEWS_WITHOUT_CANDIDATES,
@@ -35,7 +36,7 @@ from app.schemas.interviews import (
 )
 from app.services.access import require_company, require_manager
 from app.services.candidate_billing import release_unfinished
-from app.storage import interviews, invites
+from app.storage import audit, interviews, invites
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
 
@@ -150,6 +151,11 @@ async def update_settings(interview_id: UUID, body: InterviewSettings, user: Cur
         raise HTTPException(status.HTTP_403_FORBIDDEN, "You can't change this interview")
 
     await interviews.update_settings(interview.id, body)
+
+    if body.pass_mark != interview.pass_mark:
+        await audit.record(
+            interview.company_id, user.uid, AuditAction.PASS_MARK_CHANGED, interview.id
+        )
 
 
 @router.patch("/{interview_id}/title", status_code=status.HTTP_204_NO_CONTENT)

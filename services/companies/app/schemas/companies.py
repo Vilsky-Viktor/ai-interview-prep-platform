@@ -17,10 +17,13 @@ class CompanyRename(BaseModel):
 
 
 class MemberOut(BaseModel):
+    id: UUID
     email: str
     role: str
     joined: bool
     token: str | None = None
+    # Whether the user can remove this member or pending invite: the owner, any row but their own.
+    removable: bool = False
     created_at: datetime
 
 

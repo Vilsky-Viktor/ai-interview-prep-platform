@@ -67,7 +67,9 @@ export function TopicEditDemo({
               </span>
             )}
           </div>
+          {/* Dimmed like the real button while nothing is typed, and marked so. */}
           <span
+            aria-disabled={!draft || undefined}
             className={buttonVariants({
               variant: "outline",
               className: cn(

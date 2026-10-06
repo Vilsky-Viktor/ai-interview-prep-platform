@@ -66,8 +66,11 @@ export function ShareReport({
       onOpenChange(false)
     } catch (error) {
       // Too many emails: the API's message says when to try again.
-      const limited = error instanceof ApiError && error.status === 429
-      toast.error(limited ? error.message : t("sendFailed"))
+      // Too many emails, or nothing to report yet: the API's message says why.
+      const explained =
+        error instanceof ApiError &&
+        (error.status === 429 || error.status === 409)
+      toast.error(explained ? error.message : t("sendFailed"))
     } finally {
       setSending(false)
     }

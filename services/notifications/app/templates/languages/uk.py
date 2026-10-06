@@ -31,7 +31,7 @@ TEXTS = {
         "button": "Відкрити запрошення",
     },
     "report": {
-        "subject": "{sender} поділився звітом про кандидата: {candidate}",
+        "subject": "Звіт про кандидата: {candidate}",
         "preheader": "{candidate} пройшов «{title}» у {company}. Звіт у вкладенні.",
         "heading": "Звіт про кандидата",
         "lines": [
@@ -47,7 +47,7 @@ TEXTS = {
         "з цією адресою на prepza. Якщо ви його не чекали, просто проігноруйте його.",
     },
     "candidates": {
-        "subject": "{sender} поділився звітом про всіх кандидатів: {title}",
+        "subject": "Звіт про всіх кандидатів: {title}",
         "preheader": "Усі кандидати на «{title}» у {company}. Звіт у вкладенні.",
         "heading": "Звіт про кандидатів",
         "lines": [

@@ -51,6 +51,7 @@ DPA_SECTIONS = [
         "heading": "The company's duties",
         "items": [
             "The company has a lawful basis to assess its candidates, tells them how their results are used, and answers their requests.",
+            "A candidate who deletes their own prepza account erases their answers and results with it, for every company; the company sees them as a deleted candidate.",
             "prepza makes no decision about a candidate. The company reviews results before deciding, doesn't reject a candidate on the score alone, gives candidates who need it an accommodation such as extra time, and lets a candidate ask for a person to review their result.",
             "Where the law requires it, the company carries out an impact assessment, and gives candidates the notices its jurisdiction requires.",
         ],

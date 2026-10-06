@@ -31,7 +31,7 @@ TEXTS = {
         "button": "باز کردن دعوت",
     },
     "report": {
-        "subject": "{sender} گزارش یک نامزد را به اشتراک گذاشت: {candidate}",
+        "subject": "گزارش نامزد: {candidate}",
         "preheader": "{candidate} در «{title}» شرکت {company} شرکت کرد. گزارش پیوست است.",
         "heading": "گزارش نامزد",
         "lines": [
@@ -46,7 +46,7 @@ TEXTS = {
         "در prepza به اشتراک گذاشت. اگر انتظارش را نداشتید، می\u200cتوانید آن را نادیده بگیرید.",
     },
     "candidates": {
-        "subject": "{sender} گزارش همهٔ نامزدها را به اشتراک گذاشت: {title}",
+        "subject": "گزارش همهٔ نامزدها: {title}",
         "preheader": "همهٔ نامزدهای «{title}» در {company}. گزارش پیوست است.",
         "heading": "گزارش نامزدها",
         "lines": [

@@ -58,7 +58,7 @@ export function ScorecardMark({ item }: { item: ReviewItem }) {
       className={cn(
         "shrink-0 text-lg font-light",
         answer.correct
-          ? "text-green-600 dark:text-green-400"
+          ? "text-green-700 dark:text-green-400"
           : "text-red-600 dark:text-red-400"
       )}
     >

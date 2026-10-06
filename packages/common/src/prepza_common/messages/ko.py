@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "이 문제의 시간이 끝났습니다.",
     "Name the company": "회사 이름을 입력하세요",
     "The report isn't a PDF": "보고서가 PDF가 아닙니다",
+    "A report can be emailed once a candidate has finished this interview.": "지원자가 이 면접을 마친 후에 보고서를 이메일로 보낼 수 있습니다.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "회사가 오늘 이메일로 보낼 수 있는 보고서 한도에 도달했습니다. 내일 다시 시도해 주세요.",
 }

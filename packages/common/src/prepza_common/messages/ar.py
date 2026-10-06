@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "انتهى وقت هذا السؤال.",
     "Name the company": "أدخل اسم الشركة",
     "The report isn't a PDF": "التقرير ليس ملف PDF",
+    "A report can be emailed once a candidate has finished this interview.": "تُرسَل التقارير بالبريد بعد أن ينهي المرشح هذه المقابلة.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "أرسلت شركتك الحد اليومي من التقارير بالبريد. حاول مرة أخرى غدًا.",
 }

@@ -14,6 +14,8 @@ class Settings(ServiceSettings):
     email_hourly_limit: int = Field(default=100, ge=0)
     email_daily_limit: int = Field(default=200, ge=0)
     email_recipient_daily_limit: int = Field(default=3, ge=0)
+    # Report emails a company may send a day, all its members together; 0 turns it off.
+    report_emails_per_company_day: int = Field(default=20, ge=0)
     generation_url: str
     library_url: str
     rounds_url: str

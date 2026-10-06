@@ -22,7 +22,6 @@ export function useSessionPlayer(id: string) {
   const { user } = useAuth()
   const [session, setSession] = useState<InterviewSession | null>(null)
   const [question, setQuestion] = useState<NextQuestion | null>(null)
-  const [result, setResult] = useState<SessionAnswerResult | null>(null)
   const [topics, setTopics] = useState<SessionTopic[]>([])
   const [topicsLoaded, setTopicsLoaded] = useState(false)
   const [playing, setPlaying] = useState(false)
@@ -33,7 +32,6 @@ export function useSessionPlayer(id: string) {
   const showStep = useCallback(([nextSession, nextQuestion]: Step) => {
     setSession(nextSession)
     setQuestion(nextQuestion)
-    setResult(null)
   }, [])
 
   useEffect(() => {
@@ -98,7 +96,6 @@ export function useSessionPlayer(id: string) {
     setTopics(list)
     setSession(finished)
     setQuestion(null)
-    setResult(null)
 
     if (!upcoming || upcoming.id === sectionId) {
       setPlaying(false)
@@ -148,10 +145,6 @@ export function useSessionPlayer(id: string) {
           body: JSON.stringify({ question_id: question.question_id, ...input }),
         }
       )
-      setResult({
-        ...next,
-        option_index: input.option_index,
-      })
       setSession(
         (current) =>
           current && {
@@ -209,7 +202,6 @@ export function useSessionPlayer(id: string) {
       setTopics(list.map((topic) => ({ ...topic, status: "finished" })))
       setSession((current) => current && { ...current, status: "finished" })
       setQuestion(null)
-      setResult(null)
       setTopicsLoaded(true)
       setPlaying(false)
     } catch {
@@ -233,7 +225,6 @@ export function useSessionPlayer(id: string) {
   return {
     session,
     question,
-    result,
     topics,
     topicsLoaded,
     playing,

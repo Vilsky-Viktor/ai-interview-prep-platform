@@ -31,7 +31,7 @@ TEXTS = {
         "button": "Buka undangan",
     },
     "report": {
-        "subject": "{sender} membagikan laporan kandidat: {candidate}",
+        "subject": "Laporan kandidat: {candidate}",
         "preheader": "{candidate} mengikuti “{title}” di {company}. Laporannya terlampir.",
         "heading": "Laporan kandidat",
         "lines": [
@@ -46,7 +46,7 @@ TEXTS = {
         "dengan alamat ini di prepza. Jika kamu tidak mengharapkannya, abaikan saja.",
     },
     "candidates": {
-        "subject": "{sender} membagikan laporan semua kandidat: {title}",
+        "subject": "Laporan semua kandidat: {title}",
         "preheader": "Semua kandidat untuk “{title}” di {company}. Laporannya terlampir.",
         "heading": "Laporan kandidat",
         "lines": [

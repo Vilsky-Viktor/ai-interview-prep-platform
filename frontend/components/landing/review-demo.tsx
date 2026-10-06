@@ -179,6 +179,7 @@ export function ReviewDemo({
       </div>
       <div className="flex justify-end">
         <span
+          aria-disabled={step === "applying" || undefined}
           className={buttonVariants({
             className: cn(
               "h-10 px-5 lowercase",

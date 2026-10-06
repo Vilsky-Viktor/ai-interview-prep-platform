@@ -44,7 +44,7 @@
     "title": "Logi sisse",
     "continueWith": "Jätka kontoga <name>{provider}</name>",
     "link": "Selle e-posti aadressiga on juba prepza konto. Jätka samal viisil nagu varem ja {provider} seotakse selle kontoga.",
-    "consent": "Sisse logides nõustud <terms>tingimustega</terms> ja <privacy>privaatsuspoliitikaga</privacy>.",
+    "consent": "Sisse logides kinnitad, et oled vähemalt 16-aastane, ja nõustud <terms>tingimustega</terms> ja <privacy>privaatsuspoliitikaga</privacy>.",
     "failed": "Sisselogimine ebaõnnestus. Proovi uuesti.",
     "verify": "Saatsime sulle lingi e-posti aadressi kinnitamiseks. Ava see ja logi siis uuesti sisse, et intervjuusid teha."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Intervjueeri kõiki\nPalka tõelised talendid",
-    "text": "Ajapiiranguga intervjuud sinu töökuulutuse põhjal. Igale kandidaadile oma küsimused ja pole aega tehisarult küsida. Alates 1 $ kandidaadi kohta."
+    "text": "Ajapiiranguga intervjuud sinu töökuulutuse põhjal. Igale kandidaadile oma küsimused ja igal küsimusel taimer, nii et vastuste otsimiseks jääb vähe aega. Alates 1 $ kandidaadi kohta."
   },
   "start": {
     "placeholder": "Kleebi töökuulutus või kirjelda rolli ja seda, mida kandidaat peaks teadma",
@@ -145,8 +145,8 @@
     "use": "Kasuta malli",
     "using": "Alustamine…",
     "useFailed": "Sellest mallist ei õnnestunud intervjuud alustada. Proovi uuesti.",
-    "warningTitle": "Mallid on prepza proovimiseks.",
-    "warning": "Talendid harjutavad nendega, nii et kandidaadid võivad küsimusi juba teada. Päris värbamiseks loo intervjuu oma töökuulutuse põhjal.",
+    "warningTitle": "Mallid on valmis tavaliste ametite jaoks.",
+    "warning": "Täpsema sobivuse jaoks loo intervjuu oma töökuulutuse põhjal.",
     "text": "Valmis intervjuud rollide kaupa. Vali üks, et sellest oma intervjuud alustada; hiljem saad seda muuta."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, one {# aadress ületab} other {# aadressi ületavad}} praegu sinu e-kirjade piirangu. Proovi tunni pärast uuesti.",
       "no_credits": "{count, plural, one {# kandidaati ei kutsutud} other {# kandidaati ei kutsutud}}: krediidid said otsa. Nende kutsumiseks laadi juurde.",
       "failed": "{count, plural, one {# kutset} other {# kutset}} ei õnnestunud saata. Proovi uuesti."
-    },
-    "talents": "Soovitatud talendid"
+    }
   },
   "invite": {
     "signIn": "Selle intervjuu tegemiseks logi sisse kutses olnud e-posti aadressiga.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Aeg küsimuse kohta:",
     "secondsUnit": "s",
     "pickOne": "Vali iga küsimuse juures üks neljast variandist.",
-    "noChange": "Antud vastust ei saa muuta.",
-    "timeRunsOut": "Kui küsimuse aeg saab otsa, loetakse see valeks ja avaneb järgmine. Kell käib edasi ka siis, kui lahkud.",
+    "changePick": "Saad oma valikut muuta, kuni vajutad „Järgmine küsimus“.",
+    "timeRunsOut": "Kui küsimuse aeg saab otsa, loetakse sinu valik ja avaneb järgmine; ilma valikuta loetakse see valeks. Kell käib edasi ka siis, kui lahkud.",
     "unanswered": "Vastamata küsimused loetakse valeks.",
     "saved": "Edenemine salvestatakse: jätkamiseks ava see link uuesti.",
     "extraTime": "Vajad rohkem aega, näiteks puude tõttu? Küsi seda enne alustamist: lisaaega saab anda {company}.",
@@ -465,7 +464,14 @@
     "joined": "Liitunud",
     "invited": "Kutsutud",
     "copy": "Kopeeri",
-    "inviteTitle": "Ettevõtte kutse"
+    "inviteTitle": "Ettevõtte kutse",
+    "remove": "Eemalda",
+    "removed": "{email} eemaldati",
+    "removeFailed": "Eemaldamine ei õnnestunud.",
+    "removeTitle": "Eemaldada ettevõttest?",
+    "removeText": "{email} kaotab juurdepääsu ettevõttele. Kui automaatsed laadimised makstakse tema kaardiga, need peatuvad. Saad hiljem uuesti kutsuda.",
+    "removeInviteText": "Aadressile {email} saadetud kutselink lakkab töötamast. Saad hiljem uuesti kutsuda.",
+    "removeConfirm": "Eemalda"
   },
   "scorecard": {
     "timeOut": "Aeg läbi",
@@ -656,18 +662,6 @@
         "verified": "Kinnitatud sinu meeskonna töömeiliga"
       }
     },
-    "talent": {
-      "title": "Saa talentide soovitusi",
-      "text": "Meie tasuta harjutusintervjuude parimad, soovitatud sinu rolli jaoks. Tasuta.",
-      "suggested": "Soovitatud rollile Backend-arendaja",
-      "score": "Tulemus",
-      "points": {
-        "free": "Tasuta sulle ja talentidele",
-        "practice": "Hinnatud ajapiiranguga intervjuudel",
-        "first": "Arvesse läheb ainult esimene katse",
-        "link": "Nad ise otsustavad, kas neid soovitatakse"
-      }
-    },
     "languages": {
       "title": "Iga roll, iga keel",
       "text": "prepza töötab {count} keeles. Kleebi töökuulutus ühes keeles ja intervjueeri kandidaate teises."
@@ -719,7 +713,7 @@
       "title": "Miks me olemas oleme",
       "problem": "Värbamine toetub sageli CV-le ja heale vestlusele, ning mõlemad võivad eksitada. Abiks olevad hindamisvahendid on hinnastatud suurtele ettevõtetele, aastaplaanide ja kasutajatasudega, nii et enamik meeskondi jääb neist ilma.",
       "approach": "prepza teeb töökuulutusest mõne minutiga ajapiiranguga intervjuu, mis tahes rolli jaoks. Iga kandidaat saab oma küsimused, sina näed, kes tööd tunneb ja miks, ning maksad ainult nende kandidaatide eest, kes intervjuu tegelikult teevad.",
-      "practice": "Tahame ka, et intervjuuks valmistumine oleks kõigile tasuta. Igaüks saab teha meie harjutusintervjuusid mõne rolli jaoks, näha oma hinnet ja kõiki õigeid vastuseid ning uuesti harjutada, ilma et see midagi maksaks. Need, kes saavad hästi hakkama, võivad valida, et neid soovitatakse ettevõtetele, kes värbavad sarnasesse rolli."
+      "practice": "Tahame ka, et intervjuuks valmistumine oleks kõigile tasuta. Igaüks saab teha meie harjutusintervjuusid mõne rolli jaoks, näha oma hinnet ja kõiki õigeid vastuseid ning uuesti harjutada, ilma et see midagi maksaks."
     },
     "founder": {
       "quote": "Hea värbamine ei tohiks olla suurte eelarvetega suurettevõtete privileeg. Lõin prepza, et iga meeskond saaks mõne minutiga teha töökuulutusest õiglase intervjuu, näha, kes tööd päriselt tunneb, ja maksta ainult nende kandidaatide eest, kes intervjuu teevad. Loodan, et see aitab sul õiged inimesed kiiremini üles leida.",
@@ -782,27 +776,10 @@
     "gradeLabel": "Hinne",
     "questions": "{count, plural, one {# küsimus} other {# küsimust}}",
     "progressLabel": "Edenemine",
-    "answeredLabel": "küsimust vastatud"
-  },
-  "suggest": {
-    "title": "Lase end ettevõtetele soovitada",
-    "consent": "Vabatahtlik. Sarnastesse rollidesse värbavad ettevõtted võivad näha sinu nime, LinkedIni ja esimese katse tulemust. Saad seda igal ajal seadetes muuta või tagasi võtta.",
-    "link": "LinkedIni link",
-    "share": "Jaga",
-    "saved": "Nüüd võidakse sind ettevõtetele soovitada.",
-    "withdraw": "Võta tagasi",
-    "withdrawn": "Sind ei soovitata enam ettevõtetele.",
-    "invalid": "Kasuta oma LinkedIni profiili linki, näiteks https://www.linkedin.com/in/your-name",
-    "failed": "Salvestamine ei õnnestunud. Proovi uuesti.",
-    "shareAndStart": "Nõustu ja alusta",
-    "startWithout": "Keeldu ja alusta"
-  },
-  "talents": {
-    "about": "Talendid, kes said sarnase rolli intervjuu harjutamisel hästi hakkama ja nõustusid, et neid soovitatakse.",
-    "empty": "Soovitatud talente veel pole.",
-    "score": "Tulemus",
-    "hide": "Peida",
-    "hideFailed": "Talenti ei õnnestunud peita. Proovi uuesti."
+    "answeredLabel": "küsimust vastatud",
+    "hireTitle": "Värbad sellesse rolli?",
+    "hireText": "Kasuta seda intervjuud oma kandidaatidega või loo intervjuu oma töökuulutuse põhjal.",
+    "hireButton": "Loo intervjuu"
   },
   "verify": {
     "verify": "Kinnita",

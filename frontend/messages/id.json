@@ -44,7 +44,7 @@
     "title": "Masuk",
     "continueWith": "Lanjutkan dengan <name>{provider}</name>",
     "link": "Email ini sudah punya akun prepza. Lanjutkan dengan cara kamu masuk sebelumnya, dan {provider} akan ditautkan ke akun tersebut.",
-    "consent": "Dengan masuk, kamu menyetujui <terms>Ketentuan</terms> dan <privacy>Kebijakan privasi</privacy>.",
+    "consent": "Dengan masuk, kamu menyatakan berusia 16 tahun ke atas dan menyetujui <terms>Ketentuan</terms> dan <privacy>Kebijakan privasi</privacy>.",
     "failed": "Gagal masuk. Coba lagi.",
     "verify": "Kami mengirimkan tautan untuk memverifikasi email-mu. Buka tautannya, lalu masuk lagi untuk mengikuti wawancara."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Wawancarai semua orang\nRekrut talenta sejati",
-    "text": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu. Soal unik untuk setiap kandidat, dan tidak ada waktu untuk bertanya ke AI. Mulai $1 per kandidat."
+    "text": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu. Soal unik untuk setiap kandidat dan batas waktu di tiap soal, jadi hanya ada sedikit waktu untuk mencari jawaban. Mulai $1 per kandidat."
   },
   "start": {
     "placeholder": "Tempel deskripsi pekerjaan, atau jelaskan perannya dan apa yang perlu diketahui kandidat",
@@ -145,8 +145,8 @@
     "use": "Pakai templat",
     "using": "Memulai…",
     "useFailed": "Wawancara tidak bisa dimulai dari templat ini. Coba lagi.",
-    "warningTitle": "Templat untuk mencoba prepza.",
-    "warning": "Talenta berlatih dengan templat ini, jadi kandidat mungkin sudah tahu soalnya. Untuk rekrutmen sungguhan, buat wawancara dari deskripsi pekerjaanmu.",
+    "warningTitle": "Templat sudah siap untuk peran umum.",
+    "warning": "Agar lebih sesuai, buat wawancara dari deskripsi pekerjaanmu.",
     "text": "Wawancara siap pakai per peran. Pilih satu sebagai awal wawancaramu; kamu bisa mengubahnya nanti."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, other {# email}} melebihi batas emailmu untuk saat ini. Coba lagi dalam satu jam.",
       "no_credits": "{count, plural, other {# kandidat tidak diundang}}: kredit habis. Isi ulang untuk mengundang mereka.",
       "failed": "{count, plural, other {# undangan}} tidak bisa dikirim. Coba lagi."
-    },
-    "talents": "Talenta yang disarankan"
+    }
   },
   "invite": {
     "signIn": "Masuk dengan email undangan untuk mengikuti wawancara ini.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Waktu per soal:",
     "secondsUnit": "dtk",
     "pickOne": "Pilih salah satu dari empat opsi di setiap soal.",
-    "noChange": "Jawaban yang sudah diberikan tidak bisa diubah.",
-    "timeRunsOut": "Saat waktu sebuah soal habis, soal itu dihitung salah dan soal berikutnya terbuka. Waktu tetap berjalan meski kamu pergi.",
+    "changePick": "Kamu bisa mengubah pilihanmu sampai menekan Soal berikutnya.",
+    "timeRunsOut": "Saat waktu sebuah soal habis, pilihanmu dihitung dan soal berikutnya terbuka; tanpa pilihan, soal itu dihitung salah. Waktu tetap berjalan meski kamu pergi.",
     "unanswered": "Soal yang tidak dijawab dihitung salah.",
     "saved": "Kemajuan disimpan: buka tautan ini lagi untuk melanjutkan.",
     "extraTime": "Butuh waktu lebih, misalnya karena disabilitas? Tanyakan ke {company} sebelum kamu mulai.",
@@ -465,7 +464,14 @@
     "joined": "Bergabung",
     "invited": "Diundang",
     "copy": "Salin",
-    "inviteTitle": "Undangan perusahaan"
+    "inviteTitle": "Undangan perusahaan",
+    "remove": "Keluarkan",
+    "removed": "{email} dikeluarkan",
+    "removeFailed": "Tidak bisa mengeluarkannya.",
+    "removeTitle": "Keluarkan dari perusahaan?",
+    "removeText": "{email} kehilangan akses ke perusahaan. Jika kartunya dipakai untuk isi ulang otomatis, isi ulang itu berhenti. Kamu bisa mengundangnya lagi nanti.",
+    "removeInviteText": "Tautan undangan yang dikirim ke {email} tidak akan berfungsi lagi. Kamu bisa mengundangnya lagi nanti.",
+    "removeConfirm": "Keluarkan"
   },
   "scorecard": {
     "timeOut": "Waktu habis",
@@ -652,18 +658,6 @@
         "verified": "Diverifikasi lewat email kerja timmu"
       }
     },
-    "talent": {
-      "title": "Dapatkan saran talenta",
-      "text": "Pencetak skor tertinggi dari wawancara latihan gratis kami, disarankan untuk peranmu. Gratis.",
-      "suggested": "Disarankan untuk Backend developer",
-      "score": "Skor",
-      "points": {
-        "free": "Gratis untukmu dan untuk talenta",
-        "practice": "Dinilai lewat wawancara berbatas waktu",
-        "first": "Hanya percobaan pertama yang dihitung",
-        "link": "Mereka sendiri yang memilih untuk disarankan"
-      }
-    },
     "languages": {
       "title": "Peran apa pun, bahasa apa pun",
       "text": "prepza tersedia dalam {count} bahasa. Tempel deskripsi pekerjaan dalam satu bahasa dan wawancarai kandidat dalam bahasa lain."
@@ -715,7 +709,7 @@
       "title": "Mengapa kami ada",
       "problem": "Rekrutmen sering bergantung pada CV dan percakapan yang menyenangkan, dan keduanya bisa menyesatkan. Alat asesmen yang membantu dihargai untuk perusahaan besar, dengan paket tahunan dan biaya per pengguna, sehingga kebanyakan tim tidak memakainya.",
       "approach": "prepza mengubah deskripsi pekerjaan menjadi wawancara berbatas waktu dalam hitungan menit, untuk peran apa pun. Setiap kandidat mendapat soalnya sendiri, kamu melihat siapa yang menguasai pekerjaan dan alasannya, dan kamu hanya membayar untuk kandidat yang benar-benar mengikutinya.",
-      "practice": "Kami juga ingin persiapan wawancara gratis untuk semua orang. Siapa pun bisa mengikuti wawancara latihan kami untuk suatu peran, melihat nilainya dan semua jawaban yang benar, lalu berlatih lagi, tanpa biaya. Mereka yang berhasil baik bisa memilih untuk disarankan ke perusahaan yang merekrut untuk peran serupa."
+      "practice": "Kami juga ingin persiapan wawancara gratis untuk semua orang. Siapa pun bisa mengikuti wawancara latihan kami untuk suatu peran, melihat nilainya dan semua jawaban yang benar, lalu berlatih lagi, tanpa biaya."
     },
     "founder": {
       "quote": "Merekrut dengan baik seharusnya bukan hak istimewa perusahaan besar dengan anggaran besar. Aku membangun prepza agar tim mana pun bisa mengubah deskripsi pekerjaan menjadi wawancara yang adil dalam hitungan menit, melihat siapa yang benar-benar menguasai pekerjaan, dan hanya membayar untuk kandidat yang mengikutinya. Semoga prepza membantumu menemukan orang yang tepat lebih cepat.",
@@ -778,27 +772,10 @@
     "gradeLabel": "Nilai",
     "questions": "{count, plural, other {# soal}}",
     "progressLabel": "Kemajuan",
-    "answeredLabel": "soal dijawab"
-  },
-  "suggest": {
-    "title": "Disarankan ke perusahaan",
-    "consent": "Opsional. Perusahaan yang merekrut untuk peran serupa bisa melihat nama, LinkedIn, dan skor sesi pertamamu. Ubah atau tarik kapan saja di pengaturan.",
-    "link": "Tautan LinkedIn",
-    "share": "Bagikan",
-    "saved": "Sekarang kamu bisa disarankan ke perusahaan.",
-    "withdraw": "Tarik",
-    "withdrawn": "Kamu tidak akan disarankan ke perusahaan lagi.",
-    "invalid": "Gunakan tautan profil LinkedIn-mu, seperti https://www.linkedin.com/in/your-name",
-    "failed": "Tidak bisa disimpan. Coba lagi.",
-    "shareAndStart": "Setuju & mulai",
-    "startWithout": "Tidak setuju & mulai"
-  },
-  "talents": {
-    "about": "Talenta yang berhasil baik saat berlatih wawancara untuk peran seperti ini, dan setuju untuk disarankan.",
-    "empty": "Belum ada talenta yang disarankan.",
-    "score": "Skor",
-    "hide": "Sembunyikan",
-    "hideFailed": "Talenta tidak bisa disembunyikan. Coba lagi."
+    "answeredLabel": "soal dijawab",
+    "hireTitle": "Sedang merekrut untuk peran ini?",
+    "hireText": "Gunakan wawancara ini untuk kandidatmu, atau buat wawancara dari deskripsi pekerjaanmu.",
+    "hireButton": "Buat wawancara"
   },
   "verify": {
     "verify": "Verifikasi",

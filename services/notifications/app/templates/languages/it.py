@@ -31,7 +31,7 @@ TEXTS = {
         "button": "Apri l'invito",
     },
     "report": {
-        "subject": "{sender} ha condiviso il report di un candidato: {candidate}",
+        "subject": "Report del candidato: {candidate}",
         "preheader": "{candidate} ha svolto «{title}» presso {company}. Il report è in allegato.",
         "heading": "Report del candidato",
         "lines": [
@@ -47,7 +47,7 @@ TEXTS = {
         "di un candidato con questo indirizzo su prepza. Se non te l'aspettavi, puoi ignorarla.",
     },
     "candidates": {
-        "subject": "{sender} ha condiviso il report di tutti i candidati: {title}",
+        "subject": "Report di tutti i candidati: {title}",
         "preheader": "Tutti i candidati per «{title}» presso {company}. Il report è in allegato.",
         "heading": "Report dei candidati",
         "lines": [

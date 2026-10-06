@@ -31,7 +31,7 @@ TEXTS = {
         "button": "Uitnodiging openen",
     },
     "report": {
-        "subject": "{sender} heeft een kandidaatrapport gedeeld: {candidate}",
+        "subject": "Kandidaatrapport: {candidate}",
         "preheader": "{candidate} deed “{title}” bij {company}. Het rapport zit in de bijlage.",
         "heading": "Kandidaatrapport",
         "lines": [
@@ -48,7 +48,7 @@ TEXTS = {
         "negeren.",
     },
     "candidates": {
-        "subject": "{sender} heeft een rapport van alle kandidaten gedeeld: {title}",
+        "subject": "Rapport van alle kandidaten: {title}",
         "preheader": "Alle kandidaten voor “{title}” bij {company}. Het rapport zit in de bijlage.",
         "heading": "Kandidatenrapport",
         "lines": [

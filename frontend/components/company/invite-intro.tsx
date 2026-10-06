@@ -106,7 +106,7 @@ export function InviteIntro({
       <ol className="space-y-4 rounded-2xl bg-muted p-8 text-base text-muted-foreground sm:p-10">
         {[
           t("pickOne"),
-          t("noChange"),
+          t("changePick"),
           t("timeRunsOut"),
           t("unanswered"),
           t("saved"),

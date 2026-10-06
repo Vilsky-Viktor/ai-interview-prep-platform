@@ -32,7 +32,7 @@ TEXTS = {
         "button": "Abrir la invitación",
     },
     "report": {
-        "subject": "{sender} compartió un informe de candidato: {candidate}",
+        "subject": "Informe de candidato: {candidate}",
         "preheader": "{candidate} hizo «{title}» en {company}. El informe va adjunto.",
         "heading": "Informe de candidato",
         "lines": [
@@ -48,7 +48,7 @@ TEXTS = {
         "candidato con esta dirección en prepza. Si no lo esperabas, puedes ignorarlo.",
     },
     "candidates": {
-        "subject": "{sender} compartió un informe de todos los candidatos: {title}",
+        "subject": "Informe de todos los candidatos: {title}",
         "preheader": "Todos los candidatos de «{title}» en {company}. El informe va adjunto.",
         "heading": "Informe de candidatos",
         "lines": [

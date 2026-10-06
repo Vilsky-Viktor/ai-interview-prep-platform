@@ -20,8 +20,7 @@ Creating a test (an interview in the menus):
 - Or start from a template: a company's "templates" tab lists ready-made tests by role, \
 searchable and filtered by level and language. Using one copies it into the company's own \
 test at once, free and with no generation; it can then be changed like any test. Templates are \
-for trying prepza: talents practice on them, so candidates may know the questions. For real \
-hiring, generate a test from the job description.
+ready-made for common roles; for a closer fit, generate a test from the job description.
 - Paste a job description. "Generate in" next to the text box picks the language the test is \
 written in, whatever language the description is in.
 - prepza proposes topics. Before any questions are written, review them: uncheck topics you \
@@ -34,13 +33,15 @@ three plausible wrong ones. Set how many questions each topic asks a candidate (
 
 Candidates:
 - Invite candidates by email, resend an invite, or revoke one not used yet. Or turn on the test's \
-shareable link (candidates tab) for a job ad: anyone who opens it signs in with Google and takes \
+shareable link (candidates tab) for a job ad: anyone who opens it signs in and takes \
 the test, charged like an invited candidate; it can be turned off at any time. The invite page \
 tells candidates what to expect.
 - Each candidate gets a random subset of each topic, with their own question and option order, \
-in a single pass. Answers can't be changed.
+in a single pass. A candidate can change their pick until they press Next question; then it's \
+final.
 - Each question has its own countdown ({question_seconds} seconds by default, adjustable per \
-test), kept by the server; a question still open at zero counts as wrong. A test the candidate \
+test), kept by the server. At zero the pick on screen counts; with no pick, the question counts \
+as wrong. A test the candidate \
 leaves finishes by itself once its total time, plus 10%, has passed; unanswered questions count \
 as wrong.
 - Any member of the company can try a test as a candidate first (the play button on the \
@@ -72,11 +73,6 @@ so a candidate costs less (see prices). Payments go through Paddle, which issues
 under; the card is saved through Paddle.
 - Referrals: a company's link is in its referrals tab. Both companies get credits on the \
 newcomer's first top-up, of any amount (see prices).
-
-Talent suggestions:
-- People practice on prepza's free tests, and those who choose to be suggested leave a LinkedIn \
-link. When a company creates a test, the top scorers for a similar role show up next to it, with \
-their name, score and LinkedIn. Only a person's first try on a test counts. Suggestions are free.
 
 Account and settings:
 - Settings has the interface language, "Download my data" and "Delete account".

@@ -31,7 +31,7 @@ TEXTS = {
         "button": "Mở lời mời",
     },
     "report": {
-        "subject": "{sender} đã chia sẻ báo cáo ứng viên: {candidate}",
+        "subject": "Báo cáo ứng viên: {candidate}",
         "preheader": "{candidate} đã tham gia phỏng vấn “{title}” tại {company}. Báo cáo được đính kèm.",
         "heading": "Báo cáo ứng viên",
         "lines": [
@@ -49,7 +49,7 @@ TEXTS = {
         "với địa chỉ này trên prepza. Nếu bạn không mong đợi email này, bạn có thể bỏ qua.",
     },
     "candidates": {
-        "subject": "{sender} đã chia sẻ báo cáo tất cả ứng viên: {title}",
+        "subject": "Báo cáo tất cả ứng viên: {title}",
         "preheader": "Tất cả ứng viên của buổi phỏng vấn “{title}” tại {company}. Báo cáo được đính kèm.",
         "heading": "Báo cáo ứng viên",
         "lines": [

@@ -1,15 +1,17 @@
 import asyncio
 import uuid
+from datetime import UTC, datetime, timedelta
 
 import httpx
 import pytest
 
+from app.constants.audit import AUDIT_RETENTION_DAYS
 from app.constants.roles import Role
 from app.integrations import rounds
 from app.models.companies import Company, Member
 from app.services import accounts as account_service
 from app.services import company_deletion, retention
-from app.storage import accounts
+from app.storage import accounts, audit
 
 
 def membership(role, owners):
@@ -106,6 +108,17 @@ def test_cloud_scheduler_runs_retention_through_its_route(client, monkeypatch):
     async def expired_invites(before):
         return []
 
+    cutoffs = []
+
+    async def delete_before(before):
+        cutoffs.append(before)
+
+        return 0
+
     monkeypatch.setattr(accounts, "expired_invites", expired_invites)
+    monkeypatch.setattr(audit, "delete_before", delete_before)
 
     assert client.post("/internal/schedules/retention").status_code == 204
+    # Audit events go after 24 months.
+    assert len(cutoffs) == 1
+    assert datetime.now(UTC) - cutoffs[0] > timedelta(days=AUDIT_RETENTION_DAYS - 1)

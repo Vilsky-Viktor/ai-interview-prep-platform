@@ -4,11 +4,12 @@ import httpx
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 
+from app.constants.audit import AuditAction
 from app.integrations import generation as generation_api
 from app.models.interviews import Interview
 from app.schemas.interviews import ReviewIn
 from app.services.access import require_company, require_manager
-from app.storage import interviews
+from app.storage import audit, interviews
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
 
@@ -57,8 +58,10 @@ async def review_generation(interview_id: UUID, body: ReviewIn, user: CurrentUse
     response = await generation_api.review(
         interview.generation_id, interview.company_id, body.model_dump()
     )
+    reviewed = passed_through(response)
+    await audit.record(interview.company_id, user.uid, AuditAction.TOPICS_APPROVED, interview.id)
 
-    return passed_through(response)
+    return reviewed
 
 
 @router.post("/{interview_id}/generation/retry")

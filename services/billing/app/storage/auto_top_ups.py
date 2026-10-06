@@ -96,14 +96,18 @@ async def claim_charge(owner_type: str, owner_id: str, now: datetime) -> AutoTop
         return row
 
 
-async def remove(owner_type: str, owner_id: str) -> str | None:
-    """Turns it off; the subscription to cancel, if it had started."""
+async def remove(owner_type: str, owner_id: str, buyer_id: str | None = None) -> str | None:
+    """Turns it off, or only when `buyer_id` turned it on; the subscription to cancel, if it had
+    started."""
+    query = delete(AutoTopUp).where(
+        AutoTopUp.owner_type == owner_type, AutoTopUp.owner_id == owner_id
+    )
+
+    if buyer_id is not None:
+        query = query.where(AutoTopUp.buyer_id == buyer_id)
+
     async with Session() as session:
-        subscription_id = await session.scalar(
-            delete(AutoTopUp)
-            .where(AutoTopUp.owner_type == owner_type, AutoTopUp.owner_id == owner_id)
-            .returning(AutoTopUp.subscription_id)
-        )
+        subscription_id = await session.scalar(query.returning(AutoTopUp.subscription_id))
         await session.commit()
 
         return subscription_id

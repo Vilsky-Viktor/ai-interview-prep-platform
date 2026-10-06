@@ -4,8 +4,8 @@ Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) be
 
 - **Cloud Run:** the frontend, five APIs, the generation worker and notifications. Billed per request, and idle services cost nothing.
 - **Cloud SQL Postgres 17:** one database per service, with daily backups and point-in-time recovery.
-- **Pub/Sub:** domain events. One `events` topic is pushed to library, companies and notifications, with a dead-letter topic after 5 attempts.
-- **Cloud Tasks:** generation jobs on the worker. **Cloud Scheduler:** sweeps, retention, the question bank's stages, and candidate invite reminders and expiry.
+- **Pub/Sub:** domain events. One `events` topic is pushed to library, companies and notifications, with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
+- **Cloud Tasks:** generation jobs on the worker. **Cloud Scheduler:** sweeps, retention, the question bank's stages, and candidate invite reminders and expiry; a failed daily job is retried 3 times.
 - **The global load balancer:**
   - HTTPS with a Google-managed certificate;
   - `/api/<service>/` routes to each API, and everything else to the frontend;
@@ -49,7 +49,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    cp terraform.tfvars.example terraform.tfvars   # fill it in
    terraform init -backend-config="bucket=prepza-prod-terraform"
    ```
-   `alert_email`, `billing_account` and `monthly_budget` set up the alerts in `monitoring.tf`: an uptime check every minute on the site and each API's `/ready`, an email when one fails, and budget emails at 50%, 90% and 100% of the month (and when the forecast passes it). Creating the budget needs the Billing Account Costs Manager role on the billing account, which its administrator already has. `daily_generation_limit` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off.
+   `alert_email`, `billing_account` and `monthly_budget` set up the alerts in `monitoring.tf`: an uptime check every minute on the site and each API's `/ready`, an email when one fails, an email when an event is dead-lettered or a scheduled job fails, and budget emails at 50%, 90% and 100% of the month (and when the forecast passes it). Creating the budget needs the Billing Account Costs Manager role on the billing account, which its administrator already has. `daily_generation_limit` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off.
 6. **Create the image registry first,** then push the first images. CI pushes them on every push to `main` afterwards.
    - Cloud Run runs `linux/amd64`, so build for it even on an Apple-silicon Mac.
    - Use the same tag as `image_tag` in `terraform.tfvars`.
@@ -158,6 +158,18 @@ Then point `DATABASE_URL` at the clone, or copy the needed data back.
 - **Database users:** each service connects as its own Postgres user (named after its database) that owns only that database; other users can't even connect to it. The `prepza` user is the instance's admin and is used only by the `db-roles` job (`db_roles.tf`, `services/library/app/jobs/db_roles.py`), which creates those users and moves ownership to them. The deploy pipeline runs it before migrations; it's safe to repeat. **When first applying this over an existing database,** run it right after `terraform apply`, before any service restarts: `gcloud run jobs execute db-roles --region=europe-west1 --wait`. Until it has run, new instances can't connect, since their URLs already name the new users. Locally, Docker Compose keeps the one `prepza` user.
 - **Least privilege:** each service runs as its own account (`prepza-<service>`, see `iam.tf`) that can read only its own secrets and its own database's URL. The frontend has no permissions; only the backend services publish events, and only the generation services queue tasks. Migrations run as their service's account. Applying this over the old shared `prepza-runtime` account moves every service to its own account, then deletes the old one.
 - **App settings:** Terraform passes `DAILY_GENERATION_LIMIT` (from `daily_generation_limit`) but none of the other settings in `.env.example`: the AI models and reasoning efforts (`INTERVIEW_MODEL`, `VERIFY_MODEL`, `HELP_MODEL` and their `*_REASONING_EFFORT`), `INTERVIEW_QUESTIONS_PER_TOPIC`, `TEMPLATE_QUESTIONS_PER_TOPIC`, `MAX_TOPICS`, `MAX_SUBTOPICS`, `LLM_REQUESTS_PER_SECOND` and the per-user limits. The services run on their code defaults, which match `.env.example`. To change one in production, add it to the service's entry in `env.tf`.
+- **Dead-lettered events:** an event a consumer failed on 50 times waits 7 days in the `events-dead-letter` subscription, and an alert emails you while any wait there. After fixing the consumer, replay them to the `events` topic with their attributes (the type), which acknowledges each one republished:
+
+  ```bash
+  # One at a time, so each is acknowledged well within the subscription's 10-second deadline.
+  while m=$(gcloud pubsub subscriptions pull events-dead-letter --limit=1 --format=json | jq -c '.[0] // empty') && [ -n "$m" ]; do
+    attrs=$(jq -r '.message.attributes | with_entries(select(.key | startswith("CloudPubSubDeadLetter") | not)) | to_entries | map("\(.key)=\(.value)") | join(",")' <<<"$m")
+    gcloud pubsub topics publish events --message="$(jq -r .message.data <<<"$m" | base64 -d)" --attribute="$attrs" &&
+      gcloud pubsub subscriptions ack events-dead-letter --ack-ids="$(jq -r .ackId <<<"$m")"
+  done
+  ```
+
+  The replay goes to every consumer again, not only the one that failed: each ignores the types that aren't its own, but a type two consumers handle reaches the one that succeeded a second time.
 - **Generation jobs:** a job may run up to 25 minutes, under Cloud Tasks' 30-minute limit. The queue never retries; a failed generation is retried by the user.
 - **Database connections:** Cloud SQL starts at `db-g1-small` with 200 connections allowed. Each API process holds up to 10 connections, so raise `db_tier`, or add PgBouncer, before allowing many instances.
 - **High availability:** `db_high_availability = true` adds a standby in another zone, at about double the database cost.

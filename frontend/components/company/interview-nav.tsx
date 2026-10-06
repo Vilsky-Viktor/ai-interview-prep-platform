@@ -9,7 +9,7 @@ export function InterviewNav({
   current,
 }: {
   href: string
-  current: "topics" | "candidates" | "talents"
+  current: "topics" | "candidates"
 }) {
   const t = useTranslations("interviews")
   const items = [
@@ -18,11 +18,6 @@ export function InterviewNav({
       id: "candidates",
       href: `${href}?tab=candidates`,
       label: t("candidates"),
-    },
-    {
-      id: "talents",
-      href: `${href}?tab=talents`,
-      label: t("talents"),
     },
   ] as const
 

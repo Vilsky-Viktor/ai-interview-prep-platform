@@ -3,7 +3,8 @@ resource "google_pubsub_topic" "events" {
   depends_on = [google_project_service.apis]
 }
 
-# Events a consumer kept failing on; kept 7 days for a look (the pull subscription below).
+# Events a consumer kept failing on; kept 7 days for a look or a replay (the pull subscription
+# below; infra/README.md, Notes).
 resource "google_pubsub_topic" "dead_letter" {
   name       = "events-dead-letter"
   depends_on = [google_project_service.apis]
@@ -39,9 +40,11 @@ resource "google_pubsub_subscription" "push" {
     maximum_backoff = "600s"
   }
 
+  # 50 attempts, backing off up to 10 minutes, ride out several hours of downstream trouble
+  # before a message is dead-lettered (monitoring.tf alerts on that).
   dead_letter_policy {
     dead_letter_topic     = google_pubsub_topic.dead_letter.id
-    max_delivery_attempts = 5
+    max_delivery_attempts = 50
   }
 
   expiration_policy {

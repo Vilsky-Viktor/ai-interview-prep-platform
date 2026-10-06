@@ -88,10 +88,12 @@ async def export(user_id: str, email: str) -> dict:
 
 
 async def expired_invites(before: datetime) -> list:
+    """Invites last sent before `before`: kept CANDIDATE_RETENTION_DAYS after the latest send,
+    as the privacy policy says, so sending one again keeps its results longer."""
     async with Session() as session:
         return list(
             await session.scalars(
-                select(CandidateInvite.id).where(CandidateInvite.created_at < before)
+                select(CandidateInvite.id).where(CandidateInvite.sent_at < before)
             )
         )
 

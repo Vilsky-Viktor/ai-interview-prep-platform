@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "この問題の時間が終了しました。",
     "Name the company": "会社名を入力してください",
     "The report isn't a PDF": "レポートが PDF ではありません",
+    "A report can be emailed once a candidate has finished this interview.": "面接を終えた候補者のレポートのみメールで送れます。",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "会社がメールで送れるレポートの 1 日の上限に達しました。明日もう一度お試しください。",
 }

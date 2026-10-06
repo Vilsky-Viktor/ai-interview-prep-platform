@@ -12,6 +12,7 @@ from app.config.settings import settings
 from app.integrations.redis import get_redis
 from app.routers import (
     accommodations,
+    audit,
     auto_top_ups,
     bulk_invites,
     candidates,
@@ -28,7 +29,6 @@ from app.routers import (
     members,
     reports,
     schedules,
-    talents,
     verification,
 )
 from app.storage.db import ping as ping_database
@@ -54,6 +54,7 @@ app = FastAPI(
 add_localized_errors(app)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(companies.router)
+app.include_router(audit.router)
 app.include_router(auto_top_ups.router)
 app.include_router(members.router)
 app.include_router(interviews.router)
@@ -66,7 +67,6 @@ app.include_router(invites.router)
 app.include_router(links.router)
 app.include_router(logos.router)
 app.include_router(reports.router)
-app.include_router(talents.router)
 app.include_router(verification.router)
 app.include_router(internal_accounts.router)
 app.include_router(internal_invites.router)

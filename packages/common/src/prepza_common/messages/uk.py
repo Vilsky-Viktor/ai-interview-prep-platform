@@ -28,4 +28,6 @@ MESSAGES = {
     "Time is up for this question.": "Час на це питання вийшов.",
     "Name the company": "Вкажіть назву компанії",
     "The report isn't a PDF": "Звіт не у форматі PDF",
+    "A report can be emailed once a candidate has finished this interview.": "Звіт можна надіслати на email, щойно кандидат завершить цю співбесіду.",
+    "Your company has emailed its daily limit of reports. Try again tomorrow.": "Ваша компанія вже надіслала денний ліміт звітів на email. Спробуйте завтра.",
 }

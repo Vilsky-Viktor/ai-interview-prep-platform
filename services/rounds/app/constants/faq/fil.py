@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Puwede bang gumamit ng AI ang mga kandidato o hanapin ang mga sagot?",
-        "answer": "Bawat kandidato ay may sariling random na mga tanong sa sarili nilang pagkakasunod-sunod, may timer sa bawat tanong na binabantayan ng aming server, kaya walang oras para magtanong sa AI. Ipinapakita rin ng mga resulta ng kandidato kung kailan umalis ang kandidato sa page, kumopya ng text, o sumagot nang masyadong mabilis para nabasa ang tanong.",
+        "answer": "Bawat kandidato ay may sariling random na mga tanong sa sarili nilang pagkakasunod-sunod, may timer sa bawat tanong na binabantayan ng aming server, kaya kaunti lang ang oras para maghanap ng sagot o magtanong sa AI. Ipinapakita rin ng mga resulta ng kandidato kung kailan umalis ang kandidato sa page, kumopya ng text, o sumagot nang masyadong mabilis para nabasa ang tanong.",
     },
     {
         "key": "cost",
@@ -71,11 +71,6 @@ FAQ = [
         "key": "candidates",
         "question": "Ano ang nakikita ng mga kandidato?",
         "answer": "Ang pangalan at logo ng iyong kumpanya, kung ano ang aasahan bago sila magsimula, pagkatapos ay isang timed na tanong sa bawat pagkakataon. Hindi nila kailanman nakikita ang kanilang score o kung tama ang isang sagot.",
-    },
-    {
-        "key": "talent",
-        "question": "Ano ang mga mungkahing talento?",
-        "answer": "Nagpa-practice ang mga tao sa mga libreng practice interview ng prepza, at ang mga pumipiling maimungkahi ay nag-iiwan ng LinkedIn link. Kapag gumawa ka ng interview, lumalabas ang mga may pinakamataas na score para sa katulad na role sa tab nitong Mga iminumungkahing talento, kasama ang kanilang pangalan, score at LinkedIn. Ang unang try lang nila ang binibilang, puwede mong itago ang sinumang hindi akma, at libre ang mga mungkahi.",
     },
     {
         "key": "verified",

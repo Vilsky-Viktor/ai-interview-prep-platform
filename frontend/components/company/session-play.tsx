@@ -1,6 +1,6 @@
 import { MinusIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { type ReactNode, useState } from "react"
+import { type ReactNode, useEffect, useRef, useState } from "react"
 
 import { Countdown } from "@/components/company/countdown"
 import { QuestionActions } from "@/components/questions/question-actions"
@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dialog"
 import { Progress } from "@/components/ui/progress"
 import { useIntegritySignals } from "@/hooks/use-integrity-signals"
-import type { InterviewSession, SessionAnswerResult } from "@/types/company"
+import type { InterviewSession } from "@/types/company"
 import type { AnswerInput, NextQuestion } from "@/types/round"
 
 type SessionPlayProps = {
@@ -28,7 +28,6 @@ type SessionPlayProps = {
   // This topic's place among the interview's sections.
   section: { number: number; count: number }
   question: NextQuestion | null
-  result: SessionAnswerResult | null
   onAnswer: (input: AnswerInput) => Promise<boolean>
   onAdvance: () => void
   onFinish: () => void
@@ -44,7 +43,6 @@ export function SessionPlay({
   progress,
   section,
   question,
-  result,
   onAnswer,
   onAdvance,
   onFinish,
@@ -56,8 +54,46 @@ export function SessionPlay({
   const rounds = useTranslations("rounds")
   const common = useTranslations("common")
   const [confirmFinish, setConfirmFinish] = useState(false)
+  // The question whose clock ran out, announced to screen readers; the screen moves on quietly.
+  const [timedOut, setTimedOut] = useState<string | null>(null)
+  // The option picked on the question on screen: it can change until it's sent, on Next, on
+  // finishing or when the time runs out.
+  const [pick, setPick] = useState<{ question: string; option: number } | null>(
+    null
+  )
+  const [sending, setSending] = useState(false)
   useIntegritySignals(session.id, session.status === "in_progress")
-  const allAnswered = progress.total > 0 && progress.answered === progress.total
+  const questionRef = useRef<HTMLDivElement>(null)
+  const questionId = question?.question_id
+  const chosen = pick && pick.question === questionId ? pick.option : null
+  const answered = progress.answered + (chosen === null ? 0 : 1)
+  const allAnswered = progress.total > 0 && answered === progress.total
+
+  // Each new question takes focus, so the keyboard and screen readers start from it.
+  useEffect(() => {
+    if (questionId) {
+      questionRef.current?.querySelector<HTMLElement>("[role=heading]")?.focus()
+    }
+  }, [questionId])
+
+  // Saves the pick, if there is one; false when it couldn't be saved.
+  async function send() {
+    if (chosen === null) {
+      return true
+    }
+
+    setSending(true)
+    const saved = await onAnswer({ option_index: chosen })
+    setSending(false)
+
+    return saved
+  }
+
+  async function sendAndAdvance() {
+    if (await send()) {
+      onAdvance()
+    }
+  }
 
   return (
     <div className="space-y-8 pb-28">
@@ -68,25 +104,38 @@ export function SessionPlay({
           session={session}
           progress={progress}
           section={section}
-          question={result ? null : question}
-          // Quietly on to the next question: a message would only distract.
-          onTimeUp={onAdvance}
+          question={sending ? null : question}
+          // The pick counts, and quietly on to the next question: a message would only distract.
+          onTimeUp={() => {
+            setTimedOut(question?.question_id ?? null)
+            void sendAndAdvance()
+          }}
         />
       </div>
+      <p aria-live="polite" className="sr-only">
+        {timedOut && <span key={timedOut}>{t("timeUp")}</span>}
+      </p>
       {question && (
-        <div key={question.question_id} className="space-y-6">
-          <QuestionText
-            heading
-            text={question.text}
-            className="text-2xl leading-snug font-medium"
-          />
-          {/* Candidates never learn whether they were right: their pick only stays marked. */}
-          <ChoiceOptions
-            options={question.options}
-            onAnswer={(option_index) => onAnswer({ option_index })}
-          />
-          {/* Judged once answered, not mid-question. */}
-          {result && (
+        <div key={question.question_id} ref={questionRef} className="space-y-6">
+          {/* In the interview's own language, so screen readers read it with the right voice. */}
+          <div lang={session.language ?? undefined} className="space-y-6">
+            <QuestionText
+              heading
+              text={question.text}
+              className="text-2xl leading-snug font-medium"
+            />
+            {/* Candidates never learn whether they were right: their pick only stays marked. */}
+            <ChoiceOptions
+              options={question.options}
+              chosen={chosen}
+              disabled={sending}
+              onChoose={(option) =>
+                setPick({ question: question.question_id, option })
+              }
+            />
+          </div>
+          {/* Judged once picked, not before. */}
+          {chosen !== null && (
             <QuestionActions
               basePath={`/rounds/sessions/${session.id}/questions/${question.question_id}`}
             />
@@ -97,14 +146,19 @@ export function SessionPlay({
         <Button
           variant="ghost"
           className="h-12 px-6 text-base"
-          disabled={finishing}
+          disabled={finishing || sending}
           onClick={() => setConfirmFinish(true)}
         >
           {finishing ? rounds("finishing") : t("finish")}
         </Button>
         <div className="flex items-center gap-3">
-          {result && (
-            <Button className="h-12 px-6 text-base" onClick={onAdvance}>
+          {chosen !== null && (
+            // Focus stays on the pick, so it can still be changed; Next is the following stop.
+            <Button
+              className="h-12 px-6 text-base"
+              disabled={sending}
+              onClick={sendAndAdvance}
+            >
               {rounds("next")}
             </Button>
           )}
@@ -126,7 +180,7 @@ export function SessionPlay({
                 ? t("endsAll", { count: section.count })
                 : t("endsOne")}
               {!allAnswered &&
-                ` ${t("unscored", { count: progress.total - progress.answered })}`}
+                ` ${t("unscored", { count: progress.total - answered })}`}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -144,7 +198,12 @@ export function SessionPlay({
             <Button
               className="h-10 px-5 text-base"
               disabled={finishing}
-              onClick={onFinish}
+              // The pick on screen is saved first, so it counts.
+              onClick={async () => {
+                if (await send()) {
+                  onFinish()
+                }
+              }}
             >
               {finishing ? rounds("finishing") : rounds("finish")}
             </Button>
@@ -174,6 +233,7 @@ function SessionHeader({
   onTimeUp: () => void
 }) {
   const t = useTranslations("session")
+  const candidates = useTranslations("candidates")
 
   // The company's logo on the left of the section's title and the progress bar.
   return (
@@ -216,6 +276,7 @@ function SessionHeader({
           </p>
         </div>
         <Progress
+          aria-label={candidates("progress")}
           value={
             progress.total ? (progress.answered / progress.total) * 100 : 0
           }

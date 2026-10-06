@@ -44,7 +44,7 @@
     "title": "Accedi",
     "continueWith": "Continua con <name>{provider}</name>",
     "link": "Questa email ha già un account prepza. Continua come hai fatto l'ultima volta e {provider} verrà collegato.",
-    "consent": "Accedendo, accetti i <terms>Termini</terms> e l’<privacy>Informativa sulla privacy</privacy>.",
+    "consent": "Accedendo, confermi di avere almeno 16 anni e accetti i <terms>Termini</terms> e l’<privacy>Informativa sulla privacy</privacy>.",
     "failed": "Accesso non riuscito. Riprova.",
     "verify": "Ti abbiamo inviato un link per verificare la tua email. Aprilo, poi accedi di nuovo per svolgere i colloqui."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Un colloquio per tutti\nAssumi veri talenti",
-    "text": "Colloqui a tempo creati dalla tua descrizione del ruolo. Domande uniche per ogni candidato e nessun tempo per chiedere a un'IA. Da $1 per candidato."
+    "text": "Colloqui a tempo creati dalla tua descrizione del ruolo. Domande uniche per ogni candidato e un timer su ognuna, quindi c'è poco tempo per cercare le risposte. Da $1 per candidato."
   },
   "start": {
     "placeholder": "Incolla una descrizione del ruolo, oppure descrivi il ruolo e cosa dovrebbe sapere un candidato",
@@ -145,8 +145,8 @@
     "use": "Usa modello",
     "using": "Avvio…",
     "useFailed": "Impossibile avviare un colloquio da questo modello. Riprova.",
-    "warningTitle": "I modelli servono a provare prepza.",
-    "warning": "I talenti ci si esercitano, quindi i candidati potrebbero già conoscere le domande. Per assunzioni reali, crea un colloquio dalla tua descrizione del ruolo.",
+    "warningTitle": "I modelli sono pronti per i ruoli più comuni.",
+    "warning": "Per un risultato più mirato, crea un colloquio dalla tua descrizione del ruolo.",
     "text": "Colloqui pronti per ruolo. Scegline uno come base per il tuo colloquio; potrai modificarlo dopo."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, one {# email supera} other {# email superano}} per ora il tuo limite di email. Riprova tra un'ora.",
       "no_credits": "{count, plural, one {# candidato non è stato invitato} other {# candidati non sono stati invitati}}: crediti esauriti. Ricarica per invitarli.",
       "failed": "{count, plural, one {# invito non è stato inviato} other {# inviti non sono stati inviati}}. Riprova."
-    },
-    "talents": "Talenti suggeriti"
+    }
   },
   "invite": {
     "signIn": "Accedi con l'email dell'invito per sostenere questo colloquio.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Tempo per domanda:",
     "secondsUnit": "s",
     "pickOne": "Per ogni domanda scegli una delle quattro opzioni.",
-    "noChange": "Una risposta data non può essere cambiata.",
-    "timeRunsOut": "Quando il tempo di una domanda scade, conta come sbagliata e si apre la successiva. Il tempo continua a scorrere anche se esci.",
+    "changePick": "Puoi cambiare la tua scelta finché non premi «Domanda successiva».",
+    "timeRunsOut": "Quando il tempo di una domanda scade, conta la tua scelta e si apre la successiva; senza scelta, conta come sbagliata. Il tempo continua a scorrere anche se esci.",
     "unanswered": "Le domande senza risposta contano come sbagliate.",
     "saved": "I progressi vengono salvati: usa di nuovo questo link per continuare.",
     "extraTime": "Ti serve più tempo, ad esempio a causa di una disabilità? Contatta {company} prima di iniziare.",
@@ -465,7 +464,14 @@
     "joined": "Entrato",
     "invited": "Invitato",
     "copy": "Copia",
-    "inviteTitle": "Invito nell'azienda"
+    "inviteTitle": "Invito nell'azienda",
+    "remove": "Rimuovi",
+    "removed": "Accesso rimosso per {email}",
+    "removeFailed": "Impossibile rimuovere questa persona.",
+    "removeTitle": "Rimuovere dall'azienda?",
+    "removeText": "{email} perde l'accesso all'azienda. Se la sua carta paga le ricariche automatiche, queste si interrompono. Potrai invitare di nuovo questa persona più tardi.",
+    "removeInviteText": "Il link d'invito inviato a {email} smette di funzionare. Potrai invitare di nuovo questa persona più tardi.",
+    "removeConfirm": "Rimuovi"
   },
   "scorecard": {
     "timeOut": "Tempo scaduto",
@@ -652,18 +658,6 @@
         "verified": "Verificato tramite l'email di lavoro del tuo team"
       }
     },
-    "talent": {
-      "title": "Ricevi suggerimenti di talenti",
-      "text": "I migliori punteggi dei nostri colloqui di pratica gratuiti, suggeriti per il tuo ruolo. Gratis.",
-      "suggested": "Suggeriti per Sviluppatore backend",
-      "score": "Punteggio",
-      "points": {
-        "free": "Gratis per te e per i talenti",
-        "practice": "Valutati su colloqui a tempo",
-        "first": "Conta solo il loro primo tentativo",
-        "link": "Scelgono loro di essere suggeriti"
-      }
-    },
     "languages": {
       "title": "Qualsiasi ruolo, qualsiasi lingua",
       "text": "prepza funziona in {count} lingue. Incolla una descrizione del ruolo in una lingua e fai il colloquio ai candidati in un'altra."
@@ -715,7 +709,7 @@
       "title": "Perché esistiamo",
       "problem": "Le assunzioni si basano spesso su un CV e una buona conversazione, ed entrambi possono ingannare. Gli strumenti di valutazione che aiutano hanno prezzi pensati per le grandi aziende, con piani annuali e costi per utente, così la maggior parte dei team ne fa a meno.",
       "approach": "prepza trasforma una descrizione del ruolo in un colloquio a tempo in pochi minuti, per qualsiasi ruolo. Ogni candidato riceve domande tutte sue, vedi chi conosce il lavoro e perché, e paghi solo per i candidati che lo svolgono davvero.",
-      "practice": "Vogliamo anche che prepararsi a un colloquio sia gratis per tutti. Chiunque può fare i nostri colloqui di pratica per un ruolo, vedere il proprio voto e ogni risposta corretta, ed esercitarsi di nuovo, senza costi. Chi va bene può scegliere di essere suggerito alle aziende che assumono per un ruolo simile."
+      "practice": "Vogliamo anche che prepararsi a un colloquio sia gratis per tutti. Chiunque può fare i nostri colloqui di pratica per un ruolo, vedere il proprio voto e ogni risposta corretta, ed esercitarsi di nuovo, senza costi."
     },
     "founder": {
       "quote": "Assumere bene non dovrebbe essere un privilegio delle grandi aziende con grandi budget. Ho creato prepza perché qualsiasi team possa trasformare una descrizione del ruolo in un colloquio equo in pochi minuti, vedere chi conosce davvero il lavoro e pagare solo per i candidati che lo svolgono. Spero che ti aiuti a trovare prima le persone giuste.",
@@ -778,27 +772,10 @@
     "gradeLabel": "Voto",
     "questions": "{count, plural, one {# domanda} other {# domande}}",
     "progressLabel": "Avanzamento",
-    "answeredLabel": "domande risposte"
-  },
-  "suggest": {
-    "title": "Fatti suggerire alle aziende",
-    "consent": "Facoltativo. Le aziende che assumono per ruoli simili potrebbero vedere il tuo nome, il tuo LinkedIn e il punteggio del primo round. Puoi modificarlo o revocarlo quando vuoi nelle impostazioni.",
-    "link": "Link LinkedIn",
-    "share": "Condividi",
-    "saved": "Ora puoi essere suggerito alle aziende.",
-    "withdraw": "Revoca",
-    "withdrawn": "Non sarai più suggerito alle aziende.",
-    "invalid": "Usa il link del tuo profilo LinkedIn, ad esempio https://www.linkedin.com/in/your-name",
-    "failed": "Impossibile salvare. Riprova.",
-    "shareAndStart": "Accetta e inizia",
-    "startWithout": "Rifiuta e inizia"
-  },
-  "talents": {
-    "about": "Talenti che sono andati bene esercitandosi su un colloquio per un ruolo come questo e hanno accettato di essere suggeriti.",
-    "empty": "Ancora nessun talento suggerito.",
-    "score": "Punteggio",
-    "hide": "Nascondi",
-    "hideFailed": "Impossibile nascondere il talento. Riprova."
+    "answeredLabel": "domande risposte",
+    "hireTitle": "Assumi per questo ruolo?",
+    "hireText": "Usa questo colloquio con i tuoi candidati o generane uno per la tua descrizione del ruolo.",
+    "hireButton": "Crea un colloquio"
   },
   "verify": {
     "verify": "Verifica",

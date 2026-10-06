@@ -8,7 +8,11 @@ export function RoundFooter({
   className?: string
 }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-20 border-t bg-background/95 backdrop-blur">
+    // data-round-footer: the page scrolls focused elements clear of it (globals.css).
+    <div
+      data-round-footer
+      className="fixed inset-x-0 bottom-0 z-20 border-t bg-background/95 backdrop-blur"
+    >
       <div
         className={cn(
           "mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4",

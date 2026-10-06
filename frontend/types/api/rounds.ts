@@ -232,28 +232,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/talent-link": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Get Link */
-    get: operations["get_link_talent_link_get"]
-    /**
-     * Save Link
-     * @description A link is the consent: companies may see the talent's name, this link and their first
-     *     practice score on templates for roles like theirs. No link declines, or withdraws at once.
-     */
-    put: operations["save_link_talent_link_put"]
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/sessions/{session_id}/questions/{question_id}/rating": {
     parameters: {
       query?: never
@@ -461,7 +439,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/suggestions": {
+  "/internal/questions/{question_id}/rescore": {
     parameters: {
       query?: never
       header?: never
@@ -471,11 +449,10 @@ export interface paths {
     get?: never
     put?: never
     /**
-     * Talent Suggestions
-     * @description For a company's test: talents who agreed to be suggested and did well in their first
-     *     round on one of these templates (the ones for similar roles, closest first).
+     * Rescore Question
+     * @description The question's answer key was corrected: candidates who answered it are marked again.
      */
-    post: operations["talent_suggestions_internal_suggestions_post"]
+    post: operations["rescore_question_internal_questions__question_id__rescore_post"]
     delete?: never
     options?: never
     head?: never
@@ -716,7 +693,7 @@ export interface components {
      * LegalDocument
      * @enum {string}
      */
-    LegalDocument: "terms" | "privacy"
+    LegalDocument: "terms" | "privacy" | "dpa"
     /** LegalOut */
     LegalOut: {
       /** Intro */
@@ -905,6 +882,18 @@ export interface components {
       comment: string
     }
     /**
+     * RescoreIn
+     * @description A question's corrected content: its text and options with the right one marked.
+     */
+    RescoreIn: {
+      /** Text */
+      text: string
+      /** Options */
+      options: {
+        [key: string]: unknown
+      }[]
+    }
+    /**
      * ReviewItem
      * @description One question of a round. The correct option only once it's answered.
      */
@@ -993,6 +982,8 @@ export interface components {
       topic_title: string
       /** Interview Title */
       interview_title?: string | null
+      /** Language */
+      language?: string | null
       /**
        * Practice
        * @default false
@@ -1050,50 +1041,6 @@ export interface components {
     /** SignalIn */
     SignalIn: {
       kind: components["schemas"]["IntegritySignal"]
-    }
-    /**
-     * SuggestedTalent
-     * @description What a company sees of a talent: name, LinkedIn, and their first-round grade on the
-     *     closest template they practised.
-     */
-    SuggestedTalent: {
-      /** Name */
-      name: string
-      /** Url */
-      url: string
-      /** Grade */
-      grade: number
-      /**
-       * Template Id
-       * Format: uuid
-       */
-      template_id: string
-    }
-    /**
-     * SuggestionsIn
-     * @description The templates for roles like a company's test.
-     */
-    SuggestionsIn: {
-      /** Template Ids */
-      template_ids: string[]
-    }
-    /**
-     * TalentLinkIn
-     * @description A LinkedIn link is the talent's consent to be suggested; none declines (or withdraws).
-     */
-    TalentLinkIn: {
-      /** Url */
-      url?: string | null
-    }
-    /**
-     * TalentLinkOut
-     * @description Whether the talent has answered yet, and their link while they agree to be suggested.
-     */
-    TalentLinkOut: {
-      /** Decided */
-      decided: boolean
-      /** Url */
-      url: string | null
     }
     /** TopicQuestions */
     TopicQuestions: {
@@ -1512,59 +1459,6 @@ export interface operations {
       }
     }
   }
-  get_link_talent_link_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["TalentLinkOut"]
-        }
-      }
-    }
-  }
-  save_link_talent_link_put: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["TalentLinkIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["TalentLinkOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
   get_rating_sessions__session_id__questions__question_id__rating_get: {
     parameters: {
       query?: never
@@ -1946,16 +1840,18 @@ export interface operations {
       }
     }
   }
-  talent_suggestions_internal_suggestions_post: {
+  rescore_question_internal_questions__question_id__rescore_post: {
     parameters: {
       query?: never
       header?: never
-      path?: never
+      path: {
+        question_id: string
+      }
       cookie?: never
     }
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SuggestionsIn"]
+        "application/json": components["schemas"]["RescoreIn"]
       }
     }
     responses: {
@@ -1965,7 +1861,9 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["SuggestedTalent"][]
+          "application/json": {
+            [key: string]: unknown
+          }
         }
       }
       /** @description Validation Error */

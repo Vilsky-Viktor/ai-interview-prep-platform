@@ -44,7 +44,7 @@
     "title": "Giriş yap",
     "continueWith": "<name>{provider}</name> ile devam et",
     "link": "Bu e-postanın zaten bir prepza hesabı var. Daha önce giriş yaptığınız yolla devam edin; {provider} bu hesaba bağlanacak.",
-    "consent": "Giriş yaparak <terms>Koşulları</terms> ve <privacy>Gizlilik politikasını</privacy> kabul etmiş olursunuz.",
+    "consent": "Giriş yaparak 16 yaşında veya daha büyük olduğunuzu onaylar, <terms>Koşulları</terms> ve <privacy>Gizlilik politikasını</privacy> kabul etmiş olursunuz.",
     "failed": "Giriş yapılamadı. Lütfen tekrar deneyin.",
     "verify": "E-postanızı doğrulamanız için bir bağlantı gönderdik. Bağlantıyı açın, ardından mülakatlara girmek için yeniden giriş yapın."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Herkesle mülakat yapın\nGerçek yeteneği işe alın",
-    "text": "İş tanımınızdan hazırlanan süreli mülakatlar. Her adaya özel sorular ve yapay zekâya sormaya zaman yok. Aday başına $1'dan başlar."
+    "text": "İş tanımınızdan hazırlanan süreli mülakatlar. Her adaya özel sorular ve her soruda bir süre; cevap aramaya pek zaman kalmaz. Aday başına $1'dan başlar."
   },
   "start": {
     "placeholder": "Bir iş tanımı yapıştırın ya da pozisyonu ve adayın bilmesi gerekenleri anlatın",
@@ -145,8 +145,8 @@
     "use": "Şablonu kullan",
     "using": "Başlatılıyor…",
     "useFailed": "Bu şablondan mülakat başlatılamadı. Lütfen tekrar deneyin.",
-    "warningTitle": "Şablonlar prepza'yı denemek içindir.",
-    "warning": "Yetenekler bunlarla pratik yapar, bu yüzden adaylar soruları zaten biliyor olabilir. Gerçek işe alım için iş tanımınızdan bir mülakat oluşturun.",
+    "warningTitle": "Şablonlar yaygın roller için hazırdır.",
+    "warning": "Daha iyi bir uyum için iş tanımınızdan bir mülakat oluşturun.",
     "text": "Role göre hazır mülakatlar. Mülakatınıza başlamak için birini seçin; sonradan değiştirebilirsiniz."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, one {# e-posta} other {# e-posta}} şimdilik e-posta sınırınızı aşıyor. Bir saat sonra tekrar deneyin.",
       "no_credits": "{count, plural, one {# aday davet edilmedi} other {# aday davet edilmedi}}: krediniz bitti. Onları davet etmek için yükleme yapın.",
       "failed": "{count, plural, one {# davet} other {# davet}} gönderilemedi. Tekrar deneyin."
-    },
-    "talents": "Önerilen yetenekler"
+    }
   },
   "invite": {
     "signIn": "Bu mülakata girmek için davetteki e-postayla giriş yapın.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Soru başına süre:",
     "secondsUnit": "sn",
     "pickOne": "Her soruda dört seçenekten birini seçin.",
-    "noChange": "Verilen bir cevap değiştirilemez.",
-    "timeRunsOut": "Bir sorunun süresi dolduğunda yanlış sayılır ve sonraki açılır. Sayfadan ayrılsanız da süre işlemeye devam eder.",
+    "changePick": "“Sonraki soru”ya basana kadar seçiminizi değiştirebilirsiniz.",
+    "timeRunsOut": "Bir sorunun süresi dolduğunda seçiminiz sayılır ve sonraki açılır; seçim yoksa yanlış sayılır. Sayfadan ayrılsanız da süre işlemeye devam eder.",
     "unanswered": "Cevaplanmayan sorular yanlış sayılır.",
     "saved": "İlerlemeniz kaydedilir: devam etmek için bu bağlantıyı yeniden kullanın.",
     "extraTime": "Örneğin bir engel nedeniyle daha fazla süreye mi ihtiyacınız var? Başlamadan önce {company} ekibinden isteyin.",
@@ -465,7 +464,14 @@
     "joined": "Katıldı",
     "invited": "Davet edildi",
     "copy": "Kopyala",
-    "inviteTitle": "Şirket daveti"
+    "inviteTitle": "Şirket daveti",
+    "remove": "Çıkar",
+    "removed": "{email} çıkarıldı",
+    "removeFailed": "Çıkarılamadı.",
+    "removeTitle": "Şirketten çıkarılsın mı?",
+    "removeText": "{email} şirkete erişimini kaybeder. Otomatik yüklemeler bu kişinin kartından ödeniyorsa durur. Daha sonra yeniden davet edebilirsiniz.",
+    "removeInviteText": "{email} adresine gönderilen davet bağlantısı artık çalışmaz. Daha sonra yeniden davet edebilirsiniz.",
+    "removeConfirm": "Çıkar"
   },
   "scorecard": {
     "timeOut": "Süre doldu",
@@ -656,18 +662,6 @@
         "verified": "Ekibinizin iş e-postasıyla doğrulanır"
       }
     },
-    "talent": {
-      "title": "Yetenek önerileri alın",
-      "text": "Ücretsiz pratik mülakatlarımızda en yüksek puanı alanlar, rolünüz için önerilir. Ücretsiz.",
-      "suggested": "Backend geliştirici için önerilenler",
-      "score": "Puan",
-      "points": {
-        "free": "Sizin ve yetenekler için ücretsiz",
-        "practice": "Süreli mülakatlarla puanlanır",
-        "first": "Yalnızca ilk denemeleri sayılır",
-        "link": "Önerilmeyi kendileri seçer"
-      }
-    },
     "languages": {
       "title": "Her rol, her dil",
       "text": "prepza {count} dilde çalışır. İş tanımını bir dilde yapıştırın, adaylarla başka bir dilde mülakat yapın."
@@ -719,7 +713,7 @@
       "title": "Neden varız",
       "problem": "İşe alım çoğu zaman bir özgeçmişe ve iyi geçen bir sohbete dayanır; ikisi de yanıltabilir. İşe yarayan değerlendirme araçları ise yıllık planlar ve kullanıcı başı ücretlerle büyük şirketlere göre fiyatlanır, bu yüzden çoğu ekip onlarsız idare eder.",
       "approach": "prepza, bir iş tanımını dakikalar içinde her rol için süreli bir mülakata dönüştürür. Her aday kendi sorularını alır, işi kimin bildiğini ve nedenini görürsünüz ve yalnızca mülakata gerçekten giren adaylar için ödersiniz.",
-      "practice": "Mülakata hazırlanmanın da herkes için ücretsiz olmasını istiyoruz. Herkes bir rol için pratik mülakatlarımıza girebilir, notunu ve tüm doğru cevapları görebilir ve hiçbir ücret ödemeden tekrar pratik yapabilir. Başarılı olanlar, benzer bir rol için işe alım yapan şirketlere önerilmeyi seçebilir."
+      "practice": "Mülakata hazırlanmanın da herkes için ücretsiz olmasını istiyoruz. Herkes bir rol için pratik mülakatlarımıza girebilir, notunu ve tüm doğru cevapları görebilir ve hiçbir ücret ödemeden tekrar pratik yapabilir."
     },
     "founder": {
       "quote": "İyi işe alım, büyük bütçeli büyük şirketlerin ayrıcalığı olmamalı. prepza'yı, her ekip bir iş tanımını dakikalar içinde adil bir mülakata dönüştürebilsin, işi gerçekten kimin bildiğini görebilsin ve yalnızca mülakata giren adaylar için ödesin diye geliştirdim. Umarım doğru kişileri daha hızlı bulmanıza yardımcı olur.",
@@ -782,27 +776,10 @@
     "gradeLabel": "Not",
     "questions": "{count, plural, one {# soru} other {# soru}}",
     "progressLabel": "İlerleme",
-    "answeredLabel": "cevaplanan soru"
-  },
-  "suggest": {
-    "title": "Şirketlere önerilin",
-    "consent": "İsteğe bağlı. Benzer roller için işe alım yapan şirketler adınızı, LinkedIn'inizi ve ilk deneme puanınızı görebilir. Bunu istediğiniz zaman ayarlardan değiştirebilir veya geri çekebilirsiniz.",
-    "link": "LinkedIn bağlantısı",
-    "share": "Paylaş",
-    "saved": "Artık şirketlere önerilebilirsiniz.",
-    "withdraw": "Geri çek",
-    "withdrawn": "Artık şirketlere önerilmeyeceksiniz.",
-    "invalid": "LinkedIn profil bağlantınızı kullanın, örneğin https://www.linkedin.com/in/your-name",
-    "failed": "Kaydedilemedi. Lütfen tekrar deneyin.",
-    "shareAndStart": "Kabul et ve başla",
-    "startWithout": "Reddet ve başla"
-  },
-  "talents": {
-    "about": "Buna benzer bir rol için mülakat pratiğinde başarılı olan ve önerilmeyi kabul eden yetenekler.",
-    "empty": "Henüz önerilen yetenek yok.",
-    "score": "Puan",
-    "hide": "Gizle",
-    "hideFailed": "Yetenek gizlenemedi. Lütfen tekrar deneyin."
+    "answeredLabel": "cevaplanan soru",
+    "hireTitle": "Bu rol için işe alım mı yapıyorsunuz?",
+    "hireText": "Bu mülakatı adaylarınızla kullanın ya da iş tanımınız için yeni bir mülakat oluşturun.",
+    "hireButton": "Mülakat oluştur"
   },
   "verify": {
     "verify": "Doğrula",

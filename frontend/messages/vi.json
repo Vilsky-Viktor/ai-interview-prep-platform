@@ -44,7 +44,7 @@
     "title": "Đăng nhập",
     "continueWith": "Tiếp tục với <name>{provider}</name>",
     "link": "Email này đã có tài khoản prepza. Hãy tiếp tục theo cách bạn đã đăng nhập trước đây, và {provider} sẽ được liên kết với tài khoản đó.",
-    "consent": "Khi đăng nhập, bạn đồng ý với <terms>Điều khoản</terms> và <privacy>Chính sách quyền riêng tư</privacy>.",
+    "consent": "Khi đăng nhập, bạn xác nhận mình từ 16 tuổi trở lên và đồng ý với <terms>Điều khoản</terms> và <privacy>Chính sách quyền riêng tư</privacy>.",
     "failed": "Đăng nhập không thành công. Vui lòng thử lại.",
     "verify": "Chúng tôi đã gửi cho bạn một liên kết để xác minh email. Hãy mở liên kết, rồi đăng nhập lại để tham gia phỏng vấn."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Phỏng vấn mọi người\nTuyển đúng nhân tài",
-    "text": "Phỏng vấn có tính giờ, tạo từ mô tả công việc của bạn. Câu hỏi riêng cho mỗi ứng viên, và không có thời gian để hỏi AI. Từ 1 $ mỗi ứng viên."
+    "text": "Phỏng vấn có tính giờ, tạo từ mô tả công việc của bạn. Câu hỏi riêng cho mỗi ứng viên và giới hạn thời gian cho từng câu, nên có rất ít thời gian để tra cứu đáp án. Từ 1 $ mỗi ứng viên."
   },
   "start": {
     "placeholder": "Dán mô tả công việc, hoặc mô tả vị trí và những gì ứng viên cần biết",
@@ -145,8 +145,8 @@
     "use": "Dùng mẫu",
     "using": "Đang bắt đầu…",
     "useFailed": "Không thể tạo buổi phỏng vấn từ mẫu này. Vui lòng thử lại.",
-    "warningTitle": "Mẫu dùng để dùng thử prepza.",
-    "warning": "Nhân tài luyện tập trên các mẫu, nên ứng viên có thể đã biết trước câu hỏi. Để tuyển dụng thật, hãy tạo buổi phỏng vấn từ mô tả công việc của bạn.",
+    "warningTitle": "Mẫu được soạn sẵn cho các vị trí phổ biến.",
+    "warning": "Để phù hợp hơn, hãy tạo buổi phỏng vấn từ mô tả công việc của bạn.",
     "text": "Buổi phỏng vấn có sẵn theo vị trí. Chọn một mẫu để bắt đầu buổi phỏng vấn của bạn; bạn có thể thay đổi sau."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, other {# email}} vượt giới hạn email hiện tại của bạn. Hãy thử lại sau một giờ.",
       "no_credits": "{count, plural, other {# ứng viên chưa được mời}}: hết tín dụng. Hãy nạp thêm để mời họ.",
       "failed": "{count, plural, other {# lời mời}} không gửi được. Hãy thử lại."
-    },
-    "talents": "Nhân tài được gợi ý"
+    }
   },
   "invite": {
     "signIn": "Đăng nhập bằng email được mời để làm bài phỏng vấn này.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Thời gian mỗi câu:",
     "secondsUnit": "giây",
     "pickOne": "Chọn một trong bốn phương án ở mỗi câu.",
-    "noChange": "Không thể thay đổi câu trả lời sau khi đã chọn.",
-    "timeRunsOut": "Khi hết thời gian của một câu, câu đó tính là sai và câu tiếp theo mở ra. Đồng hồ vẫn chạy nếu bạn rời đi.",
+    "changePick": "Bạn có thể đổi lựa chọn cho đến khi nhấn Câu tiếp theo.",
+    "timeRunsOut": "Khi hết thời gian của một câu, lựa chọn của bạn được tính và câu tiếp theo mở ra; nếu chưa chọn, câu đó tính là sai. Đồng hồ vẫn chạy nếu bạn rời đi.",
     "unanswered": "Câu chưa trả lời được tính là sai.",
     "saved": "Tiến độ được lưu: mở lại liên kết này để tiếp tục.",
     "extraTime": "Bạn cần thêm thời gian, ví dụ vì khuyết tật? Hãy hỏi {company} trước khi bắt đầu.",
@@ -465,7 +464,14 @@
     "joined": "Đã tham gia",
     "invited": "Đã mời",
     "copy": "Sao chép",
-    "inviteTitle": "Lời mời vào công ty"
+    "inviteTitle": "Lời mời vào công ty",
+    "remove": "Xóa",
+    "removed": "Đã xóa {email}",
+    "removeFailed": "Không thể xóa người này.",
+    "removeTitle": "Xóa khỏi công ty?",
+    "removeText": "{email} sẽ mất quyền truy cập vào công ty. Nếu thẻ của họ đang dùng để tự động nạp tiền, việc nạp tự động sẽ dừng. Bạn có thể mời lại họ sau.",
+    "removeInviteText": "Liên kết mời đã gửi tới {email} sẽ không còn dùng được. Bạn có thể mời lại họ sau.",
+    "removeConfirm": "Xóa"
   },
   "scorecard": {
     "timeOut": "Hết giờ",
@@ -648,18 +654,6 @@
         "verified": "Xác minh bằng email công việc của nhóm bạn"
       }
     },
-    "talent": {
-      "title": "Nhận gợi ý nhân tài",
-      "text": "Những người đạt điểm cao nhất trong các buổi phỏng vấn luyện tập miễn phí của chúng tôi, được gợi ý cho vị trí của bạn. Miễn phí.",
-      "suggested": "Gợi ý cho Lập trình viên backend",
-      "score": "Điểm",
-      "points": {
-        "free": "Miễn phí cho bạn và cho nhân tài",
-        "practice": "Chấm điểm qua phỏng vấn có tính giờ",
-        "first": "Chỉ tính lần thử đầu tiên",
-        "link": "Họ tự chọn được gợi ý"
-      }
-    },
     "languages": {
       "title": "Mọi vị trí, mọi ngôn ngữ",
       "text": "prepza hoạt động bằng {count} ngôn ngữ. Dán mô tả công việc bằng một ngôn ngữ và phỏng vấn ứng viên bằng ngôn ngữ khác."
@@ -711,7 +705,7 @@
       "title": "Vì sao chúng tôi tồn tại",
       "problem": "Tuyển dụng thường dựa vào CV và một cuộc trò chuyện tốt, và cả hai đều có thể gây hiểu lầm. Các công cụ đánh giá hữu ích lại có giá dành cho công ty lớn, với gói năm và phí theo người dùng, nên phần lớn các nhóm đành bỏ qua.",
       "approach": "prepza biến mô tả công việc thành buổi phỏng vấn có tính giờ chỉ trong vài phút, cho mọi vị trí. Mỗi ứng viên nhận bộ câu hỏi riêng, bạn thấy ai thạo việc và vì sao, và bạn chỉ trả tiền cho những ứng viên thật sự tham gia.",
-      "practice": "Chúng tôi cũng muốn việc chuẩn bị phỏng vấn là miễn phí cho tất cả mọi người. Ai cũng có thể làm các buổi phỏng vấn luyện tập của chúng tôi cho một vị trí, xem điểm và mọi đáp án đúng, rồi luyện tập lại, hoàn toàn miễn phí. Những người làm tốt có thể chọn được gợi ý cho các công ty đang tuyển vị trí tương tự."
+      "practice": "Chúng tôi cũng muốn việc chuẩn bị phỏng vấn là miễn phí cho tất cả mọi người. Ai cũng có thể làm các buổi phỏng vấn luyện tập của chúng tôi cho một vị trí, xem điểm và mọi đáp án đúng, rồi luyện tập lại, hoàn toàn miễn phí."
     },
     "founder": {
       "quote": "Tuyển dụng tốt không nên là đặc quyền của các công ty lớn với ngân sách lớn. Tôi xây dựng prepza để bất kỳ nhóm nào cũng có thể biến mô tả công việc thành một buổi phỏng vấn công bằng trong vài phút, thấy ai thật sự thạo việc và chỉ trả tiền cho những ứng viên tham gia. Mong rằng nó giúp bạn tìm được đúng người nhanh hơn.",
@@ -774,27 +768,10 @@
     "gradeLabel": "Điểm",
     "questions": "{count, plural, other {# câu hỏi}}",
     "progressLabel": "Tiến độ",
-    "answeredLabel": "câu đã trả lời"
-  },
-  "suggest": {
-    "title": "Được gợi ý cho các công ty",
-    "consent": "Không bắt buộc. Các công ty tuyển vị trí tương tự có thể thấy tên, LinkedIn và điểm lượt đầu của bạn. Bạn có thể thay đổi hoặc rút lại bất cứ lúc nào trong cài đặt.",
-    "link": "Liên kết LinkedIn",
-    "share": "Chia sẻ",
-    "saved": "Giờ bạn có thể được gợi ý cho các công ty.",
-    "withdraw": "Rút lại",
-    "withdrawn": "Bạn sẽ không được gợi ý cho các công ty nữa.",
-    "invalid": "Hãy dùng liên kết hồ sơ LinkedIn, ví dụ https://www.linkedin.com/in/your-name",
-    "failed": "Không thể lưu. Vui lòng thử lại.",
-    "shareAndStart": "Đồng ý và bắt đầu",
-    "startWithout": "Không đồng ý và bắt đầu"
-  },
-  "talents": {
-    "about": "Những nhân tài đã làm tốt khi luyện tập phỏng vấn cho vị trí tương tự và đồng ý được gợi ý.",
-    "empty": "Chưa có nhân tài được gợi ý.",
-    "score": "Điểm",
-    "hide": "Ẩn",
-    "hideFailed": "Không thể ẩn nhân tài này. Vui lòng thử lại."
+    "answeredLabel": "câu đã trả lời",
+    "hireTitle": "Bạn đang tuyển vị trí này?",
+    "hireText": "Dùng buổi phỏng vấn này với ứng viên của bạn, hoặc tạo một buổi phỏng vấn từ mô tả công việc của bạn.",
+    "hireButton": "Tạo buổi phỏng vấn"
   },
   "verify": {
     "verify": "Xác minh",

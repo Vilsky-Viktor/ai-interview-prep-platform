@@ -34,7 +34,7 @@ TEXTS = {
         "button": "Buksan ang imbitasyon",
     },
     "report": {
-        "subject": "Nag-share si {sender} ng report ng kandidato: {candidate}",
+        "subject": "Report ng kandidato: {candidate}",
         "preheader": "Sinagutan ni {candidate} ang “{title}” sa {company}. Naka-attach ang report.",
         "heading": "Report ng kandidato",
         "lines": [
@@ -51,7 +51,7 @@ TEXTS = {
         "balewalain.",
     },
     "candidates": {
-        "subject": "Nag-share si {sender} ng report ng lahat ng kandidato: {title}",
+        "subject": "Report ng lahat ng kandidato: {title}",
         "preheader": "Lahat ng kandidato para sa “{title}” sa {company}. Naka-attach ang report.",
         "heading": "Report ng mga kandidato",
         "lines": [

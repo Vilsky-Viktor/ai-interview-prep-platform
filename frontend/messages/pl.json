@@ -44,7 +44,7 @@
     "title": "Zaloguj się",
     "continueWith": "Kontynuuj przez <name>{provider}</name>",
     "link": "Ten adres e-mail ma już konto w prepza. Kontynuuj tak, jak logowałeś się wcześniej, a {provider} zostanie z nim połączony.",
-    "consent": "Logując się, akceptujesz <terms>Regulamin</terms> i <privacy>Politykę prywatności</privacy>.",
+    "consent": "Logując się, potwierdzasz, że masz co najmniej 16 lat, i akceptujesz <terms>Regulamin</terms> i <privacy>Politykę prywatności</privacy>.",
     "failed": "Nie udało się zalogować. Spróbuj ponownie.",
     "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, a potem zaloguj się ponownie, aby przechodzić rozmowy."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Rozmawiaj z każdym\nZatrudniaj prawdziwe talenty",
-    "text": "Rozmowy na czas tworzone z Twojego opisu stanowiska. Unikalne pytania dla każdego kandydata i brak czasu, by zapytać AI. Od $1 za kandydata."
+    "text": "Rozmowy na czas tworzone z Twojego opisu stanowiska. Unikalne pytania dla każdego kandydata i limit czasu na każde z nich, więc zostaje niewiele czasu na szukanie odpowiedzi. Od $1 za kandydata."
   },
   "start": {
     "placeholder": "Wklej opis stanowiska albo opisz rolę i to, co kandydat powinien wiedzieć",
@@ -145,8 +145,8 @@
     "use": "Użyj szablonu",
     "using": "Uruchamianie…",
     "useFailed": "Nie udało się rozpocząć rozmowy z tego szablonu. Spróbuj ponownie.",
-    "warningTitle": "Szablony służą do wypróbowania prepza.",
-    "warning": "Talenty ćwiczą na nich, więc kandydaci mogą już znać pytania. Do prawdziwej rekrutacji utwórz rozmowę z własnego opisu stanowiska.",
+    "warningTitle": "Szablony są gotowe dla popularnych stanowisk.",
+    "warning": "Aby lepiej dopasować, utwórz rozmowę z opisu stanowiska.",
     "text": "Gotowe rozmowy według ról. Wybierz jedną, od której zaczniesz swoją rozmowę; możesz ją potem zmienić."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, one {# adres e-mail przekracza} few {# adresy e-mail przekraczają} many {# adresów e-mail przekracza} other {# adresu e-mail przekracza}} na razie Twój limit e-maili. Spróbuj ponownie za godzinę.",
       "no_credits": "{count, plural, one {# kandydat nie został zaproszony} few {# kandydatów nie zostało zaproszonych} many {# kandydatów nie zostało zaproszonych} other {# kandydata nie zostało zaproszone}}: brak kredytów. Doładuj, aby ich zaprosić.",
       "failed": "{count, plural, one {# zaproszenia nie udało się wysłać} few {# zaproszeń nie udało się wysłać} many {# zaproszeń nie udało się wysłać} other {# zaproszenia nie udało się wysłać}}. Spróbuj ponownie."
-    },
-    "talents": "Proponowane talenty"
+    }
   },
   "invite": {
     "signIn": "Zaloguj się adresem z zaproszenia, aby wziąć udział w tej rozmowie.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Czas na pytanie:",
     "secondsUnit": "s",
     "pickOne": "W każdym pytaniu wybierz jedną z czterech odpowiedzi.",
-    "noChange": "Udzielonej odpowiedzi nie można zmienić.",
-    "timeRunsOut": "Gdy czas na pytanie minie, liczy się ono jako błędne i otwiera się następne. Czas płynie, nawet jeśli wyjdziesz.",
+    "changePick": "Możesz zmienić wybór, dopóki nie naciśniesz „Następne pytanie”.",
+    "timeRunsOut": "Gdy czas na pytanie minie, liczy się twój wybór i otwiera się następne; bez wyboru pytanie liczy się jako błędne. Czas płynie, nawet jeśli wyjdziesz.",
     "unanswered": "Pytania bez odpowiedzi liczą się jako błędne.",
     "saved": "Postęp jest zapisywany: otwórz ten link ponownie, aby kontynuować.",
     "extraTime": "Potrzebujesz więcej czasu, np. z powodu niepełnosprawności? Przed startem zapytaj, czy {company} może go przyznać.",
@@ -465,7 +464,14 @@
     "joined": "Dołączył(a)",
     "invited": "Zaproszono",
     "copy": "Kopiuj",
-    "inviteTitle": "Zaproszenie do firmy"
+    "inviteTitle": "Zaproszenie do firmy",
+    "remove": "Usuń",
+    "removed": "Usunięto {email}",
+    "removeFailed": "Nie udało się usunąć.",
+    "removeTitle": "Usunąć z firmy?",
+    "removeText": "{email} straci dostęp do firmy. Jeśli z karty tej osoby opłacane są automatyczne doładowania, zostaną wstrzymane. Możesz zaprosić tę osobę ponownie później.",
+    "removeInviteText": "Link z zaproszeniem wysłany na {email} przestanie działać. Możesz zaprosić tę osobę ponownie później.",
+    "removeConfirm": "Usuń"
   },
   "scorecard": {
     "timeOut": "Koniec czasu",
@@ -652,18 +658,6 @@
         "verified": "Zweryfikowana służbowym e-mailem Twojego zespołu"
       }
     },
-    "talent": {
-      "title": "Otrzymuj propozycje talentów",
-      "text": "Najlepsi z naszych darmowych próbnych rozmów, proponowani do Twojej roli. Za darmo.",
-      "suggested": "Proponowani na Backend developer",
-      "score": "Wynik",
-      "points": {
-        "free": "Za darmo dla Ciebie i dla talentów",
-        "practice": "Oceniani w rozmowach na czas",
-        "first": "Liczy się tylko pierwsza próba",
-        "link": "Sami decydują, czy chcą być proponowani"
-      }
-    },
     "languages": {
       "title": "Dowolna rola, dowolny język",
       "text": "prepza działa w {count} językach. Wklej opis stanowiska w jednym języku i rozmawiaj z kandydatami w innym."
@@ -715,7 +709,7 @@
       "title": "Po co istniejemy",
       "problem": "Rekrutacja często opiera się na CV i dobrej rozmowie, a jedno i drugie może zmylić. Narzędzia do oceny, które pomagają, są wycenione dla dużych firm, z planami rocznymi i opłatami za użytkownika, więc większość zespołów się bez nich obywa.",
       "approach": "prepza w kilka minut zamienia opis stanowiska w rozmowę na czas, dla dowolnej roli. Każdy kandydat dostaje własne pytania, widzisz, kto zna się na rzeczy i dlaczego, a płacisz tylko za kandydatów, którzy faktycznie ją przejdą.",
-      "practice": "Chcemy też, by przygotowanie do rozmowy kwalifikacyjnej było darmowe dla wszystkich. Każdy może przejść nasze próbne rozmowy dla danej roli, zobaczyć swoją ocenę i wszystkie poprawne odpowiedzi oraz ćwiczyć ponownie, bez żadnych kosztów. Ci, którym dobrze pójdzie, mogą zgodzić się, by proponowano ich firmom rekrutującym na podobne stanowisko."
+      "practice": "Chcemy też, by przygotowanie do rozmowy kwalifikacyjnej było darmowe dla wszystkich. Każdy może przejść nasze próbne rozmowy dla danej roli, zobaczyć swoją ocenę i wszystkie poprawne odpowiedzi oraz ćwiczyć ponownie, bez żadnych kosztów."
     },
     "founder": {
       "quote": "Dobra rekrutacja nie powinna być przywilejem dużych firm z dużymi budżetami. Zbudowałem prepza, aby każdy zespół mógł w kilka minut zamienić opis stanowiska w uczciwą rozmowę, zobaczyć, kto naprawdę zna się na rzeczy, i płacić tylko za kandydatów, którzy ją przejdą. Mam nadzieję, że pomoże Ci szybciej znaleźć właściwych ludzi.",
@@ -778,27 +772,10 @@
     "gradeLabel": "Ocena",
     "questions": "{count, plural, one {# pytanie} few {# pytania} many {# pytań} other {# pytania}}",
     "progressLabel": "Postęp",
-    "answeredLabel": "pytań z odpowiedzią"
-  },
-  "suggest": {
-    "title": "Bądź proponowany firmom",
-    "consent": "Opcjonalnie. Firmy rekrutujące na podobne role mogą zobaczyć Twoje imię i nazwisko, LinkedIn i wynik z pierwszej rundy. Zmień lub wycofaj zgodę w każdej chwili w ustawieniach.",
-    "link": "Link do LinkedIn",
-    "share": "Udostępnij",
-    "saved": "Teraz możesz być proponowany firmom.",
-    "withdraw": "Wycofaj",
-    "withdrawn": "Nie będziesz już proponowany firmom.",
-    "invalid": "Użyj linku do profilu LinkedIn, np. https://www.linkedin.com/in/your-name",
-    "failed": "Nie udało się zapisać. Spróbuj ponownie.",
-    "shareAndStart": "Zgadzam się i zaczynam",
-    "startWithout": "Nie zgadzam się i zaczynam"
-  },
-  "talents": {
-    "about": "Talenty, które dobrze wypadły, ćwicząc rozmowę do podobnej roli, i zgodziły się być proponowane.",
-    "empty": "Nie ma jeszcze proponowanych talentów.",
-    "score": "Wynik",
-    "hide": "Ukryj",
-    "hideFailed": "Nie udało się ukryć talentu. Spróbuj ponownie."
+    "answeredLabel": "pytań z odpowiedzią",
+    "hireTitle": "Rekrutujesz na to stanowisko?",
+    "hireText": "Użyj tej rozmowy ze swoimi kandydatami albo wygeneruj własną z opisu stanowiska.",
+    "hireButton": "Utwórz rozmowę"
   },
   "verify": {
     "verify": "Zweryfikuj",

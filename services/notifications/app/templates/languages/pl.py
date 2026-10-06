@@ -31,7 +31,7 @@ TEXTS = {
         "button": "Otwórz zaproszenie",
     },
     "report": {
-        "subject": "{sender} udostępnił raport kandydata: {candidate}",
+        "subject": "Raport kandydata: {candidate}",
         "preheader": "{candidate} rozwiązał „{title}” w {company}. Raport jest w załączniku.",
         "heading": "Raport kandydata",
         "lines": [
@@ -47,7 +47,7 @@ TEXTS = {
         "adresowi raport kandydata w prepza. Jeśli się jej nie spodziewasz, możesz ją zignorować.",
     },
     "candidates": {
-        "subject": "{sender} udostępnił raport wszystkich kandydatów: {title}",
+        "subject": "Raport wszystkich kandydatów: {title}",
         "preheader": "Wszyscy kandydaci do „{title}” w {company}. Raport jest w załączniku.",
         "heading": "Raport kandydatów",
         "lines": [

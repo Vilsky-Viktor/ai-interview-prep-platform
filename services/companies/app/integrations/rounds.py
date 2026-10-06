@@ -76,16 +76,3 @@ async def delete_user(user_id: str) -> None:
     )
 
     response.raise_for_status()
-
-
-async def talent_suggestions(template_ids: list[UUID]) -> list[dict]:
-    """Talents who agreed to be suggested and did well in their first round on these
-    templates: {"name", "url", "grade", "template_id"}, best first."""
-    response = await http.get_client().post(
-        f"{settings.rounds_url}/internal/suggestions",
-        json={"template_ids": [str(template_id) for template_id in template_ids]},
-        headers={"Authorization": f"Bearer {service_token('rounds')}"},
-    )
-    response.raise_for_status()
-
-    return response.json()

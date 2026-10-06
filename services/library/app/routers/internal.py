@@ -86,6 +86,7 @@ async def get_set(set_id: UUID, caller: ServiceCaller) -> SetOut:
         owner_id=question_set.owner_id,
         title=question_set.title,
         level=question_set.level,
+        language=question_set.language,
         topics=[
             TopicOut(
                 id=topic.id,

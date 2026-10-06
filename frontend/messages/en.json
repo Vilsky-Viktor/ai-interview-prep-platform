@@ -44,7 +44,7 @@
     "title": "Sign in",
     "continueWith": "Continue with <name>{provider}</name>",
     "link": "This email already has a prepza account. Continue the way you signed in before, and {provider} will be linked to it.",
-    "consent": "By signing in, you agree to the <terms>Terms</terms> and the <privacy>Privacy policy</privacy>.",
+    "consent": "By signing in, you confirm you're 16 or older and agree to the <terms>Terms</terms> and the <privacy>Privacy policy</privacy>.",
     "failed": "Sign-in failed. Please try again.",
     "verify": "We sent you a link to verify your email. Open it, then sign in again to take interviews."
   },
@@ -78,7 +78,7 @@
   },
   "home": {
     "title": "Interview everyone\nHire real talent",
-    "text": "Timed interviews made from your job description. Unique questions for every candidate, and no time to ask an AI. From $1 per candidate."
+    "text": "Timed interviews made from your job description. Unique questions for every candidate and a timer on each, so there's little time to look answers up. From $1 per candidate."
   },
   "start": {
     "placeholder": "Paste a job description, or describe the role and what a candidate should know",
@@ -145,8 +145,8 @@
     "use": "Use template",
     "using": "Starting…",
     "useFailed": "Couldn't start an interview from this template. Please try again.",
-    "warningTitle": "Templates are for trying prepza.",
-    "warning": "Talents practice on them, so candidates may already know the questions. For real hiring, create an interview from your job description.",
+    "warningTitle": "Templates are ready-made for common roles.",
+    "warning": "For a closer fit, create an interview from your job description.",
     "text": "Ready-made interviews by role. Pick one to start your interview from; you can change it afterwards."
   },
   "billing": {
@@ -437,8 +437,7 @@
       "limit": "{count, plural, one {# email is} other {# emails are}} over your email limit for now. Try again in an hour.",
       "no_credits": "{count, plural, one {# candidate wasn't invited} other {# candidates weren't invited}}: out of credits. Top up to invite them.",
       "failed": "{count, plural, one {# invite} other {# invites}} couldn't be sent. Try again."
-    },
-    "talents": "Suggested talents"
+    }
   },
   "invite": {
     "signIn": "Sign in with the invitation email to take this interview.",
@@ -447,8 +446,8 @@
     "timePerQuestion": "Time per question:",
     "secondsUnit": "s",
     "pickOne": "Pick one of four options for each question.",
-    "noChange": "An answer can't be changed once given.",
-    "timeRunsOut": "When a question's time runs out, it counts as wrong and the next one opens. The clock keeps running if you leave.",
+    "changePick": "You can change your pick until you press Next question.",
+    "timeRunsOut": "When a question's time runs out, your pick counts and the next one opens; with no pick, it counts as wrong. The clock keeps running if you leave.",
     "unanswered": "Unanswered questions count as wrong.",
     "saved": "Progress is saved: use this link again to continue.",
     "extraTime": "Need more time, for example because of a disability? Ask {company} before you start.",
@@ -465,7 +464,14 @@
     "joined": "Joined",
     "invited": "Invited",
     "copy": "Copy",
-    "inviteTitle": "Company invite"
+    "inviteTitle": "Company invite",
+    "remove": "Remove",
+    "removed": "{email} removed",
+    "removeFailed": "Couldn't remove them.",
+    "removeTitle": "Remove from the company?",
+    "removeText": "{email} loses access to the company. If their card pays for automatic top-ups, those stop. You can invite them again later.",
+    "removeInviteText": "The invite link sent to {email} stops working. You can invite them again later.",
+    "removeConfirm": "Remove"
   },
   "scorecard": {
     "timeOut": "Time out",
@@ -648,18 +654,6 @@
         "verified": "Verified by your team's work email"
       }
     },
-    "talent": {
-      "title": "Get talent suggestions",
-      "text": "Top scorers from our free practice interviews, suggested for your role. Free.",
-      "suggested": "Suggested for Backend developer",
-      "score": "Score",
-      "points": {
-        "free": "Free for you and for talent",
-        "practice": "Scored on timed interviews",
-        "first": "Only their first try counts",
-        "link": "They choose to be suggested"
-      }
-    },
     "languages": {
       "title": "Any role, any language",
       "text": "prepza works in {count} languages. Paste a job description in one language and interview candidates in another."
@@ -711,7 +705,7 @@
       "title": "Why we exist",
       "problem": "Hiring often rests on a CV and a good conversation, and both can mislead. The assessment tools that help are priced for big companies, with annual plans and seat fees, so most teams go without.",
       "approach": "prepza turns a job description into a timed interview in minutes, for any role. Every candidate gets their own questions, you see who knows the job and why, and you pay only for candidates who actually take it.",
-      "practice": "We also want preparing for an interview to be free for everyone. Anyone can take our practice interviews for a role, see their grade and every right answer, and practise again, at no cost. Those who do well can choose to be suggested to companies hiring for a similar role."
+      "practice": "We also want preparing for an interview to be free for everyone. Anyone can take our practice interviews for a role, see their grade and every right answer, and practise again, at no cost."
     },
     "founder": {
       "quote": "Hiring well shouldn't be a privilege of big companies with big budgets. I built prepza so that any team can turn a job description into a fair interview in minutes, see who really knows the job, and pay only for the candidates who take it. I hope it helps you find the right people faster.",
@@ -774,27 +768,10 @@
     "gradeLabel": "Grade",
     "questions": "{count, plural, one {# question} other {# questions}}",
     "progressLabel": "Progress",
-    "answeredLabel": "questions answered"
-  },
-  "suggest": {
-    "title": "Get suggested to companies",
-    "consent": "Optional. Companies hiring for similar roles may see your name, LinkedIn and first-round score. Change or withdraw it any time in settings.",
-    "link": "LinkedIn link",
-    "share": "Share",
-    "saved": "You can now be suggested to companies.",
-    "withdraw": "Withdraw",
-    "withdrawn": "You won't be suggested to companies anymore.",
-    "invalid": "Use your LinkedIn profile link, like https://www.linkedin.com/in/your-name",
-    "failed": "Couldn't save. Please try again.",
-    "shareAndStart": "Agree & start",
-    "startWithout": "Disagree & start"
-  },
-  "talents": {
-    "about": "Talents who did well practising an interview for a role like this one, and agreed to be suggested.",
-    "empty": "No suggested talents yet.",
-    "score": "Score",
-    "hide": "Hide",
-    "hideFailed": "Couldn't hide the talent. Please try again."
+    "answeredLabel": "questions answered",
+    "hireTitle": "Hiring for this role?",
+    "hireText": "Use this interview with your candidates or generate one for your job description.",
+    "hireButton": "Create interview"
   },
   "verify": {
     "verify": "Verify",

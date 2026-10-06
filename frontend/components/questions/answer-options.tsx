@@ -31,11 +31,13 @@ export function AnswerOptions({
           {option.correct ? (
             <CheckIcon
               className="mt-0.5 size-4 shrink-0 text-green-600 dark:text-green-400"
+              role="img"
               aria-label={t("correct")}
             />
           ) : (
             <XIcon
               className="mt-0.5 size-4 shrink-0 text-red-600 dark:text-red-400"
+              role="img"
               aria-label={t("wrong")}
             />
           )}

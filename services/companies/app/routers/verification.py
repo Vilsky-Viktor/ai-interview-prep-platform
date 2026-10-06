@@ -31,7 +31,10 @@ async def set_website(company_id: UUID, body: WebsiteIn, user: CurrentUser) -> V
     if is_free_domain(domain):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, FREE_DOMAIN)
 
-    verified = user.email_verified and email_on_domain(user.email, domain)
+    # Re-saving the same website keeps its verification, whoever saves it.
+    verified = company.verified_domain == domain or (
+        user.email_verified and email_on_domain(user.email, domain)
+    )
     await companies.set_website(company.id, domain, verified)
 
     return VerificationOut(website_domain=domain, verified_domain=domain if verified else None)

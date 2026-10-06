@@ -2,20 +2,18 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
-from prepza_common.rate_limit import hit_emails
 
-from app.config.settings import settings
+from app.constants.audit import AuditAction
 from app.constants.invites import InviteStatus
 from app.helpers.candidates import by_grade, candidate_out
 from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
-from app.helpers.reports import is_report_pdf
 from app.integrations import rounds
-from app.integrations.redis import get_redis
 from app.schemas.reports import InterviewReportOut, ReportEmailIn
 from app.services import outbox as outbox_service
 from app.services.access import require_company
-from app.storage import interviews, invites, reports
+from app.services.report_emails import allow_report_email
+from app.storage import audit, interviews, invites, reports
 
 router = APIRouter(prefix="/interviews", tags=["reports"])
 
@@ -27,7 +25,8 @@ async def email_report(
     interview_id: UUID, invite_id: UUID, body: ReportEmailIn, user: CurrentUser
 ) -> None:
     """Emails the candidate's PDF report, made on their page, to someone such as a hiring
-    manager. A reply goes to the member who sent it. Counts towards the member's email limits."""
+    manager. A reply goes to the member who sent it. Counts towards the member's email limits
+    and the company's daily reports."""
     interview = await interviews.get(interview_id)
     invite = next(
         (item for item in (interview.invites if interview else []) if item.id == invite_id), None
@@ -38,18 +37,8 @@ async def email_report(
 
     company, _ = await require_company(user, interview.company_id)
 
-    if not is_report_pdf(body.pdf):
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "The report isn't a PDF")
-
     email = str(body.email).lower()
-    await hit_emails(
-        get_redis(),
-        user.uid,
-        f"report:{invite.id}:{email}",
-        settings.email_hourly_limit,
-        settings.email_daily_limit,
-        settings.email_recipient_daily_limit,
-    )
+    await allow_report_email(user, company, interview, body.pdf, f"report:{invite.id}:{email}")
     await reports.queue_email(
         {
             "email": email,
@@ -63,6 +52,7 @@ async def email_report(
             "pdf": body.pdf,
         }
     )
+    await audit.record(company.id, user.uid, AuditAction.REPORT_EMAILED, invite.id)
     await outbox_service.flush_quietly()
 
 
@@ -107,18 +97,8 @@ async def email_interview_report(
 
     company, _ = await require_company(user, interview.company_id)
 
-    if not is_report_pdf(body.pdf):
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "The report isn't a PDF")
-
     email = str(body.email).lower()
-    await hit_emails(
-        get_redis(),
-        user.uid,
-        f"report:{interview.id}:{email}",
-        settings.email_hourly_limit,
-        settings.email_daily_limit,
-        settings.email_recipient_daily_limit,
-    )
+    await allow_report_email(user, company, interview, body.pdf, f"report:{interview.id}:{email}")
     title = await interview_title(interview) or ""
     await reports.queue_email(
         {
@@ -133,4 +113,5 @@ async def email_interview_report(
             "pdf": body.pdf,
         }
     )
+    await audit.record(company.id, user.uid, AuditAction.REPORT_EMAILED, interview.id)
     await outbox_service.flush_quietly()

@@ -11,7 +11,6 @@ import { LanguagesSection } from "@/components/landing/languages"
 import { PricingSection } from "@/components/landing/pricing"
 import { QualitySection } from "@/components/landing/quality"
 import { ReportsSection } from "@/components/landing/reports"
-import { TalentPoolSection } from "@/components/landing/talent-pool"
 import { TryFirstSection } from "@/components/landing/try-first"
 import { StartTest } from "@/components/start-test"
 import { serverFetch } from "@/lib/server-api"
@@ -65,7 +64,6 @@ export default async function HomePage() {
       <QualitySection />
       <JobAdLinkSection />
       <BrandSection />
-      <TalentPoolSection />
       <LanguagesSection />
       <PricingSection />
       <Closing />

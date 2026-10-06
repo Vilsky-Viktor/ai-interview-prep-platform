@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Bisakah kandidat memakai AI atau mencari jawabannya?",
-        "answer": "Setiap kandidat mendapat soal acak sendiri dengan urutan sendiri, dengan batas waktu di tiap soal yang dijaga server kami, jadi tidak ada waktu untuk bertanya ke AI. Kartu skor juga menunjukkan saat kandidat keluar dari halaman, menyalin teks, atau menjawab terlalu cepat untuk sempat membaca soal.",
+        "answer": "Setiap kandidat mendapat soal acak sendiri dengan urutan sendiri, dengan batas waktu di tiap soal yang dijaga server kami, jadi hanya ada sedikit waktu untuk mencari jawaban atau bertanya ke AI. Kartu skor juga menunjukkan saat kandidat keluar dari halaman, menyalin teks, atau menjawab terlalu cepat untuk sempat membaca soal.",
     },
     {
         "key": "cost",
@@ -71,11 +71,6 @@ FAQ = [
         "key": "candidates",
         "question": "Apa yang dilihat kandidat?",
         "answer": "Nama dan logo perusahaanmu, apa yang bisa diharapkan sebelum mulai, lalu satu soal berbatas waktu setiap kalinya. Mereka tidak pernah melihat skornya atau apakah jawabannya benar.",
-    },
-    {
-        "key": "talent",
-        "question": "Apa itu saran talenta?",
-        "answer": "Orang-orang berlatih di wawancara latihan gratis prepza, dan mereka yang memilih untuk disarankan meninggalkan tautan LinkedIn. Saat kamu membuat wawancara, pencetak skor tertinggi untuk peran serupa muncul di tab talenta yang disarankan, dengan nama, skor, dan LinkedIn mereka. Hanya percobaan pertama yang dihitung, kamu bisa menyembunyikan siapa pun yang tidak cocok, dan saran ini gratis.",
     },
     {
         "key": "verified",

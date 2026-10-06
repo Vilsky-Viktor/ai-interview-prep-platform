@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "I candidati possono usare l'IA o cercare le risposte?",
-        "answer": "Ogni candidato riceve domande casuali tutte sue, in un ordine tutto suo, con un timer su ogni domanda gestito dal nostro server, quindi non c'è tempo per chiedere a un'IA. I risultati mostrano anche quando un candidato ha lasciato la pagina, copiato del testo o risposto troppo in fretta per aver letto la domanda.",
+        "answer": "Ogni candidato riceve domande casuali tutte sue, in un ordine tutto suo, con un timer su ogni domanda gestito dal nostro server, quindi c'è poco tempo per cercare le risposte o chiedere a un'IA. I risultati mostrano anche quando un candidato ha lasciato la pagina, copiato del testo o risposto troppo in fretta per aver letto la domanda.",
     },
     {
         "key": "cost",
@@ -71,11 +71,6 @@ FAQ = [
         "key": "candidates",
         "question": "Cosa vedono i candidati?",
         "answer": "Il nome e il logo della tua azienda, cosa aspettarsi prima di iniziare, poi una domanda a tempo alla volta. Non vedono mai il punteggio né se una risposta era giusta.",
-    },
-    {
-        "key": "talent",
-        "question": "Cosa sono i suggerimenti di talenti?",
-        "answer": "Le persone si esercitano sui colloqui di pratica gratuiti di prepza, e chi sceglie di essere suggerito lascia un link LinkedIn. Quando crei un colloquio, i migliori punteggi per un ruolo simile compaiono nella sua scheda Talenti suggeriti, con nome, punteggio e LinkedIn. Conta solo il loro primo tentativo, puoi nascondere chiunque non sia adatto, e i suggerimenti sono gratis.",
     },
     {
         "key": "verified",
