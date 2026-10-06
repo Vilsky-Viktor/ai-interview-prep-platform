@@ -32,6 +32,7 @@
     "pricing": "요금",
     "privacy": "개인정보",
     "terms": "이용약관",
+    "docs": "문서",
     "back": "뒤로",
     "hiring": "채용",
     "pricingLink": "요금",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "최종 업데이트",
     "englishOnly": "이 문서는 영어로만 제공됩니다."
+  },
+  "docs": {
+    "title": "문서",
+    "intro": "prepza로 지원자를 평가하는 회사를 위한 문서입니다. 이용 안내, 템플릿, 데이터 처리 계약이 있습니다.",
+    "englishOnly": "이 문서들은 영어로만 제공됩니다.",
+    "download": "{format} 다운로드",
+    "readOnline": "온라인으로 읽기",
+    "items": {
+      "instructions": {
+        "title": "회사를 위한 이용 안내",
+        "description": "점수의 의미, 사람의 검토, 합격 기준 정하기, 추가 시간, prepza를 쓰지 말아야 할 경우."
+      },
+      "notices": {
+        "title": "지원자 안내문 템플릿",
+        "description": "초대하기 전에 지원자에게 보내는 편집 가능한 안내문입니다. 뉴욕시용 안내문도 있습니다."
+      },
+      "dpia": {
+        "title": "DPIA 템플릿",
+        "description": "prepza 부분이 채워진 개인정보 영향평가 템플릿으로, 나머지를 직접 작성합니다."
+      },
+      "dpa": {
+        "title": "데이터 처리 계약",
+        "description": "prepza가 회사를 대신해 지원자 데이터를 처리하는 방식입니다. 이용약관의 일부입니다."
+      }
+    }
   },
   "autoTopUp": {
     "title": "자동 충전",

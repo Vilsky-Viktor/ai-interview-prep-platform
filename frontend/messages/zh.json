@@ -32,6 +32,7 @@
     "pricing": "价格",
     "privacy": "隐私",
     "terms": "条款",
+    "docs": "文档",
     "back": "返回",
     "hiring": "招聘",
     "pricingLink": "价格",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "最后更新",
     "englishOnly": "本文件仅提供英文版本。"
+  },
+  "docs": {
+    "title": "文档",
+    "intro": "供使用 prepza 评估候选人的公司使用的文档：使用说明、模板和数据处理协议。",
+    "englishOnly": "这些文档仅提供英文版本。",
+    "download": "下载 {format}",
+    "readOnline": "在线阅读",
+    "items": {
+      "instructions": {
+        "title": "公司使用说明",
+        "description": "分数的含义、人工审核、如何设定及格线、额外时间，以及不应使用 prepza 的场合。"
+      },
+      "notices": {
+        "title": "候选人告知模板",
+        "description": "邀请候选人之前发送给他们的可编辑告知，包括一份适用于纽约市的版本。"
+      },
+      "dpia": {
+        "title": "DPIA 模板",
+        "description": "已填好 prepza 部分的数据保护影响评估，其余部分由你填写。"
+      },
+      "dpa": {
+        "title": "数据处理协议",
+        "description": "prepza 如何代表你处理候选人的数据。它是条款的一部分。"
+      }
+    }
   },
   "autoTopUp": {
     "title": "自动充值",

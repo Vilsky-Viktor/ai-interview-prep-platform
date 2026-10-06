@@ -32,6 +32,7 @@
     "pricing": "Presyo",
     "privacy": "Privacy",
     "terms": "Mga tuntunin",
+    "docs": "Docs",
     "back": "Bumalik",
     "hiring": "hiring",
     "pricingLink": "presyo",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Huling na-update",
     "englishOnly": "Available lang ang dokumentong ito sa English."
+  },
+  "docs": {
+    "title": "Docs",
+    "intro": "Mga dokumento para sa mga kumpanyang nag-a-assess ng mga kandidato gamit ang prepza: mga tagubilin, mga template at ang data processing agreement.",
+    "englishOnly": "Available lang ang mga dokumentong ito sa English.",
+    "download": "I-download ang {format}",
+    "readOnline": "Basahin online",
+    "items": {
+      "instructions": {
+        "title": "Mga tagubilin para sa mga kumpanya",
+        "description": "Ano ang ibig sabihin ng grade, pagsusuri ng tao, pagpili ng passing grade, dagdag na oras, at kung saan hindi dapat gamitin ang prepza."
+      },
+      "notices": {
+        "title": "Mga template ng abiso sa kandidato",
+        "description": "Mga abisong mae-edit na ipapadala sa mga kandidato bago sila imbitahan, kasama ang isa para sa New York City."
+      },
+      "dpia": {
+        "title": "Template ng DPIA",
+        "description": "Isang data protection impact assessment na napunan na ang bahagi ng prepza, para kumpletuhin mo."
+      },
+      "dpa": {
+        "title": "Data processing agreement",
+        "description": "Kung paano pinoproseso ng prepza ang data ng iyong mga kandidato para sa iyo. Bahagi ito ng mga tuntunin."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Awtomatikong top-up",

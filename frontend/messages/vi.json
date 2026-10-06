@@ -32,6 +32,7 @@
     "pricing": "Bảng giá",
     "privacy": "Quyền riêng tư",
     "terms": "Điều khoản",
+    "docs": "Tài liệu",
     "back": "Quay lại",
     "hiring": "tuyển dụng",
     "pricingLink": "bảng giá",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Cập nhật lần cuối",
     "englishOnly": "Tài liệu này chỉ có bằng tiếng Anh."
+  },
+  "docs": {
+    "title": "Tài liệu",
+    "intro": "Tài liệu cho các công ty đánh giá ứng viên bằng prepza: hướng dẫn, mẫu và thỏa thuận xử lý dữ liệu.",
+    "englishOnly": "Các tài liệu này chỉ có bằng tiếng Anh.",
+    "download": "Tải {format}",
+    "readOnline": "Đọc trực tuyến",
+    "items": {
+      "instructions": {
+        "title": "Hướng dẫn cho công ty",
+        "description": "Ý nghĩa của điểm, việc con người xem xét, cách chọn điểm đạt, thời gian thêm và những trường hợp không nên dùng prepza."
+      },
+      "notices": {
+        "title": "Mẫu thông báo cho ứng viên",
+        "description": "Các thông báo có thể chỉnh sửa để gửi ứng viên trước khi mời, gồm cả một mẫu cho Thành phố New York."
+      },
+      "dpia": {
+        "title": "Mẫu DPIA",
+        "description": "Bản đánh giá tác động bảo vệ dữ liệu đã điền sẵn phần của prepza, để bạn hoàn thành."
+      },
+      "dpa": {
+        "title": "Thỏa thuận xử lý dữ liệu",
+        "description": "Cách prepza xử lý dữ liệu ứng viên thay cho bạn. Đây là một phần của điều khoản."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Tự động nạp",

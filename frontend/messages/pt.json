@@ -32,6 +32,7 @@
     "pricing": "Preços",
     "privacy": "Privacidade",
     "terms": "Termos",
+    "docs": "Documentos",
     "back": "Voltar",
     "hiring": "contratação",
     "pricingLink": "preços",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Última atualização",
     "englishOnly": "Este documento está disponível apenas em inglês."
+  },
+  "docs": {
+    "title": "Documentos",
+    "intro": "Documentos para empresas que avaliam candidatos com o prepza: instruções, modelos e o acordo de tratamento de dados.",
+    "englishOnly": "Estes documentos estão disponíveis apenas em inglês.",
+    "download": "Baixar {format}",
+    "readOnline": "Ler online",
+    "items": {
+      "instructions": {
+        "title": "Instruções para empresas",
+        "description": "O que uma nota significa, revisão humana, como escolher a nota de aprovação, tempo extra e onde não usar o prepza."
+      },
+      "notices": {
+        "title": "Modelos de aviso para candidatos",
+        "description": "Avisos editáveis para enviar aos candidatos antes de convidá-los, incluindo um para a cidade de Nova York."
+      },
+      "dpia": {
+        "title": "Modelo de AIPD",
+        "description": "Uma avaliação de impacto sobre a proteção de dados com a parte do prepza já preenchida, para você completar."
+      },
+      "dpa": {
+        "title": "Acordo de tratamento de dados",
+        "description": "Como o prepza trata os dados dos seus candidatos em seu nome. Faz parte dos termos."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Recarga automática",

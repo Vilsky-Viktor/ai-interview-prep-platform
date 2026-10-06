@@ -32,6 +32,7 @@
     "pricing": "Prezzi",
     "privacy": "Privacy",
     "terms": "Termini",
+    "docs": "Documenti",
     "back": "Indietro",
     "hiring": "assunzioni",
     "pricingLink": "prezzi",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Ultimo aggiornamento",
     "englishOnly": "Questo documento è disponibile solo in inglese."
+  },
+  "docs": {
+    "title": "Documenti",
+    "intro": "Documenti per le aziende che valutano i candidati con prepza: istruzioni, modelli e l'accordo sul trattamento dei dati.",
+    "englishOnly": "Questi documenti sono disponibili solo in inglese.",
+    "download": "Scarica {format}",
+    "readOnline": "Leggi online",
+    "items": {
+      "instructions": {
+        "title": "Istruzioni per le aziende",
+        "description": "Cosa significa un voto, la revisione umana, come scegliere la soglia di superamento, il tempo extra e dove non usare prepza."
+      },
+      "notices": {
+        "title": "Modelli di informativa per i candidati",
+        "description": "Informative modificabili da inviare ai candidati prima di invitarli, inclusa una per New York City."
+      },
+      "dpia": {
+        "title": "Modello di DPIA",
+        "description": "Una valutazione d'impatto sulla protezione dei dati con la parte di prepza già compilata, da completare."
+      },
+      "dpa": {
+        "title": "Accordo sul trattamento dei dati",
+        "description": "Come prepza tratta i dati dei tuoi candidati per tuo conto. Fa parte dei termini."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Ricarica automatica",

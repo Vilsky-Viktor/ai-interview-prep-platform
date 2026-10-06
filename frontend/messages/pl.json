@@ -32,6 +32,7 @@
     "pricing": "Cennik",
     "privacy": "Prywatność",
     "terms": "Regulamin",
+    "docs": "Dokumenty",
     "back": "Wstecz",
     "hiring": "rekrutacja",
     "pricingLink": "cennik",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Ostatnia aktualizacja",
     "englishOnly": "Ten dokument jest dostępny tylko po angielsku."
+  },
+  "docs": {
+    "title": "Dokumenty",
+    "intro": "Dokumenty dla firm, które oceniają kandydatów w prepza: instrukcje, szablony i umowa powierzenia przetwarzania danych.",
+    "englishOnly": "Te dokumenty są dostępne tylko po angielsku.",
+    "download": "Pobierz {format}",
+    "readOnline": "Czytaj online",
+    "items": {
+      "instructions": {
+        "title": "Instrukcje dla firm",
+        "description": "Co oznacza wynik, weryfikacja przez człowieka, wybór progu zaliczenia, dodatkowy czas i kiedy nie używać prepza."
+      },
+      "notices": {
+        "title": "Szablony informacji dla kandydatów",
+        "description": "Edytowalne informacje do wysłania kandydatom przed zaproszeniem, w tym jedna dla Nowego Jorku."
+      },
+      "dpia": {
+        "title": "Szablon DPIA",
+        "description": "Ocena skutków dla ochrony danych z wypełnioną częścią prepza, do uzupełnienia przez Ciebie."
+      },
+      "dpa": {
+        "title": "Umowa powierzenia przetwarzania danych",
+        "description": "Jak prepza przetwarza dane Twoich kandydatów w Twoim imieniu. Jest częścią regulaminu."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Automatyczne doładowanie",

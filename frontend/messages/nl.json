@@ -32,6 +32,7 @@
     "pricing": "Prijzen",
     "privacy": "Privacy",
     "terms": "Voorwaarden",
+    "docs": "Documenten",
     "back": "Terug",
     "hiring": "werving",
     "pricingLink": "prijzen",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Laatst bijgewerkt",
     "englishOnly": "Dit document is alleen in het Engels beschikbaar."
+  },
+  "docs": {
+    "title": "Documenten",
+    "intro": "Documenten voor bedrijven die kandidaten beoordelen met prepza: instructies, sjablonen en de verwerkersovereenkomst.",
+    "englishOnly": "Deze documenten zijn alleen in het Engels beschikbaar.",
+    "download": "{format} downloaden",
+    "readOnline": "Online lezen",
+    "items": {
+      "instructions": {
+        "title": "Instructies voor bedrijven",
+        "description": "Wat een cijfer betekent, menselijke beoordeling, het kiezen van de slaaggrens, extra tijd en waar je prepza niet gebruikt."
+      },
+      "notices": {
+        "title": "Sjablonen voor kandidaatberichten",
+        "description": "Bewerkbare berichten om kandidaten te sturen voordat je ze uitnodigt, waaronder een voor New York City."
+      },
+      "dpia": {
+        "title": "DPIA-sjabloon",
+        "description": "Een gegevensbeschermingseffectbeoordeling waarin het deel van prepza al is ingevuld, om zelf aan te vullen."
+      },
+      "dpa": {
+        "title": "Verwerkersovereenkomst",
+        "description": "Hoe prepza de gegevens van je kandidaten voor jou verwerkt. Ze maakt deel uit van de voorwaarden."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Automatisch opwaarderen",

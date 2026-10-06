@@ -29,7 +29,7 @@ TERMS_SECTIONS = [
         "items": [
             "Don't use prepza to send unwanted email, to scrape it, or to overload or attack it.",
             "Don't try to get around limits, security or another user's access.",
-            "In an interview, answer on your own and follow its rules; the company sees how long each answer took and when you left the page.",
+            "In an interview, answer on your own and follow its rules; the company sees how long each answer took, when you left the page and when you copied text.",
         ],
     },
     {

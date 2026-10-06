@@ -32,6 +32,7 @@
     "pricing": "Tarifs",
     "privacy": "Confidentialité",
     "terms": "Conditions",
+    "docs": "Documents",
     "back": "Retour",
     "hiring": "recrutement",
     "pricingLink": "tarifs",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Dernière mise à jour",
     "englishOnly": "Ce document est disponible uniquement en anglais."
+  },
+  "docs": {
+    "title": "Documents",
+    "intro": "Des documents pour les entreprises qui évaluent des candidats avec prepza : instructions, modèles et l'accord de traitement des données.",
+    "englishOnly": "Ces documents sont disponibles uniquement en anglais.",
+    "download": "Télécharger le {format}",
+    "readOnline": "Lire en ligne",
+    "items": {
+      "instructions": {
+        "title": "Instructions pour les entreprises",
+        "description": "Ce que signifie une note, la vérification humaine, le choix de la note de réussite, le temps supplémentaire et où ne pas utiliser prepza."
+      },
+      "notices": {
+        "title": "Modèles d'information des candidats",
+        "description": "Des avis modifiables à envoyer aux candidats avant de les inviter, dont un pour la ville de New York."
+      },
+      "dpia": {
+        "title": "Modèle d'AIPD",
+        "description": "Une analyse d'impact relative à la protection des données, avec la partie de prepza déjà remplie, à compléter."
+      },
+      "dpa": {
+        "title": "Accord de traitement des données",
+        "description": "Comment prepza traite les données de vos candidats pour votre compte. Il fait partie des conditions."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Recharge automatique",

@@ -32,6 +32,7 @@
     "pricing": "料金",
     "privacy": "プライバシー",
     "terms": "利用規約",
+    "docs": "資料",
     "back": "戻る",
     "hiring": "採用",
     "pricingLink": "料金",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "最終更新日",
     "englishOnly": "この文書は英語版のみです。"
+  },
+  "docs": {
+    "title": "資料",
+    "intro": "prepza で候補者を評価する会社向けの資料です。利用ガイド、テンプレート、データ処理契約があります。",
+    "englishOnly": "これらの資料は英語版のみです。",
+    "download": "{format} をダウンロード",
+    "readOnline": "オンラインで読む",
+    "items": {
+      "instructions": {
+        "title": "会社向け利用ガイド",
+        "description": "スコアの意味、人による確認、合格ラインの決め方、追加時間、prepza を使うべきでない場面。"
+      },
+      "notices": {
+        "title": "候補者への通知テンプレート",
+        "description": "招待する前に候補者に送る、編集できる通知です。ニューヨーク市向けのものも含みます。"
+      },
+      "dpia": {
+        "title": "DPIA テンプレート",
+        "description": "prepza の部分を記入済みの、データ保護影響評価のテンプレートです。残りを記入してください。"
+      },
+      "dpa": {
+        "title": "データ処理契約",
+        "description": "prepza があなたに代わって候補者のデータをどう処理するか。利用規約の一部です。"
+      }
+    }
   },
   "autoTopUp": {
     "title": "自動チャージ",

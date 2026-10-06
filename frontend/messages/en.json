@@ -32,6 +32,7 @@
     "pricing": "Pricing",
     "privacy": "Privacy",
     "terms": "Terms",
+    "docs": "Docs",
     "back": "Back",
     "hiring": "hiring",
     "pricingLink": "pricing",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Last updated",
     "englishOnly": ""
+  },
+  "docs": {
+    "title": "Docs",
+    "intro": "Documents for companies that assess candidates with prepza: instructions, templates and the data processing agreement.",
+    "englishOnly": "",
+    "download": "Download {format}",
+    "readOnline": "Read it online",
+    "items": {
+      "instructions": {
+        "title": "Instructions for companies",
+        "description": "What a grade means, human review, choosing a passing grade, extra time, and where not to use prepza."
+      },
+      "notices": {
+        "title": "Candidate notice templates",
+        "description": "Editable notices to send candidates before you invite them, including one for New York City."
+      },
+      "dpia": {
+        "title": "DPIA template",
+        "description": "A data protection impact assessment with prepza's part filled in, for you to complete."
+      },
+      "dpa": {
+        "title": "Data processing agreement",
+        "description": "How prepza processes your candidates' data for you. It's part of the terms."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Automatic top-up",

@@ -32,6 +32,7 @@
     "pricing": "Harga",
     "privacy": "Privasi",
     "terms": "Ketentuan",
+    "docs": "Dokumen",
     "back": "Kembali",
     "hiring": "rekrutmen",
     "pricingLink": "harga",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Terakhir diperbarui",
     "englishOnly": "Dokumen ini hanya tersedia dalam bahasa Inggris."
+  },
+  "docs": {
+    "title": "Dokumen",
+    "intro": "Dokumen untuk perusahaan yang menilai kandidat dengan prepza: petunjuk, templat, dan perjanjian pemrosesan data.",
+    "englishOnly": "Dokumen ini hanya tersedia dalam bahasa Inggris.",
+    "download": "Unduh {format}",
+    "readOnline": "Baca online",
+    "items": {
+      "instructions": {
+        "title": "Petunjuk untuk perusahaan",
+        "description": "Arti nilai, tinjauan oleh manusia, memilih nilai lulus, waktu tambahan, dan kapan tidak memakai prepza."
+      },
+      "notices": {
+        "title": "Templat pemberitahuan kandidat",
+        "description": "Pemberitahuan yang bisa diedit untuk dikirim ke kandidat sebelum Anda mengundang mereka, termasuk satu untuk New York City."
+      },
+      "dpia": {
+        "title": "Templat DPIA",
+        "description": "Penilaian dampak perlindungan data dengan bagian prepza yang sudah diisi, untuk Anda lengkapi."
+      },
+      "dpa": {
+        "title": "Perjanjian pemrosesan data",
+        "description": "Cara prepza memproses data kandidat Anda atas nama Anda. Ini bagian dari ketentuan."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Isi ulang otomatis",

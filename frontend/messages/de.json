@@ -32,6 +32,7 @@
     "pricing": "Preise",
     "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
+    "docs": "Dokumente",
     "back": "Zurück",
     "hiring": "recruiting",
     "pricingLink": "preise",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Zuletzt aktualisiert",
     "englishOnly": "Dieses Dokument ist nur auf Englisch verfügbar."
+  },
+  "docs": {
+    "title": "Dokumente",
+    "intro": "Dokumente für Unternehmen, die Kandidaten mit prepza bewerten: Anleitung, Vorlagen und der Auftragsverarbeitungsvertrag.",
+    "englishOnly": "Diese Dokumente sind nur auf Englisch verfügbar.",
+    "download": "{format} herunterladen",
+    "readOnline": "Online lesen",
+    "items": {
+      "instructions": {
+        "title": "Anleitung für Unternehmen",
+        "description": "Was eine Note bedeutet, menschliche Prüfung, die Wahl der Bestehensgrenze, zusätzliche Zeit und wo prepza nicht eingesetzt werden sollte."
+      },
+      "notices": {
+        "title": "Vorlagen für Hinweise an Kandidaten",
+        "description": "Bearbeitbare Hinweise, die Sie Kandidaten vor der Einladung senden, darunter einer für New York City."
+      },
+      "dpia": {
+        "title": "DSFA-Vorlage",
+        "description": "Eine Datenschutz-Folgenabschätzung, in der der Teil von prepza bereits ausgefüllt ist und die Sie ergänzen."
+      },
+      "dpa": {
+        "title": "Auftragsverarbeitungsvertrag",
+        "description": "Wie prepza die Daten Ihrer Kandidaten in Ihrem Auftrag verarbeitet. Er ist Teil der Nutzungsbedingungen."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Automatisches Aufladen",

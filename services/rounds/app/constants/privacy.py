@@ -33,7 +33,7 @@ PRIVACY_SECTIONS = [
             "To keep prepza secure and working: preventing abuse, rate limits, error reports, and statistics that improve question quality (our legitimate interest).",
             "Usage statistics show which parts of prepza help people and which prices and limits work, so we can improve them (our legitimate interest).",
             "Showing a company as verified, by checking its website against the email domains of its owners and admins (our legitimate interest).",
-            "Interview results, timings and page-leave signals help the hiring company assess your answers fairly (the company's legitimate interest). People at the company make the hiring decision; prepza makes no decision about you on its own. You can ask the company for a person to review your result, and for an accommodation such as extra time before you start.",
+            "Interview results, timings, page-leave and copy signals help the hiring company assess your answers fairly (the company's legitimate interest). People at the company make the hiring decision; prepza makes no decision about you on its own. You can ask the company for a person to review your result, and for an accommodation such as extra time before you start.",
         ],
     },
     {
@@ -61,7 +61,7 @@ PRIVACY_SECTIONS = [
         "heading": "How long we keep it",
         "items": [
             "Your account and everything in it: until you delete your account.",
-            "Interview results, timings and page-leave signals: 12 months after the invitation was sent, then deleted automatically.",
+            "Interview results, timings, page-leave and copy signals: 12 months after the invitation was sent, then deleted automatically.",
             "Practice rounds: until you delete your account.",
             "A report emailed from prepza: the PDF is kept only to send the email, and deleted at most 7 days later.",
             "Pasted job descriptions in our generation records: 90 days after the generation finishes. The interview made from them stays in the company's account until it's deleted.",

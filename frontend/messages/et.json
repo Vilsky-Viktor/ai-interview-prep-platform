@@ -32,6 +32,7 @@
     "pricing": "Hinnad",
     "privacy": "Privaatsus",
     "terms": "Tingimused",
+    "docs": "Dokumendid",
     "back": "Tagasi",
     "hiring": "värbamine",
     "pricingLink": "hinnad",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Viimati uuendatud",
     "englishOnly": "See dokument on saadaval ainult inglise keeles."
+  },
+  "docs": {
+    "title": "Dokumendid",
+    "intro": "Dokumendid ettevõtetele, kes hindavad kandidaate prepzaga: juhend, mallid ja andmetöötlusleping.",
+    "englishOnly": "Need dokumendid on saadaval ainult inglise keeles.",
+    "download": "Laadi {format} alla",
+    "readOnline": "Loe veebis",
+    "items": {
+      "instructions": {
+        "title": "Juhend ettevõtetele",
+        "description": "Mida hinne tähendab, inimese ülevaatus, läbimise läve valimine, lisaaeg ja kus prepzat mitte kasutada."
+      },
+      "notices": {
+        "title": "Kandidaaditeate mallid",
+        "description": "Muudetavad teated, mille saadate kandidaatidele enne kutsumist, sh üks New Yorgi jaoks."
+      },
+      "dpia": {
+        "title": "Andmekaitsealase mõjuhinnangu mall",
+        "description": "Andmekaitsealane mõjuhinnang, milles prepza osa on täidetud ja mille teie lõpetate."
+      },
+      "dpa": {
+        "title": "Andmetöötlusleping",
+        "description": "Kuidas prepza teie kandidaatide andmeid teie nimel töötleb. See on osa tingimustest."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Automaatne juurdelaadimine",

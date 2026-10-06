@@ -227,6 +227,14 @@ A failed send answers Pub/Sub's push with an error, so Pub/Sub retries it and, a
 
 To show invites whose email bounced or was marked as spam ("Email not delivered" in the candidate list), add a webhook at resend.com/webhooks pointing at `https://<your domain>/api/notifications/webhooks/resend` with the events `email.bounced`, `email.complained` and `email.suppressed`. Put its signing secret (`whsec_...`) in `.env` as `RESEND_WEBHOOK_SECRET` and restart notifications. Without the secret every webhook is refused. Locally, Resend reaches it only through a tunnel, as with Paddle.
 
+### Documents for companies
+
+The /documents page ("docs" in the footer) offers companies instructions for use and the data processing agreement as PDFs, and candidate notice and DPIA templates as editable Word files. Their sources are the Markdown files in `frontend/content/documents` (English only, like the legal pages; the DPA's text must match `services/rounds/app/constants/dpa.py`). After changing one, rebuild the files in `frontend/public/documents` and commit them:
+
+```bash
+./scripts/documents/build.sh   # needs uv (for pandoc) and Docker (Chromium prints the PDFs)
+```
+
 ## Tests
 
 Each Python service (and `packages/common`) keeps `tests/unit` (fakes, no services needed) and `tests/integration` (real Postgres and Redis), with the shared setup in `tests/conftest.py`.
@@ -250,7 +258,7 @@ cd frontend && pnpm api-types
 # and Redis, in a "<service>_test" database created and dropped for the run
 ./scripts/tests/integration.sh            # or: ./scripts/tests/integration.sh rounds library
 
-# Browser tests of the signed-out pages (home, companies, pricing, terms, privacy, FAQ, about,
+# Browser tests of the signed-out pages (home, companies, pricing, terms, privacy, docs, FAQ, about,
 # contact, practice) on desktop and phone sizes, in Playwright's Docker image: no console errors, no sideways
 # scroll, the same page width everywhere, the footer at the end, lowercase titles
 ./scripts/tests/pages.sh

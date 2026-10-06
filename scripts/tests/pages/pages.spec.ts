@@ -7,6 +7,7 @@ const PAGES = [
   "/pricing",
   "/terms",
   "/privacy",
+  "/documents",
   "/faq",
   "/about",
   "/contact",

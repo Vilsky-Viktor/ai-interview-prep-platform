@@ -32,6 +32,7 @@
     "pricing": "Fiyatlar",
     "privacy": "Gizlilik",
     "terms": "Koşullar",
+    "docs": "Belgeler",
     "back": "Geri",
     "hiring": "işe alım",
     "pricingLink": "fiyatlar",
@@ -508,6 +509,31 @@
   "legal": {
     "updated": "Son güncelleme",
     "englishOnly": "Bu belge yalnızca İngilizce olarak mevcuttur."
+  },
+  "docs": {
+    "title": "Belgeler",
+    "intro": "Adayları prepza ile değerlendiren şirketler için belgeler: talimatlar, şablonlar ve veri işleme sözleşmesi.",
+    "englishOnly": "Bu belgeler yalnızca İngilizce olarak mevcuttur.",
+    "download": "{format} indir",
+    "readOnline": "Çevrimiçi oku",
+    "items": {
+      "instructions": {
+        "title": "Şirketler için talimatlar",
+        "description": "Notun ne anlama geldiği, insan incelemesi, geçme notunun seçimi, ek süre ve prepza'nın kullanılmaması gereken yerler."
+      },
+      "notices": {
+        "title": "Aday bilgilendirme şablonları",
+        "description": "Adayları davet etmeden önce göndereceğiniz düzenlenebilir bildirimler; biri New York City için."
+      },
+      "dpia": {
+        "title": "DPIA şablonu",
+        "description": "prepza'nın kısmı doldurulmuş, sizin tamamlayacağınız bir veri koruma etki değerlendirmesi."
+      },
+      "dpa": {
+        "title": "Veri işleme sözleşmesi",
+        "description": "prepza'nın adaylarınızın verilerini sizin adınıza nasıl işlediği. Koşulların bir parçasıdır."
+      }
+    }
   },
   "autoTopUp": {
     "title": "Otomatik yükleme",
