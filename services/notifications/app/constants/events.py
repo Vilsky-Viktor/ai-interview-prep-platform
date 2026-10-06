@@ -8,3 +8,5 @@ CANDIDATE_REMINDED = "candidate.reminded"
 REPORT_SHARED = "report.shared"
 # A visitor wrote through the contact page; it's emailed to prepza's inbox.
 CONTACT_SENT = "contact.sent"
+# Companies: a company was deleted; its notifications go with it.
+COMPANY_DELETED = "company.deleted"

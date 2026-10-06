@@ -37,7 +37,7 @@ def test_two_requests_timing_out_the_same_question_save_one_answer(run):
     assert row.question_shown_at is None
 
 
-def test_signals_are_saved_with_their_question_and_loaded_with_the_session(run):
+def test_signals_are_saved_with_their_question_and_loaded_for_the_scorecard(run):
     invite_id = uuid.uuid4()
 
     async def scenario():
@@ -46,7 +46,7 @@ def test_signals_are_saved_with_their_question_and_loaded_with_the_session(run):
         await sessions.add_signal(row.id, question_id, "tab_leave")
         await sessions.add_signal(row.id, None, "copy")
 
-        return await sessions.list_for_invite(invite_id), question_id
+        return await sessions.list_for_invite(invite_id, signals=True), question_id
 
     [row], question_id = run(scenario())
 

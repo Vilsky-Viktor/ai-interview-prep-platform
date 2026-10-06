@@ -4,6 +4,7 @@ import uuid
 
 import pytest
 
+from app.constants.quality import MIN_ANSWERS
 from app.services import answer_events
 from app.storage import answer_stats
 
@@ -54,7 +55,7 @@ def test_recorded_answer_goes_into_the_question_statistics(client, monkeypatch, 
     async def record_answer(event_id, question_id, question_text, option, correct):
         stored.append((event_id, question_id, question_text, option, correct))
 
-        return [question_id]
+        return {question_id: MIN_ANSWERS}
 
     monkeypatch.setattr(answer_stats, "record_answer", record_answer)
 
@@ -63,6 +64,23 @@ def test_recorded_answer_goes_into_the_question_statistics(client, monkeypatch, 
     assert response.status_code == 204
     assert stored == [("1", QUESTION_ID, "Which account is debited?", "Cash", True)]
     assert no_reviews == [QUESTION_ID]
+
+
+def test_an_answer_isnt_reviewed_before_the_question_has_enough_to_say(
+    client, monkeypatch, no_reviews
+):
+    original = uuid.uuid4()
+
+    async def record_answer(*args):
+        # The copy is new to answers; its bank original has been shown often.
+        return {QUESTION_ID: MIN_ANSWERS - 1, original: MIN_ANSWERS + 5}
+
+    monkeypatch.setattr(answer_stats, "record_answer", record_answer)
+
+    response = client.post("/internal/events", json=push("answer.recorded", RECORDED))
+
+    assert response.status_code == 204
+    assert no_reviews == [original]
 
 
 def test_an_event_counted_before_isnt_reviewed_again(client, monkeypatch, no_reviews):
@@ -117,3 +135,30 @@ def test_pushes_without_a_google_token_are_refused_in_google_cloud(client, monke
     response = client.post("/internal/events", json=push("answer.recorded", RECORDED))
 
     assert response.status_code == 401
+
+
+@pytest.mark.parametrize(
+    ("event_type", "data"),
+    [
+        ("answer.recorded", {k: v for k, v in RECORDED.items() if k != "question_text"}),
+        ("answer.recorded", RECORDED | {"question_id": "not-a-uuid"}),
+        ("session.scored", {"answers": []}),
+    ],
+)
+def test_a_malformed_event_is_dropped_not_retried_forever(
+    client, monkeypatch, no_reviews, event_type, data
+):
+    stored = []
+
+    async def record(*args):
+        stored.append(args)
+
+    monkeypatch.setattr(answer_stats, "record_answer", record)
+    monkeypatch.setattr(answer_stats, "record_results", record)
+
+    response = client.post("/internal/events", json=push(event_type, data))
+
+    # Acknowledged, so Pub/Sub stops re-sending it; nothing stored or reviewed.
+    assert response.status_code == 204
+    assert stored == []
+    assert no_reviews == []

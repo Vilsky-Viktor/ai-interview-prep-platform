@@ -69,7 +69,7 @@ async def delete_interview_data(interview_set_id: UUID, caller: ServiceCaller) -
 
 @router.get("/invites/{invite_id}/scorecard")
 async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[ScorecardSession]:
-    rows = await sessions.list_for_invite(invite_id)
+    rows = await sessions.list_for_invite(invite_id, signals=True)
 
     if not rows:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "No sessions for this invite")

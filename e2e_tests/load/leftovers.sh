@@ -51,13 +51,8 @@ check rounds sessions "user_id::text IN ($user_ids)"
 check library sets "owner_id::text IN ($company_ids, $user_ids)"
 check billing wallets "owner_id::text IN ($company_ids)"
 check billing holds "owner_id::text IN ($company_ids)"
-check notifications notifications "recipient = 'user' AND recipient_id::text IN ($user_ids)"
-
-# Deleting a company doesn't delete its notifications yet (the notifications service has no way
-# to): this run's are removed here, so the local database doesn't fill up with them.
-orphans="recipient = 'company' AND recipient_id::text IN ($company_ids)"
-echo "notifications of deleted throwaway companies removed: $(sql notifications "WITH gone AS
-  (DELETE FROM notifications WHERE $orphans RETURNING 1) SELECT count(*) FROM gone")"
+check notifications notifications "(recipient = 'user' AND recipient_id::text IN ($user_ids))
+  OR (recipient = 'company' AND recipient_id::text IN ($company_ids))"
 
 if [ "$left" -gt 0 ]; then
   echo "FAIL $left rows of throwaway companies and users left" >&2

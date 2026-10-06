@@ -35,6 +35,11 @@ async def add(event_id: str, event: dict) -> bool:
         # parallel, so a burst still groups and the limit holds; other recipients don't wait.
         recipient = f"{event['recipient']}:{event['recipient_id']}"
         await session.execute(select(func.pg_advisory_xact_lock(func.hashtext(recipient))))
+
+        # A deleted company gets none, even from an event that was on its way.
+        if await session.get(Received, deleted_key(recipient)) is not None:
+            return False
+
         first = await session.scalar(
             insert(Received)
             .values(event_id=event_id, received_at=now)
@@ -171,4 +176,31 @@ async def remove_user(user_id: str) -> None:
             )
         )
         await session.execute(delete(Seen).where(Seen.user_id == user_id))
+        await session.commit()
+
+
+def deleted_key(recipient: str) -> str:
+    """The Received row that marks a recipient as deleted; it's pruned with the others after
+    KEEP_DAYS, long after Pub/Sub stops redelivering (7 days)."""
+    return f"deleted:{recipient}"
+
+
+async def remove_company(company_id: str) -> None:
+    """A deleted company takes its notifications with it, and gets none after. Safe to repeat."""
+    recipient = f"{Recipient.COMPANY}:{company_id}"
+
+    async with Session() as session:
+        # The same lock as add(), so a notification being stored now is removed too.
+        await session.execute(select(func.pg_advisory_xact_lock(func.hashtext(recipient))))
+        await session.execute(
+            delete(Notification).where(
+                Notification.recipient == Recipient.COMPANY,
+                Notification.recipient_id == company_id,
+            )
+        )
+        await session.execute(
+            insert(Received)
+            .values(event_id=deleted_key(recipient), received_at=datetime.now(UTC))
+            .on_conflict_do_nothing(index_elements=["event_id"])
+        )
         await session.commit()

@@ -8,7 +8,8 @@ from app.storage import processed_events
 from app.storage.db import Session
 
 # Counts one answer. Only when the question still has the text that was answered: an answer
-# to a question since re-generated belongs to its old content, not the new one.
+# to a question since re-generated belongs to its old content, not the new one. Returns how often
+# the question has been shown: answered or timed out.
 RECORD_ANSWER_SQL = text(
     """
     INSERT INTO question_stats (question_id, answers, correct, option_picks, updated_at)
@@ -23,6 +24,7 @@ RECORD_ANSWER_SQL = text(
             coalesce((question_stats.option_picks ->> CAST(:option AS text))::int, 0) + 1
         ),
         updated_at = now()
+    RETURNING answers + timeouts
     """
 )
 
@@ -68,18 +70,20 @@ async def with_sources(
 
 async def record_answer(
     event_id: str, question_id: uuid.UUID, question_text: str, option: str, correct: bool
-) -> list[uuid.UUID] | None:
+) -> dict[uuid.UUID, int] | None:
     """Counts one answer for the question and its bank original, in one transaction and once
-    per event. The questions counted, or None when the event was counted before."""
+    per event. How often each counted question has now been shown, or None when the event was
+    counted before. A question whose text has changed since isn't counted."""
     async with Session() as session:
         if not await processed_events.claim(session, event_id):
             return None
 
-        counted = (await with_sources(session, [question_id]))[question_id]
+        questions = (await with_sources(session, [question_id]))[question_id]
+        shown = {}
 
         # Rows are always updated in the same order, so two events never wait on each other.
-        for answered in sorted(counted):
-            await session.execute(
+        for answered in sorted(questions):
+            times = await session.scalar(
                 RECORD_ANSWER_SQL,
                 {
                     "question_id": answered,
@@ -89,9 +93,12 @@ async def record_answer(
                 },
             )
 
+            if times is not None:
+                shown[answered] = times
+
         await session.commit()
 
-        return counted
+        return shown
 
 
 async def record_results(

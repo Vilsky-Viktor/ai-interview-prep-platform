@@ -255,9 +255,9 @@ def test_billings_prices_are_kept_for_a_while(monkeypatch):
     import asyncio
 
     import httpx
+    from prepza_common import memory_cache
 
     from app.integrations import billing
-    from app.storage import memory_cache
 
     calls = []
 

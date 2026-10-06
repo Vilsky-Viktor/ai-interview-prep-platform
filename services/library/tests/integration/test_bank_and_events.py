@@ -54,7 +54,8 @@ def test_an_answer_is_counted_once_however_often_its_event_arrives(run):
     first, again, question, copy_stats, original_stats = run(scenario())
 
     # The copy's answer counts for its bank original too.
-    assert first == [question.id, question.source_question_id]
+    # How often each has been shown now.
+    assert first == {question.id: 1, question.source_question_id: 1}
     assert again is None
     assert (copy_stats.answers, original_stats.answers) == (1, 1)
 

@@ -34,6 +34,7 @@ from app.schemas.interviews import (
     PreviewOut,
     TitleIn,
 )
+from app.services import set_cache
 from app.services.access import can_edit, require_company, require_editor
 from app.services.candidate_billing import release_unfinished
 from app.storage import audit, candidates, interviews, invites
@@ -133,7 +134,7 @@ async def get_interview(interview_id: UUID, user: CurrentUser) -> InterviewDetai
     _, member = await require_company(user, interview.company_id)
     totals = await candidates.counts([interview.id])
     base = await interview_out(interview, totals.get(interview.id, 0))
-    found = await library.get_set(interview.set_id) if interview.set_id else None
+    found = await set_cache.get_set(interview.set_id) if interview.set_id else None
 
     topics = topics_out(found, interview.topic_limits) if found else []
 

@@ -7,6 +7,8 @@ import { defineConfig, devices } from "@playwright/test"
 export default defineConfig({
   testDir: "specs",
   globalSetup: "./warm-up.ts",
+  // Deletes every throwaway account and its companies after each run (teardown.ts).
+  globalTeardown: "./teardown.ts",
   reporter: "list",
   workers: 1,
   // Once more on failure: the local dev frontend can restart mid-test (see helpers/navigation.ts).

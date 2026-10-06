@@ -74,6 +74,8 @@ if [ "$scenario" != "public" ]; then
   sleep 5
   ids="$(e2e_tests/load/leftovers.sh ids)"
   k6 clean.js || status=$?
+  # Deleted companies' notifications go through an event (company.deleted).
+  sleep 3
   e2e_tests/load/leftovers.sh count "$ids" || status=$?
 fi
 

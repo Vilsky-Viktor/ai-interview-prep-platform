@@ -1,11 +1,12 @@
 import logging
 
+from prepza_common import memory_cache
+
 from app.constants.rounds import SET_CACHE_SECONDS
 from app.helpers.sessions import session_out
 from app.integrations import library
 from app.models.sessions import Session
 from app.schemas.sessions import SessionOut
-from app.storage import memory_cache
 
 logger = logging.getLogger(__name__)
 

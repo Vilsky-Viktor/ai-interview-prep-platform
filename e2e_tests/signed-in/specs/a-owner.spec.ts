@@ -57,7 +57,8 @@ test("owner creates a company, an interview from a template and invites a candid
     await visit(owner, `${companyUrl}/templates?q=${encodeURIComponent(used)}`)
     const row = owner.getByRole("listitem").filter({ hasText: used })
     await row.getByRole("button", { name: "Use template" }).click()
-    await expect(owner).toHaveURL(/\/interviews\/[^/?]+$/)
+    // The local dev server can take a while to build the interview page the first time.
+    await expect(owner).toHaveURL(/\/interviews\/[^/?]+$/, { timeout: 90_000 })
   } finally {
     for (const id of templateIds) {
       await deleteTemplate(id)

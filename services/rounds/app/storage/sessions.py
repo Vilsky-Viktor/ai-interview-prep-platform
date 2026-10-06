@@ -18,7 +18,8 @@ from app.models.signals import Signal
 from app.schemas.library import TopicQuestions
 from app.storage.db import Session as Db
 
-LOAD_SESSION = [selectinload(Session.answers), selectinload(Session.signals)]
+# Signals are read only for a scorecard (list_for_invite's `signals`).
+LOAD_SESSION = [selectinload(Session.answers)]
 
 
 async def create_many(
@@ -64,11 +65,11 @@ async def get(session_id: uuid.UUID) -> Session | None:
         return await session.get(Session, session_id, options=LOAD_SESSION)
 
 
-async def list_for_invite(candidate_invite_id: uuid.UUID) -> list[Session]:
+async def list_for_invite(candidate_invite_id: uuid.UUID, signals: bool = False) -> list[Session]:
     query = (
         select(Session)
         .where(Session.candidate_invite_id == candidate_invite_id)
-        .options(*LOAD_SESSION)
+        .options(*LOAD_SESSION, *([selectinload(Session.signals)] if signals else []))
         .order_by(Session.started_at, Session.id)
     )
 

@@ -2,6 +2,7 @@ import uuid
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common import memory_cache
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import HOUR_SECONDS
 from prepza_common.pause import refuse_if_paused
@@ -29,7 +30,7 @@ from app.schemas.practice import (
     PracticeStartOut,
     PracticeTopicProgress,
 )
-from app.storage import memory_cache, sessions
+from app.storage import sessions
 
 # Free practice for talents: timed rounds on a template's revealed questions, up to
 # PRACTICE_ROUNDS_PER_HOUR, each with fresh random questions and every right answer shown after.

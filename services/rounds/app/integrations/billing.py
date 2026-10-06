@@ -1,9 +1,8 @@
 import httpx
-from prepza_common import http
+from prepza_common import http, memory_cache
 
 from app.config.settings import settings
 from app.constants.help import CATALOG_CACHE_SECONDS, CATALOG_KEY
-from app.storage import memory_cache
 
 
 async def catalog() -> dict | None:

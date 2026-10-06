@@ -12,5 +12,7 @@ GENERATION_CANCELLED = "generation.cancelled"
 INTERVIEW_FINISHED = "interview.finished"
 # Rounds: a corrected answer key changed finished candidates' scores; their stored grades follow.
 RESULTS_RESCORED = "results.rescored"
+# A company was deleted; notifications removes the company's notifications.
+COMPANY_DELETED = "company.deleted"
 # Processed events are remembered this long: past Pub/Sub's 7 days of redeliveries.
 PROCESSED_EVENT_DAYS = 8

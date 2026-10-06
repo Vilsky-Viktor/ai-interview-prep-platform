@@ -24,3 +24,7 @@ MAX_PASS_MARK = 100
 # Questions each candidate gets from a topic until a manager sets another number: a short
 # interview, drawn at random from the topic's whole bank.
 DEFAULT_TOPIC_QUESTIONS = 10
+# A test's topics with their question counts, from library, kept this long by each companies
+# instance for the test's page: a count that changes (a question revealed in practice is no
+# longer served) shows within it. Candidates starting always read the questions afresh.
+SET_CACHE_SECONDS = 30

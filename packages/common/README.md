@@ -1,7 +1,8 @@
 # prepza-common
 
 Code every prepza API service shares: sign-in, service tokens, logging, database and HTTP setup,
-the outbox and Pub/Sub, notifications, translated messages and the limits several services read.
+the outbox and Pub/Sub, notifications, translated messages, a small in-memory cache and the limits
+several services read.
 It holds no service's settings: each service passes in
 what differs (its name, its service secret, its database URL). It reads only the environment
 variables every service has, such as `SENTRY_*`, `GOOGLE_CLOUD_PROJECT`, `ANALYTICS_SALT`,

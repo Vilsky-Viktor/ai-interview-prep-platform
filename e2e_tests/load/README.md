@@ -58,15 +58,13 @@ After every `candidates` and `dashboard` run, and on `clean`, `load.sh`:
 
 1. lists the throwaway companies and users still in the databases (`leftovers.sh ids`);
 2. deletes every throwaway account (`clean.js`) the way a user does in settings (`DELETE /api/library/me`), candidates first, which also deletes the companies they alone own;
-3. counts the rows left that hold one of those ids in companies, members, tests, candidates, audit events, rounds' sections, library's sets, billing's wallets and holds and users' notifications (`leftovers.sh count`), and fails when any is.
+3. counts the rows left that hold one of those ids in companies, members, tests, candidates, audit events, rounds' sections, library's sets, billing's wallets and holds and users' and companies' notifications (`leftovers.sh count`), and fails when any is.
 
 Only load runs' rows ever match: companies named `Load <run> <n>`, owners at `load-<run>-owner-<n>@example.com`, candidates at `delivered+load-<run>-candidate-<n>@resend.dev` (Resend's test domain, which delivers to nobody). The users' own local records are never touched.
 
-Deleting a company doesn't delete its notifications (the bell's "candidate finished"): the notifications service has no way to. `leftovers.sh` removes the run's own and says how many.
-
 ## Results
 
-Local run of 2026-10-06 on an Apple Silicon laptop, Docker VM with 8 CPUs and 7.7 GB, about 2 GB free, other test runs (Playwright, integration tests) on the same VM at the same time. The numbers vary by 2x between runs; read them as orders of magnitude.
+First local runs of 2026-10-06, before the optimisations below, on an Apple Silicon laptop, Docker VM with 8 CPUs and 7.7 GB, about 2 GB free, other test runs (Playwright, integration tests) on the same VM at the same time. The numbers vary by 2x between runs; read them as orders of magnitude.
 
 | Scenario | Load | Requests | p95 per endpoint | Errors | Thresholds |
 |---|---|---|---|---|---|
@@ -81,11 +79,24 @@ Local run of 2026-10-06 on an Apple Silicon laptop, Docker VM with 8 CPUs and 7.
 What the runs showed:
 
 - **Nothing failed**: no errors and every candidate finished, at every load tried; only latency grew. The frontend's dev server didn't run out of memory at 3 users (it stayed at about 3.3 GB).
-- **`rounds` and `library` are the busy services.** At 20 candidates `rounds` and `library` each ran at a full core (one process each) and the Pub/Sub emulator at two. Each `step` loads the candidate's sections (with every answer and signal) two or three times and makes about 7 database transactions; each `answer` publishes its event to Pub/Sub inside the request, and the event makes `library` update the question's statistics and re-review its quality. Locally every service's subscription gets every event (in production each filters to its own types), which adds to it.
-- **`start` is the slowest candidate call**: it reads the test's full content (every question that can be served, of every topic) from `library` to pick the candidate's questions, then creates the sections in `rounds`, for every candidate.
-- **`interview` (a test's page) waits on `library`** for the set's topics, so it slows down when `library` is busy with answer events.
-- **`scorecard` is the heaviest dashboard call** (about 100 ms alone): the full review of every answered question from `rounds`, an analytics event published inside the request, an audit row.
+- **`rounds` and `library` are the busy services.** At 20 candidates `rounds` and `library` each ran at a full core (one process each) and the Pub/Sub emulator at two. Each `answer` publishes its event to Pub/Sub inside the request, and the event makes `library` update the question's statistics. Locally every service's subscription gets every event (in production each filters to its own types), which adds to it.
+- **`start` is the slowest candidate call**: it reads the test's questions from `library` to pick the candidate's, then creates the sections in `rounds`, for every candidate.
+- **`scorecard` is the heaviest dashboard call**: the full review of every answered question from `rounds`, an analytics event published inside the request, an audit row.
 - **`report` reads every candidate of a test, unpaged**, and their scores from `rounds` in one call. With 3 candidates a company here (what the welcome credits pay for) it's fast alone; a test with hundreds of candidates was not tried.
 - **Pages:** the dev server compiles and renders on request and recompiles when files change, so its seconds-long spikes say nothing about production; measure pages against a production build (`next start`) or staging.
 
-Compared with [docs/capacity-and-costs.md](../../docs/capacity-and-costs.md) (an estimate of 100–300 requests a second per service): locally the candidate flow (mostly `rounds`) peaked at about 55 requests a second, with `step` and `answer` at a p95 around 350 ms, while `rounds` and `library` each used a full core and Postgres under 70% of one, on a shared VM in reload mode. It's a floor, not the production figure, but it says the services' single processes, not the database, are the first limit, and that `rounds` and `library` are the ones to scale or optimise first.
+### Optimisations
+
+Measured on 2026-10-06 by switching each change off and on between runs of the same settings, several pairs in a row, on the same VM (at times shared with browser tests, which doubled every number, including endpoints nothing changed). Numbers are p95 (median), before → after.
+
+| Change | Endpoint | 10 users × 3, no pause, shared VM | 10 users × 3, no pause, quiet VM | 20 users × 2, 3 s pause, quiet VM |
+|---|---|---|---|---|
+| `step` reads the candidate's sections once (4 database transactions instead of about 7) and no longer loads integrity signals, which only the scorecard shows | `step` | 714 / 584 ms → 477 / 271 ms (249 / 236 → 156 / 100 ms) | 321 / 176 ms → 227 / 128 ms (141 / 99 → 104 / 56 ms) | 220 / 321 ms → 394 / 235 ms (59 / 37 → 36 / 29 ms) |
+| The same; `answer` also loads no signals | `answer` | 503 / 728 ms → 506 ms / 1.8 s (257 / 217 → 205 / 142 ms) | 242 / 152 ms → 194 / 152 ms (122 / 84 → 98 / 77 ms) | 179 / 363 ms → 413 / 254 ms (54 / 33 → 50 / 47 ms) |
+| A test's page keeps the test's topics from `library` for 30 s (`SET_CACHE_SECONDS` in companies) | `interview` (10 owners, 1 min, 1 s pause) | 732 / 418 ms → 260 / 80 ms (93 / 300 → 17 / 14 ms) | 98 ms → 59 ms (59 → 9 ms) | — |
+| The scorecard asks `rounds` for the review and the scores at once, and writes the audit row while the funnel event is published | `scorecard` (same) | 629 / 473 ms → 542 / 225 ms (211 / 280 → 124 / 65 ms) | 139 ms → 163 ms (93 → 50 ms) | — |
+| `library` re-reviews a question's quality after an answer only once it has been shown `MIN_ANSWERS` (30) times: before that an answer can't change its flag | `library`, per `answer.recorded` event (150 events, real database) | — | 7.5 ms → 2.2 ms | — |
+
+Medians fell for every change; the p95s moved with whatever else the VM was doing (a single slow request is the p95 of a 30-candidate run). Tried and not kept: keeping the test's questions in memory for `start`, which showed no gain locally (the load test's tests are small and each has 3 candidates).
+
+Compared with [docs/capacity-and-costs.md](../../docs/capacity-and-costs.md) (an estimate of 100–300 requests a second per service): locally the candidate flow (mostly `rounds`) peaked at about 55 requests a second, with `step` and `answer` at a p95 around 350 ms before the optimisations above, while `rounds` and `library` each used a full core and Postgres under 70% of one, on a shared VM in reload mode. It's a floor, not the production figure, but it says the services' single processes, not the database, are the first limit, and that `rounds` and `library` are the ones to scale or optimise first.

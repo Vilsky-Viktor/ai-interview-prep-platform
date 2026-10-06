@@ -37,3 +37,23 @@ def test_a_candidate_invite_and_its_email_event_are_saved_together(run):
         # No logo set: the email shows none.
         "logo_path": None,
     } in events
+
+
+def test_a_deleted_company_and_its_company_deleted_event_are_saved_together(run):
+    async def scenario():
+        company = await companies.create(f"Gone {uuid.uuid4()}", "owner", "owner@example.com")
+        await companies.delete(company.id)
+
+        async with Session() as session:
+            events = list(
+                await session.scalars(
+                    select(OutboxEvent.data).where(OutboxEvent.event_type == "company.deleted")
+                )
+            )
+
+        return company, events
+
+    company, events = run(scenario())
+
+    # Notifications removes the company's notifications when it gets it (retried until then).
+    assert {"company_id": str(company.id)} in events

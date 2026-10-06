@@ -93,6 +93,10 @@ def wait(what: str, probe, timeout: float = GENERATION_TIMEOUT, every: float = 5
     sys.exit(f"FAIL timed out waiting for {what}")
 
 
+# The run's users as (local id, ID token), deleted at the end however the run ends.
+CREATED: list[tuple[str, str]] = []
+
+
 def sign_up(name: str, verified: bool = False) -> tuple[str, str]:
     """A new emulator user; verified ones get a fresh token carrying email_verified."""
     # Resend's test address takes any +label and is delivered to nobody.
@@ -119,7 +123,31 @@ def sign_up(name: str, verified: bool = False) -> tuple[str, str]:
             body={"email": email, "password": password, "returnSecureToken": True},
         )
 
+    CREATED.append((user["localId"], user["idToken"]))
+
     return email, user["idToken"]
+
+
+def clean_up() -> None:
+    """Deletes the run's accounts the way a user does in settings, which also deletes the
+    company they alone own and their data in every service, then the emulator users. The owner
+    signed up first, so it goes last, after its candidates."""
+    auth = f"{AUTH}/identitytoolkit.googleapis.com/v1"
+    project = env("FIREBASE_PROJECT_ID")
+
+    for local_id, token in reversed(CREATED):
+        try:
+            api("DELETE", "/library/me", token)
+            call(
+                "POST",
+                f"{auth}/projects/{project}/accounts:delete",
+                body={"localId": local_id},
+                headers={"Authorization": "Bearer owner"},
+            )
+        except SystemExit as error:
+            print(f"clean-up: couldn't delete a user: {error}")
+
+    print(f"clean-up: {len(CREATED)} throwaway accounts deleted")
 
 
 def invite_token(invite_id: str) -> str:
@@ -221,5 +249,10 @@ def company() -> None:
 if __name__ == "__main__":
     started = time.monotonic()
     print("company:")
-    company()
+
+    try:
+        company()
+    finally:
+        clean_up()
+
     print(f"e2e ok in {time.monotonic() - started:.0f}s")

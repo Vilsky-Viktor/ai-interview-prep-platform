@@ -1,3 +1,4 @@
+import asyncio
 from typing import Annotated
 from uuid import UUID
 
@@ -131,14 +132,21 @@ async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: Current
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
 
     company, member = await require_company(user, interview.company_id)
-    card = await rounds.scorecard(invite.id) or []
-    totals = (await rounds.invite_scores([invite.id])).get(str(invite.id)) or {}
+    # Both from rounds, asked at once.
+    card, scores = await asyncio.gather(
+        rounds.scorecard(invite.id), rounds.invite_scores([invite.id])
+    )
+    card = card or []
+    totals = scores.get(str(invite.id)) or {}
     await candidate_results.sync([invite], {str(invite.id): totals})
 
     # The funnel's "first results viewed": a finished candidate's results, opened by a member.
+    # The audit row is written whatever happens to the funnel event, which never raises.
     if invite.status == InviteStatus.FINISHED:
-        await track("results_viewed", user_id=user.uid, company_id=company.id)
-        await audit.record(company.id, user.uid, AuditAction.RESULTS_VIEWED, invite.id)
+        await asyncio.gather(
+            track("results_viewed", user_id=user.uid, company_id=company.id),
+            audit.record(company.id, user.uid, AuditAction.RESULTS_VIEWED, invite.id),
+        )
 
     return {
         "id": str(invite.id),

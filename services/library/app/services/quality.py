@@ -36,7 +36,8 @@ async def mark_wrong(question_id: uuid.UUID) -> None:
 async def review(question_id: uuid.UUID) -> None:
     """Flags a question from its answers and feedback, and sends a new flag to the verifier.
 
-    Never raises: a failed review is repeated by the question's next answer or feedback.
+    Never raises: a failed review is repeated by the question's next feedback, finished topic,
+    or answer once it has MIN_ANSWERS.
     """
     try:
         found = await quality.load(question_id)

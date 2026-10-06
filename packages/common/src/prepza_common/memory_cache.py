@@ -1,6 +1,7 @@
 import time
 
-# Values kept in this instance's memory for a while, by key, with when each expires.
+# Values kept in this process's memory (one service instance) for a while, by key, with when
+# each expires.
 _entries: dict[str, tuple[float, object]] = {}
 
 

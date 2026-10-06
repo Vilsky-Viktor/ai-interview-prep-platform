@@ -1,4 +1,5 @@
 import pytest
+from prepza_common import memory_cache
 
 from app.integrations import billing
 from app.storage import accounts, audit, candidates, invites
@@ -48,3 +49,9 @@ def stored_candidates(monkeypatch):
         monkeypatch.setattr(candidates, name, getattr(fake_candidates, name))
 
     return fake_candidates
+
+
+@pytest.fixture(autouse=True)
+def nothing_cached(monkeypatch):
+    """Library's answers kept in memory (services/set_cache.py) start empty for each test."""
+    monkeypatch.setattr(memory_cache, "_entries", {})

@@ -1,5 +1,5 @@
 import asyncio
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from uuid import uuid4
 
 import pytest
@@ -141,3 +141,52 @@ def test_the_interview_title_is_kept_for_the_next_steps(interview, monkeypatch):
 
     assert first.session.interview_title == again.session.interview_title == "Backend"
     assert asked == [rows[0].interview_set_id]
+
+
+def test_a_step_reads_the_interview_once(interview, monkeypatch):
+    rows, _ = interview
+    rows += [section(answered=True, status="finished"), section()]
+    reads = []
+
+    async def counted_list(invite_id):
+        reads.append("sections")
+
+        return rows
+
+    async def counted_get(session_id):
+        reads.append("section")
+
+        return next(row for row in rows if row.id == session_id)
+
+    monkeypatch.setattr(sessions, "list_for_invite", counted_list)
+    monkeypatch.setattr(sessions, "get", counted_get)
+
+    step = asyncio.run(interview_flow.interview_step(rows[1], CANDIDATE))
+
+    assert step.session.id == rows[1].id and step.question is not None
+    assert [topic.status for topic in step.topics] == ["finished", "in_progress"]
+    assert reads == ["sections"]
+
+
+def test_a_question_whose_time_ran_out_counts_as_wrong_before_the_next_step(interview, monkeypatch):
+    rows, _ = interview
+    timed_out = section()
+    timed_out.question_shown_at = datetime.now(UTC) - timedelta(seconds=60)
+    rows += [timed_out, section()]
+    saved = []
+
+    async def fake_answer(answer, event=None):
+        saved.append(answer)
+        timed_out.answers = [answer]
+        timed_out.question_shown_at = None
+
+        return True
+
+    monkeypatch.setattr(sessions, "add_answer", fake_answer)
+
+    step = asyncio.run(interview_flow.interview_step(rows[1], CANDIDATE))
+
+    # The section's only question counted as wrong, which finished it; the next one opens.
+    assert [(answer.option_index, answer.score) for answer in saved] == [(None, 0)]
+    assert step.session.id == rows[1].id
+    assert [topic.status for topic in step.topics] == ["finished", "in_progress"]
