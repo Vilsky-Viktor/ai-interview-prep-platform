@@ -5,11 +5,12 @@ Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) be
 - **Cloud Run:** the frontend, five APIs, the generation worker and notifications, whose bell stream runs as its own service (`notifications-stream`, same image) so open tabs never take the capacity event pushes need. Billed per request, and idle services cost nothing.
 - **Cloud SQL Postgres 18** (as locally): one database per service, with daily backups and point-in-time recovery.
 - **Pub/Sub:** domain events. One `events` topic is pushed to library, companies and notifications, each getting only the event types it handles (`pubsub.tf`; add a type there when a consumer starts handling it), with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
-- **Cloud Tasks:** generation jobs on the worker. **Cloud Scheduler:** sweeps, retention, the question bank's stages, and candidate invite reminders and expiry; a failed daily job is retried 3 times.
+- **Cloud Tasks:** generation jobs on the worker, each tried up to 3 times. **Cloud Scheduler:** sweeps, retention, the question bank's stages, and candidate invite reminders and expiry; a failed daily job is retried 3 times.
 - **The global load balancer:**
   - HTTPS with a Google-managed certificate;
   - `/api/<service>/` routes to each API, and everything else to the frontend;
   - Cloud CDN for static files;
+  - the security headers the local nginx gateway adds (HSTS, nosniff, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`); the frontend sets its own Content-Security-Policy;
   - a Cloud Armor rule that blocks `/api/*/internal/`.
 - **Secret Manager** for secrets, and **Artifact Registry** for images.
 
@@ -49,7 +50,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    cp terraform.tfvars.example terraform.tfvars   # fill it in
    terraform init -backend-config="bucket=prepza-prod-terraform"
    ```
-   `alert_email`, `billing_account` and `monthly_budget` set up the alerts in `monitoring.tf`: an uptime check every minute on the site and each API's `/ready`, an email when one fails, an email when an event is dead-lettered or a scheduled job fails, and budget emails at 50%, 90% and 100% of the month (and when the forecast passes it). Creating the budget needs the Billing Account Costs Manager role on the billing account, which its administrator already has. `daily_generation_limit` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off.
+   `alert_email`, `billing_account` and `monthly_budget` set up the alerts in `monitoring.tf`: an uptime check every minute on the site and each API's `/ready` (which checks the database only, so a Redis outage doesn't fail it), an email when one fails, an email when an event is dead-lettered or a scheduled job fails, when a service answers more than 5% of requests with server errors, or when the database nears its connection limit or stays busy, and budget emails at 50%, 90% and 100% of the month (and when the forecast passes it). Creating the budget needs the Billing Account Costs Manager role on the billing account, which its administrator already has. `daily_generation_limit` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off.
 6. **Create the image registry first,** then push the first images. CI pushes them on every push to `main` afterwards.
    - Cloud Run runs `linux/amd64`, so build for it even on an Apple-silicon Mac.
    - Use the same tag as `image_tag` in `terraform.tfvars`.
@@ -129,6 +130,7 @@ A failed step stops the deploy, and the services keep running the previous image
 
 - **Rolling back:** in **Actions → Deploy → Run workflow**, enter an earlier version, for example `v1.3.2`, and leave **Run migrations** off. It redeploys that version's images in about a minute, on the newer schema (an older version's migrations would fail on it). So this is safe only while the newer migrations didn't remove anything the older code needs: keep migrations additive. Tick **Run migrations** only to redeploy a version whose migrations haven't run. For one service, you can also move it to an earlier revision in the Cloud Run console.
 - **Terraform never touches image tags,** so applying an infrastructure change doesn't roll anything back.
+- **Pinned dependencies:** workflow actions are pinned by commit and the Dockerfiles' base images by digest; [`.github/dependabot.yml`](../.github/dependabot.yml) opens weekly pull requests that update them (base images by minor and patch versions only). Merge one once CI passes.
 
 ## Restore drill
 
@@ -170,7 +172,7 @@ Then point `DATABASE_URL` at the clone, or copy the needed data back.
   ```
 
   The replay goes to every consumer subscribed to that type, not only the one that failed: today each type has one consumer, but a type two consumers handle would reach the one that succeeded a second time.
-- **Generation jobs:** a job may run up to 25 minutes, under Cloud Tasks' 30-minute limit. The queue never retries; a failed generation is retried by the user.
-- **Database connections:** Cloud SQL starts at `db-g1-small` with 200 connections allowed, 20 kept free. Each API process holds up to 10 connections (generation and the worker 14, notifications 4); the services' `max` instances fit within the rest, and the plan fails if they don't (`database.tf`). A deploy briefly runs old and new instances side by side, so near the instance limits it can exceed the budget: raise `db_tier`, or add PgBouncer, before allowing more instances.
+- **Generation jobs:** a job may run up to 25 minutes, under Cloud Tasks' 30-minute limit. The queue tries a task up to 3 times (`jobs.tf`), for a delivery that fails before the job starts, such as a worker restarting; a job first moves its generation from queued to running in one atomic step, so a repeated delivery does nothing. A generation that fails once running is retried by the user.
+- **Database connections:** Cloud SQL starts at `db-g1-small` with 200 connections allowed, 20 kept free. Each API process holds up to 10 connections (generation and the worker 14, notifications 4); the services' `max` instances fit within the rest, and the plan fails if they don't (`database.tf`). Today that's at most 172 of the 180. A deploy briefly runs old and new instances side by side, so near the instance limits it can exceed the budget; this is accepted for launch, when services use a fraction of it (`docs/code-review.md`, #32). Raise `db_tier` (and `db_max_connections`), or add PgBouncer, before allowing more instances or once services often run near their `max`.
 - **High availability:** `db_high_availability = true` adds a standby in another zone, at about double the database cost.
 - **Not yet tried on a real project:** `terraform validate` passes, but some settings may need a small adjustment on the first `apply`. The ones most likely to need it are the load balancer's backend protocol for Cloud Run, and Cloud Armor on the CDN backend.

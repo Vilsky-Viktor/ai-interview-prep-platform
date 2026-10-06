@@ -1,4 +1,4 @@
-# Outage and cost alerts, by email to var.alert_email.
+# Outage, error, database and cost alerts, by email to var.alert_email.
 #
 # Uptime: Google checks the site and each API's /ready through the load balancer every minute,
 # from several regions; an alert fires when a check fails from more than one of them.
@@ -171,6 +171,107 @@ resource "google_monitoring_alert_policy" "scheduler_failed" {
 
   documentation {
     content   = "A scheduled job failed. Check the job in Cloud Scheduler and its service's Cloud Run logs."
+    mime_type = "text/markdown"
+  }
+
+  notification_channels = [google_monitoring_notification_channel.email.id]
+}
+
+# Server errors: a Cloud Run service answering more than 5% of its requests with a 5xx for ten
+# minutes.
+resource "google_monitoring_alert_policy" "server_errors" {
+  display_name = "prepza server errors"
+  combiner     = "OR"
+
+  conditions {
+    display_name = "5xx share of requests above 5%"
+
+    condition_threshold {
+      filter             = "metric.type=\"run.googleapis.com/request_count\" AND resource.type=\"cloud_run_revision\" AND metric.label.response_code_class=\"5xx\""
+      denominator_filter = "metric.type=\"run.googleapis.com/request_count\" AND resource.type=\"cloud_run_revision\""
+      duration           = "600s"
+      comparison         = "COMPARISON_GT"
+      threshold_value    = 0.05
+
+      aggregations {
+        alignment_period     = "300s"
+        per_series_aligner   = "ALIGN_RATE"
+        cross_series_reducer = "REDUCE_SUM"
+        group_by_fields      = ["resource.label.service_name"]
+      }
+
+      denominator_aggregations {
+        alignment_period     = "300s"
+        per_series_aligner   = "ALIGN_RATE"
+        cross_series_reducer = "REDUCE_SUM"
+        group_by_fields      = ["resource.label.service_name"]
+      }
+    }
+  }
+
+  documentation {
+    content   = "A service answers many requests with server errors. Check its Cloud Run logs and Sentry."
+    mime_type = "text/markdown"
+  }
+
+  notification_channels = [google_monitoring_notification_channel.email.id]
+}
+
+# Database connections: open connections past 80% of max_connections (database.tf), the sign to
+# raise db_tier before a deploy at peak runs out of them.
+resource "google_monitoring_alert_policy" "database_connections" {
+  display_name = "prepza database connections high"
+  combiner     = "OR"
+
+  conditions {
+    display_name = "Postgres connections above 80% of the limit"
+
+    condition_threshold {
+      filter          = "metric.type=\"cloudsql.googleapis.com/database/postgresql/num_backends\" AND resource.type=\"cloudsql_database\""
+      duration        = "300s"
+      comparison      = "COMPARISON_GT"
+      threshold_value = floor(local.db_max_connections * 0.8)
+
+      aggregations {
+        alignment_period     = "60s"
+        per_series_aligner   = "ALIGN_MAX"
+        cross_series_reducer = "REDUCE_SUM"
+        group_by_fields      = ["resource.label.database_id"]
+      }
+    }
+  }
+
+  documentation {
+    content   = "The database is near its connection limit. Raise db_tier (and db_max_connections) as infra/README.md describes, or lower services' max instances."
+    mime_type = "text/markdown"
+  }
+
+  notification_channels = [google_monitoring_notification_channel.email.id]
+}
+
+# Database CPU: busy above 80% for fifteen minutes.
+resource "google_monitoring_alert_policy" "database_cpu" {
+  display_name = "prepza database CPU high"
+  combiner     = "OR"
+
+  conditions {
+    display_name = "Cloud SQL CPU above 80%"
+
+    condition_threshold {
+      filter          = "metric.type=\"cloudsql.googleapis.com/database/cpu/utilization\" AND resource.type=\"cloudsql_database\""
+      duration        = "900s"
+      comparison      = "COMPARISON_GT"
+      threshold_value = 0.8
+
+      aggregations {
+        alignment_period   = "300s"
+        per_series_aligner = "ALIGN_MEAN"
+      }
+    }
+  }
+
+  documentation {
+    content   = "The database has been busy for a while. Check slow queries in Cloud SQL Query Insights, or raise db_tier."
     mime_type = "text/markdown"
   }
 
