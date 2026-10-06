@@ -599,8 +599,8 @@
     },
     "try": {
       "title": "Proovi enne kandidaate",
-      "text": "Tee sarnase rolli tasuta harjutusintervjuu või ava oma intervjuu kandidaadina, enne kui kedagi kutsud.",
-      "browse": "Sirvi harjutusintervjuusid",
+      "text": "Proovi sarnase rolli tasuta malli või ava oma intervjuu kandidaadina, enne kui kedagi kutsud.",
+      "browse": "Sirvi malle",
       "topic": "Müük",
       "question": "Millega peaks külm e-kiri algama?",
       "options": {
@@ -667,7 +667,8 @@
       "see": "Vaata hindu",
       "perCandidate": "kandidaadi kohta",
       "base": "Maksa kasutuse järgi",
-      "volume": "Juurdelaadimisega alates {from, number} $"
+      "volume": "Juurdelaadimisega alates {from, number} $",
+      "compare": "${min}–{max} kandidaadi kohta, mitte üle $100 kuus"
     },
     "faq": {
       "title": "Küsimusi veel?",

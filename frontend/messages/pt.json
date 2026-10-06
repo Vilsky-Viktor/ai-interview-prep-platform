@@ -591,8 +591,8 @@
     },
     "try": {
       "title": "Experimente antes dos candidatos",
-      "text": "Faça uma entrevista de prática gratuita para uma função parecida ou abra sua própria entrevista como candidato antes de convidar alguém.",
-      "browse": "Ver entrevistas de prática",
+      "text": "Experimente um modelo gratuito para uma função parecida ou abra sua própria entrevista como candidato antes de convidar alguém.",
+      "browse": "Ver modelos",
       "topic": "Vendas",
       "question": "Com o que um e-mail frio deve começar?",
       "options": {
@@ -659,7 +659,8 @@
       "see": "Ver preços",
       "perCandidate": "por candidato",
       "base": "Pague conforme o uso",
-      "volume": "Com uma recarga a partir de ${from, number}"
+      "volume": "Com uma recarga a partir de ${from, number}",
+      "compare": "${min}–{max} por candidato em vez de mais de $100 por mês"
     },
     "faq": {
       "title": "Ainda tem dúvidas?",

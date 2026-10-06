@@ -599,8 +599,8 @@
     },
     "try": {
       "title": "Adaylardan önce siz deneyin",
-      "text": "Benzer bir rol için ücretsiz bir pratik mülakata girin ya da kimseyi davet etmeden önce kendi mülakatınızı aday olarak açın.",
-      "browse": "Pratik mülakatlara göz atın",
+      "text": "Benzer bir rol için ücretsiz bir şablonu deneyin ya da kimseyi davet etmeden önce kendi mülakatınızı aday olarak açın.",
+      "browse": "Şablonlara göz atın",
       "topic": "Satış",
       "question": "Soğuk e-posta neyle başlamalı?",
       "options": {
@@ -667,7 +667,8 @@
       "see": "Fiyatları gör",
       "perCandidate": "aday başına",
       "base": "Kullandıkça öde",
-      "volume": "${from, number} ve üzeri yüklemeyle"
+      "volume": "${from, number} ve üzeri yüklemeyle",
+      "compare": "Ayda $100+ yerine aday başına ${min}–{max}"
     },
     "faq": {
       "title": "Hâlâ sorunuz mu var?",

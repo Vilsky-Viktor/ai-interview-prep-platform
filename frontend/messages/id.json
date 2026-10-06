@@ -595,8 +595,8 @@
     },
     "try": {
       "title": "Coba dulu sebelum kandidat",
-      "text": "Ikuti wawancara latihan gratis untuk peran serupa, atau buka wawancaramu sendiri sebagai kandidat sebelum mengundang siapa pun.",
-      "browse": "Lihat wawancara latihan",
+      "text": "Coba templat gratis untuk peran serupa, atau buka wawancaramu sendiri sebagai kandidat sebelum mengundang siapa pun.",
+      "browse": "Lihat templat",
       "topic": "Penjualan",
       "question": "Cold email sebaiknya dibuka dengan apa?",
       "options": {
@@ -663,7 +663,8 @@
       "see": "Lihat harga",
       "perCandidate": "per kandidat",
       "base": "Bayar sesuai pemakaian",
-      "volume": "Dengan isi ulang mulai ${from, number}"
+      "volume": "Dengan isi ulang mulai ${from, number}",
+      "compare": "${min}–{max} per kandidat, bukan $100+ per bulan"
     },
     "faq": {
       "title": "Masih ada pertanyaan?",

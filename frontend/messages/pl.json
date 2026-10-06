@@ -595,8 +595,8 @@
     },
     "try": {
       "title": "Wypróbuj, zanim zrobią to kandydaci",
-      "text": "Przejdź darmową próbną rozmowę dla podobnej roli albo otwórz własną rozmowę jako kandydat, zanim kogokolwiek zaprosisz.",
-      "browse": "Przeglądaj próbne rozmowy",
+      "text": "Wypróbuj darmowy szablon dla podobnej roli albo otwórz własną rozmowę jako kandydat, zanim kogokolwiek zaprosisz.",
+      "browse": "Przeglądaj szablony",
       "topic": "Sprzedaż",
       "question": "Od czego zacząć zimnego maila?",
       "options": {
@@ -663,7 +663,8 @@
       "see": "Zobacz cennik",
       "perCandidate": "za kandydata",
       "base": "Płać za użycie",
-      "volume": "Przy doładowaniu od ${from, number}"
+      "volume": "Przy doładowaniu od ${from, number}",
+      "compare": "${min}–{max} za kandydata zamiast ponad $100 miesięcznie"
     },
     "faq": {
       "title": "Masz jeszcze pytania?",

@@ -14,6 +14,7 @@ export async function PricingSection() {
   }
 
   const free = Math.floor(catalog.welcome_company / catalog.candidate_credits)
+  const prices = catalog.candidate_prices.map((tier) => tier.cents / 100)
   const see = (
     <div className="pt-2">
       <MoreLink href="/pricing">{t("see")}</MoreLink>
@@ -40,6 +41,10 @@ export async function PricingSection() {
           </li>
         ))}
       </ul>
+      {/* Against the usual monthly plans: the main reason to switch. */}
+      <p className="text-center text-xl font-medium text-balance">
+        {t("compare", { min: Math.min(...prices), max: Math.max(...prices) })}
+      </p>
     </LandingSection>
   )
 }

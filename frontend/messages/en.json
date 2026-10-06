@@ -595,8 +595,8 @@
     },
     "try": {
       "title": "Try it before candidates do",
-      "text": "Take a free practice interview for a similar role, or open your own interview as a candidate before you invite anyone.",
-      "browse": "Browse practice interviews",
+      "text": "Try a free template for a similar role, or open your own interview as a candidate before you invite anyone.",
+      "browse": "Browse templates",
       "topic": "Sales",
       "question": "What should a cold email lead with?",
       "options": {
@@ -663,7 +663,8 @@
       "see": "See pricing",
       "perCandidate": "per candidate",
       "base": "Pay as you go",
-      "volume": "With a top-up from ${from, number}"
+      "volume": "With a top-up from ${from, number}",
+      "compare": "${min}–{max} per candidate instead of $100+ a month"
     },
     "faq": {
       "title": "Still have questions?",

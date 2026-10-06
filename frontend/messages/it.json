@@ -595,8 +595,8 @@
     },
     "try": {
       "title": "Provalo prima dei candidati",
-      "text": "Fai un colloquio di pratica gratuito per un ruolo simile, oppure apri il tuo colloquio come candidato prima di invitare qualcuno.",
-      "browse": "Sfoglia i colloqui di pratica",
+      "text": "Prova un modello gratuito per un ruolo simile, oppure apri il tuo colloquio come candidato prima di invitare qualcuno.",
+      "browse": "Sfoglia i modelli",
       "topic": "Vendite",
       "question": "Con cosa deve aprire un'email a freddo?",
       "options": {
@@ -663,7 +663,8 @@
       "see": "Vedi i prezzi",
       "perCandidate": "per candidato",
       "base": "A consumo",
-      "volume": "Con una ricarica da ${from, number}"
+      "volume": "Con una ricarica da ${from, number}",
+      "compare": "${min}–{max} per candidato invece di oltre $100 al mese"
     },
     "faq": {
       "title": "Hai ancora domande?",

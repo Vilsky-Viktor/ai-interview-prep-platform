@@ -591,8 +591,8 @@
     },
     "try": {
       "title": "Probeer het voordat kandidaten het doen",
-      "text": "Doe een gratis oefengesprek voor een vergelijkbare rol, of open je eigen sollicitatiegesprek als kandidaat voordat je iemand uitnodigt.",
-      "browse": "Oefengesprekken bekijken",
+      "text": "Probeer een gratis sjabloon voor een vergelijkbare rol, of open je eigen sollicitatiegesprek als kandidaat voordat je iemand uitnodigt.",
+      "browse": "Sjablonen bekijken",
       "topic": "Sales",
       "question": "Waarmee open je een koude e-mail?",
       "options": {
@@ -659,7 +659,8 @@
       "see": "Prijzen bekijken",
       "perCandidate": "per kandidaat",
       "base": "Betalen naar gebruik",
-      "volume": "Met een opwaardering vanaf ${from, number}"
+      "volume": "Met een opwaardering vanaf ${from, number}",
+      "compare": "${min}–{max} per kandidaat in plaats van $100+ per maand"
     },
     "faq": {
       "title": "Nog vragen?",

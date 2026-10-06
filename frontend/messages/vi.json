@@ -591,8 +591,8 @@
     },
     "try": {
       "title": "Thử trước khi ứng viên làm",
-      "text": "Làm miễn phí một buổi phỏng vấn luyện tập cho vị trí tương tự, hoặc mở buổi phỏng vấn của chính bạn với tư cách ứng viên trước khi mời bất kỳ ai.",
-      "browse": "Xem các buổi phỏng vấn luyện tập",
+      "text": "Dùng thử một mẫu miễn phí cho vị trí tương tự, hoặc mở buổi phỏng vấn của chính bạn với tư cách ứng viên trước khi mời bất kỳ ai.",
+      "browse": "Xem các mẫu",
       "topic": "Bán hàng",
       "question": "Email chào hàng nên mở đầu bằng gì?",
       "options": {
@@ -659,7 +659,8 @@
       "see": "Xem bảng giá",
       "perCandidate": "mỗi ứng viên",
       "base": "Dùng bao nhiêu trả bấy nhiêu",
-      "volume": "Khi nạp từ ${from, number}"
+      "volume": "Khi nạp từ ${from, number}",
+      "compare": "${min}–{max} mỗi ứng viên thay vì hơn $100 mỗi tháng"
     },
     "faq": {
       "title": "Vẫn còn thắc mắc?",

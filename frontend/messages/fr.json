@@ -595,8 +595,8 @@
     },
     "try": {
       "title": "Essayez-le avant les candidats",
-      "text": "Passez un entretien d'entraînement gratuit pour un poste similaire, ou ouvrez votre propre entretien en tant que candidat avant d'inviter qui que ce soit.",
-      "browse": "Parcourir les entretiens d'entraînement",
+      "text": "Essayez un modèle gratuit pour un poste similaire, ou ouvrez votre propre entretien en tant que candidat avant d'inviter qui que ce soit.",
+      "browse": "Parcourir les modèles",
       "topic": "Vente",
       "question": "Par quoi commencer un e-mail de prospection ?",
       "options": {
@@ -663,7 +663,8 @@
       "see": "Voir les tarifs",
       "perCandidate": "par candidat",
       "base": "Paiement à l'usage",
-      "volume": "Avec une recharge dès {from, number} $"
+      "volume": "Avec une recharge dès {from, number} $",
+      "compare": "{min}–{max} $ par candidat au lieu de plus de 100 $ par mois"
     },
     "faq": {
       "title": "Encore des questions ?",

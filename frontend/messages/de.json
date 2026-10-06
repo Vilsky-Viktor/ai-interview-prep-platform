@@ -595,8 +595,8 @@
     },
     "try": {
       "title": "Probier es aus, bevor Kandidaten es tun",
-      "text": "Mach ein kostenloses Übungsinterview für eine ähnliche Rolle oder öffne dein eigenes Interview als Kandidat, bevor du jemanden einlädst.",
-      "browse": "Übungsinterviews ansehen",
+      "text": "Probier eine kostenlose Vorlage für eine ähnliche Rolle aus oder öffne dein eigenes Interview als Kandidat, bevor du jemanden einlädst.",
+      "browse": "Vorlagen ansehen",
       "topic": "Vertrieb",
       "question": "Womit sollte eine Kaltakquise-Mail beginnen?",
       "options": {
@@ -663,7 +663,8 @@
       "see": "Preise ansehen",
       "perCandidate": "pro Kandidat",
       "base": "Nach Verbrauch",
-      "volume": "Mit einer Aufladung ab ${from, number}"
+      "volume": "Mit einer Aufladung ab ${from, number}",
+      "compare": "${min}–{max} pro Kandidat statt über $100 im Monat"
     },
     "faq": {
       "title": "Noch Fragen?",

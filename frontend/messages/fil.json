@@ -599,8 +599,8 @@
     },
     "try": {
       "title": "Subukan ito bago ang mga kandidato",
-      "text": "Sumagot ng isang libreng practice interview para sa katulad na role, o buksan ang sarili mong interview bilang kandidato bago ka mag-imbita ng kahit sino.",
-      "browse": "Tingnan ang mga practice interview",
+      "text": "Subukan ang isang libreng template para sa katulad na role, o buksan ang sarili mong interview bilang kandidato bago ka mag-imbita ng kahit sino.",
+      "browse": "Tingnan ang mga template",
       "topic": "Sales",
       "question": "Saan dapat magsimula ang cold email?",
       "options": {
@@ -667,7 +667,8 @@
       "see": "Tingnan ang presyo",
       "perCandidate": "bawat kandidato",
       "base": "Pay as you go",
-      "volume": "Sa top-up mula ${from, number}"
+      "volume": "Sa top-up mula ${from, number}",
+      "compare": "${min}–{max} bawat kandidato sa halip na $100+ kada buwan"
     },
     "faq": {
       "title": "May tanong pa?",

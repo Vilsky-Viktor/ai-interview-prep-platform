@@ -595,8 +595,8 @@
     },
     "try": {
       "title": "Pruébalo antes que los candidatos",
-      "text": "Haz una entrevista de práctica gratuita para un puesto similar, o abre tu propia entrevista como candidato antes de invitar a nadie.",
-      "browse": "Ver entrevistas de práctica",
+      "text": "Prueba una plantilla gratuita para un puesto similar, o abre tu propia entrevista como candidato antes de invitar a nadie.",
+      "browse": "Ver plantillas",
       "topic": "Ventas",
       "question": "¿Con qué debe empezar un correo en frío?",
       "options": {
@@ -663,7 +663,8 @@
       "see": "Ver precios",
       "perCandidate": "por candidato",
       "base": "Pago por uso",
-      "volume": "Con una recarga desde ${from, number}"
+      "volume": "Con una recarga desde ${from, number}",
+      "compare": "${min}–{max} por candidato en vez de más de $100 al mes"
     },
     "faq": {
       "title": "¿Aún tienes preguntas?",
