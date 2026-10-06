@@ -722,10 +722,6 @@
         "verified": "Zweryfikowana służbowym e-mailem Twojego zespołu"
       }
     },
-    "languages": {
-      "title": "Dowolna rola, dowolny język",
-      "text": "prepza działa w {count} językach. Wklej opis stanowiska w jednym języku i rozmawiaj z kandydatami w innym."
-    },
     "pricing": {
       "title": "Płać za kandydata",
       "text": "Rozmowy są darmowe, podobnie jak {free, plural, one {Twój pierwszy kandydat} few {Twoi pierwsi # kandydaci} many {Twoich pierwszych # kandydatów} other {Twoich pierwszych # kandydata}}. Potem płacisz tylko za kandydatów, którzy odpowiadają, bez subskrypcji.",
@@ -743,6 +739,24 @@
     "ready": {
       "title": "Gotowy na rozmowy z pierwszymi kandydatami?",
       "start": "Utwórz rozmowę"
+    },
+    "trust": {
+      "title": "Uczciwie wobec kandydatów\nBezpiecznie dla Twoich danych",
+      "text": "Decyzję o zatrudnieniu podejmują ludzie. prepza sprawdza tylko wiedzę: bez analizy wideo, głosu ani twarzy.",
+      "see": "Dokumenty",
+      "points": {
+        "decision": "Człowiek może sprawdzić każdy wynik na prośbę",
+        "key": "Odpowiedzi oceniane stałym kluczem, nie przez AI",
+        "training": "Twoje dane nigdy nie trenują modeli AI",
+        "time": "Dodatkowy czas dla każdego, kto o niego poprosi",
+        "notice": "Kandydaci wiedzą, czego się spodziewać, zanim zaczną",
+        "own": "Kandydaci mogą pobrać lub usunąć swoje dane",
+        "data": "Dane usuwane po 12 miesiącach\nPrzechowywane w UE",
+        "payments": "Płatności przez Paddle, bez przechowywania danych karty",
+        "documents": "Umowa powierzenia danych i instrukcje w zestawie"
+      },
+      "terms": "Regulamin",
+      "privacy": "Polityka prywatności"
     }
   },
   "faq": {

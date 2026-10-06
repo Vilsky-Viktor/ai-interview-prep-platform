@@ -726,10 +726,6 @@
         "verified": "Kinnitatud sinu meeskonna töömeiliga"
       }
     },
-    "languages": {
-      "title": "Iga roll, iga keel",
-      "text": "prepza töötab {count} keeles. Kleebi töökuulutus ühes keeles ja intervjueeri kandidaate teises."
-    },
     "pricing": {
       "title": "Maksa kandidaadi eest",
       "text": "Intervjuud ja {free, plural, one {sinu esimene kandidaat} other {sinu esimesed # kandidaati}} on tasuta. Edaspidi maksad ainult nende kandidaatide eest, kes vastavad, ilma tellimuseta.",
@@ -747,6 +743,24 @@
     "ready": {
       "title": "Valmis oma esimesi kandidaate intervjueerima?",
       "start": "Loo intervjuu"
+    },
+    "trust": {
+      "title": "Õiglane kandidaatidele\nTurvaline sinu andmetele",
+      "text": "Värbamisotsuse teevad inimesed. prepza kontrollib ainult teadmisi: video-, hääle- ega näoanalüüsi pole.",
+      "see": "Dokumendid",
+      "points": {
+        "decision": "Inimene saab soovi korral iga tulemuse üle vaadata",
+        "key": "Vastuseid hinnatakse kindla võtme järgi, mitte AI-ga",
+        "training": "Sinu andmetega ei treenita kunagi AI mudeleid",
+        "time": "Lisaaeg kõigile, kes seda paluvad",
+        "notice": "Kandidaadid teavad enne alustamist, mis neid ees ootab",
+        "own": "Kandidaadid saavad oma andmed alla laadida või kustutada",
+        "data": "Andmed kustutatakse 12 kuu pärast\nHoitakse EL-is",
+        "payments": "Maksed Paddle'i kaudu, kaardiandmeid ei salvestata",
+        "documents": "Andmetöötlusleping ja juhised kaasas"
+      },
+      "terms": "Tingimused",
+      "privacy": "Privaatsuspoliitika"
     }
   },
   "faq": {

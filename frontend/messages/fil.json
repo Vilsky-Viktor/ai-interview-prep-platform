@@ -726,10 +726,6 @@
         "verified": "Verified gamit ang work email ng iyong team"
       }
     },
-    "languages": {
-      "title": "Anumang role, anumang wika",
-      "text": "Gumagana ang prepza sa {count} wika. Mag-paste ng job description sa isang wika at i-interview ang mga kandidato sa iba."
-    },
     "pricing": {
       "title": "Magbayad bawat kandidato",
       "text": "Libre ang mga interview at ang {free, plural, one {iyong unang kandidato} other {iyong unang # kandidato}}. Pagkatapos noon, magbabayad ka lang para sa mga kandidatong sumasagot, walang subscription.",
@@ -747,6 +743,24 @@
     "ready": {
       "title": "Handa ka na bang i-interview ang iyong mga unang kandidato?",
       "start": "Gumawa ng interview"
+    },
+    "trust": {
+      "title": "Patas sa mga kandidato\nLigtas para sa iyong data",
+      "text": "Tao ang nagpapasya sa pag-hire. Kaalaman lang ang sinusukat ng prepza: walang pagsusuri ng video, boses o mukha.",
+      "see": "Mga dokumento",
+      "points": {
+        "decision": "Puwedeng suriin ng tao ang anumang resulta kapag hiniling",
+        "key": "Minamarkahan ang sagot ng nakapirming answer key, hindi ng AI",
+        "training": "Hindi kailanman ginagamit ang data mo sa pag-train ng AI",
+        "time": "Dagdag na oras para sa sinumang humiling",
+        "notice": "Alam ng mga kandidato ang aasahan bago magsimula",
+        "own": "Puwedeng i-download o burahin ng kandidato ang kanilang data",
+        "data": "Binubura ang data pagkalipas ng 12 buwan\nNaka-host sa EU",
+        "payments": "Bayad sa Paddle, walang naka-save na detalye ng card",
+        "documents": "Kasama ang data processing agreement at mga tagubilin"
+      },
+      "terms": "Mga tuntunin",
+      "privacy": "Patakaran sa privacy"
     }
   },
   "faq": {

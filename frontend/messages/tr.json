@@ -721,10 +721,6 @@
         "verified": "Ekibinizin iş e-postasıyla doğrulanır"
       }
     },
-    "languages": {
-      "title": "Her rol, her dil",
-      "text": "prepza {count} dilde çalışır. İş tanımını bir dilde yapıştırın, adaylarla başka bir dilde mülakat yapın."
-    },
     "pricing": {
       "title": "Aday başına ödeyin",
       "text": "Mülakatlar ve {free, plural, one {ilk adayınız} other {ilk # adayınız}} ücretsizdir. Sonrasında yalnızca cevap veren adaylar için, abonelik olmadan ödersiniz.",
@@ -742,6 +738,24 @@
     "ready": {
       "title": "İlk adaylarınızla mülakat yapmaya hazır mısınız?",
       "start": "Mülakat oluştur"
+    },
+    "trust": {
+      "title": "Adaylara adil\nVerileriniz için güvenli",
+      "text": "İşe alım kararını insanlar verir. prepza yalnızca bilgiyi ölçer: video, ses ya da yüz analizi yoktur.",
+      "see": "Belgeler",
+      "points": {
+        "decision": "İstenirse her sonucu bir insan inceleyebilir",
+        "key": "Cevaplar yapay zekâyla değil, sabit anahtarla puanlanır",
+        "training": "Verileriniz asla yapay zekâ modeli eğitmez",
+        "time": "İsteyen herkese ek süre",
+        "notice": "Adaylar başlamadan önce ne bekleyeceklerini bilir",
+        "own": "Adaylar verilerini indirebilir ya da silebilir",
+        "data": "Veriler 12 ay sonra silinir\nAB'de barındırılır",
+        "payments": "Ödemeler Paddle ile, kart bilgisi saklanmaz",
+        "documents": "Veri işleme sözleşmesi ve talimatlar dahil"
+      },
+      "terms": "Koşullar",
+      "privacy": "Gizlilik politikası"
     }
   },
   "faq": {

@@ -718,10 +718,6 @@
         "verified": "Geverifieerd via het zakelijke e-mailadres van je team"
       }
     },
-    "languages": {
-      "title": "Elke rol, elke taal",
-      "text": "prepza werkt in {count} talen. Plak een functieomschrijving in de ene taal en spreek kandidaten in een andere."
-    },
     "pricing": {
       "title": "Betaal per kandidaat",
       "text": "Sollicitatiegesprekken en {free, plural, one {je eerste kandidaat} other {je eerste # kandidaten}} zijn gratis. Daarna betaal je alleen voor kandidaten die antwoorden, zonder abonnement.",
@@ -739,6 +735,24 @@
     "ready": {
       "title": "Klaar om je eerste kandidaten te spreken?",
       "start": "Sollicitatiegesprek maken"
+    },
+    "trust": {
+      "title": "Eerlijk voor kandidaten\nVeilig voor je gegevens",
+      "text": "Mensen nemen het aannamebesluit. prepza toetst alleen kennis: geen analyse van video, stem of gezicht.",
+      "see": "Documenten",
+      "points": {
+        "decision": "Een mens kan elk resultaat op verzoek bekijken",
+        "key": "Antwoorden nagekeken met een vaste sleutel, niet door AI",
+        "training": "Je gegevens trainen nooit AI-modellen",
+        "time": "Extra tijd voor iedereen die erom vraagt",
+        "notice": "Kandidaten weten vooraf wat ze kunnen verwachten",
+        "own": "Kandidaten kunnen hun gegevens downloaden of verwijderen",
+        "data": "Gegevens na 12 maanden verwijderd\nGehost in de EU",
+        "payments": "Betalingen via Paddle, geen kaartgegevens opgeslagen",
+        "documents": "Verwerkersovereenkomst en instructies inbegrepen"
+      },
+      "terms": "Voorwaarden",
+      "privacy": "Privacybeleid"
     }
   },
   "faq": {

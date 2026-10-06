@@ -722,10 +722,6 @@
         "verified": "Verified by your team's work email"
       }
     },
-    "languages": {
-      "title": "Any role, any language",
-      "text": "prepza works in {count} languages. Paste a job description in one language and interview candidates in another."
-    },
     "pricing": {
       "title": "Pay per candidate",
       "text": "Interviews and your first {free, plural, one {candidate} other {# candidates}} are free. After that, pay only for candidates who answer, with no subscription.",
@@ -743,6 +739,24 @@
     "ready": {
       "title": "Ready to interview your first candidates?",
       "start": "Create an interview"
+    },
+    "trust": {
+      "title": "Fair to candidates\nSafe for your data",
+      "text": "People make the hiring decision. prepza checks knowledge only: no video, voice or face analysis.",
+      "see": "Documents",
+      "points": {
+        "decision": "A person can review any result on request",
+        "key": "Answers marked by a fixed key, not by AI",
+        "training": "Your data never trains AI models",
+        "time": "Extra time for anyone who asks",
+        "notice": "Candidates know what to expect before they start",
+        "own": "Candidates can download or delete their data",
+        "data": "Data deleted after 12 months\nHosted in the EU",
+        "payments": "Payments by Paddle, no card details stored",
+        "documents": "Data processing agreement and instructions included"
+      },
+      "terms": "Terms",
+      "privacy": "Privacy policy"
     }
   },
   "faq": {

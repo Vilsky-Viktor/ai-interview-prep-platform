@@ -722,10 +722,6 @@
         "verified": "Vérifiée par l'e-mail professionnel de votre équipe"
       }
     },
-    "languages": {
-      "title": "Tout poste, toute langue",
-      "text": "prepza fonctionne en {count} langues. Collez une fiche de poste dans une langue et faites passer l'entretien aux candidats dans une autre."
-    },
     "pricing": {
       "title": "Payez par candidat",
       "text": "Les entretiens et {free, plural, one {votre premier candidat} other {vos # premiers candidats}} sont gratuits. Ensuite, vous ne payez que pour les candidats qui répondent, sans abonnement.",
@@ -743,6 +739,24 @@
     "ready": {
       "title": "Prêt à faire passer l'entretien à vos premiers candidats ?",
       "start": "Créer un entretien"
+    },
+    "trust": {
+      "title": "Juste pour les candidats\nSûr pour vos données",
+      "text": "Ce sont des personnes qui décident du recrutement. prepza ne vérifie que les connaissances : aucune analyse de vidéo, de voix ou de visage.",
+      "see": "Documents",
+      "points": {
+        "decision": "Une personne peut revoir tout résultat sur demande",
+        "key": "Réponses corrigées par une clé fixe, pas par l'IA",
+        "training": "Vos données n'entraînent jamais de modèles d'IA",
+        "time": "Du temps en plus pour qui le demande",
+        "notice": "Les candidats savent à quoi s'attendre avant de commencer",
+        "own": "Les candidats peuvent télécharger ou supprimer leurs données",
+        "data": "Données supprimées après 12 mois\nHébergées dans l'UE",
+        "payments": "Paiements par Paddle, aucune donnée de carte conservée",
+        "documents": "Accord de traitement des données et instructions inclus"
+      },
+      "terms": "Conditions",
+      "privacy": "Politique de confidentialité"
     }
   },
   "faq": {

@@ -722,10 +722,6 @@
         "verified": "Diverifikasi lewat email kerja timmu"
       }
     },
-    "languages": {
-      "title": "Peran apa pun, bahasa apa pun",
-      "text": "prepza tersedia dalam {count} bahasa. Tempel deskripsi pekerjaan dalam satu bahasa dan wawancarai kandidat dalam bahasa lain."
-    },
     "pricing": {
       "title": "Bayar per kandidat",
       "text": "Membuat wawancara gratis, begitu pula {free, plural, other {# kandidat}} pertamamu. Setelah itu, kamu hanya membayar kandidat yang menjawab, tanpa langganan.",
@@ -743,6 +739,24 @@
     "ready": {
       "title": "Siap mewawancarai kandidat pertamamu?",
       "start": "Buat wawancara"
+    },
+    "trust": {
+      "title": "Adil bagi kandidat\nAman untuk datamu",
+      "text": "Manusia yang memutuskan perekrutan. prepza hanya menguji pengetahuan: tanpa analisis video, suara, atau wajah.",
+      "see": "Dokumen",
+      "points": {
+        "decision": "Seseorang bisa meninjau hasil mana pun jika diminta",
+        "key": "Jawaban dinilai dengan kunci tetap, bukan oleh AI",
+        "training": "Datamu tidak pernah dipakai melatih model AI",
+        "time": "Waktu tambahan bagi siapa pun yang meminta",
+        "notice": "Kandidat tahu apa yang akan dihadapi sebelum mulai",
+        "own": "Kandidat bisa mengunduh atau menghapus datanya",
+        "data": "Data dihapus setelah 12 bulan\nDi-hosting di UE",
+        "payments": "Pembayaran lewat Paddle, data kartu tidak disimpan",
+        "documents": "Perjanjian pemrosesan data dan petunjuk disertakan"
+      },
+      "terms": "Ketentuan",
+      "privacy": "Kebijakan privasi"
     }
   },
   "faq": {

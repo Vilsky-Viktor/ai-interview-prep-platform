@@ -722,10 +722,6 @@
         "verified": "Verificato tramite l'email di lavoro del tuo team"
       }
     },
-    "languages": {
-      "title": "Qualsiasi ruolo, qualsiasi lingua",
-      "text": "prepza funziona in {count} lingue. Incolla una descrizione del ruolo in una lingua e fai il colloquio ai candidati in un'altra."
-    },
     "pricing": {
       "title": "Paghi per candidato",
       "text": "I colloqui e {free, plural, one {il tuo primo candidato} other {i tuoi primi # candidati}} sono gratis. Dopo paghi solo per i candidati che rispondono, senza abbonamento.",
@@ -743,6 +739,24 @@
     "ready": {
       "title": "Pronto a fare il colloquio ai tuoi primi candidati?",
       "start": "Crea un colloquio"
+    },
+    "trust": {
+      "title": "Equo con i candidati\nSicuro per i tuoi dati",
+      "text": "Sono le persone a decidere chi assumere. prepza verifica solo le conoscenze: nessuna analisi di video, voce o volto.",
+      "see": "Documenti",
+      "points": {
+        "decision": "Una persona può rivedere ogni risultato su richiesta",
+        "key": "Risposte corrette con una chiave fissa, non dall'IA",
+        "training": "I tuoi dati non addestrano mai modelli di IA",
+        "time": "Tempo in più per chi lo chiede",
+        "notice": "I candidati sanno cosa aspettarsi prima di iniziare",
+        "own": "I candidati possono scaricare o cancellare i propri dati",
+        "data": "Dati cancellati dopo 12 mesi\nOspitati nell'UE",
+        "payments": "Pagamenti con Paddle, nessun dato della carta salvato",
+        "documents": "Accordo sul trattamento dei dati e istruzioni inclusi"
+      },
+      "terms": "Termini",
+      "privacy": "Informativa sulla privacy"
     }
   },
   "faq": {

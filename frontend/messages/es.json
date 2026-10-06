@@ -722,10 +722,6 @@
         "verified": "Verificada con el correo de trabajo de tu equipo"
       }
     },
-    "languages": {
-      "title": "Cualquier puesto, cualquier idioma",
-      "text": "prepza funciona en {count} idiomas. Pega una descripción del puesto en un idioma y entrevista a los candidatos en otro."
-    },
     "pricing": {
       "title": "Paga por candidato",
       "text": "Las entrevistas y {free, plural, one {tu primer candidato} other {tus primeros # candidatos}} son gratis. Después solo pagas por los candidatos que responden, sin suscripción.",
@@ -743,6 +739,24 @@
     "ready": {
       "title": "¿Listo para entrevistar a tus primeros candidatos?",
       "start": "Crear una entrevista"
+    },
+    "trust": {
+      "title": "Justo con los candidatos\nSeguro para tus datos",
+      "text": "Las personas toman la decisión de contratación. prepza solo evalúa conocimientos: sin análisis de vídeo, voz ni rostro.",
+      "see": "Documentos",
+      "points": {
+        "decision": "Una persona puede revisar cualquier resultado si se pide",
+        "key": "Respuestas corregidas con una clave fija, no por IA",
+        "training": "Tus datos nunca entrenan modelos de IA",
+        "time": "Tiempo extra para quien lo pida",
+        "notice": "Los candidatos saben qué esperar antes de empezar",
+        "own": "Los candidatos pueden descargar o borrar sus datos",
+        "data": "Datos borrados a los 12 meses\nAlojados en la UE",
+        "payments": "Pagos con Paddle, sin guardar datos de tarjeta",
+        "documents": "Acuerdo de tratamiento de datos e instrucciones incluidos"
+      },
+      "terms": "Términos",
+      "privacy": "Política de privacidad"
     }
   },
   "faq": {

@@ -722,10 +722,6 @@
         "verified": "Verifiziert über die Arbeits-E-Mail deines Teams"
       }
     },
-    "languages": {
-      "title": "Jede Rolle, jede Sprache",
-      "text": "prepza funktioniert in {count} Sprachen. Füge eine Stellenbeschreibung in einer Sprache ein und führe Interviews mit Kandidaten in einer anderen."
-    },
     "pricing": {
       "title": "Zahl pro Kandidat",
       "text": "Interviews und {free, plural, one {dein erster Kandidat} other {deine ersten # Kandidaten}} sind kostenlos. Danach zahlst du nur für Kandidaten, die antworten, ohne Abo.",
@@ -743,6 +739,24 @@
     "ready": {
       "title": "Bereit für Interviews mit deinen ersten Kandidaten?",
       "start": "Interview erstellen"
+    },
+    "trust": {
+      "title": "Fair zu Kandidaten\nSicher für deine Daten",
+      "text": "Menschen treffen die Einstellungsentscheidung. prepza prüft nur Wissen: keine Video-, Stimm- oder Gesichtsanalyse.",
+      "see": "Dokumente",
+      "points": {
+        "decision": "Eine Person prüft jedes Ergebnis auf Wunsch",
+        "key": "Antworten nach festem Schlüssel bewertet, nicht von KI",
+        "training": "Deine Daten trainieren nie KI-Modelle",
+        "time": "Mehr Zeit für alle, die darum bitten",
+        "notice": "Kandidaten wissen vorher, was sie erwartet",
+        "own": "Kandidaten können ihre Daten herunterladen oder löschen",
+        "data": "Daten nach 12 Monaten gelöscht\nIn der EU gehostet",
+        "payments": "Zahlung über Paddle, keine Kartendaten gespeichert",
+        "documents": "Auftragsverarbeitungsvertrag und Anleitung inklusive"
+      },
+      "terms": "AGB",
+      "privacy": "Datenschutzerklärung"
     }
   },
   "faq": {

@@ -7,8 +7,8 @@ import { CompaniesSection } from "@/components/landing/companies"
 import { ControlSection } from "@/components/landing/control"
 import { HowItWorks } from "@/components/landing/how-it-works"
 import { JobAdLinkSection } from "@/components/landing/job-ad-link"
-import { LanguagesSection } from "@/components/landing/languages"
 import { PricingSection } from "@/components/landing/pricing"
+import { TrustSection } from "@/components/landing/trust"
 import { QualitySection } from "@/components/landing/quality"
 import { ReportsSection } from "@/components/landing/reports"
 import { TryFirstSection } from "@/components/landing/try-first"
@@ -64,7 +64,7 @@ export default async function HomePage() {
       <QualitySection />
       <JobAdLinkSection />
       <BrandSection />
-      <LanguagesSection />
+      <TrustSection />
       <PricingSection />
       <Closing />
     </main>

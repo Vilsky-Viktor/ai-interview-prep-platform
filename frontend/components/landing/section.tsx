@@ -22,11 +22,24 @@ export function LandingSection({
   return (
     <section
       id={id}
-      className="flex min-h-[calc(100svh-3.5rem)] scroll-mt-14 flex-col justify-center gap-8 py-12"
+      className="flex min-h-[calc(100svh-3.5rem)] scroll-mt-14 flex-col justify-center gap-8 py-20 sm:py-28"
     >
       <div className="mx-auto max-w-3xl space-y-4 text-center">
-        <h2 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
-          {title}
+        {/* A title over two lines ends each with the logo's blue dot, like the hero's. */}
+        <h2
+          className={cn(
+            "font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl",
+            title.includes("\n") && "no-dot"
+          )}
+        >
+          {title.includes("\n")
+            ? title.split("\n").map((line) => (
+                <span key={line} className="block">
+                  {line}
+                  <span className="text-primary">.</span>
+                </span>
+              ))
+            : title}
         </h2>
         <p className="mx-auto max-w-2xl text-lg leading-relaxed text-balance text-muted-foreground sm:text-xl">
           {text}
