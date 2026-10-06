@@ -76,6 +76,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm typecheck
+      - run: pnpm test
 
   images:
     name: ${{ matrix.name }} production image
@@ -131,11 +132,14 @@ jobs:
   smoke:
     name: smoke test (whole stack)
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       # The example settings run everything locally: the Firebase emulator, mailpit, no OpenAI key.
-      - run: cp .env.example .env
+      # The signed-in tests' superadmin is a CI-only account the emulator makes up.
+      - run: |
+          cp .env.example .env
+          sed -i 's/^SUPERADMIN_EMAILS=.*/SUPERADMIN_EMAILS=ci-superadmin@example.com/' .env
       - run: docker compose up --build -d
       # Waits for the services and the frontend's first compile, then checks pages and /ready.
       - name: Smoke test
@@ -155,6 +159,19 @@ jobs:
       # The signed-out pages in a real browser (Playwright's image), on desktop and phone sizes.
       - name: Page tests
         run: ./e2e_tests/pages.sh
+      # The signed-in pages through the Auth emulator. Interviews are made from templates, and the
+      # database has none: a small English one is added first (no OpenAI).
+      - name: Signed-in tests
+        run: |
+          docker compose exec -T library uv run --no-sync python - < e2e_tests/signed-in/seed/template.py
+          ./e2e_tests/signed-in.sh
+      - name: Signed-in test results on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: signed-in-test-results
+          path: e2e_tests/signed-in/test-results
+          if-no-files-found: ignore
       - name: Logs on failure
         if: failure()
         run: docker compose logs --tail 100

@@ -15,7 +15,7 @@ fi
 services=("$@")
 
 if [[ ${#services[@]} -eq 0 ]]; then
-  services=(library generation rounds companies billing)
+  services=(library generation rounds companies billing notifications)
 fi
 
 for service in "${services[@]}"; do

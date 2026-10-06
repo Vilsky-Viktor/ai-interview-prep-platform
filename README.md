@@ -246,8 +246,8 @@ cd services/rounds && uv sync && uv run pytest
 # Python lint and format, as CI runs them (ruff's version is pinned in CI)
 uvx ruff@0.16.10 check services packages evals && uvx ruff@0.16.10 format --check services packages evals
 
-# Frontend
-cd frontend && pnpm install && pnpm lint && pnpm typecheck
+# Frontend: lint, types, and unit tests of the pure helpers (frontend/tests, vitest)
+cd frontend && pnpm install && pnpm lint && pnpm typecheck && pnpm test
 # After changing an API: regenerate the frontend's API types (needs the stack running)
 cd frontend && pnpm api-types
 
@@ -283,7 +283,7 @@ python3 e2e_tests/flow.py
 
 Model and prompt quality is tested offline with the prepared datasets, judge prompts and metrics in [evals/](evals/README.md).
 
-CI runs all of these except the end-to-end test, which needs an OpenAI key. It also builds every production image and starts the whole stack for the smoke, integration and page tests.
+CI runs all of these except the end-to-end test, which needs an OpenAI key. It also builds every production image and starts the whole stack for the smoke, integration, page and signed-in tests. Its stack has no templates, so before the signed-in tests it adds a small English one (`e2e_tests/signed-in/seed/template.py`, no OpenAI), and its superadmin is a CI-only emulator account; on failure the screenshots and traces are kept as the run's `signed-in-test-results` artifact.
 
 ## CI/CD
 

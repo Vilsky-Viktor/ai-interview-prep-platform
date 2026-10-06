@@ -46,3 +46,12 @@
    (`DescriptionBox`, `BackLink`, `PageHeader`, `EditableTitle`, `TopicQuestions`)
    instead of new look-alikes. Keep it minimal: no new colors, shadows, gradients or
    effects unless asked.
+
+8. **Every piece of functionality is covered by tests, on the backend and the
+   frontend.** New or changed behaviour ships with its tests in the same change:
+   unit tests for logic (`services/<svc>/tests/unit`, `frontend/tests`), integration
+   tests for anything that touches the database, Redis or another service
+   (`services/<svc>/tests/integration`, run with `scripts/integration.sh`), and a
+   browser test for every user-facing flow or screen (`e2e_tests/pages` signed out,
+   `e2e_tests/signed-in` signed in). A bug fix adds a test that fails without it.
+   Run the affected suites before calling the work done.

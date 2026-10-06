@@ -6,7 +6,7 @@ const MARGIN = 53
 
 /** Where each page starts and how tall it is, in the report's px: a page ends before the first
 block or row that wouldn't fit, so none is cut in two. */
-function pageSlices(node: HTMLElement, pageHeight: number) {
+export function pageSlices(node: HTMLElement, pageHeight: number) {
   const top = node.getBoundingClientRect().top
   const slices = [{ start: 0, height: 0 }]
 

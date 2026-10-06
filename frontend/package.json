@@ -14,6 +14,7 @@
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "api-types": "openapi-typescript http://127.0.0.1:8090/api/library/openapi.json -o types/api/library.ts && openapi-typescript http://127.0.0.1:8090/api/generate/openapi.json -o types/api/generation.ts && openapi-typescript http://127.0.0.1:8090/api/rounds/openapi.json -o types/api/rounds.ts && openapi-typescript http://127.0.0.1:8090/api/companies/openapi.json -o types/api/companies.ts && openapi-typescript http://127.0.0.1:8090/api/billing/openapi.json -o types/api/billing.ts && openapi-typescript http://127.0.0.1:8090/api/notifications/openapi.json -o types/api/notifications.ts && prettier --write types/api",
     "check:messages": "node scripts/check-messages.mjs"
   },
@@ -49,6 +50,7 @@
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^5.0.3"
   }
 }
