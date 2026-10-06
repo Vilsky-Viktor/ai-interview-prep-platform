@@ -4,16 +4,28 @@
 import { sleep } from "k6"
 import http from "k6/http"
 
-import { API_P95, API_URL, BASE_URL, DURATION, ERROR_RATE, PAGE_P95, THINK_SECONDS, VUS } from "./lib/config.js"
+import {
+  API_P95,
+  API_URL,
+  BASE_URL,
+  DURATION,
+  ERROR_RATE,
+  PAGE_P95,
+  THINK_SECONDS,
+  VUS,
+} from "./lib/config.js"
 import { visit } from "./lib/http.js"
 
-const PAGES = __ENV.PAGES === "0" ? {} : {
-  home: "/",
-  pricing: "/pricing",
-  faq: "/faq",
-  documents: "/documents",
-  practice: "/practice",
-}
+const PAGES =
+  __ENV.PAGES === "0"
+    ? {}
+    : {
+        home: "/",
+        pricing: "/pricing",
+        faq: "/faq",
+        documents: "/documents",
+        practice: "/practice",
+      }
 const API = {
   catalog: "/billing/catalog",
   templates: "/library/templates?language=en",
@@ -23,8 +35,12 @@ const API = {
 export const options = {
   scenarios: { visitors: { executor: "constant-vus", vus: VUS, duration: DURATION } },
   thresholds: {
-    ...Object.fromEntries(Object.keys(PAGES).map((name) => [`http_req_duration{endpoint:${name}}`, [PAGE_P95]])),
-    ...Object.fromEntries(Object.keys(API).map((name) => [`http_req_duration{endpoint:${name}}`, [API_P95]])),
+    ...Object.fromEntries(
+      Object.keys(PAGES).map((name) => [`http_req_duration{endpoint:${name}}`, [PAGE_P95]])
+    ),
+    ...Object.fromEntries(
+      Object.keys(API).map((name) => [`http_req_duration{endpoint:${name}}`, [API_P95]])
+    ),
     "http_req_failed{phase:load}": [ERROR_RATE],
   },
 }

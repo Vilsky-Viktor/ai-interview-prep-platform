@@ -10,7 +10,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { COUNTDOWN_WARNING_SECONDS } from "@/constants/interviews"
+import { warningSeconds } from "@/lib/countdown"
 
 function secondsUntil(end: number) {
   return Math.max(0, Math.ceil((end - Date.now()) / 1000))
@@ -27,13 +27,16 @@ function clock(seconds: number) {
 stops being `paused` after that.
 
 `seconds` comes from the server as time left, not a moment, so a wrong device clock doesn't
-matter. Render it with a key per question, so each question starts its own clock. */
+matter. `questionSeconds` is the question's whole time, which sets when it turns red. Render it
+with a key per question, so each question starts its own clock. */
 export function Countdown({
   seconds,
+  questionSeconds,
   paused = false,
   onExpire,
 }: {
   seconds: number
+  questionSeconds: number
   paused?: boolean
   onExpire: () => void
 }) {
@@ -58,12 +61,13 @@ export function Countdown({
 
   // role="timer" is read only when asked; the last seconds are announced once, on reaching
   // them, not every second.
-  const warning = left > 0 && left <= COUNTDOWN_WARNING_SECONDS
+  const warningAt = warningSeconds(questionSeconds)
+  const warning = left > 0 && left <= warningAt
 
   return (
     <>
       <span aria-live="polite" className="sr-only">
-        {warning && t("timeLeft", { time: clock(COUNTDOWN_WARNING_SECONDS) })}
+        {warning && t("timeLeft", { time: clock(warningAt) })}
       </span>
       <Tooltip>
         <TooltipTrigger

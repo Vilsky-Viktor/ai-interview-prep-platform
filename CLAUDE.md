@@ -55,3 +55,8 @@
    browser test for every user-facing flow or screen (`e2e_tests/pages` signed out,
    `e2e_tests/signed-in` signed in). A bug fix adds a test that fails without it.
    Run the affected suites before calling the work done.
+
+9. **READMEs stay current.** When a change affects anything a README describes
+   (features, behaviour, setup, settings, commands, tests, deployment), update that
+   README in the same change: the root `README.md`, `infra/README.md` and any README
+   next to the changed code. Describe what is true now, not the change itself.

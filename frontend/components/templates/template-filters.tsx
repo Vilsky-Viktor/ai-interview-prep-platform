@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "cn"
 import { ChevronDownIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
@@ -124,7 +125,13 @@ export function TemplateFilterBar({
             <Button
               type="button"
               variant="ghost"
-              className={`${TRIGGER} normal-case`}
+              // Language names keep their capitals; "all languages" is lowercase like the rest.
+              className={cn(
+                TRIGGER,
+                current.languages.length > 0 &&
+                  current.languages.length <= 2 &&
+                  "normal-case"
+              )}
             />
           }
         >

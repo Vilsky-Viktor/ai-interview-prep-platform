@@ -1,7 +1,7 @@
 import uuid
 
 from prepza_common.sets import PreparationIn
-from sqlalchemy import Text, cast, or_, select, text
+from sqlalchemy import Text, cast, func, or_, select, text
 from sqlalchemy.orm import selectinload
 
 from app.constants.reuse import MIN_COPY_QUESTIONS
@@ -124,11 +124,28 @@ async def copy_template(template_id: uuid.UUID, company_id: str) -> QuestionSet 
 
 
 async def list_templates(
-    q: str, level: str | None, languages: list[str], offset: int, limit: int
+    q: str,
+    level: str | None,
+    languages: list[str],
+    offset: int,
+    limit: int,
+    copyable: bool = False,
 ) -> list[QuestionSet]:
     """Newest first; `q` matches anywhere in the title, a topic's title or a subtopic, and no
-    languages means every one."""
+    languages means every one. `copyable` keeps only the templates copy_template can copy: with
+    a topic that has at least MIN_COPY_QUESTIONS private questions left."""
     filters = [QuestionSet.kind == SetKind.TEMPLATE]
+
+    if copyable:
+        full_topics = (
+            select(Question.topic_id)
+            .join(Topic, Topic.id == Question.topic_id)
+            .where(Topic.set_id == QuestionSet.id, Question.stage == Stage.PRIVATE)
+            .group_by(Question.topic_id)
+            .having(func.count() >= MIN_COPY_QUESTIONS)
+            .exists()
+        )
+        filters.append(full_topics)
 
     if q:
         pattern = f"%{escape_like(q)}%"

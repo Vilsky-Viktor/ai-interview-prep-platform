@@ -6,20 +6,19 @@ import exec from "k6/execution"
 import { Rate } from "k6/metrics"
 
 import { candidateEmail, signUp } from "./lib/accounts.js"
-import {
-  API_P95,
-  CANDIDATES_PER_COMPANY,
-  ERROR_RATE,
-  ITERATIONS,
-  VUS,
-} from "./lib/config.js"
+import { API_P95, CANDIDATES_PER_COMPANY, ERROR_RATE, ITERATIONS, VUS } from "./lib/config.js"
 import { createCompany, takeInterview } from "./lib/interviews.js"
 
 const finished = new Rate("interviews_finished")
 
 export const options = {
   scenarios: {
-    candidates: { executor: "per-vu-iterations", vus: VUS, iterations: ITERATIONS, maxDuration: "15m" },
+    candidates: {
+      executor: "per-vu-iterations",
+      vus: VUS,
+      iterations: ITERATIONS,
+      maxDuration: "15m",
+    },
   },
   setupTimeout: "10m",
   thresholds: {

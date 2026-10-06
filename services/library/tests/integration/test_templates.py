@@ -87,6 +87,32 @@ def test_a_template_is_copied_into_a_company_test_and_stays_a_template(run):
     assert missing is None
 
 
+def test_companies_see_only_the_templates_they_can_copy(run):
+    word = uuid.uuid4().hex[:8]
+
+    async def scenario():
+        # 15 questions leave 10 private, enough to copy; 12 leave 8, too few.
+        full = await interview(f"Full {word}", template=True, questions=15)
+        short = await interview(f"Short {word}", template=True, questions=12)
+
+        def titles(rows):
+            return sorted(row.title for row in rows)
+
+        return (
+            titles(await templates.list_templates(word, None, [], 0, 10, copyable=True)),
+            titles(await templates.list_templates(word, None, [], 0, 10)),
+            await templates.copy_template(full, "company-4") is not None,
+            await templates.copy_template(short, "company-4") is None,
+        )
+
+    copyable, every, full_copied, short_refused = run(scenario())
+
+    assert copyable == [f"Full {word}"]
+    # Practice and superadmins still list every template.
+    assert every == [f"Full {word}", f"Short {word}"]
+    assert full_copied and short_refused
+
+
 def test_a_template_reveals_a_third_and_its_copies_remember_their_originals(run):
     async def scenario():
         template = await interview("Nurse", template=True, questions=15)

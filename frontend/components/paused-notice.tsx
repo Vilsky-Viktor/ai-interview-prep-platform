@@ -2,15 +2,18 @@ import { cn } from "cn"
 import { InfoIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { serverFetch } from "@/lib/server-api"
-
-/** While prepza is paused (the admin zone's emergency pause), the gray info card says so;
- * otherwise nothing. */
-export async function PausedNotice({ className }: { className?: string }) {
+/** While prepza is paused (the admin zone's emergency pause, from isPaused), the gray info card
+ * says so; otherwise nothing. */
+export async function PausedNotice({
+  paused,
+  className,
+}: {
+  paused: boolean
+  className?: string
+}) {
   const t = await getTranslations("pause")
-  const pause = await serverFetch<{ paused: boolean }>("/companies/pause")
 
-  if (!pause?.paused) {
+  if (!paused) {
     return null
   }
 

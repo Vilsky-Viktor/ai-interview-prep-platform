@@ -18,13 +18,23 @@ import {
 import { api, must } from "./lib/http.js"
 import { createCompany, takeInterview } from "./lib/interviews.js"
 
-const ENDPOINTS = ["companies", "interviews", "interview", "candidates", "filtered", "scorecard", "report"]
+const ENDPOINTS = [
+  "companies",
+  "interviews",
+  "interview",
+  "candidates",
+  "filtered",
+  "scorecard",
+  "report",
+]
 
 export const options = {
   scenarios: { owners: { executor: "constant-vus", vus: VUS, duration: DURATION } },
   setupTimeout: "10m",
   thresholds: {
-    ...Object.fromEntries(ENDPOINTS.map((name) => [`http_req_duration{endpoint:${name}}`, [API_P95]])),
+    ...Object.fromEntries(
+      ENDPOINTS.map((name) => [`http_req_duration{endpoint:${name}}`, [API_P95]])
+    ),
     "http_req_failed{phase:load}": [ERROR_RATE],
   },
 }
@@ -44,7 +54,11 @@ export function setup() {
       }
     }
 
-    const listed = must("GET", `/companies/interviews/${company.interview}/candidates`, company.owner)
+    const listed = must(
+      "GET",
+      `/companies/interviews/${company.interview}/candidates`,
+      company.owner
+    )
     companies.push({ ...company, candidates: listed.map((item) => item.id) })
   }
 

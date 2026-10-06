@@ -38,7 +38,9 @@ export async function ReportsSection() {
                   <span className="text-primary">.</span>
                 </p>
                 <span className="flex items-center gap-1 text-muted-foreground">
-                  <span className="me-2 text-sm">{report("orSummary")}</span>
+                  <span className="me-2 text-sm lowercase">
+                    {report("orSummary")}
+                  </span>
                   <span className={ICON}>
                     <WhatsAppIcon className="size-8" />
                   </span>

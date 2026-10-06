@@ -49,7 +49,8 @@ export default async function CompanyTemplatesPage({
 
   const browser = await TemplateBrowser({
     base: `/company/${companyId}/templates`,
-    listPath: "/library/templates",
+    // Only templates a company can copy, so "use template" never fails.
+    listPath: "/library/templates/copyable",
     params: await searchParams,
     openBase: `/company/${companyId}/templates`,
     // Using a template creates a test: not for viewers.

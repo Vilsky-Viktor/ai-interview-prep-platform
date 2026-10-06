@@ -21,6 +21,14 @@ describe("splitCodeBlocks", () => {
     ])
   })
 
+  it("keeps the first word of a one-line fence", () => {
+    expect(splitCodeBlocks("Run ```SELECT 1``` first")).toEqual([
+      { code: false, text: "Run " },
+      { code: true, text: "SELECT 1" },
+      { code: false, text: " first" },
+    ])
+  })
+
   it("takes a fence without a language", () => {
     expect(splitCodeBlocks("```\nx\ny\n```")).toEqual([
       { code: true, text: "x\ny" },

@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server"
 import { BackLink } from "@/components/back-link"
 import { NewInterview } from "@/components/company/new-interview"
 import { PausedNotice } from "@/components/paused-notice"
+import { isPaused } from "@/lib/pause"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Company } from "@/types/company"
@@ -26,6 +27,8 @@ export default async function NewInterviewPage({
     redirect(`/company/${companyId}/interviews`)
   }
 
+  const paused = await isPaused()
+
   // Laid out like the home page's start: a title and the box, nothing else.
   return (
     <main className="mx-auto max-w-5xl px-6">
@@ -42,8 +45,9 @@ export default async function NewInterviewPage({
               {t("createTitle")}
             </h1>
           </div>
-          <PausedNotice />
-          <NewInterview companyId={companyId} />
+          <PausedNotice paused={paused} />
+          {/* While paused, nothing can be generated: the box is there but off. */}
+          <NewInterview companyId={companyId} disabled={paused} />
         </div>
       </div>
     </main>

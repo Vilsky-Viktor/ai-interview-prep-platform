@@ -13,17 +13,19 @@ import { isSubmitShortcut } from "@/lib/keys"
 
 /** The box a test starts from, as on the home page: the pasted description, the language to
  * generate in, and the send arrow. `onSubmit` returns once the page moves on, or after an error,
- * which re-enables the box. */
+ * which re-enables the box. `disabled` turns the text and the arrow off, e.g. while paused. */
 export function DescriptionBox({
   placeholder,
   label,
   submitLabel,
   onSubmit,
+  disabled = false,
 }: {
   placeholder: string
   label: string
   submitLabel: string
   onSubmit: (text: string, generateIn: Locale) => Promise<void>
+  disabled?: boolean
 }) {
   const common = useTranslations("common")
   const [text, setText] = useState("")
@@ -58,6 +60,7 @@ export function DescriptionBox({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         aria-label={label}
+        disabled={disabled}
         className="max-h-72 min-h-40 resize-none border-0 bg-transparent p-2 text-base shadow-none focus-visible:ring-0 md:text-base dark:bg-transparent"
         autoFocus
       />
@@ -69,7 +72,7 @@ export function DescriptionBox({
             type="submit"
             size="icon-lg"
             className="rounded-full"
-            disabled={busy || !text.trim()}
+            disabled={disabled || busy || !text.trim()}
             aria-label={submitLabel}
           >
             <ArrowUpIcon />

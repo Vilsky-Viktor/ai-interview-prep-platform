@@ -33,6 +33,22 @@ async def list_templates(
     return [TemplateSummary.model_validate(row, from_attributes=True) for row in rows]
 
 
+@router.get("/copyable")
+async def list_copyable_templates(
+    page: PageParams,
+    q: str = Query(default="", max_length=MAX_TITLE_LENGTH),
+    level: Level | None = None,
+    language: Annotated[list[Language] | None, Query()] = None,
+) -> list[TemplateSummary]:
+    """The templates a company can start a test from: only those it can copy, so using one never
+    fails. Practice lists every template."""
+    rows = await templates.list_templates(
+        q.strip(), level, language or [], page.offset, page.limit, copyable=True
+    )
+
+    return [TemplateSummary.model_validate(row, from_attributes=True) for row in rows]
+
+
 @router.get("/{template_id}")
 async def get_template(template_id: UUID) -> TemplateOut:
     """A template's topics and subtopics, to review before using it; its questions stay hidden."""

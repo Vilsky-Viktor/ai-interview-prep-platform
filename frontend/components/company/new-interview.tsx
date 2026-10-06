@@ -8,7 +8,13 @@ import { DescriptionBox } from "@/components/description-box"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { Interview } from "@/types/company"
 
-export function NewInterview({ companyId }: { companyId: string }) {
+export function NewInterview({
+  companyId,
+  disabled,
+}: {
+  companyId: string
+  disabled: boolean
+}) {
   const t = useTranslations("interviews")
   const start = useTranslations("start")
   const router = useRouter()
@@ -36,6 +42,7 @@ export function NewInterview({ companyId }: { companyId: string }) {
       label={t("jobDescription")}
       submitLabel={t("generate")}
       onSubmit={create}
+      disabled={disabled}
     />
   )
 }

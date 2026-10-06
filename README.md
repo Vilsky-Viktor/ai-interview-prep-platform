@@ -279,6 +279,12 @@ docker compose exec frontend pnpm check:messages
 # generates an interview and invites a candidate, who
 # takes it from the invite link; the company sees the scorecard and pays for that candidate
 python3 e2e_tests/flow.py
+
+# Load tests with k6, in its Docker image, against the local stack only (never production; not in
+# CI): many candidates taking a test, owners on the dashboard, the public pages. Throwaway users,
+# companies and tests from local templates, all deleted and counted afterwards; settings, thresholds
+# and results in e2e_tests/load/README.md
+./e2e_tests/load.sh candidates      # or: dashboard, public; VUS=20 ITERATIONS=2 ./e2e_tests/load.sh candidates
 ```
 
 Model and prompt quality is tested offline with the prepared datasets, judge prompts and metrics in [evals/](evals/README.md).

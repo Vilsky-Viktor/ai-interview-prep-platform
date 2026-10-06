@@ -82,12 +82,15 @@ test("superadmin turns the pause and maintenance mode on and off", async ({
     const newInterview = `/company/${company.id}/interviews/new`
     await visit(owner, newInterview)
     await expect(owner.getByText(PAUSE_NOTICE)).toBeVisible()
+    // The start box is there but off, so it's clearly unavailable.
+    await expect(owner.getByLabel("Job description")).toBeDisabled()
     await shot(owner, "new-interview-paused")
     await flip(superadmin, "Emergency pause", false)
     await expect.poll(() => paused(superadmin)).toBe(false)
     await visit(owner, newInterview)
     await expect(owner.getByText("Create an interview")).toBeVisible()
     await expect(owner.getByText(PAUSE_NOTICE)).toHaveCount(0)
+    await expect(owner.getByLabel("Job description")).toBeEnabled()
 
     // Maintenance asks first, saying how many candidates are in an interview right now.
     await visit(superadmin, "/superadmin/controls")

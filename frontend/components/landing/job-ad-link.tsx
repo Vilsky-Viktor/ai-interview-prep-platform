@@ -18,7 +18,7 @@ export async function JobAdLinkSection() {
           <div className="flex items-center gap-4 text-base">
             <LinkIcon className="size-7 shrink-0 text-primary" />
             <span className="min-w-0 flex-1 space-y-1">
-              <span className="block font-medium">
+              <span className="block font-medium lowercase">
                 {interviews("linkTitle")}
               </span>
               <span className="block text-sm text-muted-foreground">

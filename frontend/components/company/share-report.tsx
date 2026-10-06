@@ -84,7 +84,7 @@ export function ShareReport({
           <DialogTitle>{t("shareTitle")}</DialogTitle>
           {/* Chats can't carry the PDF, so they get a text summary. */}
           <div className="flex items-center gap-1">
-            <span className="me-2 text-sm text-muted-foreground">
+            <span className="me-2 text-sm text-muted-foreground lowercase">
               {t("orSummary")}
             </span>
             <Button

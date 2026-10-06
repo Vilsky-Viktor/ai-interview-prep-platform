@@ -1,5 +1,5 @@
 import { expect, test } from "../fixtures"
-import { templatesBySize } from "../helpers/api"
+import { addTemplate, deleteTemplate } from "../helpers/db"
 import { openTab, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { ownerEmail, randomId, throwawayEmail } from "../helpers/users"
@@ -27,45 +27,43 @@ test("owner creates a company, an interview from a template and invites a candid
   await shot(owner, "new-company-dialog")
   await owner.getByRole("dialog").getByRole("button", { name: "Create" }).click()
   await expect(owner).toHaveURL(/\/company\/[^/]+\/interviews$/)
+  const companyUrl = new URL(owner.url()).pathname.replace(/\/interviews$/, "")
   await expect(owner.getByRole("heading", { name })).toBeVisible()
   await expect(owner.getByText("No interviews yet. Create your first one.")).toBeVisible()
   await shot(owner, "interviews-empty")
 
-  // Templates tab: the warning card and "Use template" on each row.
-  const templates = await templatesBySize(owner)
-  await openTab(owner, "Templates")
-  await expect(owner.getByText("Templates are ready-made for common roles.")).toBeVisible()
-  await shot(owner, "templates")
-  // The smallest template that can be used: one with too few questions left can't.
-  let used = ""
+  // Templates tab: the warning card and "Use template" on each row. Only templates a company can
+  // copy are listed, so using one never fails: a throwaway one with too few questions isn't,
+  // though practice lists it; one with enough is, and opens as an interview.
+  const used = `E2E Copyable ${randomId()}`
+  const uncopyable = `E2E Uncopyable ${randomId()}`
+  const templateIds = [await addTemplate(used, 10), await addTemplate(uncopyable, 9)]
 
-  for (const template of templates) {
-    const row = owner.getByRole("listitem").filter({ hasText: template.title }).first()
+  try {
+    await visit(owner, `/practice?q=${encodeURIComponent(uncopyable)}`)
+    await expect(owner.getByText(uncopyable)).toBeVisible()
+    await visit(owner, `${companyUrl}/templates?q=${encodeURIComponent(uncopyable)}`)
+    await expect(owner.getByText("No templates match.")).toBeVisible()
+
+    await visit(owner, `${companyUrl}/interviews`)
+    await openTab(owner, "Templates")
+    await expect(owner.getByText("Templates are ready-made for common roles.")).toBeVisible()
+    // "all languages" is lowercase like "level: any level" beside it.
+    await expect(owner.getByRole("button", { name: "All languages" })).toHaveCSS(
+      "text-transform",
+      "lowercase"
+    )
+    await shot(owner, "templates")
+    await visit(owner, `${companyUrl}/templates?q=${encodeURIComponent(used)}`)
+    const row = owner.getByRole("listitem").filter({ hasText: used })
     await row.getByRole("button", { name: "Use template" }).click()
-    const failed = owner.getByText("Couldn't start an interview from this template.", {
-      exact: false,
-    })
-    const outcome = await Promise.race([
-      owner
-        .waitForURL(/\/interviews\/[^/?]+$/)
-        .then(() => "opened")
-        .catch(() => ""),
-      failed
-        .waitFor()
-        .then(() => "failed")
-        .catch(() => ""),
-    ])
-
-    if (outcome === "opened") {
-      used = template.title
-      break
+    await expect(owner).toHaveURL(/\/interviews\/[^/?]+$/)
+  } finally {
+    for (const id of templateIds) {
+      await deleteTemplate(id)
     }
-
-    await shot(owner, "template-failed")
-    await failed.waitFor({ state: "hidden" })
   }
 
-  expect(used, "a template that can be used").not.toBe("")
   await expect(owner.getByRole("button", { name: "Manage questions" }).first()).toBeVisible()
   await shot(owner, "interview")
 
@@ -75,6 +73,9 @@ test("owner creates a company, an interview from a template and invites a candid
   await expect(dialog.getByText(/AI-written questions and answer keys can be wrong/)).toBeVisible()
   await expect(dialog.getByRole("img", { name: "Correct answer" }).first()).toBeVisible()
   await expect(dialog.getByRole("img", { name: "Wrong answer" }).first()).toBeVisible()
+  // `inline code` in an option shows as code, as in the question, without its backticks.
+  await expect(dialog.locator("li code").first()).toHaveText("if is_member:")
+  await expect(dialog.getByText("`if is_member:`")).toHaveCount(0)
   await shot(owner, "manage-questions")
   await owner.keyboard.press("Escape")
 

@@ -27,41 +27,37 @@ export async function createCompany(page: Page, name = `E2E ${randomId()}`) {
   return { id: company.id, name }
 }
 
-/** The local English templates, fewest topics first, or a skip when there's none: interviews are
- * made from templates here, since generating one needs OpenAI. */
+/** The local English templates a company can use, fewest topics first, or a skip when there's
+ * none: interviews are made from templates here, since generating one needs OpenAI. */
 export async function templatesBySize(page: Page): Promise<Template[]> {
-  const templates = await api<Template[]>(page, "GET", "/library/templates?language=en&limit=50")
+  const templates = await api<Template[]>(
+    page,
+    "GET",
+    "/library/templates/copyable?language=en&limit=50"
+  )
   test.skip(
     templates.length === 0,
-    "No templates locally: an interview can't be made without a real (OpenAI) generation"
+    "No usable templates locally: an interview can't be made without a real (OpenAI) generation"
   )
 
   return templates.sort((a, b) => a.topic_count - b.topic_count)
 }
 
-/** An interview made from the smallest template that can be used (one with too few questions
- * left can't), with the shortest time per question. */
+/** An interview made from the smallest template a company can use, with the shortest time per
+ * question. */
 export async function createInterview(page: Page, companyId: string) {
-  for (const template of await templatesBySize(page)) {
-    const response = await page.request.post(
-      `${API_URL}/companies/interviews/from-template?company_id=${companyId}`,
-      {
-        headers: { Authorization: `Bearer ${await tokenOf(page)}` },
-        data: { template_id: template.id },
-      }
-    )
+  const [template] = await templatesBySize(page)
+  const interview = await api<{ id: string }>(
+    page,
+    "POST",
+    `/companies/interviews/from-template?company_id=${companyId}`,
+    { template_id: template.id }
+  )
+  await api(page, "PATCH", `/companies/interviews/${interview.id}/settings`, {
+    question_seconds: MIN_QUESTION_SECONDS,
+  })
 
-    if (response.ok()) {
-      const interview = (await response.json()) as { id: string }
-      await api(page, "PATCH", `/companies/interviews/${interview.id}/settings`, {
-        question_seconds: MIN_QUESTION_SECONDS,
-      })
-
-      return interview.id
-    }
-  }
-
-  throw new Error("No local template can be used")
+  return interview.id
 }
 
 /** Invites one candidate to the interview. */

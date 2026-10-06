@@ -1,6 +1,7 @@
 export type TextPart = { code: boolean; text: string }
 
-const CODE_BLOCK = /```[\w+-]*\n?([\s\S]*?)```/g
+// A language tag counts only when a new line follows it: "```SELECT 1```" is all code.
+const CODE_BLOCK = /```(?:[\w+-]*\n)?([\s\S]*?)```/g
 const INLINE_CODE = /`([^`\n]+)`/g
 
 function split(text: string, pattern: RegExp): TextPart[] {

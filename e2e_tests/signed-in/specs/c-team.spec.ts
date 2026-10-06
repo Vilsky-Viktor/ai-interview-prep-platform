@@ -6,18 +6,13 @@ import { openTab, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { ownerEmail, throwawayEmail } from "../helpers/users"
 
-/** Picks a role in the open role menu; if the menu stays open after the pick, it's closed with
- * Escape, as a person would click away. */
+/** Picks a role in the open role menu, which closes on the pick: left open, it would cover the
+ * dialog's buttons. */
 async function pickRole(page: Page, role: string) {
   const menu = page.getByRole("menu")
   await menu.getByRole("menuitemradio", { name: new RegExp(`^${role}`) }).click()
-  await shot(page, `role-picked-${role}`)
-
-  if (await menu.isVisible()) {
-    await page.keyboard.press("Escape")
-  }
-
   await expect(menu).toBeHidden()
+  await shot(page, `role-picked-${role}`)
 }
 
 // The team tab: a viewer invited and their role changed by the owner; the viewer then sees the
@@ -95,6 +90,12 @@ test("owner adds a viewer, who sees the company read-only", async ({ signInAs })
   await expect(page.getByRole("button", { name: "Share report" })).toBeVisible()
   await expect(page.getByRole("button", { name: "New candidate(s)" })).toHaveCount(0)
   await shot(page, "viewer-candidates")
+  // A sort menu closes on the pick too.
+  await page.getByRole("button", { name: "Sort by: grade" }).click()
+  await page.getByRole("menu").getByRole("menuitemradio", { name: "date" }).click()
+  await expect(page.getByRole("menu")).toBeHidden()
+  await expect(page).toHaveURL(/sort=date/)
+  await expect(page.getByRole("button", { name: "Sort by: date" })).toBeVisible()
 
   // Their own row in the team: a role badge, nothing to change.
   await visit(page, `/company/${company.id}/members`)

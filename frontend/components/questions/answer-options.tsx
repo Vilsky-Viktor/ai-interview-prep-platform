@@ -4,6 +4,8 @@ import { cn } from "cn"
 import { CheckIcon, XIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
+import { InlineText } from "@/components/questions/inline-text"
+
 /** A question's answer options: the right one with a green check, the wrong ones with a red
  * cross, in the scorecards' colors. `picked` marks the option a talent chose in practice. */
 export function AnswerOptions({
@@ -42,7 +44,7 @@ export function AnswerOptions({
             />
           )}
           <span className="bidi-auto">
-            {option.answer}
+            <InlineText text={option.answer} />
             {picked === index && (
               <span className="ms-2 text-muted-foreground">
                 {t("yourAnswer")}

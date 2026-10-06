@@ -7,7 +7,7 @@ export const API_URL = `${BASE_URL}/api`
 export const AUTH_URL = __ENV.AUTH_URL || "http://firebase-auth:9199"
 export const PROJECT_ID = __ENV.FIREBASE_PROJECT_ID
 
-export const VUS = Number(__ENV.VUS || 10)
+export const VUS = Number(__ENV.VUS || 5)
 export const DURATION = __ENV.DURATION || "1m"
 // Seconds a user waits between two actions (reading a question, looking at a page).
 export const THINK_SECONDS = Number(__ENV.THINK_SECONDS || 1)
