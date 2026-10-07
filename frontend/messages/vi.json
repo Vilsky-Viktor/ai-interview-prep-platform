@@ -38,7 +38,12 @@
     "faq": "Câu hỏi thường gặp",
     "contact": "Liên hệ",
     "about": "Về chúng tôi",
-    "practice": "Luyện tập miễn phí"
+    "practice": "Luyện tập miễn phí",
+    "tests": "Bài kiểm tra kỹ năng",
+    "preEmploymentTesting": "Kiểm tra trước tuyển dụng",
+    "aiInterviews": "Phỏng vấn AI",
+    "compare": "So sánh",
+    "guides": "Hướng dẫn"
   },
   "signIn": {
     "title": "Đăng nhập",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "Kiểm tra mọi người\nTuyển người giỏi nhất",
-    "text": "Phỏng vấn có tính giờ, tạo từ mô tả công việc của bạn. Câu hỏi riêng cho mỗi ứng viên và giới hạn thời gian cho từng câu. Từ 1 $ mỗi ứng viên."
+    "text": "Phỏng vấn có tính giờ, tạo từ mô tả công việc của bạn. Câu hỏi riêng cho mỗi ứng viên và giới hạn thời gian cho từng câu. $1–3 mỗi ứng viên."
   },
   "start": {
     "placeholder": "Dán mô tả công việc, hoặc mô tả vị trí và những gì ứng viên cần biết",
@@ -133,7 +138,7 @@
     "passRates": "Tỷ lệ đạt",
     "controls": "Điều khiển",
     "stats": "Thống kê",
-    "statsMonth": "Tháng",
+    "statsPeriod": "Khoảng thời gian",
     "statsAllTime": "Tất cả",
     "statsCards": {
       "companies": "Công ty",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "Xóa tài khoản của bạn?",
-    "everything": "Mọi thứ sẽ bị xóa: các bộ ôn luyện (kể cả với người đã tham gia), tiến độ, chứng chỉ, cuộc trò chuyện và kết quả phỏng vấn.",
+    "everything": "Mọi thứ đều bị xóa: vị trí của bạn trong nhóm của mỗi công ty, kết quả các buổi phỏng vấn bạn đã làm với tư cách ứng viên, các lượt luyện tập và thông báo của bạn.",
     "company": "Công ty do riêng bạn sở hữu sẽ bị xóa cùng các buổi phỏng vấn. Không thể hoàn tác.",
     "confirm": "Xóa tài khoản",
     "deleted": "Tài khoản của bạn đã bị xóa.",
@@ -548,7 +553,8 @@
     "topUp": "Nạp tiền"
   },
   "site": {
-    "description": "Chuẩn bị phỏng vấn với câu hỏi trắc nghiệm do AI tạo, các vòng luyện tập và chứng chỉ."
+    "description": "Bài kiểm tra kỹ năng có giới hạn thời gian cho tuyển dụng, tạo từ mô tả công việc của bạn. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng, kèm phiếu đánh giá và báo cáo. $1–3 mỗi ứng viên.",
+    "homeTitle": "Bài kiểm tra kỹ năng cho tuyển dụng, tạo từ mô tả công việc của bạn"
   },
   "legal": {
     "updated": "Cập nhật lần cuối",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Mời ứng viên",
         "text": "Dán danh sách, tải tệp lên hoặc chia sẻ một liên kết.\nLời nhắc được gửi tự động. Kết quả được xếp hạng theo điểm."
+      }
+    },
+    "advantages": {
+      "title": "Ưu điểm của chúng tôi",
+      "text": "Vì sao các công ty kiểm tra ứng viên bằng prepza.",
+      "points": {
+        "role": {
+          "title": "Từ mô tả công việc của bạn",
+          "text": "Bài kiểm tra cho vị trí của bạn, với chủ đề bạn duyệt trước khi viết câu hỏi."
+        },
+        "anyRole": {
+          "title": "Mọi vị trí",
+          "text": "Câu hỏi đọc code cho kỹ sư, bài kiểm tra kiến thức cho bán hàng, tài chính và hơn thế."
+        },
+        "cheating": {
+          "title": "Khó gian lận hơn",
+          "text": "Mỗi ứng viên có câu hỏi ngẫu nhiên riêng, hẹn giờ từng câu và cờ cảnh báo gian lận."
+        },
+        "price": {
+          "title": "Không cần gói đăng ký",
+          "text": "Trả tiền cho mỗi ứng viên làm bài. Những ứng viên đầu tiên được miễn phí."
+        },
+        "results": {
+          "title": "Kết quả để ra quyết định",
+          "text": "Ứng viên xếp theo điểm, kèm từng câu trả lời, thời gian và báo cáo PDF."
+        },
+        "languages": {
+          "title": "23 ngôn ngữ",
+          "text": "Phỏng vấn, email mời và toàn bộ trang web bằng ngôn ngữ của ứng viên."
+        }
       }
     },
     "control": {
@@ -761,12 +797,12 @@
       "see": "Tài liệu",
       "points": {
         "decision": "Có người xem lại bất kỳ kết quả nào khi được yêu cầu",
-        "key": "Chấm điểm theo đáp án cố định, không phải AI",
-        "training": "Dữ liệu của bạn không bao giờ dùng để huấn luyện AI",
+        "key": "Mỗi câu trả lời được chấm theo đáp án của nó; đáp án được sửa sẽ chấm lại các kết quả trước",
+        "training": "Dữ liệu của bạn không được dùng để huấn luyện mô hình AI",
         "time": "Thêm thời gian cho bất kỳ ai yêu cầu",
         "notice": "Ứng viên biết điều gì đang chờ trước khi bắt đầu",
         "own": "Ứng viên có thể tải xuống hoặc xóa dữ liệu của mình",
-        "data": "Dữ liệu bị xóa sau 12 tháng\nLưu trữ tại EU",
+        "data": "Dữ liệu bị xóa sau 12 tháng\nLưu trữ tại EU, một số nhà cung cấp ở Mỹ",
         "payments": "Thanh toán qua Paddle, không lưu thông tin thẻ",
         "documents": "Kèm thỏa thuận xử lý dữ liệu và hướng dẫn"
       },
@@ -850,7 +886,7 @@
     "humanReview": "Điểm số hỗ trợ quyết định của bạn, chứ không thay bạn quyết định. Hãy đọc các câu trả lời, và nếu ứng viên yêu cầu, hãy để một người xem xét kết quả của họ."
   },
   "practice": {
-    "title": "Luyện phỏng vấn miễn phí",
+    "title": "Phỏng vấn thử miễn phí theo vị trí",
     "intro": "Luyện tập cho một vị trí với buổi phỏng vấn có tính giờ, rồi xem điểm và mọi đáp án đúng. Hoàn toàn miễn phí.",
     "about": "Phỏng vấn luyện tập có tính giờ. Khi làm xong, bạn xem được điểm và mọi đáp án đúng. Riêng tư và miễn phí.",
     "pageTitle": "{title}: phỏng vấn luyện tập miễn phí",
@@ -896,5 +932,33 @@
     "title": "Đang bảo trì",
     "text": "prepza đang được bảo trì. Chúng tôi sẽ sớm trở lại.",
     "notice": "Chế độ bảo trì đang bật: hiện chỉ quản trị viên cấp cao mới dùng được prepza."
+  },
+  "content": {
+    "updated": "Cập nhật lần cuối",
+    "englishOnly": "Trang này chỉ có bằng tiếng Anh.",
+    "startTitle": "Kiểm tra ứng viên của bạn",
+    "startText": "Tạo bài kiểm tra kỹ năng có giới hạn thời gian từ mô tả công việc của bạn. $1–3 mỗi ứng viên, không cần gói đăng ký.",
+    "startButton": "Tạo bài kiểm tra"
+  },
+  "compare": {
+    "title": "So sánh prepza",
+    "intro": "So sánh có dẫn nguồn với các công cụ kiểm tra trước tuyển dụng khác: bài kiểm tra được tạo thế nào, chi phí bao nhiêu và khi nào công cụ nào phù hợp hơn."
+  },
+  "guides": {
+    "title": "Hướng dẫn tuyển dụng",
+    "intro": "Hướng dẫn thực tế cho nhà quản lý tuyển dụng: sàng lọc ứng viên, bài kiểm tra kỹ năng và dùng AI trong tuyển dụng một cách công bằng, hợp pháp."
+  },
+  "tests": {
+    "title": "Bài kiểm tra kỹ năng theo vị trí",
+    "intro": "Bài kiểm tra kỹ năng có giới hạn thời gian, dựng sẵn cho các vị trí phổ biến. Dùng nguyên bản hoặc tạo bài kiểm tra từ mô tả công việc của riêng bạn.",
+    "heading": "Bài kiểm tra kỹ năng {role} cho tuyển dụng",
+    "pageTitle": "Bài kiểm tra kỹ năng {role} cho tuyển dụng",
+    "pageDescription": "Bài kiểm tra kỹ năng {role} có giới hạn thời gian cho ứng viên của bạn, gồm {count, plural, other {# chủ đề}}. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng. $1–3 mỗi ứng viên.",
+    "lead": "Bài kiểm tra trắc nghiệm có giới hạn thời gian về kỹ năng của vị trí này. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng, có tính giờ cho từng câu, và bạn nhận phiếu đánh giá với mọi câu trả lời cùng thời gian làm. $1–3 mỗi ứng viên, không cần gói đăng ký.",
+    "create": "Tạo bài kiểm tra cho ứng viên của bạn",
+    "practise": "Luyện tập miễn phí",
+    "topics": "Nội dung kiểm tra",
+    "questions": "Câu hỏi phỏng vấn mẫu",
+    "questionsText": "Những câu hỏi như thế này, kèm đáp án đúng. Ứng viên của bạn nhận câu hỏi riêng, không bao giờ được công khai."
   }
 }

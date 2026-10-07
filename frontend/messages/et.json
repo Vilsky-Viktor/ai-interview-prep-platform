@@ -38,7 +38,12 @@
     "faq": "KKK",
     "contact": "Võta ühendust",
     "about": "Meist",
-    "practice": "Tasuta harjutamine"
+    "practice": "Tasuta harjutamine",
+    "tests": "Oskustestid",
+    "preEmploymentTesting": "Värbamistestid",
+    "aiInterviews": "AI-intervjuud",
+    "compare": "Võrdlus",
+    "guides": "Juhendid"
   },
   "signIn": {
     "title": "Logi sisse",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "Testi kõiki\nPalka parimad",
-    "text": "Ajapiiranguga intervjuud sinu töökuulutuse põhjal. Igale kandidaadile oma küsimused ja igal küsimusel taimer. Alates 1 $ kandidaadi kohta."
+    "text": "Ajapiiranguga intervjuud sinu töökuulutuse põhjal. Igale kandidaadile oma küsimused ja igal küsimusel taimer. $1–3 kandidaadi kohta."
   },
   "start": {
     "placeholder": "Kleebi töökuulutus või kirjelda rolli ja seda, mida kandidaat peaks teadma",
@@ -133,7 +138,7 @@
     "passRates": "Läbimise määrad",
     "controls": "Juhtimine",
     "stats": "Statistika",
-    "statsMonth": "Kuu",
+    "statsPeriod": "Periood",
     "statsAllTime": "Kogu aeg",
     "statsCards": {
       "companies": "Ettevõtted",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "Kustutada sinu konto?",
-    "everything": "Kõik kustutatakse: sinu ettevalmistused (ka neile, kes on nendega liitunud), edenemine, sertifikaadid, vestlused ja intervjuude tulemused.",
+    "everything": "Kõik kustutatakse: sinu koht iga ettevõtte meeskonnas, sinu tulemused intervjuudest, mille tegid kandidaadina, sinu harjutusvoorud ja teavitused.",
     "company": "Ettevõte, mille ainus omanik oled, kustutatakse koos selle intervjuudega. Seda ei saa tagasi võtta.",
     "confirm": "Kustuta konto",
     "deleted": "Sinu konto kustutati.",
@@ -548,7 +553,8 @@
     "topUp": "Laadi juurde"
   },
   "site": {
-    "description": "Valmistu intervjuudeks tehisaru loodud valikvastustega küsimuste, harjutusvoorude ja sertifikaatidega."
+    "description": "Ajapiiranguga oskustestid värbamiseks, loodud sinu töökuulutusest. Iga kandidaat saab oma juhuslikud küsimused, lisaks hindamislehed ja aruanded. $1–3 kandidaadi kohta.",
+    "homeTitle": "Oskustestid värbamiseks, loodud sinu töökuulutusest"
   },
   "legal": {
     "updated": "Viimati uuendatud",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Kutsu kandidaadid",
         "text": "Kleebi nimekiri, laadi üles fail või jaga üht linki.\nMeeldetuletused on automaatsed. Tulemused saabuvad punktide järgi järjestatult."
+      }
+    },
+    "advantages": {
+      "title": "Meie eelised",
+      "text": "Miks ettevõtted testivad kandidaate prepzaga.",
+      "points": {
+        "role": {
+          "title": "Sinu töökuulutuse põhjal",
+          "text": "Test sinu rollile, teemadega, mille kiidad heaks enne ühegi küsimuse kirjutamist."
+        },
+        "anyRole": {
+          "title": "Iga roll",
+          "text": "Koodilugemise küsimused inseneridele, teadmistestid müügile, finantsile ja muule."
+        },
+        "cheating": {
+          "title": "Raskem petta",
+          "text": "Igal kandidaadil omad juhuslikud küsimused, taimer igal küsimusel ja ausushoiatused."
+        },
+        "price": {
+          "title": "Ilma tellimuseta",
+          "text": "Maksad iga kandidaadi eest, kes testi teeb. Esimesed kandidaadid on tasuta."
+        },
+        "results": {
+          "title": "Otsuseks valmis tulemused",
+          "text": "Kandidaadid punktide järgi, iga vastuse ja selle ajaga, pluss PDF-aruanne."
+        },
+        "languages": {
+          "title": "23 keelt",
+          "text": "Intervjuud, kutsekirjad ja kogu sait sinu kandidaatide keeles."
+        }
       }
     },
     "control": {
@@ -769,12 +805,12 @@
       "see": "Dokumendid",
       "points": {
         "decision": "Inimene saab soovi korral iga tulemuse üle vaadata",
-        "key": "Vastuseid hinnatakse kindla võtme järgi, mitte AI-ga",
-        "training": "Sinu andmetega ei treenita kunagi AI mudeleid",
+        "key": "Iga vastust hinnatakse vastuse võtme järgi; parandatud võti hindab varasemad tulemused uuesti",
+        "training": "Sinu andmeid ei kasutata tehisintellekti mudelite treenimiseks",
         "time": "Lisaaeg kõigile, kes seda paluvad",
         "notice": "Kandidaadid teavad enne alustamist, mis neid ees ootab",
         "own": "Kandidaadid saavad oma andmed alla laadida või kustutada",
-        "data": "Andmed kustutatakse 12 kuu pärast\nHoitakse EL-is",
+        "data": "Andmed kustutatakse 12 kuu pärast\nMajutus ELis, osa teenusepakkujaid USAs",
         "payments": "Maksed Paddle'i kaudu, kaardiandmeid ei salvestata",
         "documents": "Andmetöötlusleping ja juhised kaasas"
       },
@@ -858,7 +894,7 @@
     "humanReview": "Tulemus toetab sinu otsust, aga ei tee seda sinu eest. Loe vastused läbi ja kui kandidaat palub, lase tema tulemus inimesel üle vaadata."
   },
   "practice": {
-    "title": "Tasuta intervjuu harjutamine",
+    "title": "Tasuta proovintervjuud rollide kaupa",
     "intro": "Harjuta rolli jaoks ajapiiranguga intervjuuga ning vaata siis oma hinnet ja kõiki õigeid vastuseid. Tasuta.",
     "about": "Ajapiiranguga harjutusintervjuu. Kui oled valmis, näed oma hinnet ja kõiki õigeid vastuseid. Privaatne ja tasuta.",
     "pageTitle": "{title}: tasuta harjutusintervjuu",
@@ -904,5 +940,33 @@
     "title": "Hoolduses",
     "text": "prepza on hoolduses. Oleme varsti tagasi.",
     "notice": "Hooldusrežiim on sees: praegu saavad prepzat kasutada ainult superadminid."
+  },
+  "content": {
+    "updated": "Viimati uuendatud",
+    "englishOnly": "See leht on ainult inglise keeles.",
+    "startTitle": "Testi oma kandidaate",
+    "startText": "Loo oma töökuulutuse põhjal ajapiiranguga oskustest. $1–3 kandidaadi kohta, ilma tellimuseta.",
+    "startButton": "Loo test"
+  },
+  "compare": {
+    "title": "prepza võrdlus",
+    "intro": "Allikatega võrdlused teiste värbamistestide tööriistadega: kuidas testid luuakse, mis need maksavad ja millal milline paremini sobib."
+  },
+  "guides": {
+    "title": "Värbamisjuhendid",
+    "intro": "Praktilised juhendid värbajatele: kandidaatide eelvalik, oskustestid ning AI õiglane ja seaduslik kasutamine värbamisel."
+  },
+  "tests": {
+    "title": "Oskustestid rollide kaupa",
+    "intro": "Valmis ajapiiranguga oskustestid levinud rollidele. Kasuta testi nii, nagu see on, või loo test oma töökuulutuse põhjal.",
+    "heading": "Rolli {role} oskustest värbamiseks",
+    "pageTitle": "Rolli {role} oskustest värbamiseks",
+    "pageDescription": "Ajapiiranguga oskustest rollile {role} sinu kandidaatidele: {count, plural, one {# teema} other {# teemat}}. Iga kandidaat saab oma juhuslikud küsimused. $1–3 kandidaadi kohta.",
+    "lead": "Ajapiiranguga valikvastustega test selle rolli oskustest. Iga kandidaat saab oma juhusliku küsimustekomplekti ja igal küsimusel on taimer ning sina saad hindamislehe iga vastuse ja selle ajaga. $1–3 kandidaadi kohta, ilma tellimuseta.",
+    "create": "Loo test oma kandidaatidele",
+    "practise": "Harjuta tasuta",
+    "topics": "Mida see testib",
+    "questions": "Näidisküsimused intervjuult",
+    "questionsText": "Sellised küsimused koos õigete vastustega. Sinu kandidaadid saavad oma küsimused, mida kunagi avalikult ei näidata."
   }
 }

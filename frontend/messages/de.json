@@ -38,7 +38,12 @@
     "faq": "FAQ",
     "contact": "Kontakt",
     "about": "Über uns",
-    "practice": "Kostenlos üben"
+    "practice": "Kostenlos üben",
+    "tests": "Kompetenztests",
+    "preEmploymentTesting": "Eignungstests",
+    "aiInterviews": "KI-Interviews",
+    "compare": "Vergleich",
+    "guides": "Ratgeber"
   },
   "signIn": {
     "title": "Anmelden",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "Teste jeden\nStelle die Besten ein",
-    "text": "Interviews mit Zeitlimit aus deiner Stellenbeschreibung. Eigene Fragen für jeden Kandidaten und ein Zeitlimit für jede. Ab $1 pro Kandidat."
+    "text": "Interviews mit Zeitlimit aus deiner Stellenbeschreibung. Eigene Fragen für jeden Kandidaten und ein Zeitlimit für jede. $1–3 pro Kandidat."
   },
   "start": {
     "placeholder": "Füge eine Stellenbeschreibung ein oder beschreibe die Rolle und was ein Kandidat wissen sollte",
@@ -133,7 +138,7 @@
     "passRates": "Bestehensquoten",
     "controls": "Steuerung",
     "stats": "Statistik",
-    "statsMonth": "Monat",
+    "statsPeriod": "Zeitraum",
     "statsAllTime": "Gesamt",
     "statsCards": {
       "companies": "Unternehmen",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "Dein Konto löschen?",
-    "everything": "Alles wird gelöscht: deine Vorbereitungen (auch für alle, die beigetreten sind), Fortschritt, Zertifikate, Chats und Interviewergebnisse.",
+    "everything": "Alles wird gelöscht: dein Platz im Team jedes Unternehmens, deine Ergebnisse aus Interviews, die du als Kandidat gemacht hast, deine Übungsrunden und deine Benachrichtigungen.",
     "company": "Ein Unternehmen, das nur dir gehört, wird mit seinen Interviews gelöscht. Das kann nicht rückgängig gemacht werden.",
     "confirm": "Konto löschen",
     "deleted": "Dein Konto wurde gelöscht.",
@@ -548,7 +553,8 @@
     "topUp": "Aufladen"
   },
   "site": {
-    "description": "Bereite dich mit KI-generierten Multiple-Choice-Fragen, Übungsrunden und Zertifikaten auf Interviews vor."
+    "description": "Kompetenztests mit Zeitlimit für die Personalauswahl, erstellt aus deiner Stellenbeschreibung. Jeder Kandidat bekommt eigene, zufällige Fragen, dazu Bewertungsbögen und Berichte. $1–3 pro Kandidat.",
+    "homeTitle": "Kompetenztests für die Personalauswahl, erstellt aus deiner Stellenbeschreibung"
   },
   "legal": {
     "updated": "Zuletzt aktualisiert",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Lade Kandidaten ein",
         "text": "Füge eine Liste ein, lade eine Datei hoch oder teile einen Link.\nErinnerungen gehen automatisch raus. Ergebnisse kommen nach Punktzahl sortiert."
+      }
+    },
+    "advantages": {
+      "title": "Unsere Vorteile",
+      "text": "Warum Unternehmen Kandidaten mit prepza testen.",
+      "points": {
+        "role": {
+          "title": "Aus der Stellenbeschreibung",
+          "text": "Ein Test für deine Rolle, mit Themen, die du freigibst, bevor Fragen entstehen."
+        },
+        "anyRole": {
+          "title": "Jede Rolle",
+          "text": "Code-Lesefragen für Entwickler, Wissenstests für Vertrieb, Finanzen und mehr."
+        },
+        "cheating": {
+          "title": "Schwerer zu schummeln",
+          "text": "Jeder Kandidat bekommt eigene Zufallsfragen, je einen Timer und Integritätshinweise."
+        },
+        "price": {
+          "title": "Kein Abo",
+          "text": "Zahl pro Kandidat, der den Test macht. Deine ersten Kandidaten sind kostenlos."
+        },
+        "results": {
+          "title": "Ergebnisse zum Entscheiden",
+          "text": "Kandidaten nach Punktzahl sortiert, mit jeder Antwort, ihrer Zeit und PDF-Bericht."
+        },
+        "languages": {
+          "title": "23 Sprachen",
+          "text": "Interviews, Einladungen und die ganze Website in der Sprache deiner Kandidaten."
+        }
       }
     },
     "control": {
@@ -765,12 +801,12 @@
       "see": "Dokumente",
       "points": {
         "decision": "Eine Person prüft jedes Ergebnis auf Wunsch",
-        "key": "Antworten nach festem Schlüssel bewertet, nicht von KI",
-        "training": "Deine Daten trainieren nie KI-Modelle",
+        "key": "Jede Antwort wird nach ihrem Lösungsschlüssel bewertet; ein korrigierter Schlüssel bewertet frühere Ergebnisse neu",
+        "training": "Deine Daten werden nicht zum Training von KI-Modellen verwendet",
         "time": "Mehr Zeit für alle, die darum bitten",
         "notice": "Kandidaten wissen vorher, was sie erwartet",
         "own": "Kandidaten können ihre Daten herunterladen oder löschen",
-        "data": "Daten nach 12 Monaten gelöscht\nIn der EU gehostet",
+        "data": "Daten nach 12 Monaten gelöscht\nIn der EU gehostet, einige US-Anbieter",
         "payments": "Zahlung über Paddle, keine Kartendaten gespeichert",
         "documents": "Auftragsverarbeitungsvertrag und Anleitung inklusive"
       },
@@ -854,7 +890,7 @@
     "humanReview": "Das Ergebnis unterstützt deine Entscheidung, es trifft sie nicht. Lies die Antworten, und wenn der Kandidat darum bittet, lass sein Ergebnis von einem Menschen prüfen."
   },
   "practice": {
-    "title": "Kostenlose Interview-Übung",
+    "title": "Kostenlose Übungsinterviews nach Rolle",
     "intro": "Übe für eine Rolle mit einem Interview mit Zeitlimit und sieh dann deine Note und jede richtige Antwort. Kostenlos.",
     "about": "Übungsinterview mit Zeitlimit. Wenn du fertig bist, siehst du deine Note und jede richtige Antwort. Privat und kostenlos.",
     "pageTitle": "{title}: kostenloses Übungsinterview",
@@ -900,5 +936,33 @@
     "title": "Wartungsarbeiten",
     "text": "prepza wird gerade gewartet. Wir sind bald zurück.",
     "notice": "Der Wartungsmodus ist an: Nur Superadmins können prepza gerade nutzen."
+  },
+  "content": {
+    "updated": "Zuletzt aktualisiert",
+    "englishOnly": "Diese Seite gibt es nur auf Englisch.",
+    "startTitle": "Teste deine Kandidaten",
+    "startText": "Erstelle einen Kompetenztest mit Zeitlimit aus deiner Stellenbeschreibung. $1–3 pro Kandidat, ohne Abo.",
+    "startButton": "Test erstellen"
+  },
+  "compare": {
+    "title": "prepza im Vergleich",
+    "intro": "Vergleiche mit Quellen zu anderen Tools für Eignungstests: wie die Tests entstehen, was sie kosten und wann welches besser passt."
+  },
+  "guides": {
+    "title": "Ratgeber für die Personalauswahl",
+    "intro": "Praktische Ratgeber für Hiring Manager: Bewerber vorauswählen, Kompetenztests und KI fair und rechtssicher in der Personalauswahl einsetzen."
+  },
+  "tests": {
+    "title": "Kompetenztests nach Rolle",
+    "intro": "Fertige Kompetenztests mit Zeitlimit für gängige Rollen. Nutze einen direkt oder erstelle einen Test aus deiner eigenen Stellenbeschreibung.",
+    "heading": "Kompetenztest für {role} zur Personalauswahl",
+    "pageTitle": "Kompetenztest für {role} zur Personalauswahl",
+    "pageDescription": "Ein Kompetenztest mit Zeitlimit für {role} für deine Kandidaten, mit {count, plural, one {# Thema} other {# Themen}}. Jeder Kandidat bekommt eigene, zufällige Fragen. $1–3 pro Kandidat.",
+    "lead": "Ein Multiple-Choice-Test mit Zeitlimit zu den Kompetenzen dieser Rolle. Jeder Kandidat bekommt eigene, zufällige Fragen mit einem Zeitlimit für jede, und du bekommst einen Bewertungsbogen mit jeder Antwort und ihrer Dauer. $1–3 pro Kandidat, ohne Abo.",
+    "create": "Test für deine Kandidaten erstellen",
+    "practise": "Kostenlos üben",
+    "topics": "Was getestet wird",
+    "questions": "Beispielfragen aus dem Interview",
+    "questionsText": "Fragen wie diese, mit den richtigen Antworten. Deine Kandidaten bekommen eigene, die nie öffentlich gezeigt werden."
   }
 }

@@ -38,7 +38,12 @@
     "faq": "FAQ",
     "contact": "Makipag-ugnayan",
     "about": "Tungkol sa amin",
-    "practice": "Libreng practice"
+    "practice": "Libreng practice",
+    "tests": "Skills tests",
+    "preEmploymentTesting": "Pre-employment testing",
+    "aiInterviews": "AI interviews",
+    "compare": "Ikumpara",
+    "guides": "Mga gabay"
   },
   "signIn": {
     "title": "Mag-sign in",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "I-test ang lahat\nI-hire ang pinakamahusay",
-    "text": "Mga timed interview mula sa iyong job description. Ibang mga tanong sa bawat kandidato at timer sa bawat isa. Mula $1 bawat kandidato."
+    "text": "Mga timed interview mula sa iyong job description. Ibang mga tanong sa bawat kandidato at timer sa bawat isa. $1–3 bawat kandidato."
   },
   "start": {
     "placeholder": "Mag-paste ng job description, o ilarawan ang role at ang dapat malaman ng kandidato",
@@ -133,7 +138,7 @@
     "passRates": "Mga pass rate",
     "controls": "Mga kontrol",
     "stats": "Stats",
-    "statsMonth": "Buwan",
+    "statsPeriod": "Panahon",
     "statsAllTime": "Lahat ng panahon",
     "statsCards": {
       "companies": "Mga kumpanya",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "Burahin ang iyong account?",
-    "everything": "Mabubura ang lahat: ang iyong mga paghahanda (pati para sa mga sumali rito), progreso, mga certificate, chat at resulta ng interview.",
+    "everything": "Mabubura ang lahat: ang puwesto mo sa team ng bawat kumpanya, ang mga resulta mo sa mga interview na kinuha mo bilang kandidato, ang mga practice round mo at ang mga notification mo.",
     "company": "Ang kumpanyang ikaw lang ang may-ari ay mabubura kasama ang mga interview nito. Hindi na ito maibabalik.",
     "confirm": "Burahin ang account",
     "deleted": "Nabura na ang iyong account.",
@@ -548,7 +553,8 @@
     "topUp": "Mag-top up"
   },
   "site": {
-    "description": "Maghanda para sa mga interview gamit ang mga multiple-choice na tanong na gawa ng AI, mga practice round at certificate."
+    "description": "Mga timed na skills test para sa pag-hire, ginawa mula sa job description mo. May sariling random na mga tanong ang bawat kandidato, pati mga scorecard at ulat. $1–3 bawat kandidato.",
+    "homeTitle": "Mga skills test para sa pag-hire, ginawa mula sa job description mo"
   },
   "legal": {
     "updated": "Huling na-update",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Mag-imbita ng mga kandidato",
         "text": "Mag-paste ng listahan, mag-upload ng file o mag-share ng isang link.\nAwtomatiko ang mga paalala. Dumarating ang resulta nang naka-ranggo ayon sa score."
+      }
+    },
+    "advantages": {
+      "title": "Mga bentahe namin",
+      "text": "Bakit sinusubok ng mga kumpanya ang mga kandidato gamit ang prepza.",
+      "points": {
+        "role": {
+          "title": "Mula sa job description mo",
+          "text": "Test para sa role mo, may mga topic na inaaprubahan mo bago isulat ang mga tanong."
+        },
+        "anyRole": {
+          "title": "Anumang role",
+          "text": "Code-reading para sa engineers, knowledge test para sa sales, finance at iba pa."
+        },
+        "cheating": {
+          "title": "Mas mahirap mandaya",
+          "text": "Sariling random na tanong bawat kandidato, timer sa bawat isa, at integrity flags."
+        },
+        "price": {
+          "title": "Walang subscription",
+          "text": "Magbayad bawat kandidatong kumuha ng test. Libre ang mga una mong kandidato."
+        },
+        "results": {
+          "title": "Resultang magagamit mo",
+          "text": "Naka-ranggo ayon sa score, kasama ang bawat sagot, oras nito, at PDF report."
+        },
+        "languages": {
+          "title": "23 wika",
+          "text": "Mga interview, invite email at buong site sa wika ng mga kandidato mo."
+        }
       }
     },
     "control": {
@@ -769,12 +805,12 @@
       "see": "Mga dokumento",
       "points": {
         "decision": "Puwedeng suriin ng tao ang anumang resulta kapag hiniling",
-        "key": "Minamarkahan ang sagot ng nakapirming answer key, hindi ng AI",
-        "training": "Hindi kailanman ginagamit ang data mo sa pag-train ng AI",
+        "key": "Bawat sagot ay minamarkahan ayon sa answer key nito; ang naitamang key ay muling nagmamarka ng mga nakaraang resulta",
+        "training": "Hindi ginagamit ang iyong data para sanayin ang mga AI model",
         "time": "Dagdag na oras para sa sinumang humiling",
         "notice": "Alam ng mga kandidato ang aasahan bago magsimula",
         "own": "Puwedeng i-download o burahin ng kandidato ang kanilang data",
-        "data": "Binubura ang data pagkalipas ng 12 buwan\nNaka-host sa EU",
+        "data": "Binubura ang data pagkalipas ng 12 buwan\nNaka-host sa EU, ilang provider sa US",
         "payments": "Bayad sa Paddle, walang naka-save na detalye ng card",
         "documents": "Kasama ang data processing agreement at mga tagubilin"
       },
@@ -858,7 +894,7 @@
     "humanReview": "Tumutulong ang score sa iyong desisyon; hindi ito ang nagpapasya. Basahin ang mga sagot, at kung hihilingin ng kandidato, ipa-review sa isang tao ang kanyang resulta."
   },
   "practice": {
-    "title": "Libreng practice sa interview",
+    "title": "Libreng mock interview ayon sa role",
     "intro": "Mag-practice para sa isang role gamit ang timed interview, saka tingnan ang iyong grado at bawat tamang sagot. Libre.",
     "about": "Timed na practice interview. Pagkatapos mo, makikita mo ang iyong grado at bawat tamang sagot. Pribado at libre.",
     "pageTitle": "{title}: libreng practice interview",
@@ -904,5 +940,33 @@
     "title": "Nasa maintenance",
     "text": "Kasalukuyang nasa maintenance ang prepza. Babalik kami agad.",
     "notice": "Naka-on ang maintenance mode: mga superadmin lang ang makakagamit ng prepza ngayon."
+  },
+  "content": {
+    "updated": "Huling na-update",
+    "englishOnly": "Nasa English lang ang page na ito.",
+    "startTitle": "I-test ang mga kandidato mo",
+    "startText": "Gumawa ng timed skills test mula sa job description mo. $1–3 bawat kandidato, walang subscription.",
+    "startButton": "Gumawa ng test"
+  },
+  "compare": {
+    "title": "Ikumpara ang prepza",
+    "intro": "Mga paghahambing na may sources sa ibang pre-employment testing tool: paano ginagawa ang mga test, magkano ang mga ito at kailan mas bagay ang bawat isa."
+  },
+  "guides": {
+    "title": "Mga gabay sa pag-hire",
+    "intro": "Mga praktikal na gabay para sa mga hiring manager: pag-screen ng mga aplikante, mga skills test, at patas at legal na paggamit ng AI sa pag-hire."
+  },
+  "tests": {
+    "title": "Mga skills test ayon sa role",
+    "intro": "Mga handa nang timed skills test para sa mga karaniwang role. Gamitin ang isa nang ganoon lang, o gumawa ng test mula sa sarili mong job description.",
+    "heading": "{role} skills test para sa pag-hire",
+    "pageTitle": "{role} skills test para sa pag-hire",
+    "pageDescription": "Isang timed {role} skills test para sa mga kandidato mo, na may {count, plural, one {# topic} other {# topic}}. Bawat kandidato ay may sariling random na mga tanong. $1–3 bawat kandidato.",
+    "lead": "Isang timed multiple-choice test ng mga skill ng role na ito. Bawat kandidato ay may sariling random na set ng mga tanong at timer sa bawat isa, at makakakuha ka ng scorecard na may bawat sagot at oras nito. $1–3 bawat kandidato, walang subscription.",
+    "create": "Gumawa ng test para sa mga kandidato mo",
+    "practise": "I-practice nang libre",
+    "topics": "Ano ang tine-test nito",
+    "questions": "Mga halimbawang tanong sa interview",
+    "questionsText": "Mga tanong na tulad nito, kasama ang mga tamang sagot. May sariling mga tanong ang mga kandidato mo, na hindi kailanman ipinapakita sa publiko."
   }
 }

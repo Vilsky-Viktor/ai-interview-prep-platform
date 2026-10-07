@@ -38,7 +38,12 @@
     "faq": "Perguntas frequentes",
     "contact": "Contato",
     "about": "Sobre nós",
-    "practice": "Prática gratuita"
+    "practice": "Prática gratuita",
+    "tests": "Testes de habilidades",
+    "preEmploymentTesting": "Testes pré-admissão",
+    "aiInterviews": "Entrevistas com IA",
+    "compare": "Comparar",
+    "guides": "Guias"
   },
   "signIn": {
     "title": "Entrar",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "Teste todos\nContrate os melhores",
-    "text": "Entrevistas cronometradas criadas a partir da sua descrição de vaga. Questões únicas para cada candidato e um cronômetro em cada uma. A partir de $1 por candidato."
+    "text": "Entrevistas cronometradas criadas a partir da sua descrição de vaga. Questões únicas para cada candidato e um cronômetro em cada uma. $1–3 por candidato."
   },
   "start": {
     "placeholder": "Cole uma descrição de vaga ou descreva a função e o que um candidato deve saber",
@@ -133,7 +138,7 @@
     "passRates": "Taxas de aprovação",
     "controls": "Controlos",
     "stats": "Estatísticas",
-    "statsMonth": "Mês",
+    "statsPeriod": "Período",
     "statsAllTime": "Todo o período",
     "statsCards": {
       "companies": "Empresas",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "Excluir sua conta?",
-    "everything": "Tudo é excluído: suas preparações (também para quem participa delas), progresso, certificados, chats e resultados de entrevistas.",
+    "everything": "Tudo é apagado: o seu lugar na equipe de cada empresa, os seus resultados das entrevistas que fez como candidato, as suas rodadas de prática e as suas notificações.",
     "company": "Uma empresa da qual só você é dono é excluída com suas entrevistas. Isso não pode ser desfeito.",
     "confirm": "Excluir conta",
     "deleted": "Sua conta foi excluída.",
@@ -548,7 +553,8 @@
     "topUp": "Recarregar"
   },
   "site": {
-    "description": "Prepare-se para entrevistas com questões de múltipla escolha geradas por IA, rodadas de prática e certificados."
+    "description": "Testes de habilidades cronometrados para contratar, criados a partir da sua descrição da vaga. Cada candidato recebe as próprias perguntas aleatórias, além de fichas de avaliação e relatórios. $1–3 por candidato.",
+    "homeTitle": "Testes de habilidades para contratar, criados a partir da sua descrição da vaga"
   },
   "legal": {
     "updated": "Última atualização",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Convide candidatos",
         "text": "Cole uma lista, envie um arquivo ou compartilhe um link.\nOs lembretes são automáticos. Os resultados chegam ordenados por pontuação."
+      }
+    },
+    "advantages": {
+      "title": "Nossas vantagens",
+      "text": "Por que as empresas avaliam candidatos com o prepza.",
+      "points": {
+        "role": {
+          "title": "Da sua descrição da vaga",
+          "text": "Um teste para a sua função, com tópicos que você aprova antes de qualquer questão."
+        },
+        "anyRole": {
+          "title": "Qualquer função",
+          "text": "Leitura de código para engenheiros, testes de conhecimento para vendas, finanças etc."
+        },
+        "cheating": {
+          "title": "Mais difícil trapacear",
+          "text": "Questões aleatórias para cada candidato, um timer em cada uma e alertas de integridade."
+        },
+        "price": {
+          "title": "Sem assinatura",
+          "text": "Pague por candidato que faz o teste. Seus primeiros candidatos são grátis."
+        },
+        "results": {
+          "title": "Resultados para agir",
+          "text": "Candidatos ordenados por pontuação, com cada resposta, seu tempo e um relatório PDF."
+        },
+        "languages": {
+          "title": "23 idiomas",
+          "text": "Entrevistas, e-mails de convite e todo o site no idioma dos seus candidatos."
+        }
       }
     },
     "control": {
@@ -761,12 +797,12 @@
       "see": "Documentos",
       "points": {
         "decision": "Uma pessoa pode revisar qualquer resultado se pedido",
-        "key": "Respostas corrigidas por gabarito fixo, não por IA",
-        "training": "Seus dados nunca treinam modelos de IA",
+        "key": "Cada resposta é pontuada pela sua chave de resposta; uma chave corrigida recalcula os resultados anteriores",
+        "training": "Os seus dados não são usados para treinar modelos de IA",
         "time": "Tempo extra para quem pedir",
         "notice": "Os candidatos sabem o que esperar antes de começar",
         "own": "Os candidatos podem baixar ou apagar seus dados",
-        "data": "Dados apagados após 12 meses\nHospedados na UE",
+        "data": "Dados apagados após 12 meses\nHospedado na UE, alguns fornecedores dos EUA",
         "payments": "Pagamentos pela Paddle, sem guardar dados do cartão",
         "documents": "Acordo de tratamento de dados e instruções incluídos"
       },
@@ -850,7 +886,7 @@
     "humanReview": "A pontuação apoia sua decisão; ela não decide por você. Leia as respostas e, se o candidato pedir, peça a uma pessoa que revise o resultado dele."
   },
   "practice": {
-    "title": "Prática de entrevista gratuita",
+    "title": "Entrevistas simuladas gratuitas por função",
     "intro": "Pratique para uma função com uma entrevista cronometrada e depois veja sua nota e todas as respostas certas. Sem custo.",
     "about": "Entrevista de prática cronometrada. Ao terminar, veja sua nota e todas as respostas certas. Privada e gratuita.",
     "pageTitle": "{title}: entrevista de prática gratuita",
@@ -896,5 +932,33 @@
     "title": "Em manutenção",
     "text": "O prepza está em manutenção. Voltamos em breve.",
     "notice": "O modo de manutenção está ativado: agora só os superadmins podem usar o prepza."
+  },
+  "content": {
+    "updated": "Última atualização",
+    "englishOnly": "Esta página está disponível só em inglês.",
+    "startTitle": "Avalie seus candidatos",
+    "startText": "Crie um teste de habilidades cronometrado a partir da sua descrição da vaga. $1–3 por candidato, sem assinatura.",
+    "startButton": "Criar um teste"
+  },
+  "compare": {
+    "title": "Compare o prepza",
+    "intro": "Comparações com fontes com outras ferramentas de testes pré-admissão: como os testes são criados, quanto custam e quando cada uma se encaixa melhor."
+  },
+  "guides": {
+    "title": "Guias de contratação",
+    "intro": "Guias práticos para gestores de contratação: triagem de candidatos, testes de habilidades e uso de IA na contratação de forma justa e legal."
+  },
+  "tests": {
+    "title": "Testes de habilidades por função",
+    "intro": "Testes de habilidades cronometrados e prontos para funções comuns. Use um como está ou crie um teste a partir da sua própria descrição da vaga.",
+    "heading": "Teste de habilidades de {role} para contratação",
+    "pageTitle": "Teste de habilidades de {role} para contratação",
+    "pageDescription": "Um teste de habilidades de {role} cronometrado para seus candidatos, com {count, plural, one {# tópico} other {# tópicos}}. Cada candidato recebe as próprias perguntas aleatórias. $1–3 por candidato.",
+    "lead": "Um teste cronometrado de múltipla escolha sobre as habilidades desta função. Cada candidato recebe o próprio conjunto aleatório de perguntas, com um cronômetro em cada uma, e você recebe uma ficha de avaliação com cada resposta e seu tempo. $1–3 por candidato, sem assinatura.",
+    "create": "Criar um teste para seus candidatos",
+    "practise": "Pratique de graça",
+    "topics": "O que ele avalia",
+    "questions": "Exemplos de perguntas de entrevista",
+    "questionsText": "Perguntas como estas, com as respostas certas. Seus candidatos recebem as próprias, nunca mostradas em público."
   }
 }

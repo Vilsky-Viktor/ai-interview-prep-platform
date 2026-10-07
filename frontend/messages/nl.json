@@ -38,7 +38,12 @@
     "faq": "Veelgestelde vragen",
     "contact": "Contact",
     "about": "Over ons",
-    "practice": "Gratis oefenen"
+    "practice": "Gratis oefenen",
+    "tests": "Vaardigheidstests",
+    "preEmploymentTesting": "Selectietests",
+    "aiInterviews": "AI-interviews",
+    "compare": "Vergelijken",
+    "guides": "Gidsen"
   },
   "signIn": {
     "title": "Inloggen",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "Test iedereen\nNeem de besten aan",
-    "text": "Sollicitatiegesprekken met tijdslimiet, gemaakt van je functieomschrijving. Unieke vragen voor elke kandidaat en een timer bij elke vraag. Vanaf $1 per kandidaat."
+    "text": "Sollicitatiegesprekken met tijdslimiet, gemaakt van je functieomschrijving. Unieke vragen voor elke kandidaat en een timer bij elke vraag. $1–3 per kandidaat."
   },
   "start": {
     "placeholder": "Plak een functieomschrijving, of beschrijf de rol en wat een kandidaat moet weten",
@@ -133,7 +138,7 @@
     "passRates": "Slagingspercentages",
     "controls": "Bediening",
     "stats": "Statistieken",
-    "statsMonth": "Maand",
+    "statsPeriod": "Periode",
     "statsAllTime": "Totaal",
     "statsCards": {
       "companies": "Bedrijven",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "Je account verwijderen?",
-    "everything": "Alles wordt verwijderd: je voorbereidingen (ook voor wie eraan meedoet), voortgang, certificaten, chats en gespreksresultaten.",
+    "everything": "Alles wordt verwijderd: je plek in het team van elk bedrijf, je resultaten van interviews die je als kandidaat deed, je oefenrondes en je meldingen.",
     "company": "Een bedrijf waarvan alleen jij eigenaar bent, wordt met zijn sollicitatiegesprekken verwijderd. Dit kan niet ongedaan worden gemaakt.",
     "confirm": "Account verwijderen",
     "deleted": "Je account is verwijderd.",
@@ -548,7 +553,8 @@
     "topUp": "Opwaarderen"
   },
   "site": {
-    "description": "Bereid je voor op sollicitatiegesprekken met door AI gegenereerde meerkeuzevragen, oefenrondes en certificaten."
+    "description": "Vaardigheidstests met tijdslimiet voor werving, gemaakt van je vacaturetekst. Elke kandidaat krijgt eigen willekeurige vragen, plus scorekaarten en rapporten. $1–3 per kandidaat.",
+    "homeTitle": "Vaardigheidstests voor werving, gemaakt van je vacaturetekst"
   },
   "legal": {
     "updated": "Laatst bijgewerkt",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Nodig kandidaten uit",
         "text": "Plak een lijst, upload een bestand of deel één link.\nHerinneringen gaan automatisch. Resultaten komen binnen gerangschikt op score."
+      }
+    },
+    "advantages": {
+      "title": "Onze voordelen",
+      "text": "Waarom bedrijven kandidaten testen met prepza.",
+      "points": {
+        "role": {
+          "title": "Uit je functieomschrijving",
+          "text": "Een test voor je rol, met onderwerpen die je goedkeurt voordat er vragen komen."
+        },
+        "anyRole": {
+          "title": "Elke rol",
+          "text": "Code-leesvragen voor engineers, kennistests voor verkoop, financiën en meer."
+        },
+        "cheating": {
+          "title": "Lastiger om te spieken",
+          "text": "Eigen willekeurige vragen per kandidaat, een timer per vraag en integriteitssignalen."
+        },
+        "price": {
+          "title": "Geen abonnement",
+          "text": "Betaal per kandidaat die de test maakt. Je eerste kandidaten zijn gratis."
+        },
+        "results": {
+          "title": "Bruikbare resultaten",
+          "text": "Kandidaten gerangschikt op score, met elk antwoord, de tijd ervan en een PDF-rapport."
+        },
+        "languages": {
+          "title": "23 talen",
+          "text": "Interviews, uitnodigingsmails en de hele site in de taal van je kandidaten."
+        }
       }
     },
     "control": {
@@ -761,12 +797,12 @@
       "see": "Documenten",
       "points": {
         "decision": "Een mens kan elk resultaat op verzoek bekijken",
-        "key": "Antwoorden nagekeken met een vaste sleutel, niet door AI",
-        "training": "Je gegevens trainen nooit AI-modellen",
+        "key": "Elk antwoord wordt beoordeeld met de antwoordsleutel; een gecorrigeerde sleutel herberekent eerdere resultaten",
+        "training": "Je gegevens worden niet gebruikt om AI-modellen te trainen",
         "time": "Extra tijd voor iedereen die erom vraagt",
         "notice": "Kandidaten weten vooraf wat ze kunnen verwachten",
         "own": "Kandidaten kunnen hun gegevens downloaden of verwijderen",
-        "data": "Gegevens na 12 maanden verwijderd\nGehost in de EU",
+        "data": "Gegevens na 12 maanden verwijderd\nGehost in de EU, enkele Amerikaanse leveranciers",
         "payments": "Betalingen via Paddle, geen kaartgegevens opgeslagen",
         "documents": "Verwerkersovereenkomst en instructies inbegrepen"
       },
@@ -850,7 +886,7 @@
     "humanReview": "De score ondersteunt je beslissing, maar neemt die niet. Lees de antwoorden, en laat een mens het resultaat beoordelen als de kandidaat daarom vraagt."
   },
   "practice": {
-    "title": "Gratis sollicitatiegesprek oefenen",
+    "title": "Gratis oefengesprekken per rol",
     "intro": "Oefen voor een rol met een gesprek met tijdslimiet en zie daarna je cijfer en elk juist antwoord. Kosteloos.",
     "about": "Oefengesprek met tijdslimiet. Als je klaar bent, zie je je cijfer en elk juist antwoord. Privé en gratis.",
     "pageTitle": "{title}: gratis oefengesprek",
@@ -896,5 +932,33 @@
     "title": "In onderhoud",
     "text": "prepza is in onderhoud. We zijn snel terug.",
     "notice": "De onderhoudsmodus staat aan: alleen superadmins kunnen prepza nu gebruiken."
+  },
+  "content": {
+    "updated": "Laatst bijgewerkt",
+    "englishOnly": "Deze pagina is alleen in het Engels.",
+    "startTitle": "Test je kandidaten",
+    "startText": "Maak een vaardigheidstest met tijdslimiet van je vacaturetekst. $1–3 per kandidaat, zonder abonnement.",
+    "startButton": "Test maken"
+  },
+  "compare": {
+    "title": "Vergelijk prepza",
+    "intro": "Vergelijkingen met bronnen met andere tools voor selectietests: hoe de tests worden gemaakt, wat ze kosten en wanneer welke beter past."
+  },
+  "guides": {
+    "title": "Gidsen voor werving",
+    "intro": "Praktische gidsen voor hiring managers: sollicitanten screenen, vaardigheidstests en AI eerlijk en wettig inzetten bij werving."
+  },
+  "tests": {
+    "title": "Vaardigheidstests per rol",
+    "intro": "Kant-en-klare vaardigheidstests met tijdslimiet voor veelvoorkomende rollen. Gebruik er een zoals hij is, of maak een test van je eigen vacaturetekst.",
+    "heading": "Vaardigheidstest {role} voor werving",
+    "pageTitle": "Vaardigheidstest {role} voor werving",
+    "pageDescription": "Een vaardigheidstest {role} met tijdslimiet voor je kandidaten, over {count, plural, one {# onderwerp} other {# onderwerpen}}. Elke kandidaat krijgt eigen willekeurige vragen. $1–3 per kandidaat.",
+    "lead": "Een meerkeuzetest met tijdslimiet over de vaardigheden voor deze rol. Elke kandidaat krijgt een eigen willekeurige set vragen met een timer bij elke vraag, en jij krijgt een scorekaart met elk antwoord en de tijd ervan. $1–3 per kandidaat, zonder abonnement.",
+    "create": "Maak een test voor je kandidaten",
+    "practise": "Gratis oefenen",
+    "topics": "Wat er getest wordt",
+    "questions": "Voorbeeldvragen voor het gesprek",
+    "questionsText": "Vragen zoals deze, met de juiste antwoorden. Je kandidaten krijgen hun eigen vragen, die nooit openbaar worden getoond."
   }
 }

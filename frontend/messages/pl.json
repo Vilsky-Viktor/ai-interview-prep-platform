@@ -38,7 +38,12 @@
     "faq": "Częste pytania",
     "contact": "Kontakt",
     "about": "O nas",
-    "practice": "Darmowe ćwiczenia"
+    "practice": "Darmowe ćwiczenia",
+    "tests": "Testy umiejętności",
+    "preEmploymentTesting": "Testy rekrutacyjne",
+    "aiInterviews": "Rozmowy z AI",
+    "compare": "Porównanie",
+    "guides": "Poradniki"
   },
   "signIn": {
     "title": "Zaloguj się",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "Sprawdź każdego\nZatrudniaj najlepszych",
-    "text": "Rozmowy na czas tworzone z Twojego opisu stanowiska. Unikalne pytania dla każdego kandydata i limit czasu na każde z nich. Od $1 za kandydata."
+    "text": "Rozmowy na czas tworzone z Twojego opisu stanowiska. Unikalne pytania dla każdego kandydata i limit czasu na każde z nich. $1–3 za kandydata."
   },
   "start": {
     "placeholder": "Wklej opis stanowiska albo opisz rolę i to, co kandydat powinien wiedzieć",
@@ -133,7 +138,7 @@
     "passRates": "Odsetki zaliczeń",
     "controls": "Sterowanie",
     "stats": "Statystyki",
-    "statsMonth": "Miesiąc",
+    "statsPeriod": "Okres",
     "statsAllTime": "Łącznie",
     "statsCards": {
       "companies": "Firmy",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "Usunąć konto?",
-    "everything": "Wszystko zostanie usunięte: Twoje przygotowania (także dla osób, które do nich dołączyły), postępy, certyfikaty, czaty i wyniki rozmów.",
+    "everything": "Wszystko zostaje usunięte: Twoje miejsce w zespole każdej firmy, Twoje wyniki z rozmów, które odbyłeś jako kandydat, Twoje rundy ćwiczeniowe i powiadomienia.",
     "company": "Firma, której jesteś jedynym właścicielem, zostanie usunięta razem z rozmowami. Tej operacji nie można cofnąć.",
     "confirm": "Usuń konto",
     "deleted": "Twoje konto zostało usunięte.",
@@ -548,7 +553,8 @@
     "topUp": "Doładuj"
   },
   "site": {
-    "description": "Przygotuj się do rozmów kwalifikacyjnych z pytaniami wielokrotnego wyboru generowanymi przez AI, sesjami ćwiczeń i certyfikatami."
+    "description": "Testy umiejętności na czas do rekrutacji, tworzone na podstawie Twojego opisu stanowiska. Każdy kandydat dostaje własne losowe pytania, a do tego karty ocen i raporty. $1–3 za kandydata.",
+    "homeTitle": "Testy umiejętności do rekrutacji, tworzone na podstawie Twojego opisu stanowiska"
   },
   "legal": {
     "updated": "Ostatnia aktualizacja",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Zaproś kandydatów",
         "text": "Wklej listę, prześlij plik lub udostępnij jeden link.\nPrzypomnienia wysyłają się same. Wyniki spływają uszeregowane według punktów."
+      }
+    },
+    "advantages": {
+      "title": "Nasze zalety",
+      "text": "Dlaczego firmy testują kandydatów z prepza.",
+      "points": {
+        "role": {
+          "title": "Z Twojego opisu stanowiska",
+          "text": "Test dla Twojej roli, z tematami, które zatwierdzasz przed napisaniem pytań."
+        },
+        "anyRole": {
+          "title": "Dowolna rola",
+          "text": "Czytanie kodu dla inżynierów, testy wiedzy dla sprzedaży, finansów i nie tylko."
+        },
+        "cheating": {
+          "title": "Trudniej oszukiwać",
+          "text": "Każdy kandydat dostaje własne losowe pytania, limit czasu na każde i flagi uczciwości."
+        },
+        "price": {
+          "title": "Bez subskrypcji",
+          "text": "Płacisz za kandydata, który rozwiąże test. Pierwsi kandydaci są za darmo."
+        },
+        "results": {
+          "title": "Wyniki gotowe do decyzji",
+          "text": "Kandydaci według punktów, z każdą odpowiedzią, jej czasem i raportem PDF."
+        },
+        "languages": {
+          "title": "23 języki",
+          "text": "Rozmowy, zaproszenia e-mail i cała strona w języku Twoich kandydatów."
+        }
       }
     },
     "control": {
@@ -765,12 +801,12 @@
       "see": "Dokumenty",
       "points": {
         "decision": "Człowiek może sprawdzić każdy wynik na prośbę",
-        "key": "Odpowiedzi oceniane stałym kluczem, nie przez AI",
-        "training": "Twoje dane nigdy nie trenują modeli AI",
+        "key": "Każda odpowiedź jest oceniana według klucza odpowiedzi; poprawiony klucz przelicza wcześniejsze wyniki",
+        "training": "Twoje dane nie są używane do trenowania modeli AI",
         "time": "Dodatkowy czas dla każdego, kto o niego poprosi",
         "notice": "Kandydaci wiedzą, czego się spodziewać, zanim zaczną",
         "own": "Kandydaci mogą pobrać lub usunąć swoje dane",
-        "data": "Dane usuwane po 12 miesiącach\nPrzechowywane w UE",
+        "data": "Dane usuwane po 12 miesiącach\nHosting w UE, część dostawców z USA",
         "payments": "Płatności przez Paddle, bez przechowywania danych karty",
         "documents": "Umowa powierzenia danych i instrukcje w zestawie"
       },
@@ -854,7 +890,7 @@
     "humanReview": "Wynik wspiera Twoją decyzję, ale jej nie podejmuje. Przeczytaj odpowiedzi, a jeśli kandydat poprosi, zleć sprawdzenie jego wyniku człowiekowi."
   },
   "practice": {
-    "title": "Darmowe ćwiczenia przed rozmową",
+    "title": "Darmowe próbne rozmowy według roli",
     "intro": "Poćwicz pod daną rolę w rozmowie na czas, a potem zobacz swoją ocenę i wszystkie poprawne odpowiedzi. Bezpłatnie.",
     "about": "Próbna rozmowa na czas. Po zakończeniu zobaczysz swoją ocenę i wszystkie poprawne odpowiedzi. Prywatnie i za darmo.",
     "pageTitle": "{title}: darmowa próbna rozmowa",
@@ -900,5 +936,33 @@
     "title": "Trwa konserwacja",
     "text": "prepza jest w trakcie prac konserwacyjnych. Wkrótce wracamy.",
     "notice": "Tryb konserwacji jest włączony: teraz z prepza mogą korzystać tylko superadmini."
+  },
+  "content": {
+    "updated": "Ostatnia aktualizacja",
+    "englishOnly": "Ta strona jest dostępna tylko po angielsku.",
+    "startTitle": "Sprawdź swoich kandydatów",
+    "startText": "Utwórz test umiejętności na czas na podstawie swojego opisu stanowiska. $1–3 za kandydata, bez abonamentu.",
+    "startButton": "Utwórz test"
+  },
+  "compare": {
+    "title": "Porównaj prepza",
+    "intro": "Porównania z innymi narzędziami do testów rekrutacyjnych, ze źródłami: jak powstają testy, ile kosztują i kiedy które pasuje lepiej."
+  },
+  "guides": {
+    "title": "Poradniki rekrutacyjne",
+    "intro": "Praktyczne poradniki dla osób rekrutujących: preselekcja kandydatów, testy umiejętności oraz uczciwe i zgodne z prawem korzystanie z AI w rekrutacji."
+  },
+  "tests": {
+    "title": "Testy umiejętności według roli",
+    "intro": "Gotowe testy umiejętności na czas dla popularnych ról. Użyj jednego bez zmian albo utwórz test na podstawie własnego opisu stanowiska.",
+    "heading": "Test umiejętności {role} do rekrutacji",
+    "pageTitle": "Test umiejętności {role} do rekrutacji",
+    "pageDescription": "Test umiejętności {role} na czas dla Twoich kandydatów, obejmujący {count, plural, one {# temat} few {# tematy} many {# tematów} other {# tematu}}. Każdy kandydat dostaje własne losowe pytania. $1–3 za kandydata.",
+    "lead": "Test wyboru na czas sprawdzający umiejętności tej roli. Każdy kandydat dostaje własny losowy zestaw pytań z limitem czasu na każde, a Ty dostajesz kartę ocen z każdą odpowiedzią i jej czasem. $1–3 za kandydata, bez abonamentu.",
+    "create": "Utwórz test dla swoich kandydatów",
+    "practise": "Poćwicz za darmo",
+    "topics": "Co sprawdza",
+    "questions": "Przykładowe pytania z rozmowy",
+    "questionsText": "Pytania takie jak te, z poprawnymi odpowiedziami. Twoi kandydaci dostają własne, nigdy niepokazywane publicznie."
   }
 }

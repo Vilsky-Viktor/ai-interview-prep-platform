@@ -38,7 +38,12 @@
     "faq": "SSS",
     "contact": "Bize ulaşın",
     "about": "Hakkımızda",
-    "practice": "Ücretsiz pratik"
+    "practice": "Ücretsiz pratik",
+    "tests": "Beceri testleri",
+    "preEmploymentTesting": "İşe alım öncesi testler",
+    "aiInterviews": "Yapay zekâ mülakatları",
+    "compare": "Karşılaştır",
+    "guides": "Rehberler"
   },
   "signIn": {
     "title": "Giriş yap",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "Herkesi test edin\nEn iyisini işe alın",
-    "text": "İş tanımınızdan hazırlanan süreli mülakatlar. Her adaya özel sorular ve her soruda bir süre. Aday başına $1'dan başlar."
+    "text": "İş tanımınızdan hazırlanan süreli mülakatlar. Her adaya özel sorular ve her soruda bir süre. Aday başına $1–3."
   },
   "start": {
     "placeholder": "Bir iş tanımı yapıştırın ya da pozisyonu ve adayın bilmesi gerekenleri anlatın",
@@ -133,7 +138,7 @@
     "passRates": "Geçme oranları",
     "controls": "Kontroller",
     "stats": "İstatistikler",
-    "statsMonth": "Ay",
+    "statsPeriod": "Dönem",
     "statsAllTime": "Tüm zamanlar",
     "statsCards": {
       "companies": "Şirketler",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "Hesabınız silinsin mi?",
-    "everything": "Her şey silinir: hazırlıklarınız (katılan kişiler için de), ilerlemeniz, sertifikalarınız, sohbetleriniz ve mülakat sonuçlarınız.",
+    "everything": "Her şey silinir: her şirketin ekibindeki yeriniz, aday olarak girdiğiniz mülakatların sonuçları, pratik turlarınız ve bildirimleriniz.",
     "company": "Tek sahibi olduğunuz şirket, mülakatlarıyla birlikte silinir. Bu işlem geri alınamaz.",
     "confirm": "Hesabı sil",
     "deleted": "Hesabınız silindi.",
@@ -548,7 +553,8 @@
     "topUp": "Yükle"
   },
   "site": {
-    "description": "Yapay zekâ ile oluşturulan çoktan seçmeli sorular, pratik turları ve sertifikalarla mülakatlara hazırlanın."
+    "description": "İş tanımınızdan oluşturulan, işe alım için süreli beceri testleri. Her aday kendi rastgele sorularını alır; ayrıca değerlendirme kartları ve raporlar. Aday başına $1–3.",
+    "homeTitle": "İş tanımınızdan oluşturulan işe alım beceri testleri"
   },
   "legal": {
     "updated": "Son güncelleme",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Adayları davet edin",
         "text": "Bir liste yapıştırın, dosya yükleyin ya da tek bir bağlantı paylaşın.\nHatırlatmalar otomatik. Sonuçlar puana göre sıralı gelir."
+      }
+    },
+    "advantages": {
+      "title": "Avantajlarımız",
+      "text": "Şirketler adayları neden prepza ile test ediyor.",
+      "points": {
+        "role": {
+          "title": "İş tanımınızdan",
+          "text": "Rolünüze özel bir test; konuları sorular yazılmadan önce siz onaylarsınız."
+        },
+        "anyRole": {
+          "title": "Her rol",
+          "text": "Mühendislere kod okuma soruları, satış, finans ve daha fazlası için bilgi testleri."
+        },
+        "cheating": {
+          "title": "Kopya çekmek zor",
+          "text": "Her adaya kendi rastgele soruları, her soruda süre ve dürüstlük uyarıları."
+        },
+        "price": {
+          "title": "Abonelik yok",
+          "text": "Testi çözen aday başına ödeyin. İlk adaylarınız ücretsiz."
+        },
+        "results": {
+          "title": "Karar için sonuçlar",
+          "text": "Puana göre sıralı adaylar, her yanıt ve süresiyle birlikte, bir de PDF rapor."
+        },
+        "languages": {
+          "title": "23 dil",
+          "text": "Mülakatlar, davet e-postaları ve tüm site adaylarınızın dilinde."
+        }
       }
     },
     "control": {
@@ -764,12 +800,12 @@
       "see": "Belgeler",
       "points": {
         "decision": "İstenirse her sonucu bir insan inceleyebilir",
-        "key": "Cevaplar yapay zekâyla değil, sabit anahtarla puanlanır",
-        "training": "Verileriniz asla yapay zekâ modeli eğitmez",
+        "key": "Her yanıt kendi cevap anahtarına göre puanlanır; düzeltilen bir anahtar geçmiş sonuçları yeniden puanlar",
+        "training": "Verileriniz yapay zekâ modellerini eğitmek için kullanılmaz",
         "time": "İsteyen herkese ek süre",
         "notice": "Adaylar başlamadan önce ne bekleyeceklerini bilir",
         "own": "Adaylar verilerini indirebilir ya da silebilir",
-        "data": "Veriler 12 ay sonra silinir\nAB'de barındırılır",
+        "data": "Veriler 12 ay sonra silinir\nAB'de barındırılıyor, bazı ABD sağlayıcıları",
         "payments": "Ödemeler Paddle ile, kart bilgisi saklanmaz",
         "documents": "Veri işleme sözleşmesi ve talimatlar dahil"
       },
@@ -853,7 +889,7 @@
     "humanReview": "Puan kararınızı destekler, kararı sizin yerinize vermez. Cevapları okuyun ve aday isterse sonucunu bir kişiye inceletin."
   },
   "practice": {
-    "title": "Ücretsiz mülakat pratiği",
+    "title": "Role göre ücretsiz deneme mülakatları",
     "intro": "Bir rol için süreli bir mülakatla pratik yapın, sonra notunuzu ve tüm doğru cevapları görün. Ücretsiz.",
     "about": "Süreli pratik mülakat. Bitirdiğinizde notunuzu ve tüm doğru cevapları görün. Gizli ve ücretsiz.",
     "pageTitle": "{title}: ücretsiz pratik mülakat",
@@ -899,5 +935,33 @@
     "title": "Bakımda",
     "text": "prepza bakımda. Yakında geri döneceğiz.",
     "notice": "Bakım modu açık: şu anda prepza'yı yalnızca süper yöneticiler kullanabilir."
+  },
+  "content": {
+    "updated": "Son güncelleme",
+    "englishOnly": "Bu sayfa yalnızca İngilizcedir.",
+    "startTitle": "Adaylarınızı test edin",
+    "startText": "İş tanımınızdan süreli bir beceri testi oluşturun. Aday başına $1–3, abonelik yok.",
+    "startButton": "Test oluştur"
+  },
+  "compare": {
+    "title": "prepza'yı karşılaştırın",
+    "intro": "Diğer işe alım öncesi test araçlarıyla kaynaklı karşılaştırmalar: testler nasıl hazırlanır, ne kadar tutar ve hangisi ne zaman daha uygundur."
+  },
+  "guides": {
+    "title": "İşe alım rehberleri",
+    "intro": "İşe alım yöneticileri için pratik rehberler: başvuruları eleme, beceri testleri ve işe alımda yapay zekâyı adil ve yasal şekilde kullanma."
+  },
+  "tests": {
+    "title": "Role göre beceri testleri",
+    "intro": "Yaygın roller için hazır süreli beceri testleri. Birini olduğu gibi kullanın ya da kendi iş tanımınızdan bir test oluşturun.",
+    "heading": "İşe alım için {role} beceri testi",
+    "pageTitle": "İşe alım için {role} beceri testi",
+    "pageDescription": "Adaylarınız için süreli bir {role} beceri testi; {count, plural, one {# konu} other {# konu}} içerir. Her aday kendi rastgele sorularını alır. Aday başına $1–3.",
+    "lead": "Bu rolün becerilerini ölçen süreli, çoktan seçmeli bir test. Her aday kendi rastgele soru setini alır ve her soruda bir süre vardır; siz de her cevabı ve süresini gösteren bir değerlendirme kartı alırsınız. Aday başına $1–3, abonelik yok.",
+    "create": "Adaylarınız için test oluşturun",
+    "practise": "Ücretsiz pratik yapın",
+    "topics": "Neyi ölçer",
+    "questions": "Örnek mülakat soruları",
+    "questionsText": "Bunun gibi sorular, doğru cevaplarıyla. Adaylarınız kendi sorularını alır; bunlar asla herkese açık gösterilmez."
   }
 }

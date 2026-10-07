@@ -38,7 +38,12 @@
     "faq": "Tanya jawab",
     "contact": "Hubungi kami",
     "about": "Tentang kami",
-    "practice": "Latihan gratis"
+    "practice": "Latihan gratis",
+    "tests": "Tes keterampilan",
+    "preEmploymentTesting": "Tes pra-kerja",
+    "aiInterviews": "Wawancara AI",
+    "compare": "Bandingkan",
+    "guides": "Panduan"
   },
   "signIn": {
     "title": "Masuk",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "Uji semua orang\nRekrut yang terbaik",
-    "text": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu. Soal unik untuk setiap kandidat dan batas waktu di tiap soal. Mulai $1 per kandidat."
+    "text": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu. Soal unik untuk setiap kandidat dan batas waktu di tiap soal. $1–3 per kandidat."
   },
   "start": {
     "placeholder": "Tempel deskripsi pekerjaan, atau jelaskan perannya dan apa yang perlu diketahui kandidat",
@@ -133,7 +138,7 @@
     "passRates": "Tingkat kelulusan",
     "controls": "Kontrol",
     "stats": "Statistik",
-    "statsMonth": "Bulan",
+    "statsPeriod": "Periode",
     "statsAllTime": "Sepanjang waktu",
     "statsCards": {
       "companies": "Perusahaan",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "Hapus akunmu?",
-    "everything": "Semuanya dihapus: persiapanmu (juga bagi yang bergabung), kemajuan, sertifikat, obrolan, dan hasil wawancara.",
+    "everything": "Semuanya dihapus: tempat Anda di tim setiap perusahaan, hasil wawancara yang Anda ikuti sebagai kandidat, putaran latihan, dan notifikasi Anda.",
     "company": "Perusahaan yang hanya kamu miliki akan dihapus beserta wawancaranya. Tindakan ini tidak bisa dibatalkan.",
     "confirm": "Hapus akun",
     "deleted": "Akunmu sudah dihapus.",
@@ -548,7 +553,8 @@
     "topUp": "Isi ulang"
   },
   "site": {
-    "description": "Bersiap untuk wawancara dengan soal pilihan ganda buatan AI, sesi latihan, dan sertifikat."
+    "description": "Tes keterampilan berbatas waktu untuk rekrutmen, dibuat dari deskripsi pekerjaanmu. Setiap kandidat mendapat soal acak sendiri, plus kartu penilaian dan laporan. $1–3 per kandidat.",
+    "homeTitle": "Tes keterampilan untuk rekrutmen, dibuat dari deskripsi pekerjaan Anda"
   },
   "legal": {
     "updated": "Terakhir diperbarui",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Undang kandidat",
         "text": "Tempel daftar, unggah file, atau bagikan satu tautan.\nPengingat dikirim otomatis. Hasil masuk sudah diurutkan menurut skor."
+      }
+    },
+    "advantages": {
+      "title": "Keunggulan kami",
+      "text": "Alasan perusahaan menguji kandidat dengan prepza.",
+      "points": {
+        "role": {
+          "title": "Dari deskripsi pekerjaanmu",
+          "text": "Tes untuk peranmu, dengan topik yang kamu setujui sebelum soal apa pun ditulis."
+        },
+        "anyRole": {
+          "title": "Peran apa pun",
+          "text": "Soal membaca kode untuk engineer, tes pengetahuan untuk sales, keuangan, dan lainnya."
+        },
+        "cheating": {
+          "title": "Lebih sulit curang",
+          "text": "Tiap kandidat dapat soal acak sendiri, timer di tiap soal, dan tanda integritas."
+        },
+        "price": {
+          "title": "Tanpa langganan",
+          "text": "Bayar per kandidat yang mengerjakan tes. Kandidat pertamamu gratis."
+        },
+        "results": {
+          "title": "Hasil yang siap dipakai",
+          "text": "Kandidat diurutkan menurut skor, dengan tiap jawaban, waktunya, dan laporan PDF."
+        },
+        "languages": {
+          "title": "23 bahasa",
+          "text": "Wawancara, email undangan, dan seluruh situs dalam bahasa kandidatmu."
+        }
       }
     },
     "control": {
@@ -765,12 +801,12 @@
       "see": "Dokumen",
       "points": {
         "decision": "Seseorang bisa meninjau hasil mana pun jika diminta",
-        "key": "Jawaban dinilai dengan kunci tetap, bukan oleh AI",
-        "training": "Datamu tidak pernah dipakai melatih model AI",
+        "key": "Setiap jawaban dinilai berdasarkan kunci jawabannya; kunci yang dikoreksi menilai ulang hasil sebelumnya",
+        "training": "Data Anda tidak digunakan untuk melatih model AI",
         "time": "Waktu tambahan bagi siapa pun yang meminta",
         "notice": "Kandidat tahu apa yang akan dihadapi sebelum mulai",
         "own": "Kandidat bisa mengunduh atau menghapus datanya",
-        "data": "Data dihapus setelah 12 bulan\nDi-hosting di UE",
+        "data": "Data dihapus setelah 12 bulan\nDi-hosting di UE, sebagian penyedia di AS",
         "payments": "Pembayaran lewat Paddle, data kartu tidak disimpan",
         "documents": "Perjanjian pemrosesan data dan petunjuk disertakan"
       },
@@ -854,7 +890,7 @@
     "humanReview": "Skor mendukung keputusanmu, bukan menggantikannya. Baca jawabannya, dan jika kandidat meminta, minta seseorang meninjau hasilnya."
   },
   "practice": {
-    "title": "Latihan wawancara gratis",
+    "title": "Simulasi wawancara gratis per peran",
     "intro": "Berlatih untuk suatu peran dengan wawancara berbatas waktu, lalu lihat nilaimu dan semua jawaban yang benar. Gratis.",
     "about": "Wawancara latihan berbatas waktu. Setelah selesai, lihat nilaimu dan semua jawaban yang benar. Privat dan gratis.",
     "pageTitle": "{title}: wawancara latihan gratis",
@@ -900,5 +936,33 @@
     "title": "Sedang dalam pemeliharaan",
     "text": "prepza sedang dalam pemeliharaan. Kami akan segera kembali.",
     "notice": "Mode pemeliharaan aktif: hanya superadmin yang dapat menggunakan prepza sekarang."
+  },
+  "content": {
+    "updated": "Terakhir diperbarui",
+    "englishOnly": "Halaman ini hanya tersedia dalam bahasa Inggris.",
+    "startTitle": "Uji kandidatmu",
+    "startText": "Buat tes keterampilan berbatas waktu dari deskripsi pekerjaanmu. $1–3 per kandidat, tanpa langganan.",
+    "startButton": "Buat tes"
+  },
+  "compare": {
+    "title": "Bandingkan prepza",
+    "intro": "Perbandingan bersumber dengan alat tes pra-kerja lainnya: cara tesnya dibuat, berapa biayanya, dan kapan masing-masing lebih cocok."
+  },
+  "guides": {
+    "title": "Panduan rekrutmen",
+    "intro": "Panduan praktis untuk hiring manager: menyaring pelamar, tes keterampilan, dan memakai AI dalam rekrutmen secara adil dan sesuai hukum."
+  },
+  "tests": {
+    "title": "Tes keterampilan per peran",
+    "intro": "Tes keterampilan berbatas waktu yang siap pakai untuk peran umum. Pakai apa adanya, atau buat tes dari deskripsi pekerjaanmu sendiri.",
+    "heading": "Tes keterampilan {role} untuk rekrutmen",
+    "pageTitle": "Tes keterampilan {role} untuk rekrutmen",
+    "pageDescription": "Tes keterampilan {role} berbatas waktu untuk kandidatmu, mencakup {count, plural, other {# topik}}. Setiap kandidat mendapat soal acak sendiri. $1–3 per kandidat.",
+    "lead": "Tes pilihan ganda berbatas waktu untuk keterampilan peran ini. Setiap kandidat mendapat set soal acak sendiri dengan batas waktu di tiap soal, dan kamu mendapat kartu penilaian berisi setiap jawaban dan waktunya. $1–3 per kandidat, tanpa langganan.",
+    "create": "Buat tes untuk kandidatmu",
+    "practise": "Latihan gratis",
+    "topics": "Yang diuji",
+    "questions": "Contoh soal wawancara",
+    "questionsText": "Soal seperti ini, lengkap dengan jawaban yang benar. Kandidatmu mendapat soal sendiri yang tidak pernah ditampilkan ke publik."
   }
 }

@@ -38,7 +38,12 @@
     "faq": "FAQ",
     "contact": "Contact us",
     "about": "About us",
-    "practice": "Free practice"
+    "practice": "Free practice",
+    "tests": "Skills tests",
+    "preEmploymentTesting": "Pre-employment testing",
+    "aiInterviews": "AI interviews",
+    "compare": "Compare",
+    "guides": "Guides"
   },
   "signIn": {
     "title": "Sign in",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "Test everyone\nHire the best",
-    "text": "Timed interviews made from your job description. Unique questions for every candidate and a timer on each. From $1 per candidate."
+    "text": "Timed interviews made from your job description. Unique questions for every candidate and a timer on each. $1–3 per candidate."
   },
   "start": {
     "placeholder": "Paste a job description, or describe the role and what a candidate should know",
@@ -133,7 +138,7 @@
     "passRates": "Pass rates",
     "controls": "Controls",
     "stats": "Stats",
-    "statsMonth": "Month",
+    "statsPeriod": "Period",
     "statsAllTime": "All time",
     "statsCards": {
       "companies": "Companies",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "Delete your account?",
-    "everything": "Everything goes: your preparations (also for people who joined them), progress, certificates, chats and interview results.",
+    "everything": "Everything goes: your place in each company's team, your results from interviews you took as a candidate, your practice rounds and your notifications.",
     "company": "A company you alone own is deleted with its interviews. This can't be undone.",
     "confirm": "Delete account",
     "deleted": "Your account was deleted.",
@@ -548,7 +553,8 @@
     "topUp": "Top up"
   },
   "site": {
-    "description": "Prepare for interviews with AI-generated multiple-choice questions, practice rounds and certificates."
+    "description": "Timed skills tests for hiring, made from your job description. Each candidate gets their own random questions, plus scorecards and reports. $1–3 per candidate.",
+    "homeTitle": "Skills tests for hiring, made from your job description"
   },
   "legal": {
     "updated": "Last updated",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Invite candidates",
         "text": "Paste a list, upload a file or share one link.\nReminders are automatic. Results come in ranked by score."
+      }
+    },
+    "advantages": {
+      "title": "Our advantages",
+      "text": "Why companies test candidates with prepza.",
+      "points": {
+        "role": {
+          "title": "From your job description",
+          "text": "A test for your role, with topics you approve before any question is written."
+        },
+        "anyRole": {
+          "title": "Any role",
+          "text": "Code-reading questions for engineers, knowledge tests for sales, finance and more."
+        },
+        "cheating": {
+          "title": "Harder to cheat",
+          "text": "Each candidate gets their own random questions, a timer on each, and integrity flags."
+        },
+        "price": {
+          "title": "No subscription",
+          "text": "Pay per candidate who takes the test. Your first candidates are free."
+        },
+        "results": {
+          "title": "Results you can act on",
+          "text": "Candidates ranked by score, with every answer and its timing, and a PDF report."
+        },
+        "languages": {
+          "title": "23 languages",
+          "text": "Interviews, invite emails and the whole site in your candidates' language."
+        }
       }
     },
     "control": {
@@ -765,12 +801,12 @@
       "see": "Documents",
       "points": {
         "decision": "A person can review any result on request",
-        "key": "Answers marked by a fixed key, not by AI",
-        "training": "Your data never trains AI models",
+        "key": "Every answer scored against its answer key; a corrected key re-scores past results",
+        "training": "Your data isn't used to train AI models",
         "time": "Extra time for anyone who asks",
         "notice": "Candidates know what to expect before they start",
         "own": "Candidates can download or delete their data",
-        "data": "Data deleted after 12 months\nHosted in the EU",
+        "data": "Data deleted after 12 months\nEU-hosted, some US providers",
         "payments": "Payments by Paddle, no card details stored",
         "documents": "Data processing agreement and instructions included"
       },
@@ -854,7 +890,7 @@
     "humanReview": "The score supports your decision; it doesn't make it. Read the answers, and if the candidate asks, have a person review their result."
   },
   "practice": {
-    "title": "Free interview practice",
+    "title": "Free mock interviews by role",
     "intro": "Practise for a role with a timed interview, then see your grade and every right answer. Free of charge.",
     "about": "Timed practice interview. Once you're done, see your grade and every right answer. Private and free.",
     "pageTitle": "{title}: free practice interview",
@@ -900,5 +936,33 @@
     "title": "Under maintenance",
     "text": "prepza is under maintenance. We'll be back soon.",
     "notice": "Maintenance mode is on: only superadmins can use prepza right now."
+  },
+  "content": {
+    "updated": "Last updated",
+    "englishOnly": "This page is in English only.",
+    "startTitle": "Test your candidates",
+    "startText": "Create a timed skills test from your job description. $1–3 per candidate, no subscription.",
+    "startButton": "Create a test"
+  },
+  "compare": {
+    "title": "Compare prepza",
+    "intro": "Sourced comparisons with other pre-employment testing tools: how tests are made, what they cost and when each one fits better."
+  },
+  "guides": {
+    "title": "Guides for hiring",
+    "intro": "Practical guides for hiring managers: screening applicants, skills tests and using AI in hiring fairly and legally."
+  },
+  "tests": {
+    "title": "Skills tests by role",
+    "intro": "Ready-made timed skills tests for common roles. Use one as it is, or create a test from your own job description.",
+    "heading": "{role} skills test for hiring",
+    "pageTitle": "{role} skills test for hiring",
+    "pageDescription": "A timed {role} skills test for your candidates, covering {count, plural, one {# topic} other {# topics}}. Each candidate gets their own random questions. $1–3 per candidate.",
+    "lead": "A timed multiple-choice test of this role's skills. Every candidate gets their own random set of questions and a timer on each, and you get a scorecard with every answer and its timing. $1–3 per candidate, no subscription.",
+    "create": "Create a test for your candidates",
+    "practise": "Practise it free",
+    "topics": "What it tests",
+    "questions": "Sample interview questions",
+    "questionsText": "Questions like these, with the right answers. Your candidates get their own, never shown in public."
   }
 }

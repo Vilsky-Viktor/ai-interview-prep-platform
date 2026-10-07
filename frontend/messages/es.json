@@ -38,7 +38,12 @@
     "faq": "Preguntas frecuentes",
     "contact": "Contacto",
     "about": "Sobre nosotros",
-    "practice": "Práctica gratis"
+    "practice": "Práctica gratis",
+    "tests": "Pruebas de habilidades",
+    "preEmploymentTesting": "Evaluación preempleo",
+    "aiInterviews": "Entrevistas con IA",
+    "compare": "Comparar",
+    "guides": "Guías"
   },
   "signIn": {
     "title": "Iniciar sesión",
@@ -78,7 +83,7 @@
   },
   "home": {
     "title": "Evalúa a todos\nContrata a los mejores",
-    "text": "Entrevistas cronometradas creadas a partir de tu descripción del puesto. Preguntas únicas para cada candidato y un temporizador en cada una. Desde $1 por candidato."
+    "text": "Entrevistas cronometradas creadas a partir de tu descripción del puesto. Preguntas únicas para cada candidato y un temporizador en cada una. $1–3 por candidato."
   },
   "start": {
     "placeholder": "Pega una oferta de empleo, o describe el puesto y lo que un candidato debería saber",
@@ -133,7 +138,7 @@
     "passRates": "Tasas de aprobado",
     "controls": "Controles",
     "stats": "Estadísticas",
-    "statsMonth": "Mes",
+    "statsPeriod": "Periodo",
     "statsAllTime": "Todo el tiempo",
     "statsCards": {
       "companies": "Empresas",
@@ -214,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "¿Eliminar tu cuenta?",
-    "everything": "Se elimina todo: tus preparaciones (también para quienes se unieron a ellas), tu progreso, certificados, chats y resultados de entrevistas.",
+    "everything": "Se elimina todo: tu lugar en el equipo de cada empresa, tus resultados de las entrevistas que hiciste como candidato, tus rondas de práctica y tus notificaciones.",
     "company": "Las empresas de las que eres el único propietario se eliminan con sus entrevistas. Esto no se puede deshacer.",
     "confirm": "Eliminar cuenta",
     "deleted": "Tu cuenta se eliminó.",
@@ -548,7 +553,8 @@
     "topUp": "Recargar"
   },
   "site": {
-    "description": "Prepárate para entrevistas con preguntas de opción múltiple generadas por IA, rondas de práctica y certificados."
+    "description": "Pruebas de habilidades cronometradas para contratar, creadas a partir de tu descripción del puesto. Cada candidato recibe sus propias preguntas aleatorias, además de fichas de evaluación e informes. $1–3 por candidato.",
+    "homeTitle": "Pruebas de habilidades para contratar, creadas a partir de tu descripción del puesto"
   },
   "legal": {
     "updated": "Última actualización",
@@ -630,6 +636,36 @@
       "invite": {
         "title": "Invita a candidatos",
         "text": "Pega una lista, sube un archivo o comparte un enlace.\nLos recordatorios son automáticos. Los resultados llegan ordenados por puntuación."
+      }
+    },
+    "advantages": {
+      "title": "Nuestras ventajas",
+      "text": "Por qué las empresas evalúan candidatos con prepza.",
+      "points": {
+        "role": {
+          "title": "Desde tu oferta de empleo",
+          "text": "Una prueba para tu puesto, con temas que apruebas antes de escribir ninguna pregunta."
+        },
+        "anyRole": {
+          "title": "Cualquier puesto",
+          "text": "Lectura de código para ingenieros, pruebas de conocimiento para ventas, finanzas y más."
+        },
+        "cheating": {
+          "title": "Más difícil hacer trampa",
+          "text": "Preguntas aleatorias por candidato, temporizador en cada una y alertas de integridad."
+        },
+        "price": {
+          "title": "Sin suscripción",
+          "text": "Paga por cada candidato que hace la prueba. Tus primeros candidatos son gratis."
+        },
+        "results": {
+          "title": "Resultados para decidir",
+          "text": "Candidatos ordenados por puntuación, con cada respuesta, su tiempo y un informe PDF."
+        },
+        "languages": {
+          "title": "23 idiomas",
+          "text": "Entrevistas, correos de invitación y todo el sitio en el idioma de tus candidatos."
+        }
       }
     },
     "control": {
@@ -765,12 +801,12 @@
       "see": "Documentos",
       "points": {
         "decision": "Una persona puede revisar cualquier resultado si se pide",
-        "key": "Respuestas corregidas con una clave fija, no por IA",
-        "training": "Tus datos nunca entrenan modelos de IA",
+        "key": "Cada respuesta se puntúa según su clave de respuesta; una clave corregida vuelve a puntuar los resultados anteriores",
+        "training": "Tus datos no se usan para entrenar modelos de IA",
         "time": "Tiempo extra para quien lo pida",
         "notice": "Los candidatos saben qué esperar antes de empezar",
         "own": "Los candidatos pueden descargar o borrar sus datos",
-        "data": "Datos borrados a los 12 meses\nAlojados en la UE",
+        "data": "Datos borrados a los 12 meses\nAlojado en la UE, algunos proveedores de EE. UU.",
         "payments": "Pagos con Paddle, sin guardar datos de tarjeta",
         "documents": "Acuerdo de tratamiento de datos e instrucciones incluidos"
       },
@@ -854,7 +890,7 @@
     "humanReview": "La puntuación apoya tu decisión, no la toma por ti. Lee las respuestas y, si el candidato lo pide, haz que una persona revise su resultado."
   },
   "practice": {
-    "title": "Práctica de entrevistas gratis",
+    "title": "Entrevistas de práctica gratis por puesto",
     "intro": "Practica para un puesto con una entrevista cronometrada y luego mira tu nota y todas las respuestas correctas. Gratis.",
     "about": "Entrevista de práctica cronometrada. Al terminar, ve tu nota y todas las respuestas correctas. Privada y gratis.",
     "pageTitle": "{title}: entrevista de práctica gratis",
@@ -900,5 +936,33 @@
     "title": "En mantenimiento",
     "text": "prepza está en mantenimiento. Volveremos pronto.",
     "notice": "El modo de mantenimiento está activado: ahora solo los superadministradores pueden usar prepza."
+  },
+  "content": {
+    "updated": "Última actualización",
+    "englishOnly": "Esta página solo está en inglés.",
+    "startTitle": "Evalúa a tus candidatos",
+    "startText": "Crea una prueba de habilidades cronometrada a partir de tu descripción del puesto. $1–3 por candidato, sin suscripción.",
+    "startButton": "Crear una prueba"
+  },
+  "compare": {
+    "title": "Compara prepza",
+    "intro": "Comparaciones con fuentes frente a otras herramientas de evaluación preempleo: cómo se crean las pruebas, cuánto cuestan y cuándo encaja mejor cada una."
+  },
+  "guides": {
+    "title": "Guías para contratar",
+    "intro": "Guías prácticas para responsables de contratación: filtrar candidatos, pruebas de habilidades y usar la IA al contratar de forma justa y legal."
+  },
+  "tests": {
+    "title": "Pruebas de habilidades por puesto",
+    "intro": "Pruebas de habilidades cronometradas listas para puestos comunes. Usa una tal cual o crea una prueba a partir de tu propia descripción del puesto.",
+    "heading": "Prueba de habilidades de {role} para contratar",
+    "pageTitle": "Prueba de habilidades de {role} para contratar",
+    "pageDescription": "Una prueba de habilidades de {role} cronometrada para tus candidatos, con {count, plural, one {# tema} other {# temas}}. Cada candidato recibe sus propias preguntas aleatorias. $1–3 por candidato.",
+    "lead": "Una prueba cronometrada de opción múltiple sobre las habilidades de este puesto. Cada candidato recibe su propio conjunto aleatorio de preguntas con un temporizador en cada una, y tú recibes una ficha de evaluación con cada respuesta y su tiempo. $1–3 por candidato, sin suscripción.",
+    "create": "Crear una prueba para tus candidatos",
+    "practise": "Practícala gratis",
+    "topics": "Qué evalúa",
+    "questions": "Ejemplos de preguntas de entrevista",
+    "questionsText": "Preguntas como estas, con las respuestas correctas. Tus candidatos reciben las suyas, que nunca se muestran en público."
   }
 }
