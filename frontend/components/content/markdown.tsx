@@ -1,0 +1,81 @@
+import { cn } from "cn"
+import type { ComponentProps } from "react"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
+
+import { LocalizedLink } from "@/components/localized-link"
+
+// The site's text styles for each Markdown element, as on the legal pages. Headings keep their
+// capitals (names such as TestGorilla or EU), unlike the site's lowercase headings.
+const ELEMENTS: ComponentProps<typeof ReactMarkdown>["components"] = {
+  // A question gets no dot after its question mark (globals.css).
+  h2: ({ children }) => (
+    <h2
+      className={cn(
+        "pt-4 font-heading text-2xl font-medium normal-case",
+        String(children).endsWith("?") && "no-dot"
+      )}
+    >
+      {children}
+    </h2>
+  ),
+  h3: ({ children }) => (
+    <h3 className="text-xl font-medium normal-case">{children}</h3>
+  ),
+  p: ({ children }) => (
+    <p className="text-base leading-relaxed text-muted-foreground">
+      {children}
+    </p>
+  ),
+  ul: ({ children }) => (
+    <ul className="list-disc space-y-2 ps-5 text-base leading-relaxed text-muted-foreground">
+      {children}
+    </ul>
+  ),
+  ol: ({ children }) => (
+    <ol className="list-decimal space-y-2 ps-5 text-base leading-relaxed text-muted-foreground">
+      {children}
+    </ol>
+  ),
+  strong: ({ children }) => (
+    <strong className="font-medium text-foreground">{children}</strong>
+  ),
+  // The site's own pages open in place, in the address's language; others in a new tab.
+  a: ({ href = "", children }) =>
+    href.startsWith("/") ? (
+      <LocalizedLink href={href} className="text-primary hover:underline">
+        {children}
+      </LocalizedLink>
+    ) : (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-primary hover:underline"
+      >
+        {children}
+      </a>
+    ),
+  table: ({ children }) => (
+    <div className="overflow-x-auto rounded-2xl border">
+      <table className="w-full text-sm">{children}</table>
+    </div>
+  ),
+  th: ({ children }) => (
+    <th className="px-4 py-3 text-start font-medium">{children}</th>
+  ),
+  td: ({ children }) => (
+    <td className="border-t px-4 py-3 align-top text-muted-foreground">
+      {children}
+    </td>
+  ),
+}
+
+/** Markdown from the site's own content files, with tables. */
+export function Markdown({ text }: { text: string }) {
+  return (
+    <ReactMarkdown remarkPlugins={[remarkGfm]} components={ELEMENTS}>
+      {text}
+    </ReactMarkdown>
+  )
+}

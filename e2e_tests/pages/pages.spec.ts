@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 // The signed-out pages. Signed-in ones are checked by hand: sign-in isn't automated.
 const PAGES = [
   "/",
-  "/company",
+  "/companies",
   "/pricing",
   "/terms",
   "/privacy",
@@ -12,6 +12,21 @@ const PAGES = [
   "/about",
   "/contact",
   "/practice",
+  "/tests",
+  "/compare",
+  "/guides",
+  "/pre-employment-testing",
+  "/ai-interviews",
+  "/compare/testgorilla",
+  "/guides/hiring-engineers",
+  "/de/pricing",
+];
+// Articles keep their headings' capitals (names such as TestGorilla or EU).
+const ARTICLES = [
+  "/pre-employment-testing",
+  "/ai-interviews",
+  "/compare/testgorilla",
+  "/guides/hiring-engineers",
 ];
 // The width every page's <main> has: max-w-5xl (CLAUDE.md, rule 6).
 const MAIN_MAX_WIDTH = 1024;
@@ -69,10 +84,15 @@ for (const path of PAGES) {
       expect(layout.inputBottom).toBeLessThanOrEqual(layout.innerHeight);
     }
 
-    // Titles are lowercase, like the logo.
-    expect(layout.headingCase).toBe("lowercase");
+    // Titles are lowercase, like the logo; articles keep their capitals.
+    expect(layout.headingCase).toBe(
+      ARTICLES.includes(path) ? "none" : "lowercase",
+    );
+    // In the interface's language: German under /de.
     await expect(
-      page.getByRole("button", { name: /sign in/i }).first(),
+      page
+        .getByRole("button", { name: path.startsWith("/de") ? /anmelden/i : /sign in/i })
+        .first(),
     ).toBeVisible();
   });
 }

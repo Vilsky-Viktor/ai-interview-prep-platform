@@ -1,15 +1,21 @@
 import type { MetadataRoute } from "next"
 
-import { PUBLIC_PATHS } from "@/constants/seo"
+import { CATEGORY_PAGES } from "@/constants/content"
+import { LOCALES } from "@/constants/i18n"
+import { LOCALIZED_PATHS, PUBLIC_PATHS } from "@/constants/seo"
+import { contentLanguages, contentPages } from "@/lib/content"
+import { languageAlternates, localizedPath } from "@/lib/locale-path"
 import { siteUrl } from "@/lib/site"
 
-// The API's largest page, and how many pages of practice tests the sitemap reads at most.
+// The API's largest page, and how many pages of templates the sitemap reads at most.
 const PAGE = 100
 const MAX_PAGES = 50
 
-/** Every free practice test's page, read from the public template list a page at a time. */
-async function practicePaths(): Promise<string[]> {
-  const paths: string[] = []
+type Template = { id: string; slug: string | null; created_at: string }
+
+/** Every template, read from the public list a page at a time. */
+async function templates(): Promise<Template[]> {
+  const rows: Template[] = []
 
   for (let page = 0; page < MAX_PAGES; page++) {
     const response = await fetch(
@@ -21,20 +27,87 @@ async function practicePaths(): Promise<string[]> {
       break
     }
 
-    const rows: { id: string }[] = await response.json()
-    paths.push(...rows.map((row) => `/practice/${row.id}`))
+    const batch: Template[] = await response.json()
+    rows.push(...batch)
 
-    if (rows.length < PAGE) {
+    if (batch.length < PAGE) {
       break
     }
   }
 
-  return paths
+  return rows
 }
 
-/** The public pages, and one page per free practice test. */
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const paths = [...PUBLIC_PATHS, ...(await practicePaths())]
+// Articles in each content folder, by the address they live at.
+const ARTICLES = [
+  { folder: "pages", base: "" },
+  { folder: "compare", base: "/compare" },
+  { folder: "guides", base: "/guides" },
+] as const
 
-  return paths.map((path) => ({ url: `${siteUrl()}${path}` }))
+/** Every article in each language it's written in, each naming its translations, with the
+ * date it was last updated. */
+async function articles(site: string) {
+  const absolute = (links: Record<string, string>) =>
+    Object.fromEntries(
+      Object.entries(links).map(([locale, path]) => [locale, `${site}${path}`])
+    )
+  const lists = await Promise.all(
+    ARTICLES.map(async ({ folder, base }) => {
+      const pages = await contentPages(folder)
+
+      return Promise.all(
+        pages.map(async (page) => {
+          const path = `${base}/${page.slug}`
+          const languages = await contentLanguages(folder, page.slug)
+
+          return languages.map((locale) => ({
+            url: `${site}${localizedPath(locale, path)}`,
+            lastModified: page.updated || undefined,
+            alternates: {
+              languages: absolute(languageAlternates(path, languages)),
+            },
+          }))
+        })
+      )
+    })
+  )
+
+  return lists.flat(2)
+}
+
+/** The public pages (those in every language with each language's address), the articles in
+ * their languages with their dates, and each template's role test page and free practice
+ * page. */
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const site = siteUrl()
+  const absolute = (links: Record<string, string>) =>
+    Object.fromEntries(
+      Object.entries(links).map(([locale, path]) => [locale, `${site}${path}`])
+    )
+  // The category pages are articles: listed with their translations below.
+  const everyLanguage = LOCALIZED_PATHS.filter(
+    (path) => !CATEGORY_PAGES.includes(path.slice(1))
+  )
+  const [rows, written] = await Promise.all([templates(), articles(site)])
+
+  return [
+    // A page in every language is listed once per language, each naming all of them.
+    ...everyLanguage.flatMap((path) =>
+      LOCALES.map((locale) => ({
+        url: `${site}${localizedPath(locale, path)}`,
+        alternates: { languages: absolute(languageAlternates(path)) },
+      }))
+    ),
+    ...PUBLIC_PATHS.filter((path) => !LOCALIZED_PATHS.includes(path)).map(
+      (path) => ({ url: `${site}${path}` })
+    ),
+    ...written,
+    ...rows.flatMap((row) =>
+      ["/tests", "/practice"].map((base) => ({
+        url: `${site}${base}/${row.slug ?? row.id}`,
+        lastModified: row.created_at,
+      }))
+    ),
+  ]
 }

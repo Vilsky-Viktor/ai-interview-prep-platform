@@ -35,3 +35,6 @@ export type VerificationRequest = companies["schemas"]["VerificationRequestOut"]
 
 /** One service's counts in a month, for the stats tab. */
 export type Stats = companies["schemas"]["StatsOut"]
+
+/** A revealed question of a template, with its answers, for the public role test pages. */
+export type SampleQuestion = Schemas["SampleQuestionOut"]
