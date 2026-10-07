@@ -19,6 +19,19 @@ def completed(price_id="pri_topup_30", owner_type="company", owner_id="acme", qu
     }
 
 
+def adjustment(action="refund", status="approved", total="1000", adjustment_id="adj_01"):
+    return {
+        "event_type": "adjustment.updated",
+        "data": {
+            "id": adjustment_id,
+            "action": action,
+            "status": status,
+            "transaction_id": "txn_01",
+            "totals": {"total": total, "currency_code": "USD"},
+        },
+    }
+
+
 def signed(event: dict, secret=SECRET, at=None) -> tuple[bytes, str]:
     """The body and Paddle-Signature header Paddle would send."""
     body = json.dumps(event).encode()

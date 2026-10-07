@@ -4,6 +4,7 @@ from prepza_common.analytics import track
 
 from app.constants.credits import Reason
 from app.constants.products import ADJUSTMENT_APPROVED
+from app.services import credit_events
 from app.services.referrals import take_back_reward
 from app.storage import purchases
 
@@ -57,6 +58,11 @@ async def handle_adjustment(data: dict) -> None:
     taken = await purchases.take_back(
         owner_type, owner_id, sign * credits, data["transaction_id"], data["id"], reason
     )
+
+    # A chargeback reversed gives the credits back.
+    if sign > 0:
+        await credit_events.credits_added(owner_type, owner_id)
+
     await track(
         "credits_taken_back",
         company_id=owner_id,

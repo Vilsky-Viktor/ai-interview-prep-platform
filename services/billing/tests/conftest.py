@@ -21,6 +21,7 @@ os.environ.setdefault("PADDLE_PRICE_TOPUP_30", "pri_topup_30")
 
 import pytest
 from fastapi.testclient import TestClient
+from prepza_common import pubsub
 
 from app.main import app
 
@@ -29,3 +30,14 @@ from app.main import app
 def client():
     with TestClient(app) as client:
         yield client
+
+
+@pytest.fixture(autouse=True)
+def no_publishing(monkeypatch):
+    """No test sends events into a real Pub/Sub (the dev stack's, where integration tests run):
+    other services would act on its made-up companies. Tests that check events fake it again."""
+
+    async def published(*args, **kwargs):
+        return None
+
+    monkeypatch.setattr(pubsub, "publish", published)

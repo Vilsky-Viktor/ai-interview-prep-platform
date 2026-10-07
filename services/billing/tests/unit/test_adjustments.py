@@ -4,19 +4,7 @@ import pytest
 
 from app.services import adjustments, webhooks
 from app.storage import purchases, referrals
-
-
-def adjustment(action="refund", status="approved", total="1000", adjustment_id="adj_01"):
-    return {
-        "event_type": "adjustment.updated",
-        "data": {
-            "id": adjustment_id,
-            "action": action,
-            "status": status,
-            "transaction_id": "txn_01",
-            "totals": {"total": total, "currency_code": "USD"},
-        },
-    }
+from tests.unit.paddle_events import adjustment
 
 
 @pytest.fixture
