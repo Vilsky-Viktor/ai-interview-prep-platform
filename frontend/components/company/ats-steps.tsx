@@ -4,6 +4,7 @@ import { ArrowRightIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import {
+  BREEZY_KEY_PATH,
   GREENHOUSE_CREDENTIAL_PATH,
   GREENHOUSE_CREDENTIAL_TYPE,
   GREENHOUSE_PERMISSIONS,
@@ -105,6 +106,22 @@ export function RecruiteeSteps() {
       </li>
       <li>{t("rcStepCreate")}</li>
       <li>{t("stepPaste", { ats: "Recruitee" })}</li>
+    </ol>
+  )
+}
+
+/** Where to make the API key in Breezy HR, step by step; prepza adds the web hook itself. */
+export function BreezySteps() {
+  const t = useTranslations("ats")
+
+  return (
+    <ol className="list-decimal space-y-3 ps-5 text-base text-muted-foreground">
+      <li className="space-y-1.5">
+        <span className="block">{t("bzStepOpen")}</span>
+        <Chips items={BREEZY_KEY_PATH} path />
+      </li>
+      <li>{t("bzStepCreate")}</li>
+      <li>{t("bzStepPaste")}</li>
     </ol>
   )
 }

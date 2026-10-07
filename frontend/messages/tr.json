@@ -1050,6 +1050,9 @@
     "rcToken": "API token'ı",
     "notConnected": "{ats} henüz bağlı değil. İlanlarını mülakatlarınızla eşleştirmek için {ats} hesabınızı bağlayın.",
     "webhookSecretName": "Gizli anahtar",
-    "webhookPasteSecret": "Kaydedin, ardından {ats} tarafından gösterilen gizli anahtarı buraya yapıştırın:"
+    "webhookPasteSecret": "Kaydedin, ardından {ats} tarafından gösterilen gizli anahtarı buraya yapıştırın:",
+    "bzStepOpen": "Breezy HR'da sol alt köşedeki adınıza tıklayın, ardından şunu açın:",
+    "bzStepCreate": "API anahtarını tüm ilanları gören bir yönetici olarak oluşturun: anahtar sizin adınıza işlem yapar ve sonuçlar sizin adınıza yazılır. Breezy'nin API'si ve webhook'ları Pro planıyla gelir.",
+    "bzStepPaste": "Anahtarı aşağıya yapıştırın. Breezy HR'daki webhook'u kendimiz ekleriz."
   }
 }

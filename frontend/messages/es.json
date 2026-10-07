@@ -1051,6 +1051,9 @@
     "rcToken": "Token de API",
     "notConnected": "{ats} aún no está conectado. Conéctalo para vincular sus vacantes a tus entrevistas.",
     "webhookSecretName": "Secreto",
-    "webhookPasteSecret": "Guárdalo y luego pega aquí el secreto que {ats} muestra para él:"
+    "webhookPasteSecret": "Guárdalo y luego pega aquí el secreto que {ats} muestra para él:",
+    "bzStepOpen": "En Breezy HR, haz clic en tu nombre en la esquina inferior izquierda y luego abre:",
+    "bzStepCreate": "Crea una clave de API como un administrador que ve todas las vacantes: actúa en tu nombre y los resultados se escriben a tu nombre. La API y los webhooks de Breezy vienen con su plan Pro.",
+    "bzStepPaste": "Pega la clave abajo. El webhook en Breezy HR lo añadimos nosotros."
   }
 }

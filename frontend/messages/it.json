@@ -1051,6 +1051,9 @@
     "rcToken": "Token API",
     "notConnected": "{ats} non è ancora collegato. Collegalo per associare le sue posizioni ai tuoi colloqui.",
     "webhookSecretName": "Secret",
-    "webhookPasteSecret": "Salvalo, poi incolla qui il secret che {ats} ti mostra:"
+    "webhookPasteSecret": "Salvalo, poi incolla qui il secret che {ats} ti mostra:",
+    "bzStepOpen": "In Breezy HR, fai clic sul tuo nome nell'angolo in basso a sinistra, poi apri:",
+    "bzStepCreate": "Crea una chiave API come amministratore che vede tutte le posizioni: agisce a tuo nome, e i risultati vengono scritti a tuo nome. L'API e i webhook di Breezy sono inclusi nel suo piano Pro.",
+    "bzStepPaste": "Incolla qui sotto la chiave. Il webhook in Breezy HR lo aggiungiamo noi."
   }
 }

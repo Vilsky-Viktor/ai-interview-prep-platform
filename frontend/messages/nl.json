@@ -1047,6 +1047,9 @@
     "rcToken": "API-token",
     "notConnected": "{ats} is nog niet gekoppeld. Koppel het om de vacatures ervan aan je interviews te verbinden.",
     "webhookSecretName": "Secret",
-    "webhookPasteSecret": "Sla hem op en plak hier het secret dat {ats} ervoor toont:"
+    "webhookPasteSecret": "Sla hem op en plak hier het secret dat {ats} ervoor toont:",
+    "bzStepOpen": "Klik in Breezy HR linksonder op je naam en open dan:",
+    "bzStepCreate": "Maak een API-sleutel aan als beheerder die alle vacatures ziet: die handelt namens jou, en resultaten worden op jouw naam geschreven. De API en webhooks van Breezy horen bij het Pro-abonnement.",
+    "bzStepPaste": "Plak de sleutel hieronder. De webhook in Breezy HR voegen we zelf toe."
   }
 }

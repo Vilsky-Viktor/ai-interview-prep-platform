@@ -91,7 +91,7 @@ export async function addAtsConnection(
   companyId: string,
   interviewId: string,
   candidates: { invited?: number; notInvited?: number } = {},
-  provider: "workable" | "greenhouse" | "teamtailor" | "recruitee" = "workable"
+  provider: "workable" | "greenhouse" | "teamtailor" | "recruitee" | "breezy" = "workable"
 ) {
   // Sealed for real where the page reads them (the web hook's address and secret key).
   const sealed = {
@@ -99,6 +99,7 @@ export async function addAtsConnection(
     greenhouse: { client_id: "e2e", client_secret: "e2e", webhook_secret: GREENHOUSE_E2E_SECRET },
     teamtailor: { host: "https://api.teamtailor.com", key: "e2e" },
     recruitee: { company: "e2e-acme", token: "e2e" },
+    breezy: { company: "e2e", token: "e2e", webhook_id: "e2e", webhook_secret: "e2e" },
   }[provider]
   const credentials = sealed
     ? fernetEncrypt(env("ATS_ENCRYPTION_KEY"), JSON.stringify(sealed))
@@ -108,6 +109,7 @@ export async function addAtsConnection(
     greenhouse: "…e2e1",
     teamtailor: "E2E Acme",
     recruitee: "e2e-acme",
+    breezy: "E2E Acme",
   }[provider]
 
   await withDatabase("ats", async (client) => {

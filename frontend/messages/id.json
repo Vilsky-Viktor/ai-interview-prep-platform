@@ -1051,6 +1051,9 @@
     "rcToken": "Token API",
     "notConnected": "{ats} belum terhubung. Hubungkan untuk menautkan lowongannya ke wawancaramu.",
     "webhookSecretName": "Secret",
-    "webhookPasteSecret": "Simpan, lalu tempel di sini secret yang ditampilkan {ats} untuknya:"
+    "webhookPasteSecret": "Simpan, lalu tempel di sini secret yang ditampilkan {ats} untuknya:",
+    "bzStepOpen": "Di Breezy HR, klik namamu di pojok kiri bawah, lalu buka:",
+    "bzStepCreate": "Buat kunci API sebagai admin yang bisa melihat semua lowongan: kunci ini bertindak atas namamu, dan hasilnya ditulis atas namamu. API dan webhook Breezy tersedia di paket Pro-nya.",
+    "bzStepPaste": "Tempel kunci di bawah. Webhook di Breezy HR kami tambahkan sendiri."
   }
 }

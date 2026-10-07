@@ -4,6 +4,7 @@ export const ATS_PROVIDERS = [
   { id: "greenhouse", name: "Greenhouse", logo: "/ats/greenhouse.png" },
   { id: "teamtailor", name: "Teamtailor", logo: "/ats/teamtailor.png" },
   { id: "recruitee", name: "Recruitee", logo: "/ats/recruitee.png" },
+  { id: "breezy", name: "Breezy HR", logo: "/ats/breezy.png" },
 ] as const
 
 export type AtsProvider = (typeof ATS_PROVIDERS)[number]
@@ -56,6 +57,9 @@ export const RECRUITEE_WEBHOOK_PATH = [
   "Webhooks",
 ]
 export const RECRUITEE_WEBHOOK_EVENT = "candidate_moved"
+
+// Where a Breezy HR user makes the API key: from their name in the bottom left corner.
+export const BREEZY_KEY_PATH = ["My Settings", "API Keys"]
 
 // The ATSs whose web hook the company sets up itself, with where and which event; Teamtailor
 // and Recruitee make the web hook's secret key (each by its own name), which the company pastes

@@ -1047,6 +1047,9 @@
     "rcToken": "Token API",
     "notConnected": "{ats} chưa được kết nối. Hãy kết nối để liên kết các tin tuyển dụng trong {ats} với các buổi phỏng vấn của bạn.",
     "webhookSecretName": "Secret",
-    "webhookPasteSecret": "Lưu lại, rồi dán vào đây secret mà {ats} hiển thị cho webhook đó:"
+    "webhookPasteSecret": "Lưu lại, rồi dán vào đây secret mà {ats} hiển thị cho webhook đó:",
+    "bzStepOpen": "Trong Breezy HR, nhấp vào tên của bạn ở góc dưới bên trái, rồi mở:",
+    "bzStepCreate": "Tạo khóa API bằng tài khoản quản trị viên xem được mọi tin tuyển dụng: khóa hoạt động thay mặt bạn, và kết quả được ghi dưới tên bạn. API và webhook của Breezy có trong gói Pro.",
+    "bzStepPaste": "Dán khóa bên dưới. Chúng tôi tự thêm webhook trong Breezy HR."
   }
 }

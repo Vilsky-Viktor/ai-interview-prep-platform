@@ -91,6 +91,28 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/breezy": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Connect Breezy
+     * @description Connects Breezy HR with a personal API key (it acts as the person who made it), checked
+     *     with one read first, then creates the web hook that sends its stage changes, whose secret
+     *     Breezy gives only now. A reconnect replaces the earlier web hook.
+     */
+    put: operations["connect_breezy_breezy_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/{provider}/webhook": {
     parameters: {
       query?: never
@@ -150,8 +172,8 @@ export interface paths {
     post?: never
     /**
      * Disconnect
-     * @description Disconnects: Workable's notifications are cancelled, then the key is deleted, and its
-     *     linked jobs with it.
+     * @description Disconnects: Workable's notifications and Breezy HR's web hook are cancelled, then the key
+     *     is deleted, and its linked jobs with it.
      */
     delete: operations["disconnect__provider__delete"]
     options?: never
@@ -359,6 +381,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/webhooks/breezy/{connection_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Breezy Event
+     * @description The web hook prepza created in Breezy HR (candidates' stage changes), signed with its
+     *     secret (the X-Hook-Signature header, checked on the body).
+     */
+    post: operations["breezy_event_webhooks_breezy__connection_id__post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/events": {
     parameters: {
       query?: never
@@ -520,7 +563,13 @@ export interface components {
      * @description The applicant tracking systems a company can connect.
      * @enum {string}
      */
-    AtsProvider: "workable" | "greenhouse" | "teamtailor" | "recruitee"
+    AtsProvider:
+      "workable" | "greenhouse" | "teamtailor" | "recruitee" | "breezy"
+    /** BreezyIn */
+    BreezyIn: {
+      /** Token */
+      token: string
+    }
     /**
      * ConnectionOut
      * @description A connection as the company sees it: never its key.
@@ -809,6 +858,39 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["RecruiteeIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  connect_breezy_breezy_put: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["BreezyIn"]
       }
     }
     responses: {
@@ -1283,6 +1365,37 @@ export interface operations {
     }
   }
   recruitee_event_webhooks_recruitee__connection_id__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        connection_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  breezy_event_webhooks_breezy__connection_id__post: {
     parameters: {
       query?: never
       header?: never

@@ -1055,6 +1055,9 @@
     "rcToken": "API token",
     "notConnected": "Hindi pa naka-connect ang {ats}. I-connect ito para ma-link ang mga job nito sa mga interview mo.",
     "webhookSecretName": "Secret",
-    "webhookPasteSecret": "I-save ito, saka i-paste dito ang secret na ipinapakita ng {ats} para rito:"
+    "webhookPasteSecret": "I-save ito, saka i-paste dito ang secret na ipinapakita ng {ats} para rito:",
+    "bzStepOpen": "Sa Breezy HR, i-click ang pangalan mo sa kaliwang ibabang sulok, saka buksan ang:",
+    "bzStepCreate": "Gumawa ng API key bilang admin na nakikita ang lahat ng job: kikilos ito bilang ikaw, at sa pangalan mo isusulat ang mga resulta. Kasama sa Pro plan ng Breezy ang API at webhooks nito.",
+    "bzStepPaste": "I-paste ang key sa ibaba. Kami na ang magdadagdag ng webhook sa Breezy HR."
   }
 }

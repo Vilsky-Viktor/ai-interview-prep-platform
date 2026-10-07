@@ -6,6 +6,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import {
+  BreezySteps,
   GreenhouseSteps,
   RecruiteeSteps,
   TeamtailorSteps,
@@ -41,6 +42,10 @@ const FORMS = {
       { name: "client_id", label: "clientId" },
       { name: "client_secret", label: "clientSecret", secret: true },
     ],
+  },
+  breezy: {
+    steps: BreezySteps,
+    fields: [{ name: "token", label: "apiKey", secret: true }],
   },
   recruitee: {
     steps: RecruiteeSteps,

@@ -1051,6 +1051,9 @@
     "rcToken": "Token API",
     "notConnected": "{ats} nie jest jeszcze połączony. Połącz go, aby powiązać jego oferty ze swoimi rozmowami.",
     "webhookSecretName": "Sekret",
-    "webhookPasteSecret": "Zapisz go, a potem wklej tutaj sekret, który {ats} dla niego pokazuje:"
+    "webhookPasteSecret": "Zapisz go, a potem wklej tutaj sekret, który {ats} dla niego pokazuje:",
+    "bzStepOpen": "W Breezy HR kliknij swoje imię i nazwisko w lewym dolnym rogu, a potem otwórz:",
+    "bzStepCreate": "Utwórz klucz API jako administrator, który widzi wszystkie oferty: klucz działa w Twoim imieniu, a wyniki są zapisywane w Twoim imieniu. API i webhooki Breezy są dostępne w planie Pro.",
+    "bzStepPaste": "Wklej klucz poniżej. Webhook w Breezy HR dodamy sami."
   }
 }

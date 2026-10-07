@@ -1055,6 +1055,9 @@
     "rcToken": "API トークン",
     "notConnected": "{ats} はまだ接続されていません。接続すると、{ats} の求人を面接に紐付けられます。",
     "webhookSecretName": "シークレット",
-    "webhookPasteSecret": "保存したら、{ats} に表示されるシークレットをここに貼り付けます："
+    "webhookPasteSecret": "保存したら、{ats} に表示されるシークレットをここに貼り付けます：",
+    "bzStepOpen": "Breezy HR で左下の自分の名前をクリックし、次を開きます：",
+    "bzStepCreate": "すべての求人を閲覧できる管理者として API キーを作成します。キーはあなたとして動作し、結果もあなたの名前で書き込まれます。Breezy の API と Webhook は Pro プランで利用できます。",
+    "bzStepPaste": "下にキーを貼り付けてください。Breezy HR の Webhook はこちらで追加します。"
   }
 }

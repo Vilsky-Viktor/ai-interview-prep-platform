@@ -1055,6 +1055,9 @@
     "rcToken": "API token",
     "notConnected": "{ats} pole veel ühendatud. Ühenda see, et siduda selle töökuulutused oma intervjuudega.",
     "webhookSecretName": "Saladus",
-    "webhookPasteSecret": "Salvesta see ja kleebi siia saladus, mida {ats} selle jaoks näitab:"
+    "webhookPasteSecret": "Salvesta see ja kleebi siia saladus, mida {ats} selle jaoks näitab:",
+    "bzStepOpen": "Klõpsa Breezy HR-is vasakus alanurgas oma nimel ja ava siis:",
+    "bzStepCreate": "Loo API-võti administraatorina, kes näeb kõiki töökuulutusi: see tegutseb sinu nimel ja tulemused kirjutatakse sinu nimel. Breezy API ja webhookid on saadaval Pro paketiga.",
+    "bzStepPaste": "Kleebi võti allpool. Webhooki lisame Breezy HR-is ise."
   }
 }

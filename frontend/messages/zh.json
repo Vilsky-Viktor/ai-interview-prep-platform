@@ -1042,6 +1042,9 @@
     "rcToken": "API 令牌",
     "notConnected": "{ats} 尚未连接。连接后即可将其职位关联到你的面试。",
     "webhookSecretName": "密钥",
-    "webhookPasteSecret": "保存后，将 {ats} 为它显示的密钥粘贴到这里："
+    "webhookPasteSecret": "保存后，将 {ats} 为它显示的密钥粘贴到这里：",
+    "bzStepOpen": "在 Breezy HR 中，点击左下角你的名字，然后打开：",
+    "bzStepCreate": "以能看到所有职位的管理员身份创建 API 密钥：密钥以你的身份操作，结果也以你的名义写入。Breezy 的 API 和 Webhook 包含在其 Pro 套餐中。",
+    "bzStepPaste": "将密钥粘贴到下方。我们会自行在 Breezy HR 中添加 Webhook。"
   }
 }
