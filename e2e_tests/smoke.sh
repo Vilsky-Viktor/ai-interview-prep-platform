@@ -26,5 +26,6 @@ check /api/generate/ready
 check /api/rounds/ready
 check /api/companies/ready
 check /api/billing/ready
+check /api/ats/ready
 
 echo "smoke ok"

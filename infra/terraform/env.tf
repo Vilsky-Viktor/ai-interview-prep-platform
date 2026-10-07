@@ -13,6 +13,7 @@ locals {
     COMPANIES_URL           = local.run_url["companies"]
     BILLING_URL             = local.run_url["billing"]
     NOTIFICATIONS_URL       = local.run_url["notifications"]
+    ATS_URL                 = local.run_url["ats"]
   }
 
   # And each service its own; INVOKER_AUDIENCE is the service's address, which Google's signed
@@ -43,7 +44,6 @@ locals {
     }
     companies = {
       INVOKER_AUDIENCE = local.run_url["companies"]
-      SITE_URL         = "https://${var.domain}"
     }
     billing = merge(
       {
@@ -60,6 +60,10 @@ locals {
     }
     notifications-stream = {
       INVOKER_AUDIENCE = local.run_url["notifications-stream"]
+      SITE_URL         = "https://${var.domain}"
+    }
+    ats = {
+      INVOKER_AUDIENCE = local.run_url["ats"]
       SITE_URL         = "https://${var.domain}"
     }
   }

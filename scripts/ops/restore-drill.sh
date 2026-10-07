@@ -43,4 +43,5 @@ echo "rounds:      $(count rounds rounds) rounds, $(count rounds answers) answer
 echo "companies:   $(count companies companies) companies, $(count companies candidate_invites) invites"
 echo "generation:  $(count generation generations) generations"
 echo "billing:     $(count billing purchases) purchases"
+echo "ats:         $(count ats ats_connections) ATS connections"
 echo "Restore drill passed: the backup restores and its data reads back."

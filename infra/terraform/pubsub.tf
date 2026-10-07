@@ -28,6 +28,7 @@ locals {
     library       = ["answer.recorded", "session.scored"]
     companies     = ["generation.completed", "generation.cancelled", "interview.finished", "results.rescored"]
     notifications = ["notification.requested", "candidate.invited", "candidate.reminded", "report.shared", "contact.sent", "company.deleted"]
+    ats           = ["candidate.finished", "interview.ready", "interview.deleted", "company.deleted"]
   }
 }
 

@@ -31,11 +31,14 @@ locals {
     # In the morning (UTC), not the night: a reminder candidates see.
     invite-reminders = { service = "companies", path = "/internal/schedules/invite-reminders", cron = "0 9 * * *" }
     bank-stages      = { service = "library", path = "/internal/schedules/bank", cron = "45 3 * * *" }
+    # ATS candidates whose invite stalled, and ones past their retention.
+    ats-recover      = { service = "ats", path = "/internal/schedules/recover", cron = "0 4 * * *" }
     # Events not published right after their change (the outbox).
     library-outbox    = { service = "library", path = "/internal/schedules/outbox", cron = "* * * * *" }
     companies-outbox  = { service = "companies", path = "/internal/schedules/outbox", cron = "* * * * *" }
     rounds-outbox     = { service = "rounds", path = "/internal/schedules/outbox", cron = "* * * * *" }
     generation-outbox = { service = "generation-worker", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    ats-outbox        = { service = "ats", path = "/internal/schedules/outbox", cron = "* * * * *" }
     # Interviews whose time ran out after the candidate left.
     interview-expiry = { service = "rounds", path = "/internal/schedules/expire-interviews", cron = "* * * * *" }
   }

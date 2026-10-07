@@ -6,10 +6,13 @@
 30 3 * * * curl -s -X POST http://companies:8000/internal/schedules/invite-expiry
 0 9 * * * curl -s -X POST http://companies:8000/internal/schedules/invite-reminders
 45 3 * * * curl -s -X POST http://library:8000/internal/schedules/bank
+# ATS candidates whose invite stalled, and old ones (the ats service), daily.
+0 4 * * * curl -s -X POST http://ats:8000/internal/schedules/recover
 # Events not published right after their change (the outbox), every minute.
 * * * * * curl -s -X POST http://library:8000/internal/schedules/outbox
 * * * * * curl -s -X POST http://companies:8000/internal/schedules/outbox
 * * * * * curl -s -X POST http://rounds:8000/internal/schedules/outbox
 * * * * * curl -s -X POST http://generation-worker:8000/internal/schedules/outbox
+* * * * * curl -s -X POST http://ats:8000/internal/schedules/outbox
 # Interviews whose time ran out after the candidate left, every minute.
 * * * * * curl -s -X POST http://rounds:8000/internal/schedules/expire-interviews

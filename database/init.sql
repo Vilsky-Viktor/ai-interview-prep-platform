@@ -6,3 +6,4 @@ CREATE DATABASE rounds;
 CREATE DATABASE companies;
 CREATE DATABASE billing;
 CREATE DATABASE notifications;
+CREATE DATABASE ats;

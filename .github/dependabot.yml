@@ -7,6 +7,7 @@ updates:
       - /database
       - /firebase
       - /frontend
+      - /services/ats
       - /services/billing
       - /services/companies
       - /services/generation

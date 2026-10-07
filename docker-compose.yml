@@ -19,6 +19,7 @@ x-firebase-env: &firebase-env
   COMPANIES_SERVICE_SECRET: ${SERVICE_SECRET}
   BILLING_SERVICE_SECRET: ${SERVICE_SECRET}
   NOTIFICATIONS_SERVICE_SECRET: ${SERVICE_SECRET}
+  ATS_SERVICE_SECRET: ${SERVICE_SECRET}
   # Events go through the Pub/Sub emulator locally; Google Cloud uses the real service.
   GOOGLE_CLOUD_PROJECT: ${FIREBASE_PROJECT_ID}
   PUBSUB_EMULATOR_HOST: pubsub:8085
@@ -51,6 +52,7 @@ x-library-env: &library-env
   COMPANIES_URL: http://companies:8000
   BILLING_URL: http://billing:8000
   NOTIFICATIONS_URL: http://notifications:8000
+  ATS_URL: http://ats:8000
 
 x-rounds-env: &rounds-env
   <<: *firebase-env
@@ -96,10 +98,6 @@ x-companies-env: &companies-env
   EMAIL_DAILY_LIMIT: ${EMAIL_DAILY_LIMIT:-200}
   EMAIL_RECIPIENT_DAILY_LIMIT: ${EMAIL_RECIPIENT_DAILY_LIMIT:-3}
   REPORT_EMAILS_PER_COMPANY_DAY: ${REPORT_EMAILS_PER_COMPANY_DAY:-20}
-  # Encrypts companies' ATS keys (a Fernet key); empty turns ATS integrations off.
-  ATS_ENCRYPTION_KEY: ${ATS_ENCRYPTION_KEY:-}
-  # The site's address: where an ATS sends candidates, and links in results written back.
-  SITE_URL: ${SITE_URL:-http://localhost:8090}
   BILLING_URL: http://billing:8000
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/companies
   REDIS_URL: redis://redis:6379
@@ -151,6 +149,23 @@ x-notifications-source: &notifications-source
   - ./services/notifications/app:/services/notifications/app
   - ./services/notifications/migrations:/services/notifications/migrations
   - ./services/notifications/alembic.ini:/services/notifications/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+x-ats-env: &ats-env
+  <<: *firebase-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/ats
+  REDIS_URL: redis://redis:6379
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  COMPANIES_URL: http://companies:8000
+  # Encrypts companies' ATS keys (a Fernet key); empty turns ATS integrations off.
+  ATS_ENCRYPTION_KEY: ${ATS_ENCRYPTION_KEY:-}
+  # The site's address: where an ATS sends candidates, and links in results written back.
+  SITE_URL: ${SITE_URL:-http://localhost:8090}
+
+x-ats-source: &ats-source
+  - ./services/ats/app:/services/ats/app
+  - ./services/ats/migrations:/services/ats/migrations
+  - ./services/ats/alembic.ini:/services/ats/alembic.ini:ro
   - ./packages/common/src:/packages/common/src
 
 # Runs a service's migrations once, before its API starts, so replicas never race on them.
@@ -423,6 +438,29 @@ services:
     depends_on:
       billing-migrate:
         condition: service_completed_successfully
+
+  ats-migrate:
+    <<: *migrate
+    build:
+      context: .
+      dockerfile: services/ats/Dockerfile
+      target: dev
+    volumes: *ats-source
+    environment: *ats-env
+
+  ats:
+    <<: *service
+    build:
+      context: .
+      dockerfile: services/ats/Dockerfile
+      target: dev
+    volumes: *ats-source
+    environment: *ats-env
+    depends_on:
+      ats-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
 
   frontend:
     restart: unless-stopped

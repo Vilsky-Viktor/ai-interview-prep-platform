@@ -51,6 +51,7 @@ check rounds sessions "user_id::text IN ($user_ids)"
 check library sets "owner_id::text IN ($company_ids, $user_ids)"
 check billing wallets "owner_id::text IN ($company_ids)"
 check billing holds "owner_id::text IN ($company_ids)"
+check ats ats_connections "company_id::text IN ($company_ids)"
 check notifications notifications "(recipient = 'user' AND recipient_id::text IN ($user_ids))
   OR (recipient = 'company' AND recipient_id::text IN ($company_ids))"
 
