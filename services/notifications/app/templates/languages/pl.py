@@ -9,56 +9,56 @@ TEXTS = {
             "{company} zaprasza Cię na rozmowę „{title}” w prepza.",
             (
                 "Zaloguj się adresem {email}, aby zacząć. Tylko ten adres może wziąć "
-                "udział w rozmowie i masz jedną próbę."
+                "udział w rozmowie i masz jedno podejście."
             ),
         ],
         "button": "Otwórz zaproszenie",
     },
     "reminder": {
         "subject": "Przypomnienie: {company} czeka na Twoją rozmowę",
-        "preheader": "„{title}” jest nadal otwarta. Zaloguj się adresem {email}, aby zacząć.",
+        "preheader": "Rozmowa „{title}” jest nadal otwarta. Zaloguj się adresem {email}, aby zacząć.",
         "heading": "Twoja rozmowa czeka",
         "lines": [
             (
-                "{company} zaprosiła Cię kilka dni temu na rozmowę „{title}” w prepza, a Ty "
-                "jeszcze jej nie zacząłeś."
+                "Zaproszenie od {company} na rozmowę „{title}” w prepza czeka od kilku dni, "
+                "a rozmowa nie została jeszcze rozpoczęta."
             ),
             (
                 "Zaloguj się adresem {email}, aby zacząć. Tylko ten adres może wziąć udział w "
-                "rozmowie i masz jedną próbę. Zaproszenie wygasa 30 dni po wysłaniu."
+                "rozmowie i masz jedno podejście. Zaproszenie wygasa 30 dni po wysłaniu."
             ),
         ],
         "button": "Otwórz zaproszenie",
     },
     "report": {
         "subject": "Raport kandydata: {candidate}",
-        "preheader": "{candidate} rozwiązał „{title}” w {company}. Raport jest w załączniku.",
+        "preheader": "Kandydat {candidate} ukończył rozmowę „{title}” w firmie {company}. Raport jest w załączniku.",
         "heading": "Raport kandydata",
         "lines": [
-            "{sender} z {company} udostępnił raport kandydata {candidate} z rozmowy „{title}”.",
+            "{sender} z firmy {company} udostępnił(a) raport kandydata {candidate} z rozmowy „{title}”.",
             (
-                "Jest w załączniku jako jednostronicowy PDF: ocena ogólna, wynik z każdego tematu "
+                "Jest w załączniku jako jednostronicowy PDF: wynik ogólny, wynik z każdego tematu "
                 "i to, co pokazała przeglądarka kandydata. Odpowiedz na tę wiadomość, aby "
                 "odpisać {sender}."
             ),
         ],
         "button": "Odwiedź prepza",
-        "footer": "Ta wiadomość została wysłana na {email}, ponieważ {sender} udostępnił temu "
+        "footer": "Ta wiadomość została wysłana na {email}, ponieważ {sender} udostępnił(a) temu "
         "adresowi raport kandydata w prepza. Jeśli się jej nie spodziewasz, możesz ją zignorować.",
     },
     "candidates": {
         "subject": "Raport wszystkich kandydatów: {title}",
-        "preheader": "Wszyscy kandydaci do „{title}” w {company}. Raport jest w załączniku.",
+        "preheader": "Wszyscy kandydaci z rozmowy „{title}” w firmie {company}. Raport jest w załączniku.",
         "heading": "Raport kandydatów",
         "lines": [
-            "{sender} z {company} udostępnił raport wszystkich kandydatów z rozmowy „{title}”.",
+            "{sender} z firmy {company} udostępnił(a) raport wszystkich kandydatów z rozmowy „{title}”.",
             (
-                "Jest w załączniku jako PDF: ocena i postęp każdego kandydata oraz to, co pokazała "
+                "Jest w załączniku jako PDF: wynik i postęp każdego kandydata oraz to, co pokazała "
                 "jego przeglądarka, od najlepszych. Odpowiedz na tę wiadomość, aby odpisać {sender}."
             ),
         ],
         "button": "Odwiedź prepza",
-        "footer": "Ta wiadomość została wysłana na {email}, ponieważ {sender} udostępnił temu "
+        "footer": "Ta wiadomość została wysłana na {email}, ponieważ {sender} udostępnił(a) temu "
         "adresowi raport kandydatów w prepza. Jeśli się jej nie spodziewasz, możesz ją zignorować.",
     },
     "footer": "Ta wiadomość została wysłana na {email}, ponieważ ktoś zaprosił ten adres w "

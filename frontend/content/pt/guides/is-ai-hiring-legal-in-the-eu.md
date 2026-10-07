@@ -92,7 +92,7 @@ O artigo 26.º define as obrigações do empregador. Em resumo ([artigo 26.º](h
 
 Os dados dos candidatos são dados pessoais, e a IA não muda o GDPR. O essencial:
 
-- **Papéis.** Normalmente você é o controlador dos dados dos candidatos; um fornecedor de testes é o seu operador. Assine um acordo de processamento de dados.
+- **Papéis.** Normalmente você é o controlador dos dados dos candidatos; um fornecedor de testes é o seu operador. Assine um acordo de tratamento de dados.
 - **Aviso.** Informe aos candidatos o que você coleta, por quê, por quanto tempo guarda e quais são os direitos deles.
 - **Avaliação de impacto sobre a proteção de dados.** A avaliação sistemática de candidatos com tecnologia nova normalmente exige uma.
 - **Retenção.** Defina um limite e cumpra.
@@ -123,7 +123,7 @@ Como isso aparece no produto hoje:
 - **Os candidatos são informados** antes de começar de que as perguntas são escritas por IA, de que pessoas da sua empresa revisam os resultados e decidem, e de que eles podem pedir uma revisão.
 - **Tempo extra** pode ser dado a qualquer candidato que pedir.
 - **Registros.** As perguntas exibidas, as respostas, os tempos e os eventos de integridade são registrados.
-- **Dados.** Hospedados na UE (alguns suboperadores estão nos EUA; veja a [política de privacidade](/privacy)), dados dos candidatos excluídos 12 meses após o convite, acordo de processamento de dados incluído, e os seus dados não são usados para treinar modelos de IA.
+- **Dados.** Hospedados na UE (alguns suboperadores estão nos EUA; veja a [política de privacidade](/privacy)), dados dos candidatos excluídos 12 meses após o convite, acordo de tratamento de dados incluído, e os seus dados não são usados para treinar modelos de IA.
 
 Já existem rascunhos da documentação técnica, do registro de riscos, das instruções para empresas, do sistema de gestão da qualidade e do plano de acompanhamento pós-comercialização, que estão sendo concluídos antes da data de 2027. São rascunhos de trabalho, não uma declaração de conformidade.
 

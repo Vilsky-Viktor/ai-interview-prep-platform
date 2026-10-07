@@ -17,7 +17,7 @@ MESSAGES = {
     "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "새 면접을 만들기 전에 기존 면접 중 하나에 지원자를 초대해 주세요. 지원자가 없는 면접은 최대 3개까지 둘 수 있습니다.",
     "This interview is already finished": "이 면접은 이미 종료되었습니다",
     "This interview isn't taking new candidates right now.": "이 면접은 현재 새 지원자를 받지 않습니다.",
-    "This interview has no practice questions yet.": "이 연습 면접에는 아직 질문이 없습니다.",
+    "This interview has no practice questions yet.": "이 연습 면접에는 아직 문제가 없습니다.",
     "No emails found.": "이메일을 찾을 수 없습니다.",
     "At most 100 emails at once.": "한 번에 최대 100개의 이메일까지 가능합니다.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "500KB 이하의 PNG, JPEG 또는 WebP 이미지를 사용하세요",

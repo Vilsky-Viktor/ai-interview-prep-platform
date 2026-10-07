@@ -5,12 +5,12 @@ FAQ = [
     {
         "key": "what",
         "question": "Apa itu prepza?",
-        "answer": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu, untuk peran apa pun. Gunakan untuk menyaring kandidat sebelum kamu bertemu mereka, atau sebagai salah satu tahap rekrutmen itu sendiri: dengan cara mana pun, kamu melihat siapa yang benar-benar menguasai pekerjaannya.",
+        "answer": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu, untuk posisi apa pun. Gunakan untuk menyaring kandidat sebelum kamu bertemu mereka, atau sebagai salah satu tahap rekrutmen itu sendiri: dengan cara mana pun, kamu melihat siapa yang benar-benar menguasai pekerjaannya.",
     },
     {
         "key": "roles",
-        "question": "Untuk peran apa saja aku bisa merekrut?",
-        "answer": "Peran apa pun yang membutuhkan pengetahuan: dukungan pelanggan, penjualan, keuangan, kesehatan, pekerjaan teknis lapangan, rekayasa, pemasaran, dan lainnya. Jika kamu bisa menjelaskan pekerjaannya, prepza bisa membuat wawancara untuknya.",
+        "question": "Untuk posisi apa saja aku bisa merekrut?",
+        "answer": "Posisi apa pun yang membutuhkan pengetahuan: customer support, sales, keuangan, kesehatan, teknisi lapangan, engineering, pemasaran, dan lainnya. Jika kamu bisa menjelaskan pekerjaannya, prepza bisa membuat wawancara untuknya.",
     },
     {
         "key": "hiring",
@@ -20,7 +20,7 @@ FAQ = [
     {
         "key": "link",
         "question": "Bisakah aku memasang wawancara di iklan lowongan?",
-        "answer": "Bisa. Aktifkan tautan wawancara yang bisa dibagikan di tab kandidatnya, lalu tempel di iklanmu. Siapa pun yang membukanya masuk dan mengikuti wawancara, dan setiap orang dikenai biaya seperti kandidat yang diundang. Tautan mati saat kamu menandai wawancara sebagai diterima.",
+        "answer": "Bisa. Aktifkan tautan wawancara yang bisa dibagikan di tab kandidatnya, lalu tempel di iklanmu. Siapa pun yang membukanya masuk dan mengikuti wawancara, dan setiap orang dikenai biaya seperti kandidat yang diundang. Tautan nonaktif saat kamu menandai wawancara dengan status Diterima.",
     },
     {
         "key": "preview",
@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Bisakah kandidat memakai AI atau mencari jawabannya?",
-        "answer": "Setiap kandidat mendapat soal acak sendiri dengan urutan sendiri, dengan batas waktu di tiap soal yang dijaga server kami, jadi hanya ada sedikit waktu untuk mencari jawaban atau bertanya ke AI. Kartu skor juga menunjukkan saat kandidat keluar dari halaman, menyalin teks, atau menjawab terlalu cepat untuk sempat membaca soal.",
+        "answer": "Setiap kandidat mendapat soal acak sendiri dengan urutan sendiri, dengan batas waktu di tiap soal yang dijaga server kami, jadi hanya ada sedikit waktu untuk mencari jawaban atau bertanya ke AI. Scorecard juga menunjukkan saat kandidat meninggalkan halaman, menyalin teks, atau menjawab terlalu cepat untuk sempat membaca soal.",
     },
     {
         "key": "cost",
@@ -59,12 +59,12 @@ FAQ = [
     },
     {
         "key": "scorecards",
-        "question": "Apa yang ditampilkan kartu skor?",
-        "answer": "Setiap jawaban, apakah benar, dan berapa lama waktunya. Nilai tampil hijau atau merah dibanding nilai lulus yang kamu tetapkan untuk wawancara. Kartu skor juga menandai jawaban yang terlalu cepat untuk sempat membaca soal, saat kandidat keluar dari halaman, dan upaya menyalin.",
+        "question": "Apa yang ditampilkan scorecard?",
+        "answer": "Setiap jawaban, apakah benar, dan berapa lama waktunya. Nilai tampil hijau atau merah dibanding nilai lulus yang kamu tetapkan untuk wawancara. Scorecard juga menandai jawaban yang terlalu cepat untuk sempat membaca soal, saat kandidat meninggalkan halaman, dan upaya menyalin.",
     },
     {
         "key": "reports",
-        "question": "Bisakah aku membagikan hasil ke manajer perekrutan?",
+        "question": "Bisakah aku membagikan hasil ke hiring manager?",
         "answer": "Bisa. Unduh laporan PDF untuk satu kandidat atau semua kandidat sebuah wawancara, kirim lewat email langsung dari prepza, atau kirim ringkasan singkat di WhatsApp atau Telegram.",
     },
     {
@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Apa arti tanda centang terverifikasi?",
-        "answer": "Artinya pemilik atau admin perusahaan masuk dengan email kerja di domain situs perusahaan, misalnya you@acme.com, lalu tim kami meninjau perusahaan tersebut. Tambahkan situsnya lewat Verifikasi di header perusahaanmu; layanan email gratis tidak dihitung. Selama peninjauan masih tertunda, timmu melihat ikon jam di samping nama, dan mengganti nama perusahaan mengirimnya untuk ditinjau lagi. Tanda centang tampil di samping nama perusahaanmu, termasuk di undangan.",
+        "answer": "Artinya pemilik atau admin perusahaan masuk dengan email kerja di domain situs perusahaan, misalnya you@acme.com, lalu tim kami meninjau perusahaan tersebut. Tambahkan situsnya lewat Verifikasi di header perusahaanmu; layanan email gratis tidak dihitung. Selama masih menunggu peninjauan, timmu melihat ikon jam di samping nama, dan mengganti nama perusahaan mengirimnya untuk ditinjau lagi. Tanda centang tampil di samping nama perusahaanmu, termasuk di undangan.",
     },
     {
         "key": "languages",

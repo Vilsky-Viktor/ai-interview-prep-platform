@@ -119,7 +119,7 @@ Kuidas see tootes täna välja näeb:
 
 - **AI kirjutab küsimused ja nende vastusevõtmed; hindamine käib kindlate reeglite järgi.** Ükski AI ei loe ega hinda kandidaadi vastust ning video-, hääle- ega näoanalüüsi ei kasutata. Kui AI hiljem võtit parandab, arvutatakse varasemad vastused ümber.
 - **Sina kiidad teemad heaks** enne, kui ühtegi küsimust kirjutatakse, ja näed iga küsimust.
-- **Otsustavad inimesed.** Tulemuste leht ja PDF-aruanded tuletavad sinu meeskonnale meelde tulemused üle vaadata; prepza ei lükka kandidaate tagasi ega saada äraütlemiskirju.
+- **Otsustavad inimesed.** Hindamislehed ja PDF-aruanded tuletavad sinu meeskonnale meelde tulemused üle vaadata; prepza ei lükka kandidaate tagasi ega saada äraütlemiskirju.
 - **Kandidaatidele öeldakse** enne alustamist, et küsimused on kirjutanud AI, et tulemused vaatavad üle ja otsuse teevad inimesed sinu ettevõttest ning et nad võivad taotleda ülevaatust.
 - **Lisaaega** saab anda igale kandidaadile, kes seda palub.
 - **Andmed salvestatakse.** Näidatud küsimused, vastused, ajakulu ja aususega seotud sündmused salvestatakse.

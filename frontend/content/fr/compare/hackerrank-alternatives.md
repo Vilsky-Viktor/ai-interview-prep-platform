@@ -40,7 +40,7 @@ prepza lit votre fiche de poste, repère ce qu'un candidat doit savoir et propos
 Cela fonctionne de la même façon pour un développeur back-end que pour un gestionnaire de paie. Pour un développeur, prepza peut évaluer les bases de données, les API, la conception de systèmes ou un framework. Quand un thème porte sur du code, du SQL, des commandes shell ou de la configuration, de nombreuses questions montrent un court exemple et demandent ce qu'il affiche ou renvoie, ce qu'il fait, pourquoi il échoue ou quelle modification le corrige. Les candidats choisissent une réponse parmi quatre. Ils n'écrivent, n'exécutent ni ne déboguent de code dans prepza, et il n'y a pas d'environnement de code en direct.
 
 - **Tarifs :** par candidat qui répond à au moins une question, moins cher par candidat avec des recharges plus importantes. Pas d'abonnement, et les crédits n'expirent pas. Voir les [tarifs](/pricing).
-- **Aussi :** fiches d'évaluation avec réponses et temps, signalements pour les réponses trop rapides, les sorties de la page et les tentatives de copie, rapports PDF, invitations par e-mail ou via un lien dans l'offre d'emploi, relances automatiques et 23 langues.
+- **Aussi :** fiches d'évaluation avec réponses et temps, alertes pour les réponses trop rapides, les sorties de la page et les tentatives de copie, rapports PDF, invitations par e-mail ou via un lien dans l'offre d'emploi, relances automatiques et 23 langues.
 - **Adapté à :** une première présélection avant l'étape de code, et un test pour les postes hors ingénierie.
 
 ### TestGorilla : une large bibliothèque

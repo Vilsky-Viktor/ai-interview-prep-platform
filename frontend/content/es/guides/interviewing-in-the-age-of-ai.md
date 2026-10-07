@@ -73,7 +73,7 @@ prepza es muy adecuado para el paso 2. Convierte tu descripción del puesto en u
 - **Conceptos y teoría a partir de la descripción del puesto:** bases de datos, API, arquitectura, el comportamiento de un framework, prácticas de seguridad.
 - **Preguntas de lectura de código:** un breve fragmento de código con preguntas sobre qué imprime o devuelve, qué hace, por qué falla o qué cambio lo corrige. Es la misma habilidad de revisión de la que depende el trabajo asistido por IA.
 - **Un temporizador en cada pregunta:** cada pregunta tiene su propia cuenta atrás, controlada por el servidor, y cada candidato recibe su propio conjunto aleatorio de preguntas. Eso hace más difícil buscar las respuestas, incluso preguntando a un asistente de IA. No lo hace imposible.
-- **Señales de integridad:** las fichas de resultados marcan las respuestas demasiado rápidas como para haber leído la pregunta, las veces que el candidato salió de la página y los intentos de copiar. Un aviso es un motivo para mirar con más atención, no una prueba de trampa.
+- **Alertas de integridad:** las fichas de evaluación marcan las respuestas demasiado rápidas como para haber leído la pregunta, las veces que el candidato salió de la página y los intentos de copiar. Una alerta es un motivo para mirar con más atención, no una prueba de trampa.
 
 Lo que prepza no hace: los candidatos no escriben, ejecutan ni depuran código en prepza, y no observa cómo usan un asistente de IA. Eso corresponde a la fase práctica, hecha internamente o en una plataforma para desarrolladores, que complementa el filtro de conocimientos. Consulta las [pruebas de habilidades por puesto](/tests) para empezar desde pruebas ya preparadas, y [Entrevistas con IA](/ai-interviews) para ver cómo usa prepza la IA y qué deja en manos de las personas.
 
@@ -84,7 +84,7 @@ Cambiar tu proceso es un buen momento para comprobar que es justo:
 - **Deja claras las reglas sobre la IA** en cada fase, por escrito.
 - **Mantén las mismas condiciones** para todos en una misma fase.
 - **Ofrece adaptaciones,** como tiempo extra, a los candidatos que lo pidan.
-- **No trates una señal como un veredicto.** Hacer una pausa, apartar la mirada o responder rápido puede tener causas inocentes.
+- **No trates una alerta como un veredicto.** Hacer una pausa, apartar la mirada o responder rápido puede tener causas inocentes.
 - **Mantenlo corto.** Cada fase que añades cuesta a los buenos candidatos un tiempo que podrían dedicar a otra oferta.
 
 ## Resumen

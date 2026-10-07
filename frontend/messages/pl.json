@@ -2,7 +2,7 @@
   "settings": {
     "title": "Ustawienia",
     "language": "Język",
-    "languageNote": "Dla interfejsu i odpowiedzi tutora oraz domyślny język nowych zestawów i rozmów. Możesz je generować w każdym obsługiwanym języku.",
+    "languageNote": "Dla interfejsu i odpowiedzi czatu pomocy oraz język, w którym zaczynają się nowe rozmowy. Rozmowę możesz utworzyć w każdym obsługiwanym języku.",
     "languageFailed": "Nie udało się zmienić języka. Spróbuj ponownie.",
     "yourData": "Twoje dane",
     "yourDataNote": "Pobierz wszystko, co prepza. przechowuje na Twój temat, albo usuń konto.",
@@ -47,11 +47,11 @@
   },
   "signIn": {
     "title": "Zaloguj się",
-    "continueWith": "Kontynuuj przez <name>{provider}</name>",
+    "continueWith": "Kontynuuj z <name>{provider}</name>",
     "link": "Ten adres e-mail ma już konto w prepza. Kontynuuj tak, jak logowałeś się wcześniej, a {provider} zostanie z nim połączony.",
     "consent": "Logując się, potwierdzasz, że masz co najmniej 16 lat, i akceptujesz <terms>Regulamin</terms> i <privacy>Politykę prywatności</privacy>.",
     "failed": "Nie udało się zalogować. Spróbuj ponownie.",
-    "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, a potem zaloguj się ponownie, aby przechodzić rozmowy."
+    "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, a potem zaloguj się ponownie, aby brać udział w rozmowach."
   },
   "common": {
     "copyLink": "Kopiuj link",
@@ -73,7 +73,7 @@
     "titleFailed": "Nie udało się zapisać tytułu.",
     "loading": "Wczytywanie…",
     "send": "Wyślij",
-    "thinking": "Myśli…"
+    "thinking": "Myślę…"
   },
   "errors": {
     "title": "Coś poszło nie tak",
@@ -120,7 +120,7 @@
     "flags": {
       "wrong_key": "odpowiedź może być błędna",
       "rewrite": "potrzebne nowe pytanie",
-      "weak_options": "potrzebne lepsze odpowiedzi"
+      "weak_options": "potrzebne lepsze warianty odpowiedzi"
     },
     "zone": "Strefa administratora",
     "templates": "Szablony",
@@ -130,12 +130,12 @@
     "description": "Opis roli",
     "create": "Wygeneruj",
     "createFailed": "Nie udało się rozpocząć szablonu. Spróbuj ponownie.",
-    "text": "Gotowe rozmowy według ról, dla firm i talentów.",
+    "text": "Gotowe rozmowy według ról, dla firm i dla osób, które ćwiczą przed rozmową kwalifikacyjną.",
     "deleteLabel": "Usuń {title}",
     "deleteTitle": "Usunąć ten szablon?",
     "deleteText": "Jego tematy i pytania zostaną usunięte. Rozmowy, które firmy już z niego utworzyły, pozostaną.",
     "deleteFailed": "Nie udało się usunąć szablonu. Spróbuj ponownie.",
-    "passRates": "Odsetki zaliczeń",
+    "passRates": "Zdawalność",
     "controls": "Sterowanie",
     "stats": "Statystyki",
     "statsPeriod": "Okres",
@@ -146,27 +146,27 @@
       "interviews": "Rozmowy",
       "invited": "Zaproszeni",
       "finished": "Ukończyli",
-      "practice": "Rundy ćwiczeniowe",
+      "practice": "Podejścia ćwiczeniowe",
       "top_ups": "Doładowania",
       "paid": "Zapłacono",
       "credits_spent": "Wydane kredyty"
     },
     "noPassRates": "Żadna rozmowa nie ma jeszcze kandydatów, którzy ją ukończyli.",
-    "outsideTriggers": "nietypowy odsetek zaliczeń",
+    "outsideTriggers": "nietypowa zdawalność",
     "finished": "{count, plural, one {# ukończył} few {# ukończyło} many {# ukończyło} other {# ukończyło}}",
     "passed": "{percent}% zaliczyło",
     "passMark": "próg zaliczenia {percent}%",
     "averageGrade": "średnio {percent}%",
     "timedOut": "{percent}% po czasie",
     "sortBy": {
-      "pass_rate": "Najniższy odsetek zaliczeń najpierw",
-      "finished": "Najwięcej ukończonych najpierw"
+      "pass_rate": "Najpierw najniższa zdawalność",
+      "finished": "Najpierw najwięcej ukończonych"
     },
     "pauseTitle": "Awaryjne wstrzymanie",
-    "pauseText": "Gdy jest włączone, nikt nie może rozpocząć nowej rozmowy, rundy ćwiczeniowej ani podglądu, a pytania nie są generowane, generowane ponownie ani sprawdzane. Kandydaci, którzy są już w trakcie rozmowy, mogą ją dokończyć.",
+    "pauseText": "Gdy jest włączone, nikt nie może rozpocząć nowej rozmowy, podejścia ćwiczeniowego ani podglądu, a pytania nie są generowane, generowane ponownie ani sprawdzane. Kandydaci, którzy są już w trakcie rozmowy, mogą ją dokończyć.",
     "pauseFailed": "Nie udało się zmienić wstrzymania. Spróbuj ponownie.",
     "maintenanceTitle": "Tryb konserwacji",
-    "maintenanceText": "Gdy jest włączony, każda strona pokazuje, że prepza jest w trakcie konserwacji, a usługi odrzucają każde żądanie, z wyjątkiem superadminów. Płatności, e-maile i zaplanowane zadania działają dalej.",
+    "maintenanceText": "Gdy jest włączony, każda strona pokazuje, że prepza jest w trakcie konserwacji, a usługi odrzucają każde żądanie, z wyjątkiem żądań superadminów. Płatności, e-maile i zaplanowane zadania działają dalej.",
     "maintenanceFailed": "Nie udało się zmienić trybu konserwacji. Spróbuj ponownie.",
     "maintenanceConfirmTitle": "Włączyć tryb konserwacji?",
     "maintenanceRunning": "{count, plural, =0 {Żaden kandydat nie jest teraz w trakcie rozmowy.} other {Kandydaci w trakcie rozmowy: #. Mogą stracić czas.}}",
@@ -201,9 +201,9 @@
     "use": "Użyj szablonu",
     "using": "Uruchamianie…",
     "useFailed": "Nie udało się rozpocząć rozmowy z tego szablonu. Spróbuj ponownie.",
-    "warningTitle": "Szablony są gotowe dla popularnych stanowisk.",
-    "warning": "Aby lepiej dopasować, utwórz rozmowę z opisu stanowiska.",
-    "text": "Gotowe rozmowy według ról. Wybierz jedną, od której zaczniesz swoją rozmowę; możesz ją potem zmienić."
+    "warningTitle": "Szablony to gotowe rozmowy dla popularnych stanowisk.",
+    "warning": "Aby lepiej dopasować pytania, utwórz rozmowę na podstawie swojego opisu stanowiska.",
+    "text": "Gotowe rozmowy według ról. Wybierz jedną jako punkt wyjścia dla swojej rozmowy; możesz ją potem zmienić."
   },
   "billing": {
     "paid": "Płatność otrzymana. Za chwilę pojawi się tutaj.",
@@ -213,13 +213,13 @@
     "low": "Kończą się",
     "creditsWord": "{count, plural, one {kredyt} few {kredyty} many {kredytów} other {kredytu}}",
     "topUpTitle": "Doładowanie: {name}",
-    "topUpNote": "Każde doładowanie kupuje pełnych kandydatów; większe kosztują mniej za kandydata. Kredyty nie wygasają.",
-    "candidates": "{count, plural, one {# kandydat} few {# kandydatów} many {# kandydatów} other {# kandydata}}",
+    "topUpNote": "Każde doładowanie starcza na pełną liczbę kandydatów; przy większych koszt jednego kandydata jest niższy. Kredyty nie wygasają.",
+    "candidates": "{count, plural, one {# kandydat} few {# kandydaci} many {# kandydatów} other {# kandydata}}",
     "each": "{price} za każdego"
   },
   "deleteAccount": {
     "title": "Usunąć konto?",
-    "everything": "Wszystko zostaje usunięte: Twoje miejsce w zespole każdej firmy, Twoje wyniki z rozmów, które odbyłeś jako kandydat, Twoje rundy ćwiczeniowe i powiadomienia.",
+    "everything": "Wszystko zostaje usunięte: Twoje miejsce w zespole każdej firmy, Twoje wyniki z rozmów, które odbyłeś jako kandydat, Twoje podejścia ćwiczeniowe i powiadomienia.",
     "company": "Firma, której jesteś jedynym właścicielem, zostanie usunięta razem z rozmowami. Tej operacji nie można cofnąć.",
     "confirm": "Usuń konto",
     "deleted": "Twoje konto zostało usunięte.",
@@ -282,7 +282,7 @@
     "count": "{count, plural, one {pytanie} few {pytania} many {pytań} other {pytania}}",
     "loadFailed": "Nie udało się wczytać pytań.",
     "yourAnswer": "Twoja odpowiedź",
-    "aiWritten": "Pytania i odpowiedzi pisane przez AI mogą być błędne. Oznacz złą odpowiedź lub wygeneruj ponownie."
+    "aiWritten": "Pytania i klucze odpowiedzi pisane przez AI mogą zawierać błędy. Oznacz błędną odpowiedź lub wygeneruj pytanie ponownie."
   },
   "rounds": {
     "answered": "Odpowiedzi",
@@ -311,7 +311,7 @@
     "title": "Rozmowa"
   },
   "generation": {
-    "title": "Nowe przygotowanie",
+    "title": "Nowa rozmowa",
     "interviews": "Rozmowy",
     "cancel": "Anuluj generowanie",
     "cancelTitle": "Anulować to generowanie?",
@@ -348,14 +348,14 @@
     "approve": "Zatwierdź i wygeneruj"
   },
   "candidateStatus": {
-    "invited": "zaproszony",
-    "undelivered": "niedostarczone",
+    "invited": "zaproszono",
+    "undelivered": "nie dostarczono",
     "in_process": "w trakcie",
-    "finished": "zakończone",
-    "deleted": "usunięty",
+    "finished": "ukończono",
+    "deleted": "usunięto",
     "expired": "wygasło",
-    "passed": "zdał",
-    "flagged": "oznaczony"
+    "passed": "zaliczono",
+    "flagged": "oznaczono"
   },
   "roles": {
     "owner": "właściciel",
@@ -412,7 +412,7 @@
     "status": "Status: {status}",
     "anyStatus": "dowolny status",
     "progress": "Postęp",
-    "grade": "Ocena",
+    "grade": "Wynik",
     "resend": "Wyślij zaproszenie ponownie",
     "resent": "Zaproszenie ponownie wysłane na {email}",
     "resendFailed": "Nie udało się ponownie wysłać zaproszenia.",
@@ -430,7 +430,7 @@
     "eraseConfirm": "Usuń",
     "sortBy": "Sortuj według: {sort}",
     "sort": {
-      "grade": "Ocena",
+      "grade": "Wynik",
       "date": "Data"
     },
     "extraTimeNone": "Bez dodatkowego czasu",
@@ -439,7 +439,7 @@
     "extraTimeFailed": "Nie udało się zmienić dodatkowego czasu. Spróbuj ponownie."
   },
   "interviewStatus": {
-    "new": "Nowy",
+    "new": "Nowa",
     "in_process": "W toku",
     "hired": "Zatrudniono"
   },
@@ -452,7 +452,7 @@
     "try": "Wypróbuj jako kandydat",
     "newCandidate": "Nowi kandydaci",
     "linkTitle": "Link do udostępnienia",
-    "linkText": "Do ogłoszenia o pracę: każdy, kto ma link, może przejść rozmowę. Za każdą osobę płacisz jak za zaproszonego kandydata.",
+    "linkText": "Do ogłoszenia o pracę: każdy, kto ma link, może wziąć udział w rozmowie. Za każdą osobę płacisz jak za zaproszonego kandydata.",
     "linkFailed": "Nie udało się zmienić linku. Spróbuj ponownie.",
     "passMark": "Próg zaliczenia",
     "passMarkLabel": "Próg zaliczenia w procentach",
@@ -464,7 +464,7 @@
     "continueGeneration": "Kontynuuj generowanie",
     "perSession": "na sesję",
     "empty": "Nie ma jeszcze rozmów. Utwórz pierwszą.",
-    "candidateCount": "{count, plural, one {# kandydat} few {# kandydatów} many {# kandydatów} other {# kandydata}}",
+    "candidateCount": "{count, plural, one {# kandydat} few {# kandydaci} many {# kandydatów} other {# kandydata}}",
     "deleteLabel": "Usuń {title}",
     "deleteTitle": "Usunąć tę rozmowę?",
     "deleteText": "Kandydaci stracą dostęp, a ich wyniki zostaną usunięte. Tej operacji nie można cofnąć.",
@@ -474,8 +474,8 @@
     "timePerQuestion": "Czas na pytanie",
     "secondsLabel": "Czas na pytanie w sekundach",
     "secondsUnit": "s",
-    "memberEmail": "E-mail członka",
-    "addMember": "Dodaj członka",
+    "memberEmail": "E-mail członka zespołu",
+    "addMember": "Dodaj członka zespołu",
     "memberFailed": "Nie udało się zaprosić tej osoby. Spróbuj ponownie.",
     "invite": "Zaproś",
     "jobDescription": "Opis stanowiska",
@@ -488,9 +488,9 @@
     "invitedMany": "Zaproszeni kandydaci: {count}",
     "skip": {
       "invalid": "{count, plural, one {# adres e-mail jest nieprawidłowy} few {# adresy e-mail są nieprawidłowe} many {# adresów e-mail jest nieprawidłowych} other {# adresu e-mail jest nieprawidłowe}}.",
-      "limit": "{count, plural, one {# adres e-mail przekracza} few {# adresy e-mail przekraczają} many {# adresów e-mail przekracza} other {# adresu e-mail przekracza}} na razie Twój limit e-maili. Spróbuj ponownie za godzinę.",
-      "no_credits": "{count, plural, one {# kandydat nie został zaproszony} few {# kandydatów nie zostało zaproszonych} many {# kandydatów nie zostało zaproszonych} other {# kandydata nie zostało zaproszone}}: brak kredytów. Doładuj, aby ich zaprosić.",
-      "started": "{count, plural, one {# kandydat już zaczął} few {# kandydatów już zaczęło} many {# kandydatów już zaczęło} other {# kandydata już zaczęło}}, więc nie wysłano ponownie e-maila.",
+      "limit": "Na razie wyczerpano Twój limit e-maili: nie wysłano na {count, plural, one {# adres} few {# adresy} many {# adresów} other {# adresu}}. Spróbuj ponownie za godzinę.",
+      "no_credits": "{count, plural, one {# kandydat nie został zaproszony} few {# kandydaci nie zostali zaproszeni} many {# kandydatów nie zostało zaproszonych} other {# kandydata nie zostało zaproszone}}: brak kredytów. Doładuj, aby ich zaprosić.",
+      "started": "{count, plural, one {# kandydat już zaczął} few {# kandydaci już zaczęli} many {# kandydatów już zaczęło} other {# kandydata już zaczęło}}, więc nie wysłano ponownie e-maila.",
       "failed": "{count, plural, one {# zaproszenia nie udało się wysłać} few {# zaproszeń nie udało się wysłać} many {# zaproszeń nie udało się wysłać} other {# zaproszenia nie udało się wysłać}}. Spróbuj ponownie."
     }
   },
@@ -501,7 +501,7 @@
     "secondsUnit": "s",
     "pickOne": "W każdym pytaniu wybierz jedną z czterech odpowiedzi.",
     "changePick": "Możesz zmienić wybór, dopóki nie naciśniesz „Następne pytanie”.",
-    "timeRunsOut": "Gdy czas na pytanie minie, liczy się twój wybór i otwiera się następne; bez wyboru pytanie liczy się jako błędne. Czas płynie, nawet jeśli wyjdziesz.",
+    "timeRunsOut": "Gdy czas na pytanie minie, liczy się Twój wybór i otwiera się następne; bez wyboru pytanie liczy się jako błędne. Czas płynie, nawet jeśli wyjdziesz.",
     "unanswered": "Pytania bez odpowiedzi liczą się jako błędne.",
     "saved": "Postęp jest zapisywany: otwórz ten link ponownie, aby kontynuować.",
     "extraTime": "Potrzebujesz więcej czasu, np. z powodu niepełnosprawności? Przed startem zapytaj, czy {company} może go przyznać.",
@@ -540,7 +540,7 @@
   },
   "pricing": {
     "title": "Cennik",
-    "intro": "Płać za kandydata. Generowanie rozmów jest darmowe i nie ma subskrypcji.",
+    "intro": "Płać za kandydata. Generowanie rozmów jest darmowe i nie ma abonamentu.",
     "test": "Generowanie rozmowy",
     "free": "Za darmo",
     "candidate": "Każdy kandydat, który odpowie na co najmniej jedno pytanie",
@@ -633,16 +633,16 @@
       },
       "review": {
         "title": "Sprawdź tematy",
-        "text": "Zachowaj, zmień nazwę lub zmień je.\nPytania powstają, gdy tylko je zatwierdzisz."
+        "text": "Zachowaj je, zmień ich nazwy lub treść.\nPytania powstają, gdy tylko je zatwierdzisz."
       },
       "invite": {
         "title": "Zaproś kandydatów",
-        "text": "Wklej listę, prześlij plik lub udostępnij jeden link.\nPrzypomnienia wysyłają się same. Wyniki spływają uszeregowane według punktów."
+        "text": "Wklej listę, prześlij plik lub udostępnij jeden link.\nPrzypomnienia wysyłają się same. Wyniki spływają uszeregowane według wyniku."
       }
     },
     "advantages": {
       "title": "Dlaczego prepza",
-      "text": "Dlaczego firmy testują kandydatów z prepza.",
+      "text": "Dlaczego firmy sprawdzają kandydatów za pomocą prepza.",
       "points": {
         "speed": {
           "title": "Gotowe w kilka minut",
@@ -650,14 +650,14 @@
         },
         "anyRole": {
           "title": "Dowolna rola",
-          "text": "Czytanie kodu dla inżynierów, testy wiedzy dla sprzedaży, finansów i nie tylko."
+          "text": "Pytania z czytania kodu dla inżynierów, testy wiedzy dla sprzedaży, finansów i nie tylko."
         },
         "cheating": {
           "title": "Trudniej oszukiwać",
-          "text": "Każdy kandydat dostaje własne losowe pytania, limit czasu na każde i flagi uczciwości."
+          "text": "Każdy kandydat dostaje własne losowe pytania, limit czasu na każde i ostrzeżenia o podejrzanych zachowaniach."
         },
         "price": {
-          "title": "Bez subskrypcji",
+          "title": "Bez abonamentu",
           "text": "Płacisz za kandydata, który rozwiąże test. Pierwsi kandydaci są za darmo."
         },
         "results": {
@@ -738,8 +738,8 @@
     },
     "link": {
       "title": "Jeden link do Twojego ogłoszenia o pracę",
-      "text": "Wstaw link do rozmowy w ogłoszeniu. Kandydaci przechodzą ją od razu i trafiają na Twoją listę według wyniku.",
-      "note": "Każdy, kto ma link, może przejść rozmowę.",
+      "text": "Wstaw link do rozmowy w ogłoszeniu. Kandydaci od razu biorą w niej udział i trafiają na Twoją listę według wyniku.",
+      "note": "Każdy, kto ma link, może wziąć udział w rozmowie.",
       "points": {
         "anywhere": "Na portalach z ofertami pracy, LinkedIn lub Twojej stronie",
         "off": "Wyłącz go, gdy stanowisko zostanie obsadzone"
@@ -747,11 +747,11 @@
     },
     "companies": {
       "title": "Zobacz, kto zna się na rzeczy",
-      "text": "Kandydaci przechodzą rozmowę z Twojego zaproszenia e-mailem lub linku do udostępnienia. Ich wyniki i sygnały ostrzegawcze spływają na bieżąco.",
+      "text": "Kandydaci biorą udział w rozmowie przez zaproszenie e-mailem lub udostępniony link. Ich wyniki i sygnały ostrzegawcze spływają na bieżąco.",
       "points": {
         "own": "Unikalne pytania dla każdego kandydata",
         "timed": "Odliczanie przy każdym pytaniu",
-        "flags": "Flagi za pośpiech, wyjście ze strony i kopiowanie",
+        "flags": "Ostrzeżenia o pośpiechu, wyjściu ze strony i kopiowaniu",
         "answers": "Karty wyników z odpowiedziami i czasami"
       },
       "candidate": "Kandydat",
@@ -774,14 +774,14 @@
       "role": "Backend developer",
       "points": {
         "email": "Twoje logo w e-mailu z zaproszeniem",
-        "interview": "W rozmowie, którą przechodzą kandydaci",
+        "interview": "W rozmowie, w której biorą udział kandydaci",
         "report": "Na każdym raporcie PDF",
         "verified": "Zweryfikowana służbowym e-mailem Twojego zespołu"
       }
     },
     "pricing": {
       "title": "Płać za kandydata",
-      "text": "Rozmowy są darmowe, podobnie jak {free, plural, one {Twój pierwszy kandydat} few {Twoi pierwsi # kandydaci} many {Twoich pierwszych # kandydatów} other {Twoich pierwszych # kandydata}}. Potem płacisz tylko za kandydatów, którzy odpowiadają, bez subskrypcji.",
+      "text": "Rozmowy są darmowe, podobnie jak {free, plural, one {Twój pierwszy kandydat} few {Twoi pierwsi # kandydaci} many {Twoich pierwszych # kandydatów} other {Twoich pierwszych # kandydata}}. Potem płacisz tylko za kandydatów, którzy odpowiadają, bez abonamentu.",
       "see": "Zobacz cennik",
       "perCandidate": "za kandydata",
       "base": "Płać za użycie",
@@ -818,7 +818,7 @@
   },
   "faq": {
     "title": "Często zadawane pytania",
-    "intro": "Nie ma tu twojej odpowiedzi? Zapytaj czat na końcu tej strony albo napisz do nas na adres z polityki prywatności.",
+    "intro": "Nie ma tu Twojej odpowiedzi? Zapytaj czat na końcu tej strony albo napisz do nas na adres z polityki prywatności.",
     "chat": {
       "title": "Zapytaj o prepza",
       "text": "Pytania o funkcje, ceny, płatności, regulamin lub prywatność. AI odpowiada na podstawie dokumentów prepza. Odpowiedzi pisze AI i mogą zawierać błędy. Wiążące są cennik, regulamin i polityka prywatności.",
@@ -844,11 +844,11 @@
     "company": {
       "title": "Po co istniejemy",
       "problem": "Rekrutacja często opiera się na CV i dobrej rozmowie, a jedno i drugie może zmylić. Narzędzia do oceny, które pomagają, są wycenione dla dużych firm, z planami rocznymi i opłatami za użytkownika, więc większość zespołów się bez nich obywa.",
-      "approach": "prepza w kilka minut zamienia opis stanowiska w rozmowę na czas, dla dowolnej roli. Każdy kandydat dostaje własne pytania, widzisz, kto zna się na rzeczy i dlaczego, a płacisz tylko za kandydatów, którzy faktycznie ją przejdą.",
-      "practice": "Chcemy też, by przygotowanie do rozmowy kwalifikacyjnej było darmowe dla wszystkich. Każdy może przejść nasze próbne rozmowy dla danej roli, zobaczyć swoją ocenę i wszystkie poprawne odpowiedzi oraz ćwiczyć ponownie, bez żadnych kosztów."
+      "approach": "prepza w kilka minut zamienia opis stanowiska w rozmowę na czas, dla dowolnej roli. Każdy kandydat dostaje własne pytania, widzisz, kto zna się na rzeczy i dlaczego, a płacisz tylko za kandydatów, którzy faktycznie wezmą w niej udział.",
+      "practice": "Chcemy też, by przygotowanie do rozmowy kwalifikacyjnej było darmowe dla wszystkich. Każdy może odbyć nasze próbne rozmowy dla danej roli, zobaczyć swój wynik i wszystkie poprawne odpowiedzi oraz ćwiczyć ponownie, bez żadnych kosztów."
     },
     "founder": {
-      "quote": "Dobra rekrutacja nie powinna być przywilejem dużych firm z dużymi budżetami. Zbudowałem prepza, aby każdy zespół mógł w kilka minut zamienić opis stanowiska w uczciwą rozmowę, zobaczyć, kto naprawdę zna się na rzeczy, i płacić tylko za kandydatów, którzy ją przejdą. Mam nadzieję, że pomoże Ci szybciej znaleźć właściwych ludzi.",
+      "quote": "Dobra rekrutacja nie powinna być przywilejem dużych firm z dużymi budżetami. Zbudowałem prepza, aby każdy zespół mógł w kilka minut zamienić opis stanowiska w uczciwą rozmowę, zobaczyć, kto naprawdę zna się na rzeczy, i płacić tylko za kandydatów, którzy wezmą w niej udział. Mam nadzieję, że pomoże Ci szybciej znaleźć właściwych ludzi.",
       "role": "Jedyny założyciel prepza"
     }
   },
@@ -865,7 +865,7 @@
       "candidate_finished": "{count, plural, one {Kandydat {email} ukończył „{title}”{grade, select, none {.} other {: {grade}%.}}} few {# kandydaci ukończyli „{title}”.} many {# kandydatów ukończyło „{title}”.} other {# kandydata ukończyło „{title}”.}}",
       "invite_undelivered": "{count, plural, one {Zaproszenie dla {email} do „{title}” nie zostało dostarczone.} few {# zaproszenia do „{title}” nie zostały dostarczone.} many {# zaproszeń do „{title}” nie zostało dostarczonych.} other {# zaproszenia do „{title}” nie zostało dostarczone.}}",
       "interview_ready": "Rozmowa „{title}” jest gotowa.",
-      "interview_cancelled": "{title, select, none {Rozmowa została anulowana} other {Rozmowa „{title}” została anulowana}}: tematy zbyt długo czekały na weryfikację.",
+      "interview_cancelled": "{title, select, none {Rozmowa została anulowana} other {Rozmowa „{title}” została anulowana}}: tematy zbyt długo czekały na zatwierdzenie.",
       "verification_approved": "„{name}” jest zweryfikowana dla {domain}.",
       "verification_declined": "{reason, select, none {Weryfikacja „{name}” została odrzucona.} other {Weryfikacja „{name}” została odrzucona: {reason}}}"
     }
@@ -893,20 +893,20 @@
   },
   "practice": {
     "title": "Darmowa symulacja rozmowy kwalifikacyjnej",
-    "intro": "Poćwicz pod daną rolę w rozmowie na czas, a potem zobacz swoją ocenę i wszystkie poprawne odpowiedzi. Bezpłatnie.",
-    "about": "Próbna rozmowa na czas. Po zakończeniu zobaczysz swoją ocenę i wszystkie poprawne odpowiedzi. Prywatnie i za darmo.",
+    "intro": "Poćwicz pod daną rolę w rozmowie na czas, a potem zobacz swój wynik i wszystkie poprawne odpowiedzi. Bezpłatnie.",
+    "about": "Próbna rozmowa na czas. Po zakończeniu zobaczysz swój wynik i wszystkie poprawne odpowiedzi. Prywatnie i za darmo.",
     "pageTitle": "{title}: darmowa symulacja rozmowy kwalifikacyjnej",
     "pageDescription": "Darmowa symulacja rozmowy kwalifikacyjnej na poziomie {level} dla roli {title}: {count, plural, one {# temat} few {# tematy} many {# tematów} other {# tematu}}, na czas, z oceną i wszystkimi poprawnymi odpowiedziami na końcu. To ćwiczenie, nie prawdziwa rozmowa o pracę.",
     "start": "Zacznij ćwiczyć",
     "again": "Ćwicz ponownie",
     "continue": "Kontynuuj",
-    "history": "Twoje rundy",
+    "history": "Twoje podejścia",
     "results": "Wyniki ćwiczeń",
     "grade": "poprawnych odpowiedzi",
-    "notFinished": "nieukończona",
-    "noRounds": "Nie ma jeszcze rund.",
+    "notFinished": "nieukończone",
+    "noRounds": "Nie ma jeszcze podejść.",
     "startFailed": "Nie udało się rozpocząć ćwiczeń. Spróbuj ponownie.",
-    "gradeLabel": "Ocena",
+    "gradeLabel": "Wynik",
     "questions": "{count, plural, one {# pytanie} few {# pytania} many {# pytań} other {# pytania}}",
     "progressLabel": "Postęp",
     "answeredLabel": "pytań z odpowiedzią",
@@ -957,14 +957,14 @@
   "tests": {
     "title": "Testy rekrutacyjne według stanowiska",
     "intro": "Gotowe testy umiejętności na czas dla popularnych ról. Użyj jednego bez zmian albo utwórz test na podstawie własnego opisu stanowiska.",
-    "heading": "Test umiejętności {role} do rekrutacji",
+    "heading": "Test umiejętności do rekrutacji: {role}",
     "pageTitle": "Test rekrutacyjny: {role}",
     "pageDescription": "Test rekrutacyjny na czas dla kandydatów: {role}, obejmujący {count, plural, one {# temat} few {# tematy} many {# tematów} other {# tematu}}. Każdy kandydat dostaje własne losowe pytania. $1–3 za kandydata.",
-    "lead": "Test wyboru na czas sprawdzający umiejętności tej roli. Każdy kandydat dostaje własny losowy zestaw pytań z limitem czasu na każde, a Ty dostajesz kartę ocen z każdą odpowiedzią i jej czasem. $1–3 za kandydata, bez abonamentu.",
+    "lead": "Test jednokrotnego wyboru na czas sprawdzający umiejętności potrzebne na tym stanowisku. Każdy kandydat dostaje własny losowy zestaw pytań z limitem czasu na każde, a Ty dostajesz kartę wyników z każdą odpowiedzią i jej czasem. $1–3 za kandydata, bez abonamentu.",
     "create": "Utwórz test dla swoich kandydatów",
     "practise": "Poćwicz za darmo",
     "topics": "Co sprawdza",
-    "questions": "Przykładowe pytania z rozmowy",
+    "questions": "Przykładowe pytania rekrutacyjne",
     "questionsText": "Pytania takie jak te, z poprawnymi odpowiedziami. Twoi kandydaci dostają własne, nigdy niepokazywane publicznie.",
     "faq": "Pytania, które zadają firmy"
   }

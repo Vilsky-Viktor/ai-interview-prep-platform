@@ -6,7 +6,7 @@ MESSAGES = {
     "Not enough credits. Top up to continue.": "اعتبار کافی ندارید. برای ادامه، شارژ کنید.",
     "This top-up isn't available": "این شارژ در دسترس نیست",
     "Choose one of the balances": "یکی از آستانه\u200cهای موجودی را انتخاب کنید",
-    "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "به سقف تولیدهای جدید امروز رسیده\u200cایم. فردا دوباره امتحان کنید؛ تمرین و مصاحبه\u200cها همچنان کار می\u200cکنند.",
+    "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "به سقف ساخت\u200cهای جدید امروز رسیده\u200cایم. فردا دوباره امتحان کنید؛ تمرین و مصاحبه\u200cها همچنان کار می\u200cکنند.",
     "Couldn't get a reply right now. Please try again.": "فعلاً پاسخی دریافت نشد. دوباره امتحان کنید.",
     "You can own at most 3 companies.": "حداکثر می\u200cتوانید مالک ۳ شرکت باشید.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "شرکت شما می\u200cتواند روزانه حداکثر ۱۰ مصاحبه بسازد. فردا دوباره امتحان کنید.",

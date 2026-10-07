@@ -64,7 +64,7 @@ Para os detalhes e as datas, veja [O uso de IA no recrutamento é legal na UE?](
 
 ### GDPR
 
-Os resultados dos testes são dados pessoais. Pelo Regulamento Geral sobre a Proteção de Dados da UE (GDPR), e pelo UK GDPR, que é parecido, você, o empregador, normalmente é o controlador, e o fornecedor do teste é o seu operador. Você precisa de um acordo de processamento de dados, um aviso claro aos candidatos, um limite de retenção e uma forma de atender pedidos de acesso e exclusão. Se uma decisão for tomada exclusivamente com base em tratamento automatizado e afetar significativamente um candidato, o [artigo 22](https://gdpr-info.eu/art-22-gdpr/) se aplica, então faça com que uma pessoa revise os resultados. Pergunte a qualquer fornecedor onde os dados ficam hospedados e quais suboperadores ele usa.
+Os resultados dos testes são dados pessoais. Pelo Regulamento Geral sobre a Proteção de Dados da UE (GDPR), e pelo UK GDPR, que é parecido, você, o empregador, normalmente é o controlador, e o fornecedor do teste é o seu operador. Você precisa de um acordo de tratamento de dados, um aviso claro aos candidatos, um limite de retenção e uma forma de atender pedidos de acesso e exclusão. Se uma decisão for tomada exclusivamente com base em tratamento automatizado e afetar significativamente um candidato, o [artigo 22](https://gdpr-info.eu/art-22-gdpr/) se aplica, então faça com que uma pessoa revise os resultados. Pergunte a qualquer fornecedor onde os dados ficam hospedados e quais suboperadores ele usa.
 
 ### A regra que vale para todas
 
@@ -91,14 +91,14 @@ Para comparar preços, veja [como comparar o custo dos testes](/compare/cheapest
 A prepza transforma uma descrição da vaga em uma entrevista de habilidades de múltipla escolha cronometrada.
 
 1. **Cole a descrição da vaga.** Qualquer função, em qualquer um de 23 idiomas. A prepza identifica o que um candidato precisa saber e propõe tópicos.
-2. **Revise os tópicos.** Desmarque o que não precisa, renomeie um tópico, edite seus subtópicos ou descreva as mudanças em texto livre. As perguntas só são escritas depois da sua aprovação. Você também pode começar por um modelo pronto para a sua função.
+2. **Revise os tópicos.** Desmarque o que não precisa, renomeie um tópico, edite seus subtópicos ou descreva as mudanças em texto livre. As perguntas só são escritas depois da sua aprovação. Você também pode começar por um modelo pronto para o seu cargo.
 3. **Convide os candidatos.** Envie convites por e-mail, cole uma lista, faça upload de um arquivo ou coloque um único link compartilhável no anúncio da vaga. Os lembretes são enviados automaticamente.
-4. **Leia os resultados.** As pontuações chegam em ordem, com uma ficha de resultados para cada candidato.
+4. **Leia os resultados.** As pontuações chegam em ordem, com uma ficha de avaliação para cada candidato.
 
 - **Cada candidato recebe seu próprio conjunto aleatório** do banco de cada tópico, com contagem regressiva controlada pelo servidor em cada pergunta. Você pode dar tempo extra a quem pedir.
-- **As fichas de resultados** mostram cada resposta, se estava certa e quanto tempo levou, com alertas para respostas rápidas demais, saídas da página e tentativas de cópia. Os alertas não mudam a pontuação.
+- **As fichas de avaliação** mostram cada resposta, se estava certa e quanto tempo levou, com alertas para respostas rápidas demais, saídas da página e tentativas de cópia. Os alertas não mudam a pontuação.
 - **As respostas são corrigidas com base em um gabarito** que a IA escreve e verifica; nenhuma IA lê ou julga a resposta de um candidato. Um relatório em PDF cobre um candidato ou a lista inteira.
 
-A cobrança é por candidato que responde, sem assinatura: $1–3 por candidato, dependendo do tamanho da recarga, em dólares americanos, e os seus 3 primeiros candidatos são gratuitos. Os dados ficam hospedados na UE (alguns suboperadores estão nos EUA; veja a [política de privacidade](/privacy)), e o acordo de processamento de dados e as instruções para empresas estão incluídos.
+A cobrança é por candidato que responde, sem assinatura: $1–3 por candidato, dependendo do tamanho da recarga, em dólares americanos, e os seus 3 primeiros candidatos são gratuitos. Os dados ficam hospedados na UE (alguns suboperadores estão nos EUA; veja a [política de privacidade](/privacy)), e o acordo de tratamento de dados e as instruções para empresas estão incluídos.
 
 A prepza não é uma suíte psicométrica, nem uma plataforma para escrever e executar código, nem uma ferramenta de entrevista em vídeo, e funciona junto com elas. Para ver como ela se compara a outras ferramentas de contratação com IA, leia [Entrevistas com IA](/ai-interviews). Para vagas de engenharia, veja [Como contratar engenheiros](/guides/hiring-engineers).

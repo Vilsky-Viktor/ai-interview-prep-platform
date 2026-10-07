@@ -59,12 +59,12 @@ Värbamisuuringute suured ülevaated paigutavad tööspetsiifilised teadmiste te
 
 ## 3. samm: kontrolli kohustuslikke nõudeid ja kutsu (15 minutit)
 
-Tee kiire jah-ei ülevaade ainult kohustuslike nõuete kohta: tööõigus, nõutav litsents, asukoht, kui roll seda vajab. Ära järjesta siin CV-sid. Eemaldad kandideerijad, kes ei saa seda tööd vastu võtta, mitte ei vali lemmikuid.
+Tee kiire jah-ei ülevaade ainult kohustuslike nõuete kohta: tööluba, nõutav litsents, asukoht, kui roll seda vajab. Ära järjesta siin CV-sid. Eemaldad kandideerijad, kes ei saa seda tööd vastu võtta, mitte ei vali lemmikuid.
 
 Seejärel kutsu kõik ülejäänud:
 
 - **Kleebi e-posti aadresside nimekiri või laadi üles fail.** prepza võtab korraga kuni 100 aadressi ja jätab vahele need, kes on juba alustanud.
-- **Või kasuta ühte linki.** Kui sa pole tööpakkumist veel avaldanud, pane intervjuu jagatav link kuulutusse. Kandideerijad saavad testi kohe teha ja ilmuvad sinu nimekirja järjestatuna. Lülita link välja, kui koht on täidetud.
+- **Või kasuta ühte linki.** Kui sa pole töökuulutust veel avaldanud, pane intervjuu jagatav link kuulutusse. Kandideerijad saavad testi kohe teha ja ilmuvad sinu nimekirja järjestatuna. Lülita link välja, kui koht on täidetud.
 
 Enne alustamist näevad kandidaadid, mida oodata: taimerit, seda, et tulemused vaatab üle inimene sinu ettevõttest, ja seda, et nad võivad paluda rohkem aega. Kui keegi palub kohandust, saad sellele kandidaadile enne alustamist lisaaega anda.
 
@@ -79,7 +79,7 @@ Kõik ei lõpeta esimesel päeval. See on korras: vaata üle need, kes on lõpet
 Nüüd algab hoolikas lugemine, kuid väiksema, järjestatud rühmaga.
 
 1. **Sorteeri hinde järgi,** parimad eespool. See on vaikimisi.
-2. **Ava iga tulemuste leht** esirühmas. Vaata vastuseid, mitte ainult arvu: millised teemad olid tugevad, millised nõrgad, kui kaua iga vastus aega võttis.
+2. **Ava iga hindamisleht** esirühmas. Vaata vastuseid, mitte ainult arvu: millised teemad olid tugevad, millised nõrgad, kui kaua iga vastus aega võttis.
 3. **Kontrolli aususe märkeid.** prepza märgib vastused, mis on liiga kiired, et küsimust lugeda jõuaks, korrad, kui kandidaat lehelt lahkus, ja kopeerimiskatsed. Märge on põhjus lähemalt vaadata, mitte spikerdamise tõend. Kellelgi, kes lahkus lehelt ühe korra, võis lihtsalt hüpata ette teavitus.
 4. **Vaata veidi allapoole läbimise läve.** Erinevate juhuslike küsimuste komplektide tulemused pole täpselt võrreldavad, nii et mõni punkt võib tulla loosist. Keegi, kellel on 65% ja tugevad vastused kõige olulisemates teemades, võib olla intervjuud väärt.
 5. **Nüüd loe CV-sid** nendel, keda kaalud. Loed hoolikalt 15 CV-d, mitte ei sirvi 100.

@@ -27,7 +27,7 @@ Check daarna het prijsmodel tegen je wervingsvolume. Een plan past bij constant 
 | Tool | Waarvoor het gebouwd is | Prijsmodel (per oktober 2026) |
 | --- | --- | --- |
 | **TestGorilla** | Brede bibliotheek: cognitief, persoonlijkheid, taal, programmeren, functievaardigheden | Gratis plan en betaalde plannen die jaarlijks worden gefactureerd ([prijspagina](https://www.testgorilla.com/pricing/)) |
-| **prepza** | Sollicitatiegesprekken over vaardigheden met tijdslimiet en meerkeuzevragen, geschreven op basis van je functieomschrijving | Per kandidaat die antwoordt, geen abonnement ([prijzen](/pricing)) |
+| **prepza** | Interviews over vaardigheden met tijdslimiet en meerkeuzevragen, geschreven op basis van je functieomschrijving | Per kandidaat die antwoordt, geen abonnement ([prijzen](/pricing)) |
 | **CodeSignal** | Technische assessments en AI-interviewers; go-to-marketfuncties in duurdere plannen | Maand- of jaarplannen met credits ([prijspagina](https://codesignal.com/pricing/)) |
 | **HackerRank** | Programmeertests en technische interviews | Zie de [prijspagina](https://www.hackerrank.com/pricing/) |
 | **Alooba** | Screening voor technische en datafuncties | Maand- of jaarplannen met credits ([prijspagina](https://www.alooba.com/pricing/)) |
@@ -39,7 +39,7 @@ Check daarna het prijsmodel tegen je wervingsvolume. Een plan past bij constant 
 
 ### prepza
 
-prepza maakt van een functieomschrijving een sollicitatiegesprek over vaardigheden, met tijdslimiet en meerkeuzevragen. Je bekijkt de voorgestelde onderwerpen voordat er een vraag wordt geschreven, en elke kandidaat krijgt een eigen willekeurige set vragen met een aftelklok bij elke vraag. Voor technische functies kunnen vragen een kort codevoorbeeld tonen en vragen wat het doet of uitvoert. Scorekaarten tonen elk antwoord en de tijd die het kostte, met signalen bij te snelle antwoorden, het verlaten van de pagina en kopieerpogingen. Je nodigt uit per e-mail of met één link in je vacature, en herinneringen gaan automatisch.
+prepza maakt van een functieomschrijving een interview over vaardigheden, met tijdslimiet en meerkeuzevragen. Je bekijkt de voorgestelde onderwerpen voordat er een vraag wordt geschreven, en elke kandidaat krijgt een eigen willekeurige set vragen met een aftelklok bij elke vraag. Voor technische functies kunnen vragen een kort codevoorbeeld tonen en vragen wat het doet of uitvoert. Scorekaarten tonen elk antwoord en de tijd die het kostte, met signalen bij te snelle antwoorden, het verlaten van de pagina en kopieerpogingen. Je nodigt uit per e-mail of met één link in je vacature, en herinneringen gaan automatisch.
 
 - **Prijs:** per kandidaat die minstens één vraag beantwoordt, goedkoper per kandidaat bij grotere opwaarderingen. Credits verlopen niet, en er is geen abonnement. Zie [prijzen](/pricing).
 - **Geschikt voor:** kleine en middelgrote teams die voor elke functie werven, een paar mensen tegelijk, als eerste screening.

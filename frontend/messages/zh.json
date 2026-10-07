@@ -2,7 +2,7 @@
   "settings": {
     "title": "设置",
     "language": "语言",
-    "languageNote": "用于界面和导师回复，也是新学习包和面试的默认语言。你可以用任何受支持的语言生成它们。",
+    "languageNote": "用于界面和帮助聊天的回复，以及新面试的默认语言。你可以用任何支持的语言创建面试。",
     "languageFailed": "无法更改语言，请重试。",
     "yourData": "你的数据",
     "yourDataNote": "下载 prepza. 保存的所有关于你的数据，或删除你的账户。",
@@ -130,7 +130,7 @@
     "description": "职位说明",
     "create": "生成",
     "createFailed": "无法开始创建模板，请重试。",
-    "text": "按职位划分的现成面试，适用于公司和人才。",
+    "text": "按职位划分的现成面试，适用于公司和求职者。",
     "deleteLabel": "删除 {title}",
     "deleteTitle": "删除此模板？",
     "deleteText": "其主题和题目将被删除。公司已基于它创建的面试会保留。",
@@ -146,10 +146,10 @@
       "interviews": "面试",
       "invited": "已邀请",
       "finished": "已完成",
-      "practice": "练习轮次",
+      "practice": "练习次数",
       "top_ups": "充值",
       "paid": "已支付",
-      "credits_spent": "已用额度"
+      "credits_spent": "已用点数"
     },
     "noPassRates": "还没有面试有候选人完成。",
     "outsideTriggers": "通过率异常",
@@ -163,7 +163,7 @@
       "finished": "完成人数最多的在前"
     },
     "pauseTitle": "紧急暂停",
-    "pauseText": "开启期间，任何人都无法开始新的面试、练习轮或预览，也不会生成、重新生成或检查任何题目。已在面试中的候选人可以完成面试。",
+    "pauseText": "开启期间，任何人都无法开始新的面试、练习或预览，也不会生成、重新生成或检查任何题目。已在面试中的候选人可以完成面试。",
     "pauseFailed": "无法更改暂停状态，请重试。",
     "maintenanceTitle": "维护模式",
     "maintenanceText": "开启期间，每个页面都会显示 prepza 正在维护，除超级管理员外，服务会拒绝所有请求。付款、邮件和定时任务会继续运行。",
@@ -219,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "删除你的账户？",
-    "everything": "所有内容都会被删除：你在每家公司团队中的位置、你作为候选人参加面试的结果、你的练习轮次和通知。",
+    "everything": "所有内容都会被删除：你在各公司团队中的成员身份、你作为候选人参加面试的结果、你的练习记录和通知。",
     "company": "仅由你拥有的公司及其面试将一并删除。此操作无法撤销。",
     "confirm": "删除账户",
     "deleted": "你的账户已删除。",
@@ -311,7 +311,7 @@
     "title": "面试"
   },
   "generation": {
-    "title": "新学习包",
+    "title": "新面试",
     "interviews": "面试",
     "cancel": "取消生成",
     "cancelTitle": "取消此次生成？",
@@ -372,7 +372,7 @@
     "interviews": "面试",
     "templates": "模板",
     "team": "团队",
-    "referrals": "邀请",
+    "referrals": "推荐",
     "new": "新公司",
     "name": "公司名称",
     "create": "创建",
@@ -397,7 +397,7 @@
     "pickText": "测试会免费复制到你选择的公司，可立即发送给候选人。"
   },
   "candidates": {
-    "scorecard": "结果",
+    "scorecard": "评分卡",
     "interview": "面试",
     "deleted": "已删除的候选人",
     "deletedText": "候选人已删除账户，其结果也随之删除。",
@@ -412,7 +412,7 @@
     "status": "状态：{status}",
     "anyStatus": "所有状态",
     "progress": "进度",
-    "grade": "等级",
+    "grade": "成绩",
     "resend": "重新发送邀请",
     "resent": "已重新发送邀请至 {email}",
     "resendFailed": "无法重新发送邀请。",
@@ -439,7 +439,7 @@
     "extraTimeFailed": "无法更改额外时间，请重试。"
   },
   "interviewStatus": {
-    "new": "新",
+    "new": "新建",
     "in_process": "进行中",
     "hired": "已录用"
   },
@@ -452,7 +452,7 @@
     "try": "以候选人身份试用",
     "newCandidate": "新候选人",
     "linkTitle": "分享链接",
-    "linkText": "用于招聘广告：任何拥有链接的人都可以参加面试。每人按受邀候选人同样计费。",
+    "linkText": "用于招聘广告：任何拥有链接的人都可以参加面试。每人的收费与受邀候选人相同。",
     "linkFailed": "无法更改链接，请重试。",
     "passMark": "及格线",
     "passMarkLabel": "及格线（百分比）",
@@ -548,9 +548,9 @@
     "perCandidate": "每位候选人 ${dollars, number}",
     "welcome": "你的前 {count, plural, other {# 位候选人}}",
     "credits": "$1 = 100 点数，点数永不过期。",
-    "referrals": "邀请",
-    "referralsNote": "在公司的邀请标签页中分享公司链接。",
-    "companyReferral": "你邀请的公司首次充值",
+    "referrals": "推荐",
+    "referralsNote": "在公司的推荐标签页中分享公司链接。",
+    "companyReferral": "你推荐的公司首次充值",
     "each": "每方 {count, number} 点数",
     "topUp": "充值"
   },
@@ -592,7 +592,7 @@
     "text": "当可用余额低于你设定的金额时，我们会用你保存的银行卡自动充值。Paddle 每次都会发送收据，你可以随时关闭。",
     "amount": "充值金额",
     "when": "当余额低于",
-    "under": "{threshold} 点数",
+    "under": "低于 {threshold} 点数",
     "off": "自动充值：已关闭",
     "on": "自动充值：低于 {threshold} 点数时充值 {amount}",
     "waiting": "自动充值：等待你的银行卡",
@@ -743,7 +743,7 @@
         "own": "每位候选人题目各不相同",
         "timed": "每道题都有倒计时",
         "flags": "标记作答过快、离开页面或复制",
-        "answers": "含回答与用时的成绩单"
+        "answers": "含回答与用时的评分卡"
       },
       "candidate": "候选人",
       "score": "分数",
@@ -794,7 +794,7 @@
       "see": "文档",
       "points": {
         "decision": "可应要求由人工复核任何结果",
-        "key": "每个答案都按其答案键评分；答案键被修正后，过去的结果会重新评分",
+        "key": "每个答案都按标准答案评分；标准答案修正后，过去的结果会重新评分",
         "training": "你的数据不会用于训练 AI 模型",
         "time": "任何人申请都可获得额外时间",
         "notice": "候选人开始前就知道会面对什么",
@@ -891,11 +891,11 @@
     "start": "开始练习",
     "again": "再练一次",
     "continue": "继续",
-    "history": "你的轮次",
+    "history": "你的练习记录",
     "results": "练习结果",
     "grade": "的题目答对",
     "notFinished": "未完成",
-    "noRounds": "还没有轮次。",
+    "noRounds": "还没有练习记录。",
     "startFailed": "无法开始练习，请重试。",
     "gradeLabel": "成绩",
     "questions": "{count, plural, other {# 道题}}",

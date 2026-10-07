@@ -7,7 +7,7 @@ updated: "2026-10-07"
 
 # TestGorilla alternatiivid: kuhu iga tööriist sobib ja kuidas neid koos kasutada
 
-TestGorilla on oskuste testimise platvorm suure testiraamatukogu ja tasuta paketiga ([TestGorilla hinnaleht](https://www.testgorilla.com/pricing/)). Meeskonnad vaatavad teiste tööriistade poole mõnel levinud põhjusel: aastane kohustus ei sobi juhusliku värbamisega, nad tahavad praktilisi programmeerimisteste või tahavad teste, mis on kirjutatud täpselt nende rolli jaoks.
+TestGorilla on oskuste testimise platvorm suure testikogu ja tasuta paketiga ([TestGorilla hinnaleht](https://www.testgorilla.com/pricing/)). Meeskonnad vaatavad teiste tööriistade poole mõnel levinud põhjusel: aastane kohustus ei sobi juhusliku värbamisega, nad tahavad praktilisi programmeerimisteste või tahavad teste, mis on kirjutatud täpselt nende rolli jaoks.
 
 Enamik neist tööriistadest ei asenda üksteist otse. Need testivad eri asju ja paljudes värbamisprotsessides kasutatakse kahte neist koos. Eriti prepza on peamiselt täiendav: see lisab kõige muu ette kiire teadmiste kontrolli, mis on kirjutatud sinu töökuulutuse põhjal. See leht selgitab, kuhu iga tööriist sobib ja kuidas neid kombineerida. Faktid viitavad pakkujate endi lehtedele 2026. aasta oktoobri seisuga; kontrolli need enne ostmist üle.
 
@@ -26,8 +26,8 @@ Seejärel võrdle hinnamudelit oma värbamismahuga. Pakett sobib ühtlaseks vär
 
 | Tööriist | Milleks loodud | Hinnamudel (2026. aasta oktoobri seisuga) |
 | --- | --- | --- |
-| **TestGorilla** | Lai raamatukogu: kognitiivsed, isiksuse-, keele- ja programmeerimistestid, rollioskused | Tasuta pakett ja aastase arveldusega tasulised paketid ([hinnaleht](https://www.testgorilla.com/pricing/)) |
-| **prepza** | Ajapiiranguga valikvastustega oskuste intervjuud sinu töökuulutuse põhjal | Iga vastava kandidaadi eest, ilma tellimuseta ([hinnad](/pricing)) |
+| **TestGorilla** | Lai testikogu: kognitiivsed, isiksuse-, keele- ja programmeerimistestid, rollioskused | Tasuta pakett ja aastase arveldusega tasulised paketid ([hinnaleht](https://www.testgorilla.com/pricing/)) |
+| **prepza** | Ajapiiranguga valikvastustega oskuste intervjuud sinu töökuulutuse põhjal | Iga vastanud kandidaadi eest, ilma tellimuseta ([hinnad](/pricing)) |
 | **CodeSignal** | Tehnilised hindamised ja AI-intervjueerijad; müügi- ja turundusrollid kõrgemates pakettides | Kuu- või aastapaketid krediitidega ([hinnaleht](https://codesignal.com/pricing/)) |
 | **HackerRank** | Programmeerimistestid ja tehnilised intervjuud | Vaata [hinnalehte](https://www.hackerrank.com/pricing/) |
 | **Alooba** | Tehniliste ja andmerollide eelvalik | Kuu- või aastapaketid krediitidega ([hinnaleht](https://www.alooba.com/pricing/)) |

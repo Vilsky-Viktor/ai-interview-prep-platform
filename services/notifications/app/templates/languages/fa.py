@@ -32,7 +32,7 @@ TEXTS = {
     },
     "report": {
         "subject": "گزارش متقاضی: {candidate}",
-        "preheader": "{candidate} در «{title}» شرکت {company} شرکت کرد. گزارش پیوست است.",
+        "preheader": "{candidate} در مصاحبهٔ «{title}» از {company} شرکت کرد. گزارش پیوست است.",
         "heading": "گزارش متقاضی",
         "lines": [
             "{sender} از {company} گزارش {candidate} را برای مصاحبه «{title}» به اشتراک گذاشت.",

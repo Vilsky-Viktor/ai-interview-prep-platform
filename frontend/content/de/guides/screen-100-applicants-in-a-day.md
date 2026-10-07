@@ -64,7 +64,7 @@ Machen Sie einen schnellen Ja-Nein-Durchgang nur bei den harten Anforderungen: A
 Laden Sie dann alle Übrigen ein:
 
 - **Fügen Sie eine Liste mit E-Mail-Adressen ein oder laden Sie eine Datei hoch.** prepza nimmt bis zu 100 E-Mail-Adressen auf einmal an und überspringt alle, die bereits begonnen haben.
-- **Oder nutzen Sie einen Link.** Wenn Sie die Stelle noch nicht ausgeschrieben haben, setzen Sie den teilbaren Link des Interviews in die Anzeige. Bewerber können den Test sofort machen und erscheinen in Ihrer Liste, nach Rang sortiert. Deaktivieren Sie den Link, sobald die Stelle besetzt ist.
+- **Oder nutzen Sie einen Link.** Wenn Sie die Stelle noch nicht ausgeschrieben haben, setzen Sie den Link zum Teilen des Interviews in die Anzeige. Bewerber können den Test sofort machen und erscheinen in Ihrer Liste, nach Rang sortiert. Deaktivieren Sie den Link, sobald die Stelle besetzt ist.
 
 Bevor sie beginnen, sehen Kandidaten, was sie erwartet: den Timer, dass eine Person in Ihrem Unternehmen die Ergebnisse prüft und dass sie mehr Zeit beantragen können. Bittet jemand um eine Anpassung, können Sie diesem Kandidaten vor dem Start zusätzliche Zeit geben.
 
@@ -78,9 +78,9 @@ Nicht alle werden am ersten Tag fertig. Das ist in Ordnung: Prüfen Sie, wer fer
 
 Jetzt beginnt das sorgfältige Lesen, aber bei einer kleineren, nach Rang sortierten Gruppe.
 
-1. **Nach Note sortieren,** die besten zuerst. Das ist die Standardeinstellung.
+1. **Nach Punktzahl sortieren,** die besten zuerst. Das ist die Standardeinstellung.
 2. **Jede Auswertung öffnen** in der Spitzengruppe. Sehen Sie sich die Antworten an, nicht nur die Zahl: welche Themen stark waren, welche schwach, wie lange jede Antwort gedauert hat.
-3. **Die Integritätshinweise prüfen.** prepza markiert Antworten, die zu schnell kamen, um die Frage gelesen zu haben, Momente, in denen der Kandidat die Seite verlassen hat, und Kopierversuche. Ein Hinweis ist ein Grund, genauer hinzusehen, kein Beweis für Schummeln. Wer die Seite einmal verlassen hat, hatte vielleicht nur eine Benachrichtigung auf dem Bildschirm.
+3. **Die Hinweise auf Auffälligkeiten prüfen.** prepza markiert Antworten, die zu schnell kamen, um die Frage gelesen zu haben, Momente, in denen der Kandidat die Seite verlassen hat, und Kopierversuche. Ein Hinweis ist ein Grund, genauer hinzusehen, kein Beweis für Schummeln. Wer die Seite einmal verlassen hat, hatte vielleicht nur eine Benachrichtigung auf dem Bildschirm.
 4. **Knapp unter die Bestehensgrenze schauen.** Punktzahlen aus unterschiedlichen zufälligen Fragensätzen sind nicht exakt vergleichbar; ein paar Punkte können also vom Zufall der Ziehung kommen. Jemand mit 65 % und starken Antworten in den wichtigsten Themen kann ein Interview wert sein.
 5. **Jetzt die Lebensläufe lesen** der Menschen, die Sie in Betracht ziehen. Sie lesen 15 Lebensläufe sorgfältig, statt 100 zu überfliegen.
 

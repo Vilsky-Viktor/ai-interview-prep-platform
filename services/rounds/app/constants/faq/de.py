@@ -20,7 +20,7 @@ FAQ = [
     {
         "key": "link",
         "question": "Kann ich ein Interview in eine Stellenanzeige setzen?",
-        "answer": "Ja. Schalte den teilbaren Link des Interviews im Tab Kandidaten ein und füge ihn in deine Anzeige ein. Jeder, der ihn öffnet, meldet sich an und macht das Interview, und jede Person wird wie ein eingeladener Kandidat berechnet. Der Link wird abgeschaltet, wenn du das Interview als eingestellt markierst.",
+        "answer": "Ja. Schalte den Link zum Teilen des Interviews im Tab Kandidaten ein und füge ihn in deine Anzeige ein. Jeder, der ihn öffnet, meldet sich an und macht das Interview, und jede Person wird wie ein eingeladener Kandidat berechnet. Der Link wird abgeschaltet, wenn du das Interview als eingestellt markierst.",
     },
     {
         "key": "preview",
@@ -60,11 +60,11 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Was zeigen die Auswertungen?",
-        "answer": "Jede Antwort, ob sie richtig war und wie lange sie gedauert hat. Noten erscheinen grün oder rot, gemessen an der Bestehensgrenze, die du für das Interview festgelegt hast. Außerdem markieren die Auswertungen Antworten, die zu schnell waren, um die Frage gelesen zu haben, wann der Kandidat die Seite verlassen hat und Kopierversuche.",
+        "answer": "Jede Antwort, ob sie richtig war und wie lange sie gedauert hat. Ergebnisse erscheinen grün oder rot, gemessen an der Bestehensgrenze, die du für das Interview festgelegt hast. Außerdem markieren die Auswertungen Antworten, die zu schnell waren, um die Frage gelesen zu haben, wann der Kandidat die Seite verlassen hat und Kopierversuche.",
     },
     {
         "key": "reports",
-        "question": "Kann ich Ergebnisse mit einer Führungskraft im Recruiting teilen?",
+        "question": "Kann ich Ergebnisse mit einem Hiring Manager teilen?",
         "answer": "Ja. Lade einen PDF-Bericht für einen Kandidaten oder für alle Kandidaten eines Interviews herunter, sende ihn direkt aus prepza per E-Mail oder schick eine kurze Zusammenfassung über WhatsApp oder Telegram.",
     },
     {
@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Was bedeutet das Verifiziert-Häkchen?",
-        "answer": "Dass sich ein Inhaber oder Admin des Unternehmens mit einer Arbeits-E-Mail auf der Website des Unternehmens angemeldet hat, etwa du@acme.com, und unser Team das Unternehmen danach geprüft hat. Füge die Website über Verifizieren im Kopfbereich deines Unternehmens hinzu; kostenlose E-Mail-Dienste zählen nicht. Solange die Prüfung aussteht, sieht dein Team eine Uhr neben dem Namen, und eine Umbenennung schickt das Unternehmen erneut zur Prüfung. Das Häkchen erscheint neben dem Namen deines Unternehmens, auch in Einladungen.",
+        "answer": "Dass sich ein Inhaber oder Admin des Unternehmens mit einer geschäftlichen E-Mail-Adresse auf der Domain des Unternehmens angemeldet hat, etwa du@acme.com, und unser Team das Unternehmen danach geprüft hat. Füge die Website über Verifizieren im Kopfbereich deines Unternehmens hinzu; kostenlose E-Mail-Dienste zählen nicht. Solange die Prüfung aussteht, sieht dein Team eine Uhr neben dem Namen, und eine Umbenennung schickt das Unternehmen erneut zur Prüfung. Das Häkchen erscheint neben dem Namen deines Unternehmens, auch in Einladungen.",
     },
     {
         "key": "languages",

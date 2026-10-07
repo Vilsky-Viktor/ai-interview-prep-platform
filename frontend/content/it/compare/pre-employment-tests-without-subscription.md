@@ -49,7 +49,7 @@ prepza non ha abbonamenti né contratti. Compri crediti quando ti servono e li s
 - **Un candidato costa 300 crediti,** addebitati solo quando risponde ad almeno una domanda. Se un candidato invitato non inizia mai, i crediti tornano indietro. Un invito non iniziato entro 30 giorni scade e restituisce i suoi crediti.
 - **Le ricariche più grandi danno più crediti per dollaro,** quindi il prezzo per candidato scende al crescere della ricarica. Vedi i [prezzi](/pricing) per le ricariche.
 - **Generare colloqui è gratis,** e lo è anche provare il tuo colloquio come candidato.
-- **Nessun costo per postazione.** Aggiungi amministratori e osservatori alla tua azienda senza costi.
+- **Nessun costo per postazione.** Aggiungi amministratori e visualizzatori alla tua azienda senza costi.
 - **Crediti di benvenuto:** i primi 3 candidati della tua prima azienda sono gratis.
 
 I prezzi sono in dollari statunitensi. I pagamenti passano da Paddle, che gestisce IVA e imposte sulle vendite e mostra l'importo finale al momento del pagamento; prepza non conserva i dati delle carte. Puoi attivare una ricarica automatica che rabbocca il saldo quando si sta esaurendo, ma è facoltativa.

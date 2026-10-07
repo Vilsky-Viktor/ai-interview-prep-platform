@@ -27,7 +27,7 @@ Pagkatapos, itapat ang pricing model sa dami ng iyong hiring. Bagay ang isang pl
 | Tool | Para saan ito ginawa | Pricing model (noong Oktubre 2026) |
 | --- | --- | --- |
 | **TestGorilla** | Malawak na library: cognitive, personality, language, programming, role skills | Libreng plan at mga paid plan na sinisingil taun-taon ([pricing page](https://www.testgorilla.com/pricing/)) |
-| **prepza** | Timed multiple-choice skills interviews na isinulat mula sa iyong job description | Bawat kandidatong sumasagot, walang subscription ([presyo](/pricing)) |
+| **prepza** | Timed multiple-choice skills interviews na isinulat mula sa iyong job description | Bawat aplikanteng sumasagot, walang subscription ([presyo](/pricing)) |
 | **CodeSignal** | Technical assessments at AI interviewers; go-to-market roles sa mas matataas na plan | Buwanan o taunang plan na may credits ([pricing page](https://codesignal.com/pricing/)) |
 | **HackerRank** | Coding tests at technical interviews | Tingnan ang [pricing page](https://www.hackerrank.com/pricing/) nito |
 | **Alooba** | Screening para sa technical at data roles | Buwanan o taunang plan na may credits ([pricing page](https://www.alooba.com/pricing/)) |
@@ -39,9 +39,9 @@ Pagkatapos, itapat ang pricing model sa dami ng iyong hiring. Bagay ang isang pl
 
 ### prepza
 
-Ginagawang timed multiple-choice skills interview ng prepza ang isang job description. Nire-review mo ang mga iminungkahing topic bago maisulat ang kahit isang tanong, at bawat kandidato ay may sariling random na set ng tanong na may countdown sa bawat isa. Para sa mga technical role, puwedeng magpakita ang mga tanong ng maikling code example at itanong kung ano ang ginagawa o inilalabas nito. Ipinapakita ng scorecards ang bawat sagot at ang oras nito, may flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy. Nag-iimbita ka sa email o gamit ang iisang link sa iyong job ad, at kusang naipapadala ang mga paalala.
+Ginagawang timed multiple-choice skills interview ng prepza ang isang job description. Nire-review mo ang mga iminungkahing topic bago maisulat ang kahit isang tanong, at bawat aplikante ay may sariling random na set ng tanong na may countdown sa bawat isa. Para sa mga technical role, puwedeng magpakita ang mga tanong ng maikling code example at itanong kung ano ang ginagawa o inilalabas nito. Ipinapakita ng scorecards ang bawat sagot at ang oras nito, may flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy. Nag-iimbita ka sa email o gamit ang iisang link sa iyong job ad, at kusang naipapadala ang mga paalala.
 
-- **Presyo:** bawat kandidatong sumagot ng kahit isang tanong, mas mura bawat kandidato sa mas malalaking top-up. Hindi nag-e-expire ang credits, at walang subscription. Tingnan ang [presyo](/pricing).
+- **Presyo:** bawat aplikanteng sumagot ng kahit isang tanong, mas mura bawat aplikante sa mas malalaking top-up. Hindi nag-e-expire ang credits, at walang subscription. Tingnan ang [presyo](/pricing).
 - **Bagay sa:** maliliit at katamtamang laking team na nagha-hire para sa anumang role, ilang tao bawat pagkakataon, bilang unang screen.
 - **Hindi para sa:** cognitive o personality tests, pagsulat o pagpapatakbo ng code, video interviews o ATS integrations. Wala ang mga ito sa prepza, kaya ipares ito sa tool na mayroon kapag kailangan mo.
 
@@ -83,7 +83,7 @@ Maaaring mas bagay sa iyo ang TestGorilla kung:
 - Gumagamit ka ng ilang uri ng test nang sabay: role skills, cognitive, personality, language.
 - Gusto mo ng libreng plan para sa napakagaang paggamit ([pricing page](https://www.testgorilla.com/pricing/)).
 - Kailangan mo ng video questions, job simulations o webcam snapshots.
-- Tuloy-tuloy at marami ang hiring mo, kaya mas mura bawat kandidato ang isang flat plan.
+- Tuloy-tuloy at marami ang hiring mo, kaya mas mura bawat aplikante ang isang flat plan.
 
 At puwede pa rin itong itabi sa prepza: role-specific na knowledge screen muna, saka ang mas malalawak na test ng TestGorilla. Para sa one-to-one na paghahambing, basahin ang [prepza at TestGorilla](/compare/testgorilla).
 

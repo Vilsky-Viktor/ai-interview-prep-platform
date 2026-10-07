@@ -17,7 +17,7 @@ MESSAGES = {
     "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "新しい面接を作成する前に、既存の面接のいずれかに候補者を招待してください。候補者のいない面接は最大 3 件までです。",
     "This interview is already finished": "この面接はすでに終了しています",
     "This interview isn't taking new candidates right now.": "この面接は現在、新しい候補者を受け付けていません。",
-    "This interview has no practice questions yet.": "この練習面接にはまだ質問がありません。",
+    "This interview has no practice questions yet.": "この練習面接にはまだ問題がありません。",
     "No emails found.": "メールアドレスが見つかりませんでした。",
     "At most 100 emails at once.": "一度に送れるメールアドレスは最大 100 件です。",
     "Use a PNG, JPEG or WebP image up to 500 KB": "500 KB 以下の PNG、JPEG、WebP 画像を使ってください",

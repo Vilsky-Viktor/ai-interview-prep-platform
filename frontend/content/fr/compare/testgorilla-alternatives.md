@@ -39,7 +39,7 @@ Comparez ensuite le modèle de prix à votre volume de recrutement. Un abonnemen
 
 ### prepza
 
-prepza transforme une fiche de poste en entretien de compétences chronométré à choix multiples. Vous vérifiez les thèmes proposés avant qu'une question ne soit rédigée, et chaque candidat reçoit sa propre série aléatoire de questions avec un compte à rebours pour chacune. Pour les postes techniques, les questions peuvent montrer un court exemple de code et demander ce qu'il fait ou affiche. Les fiches d'évaluation montrent chaque réponse et son temps, avec des signalements pour les réponses trop rapides, les sorties de la page et les tentatives de copie. Vous invitez par e-mail ou via un lien unique dans votre offre d'emploi, et les relances partent automatiquement.
+prepza transforme une fiche de poste en entretien de compétences chronométré à choix multiples. Vous vérifiez les thèmes proposés avant qu'une question ne soit rédigée, et chaque candidat reçoit sa propre série aléatoire de questions avec un compte à rebours pour chacune. Pour les postes techniques, les questions peuvent montrer un court exemple de code et demander ce qu'il fait ou affiche. Les fiches d'évaluation montrent chaque réponse et son temps, avec des alertes pour les réponses trop rapides, les sorties de la page et les tentatives de copie. Vous invitez par e-mail ou via un lien unique dans votre offre d'emploi, et les relances partent automatiquement.
 
 - **Tarifs :** par candidat qui répond à au moins une question, moins cher par candidat avec des recharges plus importantes. Les crédits n'expirent pas et il n'y a pas d'abonnement. Voir les [tarifs](/pricing).
 - **Adapté à :** les PME qui recrutent pour tout type de poste, quelques personnes à la fois, comme première présélection.

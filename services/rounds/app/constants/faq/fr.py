@@ -15,12 +15,12 @@ FAQ = [
     {
         "key": "hiring",
         "question": "Comment ça marche ?",
-        "answer": "Collez une fiche de poste sur la page d'accueil, indiquez le nom de votre entreprise et vérifiez les sujets que propose prepza. Invitez ensuite des candidats : saisissez leurs e-mails, collez une liste ou importez un fichier. Les candidats qui n'ont pas commencé après quelques jours reçoivent un rappel. Chaque candidat reçoit ses propres questions, chacune chronométrée, et vous voyez son score et chaque réponse dès qu'il a terminé.",
+        "answer": "Collez une fiche de poste sur la page d'accueil, indiquez le nom de votre entreprise et vérifiez les thèmes que propose prepza. Invitez ensuite des candidats : saisissez leurs e-mails, collez une liste ou importez un fichier. Les candidats qui n'ont pas commencé après quelques jours reçoivent un rappel. Chaque candidat reçoit ses propres questions, chacune chronométrée, et vous voyez son score et chaque réponse dès qu'il a terminé.",
     },
     {
         "key": "link",
         "question": "Puis-je mettre un entretien dans une offre d'emploi ?",
-        "answer": "Oui. Activez le lien à partager de l'entretien dans son onglet Candidats et collez-le dans votre offre. Toute personne qui l'ouvre se connecte et passe l'entretien, et chacune est facturée comme un candidat invité. Le lien se désactive quand vous marquez l'entretien comme recruté.",
+        "answer": "Oui. Activez le lien de partage de l'entretien dans son onglet Candidats et collez-le dans votre offre. Toute personne qui l'ouvre se connecte et passe l'entretien, et chacune est facturée comme un candidat invité. Le lien se désactive quand vous marquez l'entretien comme recruté.",
     },
     {
         "key": "preview",
@@ -59,8 +59,8 @@ FAQ = [
     },
     {
         "key": "scorecards",
-        "question": "Que montrent les résultats des candidats ?",
-        "answer": "Chaque réponse, si elle était juste et le temps qu'elle a pris. Les notes s'affichent en vert ou en rouge par rapport à la note de réussite que vous avez fixée pour l'entretien. Les résultats signalent aussi les réponses trop rapides pour avoir lu la question, les sorties de la page et les tentatives de copie.",
+        "question": "Que montrent les fiches d'évaluation des candidats ?",
+        "answer": "Chaque réponse, si elle était juste et le temps qu'elle a pris. Les notes s'affichent en vert ou en rouge par rapport au seuil de réussite que vous avez fixé pour l'entretien. Les fiches signalent aussi les réponses trop rapides pour avoir lu la question, les sorties de la page et les tentatives de copie.",
     },
     {
         "key": "reports",

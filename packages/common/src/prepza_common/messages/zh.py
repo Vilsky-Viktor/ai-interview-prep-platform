@@ -14,7 +14,7 @@ MESSAGES = {
     "Details are required for this reason.": "选择此原因时需要填写详细信息。",
     "The question is too long.": "问题太长了。",
     "A company with this name already exists.": "已有同名公司。",
-    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "请先邀请一位候选人参加您现有的某场面试，再创建新的面试：最多可有 3 场面试暂无候选人。",
+    "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "请先邀请一位候选人参加你现有的某场面试，再创建新的面试：最多可有 3 场面试暂无候选人。",
     "This interview is already finished": "此面试已结束",
     "This interview isn't taking new candidates right now.": "此面试目前不接受新的候选人。",
     "This interview has no practice questions yet.": "此练习面试还没有题目。",

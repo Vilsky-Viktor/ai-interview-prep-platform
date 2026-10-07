@@ -73,7 +73,7 @@ prepza rất phù hợp với bước 2. prepza biến mô tả công việc c�
 - **Khái niệm và lý thuyết từ mô tả công việc:** cơ sở dữ liệu, API, kiến trúc, cách một framework hoạt động, các thực hành bảo mật.
 - **Câu hỏi đọc code:** một đoạn code ngắn kèm câu hỏi nó in ra hoặc trả về gì, nó làm gì, vì sao nó lỗi, hoặc thay đổi nào sửa được nó. Đó chính là kỹ năng review mà công việc có AI hỗ trợ phụ thuộc vào.
 - **Đồng hồ cho từng câu hỏi:** mỗi câu có đồng hồ đếm ngược riêng, do máy chủ áp dụng, và mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên của riêng mình. Điều đó khiến việc tra cứu đáp án, kể cả hỏi trợ lý AI, khó hơn. Nó không khiến việc đó trở nên bất khả thi.
-- **Tín hiệu liêm chính:** bảng điểm đánh dấu các câu trả lời quá nhanh để kịp đọc câu hỏi, số lần ứng viên rời khỏi trang và các lần cố sao chép. Một cảnh báo là lý do để xem kỹ hơn, không phải bằng chứng gian lận.
+- **Tín hiệu cảnh báo:** bảng điểm đánh dấu các câu trả lời quá nhanh để kịp đọc câu hỏi, số lần ứng viên rời khỏi trang và các lần cố sao chép. Một cảnh báo là lý do để xem kỹ hơn, không phải bằng chứng gian lận.
 
 Những gì prepza không làm: ứng viên không viết, chạy hay debug code trong prepza, và prepza không quan sát họ dùng trợ lý AI. Phần đó thuộc giai đoạn thực hành, tổ chức nội bộ hoặc trên một nền tảng dành cho lập trình viên, bổ sung cho bài kiểm tra kiến thức. Xem [bài kiểm tra kỹ năng theo vị trí](/tests) để có sẵn bài kiểm tra làm điểm xuất phát, và [phỏng vấn AI](/ai-interviews) để biết prepza dùng AI thế nào và để lại những gì cho con người.
 

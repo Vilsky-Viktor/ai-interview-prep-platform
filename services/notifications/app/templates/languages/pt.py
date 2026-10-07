@@ -3,10 +3,10 @@
 TEXTS = {
     "candidate": {
         "subject": "{company} convida você para uma entrevista",
-        "preheader": "Faça “{title}” no prepza. Entre com {email} para começar.",
+        "preheader": "Faça “{title}” na prepza. Entre com {email} para começar.",
         "heading": "Convite para entrevista",
         "lines": [
-            "{company} convida você para a entrevista “{title}” no prepza.",
+            "{company} convida você para a entrevista “{title}” na prepza.",
             (
                 "Entre com {email} para começar. Só este endereço pode fazer a "
                 "entrevista, e você tem uma única tentativa."
@@ -20,7 +20,7 @@ TEXTS = {
         "heading": "Sua entrevista está esperando",
         "lines": [
             (
-                "{company} convidou você para a entrevista “{title}” no prepza há alguns dias, e "
+                "{company} convidou você para a entrevista “{title}” na prepza há alguns dias, e "
                 "você ainda não começou."
             ),
             (
@@ -42,9 +42,9 @@ TEXTS = {
                 "falar com {sender}."
             ),
         ],
-        "button": "Visitar o prepza",
+        "button": "Acessar a prepza",
         "footer": "Este e-mail foi enviado para {email} porque {sender} compartilhou um relatório "
-        "de candidato com este endereço no prepza. Se você não esperava por ele, pode ignorá-lo.",
+        "de candidato com este endereço na prepza. Se você não esperava por ele, pode ignorá-lo.",
     },
     "candidates": {
         "subject": "Relatório de todos os candidatos: {title}",
@@ -57,9 +57,9 @@ TEXTS = {
                 "registrou, dos melhores para os demais. Responda a este e-mail para falar com {sender}."
             ),
         ],
-        "button": "Visitar o prepza",
+        "button": "Acessar a prepza",
         "footer": "Este e-mail foi enviado para {email} porque {sender} compartilhou um relatório "
-        "de candidatos com este endereço no prepza. Se você não esperava por ele, pode ignorá-lo.",
+        "de candidatos com este endereço na prepza. Se você não esperava por ele, pode ignorá-lo.",
     },
     "footer": "Este e-mail foi enviado para {email} porque alguém convidou este endereço no "
     "prepza. Se você não esperava por ele, pode ignorá-lo.",

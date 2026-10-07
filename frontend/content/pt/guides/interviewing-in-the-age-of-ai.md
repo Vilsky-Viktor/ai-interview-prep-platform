@@ -11,7 +11,7 @@ Durante anos, a entrevista técnica clássica pedia ao candidato que escrevesse 
 
 Os assistentes de programação com IA enfraqueceram essa ligação. Muitos trechos de código rotineiros agora podem ser rascunhados por um assistente em segundos, tanto no trabalho quanto, se você não impedir, durante uma entrevista remota. Isso não torna a habilidade de engenharia menos importante. Muda quais habilidades importam mais e, portanto, muda o que uma entrevista deve verificar.
 
-Este guia mostra o que mudou, como algumas empresas estão se adaptando e como montar um processo de entrevistas que continue dizendo quem sabe fazer o trabalho. Ele foi escrito para gestores de contratação e líderes de engenharia.
+Este guia mostra o que mudou, como algumas empresas estão se adaptando e como montar um processo de entrevistas que continue dizendo quem sabe fazer o trabalho. Ele foi escrito para gestores contratantes e líderes de engenharia.
 
 ## O que mudou
 
@@ -27,7 +27,7 @@ Ainda não existe uma resposta única no setor. As abordagens divulgadas vão em
 
 - **Permitir ou exigir IA na entrevista.** Em junho de 2025, a Canva disse que agora espera que candidatos de backend, machine learning e frontend usem ferramentas de IA como Copilot, Cursor e Claude numa nova etapa de "programação assistida por IA". Ela avalia se os candidatos conseguem "decompor requisitos complexos e ambíguos", "identificar e corrigir problemas em código gerado por IA" e "garantir que as soluções geradas por IA atendam aos padrões de produção" ([Canva Engineering, junho de 2025](https://canva.dev/blog/engineering/yes-you-can-use-ai-in-our-interviews)).
 - **Testar etapas de programação assistida por IA.** Em julho de 2025, o Business Today, citando o 404 Media, noticiou que a Meta estava criando uma entrevista de programação em que os candidatos têm um assistente de IA. O texto citava a Meta dizendo que isso é "mais representativo do ambiente de desenvolvimento em que nossos futuros funcionários vão trabalhar, e também torna a cola baseada em LLM menos eficaz" ([Business Today, julho de 2025](https://www.businesstoday.in/amp/technology/news/story/meta-to-test-job-applicants-with-ai-assisted-coding-interviews-amid-ai-expansion-plans-487200-2025-07-31)).
-- **Restringir ferramentas e voltar ao presencial.** Em março de 2025, a CNBC noticiou uma ferramenta criada para ajudar candidatos a usar IA sem serem notados em entrevistas remotas de programação. Na mesma reportagem, a Amazon disse que os candidatos precisam declarar que não vão usar ferramentas não autorizadas, o CEO do Google sugeriu que gestores de contratação considerem algumas entrevistas presenciais, e a Deloitte tinha voltado a fazer entrevistas presenciais no seu programa de trainees no Reino Unido ([CNBC via NBC New York, março de 2025](https://www.nbcnewyork.com/news/business/money-report/meet-the-21-year-old-helping-coders-use-ai-to-cheat-in-google-and-other-tech-job-interviews/6178911/?amp=1)).
+- **Restringir ferramentas e voltar ao presencial.** Em março de 2025, a CNBC noticiou uma ferramenta criada para ajudar candidatos a usar IA sem serem notados em entrevistas remotas de programação. Na mesma reportagem, a Amazon disse que os candidatos precisam declarar que não vão usar ferramentas não autorizadas, o CEO do Google sugeriu que gestores contratantes considerem algumas entrevistas presenciais, e a Deloitte tinha voltado a fazer entrevistas presenciais no seu programa de trainees no Reino Unido ([CNBC via NBC New York, março de 2025](https://www.nbcnewyork.com/news/business/money-report/meet-the-21-year-old-helping-coders-use-ai-to-cheat-in-google-and-other-tech-job-interviews/6178911/?amp=1)).
 
 São algumas poucas grandes empresas, não uma pesquisa de mercado, e as políticas mudam. Mas elas apontam na mesma direção: uma tarefa remota de "escreva isto do zero" agora é menos confiável, e a pergunta interessante passou de "você sabe produzir código?" para "você entende o código bem o bastante para julgá-lo?".
 
@@ -73,9 +73,9 @@ A prepza é bem adequada para o passo 2. Ela transforma a sua descrição da vag
 - **Conceitos e teoria a partir da descrição da vaga:** bancos de dados, APIs, arquitetura, o comportamento de um framework, práticas de segurança.
 - **Perguntas de leitura de código:** um pequeno trecho de código com perguntas sobre o que ele imprime ou retorna, o que faz, por que falha ou qual mudança o corrige. É a mesma habilidade de revisão de que depende o trabalho assistido por IA.
 - **Um cronômetro em cada pergunta:** cada pergunta tem sua própria contagem regressiva, controlada pelo servidor, e cada candidato recebe seu próprio conjunto aleatório de perguntas. Isso dificulta pesquisar as respostas, inclusive perguntando a um assistente de IA. Não torna impossível.
-- **Sinais de integridade:** as fichas de resultados sinalizam respostas rápidas demais para a pergunta ter sido lida, as vezes em que o candidato saiu da página e as tentativas de cópia. Um alerta é um motivo para olhar com mais atenção, não prova de cola.
+- **Sinais de integridade:** as fichas de avaliação sinalizam respostas rápidas demais para a pergunta ter sido lida, as vezes em que o candidato saiu da página e as tentativas de cópia. Um alerta é um motivo para olhar com mais atenção, não prova de cola.
 
-O que a prepza não faz: os candidatos não escrevem, executam nem depuram código na prepza, e ela não observa como eles usam um assistente de IA. Isso fica para a etapa prática, feita internamente ou numa plataforma para desenvolvedores, que complementa a triagem de conhecimentos. Veja os [testes de habilidades por função](/tests) para começar com testes prontos, e [Entrevistas com IA](/ai-interviews) para ver como a prepza usa a IA e o que deixa para as pessoas.
+O que a prepza não faz: os candidatos não escrevem, executam nem depuram código na prepza, e ela não observa como eles usam um assistente de IA. Isso fica para a etapa prática, feita internamente ou numa plataforma para desenvolvedores, que complementa a triagem de conhecimentos. Veja os [testes de habilidades por cargo](/tests) para começar com testes prontos, e [Entrevistas com IA](/ai-interviews) para ver como a prepza usa a IA e o que deixa para as pessoas.
 
 ## Imparcialidade e experiência do candidato
 
@@ -103,6 +103,6 @@ Os assistentes de IA baratearam a produção de código e tornaram mais importan
 ## Leitura relacionada
 
 - [Como contratar engenheiros](/guides/hiring-engineers)
-- [Testes de habilidades por função](/tests)
+- [Testes de habilidades por cargo](/tests)
 - [Entrevistas com IA: o que são e como usá-las de forma justa](/ai-interviews)
 - [Testes de habilidades x triagem de currículos](/guides/skills-tests-vs-cv-screening)

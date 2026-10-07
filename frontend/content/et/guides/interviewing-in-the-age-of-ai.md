@@ -55,7 +55,7 @@ Nende ülesannete läbiviimine ja hindamine võtab inseneri aega. See on peamine
 
 ## Protsess AI ajastuks
 
-1. **Sõelu avaldusi ainult kohustuslike nõuete järgi:** tööõigus, asukoht, nõutav kogemus.
+1. **Sõelu avaldusi ainult kohustuslike nõuete järgi:** tööluba, asukoht, nõutav kogemus.
 2. **Tee lühike teadmiste kontroll** oma tehnoloogiapaki kontseptsioonide, teooria ja koodi lugemise kohta.
 3. **Tee praktiline ülesanne** kujul, mis sobib sinu meeskonna töötamise viisiga: paaristöö AI-ga, koodiülevaatus või silumine, kaugteel või silmast silma.
 4. **Lisa süsteemidisain** seeniorrollidele.

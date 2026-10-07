@@ -19,7 +19,7 @@ Ce guide propose un plan sur une journée qui donne à chaque candidat la même 
 | Matin, 30 minutes | Créer un court test de compétences à partir de la fiche de poste et le vérifier | Vérifier les thèmes, essayer le test |
 | Fin de matinée, 15 minutes | Vérifier les exigences impératives et inviter tous ceux qui les remplissent | Un passage rapide, pas une lecture approfondie |
 | Pendant la journée | Les candidats passent le test | Aucun |
-| Après-midi, 1 à 2 heures | Examiner les meilleurs résultats, regarder les réponses et les signalements | Lecture attentive d'un petit groupe |
+| Après-midi, 1 à 2 heures | Examiner les meilleurs résultats, regarder les réponses et les alertes | Lecture attentive d'un petit groupe |
 | Fin de journée | Choisir la liste restreinte pour les entretiens | Une décision, prise par des personnes |
 
 Le test fait le tri. Votre attention va à la partie qui demande du jugement.
@@ -64,7 +64,7 @@ Faites un passage rapide, par oui ou non, uniquement sur les exigences impérati
 Invitez ensuite tous les autres :
 
 - **Collez une liste d'e-mails ou importez un fichier.** prepza accepte jusqu'à 100 e-mails à la fois et ignore ceux qui ont déjà commencé.
-- **Ou utilisez un lien unique.** Si vous n'avez pas encore publié l'offre, placez-y le lien partageable de l'entretien. Les candidats peuvent passer le test immédiatement et apparaissent dans votre liste, classés. Désactivez le lien une fois le poste pourvu.
+- **Ou utilisez un lien unique.** Si vous n'avez pas encore publié l'offre, placez-y le lien de partage de l'entretien. Les candidats peuvent passer le test immédiatement et apparaissent dans votre liste, classés. Désactivez le lien une fois le poste pourvu.
 
 Avant de commencer, les candidats savent à quoi s'attendre : le minuteur, le fait qu'une personne de votre entreprise examine les résultats, et la possibilité de demander plus de temps. Si quelqu'un demande un aménagement, vous pouvez ajouter du temps pour ce candidat avant qu'il ne commence.
 
@@ -80,7 +80,7 @@ C'est maintenant que commence la lecture attentive, mais sur un groupe plus peti
 
 1. **Triez par note,** les meilleurs en premier. C'est le tri par défaut.
 2. **Ouvrez chaque fiche d'évaluation** du groupe de tête. Regardez les réponses, pas seulement le chiffre : quels thèmes étaient forts, lesquels étaient faibles, combien de temps chaque réponse a pris.
-3. **Vérifiez les signalements d'intégrité.** prepza signale les réponses trop rapides pour que la question ait été lue, les moments où le candidat a quitté la page et les tentatives de copie. Un signalement est une raison de regarder de plus près, pas une preuve de triche. Quelqu'un qui a quitté la page une fois a peut-être simplement reçu une notification.
+3. **Vérifiez les alertes d'intégrité.** prepza signale les réponses trop rapides pour que la question ait été lue, les moments où le candidat a quitté la page et les tentatives de copie. Une alerte est une raison de regarder de plus près, pas une preuve de triche. Quelqu'un qui a quitté la page une fois a peut-être simplement reçu une notification.
 4. **Regardez juste en dessous du seuil.** Les scores issus de séries aléatoires différentes ne sont pas exactement comparables, quelques points peuvent donc tenir au tirage. Quelqu'un à 65 % avec de bonnes réponses sur les thèmes les plus importants peut mériter un entretien.
 5. **Lisez maintenant les CV** des personnes que vous envisagez. Vous lisez 15 CV attentivement au lieu d'en survoler 100.
 

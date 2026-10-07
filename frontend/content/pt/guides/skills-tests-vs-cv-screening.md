@@ -84,7 +84,7 @@ A prepza cobre o passo 2: um teste de conhecimentos da função, de múltipla es
 - **Específico da função por concepção.** A prepza propõe tópicos a partir da sua descrição da vaga, e você os revisa e edita antes de qualquer pergunta ser escrita. Remova o que não for um requisito real. Para vagas técnicas, as perguntas podem incluir pequenos exemplos de código para ler.
 - **As mesmas condições para todos.** Os mesmos tópicos e número de perguntas, e uma contagem regressiva em cada pergunta. Você pode dar tempo extra aos candidatos que pedirem.
 - **Cada candidato recebe suas próprias perguntas,** um conjunto aleatório do banco de cada tópico, o que dificulta compartilhar respostas.
-- **Resultados fáceis de ler.** Uma ficha de resultados por candidato com cada resposta e seu tempo, ordenada por pontuação, com alertas para respostas rápidas demais, saídas da página e tentativas de cópia.
+- **Resultados fáceis de ler.** Uma ficha de avaliação por candidato com cada resposta e seu tempo, ordenada por pontuação, com alertas para respostas rápidas demais, saídas da página e tentativas de cópia.
 - **Respostas corrigidas com base em um gabarito** que a IA escreve e verifica; nenhuma IA lê ou julga a resposta de um candidato.
 
 A prepza não faz entrevistas estruturadas, amostras de trabalho nem testes cognitivos. Use-a junto com eles. Para saber mais sobre tipos de teste e imparcialidade, leia [Testes de seleção](/pre-employment-testing).

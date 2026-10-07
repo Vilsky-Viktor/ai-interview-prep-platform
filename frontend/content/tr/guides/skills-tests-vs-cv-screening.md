@@ -55,13 +55,13 @@ Bu, CV'leri işe yaramaz kılmaz. Kesin gereklilikleri (bir lisans, çalışma i
 
 Mesleki bilgi sonucu önemli bir koşulla birlikte gelir. Sackett vd., söz konusu iş için hazırlanmış bilgi testlerini işle ilgisiz bilgi testlerinden ayıran Dye vd. (1993) meta-analizine dayandı. Bulunan çalışmalardan işe özgü bilgi testleri kullanan 59'unun ortalama gözlenen geçerliği (.31), 164 çalışmanın tamamınınkinden (.22) daha yüksekti. .40 tahmini, işe özgü testler içindir.
 
-Sade bir ifadeyle: bir bilgi testi, işin gerçekten neye ihtiyaç duyduğunu test ettiğinde işe yarar. Role uymayan genel bir test daha az öngörür.
+Sade bir ifadeyle: bir bilgi testi, işin gerçekten neye ihtiyaç duyduğunu test ettiğinde işe yarar. Pozisyona uymayan genel bir test daha az öngörür.
 
-Yazarlar ikinci bir koşula da dikkat çeker: iş örnekleri ve bilgi testleri, adaylardan halihazırda eğitim veya deneyim sahibi olmalarının beklendiği işe alımlara uygundur. Her şeyi iş başında öğreteceğiniz roller için, işin içeriğine yönelik bir bilgi testi daha az uygundur.
+Yazarlar ikinci bir koşula da dikkat çeker: iş örnekleri ve bilgi testleri, adaylardan halihazırda eğitim veya deneyim sahibi olmalarının beklendiği işe alımlara uygundur. Her şeyi iş başında öğreteceğiniz pozisyonlar için, işin içeriğine yönelik bir bilgi testi daha az uygundur.
 
 ## Akılda tutulması gereken sınırlar
 
-- **Bunlar birçok iş ve çalışmanın ortalamalarıdır.** Sizin rolünüz, testiniz ve adaylarınız farklı olabilir.
+- **Bunlar birçok iş ve çalışmanın ortalamalarıdır.** Sizin pozisyonunuz, testiniz ve adaylarınız farklı olabilir.
 - **Geçerlik tahminleri iyi kurgulanmış yöntemler içindir.** Kötü yazılmış bir test veya özensiz bir mülakat bu rakamlara ulaşmaz.
 - **Tek bir yöntem nadiren yeterlidir.** Araştırmacılar genellikle yöntemleri birleştirmeyi önerir; örneğin erken aşamada bir bilgi testi, daha sonra yapılandırılmış bir mülakat.
 - **Adillik kendi kontrollerini gerektirir.** Sackett vd., geçerliği siyahi ve beyaz adaylar arasındaki ortalama puan farklarıyla birlikte ele alır. Mesleki bilgi testleri, iş örnekleri ve bilişsel testler önemli farklar gösterir; yapılandırılmış mülakatlar daha küçük farklar gösterir. Yöntemleri birleştirmek bu farkları azaltabilir. Ne kullanırsanız kullanın, gruplar arasındaki geçme oranlarını izleyin. ABD'de [Tek Tip Yönergeler](https://www.law.cornell.edu/cfr/text/29/1607.4) (Uniform Guidelines) içindeki beşte dört pratik kuralı olağan başlangıç noktasıdır.
@@ -73,7 +73,7 @@ Yazarlar ikinci bir koşula da dikkat çeker: iş örnekleri ve bilgi testleri, 
 2. **Kalan herkese kısa, işe özgü bir bilgi testi verin.** Herkes için aynı konular, aynı süre sınırları, aynı kurallar.
 3. **En iyi sonuçları dikkatle inceleyin;** yalnızca puanlara değil, yanıtlara da bakın.
 4. **Kısa listeyle yapılandırılmış mülakatlar yapın:** her adaya aynı sorular ve basit bir puanlama kılavuzu.
-5. **Rol uygunsa son birkaç kişi için bir iş örneği ekleyin.**
+5. **Pozisyon uygunsa son birkaç kişi için bir iş örneği ekleyin.**
 
 Adım adım bir sürüm için [Bir günde 100 başvuru nasıl elenir](/guides/screen-100-applicants-in-a-day) rehberine bakın.
 
@@ -81,10 +81,10 @@ Adım adım bir sürüm için [Bir günde 100 başvuru nasıl elenir](/guides/sc
 
 prepza 2. adımı kapsar: iş tanımınızdan yazılmış süreli, çoktan seçmeli bir mesleki bilgi testi. Yukarıdaki geçerlik rakamları genel olarak mesleki bilgi testleri içindir, prepza testlerinin ölçümleri değildir.
 
-- **Tasarım gereği işe özgü.** prepza iş tanımınızdan konular önerir; herhangi bir soru yazılmadan önce bunları gözden geçirip düzenlersiniz. Gerçek bir gereklilik olmayan her şeyi çıkarın. Teknik rollerde sorular okunacak kısa kod örnekleri içerebilir.
+- **Tasarım gereği işe özgü.** prepza iş tanımınızdan konular önerir; herhangi bir soru yazılmadan önce bunları gözden geçirip düzenlersiniz. Gerçek bir gereklilik olmayan her şeyi çıkarın. Teknik pozisyonlarda sorular okunacak kısa kod örnekleri içerebilir.
 - **Herkes için aynı koşullar.** Aynı konular ve soru sayısı, her soruda bir geri sayım. İsteyen adaylara ek süre verebilirsiniz.
 - **Her aday kendi sorularını alır;** her konunun havuzundan rastgele bir set, böylece yanıtları paylaşmak zorlaşır.
-- **Okunabilir sonuçlar.** Her aday için her yanıtı ve süresini gösteren, puana göre sıralanmış bir puan kartı; çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretlerle.
+- **Okunabilir sonuçlar.** Her aday için her yanıtı ve süresini gösteren, puana göre sıralanmış bir değerlendirme kartı; çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretlerle.
 - **Yanıtlar, yapay zekânın yazıp kontrol ettiği bir cevap anahtarına göre değerlendirilir;** hiçbir yapay zekâ adayın yanıtını okumaz veya yargılamaz.
 
 prepza yapılandırılmış mülakatlar, iş örnekleri veya bilişsel testler yürütmez. Onlarla birlikte kullanın. Test türleri ve adillik hakkında daha fazlası için [İşe alım öncesi testler](/pre-employment-testing) sayfasını okuyun.

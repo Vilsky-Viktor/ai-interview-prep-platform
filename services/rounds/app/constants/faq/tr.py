@@ -5,12 +5,12 @@ FAQ = [
     {
         "key": "what",
         "question": "prepza nedir?",
-        "answer": "İş tanımınızdan hazırlanan, her rol için süreli bir mülakat. Adayları onlarla tanışmadan önce elemek için ya da işe alımın bir adımı olarak kullanın: her iki durumda da işi gerçekten kimin bildiğini görürsünüz.",
+        "answer": "İş tanımınızdan hazırlanan, her pozisyon için süreli bir mülakat. Adayları onlarla tanışmadan önce elemek için ya da işe alımın bir adımı olarak kullanın: her iki durumda da işi gerçekten kimin bildiğini görürsünüz.",
     },
     {
         "key": "roles",
-        "question": "Hangi roller için işe alım yapabilirim?",
-        "answer": "Bilginin önemli olduğu her rol için: destek, satış, finans, sağlık, zanaat ve teknik meslekler, mühendislik, pazarlama ve daha fazlası. İşi tarif edebiliyorsanız prepza onun için bir mülakat hazırlayabilir.",
+        "question": "Hangi pozisyonlar için işe alım yapabilirim?",
+        "answer": "Bilginin önemli olduğu her pozisyon için: destek, satış, finans, sağlık, zanaat ve teknik meslekler, mühendislik, pazarlama ve daha fazlası. İşi tarif edebiliyorsanız prepza onun için bir mülakat hazırlayabilir.",
     },
     {
         "key": "hiring",
@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Adaylar yapay zekâ kullanabilir ya da cevapları arayabilir mi?",
-        "answer": "Her aday kendi sırasında kendi rastgele sorularını alır ve her sorunun sunucumuzun tuttuğu bir süresi vardır, bu yüzden cevapları aramaya ya da yapay zekâya sormaya pek zaman kalmaz. Aday sonuçları ayrıca adayın sayfadan ne zaman ayrıldığını, metin kopyaladığını ya da soruyu okumuş olamayacak kadar hızlı cevap verdiğini gösterir.",
+        "answer": "Her aday kendi sırasında kendi rastgele sorularını alır ve her sorunun sunucumuzun tuttuğu bir süresi vardır, bu yüzden cevapları aramaya ya da yapay zekâya sormaya pek zaman kalmaz. Değerlendirme kartı ayrıca adayın sayfadan ne zaman ayrıldığını, metin kopyaladığını ya da soruyu okumuş olamayacak kadar hızlı cevap verdiğini gösterir.",
     },
     {
         "key": "cost",
         "question": "Ücreti ne kadar?",
-        "answer": "Mülakat oluşturmak ücretsizdir. En az bir soruyu cevaplayan her aday {candidate} kredi ({candidate_dollars} $) tutar; daha büyük yüklemelerden gelen kredilerle daha az, 1 $'a kadar. İlk şirketiniz {company} ücretsiz kredi alır; bu, ilk {company_candidates} adayı için yeterlidir. Fiyatlandırma sayfasında tüm fiyatlar yer alır.",
+        "answer": "Mülakat oluşturmak ücretsizdir. En az bir soruyu cevaplayan her aday {candidate} kredi ({candidate_dollars} $) tutar; daha büyük yüklemelerden gelen kredilerle daha az, 1 $'a kadar. İlk şirketiniz {company} ücretsiz kredi alır; bu, ilk {company_candidates} adayı için yeterlidir. Fiyatlar sayfasında tüm fiyatlar yer alır.",
     },
     {
         "key": "charged",
@@ -59,8 +59,8 @@ FAQ = [
     },
     {
         "key": "scorecards",
-        "question": "Aday sonuçları neleri gösterir?",
-        "answer": "Her cevabı, doğru olup olmadığını ve ne kadar sürdüğünü. Notlar, mülakat için belirlediğiniz geçme notuna göre yeşil ya da kırmızı görünür. Sonuçlar ayrıca okunamayacak kadar hızlı verilen cevapları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler.",
+        "question": "Değerlendirme kartları neleri gösterir?",
+        "answer": "Her cevabı, doğru olup olmadığını ve ne kadar sürdüğünü. Notlar, mülakat için belirlediğiniz geçme notuna göre yeşil ya da kırmızı görünür. Değerlendirme kartı ayrıca okunamayacak kadar hızlı verilen cevapları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler.",
     },
     {
         "key": "reports",

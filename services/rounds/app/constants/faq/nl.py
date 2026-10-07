@@ -5,12 +5,12 @@ FAQ = [
     {
         "key": "what",
         "question": "Wat is prepza?",
-        "answer": "Een sollicitatiegesprek met tijdslimiet, gemaakt van je functieomschrijving, voor elke rol. Gebruik het om kandidaten te screenen voordat je ze ontmoet, of als stap in de werving zelf: hoe dan ook zie je wie het vak echt kent.",
+        "answer": "Een interview met tijdslimiet, gemaakt op basis van je functieomschrijving, voor elke functie. Gebruik het om kandidaten te screenen voordat je ze ontmoet, of als stap in de werving zelf: hoe dan ook zie je wie het vak echt kent.",
     },
     {
         "key": "roles",
-        "question": "Voor welke rollen kan ik werven?",
-        "answer": "Elke rol waarin kennis telt: support, sales, financiën, zorg, technische vakken, engineering, marketing en meer. Als je de functie kunt beschrijven, kan prepza er een sollicitatiegesprek voor maken.",
+        "question": "Voor welke functies kan ik werven?",
+        "answer": "Elke functie waarin kennis telt: support, sales, financiën, zorg, technische vakken, engineering, marketing en meer. Als je de functie kunt beschrijven, kan prepza er een interview voor maken.",
     },
     {
         "key": "hiring",
@@ -19,13 +19,13 @@ FAQ = [
     },
     {
         "key": "link",
-        "question": "Kan ik een sollicitatiegesprek in een vacature zetten?",
-        "answer": "Ja. Zet de deelbare link van het sollicitatiegesprek aan op het tabblad met kandidaten en plak hem in je vacature. Iedereen die hem opent, logt in en doet het gesprek, en elke persoon wordt in rekening gebracht als een uitgenodigde kandidaat. De link gaat uit wanneer je het gesprek markeert als aangenomen.",
+        "question": "Kan ik een interview in een vacature zetten?",
+        "answer": "Ja. Zet de deelbare link van het interview aan op het tabblad met kandidaten en plak hem in je vacature. Iedereen die hem opent, logt in en doet het interview, en je betaalt per persoon hetzelfde als voor een uitgenodigde kandidaat. De link gaat uit wanneer je het interview markeert als aangenomen.",
     },
     {
         "key": "preview",
-        "question": "Kan ik een sollicitatiegesprek proberen voordat ik iemand uitnodig?",
-        "answer": "Ja. Open je sollicitatiegesprek als kandidaat vanaf de pagina ervan, gratis: voorbeeldweergaven verschijnen niet tussen je kandidaten of in de vraagstatistieken. Je kunt ook elk gratis oefengesprek doen.",
+        "question": "Kan ik een interview proberen voordat ik iemand uitnodig?",
+        "answer": "Ja. Open je interview gratis als kandidaat vanaf de pagina ervan: voorbeelden verschijnen niet tussen je kandidaten of in de vraagstatistieken. Je kunt ook elk gratis oefeninterview doen.",
     },
     {
         "key": "cheating",
@@ -35,17 +35,17 @@ FAQ = [
     {
         "key": "cost",
         "question": "Wat kost het?",
-        "answer": "Sollicitatiegesprekken genereren is gratis. Elke kandidaat die minstens één vraag beantwoordt, kost {candidate} credits ({candidate_dollars} $), en minder met credits uit grotere opwaarderingen, tot 1 $. Je eerste bedrijf krijgt {company} gratis credits, genoeg voor de eerste {company_candidates} kandidaten. De prijzenpagina toont elke prijs.",
+        "answer": "Interviews genereren is gratis. Elke kandidaat die minstens één vraag beantwoordt, kost {candidate} credits ({candidate_dollars} $), en minder met credits uit grotere opwaarderingen, tot 1 $. Je eerste bedrijf krijgt {company} gratis credits, genoeg voor de eerste {company_candidates} kandidaten. De prijzenpagina toont elke prijs.",
     },
     {
         "key": "charged",
         "question": "Wanneer wordt er voor een kandidaat betaald?",
-        "answer": "Alleen wanneer de kandidaat het sollicitatiegesprek afrondt en minstens één vraag heeft beantwoord. De credits worden gereserveerd wanneer je iemand uitnodigt en komen terug als je de uitnodiging intrekt, als de kandidaat nooit begint of niets beantwoordt.",
+        "answer": "Alleen wanneer de kandidaat het interview afrondt en minstens één vraag heeft beantwoord. De credits worden gereserveerd wanneer je iemand uitnodigt en komen terug als je de uitnodiging intrekt, als de kandidaat nooit begint of niets beantwoordt.",
     },
     {
         "key": "compare_hiring",
         "question": "Hoe verhoudt de prijs zich tot andere assessmenttools?",
-        "answer": "Veel assessmenttools worden verkocht als maand- of jaarabonnement, dat je betaalt ook als je niemand test. Bij prepza betaal je alleen per kandidaat: {candidate} credits ({candidate_dollars} $), zonder contract, zonder kosten per gebruiker en zonder te betalen voor het maken van een gesprek. Een bedrijf dat {example_candidates} kandidaten per maand uitnodigt, betaalt ongeveer {example_year_dollars} $ per jaar. Test je elke maand veel kandidaten, dan kan een abonnement goedkoper zijn, dus vergelijk met je eigen cijfers.",
+        "answer": "Veel assessmenttools worden verkocht als maand- of jaarabonnement, dat je ook betaalt als je niemand test. Bij prepza betaal je alleen per kandidaat: {candidate} credits ({candidate_dollars} $), zonder contract, zonder kosten per gebruiker en zonder te betalen voor het maken van een interview. Een bedrijf dat {example_candidates} kandidaten per maand uitnodigt, betaalt ongeveer {example_year_dollars} $ per jaar. Test je elke maand veel kandidaten, dan kan een abonnement goedkoper zijn, dus vergelijk met je eigen cijfers.",
     },
     {
         "key": "expire",
@@ -59,13 +59,13 @@ FAQ = [
     },
     {
         "key": "scorecards",
-        "question": "Wat laten kandidaatresultaten zien?",
-        "answer": "Elk antwoord, of het goed was en hoe lang het duurde. Cijfers zijn groen of rood ten opzichte van de slaaggrens die je voor het sollicitatiegesprek hebt ingesteld. De resultaten markeren ook antwoorden die te snel waren om de vraag te hebben gelezen, keren dat de kandidaat de pagina verliet, en kopieerpogingen.",
+        "question": "Wat laat een scorekaart zien?",
+        "answer": "Elk antwoord, of het goed was en hoe lang het duurde. Scores zijn groen of rood ten opzichte van de slaaggrens die je voor het interview hebt ingesteld. De scorekaart markeert ook antwoorden die te snel waren om de vraag te hebben gelezen, keren dat de kandidaat de pagina verliet, en kopieerpogingen.",
     },
     {
         "key": "reports",
         "question": "Kan ik resultaten delen met een hiring manager?",
-        "answer": "Ja. Download een PDF-rapport voor één kandidaat of voor alle kandidaten van een sollicitatiegesprek, mail het rechtstreeks vanuit prepza, of stuur een korte samenvatting via WhatsApp of Telegram.",
+        "answer": "Ja. Download een PDF-rapport voor één kandidaat of voor alle kandidaten van een interview, mail het rechtstreeks vanuit prepza, of stuur een korte samenvatting via WhatsApp of Telegram.",
     },
     {
         "key": "candidates",
@@ -80,12 +80,12 @@ FAQ = [
     {
         "key": "languages",
         "question": "Welke talen worden ondersteund?",
-        "answer": "{count} talen, voor de site, de sollicitatiegesprekken en de e-mails. Kies de taal waarin een gesprek wordt geschreven, in welke taal de functieomschrijving ook is.",
+        "answer": "{count} talen, voor de site, de interviews en de e-mails. Kies de taal waarin een interview wordt geschreven, in welke taal de functieomschrijving ook is.",
     },
     {
         "key": "privacy",
         "question": "Wat gebeurt er met functieomschrijvingen en antwoorden?",
-        "answer": "Functieomschrijvingen worden gebruikt om je sollicitatiegesprekken te maken, en de antwoorden van kandidaten om ze te beoordelen, alleen voor jouw bedrijf. Het privacybeleid legt uit wat we bewaren, hoe lang en welke rechten iedereen heeft.",
+        "answer": "Functieomschrijvingen worden gebruikt om je interviews te maken, en de antwoorden van kandidaten om ze te beoordelen, alleen voor jouw bedrijf. Het privacybeleid legt uit wat we bewaren, hoe lang en welke rechten iedereen heeft.",
     },
     {
         "key": "delete",

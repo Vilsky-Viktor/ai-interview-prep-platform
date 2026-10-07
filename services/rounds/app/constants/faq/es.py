@@ -20,7 +20,7 @@ FAQ = [
     {
         "key": "link",
         "question": "¿Puedo poner una entrevista en una oferta de empleo?",
-        "answer": "Sí. Activa el enlace para compartir de la entrevista en su pestaña Candidatos y pégalo en tu oferta. Cualquiera que lo abra inicia sesión y hace la entrevista, y cada persona se cobra como un candidato invitado. El enlace se desactiva cuando marcas la entrevista como contratada.",
+        "answer": "Sí. Activa el enlace para compartir de la entrevista en su pestaña Candidatos y pégalo en tu oferta. Cualquiera que lo abra inicia sesión y hace la entrevista, y cada persona cuesta lo mismo que un candidato invitado. El enlace se desactiva cuando marcas el puesto de la entrevista como cubierto.",
     },
     {
         "key": "preview",
@@ -30,7 +30,7 @@ FAQ = [
     {
         "key": "cheating",
         "question": "¿Pueden los candidatos usar IA o buscar las respuestas?",
-        "answer": "Cada candidato recibe sus propias preguntas aleatorias en su propio orden, con un temporizador en cada pregunta que controla nuestro servidor, así que hay poco tiempo para buscar las respuestas o preguntar a una IA. Los resultados también muestran cuándo un candidato salió de la página, copió texto o respondió demasiado rápido para haber leído la pregunta.",
+        "answer": "Cada candidato recibe sus propias preguntas aleatorias en su propio orden, con un temporizador en cada pregunta que controla nuestro servidor, así que hay poco tiempo para buscar las respuestas o preguntar a una IA. Las fichas de evaluación también muestran cuándo un candidato salió de la página, copió texto o respondió demasiado rápido para haber leído la pregunta.",
     },
     {
         "key": "cost",
@@ -39,7 +39,7 @@ FAQ = [
     },
     {
         "key": "charged",
-        "question": "¿Cuándo se cobra un candidato?",
+        "question": "¿Cuándo se cobra por un candidato?",
         "answer": "Solo cuando termina la entrevista habiendo respondido al menos una pregunta. Sus créditos se reservan cuando lo invitas y se te devuelven si revocas la invitación, si nunca empieza o si no responde nada.",
     },
     {
@@ -59,8 +59,8 @@ FAQ = [
     },
     {
         "key": "scorecards",
-        "question": "¿Qué muestran los resultados de los candidatos?",
-        "answer": "Cada respuesta, si fue correcta y cuánto tardó. Las notas se ven en verde o rojo según la nota de aprobado que fijaste para la entrevista. Los resultados también señalan respuestas demasiado rápidas para haber leído la pregunta, las veces que el candidato salió de la página y los intentos de copiar.",
+        "question": "¿Qué muestran las fichas de evaluación?",
+        "answer": "Cada respuesta, si fue correcta y cuánto tardó. Las notas se ven en verde o rojo según la nota de aprobado que fijaste para la entrevista. Las fichas también señalan respuestas demasiado rápidas para haber leído la pregunta, las veces que el candidato salió de la página y los intentos de copiar.",
     },
     {
         "key": "reports",

@@ -2,7 +2,7 @@
   "settings": {
     "title": "Paramètres",
     "language": "Langue",
-    "languageNote": "Pour l'interface et les réponses du tuteur, et la langue dans laquelle commencent les nouveaux kits et entretiens. Vous pouvez les générer dans n'importe quelle langue disponible.",
+    "languageNote": "Pour l'interface et les réponses du chat d'aide, et la langue de départ des nouveaux entretiens. Vous pouvez créer un entretien dans toute langue prise en charge.",
     "languageFailed": "Impossible de changer la langue. Veuillez réessayer.",
     "yourData": "Vos données",
     "yourDataNote": "Téléchargez tout ce que prepza. conserve sur vous, ou supprimez votre compte.",
@@ -86,7 +86,7 @@
     "text": "Des entretiens chronométrés créés à partir de votre fiche de poste. Des questions uniques pour chaque candidat et un minuteur sur chacune. 1–3 $ par candidat."
   },
   "start": {
-    "placeholder": "Collez une offre d'emploi, ou décrivez le poste et ce qu'un candidat doit savoir",
+    "placeholder": "Collez une fiche de poste, ou décrivez le poste et ce qu'un candidat doit savoir",
     "description": "Description du poste",
     "submit": "Créer un entretien",
     "whichCompany": "Pour quelle entreprise est cet entretien ?",
@@ -120,7 +120,7 @@
     "flags": {
       "wrong_key": "la réponse est peut-être fausse",
       "rewrite": "nécessite une nouvelle question",
-      "weak_options": "nécessite de meilleures options"
+      "weak_options": "nécessite de meilleures propositions de réponse"
     },
     "zone": "Espace admin",
     "templates": "Modèles",
@@ -130,10 +130,10 @@
     "description": "Description du poste",
     "create": "Générer",
     "createFailed": "Impossible de démarrer le modèle. Veuillez réessayer.",
-    "text": "Des entretiens prêts à l'emploi par poste, pour les entreprises et les talents.",
+    "text": "Des entretiens prêts à l'emploi par poste, pour les entreprises et pour les candidats qui s'entraînent.",
     "deleteLabel": "Supprimer {title}",
     "deleteTitle": "Supprimer ce modèle ?",
-    "deleteText": "Ses sujets et ses questions sont supprimés. Les entretiens que des entreprises en ont déjà tirés sont conservés.",
+    "deleteText": "Ses thèmes et ses questions sont supprimés. Les entretiens que des entreprises en ont déjà tirés sont conservés.",
     "deleteFailed": "Impossible de supprimer le modèle. Veuillez réessayer.",
     "passRates": "Taux de réussite",
     "controls": "Contrôles",
@@ -155,9 +155,9 @@
     "outsideTriggers": "taux de réussite inhabituel",
     "finished": "{count, plural, one {# a terminé} other {# ont terminé}}",
     "passed": "{percent} % de réussite",
-    "passMark": "note de réussite {percent} %",
+    "passMark": "seuil de réussite {percent} %",
     "averageGrade": "moyenne {percent} %",
-    "timedOut": "{percent} % de temps écoulé",
+    "timedOut": "{percent} % de réponses hors délai",
     "sortBy": {
       "pass_rate": "Taux de réussite le plus bas d'abord",
       "finished": "Le plus de candidats ayant terminé d'abord"
@@ -169,7 +169,7 @@
     "maintenanceText": "Tant qu'il est activé, chaque page indique que prepza est en maintenance et les services refusent toute requête, sauf celles des superadmins. Les paiements, les e-mails et les tâches planifiées continuent de fonctionner.",
     "maintenanceFailed": "Impossible de changer le mode maintenance. Réessayez.",
     "maintenanceConfirmTitle": "Activer le mode maintenance ?",
-    "maintenanceRunning": "{count, plural, =0 {Aucun candidat n'est en entretien en ce moment.} other {Candidats en entretien en ce moment : #. Ils risquent de perdre du temps.}}",
+    "maintenanceRunning": "{count, plural, =0 {Aucun candidat n'est en entretien en ce moment.} one {# candidat est en entretien en ce moment et risque de perdre du temps.} other {# candidats sont en entretien en ce moment et risquent de perdre du temps.}}",
     "maintenanceRunningUnknown": "Impossible de compter les candidats en entretien en ce moment. Ceux qui le sont risquent de perdre du temps.",
     "maintenanceTurnOn": "Activer",
     "verification": "Vérification",
@@ -190,8 +190,8 @@
   "templates": {
     "title": "Modèles",
     "empty": "Aucun modèle pour l'instant.",
-    "topics": "{count, plural, one {# sujet} other {# sujets}}",
-    "search": "Rechercher par poste ou sujet",
+    "topics": "{count, plural, one {# thème} other {# thèmes}}",
+    "search": "Rechercher par poste ou thème",
     "searchAction": "Rechercher",
     "level": "Niveau : {level}",
     "anyLevel": "Tous niveaux",
@@ -213,7 +213,7 @@
     "low": "Bientôt épuisés",
     "creditsWord": "{count, plural, one {crédit} other {crédits}}",
     "topUpTitle": "Recharger : {name}",
-    "topUpNote": "Chaque recharge achète des candidats entiers ; les plus grosses coûtent moins cher par candidat. Les crédits n'expirent jamais.",
+    "topUpNote": "Chaque recharge couvre un nombre entier de candidats ; les plus grosses coûtent moins cher par candidat. Les crédits n'expirent jamais.",
     "candidates": "{count, plural, one {# candidat} other {# candidats}}",
     "each": "{price} chacun"
   },
@@ -238,7 +238,7 @@
   "reportReasons": {
     "wrong_answer": "La réponse indiquée est fausse",
     "unclear": "La question n'est pas claire",
-    "off_topic": "Elle ne correspond pas au sujet",
+    "off_topic": "Elle ne correspond pas au thème",
     "other": "Autre chose"
   },
   "questions": {
@@ -285,7 +285,7 @@
     "aiWritten": "Les questions et corrigés écrits par l'IA peuvent être faux. Signalez une erreur ou régénérez."
   },
   "rounds": {
-    "answered": "Répondues",
+    "answered": "Avec réponse",
     "correct": "Correcte",
     "incorrect": "Incorrecte",
     "notAnswered": "Sans réponse",
@@ -311,7 +311,7 @@
     "title": "Entretien"
   },
   "generation": {
-    "title": "Nouvelle préparation",
+    "title": "Nouvel entretien",
     "interviews": "Entretiens",
     "cancel": "Annuler la génération",
     "cancelTitle": "Annuler cette génération ?",
@@ -319,10 +319,10 @@
     "cancelling": "Annulation…",
     "cancelFailed": "Impossible d'annuler la génération. Veuillez réessayer.",
     "writing": "Rédaction de vos questions",
-    "drafting": "Ébauche de vos sujets",
+    "drafting": "Ébauche de vos thèmes",
     "writingNote": "Cela prend quelques minutes. Vous pouvez quitter cette page ; nous continuons.",
     "draftingNote": "Nous lisons votre objectif et planifions ce qu'il faut couvrir.",
-    "topicsReady": "{ready} sur {count, plural, one {# sujet} other {# sujets}} prêts",
+    "topicsReady": "{ready} sur {count, plural, one {# thème} other {# thèmes}} prêts",
     "reviewFailed": "Impossible d'envoyer votre relecture. Veuillez réessayer.",
     "retryFailed": "Impossible de relancer la génération. Veuillez réessayer.",
     "missing": "Cette génération n'existe pas.",
@@ -331,25 +331,25 @@
     "retry": "Relancer",
     "retrying": "Relance…",
     "startOver": "Recommencer",
-    "topicName": "Nom du sujet",
+    "topicName": "Nom du thème",
     "removeSubtopic": "Retirer {subtopic}",
-    "addSubtopic": "Ajouter un sous-sujet",
+    "addSubtopic": "Ajouter un sous-thème",
     "subtopicsFull": "{count} sous-thèmes au maximum",
-    "newSubtopic": "Nouveau sous-sujet",
+    "newSubtopic": "Nouveau sous-thème",
     "add": "Ajouter",
     "done": "Terminé",
-    "reviewTitle": "Relisez vos sujets",
-    "reviewText": "Décochez les sujets inutiles, modifiez-les ou décrivez des changements. Chaque sujet reçoit son propre ensemble de questions avec réponses.",
+    "reviewTitle": "Relisez vos thèmes",
+    "reviewText": "Décochez les thèmes inutiles, modifiez-les ou décrivez des changements. Chaque thème reçoit son propre ensemble de questions avec réponses.",
     "editTopic": "Modifier {topic}",
-    "changesPlaceholder": "Facultatif : décrivez des changements, par ex. « Ajoute un sujet sur le leadership d'équipe »",
-    "changes": "Changements des sujets",
-    "tooMany": "Choisissez au plus {max} sujets, ou décrivez comment les regrouper.",
+    "changesPlaceholder": "Facultatif : décrivez des changements, par ex. « Ajoute un thème sur le leadership d'équipe »",
+    "changes": "Changements des thèmes",
+    "tooMany": "Choisissez au plus {max} thèmes, ou décrivez comment les regrouper.",
     "apply": "Appliquer les changements",
     "approve": "Valider et générer"
   },
   "candidateStatus": {
     "invited": "invité",
-    "undelivered": "non distribuée",
+    "undelivered": "non remise",
     "in_process": "en cours",
     "finished": "terminé",
     "deleted": "supprimé",
@@ -397,7 +397,7 @@
     "pickText": "Le test est copié dans l'entreprise choisie, gratuitement et prêt à être envoyé aux candidats."
   },
   "candidates": {
-    "scorecard": "Résultats",
+    "scorecard": "Fiche d'évaluation",
     "interview": "Entretien",
     "deleted": "Candidat supprimé",
     "deletedText": "Le candidat a supprimé son compte, et ses résultats avec.",
@@ -451,11 +451,11 @@
     "createTitle": "Créer un entretien",
     "try": "Essayer en tant que candidat",
     "newCandidate": "Nouveau(x) candidat(s)",
-    "linkTitle": "Lien à partager",
+    "linkTitle": "Lien de partage",
     "linkText": "Pour une offre d'emploi : toute personne disposant du lien peut passer l'entretien. Chacune est facturée comme un candidat invité.",
     "linkFailed": "Impossible de modifier le lien. Veuillez réessayer.",
-    "passMark": "Note de réussite",
-    "passMarkLabel": "Note de réussite en pourcentage",
+    "passMark": "Seuil de réussite",
+    "passMarkLabel": "Seuil de réussite en pourcentage",
     "markHired": "Marquer comme recruté",
     "tryLabel": "Essayer {title} en tant que candidat",
     "tryFailed": "Impossible de démarrer l'aperçu. Veuillez réessayer.",
@@ -499,14 +499,14 @@
     "fallbackTitle": "un entretien",
     "timePerQuestion": "Temps par question :",
     "secondsUnit": "s",
-    "pickOne": "Choisissez une des quatre options à chaque question.",
+    "pickOne": "Choisissez une des quatre réponses proposées pour chaque question.",
     "changePick": "Vous pouvez changer votre choix jusqu'à ce que vous cliquiez sur « Question suivante ».",
-    "timeRunsOut": "Quand le temps d'une question est écoulé, votre choix compte et la suivante s'ouvre ; sans choix, elle compte comme fausse. Le chronomètre continue si vous quittez la page.",
+    "timeRunsOut": "Quand le temps d'une question est écoulé, votre choix est retenu et la suivante s'ouvre ; sans choix, elle compte comme fausse. Le chronomètre continue si vous quittez la page.",
     "unanswered": "Les questions sans réponse comptent comme fausses.",
     "saved": "Votre progression est enregistrée : utilisez à nouveau ce lien pour continuer.",
     "extraTime": "Besoin de plus de temps, par exemple en raison d'un handicap ? Contactez {company} avant de commencer.",
-    "people": "Les questions sont rédigées par une IA. Des personnes examinent les résultats et {company} décide ; vous pouvez demander que le vôtre soit examiné.",
-    "stay": "Restez sur cette page : la quitter ou copier est enregistré (<link>confidentialité</link>).",
+    "people": "Les questions sont rédigées par une IA. Chez {company}, des personnes examinent les résultats et prennent la décision ; vous pouvez leur demander de réexaminer le vôtre.",
+    "stay": "Restez sur cette page : les sorties de la page et les copies sont enregistrées (<link>confidentialité</link>).",
     "finished": "Cet entretien est déjà terminé.",
     "continue": "Continuer",
     "start": "Accepter et commencer",
@@ -571,7 +571,7 @@
     "items": {
       "instructions": {
         "title": "Instructions pour les entreprises",
-        "description": "Ce que signifie une note, la vérification humaine, le choix de la note de réussite, le temps supplémentaire et où ne pas utiliser prepza."
+        "description": "Ce que signifie une note, la vérification humaine, le choix de la seuil de réussite, le temps supplémentaire et où ne pas utiliser prepza."
       },
       "notices": {
         "title": "Modèles d'information des candidats",
@@ -628,11 +628,11 @@
     "how": {
       "title": "Trois étapes vers votre prochain recrutement",
       "paste": {
-        "title": "Collez l'offre d'emploi",
-        "text": "Tout poste, toute langue.\nprepza repère ce qu'un candidat doit savoir et propose des sujets."
+        "title": "Collez la fiche de poste",
+        "text": "Tout poste, toute langue.\nprepza repère ce qu'un candidat doit savoir et propose des thèmes."
       },
       "review": {
-        "title": "Vérifiez les sujets",
+        "title": "Vérifiez les thèmes",
         "text": "Gardez-les, renommez-les ou modifiez-les.\nLes questions sont rédigées dès votre validation."
       },
       "invite": {
@@ -646,7 +646,7 @@
       "points": {
         "speed": {
           "title": "Prêt en quelques minutes",
-          "text": "Collez votre offre d'emploi, validez les sujets et invitez des candidats le jour même."
+          "text": "Collez votre fiche de poste, validez les thèmes et invitez des candidats le jour même."
         },
         "anyRole": {
           "title": "Tout poste",
@@ -752,13 +752,13 @@
         "own": "Des questions uniques par candidat",
         "timed": "Un compte à rebours par question",
         "flags": "Alertes : précipitation, sortie, copie",
-        "answers": "Fiches avec réponses et temps"
+        "answers": "Fiches d'évaluation avec réponses et temps"
       },
       "candidate": "Candidat",
       "score": "Score",
       "rushed": "Réponses trop rapides",
       "left": "A quitté la page",
-      "role": "Développeur backend · note de réussite {mark} %"
+      "role": "Développeur backend · seuil de réussite {mark} %"
     },
     "reports": {
       "title": "Partagez les résultats en un clic",
@@ -798,12 +798,12 @@
       "start": "Créer un entretien"
     },
     "trust": {
-      "title": "Juste pour les candidats\nSûr pour vos données",
+      "title": "Équitable pour les candidats\nSûr pour vos données",
       "text": "Ce sont des personnes qui décident du recrutement. prepza ne vérifie que les connaissances : aucune analyse de vidéo, de voix ou de visage.",
       "see": "Documents",
       "points": {
         "decision": "Une personne peut revoir tout résultat sur demande",
-        "key": "Chaque réponse est notée selon sa clé de réponse ; une clé corrigée recalcule les résultats passés",
+        "key": "Chaque réponse est notée d'après son corrigé ; un corrigé rectifié recalcule les résultats passés",
         "training": "Vos données ne servent pas à entraîner des modèles d'IA",
         "time": "Du temps en plus pour qui le demande",
         "notice": "Les candidats savent à quoi s'attendre avant de commencer",
@@ -865,15 +865,15 @@
       "candidate_finished": "{count, plural, one {{email} a terminé « {title} »{grade, select, none {.} other { : {grade} %.}}} other {# candidats ont terminé « {title} ».}}",
       "invite_undelivered": "{count, plural, one {L'invitation envoyée à {email} pour « {title} » n'a pas été remise.} other {# invitations pour « {title} » n'ont pas été remises.}}",
       "interview_ready": "L'entretien « {title} » est prêt.",
-      "interview_cancelled": "{title, select, none {Un entretien} other {L'entretien « {title} »}} a été annulé : la validation de ses sujets a trop attendu.",
+      "interview_cancelled": "{title, select, none {Un entretien} other {L'entretien « {title} »}} a été annulé : la validation de ses thèmes a trop attendu.",
       "verification_approved": "« {name} » est vérifiée pour {domain}.",
       "verification_declined": "{reason, select, none {La vérification de « {name} » a été refusée.} other {La vérification de « {name} » a été refusée : {reason}}}"
     }
   },
   "report": {
     "download": "Télécharger le PDF",
-    "passed": "réussi · note de réussite {mark} %",
-    "notPassed": "non réussi · note de réussite {mark} %",
+    "passed": "réussi · seuil de réussite {mark} %",
+    "notPassed": "non réussi · seuil de réussite {mark} %",
     "notFinished": "pas encore terminé",
     "share": "Partager le rapport",
     "fileName": "Rapport {email}",
@@ -887,7 +887,7 @@
     "via": "Envoyé depuis prepza",
     "candidatesFileName": "Candidats {title}",
     "candidateCount": "{count, plural, one {# candidat} other {# candidats}}",
-    "passMark": "note de réussite {mark} %",
+    "passMark": "seuil de réussite {mark} %",
     "progressOf": "{progress} % effectué",
     "humanReview": "Le score appuie votre décision, il ne la prend pas. Lisez les réponses et, si le candidat le demande, faites examiner son résultat par une personne."
   },
@@ -896,7 +896,7 @@
     "intro": "Entraînez-vous pour un poste avec un entretien chronométré, puis voyez votre note et toutes les bonnes réponses. Gratuitement.",
     "about": "Entretien d'entraînement chronométré. Une fois terminé, voyez votre note et toutes les bonnes réponses. Privé et gratuit.",
     "pageTitle": "{title} : simulation d'entretien d'embauche gratuite",
-    "pageDescription": "Simulation d'entretien d'embauche gratuite de niveau {level} pour {title} : {count, plural, one {# sujet} other {# sujets}}, chronométrée, avec votre note et toutes les bonnes réponses ensuite. Un entraînement, pas un vrai entretien d'embauche.",
+    "pageDescription": "Simulation d'entretien d'embauche gratuite de niveau {level} pour {title} : {count, plural, one {# thème} other {# thèmes}}, chronométrée, avec votre note et toutes les bonnes réponses ensuite. Un entraînement, pas un vrai entretien d'embauche.",
     "start": "Commencer l'entraînement",
     "again": "S'entraîner à nouveau",
     "continue": "Continuer",
@@ -909,7 +909,7 @@
     "gradeLabel": "Note",
     "questions": "{count, plural, one {# question} other {# questions}}",
     "progressLabel": "Progression",
-    "answeredLabel": "questions répondues",
+    "answeredLabel": "questions avec réponse",
     "hireTitle": "Vous recrutez pour ce poste ?",
     "hireText": "Utilisez cet entretien avec vos candidats ou générez-en un pour votre fiche de poste.",
     "hireButton": "Créer un entretien"
@@ -959,7 +959,7 @@
     "intro": "Des tests de compétences chronométrés prêts à l'emploi pour les postes courants. Utilisez-en un tel quel ou créez un test à partir de votre propre fiche de poste.",
     "heading": "Test de compétences {role} pour recruter",
     "pageTitle": "Test de recrutement {role}",
-    "pageDescription": "Test de recrutement {role} chronométré, couvrant {count, plural, one {# sujet} other {# sujets}}. Chaque candidat reçoit ses propres questions aléatoires. 1–3 $ par candidat.",
+    "pageDescription": "Test de recrutement {role} chronométré, couvrant {count, plural, one {# thème} other {# thèmes}}. Chaque candidat reçoit ses propres questions aléatoires. 1–3 $ par candidat.",
     "lead": "Un test chronométré à choix multiples sur les compétences de ce poste. Chaque candidat reçoit sa propre série aléatoire de questions avec un minuteur sur chacune, et vous recevez une fiche d'évaluation avec chaque réponse et son temps. 1–3 $ par candidat, sans abonnement.",
     "create": "Créer un test pour vos candidats",
     "practise": "S'entraîner gratuitement",

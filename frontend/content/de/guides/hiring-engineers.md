@@ -124,7 +124,7 @@ Starke Entwickler haben oft mehrere Bewerbungsprozesse gleichzeitig laufen. Ein 
 
 ## Fairness im gesamten Prozess
 
-Ein strukturierter Prozess ist auch ein faireres, aber nur, wenn Sie ihn konsequent durchführen:
+Ein strukturierter Prozess ist auch ein fairerer, aber nur, wenn Sie ihn konsequent durchführen:
 
 - **Einheitliche Fragen** in jeder Phase, für alle Kandidaten derselben Stelle.
 - **Vorab geschriebene Bewertungsraster,** damit Menschen nach denselben Kriterien beurteilt werden.

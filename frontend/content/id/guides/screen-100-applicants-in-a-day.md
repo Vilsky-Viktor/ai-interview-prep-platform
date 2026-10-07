@@ -26,7 +26,7 @@ Tes yang melakukan pemilahan. Perhatianmu dicurahkan ke bagian yang butuh penila
 
 ## Langkah 1: Tentukan apa yang dibutuhkan pekerjaan (30 menit)
 
-Sebelum menguji siapa pun, tuliskan apa yang wajib diketahui orang di peran ini pada hari pertama. Buat spesifik.
+Sebelum menguji siapa pun, tuliskan apa yang wajib diketahui orang di posisi ini pada hari pertama. Buat spesifik.
 
 - **Pengetahuan:** "Merekonsiliasi rekening koran, memahami dasar PPN, memakai buku besar" bisa diuji. "Latar belakang keuangan yang kuat" tidak.
 - **Syarat wajib:** lisensi, izin kerja, tingkat kemampuan bahasa, ketersediaan. Ini adalah pemeriksaan ya-atau-tidak, bukan materi tes.
@@ -43,10 +43,10 @@ Dengan prepza:
 1. **Tempel deskripsi pekerjaan.** prepza mengambil apa yang wajib diketahui kandidat dan mengusulkan topik.
 2. **Tinjau topiknya berdasarkan daftarmu dari langkah 1.** Hapus centang apa pun yang bukan persyaratan sebenarnya, ganti nama topik, ubah subtopik, atau jelaskan perubahan dengan teks biasa ("tambahkan topik tentang dasar-dasar penggajian"). Soal baru ditulis setelah kamu menyetujuinya.
 3. **Atur panjangnya.** Secara default setiap topik berisi 10 soal, masing-masing dengan hitung mundur 60 detik. Tiga topik berarti paling lama 30 menit untuk seorang kandidat, dan biasanya kurang. Batasi pada yang kamu butuhkan.
-4. **Tetapkan nilai kelulusan.** Default-nya 70%. Anggap ini sebagai panduan untuk membaca hasil, bukan batas otomatis.
+4. **Tetapkan nilai lulus.** Default-nya 70%. Anggap ini sebagai panduan untuk membaca hasil, bukan batas otomatis.
 5. **Lihat pratinjaunya sebagai kandidat.** Kerjakan tesnya sendiri. Gratis dan tidak dihitung sebagai kandidat. Kalau ada soal yang terlihat janggal, buat ulang soal itu.
 
-Kalau kamu merekrut untuk peran yang umum, kamu bisa mulai dari templat siap pakai lalu menyesuaikannya.
+Kalau kamu merekrut untuk posisi yang umum, kamu bisa mulai dari templat siap pakai lalu menyesuaikannya.
 
 ### Kenapa tes pengetahuan singkat efektif sebagai filter pertama
 
@@ -59,7 +59,7 @@ Tinjauan besar atas riset rekrutmen menempatkan tes pengetahuan yang spesifik un
 
 ## Langkah 3: Periksa syarat wajib, lalu undang (15 menit)
 
-Lakukan pemeriksaan ya-atau-tidak yang cepat hanya untuk syarat wajib: izin kerja, lisensi yang disyaratkan, lokasi kalau perannya membutuhkannya. Jangan memeringkat CV di sini. Kamu menyisihkan pelamar yang tidak bisa mengambil pekerjaan itu, bukan memilih favorit.
+Lakukan pemeriksaan ya-atau-tidak yang cepat hanya untuk syarat wajib: izin kerja, lisensi yang disyaratkan, lokasi kalau posisinya membutuhkannya. Jangan memeringkat CV di sini. Kamu menyisihkan pelamar yang tidak bisa mengambil pekerjaan itu, bukan memilih favorit.
 
 Lalu undang semua yang tersisa:
 
@@ -80,8 +80,8 @@ Sekarang pembacaan yang teliti dimulai, tetapi pada kelompok yang lebih kecil da
 
 1. **Urutkan berdasarkan nilai,** yang terbaik lebih dulu. Itu urutan default-nya.
 2. **Buka setiap scorecard** di kelompok teratas. Lihat jawabannya, bukan hanya angkanya: topik mana yang kuat, mana yang lemah, berapa lama setiap jawaban.
-3. **Periksa tanda integritasnya.** prepza menandai jawaban yang terlalu cepat untuk sempat membaca soalnya, saat kandidat meninggalkan halaman, dan percobaan menyalin. Tanda adalah alasan untuk melihat lebih teliti, bukan bukti kecurangan. Orang yang meninggalkan halaman sekali mungkin saja terganggu notifikasi yang muncul.
-4. **Lihat yang sedikit di bawah nilai kelulusan.** Skor dari set soal acak yang berbeda tidak bisa dibandingkan secara persis, jadi selisih beberapa poin bisa berasal dari soal yang terambil. Seseorang dengan skor 65% yang jawabannya kuat di topik yang paling penting mungkin layak diwawancarai.
+3. **Periksa tanda peringatannya.** prepza menandai jawaban yang terlalu cepat untuk sempat membaca soalnya, saat kandidat meninggalkan halaman, dan percobaan menyalin. Tanda adalah alasan untuk melihat lebih teliti, bukan bukti kecurangan. Orang yang meninggalkan halaman sekali mungkin saja terganggu notifikasi yang muncul.
+4. **Lihat yang sedikit di bawah nilai lulus.** Skor dari set soal acak yang berbeda tidak bisa dibandingkan secara persis, jadi selisih beberapa poin bisa berasal dari soal yang terambil. Seseorang dengan skor 65% yang jawabannya kuat di topik yang paling penting mungkin layak diwawancarai.
 5. **Sekarang baca CV** orang-orang yang sedang kamu pertimbangkan. Kamu membaca 15 CV dengan teliti, bukan membaca sekilas 100 CV.
 
 Untuk membagikan hasil kepada hiring manager, unduh laporan PDF untuk satu kandidat atau seluruh daftar, atau kirim lewat email dari prepza.
@@ -96,7 +96,7 @@ Tuliskan kenapa setiap orang masuk daftar. Hanya butuh satu menit per kandidat d
 
 - **Menguji "nilai plus".** Setiap topik tambahan membuat tes lebih panjang dan menyaring orang karena hal-hal yang sebenarnya bisa kamu ajarkan.
 - **Tes yang terlalu panjang.** Tes yang panjang membuatmu kehilangan kandidat bagus yang punya tawaran lain.
-- **Memperlakukan nilai kelulusan sebagai tembok.** Itu alat bantu membaca hasil. Lihat jawabannya.
+- **Memperlakukan nilai lulus sebagai tembok.** Itu alat bantu membaca hasil. Lihat jawabannya.
 - **Melewatkan pratinjau.** Kerjakan tesnya sendiri sebelum kandidat mengerjakannya.
 - **Mengabaikan akomodasi.** Tawarkan tambahan waktu kepada siapa pun yang memintanya.
 
@@ -106,6 +106,6 @@ Dengan prepza, kamu hanya membayar untuk kandidat yang menjawab setidaknya satu 
 
 ## Bacaan terkait
 
-- [Tes pra-kerja: panduan praktis](/pre-employment-testing)
+- [Tes seleksi karyawan: panduan praktis](/pre-employment-testing)
 - [Tes keterampilan vs penyaringan CV](/guides/skills-tests-vs-cv-screening)
 - [Cara membandingkan biaya tes](/compare/cheapest-pre-employment-test)

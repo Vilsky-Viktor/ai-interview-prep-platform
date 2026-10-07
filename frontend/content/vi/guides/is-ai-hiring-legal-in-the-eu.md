@@ -124,7 +124,7 @@ Hiện nay điều đó thể hiện trong sản phẩm như sau:
 - **Con người quyết định.** Trang kết quả và báo cáo PDF nhắc nhóm của bạn xem xét kết quả; prepza không loại ứng viên và không gửi thư từ chối.
 - **Ứng viên được thông báo** trước khi bắt đầu rằng câu hỏi do AI viết, rằng người của công ty bạn xem xét kết quả và quyết định, và rằng họ có thể yêu cầu xem xét lại.
 - **Thời gian thêm** có thể được cấp cho bất kỳ ứng viên nào yêu cầu.
-- **Hồ sơ lưu trữ.** Các câu hỏi đã hiển thị, câu trả lời, thời gian và sự kiện liêm chính đều được ghi lại.
+- **Hồ sơ lưu trữ.** Các câu hỏi đã hiển thị, câu trả lời, thời gian và các lần rời trang hay sao chép đều được ghi lại.
 - **Dữ liệu.** Lưu trữ tại EU (một số bên xử lý phụ ở Mỹ; xem [chính sách quyền riêng tư](/privacy)), dữ liệu ứng viên được xóa sau 12 tháng kể từ lời mời, có kèm thỏa thuận xử lý dữ liệu, và dữ liệu của bạn không được dùng để huấn luyện mô hình AI.
 
 Bản nháp tài liệu kỹ thuật, sổ đăng ký rủi ro, hướng dẫn cho công ty, hệ thống quản lý chất lượng và kế hoạch giám sát sau khi đưa ra thị trường đã có và đang được hoàn thiện trước mốc năm 2027. Đó là các bản nháp đang làm, không phải tuyên bố về việc tuân thủ.

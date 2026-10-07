@@ -49,7 +49,7 @@ Bunların hiçbiri kodlama alıştırmalarını işe yaramaz kılmıyor. Ne zama
 - **Yapay zekâ ile eşli çalışma.** Canva'nın turunda olduğu gibi adaylara bir asistan ve gerçekçi, açık uçlu bir görev verin. Görevi nasıl parçaladıklarını, asistana ne sorduklarını ve neyi kabul edip neyi reddettiklerini izleyin.
 - **Kod incelemesi.** Belki yapay zekâ tarafından yazılmış, birkaç gerçek hata içeren bir pull request verin. Neyi neden değiştireceklerini sorun.
 - **Hata ayıklama.** Başarısız bir testi olan küçük bir kod tabanı verin. Bu, anketin tarif ettiği günlük işe yakındır ve taklit edilmesi zordur.
-- **Sistem tasarımı.** Kıdemli roller için ödünleşimler üzerine bir tartışma, tek bir prompt'un üretemeyeceği muhakemeyi gösterir.
+- **Sistem tasarımı.** Kıdemli pozisyonlar için ödünleşimler üzerine bir tartışma, tek bir prompt'un üretemeyeceği muhakemeyi gösterir.
 
 Bu alıştırmaları yürütmek ve puanlamak bir mühendisin zamanını alır. Önlerine hızlı ve kapsamlı bir bilgi kontrolü koymanın asıl nedeni budur; böylece başarılı olma olasılığı en yüksek adaylara ayrılırlar.
 
@@ -58,7 +58,7 @@ Bu alıştırmaları yürütmek ve puanlamak bir mühendisin zamanını alır. �
 1. **Başvuruları yalnızca kesin gerekliliklere göre eleyin:** çalışma hakkı, konum, olmazsa olmaz deneyim.
 2. **Teknoloji yığınınız için kavramlar, teori ve kod okuma üzerine kısa bir bilgi elemesi yapın.**
 3. **Ekibinizin çalışma şekline uyan bir biçimde uygulamalı bir alıştırma yapın:** yapay zekâ destekli eşli çalışma, kod incelemesi veya hata ayıklama; uzaktan ya da yüz yüze.
-4. **Kıdemli roller için sistem tasarımı ekleyin.**
+4. **Kıdemli pozisyonlar için sistem tasarımı ekleyin.**
 5. **Belirlenmiş sorular ve bir puanlama ölçütüyle yapılandırılmış bir mülakat yapın;** adayın yapay zekâ araçlarını nasıl kullandığı ve çıktılarını nasıl kontrol ettiği de dahil.
 6. **Kararı insanlar versin;** her sonuç girdilerden yalnızca biri olsun.
 
@@ -73,9 +73,9 @@ prepza 2. adım için çok uygundur. İş tanımınızı süreli, çoktan seçme
 - **İş tanımından kavramlar ve teori:** veritabanları, API'ler, mimari, bir framework'ün davranışı, güvenlik uygulamaları.
 - **Kod okuma soruları:** kısa bir kod parçası ve bunun ne yazdırdığı veya döndürdüğü, ne yaptığı, neden hata verdiği ya da hangi değişikliğin sorunu düzelttiği üzerine sorular. Bu, yapay zekâ destekli işin dayandığı inceleme becerisinin ta kendisidir.
 - **Her soruda bir zamanlayıcı:** her sorunun sunucu tarafından uygulanan kendi geri sayımı vardır ve her aday kendine ait rastgele bir soru seti alır. Bu, yanıtları araştırmayı, bir yapay zekâ asistanına sormak da dahil, zorlaştırır. İmkânsız kılmaz.
-- **Güvenilirlik sinyalleri:** puan kartları, soruyu okumaya yetmeyecek kadar hızlı verilen yanıtları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler. İşaret, daha yakından bakmak için bir nedendir, kopya çekildiğinin kanıtı değildir.
+- **Güvenilirlik sinyalleri:** değerlendirme kartları, soruyu okumaya yetmeyecek kadar hızlı verilen yanıtları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler. İşaret, daha yakından bakmak için bir nedendir, kopya çekildiğinin kanıtı değildir.
 
-prepza'nın yapmadıkları: adaylar prepza'da kod yazmaz, çalıştırmaz veya hata ayıklamaz ve prepza onların bir yapay zekâ asistanını kullanmasını izlemez. Bunun yeri, şirket içinde veya bir geliştirici platformunda yürütülen ve bilgi elemesini tamamlayan uygulamalı aşamadır. Başlangıç için hazır testler için [role göre beceri testleri](/tests) sayfasına, prepza'nın yapay zekâyı nasıl kullandığı ve neyi insanlara bıraktığı için [Yapay zekâ mülakatları](/ai-interviews) sayfasına bakın.
+prepza'nın yapmadıkları: adaylar prepza'da kod yazmaz, çalıştırmaz veya hata ayıklamaz ve prepza onların bir yapay zekâ asistanını kullanmasını izlemez. Bunun yeri, şirket içinde veya bir geliştirici platformunda yürütülen ve bilgi elemesini tamamlayan uygulamalı aşamadır. Başlangıç için hazır testler için [pozisyona göre beceri testleri](/tests) sayfasına, prepza'nın yapay zekâyı nasıl kullandığı ve neyi insanlara bıraktığı için [Yapay zekâ mülakatları](/ai-interviews) sayfasına bakın.
 
 ## Adillik ve aday deneyimi
 
@@ -103,6 +103,6 @@ Yapay zekâ asistanları kod üretmeyi ucuzlattı, kodu değerlendirmeyi ise dah
 ## İlgili yazılar
 
 - [Mühendis işe alımı nasıl yapılır](/guides/hiring-engineers)
-- [Role göre beceri testleri](/tests)
+- [Pozisyona göre beceri testleri](/tests)
 - [Yapay zekâ mülakatları: nedir ve adil şekilde nasıl kullanılır](/ai-interviews)
 - [Beceri testleri ve CV taraması](/guides/skills-tests-vs-cv-screening)

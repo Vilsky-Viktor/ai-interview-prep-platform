@@ -15,9 +15,9 @@ Trang này không liệt kê giá của các nhà cung cấp khác, vì giá tha
 
 | Mô hình | Cách hoạt động | Phù hợp khi | Ví dụ (xem từng trang bảng giá) |
 | --- | --- | --- | --- |
-| **Gói miễn phí** | Một số lượng tín dụng hoặc bài kiểm tra giới hạn mỗi tháng | Bạn kiểm tra rất ít ứng viên và các bài kiểm tra có sẵn phù hợp với vị trí | [TestGorilla](https://www.testgorilla.com/pricing/) |
-| **Gói đăng ký** | Phí hằng tháng, thường thanh toán theo năm, kèm tín dụng hoặc giới hạn | Bạn tuyển dụng đều đặn quanh năm | [TestGorilla](https://www.testgorilla.com/pricing/), [CodeSignal](https://codesignal.com/pricing/), [Bryq](https://www.bryq.com/pricing), [Alooba](https://www.alooba.com/pricing/), [Codility](https://www.codility.com/pricing/) |
-| **Trả tiền theo ứng viên** | Bạn chỉ trả cho ứng viên làm bài, thường từ tín dụng trả trước | Bạn tuyển dụng không thường xuyên, hoặc số lượng biến động | [prepza](/pricing) |
+| **Gói miễn phí** | Một số lượng credit hoặc bài kiểm tra giới hạn mỗi tháng | Bạn kiểm tra rất ít ứng viên và các bài kiểm tra có sẵn phù hợp với vị trí | [TestGorilla](https://www.testgorilla.com/pricing/) |
+| **Gói đăng ký** | Phí hằng tháng, thường thanh toán theo năm, kèm credit hoặc giới hạn | Bạn tuyển dụng đều đặn quanh năm | [TestGorilla](https://www.testgorilla.com/pricing/), [CodeSignal](https://codesignal.com/pricing/), [Bryq](https://www.bryq.com/pricing), [Alooba](https://www.alooba.com/pricing/), [Codility](https://www.codility.com/pricing/) |
+| **Trả tiền theo ứng viên** | Bạn chỉ trả cho ứng viên làm bài, thường từ credit trả trước | Bạn tuyển dụng không thường xuyên, hoặc số lượng biến động | [prepza](/pricing) |
 | **Báo giá riêng** | Giá thỏa thuận với bộ phận kinh doanh, thường theo năm | Bạn tuyển dụng quy mô lớn hoặc cần trắc nghiệm tâm lý đã được kiểm định | Một số nhà cung cấp, thường là chuyên gia trắc nghiệm tâm lý |
 
 *Các mô hình giá theo trang của từng nhà cung cấp vào tháng 10/2026.*
@@ -28,14 +28,14 @@ Bạn cần ba con số: số ứng viên bạn kiểm tra trong một năm, gi�
 
 1. **Đếm số ứng viên.** Số vị trí bạn tuyển trong một năm × số ứng viên bạn sẽ kiểm tra cho mỗi vị trí. Hãy thực tế: chỉ đếm những người thực sự sẽ làm bài.
 2. **Trả tiền theo ứng viên:** số ứng viên × giá mỗi ứng viên. Trừ đi các ứng viên miễn phí.
-3. **Gói đăng ký:** giá hằng tháng × 12, hoặc giá theo năm. Kiểm tra tín dụng của gói đủ cho bao nhiêu ứng viên; nếu bạn sẽ vượt mức, hãy tính giá của gói cao hơn.
+3. **Gói đăng ký:** giá hằng tháng × 12, hoặc giá theo năm. Kiểm tra credit của gói đủ cho bao nhiêu ứng viên; nếu bạn sẽ vượt mức, hãy tính giá của gói cao hơn.
 4. **Tìm điểm hòa vốn:** chi phí một năm của gói ÷ giá mỗi ứng viên. Dưới số ứng viên đó mỗi năm, trả theo ứng viên rẻ hơn. Trên mức đó, gói đăng ký rẻ hơn.
 
 **Ví dụ minh họa, với số liệu giả định.** Giả sử một gói có giá $1,500 một năm và một lựa chọn trả theo ứng viên có giá $3 mỗi ứng viên. Điểm hòa vốn là 1,500 ÷ 3 = 500 ứng viên một năm. Một nhóm kiểm tra 60 ứng viên mỗi năm sẽ trả $180 phí theo ứng viên thay vì $1,500 cho gói. Một nhóm kiểm tra 600 ứng viên sẽ trả $1,800 phí theo ứng viên, và gói đăng ký sẽ rẻ hơn. Hãy dùng số liệu thật từ các trang bảng giá bạn đang so sánh.
 
 ### Giá của prepza để bạn ước tính
 
-prepza tính phí cho mỗi ứng viên trả lời ít nhất một câu hỏi. Giá mỗi ứng viên phụ thuộc vào mức nạp tiền: $3 với các mức nạp nhỏ hơn, $2 từ mức nạp $250 và $1 từ mức nạp $1,000. 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí. Giá tính bằng đô la Mỹ; Paddle, đơn vị xử lý thanh toán, xử lý VAT và thuế bán hàng khi thanh toán. Xem [bảng giá](/pricing) để biết các mức nạp hiện tại.
+prepza tính phí cho mỗi ứng viên trả lời ít nhất một câu hỏi. Giá mỗi ứng viên phụ thuộc vào mức nạp: $3 với các mức nạp nhỏ hơn, $2 từ mức nạp $250 và $1 từ mức nạp $1,000. 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí. Giá tính bằng đô la Mỹ; Paddle, đơn vị xử lý thanh toán, xử lý VAT và thuế bán hàng khi thanh toán. Xem [bảng giá](/pricing) để biết các mức nạp hiện tại.
 
 ## Chi phí ngoài giá niêm yết
 
@@ -43,8 +43,8 @@ Khi so sánh, hãy kiểm tra cả những điều sau:
 
 - **Cam kết theo năm.** Một gói "thanh toán theo năm" nghĩa là trả trước 12 tháng, kể cả khi bạn chỉ tuyển dụng trong hai tháng.
 - **Số người dùng.** Một số gói giới hạn số người trong nhóm bạn được sử dụng. prepza không tính phí theo người dùng: chủ sở hữu, quản trị viên và người xem đều miễn phí.
-- **Ứng viên không bao giờ bắt đầu.** prepza chỉ tính phí cho ứng viên trả lời ít nhất một câu hỏi; tín dụng của lời mời không được dùng sẽ được hoàn lại.
-- **Tín dụng hết hạn.** Tín dụng của prepza không hết hạn. Hãy kiểm tra tín dụng của các nhà cung cấp khác có được chuyển sang kỳ sau không.
+- **Ứng viên không bao giờ bắt đầu.** prepza chỉ tính phí cho ứng viên trả lời ít nhất một câu hỏi; credit của lời mời không được dùng sẽ được hoàn lại.
+- **Credit hết hạn.** Credit của prepza không hết hạn. Hãy kiểm tra credit của các nhà cung cấp khác có được chuyển sang kỳ sau không.
 - **Thuế.** Kiểm tra giá niêm yết đã gồm VAT hoặc thuế bán hàng chưa.
 - **Tính năng ở gói cao hơn.** Tích hợp ATS, giám sát thi (proctoring) và bài lập trình tùy chỉnh thường nằm ở các gói đắt hơn. Hãy kiểm tra bạn thực sự cần gói nào.
 - **Nhiều hơn một công cụ.** Nếu bạn cần cả bài kiểm tra kiến thức lẫn bài trắc nghiệm tâm lý hoặc bài lập trình, hãy cộng cả hai.

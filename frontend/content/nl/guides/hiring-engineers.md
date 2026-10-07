@@ -19,7 +19,7 @@ Deze gids loopt dat proces stap voor stap door. Hij steunt op onderzoek naar per
 | 2. Cv- of sollicitatiescreening | Alleen harde eisen | Recruiter of hiring manager |
 | 3. Kennistest | Wat de kandidaat weet van je stack | De kandidaat; jij leest de resultaten |
 | 4. Thuisopdracht of live coding | Of ze werkende code kunnen schrijven | Eén of twee developers |
-| 5. System design (seniorrollen) | Hoe ze over grotere systemen nadenken | Een senior developer |
+| 5. System design (seniorfuncties) | Hoe ze over grotere systemen nadenken | Een senior developer |
 | 6. Gestructureerd competentiegericht interview | Hoe ze met anderen samenwerken | Hiring manager, een collega |
 | 7. Referentiecheck | Bevestigen wat je hebt gehoord | Hiring manager |
 | 8. Besluit en aanbod | Een eerlijk, vastgelegd besluit | Het selectieteam |
@@ -72,7 +72,7 @@ Een goede kennistest is:
 - **Kort:** een paar onderwerpen met elk ongeveer 10 vragen, zodat sterke kandidaten met andere aanbiedingen hem toch afmaken.
 - **Voor iedereen gelijk:** dezelfde onderwerpen, hetzelfde aantal vragen en dezelfde tijdslimieten.
 
-Hier past prepza. Het maakt van je functieomschrijving een getimed meerkeuze-kennisgesprek. Je bekijkt de voorgestelde onderwerpen voordat er ook maar één vraag wordt geschreven, zodat de test je stack dekt en niets anders. Voor een technische functie kan dat omvatten:
+Hier past prepza. Het maakt van je functieomschrijving een getimede meerkeuze-kennistest. Je bekijkt de voorgestelde onderwerpen voordat er ook maar één vraag wordt geschreven, zodat de test je stack dekt en niets anders. Voor een technische functie kan dat omvatten:
 
 - **Vragen over code lezen:** een kort stuk code met vragen over wat het print of teruggeeft, wat het doet, waarom het faalt of welke wijziging het oplost.
 - **SQL:** een kleine tabel en een query, met de vraag welke rijen terugkomen.
@@ -93,11 +93,11 @@ Twee gangbare vormen:
 
 Beoordeel in beide gevallen op vooraf afgesproken criteria: correctheid, leesbaarheid, tests, hoe ze met randgevallen omgaan. Omdat de kennistest de groep al heeft gefilterd, doe je deze stap met een handvol mensen in plaats van met iedereen.
 
-## Stap 5: system design voor seniorrollen
+## Stap 5: system design voor seniorfuncties
 
 Voeg voor senior developers een ontwerpgesprek toe: "Hoe zou je een service bouwen die X doet?" Let op hoe ze eisen verhelderen, kiezen tussen afwegingen en zwakke plekken zien. Er is zelden één juist antwoord, dus een beoordelingsschaal is onmisbaar. Schrijf vóór het eerste gesprek op hoe een zwak, degelijk en sterk antwoord eruitziet.
 
-Sla dit over voor juniorrollen, waar het vooral zelfvertrouwen meet in plaats van vaardigheid.
+Sla dit over voor juniorfuncties, waar het vooral zelfvertrouwen meet in plaats van vaardigheid.
 
 ## Stap 6: gestructureerde competentiegerichte interviews met beoordelingsschalen
 

@@ -1,13 +1,13 @@
 ---
-title: "Cara membandingkan biaya tes pra-kerja"
-seoTitle: "Tes Pra-Kerja Termurah? Cara Membandingkan Biayanya"
+title: "Cara membandingkan biaya tes seleksi karyawan"
+seoTitle: "Tes Seleksi Karyawan Termurah? Cara Membandingkan Biayanya"
 description: "Paket gratis, langganan, bayar per kandidat, dan penawaran khusus: cara kerja tiap model harga dan cara memperkirakan biaya tes seleksi karyawanmu."
 updated: "2026-10-07"
 ---
 
-# Cara membandingkan biaya tes pra-kerja
+# Cara membandingkan biaya tes seleksi karyawan
 
-Tes pra-kerja mana yang paling murah bergantung pada satu angka: berapa banyak kandidat yang kamu tes dalam setahun. Paket bulanan yang terlihat murah bisa lebih mahal per kandidat dibanding opsi bayar sesuai pemakaian kalau kamu hanya merekrut beberapa kali setahun. Harga per kandidat yang terlihat tinggi bisa lebih murah pada volume rendah.
+Tes seleksi karyawan mana yang paling murah bergantung pada satu angka: berapa banyak kandidat yang kamu tes dalam setahun. Paket bulanan yang terlihat murah bisa lebih mahal per kandidat dibanding opsi bayar sesuai pemakaian kalau kamu hanya merekrut beberapa kali setahun. Harga per kandidat yang terlihat tinggi bisa lebih murah pada volume rendah.
 
 Halaman ini tidak mencantumkan harga vendor lain, karena harga itu sering berubah. Halaman ini menjelaskan model-model harga, menunjukkan cara memperkirakan biayamu sendiri dari halaman harga vendor mana pun, dan mencantumkan apa saja yang tidak termasuk dalam harga. Alat-alat ini juga menguji hal yang berbeda, dan sebagian tim memakai lebih dari satu, jadi biaya hanya salah satu bagian dari keputusan.
 
@@ -15,7 +15,7 @@ Halaman ini tidak mencantumkan harga vendor lain, karena harga itu sering beruba
 
 | Model | Cara kerjanya | Cocok saat | Contoh (lihat tiap halaman harga) |
 | --- | --- | --- | --- |
-| **Paket gratis** | Jumlah kredit atau tes yang terbatas setiap bulan | Kamu menguji sangat sedikit kandidat dan tes yang tersedia sesuai dengan peranmu | [TestGorilla](https://www.testgorilla.com/pricing/) |
+| **Paket gratis** | Jumlah kredit atau tes yang terbatas setiap bulan | Kamu menguji sangat sedikit kandidat dan tes yang tersedia sesuai dengan posisimu | [TestGorilla](https://www.testgorilla.com/pricing/) |
 | **Langganan** | Biaya bulanan, sering ditagih tahunan, dengan kredit atau batasan | Kamu merekrut secara rutin sepanjang tahun | [TestGorilla](https://www.testgorilla.com/pricing/), [CodeSignal](https://codesignal.com/pricing/), [Bryq](https://www.bryq.com/pricing), [Alooba](https://www.alooba.com/pricing/), [Codility](https://www.codility.com/pricing/) |
 | **Bayar per kandidat** | Kamu hanya membayar untuk kandidat yang mengikuti tes, biasanya dari kredit prabayar | Kamu merekrut sesekali, atau volumenya naik turun | [prepza](/pricing) |
 | **Penawaran khusus** | Harga yang disepakati dengan tim sales, sering untuk satu tahun | Kamu merekrut dalam skala besar atau butuh psikometri yang tervalidasi | Beberapa vendor, sering kali spesialis psikometri |
@@ -26,7 +26,7 @@ Halaman ini tidak mencantumkan harga vendor lain, karena harga itu sering beruba
 
 Kamu butuh tiga angka: berapa banyak kandidat yang kamu tes dalam setahun, harga per kandidat pada opsi bayar per kandidat, dan biaya tahunan sebuah paket.
 
-1. **Hitung kandidatmu.** Jumlah peran yang kamu rekrut dalam setahun × jumlah pelamar yang akan kamu tes per peran. Bersikaplah realistis: hitung orang yang benar-benar akan mengikuti tes.
+1. **Hitung kandidatmu.** Jumlah posisi yang kamu rekrut dalam setahun × jumlah pelamar yang akan kamu tes per posisi. Bersikaplah realistis: hitung orang yang benar-benar akan mengikuti tes.
 2. **Bayar per kandidat:** jumlah kandidat × harga per kandidat. Kurangi kandidat gratis kalau ada.
 3. **Langganan:** harga bulanan × 12, atau harga tahunan. Periksa berapa banyak kandidat yang ditanggung kreditnya; kalau kamu akan melebihinya, hitung harga paket satu tingkat di atasnya.
 4. **Temukan titik impasmu (break-even):** biaya tahunan paket ÷ harga per kandidat. Di bawah jumlah kandidat per tahun itu, bayar per kandidat lebih murah. Di atasnya, paket yang lebih murah.
@@ -63,7 +63,7 @@ Lihat [alternatif TestGorilla](/compare/testgorilla-alternatives) dan [alternati
 ## Apa yang didapat setiap kandidat prepza
 
 - Wawancara pilihan ganda berbatas waktu yang ditulis dari deskripsi pekerjaanmu, dengan topik yang kamu tinjau lebih dulu.
-- Set soal acak untuk setiap kandidat, dengan hitung mundur di setiap soal. Untuk peran teknis, soal bisa berisi contoh kode singkat.
+- Set soal acak untuk setiap kandidat, dengan hitung mundur di setiap soal. Untuk posisi teknis, soal bisa berisi contoh kode singkat.
 - Scorecard dengan jawaban dan waktunya, serta tanda untuk jawaban yang terlalu cepat, meninggalkan halaman, dan percobaan menyalin.
 - Laporan PDF untuk satu kandidat atau seluruh daftar.
 - Undangan lewat email, lewat daftar atau file, atau dengan satu tautan di lowongan kerjamu, plus pengingat otomatis.
@@ -73,6 +73,6 @@ Lihat [alternatif TestGorilla](/compare/testgorilla-alternatives) dan [alternati
 
 ## Halaman terkait
 
-- [Tes pra-kerja tanpa langganan](/compare/pre-employment-tests-without-subscription)
+- [Tes seleksi karyawan tanpa langganan](/compare/pre-employment-tests-without-subscription)
 - [prepza dan TestGorilla](/compare/testgorilla)
-- [Panduan tes pra-kerja](/pre-employment-testing)
+- [Panduan tes seleksi karyawan](/pre-employment-testing)

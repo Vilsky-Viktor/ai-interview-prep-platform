@@ -2,7 +2,7 @@
   "settings": {
     "title": "설정",
     "language": "언어",
-    "languageNote": "인터페이스와 튜터 답변, 그리고 새 키트와 면접의 기본 언어에 사용됩니다. 키트와 면접은 지원되는 어떤 언어로도 만들 수 있습니다.",
+    "languageNote": "화면과 도움말 채팅의 답변, 새 면접의 기본 언어에 사용됩니다. 면접은 지원되는 모든 언어로 만들 수 있습니다.",
     "languageFailed": "언어를 변경하지 못했습니다. 다시 시도해 주세요.",
     "yourData": "내 데이터",
     "yourDataNote": "prepza.가 보관하는 내 데이터를 모두 다운로드하거나 계정을 삭제할 수 있습니다.",
@@ -130,7 +130,7 @@
     "description": "직무 설명",
     "create": "생성",
     "createFailed": "템플릿을 시작하지 못했습니다. 다시 시도해 주세요.",
-    "text": "직무별 기성 면접. 회사와 인재를 위한 것입니다.",
+    "text": "직무별 기성 면접. 회사와 구직자를 위한 것입니다.",
     "deleteLabel": "{title} 삭제",
     "deleteTitle": "이 템플릿을 삭제할까요?",
     "deleteText": "주제와 문제가 삭제됩니다. 회사가 이미 이 템플릿으로 만든 면접은 유지됩니다.",
@@ -146,12 +146,12 @@
       "interviews": "면접",
       "invited": "초대",
       "finished": "완료",
-      "practice": "연습 라운드",
+      "practice": "연습 횟수",
       "top_ups": "충전",
       "paid": "결제액",
       "credits_spent": "사용한 크레딧"
     },
-    "noPassRates": "아직 응시를 마친 후보자가 있는 면접이 없습니다.",
+    "noPassRates": "아직 응시를 마친 지원자가 있는 면접이 없습니다.",
     "outsideTriggers": "비정상적인 합격률",
     "finished": "{count, plural, other {완료 #명}}",
     "passed": "합격 {percent}%",
@@ -163,11 +163,11 @@
       "finished": "완료 많은 순"
     },
     "pauseTitle": "긴급 일시 중지",
-    "pauseText": "켜져 있는 동안에는 누구도 새 면접, 연습 라운드, 미리보기를 시작할 수 없으며 질문 생성, 재생성, 검토도 이루어지지 않습니다. 이미 면접 중인 후보자는 끝까지 마칠 수 있습니다.",
+    "pauseText": "켜져 있는 동안에는 누구도 새 면접, 연습, 미리보기를 시작할 수 없으며 문제 생성, 재생성, 검토도 이루어지지 않습니다. 이미 면접 중인 지원자는 끝까지 마칠 수 있습니다.",
     "pauseFailed": "일시 중지를 변경하지 못했습니다. 다시 시도해 주세요.",
     "maintenanceTitle": "점검 모드",
     "maintenanceText": "켜져 있는 동안 모든 페이지에 prepza가 점검 중이라고 표시되고, 슈퍼 관리자를 제외한 모든 요청이 거부됩니다. 결제, 이메일, 예약된 작업은 계속 작동합니다.",
-    "maintenanceFailed": "점검 모드를 변경하지 못했습니다. 다시 시도하세요.",
+    "maintenanceFailed": "점검 모드를 변경하지 못했습니다. 다시 시도해 주세요.",
     "maintenanceConfirmTitle": "점검 모드를 켤까요?",
     "maintenanceRunning": "{count, plural, =0 {지금 면접 중인 지원자가 없습니다.} other {지금 면접 중인 지원자: #명. 시간을 잃을 수 있습니다.}}",
     "maintenanceRunningUnknown": "지금 면접 중인 지원자 수를 세지 못했습니다. 면접 중인 지원자는 시간을 잃을 수 있습니다.",
@@ -219,7 +219,7 @@
   },
   "deleteAccount": {
     "title": "계정을 삭제할까요?",
-    "everything": "모든 것이 삭제됩니다: 각 회사 팀에서의 자리, 지원자로 응시한 면접 결과, 연습 라운드와 알림.",
+    "everything": "모든 것이 삭제됩니다: 각 회사 팀의 멤버 자격, 지원자로 응시한 면접 결과, 연습 기록과 알림.",
     "company": "혼자 소유한 회사는 면접과 함께 삭제됩니다. 이 작업은 되돌릴 수 없습니다.",
     "confirm": "계정 삭제",
     "deleted": "계정이 삭제되었습니다.",
@@ -307,11 +307,11 @@
     "unscored": "답하지 않은 {count, plural, other {#문제}}는 채점되지 않습니다.",
     "section": "섹션 {number}/{count}",
     "missing": "이 세션은 존재하지 않습니다.",
-    "done": "면접을 마쳤습니다. 행운을 빕니다!",
+    "done": "면접을 마쳤습니다. 좋은 결과 있기를 바랍니다!",
     "title": "면접"
   },
   "generation": {
-    "title": "새 준비 키트",
+    "title": "새 면접",
     "interviews": "면접",
     "cancel": "생성 취소",
     "cancelTitle": "이 생성을 취소할까요?",
@@ -362,7 +362,7 @@
     "admin": "관리자",
     "viewer": "뷰어",
     "adminNote": "면접을 만들고 변경하며, 지원자를 초대하고, 충전합니다.",
-    "viewerNote": "면접과 결과를 보고 보고서를 공유합니다. 아무것도 변경하지 않습니다."
+    "viewerNote": "면접과 결과를 보고 보고서를 공유합니다. 변경 권한은 없습니다."
   },
   "company": {
     "title": "회사",
@@ -372,7 +372,7 @@
     "interviews": "면접",
     "templates": "템플릿",
     "team": "팀",
-    "referrals": "초대",
+    "referrals": "추천",
     "new": "새 회사",
     "name": "회사 이름",
     "create": "만들기",
@@ -397,7 +397,7 @@
     "pickText": "테스트가 선택한 회사에 무료로 복사되며, 바로 지원자에게 보낼 수 있습니다."
   },
   "candidates": {
-    "scorecard": "결과",
+    "scorecard": "평가표",
     "interview": "면접",
     "deleted": "삭제된 지원자",
     "deletedText": "지원자가 계정을 삭제하여 결과도 함께 삭제되었습니다.",
@@ -412,7 +412,7 @@
     "status": "상태: {status}",
     "anyStatus": "모든 상태",
     "progress": "진행률",
-    "grade": "등급",
+    "grade": "점수",
     "resend": "초대 다시 보내기",
     "resent": "{email}(으)로 초대를 다시 보냈습니다",
     "resendFailed": "초대를 다시 보내지 못했습니다.",
@@ -478,8 +478,8 @@
     "addMember": "멤버 추가",
     "memberFailed": "초대하지 못했습니다. 다시 시도해 주세요.",
     "invite": "초대",
-    "jobDescription": "직무 설명",
-    "pasteJob": "직무 설명을 붙여넣으세요: 역할, 자격 요건, 우대 사항…",
+    "jobDescription": "채용 공고",
+    "pasteJob": "채용 공고를 붙여 넣으세요: 담당 업무, 자격 요건, 우대 사항…",
     "generate": "면접 만들기",
     "startFailed": "면접을 시작하지 못했습니다. 다시 시도해 주세요.",
     "candidateEmails": "지원자 이메일",
@@ -548,9 +548,9 @@
     "perCandidate": "지원자당 ${dollars, number}",
     "welcome": "처음 {count, plural, other {지원자 #명}}",
     "credits": "$1 = 100 크레딧, 크레딧은 만료되지 않습니다.",
-    "referrals": "초대",
-    "referralsNote": "회사의 초대 탭에서 회사 링크를 공유하세요.",
-    "companyReferral": "초대한 회사가 첫 충전을 하면",
+    "referrals": "추천",
+    "referralsNote": "회사의 추천 탭에서 회사 링크를 공유하세요.",
+    "companyReferral": "추천한 회사가 첫 충전을 하면",
     "each": "각각 {count, number} 크레딧",
     "topUp": "충전"
   },
@@ -658,7 +658,7 @@
         },
         "price": {
           "title": "구독 없음",
-          "text": "테스트를 본 지원자만큼 결제합니다. 처음 지원자는 무료입니다."
+          "text": "테스트를 본 지원자 수만큼만 결제합니다. 처음 지원자는 무료입니다."
         },
         "results": {
           "title": "바로 활용하는 결과",
@@ -743,7 +743,7 @@
         "own": "지원자마다 다른 문제",
         "timed": "문제마다 카운트다운",
         "flags": "서두름, 이탈, 복사 표시",
-        "answers": "답변과 소요 시간이 담긴 스코어카드"
+        "answers": "답변과 소요 시간이 담긴 평가표"
       },
       "candidate": "지원자",
       "score": "점수",
@@ -794,8 +794,8 @@
       "see": "문서",
       "points": {
         "decision": "요청하면 사람이 어떤 결과든 검토합니다",
-        "key": "모든 답변은 정답 키에 따라 채점되며, 키가 수정되면 지난 결과도 다시 채점됩니다",
-        "training": "귀하의 데이터는 AI 모델 학습에 사용되지 않습니다",
+        "key": "모든 답변은 정답과 대조해 채점되며, 정답이 수정되면 지난 결과도 다시 채점됩니다",
+        "training": "데이터는 AI 모델 학습에 사용되지 않습니다",
         "time": "요청하는 누구에게나 추가 시간",
         "notice": "지원자는 시작 전에 무엇을 할지 알 수 있습니다",
         "own": "지원자는 자신의 데이터를 내려받거나 삭제할 수 있습니다",
@@ -891,11 +891,11 @@
     "start": "연습 시작",
     "again": "다시 연습",
     "continue": "계속",
-    "history": "내 라운드",
+    "history": "내 연습 기록",
     "results": "연습 결과",
     "grade": "문제 정답",
     "notFinished": "완료되지 않음",
-    "noRounds": "아직 라운드가 없습니다.",
+    "noRounds": "아직 연습 기록이 없습니다.",
     "startFailed": "연습을 시작하지 못했습니다. 다시 시도해 주세요.",
     "gradeLabel": "점수",
     "questions": "{count, plural, other {#문제}}",

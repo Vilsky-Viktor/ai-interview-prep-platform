@@ -78,7 +78,7 @@ Aquí es donde encaja prepza. Convierte tu descripción del puesto en una entrev
 - **SQL:** una tabla pequeña y una consulta, con la pregunta de qué filas devuelve.
 - **Conocimientos de arquitectura y frameworks:** compromisos de diseño, cómo se comporta un framework, qué falla bajo carga.
 
-Cada candidato recibe su propio conjunto aleatorio de preguntas con una cuenta atrás en cada una. Ves una ficha de resultados con cada respuesta y cuánto tardó, además de avisos de respuestas demasiado rápidas, salidas de la página e intentos de copiar. Un aviso es un motivo para mirar con más atención, no una prueba de nada.
+Cada candidato recibe su propio conjunto aleatorio de preguntas con una cuenta atrás en cada una. Ves una ficha de evaluación con cada respuesta y cuánto tardó, además de alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar. Una alerta es un motivo para mirar con más atención, no una prueba de nada.
 
 Lo que prepza no hace: los candidatos no escriben, ejecutan ni depuran código en prepza. Leer código y escribirlo son habilidades distintas, así que el siguiente paso sigue siendo importante. Consulta las [pruebas de habilidades por puesto](/tests) para empezar desde pruebas ya preparadas.
 

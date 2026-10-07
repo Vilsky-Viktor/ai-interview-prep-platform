@@ -78,9 +78,9 @@ Non tutti finiranno il primo giorno. Va bene così: esamina chi ha finito e rigu
 
 Ora inizia la lettura attenta, ma su un gruppo più piccolo e già in classifica.
 
-1. **Ordina per voto,** dal migliore. È l'impostazione predefinita.
+1. **Ordina per punteggio,** dal migliore. È l'impostazione predefinita.
 2. **Apri ogni scheda di valutazione** del gruppo di testa. Guarda le risposte, non solo il numero: quali argomenti erano forti, quali deboli, quanto tempo ha richiesto ogni risposta.
-3. **Controlla le segnalazioni di integrità.** prepza segnala le risposte troppo rapide per aver letto la domanda, le volte in cui il candidato ha lasciato la pagina e i tentativi di copia. Una segnalazione è un motivo per guardare meglio, non la prova di un imbroglio. Chi ha lasciato la pagina una volta potrebbe aver ricevuto una notifica.
+3. **Controlla le segnalazioni di comportamenti sospetti.** prepza segnala le risposte troppo rapide per aver letto la domanda, le volte in cui il candidato ha lasciato la pagina e i tentativi di copia. Una segnalazione è un motivo per guardare meglio, non la prova di un imbroglio. Chi ha lasciato la pagina una volta potrebbe aver ricevuto una notifica.
 4. **Guarda appena sotto la soglia di superamento.** I punteggi ottenuti con set di domande casuali diversi non sono esattamente confrontabili, quindi qualche punto può dipendere dall'estrazione. Qualcuno al 65% con risposte forti negli argomenti più importanti può valere un colloquio.
 5. **Ora leggi i CV** delle persone che stai considerando. Leggi con attenzione 15 CV invece di scorrerne 100.
 

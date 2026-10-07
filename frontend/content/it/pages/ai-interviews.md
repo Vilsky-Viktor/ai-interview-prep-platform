@@ -17,7 +17,7 @@ Questa pagina mette ordine tra i principali tipi di strumenti di colloquio con I
 | --- | --- | --- | --- |
 | Chatbot o intervistatore vocale | Pone domande, approfondisce e spesso assegna un punteggio alla conversazione | Parla o scrive le risposte con parole proprie | Come vengono valutate le risposte libere? Puoi vedere perché qualcuno ha ottenuto quel punteggio? |
 | Analisi dei videocolloqui | Registra il candidato e può valutare il parlato, le parole scelte o il modo di esprimersi | Risponde davanti alla telecamera | Cosa viene analizzato esattamente? Viene dedotto qualcosa dal volto, dalla voce o dalle emozioni? |
-| Test generati | Scrive le domande (e spesso le chiavi di risposta) a partire da una descrizione del ruolo | Risponde alle domande in condizioni stabilite | Chi controlla le domande? Come si stabilisce se una risposta è giusta o sbagliata? |
+| Test generati | Scrive le domande (e spesso le chiavi di correzione) a partire da una descrizione del ruolo | Risponde alle domande in condizioni stabilite | Chi controlla le domande? Come si stabilisce se una risposta è giusta o sbagliata? |
 
 ### Chatbot e intervistatori vocali
 
@@ -39,7 +39,7 @@ prepza usa l'IA per scrivere un colloquio sulle competenze a partire dalla tua d
 2. **Tu rivedi gli argomenti.** Mantienili, deselezionali, rinominali o modificali, oppure scrivi all'IA in linguaggio semplice cosa cambiare. Nessuna domanda viene scritta finché non approvi.
 3. **L'IA scrive le domande.** Ogni argomento riceve una serie di domande a scelta multipla, ognuna con una sola opzione corretta e tre sbagliate ma plausibili. Per gli argomenti tecnici, molte domande mostrano un breve esempio di codice e chiedono cosa stampa, cosa fa, perché fallisce o quale modifica lo corregge. Puoi aprire ogni domanda e le sue opzioni e rigenerare quelle che non ti convincono.
 4. **I candidati rispondono a domande a tempo.** Ogni candidato riceve un proprio set casuale dalla serie di domande di ciascun argomento, in un ordine tutto suo, con un conto alla rovescia su ogni domanda.
-5. **Le risposte vengono corrette in base a una chiave di risposta.** L'IA scrive e controlla le chiavi; la correzione in sé segue regole fisse, e nessuna IA legge o giudica la risposta di un candidato. Se una chiave viene corretta in seguito, le risposte già date vengono ricalcolate. Velocità, uscite dalla pagina e tentativi di copia ti vengono mostrati come segnali; non cambiano il punteggio.
+5. **Le risposte vengono corrette in base a una chiave di correzione.** L'IA scrive e controlla le chiavi; la correzione in sé segue regole fisse, e nessuna IA legge o giudica la risposta di un candidato. Se una chiave viene corretta in seguito, le risposte già date vengono ricalcolate. Velocità, uscite dalla pagina e tentativi di copia ti vengono mostrati come segnali; non cambiano il punteggio.
 6. **Decidono le persone.** Vedi una classifica e una scheda di valutazione per ogni candidato, con ogni risposta e il relativo tempo. Una persona della tua azienda esamina i risultati e prende la decisione di assunzione.
 
 Cosa prepza non fa:
@@ -51,7 +51,7 @@ Cosa prepza non fa:
 
 ### Le domande migliorano nel tempo
 
-Le domande scritte dall'IA possono essere sbagliate o poco chiare, soprattutto in un colloquio nuovo. prepza tiene d'occhio questo aspetto: risposte, valutazioni e segnalazioni dei candidati evidenziano le domande deboli, e un verificatore IA le corregge o le sostituisce. Se trovi una domanda con una chiave di risposta sbagliata, segnalala e passa subito al verificatore.
+Le domande scritte dall'IA possono essere sbagliate o poco chiare, soprattutto in un colloquio nuovo. prepza tiene d'occhio questo aspetto: risposte, valutazioni e segnalazioni dei candidati evidenziano le domande deboli, e un verificatore IA le corregge o le sostituisce. Se trovi una domanda con una chiave di correzione sbagliata, segnalala e passa subito al verificatore.
 
 Puoi anche provare il tuo colloquio come candidato prima di invitare qualcuno: le stesse domande a tempo, gratis e senza che finiscano nei tuoi risultati.
 
@@ -65,13 +65,13 @@ Puoi anche provare il tuo colloquio come candidato prima di invitare qualcuno: l
 
 **Meno segnali irrilevanti.** Una risposta a scelta multipla non porta con sé un accento, un volto, uno sfondo o uno stile di scrittura, quindi il punteggio non dipende da come qualcuno appare o suona. Questo non esclude i bias: i test di conoscenza possono mostrare differenze di punteggio tra gruppi, e un test nella seconda lingua di un candidato può penalizzarlo. Monitora i risultati tra i gruppi.
 
-**Condividere le risposte è più difficile.** Con un set di domande casuale per ogni candidato e un timer su ogni domanda, condividere le risposte o cercarle richiede più impegno. I segnali di integrità ti aiutano a capire dove guardare meglio; non sono una prova di imbroglio.
+**Condividere le risposte è più difficile.** Con un set di domande casuale per ogni candidato e un timer su ogni domanda, condividere le risposte o cercarle richiede più impegno. Le segnalazioni di comportamenti sospetti ti aiutano a capire dove guardare meglio; non sono una prova di imbroglio.
 
 Niente di tutto questo rende un test equo di per sé. Le domande devono comunque corrispondere al lavoro, i limiti di tempo devono essere adatti al ruolo e le persone devono leggere i risultati con attenzione. Un punteggio è un elemento di prova, non un verdetto. Se stai confrontando i test a tempo con altri metodi di screening, leggi [Test di competenze o screening dei CV](/guides/skills-tests-vs-cv-screening).
 
 ### Cosa non può fare la scelta multipla
 
-Sii chiaro sui limiti. Un test a scelta multipla verifica le conoscenze. Le domande di lettura del codice mostrano se qualcuno capisce il codice, non se sa scriverlo. Un test del genere non mostra come qualcuno scrive, parla con un cliente o progetta un sistema dall'inizio alla fine. Per questo, abbina prepza a una prova pratica (work sample) o a un colloquio strutturato per la tua rosa ristretta. Per il coding pratico, usa una piattaforma per sviluppatori o un tuo esercizio insieme a prepza; vedi [Alternative a HackerRank](/compare/hackerrank-alternatives) e [Fare colloqui agli ingegneri nell'era dell'IA](/guides/interviewing-in-the-age-of-ai).
+Sii chiaro sui limiti. Un test a scelta multipla verifica le conoscenze. Le domande di lettura del codice mostrano se qualcuno capisce il codice, non se sa scriverlo. Un test del genere non mostra come qualcuno scrive, parla con un cliente o progetta un sistema dall'inizio alla fine. Per questo, abbina prepza a una prova pratica (work sample) o a un colloquio strutturato per la tua rosa ristretta. Per il coding pratico, usa una piattaforma per sviluppatori o un tuo esercizio insieme a prepza; vedi [Alternative a HackerRank](/compare/hackerrank-alternatives) e [Fare colloqui agli sviluppatori nell'era dell'IA](/guides/interviewing-in-the-age-of-ai).
 
 ## Basi di conformità per gli strumenti di colloquio con IA
 

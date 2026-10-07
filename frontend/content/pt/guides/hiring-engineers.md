@@ -78,9 +78,9 @@ Uma boa triagem de conhecimentos é:
 - **SQL:** uma tabela pequena e uma consulta, com a pergunta de quais linhas voltam.
 - **Conhecimento de arquitetura e frameworks:** trade-offs, como um framework se comporta, o que dá errado sob carga.
 
-Cada candidato recebe seu próprio conjunto aleatório de perguntas, com contagem regressiva em cada uma. Você vê uma ficha de resultados com cada resposta e quanto tempo levou, além de alertas para respostas rápidas demais, saídas da página e tentativas de cópia. Um alerta é um motivo para olhar com mais atenção, não prova de nada.
+Cada candidato recebe seu próprio conjunto aleatório de perguntas, com contagem regressiva em cada uma. Você vê uma ficha de avaliação com cada resposta e quanto tempo levou, além de alertas para respostas rápidas demais, saídas da página e tentativas de cópia. Um alerta é um motivo para olhar com mais atenção, não prova de nada.
 
-O que a prepza não faz: os candidatos não escrevem, executam nem depuram código na prepza. Ler código e escrever código são habilidades diferentes, então a próxima etapa continua importante. Veja os [testes de habilidades por função](/tests) para começar com testes prontos.
+O que a prepza não faz: os candidatos não escrevem, executam nem depuram código na prepza. Ler código e escrever código são habilidades diferentes, então a próxima etapa continua importante. Veja os [testes de habilidades por cargo](/tests) para começar com testes prontos.
 
 ## Passo 4: Desafio para casa ou live coding
 
@@ -144,7 +144,7 @@ Coloque primeiro as verificações amplas e baratas e por último as profundas e
 
 ## Leitura relacionada
 
-- [Testes de habilidades por função](/tests)
+- [Testes de habilidades por cargo](/tests)
 - [Alternativas ao HackerRank](/compare/hackerrank-alternatives)
 - [Guia de testes de seleção](/pre-employment-testing)
 - [Testes de habilidades x triagem de currículos](/guides/skills-tests-vs-cv-screening)

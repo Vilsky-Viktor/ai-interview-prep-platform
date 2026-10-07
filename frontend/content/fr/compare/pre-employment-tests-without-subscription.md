@@ -59,7 +59,7 @@ Les prix sont en dollars américains. Les paiements passent par Paddle, qui gèr
 - Un entretien de compétences chronométré à choix multiples, rédigé à partir de votre fiche de poste ou d'un modèle prêt à l'emploi pour le poste.
 - Des thèmes que vous vérifiez et modifiez avant qu'une seule question ne soit rédigée.
 - Une série aléatoire de questions propre à chaque candidat, avec un compte à rebours pour chaque question. Pour les postes techniques, les questions peuvent montrer de courts exemples de code et demander ce qu'ils font ou affichent.
-- Une fiche d'évaluation avec chaque réponse et son temps, ainsi que des signalements pour les réponses trop rapides, les sorties de la page et les tentatives de copie.
+- Une fiche d'évaluation avec chaque réponse et son temps, ainsi que des alertes pour les réponses trop rapides, les sorties de la page et les tentatives de copie.
 - Un rapport PDF à télécharger ou à envoyer par e-mail depuis prepza.
 - Des invitations par e-mail, liste collée, fichier importé ou lien unique dans l'offre d'emploi, avec des relances automatiques.
 

@@ -27,9 +27,9 @@ Trang này giải thích mỗi loại công cụ phù hợp ở đâu. Các thô
 | **HackerRank** | Bài test lập trình, phỏng vấn live coding và người phỏng vấn AI cho lập trình viên ([trang web](https://www.hackerrank.com/)) | Không phải trọng tâm | Ứng viên viết và chạy code | Xem [trang bảng giá](https://www.hackerrank.com/pricing/) |
 | **prepza** | Phỏng vấn kỹ năng trắc nghiệm có tính giờ từ mô tả công việc của bạn | Mọi vị trí | Câu hỏi đọc code (code làm gì hoặc in ra gì); không viết hay chạy code | Theo ứng viên, không có gói đăng ký ([bảng giá](/pricing)) |
 | **TestGorilla** | Thư viện bài kiểm tra rộng: kỹ năng theo vị trí, nhận thức, tính cách, ngoại ngữ, lập trình | Có | Bài kiểm tra lập trình; thử thách lập trình tùy chỉnh ở gói cao hơn | Gói miễn phí và gói theo năm ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
-| **CodeSignal** | Đánh giá kỹ thuật và người phỏng vấn AI | Kinh doanh, chăm sóc khách hàng và marketing ở các gói cao hơn | Bài đánh giá lập trình | Gói theo tháng hoặc theo năm kèm tín dụng ([trang bảng giá](https://codesignal.com/pricing/)) |
+| **CodeSignal** | Đánh giá kỹ thuật và người phỏng vấn AI | Kinh doanh, chăm sóc khách hàng và marketing ở các gói cao hơn | Bài đánh giá lập trình | Gói theo tháng hoặc theo năm kèm credit ([trang bảng giá](https://codesignal.com/pricing/)) |
 | **Bryq** | Đánh giá nhận thức, tính cách và kỹ năng | Có | Không phải trọng tâm | Gói theo tháng hoặc theo năm ([trang bảng giá](https://www.bryq.com/pricing)) |
-| **Alooba** | Vị trí kỹ thuật và dữ liệu | Một số | Bài test lập trình phân tích dữ liệu và SQL ở gói cao hơn | Gói theo tháng hoặc theo năm kèm tín dụng ([trang bảng giá](https://www.alooba.com/pricing/)) |
+| **Alooba** | Vị trí kỹ thuật và dữ liệu | Một số | Bài test lập trình phân tích dữ liệu và SQL ở gói cao hơn | Gói theo tháng hoặc theo năm kèm credit ([trang bảng giá](https://www.alooba.com/pricing/)) |
 
 ## Mỗi công cụ phù hợp ở đâu
 
@@ -39,7 +39,7 @@ prepza đọc mô tả công việc của bạn, chọn ra những gì ứng vi�
 
 prepza hoạt động như nhau cho lập trình viên backend lẫn chuyên viên tính lương. Với lập trình viên, prepza có thể kiểm tra cơ sở dữ liệu, API, thiết kế hệ thống hoặc một framework. Khi một chủ đề liên quan đến code, SQL, lệnh shell hoặc cấu hình, nhiều câu hỏi đưa ra một ví dụ ngắn và hỏi nó in ra hoặc trả về gì, nó làm gì, vì sao nó lỗi hoặc thay đổi nào sửa được nó. Ứng viên chọn một trong bốn đáp án. Họ không viết, chạy hay debug code trong prepza, và không có môi trường live coding.
 
-- **Giá:** theo mỗi ứng viên trả lời ít nhất một câu hỏi, rẻ hơn mỗi ứng viên với các mức nạp lớn hơn. Không có gói đăng ký, và tín dụng không hết hạn. Xem [bảng giá](/pricing).
+- **Giá:** theo mỗi ứng viên trả lời ít nhất một câu hỏi, rẻ hơn mỗi ứng viên với các mức nạp lớn hơn. Không có gói đăng ký, và credit không hết hạn. Xem [bảng giá](/pricing).
 - **Ngoài ra:** bảng điểm với câu trả lời và thời gian, cảnh báo về trả lời quá nhanh, rời khỏi trang và cố sao chép, báo cáo PDF, lời mời qua email hoặc liên kết trong tin tuyển dụng, lời nhắc tự động và 23 ngôn ngữ.
 - **Phù hợp với:** vòng sàng lọc đầu tiên trước giai đoạn lập trình, và bài kiểm tra cho các vị trí ngoài kỹ thuật.
 

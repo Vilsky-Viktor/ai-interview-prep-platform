@@ -55,13 +55,13 @@ Itu tidak membuat CV tidak berguna. CV adalah tempat yang tepat untuk memeriksa 
 
 Hasil tes pengetahuan kerja datang dengan satu syarat penting. Sackett dkk. bersandar pada meta-analisis oleh Dye dkk. (1993), yang memisahkan tes pengetahuan yang dibuat untuk pekerjaan yang bersangkutan dari tes pengetahuan yang tidak berkaitan dengannya. Dari studi yang ditemukan, 59 studi yang memakai tes pengetahuan spesifik pekerjaan memiliki rata-rata validitas teramati yang lebih tinggi (.31) dibanding keseluruhan 164 studi (.22). Perkiraan .40 berlaku untuk tes yang spesifik untuk pekerjaan.
 
-Sederhananya: tes pengetahuan membantu kalau yang diuji adalah apa yang benar-benar dibutuhkan pekerjaan. Tes generik yang tidak sesuai dengan perannya kurang prediktif.
+Sederhananya: tes pengetahuan membantu kalau yang diuji adalah apa yang benar-benar dibutuhkan pekerjaan. Tes generik yang tidak sesuai dengan posisinya kurang prediktif.
 
-Para penulis juga mencatat syarat kedua: sampel kerja dan tes pengetahuan cocok untuk rekrutmen di mana kandidat diharapkan sudah punya pelatihan atau pengalaman. Untuk peran yang semuanya akan kamu ajarkan sambil bekerja, tes pengetahuan tentang isi pekerjaan kurang tepat.
+Para penulis juga mencatat syarat kedua: sampel kerja dan tes pengetahuan cocok untuk rekrutmen di mana kandidat diharapkan sudah punya pelatihan atau pengalaman. Untuk posisi yang semuanya akan kamu ajarkan sambil bekerja, tes pengetahuan tentang isi pekerjaan kurang tepat.
 
 ## Batasan yang perlu diingat
 
-- **Ini adalah rata-rata dari banyak pekerjaan dan studi.** Peranmu, tesmu, dan kandidatmu bisa berbeda.
+- **Ini adalah rata-rata dari banyak pekerjaan dan studi.** Posisimu, tesmu, dan kandidatmu bisa berbeda.
 - **Perkiraan validitas berlaku untuk metode yang dibuat dengan baik.** Tes yang ditulis dengan buruk atau wawancara yang asal-asalan tidak akan mencapai angka-angka ini.
 - **Satu metode jarang cukup.** Para peneliti umumnya menyarankan menggabungkan metode, misalnya tes pengetahuan di awal dan wawancara terstruktur belakangan.
 - **Keadilan perlu diperiksa tersendiri.** Sackett dkk. memasangkan validitas dengan rata-rata selisih skor antara kandidat kulit hitam dan kulit putih. Tes pengetahuan kerja, sampel kerja, dan tes kognitif menunjukkan selisih yang cukup besar; wawancara terstruktur menunjukkan selisih yang lebih kecil. Menggabungkan metode bisa menguranginya. Apa pun yang kamu pakai, pantau tingkat kelulusan antarkelompok. Di AS, patokan empat per lima dalam [Uniform Guidelines](https://www.law.cornell.edu/cfr/text/29/1607.4) adalah titik awal yang umum.
@@ -73,7 +73,7 @@ Para penulis juga mencatat syarat kedua: sampel kerja dan tes pengetahuan cocok 
 2. **Berikan tes pengetahuan singkat yang spesifik untuk pekerjaan kepada semua yang tersisa.** Topik yang sama, batas waktu yang sama, aturan yang sama untuk semua orang.
 3. **Tinjau hasil teratas dengan teliti,** termasuk jawabannya, bukan hanya skornya.
 4. **Jalankan wawancara terstruktur** dengan shortlist: pertanyaan yang sama untuk setiap kandidat dan panduan penilaian yang sederhana.
-5. **Tambahkan sampel kerja** untuk beberapa finalis kalau perannya memungkinkan.
+5. **Tambahkan sampel kerja** untuk beberapa finalis kalau posisinya memungkinkan.
 
 Lihat [Cara menyaring 100 pelamar dalam sehari](/guides/screen-100-applicants-in-a-day) untuk versi langkah demi langkah.
 
@@ -81,13 +81,13 @@ Lihat [Cara menyaring 100 pelamar dalam sehari](/guides/screen-100-applicants-in
 
 prepza menangani langkah 2: tes pengetahuan kerja pilihan ganda berbatas waktu, yang ditulis dari deskripsi pekerjaanmu. Angka validitas di atas berlaku untuk tes pengetahuan kerja secara umum, bukan hasil pengukuran atas tes prepza.
 
-- **Spesifik untuk pekerjaan sejak awal.** prepza mengusulkan topik dari deskripsi pekerjaanmu, dan kamu meninjau serta mengubahnya sebelum ada soal yang ditulis. Hapus apa pun yang bukan persyaratan sebenarnya. Untuk peran teknis, soal bisa berisi contoh kode singkat untuk dibaca.
+- **Spesifik untuk pekerjaan sejak awal.** prepza mengusulkan topik dari deskripsi pekerjaanmu, dan kamu meninjau serta mengubahnya sebelum ada soal yang ditulis. Hapus apa pun yang bukan persyaratan sebenarnya. Untuk posisi teknis, soal bisa berisi contoh kode singkat untuk dibaca.
 - **Kondisi yang sama untuk semua orang.** Topik dan jumlah soal yang sama, serta hitung mundur di setiap soal. Kamu bisa memberi tambahan waktu kepada kandidat yang memintanya.
 - **Setiap kandidat mendapat soalnya sendiri,** set acak dari bank soal tiap topik, sehingga jawaban lebih sulit dibagikan.
 - **Hasil yang mudah dibaca.** Scorecard per kandidat dengan setiap jawaban dan waktunya, diurutkan berdasarkan skor, dengan tanda untuk jawaban yang terlalu cepat, meninggalkan halaman, dan percobaan menyalin.
 - **Jawaban dinilai berdasarkan kunci jawaban** yang ditulis dan diperiksa AI; tidak ada AI yang membaca atau menilai jawaban kandidat.
 
-prepza tidak menjalankan wawancara terstruktur, sampel kerja, atau tes kognitif. Pakai prepza berdampingan dengan semua itu. Untuk informasi lebih lanjut tentang jenis-jenis tes dan keadilan, baca [Tes pra-kerja](/pre-employment-testing).
+prepza tidak menjalankan wawancara terstruktur, sampel kerja, atau tes kognitif. Pakai prepza berdampingan dengan semua itu. Untuk informasi lebih lanjut tentang jenis-jenis tes dan keadilan, baca [Tes seleksi karyawan](/pre-employment-testing).
 
 ## Sumber
 

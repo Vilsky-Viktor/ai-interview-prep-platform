@@ -48,7 +48,7 @@ prepza heeft geen abonnement en geen contract. Je koopt credits wanneer je ze no
 - **Voor $1 krijg je 100 credits.** Credits verlopen niet.
 - **Een kandidaat kost 300 credits,** alleen gerekend als hij of zij minstens één vraag beantwoordt. Begint een uitgenodigde kandidaat nooit, dan komen de credits terug. Een uitnodiging die niet binnen 30 dagen is gestart, verloopt en geeft haar credits terug.
 - **Grotere opwaarderingen geven meer credits per dollar,** dus de prijs per kandidaat daalt naarmate de opwaardering groter wordt. Zie [prijzen](/pricing) voor de opwaarderingen.
-- **Sollicitatiegesprekken genereren is gratis,** en je sollicitatiegesprek als kandidaat proberen ook.
+- **Interviews genereren is gratis,** en je interview als kandidaat proberen ook.
 - **Geen kosten per gebruiker.** Voeg zonder kosten beheerders en kijkers toe aan je bedrijf.
 - **Welkomstcredits:** de eerste 3 kandidaten van je eerste bedrijf zijn gratis.
 
@@ -56,7 +56,7 @@ Prijzen zijn in US dollars. Betalingen lopen via Paddle, dat btw en sales tax re
 
 ## Wat je per kandidaat krijgt
 
-- Een sollicitatiegesprek over vaardigheden met tijdslimiet en meerkeuzevragen, geschreven op basis van je functieomschrijving, of van een kant-en-klaar sjabloon voor de functie.
+- Een interview over vaardigheden met tijdslimiet en meerkeuzevragen, geschreven op basis van je functieomschrijving, of van een kant-en-klaar sjabloon voor de functie.
 - Onderwerpen die je bekijkt en bewerkt voordat er een vraag wordt geschreven.
 - Een eigen willekeurige set vragen per kandidaat, met een aftelklok bij elke vraag. Voor technische functies kunnen vragen korte codevoorbeelden tonen en vragen wat die doen of uitvoeren.
 - Een scorekaart met elk antwoord en de tijd die het kostte, plus signalen bij te snelle antwoorden, het verlaten van de pagina en kopieerpogingen.

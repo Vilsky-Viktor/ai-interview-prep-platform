@@ -4,28 +4,28 @@
 FAQ = [
     {
         "key": "what",
-        "question": "O que é o prepza?",
-        "answer": "Uma entrevista cronometrada criada a partir da sua descrição de vaga, para qualquer função. Use-a para fazer a triagem de candidatos antes de conhecê-los ou como uma etapa da própria contratação: de qualquer forma, você vê quem realmente conhece o trabalho.",
+        "question": "O que é a prepza?",
+        "answer": "Uma entrevista cronometrada criada a partir da sua descrição de vaga, para qualquer cargo. Use-a para fazer a triagem de candidatos antes de conhecê-los ou como uma etapa da própria contratação: de qualquer forma, você vê quem realmente conhece o trabalho.",
     },
     {
         "key": "roles",
-        "question": "Para quais funções posso contratar?",
-        "answer": "Qualquer função em que o conhecimento importa: suporte, vendas, finanças, saúde, ofícios técnicos, engenharia, marketing e muito mais. Se você consegue descrever o trabalho, o prepza consegue criar uma entrevista para ele.",
+        "question": "Para quais cargos posso contratar?",
+        "answer": "Qualquer cargo em que o conhecimento importa: suporte, vendas, finanças, saúde, ofícios técnicos, engenharia, marketing e muito mais. Se você consegue descrever o trabalho, a prepza consegue criar uma entrevista para ele.",
     },
     {
         "key": "hiring",
         "question": "Como funciona?",
-        "answer": "Cole uma descrição de vaga na página inicial, informe o nome da sua empresa e confira os tópicos que o prepza propõe. Depois, convide candidatos: digite os e-mails, cole uma lista ou envie um arquivo. Candidatos que não começaram depois de alguns dias recebem um lembrete. Cada candidato recebe suas próprias questões, com um cronômetro em cada uma, e você vê a pontuação e todas as respostas assim que ele termina.",
+        "answer": "Cole uma descrição de vaga na página inicial, informe o nome da sua empresa e confira os tópicos que a prepza propõe. Depois, convide candidatos: digite os e-mails, cole uma lista ou envie um arquivo. Candidatos que não começaram depois de alguns dias recebem um lembrete. Cada candidato recebe suas próprias questões, com um cronômetro em cada uma, e você vê a pontuação e todas as respostas assim que ele termina.",
     },
     {
         "key": "link",
         "question": "Posso colocar uma entrevista em um anúncio de vaga?",
-        "answer": "Sim. Ative o link compartilhável da entrevista na aba de candidatos e cole-o no seu anúncio. Quem o abre entra na conta e faz a entrevista, e cada pessoa é cobrada como um candidato convidado. O link é desativado quando você marca a entrevista como contratado.",
+        "answer": "Sim. Ative o link compartilhável da entrevista na aba de candidatos e cole-o no seu anúncio. Quem o abre entra na conta e faz a entrevista, e cada pessoa é cobrada como um candidato convidado. O link é desativado quando você marca a entrevista como “Contratado”.",
     },
     {
         "key": "preview",
         "question": "Posso experimentar uma entrevista antes de convidar alguém?",
-        "answer": "Sim. Abra sua entrevista como candidato na página dela, sem custo: as prévias não aparecem entre seus candidatos nem nas estatísticas das questões. Você também pode fazer qualquer uma das entrevistas de prática gratuitas.",
+        "answer": "Sim. Abra sua entrevista como candidato na página dela, sem custo: as prévias não aparecem entre seus candidatos nem nas estatísticas das questões. Você também pode fazer qualquer uma das simulações de entrevista gratuitas.",
     },
     {
         "key": "cheating",
@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Como o preço se compara a outras ferramentas de avaliação?",
-        "answer": "Muitas ferramentas de avaliação são vendidas como assinatura mensal ou anual, paga mesmo que você não avalie ninguém. No prepza você paga só por candidato: {candidate} créditos (US$ {candidate_dollars}), sem contrato, sem taxa por usuário e sem pagar para gerar uma entrevista. Uma empresa que convida {example_candidates} candidatos por mês paga cerca de US$ {example_year_dollars} por ano. Se você avalia muitos candidatos todo mês, uma assinatura pode custar menos, então compare com os seus números.",
+        "answer": "Muitas ferramentas de avaliação são vendidas como assinatura mensal ou anual, paga mesmo que você não avalie ninguém. Na prepza você paga só por candidato: {candidate} créditos (US$ {candidate_dollars}), sem contrato, sem taxa por usuário e sem pagar para gerar uma entrevista. Uma empresa que convida {example_candidates} candidatos por mês paga cerca de US$ {example_year_dollars} por ano. Se você avalia muitos candidatos todo mês, uma assinatura pode custar menos, então compare com os seus números.",
     },
     {
         "key": "expire",
@@ -59,23 +59,23 @@ FAQ = [
     },
     {
         "key": "scorecards",
-        "question": "O que os resultados dos candidatos mostram?",
-        "answer": "Cada resposta, se estava certa e quanto tempo levou. As notas aparecem em verde ou vermelho de acordo com a nota de aprovação que você definiu para a entrevista. Os resultados também sinalizam respostas rápidas demais para a questão ter sido lida, as vezes que o candidato saiu da página e tentativas de cópia.",
+        "question": "O que as fichas de avaliação mostram?",
+        "answer": "Cada resposta, se estava certa e quanto tempo levou. As notas aparecem em verde ou vermelho de acordo com a nota de aprovação que você definiu para a entrevista. As fichas também sinalizam respostas rápidas demais para a questão ter sido lida, as vezes que o candidato saiu da página e tentativas de cópia.",
     },
     {
         "key": "reports",
-        "question": "Posso compartilhar os resultados com um gestor de contratação?",
-        "answer": "Sim. Baixe um relatório em PDF de um candidato ou de todos os candidatos de uma entrevista, envie-o por e-mail direto do prepza ou mande um resumo curto pelo WhatsApp ou Telegram.",
+        "question": "Posso compartilhar os resultados com um gestor contratante?",
+        "answer": "Sim. Baixe um relatório em PDF de um candidato ou de todos os candidatos de uma entrevista, envie-o por e-mail direto da prepza ou mande um resumo curto pelo WhatsApp ou Telegram.",
     },
     {
         "key": "candidates",
         "question": "O que os candidatos veem?",
-        "answer": "O nome e o logotipo da sua empresa, o que esperar antes de começar e depois uma questão cronometrada por vez. Eles nunca veem sua pontuação nem se uma resposta estava certa.",
+        "answer": "O nome e o logotipo da sua empresa, o que esperar antes de começar e depois uma questão cronometrada por vez. Eles nunca veem a própria pontuação nem se uma resposta estava certa.",
     },
     {
         "key": "verified",
         "question": "O que significa o selo de verificação?",
-        "answer": "Que um dono ou administrador da empresa entrou com um e-mail corporativo do site da empresa, como you@acme.com, e que depois a nossa equipe analisou a empresa. Adicione o site em Verificar, no cabeçalho da sua empresa; serviços de e-mail gratuitos não contam. Enquanto a análise está pendente, sua equipe vê um relógio ao lado do nome, e mudar o nome da empresa a envia para análise de novo. O selo aparece ao lado do nome da sua empresa, inclusive nos convites.",
+        "answer": "Que um proprietário ou administrador da empresa entrou com um e-mail corporativo do site da empresa, como you@acme.com, e que depois a nossa equipe analisou a empresa. Adicione o site em Verificar, no cabeçalho da sua empresa; serviços de e-mail gratuitos não contam. Enquanto a análise está pendente, sua equipe vê um relógio ao lado do nome, e mudar o nome da empresa a envia para análise de novo. O selo aparece ao lado do nome da sua empresa, inclusive nos convites.",
     },
     {
         "key": "languages",

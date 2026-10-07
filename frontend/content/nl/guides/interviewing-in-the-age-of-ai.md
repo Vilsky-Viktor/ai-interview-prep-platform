@@ -49,7 +49,7 @@ Niets hiervan maakt codingopdrachten zinloos. Het verandert wanneer je ze doet e
 - **Pairen met AI.** Geef kandidaten, net als in de ronde van Canva, een assistent en een realistische, open opdracht. Kijk hoe ze die opsplitsen, wat ze de assistent vragen en wat ze accepteren of verwerpen.
 - **Code review.** Geef een pull request, misschien geschreven door AI, met een paar echte bugs. Vraag wat ze zouden veranderen en waarom.
 - **Debuggen.** Geef een kleine codebase met een falende test. Dat ligt dicht bij het dagelijkse werk dat de survey beschrijft en is moeilijk te faken.
-- **System design.** Voor seniorrollen laat een gesprek over afwegingen oordeelsvermogen zien dat geen enkele prompt oplevert.
+- **System design.** Voor seniorfuncties laat een gesprek over afwegingen oordeelsvermogen zien dat geen enkele prompt oplevert.
 
 Deze opdrachten kosten de tijd van een developer om af te nemen en te beoordelen. Dat is de belangrijkste reden om er een snelle, brede kennischeck voor te zetten, zodat ze naar de kandidaten gaan die het meest kans maken.
 
@@ -58,7 +58,7 @@ Deze opdrachten kosten de tijd van een developer om af te nemen en te beoordelen
 1. **Screen sollicitaties alleen op harde eisen:** werkvergunning, locatie, onmisbare ervaring.
 2. **Neem een korte kennistest af** over concepten, theorie en code lezen voor je stack.
 3. **Doe een praktijkopdracht** in een vorm die past bij hoe je team werkt: pairen met AI, code review of debuggen, op afstand of fysiek.
-4. **Voeg system design toe** voor seniorrollen.
+4. **Voeg system design toe** voor seniorfuncties.
 5. **Voer een gestructureerd interview** met vaste vragen en een beoordelingsschaal, inclusief hoe de kandidaat AI-tools gebruikt en de output controleert.
 6. **Laat mensen beslissen,** met elk resultaat als één input.
 
@@ -68,7 +68,7 @@ Voor de volledige stap-voor-stapversie, zie [Developers werven](/guides/hiring-e
 
 ## Waar prepza past
 
-prepza past goed bij stap 2. Het maakt van je functieomschrijving een getimed meerkeuze-kennisgesprek, en je bekijkt de voorgestelde onderwerpen voordat er ook maar één vraag wordt geschreven, zodat de test je stack dekt en niets anders.
+prepza past goed bij stap 2. Het maakt van je functieomschrijving een getimede meerkeuze-kennistest, en je bekijkt de voorgestelde onderwerpen voordat er ook maar één vraag wordt geschreven, zodat de test je stack dekt en niets anders.
 
 - **Concepten en theorie uit de functieomschrijving:** databases, API's, architectuur, het gedrag van een framework, securitypraktijken.
 - **Vragen over code lezen:** een kort stuk code met vragen over wat het print of teruggeeft, wat het doet, waarom het faalt of welke wijziging het oplost. Dat is dezelfde reviewvaardigheid waar AI-ondersteund werk op leunt.

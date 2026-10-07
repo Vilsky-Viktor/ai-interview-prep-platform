@@ -64,7 +64,7 @@ Consultez [Alternatives à TestGorilla](/compare/testgorilla-alternatives) et [A
 
 - Un entretien chronométré à choix multiples rédigé à partir de votre fiche de poste, avec des thèmes que vous vérifiez d'abord.
 - Une série aléatoire de questions propre à chaque candidat, avec un compte à rebours pour chaque question. Pour les postes techniques, les questions peuvent inclure de courts exemples de code.
-- Des fiches d'évaluation avec les réponses et les temps, et des signalements pour les réponses trop rapides, les sorties de la page et les tentatives de copie.
+- Des fiches d'évaluation avec les réponses et les temps, et des alertes pour les réponses trop rapides, les sorties de la page et les tentatives de copie.
 - Des rapports PDF pour un candidat ou pour toute la liste.
 - Des invitations par e-mail, par liste ou fichier, ou via un lien unique dans votre offre d'emploi, avec des relances automatiques.
 - 23 langues, des données hébergées dans l'UE (certains sous-traitants ultérieurs sont aux États-Unis ; voir la [politique de confidentialité](/privacy)) et un accord de traitement des données inclus.

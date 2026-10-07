@@ -6,7 +6,7 @@ MESSAGES = {
     "Not enough credits. Top up to continue.": "رصيدك غير كافٍ. اشحن رصيدك للمتابعة.",
     "This top-up isn't available": "عملية الشحن هذه غير متاحة",
     "Choose one of the balances": "اختر أحد حدود الرصيد",
-    "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "بلغنا حد التوليدات الجديدة لهذا اليوم. حاول مرة أخرى غدًا؛ التدريب والمقابلات تعمل كالمعتاد.",
+    "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "بلغنا الحد اليومي لعمليات الإنشاء الجديدة. حاول مرة أخرى غدًا؛ التدريب والمقابلات تعمل كالمعتاد.",
     "Couldn't get a reply right now. Please try again.": "تعذّر الحصول على رد الآن. حاول مرة أخرى.",
     "You can own at most 3 companies.": "يمكنك امتلاك 3 شركات على الأكثر.",
     "Your company can generate up to 10 interviews a day. Try again tomorrow.": "يمكن لشركتك إنشاء 10 مقابلات يوميًا كحد أقصى. حاول مرة أخرى غدًا.",

@@ -20,17 +20,17 @@ FAQ = [
     {
         "key": "link",
         "question": "Posso mettere un colloquio in un annuncio di lavoro?",
-        "answer": "Sì. Attiva il link condivisibile del colloquio nella sua scheda Candidati e incollalo nel tuo annuncio. Chiunque lo apra accede e svolge il colloquio, e ogni persona viene addebitata come un candidato invitato. Il link si disattiva quando segni il colloquio come assunto.",
+        "answer": "Sì. Attiva il link condivisibile del colloquio nella sua scheda Candidati e incollalo nel tuo annuncio. Chiunque lo apra accede e svolge il colloquio, e ogni persona ti costa quanto un candidato invitato. Il link si disattiva quando segni il colloquio come «Assunto».",
     },
     {
         "key": "preview",
         "question": "Posso provare un colloquio prima di invitare qualcuno?",
-        "answer": "Sì. Apri il tuo colloquio come candidato dalla sua pagina, gratis: le anteprime non compaiono tra i tuoi candidati né nelle statistiche delle domande. Puoi anche fare uno qualsiasi dei colloqui di pratica gratuiti.",
+        "answer": "Sì. Apri il tuo colloquio come candidato dalla sua pagina, gratis: le anteprime non compaiono tra i tuoi candidati né nelle statistiche delle domande. Puoi anche fare una qualsiasi delle simulazioni di colloquio gratuite.",
     },
     {
         "key": "cheating",
         "question": "I candidati possono usare l'IA o cercare le risposte?",
-        "answer": "Ogni candidato riceve domande casuali tutte sue, in un ordine tutto suo, con un timer su ogni domanda gestito dal nostro server, quindi c'è poco tempo per cercare le risposte o chiedere a un'IA. I risultati mostrano anche quando un candidato ha lasciato la pagina, copiato del testo o risposto troppo in fretta per aver letto la domanda.",
+        "answer": "Ogni candidato riceve domande casuali tutte sue, in un ordine tutto suo, con un timer su ogni domanda gestito dal nostro server, quindi c'è poco tempo per cercare le risposte o chiedere a un'IA. Le schede di valutazione mostrano anche quando un candidato ha lasciato la pagina, copiato del testo o risposto troppo in fretta per aver letto la domanda.",
     },
     {
         "key": "cost",
@@ -59,8 +59,8 @@ FAQ = [
     },
     {
         "key": "scorecards",
-        "question": "Cosa mostrano i risultati dei candidati?",
-        "answer": "Ogni risposta, se era giusta e quanto tempo ha richiesto. I voti compaiono in verde o in rosso rispetto alla soglia che hai impostato per il colloquio. I risultati segnalano anche risposte troppo veloci per aver letto la domanda, le uscite dalla pagina e i tentativi di copia.",
+        "question": "Cosa mostrano le schede di valutazione?",
+        "answer": "Ogni risposta, se era giusta e quanto tempo ha richiesto. I punteggi compaiono in verde o in rosso rispetto alla soglia di superamento che hai impostato per il colloquio. Le schede segnalano anche risposte troppo veloci per aver letto la domanda, le uscite dalla pagina e i tentativi di copia.",
     },
     {
         "key": "reports",
@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Cosa significa la spunta di verifica?",
-        "answer": "Che un proprietario o un amministratore dell'azienda ha effettuato l'accesso con un'email di lavoro sul sito dell'azienda, ad esempio tu@acme.com, e che poi il nostro team ha esaminato l'azienda. Aggiungi il sito con Verifica nell'intestazione della tua azienda; i servizi email gratuiti non contano. Finché la revisione è in attesa, il tuo team vede un orologio accanto al nome, e rinominare l'azienda la rimanda in revisione. La spunta compare accanto al nome della tua azienda, anche negli inviti.",
+        "answer": "Che un proprietario o un amministratore dell'azienda ha effettuato l'accesso con un'email di lavoro sul sito dell'azienda, ad esempio nome@acme.com, e che poi il nostro team ha esaminato l'azienda. Aggiungi il sito con Verifica nell'intestazione della tua azienda; i servizi email gratuiti non contano. Finché la revisione è in attesa, il tuo team vede un orologio accanto al nome, e rinominare l'azienda la rimanda in revisione. La spunta compare accanto al nome della tua azienda, anche negli inviti.",
     },
     {
         "key": "languages",

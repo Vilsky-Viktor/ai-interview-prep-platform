@@ -26,7 +26,7 @@ See leht selgitab, kuhu iga tööriistaliik sobib. Faktid viitavad pakkujate end
 | --- | --- | --- | --- | --- |
 | **HackerRank** | Programmeerimistestid, reaalajas kodeerimisintervjuud ja AI-intervjueerija arendajatele ([veebileht](https://www.hackerrank.com/)) | Pole põhifookus | Kandidaadid kirjutavad ja käivitavad koodi | Vaata [hinnalehte](https://www.hackerrank.com/pricing/) |
 | **prepza** | Ajapiiranguga valikvastustega oskuste intervjuud sinu töökuulutuse põhjal | Iga roll | Koodi lugemise küsimused (mida kood teeb või väljastab); koodi ei kirjutata ega käivitata | Kandidaadi kohta, ilma tellimuseta ([hinnad](/pricing)) |
-| **TestGorilla** | Lai testiraamatukogu: rollioskused, kognitiivsed, isiksuse-, keele- ja programmeerimistestid | Jah | Programmeerimistestid; kohandatud programmeerimisülesanded kõrgemas paketis | Tasuta pakett ja aastapaketid ([hinnaleht](https://www.testgorilla.com/pricing/)) |
+| **TestGorilla** | Lai testikogu: rollioskused, kognitiivsed, isiksuse-, keele- ja programmeerimistestid | Jah | Programmeerimistestid; kohandatud programmeerimisülesanded kõrgemas paketis | Tasuta pakett ja aastapaketid ([hinnaleht](https://www.testgorilla.com/pricing/)) |
 | **CodeSignal** | Tehnilised hindamised ja AI-intervjueerijad | Müük, kliendiedu ja turundus kõrgemates pakettides | Programmeerimisülesanded | Kuu- või aastapaketid krediitidega ([hinnaleht](https://codesignal.com/pricing/)) |
 | **Bryq** | Kognitiivsete võimete, isiksuse ja oskuste hindamine | Jah | Pole põhifookus | Kuu- või aastapaketid ([hinnaleht](https://www.bryq.com/pricing)) |
 | **Alooba** | Tehnilised ja andmerollid | Mõned | Analüütika ja SQL-i programmeerimistestid kõrgemates pakettides | Kuu- või aastapaketid krediitidega ([hinnaleht](https://www.alooba.com/pricing/)) |
@@ -43,9 +43,9 @@ See toimib backend-arendaja puhul samamoodi kui palgaarvestaja puhul. Arendaja p
 - **Lisaks:** hindamislehed vastuste ja ajakuluga, märked liiga kiirete vastuste, lehelt lahkumise ja kopeerimiskatsete kohta, PDF-aruanded, kutsed e-postiga või töökuulutuse lingiga, automaatsed meeldetuletused ja 23 keelt.
 - **Sobib:** esmaseks sõelaks enne programmeerimisetappi ja testiks rollidele väljaspool arendust.
 
-### TestGorilla: lai raamatukogu
+### TestGorilla: lai testikogu
 
-TestGorilla raamatukogu hõlmab rollipõhiseid oskusi, programmeerimist, tarkvaraoskusi, keelt, kognitiivseid võimeid, situatsioonipõhist otsustamist, isiksust ja trükkimist ([testiraamatukogu, 2026. aasta oktoobri seisuga](https://www.testgorilla.com/test-library/)). Kõrgem pakett lisab AI-intervjuud, kohandatud programmeerimisülesanded, töösimulatsioonid ja ATS-integratsioonid ([hinnaleht](https://www.testgorilla.com/pricing/)).
+TestGorilla testikogu hõlmab rollipõhiseid oskusi, programmeerimist, tarkvaraoskusi, keelt, kognitiivseid võimeid, situatsioonipõhist otsustamist, isiksust ja trükkimist ([testikogu, 2026. aasta oktoobri seisuga](https://www.testgorilla.com/test-library/)). Kõrgem pakett lisab AI-intervjuud, kohandatud programmeerimisülesanded, töösimulatsioonid ja ATS-integratsioonid ([hinnaleht](https://www.testgorilla.com/pricing/)).
 
 - **Parem kui prepza:** oskustestide kombineerimiseks kognitiivsete ja isiksustestidega, programmeerimisülesanneteks ning ühtlaseks suuremahuliseks värbamiseks.
 - Vaata [prepza ja TestGorilla](/compare/testgorilla).

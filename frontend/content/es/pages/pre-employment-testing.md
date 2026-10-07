@@ -93,10 +93,10 @@ prepza convierte una descripción del puesto en una entrevista de habilidades de
 1. **Pega la descripción del puesto.** Cualquier puesto, en cualquiera de 23 idiomas. prepza extrae lo que un candidato debe saber y propone temas.
 2. **Revisa los temas.** Desmarca lo que no necesites, cambia el nombre de un tema, edita sus subtemas o describe los cambios en texto libre. Las preguntas se redactan solo después de tu aprobación. También puedes empezar desde una plantilla lista para tu puesto.
 3. **Invita a los candidatos.** Envía invitaciones por correo electrónico, pega una lista, sube un archivo o pon un único enlace para compartir en tu oferta de empleo. Los recordatorios se envían automáticamente.
-4. **Lee los resultados.** Las puntuaciones llegan ordenadas, con una ficha de resultados para cada candidato.
+4. **Lee los resultados.** Las puntuaciones llegan ordenadas, con una ficha de evaluación para cada candidato.
 
 - **Cada candidato recibe su propio conjunto aleatorio** del banco de cada tema, con una cuenta atrás controlada por el servidor en cada pregunta. Puedes dar tiempo extra a quien lo pida.
-- **Las fichas de resultados** muestran cada respuesta, si fue correcta y cuánto tardó, con avisos de respuestas demasiado rápidas, salidas de la página e intentos de copiar. Los avisos no cambian la puntuación.
+- **Las fichas de evaluación** muestran cada respuesta, si fue correcta y cuánto tardó, con alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar. Las alertas no cambian la puntuación.
 - **Las respuestas se corrigen con una clave de respuestas** que la IA redacta y revisa; ninguna IA lee ni juzga la respuesta de un candidato. Un informe en PDF cubre a un candidato o a toda la lista.
 
 El precio es por candidato que responde, sin suscripción: $1–3 por candidato según el tamaño de tu recarga, en dólares estadounidenses, y tus 3 primeros candidatos son gratis. Los datos se alojan en la UE (algunos subencargados están en EE. UU.; consulta la [política de privacidad](/privacy)), y se incluyen el contrato de encargo del tratamiento y las instrucciones para empresas.

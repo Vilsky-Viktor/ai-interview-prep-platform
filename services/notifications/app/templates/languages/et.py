@@ -3,10 +3,10 @@
 TEXTS = {
     "candidate": {
         "subject": "{company} kutsub sind intervjuule",
-        "preheader": "Tee prepzas intervjuu „{title}”. Alustamiseks logi sisse aadressiga {email}.",
+        "preheader": "Tee prepzas intervjuu „{title}“. Alustamiseks logi sisse aadressiga {email}.",
         "heading": "Kutse intervjuule",
         "lines": [
-            "{company} kutsub sind prepzas intervjuule „{title}”.",
+            "{company} kutsub sind prepzas intervjuule „{title}“.",
             (
                 "Alustamiseks logi sisse aadressiga {email}. Intervjuud saab teha "
                 "ainult see aadress ja sul on üks katse."
@@ -16,11 +16,11 @@ TEXTS = {
     },
     "reminder": {
         "subject": "Meeldetuletus: {company} ootab sinu intervjuud",
-        "preheader": "„{title}” on endiselt avatud. Alustamiseks logi sisse aadressiga {email}.",
+        "preheader": "„{title}“ on endiselt avatud. Alustamiseks logi sisse aadressiga {email}.",
         "heading": "Sinu intervjuu ootab",
         "lines": [
             (
-                "{company} kutsus sind mõni päev tagasi prepzas intervjuule „{title}”, "
+                "{company} kutsus sind mõni päev tagasi prepzas intervjuule „{title}“, "
                 "kuid sa pole seda veel alustanud."
             ),
             (
@@ -32,10 +32,10 @@ TEXTS = {
     },
     "report": {
         "subject": "Kandidaadi aruanne: {candidate}",
-        "preheader": "{candidate} tegi ettevõttes {company} intervjuu „{title}”. Aruanne on manuses.",
+        "preheader": "{candidate} tegi ettevõttes {company} intervjuu „{title}“. Aruanne on manuses.",
         "heading": "Kandidaadi aruanne",
         "lines": [
-            "{sender} ettevõttest {company} jagas kandidaadi {candidate} aruannet intervjuu „{title}” kohta.",
+            "{sender} ettevõttest {company} jagas kandidaadi {candidate} aruannet intervjuu „{title}“ kohta.",
             (
                 "See on manuses üheleheküljelise PDF-ina: üldhinne, iga teema tulemus ja see, "
                 "mida kandidaadi brauser näitas. Kasutajale {sender} vastamiseks vasta sellele "
@@ -48,10 +48,10 @@ TEXTS = {
     },
     "candidates": {
         "subject": "Kõigi kandidaatide aruanne: {title}",
-        "preheader": "Kõik intervjuu „{title}” kandidaadid ettevõttes {company}. Aruanne on manuses.",
+        "preheader": "Kõik intervjuu „{title}“ kandidaadid ettevõttes {company}. Aruanne on manuses.",
         "heading": "Kandidaatide aruanne",
         "lines": [
-            "{sender} ettevõttest {company} jagas intervjuu „{title}” kõigi kandidaatide aruannet.",
+            "{sender} ettevõttest {company} jagas intervjuu „{title}“ kõigi kandidaatide aruannet.",
             (
                 "See on manuses PDF-ina: iga kandidaadi hinne, edenemine ja see, mida tema "
                 "brauser näitas, parimad eespool. Kasutajale {sender} vastamiseks vasta sellele "

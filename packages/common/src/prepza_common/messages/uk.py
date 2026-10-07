@@ -17,7 +17,7 @@ MESSAGES = {
     "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Запросіть кандидата на одну з ваших співбесід, перш ніж створювати нову: без кандидатів можуть чекати не більше 3 співбесід.",
     "This interview is already finished": "Цю співбесіду вже завершено",
     "This interview isn't taking new candidates right now.": "Ця співбесіда зараз не приймає нових кандидатів.",
-    "This interview has no practice questions yet.": "У цій тренувальній співбесіді ще немає питань.",
+    "This interview has no practice questions yet.": "Для цієї співбесіди ще немає тренувальних питань.",
     "No emails found.": "Адрес email не знайдено.",
     "At most 100 emails at once.": "Не більше 100 адрес за раз.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "Використайте зображення PNG, JPEG або WebP до 500 КБ",

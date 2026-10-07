@@ -34,37 +34,37 @@ TEXTS = {
         "button": "Buksan ang imbitasyon",
     },
     "report": {
-        "subject": "Report ng kandidato: {candidate}",
+        "subject": "Report ng aplikante: {candidate}",
         "preheader": "Sinagutan ni {candidate} ang “{title}” sa {company}. Naka-attach ang report.",
-        "heading": "Report ng kandidato",
+        "heading": "Report ng aplikante",
         "lines": [
             "Ibinahagi ni {sender} mula sa {company} ang report ni {candidate} para sa interview na “{title}”.",
             (
-                "Naka-attach ito bilang isang pahinang PDF: ang kabuuang grado, ang score sa "
-                "bawat topic at ang ipinakita ng browser ng kandidato. Mag-reply sa email na ito "
+                "Naka-attach ito bilang isang pahinang PDF: ang kabuuang grade, ang score sa "
+                "bawat topic at ang ipinakita ng browser ng aplikante. Mag-reply sa email na ito "
                 "para sumagot kay {sender}."
             ),
         ],
         "button": "Bisitahin ang prepza",
         "footer": "Ipinadala ang email na ito sa {email} dahil nag-share si {sender} ng report ng "
-        "kandidato sa address na ito sa prepza. Kung hindi mo ito inaasahan, puwede mo itong "
+        "aplikante sa address na ito sa prepza. Kung hindi mo ito inaasahan, puwede mo itong "
         "balewalain.",
     },
     "candidates": {
-        "subject": "Report ng lahat ng kandidato: {title}",
-        "preheader": "Lahat ng kandidato para sa “{title}” sa {company}. Naka-attach ang report.",
-        "heading": "Report ng mga kandidato",
+        "subject": "Report ng lahat ng aplikante: {title}",
+        "preheader": "Lahat ng aplikante para sa “{title}” sa {company}. Naka-attach ang report.",
+        "heading": "Report ng mga aplikante",
         "lines": [
-            "Ibinahagi ni {sender} mula sa {company} ang report ng lahat ng kandidato para sa interview na “{title}”.",
+            "Ibinahagi ni {sender} mula sa {company} ang report ng lahat ng aplikante para sa interview na “{title}”.",
             (
-                "Naka-attach ito bilang PDF: ang grado, progreso at ipinakita ng browser ng bawat "
-                "kandidato, simula sa pinakamahusay. Mag-reply sa email na ito para sumagot kay "
+                "Naka-attach ito bilang PDF: ang grade, progreso at ipinakita ng browser ng bawat "
+                "aplikante, simula sa pinakamahusay. Mag-reply sa email na ito para sumagot kay "
                 "{sender}."
             ),
         ],
         "button": "Bisitahin ang prepza",
         "footer": "Ipinadala ang email na ito sa {email} dahil nag-share si {sender} ng report ng "
-        "mga kandidato sa address na ito sa prepza. Kung hindi mo ito inaasahan, puwede mo itong "
+        "mga aplikante sa address na ito sa prepza. Kung hindi mo ito inaasahan, puwede mo itong "
         "balewalain.",
     },
     "footer": "Ipinadala ang email na ito sa {email} dahil may nag-imbita sa address na ito sa "

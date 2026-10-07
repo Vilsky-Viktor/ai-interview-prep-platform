@@ -40,7 +40,7 @@ A prepza lê a sua descrição da vaga, identifica o que um candidato precisa sa
 Funciona do mesmo jeito para uma pessoa desenvolvedora backend e para um especialista em folha de pagamento. Para um desenvolvedor, a prepza pode avaliar bancos de dados, APIs, design de sistemas ou um framework. Quando um tópico envolve código, SQL, comandos de shell ou configuração, muitas perguntas mostram um pequeno exemplo e perguntam o que ele imprime ou retorna, o que faz, por que falha ou qual mudança o corrige. Os candidatos escolhem uma entre quatro respostas. Eles não escrevem, executam nem depuram código na prepza, e não há um ambiente de live coding.
 
 - **Preço:** por candidato que responde pelo menos uma pergunta, mais barato por candidato em recargas maiores. Sem assinatura, e os créditos não expiram. Veja os [preços](/pricing).
-- **Além disso:** fichas de resultados com respostas e tempos, alertas para respostas rápidas demais, saídas da página e tentativas de cópia, relatórios em PDF, convites por e-mail ou por um link no anúncio da vaga, lembretes automáticos e 23 idiomas.
+- **Além disso:** fichas de avaliação com respostas e tempos, alertas para respostas rápidas demais, saídas da página e tentativas de cópia, relatórios em PDF, convites por e-mail ou por um link no anúncio da vaga, lembretes automáticos e 23 idiomas.
 - **Indicada para:** uma primeira triagem antes da etapa de programação e um teste para vagas fora da engenharia.
 
 ### TestGorilla: um catálogo amplo

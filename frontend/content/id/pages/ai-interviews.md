@@ -65,9 +65,9 @@ Kamu juga bisa melihat pratinjau wawancaramu sendiri sebagai kandidat sebelum me
 
 **Lebih sedikit sinyal yang tidak relevan.** Jawaban pilihan ganda tidak membawa aksen, wajah, latar belakang, atau gaya menulis, jadi skornya tidak bergantung pada penampilan atau suara seseorang. Ini tidak menghapus kemungkinan bias: tes pengetahuan bisa menunjukkan perbedaan skor antarkelompok, dan tes dalam bahasa kedua kandidat bisa menghambatnya. Pantau hasil antarkelompok.
 
-**Membagikan jawaban lebih sulit.** Dengan set soal acak untuk setiap kandidat dan timer di setiap soal, membagikan jawaban atau mencari jawaban butuh usaha lebih. Sinyal integritas membantumu memutuskan di mana perlu melihat lebih teliti; sinyal itu bukan bukti kecurangan.
+**Membagikan jawaban lebih sulit.** Dengan set soal acak untuk setiap kandidat dan timer di setiap soal, membagikan jawaban atau mencari jawaban butuh usaha lebih. Tanda peringatan membantumu memutuskan di mana perlu melihat lebih teliti; tanda itu bukan bukti kecurangan.
 
-Semua ini tidak otomatis membuat tes menjadi adil. Soal tetap harus sesuai dengan pekerjaan, batas waktu harus cocok dengan perannya, dan orang harus membaca hasil dengan cermat. Skor adalah bukti, bukan vonis. Kalau kamu sedang menimbang tes berbatas waktu dibanding metode penyaringan lain, baca [Tes keterampilan vs penyaringan CV](/guides/skills-tests-vs-cv-screening).
+Semua ini tidak otomatis membuat tes menjadi adil. Soal tetap harus sesuai dengan pekerjaan, batas waktu harus cocok dengan posisinya, dan orang harus membaca hasil dengan cermat. Skor adalah bukti, bukan vonis. Kalau kamu sedang menimbang tes berbatas waktu dibanding metode penyaringan lain, baca [Tes keterampilan vs penyaringan CV](/guides/skills-tests-vs-cv-screening).
 
 ### Apa yang tidak bisa dilakukan pilihan ganda
 
@@ -94,7 +94,7 @@ Hasil wawancara adalah data pribadi, baik menurut GDPR UE maupun UK GDPR. Harapk
 
 ### Amerika Serikat
 
-Alat AI yang dipakai dalam rekrutmen tunduk pada aturan antidiskriminasi yang sama seperti metode seleksi lainnya. Pantau tingkat seleksi antarkelompok (patokan empat per lima dalam [29 CFR 1607.4(D)](https://www.law.cornell.edu/cfr/text/29/1607.4)), sediakan akomodasi, dan periksa aturan negara bagian dan lokal. Misalnya, [Local Law 144](https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page) Kota New York mewajibkan audit bias dalam satu tahun sebelum memakai alat keputusan ketenagakerjaan otomatis, ringkasan publik atas audit itu, dan pemberitahuan kepada kandidat. Lihat [Tes pra-kerja](/pre-employment-testing) untuk gambaran umumnya.
+Alat AI yang dipakai dalam rekrutmen tunduk pada aturan antidiskriminasi yang sama seperti metode seleksi lainnya. Pantau tingkat seleksi antarkelompok (patokan empat per lima dalam [29 CFR 1607.4(D)](https://www.law.cornell.edu/cfr/text/29/1607.4)), sediakan akomodasi, dan periksa aturan negara bagian dan lokal. Misalnya, [Local Law 144](https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page) Kota New York mewajibkan audit bias dalam satu tahun sebelum memakai alat keputusan ketenagakerjaan otomatis, ringkasan publik atas audit itu, dan pemberitahuan kepada kandidat. Lihat [Tes seleksi karyawan](/pre-employment-testing) untuk gambaran umumnya.
 
 ## Cara menilai alat wawancara AI
 

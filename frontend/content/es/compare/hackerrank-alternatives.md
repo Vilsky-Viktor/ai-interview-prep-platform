@@ -40,7 +40,7 @@ prepza lee tu descripción del puesto, extrae lo que un candidato debe saber y p
 Funciona igual para un desarrollador backend que para un especialista en nóminas. Para un desarrollador, prepza puede evaluar bases de datos, API, diseño de sistemas o un framework. Cuando un tema incluye código, SQL, comandos de shell o configuración, muchas preguntas muestran un breve ejemplo y preguntan qué imprime o devuelve, qué hace, por qué falla o qué cambio lo corrige. Los candidatos eligen una de cuatro respuestas. No escriben, ejecutan ni depuran código en prepza, y no hay un entorno de programación en directo.
 
 - **Precio:** por candidato que responde al menos una pregunta, más barato por candidato con recargas más grandes. Sin suscripción, y los créditos no caducan. Consulta los [precios](/pricing).
-- **Además:** fichas de resultados con respuestas y tiempos, avisos de respuestas demasiado rápidas, salidas de la página e intentos de copiar, informes en PDF, invitaciones por correo electrónico o con un enlace en la oferta de empleo, recordatorios automáticos y 23 idiomas.
+- **Además:** fichas de evaluación con respuestas y tiempos, alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar, informes en PDF, invitaciones por correo electrónico o con un enlace en la oferta de empleo, recordatorios automáticos y 23 idiomas.
 - **Adecuado para:** un primer filtro antes de la fase de programación y una prueba para puestos fuera de ingeniería.
 
 ### TestGorilla: un catálogo amplio

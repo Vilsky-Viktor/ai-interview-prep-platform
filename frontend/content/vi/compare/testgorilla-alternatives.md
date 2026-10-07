@@ -28,11 +28,11 @@ Sau đó đối chiếu mô hình giá với số lượng tuyển dụng của 
 | --- | --- | --- |
 | **TestGorilla** | Thư viện rộng: nhận thức, tính cách, ngoại ngữ, lập trình, kỹ năng theo vị trí | Gói miễn phí và gói trả phí thanh toán theo năm ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
 | **prepza** | Phỏng vấn kỹ năng trắc nghiệm có tính giờ, viết từ mô tả công việc của bạn | Theo mỗi ứng viên có trả lời, không có gói đăng ký ([bảng giá](/pricing)) |
-| **CodeSignal** | Đánh giá kỹ thuật và người phỏng vấn AI; vị trí go-to-market ở gói cao hơn | Gói theo tháng hoặc theo năm kèm tín dụng ([trang bảng giá](https://codesignal.com/pricing/)) |
+| **CodeSignal** | Đánh giá kỹ thuật và người phỏng vấn AI; vị trí go-to-market ở gói cao hơn | Gói theo tháng hoặc theo năm kèm credit ([trang bảng giá](https://codesignal.com/pricing/)) |
 | **HackerRank** | Bài test lập trình và phỏng vấn kỹ thuật | Xem [trang bảng giá](https://www.hackerrank.com/pricing/) |
-| **Alooba** | Sàng lọc vị trí kỹ thuật và dữ liệu | Gói theo tháng hoặc theo năm kèm tín dụng ([trang bảng giá](https://www.alooba.com/pricing/)) |
+| **Alooba** | Sàng lọc vị trí kỹ thuật và dữ liệu | Gói theo tháng hoặc theo năm kèm credit ([trang bảng giá](https://www.alooba.com/pricing/)) |
 | **Bryq** | Đánh giá nhận thức, tính cách và kỹ năng | Gói theo tháng hoặc theo năm ([trang bảng giá](https://www.bryq.com/pricing)) |
-| **Codility** | Đánh giá lập trình | Gói theo năm kèm tín dụng lời mời ([trang bảng giá](https://www.codility.com/pricing/)) |
+| **Codility** | Đánh giá lập trình | Gói theo năm kèm credit lời mời ([trang bảng giá](https://www.codility.com/pricing/)) |
 | **Criteria, Wonderlic, SHL** | Trắc nghiệm tâm lý và kiểm tra nhận thức | Báo giá riêng |
 
 ## Chi tiết từng công cụ
@@ -41,7 +41,7 @@ Sau đó đối chiếu mô hình giá với số lượng tuyển dụng của 
 
 prepza biến mô tả công việc thành một buổi phỏng vấn kỹ năng trắc nghiệm có tính giờ. Bạn duyệt các chủ đề được đề xuất trước khi bất kỳ câu hỏi nào được viết, và mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên của riêng mình với đồng hồ đếm ngược cho từng câu. Với vị trí kỹ thuật, câu hỏi có thể đưa ra một ví dụ code ngắn và hỏi nó làm gì hoặc in ra gì. Bảng điểm hiển thị mọi câu trả lời và thời gian, kèm cảnh báo về trả lời quá nhanh, rời khỏi trang và cố sao chép. Bạn mời qua email hoặc bằng một liên kết trong tin tuyển dụng, và lời nhắc được gửi tự động.
 
-- **Giá:** theo mỗi ứng viên trả lời ít nhất một câu hỏi, rẻ hơn mỗi ứng viên với các mức nạp lớn hơn. Tín dụng không hết hạn, và không có gói đăng ký. Xem [bảng giá](/pricing).
+- **Giá:** theo mỗi ứng viên trả lời ít nhất một câu hỏi, rẻ hơn mỗi ứng viên với các mức nạp lớn hơn. Credit không hết hạn, và không có gói đăng ký. Xem [bảng giá](/pricing).
 - **Phù hợp với:** các nhóm vừa và nhỏ tuyển cho mọi vị trí, vài người mỗi lần, làm vòng sàng lọc đầu tiên.
 - **Không dành cho:** bài kiểm tra nhận thức hay tính cách, viết hoặc chạy code, phỏng vấn video hay tích hợp ATS. prepza không có những thứ đó, vì vậy hãy dùng kèm một công cụ có chúng khi bạn cần.
 

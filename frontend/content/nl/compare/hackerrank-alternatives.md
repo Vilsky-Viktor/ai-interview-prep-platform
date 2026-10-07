@@ -25,7 +25,7 @@ Deze pagina legt uit waar elk soort tool past. Feiten verwijzen naar de eigen pa
 | Tool | Het sterkst in | Functies buiten engineering | Code in de test | Prijsmodel (per oktober 2026) |
 | --- | --- | --- | --- | --- |
 | **HackerRank** | Programmeertests, live coding-interviews en een AI-interviewer voor developers ([site](https://www.hackerrank.com/)) | Niet de focus | Kandidaten schrijven en draaien code | Zie de [prijspagina](https://www.hackerrank.com/pricing/) |
-| **prepza** | Sollicitatiegesprekken over vaardigheden met tijdslimiet en meerkeuzevragen, op basis van je functieomschrijving | Elke functie | Vragen over code lezen (wat code doet of uitvoert); geen code schrijven of draaien | Per kandidaat, geen abonnement ([prijzen](/pricing)) |
+| **prepza** | Interviews over vaardigheden met tijdslimiet en meerkeuzevragen, op basis van je functieomschrijving | Elke functie | Vragen over code lezen (wat code doet of uitvoert); geen code schrijven of draaien | Per kandidaat, geen abonnement ([prijzen](/pricing)) |
 | **TestGorilla** | Brede testbibliotheek: functievaardigheden, cognitief, persoonlijkheid, taal, programmeren | Ja | Programmeertests; eigen programmeeropdrachten in het duurdere plan | Gratis plan en jaarplannen ([prijspagina](https://www.testgorilla.com/pricing/)) |
 | **CodeSignal** | Technische assessments en AI-interviewers | Sales, customer success en marketing in duurdere plannen | Programmeerassessments | Maand- of jaarplannen met credits ([prijspagina](https://codesignal.com/pricing/)) |
 | **Bryq** | Cognitieve, persoonlijkheids- en vaardigheidsassessments | Ja | Niet de focus | Maand- of jaarplannen ([prijspagina](https://www.bryq.com/pricing)) |

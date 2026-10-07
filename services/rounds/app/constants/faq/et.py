@@ -35,16 +35,16 @@ FAQ = [
     {
         "key": "cost",
         "question": "Kui palju see maksab?",
-        "answer": "Intervjuude loomine on tasuta. Iga kandidaat, kes vastab vähemalt ühele küsimusele, maksab {candidate} krediiti ({candidate_dollars} $), ja suuremate laadimiste krediitidega vähem, kuni 1 $. Sinu esimene ettevõte saab {company} tasuta krediiti, millest piisab tema esimese {company_candidates} kandidaadi jaoks. Hinnalehel on kõik hinnad.",
+        "answer": "Intervjuude loomine on tasuta. Iga kandidaat, kes vastab vähemalt ühele küsimusele, maksab {candidate} krediiti ({candidate_dollars} $), ja suuremate juurdelaadimiste krediitidega vähem, kuni 1 $. Sinu esimene ettevõte saab {company} tasuta krediiti, millest piisab tema esimese {company_candidates} kandidaadi jaoks. Hinnalehel on kõik hinnad.",
     },
     {
         "key": "charged",
         "question": "Millal kandidaadi eest tasu võetakse?",
-        "answer": "Ainult siis, kui ta lõpetab intervjuu ja on vastanud vähemalt ühele küsimusele. Tema krediidid pannakse kõrvale, kui ta kutsud, ja tulevad tagasi, kui tühistad kutse, kui ta kunagi ei alusta või kui ta ei vasta millelegi.",
+        "answer": "Ainult siis, kui ta lõpetab intervjuu ja on vastanud vähemalt ühele küsimusele. Kutsumisel broneeritakse tema jaoks krediidid ja need tulevad tagasi, kui tühistad kutse, kui ta kunagi ei alusta või kui ta ei vasta millelegi.",
     },
     {
         "key": "compare_hiring",
-        "question": "Kuidas hind võrdub teiste hindamisvahenditega?",
+        "question": "Milline on hind võrreldes teiste hindamisvahenditega?",
         "answer": "Paljusid hindamisvahendeid müüakse kuu- või aastatellimusena, mille eest maksad ka siis, kui kedagi ei testi. prepzas maksad ainult kandidaatide eest: {candidate} krediiti ({candidate_dollars} $) kandidaadi kohta, ilma lepingu, kasutajatasude ja intervjuu loomise tasuta. Ettevõte, kes kutsub {example_candidates} kandidaati kuus, maksab umbes {example_year_dollars} $ aastas. Kui testid igal kuul palju kandidaate, võib tellimus olla odavam, nii et võrdle oma numbritega.",
     },
     {
@@ -64,7 +64,7 @@ FAQ = [
     },
     {
         "key": "reports",
-        "question": "Kas saan tulemusi värbamisjuhiga jagada?",
+        "question": "Kas saan tulemusi värbava juhiga jagada?",
         "answer": "Jah. Laadi alla PDF-aruanne ühe kandidaadi või intervjuu kõigi kandidaatide kohta, saada see e-postiga otse prepzast või saada lühike kokkuvõte WhatsAppis või Telegramis.",
     },
     {
@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "verified",
         "question": "Mida kinnitusmärk tähendab?",
-        "answer": "Seda, et ettevõtte omanik või administraator logis sisse ettevõtte veebilehe domeeni töömeiliga, näiteks you@acme.com, ja meie meeskond vaatas ettevõtte seejärel üle. Lisa veebileht oma ettevõtte päises nupuga Kinnita; tasuta e-postiteenused ei sobi. Kuni ülevaatus on ootel, näeb su meeskond nime kõrval kella, ja ettevõtte ümbernimetamine saadab selle uuesti ülevaatusele. Märk on näha ettevõtte nime kõrval, ka kutsetes.",
+        "answer": "Seda, et ettevõtte omanik või administraator logis sisse ettevõtte veebilehe domeeni e-posti aadressiga, näiteks you@acme.com, ja meie meeskond vaatas ettevõtte seejärel üle. Lisa veebileht oma ettevõtte päises nupuga Kinnita; tasuta e-postiteenused ei sobi. Kuni ülevaatus on ootel, näeb su meeskond nime kõrval kella, ja ettevõtte ümbernimetamine saadab selle uuesti ülevaatusele. Märk on näha ettevõtte nime kõrval, ka kutsetes.",
     },
     {
         "key": "languages",

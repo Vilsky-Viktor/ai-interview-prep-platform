@@ -21,7 +21,7 @@ Esta página explica como elas diferem, onde cada uma se encaixa melhor e como c
 
 | | prepza | TestGorilla |
 | --- | --- | --- |
-| Como um teste é criado | Escrito a partir da sua descrição da vaga; você revisa os tópicos antes de as perguntas serem escritas. Também há modelos prontos por função | Montado a partir de um catálogo de testes prontos; perguntas personalizadas nos planos pagos ([página de preços](https://www.testgorilla.com/pricing/)) |
+| Como um teste é criado | Escrito a partir da sua descrição da vaga; você revisa os tópicos antes de as perguntas serem escritas. Também há modelos prontos por cargo | Montado a partir de um catálogo de testes prontos; perguntas personalizadas nos planos pagos ([página de preços](https://www.testgorilla.com/pricing/)) |
 | Tipos de teste | Entrevistas de habilidades e conhecimentos de múltipla escolha cronometradas, com perguntas de leitura de código em tópicos técnicos | Habilidade cognitiva, idiomas, personalidade e cultura, programação, habilidades específicas da função, julgamento situacional, habilidades com softwares, digitação ([catálogo de testes](https://www.testgorilla.com/test-library/)) |
 | Perguntas em vídeo | Não | Sim, nos planos pagos |
 | Entrevistas com IA | Sem IA conversacional; a IA propõe tópicos e escreve e verifica as perguntas | Entrevistas com IA no plano mais alto |
@@ -29,7 +29,7 @@ Esta página explica como elas diferem, onde cada uma se encaixa melhor e como c
 | Perguntas por candidato | Conjunto aleatório próprio para cada candidato, em ordem própria | Não comparado aqui |
 | Recursos de integridade | Cronômetro em cada pergunta (controlado pelo servidor), alertas para respostas rápidas demais, saídas da página e tentativas de cópia | Fotos pela webcam, copiar/colar desativado e modo de tela cheia no plano mais alto |
 | Integrações com ATS | Não | Integrações com ATS/API no plano mais alto |
-| Relatórios | Fichas de resultados com respostas e tempos; PDF de um candidato ou de todos | Não comparado aqui |
+| Relatórios | Fichas de avaliação com respostas e tempos; PDF de um candidato ou de todos | Não comparado aqui |
 | Idiomas | 23 idiomas para a interface, as entrevistas e os e-mails | Não comparado aqui; o catálogo inclui testes de proficiência em idiomas |
 | Modelo de preços | Por candidato que responde, com créditos pré-pagos; sem assinatura ([preços](/pricing)) | Um plano gratuito e planos pagos com cobrança anual ([página de preços](https://www.testgorilla.com/pricing/)) |
 | Hospedagem | UE (alguns suboperadores nos EUA; veja a [política de privacidade](/privacy)) | Não comparado aqui |

@@ -15,14 +15,14 @@ Trang này giải thích các lựa chọn thay cho gói đăng ký, chúng so v
 
 - **Tuyển dụng không đều.** Bạn có thể tuyển ba người vào tháng 3 rồi không tuyển ai cho đến tháng 9.
 - **Thanh toán theo năm giữ chân ngân sách.** Một gói "thanh toán theo năm" là chi phí của cả năm trả trước.
-- **Những tháng không dùng là mất trắng.** Tín dụng hoặc hạn mức đặt lại mỗi tháng chẳng giúp gì khi bạn không tuyển.
+- **Những tháng không dùng là mất trắng.** Credit hoặc hạn mức đặt lại mỗi tháng chẳng giúp gì khi bạn không tuyển.
 - **Phê duyệt mất thời gian.** Một hợp đồng định kỳ thường cần phê duyệt mà một lần mua đơn lẻ không cần.
 
 ## Các lựa chọn không cần gói đăng ký
 
 | Lựa chọn | Cách bạn trả tiền | Cần lưu ý |
 | --- | --- | --- |
-| **Trả tiền theo ứng viên** | Một mức giá cho mỗi ứng viên làm bài, thường từ tín dụng trả trước | Bạn có phải trả cho ứng viên không bao giờ bắt đầu không, và tín dụng có hết hạn không |
+| **Trả tiền theo ứng viên** | Một mức giá cho mỗi ứng viên làm bài, thường từ credit trả trước | Bạn có phải trả cho ứng viên không bao giờ bắt đầu không, và credit có hết hạn không |
 | **Gói miễn phí** | Không mất gì, trong giới hạn hằng tháng | Giới hạn số bài kiểm tra hoặc số ứng viên, và những bài kiểm tra nào được bao gồm |
 | **Dự án một lần** | Mua một lần cho một đợt tuyển dụng | Thường chỉ qua bộ phận kinh doanh, theo báo giá |
 
@@ -30,12 +30,12 @@ Trang này giải thích các lựa chọn thay cho gói đăng ký, chúng so v
 
 | Công cụ | Mô hình giá (tính đến tháng 10/2026) | Cam kết |
 | --- | --- | --- |
-| **prepza** | Tín dụng trả trước, tính phí theo mỗi ứng viên có trả lời ([bảng giá](/pricing)) | Không có; tín dụng không hết hạn |
+| **prepza** | Credit trả trước, tính phí theo mỗi ứng viên có trả lời ([bảng giá](/pricing)) | Không có; credit không hết hạn |
 | **TestGorilla** | Gói miễn phí, hoặc gói trả phí thanh toán theo năm ([trang bảng giá](https://www.testgorilla.com/pricing/)) | Theo năm với gói trả phí |
-| **CodeSignal** | Gói kèm tín dụng ([trang bảng giá](https://codesignal.com/pricing/)) | Theo tháng hoặc theo năm |
+| **CodeSignal** | Gói kèm credit ([trang bảng giá](https://codesignal.com/pricing/)) | Theo tháng hoặc theo năm |
 | **Bryq** | Gói với số lời mời không giới hạn ([trang bảng giá](https://www.bryq.com/pricing)) | Theo tháng hoặc theo năm |
-| **Alooba** | Gói kèm tín dụng hằng tháng ([trang bảng giá](https://www.alooba.com/pricing/)) | Theo tháng hoặc theo năm; tín dụng hết hạn vào cuối mỗi kỳ thanh toán; gói Enterprise tối thiểu 1 năm |
-| **Codility** | Gói theo năm kèm tín dụng lời mời ([trang bảng giá](https://www.codility.com/pricing/)) | Theo năm |
+| **Alooba** | Gói kèm credit hằng tháng ([trang bảng giá](https://www.alooba.com/pricing/)) | Theo tháng hoặc theo năm; credit hết hạn vào cuối mỗi kỳ thanh toán; gói Enterprise tối thiểu 1 năm |
+| **Codility** | Gói theo năm kèm credit lời mời ([trang bảng giá](https://www.codility.com/pricing/)) | Theo năm |
 
 Một số công cụ trên có thanh toán theo tháng, không phải hợp đồng dài hạn nhưng vẫn là phí định kỳ. Nếu bạn chỉ thỉnh thoảng mới tuyển, hãy nhớ hủy giữa các đợt tuyển dụng.
 
@@ -43,16 +43,16 @@ Các công cụ này cũng kiểm tra những thứ khác nhau. Một gói đăn
 
 ## Cách tính giá của prepza
 
-prepza không có gói đăng ký và không có hợp đồng. Bạn mua tín dụng khi cần và dùng chúng cho ứng viên.
+prepza không có gói đăng ký và không có hợp đồng. Bạn mua credit khi cần và dùng chúng cho ứng viên.
 
-- **$1 mua được 100 tín dụng.** Tín dụng không hết hạn.
-- **Một ứng viên tốn 300 tín dụng,** chỉ bị trừ khi họ trả lời ít nhất một câu hỏi. Nếu một ứng viên được mời không bao giờ bắt đầu, tín dụng sẽ được hoàn lại. Lời mời không được bắt đầu trong 30 ngày sẽ hết hạn và hoàn lại tín dụng.
-- **Mức nạp lớn hơn mua được nhiều tín dụng hơn trên mỗi đô la,** nên giá mỗi ứng viên giảm khi mức nạp tăng. Xem [bảng giá](/pricing) để biết các mức nạp.
+- **$1 mua được 100 credit.** Credit không hết hạn.
+- **Một ứng viên tốn 300 credit,** chỉ bị trừ khi họ trả lời ít nhất một câu hỏi. Nếu một ứng viên được mời không bao giờ bắt đầu, credit sẽ được hoàn lại. Lời mời không được bắt đầu trong 30 ngày sẽ hết hạn và hoàn lại credit.
+- **Mức nạp lớn hơn mua được nhiều credit hơn trên mỗi đô la,** nên giá mỗi ứng viên giảm khi mức nạp tăng. Xem [bảng giá](/pricing) để biết các mức nạp.
 - **Tạo buổi phỏng vấn là miễn phí,** xem trước buổi phỏng vấn với tư cách ứng viên cũng vậy.
 - **Không tính phí theo người dùng.** Thêm quản trị viên và người xem vào công ty của bạn miễn phí.
-- **Tín dụng chào mừng:** 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí.
+- **Credit chào mừng:** 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí.
 
-Giá tính bằng đô la Mỹ. Thanh toán qua Paddle, đơn vị xử lý VAT và thuế bán hàng và hiển thị số tiền cuối cùng khi thanh toán; prepza không lưu thông tin thẻ. Bạn có thể bật tính năng tự động nạp tiền để nạp lại số dư khi sắp hết, nhưng đó là tùy chọn.
+Giá tính bằng đô la Mỹ. Thanh toán qua Paddle, đơn vị xử lý VAT và thuế bán hàng và hiển thị số tiền cuối cùng khi thanh toán; prepza không lưu thông tin thẻ. Bạn có thể bật tính năng tự động nạp để nạp thêm credit khi sắp hết, nhưng đó là tùy chọn.
 
 ## Bạn nhận được gì cho mỗi ứng viên
 
@@ -74,7 +74,7 @@ Trả tiền theo ứng viên không phải lúc nào cũng rẻ hơn. Gói đă
 ## Câu hỏi nên đặt cho mọi nhà cung cấp trả theo mức dùng
 
 1. Tôi có phải trả cho ứng viên không bao giờ bắt đầu không?
-2. Tín dụng có hết hạn không?
+2. Credit có hết hạn không?
 3. Có phí theo người dùng hoặc phí thiết lập không?
 4. Tôi có thể tạo bài kiểm tra cho đúng vị trí của mình không, hay chỉ dùng bài có sẵn?
 5. Dữ liệu ứng viên được xử lý thế nào, và được lưu trữ ở đâu?

@@ -39,7 +39,7 @@ Después, contrasta el modelo de precios con tu volumen de contratación. Un pla
 
 ### prepza
 
-prepza convierte una descripción del puesto en una entrevista de habilidades de opción múltiple con tiempo límite. Revisas los temas propuestos antes de que se redacte ninguna pregunta, y cada candidato recibe su propio conjunto aleatorio de preguntas con una cuenta atrás en cada una. Para puestos técnicos, las preguntas pueden mostrar un breve ejemplo de código y preguntar qué hace o qué imprime. Las fichas de resultados muestran cada respuesta y su tiempo, con avisos de respuestas demasiado rápidas, salidas de la página e intentos de copiar. Invitas por correo electrónico o con un único enlace en tu oferta de empleo, y los recordatorios se envían automáticamente.
+prepza convierte una descripción del puesto en una entrevista de habilidades de opción múltiple con tiempo límite. Revisas los temas propuestos antes de que se redacte ninguna pregunta, y cada candidato recibe su propio conjunto aleatorio de preguntas con una cuenta atrás en cada una. Para puestos técnicos, las preguntas pueden mostrar un breve ejemplo de código y preguntar qué hace o qué imprime. Las fichas de evaluación muestran cada respuesta y su tiempo, con alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar. Invitas por correo electrónico o con un único enlace en tu oferta de empleo, y los recordatorios se envían automáticamente.
 
 - **Precio:** por candidato que responde al menos una pregunta, más barato por candidato con recargas más grandes. Los créditos no caducan y no hay suscripción. Consulta los [precios](/pricing).
 - **Adecuado para:** equipos pequeños y medianos que contratan para cualquier puesto, pocas personas cada vez, como primer filtro.

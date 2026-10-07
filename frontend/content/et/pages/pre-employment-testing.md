@@ -76,7 +76,7 @@ Küsimused, mida tasub igalt pakkujalt küsida:
 
 | Küsimus | Miks see on oluline |
 | --- | --- |
-| Kas testi saab sobitada täpselt minu rolliga? | Üldine raamatukogu test võib jätta poole sinu töö vajadustest katmata |
+| Kas testi saab sobitada täpselt minu rolliga? | Üldine valmistest võib jätta poole sinu töö vajadustest katmata |
 | Kas saan enne kandidaatide testi tegemist näha ja muuta, mida testitakse? | Sisu eest vastutad sina |
 | Kuidas spikerdamisega toime tullakse? | Jagatud küsimused ja avatud brauseri vahelehed nõrgestavad iga veebitesti |
 | Mida kandidaat näeb? | Selged juhised ja õiglased ajapiirangud vähendavad katkestamist ja kaebusi |
@@ -99,6 +99,6 @@ prepza muudab töökuulutuse ajapiiranguga valikvastustega oskuste intervjuuks.
 - **Hindamislehed** näitavad iga vastust, kas see oli õige ja kui kaua see aega võttis, koos märgetega liiga kiirete vastuste, lehelt lahkumise ja kopeerimiskatsete kohta. Märked tulemust ei muuda.
 - **Vastuseid kontrollitakse vastusevõtme järgi**, mille AI kirjutab ja üle kontrollib; ükski AI ei loe ega hinda kandidaadi vastust. PDF-aruanne hõlmab ühte kandidaati või kogu nimekirja.
 
-Maksad iga vastava kandidaadi eest, ilma tellimuseta: 1–3 $ kandidaadi kohta sõltuvalt juurdelaadimise suurusest, USA dollarites, ja sinu esimesed 3 kandidaati on tasuta. Andmeid hoitakse ELis (mõned volitatud alamtöötlejad asuvad USAs; vaata [privaatsuspoliitikat](/privacy)) ning andmetöötlusleping ja juhised ettevõtetele on hinnas.
+Maksad iga vastanud kandidaadi eest, ilma tellimuseta: 1–3 $ kandidaadi kohta sõltuvalt juurdelaadimise suurusest, USA dollarites, ja sinu esimesed 3 kandidaati on tasuta. Andmeid hoitakse ELis (mõned volitatud alamtöötlejad asuvad USAs; vaata [privaatsuspoliitikat](/privacy)) ning andmetöötlusleping ja juhised ettevõtetele on hinnas.
 
 prepza ei ole psühhomeetriliste testide komplekt, koodi kirjutamise ja käivitamise platvorm ega videointervjuu tööriist ning töötab nende kõrval. Kuidas see võrreldes teiste värbamise AI-tööriistadega välja näeb, loe lehelt [AI-intervjuud](/ai-interviews). Inseneride värbamise kohta vaata [Kuidas värvata insenere](/guides/hiring-engineers).

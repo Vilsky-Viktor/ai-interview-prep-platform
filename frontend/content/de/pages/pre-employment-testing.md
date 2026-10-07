@@ -92,7 +92,7 @@ prepza macht aus einer Stellenbeschreibung ein zeitlich begrenztes Multiple-Choi
 
 1. **Stellenbeschreibung einfügen.** Jede Stelle, jede von 23 Sprachen. prepza erkennt, was ein Kandidat wissen muss, und schlägt Themen vor.
 2. **Themen prüfen.** Entfernen Sie Häkchen bei Themen, die Sie nicht brauchen, benennen Sie ein Thema um, bearbeiten Sie seine Unterthemen oder beschreiben Sie Änderungen in normalem Text. Fragen werden erst geschrieben, wenn Sie zugestimmt haben. Sie können auch mit einer fertigen Vorlage für Ihre Stelle beginnen.
-3. **Kandidaten einladen.** Versenden Sie Einladungen per E-Mail, fügen Sie eine Liste ein, laden Sie eine Datei hoch oder setzen Sie einen teilbaren Link in Ihre Stellenanzeige. Erinnerungen gehen automatisch raus.
+3. **Kandidaten einladen.** Versenden Sie Einladungen per E-Mail, fügen Sie eine Liste ein, laden Sie eine Datei hoch oder setzen Sie einen Link zum Teilen in Ihre Stellenanzeige. Erinnerungen gehen automatisch raus.
 4. **Ergebnisse lesen.** Die Punktzahlen kommen als Rangliste, mit einer Auswertung (Scorecard) für jeden Kandidaten.
 
 - **Jeder Kandidat erhält einen eigenen zufälligen Fragensatz** aus dem Fragenpool jedes Themas, mit einem serverseitig erzwungenen Countdown bei jeder Frage. Allen, die darum bitten, können Sie zusätzliche Zeit geben.

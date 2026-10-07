@@ -1,31 +1,31 @@
 ---
-title: "Tes pra-kerja: panduan praktis untuk tim kecil dan menengah"
+title: "Tes seleksi karyawan: panduan praktis untuk tim kecil dan menengah"
 seoTitle: "Tes Seleksi Karyawan: Jenis, Keadilan, dan Cara Memilih Alat"
 description: "Apa itu tes seleksi karyawan, jenisnya, kapan dipakai, dasar keadilan dan hukumnya, serta cara memilih alat tes rekrutmen. Panduan ringkas untuk tim HR."
 updated: "2026-10-07"
 ---
 
-# Tes pra-kerja: panduan praktis untuk tim kecil dan menengah
+# Tes seleksi karyawan: panduan praktis untuk tim kecil dan menengah
 
-Tes pra-kerja adalah pemeriksaan terstruktur yang diikuti setiap pelamar untuk suatu peran sebelum kamu memutuskan siapa yang akan diwawancarai atau direkrut. Kamu mungkin juga mengenalnya sebagai tes rekrutmen, tes seleksi karyawan, asesmen pra-rekrutmen, atau tes keterampilan. Idenya sama: ajukan jenis pertanyaan yang sama kepada semua orang, nilai dengan cara yang sama, dan bandingkan orang berdasarkan bukti, bukan berdasarkan kesan dari CV mereka.
+Tes seleksi karyawan adalah pemeriksaan terstruktur yang diikuti setiap pelamar untuk suatu posisi sebelum kamu memutuskan siapa yang akan diwawancarai atau direkrut. Kamu mungkin juga mengenalnya sebagai tes rekrutmen, asesmen pra-rekrutmen, atau tes keterampilan. Idenya sama: ajukan jenis pertanyaan yang sama kepada semua orang, nilai dengan cara yang sama, dan bandingkan orang berdasarkan bukti, bukan berdasarkan kesan dari CV mereka.
 
 Panduan ini membahas jenis-jenis tes utama, kapan tes membantu, dasar keadilan dan hukumnya, serta apa yang perlu dicari dari sebuah alat. Di bagian akhir dijelaskan cara prepza melakukannya, dan apa yang tidak dilakukan prepza.
 
-## Apa itu tes pra-kerja
+## Apa itu tes seleksi karyawan
 
-Tes yang baik memeriksa apa yang benar-benar dibutuhkan peran tersebut, dijalankan dalam kondisi yang sama untuk semua orang, dan memberi hasil yang bisa dibaca dan dijelaskan oleh manusia. Tes tidak membuat keputusan rekrutmen; tes memberi orang yang membuat keputusan informasi yang lebih baik, lebih awal.
+Tes yang baik memeriksa apa yang benar-benar dibutuhkan posisi tersebut, dijalankan dalam kondisi yang sama untuk semua orang, dan memberi hasil yang bisa dibaca dan dijelaskan oleh manusia. Tes tidak membuat keputusan rekrutmen; tes memberi orang yang membuat keputusan informasi yang lebih baik, lebih awal.
 
-## Jenis-jenis tes pra-kerja
+## Jenis-jenis tes seleksi karyawan
 
 | Jenis | Apa yang diukur | Format umum | Cocok untuk |
 | --- | --- | --- | --- |
-| Keterampilan dan pengetahuan kerja | Apakah seseorang menguasai apa yang dibutuhkan pekerjaan | Soal pilihan ganda, termasuk membaca kode; tugas singkat | Peran dengan cakupan pengetahuan yang jelas: akuntansi, sales, support, engineering, marketing |
-| Kemampuan kognitif | Penalaran, kemampuan numerik, kemampuan verbal | Teka-teki dan soal berbatas waktu | Peran yang paling mengutamakan kecepatan belajar |
+| Keterampilan dan pengetahuan kerja | Apakah seseorang menguasai apa yang dibutuhkan pekerjaan | Soal pilihan ganda, termasuk membaca kode; tugas singkat | Posisi dengan cakupan pengetahuan yang jelas: akuntansi, sales, support, engineering, marketing |
+| Kemampuan kognitif | Penalaran, kemampuan numerik, kemampuan verbal | Teka-teki dan soal berbatas waktu | Posisi yang paling mengutamakan kecepatan belajar |
 | Kepribadian dan perilaku | Gaya kerja dan preferensi | Kuesioner | Diskusi kecocokan tim, pengembangan |
 | Sampel kerja dan simulasi kerja | Mengerjakan sebagian dari pekerjaan sebenarnya | Tugas, studi kasus, menulis kode | Pemeriksaan tahap akhir untuk shortlist |
-| Bahasa dan mengetik | Kemahiran dan kecepatan | Tes yang dinilai | Peran yang berhadapan dengan pelanggan dan administrasi |
+| Bahasa dan mengetik | Kemahiran dan kecepatan | Tes yang dinilai | Posisi yang berhadapan dengan pelanggan dan administrasi |
 
-**Yang dicakup prepza:** tes keterampilan dan pengetahuan kerja, dalam bentuk wawancara pilihan ganda berbatas waktu yang ditulis dari deskripsi pekerjaanmu. Untuk peran teknis, ini termasuk soal membaca kode: contoh kode singkat dan pertanyaan tentang apa fungsinya atau hasilnya. prepza tidak menyediakan tes kemampuan kognitif, kuesioner kepribadian, latihan saat kandidat menulis atau menjalankan kode, atau wawancara video. Kalau kamu membutuhkannya, pakai platform yang menyediakannya, sendiri atau berdampingan dengan prepza: penyaringan pengetahuan lebih dulu, lalu tes spesialis untuk shortlist. Lihat [prepza dan TestGorilla](/compare/testgorilla) dan [alternatif TestGorilla](/compare/testgorilla-alternatives).
+**Yang dicakup prepza:** tes keterampilan dan pengetahuan kerja, dalam bentuk wawancara pilihan ganda berbatas waktu yang ditulis dari deskripsi pekerjaanmu. Untuk posisi teknis, ini termasuk soal membaca kode: contoh kode singkat dan pertanyaan tentang apa fungsinya atau hasilnya. prepza tidak menyediakan tes kemampuan kognitif, kuesioner kepribadian, latihan saat kandidat menulis atau menjalankan kode, atau wawancara video. Kalau kamu membutuhkannya, pakai platform yang menyediakannya, sendiri atau berdampingan dengan prepza: penyaringan pengetahuan lebih dulu, lalu tes spesialis untuk shortlist. Lihat [prepza dan TestGorilla](/compare/testgorilla) dan [alternatif TestGorilla](/compare/testgorilla-alternatives).
 
 ### Kenapa tes keterampilan adalah langkah pertama yang masuk akal
 
@@ -33,13 +33,13 @@ Tinjauan besar atas riset rekrutmen menempatkan ukuran yang spesifik untuk peker
 
 Tes keterampilan juga mudah dijelaskan: soal tentang rekonsiliasi rekening jelas termasuk dalam tes untuk akuntan.
 
-## Kapan memakai tes pra-kerja
+## Kapan memakai tes seleksi karyawan
 
 Tes paling membantu saat:
 
 - **Pelamarmu lebih banyak daripada yang bisa kamu baca dengan teliti.** Tes singkat memberi setiap pelamar peluang yang setara, bukan hanya 20 CV pertama yang kamu buka. Lihat [Cara menyaring 100 pelamar dalam sehari](/guides/screen-100-applicants-in-a-day).
-- **CV-nya terlihat mirip.** Peran junior, orang yang beralih karier, dan pelamar internasional sulit dibandingkan di atas kertas.
-- **Peran tersebut punya cakupan pengetahuan yang jelas.** Kalau kamu bisa mendaftar apa yang wajib diketahui karyawan baru di hari pertama, kamu bisa mengujinya.
+- **CV-nya terlihat mirip.** Posisi junior, orang yang beralih karier, dan pelamar internasional sulit dibandingkan di atas kertas.
+- **Posisi tersebut punya cakupan pengetahuan yang jelas.** Kalau kamu bisa mendaftar apa yang wajib diketahui karyawan baru di hari pertama, kamu bisa mengujinya.
 - **Waktu pewawancara menjadi hambatan.** Wawancara diberikan kepada orang yang sudah menunjukkan penguasaan dasar.
 
 Tes kurang membantu saat pekerjaan terutama bergantung pada hal yang tidak bisa ditunjukkan tes singkat, seperti penilaian kepemimpinan senior, atau saat kamu hanya punya tiga pelamar dan bisa berbicara dengan masing-masing.
@@ -70,13 +70,13 @@ Hasil tes adalah data pribadi. Berdasarkan GDPR (dan UK GDPR, yang serupa), kamu
 
 **Manusia yang memutuskan.** Gunakan skor untuk mendukung keputusan, bukan untuk membuatnya. Lihat jawabannya, bukan hanya angkanya, sebelum kamu menolak siapa pun.
 
-## Cara memilih alat tes pra-kerja
+## Cara memilih alat tes seleksi karyawan
 
 Pertanyaan yang layak diajukan kepada vendor mana pun:
 
 | Pertanyaan | Kenapa penting |
 | --- | --- |
-| Apakah tesnya bisa sesuai persis dengan peranku? | Tes generik dari pustaka bisa melewatkan separuh dari yang dibutuhkan pekerjaanmu |
+| Apakah tesnya bisa sesuai persis dengan posisiku? | Tes generik dari pustaka bisa melewatkan separuh dari yang dibutuhkan pekerjaanmu |
 | Bisakah aku melihat dan mengubah apa yang diuji sebelum kandidat mengerjakannya? | Kamu yang bertanggung jawab atas isinya |
 | Bagaimana kecurangan ditangani? | Soal yang dibagikan dan tab browser yang terbuka melemahkan tes online apa pun |
 | Apa yang dilihat kandidat? | Instruksi yang jelas dan batas waktu yang adil mengurangi kandidat yang mundur dan keluhan |
@@ -84,14 +84,14 @@ Pertanyaan yang layak diajukan kepada vendor mana pun:
 | Di mana data disimpan, dan berapa lama? | GDPR, kebijakanmu sendiri, kepercayaan kandidat |
 | Apa kata vendor tentang AI Act dan bias? | Kamu berbagi kewajiban dengan mereka |
 
-Untuk perbandingan harga, lihat [cara membandingkan biaya tes](/compare/cheapest-pre-employment-test) dan [tes pra-kerja tanpa langganan](/compare/pre-employment-tests-without-subscription).
+Untuk perbandingan harga, lihat [cara membandingkan biaya tes](/compare/cheapest-pre-employment-test) dan [tes seleksi karyawan tanpa langganan](/compare/pre-employment-tests-without-subscription).
 
 ## Cara prepza melakukannya
 
 prepza mengubah deskripsi pekerjaan menjadi wawancara keterampilan pilihan ganda berbatas waktu.
 
-1. **Tempel deskripsi pekerjaan.** Peran apa pun, dalam salah satu dari 23 bahasa. prepza mengambil apa yang wajib diketahui kandidat dan mengusulkan topik.
-2. **Tinjau topiknya.** Hapus centang yang tidak kamu perlukan, ganti nama topik, ubah subtopiknya, atau jelaskan perubahan dengan teks biasa. Soal baru ditulis setelah kamu menyetujuinya. Kamu juga bisa mulai dari templat siap pakai untuk peranmu.
+1. **Tempel deskripsi pekerjaan.** Posisi apa pun, dalam salah satu dari 23 bahasa. prepza mengambil apa yang wajib diketahui kandidat dan mengusulkan topik.
+2. **Tinjau topiknya.** Hapus centang yang tidak kamu perlukan, ganti nama topik, ubah subtopiknya, atau jelaskan perubahan dengan teks biasa. Soal baru ditulis setelah kamu menyetujuinya. Kamu juga bisa mulai dari templat siap pakai untuk posisimu.
 3. **Undang kandidat.** Kirim undangan lewat email, tempel daftar, unggah file, atau pasang satu tautan yang bisa dibagikan di lowongan kerjamu. Pengingat terkirim otomatis.
 4. **Baca hasilnya.** Skor masuk dalam urutan peringkat, dengan scorecard untuk setiap kandidat.
 
@@ -101,4 +101,4 @@ prepza mengubah deskripsi pekerjaan menjadi wawancara keterampilan pilihan ganda
 
 Harga dihitung per kandidat yang menjawab, tanpa langganan: $1–3 per kandidat tergantung besar isi ulangmu, dalam dolar AS, dan 3 kandidat pertamamu gratis. Data di-hosting di UE (beberapa sub-pemroses ada di AS; lihat [kebijakan privasi](/privacy)), dan perjanjian pemrosesan data serta petunjuk untuk perusahaan sudah termasuk.
 
-prepza bukan paket psikometri, bukan platform untuk menulis dan menjalankan kode, dan bukan alat wawancara video, dan prepza bisa dipakai berdampingan dengan semua itu. Untuk perbandingannya dengan alat rekrutmen AI lain, baca [Wawancara AI](/ai-interviews). Untuk peran engineering, lihat [Cara merekrut engineer](/guides/hiring-engineers).
+prepza bukan paket psikometri, bukan platform untuk menulis dan menjalankan kode, dan bukan alat wawancara video, dan prepza bisa dipakai berdampingan dengan semua itu. Untuk perbandingannya dengan alat rekrutmen AI lain, baca [Wawancara AI](/ai-interviews). Untuk posisi engineering, lihat [Cara merekrut engineer](/guides/hiring-engineers).

@@ -2,7 +2,7 @@
   "settings": {
     "title": "Ajustes",
     "language": "Idioma",
-    "languageNote": "Para la interfaz y las respuestas del tutor, y el idioma en que empiezan los nuevos kits y entrevistas. Puedes generarlos en cualquier idioma disponible.",
+    "languageNote": "Para la interfaz y las respuestas del chat de ayuda, y el idioma en que empiezan las nuevas entrevistas. Puedes crear una entrevista en cualquier idioma disponible.",
     "languageFailed": "No se pudo cambiar el idioma. Inténtalo de nuevo.",
     "yourData": "Tus datos",
     "yourDataNote": "Descarga todo lo que prepza. guarda sobre ti o elimina tu cuenta.",
@@ -86,7 +86,7 @@
     "text": "Entrevistas cronometradas creadas a partir de tu descripción del puesto. Preguntas únicas para cada candidato y un temporizador en cada una. $1–3 por candidato."
   },
   "start": {
-    "placeholder": "Pega una oferta de empleo, o describe el puesto y lo que un candidato debería saber",
+    "placeholder": "Pega una descripción del puesto, o describe el puesto y lo que un candidato debería saber",
     "description": "Descripción del puesto",
     "submit": "Crear una entrevista",
     "whichCompany": "¿Para qué empresa es esta entrevista?",
@@ -130,7 +130,7 @@
     "description": "Descripción del puesto",
     "create": "Generar",
     "createFailed": "No se pudo iniciar la plantilla. Inténtalo de nuevo.",
-    "text": "Entrevistas listas por puesto, para empresas y talentos.",
+    "text": "Entrevistas listas por puesto, para empresas y para quien quiera practicar.",
     "deleteLabel": "Eliminar {title}",
     "deleteTitle": "¿Eliminar esta plantilla?",
     "deleteText": "Se eliminan sus temas y preguntas. Las entrevistas que las empresas ya crearon a partir de ella se mantienen.",
@@ -157,7 +157,7 @@
     "passed": "{percent} % aprobados",
     "passMark": "nota de aprobado {percent} %",
     "averageGrade": "media {percent} %",
-    "timedOut": "{percent} % sin tiempo",
+    "timedOut": "{percent} % agotó el tiempo",
     "sortBy": {
       "pass_rate": "Menor tasa de aprobado primero",
       "finished": "Más terminados primero"
@@ -282,7 +282,7 @@
     "count": "{count, plural, one {pregunta} other {preguntas}}",
     "loadFailed": "No se pudieron cargar las preguntas.",
     "yourAnswer": "tu respuesta",
-    "aiWritten": "Las preguntas y respuestas escritas por IA pueden fallar. Marca una respuesta incorrecta o regenera."
+    "aiWritten": "Las preguntas y las respuestas correctas que escribe la IA pueden tener errores. Marca una respuesta incorrecta o regenera la pregunta."
   },
   "rounds": {
     "answered": "Respondidas",
@@ -311,7 +311,7 @@
     "title": "Entrevista"
   },
   "generation": {
-    "title": "Nueva preparación",
+    "title": "Nueva entrevista",
     "interviews": "Entrevistas",
     "cancel": "Cancelar generación",
     "cancelTitle": "¿Cancelar esta generación?",
@@ -355,12 +355,12 @@
     "deleted": "eliminado",
     "expired": "caducada",
     "passed": "aprobado",
-    "flagged": "marcado"
+    "flagged": "con alertas"
   },
   "roles": {
     "owner": "propietario",
     "admin": "administrador",
-    "viewer": "observador",
+    "viewer": "lector",
     "adminNote": "Crea y cambia entrevistas, invita a candidatos, recarga créditos.",
     "viewerNote": "Ve las entrevistas y los resultados, comparte informes. No cambia nada."
   },
@@ -372,7 +372,7 @@
     "interviews": "Entrevistas",
     "templates": "Plantillas",
     "team": "Equipo",
-    "referrals": "Invitaciones",
+    "referrals": "Recomendaciones",
     "new": "Nueva empresa",
     "name": "Nombre de la empresa",
     "create": "Crear",
@@ -397,7 +397,7 @@
     "pickText": "La prueba se copia en la empresa que elijas, gratis y lista para enviar a candidatos."
   },
   "candidates": {
-    "scorecard": "Resultados",
+    "scorecard": "Ficha de evaluación",
     "interview": "Entrevista",
     "deleted": "Candidato eliminado",
     "deletedText": "El candidato eliminó su cuenta y, con ella, sus resultados.",
@@ -441,7 +441,7 @@
   "interviewStatus": {
     "new": "Nueva",
     "in_process": "En curso",
-    "hired": "Contratado"
+    "hired": "Puesto cubierto"
   },
   "interviews": {
     "title": "Entrevistas",
@@ -452,11 +452,11 @@
     "try": "Probar como candidato",
     "newCandidate": "Nuevo(s) candidato(s)",
     "linkTitle": "Enlace para compartir",
-    "linkText": "Para una oferta de empleo: cualquiera con el enlace puede hacer la entrevista. Cada persona se cobra como un candidato invitado.",
+    "linkText": "Para una oferta de empleo: cualquiera con el enlace puede hacer la entrevista. Cada persona cuesta lo mismo que un candidato invitado.",
     "linkFailed": "No se pudo cambiar el enlace. Inténtalo de nuevo.",
     "passMark": "Nota de aprobado",
     "passMarkLabel": "Nota de aprobado en porcentaje",
-    "markHired": "Marcar como contratado",
+    "markHired": "Marcar el puesto como cubierto",
     "tryLabel": "Probar {title} como candidato",
     "tryFailed": "No se pudo iniciar la vista previa. Inténtalo de nuevo.",
     "generating": "Generando…",
@@ -479,7 +479,7 @@
     "memberFailed": "No se pudo invitar a esta persona. Inténtalo de nuevo.",
     "invite": "Invitar",
     "jobDescription": "Descripción del puesto",
-    "pasteJob": "Pega la descripción del puesto: el rol, sus requisitos y lo que suma…",
+    "pasteJob": "Pega la descripción del puesto: el rol, sus requisitos y lo que se valora…",
     "generate": "Generar entrevista",
     "startFailed": "No se pudo empezar la entrevista. Inténtalo de nuevo.",
     "candidateEmails": "Correos de los candidatos",
@@ -548,8 +548,8 @@
     "perCandidate": "${dollars, number} por candidato",
     "welcome": "{count, plural, one {Tu primer candidato} other {Tus primeros # candidatos}}",
     "credits": "$1 = 100 créditos, los créditos no caducan.",
-    "referrals": "Invitaciones",
-    "referralsNote": "Comparte el enlace de tu empresa desde su pestaña de invitaciones.",
+    "referrals": "Recomendaciones",
+    "referralsNote": "Comparte el enlace de tu empresa desde su pestaña de recomendaciones.",
     "companyReferral": "Una empresa que invitaste hace su primera recarga",
     "each": "{count, number} créditos cada uno",
     "topUp": "Recargar"
@@ -579,11 +579,11 @@
       },
       "dpia": {
         "title": "Plantilla de EIPD",
-        "description": "Una evaluación de impacto relativa a la protección de datos con la parte de prepza ya completada, para que usted la termine."
+        "description": "Una evaluación de impacto relativa a la protección de datos con la parte de prepza ya completada, para que la termines."
       },
       "dpa": {
         "title": "Acuerdo de tratamiento de datos",
-        "description": "Cómo prepza trata los datos de sus candidatos por cuenta suya. Forma parte de los términos."
+        "description": "Cómo prepza trata los datos de tus candidatos por cuenta tuya. Forma parte de los términos."
       }
     }
   },
@@ -609,7 +609,7 @@
   },
   "referral": {
     "companyTitle": "Invita a otra empresa",
-    "companyNote": "Ambos reciben {reward, number} créditos cuando haga su primera recarga, de cualquier importe.",
+    "companyNote": "Las dos empresas reciben {reward, number} créditos cuando la invitada hace su primera recarga, de cualquier importe.",
     "deletedCompany": "Una empresa eliminada",
     "credits": "+{count, number} créditos",
     "rewarded": "{count, plural, =0 {Aún no hay recompensas.} one {Recompensado # vez hasta ahora.} other {Recompensado # veces hasta ahora.}}"
@@ -628,7 +628,7 @@
     "how": {
       "title": "Tres pasos para tu próxima contratación",
       "paste": {
-        "title": "Pega la oferta de empleo",
+        "title": "Pega la descripción del puesto",
         "text": "Cualquier puesto, cualquier idioma.\nprepza detecta lo que un candidato debe saber y propone temas."
       },
       "review": {
@@ -646,7 +646,7 @@
       "points": {
         "speed": {
           "title": "Lista en minutos",
-          "text": "Pega tu oferta de empleo, aprueba los temas e invita a candidatos el mismo día."
+          "text": "Pega tu descripción del puesto, aprueba los temas e invita a candidatos el mismo día."
         },
         "anyRole": {
           "title": "Cualquier puesto",
@@ -733,7 +733,7 @@
       },
       "points": {
         "practice": "Plantillas gratuitas para muchos puestos",
-        "preview": "Ve tu entrevista como candidato"
+        "preview": "Mira tu entrevista como candidato"
       }
     },
     "link": {
@@ -752,7 +752,7 @@
         "own": "Preguntas únicas para cada candidato",
         "timed": "Cuenta atrás en cada pregunta",
         "flags": "Alertas por prisas, salidas o copias",
-        "answers": "Fichas con respuestas y tiempos"
+        "answers": "Fichas de evaluación con respuestas y tiempos"
       },
       "candidate": "Candidato",
       "score": "Puntuación",
@@ -799,7 +799,7 @@
     },
     "trust": {
       "title": "Justo con los candidatos\nSeguro para tus datos",
-      "text": "Las personas toman la decisión de contratación. prepza solo evalúa conocimientos: sin análisis de vídeo, voz ni rostro.",
+      "text": "Las personas toman la decisión de contratación. prepza solo evalúa conocimientos: sin análisis de video, voz ni rostro.",
       "see": "Documentos",
       "points": {
         "decision": "Una persona puede revisar cualquier resultado si se pide",
@@ -894,7 +894,7 @@
   "practice": {
     "title": "Simulador de entrevista de trabajo gratis",
     "intro": "Practica para un puesto con una entrevista cronometrada y luego mira tu nota y todas las respuestas correctas. Gratis.",
-    "about": "Entrevista de práctica cronometrada. Al terminar, ve tu nota y todas las respuestas correctas. Privada y gratis.",
+    "about": "Entrevista de práctica cronometrada. Al terminar, mira tu nota y todas las respuestas correctas. Privada y gratis.",
     "pageTitle": "{title}: simulador de entrevista de trabajo gratis",
     "pageDescription": "Simulador de entrevista de trabajo gratis de nivel {level} para {title}: {count, plural, one {# tema} other {# temas}}, cronometrado, con tu nota y todas las respuestas correctas al final. Práctica, no una entrevista de trabajo real.",
     "start": "Empezar práctica",

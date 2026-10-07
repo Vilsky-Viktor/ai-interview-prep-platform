@@ -39,8 +39,8 @@ prepza usa la IA para redactar una entrevista de habilidades a partir de tu desc
 2. **Tú revisas los temas.** Consérvalos, desmárcalos, cámbiales el nombre o edítalos, o dile a la IA en texto libre qué cambiar. No se redacta ninguna pregunta hasta que des tu aprobación.
 3. **La IA redacta las preguntas.** Cada tema recibe un banco de preguntas de opción múltiple, cada una con una opción correcta y tres incorrectas pero verosímiles. En los temas técnicos, muchas preguntas muestran un breve ejemplo de código y preguntan qué imprime, qué hace, por qué falla o qué cambio lo corrige. Puedes abrir cada pregunta y sus opciones, y volver a generar las que no te gusten.
 4. **Los candidatos responden preguntas con tiempo límite.** Cada candidato recibe su propio conjunto aleatorio del banco de cada tema, en su propio orden, con una cuenta atrás en cada pregunta.
-5. **Las respuestas se corrigen con una clave de respuestas.** La IA redacta y revisa las claves; la corrección en sí sigue reglas fijas y ninguna IA lee ni juzga la respuesta de un candidato. Si más adelante se corrige una clave, las respuestas anteriores se vuelven a puntuar. La velocidad, las salidas de la página y los intentos de copiar se te muestran como señales; no cambian la puntuación.
-6. **Las personas deciden.** Ves una lista ordenada por puntuación y una ficha de resultados por candidato, con cada respuesta y su tiempo. Una persona de tu empresa revisa los resultados y toma la decisión de contratación.
+5. **Las respuestas se corrigen con una clave de respuestas.** La IA redacta y revisa las claves; la corrección en sí sigue reglas fijas y ninguna IA lee ni juzga la respuesta de un candidato. Si más adelante se corrige una clave, las respuestas anteriores se vuelven a puntuar. La velocidad, las salidas de la página y los intentos de copiar se te muestran como alertas; no cambian la puntuación.
+6. **Las personas deciden.** Ves una lista ordenada por puntuación y una ficha de evaluación por candidato, con cada respuesta y su tiempo. Una persona de tu empresa revisa los resultados y toma la decisión de contratación.
 
 Lo que prepza no hace:
 
@@ -65,7 +65,7 @@ También puedes probar tu propia entrevista como candidato antes de invitar a na
 
 **Menos señales irrelevantes.** Una respuesta de opción múltiple no lleva acento, rostro, entorno ni estilo de redacción, así que la puntuación no depende de cómo se ve o cómo suena alguien. Eso no descarta el sesgo: las pruebas de conocimientos pueden mostrar diferencias de puntuación entre grupos, y una prueba en la segunda lengua del candidato puede perjudicarle. Supervisa los resultados entre grupos.
 
-**Compartir respuestas es más difícil.** Con un conjunto aleatorio de preguntas propio para cada candidato y un temporizador en cada pregunta, compartir respuestas o buscarlas cuesta más esfuerzo. Las señales de integridad te ayudan a decidir dónde mirar con más atención; no son prueba de trampa.
+**Compartir respuestas es más difícil.** Con un conjunto aleatorio de preguntas propio para cada candidato y un temporizador en cada pregunta, compartir respuestas o buscarlas cuesta más esfuerzo. Las alertas de integridad te ayudan a decidir dónde mirar con más atención; no son prueba de trampa.
 
 Nada de esto hace que una prueba sea justa por defecto. Las preguntas tienen que corresponder al puesto, los tiempos límite tienen que adaptarse al rol y las personas tienen que leer los resultados con cuidado. Una puntuación es una evidencia, no un veredicto. Si estás comparando las pruebas con tiempo límite con otros métodos de filtrado, lee [Pruebas de habilidades frente a filtrado de CV](/guides/skills-tests-vs-cv-screening).
 

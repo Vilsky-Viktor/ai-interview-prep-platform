@@ -2,10 +2,10 @@
   "settings": {
     "title": "Configurações",
     "language": "Idioma",
-    "languageNote": "Para a interface e as respostas do tutor, e o idioma em que novos kits e entrevistas começam. Você pode gerá-los em qualquer idioma disponível.",
+    "languageNote": "Para a interface e as respostas do chat de ajuda, e o idioma em que novas entrevistas começam. Você pode criar uma entrevista em qualquer idioma disponível.",
     "languageFailed": "Não foi possível alterar o idioma. Tente novamente.",
     "yourData": "Seus dados",
-    "yourDataNote": "Baixe tudo o que o prepza. guarda sobre você ou exclua sua conta.",
+    "yourDataNote": "Baixe tudo o que a prepza. guarda sobre você ou exclua sua conta.",
     "download": "Baixar meus dados",
     "downloadFailed": "Não foi possível preparar seus dados. Tente novamente.",
     "delete": "Excluir conta",
@@ -48,7 +48,7 @@
   "signIn": {
     "title": "Entrar",
     "continueWith": "Continuar com <name>{provider}</name>",
-    "link": "Este e-mail já tem uma conta no prepza. Continue da forma como você entrou antes, e o {provider} será vinculado a ela.",
+    "link": "Este e-mail já tem uma conta na prepza. Continue da forma como você entrou antes, e o {provider} será vinculado a ela.",
     "consent": "Ao entrar, você confirma que tem 16 anos ou mais e concorda com os <terms>Termos</terms> e a <privacy>Política de privacidade</privacy>.",
     "failed": "Não foi possível entrar. Tente novamente.",
     "verify": "Enviamos um link para verificar seu e-mail. Abra-o e depois entre de novo para fazer entrevistas."
@@ -86,7 +86,7 @@
     "text": "Entrevistas cronometradas criadas a partir da sua descrição de vaga. Questões únicas para cada candidato e um cronômetro em cada uma. $1–3 por candidato."
   },
   "start": {
-    "placeholder": "Cole uma descrição de vaga ou descreva a função e o que um candidato deve saber",
+    "placeholder": "Cole uma descrição de vaga ou descreva o cargo e o que um candidato deve saber",
     "description": "Descrição da vaga",
     "submit": "Criar uma entrevista",
     "whichCompany": "Para qual empresa é esta entrevista?",
@@ -112,7 +112,7 @@
     "noReplaced": "Nada foi substituído ainda.",
     "answers": "{count, plural, one {# resposta} other {# respostas}}",
     "right": "{percent}% de acertos",
-    "reports": "{count, plural, =0 {nenhuma denúncia} one {# denúncia} other {# denúncias}}",
+    "reports": "{count, plural, =0 {nenhum reporte} one {# reporte} other {# reportes}}",
     "kinds": {
       "template": "modelo",
       "interview": "entrevista de empresa"
@@ -126,17 +126,17 @@
     "templates": "Modelos",
     "new": "Novo modelo",
     "createTitle": "Criar um modelo",
-    "placeholder": "Cole uma descrição da função ou descreva a função e o que uma pessoa nela deve saber",
-    "description": "Descrição da função",
+    "placeholder": "Cole uma descrição do cargo ou descreva o cargo e o que uma pessoa nele deve saber",
+    "description": "Descrição do cargo",
     "create": "Gerar",
     "createFailed": "Não foi possível iniciar o modelo. Tente novamente.",
-    "text": "Entrevistas prontas por função, para empresas e talentos.",
+    "text": "Entrevistas prontas por cargo, para empresas e para quem quer praticar.",
     "deleteLabel": "Excluir {title}",
     "deleteTitle": "Excluir este modelo?",
     "deleteText": "Seus tópicos e questões são excluídos. As entrevistas que as empresas já criaram a partir dele continuam.",
     "deleteFailed": "Não foi possível excluir o modelo. Tente novamente.",
     "passRates": "Taxas de aprovação",
-    "controls": "Controlos",
+    "controls": "Controles",
     "stats": "Estatísticas",
     "statsPeriod": "Período",
     "statsAllTime": "Todo o período",
@@ -163,13 +163,13 @@
       "finished": "Mais terminados primeiro"
     },
     "pauseTitle": "Pausa de emergência",
-    "pauseText": "Enquanto está ativa, ninguém pode começar uma nova entrevista, rodada de prática ou prévia, e nenhuma pergunta é gerada, regerada ou verificada. Candidatos que já estão em uma entrevista podem terminá-la.",
+    "pauseText": "Enquanto está ativa, ninguém pode começar uma nova entrevista, rodada de prática ou prévia, e nenhuma questão é gerada, gerada novamente ou verificada. Candidatos que já estão em uma entrevista podem terminá-la.",
     "pauseFailed": "Não foi possível alterar a pausa. Tente novamente.",
     "maintenanceTitle": "Modo de manutenção",
-    "maintenanceText": "Enquanto estiver ativado, todas as páginas mostram que o prepza está em manutenção e os serviços recusam todos os pedidos, exceto os de superadmins. Pagamentos, e-mails e tarefas agendadas continuam a funcionar.",
+    "maintenanceText": "Enquanto estiver ativado, todas as páginas mostram que a prepza está em manutenção e os serviços recusam todos os pedidos, exceto os de superadmins. Pagamentos, e-mails e tarefas agendadas continuam funcionando.",
     "maintenanceFailed": "Não foi possível alterar o modo de manutenção. Tente novamente.",
     "maintenanceConfirmTitle": "Ativar o modo de manutenção?",
-    "maintenanceRunning": "{count, plural, =0 {Nenhum candidato está numa entrevista agora.} other {Candidatos numa entrevista agora: #. Podem perder tempo.}}",
+    "maintenanceRunning": "{count, plural, =0 {Nenhum candidato está em uma entrevista agora.} one {# candidato está em uma entrevista agora e pode perder tempo nela.} other {# candidatos estão em uma entrevista agora e podem perder tempo nela.}}",
     "maintenanceRunningUnknown": "Não foi possível contar os candidatos numa entrevista agora. Quem estiver pode perder tempo.",
     "maintenanceTurnOn": "Ativar",
     "verification": "Verificação",
@@ -191,7 +191,7 @@
     "title": "Modelos",
     "empty": "Ainda não há modelos.",
     "topics": "{count, plural, one {# tópico} other {# tópicos}}",
-    "search": "Buscar por função ou tópico",
+    "search": "Buscar por cargo ou tópico",
     "searchAction": "Buscar",
     "level": "Nível: {level}",
     "anyLevel": "Qualquer nível",
@@ -203,7 +203,7 @@
     "useFailed": "Não foi possível iniciar uma entrevista a partir deste modelo. Tente novamente.",
     "warningTitle": "Os modelos estão prontos para cargos comuns.",
     "warning": "Para algo mais ajustado, crie uma entrevista a partir da sua descrição de vaga.",
-    "text": "Entrevistas prontas por função. Escolha uma para começar sua entrevista; você pode alterá-la depois."
+    "text": "Entrevistas prontas por cargo. Escolha uma para começar sua entrevista; você pode alterá-la depois."
   },
   "billing": {
     "paid": "Pagamento recebido. Ele aparece aqui em instantes.",
@@ -220,7 +220,7 @@
   "deleteAccount": {
     "title": "Excluir sua conta?",
     "everything": "Tudo é apagado: o seu lugar na equipe de cada empresa, os seus resultados das entrevistas que fez como candidato, as suas rodadas de prática e as suas notificações.",
-    "company": "Uma empresa da qual só você é dono é excluída com suas entrevistas. Isso não pode ser desfeito.",
+    "company": "Uma empresa da qual você é o único proprietário é excluída com suas entrevistas. Isso não pode ser desfeito.",
     "confirm": "Excluir conta",
     "deleted": "Sua conta foi excluída.",
     "failed": "Não foi possível excluir sua conta. Tente novamente."
@@ -246,11 +246,11 @@
     "ratingFailed": "Não foi possível salvar sua avaliação. Tente novamente.",
     "helpful": "Questão útil",
     "unhelpful": "Questão pouco útil",
-    "noReports": "Nenhuma denúncia.",
+    "noReports": "Nenhum reporte.",
     "likes": "Curtidas",
     "dislikes": "Descurtidas",
-    "reports": "Denúncias",
-    "showReports": "Mostrar denúncias ({count})",
+    "reports": "Reportes",
+    "showReports": "Mostrar reportes ({count})",
     "regenerate": "Gerar novamente",
     "manage": "Gerenciar questões",
     "wrongAnswer": "Resposta errada",
@@ -265,12 +265,12 @@
     "regenerating": "Gerando novamente…",
     "regenerated": "Questão gerada novamente",
     "regenerateFailed": "Não foi possível gerar a questão novamente. Tente novamente.",
-    "reported": "Obrigado, recebemos sua denúncia",
-    "reportFailed": "Não foi possível enviar a denúncia. Tente novamente.",
-    "questionReported": "Questão denunciada",
-    "report": "Denunciar questão",
+    "reported": "Obrigado, recebemos seu reporte",
+    "reportFailed": "Não foi possível enviar o reporte. Tente novamente.",
+    "questionReported": "Questão reportada",
+    "report": "Reportar questão",
     "whatsWrong": "O que há de errado?",
-    "reason": "Motivo da denúncia",
+    "reason": "Motivo do reporte",
     "selectReason": "Escolha um motivo",
     "details": "Detalhes",
     "showLess": "Mostrar menos",
@@ -311,7 +311,7 @@
     "title": "Entrevista"
   },
   "generation": {
-    "title": "Nova preparação",
+    "title": "Nova entrevista",
     "interviews": "Entrevistas",
     "cancel": "Cancelar geração",
     "cancelTitle": "Cancelar esta geração?",
@@ -358,21 +358,21 @@
     "flagged": "sinalizado"
   },
   "roles": {
-    "owner": "dono",
+    "owner": "proprietário",
     "admin": "administrador",
-    "viewer": "observador",
+    "viewer": "visualizador",
     "adminNote": "Cria e altera entrevistas, convida candidatos, recarrega créditos.",
     "viewerNote": "Vê entrevistas e resultados, compartilha relatórios. Não altera nada."
   },
   "company": {
     "title": "Empresas",
     "empty": "Ainda não há empresas.",
-    "owner": "Dono",
+    "owner": "Proprietário",
     "interviewCount": "{count, plural, one {# entrevista} other {# entrevistas}}",
     "interviews": "Entrevistas",
     "templates": "Modelos",
     "team": "Equipe",
-    "referrals": "Convites",
+    "referrals": "Indicações",
     "new": "Nova empresa",
     "name": "Nome da empresa",
     "create": "Criar",
@@ -397,7 +397,7 @@
     "pickText": "O teste é copiado para a empresa que você escolher, grátis e pronto para enviar aos candidatos."
   },
   "candidates": {
-    "scorecard": "Resultados",
+    "scorecard": "Ficha de avaliação",
     "interview": "Entrevista",
     "deleted": "Candidato excluído",
     "deletedText": "O candidato excluiu a conta e, com ela, seus resultados.",
@@ -439,7 +439,7 @@
     "extraTimeFailed": "Não foi possível alterar o tempo extra. Tente novamente."
   },
   "interviewStatus": {
-    "new": "Novo",
+    "new": "Nova",
     "in_process": "Em andamento",
     "hired": "Contratado"
   },
@@ -479,7 +479,7 @@
     "memberFailed": "Não foi possível convidar essa pessoa. Tente novamente.",
     "invite": "Convidar",
     "jobDescription": "Descrição da vaga",
-    "pasteJob": "Cole a descrição da vaga: a função, os requisitos e os diferenciais…",
+    "pasteJob": "Cole a descrição da vaga: o cargo, os requisitos e os diferenciais…",
     "generate": "Gerar entrevista",
     "startFailed": "Não foi possível começar a entrevista. Tente novamente.",
     "candidateEmails": "E-mails dos candidatos",
@@ -505,7 +505,7 @@
     "unanswered": "Questões não respondidas contam como erradas.",
     "saved": "O progresso é salvo: use este link de novo para continuar.",
     "extraTime": "Precisa de mais tempo, por exemplo por causa de uma deficiência? Peça à equipe da {company} antes de começar.",
-    "people": "As questões são escritas por IA. Pessoas da {company} analisam os resultados e decidem; você pode pedir que revisem o seu.",
+    "people": "As questões são escritas por IA. Pessoas da {company} analisam os resultados e decidem; você pode pedir que revisem o seu resultado.",
     "stay": "Fique nesta página: sair dela ou copiar é registrado (<link>privacidade</link>).",
     "finished": "Esta entrevista já foi concluída.",
     "continue": "Continuar",
@@ -548,8 +548,8 @@
     "perCandidate": "${dollars, number} por candidato",
     "welcome": "{count, plural, one {Seu primeiro candidato} other {Seus primeiros # candidatos}}",
     "credits": "$1 = 100 créditos, e os créditos não expiram.",
-    "referrals": "Convites",
-    "referralsNote": "Compartilhe o link da sua empresa na aba de convites dela.",
+    "referrals": "Indicações",
+    "referralsNote": "Compartilhe o link da sua empresa na aba de indicações dela.",
     "companyReferral": "Uma empresa que você convidou faz sua primeira recarga",
     "each": "{count, number} créditos para cada",
     "topUp": "Recarregar"
@@ -564,26 +564,26 @@
   },
   "docs": {
     "title": "Documentos",
-    "intro": "Documentos para empresas que avaliam candidatos com o prepza: instruções, modelos e o acordo de tratamento de dados.",
+    "intro": "Documentos para empresas que avaliam candidatos com a prepza: instruções, modelos e o acordo de tratamento de dados.",
     "englishOnly": "Estes documentos estão disponíveis apenas em inglês.",
     "download": "Baixar {format}",
     "readOnline": "Ler online",
     "items": {
       "instructions": {
         "title": "Instruções para empresas",
-        "description": "O que uma nota significa, revisão humana, como escolher a nota de aprovação, tempo extra e onde não usar o prepza."
+        "description": "O que uma nota significa, revisão humana, como escolher a nota de aprovação, tempo extra e onde não usar a prepza."
       },
       "notices": {
         "title": "Modelos de aviso para candidatos",
         "description": "Avisos editáveis para enviar aos candidatos antes de convidá-los, incluindo um para a cidade de Nova York."
       },
       "dpia": {
-        "title": "Modelo de AIPD",
-        "description": "Uma avaliação de impacto sobre a proteção de dados com a parte do prepza já preenchida, para você completar."
+        "title": "Modelo de DPIA",
+        "description": "Uma avaliação de impacto sobre a proteção de dados com a parte da prepza já preenchida, para você completar."
       },
       "dpa": {
         "title": "Acordo de tratamento de dados",
-        "description": "Como o prepza trata os dados dos seus candidatos em seu nome. Faz parte dos termos."
+        "description": "Como a prepza trata os dados dos seus candidatos em seu nome. Faz parte dos termos."
       }
     }
   },
@@ -629,7 +629,7 @@
       "title": "Três passos para a sua próxima contratação",
       "paste": {
         "title": "Cole a descrição da vaga",
-        "text": "Qualquer função, qualquer idioma.\nO prepza identifica o que um candidato precisa saber e propõe tópicos."
+        "text": "Qualquer cargo, qualquer idioma.\nA prepza identifica o que um candidato precisa saber e propõe tópicos."
       },
       "review": {
         "title": "Confira os tópicos",
@@ -642,19 +642,19 @@
     },
     "advantages": {
       "title": "Por que prepza",
-      "text": "Por que as empresas avaliam candidatos com o prepza.",
+      "text": "Por que as empresas avaliam candidatos com a prepza.",
       "points": {
         "speed": {
           "title": "Pronto em minutos",
           "text": "Cole a descrição da vaga, aprove os tópicos e convide candidatos no mesmo dia."
         },
         "anyRole": {
-          "title": "Qualquer função",
+          "title": "Qualquer cargo",
           "text": "Leitura de código para engenheiros, testes de conhecimento para vendas, finanças etc."
         },
         "cheating": {
           "title": "Mais difícil trapacear",
-          "text": "Questões aleatórias para cada candidato, um timer em cada uma e alertas de integridade."
+          "text": "Questões aleatórias para cada candidato, um cronômetro em cada uma e alertas de integridade."
         },
         "price": {
           "title": "Sem assinatura",
@@ -672,13 +672,13 @@
     },
     "control": {
       "title": "Você decide o que é avaliado",
-      "text": "As questões são escritas assim que você aprova os temas. Desmarque, renomeie ou edite, ou diga à IA o que mudar.",
+      "text": "As questões são escritas assim que você aprova os tópicos. Desmarque, renomeie ou edite, ou diga à IA o que mudar.",
       "topics": {
         "design": "Design de sistemas",
         "behavior": "Gestão do tempo",
         "basics": "Liderança de equipes"
       },
-      "change": "Adicione um tema sobre bancos de dados",
+      "change": "Adicione um tópico sobre bancos de dados",
       "subtopics": {
         "design": ["Escalabilidade", "Cache", "Balanceamento de carga"],
         "behavior": ["Priorização", "Planejar a semana", "Evitar distrações"],
@@ -691,7 +691,7 @@
     },
     "quality": {
       "title": "Questões que se corrigem sozinhas",
-      "text": "Respostas, avaliações e denúncias revelam questões fracas. A IA as corrige, e você pode regenerar qualquer uma.",
+      "text": "Respostas, avaliações e reportes revelam questões fracas. A IA as corrige, e você pode gerar qualquer uma novamente.",
       "items": {
         "good": "O que um balanço patrimonial mostra?",
         "weak": "Qual é o melhor software de contabilidade?",
@@ -701,7 +701,7 @@
       "list": "Fundamentos de contabilidade",
       "options": {
         "good": [
-          "Ativos, passivos e patrimônio em uma data",
+          "Ativos, passivos e patrimônio líquido em uma data",
           "O lucro de um ano",
           "Entradas e saídas de caixa em um mês",
           "O orçamento do próximo ano"
@@ -709,18 +709,18 @@
         "weak": ["Xero", "Sage", "QuickBooks", "FreshBooks"],
         "better": [
           "Balanço patrimonial",
-          "Demonstração de resultados",
-          "Demonstração dos fluxos de caixa",
+          "Demonstração do resultado",
+          "Demonstração do fluxo de caixa",
           "Balancete"
         ]
       }
     },
     "try": {
       "title": "Experimente antes dos candidatos",
-      "text": "Experimente um modelo gratuito para uma função parecida ou abra sua própria entrevista como candidato antes de convidar alguém.",
+      "text": "Experimente um modelo gratuito para um cargo parecido ou abra sua própria entrevista como candidato antes de convidar alguém.",
       "browse": "Ver modelos",
       "topic": "Vendas",
-      "question": "Com o que um e-mail frio deve começar?",
+      "question": "Com o que um e-mail de prospecção deve começar?",
       "options": {
         "a": "A história da sua empresa",
         "b": "O problema do cliente",
@@ -728,7 +728,7 @@
         "d": "Um código de desconto"
       },
       "points": {
-        "practice": "Modelos gratuitos para muitas funções",
+        "practice": "Modelos gratuitos para muitos cargos",
         "preview": "Veja sua entrevista como candidato"
       }
     },
@@ -748,7 +748,7 @@
         "own": "Questões únicas para cada candidato",
         "timed": "Contagem regressiva em cada questão",
         "flags": "Alertas de pressa, saída ou cópia",
-        "answers": "Boletins com respostas e tempos"
+        "answers": "Fichas de avaliação com respostas e tempos"
       },
       "candidate": "Candidato",
       "score": "Pontuação",
@@ -758,10 +758,10 @@
     },
     "reports": {
       "title": "Compartilhe resultados com um clique",
-      "text": "Um relatório em PDF claro para um candidato ou para a lista inteira. Baixe-o ou envie-o a um gestor de contratação direto do prepza.",
+      "text": "Um relatório em PDF claro para um candidato ou para a lista inteira. Baixe-o ou envie-o a um gestor contratante direto da prepza.",
       "points": {
         "pdf": "Um candidato ou todos eles",
-        "share": "PDF por e-mail ou compartilhamento em mensageiros"
+        "share": "PDF por e-mail ou compartilhamento em apps de mensagens"
       }
     },
     "brand": {
@@ -795,11 +795,11 @@
     },
     "trust": {
       "title": "Justo com os candidatos\nSeguro para seus dados",
-      "text": "Pessoas tomam a decisão de contratação. O prepza avalia só conhecimento: sem análise de vídeo, voz ou rosto.",
+      "text": "Pessoas tomam a decisão de contratação. A prepza avalia só conhecimento: sem análise de vídeo, voz ou rosto.",
       "see": "Documentos",
       "points": {
         "decision": "Uma pessoa pode revisar qualquer resultado se pedido",
-        "key": "Cada resposta é pontuada pela sua chave de resposta; uma chave corrigida recalcula os resultados anteriores",
+        "key": "Cada resposta é pontuada pelo gabarito; um gabarito corrigido recalcula os resultados anteriores",
         "training": "Os seus dados não são usados para treinar modelos de IA",
         "time": "Tempo extra para quem pedir",
         "notice": "Os candidatos sabem o que esperar antes de começar",
@@ -816,9 +816,9 @@
     "title": "Perguntas frequentes",
     "intro": "Não encontrou sua resposta? Pergunte ao chat no fim desta página ou escreva para o endereço da política de privacidade.",
     "chat": {
-      "title": "Pergunte sobre o prepza",
-      "text": "Perguntas sobre recursos, preços, pagamentos, os termos ou a privacidade. A IA responde com base nos documentos do prepza. As respostas são escritas por IA e podem conter erros. O que vale é a página de preços, os termos e a política de privacidade.",
-      "placeholder": "Faça uma pergunta sobre o prepza…",
+      "title": "Pergunte sobre a prepza",
+      "text": "Perguntas sobre recursos, preços, pagamentos, os termos ou a privacidade. A IA responde com base nos documentos da prepza. As respostas são escritas por IA e podem conter erros. O que vale é a página de preços, os termos e a política de privacidade.",
+      "placeholder": "Faça uma pergunta sobre a prepza…",
       "failed": "Não foi possível obter uma resposta. Tente novamente."
     }
   },
@@ -836,16 +836,16 @@
   },
   "about": {
     "title": "Sobre nós",
-    "intro": "O prepza ajuda empresas a encontrar pessoas que realmente conhecem o trabalho: uma entrevista justa e cronometrada, criada a partir da sua descrição de vaga, por um preço que qualquer equipe pode pagar. E quem está se preparando para uma entrevista pode praticar de graça.",
+    "intro": "A prepza ajuda empresas a encontrar pessoas que realmente conhecem o trabalho: uma entrevista justa e cronometrada, criada a partir da sua descrição de vaga, por um preço que qualquer equipe pode pagar. E quem está se preparando para uma entrevista pode praticar de graça.",
     "company": {
       "title": "Por que existimos",
       "problem": "Contratar muitas vezes depende de um currículo e de uma boa conversa, e os dois podem enganar. As ferramentas de avaliação que ajudam têm preços pensados para grandes empresas, com planos anuais e cobrança por usuário, então a maioria das equipes fica sem elas.",
-      "approach": "O prepza transforma uma descrição de vaga em uma entrevista cronometrada em minutos, para qualquer função. Cada candidato recebe suas próprias questões, você vê quem conhece o trabalho e por quê, e paga só pelos candidatos que realmente fazem a entrevista.",
-      "practice": "Também queremos que se preparar para uma entrevista seja gratuito para todos. Qualquer pessoa pode fazer nossas entrevistas de prática para uma função, ver sua nota e todas as respostas certas e praticar de novo, sem custo."
+      "approach": "A prepza transforma uma descrição de vaga em uma entrevista cronometrada em minutos, para qualquer cargo. Cada candidato recebe suas próprias questões, você vê quem conhece o trabalho e por quê, e paga só pelos candidatos que realmente fazem a entrevista.",
+      "practice": "Também queremos que se preparar para uma entrevista seja gratuito para todos. Qualquer pessoa pode fazer nossas simulações de entrevista para um cargo, ver sua nota e todas as respostas certas e praticar de novo, sem custo."
     },
     "founder": {
-      "quote": "Contratar bem não deveria ser privilégio de grandes empresas com grandes orçamentos. Criei o prepza para que qualquer equipe possa transformar uma descrição de vaga em uma entrevista justa em minutos, ver quem realmente conhece o trabalho e pagar só pelos candidatos que fazem a entrevista. Espero que ele ajude você a encontrar as pessoas certas mais rápido.",
-      "role": "Fundador solo do prepza"
+      "quote": "Contratar bem não deveria ser privilégio de grandes empresas com grandes orçamentos. Criei a prepza para que qualquer equipe possa transformar uma descrição de vaga em uma entrevista justa em minutos, ver quem realmente conhece o trabalho e pagar só pelos candidatos que fazem a entrevista. Espero que ela ajude você a encontrar as pessoas certas mais rápido.",
+      "role": "Fundador solo da prepza"
     }
   },
   "notifications": {
@@ -880,7 +880,7 @@
     "sent": "Relatório enviado para {email}",
     "sendFailed": "Não foi possível enviar o relatório.",
     "orSummary": "Ou envie por",
-    "via": "Enviado pelo prepza",
+    "via": "Enviado pela prepza",
     "candidatesFileName": "Candidatos {title}",
     "candidateCount": "{count, plural, one {# candidato} other {# candidatos}}",
     "passMark": "nota de aprovação {mark}%",
@@ -889,8 +889,8 @@
   },
   "practice": {
     "title": "Simulador de entrevista de emprego por cargo",
-    "intro": "Pratique para uma função com uma entrevista cronometrada e depois veja sua nota e todas as respostas certas. Sem custo.",
-    "about": "Entrevista de prática cronometrada. Ao terminar, veja sua nota e todas as respostas certas. Privada e gratuita.",
+    "intro": "Pratique para um cargo com uma entrevista cronometrada e depois veja sua nota e todas as respostas certas. Sem custo.",
+    "about": "Simulação de entrevista cronometrada. Ao terminar, veja sua nota e todas as respostas certas. Privada e gratuita.",
     "pageTitle": "{title}: simulador de entrevista grátis",
     "pageDescription": "Simulador de entrevista grátis para {title}, nível {level}: {count, plural, one {# tópico} other {# tópicos}}, cronometrado, com sua nota e todas as respostas certas no final. É um teste de prática, não uma entrevista de emprego real.",
     "start": "Começar a prática",
@@ -906,7 +906,7 @@
     "questions": "{count, plural, one {# questão} other {# questões}}",
     "progressLabel": "Progresso",
     "answeredLabel": "questões respondidas",
-    "hireTitle": "Contratando para esta função?",
+    "hireTitle": "Contratando para este cargo?",
     "hireText": "Use esta entrevista com seus candidatos ou gere uma para a sua descrição de vaga.",
     "hireButton": "Criar uma entrevista"
   },
@@ -914,7 +914,7 @@
     "verify": "Verificar",
     "verified": "Verificada: {domain}",
     "title": "Verificar empresa",
-    "text": "Informe o site da empresa. Quando um proprietário ou administrador entrar com um e-mail de trabalho desse domínio, como you@acme.com (na hora, se for você), analisamos a empresa e adicionamos o selo.",
+    "text": "Informe o site da empresa. Quando um proprietário ou administrador entrar com um e-mail corporativo desse domínio, como you@acme.com (na hora, se for você), analisamos a empresa e adicionamos o selo.",
     "website": "Site da empresa",
     "save": "Salvar",
     "done": "Verificada: {domain}",
@@ -923,7 +923,7 @@
     "submitted": "Aguardando análise. Você receberá uma notificação quando for verificada.",
     "waitingEmail": "Aguardando um proprietário ou administrador entrar com um e-mail de {domain}.",
     "declined": "{reason, select, none {Recusada.} other {Recusada: {reason}}}",
-    "tryAgain": "Altere o nome ou o site da empresa para enviá-la de novo para revisão, ou <contact>fale conosco</contact>.",
+    "tryAgain": "Altere o nome ou o site da empresa para enviá-la de novo para análise, ou <contact>fale conosco</contact>.",
     "pendingBadge": "Verificação pendente",
     "renameHint": "Mudar o nome envia sua empresa para verificação de novo."
   },
@@ -932,8 +932,8 @@
   },
   "maintenance": {
     "title": "Em manutenção",
-    "text": "O prepza está em manutenção. Voltamos em breve.",
-    "notice": "O modo de manutenção está ativado: agora só os superadmins podem usar o prepza."
+    "text": "A prepza está em manutenção. Voltamos em breve.",
+    "notice": "O modo de manutenção está ativado: agora só os superadmins podem usar a prepza."
   },
   "content": {
     "updated": "Última atualização",
@@ -943,20 +943,20 @@
     "startButton": "Criar um teste"
   },
   "compare": {
-    "title": "Compare o prepza",
+    "title": "Compare a prepza",
     "intro": "Comparações com fontes com outras ferramentas de testes pré-admissão: como os testes são criados, quanto custam e quando cada uma se encaixa melhor."
   },
   "guides": {
     "title": "Guias de contratação",
-    "intro": "Guias práticos para gestores de contratação: triagem de candidatos, testes de habilidades e uso de IA na contratação de forma justa e legal."
+    "intro": "Guias práticos para gestores contratantes: triagem de candidatos, testes de habilidades e uso de IA na contratação de forma justa e legal."
   },
   "tests": {
     "title": "Testes de recrutamento e seleção por cargo",
-    "intro": "Testes de habilidades cronometrados e prontos para funções comuns. Use um como está ou crie um teste a partir da sua própria descrição da vaga.",
+    "intro": "Testes de habilidades cronometrados e prontos para cargos comuns. Use um como está ou crie um teste a partir da sua própria descrição da vaga.",
     "heading": "Teste de habilidades de {role} para contratação",
     "pageTitle": "Teste para contratação de {role}",
     "pageDescription": "Teste de recrutamento e seleção para {role}, cronometrado, com {count, plural, one {# tópico} other {# tópicos}}. Cada candidato recebe as próprias perguntas aleatórias. $1–3 por candidato.",
-    "lead": "Um teste cronometrado de múltipla escolha sobre as habilidades desta função. Cada candidato recebe o próprio conjunto aleatório de perguntas, com um cronômetro em cada uma, e você recebe uma ficha de avaliação com cada resposta e seu tempo. $1–3 por candidato, sem assinatura.",
+    "lead": "Um teste cronometrado de múltipla escolha sobre as habilidades deste cargo. Cada candidato recebe o próprio conjunto aleatório de perguntas, com um cronômetro em cada uma, e você recebe uma ficha de avaliação com cada resposta e seu tempo. $1–3 por candidato, sem assinatura.",
     "create": "Criar um teste para seus candidatos",
     "practise": "Pratique de graça",
     "topics": "O que ele avalia",

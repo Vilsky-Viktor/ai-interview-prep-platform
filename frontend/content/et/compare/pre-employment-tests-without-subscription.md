@@ -30,7 +30,7 @@ See leht selgitab tellimuse alternatiive, kuidas need tellimuspakettidega võrre
 
 | Tööriist | Hinnamudel (2026. aasta oktoobri seisuga) | Kohustus |
 | --- | --- | --- |
-| **prepza** | Ettemakstud krediidid, tasu iga vastava kandidaadi eest ([hinnad](/pricing)) | Puudub; krediidid ei aegu |
+| **prepza** | Ettemakstud krediidid, tasu iga vastanud kandidaadi eest ([hinnad](/pricing)) | Puudub; krediidid ei aegu |
 | **TestGorilla** | Tasuta pakett või aastase arveldusega tasulised paketid ([hinnaleht](https://www.testgorilla.com/pricing/)) | Tasulistel pakettidel aasta |
 | **CodeSignal** | Krediitidega paketid ([hinnaleht](https://codesignal.com/pricing/)) | Kuu või aasta |
 | **Bryq** | Piiramatute kutsetega paketid ([hinnaleht](https://www.bryq.com/pricing)) | Kuu või aasta |

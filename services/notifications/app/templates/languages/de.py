@@ -2,31 +2,31 @@
 
 TEXTS = {
     "candidate": {
-        "subject": "{company} lädt Sie zu einem Vorstellungsgespräch ein",
+        "subject": "{company} lädt Sie zu einem Interview ein",
         "preheader": "Absolvieren Sie „{title}“ auf prepza. Melden Sie sich mit "
         "{email} an, um zu beginnen.",
-        "heading": "Einladung zum Vorstellungsgespräch",
+        "heading": "Einladung zum Interview",
         "lines": [
-            "{company} lädt Sie zum Vorstellungsgespräch „{title}“ auf prepza ein.",
+            "{company} lädt Sie zum Interview „{title}“ auf prepza ein.",
             (
                 "Melden Sie sich mit {email} an, um zu beginnen. Nur diese Adresse "
-                "kann das Gespräch absolvieren, und Sie haben einen Versuch."
+                "kann das Interview absolvieren, und Sie haben einen Versuch."
             ),
         ],
         "button": "Einladung öffnen",
     },
     "reminder": {
-        "subject": "Erinnerung: {company} wartet auf Ihr Vorstellungsgespräch",
+        "subject": "Erinnerung: {company} wartet auf Ihr Interview",
         "preheader": "„{title}“ ist noch offen. Melden Sie sich mit {email} an, um zu beginnen.",
-        "heading": "Ihr Vorstellungsgespräch wartet",
+        "heading": "Ihr Interview wartet",
         "lines": [
             (
-                "{company} hat Sie vor einigen Tagen zum Vorstellungsgespräch „{title}“ auf "
+                "{company} hat Sie vor einigen Tagen zum Interview „{title}“ auf "
                 "prepza eingeladen, und Sie haben es noch nicht begonnen."
             ),
             (
                 "Melden Sie sich mit {email} an, um zu beginnen. Nur diese Adresse kann das "
-                "Gespräch absolvieren, und Sie haben einen Versuch. Die Einladung läuft 30 Tage "
+                "Interview absolvieren, und Sie haben einen Versuch. Die Einladung läuft 30 Tage "
                 "nach dem Versand ab."
             ),
         ],
@@ -37,9 +37,9 @@ TEXTS = {
         "preheader": "{candidate} hat „{title}“ bei {company} absolviert. Der Bericht ist angehängt.",
         "heading": "Kandidatenbericht",
         "lines": [
-            "{sender} von {company} hat den Bericht von {candidate} zum Vorstellungsgespräch „{title}“ geteilt.",
+            "{sender} von {company} hat den Bericht von {candidate} zum Interview „{title}“ geteilt.",
             (
-                "Er ist als einseitiges PDF angehängt: die Gesamtnote, das Ergebnis jedes Themas "
+                "Er ist als einseitiges PDF angehängt: das Gesamtergebnis, das Ergebnis jedes Themas "
                 "und was der Browser des Kandidaten gezeigt hat. Antworten Sie auf diese E-Mail, "
                 "um {sender} zu antworten."
             ),
@@ -54,9 +54,9 @@ TEXTS = {
         "preheader": "Alle Kandidaten für „{title}“ bei {company}. Der Bericht ist angehängt.",
         "heading": "Kandidatenbericht",
         "lines": [
-            "{sender} von {company} hat den Bericht aller Kandidaten zum Vorstellungsgespräch „{title}“ geteilt.",
+            "{sender} von {company} hat den Bericht aller Kandidaten zum Interview „{title}“ geteilt.",
             (
-                "Er ist als PDF angehängt: Note, Fortschritt und was der Browser jedes Kandidaten "
+                "Er ist als PDF angehängt: Ergebnis, Fortschritt und was der Browser jedes Kandidaten "
                 "gezeigt hat, die Besten zuerst. Antworten Sie auf diese E-Mail, um {sender} zu "
                 "antworten."
             ),

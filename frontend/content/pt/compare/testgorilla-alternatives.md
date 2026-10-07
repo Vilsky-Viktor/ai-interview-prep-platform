@@ -39,7 +39,7 @@ Depois, compare o modelo de preço com o seu volume de contratação. Um plano c
 
 ### prepza
 
-A prepza transforma uma descrição da vaga em uma entrevista de habilidades de múltipla escolha cronometrada. Você revisa os tópicos propostos antes de qualquer pergunta ser escrita, e cada candidato recebe seu próprio conjunto aleatório de perguntas, com contagem regressiva em cada uma. Para vagas técnicas, as perguntas podem mostrar um pequeno exemplo de código e perguntar o que ele faz ou imprime. As fichas de resultados mostram cada resposta e seu tempo, com alertas para respostas rápidas demais, saídas da página e tentativas de cópia. Você convida por e-mail ou com um único link no anúncio da vaga, e os lembretes são enviados automaticamente.
+A prepza transforma uma descrição da vaga em uma entrevista de habilidades de múltipla escolha cronometrada. Você revisa os tópicos propostos antes de qualquer pergunta ser escrita, e cada candidato recebe seu próprio conjunto aleatório de perguntas, com contagem regressiva em cada uma. Para vagas técnicas, as perguntas podem mostrar um pequeno exemplo de código e perguntar o que ele faz ou imprime. As fichas de avaliação mostram cada resposta e seu tempo, com alertas para respostas rápidas demais, saídas da página e tentativas de cópia. Você convida por e-mail ou com um único link no anúncio da vaga, e os lembretes são enviados automaticamente.
 
 - **Preço:** por candidato que responde pelo menos uma pergunta, mais barato por candidato em recargas maiores. Os créditos não expiram e não há assinatura. Veja os [preços](/pricing).
 - **Indicada para:** equipes pequenas e médias que contratam para qualquer função, poucas pessoas por vez, como primeira triagem.

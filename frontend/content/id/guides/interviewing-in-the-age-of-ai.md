@@ -49,7 +49,7 @@ Semua ini tidak membuat latihan coding jadi tidak berguna. Yang berubah adalah k
 - **Pairing dengan AI.** Seperti ronde Canva, beri kandidat sebuah asisten dan tugas yang realistis dan terbuka. Perhatikan cara mereka menguraikannya, apa yang mereka tanyakan kepada asisten, dan apa yang mereka terima atau tolak.
 - **Code review.** Berikan sebuah pull request, mungkin yang ditulis AI, dengan beberapa bug nyata. Tanyakan apa yang akan mereka ubah dan kenapa.
 - **Debugging.** Berikan codebase kecil dengan tes yang gagal. Ini dekat dengan kerja sehari-hari yang digambarkan survei dan sulit dipalsukan.
-- **System design.** Untuk peran senior, diskusi tentang trade-off menunjukkan kemampuan menilai yang tidak bisa dihasilkan oleh satu prompt saja.
+- **System design.** Untuk posisi senior, diskusi tentang trade-off menunjukkan kemampuan menilai yang tidak bisa dihasilkan oleh satu prompt saja.
 
 Latihan-latihan ini menyita waktu engineer untuk menjalankan dan menilainya. Itulah alasan utama untuk menaruh pemeriksaan pengetahuan yang cepat dan luas sebelumnya, supaya latihan ini diberikan kepada kandidat yang paling mungkin berhasil.
 
@@ -58,7 +58,7 @@ Latihan-latihan ini menyita waktu engineer untuk menjalankan dan menilainya. Itu
 1. **Saring lamaran hanya untuk syarat wajib:** izin kerja, lokasi, pengalaman yang wajib.
 2. **Jalankan tes pengetahuan singkat** tentang konsep, teori, dan membaca kode untuk stack-mu.
 3. **Jalankan latihan praktik langsung** dalam bentuk yang sesuai dengan cara kerja timmu: pairing berbantuan AI, code review, atau debugging, jarak jauh atau tatap muka.
-4. **Tambahkan system design** untuk peran senior.
+4. **Tambahkan system design** untuk posisi senior.
 5. **Adakan wawancara terstruktur** dengan pertanyaan yang ditetapkan dan rubrik penilaian, termasuk cara kandidat memakai alat AI dan memeriksa outputnya.
 6. **Biarkan manusia yang memutuskan,** dengan setiap hasil sebagai salah satu masukan.
 
@@ -73,9 +73,9 @@ prepza sangat cocok untuk langkah 2. prepza mengubah deskripsi pekerjaanmu menja
 - **Konsep dan teori dari deskripsi pekerjaan:** database, API, arsitektur, perilaku framework, praktik keamanan.
 - **Soal membaca kode:** potongan kode singkat dengan pertanyaan tentang apa yang dicetak atau dikembalikannya, apa fungsinya, kenapa gagal, atau perubahan mana yang memperbaikinya. Itu adalah keterampilan meninjau yang sama yang diandalkan kerja berbantuan AI.
 - **Timer di setiap soal:** setiap soal punya hitung mundurnya sendiri, ditegakkan oleh server, dan setiap kandidat mendapat set soal acaknya sendiri. Itu membuat mencari jawaban, termasuk bertanya kepada asisten AI, lebih sulit. Tetapi tidak membuatnya mustahil.
-- **Sinyal integritas:** scorecard menandai jawaban yang terlalu cepat untuk sempat membaca soalnya, saat kandidat meninggalkan halaman, dan percobaan menyalin. Tanda adalah alasan untuk melihat lebih teliti, bukan bukti kecurangan.
+- **Tanda peringatan:** scorecard menandai jawaban yang terlalu cepat untuk sempat membaca soalnya, saat kandidat meninggalkan halaman, dan percobaan menyalin. Tanda adalah alasan untuk melihat lebih teliti, bukan bukti kecurangan.
 
-Yang tidak dilakukan prepza: kandidat tidak menulis, menjalankan, atau men-debug kode di prepza, dan prepza tidak mengamati mereka memakai asisten AI. Itu masuk ke tahap praktik langsung, yang dijalankan sendiri oleh timmu atau di platform developer, dan melengkapi tes pengetahuan. Lihat [tes keterampilan per peran](/tests) untuk tes siap pakai sebagai titik awal, dan [Wawancara AI](/ai-interviews) untuk cara prepza memakai AI dan apa yang diserahkannya kepada manusia.
+Yang tidak dilakukan prepza: kandidat tidak menulis, menjalankan, atau men-debug kode di prepza, dan prepza tidak mengamati mereka memakai asisten AI. Itu masuk ke tahap praktik langsung, yang dijalankan sendiri oleh timmu atau di platform developer, dan melengkapi tes pengetahuan. Lihat [tes keterampilan per posisi](/tests) untuk tes siap pakai sebagai titik awal, dan [Wawancara AI](/ai-interviews) untuk cara prepza memakai AI dan apa yang diserahkannya kepada manusia.
 
 ## Keadilan dan pengalaman kandidat
 
@@ -103,6 +103,6 @@ Asisten AI membuat produksi kode makin murah dan penilaian kode makin penting. P
 ## Bacaan terkait
 
 - [Cara merekrut engineer](/guides/hiring-engineers)
-- [Tes keterampilan per peran](/tests)
+- [Tes keterampilan per posisi](/tests)
 - [Wawancara AI: apa itu dan cara memakainya secara adil](/ai-interviews)
 - [Tes keterampilan vs penyaringan CV](/guides/skills-tests-vs-cv-screening)

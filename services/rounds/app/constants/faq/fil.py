@@ -5,7 +5,7 @@ FAQ = [
     {
         "key": "what",
         "question": "Ano ang prepza?",
-        "answer": "Isang timed interview mula sa iyong job description, para sa kahit anong role. Gamitin ito para i-screen ang mga kandidato bago mo sila makilala, o bilang mismong hakbang ng hiring: alinman dito, makikita mo kung sino ang talagang marunong sa trabaho.",
+        "answer": "Isang timed interview mula sa iyong job description, para sa kahit anong role. Gamitin ito para i-screen ang mga aplikante bago mo sila makilala, o bilang mismong hakbang ng hiring: alinman dito, makikita mo kung sino ang talagang marunong sa trabaho.",
     },
     {
         "key": "roles",
@@ -15,37 +15,37 @@ FAQ = [
     {
         "key": "hiring",
         "question": "Paano ito gumagana?",
-        "answer": "Mag-paste ng job description sa home page, pangalanan ang iyong kumpanya at tingnan ang mga topic na iminumungkahi ng prepza. Pagkatapos ay mag-imbita ng mga kandidato: i-type ang kanilang mga email, mag-paste ng listahan o mag-upload ng file. Ang mga kandidatong hindi pa nagsisimula pagkalipas ng ilang araw ay makakatanggap ng isang paalala. Bawat kandidato ay may sariling mga tanong at timer sa bawat isa, at makikita mo ang kanilang score at bawat sagot sa sandaling matapos sila.",
+        "answer": "Mag-paste ng job description sa home page, pangalanan ang iyong kumpanya at tingnan ang mga topic na iminumungkahi ng prepza. Pagkatapos ay mag-imbita ng mga aplikante: i-type ang kanilang mga email, mag-paste ng listahan o mag-upload ng file. Ang mga aplikanteng hindi pa nagsisimula pagkalipas ng ilang araw ay makakatanggap ng isang paalala. Bawat aplikante ay may sariling mga tanong at timer sa bawat isa, at makikita mo ang kanilang score at bawat sagot sa sandaling matapos sila.",
     },
     {
         "key": "link",
         "question": "Puwede ko bang ilagay ang interview sa isang job ad?",
-        "answer": "Oo. I-on ang shareable link ng interview sa tab nitong Mga kandidato at i-paste ito sa iyong ad. Ang sinumang magbukas nito ay magsa-sign in at sasagot sa interview, at sinisingil ang bawat tao tulad ng isang inimbitahang kandidato. Mag-o-off ang link kapag minarkahan mo ang interview bilang na-hire.",
+        "answer": "Oo. I-on ang shareable link ng interview sa tab nitong Mga aplikante at i-paste ito sa iyong ad. Ang sinumang magbukas nito ay magsa-sign in at sasagot sa interview, at sinisingil ang bawat tao tulad ng isang inimbitahang aplikante. Mag-o-off ang link kapag minarkahan mo ang interview bilang na-hire.",
     },
     {
         "key": "preview",
         "question": "Puwede ko bang subukan ang interview bago mag-imbita ng kahit sino?",
-        "answer": "Oo. Buksan ang iyong interview bilang kandidato mula sa page nito, nang libre: hindi lumalabas ang mga preview sa iyong mga kandidato o sa statistics ng mga tanong. Puwede mo ring sagutan ang alinman sa mga libreng practice interview.",
+        "answer": "Oo. Buksan ang iyong interview bilang aplikante mula sa page nito, nang libre: hindi lumalabas ang mga preview sa iyong mga aplikante o sa statistics ng mga tanong. Puwede mo ring sagutan ang alinman sa mga libreng practice interview.",
     },
     {
         "key": "cheating",
-        "question": "Puwede bang gumamit ng AI ang mga kandidato o hanapin ang mga sagot?",
-        "answer": "Bawat kandidato ay may sariling random na mga tanong sa sarili nilang pagkakasunod-sunod, may timer sa bawat tanong na binabantayan ng aming server, kaya kaunti lang ang oras para maghanap ng sagot o magtanong sa AI. Ipinapakita rin ng mga resulta ng kandidato kung kailan umalis ang kandidato sa page, kumopya ng text, o sumagot nang masyadong mabilis para nabasa ang tanong.",
+        "question": "Puwede bang gumamit ng AI ang mga aplikante o hanapin ang mga sagot?",
+        "answer": "Bawat aplikante ay may sariling random na mga tanong sa sarili nilang pagkakasunod-sunod, may timer sa bawat tanong na binabantayan ng aming server, kaya kaunti lang ang oras para maghanap ng sagot o magtanong sa AI. Ipinapakita rin ng scorecard ng aplikante kung kailan siya umalis sa page, kumopya ng text, o sumagot nang masyadong mabilis para nabasa ang tanong.",
     },
     {
         "key": "cost",
         "question": "Magkano ito?",
-        "answer": "Libre ang paggawa ng interview. Bawat kandidatong sumagot ng kahit isang tanong ay {candidate} credits (${candidate_dollars}), at mas mura gamit ang credits mula sa mas malalaking top-up, hanggang $1. Makakatanggap ang iyong unang kumpanya ng {company} libreng credits, sapat para sa unang {company_candidates} kandidato nito. Nakalista sa pricing page ang bawat presyo.",
+        "answer": "Libre ang paggawa ng interview. Bawat aplikanteng sumagot ng kahit isang tanong ay {candidate} credits (${candidate_dollars}), at mas mura gamit ang credits mula sa mas malalaking top-up, hanggang $1. Makakatanggap ang iyong unang kumpanya ng {company} libreng credits, sapat para sa unang {company_candidates} aplikante nito. Nakalista sa pricing page ang bawat presyo.",
     },
     {
         "key": "charged",
-        "question": "Kailan sinisingil ang isang kandidato?",
+        "question": "Kailan sinisingil ang isang aplikante?",
         "answer": "Kapag natapos lang nila ang interview nang nakasagot ng kahit isang tanong. Itinatabi ang kanilang credits kapag inimbitahan mo sila, at ibinabalik kung babawiin mo ang imbitasyon, kung hindi sila kailanman nagsimula, o kung wala silang sinagot.",
     },
     {
         "key": "compare_hiring",
         "question": "Paano maihahambing ang presyo sa ibang assessment tool?",
-        "answer": "Maraming assessment tool ang ibinebenta bilang buwanan o taunang subscription na binabayaran kahit wala kang tine-test. Sa prepza, nagbabayad ka lang kada kandidato: {candidate} credits (${candidate_dollars}), walang kontrata, walang bayad kada user, at walang bayad sa paggawa ng interview. Ang kumpanyang nag-iimbita ng {example_candidates} kandidato kada buwan ay nagbabayad ng mga ${example_year_dollars} kada taon. Kung maraming kandidato ang tine-test mo buwan-buwan, maaaring mas mura ang subscription, kaya ihambing sa sarili mong mga numero.",
+        "answer": "Maraming assessment tool ang ibinebenta bilang buwanan o taunang subscription na binabayaran kahit wala kang tine-test. Sa prepza, nagbabayad ka lang kada aplikante: {candidate} credits (${candidate_dollars}), walang kontrata, walang bayad kada user, at walang bayad sa paggawa ng interview. Ang kumpanyang nag-iimbita ng {example_candidates} aplikante kada buwan ay nagbabayad ng mga ${example_year_dollars} kada taon. Kung maraming aplikante ang tine-test mo buwan-buwan, maaaring mas mura ang subscription, kaya ihambing sa sarili mong mga numero.",
     },
     {
         "key": "expire",
@@ -59,17 +59,17 @@ FAQ = [
     },
     {
         "key": "scorecards",
-        "question": "Ano ang ipinapakita ng mga resulta ng kandidato?",
-        "answer": "Bawat sagot, kung tama ito at gaano katagal ito. Berde o pula ang mga grado batay sa passing grade na itinakda mo para sa interview. Nagfa-flag din ang mga resulta ng mga sagot na masyadong mabilis para nabasa ang tanong, mga pagkakataong umalis ang kandidato sa page, at mga pagtatangkang mangopya.",
+        "question": "Ano ang ipinapakita ng scorecard ng aplikante?",
+        "answer": "Bawat sagot, kung tama ito at gaano katagal ito. Berde o pula ang mga grade batay sa passing grade na itinakda mo para sa interview. Nagfa-flag din ang scorecard ng mga sagot na masyadong mabilis para nabasa ang tanong, mga pagkakataong umalis ang aplikante sa page, at mga pagtatangkang mangopya.",
     },
     {
         "key": "reports",
         "question": "Puwede ko bang i-share ang mga resulta sa isang hiring manager?",
-        "answer": "Oo. Mag-download ng PDF report para sa isang kandidato o para sa lahat ng kandidato ng isang interview, i-email ito direkta mula sa prepza, o magpadala ng maikling buod sa WhatsApp o Telegram.",
+        "answer": "Oo. Mag-download ng PDF report para sa isang aplikante o para sa lahat ng aplikante ng isang interview, i-email ito direkta mula sa prepza, o magpadala ng maikling buod sa WhatsApp o Telegram.",
     },
     {
         "key": "candidates",
-        "question": "Ano ang nakikita ng mga kandidato?",
+        "question": "Ano ang nakikita ng mga aplikante?",
         "answer": "Ang pangalan at logo ng iyong kumpanya, kung ano ang aasahan bago sila magsimula, pagkatapos ay isang timed na tanong sa bawat pagkakataon. Hindi nila kailanman nakikita ang kanilang score o kung tama ang isang sagot.",
     },
     {
@@ -85,7 +85,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Ano ang nangyayari sa mga job description at mga sagot?",
-        "answer": "Ginagamit ang mga job description para buuin ang iyong mga interview, at ang mga sagot ng kandidato para i-score ang mga ito, para sa iyong kumpanya lang. Ipinapaliwanag ng privacy policy kung ano ang itinatago namin, gaano katagal, at ang mga karapatan ng lahat.",
+        "answer": "Ginagamit ang mga job description para buuin ang iyong mga interview, at ang mga sagot ng aplikante para i-score ang mga ito, para sa iyong kumpanya lang. Ipinapaliwanag ng privacy policy kung ano ang itinatago namin, gaano katagal, at ang mga karapatan ng lahat.",
     },
     {
         "key": "delete",

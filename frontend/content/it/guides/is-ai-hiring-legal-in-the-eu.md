@@ -117,12 +117,12 @@ prepza svolge colloqui di competenze a scelta multipla e a tempo, scritti dall'I
 
 Ecco cosa significa oggi nel prodotto:
 
-- **L'IA scrive le domande e le relative chiavi di risposta; la correzione segue regole fisse.** Nessuna IA legge o giudica la risposta di un candidato, e non si usa alcuna analisi di video, voce o volto. Se in seguito l'IA corregge una chiave, le risposte passate vengono ricalcolate.
+- **L'IA scrive le domande e le relative chiavi di correzione; la correzione segue regole fisse.** Nessuna IA legge o giudica la risposta di un candidato, e non si usa alcuna analisi di video, voce o volto. Se in seguito l'IA corregge una chiave, le risposte passate vengono ricalcolate.
 - **Approvi tu gli argomenti** prima che venga scritta qualsiasi domanda, e puoi vedere ogni domanda.
 - **Decidono le persone.** La pagina dei risultati e i report PDF ricordano al tuo team di esaminare i risultati; prepza non scarta candidati né invia messaggi di rifiuto.
 - **I candidati vengono informati** prima di iniziare che le domande sono scritte dall'IA, che le persone della tua azienda esaminano i risultati e decidono, e che possono chiedere una revisione.
 - **Più tempo** può essere concesso a qualsiasi candidato che lo chieda.
-- **Registrazioni.** Vengono registrati le domande mostrate, le risposte, i tempi e gli eventi di integrità.
+- **Registrazioni.** Vengono registrati le domande mostrate, le risposte, i tempi e le segnalazioni di comportamenti sospetti.
 - **Dati.** Ospitati nell'UE (alcuni sub-responsabili si trovano negli Stati Uniti; vedi l'[informativa sulla privacy](/privacy)), dati dei candidati cancellati 12 mesi dopo l'invito, accordo sul trattamento dei dati incluso, e i tuoi dati non vengono usati per addestrare modelli di IA.
 
 Esistono bozze della documentazione tecnica, del registro dei rischi, delle istruzioni per le aziende, del sistema di gestione della qualità e del piano di monitoraggio successivo all'immissione sul mercato, che vengono completate in vista della scadenza del 2027. Sono bozze di lavoro, non una dichiarazione di conformità.

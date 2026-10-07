@@ -64,7 +64,7 @@ Consulta [Alternativas a TestGorilla](/compare/testgorilla-alternatives) y [Alte
 
 - Una entrevista de opción múltiple con tiempo límite redactada a partir de tu descripción del puesto, con temas que revisas primero.
 - Un conjunto aleatorio de preguntas propio para cada candidato, con una cuenta atrás en cada pregunta. Para puestos técnicos, las preguntas pueden incluir breves ejemplos de código.
-- Fichas de resultados con respuestas y tiempos, y avisos de respuestas demasiado rápidas, salidas de la página e intentos de copiar.
+- Fichas de evaluación con respuestas y tiempos, y alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar.
 - Informes en PDF de un candidato o de toda la lista.
 - Invitaciones por correo electrónico, por lista o archivo, o con un único enlace en tu oferta de empleo, además de recordatorios automáticos.
 - 23 idiomas, datos alojados en la UE (algunos subencargados están en EE. UU.; consulta la [política de privacidad](/privacy)) y un contrato de encargo del tratamiento incluido.

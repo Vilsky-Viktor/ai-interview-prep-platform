@@ -75,7 +75,7 @@ Usa HackerRank, o un'altra piattaforma per sviluppatori, quando:
 - Ti serve che i candidati scrivano, eseguano e facciano debug di codice.
 - Conduci colloqui tecnici dal vivo in un ambiente di coding condiviso.
 - Vuoi vedere come i candidati costruiscono e revisionano codice reale, non solo come lo leggono.
-- I tuoi ingegneri conoscono già la piattaforma e se ne fidano.
+- I tuoi sviluppatori conoscono già la piattaforma e se ne fidano.
 
 Niente di questo esclude una verifica delle conoscenze prima. I due strumenti coprono fasi diverse.
 
@@ -89,7 +89,7 @@ Supponi di assumere 1 sviluppatore, 2 commerciali e 3 addetti all'assistenza in 
 | Pratica | Il test di coding o il colloquio di live coding di una piattaforma per sviluppatori per i 3–5 che lo superano | Un role play o una prova pratica per la rosa ristretta |
 | Decisione | Colloqui strutturati e il giudizio di una persona | Colloqui strutturati e il giudizio di una persona |
 
-Lo screening riserva il tempo dei colloqui degli ingegneri a chi conosce già lo stack. La fase di coding mostra se sanno scrivere codice funzionante, cosa che prepza non valuta. Il costo totale dipende dai tuoi volumi e dal piano della piattaforma per sviluppatori; vedi [Come confrontare i costi dei test](/compare/cheapest-pre-employment-test).
+Lo screening riserva il tempo dei colloqui degli sviluppatori a chi conosce già lo stack. La fase di coding mostra se sanno scrivere codice funzionante, cosa che prepza non valuta. Il costo totale dipende dai tuoi volumi e dal piano della piattaforma per sviluppatori; vedi [Come confrontare i costi dei test](/compare/cheapest-pre-employment-test).
 
 ## Cosa prepza non fa
 
@@ -100,7 +100,7 @@ Per un confronto onesto:
 - Niente test di abilità cognitive o di personalità.
 - Nessuna integrazione con l'ATS.
 
-Per un processo di assunzione completo in ambito ingegneristico, vedi [Come assumere ingegneri](/guides/hiring-engineers).
+Per un processo di assunzione completo in ambito ingegneristico, vedi [Come assumere sviluppatori](/guides/hiring-engineers).
 
 *HackerRank è un marchio del rispettivo proprietario. prepza non è affiliata né approvata da HackerRank o da qualsiasi altra azienda citata in questa pagina.*
 

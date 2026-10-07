@@ -40,7 +40,7 @@ A prepza usa IA para escrever uma entrevista de habilidades a partir da sua desc
 3. **A IA escreve as perguntas.** Cada tópico recebe um banco de perguntas de múltipla escolha, cada uma com uma opção correta e três erradas, mas plausíveis. Em tópicos técnicos, muitas perguntas mostram um pequeno exemplo de código e perguntam o que ele imprime, o que faz, por que falha ou qual mudança o corrige. Você pode abrir cada pergunta e suas opções e gerar novamente as que não gostar.
 4. **Os candidatos respondem perguntas com tempo cronometrado.** Cada candidato recebe seu próprio conjunto aleatório do banco de cada tópico, em ordem própria, com contagem regressiva em cada pergunta.
 5. **As respostas são corrigidas com base em um gabarito.** A IA escreve e verifica os gabaritos; a correção em si segue regras fixas, e nenhuma IA lê ou julga a resposta de um candidato. Se um gabarito for corrigido depois, as respostas anteriores são pontuadas novamente. Velocidade, saídas da página e tentativas de cópia aparecem para você como sinais; elas não mudam a pontuação.
-6. **Pessoas decidem.** Você vê uma lista ordenada e uma ficha de resultados por candidato, com cada resposta e seu tempo. Uma pessoa da sua empresa revisa os resultados e toma a decisão de contratação.
+6. **Pessoas decidem.** Você vê uma lista ordenada e uma ficha de avaliação por candidato, com cada resposta e seu tempo. Uma pessoa da sua empresa revisa os resultados e toma a decisão de contratação.
 
 O que a prepza não faz:
 
@@ -51,7 +51,7 @@ O que a prepza não faz:
 
 ### As perguntas melhoram com o tempo
 
-Perguntas escritas por IA podem estar erradas ou pouco claras, principalmente em uma entrevista nova. A prepza fica atenta a isso: as respostas, avaliações e denúncias dos candidatos sinalizam perguntas fracas, e um verificador de IA as corrige ou substitui. Se você encontrar uma pergunta com o gabarito errado, marque-a, e ela vai para o verificador na hora.
+Perguntas escritas por IA podem estar erradas ou pouco claras, principalmente em uma entrevista nova. A prepza fica atenta a isso: as respostas, avaliações e reportes dos candidatos sinalizam perguntas fracas, e um verificador de IA as corrige ou substitui. Se você encontrar uma pergunta com o gabarito errado, marque-a, e ela vai para o verificador na hora.
 
 Você também pode testar a sua própria entrevista como candidato antes de convidar alguém: as mesmas perguntas cronometradas, de graça e fora dos seus resultados.
 
@@ -90,7 +90,7 @@ As datas e os detalhes estão em [O uso de IA no recrutamento é legal na UE?](/
 
 ### GDPR
 
-Os resultados das entrevistas são dados pessoais, tanto pelo Regulamento Geral sobre a Proteção de Dados da UE (GDPR) quanto pelo UK GDPR. Conte com um acordo de processamento de dados, um aviso aos candidatos, retenção limitada e uma forma de os candidatos acessarem ou excluírem seus dados. O [artigo 22](https://gdpr-info.eu/art-22-gdpr/) também limita decisões tomadas exclusivamente com base em tratamento automatizado que afetem as pessoas de forma significativa, então faça com que uma pessoa revise os resultados antes de agir. A prepza é hospedada na UE (alguns suboperadores estão nos EUA; veja a [política de privacidade](/privacy)), exclui os dados dos candidatos 12 meses após o convite e inclui um acordo de processamento de dados e instruções para empresas.
+Os resultados das entrevistas são dados pessoais, tanto pelo Regulamento Geral sobre a Proteção de Dados da UE (GDPR) quanto pelo UK GDPR. Conte com um acordo de tratamento de dados, um aviso aos candidatos, retenção limitada e uma forma de os candidatos acessarem ou excluírem seus dados. O [artigo 22](https://gdpr-info.eu/art-22-gdpr/) também limita decisões tomadas exclusivamente com base em tratamento automatizado que afetem as pessoas de forma significativa, então faça com que uma pessoa revise os resultados antes de agir. A prepza é hospedada na UE (alguns suboperadores estão nos EUA; veja a [política de privacidade](/privacy)), exclui os dados dos candidatos 12 meses após o convite e inclui um acordo de tratamento de dados e instruções para empresas.
 
 ### Estados Unidos
 

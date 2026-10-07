@@ -2,7 +2,7 @@
   "settings": {
     "title": "Pengaturan",
     "language": "Bahasa",
-    "languageNote": "Untuk antarmuka dan balasan tutor, serta bahasa awal kit dan wawancara baru. Kamu bisa membuatnya dalam bahasa apa pun yang didukung.",
+    "languageNote": "Untuk antarmuka dan balasan chat bantuan, serta bahasa awal wawancara baru. Kamu bisa membuat wawancara dalam bahasa apa pun yang didukung.",
     "languageFailed": "Bahasa tidak bisa diubah. Coba lagi.",
     "yourData": "Datamu",
     "yourDataNote": "Unduh semua yang disimpan prepza. tentangmu, atau hapus akunmu.",
@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. beranda",
     "main": "Menu utama",
-    "legal": "Hukum",
+    "legal": "Legal",
     "pricing": "Harga",
     "privacy": "Privasi",
     "terms": "Ketentuan",
@@ -40,7 +40,7 @@
     "about": "Tentang kami",
     "practice": "Latihan gratis",
     "tests": "Tes keterampilan",
-    "preEmploymentTesting": "Tes pra-kerja",
+    "preEmploymentTesting": "Tes seleksi karyawan",
     "aiInterviews": "Wawancara AI",
     "compare": "Bandingkan",
     "guides": "Panduan"
@@ -63,7 +63,7 @@
     "close": "Tutup",
     "delete": "Hapus",
     "deleting": "Menghapus…",
-    "keep": "Simpan saja",
+    "keep": "Biarkan",
     "edit": "Ubah",
     "retry": "Coba lagi",
     "loadMoreFailed": "Tidak bisa memuat lagi. Coba lagi.",
@@ -86,7 +86,7 @@
     "text": "Wawancara berbatas waktu yang dibuat dari deskripsi pekerjaanmu. Soal unik untuk setiap kandidat dan batas waktu di tiap soal. $1–3 per kandidat."
   },
   "start": {
-    "placeholder": "Tempel deskripsi pekerjaan, atau jelaskan perannya dan apa yang perlu diketahui kandidat",
+    "placeholder": "Tempel deskripsi pekerjaan, atau jelaskan posisinya dan apa yang perlu diketahui kandidat",
     "description": "Deskripsi pekerjaan",
     "submit": "Buat wawancara",
     "whichCompany": "Wawancara ini untuk perusahaan mana?",
@@ -120,17 +120,17 @@
     "flags": {
       "wrong_key": "jawaban mungkin salah",
       "rewrite": "perlu soal baru",
-      "weak_options": "perlu opsi yang lebih baik"
+      "weak_options": "perlu pilihan jawaban yang lebih baik"
     },
     "zone": "Zona admin",
     "templates": "Templat",
     "new": "Templat baru",
     "createTitle": "Buat templat",
-    "placeholder": "Tempel deskripsi peran, atau jelaskan perannya dan apa yang perlu diketahui orang di peran itu",
-    "description": "Deskripsi peran",
+    "placeholder": "Tempel deskripsi posisi, atau jelaskan posisinya dan apa yang perlu diketahui orang di posisi itu",
+    "description": "Deskripsi posisi",
     "create": "Buat",
     "createFailed": "Templat tidak bisa dimulai. Coba lagi.",
-    "text": "Wawancara siap pakai per peran, untuk perusahaan dan talenta.",
+    "text": "Wawancara siap pakai per posisi, untuk perusahaan dan pencari kerja.",
     "deleteLabel": "Hapus {title}",
     "deleteTitle": "Hapus templat ini?",
     "deleteText": "Topik dan soalnya akan dihapus. Wawancara yang sudah dibuat perusahaan dari templat ini tetap ada.",
@@ -146,7 +146,7 @@
       "interviews": "Wawancara",
       "invited": "Diundang",
       "finished": "Selesai",
-      "practice": "Putaran latihan",
+      "practice": "Sesi latihan",
       "top_ups": "Isi ulang",
       "paid": "Dibayar",
       "credits_spent": "Kredit terpakai"
@@ -157,13 +157,13 @@
     "passed": "{percent}% lulus",
     "passMark": "nilai lulus {percent}%",
     "averageGrade": "rata-rata {percent}%",
-    "timedOut": "{percent}% waktu habis",
+    "timedOut": "{percent}% kehabisan waktu",
     "sortBy": {
       "pass_rate": "Tingkat kelulusan terendah dulu",
       "finished": "Paling banyak selesai dulu"
     },
     "pauseTitle": "Jeda darurat",
-    "pauseText": "Selama aktif, tidak ada yang bisa memulai wawancara, ronde latihan, atau pratinjau baru, dan tidak ada pertanyaan yang dibuat, dibuat ulang, atau diperiksa. Kandidat yang sudah dalam wawancara bisa menyelesaikannya.",
+    "pauseText": "Selama aktif, tidak ada yang bisa memulai wawancara, sesi latihan, atau pratinjau baru, dan tidak ada soal yang dibuat, dibuat ulang, atau diperiksa. Kandidat yang sudah dalam wawancara bisa menyelesaikannya.",
     "pauseFailed": "Tidak dapat mengubah jeda. Coba lagi.",
     "maintenanceTitle": "Mode pemeliharaan",
     "maintenanceText": "Selama aktif, setiap halaman menampilkan bahwa prepza sedang dalam pemeliharaan dan layanan menolak setiap permintaan, kecuali dari superadmin. Pembayaran, email, dan tugas terjadwal tetap berjalan.",
@@ -177,7 +177,7 @@
     "approve": "Setujui",
     "decline": "Tolak",
     "declineTitle": "Tolak “{name}”?",
-    "declineText": "Pemilik dan admin perusahaan ini mendapat notifikasi beserta alasan Anda, jika Anda memberikannya. Mereka bisa meminta lagi.",
+    "declineText": "Pemilik dan admin perusahaan ini mendapat notifikasi beserta alasanmu, jika kamu memberikannya. Mereka bisa meminta lagi.",
     "declineReason": "Alasan (opsional)",
     "declinedBecause": "Alasan: {reason}",
     "verificationStatus": {
@@ -191,7 +191,7 @@
     "title": "Templat",
     "empty": "Belum ada templat.",
     "topics": "{count, plural, other {# topik}}",
-    "search": "Cari berdasarkan peran atau topik",
+    "search": "Cari berdasarkan posisi atau topik",
     "searchAction": "Cari",
     "level": "Level: {level}",
     "anyLevel": "Semua level",
@@ -201,9 +201,9 @@
     "use": "Pakai templat",
     "using": "Memulai…",
     "useFailed": "Wawancara tidak bisa dimulai dari templat ini. Coba lagi.",
-    "warningTitle": "Templat sudah siap untuk peran umum.",
+    "warningTitle": "Templat dibuat siap pakai untuk posisi yang umum.",
     "warning": "Agar lebih sesuai, buat wawancara dari deskripsi pekerjaanmu.",
-    "text": "Wawancara siap pakai per peran. Pilih satu sebagai awal wawancaramu; kamu bisa mengubahnya nanti."
+    "text": "Wawancara siap pakai per posisi. Pilih satu sebagai awal wawancaramu; kamu bisa mengubahnya nanti."
   },
   "billing": {
     "paid": "Pembayaran diterima. Sebentar lagi akan muncul di sini.",
@@ -213,13 +213,13 @@
     "low": "Hampir habis",
     "creditsWord": "{count, plural, other {kredit}}",
     "topUpTitle": "Isi ulang: {name}",
-    "topUpNote": "Setiap isi ulang membeli kandidat utuh; makin besar isi ulangnya, makin murah per kandidat. Kredit tidak pernah kedaluwarsa.",
+    "topUpNote": "Setiap isi ulang dihitung untuk jumlah kandidat yang utuh; makin besar isi ulangnya, makin murah per kandidat. Kredit tidak pernah kedaluwarsa.",
     "candidates": "{count, plural, other {# kandidat}}",
     "each": "{price} per kandidat"
   },
   "deleteAccount": {
     "title": "Hapus akunmu?",
-    "everything": "Semuanya dihapus: tempat Anda di tim setiap perusahaan, hasil wawancara yang Anda ikuti sebagai kandidat, putaran latihan, dan notifikasi Anda.",
+    "everything": "Semuanya dihapus: keanggotaanmu di tim setiap perusahaan, hasil wawancara yang kamu ikuti sebagai kandidat, sesi latihan, dan notifikasimu.",
     "company": "Perusahaan yang hanya kamu miliki akan dihapus beserta wawancaranya. Tindakan ini tidak bisa dibatalkan.",
     "confirm": "Hapus akun",
     "deleted": "Akunmu sudah dihapus.",
@@ -311,7 +311,7 @@
     "title": "Wawancara"
   },
   "generation": {
-    "title": "Persiapan baru",
+    "title": "Wawancara baru",
     "interviews": "Wawancara",
     "cancel": "Batalkan pembuatan",
     "cancelTitle": "Batalkan pembuatan ini?",
@@ -360,7 +360,7 @@
   "roles": {
     "owner": "pemilik",
     "admin": "admin",
-    "viewer": "pengamat",
+    "viewer": "pelihat",
     "adminNote": "Membuat dan mengubah wawancara, mengundang kandidat, mengisi ulang kredit.",
     "viewerNote": "Melihat wawancara dan hasil, membagikan laporan. Tidak mengubah apa pun."
   },
@@ -372,7 +372,7 @@
     "interviews": "Wawancara",
     "templates": "Templat",
     "team": "Tim",
-    "referrals": "Undangan",
+    "referrals": "Referal",
     "new": "Perusahaan baru",
     "name": "Nama perusahaan",
     "create": "Buat",
@@ -397,14 +397,14 @@
     "pickText": "Tes disalin ke perusahaan yang kamu pilih, gratis dan siap dikirim ke kandidat."
   },
   "candidates": {
-    "scorecard": "Hasil",
+    "scorecard": "Scorecard",
     "interview": "Wawancara",
     "deleted": "Kandidat yang dihapus",
     "deletedText": "Kandidat menghapus akunnya, beserta hasilnya.",
     "notStarted": "Kandidat belum mulai.",
     "pageLeaves": "{count, plural, other {# kali meninggalkan halaman}}",
     "copies": "{count, plural, other {# percobaan menyalin}}",
-    "fastAnswers": "{count, plural, other {# jawaban cepat}}",
+    "fastAnswers": "{count, plural, other {# jawaban terlalu cepat}}",
     "empty": "Belum ada kandidat yang diundang.",
     "noMatches": "Tidak ada kandidat yang cocok.",
     "search": "Cari kandidat berdasarkan email",
@@ -479,7 +479,7 @@
     "memberFailed": "Tidak bisa mengundangnya. Coba lagi.",
     "invite": "Undang",
     "jobDescription": "Deskripsi pekerjaan",
-    "pasteJob": "Tempel deskripsi pekerjaan: peran, persyaratan, dan nilai tambahnya…",
+    "pasteJob": "Tempel deskripsi pekerjaan: posisi, persyaratan, dan nilai tambahnya…",
     "generate": "Buat wawancara",
     "startFailed": "Wawancara tidak bisa dimulai. Coba lagi.",
     "candidateEmails": "Email kandidat",
@@ -495,11 +495,11 @@
     }
   },
   "invite": {
-    "invitedYou": "<b>{company}</b> mengundangmu ke wawancara.",
+    "invitedYou": "<b>{company}</b> mengundangmu mengikuti wawancara.",
     "fallbackTitle": "sebuah wawancara",
     "timePerQuestion": "Waktu per soal:",
     "secondsUnit": "dtk",
-    "pickOne": "Pilih salah satu dari empat opsi di setiap soal.",
+    "pickOne": "Pilih salah satu dari empat pilihan jawaban di setiap soal.",
     "changePick": "Kamu bisa mengubah pilihanmu sampai menekan Soal berikutnya.",
     "timeRunsOut": "Saat waktu sebuah soal habis, pilihanmu dihitung dan soal berikutnya terbuka; tanpa pilihan, soal itu dihitung salah. Waktu tetap berjalan meski kamu pergi.",
     "unanswered": "Soal yang tidak dijawab dihitung salah.",
@@ -548,14 +548,14 @@
     "perCandidate": "${dollars, number} per kandidat",
     "welcome": "{count, plural, other {# kandidat}} pertamamu",
     "credits": "$1 = 100 kredit, kredit tidak pernah kedaluwarsa.",
-    "referrals": "Undangan",
-    "referralsNote": "Bagikan tautan perusahaanmu dari tab undangan perusahaan.",
+    "referrals": "Referal",
+    "referralsNote": "Bagikan tautan perusahaanmu dari tab Referal perusahaan.",
     "companyReferral": "Perusahaan yang kamu undang melakukan isi ulang pertama",
     "each": "masing-masing {count, number} kredit",
     "topUp": "Isi ulang"
   },
   "site": {
-    "description": "Tes seleksi karyawan berbatas waktu dari deskripsi pekerjaanmu. Tiap kandidat dapat soal acak sendiri, plus peringkat dan laporan. $1–3 per kandidat.",
+    "description": "Tes seleksi karyawan berbatas waktu dari deskripsi pekerjaanmu. Tiap kandidat dapat soal acak sendiri, plus scorecard dan laporan. $1–3 per kandidat.",
     "homeTitle": "Tes seleksi karyawan, dibuat dari deskripsi pekerjaan"
   },
   "legal": {
@@ -575,15 +575,15 @@
       },
       "notices": {
         "title": "Templat pemberitahuan kandidat",
-        "description": "Pemberitahuan yang bisa diedit untuk dikirim ke kandidat sebelum Anda mengundang mereka, termasuk satu untuk New York City."
+        "description": "Pemberitahuan yang bisa diedit untuk dikirim ke kandidat sebelum kamu mengundang mereka, termasuk satu untuk New York City."
       },
       "dpia": {
         "title": "Templat DPIA",
-        "description": "Penilaian dampak perlindungan data dengan bagian prepza yang sudah diisi, untuk Anda lengkapi."
+        "description": "Penilaian dampak perlindungan data dengan bagian prepza yang sudah diisi, untuk kamu lengkapi."
       },
       "dpa": {
         "title": "Perjanjian pemrosesan data",
-        "description": "Cara prepza memproses data kandidat Anda atas nama Anda. Ini bagian dari ketentuan."
+        "description": "Cara prepza memproses data kandidatmu atas namamu. Ini bagian dari ketentuan."
       }
     }
   },
@@ -626,10 +626,10 @@
   "landing": {
     "more": "Cara kerjanya",
     "how": {
-      "title": "Tiga langkah menuju rekrutan berikutnya",
+      "title": "Tiga langkah menuju karyawan barumu",
       "paste": {
         "title": "Tempel deskripsi pekerjaan",
-        "text": "Peran apa pun, bahasa apa pun.\nprepza menentukan apa yang wajib diketahui kandidat dan mengusulkan topik."
+        "text": "Posisi apa pun, bahasa apa pun.\nprepza menentukan apa yang wajib diketahui kandidat dan mengusulkan topik."
       },
       "review": {
         "title": "Periksa topiknya",
@@ -649,12 +649,12 @@
           "text": "Tempel deskripsi pekerjaanmu, setujui topiknya, dan undang kandidat di hari yang sama."
         },
         "anyRole": {
-          "title": "Peran apa pun",
+          "title": "Posisi apa pun",
           "text": "Soal membaca kode untuk engineer, tes pengetahuan untuk sales, keuangan, dan lainnya."
         },
         "cheating": {
           "title": "Lebih sulit curang",
-          "text": "Tiap kandidat dapat soal acak sendiri, timer di tiap soal, dan tanda integritas."
+          "text": "Tiap kandidat dapat soal acak sendiri, timer di tiap soal, dan tanda peringatan."
         },
         "price": {
           "title": "Tanpa langganan",
@@ -720,8 +720,8 @@
       }
     },
     "try": {
-      "title": "Coba dulu sebelum kandidat",
-      "text": "Coba templat gratis untuk peran serupa, atau buka wawancaramu sendiri sebagai kandidat sebelum mengundang siapa pun.",
+      "title": "Coba dulu sebelum kandidat mengerjakannya",
+      "text": "Coba templat gratis untuk posisi serupa, atau buka wawancaramu sendiri sebagai kandidat sebelum mengundang siapa pun.",
       "browse": "Lihat templat",
       "topic": "Penjualan",
       "question": "Cold email sebaiknya dibuka dengan apa?",
@@ -732,7 +732,7 @@
         "d": "Kode diskon"
       },
       "points": {
-        "practice": "Templat gratis untuk banyak peran",
+        "practice": "Templat gratis untuk banyak posisi",
         "preview": "Lihat wawancaramu sebagai kandidat"
       }
     },
@@ -751,18 +751,18 @@
       "points": {
         "own": "Soal unik untuk tiap kandidat",
         "timed": "Hitung mundur di setiap soal",
-        "flags": "Tanda untuk terburu-buru, keluar, atau menyalin",
-        "answers": "Kartu skor dengan jawaban dan waktu"
+        "flags": "Tanda untuk jawaban terburu-buru, meninggalkan halaman, atau menyalin",
+        "answers": "Scorecard berisi jawaban dan waktunya"
       },
       "candidate": "Kandidat",
       "score": "Skor",
       "rushed": "Jawaban terburu-buru",
-      "left": "Keluar dari halaman",
-      "role": "Pengembang backend · nilai lulus {mark}%"
+      "left": "Meninggalkan halaman",
+      "role": "Backend developer · nilai lulus {mark}%"
     },
     "reports": {
       "title": "Bagikan hasil dengan satu klik",
-      "text": "Laporan PDF yang jelas untuk satu kandidat atau seluruh daftar. Unduh, atau kirim ke manajer perekrutan langsung dari prepza.",
+      "text": "Laporan PDF yang jelas untuk satu kandidat atau seluruh daftar. Unduh, atau kirim ke hiring manager langsung dari prepza.",
       "points": {
         "pdf": "Satu kandidat atau semuanya",
         "share": "Kirim PDF lewat email atau bagikan di aplikasi pesan"
@@ -770,8 +770,8 @@
     },
     "brand": {
       "title": "Merekmu, terverifikasi",
-      "text": "Kandidat melihat logomu dari email pertama hingga soal terakhir, dengan tanda centang yang menunjukkan perusahaanmu nyata.",
-      "role": "Pengembang backend",
+      "text": "Kandidat melihat logomu dari email pertama hingga soal terakhir, dengan tanda centang yang menunjukkan perusahaanmu benar-benar ada.",
+      "role": "Backend developer",
       "points": {
         "email": "Logomu di email undangan",
         "interview": "Di wawancara yang diikuti kandidat",
@@ -804,7 +804,7 @@
       "points": {
         "decision": "Seseorang bisa meninjau hasil mana pun jika diminta",
         "key": "Setiap jawaban dinilai berdasarkan kunci jawabannya; kunci yang dikoreksi menilai ulang hasil sebelumnya",
-        "training": "Data Anda tidak digunakan untuk melatih model AI",
+        "training": "Datamu tidak digunakan untuk melatih model AI",
         "time": "Waktu tambahan bagi siapa pun yang meminta",
         "notice": "Kandidat tahu apa yang akan dihadapi sebelum mulai",
         "own": "Kandidat bisa mengunduh atau menghapus datanya",
@@ -843,9 +843,9 @@
     "intro": "prepza membantu perusahaan menemukan orang yang benar-benar menguasai pekerjaannya: wawancara yang adil dan berbatas waktu, dibuat dari deskripsi pekerjaanmu, dengan harga yang terjangkau bagi tim mana pun. Dan siapa pun yang sedang bersiap untuk wawancara bisa berlatih gratis.",
     "company": {
       "title": "Mengapa kami ada",
-      "problem": "Rekrutmen sering bergantung pada CV dan percakapan yang menyenangkan, dan keduanya bisa menyesatkan. Alat asesmen yang membantu dihargai untuk perusahaan besar, dengan paket tahunan dan biaya per pengguna, sehingga kebanyakan tim tidak memakainya.",
-      "approach": "prepza mengubah deskripsi pekerjaan menjadi wawancara berbatas waktu dalam hitungan menit, untuk peran apa pun. Setiap kandidat mendapat soalnya sendiri, kamu melihat siapa yang menguasai pekerjaan dan alasannya, dan kamu hanya membayar untuk kandidat yang benar-benar mengikutinya.",
-      "practice": "Kami juga ingin persiapan wawancara gratis untuk semua orang. Siapa pun bisa mengikuti wawancara latihan kami untuk suatu peran, melihat nilainya dan semua jawaban yang benar, lalu berlatih lagi, tanpa biaya."
+      "problem": "Rekrutmen sering bergantung pada CV dan percakapan yang menyenangkan, dan keduanya bisa menyesatkan. Alat asesmen yang membantu dipatok dengan harga untuk perusahaan besar, dengan paket tahunan dan biaya per pengguna, sehingga kebanyakan tim tidak memakainya.",
+      "approach": "prepza mengubah deskripsi pekerjaan menjadi wawancara berbatas waktu dalam hitungan menit, untuk posisi apa pun. Setiap kandidat mendapat soalnya sendiri, kamu melihat siapa yang menguasai pekerjaan dan alasannya, dan kamu hanya membayar untuk kandidat yang benar-benar mengikutinya.",
+      "practice": "Kami juga ingin persiapan wawancara gratis untuk semua orang. Siapa pun bisa mengikuti wawancara latihan kami untuk suatu posisi, melihat nilainya dan semua jawaban yang benar, lalu berlatih lagi, tanpa biaya."
     },
     "founder": {
       "quote": "Merekrut dengan baik seharusnya bukan hak istimewa perusahaan besar dengan anggaran besar. Aku membangun prepza agar tim mana pun bisa mengubah deskripsi pekerjaan menjadi wawancara yang adil dalam hitungan menit, melihat siapa yang benar-benar menguasai pekerjaan, dan hanya membayar untuk kandidat yang mengikutinya. Semoga prepza membantumu menemukan orang yang tepat lebih cepat.",
@@ -893,7 +893,7 @@
   },
   "practice": {
     "title": "Latihan interview kerja gratis per posisi",
-    "intro": "Berlatih untuk suatu peran dengan wawancara berbatas waktu, lalu lihat nilaimu dan semua jawaban yang benar. Gratis.",
+    "intro": "Berlatih untuk suatu posisi dengan wawancara berbatas waktu, lalu lihat nilaimu dan semua jawaban yang benar. Gratis.",
     "about": "Wawancara latihan berbatas waktu. Setelah selesai, lihat nilaimu dan semua jawaban yang benar. Privat dan gratis.",
     "pageTitle": "{title}: latihan interview kerja gratis",
     "pageDescription": "Latihan interview kerja {level} gratis untuk {title}: {count, plural, other {# topik}}, berbatas waktu, dengan nilai dan semua jawaban yang benar setelahnya. Latihan, bukan wawancara kerja sungguhan.",
@@ -904,13 +904,13 @@
     "results": "Hasil latihan",
     "grade": "soal dijawab benar",
     "notFinished": "belum selesai",
-    "noRounds": "Belum ada sesi.",
+    "noRounds": "Belum ada sesi latihan.",
     "startFailed": "Latihan tidak bisa dimulai. Coba lagi.",
     "gradeLabel": "Nilai",
     "questions": "{count, plural, other {# soal}}",
     "progressLabel": "Kemajuan",
     "answeredLabel": "soal dijawab",
-    "hireTitle": "Sedang merekrut untuk peran ini?",
+    "hireTitle": "Sedang merekrut untuk posisi ini?",
     "hireText": "Gunakan wawancara ini untuk kandidatmu, atau buat wawancara dari deskripsi pekerjaanmu.",
     "hireButton": "Buat wawancara"
   },
@@ -918,17 +918,17 @@
     "verify": "Verifikasi",
     "verified": "Terverifikasi: {domain}",
     "title": "Verifikasi perusahaan",
-    "text": "Masukkan situs web perusahaan. Setelah pemilik atau admin masuk dengan email kerja di domain itu, seperti you@acme.com (langsung jika itu Anda), kami meninjau perusahaan dan menambahkan lencananya.",
+    "text": "Masukkan situs web perusahaan. Setelah pemilik atau admin masuk dengan email kerja di domain itu, seperti you@acme.com (langsung jika itu kamu), kami meninjau perusahaan dan menambahkan lencananya.",
     "website": "Situs web perusahaan",
     "save": "Simpan",
     "done": "Terverifikasi: {domain}",
     "pending": "Tersimpan. Dikirim untuk ditinjau setelah pemilik atau admin masuk dengan email di {domain}.",
     "failed": "Situs web tidak bisa disimpan.",
-    "submitted": "Menunggu peninjauan. Anda akan mendapat notifikasi setelah diperiksa.",
+    "submitted": "Menunggu peninjauan. Kamu akan mendapat notifikasi setelah diperiksa.",
     "waitingEmail": "Menunggu pemilik atau admin masuk dengan email di {domain}.",
     "declined": "{reason, select, none {Ditolak.} other {Ditolak: {reason}}}",
     "tryAgain": "Ubah nama atau situs web perusahaan untuk mengirimkannya ditinjau lagi, atau <contact>hubungi kami</contact>.",
-    "pendingBadge": "Verifikasi tertunda",
+    "pendingBadge": "Menunggu verifikasi",
     "renameHint": "Mengganti nama akan mengirim perusahaanmu untuk diverifikasi lagi."
   },
   "pause": {
@@ -948,7 +948,7 @@
   },
   "compare": {
     "title": "Bandingkan prepza",
-    "intro": "Perbandingan bersumber dengan alat tes pra-kerja lainnya: cara tesnya dibuat, berapa biayanya, dan kapan masing-masing lebih cocok."
+    "intro": "Perbandingan bersumber dengan alat tes seleksi karyawan lainnya: cara tesnya dibuat, berapa biayanya, dan kapan masing-masing lebih cocok."
   },
   "guides": {
     "title": "Panduan rekrutmen",
@@ -956,11 +956,11 @@
   },
   "tests": {
     "title": "Tes seleksi karyawan per posisi",
-    "intro": "Tes keterampilan berbatas waktu yang siap pakai untuk peran umum. Pakai apa adanya, atau buat tes dari deskripsi pekerjaanmu sendiri.",
+    "intro": "Tes keterampilan berbatas waktu yang siap pakai untuk posisi umum. Pakai apa adanya, atau buat tes dari deskripsi pekerjaanmu sendiri.",
     "heading": "Tes keterampilan {role} untuk rekrutmen",
     "pageTitle": "Tes {role} untuk calon karyawan",
     "pageDescription": "Tes {role} berbatas waktu untuk calon karyawanmu, mencakup {count, plural, other {# topik}}. Setiap kandidat mendapat soal acak sendiri. $1–3 per kandidat.",
-    "lead": "Tes pilihan ganda berbatas waktu untuk keterampilan peran ini. Setiap kandidat mendapat set soal acak sendiri dengan batas waktu di tiap soal, dan kamu mendapat kartu penilaian berisi setiap jawaban dan waktunya. $1–3 per kandidat, tanpa langganan.",
+    "lead": "Tes pilihan ganda berbatas waktu untuk keterampilan posisi ini. Setiap kandidat mendapat set soal acak sendiri dengan batas waktu di tiap soal, dan kamu mendapat scorecard berisi setiap jawaban dan waktunya. $1–3 per kandidat, tanpa langganan.",
     "create": "Buat tes untuk kandidatmu",
     "practise": "Latihan gratis",
     "topics": "Yang diuji",

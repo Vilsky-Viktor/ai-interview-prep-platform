@@ -17,7 +17,7 @@ MESSAGES = {
     "Invite a candidate to one of your interviews before generating another: up to 3 interviews can wait without candidates.": "Undang kandidat ke salah satu wawancaramu sebelum membuat yang baru: maksimal 3 wawancara boleh menunggu tanpa kandidat.",
     "This interview is already finished": "Wawancara ini sudah selesai",
     "This interview isn't taking new candidates right now.": "Wawancara ini sedang tidak menerima kandidat baru.",
-    "This interview has no practice questions yet.": "Wawancara latihan ini belum punya pertanyaan.",
+    "This interview has no practice questions yet.": "Wawancara ini belum punya soal latihan.",
     "No emails found.": "Tidak ada email yang ditemukan.",
     "At most 100 emails at once.": "Maksimal 100 email sekaligus.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "Gunakan gambar PNG, JPEG, atau WebP hingga 500 KB",

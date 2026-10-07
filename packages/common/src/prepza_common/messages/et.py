@@ -12,7 +12,7 @@ MESSAGES = {
     "Choose one of the balances": "Vali üks saldopiiridest",
     "We've reached today's limit for new generations. Please try again tomorrow; practice "
     "and interviews keep working.": (
-        "Tänane uute loomiste piir on täis. Proovi homme uuesti; harjutamine ja intervjuud "
+        "Tänane uue sisu loomise piirang on täis. Proovi homme uuesti; harjutamine ja intervjuud "
         "töötavad edasi."
     ),
     "Couldn't get a reply right now. Please try again.": (

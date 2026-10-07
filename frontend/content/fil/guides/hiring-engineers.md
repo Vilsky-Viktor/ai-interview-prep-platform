@@ -17,7 +17,7 @@ Isa-isang tinatalakay ng gabay na ito ang prosesong iyon. Nakabatay ito sa hirin
 | --- | --- | --- |
 | 1. Role profile at job description | Ang talagang kailangan ng trabaho | Hiring manager, isang senior engineer |
 | 2. CV o application screening | Mga mahigpit na requirement lang | Recruiter o hiring manager |
-| 3. Knowledge screen | Ang alam ng kandidato tungkol sa iyong stack | Ang kandidato; ikaw ang nagbabasa ng resulta |
+| 3. Knowledge screen | Ang alam ng aplikante tungkol sa iyong stack | Ang aplikante; ikaw ang nagbabasa ng resulta |
 | 4. Take-home o live coding | Kung kaya nilang sumulat ng gumaganang code | Isa o dalawang engineer |
 | 5. System design (senior roles) | Kung paano sila mangatwiran tungkol sa mas malalaking system | Isang senior engineer |
 | 6. Structured behavioral interview | Kung paano sila makipagtrabaho sa iba | Hiring manager, isang kasamahan |
@@ -42,7 +42,7 @@ Tatlong aral para sa engineering hiring:
 - **Kaunti lang ang sinasabi ng taon ng karanasan nang mag-isa.** Mahinang signal ang "limang taon sa Java" kumpara sa talagang alam at kayang gawin ng isang tao.
 - **Pagsamahin ang mga paraan.** Walang iisang paraan na sapat na mahusay ang prediksyon para tumayo nang mag-isa.
 
-Mga average ito mula sa maraming trabaho at pag-aaral, hindi garantiya para sa iyong role. Sinasabi rin ng mga may-akda na bagay ang knowledge tests at work samples sa mga role kung saan inaasahang may training o karanasan na ang mga kandidato. Bagay iyon sa karamihan ng engineering hiring, pero hindi sa apprenticeship.
+Mga average ito mula sa maraming trabaho at pag-aaral, hindi garantiya para sa iyong role. Sinasabi rin ng mga may-akda na bagay ang knowledge tests at work samples sa mga role kung saan inaasahang may training o karanasan na ang mga aplikante. Bagay iyon sa karamihan ng engineering hiring, pero hindi sa apprenticeship.
 
 ## Hakbang 1: Sumulat ng malinaw na role profile at job description
 
@@ -64,12 +64,12 @@ Huwag i-rank ang mga tao batay sa kanilang CV. Mahihinang predictor ang job titl
 
 ## Hakbang 3: Magpatakbo ng maikling knowledge screen
 
-Ito ang hakbang na pinakamalaki ang natitipid na oras ng iyong mga engineer. Bago gumugol ang kahit sino ng isang oras sa live interview, i-check kung ano ang alam ng bawat kandidato tungkol sa iyong stack.
+Ito ang hakbang na pinakamalaki ang natitipid na oras ng iyong mga engineer. Bago gumugol ang kahit sino ng isang oras sa live interview, i-check kung ano ang alam ng bawat aplikante tungkol sa iyong stack.
 
 Ang mahusay na knowledge screen ay:
 
 - **Job-specific:** tine-test nito ang mga language, framework, database at practice sa iyong role profile, hindi generic na trivia.
-- **Maikli:** ilang topic na may humigit-kumulang 10 tanong bawat isa, para matapos pa rin ito ng malalakas na kandidatong may ibang offer.
+- **Maikli:** ilang topic na may humigit-kumulang 10 tanong bawat isa, para matapos pa rin ito ng malalakas na aplikanteng may ibang offer.
 - **Pareho para sa lahat:** parehong mga topic, parehong bilang ng tanong at parehong time limits.
 
 Dito pumapasok ang prepza. Ginagawa nitong timed multiple-choice na knowledge interview ang iyong job description. Nire-review mo ang mga iminungkahing topic bago maisulat ang kahit isang tanong, kaya ang iyong stack lang ang sinasaklaw ng test. Para sa isang engineering role, puwedeng kasama rito ang:
@@ -78,18 +78,18 @@ Dito pumapasok ang prepza. Ginagawa nitong timed multiple-choice na knowledge in
 - **SQL:** isang maliit na table at isang query, na may tanong kung aling mga row ang lalabas.
 - **Kaalaman sa architecture at framework:** trade-offs, kung paano kumikilos ang isang framework, ano ang pumapalya kapag mabigat ang load.
 
-Bawat kandidato ay may sariling random na set ng tanong na may countdown sa bawat isa. Makikita mo ang scorecard na may bawat sagot at kung gaano ito katagal, kasama ang mga flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy. Ang flag ay dahilan para tumingin nang mas mabuti, hindi patunay ng kahit ano.
+Bawat aplikante ay may sariling random na set ng tanong na may countdown sa bawat isa. Makikita mo ang scorecard na may bawat sagot at kung gaano ito katagal, kasama ang mga flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy. Ang flag ay dahilan para tumingin nang mas mabuti, hindi patunay ng kahit ano.
 
-Ang hindi ginagawa ng prepza: hindi sumusulat, nagpapatakbo o nagde-debug ng code ang mga kandidato sa prepza. Magkaibang skill ang pagbasa at pagsulat ng code, kaya mahalaga pa rin ang susunod na hakbang. Tingnan ang [skills tests ayon sa role](/tests) para sa mga handang test na puwedeng simulan.
+Ang hindi ginagawa ng prepza: hindi sumusulat, nagpapatakbo o nagde-debug ng code ang mga aplikante sa prepza. Magkaibang skill ang pagbasa at pagsulat ng code, kaya mahalaga pa rin ang susunod na hakbang. Tingnan ang [skills tests ayon sa role](/tests) para sa mga handang test na puwedeng simulan.
 
 ## Hakbang 4: Take-home o live coding
 
-Ngayon, i-check kung kaya ng mga kandidato na sumulat ng gumaganang code. Ito ang stage para sa pagsulat, pagpapatakbo at pag-debug ng code, gamit man ang sarili mong exercise o isang developer platform. Tingnan ang [Mga alternatibo sa HackerRank](/compare/hackerrank-alternatives) para makita kung paano nagsasama ang knowledge screen at isang coding platform.
+Ngayon, i-check kung kaya ng mga aplikante na sumulat ng gumaganang code. Ito ang stage para sa pagsulat, pagpapatakbo at pag-debug ng code, gamit man ang sarili mong exercise o isang developer platform. Tingnan ang [Mga alternatibo sa HackerRank](/compare/hackerrank-alternatives) para makita kung paano nagsasama ang knowledge screen at isang coding platform.
 
 Dalawang karaniwang format:
 
-- **Take-home task:** makatotohanan at hindi gaanong pressured, pero kinakain nito ang oras ng mga kandidato sa gabi. Limitahan sa ilang oras lang, sabihin kung gaano ito katagal dapat, at i-review gamit ang nakasulat na rubric.
-- **Live coding:** mas maikli at mas mahirap ipagawa sa iba, pero mas nakaka-stress. Mag-pair sa isang makatotohanang problema, hayaang gamitin ng mga kandidato ang language na pinakakabisado nila, at husgahan ang kanilang pangangatwiran, hindi lang kung natapos nila.
+- **Take-home task:** makatotohanan at hindi gaanong pressured, pero kinakain nito ang oras ng mga aplikante sa gabi. Limitahan sa ilang oras lang, sabihin kung gaano ito katagal dapat, at i-review gamit ang nakasulat na rubric.
+- **Live coding:** mas maikli at mas mahirap ipagawa sa iba, pero mas nakaka-stress. Mag-pair sa isang makatotohanang problema, hayaang gamitin ng mga aplikante ang language na pinakakabisado nila, at husgahan ang kanilang pangangatwiran, hindi lang kung natapos nila.
 
 Alinman dito, mag-score batay sa mga pamantayang napagkasunduan nang maaga: correctness, readability, tests, at kung paano nila hinaharap ang edge cases. Dahil na-filter na ng knowledge screen ang grupo, ilang tao lang ang kasama mo sa hakbang na ito sa halip na lahat.
 
@@ -103,7 +103,7 @@ Laktawan ito para sa junior roles, kung saan mas kumpiyansa ang nate-test nito k
 
 Ang structured interviews ang pinakamalakas na iisang predictor sa Sackett et al. (2022). Ang ibig sabihin ng structure:
 
-- **Parehong mga tanong para sa bawat kandidato,** nakatali sa role profile: "Ikuwento ang isang pagkakataong hindi ka sumang-ayon sa isang design decision. Ano ang ginawa mo?"
+- **Parehong mga tanong para sa bawat aplikante,** nakatali sa role profile: "Ikuwento ang isang pagkakataong hindi ka sumang-ayon sa isang design decision. Ano ang ginawa mo?"
 - **Scoring rubric para sa bawat tanong,** na may mga halimbawa ng mahina, maayos at malakas na sagot.
 - **Hiwalay na mga score:** nagbibigay ng score ang bawat interviewer bago makipag-usap sa iba, para hindi ang pinakamalakas na boses ang magtakda ng resulta.
 
@@ -117,7 +117,7 @@ Puwedeng kumpirmahin ng references ang mga natutunan mo at maglabas ng mga alala
 
 Madalas may ilang hiring process na sabay-sabay ang malalakas na engineer. Nawawala sila sa mabagal o nakakalitong proseso.
 
-- **Sabihin agad sa mga kandidato ang buong proseso:** ang mga stage, gaano katagal ang bawat isa at kailan sila makakatanggap ng balita.
+- **Sabihin agad sa mga aplikante ang buong proseso:** ang mga stage, gaano katagal ang bawat isa at kailan sila makakatanggap ng balita.
 - **Panatilihing maikli.** Iiskedyul nang magkakalapit ang mga huling stage, at magdesisyon agad pagkatapos ng huling interview.
 - **Igalang ang kanilang oras.** Dahil sa maikling knowledge screen sa simula, mas kaunti ang taong dadaan sa mahahabang interview na malamang hindi nila maipapasa.
 - **Magbigay ng napapanahong sagot sa lahat,** kasama ang mga hindi mo itutuloy.
@@ -126,9 +126,9 @@ Madalas may ilang hiring process na sabay-sabay ang malalakas na engineer. Nawaw
 
 Mas patas din ang isang structured na proseso, pero kung pare-pareho lang ang pagpapatakbo mo rito:
 
-- **Pare-parehong mga tanong** sa bawat stage, para sa bawat kandidato sa parehong role.
+- **Pare-parehong mga tanong** sa bawat stage, para sa bawat aplikante sa parehong role.
 - **Rubrics na isinulat nang maaga,** para hinuhusgahan ang mga tao sa parehong pamantayan.
-- **Accommodations:** mag-alok ng dagdag na oras o ibang format sa mga kandidatong humihingi, halimbawa dahil sa kapansanan. Sa prepza, puwede mong bigyan ng dagdag na oras ang isang kandidato bago siya magsimula.
+- **Accommodations:** mag-alok ng dagdag na oras o ibang format sa mga aplikanteng humihingi, halimbawa dahil sa kapansanan. Sa prepza, puwede mong bigyan ng dagdag na oras ang isang aplikante bago siya magsimula.
 - **Bantayan ang mga resulta.** Iba-iba ang score gap sa pagitan ng mga grupo sa iba't ibang paraan. Nakita nina Sackett et al. ang mas malalaking average na pagkakaiba para sa job knowledge tests at work samples kaysa sa structured interviews, na isa pang dahilan para pagsamahin ang mga paraan. Bantayan ang pass rates sa bawat stage.
 - **Tao ang nagdedesisyon.** Sinusuportahan ng score ang desisyon; hindi ito ang gumagawa nito. Tingnan ang mga sagot bago ka mag-reject ng kahit sino.
 

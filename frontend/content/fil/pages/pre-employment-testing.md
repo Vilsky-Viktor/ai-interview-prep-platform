@@ -25,7 +25,7 @@ Ang mahusay na test ay sumusuri sa talagang kailangan ng role, tumatakbo sa pare
 | Work samples at job simulations | Paggawa ng bahagi ng totoong trabaho | Mga task, case study, pagsulat ng code | Huling-stage na pagsusuri para sa shortlist |
 | Language at typing | Kahusayan at bilis | Mga gradong test | Mga customer-facing at admin role |
 
-**Ang saklaw ng prepza:** skills at job knowledge tests, bilang timed multiple-choice interviews na isinulat mula sa iyong job description. Para sa mga technical role, kasama rito ang code-reading questions: isang maikling code example at tanong tungkol sa ginagawa o inilalabas nito. Hindi nag-aalok ang prepza ng cognitive ability tests, personality questionnaires, mga exercise kung saan sumusulat o nagpapatakbo ng code ang kandidato, o video interviews. Kung kailangan mo ang mga iyon, gumamit ng platform na mayroon nito, mag-isa man o katabi ng prepza: knowledge screen muna, saka ang specialist test para sa shortlist. Tingnan ang [prepza at TestGorilla](/compare/testgorilla) at [Mga alternatibo sa TestGorilla](/compare/testgorilla-alternatives).
+**Ang saklaw ng prepza:** skills at job knowledge tests, bilang timed multiple-choice interviews na isinulat mula sa iyong job description. Para sa mga technical role, kasama rito ang code-reading questions: isang maikling code example at tanong tungkol sa ginagawa o inilalabas nito. Hindi nag-aalok ang prepza ng cognitive ability tests, personality questionnaires, mga exercise kung saan sumusulat o nagpapatakbo ng code ang aplikante, o video interviews. Kung kailangan mo ang mga iyon, gumamit ng platform na mayroon nito, mag-isa man o katabi ng prepza: knowledge screen muna, saka ang specialist test para sa shortlist. Tingnan ang [prepza at TestGorilla](/compare/testgorilla) at [Mga alternatibo sa TestGorilla](/compare/testgorilla-alternatives).
 
 ### Bakit makatwirang unang hakbang ang skills tests
 
@@ -54,17 +54,17 @@ Ang seksyong ito ay pangkalahatang overview noong Oktubre 2026, hindi legal advi
 
 Saklaw ng mga pederal na batas laban sa diskriminasyon na ipinapatupad ng EEOC ang mga employer sa US na gumagamit ng test sa hiring decisions. Kasama sa Uniform Guidelines on Employee Selection Procedures ang isang rule of thumb para sa adverse impact: "Ang selection rate para sa anumang lahi, kasarian o etnikong grupo na mas mababa sa apat na ikalima (4/5) (o walumpung porsyento) ng rate ng grupong may pinakamataas na rate ay karaniwang ituturing ng mga Federal enforcement agency bilang ebidensya ng adverse impact" ([29 CFR 1607.4(D)](https://www.law.cornell.edu/cfr/text/29/1607.4)).
 
-Sa praktika: i-test lang ang kaalamang kailangan ng trabaho, bantayan ang pass rates sa iba't ibang grupo, mag-alok ng accommodations gaya ng dagdag na oras, at tingnan ang mga patakaran ng estado at lungsod para sa automated hiring tools. Halimbawa, ang [Local Law 144](https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page) ng New York City ay nag-aatas ng bias audit, pampublikong buod nito at abiso sa mga kandidato bago gamitin ang isang automated employment decision tool.
+Sa praktika: i-test lang ang kaalamang kailangan ng trabaho, bantayan ang pass rates sa iba't ibang grupo, mag-alok ng accommodations gaya ng dagdag na oras, at tingnan ang mga patakaran ng estado at lungsod para sa automated hiring tools. Halimbawa, ang [Local Law 144](https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page) ng New York City ay nag-aatas ng bias audit, pampublikong buod nito at abiso sa mga aplikante bago gamitin ang isang automated employment decision tool.
 
 ### European Union: ang AI Act
 
-Inililista ng EU AI Act bilang high-risk ang mga AI system na "nilalayong gamitin sa recruitment o selection ng mga natural na tao, lalo na para maglagay ng targeted job advertisements, mag-analyze at mag-filter ng job applications, at mag-evaluate ng mga kandidato" ([Annex III, point 4(a)](https://artificialintelligenceact.eu/annex/3/)). Malamang na saklaw nito ang mga tool na nag-i-score at nagra-rank ng mga kandidato gamit ang AI; para sa hiring tools, ipinapatupad ang mga obligasyong ito simula 2 Disyembre 2027. May mga obligasyon ang high-risk systems para sa vendor (risk management, dokumentasyon, logging, human oversight by design, accuracy) at para sa employer na gumagamit nito (paggamit ayon sa instruksyon, human oversight, pagtatabi ng logs, pag-abiso sa mga kandidato). Hindi opisyal na salin ang mga sipi mula sa batas ng EU dito.
+Inililista ng EU AI Act bilang high-risk ang mga AI system na "nilalayong gamitin sa recruitment o selection ng mga natural na tao, lalo na para maglagay ng targeted job advertisements, mag-analyze at mag-filter ng job applications, at mag-evaluate ng mga aplikante" ([Annex III, point 4(a)](https://artificialintelligenceact.eu/annex/3/)). Malamang na saklaw nito ang mga tool na nag-i-score at nagra-rank ng mga aplikante gamit ang AI; para sa hiring tools, ipinapatupad ang mga obligasyong ito simula 2 Disyembre 2027. May mga obligasyon ang high-risk systems para sa vendor (risk management, dokumentasyon, logging, human oversight by design, accuracy) at para sa employer na gumagamit nito (paggamit ayon sa instruksyon, human oversight, pagtatabi ng logs, pag-abiso sa mga aplikante). Hindi opisyal na salin ang mga sipi mula sa batas ng EU dito.
 
 Para sa mga detalye at petsa, tingnan ang [Legal ba ang AI hiring sa EU?](/guides/is-ai-hiring-legal-in-the-eu)
 
 ### GDPR
 
-Personal data ang mga resulta ng test. Sa ilalim ng GDPR (at ng UK GDPR, na kahawig nito), ikaw, ang employer, ang karaniwang controller, at ang testing vendor ang iyong processor. Kailangan mo ng data processing agreement, malinaw na abiso sa mga kandidato, limitasyon sa retention, at paraan para hawakan ang mga request para sa access at pagbura. Kung ang isang desisyon ay nakabatay lang sa automated processing at may malaking epekto sa kandidato, nalalapat ang [Article 22](https://gdpr-info.eu/art-22-gdpr/), kaya ipa-review sa isang tao ang mga resulta. Tanungin ang kahit anong vendor kung saan naka-host ang data at aling mga sub-processor ang ginagamit nito.
+Personal data ang mga resulta ng test. Sa ilalim ng GDPR (at ng UK GDPR, na kahawig nito), ikaw, ang employer, ang karaniwang controller, at ang testing vendor ang iyong processor. Kailangan mo ng data processing agreement, malinaw na abiso sa mga aplikante, limitasyon sa retention, at paraan para hawakan ang mga request para sa access at pagbura. Kung ang isang desisyon ay nakabatay lang sa automated processing at may malaking epekto sa aplikante, nalalapat ang [Article 22](https://gdpr-info.eu/art-22-gdpr/), kaya ipa-review sa isang tao ang mga resulta. Tanungin ang kahit anong vendor kung saan naka-host ang data at aling mga sub-processor ang ginagamit nito.
 
 ### Ang patakarang sumasaklaw sa lahat
 
@@ -77,11 +77,11 @@ Mga tanong na sulit itanong sa kahit anong vendor:
 | Tanong | Bakit ito mahalaga |
 | --- | --- |
 | Kaya bang tumugma ng test sa mismong role ko? | Baka hindi masaklaw ng generic na library test ang kalahati ng kailangan ng iyong trabaho |
-| Makikita at mababago ko ba ang tine-test bago ito kunin ng mga kandidato? | Ikaw ang may pananagutan sa nilalaman |
+| Makikita at mababago ko ba ang tine-test bago ito kunin ng mga aplikante? | Ikaw ang may pananagutan sa nilalaman |
 | Paano hinaharap ang pandaraya? | Pinapahina ng mga naipasang tanong at bukas na browser tabs ang kahit anong online test |
-| Ano ang nakikita ng kandidato? | Binabawasan ng malinaw na instruksyon at patas na time limit ang drop-off at mga reklamo |
+| Ano ang nakikita ng aplikante? | Binabawasan ng malinaw na instruksyon at patas na time limit ang drop-off at mga reklamo |
 | Paano ito naka-presyo? | Puwedeng mas mahal ang buwanang plan kaysa sa halaga ng buong hiring volume mo |
-| Saan iniimbak ang data, at gaano katagal? | GDPR, sarili mong mga patakaran, tiwala ng mga kandidato |
+| Saan iniimbak ang data, at gaano katagal? | GDPR, sarili mong mga patakaran, tiwala ng mga aplikante |
 | Ano ang sinasabi ng vendor tungkol sa AI Act at bias? | Kahati mo sila sa mga obligasyon |
 
 Para sa paghahambing ng presyo, tingnan ang [paano ikumpara ang gastos ng mga test](/compare/cheapest-pre-employment-test) at [pre-employment tests na walang subscription](/compare/pre-employment-tests-without-subscription).
@@ -90,15 +90,15 @@ Para sa paghahambing ng presyo, tingnan ang [paano ikumpara ang gastos ng mga te
 
 Ginagawang timed multiple-choice skills interview ng prepza ang isang job description.
 
-1. **I-paste ang job description.** Anumang role, sa alinman sa 23 wika. Kinukuha ng prepza ang dapat malaman ng kandidato at nagmumungkahi ng mga topic.
+1. **I-paste ang job description.** Anumang role, sa alinman sa 23 wika. Kinukuha ng prepza ang dapat malaman ng aplikante at nagmumungkahi ng mga topic.
 2. **I-review ang mga topic.** I-uncheck ang hindi mo kailangan, palitan ang pangalan ng topic, i-edit ang mga subtopic nito, o ilarawan ang pagbabago sa simpleng text. Isinusulat lang ang mga tanong pagkatapos mong aprubahan. Puwede ka ring magsimula sa handang template para sa iyong role.
-3. **Imbitahan ang mga kandidato.** Magpadala ng imbitasyon sa email, mag-paste ng listahan, mag-upload ng file, o maglagay ng iisang shareable link sa iyong job ad. Kusang naipapadala ang mga paalala.
-4. **Basahin ang mga resulta.** Dumarating ang mga score nang naka-rank, may scorecard para sa bawat kandidato.
+3. **Imbitahan ang mga aplikante.** Magpadala ng imbitasyon sa email, mag-paste ng listahan, mag-upload ng file, o maglagay ng iisang shareable link sa iyong job ad. Kusang naipapadala ang mga paalala.
+4. **Basahin ang mga resulta.** Dumarating ang mga score nang naka-rank, may scorecard para sa bawat aplikante.
 
-- **Sariling random na set ang bawat kandidato** mula sa bank ng bawat topic, na may countdown na ipinapatupad ng server sa bawat tanong. Puwede kang magbigay ng dagdag na oras sa sinumang humingi.
+- **Sariling random na set ang bawat aplikante** mula sa bank ng bawat topic, na may countdown na ipinapatupad ng server sa bawat tanong. Puwede kang magbigay ng dagdag na oras sa sinumang humingi.
 - **Ipinapakita ng scorecards** ang bawat sagot, kung tama ito at gaano katagal ito, na may flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy. Hindi binabago ng mga flag ang score.
-- **Mina-mark ang mga sagot ayon sa answer key** na isinusulat at chine-check ng AI; walang AI na bumabasa o humuhusga sa sagot ng kandidato. Sinasaklaw ng isang PDF report ang isang kandidato o ang buong listahan.
+- **Mina-mark ang mga sagot ayon sa answer key** na isinusulat at chine-check ng AI; walang AI na bumabasa o humuhusga sa sagot ng aplikante. Sinasaklaw ng isang PDF report ang isang aplikante o ang buong listahan.
 
-Bawat kandidatong sumasagot ang presyo, walang subscription: $1–3 bawat kandidato depende sa laki ng iyong top-up, sa US dollars, at libre ang unang 3 kandidato mo. Naka-host ang data sa EU (may ilang sub-processor sa US; tingnan ang [privacy policy](/privacy)), at kasama ang data processing agreement at ang mga instruksyon para sa mga kumpanya.
+Bawat aplikanteng sumasagot ang presyo, walang subscription: $1–3 bawat aplikante depende sa laki ng iyong top-up, sa US dollars, at libre ang unang 3 aplikante mo. Naka-host ang data sa EU (may ilang sub-processor sa US; tingnan ang [privacy policy](/privacy)), at kasama ang data processing agreement at ang mga instruksyon para sa mga kumpanya.
 
 Ang prepza ay hindi psychometric suite, hindi platform para sa pagsulat at pagpapatakbo ng code, at hindi video interview tool, at gumagana ito kasabay ng mga iyon. Para sa paghahambing nito sa ibang AI hiring tools, basahin ang [AI interviews](/ai-interviews). Para sa mga engineering role, tingnan ang [Paano mag-hire ng mga engineer](/guides/hiring-engineers).

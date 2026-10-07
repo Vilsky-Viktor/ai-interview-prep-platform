@@ -2,11 +2,11 @@
 
 TEXTS = {
     "candidate": {
-        "subject": "{company} mengundangmu ke wawancara",
+        "subject": "{company} mengundangmu mengikuti wawancara",
         "preheader": "Ikuti “{title}” di prepza. Masuk dengan {email} untuk mulai.",
         "heading": "Undangan wawancara",
         "lines": [
-            "{company} mengundangmu ke wawancara “{title}” di prepza.",
+            "{company} mengundangmu mengikuti wawancara “{title}” di prepza.",
             (
                 "Masuk dengan {email} untuk mulai. Hanya alamat ini yang bisa "
                 "mengikuti wawancara, dan kamu punya satu kesempatan."
@@ -20,8 +20,8 @@ TEXTS = {
         "heading": "Wawancaramu sedang menunggu",
         "lines": [
             (
-                "{company} mengundangmu ke wawancara “{title}” di prepza beberapa hari lalu, dan "
-                "kamu belum memulainya."
+                "{company} mengundangmu mengikuti wawancara “{title}” di prepza beberapa hari "
+                "lalu, dan kamu belum memulainya."
             ),
             (
                 "Masuk dengan {email} untuk mulai. Hanya alamat ini yang bisa mengikuti wawancara, "

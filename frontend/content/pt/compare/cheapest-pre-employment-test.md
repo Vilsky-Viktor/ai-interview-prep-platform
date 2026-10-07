@@ -64,10 +64,10 @@ Veja [Alternativas à TestGorilla](/compare/testgorilla-alternatives) e [Alterna
 
 - Uma entrevista de múltipla escolha cronometrada, escrita a partir da sua descrição da vaga, com tópicos que você revisa antes.
 - Um conjunto aleatório de perguntas próprio para cada candidato, com contagem regressiva em cada pergunta. Para vagas técnicas, as perguntas podem incluir pequenos exemplos de código.
-- Fichas de resultados com respostas e tempos, e alertas para respostas rápidas demais, saídas da página e tentativas de cópia.
+- Fichas de avaliação com respostas e tempos, e alertas para respostas rápidas demais, saídas da página e tentativas de cópia.
 - Relatórios em PDF de um candidato ou da lista inteira.
 - Convites por e-mail, por lista ou arquivo, ou com um único link no anúncio da vaga, além de lembretes automáticos.
-- 23 idiomas, dados hospedados na UE (alguns suboperadores estão nos EUA; veja a [política de privacidade](/privacy)) e um acordo de processamento de dados incluído.
+- 23 idiomas, dados hospedados na UE (alguns suboperadores estão nos EUA; veja a [política de privacidade](/privacy)) e um acordo de tratamento de dados incluído.
 
 *Os nomes de produtos pertencem aos seus respectivos titulares. A prepza não é afiliada a nenhuma empresa citada nesta página nem endossada por ela.*
 

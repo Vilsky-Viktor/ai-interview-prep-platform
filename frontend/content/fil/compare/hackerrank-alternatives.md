@@ -7,9 +7,9 @@ updated: "2026-10-07"
 
 # Mga alternatibo at kapares ng HackerRank para sa pag-test ng technical knowledge
 
-Ang HackerRank ay isang platform para sa pag-hire ng mga developer. Noong Oktubre 2026, inilalarawan ng site nito ang screening tests, live pair-programming interviews sa isang shared canvas, at isang AI interviewer na dumaraan sa isang real-world na task ([hackerrank.com](https://www.hackerrank.com/)). Kung kailangan mong sumulat at magpatakbo ng code ang mga kandidato, ginawa talaga para doon ang ganitong platform.
+Ang HackerRank ay isang platform para sa pag-hire ng mga developer. Noong Oktubre 2026, inilalarawan ng site nito ang screening tests, live pair-programming interviews sa isang shared canvas, at isang AI interviewer na dumaraan sa isang real-world na task ([hackerrank.com](https://www.hackerrank.com/)). Kung kailangan mong sumulat at magpatakbo ng code ang mga aplikante, ginawa talaga para doon ang ganitong platform.
 
-Hindi ito pinapalitan ng prepza. Iba ang trabaho nito: isang timed multiple-choice test ng alam ng kandidato, na isinulat mula sa iyong job description, kasama ang code-reading questions. Bagay na bagay silang magkasama. Karaniwang setup ang prepza bilang mabilis na knowledge screen para sa bawat aplikante, saka ang coding test o live coding interview ng isang developer platform para sa mga papasa. Sinasaklaw din ng prepza ang ibang role na hina-hire mo sa parehong quarter, gaya ng account manager, bookkeeper o support agent.
+Hindi ito pinapalitan ng prepza. Iba ang trabaho nito: isang timed multiple-choice test ng alam ng aplikante, na isinulat mula sa iyong job description, kasama ang code-reading questions. Bagay na bagay silang magkasama. Karaniwang setup ang prepza bilang mabilis na knowledge screen para sa bawat aplikante, saka ang coding test o live coding interview ng isang developer platform para sa mga papasa. Sinasaklaw din ng prepza ang ibang role na hina-hire mo sa parehong quarter, gaya ng account manager, bookkeeper o support agent.
 
 Ipinapaliwanag ng pahinang ito kung saan bagay ang bawat uri ng tool. Naka-link ang mga detalye sa sariling mga pahina ng bawat vendor noong Oktubre 2026; tingnan muna ang mga ito bago ka bumili.
 
@@ -24,8 +24,8 @@ Ipinapaliwanag ng pahinang ito kung saan bagay ang bawat uri ng tool. Naka-link 
 
 | Tool | Pinakamalakas sa | Mga role sa labas ng engineering | Code sa test | Pricing model (noong Oktubre 2026) |
 | --- | --- | --- | --- | --- |
-| **HackerRank** | Coding tests, live coding interviews at AI interviewer para sa mga developer ([site](https://www.hackerrank.com/)) | Hindi ito ang pokus | Sumusulat at nagpapatakbo ng code ang mga kandidato | Tingnan ang [pricing page](https://www.hackerrank.com/pricing/) nito |
-| **prepza** | Timed multiple-choice skills interviews mula sa iyong job description | Anumang role | Code-reading questions (ano ang ginagawa o inilalabas ng code); walang pagsulat o pagpapatakbo ng code | Bawat kandidato, walang subscription ([presyo](/pricing)) |
+| **HackerRank** | Coding tests, live coding interviews at AI interviewer para sa mga developer ([site](https://www.hackerrank.com/)) | Hindi ito ang pokus | Sumusulat at nagpapatakbo ng code ang mga aplikante | Tingnan ang [pricing page](https://www.hackerrank.com/pricing/) nito |
+| **prepza** | Timed multiple-choice skills interviews mula sa iyong job description | Anumang role | Code-reading questions (ano ang ginagawa o inilalabas ng code); walang pagsulat o pagpapatakbo ng code | Bawat aplikante, walang subscription ([presyo](/pricing)) |
 | **TestGorilla** | Malawak na test library: role skills, cognitive, personality, language, programming | Oo | Programming tests; custom coding challenges sa mas mataas nitong plan | Libreng plan at taunang plan ([pricing page](https://www.testgorilla.com/pricing/)) |
 | **CodeSignal** | Technical assessments at AI interviewers | Sales, customer success at marketing sa mas matataas na plan | Coding assessments | Buwanan o taunang plan na may credits ([pricing page](https://codesignal.com/pricing/)) |
 | **Bryq** | Cognitive, personality at skills assessments | Oo | Hindi ito ang pokus | Buwanan o taunang plan ([pricing page](https://www.bryq.com/pricing)) |
@@ -35,11 +35,11 @@ Ipinapaliwanag ng pahinang ito kung saan bagay ang bawat uri ng tool. Naka-link 
 
 ### prepza: knowledge screen na isinulat mula sa job description
 
-Binabasa ng prepza ang iyong job description, kinukuha ang dapat malaman ng kandidato at nagmumungkahi ng mga topic. Nire-review mo ang mga ito (panatilihin, i-uncheck, palitan ang pangalan, i-edit, o ilarawan ang pagbabago sa simpleng text) bago isulat ang mga tanong. Bawat topic ay may bank ng multiple-choice questions, at bawat kandidato ay may sariling random na set na may countdown sa bawat tanong.
+Binabasa ng prepza ang iyong job description, kinukuha ang dapat malaman ng aplikante at nagmumungkahi ng mga topic. Nire-review mo ang mga ito (panatilihin, i-uncheck, palitan ang pangalan, i-edit, o ilarawan ang pagbabago sa simpleng text) bago isulat ang mga tanong. Bawat topic ay may bank ng multiple-choice questions, at bawat aplikante ay may sariling random na set na may countdown sa bawat tanong.
 
-Pareho ang paraan nito para sa backend developer at sa payroll specialist. Para sa developer, kayang i-test ng prepza ang databases, APIs, system design o isang framework. Kapag may code, SQL, shell commands o configuration ang isang topic, maraming tanong ang nagpapakita ng maikling halimbawa at nagtatanong kung ano ang ipi-print o ibabalik nito, ano ang ginagawa nito, bakit ito pumapalya o aling pagbabago ang aayos dito. Pumipili ang mga kandidato ng isa sa apat na sagot. Hindi sila sumusulat, nagpapatakbo o nagde-debug ng code sa prepza, at walang live coding environment.
+Pareho ang paraan nito para sa backend developer at sa payroll specialist. Para sa developer, kayang i-test ng prepza ang databases, APIs, system design o isang framework. Kapag may code, SQL, shell commands o configuration ang isang topic, maraming tanong ang nagpapakita ng maikling halimbawa at nagtatanong kung ano ang ipi-print o ibabalik nito, ano ang ginagawa nito, bakit ito pumapalya o aling pagbabago ang aayos dito. Pumipili ang mga aplikante ng isa sa apat na sagot. Hindi sila sumusulat, nagpapatakbo o nagde-debug ng code sa prepza, at walang live coding environment.
 
-- **Presyo:** bawat kandidatong sumagot ng kahit isang tanong, mas mura bawat kandidato sa mas malalaking top-up. Walang subscription, at hindi nag-e-expire ang credits. Tingnan ang [presyo](/pricing).
+- **Presyo:** bawat aplikanteng sumagot ng kahit isang tanong, mas mura bawat aplikante sa mas malalaking top-up. Walang subscription, at hindi nag-e-expire ang credits. Tingnan ang [presyo](/pricing).
 - **Kasama rin:** scorecards na may mga sagot at oras, flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy, PDF reports, imbitasyon sa email o sa link sa job ad, awtomatikong paalala, at 23 wika.
 - **Bagay sa:** unang screen bago ang coding stage, at test para sa mga role sa labas ng engineering.
 
@@ -72,9 +72,9 @@ Naglilista ang Alooba ng 400+ role screening tests sa 500+ skills, kasama ang da
 
 Gamitin ang HackerRank, o ibang developer platform, kapag:
 
-- Kailangan mong sumulat, magpatakbo at mag-debug ng code ang mga kandidato.
+- Kailangan mong sumulat, magpatakbo at mag-debug ng code ang mga aplikante.
 - Nagpapatakbo ka ng live technical interviews sa isang shared coding environment.
-- Gusto mong makita kung paano bumubuo at nagre-review ng totoong code ang mga kandidato, hindi lang kung paano nila ito binabasa.
+- Gusto mong makita kung paano bumubuo at nagre-review ng totoong code ang mga aplikante, hindi lang kung paano nila ito binabasa.
 - Kilala at pinagkakatiwalaan na ng iyong mga engineer ang platform.
 
 Wala sa mga ito ang humahadlang sa isang knowledge screen bago nito. Magkaibang stage ang sinasaklaw ng dalawa.

@@ -56,10 +56,10 @@ Fiyatlar ABD doları cinsindendir. Ödemeler, KDV ve satış vergisini hesaplaya
 
 ## Her aday için neler alırsınız
 
-- İş tanımınızdan veya rol için hazır bir şablondan yazılmış süreli, çoktan seçmeli bir beceri mülakatı.
+- İş tanımınızdan veya pozisyon için hazır bir şablondan yazılmış süreli, çoktan seçmeli bir beceri mülakatı.
 - Herhangi bir soru yazılmadan önce gözden geçirip düzenlediğiniz konular.
-- Her adaya, her sorusunda geri sayım olan kendine ait rastgele bir soru seti. Teknik rollerde sorular kısa kod örnekleri gösterip bunların ne yaptığını veya ne çıktı verdiğini sorabilir.
-- Her yanıtı ve süresini gösteren bir puan kartı; ayrıca çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler.
+- Her adaya, her sorusunda geri sayım olan kendine ait rastgele bir soru seti. Teknik pozisyonlarda sorular kısa kod örnekleri gösterip bunların ne yaptığını veya ne çıktı verdiğini sorabilir.
+- Her yanıtı ve süresini gösteren bir değerlendirme kartı; ayrıca çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler.
 - İndirebileceğiniz veya prepza'dan e-postayla gönderebileceğiniz bir PDF rapor.
 - E-postayla, yapıştırılan bir listeyle, yüklenen bir dosyayla veya tek bir iş ilanı bağlantısıyla davetler ve otomatik hatırlatmalar.
 
@@ -69,14 +69,14 @@ Aday başına ödeme her zaman daha ucuz değildir. Abonelik şu durumlarda size
 
 - **Yılda yüzlerce aday test ediyorsanız.** Sabit bir plan, özellikle sınırsız davetli olanı, yüksek hacimde aday başına daha ucuza gelebilir. Başabaş noktasını bulmak için planın yıllık maliyetini aday başı fiyatınıza bölün; [İşe alım öncesi test maliyetleri nasıl karşılaştırılır](/compare/cheapest-pre-employment-test) sayfası bunu adım adım anlatır.
 - **prepza'nın sunmadığı testlere ihtiyacınız varsa.** Bilişsel yetenek, kişilik, uygulamalı kodlama (kod yazma ve çalıştırma), video soruları ve ATS entegrasyonları diğer platformların planlarıyla gelir. Bunlardan birini prepza'nın yanında kullanabilirsiniz.
-- **Ücretsiz bir plan ihtiyacınızı karşılıyorsa.** Bazı sağlayıcılar birkaç test içeren ücretsiz planlar sunar; bu testler rolünüze uyuyorsa hiç ödeme yapmanız gerekmeyebilir.
+- **Ücretsiz bir plan ihtiyacınızı karşılıyorsa.** Bazı sağlayıcılar birkaç test içeren ücretsiz planlar sunar; bu testler pozisyonunuza uyuyorsa hiç ödeme yapmanız gerekmeyebilir.
 
 ## Kullandıkça öde modelli her sağlayıcıya sorulacak sorular
 
 1. Hiç başlamayan adaylar için ödeme yapıyor muyum?
 2. Kredilerin süresi doluyor mu?
 3. Kullanıcı başı veya kurulum ücreti var mı?
-4. Tam olarak kendi rolüm için test oluşturabilir miyim, yoksa yalnızca hazır testleri mi kullanabilirim?
+4. Tam olarak kendi pozisyonum için test oluşturabilir miyim, yoksa yalnızca hazır testleri mi kullanabilirim?
 5. Aday verilerine ne oluyor ve nerede barındırılıyor?
 6. Asgari satın alma tutarı var mı?
 

@@ -25,7 +25,7 @@ Een goede test toetst wat de functie echt vraagt, draait voor iedereen onder dez
 | Werkproeven en functiesimulaties | Een stukje van het echte werk doen | Opdrachten, casussen, code schrijven | Checks in een late fase voor een shortlist |
 | Taal en typen | Beheersing en snelheid | Beoordeelde tests | Klantgerichte en administratieve functies |
 
-**Wat prepza dekt:** tests van vaardigheden en vakkennis, als sollicitatiegesprekken met tijdslimiet en meerkeuzevragen, geschreven op basis van je functieomschrijving. Voor technische functies horen daar vragen over code lezen bij: een kort codevoorbeeld en een vraag over wat het doet of uitvoert. prepza biedt geen tests van cognitieve vaardigheden, geen persoonlijkheidsvragenlijsten, geen opdrachten waarin kandidaten code schrijven of draaien, en geen video-interviews. Heb je die nodig, gebruik dan een platform dat ze biedt, los of naast prepza: eerst een kennisscreening, daarna de specialistische test voor de shortlist. Zie [prepza en TestGorilla](/compare/testgorilla) en [Alternatieven voor TestGorilla](/compare/testgorilla-alternatives).
+**Wat prepza dekt:** tests van vaardigheden en vakkennis, als interviews met tijdslimiet en meerkeuzevragen, geschreven op basis van je functieomschrijving. Voor technische functies horen daar vragen over code lezen bij: een kort codevoorbeeld en een vraag over wat het doet of uitvoert. prepza biedt geen tests van cognitieve vaardigheden, geen persoonlijkheidsvragenlijsten, geen opdrachten waarin kandidaten code schrijven of draaien, en geen video-interviews. Heb je die nodig, gebruik dan een platform dat ze biedt, los of naast prepza: eerst een kennisscreening, daarna de specialistische test voor de shortlist. Zie [prepza en TestGorilla](/compare/testgorilla) en [Alternatieven voor TestGorilla](/compare/testgorilla-alternatives).
 
 ### Waarom vaardigheidstests een verstandige eerste stap zijn
 
@@ -88,7 +88,7 @@ Voor prijsvergelijkingen, zie [hoe je de kosten van tests vergelijkt](/compare/c
 
 ## Hoe prepza het doet
 
-prepza maakt van een functieomschrijving een sollicitatiegesprek over vaardigheden, met tijdslimiet en meerkeuzevragen.
+prepza maakt van een functieomschrijving een interview over vaardigheden, met tijdslimiet en meerkeuzevragen.
 
 1. **Plak de functieomschrijving.** Elke functie, in elk van 23 talen. prepza haalt eruit wat een kandidaat moet weten en stelt onderwerpen voor.
 2. **Bekijk de onderwerpen.** Vink uit wat je niet nodig hebt, hernoem een onderwerp, bewerk de subonderwerpen of beschrijf wijzigingen in gewone taal. Vragen worden pas geschreven nadat jij akkoord geeft. Je kunt ook beginnen met een kant-en-klaar sjabloon voor je functie.

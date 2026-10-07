@@ -97,8 +97,8 @@ prepza trasforma una descrizione del ruolo in un colloquio sulle competenze a sc
 
 - **Ogni candidato riceve un proprio set casuale** dalla serie di domande di ciascun argomento, con un conto alla rovescia gestito dal server su ogni domanda. Puoi dare tempo extra a chiunque lo chieda.
 - **Le schede di valutazione** mostrano ogni risposta, se era giusta e quanto tempo ha richiesto, con segnalazioni per risposte troppo rapide, uscite dalla pagina e tentativi di copia. Le segnalazioni non cambiano il punteggio.
-- **Le risposte vengono corrette in base a una chiave di risposta** che l'IA scrive e controlla; nessuna IA legge o giudica la risposta di un candidato. Un report PDF copre un singolo candidato o l'intero elenco.
+- **Le risposte vengono corrette in base a una chiave di correzione** che l'IA scrive e controlla; nessuna IA legge o giudica la risposta di un candidato. Un report PDF copre un singolo candidato o l'intero elenco.
 
 Il prezzo è per candidato che risponde, senza abbonamento: $1–3 per candidato a seconda dell'importo della ricarica, in dollari statunitensi, e i tuoi primi 3 candidati sono gratis. I dati sono ospitati nell'UE (alcuni sub-responsabili si trovano negli Stati Uniti; vedi l'[informativa sulla privacy](/privacy)), e l'accordo sul trattamento dei dati e le istruzioni per le aziende sono inclusi.
 
-prepza non è una suite psicometrica, una piattaforma per scrivere ed eseguire codice né uno strumento di videocolloqui, e funziona insieme a questi. Per capire come si confronta con altri strumenti di assunzione basati sull'IA, leggi [Colloqui con IA](/ai-interviews). Per i ruoli di ingegneria, vedi [Come assumere ingegneri](/guides/hiring-engineers).
+prepza non è una suite psicometrica, una piattaforma per scrivere ed eseguire codice né uno strumento di videocolloqui, e funziona insieme a questi. Per capire come si confronta con altri strumenti di assunzione basati sull'IA, leggi [Colloqui con IA](/ai-interviews). Per i ruoli di ingegneria, vedi [Come assumere sviluppatori](/guides/hiring-engineers).

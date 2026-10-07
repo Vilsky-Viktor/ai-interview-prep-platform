@@ -7,7 +7,7 @@ updated: "2026-10-07"
 
 # prepza ja TestGorilla: kuhu kumbki sobib ja kuidas kasutada mõlemat
 
-prepzat ja TestGorillat on loomulik võrrelda, kuid tegelikult ei ole need konkurendid. TestGorilla pakub suurt valmis testide raamatukogu, sealhulgas kognitiivseid, isiksuse-, keele- ja programmeerimisteste. prepza teeb üht asja: kirjutab sinu töökuulutuse põhjal ajapiiranguga valikvastustega teadmiste intervjuu. Paljud värbamisprotsessid võiksid kasutada mõlemat, näiteks prepzat kiire rollipõhise teadmiste kontrollina ja TestGorillat lõppvaliku kognitiivsete või isiksustestide jaoks.
+prepzat ja TestGorillat on loomulik võrrelda, kuid tegelikult ei ole need konkurendid. TestGorilla pakub suurt valmis testide kogu, sealhulgas kognitiivseid, isiksuse-, keele- ja programmeerimisteste. prepza teeb üht asja: kirjutab sinu töökuulutuse põhjal ajapiiranguga valikvastustega teadmiste intervjuu. Paljud värbamisprotsessid võiksid kasutada mõlemat, näiteks prepzat kiire rollipõhise teadmiste kontrollina ja TestGorillat lõppvaliku kognitiivsete või isiksustestide jaoks.
 
 See leht selgitab, mille poolest need erinevad, kuhu kumbki paremini sobib ja kuidas neid kombineerida. TestGorilla faktid pärinevad selle enda lehtedelt 2026. aasta oktoobri seisuga ja võivad muutuda; kontrolli linke enne otsustamist.
 
@@ -21,28 +21,28 @@ See leht selgitab, mille poolest need erinevad, kuhu kumbki paremini sobib ja ku
 
 | | prepza | TestGorilla |
 | --- | --- | --- |
-| Kuidas test koostatakse | Kirjutatakse sinu töökuulutuse põhjal; vaatad teemad üle enne küsimuste kirjutamist. Saadaval ka rollipõhised valmis mallid | Pannakse kokku valmis testide raamatukogust; omaküsimused tasulistes pakettides ([hinnaleht](https://www.testgorilla.com/pricing/)) |
-| Testiliigid | Ajapiiranguga valikvastustega oskuste ja teadmiste intervjuud, tehniliste teemade puhul koodi lugemise küsimustega | Kognitiivsed võimed, keel, isiksus ja kultuur, programmeerimine, rollipõhised oskused, situatsioonipõhine otsustamine, tarkvaraoskused, trükkimine ([testiraamatukogu](https://www.testgorilla.com/test-library/)) |
+| Kuidas test koostatakse | Kirjutatakse sinu töökuulutuse põhjal; vaatad teemad üle enne küsimuste kirjutamist. Saadaval ka rollipõhised valmis mallid | Pannakse kokku valmis testide kogust; omaküsimused tasulistes pakettides ([hinnaleht](https://www.testgorilla.com/pricing/)) |
+| Testiliigid | Ajapiiranguga valikvastustega oskuste ja teadmiste intervjuud, tehniliste teemade puhul koodi lugemise küsimustega | Kognitiivsed võimed, keel, isiksus ja kultuur, programmeerimine, rollipõhised oskused, situatsioonipõhine otsustamine, tarkvaraoskused, trükkimine ([testikogu](https://www.testgorilla.com/test-library/)) |
 | Videoküsimused | Ei | Jah, tasulistes pakettides |
 | AI-intervjuud | Vestlevat AI-d pole; AI pakub teemad ning kirjutab ja kontrollib küsimused | AI-intervjuud kõrgemas paketis |
-| Kood testis | Koodi lugemise küsimused (mida kood teeb või väljastab); koodi ei kirjutata ega käivitata | Programmeerimistestid raamatukogus; kohandatud programmeerimisülesanded kõrgemas paketis |
+| Kood testis | Koodi lugemise küsimused (mida kood teeb või väljastab); koodi ei kirjutata ega käivitata | Programmeerimistestid testikogus; kohandatud programmeerimisülesanded kõrgemas paketis |
 | Küsimused kandidaadi kohta | Igal kandidaadil oma juhuslik komplekt, oma järjekorras | Siin ei võrrelda |
 | Aususe tagamise funktsioonid | Taimer igal küsimusel (serveri jõustatud), märked liiga kiirete vastuste, lehelt lahkumise ja kopeerimiskatsete kohta | Veebikaamera hetktõmmised, keelatud kopeerimine/kleepimine ja täisekraanirežiim kõrgemas paketis |
 | ATS-integratsioonid | Ei | ATS/API-integratsioonid kõrgemas paketis |
 | Aruanded | Hindamislehed vastuste ja ajakuluga; PDF ühe või kõigi kandidaatide kohta | Siin ei võrrelda |
-| Keeled | 23 keelt liidese, intervjuude ja e-kirjade jaoks | Siin ei võrrelda; raamatukogus on keeleoskuse testid |
-| Hinnamudel | Iga vastava kandidaadi eest, ettemakstud krediitidest; ilma tellimuseta ([hinnad](/pricing)) | Tasuta pakett ja aastase arveldusega tasulised paketid ([hinnaleht](https://www.testgorilla.com/pricing/)) |
+| Keeled | 23 keelt liidese, intervjuude ja e-kirjade jaoks | Siin ei võrrelda; testikogus on keeleoskuse testid |
+| Hinnamudel | Iga vastanud kandidaadi eest, ettemakstud krediitidest; ilma tellimuseta ([hinnad](/pricing)) | Tasuta pakett ja aastase arveldusega tasulised paketid ([hinnaleht](https://www.testgorilla.com/pricing/)) |
 | Majutus | EL (mõned volitatud alamtöötlejad USAs; vaata [privaatsuspoliitikat](/privacy)) | Siin ei võrrelda |
 
-*TestGorilla funktsioonid 2026. aasta oktoobri seisuga, selle [hinnalehe](https://www.testgorilla.com/pricing/) ja [testiraamatukogu](https://www.testgorilla.com/test-library/) järgi.*
+*TestGorilla funktsioonid 2026. aasta oktoobri seisuga, selle [hinnalehe](https://www.testgorilla.com/pricing/) ja [testikogu](https://www.testgorilla.com/test-library/) järgi.*
 
 ## Kuidas testid koostatakse
 
-**TestGorilla** alustab oma raamatukogust. Valid rolliga sobivad testid (näiteks rollipõhise oskuste testi pluss kognitiivse testi pluss isiksusetesti) ja ühendad need hindamiseks. Raamatukogu on jagatud kategooriatesse, nagu rollipõhised oskused, programmeerimisoskused, tarkvaraoskused, keel, kognitiivsed võimed, situatsioonipõhine otsustamine, isiksus ja kultuur ning trükkimine ([testiraamatukogu](https://www.testgorilla.com/test-library/)).
+**TestGorilla** alustab oma testikogust. Valid rolliga sobivad testid (näiteks rollipõhise oskuste testi pluss kognitiivse testi pluss isiksusetesti) ja ühendad need hindamiseks. Testikogu on jagatud kategooriatesse, nagu rollipõhised oskused, programmeerimisoskused, tarkvaraoskused, keel, kognitiivsed võimed, situatsioonipõhine otsustamine, isiksus ja kultuur ning trükkimine ([testikogu](https://www.testgorilla.com/test-library/)).
 
 **prepza** alustab sinu töökuulutusest. See toob välja, mida kandidaat peab teadma, ja pakub teemad koos alateemadega. Jätad need alles, eemaldad linnukese, nimetad ümber või muudad neid või kirjeldad muudatusi tavalise tekstiga. Alles siis kirjutatakse küsimused: iga teema jaoks valikvastustega küsimuste pank, igas küsimuses üks õige ja kolm usutavat valet vastust. Näed iga küsimust ja saad ükskõik millise neist uuesti luua. Tehnilistes teemades näitavad paljud küsimused lühikest koodinäidet, päringut või käsku ja küsivad, mida see väljastab, mida see teeb, miks see ebaõnnestub või milline muudatus selle parandab.
 
-Praktiline erinevus: raamatukogu test on muutumatu ja seda on kasutatud palju kordi, kuid see pole kirjutatud sinu rolli jaoks. prepza intervjuu on kirjutatud sinu rolli jaoks, sh selle nišiosad, kuid see on iga kord uus. AI kirjutatud küsimustes võib olla vigu, seega kontrollib prepza vastusevõtmeid ja parandab küsimusi kandidaatide vastuste põhjal ning sina saad iga küsimuse märkida.
+Praktiline erinevus: valmis test on muutumatu ja seda on kasutatud palju kordi, kuid see pole kirjutatud sinu rolli jaoks. prepza intervjuu on kirjutatud sinu rolli jaoks, sh selle nišiosad, kuid see on iga kord uus. AI kirjutatud küsimustes võib olla vigu, seega kontrollib prepza vastusevõtmeid ja parandab küsimusi kandidaatide vastuste põhjal ning sina saad iga küsimuse märkida.
 
 ## Kuidas hinnastus toimib
 

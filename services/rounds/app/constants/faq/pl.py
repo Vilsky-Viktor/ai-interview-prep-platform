@@ -20,12 +20,12 @@ FAQ = [
     {
         "key": "link",
         "question": "Czy mogę umieścić rozmowę w ogłoszeniu o pracę?",
-        "answer": "Tak. Włącz link do udostępnienia rozmowy na jej karcie kandydatów i wklej go do ogłoszenia. Każdy, kto go otworzy, loguje się i przechodzi rozmowę, a za każdą osobę płacisz jak za zaproszonego kandydata. Link wyłącza się, gdy oznaczysz w rozmowie, że ktoś został zatrudniony.",
+        "answer": "Tak. Włącz link do udostępnienia rozmowy na jej karcie kandydatów i wklej go do ogłoszenia. Każdy, kto go otworzy, loguje się i bierze udział w rozmowie, a za każdą osobę płacisz jak za zaproszonego kandydata. Link wyłącza się, gdy oznaczysz w rozmowie, że ktoś został zatrudniony.",
     },
     {
         "key": "preview",
         "question": "Czy mogę wypróbować rozmowę, zanim kogoś zaproszę?",
-        "answer": "Tak. Otwórz swoją rozmowę jako kandydat z jej strony, bezpłatnie: podglądy nie pojawiają się wśród Twoich kandydatów ani w statystykach pytań. Możesz też przejść dowolną z darmowych próbnych rozmów.",
+        "answer": "Tak. Otwórz swoją rozmowę jako kandydat z jej strony, bezpłatnie: podglądy nie pojawiają się wśród Twoich kandydatów ani w statystykach pytań. Możesz też odbyć dowolną z darmowych próbnych rozmów.",
     },
     {
         "key": "cheating",
@@ -50,7 +50,7 @@ FAQ = [
     {
         "key": "expire",
         "question": "Czy kredyty wygasają?",
-        "answer": "Nie. Kredyty nigdy nie wygasają i nie ma subskrypcji ani odnowień.",
+        "answer": "Nie. Kredyty nigdy nie wygasają i nie ma abonamentu ani odnowień.",
     },
     {
         "key": "refunds",
@@ -59,8 +59,8 @@ FAQ = [
     },
     {
         "key": "scorecards",
-        "question": "Co pokazują wyniki kandydatów?",
-        "answer": "Każdą odpowiedź, czy była poprawna i ile trwała. Oceny są oznaczone na zielono lub na czerwono względem progu zaliczenia ustawionego dla rozmowy. Wyniki oznaczają też odpowiedzi zbyt szybkie, by przeczytać pytanie, opuszczenia strony i próby kopiowania.",
+        "question": "Co pokazują karty wyników?",
+        "answer": "Każdą odpowiedź, czy była poprawna i ile trwała. Wyniki są oznaczone na zielono lub na czerwono względem progu zaliczenia ustawionego dla rozmowy. Karty wyników oznaczają też odpowiedzi zbyt szybkie, by przeczytać pytanie, opuszczenia strony i próby kopiowania.",
     },
     {
         "key": "reports",
@@ -80,7 +80,7 @@ FAQ = [
     {
         "key": "languages",
         "question": "Jakie języki są obsługiwane?",
-        "answer": "{count} języków: dla strony, rozmów i e-maili. Wybierz język, w którym ma być napisana rozmowa, niezależnie od języka opisu stanowiska.",
+        "answer": "Liczba obsługiwanych języków: {count}, dla strony, rozmów i e-maili. Wybierz język, w którym ma być napisana rozmowa, niezależnie od języka opisu stanowiska.",
     },
     {
         "key": "privacy",

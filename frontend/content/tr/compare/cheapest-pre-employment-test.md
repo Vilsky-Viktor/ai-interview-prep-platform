@@ -15,7 +15,7 @@ Bu sayfa diğer sağlayıcıların fiyatlarını listelemez, çünkü sık deği
 
 | Model | Nasıl işler | Ne zaman uygun | Örnekler (her birinin fiyat sayfasına bakın) |
 | --- | --- | --- | --- |
-| **Ücretsiz plan** | Her ay sınırlı sayıda kredi veya test | Çok az aday test ediyorsanız ve dahil olan testler rolünüze uyuyorsa | [TestGorilla](https://www.testgorilla.com/pricing/) |
+| **Ücretsiz plan** | Her ay sınırlı sayıda kredi veya test | Çok az aday test ediyorsanız ve dahil olan testler pozisyonunuza uyuyorsa | [TestGorilla](https://www.testgorilla.com/pricing/) |
 | **Abonelik** | Kredi veya limitlerle birlikte, çoğunlukla yıllık faturalandırılan aylık ücret | Yıl boyunca düzenli işe alım yapıyorsanız | [TestGorilla](https://www.testgorilla.com/pricing/), [CodeSignal](https://codesignal.com/pricing/), [Bryq](https://www.bryq.com/pricing), [Alooba](https://www.alooba.com/pricing/), [Codility](https://www.codility.com/pricing/) |
 | **Aday başına ödeme** | Yalnızca testi çözen adaylar için, genellikle ön ödemeli kredilerden ödersiniz | Ara sıra işe alım yapıyorsanız veya hacminiz dalgalanıyorsa | [prepza](/pricing) |
 | **Özel teklif** | Satış ekibiyle, çoğunlukla bir yıllığına anlaşılan fiyat | Büyük ölçekte işe alım yapıyorsanız veya geçerliliği kanıtlanmış psikometrik testlere ihtiyacınız varsa | Bazı sağlayıcılar, çoğunlukla psikometri uzmanları |
@@ -26,7 +26,7 @@ Bu sayfa diğer sağlayıcıların fiyatlarını listelemez, çünkü sık deği
 
 Üç sayıya ihtiyacınız var: bir yılda kaç aday test ettiğiniz, aday başına ödeme seçeneğindeki aday başı fiyat ve bir planın yıllık maliyeti.
 
-1. **Adaylarınızı sayın.** Bir yılda işe aldığınız roller × rol başına test edeceğiniz başvuru sahibi. Gerçekçi olun: testi gerçekten çözecek kişileri sayın.
+1. **Adaylarınızı sayın.** Bir yılda işe aldığınız pozisyonlar × pozisyon başına test edeceğiniz başvuru sahibi. Gerçekçi olun: testi gerçekten çözecek kişileri sayın.
 2. **Aday başına ödeme:** aday sayısı × aday başı fiyat. Varsa ücretsiz adayları düşün.
 3. **Abonelik:** aylık fiyat × 12 veya yıllık fiyat. Kredilerinin kaç adayı kapsadığını kontrol edin; aşacaksanız bir üst planın fiyatına bakın.
 4. **Başabaş noktanızı bulun:** planın yıllık maliyeti ÷ aday başı fiyat. Yılda bu sayının altında aday için aday başına ödeme daha ucuzdur. Üstünde ise plan daha ucuzdur.
@@ -63,8 +63,8 @@ Her aracın nerede uygun olduğu ve nasıl birleştirildiği için [TestGorilla 
 ## prepza'da her adaya neler dahildir
 
 - İş tanımınızdan yazılmış, konularını önce sizin gözden geçirdiğiniz süreli, çoktan seçmeli bir mülakat.
-- Her adaya, her sorusunda geri sayım olan kendine ait rastgele bir soru seti. Teknik rollerde sorular kısa kod örnekleri içerebilir.
-- Yanıtlar ve sürelerle puan kartları; çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler.
+- Her adaya, her sorusunda geri sayım olan kendine ait rastgele bir soru seti. Teknik pozisyonlarda sorular kısa kod örnekleri içerebilir.
+- Yanıtlar ve sürelerle değerlendirme kartları; çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler.
 - Tek bir aday veya tüm liste için PDF raporlar.
 - E-postayla, liste ya da dosyayla veya iş ilanınızdaki tek bir bağlantıyla davetler ve otomatik hatırlatmalar.
 - 23 dil, AB'de barındırılan veriler (bazı alt işleyenler ABD'dedir; bkz. [gizlilik politikası](/privacy)) ve dahil olan bir veri işleme sözleşmesi.

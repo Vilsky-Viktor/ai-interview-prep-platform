@@ -56,10 +56,10 @@ Os preços são em dólares americanos. Os pagamentos passam pela Paddle, que cu
 
 ## O que você recebe por candidato
 
-- Uma entrevista de habilidades de múltipla escolha cronometrada, escrita a partir da sua descrição da vaga ou de um modelo pronto para a função.
+- Uma entrevista de habilidades de múltipla escolha cronometrada, escrita a partir da sua descrição da vaga ou de um modelo pronto para o cargo.
 - Tópicos que você revisa e edita antes de qualquer pergunta ser escrita.
 - Um conjunto aleatório de perguntas próprio para cada candidato, com contagem regressiva em cada pergunta. Para vagas técnicas, as perguntas podem mostrar pequenos exemplos de código e perguntar o que eles fazem ou imprimem.
-- Uma ficha de resultados com cada resposta e seu tempo, além de alertas para respostas rápidas demais, saídas da página e tentativas de cópia.
+- Uma ficha de avaliação com cada resposta e seu tempo, além de alertas para respostas rápidas demais, saídas da página e tentativas de cópia.
 - Um relatório em PDF que você pode baixar ou enviar por e-mail pela prepza.
 - Convites por e-mail, por uma lista colada, por upload de arquivo ou por um único link no anúncio da vaga, com lembretes automáticos.
 

@@ -80,7 +80,7 @@ Płatność za kandydata nie zawsze jest tańsza. Subskrypcja może pasować lep
 5. Co dzieje się z danymi kandydatów i gdzie są przechowywane?
 6. Czy jest minimalna kwota zakupu?
 
-W przypadku prepza: nie, nie, nie, tak (oba warianty), dane przechowywane w UE, a dane kandydatów usuwane 12 miesięcy po zaproszeniu (niektórzy podwykonawcy przetwarzania są w USA; zobacz [politykę prywatności](/privacy)), a najmniejsze doładowanie jest podane w [cenniku](/pricing).
+W przypadku prepza: nie, nie, nie, tak (oba warianty), dane przechowywane w UE, a dane kandydatów usuwane 12 miesięcy po zaproszeniu (niektóre podmioty podprzetwarzające są w USA; zobacz [politykę prywatności](/privacy)), a najmniejsze doładowanie jest podane w [cenniku](/pricing).
 
 ## Przykład
 

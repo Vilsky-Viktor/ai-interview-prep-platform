@@ -33,7 +33,7 @@ In dit model doet AI het schrijfwerk: het leest de functieomschrijving, stelt vo
 
 ## De aanpak van prepza
 
-prepza gebruikt AI om op basis van je functieomschrijving een sollicitatiegesprek over vaardigheden te schrijven. Mensen houden de regie over wat er getoetst wordt en over elk besluit.
+prepza gebruikt AI om op basis van je functieomschrijving een interview over vaardigheden te schrijven. Mensen houden de regie over wat er getoetst wordt en over elk besluit.
 
 1. **AI leest je functieomschrijving** en haalt eruit wat een kandidaat moet weten: de eisen, het niveau en een set onderwerpen met subonderwerpen.
 2. **Jij bekijkt de onderwerpen.** Houd ze, vink ze uit, hernoem of bewerk ze, of vertel de AI in gewone taal wat er anders moet. Er wordt geen vraag geschreven tot jij akkoord geeft.
@@ -51,9 +51,9 @@ Wat prepza niet doet:
 
 ### Vragen worden steeds beter
 
-Door AI geschreven vragen kunnen fout of onduidelijk zijn, vooral in een nieuw sollicitatiegesprek. prepza let daarop: antwoorden, beoordelingen en meldingen van kandidaten wijzen zwakke vragen aan, en een AI-controleur verbetert of vervangt ze. Zie je een vraag met een foute antwoordsleutel, markeer die dan; ze gaat direct naar de controleur.
+Door AI geschreven vragen kunnen fout of onduidelijk zijn, vooral in een nieuw interview. prepza let daarop: antwoorden, beoordelingen en meldingen van kandidaten wijzen zwakke vragen aan, en een AI-controleur verbetert of vervangt ze. Zie je een vraag met een foute antwoordsleutel, markeer die dan; ze gaat direct naar de controleur.
 
-Je kunt je eigen sollicitatiegesprek ook als kandidaat proberen voordat je iemand uitnodigt: dezelfde vragen met tijdslimiet, gratis, en buiten je resultaten gehouden.
+Je kunt je eigen interview ook als kandidaat proberen voordat je iemand uitnodigt: dezelfde vragen met tijdslimiet, gratis, en buiten je resultaten gehouden.
 
 ## Waarom deze aanpak makkelijker uit te leggen en te controleren is
 
@@ -67,7 +67,7 @@ Je kunt je eigen sollicitatiegesprek ook als kandidaat proberen voordat je ieman
 
 **Antwoorden delen is lastiger.** Omdat elke kandidaat een eigen willekeurige set vragen krijgt en elke vraag een timer heeft, kost het meer moeite om antwoorden te delen of dingen op te zoeken. De integriteitssignalen helpen je bepalen waar je beter moet kijken; ze zijn geen bewijs van fraude.
 
-Niets hiervan maakt een test vanzelf eerlijk. De vragen moeten nog steeds bij de functie passen, de tijdslimieten bij de rol, en mensen moeten de resultaten zorgvuldig lezen. Een score is bewijs, geen oordeel. Weeg je vaardigheidstests met tijdslimiet af tegen andere manieren om kandidaten te screenen, lees dan [Vaardigheidstests vs. cv-screening](/guides/skills-tests-vs-cv-screening).
+Niets hiervan maakt een test vanzelf eerlijk. De vragen moeten nog steeds bij de functie passen, de tijdslimieten bij het werk, en mensen moeten de resultaten zorgvuldig lezen. Een score is bewijs, geen oordeel. Weeg je vaardigheidstests met tijdslimiet af tegen andere manieren om kandidaten te screenen, lees dan [Vaardigheidstests vs. cv-screening](/guides/skills-tests-vs-cv-screening).
 
 ### Wat meerkeuze niet kan
 
@@ -90,7 +90,7 @@ De data en de details staan in [Is werven met AI legaal in de EU?](/guides/is-ai
 
 ### AVG
 
-Resultaten van sollicitatiegesprekken zijn persoonsgegevens, onder de AVG (GDPR) van de EU en de UK GDPR. Reken op een verwerkersovereenkomst, een bericht aan kandidaten, een beperkte bewaartermijn en een manier waarop kandidaten hun gegevens kunnen inzien of laten verwijderen. [Artikel 22](https://gdpr-info.eu/art-22-gdpr/) beperkt ook besluiten die uitsluitend op geautomatiseerde verwerking berusten en mensen in aanmerkelijke mate treffen, dus laat een mens de resultaten bekijken voordat je ernaar handelt. prepza wordt gehost in de EU (sommige subverwerkers zitten in de VS; zie het [privacybeleid](/privacy)), verwijdert kandidaatgegevens 12 maanden na de uitnodiging, en levert een verwerkersovereenkomst en instructies voor bedrijven mee.
+Interviewresultaten zijn persoonsgegevens, onder de AVG (GDPR) van de EU en de UK GDPR. Reken op een verwerkersovereenkomst, een bericht aan kandidaten, een beperkte bewaartermijn en een manier waarop kandidaten hun gegevens kunnen inzien of laten verwijderen. [Artikel 22](https://gdpr-info.eu/art-22-gdpr/) beperkt ook besluiten die uitsluitend op geautomatiseerde verwerking berusten en mensen in aanmerkelijke mate treffen, dus laat een mens de resultaten bekijken voordat je ernaar handelt. prepza wordt gehost in de EU (sommige subverwerkers zitten in de VS; zie het [privacybeleid](/privacy)), verwijdert kandidaatgegevens 12 maanden na de uitnodiging, en levert een verwerkersovereenkomst en instructies voor bedrijven mee.
 
 ### Verenigde Staten
 

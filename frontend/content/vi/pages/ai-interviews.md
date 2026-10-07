@@ -65,7 +65,7 @@ Bạn cũng có thể xem trước buổi phỏng vấn của mình với tư c�
 
 **Ít tín hiệu không liên quan hơn.** Một câu trả lời trắc nghiệm không mang theo giọng nói, khuôn mặt, xuất thân hay văn phong, nên điểm số không phụ thuộc vào ngoại hình hay giọng nói của ai đó. Điều đó không loại trừ thiên lệch: bài kiểm tra kiến thức có thể cho thấy chênh lệch điểm giữa các nhóm, và một bài kiểm tra bằng ngôn ngữ thứ hai của ứng viên có thể gây bất lợi cho họ. Hãy theo dõi kết quả giữa các nhóm.
 
-**Chia sẻ đáp án khó hơn.** Với bộ câu hỏi ngẫu nhiên riêng cho mỗi ứng viên và đồng hồ cho mọi câu hỏi, việc chia sẻ đáp án hay tra cứu tốn nhiều công sức hơn. Các tín hiệu liêm chính giúp bạn quyết định cần xem kỹ ở đâu; chúng không phải bằng chứng gian lận.
+**Chia sẻ đáp án khó hơn.** Với bộ câu hỏi ngẫu nhiên riêng cho mỗi ứng viên và đồng hồ cho mọi câu hỏi, việc chia sẻ đáp án hay tra cứu tốn nhiều công sức hơn. Các tín hiệu cảnh báo giúp bạn quyết định cần xem kỹ ở đâu; chúng không phải bằng chứng gian lận.
 
 Không điều nào ở trên khiến một bài kiểm tra mặc nhiên công bằng. Câu hỏi vẫn cần khớp với công việc, giới hạn thời gian cần phù hợp với vị trí, và con người cần đọc kết quả cẩn thận. Điểm số là bằng chứng, không phải phán quyết. Nếu bạn đang cân nhắc bài kiểm tra có tính giờ so với các phương pháp sàng lọc khác, hãy đọc [Bài kiểm tra kỹ năng và sàng lọc CV](/guides/skills-tests-vs-cv-screening).
 

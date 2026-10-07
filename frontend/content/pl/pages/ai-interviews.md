@@ -53,7 +53,7 @@ Czego prepza nie robi:
 
 Pytania napisane przez AI mogą być błędne lub niejasne, zwłaszcza w nowej rozmowie. prepza tego pilnuje: odpowiedzi kandydatów, ich oceny i zgłoszenia wskazują słabe pytania, a weryfikator AI je poprawia lub zastępuje. Jeśli zauważysz pytanie z błędnym kluczem odpowiedzi, oznacz je, a od razu trafi do weryfikatora.
 
-Zanim kogokolwiek zaprosisz, możesz też przejść własną rozmowę jako kandydat: te same pytania z limitem czasu, bezpłatnie i bez wpływu na Twoje wyniki.
+Zanim kogokolwiek zaprosisz, możesz też odbyć własną rozmowę jako kandydat: te same pytania z limitem czasu, bezpłatnie i bez wpływu na Twoje wyniki.
 
 ## Dlaczego takie podejście łatwiej wyjaśnić i sprawdzić
 

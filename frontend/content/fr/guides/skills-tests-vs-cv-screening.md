@@ -84,7 +84,7 @@ prepza couvre l'étape 2 : un test chronométré à choix multiples sur les conn
 - **Propre au poste par construction.** prepza propose des thèmes à partir de votre fiche de poste, et vous les vérifiez et modifiez avant qu'une question ne soit rédigée. Retirez tout ce qui n'est pas une vraie exigence. Pour les postes techniques, les questions peuvent inclure de courts exemples de code à lire.
 - **Les mêmes conditions pour tous.** Les mêmes thèmes et le même nombre de questions, et un compte à rebours pour chaque question. Vous pouvez accorder du temps supplémentaire aux candidats qui le demandent.
 - **Chaque candidat reçoit ses propres questions,** une série aléatoire tirée de la banque de chaque thème, pour que les réponses soient plus difficiles à partager.
-- **Des résultats lisibles.** Une fiche d'évaluation par candidat avec chaque réponse et son temps, classée par score, avec des signalements pour les réponses trop rapides, les sorties de la page et les tentatives de copie.
+- **Des résultats lisibles.** Une fiche d'évaluation par candidat avec chaque réponse et son temps, classée par score, avec des alertes pour les réponses trop rapides, les sorties de la page et les tentatives de copie.
 - **Des réponses notées d'après un corrigé** que l'IA rédige et vérifie ; aucune IA ne lit ni ne juge la réponse d'un candidat.
 
 prepza ne mène pas d'entretiens structurés, de mises en situation ni de tests cognitifs. Utilisez-le en complément. Pour en savoir plus sur les types de tests et l'équité, lisez [Tests de recrutement](/pre-employment-testing).

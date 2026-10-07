@@ -3,7 +3,7 @@
 MESSAGES = {
     "Too many requests. Try again later.": "Quá nhiều yêu cầu. Vui lòng thử lại sau.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Đăng nhập tạm thời không khả dụng. Vui lòng thử lại sau ít phút.",
-    "Not enough credits. Top up to continue.": "Không đủ tín dụng. Hãy nạp thêm để tiếp tục.",
+    "Not enough credits. Top up to continue.": "Không đủ credit. Hãy nạp thêm để tiếp tục.",
     "This top-up isn't available": "Gói nạp này không khả dụng",
     "Choose one of the balances": "Hãy chọn một ngưỡng số dư",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "Đã đạt giới hạn tạo mới của hôm nay. Vui lòng thử lại vào ngày mai; luyện tập và phỏng vấn vẫn hoạt động bình thường.",

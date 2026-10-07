@@ -122,7 +122,7 @@ So sieht das heute im Produkt aus:
 - **Menschen entscheiden.** Die Ergebnisseite und die PDF-Berichte erinnern Ihr Team daran, die Ergebnisse zu prüfen; prepza lehnt keine Kandidaten ab und verschickt keine Absagen.
 - **Kandidaten werden informiert,** bevor sie beginnen: dass die Fragen von KI geschrieben sind, dass Menschen in Ihrem Unternehmen die Ergebnisse prüfen und entscheiden und dass sie eine Überprüfung verlangen können.
 - **Zusätzliche Zeit** kann jedem Kandidaten gewährt werden, der darum bittet.
-- **Aufzeichnungen.** Die angezeigten Fragen, Antworten, Zeiten und Integritätsereignisse werden protokolliert.
+- **Aufzeichnungen.** Die angezeigten Fragen, Antworten, Zeiten und Auffälligkeiten (Seitenwechsel, Kopierversuche) werden protokolliert.
 - **Daten.** Gehostet in der EU (einige Unterauftragsverarbeiter sitzen in den USA; siehe die [Datenschutzerklärung](/privacy)), Kandidatendaten werden 12 Monate nach der Einladung gelöscht, ein Auftragsverarbeitungsvertrag ist enthalten, und Ihre Daten werden nicht zum Training von KI-Modellen genutzt.
 
 Entwürfe der technischen Dokumentation, des Risikoregisters, der Anleitung für Unternehmen, des Qualitätsmanagementsystems und des Plans zur Beobachtung nach dem Inverkehrbringen liegen vor und werden vor dem Stichtag 2027 fertiggestellt. Es sind Arbeitsentwürfe, keine Behauptung von Konformität.

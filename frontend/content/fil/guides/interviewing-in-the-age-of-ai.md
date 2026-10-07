@@ -7,7 +7,7 @@ updated: "2026-10-07"
 
 # Pag-interview ng mga engineer sa panahon ng AI: ano ang dapat i-test ngayon
 
-Sa loob ng maraming taon, hinihiling ng klasikong technical interview na sumulat ang kandidato ng code mula sa wala: i-reverse ang isang list, mag-implement ng cache, lutasin ang isang puzzle sa whiteboard o sa shared editor. Simple ang ideya. Kung kaya ng isang tao na isulat ang code, malamang kaya niya ang trabaho.
+Sa loob ng maraming taon, hinihiling ng klasikong technical interview na sumulat ang aplikante ng code mula sa wala: i-reverse ang isang list, mag-implement ng cache, lutasin ang isang puzzle sa whiteboard o sa shared editor. Simple ang ideya. Kung kaya ng isang tao na isulat ang code, malamang kaya niya ang trabaho.
 
 Pinahina ng AI coding assistants ang ugnayang iyon. Maraming karaniwang piraso ng code ang kaya nang i-draft ng assistant sa ilang segundo, sa trabaho man at, kung hindi mo ito pipigilan, sa isang remote interview. Hindi nito binabawasan ang halaga ng engineering skill. Binabago nito kung aling mga skill ang pinakamahalaga, kaya binabago rin nito ang dapat suriin sa isang interview.
 
@@ -25,9 +25,9 @@ Kapag pinagsama, inilalarawan ng mga numerong ito ang paglipat sa mismong trabah
 
 Wala pang iisang sagot ang industriya. Magkakaibang direksyon ang mga naiulat na paraan:
 
-- **Pagpapahintulot o pag-aatas ng AI sa interview.** Noong Hunyo 2025, sinabi ng Canva na inaasahan na nito ngayon ang mga backend, machine learning at frontend na kandidato na gumamit ng AI tools gaya ng Copilot, Cursor at Claude sa isang bagong "AI-Assisted Coding" round. Sinusuri nito kung kaya ng mga kandidato na "himayin ang masalimuot at malabong mga requirement", "hanapin at ayusin ang mga isyu sa code na gawa ng AI" at "tiyaking pasok sa production standards ang mga solusyong gawa ng AI" ([Canva Engineering, Hunyo 2025](https://canva.dev/blog/engineering/yes-you-can-use-ai-in-our-interviews)).
-- **Pagsubok ng AI-assisted coding rounds.** Noong Hulyo 2025, iniulat ng Business Today, batay sa 404 Media, na gumagawa ang Meta ng coding interview kung saan may AI assistant ang mga kandidato. Sinipi nito ang Meta na nagsabing ito ay "mas kumakatawan sa developer environment na pagtatrabahuhan ng aming mga magiging empleyado, at ginagawa ring hindi gaanong epektibo ang pandaraya gamit ang LLM" ([Business Today, Hulyo 2025](https://www.businesstoday.in/amp/technology/news/story/meta-to-test-job-applicants-with-ai-assisted-coding-interviews-amid-ai-expansion-plans-487200-2025-07-31)).
-- **Paghihigpit sa tools at pagkikita nang personal.** Noong Marso 2025, nag-ulat ang CNBC tungkol sa isang tool na ginawa para matulungan ang mga kandidato na gumamit ng AI nang hindi napapansin sa remote coding interviews. Sa parehong ulat, sinabi ng Amazon na kailangang kumpirmahin ng mga kandidato na hindi sila gagamit ng hindi awtorisadong tools, iminungkahi ng CEO ng Google na isaalang-alang ng mga hiring manager ang ilang in-person na interview, at ibinalik ng Deloitte ang in-person na interview para sa graduate program nito sa UK ([CNBC via NBC New York, Marso 2025](https://www.nbcnewyork.com/news/business/money-report/meet-the-21-year-old-helping-coders-use-ai-to-cheat-in-google-and-other-tech-job-interviews/6178911/?amp=1)).
+- **Pagpapahintulot o pag-aatas ng AI sa interview.** Noong Hunyo 2025, sinabi ng Canva na inaasahan na nito ngayon ang mga backend, machine learning at frontend na aplikante na gumamit ng AI tools gaya ng Copilot, Cursor at Claude sa isang bagong "AI-Assisted Coding" round. Sinusuri nito kung kaya ng mga aplikante na "himayin ang masalimuot at malabong mga requirement", "hanapin at ayusin ang mga isyu sa code na gawa ng AI" at "tiyaking pasok sa production standards ang mga solusyong gawa ng AI" ([Canva Engineering, Hunyo 2025](https://canva.dev/blog/engineering/yes-you-can-use-ai-in-our-interviews)).
+- **Pagsubok ng AI-assisted coding rounds.** Noong Hulyo 2025, iniulat ng Business Today, batay sa 404 Media, na gumagawa ang Meta ng coding interview kung saan may AI assistant ang mga aplikante. Sinipi nito ang Meta na nagsabing ito ay "mas kumakatawan sa developer environment na pagtatrabahuhan ng aming mga magiging empleyado, at ginagawa ring hindi gaanong epektibo ang pandaraya gamit ang LLM" ([Business Today, Hulyo 2025](https://www.businesstoday.in/amp/technology/news/story/meta-to-test-job-applicants-with-ai-assisted-coding-interviews-amid-ai-expansion-plans-487200-2025-07-31)).
+- **Paghihigpit sa tools at pagkikita nang personal.** Noong Marso 2025, nag-ulat ang CNBC tungkol sa isang tool na ginawa para matulungan ang mga aplikante na gumamit ng AI nang hindi napapansin sa remote coding interviews. Sa parehong ulat, sinabi ng Amazon na kailangang kumpirmahin ng mga aplikante na hindi sila gagamit ng hindi awtorisadong tools, iminungkahi ng CEO ng Google na isaalang-alang ng mga hiring manager ang ilang in-person na interview, at ibinalik ng Deloitte ang in-person na interview para sa graduate program nito sa UK ([CNBC via NBC New York, Marso 2025](https://www.nbcnewyork.com/news/business/money-report/meet-the-21-year-old-helping-coders-use-ai-to-cheat-in-google-and-other-tech-job-interviews/6178911/?amp=1)).
 
 Ilang malalaking kumpanya lang ito, hindi survey ng market, at nagbabago ang mga patakaran. Pero iisa ang itinuturo nila: mas mahirap nang pagkatiwalaan ngayon ang remote na "isulat ito mula sa wala" na task, at lumipat na ang mahalagang tanong mula sa "kaya mo bang gumawa ng code?" papunta sa "naiintindihan mo ba ito nang sapat para husgahan ito?"
 
@@ -46,12 +46,12 @@ Mga skill ito ng kaalaman at pangangatwiran, at kayang i-test ang mga ito nang d
 
 Hindi nito ginagawang walang silbi ang coding exercises. Binabago nito kung kailan mo sila pinapatakbo at kung ano ang hitsura nila:
 
-- **Pairing kasama ang AI.** Gaya ng round ng Canva, bigyan ang mga kandidato ng assistant at isang makatotohanan at open-ended na task. Panoorin kung paano nila ito hinihimay, ano ang itinatanong nila sa assistant, at ano ang tinatanggap o tinatanggihan nila.
+- **Pairing kasama ang AI.** Gaya ng round ng Canva, bigyan ang mga aplikante ng assistant at isang makatotohanan at open-ended na task. Panoorin kung paano nila ito hinihimay, ano ang itinatanong nila sa assistant, at ano ang tinatanggap o tinatanggihan nila.
 - **Code review.** Magbigay ng isang pull request, posibleng isinulat ng AI, na may ilang totoong bug. Itanong kung ano ang babaguhin nila at bakit.
 - **Debugging.** Magbigay ng maliit na codebase na may pumapalyang test. Malapit ito sa araw-araw na trabahong inilalarawan ng survey at mahirap pekein.
 - **System design.** Para sa senior roles, ipinapakita ng usapan tungkol sa trade-offs ang judgment na hindi kayang ilabas ng iisang prompt.
 
-Kinakailangan ng oras ng isang engineer para patakbuhin at i-score ang mga exercise na ito. Iyon ang pangunahing dahilan para maglagay ng mabilis at malawak na knowledge check bago ang mga ito, para mapunta sila sa mga kandidatong pinakamalamang na magtagumpay.
+Kinakailangan ng oras ng isang engineer para patakbuhin at i-score ang mga exercise na ito. Iyon ang pangunahing dahilan para maglagay ng mabilis at malawak na knowledge check bago ang mga ito, para mapunta sila sa mga aplikanteng pinakamalamang na magtagumpay.
 
 ## Isang proseso para sa panahon ng AI
 
@@ -59,10 +59,10 @@ Kinakailangan ng oras ng isang engineer para patakbuhin at i-score ang mga exerc
 2. **Magpatakbo ng maikling knowledge screen** tungkol sa concepts, theory at pagbasa ng code para sa iyong stack.
 3. **Magpatakbo ng hands-on exercise** sa anyong bagay sa paraan ng pagtatrabaho ng iyong team: AI-assisted pairing, code review o debugging, remote man o in person.
 4. **Magdagdag ng system design** para sa senior roles.
-5. **Magsagawa ng structured interview** na may nakatakdang mga tanong at scoring rubric, kasama kung paano ginagamit ng kandidato ang AI tools at chine-check ang output nito.
+5. **Magsagawa ng structured interview** na may nakatakdang mga tanong at scoring rubric, kasama kung paano ginagamit ng aplikante ang AI tools at chine-check ang output nito.
 6. **Hayaang tao ang magdesisyon,** na ang bawat resulta ay isang input.
 
-Sabihin agad sa mga kandidato kung aling tools ang pinapayagan sa bawat stage. Mas patas ang malinaw na patakaran kaysa sa hulaan, at mas madaling ikumpara ang mga resulta.
+Sabihin agad sa mga aplikante kung aling tools ang pinapayagan sa bawat stage. Mas patas ang malinaw na patakaran kaysa sa hulaan, at mas madaling ikumpara ang mga resulta.
 
 Para sa buong hakbang-hakbang na bersyon, tingnan ang [Paano mag-hire ng mga engineer](/guides/hiring-engineers).
 
@@ -72,10 +72,10 @@ Bagay na bagay ang prepza sa hakbang 2. Ginagawa nitong timed multiple-choice na
 
 - **Concepts at theory mula sa job description:** databases, APIs, architecture, kung paano kumikilos ang isang framework, security practices.
 - **Code-reading questions:** maikling piraso ng code na may mga tanong tungkol sa ipi-print o ibabalik nito, ano ang ginagawa nito, bakit ito pumapalya o aling pagbabago ang aayos dito. Iyan din ang reviewing skill na inaasahan sa AI-assisted na trabaho.
-- **Timer sa bawat tanong:** may sariling countdown ang bawat tanong, na ipinapatupad ng server, at may sariling random na set ng tanong ang bawat kandidato. Pinapahirap nito ang paghahanap ng sagot, kasama ang pagtatanong sa AI assistant. Hindi nito ginagawang imposible.
-- **Integrity signals:** fina-flag ng scorecards ang mga sagot na masyadong mabilis para mabasa pa ang tanong, ang mga pagkakataong umalis ang kandidato sa pahina, at ang mga pagtatangkang mag-copy. Ang flag ay dahilan para tumingin nang mas mabuti, hindi patunay ng pandaraya.
+- **Timer sa bawat tanong:** may sariling countdown ang bawat tanong, na ipinapatupad ng server, at may sariling random na set ng tanong ang bawat aplikante. Pinapahirap nito ang paghahanap ng sagot, kasama ang pagtatanong sa AI assistant. Hindi nito ginagawang imposible.
+- **Integrity signals:** fina-flag ng scorecards ang mga sagot na masyadong mabilis para mabasa pa ang tanong, ang mga pagkakataong umalis ang aplikante sa pahina, at ang mga pagtatangkang mag-copy. Ang flag ay dahilan para tumingin nang mas mabuti, hindi patunay ng pandaraya.
 
-Ang hindi ginagawa ng prepza: hindi sumusulat, nagpapatakbo o nagde-debug ng code ang mga kandidato sa prepza, at hindi nito pinapanood kung paano sila gumagamit ng AI assistant. Bahagi iyon ng hands-on stage, na pinapatakbo in-house o sa isang developer platform, at kumukumpleto sa knowledge screen. Tingnan ang [skills tests ayon sa role](/tests) para sa mga handang test na puwedeng simulan, at ang [AI interviews](/ai-interviews) para malaman kung paano gumagamit ng AI ang prepza at ano ang iniiwan nito sa mga tao.
+Ang hindi ginagawa ng prepza: hindi sumusulat, nagpapatakbo o nagde-debug ng code ang mga aplikante sa prepza, at hindi nito pinapanood kung paano sila gumagamit ng AI assistant. Bahagi iyon ng hands-on stage, na pinapatakbo in-house o sa isang developer platform, at kumukumpleto sa knowledge screen. Tingnan ang [skills tests ayon sa role](/tests) para sa mga handang test na puwedeng simulan, at ang [AI interviews](/ai-interviews) para malaman kung paano gumagamit ng AI ang prepza at ano ang iniiwan nito sa mga tao.
 
 ## Pagkapatas at candidate experience
 
@@ -83,13 +83,13 @@ Magandang pagkakataon ang pagbabago ng iyong proseso para i-check kung patas ito
 
 - **Maging malinaw sa mga patakaran sa AI** sa bawat stage, nang nakasulat.
 - **Panatilihing pareho ang kondisyon** para sa lahat sa isang stage.
-- **Mag-alok ng accommodations,** gaya ng dagdag na oras, sa mga kandidatong humihingi.
+- **Mag-alok ng accommodations,** gaya ng dagdag na oras, sa mga aplikanteng humihingi.
 - **Huwag ituring na hatol ang isang signal.** Puwedeng may inosenteng dahilan ang paghinto, pagtingin sa ibang direksyon o mabilis na pagsagot.
-- **Panatilihing maikli.** Bawat stage na idinadagdag mo ay kumakain ng oras ng malalakas na kandidato na puwede nilang gugulin sa ibang offer.
+- **Panatilihing maikli.** Bawat stage na idinadagdag mo ay kumakain ng oras ng malalakas na aplikante na puwede nilang gugulin sa ibang offer.
 
 ## Buod
 
-Pinamura ng AI assistants ang paggawa ng code at pinahalaga ang paghusga rito. Sinasalamin iyon ng mahusay na proseso: i-test ang kaalaman, theory at pagbasa ng code nang maaga, kung saan mabilis ito at, dahil may timer sa bawat tanong, mas mahirap ipagawa sa iba, saka gumamit ng hands-on exercises, kadalasang pinapayagan ang AI, para makita kung paano magtrabaho ang mga kandidato. Maging malinaw sa mga patakaran, at panatilihing tao ang may hawak ng desisyon.
+Pinamura ng AI assistants ang paggawa ng code at pinahalaga ang paghusga rito. Sinasalamin iyon ng mahusay na proseso: i-test ang kaalaman, theory at pagbasa ng code nang maaga, kung saan mabilis ito at, dahil may timer sa bawat tanong, mas mahirap ipagawa sa iba, saka gumamit ng hands-on exercises, kadalasang pinapayagan ang AI, para makita kung paano magtrabaho ang mga aplikante. Maging malinaw sa mga patakaran, at panatilihing tao ang may hawak ng desisyon.
 
 ## Mga pinagkunan
 

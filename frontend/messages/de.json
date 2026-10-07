@@ -2,7 +2,7 @@
   "settings": {
     "title": "Einstellungen",
     "language": "Sprache",
-    "languageNote": "Für die Oberfläche und die Antworten des Tutors sowie die Sprache, mit der neue Kits und Interviews beginnen. Du kannst sie in jeder unterstützten Sprache erstellen.",
+    "languageNote": "Für die Oberfläche und die Antworten im Hilfe-Chat sowie die Sprache, in der neue Interviews starten. Du kannst ein Interview in jeder unterstützten Sprache erstellen.",
     "languageFailed": "Die Sprache konnte nicht geändert werden. Bitte versuche es erneut.",
     "yourData": "Deine Daten",
     "yourDataNote": "Lade alles herunter, was prepza. über dich speichert, oder lösche dein Konto.",
@@ -93,7 +93,7 @@
     "firstCompany": "Wie heißt dein Unternehmen?",
     "newCompany": "Ein neues Unternehmen",
     "companyName": "Name des Unternehmens",
-    "freeCandidates": "Dein erstes Unternehmen führt Interviews mit {count, plural, one {seinem ersten Kandidaten} other {seinen ersten # Kandidaten}} kostenlos.",
+    "freeCandidates": "Bei deinem ersten Unternehmen {count, plural, one {ist der erste Kandidat} other {sind die ersten # Kandidaten}} kostenlos.",
     "back": "Beschreibung bearbeiten",
     "continue": "Weiter",
     "starting": "Wird gestartet…",
@@ -103,7 +103,7 @@
     "fixNow": "Jetzt korrigieren",
     "fixing": "Wird korrigiert…",
     "dismiss": "Verwerfen",
-    "fixSent": "An den Prüfer gesendet. Sie wird gleich korrigiert oder ersetzt.",
+    "fixSent": "An den Prüfer gesendet. Die Frage wird gleich korrigiert oder ersetzt.",
     "actionFailed": "Das hat nicht funktioniert. Bitte versuche es erneut.",
     "quality": "Qualität",
     "flagged": "Gemeldet",
@@ -130,7 +130,7 @@
     "description": "Rollenbeschreibung",
     "create": "Generieren",
     "createFailed": "Die Vorlage konnte nicht gestartet werden. Bitte versuche es erneut.",
-    "text": "Fertige Interviews nach Rolle, für Unternehmen und Talente.",
+    "text": "Fertige Interviews nach Rolle, für Unternehmen und zum Üben.",
     "deleteLabel": "{title} löschen",
     "deleteTitle": "Diese Vorlage löschen?",
     "deleteText": "Ihre Themen und Fragen werden gelöscht. Interviews, die Unternehmen daraus erstellt haben, bleiben erhalten.",
@@ -213,7 +213,7 @@
     "low": "Bald aufgebraucht",
     "creditsWord": "{count, plural, one {Credit} other {Credits}}",
     "topUpTitle": "Aufladen: {name}",
-    "topUpNote": "Jede Aufladung kauft ganze Kandidaten; größere kosten weniger pro Kandidat. Credits verfallen nie.",
+    "topUpNote": "Jede Aufladung reicht für eine feste Zahl von Kandidaten; größere Aufladungen kosten weniger pro Kandidat. Credits verfallen nie.",
     "candidates": "{count, plural, one {# Kandidat} other {# Kandidaten}}",
     "each": "je {price}"
   },
@@ -311,7 +311,7 @@
     "title": "Interview"
   },
   "generation": {
-    "title": "Neue Vorbereitung",
+    "title": "Neues Interview",
     "interviews": "Interviews",
     "cancel": "Generierung abbrechen",
     "cancelTitle": "Diese Generierung abbrechen?",
@@ -345,7 +345,7 @@
     "changes": "Änderungen an den Themen",
     "tooMany": "Wähle höchstens {max} Themen oder beschreibe, wie sie zusammengefasst werden sollen.",
     "apply": "Änderungen übernehmen",
-    "approve": "Bestätigen und generieren"
+    "approve": "Freigeben und generieren"
   },
   "candidateStatus": {
     "invited": "eingeladen",
@@ -358,9 +358,9 @@
     "flagged": "auffällig"
   },
   "roles": {
-    "owner": "inhaber",
-    "admin": "admin",
-    "viewer": "betrachter",
+    "owner": "Inhaber",
+    "admin": "Admin",
+    "viewer": "Betrachter",
     "adminNote": "Erstellt und ändert Interviews, lädt Kandidaten ein, lädt Guthaben auf.",
     "viewerNote": "Sieht Interviews und Ergebnisse, teilt Berichte. Ändert nichts."
   },
@@ -372,7 +372,7 @@
     "interviews": "Interviews",
     "templates": "Vorlagen",
     "team": "Team",
-    "referrals": "Einladungen",
+    "referrals": "Empfehlungen",
     "new": "Neues Unternehmen",
     "name": "Name des Unternehmens",
     "create": "Erstellen",
@@ -412,7 +412,7 @@
     "status": "Status: {status}",
     "anyStatus": "jeder Status",
     "progress": "Fortschritt",
-    "grade": "Note",
+    "grade": "Ergebnis",
     "resend": "Einladung erneut senden",
     "resent": "Einladung erneut an {email} gesendet",
     "resendFailed": "Die Einladung konnte nicht erneut gesendet werden.",
@@ -430,7 +430,7 @@
     "eraseConfirm": "Löschen",
     "sortBy": "Sortieren nach: {sort}",
     "sort": {
-      "grade": "Note",
+      "grade": "Ergebnis",
       "date": "Datum"
     },
     "extraTimeNone": "Keine zusätzliche Zeit",
@@ -451,7 +451,7 @@
     "createTitle": "Interview erstellen",
     "try": "Als Kandidat ausprobieren",
     "newCandidate": "Neue(r) Kandidat(en)",
-    "linkTitle": "Teilbarer Link",
+    "linkTitle": "Link zum Teilen",
     "linkText": "Für eine Stellenanzeige: Jeder mit dem Link kann das Interview machen. Jede Person wird wie ein eingeladener Kandidat berechnet.",
     "linkFailed": "Der Link konnte nicht geändert werden. Bitte versuche es erneut.",
     "passMark": "Bestehensgrenze",
@@ -479,7 +479,7 @@
     "memberFailed": "Die Person konnte nicht eingeladen werden. Bitte versuche es erneut.",
     "invite": "Einladen",
     "jobDescription": "Stellenbeschreibung",
-    "pasteJob": "Füge die Stellenbeschreibung ein: die Rolle, ihre Anforderungen und was ein Plus ist…",
+    "pasteJob": "Füge die Stellenbeschreibung ein: die Rolle, ihre Anforderungen und was wünschenswert ist…",
     "generate": "Interview generieren",
     "startFailed": "Das Interview konnte nicht gestartet werden. Bitte versuche es erneut.",
     "candidateEmails": "E-Mails der Kandidaten",
@@ -505,7 +505,7 @@
     "unanswered": "Unbeantwortete Fragen zählen als falsch.",
     "saved": "Der Fortschritt wird gespeichert: Öffne diesen Link erneut, um fortzufahren.",
     "extraTime": "Brauchst du mehr Zeit, zum Beispiel wegen einer Behinderung? Frag {company}, bevor du beginnst.",
-    "people": "Die Fragen werden von KI geschrieben. Die Ergebnisse prüfen Menschen, und {company} entscheidet; du kannst darum bitten, dass deines geprüft wird.",
+    "people": "Die Fragen werden von KI geschrieben. Mitarbeitende von {company} prüfen die Ergebnisse und entscheiden; du kannst sie bitten, deines zu prüfen.",
     "stay": "Bleib auf dieser Seite: Verlassen und Kopieren werden erfasst (<link>Datenschutz</link>).",
     "finished": "Dieses Interview ist bereits beendet.",
     "continue": "Fortsetzen",
@@ -540,7 +540,7 @@
   },
   "pricing": {
     "title": "Preise",
-    "intro": "Zahl pro Kandidat. Interviews zu generieren ist kostenlos, und es gibt keine Abos.",
+    "intro": "Du zahlst pro Kandidat. Interviews zu generieren ist kostenlos, und es gibt keine Abos.",
     "test": "Ein Interview generieren",
     "free": "Kostenlos",
     "candidate": "Jeder Kandidat, der mindestens eine Frage beantwortet",
@@ -548,8 +548,8 @@
     "perCandidate": "${dollars, number} pro Kandidat",
     "welcome": "{count, plural, one {Dein erster Kandidat} other {Deine ersten # Kandidaten}}",
     "credits": "$1 = 100 Credits, Credits verfallen nie.",
-    "referrals": "Einladungen",
-    "referralsNote": "Teile den Link deines Unternehmens im Tab Einladungen.",
+    "referrals": "Empfehlungen",
+    "referralsNote": "Teile den Link deines Unternehmens im Tab Empfehlungen.",
     "companyReferral": "Ein von dir eingeladenes Unternehmen lädt zum ersten Mal auf",
     "each": "je {count, number} Credits",
     "topUp": "Aufladen"
@@ -571,19 +571,19 @@
     "items": {
       "instructions": {
         "title": "Anleitung für Unternehmen",
-        "description": "Was eine Note bedeutet, menschliche Prüfung, die Wahl der Bestehensgrenze, zusätzliche Zeit und wo prepza nicht eingesetzt werden sollte."
+        "description": "Was ein Ergebnis bedeutet, menschliche Prüfung, die Wahl der Bestehensgrenze, zusätzliche Zeit und wo prepza nicht eingesetzt werden sollte."
       },
       "notices": {
         "title": "Vorlagen für Hinweise an Kandidaten",
-        "description": "Bearbeitbare Hinweise, die Sie Kandidaten vor der Einladung senden, darunter einer für New York City."
+        "description": "Bearbeitbare Hinweise, die du Kandidaten vor der Einladung sendest, darunter einer für New York City."
       },
       "dpia": {
         "title": "DSFA-Vorlage",
-        "description": "Eine Datenschutz-Folgenabschätzung, in der der Teil von prepza bereits ausgefüllt ist und die Sie ergänzen."
+        "description": "Eine Datenschutz-Folgenabschätzung, in der der Teil von prepza bereits ausgefüllt ist und die du ergänzt."
       },
       "dpa": {
         "title": "Auftragsverarbeitungsvertrag",
-        "description": "Wie prepza die Daten Ihrer Kandidaten in Ihrem Auftrag verarbeitet. Er ist Teil der Nutzungsbedingungen."
+        "description": "Wie prepza die Daten deiner Kandidaten in deinem Auftrag verarbeitet. Er ist Teil der Nutzungsbedingungen."
       }
     }
   },
@@ -633,7 +633,7 @@
       },
       "review": {
         "title": "Prüfe die Themen",
-        "text": "Behalte, benenne um oder ändere sie.\nSobald du zustimmst, werden die Fragen geschrieben."
+        "text": "Behalte, benenne um oder ändere sie.\nSobald du sie freigibst, werden die Fragen geschrieben."
       },
       "invite": {
         "title": "Lade Kandidaten ein",
@@ -650,15 +650,15 @@
         },
         "anyRole": {
           "title": "Jede Rolle",
-          "text": "Code-Lesefragen für Entwickler, Wissenstests für Vertrieb, Finanzen und mehr."
+          "text": "Fragen zum Codeverständnis für Entwickler, Wissenstests für Vertrieb, Finanzen und mehr."
         },
         "cheating": {
           "title": "Schwerer zu schummeln",
-          "text": "Jeder Kandidat bekommt eigene Zufallsfragen, je einen Timer und Integritätshinweise."
+          "text": "Jeder Kandidat bekommt eigene Zufallsfragen, einen Timer pro Frage und Hinweise auf Auffälligkeiten."
         },
         "price": {
           "title": "Kein Abo",
-          "text": "Zahl pro Kandidat, der den Test macht. Deine ersten Kandidaten sind kostenlos."
+          "text": "Du zahlst pro Kandidat, der den Test macht. Deine ersten Kandidaten sind kostenlos."
         },
         "results": {
           "title": "Ergebnisse zum Entscheiden",
@@ -747,7 +747,7 @@
     },
     "companies": {
       "title": "Sieh, wer den Job beherrscht",
-      "text": "Kandidaten machen das Interview über deine E-Mail-Einladung oder deinen teilbaren Link. Ihre Ergebnisse und Warnzeichen kommen herein, während sie antworten.",
+      "text": "Kandidaten machen das Interview über deine E-Mail-Einladung oder deinen Link zum Teilen. Ihre Ergebnisse und Warnzeichen kommen herein, während sie antworten.",
       "points": {
         "own": "Eigene Fragen für jeden Kandidaten",
         "timed": "Ein Countdown bei jeder Frage",
@@ -762,7 +762,7 @@
     },
     "reports": {
       "title": "Ergebnisse mit einem Klick teilen",
-      "text": "Ein klarer PDF-Bericht für einen Kandidaten oder die ganze Liste. Lade ihn herunter oder sende ihn direkt aus prepza an eine Führungskraft im Recruiting.",
+      "text": "Ein klarer PDF-Bericht für einen Kandidaten oder die ganze Liste. Lade ihn herunter oder sende ihn direkt aus prepza an einen Hiring Manager.",
       "points": {
         "pdf": "Ein Kandidat oder alle",
         "share": "PDF per E-Mail oder über Messenger teilen"
@@ -776,11 +776,11 @@
         "email": "Dein Logo in der Einladungs-E-Mail",
         "interview": "Im Interview, das Kandidaten machen",
         "report": "In jedem PDF-Bericht",
-        "verified": "Verifiziert über die Arbeits-E-Mail deines Teams"
+        "verified": "Verifiziert über die geschäftliche E-Mail deines Teams"
       }
     },
     "pricing": {
-      "title": "Zahl pro Kandidat",
+      "title": "Bezahlung pro Kandidat",
       "text": "Interviews und {free, plural, one {dein erster Kandidat} other {deine ersten # Kandidaten}} sind kostenlos. Danach zahlst du nur für Kandidaten, die antworten, ohne Abo.",
       "see": "Preise ansehen",
       "perCandidate": "pro Kandidat",
@@ -812,7 +812,7 @@
         "payments": "Zahlung über Paddle, keine Kartendaten gespeichert",
         "documents": "Auftragsverarbeitungsvertrag und Anleitung inklusive"
       },
-      "terms": "AGB",
+      "terms": "Nutzungsbedingungen",
       "privacy": "Datenschutzerklärung"
     }
   },
@@ -843,9 +843,9 @@
     "intro": "prepza hilft Unternehmen, Menschen zu finden, die den Job wirklich beherrschen: ein faires Interview mit Zeitlimit, erstellt aus deiner Stellenbeschreibung, zu einem Preis, den sich jedes Team leisten kann. Und wer sich auf ein Interview vorbereitet, kann kostenlos üben.",
     "company": {
       "title": "Warum es uns gibt",
-      "problem": "Einstellungen stützen sich oft auf einen Lebenslauf und ein gutes Gespräch, und beides kann täuschen. Die Bewertungstools, die helfen, sind für große Unternehmen bepreist, mit Jahresverträgen und Lizenzgebühren pro Platz, also verzichten die meisten Teams darauf.",
+      "problem": "Einstellungen stützen sich oft auf einen Lebenslauf und ein gutes Gespräch, und beides kann täuschen. Die Bewertungstools, die helfen, sind für große Unternehmen bepreist, mit Jahresverträgen und Lizenzgebühren pro Nutzer, also verzichten die meisten Teams darauf.",
       "approach": "prepza macht aus einer Stellenbeschreibung in wenigen Minuten ein Interview mit Zeitlimit, für jede Rolle. Jeder Kandidat bekommt eigene Fragen, du siehst, wer den Job beherrscht und warum, und du zahlst nur für Kandidaten, die es wirklich machen.",
-      "practice": "Außerdem wollen wir, dass die Vorbereitung auf ein Interview für alle kostenlos ist. Jeder kann unsere Übungsinterviews für eine Rolle machen, seine Note und jede richtige Antwort sehen und erneut üben, ohne Kosten."
+      "practice": "Außerdem wollen wir, dass die Vorbereitung auf ein Interview für alle kostenlos ist. Jeder kann unsere Übungsinterviews für eine Rolle machen, sein Ergebnis und jede richtige Antwort sehen und erneut üben, ohne Kosten."
     },
     "founder": {
       "quote": "Gut einzustellen sollte kein Privileg großer Unternehmen mit großen Budgets sein. Ich habe prepza gebaut, damit jedes Team aus einer Stellenbeschreibung in wenigen Minuten ein faires Interview machen, sehen kann, wer den Job wirklich beherrscht, und nur für die Kandidaten zahlt, die es machen. Ich hoffe, es hilft dir, schneller die richtigen Leute zu finden.",
@@ -865,7 +865,7 @@
       "candidate_finished": "{count, plural, one {{email} hat „{title}“ abgeschlossen{grade, select, none {.} other {: {grade} %.}}} other {# Kandidaten haben „{title}“ abgeschlossen.}}",
       "invite_undelivered": "{count, plural, one {Die Einladung an {email} für „{title}“ wurde nicht zugestellt.} other {# Einladungen für „{title}“ wurden nicht zugestellt.}}",
       "interview_ready": "Das Interview „{title}“ ist fertig.",
-      "interview_cancelled": "{title, select, none {Ein Interview} other {Das Interview „{title}“}} wurde abgebrochen: Die Themenprüfung hat zu lange gewartet.",
+      "interview_cancelled": "{title, select, none {Ein Interview} other {Das Interview „{title}“}} wurde abgebrochen: Die Themen wurden zu lange nicht freigegeben.",
       "verification_approved": "„{name}“ ist für {domain} verifiziert.",
       "verification_declined": "{reason, select, none {Die Verifizierung von „{name}“ wurde abgelehnt.} other {Die Verifizierung von „{name}“ wurde abgelehnt: {reason}}}"
     }
@@ -893,20 +893,20 @@
   },
   "practice": {
     "title": "Vorstellungsgespräch kostenlos üben",
-    "intro": "Übe für eine Rolle mit einem Interview mit Zeitlimit und sieh dann deine Note und jede richtige Antwort. Kostenlos.",
-    "about": "Übungsinterview mit Zeitlimit. Wenn du fertig bist, siehst du deine Note und jede richtige Antwort. Privat und kostenlos.",
+    "intro": "Übe für eine Rolle mit einem Interview mit Zeitlimit und sieh dann dein Ergebnis und jede richtige Antwort. Kostenlos.",
+    "about": "Übungsinterview mit Zeitlimit. Wenn du fertig bist, siehst du dein Ergebnis und jede richtige Antwort. Privat und kostenlos.",
     "pageTitle": "{title}: Vorstellungsgespräch kostenlos üben",
-    "pageDescription": "Vorstellungsgespräch für {title} kostenlos üben ({level}): {count, plural, one {# Thema} other {# Themen}}, mit Zeitlimit, danach deine Note und jede richtige Antwort. Übung, kein echtes Vorstellungsgespräch.",
+    "pageDescription": "Vorstellungsgespräch für {title} kostenlos üben ({level}): {count, plural, one {# Thema} other {# Themen}}, mit Zeitlimit, danach dein Ergebnis und jede richtige Antwort. Übung, kein echtes Vorstellungsgespräch.",
     "start": "Übung starten",
     "again": "Erneut üben",
     "continue": "Fortsetzen",
-    "history": "Deine Runden",
+    "history": "Deine Übungsrunden",
     "results": "Übungsergebnisse",
     "grade": "der Fragen richtig",
     "notFinished": "nicht beendet",
-    "noRounds": "Noch keine Runden.",
+    "noRounds": "Noch keine Übungsrunden.",
     "startFailed": "Die Übung konnte nicht gestartet werden. Bitte versuche es erneut.",
-    "gradeLabel": "Note",
+    "gradeLabel": "Ergebnis",
     "questions": "{count, plural, one {# Frage} other {# Fragen}}",
     "progressLabel": "Fortschritt",
     "answeredLabel": "Fragen beantwortet",
@@ -918,7 +918,7 @@
     "verify": "Verifizieren",
     "verified": "Verifiziert: {domain}",
     "title": "Unternehmen verifizieren",
-    "text": "Gib die Website des Unternehmens ein. Sobald sich ein Inhaber oder Admin mit einer geschäftlichen E-Mail dieser Domain anmeldet, z. B. you@acme.com (sofort, wenn du das bist), prüfen wir das Unternehmen und vergeben das Abzeichen.",
+    "text": "Gib die Website des Unternehmens ein. Sobald sich ein Inhaber oder Admin mit einer geschäftlichen E-Mail dieser Domain anmeldet, z. B. you@acme.com (sofort, wenn du das bist), prüfen wir das Unternehmen und vergeben das Verifiziert-Häkchen.",
     "website": "Website des Unternehmens",
     "save": "Speichern",
     "done": "Verifiziert: {domain}",
@@ -960,7 +960,7 @@
     "heading": "Kompetenztest für {role} zur Personalauswahl",
     "pageTitle": "{role} Test für Bewerber",
     "pageDescription": "Einstellungstest für {role} mit Zeitlimit, mit {count, plural, one {# Thema} other {# Themen}}. Jeder Bewerber bekommt eigene, zufällige Fragen. $1–3 pro Kandidat.",
-    "lead": "Ein Multiple-Choice-Test mit Zeitlimit zu den Kompetenzen dieser Rolle. Jeder Kandidat bekommt eigene, zufällige Fragen mit einem Zeitlimit für jede, und du bekommst einen Bewertungsbogen mit jeder Antwort und ihrer Dauer. $1–3 pro Kandidat, ohne Abo.",
+    "lead": "Ein Multiple-Choice-Test mit Zeitlimit zu den Kompetenzen dieser Rolle. Jeder Kandidat bekommt eigene, zufällige Fragen mit einem Zeitlimit für jede, und du bekommst eine Auswertung mit jeder Antwort und ihrer Dauer. $1–3 pro Kandidat, ohne Abo.",
     "create": "Test für deine Kandidaten erstellen",
     "practise": "Kostenlos üben",
     "topics": "Was getestet wird",

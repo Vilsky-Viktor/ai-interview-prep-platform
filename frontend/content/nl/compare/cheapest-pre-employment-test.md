@@ -62,7 +62,7 @@ Zie [Alternatieven voor TestGorilla](/compare/testgorilla-alternatives) en [Alte
 
 ## Wat je bij prepza per kandidaat krijgt
 
-- Een sollicitatiegesprek met tijdslimiet en meerkeuzevragen, geschreven op basis van je functieomschrijving, met onderwerpen die je eerst bekijkt.
+- Een interview met tijdslimiet en meerkeuzevragen, geschreven op basis van je functieomschrijving, met onderwerpen die je eerst bekijkt.
 - Een eigen willekeurige set vragen per kandidaat, met een aftelklok bij elke vraag. Voor technische functies kunnen vragen korte codevoorbeelden bevatten.
 - Scorekaarten met antwoorden en tijden, en signalen bij te snelle antwoorden, het verlaten van de pagina en kopieerpogingen.
 - Pdf-rapporten voor één kandidaat of de hele lijst.

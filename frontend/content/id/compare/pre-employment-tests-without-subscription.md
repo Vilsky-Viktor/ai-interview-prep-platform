@@ -1,13 +1,13 @@
 ---
-title: "Tes pra-kerja tanpa langganan"
-seoTitle: "Tes Pra-Kerja Tanpa Langganan: Bayar per Kandidat"
+title: "Tes seleksi karyawan tanpa langganan"
+seoTitle: "Tes Seleksi Karyawan Tanpa Langganan: Bayar per Kandidat"
 description: "Tes kandidat tanpa paket bulanan atau kontrak tahunan. Perbandingan tes bayar per kandidat dengan langganan, dan apa yang perlu dicek sebelum membeli."
 updated: "2026-10-07"
 ---
 
-# Tes pra-kerja tanpa langganan
+# Tes seleksi karyawan tanpa langganan
 
-Banyak platform tes pra-kerja menjual paket bulanan, sering kali ditagih setahun di muka. Itu masuk akal kalau kamu merekrut setiap bulan. Bagi perusahaan kecil atau menengah yang hanya merekrut beberapa orang setahun, itu bisa berarti membayar bulan-bulan yang tidak kamu pakai.
+Banyak platform tes seleksi karyawan menjual paket bulanan, sering kali ditagih setahun di muka. Itu masuk akal kalau kamu merekrut setiap bulan. Bagi perusahaan kecil atau menengah yang hanya merekrut beberapa orang setahun, itu bisa berarti membayar bulan-bulan yang tidak kamu pakai.
 
 Halaman ini menjelaskan alternatif selain langganan, bagaimana perbandingannya dengan paket langganan, dan apa yang perlu dicek sebelum membeli. Halaman ini menjelaskan model harga, bukan harga vendor lain yang sering berubah; ikuti tautannya untuk harga terbaru.
 
@@ -56,9 +56,9 @@ Harga dalam dolar AS. Pembayaran diproses lewat Paddle, yang menangani PPN (VAT)
 
 ## Apa yang kamu dapat untuk setiap kandidat
 
-- Wawancara keterampilan pilihan ganda berbatas waktu yang ditulis dari deskripsi pekerjaanmu, atau dari templat siap pakai untuk peran tersebut.
+- Wawancara keterampilan pilihan ganda berbatas waktu yang ditulis dari deskripsi pekerjaanmu, atau dari templat siap pakai untuk posisi tersebut.
 - Topik yang kamu tinjau dan ubah sebelum ada soal yang ditulis.
-- Set soal acak untuk setiap kandidat, dengan hitung mundur di setiap soal. Untuk peran teknis, soal bisa menampilkan contoh kode singkat dan menanyakan apa fungsinya atau hasilnya.
+- Set soal acak untuk setiap kandidat, dengan hitung mundur di setiap soal. Untuk posisi teknis, soal bisa menampilkan contoh kode singkat dan menanyakan apa fungsinya atau hasilnya.
 - Scorecard berisi setiap jawaban dan waktunya, plus tanda untuk jawaban yang terlalu cepat, meninggalkan halaman, dan percobaan menyalin.
 - Laporan PDF yang bisa kamu unduh atau kirim lewat email dari prepza.
 - Undangan lewat email, daftar yang ditempel, file yang diunggah, atau satu tautan di lowongan kerja, dengan pengingat otomatis.
@@ -69,14 +69,14 @@ Bayar per kandidat tidak selalu lebih murah. Langganan mungkin lebih cocok untuk
 
 - **Kamu menguji ratusan kandidat per tahun.** Paket tetap, terutama yang punya undangan tanpa batas, bisa lebih murah per kandidat pada volume tinggi. Bagi biaya tahunan paket dengan harga per kandidatmu untuk menemukan titik impasnya; [Cara membandingkan biaya tes](/compare/cheapest-pre-employment-test) menjelaskan langkah-langkahnya.
 - **Kamu butuh tes yang tidak ditawarkan prepza.** Kemampuan kognitif, kepribadian, coding langsung (menulis dan menjalankan kode), pertanyaan video, dan integrasi ATS tersedia di paket platform lain. Kamu bisa memakai salah satunya berdampingan dengan prepza.
-- **Paket gratis sudah cukup.** Beberapa vendor menawarkan paket gratis dengan beberapa tes; kalau tes itu sesuai dengan peranmu, mungkin kamu tidak perlu membayar sama sekali.
+- **Paket gratis sudah cukup.** Beberapa vendor menawarkan paket gratis dengan beberapa tes; kalau tes itu sesuai dengan posisimu, mungkin kamu tidak perlu membayar sama sekali.
 
 ## Pertanyaan untuk vendor bayar sesuai pemakaian mana pun
 
 1. Apakah saya membayar kandidat yang tidak pernah mulai?
 2. Apakah kredit bisa kedaluwarsa?
 3. Apakah ada biaya per kursi atau biaya setup?
-4. Bisakah saya membuat tes untuk peran saya secara spesifik, atau hanya memakai tes siap pakai?
+4. Bisakah saya membuat tes untuk posisi saya secara spesifik, atau hanya memakai tes siap pakai?
 5. Apa yang terjadi pada data kandidat, dan di mana data itu di-hosting?
 6. Apakah ada pembelian minimum?
 
@@ -98,4 +98,4 @@ Masukkan harga sebenarnya dari halaman harga tiap vendor, dan [harga prepza](/pr
 - [Cara membandingkan biaya tes](/compare/cheapest-pre-employment-test)
 - [Alternatif TestGorilla](/compare/testgorilla-alternatives)
 - [prepza dan TestGorilla](/compare/testgorilla)
-- [Panduan tes pra-kerja](/pre-employment-testing)
+- [Panduan tes seleksi karyawan](/pre-employment-testing)

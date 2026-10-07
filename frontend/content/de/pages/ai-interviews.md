@@ -65,7 +65,7 @@ Sie können Ihr eigenes Interview auch vorab als Kandidat ausprobieren, bevor Si
 
 **Weniger irrelevante Signale.** Eine Multiple-Choice-Antwort hat keinen Akzent, kein Gesicht, keinen Hintergrund und keinen Schreibstil, die Punktzahl hängt also nicht davon ab, wie jemand aussieht oder klingt. Bias ist damit nicht ausgeschlossen: Wissenstests können Punktunterschiede zwischen Gruppen zeigen, und ein Test in der Zweitsprache kann Kandidaten benachteiligen. Beobachten Sie die Ergebnisse über Gruppen hinweg.
 
-**Antworten weiterzugeben ist schwieriger.** Weil jeder Kandidat einen eigenen zufälligen Fragensatz und bei jeder Frage einen Timer hat, kostet es mehr Aufwand, Antworten zu teilen oder nachzuschlagen. Die Integritätshinweise helfen Ihnen zu entscheiden, wo Sie genauer hinsehen sollten; sie sind kein Beweis für Schummeln.
+**Antworten weiterzugeben ist schwieriger.** Weil jeder Kandidat einen eigenen zufälligen Fragensatz und bei jeder Frage einen Timer hat, kostet es mehr Aufwand, Antworten zu teilen oder nachzuschlagen. Die Hinweise auf Auffälligkeiten helfen Ihnen zu entscheiden, wo Sie genauer hinsehen sollten; sie sind kein Beweis für Schummeln.
 
 Nichts davon macht einen Test automatisch fair. Die Fragen müssen weiterhin zur Stelle passen, die Zeitlimits zur Rolle, und Menschen müssen die Ergebnisse sorgfältig lesen. Eine Punktzahl ist ein Beleg, kein Urteil. Wenn Sie zeitlich begrenzte Tests gegen andere Methoden der Vorauswahl abwägen, lesen Sie [Fachtests vs. Lebenslauf-Screening](/guides/skills-tests-vs-cv-screening).
 

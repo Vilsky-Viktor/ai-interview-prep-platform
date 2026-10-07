@@ -27,9 +27,9 @@ Esta página explica en qué se diferencian, dónde encaja mejor cada uno y cóm
 | Entrevistas con IA | Sin IA conversacional; la IA propone temas y redacta y revisa las preguntas | Entrevistas con IA en su plan superior |
 | Código en la prueba | Preguntas de lectura de código (qué hace o qué imprime el código); no se escribe ni se ejecuta código | Pruebas de programación en el catálogo; retos de programación personalizados en su plan superior |
 | Preguntas por candidato | Un conjunto aleatorio propio para cada candidato, en su propio orden | No comparado aquí |
-| Funciones de integridad | Temporizador en cada pregunta (controlado por el servidor), avisos de respuestas demasiado rápidas, salidas de la página e intentos de copiar | Capturas de webcam, copiar/pegar desactivado y modo de pantalla completa en su plan superior |
+| Funciones de integridad | Temporizador en cada pregunta (controlado por el servidor), alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar | Capturas de webcam, copiar/pegar desactivado y modo de pantalla completa en su plan superior |
 | Integraciones con ATS | No | Integraciones con ATS/API en su plan superior |
-| Informes | Fichas de resultados con respuestas y tiempos; PDF de un candidato o de todos | No comparado aquí |
+| Informes | Fichas de evaluación con respuestas y tiempos; PDF de un candidato o de todos | No comparado aquí |
 | Idiomas | 23 idiomas para la interfaz, las entrevistas y los correos | No comparado aquí; el catálogo incluye pruebas de nivel de idiomas |
 | Modelo de precios | Por candidato que responde, con créditos prepago; sin suscripción ([precios](/pricing)) | Un plan gratuito y planes de pago con facturación anual ([página de precios](https://www.testgorilla.com/pricing/)) |
 | Alojamiento | UE (algunos subencargados en EE. UU.; consulta la [política de privacidad](/privacy)) | No comparado aquí |

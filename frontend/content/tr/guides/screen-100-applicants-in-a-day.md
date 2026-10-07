@@ -26,7 +26,7 @@ Sıralamayı test yapar. Sizin dikkatiniz, muhakeme gerektiren kısma gider.
 
 ## 1. adım: İşin neye ihtiyaç duyduğuna karar verin (30 dakika)
 
-Kimseyi test etmeden önce, bu roldeki bir kişinin ilk gün bilmesi gerekenleri yazın. Somut olun.
+Kimseyi test etmeden önce, bu pozisyondaki bir kişinin ilk gün bilmesi gerekenleri yazın. Somut olun.
 
 - **Bilgi:** “Banka ekstrelerinin mutabakatını yapar, KDV'nin temellerini bilir, büyük defter kullanır” test edilebilir. “Güçlü finans geçmişi” edilemez.
 - **Kesin gereklilikler:** bir lisans, çalışma izni, dil seviyesi, müsaitlik. Bunlar evet ya da hayır kontrolleridir, test malzemesi değildir.
@@ -46,7 +46,7 @@ prepza ile:
 4. **Bir geçme notu belirleyin.** Varsayılan %70'tir. Bunu otomatik bir kesme noktası olarak değil, sonuçları okumak için bir kılavuz olarak görün.
 5. **Aday gözüyle önizleyin.** Testi kendiniz çözün. Ücretsizdir ve aday olarak sayılmaz. Bir soru tuhaf görünüyorsa yeniden oluşturun.
 
-Yaygın bir rol için işe alım yapıyorsanız, bunun yerine hazır bir şablondan başlayıp onu uyarlayabilirsiniz.
+Yaygın bir pozisyon için işe alım yapıyorsanız, bunun yerine hazır bir şablondan başlayıp onu uyarlayabilirsiniz.
 
 ### Kısa bir bilgi testi neden ilk filtre olarak işe yarar
 
@@ -59,7 +59,7 @@ Yaygın bir rol için işe alım yapıyorsanız, bunun yerine hazır bir şablon
 
 ## 3. adım: Kesin gereklilikleri kontrol edin, sonra davet edin (15 dakika)
 
-Yalnızca kesin gereklilikler üzerinde hızlı bir evet-hayır geçişi yapın: çalışma hakkı, gerekli lisans, rol gerektiriyorsa konum. Burada CV'leri sıralamayın. Favori seçmiyorsunuz, işi alamayacak başvuru sahiplerini çıkarıyorsunuz.
+Yalnızca kesin gereklilikler üzerinde hızlı bir evet-hayır geçişi yapın: çalışma hakkı, gerekli lisans, pozisyon gerektiriyorsa konum. Burada CV'leri sıralamayın. Favori seçmiyorsunuz, işi alamayacak başvuru sahiplerini çıkarıyorsunuz.
 
 Ardından kalan herkesi davet edin:
 
@@ -79,7 +79,7 @@ Herkes ilk gün bitirmeyecek. Sorun değil: bitirenleri inceleyin ve geride kala
 Dikkatli okuma şimdi başlıyor, ama daha küçük ve sıralı bir grup üzerinde.
 
 1. **Nota göre sıralayın,** en iyisi en üstte. Varsayılan budur.
-2. **En üstteki gruptaki her puan kartını açın.** Yalnızca sayıya değil, yanıtlara bakın: hangi konular güçlü, hangileri zayıf, her yanıt ne kadar sürdü.
+2. **En üstteki gruptaki her değerlendirme kartını açın.** Yalnızca sayıya değil, yanıtlara bakın: hangi konular güçlü, hangileri zayıf, her yanıt ne kadar sürdü.
 3. **Güvenilirlik işaretlerini kontrol edin.** prepza, soruyu okumaya yetmeyecek kadar hızlı verilen yanıtları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler. İşaret, daha yakından bakmak için bir nedendir, kopya çekildiğinin kanıtı değildir. Sayfadan bir kez ayrılan birinin ekranına bir bildirim düşmüş olabilir.
 4. **Geçme notunun hemen altına bakın.** Farklı rastgele soru setlerinden gelen puanlar tam olarak karşılaştırılabilir değildir; birkaç puanlık fark çekilen sorulardan kaynaklanabilir. En önemli konularda güçlü yanıtlar vermiş %65'lik biri mülakata değer olabilir.
 5. **Şimdi değerlendirdiğiniz kişilerin CV'lerini okuyun.** 100 CV'ye göz gezdirmek yerine 15 CV'yi dikkatle okuyorsunuz.

@@ -39,7 +39,7 @@ TEXTS = {
             "{sender} de {company} a partagé le rapport de {candidate} pour l'entretien « {title} ».",
             (
                 "Il est joint sous forme de PDF d'une page : la note globale, le score de chaque "
-                "sujet et ce que le navigateur du candidat a montré. Répondez à cet e-mail pour "
+                "thème et ce que le navigateur du candidat a montré. Répondez à cet e-mail pour "
                 "répondre à {sender}."
             ),
         ],

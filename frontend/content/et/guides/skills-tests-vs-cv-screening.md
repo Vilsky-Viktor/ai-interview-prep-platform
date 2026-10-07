@@ -15,7 +15,7 @@ Töö- ja organisatsioonipsühholoogid on seda küsimust uurinud aastakümneid, 
 
 **Schmidt ja Hunter (1998)** võtsid ühes laialt tsiteeritud artiklis kokku 85 aastat valikumeetodite uuringuid. Aastaid oli see standardviide küsimusele „millised värbamismeetodid toimivad“.
 
-**Sackett, Zhang, Berry ja Lievens (2022)** vaatasid ajakirjas *Journal of Applied Psychology* ([doi:10.1037/apl0000994](https://doi.org/10.1037/apl0000994)) need hinnangud uuesti üle. Nad väitsid, et varasemad metaanalüüsid korrigeerisid sageli üle statistilist efekti, mida nimetatakse vahemiku piiratuseks (range restriction), mistõttu paljud meetodid paistsid ennustusvõimelisemad, kui nad tegelikult on. Nende sõnul „jäävad enamik samu valikuprotseduure, mis varasemates kokkuvõtetes olid kõrgel kohal, kõrgele, kuid keskmised valiidsuse hinnangud vähenevad 0,10–0,20 punkti võrra“.
+**Sackett, Zhang, Berry ja Lievens (2022)** vaatasid ajakirjas *Journal of Applied Psychology* ([doi:10.1037/apl0000994](https://doi.org/10.1037/apl0000994)) need hinnangud uuesti üle. Nad väitsid, et varasemad metaanalüüsid korrigeerisid sageli üle statistilist efekti, mida nimetatakse vahemiku piiratuseks (range restriction), mistõttu paljud meetodid paistsid ennustusvõimelisemad, kui nad tegelikult on. Nende sõnul „jääb enamik samu valikuprotseduure, mis varasemates kokkuvõtetes olid kõrgel kohal, kõrgele, kuid keskmised valiidsuse hinnangud vähenevad 0,10–0,20 punkti võrra“.
 
 ## Mida arvud tähendavad
 
@@ -69,7 +69,7 @@ Autorid märgivad ka teist tingimust: proovitööd ja teadmiste testid sobivad v
 
 ## Uuringutele tuginev eelvalikuprotsess
 
-1. **Kontrolli CV põhjal kohustuslikke nõudeid.** Ainult jah-ei: litsents, tööõigus, nõutav keel.
+1. **Kontrolli CV põhjal kohustuslikke nõudeid.** Ainult jah-ei: litsents, tööluba, nõutav keel.
 2. **Anna kõigile ülejäänutele lühike tööspetsiifiline teadmiste test.** Samad teemad, samad ajapiirangud, kõigile samad reeglid.
 3. **Vaata parimad tulemused hoolikalt üle,** sh vastused, mitte ainult tulemused.
 4. **Tee lõppvalikuga struktureeritud intervjuud:** igale kandidaadile samad küsimused ja lihtne hindamisjuhend.

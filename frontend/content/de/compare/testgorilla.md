@@ -27,7 +27,7 @@ Diese Seite erklärt, wie sie sich unterscheiden, wofür sich welches Tool besse
 | KI-Interviews | Keine Gesprächs-KI; die KI schlägt Themen vor und schreibt und prüft Fragen | KI-Interviews im höheren Tarif |
 | Code im Test | Fragen zum Lesen von Code (was Code tut oder ausgibt); kein Schreiben oder Ausführen von Code | Programmiertests in der Bibliothek; eigene Coding-Challenges im höheren Tarif |
 | Fragen pro Kandidat | Eigener zufälliger Fragensatz für jeden Kandidaten, in eigener Reihenfolge | Hier nicht verglichen |
-| Integritätsfunktionen | Timer bei jeder Frage (serverseitig erzwungen), Hinweise auf zu schnelle Antworten, das Verlassen der Seite und Kopierversuche | Webcam-Schnappschüsse, deaktiviertes Kopieren/Einfügen und Vollbildmodus im höheren Tarif |
+| Schutz vor Schummeln | Timer bei jeder Frage (serverseitig erzwungen), Hinweise auf zu schnelle Antworten, das Verlassen der Seite und Kopierversuche | Webcam-Schnappschüsse, deaktiviertes Kopieren/Einfügen und Vollbildmodus im höheren Tarif |
 | ATS-Integrationen | Nein | ATS-/API-Integrationen im höheren Tarif |
 | Berichte | Auswertungen mit Antworten und Zeiten; PDF für einen oder alle Kandidaten | Hier nicht verglichen |
 | Sprachen | 23 Sprachen für Oberfläche, Interviews und E-Mails | Hier nicht verglichen; die Bibliothek enthält Sprachtests |

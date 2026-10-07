@@ -40,7 +40,7 @@ prepza, iş tanımınızdan bir beceri mülakatı yazmak için yapay zekâ kulla
 3. **Soruları yapay zekâ yazar.** Her konu için, her birinde bir doğru ve üç akla yatkın yanlış seçenek bulunan çoktan seçmeli sorulardan oluşan bir havuz hazırlanır. Teknik konularda birçok soru kısa bir kod örneği gösterir ve bunun ne çıktı verdiğini, ne yaptığını, neden hata verdiğini ya da hangi değişikliğin sorunu düzelttiğini sorar. Her soruyu ve seçeneklerini açabilir, beğenmediklerinizi yeniden oluşturabilirsiniz.
 4. **Adaylar süreli soruları yanıtlar.** Her aday, her konunun havuzundan kendi sırasıyla, kendine ait rastgele bir set alır; her soruda geri sayım vardır.
 5. **Yanıtlar cevap anahtarına göre değerlendirilir.** Anahtarları yapay zekâ yazar ve kontrol eder; değerlendirmenin kendisi sabit kurallara göre yapılır ve hiçbir yapay zekâ adayın yanıtını okumaz veya yargılamaz. Bir anahtar sonradan düzeltilirse geçmiş yanıtlar yeniden puanlanır. Hız, sayfadan ayrılmalar ve kopyalama girişimleri size sinyal olarak gösterilir; puanı değiştirmez.
-6. **Kararı insanlar verir.** Sıralı bir liste ve her aday için her yanıtı ve süresini gösteren bir puan kartı görürsünüz. Şirketinizden bir kişi sonuçları inceler ve işe alım kararını verir.
+6. **Kararı insanlar verir.** Sıralı bir liste ve her aday için her yanıtı ve süresini gösteren bir değerlendirme kartı görürsünüz. Şirketinizden bir kişi sonuçları inceler ve işe alım kararını verir.
 
 prepza'nın yapmadıkları:
 
@@ -67,7 +67,7 @@ Kimseyi davet etmeden önce kendi mülakatınızı aday gözüyle de önizleyebi
 
 **Yanıtları paylaşmak daha zordur.** Her adayın kendine ait rastgele soru seti ve her soruda bir zamanlayıcı olduğunda, yanıtları paylaşmak veya bir şeyleri araştırmak daha fazla çaba gerektirir. Güvenilirlik sinyalleri nereye daha yakından bakmanız gerektiğine karar vermenize yardımcı olur; kopya çekildiğinin kanıtı değildir.
 
-Bunların hiçbiri bir testi kendiliğinden adil yapmaz. Soruların yine işe uyması, süre sınırlarının role uygun olması ve insanların sonuçları özenle okuması gerekir. Puan bir kanıttır, hüküm değildir. Süreli testleri diğer eleme yöntemleriyle karşılaştırıyorsanız [Beceri testleri ve CV taraması](/guides/skills-tests-vs-cv-screening) yazısını okuyun.
+Bunların hiçbiri bir testi kendiliğinden adil yapmaz. Soruların yine işe uyması, süre sınırlarının pozisyona uygun olması ve insanların sonuçları özenle okuması gerekir. Puan bir kanıttır, hüküm değildir. Süreli testleri diğer eleme yöntemleriyle karşılaştırıyorsanız [Beceri testleri ve CV taraması](/guides/skills-tests-vs-cv-screening) yazısını okuyun.
 
 ### Çoktan seçmeli testin yapamadıkları
 

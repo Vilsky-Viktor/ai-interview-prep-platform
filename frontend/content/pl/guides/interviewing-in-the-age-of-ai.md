@@ -73,7 +73,7 @@ prepza dobrze sprawdza się w kroku 2. Zamienia Twój opis stanowiska w rozmowę
 - **Pojęcia i teoria z opisu stanowiska:** bazy danych, API, architektura, zachowanie frameworka, praktyki bezpieczeństwa.
 - **Pytania o czytanie kodu:** krótki fragment kodu i pytania o to, co wypisze lub zwróci, co robi, dlaczego nie działa albo która zmiana go naprawi. To ta sama umiejętność przeglądania kodu, od której zależy praca z AI.
 - **Limit czasu na każde pytanie:** każde pytanie ma własne odliczanie, pilnowane przez serwer, a każdy kandydat dostaje własny, losowy zestaw pytań. To utrudnia wyszukiwanie odpowiedzi, w tym pytanie asystenta AI. Nie uniemożliwia tego.
-- **Sygnały uczciwości:** karty wyników oznaczają odpowiedzi zbyt szybkie, by kandydat zdążył przeczytać pytanie, momenty opuszczenia strony i próby kopiowania. Oznaczenie to powód, by przyjrzeć się bliżej, a nie dowód oszustwa.
+- **Sygnały dotyczące rzetelności:** karty wyników oznaczają odpowiedzi zbyt szybkie, by kandydat zdążył przeczytać pytanie, momenty opuszczenia strony i próby kopiowania. Oznaczenie to powód, by przyjrzeć się bliżej, a nie dowód oszustwa.
 
 Czego prepza nie robi: kandydaci nie piszą, nie uruchamiają ani nie debugują kodu w prepza, a prepza nie obserwuje, jak korzystają z asystenta AI. To należy do etapu praktycznego, prowadzonego we własnym zakresie lub na platformie dla programistów, który uzupełnia test wiedzy. Gotowe testy na start znajdziesz w [testach umiejętności według roli](/tests), a o tym, jak prepza korzysta z AI i co zostawia ludziom, przeczytasz na stronie [Rozmowy rekrutacyjne z AI](/ai-interviews).
 

@@ -7,29 +7,29 @@ updated: "2026-10-07"
 
 # prepza ve TestGorilla: hangisi nerede uygun, ikisini birlikte kullanmak
 
-prepza ile TestGorilla'yı karşılaştırmak doğal, ancak ikisi aslında rakip değil. TestGorilla; bilişsel yetenek, kişilik, dil ve programlama testleri dahil geniş bir hazır test kütüphanesi sunar. prepza ise tek bir iş yapar: iş tanımınızdan süreli, çoktan seçmeli bir bilgi mülakatı hazırlar. Pek çok işe alım süreci ikisinden birden yararlanabilir; örneğin prepza'yı role özel hızlı bir bilgi elemesi, TestGorilla'yı ise kısa listedeki adaylar için bilişsel ya da kişilik testleri olarak kullanmak.
+prepza ile TestGorilla'yı karşılaştırmak doğal, ancak ikisi aslında rakip değil. TestGorilla; bilişsel yetenek, kişilik, dil ve programlama testleri dahil geniş bir hazır test kütüphanesi sunar. prepza ise tek bir iş yapar: iş tanımınızdan süreli, çoktan seçmeli bir bilgi mülakatı hazırlar. Pek çok işe alım süreci ikisinden birden yararlanabilir; örneğin prepza'yı pozisyona özel hızlı bir bilgi elemesi, TestGorilla'yı ise kısa listedeki adaylar için bilişsel ya da kişilik testleri olarak kullanmak.
 
 Bu sayfa ikisinin nasıl farklılaştığını, hangisinin nerede daha uygun olduğunu ve nasıl birleştirileceğini anlatır. TestGorilla bilgileri, Ekim 2026 itibarıyla şirketin kendi sayfalarından alınmıştır ve değişebilir; karar vermeden önce bağlantıları kontrol edin.
 
 ## Kısaca
 
 - **TestGorilla uygundur:** bilişsel yetenek, kişilik, dil ya da uygulamalı kodlama testlerine, video sorularına, ATS entegrasyonlarına veya web kamerası fotoğraflarına ihtiyacınız varsa.
-- **prepza uygundur:** teknik roller için kod okuma soruları da dahil, tam olarak sizin iş tanımınızdan yazılmış bir bilgi testi istiyorsanız ve bir plan yerine aday başına ödemeyi tercih ediyorsanız.
-- **İkisi birlikte uygundur:** her başvuru sahibi için role özel bir bilgi elemesi, bunu geçenler için ise daha kapsamlı testler istiyorsanız.
+- **prepza uygundur:** teknik pozisyonlar için kod okuma soruları da dahil, tam olarak sizin iş tanımınızdan yazılmış bir bilgi testi istiyorsanız ve bir plan yerine aday başına ödemeyi tercih ediyorsanız.
+- **İkisi birlikte uygundur:** her başvuru sahibi için pozisyona özel bir bilgi elemesi, bunu geçenler için ise daha kapsamlı testler istiyorsanız.
 
 ## Yan yana karşılaştırma
 
 | | prepza | TestGorilla |
 | --- | --- | --- |
-| Test nasıl oluşturulur | İş tanımınızdan yazılır; sorular yazılmadan önce konuları siz gözden geçirirsiniz. Role göre hazır şablonlar da mevcuttur | Hazır testlerden oluşan bir kütüphaneden derlenir; ücretli planlarda özel sorular ([fiyat sayfası](https://www.testgorilla.com/pricing/)) |
-| Test türleri | Süreli, çoktan seçmeli beceri ve bilgi mülakatları; teknik konularda kod okuma soruları | Bilişsel yetenek, dil, kişilik ve kültür, programlama, role özel beceriler, durumsal muhakeme, yazılım becerileri, klavye hızı ([test kütüphanesi](https://www.testgorilla.com/test-library/)) |
+| Test nasıl oluşturulur | İş tanımınızdan yazılır; sorular yazılmadan önce konuları siz gözden geçirirsiniz. Pozisyona göre hazır şablonlar da mevcuttur | Hazır testlerden oluşan bir kütüphaneden derlenir; ücretli planlarda özel sorular ([fiyat sayfası](https://www.testgorilla.com/pricing/)) |
+| Test türleri | Süreli, çoktan seçmeli beceri ve bilgi mülakatları; teknik konularda kod okuma soruları | Bilişsel yetenek, dil, kişilik ve kültür, programlama, pozisyona özel beceriler, durumsal muhakeme, yazılım becerileri, klavye hızı ([test kütüphanesi](https://www.testgorilla.com/test-library/)) |
 | Video soruları | Hayır | Evet, ücretli planlarda |
 | Yapay zekâ mülakatları | Sohbet tabanlı yapay zekâ yok; yapay zekâ konu önerir, soruları yazar ve kontrol eder | Üst planında yapay zekâ mülakatları |
 | Testte kod | Kod okuma soruları (kodun ne yaptığı veya ne çıktı verdiği); kod yazma veya çalıştırma yok | Kütüphanede programlama testleri; üst planında özel kodlama görevleri |
 | Aday başına sorular | Her adaya kendi sırasıyla, kendine ait rastgele bir soru seti | Burada karşılaştırılmadı |
 | Güvenilirlik özellikleri | Her soruda süre sınırı (sunucu tarafından uygulanır), çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler | Üst planında web kamerası fotoğrafları, kopyala/yapıştır engeli ve tam ekran modu |
 | ATS entegrasyonları | Hayır | Üst planında ATS/API entegrasyonları |
-| Raporlar | Yanıtlar ve sürelerle puan kartları; tek aday veya tüm adaylar için PDF | Burada karşılaştırılmadı |
+| Raporlar | Yanıtlar ve sürelerle değerlendirme kartları; tek aday veya tüm adaylar için PDF | Burada karşılaştırılmadı |
 | Diller | Arayüz, mülakatlar ve e-postalar için 23 dil | Burada karşılaştırılmadı; kütüphanede dil yeterlilik testleri bulunur |
 | Fiyatlandırma modeli | Yanıt veren aday başına, ön ödemeli kredilerden; abonelik yok ([fiyatlar](/pricing)) | Ücretsiz bir plan ve yıllık faturalandırılan ücretli planlar ([fiyat sayfası](https://www.testgorilla.com/pricing/)) |
 | Barındırma | AB (bazı alt işleyenler ABD'de; bkz. [gizlilik politikası](/privacy)) | Burada karşılaştırılmadı |
@@ -38,11 +38,11 @@ Bu sayfa ikisinin nasıl farklılaştığını, hangisinin nerede daha uygun old
 
 ## Testler nasıl oluşturulur
 
-**TestGorilla** kendi kütüphanesinden başlar. Role uygun testleri seçer (örneğin role özel bir beceri testi, bir bilişsel test ve bir kişilik testi) ve bunları bir değerlendirmede birleştirirsiniz. Kütüphanesi role özel beceriler, programlama becerileri, yazılım becerileri, dil, bilişsel yetenek, durumsal muhakeme, kişilik ve kültür ile klavye hızı gibi kategorilere ayrılmıştır ([test kütüphanesi](https://www.testgorilla.com/test-library/)).
+**TestGorilla** kendi kütüphanesinden başlar. Pozisyona uygun testleri seçer (örneğin pozisyona özel bir beceri testi, bir bilişsel test ve bir kişilik testi) ve bunları bir değerlendirmede birleştirirsiniz. Kütüphanesi pozisyona özel beceriler, programlama becerileri, yazılım becerileri, dil, bilişsel yetenek, durumsal muhakeme, kişilik ve kültür ile klavye hızı gibi kategorilere ayrılmıştır ([test kütüphanesi](https://www.testgorilla.com/test-library/)).
 
 **prepza** iş tanımınızdan başlar. Bir adayın bilmesi gerekenleri çıkarır ve alt konularıyla birlikte konular önerir. Bunları tutabilir, işaretini kaldırabilir, yeniden adlandırabilir veya düzenleyebilir ya da değişiklikleri düz metinle anlatabilirsiniz. Sorular ancak bundan sonra yazılır: her konu için, her birinde bir doğru ve üç akla yatkın yanlış yanıt bulunan çoktan seçmeli sorulardan oluşan bir soru havuzu. Her soruyu görebilir ve istediğinizi yeniden oluşturabilirsiniz. Teknik konularda birçok soru kısa bir kod örneği, sorgu veya komut gösterir ve bunun ne çıktı verdiğini, ne yaptığını, neden hata verdiğini ya da hangi değişikliğin sorunu düzelttiğini sorar.
 
-Pratikteki fark şu: kütüphane testi sabittir ve defalarca kullanılmıştır, ancak sizin rolünüz için yazılmamıştır. prepza mülakatı ise niş kısımları dahil sizin rolünüz için yazılır, ama her seferinde yenidir. Yapay zekânın yazdığı sorular hata içerebilir; bu nedenle prepza adaylar yanıt verdikçe cevap anahtarlarını kontrol eder ve soruları iyileştirir, siz de herhangi bir soruyu işaretleyebilirsiniz.
+Pratikteki fark şu: kütüphane testi sabittir ve defalarca kullanılmıştır, ancak sizin pozisyonunuz için yazılmamıştır. prepza mülakatı ise niş kısımları dahil sizin pozisyonunuz için yazılır, ama her seferinde yenidir. Yapay zekânın yazdığı sorular hata içerebilir; bu nedenle prepza adaylar yanıt verdikçe cevap anahtarlarını kontrol eder ve soruları iyileştirir, siz de herhangi bir soruyu işaretleyebilirsiniz.
 
 ## Fiyatlandırma nasıl işler
 
@@ -71,11 +71,11 @@ Neyi test etmeniz gerektiğinden yola çıkın. TestGorilla şu durumlarda daha 
 - **Video yanıtlar veya yapay zekâ yönetimli mülakatlar istiyorsanız.** prepza'da ikisi de yoktur.
 - **ATS entegrasyonlarına ihtiyacınız varsa.** prepza ATS sistemleriyle entegre olmaz.
 - **Sabit bir planın daha ucuza geldiği büyük ve düzenli hacimlerde işe alım yapıyorsanız.**
-- **Her rol için yazılan testler yerine defalarca kullanılmış hazır testleri tercih ediyorsanız.**
+- **Her pozisyon için yazılan testler yerine defalarca kullanılmış hazır testleri tercih ediyorsanız.**
 
 ## prepza'nın daha uygun olduğu durumlar
 
-- **Rolünüz özelse.** İş tanımınızdan yazılan bir test, ekibinizin gerçekten kullandığı şeyleri kapsar.
+- **Pozisyonunuz özelse.** İş tanımınızdan yazılan bir test, ekibinizin gerçekten kullandığı şeyleri kapsar.
 - **Ara sıra işe alım yapıyorsanız.** Aday başına ödeme, birkaç işe alım için yıllık taahhütten kurtarır.
 - **Herhangi bir soru yazılmadan önce neyin test edildiğini gözden geçirmek istiyorsanız.**
 - **Her adayın kendine ait rastgele bir soru seti almasını istiyorsanız,** böylece yanıtların paylaşılması zorlaşır.

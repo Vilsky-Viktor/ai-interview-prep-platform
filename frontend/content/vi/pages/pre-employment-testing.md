@@ -99,6 +99,6 @@ prepza biến mô tả công việc thành một buổi phỏng vấn kỹ năng
 - **Bảng điểm** hiển thị mọi câu trả lời, đúng hay sai và mất bao lâu, kèm cảnh báo về trả lời quá nhanh, rời khỏi trang và cố sao chép. Cảnh báo không làm thay đổi điểm số.
 - **Câu trả lời được chấm theo đáp án** do AI viết và kiểm tra; không có AI nào đọc hay đánh giá câu trả lời của ứng viên. Báo cáo PDF bao gồm một ứng viên hoặc cả danh sách.
 
-Giá tính theo ứng viên có trả lời, không có gói đăng ký: $1–3 mỗi ứng viên tùy mức nạp tiền, bằng đô la Mỹ, và 3 ứng viên đầu tiên của bạn được miễn phí. Dữ liệu được lưu trữ tại EU (một số bên xử lý phụ ở Mỹ; xem [chính sách quyền riêng tư](/privacy)), có kèm thỏa thuận xử lý dữ liệu và hướng dẫn cho công ty.
+Giá tính theo ứng viên có trả lời, không có gói đăng ký: $1–3 mỗi ứng viên tùy mức nạp, bằng đô la Mỹ, và 3 ứng viên đầu tiên của bạn được miễn phí. Dữ liệu được lưu trữ tại EU (một số bên xử lý phụ ở Mỹ; xem [chính sách quyền riêng tư](/privacy)), có kèm thỏa thuận xử lý dữ liệu và hướng dẫn cho công ty.
 
 prepza không phải bộ công cụ trắc nghiệm tâm lý, nền tảng để viết và chạy code, hay công cụ phỏng vấn video, và prepza hoạt động song song với các công cụ đó. Để xem prepza so với các công cụ tuyển dụng AI khác ra sao, đọc [Phỏng vấn AI](/ai-interviews). Với vị trí kỹ thuật, xem [Cách tuyển kỹ sư phần mềm](/guides/hiring-engineers).

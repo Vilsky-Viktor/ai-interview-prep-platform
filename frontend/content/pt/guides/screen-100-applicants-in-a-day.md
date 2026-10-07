@@ -43,7 +43,7 @@ Com a prepza:
 1. **Cole a descrição da vaga.** A prepza identifica o que um candidato precisa saber e propõe tópicos.
 2. **Revise os tópicos comparando com a sua lista do passo 1.** Desmarque o que não for um requisito real, renomeie tópicos, edite subtópicos ou descreva as mudanças em texto livre ("adicione um tópico sobre o básico de folha de pagamento"). As perguntas só são escritas depois da sua aprovação.
 3. **Defina a duração.** Por padrão, cada tópico tem 10 perguntas, cada uma com contagem regressiva de 60 segundos. Três tópicos significam no máximo 30 minutos por candidato, e normalmente menos. Limite ao que você precisa.
-4. **Defina uma nota de corte.** O padrão é 70%. Use-a como guia para ler os resultados, não como corte automático.
+4. **Defina uma nota de aprovação.** O padrão é 70%. Use-a como guia para ler os resultados, não como corte automático.
 5. **Teste como candidato.** Faça o teste você mesmo. É gratuito e não conta como candidato. Se uma pergunta parecer estranha, gere-a novamente.
 
 Se você contrata para uma função comum, pode começar por um modelo pronto e ajustá-lo.
@@ -79,9 +79,9 @@ Nem todos vão terminar no primeiro dia. Tudo bem: revise quem já terminou e ol
 Agora começa a leitura cuidadosa, mas de um grupo menor e ordenado.
 
 1. **Ordene por nota,** da maior para a menor. Essa é a ordem padrão.
-2. **Abra cada ficha de resultados** do grupo de cima. Olhe as respostas, não só o número: quais tópicos foram fortes, quais foram fracos, quanto tempo levou cada resposta.
+2. **Abra cada ficha de avaliação** do grupo de cima. Olhe as respostas, não só o número: quais tópicos foram fortes, quais foram fracos, quanto tempo levou cada resposta.
 3. **Verifique os alertas de integridade.** A prepza sinaliza respostas rápidas demais para a pergunta ter sido lida, as vezes em que o candidato saiu da página e as tentativas de cópia. Um alerta é um motivo para olhar com mais atenção, não prova de cola. Quem saiu da página uma vez pode ter recebido uma notificação.
-4. **Olhe logo abaixo da nota de corte.** Pontuações de conjuntos aleatórios de perguntas diferentes não são exatamente comparáveis, então alguns pontos podem vir do sorteio. Alguém com 65% e respostas fortes nos tópicos mais importantes pode valer uma entrevista.
+4. **Olhe logo abaixo da nota de aprovação.** Pontuações de conjuntos aleatórios de perguntas diferentes não são exatamente comparáveis, então alguns pontos podem vir do sorteio. Alguém com 65% e respostas fortes nos tópicos mais importantes pode valer uma entrevista.
 5. **Agora leia os currículos** das pessoas que você está considerando. Você lê 15 currículos com atenção em vez de passar os olhos por 100.
 
 Para compartilhar os resultados com um gestor, baixe um relatório em PDF de um candidato ou da lista inteira, ou envie por e-mail pela prepza.
@@ -96,7 +96,7 @@ Anote por que cada pessoa entrou na lista. Leva um minuto por candidato e ajuda 
 
 - **Testar os "desejáveis".** Cada tópico extra deixa o teste mais longo e elimina pessoas por coisas que você poderia ensinar.
 - **Um teste longo demais.** Testes longos fazem você perder bons candidatos que têm outras propostas.
-- **Tratar a nota de corte como um muro.** Ela é uma ajuda para a leitura. Olhe as respostas.
+- **Tratar a nota de aprovação como um muro.** Ela é uma ajuda para a leitura. Olhe as respostas.
 - **Pular o teste prévio.** Faça o teste você mesmo antes dos candidatos.
 - **Ignorar adaptações.** Ofereça tempo extra a quem pedir.
 

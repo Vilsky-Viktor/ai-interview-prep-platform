@@ -59,7 +59,7 @@ Los precios están en dólares estadounidenses. Los pagos se procesan a través 
 - Una entrevista de habilidades de opción múltiple con tiempo límite redactada a partir de tu descripción del puesto, o de una plantilla lista para el puesto.
 - Temas que revisas y editas antes de que se redacte ninguna pregunta.
 - Un conjunto aleatorio de preguntas propio para cada candidato, con una cuenta atrás en cada pregunta. Para puestos técnicos, las preguntas pueden mostrar breves ejemplos de código y preguntar qué hacen o qué imprimen.
-- Una ficha de resultados con cada respuesta y su tiempo, además de avisos de respuestas demasiado rápidas, salidas de la página e intentos de copiar.
+- Una ficha de evaluación con cada respuesta y su tiempo, además de alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar.
 - Un informe en PDF que puedes descargar o enviar por correo desde prepza.
 - Invitaciones por correo electrónico, con una lista pegada, con un archivo subido o con un único enlace en la oferta de empleo, con recordatorios automáticos.
 

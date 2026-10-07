@@ -37,7 +37,7 @@ TEXTS = {
         "lines": [
             "{sender} di {company} ha condiviso il report di {candidate} per il colloquio «{title}».",
             (
-                "È allegato come PDF di una pagina: il voto complessivo, il punteggio di ogni "
+                "È allegato come PDF di una pagina: il punteggio complessivo, quello di ogni "
                 "argomento e cosa ha mostrato il browser del candidato. Rispondi a questa email "
                 "per rispondere a {sender}."
             ),
@@ -53,7 +53,7 @@ TEXTS = {
         "lines": [
             "{sender} di {company} ha condiviso il report di tutti i candidati per il colloquio «{title}».",
             (
-                "È allegato come PDF: il voto di ogni candidato, i suoi progressi e cosa ha mostrato "
+                "È allegato come PDF: il punteggio di ogni candidato, i suoi progressi e cosa ha mostrato "
                 "il suo browser, dai migliori in giù. Rispondi a questa email per rispondere a "
                 "{sender}."
             ),

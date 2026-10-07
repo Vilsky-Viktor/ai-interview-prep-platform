@@ -2,29 +2,29 @@
 
 TEXTS = {
     "candidate": {
-        "subject": "{company} nodigt je uit voor een sollicitatiegesprek",
+        "subject": "{company} nodigt je uit voor een interview",
         "preheader": "Doe “{title}” op prepza. Log in met {email} om te beginnen.",
-        "heading": "Uitnodiging voor een gesprek",
+        "heading": "Uitnodiging voor een interview",
         "lines": [
-            "{company} nodigt je uit voor het gesprek “{title}” op prepza.",
+            "{company} nodigt je uit voor het interview “{title}” op prepza.",
             (
-                "Log in met {email} om te beginnen. Alleen dit adres kan het gesprek "
+                "Log in met {email} om te beginnen. Alleen dit adres kan het interview "
                 "doen, en je hebt één poging."
             ),
         ],
         "button": "Uitnodiging openen",
     },
     "reminder": {
-        "subject": "Herinnering: {company} wacht op je sollicitatiegesprek",
+        "subject": "Herinnering: {company} wacht op je interview",
         "preheader": "“{title}” staat nog open. Log in met {email} om te beginnen.",
-        "heading": "Je gesprek wacht op je",
+        "heading": "Je interview wacht op je",
         "lines": [
             (
-                "{company} heeft je een paar dagen geleden uitgenodigd voor het gesprek “{title}” "
+                "{company} heeft je een paar dagen geleden uitgenodigd voor het interview “{title}” "
                 "op prepza, en je bent nog niet begonnen."
             ),
             (
-                "Log in met {email} om te beginnen. Alleen dit adres kan het gesprek doen, en je "
+                "Log in met {email} om te beginnen. Alleen dit adres kan het interview doen, en je "
                 "hebt één poging. De uitnodiging verloopt 30 dagen na verzending."
             ),
         ],
@@ -35,9 +35,9 @@ TEXTS = {
         "preheader": "{candidate} deed “{title}” bij {company}. Het rapport zit in de bijlage.",
         "heading": "Kandidaatrapport",
         "lines": [
-            "{sender} van {company} heeft het rapport van {candidate} voor het sollicitatiegesprek “{title}” gedeeld.",
+            "{sender} van {company} heeft het rapport van {candidate} voor het interview “{title}” gedeeld.",
             (
-                "Het zit als PDF van één pagina in de bijlage: het totaalcijfer, de score per "
+                "Het zit als PDF van één pagina in de bijlage: de totaalscore, de score per "
                 "onderwerp en wat de browser van de kandidaat liet zien. Beantwoord deze e-mail om "
                 "{sender} te antwoorden."
             ),
@@ -52,9 +52,9 @@ TEXTS = {
         "preheader": "Alle kandidaten voor “{title}” bij {company}. Het rapport zit in de bijlage.",
         "heading": "Kandidatenrapport",
         "lines": [
-            "{sender} van {company} heeft het rapport van alle kandidaten voor het sollicitatiegesprek “{title}” gedeeld.",
+            "{sender} van {company} heeft het rapport van alle kandidaten voor het interview “{title}” gedeeld.",
             (
-                "Het zit als PDF in de bijlage: het cijfer, de voortgang en wat de browser van elke "
+                "Het zit als PDF in de bijlage: de score, de voortgang en wat de browser van elke "
                 "kandidaat liet zien, beste eerst. Beantwoord deze e-mail om {sender} te antwoorden."
             ),
         ],

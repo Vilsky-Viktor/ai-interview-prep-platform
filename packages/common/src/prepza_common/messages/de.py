@@ -5,7 +5,7 @@ MESSAGES = {
     "Sign-in is temporarily unavailable. Please try again shortly.": "Die Anmeldung ist vorübergehend nicht verfügbar. Versuche es gleich noch einmal.",
     "Not enough credits. Top up to continue.": "Nicht genug Credits. Lade auf, um fortzufahren.",
     "This top-up isn't available": "Diese Aufladung ist nicht verfügbar",
-    "Choose one of the balances": "Wähle einen der Kontostände",
+    "Choose one of the balances": "Wähle eines der Guthaben",
     "We've reached today's limit for new generations. Please try again tomorrow; practice and interviews keep working.": "Das heutige Limit für neue Generierungen ist erreicht. Versuche es morgen erneut; Übungen und Interviews funktionieren weiterhin.",
     "Couldn't get a reply right now. Please try again.": "Gerade konnte keine Antwort geladen werden. Versuche es erneut.",
     "You can own at most 3 companies.": "Du kannst höchstens 3 Unternehmen besitzen.",

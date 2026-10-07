@@ -42,7 +42,7 @@ prepza addebita per ogni candidato che risponde ad almeno una domanda. Il prezzo
 Quando confronti, controlla anche questi:
 
 - **Impegno annuale.** Un piano "fatturato annualmente" significa pagare 12 mesi in anticipo, anche se assumi solo in due di quei mesi.
-- **Postazioni.** Alcuni piani limitano quante persone del tuo team possono usarli. prepza non ha costi per postazione: proprietari, amministratori e osservatori sono gratis.
+- **Postazioni.** Alcuni piani limitano quante persone del tuo team possono usarli. prepza non ha costi per postazione: proprietari, amministratori e visualizzatori sono gratis.
 - **Candidati che non iniziano mai.** prepza addebita solo i candidati che rispondono ad almeno una domanda; i crediti di un invito non usato tornano indietro.
 - **Crediti in scadenza.** I crediti di prepza non scadono. Verifica se i crediti di altri fornitori vengono riportati.
 - **Imposte.** Verifica se un prezzo indicato include IVA o imposte sulle vendite.

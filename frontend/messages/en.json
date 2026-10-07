@@ -2,7 +2,7 @@
   "settings": {
     "title": "Settings",
     "language": "Language",
-    "languageNote": "For the interface and tutor replies, and the language new prep kits and interviews start in. You can generate them in any supported language.",
+    "languageNote": "For the interface and the help chat's replies, and the language new interviews start in. You can create an interview in any supported language.",
     "languageFailed": "Couldn't change the language. Please try again.",
     "yourData": "Your data",
     "yourDataNote": "Download everything prepza. holds about you, or delete your account.",
@@ -311,7 +311,7 @@
     "title": "Interview"
   },
   "generation": {
-    "title": "New preparation",
+    "title": "New interview",
     "interviews": "Interviews",
     "cancel": "Cancel generation",
     "cancelTitle": "Cancel this generation?",

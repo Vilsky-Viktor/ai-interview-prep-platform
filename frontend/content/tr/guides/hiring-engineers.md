@@ -1,7 +1,7 @@
 ---
 title: "Mühendis işe alımı nasıl yapılır: iş tanımından teklife yapılandırılmış süreç"
 seoTitle: "Yazılım Mühendisi İşe Alımı: Yapılandırılmış Süreç Rehberi"
-description: "Yazılım mühendisi işe alımı için adım adım süreç: rol profili, ön eleme, bilgi testi, kodlama, sistem tasarımı, yapılandırılmış mülakatlar ve teklif."
+description: "Yazılım mühendisi işe alımı için adım adım süreç: pozisyon profili, ön eleme, bilgi testi, kodlama, sistem tasarımı, yapılandırılmış mülakatlar ve teklif."
 updated: "2026-10-07"
 ---
 
@@ -15,11 +15,11 @@ Bu rehber o süreci adım adım anlatır. Araştırmaların net olduğu yerlerde
 
 | Aşama | Neyi kontrol eder | Kimin zamanı harcanır |
 | --- | --- | --- |
-| 1. Rol profili ve iş tanımı | İşin gerçekte neye ihtiyaç duyduğu | İşe alım yöneticisi, kıdemli bir mühendis |
+| 1. Pozisyon profili ve iş tanımı | İşin gerçekte neye ihtiyaç duyduğu | İşe alım yöneticisi, kıdemli bir mühendis |
 | 2. CV veya başvuru taraması | Yalnızca kesin gereklilikler | İşe alım uzmanı veya işe alım yöneticisi |
 | 3. Bilgi elemesi | Adayın teknoloji yığınınız hakkında ne bildiği | Aday; sonuçları siz okursunuz |
 | 4. Ev ödevi veya canlı kodlama | Çalışan kod yazıp yazamadığı | Bir veya iki mühendis |
-| 5. Sistem tasarımı (kıdemli roller) | Daha büyük sistemler hakkında nasıl düşündüğü | Kıdemli bir mühendis |
+| 5. Sistem tasarımı (kıdemli pozisyonlar) | Daha büyük sistemler hakkında nasıl düşündüğü | Kıdemli bir mühendis |
 | 6. Yapılandırılmış davranışsal mülakat | Başkalarıyla nasıl çalıştığı | İşe alım yöneticisi, bir ekip arkadaşı |
 | 7. Referans kontrolleri | Duyduklarınızı teyit etmek | İşe alım yöneticisi |
 | 8. Karar ve teklif | Adil, belgelenmiş bir karar | İşe alım ekibi |
@@ -42,9 +42,9 @@ Bundan mühendis işe alımı için üç ders çıkar:
 - **Deneyim yılı tek başına pek bir şey söylemez.** “Beş yıllık Java”, birinin gerçekte ne bildiği ve ne yapabildiğiyle karşılaştırıldığında zayıf bir sinyaldir.
 - **Yöntemleri birleştirin.** Hiçbir yöntem tek başına yeterince iyi öngörmez.
 
-Bunlar birçok iş ve çalışmanın ortalamalarıdır, sizin rolünüz için garanti değildir. Yazarlar ayrıca bilgi testlerinin ve iş örneklerinin, adaylardan halihazırda eğitim veya deneyim sahibi olmalarının beklendiği rollere uygun olduğunu belirtir. Bu, mühendis işe alımlarının çoğuna uyar, ancak bir çıraklık programına uymaz.
+Bunlar birçok iş ve çalışmanın ortalamalarıdır, sizin pozisyonunuz için garanti değildir. Yazarlar ayrıca bilgi testlerinin ve iş örneklerinin, adaylardan halihazırda eğitim veya deneyim sahibi olmalarının beklendiği pozisyonlara uygun olduğunu belirtir. Bu, mühendis işe alımlarının çoğuna uyar, ancak bir çıraklık programına uymaz.
 
-## 1. adım: Net bir rol profili ve iş tanımı yazın
+## 1. adım: Net bir pozisyon profili ve iş tanımı yazın
 
 Herhangi bir şey yayınlamadan önce, kişinin ilk altı ayında ne yapacağını ve ilk gün ne bilmesi gerektiğini yazın. Somut olun:
 
@@ -58,7 +58,7 @@ Bu konuda işe alımda yer alan herkesle anlaşın. Ardından iş tanımını bu
 
 ## 2. adım: CV'leri yalnızca kesin gerekliliklere göre tarayın
 
-CV'yi veya başvuruyu evet ya da hayır kontrolleri için kullanın: çalışma hakkı, rol gerektiriyorsa konum veya saat dilimi, gerekli bir dil ve işin gerçekten vazgeçemeyeceği her olmazsa olmaz.
+CV'yi veya başvuruyu evet ya da hayır kontrolleri için kullanın: çalışma hakkı, pozisyon gerektiriyorsa konum veya saat dilimi, gerekli bir dil ve işin gerçekten vazgeçemeyeceği her olmazsa olmaz.
 
 İnsanları CV'lerine göre sıralamayın. Unvanlar, işveren adları ve deneyim yılı zayıf yordayıcılardır ve CV'leri adil şekilde karşılaştırmak zordur: güçlü bir CV, iyi işin olduğu kadar iyi yazmanın da yansıması olabilir. CV'yi test edilemeyen şeyler için bir filtre olarak görün ve geçen herkesi bilgi elemesine aktarın.
 
@@ -68,19 +68,19 @@ Mühendislerinize en çok zaman kazandıran adım budur. Herhangi biri canlı bi
 
 İyi bir bilgi elemesi:
 
-- **İşe özgüdür:** genel bilgi kırıntılarını değil, rol profilinizdeki dilleri, framework'leri, veritabanlarını ve uygulamaları test eder.
+- **İşe özgüdür:** genel bilgi kırıntılarını değil, pozisyon profilinizdeki dilleri, framework'leri, veritabanlarını ve uygulamaları test eder.
 - **Kısadır:** her biri yaklaşık 10 soruluk birkaç konu; böylece başka teklifleri olan güçlü adaylar da testi bitirir.
 - **Herkes için aynıdır:** aynı konular, aynı sayıda soru ve aynı süre sınırları.
 
-prepza burada devreye girer. İş tanımınızı süreli, çoktan seçmeli bir bilgi mülakatına dönüştürür. Herhangi bir soru yazılmadan önce önerilen konuları gözden geçirirsiniz; böylece test teknoloji yığınınızı kapsar, başka hiçbir şeyi değil. Bir mühendislik rolü için bu şunları içerebilir:
+prepza burada devreye girer. İş tanımınızı süreli, çoktan seçmeli bir bilgi mülakatına dönüştürür. Herhangi bir soru yazılmadan önce önerilen konuları gözden geçirirsiniz; böylece test teknoloji yığınınızı kapsar, başka hiçbir şeyi değil. Bir mühendislik pozisyonu için bu şunları içerebilir:
 
 - **Kod okuma soruları:** kısa bir kod parçası ve bunun ne yazdırdığı veya döndürdüğü, ne yaptığı, neden hata verdiği ya da hangi değişikliğin sorunu düzelttiği üzerine sorular.
 - **SQL:** küçük bir tablo ve bir sorgu; hangi satırların döneceği sorusuyla.
 - **Mimari ve framework bilgisi:** ödünleşimler, bir framework'ün nasıl davrandığı, yük altında neyin ters gittiği.
 
-Her aday, her sorusunda geri sayım olan kendine ait rastgele bir soru seti alır. Her yanıtı ve ne kadar sürdüğünü gösteren bir puan kartı görürsünüz; ayrıca çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler. İşaret, daha yakından bakmak için bir nedendir, hiçbir şeyin kanıtı değildir.
+Her aday, her sorusunda geri sayım olan kendine ait rastgele bir soru seti alır. Her yanıtı ve ne kadar sürdüğünü gösteren bir değerlendirme kartı görürsünüz; ayrıca çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler. İşaret, daha yakından bakmak için bir nedendir, hiçbir şeyin kanıtı değildir.
 
-prepza'nın yapmadıkları: adaylar prepza'da kod yazmaz, çalıştırmaz veya hata ayıklamaz. Kod okumak ve yazmak farklı becerilerdir, bu nedenle sonraki adım hâlâ önemlidir. Başlangıç için hazır testler için [role göre beceri testleri](/tests) sayfasına bakın.
+prepza'nın yapmadıkları: adaylar prepza'da kod yazmaz, çalıştırmaz veya hata ayıklamaz. Kod okumak ve yazmak farklı becerilerdir, bu nedenle sonraki adım hâlâ önemlidir. Başlangıç için hazır testler için [pozisyona göre beceri testleri](/tests) sayfasına bakın.
 
 ## 4. adım: Ev ödevi veya canlı kodlama
 
@@ -93,17 +93,17 @@ prepza'nın yapmadıkları: adaylar prepza'da kod yazmaz, çalıştırmaz veya h
 
 Her iki durumda da önceden üzerinde anlaşılmış kriterlere göre puanlayın: doğruluk, okunabilirlik, testler, uç durumları nasıl ele aldıkları. Bilgi elemesi grubu zaten süzdüğü için bu adımı herkesle değil, bir avuç kişiyle yaparsınız.
 
-## 5. adım: Kıdemli roller için sistem tasarımı
+## 5. adım: Kıdemli pozisyonlar için sistem tasarımı
 
 Kıdemli mühendisler için bir tasarım tartışması ekleyin: “X'i yapan bir servisi nasıl kurardınız?” Gereksinimleri nasıl netleştirdiklerine, ödünleşimler arasında nasıl seçim yaptıklarına ve hata noktalarını nasıl fark ettiklerine bakın. Nadiren tek bir doğru yanıt vardır, bu yüzden bir değerlendirme ölçütü şarttır. İlk mülakattan önce zayıf, sağlam ve güçlü bir yanıtın neye benzediğini yazın.
 
-Junior roller için bunu atlayın; orada çoğunlukla beceriyi değil özgüveni ölçer.
+Junior pozisyonlar için bunu atlayın; orada çoğunlukla beceriyi değil özgüveni ölçer.
 
 ## 6. adım: Değerlendirme ölçütlü yapılandırılmış davranışsal mülakatlar
 
 Sackett vd. (2022) çalışmasında yapılandırılmış mülakatlar tek başına en güçlü yordayıcıydı. Yapı şu anlama gelir:
 
-- **Her adaya aynı sorular,** rol profiline bağlı: “Bir tasarım kararına katılmadığınız bir zamanı anlatın. Ne yaptınız?”
+- **Her adaya aynı sorular,** pozisyon profiline bağlı: “Bir tasarım kararına katılmadığınız bir zamanı anlatın. Ne yaptınız?”
 - **Her soru için bir puanlama ölçütü;** zayıf, sağlam ve güçlü yanıt örnekleriyle.
 - **Bağımsız puanlar:** her mülakatçı başkalarıyla tartışmadan önce puan verir; böylece en yüksek sesli görüş sonucu belirlemez.
 
@@ -126,7 +126,7 @@ Güçlü mühendislerin çoğu zaman aynı anda birkaç süreci olur. Yavaş vey
 
 Yapılandırılmış bir süreç aynı zamanda daha adildir, ama yalnızca tutarlı şekilde uygularsanız:
 
-- **Tutarlı sorular:** her aşamada, aynı rol için her adaya.
+- **Tutarlı sorular:** her aşamada, aynı pozisyon için her adaya.
 - **Önceden yazılmış değerlendirme ölçütleri;** böylece insanlar aynı kriterlere göre değerlendirilir.
 - **Makul düzenlemeler:** örneğin bir engel nedeniyle talep eden adaylara ek süre veya başka bir format sunun. prepza'da bir adaya başlamadan önce ek süre verebilirsiniz.
 - **Sonuçları izleyin.** Farklı yöntemler gruplar arasında farklı puan açıkları gösterir. Sackett vd., mesleki bilgi testleri ve iş örnekleri için yapılandırılmış mülakatlara göre daha büyük ortalama farklar buldu; bu da yöntemleri birleştirmek için bir neden daha. Her aşamadaki geçme oranlarını izleyin.
@@ -144,7 +144,7 @@ Kapsamlı ve ucuz kontrolleri başa, derin ve pahalı olanları sona koyun. CV'l
 
 ## İlgili yazılar
 
-- [Role göre beceri testleri](/tests)
+- [Pozisyona göre beceri testleri](/tests)
 - [HackerRank alternatifleri](/compare/hackerrank-alternatives)
 - [İşe alım öncesi test rehberi](/pre-employment-testing)
 - [Beceri testleri ve CV taraması](/guides/skills-tests-vs-cv-screening)

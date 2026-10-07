@@ -124,7 +124,7 @@ Seperti apa wujudnya di produk saat ini:
 - **Manusia yang memutuskan.** Halaman hasil dan laporan PDF mengingatkan timmu untuk meninjau hasil; prepza tidak menolak kandidat atau mengirim pesan penolakan.
 - **Kandidat diberi tahu** sebelum mulai bahwa soal ditulis oleh AI, bahwa orang di perusahaanmu yang meninjau hasil dan memutuskan, dan bahwa mereka bisa meminta peninjauan.
 - **Tambahan waktu** bisa diberikan kepada kandidat mana pun yang memintanya.
-- **Catatan.** Soal yang ditampilkan, jawaban, waktu, dan kejadian integritas tercatat.
+- **Catatan.** Soal yang ditampilkan, jawaban, waktu, dan tanda peringatan tercatat.
 - **Data.** Di-hosting di UE (beberapa sub-pemroses ada di AS; lihat [kebijakan privasi](/privacy)), data kandidat dihapus 12 bulan setelah undangan, perjanjian pemrosesan data sudah termasuk, dan datamu tidak dipakai untuk melatih model AI.
 
 Draf dokumentasi teknis, daftar risiko, petunjuk untuk perusahaan, sistem manajemen mutu, dan rencana pemantauan pascapasar sudah ada dan sedang dilengkapi menjelang tanggal 2027. Semuanya masih draf kerja, bukan klaim kepatuhan.
@@ -132,5 +132,5 @@ Draf dokumentasi teknis, daftar risiko, petunjuk untuk perusahaan, sistem manaje
 ## Bacaan terkait
 
 - [Wawancara AI: apa itu dan cara memakainya secara adil](/ai-interviews)
-- [Tes pra-kerja: panduan praktis](/pre-employment-testing)
+- [Tes seleksi karyawan: panduan praktis](/pre-employment-testing)
 - [Tes keterampilan vs penyaringan CV](/guides/skills-tests-vs-cv-screening)

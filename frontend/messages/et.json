@@ -2,7 +2,7 @@
   "settings": {
     "title": "Seaded",
     "language": "Keel",
-    "languageNote": "Liidese ja juhendaja vastuste jaoks ning keel, millega uued komplektid ja intervjuud algavad. Saad neid luua igas toetatud keeles.",
+    "languageNote": "Liidese ja abivestluse vastuste jaoks ning keel, milles uued intervjuud algavad. Intervjuu saad luua igas toetatud keeles.",
     "languageFailed": "Keelt ei õnnestunud muuta. Proovi uuesti.",
     "yourData": "Sinu andmed",
     "yourDataNote": "Laadi alla kõik, mida prepza. sinu kohta hoiab, või kustuta oma konto.",
@@ -87,7 +87,7 @@
   },
   "start": {
     "placeholder": "Kleebi töökuulutus või kirjelda rolli ja seda, mida kandidaat peaks teadma",
-    "description": "Töö kirjeldus",
+    "description": "Töökuulutus",
     "submit": "Loo intervjuu",
     "whichCompany": "Millise ettevõtte jaoks see intervjuu on?",
     "firstCompany": "Mis on sinu ettevõtte nimi?",
@@ -130,7 +130,7 @@
     "description": "Rolli kirjeldus",
     "create": "Loo",
     "createFailed": "Malli ei õnnestunud alustada. Proovi uuesti.",
-    "text": "Valmis intervjuud rollide kaupa ettevõtetele ja talentidele.",
+    "text": "Valmis intervjuud rollide kaupa ettevõtetele ja tööotsijatele.",
     "deleteLabel": "Kustuta {title}",
     "deleteTitle": "Kustutada see mall?",
     "deleteText": "Selle teemad ja küsimused kustutatakse. Intervjuud, mille ettevõtted on selle põhjal juba teinud, jäävad alles.",
@@ -147,7 +147,7 @@
       "invited": "Kutsutud",
       "finished": "Lõpetanud",
       "practice": "Harjutusvoorud",
-      "top_ups": "Täiendused",
+      "top_ups": "Juurdelaadimised",
       "paid": "Makstud",
       "credits_spent": "Kulutatud krediit"
     },
@@ -177,7 +177,7 @@
     "approve": "Kinnita",
     "decline": "Lükka tagasi",
     "declineTitle": "Kas lükata „{name}“ tagasi?",
-    "declineText": "Selle omanikud ja adminid saavad teavituse sinu põhjusega, kui selle annad. Nad saavad uuesti küsida.",
+    "declineText": "Selle omanikud ja administraatorid saavad teavituse sinu põhjusega, kui selle annad. Nad saavad uuesti küsida.",
     "declineReason": "Põhjus (valikuline)",
     "declinedBecause": "Põhjus: {reason}",
     "verificationStatus": {
@@ -215,7 +215,7 @@
     "topUpTitle": "Laadi juurde: {name}",
     "topUpNote": "Iga juurdelaadimine ostab terve arvu kandidaate; suuremate puhul on kandidaat odavam. Krediidid ei aegu.",
     "candidates": "{count, plural, one {# kandidaat} other {# kandidaati}}",
-    "each": "{price} tükk"
+    "each": "{price} kandidaadi kohta"
   },
   "deleteAccount": {
     "title": "Kustutada sinu konto?",
@@ -311,7 +311,7 @@
     "title": "Intervjuu"
   },
   "generation": {
-    "title": "Uus ettevalmistus",
+    "title": "Uus intervjuu",
     "interviews": "Intervjuud",
     "cancel": "Tühista loomine",
     "cancelTitle": "Tühistada see loomine?",
@@ -334,7 +334,7 @@
     "topicName": "Teema nimi",
     "removeSubtopic": "Eemalda {subtopic}",
     "addSubtopic": "Lisa alateema",
-    "subtopicsFull": "Kõige rohkem {count} alamteemat",
+    "subtopicsFull": "Kõige rohkem {count} alateemat",
     "newSubtopic": "Uus alateema",
     "add": "Lisa",
     "done": "Valmis",
@@ -372,7 +372,7 @@
     "interviews": "Intervjuud",
     "templates": "Mallid",
     "team": "Meeskond",
-    "referrals": "Kutsed",
+    "referrals": "Soovitused",
     "new": "Uus ettevõte",
     "name": "Ettevõtte nimi",
     "create": "Loo",
@@ -397,7 +397,7 @@
     "pickText": "Test kopeeritakse tasuta sinu valitud ettevõttesse ja on kohe valmis kandidaatidele saatmiseks."
   },
   "candidates": {
-    "scorecard": "Tulemused",
+    "scorecard": "Hindamisleht",
     "interview": "Intervjuu",
     "deleted": "Kustutatud kandidaat",
     "deletedText": "Kandidaat kustutas oma konto ja koos sellega oma tulemused.",
@@ -478,8 +478,8 @@
     "addMember": "Lisa liige",
     "memberFailed": "Kutset ei õnnestunud saata. Proovi uuesti.",
     "invite": "Kutsu",
-    "jobDescription": "Töö kirjeldus",
-    "pasteJob": "Kleebi töö kirjeldus: roll, nõuded ja mis tuleb kasuks…",
+    "jobDescription": "Töökuulutus",
+    "pasteJob": "Kleebi töökuulutus: roll, nõuded ja mis tuleb kasuks…",
     "generate": "Loo intervjuu",
     "startFailed": "Intervjuud ei õnnestunud alustada. Proovi uuesti.",
     "candidateEmails": "Kandidaatide e-posti aadressid",
@@ -525,7 +525,7 @@
     "removed": "{email} eemaldati",
     "removeFailed": "Eemaldamine ei õnnestunud.",
     "removeTitle": "Eemaldada ettevõttest?",
-    "removeText": "{email} kaotab juurdepääsu ettevõttele. Kui automaatsed laadimised makstakse tema kaardiga, need peatuvad. Saad hiljem uuesti kutsuda.",
+    "removeText": "{email} kaotab juurdepääsu ettevõttele. Kui automaatsed juurdelaadimised makstakse tema kaardiga, need peatuvad. Saad hiljem uuesti kutsuda.",
     "removeInviteText": "Aadressile {email} saadetud kutselink lakkab töötamast. Saad hiljem uuesti kutsuda.",
     "removeConfirm": "Eemalda"
   },
@@ -548,8 +548,8 @@
     "perCandidate": "{dollars, number} $ kandidaadi kohta",
     "welcome": "{count, plural, one {Sinu esimene kandidaat} other {Sinu esimesed # kandidaati}}",
     "credits": "1 $ = 100 krediiti, krediidid ei aegu.",
-    "referrals": "Kutsed",
-    "referralsNote": "Jaga oma ettevõtte linki selle kutsete vahekaardil.",
+    "referrals": "Soovitused",
+    "referralsNote": "Jaga oma ettevõtte linki selle soovituste vahekaardil.",
     "companyReferral": "Sinu kutsutud ettevõte teeb esimese juurdelaadimise",
     "each": "kummalegi {count, number} krediiti",
     "topUp": "Laadi juurde"
@@ -654,7 +654,7 @@
         },
         "cheating": {
           "title": "Raskem petta",
-          "text": "Igal kandidaadil omad juhuslikud küsimused, taimer igal küsimusel ja ausushoiatused."
+          "text": "Igal kandidaadil omad juhuslikud küsimused, taimer igal küsimusel ja märked kahtlase käitumise kohta."
         },
         "price": {
           "title": "Ilma tellimuseta",
@@ -756,7 +756,7 @@
         "own": "Igale kandidaadile oma küsimused",
         "timed": "Taimer iga küsimuse juures",
         "flags": "Märked kiirustamise, lahkumise ja kopeerimise kohta",
-        "answers": "Tulemuskaardid vastuste ja aegadega"
+        "answers": "Hindamislehed vastuste ja aegadega"
       },
       "candidate": "Kandidaat",
       "score": "Tulemus",
@@ -766,7 +766,7 @@
     },
     "reports": {
       "title": "Jaga tulemusi ühe klõpsuga",
-      "text": "Selge PDF-aruanne ühe kandidaadi või kogu nimekirja kohta. Laadi see alla või saada otse prepzast värbamisjuhile.",
+      "text": "Selge PDF-aruanne ühe kandidaadi või kogu nimekirja kohta. Laadi see alla või saada otse prepzast värbavale juhile.",
       "points": {
         "pdf": "Üks kandidaat või kõik korraga",
         "share": "Saada PDF e-postiga või jaga sõnumirakendustes"
@@ -780,7 +780,7 @@
         "email": "Sinu logo kutsekirjas",
         "interview": "Intervjuul, mida kandidaadid teevad",
         "report": "Igas PDF-aruandes",
-        "verified": "Kinnitatud sinu meeskonna töömeiliga"
+        "verified": "Kinnitatud sinu meeskonna tööaadressiga"
       }
     },
     "pricing": {
@@ -807,12 +807,12 @@
       "see": "Dokumendid",
       "points": {
         "decision": "Inimene saab soovi korral iga tulemuse üle vaadata",
-        "key": "Iga vastust hinnatakse vastuse võtme järgi; parandatud võti hindab varasemad tulemused uuesti",
+        "key": "Iga vastust hinnatakse vastusevõtme järgi; võtme parandamisel arvutatakse varasemad tulemused ümber",
         "training": "Sinu andmeid ei kasutata tehisintellekti mudelite treenimiseks",
         "time": "Lisaaeg kõigile, kes seda paluvad",
         "notice": "Kandidaadid teavad enne alustamist, mis neid ees ootab",
         "own": "Kandidaadid saavad oma andmed alla laadida või kustutada",
-        "data": "Andmed kustutatakse 12 kuu pärast\nMajutus ELis, osa teenusepakkujaid USAs",
+        "data": "Andmed kustutatakse 12 kuu pärast\nAndmeid hoitakse ELis, osa teenusepakkujaid USAs",
         "payments": "Maksed Paddle'i kaudu, kaardiandmeid ei salvestata",
         "documents": "Andmetöötlusleping ja juhised kaasas"
       },
@@ -822,7 +822,7 @@
   },
   "faq": {
     "title": "Korduma kippuvad küsimused",
-    "intro": "Ei leidnud vastust? Küsi selle lehe lõpus olevalt vestluselt või kirjuta meile privaatsuspoliitikas toodud aadressil.",
+    "intro": "Ei leidnud vastust? Küsi selle lehe lõpus olevas vestlusaknas või kirjuta meile privaatsuspoliitikas toodud aadressil.",
     "chat": {
       "title": "Küsi prepza kohta",
       "text": "Küsimused funktsioonide, hindade, maksete, tingimuste või privaatsuse kohta. Tehisaru vastab prepza enda dokumentide põhjal. Vastused kirjutab tehisaru ja need võivad olla valed. Kehtivad hinnaleht, tingimused ja privaatsuspoliitika.",
@@ -847,7 +847,7 @@
     "intro": "prepza aitab ettevõtetel leida inimesi, kes tööd päriselt tunnevad: õiglane ajapiiranguga intervjuu sinu töökuulutuse põhjal, hinnaga, mida iga meeskond saab endale lubada. Ja igaüks, kes intervjuuks valmistub, saab tasuta harjutada.",
     "company": {
       "title": "Miks me olemas oleme",
-      "problem": "Värbamine toetub sageli CV-le ja heale vestlusele, ning mõlemad võivad eksitada. Abiks olevad hindamisvahendid on hinnastatud suurtele ettevõtetele, aastaplaanide ja kasutajatasudega, nii et enamik meeskondi jääb neist ilma.",
+      "problem": "Värbamine toetub sageli CV-le ja heale vestlusele, kuid mõlemad võivad eksitada. Abiks olevad hindamisvahendid on hinnastatud suurtele ettevõtetele, aastaplaanide ja kasutajatasudega, nii et enamik meeskondi jääb neist ilma.",
       "approach": "prepza teeb töökuulutusest mõne minutiga ajapiiranguga intervjuu, mis tahes rolli jaoks. Iga kandidaat saab oma küsimused, sina näed, kes tööd tunneb ja miks, ning maksad ainult nende kandidaatide eest, kes intervjuu tegelikult teevad.",
       "practice": "Tahame ka, et intervjuuks valmistumine oleks kõigile tasuta. Igaüks saab teha meie harjutusintervjuusid mõne rolli jaoks, näha oma hinnet ja kõiki õigeid vastuseid ning uuesti harjutada, ilma et see midagi maksaks."
     },
@@ -861,11 +861,11 @@
     "unread": "{count, plural, one {# lugemata teavitus} other {# lugemata teavitust}}",
     "empty": "Veel pole midagi uut.",
     "kinds": {
-      "question_flagged": "{count, plural, one {Komplekti „{title}“ teema „{topic}“ küsimus märgiti ülevaatamiseks.} other {Komplekti „{title}“ # küsimust märgiti ülevaatamiseks.}}",
-      "question_fixed": "{count, plural, one {Tehisaru parandas komplekti „{title}“ teema „{topic}“ märgitud küsimuse.} other {Tehisaru parandas komplekti „{title}“ # märgitud küsimust.}}",
+      "question_flagged": "{count, plural, one {„{title}“: teema „{topic}“ küsimus märgiti ülevaatamiseks.} other {„{title}“: # küsimust märgiti ülevaatamiseks.}}",
+      "question_fixed": "{count, plural, one {„{title}“: tehisaru parandas teema „{topic}“ märgitud küsimuse.} other {„{title}“: tehisaru parandas # märgitud küsimust.}}",
       "referral_rewarded": "Sinu kutsutud inimene laadis juurde. Said {credits} krediiti.",
       "auto_top_up_charged": "Automaatne juurdelaadimine lisas {credits} krediiti.",
-      "auto_top_up_failed": "Automaatne juurdelaadimine ei saanud kaardilt makset võtta. Lae juurde, et saldo otsa ei saaks.",
+      "auto_top_up_failed": "Automaatne juurdelaadimine ei saanud kaardilt makset võtta. Laadi juurde, et saldo otsa ei saaks.",
       "candidate_finished": "{count, plural, one {{email} lõpetas intervjuu „{title}“{grade, select, none {.} other {: {grade}%.}}} other {# kandidaati lõpetasid intervjuu „{title}“.}}",
       "invite_undelivered": "{count, plural, one {Kutset intervjuule „{title}“ aadressile {email} ei õnnestunud kohale toimetada.} other {# kutset intervjuule „{title}“ ei õnnestunud kohale toimetada.}}",
       "interview_ready": "Intervjuu „{title}“ on valmis.",
@@ -922,14 +922,14 @@
     "verify": "Kinnita",
     "verified": "Kinnitatud: {domain}",
     "title": "Kinnita ettevõte",
-    "text": "Sisesta ettevõtte veebisait. Kui omanik või admin logib sisse selle domeeni tööaadressiga, näiteks you@acme.com (kohe, kui see oled sina), vaatame ettevõtte üle ja lisame märgi.",
+    "text": "Sisesta ettevõtte veebisait. Kui omanik või administraator logib sisse selle domeeni tööaadressiga, näiteks you@acme.com (kohe, kui see oled sina), vaatame ettevõtte üle ja lisame märgi.",
     "website": "Ettevõtte veebisait",
     "save": "Salvesta",
     "done": "Kinnitatud: {domain}",
-    "pending": "Salvestatud. Saadetakse ülevaatusele, kui omanik või admin logib sisse aadressiga domeenis {domain}.",
+    "pending": "Salvestatud. Saadetakse ülevaatusele, kui omanik või administraator logib sisse aadressiga domeenis {domain}.",
     "failed": "Veebisaiti ei õnnestunud salvestada.",
     "submitted": "Ootab ülevaatust. Saad teavituse, kui see on tehtud.",
-    "waitingEmail": "Ootab, et omanik või admin logiks sisse aadressiga domeenis {domain}.",
+    "waitingEmail": "Ootab, et omanik või administraator logiks sisse aadressiga domeenis {domain}.",
     "declined": "{reason, select, none {Tagasi lükatud.} other {Tagasi lükatud: {reason}}}",
     "tryAgain": "Muuda ettevõtte nime või veebilehte, et saata see uuesti ülevaatusele, või <contact>võta meiega ühendust</contact>.",
     "pendingBadge": "Kinnitamine ootel",
@@ -968,7 +968,7 @@
     "create": "Loo test oma kandidaatidele",
     "practise": "Harjuta tasuta",
     "topics": "Mida see testib",
-    "questions": "Näidisküsimused intervjuult",
+    "questions": "Intervjuu näidisküsimused",
     "questionsText": "Sellised küsimused koos õigete vastustega. Sinu kandidaadid saavad oma küsimused, mida kunagi avalikult ei näidata.",
     "faq": "Küsimused, mida ettevõtted küsivad"
   }

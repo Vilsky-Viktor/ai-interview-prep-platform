@@ -73,7 +73,7 @@ prepza eignet sich gut für Schritt 2. Es macht aus Ihrer Stellenbeschreibung ei
 - **Konzepte und Theorie aus der Stellenbeschreibung:** Datenbanken, APIs, Architektur, das Verhalten eines Frameworks, Sicherheitspraktiken.
 - **Fragen zum Lesen von Code:** ein kurzes Stück Code mit Fragen dazu, was es ausgibt oder zurückgibt, was es tut, warum es fehlschlägt oder welche Änderung es behebt. Das ist dieselbe Review-Fähigkeit, von der KI-gestützte Arbeit abhängt.
 - **Ein Timer bei jeder Frage:** Jede Frage hat ihren eigenen Countdown, serverseitig erzwungen, und jeder Kandidat erhält einen eigenen zufälligen Fragensatz. Das erschwert das Nachschlagen von Antworten, auch das Fragen eines KI-Assistenten. Unmöglich macht es das nicht.
-- **Integritätshinweise:** Auswertungen markieren Antworten, die zu schnell kamen, um die Frage gelesen zu haben, Momente, in denen der Kandidat die Seite verlassen hat, und Kopierversuche. Ein Hinweis ist ein Grund, genauer hinzusehen, kein Beweis für Schummeln.
+- **Hinweise auf Auffälligkeiten:** Auswertungen markieren Antworten, die zu schnell kamen, um die Frage gelesen zu haben, Momente, in denen der Kandidat die Seite verlassen hat, und Kopierversuche. Ein Hinweis ist ein Grund, genauer hinzusehen, kein Beweis für Schummeln.
 
 Was prepza nicht tut: Kandidaten schreiben, starten oder debuggen in prepza keinen Code, und prepza beobachtet nicht, wie sie einen KI-Assistenten nutzen. Das gehört in die praktische Phase, intern oder auf einer Entwicklerplattform durchgeführt, die den Wissenstest ergänzt. Unter [Fachtests nach Stelle](/tests) finden Sie fertige Tests als Ausgangspunkt, und unter [KI-Interviews](/ai-interviews), wie prepza KI nutzt und was es Menschen überlässt.
 

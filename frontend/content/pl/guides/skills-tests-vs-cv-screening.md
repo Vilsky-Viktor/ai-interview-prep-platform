@@ -64,7 +64,7 @@ Autorzy zwracają też uwagę na drugi warunek: próbki pracy i testy wiedzy pas
 - **To średnie z wielu stanowisk i badań.** Twoja rola, Twój test i Twoi kandydaci mogą się różnić.
 - **Szacunki trafności dotyczą dobrze zbudowanych metod.** Źle napisany test lub niedbała rozmowa nie osiągną tych wartości.
 - **Jedna metoda rzadko wystarcza.** Badacze zwykle zalecają łączenie metod, na przykład test wiedzy na wczesnym etapie, a później ustrukturyzowaną rozmowę kwalifikacyjną.
-- **Uczciwość wymaga osobnej kontroli.** Sackett i in. zestawiają trafność ze średnimi różnicami wyników między kandydatami czarnoskórymi i białymi. Testy wiedzy zawodowej, próbki pracy i testy poznawcze wykazują znaczne różnice; ustrukturyzowane rozmowy mniejsze. Łączenie metod może je zmniejszyć. Niezależnie od tego, czego używasz, monitoruj odsetek zaliczeń w poszczególnych grupach. W USA zwykłym punktem wyjścia jest reguła czterech piątych z [Uniform Guidelines](https://www.law.cornell.edu/cfr/text/29/1607.4).
+- **Uczciwość wymaga osobnej kontroli.** Sackett i in. zestawiają trafność ze średnimi różnicami wyników między kandydatami czarnoskórymi i białymi. Testy wiedzy zawodowej, próbki pracy i testy poznawcze wykazują znaczne różnice; ustrukturyzowane rozmowy mniejsze. Łączenie metod może je zmniejszyć. Niezależnie od tego, czego używasz, monitoruj zdawalność w poszczególnych grupach. W USA zwykłym punktem wyjścia jest reguła czterech piątych z [Uniform Guidelines](https://www.law.cornell.edu/cfr/text/29/1607.4).
 - **Wynik wspiera decyzję, ale jej nie podejmuje.** Zanim zdecydujesz, człowiek powinien przejrzeć odpowiedzi.
 
 ## Proces selekcji oparty na badaniach

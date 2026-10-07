@@ -19,7 +19,7 @@ Esta guía presenta un plan de un día que da a cada candidato la misma oportuni
 | Mañana, 30 minutos | Crea una prueba de habilidades breve a partir de la descripción del puesto y revísala | Revisar los temas, probar la prueba |
 | Media mañana, 15 minutos | Comprueba los requisitos imprescindibles e invita a todos los que los cumplan | Un repaso rápido, no una lectura a fondo |
 | Durante el día | Los candidatos hacen la prueba | Ninguno |
-| Tarde, 1–2 horas | Revisa los mejores resultados, mira las respuestas y los avisos | Lectura atenta de un grupo pequeño |
+| Tarde, 1–2 horas | Revisa los mejores resultados, mira las respuestas y las alertas | Lectura atenta de un grupo pequeño |
 | Final del día | Elige la lista corta para las entrevistas | Una decisión, tomada por personas |
 
 La prueba hace la clasificación. Tu atención va a la parte que requiere criterio.
@@ -43,7 +43,7 @@ Con prepza:
 1. **Pega la descripción del puesto.** prepza extrae lo que un candidato debe saber y propone temas.
 2. **Revisa los temas frente a tu lista del paso 1.** Desmarca lo que no sea un requisito real, cambia el nombre de los temas, edita los subtemas o describe los cambios en texto libre («añade un tema sobre nóminas básicas»). Las preguntas se redactan solo después de tu aprobación.
 3. **Fija la duración.** Por defecto, cada tema tiene 10 preguntas, cada una con una cuenta atrás de 60 segundos. Tres temas significan como máximo 30 minutos por candidato, y normalmente menos. Limítala a lo que necesitas.
-4. **Fija una nota de corte.** Por defecto es el 70 %. Úsala como guía para leer los resultados, no como un corte automático.
+4. **Fija una nota de aprobado.** Por defecto es el 70 %. Úsala como guía para leer los resultados, no como un corte automático.
 5. **Pruébala como candidato.** Haz la prueba tú mismo. Es gratis y no cuenta como candidato. Si una pregunta no te convence, vuelve a generarla.
 
 Si contratas para un puesto habitual, puedes empezar desde una plantilla lista y ajustarla.
@@ -79,9 +79,9 @@ No todos terminarán el primer día. No pasa nada: revisa a quienes hayan termin
 Ahora empieza la lectura atenta, pero sobre un grupo más pequeño y ordenado.
 
 1. **Ordena por nota,** de mejor a peor. Es el orden por defecto.
-2. **Abre cada ficha de resultados** del grupo de cabeza. Mira las respuestas, no solo el número: qué temas fueron fuertes, cuáles débiles, cuánto tardó cada respuesta.
-3. **Revisa los avisos de integridad.** prepza marca las respuestas demasiado rápidas como para haber leído la pregunta, las veces que el candidato salió de la página y los intentos de copiar. Un aviso es un motivo para mirar con más atención, no una prueba de trampa. Alguien que salió de la página una vez puede haber recibido una notificación.
-4. **Mira justo por debajo de la nota de corte.** Las puntuaciones de distintos conjuntos aleatorios de preguntas no son exactamente comparables, así que unos pocos puntos pueden deberse al azar. Alguien con un 65 % y respuestas sólidas en los temas que más importan puede merecer una entrevista.
+2. **Abre cada ficha de evaluación** del grupo de cabeza. Mira las respuestas, no solo el número: qué temas fueron fuertes, cuáles débiles, cuánto tardó cada respuesta.
+3. **Revisa las alertas de integridad.** prepza marca las respuestas demasiado rápidas como para haber leído la pregunta, las veces que el candidato salió de la página y los intentos de copiar. Una alerta es un motivo para mirar con más atención, no una prueba de trampa. Alguien que salió de la página una vez puede haber recibido una notificación.
+4. **Mira justo por debajo de la nota de aprobado.** Las puntuaciones de distintos conjuntos aleatorios de preguntas no son exactamente comparables, así que unos pocos puntos pueden deberse al azar. Alguien con un 65 % y respuestas sólidas en los temas que más importan puede merecer una entrevista.
 5. **Ahora lee los CV** de las personas que estás considerando. Lees 15 CV con atención en lugar de ojear 100.
 
 Para compartir los resultados con un responsable de contratación, descarga un informe en PDF de un candidato o de toda la lista, o envíalo por correo desde prepza.
@@ -96,7 +96,7 @@ Anota por qué cada persona entró en la lista. Lleva un minuto por candidato y 
 
 - **Evaluar los «deseables».** Cada tema extra alarga la prueba y descarta a personas por cosas que podrías enseñar.
 - **Una prueba demasiado larga.** Las pruebas largas hacen perder a buenos candidatos que tienen otras ofertas.
-- **Tratar la nota de corte como un muro.** Es una ayuda para leer los resultados. Mira las respuestas.
+- **Tratar la nota de aprobado como un muro.** Es una ayuda para leer los resultados. Mira las respuestas.
 - **Saltarse la prueba previa.** Haz la prueba tú mismo antes que los candidatos.
 - **Ignorar las adaptaciones.** Ofrece tiempo extra a quien lo pida.
 

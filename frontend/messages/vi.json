@@ -2,7 +2,7 @@
   "settings": {
     "title": "Cài đặt",
     "language": "Ngôn ngữ",
-    "languageNote": "Dùng cho giao diện và câu trả lời của gia sư, đồng thời là ngôn ngữ mặc định của bộ ôn luyện và buổi phỏng vấn mới. Bạn có thể tạo chúng bằng bất kỳ ngôn ngữ nào được hỗ trợ.",
+    "languageNote": "Dùng cho giao diện và câu trả lời của chat hỗ trợ, cùng ngôn ngữ mặc định của buổi phỏng vấn mới. Bạn có thể tạo buổi phỏng vấn bằng bất kỳ ngôn ngữ nào được hỗ trợ.",
     "languageFailed": "Không thể đổi ngôn ngữ. Vui lòng thử lại.",
     "yourData": "Dữ liệu của bạn",
     "yourDataNote": "Tải xuống mọi thứ prepza. lưu về bạn, hoặc xóa tài khoản.",
@@ -22,7 +22,7 @@
     "system": "Hệ thống",
     "light": "Sáng",
     "dark": "Tối",
-    "topUp": "Nạp tiền"
+    "topUp": "Nạp credit"
   },
   "nav": {
     "home": "prepza. trang chủ",
@@ -82,7 +82,7 @@
     "notFoundText": "Trang này không tồn tại hoặc đã bị xóa."
   },
   "home": {
-    "title": "Kiểm tra mọi người\nTuyển người giỏi nhất",
+    "title": "Kiểm tra mọi ứng viên\nTuyển người giỏi nhất",
     "text": "Phỏng vấn có tính giờ, tạo từ mô tả công việc của bạn. Câu hỏi riêng cho mỗi ứng viên và giới hạn thời gian cho từng câu. $1–3 mỗi ứng viên."
   },
   "start": {
@@ -130,7 +130,7 @@
     "description": "Mô tả vị trí",
     "create": "Tạo",
     "createFailed": "Không thể bắt đầu tạo mẫu. Vui lòng thử lại.",
-    "text": "Buổi phỏng vấn có sẵn theo vị trí, cho công ty và nhân tài.",
+    "text": "Buổi phỏng vấn có sẵn theo vị trí, cho công ty và người chuẩn bị phỏng vấn.",
     "deleteLabel": "Xóa {title}",
     "deleteTitle": "Xóa mẫu này?",
     "deleteText": "Các chủ đề và câu hỏi của mẫu sẽ bị xóa. Những buổi phỏng vấn mà công ty đã tạo từ mẫu vẫn được giữ lại.",
@@ -149,7 +149,7 @@
       "practice": "Lượt luyện tập",
       "top_ups": "Lần nạp",
       "paid": "Đã thanh toán",
-      "credits_spent": "Tín dụng đã dùng"
+      "credits_spent": "Credit đã dùng"
     },
     "noPassRates": "Chưa có buổi phỏng vấn nào có ứng viên hoàn thành.",
     "outsideTriggers": "tỷ lệ đạt bất thường",
@@ -169,8 +169,8 @@
     "maintenanceText": "Khi bật, mọi trang đều hiển thị rằng prepza đang được bảo trì và các dịch vụ từ chối mọi yêu cầu, trừ của quản trị viên cấp cao. Thanh toán, email và tác vụ theo lịch vẫn hoạt động.",
     "maintenanceFailed": "Không thể thay đổi chế độ bảo trì. Hãy thử lại.",
     "maintenanceConfirmTitle": "Bật chế độ bảo trì?",
-    "maintenanceRunning": "{count, plural, =0 {Hiện không có ứng viên nào đang phỏng vấn.} other {Ứng viên đang phỏng vấn lúc này: #. Họ có thể mất thời gian.}}",
-    "maintenanceRunningUnknown": "Không thể đếm số ứng viên đang phỏng vấn lúc này. Ai đang phỏng vấn có thể mất thời gian.",
+    "maintenanceRunning": "{count, plural, =0 {Hiện không có ứng viên nào đang làm phỏng vấn.} other {Hiện có # ứng viên đang làm phỏng vấn và có thể bị mất thời gian làm bài.}}",
+    "maintenanceRunningUnknown": "Không thể đếm số ứng viên đang làm phỏng vấn lúc này. Ai đang làm bài có thể bị mất thời gian làm bài.",
     "maintenanceTurnOn": "Bật",
     "verification": "Xác minh",
     "noVerifications": "Chưa có công ty nào yêu cầu xác minh.",
@@ -208,12 +208,12 @@
   "billing": {
     "paid": "Đã nhận thanh toán. Sẽ hiển thị ở đây trong giây lát.",
     "checkoutFailed": "Không thể mở trang thanh toán. Vui lòng thử lại.",
-    "credits": "{count, plural, other {# tín dụng}}",
-    "topUp": "Nạp tiền",
+    "credits": "{count, plural, other {# credit}}",
+    "topUp": "Nạp credit",
     "low": "Sắp hết",
-    "creditsWord": "{count, plural, other {tín dụng}}",
-    "topUpTitle": "Nạp tiền: {name}",
-    "topUpNote": "Mỗi lần nạp mua trọn số ứng viên; nạp càng nhiều, giá mỗi ứng viên càng rẻ. Tín dụng không bao giờ hết hạn.",
+    "creditsWord": "{count, plural, other {credit}}",
+    "topUpTitle": "Nạp credit: {name}",
+    "topUpNote": "Mỗi lần nạp mua trọn số ứng viên; nạp càng nhiều, giá mỗi ứng viên càng rẻ. Credit không bao giờ hết hạn.",
     "candidates": "{count, plural, other {# ứng viên}}",
     "each": "{price} mỗi ứng viên"
   },
@@ -311,7 +311,7 @@
     "title": "Phỏng vấn"
   },
   "generation": {
-    "title": "Bộ ôn luyện mới",
+    "title": "Buổi phỏng vấn mới",
     "interviews": "Phỏng vấn",
     "cancel": "Hủy tạo",
     "cancelTitle": "Hủy lần tạo này?",
@@ -355,13 +355,13 @@
     "deleted": "đã xóa",
     "expired": "đã hết hạn",
     "passed": "đạt",
-    "flagged": "bị đánh dấu"
+    "flagged": "có cảnh báo"
   },
   "roles": {
     "owner": "chủ sở hữu",
     "admin": "quản trị viên",
     "viewer": "người xem",
-    "adminNote": "Tạo và thay đổi buổi phỏng vấn, mời ứng viên, nạp tín dụng.",
+    "adminNote": "Tạo và thay đổi buổi phỏng vấn, mời ứng viên, nạp credit.",
     "viewerNote": "Xem buổi phỏng vấn và kết quả, chia sẻ báo cáo. Không thay đổi gì."
   },
   "company": {
@@ -372,14 +372,14 @@
     "interviews": "Phỏng vấn",
     "templates": "Mẫu",
     "team": "Nhóm",
-    "referrals": "Lời mời",
+    "referrals": "Giới thiệu",
     "new": "Công ty mới",
     "name": "Tên công ty",
     "create": "Tạo",
     "createFailed": "Không thể tạo công ty. Vui lòng thử lại.",
     "open": "Mở công ty",
     "join": "Tham gia công ty",
-    "creditsLeft": "{count, plural, other {tín dụng}}",
+    "creditsLeft": "{count, plural, other {credit}}",
     "creditsLow": "Sắp hết: hãy nạp thêm để tiếp tục mời ứng viên.",
     "timeLeft": "Thời gian còn lại: {time}",
     "removeLabel": "Xóa {name}",
@@ -397,7 +397,7 @@
     "pickText": "Bài kiểm tra được sao chép miễn phí vào công ty bạn chọn, sẵn sàng gửi cho ứng viên."
   },
   "candidates": {
-    "scorecard": "Kết quả",
+    "scorecard": "Bảng điểm",
     "interview": "Phỏng vấn",
     "deleted": "Ứng viên đã xóa",
     "deletedText": "Ứng viên đã xóa tài khoản, kéo theo cả kết quả.",
@@ -412,7 +412,7 @@
     "status": "Trạng thái: {status}",
     "anyStatus": "mọi trạng thái",
     "progress": "Tiến độ",
-    "grade": "Xếp loại",
+    "grade": "Điểm",
     "resend": "Gửi lại lời mời",
     "resent": "Đã gửi lại lời mời tới {email}",
     "resendFailed": "Không thể gửi lại lời mời.",
@@ -440,7 +440,7 @@
   },
   "interviewStatus": {
     "new": "Mới",
-    "in_process": "Đang xử lý",
+    "in_process": "Đang tuyển",
     "hired": "Đã tuyển"
   },
   "interviews": {
@@ -489,7 +489,7 @@
     "skip": {
       "invalid": "{count, plural, other {# email không hợp lệ}}.",
       "limit": "{count, plural, other {# email}} vượt giới hạn email hiện tại của bạn. Hãy thử lại sau một giờ.",
-      "no_credits": "{count, plural, other {# ứng viên chưa được mời}}: hết tín dụng. Hãy nạp thêm để mời họ.",
+      "no_credits": "{count, plural, other {# ứng viên chưa được mời}}: hết credit. Hãy nạp thêm để mời họ.",
       "started": "{count, plural, other {# ứng viên}} đã bắt đầu nên không được gửi email lại.",
       "failed": "{count, plural, other {# lời mời}} không gửi được. Hãy thử lại."
     }
@@ -525,7 +525,7 @@
     "removed": "Đã xóa {email}",
     "removeFailed": "Không thể xóa người này.",
     "removeTitle": "Xóa khỏi công ty?",
-    "removeText": "{email} sẽ mất quyền truy cập vào công ty. Nếu thẻ của họ đang dùng để tự động nạp tiền, việc nạp tự động sẽ dừng. Bạn có thể mời lại họ sau.",
+    "removeText": "{email} sẽ mất quyền truy cập vào công ty. Nếu thẻ của họ đang dùng để tự động nạp credit, việc nạp tự động sẽ dừng. Bạn có thể mời lại họ sau.",
     "removeInviteText": "Liên kết mời đã gửi tới {email} sẽ không còn dùng được. Bạn có thể mời lại họ sau.",
     "removeConfirm": "Xóa"
   },
@@ -544,18 +544,18 @@
     "test": "Tạo một buổi phỏng vấn",
     "free": "Miễn phí",
     "candidate": "Mỗi ứng viên trả lời ít nhất một câu hỏi",
-    "candidateVolume": "Với tín dụng từ lần nạp ${from, number} trở lên",
+    "candidateVolume": "Với credit từ lần nạp ${from, number} trở lên",
     "perCandidate": "${dollars, number} mỗi ứng viên",
     "welcome": "{count, plural, other {# ứng viên}} đầu tiên của bạn",
-    "credits": "$1 = 100 tín dụng, tín dụng không bao giờ hết hạn.",
-    "referrals": "Lời mời",
-    "referralsNote": "Chia sẻ liên kết của công ty bạn từ thẻ lời mời của công ty.",
-    "companyReferral": "Một công ty bạn mời nạp tiền lần đầu",
-    "each": "mỗi bên {count, number} tín dụng",
-    "topUp": "Nạp tiền"
+    "credits": "$1 = 100 credit, credit không bao giờ hết hạn.",
+    "referrals": "Giới thiệu",
+    "referralsNote": "Chia sẻ liên kết của công ty bạn từ thẻ Giới thiệu của công ty.",
+    "companyReferral": "Một công ty bạn mời nạp credit lần đầu",
+    "each": "mỗi bên {count, number} credit",
+    "topUp": "Nạp credit"
   },
   "site": {
-    "description": "Bài test tuyển dụng có tính giờ, tạo từ mô tả công việc của bạn: mỗi ứng viên nhận câu hỏi ngẫu nhiên riêng, kèm xếp hạng và báo cáo. $1–3 mỗi ứng viên.",
+    "description": "Bài test tuyển dụng có tính giờ, tạo từ mô tả công việc của bạn: mỗi ứng viên nhận câu hỏi ngẫu nhiên riêng, kèm bảng điểm và báo cáo. $1–3 mỗi ứng viên.",
     "homeTitle": "Bài test tuyển dụng tạo từ mô tả công việc của bạn"
   },
   "legal": {
@@ -592,9 +592,9 @@
     "text": "Khi số dư khả dụng xuống dưới mức bạn chọn, chúng tôi nạp bằng thẻ đã lưu. Paddle gửi biên lai mỗi lần, và bạn có thể tắt bất cứ lúc nào.",
     "amount": "Số tiền nạp",
     "when": "Khi số dư xuống dưới",
-    "under": "{threshold} tín dụng",
+    "under": "Dưới {threshold} credit",
     "off": "Tự động nạp: tắt",
-    "on": "Tự động nạp: {amount} khi dưới {threshold} tín dụng",
+    "on": "Tự động nạp: {amount} khi dưới {threshold} credit",
     "waiting": "Tự động nạp: đang chờ thẻ của bạn",
     "turnOn": "Bật",
     "turnOff": "Tắt",
@@ -609,24 +609,24 @@
   },
   "referral": {
     "companyTitle": "Mời công ty khác",
-    "companyNote": "Cả hai bên đều nhận {reward, number} tín dụng khi họ nạp tiền lần đầu, với bất kỳ số tiền nào.",
+    "companyNote": "Cả hai bên đều nhận {reward, number} credit khi họ nạp credit lần đầu, với bất kỳ số tiền nào.",
     "deletedCompany": "Một công ty đã xóa",
-    "credits": "+{count, number} tín dụng",
+    "credits": "+{count, number} credit",
     "rewarded": "{count, plural, =0 {Chưa có phần thưởng.} other {Đã nhận thưởng # lần.}}"
   },
   "topUp": {
-    "title": "Nạp tiền",
-    "intro": "$1 mua được 100 tín dụng, và tín dụng không bao giờ hết hạn.",
-    "companies": "Tín dụng công ty",
+    "title": "Nạp credit",
+    "intro": "$1 mua được 100 credit, và credit không bao giờ hết hạn.",
+    "companies": "Credit của công ty",
     "companiesNote": "Cho ứng viên của từng công ty.",
-    "noCompany": "Tín dụng thuộc về công ty. Hãy tạo công ty trước, rồi nạp tiền tại đây.",
+    "noCompany": "Credit thuộc về công ty. Hãy tạo công ty trước, rồi nạp credit tại đây.",
     "createCompany": "Tạo công ty",
     "pricing": "Bảng giá"
   },
   "landing": {
     "more": "Cách hoạt động",
     "how": {
-      "title": "Ba bước đến người được tuyển tiếp theo",
+      "title": "Ba bước để tuyển được người tiếp theo",
       "paste": {
         "title": "Dán mô tả công việc",
         "text": "Mọi vị trí, mọi ngôn ngữ.\nprepza chọn ra những gì ứng viên phải biết và đề xuất chủ đề."
@@ -654,7 +654,7 @@
         },
         "cheating": {
           "title": "Khó gian lận hơn",
-          "text": "Mỗi ứng viên có câu hỏi ngẫu nhiên riêng, hẹn giờ từng câu và cờ cảnh báo gian lận."
+          "text": "Mỗi ứng viên có câu hỏi ngẫu nhiên riêng, hẹn giờ từng câu và cảnh báo hành vi bất thường."
         },
         "price": {
           "title": "Không cần gói đăng ký",
@@ -782,7 +782,7 @@
       "perCandidate": "mỗi ứng viên",
       "base": "Dùng bao nhiêu trả bấy nhiêu",
       "volume": "Khi nạp từ ${from, number}",
-      "compare": "${min}–{max} mỗi ứng viên, không cần thuê bao"
+      "compare": "${min}–{max} mỗi ứng viên, không cần gói đăng ký"
     },
     "faq": {
       "title": "Vẫn còn thắc mắc?",
@@ -855,9 +855,9 @@
     "kinds": {
       "question_flagged": "{count, plural, =1 {Một câu hỏi về “{topic}” trong “{title}” đã bị đánh dấu để xem xét.} other {# câu hỏi trong “{title}” đã bị đánh dấu để xem xét.}}",
       "question_fixed": "{count, plural, =1 {AI đã sửa một câu hỏi bị đánh dấu về “{topic}” trong “{title}”.} other {AI đã sửa # câu hỏi bị đánh dấu trong “{title}”.}}",
-      "referral_rewarded": "Một người bạn mời đã nạp tiền. Bạn nhận được {credits} tín dụng.",
-      "auto_top_up_charged": "Tự động nạp đã thêm {credits} tín dụng.",
-      "auto_top_up_failed": "Tự động nạp không trừ tiền được từ thẻ. Hãy nạp tiền để không bị hết số dư.",
+      "referral_rewarded": "Một người bạn mời đã nạp credit. Bạn nhận được {credits} credit.",
+      "auto_top_up_charged": "Tự động nạp đã thêm {credits} credit.",
+      "auto_top_up_failed": "Tự động nạp không trừ tiền được từ thẻ. Hãy nạp credit để không bị hết số dư.",
       "candidate_finished": "{count, plural, =1 {{email} đã hoàn thành “{title}”{grade, select, none {.} other {: {grade}%.}}} other {# ứng viên đã hoàn thành “{title}”.}}",
       "invite_undelivered": "{count, plural, =1 {Lời mời gửi tới {email} cho “{title}” chưa được chuyển đến.} other {# lời mời cho “{title}” chưa được chuyển đến.}}",
       "interview_ready": "Buổi phỏng vấn “{title}” đã sẵn sàng.",
@@ -914,7 +914,7 @@
     "verify": "Xác minh",
     "verified": "Đã xác minh: {domain}",
     "title": "Xác minh công ty",
-    "text": "Nhập trang web của công ty. Khi chủ sở hữu hoặc quản trị viên đăng nhập bằng email công việc thuộc tên miền đó, như you@acme.com (ngay lập tức nếu đó là bạn), chúng tôi sẽ xem xét công ty và thêm huy hiệu.",
+    "text": "Nhập trang web của công ty. Khi chủ sở hữu hoặc quản trị viên đăng nhập bằng email công việc thuộc tên miền đó, như you@acme.com (ngay lập tức nếu đó là bạn), chúng tôi sẽ xem xét công ty và thêm dấu xác minh.",
     "website": "Website công ty",
     "save": "Lưu",
     "done": "Đã xác minh: {domain}",
@@ -953,10 +953,10 @@
   "tests": {
     "title": "Bài test tuyển dụng theo vị trí",
     "intro": "Bài kiểm tra kỹ năng có giới hạn thời gian, dựng sẵn cho các vị trí phổ biến. Dùng nguyên bản hoặc tạo bài kiểm tra từ mô tả công việc của riêng bạn.",
-    "heading": "Bài kiểm tra kỹ năng {role} cho tuyển dụng",
+    "heading": "Bài kiểm tra kỹ năng {role} để tuyển dụng",
     "pageTitle": "Bài test tuyển dụng {role}",
     "pageDescription": "Bài test tuyển dụng {role} có tính giờ để đánh giá năng lực ứng viên, gồm {count, plural, other {# chủ đề}}. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng. $1–3 mỗi ứng viên.",
-    "lead": "Bài kiểm tra trắc nghiệm có giới hạn thời gian về kỹ năng của vị trí này. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng, có tính giờ cho từng câu, và bạn nhận phiếu đánh giá với mọi câu trả lời cùng thời gian làm. $1–3 mỗi ứng viên, không cần gói đăng ký.",
+    "lead": "Bài kiểm tra trắc nghiệm có giới hạn thời gian về kỹ năng của vị trí này. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng, có tính giờ cho từng câu, và bạn nhận bảng điểm với mọi câu trả lời cùng thời gian làm. $1–3 mỗi ứng viên, không cần gói đăng ký.",
     "create": "Tạo bài kiểm tra cho ứng viên của bạn",
     "practise": "Luyện tập miễn phí",
     "topics": "Nội dung kiểm tra",

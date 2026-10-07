@@ -92,11 +92,11 @@ prepza transforme une fiche de poste en entretien de compétences chronométré 
 
 1. **Collez la fiche de poste.** N'importe quel poste, dans l'une des 23 langues. prepza repère ce qu'un candidat doit savoir et propose des thèmes.
 2. **Vérifiez les thèmes.** Décochez ce dont vous n'avez pas besoin, renommez un thème, modifiez ses sous-thèmes ou décrivez vos changements en texte libre. Les questions ne sont rédigées qu'après votre validation. Vous pouvez aussi partir d'un modèle prêt à l'emploi pour votre poste.
-3. **Invitez les candidats.** Envoyez les invitations par e-mail, collez une liste, importez un fichier ou placez un lien partageable dans votre offre d'emploi. Les relances partent automatiquement.
+3. **Invitez les candidats.** Envoyez les invitations par e-mail, collez une liste, importez un fichier ou placez un lien de partage dans votre offre d'emploi. Les relances partent automatiquement.
 4. **Lisez les résultats.** Les scores arrivent classés, avec une fiche d'évaluation pour chaque candidat.
 
 - **Chaque candidat reçoit sa propre série aléatoire** tirée de la banque de questions de chaque thème, avec un compte à rebours imposé par le serveur pour chaque question. Vous pouvez accorder du temps supplémentaire à quiconque le demande.
-- **Les fiches d'évaluation** montrent chaque réponse, si elle était juste et le temps qu'elle a pris, avec des signalements pour les réponses trop rapides, les sorties de la page et les tentatives de copie. Les signalements ne modifient pas le score.
+- **Les fiches d'évaluation** montrent chaque réponse, si elle était juste et le temps qu'elle a pris, avec des alertes pour les réponses trop rapides, les sorties de la page et les tentatives de copie. Les alertes ne modifient pas le score.
 - **Les réponses sont notées d'après un corrigé** que l'IA rédige et vérifie ; aucune IA ne lit ni ne juge la réponse d'un candidat. Un rapport PDF couvre un candidat ou toute la liste.
 
 La tarification se fait par candidat qui répond, sans abonnement : 1 à 3 $ par candidat selon le montant de votre recharge, en dollars américains, et vos 3 premiers candidats sont gratuits. Les données sont hébergées dans l'UE (certains sous-traitants ultérieurs sont aux États-Unis ; voir la [politique de confidentialité](/privacy)), et l'accord de traitement des données ainsi que les instructions pour les entreprises sont inclus.

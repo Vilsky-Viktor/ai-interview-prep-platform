@@ -35,27 +35,27 @@ FAQ = [
     {
         "key": "cost",
         "question": "Chi phí bao nhiêu?",
-        "answer": "Tạo buổi phỏng vấn là miễn phí. Mỗi ứng viên trả lời ít nhất một câu hỏi tốn {candidate} tín dụng ({candidate_dollars} $), và rẻ hơn với tín dụng từ các lần nạp lớn hơn, xuống tới 1 $. Công ty đầu tiên của bạn nhận {company} tín dụng miễn phí, đủ cho {company_candidates} ứng viên đầu tiên. Trang bảng giá liệt kê mọi mức giá.",
+        "answer": "Tạo buổi phỏng vấn là miễn phí. Mỗi ứng viên trả lời ít nhất một câu hỏi tốn {candidate} credit ({candidate_dollars} $), và rẻ hơn với credit từ các lần nạp lớn hơn, xuống tới 1 $. Công ty đầu tiên của bạn nhận {company} credit miễn phí, đủ cho {company_candidates} ứng viên đầu tiên. Trang bảng giá liệt kê mọi mức giá.",
     },
     {
         "key": "charged",
-        "question": "Khi nào một ứng viên bị tính phí?",
-        "answer": "Chỉ khi họ hoàn thành buổi phỏng vấn và đã trả lời ít nhất một câu hỏi. Tín dụng của họ được giữ lại khi bạn mời và được hoàn lại nếu bạn thu hồi lời mời, nếu họ không bao giờ bắt đầu, hoặc nếu họ không trả lời câu nào.",
+        "question": "Khi nào tôi bị tính phí cho một ứng viên?",
+        "answer": "Chỉ khi họ hoàn thành buổi phỏng vấn và đã trả lời ít nhất một câu hỏi. Credit dành cho họ được tạm giữ khi bạn mời và được hoàn lại nếu bạn thu hồi lời mời, nếu họ không bao giờ bắt đầu, hoặc nếu họ không trả lời câu nào.",
     },
     {
         "key": "compare_hiring",
         "question": "Giá so với các công cụ đánh giá khác thế nào?",
-        "answer": "Nhiều công cụ đánh giá được bán theo gói thuê bao tháng hoặc năm, phải trả dù bạn không kiểm tra ai. Với prepza, bạn chỉ trả theo ứng viên: {candidate} tín dụng ({candidate_dollars} $) mỗi ứng viên, không hợp đồng, không phí theo người dùng và không tốn phí tạo buổi phỏng vấn. Một công ty mời {example_candidates} ứng viên mỗi tháng trả khoảng {example_year_dollars} $ mỗi năm. Nếu bạn kiểm tra nhiều ứng viên mỗi tháng, gói thuê bao có thể rẻ hơn, nên hãy so sánh với số liệu của bạn.",
+        "answer": "Nhiều công cụ đánh giá được bán theo gói đăng ký theo tháng hoặc năm, phải trả dù bạn không kiểm tra ai. Với prepza, bạn chỉ trả theo ứng viên: {candidate} credit ({candidate_dollars} $) mỗi ứng viên, không hợp đồng, không phí theo người dùng và không tốn phí tạo buổi phỏng vấn. Một công ty mời {example_candidates} ứng viên mỗi tháng trả khoảng {example_year_dollars} $ mỗi năm. Nếu bạn kiểm tra nhiều ứng viên mỗi tháng, gói đăng ký có thể rẻ hơn, nên hãy so sánh với số liệu của bạn.",
     },
     {
         "key": "expire",
-        "question": "Tín dụng có hết hạn không?",
-        "answer": "Không. Tín dụng không bao giờ hết hạn, và không có gói đăng ký hay gia hạn.",
+        "question": "Credit có hết hạn không?",
+        "answer": "Không. Credit không bao giờ hết hạn, và không có gói đăng ký hay gia hạn.",
     },
     {
         "key": "refunds",
         "question": "Tôi có được hoàn tiền không?",
-        "answer": "Có, với tín dụng bạn mua trong 14 ngày gần nhất và chưa dùng: qua Paddle hoặc bằng cách viết cho chúng tôi. Tín dụng miễn phí, như quà chào mừng, không được hoàn. Chi tiết có trong điều khoản.",
+        "answer": "Có, với credit bạn mua trong 14 ngày gần nhất và chưa dùng: qua Paddle hoặc bằng cách viết cho chúng tôi. Credit miễn phí, như quà chào mừng, không được hoàn. Chi tiết có trong điều khoản.",
     },
     {
         "key": "scorecards",

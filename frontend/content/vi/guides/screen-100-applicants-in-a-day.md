@@ -80,7 +80,7 @@ Giờ là lúc đọc kỹ, nhưng với một nhóm nhỏ hơn, đã xếp hạ
 
 1. **Sắp xếp theo điểm,** cao nhất trước. Đây là mặc định.
 2. **Mở bảng điểm của từng người** trong nhóm dẫn đầu. Xem các câu trả lời, không chỉ con số: chủ đề nào mạnh, chủ đề nào yếu, mỗi câu mất bao lâu.
-3. **Kiểm tra các cảnh báo liêm chính.** prepza đánh dấu các câu trả lời quá nhanh để kịp đọc câu hỏi, số lần ứng viên rời khỏi trang và các lần cố sao chép. Một cảnh báo là lý do để xem kỹ hơn, không phải bằng chứng gian lận. Người rời trang một lần có thể chỉ vì một thông báo bật lên.
+3. **Kiểm tra các cảnh báo.** prepza đánh dấu các câu trả lời quá nhanh để kịp đọc câu hỏi, số lần ứng viên rời khỏi trang và các lần cố sao chép. Một cảnh báo là lý do để xem kỹ hơn, không phải bằng chứng gian lận. Người rời trang một lần có thể chỉ vì một thông báo bật lên.
 4. **Xem cả những người ngay dưới điểm đạt.** Điểm từ các bộ câu hỏi ngẫu nhiên khác nhau không hoàn toàn so sánh được, nên vài điểm chênh lệch có thể do may rủi khi chọn câu hỏi. Một người đạt 65% nhưng trả lời tốt ở các chủ đề quan trọng nhất có thể đáng được phỏng vấn.
 5. **Bây giờ mới đọc CV** của những người bạn đang cân nhắc. Bạn đọc kỹ 15 CV thay vì lướt qua 100.
 

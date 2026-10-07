@@ -2,7 +2,7 @@
   "settings": {
     "title": "Impostazioni",
     "language": "Lingua",
-    "languageNote": "Per l'interfaccia e le risposte del tutor, e la lingua con cui iniziano i nuovi kit e colloqui. Puoi generarli in qualsiasi lingua disponibile.",
+    "languageNote": "Per l'interfaccia e le risposte della chat di assistenza, e la lingua in cui partono i nuovi colloqui. Puoi creare un colloquio in qualsiasi lingua supportata.",
     "languageFailed": "Impossibile cambiare la lingua. Riprova.",
     "yourData": "I tuoi dati",
     "yourDataNote": "Scarica tutto ciò che prepza. conserva su di te o elimina il tuo account.",
@@ -38,7 +38,7 @@
     "faq": "Domande frequenti",
     "contact": "Contatti",
     "about": "Chi siamo",
-    "practice": "Pratica gratuita",
+    "practice": "Simulazioni gratuite",
     "tests": "Test di competenze",
     "preEmploymentTesting": "Test pre-assunzione",
     "aiInterviews": "Colloqui con IA",
@@ -130,7 +130,7 @@
     "description": "Descrizione del ruolo",
     "create": "Genera",
     "createFailed": "Impossibile avviare il modello. Riprova.",
-    "text": "Colloqui pronti per ruolo, per aziende e talenti.",
+    "text": "Colloqui pronti per ruolo, per le aziende e per chi si esercita.",
     "deleteLabel": "Elimina {title}",
     "deleteTitle": "Eliminare questo modello?",
     "deleteText": "I suoi argomenti e le sue domande vengono eliminati. I colloqui che le aziende ne hanno già ricavato restano.",
@@ -146,7 +146,7 @@
       "interviews": "Colloqui",
       "invited": "Invitati",
       "finished": "Completati",
-      "practice": "Sessioni di pratica",
+      "practice": "Simulazioni",
       "top_ups": "Ricariche",
       "paid": "Pagato",
       "credits_spent": "Crediti spesi"
@@ -156,14 +156,14 @@
     "finished": "{count, plural, one {# completato} other {# completati}}",
     "passed": "{percent}% superato",
     "passMark": "soglia {percent}%",
-    "averageGrade": "media {percent}%",
+    "averageGrade": "punteggio medio {percent}%",
     "timedOut": "{percent}% tempo scaduto",
     "sortBy": {
       "pass_rate": "Tasso di superamento più basso prima",
       "finished": "Più completati prima"
     },
     "pauseTitle": "Pausa di emergenza",
-    "pauseText": "Finché è attiva, nessuno può iniziare un nuovo colloquio, un round di pratica o un'anteprima, e nessuna domanda viene generata, rigenerata o verificata. I candidati già in un colloquio possono completarlo.",
+    "pauseText": "Finché è attiva, nessuno può iniziare un nuovo colloquio, una simulazione o un'anteprima, e nessuna domanda viene generata, rigenerata o verificata. I candidati già in un colloquio possono completarlo.",
     "pauseFailed": "Impossibile modificare la pausa. Riprova.",
     "maintenanceTitle": "Modalità manutenzione",
     "maintenanceText": "Finché è attiva, ogni pagina mostra che prepza è in manutenzione e i servizi rifiutano ogni richiesta, tranne quelle dei superadmin. Pagamenti, email e attività pianificate continuano a funzionare.",
@@ -177,7 +177,7 @@
     "approve": "Approva",
     "decline": "Rifiuta",
     "declineTitle": "Rifiutare «{name}»?",
-    "declineText": "I suoi proprietari e admin ricevono una notifica con il tuo motivo, se lo indichi. Possono chiedere di nuovo.",
+    "declineText": "I suoi proprietari e amministratori ricevono una notifica con il tuo motivo, se lo indichi. Possono chiedere di nuovo.",
     "declineReason": "Motivo (facoltativo)",
     "declinedBecause": "Motivo: {reason}",
     "verificationStatus": {
@@ -213,13 +213,13 @@
     "low": "Stanno finendo",
     "creditsWord": "{count, plural, one {credito} other {crediti}}",
     "topUpTitle": "Ricarica: {name}",
-    "topUpNote": "Ogni ricarica acquista candidati interi; quelle più grandi costano meno per candidato. I crediti non scadono.",
+    "topUpNote": "Ogni ricarica copre un numero intero di candidati; quelle più grandi costano meno per candidato. I crediti non scadono.",
     "candidates": "{count, plural, one {# candidato} other {# candidati}}",
     "each": "{price} ciascuno"
   },
   "deleteAccount": {
     "title": "Eliminare il tuo account?",
-    "everything": "Viene eliminato tutto: il tuo posto nel team di ogni azienda, i tuoi risultati dei colloqui sostenuti come candidato, le tue sessioni di pratica e le tue notifiche.",
+    "everything": "Viene eliminato tutto: il tuo posto nel team di ogni azienda, i tuoi risultati dei colloqui sostenuti come candidato, le tue simulazioni e le tue notifiche.",
     "company": "Un'azienda di cui sei l'unico proprietario viene eliminata con i suoi colloqui. L'operazione non può essere annullata.",
     "confirm": "Elimina account",
     "deleted": "Il tuo account è stato eliminato.",
@@ -242,7 +242,7 @@
     "other": "Altro"
   },
   "questions": {
-    "goodQuestion": "Bella domanda?",
+    "goodQuestion": "Domanda utile?",
     "ratingFailed": "Impossibile salvare la valutazione. Riprova.",
     "helpful": "Domanda utile",
     "unhelpful": "Domanda poco utile",
@@ -311,7 +311,7 @@
     "title": "Colloquio"
   },
   "generation": {
-    "title": "Nuova preparazione",
+    "title": "Nuovo colloquio",
     "interviews": "Colloqui",
     "cancel": "Annulla la generazione",
     "cancelTitle": "Annullare questa generazione?",
@@ -360,7 +360,7 @@
   "roles": {
     "owner": "proprietario",
     "admin": "amministratore",
-    "viewer": "osservatore",
+    "viewer": "visualizzatore",
     "adminNote": "Crea e modifica i colloqui, invita i candidati, ricarica i crediti.",
     "viewerNote": "Vede colloqui e risultati, condivide i report. Non modifica nulla."
   },
@@ -372,7 +372,7 @@
     "interviews": "Colloqui",
     "templates": "Modelli",
     "team": "Team",
-    "referrals": "Inviti",
+    "referrals": "Referral",
     "new": "Nuova azienda",
     "name": "Nome dell'azienda",
     "create": "Crea",
@@ -397,7 +397,7 @@
     "pickText": "Il test viene copiato nell'azienda che scegli, gratis e pronto da inviare ai candidati."
   },
   "candidates": {
-    "scorecard": "Risultati",
+    "scorecard": "Scheda di valutazione",
     "interview": "Colloquio",
     "deleted": "Candidato eliminato",
     "deletedText": "Il candidato ha eliminato il suo account e, con esso, i suoi risultati.",
@@ -412,7 +412,7 @@
     "status": "Stato: {status}",
     "anyStatus": "qualsiasi stato",
     "progress": "Progresso",
-    "grade": "Voto",
+    "grade": "Punteggio",
     "resend": "Invia di nuovo l'invito",
     "resent": "Invito inviato di nuovo a {email}",
     "resendFailed": "Impossibile inviare di nuovo l'invito.",
@@ -430,7 +430,7 @@
     "eraseConfirm": "Elimina",
     "sortBy": "Ordina per: {sort}",
     "sort": {
-      "grade": "Voto",
+      "grade": "Punteggio",
       "date": "Data"
     },
     "extraTimeNone": "Nessun tempo extra",
@@ -450,9 +450,9 @@
     "new": "Nuovo colloquio",
     "createTitle": "Crea un colloquio",
     "try": "Prova come candidato",
-    "newCandidate": "Nuovo/i candidato/i",
+    "newCandidate": "Nuovi candidati",
     "linkTitle": "Link condivisibile",
-    "linkText": "Per un annuncio di lavoro: chiunque abbia il link può svolgere il colloquio. Ogni persona viene addebitata come un candidato invitato.",
+    "linkText": "Per un annuncio di lavoro: chiunque abbia il link può svolgere il colloquio. Ogni persona ti costa quanto un candidato invitato.",
     "linkFailed": "Impossibile modificare il link. Riprova.",
     "passMark": "Soglia di superamento",
     "passMarkLabel": "Soglia di superamento in percentuale",
@@ -548,8 +548,8 @@
     "perCandidate": "${dollars, number} a candidato",
     "welcome": "{count, plural, one {Il tuo primo candidato} other {I tuoi primi # candidati}}",
     "credits": "$1 = 100 crediti, i crediti non scadono.",
-    "referrals": "Inviti",
-    "referralsNote": "Condividi il link della tua azienda dalla sua scheda Inviti.",
+    "referrals": "Referral",
+    "referralsNote": "Condividi il link della tua azienda dalla sua scheda Referral.",
     "companyReferral": "Un'azienda che hai invitato fa la sua prima ricarica",
     "each": "{count, number} crediti ciascuno",
     "topUp": "Ricarica"
@@ -571,7 +571,7 @@
     "items": {
       "instructions": {
         "title": "Istruzioni per le aziende",
-        "description": "Cosa significa un voto, la revisione umana, come scegliere la soglia di superamento, il tempo extra e dove non usare prepza."
+        "description": "Cosa significa un punteggio, la revisione umana, come scegliere la soglia di superamento, il tempo extra e dove non usare prepza."
       },
       "notices": {
         "title": "Modelli di informativa per i candidati",
@@ -650,11 +650,11 @@
         },
         "anyRole": {
           "title": "Qualsiasi ruolo",
-          "text": "Lettura di codice per ingegneri, test di conoscenze per vendite, finanza e altro."
+          "text": "Lettura di codice per sviluppatori, test di conoscenze per vendite, finanza e altro."
         },
         "cheating": {
           "title": "Più difficile barare",
-          "text": "Domande casuali per ogni candidato, un timer su ciascuna e segnali di integrità."
+          "text": "Domande casuali per ogni candidato, un timer su ciascuna e segnalazioni di comportamenti sospetti."
         },
         "price": {
           "title": "Nessun abbonamento",
@@ -695,7 +695,7 @@
     },
     "quality": {
       "title": "Domande che si correggono da sole",
-      "text": "Risposte, valutazioni e segnalazioni rivelano le domande deboli. L'IA le corregge e puoi rigenerarne qualsiasi da solo.",
+      "text": "Risposte, valutazioni e segnalazioni rivelano le domande deboli. L'IA le corregge e puoi rigenerare tu stesso qualsiasi domanda.",
       "items": {
         "good": "Cosa mostra uno stato patrimoniale?",
         "weak": "Qual è il miglior software di contabilità?",
@@ -803,7 +803,7 @@
       "see": "Documenti",
       "points": {
         "decision": "Una persona può rivedere ogni risultato su richiesta",
-        "key": "Ogni risposta è valutata in base alla sua chiave di risposta; una chiave corretta ricalcola i risultati passati",
+        "key": "Ogni risposta è valutata in base alla chiave di correzione; se una chiave viene corretta, i risultati passati vengono ricalcolati",
         "training": "I tuoi dati non vengono usati per addestrare modelli di IA",
         "time": "Tempo in più per chi lo chiede",
         "notice": "I candidati sanno cosa aspettarsi prima di iniziare",
@@ -845,7 +845,7 @@
       "title": "Perché esistiamo",
       "problem": "Le assunzioni si basano spesso su un CV e una buona conversazione, ed entrambi possono ingannare. Gli strumenti di valutazione che aiutano hanno prezzi pensati per le grandi aziende, con piani annuali e costi per utente, così la maggior parte dei team ne fa a meno.",
       "approach": "prepza trasforma una descrizione del ruolo in un colloquio a tempo in pochi minuti, per qualsiasi ruolo. Ogni candidato riceve domande tutte sue, vedi chi conosce il lavoro e perché, e paghi solo per i candidati che lo svolgono davvero.",
-      "practice": "Vogliamo anche che prepararsi a un colloquio sia gratis per tutti. Chiunque può fare i nostri colloqui di pratica per un ruolo, vedere il proprio voto e ogni risposta corretta, ed esercitarsi di nuovo, senza costi."
+      "practice": "Vogliamo anche che prepararsi a un colloquio sia gratis per tutti. Chiunque può fare le nostre simulazioni di colloquio per un ruolo, vedere il proprio punteggio e ogni risposta corretta, ed esercitarsi di nuovo, senza costi."
     },
     "founder": {
       "quote": "Assumere bene non dovrebbe essere un privilegio delle grandi aziende con grandi budget. Ho creato prepza perché qualsiasi team possa trasformare una descrizione del ruolo in un colloquio equo in pochi minuti, vedere chi conosce davvero il lavoro e pagare solo per i candidati che lo svolgono. Spero che ti aiuti a trovare prima le persone giuste.",
@@ -893,20 +893,20 @@
   },
   "practice": {
     "title": "Simulazione colloquio di lavoro per ruolo",
-    "intro": "Esercitati per un ruolo con un colloquio a tempo, poi vedi il tuo voto e tutte le risposte corrette. Gratis.",
-    "about": "Colloquio di pratica a tempo. Alla fine vedi il tuo voto e tutte le risposte corrette. Privato e gratuito.",
+    "intro": "Esercitati per un ruolo con un colloquio a tempo, poi vedi il tuo punteggio e tutte le risposte corrette. Gratis.",
+    "about": "Simulazione di colloquio a tempo. Alla fine vedi il tuo punteggio e tutte le risposte corrette. Privato e gratuito.",
     "pageTitle": "{title}: simulazione colloquio di lavoro gratis",
-    "pageDescription": "Simulazione gratuita di colloquio di lavoro per {title}, livello {level}: {count, plural, one {# argomento} other {# argomenti}}, a tempo, con il tuo voto e tutte le risposte corrette alla fine. È un test di pratica, non un vero colloquio.",
-    "start": "Inizia la pratica",
+    "pageDescription": "Simulazione gratuita di colloquio di lavoro per {title}, livello {level}: {count, plural, one {# argomento} other {# argomenti}}, a tempo, con il tuo punteggio e tutte le risposte corrette alla fine. È una simulazione, non un vero colloquio.",
+    "start": "Inizia la simulazione",
     "again": "Esercitati di nuovo",
     "continue": "Continua",
-    "history": "I tuoi round",
-    "results": "Risultati della pratica",
+    "history": "Le tue simulazioni",
+    "results": "Risultati della simulazione",
     "grade": "delle domande corrette",
     "notFinished": "non terminato",
-    "noRounds": "Ancora nessun round.",
-    "startFailed": "Impossibile avviare la pratica. Riprova.",
-    "gradeLabel": "Voto",
+    "noRounds": "Ancora nessuna simulazione.",
+    "startFailed": "Impossibile avviare la simulazione. Riprova.",
+    "gradeLabel": "Punteggio",
     "questions": "{count, plural, one {# domanda} other {# domande}}",
     "progressLabel": "Avanzamento",
     "answeredLabel": "domande risposte",
@@ -918,14 +918,14 @@
     "verify": "Verifica",
     "verified": "Verificata: {domain}",
     "title": "Verifica l'azienda",
-    "text": "Inserisci il sito web dell'azienda. Quando un proprietario o un admin accede con un'email di lavoro su quel dominio, come you@acme.com (subito se sei tu), esaminiamo l'azienda e aggiungiamo il badge.",
+    "text": "Inserisci il sito web dell'azienda. Quando un proprietario o un amministratore accede con un'email di lavoro su quel dominio, come nome@acme.com (subito se sei tu), esaminiamo l'azienda e aggiungiamo il badge.",
     "website": "Sito web dell'azienda",
     "save": "Salva",
     "done": "Verificata: {domain}",
-    "pending": "Salvato. Verrà inviato per la revisione quando un proprietario o un admin accede con un'email su {domain}.",
+    "pending": "Salvato. Verrà inviato per la revisione quando un proprietario o un amministratore accede con un'email su {domain}.",
     "failed": "Impossibile salvare il sito web.",
     "submitted": "In attesa di revisione. Riceverai una notifica appena sarà controllata.",
-    "waitingEmail": "In attesa che un proprietario o un admin acceda con un'email su {domain}.",
+    "waitingEmail": "In attesa che un proprietario o un amministratore acceda con un'email su {domain}.",
     "declined": "{reason, select, none {Rifiutata.} other {Rifiutata: {reason}}}",
     "tryAgain": "Cambia il nome o il sito web dell'azienda per inviarla di nuovo alla verifica, oppure <contact>contattaci</contact>.",
     "pendingBadge": "Verifica in attesa",

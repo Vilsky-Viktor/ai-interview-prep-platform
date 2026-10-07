@@ -58,7 +58,7 @@ Hoia „oleks plussiks“ loetelu lühike. Pikad nõuete loetelud peletavad eema
 
 ## 2. samm: sõelu CV-sid ainult kohustuslike nõuete järgi
 
-Kasuta CV-d või avaldust jah-ei kontrollideks: tööõigus, asukoht või ajavöönd, kui roll seda nõuab, nõutud keel ja kõik muu, ilma milleta töö tõesti ei saa.
+Kasuta CV-d või avaldust jah-ei kontrollideks: tööluba, asukoht või ajavöönd, kui roll seda nõuab, nõutud keel ja kõik muu, ilma milleta töö tõesti ei saa.
 
 Ära järjesta inimesi CV põhjal. Ametinimetused, tööandjate nimed ja kogemusaastad on nõrgad ennustajad ning CV-sid on raske õiglaselt võrrelda: tugev CV võib peegeldada head kirjutamisoskust sama palju kui head tööd. Kasuta CV-d filtrina selle jaoks, mida ei saa testida, ja suuna kõik läbinud teadmiste kontrolli.
 

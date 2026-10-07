@@ -84,7 +84,7 @@ prepza cubre el paso 2: una prueba de conocimientos del puesto de opción múlti
 - **Específica del puesto por diseño.** prepza propone temas a partir de tu descripción del puesto, y tú los revisas y editas antes de que se redacte ninguna pregunta. Elimina lo que no sea un requisito real. Para puestos técnicos, las preguntas pueden incluir breves ejemplos de código para leer.
 - **Las mismas condiciones para todos.** Los mismos temas y número de preguntas, y una cuenta atrás en cada pregunta. Puedes dar tiempo extra a los candidatos que lo pidan.
 - **Cada candidato recibe sus propias preguntas,** un conjunto aleatorio del banco de cada tema, así que es más difícil compartir respuestas.
-- **Resultados fáciles de leer.** Una ficha de resultados por candidato con cada respuesta y su tiempo, ordenada por puntuación, con avisos de respuestas demasiado rápidas, salidas de la página e intentos de copiar.
+- **Resultados fáciles de leer.** Una ficha de evaluación por candidato con cada respuesta y su tiempo, ordenada por puntuación, con alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar.
 - **Respuestas corregidas con una clave de respuestas** que la IA redacta y revisa; ninguna IA lee ni juzga la respuesta de un candidato.
 
 prepza no hace entrevistas estructuradas, muestras de trabajo ni pruebas cognitivas. Úsalo junto con ellas. Para saber más sobre tipos de pruebas y equidad, lee [Pruebas de selección de personal](/pre-employment-testing).

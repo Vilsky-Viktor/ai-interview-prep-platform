@@ -86,7 +86,7 @@ Zacznij od tego, co musisz sprawdzić. TestGorilla sprawdzi się lepiej, gdy:
 
 Oba narzędzia mogą działać w tym samym procesie rekrutacyjnym:
 
-1. **Każdy, kto aplikuje**, przechodzi krótką rozmowę sprawdzającą wiedzę w prepza, napisaną na podstawie opisu stanowiska.
+1. **Każdy, kto aplikuje**, bierze udział w krótkiej rozmowie sprawdzającej wiedzę w prepza, napisaną na podstawie opisu stanowiska.
 2. **Osoby, które przejdą ten etap**, rozwiązują testy poznawcze, osobowości lub językowe TestGorilla albo zadanie programistyczne.
 3. **Decydują ludzie**, korzystając z obu wyników, CV i ustrukturyzowanej rozmowy kwalifikacyjnej.
 

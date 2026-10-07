@@ -31,7 +31,7 @@ Trang này giải thích hai công cụ khác nhau thế nào, mỗi công cụ 
 | Tích hợp ATS | Không | Tích hợp ATS/API ở gói cao hơn |
 | Báo cáo | Bảng điểm với câu trả lời và thời gian; PDF cho một hoặc tất cả ứng viên | Không so sánh ở đây |
 | Ngôn ngữ | 23 ngôn ngữ cho giao diện, buổi phỏng vấn và email | Không so sánh ở đây; thư viện có bài kiểm tra trình độ ngoại ngữ |
-| Mô hình giá | Theo mỗi ứng viên có trả lời, từ tín dụng trả trước; không có gói đăng ký ([bảng giá](/pricing)) | Một gói miễn phí và các gói trả phí thanh toán theo năm ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
+| Mô hình giá | Theo mỗi ứng viên có trả lời, từ credit trả trước; không có gói đăng ký ([bảng giá](/pricing)) | Một gói miễn phí và các gói trả phí thanh toán theo năm ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
 | Lưu trữ dữ liệu | EU (một số bên xử lý phụ ở Mỹ; xem [chính sách quyền riêng tư](/privacy)) | Không so sánh ở đây |
 
 *Tính năng của TestGorilla tính đến tháng 10/2026, theo [trang bảng giá](https://www.testgorilla.com/pricing/) và [thư viện bài kiểm tra](https://www.testgorilla.com/test-library/) của TestGorilla.*
@@ -51,8 +51,8 @@ Khác biệt thực tế: một bài kiểm tra từ thư viện là cố địn
 **prepza** tính phí theo ứng viên:
 
 - Tạo buổi phỏng vấn là miễn phí.
-- Bạn trả tiền cho mỗi ứng viên trả lời ít nhất một câu hỏi. Ứng viên được mời nhưng không bao giờ bắt đầu thì không tốn gì; tín dụng của họ được hoàn lại.
-- Giá mỗi ứng viên giảm với các mức nạp lớn hơn, 3 ứng viên đầu tiên của bạn được miễn phí, tín dụng không hết hạn, và không có gói đăng ký. Xem [bảng giá](/pricing).
+- Bạn trả tiền cho mỗi ứng viên trả lời ít nhất một câu hỏi. Ứng viên được mời nhưng không bao giờ bắt đầu thì không tốn gì; credit của họ được hoàn lại.
+- Giá mỗi ứng viên giảm với các mức nạp lớn hơn, 3 ứng viên đầu tiên của bạn được miễn phí, credit không hết hạn, và không có gói đăng ký. Xem [bảng giá](/pricing).
 
 Mô hình nào rẻ hơn phụ thuộc vào số ứng viên bạn kiểm tra mỗi năm và các loại bài kiểm tra bạn cần. Gói đăng ký hợp với tuyển dụng đều đặn, số lượng lớn; giá theo ứng viên hợp với tuyển dụng không thường xuyên. [Cách so sánh chi phí bài kiểm tra](/compare/cheapest-pre-employment-test) chỉ cách tính cho số lượng của riêng bạn.
 
@@ -90,7 +90,7 @@ Hai công cụ có thể nằm trong cùng một quy trình tuyển dụng:
 2. **Những người vượt qua** làm bài kiểm tra nhận thức, tính cách hoặc ngoại ngữ của TestGorilla, hoặc một thử thách lập trình.
 3. **Con người quyết định,** dựa trên cả hai kết quả cùng với CV và một buổi phỏng vấn có cấu trúc.
 
-prepza không có hợp đồng và tín dụng không hết hạn, nên thêm prepza vào một quy trình đã dùng công cụ khác không làm phát sinh chi phí cố định.
+prepza không có hợp đồng và credit không hết hạn, nên thêm prepza vào một quy trình đã dùng công cụ khác không làm phát sinh chi phí cố định.
 
 *TestGorilla là nhãn hiệu của chủ sở hữu. prepza không liên kết với và không được chứng thực bởi TestGorilla.*
 

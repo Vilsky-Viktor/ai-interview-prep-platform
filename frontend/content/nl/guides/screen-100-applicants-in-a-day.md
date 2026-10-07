@@ -7,7 +7,7 @@ updated: "2026-10-07"
 
 # Zo screen je 100 sollicitanten in één dag
 
-Er gaat een vacature online en er komen 100 sollicitaties binnen. Elk cv zorgvuldig lezen kost tijd die je niet hebt, dus in de praktijk krijgen de eerste 20 aandacht en worden de rest vluchtig doorgekeken. Dat is niet eerlijk tegenover sollicitanten, en ook niet goed voor jou: een sterke sollicitant kan nummer 87 zijn.
+Er gaat een vacature online en er komen 100 sollicitaties binnen. Elk cv zorgvuldig lezen kost tijd die je niet hebt, dus in de praktijk krijgen de eerste 20 aandacht en wordt de rest vluchtig doorgekeken. Dat is niet eerlijk tegenover sollicitanten, en ook niet goed voor jou: een sterke sollicitant kan nummer 87 zijn.
 
 Deze gids beschrijft een plan voor één dag dat elke sollicitant dezelfde kans geeft en je aan het eind van de dag een shortlist oplevert. Het gebruikt een korte vaardigheidstest als belangrijkste filter, en mensen nemen elk besluit.
 
@@ -16,7 +16,7 @@ Deze gids beschrijft een plan voor één dag dat elke sollicitant dezelfde kans 
 | Tijd | Stap | Jouw inzet |
 | --- | --- | --- |
 | Ochtend, 30 minuten | Bepaal wat de functie vraagt en schrijf de harde eisen op | Gericht nadenken |
-| Ochtend, 30 minuten | Maak een korte vaardigheidstest van de functieomschrijving en controleer die | Onderwerpen nalopen, de test vooraf bekijken |
+| Ochtend, 30 minuten | Maak een korte vaardigheidstest op basis van de functieomschrijving en controleer die | Onderwerpen nalopen, de test vooraf bekijken |
 | Eind van de ochtend, 15 minuten | Controleer de harde eisen en nodig iedereen uit die eraan voldoet | Een snelle check, geen diepgaande lezing |
 | Gedurende de dag | Kandidaten maken de test | Geen |
 | Middag, 1–2 uur | Bekijk de beste resultaten, de antwoorden en de signalen | Zorgvuldig lezen van een kleine groep |
@@ -59,12 +59,12 @@ Grote overzichtsstudies naar personeelsselectie rekenen functiespecifieke kennis
 
 ## Stap 3: controleer de harde eisen en nodig uit (15 minuten)
 
-Loop snel met ja/nee alleen de harde eisen na: werkvergunning, vereiste vergunning of diploma, locatie als de functie dat vraagt. Rangschik hier geen cv's. Je haalt sollicitanten weg die de functie niet kunnen aannemen, je kiest geen favorieten.
+Loop snel met ja/nee alleen de harde eisen na: werkvergunning, vereiste vergunning of diploma, locatie als de functie dat vraagt. Rangschik hier geen cv's. Je haalt sollicitanten weg die de functie niet kunnen aanvaarden, je kiest geen favorieten.
 
 Nodig daarna iedereen uit die overblijft:
 
 - **Plak een lijst met e-mailadressen of upload een bestand.** prepza neemt tot 100 e-mailadressen tegelijk en slaat iedereen over die al begonnen is.
-- **Of gebruik één link.** Heb je de vacature nog niet geplaatst, zet dan de deelbare link van het sollicitatiegesprek in de vacaturetekst. Sollicitanten kunnen de test meteen maken en verschijnen gerangschikt in je lijst. Zet de link uit zodra de functie is vervuld.
+- **Of gebruik één link.** Heb je de vacature nog niet geplaatst, zet dan de deelbare link van het interview in de vacaturetekst. Sollicitanten kunnen de test meteen maken en verschijnen gerangschikt in je lijst. Zet de link uit zodra de functie is vervuld.
 
 Voordat ze beginnen, zien kandidaten wat ze kunnen verwachten: de timer, dat iemand bij jouw bedrijf de resultaten beoordeelt en dat ze om meer tijd kunnen vragen. Vraagt iemand om een aanpassing, dan kun je die kandidaat extra tijd geven voordat hij of zij begint.
 
@@ -78,7 +78,7 @@ Niet iedereen rondt hem op dag één af. Dat is prima: bekijk wie klaar is en ki
 
 Nu begint het zorgvuldige lezen, maar bij een kleinere, gerangschikte groep.
 
-1. **Sorteer op cijfer,** de beste eerst. Dat is de standaard.
+1. **Sorteer op score,** de beste eerst. Dat is de standaard.
 2. **Open elke scorekaart** in de topgroep. Kijk naar de antwoorden, niet alleen naar het getal: welke onderwerpen sterk waren, welke zwak, hoe lang elk antwoord duurde.
 3. **Controleer de integriteitssignalen.** prepza markeert antwoorden die te snel waren om de vraag te hebben gelezen, momenten waarop de kandidaat de pagina verliet, en kopieerpogingen. Een signaal is een reden om beter te kijken, geen bewijs van valsspelen. Iemand die één keer de pagina verliet, kreeg misschien een melding.
 4. **Kijk net onder de slaaggrens.** Scores van verschillende willekeurige vragensets zijn niet precies vergelijkbaar, dus een paar punten kunnen van de trekking komen. Iemand met 65% en sterke antwoorden op de belangrijkste onderwerpen kan een gesprek waard zijn.
