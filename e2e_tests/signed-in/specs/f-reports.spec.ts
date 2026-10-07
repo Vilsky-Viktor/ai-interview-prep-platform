@@ -32,6 +32,11 @@ test("owner downloads and shares the report of all candidates", async ({ signInA
   const dialog = owner.getByRole("dialog")
   await expect(dialog.getByLabel("Recipient's email")).toBeVisible()
   await expect(dialog.getByText("Or send via")).toHaveCSS("text-transform", "lowercase")
+  // The summary goes to each chat app with its own link.
+  await expect(dialog.getByRole("button", { name: "WhatsApp" })).toHaveAttribute("href", /^https:\/\/wa\.me\/\?text=/)
+  await expect(dialog.getByRole("button", { name: "Telegram" })).toHaveAttribute("href", /^https:\/\/t\.me\/share\/url\?/)
+  await expect(dialog.getByRole("button", { name: "Viber" })).toHaveAttribute("href", /^viber:\/\/forward\?text=/)
+  await expect(dialog.getByRole("button", { name: "LINE" })).toHaveAttribute("href", /^https:\/\/line\.me\/R\/share\?text=/)
   await shot(owner, "share-dialog")
   await owner.keyboard.press("Escape")
 })

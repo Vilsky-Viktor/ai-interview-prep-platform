@@ -1,7 +1,7 @@
 import { DownloadIcon, Share2Icon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { TelegramIcon, WhatsAppIcon } from "@/components/chat-icons"
+import { CHAT_APPS } from "@/components/chat-apps"
 import { ReportPdfDemo } from "@/components/landing/report-pdf-demo"
 import { LandingSection, PANEL, Stage } from "@/components/landing/section"
 
@@ -41,12 +41,11 @@ export async function ReportsSection() {
                   <span className="me-2 text-sm lowercase">
                     {report("orSummary")}
                   </span>
-                  <span className={ICON}>
-                    <WhatsAppIcon className="size-8" />
-                  </span>
-                  <span className={ICON}>
-                    <TelegramIcon className="size-8" />
-                  </span>
+                  {CHAT_APPS.map(({ name, Icon }) => (
+                    <span key={name} className={ICON}>
+                      <Icon className="size-8" />
+                    </span>
+                  ))}
                 </span>
               </div>
               <p className="flex h-16 items-center rounded-full bg-muted px-6 text-lg dark:bg-input/30">

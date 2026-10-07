@@ -94,7 +94,7 @@ A report is a PDF, made in the browser, for one candidate or for all of an inter
 
 - downloaded,
 - emailed from prepza, with the PDF attached (it counts towards the member's email limits),
-- shared as a short summary on WhatsApp or Telegram.
+- shared as a short summary on WhatsApp, Telegram, Viber or LINE (Viber's button opens only where its app is installed).
 
 ## Email limits
 

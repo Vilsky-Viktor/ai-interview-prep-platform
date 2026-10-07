@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
-import { TelegramIcon, WhatsAppIcon } from "@/components/chat-icons"
+import { CHAT_APPS } from "@/components/chat-apps"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -24,7 +24,7 @@ const CHAT_BUTTON =
   "size-12 shrink-0 text-muted-foreground hover:text-foreground"
 
 /** Sends a PDF report by email from prepza (a reply goes to the member), or a text
- * summary through WhatsApp or Telegram, which can't carry a file. Laid out like "new candidate". */
+ * summary through a chat app (WhatsApp, Telegram, Viber, LINE), which can't carry a file. Laid out like "new candidate". */
 export function ShareReport({
   open,
   onOpenChange,
@@ -36,7 +36,7 @@ export function ShareReport({
   onOpenChange: (open: boolean) => void
   // The API path that emails the report.
   path: string
-  // The chat message, for WhatsApp and Telegram.
+  // The chat message, for the chat apps.
   summary: string
   makePdf: () => Promise<File | null>
 }) {
@@ -78,7 +78,7 @@ export function ShareReport({
 
   return (
     <Dialog open={open} onOpenChange={(next) => !sending && onOpenChange(next)}>
-      <DialogContent showCloseButton={false} className="sm:max-w-lg">
+      <DialogContent showCloseButton={false} className="sm:max-w-xl">
         {/* The title on the left; the chat apps at the end of its row. */}
         <DialogHeader className="flex-row items-center justify-between gap-4">
           <DialogTitle>{t("shareTitle")}</DialogTitle>
@@ -87,38 +87,25 @@ export function ShareReport({
             <span className="me-2 text-sm text-muted-foreground lowercase">
               {t("orSummary")}
             </span>
-            <Button
-              variant="ghost"
-              size="icon"
-              className={CHAT_BUTTON}
-              aria-label="WhatsApp"
-              render={
-                <a
-                  href={`https://wa.me/?text=${encodeURIComponent(summary)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              }
-              nativeButton={false}
-            >
-              <WhatsAppIcon className="size-8" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className={CHAT_BUTTON}
-              aria-label="Telegram"
-              render={
-                <a
-                  href={`https://t.me/share/url?url=${encodeURIComponent(origin)}&text=${encodeURIComponent(summary)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              }
-              nativeButton={false}
-            >
-              <TelegramIcon className="size-8" />
-            </Button>
+            {CHAT_APPS.map(({ name, Icon, link }) => (
+              <Button
+                key={name}
+                variant="ghost"
+                size="icon"
+                className={CHAT_BUTTON}
+                aria-label={name}
+                render={
+                  <a
+                    href={link(summary, origin)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                }
+                nativeButton={false}
+              >
+                <Icon className="size-8" />
+              </Button>
+            ))}
           </div>
         </DialogHeader>
         <form id="share-report-form" onSubmit={send}>
