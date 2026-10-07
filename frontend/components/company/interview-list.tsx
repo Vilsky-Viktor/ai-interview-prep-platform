@@ -54,7 +54,7 @@ export function InterviewList({
         // One hover surface: the link stretches over the whole row, Delete sits on top of it.
         <div className="relative flex items-center gap-2 p-6 pe-3 transition-colors hover:bg-muted/50">
           <Link
-            href={`/company/${companyId}/interviews/${interview.id}`}
+            href={`/companies/${companyId}/interviews/${interview.id}`}
             className="flex min-w-0 flex-1 items-center justify-between gap-4 after:absolute after:inset-0"
           >
             <span className="min-w-0 space-y-1">

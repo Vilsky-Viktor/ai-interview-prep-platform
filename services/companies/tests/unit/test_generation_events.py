@@ -67,7 +67,7 @@ def test_finished_generation_is_stored_on_its_interview_and_the_company_told(cli
         "company",
         company,
         "interview_ready",
-        f"/company/{company}/interviews/{INTERVIEW.id}",
+        f"/companies/{company}/interviews/{INTERVIEW.id}",
         key=str(INTERVIEW.id),
         title="Bookkeeper interview",
     )
@@ -86,7 +86,7 @@ def test_a_cancelled_generation_removes_its_interview_and_tells_the_company(clie
 
     company = INTERVIEW.company_id
     cancelled = notification(
-        "company", company, "interview_cancelled", f"/company/{company}/interviews"
+        "company", company, "interview_cancelled", f"/companies/{company}/interviews"
     )
     assert client.post("/internal/events", json=event).status_code == 204
     assert removed == [(GENERATION_ID, cancelled)]

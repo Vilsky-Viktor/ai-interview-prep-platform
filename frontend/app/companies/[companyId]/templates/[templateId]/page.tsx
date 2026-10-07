@@ -35,7 +35,7 @@ export default async function CompanyTemplatePage({
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
       <PageHeader
         back={
-          <BackLink href={`/company/${companyId}/templates`}>
+          <BackLink href={`/companies/${companyId}/templates`}>
             {t("title")}
           </BackLink>
         }

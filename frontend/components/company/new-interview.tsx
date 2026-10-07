@@ -29,7 +29,7 @@ export function NewInterview({
         }
       )
       router.push(
-        `/generate/${interview.generation_id}?next=/company/${companyId}/interviews/${interview.id}`
+        `/generate/${interview.generation_id}?next=/companies/${companyId}/interviews/${interview.id}`
       )
     } catch (error) {
       toast.error(apiErrorMessage(error, t("startFailed")))

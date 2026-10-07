@@ -31,7 +31,7 @@ export function StartPreview({
         { method: "POST" }
       )
       router.push(
-        `/sessions/${preview.session_id}?from=/company/${companyId}/interviews/${interviewId}`
+        `/sessions/${preview.session_id}?from=/companies/${companyId}/interviews/${interviewId}`
       )
     } catch (error) {
       toast.error(apiErrorMessage(error, interviews("tryFailed")))

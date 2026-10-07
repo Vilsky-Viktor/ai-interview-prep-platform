@@ -41,7 +41,7 @@ export default async function ReferralsPage({
   }
 
   if (!company) {
-    redirect("/company")
+    redirect("/companies")
   }
 
   return (
@@ -67,7 +67,7 @@ export default async function ReferralsPage({
                 {referralText("companyNote", { reward: referral.reward })}
               </p>
             </div>
-            <ReferralLink referral={referral} path="/company" />
+            <ReferralLink referral={referral} path="/companies" />
           </div>
           {referral.rewards.length === 0 ? (
             <p className="py-16 text-center text-muted-foreground">

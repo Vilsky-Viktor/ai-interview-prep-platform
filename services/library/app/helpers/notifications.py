@@ -9,7 +9,7 @@ def question_notification(question_set, topic: str, kind: NotificationKind) -> d
         Recipient.COMPANY,
         question_set.owner_id,
         kind,
-        f"/company/{question_set.owner_id}/interviews",
+        f"/companies/{question_set.owner_id}/interviews",
         title=question_set.title,
         topic=topic,
     )

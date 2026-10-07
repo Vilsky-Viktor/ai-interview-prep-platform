@@ -44,15 +44,15 @@ export default async function CompanyTemplatesPage({
   }
 
   if (!company) {
-    redirect("/company")
+    redirect("/companies")
   }
 
   const browser = await TemplateBrowser({
-    base: `/company/${companyId}/templates`,
+    base: `/companies/${companyId}/templates`,
     // Only templates a company can copy, so "use template" never fails.
     listPath: "/library/templates/copyable",
     params: await searchParams,
-    openBase: `/company/${companyId}/templates`,
+    openBase: `/companies/${companyId}/templates`,
     // Using a template creates a test: not for viewers.
     companyId: company.can_edit ? companyId : undefined,
   })
@@ -85,7 +85,7 @@ export default async function CompanyTemplatesPage({
           <Button
             size="icon"
             aria-label={interviewsText("new")}
-            render={<Link href={`/company/${companyId}/interviews/new`} />}
+            render={<Link href={`/companies/${companyId}/interviews/new`} />}
             nativeButton={false}
             className="size-10 shrink-0"
           >

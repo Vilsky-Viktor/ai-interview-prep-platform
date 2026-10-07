@@ -15,12 +15,12 @@ const SOME_ID = "00000000-0000-0000-0000-000000000000"
 // Every page the specs open, so each is compiled before the browser starts (warm-up.ts).
 export const WARM_UP_PATHS = [
   "/",
-  "/company",
-  `/company/${SOME_ID}/interviews`,
-  `/company/${SOME_ID}/interviews/new`,
-  `/company/${SOME_ID}/interviews/${SOME_ID}`,
-  `/company/${SOME_ID}/templates`,
-  `/company/${SOME_ID}/members`,
+  "/companies",
+  `/companies/${SOME_ID}/interviews`,
+  `/companies/${SOME_ID}/interviews/new`,
+  `/companies/${SOME_ID}/interviews/${SOME_ID}`,
+  `/companies/${SOME_ID}/templates`,
+  `/companies/${SOME_ID}/members`,
   `/invite/${SOME_ID}`,
   `/join/${SOME_ID}`,
   `/sessions/${SOME_ID}`,

@@ -37,7 +37,7 @@ export default async function GeneratePage({
     )
   }
 
-  const company = next?.match(/^\/company\/([^/]+)\/interviews\/([^/?]+)/)
+  const company = next?.match(/^\/companies\/([^/]+)\/interviews\/([^/?]+)/)
 
   if (!next || !company) {
     notFound()
@@ -49,7 +49,7 @@ export default async function GeneratePage({
         // Generations go through companies, so every admin can follow them.
         path={`/companies/interviews/${company[2]}/generation`}
         next={next}
-        backHref={`/company/${company[1]}/interviews`}
+        backHref={`/companies/${company[1]}/interviews`}
         backLabel={t("interviews")}
       />
     </main>

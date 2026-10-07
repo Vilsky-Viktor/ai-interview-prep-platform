@@ -60,7 +60,7 @@ export default async function TopUpPage() {
           <p className="text-base text-muted-foreground">{t("noCompany")}</p>
           <Button
             className="h-12 px-6 text-base"
-            render={<Link href="/company" />}
+            render={<Link href="/companies" />}
             nativeButton={false}
           >
             {t("createCompany")}

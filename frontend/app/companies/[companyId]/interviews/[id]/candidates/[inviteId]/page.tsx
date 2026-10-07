@@ -67,7 +67,7 @@ export default async function ScorecardPage({
         <PageHeader
           back={
             <BackLink
-              href={`/company/${companyId}/interviews/${id}?tab=candidates`}
+              href={`/companies/${companyId}/interviews/${id}?tab=candidates`}
             >
               {t("interview")}
             </BackLink>
@@ -102,7 +102,7 @@ export default async function ScorecardPage({
                 inviteId={inviteId}
                 email={card.email}
                 status={card.status}
-                backHref={`/company/${companyId}/interviews/${id}?tab=candidates`}
+                backHref={`/companies/${companyId}/interviews/${id}?tab=candidates`}
               />
             )}
             {reportable && (

@@ -14,7 +14,7 @@ from app.services import events, feed
 from app.storage import notifications
 
 EVENT = notification(
-    "company", "c1", NotificationKind.CANDIDATE_FINISHED, "/company/c1", email="a@b.c"
+    "company", "c1", NotificationKind.CANDIDATE_FINISHED, "/companies/c1", email="a@b.c"
 )
 
 
@@ -78,7 +78,7 @@ def test_the_bell_shows_the_users_and_their_companies_notifications(client, monk
             Notification(
                 id=uuid.uuid4(),
                 kind="candidate_finished",
-                link="/company/c1",
+                link="/companies/c1",
                 data={"email": "a@b.c"},
                 created_at=datetime.now(UTC),
             )

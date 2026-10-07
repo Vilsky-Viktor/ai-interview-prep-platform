@@ -49,7 +49,7 @@ export default async function InterviewsPage({
   }
 
   if (!company) {
-    redirect("/company")
+    redirect("/companies")
   }
 
   return (
@@ -78,7 +78,7 @@ export default async function InterviewsPage({
             )}
             {company.can_edit && (
               <Button
-                render={<Link href={`/company/${companyId}/interviews/new`} />}
+                render={<Link href={`/companies/${companyId}/interviews/new`} />}
                 nativeButton={false}
                 className="h-12 px-6 text-base"
               >

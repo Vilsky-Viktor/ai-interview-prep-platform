@@ -15,7 +15,7 @@ export async function signIn(browser: Browser, email: string): Promise<Page> {
   const context = await browser.newContext()
   const page = await context.newPage()
   // A page that only asks to sign in shows the options inline.
-  await visit(page, "/company")
+  await visit(page, "/companies")
   const popup = await openGooglePopup(page)
   await popup.waitForLoadState()
   // Each listed account carries its claims, the email among them, URL-encoded.

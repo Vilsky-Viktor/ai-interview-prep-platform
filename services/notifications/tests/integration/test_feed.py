@@ -49,7 +49,7 @@ def test_the_feed_holds_the_users_and_their_companies_notifications(run, member_
     result = run(scenario())
 
     assert [(item.kind, item.link) for item in result.items] == [
-        ("candidate_finished", f"/company/{mine}"),
+        ("candidate_finished", f"/companies/{mine}"),
         ("referral_rewarded", "/billing"),
     ]
     assert result.unread == 2

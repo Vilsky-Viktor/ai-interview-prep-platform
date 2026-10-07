@@ -38,7 +38,7 @@ export default async function MembersPage({
   }
 
   if (!company) {
-    redirect("/company")
+    redirect("/companies")
   }
 
   return (

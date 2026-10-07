@@ -75,7 +75,7 @@ def test_a_newly_flagged_interview_question_notifies_the_company(monkeypatch):
 
     assert saved[0]["recipient"] == "company"
     assert saved[0]["recipient_id"] == "c1"
-    assert saved[0]["link"] == "/company/c1/interviews"
+    assert saved[0]["link"] == "/companies/c1/interviews"
 
 
 def test_a_flagged_question_is_not_notified_again(monkeypatch):
@@ -130,7 +130,7 @@ def test_fixing_a_flagged_question_notifies_its_owner(monkeypatch):
                 "recipient": "company",
                 "recipient_id": "u1",
                 "kind": "question_fixed",
-                "link": "/company/u1/interviews",
+                "link": "/companies/u1/interviews",
                 "data": {"title": "Accounting", "topic": TOPIC},
             },
         )

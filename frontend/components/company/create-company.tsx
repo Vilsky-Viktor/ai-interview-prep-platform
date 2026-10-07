@@ -58,7 +58,7 @@ export function CreateCompany() {
         method: "POST",
         body: JSON.stringify({ name: name.trim() }),
       })
-      router.replace(`/company/${company.id}/interviews`)
+      router.replace(`/companies/${company.id}/interviews`)
     } catch (error) {
       if (error instanceof ApiError && error.status === 409) {
         setNameError(error.message)

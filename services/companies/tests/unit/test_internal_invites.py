@@ -38,7 +38,7 @@ def test_notifications_marks_an_invite_undelivered_and_the_company_is_told(clien
         "company",
         company,
         "invite_undelivered",
-        f"/company/{company}/interviews/{INTERVIEW.id}",
+        f"/companies/{company}/interviews/{INTERVIEW.id}",
         email="erin@example.com",
         title="Backend",
     )

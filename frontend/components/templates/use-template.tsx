@@ -29,7 +29,7 @@ export function UseTemplate({
         `/companies/interviews/from-template?company_id=${companyId}`,
         { method: "POST", body: JSON.stringify({ template_id: templateId }) }
       )
-      router.push(`/company/${companyId}/interviews/${interview.id}`)
+      router.push(`/companies/${companyId}/interviews/${interview.id}`)
     } catch (error) {
       toast.error(apiErrorMessage(error, t("useFailed")))
       setBusy(false)

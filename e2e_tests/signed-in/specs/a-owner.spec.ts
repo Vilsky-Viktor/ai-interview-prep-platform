@@ -21,12 +21,12 @@ test("owner creates a company, an interview from a template and invites a candid
   await shot(owner, "home-company-step", false)
 
   const name = `E2E Owner ${randomId()}`
-  await visit(owner, "/company")
+  await visit(owner, "/companies")
   await owner.getByRole("button", { name: "New company" }).click()
   await owner.getByRole("dialog").getByLabel("Company name").fill(name)
   await shot(owner, "new-company-dialog")
   await owner.getByRole("dialog").getByRole("button", { name: "Create" }).click()
-  await expect(owner).toHaveURL(/\/company\/[^/]+\/interviews$/)
+  await expect(owner).toHaveURL(/\/companies\/[^/]+\/interviews$/)
   const companyUrl = new URL(owner.url()).pathname.replace(/\/interviews$/, "")
   await expect(owner.getByRole("heading", { name })).toBeVisible()
   await expect(owner.getByText("No interviews yet. Create your first one.")).toBeVisible()

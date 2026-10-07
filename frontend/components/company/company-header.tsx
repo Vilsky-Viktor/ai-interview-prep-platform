@@ -49,7 +49,7 @@ export function CompanyHeader({
   return (
     <div className="space-y-4">
       <div className="relative flex min-h-14 items-center">
-        <BackLink href="/company">{t("title")}</BackLink>
+        <BackLink href="/companies">{t("title")}</BackLink>
         {/* The logo candidates see; clicking it sets or changes it. */}
         <div className="me-4">
           <LogoPicker

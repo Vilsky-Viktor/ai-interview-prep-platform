@@ -4,6 +4,10 @@ import createNextIntlPlugin from "next-intl/plugin"
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // Titles, canonical addresses and hreflang always go in the <head>, for every visitor and
+  // crawler: Next.js would otherwise stream a slow page's metadata into the body, which only
+  // crawlers that run JavaScript read.
+  htmlLimitedBots: /.*/,
   // Bind mounts on Colima do not deliver file events, so the dev server polls.
   watchOptions: {
     pollIntervalMs: 1000,
@@ -20,6 +24,18 @@ const nextConfig: NextConfig = {
     }
 
     return config
+  },
+  // Companies' pages moved from /company to /companies; links in emails and notifications sent
+  // before still work.
+  async redirects() {
+    return [
+      { source: "/company", destination: "/companies", permanent: true },
+      {
+        source: "/company/:path*",
+        destination: "/companies/:path*",
+        permanent: true,
+      },
+    ]
   },
   // In `pnpm dev` there is no gateway in front of Next, so proxy the API to it.
   async rewrites() {

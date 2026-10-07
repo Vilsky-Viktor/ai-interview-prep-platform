@@ -12,7 +12,7 @@ test("owner downloads and shares the report of all candidates", async ({ signInA
   const company = await createCompany(owner)
   const interviewId = await createInterview(owner, company.id)
   await inviteCandidate(owner, interviewId, throwawayEmail("candidate"))
-  await visit(owner, `/company/${company.id}/interviews/${interviewId}?tab=candidates`)
+  await visit(owner, `/companies/${company.id}/interviews/${interviewId}?tab=candidates`)
   // Labels are lowercase like the filters beside them, in every language (CSS, not the text).
   await expect(owner.getByText("Shareable link", { exact: true })).toHaveCSS(
     "text-transform",

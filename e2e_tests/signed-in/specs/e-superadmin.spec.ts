@@ -32,43 +32,50 @@ test("superadmin sorts pass rates", async ({ signInSuperadmin }) => {
   await shot(superadmin, "pass-rates-by-finished")
 })
 
-test("superadmin sees a month's stats, another month and all time", async ({
+test("superadmin sees a month's stats, a year's and all time, kept after a reload", async ({
   signInSuperadmin,
 }) => {
   const superadmin = await signInSuperadmin()
   await visit(superadmin, "/superadmin/stats")
-  const month = superadmin.getByRole("combobox", { name: "Month" })
-  const allTime = superadmin.getByRole("button", { name: /^all time$/i })
-  // This UTC month by default; the menu has the last twelve.
-  const now = new Date().toISOString().slice(0, 7)
-  await expect(month).toHaveValue(now)
-  await expect(month.locator("option")).toHaveCount(12)
-  await expect(allTime).toHaveAttribute("aria-pressed", "false")
+  // A fresh start: this month.
+  await superadmin.evaluate(() => localStorage.removeItem("prepza_stats_period"))
+  await visit(superadmin, "/superadmin/stats")
+  const now = new Date()
+  const thisMonth = now.toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  })
+  const thisYear = String(now.getUTCFullYear())
+  const period = superadmin.getByRole("button", { name: "Period" })
+  const allTime = superadmin.getByRole("checkbox")
+  await expect(period).toHaveText(thisMonth)
   const cards = superadmin.locator("dl")
   await expect(cards.getByRole("term")).toHaveCount(9)
-  await expect(cards.getByRole("term").filter({ hasText: "Paid" })).toBeVisible()
   // Every service answered: no card is left as a dash.
   await expect(cards.getByRole("definition").filter({ hasText: /^—$/ })).toHaveCount(0)
   await shot(superadmin, "stats")
-  // The oldest month on offer.
-  const oldest = (await month.locator("option").last().getAttribute("value")) ?? ""
-  await month.selectOption(oldest)
-  await expect(superadmin).toHaveURL(new RegExp(`month=${oldest}$`))
-  // All time turns on, and off again back to the month picked before.
+  // One choice in the menu: a month with its year, or a year.
+  await period.click()
+  await expect(superadmin.getByRole("menuitemradio", { name: thisMonth })).toHaveAttribute(
+    "aria-checked",
+    "true"
+  )
+  await shot(superadmin, "stats-menu")
+  await superadmin.getByRole("menuitemradio", { name: thisYear, exact: true }).click()
+  await expect(period).toHaveText(thisYear)
+  // All time turns the menu off, keeping its year.
   await allTime.click()
-  await expect(superadmin).toHaveURL(new RegExp(`month=${oldest}&all=1$`))
-  await expect(allTime).toHaveAttribute("aria-pressed", "true")
-  await expect(month).toHaveValue(oldest)
+  await expect(allTime).toBeChecked()
+  await expect(period).toBeDisabled()
   await shot(superadmin, "stats-all-time")
+  // The browser keeps the choice; the address doesn't change.
+  await expect(superadmin).toHaveURL(/\/superadmin\/stats$/)
+  await superadmin.reload()
+  await expect(allTime).toBeChecked()
+  await expect(period).toHaveText(thisYear)
   await allTime.click()
-  await expect(superadmin).toHaveURL(new RegExp(`month=${oldest}$`))
-  await expect(allTime).toHaveAttribute("aria-pressed", "false")
-  // Picking a month turns all time off too.
-  await allTime.click()
-  await expect(allTime).toHaveAttribute("aria-pressed", "true")
-  await month.selectOption(now)
-  await expect(superadmin).toHaveURL(new RegExp(`month=${now}$`))
-  await expect(allTime).toHaveAttribute("aria-pressed", "false")
+  await expect(period).toBeEnabled()
 })
 
 /** Turns a switch on the controls page, opened afresh: the dev frontend may have reloaded it. */
@@ -118,7 +125,7 @@ test("superadmin turns the pause and maintenance mode on and off", async ({
     await expect.poll(() => paused(superadmin)).toBe(true)
     await shot(superadmin, "pause-on")
 
-    const newInterview = `/company/${company.id}/interviews/new`
+    const newInterview = `/companies/${company.id}/interviews/new`
     await visit(owner, newInterview)
     await expect(owner.getByText(PAUSE_NOTICE)).toBeVisible()
     // The start box is there but off, so it's clearly unavailable.
@@ -142,14 +149,14 @@ test("superadmin turns the pause and maintenance mode on and off", async ({
     await expect.poll(() => maintenanceOn(superadmin)).toBe(true)
 
     // Everyone else gets the maintenance screen; superadmins the site, with a warning card.
-    await visitUntil(owner, "/company", owner.getByRole("heading", { name: "Under maintenance" }))
+    await visitUntil(owner, "/companies", owner.getByRole("heading", { name: "Under maintenance" }))
     await shot(owner, "maintenance-screen")
-    await visitUntil(superadmin, "/company", superadmin.getByText(MAINTENANCE_NOTICE))
+    await visitUntil(superadmin, "/companies", superadmin.getByText(MAINTENANCE_NOTICE))
     await shot(superadmin, "maintenance-superadmin")
 
     await flip(superadmin, "Maintenance mode", false)
     await expect.poll(() => maintenanceOn(superadmin)).toBe(false)
-    await visitUntil(owner, "/company", owner.getByText(company.name))
+    await visitUntil(owner, "/companies", owner.getByText(company.name))
   } finally {
     await api(superadmin, "PUT", "/companies/superadmin/maintenance", { on: false })
     await api(superadmin, "PUT", "/companies/superadmin/pause", { paused: false })

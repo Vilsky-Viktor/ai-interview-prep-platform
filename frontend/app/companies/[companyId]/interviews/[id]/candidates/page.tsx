@@ -7,5 +7,5 @@ export default async function CandidatesPage({
 }) {
   const { companyId, id } = await params
 
-  redirect(`/company/${companyId}/interviews/${id}?tab=candidates`)
+  redirect(`/companies/${companyId}/interviews/${id}?tab=candidates`)
 }

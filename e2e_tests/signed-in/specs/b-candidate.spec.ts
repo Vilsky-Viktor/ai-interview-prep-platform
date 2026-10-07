@@ -58,7 +58,7 @@ test("candidate takes the interview from the invite link", async ({ signInAs }) 
   await shot(candidate, "done")
 
   // The company sees them finished.
-  await visit(owner, `/company/${company.id}/interviews/${interviewId}?tab=candidates`)
+  await visit(owner, `/companies/${company.id}/interviews/${interviewId}?tab=candidates`)
   await expect(owner.getByText(email, { exact: true }).first()).toBeVisible()
   await shot(owner, "owner-candidates")
 })

@@ -39,7 +39,7 @@ export function AdminInvite({ token }: { token: string }) {
       await apiFetch(`/companies/members/invites/${token}/accept`, {
         method: "POST",
       })
-      router.push("/company")
+      router.push("/companies")
     } catch (error) {
       const forbidden = error instanceof ApiError && error.status === 403
       toast.error(forbidden ? share("wrongEmail") : share("acceptFailed"))
@@ -78,7 +78,7 @@ export function AdminInvite({ token }: { token: string }) {
       {invite.joined && matches ? (
         <Button
           className="h-12 px-6 text-base"
-          onClick={() => router.push("/company")}
+          onClick={() => router.push("/companies")}
         >
           {t("open")}
         </Button>

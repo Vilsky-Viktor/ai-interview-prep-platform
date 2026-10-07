@@ -4,7 +4,7 @@ import { translatedTitle } from "@/lib/site"
 export const generateMetadata = () => translatedTitle("session", "title")
 
 // A company member's preview passes the test it came from; nothing else is accepted.
-const FROM_TEST = /^\/company\/[^/]+\/interviews\/[^/?#]+$/
+const FROM_TEST = /^\/companies\/[^/]+\/interviews\/[^/?#]+$/
 
 export default async function SessionPage({
   params,

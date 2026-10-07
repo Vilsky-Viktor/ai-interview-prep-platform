@@ -95,7 +95,7 @@ export default async function InterviewPage({
     notFound()
   }
 
-  const interviewsHref = `/company/${companyId}/interviews`
+  const interviewsHref = `/companies/${companyId}/interviews`
   const interviewHref = `${interviewsHref}/${id}`
   const questionsPath = `/companies/interviews/${id}/questions`
   const ready = Boolean(interview.set_id)

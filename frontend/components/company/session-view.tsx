@@ -59,7 +59,7 @@ export function SessionView({
     }
   }, [practiceDone, inviteId, router])
 
-  // A member's preview comes from its test's page (/company/{id}/...), so its company is known;
+  // A member's preview comes from its test's page (/companies/{id}/...), so its company is known;
   // a preview has no invite behind it.
   const previewCompany = testHref?.split("/")[2]
 

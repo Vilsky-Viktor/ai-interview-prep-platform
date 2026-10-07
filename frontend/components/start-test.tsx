@@ -103,7 +103,7 @@ export function StartTest({
         }
       )
       router.push(
-        `/generate/${interview.generation_id}?next=/company/${id}/interviews/${interview.id}`
+        `/generate/${interview.generation_id}?next=/companies/${id}/interviews/${interview.id}`
       )
     } catch (error) {
       if (error instanceof ApiError && error.status === 409) {

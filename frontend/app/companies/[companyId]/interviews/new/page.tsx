@@ -24,7 +24,7 @@ export default async function NewInterviewPage({
 
   // Viewers don't create tests: back to the company's tests.
   if (company && !company.can_edit) {
-    redirect(`/company/${companyId}/interviews`)
+    redirect(`/companies/${companyId}/interviews`)
   }
 
   const paused = await isPaused()
@@ -36,7 +36,7 @@ export default async function NewInterviewPage({
         <div className="w-full max-w-176 space-y-10">
           <div className="relative">
             <BackLink
-              href={`/company/${companyId}/interviews`}
+              href={`/companies/${companyId}/interviews`}
               className="xl:top-2.5"
             >
               {t("title")}

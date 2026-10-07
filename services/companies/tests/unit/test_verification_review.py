@@ -88,7 +88,7 @@ def test_approving_tells_the_owners_and_admins(client, superadmin, decisions):
     assert [notice["recipient_id"] for notice in notices] == ["ann", "bob"]
     assert notices[0]["kind"] == "verification_approved"
     assert notices[0]["data"] == {"name": "Acme", "domain": "acme.com"}
-    assert notices[0]["link"] == f"/company/{COMPANY_ID}/interviews"
+    assert notices[0]["link"] == f"/companies/{COMPANY_ID}/interviews"
 
 
 def test_declining_keeps_the_reason_and_says_it(client, superadmin, decisions):

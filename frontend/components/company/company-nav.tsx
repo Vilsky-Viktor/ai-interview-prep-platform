@@ -15,22 +15,22 @@ export function CompanyNav({
   const items = [
     {
       id: "interviews",
-      href: `/company/${companyId}/interviews`,
+      href: `/companies/${companyId}/interviews`,
       label: t("interviews"),
     },
     {
       id: "templates",
-      href: `/company/${companyId}/templates`,
+      href: `/companies/${companyId}/templates`,
       label: t("templates"),
     },
     {
       id: "members",
-      href: `/company/${companyId}/members`,
+      href: `/companies/${companyId}/members`,
       label: t("team"),
     },
     {
       id: "referrals",
-      href: `/company/${companyId}/referrals`,
+      href: `/companies/${companyId}/referrals`,
       label: t("referrals"),
     },
   ] as const

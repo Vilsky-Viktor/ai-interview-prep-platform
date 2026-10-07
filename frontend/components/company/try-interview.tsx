@@ -26,7 +26,7 @@ export function TryInterview({
       aria-label={t("tryLabel", { title })}
       tooltip={t("try")}
       render={
-        <Link href={`/company/${companyId}/interviews/${interviewId}/try`} />
+        <Link href={`/companies/${companyId}/interviews/${interviewId}/try`} />
       }
       nativeButton={false}
     >

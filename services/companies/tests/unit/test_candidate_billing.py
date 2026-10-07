@@ -81,7 +81,7 @@ def test_a_finished_interview_with_an_answer_charges_and_tells_the_company(ledge
             "company",
             COMPANY_ID,
             "candidate_finished",
-            f"/company/{COMPANY_ID}/interviews/{INTERVIEW_ID}",
+            f"/companies/{COMPANY_ID}/interviews/{INTERVIEW_ID}",
             # One per invite, however often the event comes.
             key=str(invite.id),
             email="carol@example.com",

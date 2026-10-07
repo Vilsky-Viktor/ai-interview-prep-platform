@@ -23,7 +23,7 @@ def finished(company_id: str, title: str = "Backend", **data) -> dict:
         Recipient.COMPANY,
         company_id,
         NotificationKind.CANDIDATE_FINISHED,
-        f"/company/{company_id}",
+        f"/companies/{company_id}",
         title=title,
         **data,
     )

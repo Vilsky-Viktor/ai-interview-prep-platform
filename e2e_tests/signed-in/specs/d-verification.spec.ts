@@ -23,7 +23,7 @@ test("company verification: pending, declined, renamed, approved", async ({
   const domain = `e2e-${randomId()}.test`
   const owner = await signInAs(ownerEmail(domain))
   const company = await createCompany(owner)
-  const interviews = `/company/${company.id}/interviews`
+  const interviews = `/companies/${company.id}/interviews`
   await visit(owner, interviews)
 
   await owner.getByRole("button", { name: "Verify" }).click()
