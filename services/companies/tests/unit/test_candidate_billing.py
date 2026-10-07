@@ -35,8 +35,9 @@ def ledger(monkeypatch):
 COMPANY_ID = uuid.uuid4()
 
 
-def finished(monkeypatch, status=InviteStatus.IN_PROCESS):
-    """The invite, and the notifications saved as it's finished."""
+def finished(monkeypatch, status=InviteStatus.IN_PROCESS, pass_mark=70):
+    """The invite, and the notifications saved as it's finished (its candidate.finished event
+    in `invite.result`)."""
     invite = SimpleNamespace(
         id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="carol@example.com", status=status
     )
@@ -45,12 +46,15 @@ def finished(monkeypatch, status=InviteStatus.IN_PROCESS):
     async def fake_get(invite_id):
         return invite
 
-    async def fake_finish(invite_id, grade, flagged, notice, event_id):
+    async def fake_finish(invite_id, grade, flagged, notice, event_id, result):
         invite.results = (grade, flagged)
+        invite.result = result
         notices.append(notice)
 
     async def fake_interview(interview_id):
-        return SimpleNamespace(id=interview_id, company_id=COMPANY_ID, title="Backend")
+        return SimpleNamespace(
+            id=interview_id, company_id=COMPANY_ID, title="Backend", pass_mark=pass_mark
+        )
 
     async def fake_scores(invite_ids):
         return {str(invite.id): {"progress": 100, "grade": 85, "finished": True, "copies": 1}}
@@ -92,6 +96,32 @@ def test_a_finished_interview_with_an_answer_charges_and_tells_the_company(ledge
     # Stored on the invite, so the candidates list sorts and filters by them.
     assert invite.results == (85, True)
     assert ledger == [("charge", f"{INTERVIEW_ID}:carol@example.com")]
+    # ats writes the result back to the ATS that sent the candidate.
+    assert invite.result == {
+        "candidate_invite_id": str(invite.id),
+        "interview_id": str(INTERVIEW_ID),
+        "company_id": str(COMPANY_ID),
+        "title": "Backend",
+        "grade": 85,
+        "passed": True,
+        "flagged": True,
+    }
+
+
+def test_a_grade_under_the_pass_mark_or_none_hasnt_passed(ledger, monkeypatch):
+    invite, _ = finished(monkeypatch, pass_mark=90)
+    data = {"candidate_invite_id": str(invite.id), "answered": 2}
+    asyncio.run(candidate_billing.handle("interview.finished", data, "event-1"))
+    under = invite.result["passed"]
+
+    async def down(invite_ids):
+        raise httpx.ConnectError("rounds is down")
+
+    monkeypatch.setattr(rounds, "invite_scores", down)
+    asyncio.run(candidate_billing.handle("interview.finished", data, "event-2"))
+
+    assert under is False
+    assert (invite.result["grade"], invite.result["passed"]) == (None, False)
 
 
 def test_rounds_being_down_doesnt_hold_up_the_charge(ledger, monkeypatch):

@@ -7,7 +7,7 @@ from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from app.constants.events import CANDIDATE_INVITED
+from app.constants.events import CANDIDATE_FINISHED, CANDIDATE_INVITED
 from app.constants.invites import NOT_STARTED, InviteStatus
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
@@ -222,9 +222,11 @@ async def finish(
     flagged: bool,
     notice: dict | None,
     event_id: str | None = None,
+    result: dict | None = None,
 ) -> None:
     """Marks the invite finished (the candidates list may have already) with the candidate's
-    grade and integrity flag, and the company's notification, if any: once per event."""
+    grade and integrity flag, and the company's notification and the candidate.finished event
+    (`result`), if any: once per event."""
     async with Session() as session:
         new = await processed_events.claim(session, event_id)
         await session.execute(
@@ -235,6 +237,9 @@ async def finish(
 
         if notice and new:
             outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+
+        if result and new:
+            outbox.add(session, OutboxEvent, CANDIDATE_FINISHED, result)
 
         await session.commit()
 

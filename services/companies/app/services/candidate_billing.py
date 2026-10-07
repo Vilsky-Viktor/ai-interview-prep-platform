@@ -6,7 +6,7 @@ from prepza_common.analytics import track
 
 from app.constants.events import INTERVIEW_FINISHED
 from app.constants.invites import EXPIRIES_PER_BATCH, INVITE_EXPIRY_DAYS, NOT_STARTED, InviteStatus
-from app.helpers.candidates import candidate_key, stored_results
+from app.helpers.candidates import candidate_key, finished_result, stored_results
 from app.helpers.notifications import candidate_finished
 from app.integrations import billing, rounds
 from app.services import outbox as outbox_service
@@ -52,7 +52,8 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
     if charged:
         notice = candidate_finished(interview, invite.id, invite.email, grade)
 
-    await invites.finish(invite.id, grade, flagged, notice, event_id)
+    result = finished_result(interview, invite.id, grade, flagged)
+    await invites.finish(invite.id, grade, flagged, notice, event_id, result)
     await outbox_service.flush_quietly()
 
     key = candidate_key(invite.interview_id, invite.email)

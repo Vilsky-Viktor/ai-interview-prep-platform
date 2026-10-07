@@ -2,7 +2,7 @@ from fastapi import APIRouter, status
 from prepza_common.google import Invoker
 from prepza_common.pubsub import PushBody, event_of
 
-from app.services import ats_candidates, candidate_billing, candidate_results, generation_events
+from app.services import candidate_billing, candidate_results, generation_events
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -15,5 +15,3 @@ async def receive_event(body: PushBody) -> None:
     await generation_events.handle(event_type, data, event_id)
     await candidate_billing.handle(event_type, data, event_id)
     await candidate_results.handle(event_type, data)
-    # Last: a finished candidate's grade is stored by now, for writing it back to their ATS.
-    await ats_candidates.report(event_type, data)

@@ -2,7 +2,6 @@ import pytest
 from prepza_common import memory_cache
 
 from app.integrations import billing
-from app.services import ats_candidates
 from app.storage import accounts, audit, candidates, invites
 from tests.unit import fake_candidates
 
@@ -56,14 +55,3 @@ def stored_candidates(monkeypatch):
 def nothing_cached(monkeypatch):
     """Library's answers kept in memory (services/set_cache.py) start empty for each test."""
     monkeypatch.setattr(memory_cache, "_entries", {})
-
-
-@pytest.fixture(autouse=True)
-def no_ats_candidates(monkeypatch):
-    """Candidates an ATS sent live in the database; tests of the ATS flow replace these."""
-
-    async def nothing(*args, **kwargs):
-        return None
-
-    monkeypatch.setattr(ats_candidates, "invite_waiting", nothing)
-    monkeypatch.setattr(ats_candidates, "report", nothing)

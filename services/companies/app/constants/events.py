@@ -14,5 +14,12 @@ INTERVIEW_FINISHED = "interview.finished"
 RESULTS_RESCORED = "results.rescored"
 # A company was deleted; notifications removes the company's notifications.
 COMPANY_DELETED = "company.deleted"
+# A candidate's interview.finished was stored: their grade, whether they passed, and the
+# interview's title; ats writes the result back to the ATS that sent them.
+CANDIDATE_FINISHED = "candidate.finished"
+# A generated interview got its questions; ats invites the candidates waiting for it.
+INTERVIEW_READY = "interview.ready"
+# An interview was deleted; ats removes its job links and the candidates sent for it.
+INTERVIEW_DELETED = "interview.deleted"
 # Processed events are remembered this long: past Pub/Sub's 7 days of redeliveries.
 PROCESSED_EVENT_DAYS = 8

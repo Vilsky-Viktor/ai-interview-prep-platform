@@ -4,6 +4,7 @@ from prepza_common import outbox
 from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, func, select, update
 
+from app.constants.events import INTERVIEW_DELETED, INTERVIEW_READY
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
@@ -132,9 +133,22 @@ async def set_topic_limit(interview_id, topic_id: uuid.UUID, limit: int) -> None
 
 
 async def remove(interview_id) -> None:
+    """Deletes the interview, with the interview.deleted event when one is removed."""
     async with Session() as session:
-        await session.execute(delete(Interview).where(Interview.id == interview_id))
+        company_id = await session.scalar(
+            delete(Interview).where(Interview.id == interview_id).returning(Interview.company_id)
+        )
+
+        if company_id is not None:
+            add_deleted(session, interview_id, company_id)
+
         await session.commit()
+
+
+def add_deleted(session, interview_id, company_id) -> None:
+    """ats removes the deleted interview's job links and candidates."""
+    data = {"interview_id": str(interview_id), "company_id": str(company_id)}
+    outbox.add(session, OutboxEvent, INTERVIEW_DELETED, data)
 
 
 async def set_set_id(interview_id, set_id: uuid.UUID) -> None:
@@ -156,33 +170,42 @@ async def set_generated(
     generation_id: uuid.UUID, set_id: uuid.UUID, title: str, notice: dict, event_id: str
 ) -> None:
     """Stores the set and title a finished generation produced for its interview, and the
-    company's notification with them, once per event."""
+    company's notification and the interview.ready event (ats invites the candidates waiting
+    for it) with them, once per event."""
     async with Session() as session:
         new = await processed_events.claim(session, event_id)
-        await session.execute(
+        interview_id = await session.scalar(
             update(Interview)
             .where(Interview.generation_id == generation_id)
             .values(set_id=set_id, title=title)
+            .returning(Interview.id)
         )
 
         if new:
             outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+
+        if new and interview_id is not None:
+            outbox.add(session, OutboxEvent, INTERVIEW_READY, {"interview_id": str(interview_id)})
 
         await session.commit()
 
 
 async def remove_for_generation(generation_id: uuid.UUID, notice: dict) -> None:
     """Removes the interview of a generation that was cancelled before producing questions;
-    the company's notification is saved only when one is removed."""
+    the company's notification and the interview.deleted event are saved only when one is
+    removed."""
     async with Session() as session:
-        removed = await session.scalar(
-            delete(Interview)
-            .where(Interview.generation_id == generation_id, Interview.set_id.is_(None))
-            .returning(Interview.id)
-        )
+        removed = (
+            await session.execute(
+                delete(Interview)
+                .where(Interview.generation_id == generation_id, Interview.set_id.is_(None))
+                .returning(Interview.id, Interview.company_id)
+            )
+        ).first()
 
         if removed is not None:
             outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+            add_deleted(session, *removed)
 
         await session.commit()
 
@@ -193,3 +216,12 @@ async def set_title(interview_id, title: str) -> None:
             update(Interview).where(Interview.id == interview_id).values(title=title)
         )
         await session.commit()
+
+
+async def by_ids(interview_ids: list) -> list[Interview]:
+    """The interviews of those ids that still exist."""
+    if not interview_ids:
+        return []
+
+    async with Session() as session:
+        return list(await session.scalars(select(Interview).where(Interview.id.in_(interview_ids))))

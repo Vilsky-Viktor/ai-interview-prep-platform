@@ -13,14 +13,13 @@ from app.config.settings import settings
 from app.integrations.redis import get_redis
 from app.routers import (
     accommodations,
-    ats,
-    ats_webhooks,
     audit,
     auto_top_ups,
     bulk_invites,
     candidates,
     companies,
     internal_accounts,
+    internal_ats,
     internal_events,
     internal_invites,
     interview_generation,
@@ -65,8 +64,6 @@ app.include_router(companies.router)
 app.include_router(audit.router)
 app.include_router(auto_top_ups.router)
 app.include_router(members.router)
-app.include_router(ats.router)
-app.include_router(ats_webhooks.router)
 app.include_router(interviews.router)
 app.include_router(candidates.router)
 app.include_router(accommodations.router)
@@ -79,6 +76,7 @@ app.include_router(logos.router)
 app.include_router(reports.router)
 app.include_router(verification.router)
 app.include_router(internal_accounts.router)
+app.include_router(internal_ats.router)
 app.include_router(internal_invites.router)
 app.include_router(internal_events.router)
 app.include_router(schedules.router)

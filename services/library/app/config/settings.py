@@ -13,6 +13,7 @@ class Settings(ServiceSettings):
     companies_url: str
     billing_url: str
     notifications_url: str
+    ats_url: str
 
     @property
     def sqlalchemy_url(self) -> str:

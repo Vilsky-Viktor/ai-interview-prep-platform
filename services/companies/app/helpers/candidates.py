@@ -15,6 +15,19 @@ def passed(totals: dict, pass_mark: int) -> bool | None:
     return totals["grade"] >= pass_mark
 
 
+def finished_result(interview, invite_id, grade: int | None, flagged: bool) -> dict:
+    """The candidate.finished event: what ats writes back to the ATS that sent the candidate."""
+    return {
+        "candidate_invite_id": str(invite_id),
+        "interview_id": str(interview.id),
+        "company_id": str(interview.company_id),
+        "title": interview.title or "",
+        "grade": grade,
+        "passed": grade is not None and grade >= interview.pass_mark,
+        "flagged": flagged,
+    }
+
+
 def section_passed(section: dict, pass_mark: int) -> bool | None:
     """Whether a finished section's score reached the pass mark; None while it's still going."""
     if section.get("status") != "finished" or section.get("final_score") is None:

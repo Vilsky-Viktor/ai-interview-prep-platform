@@ -1,6 +1,6 @@
 from prepza_common.notifications import NotificationKind, Recipient, notification
 
-from app.constants.notifications import ATS_LINK, INTERVIEW_LINK, INTERVIEWS_LINK
+from app.constants.notifications import INTERVIEW_LINK, INTERVIEWS_LINK
 from app.constants.roles import EDITORS
 from app.models.companies import Company
 from app.models.interviews import Interview
@@ -88,17 +88,3 @@ def verification_decided(company: Company, approved: bool, reason: str | None) -
         for member in company.members
         if member.user_id and member.role in EDITORS
     ]
-
-
-def ats_not_invited(interview: Interview, email: str, reason: str) -> dict:
-    """A candidate the ATS sent who wasn't invited, and why; the ATS tab retries. Several at
-    once add up to one notification."""
-    return notification(
-        Recipient.COMPANY,
-        interview.company_id,
-        NotificationKind.ATS_NOT_INVITED,
-        ATS_LINK.format(company_id=interview.company_id),
-        email=email,
-        title=interview.title,
-        reason=reason,
-    )

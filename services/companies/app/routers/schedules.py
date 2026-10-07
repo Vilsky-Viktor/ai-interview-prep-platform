@@ -7,7 +7,6 @@ from prepza_common.google import Invoker
 
 from app.constants.events import PROCESSED_EVENT_DAYS
 from app.integrations.redis import get_redis
-from app.services import ats_candidates
 from app.services import outbox as outbox_service
 from app.services.candidate_billing import expire_unstarted
 from app.services.reminders import remind_unstarted
@@ -48,9 +47,8 @@ async def invite_expiry() -> None:
 
 @router.post("/invite-reminders", status_code=status.HTTP_204_NO_CONTENT)
 async def invite_reminders() -> None:
-    """Daily, from Cloud Scheduler: candidates who haven't started get one reminder, and ATS
-    invites cut off midway start again; neither during the emergency pause (they run once it's
-    off)."""
+    """Daily, from Cloud Scheduler: candidates who haven't started get one reminder; not during
+    the emergency pause (they're reminded once it's off)."""
     if await pause.is_paused(get_redis()):
         logger.warning("Reminders skipped: the emergency pause is on")
 
@@ -60,12 +58,6 @@ async def invite_reminders() -> None:
 
     if count:
         logger.info("Reminded %d candidates who haven't started", count)
-
-    # Candidates an ATS sent whose invite was cut off midway get it now.
-    recovered = await ats_candidates.recover()
-
-    if recovered:
-        logger.info("Started again %d ATS invites cut off midway", recovered)
 
 
 @router.post("/outbox", status_code=status.HTTP_204_NO_CONTENT)

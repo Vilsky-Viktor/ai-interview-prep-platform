@@ -15,12 +15,16 @@ async def require_company(user: CurrentUser, company_id: UUID) -> tuple[Company,
     if company is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Company not found")
 
-    member = next((item for item in company.members if item.user_id == user.uid), None)
+    member = member_of(company, user.uid)
 
     if member is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Company not found")
 
     return company, member
+
+
+def member_of(company: Company, user_id: str) -> Member | None:
+    return next((item for item in company.members if item.user_id == user_id), None)
 
 
 def can_edit(member: Member) -> bool:

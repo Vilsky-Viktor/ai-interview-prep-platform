@@ -12,6 +12,7 @@ def services() -> dict[str, str]:
         "generation": settings.generation_url,
         "billing": settings.billing_url,
         "notifications": settings.notifications_url,
+        "ats": settings.ats_url,
     }
 
 
