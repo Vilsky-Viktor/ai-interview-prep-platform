@@ -1,6 +1,6 @@
 # ATS integrations
 
-A company can connect its applicant tracking system (ATS): Workable, Greenhouse, Teamtailor or Recruitee. Candidates the company moves into a chosen stage in the ATS get the prepza invite, and their results go back to the ATS.
+A company can connect its applicant tracking system (ATS): Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR. Candidates the company moves into a chosen stage in the ATS get the prepza invite, and their results go back to the ATS.
 
 - [Connecting an ATS](#connecting-an-ats)
 - [Linking a job](#linking-a-job)
@@ -9,6 +9,7 @@ A company can connect its applicant tracking system (ATS): Workable, Greenhouse,
 - [Candidates from Greenhouse](#candidates-from-greenhouse)
 - [Candidates from Teamtailor](#candidates-from-teamtailor)
 - [Candidates from Recruitee](#candidates-from-recruitee)
+- [Candidates from Breezy HR](#candidates-from-breezy-hr)
 - [Results back to the ATS](#results-back-to-the-ats)
 - [How it's built](#how-its-built)
 
@@ -22,6 +23,7 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 | Greenhouse | A Harvest V3 (OAuth) API credential's client ID and secret | The Jobs, Job Posts, Job Interview Stages and Notes endpoints |
 | Teamtailor | An API key (Settings → Integrations → API keys) | Admin permission, Read/Write |
 | Recruitee | Its address and a personal API token (Settings → Apps and plugins → Personal API tokens) | The token acts as the person who made it: an admin who sees every job |
+| Breezy HR | An API key (your name → My Settings → API Keys) | The key acts as the person who made it: an admin who sees every position. Breezy's API and web hooks come with its Pro plan |
 
 - prepza checks the key with one read before saving it. A Teamtailor key is tried in each of Teamtailor's regions (EU, North America, Asia-Pacific) until one accepts it; the connection keeps that region.
 - The key is saved encrypted with `ATS_ENCRYPTION_KEY`, the ats service's Fernet key. An empty key turns integrations off.
@@ -39,7 +41,7 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 ## The ATS pages
 
 - The ATS tab lists the ATSs, with a "connected" tag once connected.
-- Each ATS opens its own page: `/companies/<id>/integrations/<workable, greenhouse, teamtailor or recruitee>`. Before it's connected, the page says so in place of the linked jobs.
+- Each ATS opens its own page: `/companies/<id>/integrations/<workable, greenhouse, teamtailor, recruitee or breezy>`. Before it's connected, the page says so in place of the linked jobs.
 - The page lists its linked jobs. For each job:
   - how many of its candidates were invited (an icon and the number),
   - how many are waiting or weren't invited, above **Invite again**, which tries that job's again,
@@ -111,6 +113,16 @@ The company sets up Recruitee's web hook by hand too:
 - An event counts only when its `X-Recruitee-Signature` is the HMAC-SHA256 hex digest of the body with that secret.
 - A `candidate_moved` event of subtype `stage_changed` carries the candidate's emails, the job (offer) and the new stage: a candidate moved into a linked job's stage is saved and invited exactly as from Workable, by their Recruitee candidate id.
 
+## Candidates from Breezy HR
+
+prepza sets up Breezy HR's web hook itself, so the company only pastes the key:
+
+- Connecting creates a web hook in Breezy (`candidateStatusUpdated`) at the connection's own address, `/api/ats/webhooks/breezy/<connection id>`, and keeps the signing secret Breezy gives then, once. Breezy refuses web hooks without its Pro plan; connecting then fails with that reason, and nothing is saved.
+- Reconnecting replaces the web hook; disconnecting deletes it in Breezy.
+- A key's person in several Breezy companies connects the first one.
+- An event counts only when its `X-Hook-Signature` is the HMAC-SHA256 hex digest of the body with that secret (of the raw body, or the JSON written compactly: Breezy's docs say both).
+- The event carries the position, the new stage and the candidate's email: a candidate moved into a linked position's stage is saved and invited exactly as from Workable, as `<position id>:<candidate id>`.
+
 ## Results back to the ATS
 
 When such a candidate finishes, companies publishes `candidate.finished` (grade, passed, flagged), and ats writes a comment about them in the ATS, in English:
@@ -126,6 +138,7 @@ When such a candidate finishes, companies publishes `candidate.finished` (grade,
 | Greenhouse | A note on the candidate's application |
 | Teamtailor | A note on the candidate, as the Teamtailor user of whoever connected it (or an admin) |
 | Recruitee | A note on the candidate, as the person whose token it is |
+| Breezy HR | An internal note on the candidate in that position, as the person whose key it is |
 
 - It's sent once (`reported_at`).
 - A failing ATS makes the event come again.
@@ -135,7 +148,7 @@ When such a candidate finishes, companies publishes `candidate.finished` (grade,
 
 - All of it is the `ats` service (`services/ats`, its own database).
 - It asks companies who is a member or editor, the interviews' titles, and to send invites.
-- Each ATS's API is one client module (`app/integrations/workable.py`, `greenhouse.py`, `teamtailor.py`, `recruitee.py`) with the same functions. Each names the credentials it takes (`KEYS`), so a connection can keep others, like a web hook's secret key.
+- Each ATS's API is one client module (`app/integrations/workable.py`, `greenhouse.py`, `teamtailor.py`, `recruitee.py`, `breezy.py`) with the same functions. Each names the credentials it takes (`KEYS`), so a connection can keep others, like a web hook's secret key.
 - `app/integrations/ats_clients.py` picks the module by provider. A new ATS adds its module there.
 - The web hook handlers are in `app/services/ats_webhooks.py`, one per ATS.
 - The webhook routes stay open in maintenance mode (see [Admin zone](admin-zone.md#maintenance-mode)).
