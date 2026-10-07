@@ -1,0 +1,102 @@
+---
+title: "prepza dan TestGorilla: kapan memakai masing-masing, dan memakai keduanya"
+seoTitle: "prepza vs TestGorilla: Perbandingan Tes Pra-Kerja"
+description: "Perbedaan prepza dan TestGorilla dalam cara tes dibuat, apa yang diuji dan harganya, kapan masing-masing lebih cocok, dan cara memakai keduanya."
+updated: "2026-10-07"
+---
+
+# prepza dan TestGorilla: kapan memakai masing-masing, dan memakai keduanya
+
+Wajar kalau prepza dan TestGorilla dibandingkan, tetapi keduanya sebenarnya bukan pesaing langsung. TestGorilla menawarkan pustaka besar berisi tes siap pakai, termasuk tes kognitif, kepribadian, bahasa, dan pemrograman. prepza melakukan satu hal: membuat wawancara pengetahuan pilihan ganda berbatas waktu dari deskripsi pekerjaanmu. Banyak proses rekrutmen bisa memakai keduanya, misalnya prepza sebagai penyaringan pengetahuan yang cepat dan spesifik untuk peran tersebut, lalu TestGorilla untuk tes kognitif atau kepribadian bagi kandidat di shortlist.
+
+Halaman ini menjelaskan perbedaannya, kapan masing-masing lebih cocok, dan cara menggabungkannya. Fakta tentang TestGorilla diambil dari halaman resminya per Oktober 2026 dan bisa berubah; periksa tautannya sebelum kamu memutuskan.
+
+## Versi singkatnya
+
+- **TestGorilla cocok** saat kamu butuh tes kemampuan kognitif, kepribadian, bahasa, atau coding langsung, pertanyaan video, integrasi ATS, atau snapshot webcam.
+- **prepza cocok** saat kamu ingin tes pengetahuan yang dibuat dari deskripsi pekerjaanmu sendiri, termasuk soal membaca kode untuk peran teknis, dan kamu lebih suka bayar per kandidat daripada berlangganan paket.
+- **Keduanya cocok** saat kamu ingin penyaringan pengetahuan khusus peran untuk setiap pelamar, dan tes yang lebih luas bagi yang lolos.
+
+## Perbandingan berdampingan
+
+| | prepza | TestGorilla |
+| --- | --- | --- |
+| Cara tes dibuat | Dibuat dari deskripsi pekerjaanmu; kamu meninjau topiknya sebelum soal ditulis. Tersedia juga templat siap pakai per peran | Disusun dari pustaka tes siap pakai; soal kustom di paket berbayar ([halaman harga](https://www.testgorilla.com/pricing/)) |
+| Jenis tes | Wawancara keterampilan dan pengetahuan pilihan ganda berbatas waktu, dengan soal membaca kode untuk topik teknis | Kemampuan kognitif, bahasa, kepribadian dan budaya, pemrograman, keterampilan khusus peran, penilaian situasional, keterampilan software, mengetik ([pustaka tes](https://www.testgorilla.com/test-library/)) |
+| Pertanyaan video | Tidak | Ya, di paket berbayar |
+| Wawancara AI | Tidak ada AI percakapan; AI mengusulkan topik serta menulis dan memeriksa soal | Wawancara AI di paket yang lebih tinggi |
+| Kode dalam tes | Soal membaca kode (apa yang dilakukan atau dihasilkan kode); tidak menulis atau menjalankan kode | Tes pemrograman di pustaka; tantangan coding kustom di paket yang lebih tinggi |
+| Soal per kandidat | Setiap kandidat mendapat set acaknya sendiri, dengan urutannya sendiri | Tidak dibandingkan di sini |
+| Fitur integritas | Timer di setiap soal (ditegakkan oleh server), tanda untuk jawaban yang terlalu cepat, meninggalkan halaman, dan percobaan menyalin | Snapshot webcam, salin/tempel dinonaktifkan, dan mode layar penuh di paket yang lebih tinggi |
+| Integrasi ATS | Tidak | Integrasi ATS/API di paket yang lebih tinggi |
+| Laporan | Scorecard dengan jawaban dan waktunya; PDF untuk satu atau semua kandidat | Tidak dibandingkan di sini |
+| Bahasa | 23 bahasa untuk antarmuka, wawancara, dan email | Tidak dibandingkan di sini; pustakanya mencakup tes kemahiran bahasa |
+| Model harga | Per kandidat yang menjawab, dari kredit prabayar; tanpa langganan ([harga](/pricing)) | Paket gratis dan paket berbayar yang ditagih tahunan ([halaman harga](https://www.testgorilla.com/pricing/)) |
+| Hosting | UE (beberapa sub-pemroses di AS; lihat [kebijakan privasi](/privacy)) | Tidak dibandingkan di sini |
+
+*Fitur TestGorilla per Oktober 2026, dari [halaman harga](https://www.testgorilla.com/pricing/) dan [pustaka tes](https://www.testgorilla.com/test-library/)-nya.*
+
+## Cara tes dibuat
+
+**TestGorilla** dimulai dari pustakanya. Kamu memilih tes yang sesuai dengan peran (misalnya tes keterampilan khusus peran ditambah tes kognitif dan tes kepribadian) lalu menggabungkannya menjadi satu asesmen. Pustakanya dikelompokkan dalam kategori seperti keterampilan khusus peran, keterampilan pemrograman, keterampilan software, bahasa, kemampuan kognitif, penilaian situasional, kepribadian dan budaya, serta mengetik ([pustaka tes](https://www.testgorilla.com/test-library/)).
+
+**prepza** dimulai dari deskripsi pekerjaanmu. prepza mengambil apa yang wajib diketahui kandidat dan mengusulkan topik beserta subtopiknya. Kamu bisa mempertahankan, menghapus centang, mengganti nama, atau mengubahnya, atau menjelaskan perubahan dengan teks biasa. Baru setelah itu soal ditulis: bank soal pilihan ganda per topik, masing-masing dengan satu jawaban benar dan tiga jawaban salah yang masuk akal. Kamu bisa melihat setiap soal dan membuat ulang soal mana pun. Untuk topik teknis, banyak soal menampilkan contoh kode, query, atau perintah singkat, lalu menanyakan apa hasilnya, apa fungsinya, kenapa gagal, atau perubahan mana yang memperbaikinya.
+
+Perbedaan praktisnya: tes dari pustaka bersifat tetap dan sudah dipakai berkali-kali, tetapi tidak ditulis untuk peranmu. Wawancara prepza ditulis untuk peranmu, termasuk bagian-bagiannya yang spesifik, tetapi selalu baru. Soal yang ditulis AI bisa mengandung kesalahan, jadi prepza memeriksa kunci jawaban dan memperbaiki soal seiring kandidat menjawab, dan kamu bisa menandai soal mana pun.
+
+## Cara harganya bekerja
+
+**TestGorilla** menawarkan paket gratis dengan kuota bulanan dan paket berbayar yang ditagih tahunan, dengan fitur lebih banyak di paket yang lebih tinggi. Lihat [halaman harga](https://www.testgorilla.com/pricing/)-nya untuk paket dan harga terbaru.
+
+**prepza** mengenakan biaya per kandidat:
+
+- Membuat wawancara gratis.
+- Kamu membayar untuk setiap kandidat yang menjawab setidaknya satu soal. Kandidat yang diundang tetapi tidak pernah mulai tidak dikenai biaya; kreditnya kembali.
+- Harga per kandidat makin murah dengan isi ulang yang lebih besar, 3 kandidat pertamamu gratis, kredit tidak kedaluwarsa, dan tidak ada langganan. Lihat [harga](/pricing).
+
+Model mana yang lebih murah tergantung berapa banyak kandidat yang kamu tes dalam setahun dan jenis tes apa yang kamu butuhkan. Paket langganan cocok untuk rekrutmen yang rutin dan bervolume tinggi; harga per kandidat cocok untuk rekrutmen sesekali. [Cara membandingkan biaya tes](/compare/cheapest-pre-employment-test) menunjukkan cara menghitungnya untuk volume rekrutmenmu sendiri.
+
+## Pengalaman kandidat
+
+**prepza:** sebelum mulai, kandidat melihat apa yang akan terjadi: bahwa soalnya ditulis oleh AI, bahwa orang di perusahaanmu yang meninjau hasil dan memutuskan, dan bahwa mereka bisa meminta tambahan waktu atau peninjauan ulang hasilnya. Setiap soal punya hitung mundurnya sendiri. Kandidat tidak melihat skor mereka atau jawaban mana yang benar. Kamera tidak digunakan.
+
+**TestGorilla:** di paket yang lebih tinggi, proctoring mencakup snapshot webcam, salin/tempel dinonaktifkan, dan mode layar penuh ([halaman harga](https://www.testgorilla.com/pricing/)). Itu memberimu pengawasan lebih. Memakai kamera atau tidak adalah pertimbangan antara pengawasan dan privasi kandidat, dan gambar dari kamera berarti lebih banyak data pribadi yang harus dilindungi.
+
+## Kapan TestGorilla lebih cocok
+
+Mulailah dari apa yang perlu kamu uji. TestGorilla lebih cocok saat:
+
+- **Kamu butuh psikometri.** Tes kemampuan kognitif, kepribadian, dan budaya tidak ditawarkan prepza.
+- **Kamu butuh coding langsung atau simulasi kerja.** prepza memberi soal membaca kode, tetapi kandidat tidak menulis atau menjalankan kode.
+- **Kamu ingin jawaban video atau wawancara yang dipandu AI.** prepza tidak punya keduanya.
+- **Kamu butuh integrasi ATS.** prepza tidak terintegrasi dengan sistem ATS.
+- **Kamu merekrut dalam volume besar dan stabil** sehingga paket tetap jadi lebih murah.
+- **Kamu lebih suka tes siap pakai yang sudah dipakai berkali-kali** daripada tes yang ditulis untuk tiap peran.
+
+## Kapan prepza lebih cocok
+
+- **Peranmu spesifik.** Tes yang ditulis dari deskripsi pekerjaanmu mencakup apa yang benar-benar dipakai timmu.
+- **Kamu merekrut sesekali.** Bayar per kandidat menghindari komitmen tahunan hanya untuk beberapa rekrutan.
+- **Kamu ingin meninjau apa yang diuji** sebelum ada soal yang ditulis.
+- **Kamu ingin setiap kandidat mendapat set soal acaknya sendiri,** sehingga jawaban lebih sulit dibagikan.
+- **Kamu lebih suka tanpa pengawasan kamera.** prepza tidak memakai analisis video, suara, atau wajah.
+- **Kamu merekrut dalam banyak bahasa.** Wawancara, antarmuka, dan email tersedia dalam 23 bahasa.
+
+## Memakai keduanya
+
+Keduanya bisa berada dalam proses rekrutmen yang sama:
+
+1. **Semua pelamar** mengikuti wawancara pengetahuan prepza singkat yang ditulis dari deskripsi pekerjaan.
+2. **Yang lolos** mengikuti tes kognitif, kepribadian, atau bahasa dari TestGorilla, atau tantangan coding.
+3. **Manusia yang memutuskan,** dengan memakai kedua hasil bersama CV dan wawancara terstruktur.
+
+prepza tidak memakai kontrak dan kreditnya tidak kedaluwarsa, jadi menambahkannya ke proses yang sudah memakai alat lain tidak menambah biaya tetap.
+
+*TestGorilla adalah merek dagang milik pemiliknya. prepza tidak berafiliasi dengan atau didukung oleh TestGorilla.*
+
+## Halaman terkait
+
+- [Alternatif TestGorilla](/compare/testgorilla-alternatives)
+- [Cara membandingkan biaya tes](/compare/cheapest-pre-employment-test)
+- [Tes pra-kerja tanpa langganan](/compare/pre-employment-tests-without-subscription)
+- [Panduan tes pra-kerja](/pre-employment-testing)
