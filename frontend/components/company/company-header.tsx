@@ -34,7 +34,7 @@ export function CompanyHeader({
   websiteDomain: string | null
   verificationStatus: VerificationStatus
   declineReason: string | null
-  current: "interviews" | "templates" | "members" | "referrals"
+  current: "interviews" | "templates" | "members" | "integrations" | "referrals"
   action?: ReactNode
   // Owners and admins change the logo, name and website; viewers only see them.
   canEdit: boolean

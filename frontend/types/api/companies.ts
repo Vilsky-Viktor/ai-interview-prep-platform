@@ -263,6 +263,141 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/ats": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Connections
+     * @description The company's ATS connections; every member sees them, only owners and admins change
+     *     them.
+     */
+    get: operations["list_connections_ats_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/ats/workable": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Connect Workable
+     * @description Connects Workable with an account's API access token, checked with one read first. A
+     *     second connect replaces the key.
+     */
+    put: operations["connect_workable_ats_workable_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/ats/{provider}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    /**
+     * Disconnect
+     * @description Disconnects: the key is deleted at once, and its linked jobs with it.
+     */
+    delete: operations["disconnect_ats__provider__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/ats/{provider}/jobs": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** List Jobs */
+    get: operations["list_jobs_ats__provider__jobs_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/ats/{provider}/jobs/{job_id}/stages": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** List Stages */
+    get: operations["list_stages_ats__provider__jobs__job_id__stages_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/ats/links": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** List Links */
+    get: operations["list_links_ats_links_get"]
+    put?: never
+    /**
+     * Add Link
+     * @description Links an ATS job to one of the company's ready interviews: its candidates who reach the
+     *     stage will get the interview. A job has one interview.
+     */
+    post: operations["add_link_ats_links_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/ats/links/{link_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    /** Remove Link */
+    delete: operations["remove_link_ats_links__link_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/interviews": {
     parameters: {
       query?: never
@@ -1161,8 +1296,8 @@ export interface paths {
     }
     /**
      * Get Stats
-     * @description Companies, interviews and candidates, all time or in one month, for the stats
-     *     tab.
+     * @description Companies, interviews and candidates, all time or in one year or
+     *     month, for the stats tab.
      */
     get: operations["get_stats_superadmin_stats_get"]
     put?: never
@@ -1294,6 +1429,22 @@ export interface components {
       /** Domain */
       domain: string
     }
+    /**
+     * AtsItemOut
+     * @description A job or a stage in the ATS: its own id and name.
+     */
+    AtsItemOut: {
+      /** Id */
+      id: string
+      /** Name */
+      name: string
+    }
+    /**
+     * AtsProvider
+     * @description The applicant tracking systems a company can connect.
+     * @enum {string}
+     */
+    AtsProvider: "workable"
     /** AuditEventOut */
     AuditEventOut: {
       /** User Id */
@@ -1518,6 +1669,26 @@ export interface components {
       /** Title */
       title: string
     }
+    /**
+     * ConnectionOut
+     * @description A connection as the company sees it: never its key.
+     */
+    ConnectionOut: {
+      provider: components["schemas"]["AtsProvider"]
+      /** Account */
+      account: string
+      status: components["schemas"]["ConnectionStatus"]
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+    }
+    /**
+     * ConnectionStatus
+     * @enum {string}
+     */
+    ConnectionStatus: "connected" | "broken"
     /** DeclineIn */
     DeclineIn: {
       /**
@@ -1538,6 +1709,13 @@ export interface components {
     HTTPValidationError: {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
+    }
+    /** IntegrationsOut */
+    IntegrationsOut: {
+      /** Available */
+      available: boolean
+      /** Connections */
+      connections: components["schemas"]["ConnectionOut"][]
     }
     /** InterviewCreate */
     InterviewCreate: {
@@ -1712,6 +1890,39 @@ export interface components {
       status: string
       /** Question Seconds */
       question_seconds: number
+    }
+    /** JobLinkIn */
+    JobLinkIn: {
+      provider: components["schemas"]["AtsProvider"]
+      /** Job Id */
+      job_id: string
+      /** Stage Id */
+      stage_id: string
+      /**
+       * Interview Id
+       * Format: uuid
+       */
+      interview_id: string
+    }
+    /** JobLinkOut */
+    JobLinkOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      provider: components["schemas"]["AtsProvider"]
+      /** Job Name */
+      job_name: string
+      /** Stage Name */
+      stage_name: string
+      /**
+       * Interview Id
+       * Format: uuid
+       */
+      interview_id: string
+      /** Interview Title */
+      interview_title: string | null
     }
     /** LinkIn */
     LinkIn: {
@@ -2142,6 +2353,13 @@ export interface components {
        * @default
        */
       website: string
+    }
+    /** WorkableIn */
+    WorkableIn: {
+      /** Account */
+      account: string
+      /** Token */
+      token: string
     }
   }
   responses: never
@@ -2704,6 +2922,265 @@ export interface operations {
       header?: never
       path: {
         token: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_connections_ats_get: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["IntegrationsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  connect_workable_ats_workable_put: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["WorkableIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  disconnect_ats__provider__delete: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path: {
+        provider: components["schemas"]["AtsProvider"]
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_jobs_ats__provider__jobs_get: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path: {
+        provider: components["schemas"]["AtsProvider"]
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AtsItemOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_stages_ats__provider__jobs__job_id__stages_get: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path: {
+        provider: components["schemas"]["AtsProvider"]
+        job_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AtsItemOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_links_ats_links_get: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["JobLinkOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  add_link_ats_links_post: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["JobLinkIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  remove_link_ats_links__link_id__delete: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path: {
+        link_id: string
       }
       cookie?: never
     }
@@ -4326,7 +4803,7 @@ export interface operations {
   get_stats_superadmin_stats_get: {
     parameters: {
       query?: {
-        month?: string | null
+        period?: string | null
       }
       header?: never
       path?: never

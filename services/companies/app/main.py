@@ -13,6 +13,7 @@ from app.config.settings import settings
 from app.integrations.redis import get_redis
 from app.routers import (
     accommodations,
+    ats,
     audit,
     auto_top_ups,
     bulk_invites,
@@ -63,6 +64,7 @@ app.include_router(companies.router)
 app.include_router(audit.router)
 app.include_router(auto_top_ups.router)
 app.include_router(members.router)
+app.include_router(ats.router)
 app.include_router(interviews.router)
 app.include_router(candidates.router)
 app.include_router(accommodations.router)

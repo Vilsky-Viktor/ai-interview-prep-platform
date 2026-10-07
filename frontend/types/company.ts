@@ -27,6 +27,10 @@ export type SessionAnswerResult = RoundSchemas["SessionAnswerResult"] & {
   option_index?: number | null
 }
 export type CompanyReferral = Schemas["ReferralOut"]
+export type AtsIntegrations = Schemas["IntegrationsOut"]
+export type AtsConnection = Schemas["ConnectionOut"]
+export type AtsItem = Schemas["AtsItemOut"]
+export type AtsJobLink = Schemas["JobLinkOut"]
 
 /** A candidate's result as the PDF report and the shared summary show it. */
 export type CandidateReportData = {

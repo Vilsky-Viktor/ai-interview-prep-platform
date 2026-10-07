@@ -80,3 +80,27 @@ export async function addTemplate(title: string, questions: number): Promise<str
 export async function deleteTemplate(id: string) {
   await withDatabase("library", (client) => client.query("DELETE FROM sets WHERE id = $1", [id]))
 }
+
+/** A Workable connection for a throwaway company, saved straight into the companies database
+ * (a real one needs a Workable account), with one job linked to `interviewId`. Its key is a
+ * placeholder, so anything that calls Workable with it marks it broken. Deleting the company
+ * deletes both. */
+export async function addAtsConnection(companyId: string, interviewId: string) {
+  await withDatabase("companies", async (client) => {
+    const connection = await client.query(
+      `INSERT INTO ats_connections (id, company_id, provider, account, credentials, status,
+         created_by, created_at)
+       VALUES (gen_random_uuid(), $1, 'workable', 'e2e-acme', 'placeholder', 'connected', 'e2e',
+         now())
+       RETURNING id`,
+      [companyId]
+    )
+    await client.query(
+      `INSERT INTO ats_job_links (id, connection_id, interview_id, job_id, job_name, stage_id,
+         stage_name, created_at)
+       VALUES (gen_random_uuid(), $1, $2, 'E2E01', 'E2E Backend developer', 'assessment',
+         'Assessment', now())`,
+      [connection.rows[0].id, interviewId]
+    )
+  })
+}

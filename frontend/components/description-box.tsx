@@ -20,15 +20,18 @@ export function DescriptionBox({
   submitLabel,
   onSubmit,
   disabled = false,
+  initialText = "",
 }: {
   placeholder: string
   label: string
   submitLabel: string
   onSubmit: (text: string, generateIn: Locale) => Promise<void>
   disabled?: boolean
+  // Text to start from, which the user can edit (an ATS job's description).
+  initialText?: string
 }) {
   const common = useTranslations("common")
-  const [text, setText] = useState("")
+  const [text, setText] = useState(initialText)
   // Starts on the interface's language; any supported one can be chosen.
   const [generateIn, setGenerateIn] = useState(useLocale() as Locale)
   const [busy, setBusy] = useState(false)

@@ -96,6 +96,8 @@ x-companies-env: &companies-env
   EMAIL_DAILY_LIMIT: ${EMAIL_DAILY_LIMIT:-200}
   EMAIL_RECIPIENT_DAILY_LIMIT: ${EMAIL_RECIPIENT_DAILY_LIMIT:-3}
   REPORT_EMAILS_PER_COMPANY_DAY: ${REPORT_EMAILS_PER_COMPANY_DAY:-20}
+  # Encrypts companies' ATS keys (a Fernet key); empty turns ATS integrations off.
+  ATS_ENCRYPTION_KEY: ${ATS_ENCRYPTION_KEY:-}
   BILLING_URL: http://billing:8000
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/companies
   REDIS_URL: redis://redis:6379

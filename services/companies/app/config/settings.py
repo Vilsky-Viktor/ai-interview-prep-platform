@@ -16,6 +16,9 @@ class Settings(ServiceSettings):
     email_recipient_daily_limit: int = Field(default=3, ge=0)
     # Report emails a company may send a day, all its members together; 0 turns it off.
     report_emails_per_company_day: int = Field(default=20, ge=0)
+    # The Fernet key that encrypts companies' ATS keys; empty (or not a key) turns ATS
+    # integrations off.
+    ats_encryption_key: str = ""
     generation_url: str
     library_url: str
     rounds_url: str

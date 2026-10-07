@@ -16,6 +16,7 @@ dependencies = [
     "sqlalchemy[asyncio]>=2.1.1",
     "uvicorn>=0.54.0",
     "publicsuffixlist>=1.0.2.20261003",
+    "cryptography>=46",
 ]
 
 # The shared package, from this repo. To use a published version, drop this source and require
