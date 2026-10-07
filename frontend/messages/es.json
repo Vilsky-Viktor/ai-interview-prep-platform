@@ -892,11 +892,11 @@
     "humanReview": "La puntuación apoya tu decisión, no la toma por ti. Lee las respuestas y, si el candidato lo pide, haz que una persona revise su resultado."
   },
   "practice": {
-    "title": "Entrevistas de práctica gratis por puesto",
+    "title": "Simulador de entrevista de trabajo gratis",
     "intro": "Practica para un puesto con una entrevista cronometrada y luego mira tu nota y todas las respuestas correctas. Gratis.",
     "about": "Entrevista de práctica cronometrada. Al terminar, ve tu nota y todas las respuestas correctas. Privada y gratis.",
-    "pageTitle": "{title}: entrevista de práctica gratis",
-    "pageDescription": "Una entrevista de práctica gratis de nivel {level} para {title}: {count, plural, one {# tema} other {# temas}}, cronometrada, con tu nota y todas las respuestas correctas al final. Práctica, no una entrevista de trabajo real.",
+    "pageTitle": "{title}: simulador de entrevista de trabajo gratis",
+    "pageDescription": "Simulador de entrevista de trabajo gratis de nivel {level} para {title}: {count, plural, one {# tema} other {# temas}}, cronometrado, con tu nota y todas las respuestas correctas al final. Práctica, no una entrevista de trabajo real.",
     "start": "Empezar práctica",
     "again": "Practicar de nuevo",
     "continue": "Continuar",

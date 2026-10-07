@@ -555,8 +555,8 @@
     "topUp": "Mag-top up"
   },
   "site": {
-    "description": "Mga timed na skills test para sa pag-hire, ginawa mula sa job description mo. May sariling random na mga tanong ang bawat kandidato, pati mga scorecard at ulat. $1–3 bawat kandidato.",
-    "homeTitle": "Mga skills test para sa pag-hire, ginawa mula sa job description mo"
+    "description": "Timed na skills test para sa mga aplikante, mula sa job description mo. Random na tanong bawat kandidato, may ranking at ulat. $1–3 bawat kandidato.",
+    "homeTitle": "Pre-employment assessment mula sa job description mo"
   },
   "legal": {
     "updated": "Huling na-update",
@@ -896,11 +896,11 @@
     "humanReview": "Tumutulong ang score sa iyong desisyon; hindi ito ang nagpapasya. Basahin ang mga sagot, at kung hihilingin ng kandidato, ipa-review sa isang tao ang kanyang resulta."
   },
   "practice": {
-    "title": "Libreng mock interview ayon sa role",
+    "title": "Libreng mock interview practice ayon sa role",
     "intro": "Mag-practice para sa isang role gamit ang timed interview, saka tingnan ang iyong grado at bawat tamang sagot. Libre.",
     "about": "Timed na practice interview. Pagkatapos mo, makikita mo ang iyong grado at bawat tamang sagot. Pribado at libre.",
-    "pageTitle": "{title}: libreng practice interview",
-    "pageDescription": "Libreng {level} practice interview para sa {title}: {count, plural, one {# topic} other {# topic}}, timed, kasama ang iyong grado at bawat tamang sagot pagkatapos. Practice, hindi totoong job interview.",
+    "pageTitle": "{title}: libreng mock interview practice",
+    "pageDescription": "Libreng {level} mock interview practice para sa {title}: {count, plural, one {# topic} other {# topic}}, timed, kasama ang grado mo at bawat tamang sagot pagkatapos. Practice, hindi totoong job interview.",
     "start": "Simulan ang practice",
     "again": "Mag-practice ulit",
     "continue": "Magpatuloy",
@@ -959,11 +959,11 @@
     "intro": "Mga praktikal na gabay para sa mga hiring manager: pag-screen ng mga aplikante, mga skills test, at patas at legal na paggamit ng AI sa pag-hire."
   },
   "tests": {
-    "title": "Mga skills test ayon sa role",
+    "title": "Mga skills assessment test ayon sa role",
     "intro": "Mga handa nang timed skills test para sa mga karaniwang role. Gamitin ang isa nang ganoon lang, o gumawa ng test mula sa sarili mong job description.",
     "heading": "{role} skills test para sa pag-hire",
-    "pageTitle": "{role} skills test para sa pag-hire",
-    "pageDescription": "Isang timed {role} skills test para sa mga kandidato mo, na may {count, plural, one {# topic} other {# topic}}. Bawat kandidato ay may sariling random na mga tanong. $1–3 bawat kandidato.",
+    "pageTitle": "{role} skills test para sa mga aplikante",
+    "pageDescription": "Isang timed {role} assessment test para sa mga aplikante mo, na may {count, plural, one {# topic} other {# topic}}. Bawat kandidato ay may sariling random na mga tanong. $1–3 bawat kandidato.",
     "lead": "Isang timed multiple-choice test ng mga skill ng role na ito. Bawat kandidato ay may sariling random na set ng mga tanong at timer sa bawat isa, at makakakuha ka ng scorecard na may bawat sagot at oras nito. $1–3 bawat kandidato, walang subscription.",
     "create": "Gumawa ng test para sa mga kandidato mo",
     "practise": "I-practice nang libre",

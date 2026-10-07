@@ -892,11 +892,11 @@
     "humanReview": "Le score appuie votre décision, il ne la prend pas. Lisez les réponses et, si le candidat le demande, faites examiner son résultat par une personne."
   },
   "practice": {
-    "title": "Entretiens d'entraînement gratuits par poste",
+    "title": "Simulation d'entretien d'embauche gratuite",
     "intro": "Entraînez-vous pour un poste avec un entretien chronométré, puis voyez votre note et toutes les bonnes réponses. Gratuitement.",
     "about": "Entretien d'entraînement chronométré. Une fois terminé, voyez votre note et toutes les bonnes réponses. Privé et gratuit.",
-    "pageTitle": "{title} : entretien d'entraînement gratuit",
-    "pageDescription": "Un entretien d'entraînement gratuit de niveau {level} pour {title} : {count, plural, one {# sujet} other {# sujets}}, chronométré, avec votre note et toutes les bonnes réponses ensuite. Un entraînement, pas un vrai entretien d'embauche.",
+    "pageTitle": "{title} : simulation d'entretien d'embauche gratuite",
+    "pageDescription": "Simulation d'entretien d'embauche gratuite de niveau {level} pour {title} : {count, plural, one {# sujet} other {# sujets}}, chronométrée, avec votre note et toutes les bonnes réponses ensuite. Un entraînement, pas un vrai entretien d'embauche.",
     "start": "Commencer l'entraînement",
     "again": "S'entraîner à nouveau",
     "continue": "Continuer",

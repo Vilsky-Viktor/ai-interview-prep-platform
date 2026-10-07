@@ -888,11 +888,11 @@
     "humanReview": "De score ondersteunt je beslissing, maar neemt die niet. Lees de antwoorden, en laat een mens het resultaat beoordelen als de kandidaat daarom vraagt."
   },
   "practice": {
-    "title": "Gratis oefengesprekken per rol",
+    "title": "Sollicitatiegesprek gratis oefenen",
     "intro": "Oefen voor een rol met een gesprek met tijdslimiet en zie daarna je cijfer en elk juist antwoord. Kosteloos.",
     "about": "Oefengesprek met tijdslimiet. Als je klaar bent, zie je je cijfer en elk juist antwoord. Privé en gratis.",
-    "pageTitle": "{title}: gratis oefengesprek",
-    "pageDescription": "Een gratis oefengesprek op {level}-niveau voor {title}: {count, plural, one {# onderwerp} other {# onderwerpen}}, met tijdslimiet, met je cijfer en elk juist antwoord achteraf. Oefening, geen echt sollicitatiegesprek.",
+    "pageTitle": "{title}: sollicitatiegesprek gratis oefenen",
+    "pageDescription": "Sollicitatiegesprek gratis oefenen op {level}-niveau voor {title}: {count, plural, one {# onderwerp} other {# onderwerpen}}, met tijdslimiet, met je cijfer en elk juist antwoord achteraf. Oefening, geen echt sollicitatiegesprek.",
     "start": "Oefenen starten",
     "again": "Opnieuw oefenen",
     "continue": "Doorgaan",

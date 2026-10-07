@@ -1,7 +1,7 @@
 ---
 title: "Colloqui con IA: cosa sono e come usarli in modo equo"
-seoTitle: "Colloqui con IA: tipi, rischi e uso corretto nella selezione"
-description: "Cosa fanno gli strumenti di colloquio con IA: chatbot, analisi video e test generati. Come funziona l'approccio a tempo di prepza e le basi di conformità."
+seoTitle: "IA nel recruiting: colloqui con IA, rischi e uso corretto"
+description: "IA nel recruiting: cosa fanno colloqui con intelligenza artificiale, chatbot, analisi video e test generati, rischi, conformità e l'approccio di prepza."
 updated: "2026-10-07"
 ---
 

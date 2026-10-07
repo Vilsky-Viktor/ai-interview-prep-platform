@@ -1,7 +1,7 @@
 ---
 title: "Kandidaatide testimine värbamisel: praktiline juhend väikestele ja keskmise suurusega meeskondadele"
-seoTitle: "Kandidaatide testimine: värbamistestid, reeglid, tööriistad"
-description: "Mis on värbamistestid, millised liigid on olemas, millal neid kasutada, õigluse ja õiguse põhitõed ning kuidas tööriista valida. Selge juhend värbajatele."
+seoTitle: "Värbamistestid: kandidaatide testimine, reeglid, tööriistad"
+description: "Kandidaatide testimine värbamisel: millised testid on olemas, millal neid kasutada, õigluse ja seaduse põhitõed ning kuidas tööriista valida."
 updated: "2026-10-07"
 ---
 

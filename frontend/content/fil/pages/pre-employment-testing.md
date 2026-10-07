@@ -1,7 +1,7 @@
 ---
 title: "Pre-employment testing: praktikal na gabay para sa maliliit at katamtamang team"
-seoTitle: "Pre-Employment Testing: Mga Uri, Pagkapatas at Tools"
-description: "Ano ang pre-employment test, mga uri nito, kailan gagamitin, basics ng pagkapatas at batas, at paano pumili ng tool. Simpleng gabay para sa hiring team."
+seoTitle: "Pre-Employment Assessment Test: Mga Uri, Pagkapatas at Tools"
+description: "Ano ang pre-employment assessment test, mga uri nito, kailan gagamitin, basics ng pagkapatas at batas, at paano pumili ng tool para sa hiring team."
 updated: "2026-10-07"
 ---
 

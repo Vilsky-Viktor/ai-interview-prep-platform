@@ -555,8 +555,8 @@
     "topUp": "Nạp tiền"
   },
   "site": {
-    "description": "Bài kiểm tra kỹ năng có giới hạn thời gian cho tuyển dụng, tạo từ mô tả công việc của bạn. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng, kèm phiếu đánh giá và báo cáo. $1–3 mỗi ứng viên.",
-    "homeTitle": "Bài kiểm tra kỹ năng cho tuyển dụng, tạo từ mô tả công việc của bạn"
+    "description": "Bài test tuyển dụng có tính giờ, tạo từ mô tả công việc của bạn: mỗi ứng viên nhận câu hỏi ngẫu nhiên riêng, kèm xếp hạng và báo cáo. $1–3 mỗi ứng viên.",
+    "homeTitle": "Bài test tuyển dụng tạo từ mô tả công việc của bạn"
   },
   "legal": {
     "updated": "Cập nhật lần cuối",
@@ -888,11 +888,11 @@
     "humanReview": "Điểm số hỗ trợ quyết định của bạn, chứ không thay bạn quyết định. Hãy đọc các câu trả lời, và nếu ứng viên yêu cầu, hãy để một người xem xét kết quả của họ."
   },
   "practice": {
-    "title": "Phỏng vấn thử miễn phí theo vị trí",
+    "title": "Luyện phỏng vấn miễn phí theo vị trí",
     "intro": "Luyện tập cho một vị trí với buổi phỏng vấn có tính giờ, rồi xem điểm và mọi đáp án đúng. Hoàn toàn miễn phí.",
     "about": "Phỏng vấn luyện tập có tính giờ. Khi làm xong, bạn xem được điểm và mọi đáp án đúng. Riêng tư và miễn phí.",
-    "pageTitle": "{title}: phỏng vấn luyện tập miễn phí",
-    "pageDescription": "Buổi phỏng vấn luyện tập {level} miễn phí cho {title}: {count, plural, other {# chủ đề}}, tính giờ, kèm điểm và mọi đáp án đúng sau khi làm. Đây là luyện tập, không phải phỏng vấn tuyển dụng thật.",
+    "pageTitle": "Luyện phỏng vấn {title} miễn phí",
+    "pageDescription": "Luyện phỏng vấn {title} ({level}) miễn phí: câu hỏi phỏng vấn trắc nghiệm về {count, plural, other {# chủ đề}}, tính giờ, kèm điểm và mọi đáp án đúng sau khi làm. Đây là luyện tập, không phải phỏng vấn tuyển dụng thật.",
     "start": "Bắt đầu luyện tập",
     "again": "Luyện tập lại",
     "continue": "Tiếp tục",
@@ -951,11 +951,11 @@
     "intro": "Hướng dẫn thực tế cho nhà quản lý tuyển dụng: sàng lọc ứng viên, bài kiểm tra kỹ năng và dùng AI trong tuyển dụng một cách công bằng, hợp pháp."
   },
   "tests": {
-    "title": "Bài kiểm tra kỹ năng theo vị trí",
+    "title": "Bài test tuyển dụng theo vị trí",
     "intro": "Bài kiểm tra kỹ năng có giới hạn thời gian, dựng sẵn cho các vị trí phổ biến. Dùng nguyên bản hoặc tạo bài kiểm tra từ mô tả công việc của riêng bạn.",
     "heading": "Bài kiểm tra kỹ năng {role} cho tuyển dụng",
-    "pageTitle": "Bài kiểm tra kỹ năng {role} cho tuyển dụng",
-    "pageDescription": "Bài kiểm tra kỹ năng {role} có giới hạn thời gian cho ứng viên của bạn, gồm {count, plural, other {# chủ đề}}. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng. $1–3 mỗi ứng viên.",
+    "pageTitle": "Bài test tuyển dụng {role}",
+    "pageDescription": "Bài test tuyển dụng {role} có tính giờ để đánh giá năng lực ứng viên, gồm {count, plural, other {# chủ đề}}. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng. $1–3 mỗi ứng viên.",
     "lead": "Bài kiểm tra trắc nghiệm có giới hạn thời gian về kỹ năng của vị trí này. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng, có tính giờ cho từng câu, và bạn nhận phiếu đánh giá với mọi câu trả lời cùng thời gian làm. $1–3 mỗi ứng viên, không cần gói đăng ký.",
     "create": "Tạo bài kiểm tra cho ứng viên của bạn",
     "practise": "Luyện tập miễn phí",

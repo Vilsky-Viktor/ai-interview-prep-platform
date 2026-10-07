@@ -555,8 +555,8 @@
     "topUp": "Ricarica"
   },
   "site": {
-    "description": "Test di competenze a tempo per assumere, creati dalla tua descrizione del lavoro. Ogni candidato riceve le proprie domande casuali, oltre a schede di valutazione e report. $1–3 per candidato.",
-    "homeTitle": "Test di competenze per assumere, creati dalla tua descrizione del lavoro"
+    "description": "Test di selezione del personale a tempo, creati dal tuo annuncio. Domande casuali diverse per ogni candidato, classifica e report. $1–3 per candidato.",
+    "homeTitle": "Test di selezione del personale creati dal tuo annuncio"
   },
   "legal": {
     "updated": "Ultimo aggiornamento",
@@ -892,11 +892,11 @@
     "humanReview": "Il punteggio supporta la tua decisione, non la prende al posto tuo. Leggi le risposte e, se il candidato lo chiede, fai esaminare il suo risultato da una persona."
   },
   "practice": {
-    "title": "Colloqui di prova gratuiti per ruolo",
+    "title": "Simulazione colloquio di lavoro per ruolo",
     "intro": "Esercitati per un ruolo con un colloquio a tempo, poi vedi il tuo voto e tutte le risposte corrette. Gratis.",
     "about": "Colloquio di pratica a tempo. Alla fine vedi il tuo voto e tutte le risposte corrette. Privato e gratuito.",
-    "pageTitle": "{title}: colloquio di pratica gratuito",
-    "pageDescription": "Un colloquio di pratica gratuito di livello {level} per {title}: {count, plural, one {# argomento} other {# argomenti}}, a tempo, con il tuo voto e tutte le risposte corrette alla fine. Pratica, non un vero colloquio di lavoro.",
+    "pageTitle": "{title}: simulazione colloquio di lavoro gratis",
+    "pageDescription": "Simulazione gratuita di colloquio di lavoro per {title}, livello {level}: {count, plural, one {# argomento} other {# argomenti}}, a tempo, con il tuo voto e tutte le risposte corrette alla fine. È un test di pratica, non un vero colloquio.",
     "start": "Inizia la pratica",
     "again": "Esercitati di nuovo",
     "continue": "Continua",
@@ -955,11 +955,11 @@
     "intro": "Guide pratiche per chi assume: selezionare i candidati, test di competenze e usare l'IA nelle assunzioni in modo equo e legale."
   },
   "tests": {
-    "title": "Test di competenze per ruolo",
+    "title": "Test di selezione del personale per ruolo",
     "intro": "Test di competenze a tempo già pronti per i ruoli più comuni. Usane uno così com'è o crea un test dalla tua descrizione del ruolo.",
     "heading": "Test di competenze {role} per le assunzioni",
-    "pageTitle": "Test di competenze {role} per le assunzioni",
-    "pageDescription": "Un test di competenze {role} a tempo per i tuoi candidati, con {count, plural, one {# argomento} other {# argomenti}}. Ogni candidato riceve le proprie domande casuali. $1–3 per candidato.",
+    "pageTitle": "Test di selezione per {role}",
+    "pageDescription": "Test per l'assunzione di {role}, a tempo, con {count, plural, one {# argomento} other {# argomenti}}. Ogni candidato riceve le proprie domande casuali. $1–3 per candidato.",
     "lead": "Un test a scelta multipla a tempo sulle competenze di questo ruolo. Ogni candidato riceve un proprio set casuale di domande con un timer su ognuna, e tu ricevi una scheda di valutazione con ogni risposta e i suoi tempi. $1–3 per candidato, senza abbonamento.",
     "create": "Crea un test per i tuoi candidati",
     "practise": "Esercitati gratis",

@@ -1,7 +1,7 @@
 ---
 title: "Teste de seleção: guia prático para pequenas e médias empresas"
-seoTitle: "Teste de seleção: tipos, imparcialidade e ferramentas"
-description: "O que são testes de seleção, quais tipos existem, quando usar, o básico de imparcialidade e legislação, e como escolher uma ferramenta para o seu RH."
+seoTitle: "Testes de recrutamento e seleção: tipos e ferramentas"
+description: "O que são testes de recrutamento e seleção, quais tipos existem, quando usar, imparcialidade e legislação, e como escolher uma ferramenta para o seu RH."
 updated: "2026-10-07"
 ---
 

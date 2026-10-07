@@ -555,8 +555,8 @@
     "topUp": "Isi ulang"
   },
   "site": {
-    "description": "Tes keterampilan berbatas waktu untuk rekrutmen, dibuat dari deskripsi pekerjaanmu. Setiap kandidat mendapat soal acak sendiri, plus kartu penilaian dan laporan. $1–3 per kandidat.",
-    "homeTitle": "Tes keterampilan untuk rekrutmen, dibuat dari deskripsi pekerjaan Anda"
+    "description": "Tes seleksi karyawan berbatas waktu dari deskripsi pekerjaanmu. Tiap kandidat dapat soal acak sendiri, plus peringkat dan laporan. $1–3 per kandidat.",
+    "homeTitle": "Tes seleksi karyawan, dibuat dari deskripsi pekerjaan"
   },
   "legal": {
     "updated": "Terakhir diperbarui",
@@ -892,11 +892,11 @@
     "humanReview": "Skor mendukung keputusanmu, bukan menggantikannya. Baca jawabannya, dan jika kandidat meminta, minta seseorang meninjau hasilnya."
   },
   "practice": {
-    "title": "Simulasi wawancara gratis per peran",
+    "title": "Latihan interview kerja gratis per posisi",
     "intro": "Berlatih untuk suatu peran dengan wawancara berbatas waktu, lalu lihat nilaimu dan semua jawaban yang benar. Gratis.",
     "about": "Wawancara latihan berbatas waktu. Setelah selesai, lihat nilaimu dan semua jawaban yang benar. Privat dan gratis.",
-    "pageTitle": "{title}: wawancara latihan gratis",
-    "pageDescription": "Wawancara latihan {level} gratis untuk {title}: {count, plural, other {# topik}}, berbatas waktu, dengan nilai dan semua jawaban yang benar setelahnya. Latihan, bukan wawancara kerja sungguhan.",
+    "pageTitle": "{title}: latihan interview kerja gratis",
+    "pageDescription": "Latihan interview kerja {level} gratis untuk {title}: {count, plural, other {# topik}}, berbatas waktu, dengan nilai dan semua jawaban yang benar setelahnya. Latihan, bukan wawancara kerja sungguhan.",
     "start": "Mulai latihan",
     "again": "Latihan lagi",
     "continue": "Lanjutkan",
@@ -955,11 +955,11 @@
     "intro": "Panduan praktis untuk hiring manager: menyaring pelamar, tes keterampilan, dan memakai AI dalam rekrutmen secara adil dan sesuai hukum."
   },
   "tests": {
-    "title": "Tes keterampilan per peran",
+    "title": "Tes seleksi karyawan per posisi",
     "intro": "Tes keterampilan berbatas waktu yang siap pakai untuk peran umum. Pakai apa adanya, atau buat tes dari deskripsi pekerjaanmu sendiri.",
     "heading": "Tes keterampilan {role} untuk rekrutmen",
-    "pageTitle": "Tes keterampilan {role} untuk rekrutmen",
-    "pageDescription": "Tes keterampilan {role} berbatas waktu untuk kandidatmu, mencakup {count, plural, other {# topik}}. Setiap kandidat mendapat soal acak sendiri. $1–3 per kandidat.",
+    "pageTitle": "Tes {role} untuk calon karyawan",
+    "pageDescription": "Tes {role} berbatas waktu untuk calon karyawanmu, mencakup {count, plural, other {# topik}}. Setiap kandidat mendapat soal acak sendiri. $1–3 per kandidat.",
     "lead": "Tes pilihan ganda berbatas waktu untuk keterampilan peran ini. Setiap kandidat mendapat set soal acak sendiri dengan batas waktu di tiap soal, dan kamu mendapat kartu penilaian berisi setiap jawaban dan waktunya. $1–3 per kandidat, tanpa langganan.",
     "create": "Buat tes untuk kandidatmu",
     "practise": "Latihan gratis",

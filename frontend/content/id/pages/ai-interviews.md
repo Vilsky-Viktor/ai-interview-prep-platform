@@ -1,7 +1,7 @@
 ---
 title: "Wawancara AI: apa itu dan cara memakainya secara adil"
-seoTitle: "Wawancara AI untuk Rekrutmen: Jenis, Risiko, Cara Adil"
-description: "Apa yang dilakukan alat wawancara AI: chatbot, analisis video, dan tes buatan AI. Cara kerja tes pilihan ganda berwaktu prepza dan dasar kepatuhannya."
+seoTitle: "AI dalam Rekrutmen: Wawancara AI, Risiko, dan Cara Adil"
+description: "AI dalam rekrutmen: fungsi AI interview, chatbot, analisis video, dan tes buatan AI, risikonya, serta cara kerja tes pilihan ganda berwaktu prepza."
 updated: "2026-10-07"
 ---
 

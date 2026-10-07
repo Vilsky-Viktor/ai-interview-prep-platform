@@ -892,11 +892,11 @@
     "humanReview": "Das Ergebnis unterstützt deine Entscheidung, es trifft sie nicht. Lies die Antworten, und wenn der Kandidat darum bittet, lass sein Ergebnis von einem Menschen prüfen."
   },
   "practice": {
-    "title": "Kostenlose Übungsinterviews nach Rolle",
+    "title": "Vorstellungsgespräch kostenlos üben",
     "intro": "Übe für eine Rolle mit einem Interview mit Zeitlimit und sieh dann deine Note und jede richtige Antwort. Kostenlos.",
     "about": "Übungsinterview mit Zeitlimit. Wenn du fertig bist, siehst du deine Note und jede richtige Antwort. Privat und kostenlos.",
-    "pageTitle": "{title}: kostenloses Übungsinterview",
-    "pageDescription": "Ein kostenloses Übungsinterview ({level}) für {title}: {count, plural, one {# Thema} other {# Themen}}, mit Zeitlimit, danach deine Note und jede richtige Antwort. Übung, kein echtes Vorstellungsgespräch.",
+    "pageTitle": "{title}: Vorstellungsgespräch kostenlos üben",
+    "pageDescription": "Vorstellungsgespräch für {title} kostenlos üben ({level}): {count, plural, one {# Thema} other {# Themen}}, mit Zeitlimit, danach deine Note und jede richtige Antwort. Übung, kein echtes Vorstellungsgespräch.",
     "start": "Übung starten",
     "again": "Erneut üben",
     "continue": "Fortsetzen",

@@ -1,7 +1,7 @@
 ---
 title: "Test pre-assunzione: guida pratica per piccole e medie aziende"
-seoTitle: "Test pre-assunzione: tipi, equità e strumenti"
-description: "Cosa sono i test pre-assunzione, quali tipi esistono, quando usarli, basi di equità e di legge e come scegliere uno strumento. Guida per i recruiter."
+seoTitle: "Test di selezione del personale: tipi, regole e strumenti"
+description: "Test di selezione del personale e test per assunzione: tipi, quando usarli, equità e basi di legge, come scegliere uno strumento. Guida per i recruiter."
 updated: "2026-10-07"
 ---
 

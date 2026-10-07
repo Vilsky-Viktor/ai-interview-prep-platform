@@ -1,7 +1,7 @@
 ---
 title: "Phỏng vấn AI: là gì và cách dùng công bằng"
-seoTitle: "Phỏng vấn AI trong tuyển dụng: loại, rủi ro và cách dùng"
-description: "Công cụ phỏng vấn AI làm gì: chatbot, phân tích video và bài kiểm tra tạo tự động. Cách prepza dùng trắc nghiệm có tính giờ và các điều cơ bản về tuân thủ."
+seoTitle: "AI trong tuyển dụng: phỏng vấn AI, rủi ro và cách dùng"
+description: "Ứng dụng AI trong tuyển dụng: chatbot phỏng vấn AI, phân tích video, bài test tạo tự động. Cách prepza dùng trắc nghiệm tính giờ và điều cần tuân thủ."
 updated: "2026-10-07"
 ---
 

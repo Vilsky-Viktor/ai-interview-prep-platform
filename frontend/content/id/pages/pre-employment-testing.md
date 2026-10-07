@@ -1,7 +1,7 @@
 ---
 title: "Tes pra-kerja: panduan praktis untuk tim kecil dan menengah"
-seoTitle: "Tes Pra-Kerja: Jenis, Keadilan, dan Alatnya"
-description: "Apa itu tes seleksi karyawan, jenis-jenisnya, kapan dipakai, dasar keadilan dan hukumnya, serta cara memilih alatnya. Panduan ringkas untuk tim rekrutmen."
+seoTitle: "Tes Seleksi Karyawan: Jenis, Keadilan, dan Cara Memilih Alat"
+description: "Apa itu tes seleksi karyawan, jenisnya, kapan dipakai, dasar keadilan dan hukumnya, serta cara memilih alat tes rekrutmen. Panduan ringkas untuk tim HR."
 updated: "2026-10-07"
 ---
 

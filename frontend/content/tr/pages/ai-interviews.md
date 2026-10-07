@@ -1,7 +1,7 @@
 ---
 title: "Yapay zekâ mülakatları: nedir ve adil şekilde nasıl kullanılır"
-seoTitle: "Yapay Zekâ Mülakat Araçları: Türler, Riskler, Adil Kullanım"
-description: "Yapay zekâ mülakat araçları ne yapar: sohbet botları, video analizi ve otomatik testler. prepza'nın süreli çoktan seçmeli yaklaşımı ve uyum esasları."
+seoTitle: "Yapay Zekâ ile İşe Alım ve Mülakat: Riskler, Adil Kullanım"
+description: "Yapay zekâ ile işe alım: mülakat araçları, sohbet botları, video analizi ve otomatik testler ne yapar; riskler, uyum esasları ve prepza'nın yaklaşımı."
 updated: "2026-10-07"
 ---
 

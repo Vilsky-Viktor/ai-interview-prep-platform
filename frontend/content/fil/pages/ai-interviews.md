@@ -1,7 +1,7 @@
 ---
 title: "AI interviews: ano ang mga ito at paano gamitin nang patas"
-seoTitle: "AI Interview Tools: Mga Uri, Panganib at Patas na Paggamit"
-description: "Ano ang ginagawa ng AI interview tools: chatbot, video analysis at generated tests. Paano gumagana ang timed multiple-choice ng prepza, at compliance."
+seoTitle: "AI in Recruitment: AI Interview Tools, Panganib at Gamit"
+description: "AI in recruitment: ano ang AI interview tools, chatbot, video analysis at generated tests, paano gumagana ang timed test ng prepza, at compliance."
 updated: "2026-10-07"
 ---
 

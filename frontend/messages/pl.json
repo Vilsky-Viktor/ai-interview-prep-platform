@@ -892,11 +892,11 @@
     "humanReview": "Wynik wspiera Twoją decyzję, ale jej nie podejmuje. Przeczytaj odpowiedzi, a jeśli kandydat poprosi, zleć sprawdzenie jego wyniku człowiekowi."
   },
   "practice": {
-    "title": "Darmowe próbne rozmowy według roli",
+    "title": "Darmowa symulacja rozmowy kwalifikacyjnej",
     "intro": "Poćwicz pod daną rolę w rozmowie na czas, a potem zobacz swoją ocenę i wszystkie poprawne odpowiedzi. Bezpłatnie.",
     "about": "Próbna rozmowa na czas. Po zakończeniu zobaczysz swoją ocenę i wszystkie poprawne odpowiedzi. Prywatnie i za darmo.",
-    "pageTitle": "{title}: darmowa próbna rozmowa",
-    "pageDescription": "Darmowa próbna rozmowa na poziomie {level} dla roli {title}: {count, plural, one {# temat} few {# tematy} many {# tematów} other {# tematu}}, na czas, z oceną i wszystkimi poprawnymi odpowiedziami na końcu. To ćwiczenie, nie prawdziwa rozmowa o pracę.",
+    "pageTitle": "{title}: darmowa symulacja rozmowy kwalifikacyjnej",
+    "pageDescription": "Darmowa symulacja rozmowy kwalifikacyjnej na poziomie {level} dla roli {title}: {count, plural, one {# temat} few {# tematy} many {# tematów} other {# tematu}}, na czas, z oceną i wszystkimi poprawnymi odpowiedziami na końcu. To ćwiczenie, nie prawdziwa rozmowa o pracę.",
     "start": "Zacznij ćwiczyć",
     "again": "Ćwicz ponownie",
     "continue": "Kontynuuj",

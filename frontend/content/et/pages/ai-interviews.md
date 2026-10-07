@@ -1,7 +1,7 @@
 ---
 title: "AI-intervjuud: mis need on ja kuidas neid õiglaselt kasutada"
-seoTitle: "AI-intervjuu värbamisel: liigid, riskid ja reeglid"
-description: "Mida teevad AI-intervjuu tööriistad: vestlusrobotid, videoanalüüs ja loodud testid. prepza ajapiiranguga valikvastustega lähenemine ja seaduse nõuded."
+seoTitle: "Tehisintellekt värbamisel: AI-intervjuud, riskid, reeglid"
+description: "Tehisintellekt (AI) värbamisel: mida teevad AI-intervjuud, vestlusrobotid, videoanalüüs ja loodud testid, millised on riskid ja seaduse nõuded."
 updated: "2026-10-07"
 ---
 

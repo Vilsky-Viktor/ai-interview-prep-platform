@@ -555,8 +555,8 @@
     "topUp": "Yükle"
   },
   "site": {
-    "description": "İş tanımınızdan oluşturulan, işe alım için süreli beceri testleri. Her aday kendi rastgele sorularını alır; ayrıca değerlendirme kartları ve raporlar. Aday başına $1–3.",
-    "homeTitle": "İş tanımınızdan oluşturulan işe alım beceri testleri"
+    "description": "İş tanımınızdan süreli işe alım testleri. Her aday kendi rastgele sorularını alır; aday sıralaması, değerlendirme kartları ve raporlar. Aday başına $1–3.",
+    "homeTitle": "İş tanımınızdan işe alım testleri oluşturun"
   },
   "legal": {
     "updated": "Son güncelleme",
@@ -891,11 +891,11 @@
     "humanReview": "Puan kararınızı destekler, kararı sizin yerinize vermez. Cevapları okuyun ve aday isterse sonucunu bir kişiye inceletin."
   },
   "practice": {
-    "title": "Role göre ücretsiz deneme mülakatları",
+    "title": "Pozisyona göre ücretsiz mülakat simülasyonu",
     "intro": "Bir rol için süreli bir mülakatla pratik yapın, sonra notunuzu ve tüm doğru cevapları görün. Ücretsiz.",
     "about": "Süreli pratik mülakat. Bitirdiğinizde notunuzu ve tüm doğru cevapları görün. Gizli ve ücretsiz.",
-    "pageTitle": "{title}: ücretsiz pratik mülakat",
-    "pageDescription": "{title} için ücretsiz {level} pratik mülakat: {count, plural, one {# konu} other {# konu}}, süreli, sonunda notunuz ve tüm doğru cevaplarla. Gerçek bir iş mülakatı değil, pratik.",
+    "pageTitle": "{title}: ücretsiz mülakat simülasyonu",
+    "pageDescription": "{title} için ücretsiz {level} mülakat simülasyonu: {count, plural, one {# konu} other {# konu}}, süreli, sonunda notunuz ve tüm doğru cevaplarla. Gerçek bir iş mülakatı değil, pratik.",
     "start": "Pratiğe başla",
     "again": "Tekrar pratik yap",
     "continue": "Devam et",
@@ -954,11 +954,11 @@
     "intro": "İşe alım yöneticileri için pratik rehberler: başvuruları eleme, beceri testleri ve işe alımda yapay zekâyı adil ve yasal şekilde kullanma."
   },
   "tests": {
-    "title": "Role göre beceri testleri",
+    "title": "Pozisyona göre işe alım testleri",
     "intro": "Yaygın roller için hazır süreli beceri testleri. Birini olduğu gibi kullanın ya da kendi iş tanımınızdan bir test oluşturun.",
     "heading": "İşe alım için {role} beceri testi",
-    "pageTitle": "İşe alım için {role} beceri testi",
-    "pageDescription": "Adaylarınız için süreli bir {role} beceri testi; {count, plural, one {# konu} other {# konu}} içerir. Her aday kendi rastgele sorularını alır. Aday başına $1–3.",
+    "pageTitle": "{role} işe alım testi",
+    "pageDescription": "Adaylarınız için süreli {role} işe alım testi; {count, plural, one {# konu} other {# konu}} içerir. Her aday kendi rastgele sorularını alır. Aday başına $1–3.",
     "lead": "Bu rolün becerilerini ölçen süreli, çoktan seçmeli bir test. Her aday kendi rastgele soru setini alır ve her soruda bir süre vardır; siz de her cevabı ve süresini gösteren bir değerlendirme kartı alırsınız. Aday başına $1–3, abonelik yok.",
     "create": "Adaylarınız için test oluşturun",
     "practise": "Ücretsiz pratik yapın",

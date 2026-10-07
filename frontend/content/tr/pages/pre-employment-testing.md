@@ -1,7 +1,7 @@
 ---
 title: "İşe alım öncesi testler: küçük ve orta ölçekli ekipler için pratik rehber"
-seoTitle: "İşe Alım Öncesi Testler: Türleri, Adillik ve Araçlar"
-description: "İşe alım öncesi test nedir, hangi türleri vardır, ne zaman kullanılır, adillik ve yasal esaslar, araç nasıl seçilir. İşe alım ekipleri için kısa rehber."
+seoTitle: "İşe Alım Testleri: Türleri, Adillik ve Araç Seçimi"
+description: "İşe alım testleri nedir, hangi türleri vardır, ne zaman kullanılır, adillik ve yasal esaslar, araç nasıl seçilir. İşe alım ekipleri için kısa rehber."
 updated: "2026-10-07"
 ---
 
