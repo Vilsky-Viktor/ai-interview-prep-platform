@@ -2,158 +2,28 @@
 
 Timed knowledge interviews for hiring, made from a job description or a ready-made template. A company pastes the role, reviews the topics, and invites candidates; each candidate gets their own random questions with a countdown on every one, and the company sees their scores and integrity signals. People preparing for a role practise free on the templates. Any role, 23 languages, from $1 per candidate.
 
-**Private use only.** This repository is for private use and may not be used for commercial purposes.
+**For private and research use only.** This repository may not be used for commercial purposes.
 
 ![prepza](screenshot.png)
 
 ## Features
 
-**Making an interview**
+- **Interviews from a job description:** the AI proposes topics, the company reviews them for free, then each topic gets a bank of multiple-choice questions.
+- **Ready-made templates:** copy an interview by role, level and language at once, for free.
+- **Timed and fair:** each candidate gets their own random questions, with a server-enforced countdown on every one.
+- **Scorecards and reports:** grades against a pass mark, integrity flags, and PDF reports to download, email or share.
+- **Invites three ways:** by email, from a list or file, or through one shareable link for a job ad.
+- **Teams and verified companies:** owners, admins and viewers; a check next to a verified company's name.
+- **Questions that fix themselves:** answers, votes and reports flag weak questions, and a verifier fixes them.
+- **ATS integrations:** candidates from Workable and Greenhouse are invited automatically, and results go back.
+- **Pay per candidate:** credits that never expire, from $1 per candidate, with no subscription.
+- **Free practice:** people preparing for a role practise on the templates' revealed questions.
+- **23 languages:** the interface, generated interviews and emails.
+- **Admin zone:** templates, question quality, verification, pass rates, stats, and the pause and maintenance switches.
 
-- Paste a job description or describe the role; the AI extracts the requirements and proposes topics.
-- Review the topics before anything expensive runs, for free: uncheck what you don't need, rename a topic or edit its subtopics in place, or describe bigger changes in plain text.
-- Every topic gets a bank of multiple-choice questions, each with one correct option and three plausible wrong ones. Owners and admins can re-generate individual questions; an interview's questions page always shows each question with its answer options.
-- Questions improve on their own: candidates' answers, votes and reports flag weak ones, and a background verifier fixes or replaces them (see [Question quality](#question-quality)).
-- Everything works in 23 languages: English, Russian, Ukrainian, Spanish, Portuguese, German, French, Italian, Polish, Dutch, Turkish, Arabic, Hebrew, Persian, Japanese, Chinese, Korean, Hindi, Indonesian, Thai, Vietnamese, Filipino and Estonian. That covers the interface, error messages, generated interviews and emails.
-- On a first visit the site opens in the browser's preferred language if it's supported, otherwise in English. A new account keeps the language it signed up in; it can be changed in Settings.
-- The public pages (home, pricing, FAQ, about, contact, documents, practice, skills tests, and the articles with their hubs) also have an address in every other language (`/de/pricing`, `/fr` for the home page), linked with hreflang; English keeps the plain address. `proxy.ts` serves a prefixed address from its page in that language, a first visit through one keeps the language on the next pages, and links between such pages stay in the address's language (`components/localized-link.tsx`, `lib/locale-path.ts`). Scripts other than Latin and Cyrillic use Noto fonts (`constants/fonts.ts`), loaded only on pages that need them.
-- Interviews are generated in the language chosen in "generate in" next to the text box (the interface language by default), whatever language the pasted text is in. Invite emails follow the interview's language. Arabic, Hebrew and Persian read right to left on the site and in emails.
-- Every list loads more as you scroll and renders only what's on screen, however long it gets.
-- Every text field stops at the length its service accepts (titles 70 characters, company names 45, topic names 50, a job description 10,000, emails 254, a pasted or uploaded list of emails 50,000), so nothing is refused on sending; the limits live in the services and `frontend/constants/limits.ts` mirrors them.
+## Quick start
 
-**For companies**
-
-- Company names are unique across prepza, ignoring case, and a company can be renamed. One person can own at most 3 companies.
-- **Team:** a company has one owner; on the company's **Team** tab, the owner invites members by email as an **admin** or a **viewer** and can change a member's role later. Admins work like the owner, except managing the team and removing the company. Viewers see the company's interviews, questions, candidates and scorecards, download and share reports, and preview interviews, but change nothing and spend no credits; the companies service enforces it (`require_editor` answers 403).
-- A company can upload its logo (PNG, JPEG or WebP, up to 500 KB), shown on invite emails, the interview candidates take and PDF reports. To be **verified**, an owner or admin gives the company's website and proves its domain by signing in with a verified email on it (free mail services don't count); the company then waits for a superadmin's review (a clock next to its name, for its members only) on the admin zone's Verification tab. Approved, a check next to its name shows it everywhere; declined, its owners and admins see why, and it goes for review again only after its name or website changes. Both decisions reach them in the bell. Renaming a verified, pending or declined company sends the new name for review (taking any check away); changing the website starts over.
-- Start an interview from a ready-made template (searchable by role, level and language: copied at once, free; the list shows only templates that can still be copied) or generate one from a job description, and set how many questions each topic asks: 10 by default, drawn from the topic's 70.
-- Invite candidates by email, paste a list or upload a file (up to 100 emails at once, only the emails in it count; a list skips candidates who already started, so they aren't emailed again), resend an invite, or revoke one the candidate hasn't used yet. The invite page tells candidates what to expect before they start. An invite not started after 3 days gets one reminder email (daily, `/internal/schedules/invite-reminders`); one not started within 30 days expires and its credits come back.
-- **Shareable link** (`/apply/{token}`): owners and admins turn on one link per interview for a job ad. Anyone who opens it signs in and takes the interview, once per verified email, and is charged like an invited candidate. Turning it off, or marking the interview as hired, stops it at once.
-- Each candidate gets a random subset of each topic, with their own question and option order, in a single pass. A candidate can change their pick until they press Next question, finish the interview, or the question's time runs out; the pick is sent then, and it's final. The backend decides which section and question come next and when the interview is done (`POST /sessions/{id}/step` and `/finish-interview` in rounds, `app/routers/interview_flow.py`). Questions and options carry the interview's language (`lang`), so screen readers read them in it whatever the interface language (see [docs/compliance/accessibility-review.md](docs/compliance/accessibility-review.md)). Unanswered questions count as wrong.
-- Every interview is **timed**: each question gets its own countdown (60 seconds by default, adjustable per interview; it turns red for the last 10 seconds, or the last third of a shorter question), and at zero the pick on screen counts, or the question counts as wrong if nothing is picked. The server enforces it, so closing the tab doesn't stop the clock; it accepts an answer up to 5 seconds after the deadline (`TIME_GRACE_SECONDS`), for a pick sent as the clock reaches zero. An interview the candidate leaves finishes by itself once its total time, plus 10%, has passed; unanswered questions count as wrong.
-- Scorecards show every answer, whether it was right and how long it took. They flag answers too fast to have read the question, times the candidate left the page, and copy attempts.
-- Candidates never see their scores or whether an answer was right.
-- An interview's page has three tabs: **topics** (its topics and questions), **candidates**, and, for owners and admins, **settings**: time per question, pass mark and "Mark as hired", each saved as it changes.
-- Each interview has a pass mark (70% by default, 1–100); grades show green or red against it.
-- **Reports:** a PDF for one candidate or for all of an interview's candidates, made in the browser. Download it, email it from prepza (the PDF attached; it counts towards the member's email limits), or share a short summary on WhatsApp or Telegram.
-- Any company member can preview an interview as a candidate (the play button on the interview list or page): the same timed questions, free, kept out of the candidate list, and its answers out of the questions' statistics.
-- Each interview shows its status: new (no candidates yet), in process (candidates invited), or hired ("Mark as hired" on its settings tab).
-- The candidate list is sorted by grade by default (best first, candidates without a grade yet last), or by invite date. It can be searched by email and filtered by status (invited, in process, finished, passed, flagged, not delivered, expired). Each candidate's grade and integrity flag are stored on their invite when they finish, so the list is sorted, filtered and paged in the database.
-
-**For talents**
-
-- **Free practice** (`/practice`): timed practice interviews on the templates' revealed questions, 10 a topic, then the grade and every right answer. A practice test's page and its result both offer it for hiring ("Hiring for this role?"): the button opens `/companies/templates/<template id>`, which goes straight to the test in the user's only company, or lists their companies (or lets them create one) to choose where it's copied. Each template keeps the person's rounds and progress. At most 20 rounds an hour per person (`PRACTICE_ROUNDS_PER_HOUR`). Each template has a readable slug made from its title when it's saved (`backend-developer`, then `backend-developer-2`…), never changed on rename, so its practice page's URL stays the same; `GET /templates/{id or slug}` finds it by either, and the public `GET /templates/{id or slug}/sample` gives up to 5 of its revealed questions with answers, spread across its topics (never private or retiring ones).
-
-**Superadmin**
-
-- Superadmins are prepza's own team, not a company's admins: the accounts in `SUPERADMIN_EMAILS` (verified Google emails). Only they see the Admin zone in the account menu: **Templates**, ready-made interviews by role, generated from a role description through the same topic review as a company's interview (titles never name a company), then renamed, checked question by question, re-generated or deleted; and **Quality**, the flagged questions (fix now or dismiss) and the replaced ones. **Pass rates** lists company interviews with finished candidates (finished, pass rate at the current passing grade, average grade, share of timed-out answers), lowest pass rate or most finished first, and marks those outside the post-market monitoring triggers (below 10% or above 95% with 20+ finished). **Stats** shows nine numbers as cards for a UTC month or year, or for all time with the "all time" checkbox: companies created and verified (in the month approved), interviews created, candidates invited and finished (both in the month they were invited), talents' practice rounds, top-ups, what they paid (tax included, refunds not taken off; a transaction counts once) and the credits spent on candidates. The period is one choice in a menu of two columns, a month with its year (the last 12, none before 2026) or a year; the menu is off while all time is on. The browser keeps the choice for the next visit (`localStorage`), not the address. Companies, rounds and billing each count their own records (`GET /superadmin/stats?period=2026-10` or `?period=2026`, without `period` for all time; the shared `prepza_common.stats`), so it's what is stored now: deleted companies and candidates past retention aren't counted. **Controls** has two switches. The emergency pause: while it's on, every service refuses new candidate interviews (invite and job-ad link starts), candidate invites (new, sent again or from a list), practice rounds, previews, generations, re-generations, verifier jobs and the help chat with a 503, and the invite and new-interview pages say so (the new-interview box is turned off); the scheduled answer-key checks and invite reminders wait until it's off; candidates already in an interview can finish. The switch is one Redis key (`pause:on`, no expiry) that every service reads; with Redis down it counts as off. Who turned it and when goes to companies' logs. Maintenance mode closes the whole site: every page shows a maintenance screen (`proxy.ts` asks companies' public `GET /maintenance`, cached 10 seconds) and every service's API answers every request with a 503 (`prepza_common.maintenance`, a middleware in each `main.py`), except superadmins, who use the site with a warning above each page; `/health`, `/ready`, the switch, `/internal/` (calls between services, Pub/Sub and Scheduler pushes) and `/webhooks/` (Paddle, Resend) stay open, so no event, job or payment is lost. Billing has no Redis and isn't switched; its only public route is the price catalog. Turning it on first asks to confirm, with the number of candidates in an interview right now (a question shown in the last 15 minutes), who may lose time. It's one Redis key (`maintenance:on`); with Redis down it counts as off, and who turned it goes to the logs. Templates are the question bank (see [Generation pipeline](#generation-pipeline)); their topics keep embeddings, so proven questions on similar topics can be found. Everyone else gets "not found" from those pages and routes.
-
-**Credits and payments** (see [docs/monetization.md](docs/monetization.md))
-
-- Pay as you go: $1 buys 100 credits, and credits never expire. A company pays 300 credits per candidate who answers at least one question; generating an interview is free. Large top-ups buy more credits per dollar: 50% more from $250 and three times as many from $1,000, so a candidate costs $3, $2 or $1. A person's first company gets 900 credits, enough for 3 candidates. A company can have at most 3 interviews waiting without a candidate before it generates another, and generates at most 10 a day.
-- Only what works is charged: a candidate's credits are set aside on invite and given back if they never answer.
-- Top up on the top-up page, for any company you belong to: $30 for 10 candidates, $150 for 50, $250 for 125 ($2 each) or $1,000 for 1,000 ($1 each). Balances follow a payment as it lands, rechecked for 40 seconds after checkout, and catch up when the tab is back in view (an automatic top-up, a payment in another tab); a balance that goes up counts up to its new value, on the top-up page and on a company's interviews page.
-- **Automatic top-up:** on the top-up page, under each balance ("Automatic top-up: off"), choose a top-up and a balance to refill under; the card is saved through Paddle once. Shown only when Paddle's API key and the $0 price are set (see [Payments](#payments)).
-- **ATS (Workable, Greenhouse):** on a company's **ATS** tab, an owner or admin connects an ATS with its key: for Workable, its address and an API access token with the scopes `r_jobs`, `r_candidates` and `w_candidates`; for Greenhouse, a Harvest V3 (OAuth) API credential's client ID and secret, allowed the Jobs, Job Posts, Job Interview Stages and Notes endpoints. prepza checks the key with one read before saving it, encrypted with `ATS_ENCRYPTION_KEY` (a Fernet key; empty turns integrations off), and never shows it again. Disconnecting deletes the key and the linked jobs at once; a key the ATS stops accepting marks the connection for reconnecting. **Link a job** links one of the ATS's jobs and one of its stages to an interview: an existing one, or a new interview made from the job's text in the ATS, which the company checks and edits first, then reviews its topics as usual. The ATS tab lists the ATSs (a "connected" tag once connected); each opens its own page (`/companies/<id>/integrations/workable` or `/greenhouse`) with its linked jobs, how many of their candidates were invited (an icon and the number), are waiting or weren't invited (above "Invite again", which tries that job's again), and Unlink (after a confirmation). Each ATS has one info button, whose dialog holds everything to know: the candidate flow, starting with a stage just for prepza, and for a connected Greenhouse the web hook to set up (below). Every member sees them; viewers change nothing. In the companies service each ATS's API is one client module (`app/integrations/workable.py`, `greenhouse.py`) with the same functions, picked by provider in `app/integrations/ats_clients.py`; a new ATS adds its module there.
-  - **Candidates from Greenhouse:** Greenhouse's API can't set up web hooks, so the company does it once in Greenhouse (Configure → Dev Center → Web Hooks, event "Candidate or Prospect Stage Change"), pasting the address and secret key the info dialog shows to owners and admins; the dialog opens by itself right after connecting. The address is the connection's own (`/api/companies/webhooks/ats/greenhouse/<connection id>`), the secret key is made at the first connect and kept on reconnecting. An event counts only when its `Signature` header is `sha256 ` and the HMAC-SHA256 of the body with that key; a candidate whose application moved into a linked job's stage (matched by id or name) is saved and invited exactly as from Workable, as `<candidate id>:<application id>`.
-  - **Candidates from Workable:** linking a job subscribes to Workable's `candidate_moved` events for its stage at an address of its own (`/api/companies/webhooks/ats/workable/<link id>`, built from `SITE_URL`); unlinking or disconnecting cancels it. An event counts only when its `X-Workable-Signature` is the HMAC-SHA256 of the body with the account's token. The candidate is saved once per Workable candidate and interview (a unique key), then claimed in one update before the invite, so a repeated or simultaneous event invites once; an invite cut off midway can be claimed again after 10 minutes, by "Invite again", a new event or the daily `invite-reminders` job. The invite is the usual one, as if whoever connected Workable sent it (their limits, the company's credits, the pause). A candidate for an interview still being made waits and is invited once it's ready; one refused (credits, limits, the pause) is kept as not invited and owners and admins get an `ats_not_invited` notification.
-  - **Results back to the ATS:** when such a candidate finishes (`interview.finished`), a comment goes to them in the ATS: their grade, whether they passed, any integrity flags and a link to their scorecard, in English. In Workable it's written as the Workable member of whoever connected it (or an admin); in Greenhouse it's a note on the candidate's application. It's sent once (`reported_at`); a failing ATS makes the event come again, a key it refuses marks the connection for reconnecting.
-- **Referrals:** a company's link is in its referrals tab. Both companies get 500 credits once the new one first tops up, any amount; if that top-up is refunded in full or charged back, both rewards are taken back.
-- Refunds and chargebacks in Paddle take the credits they bought back.
-- A card that declines an automatic top-up is tried again at most once a day (`AUTO_TOP_UP_RETRY_AFTER`), and the owner is told.
-- The welcome gift is given once per inbox: case, a `+tag` and Gmail's dots don't make a new one (`app/helpers/gifts.py` in billing). Paddle's checkout doesn't offer a discount code field.
-
-**Site and help**
-
-- **Home page:** "Test everyone. Hire the best." and the box to paste a job description; submitting it signs you in if needed, asks which company the interview is for (or its name, for a first company), and starts the generation. Below, a landing page walks through prepza, one section per screen: how it works, why prepza (six advantages at a glance: ready in minutes, any role, harder to cheat, no subscription, ranked results, 23 languages), seeing who knows the job, trying it before your candidates do (free templates and a preview), sharing results, topic review, questions that fix themselves, one link for a job ad, a verified brand, languages, pricing ("$1–3 per candidate, with no subscription") and a closing call to action. Each section has a picture of the real interface, several of them animated; prices come from billing, so they follow any change. Signed-in users see it too.
-- **Skills tests by role** (`/tests`, `/tests/<slug>`): a page per template for companies hiring for the role, with what it tests, the way to create a test and up to 5 of its revealed questions with answers as examples (also a link to free practice), then "questions companies ask": the FAQ's answers on cost, charging, cheating, what candidates see and languages, without FAQ structured data, which `/faq` carries. Addresses use the template's slug; an old address by id moves there for good. A role page, like the template's free practice page, is in English and in its template's language only (`/de/tests/<slug>` and `/de/practice/<slug>` for a German template, with hreflang between the two); its address in any other language isn't found.
-- **Articles** (`/pre-employment-testing`, `/ai-interviews`, `/compare` and its pages, `/guides` and its pages): Markdown in `frontend/content/` (`pages/`, `compare/`, `guides/`) with a short frontmatter (`title`, `seoTitle`, `description`, `updated`), shown by `lib/content.ts` and `components/content/`; translations live in `content/<language>/<folder>/` under the same file name. A page shows its translation in the interface's language, English (with a note) where there is none, and names only its real translations for hreflang and in the sitemap. A new file is a new page, in its hub and the sitemap. Comparisons name no competitor prices and say where each tool fits better; prepza is presented as complementary.
-- **Search engines:** every public page has its title, description, canonical address and link-preview image: the logo over the page's own title in its language, drawn by `app/preview/route.tsx` in the site's dark theme and Poppins (`frontend/assets/fonts`; other scripts' letters come from Google Fonts), with the home page's promise (`app/opengraph-image.tsx`) for the home page and for Arabic, Persian, Hebrew and Hindi, which the renderer can't draw; structured data (organization, product and price range, founder, articles, breadcrumbs, FAQ); a sitemap with every language version, template page and article; private pages (signed-in areas and personal links) answer with `X-Robots-Tag: noindex`, and robots.txt blocks only `/api/` and `/monitoring`. `GOOGLE_SITE_VERIFICATION` and `BING_SITE_VERIFICATION` add Search Console's and Bing's ownership tags when set. Companies' pages live under `/companies`; old `/company` links redirect.
-- **FAQ** (`/faq`): the common questions, in the interface language with today's prices, and at the end an AI help chat about prepza, open to visitors too. It answers only from the platform guide, the FAQ, the prices, the terms and the privacy policy, in the page's language; nothing of the conversation is stored. Limits: 30 messages an hour per account (`HELP_USER_LIMIT`), 60 questions an hour per address (`HELP_IP_LIMIT`), 5,000 a day in all (`HELP_DAILY_LIMIT`), and in Google Cloud 20 questions per 10 minutes per IP at the edge.
-- **Legal pages:** the privacy policy and terms are served by the rounds service (English only), which the help chat answers from too. The contact address in them, hello@prepza.ai, is put together in the browser, so the page's HTML doesn't hold it for bots to collect.
-- **Contact us** (`/contact`): a name, email and message form. The message is emailed to hello@prepza.ai (`CONTACT_EMAIL` in notifications), with the visitor's address as the reply-to, so answering the email answers them. At most 5 messages a day per address (`CONTACT_IP_LIMIT`) and 200 a day in all (`CONTACT_DAILY_LIMIT`).
-- **About us** (`/about`): why prepza exists for companies, free practice for people preparing, and its solo founder.
-- The footer links free practice, pricing, the privacy policy, the terms, the FAQ, About us and Contact us.
-- **Notifications:** a bell next to the account menu, live (it updates within a second, without reloading), with a badge of unread ones; it shows the latest 10. Each person or company keeps at most 100, none older than 90 days; a deleted company's go with it. Bursts are grouped: another finished candidate, undelivered invite, or flagged or fixed question about the same interview within 24 hours adds to the last one ("3 candidates finished …") instead of a new one. Only what matters gets one, for every member of a company: a candidate finished (with their grade), an invite not delivered, an interview ready or cancelled, a flagged and fixed interview question, a referral reward, an automatic top-up charged or failed.
-
-## Architecture
-
-```mermaid
-flowchart LR
-    browser[Browser] --> gateway[nginx gateway]
-    gateway --> frontend[Next.js frontend]
-    gateway --> library
-    gateway --> generation
-    gateway --> rounds
-    gateway --> companies
-    gateway --> billing
-    paddle[Paddle] -- payment webhooks --> billing
-
-    generation -- jobs via Cloud Tasks --> worker[generation worker]
-    scheduler[Cloud Scheduler] -- sweeps, retention --> worker
-    worker -- saves sets, reuses questions --> library
-    library -- re-generate, verify --> generation
-    rounds -- questions --> library
-    companies --> generation
-    companies --> library
-    companies --> rounds
-    companies -- candidate credits --> billing
-
-    rounds -- answer.recorded / session.scored / interview.finished / results.rescored --> pubsub[(Pub/Sub topic: events)]
-    worker -- generation.completed / cancelled --> pubsub
-    companies -- candidate.invited / reminded, report.shared, company.deleted --> pubsub
-    rounds -- contact.sent --> pubsub
-    library & companies & billing -- notification.requested --> pubsub
-    pubsub -- push --> library
-    pubsub -- push --> companies
-    pubsub -- push --> notifications -- email --> smtp[Resend / mailpit]
-    pubsub -- funnel.* events --> bigquery[(BigQuery: funnel_events)]
-```
-
-| Service | Responsibility |
-|---|---|
-| `library` | Question sets (topics and questions) of interviews and templates: the template catalog, the question bank's stages, revealed questions for practice; candidates' votes and reports, question quality flags and reuse; also account deletion and export across services |
-| `generation` | The generation pipeline (LangGraph), run by its worker (`app/worker_main.py`) as Cloud Tasks jobs; topic review, re-generating single questions, the question verifier, and scheduled sweeps |
-| `rounds` | Candidates' interview sessions and their answers, free practice rounds; the FAQ, the help chat, the legal texts and the contact form (`/help/...`) |
-| `companies` | Companies (unique names, logos, verification), members (owner, admins, viewers), interviews, candidate invites (one by one, in bulk, through a shareable link, with reminders), reports |
-| `billing` | Companies' credit wallets (holds and charges), welcome credits, referrals, Paddle top-ups, automatic top-ups, refunds and chargebacks (webhooks); companies sets a candidate's credits aside and charges them through it |
-| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites and reminders, emailed PDF reports, and contact messages to prepza's inbox. Also the bell: stores the notifications other services ask for (`notification.requested`), removes a deleted company's (`company.deleted`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them |
-| `frontend` | Next.js app; server-rendered pages call the API through the gateway |
-
-Each service owns its own Postgres database. Services call each other's `/internal/` endpoints with short-lived signed tokens; the gateway never exposes those routes. Code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](packages/common), installed into each service from the repo; the API images are therefore built from the repo root. Every list endpoint takes `offset` and `limit` (at most 100 per page). Users sign in with Firebase Authentication (the local setup uses the Firebase emulator, so no Firebase project is needed). Long jobs (a generation, a question check) are Cloud Tasks that call the generation worker's `/internal/jobs/...`; periodic work (stuck-generation sweeps, key-check batches, invite reminders and expiry, retention) is Cloud Scheduler calling `/internal/schedules/...`. Google signs those calls, and pushes, as one invoker service account, which each service checks. Locally there is no queue: the API calls the worker directly, and a small `scheduler` container runs `scripts/local/crontab`. Domain events are saved in an `outbox` table in the same transaction as the change they announce, published right after (a request publishes only the events it saved, in one batch, with a 5-second timeout), and published by a per-minute scheduled flush if that failed, so a change never loses its event. An event Pub/Sub refuses is counted in its row's `attempts` and parked after 5 refusals, so it can't hold up the rest. Each event carries a stable `event_id` attribute (its outbox row id), so a consumer that gets it twice acts once (notifications' emails and bell, library's statistics and companies' notifications through their `processed_events`). They go to one Pub/Sub topic, `events`, which pushes each event to the `/internal/events` endpoint of library, companies and notifications; in Google Cloud each subscription carries only the types its consumer handles (`infra/terraform/pubsub.tf`), and locally each ignores events that aren't its own. Locally, Google's Pub/Sub emulator runs in docker-compose and `scripts/local/pubsub-setup.sh` creates the topic and subscriptions. The services also publish small `funnel.*` events (signed up, company created, candidate invited, results viewed, topped up and so on) to the same topic; a filtered BigQuery subscription stores them for the dashboards and the push subscriptions skip them. They carry counts and a salted hash of the user id (`ANALYTICS_SALT`), never emails or text; see [docs/measurement.md](docs/measurement.md). Locally nothing stores them.
-
-### Generation pipeline
-
-```
-job text -> extract requirements and level -> draft topics          (both cached per input)
-         -> human review loop (checkboxes, inline edits, or free-text revision)
-         -> reuse proven questions from similar templates          (pgvector)
-         -> questions with their options, in parallel calls per subtopic
-         -> drop duplicates by meaning                             (embeddings)
-         -> top up any topic short of its size -> save to the library
-```
-
-The graph is checkpointed in Postgres, so a failed run can be retried from where it stopped, and a generation can be cancelled at any step.
-
-Every LLM call of the pipeline shares one rate limit across the API and all workers (`LLM_REQUESTS_PER_SECOND`). The question bank is the superadmins' templates. Each template question has a stage that only moves forward: **private** (company interviews only), **retiring** (after 100 answers across every interview using it, new interviews stop taking it), **revealed** (once no interview has used a copy for 90 days: free practice, shown with its answer). A new template reveals a third of each topic at once. Reused questions fill at most half of a new interview's topic, and only proven private ones of templates of the same level and language qualify (answered at least 5 times, never flagged). An interview's copy remembers its original, so its answers count there too. Copying a template into a company's interview takes only its private questions, and leaves out a topic with fewer than 10 of them (`MIN_COPY_QUESTIONS`); a template with no such topic can't be copied, and companies' template list leaves it out (`GET /templates/copyable`); practice and the admin zone list every template. A question revealed for practice is no longer given to candidates, even in an interview that copied it earlier. A daily job (`/internal/schedules/bank`) moves the stages; template topics without an embedding get one from `docker compose exec generation uv run --no-sync python -m app.jobs.embed_templates`.
-
-### Question quality
-
-Before a new interview or template is ready, the verifier checks one random answer key a topic and fixes or replaces what's wrong (`KEY_CHECKS_PER_TOPIC`, about $0.001 a check). A company's owners and admins can also mark a question's answer wrong in one click, which sends it to the verifier at once.
-
-Rounds publish every answer; library keeps per-question stats (answers, correct, picks per option) next to thumbs and reports, and flags a question when they show a problem (an answer re-checks a question only once it has been shown 30 times, as answer-based flags need that many; votes, reports and finished topics re-check it every time; an answer event missing a field is logged and dropped rather than retried forever):
-
-| Flag | When | What the verifier does |
-|---|---|---|
-| `wrong_key` | 2 "wrong answer" reports, or a wrong option picked more than the marked one (after 30 answers) | Checks the key through OpenAI's Batch API (half price, every 10 minutes): keeps the question, moves the key, or replaces it |
-| `rewrite` | 2 "unclear" or "off topic" reports, 3+ dislikes at twice the likes, or ≤ 15% correct | Writes a new question in its place |
-| `weak_options` | A wrong option almost nobody picks, or ≥ 95% correct | Writes new options for the same question |
-
-Fixes happen in place, so a topic's size never changes, and the replaced version is archived with its stats and feedback. A replacement question must differ in meaning from every question already in the topic, checked by embeddings like the pipeline's duplicate step.
-
-## Running locally
-
-Requirements: Docker with Compose and an OpenAI API key.
+Requirements: Docker with Compose, and an OpenAI API key.
 
 ```bash
 cp .env.example .env
@@ -161,170 +31,38 @@ cp .env.example .env
 docker compose up --build
 ```
 
-The other values work locally as they are: `POSTGRES_PASSWORD` is the local Postgres password, `SERVICE_SECRET` signs calls between services (at least 32 characters), and `FIREBASE_PROJECT_ID` is a `demo-` project, which lets the services (`FIREBASE_AUTH_EMULATOR_HOST`) and the browser (`NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL`) use the Auth emulator.
+Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emulator (http://localhost:4100), and every email lands in Mailpit (http://localhost:8125). More in [Development](docs/development.md).
 
-| URL | What |
+## Documentation
+
+### Product
+
+| Page | What it covers |
 |---|---|
-| http://localhost:8090 | The app |
-| http://localhost:4100 | Firebase Auth emulator UI (sign-in creates fake accounts here) |
-| http://localhost:8125 | Mailpit: every email sent locally, when `RESEND_API_KEY` is empty |
+| [Companies](docs/features/companies.md) | Company names, the team and its roles, logos, verification |
+| [Interviews](docs/features/interviews.md) | Making an interview, topic review, the interview page and its settings, preview |
+| [Candidates](docs/features/candidates.md) | Invites, the shareable link, taking an interview, timing, scorecards, reports |
+| [Templates and practice](docs/features/templates-and-practice.md) | The question bank, copying templates, slugs, free practice |
+| [Credits and payments](docs/features/billing.md) | Credits, top-ups, automatic top-up, referrals, setting up Paddle |
+| [ATS integrations](docs/features/ats.md) | Connecting Workable and Greenhouse, linked jobs, results back to the ATS |
+| [Notifications and emails](docs/features/notifications.md) | The bell, emails, setting up Resend |
+| [Admin zone](docs/features/admin-zone.md) | Superadmins' templates, quality, pass rates, stats, pause and maintenance mode |
+| [Public site](docs/features/site.md) | Home page, skills tests, articles, FAQ and help chat, legal pages, contact, SEO |
+| [Languages](docs/features/languages.md) | The 23 languages, language addresses, fonts, right-to-left |
 
-Without `RESEND_API_KEY`, emails go to Mailpit instead of real inboxes. See [Emails](#emails) to send real ones.
+### Engineering
 
-Each API's database migrations run once in a short-lived `*-migrate` container before the API starts (a Postgres volume made before a database was added needs it created once, for example `docker compose exec postgres createdb -U prepza notifications`), and Docker marks an API healthy only when `/ready` confirms its database answers (Redis isn't checked, so a Redis outage doesn't stop a service from starting).
-
-`docker-compose.yml` is for local development only. It builds each image's `dev` target, mounts the source so servers reload on change, and enables the Firebase emulator. The frontend keeps its `node_modules` in a volume, so after a frontend dependency changes, run `docker compose build frontend`, remove the `prepza_frontend-modules` volume and start again.
-
-### Google Cloud
-
-Production runs on Google Cloud in `europe-west1`, set up by Terraform in [`infra/`](infra/README.md), which also has the one-time bootstrap steps.
-
-### Production images
-
-Every app Dockerfile (on Alpine) has a `prod` target with the code built in and no reload. The API images are built from the repo root, because they include `packages/common`:
-
-```bash
-docker build --target prod -f services/library/Dockerfile -t prepza-library .   # also generation, rounds, companies, billing, notifications
-docker build --target prod -t prepza-frontend \
-  --build-arg NEXT_PUBLIC_FIREBASE_API_KEY=... --build-arg NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=... \
-  --build-arg NEXT_PUBLIC_FIREBASE_PROJECT_ID=... frontend
-```
-
-Run each API's migrations (`uv run --no-sync alembic upgrade head`; every API but the frontend has them, notifications included) once before it starts, and never set `FIREBASE_AUTH_EMULATOR_HOST` in production.
-
-Errors go to Sentry when `SENTRY_DSN` (backend services) and `NEXT_PUBLIC_SENTRY_DSN` (frontend, a build argument) are set; empty, nothing is sent. `SENTRY_ENVIRONMENT` names the environment (`development` locally) and `SENTRY_TRACES_SAMPLE_RATE` (default 0.1) the share of requests traced. Events carry user ids only, with emails scrubbed. To see the original code in frontend stack traces, also pass `SENTRY_AUTH_TOKEN`, `SENTRY_ORG` and `SENTRY_PROJECT` to the frontend build.
-
-### Generation settings
-
-These settings in `.env` shape every generation (Terraform passes none of them to Google Cloud, so production runs on the defaults below; see [infra/README.md](infra/README.md#notes)):
-
-- `MAX_TOPICS` and `MAX_SUBTOPICS` (default 10 each): main topics an interview or template has, and subtopics per topic; every subtopic is at least one model call. The review page follows them.
-- `INTERVIEW_QUESTIONS_PER_TOPIC` (default 70): questions per topic of a company's interview, from which each candidate gets a random subset.
-- `TEMPLATE_QUESTIONS_PER_TOPIC` (default 90): questions per topic of a template; a third is revealed for free practice, the rest is copied into companies' interviews.
-- `LLM_REQUESTS_PER_SECOND` (default 8): generation's LLM requests a second, shared by the API and every worker through Redis; 0 turns it off. The help chat isn't limited by it, so it stays responsive during big generations.
-- Each AI task has its own model and reasoning effort (`none`, `minimal`, `low`, `medium` or `high`; only reasoning models take an effort):
-
-  | Task | Model | Effort |
-  |---|---|---|
-  | Generation of an interview or template, at any level | `INTERVIEW_MODEL` (`gpt-6.1-sol`) | `INTERVIEW_REASONING_EFFORT` (`low`) |
-  | Verifier: answer-key checks, at once and in batches | `VERIFY_MODEL` (`gpt-6.1-sol`) | `VERIFY_REASONING_EFFORT` (`medium`) |
-  | FAQ help chat | `HELP_MODEL` (`gpt-6-luna`) | `HELP_REASONING_EFFORT` (`none`, which also lets it take a temperature) |
-
-  Every generation runs on `gpt-6.1-sol` at low. In testing ([evals/README.md](evals/README.md)), `gpt-6-luna` at high wrote basic and medium questions as accurately at a fraction of the price but more slowly, and its hard questions came out too easy, so generation stays on Sol for one quality everywhere. The verifier did as well at low as at medium and stays at medium.
-- `LANGSMITH_TRACING`, `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT` (off by default) trace generation and help chat calls to LangSmith.
-
-Per-user rate limits cap how much a single account can generate (`GENERATION_LIMIT`, 20 per `GENERATION_WINDOW_SECONDS`, a day; `REGENERATION_LIMIT`, 100 re-generated questions in the same window); 0 turns one off. A topic review takes at most 10 revisions in words (`MAX_TOPIC_REVISIONS`); after that the topics are only chosen by checkbox. `DAILY_GENERATION_LIMIT` (default 200) caps new generations a day for everyone together, a ceiling on LLM spending; 0 turns it off. Candidate invite and report emails are limited per user (`EMAIL_HOURLY_LIMIT`, 100; `EMAIL_DAILY_LIMIT`, 200) and per address (`EMAIL_RECIPIENT_DAILY_LIMIT`, 3); a company emails at most `REPORT_EMAILS_PER_COMPANY_DAY` reports a day (20), and only once a candidate has finished that interview. Question reports and thumbs are limited per user too (30 reports and 200 ratings a day, library's `REPORTS_PER_DAY` and `RATINGS_PER_DAY`), and the verifier runs at most 300 jobs a day for everyone together (`DAILY_VERIFY_LIMIT`; a superadmin's "Fix now" isn't counted).
-
-### Payments
-
-`billing` sells through [Paddle](https://www.paddle.com), which is the merchant of record (it handles VAT and sales tax). Companies top up credits ($1 = 100 credits) and spend them on candidates; see [docs/monetization.md](docs/monetization.md). To sell:
-
-1. In Paddle (start with the sandbox), create a product with a USD price for each top-up in `services/billing/app/constants/products.py` ($30, $150, $250, $1,000), and a client-side token.
-2. Under Developer tools → Notifications, add a webhook destination at `https://<your domain>/api/billing/webhooks/paddle` for `transaction.completed`, `adjustment.created`, `adjustment.updated`, `subscription.created` and `subscription.canceled` (the adjustments are refunds and chargebacks, which take credits back; the subscriptions start and end automatic top-ups). Copy its secret key.
-3. For automatic top-up, create a $0 monthly price (its checkout saves the card) and a server-side API key with permission to read and update subscriptions. Without both, automatic top-up isn't offered.
-4. Set `PADDLE_ENVIRONMENT`, `PADDLE_CLIENT_TOKEN`, `PADDLE_WEBHOOK_SECRET`, `PADDLE_PRICE_TOPUP_30`, `PADDLE_PRICE_TOPUP_150`, `PADDLE_PRICE_TOPUP_250`, `PADDLE_PRICE_TOPUP_1000`, `PADDLE_PRICE_AUTO_TOP_UP` and `PADDLE_API_KEY` in `.env`, then restart billing (in Google Cloud the webhook secret and the API key go into the `paddle-webhook-secret` and `paddle-api-key` secrets, see [infra/README.md](infra/README.md)). Until a price is set, its top-up button is disabled; until both automatic top-up values are set, its line on the top-up page is hidden. Locally, Paddle reaches the webhook only through a tunnel (for example `cloudflared tunnel --url http://localhost:8090`).
-
-### Emails
-
-Candidate invites, reminders and emailed reports (the PDF attached) are sent by the `notifications` service, as HTML with a plain-text version, and so are contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default). Note that with `RESEND_API_KEY` set, a message sent from the local contact page reaches that real inbox. To send real emails through [Resend](https://resend.com):
-
-1. Verify your domain at resend.com/domains.
-2. In `.env`, set `RESEND_API_KEY` (a sending-only key is enough) and `MAIL_FROM` with an address on that domain, for example `prepza. <no-reply@yourdomain.com>`.
-3. Restart the service: it reads `.env` only when it starts.
-
-`SITE_URL` is the site address that links in emails point to. Without `RESEND_API_KEY`, emails go to `SMTP_HOST` and `SMTP_PORT`, Mailpit locally.
-
-A failed send answers Pub/Sub's push with an error, so Pub/Sub retries it and, after the subscription's maximum attempts, moves it to the dead-letter topic; the error from Resend is in the logs. Retries never send an email twice.
-
-To show invites whose email bounced or was marked as spam ("Email not delivered" in the candidate list), add a webhook at resend.com/webhooks pointing at `https://<your domain>/api/notifications/webhooks/resend` with the events `email.bounced`, `email.complained` and `email.suppressed`. Put its signing secret (`whsec_...`) in `.env` as `RESEND_WEBHOOK_SECRET` and restart notifications. Without the secret every webhook is refused. Locally, Resend reaches it only through a tunnel, as with Paddle.
-
-### Documents for companies
-
-The /documents page ("docs" in the footer) offers companies instructions for use and the data processing agreement as PDFs, and candidate notice and DPIA templates as editable Word files. Their sources are the Markdown files in `frontend/content/documents` (English only, like the legal pages; the DPA's text must match `services/rounds/app/constants/dpa.py`). After changing one, rebuild the files in `frontend/public/documents` and commit them:
-
-```bash
-./scripts/documents/build.sh   # needs uv (for pandoc) and Docker (Chromium prints the PDFs)
-```
-
-## Tests
-
-Each Python service (and `packages/common`) keeps `tests/unit` (fakes, no services needed) and `tests/integration` (real Postgres and Redis), with the shared setup in `tests/conftest.py`.
-
-```bash
-# Unit tests of each Python service, and of the shared package (packages/common)
-cd services/rounds && uv sync && uv run pytest
-
-# Python lint and format, as CI runs them (ruff's version is pinned in CI)
-uvx ruff@0.16.10 check services packages evals && uvx ruff@0.16.10 format --check services packages evals
-
-# Frontend: lint, types, and unit tests of the pure helpers (frontend/tests, vitest)
-cd frontend && pnpm install && pnpm lint && pnpm typecheck && pnpm test
-# After changing an API: regenerate the frontend's API types (needs the stack running)
-cd frontend && pnpm api-types
-
-# Smoke test against a running stack
-./e2e_tests/smoke.sh
-
-# Integration tests: each service's tests/integration against the running stack's real Postgres
-# and Redis, in a "<service>_test" database created and dropped for the run
-./scripts/integration.sh            # or: ./scripts/integration.sh rounds library
-
-# Browser tests of the signed-out pages (home, companies, pricing, terms, privacy, docs, FAQ, about,
-# contact, practice) on desktop and phone sizes, in Playwright's Docker image: no console errors, no sideways
-# scroll, the same page width everywhere, the footer at the end, lowercase titles (articles keep
-# their capitals); and seo.spec.ts: language addresses and hreflang, titles, structured data, the
-# sitemap, robots.txt, noindex on private pages, redirects and the footer. Extra arguments go to
-# Playwright, e.g. --workers=2 when the dev server is slow to compile
-./e2e_tests/pages.sh
-
-# Browser tests of the signed-in pages, in the same Docker image, against the running stack. Users
-# sign in through "Continue with Google" and the Firebase Auth emulator's own sign-in page (local
-# only), the superadmin as the first address in SUPERADMIN_EMAILS. Every test makes throwaway users,
-# companies and interviews (made from local templates: no OpenAI; the owner spec adds and deletes its own
-# throwaway templates in the library database): a company owner, a candidate taking
-# an interview, the team and a viewer, verification, the admin zone's pass rates, stats, pause and
-# maintenance mode (turned off again afterwards), and the candidates' PDF report. After every run,
-# teardown.ts deletes every throwaway account (and so their companies and data), leftovers of
-# stopped runs included, and fails if any is left. Screenshots land in
-# e2e_tests/signed-in/test-results/screenshots
-./e2e_tests/signed-in.sh            # or: ./e2e_tests/signed-in.sh specs/b-candidate.spec.ts
-
-# Translations: every language has every key of en.json, with the same placeholders and plurals
-docker compose exec frontend pnpm check:messages
-
-# End-to-end, with a real generation (needs OPENAI_API_KEY; a few cents and a few minutes): a company
-# generates an interview and invites a candidate, who
-# takes it from the invite link; the company sees the scorecard and pays for that candidate. Its
-# accounts, company and data are deleted at the end, however the run ends
-python3 e2e_tests/flow.py
-
-# Load tests with k6, in its Docker image, against the local stack only (never production; not in
-# CI): many candidates taking a test, owners on the dashboard, the public pages. Throwaway users,
-# companies and tests from local templates, all deleted and counted afterwards; settings, thresholds
-# and results in e2e_tests/load/README.md
-./e2e_tests/load.sh candidates      # or: dashboard, public; VUS=20 ITERATIONS=2 ./e2e_tests/load.sh candidates
-```
-
-Model and prompt quality is tested offline with the prepared datasets, judge prompts and metrics in [evals/](evals/README.md).
-
-CI runs all of these except the end-to-end test, which needs an OpenAI key. It also builds every production image and starts the whole stack for the smoke, integration, page and signed-in tests. Its stack has no templates, so before the signed-in tests it adds a small English one (`e2e_tests/signed-in/seed/template.py`, no OpenAI), and its superadmin is a CI-only emulator account; on failure the screenshots and traces are kept as the run's `signed-in-test-results` artifact.
-
-## CI/CD
-
-| When | What runs |
+| Page | What it covers |
 |---|---|
-| A push to a pull request | CI ([`ci.yml`](.github/workflows/ci.yml)); a newer push cancels the run for the previous one |
-| A merge to `main` | CI again on the merged code, then the production images are pushed, tagged with the commit. Nothing is deployed |
-| A `v*` tag on such a commit | [`deploy.yml`](.github/workflows/deploy.yml): checks the tag is on `main` and CI passed on it, tags that commit's images with the version (no rebuild), runs the migrations, deploys every service, smoke-tests the site and creates a GitHub release |
-| Actions → Deploy → Run workflow with an earlier tag | Redeploys that version: a rollback. Migrations run only when **Run migrations** (`migrate`) is ticked |
-
-To release, tag the last commit of a push to `main` once CI has passed on it:
-
-```bash
-git tag v1.4.0 && git push origin v1.4.0
-```
-
-Migrations only go forward, so keep them additive for rollbacks to stay safe. Workflow actions are pinned by commit and Dockerfile base images by digest; Dependabot ([`.github/dependabot.yml`](.github/dependabot.yml)) opens weekly pull requests to update them. The one-time GitHub setup (tag protection, an optional approval for deploys) is in [infra/README.md](infra/README.md#deploys).
+| [Architecture](docs/architecture.md) | Services, how they call each other, background jobs, events and Pub/Sub |
+| [Generation and question quality](docs/generation.md) | The generation pipeline, question reuse and checks, generation settings, models, rate limits |
+| [Development](docs/development.md) | Running locally, settings, the local stack, everyday commands, conventions |
+| [Testing](docs/testing.md) | Unit, integration, browser, end-to-end and load tests; CI |
+| [Deployment](docs/deployment.md) | Production images, migrations, Sentry, CI/CD, releases and rollbacks |
+| [infra/README.md](infra/README.md) | Google Cloud with Terraform: bootstrap, deploys, restore drill |
+| [packages/common](packages/common/README.md) | The code the API services share |
+| [e2e_tests/load/README.md](e2e_tests/load/README.md) | Load test settings, thresholds and results |
+| [evals/README.md](evals/README.md) | Offline evals of models and prompts |
 
 ## Project conventions
 

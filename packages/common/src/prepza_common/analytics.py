@@ -25,7 +25,7 @@ async def track(
     company_id: object | None = None,
     **props: object,
 ) -> None:
-    """Records one funnel event (docs/measurement.md). Best effort: a lost event is logged and
+    """Records one funnel event (internal_docs/measurement.md). Best effort: a lost event is logged and
     never breaks the request. `props` hold counts and choices only, never text people wrote."""
     data = {
         "at": datetime.now(UTC).isoformat(),

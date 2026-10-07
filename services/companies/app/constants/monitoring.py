@@ -1,6 +1,6 @@
 from enum import StrEnum
 
-# The monitoring plan's pass-rate trigger (docs/compliance/post-market-monitoring-plan.md,
+# The monitoring plan's pass-rate trigger (internal_docs/compliance/post-market-monitoring-plan.md,
 # section 3): an interview whose pass rate is below LOW or above HIGH percent, once at least
 # MIN_FINISHED candidates finished it, needs a look.
 PASS_RATE_LOW = 10

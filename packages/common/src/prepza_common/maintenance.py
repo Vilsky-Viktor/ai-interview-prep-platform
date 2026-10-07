@@ -1,4 +1,4 @@
-# Maintenance mode (docs/compliance/post-market-monitoring-plan.md, section 4): a superadmin turns
+# Maintenance mode (internal_docs/compliance/post-market-monitoring-plan.md, section 4): a superadmin turns
 # it on, and every service's API refuses every request with a 503, except superadmins and the
 # paths in MAINTENANCE_OPEN_PATHS and MAINTENANCE_OPEN_PREFIXES. Like the emergency pause, it's
 # one Redis key without expiry.

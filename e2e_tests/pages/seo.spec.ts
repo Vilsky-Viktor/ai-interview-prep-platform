@@ -38,7 +38,7 @@ test("a page in another language has its own address, language and alternates", 
   ).toMatch(/\/pricing$/);
 });
 
-// Each language's titles use the words its employers search for (docs/seo-plan.md), not a
+// Each language's titles use the words its employers search for (internal_docs/seo-plan.md), not a
 // translation of the English ones: German companies search "Einstellungstest".
 test("a language's home page is titled with its own search terms", async ({
   page,

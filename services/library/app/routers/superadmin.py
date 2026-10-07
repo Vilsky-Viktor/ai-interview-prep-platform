@@ -17,7 +17,7 @@ from app.services.questions import question_texts
 from app.storage import feedback, preparations
 from app.storage import templates as template_storage
 
-# The superadmin's templates (docs/company-plan.md, Phase 2); everyone else gets "not found".
+# The superadmin's templates (internal_docs/company-plan.md, Phase 2); everyone else gets "not found".
 router = APIRouter(prefix="/superadmin/templates", tags=["superadmin"])
 
 

@@ -9,7 +9,7 @@ from app.integrations import rounds
 from app.schemas.monitoring import PassRateOut
 from app.storage import pass_rates, stats
 
-# The superadmin's monitoring (docs/compliance/post-market-monitoring-plan.md) and stats;
+# The superadmin's monitoring (internal_docs/compliance/post-market-monitoring-plan.md) and stats;
 # everyone else gets "not found".
 router = APIRouter(prefix="/superadmin", tags=["superadmin"])
 

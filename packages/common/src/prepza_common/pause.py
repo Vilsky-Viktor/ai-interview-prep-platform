@@ -1,4 +1,4 @@
-# The emergency pause (docs/compliance/post-market-monitoring-plan.md, section 4): a superadmin
+# The emergency pause (internal_docs/compliance/post-market-monitoring-plan.md, section 4): a superadmin
 # turns it on, and every service refuses new candidate interviews and invites, practice rounds,
 # previews, AI generation and the help chat (the plan lists exactly what). Sessions already
 # running may finish: answering is never refused. The switch is

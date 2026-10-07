@@ -3,7 +3,7 @@ from enum import StrEnum
 
 class SetKind(StrEnum):
     INTERVIEW = "interview"
-    # Made by a superadmin (Phase 2 of docs/company-plan.md); the question bank reuses theirs.
+    # Made by a superadmin (Phase 2 of internal_docs/company-plan.md); the question bank reuses theirs.
     TEMPLATE = "template"
 
 

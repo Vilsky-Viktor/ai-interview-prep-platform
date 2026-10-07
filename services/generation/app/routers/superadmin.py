@@ -21,7 +21,7 @@ from app.services.retry import retry_generation
 from app.services.review import submit_review
 from app.storage import generations
 
-# The superadmin's templates (docs/company-plan.md, Phase 2): the same pipeline as a company's test,
+# The superadmin's templates (internal_docs/company-plan.md, Phase 2): the same pipeline as a company's test,
 # saved without a company. Everyone else gets "not found".
 router = APIRouter(prefix="/superadmin", tags=["superadmin"])
 

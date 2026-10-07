@@ -58,7 +58,7 @@ After every `candidates` and `dashboard` run, and on `clean`, `load.sh`:
 
 1. lists the throwaway companies and users still in the databases (`leftovers.sh ids`);
 2. deletes every throwaway account (`clean.js`) the way a user does in settings (`DELETE /api/library/me`), candidates first, which also deletes the companies they alone own;
-3. counts the rows left that hold one of those ids in companies, members, tests, candidates, audit events, rounds' sections, library's sets, billing's wallets and holds and users' and companies' notifications (`leftovers.sh count`), and fails when any is.
+3. counts the rows left that hold one of those ids in companies, members, tests, candidates, audit events, rounds' sections, library's sets, billing's wallets and holds, ATS connections and users' and companies' notifications (`leftovers.sh count`), and fails when any is.
 
 Only load runs' rows ever match: companies named `Load <run> <n>`, owners at `load-<run>-owner-<n>@example.com`, candidates at `delivered+load-<run>-candidate-<n>@resend.dev` (Resend's test domain, which delivers to nobody). The users' own local records are never touched.
 
@@ -99,4 +99,4 @@ Measured on 2026-10-06 by switching each change off and on between runs of the s
 
 Medians fell for every change; the p95s moved with whatever else the VM was doing (a single slow request is the p95 of a 30-candidate run). Tried and not kept: keeping the test's questions in memory for `start`, which showed no gain locally (the load test's tests are small and each has 3 candidates).
 
-Compared with [docs/capacity-and-costs.md](../../docs/capacity-and-costs.md) (an estimate of 100–300 requests a second per service): locally the candidate flow (mostly `rounds`) peaked at about 55 requests a second, with `step` and `answer` at a p95 around 350 ms before the optimisations above, while `rounds` and `library` each used a full core and Postgres under 70% of one, on a shared VM in reload mode. It's a floor, not the production figure, but it says the services' single processes, not the database, are the first limit, and that `rounds` and `library` are the ones to scale or optimise first.
+Compared with `internal_docs/capacity-and-costs.md` (kept out of the repo; an estimate of 100–300 requests a second per service): locally the candidate flow (mostly `rounds`) peaked at about 55 requests a second, with `step` and `answer` at a p95 around 350 ms before the optimisations above, while `rounds` and `library` each used a full core and Postgres under 70% of one, on a shared VM in reload mode. It's a floor, not the production figure, but it says the services' single processes, not the database, are the first limit, and that `rounds` and `library` are the ones to scale or optimise first.
