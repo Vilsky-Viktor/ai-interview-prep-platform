@@ -1,17 +1,19 @@
 "use client"
 
 import { cn } from "cn"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useTranslations } from "next-intl"
 
 import { useAuth } from "@/components/auth-provider"
+import { LocalizedLink, useUrlLocale } from "@/components/localized-link"
 import { NAV_LINKS } from "@/constants/navigation"
+import { localizeHref } from "@/lib/locale-path"
 
 export function SiteNav() {
   const t = useTranslations("nav")
   const pathname = usePathname()
   const { user, loading } = useAuth()
+  const locale = useUrlLocale()
 
   return (
     // The negative margin cancels the first link's padding, so the separator sits evenly.
@@ -26,12 +28,14 @@ export function SiteNav() {
           return null
         }
 
+        // Against the address in the page's language (/de/pricing).
+        const href = localizeHref(locale, link.href)
         const current = link.exact
-          ? pathname === link.href
-          : pathname.startsWith(link.href)
+          ? pathname === href
+          : pathname.startsWith(href)
 
         return (
-          <Link
+          <LocalizedLink
             key={link.href}
             href={link.href}
             aria-current={current ? "page" : undefined}
@@ -42,7 +46,7 @@ export function SiteNav() {
             )}
           >
             {t(link.label)}
-          </Link>
+          </LocalizedLink>
         )
       })}
     </nav>

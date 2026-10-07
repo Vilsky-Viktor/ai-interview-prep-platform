@@ -5,10 +5,25 @@
 /* Dark, except inside .light-scope: the candidate PDF report keeps the light design. */
 @custom-variant dark (&:is(.dark *):not(.light-scope *));
 
+/* The script fonts in fallback order; :lang() puts each CJK page's own font first. */
+:root {
+  --font-scripts:
+    var(--font-arabic), var(--font-hebrew), var(--font-devanagari), var(--font-thai),
+    var(--font-vietnamese), var(--font-japanese), var(--font-chinese), var(--font-korean);
+}
+:root:lang(zh) {
+  --font-scripts: var(--font-chinese), var(--font-japanese), var(--font-korean);
+}
+:root:lang(ko) {
+  --font-scripts: var(--font-korean), var(--font-japanese), var(--font-chinese);
+}
+
 @theme inline {
-  /* Poppins has no Cyrillic: those letters fall back to Geist, never to a serif. */
-  --font-heading: var(--font-poppins), var(--font-geist), sans-serif;
-  --font-sans: var(--font-geist);
+  /* Poppins has no Cyrillic: those letters fall back to Geist, never to a serif. Letters neither
+     has fall back to the script fonts (constants/fonts.ts); Chinese, Japanese and Korean pages
+     put their own first (below), as the three draw shared characters differently. */
+  --font-heading: var(--font-poppins), var(--font-geist), var(--font-scripts), sans-serif;
+  --font-sans: var(--font-geist), var(--font-scripts), sans-serif;
   --font-mono: var(--font-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);

@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Poppins } from "next/font/google"
 import { headers } from "next/headers"
 import { NextIntlClientProvider } from "next-intl"
 import { getLocale, getTranslations } from "next-intl/server"
 
 import "./globals.css"
 import { AuthProvider } from "@/components/auth-provider"
+import { UrlLocaleProvider } from "@/components/localized-link"
 import { MaintenanceNotice } from "@/components/maintenance-notice"
 import { SignInProvider } from "@/components/sign-in-dialog"
 import { SiteFooter } from "@/components/site-footer"
@@ -13,23 +13,11 @@ import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner"
+import { FONT_VARIABLES } from "@/constants/fonts"
 import { RTL_LOCALES, type Locale } from "@/constants/i18n"
 import { SITE_NAME } from "@/constants/seo"
-import { siteUrl } from "@/lib/site"
+import { previewImage, siteUrl, urlLocale } from "@/lib/site"
 import { cn } from "cn"
-
-const geist = Geist({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-geist",
-})
-
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  variable: "--font-poppins",
-})
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("site")
@@ -39,8 +27,15 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(siteUrl()),
     title: { default: SITE_NAME, template: `%s · ${SITE_NAME}` },
     description: t("description"),
-    openGraph: { siteName: SITE_NAME, type: "website" },
-    twitter: { card: "summary" },
+    openGraph: { siteName: SITE_NAME, type: "website", images: previewImage() },
+    twitter: { card: "summary_large_image" },
+    // Ownership checks for Google Search Console and Bing Webmaster Tools, when set.
+    verification: {
+      google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
+      other: process.env.BING_SITE_VERIFICATION
+        ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+        : undefined,
+    },
   }
 }
 
@@ -55,15 +50,16 @@ export default async function RootLayout({
   const direction = RTL_LOCALES.includes(locale as Locale) ? "rtl" : "ltr"
 
   return (
+    // In-page links ("how it works" on the home page) scroll smoothly; Next.js turns it off for
+    // navigation between pages (data-scroll-behavior), and reduced motion keeps the jump.
     <html
       lang={locale}
       dir={direction}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={cn(
-        "antialiased",
-        geist.variable,
-        geistMono.variable,
-        poppins.variable,
+        "scroll-smooth antialiased motion-reduce:scroll-auto",
+        ...FONT_VARIABLES,
         "font-sans"
       )}
     >
@@ -72,21 +68,23 @@ export default async function RootLayout({
           flex column would otherwise shrink them to their content. */}
       <body className="flex min-h-svh flex-col">
         <NextIntlClientProvider>
-          <ThemeProvider nonce={nonce}>
-            <AuthProvider>
-              <TooltipProvider>
-                <SignInProvider>
-                  <SiteHeader />
-                  <div className="flex flex-1 flex-col [&>*]:w-full">
-                    <MaintenanceNotice />
-                    {children}
-                  </div>
-                  <SiteFooter />
-                  <Toaster />
-                </SignInProvider>
-              </TooltipProvider>
-            </AuthProvider>
-          </ThemeProvider>
+          <UrlLocaleProvider locale={await urlLocale()}>
+            <ThemeProvider nonce={nonce}>
+              <AuthProvider>
+                <TooltipProvider>
+                  <SignInProvider>
+                    <SiteHeader />
+                    <div className="flex flex-1 flex-col [&>*]:w-full">
+                      <MaintenanceNotice />
+                      {children}
+                    </div>
+                    <SiteFooter />
+                    <Toaster />
+                  </SignInProvider>
+                </TooltipProvider>
+              </AuthProvider>
+            </ThemeProvider>
+          </UrlLocaleProvider>
         </NextIntlClientProvider>
       </body>
     </html>

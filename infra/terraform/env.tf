@@ -19,8 +19,10 @@ locals {
   # tokens are issued for.
   service_env = {
     frontend = {
-      API_URL  = "https://${var.domain}"
-      SITE_URL = "https://${var.domain}"
+      API_URL                  = "https://${var.domain}"
+      SITE_URL                 = "https://${var.domain}"
+      GOOGLE_SITE_VERIFICATION = var.google_site_verification
+      BING_SITE_VERIFICATION   = var.bing_site_verification
     }
     library = {
       INVOKER_AUDIENCE = local.run_url["library"]

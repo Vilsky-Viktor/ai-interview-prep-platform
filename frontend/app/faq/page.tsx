@@ -2,6 +2,7 @@ import { ChevronDownIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { HelpChat } from "@/components/help-chat"
+import { JsonLd } from "@/components/json-ld"
 import { serverFetch } from "@/lib/server-api"
 import { pageMetadata } from "@/lib/site"
 import type { FaqItem } from "@/types/help"
@@ -9,7 +10,7 @@ import type { FaqItem } from "@/types/help"
 export async function generateMetadata() {
   const t = await getTranslations("faq")
 
-  return pageMetadata(t("title"), t("intro"), "/faq")
+  return pageMetadata(t("title"), t("intro"), "/faq", true)
 }
 
 export default async function FaqPage() {
@@ -29,12 +30,7 @@ export default async function FaqPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structured).replace(/</g, "\\u003c"),
-        }}
-      />
+      <JsonLd data={structured} />
       <header className="space-y-4">
         <h1 className="font-heading text-4xl font-medium tracking-tight">
           {t("title")}

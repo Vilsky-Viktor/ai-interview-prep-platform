@@ -122,3 +122,15 @@ variable "linkedin_client_secret" {
   default     = ""
   sensitive   = true
 }
+
+variable "google_site_verification" {
+  description = "The token from Google Search Console's HTML-tag check for the domain; empty skips it."
+  type        = string
+  default     = ""
+}
+
+variable "bing_site_verification" {
+  description = "The token from Bing Webmaster Tools' meta-tag check for the domain; empty skips it."
+  type        = string
+  default     = ""
+}

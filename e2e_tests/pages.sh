@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Browser tests of the signed-out pages (e2e_tests/pages), in Playwright's Docker image, against
 # the running stack: the browser opens SITE_URL, which Chromium resolves to the gateway on the
-# stack's own network. Usage: e2e_tests/pages.sh
+# stack's own network. Usage: e2e_tests/pages.sh [playwright args], e.g. --workers=2
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -19,5 +19,6 @@ docker run --rm --network "$network" \
   -v "$PWD/e2e_tests/pages:/tests" -w /tests \
   -e SITE_URL=http://localhost:8090 \
   -e HOST_RULES="MAP localhost:8090 gateway:80" \
+  -e REQUEST_URL=http://gateway \
   mcr.microsoft.com/playwright:v1.63.0-noble \
-  sh -c "npm ci --no-audit --no-fund --loglevel=error && npx playwright test"
+  sh -c "npm ci --no-audit --no-fund --loglevel=error && npx playwright test $*"

@@ -1,7 +1,7 @@
 import { cn } from "cn"
 import { ArrowRightIcon } from "lucide-react"
-import Link from "next/link"
 
+import { LocalizedLink } from "@/components/localized-link"
 import { buttonVariants } from "@/components/ui/button"
 
 /** One landing section, a screen of its own: a large title and a short text, centered, and
@@ -89,7 +89,7 @@ export function MoreLink({
   children: React.ReactNode
 }) {
   return (
-    <Link
+    <LocalizedLink
       href={href}
       className={cn(
         buttonVariants({ variant: "outline" }),
@@ -99,6 +99,6 @@ export function MoreLink({
     >
       {children}
       <ArrowRightIcon className="size-4 rtl:-scale-x-100" />
-    </Link>
+    </LocalizedLink>
   )
 }

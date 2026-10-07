@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/site"
 export async function generateMetadata() {
   const t = await getTranslations("contact")
 
-  return pageMetadata(t("title"), t("intro"), "/contact")
+  return pageMetadata(t("title"), t("intro"), "/contact", true)
 }
 
 export default async function ContactPage() {

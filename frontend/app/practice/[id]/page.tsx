@@ -1,6 +1,6 @@
 import { InfoIcon } from "lucide-react"
 import { cookies } from "next/headers"
-import { notFound } from "next/navigation"
+import { notFound, permanentRedirect } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
@@ -33,33 +33,40 @@ export async function generateMetadata({
           level: template.level,
           count: template.topic_count,
         }),
-        `/practice/${id}`
+        `/practice/${template.slug ?? template.id}`
       )
     : {}
 }
 
 /** One free practice test, public for search engines: the role, its level and language, and
- * the topics it covers. Its questions are never shown here. */
+ * the topics it covers. Its questions are never shown here. Its address is the template's slug;
+ * an old address by id moves there for good. */
 export default async function PracticeTestPage({
   params,
 }: {
   params: Promise<{ id: string }>
 }) {
-  const { id } = await params
+  const { id: key } = await params
   const t = await getTranslations("practice")
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
-  const [template, size, progress] = await Promise.all([
-    serverFetch<Template>(`/library/templates/${id}`),
+  const template = await serverFetch<Template>(`/library/templates/${key}`)
+
+  if (!template) {
+    notFound()
+  }
+
+  if (template.slug && key !== template.slug) {
+    permanentRedirect(`/practice/${template.slug}`)
+  }
+
+  const id = template.id
+  const [size, progress] = await Promise.all([
     serverFetch<PracticeSize>(`/rounds/practice/${id}/size`),
     // The talent's latest score on each topic; nothing before their first round.
     signedIn
       ? serverFetch<PracticeTopicProgress[]>(`/rounds/practice/${id}/progress`)
       : null,
   ])
-
-  if (!template) {
-    notFound()
-  }
 
   const reached = new Map((progress ?? []).map((item) => [item.topic_id, item]))
 

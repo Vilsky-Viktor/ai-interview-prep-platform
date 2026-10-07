@@ -1,10 +1,11 @@
 export const SITE_NAME = "prepza."
 
-// Private areas search engines shouldn't crawl; they need sign-in or a personal link anyway.
+// Private areas: signed-in pages and personal links. They're served with "noindex" (proxy.ts),
+// so they stay out of search results even when a link to one is public (a job ad's link).
 export const PRIVATE_PATHS = [
   "/api/",
   "/apply",
-  "/company",
+  "/companies",
   "/generate",
   "/invite",
   "/join",
@@ -17,6 +18,9 @@ export const PRIVATE_PATHS = [
   "/superadmin",
   "/top-up",
 ]
+
+// Not crawled at all: the API and Sentry's tunnel aren't pages.
+export const UNCRAWLED_PATHS = ["/api/", "/monitoring"]
 
 // Public pages listed in the sitemap.
 export const PUBLIC_PATHS = [
@@ -31,3 +35,28 @@ export const PUBLIC_PATHS = [
   "/contact",
   "/practice",
 ]
+
+// Public pages also served in every other language under its prefix (/de/pricing), linked to
+// each other with hreflang. Other pages have one address and follow the visitor's language.
+export const LOCALIZED_PATHS = [
+  "/",
+  "/pricing",
+  "/faq",
+  "/about",
+  "/contact",
+  "/documents",
+  "/practice",
+  "/tests",
+  "/compare",
+  "/guides",
+  "/pre-employment-testing",
+  "/ai-interviews",
+]
+
+// Articles also have an address in every language: in a language without a translation yet they
+// show the English text, and name only their real translations for hreflang.
+export const LOCALIZED_ARTICLE = /^\/(compare|guides)\/[a-z0-9-]+$/
+
+// Set by proxy.ts on a request that came in under a language prefix: that language, which the
+// page then renders in and names as its canonical address.
+export const LOCALE_HEADER = "x-prepza-locale"

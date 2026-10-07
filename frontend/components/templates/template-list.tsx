@@ -18,7 +18,8 @@ import { formatDate } from "@/lib/format"
 import type { TemplateSummary } from "@/types/superadmin"
 
 /** The templates at `path`, newest first, a page at a time; `initial` is the server's first
- * page, and `empty` shows when there are none. A row opens the template under `openBase`, and
+ * page, and `empty` shows when there are none. A row opens the template under `openBase` (by its
+ * slug with `bySlug`), and
  * for `companyId` also ends with a "Use template" button. */
 export function TemplateList({
   path,
@@ -26,12 +27,14 @@ export function TemplateList({
   empty,
   openBase,
   companyId,
+  bySlug,
 }: {
   path: string
   initial: TemplateSummary[]
   empty: string
   openBase: string
   companyId?: string
+  bySlug?: boolean
 }) {
   const t = useTranslations("templates")
   const locale = useLocale()
@@ -97,7 +100,7 @@ export function TemplateList({
         return (
           <div className="relative flex items-center gap-6 p-6 transition-colors hover:bg-muted/50">
             <Link
-              href={`${openBase}/${template.id}`}
+              href={`${openBase}/${(bySlug && template.slug) || template.id}`}
               // On phones the title takes its own line, the tags and count the next.
               className="flex min-w-0 flex-1 flex-wrap items-center gap-x-6 gap-y-3 after:absolute after:inset-0 sm:flex-nowrap"
             >

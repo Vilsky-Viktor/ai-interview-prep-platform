@@ -1,9 +1,9 @@
 "use client"
 
-import Link from "next/link"
 import { useTranslations } from "next-intl"
 
 import { useAuth } from "@/components/auth-provider"
+import { LocalizedLink } from "@/components/localized-link"
 import { NotificationBell } from "@/components/notification-bell"
 import { SiteNav } from "@/components/site-nav"
 import { ThemeModes } from "@/components/theme-toggle"
@@ -21,13 +21,13 @@ export function SiteHeader() {
       <div className="mx-auto flex h-full max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
         {/* The logo and links share a text baseline; the separator stays centered. */}
         <div className="flex items-baseline gap-2 sm:gap-4">
-          <Link
+          <LocalizedLink
             href="/"
             aria-label={t("home")}
             className="flex h-8 items-center"
           >
             <Wordmark className="text-xl leading-none" shortOnPhones />
-          </Link>
+          </LocalizedLink>
           <span aria-hidden className="h-5 w-px self-center bg-border" />
           <SiteNav />
         </div>

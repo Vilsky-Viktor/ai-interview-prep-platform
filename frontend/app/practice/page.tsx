@@ -4,12 +4,14 @@ import {
   TemplateBrowser,
   type TemplateSearchParams,
 } from "@/components/templates/template-browser"
-import { pageMetadata } from "@/lib/site"
+import { DEFAULT_LOCALE } from "@/constants/i18n"
+import { localizedPath } from "@/lib/locale-path"
+import { pageMetadata, urlLocale } from "@/lib/site"
 
 export async function generateMetadata() {
   const t = await getTranslations("practice")
 
-  return pageMetadata(t("title"), t("intro"), "/practice")
+  return pageMetadata(t("title"), t("intro"), "/practice", true)
 }
 
 /** The free practice library: every template, searched and filtered like the companies' list.
@@ -21,10 +23,12 @@ export default async function PracticePage({
 }) {
   const t = await getTranslations("practice")
   const browser = await TemplateBrowser({
-    base: "/practice",
+    // A search stays in the language of the address it started on.
+    base: localizedPath((await urlLocale()) ?? DEFAULT_LOCALE, "/practice"),
     listPath: "/library/templates",
     params: await searchParams,
     openBase: "/practice",
+    bySlug: true,
   })
 
   return (

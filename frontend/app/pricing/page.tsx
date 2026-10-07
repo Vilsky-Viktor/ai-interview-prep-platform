@@ -2,12 +2,18 @@ import { InfoIcon } from "lucide-react"
 import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 
+import { JsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import { serverFetch } from "@/lib/server-api"
-import { translatedTitle } from "@/lib/site"
+import { pageMetadata, siteUrl } from "@/lib/site"
+import { softwareData } from "@/lib/structured-data"
 import type { Catalog } from "@/types/billing"
 
-export const generateMetadata = () => translatedTitle("pricing", "title")
+export async function generateMetadata() {
+  const t = await getTranslations("pricing")
+
+  return pageMetadata(t("title"), t("intro"), "/pricing", true)
+}
 
 function PriceRow({ what, price }: { what: string; price: string }) {
   return (
@@ -36,6 +42,7 @@ export default async function PricingPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-16 px-6 py-12">
+      <JsonLd data={softwareData(siteUrl(), t("intro"), catalog)} />
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-4">
           <h1 className="font-heading text-4xl font-medium tracking-tight">

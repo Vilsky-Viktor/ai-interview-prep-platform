@@ -32,3 +32,7 @@ github_client_id       = ""
 github_client_secret   = ""
 linkedin_client_id     = ""
 linkedin_client_secret = ""
+
+# Optional: the tokens from Google Search Console's and Bing Webmaster Tools' meta-tag checks.
+# google_site_verification = ""
+# bing_site_verification   = ""

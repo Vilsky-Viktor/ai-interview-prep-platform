@@ -19,20 +19,23 @@ export type TemplateSearchParams = {
 }
 
 /** The templates searched and filtered like the old public library, on the page at `base` (the
- * address keeps the choices). `listPath` is the API list; rows open under `openBase`, and carry a
- * "Use template" button for `companyId`. Null when the list can't be read. */
+ * address keeps the choices). `listPath` is the API list; rows open under `openBase` (by their
+ * readable slug with `bySlug`, the public practice pages), and carry a "Use template" button for
+ * `companyId`. Null when the list can't be read. */
 export async function TemplateBrowser({
   base,
   listPath,
   params,
   openBase,
   companyId,
+  bySlug,
 }: {
   base: string
   listPath: string
   params: TemplateSearchParams
   openBase: string
   companyId?: string
+  bySlug?: boolean
 }) {
   const t = await getTranslations("templates")
   const filters = await serverFetch<TemplateFilters>(
@@ -104,6 +107,7 @@ export async function TemplateBrowser({
         empty={narrowed ? t("noMatches") : t("empty")}
         openBase={openBase}
         companyId={companyId}
+        bySlug={bySlug}
       />
     </>
   )
