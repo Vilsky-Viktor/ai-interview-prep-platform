@@ -43,13 +43,14 @@ prepza transforme une fiche de poste en entretien de compétences chronométré 
 
 - **Tarifs :** par candidat qui répond à au moins une question, moins cher par candidat avec des recharges plus importantes. Les crédits n'expirent pas et il n'y a pas d'abonnement. Voir les [tarifs](/pricing).
 - **Adapté à :** les PME qui recrutent pour tout type de poste, quelques personnes à la fois, comme première présélection.
-- **Pas adapté à :** les tests cognitifs ou de personnalité, l'écriture ou l'exécution de code, les entretiens vidéo ou les intégrations ATS. prepza ne les propose pas : associez-le à un outil qui le fait quand vous en avez besoin.
+- **Fonctionne avec votre ATS :** Workable, Greenhouse, Teamtailor, Recruitee et Breezy HR envoient les candidats à prepza et récupèrent leurs résultats, sans surcoût.
+- **Pas adapté à :** les tests cognitifs ou de personnalité, l'écriture ou l'exécution de code, ou les entretiens vidéo. prepza ne les propose pas : associez-le à un outil qui le fait quand vous en avez besoin.
 
 ### CodeSignal
 
 Les offres de CodeSignal couvrent les évaluations techniques et les recruteurs IA pour les postes produit, design et ingénierie, avec surveillance par IA et vérification d'identité. Les offres supérieures ajoutent des évaluations go-to-market et des recruteurs IA pour la vente, le customer success et le marketing, ainsi que des intégrations ATS ([page tarifs de CodeSignal, en octobre 2026](https://codesignal.com/pricing/)).
 
-- **Mieux que prepza pour :** l'évaluation de code en pratique, les entretiens menés par IA, l'intégration ATS.
+- **Mieux que prepza pour :** l'évaluation de code en pratique, les entretiens menés par IA.
 - **Ensemble :** prepza comme présélection des connaissances pour chaque candidat, CodeSignal pour l'étape de code.
 
 ### HackerRank

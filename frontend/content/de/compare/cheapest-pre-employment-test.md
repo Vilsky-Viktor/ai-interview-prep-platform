@@ -46,7 +46,7 @@ Prüfen Sie beim Vergleich auch Folgendes:
 - **Kandidaten, die nie anfangen.** prepza berechnet nur Kandidaten, die mindestens eine Frage beantworten; die Credits einer ungenutzten Einladung kommen zurück.
 - **Verfallende Credits.** Die Credits von prepza verfallen nicht. Prüfen Sie, ob die Credits anderer Anbieter übertragen werden.
 - **Steuern.** Prüfen Sie, ob ein angegebener Preis Mehrwertsteuer oder Sales Tax enthält.
-- **Funktionen in höheren Tarifen.** ATS-Integrationen, Proctoring und eigene Programmieraufgaben gibt es oft nur in teureren Tarifen. Prüfen Sie, welchen Tarif Sie tatsächlich bräuchten.
+- **Funktionen in höheren Tarifen.** ATS-Integrationen, Proctoring und eigene Programmieraufgaben gibt es oft nur in teureren Tarifen. Prüfen Sie, welchen Tarif Sie tatsächlich bräuchten. prepza ist ohne Aufpreis an Workable, Greenhouse, Teamtailor, Recruitee und Breezy HR angebunden.
 - **Mehr als ein Tool.** Wenn Sie einen Wissenstest und einen psychometrischen Test oder Programmiertest brauchen, addieren Sie beide.
 
 ## Wann ein niedrigerer Preis nicht die richtige Wahl ist

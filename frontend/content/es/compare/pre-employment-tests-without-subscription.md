@@ -68,7 +68,7 @@ Los precios están en dólares estadounidenses. Los pagos se procesan a través 
 El pago por candidato no siempre es más barato. Una suscripción puede convenirte más cuando:
 
 - **Evalúas a cientos de candidatos al año.** Un plan fijo, sobre todo uno con invitaciones ilimitadas, puede costar menos por candidato con un volumen alto. Divide el coste anual del plan entre tu precio por candidato para encontrar el punto de equilibrio; [Cómo comparar el coste de las pruebas](/compare/cheapest-pre-employment-test) lo explica paso a paso.
-- **Necesitas pruebas que prepza no ofrece.** La aptitud cognitiva, la personalidad, la programación práctica (escribir y ejecutar código), las preguntas en video y las integraciones con ATS vienen con los planes de otras plataformas. Puedes usar una de ellas junto con prepza.
+- **Necesitas pruebas que prepza no ofrece.** La aptitud cognitiva, la personalidad, la programación práctica (escribir y ejecutar código) y las preguntas en video vienen con los planes de otras plataformas. Puedes usar una de ellas junto con prepza.
 - **Un plan gratuito te basta.** Algunos proveedores ofrecen planes gratuitos con unas pocas pruebas; si esas pruebas encajan con tu puesto, puede que no necesites pagar nada.
 
 ## Preguntas para cualquier proveedor de pago por uso

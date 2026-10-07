@@ -68,7 +68,7 @@ Prices are in US dollars. Payments go through Paddle, which handles VAT and sale
 Pay-per-candidate isn't always cheaper. A subscription may suit you better when:
 
 - **You test hundreds of candidates a year.** A flat plan, especially one with unlimited invitations, can cost less per candidate at high volume. Divide the plan's yearly cost by your price per candidate to find the break-even point; [How to compare test costs](/compare/cheapest-pre-employment-test) walks through it.
-- **You need tests prepza doesn't offer.** Cognitive ability, personality, hands-on coding (writing and running code), video questions and ATS integrations come with other platforms' plans. You can use one of them next to prepza.
+- **You need tests prepza doesn't offer.** Cognitive ability, personality, hands-on coding (writing and running code) and video questions come with other platforms' plans. You can use one of them next to prepza.
 - **A free plan covers you.** Some vendors offer free plans with a few tests; if those tests fit your role, you may not need to pay at all.
 
 ## Questions to ask any pay-as-you-go vendor

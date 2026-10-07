@@ -43,13 +43,14 @@ prepza mengubah deskripsi pekerjaan menjadi wawancara keterampilan pilihan ganda
 
 - **Harga:** per kandidat yang menjawab setidaknya satu soal, lebih murah per kandidat dengan isi ulang yang lebih besar. Kredit tidak kedaluwarsa, dan tidak ada langganan. Lihat [harga](/pricing).
 - **Cocok untuk:** tim kecil dan menengah yang merekrut untuk posisi apa pun, beberapa orang sekaligus, sebagai penyaringan pertama.
-- **Bukan untuk:** tes kognitif atau kepribadian, menulis atau menjalankan kode, wawancara video, atau integrasi ATS. prepza tidak menyediakannya, jadi pasangkan dengan alat yang menyediakannya kalau kamu membutuhkannya.
+- **Bekerja dengan ATS kamu:** Workable, Greenhouse, Teamtailor, Recruitee, dan Breezy HR mengirim kandidat ke prepza dan menerima hasilnya kembali, tanpa biaya tambahan.
+- **Bukan untuk:** tes kognitif atau kepribadian, menulis atau menjalankan kode, atau wawancara video. prepza tidak menyediakannya, jadi pasangkan dengan alat yang menyediakannya kalau kamu membutuhkannya.
 
 ### CodeSignal
 
 Paket CodeSignal mencakup asesmen teknis dan pewawancara AI untuk posisi product, design, dan engineering, dengan proctoring AI dan verifikasi identitas. Paket yang lebih tinggi menambahkan asesmen go-to-market dan pewawancara AI untuk sales, customer success, dan marketing, serta integrasi ATS ([halaman harga CodeSignal, per Oktober 2026](https://codesignal.com/pricing/)).
 
-- **Lebih baik dari prepza untuk:** asesmen coding langsung, wawancara yang dipandu AI, integrasi ATS.
+- **Lebih baik dari prepza untuk:** asesmen coding langsung, wawancara yang dipandu AI.
 - **Bersama:** prepza sebagai penyaringan pengetahuan untuk semua pelamar, CodeSignal untuk tahap coding.
 
 ### HackerRank

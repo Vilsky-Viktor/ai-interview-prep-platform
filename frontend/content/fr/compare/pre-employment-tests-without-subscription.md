@@ -68,7 +68,7 @@ Les prix sont en dollars américains. Les paiements passent par Paddle, qui gèr
 Le paiement par candidat n'est pas toujours moins cher. Un abonnement peut mieux vous convenir quand :
 
 - **Vous évaluez des centaines de candidats par an.** Un forfait, surtout avec des invitations illimitées, peut coûter moins cher par candidat à fort volume. Divisez le coût annuel de l'abonnement par votre prix par candidat pour trouver le seuil de rentabilité ; [Comment comparer le coût des tests](/compare/cheapest-pre-employment-test) détaille le calcul.
-- **Vous avez besoin de tests que prepza ne propose pas.** Aptitudes cognitives, personnalité, code en pratique (écrire et exécuter du code), questions vidéo et intégrations ATS se trouvent dans les offres d'autres plateformes. Vous pouvez en utiliser une en complément de prepza.
+- **Vous avez besoin de tests que prepza ne propose pas.** Aptitudes cognitives, personnalité, code en pratique (écrire et exécuter du code) et questions vidéo se trouvent dans les offres d'autres plateformes. Vous pouvez en utiliser une en complément de prepza.
 - **Une offre gratuite vous suffit.** Certains fournisseurs proposent des offres gratuites avec quelques tests ; si ces tests conviennent à votre poste, vous n'aurez peut-être rien à payer.
 
 ## Questions à poser à tout fournisseur sans abonnement

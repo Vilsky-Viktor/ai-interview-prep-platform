@@ -13,7 +13,7 @@ Trang này giải thích hai công cụ khác nhau thế nào, mỗi công cụ 
 
 ## Tóm tắt nhanh
 
-- **TestGorilla phù hợp** khi bạn cần bài kiểm tra năng lực nhận thức, tính cách, ngoại ngữ hoặc lập trình thực hành, câu hỏi video, tích hợp ATS hay chụp ảnh qua webcam.
+- **TestGorilla phù hợp** khi bạn cần bài kiểm tra năng lực nhận thức, tính cách, ngoại ngữ hoặc lập trình thực hành, câu hỏi video hay chụp ảnh qua webcam.
 - **prepza phù hợp** khi bạn muốn một bài kiểm tra kiến thức được viết từ chính mô tả công việc của mình, kể cả câu hỏi đọc code cho vị trí kỹ thuật, và bạn muốn trả tiền theo ứng viên hơn là mua gói.
 - **Cả hai đều phù hợp** khi bạn muốn một bài kiểm tra kiến thức theo vị trí cho mọi ứng viên và các bài kiểm tra rộng hơn cho những người vượt qua.
 
@@ -28,7 +28,7 @@ Trang này giải thích hai công cụ khác nhau thế nào, mỗi công cụ 
 | Code trong bài kiểm tra | Câu hỏi đọc code (code làm gì hoặc in ra gì); không viết hay chạy code | Bài kiểm tra lập trình trong thư viện; thử thách lập trình tùy chỉnh ở gói cao hơn |
 | Câu hỏi cho mỗi ứng viên | Bộ câu hỏi ngẫu nhiên riêng cho mỗi ứng viên, theo thứ tự riêng | Không so sánh ở đây |
 | Tính năng chống gian lận | Đồng hồ cho mọi câu hỏi (do máy chủ áp dụng), cảnh báo về trả lời quá nhanh, rời khỏi trang và cố sao chép | Chụp ảnh qua webcam, chặn sao chép/dán và chế độ toàn màn hình ở gói cao hơn |
-| Tích hợp ATS | Không | Tích hợp ATS/API ở gói cao hơn |
+| Tích hợp ATS | Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR, không tốn thêm phí | Tích hợp ATS/API ở gói cao hơn |
 | Báo cáo | Bảng điểm với câu trả lời và thời gian; PDF cho một hoặc tất cả ứng viên | Không so sánh ở đây |
 | Ngôn ngữ | 23 ngôn ngữ cho giao diện, buổi phỏng vấn và email | Không so sánh ở đây; thư viện có bài kiểm tra trình độ ngoại ngữ |
 | Mô hình giá | Theo mỗi ứng viên có trả lời, từ credit trả trước; không có gói đăng ký ([bảng giá](/pricing)) | Một gói miễn phí và các gói trả phí thanh toán theo năm ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
@@ -69,7 +69,6 @@ Hãy bắt đầu từ những gì bạn cần kiểm tra. TestGorilla phù hợ
 - **Bạn cần trắc nghiệm tâm lý.** Bài kiểm tra năng lực nhận thức, tính cách và văn hóa không phải là thứ prepza cung cấp.
 - **Bạn cần lập trình thực hành hoặc mô phỏng công việc.** prepza có câu hỏi đọc code, nhưng ứng viên không viết hay chạy code.
 - **Bạn muốn câu trả lời bằng video hoặc phỏng vấn do AI dẫn dắt.** prepza không có cả hai.
-- **Bạn cần tích hợp ATS.** prepza không tích hợp với hệ thống ATS.
 - **Bạn tuyển dụng đều đặn với số lượng lớn,** khi một gói cố định rẻ hơn.
 - **Bạn thích các bài kiểm tra có sẵn đã được dùng nhiều lần** hơn là bài kiểm tra được viết cho từng vị trí.
 

@@ -98,7 +98,6 @@ Pour une comparaison honnête :
 - Pas d'écriture, d'exécution ni de débogage de code, et pas d'environnement de code en direct.
 - Pas d'entretiens vidéo ni d'entretiens conversationnels menés par IA.
 - Pas de tests d'aptitudes cognitives ni de personnalité.
-- Pas d'intégrations ATS.
 
 Pour un processus complet de recrutement d'ingénieurs, voir [Comment recruter des développeurs](/guides/hiring-engineers).
 

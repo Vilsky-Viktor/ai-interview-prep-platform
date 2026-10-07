@@ -68,7 +68,7 @@ Hinnad on USA dollarites. Maksed käivad läbi Paddle'i, mis arvestab käibemaks
 Kandidaadipõhine tasu ei ole alati odavam. Tellimus võib sobida paremini, kui:
 
 - **Testid aastas sadu kandidaate.** Fikseeritud pakett, eriti piiramatute kutsetega, võib suure mahu juures tulla kandidaadi kohta odavam. Jaga paketi aastahind oma kandidaadi hinnaga, et leida tasuvuspunkt; [Kuidas võrrelda värbamistestide hindu](/compare/cheapest-pre-employment-test) näitab, kuidas.
-- **Vajad teste, mida prepza ei paku.** Kognitiivsed võimed, isiksus, praktiline programmeerimine (koodi kirjutamine ja käivitamine), videoküsimused ja ATS-integratsioonid kuuluvad teiste platvormide pakettidesse. Ühte neist saad kasutada prepza kõrval.
+- **Vajad teste, mida prepza ei paku.** Kognitiivsed võimed, isiksus, praktiline programmeerimine (koodi kirjutamine ja käivitamine) ja videoküsimused kuuluvad teiste platvormide pakettidesse. Ühte neist saad kasutada prepza kõrval.
 - **Sulle piisab tasuta paketist.** Mõni pakkuja pakub tasuta paketti mõne testiga; kui need testid sobivad sinu rolliga, ei pruugi sul üldse vaja maksta.
 
 ## Mida küsida igalt kasutuspõhise hinnaga pakkujalt

@@ -13,7 +13,7 @@ Deze pagina legt uit hoe ze verschillen, waar elk beter past en hoe je ze combin
 
 ## De korte versie
 
-- **TestGorilla past** als je tests nodig hebt voor cognitieve vaardigheden, persoonlijkheid, taal of echt programmeren, videovragen, ATS-koppelingen of webcamfoto's.
+- **TestGorilla past** als je tests nodig hebt voor cognitieve vaardigheden, persoonlijkheid, taal of echt programmeren, videovragen of webcamfoto's.
 - **prepza past** als je een kennistest wilt die geschreven is op basis van precies jouw functieomschrijving, inclusief vragen over code lezen voor technische functies, en je liever per kandidaat betaalt dan voor een plan.
 - **Allebei passen** als je een functiespecifieke kennisscreening voor elke sollicitant wilt en bredere tests voor de mensen die slagen.
 
@@ -28,7 +28,7 @@ Deze pagina legt uit hoe ze verschillen, waar elk beter past en hoe je ze combin
 | Code in de test | Vragen over code lezen (wat code doet of uitvoert); geen code schrijven of draaien | Programmeertests in de bibliotheek; eigen programmeeropdrachten in het duurdere plan |
 | Vragen per kandidaat | Een eigen willekeurige set per kandidaat, in een eigen volgorde | Hier niet vergeleken |
 | Integriteitsfuncties | Timer bij elke vraag (door de server afgedwongen), signalen bij te snelle antwoorden, het verlaten van de pagina en kopieerpogingen | Webcamfoto's, uitgeschakeld kopiëren/plakken en volledig scherm in het duurdere plan |
-| ATS-koppelingen | Nee | ATS-/API-koppelingen in het duurdere plan |
+| ATS-koppelingen | Workable, Greenhouse, Teamtailor, Recruitee en Breezy HR, zonder meerkosten | ATS-/API-koppelingen in het duurdere plan |
 | Rapporten | Scorekaarten met antwoorden en tijden; pdf voor één of alle kandidaten | Hier niet vergeleken |
 | Talen | 23 talen voor de interface, interviews en e-mails | Hier niet vergeleken; de bibliotheek bevat taalvaardigheidstests |
 | Prijsmodel | Per kandidaat die antwoordt, uit vooraf gekochte credits; geen abonnement ([prijzen](/pricing)) | Een gratis plan en betaalde plannen die jaarlijks worden gefactureerd ([prijspagina](https://www.testgorilla.com/pricing/)) |
@@ -69,7 +69,6 @@ Begin bij wat je moet toetsen. TestGorilla past beter als:
 - **Je psychometrie wilt.** Tests voor cognitieve vaardigheden, persoonlijkheid en cultuur biedt prepza niet.
 - **Je echt wilt laten programmeren of functiesimulaties nodig hebt.** prepza stelt vragen over code lezen, maar kandidaten schrijven of draaien geen code.
 - **Je video-antwoorden of door AI geleide interviews wilt.** prepza heeft geen van beide.
-- **Je ATS-koppelingen nodig hebt.** prepza koppelt niet met ATS-systemen.
 - **Je in grote, constante volumes werft** waarbij een vast plan goedkoper uitvalt.
 - **Je liever kant-en-klare tests gebruikt die al vaak zijn ingezet** dan tests die per functie worden geschreven.
 

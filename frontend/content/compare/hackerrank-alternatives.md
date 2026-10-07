@@ -98,7 +98,6 @@ To keep the comparison fair:
 - No code writing, running or debugging, and no live coding environment.
 - No video or AI-led conversational interviews.
 - No cognitive ability or personality tests.
-- No ATS integrations.
 
 For a full engineering process, see [How to hire engineers](/guides/hiring-engineers).
 

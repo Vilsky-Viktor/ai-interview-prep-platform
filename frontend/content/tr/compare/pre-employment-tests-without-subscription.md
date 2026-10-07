@@ -68,7 +68,7 @@ Fiyatlar ABD doları cinsindendir. Ödemeler, KDV ve satış vergisini hesaplaya
 Aday başına ödeme her zaman daha ucuz değildir. Abonelik şu durumlarda size daha uygun olabilir:
 
 - **Yılda yüzlerce aday test ediyorsanız.** Sabit bir plan, özellikle sınırsız davetli olanı, yüksek hacimde aday başına daha ucuza gelebilir. Başabaş noktasını bulmak için planın yıllık maliyetini aday başı fiyatınıza bölün; [İşe alım öncesi test maliyetleri nasıl karşılaştırılır](/compare/cheapest-pre-employment-test) sayfası bunu adım adım anlatır.
-- **prepza'nın sunmadığı testlere ihtiyacınız varsa.** Bilişsel yetenek, kişilik, uygulamalı kodlama (kod yazma ve çalıştırma), video soruları ve ATS entegrasyonları diğer platformların planlarıyla gelir. Bunlardan birini prepza'nın yanında kullanabilirsiniz.
+- **prepza'nın sunmadığı testlere ihtiyacınız varsa.** Bilişsel yetenek, kişilik, uygulamalı kodlama (kod yazma ve çalıştırma) ve video soruları diğer platformların planlarıyla gelir. Bunlardan birini prepza'nın yanında kullanabilirsiniz.
 - **Ücretsiz bir plan ihtiyacınızı karşılıyorsa.** Bazı sağlayıcılar birkaç test içeren ücretsiz planlar sunar; bu testler pozisyonunuza uyuyorsa hiç ödeme yapmanız gerekmeyebilir.
 
 ## Kullandıkça öde modelli her sağlayıcıya sorulacak sorular

@@ -13,7 +13,7 @@ Cette page explique ce qui les distingue, dans quels cas chacun convient le mieu
 
 ## En bref
 
-- **TestGorilla convient** quand vous avez besoin de tests d'aptitudes cognitives, de personnalité, de langue ou de code en pratique, de questions vidéo, d'intégrations ATS ou de captures webcam.
+- **TestGorilla convient** quand vous avez besoin de tests d'aptitudes cognitives, de personnalité, de langue ou de code en pratique, de questions vidéo ou de captures webcam.
 - **prepza convient** quand vous voulez un test de connaissances rédigé à partir de votre fiche de poste exacte, avec des questions de lecture de code pour les postes techniques, et que vous préférez payer par candidat plutôt qu'un abonnement.
 - **Les deux conviennent** quand vous voulez une présélection des connaissances propre au poste pour chaque candidat et des tests plus larges pour ceux qui la réussissent.
 
@@ -28,7 +28,7 @@ Cette page explique ce qui les distingue, dans quels cas chacun convient le mieu
 | Code dans le test | Questions de lecture de code (ce que fait ou affiche un code) ; pas d'écriture ni d'exécution de code | Tests de programmation dans la bibliothèque ; exercices de code personnalisés dans l'offre supérieure |
 | Questions par candidat | Série aléatoire propre à chaque candidat, dans son propre ordre | Non comparé ici |
 | Fonctions d'intégrité | Minuteur sur chaque question (imposé par le serveur), alertes pour les réponses trop rapides, les sorties de la page et les tentatives de copie | Captures webcam, copier-coller désactivé et mode plein écran dans l'offre supérieure |
-| Intégrations ATS | Non | Intégrations ATS/API dans l'offre supérieure |
+| Intégrations ATS | Workable, Greenhouse, Teamtailor, Recruitee et Breezy HR, sans surcoût | Intégrations ATS/API dans l'offre supérieure |
 | Rapports | Fiches d'évaluation avec réponses et temps ; PDF pour un ou tous les candidats | Non comparé ici |
 | Langues | 23 langues pour l'interface, les entretiens et les e-mails | Non comparé ici ; la bibliothèque inclut des tests de niveau de langue |
 | Modèle de prix | Par candidat qui répond, avec des crédits prépayés ; pas d'abonnement ([tarifs](/pricing)) | Une offre gratuite et des offres payantes facturées annuellement ([page tarifs](https://www.testgorilla.com/pricing/)) |
@@ -69,7 +69,6 @@ Partez de ce que vous devez évaluer. TestGorilla convient mieux quand :
 - **Vous voulez de la psychométrie.** prepza ne propose pas de tests d'aptitudes cognitives, de personnalité ou de culture.
 - **Vous avez besoin de code en pratique ou de simulations de poste.** prepza pose des questions de lecture de code, mais les candidats n'écrivent ni n'exécutent de code.
 - **Vous voulez des réponses vidéo ou des entretiens menés par IA.** prepza ne propose ni l'un ni l'autre.
-- **Vous avez besoin d'intégrations ATS.** prepza ne s'intègre pas aux ATS.
 - **Vous recrutez en volumes importants et réguliers,** où un forfait revient moins cher.
 - **Vous préférez des tests prêts à l'emploi déjà utilisés de nombreuses fois** à des tests rédigés pour chaque poste.
 

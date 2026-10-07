@@ -98,7 +98,6 @@ Selekcja zostawia czas inżynierów na rozmowy z osobami, które już znają sto
 - Nie ma pisania, uruchamiania ani debugowania kodu ani środowiska do kodowania na żywo.
 - Nie ma rozmów wideo ani rozmów prowadzonych przez AI.
 - Nie ma testów zdolności poznawczych ani osobowości.
-- Nie ma integracji z ATS.
 
 Pełny proces rekrutacji inżynierów opisuje [Jak rekrutować programistów](/guides/hiring-engineers).
 

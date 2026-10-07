@@ -43,13 +43,14 @@ prepza biến mô tả công việc thành một buổi phỏng vấn kỹ năng
 
 - **Giá:** theo mỗi ứng viên trả lời ít nhất một câu hỏi, rẻ hơn mỗi ứng viên với các mức nạp lớn hơn. Credit không hết hạn, và không có gói đăng ký. Xem [bảng giá](/pricing).
 - **Phù hợp với:** các nhóm vừa và nhỏ tuyển cho mọi vị trí, vài người mỗi lần, làm vòng sàng lọc đầu tiên.
-- **Không dành cho:** bài kiểm tra nhận thức hay tính cách, viết hoặc chạy code, phỏng vấn video hay tích hợp ATS. prepza không có những thứ đó, vì vậy hãy dùng kèm một công cụ có chúng khi bạn cần.
+- **Hoạt động với ATS của bạn:** Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR gửi ứng viên sang prepza và nhận lại kết quả của họ, không tốn thêm phí.
+- **Không dành cho:** bài kiểm tra nhận thức hay tính cách, viết hoặc chạy code hay phỏng vấn video. prepza không có những thứ đó, vì vậy hãy dùng kèm một công cụ có chúng khi bạn cần.
 
 ### CodeSignal
 
 Các gói của CodeSignal bao gồm đánh giá kỹ thuật và người phỏng vấn AI cho các vị trí sản phẩm, thiết kế và kỹ thuật, với giám sát thi bằng AI và xác minh danh tính. Các gói cao hơn có thêm đánh giá go-to-market và người phỏng vấn AI cho kinh doanh, chăm sóc khách hàng và marketing, cùng tích hợp ATS ([trang bảng giá CodeSignal, tính đến tháng 10/2026](https://codesignal.com/pricing/)).
 
-- **Tốt hơn prepza khi:** cần đánh giá lập trình thực hành, phỏng vấn do AI dẫn dắt, tích hợp ATS.
+- **Tốt hơn prepza khi:** cần đánh giá lập trình thực hành, phỏng vấn do AI dẫn dắt.
 - **Kết hợp:** prepza làm bài kiểm tra kiến thức cho mọi ứng viên, CodeSignal cho giai đoạn lập trình.
 
 ### HackerRank

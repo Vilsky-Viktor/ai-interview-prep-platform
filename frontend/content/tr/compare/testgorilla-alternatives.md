@@ -43,13 +43,14 @@ prepza bir iş tanımını süreli, çoktan seçmeli bir beceri mülakatına dö
 
 - **Fiyatlandırma:** en az bir soruyu yanıtlayan aday başına; daha büyük kredi yüklemelerinde aday başına daha ucuz. Krediler süresiz geçerlidir ve abonelik yoktur. Bkz. [fiyatlar](/pricing).
 - **Kimlere uygun:** herhangi bir pozisyon için, bir seferde birkaç kişiyi işe alan küçük ve orta ölçekli ekiplere, ilk eleme olarak.
-- **Uygun olmadığı durumlar:** bilişsel veya kişilik testleri, kod yazma veya çalıştırma, video mülakatlar ya da ATS entegrasyonları. prepza bunları sunmaz; ihtiyaç duyduğunuzda sunan bir araçla birlikte kullanın.
+- **ATS'nizle çalışır:** Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR, adayları ek ücret olmadan prepza'ya gönderir ve sonuçlarını geri alır.
+- **Uygun olmadığı durumlar:** bilişsel veya kişilik testleri, kod yazma veya çalıştırma ya da video mülakatlar. prepza bunları sunmaz; ihtiyaç duyduğunuzda sunan bir araçla birlikte kullanın.
 
 ### CodeSignal
 
 CodeSignal'ın planları; ürün, tasarım ve mühendislik pozisyonları için teknik değerlendirmeleri ve yapay zekâ mülakatçılarını, yapay zekâ destekli gözetim ve kimlik doğrulamayla birlikte kapsar. Üst planlar satış, müşteri başarısı ve pazarlama için go-to-market değerlendirmeleri ve yapay zekâ mülakatçılarının yanı sıra ATS entegrasyonları ekler ([CodeSignal fiyat sayfası, Ekim 2026 itibarıyla](https://codesignal.com/pricing/)).
 
-- **prepza'dan daha iyi olduğu alanlar:** uygulamalı kodlama değerlendirmesi, yapay zekâ yönetimli mülakatlar, ATS entegrasyonu.
+- **prepza'dan daha iyi olduğu alanlar:** uygulamalı kodlama değerlendirmesi, yapay zekâ yönetimli mülakatlar.
 - **Birlikte:** her başvuru sahibi için bilgi elemesi olarak prepza, kodlama aşaması için CodeSignal.
 
 ### HackerRank

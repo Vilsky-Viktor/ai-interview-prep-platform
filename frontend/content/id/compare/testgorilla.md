@@ -13,7 +13,7 @@ Halaman ini menjelaskan perbedaannya, kapan masing-masing lebih cocok, dan cara 
 
 ## Versi singkatnya
 
-- **TestGorilla cocok** saat kamu butuh tes kemampuan kognitif, kepribadian, bahasa, atau coding langsung, pertanyaan video, integrasi ATS, atau snapshot webcam.
+- **TestGorilla cocok** saat kamu butuh tes kemampuan kognitif, kepribadian, bahasa, atau coding langsung, pertanyaan video, atau snapshot webcam.
 - **prepza cocok** saat kamu ingin tes pengetahuan yang dibuat dari deskripsi pekerjaanmu sendiri, termasuk soal membaca kode untuk posisi teknis, dan kamu lebih suka bayar per kandidat daripada berlangganan paket.
 - **Keduanya cocok** saat kamu ingin penyaringan pengetahuan khusus posisi untuk setiap pelamar, dan tes yang lebih luas bagi yang lolos.
 
@@ -28,7 +28,7 @@ Halaman ini menjelaskan perbedaannya, kapan masing-masing lebih cocok, dan cara 
 | Kode dalam tes | Soal membaca kode (apa yang dilakukan atau dihasilkan kode); tidak menulis atau menjalankan kode | Tes pemrograman di pustaka; tantangan coding kustom di paket yang lebih tinggi |
 | Soal per kandidat | Setiap kandidat mendapat set acaknya sendiri, dengan urutannya sendiri | Tidak dibandingkan di sini |
 | Fitur anti-kecurangan | Timer di setiap soal (ditegakkan oleh server), tanda untuk jawaban yang terlalu cepat, meninggalkan halaman, dan percobaan menyalin | Snapshot webcam, salin/tempel dinonaktifkan, dan mode layar penuh di paket yang lebih tinggi |
-| Integrasi ATS | Tidak | Integrasi ATS/API di paket yang lebih tinggi |
+| Integrasi ATS | Workable, Greenhouse, Teamtailor, Recruitee, dan Breezy HR, tanpa biaya tambahan | Integrasi ATS/API di paket yang lebih tinggi |
 | Laporan | Scorecard dengan jawaban dan waktunya; PDF untuk satu atau semua kandidat | Tidak dibandingkan di sini |
 | Bahasa | 23 bahasa untuk antarmuka, wawancara, dan email | Tidak dibandingkan di sini; pustakanya mencakup tes kemahiran bahasa |
 | Model harga | Per kandidat yang menjawab, dari kredit prabayar; tanpa langganan ([harga](/pricing)) | Paket gratis dan paket berbayar yang ditagih tahunan ([halaman harga](https://www.testgorilla.com/pricing/)) |
@@ -69,7 +69,6 @@ Mulailah dari apa yang perlu kamu uji. TestGorilla lebih cocok saat:
 - **Kamu butuh psikometri.** Tes kemampuan kognitif, kepribadian, dan budaya tidak ditawarkan prepza.
 - **Kamu butuh coding langsung atau simulasi kerja.** prepza memberi soal membaca kode, tetapi kandidat tidak menulis atau menjalankan kode.
 - **Kamu ingin jawaban video atau wawancara yang dipandu AI.** prepza tidak punya keduanya.
-- **Kamu butuh integrasi ATS.** prepza tidak terintegrasi dengan sistem ATS.
 - **Kamu merekrut dalam volume besar dan stabil** sehingga paket tetap jadi lebih murah.
 - **Kamu lebih suka tes siap pakai yang sudah dipakai berkali-kali** daripada tes yang ditulis untuk tiap posisi.
 

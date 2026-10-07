@@ -98,7 +98,6 @@ Per un confronto onesto:
 - Niente scrittura, esecuzione o debug di codice, e nessun ambiente di live coding.
 - Niente videocolloqui né colloqui conversazionali condotti dall'IA.
 - Niente test di abilità cognitive o di personalità.
-- Nessuna integrazione con l'ATS.
 
 Per un processo di assunzione completo in ambito ingegneristico, vedi [Come assumere sviluppatori](/guides/hiring-engineers).
 

@@ -68,7 +68,7 @@ Nasa US dollars ang mga presyo. Dumaraan ang mga bayad sa Paddle, na humahawak s
 Hindi laging mas mura ang pay-per-candidate. Maaaring mas bagay sa iyo ang subscription kapag:
 
 - **Daan-daang aplikante ang tine-test mo sa isang taon.** Ang flat plan, lalo na ang may unlimited invitations, ay puwedeng mas mura bawat aplikante kapag mataas ang volume. Hatiin ang taunang gastos ng plan sa iyong presyo bawat aplikante para makita ang break-even point; ipinapaliwanag ito ng [Paano ikumpara ang gastos ng mga test](/compare/cheapest-pre-employment-test).
-- **Kailangan mo ng mga test na wala sa prepza.** Kasama sa mga plan ng ibang platform ang cognitive ability, personality, hands-on coding (pagsulat at pagpapatakbo ng code), video questions at ATS integrations. Puwede mong gamitin ang isa sa mga ito katabi ng prepza.
+- **Kailangan mo ng mga test na wala sa prepza.** Kasama sa mga plan ng ibang platform ang cognitive ability, personality, hands-on coding (pagsulat at pagpapatakbo ng code) at video questions. Puwede mong gamitin ang isa sa mga ito katabi ng prepza.
 - **Sapat na sa iyo ang libreng plan.** May mga vendor na nag-aalok ng libreng plan na may ilang test; kung bagay ang mga test na iyon sa iyong role, baka hindi mo na kailangang magbayad.
 
 ## Mga tanong para sa kahit anong pay-as-you-go na vendor

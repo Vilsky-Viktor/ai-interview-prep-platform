@@ -43,13 +43,14 @@ prepza muudab töökuulutuse ajapiiranguga valikvastustega oskuste intervjuuks. 
 
 - **Hind:** iga kandidaadi eest, kes vastab vähemalt ühele küsimusele, suuremate juurdelaadimiste puhul kandidaadi kohta odavam. Krediidid ei aegu ja tellimust pole. Vaata [hindu](/pricing).
 - **Sobib:** väikestele ja keskmise suurusega meeskondadele, kes värbavad mis tahes rolli, mõne inimese kaupa, esmaseks sõelaks.
-- **Ei sobi:** kognitiivseteks ja isiksustestideks, koodi kirjutamiseks või käivitamiseks, videointervjuudeks ega ATS-integratsioonideks. prepza neid ei paku, nii et kui neid vajad, kombineeri see tööriistaga, mis seda teeb.
+- **Töötab sinu ATS-iga:** Workable, Greenhouse, Teamtailor, Recruitee ja Breezy HR saadavad kandidaadid prepzasse ja saavad nende tulemused tagasi, ilma lisatasuta.
+- **Ei sobi:** kognitiivseteks ja isiksustestideks, koodi kirjutamiseks või käivitamiseks ega videointervjuudeks. prepza neid ei paku, nii et kui neid vajad, kombineeri see tööriistaga, mis seda teeb.
 
 ### CodeSignal
 
 CodeSignali paketid hõlmavad tehnilisi hindamisi ja AI-intervjueerijaid toote-, disaini- ja arendusrollidele koos AI-põhise järelevalve ja isikusamasuse kontrolliga. Kõrgemad paketid lisavad müügi- ja turundussuunaliste (go-to-market) rollide hindamised ja AI-intervjueerijad müügi, kliendiedu ja turunduse jaoks ning ATS-integratsioonid ([CodeSignali hinnaleht, 2026. aasta oktoobri seisuga](https://codesignal.com/pricing/)).
 
-- **Parem kui prepza:** praktiliseks programmeerimise hindamiseks, AI juhitud intervjuudeks, ATS-integratsiooniks.
+- **Parem kui prepza:** praktiliseks programmeerimise hindamiseks, AI juhitud intervjuudeks.
 - **Koos:** prepza teadmiste kontrollina igale kandideerijale, CodeSignal programmeerimisetapiks.
 
 ### HackerRank

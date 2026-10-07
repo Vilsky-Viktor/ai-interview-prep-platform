@@ -68,7 +68,7 @@ Prijzen zijn in US dollars. Betalingen lopen via Paddle, dat btw en sales tax re
 Betalen per kandidaat is niet altijd goedkoper. Een abonnement past mogelijk beter als:
 
 - **Je honderden kandidaten per jaar test.** Een vast plan, vooral een met onbeperkt uitnodigen, kan bij een hoog volume minder per kandidaat kosten. Deel de jaarkosten van het plan door je prijs per kandidaat om het break-evenpunt te vinden; [Hoe je de kosten van selectietests vergelijkt](/compare/cheapest-pre-employment-test) loopt het door.
-- **Je tests nodig hebt die prepza niet biedt.** Cognitieve vaardigheden, persoonlijkheid, echt programmeren (code schrijven en draaien), videovragen en ATS-koppelingen zitten in de plannen van andere platforms. Je kunt er een naast prepza gebruiken.
+- **Je tests nodig hebt die prepza niet biedt.** Cognitieve vaardigheden, persoonlijkheid, echt programmeren (code schrijven en draaien) en videovragen zitten in de plannen van andere platforms. Je kunt er een naast prepza gebruiken.
 - **Een gratis plan volstaat.** Sommige leveranciers bieden gratis plannen met een paar tests; passen die tests bij je functie, dan hoef je misschien helemaal niet te betalen.
 
 ## Vragen voor elke leverancier met betalen naar gebruik

@@ -98,7 +98,6 @@ Damit der Vergleich fair bleibt:
 - Kein Schreiben, Ausführen oder Debuggen von Code und keine Live-Coding-Umgebung.
 - Keine Video- oder KI-geführten Gesprächsinterviews.
 - Keine Tests zu kognitiven Fähigkeiten oder Persönlichkeit.
-- Keine ATS-Integrationen.
 
 Einen vollständigen Prozess für technische Stellen finden Sie unter [Entwickler einstellen](/guides/hiring-engineers).
 

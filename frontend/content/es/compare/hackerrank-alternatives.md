@@ -98,7 +98,6 @@ Para que la comparación sea justa:
 - No se escribe, ejecuta ni depura código, y no hay entorno de programación en directo.
 - No hay entrevistas en video ni entrevistas conversacionales dirigidas por IA.
 - No hay pruebas de aptitud cognitiva ni de personalidad.
-- No hay integraciones con ATS.
 
 Para un proceso completo de ingeniería, consulta [Cómo contratar ingenieros](/guides/hiring-engineers).
 

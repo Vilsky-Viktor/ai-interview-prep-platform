@@ -98,7 +98,6 @@ Supaya perbandingannya adil:
 - Tidak ada menulis, menjalankan, atau men-debug kode, dan tidak ada lingkungan live coding.
 - Tidak ada wawancara video atau wawancara percakapan yang dipandu AI.
 - Tidak ada tes kemampuan kognitif atau kepribadian.
-- Tidak ada integrasi ATS.
 
 Untuk proses engineering yang lengkap, lihat [Cara merekrut engineer](/guides/hiring-engineers).
 

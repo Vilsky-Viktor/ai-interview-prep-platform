@@ -46,7 +46,7 @@ Lors de votre comparaison, vérifiez aussi :
 - **Les candidats qui ne commencent jamais.** prepza ne facture que les candidats qui répondent à au moins une question ; les crédits d'une invitation inutilisée vous sont rendus.
 - **Les crédits qui expirent.** Les crédits de prepza n'expirent pas. Vérifiez si les crédits des autres fournisseurs sont reportés.
 - **Les taxes.** Vérifiez si un prix affiché inclut la TVA ou la sales tax.
-- **Les fonctionnalités réservées aux offres supérieures.** Intégrations ATS, surveillance (proctoring) et exercices de code personnalisés sont souvent dans des offres plus chères. Vérifiez de quelle offre vous auriez réellement besoin.
+- **Les fonctionnalités réservées aux offres supérieures.** Intégrations ATS, surveillance (proctoring) et exercices de code personnalisés sont souvent dans des offres plus chères. Vérifiez de quelle offre vous auriez réellement besoin. prepza se connecte à Workable, Greenhouse, Teamtailor, Recruitee et Breezy HR sans surcoût.
 - **Plusieurs outils.** Si vous avez besoin d'un test de connaissances et d'un test psychométrique ou de code, additionnez les deux.
 
 ## Quand un prix plus bas n'est pas le bon choix

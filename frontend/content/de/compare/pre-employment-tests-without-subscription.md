@@ -68,7 +68,7 @@ Die Preise sind in US-Dollar angegeben. Zahlungen laufen über Paddle, das sich 
 Die Abrechnung pro Kandidat ist nicht immer günstiger. Ein Abo kann besser zu Ihnen passen, wenn:
 
 - **Sie Hunderte Kandidaten pro Jahr testen.** Ein Pauschaltarif, besonders einer mit unbegrenzten Einladungen, kann bei hohem Volumen pro Kandidat günstiger sein. Teilen Sie die Jahreskosten des Abos durch Ihren Preis pro Kandidat, um den Break-even-Punkt zu finden; [Kosten von Einstellungstests vergleichen](/compare/cheapest-pre-employment-test) rechnet das durch.
-- **Sie Tests brauchen, die prepza nicht anbietet.** Kognitive Fähigkeiten, Persönlichkeit, praktisches Programmieren (Code schreiben und ausführen), Videofragen und ATS-Integrationen gibt es in den Tarifen anderer Plattformen. Sie können eine davon neben prepza nutzen.
+- **Sie Tests brauchen, die prepza nicht anbietet.** Kognitive Fähigkeiten, Persönlichkeit, praktisches Programmieren (Code schreiben und ausführen) und Videofragen gibt es in den Tarifen anderer Plattformen. Sie können eine davon neben prepza nutzen.
 - **Ein Gratis-Tarif reicht Ihnen.** Einige Anbieter haben Gratis-Tarife mit ein paar Tests; wenn diese Tests zu Ihrer Stelle passen, müssen Sie vielleicht gar nichts bezahlen.
 
 ## Fragen an jeden Pay-as-you-go-Anbieter

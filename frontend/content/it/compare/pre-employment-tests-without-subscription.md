@@ -68,7 +68,7 @@ I prezzi sono in dollari statunitensi. I pagamenti passano da Paddle, che gestis
 Il pagamento per candidato non è sempre più economico. Un abbonamento potrebbe fare più al caso tuo quando:
 
 - **Valuti centinaia di candidati all'anno.** Un piano a tariffa fissa, soprattutto con inviti illimitati, può costare meno per candidato con volumi alti. Dividi il costo annuo del piano per il tuo prezzo per candidato per trovare il punto di pareggio; [Come confrontare i costi dei test](/compare/cheapest-pre-employment-test) lo spiega passo per passo.
-- **Ti servono test che prepza non offre.** Abilità cognitive, personalità, coding pratico (scrivere ed eseguire codice), domande video e integrazioni con l'ATS arrivano con i piani di altre piattaforme. Puoi usarne una insieme a prepza.
+- **Ti servono test che prepza non offre.** Abilità cognitive, personalità, coding pratico (scrivere ed eseguire codice) e domande video arrivano con i piani di altre piattaforme. Puoi usarne una insieme a prepza.
 - **Ti basta un piano gratuito.** Alcuni fornitori offrono piani gratuiti con pochi test; se quei test vanno bene per il tuo ruolo, potresti non dover pagare nulla.
 
 ## Domande da fare a qualsiasi fornitore a consumo

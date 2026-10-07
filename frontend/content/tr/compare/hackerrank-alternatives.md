@@ -98,7 +98,6 @@ Karşılaştırmayı adil tutmak için:
 - Kod yazma, çalıştırma veya hata ayıklama yok; canlı kodlama ortamı yok.
 - Video veya yapay zekâ yönetimli sohbet mülakatları yok.
 - Bilişsel yetenek veya kişilik testleri yok.
-- ATS entegrasyonları yok.
 
 Eksiksiz bir mühendislik işe alım süreci için [Mühendis işe alımı nasıl yapılır](/guides/hiring-engineers) rehberine bakın.
 

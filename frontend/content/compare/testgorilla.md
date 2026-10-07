@@ -13,7 +13,7 @@ This page explains how they differ, where each one fits better, and how to combi
 
 ## The short version
 
-- **TestGorilla fits** when you need cognitive ability, personality, language or hands-on coding tests, video questions, ATS integrations or webcam snapshots.
+- **TestGorilla fits** when you need cognitive ability, personality, language or hands-on coding tests, video questions or webcam snapshots.
 - **prepza fits** when you want a knowledge test written from your exact job description, including code-reading questions for technical roles, and you'd rather pay per candidate than for a plan.
 - **Both fit** when you want a role-specific knowledge screen for every applicant and broader tests for the people who pass it.
 
@@ -28,7 +28,7 @@ This page explains how they differ, where each one fits better, and how to combi
 | Code in the test | Code-reading questions (what code does or outputs); no writing or running code | Programming tests in the library; custom coding challenges on its higher plan |
 | Questions per candidate | Each candidate's own random set, in its own order | Not compared here |
 | Integrity features | Timer on every question (server-enforced), flags for too-fast answers, leaving the page and copy attempts | Webcam snapshots, disabled copy/paste and full-screen mode on its higher plan |
-| ATS integrations | No | ATS/API integrations on its higher plan |
+| ATS integrations | Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR, at no extra cost | ATS/API integrations on its higher plan |
 | Reports | Scorecards with answers and timings; PDF for one or all candidates | Not compared here |
 | Languages | 23 languages for the interface, interviews and emails | Not compared here; the library includes language-proficiency tests |
 | Pricing model | Per candidate who answers, from prepaid credits; no subscription ([pricing](/pricing)) | A free plan and paid plans billed annually ([pricing page](https://www.testgorilla.com/pricing/)) |
@@ -69,7 +69,6 @@ Start from what you need to test. TestGorilla is a better fit when:
 - **You want psychometrics.** Cognitive ability, personality and culture tests aren't something prepza offers.
 - **You need hands-on coding or job simulations.** prepza asks code-reading questions, but candidates don't write or run code.
 - **You want video answers or AI-led interviews.** prepza has neither.
-- **You need ATS integrations.** prepza doesn't integrate with ATS systems.
 - **You hire in large, steady volumes** where a flat plan works out cheaper.
 - **You prefer ready-made tests that have been used many times** over tests written for each role.
 

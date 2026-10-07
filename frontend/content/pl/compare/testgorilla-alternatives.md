@@ -43,13 +43,14 @@ prepza zamienia opis stanowiska w rozmowę sprawdzającą umiejętności z pytan
 
 - **Ceny:** za kandydata, który odpowie na co najmniej jedno pytanie, taniej za kandydata przy większych doładowaniach. Kredyty nie wygasają i nie ma subskrypcji. Zobacz [cennik](/pricing).
 - **Pasuje do:** małych i średnich zespołów rekrutujących na dowolne stanowisko, po kilka osób naraz, jako pierwszy etap selekcji.
-- **Nie nadaje się do:** testów poznawczych lub osobowości, pisania ani uruchamiania kodu, rozmów wideo ani integracji z ATS. prepza ich nie oferuje, więc gdy ich potrzebujesz, połącz ją z narzędziem, które je ma.
+- **Współpracuje z Twoim ATS:** Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR przekazują kandydatów do prepza i otrzymują z powrotem ich wyniki, bez dodatkowych opłat.
+- **Nie nadaje się do:** testów poznawczych lub osobowości, pisania ani uruchamiania kodu ani rozmów wideo. prepza ich nie oferuje, więc gdy ich potrzebujesz, połącz ją z narzędziem, które je ma.
 
 ### CodeSignal
 
 Plany CodeSignal obejmują oceny techniczne i rozmówców AI dla stanowisk produktowych, projektowych i inżynierskich, z nadzorem AI (proctoring) i weryfikacją tożsamości. Wyższe plany dodają oceny i rozmówców AI dla stanowisk go-to-market, takich jak sprzedaż, customer success i marketing, a także integracje z ATS ([strona z cenami CodeSignal, stan na październik 2026](https://codesignal.com/pricing/)).
 
-- **Lepszy niż prepza do:** praktycznej oceny kodowania, rozmów prowadzonych przez AI, integracji z ATS.
+- **Lepszy niż prepza do:** praktycznej oceny kodowania, rozmów prowadzonych przez AI.
 - **Razem:** prepza jako sprawdzenie wiedzy każdego kandydata, CodeSignal na etapie kodowania.
 
 ### HackerRank

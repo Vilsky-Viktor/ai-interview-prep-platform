@@ -68,7 +68,7 @@ Harga dalam dolar AS. Pembayaran diproses lewat Paddle, yang menangani PPN (VAT)
 Bayar per kandidat tidak selalu lebih murah. Langganan mungkin lebih cocok untukmu saat:
 
 - **Kamu menguji ratusan kandidat per tahun.** Paket tetap, terutama yang punya undangan tanpa batas, bisa lebih murah per kandidat pada volume tinggi. Bagi biaya tahunan paket dengan harga per kandidatmu untuk menemukan titik impasnya; [Cara membandingkan biaya tes](/compare/cheapest-pre-employment-test) menjelaskan langkah-langkahnya.
-- **Kamu butuh tes yang tidak ditawarkan prepza.** Kemampuan kognitif, kepribadian, coding langsung (menulis dan menjalankan kode), pertanyaan video, dan integrasi ATS tersedia di paket platform lain. Kamu bisa memakai salah satunya berdampingan dengan prepza.
+- **Kamu butuh tes yang tidak ditawarkan prepza.** Kemampuan kognitif, kepribadian, coding langsung (menulis dan menjalankan kode), dan pertanyaan video tersedia di paket platform lain. Kamu bisa memakai salah satunya berdampingan dengan prepza.
 - **Paket gratis sudah cukup.** Beberapa vendor menawarkan paket gratis dengan beberapa tes; kalau tes itu sesuai dengan posisimu, mungkin kamu tidak perlu membayar sama sekali.
 
 ## Pertanyaan untuk vendor bayar sesuai pemakaian mana pun

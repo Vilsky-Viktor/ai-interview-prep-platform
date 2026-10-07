@@ -43,13 +43,14 @@ prepza maakt van een functieomschrijving een interview over vaardigheden, met ti
 
 - **Prijs:** per kandidaat die minstens één vraag beantwoordt, goedkoper per kandidaat bij grotere opwaarderingen. Credits verlopen niet, en er is geen abonnement. Zie [prijzen](/pricing).
 - **Geschikt voor:** kleine en middelgrote teams die voor elke functie werven, een paar mensen tegelijk, als eerste screening.
-- **Niet voor:** cognitieve of persoonlijkheidstests, code schrijven of draaien, video-interviews of ATS-koppelingen. prepza biedt die niet, dus combineer het met een tool die dat wel doet als je ze nodig hebt.
+- **Werkt met je ATS:** Workable, Greenhouse, Teamtailor, Recruitee en Breezy HR sturen kandidaten door naar prepza en krijgen hun resultaten terug, zonder meerkosten.
+- **Niet voor:** cognitieve of persoonlijkheidstests, code schrijven of draaien, of video-interviews. prepza biedt die niet, dus combineer het met een tool die dat wel doet als je ze nodig hebt.
 
 ### CodeSignal
 
 De plannen van CodeSignal omvatten technische assessments en AI-interviewers voor product-, design- en engineeringfuncties, met AI-proctoring en ID-verificatie. Duurdere plannen voegen go-to-marketassessments en AI-interviewers toe voor sales, customer success en marketing, plus ATS-koppelingen ([prijspagina van CodeSignal, per oktober 2026](https://codesignal.com/pricing/)).
 
-- **Beter dan prepza voor:** programmeerassessments, door AI geleide interviews, ATS-koppeling.
+- **Beter dan prepza voor:** programmeerassessments, door AI geleide interviews.
 - **Samen:** prepza als kennisscreening voor elke sollicitant, CodeSignal voor de programmeerfase.
 
 ### HackerRank

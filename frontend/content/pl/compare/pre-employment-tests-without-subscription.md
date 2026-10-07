@@ -68,7 +68,7 @@ Ceny są w dolarach amerykańskich. Płatności obsługuje Paddle, który nalicz
 Płatność za kandydata nie zawsze jest tańsza. Subskrypcja może pasować lepiej, gdy:
 
 - **Testujesz setki kandydatów rocznie.** Plan ze stałą opłatą, zwłaszcza z nielimitowanymi zaproszeniami, może przy dużej skali kosztować mniej za kandydata. Podziel roczny koszt planu przez cenę za kandydata, aby znaleźć próg opłacalności; krok po kroku opisuje to [Jak porównać koszty testów](/compare/cheapest-pre-employment-test).
-- **Potrzebujesz testów, których prepza nie oferuje.** Zdolności poznawcze, osobowość, praktyczne programowanie (pisanie i uruchamianie kodu), pytania wideo i integracje z ATS są dostępne w planach innych platform. Możesz używać jednej z nich obok prepza.
+- **Potrzebujesz testów, których prepza nie oferuje.** Zdolności poznawcze, osobowość, praktyczne programowanie (pisanie i uruchamianie kodu) i pytania wideo są dostępne w planach innych platform. Możesz używać jednej z nich obok prepza.
 - **Wystarczy Ci darmowy plan.** Niektórzy dostawcy oferują darmowe plany z kilkoma testami; jeśli te testy pasują do Twojego stanowiska, może nie musisz płacić wcale.
 
 ## Pytania do każdego dostawcy z płatnością za użycie

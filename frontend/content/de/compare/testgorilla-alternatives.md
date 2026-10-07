@@ -43,13 +43,14 @@ prepza macht aus einer Stellenbeschreibung ein zeitlich begrenztes Multiple-Choi
 
 - **Preise:** pro Kandidat, der mindestens eine Frage beantwortet, pro Kandidat günstiger bei größeren Aufladungen. Credits verfallen nicht, und es gibt kein Abo. Siehe [Preise](/pricing).
 - **Geeignet für:** kleine und mittlere Teams, die für beliebige Stellen ein paar Personen auf einmal einstellen, als erste Vorauswahl.
-- **Nicht geeignet für:** kognitive Tests oder Persönlichkeitstests, das Schreiben oder Ausführen von Code, Videointerviews oder ATS-Integrationen. prepza bietet das nicht an; kombinieren Sie es also mit einem Tool, das es anbietet, wenn Sie es brauchen.
+- **Funktioniert mit Ihrem ATS:** Workable, Greenhouse, Teamtailor, Recruitee und Breezy HR übergeben Kandidaten an prepza und erhalten ihre Ergebnisse zurück, ohne Aufpreis.
+- **Nicht geeignet für:** kognitive Tests oder Persönlichkeitstests, das Schreiben oder Ausführen von Code oder Videointerviews. prepza bietet das nicht an; kombinieren Sie es also mit einem Tool, das es anbietet, wenn Sie es brauchen.
 
 ### CodeSignal
 
 Die Tarife von CodeSignal decken technische Assessments und KI-Interviewer für Stellen in Produkt, Design und Entwicklung ab, mit KI-Proctoring und Identitätsprüfung. Höhere Tarife ergänzen Go-to-Market-Assessments und KI-Interviewer für Vertrieb, Customer Success und Marketing sowie ATS-Integrationen ([Preisseite von CodeSignal, Stand Oktober 2026](https://codesignal.com/pricing/)).
 
-- **Besser als prepza für:** praktische Programmier-Assessments, KI-geführte Interviews, ATS-Integration.
+- **Besser als prepza für:** praktische Programmier-Assessments, KI-geführte Interviews.
 - **Zusammen:** prepza als Wissenstest für alle Bewerber, CodeSignal für die Programmierphase.
 
 ### HackerRank

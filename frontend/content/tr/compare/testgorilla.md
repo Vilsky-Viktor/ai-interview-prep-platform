@@ -13,7 +13,7 @@ Bu sayfa ikisinin nasıl farklılaştığını, hangisinin nerede daha uygun old
 
 ## Kısaca
 
-- **TestGorilla uygundur:** bilişsel yetenek, kişilik, dil ya da uygulamalı kodlama testlerine, video sorularına, ATS entegrasyonlarına veya web kamerası fotoğraflarına ihtiyacınız varsa.
+- **TestGorilla uygundur:** bilişsel yetenek, kişilik, dil ya da uygulamalı kodlama testlerine, video sorularına veya web kamerası fotoğraflarına ihtiyacınız varsa.
 - **prepza uygundur:** teknik pozisyonlar için kod okuma soruları da dahil, tam olarak sizin iş tanımınızdan yazılmış bir bilgi testi istiyorsanız ve bir plan yerine aday başına ödemeyi tercih ediyorsanız.
 - **İkisi birlikte uygundur:** her başvuru sahibi için pozisyona özel bir bilgi elemesi, bunu geçenler için ise daha kapsamlı testler istiyorsanız.
 
@@ -28,7 +28,7 @@ Bu sayfa ikisinin nasıl farklılaştığını, hangisinin nerede daha uygun old
 | Testte kod | Kod okuma soruları (kodun ne yaptığı veya ne çıktı verdiği); kod yazma veya çalıştırma yok | Kütüphanede programlama testleri; üst planında özel kodlama görevleri |
 | Aday başına sorular | Her adaya kendi sırasıyla, kendine ait rastgele bir soru seti | Burada karşılaştırılmadı |
 | Güvenilirlik özellikleri | Her soruda süre sınırı (sunucu tarafından uygulanır), çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler | Üst planında web kamerası fotoğrafları, kopyala/yapıştır engeli ve tam ekran modu |
-| ATS entegrasyonları | Hayır | Üst planında ATS/API entegrasyonları |
+| ATS entegrasyonları | Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR, ek ücret olmadan | Üst planında ATS/API entegrasyonları |
 | Raporlar | Yanıtlar ve sürelerle değerlendirme kartları; tek aday veya tüm adaylar için PDF | Burada karşılaştırılmadı |
 | Diller | Arayüz, mülakatlar ve e-postalar için 23 dil | Burada karşılaştırılmadı; kütüphanede dil yeterlilik testleri bulunur |
 | Fiyatlandırma modeli | Yanıt veren aday başına, ön ödemeli kredilerden; abonelik yok ([fiyatlar](/pricing)) | Ücretsiz bir plan ve yıllık faturalandırılan ücretli planlar ([fiyat sayfası](https://www.testgorilla.com/pricing/)) |
@@ -69,7 +69,6 @@ Neyi test etmeniz gerektiğinden yola çıkın. TestGorilla şu durumlarda daha 
 - **Psikometrik testler istiyorsanız.** Bilişsel yetenek, kişilik ve kültür testleri prepza'nın sunduğu şeyler değildir.
 - **Uygulamalı kodlama veya iş simülasyonlarına ihtiyacınız varsa.** prepza kod okuma soruları sorar, ancak adaylar kod yazmaz veya çalıştırmaz.
 - **Video yanıtlar veya yapay zekâ yönetimli mülakatlar istiyorsanız.** prepza'da ikisi de yoktur.
-- **ATS entegrasyonlarına ihtiyacınız varsa.** prepza ATS sistemleriyle entegre olmaz.
 - **Sabit bir planın daha ucuza geldiği büyük ve düzenli hacimlerde işe alım yapıyorsanız.**
 - **Her pozisyon için yazılan testler yerine defalarca kullanılmış hazır testleri tercih ediyorsanız.**
 

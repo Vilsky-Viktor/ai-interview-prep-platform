@@ -13,7 +13,7 @@ Esta página explica en qué se diferencian, dónde encaja mejor cada uno y cóm
 
 ## La versión corta
 
-- **TestGorilla encaja** cuando necesitas pruebas de aptitud cognitiva, de personalidad, de idiomas o de programación práctica, preguntas en video, integraciones con ATS o capturas de webcam.
+- **TestGorilla encaja** cuando necesitas pruebas de aptitud cognitiva, de personalidad, de idiomas o de programación práctica, preguntas en video o capturas de webcam.
 - **prepza encaja** cuando quieres una prueba de conocimientos redactada a partir de tu descripción del puesto exacta, con preguntas de lectura de código para puestos técnicos, y prefieres pagar por candidato en lugar de por un plan.
 - **Ambos encajan** cuando quieres un filtro de conocimientos específico del puesto para cada candidato y pruebas más amplias para quienes lo superan.
 
@@ -28,7 +28,7 @@ Esta página explica en qué se diferencian, dónde encaja mejor cada uno y cóm
 | Código en la prueba | Preguntas de lectura de código (qué hace o qué imprime el código); no se escribe ni se ejecuta código | Pruebas de programación en el catálogo; retos de programación personalizados en su plan superior |
 | Preguntas por candidato | Un conjunto aleatorio propio para cada candidato, en su propio orden | No comparado aquí |
 | Funciones de integridad | Temporizador en cada pregunta (controlado por el servidor), alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar | Capturas de webcam, copiar/pegar desactivado y modo de pantalla completa en su plan superior |
-| Integraciones con ATS | No | Integraciones con ATS/API en su plan superior |
+| Integraciones con ATS | Workable, Greenhouse, Teamtailor, Recruitee y Breezy HR, sin coste adicional | Integraciones con ATS/API en su plan superior |
 | Informes | Fichas de evaluación con respuestas y tiempos; PDF de un candidato o de todos | No comparado aquí |
 | Idiomas | 23 idiomas para la interfaz, las entrevistas y los correos | No comparado aquí; el catálogo incluye pruebas de nivel de idiomas |
 | Modelo de precios | Por candidato que responde, con créditos prepago; sin suscripción ([precios](/pricing)) | Un plan gratuito y planes de pago con facturación anual ([página de precios](https://www.testgorilla.com/pricing/)) |
@@ -69,7 +69,6 @@ Parte de lo que necesitas evaluar. TestGorilla encaja mejor cuando:
 - **Quieres pruebas psicométricas.** Las pruebas de aptitud cognitiva, de personalidad y de cultura no son algo que ofrezca prepza.
 - **Necesitas programación práctica o simulaciones del puesto.** prepza hace preguntas de lectura de código, pero los candidatos no escriben ni ejecutan código.
 - **Quieres respuestas en video o entrevistas dirigidas por IA.** prepza no tiene ninguna de las dos.
-- **Necesitas integraciones con ATS.** prepza no se integra con sistemas ATS.
 - **Contratas en volúmenes grandes y constantes**, donde un plan fijo resulta más barato.
 - **Prefieres pruebas listas que se han usado muchas veces** frente a pruebas redactadas para cada puesto.
 

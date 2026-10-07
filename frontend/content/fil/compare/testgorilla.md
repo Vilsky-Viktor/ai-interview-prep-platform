@@ -13,7 +13,7 @@ Ipinapaliwanag ng pahinang ito kung paano sila nagkakaiba, kung saan mas bagay a
 
 ## Ang maikling bersyon
 
-- **Bagay ang TestGorilla** kapag kailangan mo ng cognitive ability, personality, language o hands-on coding tests, video questions, ATS integrations o webcam snapshots.
+- **Bagay ang TestGorilla** kapag kailangan mo ng cognitive ability, personality, language o hands-on coding tests, video questions o webcam snapshots.
 - **Bagay ang prepza** kapag gusto mo ng knowledge test na isinulat mula mismo sa iyong job description, kasama ang code-reading questions para sa mga technical role, at mas gusto mong magbayad bawat aplikante kaysa sa isang plan.
 - **Bagay ang dalawa** kapag gusto mo ng role-specific na knowledge screen para sa bawat aplikante at mas malawak na mga test para sa mga papasa rito.
 
@@ -28,7 +28,7 @@ Ipinapaliwanag ng pahinang ito kung paano sila nagkakaiba, kung saan mas bagay a
 | Code sa test | Code-reading questions (ano ang ginagawa o inilalabas ng code); walang pagsulat o pagpapatakbo ng code | Programming tests sa library; custom coding challenges sa mas mataas nitong plan |
 | Mga tanong bawat aplikante | Sariling random na set ang bawat aplikante, sa sarili nitong pagkakasunod-sunod | Hindi ikinumpara rito |
 | Integrity features | Timer sa bawat tanong (ipinapatupad ng server), flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy | Webcam snapshots, naka-disable na copy/paste at full-screen mode sa mas mataas nitong plan |
-| ATS integrations | Wala | ATS/API integrations sa mas mataas nitong plan |
+| ATS integrations | Workable, Greenhouse, Teamtailor, Recruitee at Breezy HR, nang walang dagdag na bayad | ATS/API integrations sa mas mataas nitong plan |
 | Reports | Scorecards na may mga sagot at oras; PDF para sa isa o lahat ng aplikante | Hindi ikinumpara rito |
 | Mga wika | 23 wika para sa interface, interviews at emails | Hindi ikinumpara rito; may language-proficiency tests ang library |
 | Pricing model | Bawat aplikanteng sumasagot, mula sa prepaid credits; walang subscription ([presyo](/pricing)) | Libreng plan at mga paid plan na sinisingil taun-taon ([pricing page](https://www.testgorilla.com/pricing/)) |
@@ -69,7 +69,6 @@ Magsimula sa kung ano ang kailangan mong i-test. Mas bagay ang TestGorilla kapag
 - **Gusto mo ng psychometrics.** Hindi nag-aalok ang prepza ng cognitive ability, personality at culture tests.
 - **Kailangan mo ng hands-on coding o job simulations.** May code-reading questions ang prepza, pero hindi sumusulat o nagpapatakbo ng code ang mga aplikante.
 - **Gusto mo ng video answers o AI-led interviews.** Wala ang alinman sa dalawa sa prepza.
-- **Kailangan mo ng ATS integrations.** Hindi nag-i-integrate ang prepza sa mga ATS.
 - **Malaki at tuloy-tuloy ang dami ng hiring mo** kaya mas mura ang flat plan.
 - **Mas gusto mo ang mga handang test na ilang beses nang nagamit** kaysa sa mga test na isinusulat para sa bawat role.
 

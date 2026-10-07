@@ -46,7 +46,7 @@ Võrdlemisel kontrolli ka neid:
 - **Kandidaadid, kes ei alusta.** prepza võtab tasu ainult kandidaatide eest, kes vastavad vähemalt ühele küsimusele; kasutamata kutse krediidid tulevad tagasi.
 - **Aeguvad krediidid.** prepza krediidid ei aegu. Kontrolli, kas teiste pakkujate krediidid kanduvad üle.
 - **Maksud.** Kontrolli, kas avaldatud hind sisaldab käibemaksu või müügimaksu.
-- **Kallimate pakettide funktsioonid.** ATS-integratsioonid, järelevalve (proctoring) ja kohandatud programmeerimisülesanded on sageli kallimates pakettides. Kontrolli, millist paketti sul tegelikult vaja oleks.
+- **Kallimate pakettide funktsioonid.** ATS-integratsioonid, järelevalve (proctoring) ja kohandatud programmeerimisülesanded on sageli kallimates pakettides. Kontrolli, millist paketti sul tegelikult vaja oleks. prepza ühendub ilma lisatasuta Workable'i, Greenhouse'i, Teamtailori, Recruitee ja Breezy HR-iga.
 - **Rohkem kui üks tööriist.** Kui vajad nii teadmiste testi kui ka psühhomeetrilist või programmeerimistesti, liida mõlemad kokku.
 
 ## Millal madalam hind ei ole õige valik

@@ -46,7 +46,7 @@ Saat membandingkan, periksa juga hal-hal ini:
 - **Kandidat yang tidak pernah mulai.** prepza hanya menagih kandidat yang menjawab setidaknya satu soal; kredit dari undangan yang tidak terpakai kembali.
 - **Kredit yang kedaluwarsa.** Kredit prepza tidak kedaluwarsa. Periksa apakah kredit vendor lain bisa dibawa ke periode berikutnya.
 - **Pajak.** Periksa apakah harga yang tercantum sudah termasuk PPN atau pajak penjualan.
-- **Fitur di paket yang lebih tinggi.** Integrasi ATS, proctoring, dan coding kustom sering ada di paket yang lebih mahal. Periksa paket mana yang sebenarnya kamu butuhkan.
+- **Fitur di paket yang lebih tinggi.** Integrasi ATS, proctoring, dan coding kustom sering ada di paket yang lebih mahal. Periksa paket mana yang sebenarnya kamu butuhkan. prepza terintegrasi dengan Workable, Greenhouse, Teamtailor, Recruitee, dan Breezy HR tanpa biaya tambahan.
 - **Lebih dari satu alat.** Kalau kamu butuh tes pengetahuan dan tes psikometri atau coding, jumlahkan keduanya.
 
 ## Kapan harga lebih murah bukan pilihan yang tepat

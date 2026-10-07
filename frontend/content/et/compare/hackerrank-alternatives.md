@@ -98,7 +98,6 @@ Et võrdlus oleks aus:
 - Ei koodi kirjutamist, käivitamist ega silumist ega reaalajas programmeerimiskeskkonda.
 - Ei videointervjuusid ega AI juhitud vestlusintervjuusid.
 - Ei kognitiivsete võimete ega isiksuse teste.
-- Ei ATS-integratsioone.
 
 Inseneride värbamise terviklikku protsessi vaata juhendist [Kuidas värvata insenere](/guides/hiring-engineers).
 

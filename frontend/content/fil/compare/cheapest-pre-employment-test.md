@@ -46,7 +46,7 @@ Kapag nagkukumpara ka, tingnan din ang mga ito:
 - **Mga aplikanteng hindi nagsimula.** Naniningil lang ang prepza para sa mga aplikanteng sumagot ng kahit isang tanong; bumabalik ang credits ng hindi nagamit na imbitasyon.
 - **Nag-e-expire na credits.** Hindi nag-e-expire ang credits ng prepza. Tingnan kung naililipat sa susunod na panahon ang credits ng ibang vendor.
 - **Buwis.** Tingnan kung kasama na sa nakalistang presyo ang VAT o sales tax.
-- **Mga feature sa mas matataas na plan.** Madalas nasa mas mahal na plan ang ATS integrations, proctoring at custom coding. Tingnan kung aling plan ang talagang kakailanganin mo.
+- **Mga feature sa mas matataas na plan.** Madalas nasa mas mahal na plan ang ATS integrations, proctoring at custom coding. Tingnan kung aling plan ang talagang kakailanganin mo. Kumokonekta ang prepza sa Workable, Greenhouse, Teamtailor, Recruitee at Breezy HR nang walang dagdag na bayad.
 - **Higit sa isang tool.** Kung kailangan mo ng knowledge test at psychometric o coding test, pagsamahin ang gastos ng dalawa.
 
 ## Kapag hindi tamang pagpipilian ang mas mababang presyo

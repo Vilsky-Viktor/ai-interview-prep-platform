@@ -98,7 +98,6 @@ Para patas ang paghahambing:
 - Walang pagsulat, pagpapatakbo o pag-debug ng code, at walang live coding environment.
 - Walang video o AI-led conversational interviews.
 - Walang cognitive ability o personality tests.
-- Walang ATS integrations.
 
 Para sa buong proseso ng engineering hiring, tingnan ang [Paano mag-hire ng mga engineer](/guides/hiring-engineers).
 

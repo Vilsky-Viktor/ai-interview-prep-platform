@@ -46,7 +46,7 @@ When you compare, check these too:
 - **Candidates who never start.** prepza charges only for candidates who answer at least one question; an unused invite's credits come back.
 - **Expiring credits.** prepza's credits don't expire. Check whether other vendors' credits roll over.
 - **Taxes.** Check whether a listed price includes VAT or sales tax.
-- **Features behind higher plans.** ATS integrations, proctoring and custom coding are often on more expensive plans. Check which plan you'd actually need.
+- **Features behind higher plans.** ATS integrations, proctoring and custom coding are often on more expensive plans. Check which plan you'd actually need. prepza connects to Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR at no extra cost.
 - **More than one tool.** If you need a knowledge test and a psychometric or coding test, add up both.
 
 ## When a lower price isn't the right choice

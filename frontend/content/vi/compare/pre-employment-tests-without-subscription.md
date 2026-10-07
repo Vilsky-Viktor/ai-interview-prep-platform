@@ -68,7 +68,7 @@ Giá tính bằng đô la Mỹ. Thanh toán qua Paddle, đơn vị xử lý VAT 
 Trả tiền theo ứng viên không phải lúc nào cũng rẻ hơn. Gói đăng ký có thể phù hợp hơn khi:
 
 - **Bạn kiểm tra hàng trăm ứng viên mỗi năm.** Một gói cố định, nhất là gói có số lời mời không giới hạn, có thể rẻ hơn tính theo mỗi ứng viên khi số lượng lớn. Chia chi phí một năm của gói cho giá mỗi ứng viên của bạn để tìm điểm hòa vốn; [Cách so sánh chi phí bài kiểm tra](/compare/cheapest-pre-employment-test) hướng dẫn chi tiết.
-- **Bạn cần những bài kiểm tra prepza không có.** Năng lực nhận thức, tính cách, lập trình thực hành (viết và chạy code), câu hỏi video và tích hợp ATS có trong gói của các nền tảng khác. Bạn có thể dùng một trong số đó cùng với prepza.
+- **Bạn cần những bài kiểm tra prepza không có.** Năng lực nhận thức, tính cách, lập trình thực hành (viết và chạy code) và câu hỏi video có trong gói của các nền tảng khác. Bạn có thể dùng một trong số đó cùng với prepza.
 - **Một gói miễn phí đã đủ cho bạn.** Một số nhà cung cấp có gói miễn phí với vài bài kiểm tra; nếu các bài đó phù hợp với vị trí, có thể bạn không cần trả tiền gì cả.
 
 ## Câu hỏi nên đặt cho mọi nhà cung cấp trả theo mức dùng

@@ -43,13 +43,14 @@ Ginagawang timed multiple-choice skills interview ng prepza ang isang job descri
 
 - **Presyo:** bawat aplikanteng sumagot ng kahit isang tanong, mas mura bawat aplikante sa mas malalaking top-up. Hindi nag-e-expire ang credits, at walang subscription. Tingnan ang [presyo](/pricing).
 - **Bagay sa:** maliliit at katamtamang laking team na nagha-hire para sa anumang role, ilang tao bawat pagkakataon, bilang unang screen.
-- **Hindi para sa:** cognitive o personality tests, pagsulat o pagpapatakbo ng code, video interviews o ATS integrations. Wala ang mga ito sa prepza, kaya ipares ito sa tool na mayroon kapag kailangan mo.
+- **Gumagana sa ATS mo:** Ipinapadala ng Workable, Greenhouse, Teamtailor, Recruitee at Breezy HR ang mga aplikante sa prepza at natatanggap nila pabalik ang mga resulta, nang walang dagdag na bayad.
+- **Hindi para sa:** cognitive o personality tests, pagsulat o pagpapatakbo ng code, o video interviews. Wala ang mga ito sa prepza, kaya ipares ito sa tool na mayroon kapag kailangan mo.
 
 ### CodeSignal
 
 Sinasaklaw ng mga plan ng CodeSignal ang technical assessments at AI interviewers para sa product, design at engineering roles, na may AI proctoring at ID verification. Nagdadagdag ang mas matataas na plan ng go-to-market assessments at AI interviewers para sa sales, customer success at marketing, pati ATS integrations ([CodeSignal pricing page, noong Oktubre 2026](https://codesignal.com/pricing/)).
 
-- **Mas mahusay kaysa sa prepza para sa:** hands-on coding assessment, AI-led interviews, ATS integration.
+- **Mas mahusay kaysa sa prepza para sa:** hands-on coding assessment, AI-led interviews.
 - **Magkasama:** prepza bilang knowledge screen para sa bawat aplikante, CodeSignal para sa coding stage.
 
 ### HackerRank

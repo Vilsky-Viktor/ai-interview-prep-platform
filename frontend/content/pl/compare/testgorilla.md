@@ -13,7 +13,7 @@ Ta strona wyjaśnia, czym się różnią, gdzie każde z nich sprawdza się lepi
 
 ## W skrócie
 
-- **TestGorilla pasuje**, gdy potrzebujesz testów zdolności poznawczych, osobowości, językowych lub praktycznego kodowania, pytań wideo, integracji z ATS albo zdjęć z kamery internetowej.
+- **TestGorilla pasuje**, gdy potrzebujesz testów zdolności poznawczych, osobowości, językowych lub praktycznego kodowania, pytań wideo albo zdjęć z kamery internetowej.
 - **prepza pasuje**, gdy chcesz testu wiedzy napisanego na podstawie dokładnie Twojego opisu stanowiska, w tym pytań o czytanie kodu na stanowiska techniczne, i wolisz płacić za kandydata niż za plan.
 - **Oba pasują**, gdy chcesz sprawdzić wiedzę każdego kandydata pod kątem konkretnego stanowiska, a szersze testy zostawić dla osób, które przejdą ten etap.
 
@@ -28,7 +28,7 @@ Ta strona wyjaśnia, czym się różnią, gdzie każde z nich sprawdza się lepi
 | Kod w teście | Pytania o czytanie kodu (co kod robi lub wypisuje); bez pisania ani uruchamiania kodu | Testy programistyczne w bibliotece; własne zadania programistyczne w wyższym planie |
 | Pytania na kandydata | Własny losowy zestaw każdego kandydata, we własnej kolejności | Nie porównujemy tutaj |
 | Funkcje rzetelności | Limit czasu przy każdym pytaniu (kontrolowany po stronie serwera), oznaczenia zbyt szybkich odpowiedzi, opuszczenia strony i prób kopiowania | Zdjęcia z kamery internetowej, wyłączone kopiowanie/wklejanie i tryb pełnoekranowy w wyższym planie |
-| Integracje z ATS | Nie | Integracje z ATS/API w wyższym planie |
+| Integracje z ATS | Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR, bez dodatkowych opłat | Integracje z ATS/API w wyższym planie |
 | Raporty | Karty wyników z odpowiedziami i czasami; PDF dla jednego lub wszystkich kandydatów | Nie porównujemy tutaj |
 | Języki | 23 języki interfejsu, rozmów i e-maili | Nie porównujemy tutaj; biblioteka zawiera testy biegłości językowej |
 | Model cenowy | Za kandydata, który odpowiada, z przedpłaconych kredytów; bez subskrypcji ([cennik](/pricing)) | Plan bezpłatny i płatne plany rozliczane rocznie ([strona z cenami](https://www.testgorilla.com/pricing/)) |
@@ -69,7 +69,6 @@ Zacznij od tego, co musisz sprawdzić. TestGorilla sprawdzi się lepiej, gdy:
 - **Chcesz testów psychometrycznych.** Testów zdolności poznawczych, osobowości i kultury prepza nie oferuje.
 - **Potrzebujesz praktycznego kodowania lub symulacji stanowiska.** prepza zadaje pytania o czytanie kodu, ale kandydaci nie piszą ani nie uruchamiają kodu.
 - **Chcesz odpowiedzi wideo lub rozmów prowadzonych przez AI.** prepza nie ma żadnej z tych funkcji.
-- **Potrzebujesz integracji z ATS.** prepza nie integruje się z systemami ATS.
 - **Rekrutujesz na dużą skalę i regularnie**, a stały plan wychodzi taniej.
 - **Wolisz gotowe testy, które były używane wiele razy**, od testów pisanych dla każdego stanowiska.
 

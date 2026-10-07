@@ -46,7 +46,7 @@ Al comparar, revisa también lo siguiente:
 - **Candidatos que nunca empiezan.** prepza solo cobra por los candidatos que responden al menos una pregunta; los créditos de una invitación sin usar se devuelven.
 - **Créditos que caducan.** Los créditos de prepza no caducan. Comprueba si los créditos de otros proveedores se acumulan de un periodo a otro.
 - **Impuestos.** Comprueba si un precio publicado incluye el IVA o los impuestos sobre las ventas.
-- **Funciones reservadas a planes superiores.** Las integraciones con ATS, la supervisión (proctoring) y la programación personalizada suelen estar en planes más caros. Comprueba qué plan necesitarías de verdad.
+- **Funciones reservadas a planes superiores.** Las integraciones con ATS, la supervisión (proctoring) y la programación personalizada suelen estar en planes más caros. Comprueba qué plan necesitarías de verdad. prepza se conecta con Workable, Greenhouse, Teamtailor, Recruitee y Breezy HR sin coste adicional.
 - **Más de una herramienta.** Si necesitas una prueba de conocimientos y una prueba psicométrica o de programación, suma ambas.
 
 ## Cuando un precio más bajo no es la opción correcta

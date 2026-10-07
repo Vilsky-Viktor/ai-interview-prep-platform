@@ -43,13 +43,14 @@ prepza turns a job description into a timed multiple-choice skills interview. Yo
 
 - **Pricing:** per candidate who answers at least one question, cheaper per candidate on larger top-ups. Credits don't expire, and there's no subscription. See [pricing](/pricing).
 - **Suits:** small and mid-size teams hiring for any role, a few people at a time, as a first screen.
-- **Not for:** cognitive or personality tests, writing or running code, video interviews or ATS integrations. prepza doesn't offer them, so pair it with a tool that does when you need them.
+- **Works with your ATS:** Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR send candidates in and get their results back, at no extra cost.
+- **Not for:** cognitive or personality tests, writing or running code, or video interviews. prepza doesn't offer them, so pair it with a tool that does when you need them.
 
 ### CodeSignal
 
 CodeSignal's plans cover technical assessments and AI interviewers for product, design and engineering roles, with AI proctoring and ID verification. Higher plans add go-to-market assessments and AI interviewers for sales, customer success and marketing, plus ATS integrations ([CodeSignal pricing page, as of October 2026](https://codesignal.com/pricing/)).
 
-- **Better than prepza for:** hands-on coding assessment, AI-led interviews, ATS integration.
+- **Better than prepza for:** hands-on coding assessment, AI-led interviews.
 - **Together:** prepza as a knowledge screen for every applicant, CodeSignal for the coding stage.
 
 ### HackerRank

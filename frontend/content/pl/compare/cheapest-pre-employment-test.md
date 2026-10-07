@@ -46,7 +46,7 @@ Porównując, sprawdź też:
 - **Kandydaci, którzy nie zaczną testu.** prepza pobiera opłatę tylko za kandydatów, którzy odpowiedzą na co najmniej jedno pytanie; kredyty za niewykorzystane zaproszenie wracają.
 - **Wygasające kredyty.** Kredyty w prepza nie wygasają. Sprawdź, czy u innych dostawców kredyty przechodzą na kolejny okres.
 - **Podatki.** Sprawdź, czy podana cena zawiera VAT lub podatek od sprzedaży.
-- **Funkcje w droższych planach.** Integracje z ATS, nadzór nad testem (proctoring) i własne zadania programistyczne są często w droższych planach. Sprawdź, którego planu faktycznie potrzebujesz.
+- **Funkcje w droższych planach.** Integracje z ATS, nadzór nad testem (proctoring) i własne zadania programistyczne są często w droższych planach. Sprawdź, którego planu faktycznie potrzebujesz. prepza integruje się z Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR bez dodatkowych opłat.
 - **Więcej niż jedno narzędzie.** Jeśli potrzebujesz testu wiedzy oraz testu psychometrycznego lub programistycznego, zsumuj oba koszty.
 
 ## Kiedy niższa cena nie jest właściwym wyborem

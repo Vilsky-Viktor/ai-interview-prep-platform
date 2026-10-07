@@ -68,7 +68,7 @@ Os preços são em dólares americanos. Os pagamentos passam pela Paddle, que cu
 Pagar por candidato nem sempre é mais barato. Uma assinatura pode ser melhor para você quando:
 
 - **Você avalia centenas de candidatos por ano.** Um plano fixo, principalmente um com convites ilimitados, pode custar menos por candidato em volume alto. Divida o custo anual do plano pelo seu preço por candidato para encontrar o ponto de equilíbrio; [Como comparar o custo dos testes](/compare/cheapest-pre-employment-test) mostra o passo a passo.
-- **Você precisa de testes que a prepza não oferece.** Habilidade cognitiva, personalidade, programação prática (escrever e executar código), perguntas em vídeo e integrações com ATS vêm nos planos de outras plataformas. Você pode usar uma delas junto com a prepza.
+- **Você precisa de testes que a prepza não oferece.** Habilidade cognitiva, personalidade, programação prática (escrever e executar código) e perguntas em vídeo vêm nos planos de outras plataformas. Você pode usar uma delas junto com a prepza.
 - **Um plano gratuito resolve.** Alguns fornecedores oferecem planos gratuitos com poucos testes; se esses testes servirem para a sua vaga, talvez você nem precise pagar.
 
 ## Perguntas para qualquer fornecedor de pagamento por uso

@@ -98,7 +98,6 @@ Om de vergelijking eerlijk te houden:
 - Geen code schrijven, draaien of debuggen, en geen live programmeeromgeving.
 - Geen video-interviews of door AI geleide gespreksinterviews.
 - Geen tests van cognitieve vaardigheden of persoonlijkheid.
-- Geen ATS-koppelingen.
 
 Voor een volledig selectieproces voor developers, zie [Developers werven](/guides/hiring-engineers).
 

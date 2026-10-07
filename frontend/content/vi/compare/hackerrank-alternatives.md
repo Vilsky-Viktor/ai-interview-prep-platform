@@ -98,7 +98,6 @@ Vòng sàng lọc giữ thời gian phỏng vấn của kỹ sư cho những ng�
 - Không viết, chạy hay debug code, và không có môi trường live coding.
 - Không có phỏng vấn video hay phỏng vấn hội thoại do AI dẫn dắt.
 - Không có bài kiểm tra năng lực nhận thức hay tính cách.
-- Không tích hợp ATS.
 
 Để xem toàn bộ quy trình tuyển kỹ sư, đọc [Cách tuyển kỹ sư phần mềm](/guides/hiring-engineers).
 

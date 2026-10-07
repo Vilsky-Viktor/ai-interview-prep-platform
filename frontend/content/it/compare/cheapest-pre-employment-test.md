@@ -46,7 +46,7 @@ Quando confronti, controlla anche questi:
 - **Candidati che non iniziano mai.** prepza addebita solo i candidati che rispondono ad almeno una domanda; i crediti di un invito non usato tornano indietro.
 - **Crediti in scadenza.** I crediti di prepza non scadono. Verifica se i crediti di altri fornitori vengono riportati.
 - **Imposte.** Verifica se un prezzo indicato include IVA o imposte sulle vendite.
-- **Funzioni nei piani superiori.** Integrazioni con l'ATS, proctoring e coding personalizzato sono spesso nei piani più costosi. Verifica quale piano ti servirebbe davvero.
+- **Funzioni nei piani superiori.** Integrazioni con l'ATS, proctoring e coding personalizzato sono spesso nei piani più costosi. Verifica quale piano ti servirebbe davvero. prepza si integra con Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR senza costi aggiuntivi.
 - **Più di uno strumento.** Se ti servono un test di conoscenze e un test psicometrico o di coding, somma entrambi.
 
 ## Quando un prezzo più basso non è la scelta giusta

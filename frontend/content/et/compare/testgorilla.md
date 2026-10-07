@@ -13,7 +13,7 @@ See leht selgitab, mille poolest need erinevad, kuhu kumbki paremini sobib ja ku
 
 ## Lühidalt
 
-- **TestGorilla sobib,** kui vajad kognitiivsete võimete, isiksuse, keele või praktilise programmeerimise teste, videoküsimusi, ATS-integratsioone või veebikaamera hetktõmmiseid.
+- **TestGorilla sobib,** kui vajad kognitiivsete võimete, isiksuse, keele või praktilise programmeerimise teste, videoküsimusi või veebikaamera hetktõmmiseid.
 - **prepza sobib,** kui tahad teadmiste testi, mis on kirjutatud täpselt sinu töökuulutuse põhjal, sh koodi lugemise küsimustega tehniliste rollide jaoks, ja eelistad maksta kandidaadi, mitte paketi eest.
 - **Mõlemad sobivad,** kui tahad igale kandideerijale rollipõhist teadmiste kontrolli ja selle läbinutele laiemaid teste.
 
@@ -28,7 +28,7 @@ See leht selgitab, mille poolest need erinevad, kuhu kumbki paremini sobib ja ku
 | Kood testis | Koodi lugemise küsimused (mida kood teeb või väljastab); koodi ei kirjutata ega käivitata | Programmeerimistestid testikogus; kohandatud programmeerimisülesanded kõrgemas paketis |
 | Küsimused kandidaadi kohta | Igal kandidaadil oma juhuslik komplekt, oma järjekorras | Siin ei võrrelda |
 | Aususe tagamise funktsioonid | Taimer igal küsimusel (serveri jõustatud), märked liiga kiirete vastuste, lehelt lahkumise ja kopeerimiskatsete kohta | Veebikaamera hetktõmmised, keelatud kopeerimine/kleepimine ja täisekraanirežiim kõrgemas paketis |
-| ATS-integratsioonid | Ei | ATS/API-integratsioonid kõrgemas paketis |
+| ATS-integratsioonid | Workable, Greenhouse, Teamtailor, Recruitee ja Breezy HR, ilma lisatasuta | ATS/API-integratsioonid kõrgemas paketis |
 | Aruanded | Hindamislehed vastuste ja ajakuluga; PDF ühe või kõigi kandidaatide kohta | Siin ei võrrelda |
 | Keeled | 23 keelt liidese, intervjuude ja e-kirjade jaoks | Siin ei võrrelda; testikogus on keeleoskuse testid |
 | Hinnamudel | Iga vastanud kandidaadi eest, ettemakstud krediitidest; ilma tellimuseta ([hinnad](/pricing)) | Tasuta pakett ja aastase arveldusega tasulised paketid ([hinnaleht](https://www.testgorilla.com/pricing/)) |
@@ -69,7 +69,6 @@ Lähtu sellest, mida on vaja testida. TestGorilla sobib paremini, kui:
 - **Tahad psühhomeetriat.** Kognitiivsete võimete, isiksuse ja kultuuri teste prepza ei paku.
 - **Vajad praktilist programmeerimist või töösimulatsioone.** prepza esitab koodi lugemise küsimusi, kuid kandidaadid koodi ei kirjuta ega käivita.
 - **Tahad videovastuseid või AI juhitud intervjuusid.** prepzas pole kumbagi.
-- **Vajad ATS-integratsioone.** prepza ei integreeru ATS-süsteemidega.
 - **Värbad suurtes ja ühtlastes mahtudes,** kus fikseeritud pakett tuleb odavam.
 - **Eelistad valmis teste, mida on palju kordi kasutatud,** iga rolli jaoks kirjutatud testidele.
 
