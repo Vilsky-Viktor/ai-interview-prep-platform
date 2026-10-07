@@ -373,7 +373,7 @@
     "interviews": "Colloqui",
     "templates": "Modelli",
     "team": "Team",
-    "integrations": "ATS",
+    "integrations": "Integrazioni",
     "referrals": "Referral",
     "new": "Nuova azienda",
     "name": "Nome dell'azienda",
@@ -749,8 +749,8 @@
       }
     },
     "ats": {
-      "title": "Funziona con il tuo ATS",
-      "text": "I candidati che sposti in una fase del tuo ATS ricevono il colloquio, e i loro risultati tornano sul loro profilo.",
+      "title": "Funziona con il tuo ATS e con Slack",
+      "text": "I candidati che sposti in una fase del tuo ATS ricevono il colloquio. I loro risultati tornano nel tuo ATS e in Slack.",
       "points": {
         "move": "Sposta un candidato in una fase: l'invito parte da solo",
         "back": "Punteggio, segnalazioni e link alla scheda di valutazione arrivano nel tuo ATS"
@@ -1062,6 +1062,33 @@
     "webhookPasteSecret": "Salvalo, poi incolla qui il secret che {ats} ti mostra:",
     "bzStepOpen": "In Breezy HR, fai clic sul tuo nome nell'angolo in basso a sinistra, poi apri:",
     "bzStepCreate": "Crea una chiave API come amministratore che vede tutte le posizioni: agisce a tuo nome, e i risultati vengono scritti a tuo nome. L'API e i webhook di Breezy sono inclusi nel suo piano Pro.",
-    "bzStepPaste": "Incolla qui sotto la chiave. Il webhook in Breezy HR lo aggiungiamo noi."
+    "bzStepPaste": "Incolla qui sotto la chiave. Il webhook in Breezy HR lo aggiungiamo noi.",
+    "atsGroup": "ATS",
+    "messagingGroup": "Messaggistica"
+  },
+  "slack": {
+    "add": "Aggiungi a Slack",
+    "connectFailed": "Impossibile collegare Slack.",
+    "connected": "Slack è collegato.",
+    "disconnectFailed": "Impossibile scollegare Slack.",
+    "disconnectTitle": "Scollegare Slack?",
+    "disconnectText": "Le notifiche della tua azienda smettono di arrivare nel canale e l'app di prepza viene rimossa dal tuo Slack.",
+    "notConnected": "Slack non è ancora collegato. Aggiungilo per ricevere le notifiche della tua azienda in un canale a tua scelta.",
+    "kindsTitle": "Notifiche in Slack",
+    "kindsText": "Il canale le riceve appena succedono. Tutti continuano a vederle nella campanella.",
+    "saveFailed": "Impossibile salvare.",
+    "kinds": {
+      "candidate_finished": "Un candidato ha completato un colloquio",
+      "ats_not_invited": "Un candidato dal tuo ATS non è stato invitato",
+      "invite_undelivered": "Un'email di invito non è stata consegnata",
+      "interview_ready": "Un colloquio è pronto",
+      "auto_top_up_charged": "È stata addebitata una ricarica automatica",
+      "auto_top_up_failed": "Una ricarica automatica non è riuscita"
+    },
+    "instructionsTitle": "Come Slack riceve le tue notifiche",
+    "stepAdd": "Clicca su «Aggiungi a Slack»: Slack si apre e ti chiede di autorizzare prepza nel tuo workspace.",
+    "stepChannel": "Scegli il canale in cui il tuo team deve vederle, ad esempio #hiring, e autorizza.",
+    "stepKinds": "Poi, qui, scegli quali notifiche arrivano lì: un candidato che completa il colloquio, un invito non consegnato e altro.",
+    "stepPrivacy": "prepza può pubblicare solo in quel canale. Non può leggere il tuo Slack e, se lo scolleghi, viene rimosso."
   }
 }

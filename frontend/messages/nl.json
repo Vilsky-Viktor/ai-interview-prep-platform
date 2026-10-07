@@ -373,7 +373,7 @@
     "interviews": "Interviews",
     "templates": "Sjablonen",
     "team": "Team",
-    "integrations": "ATS",
+    "integrations": "Integraties",
     "referrals": "Doorverwijzingen",
     "new": "Nieuw bedrijf",
     "name": "Bedrijfsnaam",
@@ -745,8 +745,8 @@
       }
     },
     "ats": {
-      "title": "Werkt met je ATS",
-      "text": "Kandidaten die je in je ATS naar een fase verplaatst, krijgen het interview, en hun resultaten komen terug in hun profiel.",
+      "title": "Werkt met je ATS en Slack",
+      "text": "Kandidaten die je in je ATS naar een fase verplaatst, krijgen het interview. Hun resultaten komen terug in je ATS en Slack.",
       "points": {
         "move": "Verplaats een kandidaat naar een fase: de uitnodiging gaat eruit",
         "back": "Score, signalen en een link naar de scorekaart komen in je ATS"
@@ -1058,6 +1058,33 @@
     "webhookPasteSecret": "Sla hem op en plak hier het secret dat {ats} ervoor toont:",
     "bzStepOpen": "Klik in Breezy HR linksonder op je naam en open dan:",
     "bzStepCreate": "Maak een API-sleutel aan als beheerder die alle vacatures ziet: die handelt namens jou, en resultaten worden op jouw naam geschreven. De API en webhooks van Breezy horen bij het Pro-abonnement.",
-    "bzStepPaste": "Plak de sleutel hieronder. De webhook in Breezy HR voegen we zelf toe."
+    "bzStepPaste": "Plak de sleutel hieronder. De webhook in Breezy HR voegen we zelf toe.",
+    "atsGroup": "ATS",
+    "messagingGroup": "Berichtenapps"
+  },
+  "slack": {
+    "add": "Toevoegen aan Slack",
+    "connectFailed": "Slack kon niet worden gekoppeld.",
+    "connected": "Slack is gekoppeld.",
+    "disconnectFailed": "Slack kon niet worden ontkoppeld.",
+    "disconnectTitle": "Slack ontkoppelen?",
+    "disconnectText": "De meldingen van je bedrijf gaan niet meer naar het kanaal, en de app van prepza wordt uit je Slack verwijderd.",
+    "notConnected": "Slack is nog niet gekoppeld. Voeg het toe om de meldingen van je bedrijf te krijgen in een kanaal dat je kiest.",
+    "kindsTitle": "Meldingen in Slack",
+    "kindsText": "Het kanaal krijgt deze zodra ze gebeuren. Iedereen ziet ze ook nog steeds bij de bel.",
+    "saveFailed": "Kon niet worden opgeslagen.",
+    "kinds": {
+      "candidate_finished": "Een kandidaat heeft een interview afgerond",
+      "ats_not_invited": "Een kandidaat uit je ATS is niet uitgenodigd",
+      "invite_undelivered": "Een uitnodigingsmail is niet bezorgd",
+      "interview_ready": "Een interview is klaar",
+      "auto_top_up_charged": "Een automatische opwaardering is afgeschreven",
+      "auto_top_up_failed": "Een automatische opwaardering is mislukt"
+    },
+    "instructionsTitle": "Zo krijgt Slack je meldingen",
+    "stepAdd": "Klik op “Toevoegen aan Slack”: Slack opent en vraagt je prepza toe te staan in je workspace.",
+    "stepChannel": "Kies het kanaal waarin je team ze moet zien, bijvoorbeeld #hiring, en sta toe.",
+    "stepKinds": "Kies daarna hier welke meldingen daarheen gaan: een kandidaat die klaar is, een uitnodiging die niet is bezorgd en meer.",
+    "stepPrivacy": "prepza kan alleen in dat kanaal posten. Het kan je Slack niet lezen, en ontkoppelen verwijdert het."
   }
 }

@@ -373,7 +373,7 @@
     "interviews": "面试",
     "templates": "模板",
     "team": "团队",
-    "integrations": "ATS",
+    "integrations": "集成",
     "referrals": "推荐",
     "new": "新公司",
     "name": "公司名称",
@@ -740,8 +740,8 @@
       }
     },
     "ats": {
-      "title": "与你的 ATS 对接",
-      "text": "你在 ATS 中移到某个阶段的候选人会收到面试，结果会回传到其个人资料。",
+      "title": "与你的 ATS 和 Slack 对接",
+      "text": "你在 ATS 中移到某个阶段的候选人会收到面试。结果会回传到你的 ATS 和 Slack。",
       "points": {
         "move": "把候选人移到某个阶段，邀请即自动发出",
         "back": "成绩、标记和评分卡链接回传到你的 ATS"
@@ -1053,6 +1053,33 @@
     "webhookPasteSecret": "保存后，将 {ats} 为它显示的密钥粘贴到这里：",
     "bzStepOpen": "在 Breezy HR 中，点击左下角你的名字，然后打开：",
     "bzStepCreate": "以能看到所有职位的管理员身份创建 API 密钥：密钥以你的身份操作，结果也以你的名义写入。Breezy 的 API 和 Webhook 包含在其 Pro 套餐中。",
-    "bzStepPaste": "将密钥粘贴到下方。我们会自行在 Breezy HR 中添加 Webhook。"
+    "bzStepPaste": "将密钥粘贴到下方。我们会自行在 Breezy HR 中添加 Webhook。",
+    "atsGroup": "ATS",
+    "messagingGroup": "消息应用"
+  },
+  "slack": {
+    "add": "添加到 Slack",
+    "connectFailed": "无法连接 Slack。",
+    "connected": "Slack 已连接。",
+    "disconnectFailed": "无法断开 Slack。",
+    "disconnectTitle": "断开 Slack？",
+    "disconnectText": "公司的通知将不再发送到该频道，prepza 应用也会从你的 Slack 中移除。",
+    "notConnected": "Slack 尚未连接。添加后，即可在你选择的频道中接收公司的通知。",
+    "kindsTitle": "Slack 中的通知",
+    "kindsText": "这些通知一发生就会发到频道。所有人仍可在铃铛中看到它们。",
+    "saveFailed": "无法保存。",
+    "kinds": {
+      "candidate_finished": "候选人完成了面试",
+      "ats_not_invited": "来自你的 ATS 的候选人未被邀请",
+      "invite_undelivered": "邀请邮件未能送达",
+      "interview_ready": "面试已就绪",
+      "auto_top_up_charged": "自动充值已扣款",
+      "auto_top_up_failed": "自动充值失败"
+    },
+    "instructionsTitle": "Slack 如何接收你的通知",
+    "stepAdd": "点击“添加到 Slack”：Slack 会打开，并请你允许 prepza 访问你的工作区。",
+    "stepChannel": "选择团队查看通知的频道，例如 #hiring，然后点击允许。",
+    "stepKinds": "回到这里，选择哪些通知发送到该频道：候选人完成面试、邀请未送达等。",
+    "stepPrivacy": "prepza 只能在该频道发消息。它无法读取你的 Slack，断开连接后即会被移除。"
   }
 }

@@ -373,7 +373,7 @@
     "interviews": "Intervjuud",
     "templates": "Mallid",
     "team": "Meeskond",
-    "integrations": "ATS",
+    "integrations": "Integratsioonid",
     "referrals": "Soovitused",
     "new": "Uus ettevõte",
     "name": "Ettevõtte nimi",
@@ -753,8 +753,8 @@
       }
     },
     "ats": {
-      "title": "Töötab sinu ATS-süsteemiga",
-      "text": "Kandidaadid, kelle viid ATS-süsteemis etappi, saavad intervjuu ja nende tulemused jõuavad tagasi nende profiilile.",
+      "title": "Töötab sinu ATS-süsteemi ja Slackiga",
+      "text": "Kandidaadid, kelle viid ATS-süsteemis etappi, saavad intervjuu. Nende tulemused jõuavad tagasi sinu ATS-süsteemi ja Slacki.",
       "points": {
         "move": "Vii kandidaat etappi: kutse läheb kohe teele",
         "back": "Hinne, märked ja hindamislehe link jõuavad sinu ATS-süsteemi"
@@ -1066,6 +1066,33 @@
     "webhookPasteSecret": "Salvesta see ja kleebi siia saladus, mida {ats} selle jaoks näitab:",
     "bzStepOpen": "Klõpsa Breezy HR-is vasakus alanurgas oma nimel ja ava siis:",
     "bzStepCreate": "Loo API-võti administraatorina, kes näeb kõiki töökuulutusi: see tegutseb sinu nimel ja tulemused kirjutatakse sinu nimel. Breezy API ja webhookid on saadaval Pro paketiga.",
-    "bzStepPaste": "Kleebi võti allpool. Webhooki lisame Breezy HR-is ise."
+    "bzStepPaste": "Kleebi võti allpool. Webhooki lisame Breezy HR-is ise.",
+    "atsGroup": "ATS",
+    "messagingGroup": "Sõnumirakendused"
+  },
+  "slack": {
+    "add": "Lisa Slacki",
+    "connectFailed": "Slacki ühendamine ebaõnnestus.",
+    "connected": "Slack on ühendatud.",
+    "disconnectFailed": "Slacki ühendust ei õnnestunud katkestada.",
+    "disconnectTitle": "Katkestada ühendus Slackiga?",
+    "disconnectText": "Sinu ettevõtte teavitused ei jõua enam kanalisse ja prepza rakendus eemaldatakse sinu Slackist.",
+    "notConnected": "Slack pole veel ühendatud. Lisa see, et saada oma ettevõtte teavitusi enda valitud kanalisse.",
+    "kindsTitle": "Teavitused Slackis",
+    "kindsText": "Kanal saab need kohe, kui midagi juhtub. Kõik näevad neid endiselt ka kellukese all.",
+    "saveFailed": "Salvestamine ebaõnnestus.",
+    "kinds": {
+      "candidate_finished": "Kandidaat lõpetas intervjuu",
+      "ats_not_invited": "Kandidaati sinu ATS-süsteemist ei kutsutud",
+      "invite_undelivered": "Kutse e-kiri ei jõudnud kohale",
+      "interview_ready": "Intervjuu on valmis",
+      "auto_top_up_charged": "Automaatse juurdelaadimise makse võeti kaardilt",
+      "auto_top_up_failed": "Automaatne juurdelaadimine ebaõnnestus"
+    },
+    "instructionsTitle": "Kuidas Slack sinu teavitused saab",
+    "stepAdd": "Klõpsa „Lisa Slacki“: Slack avaneb ja palub sul lubada prepza oma tööruumis.",
+    "stepChannel": "Vali kanal, kus su meeskond neid näeb, näiteks #hiring, ja luba.",
+    "stepKinds": "Siia tagasi tulles vali, millised teavitused sinna lähevad: kandidaat lõpetas, kutse ei jõudnud kohale ja muud.",
+    "stepPrivacy": "prepza saab postitada ainult sellesse kanalisse. See ei saa sinu Slacki lugeda ja ühenduse katkestamine eemaldab selle."
   }
 }

@@ -373,7 +373,7 @@
     "interviews": "Interviews",
     "templates": "Templates",
     "team": "Team",
-    "integrations": "ATS",
+    "integrations": "Integrations",
     "referrals": "Referrals",
     "new": "New company",
     "name": "Company name",
@@ -749,8 +749,8 @@
       }
     },
     "ats": {
-      "title": "Works with your ATS",
-      "text": "Candidates you move to a stage in your ATS get the interview, and their results come back to their profile.",
+      "title": "Works with your ATS and Slack",
+      "text": "Candidates you move to a stage in your ATS get the interview. Their results come back to your ATS and Slack.",
       "points": {
         "move": "Move a candidate to a stage: the invite goes out",
         "back": "Grade, flags and a scorecard link land in your ATS"
@@ -1062,6 +1062,33 @@
     "webhookPasteSecret": "Save it, then paste the secret {ats} shows for it here:",
     "bzStepOpen": "In Breezy HR, click your name in the bottom left corner, then open:",
     "bzStepCreate": "Create an API key as an admin who sees every position: it acts as you, and results are written as you. Breezy's API and web hooks come with its Pro plan.",
-    "bzStepPaste": "Paste the key below. We add the web hook in Breezy HR ourselves."
+    "bzStepPaste": "Paste the key below. We add the web hook in Breezy HR ourselves.",
+    "atsGroup": "ATS",
+    "messagingGroup": "Messaging"
+  },
+  "slack": {
+    "add": "Add to Slack",
+    "connectFailed": "Couldn't connect Slack.",
+    "connected": "Slack is connected.",
+    "disconnectFailed": "Couldn't disconnect Slack.",
+    "disconnectTitle": "Disconnect Slack?",
+    "disconnectText": "Your company's notifications stop going to the channel, and prepza's app is removed from your Slack.",
+    "notConnected": "Slack isn't connected yet. Add it to get your company's notifications in a channel you pick.",
+    "kindsTitle": "Notifications in Slack",
+    "kindsText": "The channel gets these, as they happen. Everyone still sees them in the bell.",
+    "saveFailed": "Couldn't save.",
+    "kinds": {
+      "candidate_finished": "A candidate finished an interview",
+      "ats_not_invited": "A candidate from your ATS wasn't invited",
+      "invite_undelivered": "An invite email wasn't delivered",
+      "interview_ready": "An interview is ready",
+      "auto_top_up_charged": "An automatic top-up was charged",
+      "auto_top_up_failed": "An automatic top-up failed"
+    },
+    "instructionsTitle": "How Slack gets your notifications",
+    "stepAdd": "Click “Add to Slack”: Slack opens and asks you to allow prepza in your workspace.",
+    "stepChannel": "Pick the channel your team should see them in, for example #hiring, and allow.",
+    "stepKinds": "Back here, choose which notifications go there: a candidate finishing, an invite that wasn't delivered and more.",
+    "stepPrivacy": "prepza can only post to that channel. It can't read your Slack, and disconnecting removes it."
   }
 }

@@ -373,7 +373,7 @@
     "interviews": "Wawancara",
     "templates": "Templat",
     "team": "Tim",
-    "integrations": "ATS",
+    "integrations": "Integrasi",
     "referrals": "Referal",
     "new": "Perusahaan baru",
     "name": "Nama perusahaan",
@@ -749,8 +749,8 @@
       }
     },
     "ats": {
-      "title": "Bekerja dengan ATS-mu",
-      "text": "Kandidat yang kamu pindahkan ke suatu tahap di ATS-mu mendapat wawancara, dan hasilnya kembali ke profil mereka.",
+      "title": "Bekerja dengan ATS-mu dan Slack",
+      "text": "Kandidat yang kamu pindahkan ke suatu tahap di ATS-mu mendapat wawancara. Hasilnya kembali ke ATS-mu dan Slack.",
       "points": {
         "move": "Pindahkan kandidat ke suatu tahap: undangan langsung terkirim",
         "back": "Nilai, tanda, dan tautan scorecard masuk ke ATS-mu"
@@ -1062,6 +1062,33 @@
     "webhookPasteSecret": "Simpan, lalu tempel di sini secret yang ditampilkan {ats} untuknya:",
     "bzStepOpen": "Di Breezy HR, klik namamu di pojok kiri bawah, lalu buka:",
     "bzStepCreate": "Buat kunci API sebagai admin yang bisa melihat semua lowongan: kunci ini bertindak atas namamu, dan hasilnya ditulis atas namamu. API dan webhook Breezy tersedia di paket Pro-nya.",
-    "bzStepPaste": "Tempel kunci di bawah. Webhook di Breezy HR kami tambahkan sendiri."
+    "bzStepPaste": "Tempel kunci di bawah. Webhook di Breezy HR kami tambahkan sendiri.",
+    "atsGroup": "ATS",
+    "messagingGroup": "Aplikasi pesan"
+  },
+  "slack": {
+    "add": "Tambahkan ke Slack",
+    "connectFailed": "Slack tidak bisa dihubungkan.",
+    "connected": "Slack sudah terhubung.",
+    "disconnectFailed": "Slack tidak bisa diputuskan.",
+    "disconnectTitle": "Putuskan Slack?",
+    "disconnectText": "Notifikasi perusahaanmu tidak lagi dikirim ke channel, dan aplikasi prepza dihapus dari Slack-mu.",
+    "notConnected": "Slack belum terhubung. Tambahkan untuk menerima notifikasi perusahaanmu di channel pilihanmu.",
+    "kindsTitle": "Notifikasi di Slack",
+    "kindsText": "Channel menerimanya begitu terjadi. Semua orang tetap melihatnya di ikon lonceng.",
+    "saveFailed": "Tidak bisa disimpan.",
+    "kinds": {
+      "candidate_finished": "Kandidat menyelesaikan wawancara",
+      "ats_not_invited": "Kandidat dari ATS-mu tidak diundang",
+      "invite_undelivered": "Email undangan tidak terkirim",
+      "interview_ready": "Wawancara sudah siap",
+      "auto_top_up_charged": "Isi ulang otomatis berhasil ditagih",
+      "auto_top_up_failed": "Isi ulang otomatis gagal"
+    },
+    "instructionsTitle": "Cara Slack menerima notifikasimu",
+    "stepAdd": "Klik “Tambahkan ke Slack”: Slack terbuka dan memintamu mengizinkan prepza di workspace-mu.",
+    "stepChannel": "Pilih channel tempat timmu akan melihatnya, misalnya #hiring, lalu izinkan.",
+    "stepKinds": "Kembali ke sini, pilih notifikasi mana yang dikirim ke sana: kandidat yang selesai, undangan yang tidak terkirim, dan lainnya.",
+    "stepPrivacy": "prepza hanya bisa memposting ke channel itu. prepza tidak bisa membaca Slack-mu, dan memutuskannya akan menghapus prepza."
   }
 }

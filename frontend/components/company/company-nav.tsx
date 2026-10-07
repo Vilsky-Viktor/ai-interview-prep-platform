@@ -32,7 +32,6 @@ export function CompanyNav({
       id: "integrations",
       href: `/companies/${companyId}/integrations`,
       label: t("integrations"),
-      keepCase: true,
     },
     {
       id: "referrals",

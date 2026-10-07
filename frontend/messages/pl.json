@@ -373,7 +373,7 @@
     "interviews": "Rozmowy",
     "templates": "Szablony",
     "team": "Zespół",
-    "integrations": "ATS",
+    "integrations": "Integracje",
     "referrals": "Polecenia",
     "new": "Nowa firma",
     "name": "Nazwa firmy",
@@ -749,8 +749,8 @@
       }
     },
     "ats": {
-      "title": "Działa z Twoim systemem ATS",
-      "text": "Kandydaci, których przeniesiesz do etapu w swoim systemie ATS, dostają rozmowę, a ich wyniki wracają do ich profilu.",
+      "title": "Działa z Twoim systemem ATS i Slackiem",
+      "text": "Kandydaci, których przeniesiesz do etapu w swoim systemie ATS, dostają rozmowę. Ich wyniki wracają do Twojego systemu ATS i Slacka.",
       "points": {
         "move": "Przenieś kandydata do etapu: zaproszenie wychodzi samo",
         "back": "Wynik, ostrzeżenia i link do karty wyników trafiają do Twojego systemu ATS"
@@ -1062,6 +1062,33 @@
     "webhookPasteSecret": "Zapisz go, a potem wklej tutaj sekret, który {ats} dla niego pokazuje:",
     "bzStepOpen": "W Breezy HR kliknij swoje imię i nazwisko w lewym dolnym rogu, a potem otwórz:",
     "bzStepCreate": "Utwórz klucz API jako administrator, który widzi wszystkie oferty: klucz działa w Twoim imieniu, a wyniki są zapisywane w Twoim imieniu. API i webhooki Breezy są dostępne w planie Pro.",
-    "bzStepPaste": "Wklej klucz poniżej. Webhook w Breezy HR dodamy sami."
+    "bzStepPaste": "Wklej klucz poniżej. Webhook w Breezy HR dodamy sami.",
+    "atsGroup": "ATS",
+    "messagingGroup": "Komunikatory"
+  },
+  "slack": {
+    "add": "Dodaj do Slacka",
+    "connectFailed": "Nie udało się połączyć Slacka.",
+    "connected": "Slack jest połączony.",
+    "disconnectFailed": "Nie udało się odłączyć Slacka.",
+    "disconnectTitle": "Odłączyć Slacka?",
+    "disconnectText": "Powiadomienia Twojej firmy przestaną trafiać na kanał, a aplikacja prepza zostanie usunięta z Twojego Slacka.",
+    "notConnected": "Slack nie jest jeszcze połączony. Dodaj go, aby otrzymywać powiadomienia firmy na wybranym kanale.",
+    "kindsTitle": "Powiadomienia w Slacku",
+    "kindsText": "Kanał dostaje je od razu, gdy się pojawią. Wszyscy nadal widzą je też pod dzwonkiem.",
+    "saveFailed": "Nie udało się zapisać.",
+    "kinds": {
+      "candidate_finished": "Kandydat ukończył rozmowę",
+      "ats_not_invited": "Kandydat z Twojego systemu ATS nie został zaproszony",
+      "invite_undelivered": "E-mail z zaproszeniem nie został dostarczony",
+      "interview_ready": "Rozmowa jest gotowa",
+      "auto_top_up_charged": "Pobrano płatność za automatyczne doładowanie",
+      "auto_top_up_failed": "Automatyczne doładowanie nie powiodło się"
+    },
+    "instructionsTitle": "Jak Slack otrzymuje Twoje powiadomienia",
+    "stepAdd": "Kliknij „Dodaj do Slacka”: Slack się otworzy i poprosi o zezwolenie na prepza w Twoim obszarze roboczym.",
+    "stepChannel": "Wybierz kanał, na którym Twój zespół ma je widzieć, np. #hiring, i zezwól.",
+    "stepKinds": "Po powrocie tutaj wybierz, które powiadomienia mają tam trafiać: ukończona rozmowa kandydata, niedostarczone zaproszenie i inne.",
+    "stepPrivacy": "prepza może publikować tylko na tym kanale. Nie może czytać Twojego Slacka, a odłączenie go usuwa."
   }
 }

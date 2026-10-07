@@ -373,7 +373,7 @@
     "interviews": "Mga interview",
     "templates": "Mga template",
     "team": "Team",
-    "integrations": "ATS",
+    "integrations": "Mga integration",
     "referrals": "Referrals",
     "new": "Bagong kumpanya",
     "name": "Pangalan ng kumpanya",
@@ -753,8 +753,8 @@
       }
     },
     "ats": {
-      "title": "Gumagana sa ATS mo",
-      "text": "Makukuha ng mga aplikanteng inilipat mo sa isang stage sa ATS mo ang interview, at babalik sa profile nila ang mga resulta.",
+      "title": "Gumagana sa ATS mo at sa Slack",
+      "text": "Makukuha ng mga aplikanteng inilipat mo sa isang stage sa ATS mo ang interview. Babalik ang mga resulta nila sa ATS mo at sa Slack.",
       "points": {
         "move": "Ilipat ang aplikante sa isang stage: maipapadala agad ang invite",
         "back": "Mapupunta sa ATS mo ang grade, mga flag at link sa scorecard"
@@ -1066,6 +1066,33 @@
     "webhookPasteSecret": "I-save ito, saka i-paste dito ang secret na ipinapakita ng {ats} para rito:",
     "bzStepOpen": "Sa Breezy HR, i-click ang pangalan mo sa kaliwang ibabang sulok, saka buksan ang:",
     "bzStepCreate": "Gumawa ng API key bilang admin na nakikita ang lahat ng job: kikilos ito bilang ikaw, at sa pangalan mo isusulat ang mga resulta. Kasama sa Pro plan ng Breezy ang API at webhooks nito.",
-    "bzStepPaste": "I-paste ang key sa ibaba. Kami na ang magdadagdag ng webhook sa Breezy HR."
+    "bzStepPaste": "I-paste ang key sa ibaba. Kami na ang magdadagdag ng webhook sa Breezy HR.",
+    "atsGroup": "ATS",
+    "messagingGroup": "Mga messaging app"
+  },
+  "slack": {
+    "add": "Idagdag sa Slack",
+    "connectFailed": "Hindi ma-connect ang Slack.",
+    "connected": "Naka-connect na ang Slack.",
+    "disconnectFailed": "Hindi ma-disconnect ang Slack.",
+    "disconnectTitle": "I-disconnect ang Slack?",
+    "disconnectText": "Hindi na mapupunta sa channel ang mga notification ng kumpanya mo, at aalisin ang app ng prepza sa Slack mo.",
+    "notConnected": "Hindi pa naka-connect ang Slack. Idagdag ito para makuha ang mga notification ng kumpanya mo sa channel na pipiliin mo.",
+    "kindsTitle": "Mga notification sa Slack",
+    "kindsText": "Matatanggap ito ng channel habang nangyayari. Makikita pa rin ito ng lahat sa bell.",
+    "saveFailed": "Hindi ma-save.",
+    "kinds": {
+      "candidate_finished": "May aplikanteng nakatapos ng interview",
+      "ats_not_invited": "May aplikante mula sa ATS mo na hindi na-imbitahan",
+      "invite_undelivered": "May email ng imbitasyon na hindi naihatid",
+      "interview_ready": "May interview na handa na",
+      "auto_top_up_charged": "Na-charge ang isang awtomatikong top-up",
+      "auto_top_up_failed": "Pumalya ang isang awtomatikong top-up"
+    },
+    "instructionsTitle": "Paano natatanggap ng Slack ang mga notification mo",
+    "stepAdd": "I-click ang “Idagdag sa Slack”: magbubukas ang Slack at hihilingin sa iyong payagan ang prepza sa workspace mo.",
+    "stepChannel": "Piliin ang channel kung saan dapat makita ng team mo ang mga ito, halimbawa #hiring, at payagan.",
+    "stepKinds": "Pagbalik dito, piliin kung aling mga notification ang mapupunta roon: aplikanteng nakatapos, imbitasyong hindi naihatid at iba pa.",
+    "stepPrivacy": "Sa channel na iyon lang makakapag-post ang prepza. Hindi nito mababasa ang Slack mo, at maaalis ito kapag nag-disconnect ka."
   }
 }

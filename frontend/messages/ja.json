@@ -373,7 +373,7 @@
     "interviews": "面接",
     "templates": "テンプレート",
     "team": "チーム",
-    "integrations": "ATS",
+    "integrations": "連携",
     "referrals": "紹介",
     "new": "新しい会社",
     "name": "会社名",
@@ -753,8 +753,8 @@
       }
     },
     "ats": {
-      "title": "お使いの ATS と連携",
-      "text": "ATS で選考ステップに移動した候補者に面接が届き、結果はその候補者のプロフィールに戻ります。",
+      "title": "お使いの ATS や Slack と連携",
+      "text": "ATS で選考ステップに移動した候補者に面接が届きます。結果はお使いの ATS と Slack に戻ります。",
       "points": {
         "move": "候補者を選考ステップに移すだけで招待を送信",
         "back": "スコア、注意点、スコアカードのリンクが ATS に届く"
@@ -1066,6 +1066,33 @@
     "webhookPasteSecret": "保存したら、{ats} に表示されるシークレットをここに貼り付けます：",
     "bzStepOpen": "Breezy HR で左下の自分の名前をクリックし、次を開きます：",
     "bzStepCreate": "すべての求人を閲覧できる管理者として API キーを作成します。キーはあなたとして動作し、結果もあなたの名前で書き込まれます。Breezy の API と Webhook は Pro プランで利用できます。",
-    "bzStepPaste": "下にキーを貼り付けてください。Breezy HR の Webhook はこちらで追加します。"
+    "bzStepPaste": "下にキーを貼り付けてください。Breezy HR の Webhook はこちらで追加します。",
+    "atsGroup": "ATS",
+    "messagingGroup": "メッセージアプリ"
+  },
+  "slack": {
+    "add": "Slack に追加",
+    "connectFailed": "Slack に接続できませんでした。",
+    "connected": "Slack に接続済みです。",
+    "disconnectFailed": "Slack の接続を解除できませんでした。",
+    "disconnectTitle": "Slack の接続を解除しますか？",
+    "disconnectText": "会社のお知らせはチャンネルに届かなくなり、prepza のアプリはお使いの Slack から削除されます。",
+    "notConnected": "Slack はまだ接続されていません。追加すると、会社のお知らせを選んだチャンネルで受け取れます。",
+    "kindsTitle": "Slack に届くお知らせ",
+    "kindsText": "発生するとすぐにチャンネルに届きます。ベルのお知らせにも引き続き表示されます。",
+    "saveFailed": "保存できませんでした。",
+    "kinds": {
+      "candidate_finished": "候補者が面接を完了した",
+      "ats_not_invited": "ATS から来た候補者が招待されなかった",
+      "invite_undelivered": "招待メールが届かなかった",
+      "interview_ready": "面接の準備ができた",
+      "auto_top_up_charged": "自動チャージで請求された",
+      "auto_top_up_failed": "自動チャージに失敗した"
+    },
+    "instructionsTitle": "Slack にお知らせが届くしくみ",
+    "stepAdd": "「Slack に追加」をクリックします。Slack が開き、ワークスペースで prepza を許可するよう求められます。",
+    "stepChannel": "チームがお知らせを見るチャンネル（例：#hiring）を選び、許可します。",
+    "stepKinds": "この画面に戻り、そこに送るお知らせを選びます。候補者の完了、届かなかった招待などがあります。",
+    "stepPrivacy": "prepza が投稿できるのはそのチャンネルだけです。Slack の内容を読むことはできず、接続を解除すると削除されます。"
   }
 }

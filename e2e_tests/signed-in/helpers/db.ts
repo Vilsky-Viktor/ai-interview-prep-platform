@@ -152,3 +152,19 @@ export async function addAtsConnection(
     }
   })
 }
+
+/** A Slack channel for a throwaway company, saved straight into the notifications database (a
+ * real one needs prepza's Slack app and a workspace). Its web hook is a placeholder: nothing is
+ * posted with it. Deleting the company deletes it. */
+export async function addSlackConnection(companyId: string) {
+  await withDatabase("notifications", (client) =>
+    client.query(
+      `INSERT INTO slack_connections (company_id, team, channel, webhook, token, kinds, status,
+         created_by, created_at)
+       VALUES ($1, 'E2E Acme', '#hiring', 'placeholder', 'placeholder',
+         '["candidate_finished", "ats_not_invited", "invite_undelivered", "auto_top_up_failed"]',
+         'connected', 'e2e', now())`,
+      [companyId]
+    )
+  )
+}

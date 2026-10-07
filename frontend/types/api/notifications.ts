@@ -150,6 +150,85 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/slack": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Slack
+     * @description The company's Slack channel and the notifications it gets; every member sees it.
+     */
+    get: operations["get_slack_slack_get"]
+    put?: never
+    post?: never
+    /** Disconnect */
+    delete: operations["disconnect_slack_delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/slack/start": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Start
+     * @description Where "Add to Slack" goes: Slack's page to approve prepza and pick a channel.
+     */
+    get: operations["start_slack_start_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/slack/callback": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Callback
+     * @description Slack sends the browser back here; the signed state says whose company it is. Then on to
+     *     the company's Slack page.
+     */
+    get: operations["callback_slack_callback_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/slack/kinds": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Set Kinds */
+    put: operations["set_kinds_slack_kinds_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/health": {
     parameters: {
       query?: never
@@ -253,6 +332,34 @@ export interface components {
       }
       /** Messageid */
       messageId: string
+    }
+    /** SlackKindsIn */
+    SlackKindsIn: {
+      /** Kinds */
+      kinds: string[]
+    }
+    /**
+     * SlackOut
+     * @description The company's Slack channel as the page shows it: never its web hook.
+     */
+    SlackOut: {
+      /** Connected */
+      connected: boolean
+      /** Status */
+      status?: string | null
+      /** Team */
+      team?: string | null
+      /** Channel */
+      channel?: string | null
+      /** Kinds */
+      kinds: string[]
+      /** All Kinds */
+      all_kinds: string[]
+    }
+    /** SlackStartOut */
+    SlackStartOut: {
+      /** Url */
+      url: string
     }
     /** ValidationError */
     ValidationError: {
@@ -433,6 +540,163 @@ export interface operations {
             [key: string]: unknown
           }
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_slack_slack_get: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SlackOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  disconnect_slack_delete: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  start_slack_start_get: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SlackStartOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  callback_slack_callback_get: {
+    parameters: {
+      query: {
+        state: string
+        code?: string | null
+        error?: string | null
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  set_kinds_slack_kinds_put: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SlackKindsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {

@@ -373,7 +373,7 @@
     "interviews": "Phỏng vấn",
     "templates": "Mẫu",
     "team": "Nhóm",
-    "integrations": "ATS",
+    "integrations": "Tích hợp",
     "referrals": "Giới thiệu",
     "new": "Công ty mới",
     "name": "Tên công ty",
@@ -745,8 +745,8 @@
       }
     },
     "ats": {
-      "title": "Hoạt động với ATS của bạn",
-      "text": "Ứng viên bạn chuyển vào một giai đoạn trong ATS sẽ nhận buổi phỏng vấn, và kết quả được gửi về hồ sơ của họ.",
+      "title": "Hoạt động với ATS và Slack của bạn",
+      "text": "Ứng viên bạn chuyển vào một giai đoạn trong ATS sẽ nhận buổi phỏng vấn. Kết quả được gửi về ATS và Slack của bạn.",
       "points": {
         "move": "Chuyển ứng viên vào một giai đoạn: lời mời được gửi đi ngay",
         "back": "Điểm, cảnh báo và liên kết bảng điểm được gửi về ATS của bạn"
@@ -1058,6 +1058,33 @@
     "webhookPasteSecret": "Lưu lại, rồi dán vào đây secret mà {ats} hiển thị cho webhook đó:",
     "bzStepOpen": "Trong Breezy HR, nhấp vào tên của bạn ở góc dưới bên trái, rồi mở:",
     "bzStepCreate": "Tạo khóa API bằng tài khoản quản trị viên xem được mọi tin tuyển dụng: khóa hoạt động thay mặt bạn, và kết quả được ghi dưới tên bạn. API và webhook của Breezy có trong gói Pro.",
-    "bzStepPaste": "Dán khóa bên dưới. Chúng tôi tự thêm webhook trong Breezy HR."
+    "bzStepPaste": "Dán khóa bên dưới. Chúng tôi tự thêm webhook trong Breezy HR.",
+    "atsGroup": "ATS",
+    "messagingGroup": "Nhắn tin"
+  },
+  "slack": {
+    "add": "Thêm vào Slack",
+    "connectFailed": "Không thể kết nối Slack.",
+    "connected": "Slack đã được kết nối.",
+    "disconnectFailed": "Không thể ngắt kết nối Slack.",
+    "disconnectTitle": "Ngắt kết nối Slack?",
+    "disconnectText": "Thông báo của công ty bạn sẽ không còn được gửi vào kênh, và ứng dụng prepza sẽ bị gỡ khỏi Slack của bạn.",
+    "notConnected": "Slack chưa được kết nối. Hãy thêm Slack để nhận thông báo của công ty trong kênh bạn chọn.",
+    "kindsTitle": "Thông báo trong Slack",
+    "kindsText": "Kênh nhận các thông báo này ngay khi chúng xảy ra. Mọi người vẫn thấy chúng ở biểu tượng chuông.",
+    "saveFailed": "Không thể lưu.",
+    "kinds": {
+      "candidate_finished": "Một ứng viên đã hoàn thành buổi phỏng vấn",
+      "ats_not_invited": "Một ứng viên từ ATS của bạn chưa được mời",
+      "invite_undelivered": "Một email mời chưa được gửi đến",
+      "interview_ready": "Một buổi phỏng vấn đã sẵn sàng",
+      "auto_top_up_charged": "Đã trừ tiền cho một lần tự động nạp",
+      "auto_top_up_failed": "Một lần tự động nạp không thành công"
+    },
+    "instructionsTitle": "Cách Slack nhận thông báo của bạn",
+    "stepAdd": "Nhấp “Thêm vào Slack”: Slack sẽ mở ra và yêu cầu bạn cho phép prepza trong không gian làm việc của bạn.",
+    "stepChannel": "Chọn kênh mà nhóm của bạn sẽ xem thông báo, ví dụ #hiring, rồi cho phép.",
+    "stepKinds": "Quay lại đây, chọn những thông báo nào được gửi đến đó: ứng viên hoàn thành, lời mời chưa được gửi đến và nhiều hơn nữa.",
+    "stepPrivacy": "prepza chỉ có thể đăng vào kênh đó. prepza không thể đọc Slack của bạn, và ngắt kết nối sẽ gỡ prepza."
   }
 }

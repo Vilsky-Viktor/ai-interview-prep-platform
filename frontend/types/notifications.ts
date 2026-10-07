@@ -4,3 +4,4 @@ type Schemas = components["schemas"]
 
 export type NotificationFeed = Schemas["FeedOut"]
 export type AppNotification = Schemas["NotificationOut"]
+export type SlackOverview = Schemas["SlackOut"]

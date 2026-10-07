@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { AtsConnectionRow } from "@/components/company/ats-connection"
+import { SlackRow } from "@/components/company/slack-connection"
 import { CompanyHeader } from "@/components/company/company-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { ATS_PROVIDERS } from "@/constants/ats"
@@ -10,11 +11,12 @@ import { TOKEN_COOKIE } from "@/constants/auth"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { AtsIntegrations, Company } from "@/types/company"
+import type { SlackOverview } from "@/types/notifications"
 
 export const generateMetadata = () => translatedTitle("company", "integrations")
 
-/** The company's ATSs, a row each laid out like the companies list; each opens its own page
- * with its linked jobs. Everyone in the company sees them; owners and admins change them. */
+/** The company's integrations: its ATSs and Slack, a row each laid out like the companies list,
+ * in two groups, messaging first; each opens its own page. Everyone in the company sees them; owners and admins change them. */
 export default async function IntegrationsPage({
   params,
 }: {
@@ -26,11 +28,16 @@ export default async function IntegrationsPage({
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
     : null
-  const integrations = company
-    ? await serverFetch<AtsIntegrations>(
-        `/ats/connections?company_id=${companyId}`
-      )
-    : null
+  const [integrations, slack] = company
+    ? await Promise.all([
+        serverFetch<AtsIntegrations>(
+          `/ats/connections?company_id=${companyId}`
+        ),
+        serverFetch<SlackOverview>(
+          `/notifications/slack?company_id=${companyId}`
+        ),
+      ])
+    : [null, null]
 
   if (!signedIn) {
     return (
@@ -57,27 +64,47 @@ export default async function IntegrationsPage({
         current="integrations"
         canEdit={company.can_edit}
       />
-      {integrations?.available ? (
-        <ul className="divide-y overflow-hidden rounded-2xl border">
-          {ATS_PROVIDERS.map((provider) => (
-            <AtsConnectionRow
-              key={provider.id}
+      {slack && (
+        <section className="space-y-6">
+          <h2 className="font-heading text-2xl font-medium">
+            {t("messagingGroup")}
+          </h2>
+          <ul className="divide-y overflow-hidden rounded-2xl border">
+            <SlackRow
               companyId={companyId}
-              provider={provider}
-              connection={
-                integrations.connections.find(
-                  (item) => item.provider === provider.id
-                ) ?? null
-              }
+              slack={slack}
               canEdit={company.can_edit}
             />
-          ))}
-        </ul>
-      ) : (
-        <p className="rounded-2xl border p-6 text-muted-foreground">
-          {t("unavailable")}
-        </p>
+          </ul>
+        </section>
       )}
+      <section className="space-y-6">
+        {/* An acronym: its capitals stay, though titles are lowercase. */}
+        <h2 className="font-heading text-2xl font-medium normal-case">
+          {t("atsGroup")}
+        </h2>
+        {integrations?.available ? (
+          <ul className="divide-y overflow-hidden rounded-2xl border">
+            {ATS_PROVIDERS.map((provider) => (
+              <AtsConnectionRow
+                key={provider.id}
+                companyId={companyId}
+                provider={provider}
+                connection={
+                  integrations.connections.find(
+                    (item) => item.provider === provider.id
+                  ) ?? null
+                }
+                canEdit={company.can_edit}
+              />
+            ))}
+          </ul>
+        ) : (
+          <p className="rounded-2xl border p-6 text-muted-foreground">
+            {t("unavailable")}
+          </p>
+        )}
+      </section>
     </main>
   )
 }

@@ -373,7 +373,7 @@
     "interviews": "면접",
     "templates": "템플릿",
     "team": "팀",
-    "integrations": "ATS",
+    "integrations": "연동",
     "referrals": "추천",
     "new": "새 회사",
     "name": "회사 이름",
@@ -740,8 +740,8 @@
       }
     },
     "ats": {
-      "title": "사용 중인 ATS와 연동",
-      "text": "ATS에서 전형 단계로 옮긴 지원자는 면접을 받고, 결과는 지원자 프로필로 돌아옵니다.",
+      "title": "사용 중인 ATS 및 Slack과 연동",
+      "text": "ATS에서 전형 단계로 옮긴 지원자는 면접을 받습니다. 결과는 사용 중인 ATS와 Slack으로 돌아옵니다.",
       "points": {
         "move": "지원자를 전형 단계로 옮기면 초대 자동 발송",
         "back": "점수, 주의 표시, 평가표 링크가 ATS로 전달"
@@ -1053,6 +1053,33 @@
     "webhookPasteSecret": "저장한 뒤, {ats}에 표시되는 시크릿을 여기에 붙여 넣으세요:",
     "bzStepOpen": "Breezy HR에서 왼쪽 아래 모서리의 이름을 클릭한 다음 다음을 여세요:",
     "bzStepCreate": "모든 채용 공고를 볼 수 있는 관리자 계정으로 API 키를 만드세요. 키는 본인 명의로 동작하고, 결과도 본인 명의로 기록됩니다. Breezy의 API와 웹훅은 Pro 요금제에서 제공됩니다.",
-    "bzStepPaste": "아래에 키를 붙여 넣으세요. Breezy HR의 웹훅은 저희가 직접 추가합니다."
+    "bzStepPaste": "아래에 키를 붙여 넣으세요. Breezy HR의 웹훅은 저희가 직접 추가합니다.",
+    "atsGroup": "ATS",
+    "messagingGroup": "메신저"
+  },
+  "slack": {
+    "add": "Slack에 추가",
+    "connectFailed": "Slack 연동에 실패했습니다.",
+    "connected": "Slack이 연동되었습니다.",
+    "disconnectFailed": "Slack 연동을 해제하지 못했습니다.",
+    "disconnectTitle": "Slack 연동을 해제할까요?",
+    "disconnectText": "회사 알림이 더 이상 채널로 전송되지 않으며, prepza 앱이 Slack에서 삭제됩니다.",
+    "notConnected": "아직 Slack 연동 전입니다. 추가하면 선택한 채널에서 회사 알림을 받을 수 있습니다.",
+    "kindsTitle": "Slack 알림",
+    "kindsText": "알림이 발생하는 즉시 채널로 전송됩니다. 모든 구성원은 계속 종 모양 아이콘에서도 볼 수 있습니다.",
+    "saveFailed": "저장하지 못했습니다.",
+    "kinds": {
+      "candidate_finished": "지원자가 면접을 완료함",
+      "ats_not_invited": "ATS에서 온 지원자가 초대되지 않음",
+      "invite_undelivered": "초대 이메일이 전달되지 않음",
+      "interview_ready": "면접 준비 완료",
+      "auto_top_up_charged": "자동 충전 결제 완료",
+      "auto_top_up_failed": "자동 충전 실패"
+    },
+    "instructionsTitle": "Slack으로 알림을 받는 방법",
+    "stepAdd": "“Slack에 추가”를 클릭하세요. Slack이 열리고 워크스페이스에서 prepza를 허용할지 묻습니다.",
+    "stepChannel": "팀이 알림을 확인할 채널(예: #hiring)을 선택하고 허용하세요.",
+    "stepKinds": "이 화면으로 돌아와 그 채널로 보낼 알림을 선택하세요. 지원자의 면접 완료, 전달되지 않은 초대 등이 있습니다.",
+    "stepPrivacy": "prepza는 해당 채널에만 게시할 수 있습니다. Slack의 내용을 읽을 수 없으며, 연동을 해제하면 삭제됩니다."
   }
 }
