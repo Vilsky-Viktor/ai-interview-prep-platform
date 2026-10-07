@@ -12,6 +12,7 @@ from app.storage import preparations, templates
 TEMPLATE = SimpleNamespace(
     id=uuid.uuid4(),
     kind="template",
+    slug="senior-accountant",
     title="Senior accountant",
     level="hard",
     language="en",

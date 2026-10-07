@@ -24,6 +24,9 @@ class QuestionSet(Base):
     owner_type: Mapped[str] = mapped_column(String(32))
     owner_id: Mapped[str] = mapped_column(String(128), index=True)
     title: Mapped[str] = mapped_column(String(200))
+    # A template's readable URL part, set once when it's saved and never changed, so its practice
+    # page's URL stays the same after a rename; null for other sets.
+    slug: Mapped[str | None] = mapped_column(String(120), unique=True)
     source_text: Mapped[str] = mapped_column(Text)
     level: Mapped[str] = mapped_column(String(32))
     # The language its content was generated in; reuse only mixes sets of one language.

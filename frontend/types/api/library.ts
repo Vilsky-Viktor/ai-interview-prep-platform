@@ -340,7 +340,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/templates/{template_id}": {
+  "/templates/{key}": {
     parameters: {
       query?: never
       header?: never
@@ -349,9 +349,30 @@ export interface paths {
     }
     /**
      * Get Template
-     * @description A template's topics and subtopics, to review before using it; its questions stay hidden.
+     * @description A template's topics and subtopics, by its id or slug, to review before using it.
      */
-    get: operations["get_template_templates__template_id__get"]
+    get: operations["get_template_templates__key__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/templates/{key}/sample": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Sample Questions
+     * @description A few of the template's revealed questions, with answers, spread across its topics, for
+     *     its practice page. Private and retiring questions are never shown.
+     */
+    get: operations["sample_questions_templates__key__sample_get"]
     put?: never
     post?: never
     delete?: never
@@ -1242,6 +1263,23 @@ export interface components {
       options: components["schemas"]["OptionIn"][]
     }
     /**
+     * SampleQuestionOut
+     * @description A revealed question of a template, with its answer, shown on its public practice page.
+     */
+    SampleQuestionOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Topic */
+      topic: string
+      /** Text */
+      text: string
+      /** Options */
+      options: components["schemas"]["OptionIn"][]
+    }
+    /**
      * SetContent
      * @description Internal: every question of an interview, with answers.
      */
@@ -1356,6 +1394,8 @@ export interface components {
        * Format: uuid
        */
       id: string
+      /** Slug */
+      slug: string | null
       /** Title */
       title: string
       /** Level */
@@ -1382,6 +1422,8 @@ export interface components {
        * Format: uuid
        */
       id: string
+      /** Slug */
+      slug: string | null
       /** Title */
       title: string
       /** Level */
@@ -2146,12 +2188,12 @@ export interface operations {
       }
     }
   }
-  get_template_templates__template_id__get: {
+  get_template_templates__key__get: {
     parameters: {
       query?: never
       header?: never
       path: {
-        template_id: string
+        key: string
       }
       cookie?: never
     }
@@ -2164,6 +2206,37 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["TemplateOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  sample_questions_templates__key__sample_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        key: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SampleQuestionOut"][]
         }
       }
       /** @description Validation Error */

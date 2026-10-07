@@ -7,12 +7,20 @@ from prepza_common.paging import PageParams
 from prepza_common.user import Language, Level
 
 from app.constants.sets import SetKind
+from app.constants.templates import SAMPLE_QUESTIONS
+from app.models.sets import QuestionSet
 from app.schemas.preparations import TopicOut
-from app.schemas.templates import TemplateFiltersOut, TemplateOut, TemplateSummary
+from app.schemas.templates import (
+    SampleQuestionOut,
+    TemplateFiltersOut,
+    TemplateOut,
+    TemplateSummary,
+)
 from app.storage import preparations, templates
 
 # Templates: public, for the practice pages search engines index and for companies to start a
-# test from. Topics only, never the questions; only superadmins change them.
+# test from. Topics, and a sample of the revealed questions practice shows anyway; never the
+# private ones. Only superadmins change them.
 router = APIRouter(prefix="/templates", tags=["templates"])
 
 
@@ -49,15 +57,29 @@ async def list_copyable_templates(
     return [TemplateSummary.model_validate(row, from_attributes=True) for row in rows]
 
 
-@router.get("/{template_id}")
-async def get_template(template_id: UUID) -> TemplateOut:
-    """A template's topics and subtopics, to review before using it; its questions stay hidden."""
-    template = await preparations.get(template_id)
+async def find_template(key: str) -> QuestionSet:
+    """A template by its id or its slug; 404 when there's none."""
+    try:
+        template_id = UUID(key)
+    except ValueError:
+        template_id = None
+
+    if template_id is None:
+        template = await templates.get_by_slug(key)
+    else:
+        template = await preparations.get(template_id)
 
     if template is None or template.kind != SetKind.TEMPLATE:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Template not found")
 
-    topics = await preparations.get_topics(template_id)
+    return template
+
+
+@router.get("/{key}")
+async def get_template(key: str) -> TemplateOut:
+    """A template's topics and subtopics, by its id or slug, to review before using it."""
+    template = await find_template(key)
+    topics = await preparations.get_topics(template.id)
 
     return TemplateOut(
         **TemplateSummary.model_validate(template, from_attributes=True).model_dump(),
@@ -68,3 +90,16 @@ async def get_template(template_id: UUID) -> TemplateOut:
             for topic, count in topics
         ],
     )
+
+
+@router.get("/{key}/sample")
+async def sample_questions(key: str) -> list[SampleQuestionOut]:
+    """A few of the template's revealed questions, with answers, spread across its topics, for
+    its practice page. Private and retiring questions are never shown."""
+    template = await find_template(key)
+    rows = await templates.sample_questions(template.id, SAMPLE_QUESTIONS)
+
+    return [
+        SampleQuestionOut(id=question.id, topic=topic, text=question.text, options=question.options)
+        for question, topic in rows
+    ]

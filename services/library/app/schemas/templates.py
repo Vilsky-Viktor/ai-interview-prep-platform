@@ -1,6 +1,7 @@
 from datetime import datetime
 from uuid import UUID
 
+from prepza_common.sets import OptionIn
 from pydantic import BaseModel
 
 from app.schemas.preparations import TopicOut
@@ -10,6 +11,7 @@ class TemplateSummary(BaseModel):
     """A template in the admin's list."""
 
     id: UUID
+    slug: str | None
     title: str
     level: str
     language: str
@@ -38,3 +40,12 @@ class TemplateFiltersOut(BaseModel):
 
 class TemplateOut(TemplateSummary):
     topics: list[TopicOut]
+
+
+class SampleQuestionOut(BaseModel):
+    """A revealed question of a template, with its answer, shown on its public practice page."""
+
+    id: UUID
+    topic: str
+    text: str
+    options: list[OptionIn]

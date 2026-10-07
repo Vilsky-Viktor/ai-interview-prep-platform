@@ -7,6 +7,7 @@ from sqlalchemy.orm import selectinload
 from app.constants.reuse import MIN_COPY_QUESTIONS
 from app.constants.sets import PLATFORM_OWNER, REVEALED_EVERY, OwnerType, SetKind, Stage
 from app.helpers.search import escape_like
+from app.helpers.slugs import slugify, unique_slug
 from app.models.sets import Question, QuestionSet, Topic
 from app.storage import reuse
 from app.storage.db import Session
@@ -44,6 +45,7 @@ async def create_template(payload: PreparationIn) -> uuid.UUID:
                 question.stage = Stage.REVEALED
 
     async with Session() as session:
+        question_set.slug = await free_slug(session, slugify(payload.title))
         session.add(question_set)
         await session.flush()
         await reuse.save_embeddings(
@@ -54,6 +56,47 @@ async def create_template(payload: PreparationIn) -> uuid.UUID:
         await session.commit()
 
     return question_set.id
+
+
+async def free_slug(session, base: str) -> str:
+    """`base`, or it with the first free "-2", "-3"… A slug holds only letters, digits and "-",
+    so it needs no escaping in LIKE."""
+    query = select(QuestionSet.slug).where(
+        or_(QuestionSet.slug == base, QuestionSet.slug.like(f"{base}-%"))
+    )
+
+    return unique_slug(base, set(await session.scalars(query)))
+
+
+async def get_by_slug(slug: str) -> QuestionSet | None:
+    query = select(QuestionSet).where(QuestionSet.slug == slug)
+
+    async with Session() as session:
+        return await session.scalar(query)
+
+
+async def sample_questions(template_id: uuid.UUID, limit: int) -> list[tuple[Question, str]]:
+    """Up to `limit` revealed questions with their topic's title, spread across topics: each
+    topic's first, in topic order, then each one's second, and so on."""
+    rank = (
+        func.row_number().over(partition_by=Question.topic_id, order_by=Question.position)
+    ).label("rank")
+    ranked = (
+        select(Question.id, rank, Topic.position.label("topic_position"))
+        .join(Topic, Topic.id == Question.topic_id)
+        .where(Topic.set_id == template_id, Question.stage == Stage.REVEALED)
+        .subquery()
+    )
+    query = (
+        select(Question, Topic.title)
+        .join(ranked, ranked.c.id == Question.id)
+        .join(Topic, Topic.id == Question.topic_id)
+        .order_by(ranked.c.rank, ranked.c.topic_position)
+        .limit(limit)
+    )
+
+    async with Session() as session:
+        return [(question, title) for question, title in await session.execute(query)]
 
 
 async def copy_template(template_id: uuid.UUID, company_id: str) -> QuestionSet | None:
