@@ -57,9 +57,10 @@ export const LOCALIZED_PATHS = [
 // show the English text, and name only their real translations for hreflang.
 export const LOCALIZED_ARTICLE = /^\/(compare|guides)\/[a-z0-9-]+$/
 
-// A role test page has an address in its template's language besides English (/de/tests/<slug>
-// for a German template); the page itself answers "not found" in any other language.
-export const ROLE_PAGE = /^\/tests\/[a-z0-9-]+$/
+// A template's pages (its role test page and its free practice test) have an address in the
+// template's language besides English (/de/tests/<slug> for a German template); the page itself
+// answers "not found" in any other language.
+export const TEMPLATE_PAGE = /^\/(tests|practice)\/[a-z0-9-]+$/
 
 // Set by proxy.ts on a request that came in under a language prefix: that language, which the
 // page then renders in and names as its canonical address.

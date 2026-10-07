@@ -11,7 +11,9 @@ import { SubtopicList } from "@/components/questions/subtopic-list"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { TOKEN_COOKIE } from "@/constants/auth"
-import { pageMetadata } from "@/lib/site"
+import { DEFAULT_LOCALE } from "@/constants/i18n"
+import { localizedPath, templateLocales } from "@/lib/locale-path"
+import { pageMetadata, urlLocale } from "@/lib/site"
 import { serverFetch } from "@/lib/server-api"
 import type { PracticeSize, PracticeTopicProgress } from "@/types/round"
 import type { Template } from "@/types/superadmin"
@@ -33,7 +35,8 @@ export async function generateMetadata({
           level: template.level,
           count: template.topic_count,
         }),
-        `/practice/${template.slug ?? template.id}`
+        `/practice/${template.slug ?? template.id}`,
+        templateLocales(template.language)
       )
     : {}
 }
@@ -51,12 +54,17 @@ export default async function PracticeTestPage({
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const template = await serverFetch<Template>(`/library/templates/${key}`)
 
-  if (!template) {
+  const locale = await urlLocale()
+
+  // Only English and the template's own language have this page.
+  if (!template || (locale && locale !== template.language)) {
     notFound()
   }
 
   if (template.slug && key !== template.slug) {
-    permanentRedirect(`/practice/${template.slug}`)
+    permanentRedirect(
+      localizedPath(locale ?? DEFAULT_LOCALE, `/practice/${template.slug}`)
+    )
   }
 
   const id = template.id

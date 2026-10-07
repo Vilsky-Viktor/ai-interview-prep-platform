@@ -4,7 +4,11 @@ import { CATEGORY_PAGES } from "@/constants/content"
 import { DEFAULT_LOCALE, LOCALES } from "@/constants/i18n"
 import { LOCALIZED_PATHS, PUBLIC_PATHS } from "@/constants/seo"
 import { contentLanguages, contentPages } from "@/lib/content"
-import { languageAlternates, localizedPath } from "@/lib/locale-path"
+import {
+  languageAlternates,
+  localizedPath,
+  templateLocales,
+} from "@/lib/locale-path"
 import { siteUrl } from "@/lib/site"
 
 // The API's largest page, and how many pages of templates the sitemap reads at most.
@@ -108,26 +112,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       (path) => ({ url: `${site}${path}` })
     ),
     ...written,
+    // A template's pages in English and in its language, each naming the other.
     ...rows.flatMap((row) => {
-      const role = `/tests/${row.slug ?? row.id}`
-      // A role page in English and in its template's language, each naming the other.
-      const languages =
-        row.language === DEFAULT_LOCALE ? [] : [DEFAULT_LOCALE, row.language]
-      const alternates = languages.length
-        ? { languages: absolute(languageAlternates(role, languages)) }
-        : undefined
+      const languages = templateLocales(row.language)
 
-      return [
-        ...(languages.length ? languages : [DEFAULT_LOCALE]).map((locale) => ({
-          url: `${site}${localizedPath(locale, role)}`,
+      return ["/tests", "/practice"].flatMap((base) => {
+        const path = `${base}/${row.slug ?? row.id}`
+        const alternates = languages
+          ? { languages: absolute(languageAlternates(path, languages)) }
+          : undefined
+
+        return (languages || [DEFAULT_LOCALE]).map((locale) => ({
+          url: `${site}${localizedPath(locale, path)}`,
           lastModified: row.created_at,
           alternates,
-        })),
-        {
-          url: `${site}/practice/${row.slug ?? row.id}`,
-          lastModified: row.created_at,
-        },
-      ]
+        }))
+      })
     }),
   ]
 }

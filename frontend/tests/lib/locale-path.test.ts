@@ -7,6 +7,7 @@ import {
   localizeHref,
   localizedPath,
   splitLocale,
+  templateLocales,
 } from "@/lib/locale-path"
 
 describe("localizedPath", () => {
@@ -77,6 +78,13 @@ describe("localizeHref", () => {
   })
 })
 
+describe("templateLocales", () => {
+  it("names English and the template's language, nothing for an English template", () => {
+    expect(templateLocales("de")).toEqual(["en", "de"])
+    expect(templateLocales("en")).toBe(false)
+  })
+})
+
 describe("splitLocale", () => {
   it("finds the language and page of a localized address", () => {
     expect(splitLocale("/de/pricing")).toEqual({
@@ -90,19 +98,24 @@ describe("splitLocale", () => {
     })
   })
 
-  it("passes a role page's language address to the page, which keeps only its template's", () => {
+  it("passes a template page's language address to the page, which keeps only its template's", () => {
     expect(splitLocale("/de/tests/buchhalter")).toEqual({
       locale: "de",
       path: "/tests/buchhalter",
     })
+    expect(splitLocale("/de/practice/buchhalter")).toEqual({
+      locale: "de",
+      path: "/practice/buchhalter",
+    })
     expect(splitLocale("/de/tests/buchhalter/extra")).toBeNull()
+    expect(splitLocale("/de/practice/buchhalter/start")).toBeNull()
   })
 
   it("leaves English's prefix, unknown prefixes and pages without language versions alone", () => {
     expect(splitLocale("/en/pricing")).toBeNull()
     expect(splitLocale("/xx/pricing")).toBeNull()
     expect(splitLocale("/de/companies")).toBeNull()
-    expect(splitLocale("/de/practice/backend-developer")).toBeNull()
+    expect(splitLocale("/de/practice/history/abc")).toBeNull()
     expect(splitLocale("/de/guides/hiring-engineers")).toEqual({
       locale: "de",
       path: "/guides/hiring-engineers",

@@ -3,7 +3,7 @@ import {
   LOCALIZED_ARTICLE,
   LOCALIZED_PATHS,
   PRIVATE_PATHS,
-  ROLE_PAGE,
+  TEMPLATE_PAGE,
 } from "@/constants/seo"
 import { isLocale } from "@/lib/locale"
 
@@ -48,6 +48,12 @@ export function languageAlternates(
   }
 }
 
+/** The languages a template's pages are in: English, and the template's own language (its
+ * questions are in it); false for an English template, which has no other versions. */
+export function templateLocales(language: string) {
+  return language === DEFAULT_LOCALE ? false : [DEFAULT_LOCALE, language]
+}
+
 /** The language and page of an address under a language prefix ("/de/pricing" gives de and
  * /pricing); none for other addresses, English's prefix included, or a page that has no
  * language versions. */
@@ -59,7 +65,7 @@ export function splitLocale(pathname: string) {
     return null
   }
 
-  return isLocalizedPath(path) || ROLE_PAGE.test(path)
+  return isLocalizedPath(path) || TEMPLATE_PAGE.test(path)
     ? { locale: first, path }
     : null
 }

@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { ROLE_PAGE_FAQ } from "@/constants/role-tests"
 import { serverFetch } from "@/lib/server-api"
-import { localizedPath } from "@/lib/locale-path"
+import { localizedPath, templateLocales } from "@/lib/locale-path"
 import { pageMetadata, siteUrl, urlLocale } from "@/lib/site"
 import { breadcrumbData } from "@/lib/structured-data"
 import type { FaqItem } from "@/types/help"
@@ -34,10 +34,7 @@ export async function generateMetadata({ params }: Params) {
           count: template.topic_count,
         }),
         `/tests/${template.slug ?? template.id}`,
-        // English and the template's own language: its questions are in that language.
-        template.language === DEFAULT_LOCALE
-          ? false
-          : [DEFAULT_LOCALE, template.language]
+        templateLocales(template.language)
       )
     : {}
 }

@@ -119,18 +119,21 @@ test("a role test page is for hiring, with the way to practise second", async ({
   expect(data.join()).not.toContain('"@type":"FAQPage"');
 });
 
-// A role page exists in English and in its template's language only: an English template's
-// page has no other language versions, and its address under another language isn't found.
-test("a role page is only in English and its template's language", async ({
+// A template's pages (role test and free practice) exist in English and in the template's
+// language only: an English template's pages have no other language versions, and their
+// addresses under another language aren't found.
+test("a template's pages are only in English and its template's language", async ({
   page,
 }) => {
   const template = await firstTemplate(page);
   test.skip(template.language !== "en", "the check needs an English template");
 
-  await page.goto(`/tests/${template.slug}`);
-  await expect(page.locator('head link[rel="alternate"][hreflang]')).toHaveCount(0);
-  const other = await page.request.get(`${REQUEST_URL}/de/tests/${template.slug}`);
-  expect(other.status()).toBe(404);
+  for (const base of ["/tests", "/practice"]) {
+    await page.goto(`${base}/${template.slug}`);
+    await expect(page.locator('head link[rel="alternate"][hreflang]')).toHaveCount(0);
+    const other = await page.request.get(`${REQUEST_URL}/de${base}/${template.slug}`);
+    expect(other.status()).toBe(404);
+  }
 });
 
 test("old addresses move to their readable ones for good", async ({ page }) => {
