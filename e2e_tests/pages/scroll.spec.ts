@@ -16,3 +16,15 @@ test("how it works scrolls smoothly", async ({ page }, info) => {
   expect(midway).toBeGreaterThan(0)
   expect(midway).toBeLessThan(end)
 })
+
+// On a long page, "back to top" shows once it's scrolled down, and goes back to the top.
+test("back to top shows on a long page and returns to its top", async ({ page }) => {
+  await page.goto("/")
+  await expect(page.getByRole("button", { name: "Back to top" })).toHaveCount(0)
+  await page.mouse.wheel(0, 2500)
+  const button = page.getByRole("button", { name: "Back to top" })
+  await expect(button).toBeVisible()
+  await button.click()
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0)
+  await expect(button).toHaveCount(0)
+})

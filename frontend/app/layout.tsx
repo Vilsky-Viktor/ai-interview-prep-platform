@@ -7,6 +7,7 @@ import "./globals.css"
 import { AuthProvider } from "@/components/auth-provider"
 import { UrlLocaleProvider } from "@/components/localized-link"
 import { MaintenanceNotice } from "@/components/maintenance-notice"
+import { ScrollTopButton } from "@/components/scroll-top-button"
 import { SignInProvider } from "@/components/sign-in-dialog"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
@@ -79,6 +80,7 @@ export default async function RootLayout({
                       {children}
                     </div>
                     <SiteFooter />
+                    <ScrollTopButton />
                     <Toaster />
                   </SignInProvider>
                 </TooltipProvider>
