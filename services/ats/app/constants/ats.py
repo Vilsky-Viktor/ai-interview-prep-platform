@@ -8,6 +8,7 @@ class AtsProvider(StrEnum):
     GREENHOUSE = "greenhouse"
     TEAMTAILOR = "teamtailor"
     RECRUITEE = "recruitee"
+    BREEZY = "breezy"
 
 
 # Each ATS's name as companies know it.
@@ -16,6 +17,7 @@ ATS_NAMES = {
     AtsProvider.GREENHOUSE: "Greenhouse",
     AtsProvider.TEAMTAILOR: "Teamtailor",
     AtsProvider.RECRUITEE: "Recruitee",
+    AtsProvider.BREEZY: "Breezy HR",
 }
 # The ATSs whose comments need an author: results go back as the member found at connecting.
 NEEDS_AUTHOR = {AtsProvider.WORKABLE, AtsProvider.TEAMTAILOR}
@@ -107,6 +109,12 @@ RECRUITEE_OPEN_JOBS = ("published", "internal")
 RECRUITEE_WEBHOOK = "{site}/api/ats/webhooks/recruitee/{connection_id}"
 RECRUITEE_MOVED = "candidate_moved"
 RECRUITEE_STAGE_CHANGED = "stage_changed"
+# Breezy HR's API; a personal API key acts as the person who made it.
+BREEZY_API = "https://api.breezy.hr/v3"
+# Where Breezy sends a company's events, one address per connection; prepza creates that web hook
+# itself when connecting, and Breezy gives its signing secret then, once.
+BREEZY_WEBHOOK = "{site}/api/ats/webhooks/breezy/{connection_id}"
+BREEZY_STATUS_UPDATED = "candidateStatusUpdated"
 # Each ATS's web hook address, for the ATSs whose web hook the company sets up itself.
 WEBHOOKS = {
     AtsProvider.GREENHOUSE: GREENHOUSE_WEBHOOK,

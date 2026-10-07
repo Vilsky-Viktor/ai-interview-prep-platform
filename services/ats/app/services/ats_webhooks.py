@@ -4,6 +4,7 @@ from uuid import UUID
 from fastapi import HTTPException, status
 
 from app.constants.ats import (
+    BREEZY_STATUS_UPDATED,
     GREENHOUSE_STAGE_CHANGE,
     RECRUITEE_MOVED,
     RECRUITEE_STAGE_CHANGED,
@@ -12,6 +13,7 @@ from app.constants.ats import (
     AtsProvider,
 )
 from app.helpers.ats import (
+    breezy_signed,
     greenhouse_signed,
     recruitee_signed,
     teamtailor_signed,
@@ -162,3 +164,34 @@ async def receive_recruitee(connection_id: UUID, body: bytes, signature: str) ->
 
     if link and link.stage_id == str(stage.get("id")):
         await flow.arrived(link, connection, str(candidate["id"]), emails[0])
+
+
+async def receive_breezy(connection_id: UUID, body: bytes, signature: str) -> None:
+    """Breezy HR's web hook, created when connecting: a candidate moved into a linked position's
+    stage gets the interview. Only events signed with the secret Breezy gave then count."""
+    connection = await ats.connection_by_id(connection_id)
+
+    if connection is None or connection.provider != AtsProvider.BREEZY:
+        return
+
+    key = await flow.key_of(connection)
+
+    if key is None or not key.get("webhook_secret"):
+        return
+
+    if not breezy_signed(key["webhook_secret"], body, signature):
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Not signed by Breezy HR")
+
+    event = json.loads(body)
+    found = event.get("object") or {}
+    position = found.get("position") or {}
+    candidate = found.get("candidate") or {}
+
+    if event.get("type") != BREEZY_STATUS_UPDATED or not candidate.get("email_address"):
+        return
+
+    link = await ats.link_for_job(connection.id, str(position.get("_id")))
+
+    if link and link.stage_id == str((found.get("stage") or {}).get("id")):
+        reference = f"{position['_id']}:{candidate.get('_id')}"
+        await flow.arrived(link, connection, reference, candidate["email_address"])

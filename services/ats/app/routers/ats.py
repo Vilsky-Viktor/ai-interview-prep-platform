@@ -46,13 +46,14 @@ async def list_connections(company_id: UUID, user: CurrentUser) -> IntegrationsO
 
 @router.delete("/{provider}", status_code=status.HTTP_204_NO_CONTENT)
 async def disconnect(company_id: UUID, provider: AtsProvider, user: CurrentUser) -> None:
-    """Disconnects: Workable's notifications are cancelled, then the key is deleted, and its
-    linked jobs with it."""
+    """Disconnects: Workable's notifications and Breezy HR's web hook are cancelled, then the key
+    is deleted, and its linked jobs with it."""
     await require_editor(user, company_id)
     connection = await ats.connection(company_id, provider)
 
     if connection is not None:
         await integrations.unsubscribe(connection, await ats.subscriptions(company_id))
+        await integrations.remove_webhook(connection)
 
     await ats.disconnect(company_id, provider)
 

@@ -33,6 +33,11 @@ class GreenhouseIn(BaseModel):
     client_secret: str = Field(min_length=1, max_length=500)
 
 
+class BreezyIn(BaseModel):
+    # A personal API key from Breezy HR (My Settings > API Keys).
+    token: str = Field(min_length=1, max_length=500)
+
+
 class RecruiteeIn(BaseModel):
     # The company's Recruitee address (acme, acme.recruitee.com) and a personal API token.
     account: str = Field(min_length=1, max_length=200)

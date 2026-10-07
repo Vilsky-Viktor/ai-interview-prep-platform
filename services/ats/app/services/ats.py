@@ -5,9 +5,9 @@ from cryptography.fernet import Fernet
 from fastapi import HTTPException, status
 
 from app.config.settings import settings
-from app.constants.ats import ATS_NAMES, WORKABLE_WEBHOOK
+from app.constants.ats import ATS_NAMES, WORKABLE_WEBHOOK, AtsProvider
 from app.helpers.encryption import decrypt, encrypt
-from app.integrations import workable
+from app.integrations import breezy, workable
 from app.integrations.ats_clients import client
 from app.integrations.errors import KeyRejected
 from app.models.ats import AtsConnection
@@ -107,6 +107,23 @@ async def subscribe(connection: AtsConnection, link_id, job_id: str, stage_id: s
         return await workable.subscribe(subdomain, token, target, job_id, stage_id)
     except KeyRejected:
         await broken(connection)
+
+
+async def remove_webhook(connection: AtsConnection) -> None:
+    """Deletes the web hook prepza created in Breezy HR for the connection, as far as Breezy
+    answers: the connection goes either way, and events for it are ignored after."""
+    if connection.provider != AtsProvider.BREEZY:
+        return
+
+    try:
+        found = await credentials(connection)
+
+        if found.get("webhook_id"):
+            await breezy.unsubscribe(found["company"], found["token"], found["webhook_id"])
+    except (HTTPException, KeyRejected):
+        logging.getLogger(__name__).warning(
+            "Couldn't delete the Breezy web hook of connection %s", connection.id
+        )
 
 
 async def unsubscribe(connection: AtsConnection, subscription_ids: list[str]) -> None:

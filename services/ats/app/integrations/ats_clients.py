@@ -1,7 +1,7 @@
 from typing import Protocol
 
 from app.constants.ats import AtsProvider
-from app.integrations import greenhouse, recruitee, teamtailor, workable
+from app.integrations import breezy, greenhouse, recruitee, teamtailor, workable
 
 
 class AtsClient(Protocol):
@@ -31,6 +31,7 @@ CLIENTS: dict[AtsProvider, AtsClient] = {
     AtsProvider.GREENHOUSE: greenhouse,
     AtsProvider.TEAMTAILOR: teamtailor,
     AtsProvider.RECRUITEE: recruitee,
+    AtsProvider.BREEZY: breezy,
 }
 
 

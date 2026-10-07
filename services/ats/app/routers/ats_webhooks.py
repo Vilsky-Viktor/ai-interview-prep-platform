@@ -42,3 +42,12 @@ async def recruitee_event(connection_id: UUID, request: Request) -> None:
     await ats_webhooks.receive_recruitee(
         connection_id, await request.body(), request.headers.get("x-recruitee-signature", "")
     )
+
+
+@router.post("/breezy/{connection_id}", status_code=status.HTTP_200_OK)
+async def breezy_event(connection_id: UUID, request: Request) -> None:
+    """The web hook prepza created in Breezy HR (candidates' stage changes), signed with its
+    secret (the X-Hook-Signature header, checked on the body)."""
+    await ats_webhooks.receive_breezy(
+        connection_id, await request.body(), request.headers.get("x-hook-signature", "")
+    )

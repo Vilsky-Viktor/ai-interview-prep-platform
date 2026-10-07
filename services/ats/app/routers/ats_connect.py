@@ -5,11 +5,18 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 
 from app.config.settings import settings
-from app.constants.ats import PASTED_KEYS, RECRUITEE_DOMAIN, WEBHOOKS, AtsProvider
+from app.constants.ats import (
+    BREEZY_WEBHOOK,
+    PASTED_KEYS,
+    RECRUITEE_DOMAIN,
+    WEBHOOKS,
+    AtsProvider,
+)
 from app.helpers.ats import subdomain
-from app.integrations import greenhouse, recruitee, teamtailor, workable
+from app.integrations import breezy, greenhouse, recruitee, teamtailor, workable
 from app.integrations.errors import KeyRejected
 from app.schemas.ats import (
+    BreezyIn,
     GreenhouseIn,
     RecruiteeIn,
     TeamtailorIn,
@@ -151,6 +158,56 @@ async def connect_recruitee(company_id: UUID, body: RecruiteeIn, user: CurrentUs
 
     sealed = integrations.seal(credentials)
     await ats.connect(company_id, AtsProvider.RECRUITEE, account, sealed, user.uid)
+
+
+@router.put("/breezy", status_code=status.HTTP_204_NO_CONTENT)
+async def connect_breezy(company_id: UUID, body: BreezyIn, user: CurrentUser) -> None:
+    """Connects Breezy HR with a personal API key (it acts as the person who made it), checked
+    with one read first, then creates the web hook that sends its stage changes, whose secret
+    Breezy gives only now. A reconnect replaces the earlier web hook."""
+    await require_editor(user, company_id)
+    integrations.require_available()
+    token = body.token.strip()
+
+    try:
+        found = await breezy.company(token)
+
+        if found is not None:
+            await breezy.check(found["id"], token)
+    except KeyRejected:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, "Breezy HR didn't accept this key"
+        ) from None
+
+    if found is None:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, "This key's person has no Breezy HR company"
+        )
+
+    earlier = await ats.connection(company_id, AtsProvider.BREEZY)
+
+    if earlier is not None:
+        await integrations.remove_webhook(earlier)
+
+    credentials = {"company": found["id"], "token": token}
+    sealed = integrations.seal(credentials)
+    await ats.connect(company_id, AtsProvider.BREEZY, found["name"], sealed, user.uid)
+    connection = await ats.connection(company_id, AtsProvider.BREEZY)
+    url = BREEZY_WEBHOOK.format(site=settings.site_url, connection_id=connection.id)
+
+    try:
+        hook, secret = await breezy.subscribe(found["id"], token, url)
+    except (KeyRejected, HTTPException):
+        # Without its web hook no candidate would come: the connection doesn't stay.
+        await ats.disconnect(company_id, AtsProvider.BREEZY)
+
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan",
+        ) from None
+
+    sealed = integrations.seal({**credentials, "webhook_id": hook, "webhook_secret": secret})
+    await ats.set_credentials(connection.id, sealed)
 
 
 @router.get("/{provider}/webhook")
