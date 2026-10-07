@@ -392,7 +392,9 @@
     "uploadLogo": "Laadi logo üles",
     "changeLogo": "Muuda logo",
     "removeLogo": "Eemalda logo",
-    "logoFailed": "Logo ei õnnestunud salvestada."
+    "logoFailed": "Logo ei õnnestunud salvestada.",
+    "pickTitle": "Vali ettevõte",
+    "pickText": "Test kopeeritakse tasuta sinu valitud ettevõttesse ja on kohe valmis kandidaatidele saatmiseks."
   },
   "candidates": {
     "scorecard": "Tulemused",

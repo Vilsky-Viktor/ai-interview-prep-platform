@@ -392,7 +392,9 @@
     "uploadLogo": "Logo hochladen",
     "changeLogo": "Logo ändern",
     "removeLogo": "Logo entfernen",
-    "logoFailed": "Das Logo konnte nicht gespeichert werden."
+    "logoFailed": "Das Logo konnte nicht gespeichert werden.",
+    "pickTitle": "Wähle ein Unternehmen",
+    "pickText": "Der Test wird kostenlos in das gewählte Unternehmen kopiert und ist sofort bereit für Kandidaten."
   },
   "candidates": {
     "scorecard": "Auswertung",

@@ -392,7 +392,9 @@
     "uploadLogo": "Enviar logotipo",
     "changeLogo": "Trocar logotipo",
     "removeLogo": "Remover logotipo",
-    "logoFailed": "Não foi possível salvar o logotipo."
+    "logoFailed": "Não foi possível salvar o logotipo.",
+    "pickTitle": "Escolha uma empresa",
+    "pickText": "O teste é copiado para a empresa que você escolher, grátis e pronto para enviar aos candidatos."
   },
   "candidates": {
     "scorecard": "Resultados",

@@ -392,7 +392,9 @@
     "uploadLogo": "Logo yükle",
     "changeLogo": "Logoyu değiştir",
     "removeLogo": "Logoyu kaldır",
-    "logoFailed": "Logo kaydedilemedi."
+    "logoFailed": "Logo kaydedilemedi.",
+    "pickTitle": "Bir şirket seçin",
+    "pickText": "Test, seçtiğiniz şirkete ücretsiz kopyalanır ve adaylara gönderilmeye hazır olur."
   },
   "candidates": {
     "scorecard": "Sonuçlar",

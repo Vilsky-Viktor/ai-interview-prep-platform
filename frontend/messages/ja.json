@@ -392,7 +392,9 @@
     "uploadLogo": "ロゴをアップロード",
     "changeLogo": "ロゴを変更",
     "removeLogo": "ロゴを削除",
-    "logoFailed": "ロゴを保存できませんでした。"
+    "logoFailed": "ロゴを保存できませんでした。",
+    "pickTitle": "会社を選択",
+    "pickText": "テストは選んだ会社に無料でコピーされ、すぐに候補者へ送れます。"
   },
   "candidates": {
     "scorecard": "結果",

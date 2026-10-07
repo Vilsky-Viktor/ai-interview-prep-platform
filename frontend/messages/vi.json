@@ -392,7 +392,9 @@
     "uploadLogo": "Tải logo lên",
     "changeLogo": "Đổi logo",
     "removeLogo": "Xóa logo",
-    "logoFailed": "Không thể lưu logo."
+    "logoFailed": "Không thể lưu logo.",
+    "pickTitle": "Chọn công ty",
+    "pickText": "Bài kiểm tra được sao chép miễn phí vào công ty bạn chọn, sẵn sàng gửi cho ứng viên."
   },
   "candidates": {
     "scorecard": "Kết quả",

@@ -21,8 +21,16 @@ import type { Company } from "@/types/company"
 
 const PATH = "/companies/companies"
 
-/** The companies the user belongs to, a page at a time; `initial` is the server's first page. */
-export function CompanyList({ initial }: { initial: Company[] }) {
+/** The companies the user belongs to, a page at a time; `initial` is the server's first page.
+ * With `templateId`, each row opens that template in the company instead (choosing where to use
+ * a free test), without Remove. */
+export function CompanyList({
+  initial,
+  templateId,
+}: {
+  initial: Company[]
+  templateId?: string
+}) {
   const t = useTranslations("company")
   const roles = useTranslations("roles")
   const { items, loadMore } = usePagedList(PATH, byId, initial)
@@ -46,7 +54,11 @@ export function CompanyList({ initial }: { initial: Company[] }) {
         // One hover surface: the link stretches over the whole row, Remove sits on top of it.
         <div className="relative flex items-center gap-2 pe-3 transition-colors hover:bg-muted/50">
           <Link
-            href={`/companies/${company.id}/interviews`}
+            href={
+              templateId
+                ? `/companies/${company.id}/templates/${templateId}`
+                : `/companies/${company.id}/interviews`
+            }
             className="flex min-w-0 flex-1 items-center justify-between gap-4 py-6 after:absolute after:inset-0"
           >
             <span className="flex min-w-0 items-center gap-2">
@@ -123,7 +135,7 @@ export function CompanyList({ initial }: { initial: Company[] }) {
               )}
             </span>
           </Link>
-          {company.role === "owner" && (
+          {company.role === "owner" && !templateId && (
             <div className="relative z-10 shrink-0">
               <RemoveCompany companyId={company.id} name={company.name} />
             </div>

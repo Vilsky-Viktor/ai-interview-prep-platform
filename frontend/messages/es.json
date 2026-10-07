@@ -392,7 +392,9 @@
     "uploadLogo": "Subir logo",
     "changeLogo": "Cambiar logo",
     "removeLogo": "Quitar logo",
-    "logoFailed": "No se pudo guardar el logo."
+    "logoFailed": "No se pudo guardar el logo.",
+    "pickTitle": "Elige una empresa",
+    "pickText": "La prueba se copia en la empresa que elijas, gratis y lista para enviar a candidatos."
   },
   "candidates": {
     "scorecard": "Resultados",

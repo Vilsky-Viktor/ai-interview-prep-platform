@@ -392,7 +392,9 @@
     "uploadLogo": "Logo uploaden",
     "changeLogo": "Logo wijzigen",
     "removeLogo": "Logo verwijderen",
-    "logoFailed": "Het logo kon niet worden opgeslagen."
+    "logoFailed": "Het logo kon niet worden opgeslagen.",
+    "pickTitle": "Kies een bedrijf",
+    "pickText": "De test wordt gratis gekopieerd naar het bedrijf dat je kiest, klaar om naar kandidaten te sturen."
   },
   "candidates": {
     "scorecard": "Resultaten",

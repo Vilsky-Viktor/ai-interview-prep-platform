@@ -21,7 +21,7 @@ import { MAX_COMPANY_NAME_LENGTH } from "@/constants/limits"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { Company } from "@/types/company"
 
-export function CreateCompany() {
+export function CreateCompany({ templateId }: { templateId?: string }) {
   const t = useTranslations("company")
   const common = useTranslations("common")
   const router = useRouter()
@@ -58,7 +58,12 @@ export function CreateCompany() {
         method: "POST",
         body: JSON.stringify({ name: name.trim() }),
       })
-      router.replace(`/companies/${company.id}/interviews`)
+      // Choosing where to use a free test: the new company opens on that test.
+      router.replace(
+        templateId
+          ? `/companies/${company.id}/templates/${templateId}`
+          : `/companies/${company.id}/interviews`
+      )
     } catch (error) {
       if (error instanceof ApiError && error.status === 409) {
         setNameError(error.message)

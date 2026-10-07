@@ -392,7 +392,9 @@
     "uploadLogo": "Carica logo",
     "changeLogo": "Cambia logo",
     "removeLogo": "Rimuovi logo",
-    "logoFailed": "Impossibile salvare il logo."
+    "logoFailed": "Impossibile salvare il logo.",
+    "pickTitle": "Scegli un'azienda",
+    "pickText": "Il test viene copiato nell'azienda che scegli, gratis e pronto da inviare ai candidati."
   },
   "candidates": {
     "scorecard": "Risultati",

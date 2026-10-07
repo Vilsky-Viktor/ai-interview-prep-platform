@@ -392,7 +392,9 @@
     "uploadLogo": "Upload logo",
     "changeLogo": "Change logo",
     "removeLogo": "Remove logo",
-    "logoFailed": "Couldn't save the logo."
+    "logoFailed": "Couldn't save the logo.",
+    "pickTitle": "Choose a company",
+    "pickText": "The test is copied into the company you choose, free and ready to send to candidates."
   },
   "candidates": {
     "scorecard": "Scorecard",

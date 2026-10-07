@@ -392,7 +392,9 @@
     "uploadLogo": "Unggah logo",
     "changeLogo": "Ganti logo",
     "removeLogo": "Hapus logo",
-    "logoFailed": "Logo tidak bisa disimpan."
+    "logoFailed": "Logo tidak bisa disimpan.",
+    "pickTitle": "Pilih perusahaan",
+    "pickText": "Tes disalin ke perusahaan yang kamu pilih, gratis dan siap dikirim ke kandidat."
   },
   "candidates": {
     "scorecard": "Hasil",

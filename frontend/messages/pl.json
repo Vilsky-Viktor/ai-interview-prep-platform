@@ -392,7 +392,9 @@
     "uploadLogo": "Prześlij logo",
     "changeLogo": "Zmień logo",
     "removeLogo": "Usuń logo",
-    "logoFailed": "Nie udało się zapisać logo."
+    "logoFailed": "Nie udało się zapisać logo.",
+    "pickTitle": "Wybierz firmę",
+    "pickText": "Test zostanie skopiowany do wybranej firmy za darmo i od razu będzie gotowy do wysłania kandydatom."
   },
   "candidates": {
     "scorecard": "Wyniki",

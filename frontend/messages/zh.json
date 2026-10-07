@@ -392,7 +392,9 @@
     "uploadLogo": "上传标志",
     "changeLogo": "更换标志",
     "removeLogo": "移除标志",
-    "logoFailed": "无法保存标志。"
+    "logoFailed": "无法保存标志。",
+    "pickTitle": "选择公司",
+    "pickText": "测试会免费复制到你选择的公司，可立即发送给候选人。"
   },
   "candidates": {
     "scorecard": "结果",

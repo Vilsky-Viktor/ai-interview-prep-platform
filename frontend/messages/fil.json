@@ -392,7 +392,9 @@
     "uploadLogo": "Mag-upload ng logo",
     "changeLogo": "Palitan ang logo",
     "removeLogo": "Alisin ang logo",
-    "logoFailed": "Hindi ma-save ang logo."
+    "logoFailed": "Hindi ma-save ang logo.",
+    "pickTitle": "Pumili ng kumpanya",
+    "pickText": "Kokopyahin nang libre ang test sa kumpanyang pipiliin mo, handa nang ipadala sa mga kandidato."
   },
   "candidates": {
     "scorecard": "Resulta",

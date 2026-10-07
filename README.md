@@ -39,7 +39,7 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 
 **For talents**
 
-- **Free practice** (`/practice`): timed practice interviews on the templates' revealed questions, 10 a topic, then the grade and every right answer. Each template keeps the person's rounds and progress. At most 20 rounds an hour per person (`PRACTICE_ROUNDS_PER_HOUR`). Each template has a readable slug made from its title when it's saved (`backend-developer`, then `backend-developer-2`…), never changed on rename, so its practice page's URL stays the same; `GET /templates/{id or slug}` finds it by either, and the public `GET /templates/{id or slug}/sample` gives up to 5 of its revealed questions with answers, spread across its topics (never private or retiring ones).
+- **Free practice** (`/practice`): timed practice interviews on the templates' revealed questions, 10 a topic, then the grade and every right answer. A practice test's page and its result both offer it for hiring ("Hiring for this role?"): the button opens `/companies/templates/<template id>`, which goes straight to the test in the user's only company, or lists their companies (or lets them create one) to choose where it's copied. Each template keeps the person's rounds and progress. At most 20 rounds an hour per person (`PRACTICE_ROUNDS_PER_HOUR`). Each template has a readable slug made from its title when it's saved (`backend-developer`, then `backend-developer-2`…), never changed on rename, so its practice page's URL stays the same; `GET /templates/{id or slug}` finds it by either, and the public `GET /templates/{id or slug}/sample` gives up to 5 of its revealed questions with answers, spread across its topics (never private or retiring ones).
 
 **Superadmin**
 

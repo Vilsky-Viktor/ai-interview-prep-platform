@@ -149,7 +149,7 @@ export default async function PracticeTestPage({
       </ul>
 
       {/* Visitors who hire for this role can create an interview for their own candidates. */}
-      <HireWithTemplate />
+      <HireWithTemplate templateId={template.id} />
     </main>
   )
 }

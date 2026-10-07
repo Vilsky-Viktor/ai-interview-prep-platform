@@ -392,7 +392,9 @@
     "uploadLogo": "העלאת לוגו",
     "changeLogo": "החלפת לוגו",
     "removeLogo": "הסרת לוגו",
-    "logoFailed": "לא ניתן לשמור את הלוגו."
+    "logoFailed": "לא ניתן לשמור את הלוגו.",
+    "pickTitle": "בחרו חברה",
+    "pickText": "המבחן מועתק לחברה שתבחרו, בחינם ומוכן לשליחה למועמדים."
   },
   "candidates": {
     "scorecard": "תוצאות",

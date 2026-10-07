@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { PageHeader } from "@/components/page-header"
+import { HireWithTemplate } from "@/components/practice/hire-with-template"
 import { PracticeActions } from "@/components/practice/practice-actions"
 import { PracticeReview } from "@/components/practice/practice-review"
 import { SignInPrompt } from "@/components/sign-in-prompt"
@@ -121,6 +122,9 @@ export default async function PracticeRoundPage({
           ))}
         </>
       )}
+
+      {/* Having just taken it, a hiring manager knows what their candidates would get. */}
+      <HireWithTemplate templateId={round.template_id} />
     </main>
   )
 }

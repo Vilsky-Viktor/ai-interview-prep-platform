@@ -4,9 +4,9 @@ import { getTranslations } from "next-intl/server"
 
 import { Button } from "@/components/ui/button"
 
-/** For a hiring manager who found a practice interview: the main page, where they create an
- * interview for their own candidates, signed in or not. */
-export async function HireWithTemplate() {
+/** For a hiring manager who found or just took a practice interview: this test for their own
+ * candidates, in a company they choose (app/companies/templates). */
+export async function HireWithTemplate({ templateId }: { templateId: string }) {
   const t = await getTranslations("practice")
 
   return (
@@ -23,7 +23,7 @@ export async function HireWithTemplate() {
       </div>
       <Button
         className="h-10 shrink-0 px-5 text-base"
-        render={<Link href="/" />}
+        render={<Link href={`/companies/templates/${templateId}`} />}
         nativeButton={false}
       >
         {t("hireButton")}
