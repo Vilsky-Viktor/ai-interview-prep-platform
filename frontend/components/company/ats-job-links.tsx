@@ -184,7 +184,7 @@ function CandidateCounts({
           type="button"
           disabled={busy}
           onClick={retry}
-          className="text-primary lowercase underline-offset-4 hover:underline disabled:opacity-50"
+          className="cursor-pointer text-primary lowercase transition-opacity hover:opacity-70 disabled:opacity-50"
         >
           {t("inviteAgain")}
         </button>
