@@ -867,7 +867,7 @@
       "interview_cancelled": "{title, select, none {Một buổi phỏng vấn} other {Buổi phỏng vấn “{title}”}} đã bị hủy: phần xem xét chủ đề phải chờ quá lâu.",
       "verification_approved": "“{name}” đã được xác minh cho {domain}.",
       "verification_declined": "{reason, select, none {Yêu cầu xác minh “{name}” đã bị từ chối.} other {Yêu cầu xác minh “{name}” đã bị từ chối: {reason}}}",
-      "ats_not_invited": "{count, plural, =1 {{email} từ Workable chưa được mời vào “{title}”: {reason, select, credits {hết credit} limit {đã chạm giới hạn email} paused {việc gửi lời mời đang tạm dừng} other {đã xảy ra lỗi}}.} other {# ứng viên từ Workable chưa được mời vào “{title}”.}}"
+      "ats_not_invited": "{count, plural, =1 {{email} từ {ats} chưa được mời vào “{title}”: {reason, select, credits {hết credit} limit {đã chạm giới hạn email} paused {việc gửi lời mời đang tạm dừng} other {đã xảy ra lỗi}}.} other {# ứng viên từ {ats} chưa được mời vào “{title}”.}}"
     }
   },
   "report": {

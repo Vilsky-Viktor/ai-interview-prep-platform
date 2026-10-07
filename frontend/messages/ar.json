@@ -867,7 +867,7 @@
       "interview_cancelled": "{title, select, none {أُلغيت مقابلة} other {أُلغيت المقابلة «{title}»}}: انتظرت مراجعة مواضيعها طويلًا.",
       "verification_approved": "تم توثيق «{name}» للنطاق {domain}.",
       "verification_declined": "{reason, select, none {تم رفض توثيق «{name}».} other {تم رفض توثيق «{name}»: {reason}}}",
-      "ats_not_invited": "{count, plural, one {لم تتم دعوة {email} من Workable إلى «{title}»: {reason, select, credits {نفد الرصيد} limit {تم بلوغ حد الرسائل} paused {الدعوات متوقفة مؤقتًا} other {حدث خطأ ما}}.} zero {لم تتم دعوة # مرشح من Workable إلى «{title}».} two {لم تتم دعوة مرشحَين من Workable إلى «{title}».} few {لم تتم دعوة # مرشحين من Workable إلى «{title}».} many {لم تتم دعوة # مرشحًا من Workable إلى «{title}».} other {لم تتم دعوة # مرشح من Workable إلى «{title}».}}"
+      "ats_not_invited": "{count, plural, one {لم تتم دعوة {email} من {ats} إلى «{title}»: {reason, select, credits {نفد الرصيد} limit {تم بلوغ حد الرسائل} paused {الدعوات متوقفة مؤقتًا} other {حدث خطأ ما}}.} zero {لم تتم دعوة # مرشح من {ats} إلى «{title}».} two {لم تتم دعوة مرشحَين من {ats} إلى «{title}».} few {لم تتم دعوة # مرشحين من {ats} إلى «{title}».} many {لم تتم دعوة # مرشحًا من {ats} إلى «{title}».} other {لم تتم دعوة # مرشح من {ats} إلى «{title}».}}"
     }
   },
   "report": {

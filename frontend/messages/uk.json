@@ -871,7 +871,7 @@
       "interview_cancelled": "{title, select, none {Співбесіду} other {Співбесіду «{title}»}} скасовано: теми надто довго чекали на перевірку.",
       "verification_approved": "Компанію «{name}» підтверджено для {domain}.",
       "verification_declined": "{reason, select, none {Підтвердження компанії «{name}» відхилено.} other {Підтвердження компанії «{name}» відхилено: {reason}}}",
-      "ats_not_invited": "{count, plural, =1 {Кандидата {email} з Workable не запрошено на «{title}»: {reason, select, credits {закінчилися кредити} limit {досягнуто ліміту листів} paused {запрошення призупинено} other {щось пішло не так}}.} one {# кандидата з Workable не запрошено на «{title}».} few {# кандидатів з Workable не запрошено на «{title}».} many {# кандидатів з Workable не запрошено на «{title}».} other {# кандидата з Workable не запрошено на «{title}».}}"
+      "ats_not_invited": "{count, plural, =1 {Кандидата {email} з {ats} не запрошено на «{title}»: {reason, select, credits {закінчилися кредити} limit {досягнуто ліміту листів} paused {запрошення призупинено} other {щось пішло не так}}.} one {# кандидата з {ats} не запрошено на «{title}».} few {# кандидатів з {ats} не запрошено на «{title}».} many {# кандидатів з {ats} не запрошено на «{title}».} other {# кандидата з {ats} не запрошено на «{title}».}}"
     }
   },
   "report": {

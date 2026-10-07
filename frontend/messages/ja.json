@@ -875,7 +875,7 @@
       "interview_cancelled": "{title, select, none {面接} other {面接「{title}」}}はキャンセルされました：トピックの確認待ちが長すぎました。",
       "verification_approved": "「{name}」は {domain} で認証されました。",
       "verification_declined": "{reason, select, none {「{name}」の認証は却下されました。} other {「{name}」の認証は却下されました：{reason}}}",
-      "ats_not_invited": "{count, plural, =1 {Workable の {email} さんを「{title}」に招待できませんでした：{reason, select, credits {クレジットが不足しています} limit {メールの送信上限に達しました} paused {招待は一時停止中です} other {問題が発生しました}}。} other {Workable の候補者 # 人を「{title}」に招待できませんでした。}}"
+      "ats_not_invited": "{count, plural, =1 {{ats} の {email} さんを「{title}」に招待できませんでした：{reason, select, credits {クレジットが不足しています} limit {メールの送信上限に達しました} paused {招待は一時停止中です} other {問題が発生しました}}。} other {{ats} の候補者 # 人を「{title}」に招待できませんでした。}}"
     }
   },
   "report": {

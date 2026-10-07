@@ -5,6 +5,7 @@ from fastapi import HTTPException, status
 
 from app.config.settings import settings
 from app.constants.ats import (
+    ATS_NAMES,
     NEEDS_AUTHOR,
     SCORECARD_LINK,
     CandidateStatus,
@@ -72,21 +73,24 @@ async def invite(row: AtsCandidate, connection: AtsConnection, interview: dict |
 
             return
 
-        await refused(row, interview, REASONS.get(error.status_code, FailReason.OTHER))
+        await refused(row, connection, interview, REASONS.get(error.status_code, FailReason.OTHER))
 
         return
     except Exception:
         logger.exception("Couldn't invite ATS candidate %s", row.id)
-        await refused(row, interview, FailReason.OTHER)
+        await refused(row, connection, interview, FailReason.OTHER)
 
         return
 
     await ats_candidates.settle(row.id, CandidateStatus.INVITED, invite_id=invite_id)
 
 
-async def refused(row: AtsCandidate, interview: dict, reason: str) -> None:
-    """Kept as not invited, to retry; owners and admins hear why."""
-    notice = ats_not_invited(interview["company_id"], interview["title"], row.email, reason)
+async def refused(
+    row: AtsCandidate, connection: AtsConnection, interview: dict, reason: str
+) -> None:
+    """Kept as not invited, to retry; owners and admins hear why, and from which ATS."""
+    name = ATS_NAMES[connection.provider]
+    notice = ats_not_invited(interview["company_id"], name, interview["title"], row.email, reason)
     await ats_candidates.settle(row.id, CandidateStatus.FAILED, reason, notice=notice)
     await outbox_service.flush_quietly()
 

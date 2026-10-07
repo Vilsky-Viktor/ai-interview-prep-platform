@@ -871,7 +871,7 @@
       "interview_cancelled": "{title, select, none {Rozmowa została anulowana} other {Rozmowa „{title}” została anulowana}}: tematy zbyt długo czekały na zatwierdzenie.",
       "verification_approved": "„{name}” jest zweryfikowana dla {domain}.",
       "verification_declined": "{reason, select, none {Weryfikacja „{name}” została odrzucona.} other {Weryfikacja „{name}” została odrzucona: {reason}}}",
-      "ats_not_invited": "{count, plural, one {Kandydat {email} z Workable nie został zaproszony do „{title}”: {reason, select, credits {brak kredytów} limit {osiągnięto limit e-maili} paused {zaproszenia są wstrzymane} other {coś poszło nie tak}}.} few {# kandydaci z Workable nie zostali zaproszeni do „{title}”.} many {# kandydatów z Workable nie zostało zaproszonych do „{title}”.} other {# kandydata z Workable nie zostało zaproszone do „{title}”.}}"
+      "ats_not_invited": "{count, plural, one {Kandydat {email} z {ats} nie został zaproszony do „{title}”: {reason, select, credits {brak kredytów} limit {osiągnięto limit e-maili} paused {zaproszenia są wstrzymane} other {coś poszło nie tak}}.} few {# kandydaci z {ats} nie zostali zaproszeni do „{title}”.} many {# kandydatów z {ats} nie zostało zaproszonych do „{title}”.} other {# kandydata z {ats} nie zostało zaproszone do „{title}”.}}"
     }
   },
   "report": {

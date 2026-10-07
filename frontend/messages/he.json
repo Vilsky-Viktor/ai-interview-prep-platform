@@ -862,7 +862,7 @@
       "interview_cancelled": "{title, select, none {ראיון בוטל} other {הראיון \"{title}\" בוטל}}: בדיקת הנושאים שלו חיכתה יותר מדי זמן.",
       "verification_approved": "\"{name}\" מאומתת עבור {domain}.",
       "verification_declined": "{reason, select, none {האימות של \"{name}\" נדחה.} other {האימות של \"{name}\" נדחה: {reason}}}",
-      "ats_not_invited": "{count, plural, one {{email} מ-Workable לא הוזמן/ה ל\"{title}\": {reason, select, credits {נגמרו הקרדיטים} limit {הושגה מגבלת אימיילים} paused {ההזמנות מושהות} other {משהו השתבש}}.} two {שני מועמדים מ-Workable לא הוזמנו ל\"{title}\".} other {# מועמדים מ-Workable לא הוזמנו ל\"{title}\".}}"
+      "ats_not_invited": "{count, plural, one {{email} מ-{ats} לא הוזמן/ה ל\"{title}\": {reason, select, credits {נגמרו הקרדיטים} limit {הושגה מגבלת אימיילים} paused {ההזמנות מושהות} other {משהו השתבש}}.} two {שני מועמדים מ-{ats} לא הוזמנו ל\"{title}\".} other {# מועמדים מ-{ats} לא הוזמנו ל\"{title}\".}}"
     }
   },
   "report": {

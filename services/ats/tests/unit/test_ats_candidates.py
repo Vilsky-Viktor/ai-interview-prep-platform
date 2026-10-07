@@ -183,7 +183,13 @@ def test_a_refused_invite_is_kept_with_its_reason_to_retry(world, refusal, reaso
     # Owners and admins hear why, with a link to the ATS tab to retry.
     [notice] = state["notices"]
     assert notice["kind"] == "ats_not_invited"
-    assert notice["data"] == {"email": "ann@example.com", "title": "Accountant", "reason": reason}
+    # It names the ATS the candidate came from.
+    assert notice["data"] == {
+        "ats": "Workable",
+        "email": "ann@example.com",
+        "title": "Accountant",
+        "reason": reason,
+    }
     assert notice["link"].endswith("/integrations")
     assert state["flushed"] == 1
 

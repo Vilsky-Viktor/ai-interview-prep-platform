@@ -875,7 +875,7 @@
       "interview_cancelled": "{title, select, none {Kinansela ang isang interview} other {Kinansela ang interview na “{title}”}}: masyadong natagal ang paghihintay sa review ng mga topic.",
       "verification_approved": "Verified na ang “{name}” para sa {domain}.",
       "verification_declined": "{reason, select, none {Tinanggihan ang verification ng “{name}”.} other {Tinanggihan ang verification ng “{name}”: {reason}}}",
-      "ats_not_invited": "{count, plural, =1 {Hindi naimbitahan sa “{title}” si {email} mula sa Workable: {reason, select, credits {ubos na ang credits} limit {naabot ang email limit} paused {naka-pause ang mga imbitasyon} other {nagkaproblema}}.} other {Hindi naimbitahan sa “{title}” ang # aplikante mula sa Workable.}}"
+      "ats_not_invited": "{count, plural, =1 {Hindi naimbitahan sa “{title}” si {email} mula sa {ats}: {reason, select, credits {ubos na ang credits} limit {naabot ang email limit} paused {naka-pause ang mga imbitasyon} other {nagkaproblema}}.} other {Hindi naimbitahan sa “{title}” ang # aplikante mula sa {ats}.}}"
     }
   },
   "report": {

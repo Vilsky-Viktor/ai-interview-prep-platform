@@ -866,7 +866,7 @@
       "interview_cancelled": "{title, select, none {การสัมภาษณ์} other {การสัมภาษณ์ “{title}”}} ถูกยกเลิก เพราะรอการตรวจหัวข้อนานเกินไป",
       "verification_approved": "“{name}” ได้รับการยืนยันสำหรับ {domain} แล้ว",
       "verification_declined": "{reason, select, none {การยืนยัน “{name}” ถูกปฏิเสธ} other {การยืนยัน “{name}” ถูกปฏิเสธ: {reason}}}",
-      "ats_not_invited": "{count, plural, =1 {ไม่ได้เชิญ {email} จาก Workable เข้า “{title}”: {reason, select, credits {เครดิตหมด} limit {ถึงขีดจำกัดการส่งอีเมลแล้ว} paused {การเชิญหยุดชั่วคราวอยู่} other {เกิดข้อผิดพลาด}}} other {ไม่ได้เชิญผู้สมัคร # คนจาก Workable เข้า “{title}”}}"
+      "ats_not_invited": "{count, plural, =1 {ไม่ได้เชิญ {email} จาก {ats} เข้า “{title}”: {reason, select, credits {เครดิตหมด} limit {ถึงขีดจำกัดการส่งอีเมลแล้ว} paused {การเชิญหยุดชั่วคราวอยู่} other {เกิดข้อผิดพลาด}}} other {ไม่ได้เชิญผู้สมัคร # คนจาก {ats} เข้า “{title}”}}"
     }
   },
   "report": {

@@ -871,7 +871,7 @@
       "interview_cancelled": "{title, select, none {Un colloquio} other {Il colloquio «{title}»}} è stato annullato: la revisione degli argomenti ha atteso troppo.",
       "verification_approved": "«{name}» è verificata per {domain}.",
       "verification_declined": "{reason, select, none {La verifica di «{name}» è stata rifiutata.} other {La verifica di «{name}» è stata rifiutata: {reason}}}",
-      "ats_not_invited": "{count, plural, one {{email} da Workable non è stato invitato a «{title}»: {reason, select, credits {crediti esauriti} limit {è stato raggiunto un limite di email} paused {gli inviti sono in pausa} other {qualcosa è andato storto}}.} other {# candidati da Workable non sono stati invitati a «{title}».}}"
+      "ats_not_invited": "{count, plural, one {{email} da {ats} non è stato invitato a «{title}»: {reason, select, credits {crediti esauriti} limit {è stato raggiunto un limite di email} paused {gli inviti sono in pausa} other {qualcosa è andato storto}}.} other {# candidati da {ats} non sono stati invitati a «{title}».}}"
     }
   },
   "report": {

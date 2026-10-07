@@ -870,7 +870,7 @@
       "interview_cancelled": "{title, select, none {Bir mülakat} other {“{title}” mülakatı}} iptal edildi: konu incelemesi çok uzun süre bekledi.",
       "verification_approved": "“{name}”, {domain} için doğrulandı.",
       "verification_declined": "{reason, select, none {“{name}” doğrulaması reddedildi.} other {“{name}” doğrulaması reddedildi: {reason}}}",
-      "ats_not_invited": "{count, plural, one {Workable'dan gelen {email}, “{title}” mülakatına davet edilmedi: {reason, select, credits {krediniz bitti} limit {bir e-posta sınırına ulaşıldı} paused {davetler duraklatıldı} other {bir şeyler ters gitti}}.} other {Workable'dan gelen # aday “{title}” mülakatına davet edilmedi.}}"
+      "ats_not_invited": "{count, plural, one {{ats} üzerinden gelen {email}, “{title}” mülakatına davet edilmedi: {reason, select, credits {krediniz bitti} limit {bir e-posta sınırına ulaşıldı} paused {davetler duraklatıldı} other {bir şeyler ters gitti}}.} other {{ats} üzerinden gelen # aday “{title}” mülakatına davet edilmedi.}}"
     }
   },
   "report": {

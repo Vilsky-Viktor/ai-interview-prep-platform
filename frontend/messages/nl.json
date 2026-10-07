@@ -867,7 +867,7 @@
       "interview_cancelled": "{title, select, none {Een interview} other {Het interview “{title}”}} is geannuleerd: de controle van de onderwerpen bleef te lang liggen.",
       "verification_approved": "“{name}” is geverifieerd voor {domain}.",
       "verification_declined": "{reason, select, none {De verificatie van “{name}” is afgewezen.} other {De verificatie van “{name}” is afgewezen: {reason}}}",
-      "ats_not_invited": "{count, plural, one {{email} uit Workable is niet uitgenodigd voor “{title}”: {reason, select, credits {credits op} limit {een e-maillimiet is bereikt} paused {uitnodigingen zijn gepauzeerd} other {er ging iets mis}}.} other {# kandidaten uit Workable zijn niet uitgenodigd voor “{title}”.}}"
+      "ats_not_invited": "{count, plural, one {{email} uit {ats} is niet uitgenodigd voor “{title}”: {reason, select, credits {credits op} limit {een e-maillimiet is bereikt} paused {uitnodigingen zijn gepauzeerd} other {er ging iets mis}}.} other {# kandidaten uit {ats} zijn niet uitgenodigd voor “{title}”.}}"
     }
   },
   "report": {

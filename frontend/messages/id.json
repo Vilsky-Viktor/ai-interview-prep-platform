@@ -871,7 +871,7 @@
       "interview_cancelled": "{title, select, none {Sebuah wawancara} other {Wawancara “{title}”}} dibatalkan: tinjauan topiknya menunggu terlalu lama.",
       "verification_approved": "“{name}” terverifikasi untuk {domain}.",
       "verification_declined": "{reason, select, none {Verifikasi “{name}” ditolak.} other {Verifikasi “{name}” ditolak: {reason}}}",
-      "ats_not_invited": "{count, plural, =1 {{email} dari Workable tidak diundang ke “{title}”: {reason, select, credits {kredit habis} limit {batas email tercapai} paused {undangan sedang dijeda} other {terjadi kesalahan}}.} other {# kandidat dari Workable tidak diundang ke “{title}”.}}"
+      "ats_not_invited": "{count, plural, =1 {{email} dari {ats} tidak diundang ke “{title}”: {reason, select, credits {kredit habis} limit {batas email tercapai} paused {undangan sedang dijeda} other {terjadi kesalahan}}.} other {# kandidat dari {ats} tidak diundang ke “{title}”.}}"
     }
   },
   "report": {

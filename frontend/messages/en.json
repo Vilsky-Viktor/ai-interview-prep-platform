@@ -871,7 +871,7 @@
       "interview_cancelled": "{title, select, none {An interview} other {The interview “{title}”}} was cancelled: its topic review waited too long.",
       "verification_approved": "“{name}” is verified for {domain}.",
       "verification_declined": "{reason, select, none {Verification of “{name}” was declined.} other {Verification of “{name}” was declined: {reason}}}",
-      "ats_not_invited": "{count, plural, one {{email} from Workable wasn't invited to “{title}”: {reason, select, credits {out of credits} limit {an email limit was reached} paused {invites are paused} other {something went wrong}}.} other {# candidates from Workable weren't invited to “{title}”.}}"
+      "ats_not_invited": "{count, plural, one {{email} from {ats} wasn't invited to “{title}”: {reason, select, credits {out of credits} limit {an email limit was reached} paused {invites are paused} other {something went wrong}}.} other {# candidates from {ats} weren't invited to “{title}”.}}"
     }
   },
   "report": {

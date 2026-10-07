@@ -871,7 +871,7 @@
       "interview_cancelled": "{title, select, none {Ein Interview} other {Das Interview „{title}“}} wurde abgebrochen: Die Themen wurden zu lange nicht freigegeben.",
       "verification_approved": "„{name}“ ist für {domain} verifiziert.",
       "verification_declined": "{reason, select, none {Die Verifizierung von „{name}“ wurde abgelehnt.} other {Die Verifizierung von „{name}“ wurde abgelehnt: {reason}}}",
-      "ats_not_invited": "{count, plural, one {{email} aus Workable wurde nicht zu „{title}“ eingeladen: {reason, select, credits {keine Credits mehr} limit {ein E-Mail-Limit wurde erreicht} paused {Einladungen sind pausiert} other {etwas ist schiefgelaufen}}.} other {# Kandidaten aus Workable wurden nicht zu „{title}“ eingeladen.}}"
+      "ats_not_invited": "{count, plural, one {{email} aus {ats} wurde nicht zu „{title}“ eingeladen: {reason, select, credits {keine Credits mehr} limit {ein E-Mail-Limit wurde erreicht} paused {Einladungen sind pausiert} other {etwas ist schiefgelaufen}}.} other {# Kandidaten aus {ats} wurden nicht zu „{title}“ eingeladen.}}"
     }
   },
   "report": {

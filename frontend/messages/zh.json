@@ -862,7 +862,7 @@
       "interview_cancelled": "{title, select, none {一场面试} other {面试“{title}”}}已取消：主题审核等待时间过长。",
       "verification_approved": "“{name}”已通过 {domain} 验证。",
       "verification_declined": "{reason, select, none {“{name}”的验证已被拒绝。} other {“{name}”的验证已被拒绝：{reason}}}",
-      "ats_not_invited": "{count, plural, =1 {来自 Workable 的 {email} 未被邀请参加“{title}”：{reason, select, credits {点数不足} limit {已达到邮件发送上限} paused {邀请已暂停} other {出了点问题}}。} other {来自 Workable 的 # 位候选人未被邀请参加“{title}”。}}"
+      "ats_not_invited": "{count, plural, =1 {来自 {ats} 的 {email} 未被邀请参加“{title}”：{reason, select, credits {点数不足} limit {已达到邮件发送上限} paused {邀请已暂停} other {出了点问题}}。} other {来自 {ats} 的 # 位候选人未被邀请参加“{title}”。}}"
     }
   },
   "report": {
