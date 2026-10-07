@@ -14,11 +14,8 @@ export const STATS_CARDS = [
 
 export const STATS_SOURCES = ["companies", "rounds", "billing"] as const
 
-// Months the stats tab's menu offers, this one included.
-export const STATS_MONTHS = 12
+// The year prepza launched: the first year the menu offers.
+export const STATS_FIRST_YEAR = 2026
 
-// All time is on in the address: `?month=2026-10&all=1`; the month stays for turning it off.
-export const ALL_TIME = "1"
-
-// A month in the address and the API: "2026-10".
-export const MONTH_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/
+// Where the browser keeps the superadmin's last choice (all time, and the year or month).
+export const STATS_STORAGE_KEY = "prepza_stats_period"

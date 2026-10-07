@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from prepza_common.paging import PageParams
-from prepza_common.stats import Month, StatsOut
+from prepza_common.stats import Period, StatsOut
 from prepza_common.superadmin import SuperadminUser
 
 from app.constants.monitoring import PassRateSort
@@ -38,8 +38,8 @@ async def list_pass_rates(
 
 
 @router.get("/stats")
-async def get_stats(superadmin: SuperadminUser, month: Month = None) -> StatsOut:
-    """Companies, interviews and candidates, all time or in one month, for the stats
-    tab."""
+async def get_stats(superadmin: SuperadminUser, period: Period = None) -> StatsOut:
+    """Companies, interviews and candidates, all time or in one year or
+    month, for the stats tab."""
 
-    return StatsOut(counts=await stats.stats(month))
+    return StatsOut(counts=await stats.stats(period))

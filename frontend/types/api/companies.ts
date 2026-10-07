@@ -1161,7 +1161,8 @@ export interface paths {
     }
     /**
      * Get Stats
-     * @description Companies, interviews and candidates, in one month, for the stats tab.
+     * @description Companies, interviews and candidates, all time or in one month, for the stats
+     *     tab.
      */
     get: operations["get_stats_superadmin_stats_get"]
     put?: never
@@ -4324,8 +4325,8 @@ export interface operations {
   }
   get_stats_superadmin_stats_get: {
     parameters: {
-      query: {
-        month: string
+      query?: {
+        month?: string | null
       }
       header?: never
       path?: never

@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from prepza_common.stats import Month, StatsOut
+from prepza_common.stats import Period, StatsOut
 from prepza_common.superadmin import SuperadminUser
 
 from app.storage import stats
@@ -9,8 +9,8 @@ router = APIRouter(prefix="/superadmin", tags=["superadmin"])
 
 
 @router.get("/stats")
-async def get_stats(superadmin: SuperadminUser, month: Month = None) -> StatsOut:
-    """Practice rounds, all time or in one month, for the stats
-    tab."""
+async def get_stats(superadmin: SuperadminUser, period: Period = None) -> StatsOut:
+    """Practice rounds, all time or in one year or
+    month, for the stats tab."""
 
-    return StatsOut(counts=await stats.stats(month))
+    return StatsOut(counts=await stats.stats(period))

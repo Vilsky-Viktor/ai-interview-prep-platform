@@ -10,8 +10,8 @@ from app.models.billing import Entry, Purchase
 from app.storage.db import Session
 
 
-async def stats(month: str | None) -> dict[str, int]:
-    """All time or in `month`: paid top-ups and what they paid in cents, tax included and refunds
+async def stats(period: str | None) -> dict[str, int]:
+    """All time or in `period` (a year or a period): paid top-ups and what they paid in cents, tax included and refunds
     not taken off, and the credits companies spent on candidates. Each product line of a transaction
     holds the whole transaction's total, so it counts once."""
     transactions = (
@@ -27,16 +27,16 @@ async def stats(month: str | None) -> dict[str, int]:
     async with Session() as session:
         return {
             "top_ups": await counted(
-                session, func.count(transactions.c.created_at), transactions.c.created_at, month
+                session, func.count(transactions.c.created_at), transactions.c.created_at, period
             ),
             "paid": await counted(
-                session, func.sum(transactions.c.paid), transactions.c.created_at, month
+                session, func.sum(transactions.c.paid), transactions.c.created_at, period
             ),
             "credits_spent": await counted(
                 session,
                 -func.sum(Entry.amount),
                 Entry.created_at,
-                month,
+                period,
                 Entry.reason == Reason.CANDIDATE,
             ),
         }
