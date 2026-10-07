@@ -34,6 +34,7 @@ def calls(monkeypatch):
 
     monkeypatch.setattr(ats_candidates, "report", record("report"))
     monkeypatch.setattr(ats_candidates, "invite_waiting", record("invite_waiting"))
+    monkeypatch.setattr(ats_candidates, "topped_up", record("topped_up"))
     monkeypatch.setattr(ats, "delete_interview", record("delete_interview"))
     monkeypatch.setattr(ats, "delete_company", record("delete_company"))
 
@@ -58,6 +59,27 @@ def test_a_deleted_interview_or_company_deletes_its_rows(client, calls):
     push(client, "company.deleted", {"company_id": str(COMPANY_ID)})
 
     assert calls == [("delete_interview", INTERVIEW_ID), ("delete_company", COMPANY_ID)]
+
+
+def test_a_company_that_got_credits_invites_its_candidates_short_of_them(client, calls):
+    data = {"owner_type": "company", "owner_id": str(COMPANY_ID)}
+
+    assert push(client, "credits.added", data).status_code == 204
+    assert calls == [("topped_up", COMPANY_ID)]
+
+
+def test_credits_another_kind_of_owner_got_are_ignored(client, calls):
+    data = {"owner_type": "user", "owner_id": "ann"}
+
+    assert push(client, "credits.added", data).status_code == 204
+    assert calls == []
+
+
+def test_credits_for_a_malformed_company_are_dropped_not_retried(client, calls):
+    data = {"owner_type": "company", "owner_id": "acme"}
+
+    assert push(client, "credits.added", data).status_code == 204
+    assert calls == []
 
 
 def test_other_events_are_ignored(client, calls):

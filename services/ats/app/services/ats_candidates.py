@@ -113,6 +113,12 @@ async def retry(company_id: UUID, link_id: UUID) -> None:
     await invite_all(await ats_candidates.not_invited(company_id, link_id))
 
 
+async def topped_up(company_id: UUID) -> None:
+    """The company got credits: its candidates not invited for lack of them are invited, as far
+    as the credits go (the rest are kept, with a new notification)."""
+    await invite_all(await ats_candidates.short_of_credits(company_id))
+
+
 async def recover() -> int:
     """Daily: invites cut off midway (the server stopped) are started again; how many."""
     rows = await ats_candidates.stale()

@@ -6,7 +6,7 @@ from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import and_, delete, func, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from app.constants.ats import STALE_CLAIM_MINUTES, CandidateStatus
+from app.constants.ats import STALE_CLAIM_MINUTES, CandidateStatus, FailReason
 from app.models.ats import AtsCandidate, AtsConnection
 from app.models.outbox import OutboxEvent
 from app.storage.db import Session
@@ -81,6 +81,19 @@ async def not_invited(company_id: UUID, link_id: UUID) -> list[AtsCandidate]:
         AtsCandidate.link_id == link_id,
         AtsCandidate.connection_id.in_(owned),
         or_(AtsCandidate.status == CandidateStatus.FAILED, _stale()),
+    )
+
+    async with Session() as session:
+        return list((await session.scalars(query)).all())
+
+
+async def short_of_credits(company_id: UUID) -> list[AtsCandidate]:
+    """The company's candidates, from any ATS, that weren't invited for lack of credits."""
+    owned = select(AtsConnection.id).where(AtsConnection.company_id == company_id)
+    query = select(AtsCandidate).where(
+        AtsCandidate.connection_id.in_(owned),
+        AtsCandidate.status == CandidateStatus.FAILED,
+        AtsCandidate.reason == FailReason.CREDITS,
     )
 
     async with Session() as session:

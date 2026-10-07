@@ -225,3 +225,28 @@ def test_waiting_candidates_are_invited_once_the_interview_is_ready(world, monke
 
     assert state["api"]["sent"] == [("ann@example.com", "ann")]
     assert state["rows"]["c-1"].status == "invited"
+
+
+def test_a_top_up_invites_the_candidates_kept_for_lack_of_credits(world, monkeypatch):
+    state, _ = world
+    state["api"]["refuse"] = status.HTTP_402_PAYMENT_REQUIRED
+    receive(event())
+    state["api"]["refuse"] = None
+    asked = []
+
+    async def short_of_credits(company_id):
+        asked.append(company_id)
+
+        return [row for row in state["rows"].values() if row.reason == "credits"]
+
+    async def connection_by_id(connection_id):
+        return AtsConnection(id=connection_id, created_by="ann")
+
+    monkeypatch.setattr(ats_candidates, "short_of_credits", short_of_credits)
+    monkeypatch.setattr(ats, "connection_by_id", connection_by_id)
+    company_id = uuid.uuid4()
+    asyncio.run(flow.topped_up(company_id))
+
+    assert asked == [company_id]
+    assert state["api"]["sent"] == [("ann@example.com", "ann")]
+    assert state["rows"]["c-1"].status == "invited"

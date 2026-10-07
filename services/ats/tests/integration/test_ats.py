@@ -1,6 +1,6 @@
 import uuid
 
-from app.constants.ats import AtsProvider, CandidateStatus
+from app.constants.ats import AtsProvider, CandidateStatus, FailReason
 from app.storage import ats, ats_candidates
 
 JOB = {"id": "A1", "name": "Accountant"}
@@ -179,3 +179,43 @@ def test_new_credentials_replace_only_that_connections(run):
 
     assert (found.credentials, found.account, found.member_id) == ("sealed-2", "Acme", "5")
     assert other.credentials == "sealed-g"
+
+
+def test_a_top_up_finds_only_the_companys_candidates_not_invited_for_lack_of_credits(run):
+    async def scenario():
+        company = uuid.uuid4()
+        other_company = uuid.uuid4()
+        interview = uuid.uuid4()
+        await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann")
+        await ats.connect(company, AtsProvider.GREENHOUSE, "…1234", "sealed", "ann")
+        await ats.connect(other_company, AtsProvider.WORKABLE, "other", "sealed", "bob")
+        workable = await ats.connection(company, AtsProvider.WORKABLE)
+        greenhouse = await ats.connection(company, AtsProvider.GREENHOUSE)
+        theirs = await ats.connection(other_company, AtsProvider.WORKABLE)
+        rows = {
+            "credits": (workable.id, CandidateStatus.FAILED, FailReason.CREDITS),
+            "credits-other-ats": (greenhouse.id, CandidateStatus.FAILED, FailReason.CREDITS),
+            "limit": (workable.id, CandidateStatus.FAILED, FailReason.LIMIT),
+            "paused": (workable.id, CandidateStatus.FAILED, FailReason.PAUSED),
+            "invited": (workable.id, CandidateStatus.INVITED, None),
+            "waiting": (workable.id, CandidateStatus.WAITING, None),
+            "other-company": (theirs.id, CandidateStatus.FAILED, FailReason.CREDITS),
+        }
+
+        for candidate_id, (connection_id, status, reason) in rows.items():
+            row = await ats_candidates.add(
+                connection_id, None, interview, candidate_id, f"{candidate_id}@x.com"
+            )
+
+            if status != CandidateStatus.WAITING:
+                await ats_candidates.settle(row.id, status, reason)
+
+        found = await ats_candidates.short_of_credits(company)
+        await ats.delete_company(company)
+        await ats.delete_company(other_company)
+
+        return found
+
+    found = run(scenario())
+
+    assert sorted(row.candidate_id for row in found) == ["credits", "credits-other-ats"]
