@@ -1,3 +1,6 @@
+import base64
+import hashlib
+import hmac
 import re
 from html.parser import HTMLParser
 
@@ -54,3 +57,32 @@ def job_text(title: str, sections: list[str], limit: int) -> str:
     parts = [title.strip(), *(html_to_text(section) for section in sections)]
 
     return "\n\n".join(part for part in parts if part)[:limit]
+
+
+def workable_signed(token: str, body: bytes, signature: str) -> bool:
+    """Whether a Workable event is Workable's: its X-Workable-Signature is the HMAC-SHA256 of
+    the raw body with the account's token (hex, or base64)."""
+    digest = hmac.new(token.encode(), body, hashlib.sha256).digest()
+    given = signature.strip()
+
+    return any(
+        hmac.compare_digest(given, expected)
+        for expected in (digest.hex(), base64.b64encode(digest).decode())
+    )
+
+
+def result_comment(title: str, grade: int | None, passed: bool, flagged: bool, link: str) -> str:
+    """The comment a finished candidate's results go back to the ATS as."""
+    lines = [f"prepza: {title}"]
+
+    if grade is None:
+        lines.append("Finished; the grade is on the scorecard.")
+    else:
+        lines.append(f"Grade: {grade}% ({'passed' if passed else 'below the passing grade'})")
+
+    if flagged:
+        lines.append("Integrity flags: yes, see the scorecard.")
+
+    lines.append(f"Scorecard: {link}")
+
+    return "\n".join(lines)

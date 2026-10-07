@@ -14,6 +14,7 @@ from app.integrations.redis import get_redis
 from app.routers import (
     accommodations,
     ats,
+    ats_webhooks,
     audit,
     auto_top_ups,
     bulk_invites,
@@ -65,6 +66,7 @@ app.include_router(audit.router)
 app.include_router(auto_top_ups.router)
 app.include_router(members.router)
 app.include_router(ats.router)
+app.include_router(ats_webhooks.router)
 app.include_router(interviews.router)
 app.include_router(candidates.router)
 app.include_router(accommodations.router)

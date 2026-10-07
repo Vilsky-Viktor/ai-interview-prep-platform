@@ -12,7 +12,13 @@ KEEP_DAYS = 90
 EXPIRED_PER_PRUNE = 100
 # Kinds that can come in bursts. One about the same thing (its page and title) within
 # GROUP_HOURS of the last adds to it, "3 candidates finished …", instead of a new one.
-GROUPED_KINDS = {"candidate_finished", "invite_undelivered", "question_flagged", "question_fixed"}
+GROUPED_KINDS = {
+    "candidate_finished",
+    "invite_undelivered",
+    "question_flagged",
+    "question_fixed",
+    "ats_not_invited",
+}
 GROUP_HOURS = 24
 # A user's open tabs hear about a recipient's new notification on this Redis channel.
 CHANNEL = "notifications:{recipient}:{recipient_id}"

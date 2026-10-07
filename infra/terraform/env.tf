@@ -43,6 +43,7 @@ locals {
     }
     companies = {
       INVOKER_AUDIENCE = local.run_url["companies"]
+      SITE_URL         = "https://${var.domain}"
     }
     billing = merge(
       {

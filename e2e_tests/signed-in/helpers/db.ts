@@ -85,7 +85,11 @@ export async function deleteTemplate(id: string) {
  * (a real one needs a Workable account), with one job linked to `interviewId`. Its key is a
  * placeholder, so anything that calls Workable with it marks it broken. Deleting the company
  * deletes both. */
-export async function addAtsConnection(companyId: string, interviewId: string) {
+export async function addAtsConnection(
+  companyId: string,
+  interviewId: string,
+  candidates: { invited?: number; notInvited?: number } = {}
+) {
   await withDatabase("companies", async (client) => {
     const connection = await client.query(
       `INSERT INTO ats_connections (id, company_id, provider, account, credentials, status,
@@ -95,12 +99,35 @@ export async function addAtsConnection(companyId: string, interviewId: string) {
        RETURNING id`,
       [companyId]
     )
-    await client.query(
+    const link = await client.query(
       `INSERT INTO ats_job_links (id, connection_id, interview_id, job_id, job_name, stage_id,
          stage_name, created_at)
        VALUES (gen_random_uuid(), $1, $2, 'E2E01', 'E2E Backend developer', 'assessment',
-         'Assessment', now())`,
+         'Assessment', now())
+       RETURNING id`,
       [connection.rows[0].id, interviewId]
     )
+    // Candidates Workable "sent" for the job: invited, and not invited for lack of credits.
+    const statuses = [
+      ...Array(candidates.invited ?? 0).fill(["invited", null]),
+      ...Array(candidates.notInvited ?? 0).fill(["failed", "credits"]),
+    ]
+
+    for (const [index, [status, reason]] of statuses.entries()) {
+      await client.query(
+        `INSERT INTO ats_candidates (id, connection_id, interview_id, link_id, candidate_id,
+           email, status, reason, created_at)
+         VALUES (gen_random_uuid(), $1, $2, $3, $4, $5, $6, $7, now())`,
+        [
+          connection.rows[0].id,
+          interviewId,
+          link.rows[0].id,
+          `e2e-${index}`,
+          `e2e-${index}@example.com`,
+          status,
+          reason,
+        ]
+      )
+    }
   })
 }

@@ -5,9 +5,10 @@ import { visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"
 
-// The ATS tab: Workable with what connecting needs, how candidates flow, and once connected, the
-// linked jobs. A real connection needs a Workable account, so one is saved straight into the
-// database, and Workable's lists are answered in the browser.
+// The ATS tab lists Workable with what connecting needs and how candidates flow; Workable's own
+// page has its linked jobs with how their candidates went. A real connection needs a Workable
+// account, so one is saved straight into the database, and Workable's lists are answered in the
+// browser.
 test("an owner sees how to connect Workable and manages its linked jobs", async ({
   signInAs,
 }) => {
@@ -19,7 +20,8 @@ test("an owner sees how to connect Workable and manages its linked jobs", async 
   await visit(owner, `/companies/${company.id}/interviews`)
   await owner.locator("main nav").getByRole("link", { name: "ATS" }).click()
   await expect(owner).toHaveURL(new RegExp(`${tab}$`))
-  await expect(owner.getByText("Not connected")).toBeVisible()
+  // Not connected yet: no tag, only Connect.
+  await expect(owner.getByText("connected", { exact: true })).toHaveCount(0)
 
   // The candidate flow, explained before connecting.
   await owner.getByRole("button", { name: "How candidates come from Workable" }).click()
@@ -36,10 +38,19 @@ test("an owner sees how to connect Workable and manages its linked jobs", async 
   await shot(owner, "connect")
   await owner.keyboard.press("Escape")
 
-  await addAtsConnection(company.id, interviewId)
+  await addAtsConnection(company.id, interviewId, { invited: 3, notInvited: 2 })
   await visit(owner, tab)
-  await expect(owner.getByText("Connected as e2e-acme")).toBeVisible()
+  await expect(owner.getByText("connected", { exact: true })).toBeVisible()
+  await expect(owner.getByText("e2e-acme")).toBeVisible()
+
+  // The row opens Workable's page: its linked jobs and how their candidates went.
+  await owner.getByRole("link", { name: /^Workable/ }).click()
+  await expect(owner).toHaveURL(new RegExp(`${tab}/workable$`))
   await expect(owner.getByText("E2E Backend developer")).toBeVisible()
+  await expect(owner.getByText("3 invited")).toBeVisible()
+  await expect(owner.getByText("2 not invited")).toBeVisible()
+  await expect(owner.getByRole("button", { name: "Invite again" })).toBeVisible()
+  await shot(owner, "workable-page")
 
   // A new interview from a Workable job starts from the job's own text, which can be edited.
   await owner.route("**/api/companies/ats/workable/jobs?*", (route) =>

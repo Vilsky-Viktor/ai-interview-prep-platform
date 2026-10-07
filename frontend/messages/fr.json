@@ -54,6 +54,7 @@
     "verify": "Nous vous avons envoyé un lien pour vérifier votre e-mail. Ouvrez-le, puis reconnectez-vous pour passer des entretiens."
   },
   "common": {
+    "backToTop": "Haut de page",
     "copyLink": "Copier le lien",
     "linkCopied": "Lien copié",
     "home": "Accueil",
@@ -869,7 +870,8 @@
       "interview_ready": "L'entretien « {title} » est prêt.",
       "interview_cancelled": "{title, select, none {Un entretien} other {L'entretien « {title} »}} a été annulé : la validation de ses thèmes a trop attendu.",
       "verification_approved": "« {name} » est vérifiée pour {domain}.",
-      "verification_declined": "{reason, select, none {La vérification de « {name} » a été refusée.} other {La vérification de « {name} » a été refusée : {reason}}}"
+      "verification_declined": "{reason, select, none {La vérification de « {name} » a été refusée.} other {La vérification de « {name} » a été refusée : {reason}}}",
+      "ats_not_invited": "{count, plural, one {{email} venant de Workable n'a pas été invité à « {title} » : {reason, select, credits {crédits épuisés} limit {une limite d'e-mails a été atteinte} paused {les invitations sont en pause} other {une erreur s'est produite}}.} other {# candidats venant de Workable n'ont pas été invités à « {title} ».}}"
     }
   },
   "report": {
@@ -971,9 +973,7 @@
     "faq": "Les questions des entreprises"
   },
   "ats": {
-    "notConnected": "Non connecté",
-    "connectedAs": "Connecté en tant que {account}",
-    "broken": "Workable n'accepte plus la clé : reconnectez-le pour continuer",
+    "statusConnected": "connecté",
     "flowTitle": "Comment les candidats arrivent depuis Workable",
     "flowStage": "Dans Workable, ajoutez au pipeline du poste une étape réservée à prepza, par exemple « Test de compétences prepza », pour qu'elle ne se mélange jamais avec vos autres outils.",
     "flowLink": "Ici, liez le poste et choisissez cette étape.",
@@ -1017,6 +1017,11 @@
     "unlink": "Délier",
     "unlinkTitle": "Délier ce poste ?",
     "unlinkText": "Les candidats qui atteignent l'étape dans {job} ne recevront plus l'entretien. Ceux déjà invités le gardent.",
-    "unlinkFailed": "Impossible de délier le poste."
+    "unlinkFailed": "Impossible de délier le poste.",
+    "invitedCount": "{count, plural, one {# invité} other {# invités}}",
+    "waitingCount": "{count, plural, one {# en attente de l'entretien} other {# en attente de l'entretien}}",
+    "notInvitedCount": "{count, plural, one {# non invité} other {# non invités}}",
+    "inviteAgain": "Inviter à nouveau",
+    "inviteAgainFailed": "Impossible de les inviter à nouveau."
   }
 }

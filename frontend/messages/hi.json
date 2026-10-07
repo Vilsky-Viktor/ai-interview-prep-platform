@@ -54,6 +54,7 @@
     "verify": "हमने आपका ईमेल सत्यापित करने के लिए एक लिंक भेजा है। उसे खोलें, फिर इंटरव्यू देने के लिए दोबारा साइन इन करें।"
   },
   "common": {
+    "backToTop": "ऊपर जाएँ",
     "copyLink": "लिंक कॉपी करें",
     "linkCopied": "लिंक कॉपी हो गया",
     "home": "होम",
@@ -864,7 +865,8 @@
       "interview_ready": "इंटरव्यू “{title}” तैयार है।",
       "interview_cancelled": "{title, select, none {एक इंटरव्यू} other {इंटरव्यू “{title}”}} रद्द हो गया: उसके विषयों की समीक्षा बहुत देर तक रुकी रही।",
       "verification_approved": "“{name}” {domain} के लिए सत्यापित है।",
-      "verification_declined": "{reason, select, none {“{name}” का सत्यापन अस्वीकार किया गया।} other {“{name}” का सत्यापन अस्वीकार किया गया: {reason}}}"
+      "verification_declined": "{reason, select, none {“{name}” का सत्यापन अस्वीकार किया गया।} other {“{name}” का सत्यापन अस्वीकार किया गया: {reason}}}",
+      "ats_not_invited": "{count, plural, one {Workable से आए {email} को “{title}” के लिए इनवाइट नहीं किया गया: {reason, select, credits {क्रेडिट खत्म हो गए} limit {ईमेल सीमा पूरी हो गई} paused {इनवाइट रोके गए हैं} other {कुछ गड़बड़ हो गई}}।} other {Workable से आए # उम्मीदवारों को “{title}” के लिए इनवाइट नहीं किया गया।}}"
     }
   },
   "report": {
@@ -966,9 +968,7 @@
     "faq": "कंपनियों के सवाल"
   },
   "ats": {
-    "notConnected": "कनेक्ट नहीं है",
-    "connectedAs": "{account} के रूप में कनेक्ट है",
-    "broken": "Workable अब कुंजी स्वीकार नहीं करता: जारी रखने के लिए फिर से कनेक्ट करें",
+    "statusConnected": "कनेक्टेड",
     "flowTitle": "Workable से उम्मीदवार कैसे आते हैं",
     "flowStage": "Workable में जॉब की पाइपलाइन में सिर्फ़ prepza के लिए एक स्टेज जोड़ें, जैसे “prepza स्किल टेस्ट”, ताकि यह कभी आपके दूसरे टूल से न मिले।",
     "flowLink": "यहाँ जॉब लिंक करें और वही स्टेज चुनें।",
@@ -1012,6 +1012,11 @@
     "unlink": "अनलिंक करें",
     "unlinkTitle": "यह जॉब अनलिंक करें?",
     "unlinkText": "{job} में इस स्टेज तक पहुँचने वाले उम्मीदवारों को अब इंटरव्यू नहीं मिलेगा। जिन्हें पहले ही इनवाइट किया जा चुका है, उनके पास यह बना रहेगा।",
-    "unlinkFailed": "जॉब अनलिंक नहीं हो सकी।"
+    "unlinkFailed": "जॉब अनलिंक नहीं हो सकी।",
+    "invitedCount": "{count, plural, one {# इनवाइट किया गया} other {# इनवाइट किए गए}}",
+    "waitingCount": "{count, plural, one {# इंटरव्यू के इंतज़ार में} other {# इंटरव्यू के इंतज़ार में}}",
+    "notInvitedCount": "{count, plural, one {# इनवाइट नहीं किया गया} other {# इनवाइट नहीं किए गए}}",
+    "inviteAgain": "फिर से इनवाइट करें",
+    "inviteAgainFailed": "उन्हें फिर से इनवाइट नहीं किया जा सका।"
   }
 }

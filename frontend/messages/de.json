@@ -54,6 +54,7 @@
     "verify": "Wir haben dir einen Link zur Bestätigung deiner E-Mail-Adresse geschickt. Öffne ihn und melde dich dann erneut an, um Interviews zu machen."
   },
   "common": {
+    "backToTop": "Nach oben",
     "copyLink": "Link kopieren",
     "linkCopied": "Link kopiert",
     "home": "Startseite",
@@ -869,7 +870,8 @@
       "interview_ready": "Das Interview „{title}“ ist fertig.",
       "interview_cancelled": "{title, select, none {Ein Interview} other {Das Interview „{title}“}} wurde abgebrochen: Die Themen wurden zu lange nicht freigegeben.",
       "verification_approved": "„{name}“ ist für {domain} verifiziert.",
-      "verification_declined": "{reason, select, none {Die Verifizierung von „{name}“ wurde abgelehnt.} other {Die Verifizierung von „{name}“ wurde abgelehnt: {reason}}}"
+      "verification_declined": "{reason, select, none {Die Verifizierung von „{name}“ wurde abgelehnt.} other {Die Verifizierung von „{name}“ wurde abgelehnt: {reason}}}",
+      "ats_not_invited": "{count, plural, one {{email} aus Workable wurde nicht zu „{title}“ eingeladen: {reason, select, credits {keine Credits mehr} limit {ein E-Mail-Limit wurde erreicht} paused {Einladungen sind pausiert} other {etwas ist schiefgelaufen}}.} other {# Kandidaten aus Workable wurden nicht zu „{title}“ eingeladen.}}"
     }
   },
   "report": {
@@ -971,9 +973,7 @@
     "faq": "Fragen, die Unternehmen stellen"
   },
   "ats": {
-    "notConnected": "Nicht verbunden",
-    "connectedAs": "Verbunden als {account}",
-    "broken": "Workable akzeptiert den Schlüssel nicht mehr: Verbinde neu, um fortzufahren",
+    "statusConnected": "verbunden",
     "flowTitle": "Wie Kandidaten aus Workable kommen",
     "flowStage": "Füge in Workable der Pipeline der Stelle eine eigene Phase nur für prepza hinzu, etwa „prepza Skills-Test“, damit sie sich nie mit deinen anderen Tools vermischt.",
     "flowLink": "Verknüpfe hier die Stelle und wähle diese Phase.",
@@ -1017,6 +1017,11 @@
     "unlink": "Verknüpfung lösen",
     "unlinkTitle": "Verknüpfung dieser Stelle lösen?",
     "unlinkText": "Kandidaten, die in {job} die Phase erreichen, bekommen das Interview nicht mehr. Bereits eingeladene behalten es.",
-    "unlinkFailed": "Die Verknüpfung konnte nicht gelöst werden."
+    "unlinkFailed": "Die Verknüpfung konnte nicht gelöst werden.",
+    "invitedCount": "{count, plural, one {# eingeladen} other {# eingeladen}}",
+    "waitingCount": "{count, plural, one {# wartet auf das Interview} other {# warten auf das Interview}}",
+    "notInvitedCount": "{count, plural, one {# nicht eingeladen} other {# nicht eingeladen}}",
+    "inviteAgain": "Erneut einladen",
+    "inviteAgainFailed": "Die Kandidaten konnten nicht erneut eingeladen werden."
   }
 }

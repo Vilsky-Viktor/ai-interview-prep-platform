@@ -6,6 +6,7 @@ from app.constants.ats import (
     ATS_TIMEOUT_SECONDS,
     WORKABLE_API,
     WORKABLE_MAX_PAGES,
+    WORKABLE_MOVED,
     WORKABLE_PAGE,
 )
 
@@ -17,13 +18,22 @@ class KeyRejected(Exception):
     """Workable refused the key: the connection needs a new one."""
 
 
-async def _get(subdomain: str, token: str, path: str, params: dict | None = None) -> dict:
+async def _call(
+    method: str,
+    subdomain: str,
+    token: str,
+    path: str,
+    params: dict | None = None,
+    body: dict | None = None,
+) -> dict:
     """One call to Workable's API. A refused key raises KeyRejected; anything else that fails
-    (down, rate limited, unknown subdomain) is a 502 the company can retry."""
+    (down, rate limited, unknown subdomain) is a 502 the caller can retry."""
     try:
-        response = await http.get_client().get(
+        response = await http.get_client().request(
+            method,
             WORKABLE_API.format(subdomain=subdomain) + path,
             params=params,
+            json=body,
             headers={"Authorization": f"Bearer {token}"},
             timeout=ATS_TIMEOUT_SECONDS,
         )
@@ -33,10 +43,14 @@ async def _get(subdomain: str, token: str, path: str, params: dict | None = None
     if response.status_code in REJECTED:
         raise KeyRejected
 
-    if response.status_code != status.HTTP_200_OK:
+    if not response.is_success:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Workable didn't answer")
 
-    return response.json()
+    return response.json() if response.content else {}
+
+
+async def _get(subdomain: str, token: str, path: str, params: dict | None = None) -> dict:
+    return await _call("GET", subdomain, token, path, params)
 
 
 async def check(subdomain: str, token: str) -> None:
@@ -78,3 +92,39 @@ async def job(subdomain: str, token: str, job_id: str) -> dict:
         "name": found.get("title", ""),
         "sections": [found.get(key) or "" for key in ("description", "requirements", "benefits")],
     }
+
+
+async def member_id(subdomain: str, token: str, email: str) -> str | None:
+    """The Workable member results are written back as: the one with `email` (who connected),
+    else the account's first admin, else its first member."""
+    found = (await _get(subdomain, token, "/members", {"email": email})).get("members", [])
+
+    if found:
+        return found[0]["id"]
+
+    members = (await _get(subdomain, token, "/members")).get("members", [])
+    admins = [member for member in members if member.get("role") == "admin"]
+
+    return (admins or members or [{"id": None}])[0]["id"]
+
+
+async def subscribe(subdomain: str, token: str, target: str, job_id: str, stage_id: str) -> str:
+    """Asks Workable to send candidates moved into `stage_id` of `job_id` to `target`; the
+    subscription's id."""
+    body = {
+        "target": target,
+        "event": WORKABLE_MOVED,
+        "args": {"account_id": subdomain, "job_shortcode": job_id, "stage_slug": stage_id},
+    }
+
+    return str((await _call("POST", subdomain, token, "/subscriptions", body=body))["id"])
+
+
+async def unsubscribe(subdomain: str, token: str, subscription_id: str) -> None:
+    await _call("DELETE", subdomain, token, f"/subscriptions/{subscription_id}")
+
+
+async def comment(subdomain: str, token: str, candidate_id: str, member: str, text: str) -> None:
+    """A comment on the candidate in Workable, as `member`."""
+    body = {"member_id": member, "comment": {"body": text}}
+    await _call("POST", subdomain, token, f"/candidates/{candidate_id}/comments", body=body)

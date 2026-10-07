@@ -54,6 +54,7 @@
     "verify": "Saatsime sulle lingi e-posti aadressi kinnitamiseks. Ava see ja logi siis uuesti sisse, et intervjuusid teha."
   },
   "common": {
+    "backToTop": "Tagasi üles",
     "copyLink": "Kopeeri link",
     "linkCopied": "Link kopeeritud",
     "home": "Avaleht",
@@ -873,7 +874,8 @@
       "interview_ready": "Intervjuu „{title}“ on valmis.",
       "interview_cancelled": "{title, select, none {Intervjuu} other {Intervjuu „{title}“}} tühistati: teemade ülevaatus ootas liiga kaua.",
       "verification_approved": "„{name}“ on kinnitatud domeeniga {domain}.",
-      "verification_declined": "{reason, select, none {Ettevõtte „{name}“ kinnitamine lükati tagasi.} other {Ettevõtte „{name}“ kinnitamine lükati tagasi: {reason}}}"
+      "verification_declined": "{reason, select, none {Ettevõtte „{name}“ kinnitamine lükati tagasi.} other {Ettevõtte „{name}“ kinnitamine lükati tagasi: {reason}}}",
+      "ats_not_invited": "{count, plural, one {Workable'ist tulnud {email} ei saanud kutset intervjuule „{title}“: {reason, select, credits {krediidid said otsa} limit {e-kirjade piirang sai täis} paused {kutsed on peatatud} other {midagi läks valesti}}.} other {# Workable'ist tulnud kandidaati ei saanud kutset intervjuule „{title}“.}}"
     }
   },
   "report": {
@@ -975,9 +977,7 @@
     "faq": "Küsimused, mida ettevõtted küsivad"
   },
   "ats": {
-    "notConnected": "Ühendamata",
-    "connectedAs": "Ühendatud kontoga {account}",
-    "broken": "Workable ei võta võtit enam vastu: jätkamiseks ühenda uuesti",
+    "statusConnected": "ühendatud",
     "flowTitle": "Kuidas kandidaadid Workable'ist tulevad",
     "flowStage": "Lisa Workable'is töökuulutuse protsessi etapp ainult prepza jaoks, näiteks „prepza oskuste test“, et see ei läheks kunagi segamini sinu teiste tööriistadega.",
     "flowLink": "Seo siin töökuulutus ja vali see etapp.",
@@ -1021,6 +1021,11 @@
     "unlink": "Eemalda seos",
     "unlinkTitle": "Eemaldada selle töökuulutuse seos?",
     "unlinkText": "Kandidaadid, kes jõuavad töökuulutuses {job} etappi, ei saa enam intervjuud. Juba kutsutute intervjuud jäävad alles.",
-    "unlinkFailed": "Töökuulutuse seost ei õnnestunud eemaldada."
+    "unlinkFailed": "Töökuulutuse seost ei õnnestunud eemaldada.",
+    "invitedCount": "{count, plural, one {# kutsutud} other {# kutsutud}}",
+    "waitingCount": "{count, plural, one {# ootab intervjuud} other {# ootavad intervjuud}}",
+    "notInvitedCount": "{count, plural, one {# kutsumata} other {# kutsumata}}",
+    "inviteAgain": "Kutsu uuesti",
+    "inviteAgainFailed": "Neid ei õnnestunud uuesti kutsuda."
   }
 }

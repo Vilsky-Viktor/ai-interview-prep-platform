@@ -54,6 +54,7 @@
     "verify": "メールアドレスを確認するためのリンクを送信しました。リンクを開いてから、もう一度サインインすると面接を受けられます。"
   },
   "common": {
+    "backToTop": "ページの先頭へ",
     "copyLink": "リンクをコピー",
     "linkCopied": "リンクをコピーしました",
     "home": "ホーム",
@@ -873,7 +874,8 @@
       "interview_ready": "面接「{title}」の準備ができました。",
       "interview_cancelled": "{title, select, none {面接} other {面接「{title}」}}はキャンセルされました：トピックの確認待ちが長すぎました。",
       "verification_approved": "「{name}」は {domain} で認証されました。",
-      "verification_declined": "{reason, select, none {「{name}」の認証は却下されました。} other {「{name}」の認証は却下されました：{reason}}}"
+      "verification_declined": "{reason, select, none {「{name}」の認証は却下されました。} other {「{name}」の認証は却下されました：{reason}}}",
+      "ats_not_invited": "{count, plural, =1 {Workable の {email} さんを「{title}」に招待できませんでした：{reason, select, credits {クレジットが不足しています} limit {メールの送信上限に達しました} paused {招待は一時停止中です} other {問題が発生しました}}。} other {Workable の候補者 # 人を「{title}」に招待できませんでした。}}"
     }
   },
   "report": {
@@ -975,9 +977,7 @@
     "faq": "企業からよくある質問"
   },
   "ats": {
-    "notConnected": "未接続",
-    "connectedAs": "接続中：{account}",
-    "broken": "Workable がキーを受け付けなくなりました。続けるには再接続してください",
+    "statusConnected": "接続済み",
     "flowTitle": "Workable から候補者が届く流れ",
     "flowStage": "Workable で、求人の選考フローに prepza 専用の選考ステップ（例：「prepza スキルテスト」）を追加してください。ほかのツールと混ざることはありません。",
     "flowLink": "ここで求人を紐付け、その選考ステップを選びます。",
@@ -1021,6 +1021,11 @@
     "unlink": "紐付けを解除",
     "unlinkTitle": "この求人の紐付けを解除しますか？",
     "unlinkText": "{job} でこの選考ステップに進んだ候補者には、今後面接が届きません。招待済みの候補者の面接はそのまま残ります。",
-    "unlinkFailed": "求人の紐付けを解除できませんでした。"
+    "unlinkFailed": "求人の紐付けを解除できませんでした。",
+    "invitedCount": "{count, plural, other {招待済み # 人}}",
+    "waitingCount": "{count, plural, other {面接の準備待ち # 人}}",
+    "notInvitedCount": "{count, plural, other {未招待 # 人}}",
+    "inviteAgain": "もう一度招待",
+    "inviteAgainFailed": "もう一度招待できませんでした。"
   }
 }

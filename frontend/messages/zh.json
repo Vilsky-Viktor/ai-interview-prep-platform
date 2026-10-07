@@ -54,6 +54,7 @@
     "verify": "我们已向你发送一个验证邮箱的链接。打开链接后重新登录，即可参加面试。"
   },
   "common": {
+    "backToTop": "返回顶部",
     "copyLink": "复制链接",
     "linkCopied": "链接已复制",
     "home": "首页",
@@ -860,7 +861,8 @@
       "interview_ready": "面试“{title}”已就绪。",
       "interview_cancelled": "{title, select, none {一场面试} other {面试“{title}”}}已取消：主题审核等待时间过长。",
       "verification_approved": "“{name}”已通过 {domain} 验证。",
-      "verification_declined": "{reason, select, none {“{name}”的验证已被拒绝。} other {“{name}”的验证已被拒绝：{reason}}}"
+      "verification_declined": "{reason, select, none {“{name}”的验证已被拒绝。} other {“{name}”的验证已被拒绝：{reason}}}",
+      "ats_not_invited": "{count, plural, =1 {来自 Workable 的 {email} 未被邀请参加“{title}”：{reason, select, credits {点数不足} limit {已达到邮件发送上限} paused {邀请已暂停} other {出了点问题}}。} other {来自 Workable 的 # 位候选人未被邀请参加“{title}”。}}"
     }
   },
   "report": {
@@ -962,9 +964,7 @@
     "faq": "企业常问的问题"
   },
   "ats": {
-    "notConnected": "未连接",
-    "connectedAs": "已连接：{account}",
-    "broken": "Workable 不再接受该密钥：请重新连接以继续",
+    "statusConnected": "已连接",
     "flowTitle": "候选人如何从 Workable 进入",
     "flowStage": "在 Workable 中，为该职位的招聘流程添加一个 prepza 专用阶段，例如“prepza 技能测试”，这样就不会和你的其他工具混在一起。",
     "flowLink": "在这里关联该职位并选择这个阶段。",
@@ -1008,6 +1008,11 @@
     "unlink": "取消关联",
     "unlinkTitle": "取消关联此职位？",
     "unlinkText": "在 {job} 中进入该阶段的候选人将不再收到面试。已邀请的候选人仍保留面试。",
-    "unlinkFailed": "无法取消关联职位。"
+    "unlinkFailed": "无法取消关联职位。",
+    "invitedCount": "{count, plural, other {已邀请 # 人}}",
+    "waitingCount": "{count, plural, other {等待面试 # 人}}",
+    "notInvitedCount": "{count, plural, other {未邀请 # 人}}",
+    "inviteAgain": "重新邀请",
+    "inviteAgainFailed": "无法重新邀请。"
   }
 }

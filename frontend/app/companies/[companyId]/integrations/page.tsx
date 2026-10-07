@@ -3,23 +3,17 @@ import { redirect } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { AtsConnectionRow } from "@/components/company/ats-connection"
-import { AtsJobLinks } from "@/components/company/ats-job-links"
 import { CompanyHeader } from "@/components/company/company-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
-import type {
-  AtsIntegrations,
-  AtsJobLink,
-  Company,
-  Interview,
-} from "@/types/company"
+import type { AtsIntegrations, Company } from "@/types/company"
 
 export const generateMetadata = () => translatedTitle("company", "integrations")
 
-/** The company's ATS connections and the ATS jobs linked to its interviews, laid out like the
- * team tab. Everyone in the company sees them; owners and admins change them. */
+/** The company's ATSs, a row each laid out like the companies list; each opens its own page
+ * with its linked jobs. Everyone in the company sees them; owners and admins change them. */
 export default async function IntegrationsPage({
   params,
 }: {
@@ -31,17 +25,11 @@ export default async function IntegrationsPage({
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
     : null
-  const [integrations, links, interviews] = company
-    ? await Promise.all([
-        serverFetch<AtsIntegrations>(`/companies/ats?company_id=${companyId}`),
-        serverFetch<AtsJobLink[]>(
-          `/companies/ats/links?company_id=${companyId}`
-        ),
-        serverFetch<Interview[]>(
-          `/companies/interviews?company_id=${companyId}&limit=100`
-        ),
-      ])
-    : [null, null, null]
+  const integrations = company
+    ? await serverFetch<AtsIntegrations>(
+        `/companies/ats?company_id=${companyId}`
+      )
+    : null
 
   if (!signedIn) {
     return (
@@ -81,14 +69,6 @@ export default async function IntegrationsPage({
               canEdit={company.can_edit}
             />
           </ul>
-          {workable && (
-            <AtsJobLinks
-              companyId={companyId}
-              links={links ?? []}
-              interviews={(interviews ?? []).filter((item) => item.set_id)}
-              canEdit={company.can_edit && workable.status === "connected"}
-            />
-          )}
         </>
       ) : (
         <p className="rounded-2xl border p-6 text-muted-foreground">

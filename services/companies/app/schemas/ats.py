@@ -48,6 +48,11 @@ class JobLinkOut(BaseModel):
     stage_name: str
     interview_id: UUID
     interview_title: str | None
+    # Candidates the ATS sent for this job: invited, not invited (to retry), and waiting for
+    # the interview to be ready.
+    invited: int = 0
+    not_invited: int = 0
+    waiting: int = 0
 
 
 class JobTextOut(BaseModel):

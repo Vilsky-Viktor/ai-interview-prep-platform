@@ -54,6 +54,7 @@
     "verify": "שלחנו לכם קישור לאימות האימייל. פתחו אותו ואז התחברו שוב כדי לגשת לראיונות."
   },
   "common": {
+    "backToTop": "חזרה למעלה",
     "copyLink": "העתקת קישור",
     "linkCopied": "הקישור הועתק",
     "home": "דף הבית",
@@ -860,7 +861,8 @@
       "interview_ready": "הראיון \"{title}\" מוכן.",
       "interview_cancelled": "{title, select, none {ראיון בוטל} other {הראיון \"{title}\" בוטל}}: בדיקת הנושאים שלו חיכתה יותר מדי זמן.",
       "verification_approved": "\"{name}\" מאומתת עבור {domain}.",
-      "verification_declined": "{reason, select, none {האימות של \"{name}\" נדחה.} other {האימות של \"{name}\" נדחה: {reason}}}"
+      "verification_declined": "{reason, select, none {האימות של \"{name}\" נדחה.} other {האימות של \"{name}\" נדחה: {reason}}}",
+      "ats_not_invited": "{count, plural, one {{email} מ-Workable לא הוזמן/ה ל\"{title}\": {reason, select, credits {נגמרו הקרדיטים} limit {הושגה מגבלת אימיילים} paused {ההזמנות מושהות} other {משהו השתבש}}.} two {שני מועמדים מ-Workable לא הוזמנו ל\"{title}\".} other {# מועמדים מ-Workable לא הוזמנו ל\"{title}\".}}"
     }
   },
   "report": {
@@ -962,9 +964,7 @@
     "faq": "שאלות שחברות שואלות"
   },
   "ats": {
-    "notConnected": "לא מחובר",
-    "connectedAs": "מחובר כ-{account}",
-    "broken": "Workable כבר לא מקבל את המפתח: חברו מחדש כדי להמשיך",
+    "statusConnected": "מחובר",
     "flowTitle": "איך מועמדים מגיעים מ-Workable",
     "flowStage": "ב-Workable, הוסיפו לתהליך הגיוס של המשרה שלב רק עבור prepza, למשל „מבחן מיומנויות prepza”, כדי שלא יתערבב אף פעם עם הכלים האחרים שלכם.",
     "flowLink": "כאן, קשרו את המשרה ובחרו את השלב הזה.",
@@ -1008,6 +1008,11 @@
     "unlink": "ביטול קישור",
     "unlinkTitle": "לבטל את הקישור של המשרה?",
     "unlinkText": "מועמדים שיגיעו לשלב ב-{job} לא יקבלו יותר את הראיון. מי שכבר הוזמנו שומרים עליו.",
-    "unlinkFailed": "לא ניתן לבטל את קישור המשרה."
+    "unlinkFailed": "לא ניתן לבטל את קישור המשרה.",
+    "invitedCount": "{count, plural, one {# הוזמן} two {# הוזמנו} other {# הוזמנו}}",
+    "waitingCount": "{count, plural, one {# ממתין לראיון} two {# ממתינים לראיון} other {# ממתינים לראיון}}",
+    "notInvitedCount": "{count, plural, one {# לא הוזמן} two {# לא הוזמנו} other {# לא הוזמנו}}",
+    "inviteAgain": "הזמנה מחדש",
+    "inviteAgainFailed": "לא ניתן להזמין אותם שוב."
   }
 }

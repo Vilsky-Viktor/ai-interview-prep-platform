@@ -54,6 +54,7 @@
     "verify": "Ми надіслали вам посилання для підтвердження email. Відкрийте його, а потім увійдіть знову, щоб проходити співбесіди."
   },
   "common": {
+    "backToTop": "Нагору",
     "copyLink": "Копіювати посилання",
     "linkCopied": "Посилання скопійовано",
     "home": "Головна",
@@ -869,7 +870,8 @@
       "interview_ready": "Співбесіда «{title}» готова.",
       "interview_cancelled": "{title, select, none {Співбесіду} other {Співбесіду «{title}»}} скасовано: теми надто довго чекали на перевірку.",
       "verification_approved": "Компанію «{name}» підтверджено для {domain}.",
-      "verification_declined": "{reason, select, none {Підтвердження компанії «{name}» відхилено.} other {Підтвердження компанії «{name}» відхилено: {reason}}}"
+      "verification_declined": "{reason, select, none {Підтвердження компанії «{name}» відхилено.} other {Підтвердження компанії «{name}» відхилено: {reason}}}",
+      "ats_not_invited": "{count, plural, =1 {Кандидата {email} з Workable не запрошено на «{title}»: {reason, select, credits {закінчилися кредити} limit {досягнуто ліміту листів} paused {запрошення призупинено} other {щось пішло не так}}.} one {# кандидата з Workable не запрошено на «{title}».} few {# кандидатів з Workable не запрошено на «{title}».} many {# кандидатів з Workable не запрошено на «{title}».} other {# кандидата з Workable не запрошено на «{title}».}}"
     }
   },
   "report": {
@@ -971,9 +973,7 @@
     "faq": "Питання, які ставлять компанії"
   },
   "ats": {
-    "notConnected": "Не підключено",
-    "connectedAs": "Підключено акаунт {account}",
-    "broken": "Workable більше не приймає ключ: підключіть знову, щоб продовжити",
+    "statusConnected": "підключено",
     "flowTitle": "Як кандидати надходять із Workable",
     "flowStage": "У Workable додайте до воронки вакансії окремий етап лише для prepza, наприклад «Перевірка навичок prepza», щоб він не перетинався з іншими вашими інструментами.",
     "flowLink": "Тут пов'яжіть вакансію й виберіть цей етап.",
@@ -1017,6 +1017,11 @@
     "unlink": "Відв'язати",
     "unlinkTitle": "Відв'язати цю вакансію?",
     "unlinkText": "Кандидати, які дійдуть до етапу в {job}, більше не отримуватимуть співбесіду. Уже запрошені її збережуть.",
-    "unlinkFailed": "Не вдалося відв'язати вакансію."
+    "unlinkFailed": "Не вдалося відв'язати вакансію.",
+    "invitedCount": "{count, plural, one {# запрошено} few {# запрошено} many {# запрошено} other {# запрошено}}",
+    "waitingCount": "{count, plural, one {# чекає на співбесіду} few {# чекають на співбесіду} many {# чекають на співбесіду} other {# чекають на співбесіду}}",
+    "notInvitedCount": "{count, plural, one {# не запрошено} few {# не запрошено} many {# не запрошено} other {# не запрошено}}",
+    "inviteAgain": "Запросити знову",
+    "inviteAgainFailed": "Не вдалося запросити їх знову."
   }
 }

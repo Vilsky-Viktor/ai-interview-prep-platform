@@ -4,6 +4,7 @@ from prepza_common.analytics import track
 
 from app.constants.events import GENERATION_CANCELLED, GENERATION_COMPLETED
 from app.helpers.notifications import interview_cancelled, interview_ready
+from app.services import ats_candidates
 from app.services import outbox as outbox_service
 from app.storage import interviews
 
@@ -30,6 +31,9 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
             event_id,
         )
         await track("test_ready", company_id=interview.company_id, how="generated")
+        # Candidates an ATS sent while it was being made get it now.
+        await outbox_service.flush_quietly()
+        await ats_candidates.invite_waiting(interview.id)
     else:
         await interviews.remove_for_generation(generation_id, interview_cancelled(interview))
 

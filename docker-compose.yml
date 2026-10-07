@@ -98,6 +98,8 @@ x-companies-env: &companies-env
   REPORT_EMAILS_PER_COMPANY_DAY: ${REPORT_EMAILS_PER_COMPANY_DAY:-20}
   # Encrypts companies' ATS keys (a Fernet key); empty turns ATS integrations off.
   ATS_ENCRYPTION_KEY: ${ATS_ENCRYPTION_KEY:-}
+  # The site's address: where an ATS sends candidates, and links in results written back.
+  SITE_URL: ${SITE_URL:-http://localhost:8090}
   BILLING_URL: http://billing:8000
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/companies
   REDIS_URL: redis://redis:6379

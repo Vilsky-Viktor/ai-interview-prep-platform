@@ -54,6 +54,7 @@
     "verify": "أرسلنا إليك رابطًا للتحقق من بريدك الإلكتروني. افتحه، ثم سجّل الدخول مرة أخرى لإجراء المقابلات."
   },
   "common": {
+    "backToTop": "العودة إلى الأعلى",
     "copyLink": "نسخ الرابط",
     "linkCopied": "تم نسخ الرابط",
     "home": "الرئيسية",
@@ -865,7 +866,8 @@
       "interview_ready": "المقابلة «{title}» جاهزة.",
       "interview_cancelled": "{title, select, none {أُلغيت مقابلة} other {أُلغيت المقابلة «{title}»}}: انتظرت مراجعة مواضيعها طويلًا.",
       "verification_approved": "تم توثيق «{name}» للنطاق {domain}.",
-      "verification_declined": "{reason, select, none {تم رفض توثيق «{name}».} other {تم رفض توثيق «{name}»: {reason}}}"
+      "verification_declined": "{reason, select, none {تم رفض توثيق «{name}».} other {تم رفض توثيق «{name}»: {reason}}}",
+      "ats_not_invited": "{count, plural, one {لم تتم دعوة {email} من Workable إلى «{title}»: {reason, select, credits {نفد الرصيد} limit {تم بلوغ حد الرسائل} paused {الدعوات متوقفة مؤقتًا} other {حدث خطأ ما}}.} zero {لم تتم دعوة # مرشح من Workable إلى «{title}».} two {لم تتم دعوة مرشحَين من Workable إلى «{title}».} few {لم تتم دعوة # مرشحين من Workable إلى «{title}».} many {لم تتم دعوة # مرشحًا من Workable إلى «{title}».} other {لم تتم دعوة # مرشح من Workable إلى «{title}».}}"
     }
   },
   "report": {
@@ -967,9 +969,7 @@
     "faq": "أسئلة تطرحها الشركات"
   },
   "ats": {
-    "notConnected": "غير متصل",
-    "connectedAs": "متصل بالحساب {account}",
-    "broken": "لم يعد Workable يقبل المفتاح: أعد الربط للمتابعة",
+    "statusConnected": "متصل",
     "flowTitle": "كيف يصل المرشحون من Workable",
     "flowStage": "في Workable، أضف إلى مسار التوظيف للوظيفة مرحلة خاصة بـ prepza فقط، مثل «اختبار المهارات من prepza»، حتى لا تختلط أبدًا بأدواتك الأخرى.",
     "flowLink": "هنا، اربط الوظيفة واختر تلك المرحلة.",
@@ -1013,6 +1013,11 @@
     "unlink": "إلغاء الربط",
     "unlinkTitle": "إلغاء ربط هذه الوظيفة؟",
     "unlinkText": "لن يحصل المرشحون الذين يصلون إلى المرحلة في {job} على المقابلة بعد الآن. ويحتفظ بها من دُعوا بالفعل.",
-    "unlinkFailed": "تعذّر إلغاء ربط الوظيفة."
+    "unlinkFailed": "تعذّر إلغاء ربط الوظيفة.",
+    "invitedCount": "{count, plural, zero {المدعوون: #} one {المدعوون: #} two {المدعوون: #} few {المدعوون: #} many {المدعوون: #} other {المدعوون: #}}",
+    "waitingCount": "{count, plural, zero {بانتظار المقابلة: #} one {بانتظار المقابلة: #} two {بانتظار المقابلة: #} few {بانتظار المقابلة: #} many {بانتظار المقابلة: #} other {بانتظار المقابلة: #}}",
+    "notInvitedCount": "{count, plural, zero {لم تتم دعوتهم: #} one {لم تتم دعوتهم: #} two {لم تتم دعوتهم: #} few {لم تتم دعوتهم: #} many {لم تتم دعوتهم: #} other {لم تتم دعوتهم: #}}",
+    "inviteAgain": "إعادة الدعوة",
+    "inviteAgainFailed": "تعذّرت دعوتهم مرة أخرى."
   }
 }

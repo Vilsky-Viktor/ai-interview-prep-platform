@@ -54,6 +54,7 @@
     "verify": "Enviamos um link para verificar seu e-mail. Abra-o e depois entre de novo para fazer entrevistas."
   },
   "common": {
+    "backToTop": "Voltar ao topo",
     "copyLink": "Copiar link",
     "linkCopied": "Link copiado",
     "home": "Início",
@@ -865,7 +866,8 @@
       "interview_ready": "A entrevista “{title}” está pronta.",
       "interview_cancelled": "{title, select, none {Uma entrevista} other {A entrevista “{title}”}} foi cancelada: a revisão dos tópicos esperou demais.",
       "verification_approved": "“{name}” está verificada para {domain}.",
-      "verification_declined": "{reason, select, none {A verificação de “{name}” foi recusada.} other {A verificação de “{name}” foi recusada: {reason}}}"
+      "verification_declined": "{reason, select, none {A verificação de “{name}” foi recusada.} other {A verificação de “{name}” foi recusada: {reason}}}",
+      "ats_not_invited": "{count, plural, one {{email} do Workable não foi convidado para “{title}”: {reason, select, credits {créditos esgotados} limit {um limite de e-mails foi atingido} paused {os convites estão pausados} other {algo deu errado}}.} other {# candidatos do Workable não foram convidados para “{title}”.}}"
     }
   },
   "report": {
@@ -967,9 +969,7 @@
     "faq": "Perguntas que as empresas fazem"
   },
   "ats": {
-    "notConnected": "Não conectado",
-    "connectedAs": "Conectado como {account}",
-    "broken": "O Workable não aceita mais a chave: reconecte para continuar",
+    "statusConnected": "conectado",
     "flowTitle": "Como os candidatos chegam do Workable",
     "flowStage": "No Workable, adicione ao pipeline da vaga uma etapa só para a prepza, por exemplo “Teste de habilidades prepza”, para que ela nunca se misture com suas outras ferramentas.",
     "flowLink": "Aqui, vincule a vaga e escolha essa etapa.",
@@ -1013,6 +1013,11 @@
     "unlink": "Desvincular",
     "unlinkTitle": "Desvincular esta vaga?",
     "unlinkText": "Os candidatos que chegarem à etapa em {job} não vão mais receber a entrevista. Quem já foi convidado a mantém.",
-    "unlinkFailed": "Não foi possível desvincular a vaga."
+    "unlinkFailed": "Não foi possível desvincular a vaga.",
+    "invitedCount": "{count, plural, one {# convidado} other {# convidados}}",
+    "waitingCount": "{count, plural, one {# aguardando a entrevista} other {# aguardando a entrevista}}",
+    "notInvitedCount": "{count, plural, one {# não convidado} other {# não convidados}}",
+    "inviteAgain": "Convidar novamente",
+    "inviteAgainFailed": "Não foi possível convidá-los novamente."
   }
 }

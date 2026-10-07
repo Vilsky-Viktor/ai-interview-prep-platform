@@ -54,6 +54,7 @@
     "verify": "เราส่งลิงก์ยืนยันอีเมลให้คุณแล้ว เปิดลิงก์ แล้วลงชื่อเข้าใช้อีกครั้งเพื่อทำการสัมภาษณ์"
   },
   "common": {
+    "backToTop": "กลับขึ้นด้านบน",
     "copyLink": "คัดลอกลิงก์",
     "linkCopied": "คัดลอกลิงก์แล้ว",
     "home": "หน้าแรก",
@@ -864,7 +865,8 @@
       "interview_ready": "การสัมภาษณ์ “{title}” พร้อมแล้ว",
       "interview_cancelled": "{title, select, none {การสัมภาษณ์} other {การสัมภาษณ์ “{title}”}} ถูกยกเลิก เพราะรอการตรวจหัวข้อนานเกินไป",
       "verification_approved": "“{name}” ได้รับการยืนยันสำหรับ {domain} แล้ว",
-      "verification_declined": "{reason, select, none {การยืนยัน “{name}” ถูกปฏิเสธ} other {การยืนยัน “{name}” ถูกปฏิเสธ: {reason}}}"
+      "verification_declined": "{reason, select, none {การยืนยัน “{name}” ถูกปฏิเสธ} other {การยืนยัน “{name}” ถูกปฏิเสธ: {reason}}}",
+      "ats_not_invited": "{count, plural, =1 {ไม่ได้เชิญ {email} จาก Workable เข้า “{title}”: {reason, select, credits {เครดิตหมด} limit {ถึงขีดจำกัดการส่งอีเมลแล้ว} paused {การเชิญหยุดชั่วคราวอยู่} other {เกิดข้อผิดพลาด}}} other {ไม่ได้เชิญผู้สมัคร # คนจาก Workable เข้า “{title}”}}"
     }
   },
   "report": {
@@ -966,9 +968,7 @@
     "faq": "คำถามที่บริษัทมักถาม"
   },
   "ats": {
-    "notConnected": "ยังไม่ได้เชื่อมต่อ",
-    "connectedAs": "เชื่อมต่อกับ {account} แล้ว",
-    "broken": "Workable ไม่รับคีย์นี้แล้ว: เชื่อมต่อใหม่เพื่อดำเนินการต่อ",
+    "statusConnected": "เชื่อมต่อแล้ว",
     "flowTitle": "ผู้สมัครเข้ามาจาก Workable อย่างไร",
     "flowStage": "ใน Workable ให้เพิ่มขั้นตอนสำหรับ prepza โดยเฉพาะในกระบวนการสรรหาของตำแหน่งงาน เช่น “แบบทดสอบทักษะ prepza” เพื่อไม่ให้ปะปนกับเครื่องมืออื่นของคุณ",
     "flowLink": "ที่นี่ ให้ผูกตำแหน่งงานและเลือกขั้นตอนนั้น",
@@ -1012,6 +1012,11 @@
     "unlink": "ยกเลิกการผูก",
     "unlinkTitle": "ยกเลิกการผูกตำแหน่งงานนี้?",
     "unlinkText": "ผู้สมัครที่ถึงขั้นตอนนี้ใน {job} จะไม่ได้รับการสัมภาษณ์อีก ส่วนผู้ที่ได้รับเชิญแล้วยังคงมีอยู่",
-    "unlinkFailed": "ยกเลิกการผูกตำแหน่งงานไม่สำเร็จ"
+    "unlinkFailed": "ยกเลิกการผูกตำแหน่งงานไม่สำเร็จ",
+    "invitedCount": "{count, plural, other {เชิญแล้ว # คน}}",
+    "waitingCount": "{count, plural, other {รอการสัมภาษณ์ # คน}}",
+    "notInvitedCount": "{count, plural, other {ยังไม่ได้เชิญ # คน}}",
+    "inviteAgain": "เชิญอีกครั้ง",
+    "inviteAgainFailed": "เชิญอีกครั้งไม่สำเร็จ"
   }
 }

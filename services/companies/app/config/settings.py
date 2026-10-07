@@ -19,6 +19,8 @@ class Settings(ServiceSettings):
     # The Fernet key that encrypts companies' ATS keys; empty (or not a key) turns ATS
     # integrations off.
     ats_encryption_key: str = ""
+    # The site's public address: where an ATS sends its events, and links in what goes back.
+    site_url: str = "http://localhost:8090"
     generation_url: str
     library_url: str
     rounds_url: str

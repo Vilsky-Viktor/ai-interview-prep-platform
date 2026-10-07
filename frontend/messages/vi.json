@@ -54,6 +54,7 @@
     "verify": "Chúng tôi đã gửi cho bạn một liên kết để xác minh email. Hãy mở liên kết, rồi đăng nhập lại để tham gia phỏng vấn."
   },
   "common": {
+    "backToTop": "Lên đầu trang",
     "copyLink": "Sao chép liên kết",
     "linkCopied": "Đã sao chép liên kết",
     "home": "Trang chủ",
@@ -865,7 +866,8 @@
       "interview_ready": "Buổi phỏng vấn “{title}” đã sẵn sàng.",
       "interview_cancelled": "{title, select, none {Một buổi phỏng vấn} other {Buổi phỏng vấn “{title}”}} đã bị hủy: phần xem xét chủ đề phải chờ quá lâu.",
       "verification_approved": "“{name}” đã được xác minh cho {domain}.",
-      "verification_declined": "{reason, select, none {Yêu cầu xác minh “{name}” đã bị từ chối.} other {Yêu cầu xác minh “{name}” đã bị từ chối: {reason}}}"
+      "verification_declined": "{reason, select, none {Yêu cầu xác minh “{name}” đã bị từ chối.} other {Yêu cầu xác minh “{name}” đã bị từ chối: {reason}}}",
+      "ats_not_invited": "{count, plural, =1 {{email} từ Workable chưa được mời vào “{title}”: {reason, select, credits {hết credit} limit {đã chạm giới hạn email} paused {việc gửi lời mời đang tạm dừng} other {đã xảy ra lỗi}}.} other {# ứng viên từ Workable chưa được mời vào “{title}”.}}"
     }
   },
   "report": {
@@ -967,9 +969,7 @@
     "faq": "Câu hỏi các công ty thường hỏi"
   },
   "ats": {
-    "notConnected": "Chưa kết nối",
-    "connectedAs": "Đã kết nối với {account}",
-    "broken": "Workable không còn chấp nhận khóa: hãy kết nối lại để tiếp tục",
+    "statusConnected": "đã kết nối",
     "flowTitle": "Ứng viên đến từ Workable như thế nào",
     "flowStage": "Trong Workable, hãy thêm vào quy trình tuyển dụng của tin một giai đoạn riêng cho prepza, chẳng hạn “Kiểm tra kỹ năng prepza”, để không bao giờ lẫn với các công cụ khác của bạn.",
     "flowLink": "Tại đây, hãy liên kết tin tuyển dụng và chọn giai đoạn đó.",
@@ -1013,6 +1013,11 @@
     "unlink": "Hủy liên kết",
     "unlinkTitle": "Hủy liên kết tin này?",
     "unlinkText": "Ứng viên đến giai đoạn này trong {job} sẽ không nhận buổi phỏng vấn nữa. Người đã được mời vẫn giữ nó.",
-    "unlinkFailed": "Không thể hủy liên kết tin tuyển dụng."
+    "unlinkFailed": "Không thể hủy liên kết tin tuyển dụng.",
+    "invitedCount": "{count, plural, other {# đã mời}}",
+    "waitingCount": "{count, plural, other {# đang chờ phỏng vấn}}",
+    "notInvitedCount": "{count, plural, other {# chưa được mời}}",
+    "inviteAgain": "Mời lại",
+    "inviteAgainFailed": "Không thể mời lại họ."
   }
 }

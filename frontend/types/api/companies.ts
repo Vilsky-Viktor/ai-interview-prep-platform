@@ -317,7 +317,8 @@ export interface paths {
     post?: never
     /**
      * Disconnect
-     * @description Disconnects: the key is deleted at once, and its linked jobs with it.
+     * @description Disconnects: Workable's notifications are cancelled, then the key is deleted, and its
+     *     linked jobs with it.
      */
     delete: operations["disconnect_ats__provider__delete"]
     options?: never
@@ -359,6 +360,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/ats/{provider}/jobs/{job_id}/text": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Job Text Of
+     * @description A job's title, description, requirements and benefits as plain text, to make an
+     *     interview from (the same limit as a pasted job description).
+     */
+    get: operations["job_text_of_ats__provider__jobs__job_id__text_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/ats/links": {
     parameters: {
       query?: never
@@ -371,8 +393,8 @@ export interface paths {
     put?: never
     /**
      * Add Link
-     * @description Links an ATS job to one of the company's ready interviews: its candidates who reach the
-     *     stage will get the interview. A job has one interview.
+     * @description Links an ATS job to one of the company's interviews: its candidates who reach the stage
+     *     will get the interview. A job has one interview.
      */
     post: operations["add_link_ats_links_post"]
     delete?: never
@@ -393,6 +415,48 @@ export interface paths {
     post?: never
     /** Remove Link */
     delete: operations["remove_link_ats_links__link_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/ats/candidates/retry": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Retry Candidates
+     * @description Invites again the candidates the ATS sent who weren't invited (after a top-up, or once
+     *     the pause is off).
+     */
+    post: operations["retry_candidates_ats_candidates_retry_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/webhooks/ats/workable/{link_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Workable Event
+     * @description Workable's events for one linked job, signed with the account's token (checked on the raw
+     *     body). Open in maintenance mode like every /webhooks/ route, so no candidate is lost.
+     */
+    post: operations["workable_event_webhooks_ats_workable__link_id__post"]
+    delete?: never
     options?: never
     head?: never
     patch?: never
@@ -1923,6 +1987,29 @@ export interface components {
       interview_id: string
       /** Interview Title */
       interview_title: string | null
+      /**
+       * Invited
+       * @default 0
+       */
+      invited: number
+      /**
+       * Not Invited
+       * @default 0
+       */
+      not_invited: number
+      /**
+       * Waiting
+       * @default 0
+       */
+      waiting: number
+    }
+    /**
+     * JobTextOut
+     * @description A job's text to make an interview from, which the company can edit first.
+     */
+    JobTextOut: {
+      /** Text */
+      text: string
     }
     /** LinkIn */
     LinkIn: {
@@ -3107,6 +3194,40 @@ export interface operations {
       }
     }
   }
+  job_text_of_ats__provider__jobs__job_id__text_get: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path: {
+        provider: components["schemas"]["AtsProvider"]
+        job_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["JobTextOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   list_links_ats_links_get: {
     parameters: {
       query: {
@@ -3192,6 +3313,66 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  retry_candidates_ats_candidates_retry_post: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  workable_event_webhooks_ats_workable__link_id__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        link_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
       }
       /** @description Validation Error */
       422: {

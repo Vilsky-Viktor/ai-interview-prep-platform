@@ -54,6 +54,7 @@
     "verify": "پیوندی برای تأیید ایمیلتان فرستادیم. آن را باز کنید و سپس دوباره وارد شوید تا در مصاحبه‌ها شرکت کنید."
   },
   "common": {
+    "backToTop": "بازگشت به بالا",
     "copyLink": "کپی پیوند",
     "linkCopied": "پیوند کپی شد",
     "home": "صفحه اصلی",
@@ -865,7 +866,8 @@
       "interview_ready": "مصاحبه «{title}» آماده است.",
       "interview_cancelled": "{title, select, none {یک مصاحبه} other {مصاحبه «{title}»}} لغو شد: بررسی موضوع‌هایش بیش از حد منتظر ماند.",
       "verification_approved": "«{name}» برای {domain} تأیید شد.",
-      "verification_declined": "{reason, select, none {تأیید «{name}» رد شد.} other {تأیید «{name}» رد شد: {reason}}}"
+      "verification_declined": "{reason, select, none {تأیید «{name}» رد شد.} other {تأیید «{name}» رد شد: {reason}}}",
+      "ats_not_invited": "{count, plural, one {{email} از Workable به «{title}» دعوت نشد: {reason, select, credits {اعتبار تمام شده است} limit {سقف ایمیل پر شده است} paused {دعوت‌ها متوقف شده‌اند} other {مشکلی پیش آمد}}.} other {# متقاضی از Workable به «{title}» دعوت نشدند.}}"
     }
   },
   "report": {
@@ -967,9 +969,7 @@
     "faq": "پرسش‌هایی که شرکت‌ها می‌پرسند"
   },
   "ats": {
-    "notConnected": "متصل نیست",
-    "connectedAs": "متصل به حساب {account}",
-    "broken": "Workable دیگر کلید را نمی‌پذیرد: برای ادامه دوباره متصل کنید",
+    "statusConnected": "متصل",
     "flowTitle": "متقاضیان چگونه از Workable می‌آیند",
     "flowStage": "در Workable، به روند استخدام این موقعیت شغلی مرحله‌ای فقط برای prepza اضافه کنید، مثلاً «آزمون مهارت prepza»، تا هیچ‌وقت با ابزارهای دیگرتان قاطی نشود.",
     "flowLink": "اینجا موقعیت شغلی را پیوند دهید و همان مرحله را انتخاب کنید.",
@@ -1013,6 +1013,11 @@
     "unlink": "حذف پیوند",
     "unlinkTitle": "پیوند این موقعیت شغلی حذف شود؟",
     "unlinkText": "متقاضیانی که در {job} به این مرحله برسند دیگر مصاحبه را دریافت نمی‌کنند. کسانی که دعوت شده‌اند آن را نگه می‌دارند.",
-    "unlinkFailed": "حذف پیوند موقعیت شغلی ممکن نشد."
+    "unlinkFailed": "حذف پیوند موقعیت شغلی ممکن نشد.",
+    "invitedCount": "{count, plural, one {# دعوت‌شده} other {# دعوت‌شده}}",
+    "waitingCount": "{count, plural, one {# در انتظار مصاحبه} other {# در انتظار مصاحبه}}",
+    "notInvitedCount": "{count, plural, one {# دعوت‌نشده} other {# دعوت‌نشده}}",
+    "inviteAgain": "دعوت دوباره",
+    "inviteAgainFailed": "دعوت دوبارهٔ آن‌ها ممکن نشد."
   }
 }

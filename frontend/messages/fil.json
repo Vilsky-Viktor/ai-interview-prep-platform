@@ -54,6 +54,7 @@
     "verify": "Nagpadala kami sa iyo ng link para i-verify ang iyong email. Buksan ito, saka mag-sign in ulit para makasagot ng mga interview."
   },
   "common": {
+    "backToTop": "Bumalik sa itaas",
     "copyLink": "Kopyahin ang link",
     "linkCopied": "Nakopya ang link",
     "home": "Home",
@@ -873,7 +874,8 @@
       "interview_ready": "Handa na ang interview na “{title}”.",
       "interview_cancelled": "{title, select, none {Kinansela ang isang interview} other {Kinansela ang interview na “{title}”}}: masyadong natagal ang paghihintay sa review ng mga topic.",
       "verification_approved": "Verified na ang “{name}” para sa {domain}.",
-      "verification_declined": "{reason, select, none {Tinanggihan ang verification ng “{name}”.} other {Tinanggihan ang verification ng “{name}”: {reason}}}"
+      "verification_declined": "{reason, select, none {Tinanggihan ang verification ng “{name}”.} other {Tinanggihan ang verification ng “{name}”: {reason}}}",
+      "ats_not_invited": "{count, plural, =1 {Hindi naimbitahan sa “{title}” si {email} mula sa Workable: {reason, select, credits {ubos na ang credits} limit {naabot ang email limit} paused {naka-pause ang mga imbitasyon} other {nagkaproblema}}.} other {Hindi naimbitahan sa “{title}” ang # aplikante mula sa Workable.}}"
     }
   },
   "report": {
@@ -975,9 +977,7 @@
     "faq": "Mga tanong ng mga kumpanya"
   },
   "ats": {
-    "notConnected": "Hindi naka-connect",
-    "connectedAs": "Naka-connect bilang {account}",
-    "broken": "Hindi na tinatanggap ng Workable ang key: i-reconnect para magpatuloy",
+    "statusConnected": "connected",
     "flowTitle": "Paano dumarating ang mga aplikante mula sa Workable",
     "flowStage": "Sa Workable, magdagdag ng stage para lang sa prepza sa pipeline ng job, halimbawa “prepza skills test”, para hindi ito kailanman mahalo sa iba mong tool.",
     "flowLink": "Dito, i-link ang job at piliin ang stage na iyon.",
@@ -1021,6 +1021,11 @@
     "unlink": "I-unlink",
     "unlinkTitle": "I-unlink ang job na ito?",
     "unlinkText": "Hindi na makukuha ng mga aplikanteng aabot sa stage sa {job} ang interview. Mananatili ito sa mga naimbitahan na.",
-    "unlinkFailed": "Hindi ma-unlink ang job."
+    "unlinkFailed": "Hindi ma-unlink ang job.",
+    "invitedCount": "{count, plural, one {# inimbitahan} other {# inimbitahan}}",
+    "waitingCount": "{count, plural, one {# naghihintay sa interview} other {# naghihintay sa interview}}",
+    "notInvitedCount": "{count, plural, one {# hindi naimbitahan} other {# hindi naimbitahan}}",
+    "inviteAgain": "Imbitahan muli",
+    "inviteAgainFailed": "Hindi sila maimbitahan muli."
   }
 }

@@ -54,6 +54,7 @@
     "verify": "We hebben je een link gestuurd om je e-mailadres te verifiëren. Open hem en log daarna opnieuw in om interviews te doen."
   },
   "common": {
+    "backToTop": "Terug naar boven",
     "copyLink": "Link kopiëren",
     "linkCopied": "Link gekopieerd",
     "home": "Home",
@@ -865,7 +866,8 @@
       "interview_ready": "Het interview “{title}” is klaar.",
       "interview_cancelled": "{title, select, none {Een interview} other {Het interview “{title}”}} is geannuleerd: de controle van de onderwerpen bleef te lang liggen.",
       "verification_approved": "“{name}” is geverifieerd voor {domain}.",
-      "verification_declined": "{reason, select, none {De verificatie van “{name}” is afgewezen.} other {De verificatie van “{name}” is afgewezen: {reason}}}"
+      "verification_declined": "{reason, select, none {De verificatie van “{name}” is afgewezen.} other {De verificatie van “{name}” is afgewezen: {reason}}}",
+      "ats_not_invited": "{count, plural, one {{email} uit Workable is niet uitgenodigd voor “{title}”: {reason, select, credits {credits op} limit {een e-maillimiet is bereikt} paused {uitnodigingen zijn gepauzeerd} other {er ging iets mis}}.} other {# kandidaten uit Workable zijn niet uitgenodigd voor “{title}”.}}"
     }
   },
   "report": {
@@ -967,9 +969,7 @@
     "faq": "Vragen die bedrijven stellen"
   },
   "ats": {
-    "notConnected": "Niet gekoppeld",
-    "connectedAs": "Gekoppeld als {account}",
-    "broken": "Workable accepteert de sleutel niet meer: koppel opnieuw om verder te gaan",
+    "statusConnected": "verbonden",
     "flowTitle": "Hoe kandidaten uit Workable binnenkomen",
     "flowStage": "Voeg in Workable aan de pipeline van de vacature een fase toe alleen voor prepza, bijvoorbeeld “prepza-vaardighedentest”, zodat die nooit door je andere tools heen loopt.",
     "flowLink": "Koppel hier de vacature en kies die fase.",
@@ -1013,6 +1013,11 @@
     "unlink": "Ontkoppelen",
     "unlinkTitle": "Deze vacature ontkoppelen?",
     "unlinkText": "Kandidaten die de fase in {job} bereiken, krijgen het interview niet meer. Wie al is uitgenodigd, houdt het.",
-    "unlinkFailed": "De vacature kon niet worden ontkoppeld."
+    "unlinkFailed": "De vacature kon niet worden ontkoppeld.",
+    "invitedCount": "{count, plural, one {# uitgenodigd} other {# uitgenodigd}}",
+    "waitingCount": "{count, plural, one {# wacht op het interview} other {# wachten op het interview}}",
+    "notInvitedCount": "{count, plural, one {# niet uitgenodigd} other {# niet uitgenodigd}}",
+    "inviteAgain": "Opnieuw uitnodigen",
+    "inviteAgainFailed": "Opnieuw uitnodigen is mislukt."
   }
 }

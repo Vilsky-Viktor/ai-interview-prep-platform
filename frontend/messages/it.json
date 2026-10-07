@@ -54,6 +54,7 @@
     "verify": "Ti abbiamo inviato un link per verificare la tua email. Aprilo, poi accedi di nuovo per svolgere i colloqui."
   },
   "common": {
+    "backToTop": "Torna su",
     "copyLink": "Copia link",
     "linkCopied": "Link copiato",
     "home": "Home",
@@ -869,7 +870,8 @@
       "interview_ready": "Il colloquio «{title}» è pronto.",
       "interview_cancelled": "{title, select, none {Un colloquio} other {Il colloquio «{title}»}} è stato annullato: la revisione degli argomenti ha atteso troppo.",
       "verification_approved": "«{name}» è verificata per {domain}.",
-      "verification_declined": "{reason, select, none {La verifica di «{name}» è stata rifiutata.} other {La verifica di «{name}» è stata rifiutata: {reason}}}"
+      "verification_declined": "{reason, select, none {La verifica di «{name}» è stata rifiutata.} other {La verifica di «{name}» è stata rifiutata: {reason}}}",
+      "ats_not_invited": "{count, plural, one {{email} da Workable non è stato invitato a «{title}»: {reason, select, credits {crediti esauriti} limit {è stato raggiunto un limite di email} paused {gli inviti sono in pausa} other {qualcosa è andato storto}}.} other {# candidati da Workable non sono stati invitati a «{title}».}}"
     }
   },
   "report": {
@@ -971,9 +973,7 @@
     "faq": "Domande che fanno le aziende"
   },
   "ats": {
-    "notConnected": "Non collegato",
-    "connectedAs": "Collegato come {account}",
-    "broken": "Workable non accetta più la chiave: ricollegalo per continuare",
+    "statusConnected": "connesso",
     "flowTitle": "Come arrivano i candidati da Workable",
     "flowStage": "In Workable, aggiungi alla pipeline della posizione una fase solo per prepza, ad esempio «Test delle competenze prepza», così non si mescola mai con gli altri tuoi strumenti.",
     "flowLink": "Qui, collega la posizione e scegli quella fase.",
@@ -1017,6 +1017,11 @@
     "unlink": "Scollega",
     "unlinkTitle": "Scollegare questa posizione?",
     "unlinkText": "I candidati che raggiungono la fase in {job} non riceveranno più il colloquio. Chi è già stato invitato lo mantiene.",
-    "unlinkFailed": "Impossibile scollegare la posizione."
+    "unlinkFailed": "Impossibile scollegare la posizione.",
+    "invitedCount": "{count, plural, one {# invitato} other {# invitati}}",
+    "waitingCount": "{count, plural, one {# in attesa del colloquio} other {# in attesa del colloquio}}",
+    "notInvitedCount": "{count, plural, one {# non invitato} other {# non invitati}}",
+    "inviteAgain": "Invita di nuovo",
+    "inviteAgainFailed": "Impossibile invitarli di nuovo."
   }
 }

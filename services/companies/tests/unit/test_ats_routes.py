@@ -13,7 +13,7 @@ from app.main import app
 from app.models.ats import AtsConnection
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
-from app.storage import ats, companies, interviews
+from app.storage import ats, ats_candidates, companies, interviews
 
 COMPANY_ID = uuid.uuid4()
 OTHER_COMPANY = uuid.uuid4()
@@ -52,13 +52,14 @@ def stored(monkeypatch):
         Member(company_id=COMPANY_ID, user_id="ann", invited_email="a@x.com", role="admin"),
         Member(company_id=COMPANY_ID, user_id="vic", invited_email="v@x.com", role="viewer"),
     ]
-    rows = {"connection": None, "links": []}
+    rows = {"connection": None, "links": [], "subscriptions": [], "targets": []}
 
     async def get_company(company_id):
         return company if company_id == COMPANY_ID else None
 
-    async def connect(company_id, provider, account, credentials, user_id):
+    async def connect(company_id, provider, account, credentials, user_id, member_id=None):
         rows["connection"] = AtsConnection(
+            member_id=member_id,
             id=uuid.uuid4(),
             company_id=company_id,
             provider=provider,
@@ -81,7 +82,24 @@ def stored(monkeypatch):
     async def add_link(connection_id, interview_id, job, stage):
         rows["links"].append((interview_id, job["id"], stage["id"]))
 
-        return True
+        return uuid.uuid4()
+
+    async def set_subscription(link_id, subscription_id):
+        rows["subscriptions"].append(subscription_id)
+
+    async def subscriptions(company_id, link_id=None):
+        return list(rows["subscriptions"])
+
+    async def no_counts(company_id):
+        return {}
+
+    async def member_id(subdomain, token, email):
+        return "member-1"
+
+    async def subscribe(subdomain, token, target, job_id, stage_id):
+        rows["targets"].append(target)
+
+        return "sub-1"
 
     async def get_interview(interview_id):
         if interview_id == INTERVIEW_ID:
@@ -107,11 +125,16 @@ def stored(monkeypatch):
         "connections": connections,
         "disconnect": disconnect,
         "add_link": add_link,
+        "set_subscription": set_subscription,
+        "subscriptions": subscriptions,
     }.items():
         monkeypatch.setattr(ats, name, fake)
     monkeypatch.setattr(workable, "check", check)
     monkeypatch.setattr(workable, "jobs", jobs)
     monkeypatch.setattr(workable, "stages", stages)
+    monkeypatch.setattr(workable, "member_id", member_id)
+    monkeypatch.setattr(workable, "subscribe", subscribe)
+    monkeypatch.setattr(ats_candidates, "counts", no_counts)
 
     return rows
 
@@ -137,6 +160,7 @@ def test_an_admin_connects_and_the_key_is_kept_encrypted(client, stored, key):
 
     saved = stored["connection"]
     assert saved.account == "acme"
+    assert saved.member_id == "member-1"
     assert "good" not in saved.credentials
     assert decrypt(key, saved.credentials) == '{"subdomain": "acme", "token": "good"}'
     # Never the key itself.
@@ -183,6 +207,9 @@ def test_a_job_links_to_one_of_the_companys_interviews(client, stored, key):
         == 201
     )
     assert stored["links"] == [(INTERVIEW_ID, "A1", "assessment")]
+    # Workable notifies this link's own address, and the subscription is kept to cancel it.
+    assert stored["targets"][0].startswith("http://localhost:8090/api/companies/webhooks/ats/")
+    assert stored["subscriptions"] == ["sub-1"]
     # Another company's interview, or a job or stage Workable doesn't have, isn't linked.
     other = {**body, "interview_id": str(uuid.uuid4())}
     unknown = {**body, "stage_id": "offer", "interview_id": str(INTERVIEW_ID)}

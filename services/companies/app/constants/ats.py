@@ -22,3 +22,31 @@ WORKABLE_PAGE = 100
 WORKABLE_MAX_PAGES = 10
 # Seconds to wait for an ATS's answer.
 ATS_TIMEOUT_SECONDS = 15
+
+
+class CandidateStatus(StrEnum):
+    """A candidate the ATS sent: waiting for the interview to be ready (or being invited right
+    now), invited, or not invited for `reason`."""
+
+    WAITING = "waiting"
+    INVITING = "inviting"
+    INVITED = "invited"
+    FAILED = "failed"
+
+
+# An invite claimed this long ago and still not settled was cut off (the server stopped
+# mid-invite): it can be claimed again.
+STALE_CLAIM_MINUTES = 10
+
+
+class FailReason(StrEnum):
+    CREDITS = "credits"
+    LIMIT = "limit"
+    PAUSED = "paused"
+    OTHER = "other"
+
+
+# The Workable event that sends a candidate: moved into a linked job's stage.
+WORKABLE_MOVED = "candidate_moved"
+# Where Workable sends it, one address per linked job (Workable wants each target unique).
+WORKABLE_WEBHOOK = "{site}/api/companies/webhooks/ats/workable/{link_id}"

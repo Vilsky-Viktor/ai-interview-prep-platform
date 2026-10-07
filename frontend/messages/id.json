@@ -54,6 +54,7 @@
     "verify": "Kami mengirimkan tautan untuk memverifikasi email-mu. Buka tautannya, lalu masuk lagi untuk mengikuti wawancara."
   },
   "common": {
+    "backToTop": "Kembali ke atas",
     "copyLink": "Salin tautan",
     "linkCopied": "Tautan disalin",
     "home": "Beranda",
@@ -869,7 +870,8 @@
       "interview_ready": "Wawancara “{title}” sudah siap.",
       "interview_cancelled": "{title, select, none {Sebuah wawancara} other {Wawancara “{title}”}} dibatalkan: tinjauan topiknya menunggu terlalu lama.",
       "verification_approved": "“{name}” terverifikasi untuk {domain}.",
-      "verification_declined": "{reason, select, none {Verifikasi “{name}” ditolak.} other {Verifikasi “{name}” ditolak: {reason}}}"
+      "verification_declined": "{reason, select, none {Verifikasi “{name}” ditolak.} other {Verifikasi “{name}” ditolak: {reason}}}",
+      "ats_not_invited": "{count, plural, =1 {{email} dari Workable tidak diundang ke “{title}”: {reason, select, credits {kredit habis} limit {batas email tercapai} paused {undangan sedang dijeda} other {terjadi kesalahan}}.} other {# kandidat dari Workable tidak diundang ke “{title}”.}}"
     }
   },
   "report": {
@@ -971,9 +973,7 @@
     "faq": "Pertanyaan yang diajukan perusahaan"
   },
   "ats": {
-    "notConnected": "Belum terhubung",
-    "connectedAs": "Terhubung sebagai {account}",
-    "broken": "Workable tidak lagi menerima kunci: hubungkan ulang untuk melanjutkan",
+    "statusConnected": "terhubung",
     "flowTitle": "Cara kandidat masuk dari Workable",
     "flowStage": "Di Workable, tambahkan tahap khusus untuk prepza ke pipeline lowongan, misalnya “Tes keterampilan prepza”, supaya tidak pernah tercampur dengan alat lain yang kamu pakai.",
     "flowLink": "Di sini, tautkan lowongan dan pilih tahap itu.",
@@ -1017,6 +1017,11 @@
     "unlink": "Lepas tautan",
     "unlinkTitle": "Lepas tautan lowongan ini?",
     "unlinkText": "Kandidat yang mencapai tahap ini di {job} tidak akan mendapat wawancara lagi. Yang sudah diundang tetap memilikinya.",
-    "unlinkFailed": "Tautan lowongan tidak bisa dilepas."
+    "unlinkFailed": "Tautan lowongan tidak bisa dilepas.",
+    "invitedCount": "{count, plural, other {# diundang}}",
+    "waitingCount": "{count, plural, other {# menunggu wawancara}}",
+    "notInvitedCount": "{count, plural, other {# tidak diundang}}",
+    "inviteAgain": "Undang lagi",
+    "inviteAgainFailed": "Tidak bisa mengundang mereka lagi."
   }
 }

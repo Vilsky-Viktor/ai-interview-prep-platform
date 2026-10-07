@@ -54,6 +54,7 @@
     "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, a potem zaloguj się ponownie, aby brać udział w rozmowach."
   },
   "common": {
+    "backToTop": "Na górę",
     "copyLink": "Kopiuj link",
     "linkCopied": "Skopiowano link",
     "home": "Strona główna",
@@ -869,7 +870,8 @@
       "interview_ready": "Rozmowa „{title}” jest gotowa.",
       "interview_cancelled": "{title, select, none {Rozmowa została anulowana} other {Rozmowa „{title}” została anulowana}}: tematy zbyt długo czekały na zatwierdzenie.",
       "verification_approved": "„{name}” jest zweryfikowana dla {domain}.",
-      "verification_declined": "{reason, select, none {Weryfikacja „{name}” została odrzucona.} other {Weryfikacja „{name}” została odrzucona: {reason}}}"
+      "verification_declined": "{reason, select, none {Weryfikacja „{name}” została odrzucona.} other {Weryfikacja „{name}” została odrzucona: {reason}}}",
+      "ats_not_invited": "{count, plural, one {Kandydat {email} z Workable nie został zaproszony do „{title}”: {reason, select, credits {brak kredytów} limit {osiągnięto limit e-maili} paused {zaproszenia są wstrzymane} other {coś poszło nie tak}}.} few {# kandydaci z Workable nie zostali zaproszeni do „{title}”.} many {# kandydatów z Workable nie zostało zaproszonych do „{title}”.} other {# kandydata z Workable nie zostało zaproszone do „{title}”.}}"
     }
   },
   "report": {
@@ -971,9 +973,7 @@
     "faq": "Pytania, które zadają firmy"
   },
   "ats": {
-    "notConnected": "Nie połączono",
-    "connectedAs": "Połączono jako {account}",
-    "broken": "Workable nie akceptuje już klucza: połącz ponownie, aby kontynuować",
+    "statusConnected": "połączono",
     "flowTitle": "Jak kandydaci trafiają z Workable",
     "flowStage": "W Workable dodaj do procesu rekrutacji tej oferty etap tylko dla prepza, np. „Test umiejętności prepza”, żeby nigdy nie mieszał się z innymi narzędziami.",
     "flowLink": "Tutaj powiąż ofertę i wybierz ten etap.",
@@ -1017,6 +1017,11 @@
     "unlink": "Usuń powiązanie",
     "unlinkTitle": "Usunąć powiązanie tej oferty?",
     "unlinkText": "Kandydaci, którzy dotrą do etapu w {job}, nie dostaną już rozmowy. Już zaproszeni ją zachowają.",
-    "unlinkFailed": "Nie udało się usunąć powiązania oferty."
+    "unlinkFailed": "Nie udało się usunąć powiązania oferty.",
+    "invitedCount": "{count, plural, one {Zaproszono: #} few {Zaproszono: #} many {Zaproszono: #} other {Zaproszono: #}}",
+    "waitingCount": "{count, plural, one {Czeka na rozmowę: #} few {Czeka na rozmowę: #} many {Czeka na rozmowę: #} other {Czeka na rozmowę: #}}",
+    "notInvitedCount": "{count, plural, one {Nie zaproszono: #} few {Nie zaproszono: #} many {Nie zaproszono: #} other {Nie zaproszono: #}}",
+    "inviteAgain": "Zaproś ponownie",
+    "inviteAgainFailed": "Nie udało się ponownie ich zaprosić."
   }
 }

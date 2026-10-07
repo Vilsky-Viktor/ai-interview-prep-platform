@@ -13,8 +13,8 @@ import { Button } from "@/components/ui/button"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { AtsJobLink, Interview } from "@/types/company"
 
-/** The ATS jobs linked to the company's interviews, laid out like the company's other lists,
- * with "Link a job" for owners and admins. */
+/** The ATS's jobs linked to the company's interviews, on the ATS's own page, with "Link a job"
+ * for owners and admins. */
 export function AtsJobLinks({
   companyId,
   links,
@@ -103,6 +103,7 @@ function LinkRow({
             {link.interview_title ?? t("generatingInterview")}
           </Link>
         </span>
+        <CandidateCounts companyId={companyId} link={link} canEdit={canEdit} />
       </span>
       {canEdit && (
         <Button
@@ -125,5 +126,69 @@ function LinkRow({
         onConfirm={unlink}
       />
     </li>
+  )
+}
+
+/** How the candidates Workable sent for this job went: invited, waiting for the interview to be
+ * ready, and not invited (in red, with "Invite again" for owners and admins). */
+function CandidateCounts({
+  companyId,
+  link,
+  canEdit,
+}: {
+  companyId: string
+  link: AtsJobLink
+  canEdit: boolean
+}) {
+  const t = useTranslations("ats")
+  const router = useRouter()
+  const [busy, setBusy] = useState(false)
+
+  if (!link.invited && !link.waiting && !link.not_invited) {
+    return null
+  }
+
+  async function retry() {
+    setBusy(true)
+
+    try {
+      await apiFetch(
+        `/companies/ats/candidates/retry?company_id=${companyId}`,
+        {
+          method: "POST",
+        }
+      )
+      router.refresh()
+    } catch (error) {
+      toast.error(apiErrorMessage(error, t("inviteAgainFailed")))
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+      {link.invited > 0 && (
+        <span>{t("invitedCount", { count: link.invited })}</span>
+      )}
+      {link.waiting > 0 && (
+        <span>{t("waitingCount", { count: link.waiting })}</span>
+      )}
+      {link.not_invited > 0 && (
+        <span className="text-destructive">
+          {t("notInvitedCount", { count: link.not_invited })}
+        </span>
+      )}
+      {link.not_invited > 0 && canEdit && (
+        <button
+          type="button"
+          disabled={busy}
+          onClick={retry}
+          className="text-primary lowercase underline-offset-4 hover:underline disabled:opacity-50"
+        >
+          {t("inviteAgain")}
+        </button>
+      )}
+    </span>
   )
 }

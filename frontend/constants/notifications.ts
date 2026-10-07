@@ -7,6 +7,7 @@ import {
   PackageCheckIcon,
   SparklesIcon,
   UserCheckIcon,
+  UserXIcon,
   XCircleIcon,
   type LucideIcon,
 } from "lucide-react"
@@ -34,4 +35,5 @@ export const NOTIFICATION_LOOKS: Record<
   interview_cancelled: { icon: XCircleIcon, alert: true },
   verification_approved: { icon: BadgeCheckIcon, alert: false },
   verification_declined: { icon: BadgeXIcon, alert: true },
+  ats_not_invited: { icon: UserXIcon, alert: true },
 }

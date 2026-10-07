@@ -54,6 +54,7 @@
     "verify": "E-postanızı doğrulamanız için bir bağlantı gönderdik. Bağlantıyı açın, ardından mülakatlara girmek için yeniden giriş yapın."
   },
   "common": {
+    "backToTop": "Başa dön",
     "copyLink": "Bağlantıyı kopyala",
     "linkCopied": "Bağlantı kopyalandı",
     "home": "Ana sayfa",
@@ -868,7 +869,8 @@
       "interview_ready": "“{title}” mülakatı hazır.",
       "interview_cancelled": "{title, select, none {Bir mülakat} other {“{title}” mülakatı}} iptal edildi: konu incelemesi çok uzun süre bekledi.",
       "verification_approved": "“{name}”, {domain} için doğrulandı.",
-      "verification_declined": "{reason, select, none {“{name}” doğrulaması reddedildi.} other {“{name}” doğrulaması reddedildi: {reason}}}"
+      "verification_declined": "{reason, select, none {“{name}” doğrulaması reddedildi.} other {“{name}” doğrulaması reddedildi: {reason}}}",
+      "ats_not_invited": "{count, plural, one {Workable'dan gelen {email}, “{title}” mülakatına davet edilmedi: {reason, select, credits {krediniz bitti} limit {bir e-posta sınırına ulaşıldı} paused {davetler duraklatıldı} other {bir şeyler ters gitti}}.} other {Workable'dan gelen # aday “{title}” mülakatına davet edilmedi.}}"
     }
   },
   "report": {
@@ -970,9 +972,7 @@
     "faq": "Şirketlerin sorduğu sorular"
   },
   "ats": {
-    "notConnected": "Bağlı değil",
-    "connectedAs": "{account} olarak bağlı",
-    "broken": "Workable artık anahtarı kabul etmiyor: devam etmek için yeniden bağlayın",
+    "statusConnected": "bağlı",
     "flowTitle": "Adaylar Workable'dan nasıl gelir",
     "flowStage": "Workable'da ilanın sürecine yalnızca prepza için bir aşama ekleyin, örneğin “prepza beceri testi”; böylece diğer araçlarınızla hiç karışmaz.",
     "flowLink": "Burada ilanı bağlayın ve o aşamayı seçin.",
@@ -1016,6 +1016,11 @@
     "unlink": "Bağlantıyı kaldır",
     "unlinkTitle": "Bu ilanın bağlantısı kaldırılsın mı?",
     "unlinkText": "{job} ilanında aşamaya ulaşan adaylar artık mülakatı almaz. Daha önce davet edilenlerin mülakatı kalır.",
-    "unlinkFailed": "İlanın bağlantısı kaldırılamadı."
+    "unlinkFailed": "İlanın bağlantısı kaldırılamadı.",
+    "invitedCount": "{count, plural, one {# davet edildi} other {# davet edildi}}",
+    "waitingCount": "{count, plural, one {# mülakatı bekliyor} other {# mülakatı bekliyor}}",
+    "notInvitedCount": "{count, plural, one {# davet edilmedi} other {# davet edilmedi}}",
+    "inviteAgain": "Yeniden davet et",
+    "inviteAgainFailed": "Adaylar yeniden davet edilemedi."
   }
 }
