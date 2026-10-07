@@ -47,7 +47,7 @@ export function CompanyList({
     <VirtualList
       items={items}
       getKey={byId}
-      estimateSize={77}
+      estimateSize={93}
       onEndReached={loadMore}
       className="divide-y overflow-hidden rounded-2xl border"
       renderItem={(company) => (
@@ -59,13 +59,13 @@ export function CompanyList({
                 ? `/companies/${company.id}/templates/${templateId}`
                 : `/companies/${company.id}/interviews`
             }
-            className="flex min-w-0 flex-1 items-center justify-between gap-4 py-6 after:absolute after:inset-0"
+            className="flex min-w-0 flex-1 items-center justify-between gap-4 py-8 after:absolute after:inset-0"
           >
             <span className="flex min-w-0 items-center gap-2">
               {/* The logo, or the first letter, as in the company's header: a square the
-                  row's full height (24px padding twice, plus the name's line), from its
+                  row's full height (32px padding twice, plus the name's line), from its
                   left border. */}
-              <span className="-my-6 me-4 flex size-19 shrink-0 items-center justify-center overflow-hidden bg-muted">
+              <span className="-my-8 me-4 flex size-23 shrink-0 items-center justify-center overflow-hidden bg-muted">
                 {company.logo_url ? (
                   <CompanyLogo
                     url={company.logo_url}
