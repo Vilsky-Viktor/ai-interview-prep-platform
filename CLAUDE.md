@@ -75,3 +75,11 @@
     unique constraint), rate limits (of external APIs and of our own services, with
     retries and backoff), and failures (what is retried, what is lost, what a handler
     does halfway through).
+
+12. **Translate the meaning, not the words.** In every language, use the words and
+    phrases that carry exactly the intended meaning in our domain (hiring, candidates,
+    tests, practice). When a word is ambiguous, look up what that language normally
+    uses for it in hiring and HR. A literal translation can narrow or change the
+    meaning: English "learner" covers anyone learning, while its literal translation
+    elsewhere may mean only a school pupil or a university student; Persian «نامزد»
+    for "candidate" also means an election candidate or a fiancé («متقاضی» is right).
