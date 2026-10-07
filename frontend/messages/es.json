@@ -1028,7 +1028,7 @@
     "ghStepCreate": "Crea una credencial de API de este tipo:",
     "ghStepPermissions": "Dale acceso a estos endpoints:",
     "ghStepPaste": "Pega abajo su ID de cliente y su secreto.",
-    "webhookText": "Una sola vez, para que Greenhouse nos avise cuando un candidato pase a otra etapa.",
+    "webhookText": "Una sola vez, para que {ats} nos avise cuando un candidato pase a otra etapa.",
     "webhookEvent": "Crea un webhook para este evento:",
     "webhookUrl": "Pega esto como su URL de endpoint:",
     "webhookSecret": "Y esto como su clave secreta:",
@@ -1036,6 +1036,16 @@
     "copySecret": "Copiar clave",
     "copied": "Copiado",
     "webhookTitle": "Configurar el webhook",
-    "flowHow": "Cómo llegan los candidatos"
+    "flowHow": "Cómo llegan los candidatos",
+    "apiKey": "Clave de API",
+    "ttStepCreate": "Crea una nueva clave de API con estos permisos:",
+    "ttStepPaste": "Pega la clave abajo. Tu región de Teamtailor la detectamos nosotros.",
+    "ttWebhookAddon": "Los webhooks son un complemento de Teamtailor: primero activa Webhooks en el Add-on feature center de Teamtailor.",
+    "webhookPasteKey": "Guárdalo y luego pega aquí la clave de firma que {ats} muestra para él:",
+    "signatureKey": "Clave de firma",
+    "saveKey": "Guardar clave",
+    "keySaved": "Clave guardada",
+    "keySaveFailed": "No se pudo guardar la clave.",
+    "instructions": "Instrucciones"
   }
 }

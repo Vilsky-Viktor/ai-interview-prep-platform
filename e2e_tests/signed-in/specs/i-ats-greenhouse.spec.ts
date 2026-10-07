@@ -29,7 +29,7 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
   // Not connected: the info dialog has no web hook yet.
   await openDialog(
     owner,
-    owner.getByRole("button", { name: "How candidates come from Greenhouse" })
+    owner.getByRole("button", { name: "Instructions" })
   )
   await expect(owner.getByRole("dialog").getByRole("listitem")).toHaveCount(6)
   await expect(owner.getByText("Set up the web hook")).toHaveCount(0)

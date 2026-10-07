@@ -1027,7 +1027,7 @@
     "ghStepCreate": "Bu türde bir API kimlik bilgisi oluşturun:",
     "ghStepPermissions": "Şu uç noktalara erişim verin:",
     "ghStepPaste": "İstemci kimliğini ve gizli anahtarını aşağıya yapıştırın.",
-    "webhookText": "Yalnızca bir kez; böylece bir aday başka bir aşamaya geçtiğinde Greenhouse bize haber verir.",
+    "webhookText": "Yalnızca bir kez; böylece bir aday başka bir aşamaya geçtiğinde {ats} bize haber verir.",
     "webhookEvent": "Bu olay için bir webhook oluşturun:",
     "webhookUrl": "Bunu uç nokta URL'si olarak yapıştırın:",
     "webhookSecret": "Bunu da gizli anahtar olarak:",
@@ -1035,6 +1035,16 @@
     "copySecret": "Anahtarı kopyala",
     "copied": "Kopyalandı",
     "webhookTitle": "Webhook'u kur",
-    "flowHow": "Adaylar nasıl gelir"
+    "flowHow": "Adaylar nasıl gelir",
+    "apiKey": "API anahtarı",
+    "ttStepCreate": "Şu izinlerle yeni bir API anahtarı oluşturun:",
+    "ttStepPaste": "Anahtarı aşağıya yapıştırın. Teamtailor bölgenizi kendimiz buluruz.",
+    "ttWebhookAddon": "Webhook'lar bir Teamtailor eklentisidir: önce Teamtailor'daki Add-on feature center bölümünde Webhooks'u açın.",
+    "webhookPasteKey": "Kaydedin, ardından {ats} tarafından gösterilen imza anahtarını buraya yapıştırın:",
+    "signatureKey": "İmza anahtarı",
+    "saveKey": "Anahtarı kaydet",
+    "keySaved": "Anahtar kaydedildi",
+    "keySaveFailed": "Anahtar kaydedilemedi.",
+    "instructions": "Talimatlar"
   }
 }

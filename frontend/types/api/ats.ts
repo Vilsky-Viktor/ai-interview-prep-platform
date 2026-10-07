@@ -4,27 +4,6 @@
  */
 
 export interface paths {
-  "/connections": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * List Connections
-     * @description The company's ATS connections; every member sees them, only owners and admins change
-     *     them.
-     */
-    get: operations["list_connections_connections_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/workable": {
     parameters: {
       query?: never
@@ -68,7 +47,29 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/greenhouse/webhook": {
+  "/teamtailor": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Connect Teamtailor
+     * @description Connects Teamtailor with an Admin, Read/Write API key, checked first in each region until
+     *     one accepts it. The web hook's signature key comes later (Teamtailor makes it); a reconnect
+     *     keeps it.
+     */
+    put: operations["connect_teamtailor_teamtailor_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/{provider}/webhook": {
     parameters: {
       query?: never
       header?: never
@@ -76,11 +77,53 @@ export interface paths {
       cookie?: never
     }
     /**
-     * Greenhouse Webhook
-     * @description Where the company's Greenhouse web hook sends stage changes, and its secret key, to paste
-     *     into Greenhouse; owners and admins only.
+     * Webhook
+     * @description Where the company's web hook sends its events, and its secret key (empty while a
+     *     Teamtailor one has none saved); owners and admins only.
      */
-    get: operations["greenhouse_webhook_greenhouse_webhook_get"]
+    get: operations["webhook__provider__webhook_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/teamtailor/webhook": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Save Teamtailor Key
+     * @description Saves the signature key Teamtailor generated for the company's web hook: its events count
+     *     from then on.
+     */
+    put: operations["save_teamtailor_key_teamtailor_webhook_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/connections": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Connections
+     * @description The company's ATS connections; every member sees them, only owners and admins change
+     *     them.
+     */
+    get: operations["list_connections_connections_get"]
     put?: never
     post?: never
     delete?: never
@@ -268,6 +311,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/webhooks/teamtailor/{connection_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Teamtailor Event
+     * @description The company's Teamtailor web hook (job applications changed), signed with the signature
+     *     key Teamtailor gave it (the TT-Signature header, checked on the raw body).
+     */
+    post: operations["teamtailor_event_webhooks_teamtailor__connection_id__post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/events": {
     parameters: {
       query?: never
@@ -429,7 +493,7 @@ export interface components {
      * @description The applicant tracking systems a company can connect.
      * @enum {string}
      */
-    AtsProvider: "workable" | "greenhouse"
+    AtsProvider: "workable" | "greenhouse" | "teamtailor"
     /**
      * ConnectionOut
      * @description A connection as the company sees it: never its key.
@@ -551,6 +615,11 @@ export interface components {
       /** Messageid */
       messageId: string
     }
+    /** TeamtailorIn */
+    TeamtailorIn: {
+      /** Key */
+      key: string
+    }
     /** ValidationError */
     ValidationError: {
       /** Location */
@@ -563,6 +632,11 @@ export interface components {
       input?: unknown
       /** Context */
       ctx?: Record<string, never>
+    }
+    /** WebhookKeyIn */
+    WebhookKeyIn: {
+      /** Secret */
+      secret: string
     }
     /**
      * WebhookOut
@@ -590,37 +664,6 @@ export interface components {
 }
 export type $defs = Record<string, never>
 export interface operations {
-  list_connections_connections_get: {
-    parameters: {
-      query: {
-        company_id: string
-      }
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["IntegrationsOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
   connect_workable_workable_put: {
     parameters: {
       query: {
@@ -687,7 +730,106 @@ export interface operations {
       }
     }
   }
-  greenhouse_webhook_greenhouse_webhook_get: {
+  connect_teamtailor_teamtailor_put: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["TeamtailorIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  webhook__provider__webhook_get: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path: {
+        provider: components["schemas"]["AtsProvider"]
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["WebhookOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  save_teamtailor_key_teamtailor_webhook_put: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["WebhookKeyIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_connections_connections_get: {
     parameters: {
       query: {
         company_id: string
@@ -704,7 +846,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["WebhookOut"]
+          "application/json": components["schemas"]["IntegrationsOut"]
         }
       }
       /** @description Validation Error */
@@ -1010,6 +1152,37 @@ export interface operations {
     }
   }
   greenhouse_event_webhooks_greenhouse__connection_id__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        connection_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  teamtailor_event_webhooks_teamtailor__connection_id__post: {
     parameters: {
       query?: never
       header?: never

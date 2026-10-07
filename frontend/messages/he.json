@@ -1019,7 +1019,7 @@
     "ghStepCreate": "צרו פרטי גישה ל-API מהסוג הזה:",
     "ghStepPermissions": "תנו להם גישה לנקודות הקצה האלה:",
     "ghStepPaste": "הדביקו למטה את מזהה הלקוח ואת הסוד שלהם.",
-    "webhookText": "פעם אחת, כדי ש-Greenhouse יודיע לנו כשמועמד עובר לשלב אחר.",
+    "webhookText": "פעם אחת, כדי ש-{ats} יודיע לנו כשמועמד עובר לשלב אחר.",
     "webhookEvent": "צרו וובהוק לאירוע הזה:",
     "webhookUrl": "הדביקו את זה ככתובת ה-URL של נקודת הקצה:",
     "webhookSecret": "ואת זה כמפתח הסודי:",
@@ -1027,6 +1027,16 @@
     "copySecret": "העתקת המפתח",
     "copied": "הועתק",
     "webhookTitle": "הגדרת וובהוק",
-    "flowHow": "איך מועמדים מגיעים"
+    "flowHow": "איך מועמדים מגיעים",
+    "apiKey": "מפתח API",
+    "ttStepCreate": "צרו מפתח API חדש עם ההרשאות האלה:",
+    "ttStepPaste": "הדביקו את המפתח למטה. את אזור ה-Teamtailor שלכם נמצא בעצמנו.",
+    "ttWebhookAddon": "וובהוקים הם תוסף של Teamtailor: קודם הפעילו את Webhooks ב-Add-on feature center של Teamtailor.",
+    "webhookPasteKey": "שמרו אותו, ואז הדביקו כאן את מפתח החתימה ש-{ats} מציג עבורו:",
+    "signatureKey": "מפתח חתימה",
+    "saveKey": "שמירת המפתח",
+    "keySaved": "המפתח נשמר",
+    "keySaveFailed": "לא ניתן לשמור את המפתח.",
+    "instructions": "הוראות"
   }
 }

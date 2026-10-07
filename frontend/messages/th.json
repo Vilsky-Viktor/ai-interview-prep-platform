@@ -1023,7 +1023,7 @@
     "ghStepCreate": "สร้างข้อมูลรับรอง API ประเภทนี้:",
     "ghStepPermissions": "ให้สิทธิ์เข้าถึงเอนด์พอยต์เหล่านี้:",
     "ghStepPaste": "วาง Client ID และ Client secret ด้านล่าง",
-    "webhookText": "ทำเพียงครั้งเดียว เพื่อให้ Greenhouse แจ้งเราเมื่อผู้สมัครย้ายไปขั้นตอนอื่น",
+    "webhookText": "ทำเพียงครั้งเดียว เพื่อให้ {ats} แจ้งเราเมื่อผู้สมัครย้ายไปขั้นตอนอื่น",
     "webhookEvent": "สร้างเว็บฮุกสำหรับเหตุการณ์นี้:",
     "webhookUrl": "วางค่านี้เป็น URL ของเอนด์พอยต์:",
     "webhookSecret": "และวางค่านี้เป็นคีย์ลับ:",
@@ -1031,6 +1031,16 @@
     "copySecret": "คัดลอกคีย์",
     "copied": "คัดลอกแล้ว",
     "webhookTitle": "ตั้งค่าเว็บฮุก",
-    "flowHow": "ผู้สมัครเข้ามาอย่างไร"
+    "flowHow": "ผู้สมัครเข้ามาอย่างไร",
+    "apiKey": "คีย์ API",
+    "ttStepCreate": "สร้างคีย์ API ใหม่ที่มีสิทธิ์เหล่านี้:",
+    "ttStepPaste": "วางคีย์ด้านล่าง เราจะหาภูมิภาค Teamtailor ของคุณเอง",
+    "ttWebhookAddon": "เว็บฮุกเป็นส่วนเสริมของ Teamtailor: ให้เปิด Webhooks ใน Add-on feature center ของ Teamtailor ก่อน",
+    "webhookPasteKey": "บันทึกเว็บฮุก แล้ววางคีย์ลายเซ็นที่ {ats} แสดงให้ที่นี่:",
+    "signatureKey": "คีย์ลายเซ็น",
+    "saveKey": "บันทึกคีย์",
+    "keySaved": "บันทึกคีย์แล้ว",
+    "keySaveFailed": "บันทึกคีย์ไม่สำเร็จ",
+    "instructions": "คำแนะนำ"
   }
 }

@@ -1032,7 +1032,7 @@
     "ghStepCreate": "次の種類の API 認証情報を作成します：",
     "ghStepPermissions": "次のエンドポイントへのアクセスを許可します：",
     "ghStepPaste": "下にクライアント ID とシークレットを貼り付けてください。",
-    "webhookText": "候補者が別の選考ステップに移ったときに Greenhouse から通知を受けるための、一度だけの設定です。",
+    "webhookText": "候補者が別の選考ステップに移ったときに {ats} から通知を受けるための、一度だけの設定です。",
     "webhookEvent": "次のイベントの Webhook を作成します：",
     "webhookUrl": "エンドポイント URL にはこれを貼り付けます：",
     "webhookSecret": "シークレットキーにはこれを貼り付けます：",
@@ -1040,6 +1040,16 @@
     "copySecret": "キーをコピー",
     "copied": "コピーしました",
     "webhookTitle": "Webhook を設定",
-    "flowHow": "候補者が届く流れ"
+    "flowHow": "候補者が届く流れ",
+    "apiKey": "API キー",
+    "ttStepCreate": "次の権限で新しい API キーを作成します：",
+    "ttStepPaste": "下にキーを貼り付けてください。Teamtailor のリージョンはこちらで特定します。",
+    "ttWebhookAddon": "Webhook は Teamtailor のアドオンです。先に Teamtailor の Add-on feature center で Webhooks を有効にしてください。",
+    "webhookPasteKey": "保存したら、{ats} に表示される署名キーをここに貼り付けます：",
+    "signatureKey": "署名キー",
+    "saveKey": "キーを保存",
+    "keySaved": "キーを保存しました",
+    "keySaveFailed": "キーを保存できませんでした。",
+    "instructions": "手順"
   }
 }

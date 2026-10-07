@@ -1028,7 +1028,7 @@
     "ghStepCreate": "Utwórz dane uwierzytelniające API tego typu:",
     "ghStepPermissions": "Daj im dostęp do tych endpointów:",
     "ghStepPaste": "Wklej poniżej identyfikator klienta i sekret.",
-    "webhookText": "Tylko raz, aby Greenhouse powiadamiał nas, gdy kandydat przejdzie do innego etapu.",
+    "webhookText": "Tylko raz, aby {ats} powiadamiał nas, gdy kandydat przejdzie do innego etapu.",
     "webhookEvent": "Utwórz webhook dla tego zdarzenia:",
     "webhookUrl": "Wklej to jako adres URL endpointu:",
     "webhookSecret": "A to jako klucz tajny:",
@@ -1036,6 +1036,16 @@
     "copySecret": "Kopiuj klucz",
     "copied": "Skopiowano",
     "webhookTitle": "Skonfiguruj webhook",
-    "flowHow": "Jak trafiają kandydaci"
+    "flowHow": "Jak trafiają kandydaci",
+    "apiKey": "Klucz API",
+    "ttStepCreate": "Utwórz nowy klucz API z tymi uprawnieniami:",
+    "ttStepPaste": "Wklej klucz poniżej. Twój region Teamtailor ustalimy sami.",
+    "ttWebhookAddon": "Webhooki to dodatek Teamtailor: najpierw włącz Webhooks w sekcji Add-on feature center w Teamtailor.",
+    "webhookPasteKey": "Zapisz go, a potem wklej tutaj klucz podpisu, który {ats} dla niego pokazuje:",
+    "signatureKey": "Klucz podpisu",
+    "saveKey": "Zapisz klucz",
+    "keySaved": "Zapisano klucz",
+    "keySaveFailed": "Nie udało się zapisać klucza.",
+    "instructions": "Instrukcja"
   }
 }

@@ -1024,7 +1024,7 @@
     "ghStepCreate": "Tạo thông tin xác thực API thuộc loại này:",
     "ghStepPermissions": "Cấp quyền truy cập các endpoint sau:",
     "ghStepPaste": "Dán client ID và secret của nó bên dưới.",
-    "webhookText": "Chỉ một lần, để Greenhouse báo cho chúng tôi khi ứng viên chuyển sang giai đoạn khác.",
+    "webhookText": "Chỉ một lần, để {ats} báo cho chúng tôi khi ứng viên chuyển sang giai đoạn khác.",
     "webhookEvent": "Tạo webhook cho sự kiện này:",
     "webhookUrl": "Dán giá trị này làm URL endpoint:",
     "webhookSecret": "Và giá trị này làm khóa bí mật:",
@@ -1032,6 +1032,16 @@
     "copySecret": "Sao chép khóa",
     "copied": "Đã sao chép",
     "webhookTitle": "Thiết lập webhook",
-    "flowHow": "Ứng viên đến như thế nào"
+    "flowHow": "Ứng viên đến như thế nào",
+    "apiKey": "Khóa API",
+    "ttStepCreate": "Tạo khóa API mới với các quyền sau:",
+    "ttStepPaste": "Dán khóa bên dưới. Chúng tôi tự tìm khu vực Teamtailor của bạn.",
+    "ttWebhookAddon": "Webhook là tiện ích bổ sung của Teamtailor: trước tiên hãy bật Webhooks trong Add-on feature center của Teamtailor.",
+    "webhookPasteKey": "Lưu lại, rồi dán vào đây khóa chữ ký mà {ats} hiển thị cho webhook đó:",
+    "signatureKey": "Khóa chữ ký",
+    "saveKey": "Lưu khóa",
+    "keySaved": "Đã lưu khóa",
+    "keySaveFailed": "Không thể lưu khóa.",
+    "instructions": "Hướng dẫn"
   }
 }

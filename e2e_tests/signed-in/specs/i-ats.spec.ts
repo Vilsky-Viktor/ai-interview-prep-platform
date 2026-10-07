@@ -24,7 +24,14 @@ test("an owner sees how to connect Workable and manages its linked jobs", async 
   await expect(owner.getByText("connected", { exact: true })).toHaveCount(0)
 
   // The candidate flow, explained before connecting.
-  await openDialog(owner, owner.getByRole("button", { name: "How candidates come from Workable" }))
+  await openDialog(
+    owner,
+    owner
+      .getByRole("listitem")
+      .filter({ hasText: "Workable" })
+      .getByRole("button", { name: "Instructions" })
+  )
+  await expect(owner.getByRole("dialog")).toContainText("How candidates come from Workable")
   await expect(owner.getByRole("dialog").getByRole("listitem")).toHaveCount(6)
   await shot(owner, "candidate-flow")
   await owner.keyboard.press("Escape")

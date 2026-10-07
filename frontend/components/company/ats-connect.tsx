@@ -5,7 +5,11 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
-import { GreenhouseSteps, WorkableSteps } from "@/components/company/ats-steps"
+import {
+  GreenhouseSteps,
+  TeamtailorSteps,
+  WorkableSteps,
+} from "@/components/company/ats-steps"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -36,6 +40,10 @@ const FORMS = {
       { name: "client_id", label: "clientId" },
       { name: "client_secret", label: "clientSecret", secret: true },
     ],
+  },
+  teamtailor: {
+    steps: TeamtailorSteps,
+    fields: [{ name: "key", label: "apiKey", secret: true }],
   },
 } as const
 

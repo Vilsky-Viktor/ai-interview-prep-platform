@@ -1032,7 +1032,7 @@
     "ghStepCreate": "Gumawa ng API credential na ganitong uri:",
     "ghStepPermissions": "Bigyan ito ng access sa mga endpoint na ito:",
     "ghStepPaste": "I-paste sa ibaba ang client ID at secret nito.",
-    "webhookText": "Isang beses lang, para sabihan kami ng Greenhouse kapag lumipat ang isang aplikante sa ibang stage.",
+    "webhookText": "Isang beses lang, para sabihan kami ng {ats} kapag lumipat ang isang aplikante sa ibang stage.",
     "webhookEvent": "Gumawa ng webhook para sa event na ito:",
     "webhookUrl": "I-paste ito bilang endpoint URL nito:",
     "webhookSecret": "At ito bilang secret key nito:",
@@ -1040,6 +1040,16 @@
     "copySecret": "Kopyahin ang key",
     "copied": "Nakopya na",
     "webhookTitle": "I-set up ang webhook",
-    "flowHow": "Paano dumarating ang mga aplikante"
+    "flowHow": "Paano dumarating ang mga aplikante",
+    "apiKey": "API key",
+    "ttStepCreate": "Gumawa ng bagong API key na may ganitong access:",
+    "ttStepPaste": "I-paste ang key sa ibaba. Kami na ang hahanap ng Teamtailor region mo.",
+    "ttWebhookAddon": "Add-on ng Teamtailor ang webhooks: i-on muna ang Webhooks sa Add-on feature center ng Teamtailor.",
+    "webhookPasteKey": "I-save ito, saka i-paste dito ang signature key na ipinapakita ng {ats} para rito:",
+    "signatureKey": "Signature key",
+    "saveKey": "I-save ang key",
+    "keySaved": "Na-save na ang key",
+    "keySaveFailed": "Hindi ma-save ang key.",
+    "instructions": "Mga tagubilin"
   }
 }

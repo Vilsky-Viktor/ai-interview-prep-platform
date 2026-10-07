@@ -7,6 +7,8 @@ import {
   GREENHOUSE_CREDENTIAL_PATH,
   GREENHOUSE_CREDENTIAL_TYPE,
   GREENHOUSE_PERMISSIONS,
+  TEAMTAILOR_KEY_ACCESS,
+  TEAMTAILOR_KEY_PATH,
   WORKABLE_SCOPES,
   WORKABLE_TOKEN_PATH,
 } from "@/constants/ats"
@@ -67,6 +69,25 @@ export function GreenhouseSteps() {
         <Chips items={GREENHOUSE_PERMISSIONS} />
       </li>
       <li>{t("ghStepPaste")}</li>
+    </ol>
+  )
+}
+
+/** Where to make the API key in Teamtailor, step by step. */
+export function TeamtailorSteps() {
+  const t = useTranslations("ats")
+
+  return (
+    <ol className="list-decimal space-y-3 ps-5 text-base text-muted-foreground">
+      <li className="space-y-1.5">
+        <span className="block">{t("stepOpen", { ats: "Teamtailor" })}</span>
+        <Chips items={TEAMTAILOR_KEY_PATH} path />
+      </li>
+      <li className="space-y-1.5">
+        <span className="block">{t("ttStepCreate")}</span>
+        <Chips items={TEAMTAILOR_KEY_ACCESS} />
+      </li>
+      <li>{t("ttStepPaste")}</li>
     </ol>
   )
 }

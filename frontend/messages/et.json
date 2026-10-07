@@ -1032,7 +1032,7 @@
     "ghStepCreate": "Loo seda tüüpi API volitusandmed:",
     "ghStepPermissions": "Luba neile need lõpp-punktid:",
     "ghStepPaste": "Kleebi allpool nende kliendi ID ja saladus.",
-    "webhookText": "Ühe korra, et Greenhouse annaks meile teada, kui kandidaat liigub teise etappi.",
+    "webhookText": "Ühe korra, et {ats} annaks meile teada, kui kandidaat liigub teise etappi.",
     "webhookEvent": "Loo selle sündmuse jaoks webhook:",
     "webhookUrl": "Kleebi see lõpp-punkti URL-iks:",
     "webhookSecret": "Ja see salajaseks võtmeks:",
@@ -1040,6 +1040,16 @@
     "copySecret": "Kopeeri võti",
     "copied": "Kopeeritud",
     "webhookTitle": "Seadista webhook",
-    "flowHow": "Kuidas kandidaadid tulevad"
+    "flowHow": "Kuidas kandidaadid tulevad",
+    "apiKey": "API-võti",
+    "ttStepCreate": "Loo uus API-võti nende õigustega:",
+    "ttStepPaste": "Kleebi võti allpool. Sinu Teamtailori piirkonna leiame ise.",
+    "ttWebhookAddon": "Webhookid on Teamtailori lisa: lülita esmalt Teamtailori jaotises Add-on feature center sisse Webhooks.",
+    "webhookPasteKey": "Salvesta see ja kleebi siia allkirjavõti, mida {ats} selle jaoks näitab:",
+    "signatureKey": "Allkirjavõti",
+    "saveKey": "Salvesta võti",
+    "keySaved": "Võti salvestatud",
+    "keySaveFailed": "Võtit ei õnnestunud salvestada.",
+    "instructions": "Juhised"
   }
 }

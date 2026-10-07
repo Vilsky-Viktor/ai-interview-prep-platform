@@ -1024,7 +1024,7 @@
     "ghStepCreate": "أنشئ بيانات اعتماد API من هذا النوع:",
     "ghStepPermissions": "اسمح لها بنقاط النهاية هذه:",
     "ghStepPaste": "الصق معرّف العميل والسر الخاصين بها أدناه.",
-    "webhookText": "مرة واحدة فقط، ليُعلمنا Greenhouse عندما ينتقل مرشح إلى مرحلة أخرى.",
+    "webhookText": "مرة واحدة فقط، ليُعلمنا {ats} عندما ينتقل مرشح إلى مرحلة أخرى.",
     "webhookEvent": "أنشئ ويب هوك لهذا الحدث:",
     "webhookUrl": "الصق هذا كعنوان URL لنقطة النهاية:",
     "webhookSecret": "وهذا كمفتاح سري:",
@@ -1032,6 +1032,16 @@
     "copySecret": "نسخ المفتاح",
     "copied": "تم النسخ",
     "webhookTitle": "إعداد الويب هوك",
-    "flowHow": "كيف يصل المرشحون"
+    "flowHow": "كيف يصل المرشحون",
+    "apiKey": "مفتاح API",
+    "ttStepCreate": "أنشئ مفتاح API جديدًا بهذه الصلاحيات:",
+    "ttStepPaste": "الصق المفتاح أدناه. سنحدد منطقة Teamtailor الخاصة بك بأنفسنا.",
+    "ttWebhookAddon": "الويب هوك إضافة في Teamtailor: فعّل أولًا Webhooks في Add-on feature center في Teamtailor.",
+    "webhookPasteKey": "احفظه، ثم الصق هنا مفتاح التوقيع الذي يعرضه {ats} له:",
+    "signatureKey": "مفتاح التوقيع",
+    "saveKey": "حفظ المفتاح",
+    "keySaved": "تم حفظ المفتاح",
+    "keySaveFailed": "تعذّر حفظ المفتاح.",
+    "instructions": "التعليمات"
   }
 }

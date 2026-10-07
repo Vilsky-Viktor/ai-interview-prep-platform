@@ -1019,7 +1019,7 @@
     "ghStepCreate": "创建一个此类型的 API 凭据：",
     "ghStepPermissions": "为其开放以下端点的访问权限：",
     "ghStepPaste": "将它的客户端 ID 和密钥粘贴到下方。",
-    "webhookText": "只需设置一次，这样候选人进入其他阶段时 Greenhouse 会通知我们。",
+    "webhookText": "只需设置一次，这样候选人进入其他阶段时 {ats} 会通知我们。",
     "webhookEvent": "为此事件创建一个 Webhook：",
     "webhookUrl": "将此粘贴为端点 URL：",
     "webhookSecret": "并将此粘贴为密钥：",
@@ -1027,6 +1027,16 @@
     "copySecret": "复制密钥",
     "copied": "已复制",
     "webhookTitle": "设置 Webhook",
-    "flowHow": "候选人如何进入"
+    "flowHow": "候选人如何进入",
+    "apiKey": "API 密钥",
+    "ttStepCreate": "创建一个具有以下权限的新 API 密钥：",
+    "ttStepPaste": "将密钥粘贴到下方。我们会自动识别你的 Teamtailor 区域。",
+    "ttWebhookAddon": "Webhook 是 Teamtailor 的附加功能：请先在 Teamtailor 的 Add-on feature center 中开启 Webhooks。",
+    "webhookPasteKey": "保存后，将 {ats} 为它显示的签名密钥粘贴到这里：",
+    "signatureKey": "签名密钥",
+    "saveKey": "保存密钥",
+    "keySaved": "密钥已保存",
+    "keySaveFailed": "无法保存密钥。",
+    "instructions": "说明"
   }
 }

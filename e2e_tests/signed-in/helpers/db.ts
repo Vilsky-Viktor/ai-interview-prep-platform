@@ -91,19 +91,18 @@ export async function addAtsConnection(
   companyId: string,
   interviewId: string,
   candidates: { invited?: number; notInvited?: number } = {},
-  provider: "workable" | "greenhouse" = "workable"
+  provider: "workable" | "greenhouse" | "teamtailor" = "workable"
 ) {
-  const greenhouse = provider === "greenhouse"
-  const credentials = greenhouse
-    ? fernetEncrypt(
-        env("ATS_ENCRYPTION_KEY"),
-        JSON.stringify({
-          client_id: "e2e",
-          client_secret: "e2e",
-          webhook_secret: GREENHOUSE_E2E_SECRET,
-        })
-      )
+  // Sealed for real where the page reads them (the web hook's address and secret key).
+  const sealed = {
+    workable: null,
+    greenhouse: { client_id: "e2e", client_secret: "e2e", webhook_secret: GREENHOUSE_E2E_SECRET },
+    teamtailor: { host: "https://api.teamtailor.com", key: "e2e" },
+  }[provider]
+  const credentials = sealed
+    ? fernetEncrypt(env("ATS_ENCRYPTION_KEY"), JSON.stringify(sealed))
     : "placeholder"
+  const account = { workable: "e2e-acme", greenhouse: "…e2e1", teamtailor: "E2E Acme" }[provider]
 
   await withDatabase("ats", async (client) => {
     const connection = await client.query(
@@ -111,7 +110,7 @@ export async function addAtsConnection(
          created_by, created_at)
        VALUES (gen_random_uuid(), $1, $2, $3, $4, 'connected', 'e2e', now())
        RETURNING id`,
-      [companyId, provider, greenhouse ? "…e2e1" : "e2e-acme", credentials]
+      [companyId, provider, account, credentials]
     )
     const link = await client.query(
       `INSERT INTO ats_job_links (id, connection_id, interview_id, job_id, job_name, stage_id,

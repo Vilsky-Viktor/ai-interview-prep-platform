@@ -1023,7 +1023,7 @@
     "ghStepCreate": "इस टाइप का एक API क्रेडेंशियल बनाएँ:",
     "ghStepPermissions": "इसे इन एंडपॉइंट का एक्सेस दें:",
     "ghStepPaste": "इसका क्लाइंट ID और सीक्रेट नीचे पेस्ट करें।",
-    "webhookText": "बस एक बार, ताकि जब कोई उम्मीदवार दूसरे स्टेज में जाए तो Greenhouse हमें बता दे।",
+    "webhookText": "बस एक बार, ताकि जब कोई उम्मीदवार दूसरे स्टेज में जाए तो {ats} हमें बता दे।",
     "webhookEvent": "इस इवेंट के लिए एक वेबहुक बनाएँ:",
     "webhookUrl": "इसे उसके एंडपॉइंट URL के रूप में पेस्ट करें:",
     "webhookSecret": "और इसे उसकी सीक्रेट की के रूप में:",
@@ -1031,6 +1031,16 @@
     "copySecret": "की कॉपी करें",
     "copied": "कॉपी हो गया",
     "webhookTitle": "वेबहुक सेट अप करें",
-    "flowHow": "उम्मीदवार कैसे आते हैं"
+    "flowHow": "उम्मीदवार कैसे आते हैं",
+    "apiKey": "API की",
+    "ttStepCreate": "इस एक्सेस के साथ एक नई API की बनाएँ:",
+    "ttStepPaste": "की नीचे पेस्ट करें। आपका Teamtailor रीजन हम खुद पता कर लेंगे।",
+    "ttWebhookAddon": "वेबहुक Teamtailor का एक ऐड-ऑन है: पहले Teamtailor के Add-on feature center में Webhooks चालू करें।",
+    "webhookPasteKey": "इसे सेव करें, फिर {ats} इसके लिए जो सिग्नेचर की दिखाता है, उसे यहाँ पेस्ट करें:",
+    "signatureKey": "सिग्नेचर की",
+    "saveKey": "की सेव करें",
+    "keySaved": "की सेव हो गई",
+    "keySaveFailed": "की सेव नहीं हो सकी।",
+    "instructions": "निर्देश"
   }
 }

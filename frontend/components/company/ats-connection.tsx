@@ -8,11 +8,11 @@ import { toast } from "sonner"
 
 import { CandidateFlow } from "@/components/company/ats-candidate-flow"
 import { ConnectAts } from "@/components/company/ats-connect"
-import { GreenhouseWebhook } from "@/components/company/ats-webhook"
+import { AtsWebhook } from "@/components/company/ats-webhook"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import type { AtsProvider } from "@/constants/ats"
+import { WEBHOOKS, type AtsProvider } from "@/constants/ats"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { AtsConnection } from "@/types/company"
 
@@ -91,8 +91,9 @@ export function AtsStatus({
 }
 
 /** An ATS's buttons, on its row and its page: how candidates flow, and for owners and admins
- * Connect (or Reconnect when its key stopped working) and Disconnect. Greenhouse's web hook is
- * set up by hand: its steps are in the info dialog, which opens once it's connected. */
+ * Connect (or Reconnect when its key stopped working) and Disconnect. Greenhouse's and
+ * Teamtailor's web hooks are set up by hand: their steps are in the info dialog, which opens
+ * once it's connected. */
 export function AtsActions({
   companyId,
   provider,
@@ -110,7 +111,7 @@ export function AtsActions({
   const [busy, setBusy] = useState(false)
   const [info, setInfo] = useState(false)
   const broken = connection?.status === "broken"
-  const greenhouse = provider.id === "greenhouse"
+  const hooked = provider.id in WEBHOOKS
 
   async function disconnect() {
     setBusy(true)
@@ -133,8 +134,11 @@ export function AtsActions({
   return (
     <span className="flex shrink-0 items-center gap-3">
       <CandidateFlow provider={provider} open={info} onOpenChange={setInfo}>
-        {canEdit && greenhouse && connection?.status === "connected" && (
-          <GreenhouseWebhook companyId={companyId} />
+        {canEdit && hooked && connection?.status === "connected" && (
+          <AtsWebhook
+            companyId={companyId}
+            provider={provider as AtsProvider & { id: keyof typeof WEBHOOKS }}
+          />
         )}
       </CandidateFlow>
       {canEdit && connection && (
@@ -151,7 +155,7 @@ export function AtsActions({
           companyId={companyId}
           provider={provider}
           again={broken}
-          onConnected={() => greenhouse && setInfo(true)}
+          onConnected={() => hooked && setInfo(true)}
         />
       )}
       <ConfirmDialog

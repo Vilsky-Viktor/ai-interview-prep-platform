@@ -1028,7 +1028,7 @@
     "ghStepCreate": "Buat kredensial API dengan jenis ini:",
     "ghStepPermissions": "Beri akses ke endpoint berikut:",
     "ghStepPaste": "Tempel client ID dan secret-nya di bawah.",
-    "webhookText": "Cukup sekali, agar Greenhouse memberi tahu kami saat kandidat pindah ke tahap lain.",
+    "webhookText": "Cukup sekali, agar {ats} memberi tahu kami saat kandidat pindah ke tahap lain.",
     "webhookEvent": "Buat webhook untuk event ini:",
     "webhookUrl": "Tempel ini sebagai URL endpoint-nya:",
     "webhookSecret": "Dan ini sebagai kunci rahasianya:",
@@ -1036,6 +1036,16 @@
     "copySecret": "Salin kunci",
     "copied": "Tersalin",
     "webhookTitle": "Siapkan webhook",
-    "flowHow": "Cara kandidat masuk"
+    "flowHow": "Cara kandidat masuk",
+    "apiKey": "Kunci API",
+    "ttStepCreate": "Buat kunci API baru dengan akses ini:",
+    "ttStepPaste": "Tempel kunci di bawah. Region Teamtailor kamu kami cari sendiri.",
+    "ttWebhookAddon": "Webhook adalah add-on Teamtailor: aktifkan dulu Webhooks di Add-on feature center Teamtailor.",
+    "webhookPasteKey": "Simpan, lalu tempel di sini kunci tanda tangan yang ditampilkan {ats} untuknya:",
+    "signatureKey": "Kunci tanda tangan",
+    "saveKey": "Simpan kunci",
+    "keySaved": "Kunci tersimpan",
+    "keySaveFailed": "Kunci tidak bisa disimpan.",
+    "instructions": "Petunjuk"
   }
 }

@@ -1,6 +1,5 @@
 "use client"
 
-import { InfoIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { Button } from "@/components/ui/button"
@@ -15,7 +14,7 @@ import {
 } from "@/components/ui/dialog"
 import type { AtsProvider } from "@/constants/ats"
 
-/** The ATS's one info button, beside Connect: a dialog with everything to know, connected or
+/** The ATS's one Instructions button, beside Connect: a dialog with everything to know, connected or
  * not: how candidates come from the ATS and what goes back, step by step, after any setup still
  * to do there (`children`: Greenhouse's web hook). */
 export function CandidateFlow({
@@ -36,15 +35,10 @@ export function CandidateFlow({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger
         render={
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-10 shrink-0 text-muted-foreground"
-            aria-label={t("flowTitle", { ats: provider.name })}
-          />
+          <Button variant="outline" className="h-10 shrink-0 px-5 text-base" />
         }
       >
-        <InfoIcon className="size-6" />
+        {t("instructions")}
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}

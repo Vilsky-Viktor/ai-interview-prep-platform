@@ -1028,7 +1028,7 @@
     "ghStepCreate": "Créez un identifiant d'API de ce type :",
     "ghStepPermissions": "Donnez-lui accès à ces endpoints :",
     "ghStepPaste": "Collez ci-dessous son ID client et son secret.",
-    "webhookText": "Une seule fois, pour que Greenhouse nous prévienne quand un candidat passe à une autre étape.",
+    "webhookText": "Une seule fois, pour que {ats} nous prévienne quand un candidat passe à une autre étape.",
     "webhookEvent": "Créez un webhook pour cet événement :",
     "webhookUrl": "Collez ceci comme URL de l'endpoint :",
     "webhookSecret": "Et ceci comme clé secrète :",
@@ -1036,6 +1036,16 @@
     "copySecret": "Copier la clé",
     "copied": "Copié",
     "webhookTitle": "Configurer le webhook",
-    "flowHow": "Comment arrivent les candidats"
+    "flowHow": "Comment arrivent les candidats",
+    "apiKey": "Clé API",
+    "ttStepCreate": "Créez une nouvelle clé API avec ces autorisations :",
+    "ttStepPaste": "Collez la clé ci-dessous. Nous trouvons nous-mêmes votre région Teamtailor.",
+    "ttWebhookAddon": "Les webhooks sont un module complémentaire de Teamtailor : activez d'abord Webhooks dans l'Add-on feature center de Teamtailor.",
+    "webhookPasteKey": "Enregistrez-le, puis collez ici la clé de signature que {ats} affiche pour lui :",
+    "signatureKey": "Clé de signature",
+    "saveKey": "Enregistrer la clé",
+    "keySaved": "Clé enregistrée",
+    "keySaveFailed": "Impossible d'enregistrer la clé.",
+    "instructions": "Instructions"
   }
 }
