@@ -2,7 +2,8 @@ import type { Metadata } from "next"
 import { headers } from "next/headers"
 import { getTranslations } from "next-intl/server"
 
-import { DEFAULT_LOCALE } from "@/constants/i18n"
+import { DEFAULT_LOCALE, type Locale } from "@/constants/i18n"
+import { PREVIEW_UNSUPPORTED } from "@/constants/preview-image"
 import { LOCALE_HEADER, SITE_NAME } from "@/constants/seo"
 import { languageAlternates, localizedPath } from "@/lib/locale-path"
 
@@ -11,10 +12,18 @@ export function siteUrl() {
   return process.env.SITE_URL ?? "http://localhost:8090"
 }
 
-/** The link-preview picture (app/opengraph-image.tsx) at the site's own address: Next.js would
- * otherwise name the dev server's internal one, and a page's openGraph would drop it. */
-export function previewImage() {
-  return [{ url: `${siteUrl()}/opengraph-image`, width: 1200, height: 630 }]
+/** The link-preview picture at the site's own address (Next.js would otherwise name the dev
+ * server's internal one, and a page's openGraph would drop it): the page's title under the logo
+ * (app/preview/route.tsx), or the site's own (app/opengraph-image.tsx) without a title or in a
+ * language the picture can't draw. */
+export function previewImage(title?: string, locale: string = DEFAULT_LOCALE) {
+  const drawn = title && !PREVIEW_UNSUPPORTED.includes(locale as Locale)
+  const query = new URLSearchParams({ title: title ?? "", lang: locale })
+  const url = drawn
+    ? `${siteUrl()}/preview?${query}`
+    : `${siteUrl()}/opengraph-image`
+
+  return [{ url, width: 1200, height: 630 }]
 }
 
 /** The language of the address the page was asked for (/de/pricing gives de), or null for a
@@ -48,6 +57,10 @@ export async function pageMetadata(
   const languages = localized === true ? undefined : localized || undefined
   const own = localized === true || (languages ?? []).includes(locale)
   const canonical = own ? localizedPath(locale, path) : path
+  // The picture's title is lowercase like the site's titles; articles keep their capitals (names
+  // such as TestGorilla or EU), and the home page shows the site's own picture.
+  const article = Array.isArray(localized)
+  const pictureTitle = article ? title : title.toLocaleLowerCase(locale)
 
   return {
     title,
@@ -61,7 +74,8 @@ export async function pageMetadata(
       siteName: SITE_NAME,
       type: "website",
       url: canonical,
-      images: previewImage(),
+      images:
+        path === "/" ? previewImage() : previewImage(pictureTitle, locale),
     },
   }
 }

@@ -4,6 +4,11 @@ import createNextIntlPlugin from "next-intl/plugin"
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // The preview pictures' font files, read at request time, go into the standalone server.
+  outputFileTracingIncludes: {
+    "/preview": ["./assets/fonts/**"],
+    "/opengraph-image": ["./assets/fonts/**"],
+  },
   // Titles, canonical addresses and hreflang always go in the <head>, for every visitor and
   // crawler: Next.js would otherwise stream a slow page's metadata into the body, which only
   // crawlers that run JavaScript read.

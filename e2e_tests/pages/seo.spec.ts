@@ -55,6 +55,28 @@ test("the home page has a title, a description, a preview image and its company 
   expect(image.headers()["content-type"]).toBe("image/png");
 });
 
+// Every page's preview is the logo over its own title, in its language; the languages the
+// picture can't draw keep the site's own.
+test("each page's preview image shows its own title", async ({ page }) => {
+  await page.goto("/de/pricing");
+  const own = new URL(
+    (await head(page, 'meta[property="og:image"]', "content")) ?? "",
+  );
+
+  expect(own.pathname).toBe("/preview");
+  expect(own.searchParams.get("title")).toBe("preise");
+  expect(own.searchParams.get("lang")).toBe("de");
+  const image = await page.request.get(`${REQUEST_URL}/preview${own.search}`);
+  expect(image.status()).toBe(200);
+  expect(image.headers()["content-type"]).toBe("image/png");
+
+  await page.goto("/ar/pricing");
+  const fallback = new URL(
+    (await head(page, 'meta[property="og:image"]', "content")) ?? "",
+  );
+  expect(fallback.pathname).toBe("/opengraph-image");
+});
+
 // The two ways on are links drawn as the site's buttons.
 test("a role test page is for hiring, with the way to practise second", async ({
   page,
