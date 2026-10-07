@@ -60,3 +60,18 @@
    (features, behaviour, setup, settings, commands, tests, deployment), update that
    README in the same change: the root `README.md`, `infra/README.md` and any README
    next to the changed code. Describe what is true now, not the change itself.
+
+10. **No duplicated functionality or logic.** Before writing something, look for code
+    that already does it and reuse it. Logic repeated across services goes into a
+    shared library (`packages/common`, `prepza_common`); repeated frontend logic into
+    one helper or component. A logically grouped domain that several services keep
+    reimplementing gets its own service.
+
+11. **Check every event-driven flow end to end.** When code publishes, consumes or
+    schedules events (outbox, Pub/Sub, webhooks, scheduled jobs), trace the whole flow
+    from producer to every consumer, and check it for the common issues: idempotency
+    (a redelivered or duplicate event changes nothing twice), race conditions
+    (concurrent handlers, out-of-order events, read-then-write without a lock or a
+    unique constraint), rate limits (of external APIs and of our own services, with
+    retries and backoff), and failures (what is retried, what is lost, what a handler
+    does halfway through).
