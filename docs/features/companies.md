@@ -52,4 +52,4 @@ Later changes:
 - [Interviews](interviews.md): making and running a company's interviews.
 - [Candidates](candidates.md): invites, scorecards and reports.
 - [Credits and payments](billing.md): the company's wallet and referrals.
-- [ATS integrations](ats.md): connecting Workable, Greenhouse or Teamtailor.
+- [ATS integrations](ats.md): connecting Workable, Greenhouse, Teamtailor or Recruitee.
