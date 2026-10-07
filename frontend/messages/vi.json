@@ -780,7 +780,7 @@
       "perCandidate": "mỗi ứng viên",
       "base": "Dùng bao nhiêu trả bấy nhiêu",
       "volume": "Khi nạp từ ${from, number}",
-      "compare": "${min}–{max} mỗi ứng viên thay vì hơn $100 mỗi tháng"
+      "compare": "${min}–{max} mỗi ứng viên, không cần thuê bao"
     },
     "faq": {
       "title": "Vẫn còn thắc mắc?",

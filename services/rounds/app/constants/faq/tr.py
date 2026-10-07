@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Fiyat, diğer değerlendirme araçlarıyla nasıl karşılaştırılır?",
-        "answer": "Değerlendirme platformlarının çoğu yıllık planda ayda 100–215 $ ya da aday başına 7–20 $ tutar. prepza'da bir aday {candidate} kredi ({candidate_dollars} $) tutar; sözleşme, kullanıcı başı ücret ve mülakat oluşturma ücreti yoktur. Ayda {example_candidates} aday davet eden bir şirket yılda yaklaşık {example_year_dollars} $ öder; yıllık bir plan ise 1.200–2.580 $ tutar. Ayda yaklaşık 50 adaydan itibaren bazı sınırsız planlar daha ucuz olabilir.",
+        "answer": "Birçok değerlendirme aracı, kimseyi test etmeseniz bile ödediğiniz aylık veya yıllık abonelikle satılır. prepza'da yalnızca aday başına ödersiniz: {candidate} kredi ({candidate_dollars} $); sözleşme, kullanıcı başı ücret ve mülakat oluşturma ücreti yoktur. Ayda {example_candidates} aday davet eden bir şirket yılda yaklaşık {example_year_dollars} $ öder. Her ay çok sayıda aday test ediyorsanız bir abonelik daha ucuz olabilir; kendi rakamlarınızla karşılaştırın.",
     },
     {
         "key": "expire",

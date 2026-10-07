@@ -780,7 +780,7 @@
       "perCandidate": "por candidato",
       "base": "Pague conforme o uso",
       "volume": "Com uma recarga a partir de ${from, number}",
-      "compare": "${min}–{max} por candidato em vez de mais de $100 por mês"
+      "compare": "${min}–{max} por candidato, sem assinatura"
     },
     "faq": {
       "title": "Ainda tem dúvidas?",

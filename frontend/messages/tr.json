@@ -783,7 +783,7 @@
       "perCandidate": "aday başına",
       "base": "Kullandıkça öde",
       "volume": "${from, number} ve üzeri yüklemeyle",
-      "compare": "Ayda $100+ yerine aday başına ${min}–{max}"
+      "compare": "Aday başına ${min}–{max}, abonelik yok"
     },
     "faq": {
       "title": "Hâlâ sorunuz mu var?",

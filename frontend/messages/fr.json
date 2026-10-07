@@ -784,7 +784,7 @@
       "perCandidate": "par candidat",
       "base": "Paiement à l'usage",
       "volume": "Avec une recharge dès {from, number} $",
-      "compare": "{min}–{max} $ par candidat au lieu de plus de 100 $ par mois"
+      "compare": "{min}–{max} $ par candidat, sans abonnement"
     },
     "faq": {
       "title": "Encore des questions ?",

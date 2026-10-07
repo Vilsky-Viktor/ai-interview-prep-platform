@@ -784,7 +784,7 @@
       "perCandidate": "por candidato",
       "base": "Pago por uso",
       "volume": "Con una recarga desde ${from, number}",
-      "compare": "${min}–{max} por candidato en vez de más de $100 al mes"
+      "compare": "${min}–{max} por candidato, sin suscripción"
     },
     "faq": {
       "title": "¿Aún tienes preguntas?",

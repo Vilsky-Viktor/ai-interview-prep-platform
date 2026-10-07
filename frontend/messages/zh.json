@@ -775,7 +775,7 @@
       "perCandidate": "每位候选人",
       "base": "按量付费",
       "volume": "充值 ${from, number} 起",
-      "compare": "每位候选人 ${min}–{max}，而不是每月 $100 以上"
+      "compare": "每位候选人 ${min}–{max}，无需订阅"
     },
     "faq": {
       "title": "还有疑问？",

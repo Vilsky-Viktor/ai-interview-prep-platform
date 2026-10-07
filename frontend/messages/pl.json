@@ -784,7 +784,7 @@
       "perCandidate": "za kandydata",
       "base": "Płać za użycie",
       "volume": "Przy doładowaniu od ${from, number}",
-      "compare": "${min}–{max} za kandydata zamiast ponad $100 miesięcznie"
+      "compare": "${min}–{max} za kandydata, bez abonamentu"
     },
     "faq": {
       "title": "Masz jeszcze pytania?",

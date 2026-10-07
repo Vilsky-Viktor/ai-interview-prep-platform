@@ -784,7 +784,7 @@
       "perCandidate": "pro Kandidat",
       "base": "Nach Verbrauch",
       "volume": "Mit einer Aufladung ab ${from, number}",
-      "compare": "${min}–{max} pro Kandidat statt über $100 im Monat"
+      "compare": "${min}–{max} pro Kandidat, ohne Abo"
     },
     "faq": {
       "title": "Noch Fragen?",

@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "다른 평가 도구와 비교하면 가격이 어떤가요?",
-        "answer": "대부분의 평가 플랫폼은 연간 요금제로 월 100~215달러, 또는 지원자당 7~20달러입니다. prepza에서는 지원자 한 명당 {candidate} 크레딧({candidate_dollars}달러)이며, 계약도, 사용자별 요금도, 면접 생성 비용도 없습니다. 매달 지원자 {example_candidates}명을 초대하는 회사는 1년에 약 {example_year_dollars}달러를 내며, 연간 요금제는 1,200~2,580달러입니다. 매달 지원자가 50명 정도를 넘으면 일부 무제한 요금제가 더 저렴할 수 있습니다.",
+        "answer": "많은 평가 도구는 아무도 테스트하지 않아도 내야 하는 월간 또는 연간 구독으로 판매됩니다. prepza에서는 지원자별로만 결제합니다. 지원자 한 명당 {candidate} 크레딧({candidate_dollars}달러)이며, 계약도, 사용자별 요금도, 면접 생성 비용도 없습니다. 매달 지원자 {example_candidates}명을 초대하는 회사는 1년에 약 {example_year_dollars}달러를 냅니다. 매달 많은 지원자를 테스트한다면 구독이 더 저렴할 수 있으니 직접 숫자로 비교해 보세요.",
     },
     {
         "key": "expire",

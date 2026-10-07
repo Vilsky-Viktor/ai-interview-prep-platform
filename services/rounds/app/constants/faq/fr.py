@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Comment le prix se compare-t-il à celui d'autres outils d'évaluation ?",
-        "answer": "La plupart des plateformes d'évaluation coûtent 100–215 $ par mois en formule annuelle, ou 7–20 $ par candidat. Avec prepza, un candidat coûte {candidate} crédits ({candidate_dollars} $), sans contrat, sans frais par utilisateur et sans rien à payer pour générer un entretien. Une entreprise qui invite {example_candidates} candidats par mois paie environ {example_year_dollars} $ par an, contre 1 200–2 580 $ pour une formule annuelle. À partir d'environ 50 candidats par mois, certaines formules illimitées coûtent moins cher.",
+        "answer": "Beaucoup d'outils d'évaluation sont vendus sous forme d'abonnement mensuel ou annuel, payé même si vous n'évaluez personne. Avec prepza, vous payez uniquement par candidat : {candidate} crédits ({candidate_dollars} $), sans contrat, sans frais par utilisateur et sans rien à payer pour générer un entretien. Une entreprise qui invite {example_candidates} candidats par mois paie environ {example_year_dollars} $ par an. Si vous évaluez beaucoup de candidats chaque mois, un abonnement peut coûter moins cher : comparez avec vos propres chiffres.",
     },
     {
         "key": "expire",

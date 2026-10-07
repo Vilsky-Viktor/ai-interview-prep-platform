@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Giá so với các công cụ đánh giá khác thế nào?",
-        "answer": "Phần lớn nền tảng đánh giá có giá 100–215 $ mỗi tháng theo gói năm, hoặc 7–20 $ mỗi ứng viên. Với prepza, mỗi ứng viên tốn {candidate} tín dụng ({candidate_dollars} $), không hợp đồng, không phí theo người dùng và không tốn phí tạo buổi phỏng vấn. Một công ty mời {example_candidates} ứng viên mỗi tháng trả khoảng {example_year_dollars} $ mỗi năm, so với 1.200–2.580 $ cho một gói năm. Từ khoảng 50 ứng viên mỗi tháng, một số gói không giới hạn có thể rẻ hơn.",
+        "answer": "Nhiều công cụ đánh giá được bán theo gói thuê bao tháng hoặc năm, phải trả dù bạn không kiểm tra ai. Với prepza, bạn chỉ trả theo ứng viên: {candidate} tín dụng ({candidate_dollars} $) mỗi ứng viên, không hợp đồng, không phí theo người dùng và không tốn phí tạo buổi phỏng vấn. Một công ty mời {example_candidates} ứng viên mỗi tháng trả khoảng {example_year_dollars} $ mỗi năm. Nếu bạn kiểm tra nhiều ứng viên mỗi tháng, gói thuê bao có thể rẻ hơn, nên hãy so sánh với số liệu của bạn.",
     },
     {
         "key": "expire",

@@ -41,7 +41,7 @@ export async function PricingSection() {
           </li>
         ))}
       </ul>
-      {/* Against the usual monthly plans: the main reason to switch. */}
+      {/* Per candidate, with no subscription: the main reason to switch. */}
       <p className="text-center text-xl font-medium text-balance">
         {t("compare", { min: Math.min(...prices), max: Math.max(...prices) })}
       </p>

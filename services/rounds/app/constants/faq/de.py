@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Wie ist der Preis im Vergleich zu anderen Bewertungstools?",
-        "answer": "Die meisten Plattformen für Eignungstests kosten 100–215 $ im Monat im Jahresabo oder 7–20 $ pro Kandidat. Bei prepza kostet ein Kandidat {candidate} Credits ({candidate_dollars} $), ohne Vertrag, ohne Gebühren pro Nutzer und ohne Kosten für das Generieren eines Interviews. Ein Unternehmen, das {example_candidates} Kandidaten im Monat einlädt, zahlt etwa {example_year_dollars} $ im Jahr, gegenüber 1.200–2.580 $ für ein Jahresabo. Ab etwa 50 Kandidaten im Monat können manche Flatrates günstiger sein.",
+        "answer": "Viele Tools für Eignungstests werden als Monats- oder Jahresabo verkauft, das du zahlst, auch wenn du niemanden testest. Bei prepza zahlst du nur pro Kandidat: {candidate} Credits ({candidate_dollars} $), ohne Vertrag, ohne Gebühren pro Nutzer und ohne Kosten für das Generieren eines Interviews. Ein Unternehmen, das {example_candidates} Kandidaten im Monat einlädt, zahlt etwa {example_year_dollars} $ im Jahr. Wenn du jeden Monat viele Kandidaten testest, kann ein Abo günstiger sein, also vergleiche mit deinen eigenen Zahlen.",
     },
     {
         "key": "expire",

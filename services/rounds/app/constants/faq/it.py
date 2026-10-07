@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Come si confronta il prezzo con altri strumenti di valutazione?",
-        "answer": "La maggior parte delle piattaforme di valutazione costa 100–215 $ al mese con piano annuale, oppure 7–20 $ per candidato. Con prepza un candidato costa {candidate} crediti ({candidate_dollars} $), senza contratto, senza costi per utente e senza pagare per generare un colloquio. Un’azienda che invita {example_candidates} candidati al mese paga circa {example_year_dollars} $ all’anno, contro 1.200–2.580 $ di un piano annuale. Da circa 50 candidati al mese, alcuni piani illimitati costano meno.",
+        "answer": "Molti strumenti di valutazione sono venduti in abbonamento mensile o annuale, che paghi anche se non valuti nessuno. Con prepza paghi solo per candidato: {candidate} crediti ({candidate_dollars} $), senza contratto, senza costi per utente e senza pagare per generare un colloquio. Un’azienda che invita {example_candidates} candidati al mese paga circa {example_year_dollars} $ all’anno. Se valuti molti candidati ogni mese, un abbonamento può costare meno, quindi confronta con i tuoi numeri.",
     },
     {
         "key": "expire",

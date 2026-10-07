@@ -44,7 +44,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "How does the price compare with other assessment tools?",
-        "answer": "Most assessment platforms cost $100–215 a month on an annual plan, or $7–20 per candidate. With prepza a candidate costs {candidate} credits (${candidate_dollars}), with no contract, no seat fees and nothing to pay for generating an interview. A company inviting {example_candidates} candidates a month pays about ${example_year_dollars} a year, against $1,200–2,580 for an annual plan. From about 50 candidates a month, some unlimited plans cost less.",
+        "answer": "Many assessment tools are sold as monthly or annual subscriptions, paid whether or not you test anyone. With prepza you pay only per candidate: {candidate} credits (${candidate_dollars}), with no contract, no seat fees and nothing to pay for generating an interview. A company inviting {example_candidates} candidates a month pays about ${example_year_dollars} a year. If you test many candidates every month, a subscription can cost less, so compare with your own numbers.",
     },
     {
         "key": "expire",

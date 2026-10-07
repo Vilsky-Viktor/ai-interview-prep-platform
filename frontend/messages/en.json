@@ -784,7 +784,7 @@
       "perCandidate": "per candidate",
       "base": "Pay as you go",
       "volume": "With a top-up from ${from, number}",
-      "compare": "${min}–{max} per candidate instead of $100+ a month"
+      "compare": "${min}–{max} per candidate, with no subscription"
     },
     "faq": {
       "title": "Still have questions?",

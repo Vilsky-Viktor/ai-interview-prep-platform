@@ -775,7 +775,7 @@
       "perCandidate": "지원자당",
       "base": "사용한 만큼 결제",
       "volume": "${from, number}부터 충전 시",
-      "compare": "월 $100 이상 대신 지원자당 ${min}–{max}"
+      "compare": "지원자당 ${min}–{max}, 구독 없음"
     },
     "faq": {
       "title": "궁금한 점이 더 있나요?",

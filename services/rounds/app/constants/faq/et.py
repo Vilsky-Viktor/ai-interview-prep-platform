@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Kuidas hind võrdub teiste hindamisvahenditega?",
-        "answer": "Enamik hindamisplatvorme maksab aastaplaaniga 100–215 $ kuus või 7–20 $ kandidaadi kohta. prepzas maksab kandidaat {candidate} krediiti ({candidate_dollars} $), ilma lepingu, kasutajatasude ja intervjuu loomise tasuta. Ettevõte, kes kutsub {example_candidates} kandidaati kuus, maksab umbes {example_year_dollars} $ aastas, aastaplaani 1 200–2 580 $ asemel. Alates umbes 50 kandidaadist kuus võivad mõned piiramatud plaanid olla odavamad.",
+        "answer": "Paljusid hindamisvahendeid müüakse kuu- või aastatellimusena, mille eest maksad ka siis, kui kedagi ei testi. prepzas maksad ainult kandidaatide eest: {candidate} krediiti ({candidate_dollars} $) kandidaadi kohta, ilma lepingu, kasutajatasude ja intervjuu loomise tasuta. Ettevõte, kes kutsub {example_candidates} kandidaati kuus, maksab umbes {example_year_dollars} $ aastas. Kui testid igal kuul palju kandidaate, võib tellimus olla odavam, nii et võrdle oma numbritega.",
     },
     {
         "key": "expire",

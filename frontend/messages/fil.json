@@ -788,7 +788,7 @@
       "perCandidate": "bawat kandidato",
       "base": "Pay as you go",
       "volume": "Sa top-up mula ${from, number}",
-      "compare": "${min}–{max} bawat kandidato sa halip na $100+ kada buwan"
+      "compare": "${min}–{max} bawat kandidato, walang subscription"
     },
     "faq": {
       "title": "May tanong pa?",

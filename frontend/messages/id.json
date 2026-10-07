@@ -784,7 +784,7 @@
       "perCandidate": "per kandidat",
       "base": "Bayar sesuai pemakaian",
       "volume": "Dengan isi ulang mulai ${from, number}",
-      "compare": "${min}–{max} per kandidat, bukan $100+ per bulan"
+      "compare": "${min}–{max} per kandidat, tanpa langganan"
     },
     "faq": {
       "title": "Masih ada pertanyaan?",

@@ -780,7 +780,7 @@
       "perCandidate": "per kandidaat",
       "base": "Betalen naar gebruik",
       "volume": "Met een opwaardering vanaf ${from, number}",
-      "compare": "${min}–{max} per kandidaat in plaats van $100+ per maand"
+      "compare": "${min}–{max} per kandidaat, zonder abonnement"
     },
     "faq": {
       "title": "Nog vragen?",

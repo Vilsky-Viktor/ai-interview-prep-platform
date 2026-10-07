@@ -788,7 +788,7 @@
       "perCandidate": "kandidaadi kohta",
       "base": "Maksa kasutuse järgi",
       "volume": "Juurdelaadimisega alates {from, number} $",
-      "compare": "${min}–{max} kandidaadi kohta, mitte üle $100 kuus"
+      "compare": "${min}–{max} kandidaadi kohta, ilma tellimuseta"
     },
     "faq": {
       "title": "Küsimusi veel?",

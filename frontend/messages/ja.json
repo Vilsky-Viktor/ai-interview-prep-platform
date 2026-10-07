@@ -788,7 +788,7 @@
       "perCandidate": "候補者 1 人あたり",
       "base": "従量課金",
       "volume": "${from, number} からのチャージで",
-      "compare": "月額 $100 以上ではなく、候補者 1 人 ${min}〜{max}"
+      "compare": "候補者 1 人 ${min}〜{max}、サブスクリプションなし"
     },
     "faq": {
       "title": "ほかに質問はありますか？",

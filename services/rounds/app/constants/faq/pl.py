@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Jak cena wypada na tle innych narzędzi do oceny kandydatów?",
-        "answer": "Większość platform do oceny kandydatów kosztuje 100–215 $ miesięcznie w planie rocznym albo 7–20 $ za kandydata. W prepza kandydat kosztuje {candidate} kredytów ({candidate_dollars} $), bez umowy, bez opłat za użytkowników i bez płacenia za wygenerowanie rozmowy. Firma, która zaprasza {example_candidates} kandydatów miesięcznie, płaci około {example_year_dollars} $ rocznie, wobec 1 200–2 580 $ za plan roczny. Od około 50 kandydatów miesięcznie niektóre plany bez limitu wychodzą taniej.",
+        "answer": "Wiele narzędzi do oceny kandydatów sprzedaje się w abonamencie miesięcznym lub rocznym, płatnym nawet wtedy, gdy nikogo nie testujesz. W prepza płacisz tylko za kandydatów: {candidate} kredytów ({candidate_dollars} $) za kandydata, bez umowy, bez opłat za użytkowników i bez płacenia za wygenerowanie rozmowy. Firma, która zaprasza {example_candidates} kandydatów miesięcznie, płaci około {example_year_dollars} $ rocznie. Jeśli co miesiąc testujesz wielu kandydatów, abonament może wyjść taniej, więc porównaj to ze swoimi liczbami.",
     },
     {
         "key": "expire",

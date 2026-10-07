@@ -784,7 +784,7 @@
       "perCandidate": "per candidato",
       "base": "A consumo",
       "volume": "Con una ricarica da ${from, number}",
-      "compare": "${min}–{max} per candidato invece di oltre $100 al mese"
+      "compare": "${min}–{max} per candidato, senza abbonamento"
     },
     "faq": {
       "title": "Hai ancora domande?",

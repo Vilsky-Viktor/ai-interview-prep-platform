@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "¿Cómo se compara el precio con otras herramientas de evaluación?",
-        "answer": "La mayoría de las plataformas de evaluación cuestan 100–215 $ al mes con plan anual, o 7–20 $ por candidato. En prepza un candidato cuesta {candidate} créditos ({candidate_dollars} $), sin contrato, sin cuotas por usuario y sin pagar por generar una entrevista. Una empresa que invita a {example_candidates} candidatos al mes paga unos {example_year_dollars} $ al año, frente a 1.200–2.580 $ de un plan anual. A partir de unos 50 candidatos al mes, algunos planes ilimitados cuestan menos.",
+        "answer": "Muchas herramientas de evaluación se venden como suscripción mensual o anual, que pagas aunque no evalúes a nadie. Con prepza pagas solo por candidato: {candidate} créditos ({candidate_dollars} $), sin contrato, sin cuotas por usuario y sin pagar por generar una entrevista. Una empresa que invita a {example_candidates} candidatos al mes paga unos {example_year_dollars} $ al año. Si evalúas a muchos candidatos cada mes, una suscripción puede salir más barata, así que compara con tus propias cifras.",
     },
     {
         "key": "expire",

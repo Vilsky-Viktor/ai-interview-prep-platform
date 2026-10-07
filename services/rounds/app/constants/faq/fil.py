@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Paano maihahambing ang presyo sa ibang assessment tool?",
-        "answer": "Karamihan sa mga assessment platform ay $100–215 kada buwan sa annual plan, o $7–20 bawat kandidato. Sa prepza, ang isang kandidato ay {candidate} credits (${candidate_dollars}), walang kontrata, walang bayad kada user, at walang bayad sa paggawa ng interview. Ang kumpanyang nag-iimbita ng {example_candidates} kandidato kada buwan ay nagbabayad ng mga ${example_year_dollars} kada taon, kumpara sa $1,200–2,580 para sa annual plan. Mula mga 50 kandidato kada buwan, may ilang unlimited plan na mas mura.",
+        "answer": "Maraming assessment tool ang ibinebenta bilang buwanan o taunang subscription na binabayaran kahit wala kang tine-test. Sa prepza, nagbabayad ka lang kada kandidato: {candidate} credits (${candidate_dollars}), walang kontrata, walang bayad kada user, at walang bayad sa paggawa ng interview. Ang kumpanyang nag-iimbita ng {example_candidates} kandidato kada buwan ay nagbabayad ng mga ${example_year_dollars} kada taon. Kung maraming kandidato ang tine-test mo buwan-buwan, maaaring mas mura ang subscription, kaya ihambing sa sarili mong mga numero.",
     },
     {
         "key": "expire",

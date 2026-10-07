@@ -45,7 +45,7 @@ FAQ = [
     {
         "key": "compare_hiring",
         "question": "Hoe verhoudt de prijs zich tot andere assessmenttools?",
-        "answer": "De meeste assessmentplatforms kosten 100–215 $ per maand met een jaarabonnement, of 7–20 $ per kandidaat. Bij prepza kost een kandidaat {candidate} credits ({candidate_dollars} $), zonder contract, zonder kosten per gebruiker en zonder te betalen voor het maken van een gesprek. Een bedrijf dat {example_candidates} kandidaten per maand uitnodigt, betaalt ongeveer {example_year_dollars} $ per jaar, tegenover 1.200–2.580 $ voor een jaarabonnement. Vanaf ongeveer 50 kandidaten per maand zijn sommige onbeperkte abonnementen goedkoper.",
+        "answer": "Veel assessmenttools worden verkocht als maand- of jaarabonnement, dat je betaalt ook als je niemand test. Bij prepza betaal je alleen per kandidaat: {candidate} credits ({candidate_dollars} $), zonder contract, zonder kosten per gebruiker en zonder te betalen voor het maken van een gesprek. Een bedrijf dat {example_candidates} kandidaten per maand uitnodigt, betaalt ongeveer {example_year_dollars} $ per jaar. Test je elke maand veel kandidaten, dan kan een abonnement goedkoper zijn, dus vergelijk met je eigen cijfers.",
     },
     {
         "key": "expire",
