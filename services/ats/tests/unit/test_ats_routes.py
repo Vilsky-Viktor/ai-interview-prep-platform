@@ -4,10 +4,10 @@ from datetime import UTC, datetime
 import pytest
 from cryptography.fernet import Fernet
 from prepza_common.auth import current_user
+from prepza_common.encryption import decrypt
 from prepza_common.user import User
 
 from app.config.settings import settings
-from app.helpers.encryption import decrypt
 from app.integrations import workable
 from app.main import app
 from app.models.ats import AtsConnection

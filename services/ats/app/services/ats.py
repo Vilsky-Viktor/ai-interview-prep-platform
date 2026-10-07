@@ -3,10 +3,10 @@ import logging
 
 from cryptography.fernet import Fernet
 from fastapi import HTTPException, status
+from prepza_common.encryption import decrypt, encrypt
 
 from app.config.settings import settings
 from app.constants.ats import ATS_NAMES, WORKABLE_WEBHOOK, AtsProvider
-from app.helpers.encryption import decrypt, encrypt
 from app.integrations import breezy, workable
 from app.integrations.ats_clients import client
 from app.integrations.errors import KeyRejected

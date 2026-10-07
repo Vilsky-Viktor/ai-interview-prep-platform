@@ -5,7 +5,6 @@ requires-python = ">=3.13"
 dependencies = [
     "prepza-common",
     "alembic>=1.20.0",
-    "cryptography>=46.0.0",
     "fastapi>=0.141.1",
     "firebase-admin>=7.7.0",
     "httpx>=0.28.1",

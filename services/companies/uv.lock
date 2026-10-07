@@ -974,6 +974,7 @@ name = "prepza-common"
 version = "0.1.0"
 source = { editable = "../../packages/common" }
 dependencies = [
+    { name = "cryptography" },
     { name = "fastapi" },
     { name = "firebase-admin" },
     { name = "google-auth", extra = ["requests"] },
@@ -986,6 +987,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "cryptography", specifier = ">=46.0.0" },
     { name = "fastapi", specifier = ">=0.141.1" },
     { name = "firebase-admin", specifier = ">=7.7.0" },
     { name = "google-auth", extras = ["requests"], specifier = ">=2.40.0" },

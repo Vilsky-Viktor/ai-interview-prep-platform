@@ -5,10 +5,10 @@ import pytest
 from cryptography.fernet import Fernet
 from fastapi import HTTPException
 from prepza_common.auth import current_user
+from prepza_common.encryption import decrypt
 from prepza_common.user import User
 
 from app.config.settings import settings
-from app.helpers.encryption import decrypt
 from app.integrations import breezy
 from app.integrations.errors import KeyRejected
 from app.main import app

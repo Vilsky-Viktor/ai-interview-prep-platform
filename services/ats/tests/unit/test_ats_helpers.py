@@ -2,12 +2,10 @@ import asyncio
 
 import httpx
 import pytest
-from cryptography.fernet import Fernet
 from fastapi import HTTPException
 from prepza_common import http
 
 from app.helpers.ats import html_to_text, job_text, subdomain
-from app.helpers.encryption import decrypt, encrypt
 from app.integrations import workable
 
 
@@ -50,15 +48,6 @@ def test_a_job_is_its_title_and_non_empty_sections_cut_to_the_limit():
         "Accountant\n\nClose\n\nPerks"
     )
     assert job_text("Accountant", ["<p>Close the books</p>"], 15) == "Accountant\n\nClo"
-
-
-def test_an_ats_key_is_unreadable_with_another_key():
-    key = Fernet.generate_key().decode()
-    sealed = encrypt(key, "secret-token")
-
-    assert "secret-token" not in sealed
-    assert decrypt(key, sealed) == "secret-token"
-    assert decrypt(Fernet.generate_key().decode(), sealed) is None
 
 
 def answering(monkeypatch, handler):

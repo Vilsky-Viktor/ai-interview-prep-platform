@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Code shared by prepza's services: sign-in, service tokens, logging, database and HTTP setup."
 requires-python = ">=3.13"
 dependencies = [
+    "cryptography>=46.0.0",
     "fastapi>=0.141.1",
     "firebase-admin>=7.7.0",
     "google-auth[requests]>=2.40.0",
