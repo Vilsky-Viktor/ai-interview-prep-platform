@@ -79,6 +79,28 @@ def greenhouse_signed(secret: str, body: bytes, signature: str) -> bool:
     return hmac.compare_digest(signature.strip().removeprefix("sha256 "), expected)
 
 
+def teamtailor_signed(secret: str, body: bytes, signature: str) -> bool:
+    """Whether a Teamtailor web hook is Teamtailor's: its TT-Signature is base64 of
+    "t=<timestamp>,v2=<hex>", the HMAC-SHA256 of "<timestamp>.<raw body>" with the signature key
+    Teamtailor gave the web hook."""
+    try:
+        parts = dict(
+            part.split("=", 1)
+            for part in base64.b64decode(signature).decode().split(",")
+            if "=" in part
+        )
+    except ValueError:
+        return False
+
+    if "t" not in parts or "v2" not in parts:
+        return False
+
+    signed = parts["t"].encode() + b"." + body
+    expected = hmac.new(secret.encode(), signed, hashlib.sha256).hexdigest()
+
+    return hmac.compare_digest(parts["v2"], expected)
+
+
 def result_comment(title: str, grade: int | None, passed: bool, flagged: bool, link: str) -> str:
     """The comment a finished candidate's results go back to the ATS as."""
     lines = [f"prepza: {title}"]

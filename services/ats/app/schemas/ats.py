@@ -33,6 +33,16 @@ class GreenhouseIn(BaseModel):
     client_secret: str = Field(min_length=1, max_length=500)
 
 
+class TeamtailorIn(BaseModel):
+    # An API key with Admin permission, Read/Write.
+    key: str = Field(min_length=1, max_length=500)
+
+
+class WebhookKeyIn(BaseModel):
+    # The signature key the ATS generated for the company's web hook.
+    secret: str = Field(min_length=1, max_length=500)
+
+
 class WebhookOut(BaseModel):
     """What the company pastes into its ATS's web hook: where it sends, and its secret key."""
 

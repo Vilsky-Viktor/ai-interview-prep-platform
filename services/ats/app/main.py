@@ -11,7 +11,7 @@ from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
 from app.integrations.redis import get_redis
-from app.routers import ats, ats_webhooks, events, internal_accounts, schedules
+from app.routers import ats, ats_connect, ats_webhooks, events, internal_accounts, schedules
 from app.storage.db import ping as ping_database
 
 configure_logging()
@@ -36,6 +36,7 @@ app = FastAPI(
 add_localized_errors(app)
 app.add_middleware(MaintenanceMiddleware, get_redis=get_redis)
 app.add_middleware(RequestLogMiddleware)
+app.include_router(ats_connect.router)
 app.include_router(ats.router)
 app.include_router(ats_webhooks.router)
 app.include_router(events.router)

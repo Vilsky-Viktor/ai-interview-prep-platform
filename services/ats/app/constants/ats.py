@@ -6,10 +6,17 @@ class AtsProvider(StrEnum):
 
     WORKABLE = "workable"
     GREENHOUSE = "greenhouse"
+    TEAMTAILOR = "teamtailor"
 
 
 # Each ATS's name as companies know it.
-ATS_NAMES = {AtsProvider.WORKABLE: "Workable", AtsProvider.GREENHOUSE: "Greenhouse"}
+ATS_NAMES = {
+    AtsProvider.WORKABLE: "Workable",
+    AtsProvider.GREENHOUSE: "Greenhouse",
+    AtsProvider.TEAMTAILOR: "Teamtailor",
+}
+# The ATSs whose comments need an author: results go back as the member found at connecting.
+NEEDS_AUTHOR = {AtsProvider.WORKABLE, AtsProvider.TEAMTAILOR}
 
 
 class ConnectionStatus(StrEnum):
@@ -69,5 +76,28 @@ GREENHOUSE_MAX_PAGES = 10
 # the company pastes into Greenhouse with its secret key.
 GREENHOUSE_WEBHOOK = "{site}/api/ats/webhooks/greenhouse/{connection_id}"
 GREENHOUSE_STAGE_CHANGE = "candidate_stage_change"
+# Teamtailor's API in each of its regions; an API key works only in its company's region.
+TEAMTAILOR_HOSTS = (
+    "https://api.teamtailor.com",
+    "https://api.na.teamtailor.com",
+    "https://api.au.teamtailor.com",
+)
+TEAMTAILOR_API_VERSION = "20240904"
+TEAMTAILOR_MEDIA_TYPE = "application/vnd.api+json"
+# The most items one page of Teamtailor's lists returns, and how many pages are read at most.
+TEAMTAILOR_PAGE = 30
+TEAMTAILOR_MAX_PAGES = 20
+# Jobs no longer hiring, left out of the jobs to link.
+TEAMTAILOR_CLOSED_JOBS = {"archived"}
+# Where a company's Teamtailor web hook sends its events, one address per connection; the company
+# pastes the signature key Teamtailor generates for it back into prepza.
+TEAMTAILOR_WEBHOOK = "{site}/api/ats/webhooks/teamtailor/{connection_id}"
+# The events that can bring a candidate into a stage: an application moved, or one made there.
+TEAMTAILOR_EVENTS = {"job_application.update", "job_application.create"}
+# Each ATS's web hook address, for the ATSs whose web hook the company sets up itself.
+WEBHOOKS = {
+    AtsProvider.GREENHOUSE: GREENHOUSE_WEBHOOK,
+    AtsProvider.TEAMTAILOR: TEAMTAILOR_WEBHOOK,
+}
 # A candidate's scorecard, linked in the results that go back to the ATS.
 SCORECARD_LINK = "{site}/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}"

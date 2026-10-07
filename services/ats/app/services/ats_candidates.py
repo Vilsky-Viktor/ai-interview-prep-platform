@@ -7,14 +7,21 @@ from fastapi import HTTPException, status
 from app.config.settings import settings
 from app.constants.ats import (
     GREENHOUSE_STAGE_CHANGE,
+    NEEDS_AUTHOR,
     SCORECARD_LINK,
+    TEAMTAILOR_EVENTS,
     WORKABLE_MOVED,
     AtsProvider,
     CandidateStatus,
     ConnectionStatus,
     FailReason,
 )
-from app.helpers.ats import greenhouse_signed, result_comment, workable_signed
+from app.helpers.ats import (
+    greenhouse_signed,
+    result_comment,
+    teamtailor_signed,
+    workable_signed,
+)
 from app.helpers.notifications import ats_not_invited
 from app.integrations import companies
 from app.models.ats import AtsCandidate, AtsConnection
@@ -110,6 +117,41 @@ async def receive_greenhouse(connection_id: UUID, body: bytes, signature: str) -
             await arrived(link, connection, reference, next(item for item in emails if item))
 
 
+async def receive_teamtailor(connection_id: UUID, body: bytes, signature: str) -> None:
+    """A Teamtailor web hook: a candidate whose application is now in a linked job's stage gets
+    the interview. Only events signed with the signature key the company saved count (none
+    count before it's saved). The event only says an application changed, so the application is
+    read from Teamtailor: its job, stage and candidate as they are now."""
+    connection = await ats.connection_by_id(connection_id)
+
+    if connection is None or connection.provider != AtsProvider.TEAMTAILOR:
+        return
+
+    key = await key_of(connection)
+
+    if key is None:
+        return
+
+    if not key.get("webhook_secret") or not teamtailor_signed(
+        key["webhook_secret"], body, signature
+    ):
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Not signed by Teamtailor")
+
+    event = json.loads(body)
+    # The event comes on its own, or inside a "payload" envelope.
+    event = event.get("payload") or event
+    changed = event.get("data") or {}
+
+    if event.get("event_name") not in TEAMTAILOR_EVENTS or not changed.get("id"):
+        return
+
+    found = await integrations.call(connection, "application", application_id=str(changed["id"]))
+    link = await ats.link_for_job(connection.id, found["job_id"] or "")
+
+    if link and link.stage_id == found["stage_id"] and found["email"]:
+        await arrived(link, connection, found["candidate_id"], found["email"])
+
+
 async def arrived(link, connection: AtsConnection, candidate_id: str, email: str) -> None:
     """A candidate the ATS sent for a linked job: saved once, then invited."""
     row = await ats_candidates.add(connection.id, link.id, link.interview_id, candidate_id, email)
@@ -200,7 +242,7 @@ async def report(data: dict) -> None:
     row, connection = found
     key = await key_of(connection)
     # Workable's comments need an author; Greenhouse's notes don't.
-    no_author = connection.provider == AtsProvider.WORKABLE and connection.member_id is None
+    no_author = connection.provider in NEEDS_AUTHOR and connection.member_id is None
 
     if key is None or no_author:
         return

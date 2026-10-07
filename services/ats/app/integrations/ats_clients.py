@@ -1,13 +1,16 @@
 from typing import Protocol
 
 from app.constants.ats import AtsProvider
-from app.integrations import greenhouse, workable
+from app.integrations import greenhouse, teamtailor, workable
 
 
 class AtsClient(Protocol):
     """What every ATS's client offers, each taking the connection's credentials as keyword
     arguments (Workable: subdomain and token; Greenhouse: client_id and client_secret). A
-    refused key raises integrations.errors.KeyRejected; an ATS that fails, a 502."""
+    refused key raises integrations.errors.KeyRejected; an ATS that fails, a 502. `KEYS` names
+    the credentials it takes: a connection may keep others (a web hook's secret key)."""
+
+    KEYS: tuple[str, ...]
 
     async def check(self, **credentials) -> None: ...
 
@@ -26,6 +29,7 @@ class AtsClient(Protocol):
 CLIENTS: dict[AtsProvider, AtsClient] = {
     AtsProvider.WORKABLE: workable,
     AtsProvider.GREENHOUSE: greenhouse,
+    AtsProvider.TEAMTAILOR: teamtailor,
 }
 
 

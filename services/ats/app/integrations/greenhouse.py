@@ -14,6 +14,8 @@ from app.constants.ats import (
 )
 from app.integrations.errors import KeyRejected
 
+# The credentials this client takes (a connection also keeps its web hook's secret key).
+KEYS = ("client_id", "client_secret")
 # Greenhouse's answers that mean the credential is wrong, revoked or lacks a permission.
 REJECTED = {status.HTTP_400_BAD_REQUEST, status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
 # Access tokens by client id, with when each stops being used: they last about an hour.

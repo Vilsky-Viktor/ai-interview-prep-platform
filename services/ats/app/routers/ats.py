@@ -1,25 +1,19 @@
-import secrets
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import MAX_GOAL_LENGTH
 
-from app.config.settings import settings
-from app.constants.ats import ATS_NAMES, GREENHOUSE_WEBHOOK, AtsProvider, CandidateStatus
-from app.helpers.ats import job_text, workable_subdomain
-from app.integrations import companies, greenhouse, workable
-from app.integrations.errors import KeyRejected
+from app.constants.ats import ATS_NAMES, AtsProvider, CandidateStatus
+from app.helpers.ats import job_text
+from app.integrations import companies
 from app.schemas.ats import (
     AtsItemOut,
     ConnectionOut,
-    GreenhouseIn,
     IntegrationsOut,
     JobLinkIn,
     JobLinkOut,
     JobTextOut,
-    WebhookOut,
-    WorkableIn,
 )
 from app.services import ats as integrations
 from app.services import ats_candidates as ats_candidates_service
@@ -48,75 +42,6 @@ async def list_connections(company_id: UUID, user: CurrentUser) -> IntegrationsO
             for row in rows
         ],
     )
-
-
-@router.put("/workable", status_code=status.HTTP_204_NO_CONTENT)
-async def connect_workable(company_id: UUID, body: WorkableIn, user: CurrentUser) -> None:
-    """Connects Workable with an account's API access token, checked with one read first. A
-    second connect replaces the key."""
-    await require_editor(user, company_id)
-    integrations.require_available()
-    subdomain = workable_subdomain(body.account)
-
-    if subdomain is None:
-        raise HTTPException(
-            status.HTTP_400_BAD_REQUEST, "Enter your Workable address, like acme.workable.com"
-        )
-
-    token = body.token.strip()
-
-    try:
-        await workable.check(subdomain, token)
-    except workable.KeyRejected:
-        raise HTTPException(
-            status.HTTP_400_BAD_REQUEST, "Workable didn't accept this token for that account"
-        ) from None
-
-    credentials = integrations.seal({"subdomain": subdomain, "token": token})
-    # Who results are written back as: the connecting user's Workable member, or an admin.
-    member = await workable.member_id(subdomain, token, user.email)
-    await ats.connect(company_id, AtsProvider.WORKABLE, subdomain, credentials, user.uid, member)
-
-
-@router.put("/greenhouse", status_code=status.HTTP_204_NO_CONTENT)
-async def connect_greenhouse(company_id: UUID, body: GreenhouseIn, user: CurrentUser) -> None:
-    """Connects Greenhouse with a Harvest V3 (OAuth) API credential, checked with one read
-    first. Each connection gets its own secret key for the web hook the company sets up; a
-    reconnect keeps it, so the web hook goes on working."""
-    await require_editor(user, company_id)
-    integrations.require_available()
-    client_id, client_secret = body.client_id.strip(), body.client_secret.strip()
-
-    try:
-        await greenhouse.check(client_id, client_secret)
-    except KeyRejected:
-        raise HTTPException(
-            status.HTTP_400_BAD_REQUEST, "Greenhouse didn't accept this client ID and secret"
-        ) from None
-
-    earlier = await ats.connection(company_id, AtsProvider.GREENHOUSE)
-    kept = (await integrations.credentials(earlier)).get("webhook_secret") if earlier else None
-    sealed = integrations.seal(
-        {
-            "client_id": client_id,
-            "client_secret": client_secret,
-            "webhook_secret": kept or secrets.token_urlsafe(32),
-        }
-    )
-    # Shown as the credential's last characters: Greenhouse names no account.
-    await ats.connect(company_id, AtsProvider.GREENHOUSE, f"…{client_id[-4:]}", sealed, user.uid)
-
-
-@router.get("/greenhouse/webhook")
-async def greenhouse_webhook(company_id: UUID, user: CurrentUser) -> WebhookOut:
-    """Where the company's Greenhouse web hook sends stage changes, and its secret key, to paste
-    into Greenhouse; owners and admins only."""
-    await require_editor(user, company_id)
-    connection = await integrations.connected(company_id, AtsProvider.GREENHOUSE)
-    found = await integrations.credentials(connection)
-    url = GREENHOUSE_WEBHOOK.format(site=settings.site_url, connection_id=connection.id)
-
-    return WebhookOut(url=url, secret=found["webhook_secret"])
 
 
 @router.delete("/{provider}", status_code=status.HTTP_204_NO_CONTENT)

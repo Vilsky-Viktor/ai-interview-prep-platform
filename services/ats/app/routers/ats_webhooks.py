@@ -24,3 +24,12 @@ async def greenhouse_event(connection_id: UUID, request: Request) -> None:
     await ats_candidates.receive_greenhouse(
         connection_id, await request.body(), request.headers.get("signature", "")
     )
+
+
+@router.post("/teamtailor/{connection_id}", status_code=status.HTTP_200_OK)
+async def teamtailor_event(connection_id: UUID, request: Request) -> None:
+    """The company's Teamtailor web hook (job applications changed), signed with the signature
+    key Teamtailor gave it (the TT-Signature header, checked on the raw body)."""
+    await ats_candidates.receive_teamtailor(
+        connection_id, await request.body(), request.headers.get("tt-signature", "")
+    )

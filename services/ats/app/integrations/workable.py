@@ -11,6 +11,8 @@ from app.constants.ats import (
 )
 from app.integrations.errors import KeyRejected
 
+# The credentials this client takes.
+KEYS = ("subdomain", "token")
 # Workable's answers that mean the key is wrong, revoked, expired or lacks a scope.
 REJECTED = {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
 

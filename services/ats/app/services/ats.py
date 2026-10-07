@@ -77,9 +77,11 @@ async def call(connection: AtsConnection, action: str, **arguments):
     """One action of the connection's ATS client (integrations/ats_clients.py), with its
     credentials; a refused key marks the connection broken."""
     found = await credentials(connection)
+    used = client(connection.provider)
+    keys = {key: found[key] for key in used.KEYS}
 
     try:
-        return await getattr(client(connection.provider), action)(**found, **arguments)
+        return await getattr(used, action)(**keys, **arguments)
     except KeyRejected:
         await broken(connection)
 

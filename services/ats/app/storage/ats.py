@@ -57,6 +57,19 @@ async def connect(
         await session.commit()
 
 
+async def set_credentials(connection_id: UUID, credentials: str) -> None:
+    """Replaces the connection's sealed credentials (a web hook's signature key added)."""
+    query = (
+        update(AtsConnection)
+        .where(AtsConnection.id == connection_id)
+        .values(credentials=credentials)
+    )
+
+    async with Session() as session:
+        await session.execute(query)
+        await session.commit()
+
+
 async def mark_broken(connection_id: UUID) -> None:
     query = (
         update(AtsConnection)

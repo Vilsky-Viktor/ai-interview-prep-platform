@@ -160,3 +160,22 @@ def test_a_greenhouse_event_finds_its_linked_job_by_connection_and_job_id(run):
 
     assert found.id == link_id and found.stage_id == "assessment"
     assert (other_job, other_ats) == (None, None)
+
+
+def test_new_credentials_replace_only_that_connections(run):
+    async def scenario():
+        company = uuid.uuid4()
+        await ats.connect(company, AtsProvider.TEAMTAILOR, "Acme", "sealed-1", "ann", "5")
+        await ats.connect(company, AtsProvider.GREENHOUSE, "…1234", "sealed-g", "ann")
+        connection = await ats.connection(company, AtsProvider.TEAMTAILOR)
+        await ats.set_credentials(connection.id, "sealed-2")
+        found = await ats.connection(company, AtsProvider.TEAMTAILOR)
+        other = await ats.connection(company, AtsProvider.GREENHOUSE)
+        await ats.delete_company(company)
+
+        return found, other
+
+    found, other = run(scenario())
+
+    assert (found.credentials, found.account, found.member_id) == ("sealed-2", "Acme", "5")
+    assert other.credentials == "sealed-g"
