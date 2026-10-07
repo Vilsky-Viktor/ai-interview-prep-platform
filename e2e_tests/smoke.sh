@@ -20,7 +20,7 @@ check() {
 }
 
 check /
-check /company
+check /companies
 check /api/library/ready
 check /api/generate/ready
 check /api/rounds/ready
