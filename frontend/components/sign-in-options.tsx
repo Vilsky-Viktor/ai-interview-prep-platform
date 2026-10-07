@@ -5,7 +5,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { LegalConsent } from "@/components/legal-consent"
-import { LinkedInIcon } from "@/components/linkedin-icon"
+import { LinkedInIcon } from "@/components/brand-icons"
 import { GitHubIcon, GoogleIcon } from "@/components/sign-in-icons"
 import { Button } from "@/components/ui/button"
 import { SIGN_IN_PROVIDERS } from "@/constants/auth"

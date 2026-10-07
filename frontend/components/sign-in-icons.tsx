@@ -1,5 +1,5 @@
 // Marks of the ways to sign in, from Simple Icons (CC0), in the text color like the app's other
-// icons; LinkedIn's is components/linkedin-icon.tsx.
+// icons; LinkedIn's is in components/brand-icons.tsx.
 
 export function GoogleIcon() {
   return (

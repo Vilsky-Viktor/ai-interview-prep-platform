@@ -1,19 +1,21 @@
 import Image from "next/image"
 import { getTranslations } from "next-intl/server"
 
-import { LinkedInIcon } from "@/components/linkedin-icon"
+import { LinkedInIcon } from "@/components/brand-icons"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { JsonLd } from "@/components/json-ld"
 import { FOUNDER } from "@/constants/about"
-import { pageMetadata } from "@/lib/site"
+import { pageMetadata, siteUrl } from "@/lib/site"
+import { personData } from "@/lib/structured-data"
 
 export async function generateMetadata() {
   const t = await getTranslations("about")
 
-  return pageMetadata(t("title"), t("intro"), "/about")
+  return pageMetadata(t("title"), t("intro"), "/about", true)
 }
 
 export default async function AboutPage() {
@@ -21,6 +23,7 @@ export default async function AboutPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-16 px-6 py-12">
+      <JsonLd data={personData(siteUrl())} />
       <header className="space-y-4">
         <h1 className="font-heading text-4xl font-medium tracking-tight">
           {t("title")}

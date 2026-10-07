@@ -1,6 +1,7 @@
 import { ArrowDownIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
+import { AdvantagesSection } from "@/components/landing/advantages"
 import { BrandSection } from "@/components/landing/brand"
 import { Closing } from "@/components/landing/closing"
 import { CompaniesSection } from "@/components/landing/companies"
@@ -12,12 +13,29 @@ import { TrustSection } from "@/components/landing/trust"
 import { QualitySection } from "@/components/landing/quality"
 import { ReportsSection } from "@/components/landing/reports"
 import { TryFirstSection } from "@/components/landing/try-first"
+import { JsonLd } from "@/components/json-ld"
 import { StartTest } from "@/components/start-test"
+import { SITE_NAME } from "@/constants/seo"
 import { serverFetch } from "@/lib/server-api"
+import { pageMetadata, siteUrl } from "@/lib/site"
+import { organizationData } from "@/lib/structured-data"
 import type { Catalog } from "@/types/billing"
+
+export async function generateMetadata() {
+  const t = await getTranslations("site")
+
+  // The layout's title template doesn't reach its own segment's page: the brand is added here.
+  return pageMetadata(
+    `${t("homeTitle")} · ${SITE_NAME}`,
+    t("description"),
+    "/",
+    true
+  )
+}
 
 export default async function HomePage() {
   const t = await getTranslations("home")
+  const site = await getTranslations("site")
   const landing = await getTranslations("landing")
   const catalog = await serverFetch<Catalog>("/billing/catalog")
   // The candidates a first company's welcome credits cover.
@@ -27,6 +45,7 @@ export default async function HomePage() {
 
   return (
     <main className="mx-auto max-w-5xl px-6">
+      <JsonLd data={organizationData(siteUrl(), site("description"))} />
       {/* The promise and the box to start in fill the first screen, under the 3.5rem header. */}
       <div className="relative flex min-h-[calc(100svh-3.5rem)] flex-col items-center justify-center pb-24">
         <div className="w-full max-w-176 space-y-10">
@@ -57,6 +76,7 @@ export default async function HomePage() {
         </a>
       </div>
       <HowItWorks />
+      <AdvantagesSection />
       <CompaniesSection />
       <TryFirstSection />
       <ReportsSection />
