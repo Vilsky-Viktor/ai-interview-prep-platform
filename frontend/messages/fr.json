@@ -748,6 +748,14 @@
         "off": "Désactivez-le une fois le poste pourvu"
       }
     },
+    "ats": {
+      "title": "Compatible avec votre ATS",
+      "text": "Les candidats que vous déplacez vers une étape dans votre ATS reçoivent l'entretien, et leurs résultats reviennent sur leur profil.",
+      "points": {
+        "move": "Déplacez un candidat vers une étape : l'invitation part aussitôt",
+        "back": "Note, alertes et lien vers la fiche d'évaluation arrivent dans votre ATS"
+      }
+    },
     "companies": {
       "title": "Voyez qui maîtrise le poste",
       "text": "Les candidats passent l'entretien depuis votre invitation par e-mail ou votre lien de partage. Leurs scores et les signaux d'alerte arrivent au fil de leurs réponses.",

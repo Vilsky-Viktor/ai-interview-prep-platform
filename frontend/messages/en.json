@@ -748,6 +748,14 @@
         "off": "Turn it off once the role is filled"
       }
     },
+    "ats": {
+      "title": "Works with your ATS",
+      "text": "Candidates you move to a stage in your ATS get the interview, and their results come back to their profile.",
+      "points": {
+        "move": "Move a candidate to a stage: the invite goes out",
+        "back": "Grade, flags and a scorecard link land in your ATS"
+      }
+    },
     "companies": {
       "title": "See who knows the job",
       "text": "Candidates take the interview from your email invite or shareable link. Their scores and warning signs come in as they answer.",

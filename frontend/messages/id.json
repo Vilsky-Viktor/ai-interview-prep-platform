@@ -748,6 +748,14 @@
         "off": "Matikan setelah posisinya terisi"
       }
     },
+    "ats": {
+      "title": "Bekerja dengan ATS-mu",
+      "text": "Kandidat yang kamu pindahkan ke suatu tahap di ATS-mu mendapat wawancara, dan hasilnya kembali ke profil mereka.",
+      "points": {
+        "move": "Pindahkan kandidat ke suatu tahap: undangan langsung terkirim",
+        "back": "Nilai, tanda, dan tautan scorecard masuk ke ATS-mu"
+      }
+    },
     "companies": {
       "title": "Lihat siapa yang menguasai pekerjaan",
       "text": "Kandidat mengikuti wawancara dari undangan email atau tautan yang bisa dibagikan. Skor dan tanda peringatan mereka masuk seiring mereka menjawab.",

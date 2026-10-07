@@ -752,6 +752,14 @@
         "off": "Lülita see välja, kui koht on täidetud"
       }
     },
+    "ats": {
+      "title": "Töötab sinu ATS-süsteemiga",
+      "text": "Kandidaadid, kelle viid ATS-süsteemis etappi, saavad intervjuu ja nende tulemused jõuavad tagasi nende profiilile.",
+      "points": {
+        "move": "Vii kandidaat etappi: kutse läheb kohe teele",
+        "back": "Hinne, märked ja hindamislehe link jõuavad sinu ATS-süsteemi"
+      }
+    },
     "companies": {
       "title": "Vaata, kes tööd tunneb",
       "text": "Kandidaadid teevad intervjuu sinu e-posti kutse või jagatava lingi kaudu. Nende tulemused ja hoiatusmärgid saabuvad vastamise käigus.",

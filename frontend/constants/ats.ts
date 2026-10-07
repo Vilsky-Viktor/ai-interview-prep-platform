@@ -1,10 +1,42 @@
-// The ATSs a company can connect, each with its own page at /integrations/<id>.
+// The ATSs a company can connect, each with its own page at /integrations/<id>: its square logo
+// for the app, and its full logo (wordmark) for the landing page, in white on the dark theme
+// where its colors are too dark to see.
 export const ATS_PROVIDERS = [
-  { id: "workable", name: "Workable", logo: "/ats/workable.svg" },
-  { id: "greenhouse", name: "Greenhouse", logo: "/ats/greenhouse.png" },
-  { id: "teamtailor", name: "Teamtailor", logo: "/ats/teamtailor.png" },
-  { id: "recruitee", name: "Recruitee", logo: "/ats/recruitee.png" },
-  { id: "breezy", name: "Breezy HR", logo: "/ats/breezy.png" },
+  {
+    id: "workable",
+    name: "Workable",
+    logo: "/ats/workable.svg",
+    wordmark: "/ats/logos/workable.svg",
+    darkWhite: true,
+  },
+  {
+    id: "greenhouse",
+    name: "Greenhouse",
+    logo: "/ats/greenhouse.png",
+    wordmark: "/ats/logos/greenhouse.svg",
+    darkWhite: false,
+  },
+  {
+    id: "teamtailor",
+    name: "Teamtailor",
+    logo: "/ats/teamtailor.png",
+    wordmark: "/ats/logos/teamtailor.svg",
+    darkWhite: false,
+  },
+  {
+    id: "recruitee",
+    name: "Recruitee",
+    logo: "/ats/recruitee.png",
+    wordmark: "/ats/logos/recruitee.png",
+    darkWhite: true,
+  },
+  {
+    id: "breezy",
+    name: "Breezy HR",
+    logo: "/ats/breezy.png",
+    wordmark: "/ats/logos/breezy.png",
+    darkWhite: false,
+  },
 ] as const
 
 export type AtsProvider = (typeof ATS_PROVIDERS)[number]

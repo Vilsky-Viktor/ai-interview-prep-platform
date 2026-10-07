@@ -748,6 +748,14 @@
         "off": "Schalte ihn ab, sobald die Stelle besetzt ist"
       }
     },
+    "ats": {
+      "title": "Funktioniert mit deinem ATS",
+      "text": "Kandidaten, die du in deinem ATS in eine Phase verschiebst, bekommen das Interview, und ihre Ergebnisse landen wieder in ihrem Profil.",
+      "points": {
+        "move": "Verschiebe einen Kandidaten in eine Phase: Die Einladung geht raus",
+        "back": "Ergebnis, Hinweise und ein Link zur Auswertung landen in deinem ATS"
+      }
+    },
     "companies": {
       "title": "Sieh, wer den Job beherrscht",
       "text": "Kandidaten machen das Interview über deine E-Mail-Einladung oder deinen Link zum Teilen. Ihre Ergebnisse und Warnzeichen kommen herein, während sie antworten.",

@@ -747,6 +747,14 @@
         "off": "Pozisyon dolunca kapatın"
       }
     },
+    "ats": {
+      "title": "ATS sisteminizle çalışır",
+      "text": "ATS sisteminizde bir aşamaya taşıdığınız adaylar mülakatı alır ve sonuçları profillerine geri gelir.",
+      "points": {
+        "move": "Adayı bir aşamaya taşıyın: davet hemen gönderilir",
+        "back": "Not, işaretler ve değerlendirme kartı bağlantısı ATS sisteminize gelir"
+      }
+    },
     "companies": {
       "title": "İşi kimin bildiğini görün",
       "text": "Adaylar mülakata e-posta davetinizden veya paylaşılabilir bağlantınızdan girer. Puanları ve uyarı işaretleri cevapladıkça gelir.",

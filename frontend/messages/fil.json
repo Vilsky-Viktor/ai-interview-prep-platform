@@ -752,6 +752,14 @@
         "off": "I-off ito kapag napunan na ang role"
       }
     },
+    "ats": {
+      "title": "Gumagana sa ATS mo",
+      "text": "Makukuha ng mga aplikanteng inilipat mo sa isang stage sa ATS mo ang interview, at babalik sa profile nila ang mga resulta.",
+      "points": {
+        "move": "Ilipat ang aplikante sa isang stage: maipapadala agad ang invite",
+        "back": "Mapupunta sa ATS mo ang grade, mga flag at link sa scorecard"
+      }
+    },
     "companies": {
       "title": "Alamin kung sino ang marunong sa trabaho",
       "text": "Sinasagutan ng mga aplikante ang interview mula sa iyong email invite o shareable link. Dumarating ang kanilang score at mga babala habang sumasagot sila.",

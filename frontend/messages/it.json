@@ -748,6 +748,14 @@
         "off": "Disattivalo quando il ruolo è coperto"
       }
     },
+    "ats": {
+      "title": "Funziona con il tuo ATS",
+      "text": "I candidati che sposti in una fase del tuo ATS ricevono il colloquio, e i loro risultati tornano sul loro profilo.",
+      "points": {
+        "move": "Sposta un candidato in una fase: l'invito parte da solo",
+        "back": "Punteggio, segnalazioni e link alla scheda di valutazione arrivano nel tuo ATS"
+      }
+    },
     "companies": {
       "title": "Scopri chi conosce il lavoro",
       "text": "I candidati svolgono il colloquio dal tuo invito via email o dal link condivisibile. I loro punteggi e i segnali d'allarme arrivano man mano che rispondono.",

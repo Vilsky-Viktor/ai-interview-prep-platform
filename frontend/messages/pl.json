@@ -748,6 +748,14 @@
         "off": "Wyłącz go, gdy stanowisko zostanie obsadzone"
       }
     },
+    "ats": {
+      "title": "Działa z Twoim systemem ATS",
+      "text": "Kandydaci, których przeniesiesz do etapu w swoim systemie ATS, dostają rozmowę, a ich wyniki wracają do ich profilu.",
+      "points": {
+        "move": "Przenieś kandydata do etapu: zaproszenie wychodzi samo",
+        "back": "Wynik, ostrzeżenia i link do karty wyników trafiają do Twojego systemu ATS"
+      }
+    },
     "companies": {
       "title": "Zobacz, kto zna się na rzeczy",
       "text": "Kandydaci biorą udział w rozmowie przez zaproszenie e-mailem lub udostępniony link. Ich wyniki i sygnały ostrzegawcze spływają na bieżąco.",

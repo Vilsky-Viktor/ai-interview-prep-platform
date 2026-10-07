@@ -744,6 +744,14 @@
         "off": "Zet hem uit zodra de functie vervuld is"
       }
     },
+    "ats": {
+      "title": "Werkt met je ATS",
+      "text": "Kandidaten die je in je ATS naar een fase verplaatst, krijgen het interview, en hun resultaten komen terug in hun profiel.",
+      "points": {
+        "move": "Verplaats een kandidaat naar een fase: de uitnodiging gaat eruit",
+        "back": "Score, signalen en een link naar de scorekaart komen in je ATS"
+      }
+    },
     "companies": {
       "title": "Zie wie het vak kent",
       "text": "Kandidaten doen het interview via je uitnodiging per e-mail of je deelbare link. Hun scores en waarschuwingssignalen komen binnen terwijl ze antwoorden.",

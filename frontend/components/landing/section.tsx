@@ -32,14 +32,16 @@ export function LandingSection({
             title.includes("\n") && "no-dot"
           )}
         >
-          {title.includes("\n")
-            ? title.split("\n").map((line) => (
-                <span key={line} className="block">
-                  {line}
-                  <span className="text-primary">.</span>
-                </span>
-              ))
-            : title}
+          {title.includes("\n") ? (
+            title.split("\n").map((line) => (
+              <span key={line} className="block">
+                <KeepAcronyms text={line} />
+                <span className="text-primary">.</span>
+              </span>
+            ))
+          ) : (
+            <KeepAcronyms text={title} />
+          )}
         </h2>
         <p className="mx-auto max-w-2xl text-lg leading-relaxed text-balance text-muted-foreground sm:text-xl">
           {text}
@@ -48,6 +50,19 @@ export function LandingSection({
       </div>
       {children}
     </section>
+  )
+}
+
+/** A title's text with its acronyms (ATS, PDF) in capitals, though titles are lowercase. */
+function KeepAcronyms({ text }: { text: string }) {
+  return text.split(/\b([A-Z]{2,})\b/).map((part, index) =>
+    index % 2 ? (
+      <span key={index} className="normal-case">
+        {part}
+      </span>
+    ) : (
+      part
+    )
   )
 }
 

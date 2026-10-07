@@ -744,6 +744,14 @@
         "off": "Tắt liên kết khi đã tuyển được người"
       }
     },
+    "ats": {
+      "title": "Hoạt động với ATS của bạn",
+      "text": "Ứng viên bạn chuyển vào một giai đoạn trong ATS sẽ nhận buổi phỏng vấn, và kết quả được gửi về hồ sơ của họ.",
+      "points": {
+        "move": "Chuyển ứng viên vào một giai đoạn: lời mời được gửi đi ngay",
+        "back": "Điểm, cảnh báo và liên kết bảng điểm được gửi về ATS của bạn"
+      }
+    },
     "companies": {
       "title": "Biết ai thạo việc",
       "text": "Ứng viên tham gia phỏng vấn từ email mời hoặc đường link chia sẻ của bạn. Điểm và dấu hiệu cảnh báo hiện ra ngay khi họ trả lời.",

@@ -748,6 +748,14 @@
         "off": "Desactívalo cuando cubras el puesto"
       }
     },
+    "ats": {
+      "title": "Funciona con tu ATS",
+      "text": "Los candidatos que muevas a una etapa en tu ATS reciben la entrevista, y sus resultados vuelven a su perfil.",
+      "points": {
+        "move": "Mueve a un candidato a una etapa: la invitación sale sola",
+        "back": "Nota, alertas y un enlace a la ficha de evaluación llegan a tu ATS"
+      }
+    },
     "companies": {
       "title": "Descubre quién domina el trabajo",
       "text": "Los candidatos hacen la entrevista desde tu invitación por correo o tu enlace para compartir. Sus puntuaciones y señales de alerta llegan a medida que responden.",

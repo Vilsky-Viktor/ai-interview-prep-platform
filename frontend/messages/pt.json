@@ -744,6 +744,14 @@
         "off": "Desative quando a vaga for preenchida"
       }
     },
+    "ats": {
+      "title": "Funciona com o seu ATS",
+      "text": "Os candidatos que você move para uma etapa no seu ATS recebem a entrevista, e os resultados voltam para o perfil deles.",
+      "points": {
+        "move": "Mova um candidato para uma etapa: o convite é enviado",
+        "back": "Nota, alertas e um link para a ficha de avaliação chegam ao seu ATS"
+      }
+    },
     "companies": {
       "title": "Veja quem conhece o trabalho",
       "text": "Os candidatos fazem a entrevista a partir do seu convite por e-mail ou do link compartilhável. As pontuações e os sinais de alerta chegam conforme eles respondem.",
