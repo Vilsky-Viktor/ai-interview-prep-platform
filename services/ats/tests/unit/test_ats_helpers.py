@@ -6,13 +6,13 @@ from cryptography.fernet import Fernet
 from fastapi import HTTPException
 from prepza_common import http
 
-from app.helpers.ats import html_to_text, job_text, workable_subdomain
+from app.helpers.ats import html_to_text, job_text, subdomain
 from app.helpers.encryption import decrypt, encrypt
 from app.integrations import workable
 
 
 @pytest.mark.parametrize(
-    ("pasted", "subdomain"),
+    ("pasted", "expected"),
     [
         ("acme", "acme"),
         (" Acme.Workable.com ", "acme"),
@@ -21,8 +21,22 @@ from app.integrations import workable
         ("-acme", None),
     ],
 )
-def test_a_pasted_workable_address_gives_its_subdomain(pasted, subdomain):
-    assert workable_subdomain(pasted) == subdomain
+def test_a_pasted_workable_address_gives_its_subdomain(pasted, expected):
+    assert subdomain(pasted, ".workable.com") == expected
+
+
+@pytest.mark.parametrize(
+    ("pasted", "expected"),
+    [
+        ("acme", "acme"),
+        (" Acme.Recruitee.com ", "acme"),
+        ("https://acme-eu.recruitee.com/app/offers", "acme-eu"),
+        ("acme.workable.com", None),
+        ("not a subdomain", None),
+    ],
+)
+def test_a_pasted_recruitee_address_gives_its_subdomain(pasted, expected):
+    assert subdomain(pasted, ".recruitee.com") == expected
 
 
 def test_job_html_becomes_plain_text_with_lines_and_dashes():

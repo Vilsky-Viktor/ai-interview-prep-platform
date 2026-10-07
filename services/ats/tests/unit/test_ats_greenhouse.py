@@ -10,6 +10,7 @@ from fastapi import HTTPException
 from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
 from app.services import ats as integrations
 from app.services import ats_candidates as flow
+from app.services import ats_webhooks as hooks
 from app.storage import ats, ats_candidates
 from tests.unit.conftest import interview
 
@@ -95,7 +96,7 @@ def world(monkeypatch, companies_api):
 
 def receive(body, signature=None, connection_id=CONNECTION_ID):
     signature = sign(body) if signature is None else signature
-    asyncio.run(flow.receive_greenhouse(connection_id, body, signature))
+    asyncio.run(hooks.receive_greenhouse(connection_id, body, signature))
 
 
 def test_a_candidate_moved_into_the_linked_stage_is_invited(world):

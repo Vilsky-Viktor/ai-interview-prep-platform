@@ -5,16 +5,24 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 
 from app.config.settings import settings
-from app.constants.ats import WEBHOOKS, AtsProvider
-from app.helpers.ats import workable_subdomain
-from app.integrations import greenhouse, teamtailor, workable
+from app.constants.ats import PASTED_KEYS, RECRUITEE_DOMAIN, WEBHOOKS, AtsProvider
+from app.helpers.ats import subdomain
+from app.integrations import greenhouse, recruitee, teamtailor, workable
 from app.integrations.errors import KeyRejected
-from app.schemas.ats import GreenhouseIn, TeamtailorIn, WebhookKeyIn, WebhookOut, WorkableIn
+from app.schemas.ats import (
+    GreenhouseIn,
+    RecruiteeIn,
+    TeamtailorIn,
+    WebhookKeyIn,
+    WebhookOut,
+    WorkableIn,
+)
 from app.services import ats as integrations
 from app.services.access import require_editor
 from app.storage import ats
 
-# Connecting each ATS, and the web hooks companies set up themselves (Greenhouse, Teamtailor).
+# Connecting each ATS, and the web hooks companies set up themselves (Greenhouse, Teamtailor,
+# Recruitee).
 router = APIRouter(tags=["ats"])
 
 
@@ -32,9 +40,9 @@ async def connect_workable(company_id: UUID, body: WorkableIn, user: CurrentUser
     second connect replaces the key."""
     await require_editor(user, company_id)
     integrations.require_available()
-    subdomain = workable_subdomain(body.account)
+    account = subdomain(body.account, ".workable.com")
 
-    if subdomain is None:
+    if account is None:
         raise HTTPException(
             status.HTTP_400_BAD_REQUEST, "Enter your Workable address, like acme.workable.com"
         )
@@ -42,16 +50,16 @@ async def connect_workable(company_id: UUID, body: WorkableIn, user: CurrentUser
     token = body.token.strip()
 
     try:
-        await workable.check(subdomain, token)
+        await workable.check(account, token)
     except workable.KeyRejected:
         raise HTTPException(
             status.HTTP_400_BAD_REQUEST, "Workable didn't accept this token for that account"
         ) from None
 
-    credentials = integrations.seal({"subdomain": subdomain, "token": token})
+    credentials = integrations.seal({"subdomain": account, "token": token})
     # Who results are written back as: the connecting user's Workable member, or an admin.
-    member = await workable.member_id(subdomain, token, user.email)
-    await ats.connect(company_id, AtsProvider.WORKABLE, subdomain, credentials, user.uid, member)
+    member = await workable.member_id(account, token, user.email)
+    await ats.connect(company_id, AtsProvider.WORKABLE, account, credentials, user.uid, member)
 
 
 @router.put("/greenhouse", status_code=status.HTTP_204_NO_CONTENT)
@@ -112,10 +120,43 @@ async def connect_teamtailor(company_id: UUID, body: TeamtailorIn, user: Current
     await ats.connect(company_id, AtsProvider.TEAMTAILOR, company, sealed, user.uid, member)
 
 
+@router.put("/recruitee", status_code=status.HTTP_204_NO_CONTENT)
+async def connect_recruitee(company_id: UUID, body: RecruiteeIn, user: CurrentUser) -> None:
+    """Connects Recruitee with the company's address and a personal API token (it acts as the
+    person who made it), checked with one read first. The web hook's secret comes later
+    (Recruitee shows it); a reconnect keeps it."""
+    await require_editor(user, company_id)
+    integrations.require_available()
+    account = subdomain(body.account, RECRUITEE_DOMAIN)
+
+    if account is None:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, "Enter your Recruitee address, like acme.recruitee.com"
+        )
+
+    token = body.token.strip()
+
+    try:
+        await recruitee.check(account, token)
+    except KeyRejected:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, "Recruitee didn't accept this token for that company"
+        ) from None
+
+    credentials = {"company": account, "token": token}
+    kept = await kept_secret(company_id, AtsProvider.RECRUITEE)
+
+    if kept:
+        credentials["webhook_secret"] = kept
+
+    sealed = integrations.seal(credentials)
+    await ats.connect(company_id, AtsProvider.RECRUITEE, account, sealed, user.uid)
+
+
 @router.get("/{provider}/webhook")
 async def webhook(company_id: UUID, provider: AtsProvider, user: CurrentUser) -> WebhookOut:
-    """Where the company's web hook sends its events, and its secret key (empty while a
-    Teamtailor one has none saved); owners and admins only."""
+    """Where the company's web hook sends its events, and its secret key (empty while one the
+    ATS makes isn't saved yet); owners and admins only."""
     await require_editor(user, company_id)
 
     if provider not in WEBHOOKS:
@@ -128,12 +169,18 @@ async def webhook(company_id: UUID, provider: AtsProvider, user: CurrentUser) ->
     return WebhookOut(url=url, secret=found.get("webhook_secret", ""))
 
 
-@router.put("/teamtailor/webhook", status_code=status.HTTP_204_NO_CONTENT)
-async def save_teamtailor_key(company_id: UUID, body: WebhookKeyIn, user: CurrentUser) -> None:
-    """Saves the signature key Teamtailor generated for the company's web hook: its events count
-    from then on."""
+@router.put("/{provider}/webhook", status_code=status.HTTP_204_NO_CONTENT)
+async def save_webhook_key(
+    company_id: UUID, provider: AtsProvider, body: WebhookKeyIn, user: CurrentUser
+) -> None:
+    """Saves the secret key the ATS made for the company's web hook (Teamtailor, Recruitee): its
+    events count from then on."""
     await require_editor(user, company_id)
-    connection = await integrations.connected(company_id, AtsProvider.TEAMTAILOR)
+
+    if provider not in PASTED_KEYS:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "No web hook key to save")
+
+    connection = await integrations.connected(company_id, provider)
     found = await integrations.credentials(connection)
     sealed = integrations.seal({**found, "webhook_secret": body.secret.strip()})
     await ats.set_credentials(connection.id, sealed)

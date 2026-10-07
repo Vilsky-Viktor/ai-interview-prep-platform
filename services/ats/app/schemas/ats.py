@@ -33,6 +33,12 @@ class GreenhouseIn(BaseModel):
     client_secret: str = Field(min_length=1, max_length=500)
 
 
+class RecruiteeIn(BaseModel):
+    # The company's Recruitee address (acme, acme.recruitee.com) and a personal API token.
+    account: str = Field(min_length=1, max_length=200)
+    token: str = Field(min_length=1, max_length=500)
+
+
 class TeamtailorIn(BaseModel):
     # An API key with Admin permission, Read/Write.
     key: str = Field(min_length=1, max_length=500)

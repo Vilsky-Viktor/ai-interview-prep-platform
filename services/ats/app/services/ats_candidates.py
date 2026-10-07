@@ -1,4 +1,3 @@
-import json
 import logging
 from uuid import UUID
 
@@ -6,21 +5,14 @@ from fastapi import HTTPException, status
 
 from app.config.settings import settings
 from app.constants.ats import (
-    GREENHOUSE_STAGE_CHANGE,
     NEEDS_AUTHOR,
     SCORECARD_LINK,
-    TEAMTAILOR_EVENTS,
-    WORKABLE_MOVED,
-    AtsProvider,
     CandidateStatus,
     ConnectionStatus,
     FailReason,
 )
 from app.helpers.ats import (
-    greenhouse_signed,
     result_comment,
-    teamtailor_signed,
-    workable_signed,
 )
 from app.helpers.notifications import ats_not_invited
 from app.integrations import companies
@@ -49,107 +41,6 @@ async def key_of(connection: AtsConnection) -> dict | None:
         return await integrations.credentials(connection)
     except HTTPException:
         return None
-
-
-async def receive_workable(link_id: UUID, body: bytes, signature: str) -> None:
-    """A Workable event for a linked job: a candidate moved into its stage gets the interview.
-    Only events signed with the account's token count; anything for a job or link that's gone,
-    or another event, is ignored, so Workable doesn't send it again."""
-    found = await ats.link(link_id)
-
-    if found is None:
-        return
-
-    link, connection = found
-    key = await key_of(connection)
-
-    if key is None:
-        return
-
-    if not workable_signed(key["token"], body, signature):
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Not signed by Workable")
-
-    event = json.loads(body)
-    candidate = event.get("data") or {}
-
-    if (
-        event.get("event_type") != WORKABLE_MOVED
-        or (candidate.get("job") or {}).get("shortcode") != link.job_id
-        or not candidate.get("email")
-    ):
-        return
-
-    await arrived(link, connection, str(candidate["id"]), candidate["email"])
-
-
-async def receive_greenhouse(connection_id: UUID, body: bytes, signature: str) -> None:
-    """A Greenhouse web hook: a candidate whose application moved into a linked job's stage gets
-    the interview. Only events signed with the connection's secret key count; Greenhouse's ping,
-    other events, and jobs or stages not linked are ignored."""
-    connection = await ats.connection_by_id(connection_id)
-
-    if connection is None or connection.provider != AtsProvider.GREENHOUSE:
-        return
-
-    key = await key_of(connection)
-
-    if key is None:
-        return
-
-    if not greenhouse_signed(key["webhook_secret"], body, signature):
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Not signed by Greenhouse")
-
-    event = json.loads(body)
-    application = (event.get("payload") or {}).get("application") or {}
-    stage = application.get("current_stage") or {}
-    candidate = application.get("candidate") or {}
-    emails = [item.get("value") for item in candidate.get("email_addresses") or []]
-
-    if event.get("action") != GREENHOUSE_STAGE_CHANGE or not any(emails):
-        return
-
-    for job in application.get("jobs") or []:
-        link = await ats.link_for_job(connection.id, str(job.get("id")))
-
-        # Its stage by id, or by name (which id Greenhouse's web hooks send isn't settled).
-        if link and link.stage_id in (str(stage.get("id")), stage.get("name")):
-            reference = f"{candidate.get('id')}:{application.get('id')}"
-            await arrived(link, connection, reference, next(item for item in emails if item))
-
-
-async def receive_teamtailor(connection_id: UUID, body: bytes, signature: str) -> None:
-    """A Teamtailor web hook: a candidate whose application is now in a linked job's stage gets
-    the interview. Only events signed with the signature key the company saved count (none
-    count before it's saved). The event only says an application changed, so the application is
-    read from Teamtailor: its job, stage and candidate as they are now."""
-    connection = await ats.connection_by_id(connection_id)
-
-    if connection is None or connection.provider != AtsProvider.TEAMTAILOR:
-        return
-
-    key = await key_of(connection)
-
-    if key is None:
-        return
-
-    if not key.get("webhook_secret") or not teamtailor_signed(
-        key["webhook_secret"], body, signature
-    ):
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Not signed by Teamtailor")
-
-    event = json.loads(body)
-    # The event comes on its own, or inside a "payload" envelope.
-    event = event.get("payload") or event
-    changed = event.get("data") or {}
-
-    if event.get("event_name") not in TEAMTAILOR_EVENTS or not changed.get("id"):
-        return
-
-    found = await integrations.call(connection, "application", application_id=str(changed["id"]))
-    link = await ats.link_for_job(connection.id, found["job_id"] or "")
-
-    if link and link.stage_id == found["stage_id"] and found["email"]:
-        await arrived(link, connection, found["candidate_id"], found["email"])
 
 
 async def arrived(link, connection: AtsConnection, candidate_id: str, email: str) -> None:

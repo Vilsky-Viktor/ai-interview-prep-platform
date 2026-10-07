@@ -12,6 +12,7 @@ from app.helpers.ats import result_comment, workable_signed
 from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
 from app.services import ats as integrations
 from app.services import ats_candidates as flow
+from app.services import ats_webhooks as hooks
 from app.storage import ats, ats_candidates
 from tests.unit.conftest import interview
 
@@ -117,7 +118,7 @@ def world(monkeypatch, companies_api):
 
 def receive(body, signature=None):
     asyncio.run(
-        flow.receive_workable(LINK_ID, body, sign(body) if signature is None else signature)
+        hooks.receive_workable(LINK_ID, body, sign(body) if signature is None else signature)
     )
 
 

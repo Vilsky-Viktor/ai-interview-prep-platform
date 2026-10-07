@@ -4,16 +4,16 @@ import hmac
 import re
 from html.parser import HTMLParser
 
-from app.constants.ats import WORKABLE_SUBDOMAIN
+from app.constants.ats import SUBDOMAIN
 
 
-def workable_subdomain(text: str) -> str | None:
-    """The account's subdomain from what a company pasted: "acme", "acme.workable.com" or its
-    full address; None when it isn't one."""
+def subdomain(text: str, domain: str) -> str | None:
+    """An account's subdomain from what a company pasted: "acme", "acme<domain>" (like
+    acme.workable.com) or its full address; None when it isn't one."""
     value = text.strip().lower().removeprefix("https://").removeprefix("http://")
-    value = value.split("/")[0].removesuffix(".workable.com")
+    value = value.split("/")[0].removesuffix(domain)
 
-    return value if re.fullmatch(WORKABLE_SUBDOMAIN, value) else None
+    return value if re.fullmatch(SUBDOMAIN, value) else None
 
 
 # Tags that start a new line in plain text, and list items, which get a dash.
@@ -99,6 +99,14 @@ def teamtailor_signed(secret: str, body: bytes, signature: str) -> bool:
     expected = hmac.new(secret.encode(), signed, hashlib.sha256).hexdigest()
 
     return hmac.compare_digest(parts["v2"], expected)
+
+
+def recruitee_signed(secret: str, body: bytes, signature: str) -> bool:
+    """Whether a Recruitee web hook is Recruitee's: its X-Recruitee-Signature is the HMAC-SHA256
+    hex digest of the raw body with the secret Recruitee shows for the web hook."""
+    expected = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
+
+    return hmac.compare_digest(signature.strip().lower(), expected)
 
 
 def result_comment(title: str, grade: int | None, passed: bool, flagged: bool, link: str) -> str:

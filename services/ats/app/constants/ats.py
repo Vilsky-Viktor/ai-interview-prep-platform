@@ -7,6 +7,7 @@ class AtsProvider(StrEnum):
     WORKABLE = "workable"
     GREENHOUSE = "greenhouse"
     TEAMTAILOR = "teamtailor"
+    RECRUITEE = "recruitee"
 
 
 # Each ATS's name as companies know it.
@@ -14,6 +15,7 @@ ATS_NAMES = {
     AtsProvider.WORKABLE: "Workable",
     AtsProvider.GREENHOUSE: "Greenhouse",
     AtsProvider.TEAMTAILOR: "Teamtailor",
+    AtsProvider.RECRUITEE: "Recruitee",
 }
 # The ATSs whose comments need an author: results go back as the member found at connecting.
 NEEDS_AUTHOR = {AtsProvider.WORKABLE, AtsProvider.TEAMTAILOR}
@@ -27,8 +29,8 @@ class ConnectionStatus(StrEnum):
 
 # Workable's API for one account, by its subdomain (acme for acme.workable.com).
 WORKABLE_API = "https://{subdomain}.workable.com/spi/v3"
-# A subdomain as Workable allows it.
-WORKABLE_SUBDOMAIN = r"^[a-z0-9][a-z0-9-]{0,62}$"
+# An account's subdomain as Workable and Recruitee allow it (acme in acme.workable.com).
+SUBDOMAIN = r"^[a-z0-9][a-z0-9-]{0,62}$"
 # The most jobs one page of Workable's list returns, and how many pages are read at most.
 WORKABLE_PAGE = 100
 WORKABLE_MAX_PAGES = 10
@@ -94,10 +96,24 @@ TEAMTAILOR_CLOSED_JOBS = {"archived"}
 TEAMTAILOR_WEBHOOK = "{site}/api/ats/webhooks/teamtailor/{connection_id}"
 # The events that can bring a candidate into a stage: an application moved, or one made there.
 TEAMTAILOR_EVENTS = {"job_application.update", "job_application.create"}
+# Recruitee's API for one company, by its subdomain (acme for acme.recruitee.com) or id.
+RECRUITEE_API = "https://api.recruitee.com/c/{company}"
+# Recruitee's own address for an account, which a company may paste.
+RECRUITEE_DOMAIN = ".recruitee.com"
+# The jobs to link: hiring ones (published, or internal only), not drafts, closed or archived.
+RECRUITEE_OPEN_JOBS = ("published", "internal")
+# Where a company's Recruitee web hook sends its events, one address per connection; the company
+# pastes the secret Recruitee shows for it back into prepza.
+RECRUITEE_WEBHOOK = "{site}/api/ats/webhooks/recruitee/{connection_id}"
+RECRUITEE_MOVED = "candidate_moved"
+RECRUITEE_STAGE_CHANGED = "stage_changed"
 # Each ATS's web hook address, for the ATSs whose web hook the company sets up itself.
 WEBHOOKS = {
     AtsProvider.GREENHOUSE: GREENHOUSE_WEBHOOK,
     AtsProvider.TEAMTAILOR: TEAMTAILOR_WEBHOOK,
+    AtsProvider.RECRUITEE: RECRUITEE_WEBHOOK,
 }
+# The ATSs that make the web hook's secret key themselves: the company pastes it into prepza.
+PASTED_KEYS = {AtsProvider.TEAMTAILOR, AtsProvider.RECRUITEE}
 # A candidate's scorecard, linked in the results that go back to the ATS.
 SCORECARD_LINK = "{site}/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}"

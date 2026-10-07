@@ -9,6 +9,7 @@ from app.integrations import teamtailor
 from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
 from app.services import ats as integrations
 from app.services import ats_candidates as flow
+from app.services import ats_webhooks as hooks
 from app.storage import ats, ats_candidates
 from tests.unit.conftest import interview
 from tests.unit.test_teamtailor import signature
@@ -103,7 +104,7 @@ def world(monkeypatch, companies_api):
 
 def receive(body, given=None, connection_id=CONNECTION_ID):
     given = signature(SECRET, body) if given is None else given
-    asyncio.run(flow.receive_teamtailor(connection_id, body, given))
+    asyncio.run(hooks.receive_teamtailor(connection_id, body, given))
 
 
 @pytest.mark.parametrize("wrapped", [False, True])
