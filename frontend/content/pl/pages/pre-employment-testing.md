@@ -1,7 +1,7 @@
 ---
 title: "Testy rekrutacyjne: praktyczny przewodnik dla małych i średnich zespołów"
-seoTitle: "Testy rekrutacyjne: rodzaje, uczciwość i narzędzia"
-description: "Czym są testy rekrutacyjne, jakie są ich rodzaje, kiedy ich używać, podstawy uczciwości i prawa i jak wybrać narzędzie. Prosty przewodnik dla rekruterów."
+seoTitle: "Testy rekrutacyjne: rodzaje, uczciwość i wybór narzędzia"
+description: "Czym są testy rekrutacyjne i testy kompetencji, jakie są ich rodzaje, kiedy ich używać, jak zadbać o uczciwość i zgodność z prawem i jak wybrać narzędzie."
 updated: "2026-10-07"
 ---
 

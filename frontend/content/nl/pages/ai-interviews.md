@@ -1,7 +1,7 @@
 ---
 title: "AI-interviews: wat ze zijn en hoe je ze eerlijk inzet"
-seoTitle: "AI-interviews bij werving: soorten, risico's en eerlijkheid"
-description: "Wat AI-interviewtools doen: chatbots, video-analyse en gegenereerde assessments. Hoe de getimede meerkeuzeaanpak van prepza werkt, en de juridische basis."
+seoTitle: "AI in werving en selectie: AI-interviews, risico's en regels"
+description: "AI in werving en selectie: wat AI-interviewtools doen (chatbots, video-analyse, gegenereerde assessments), hoe prepza werkt en de juridische basis."
 updated: "2026-10-07"
 ---
 

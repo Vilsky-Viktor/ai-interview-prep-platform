@@ -1,7 +1,7 @@
 ---
 title: "Entrevistas con IA: qué son y cómo usarlas de forma justa"
-seoTitle: "Entrevistas con IA: tipos, riesgos y uso justo"
-description: "Qué hacen las herramientas de entrevista con IA: chatbots, análisis de video y pruebas generadas. El enfoque de prepza y lo básico del cumplimiento."
+seoTitle: "IA en la selección de personal: entrevistas con IA y riesgos"
+description: "Cómo se usa la IA en reclutamiento: chatbots, análisis de vídeo y pruebas generadas. Riesgos, uso justo, cumplimiento y el enfoque de prepza."
 updated: "2026-10-07"
 ---
 

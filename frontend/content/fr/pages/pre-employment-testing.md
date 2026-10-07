@@ -1,7 +1,7 @@
 ---
 title: "Tests de recrutement : guide pratique pour les PME"
-seoTitle: "Test de recrutement : types, équité et outils"
-description: "Ce que sont les tests de recrutement, leurs types, quand les utiliser, les bases d'équité et de droit, et comment choisir un outil. Guide pour recruteurs."
+seoTitle: "Test de recrutement : types, équité et choix d'un outil"
+description: "Test de recrutement et test d'aptitude : types, usages, équité, cadre légal et choix d'un logiciel d'évaluation des candidats. Guide pour recruteurs."
 updated: "2026-10-07"
 ---
 

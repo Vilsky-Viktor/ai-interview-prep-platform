@@ -1,7 +1,7 @@
 ---
 title: "Einstellungstests: ein Praxisleitfaden für kleine und mittlere Teams"
-seoTitle: "Einstellungstest: Arten, Fairness und passende Tools"
-description: "Was Einstellungstests sind, welche Arten es gibt, wann sie sinnvoll sind, was rechtlich gilt und wie Sie ein Tool wählen. Leitfaden für Recruiting-Teams."
+seoTitle: "Einstellungstests für Unternehmen: Arten, Recht und Software"
+description: "Eignungstests für Bewerber: welche Arten es gibt, wann sie sinnvoll sind, was rechtlich gilt und wie Sie eine Einstellungstest-Software wählen."
 updated: "2026-10-07"
 ---
 

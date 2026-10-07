@@ -1,7 +1,7 @@
 ---
 title: "Selectietests: een praktische gids voor kleine en middelgrote teams"
-seoTitle: "Pre-employment tests: soorten, eerlijkheid en tools"
-description: "Wat een selectietest of assessment is, welke soorten er zijn, wanneer je ze inzet, de basis van eerlijkheid en wetgeving, en hoe je een tool kiest."
+seoTitle: "Selectietesten en assessments: soorten, eerlijkheid en tools"
+description: "Wat een selectietest of assessment is, welke soorten er zijn, wanneer je ze inzet bij werving en selectie, eerlijkheid, wetgeving en hoe je een tool kiest."
 updated: "2026-10-07"
 ---
 

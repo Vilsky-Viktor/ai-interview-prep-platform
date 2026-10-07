@@ -38,6 +38,19 @@ test("a page in another language has its own address, language and alternates", 
   ).toMatch(/\/pricing$/);
 });
 
+// Each language's titles use the words its employers search for (docs/seo-plan.md), not a
+// translation of the English ones: German companies search "Einstellungstest".
+test("a language's home page is titled with its own search terms", async ({
+  page,
+}) => {
+  await page.goto("/de");
+
+  await expect(page).toHaveTitle(/^Einstellungstest /);
+  expect(await head(page, 'meta[name="description"]', "content")).toContain(
+    "Einstellungstest",
+  );
+});
+
 test("the home page has a title, a description, a preview image and its company data", async ({
   page,
 }) => {

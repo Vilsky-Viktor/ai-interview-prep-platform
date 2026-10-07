@@ -1,7 +1,7 @@
 ---
 title: "Pruebas de selección de personal: guía práctica para pymes"
 seoTitle: "Pruebas de selección de personal: tipos, equidad y legalidad"
-description: "Qué son las pruebas de selección de personal, qué tipos existen, cuándo usarlas, lo básico de equidad y legalidad, y cómo elegir una herramienta."
+description: "Qué son las pruebas de selección de personal, sus tipos (técnicas, psicotécnicas, de habilidades), equidad, legalidad y cómo elegir una herramienta."
 updated: "2026-10-07"
 ---
 

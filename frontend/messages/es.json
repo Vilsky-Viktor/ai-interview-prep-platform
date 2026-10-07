@@ -553,8 +553,8 @@
     "topUp": "Recargar"
   },
   "site": {
-    "description": "Pruebas de habilidades cronometradas para contratar, creadas a partir de tu descripción del puesto. Cada candidato recibe sus propias preguntas aleatorias, además de fichas de evaluación e informes. $1–3 por candidato.",
-    "homeTitle": "Pruebas de habilidades para contratar, creadas a partir de tu descripción del puesto"
+    "description": "Pega la descripción del puesto y obtén una prueba de selección cronometrada. Preguntas aleatorias por candidato, ranking e informes. $1–3 por candidato.",
+    "homeTitle": "Pruebas de selección de personal desde tu oferta de empleo"
   },
   "legal": {
     "updated": "Última actualización",
@@ -953,11 +953,11 @@
     "intro": "Guías prácticas para responsables de contratación: filtrar candidatos, pruebas de habilidades y usar la IA al contratar de forma justa y legal."
   },
   "tests": {
-    "title": "Pruebas de habilidades por puesto",
+    "title": "Pruebas de selección por puesto",
     "intro": "Pruebas de habilidades cronometradas listas para puestos comunes. Usa una tal cual o crea una prueba a partir de tu propia descripción del puesto.",
     "heading": "Prueba de habilidades de {role} para contratar",
-    "pageTitle": "Prueba de habilidades de {role} para contratar",
-    "pageDescription": "Una prueba de habilidades de {role} cronometrada para tus candidatos, con {count, plural, one {# tema} other {# temas}}. Cada candidato recibe sus propias preguntas aleatorias. $1–3 por candidato.",
+    "pageTitle": "Prueba de {role} para selección de personal",
+    "pageDescription": "Prueba de {role} cronometrada para selección de personal, con {count, plural, one {# tema} other {# temas}}. Cada candidato recibe sus propias preguntas aleatorias. $1–3 por candidato.",
     "lead": "Una prueba cronometrada de opción múltiple sobre las habilidades de este puesto. Cada candidato recibe su propio conjunto aleatorio de preguntas con un temporizador en cada una, y tú recibes una ficha de evaluación con cada respuesta y su tiempo. $1–3 por candidato, sin suscripción.",
     "create": "Crear una prueba para tus candidatos",
     "practise": "Practícala gratis",

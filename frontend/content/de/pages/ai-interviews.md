@@ -1,7 +1,7 @@
 ---
 title: "KI-Interviews: was sie sind und wie Sie sie fair einsetzen"
-seoTitle: "KI-Interview-Tools: Arten, Risiken und fairer Einsatz"
-description: "Was KI-Interview-Tools leisten: Chatbots, Videoanalyse, generierte Tests. So funktioniert prepzas Multiple-Choice-Ansatz, plus rechtliche Grundlagen."
+seoTitle: "KI im Recruiting: KI-Interviews, Risiken und fairer Einsatz"
+description: "KI im Recruiting: was KI-Interviewer, Chatbots, Videoanalyse und generierte Tests leisten, wo Risiken liegen und was rechtlich gilt. Mit prepzas Ansatz."
 updated: "2026-10-07"
 ---
 

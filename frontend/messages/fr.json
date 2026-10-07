@@ -553,8 +553,8 @@
     "topUp": "Recharger"
   },
   "site": {
-    "description": "Des tests de compétences chronométrés pour recruter, créés à partir de votre fiche de poste. Chaque candidat reçoit ses propres questions aléatoires, avec des fiches d'évaluation et des rapports. 1–3 $ par candidat.",
-    "homeTitle": "Des tests de compétences pour recruter, créés à partir de votre offre d'emploi"
+    "description": "Tests de recrutement chronométrés, créés à partir de votre offre d'emploi. Questions aléatoires par candidat, classement, rapports PDF. 1–3 $ par candidat.",
+    "homeTitle": "Test de recrutement créé à partir de votre offre d'emploi"
   },
   "legal": {
     "updated": "Dernière mise à jour",
@@ -953,11 +953,11 @@
     "intro": "Des guides pratiques pour les recruteurs : présélectionner les candidats, les tests de compétences et utiliser l'IA dans le recrutement de façon équitable et légale."
   },
   "tests": {
-    "title": "Tests de compétences par poste",
+    "title": "Tests de recrutement par métier",
     "intro": "Des tests de compétences chronométrés prêts à l'emploi pour les postes courants. Utilisez-en un tel quel ou créez un test à partir de votre propre fiche de poste.",
     "heading": "Test de compétences {role} pour recruter",
-    "pageTitle": "Test de compétences {role} pour recruter",
-    "pageDescription": "Un test de compétences {role} chronométré pour vos candidats, couvrant {count, plural, one {# sujet} other {# sujets}}. Chaque candidat reçoit ses propres questions aléatoires. 1–3 $ par candidat.",
+    "pageTitle": "Test de recrutement {role}",
+    "pageDescription": "Test de recrutement {role} chronométré, couvrant {count, plural, one {# sujet} other {# sujets}}. Chaque candidat reçoit ses propres questions aléatoires. 1–3 $ par candidat.",
     "lead": "Un test chronométré à choix multiples sur les compétences de ce poste. Chaque candidat reçoit sa propre série aléatoire de questions avec un minuteur sur chacune, et vous recevez une fiche d'évaluation avec chaque réponse et son temps. 1–3 $ par candidat, sans abonnement.",
     "create": "Créer un test pour vos candidats",
     "practise": "S'entraîner gratuitement",

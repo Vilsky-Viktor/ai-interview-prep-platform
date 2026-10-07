@@ -1,7 +1,7 @@
 ---
 title: "Entretiens IA : ce qu'ils sont et comment les utiliser équitablement"
-seoTitle: "Outils d'entretien IA : types, risques et bonnes pratiques"
-description: "Ce que font les outils d'entretien IA : chatbots, analyse vidéo, tests générés. L'approche QCM chronométrée de prepza et les bases de la conformité."
+seoTitle: "Entretien IA en recrutement : types, risques et conformité"
+description: "IA en recrutement : chatbots, analyse vidéo, tests générés. Risques, conformité et l'approche QCM chronométrée de prepza pour évaluer les candidats."
 updated: "2026-10-07"
 ---
 

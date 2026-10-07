@@ -1,7 +1,7 @@
 ---
 title: "Rozmowy rekrutacyjne z AI: czym są i jak korzystać z nich uczciwie"
-seoTitle: "Rozmowy rekrutacyjne z AI: rodzaje, ryzyka, uczciwe użycie"
-description: "Co robią narzędzia do rozmów rekrutacyjnych z AI: chatboty, analiza wideo i generowane testy. Jak działa podejście prepza i podstawy zgodności z prawem."
+seoTitle: "AI w rekrutacji: rozmowy z AI, ryzyka i uczciwe użycie"
+description: "Narzędzia AI w rekrutacji: chatboty, analiza wideo i generowane testy. Co mówi prawo, jakie są ryzyka i jak działa podejście prepza."
 updated: "2026-10-07"
 ---
 
