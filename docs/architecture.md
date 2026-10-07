@@ -22,7 +22,7 @@ flowchart LR
     gateway --> billing
     gateway --> ats
     paddle[Paddle] -- payment webhooks --> billing
-    atss[Workable / Greenhouse] -- candidate webhooks --> ats
+    atss[Workable / Greenhouse / Teamtailor] -- candidate webhooks --> ats
 
     generation -- jobs via Cloud Tasks --> worker[generation worker]
     scheduler[Cloud Scheduler] -- sweeps, retention --> worker
@@ -58,7 +58,7 @@ flowchart LR
 | `companies` | Companies (unique names, logos, verification), members (owner, admins, viewers), interviews, candidate invites (one by one, in bulk, through a shareable link, with reminders), reports |
 | `billing` | Companies' credit wallets (holds and charges), welcome credits, referrals, Paddle top-ups, automatic top-ups, refunds and chargebacks (webhooks); companies sets a candidate's credits aside and charges them through it |
 | `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites and reminders, emailed PDF reports, and contact messages to prepza's inbox. Also the bell: stores the notifications other services ask for (`notification.requested`), removes a deleted company's (`company.deleted`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them |
-| `ats` | ATS integrations (Workable, Greenhouse): companies' encrypted ATS keys, linked jobs and the candidates the ATSs send (their webhooks); invites them through companies and writes their results back to the ATS |
+| `ats` | ATS integrations (Workable, Greenhouse, Teamtailor): companies' encrypted ATS keys, linked jobs and the candidates the ATSs send (their webhooks); invites them through companies and writes their results back to the ATS |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
 What each service does for users is described in the feature pages, linked from the [README](../README.md#documentation). Generation is described in [Generation and question quality](generation.md).

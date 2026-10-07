@@ -1,12 +1,13 @@
 # ATS integrations
 
-A company can connect its applicant tracking system (ATS): Workable or Greenhouse. Candidates the company moves into a chosen stage in the ATS get the prepza invite, and their results go back to the ATS.
+A company can connect its applicant tracking system (ATS): Workable, Greenhouse or Teamtailor. Candidates the company moves into a chosen stage in the ATS get the prepza invite, and their results go back to the ATS.
 
 - [Connecting an ATS](#connecting-an-ats)
 - [Linking a job](#linking-a-job)
 - [The ATS pages](#the-ats-pages)
 - [Candidates from Workable](#candidates-from-workable)
 - [Candidates from Greenhouse](#candidates-from-greenhouse)
+- [Candidates from Teamtailor](#candidates-from-teamtailor)
 - [Results back to the ATS](#results-back-to-the-ats)
 - [How it's built](#how-its-built)
 
@@ -18,8 +19,9 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 |---|---|---|
 | Workable | Its address and an API access token | The scopes `r_jobs`, `r_candidates` and `w_candidates` |
 | Greenhouse | A Harvest V3 (OAuth) API credential's client ID and secret | The Jobs, Job Posts, Job Interview Stages and Notes endpoints |
+| Teamtailor | An API key (Settings → Integrations → API keys) | Admin permission, Read/Write |
 
-- prepza checks the key with one read before saving it.
+- prepza checks the key with one read before saving it. A Teamtailor key is tried in each of Teamtailor's regions (EU, North America, Asia-Pacific) until one accepts it; the connection keeps that region.
 - The key is saved encrypted with `ATS_ENCRYPTION_KEY`, the ats service's Fernet key. An empty key turns integrations off.
 - prepza never shows the key again.
 - Disconnecting deletes the key and the linked jobs at once.
@@ -35,12 +37,12 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 ## The ATS pages
 
 - The ATS tab lists the ATSs, with a "connected" tag once connected.
-- Each ATS opens its own page: `/companies/<id>/integrations/workable` or `/companies/<id>/integrations/greenhouse`.
+- Each ATS opens its own page: `/companies/<id>/integrations/<workable, greenhouse or teamtailor>`.
 - The page lists its linked jobs. For each job:
   - how many of its candidates were invited (an icon and the number),
   - how many are waiting or weren't invited, above **Invite again**, which tries that job's again,
   - **Unlink**, after a confirmation.
-- Each ATS has one info button. Its dialog holds everything to know: the candidate flow, starting with a stage just for prepza, and, for a connected Greenhouse, the web hook to set up.
+- Each ATS has one **Instructions** button, on its row and its page. Its dialog holds everything to know: the candidate flow, starting with a stage just for prepza, and, for a connected Greenhouse or Teamtailor, the web hook to set up (owners and admins only). The dialog opens by itself right after connecting either of them.
 - Every member sees these pages; viewers change nothing.
 
 ## Candidates from Workable
@@ -73,12 +75,26 @@ Greenhouse's API can't set up web hooks, so the company does it once in Greenhou
 
 1. Go to Configure → Dev Center → Web Hooks.
 2. Add the event "Candidate or Prospect Stage Change".
-3. Paste the address and secret key that the info dialog shows to owners and admins. The dialog opens by itself right after connecting.
+3. Paste the address and secret key the Instructions dialog shows.
 
 - The address is the connection's own: `/api/ats/webhooks/greenhouse/<connection id>`.
 - The secret key is made at the first connect, and kept on reconnecting.
 - An event counts only when its `Signature` header is `sha256 ` followed by the HMAC-SHA256 of the body with that key.
 - A candidate whose application moved into a linked job's stage (matched by id or name) is saved and invited exactly as from Workable, as `<candidate id>:<application id>`.
+
+## Candidates from Teamtailor
+
+Teamtailor's web hooks are an add-on, set up by hand in Teamtailor too:
+
+1. Turn on Webhooks in Teamtailor's Add-on feature center.
+2. Go to Settings → Integrations → Webhooks and add one for the event `job_application.update`, with the address the Instructions dialog shows.
+3. Teamtailor makes the web hook's signature key: paste it into the Instructions dialog and save it.
+
+- The address is the connection's own: `/api/ats/webhooks/teamtailor/<connection id>`.
+- The signature key is kept on reconnecting. Until it's saved, every event is refused.
+- An event counts only when its `TT-Signature` header is base64 of `t=<timestamp>,v2=<hex>`, the HMAC-SHA256 of `<timestamp>.<body>` with that key.
+- The event only says an application changed (`job_application.update` or `.create`), so ats reads the application from Teamtailor: its job, stage and candidate as they are now.
+- A candidate whose application is in a linked job's stage is saved and invited exactly as from Workable, by their Teamtailor candidate id.
 
 ## Results back to the ATS
 
@@ -93,6 +109,7 @@ When such a candidate finishes, companies publishes `candidate.finished` (grade,
 |---|---|
 | Workable | As the Workable member of whoever connected it (or an admin) |
 | Greenhouse | A note on the candidate's application |
+| Teamtailor | A note on the candidate, as the Teamtailor user of whoever connected it (or an admin) |
 
 - It's sent once (`reported_at`).
 - A failing ATS makes the event come again.
@@ -102,7 +119,7 @@ When such a candidate finishes, companies publishes `candidate.finished` (grade,
 
 - All of it is the `ats` service (`services/ats`, its own database).
 - It asks companies who is a member or editor, the interviews' titles, and to send invites.
-- Each ATS's API is one client module (`app/integrations/workable.py`, `greenhouse.py`) with the same functions.
+- Each ATS's API is one client module (`app/integrations/workable.py`, `greenhouse.py`, `teamtailor.py`) with the same functions. Each names the credentials it takes (`KEYS`), so a connection can keep others, like a web hook's secret key.
 - `app/integrations/ats_clients.py` picks the module by provider. A new ATS adds its module there.
 - The webhook routes stay open in maintenance mode (see [Admin zone](admin-zone.md#maintenance-mode)).
 
