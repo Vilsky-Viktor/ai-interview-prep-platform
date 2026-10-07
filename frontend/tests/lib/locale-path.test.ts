@@ -90,6 +90,14 @@ describe("splitLocale", () => {
     })
   })
 
+  it("passes a role page's language address to the page, which keeps only its template's", () => {
+    expect(splitLocale("/de/tests/buchhalter")).toEqual({
+      locale: "de",
+      path: "/tests/buchhalter",
+    })
+    expect(splitLocale("/de/tests/buchhalter/extra")).toBeNull()
+  })
+
   it("leaves English's prefix, unknown prefixes and pages without language versions alone", () => {
     expect(splitLocale("/en/pricing")).toBeNull()
     expect(splitLocale("/xx/pricing")).toBeNull()

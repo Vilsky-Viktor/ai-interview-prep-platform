@@ -4,7 +4,8 @@ import { getTranslations } from "next-intl/server"
 
 import { DEFAULT_LOCALE, type Locale } from "@/constants/i18n"
 import { PREVIEW_UNSUPPORTED } from "@/constants/preview-image"
-import { LOCALE_HEADER, SITE_NAME } from "@/constants/seo"
+import { CATEGORY_PAGES } from "@/constants/content"
+import { LOCALE_HEADER, LOCALIZED_ARTICLE, SITE_NAME } from "@/constants/seo"
 import { languageAlternates, localizedPath } from "@/lib/locale-path"
 
 /** The site's public address, for absolute links in metadata, robots.txt and the sitemap. */
@@ -59,7 +60,8 @@ export async function pageMetadata(
   const canonical = own ? localizedPath(locale, path) : path
   // The picture's title is lowercase like the site's titles; articles keep their capitals (names
   // such as TestGorilla or EU), and the home page shows the site's own picture.
-  const article = Array.isArray(localized)
+  const article =
+    LOCALIZED_ARTICLE.test(path) || CATEGORY_PAGES.includes(path.slice(1))
   const pictureTitle = article ? title : title.toLocaleLowerCase(locale)
 
   return {

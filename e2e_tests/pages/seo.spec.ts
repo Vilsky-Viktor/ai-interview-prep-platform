@@ -3,7 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 // What search engines see on the public pages: addresses in every language, titles and
 // structured data, the sitemap and robots.txt, redirects, and private pages kept out.
 
-type Template = { id: string; slug: string };
+type Template = { id: string; slug: string; language: string };
 
 // Requests made outside the browser go to the gateway itself: the container's "localhost" isn't
 // the site (pages.sh sets REQUEST_URL; locally the site's address works).
@@ -117,6 +117,20 @@ test("a role test page is for hiring, with the way to practise second", async ({
   await faq.getByText("How much does it cost?").click();
   await expect(faq.getByText(/credits/).first()).toBeVisible();
   expect(data.join()).not.toContain('"@type":"FAQPage"');
+});
+
+// A role page exists in English and in its template's language only: an English template's
+// page has no other language versions, and its address under another language isn't found.
+test("a role page is only in English and its template's language", async ({
+  page,
+}) => {
+  const template = await firstTemplate(page);
+  test.skip(template.language !== "en", "the check needs an English template");
+
+  await page.goto(`/tests/${template.slug}`);
+  await expect(page.locator('head link[rel="alternate"][hreflang]')).toHaveCount(0);
+  const other = await page.request.get(`${REQUEST_URL}/de/tests/${template.slug}`);
+  expect(other.status()).toBe(404);
 });
 
 test("old addresses move to their readable ones for good", async ({ page }) => {

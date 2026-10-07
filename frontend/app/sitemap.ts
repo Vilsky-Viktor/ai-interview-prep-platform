@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 
 import { CATEGORY_PAGES } from "@/constants/content"
-import { LOCALES } from "@/constants/i18n"
+import { DEFAULT_LOCALE, LOCALES } from "@/constants/i18n"
 import { LOCALIZED_PATHS, PUBLIC_PATHS } from "@/constants/seo"
 import { contentLanguages, contentPages } from "@/lib/content"
 import { languageAlternates, localizedPath } from "@/lib/locale-path"
@@ -11,7 +11,12 @@ import { siteUrl } from "@/lib/site"
 const PAGE = 100
 const MAX_PAGES = 50
 
-type Template = { id: string; slug: string | null; created_at: string }
+type Template = {
+  id: string
+  slug: string | null
+  language: string
+  created_at: string
+}
 
 /** Every template, read from the public list a page at a time. */
 async function templates(): Promise<Template[]> {
@@ -103,11 +108,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       (path) => ({ url: `${site}${path}` })
     ),
     ...written,
-    ...rows.flatMap((row) =>
-      ["/tests", "/practice"].map((base) => ({
-        url: `${site}${base}/${row.slug ?? row.id}`,
-        lastModified: row.created_at,
-      }))
-    ),
+    ...rows.flatMap((row) => {
+      const role = `/tests/${row.slug ?? row.id}`
+      // A role page in English and in its template's language, each naming the other.
+      const languages =
+        row.language === DEFAULT_LOCALE ? [] : [DEFAULT_LOCALE, row.language]
+      const alternates = languages.length
+        ? { languages: absolute(languageAlternates(role, languages)) }
+        : undefined
+
+      return [
+        ...(languages.length ? languages : [DEFAULT_LOCALE]).map((locale) => ({
+          url: `${site}${localizedPath(locale, role)}`,
+          lastModified: row.created_at,
+          alternates,
+        })),
+        {
+          url: `${site}/practice/${row.slug ?? row.id}`,
+          lastModified: row.created_at,
+        },
+      ]
+    }),
   ]
 }

@@ -3,6 +3,7 @@ import {
   LOCALIZED_ARTICLE,
   LOCALIZED_PATHS,
   PRIVATE_PATHS,
+  ROLE_PAGE,
 } from "@/constants/seo"
 import { isLocale } from "@/lib/locale"
 
@@ -58,7 +59,9 @@ export function splitLocale(pathname: string) {
     return null
   }
 
-  return isLocalizedPath(path) ? { locale: first, path } : null
+  return isLocalizedPath(path) || ROLE_PAGE.test(path)
+    ? { locale: first, path }
+    : null
 }
 
 /** Whether an address is a private page: signed-in areas and personal links, kept out of search

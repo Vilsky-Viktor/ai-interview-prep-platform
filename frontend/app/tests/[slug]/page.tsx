@@ -10,9 +10,11 @@ import { SubtopicList } from "@/components/questions/subtopic-list"
 import { SampleQuestions } from "@/components/tests/sample-questions"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { ROLE_PAGE_FAQ } from "@/constants/role-tests"
 import { serverFetch } from "@/lib/server-api"
-import { pageMetadata, siteUrl } from "@/lib/site"
+import { localizedPath } from "@/lib/locale-path"
+import { pageMetadata, siteUrl, urlLocale } from "@/lib/site"
 import { breadcrumbData } from "@/lib/structured-data"
 import type { FaqItem } from "@/types/help"
 import type { SampleQuestion, Template } from "@/types/superadmin"
@@ -31,7 +33,11 @@ export async function generateMetadata({ params }: Params) {
           role: template.title,
           count: template.topic_count,
         }),
-        `/tests/${template.slug ?? template.id}`
+        `/tests/${template.slug ?? template.id}`,
+        // English and the template's own language: its questions are in that language.
+        template.language === DEFAULT_LOCALE
+          ? false
+          : [DEFAULT_LOCALE, template.language]
       )
     : {}
 }
@@ -44,12 +50,17 @@ export default async function RoleTestPage({ params }: Params) {
   const t = await getTranslations("tests")
   const template = await serverFetch<Template>(`/library/templates/${key}`)
 
-  if (!template) {
+  const locale = await urlLocale()
+
+  // Only English and the template's own language have this page.
+  if (!template || (locale && locale !== template.language)) {
     notFound()
   }
 
   if (template.slug && key !== template.slug) {
-    permanentRedirect(`/tests/${template.slug}`)
+    permanentRedirect(
+      localizedPath(locale ?? DEFAULT_LOCALE, `/tests/${template.slug}`)
+    )
   }
 
   const slug = template.slug ?? template.id
