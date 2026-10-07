@@ -40,6 +40,7 @@ flowchart LR
     companies -- candidate.invited / reminded, report.shared, company.deleted --> pubsub
     companies -- candidate.finished, interview.ready / deleted --> pubsub
     rounds -- contact.sent --> pubsub
+    billing -- credits.added --> pubsub
     library & companies & billing & ats -- notification.requested --> pubsub
     pubsub -- push --> library
     pubsub -- push --> companies

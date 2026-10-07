@@ -65,6 +65,7 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 
 - A candidate for an interview still being made waits, and is invited once it's ready (`interview.ready`).
 - A candidate refused (credits, limits, the pause) is kept as not invited, and owners and admins get an `ats_not_invited` notification.
+- Candidates refused for lack of credits are invited again by themselves once the company gets credits: billing publishes `credits.added` after a top-up (automatic ones too), a referral reward or a chargeback reversed, and ats invites the company's credit-refused candidates from every ATS, as far as the credits go (the rest stay not invited, with a new notification). Billing publishes without an outbox, so a lost event leaves them for **Invite again**.
 
 **Retention.** The saved candidates, with their emails, are deleted:
 

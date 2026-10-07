@@ -15,6 +15,7 @@ Companies pay per candidate from a wallet of credits. There are no subscriptions
 - A company pays 300 credits per candidate who answers at least one question.
 - Generating an interview is free.
 - Only what works is charged: a candidate's credits are set aside on invite and given back if they never answer.
+- Whenever a company gets credits (a top-up, a referral reward, a chargeback reversed), billing publishes `credits.added`: candidates its ATSs sent that weren't invited for lack of credits are invited then (see [ATS integrations](ats.md)).
 - A person's first company gets 900 credits, enough for 3 candidates.
 - The welcome gift is given once per inbox: case, a `+tag` and Gmail's dots don't make a new one (`app/helpers/gifts.py` in billing).
 
