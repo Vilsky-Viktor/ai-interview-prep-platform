@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "Mga bentahe namin",
+      "title": "Bakit prepza",
       "text": "Bakit sinusubok ng mga kumpanya ang mga kandidato gamit ang prepza.",
       "points": {
-        "role": {
-          "title": "Mula sa job description mo",
-          "text": "Test para sa role mo, may mga topic na inaaprubahan mo bago isulat ang mga tanong."
+        "speed": {
+          "title": "Handa sa ilang minuto",
+          "text": "I-paste ang job description mo, aprubahan ang mga topic, at mag-imbita ng mga kandidato sa parehong araw."
         },
         "anyRole": {
           "title": "Anumang role",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Resultang magagamit mo",
-          "text": "Naka-ranggo ayon sa score, kasama ang bawat sagot, oras nito, at PDF report."
+          "text": "Mga kandidatong naka-ranggo ayon sa score, may report sa site o bilang PDF."
         },
         "languages": {
           "title": "23 wika",
-          "text": "Mga interview, invite email at buong site sa wika ng mga kandidato mo."
+          "text": "Mga interview, email at site sa wikang gusto mo."
         }
       }
     },
@@ -967,6 +967,7 @@
     "practise": "I-practice nang libre",
     "topics": "Ano ang tine-test nito",
     "questions": "Mga halimbawang tanong sa interview",
-    "questionsText": "Mga tanong na tulad nito, kasama ang mga tamang sagot. May sariling mga tanong ang mga kandidato mo, na hindi kailanman ipinapakita sa publiko."
+    "questionsText": "Mga tanong na tulad nito, kasama ang mga tamang sagot. May sariling mga tanong ang mga kandidato mo, na hindi kailanman ipinapakita sa publiko.",
+    "faq": "Mga tanong ng mga kumpanya"
   }
 }

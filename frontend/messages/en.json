@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "Our advantages",
+      "title": "Why prepza",
       "text": "Why companies test candidates with prepza.",
       "points": {
-        "role": {
-          "title": "From your job description",
-          "text": "A test for your role, with topics you approve before any question is written."
+        "speed": {
+          "title": "Ready in minutes",
+          "text": "Paste your job description, approve the topics, and invite candidates the same day."
         },
         "anyRole": {
           "title": "Any role",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Results you can act on",
-          "text": "Candidates ranked by score, with every answer and its timing, and a PDF report."
+          "text": "Candidates ranked by score, with reports on the site or as a PDF."
         },
         "languages": {
           "title": "23 languages",
-          "text": "Interviews, invite emails and the whole site in your candidates' language."
+          "text": "Interviews, emails and the site in the language you prefer."
         }
       }
     },
@@ -963,6 +963,7 @@
     "practise": "Practise it free",
     "topics": "What it tests",
     "questions": "Sample interview questions",
-    "questionsText": "Questions like these, with the right answers. Your candidates get their own, never shown in public."
+    "questionsText": "Questions like these, with the right answers. Your candidates get their own, never shown in public.",
+    "faq": "Questions companies ask"
   }
 }

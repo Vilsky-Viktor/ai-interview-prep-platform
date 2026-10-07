@@ -2,9 +2,9 @@ import {
   DollarSignIcon,
   LanguagesIcon,
   ListOrderedIcon,
-  TextAlignStartIcon,
   TimerIcon,
   UsersRoundIcon,
+  ZapIcon,
 } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
@@ -13,7 +13,7 @@ import { LandingSection } from "@/components/landing/section"
 // prepza's advantages, each with its icon, in the trust section's cards (trust.tsx). Only
 // what's true today, without comparisons to named tools.
 const POINTS = [
-  { key: "role", Icon: TextAlignStartIcon },
+  { key: "speed", Icon: ZapIcon },
   { key: "anyRole", Icon: UsersRoundIcon },
   { key: "cheating", Icon: TimerIcon },
   { key: "price", Icon: DollarSignIcon },
@@ -26,7 +26,7 @@ export async function AdvantagesSection() {
   const t = await getTranslations("landing.advantages")
 
   return (
-    <LandingSection title={t("title")} text={t("text")}>
+    <LandingSection id="advantages" title={t("title")} text={t("text")}>
       <ul className="mx-auto mt-8 grid w-full max-w-5xl gap-8 pe-1 sm:grid-cols-2 sm:pe-0 lg:grid-cols-3">
         {POINTS.map(({ key, Icon }) => (
           <li

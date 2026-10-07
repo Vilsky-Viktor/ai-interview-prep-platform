@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "I nostri vantaggi",
+      "title": "Perché prepza",
       "text": "Perché le aziende valutano i candidati con prepza.",
       "points": {
-        "role": {
-          "title": "Dalla descrizione del ruolo",
-          "text": "Un test per il tuo ruolo, con argomenti che approvi prima che si scriva una domanda."
+        "speed": {
+          "title": "Pronto in pochi minuti",
+          "text": "Incolla la descrizione del ruolo, approva gli argomenti e invita i candidati il giorno stesso."
         },
         "anyRole": {
           "title": "Qualsiasi ruolo",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Risultati su cui agire",
-          "text": "Candidati ordinati per punteggio, con ogni risposta, i suoi tempi e un report PDF."
+          "text": "Candidati in ordine di punteggio, con report sul sito o in PDF."
         },
         "languages": {
           "title": "23 lingue",
-          "text": "Colloqui, email di invito e l'intero sito nella lingua dei tuoi candidati."
+          "text": "Colloqui, email e sito nella lingua che preferisci."
         }
       }
     },
@@ -963,6 +963,7 @@
     "practise": "Esercitati gratis",
     "topics": "Cosa verifica",
     "questions": "Esempi di domande del colloquio",
-    "questionsText": "Domande come queste, con le risposte corrette. I tuoi candidati ricevono le proprie, mai mostrate in pubblico."
+    "questionsText": "Domande come queste, con le risposte corrette. I tuoi candidati ricevono le proprie, mai mostrate in pubblico.",
+    "faq": "Domande che fanno le aziende"
   }
 }

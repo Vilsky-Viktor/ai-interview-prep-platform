@@ -3,15 +3,18 @@ import { notFound, permanentRedirect } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
+import { FaqList } from "@/components/faq-list"
 import { JsonLd } from "@/components/json-ld"
 import { PageHeader } from "@/components/page-header"
 import { SubtopicList } from "@/components/questions/subtopic-list"
 import { SampleQuestions } from "@/components/tests/sample-questions"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { ROLE_PAGE_FAQ } from "@/constants/role-tests"
 import { serverFetch } from "@/lib/server-api"
 import { pageMetadata, siteUrl } from "@/lib/site"
 import { breadcrumbData } from "@/lib/structured-data"
+import type { FaqItem } from "@/types/help"
 import type { SampleQuestion, Template } from "@/types/superadmin"
 
 type Params = { params: Promise<{ slug: string }> }
@@ -54,6 +57,11 @@ export default async function RoleTestPage({ params }: Params) {
     (await serverFetch<SampleQuestion[]>(
       `/library/templates/${slug}/sample`
     )) ?? []
+  // The site FAQ's answers to what companies ask before testing candidates, in the page's
+  // language and with today's prices.
+  const faq = ((await serverFetch<FaqItem[]>("/rounds/help/faq")) ?? []).filter(
+    (item) => ROLE_PAGE_FAQ.includes(item.key)
+  )
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
@@ -120,6 +128,13 @@ export default async function RoleTestPage({ params }: Params) {
 
       {questions.length > 0 && (
         <SampleQuestions questions={questions} language={template.language} />
+      )}
+
+      {faq.length > 0 && (
+        <section className="space-y-4">
+          <h2 className="font-heading text-2xl font-medium">{t("faq")}</h2>
+          <FaqList items={faq} />
+        </section>
       )}
     </main>
   )

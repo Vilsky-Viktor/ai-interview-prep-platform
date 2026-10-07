@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "Nos avantages",
+      "title": "Pourquoi prepza",
       "text": "Pourquoi les entreprises testent leurs candidats avec prepza.",
       "points": {
-        "role": {
-          "title": "Selon votre offre d'emploi",
-          "text": "Un test pour votre poste, avec des sujets validés par vous avant toute question."
+        "speed": {
+          "title": "Prêt en quelques minutes",
+          "text": "Collez votre offre d'emploi, validez les sujets et invitez des candidats le jour même."
         },
         "anyRole": {
           "title": "Tout poste",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Des résultats exploitables",
-          "text": "Candidats classés par score, avec chaque réponse, son temps et un rapport PDF."
+          "text": "Candidats classés par score, avec des rapports sur le site ou en PDF."
         },
         "languages": {
           "title": "23 langues",
-          "text": "Entretiens, e-mails d'invitation et tout le site dans la langue de vos candidats."
+          "text": "Entretiens, e-mails et site dans la langue de votre choix."
         }
       }
     },
@@ -963,6 +963,7 @@
     "practise": "S'entraîner gratuitement",
     "topics": "Ce qu'il évalue",
     "questions": "Exemples de questions d'entretien",
-    "questionsText": "Des questions comme celles-ci, avec les bonnes réponses. Vos candidats reçoivent les leurs, jamais affichées publiquement."
+    "questionsText": "Des questions comme celles-ci, avec les bonnes réponses. Vos candidats reçoivent les leurs, jamais affichées publiquement.",
+    "faq": "Les questions des entreprises"
   }
 }

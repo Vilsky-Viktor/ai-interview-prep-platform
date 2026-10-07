@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "Nasze zalety",
+      "title": "Dlaczego prepza",
       "text": "Dlaczego firmy testują kandydatów z prepza.",
       "points": {
-        "role": {
-          "title": "Z Twojego opisu stanowiska",
-          "text": "Test dla Twojej roli, z tematami, które zatwierdzasz przed napisaniem pytań."
+        "speed": {
+          "title": "Gotowe w kilka minut",
+          "text": "Wklej opis stanowiska, zatwierdź tematy i zaproś kandydatów jeszcze tego samego dnia."
         },
         "anyRole": {
           "title": "Dowolna rola",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Wyniki gotowe do decyzji",
-          "text": "Kandydaci według punktów, z każdą odpowiedzią, jej czasem i raportem PDF."
+          "text": "Kandydaci uszeregowani według wyniku, z raportami na stronie lub w PDF."
         },
         "languages": {
           "title": "23 języki",
-          "text": "Rozmowy, zaproszenia e-mail i cała strona w języku Twoich kandydatów."
+          "text": "Rozmowy, e-maile i strona w wybranym przez Ciebie języku."
         }
       }
     },
@@ -963,6 +963,7 @@
     "practise": "Poćwicz za darmo",
     "topics": "Co sprawdza",
     "questions": "Przykładowe pytania z rozmowy",
-    "questionsText": "Pytania takie jak te, z poprawnymi odpowiedziami. Twoi kandydaci dostają własne, nigdy niepokazywane publicznie."
+    "questionsText": "Pytania takie jak te, z poprawnymi odpowiedziami. Twoi kandydaci dostają własne, nigdy niepokazywane publicznie.",
+    "faq": "Pytania, które zadają firmy"
   }
 }

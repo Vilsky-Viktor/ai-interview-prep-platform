@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "Meie eelised",
+      "title": "Miks prepza",
       "text": "Miks ettevõtted testivad kandidaate prepzaga.",
       "points": {
-        "role": {
-          "title": "Sinu töökuulutuse põhjal",
-          "text": "Test sinu rollile, teemadega, mille kiidad heaks enne ühegi küsimuse kirjutamist."
+        "speed": {
+          "title": "Valmis minutitega",
+          "text": "Kleebi töökuulutus, kiida teemad heaks ja kutsu kandidaadid samal päeval."
         },
         "anyRole": {
           "title": "Iga roll",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Otsuseks valmis tulemused",
-          "text": "Kandidaadid punktide järgi, iga vastuse ja selle ajaga, pluss PDF-aruanne."
+          "text": "Kandidaadid punktide järjekorras, aruannetega saidil või PDF-ina."
         },
         "languages": {
           "title": "23 keelt",
-          "text": "Intervjuud, kutsekirjad ja kogu sait sinu kandidaatide keeles."
+          "text": "Intervjuud, kirjad ja sait sinu eelistatud keeles."
         }
       }
     },
@@ -967,6 +967,7 @@
     "practise": "Harjuta tasuta",
     "topics": "Mida see testib",
     "questions": "Näidisküsimused intervjuult",
-    "questionsText": "Sellised küsimused koos õigete vastustega. Sinu kandidaadid saavad oma küsimused, mida kunagi avalikult ei näidata."
+    "questionsText": "Sellised küsimused koos õigete vastustega. Sinu kandidaadid saavad oma küsimused, mida kunagi avalikult ei näidata.",
+    "faq": "Küsimused, mida ettevõtted küsivad"
   }
 }

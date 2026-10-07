@@ -95,6 +95,15 @@ test("a role test page is for hiring, with the way to practise second", async ({
     .locator('script[type="application/ld+json"]')
     .allTextContents();
   expect(data.join()).toContain('"@type":"BreadcrumbList"');
+  // The site FAQ's answers to companies' questions, opening on a click; no FAQ data, as the
+  // same answers repeat on every role page (/faq carries it).
+  const faq = page.locator("section", {
+    has: page.getByRole("heading", { name: /questions companies ask/i }),
+  });
+  await expect(faq.locator("details")).toHaveCount(5);
+  await faq.getByText("How much does it cost?").click();
+  await expect(faq.getByText(/credits/).first()).toBeVisible();
+  expect(data.join()).not.toContain('"@type":"FAQPage"');
 });
 
 test("old addresses move to their readable ones for good", async ({ page }) => {

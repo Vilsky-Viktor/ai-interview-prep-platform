@@ -1,6 +1,6 @@
-import { ChevronDownIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
+import { FaqList } from "@/components/faq-list"
 import { HelpChat } from "@/components/help-chat"
 import { JsonLd } from "@/components/json-ld"
 import { serverFetch } from "@/lib/server-api"
@@ -37,19 +37,7 @@ export default async function FaqPage() {
         </h1>
         <p className="text-base text-muted-foreground">{t("intro")}</p>
       </header>
-      <div className="divide-y rounded-3xl bg-card shadow-sm ring-1 ring-foreground/5">
-        {items.map((item) => (
-          <details key={item.key} className="group px-6">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-medium [&::-webkit-details-marker]:hidden">
-              {item.question}
-              <ChevronDownIcon className="size-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" />
-            </summary>
-            <p className="pb-5 text-base leading-relaxed text-muted-foreground">
-              {item.answer}
-            </p>
-          </details>
-        ))}
-      </div>
+      <FaqList items={items} />
       <HelpChat />
     </main>
   )

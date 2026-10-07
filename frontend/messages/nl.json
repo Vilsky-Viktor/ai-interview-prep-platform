@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "Onze voordelen",
+      "title": "Waarom prepza",
       "text": "Waarom bedrijven kandidaten testen met prepza.",
       "points": {
-        "role": {
-          "title": "Uit je functieomschrijving",
-          "text": "Een test voor je rol, met onderwerpen die je goedkeurt voordat er vragen komen."
+        "speed": {
+          "title": "Klaar in minuten",
+          "text": "Plak je functieomschrijving, keur de onderwerpen goed en nodig dezelfde dag kandidaten uit."
         },
         "anyRole": {
           "title": "Elke rol",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Bruikbare resultaten",
-          "text": "Kandidaten gerangschikt op score, met elk antwoord, de tijd ervan en een PDF-rapport."
+          "text": "Kandidaten op score gerangschikt, met rapporten op de site of als pdf."
         },
         "languages": {
           "title": "23 talen",
-          "text": "Interviews, uitnodigingsmails en de hele site in de taal van je kandidaten."
+          "text": "Interviews, e-mails en de site in de taal die jij wilt."
         }
       }
     },
@@ -959,6 +959,7 @@
     "practise": "Gratis oefenen",
     "topics": "Wat er getest wordt",
     "questions": "Voorbeeldvragen voor het gesprek",
-    "questionsText": "Vragen zoals deze, met de juiste antwoorden. Je kandidaten krijgen hun eigen vragen, die nooit openbaar worden getoond."
+    "questionsText": "Vragen zoals deze, met de juiste antwoorden. Je kandidaten krijgen hun eigen vragen, die nooit openbaar worden getoond.",
+    "faq": "Vragen die bedrijven stellen"
   }
 }

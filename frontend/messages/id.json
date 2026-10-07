@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "Keunggulan kami",
+      "title": "Mengapa prepza",
       "text": "Alasan perusahaan menguji kandidat dengan prepza.",
       "points": {
-        "role": {
-          "title": "Dari deskripsi pekerjaanmu",
-          "text": "Tes untuk peranmu, dengan topik yang kamu setujui sebelum soal apa pun ditulis."
+        "speed": {
+          "title": "Siap dalam hitungan menit",
+          "text": "Tempel deskripsi pekerjaanmu, setujui topiknya, dan undang kandidat di hari yang sama."
         },
         "anyRole": {
           "title": "Peran apa pun",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Hasil yang siap dipakai",
-          "text": "Kandidat diurutkan menurut skor, dengan tiap jawaban, waktunya, dan laporan PDF."
+          "text": "Kandidat diurutkan berdasarkan skor, dengan laporan di situs atau dalam PDF."
         },
         "languages": {
           "title": "23 bahasa",
-          "text": "Wawancara, email undangan, dan seluruh situs dalam bahasa kandidatmu."
+          "text": "Wawancara, email, dan situs dalam bahasa pilihanmu."
         }
       }
     },
@@ -963,6 +963,7 @@
     "practise": "Latihan gratis",
     "topics": "Yang diuji",
     "questions": "Contoh soal wawancara",
-    "questionsText": "Soal seperti ini, lengkap dengan jawaban yang benar. Kandidatmu mendapat soal sendiri yang tidak pernah ditampilkan ke publik."
+    "questionsText": "Soal seperti ini, lengkap dengan jawaban yang benar. Kandidatmu mendapat soal sendiri yang tidak pernah ditampilkan ke publik.",
+    "faq": "Pertanyaan yang diajukan perusahaan"
   }
 }

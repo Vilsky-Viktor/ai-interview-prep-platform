@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "Avantajlarımız",
+      "title": "Neden prepza",
       "text": "Şirketler adayları neden prepza ile test ediyor.",
       "points": {
-        "role": {
-          "title": "İş tanımınızdan",
-          "text": "Rolünüze özel bir test; konuları sorular yazılmadan önce siz onaylarsınız."
+        "speed": {
+          "title": "Dakikalar içinde hazır",
+          "text": "İş tanımınızı yapıştırın, konuları onaylayın ve adayları aynı gün davet edin."
         },
         "anyRole": {
           "title": "Her rol",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Karar için sonuçlar",
-          "text": "Puana göre sıralı adaylar, her yanıt ve süresiyle birlikte, bir de PDF rapor."
+          "text": "Puana göre sıralanmış adaylar, sitede veya PDF olarak raporlarla."
         },
         "languages": {
           "title": "23 dil",
-          "text": "Mülakatlar, davet e-postaları ve tüm site adaylarınızın dilinde."
+          "text": "Mülakatlar, e-postalar ve site tercih ettiğiniz dilde."
         }
       }
     },
@@ -962,6 +962,7 @@
     "practise": "Ücretsiz pratik yapın",
     "topics": "Neyi ölçer",
     "questions": "Örnek mülakat soruları",
-    "questionsText": "Bunun gibi sorular, doğru cevaplarıyla. Adaylarınız kendi sorularını alır; bunlar asla herkese açık gösterilmez."
+    "questionsText": "Bunun gibi sorular, doğru cevaplarıyla. Adaylarınız kendi sorularını alır; bunlar asla herkese açık gösterilmez.",
+    "faq": "Şirketlerin sorduğu sorular"
   }
 }

@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "Nuestras ventajas",
+      "title": "Por qué prepza",
       "text": "Por qué las empresas evalúan candidatos con prepza.",
       "points": {
-        "role": {
-          "title": "Desde tu oferta de empleo",
-          "text": "Una prueba para tu puesto, con temas que apruebas antes de escribir ninguna pregunta."
+        "speed": {
+          "title": "Lista en minutos",
+          "text": "Pega tu oferta de empleo, aprueba los temas e invita a candidatos el mismo día."
         },
         "anyRole": {
           "title": "Cualquier puesto",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Resultados para decidir",
-          "text": "Candidatos ordenados por puntuación, con cada respuesta, su tiempo y un informe PDF."
+          "text": "Candidatos ordenados por puntuación, con informes en el sitio o en PDF."
         },
         "languages": {
           "title": "23 idiomas",
-          "text": "Entrevistas, correos de invitación y todo el sitio en el idioma de tus candidatos."
+          "text": "Entrevistas, correos y el sitio en el idioma que prefieras."
         }
       }
     },
@@ -963,6 +963,7 @@
     "practise": "Practícala gratis",
     "topics": "Qué evalúa",
     "questions": "Ejemplos de preguntas de entrevista",
-    "questionsText": "Preguntas como estas, con las respuestas correctas. Tus candidatos reciben las suyas, que nunca se muestran en público."
+    "questionsText": "Preguntas como estas, con las respuestas correctas. Tus candidatos reciben las suyas, que nunca se muestran en público.",
+    "faq": "Preguntas que hacen las empresas"
   }
 }

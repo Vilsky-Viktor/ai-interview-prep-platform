@@ -639,12 +639,12 @@
       }
     },
     "advantages": {
-      "title": "Ưu điểm của chúng tôi",
+      "title": "Vì sao chọn prepza",
       "text": "Vì sao các công ty kiểm tra ứng viên bằng prepza.",
       "points": {
-        "role": {
-          "title": "Từ mô tả công việc của bạn",
-          "text": "Bài kiểm tra cho vị trí của bạn, với chủ đề bạn duyệt trước khi viết câu hỏi."
+        "speed": {
+          "title": "Sẵn sàng trong vài phút",
+          "text": "Dán mô tả công việc, duyệt chủ đề và mời ứng viên ngay trong ngày."
         },
         "anyRole": {
           "title": "Mọi vị trí",
@@ -660,11 +660,11 @@
         },
         "results": {
           "title": "Kết quả để ra quyết định",
-          "text": "Ứng viên xếp theo điểm, kèm từng câu trả lời, thời gian và báo cáo PDF."
+          "text": "Ứng viên xếp theo điểm, kèm báo cáo trên trang web hoặc dạng PDF."
         },
         "languages": {
           "title": "23 ngôn ngữ",
-          "text": "Phỏng vấn, email mời và toàn bộ trang web bằng ngôn ngữ của ứng viên."
+          "text": "Phỏng vấn, email và trang web bằng ngôn ngữ bạn chọn."
         }
       }
     },
@@ -959,6 +959,7 @@
     "practise": "Luyện tập miễn phí",
     "topics": "Nội dung kiểm tra",
     "questions": "Câu hỏi phỏng vấn mẫu",
-    "questionsText": "Những câu hỏi như thế này, kèm đáp án đúng. Ứng viên của bạn nhận câu hỏi riêng, không bao giờ được công khai."
+    "questionsText": "Những câu hỏi như thế này, kèm đáp án đúng. Ứng viên của bạn nhận câu hỏi riêng, không bao giờ được công khai.",
+    "faq": "Câu hỏi các công ty thường hỏi"
   }
 }
