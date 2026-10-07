@@ -7,11 +7,17 @@ from prepza_common.pause import refuse_if_paused
 from prepza_common.user import User
 
 from app.config.settings import settings
-from app.constants.ats import WORKABLE_MOVED, CandidateStatus, ConnectionStatus, FailReason
+from app.constants.ats import (
+    GREENHOUSE_STAGE_CHANGE,
+    WORKABLE_MOVED,
+    AtsProvider,
+    CandidateStatus,
+    ConnectionStatus,
+    FailReason,
+)
 from app.constants.events import INTERVIEW_FINISHED
-from app.helpers.ats import result_comment, workable_signed
+from app.helpers.ats import greenhouse_signed, result_comment, workable_signed
 from app.helpers.notifications import ats_not_invited
-from app.integrations import workable
 from app.integrations.redis import get_redis
 from app.models.ats import AtsCandidate, AtsConnection
 from app.services import ats as integrations
@@ -29,10 +35,14 @@ REASONS = {
 }
 
 
-async def key_of(connection: AtsConnection) -> tuple[str, str] | None:
-    """The connection's subdomain and token, or None when it's broken (marked so)."""
+async def key_of(connection: AtsConnection) -> dict | None:
+    """A working connection's credentials, or None when it isn't connected or its key can't be
+    read (then marked broken)."""
+    if connection.status != ConnectionStatus.CONNECTED:
+        return None
+
     try:
-        return await integrations.workable_key(connection)
+        return await integrations.credentials(connection)
     except HTTPException:
         return None
 
@@ -47,12 +57,12 @@ async def receive_workable(link_id: UUID, body: bytes, signature: str) -> None:
         return
 
     link, connection = found
-    key = await key_of(connection) if connection.status == ConnectionStatus.CONNECTED else None
+    key = await key_of(connection)
 
     if key is None:
         return
 
-    if not workable_signed(key[1], body, signature):
+    if not workable_signed(key["token"], body, signature):
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Not signed by Workable")
 
     event = json.loads(body)
@@ -65,9 +75,47 @@ async def receive_workable(link_id: UUID, body: bytes, signature: str) -> None:
     ):
         return
 
-    row = await ats_candidates.add(
-        connection.id, link.id, link.interview_id, str(candidate["id"]), candidate["email"]
-    )
+    await arrived(link, connection, str(candidate["id"]), candidate["email"])
+
+
+async def receive_greenhouse(connection_id: UUID, body: bytes, signature: str) -> None:
+    """A Greenhouse web hook: a candidate whose application moved into a linked job's stage gets
+    the interview. Only events signed with the connection's secret key count; Greenhouse's ping,
+    other events, and jobs or stages not linked are ignored."""
+    connection = await ats.connection_by_id(connection_id)
+
+    if connection is None or connection.provider != AtsProvider.GREENHOUSE:
+        return
+
+    key = await key_of(connection)
+
+    if key is None:
+        return
+
+    if not greenhouse_signed(key["webhook_secret"], body, signature):
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Not signed by Greenhouse")
+
+    event = json.loads(body)
+    application = (event.get("payload") or {}).get("application") or {}
+    stage = application.get("current_stage") or {}
+    candidate = application.get("candidate") or {}
+    emails = [item.get("value") for item in candidate.get("email_addresses") or []]
+
+    if event.get("action") != GREENHOUSE_STAGE_CHANGE or not any(emails):
+        return
+
+    for job in application.get("jobs") or []:
+        link = await ats.link_for_job(connection.id, str(job.get("id")))
+
+        # Its stage by id, or by name (which id Greenhouse's web hooks send isn't settled).
+        if link and link.stage_id in (str(stage.get("id")), stage.get("name")):
+            reference = f"{candidate.get('id')}:{application.get('id')}"
+            await arrived(link, connection, reference, next(item for item in emails if item))
+
+
+async def arrived(link, connection: AtsConnection, candidate_id: str, email: str) -> None:
+    """A candidate the ATS sent for a linked job: saved once, then invited."""
+    row = await ats_candidates.add(connection.id, link.id, link.interview_id, candidate_id, email)
     await invite(row, connection)
 
 
@@ -156,8 +204,10 @@ async def report(event_type: str, data: dict) -> None:
     key = await key_of(connection)
     sent = await invites.get(row.invite_id)
     interview = await interviews.get(row.interview_id)
+    # Workable's comments need an author; Greenhouse's notes don't.
+    no_author = connection.provider == AtsProvider.WORKABLE and connection.member_id is None
 
-    if key is None or connection.member_id is None or sent is None or interview is None:
+    if key is None or no_author or sent is None or interview is None:
         return
 
     link = (
@@ -168,10 +218,18 @@ async def report(event_type: str, data: dict) -> None:
     text = result_comment(interview.title or "", sent.grade, passed, sent.flagged, link)
 
     try:
-        await workable.comment(key[0], key[1], row.candidate_id, connection.member_id, text)
-    except workable.KeyRejected:
-        await ats.mark_broken(connection.id)
+        await integrations.call(
+            connection,
+            "comment",
+            candidate_id=row.candidate_id,
+            member=connection.member_id,
+            text=text,
+        )
+    except HTTPException as error:
+        # A refused key was marked broken: nothing to retry. Anything else comes again.
+        if error.status_code == status.HTTP_409_CONFLICT:
+            return
 
-        return
+        raise
 
     await ats_candidates.mark_reported(row.id)

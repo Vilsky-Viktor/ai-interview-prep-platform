@@ -142,6 +142,15 @@ async def link(link_id: UUID) -> tuple[AtsJobLink, AtsConnection] | None:
         return tuple(row) if row else None
 
 
+async def link_for_job(connection_id: UUID, job_id: str) -> AtsJobLink | None:
+    query = select(AtsJobLink).where(
+        AtsJobLink.connection_id == connection_id, AtsJobLink.job_id == job_id
+    )
+
+    async with Session() as session:
+        return await session.scalar(query)
+
+
 async def subscriptions(company_id: UUID, link_id: UUID | None = None) -> list[str]:
     """The ATS notifications of the company's linked jobs (or of one), to cancel them."""
     query = (

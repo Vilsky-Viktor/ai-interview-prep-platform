@@ -138,3 +138,25 @@ def test_an_invite_cut_off_midway_can_be_claimed_again_after_a_while(run):
     assert (first, fresh) == (True, False)
     assert stale_before == [] and len(stale_after) == 1
     assert again is True
+
+
+def test_a_greenhouse_event_finds_its_linked_job_by_connection_and_job_id(run):
+    async def scenario():
+        company = await companies.create(f"ATS job {uuid.uuid4()}", "ann", "ann@example.com")
+        interview = await interviews.create(company.id, uuid.uuid4(), "en")
+        await ats.connect(company.id, AtsProvider.GREENHOUSE, "…1234", "sealed", "ann")
+        await ats.connect(company.id, AtsProvider.WORKABLE, "acme", "sealed", "ann")
+        greenhouse = await ats.connection(company.id, AtsProvider.GREENHOUSE)
+        workable = await ats.connection(company.id, AtsProvider.WORKABLE)
+        link_id = await ats.add_link(greenhouse.id, interview.id, JOB, STAGE)
+        found = await ats.link_for_job(greenhouse.id, "A1")
+        other_job = await ats.link_for_job(greenhouse.id, "B2")
+        other_ats = await ats.link_for_job(workable.id, "A1")
+        await companies.delete(company.id)
+
+        return link_id, found, other_job, other_ats
+
+    link_id, found, other_job, other_ats = run(scenario())
+
+    assert found.id == link_id and found.stage_id == "assessment"
+    assert (other_job, other_ats) == (None, None)

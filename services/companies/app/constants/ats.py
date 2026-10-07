@@ -5,6 +5,11 @@ class AtsProvider(StrEnum):
     """The applicant tracking systems a company can connect."""
 
     WORKABLE = "workable"
+    GREENHOUSE = "greenhouse"
+
+
+# Each ATS's name as companies know it.
+ATS_NAMES = {AtsProvider.WORKABLE: "Workable", AtsProvider.GREENHOUSE: "Greenhouse"}
 
 
 class ConnectionStatus(StrEnum):
@@ -50,3 +55,15 @@ class FailReason(StrEnum):
 WORKABLE_MOVED = "candidate_moved"
 # Where Workable sends it, one address per linked job (Workable wants each target unique).
 WORKABLE_WEBHOOK = "{site}/api/companies/webhooks/ats/workable/{link_id}"
+
+# Greenhouse's Harvest API (v3), and where its client credentials become an access token.
+GREENHOUSE_API = "https://harvest.greenhouse.io/v3"
+GREENHOUSE_TOKEN_URL = "https://auth.greenhouse.io/token"
+# A token is renewed this long before Greenhouse said it expires.
+GREENHOUSE_TOKEN_MARGIN_SECONDS = 60
+GREENHOUSE_PAGE = 500
+GREENHOUSE_MAX_PAGES = 10
+# Where a company's Greenhouse web hook sends stage changes: one address per connection, which
+# the company pastes into Greenhouse with its secret key.
+GREENHOUSE_WEBHOOK = "{site}/api/companies/webhooks/ats/greenhouse/{connection_id}"
+GREENHOUSE_STAGE_CHANGE = "candidate_stage_change"

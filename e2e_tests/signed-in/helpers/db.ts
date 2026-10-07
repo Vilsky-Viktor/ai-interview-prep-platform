@@ -1,7 +1,8 @@
 import pg from "pg"
 
-import { POSTGRES_HOST } from "../constants"
+import { GREENHOUSE_E2E_SECRET, POSTGRES_HOST } from "../constants"
 import { env } from "./env"
+import { fernetEncrypt } from "./fernet"
 
 /** Runs `work` on a fresh connection to one of the stack's databases. */
 async function withDatabase<T>(database: string, work: (client: pg.Client) => Promise<T>) {
@@ -81,23 +82,36 @@ export async function deleteTemplate(id: string) {
   await withDatabase("library", (client) => client.query("DELETE FROM sets WHERE id = $1", [id]))
 }
 
-/** A Workable connection for a throwaway company, saved straight into the companies database
- * (a real one needs a Workable account), with one job linked to `interviewId`. Its key is a
- * placeholder, so anything that calls Workable with it marks it broken. Deleting the company
- * deletes both. */
+/** An ATS connection for a throwaway company, saved straight into the companies database
+ * (a real one needs an ATS account), with one job linked to `interviewId`. Workable's key is a
+ * placeholder, so anything that calls Workable with it marks it broken; Greenhouse's is sealed
+ * for real, as its page shows the web hook's secret key from it. Deleting the company deletes
+ * both. */
 export async function addAtsConnection(
   companyId: string,
   interviewId: string,
-  candidates: { invited?: number; notInvited?: number } = {}
+  candidates: { invited?: number; notInvited?: number } = {},
+  provider: "workable" | "greenhouse" = "workable"
 ) {
+  const greenhouse = provider === "greenhouse"
+  const credentials = greenhouse
+    ? fernetEncrypt(
+        env("ATS_ENCRYPTION_KEY"),
+        JSON.stringify({
+          client_id: "e2e",
+          client_secret: "e2e",
+          webhook_secret: GREENHOUSE_E2E_SECRET,
+        })
+      )
+    : "placeholder"
+
   await withDatabase("companies", async (client) => {
     const connection = await client.query(
       `INSERT INTO ats_connections (id, company_id, provider, account, credentials, status,
          created_by, created_at)
-       VALUES (gen_random_uuid(), $1, 'workable', 'e2e-acme', 'placeholder', 'connected', 'e2e',
-         now())
+       VALUES (gen_random_uuid(), $1, $2, $3, $4, 'connected', 'e2e', now())
        RETURNING id`,
-      [companyId]
+      [companyId, provider, greenhouse ? "…e2e1" : "e2e-acme", credentials]
     )
     const link = await client.query(
       `INSERT INTO ats_job_links (id, connection_id, interview_id, job_id, job_name, stage_id,
@@ -107,7 +121,7 @@ export async function addAtsConnection(
        RETURNING id`,
       [connection.rows[0].id, interviewId]
     )
-    // Candidates Workable "sent" for the job: invited, and not invited for lack of credits.
+    // Candidates the ATS "sent" for the job: invited, and not invited for lack of credits.
     const statuses = [
       ...Array(candidates.invited ?? 0).fill(["invited", null]),
       ...Array(candidates.notInvited ?? 0).fill(["failed", "credits"]),

@@ -18,22 +18,25 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import type { Locale } from "@/constants/i18n"
+import type { AtsProvider } from "@/constants/ats"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { AtsItem, Interview } from "@/types/company"
 
 // The interview menu's first choice: a new interview made from the job's own text.
 const NEW = "new"
 
-/** "Link a job": a Workable job, the stage that sends its candidates the interview, and which
+/** "Link a job": an ATS's job, the stage that sends its candidates the interview, and which
  * interview. Jobs load when the dialog opens, a job's stages once it's chosen. "New interview
- * from this job" shows the job's text from Workable to edit, then makes the interview from it,
+ * from this job" shows the job's text from the ATS to edit, then makes the interview from it,
  * links it, and opens its topic review, which goes on to the new interview, as from the home
  * page. */
 export function LinkJob({
   companyId,
+  provider,
   interviews,
 }: {
   companyId: string
+  provider: AtsProvider
   interviews: Interview[]
 }) {
   const t = useTranslations("ats")
@@ -49,7 +52,7 @@ export function LinkJob({
   // The job's text for a new interview, once loaded.
   const [jobText, setJobText] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
-  const base = `/companies/ats/workable/jobs`
+  const base = `/companies/ats/${provider.id}/jobs`
 
   async function openDialog(next: boolean) {
     if (saving) {
@@ -62,7 +65,9 @@ export function LinkJob({
       try {
         setJobs(await apiFetch<AtsItem[]>(`${base}?company_id=${companyId}`))
       } catch (error) {
-        toast.error(apiErrorMessage(error, t("loadFailed")))
+        toast.error(
+          apiErrorMessage(error, t("loadFailed", { ats: provider.name }))
+        )
         setOpen(false)
       }
     }
@@ -77,7 +82,9 @@ export function LinkJob({
       )
       setJobText(found.text)
     } catch (error) {
-      toast.error(apiErrorMessage(error, t("loadFailed")))
+      toast.error(
+        apiErrorMessage(error, t("loadFailed", { ats: provider.name }))
+      )
     }
   }
 
@@ -97,7 +104,9 @@ export function LinkJob({
         )
       )
     } catch (error) {
-      toast.error(apiErrorMessage(error, t("loadFailed")))
+      toast.error(
+        apiErrorMessage(error, t("loadFailed", { ats: provider.name }))
+      )
     }
   }
 
@@ -113,7 +122,7 @@ export function LinkJob({
     await apiFetch(`/companies/ats/links?company_id=${companyId}`, {
       method: "POST",
       body: JSON.stringify({
-        provider: "workable",
+        provider: provider.id,
         job_id: job,
         stage_id: stage,
         interview_id: interviewId,
@@ -212,11 +221,13 @@ export function LinkJob({
             disabled={saving}
           />
         </form>
-        {/* The job's text from Workable, to check and edit before the interview is made from
+        {/* The job's text from the ATS, to check and edit before the interview is made from
             it, in the home page's box. */}
         {fromJob && job && (
           <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">{t("jobTextNote")}</p>
+            <p className="text-sm text-muted-foreground">
+              {t("jobTextNote", { ats: provider.name })}
+            </p>
             {jobText === null ? (
               <p className="rounded-3xl bg-muted p-5 text-muted-foreground">
                 {t("loading")}
@@ -226,7 +237,7 @@ export function LinkJob({
                 key={job}
                 initialText={jobText}
                 placeholder={start("placeholder")}
-                label={t("jobText")}
+                label={t("jobText", { ats: provider.name })}
                 submitLabel={t("createAndLink")}
                 onSubmit={createAndLink}
                 disabled={saving || !stage}

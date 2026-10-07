@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server"
 import { AtsConnectionRow } from "@/components/company/ats-connection"
 import { CompanyHeader } from "@/components/company/company-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
+import { ATS_PROVIDERS } from "@/constants/ats"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
@@ -43,10 +44,6 @@ export default async function IntegrationsPage({
     redirect("/companies")
   }
 
-  const workable =
-    integrations?.connections.find((item) => item.provider === "workable") ??
-    null
-
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
       <CompanyHeader
@@ -61,15 +58,21 @@ export default async function IntegrationsPage({
         canEdit={company.can_edit}
       />
       {integrations?.available ? (
-        <>
-          <ul className="divide-y overflow-hidden rounded-2xl border">
+        <ul className="divide-y overflow-hidden rounded-2xl border">
+          {ATS_PROVIDERS.map((provider) => (
             <AtsConnectionRow
+              key={provider.id}
               companyId={companyId}
-              connection={workable}
+              provider={provider}
+              connection={
+                integrations.connections.find(
+                  (item) => item.provider === provider.id
+                ) ?? null
+              }
               canEdit={company.can_edit}
             />
-          </ul>
-        </>
+          ))}
+        </ul>
       ) : (
         <p className="rounded-2xl border p-6 text-muted-foreground">
           {t("unavailable")}

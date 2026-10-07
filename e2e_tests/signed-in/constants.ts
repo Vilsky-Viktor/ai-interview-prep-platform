@@ -29,3 +29,6 @@ export const WARM_UP_PATHS = [
   "/superadmin/verification",
   "/superadmin/controls",
 ]
+
+// The web hook secret key of the Greenhouse connection the tests save.
+export const GREENHOUSE_E2E_SECRET = "e2e-webhook-secret"

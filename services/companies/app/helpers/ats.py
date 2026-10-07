@@ -71,6 +71,14 @@ def workable_signed(token: str, body: bytes, signature: str) -> bool:
     )
 
 
+def greenhouse_signed(secret: str, body: bytes, signature: str) -> bool:
+    """Whether a Greenhouse web hook is Greenhouse's: its Signature header is "sha256 " and the
+    HMAC-SHA256 hex digest of the raw body with the secret key the company set."""
+    expected = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
+
+    return hmac.compare_digest(signature.strip().removeprefix("sha256 "), expected)
+
+
 def result_comment(title: str, grade: int | None, passed: bool, flagged: bool, link: str) -> str:
     """The comment a finished candidate's results go back to the ATS as."""
     lines = [f"prepza: {title}"]

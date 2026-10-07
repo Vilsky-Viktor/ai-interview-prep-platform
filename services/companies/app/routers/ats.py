@@ -1,19 +1,24 @@
+import secrets
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import MAX_GOAL_LENGTH
 
-from app.constants.ats import AtsProvider, CandidateStatus
+from app.config.settings import settings
+from app.constants.ats import ATS_NAMES, GREENHOUSE_WEBHOOK, AtsProvider, CandidateStatus
 from app.helpers.ats import job_text, workable_subdomain
-from app.integrations import workable
+from app.integrations import greenhouse, workable
+from app.integrations.errors import KeyRejected
 from app.schemas.ats import (
     AtsItemOut,
     ConnectionOut,
+    GreenhouseIn,
     IntegrationsOut,
     JobLinkIn,
     JobLinkOut,
     JobTextOut,
+    WebhookOut,
     WorkableIn,
 )
 from app.services import ats as integrations
@@ -71,6 +76,47 @@ async def connect_workable(company_id: UUID, body: WorkableIn, user: CurrentUser
     # Who results are written back as: the connecting user's Workable member, or an admin.
     member = await workable.member_id(subdomain, token, user.email)
     await ats.connect(company_id, AtsProvider.WORKABLE, subdomain, credentials, user.uid, member)
+
+
+@router.put("/greenhouse", status_code=status.HTTP_204_NO_CONTENT)
+async def connect_greenhouse(company_id: UUID, body: GreenhouseIn, user: CurrentUser) -> None:
+    """Connects Greenhouse with a Harvest V3 (OAuth) API credential, checked with one read
+    first. Each connection gets its own secret key for the web hook the company sets up; a
+    reconnect keeps it, so the web hook goes on working."""
+    await require_editor(user, company_id)
+    integrations.require_available()
+    client_id, client_secret = body.client_id.strip(), body.client_secret.strip()
+
+    try:
+        await greenhouse.check(client_id, client_secret)
+    except KeyRejected:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, "Greenhouse didn't accept this client ID and secret"
+        ) from None
+
+    earlier = await ats.connection(company_id, AtsProvider.GREENHOUSE)
+    kept = (await integrations.credentials(earlier)).get("webhook_secret") if earlier else None
+    sealed = integrations.seal(
+        {
+            "client_id": client_id,
+            "client_secret": client_secret,
+            "webhook_secret": kept or secrets.token_urlsafe(32),
+        }
+    )
+    # Shown as the credential's last characters: Greenhouse names no account.
+    await ats.connect(company_id, AtsProvider.GREENHOUSE, f"…{client_id[-4:]}", sealed, user.uid)
+
+
+@router.get("/greenhouse/webhook")
+async def greenhouse_webhook(company_id: UUID, user: CurrentUser) -> WebhookOut:
+    """Where the company's Greenhouse web hook sends stage changes, and its secret key, to paste
+    into Greenhouse; owners and admins only."""
+    await require_editor(user, company_id)
+    connection = await integrations.connected(company_id, AtsProvider.GREENHOUSE)
+    found = await integrations.credentials(connection)
+    url = GREENHOUSE_WEBHOOK.format(site=settings.site_url, connection_id=connection.id)
+
+    return WebhookOut(url=url, secret=found["webhook_secret"])
 
 
 @router.delete("/{provider}", status_code=status.HTTP_204_NO_CONTENT)
@@ -161,14 +207,20 @@ async def add_link(company_id: UUID, body: JobLinkIn, user: CurrentUser) -> None
     stage = next((stage for stage in stage_list if stage["id"] == body.stage_id), None)
 
     if job is None or stage is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "That job or stage isn't in Workable")
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND, f"That job or stage isn't in {ATS_NAMES[body.provider]}"
+        )
 
     link_id = await ats.add_link(connection.id, interview.id, job, stage)
 
     if link_id is None:
         raise HTTPException(status.HTTP_409_CONFLICT, "That job is already linked")
 
-    # Workable then sends candidates moved into the stage; a link it won't notify isn't kept.
+    # Workable is asked to send candidates moved into the stage; a link it won't notify isn't
+    # kept. Greenhouse sends them through the web hook the company set up.
+    if body.provider != AtsProvider.WORKABLE:
+        return
+
     try:
         subscription = await integrations.subscribe(connection, link_id, job["id"], stage["id"])
     except Exception:

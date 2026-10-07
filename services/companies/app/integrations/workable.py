@@ -9,13 +9,10 @@ from app.constants.ats import (
     WORKABLE_MOVED,
     WORKABLE_PAGE,
 )
+from app.integrations.errors import KeyRejected
 
 # Workable's answers that mean the key is wrong, revoked, expired or lacks a scope.
 REJECTED = {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
-
-
-class KeyRejected(Exception):
-    """Workable refused the key: the connection needs a new one."""
 
 
 async def _call(

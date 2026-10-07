@@ -16,17 +16,20 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
+import type { AtsProvider } from "@/constants/ats"
 import type { AtsJobLink, Interview } from "@/types/company"
 
 /** The ATS's jobs linked to the company's interviews, on the ATS's own page, with "Link a job"
  * for owners and admins. */
 export function AtsJobLinks({
   companyId,
+  provider,
   links,
   interviews,
   canEdit,
 }: {
   companyId: string
+  provider: AtsProvider
   links: AtsJobLink[]
   interviews: Interview[]
   canEdit: boolean
@@ -38,9 +41,17 @@ export function AtsJobLinks({
       <div className="flex items-center justify-between gap-4">
         <div className="space-y-1">
           <h2 className="font-heading text-2xl font-medium">{t("links")}</h2>
-          <p className="text-base text-muted-foreground">{t("linksText")}</p>
+          <p className="text-base text-muted-foreground">
+            {t("linksText", { ats: provider.name })}
+          </p>
         </div>
-        {canEdit && <LinkJob companyId={companyId} interviews={interviews} />}
+        {canEdit && (
+          <LinkJob
+            companyId={companyId}
+            provider={provider}
+            interviews={interviews}
+          />
+        )}
       </div>
       {links.length === 0 ? (
         <p className="rounded-2xl border p-6 text-muted-foreground">
@@ -145,7 +156,7 @@ function LinkRow({
   )
 }
 
-/** Candidates invited from Workable for this job: an icon and the number, in a column of its own
+/** Candidates invited from the ATS for this job: an icon and the number, in a column of its own
  * like a company's interview count, its meaning in a tooltip. */
 function InvitedCount({ count }: { count: number }) {
   const t = useTranslations("ats")
@@ -168,7 +179,7 @@ function InvitedCount({ count }: { count: number }) {
   )
 }
 
-/** Candidates Workable sent who weren't invited: their number in red, above "Invite again" for
+/** Candidates the ATS sent who weren't invited: their number in red, above "Invite again" for
  * owners and admins, which tries this job's again (after a top-up, or once the pause is off). */
 function NotInvited({
   companyId,

@@ -5,9 +5,11 @@ from cryptography.fernet import Fernet
 from fastapi import HTTPException, status
 
 from app.config.settings import settings
-from app.constants.ats import WORKABLE_WEBHOOK
+from app.constants.ats import ATS_NAMES, WORKABLE_WEBHOOK
 from app.helpers.encryption import decrypt, encrypt
 from app.integrations import workable
+from app.integrations.ats_clients import client
+from app.integrations.errors import KeyRejected
 from app.models.ats import AtsConnection
 from app.storage import ats
 
@@ -31,25 +33,33 @@ def seal(credentials: dict) -> str:
     return encrypt(settings.ats_encryption_key, json.dumps(credentials))
 
 
-async def workable_key(connection: AtsConnection) -> tuple[str, str]:
-    """The connection's subdomain and token. A key that can't be read any more (the encryption
-    key changed) marks the connection broken, like one Workable refuses."""
+async def credentials(connection: AtsConnection) -> dict:
+    """The connection's credentials, as its ATS's client takes them. A key that can't be read
+    any more (the encryption key changed) marks the connection broken, like one the ATS
+    refuses."""
     opened = decrypt(settings.ats_encryption_key, connection.credentials)
 
     if opened is None:
         await broken(connection)
 
-    credentials = json.loads(opened)
+    return json.loads(opened)
 
-    return credentials["subdomain"], credentials["token"]
+
+async def workable_key(connection: AtsConnection) -> tuple[str, str]:
+    """A Workable connection's subdomain and token, for what only Workable has (subscriptions,
+    signed events)."""
+    found = await credentials(connection)
+
+    return found["subdomain"], found["token"]
 
 
 async def broken(connection: AtsConnection) -> None:
     """Marks the connection for reconnecting, and tells the company."""
     await ats.mark_broken(connection.id)
+    name = ATS_NAMES[connection.provider]
 
     raise HTTPException(
-        status.HTTP_409_CONFLICT, "Workable no longer accepts the key: reconnect to continue"
+        status.HTTP_409_CONFLICT, f"{name} no longer accepts the key: reconnect to continue"
     )
 
 
@@ -63,31 +73,27 @@ async def connected(company_id, provider: str) -> AtsConnection:
     return connection
 
 
-async def jobs(connection: AtsConnection) -> list[dict]:
-    subdomain, token = await workable_key(connection)
+async def call(connection: AtsConnection, action: str, **arguments):
+    """One action of the connection's ATS client (integrations/ats_clients.py), with its
+    credentials; a refused key marks the connection broken."""
+    found = await credentials(connection)
 
     try:
-        return await workable.jobs(subdomain, token)
-    except workable.KeyRejected:
+        return await getattr(client(connection.provider), action)(**found, **arguments)
+    except KeyRejected:
         await broken(connection)
+
+
+async def jobs(connection: AtsConnection) -> list[dict]:
+    return await call(connection, "jobs")
 
 
 async def stages(connection: AtsConnection, job_id: str) -> list[dict]:
-    subdomain, token = await workable_key(connection)
-
-    try:
-        return await workable.stages(subdomain, token, job_id)
-    except workable.KeyRejected:
-        await broken(connection)
+    return await call(connection, "stages", job_id=job_id)
 
 
 async def job(connection: AtsConnection, job_id: str) -> dict:
-    subdomain, token = await workable_key(connection)
-
-    try:
-        return await workable.job(subdomain, token, job_id)
-    except workable.KeyRejected:
-        await broken(connection)
+    return await call(connection, "job", job_id=job_id)
 
 
 async def subscribe(connection: AtsConnection, link_id, job_id: str, stage_id: str) -> str:
@@ -97,7 +103,7 @@ async def subscribe(connection: AtsConnection, link_id, job_id: str, stage_id: s
 
     try:
         return await workable.subscribe(subdomain, token, target, job_id, stage_id)
-    except workable.KeyRejected:
+    except KeyRejected:
         await broken(connection)
 
 
@@ -108,7 +114,7 @@ async def unsubscribe(connection: AtsConnection, subscription_ids: list[str]) ->
         try:
             subdomain, token = await workable_key(connection)
             await workable.unsubscribe(subdomain, token, subscription_id)
-        except (HTTPException, workable.KeyRejected):
+        except (HTTPException, KeyRejected):
             logging.getLogger(__name__).warning(
                 "Couldn't cancel Workable subscription %s", subscription_id
             )

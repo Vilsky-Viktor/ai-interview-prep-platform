@@ -14,3 +14,13 @@ async def workable_event(link_id: UUID, request: Request) -> None:
     await ats_candidates.receive_workable(
         link_id, await request.body(), request.headers.get("x-workable-signature", "")
     )
+
+
+@router.post("/greenhouse/{connection_id}", status_code=status.HTTP_200_OK)
+async def greenhouse_event(connection_id: UUID, request: Request) -> None:
+    """The company's Greenhouse web hook (stage changes), signed with the connection's secret key
+    (the Signature header, checked on the raw body). Greenhouse's ping on saving it is
+    answered too."""
+    await ats_candidates.receive_greenhouse(
+        connection_id, await request.body(), request.headers.get("signature", "")
+    )

@@ -5,7 +5,7 @@ import { visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"
 
-// The ATS tab lists Workable with what connecting needs and how candidates flow; Workable's own
+// The ATS tab lists Workable (beside Greenhouse) with what connecting needs and how candidates flow; Workable's own
 // page has its linked jobs with how their candidates went. A real connection needs a Workable
 // account, so one is saved straight into the database, and Workable's lists are answered in the
 // browser.
@@ -30,7 +30,11 @@ test("an owner sees how to connect Workable and manages its linked jobs", async 
   await owner.keyboard.press("Escape")
 
   // Where to make the token, and its scopes.
-  await owner.getByRole("button", { name: "Connect" }).click()
+  await owner
+    .getByRole("listitem")
+    .filter({ hasText: "Workable" })
+    .getByRole("button", { name: "Connect" })
+    .click()
   const connect = owner.getByRole("dialog")
   await expect(connect.getByText("API access tokens")).toBeVisible()
   await expect(connect.getByText("w_candidates")).toBeVisible()

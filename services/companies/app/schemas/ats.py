@@ -27,6 +27,19 @@ class WorkableIn(BaseModel):
     token: str = Field(min_length=1, max_length=500)
 
 
+class GreenhouseIn(BaseModel):
+    # A Harvest V3 (OAuth) API credential's client ID and secret.
+    client_id: str = Field(min_length=1, max_length=200)
+    client_secret: str = Field(min_length=1, max_length=500)
+
+
+class WebhookOut(BaseModel):
+    """What the company pastes into its ATS's web hook: where it sends, and its secret key."""
+
+    url: str
+    secret: str
+
+
 class AtsItemOut(BaseModel):
     """A job or a stage in the ATS: its own id and name."""
 
