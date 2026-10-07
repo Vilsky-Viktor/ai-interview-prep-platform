@@ -983,8 +983,8 @@
     "connectTitle": "Conectar o {ats}",
     "stepOpen": "No {ats}, abra:",
     "stepScopes": "Gere um token com estas permissões:",
-    "stepPaste": "Cole o token abaixo, com o seu endereço do Workable.",
-    "account": "Endereço do Workable",
+    "stepPaste": "Cole o token abaixo, com o seu endereço do {ats}.",
+    "account": "Endereço do {ats}",
     "token": "Token de acesso à API",
     "connectFailed": "Não foi possível conectar o {ats}.",
     "disconnectTitle": "Desconectar o {ats}?",
@@ -1042,6 +1042,11 @@
     "saveKey": "Salvar chave",
     "keySaved": "Chave salva",
     "keySaveFailed": "Não foi possível salvar a chave.",
-    "instructions": "Instruções"
+    "instructions": "Instruções",
+    "rcStepCreate": "Crie o token como um administrador que vê todas as vagas: ele age em seu nome, e os resultados são registrados em seu nome.",
+    "rcToken": "Token de API",
+    "notConnected": "O {ats} ainda não está conectado. Conecte-o para vincular as vagas dele às suas entrevistas.",
+    "webhookSecretName": "Segredo",
+    "webhookPasteSecret": "Salve-o e depois cole aqui o segredo que o {ats} mostra para ele:"
   }
 }

@@ -987,8 +987,8 @@
     "connectTitle": "Connecter {ats}",
     "stepOpen": "Dans {ats}, ouvrez :",
     "stepScopes": "Générez un jeton avec ces autorisations :",
-    "stepPaste": "Collez le jeton ci-dessous, avec votre adresse Workable.",
-    "account": "Adresse Workable",
+    "stepPaste": "Collez le jeton ci-dessous, avec votre adresse {ats}.",
+    "account": "Adresse {ats}",
     "token": "Jeton d'accès API",
     "connectFailed": "Impossible de connecter {ats}.",
     "disconnectTitle": "Déconnecter {ats} ?",
@@ -1046,6 +1046,11 @@
     "saveKey": "Enregistrer la clé",
     "keySaved": "Clé enregistrée",
     "keySaveFailed": "Impossible d'enregistrer la clé.",
-    "instructions": "Instructions"
+    "instructions": "Instructions",
+    "rcStepCreate": "Créez le jeton en tant qu'administrateur qui voit tous les postes : il agit en votre nom, et les résultats sont écrits en votre nom.",
+    "rcToken": "Jeton API",
+    "notConnected": "{ats} n'est pas encore connecté. Connectez-le pour lier ses postes à vos entretiens.",
+    "webhookSecretName": "Secret",
+    "webhookPasteSecret": "Enregistrez-le, puis collez ici le secret que {ats} affiche pour lui :"
   }
 }

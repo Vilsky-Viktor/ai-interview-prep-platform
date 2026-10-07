@@ -67,9 +67,17 @@ export function AtsWebhook({
           {setup.pastesKey ? (
             <>
               <span className="block">
-                {t("webhookPasteKey", { ats: provider.name })}
+                {t(setup.pasteText ?? "webhookPasteKey", {
+                  ats: provider.name,
+                })}
               </span>
-              {webhook && <PastedKey path={path} saved={webhook.secret} />}
+              {webhook && (
+                <PastedKey
+                  path={path}
+                  saved={webhook.secret}
+                  label={t(setup.keyName ?? "signatureKey")}
+                />
+              )}
             </>
           ) : (
             <>
@@ -88,7 +96,15 @@ export function AtsWebhook({
 }
 
 /** The signature key the ATS made for the web hook, pasted and saved; shown once saved. */
-function PastedKey({ path, saved }: { path: string; saved: string }) {
+function PastedKey({
+  path,
+  saved,
+  label,
+}: {
+  path: string
+  saved: string
+  label: string
+}) {
   const t = useTranslations("ats")
   const [key, setKey] = useState(saved)
   const [stored, setStored] = useState(saved)
@@ -119,8 +135,8 @@ function PastedKey({ path, saved }: { path: string; saved: string }) {
         type="password"
         autoComplete="off"
         maxLength={500}
-        placeholder={t("signatureKey")}
-        aria-label={t("signatureKey")}
+        placeholder={label}
+        aria-label={label}
         value={key}
         onChange={(event) => setKey(event.target.value)}
         action={t("saveKey")}

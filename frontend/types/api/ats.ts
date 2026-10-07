@@ -69,6 +69,28 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/recruitee": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Connect Recruitee
+     * @description Connects Recruitee with the company's address and a personal API token (it acts as the
+     *     person who made it), checked with one read first. The web hook's secret comes later
+     *     (Recruitee shows it); a reconnect keeps it.
+     */
+    put: operations["connect_recruitee_recruitee_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/{provider}/webhook": {
     parameters: {
       query?: never
@@ -78,32 +100,16 @@ export interface paths {
     }
     /**
      * Webhook
-     * @description Where the company's web hook sends its events, and its secret key (empty while a
-     *     Teamtailor one has none saved); owners and admins only.
+     * @description Where the company's web hook sends its events, and its secret key (empty while one the
+     *     ATS makes isn't saved yet); owners and admins only.
      */
     get: operations["webhook__provider__webhook_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/teamtailor/webhook": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
     /**
-     * Save Teamtailor Key
-     * @description Saves the signature key Teamtailor generated for the company's web hook: its events count
-     *     from then on.
+     * Save Webhook Key
+     * @description Saves the secret key the ATS made for the company's web hook (Teamtailor, Recruitee): its
+     *     events count from then on.
      */
-    put: operations["save_teamtailor_key_teamtailor_webhook_put"]
+    put: operations["save_webhook_key__provider__webhook_put"]
     post?: never
     delete?: never
     options?: never
@@ -332,6 +338,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/webhooks/recruitee/{connection_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Recruitee Event
+     * @description The company's Recruitee web hook (candidates moved), signed with the secret Recruitee
+     *     shows for it (the X-Recruitee-Signature header, checked on the raw body).
+     */
+    post: operations["recruitee_event_webhooks_recruitee__connection_id__post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/events": {
     parameters: {
       query?: never
@@ -493,7 +520,7 @@ export interface components {
      * @description The applicant tracking systems a company can connect.
      * @enum {string}
      */
-    AtsProvider: "workable" | "greenhouse" | "teamtailor"
+    AtsProvider: "workable" | "greenhouse" | "teamtailor" | "recruitee"
     /**
      * ConnectionOut
      * @description A connection as the company sees it: never its key.
@@ -614,6 +641,13 @@ export interface components {
       }
       /** Messageid */
       messageId: string
+    }
+    /** RecruiteeIn */
+    RecruiteeIn: {
+      /** Account */
+      account: string
+      /** Token */
+      token: string
     }
     /** TeamtailorIn */
     TeamtailorIn: {
@@ -763,6 +797,39 @@ export interface operations {
       }
     }
   }
+  connect_recruitee_recruitee_put: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["RecruiteeIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   webhook__provider__webhook_get: {
     parameters: {
       query: {
@@ -796,13 +863,15 @@ export interface operations {
       }
     }
   }
-  save_teamtailor_key_teamtailor_webhook_put: {
+  save_webhook_key__provider__webhook_put: {
     parameters: {
       query: {
         company_id: string
       }
       header?: never
-      path?: never
+      path: {
+        provider: components["schemas"]["AtsProvider"]
+      }
       cookie?: never
     }
     requestBody: {
@@ -1183,6 +1252,37 @@ export interface operations {
     }
   }
   teamtailor_event_webhooks_teamtailor__connection_id__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        connection_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  recruitee_event_webhooks_recruitee__connection_id__post: {
     parameters: {
       query?: never
       header?: never

@@ -987,8 +987,8 @@
     "connectTitle": "Connect {ats}",
     "stepOpen": "In {ats}, open:",
     "stepScopes": "Generate a token with these scopes:",
-    "stepPaste": "Paste the token below, with your Workable address.",
-    "account": "Workable address",
+    "stepPaste": "Paste the token below, with your {ats} address.",
+    "account": "{ats} address",
     "token": "API access token",
     "connectFailed": "Couldn't connect {ats}.",
     "disconnectTitle": "Disconnect {ats}?",
@@ -1046,6 +1046,11 @@
     "saveKey": "Save key",
     "keySaved": "Key saved",
     "keySaveFailed": "Couldn't save the key.",
-    "instructions": "Instructions"
+    "instructions": "Instructions",
+    "rcStepCreate": "Create a token as an admin who sees every job: it acts as you, and results are written as you.",
+    "rcToken": "API token",
+    "notConnected": "{ats} isn't connected yet. Connect it to link its jobs to your interviews.",
+    "webhookSecretName": "Secret",
+    "webhookPasteSecret": "Save it, then paste the secret {ats} shows for it here:"
   }
 }

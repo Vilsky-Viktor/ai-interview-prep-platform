@@ -7,6 +7,7 @@ import { toast } from "sonner"
 
 import {
   GreenhouseSteps,
+  RecruiteeSteps,
   TeamtailorSteps,
   WorkableSteps,
 } from "@/components/company/ats-steps"
@@ -39,6 +40,13 @@ const FORMS = {
     fields: [
       { name: "client_id", label: "clientId" },
       { name: "client_secret", label: "clientSecret", secret: true },
+    ],
+  },
+  recruitee: {
+    steps: RecruiteeSteps,
+    fields: [
+      { name: "account", label: "account", placeholder: "acme.recruitee.com" },
+      { name: "token", label: "rcToken", secret: true },
     ],
   },
   teamtailor: {
@@ -114,9 +122,11 @@ export function ConnectAts({
                 autoComplete="off"
                 maxLength={500}
                 placeholder={
-                  "placeholder" in field ? field.placeholder : t(field.label)
+                  "placeholder" in field
+                    ? field.placeholder
+                    : t(field.label, { ats: provider.name })
                 }
-                aria-label={t(field.label)}
+                aria-label={t(field.label, { ats: provider.name })}
                 value={values[field.name] ?? ""}
                 onChange={(event) =>
                   setValues({ ...values, [field.name]: event.target.value })

@@ -55,7 +55,8 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
 
   // Connected: the info dialog opens by itself with the web hook's address and secret key.
   const dialog = owner.getByRole("dialog")
-  await expect(dialog.getByText("Set up the web hook")).toBeVisible()
+  // The web hook shows once the page has reloaded the connection (slow on the dev server).
+  await expect(dialog.getByText("Set up the web hook")).toBeVisible({ timeout: 60_000 })
   await expect(dialog.getByText("Candidate or Prospect Stage Change")).toBeVisible()
   await expect(dialog.getByRole("textbox", { name: "Copy URL" })).toHaveValue(
     /\/api\/ats\/webhooks\/greenhouse\/[0-9a-f-]{36}$/

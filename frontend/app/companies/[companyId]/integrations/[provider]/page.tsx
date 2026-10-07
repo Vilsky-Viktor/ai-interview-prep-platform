@@ -28,7 +28,8 @@ export const generateMetadata = async ({ params }: { params: Params }) => ({
 })
 
 /** An ATS's own page, laid out like an interview's: back to the integrations tab, its status
- * and buttons, and once connected, its linked jobs with "Link a job" and Unlink. */
+ * and buttons, and once connected, its linked jobs with "Link a job" and Unlink; before, that it
+ * isn't connected yet. */
 export default async function AtsPage({ params }: { params: Params }) {
   const { companyId, provider: id } = await params
   const provider = providerOf(id)
@@ -39,6 +40,7 @@ export default async function AtsPage({ params }: { params: Params }) {
 
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const t = await getTranslations("company")
+  const ats = await getTranslations("ats")
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
     : null
@@ -115,7 +117,7 @@ export default async function AtsPage({ params }: { params: Params }) {
           </div>
         }
       />
-      {connection && (
+      {connection ? (
         <AtsJobLinks
           companyId={companyId}
           provider={provider}
@@ -123,6 +125,10 @@ export default async function AtsPage({ params }: { params: Params }) {
           interviews={(interviews ?? []).filter((item) => item.set_id)}
           canEdit={company.can_edit && connected}
         />
+      ) : (
+        <p className="rounded-2xl border p-6 text-muted-foreground">
+          {ats("notConnected", { ats: provider.name })}
+        </p>
       )}
     </main>
   )

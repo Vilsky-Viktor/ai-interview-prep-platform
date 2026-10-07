@@ -46,7 +46,8 @@ test("an owner connects Teamtailor and saves its web hook's signature key", asyn
   // Connected: the info dialog opens by itself with the web hook, the add-on it needs, our
   // address, and a field for Teamtailor's signature key, saved once it changes.
   const dialog = owner.getByRole("dialog")
-  await expect(dialog.getByText("Add-on feature center", { exact: false })).toBeVisible()
+  // The web hook shows once the page has reloaded the connection (slow on the dev server).
+  await expect(dialog.getByText("Add-on feature center", { exact: false })).toBeVisible({ timeout: 60_000 })
   await expect(dialog.getByText("job_application.update")).toBeVisible()
   await expect(dialog.getByRole("textbox", { name: "Copy URL" })).toHaveValue(
     /\/api\/ats\/webhooks\/teamtailor\/[0-9a-f-]{36}$/

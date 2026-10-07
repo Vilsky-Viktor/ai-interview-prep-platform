@@ -978,8 +978,8 @@
     "connectTitle": "חיבור {ats}",
     "stepOpen": "ב-{ats}, פתחו:",
     "stepScopes": "צרו טוקן עם ההרשאות האלה:",
-    "stepPaste": "הדביקו את הטוקן למטה, יחד עם כתובת ה-Workable שלכם.",
-    "account": "כתובת Workable",
+    "stepPaste": "הדביקו את הטוקן למטה, יחד עם כתובת ה-{ats} שלכם.",
+    "account": "כתובת {ats}",
     "token": "טוקן גישה ל-API",
     "connectFailed": "לא ניתן לחבר את {ats}.",
     "disconnectTitle": "לנתק את {ats}?",
@@ -1037,6 +1037,11 @@
     "saveKey": "שמירת המפתח",
     "keySaved": "המפתח נשמר",
     "keySaveFailed": "לא ניתן לשמור את המפתח.",
-    "instructions": "הוראות"
+    "instructions": "הוראות",
+    "rcStepCreate": "צרו את הטוקן כמנהלים שרואים את כל המשרות: הוא פועל בשמכם, והתוצאות נכתבות בשמכם.",
+    "rcToken": "טוקן API",
+    "notConnected": "{ats} עדיין לא מחובר. חברו אותו כדי לקשר את המשרות שלו לראיונות שלכם.",
+    "webhookSecretName": "סוד",
+    "webhookPasteSecret": "שמרו אותו, ואז הדביקו כאן את הסוד ש-{ats} מציג עבורו:"
   }
 }

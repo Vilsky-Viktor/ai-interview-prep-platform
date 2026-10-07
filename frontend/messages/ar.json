@@ -983,8 +983,8 @@
     "connectTitle": "ربط {ats}",
     "stepOpen": "في {ats}، افتح:",
     "stepScopes": "أنشئ رمز وصول بهذه الصلاحيات:",
-    "stepPaste": "الصق الرمز أدناه مع عنوان Workable الخاص بك.",
-    "account": "عنوان Workable",
+    "stepPaste": "الصق الرمز أدناه مع عنوان {ats} الخاص بك.",
+    "account": "عنوان {ats}",
     "token": "رمز الوصول إلى API",
     "connectFailed": "تعذّر ربط {ats}.",
     "disconnectTitle": "إلغاء ربط {ats}؟",
@@ -1042,6 +1042,11 @@
     "saveKey": "حفظ المفتاح",
     "keySaved": "تم حفظ المفتاح",
     "keySaveFailed": "تعذّر حفظ المفتاح.",
-    "instructions": "التعليمات"
+    "instructions": "التعليمات",
+    "rcStepCreate": "أنشئ الرمز بحساب مسؤول يرى كل الوظائف: فهو يعمل باسمك، وتُكتب النتائج باسمك.",
+    "rcToken": "رمز API",
+    "notConnected": "{ats} غير متصل بعد. اربطه لتربط وظائفه بمقابلاتك.",
+    "webhookSecretName": "السر",
+    "webhookPasteSecret": "احفظه، ثم الصق هنا السر الذي يعرضه {ats} له:"
   }
 }

@@ -983,8 +983,8 @@
     "connectTitle": "Kết nối {ats}",
     "stepOpen": "Trong {ats}, mở:",
     "stepScopes": "Tạo token với các phạm vi quyền sau:",
-    "stepPaste": "Dán token bên dưới, kèm địa chỉ Workable của bạn.",
-    "account": "Địa chỉ Workable",
+    "stepPaste": "Dán token bên dưới, kèm địa chỉ {ats} của bạn.",
+    "account": "Địa chỉ {ats}",
     "token": "Token truy cập API",
     "connectFailed": "Không thể kết nối {ats}.",
     "disconnectTitle": "Ngắt kết nối {ats}?",
@@ -1042,6 +1042,11 @@
     "saveKey": "Lưu khóa",
     "keySaved": "Đã lưu khóa",
     "keySaveFailed": "Không thể lưu khóa.",
-    "instructions": "Hướng dẫn"
+    "instructions": "Hướng dẫn",
+    "rcStepCreate": "Tạo token bằng tài khoản quản trị viên xem được mọi tin tuyển dụng: token hoạt động thay mặt bạn, và kết quả được ghi dưới tên bạn.",
+    "rcToken": "Token API",
+    "notConnected": "{ats} chưa được kết nối. Hãy kết nối để liên kết các tin tuyển dụng trong {ats} với các buổi phỏng vấn của bạn.",
+    "webhookSecretName": "Secret",
+    "webhookPasteSecret": "Lưu lại, rồi dán vào đây secret mà {ats} hiển thị cho webhook đó:"
   }
 }

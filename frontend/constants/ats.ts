@@ -3,6 +3,7 @@ export const ATS_PROVIDERS = [
   { id: "workable", name: "Workable", logo: "/ats/workable.svg" },
   { id: "greenhouse", name: "Greenhouse", logo: "/ats/greenhouse.png" },
   { id: "teamtailor", name: "Teamtailor", logo: "/ats/teamtailor.png" },
+  { id: "recruitee", name: "Recruitee", logo: "/ats/recruitee.png" },
 ] as const
 
 export type AtsProvider = (typeof ATS_PROVIDERS)[number]
@@ -42,19 +43,46 @@ export const TEAMTAILOR_KEY_ACCESS = ["Admin", "Read/Write"]
 export const TEAMTAILOR_WEBHOOK_PATH = ["Settings", "Integrations", "Webhooks"]
 export const TEAMTAILOR_WEBHOOK_EVENT = "job_application.update"
 
+// Where a Recruitee user makes the personal API token, and where the web hook is set up, with
+// the event it sends.
+export const RECRUITEE_TOKEN_PATH = [
+  "Settings",
+  "Apps and plugins",
+  "Personal API tokens",
+]
+export const RECRUITEE_WEBHOOK_PATH = [
+  "Settings",
+  "Apps and plugins",
+  "Webhooks",
+]
+export const RECRUITEE_WEBHOOK_EVENT = "candidate_moved"
+
 // The ATSs whose web hook the company sets up itself, with where and which event; Teamtailor
-// makes the web hook's signature key, which the company pastes back, the others take ours.
+// and Recruitee make the web hook's secret key (each by its own name), which the company pastes
+// back; Greenhouse takes ours.
 export const WEBHOOKS = {
   greenhouse: {
     path: GREENHOUSE_WEBHOOK_PATH,
     event: GREENHOUSE_WEBHOOK_EVENT,
     pastesKey: false,
     note: null,
+    keyName: null,
+    pasteText: null,
   },
   teamtailor: {
     path: TEAMTAILOR_WEBHOOK_PATH,
     event: TEAMTAILOR_WEBHOOK_EVENT,
     pastesKey: true,
     note: "ttWebhookAddon",
+    keyName: "signatureKey",
+    pasteText: "webhookPasteKey",
+  },
+  recruitee: {
+    path: RECRUITEE_WEBHOOK_PATH,
+    event: RECRUITEE_WEBHOOK_EVENT,
+    pastesKey: true,
+    note: null,
+    keyName: "webhookSecretName",
+    pasteText: "webhookPasteSecret",
   },
 } as const

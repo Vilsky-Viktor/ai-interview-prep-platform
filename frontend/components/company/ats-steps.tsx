@@ -7,6 +7,7 @@ import {
   GREENHOUSE_CREDENTIAL_PATH,
   GREENHOUSE_CREDENTIAL_TYPE,
   GREENHOUSE_PERMISSIONS,
+  RECRUITEE_TOKEN_PATH,
   TEAMTAILOR_KEY_ACCESS,
   TEAMTAILOR_KEY_PATH,
   WORKABLE_SCOPES,
@@ -45,7 +46,7 @@ export function WorkableSteps() {
         <span className="block">{t("stepScopes")}</span>
         <Chips items={WORKABLE_SCOPES} />
       </li>
-      <li>{t("stepPaste")}</li>
+      <li>{t("stepPaste", { ats: "Workable" })}</li>
     </ol>
   )
 }
@@ -88,6 +89,22 @@ export function TeamtailorSteps() {
         <Chips items={TEAMTAILOR_KEY_ACCESS} />
       </li>
       <li>{t("ttStepPaste")}</li>
+    </ol>
+  )
+}
+
+/** Where to make the personal API token in Recruitee, step by step. */
+export function RecruiteeSteps() {
+  const t = useTranslations("ats")
+
+  return (
+    <ol className="list-decimal space-y-3 ps-5 text-base text-muted-foreground">
+      <li className="space-y-1.5">
+        <span className="block">{t("stepOpen", { ats: "Recruitee" })}</span>
+        <Chips items={RECRUITEE_TOKEN_PATH} path />
+      </li>
+      <li>{t("rcStepCreate")}</li>
+      <li>{t("stepPaste", { ats: "Recruitee" })}</li>
     </ol>
   )
 }

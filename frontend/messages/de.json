@@ -987,8 +987,8 @@
     "connectTitle": "{ats} verbinden",
     "stepOpen": "Öffne in {ats}:",
     "stepScopes": "Erstelle ein Token mit diesen Berechtigungen:",
-    "stepPaste": "Füge das Token unten ein, zusammen mit deiner Workable-Adresse.",
-    "account": "Workable-Adresse",
+    "stepPaste": "Füge das Token unten ein, zusammen mit deiner {ats}-Adresse.",
+    "account": "{ats}-Adresse",
     "token": "API-Zugriffstoken",
     "connectFailed": "{ats} konnte nicht verbunden werden.",
     "disconnectTitle": "{ats} trennen?",
@@ -1046,6 +1046,11 @@
     "saveKey": "Schlüssel speichern",
     "keySaved": "Schlüssel gespeichert",
     "keySaveFailed": "Der Schlüssel konnte nicht gespeichert werden.",
-    "instructions": "Anleitung"
+    "instructions": "Anleitung",
+    "rcStepCreate": "Erstelle das Token als Admin, der alle Stellen sieht: Es handelt in deinem Namen, und Ergebnisse werden unter deinem Namen eingetragen.",
+    "rcToken": "API-Token",
+    "notConnected": "{ats} ist noch nicht verbunden. Verbinde es, um seine Stellen mit deinen Interviews zu verknüpfen.",
+    "webhookSecretName": "Secret",
+    "webhookPasteSecret": "Speichere ihn, dann füge hier das Secret ein, das {ats} dafür anzeigt:"
   }
 }

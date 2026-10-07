@@ -978,8 +978,8 @@
     "connectTitle": "连接 {ats}",
     "stepOpen": "在 {ats} 中打开：",
     "stepScopes": "生成一个具有以下权限范围的令牌：",
-    "stepPaste": "将令牌粘贴到下方，并填写你的 Workable 地址。",
-    "account": "Workable 地址",
+    "stepPaste": "将令牌粘贴到下方，并填写你的 {ats} 地址。",
+    "account": "{ats} 地址",
     "token": "API 访问令牌",
     "connectFailed": "无法连接 {ats}。",
     "disconnectTitle": "断开 {ats}？",
@@ -1037,6 +1037,11 @@
     "saveKey": "保存密钥",
     "keySaved": "密钥已保存",
     "keySaveFailed": "无法保存密钥。",
-    "instructions": "说明"
+    "instructions": "说明",
+    "rcStepCreate": "以能看到所有职位的管理员身份创建令牌：令牌以你的身份操作，结果也以你的名义写入。",
+    "rcToken": "API 令牌",
+    "notConnected": "{ats} 尚未连接。连接后即可将其职位关联到你的面试。",
+    "webhookSecretName": "密钥",
+    "webhookPasteSecret": "保存后，将 {ats} 为它显示的密钥粘贴到这里："
   }
 }

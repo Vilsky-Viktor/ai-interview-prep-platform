@@ -987,8 +987,8 @@
     "connectTitle": "Collega {ats}",
     "stepOpen": "In {ats}, apri:",
     "stepScopes": "Genera un token con questi permessi:",
-    "stepPaste": "Incolla qui sotto il token, con il tuo indirizzo Workable.",
-    "account": "Indirizzo Workable",
+    "stepPaste": "Incolla qui sotto il token, con il tuo indirizzo {ats}.",
+    "account": "Indirizzo {ats}",
     "token": "Token di accesso API",
     "connectFailed": "Impossibile collegare {ats}.",
     "disconnectTitle": "Scollegare {ats}?",
@@ -1046,6 +1046,11 @@
     "saveKey": "Salva chiave",
     "keySaved": "Chiave salvata",
     "keySaveFailed": "Impossibile salvare la chiave.",
-    "instructions": "Istruzioni"
+    "instructions": "Istruzioni",
+    "rcStepCreate": "Crea il token come amministratore che vede tutte le posizioni: agisce a tuo nome, e i risultati vengono scritti a tuo nome.",
+    "rcToken": "Token API",
+    "notConnected": "{ats} non è ancora collegato. Collegalo per associare le sue posizioni ai tuoi colloqui.",
+    "webhookSecretName": "Secret",
+    "webhookPasteSecret": "Salvalo, poi incolla qui il secret che {ats} ti mostra:"
   }
 }

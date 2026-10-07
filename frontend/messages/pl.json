@@ -987,8 +987,8 @@
     "connectTitle": "Połącz {ats}",
     "stepOpen": "W {ats} otwórz:",
     "stepScopes": "Wygeneruj token z tymi uprawnieniami:",
-    "stepPaste": "Wklej token poniżej razem z adresem Workable.",
-    "account": "Adres Workable",
+    "stepPaste": "Wklej token poniżej razem z adresem {ats}.",
+    "account": "Adres {ats}",
     "token": "Token dostępu do API",
     "connectFailed": "Nie udało się połączyć {ats}.",
     "disconnectTitle": "Odłączyć {ats}?",
@@ -1046,6 +1046,11 @@
     "saveKey": "Zapisz klucz",
     "keySaved": "Zapisano klucz",
     "keySaveFailed": "Nie udało się zapisać klucza.",
-    "instructions": "Instrukcja"
+    "instructions": "Instrukcja",
+    "rcStepCreate": "Utwórz token jako administrator, który widzi wszystkie oferty: token działa w Twoim imieniu, a wyniki są zapisywane w Twoim imieniu.",
+    "rcToken": "Token API",
+    "notConnected": "{ats} nie jest jeszcze połączony. Połącz go, aby powiązać jego oferty ze swoimi rozmowami.",
+    "webhookSecretName": "Sekret",
+    "webhookPasteSecret": "Zapisz go, a potem wklej tutaj sekret, który {ats} dla niego pokazuje:"
   }
 }

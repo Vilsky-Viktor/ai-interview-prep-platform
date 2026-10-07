@@ -983,8 +983,8 @@
     "connectTitle": "{ats} koppelen",
     "stepOpen": "Open in {ats}:",
     "stepScopes": "Maak een token aan met deze rechten:",
-    "stepPaste": "Plak het token hieronder, met je Workable-adres.",
-    "account": "Workable-adres",
+    "stepPaste": "Plak het token hieronder, met je {ats}-adres.",
+    "account": "{ats}-adres",
     "token": "API-toegangstoken",
     "connectFailed": "{ats} kon niet worden gekoppeld.",
     "disconnectTitle": "{ats} ontkoppelen?",
@@ -1042,6 +1042,11 @@
     "saveKey": "Sleutel opslaan",
     "keySaved": "Sleutel opgeslagen",
     "keySaveFailed": "De sleutel kon niet worden opgeslagen.",
-    "instructions": "Instructies"
+    "instructions": "Instructies",
+    "rcStepCreate": "Maak het token aan als beheerder die alle vacatures ziet: het handelt namens jou, en resultaten worden op jouw naam geschreven.",
+    "rcToken": "API-token",
+    "notConnected": "{ats} is nog niet gekoppeld. Koppel het om de vacatures ervan aan je interviews te verbinden.",
+    "webhookSecretName": "Secret",
+    "webhookPasteSecret": "Sla hem op en plak hier het secret dat {ats} ervoor toont:"
   }
 }

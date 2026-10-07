@@ -987,8 +987,8 @@
     "connectTitle": "Hubungkan {ats}",
     "stepOpen": "Di {ats}, buka:",
     "stepScopes": "Buat token dengan cakupan izin ini:",
-    "stepPaste": "Tempel token di bawah, bersama alamat Workable kamu.",
-    "account": "Alamat Workable",
+    "stepPaste": "Tempel token di bawah, bersama alamat {ats} kamu.",
+    "account": "Alamat {ats}",
     "token": "Token akses API",
     "connectFailed": "{ats} tidak bisa dihubungkan.",
     "disconnectTitle": "Putuskan {ats}?",
@@ -1046,6 +1046,11 @@
     "saveKey": "Simpan kunci",
     "keySaved": "Kunci tersimpan",
     "keySaveFailed": "Kunci tidak bisa disimpan.",
-    "instructions": "Petunjuk"
+    "instructions": "Petunjuk",
+    "rcStepCreate": "Buat token sebagai admin yang bisa melihat semua lowongan: token ini bertindak atas namamu, dan hasilnya ditulis atas namamu.",
+    "rcToken": "Token API",
+    "notConnected": "{ats} belum terhubung. Hubungkan untuk menautkan lowongannya ke wawancaramu.",
+    "webhookSecretName": "Secret",
+    "webhookPasteSecret": "Simpan, lalu tempel di sini secret yang ditampilkan {ats} untuknya:"
   }
 }

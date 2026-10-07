@@ -991,8 +991,8 @@
     "connectTitle": "I-connect ang {ats}",
     "stepOpen": "Sa {ats}, buksan ang:",
     "stepScopes": "Gumawa ng token na may mga scope na ito:",
-    "stepPaste": "I-paste ang token sa ibaba, kasama ang Workable address mo.",
-    "account": "Workable address",
+    "stepPaste": "I-paste ang token sa ibaba, kasama ang {ats} address mo.",
+    "account": "{ats} address",
     "token": "API access token",
     "connectFailed": "Hindi ma-connect ang {ats}.",
     "disconnectTitle": "I-disconnect ang {ats}?",
@@ -1050,6 +1050,11 @@
     "saveKey": "I-save ang key",
     "keySaved": "Na-save na ang key",
     "keySaveFailed": "Hindi ma-save ang key.",
-    "instructions": "Mga tagubilin"
+    "instructions": "Mga tagubilin",
+    "rcStepCreate": "Gumawa ng token bilang admin na nakikita ang lahat ng job: kikilos ito bilang ikaw, at sa pangalan mo isusulat ang mga resulta.",
+    "rcToken": "API token",
+    "notConnected": "Hindi pa naka-connect ang {ats}. I-connect ito para ma-link ang mga job nito sa mga interview mo.",
+    "webhookSecretName": "Secret",
+    "webhookPasteSecret": "I-save ito, saka i-paste dito ang secret na ipinapakita ng {ats} para rito:"
   }
 }

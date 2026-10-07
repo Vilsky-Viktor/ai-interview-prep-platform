@@ -991,8 +991,8 @@
     "connectTitle": "{ats} に接続",
     "stepOpen": "{ats} で次を開きます：",
     "stepScopes": "次のスコープでトークンを生成します：",
-    "stepPaste": "下にトークンを貼り付け、Workable のアドレスも入力してください。",
-    "account": "Workable のアドレス",
+    "stepPaste": "下にトークンを貼り付け、{ats} のアドレスも入力してください。",
+    "account": "{ats} のアドレス",
     "token": "API アクセストークン",
     "connectFailed": "{ats} に接続できませんでした。",
     "disconnectTitle": "{ats} の接続を解除しますか？",
@@ -1050,6 +1050,11 @@
     "saveKey": "キーを保存",
     "keySaved": "キーを保存しました",
     "keySaveFailed": "キーを保存できませんでした。",
-    "instructions": "手順"
+    "instructions": "手順",
+    "rcStepCreate": "すべての求人を閲覧できる管理者としてトークンを作成します。トークンはあなたとして動作し、結果もあなたの名前で書き込まれます。",
+    "rcToken": "API トークン",
+    "notConnected": "{ats} はまだ接続されていません。接続すると、{ats} の求人を面接に紐付けられます。",
+    "webhookSecretName": "シークレット",
+    "webhookPasteSecret": "保存したら、{ats} に表示されるシークレットをここに貼り付けます："
   }
 }
