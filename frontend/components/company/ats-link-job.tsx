@@ -52,7 +52,7 @@ export function LinkJob({
   // The job's text for a new interview, once loaded.
   const [jobText, setJobText] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
-  const base = `/companies/ats/${provider.id}/jobs`
+  const base = `/ats/${provider.id}/jobs`
 
   async function openDialog(next: boolean) {
     if (saving) {
@@ -119,7 +119,7 @@ export function LinkJob({
   }
 
   async function saveLink(interviewId: string) {
-    await apiFetch(`/companies/ats/links?company_id=${companyId}`, {
+    await apiFetch(`/ats/links?company_id=${companyId}`, {
       method: "POST",
       body: JSON.stringify({
         provider: provider.id,

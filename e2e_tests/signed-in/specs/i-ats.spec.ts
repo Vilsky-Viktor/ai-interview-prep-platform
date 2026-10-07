@@ -1,7 +1,7 @@
 import { expect, test } from "../fixtures"
 import { createCompany, createInterview } from "../helpers/api"
 import { addAtsConnection } from "../helpers/db"
-import { visit } from "../helpers/navigation"
+import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"
 
@@ -24,7 +24,7 @@ test("an owner sees how to connect Workable and manages its linked jobs", async 
   await expect(owner.getByText("connected", { exact: true })).toHaveCount(0)
 
   // The candidate flow, explained before connecting.
-  await owner.getByRole("button", { name: "How candidates come from Workable" }).click()
+  await openDialog(owner, owner.getByRole("button", { name: "How candidates come from Workable" }))
   await expect(owner.getByRole("dialog").getByRole("listitem")).toHaveCount(6)
   await shot(owner, "candidate-flow")
   await owner.keyboard.press("Escape")
@@ -57,13 +57,13 @@ test("an owner sees how to connect Workable and manages its linked jobs", async 
   await shot(owner, "workable-page")
 
   // A new interview from a Workable job starts from the job's own text, which can be edited.
-  await owner.route("**/api/companies/ats/workable/jobs?*", (route) =>
+  await owner.route("**/api/ats/workable/jobs?*", (route) =>
     route.fulfill({ json: [{ id: "J1", name: "Senior Accountant" }] })
   )
-  await owner.route("**/api/companies/ats/workable/jobs/J1/stages?*", (route) =>
+  await owner.route("**/api/ats/workable/jobs/J1/stages?*", (route) =>
     route.fulfill({ json: [{ id: "assessment", name: "Assessment" }] })
   )
-  await owner.route("**/api/companies/ats/workable/jobs/J1/text?*", (route) =>
+  await owner.route("**/api/ats/workable/jobs/J1/text?*", (route) =>
     route.fulfill({ json: { text: "Senior Accountant\n\nOwn our monthly close." } })
   )
   await owner.getByRole("button", { name: "Link a job" }).click()
@@ -79,7 +79,8 @@ test("an owner sees how to connect Workable and manages its linked jobs", async 
   await shot(owner, "new-interview-from-job")
   await owner.keyboard.press("Escape")
 
-  // Unlinking asks first, then the job is gone.
+  // Unlinking asks first, then the job is gone. (The link dialog finishes closing first.)
+  await expect(owner.getByRole("dialog")).toHaveCount(0)
   await owner.getByRole("button", { name: "Unlink" }).click()
   await owner.getByRole("dialog").getByRole("button", { name: "Unlink" }).click()
   await expect(owner.getByText("No linked jobs yet.")).toBeVisible()

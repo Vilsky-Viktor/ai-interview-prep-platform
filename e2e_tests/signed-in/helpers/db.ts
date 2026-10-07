@@ -82,11 +82,11 @@ export async function deleteTemplate(id: string) {
   await withDatabase("library", (client) => client.query("DELETE FROM sets WHERE id = $1", [id]))
 }
 
-/** An ATS connection for a throwaway company, saved straight into the companies database
- * (a real one needs an ATS account), with one job linked to `interviewId`. Workable's key is a
- * placeholder, so anything that calls Workable with it marks it broken; Greenhouse's is sealed
- * for real, as its page shows the web hook's secret key from it. Deleting the company deletes
- * both. */
+/** An ATS connection for a throwaway company, saved straight into the ats database (a real one
+ * needs an ATS account), with one job linked to `interviewId`. Workable's key is a placeholder,
+ * so anything that calls Workable with it marks it broken; Greenhouse's is sealed for real, as
+ * its page shows the web hook's secret key from it. Deleting the company deletes both (the ats
+ * service handles its company.deleted event). */
 export async function addAtsConnection(
   companyId: string,
   interviewId: string,
@@ -105,7 +105,7 @@ export async function addAtsConnection(
       )
     : "placeholder"
 
-  await withDatabase("companies", async (client) => {
+  await withDatabase("ats", async (client) => {
     const connection = await client.query(
       `INSERT INTO ats_connections (id, company_id, provider, account, credentials, status,
          created_by, created_at)

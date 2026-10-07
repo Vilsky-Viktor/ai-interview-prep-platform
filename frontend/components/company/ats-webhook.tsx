@@ -20,7 +20,7 @@ export function GreenhouseWebhook({ companyId }: { companyId: string }) {
 
   useEffect(() => {
     apiFetch<{ url: string; secret: string }>(
-      `/companies/ats/greenhouse/webhook?company_id=${companyId}`
+      `/ats/greenhouse/webhook?company_id=${companyId}`
     )
       .then(setWebhook)
       .catch((error) =>

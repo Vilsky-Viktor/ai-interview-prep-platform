@@ -28,7 +28,7 @@ export default async function IntegrationsPage({
     : null
   const integrations = company
     ? await serverFetch<AtsIntegrations>(
-        `/companies/ats?company_id=${companyId}`
+        `/ats/connections?company_id=${companyId}`
       )
     : null
 

@@ -116,7 +116,7 @@ export function AtsActions({
     setBusy(true)
 
     try {
-      await apiFetch(`/companies/ats/${provider.id}?company_id=${companyId}`, {
+      await apiFetch(`/ats/${provider.id}?company_id=${companyId}`, {
         method: "DELETE",
       })
       setConfirming(false)

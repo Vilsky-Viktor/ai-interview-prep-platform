@@ -2,7 +2,7 @@ import { expect, test } from "../fixtures"
 import { GREENHOUSE_E2E_SECRET } from "../constants"
 import { createCompany, createInterview } from "../helpers/api"
 import { addAtsConnection } from "../helpers/db"
-import { visit } from "../helpers/navigation"
+import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"
 
@@ -27,8 +27,10 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
   await visit(owner, `${tab}/greenhouse`)
 
   // Not connected: the info dialog has no web hook yet.
-  const info = owner.getByRole("button", { name: "How candidates come from Greenhouse" })
-  await info.click()
+  await openDialog(
+    owner,
+    owner.getByRole("button", { name: "How candidates come from Greenhouse" })
+  )
   await expect(owner.getByRole("dialog").getByRole("listitem")).toHaveCount(6)
   await expect(owner.getByText("Set up the web hook")).toHaveCount(0)
   await owner.keyboard.press("Escape")
@@ -41,7 +43,7 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
   await connect.getByRole("textbox", { name: "Client ID" }).fill("e2e")
   await connect.getByLabel("Client secret").fill("e2e")
   await shot(owner, "connect")
-  await owner.route("**/api/companies/ats/greenhouse?*", async (route) => {
+  await owner.route("**/api/ats/greenhouse?*", async (route) => {
     if (route.request().method() !== "PUT") {
       return route.fallback()
     }
@@ -56,7 +58,7 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
   await expect(dialog.getByText("Set up the web hook")).toBeVisible()
   await expect(dialog.getByText("Candidate or Prospect Stage Change")).toBeVisible()
   await expect(dialog.getByRole("textbox", { name: "Copy URL" })).toHaveValue(
-    /\/api\/companies\/webhooks\/ats\/greenhouse\/[0-9a-f-]{36}$/
+    /\/api\/ats\/webhooks\/greenhouse\/[0-9a-f-]{36}$/
   )
   await expect(dialog.getByRole("textbox", { name: "Copy key" })).toHaveValue(
     GREENHOUSE_E2E_SECRET

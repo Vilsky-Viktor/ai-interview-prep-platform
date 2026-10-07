@@ -1,9 +1,11 @@
+import type { components as ats } from "@/types/api/ats"
 import type { components as companies } from "@/types/api/companies"
 import type { components as rounds } from "@/types/api/rounds"
 import type { ReviewItem } from "@/types/round"
 
 type Schemas = companies["schemas"]
 type RoundSchemas = rounds["schemas"]
+type AtsSchemas = ats["schemas"]
 
 export type Company = Schemas["CompanyOut"]
 export type CompanyBalance = Schemas["CompanyBalanceOut"]
@@ -27,10 +29,10 @@ export type SessionAnswerResult = RoundSchemas["SessionAnswerResult"] & {
   option_index?: number | null
 }
 export type CompanyReferral = Schemas["ReferralOut"]
-export type AtsIntegrations = Schemas["IntegrationsOut"]
-export type AtsConnection = Schemas["ConnectionOut"]
-export type AtsItem = Schemas["AtsItemOut"]
-export type AtsJobLink = Schemas["JobLinkOut"]
+export type AtsIntegrations = AtsSchemas["IntegrationsOut"]
+export type AtsConnection = AtsSchemas["ConnectionOut"]
+export type AtsItem = AtsSchemas["AtsItemOut"]
+export type AtsJobLink = AtsSchemas["JobLinkOut"]
 
 /** A candidate's result as the PDF report and the shared summary show it. */
 export type CandidateReportData = {

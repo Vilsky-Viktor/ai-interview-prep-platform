@@ -91,12 +91,9 @@ function LinkRow({
     setBusy(true)
 
     try {
-      await apiFetch(
-        `/companies/ats/links/${link.id}?company_id=${companyId}`,
-        {
-          method: "DELETE",
-        }
-      )
+      await apiFetch(`/ats/links/${link.id}?company_id=${companyId}`, {
+        method: "DELETE",
+      })
       setConfirming(false)
       router.refresh()
     } catch (error) {
@@ -198,10 +195,9 @@ function NotInvited({
     setBusy(true)
 
     try {
-      await apiFetch(
-        `/companies/ats/links/${link.id}/retry?company_id=${companyId}`,
-        { method: "POST" }
-      )
+      await apiFetch(`/ats/links/${link.id}/retry?company_id=${companyId}`, {
+        method: "POST",
+      })
       router.refresh()
     } catch (error) {
       toast.error(apiErrorMessage(error, t("inviteAgainFailed")))

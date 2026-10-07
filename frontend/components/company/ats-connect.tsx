@@ -66,7 +66,7 @@ export function ConnectAts({
     setSaving(true)
 
     try {
-      await apiFetch(`/companies/ats/${provider.id}?company_id=${companyId}`, {
+      await apiFetch(`/ats/${provider.id}?company_id=${companyId}`, {
         method: "PUT",
         body: JSON.stringify(values),
       })

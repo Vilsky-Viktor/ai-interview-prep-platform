@@ -21,6 +21,8 @@ export const WARM_UP_PATHS = [
   `/companies/${SOME_ID}/interviews/${SOME_ID}`,
   `/companies/${SOME_ID}/templates`,
   `/companies/${SOME_ID}/members`,
+  `/companies/${SOME_ID}/integrations`,
+  `/companies/${SOME_ID}/integrations/workable`,
   `/invite/${SOME_ID}`,
   `/join/${SOME_ID}`,
   `/sessions/${SOME_ID}`,

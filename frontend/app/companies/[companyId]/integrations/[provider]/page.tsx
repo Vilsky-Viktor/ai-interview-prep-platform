@@ -44,10 +44,10 @@ export default async function AtsPage({ params }: { params: Params }) {
     : null
   const [integrations, links, interviews] = company
     ? await Promise.all([
-        serverFetch<AtsIntegrations>(`/companies/ats?company_id=${companyId}`),
-        serverFetch<AtsJobLink[]>(
-          `/companies/ats/links?company_id=${companyId}`
+        serverFetch<AtsIntegrations>(
+          `/ats/connections?company_id=${companyId}`
         ),
+        serverFetch<AtsJobLink[]>(`/ats/links?company_id=${companyId}`),
         serverFetch<Interview[]>(
           `/companies/interviews?company_id=${companyId}&limit=100`
         ),
