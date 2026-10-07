@@ -23,3 +23,17 @@ async def company_ids(user_id: str) -> list[str]:
     response.raise_for_status()
 
     return response.json()["company_ids"]
+
+
+async def access(company_id: str, user_id: str) -> dict:
+    """Whether the user is a member of the company, and an editor (owner or admin); a company
+    that doesn't exist answers 404."""
+    response = await http.get_client().get(
+        f"{settings.companies_url}/internal/companies/{company_id}/access",
+        params={"user_id": user_id},
+        headers={"Authorization": f"Bearer {service_token('companies')}"},
+    )
+
+    response.raise_for_status()
+
+    return response.json()

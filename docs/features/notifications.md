@@ -24,6 +24,47 @@ Only what matters, for every member of a company:
 
 Companies' verification decisions and ATS candidates that couldn't be invited (`ats_not_invited`) reach owners and admins in the bell too (see [Companies](companies.md#verification) and [ATS integrations](ats.md#candidates-from-workable)).
 
+## Slack
+
+A company can send its notifications to one Slack channel too, from its integrations tab (Messaging, above the ATSs).
+
+- An owner or admin clicks "Add to Slack", allows prepza in Slack and picks the channel. Back on the company's Slack page, they choose which notifications go there. By default: finished candidates, ATS candidates that weren't invited, undelivered invites and failed automatic top-ups; ready interviews and charged top-ups can be added.
+- prepza gets only an incoming web hook for that channel (the `incoming-webhook` scope): it can post there and can't read anything.
+- Each new notification is posted once, in English, with a link back to prepza. A redelivered event doesn't post again.
+- If Slack says the web hook is gone (the app was removed or the channel deleted), the page shows "Reconnect". Other Slack errors are logged and that message is skipped; the bell always gets it.
+- Disconnecting, or deleting the company, removes prepza's app from the workspace and the channel from prepza.
+- Members who can't edit see the channel and its notifications without changing them.
+
+### Setting up Slack
+
+1. At api.slack.com/apps, create an app "From a manifest" with:
+   ```yaml
+   display_information:
+     name: prepza
+     description: Hiring notifications from prepza
+   oauth_config:
+     redirect_urls:
+       - https://<your domain>/api/notifications/slack/callback
+     scopes:
+       bot:
+         - incoming-webhook
+   settings:
+     org_deploy_enabled: false
+     socket_mode_enabled: false
+     token_rotation_enabled: false
+   ```
+   Add `http://localhost:8090/api/notifications/slack/callback` to `redirect_urls` for local use.
+2. Under **Manage Distribution**, activate public distribution, so other companies' workspaces can add it.
+3. Put its **Client ID** and **Client Secret** (Basic Information) in `.env` as `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET`.
+4. Set `SLACK_ENCRYPTION_KEY`, the Fernet key that encrypts the web hooks:
+   ```bash
+   python3 -c "import base64,os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())"
+   ```
+   Keep it: a new key makes every company reconnect.
+5. Restart notifications.
+
+Until all three are set, "Add to Slack" answers "Slack isn't set up yet" and nothing is posted.
+
 ### Grouping
 
 Bursts are grouped. Another finished candidate, undelivered invite, or flagged or fixed question about the same interview within 24 hours adds to the last notification ("3 candidates finished …") instead of making a new one.

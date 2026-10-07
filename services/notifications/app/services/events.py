@@ -17,6 +17,7 @@ from app.helpers.emails import (
 )
 from app.integrations import resend, smtp
 from app.models.email import Email
+from app.services import slack
 from app.services.feed import announce
 from app.services.webhooks import report_undelivered
 from app.storage import notifications
@@ -51,6 +52,9 @@ async def notify(data: dict, event_id: str) -> None:
     if not await notifications.add(event_id, data):
         return
 
+    # New, so it's posted once: also to the company's Slack channel, if it chose it.
+    await slack.deliver(data)
+
     try:
         await announce(data["recipient"], data["recipient_id"])
     except Exception:
@@ -73,6 +77,7 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
 
     if event_type == COMPANY_DELETED:
         await notifications.remove_company(data["company_id"])
+        await slack.disconnect(data["company_id"])
 
     if event_type == CONTACT_SENT:
         await deliver(contact_email(data, settings.contact_email), event_id)

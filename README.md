@@ -16,6 +16,7 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 - **Teams and verified companies:** owners, admins and viewers; a check next to a verified company's name.
 - **Questions that fix themselves:** answers, votes and reports flag weak questions, and a verifier fixes them.
 - **ATS integrations:** candidates from Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR are invited automatically, and results go back.
+- **Slack:** a company picks a channel and which of its notifications go there.
 - **Pay per candidate:** credits that never expire, from $1 per candidate, with no subscription.
 - **Free practice:** people preparing for a role practise on the templates' revealed questions.
 - **23 languages:** the interface, generated interviews and emails.
@@ -45,7 +46,7 @@ Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emula
 | [Templates and practice](docs/features/templates-and-practice.md) | The question bank, copying templates, slugs, free practice |
 | [Credits and payments](docs/features/billing.md) | Credits, top-ups, automatic top-up, referrals, setting up Paddle |
 | [ATS integrations](docs/features/ats.md) | Connecting Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR, linked jobs, results back to the ATS |
-| [Notifications and emails](docs/features/notifications.md) | The bell, emails, setting up Resend |
+| [Notifications and emails](docs/features/notifications.md) | The bell, emails, Slack, setting up Resend and Slack |
 | [Admin zone](docs/features/admin-zone.md) | Superadmins' templates, quality, pass rates, stats, pause and maintenance mode |
 | [Public site](docs/features/site.md) | Home page, skills tests, articles, FAQ and help chat, legal pages, contact, SEO |
 | [Languages](docs/features/languages.md) | The 23 languages, language addresses, fonts, right-to-left |

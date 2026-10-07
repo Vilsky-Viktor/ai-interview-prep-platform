@@ -50,6 +50,7 @@ Settings are described with the feature they shape:
 | Email limits | [Candidates](features/candidates.md#email-limits) |
 | Help chat and contact form limits | [Public site](features/site.md#faq-and-help-chat) |
 | `ATS_ENCRYPTION_KEY` | [ATS integrations](features/ats.md#connecting-an-ats) |
+| `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET`, `SLACK_ENCRYPTION_KEY` | [Notifications and emails](features/notifications.md#setting-up-slack) |
 | `SUPERADMIN_EMAILS` | [Admin zone](features/admin-zone.md) |
 | `ANALYTICS_SALT` | [Architecture](architecture.md#funnel-events) |
 | Sentry, search engine verification | [Deployment](deployment.md#error-reporting) and [Public site](features/site.md#search-engines) |

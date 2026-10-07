@@ -3,7 +3,8 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import create_engine
 
-import app.models.notifications  # noqa: F401  registers the tables on Base.metadata
+import app.models.notifications
+import app.models.slack  # noqa: F401
 from app.config.settings import settings
 from app.models.base import Base
 

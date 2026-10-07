@@ -24,6 +24,11 @@ class Settings(ServiceSettings):
     # Companies owns the invites, told when an invite's email wasn't delivered, and says which
     # companies a user belongs to, whose notifications they see.
     companies_url: str
+    # prepza's Slack app (api.slack.com: incoming-webhook scope), and the Fernet key that seals
+    # each company's web hook. Without all three, Slack isn't offered.
+    slack_client_id: str = ""
+    slack_client_secret: str = ""
+    slack_encryption_key: str = ""
 
     @property
     def sqlalchemy_url(self) -> str:
