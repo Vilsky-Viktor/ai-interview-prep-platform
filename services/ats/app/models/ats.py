@@ -1,0 +1,91 @@
+import uuid
+from datetime import UTC, datetime
+
+from sqlalchemy import DateTime, ForeignKey, String, Text, UniqueConstraint
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.constants.ats import CandidateStatus, ConnectionStatus
+from app.models.base import Base
+
+
+class AtsConnection(Base):
+    """A company's connection to its applicant tracking system: one per company and ATS."""
+
+    __tablename__ = "ats_connections"
+    __table_args__ = (UniqueConstraint("company_id", "provider"),)
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    # The company, in the companies service.
+    company_id: Mapped[uuid.UUID] = mapped_column(index=True)
+    provider: Mapped[str] = mapped_column(String(32))
+    # What the company sees it connected as (Workable's subdomain).
+    account: Mapped[str] = mapped_column(String(200))
+    # The ATS key, encrypted (helpers/encryption.py); never returned to the browser.
+    credentials: Mapped[str] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(String(16), default=ConnectionStatus.CONNECTED)
+    # The Workable member results are written back as (comments need an author).
+    member_id: Mapped[str | None] = mapped_column(String(100))
+    # Who connected it: their invites and limits apply to candidates the ATS sends.
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
+
+
+class AtsJobLink(Base):
+    """An ATS job linked to a prepza interview: candidates who reach `stage_id` in that job get
+    the interview."""
+
+    __tablename__ = "ats_job_links"
+    __table_args__ = (UniqueConstraint("connection_id", "job_id"),)
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    connection_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("ats_connections.id", ondelete="CASCADE"), index=True
+    )
+    # The interview, in the companies service: its interview.deleted event removes this row.
+    interview_id: Mapped[uuid.UUID] = mapped_column(index=True)
+    # The ATS's own ids, and their names as they were when linked.
+    job_id: Mapped[str] = mapped_column(String(100))
+    job_name: Mapped[str] = mapped_column(String(300))
+    stage_id: Mapped[str] = mapped_column(String(100))
+    stage_name: Mapped[str] = mapped_column(String(200))
+    # The ATS's notification for this job and stage, cancelled when the link goes.
+    subscription_id: Mapped[str | None] = mapped_column(String(100))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
+
+
+class AtsCandidate(Base):
+    """A candidate the ATS sent for an interview: one row per candidate and interview, so a
+    repeated or simultaneous event invites them once. Kept after an unlink, for writing their
+    results back."""
+
+    __tablename__ = "ats_candidates"
+    __table_args__ = (UniqueConstraint("connection_id", "candidate_id", "interview_id"),)
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    connection_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("ats_connections.id", ondelete="CASCADE"), index=True
+    )
+    # The interview, in the companies service: its interview.deleted event removes this row.
+    interview_id: Mapped[uuid.UUID] = mapped_column(index=True)
+    link_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("ats_job_links.id", ondelete="SET NULL")
+    )
+    # The ATS's own candidate id, and who they are.
+    candidate_id: Mapped[str] = mapped_column(String(100))
+    email: Mapped[str] = mapped_column(String(320))
+    status: Mapped[str] = mapped_column(String(16), default=CandidateStatus.WAITING)
+    # When an invite was last started (status inviting): one left too long was cut off.
+    claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # Why they weren't invited (constants/ats.py FailReason).
+    reason: Mapped[str | None] = mapped_column(String(16))
+    # The candidate's invite, in the companies service.
+    invite_id: Mapped[uuid.UUID | None] = mapped_column(index=True)
+    # When their results went back to the ATS: once.
+    reported_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
