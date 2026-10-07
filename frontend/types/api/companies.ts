@@ -420,7 +420,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/ats/candidates/retry": {
+  "/ats/links/{link_id}/retry": {
     parameters: {
       query?: never
       header?: never
@@ -431,10 +431,10 @@ export interface paths {
     put?: never
     /**
      * Retry Candidates
-     * @description Invites again the candidates the ATS sent who weren't invited (after a top-up, or once
-     *     the pause is off).
+     * @description Invites again the candidates the ATS sent for this job who weren't invited (after a
+     *     top-up, or once the pause is off).
      */
-    post: operations["retry_candidates_ats_candidates_retry_post"]
+    post: operations["retry_candidates_ats_links__link_id__retry_post"]
     delete?: never
     options?: never
     head?: never
@@ -1222,8 +1222,9 @@ export interface paths {
     put?: never
     /**
      * Invite Reminders
-     * @description Daily, from Cloud Scheduler: candidates who haven't started get one reminder; none during
-     *     the emergency pause, as they couldn't start (they're reminded once it's off).
+     * @description Daily, from Cloud Scheduler: candidates who haven't started get one reminder, and ATS
+     *     invites cut off midway start again; neither during the emergency pause (they run once it's
+     *     off).
      */
     post: operations["invite_reminders_internal_schedules_invite_reminders_post"]
     delete?: never
@@ -3325,13 +3326,15 @@ export interface operations {
       }
     }
   }
-  retry_candidates_ats_candidates_retry_post: {
+  retry_candidates_ats_links__link_id__retry_post: {
     parameters: {
       query: {
         company_id: string
       }
       header?: never
-      path?: never
+      path: {
+        link_id: string
+      }
       cookie?: never
     }
     requestBody?: never

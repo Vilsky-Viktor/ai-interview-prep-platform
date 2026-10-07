@@ -67,13 +67,21 @@ async def claim(row_id: UUID, statuses: tuple[str, ...]) -> bool:
     return claimed is not None
 
 
-async def stale(company_id: UUID | None = None) -> list[AtsCandidate]:
-    """Invites cut off midway, of one company or all, to start again."""
-    query = select(AtsCandidate).where(_stale())
+async def stale() -> list[AtsCandidate]:
+    """Invites cut off midway, to start again."""
+    async with Session() as session:
+        return list((await session.scalars(select(AtsCandidate).where(_stale()))).all())
 
-    if company_id is not None:
-        owned = select(AtsConnection.id).where(AtsConnection.company_id == company_id)
-        query = query.where(AtsCandidate.connection_id.in_(owned))
+
+async def not_invited(company_id: UUID, link_id: UUID) -> list[AtsCandidate]:
+    """A linked job's candidates that weren't invited, or whose invite was cut off midway; only
+    the company's own."""
+    owned = select(AtsConnection.id).where(AtsConnection.company_id == company_id)
+    query = select(AtsCandidate).where(
+        AtsCandidate.link_id == link_id,
+        AtsCandidate.connection_id.in_(owned),
+        or_(AtsCandidate.status == CandidateStatus.FAILED, _stale()),
+    )
 
     async with Session() as session:
         return list((await session.scalars(query)).all())
@@ -103,16 +111,11 @@ async def settle(
         await session.commit()
 
 
-async def with_status(status: str, *, interview_id=None, company_id=None) -> list[AtsCandidate]:
-    """The candidates in `status`, of one interview or of one company's connections."""
-    query = select(AtsCandidate).where(AtsCandidate.status == status)
-
-    if interview_id is not None:
-        query = query.where(AtsCandidate.interview_id == interview_id)
-
-    if company_id is not None:
-        owned = select(AtsConnection.id).where(AtsConnection.company_id == company_id)
-        query = query.where(AtsCandidate.connection_id.in_(owned))
+async def waiting(interview_id: UUID) -> list[AtsCandidate]:
+    """The candidates waiting for an interview to be ready."""
+    query = select(AtsCandidate).where(
+        AtsCandidate.status == CandidateStatus.WAITING, AtsCandidate.interview_id == interview_id
+    )
 
     async with Session() as session:
         return list((await session.scalars(query)).all())

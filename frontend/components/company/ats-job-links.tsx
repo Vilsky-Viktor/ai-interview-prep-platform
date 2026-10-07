@@ -1,6 +1,6 @@
 "use client"
 
-import { XIcon } from "lucide-react"
+import { UserRoundIcon, XIcon } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
@@ -10,6 +10,11 @@ import { toast } from "sonner"
 import { LinkJob } from "@/components/company/ats-link-job"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { Button } from "@/components/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { AtsJobLink, Interview } from "@/types/company"
 
@@ -29,7 +34,7 @@ export function AtsJobLinks({
   const t = useTranslations("ats")
 
   return (
-    <section className="space-y-4">
+    <section className="space-y-6">
       <div className="flex items-center justify-between gap-4">
         <div className="space-y-1">
           <h2 className="font-heading text-2xl font-medium">{t("links")}</h2>
@@ -103,19 +108,30 @@ function LinkRow({
             {link.interview_title ?? t("generatingInterview")}
           </Link>
         </span>
-        <CandidateCounts companyId={companyId} link={link} canEdit={canEdit} />
+        {link.waiting > 0 && (
+          <span className="block text-sm text-muted-foreground">
+            {t("waitingCount", { count: link.waiting })}
+          </span>
+        )}
       </span>
-      {canEdit && (
-        <Button
-          variant="ghost"
-          size="icon"
-          className="size-12 shrink-0 text-muted-foreground hover:text-destructive"
-          aria-label={t("unlink")}
-          onClick={() => setConfirming(true)}
-        >
-          <XIcon className="size-6" />
-        </Button>
-      )}
+      {/* The stats, then Unlink, together at the row's end. */}
+      <span className="flex shrink-0 items-center gap-4">
+        <InvitedCount count={link.invited} />
+        {link.not_invited > 0 && (
+          <NotInvited companyId={companyId} link={link} canEdit={canEdit} />
+        )}
+        {canEdit && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-12 shrink-0 text-muted-foreground hover:text-destructive"
+            aria-label={t("unlink")}
+            onClick={() => setConfirming(true)}
+          >
+            <XIcon className="size-6" />
+          </Button>
+        )}
+      </span>
       <ConfirmDialog
         open={confirming}
         onOpenChange={setConfirming}
@@ -129,9 +145,32 @@ function LinkRow({
   )
 }
 
-/** How the candidates Workable sent for this job went: invited, waiting for the interview to be
- * ready, and not invited (in red, with "Invite again" for owners and admins). */
-function CandidateCounts({
+/** Candidates invited from Workable for this job: an icon and the number, in a column of its own
+ * like a company's interview count, its meaning in a tooltip. */
+function InvitedCount({ count }: { count: number }) {
+  const t = useTranslations("ats")
+
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <span
+            className="me-6 flex items-center gap-1.5 text-sm text-muted-foreground tabular-nums"
+            aria-label={t("invitedCount", { count })}
+          />
+        }
+      >
+        <UserRoundIcon aria-hidden className="size-5" />
+        {count}
+      </TooltipTrigger>
+      <TooltipContent>{t("invitedCount", { count })}</TooltipContent>
+    </Tooltip>
+  )
+}
+
+/** Candidates Workable sent who weren't invited: their number in red, above "Invite again" for
+ * owners and admins, which tries this job's again (after a top-up, or once the pause is off). */
+function NotInvited({
   companyId,
   link,
   canEdit,
@@ -144,19 +183,13 @@ function CandidateCounts({
   const router = useRouter()
   const [busy, setBusy] = useState(false)
 
-  if (!link.invited && !link.waiting && !link.not_invited) {
-    return null
-  }
-
   async function retry() {
     setBusy(true)
 
     try {
       await apiFetch(
-        `/companies/ats/candidates/retry?company_id=${companyId}`,
-        {
-          method: "POST",
-        }
+        `/companies/ats/links/${link.id}/retry?company_id=${companyId}`,
+        { method: "POST" }
       )
       router.refresh()
     } catch (error) {
@@ -167,27 +200,19 @@ function CandidateCounts({
   }
 
   return (
-    <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-      {link.invited > 0 && (
-        <span>{t("invitedCount", { count: link.invited })}</span>
-      )}
-      {link.waiting > 0 && (
-        <span>{t("waitingCount", { count: link.waiting })}</span>
-      )}
-      {link.not_invited > 0 && (
-        <span className="text-destructive">
-          {t("notInvitedCount", { count: link.not_invited })}
-        </span>
-      )}
-      {link.not_invited > 0 && canEdit && (
-        <button
-          type="button"
+    <span className="flex flex-col items-center gap-2">
+      <span className="text-sm text-destructive">
+        {t("notInvitedCount", { count: link.not_invited })}
+      </span>
+      {canEdit && (
+        <Button
+          variant="outline"
+          className="h-10 px-5 text-base"
           disabled={busy}
           onClick={retry}
-          className="cursor-pointer text-primary lowercase transition-opacity hover:opacity-70 disabled:opacity-50"
         >
           {t("inviteAgain")}
-        </button>
+        </Button>
       )}
     </span>
   )

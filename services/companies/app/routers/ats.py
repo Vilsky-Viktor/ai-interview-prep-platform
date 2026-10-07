@@ -190,9 +190,9 @@ async def remove_link(company_id: UUID, link_id: UUID, user: CurrentUser) -> Non
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Link not found")
 
 
-@router.post("/candidates/retry", status_code=status.HTTP_204_NO_CONTENT)
-async def retry_candidates(company_id: UUID, user: CurrentUser) -> None:
-    """Invites again the candidates the ATS sent who weren't invited (after a top-up, or once
-    the pause is off)."""
+@router.post("/links/{link_id}/retry", status_code=status.HTTP_204_NO_CONTENT)
+async def retry_candidates(company_id: UUID, link_id: UUID, user: CurrentUser) -> None:
+    """Invites again the candidates the ATS sent for this job who weren't invited (after a
+    top-up, or once the pause is off)."""
     await require_editor(user, company_id)
-    await ats_candidates_service.retry(company_id)
+    await ats_candidates_service.retry(company_id, link_id)

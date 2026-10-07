@@ -47,7 +47,7 @@ test("an owner sees how to connect Workable and manages its linked jobs", async 
   await owner.getByRole("link", { name: /^Workable/ }).click()
   await expect(owner).toHaveURL(new RegExp(`${tab}/workable$`))
   await expect(owner.getByText("E2E Backend developer")).toBeVisible()
-  await expect(owner.getByText("3 invited")).toBeVisible()
+  await expect(owner.getByLabel("3 invited")).toBeVisible()
   await expect(owner.getByText("2 not invited")).toBeVisible()
   await expect(owner.getByRole("button", { name: "Invite again" })).toBeVisible()
   await shot(owner, "workable-page")

@@ -123,16 +123,13 @@ async def invite_all(rows: list[AtsCandidate]) -> None:
 
 async def invite_waiting(interview_id: UUID) -> None:
     """An interview just became ready: the candidates the ATS sent for it are invited."""
-    await invite_all(
-        await ats_candidates.with_status(CandidateStatus.WAITING, interview_id=interview_id)
-    )
+    await invite_all(await ats_candidates.waiting(interview_id))
 
 
-async def retry(company_id: UUID) -> None:
-    """The company's candidates that weren't invited, or whose invite was cut off, are tried
-    again (after a top-up)."""
-    failed = await ats_candidates.with_status(CandidateStatus.FAILED, company_id=company_id)
-    await invite_all(failed + await ats_candidates.stale(company_id))
+async def retry(company_id: UUID, link_id: UUID) -> None:
+    """A linked job's candidates that weren't invited, or whose invite was cut off, are tried
+    again (after a top-up, or once the pause is off)."""
+    await invite_all(await ats_candidates.not_invited(company_id, link_id))
 
 
 async def recover() -> int:

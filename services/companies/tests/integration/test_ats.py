@@ -82,7 +82,7 @@ def test_a_candidate_is_one_row_claimed_once_counted_and_reported_once(run):
         other = await ats_candidates.add(connection.id, link_id, interview.id, "c-2", "b@x.com")
         await ats_candidates.settle(other.id, CandidateStatus.FAILED, "credits")
         counts = await ats_candidates.counts(company.id)
-        failed = await ats_candidates.with_status(CandidateStatus.FAILED, company_id=company.id)
+        failed = await ats_candidates.not_invited(company.id, link_id)
         to_report = await ats_candidates.for_invite(invite.id)
         await ats_candidates.mark_reported(first.id)
         reported = await ats_candidates.for_invite(invite.id)
@@ -117,7 +117,7 @@ def test_an_invite_cut_off_midway_can_be_claimed_again_after_a_while(run):
         first = await ats_candidates.claim(row.id, (CandidateStatus.WAITING,))
         # Started just now: not stale, so nobody else may claim it.
         fresh = await ats_candidates.claim(row.id, (CandidateStatus.WAITING,))
-        stale_before = await ats_candidates.stale(company.id)
+        stale_before = [item for item in await ats_candidates.stale() if item.id == row.id]
 
         async with Session() as session:
             await session.execute(
@@ -127,7 +127,7 @@ def test_an_invite_cut_off_midway_can_be_claimed_again_after_a_while(run):
             )
             await session.commit()
 
-        stale_after = await ats_candidates.stale(company.id)
+        stale_after = [item for item in await ats_candidates.stale() if item.id == row.id]
         again = await ats_candidates.claim(row.id, (CandidateStatus.WAITING,))
         await companies.delete(company.id)
 
