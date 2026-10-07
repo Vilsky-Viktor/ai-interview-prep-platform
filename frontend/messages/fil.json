@@ -446,6 +446,7 @@
   "interviews": {
     "title": "Mga interview",
     "interview": "Interview",
+    "topicsTab": "Mga topic",
     "candidates": "Mga aplikante",
     "new": "Bagong interview",
     "createTitle": "Gumawa ng interview",

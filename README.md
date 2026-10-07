@@ -31,10 +31,11 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 - Every interview is **timed**: each question gets its own countdown (60 seconds by default, adjustable per interview; it turns red for the last 10 seconds, or the last third of a shorter question), and at zero the pick on screen counts, or the question counts as wrong if nothing is picked. The server enforces it, so closing the tab doesn't stop the clock; it accepts an answer up to 5 seconds after the deadline (`TIME_GRACE_SECONDS`), for a pick sent as the clock reaches zero. An interview the candidate leaves finishes by itself once its total time, plus 10%, has passed; unanswered questions count as wrong.
 - Scorecards show every answer, whether it was right and how long it took. They flag answers too fast to have read the question, times the candidate left the page, and copy attempts.
 - Candidates never see their scores or whether an answer was right.
+- An interview's page has three tabs: **topics** (its topics and questions), **candidates**, and, for owners and admins, **settings**: time per question, pass mark and "Mark as hired", each saved as it changes.
 - Each interview has a pass mark (70% by default, 1–100); grades show green or red against it.
 - **Reports:** a PDF for one candidate or for all of an interview's candidates, made in the browser. Download it, email it from prepza (the PDF attached; it counts towards the member's email limits), or share a short summary on WhatsApp or Telegram.
 - Any company member can preview an interview as a candidate (the play button on the interview list or page): the same timed questions, free, kept out of the candidate list, and its answers out of the questions' statistics.
-- Each interview shows its status: new (no candidates yet), in process (candidates invited), or hired ("Mark as hired" in its settings).
+- Each interview shows its status: new (no candidates yet), in process (candidates invited), or hired ("Mark as hired" on its settings tab).
 - The candidate list is sorted by grade by default (best first, candidates without a grade yet last), or by invite date. It can be searched by email and filtered by status (invited, in process, finished, passed, flagged, not delivered, expired). Each candidate's grade and integrity flag are stored on their invite when they finish, so the list is sorted, filtered and paged in the database.
 
 **For talents**

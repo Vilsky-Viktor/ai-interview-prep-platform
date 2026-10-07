@@ -446,6 +446,7 @@
   "interviews": {
     "title": "Colloqui",
     "interview": "Colloquio",
+    "topicsTab": "Argomenti",
     "candidates": "Candidati",
     "new": "Nuovo colloquio",
     "createTitle": "Crea un colloquio",

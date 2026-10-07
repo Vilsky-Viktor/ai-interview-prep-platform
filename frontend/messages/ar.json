@@ -446,6 +446,7 @@
   "interviews": {
     "title": "المقابلات",
     "interview": "مقابلة",
+    "topicsTab": "المواضيع",
     "candidates": "المرشحون",
     "new": "مقابلة جديدة",
     "createTitle": "إنشاء مقابلة",

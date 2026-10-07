@@ -446,6 +446,7 @@
   "interviews": {
     "title": "면접",
     "interview": "면접",
+    "topicsTab": "주제",
     "candidates": "지원자",
     "new": "새 면접",
     "createTitle": "면접 만들기",

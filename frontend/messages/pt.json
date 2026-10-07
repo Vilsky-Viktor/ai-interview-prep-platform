@@ -446,6 +446,7 @@
   "interviews": {
     "title": "Entrevistas",
     "interview": "Entrevista",
+    "topicsTab": "Tópicos",
     "candidates": "Candidatos",
     "new": "Nova entrevista",
     "createTitle": "Criar uma entrevista",

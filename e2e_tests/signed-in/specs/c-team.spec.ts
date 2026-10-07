@@ -82,8 +82,11 @@ test("owner adds a viewer, who sees the company read-only", async ({ signInAs })
   await visit(page, `/companies/${company.id}/interviews/${interviewId}`)
   await expect(page.getByRole("button", { name: "Manage questions" }).first()).toBeVisible()
   await expect(page.getByRole("heading").getByRole("button")).toHaveCount(0)
-  await expect(page.getByRole("button", { name: "Settings" })).toHaveCount(0)
+  // No settings tab, and its address shows the interview instead.
+  await expect(page.locator("main nav").getByRole("link", { name: "Settings" })).toHaveCount(0)
   await shot(page, "viewer-interview")
+  await visit(page, `/companies/${company.id}/interviews/${interviewId}?tab=settings`)
+  await expect(page.getByRole("button", { name: "Manage questions" }).first()).toBeVisible()
 
   await visit(page, `/companies/${company.id}/interviews/${interviewId}?tab=candidates`)
   await expect(page.getByRole("button", { name: "Download PDF" })).toBeVisible()
@@ -91,7 +94,11 @@ test("owner adds a viewer, who sees the company read-only", async ({ signInAs })
   await expect(page.getByRole("button", { name: "New candidate(s)" })).toHaveCount(0)
   await shot(page, "viewer-candidates")
   // A sort menu closes on the pick too.
-  await page.getByRole("button", { name: "Sort by: grade" }).click()
+  // A click before the page is interactive is lost, so it's repeated until the menu opens.
+  await expect(async () => {
+    await page.getByRole("button", { name: "Sort by: grade" }).click()
+    await expect(page.getByRole("menu")).toBeVisible({ timeout: 2000 })
+  }).toPass()
   await page.getByRole("menu").getByRole("menuitemradio", { name: "date" }).click()
   await expect(page.getByRole("menu")).toBeHidden()
   await expect(page).toHaveURL(/sort=date/)

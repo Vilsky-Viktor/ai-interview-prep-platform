@@ -101,7 +101,10 @@ export default async function InterviewPage({
   const ready = Boolean(interview.set_id)
   // Viewers see everything but change nothing.
   const canEdit = interview.can_edit
-  const current = ready && tab === "candidates" ? tab : "topics"
+  const current =
+    ready && (tab === "candidates" || (tab === "settings" && canEdit))
+      ? tab
+      : "topics"
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
@@ -144,14 +147,6 @@ export default async function InterviewPage({
                         leaveTo={interviewsHref}
                       />
                     )}
-                    {canEdit && (
-                      <InterviewSettings
-                        interviewId={interview.id}
-                        questionSeconds={interview.question_seconds}
-                        passMark={interview.pass_mark}
-                        hired={interview.hired}
-                      />
-                    )}
                   </>
                 ) : (
                   current === "candidates" && (
@@ -190,10 +185,23 @@ export default async function InterviewPage({
             </Button>
           )}
         </PageHeader>
-        {ready && <InterviewNav href={interviewHref} current={current} />}
+        {ready && (
+          <InterviewNav
+            href={interviewHref}
+            current={current}
+            canEdit={canEdit}
+          />
+        )}
       </div>
 
-      {current === "candidates" ? (
+      {current === "settings" ? (
+        <InterviewSettings
+          interviewId={interview.id}
+          questionSeconds={interview.question_seconds}
+          passMark={interview.pass_mark}
+          hired={interview.hired}
+        />
+      ) : current === "candidates" ? (
         <div className="space-y-6">
           <ShareLink
             interviewId={interview.id}

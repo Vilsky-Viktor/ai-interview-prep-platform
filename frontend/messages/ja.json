@@ -446,6 +446,7 @@
   "interviews": {
     "title": "面接",
     "interview": "面接",
+    "topicsTab": "トピック",
     "candidates": "候補者",
     "new": "新しい面接",
     "createTitle": "面接を作成",

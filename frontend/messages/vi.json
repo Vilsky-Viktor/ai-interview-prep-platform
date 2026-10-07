@@ -446,6 +446,7 @@
   "interviews": {
     "title": "Phỏng vấn",
     "interview": "Phỏng vấn",
+    "topicsTab": "Chủ đề",
     "candidates": "Ứng viên",
     "new": "Buổi phỏng vấn mới",
     "createTitle": "Tạo buổi phỏng vấn",

@@ -446,6 +446,7 @@
   "interviews": {
     "title": "Wawancara",
     "interview": "Wawancara",
+    "topicsTab": "Topik",
     "candidates": "Kandidat",
     "new": "Wawancara baru",
     "createTitle": "Buat wawancara",

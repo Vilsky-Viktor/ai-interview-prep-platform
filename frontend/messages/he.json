@@ -446,6 +446,7 @@
   "interviews": {
     "title": "ראיונות",
     "interview": "ראיון",
+    "topicsTab": "נושאים",
     "candidates": "מועמדים",
     "new": "ראיון חדש",
     "createTitle": "יצירת ראיון",

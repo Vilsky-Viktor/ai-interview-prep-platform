@@ -446,6 +446,7 @@
   "interviews": {
     "title": "การสัมภาษณ์",
     "interview": "การสัมภาษณ์",
+    "topicsTab": "หัวข้อ",
     "candidates": "ผู้สมัคร",
     "new": "การสัมภาษณ์ใหม่",
     "createTitle": "สร้างการสัมภาษณ์",

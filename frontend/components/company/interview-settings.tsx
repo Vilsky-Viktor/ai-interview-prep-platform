@@ -1,25 +1,18 @@
 "use client"
 
-import { SettingsIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
-import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { InterviewSettingsData } from "@/types/company"
 
-/** The interview's settings: the time each question has, the pass mark, and whether the
-company hired. Every interview is timed, and candidates never see their scores. */
+/** The interview's settings tab: the time each question has, the pass mark, and whether the
+company hired, one row each in a list like the topics'. Every interview is timed, and
+candidates never see their scores. */
 export function InterviewSettings({
   interviewId,
   questionSeconds,
@@ -70,57 +63,38 @@ export function InterviewSettings({
   }
 
   return (
-    <Dialog>
-      <DialogTrigger
-        render={
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-12 shrink-0 text-muted-foreground"
-            aria-label={t("settings")}
+    <div className="divide-y rounded-2xl border">
+      <NumberSetting
+        label={t("timePerQuestion")}
+        fieldLabel={t("secondsLabel")}
+        unit={t("secondsUnit")}
+        value={seconds}
+        disabled={saving}
+        onChange={setSeconds}
+        onSave={() => save({ question_seconds: Number(seconds) })}
+      />
+      <NumberSetting
+        label={t("passMark")}
+        fieldLabel={t("passMarkLabel")}
+        unit="%"
+        value={mark}
+        disabled={saving}
+        onChange={setMark}
+        onSave={() => save({ pass_mark: Number(mark) })}
+      />
+      <label className="flex cursor-pointer items-center justify-between gap-4 p-4 sm:p-6">
+        <span className="text-lg font-light">{t("markHired")}</span>
+        {/* Centred under the fields above. */}
+        <span className="flex w-36 justify-center">
+          <Checkbox
+            className="size-7 shrink-0 [&_[data-slot=checkbox-indicator]>svg]:size-5"
+            checked={saved.hired}
+            disabled={saving}
+            onCheckedChange={(checked) => save({ hired: checked })}
           />
-        }
-      >
-        <SettingsIcon className="size-6" />
-      </DialogTrigger>
-      <DialogContent
-        showCloseButton={false}
-        className="sm:max-w-lg"
-        aria-label={t("settings")}
-      >
-        <NumberSetting
-          label={t("timePerQuestion")}
-          fieldLabel={t("secondsLabel")}
-          unit={t("secondsUnit")}
-          value={seconds}
-          disabled={saving}
-          onChange={setSeconds}
-          onSave={() => save({ question_seconds: Number(seconds) })}
-        />
-        <NumberSetting
-          label={t("passMark")}
-          fieldLabel={t("passMarkLabel")}
-          unit="%"
-          value={mark}
-          disabled={saving}
-          onChange={setMark}
-          onSave={() => save({ pass_mark: Number(mark) })}
-        />
-        <label className="flex cursor-pointer items-center justify-between gap-4">
-          <span className="text-lg font-light">{t("markHired")}</span>
-          {/* Centred under the fields above. */}
-          <span className="flex w-36 justify-center">
-            <Checkbox
-              className="size-7 shrink-0 [&_[data-slot=checkbox-indicator]>svg]:size-5"
-              checked={saved.hired}
-              disabled={saving}
-              onCheckedChange={(checked) => save({ hired: checked })}
-            />
-          </span>
-        </label>
-        <DialogFooter showCloseButton />
-      </DialogContent>
-    </Dialog>
+        </span>
+      </label>
+    </div>
   )
 }
 
@@ -143,7 +117,7 @@ function NumberSetting({
   onSave: () => void
 }) {
   return (
-    <label className="flex items-center justify-between gap-4">
+    <label className="flex items-center justify-between gap-4 p-4 sm:p-6">
       <span className="text-lg font-light">{label}</span>
       {/* Same look as the app's other fields (library search, candidate invite). */}
       <span className="relative w-36 rounded-full border border-transparent transition-colors focus-within:border-ring">

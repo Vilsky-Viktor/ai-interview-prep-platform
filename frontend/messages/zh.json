@@ -446,6 +446,7 @@
   "interviews": {
     "title": "面试",
     "interview": "面试",
+    "topicsTab": "主题",
     "candidates": "候选人",
     "new": "新面试",
     "createTitle": "创建面试",

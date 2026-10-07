@@ -446,6 +446,7 @@
   "interviews": {
     "title": "Mülakatlar",
     "interview": "Mülakat",
+    "topicsTab": "Konular",
     "candidates": "Adaylar",
     "new": "Yeni mülakat",
     "createTitle": "Mülakat oluştur",

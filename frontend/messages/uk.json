@@ -446,6 +446,7 @@
   "interviews": {
     "title": "Співбесіди",
     "interview": "Співбесіда",
+    "topicsTab": "Теми",
     "candidates": "Кандидати",
     "new": "Нова співбесіда",
     "createTitle": "Створити співбесіду",
