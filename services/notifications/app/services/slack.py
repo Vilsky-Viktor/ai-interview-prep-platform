@@ -150,9 +150,10 @@ async def disconnect(company_id: str) -> None:
 
 
 async def deliver(event: dict) -> None:
-    """A new notification for a company goes to its Slack channel too, if it chose that kind.
-    Slack failing never stops the bell: a gone web hook marks the channel for reconnecting,
-    anything else is logged."""
+    """A new notification for a company goes to its Slack channel too, if it chose that kind and
+    whoever connected it is still an owner or admin. Slack failing never stops the bell: a gone
+    web hook, or a connector no longer an editor, marks the channel for reconnecting; anything
+    else is logged."""
     if event.get("recipient") != Recipient.COMPANY or not available():
         return
 
@@ -161,6 +162,20 @@ async def deliver(event: dict) -> None:
     text = message(event, settings.site_url)
 
     if found is None or event.get("kind") not in found.kinds or text is None:
+        return
+
+    # The channel works while whoever connected it is still an owner or admin, like an API key;
+    # otherwise an editor reconnects it.
+    try:
+        editor = (await companies.access(company_id, found.created_by))["editor"]
+    except httpx.HTTPError:
+        logger.warning("Couldn't check who connected Slack for %s", company_id)
+
+        return
+
+    if not editor:
+        await storage.mark_broken(company_id)
+
         return
 
     webhook = decrypt(settings.slack_encryption_key, found.webhook)

@@ -27,8 +27,10 @@ def endpoints(monkeypatch, companies_api):
     """COMPANY's web hooks, what each endpoint got, which fail, and which got which event."""
     state = {"hooks": [], "posted": [], "failing": set(), "delivered": set(), "public": True}
 
-    def hook(url, secret="whsec_a"):
-        found = SimpleNamespace(id=uuid.uuid4(), url=url, secret=encrypt(KEY, secret))
+    def hook(url, secret="whsec_a", maker="u1"):
+        found = SimpleNamespace(
+            id=uuid.uuid4(), url=url, secret=encrypt(KEY, secret), created_by=maker
+        )
         state["hooks"].append(found)
 
         return found
@@ -96,6 +98,16 @@ def test_a_redelivered_event_reaches_only_the_web_hooks_that_failed(endpoints):
     ]
     finish()
     assert len(endpoints["posted"]) == 2
+
+
+def test_a_web_hook_added_by_someone_no_longer_an_editor_gets_nothing(endpoints, companies_api):
+    endpoints["hook"]("https://kept.example/x")
+    endpoints["hook"]("https://left.example/x", maker="u2")
+    companies_api["roles"]["u2"] = "viewer"
+
+    finish()
+
+    assert [item[0] for item in endpoints["posted"]] == ["https://kept.example/x"]
 
 
 def test_without_web_hooks_companies_isnt_asked(endpoints, companies_api):

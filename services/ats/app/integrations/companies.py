@@ -7,9 +7,10 @@ from app.config.settings import settings
 from app.service_auth import service_token
 
 # Companies' refusals of an invite that the ATS flow tells apart: no credits, limits, the
-# pause, the interview gone, or not ready yet.
+# pause, the interview gone, not ready yet, or the member who connected it no longer an editor.
 INVITE_REFUSALS = {
     status.HTTP_402_PAYMENT_REQUIRED,
+    status.HTTP_403_FORBIDDEN,
     status.HTTP_404_NOT_FOUND,
     status.HTTP_409_CONFLICT,
     status.HTTP_429_TOO_MANY_REQUESTS,

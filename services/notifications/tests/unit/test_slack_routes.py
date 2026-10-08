@@ -169,7 +169,9 @@ def test_only_known_kinds_are_saved(client, monkeypatch):
 def channel(monkeypatch):
     """c1's working channel, which takes candidate_finished, and what reaches it."""
     found = {"posted": [], "broken": [], "answer": None}
-    hook = SimpleNamespace(kinds=["candidate_finished"], webhook=encrypt(KEY, "https://hooks/x"))
+    hook = SimpleNamespace(
+        kinds=["candidate_finished"], webhook=encrypt(KEY, "https://hooks/x"), created_by="u1"
+    )
 
     async def connected(company_id):
         return hook if company_id == "c1" else None
@@ -183,9 +185,14 @@ def channel(monkeypatch):
     async def mark_broken(company_id):
         found["broken"].append(company_id)
 
+    async def access(company_id, user_id):
+        return {"member": True, "editor": user_id not in found["left"]}
+
+    found["left"] = set()
     monkeypatch.setattr(storage, "connected", connected)
     monkeypatch.setattr(storage, "mark_broken", mark_broken)
     monkeypatch.setattr(slack_api, "post", post)
+    monkeypatch.setattr(companies, "access", access)
 
     return found
 
@@ -219,4 +226,12 @@ def test_a_gone_web_hook_marks_the_channel_and_slack_down_is_only_logged(channel
     channel["answer"] = slack_api.WebhookGone()
     asyncio.run(slack.deliver(finished()))
 
+    assert channel["broken"] == ["c1"]
+
+
+def test_a_channel_connected_by_someone_no_longer_an_editor_asks_for_reconnecting(channel):
+    channel["left"].add("u1")
+    asyncio.run(slack.deliver(finished()))
+
+    assert channel["posted"] == []
     assert channel["broken"] == ["c1"]

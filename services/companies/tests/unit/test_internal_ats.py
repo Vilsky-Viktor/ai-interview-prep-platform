@@ -109,6 +109,16 @@ def test_no_invite_to_an_interview_gone_or_not_ready(client, stored, interview_i
     assert stored["invites"] == []
 
 
+@pytest.mark.parametrize("sender", ["vic", "eve"])
+def test_a_viewer_or_a_removed_member_invites_no_one(client, stored, sender):
+    body = {"email": "cara@example.com", "sender_id": sender}
+    url = f"/internal/interviews/{READY.id}/invites"
+    response = client.post(url, json=body, headers=HEADERS)
+
+    assert response.status_code == 403
+    assert stored["invites"] == []
+
+
 def test_no_invite_during_the_pause(client, stored, monkeypatch):
     async def on(redis):
         return True

@@ -34,6 +34,7 @@ A company can send its notifications to one Slack channel too, from its integrat
 - If Slack says the web hook is gone (the app was removed or the channel deleted), the page shows "Reconnect". Other Slack errors are logged and that message is skipped; the bell always gets it.
 - Disconnecting, or deleting the company, removes prepza's app from the workspace and the channel from prepza.
 - Members who can't edit see the channel and its notifications without changing them.
+- The channel works while whoever connected it is still an owner or admin; once they're removed or made a viewer, it's marked for reconnecting by a current editor.
 
 ### Setting up Slack
 

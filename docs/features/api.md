@@ -34,7 +34,7 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 
 ## Web hooks
 
-- An owner or admin adds up to 5 HTTPS addresses on the API page's **web hooks** tab. An address must lead to the public internet: prepza refuses private, loopback and link-local addresses when it's added and again before each send, and never follows redirects.
+- An owner or admin adds up to 5 HTTPS addresses on the API page's **web hooks** tab. Like a key, a web hook works while whoever added it is still an owner or admin of the company; after that it gets nothing. An address must lead to the public internet: prepza refuses private, loopback and link-local addresses when it's added and again before each send, and never follows redirects.
 - Each web hook gets a signing secret (`whsec_...`), shown once and stored encrypted with `API_ENCRYPTION_KEY`.
 - When a candidate finishes (companies' `candidate.finished`), each web hook gets `POST {"id", "type": "candidate.finished", "data": {"interview", "candidate"}}`, the same objects the API returns, with `Prepza-Signature: t=<unix seconds>,v1=<hex HMAC-SHA256 of "<t>.<body>">`.
 - Delivery: all of a company's web hooks are sent to at once, each with 10 seconds to answer `2xx`. A web hook that took the event is remembered (`webhook_deliveries`, for 30 days), so a redelivered event reaches only the ones that failed. If any failed, the event fails and Pub/Sub retries it with backoff (from 10 seconds to 10 minutes, up to 50 times). An event can arrive more than once; its `id` stays the same.

@@ -61,7 +61,7 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 - It is then claimed in one update before the invite, so a repeated or simultaneous event invites once.
 - An invite cut off midway can be claimed again after 10 minutes, by **Invite again**, a new event or the ats service's daily `recover` job.
 
-**The invite** is the usual one. Companies sends it as if whoever connected Workable sent it: their limits, the company's credits, the pause.
+**The invite** is the usual one. Companies sends it as if whoever connected Workable sent it: their limits, the company's credits, the pause. If that member is no longer an owner or admin (removed, or made a viewer), companies refuses it and the connection is marked for reconnecting by a current editor.
 
 - A candidate for an interview still being made waits, and is invited once it's ready (`interview.ready`).
 - A candidate refused (credits, limits, the pause) is kept as not invited, and owners and admins get an `ats_not_invited` notification.

@@ -26,7 +26,7 @@ class DeliveryFailed(Exception):
 
 async def finished(data: dict, event_id: str) -> None:
     """A candidate finished (companies' candidate.finished): each of the company's web hooks gets
-    the interview and the candidate, once. Web hooks that already got it are skipped, so a
+    the interview and the candidate, once, while whoever added it is still an owner or admin. Web hooks that already got it are skipped, so a
     redelivered event reaches only the ones that failed."""
     company_id = UUID(data["company_id"])
     hooks = [
@@ -34,6 +34,12 @@ async def finished(data: dict, event_id: str) -> None:
         for hook in await webhooks.of_company(company_id)
         if not await webhooks.delivered(hook.id, event_id)
     ]
+    # A web hook works while whoever added it is still an owner or admin, like an API key.
+    editors = {
+        maker: (await companies.access(company_id, maker))["editor"]
+        for maker in {hook.created_by for hook in hooks}
+    }
+    hooks = [hook for hook in hooks if editors[hook.created_by]]
 
     if not hooks:
         return

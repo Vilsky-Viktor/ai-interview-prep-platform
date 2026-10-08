@@ -3,11 +3,16 @@ from prepza_common.encryption import encrypt
 
 from app.config.settings import settings
 from app.constants.slack import SlackStatus
+from app.integrations import companies
 from app.integrations import slack as slack_api
 from app.storage import slack as storage
 from tests.integration.factories import api, company, finished, push
 
 KEY = "Zm9vYmFyYmF6cXV4cXV1eGNvcmdlZ3JhdWx0Z2FycGw="
+
+
+async def editor(company_id, user_id):
+    return {"member": True, "editor": True}
 
 
 @pytest.fixture(autouse=True)
@@ -26,6 +31,8 @@ def configured(monkeypatch):
     monkeypatch.setattr(settings, "slack_encryption_key", KEY)
     monkeypatch.setattr(slack_api, "post", post)
     monkeypatch.setattr(slack_api, "revoke", revoke)
+    # Whoever connected the channel is still an editor (companies is another service).
+    monkeypatch.setattr(companies, "access", editor)
 
     return found
 

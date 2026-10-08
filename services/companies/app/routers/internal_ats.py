@@ -47,7 +47,8 @@ async def interviews_by_ids(
 async def invite(interview_id: UUID, body: AtsInviteIn, caller: ServiceCaller) -> AtsInviteOut:
     """A candidate an ATS sent is invited, as the member who connected it. Refused with 503
     during the emergency pause, 402 without credits and 429 over the email limits; 404 when the
-    interview is gone and 409 while it has no questions yet."""
+    interview is gone, 409 while it has no questions yet, and 403 when that member is no longer
+    an owner or admin (a removed member's connection invites no one)."""
     interview = await interviews.get(interview_id)
 
     if interview is None:
@@ -58,8 +59,13 @@ async def invite(interview_id: UUID, body: AtsInviteIn, caller: ServiceCaller) -
 
     await refuse_if_paused(get_redis())
     company = await companies.get(interview.company_id)
-    sender = User(uid=body.sender_id, email="", email_verified=True)
-    sent = await candidate_invites.invite(interview, company, sender, body.email)
+    sender = member_of(company, body.sender_id)
+
+    if sender is None or not can_edit(sender):
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Only an owner or admin can invite")
+
+    user = User(uid=body.sender_id, email="", email_verified=True)
+    sent = await candidate_invites.invite(interview, company, user, body.email)
     await outbox_service.flush_quietly()
 
     return AtsInviteOut(invite_id=sent.id)

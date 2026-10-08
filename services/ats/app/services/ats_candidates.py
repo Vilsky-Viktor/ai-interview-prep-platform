@@ -73,6 +73,10 @@ async def invite(row: AtsCandidate, connection: AtsConnection, interview: dict |
 
             return
 
+        # Whoever connected the ATS is no longer an owner or admin: an editor reconnects it.
+        if error.status_code == status.HTTP_403_FORBIDDEN:
+            await ats.mark_broken(connection.id)
+
         await refused(row, connection, interview, REASONS.get(error.status_code, FailReason.OTHER))
 
         return

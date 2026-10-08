@@ -194,6 +194,22 @@ def test_a_refused_invite_is_kept_with_its_reason_to_retry(world, refusal, reaso
     assert state["flushed"] == 1
 
 
+def test_a_connection_whose_maker_is_no_longer_an_editor_asks_for_reconnecting(world, monkeypatch):
+    state, _ = world
+    broken = []
+
+    async def mark_broken(connection_id):
+        broken.append(connection_id)
+
+    monkeypatch.setattr(ats, "mark_broken", mark_broken)
+    state["api"]["refuse"] = status.HTTP_403_FORBIDDEN
+    receive(event())
+
+    assert len(broken) == 1
+    assert state["rows"]["c-1"].status == "failed"
+    assert state["api"]["sent"] == []
+
+
 @pytest.mark.parametrize("answer", [status.HTTP_404_NOT_FOUND, status.HTTP_409_CONFLICT])
 def test_an_interview_gone_or_not_ready_at_companies_keeps_the_candidate_waiting(world, answer):
     state, _ = world
