@@ -4,7 +4,7 @@ Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) be
 
 - **Cloud Run:** the frontend, six APIs, the generation worker and notifications, whose bell stream runs as its own service (`notifications-stream`, same image) so open tabs never take the capacity event pushes need. Billed per request, and idle services cost nothing.
 - **Cloud SQL Postgres 18** (as locally): one database per service, with daily backups and point-in-time recovery.
-- **Pub/Sub:** domain events. One `events` topic is pushed to library, companies, notifications and ats, each getting only the event types it handles (`pubsub.tf`; add a type there when a consumer starts handling it), with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
+- **Pub/Sub:** domain events. One `events` topic is pushed to library, companies, notifications, ats and api, each getting only the event types it handles (`pubsub.tf`; add a type there when a consumer starts handling it), with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
 - **Cloud Tasks:** generation jobs on the worker, each tried up to 3 times. **Cloud Scheduler:** sweeps, retention, the question bank's stages, and candidate invite reminders and expiry; a failed daily job is retried 3 times.
 - **The global load balancer:**
   - HTTPS with a Google-managed certificate;
@@ -59,7 +59,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    terraform apply -target=google_artifact_registry_repository.images
    gcloud auth configure-docker europe-west1-docker.pkg.dev
    REGISTRY=europe-west1-docker.pkg.dev/prepza-prod/prepza
-   for service in library generation rounds companies billing notifications ats; do
+   for service in library generation rounds companies billing notifications ats api; do
      docker build --platform linux/amd64 --target prod -f services/$service/Dockerfile -t $REGISTRY/$service:first . && docker push $REGISTRY/$service:first
    done
    docker build --platform linux/amd64 --target prod -t $REGISTRY/frontend:first \
@@ -83,6 +83,8 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    printf '%s' "$PADDLE_API_KEY" | gcloud secrets versions add paddle-api-key --data-file=-
    # The ats service's key that encrypts companies' ATS keys (a Fernet key); keep it: a new one makes them reconnect.
    python3 -c "import base64,os; print(base64.urlsafe_b64encode(os.urandom(32)).decode(), end='')" | gcloud secrets versions add ats-encryption-key --data-file=-
+   # The api service's key that encrypts web hooks' signing secrets (a Fernet key); keep it: a new one makes companies add their web hooks again.
+   python3 -c "import base64,os; print(base64.urlsafe_b64encode(os.urandom(32)).decode(), end='')" | gcloud secrets versions add api-encryption-key --data-file=-
    # Slack: prepza's Slack app (see docs/features/notifications.md#setting-up-slack), and the key that encrypts companies' web hooks; keep it too.
    printf '%s' "$SLACK_CLIENT_ID" | gcloud secrets versions add slack-client-id --data-file=-
    printf '%s' "$SLACK_CLIENT_SECRET" | gcloud secrets versions add slack-client-secret --data-file=-
@@ -92,11 +94,11 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    Services read `latest` when they start, so redeploy (step 9) after setting secrets.
 9. **Run the migrations, then restart the services** so they pick up the secrets.
    ```bash
-   for db in library generation rounds companies billing notifications ats; do
+   for db in library generation rounds companies billing notifications ats api; do
      gcloud run jobs execute $db-migrate --region=europe-west1 --wait
    done
    # A new revision of each service reads the secrets you just set.
-   for service in frontend library generation rounds companies billing notifications notifications-stream ats generation-worker; do
+   for service in frontend library generation rounds companies billing notifications notifications-stream ats api generation-worker; do
      gcloud run services update $service --region=europe-west1 --update-labels=restarted=$(date +%s)
    done
    ```
@@ -179,6 +181,6 @@ Then point `DATABASE_URL` at the clone, or copy the needed data back.
 
   The replay goes to every consumer subscribed to that type, not only the one that failed: today each type has one consumer, but a type two consumers handle would reach the one that succeeded a second time.
 - **Generation jobs:** a job may run up to 25 minutes, under Cloud Tasks' 30-minute limit. The queue tries a task up to 3 times (`jobs.tf`), for a delivery that fails before the job starts, such as a worker restarting; a job first moves its generation from queued to running in one atomic step, so a repeated delivery does nothing. A generation that fails once running is retried by the user.
-- **Database connections:** Cloud SQL starts at `db-g1-small` with 200 connections allowed, 20 kept free. Each API process holds up to 10 connections (generation and the worker 14, notifications and ats 4); the services' `max` instances fit within the rest, and the plan fails if they don't (`database.tf`). Today that's at most 176 of the 180. A deploy briefly runs old and new instances side by side, so near the instance limits it can exceed the budget; this is accepted for launch, when services use a fraction of it (`internal_docs/code-review.md`, #32). Raise `db_tier` (and `db_max_connections`), or add PgBouncer, before allowing more instances or once services often run near their `max`.
+- **Database connections:** Cloud SQL starts at `db-g1-small` with 200 connections allowed, 20 kept free. Each API process holds up to 10 connections (generation and the worker 14, notifications, ats and api 4); the services' `max` instances fit within the rest, and the plan fails if they don't (`database.tf`). Today that's at most 180 of the 180. A deploy briefly runs old and new instances side by side, so near the instance limits it can exceed the budget; this is accepted for launch, when services use a fraction of it (`internal_docs/code-review.md`, #32). Raise `db_tier` (and `db_max_connections`), or add PgBouncer, before allowing more instances or once services often run near their `max`.
 - **High availability:** `db_high_availability = true` adds a standby in another zone, at about double the database cost.
 - **Not yet tried on a real project:** `terraform validate` passes, but some settings may need a small adjustment on the first `apply`. The ones most likely to need it are the load balancer's backend protocol for Cloud Run, and Cloud Armor on the CDN backend.

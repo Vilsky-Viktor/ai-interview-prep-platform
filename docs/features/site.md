@@ -106,6 +106,10 @@ After changing one, rebuild the files in `frontend/public/documents` and commit 
 ./scripts/documents/build.sh   # needs uv (for pandoc) and Docker (Chromium prints the PDFs)
 ```
 
+## API docs
+
+The `/api-docs` page ("api docs" in the footer) is the public API's reference, in English only, like the legal pages. It reads the API's OpenAPI description on each request (`lib/openapi.ts`, `components/api-docs/`): its description's sections (getting a key, authentication, limits, errors, web hooks), the base URL, each route with its parameters, body, result and errors, the `candidate.finished` web hook and the objects. See [Public API](api.md).
+
 ## Contact us
 
 `/contact` is a form with a name, an email and a message.
@@ -119,7 +123,7 @@ After changing one, rebuild the files in `frontend/public/documents` and commit 
 
 `/about` explains why prepza exists for companies, free practice for people preparing, and its solo founder.
 
-The footer links free practice, pricing, the privacy policy, the terms, the FAQ, About us and Contact us.
+The footer links free practice, pricing, the privacy policy, the terms, the documents, the API docs, the FAQ, About us and Contact us.
 
 ## Search engines
 

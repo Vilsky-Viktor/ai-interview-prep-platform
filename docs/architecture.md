@@ -21,6 +21,8 @@ flowchart LR
     gateway --> companies
     gateway --> billing
     gateway --> ats
+    gateway --> api
+    platforms[Companies' platforms] -- API keys --> gateway
     paddle[Paddle] -- payment webhooks --> billing
     atss[Workable / Greenhouse / Teamtailor / Recruitee / Breezy HR] -- candidate webhooks --> ats
 
@@ -34,6 +36,8 @@ flowchart LR
     companies --> rounds
     companies -- candidate credits --> billing
     ats -- members, interviews, invites --> companies
+    api -- members, interviews, candidates, invites --> companies
+    api -- signed web hooks --> platforms
 
     rounds -- answer.recorded / session.scored / interview.finished / results.rescored --> pubsub[(Pub/Sub topic: events)]
     worker -- generation.completed / cancelled --> pubsub
@@ -45,6 +49,7 @@ flowchart LR
     pubsub -- push --> library
     pubsub -- push --> companies
     pubsub -- push --> ats
+    pubsub -- push --> api
     pubsub -- push --> notifications -- email --> smtp[Resend / mailpit]
     pubsub -- funnel.* events --> bigquery[(BigQuery: funnel_events)]
 ```
@@ -60,6 +65,7 @@ flowchart LR
 | `billing` | Companies' credit wallets (holds and charges), welcome credits, referrals, Paddle top-ups, automatic top-ups, refunds and chargebacks (webhooks); companies sets a candidate's credits aside and charges them through it |
 | `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites and reminders, emailed PDF reports, and contact messages to prepza's inbox. Also the bell: stores the notifications other services ask for (`notification.requested`), removes a deleted company's (`company.deleted`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them. Posts a company's chosen notifications to its Slack channel too, through the channel's incoming web hook |
 | `ats` | ATS integrations (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): companies' encrypted ATS keys, linked jobs and the candidates the ATSs send (their webhooks); invites them through companies and writes their results back to the ATS |
+| `api` | The public API at `/api/v1/`: companies' API keys (as hashes, with their expiry), their web hooks (secrets encrypted) and deliveries; reads interviews and candidates and invites through companies, and sends a signed web hook when a candidate finishes |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
 What each service does for users is described in the feature pages, linked from the [README](../README.md#documentation). Generation is described in [Generation and question quality](generation.md).
@@ -99,7 +105,7 @@ Refusals and duplicates:
 Delivery:
 
 - All events go to one Pub/Sub topic, `events`.
-- It pushes each event to the `/internal/events` endpoint of library, companies, notifications and ats.
+- It pushes each event to the `/internal/events` endpoint of library, companies, notifications, ats and api.
 - In Google Cloud, each subscription carries only the types its consumer handles ([`infra/terraform/pubsub.tf`](../infra/terraform/pubsub.tf)).
 - Locally, each consumer ignores events that aren't its own.
 - Locally, Google's Pub/Sub emulator runs in docker-compose, and [`scripts/local/pubsub-setup.sh`](../scripts/local/pubsub-setup.sh) creates the topic and subscriptions.
