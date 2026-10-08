@@ -47,7 +47,7 @@ export function UserMenu() {
   }, [user])
 
   if (loading) {
-    return <div className="size-8" />
+    return <div className="size-10" />
   }
 
   if (!user) {
@@ -71,12 +71,12 @@ export function UserMenu() {
           <Button
             variant="ghost"
             size="icon"
-            className="rounded-full"
+            className="size-10 rounded-full"
             aria-label={t("account")}
           />
         }
       >
-        <Avatar size="sm" className="data-[size=sm]:size-7">
+        <Avatar size="lg">
           <AvatarImage src={user.photoURL ?? undefined} alt="" />
           <AvatarFallback>{initial}</AvatarFallback>
         </Avatar>
