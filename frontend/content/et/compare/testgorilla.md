@@ -24,8 +24,8 @@ See leht selgitab, mille poolest need erinevad, kuhu kumbki paremini sobib ja ku
 | Kuidas test koostatakse | Kirjutatakse sinu töökuulutuse põhjal; vaatad teemad üle enne küsimuste kirjutamist. Saadaval ka rollipõhised valmis mallid | Pannakse kokku valmis testide kogust; omaküsimused tasulistes pakettides ([hinnaleht](https://www.testgorilla.com/pricing/)) |
 | Testiliigid | Ajapiiranguga valikvastustega oskuste ja teadmiste intervjuud, tehniliste teemade puhul koodi lugemise küsimustega | Kognitiivsed võimed, keel, isiksus ja kultuur, programmeerimine, rollipõhised oskused, situatsioonipõhine otsustamine, tarkvaraoskused, trükkimine ([testikogu](https://www.testgorilla.com/test-library/)) |
 | Videoküsimused | Ei | Jah, tasulistes pakettides |
-| AI-intervjuud | Vestlevat AI-d pole; AI pakub teemad ja kirjutab küsimused ning valim nende vastusevõtmetest kontrollitakse | AI-intervjuud kõrgemas paketis |
-| Kood testis | Koodi lugemise küsimused (mida kood teeb või väljastab); koodi ei kirjutata ega käivitata | Programmeerimistestid testikogus; kohandatud programmeerimisülesanded kõrgemas paketis |
+| AI-intervjuud | Vestlevat AI-d pole; AI pakub teemad ja kirjutab küsimused ning valim nende vastusevõtmetest kontrollitakse | Vaata pakette ([hinnaleht](https://www.testgorilla.com/pricing/)) |
+| Kood testis | Koodi lugemise küsimused (mida kood teeb või väljastab); koodi ei kirjutata ega käivitata | Programmeerimistestid testikogus; kohandatud programmeerimisülesannete kohta vaata pakette ([hinnaleht](https://www.testgorilla.com/pricing/)) |
 | Küsimused kandidaadi kohta | Igal kandidaadil oma juhuslik komplekt, oma järjekorras | Siin ei võrrelda |
 | Aususe tagamise funktsioonid | Taimer igal küsimusel (serveri jõustatud), märked liiga kiirete vastuste, lehelt lahkumise ja kopeerimiskatsete kohta | Veebikaamera hetktõmmised, keelatud kopeerimine/kleepimine ja täisekraanirežiim kõrgemas paketis |
 | Integratsioonid | Workable, Greenhouse, Teamtailor, Recruitee ja Breezy HR; Slack; avalik API allkirjastatud webhookidega ([API dokumentatsioon](/api-docs)). Kõik ilma lisatasuta | ATS/API-integratsioonid kõrgemas paketis |

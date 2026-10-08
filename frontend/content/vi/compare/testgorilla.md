@@ -24,8 +24,8 @@ Trang này giải thích hai công cụ khác nhau thế nào, mỗi công cụ 
 | Cách xây dựng bài kiểm tra | Viết từ mô tả công việc của bạn; bạn duyệt các chủ đề trước khi câu hỏi được viết. Cũng có sẵn các mẫu theo vị trí | Ghép từ thư viện các bài kiểm tra có sẵn; câu hỏi tùy chỉnh ở các gói trả phí ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
 | Loại bài kiểm tra | Phỏng vấn kỹ năng và kiến thức trắc nghiệm có tính giờ, có câu hỏi đọc code cho chủ đề kỹ thuật | Năng lực nhận thức, ngoại ngữ, tính cách và văn hóa, lập trình, kỹ năng theo vị trí, phán đoán tình huống, kỹ năng phần mềm, đánh máy ([thư viện bài kiểm tra](https://www.testgorilla.com/test-library/)) |
 | Câu hỏi video | Không | Có, ở các gói trả phí |
-| Phỏng vấn AI | Không có AI hội thoại; AI đề xuất chủ đề và viết câu hỏi, một phần đáp án được kiểm tra | Phỏng vấn AI ở gói cao hơn |
-| Code trong bài kiểm tra | Câu hỏi đọc code (code làm gì hoặc in ra gì); không viết hay chạy code | Bài kiểm tra lập trình trong thư viện; thử thách lập trình tùy chỉnh ở gói cao hơn |
+| Phỏng vấn AI | Không có AI hội thoại; AI đề xuất chủ đề và viết câu hỏi, một phần đáp án được kiểm tra | Xem các gói ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
+| Code trong bài kiểm tra | Câu hỏi đọc code (code làm gì hoặc in ra gì); không viết hay chạy code | Bài kiểm tra lập trình trong thư viện; về thử thách lập trình tùy chỉnh, xem các gói ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
 | Câu hỏi cho mỗi ứng viên | Bộ câu hỏi ngẫu nhiên riêng cho mỗi ứng viên, theo thứ tự riêng | Không so sánh ở đây |
 | Tính năng chống gian lận | Đồng hồ cho mọi câu hỏi (do máy chủ áp dụng), cảnh báo về trả lời quá nhanh, rời khỏi trang và cố sao chép | Chụp ảnh qua webcam, chặn sao chép/dán và chế độ toàn màn hình ở gói cao hơn |
 | Tích hợp | Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR; Slack; API công khai với webhook có chữ ký ([Tài liệu API](/api-docs)). Tất cả đều không tốn thêm phí | Tích hợp ATS/API ở gói cao hơn |

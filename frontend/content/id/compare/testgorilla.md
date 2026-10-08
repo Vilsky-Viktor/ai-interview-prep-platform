@@ -24,8 +24,8 @@ Halaman ini menjelaskan perbedaannya, kapan masing-masing lebih cocok, dan cara 
 | Cara tes dibuat | Dibuat dari deskripsi pekerjaanmu; kamu meninjau topiknya sebelum soal ditulis. Tersedia juga templat siap pakai per posisi | Disusun dari pustaka tes siap pakai; soal kustom di paket berbayar ([halaman harga](https://www.testgorilla.com/pricing/)) |
 | Jenis tes | Wawancara keterampilan dan pengetahuan pilihan ganda berbatas waktu, dengan soal membaca kode untuk topik teknis | Kemampuan kognitif, bahasa, kepribadian dan budaya, pemrograman, keterampilan khusus posisi, penilaian situasional, keterampilan software, mengetik ([pustaka tes](https://www.testgorilla.com/test-library/)) |
 | Pertanyaan video | Tidak | Ya, di paket berbayar |
-| Wawancara AI | Tidak ada AI percakapan; AI mengusulkan topik dan menulis soal, dan sebagian kunci jawabannya diperiksa | Wawancara AI di paket yang lebih tinggi |
-| Kode dalam tes | Soal membaca kode (apa yang dilakukan atau dihasilkan kode); tidak menulis atau menjalankan kode | Tes pemrograman di pustaka; tantangan coding kustom di paket yang lebih tinggi |
+| Wawancara AI | Tidak ada AI percakapan; AI mengusulkan topik dan menulis soal, dan sebagian kunci jawabannya diperiksa | Lihat paketnya ([halaman harga](https://www.testgorilla.com/pricing/)) |
+| Kode dalam tes | Soal membaca kode (apa yang dilakukan atau dihasilkan kode); tidak menulis atau menjalankan kode | Tes pemrograman di pustaka; untuk tantangan coding kustom, lihat paketnya ([halaman harga](https://www.testgorilla.com/pricing/)) |
 | Soal per kandidat | Setiap kandidat mendapat set acaknya sendiri, dengan urutannya sendiri | Tidak dibandingkan di sini |
 | Fitur anti-kecurangan | Timer di setiap soal (ditegakkan oleh server), tanda untuk jawaban yang terlalu cepat, meninggalkan halaman, dan percobaan menyalin | Snapshot webcam, salin/tempel dinonaktifkan, dan mode layar penuh di paket yang lebih tinggi |
 | Integrasi | Workable, Greenhouse, Teamtailor, Recruitee, dan Breezy HR; Slack; API publik dengan webhook bertanda tangan ([Dokumentasi API](/api-docs)). Semuanya tanpa biaya tambahan | Integrasi ATS/API di paket yang lebih tinggi |

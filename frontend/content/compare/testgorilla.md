@@ -24,8 +24,8 @@ This page explains how they differ, where each one fits better, and how to combi
 | How a test is built | Written from your job description; you review the topics before questions are written. Ready-made templates by role also available | Assembled from a library of ready-made tests; custom questions on paid plans ([pricing page](https://www.testgorilla.com/pricing/)) |
 | Test types | Timed multiple-choice skills and knowledge interviews, with code-reading questions for technical topics | Cognitive ability, language, personality and culture, programming, role-specific skills, situational judgment, software skills, typing ([test library](https://www.testgorilla.com/test-library/)) |
 | Video questions | No | Yes, on paid plans |
-| AI interviews | No conversational AI; AI proposes topics and writes questions, and a sample of their answer keys is checked | AI interviews on its higher plan |
-| Code in the test | Code-reading questions (what code does or outputs); no writing or running code | Programming tests in the library; custom coding challenges on its higher plan |
+| AI interviews | No conversational AI; AI proposes topics and writes questions, and a sample of their answer keys is checked | See its plans ([pricing page](https://www.testgorilla.com/pricing/)) |
+| Code in the test | Code-reading questions (what code does or outputs); no writing or running code | Programming tests in the library; for custom coding challenges, see its plans ([pricing page](https://www.testgorilla.com/pricing/)) |
 | Questions per candidate | Each candidate's own random set, in its own order | Not compared here |
 | Integrity features | Timer on every question (server-enforced), flags for too-fast answers, leaving the page and copy attempts | Webcam snapshots, disabled copy/paste and full-screen mode on its higher plan |
 | Integrations | Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR; Slack; a public API with signed web hooks ([API docs](/api-docs)). All at no extra cost | ATS/API integrations on its higher plan |
