@@ -64,7 +64,8 @@
     "aiInterviews": "KI-Interviews",
     "compare": "Vergleich",
     "guides": "Ratgeber",
-    "apiDocs": "API-Dokumentation"
+    "apiDocs": "API-Dokumentation",
+    "news": "Neuigkeiten"
   },
   "signIn": {
     "title": "Anmelden",
@@ -227,7 +228,23 @@
     "companyStopped": "Alle E-Mails gestoppt",
     "remindersStopped": "{count, plural, one {Erinnerungen für # Einladung gestoppt} other {Erinnerungen für # Einladungen gestoppt}}",
     "stopEmails": "E-Mails stoppen",
-    "resumeEmails": "E-Mails wieder senden"
+    "resumeEmails": "E-Mails wieder senden",
+    "news": "Neuigkeiten",
+    "newPost": "Neuer Beitrag",
+    "editPost": "Beitrag bearbeiten",
+    "postInEnglish": "Schreib auf Englisch. Nach dem Speichern wird der Beitrag in alle anderen Sprachen übersetzt.",
+    "postTitlePlaceholder": "Titel hier eingeben…",
+    "postTextPlaceholder": "Neuigkeit hier eingeben…",
+    "postDate": "Datum",
+    "postText": "Text",
+    "charactersLeft": "{count, plural, one {Noch # Zeichen} other {Noch # Zeichen}}",
+    "noNews": "Noch keine Beiträge.",
+    "translated": "übersetzt",
+    "translating": "wird übersetzt…",
+    "deletePostTitle": "Diesen Beitrag löschen?",
+    "deletePostText": "Er verschwindet in allen Sprachen von der Neuigkeiten-Seite.",
+    "postSaveFailed": "Der Beitrag konnte nicht gespeichert werden. Bitte versuche es erneut.",
+    "postDeleteFailed": "Der Beitrag konnte nicht gelöscht werden. Bitte versuche es erneut."
   },
   "templates": {
     "title": "Vorlagen",
@@ -930,6 +947,13 @@
       "quote": "Gut einzustellen sollte kein Privileg großer Unternehmen mit großen Budgets sein. Ich habe prepza gebaut, damit jedes Team aus einer Stellenbeschreibung in wenigen Minuten ein faires Interview machen, sehen kann, wer den Job wirklich beherrscht, und nur für die Kandidaten zahlt, die es machen. Ich hoffe, es hilft dir, schneller die richtigen Leute zu finden.",
       "role": "Solo-Gründer von prepza"
     }
+  },
+  "news": {
+    "title": "Neuigkeiten von prepza",
+    "description": "Was es Neues bei prepza gibt: neue Funktionen, Verbesserungen und Updates.",
+    "metaDescription": "Neuigkeiten von prepza: neue Funktionen, Sprachen und Verbesserungen bei Kompetenztests, KI-Interviews und kostenlosem Üben. Hier oder per RSS folgen.",
+    "empty": "Noch keine Neuigkeiten.",
+    "rss": "RSS-Feed"
   },
   "notifications": {
     "title": "Benachrichtigungen",

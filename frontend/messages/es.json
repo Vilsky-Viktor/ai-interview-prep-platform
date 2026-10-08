@@ -64,7 +64,8 @@
     "aiInterviews": "Entrevistas con IA",
     "compare": "Comparar",
     "guides": "Guías",
-    "apiDocs": "Documentación de la API"
+    "apiDocs": "Documentación de la API",
+    "news": "Novedades"
   },
   "signIn": {
     "title": "Iniciar sesión",
@@ -227,7 +228,23 @@
     "companyStopped": "Todos los correos detenidos",
     "remindersStopped": "{count, plural, one {Recordatorios detenidos para # invitación} other {Recordatorios detenidos para # invitaciones}}",
     "stopEmails": "Detener correos",
-    "resumeEmails": "Reanudar correos"
+    "resumeEmails": "Reanudar correos",
+    "news": "Novedades",
+    "newPost": "Nueva publicación",
+    "editPost": "Editar publicación",
+    "postInEnglish": "Escribe en inglés. Al guardarla, la publicación se traduce a todos los demás idiomas.",
+    "postTitlePlaceholder": "Escribe aquí el título…",
+    "postTextPlaceholder": "Escribe aquí la novedad…",
+    "postDate": "Fecha",
+    "postText": "Texto",
+    "charactersLeft": "{count, plural, one {Queda # carácter} other {Quedan # caracteres}}",
+    "noNews": "Aún no hay publicaciones.",
+    "translated": "traducida",
+    "translating": "traduciendo…",
+    "deletePostTitle": "¿Eliminar esta publicación?",
+    "deletePostText": "Desaparece de la página de novedades en todos los idiomas.",
+    "postSaveFailed": "No se pudo guardar la publicación. Inténtalo de nuevo.",
+    "postDeleteFailed": "No se pudo eliminar la publicación. Inténtalo de nuevo."
   },
   "templates": {
     "title": "Plantillas",
@@ -930,6 +947,13 @@
       "quote": "Contratar bien no debería ser un privilegio de las grandes empresas con grandes presupuestos. Creé prepza para que cualquier equipo pueda convertir una descripción del puesto en una entrevista justa en minutos, ver quién domina de verdad el trabajo y pagar solo por los candidatos que la hacen. Espero que te ayude a encontrar antes a las personas adecuadas.",
       "role": "Fundador en solitario de prepza"
     }
+  },
+  "news": {
+    "title": "Novedades de prepza",
+    "description": "Lo nuevo en prepza: funciones nuevas, mejoras y actualizaciones.",
+    "metaDescription": "Novedades de prepza: nuevas funciones, idiomas y mejoras en las pruebas de habilidades, entrevistas con IA y práctica gratuita. Síguelas aquí o por RSS.",
+    "empty": "Aún no hay novedades.",
+    "rss": "Feed RSS"
   },
   "notifications": {
     "title": "Notificaciones",

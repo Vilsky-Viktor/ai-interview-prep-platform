@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest"
 import {
   articleData,
   breadcrumbData,
+  newsData,
   organizationData,
   softwareData,
   techArticleData,
@@ -95,5 +96,48 @@ describe("techArticleData", () => {
       image: `${SITE}/preview`,
       inLanguage: "en",
     })
+  })
+})
+
+describe("newsData", () => {
+  it("lists the posts as the language's blog posts by prepza, each at its place", () => {
+    const data = newsData(
+      SITE,
+      {
+        title: "prepza news",
+        description: "What's new.",
+        path: "/de/news",
+        language: "de",
+      },
+      [
+        {
+          id: "p1",
+          title: "Neu",
+          text: "Text.",
+          published_on: "2026-10-08",
+          updated_at: "2026-10-08T09:30:00Z",
+        },
+      ]
+    )
+
+    expect(data).toMatchObject({
+      "@type": "Blog",
+      url: `${SITE}/de/news`,
+      inLanguage: "de",
+      publisher: { "@type": "Organization", name: "prepza" },
+    })
+    expect(data.blogPost).toEqual([
+      {
+        "@type": "BlogPosting",
+        headline: "Neu",
+        articleBody: "Text.",
+        url: `${SITE}/de/news#p1`,
+        datePublished: "2026-10-08",
+        dateModified: "2026-10-08T09:30:00Z",
+        inLanguage: "de",
+        author: { "@type": "Organization", name: "prepza", url: SITE },
+        publisher: { "@type": "Organization", name: "prepza", url: SITE },
+      },
+    ])
   })
 })

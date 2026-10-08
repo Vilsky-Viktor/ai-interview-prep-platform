@@ -64,7 +64,8 @@
     "aiInterviews": "AI-intervjuud",
     "compare": "Võrdlus",
     "guides": "Juhendid",
-    "apiDocs": "API dokumentatsioon"
+    "apiDocs": "API dokumentatsioon",
+    "news": "Uudised"
   },
   "signIn": {
     "title": "Logi sisse",
@@ -227,7 +228,23 @@
     "companyStopped": "Kõik e-kirjad peatatud",
     "remindersStopped": "{count, plural, one {Meeldetuletused peatatud # kutse jaoks} other {Meeldetuletused peatatud # kutse jaoks}}",
     "stopEmails": "Peata e-kirjad",
-    "resumeEmails": "Jätka e-kirju"
+    "resumeEmails": "Jätka e-kirju",
+    "news": "Uudised",
+    "newPost": "Uus postitus",
+    "editPost": "Muuda postitust",
+    "postInEnglish": "Kirjuta inglise keeles. Pärast salvestamist tõlgitakse postitus kõigisse teistesse keeltesse.",
+    "postTitlePlaceholder": "Kirjuta pealkiri siia…",
+    "postTextPlaceholder": "Kirjuta uudis siia…",
+    "postDate": "Kuupäev",
+    "postText": "Tekst",
+    "charactersLeft": "{count, plural, one {Jäänud # märk} other {Jäänud # märki}}",
+    "noNews": "Postitusi veel pole.",
+    "translated": "tõlgitud",
+    "translating": "tõlgitakse…",
+    "deletePostTitle": "Kas kustutada see postitus?",
+    "deletePostText": "See eemaldatakse uudiste lehelt kõigis keeltes.",
+    "postSaveFailed": "Postitust ei õnnestunud salvestada. Proovi uuesti.",
+    "postDeleteFailed": "Postitust ei õnnestunud kustutada. Proovi uuesti."
   },
   "templates": {
     "title": "Mallid",
@@ -934,6 +951,13 @@
       "quote": "Hea värbamine ei tohiks olla suurte eelarvetega suurettevõtete privileeg. Lõin prepza, et iga meeskond saaks mõne minutiga teha töökuulutusest õiglase intervjuu, näha, kes tööd päriselt tunneb, ja maksta ainult nende kandidaatide eest, kes intervjuu teevad. Loodan, et see aitab sul õiged inimesed kiiremini üles leida.",
       "role": "prepza ainuasutaja"
     }
+  },
+  "news": {
+    "title": "prepza uudised",
+    "description": "Mis on prepzas uut: uued funktsioonid, täiustused ja uuendused.",
+    "metaDescription": "prepza uudised: uued funktsioonid, keeled ja täiustused oskuste testides, tehisintellektiga intervjuudes ja tasuta harjutamises. Jälgi siin või RSS-i kaudu.",
+    "empty": "Uudiseid veel pole.",
+    "rss": "RSS-voog"
   },
   "notifications": {
     "title": "Teavitused",

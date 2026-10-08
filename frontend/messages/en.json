@@ -64,7 +64,8 @@
     "aiInterviews": "AI interviews",
     "compare": "Compare",
     "guides": "Guides",
-    "apiDocs": "API docs"
+    "apiDocs": "API docs",
+    "news": "News"
   },
   "signIn": {
     "title": "Sign in",
@@ -227,7 +228,23 @@
     "companyStopped": "All emails stopped",
     "remindersStopped": "{count, plural, one {Reminders stopped for # invite} other {Reminders stopped for # invites}}",
     "stopEmails": "Stop emails",
-    "resumeEmails": "Resume emails"
+    "resumeEmails": "Resume emails",
+    "news": "News",
+    "newPost": "New post",
+    "editPost": "Edit post",
+    "postInEnglish": "Write in English. After you save, the post is translated into every other language.",
+    "postTitlePlaceholder": "Title goes here…",
+    "postTextPlaceholder": "News goes here…",
+    "postDate": "Date",
+    "postText": "Text",
+    "charactersLeft": "{count, plural, one {# character left} other {# characters left}}",
+    "noNews": "No posts yet.",
+    "translated": "translated",
+    "translating": "translating…",
+    "deletePostTitle": "Delete this post?",
+    "deletePostText": "It's removed from the news page in every language.",
+    "postSaveFailed": "Couldn't save the post. Please try again.",
+    "postDeleteFailed": "Couldn't delete the post. Please try again."
   },
   "templates": {
     "title": "Templates",
@@ -930,6 +947,13 @@
       "quote": "Hiring well shouldn't be a privilege of big companies with big budgets. I built prepza so that any team can turn a job description into a fair interview in minutes, see who really knows the job, and pay only for the candidates who take it. I hope it helps you find the right people faster.",
       "role": "Solo founder of prepza"
     }
+  },
+  "news": {
+    "title": "prepza news",
+    "description": "What's new at prepza: new features, improvements and updates.",
+    "metaDescription": "prepza news: new features, languages and improvements in prepza's skills tests, AI interviews and free practice, as they ship. Follow here or by RSS.",
+    "empty": "No news yet.",
+    "rss": "RSS feed"
   },
   "notifications": {
     "title": "Notifications",

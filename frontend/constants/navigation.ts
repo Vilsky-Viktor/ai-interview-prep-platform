@@ -34,6 +34,7 @@ export const FOOTER_COLUMNS = [
     { href: "/practice", label: "practice" },
     { href: "/faq", label: "faq" },
     { href: "/about", label: "about" },
+    { href: "/news", label: "news" },
     { href: "/contact", label: "contact" },
   ],
 ] as const

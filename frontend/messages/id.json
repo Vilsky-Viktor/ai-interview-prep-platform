@@ -64,7 +64,8 @@
     "aiInterviews": "Wawancara AI",
     "compare": "Bandingkan",
     "guides": "Panduan",
-    "apiDocs": "Dokumentasi API"
+    "apiDocs": "Dokumentasi API",
+    "news": "Berita"
   },
   "signIn": {
     "title": "Masuk",
@@ -227,7 +228,23 @@
     "companyStopped": "Semua email dihentikan",
     "remindersStopped": "{count, plural, other {Pengingat dihentikan untuk # undangan}}",
     "stopEmails": "Hentikan email",
-    "resumeEmails": "Lanjutkan email"
+    "resumeEmails": "Lanjutkan email",
+    "news": "Berita",
+    "newPost": "Postingan baru",
+    "editPost": "Edit postingan",
+    "postInEnglish": "Tulis dalam bahasa Inggris. Setelah disimpan, postingan diterjemahkan ke semua bahasa lainnya.",
+    "postTitlePlaceholder": "Tulis judul di sini…",
+    "postTextPlaceholder": "Tulis berita di sini…",
+    "postDate": "Tanggal",
+    "postText": "Teks",
+    "charactersLeft": "{count, plural, other {Sisa # karakter}}",
+    "noNews": "Belum ada postingan.",
+    "translated": "diterjemahkan",
+    "translating": "menerjemahkan…",
+    "deletePostTitle": "Hapus postingan ini?",
+    "deletePostText": "Postingan dihapus dari halaman berita di semua bahasa.",
+    "postSaveFailed": "Postingan tidak dapat disimpan. Silakan coba lagi.",
+    "postDeleteFailed": "Postingan tidak dapat dihapus. Silakan coba lagi."
   },
   "templates": {
     "title": "Templat",
@@ -930,6 +947,13 @@
       "quote": "Merekrut dengan baik seharusnya bukan hak istimewa perusahaan besar dengan anggaran besar. Aku membangun prepza agar tim mana pun bisa mengubah deskripsi pekerjaan menjadi wawancara yang adil dalam hitungan menit, melihat siapa yang benar-benar menguasai pekerjaan, dan hanya membayar untuk kandidat yang mengikutinya. Semoga prepza membantumu menemukan orang yang tepat lebih cepat.",
       "role": "Pendiri tunggal prepza"
     }
+  },
+  "news": {
+    "title": "Berita prepza",
+    "description": "Yang baru di prepza: fitur baru, peningkatan, dan pembaruan.",
+    "metaDescription": "Berita prepza: fitur, bahasa, dan peningkatan baru pada tes keterampilan, wawancara AI, dan latihan gratis begitu dirilis. Ikuti di sini atau lewat RSS.",
+    "empty": "Belum ada berita.",
+    "rss": "Feed RSS"
   },
   "notifications": {
     "title": "Notifikasi",

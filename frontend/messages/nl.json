@@ -64,7 +64,8 @@
     "aiInterviews": "AI-interviews",
     "compare": "Vergelijken",
     "guides": "Gidsen",
-    "apiDocs": "API-documentatie"
+    "apiDocs": "API-documentatie",
+    "news": "Nieuws"
   },
   "signIn": {
     "title": "Inloggen",
@@ -227,7 +228,23 @@
     "companyStopped": "Alle e-mails gestopt",
     "remindersStopped": "{count, plural, one {Herinneringen gestopt voor # uitnodiging} other {Herinneringen gestopt voor # uitnodigingen}}",
     "stopEmails": "E-mails stoppen",
-    "resumeEmails": "E-mails hervatten"
+    "resumeEmails": "E-mails hervatten",
+    "news": "Nieuws",
+    "newPost": "Nieuw bericht",
+    "editPost": "Bericht bewerken",
+    "postInEnglish": "Schrijf in het Engels. Na het opslaan wordt het bericht in alle andere talen vertaald.",
+    "postTitlePlaceholder": "Typ hier de titel…",
+    "postTextPlaceholder": "Typ hier het nieuws…",
+    "postDate": "Datum",
+    "postText": "Tekst",
+    "charactersLeft": "{count, plural, one {Nog # teken} other {Nog # tekens}}",
+    "noNews": "Nog geen berichten.",
+    "translated": "vertaald",
+    "translating": "wordt vertaald…",
+    "deletePostTitle": "Dit bericht verwijderen?",
+    "deletePostText": "Het verdwijnt in alle talen van de nieuwspagina.",
+    "postSaveFailed": "Het bericht kon niet worden opgeslagen. Probeer het opnieuw.",
+    "postDeleteFailed": "Het bericht kon niet worden verwijderd. Probeer het opnieuw."
   },
   "templates": {
     "title": "Sjablonen",
@@ -926,6 +943,13 @@
       "quote": "Goed aannemen zou geen voorrecht moeten zijn van grote bedrijven met grote budgetten. Ik heb prepza gebouwd zodat elk team in een paar minuten van een functieomschrijving een eerlijk interview kan maken, kan zien wie het vak echt kent en alleen betaalt voor de kandidaten die het interview doen. Ik hoop dat het je helpt sneller de juiste mensen te vinden.",
       "role": "Solo-oprichter van prepza"
     }
+  },
+  "news": {
+    "title": "prepza-nieuws",
+    "description": "Wat er nieuw is bij prepza: nieuwe functies, verbeteringen en updates.",
+    "metaDescription": "prepza-nieuws: nieuwe functies, talen en verbeteringen in vaardigheidstests, AI-interviews en gratis oefenen, zodra ze live gaan. Volg het hier of via RSS.",
+    "empty": "Nog geen nieuws.",
+    "rss": "RSS-feed"
   },
   "notifications": {
     "title": "Meldingen",

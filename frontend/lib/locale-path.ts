@@ -2,6 +2,7 @@ import { DEFAULT_LOCALE, LOCALES } from "@/constants/i18n"
 import {
   LOCALIZED_ARTICLE,
   LOCALIZED_PATHS,
+  NEWS_FEED,
   PRIVATE_PATHS,
   TEMPLATE_PAGE,
 } from "@/constants/seo"
@@ -56,7 +57,7 @@ export function templateLocales(language: string) {
 
 /** The language and page of an address under a language prefix ("/de/pricing" gives de and
  * /pricing); none for other addresses, English's prefix included, or a page that has no
- * language versions. */
+ * language versions. The news feed has one in each language too. */
 export function splitLocale(pathname: string) {
   const [, first, ...rest] = pathname.split("/")
   const path = `/${rest.join("/")}`.replace(/\/$/, "") || "/"
@@ -65,7 +66,7 @@ export function splitLocale(pathname: string) {
     return null
   }
 
-  return isLocalizedPath(path) || TEMPLATE_PAGE.test(path)
+  return isLocalizedPath(path) || TEMPLATE_PAGE.test(path) || path === NEWS_FEED
     ? { locale: first, path }
     : null
 }

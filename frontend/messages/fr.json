@@ -64,7 +64,8 @@
     "aiInterviews": "Entretiens IA",
     "compare": "Comparer",
     "guides": "Guides",
-    "apiDocs": "Documentation de l'API"
+    "apiDocs": "Documentation de l'API",
+    "news": "Actualités"
   },
   "signIn": {
     "title": "Se connecter",
@@ -227,7 +228,23 @@
     "companyStopped": "Tous les e-mails arrêtés",
     "remindersStopped": "{count, plural, one {Rappels arrêtés pour # invitation} other {Rappels arrêtés pour # invitations}}",
     "stopEmails": "Arrêter les e-mails",
-    "resumeEmails": "Reprendre les e-mails"
+    "resumeEmails": "Reprendre les e-mails",
+    "news": "Actualités",
+    "newPost": "Nouvelle publication",
+    "editPost": "Modifier la publication",
+    "postInEnglish": "Rédigez en anglais. Une fois enregistrée, la publication est traduite dans toutes les autres langues.",
+    "postTitlePlaceholder": "Saisissez le titre ici…",
+    "postTextPlaceholder": "Saisissez l'actualité ici…",
+    "postDate": "Date",
+    "postText": "Texte",
+    "charactersLeft": "{count, plural, one {# caractère restant} other {# caractères restants}}",
+    "noNews": "Aucune publication pour le moment.",
+    "translated": "traduite",
+    "translating": "traduction en cours…",
+    "deletePostTitle": "Supprimer cette publication ?",
+    "deletePostText": "Elle disparaît de la page des actualités dans toutes les langues.",
+    "postSaveFailed": "Impossible d'enregistrer la publication. Veuillez réessayer.",
+    "postDeleteFailed": "Impossible de supprimer la publication. Veuillez réessayer."
   },
   "templates": {
     "title": "Modèles",
@@ -930,6 +947,13 @@
       "quote": "Bien recruter ne devrait pas être le privilège des grandes entreprises aux gros budgets. J'ai créé prepza pour que toute équipe puisse transformer une fiche de poste en entretien équitable en quelques minutes, voir qui maîtrise vraiment le poste et ne payer que pour les candidats qui le passent. J'espère qu'il vous aidera à trouver plus vite les bonnes personnes.",
       "role": "Fondateur de prepza, en solo"
     }
+  },
+  "news": {
+    "title": "Actualités de prepza",
+    "description": "Les nouveautés de prepza : nouvelles fonctionnalités, améliorations et mises à jour.",
+    "metaDescription": "Actualités de prepza : nouvelles fonctionnalités, langues et améliorations des tests de compétences, entretiens IA et entraînement gratuit. Ici ou par RSS.",
+    "empty": "Aucune actualité pour le moment.",
+    "rss": "Flux RSS"
   },
   "notifications": {
     "title": "Notifications",

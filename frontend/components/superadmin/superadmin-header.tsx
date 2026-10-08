@@ -19,6 +19,7 @@ export function SuperadminHeader({
     | "stats"
     | "controls"
     | "emails"
+    | "news"
   action?: ReactNode
 }) {
   const t = useTranslations("superadmin")
@@ -38,6 +39,7 @@ export function SuperadminHeader({
             href: "/superadmin/templates",
             label: t("templates"),
           },
+          { id: "news", href: "/superadmin/news", label: t("news") },
           { id: "flagged", href: "/superadmin/flagged", label: t("flagged") },
           {
             id: "replaced",
@@ -55,12 +57,12 @@ export function SuperadminHeader({
             label: t("verification"),
           },
           { id: "stats", href: "/superadmin/stats", label: t("stats") },
+          { id: "emails", href: "/superadmin/emails", label: t("emails") },
           {
             id: "controls",
             href: "/superadmin/controls",
             label: t("controls"),
           },
-          { id: "emails", href: "/superadmin/emails", label: t("emails") },
         ]}
         current={current}
       />

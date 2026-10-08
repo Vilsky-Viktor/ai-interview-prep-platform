@@ -64,7 +64,8 @@
     "aiInterviews": "Phỏng vấn AI",
     "compare": "So sánh",
     "guides": "Hướng dẫn",
-    "apiDocs": "Tài liệu API"
+    "apiDocs": "Tài liệu API",
+    "news": "Tin tức"
   },
   "signIn": {
     "title": "Đăng nhập",
@@ -227,7 +228,23 @@
     "companyStopped": "Đã dừng mọi email",
     "remindersStopped": "{count, plural, other {Đã dừng lời nhắc cho # lời mời}}",
     "stopEmails": "Dừng email",
-    "resumeEmails": "Gửi lại email"
+    "resumeEmails": "Gửi lại email",
+    "news": "Tin tức",
+    "newPost": "Bài đăng mới",
+    "editPost": "Sửa bài đăng",
+    "postInEnglish": "Hãy viết bằng tiếng Anh. Sau khi lưu, bài đăng được dịch sang mọi ngôn ngữ khác.",
+    "postTitlePlaceholder": "Nhập tiêu đề tại đây…",
+    "postTextPlaceholder": "Nhập tin tức tại đây…",
+    "postDate": "Ngày",
+    "postText": "Nội dung",
+    "charactersLeft": "{count, plural, other {Còn # ký tự}}",
+    "noNews": "Chưa có bài đăng nào.",
+    "translated": "đã dịch",
+    "translating": "đang dịch…",
+    "deletePostTitle": "Xóa bài đăng này?",
+    "deletePostText": "Bài đăng sẽ bị gỡ khỏi trang tin tức ở mọi ngôn ngữ.",
+    "postSaveFailed": "Không lưu được bài đăng. Vui lòng thử lại.",
+    "postDeleteFailed": "Không xóa được bài đăng. Vui lòng thử lại."
   },
   "templates": {
     "title": "Mẫu",
@@ -926,6 +943,13 @@
       "quote": "Tuyển dụng tốt không nên là đặc quyền của các công ty lớn với ngân sách lớn. Tôi xây dựng prepza để bất kỳ nhóm nào cũng có thể biến mô tả công việc thành một buổi phỏng vấn công bằng trong vài phút, thấy ai thật sự thạo việc và chỉ trả tiền cho những ứng viên tham gia. Mong rằng nó giúp bạn tìm được đúng người nhanh hơn.",
       "role": "Nhà sáng lập duy nhất của prepza"
     }
+  },
+  "news": {
+    "title": "Tin tức prepza",
+    "description": "Có gì mới ở prepza: tính năng mới, cải tiến và cập nhật.",
+    "metaDescription": "Tin tức prepza: tính năng, ngôn ngữ và cải tiến mới cho bài kiểm tra kỹ năng, phỏng vấn AI và luyện tập miễn phí ngay khi ra mắt. Theo dõi tại đây hoặc qua RSS.",
+    "empty": "Chưa có tin tức nào.",
+    "rss": "Nguồn cấp RSS"
   },
   "notifications": {
     "title": "Thông báo",

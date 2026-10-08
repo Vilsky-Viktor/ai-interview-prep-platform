@@ -64,7 +64,8 @@
     "aiInterviews": "AI 面接",
     "compare": "比較",
     "guides": "ガイド",
-    "apiDocs": "API ドキュメント"
+    "apiDocs": "API ドキュメント",
+    "news": "お知らせ"
   },
   "signIn": {
     "title": "サインイン",
@@ -227,7 +228,23 @@
     "companyStopped": "すべてのメールを停止中",
     "remindersStopped": "{count, plural, other {# 件の招待のリマインダーを停止中}}",
     "stopEmails": "メールを停止",
-    "resumeEmails": "メールを再開"
+    "resumeEmails": "メールを再開",
+    "news": "お知らせ",
+    "newPost": "新しい投稿",
+    "editPost": "投稿を編集",
+    "postInEnglish": "英語で書いてください。保存すると、投稿はほかのすべての言語に翻訳されます。",
+    "postTitlePlaceholder": "タイトルを入力…",
+    "postTextPlaceholder": "お知らせの本文を入力…",
+    "postDate": "日付",
+    "postText": "本文",
+    "charactersLeft": "{count, plural, other {残り#文字}}",
+    "noNews": "まだ投稿はありません。",
+    "translated": "翻訳済み",
+    "translating": "翻訳中…",
+    "deletePostTitle": "この投稿を削除しますか？",
+    "deletePostText": "すべての言語のお知らせページから削除されます。",
+    "postSaveFailed": "投稿を保存できませんでした。もう一度お試しください。",
+    "postDeleteFailed": "投稿を削除できませんでした。もう一度お試しください。"
   },
   "templates": {
     "title": "テンプレート",
@@ -934,6 +951,13 @@
       "quote": "良い採用は、大きな予算を持つ大企業だけの特権であってはなりません。私が prepza を作ったのは、どんなチームでも求人票を数分で公平な面接に変え、本当に仕事をわかっている人を見極め、受けた候補者の分だけ支払えるようにするためです。あなたがふさわしい人をより早く見つける助けになれば幸いです。",
       "role": "prepza の一人創業者"
     }
+  },
+  "news": {
+    "title": "prepzaのお知らせ",
+    "description": "prepzaの最新情報：新機能、改善、アップデート。",
+    "metaDescription": "prepzaのお知らせ：スキルテスト、AI面接、無料練習の新機能・対応言語・改善点をリリースと同時にお届けします。このページまたはRSSでご確認ください。",
+    "empty": "まだお知らせはありません。",
+    "rss": "RSSフィード"
   },
   "notifications": {
     "title": "お知らせ",

@@ -64,7 +64,8 @@
     "aiInterviews": "Yapay zekâ mülakatları",
     "compare": "Karşılaştır",
     "guides": "Rehberler",
-    "apiDocs": "API belgeleri"
+    "apiDocs": "API belgeleri",
+    "news": "Haberler"
   },
   "signIn": {
     "title": "Giriş yap",
@@ -227,7 +228,23 @@
     "companyStopped": "Tüm e-postalar durduruldu",
     "remindersStopped": "{count, plural, other {# davet için hatırlatmalar durduruldu}}",
     "stopEmails": "E-postaları durdur",
-    "resumeEmails": "E-postaları sürdür"
+    "resumeEmails": "E-postaları sürdür",
+    "news": "Haberler",
+    "newPost": "Yeni yazı",
+    "editPost": "Yazıyı düzenle",
+    "postInEnglish": "İngilizce yazın. Kaydettikten sonra yazı diğer tüm dillere çevrilir.",
+    "postTitlePlaceholder": "Başlığı buraya yazın…",
+    "postTextPlaceholder": "Haberi buraya yazın…",
+    "postDate": "Tarih",
+    "postText": "Metin",
+    "charactersLeft": "{count, plural, one {# karakter kaldı} other {# karakter kaldı}}",
+    "noNews": "Henüz yazı yok.",
+    "translated": "çevrildi",
+    "translating": "çevriliyor…",
+    "deletePostTitle": "Bu yazı silinsin mi?",
+    "deletePostText": "Haberler sayfasından tüm dillerde kaldırılır.",
+    "postSaveFailed": "Yazı kaydedilemedi. Lütfen tekrar deneyin.",
+    "postDeleteFailed": "Yazı silinemedi. Lütfen tekrar deneyin."
   },
   "templates": {
     "title": "Şablonlar",
@@ -929,6 +946,13 @@
       "quote": "İyi işe alım, büyük bütçeli büyük şirketlerin ayrıcalığı olmamalı. prepza'yı, her ekip bir iş tanımını dakikalar içinde adil bir mülakata dönüştürebilsin, işi gerçekten kimin bildiğini görebilsin ve yalnızca mülakata giren adaylar için ödesin diye geliştirdim. Umarım doğru kişileri daha hızlı bulmanıza yardımcı olur.",
       "role": "prepza'nın tek kurucusu"
     }
+  },
+  "news": {
+    "title": "prepza haberleri",
+    "description": "prepza'daki yenilikler: yeni özellikler, iyileştirmeler ve güncellemeler.",
+    "metaDescription": "prepza haberleri: beceri testleri, yapay zekâ mülakatları ve ücretsiz pratikteki yeni özellikler, diller ve iyileştirmeler. Buradan veya RSS ile takip edin.",
+    "empty": "Henüz haber yok.",
+    "rss": "RSS beslemesi"
   },
   "notifications": {
     "title": "Bildirimler",

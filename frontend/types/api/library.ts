@@ -233,6 +233,45 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/news": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** List News */
+    get: operations["list_news_superadmin_news_get"]
+    put?: never
+    /** Create News */
+    post: operations["create_news_superadmin_news_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/news/{news_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Update News
+     * @description A changed title or text is translated again; a new date alone keeps the translations.
+     */
+    put: operations["update_news_superadmin_news__news_id__put"]
+    post?: never
+    /** Delete News */
+    delete: operations["delete_news_superadmin_news__news_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/superadmin/quality/flagged": {
     parameters: {
       query?: never
@@ -435,6 +474,23 @@ export interface paths {
      *     its practice page. Private and retiring questions are never shown.
      */
     get: operations["sample_questions_templates__key__sample_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/news": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** List News */
+    get: operations["list_news_news_get"]
     put?: never
     post?: never
     delete?: never
@@ -829,6 +885,44 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/news/{news_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get News Source */
+    get: operations["get_news_source_internal_news__news_id__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/news/{news_id}/translations": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Save News Translations
+     * @description Safe to repeat; translations of an older version of the post, or of a deleted one, are
+     *     dropped.
+     */
+    put: operations["save_news_translations_internal_news__news_id__translations_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/templates/{template_id}/practice": {
     parameters: {
       query?: never
@@ -1016,6 +1110,30 @@ export interface components {
         [key: string]: boolean
       }
     }
+    /** AdminNewsOut */
+    AdminNewsOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Title */
+      title: string
+      /** Text */
+      text: string
+      /**
+       * Published On
+       * Format: date
+       */
+      published_on: string
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string
+      /** Translated */
+      translated: boolean
+    }
     /** CreatedOut */
     CreatedOut: {
       /**
@@ -1194,6 +1312,80 @@ export interface components {
     MyReportOut: {
       /** Reported */
       reported: boolean
+    }
+    /**
+     * NewsIn
+     * @description A post as a superadmin writes it, in English.
+     */
+    NewsIn: {
+      /** Title */
+      title: string
+      /** Text */
+      text: string
+      /**
+       * Published On
+       * Format: date
+       */
+      published_on: string
+    }
+    /**
+     * NewsOut
+     * @description A post as the news page shows it, in the reader's language when it's translated.
+     */
+    NewsOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Title */
+      title: string
+      /** Text */
+      text: string
+      /**
+       * Published On
+       * Format: date
+       */
+      published_on: string
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string
+    }
+    /**
+     * NewsSourceOut
+     * @description A post to translate (generation): its English text and the languages it lacks.
+     */
+    NewsSourceOut: {
+      /** Title */
+      title: string
+      /** Text */
+      text: string
+      /** Missing */
+      missing: string[]
+    }
+    /** NewsTranslationIn */
+    NewsTranslationIn: {
+      /** Title */
+      title: string
+      /** Text */
+      text: string
+    }
+    /**
+     * NewsTranslationsIn
+     * @description Translations of the post's English `title` and `text`: saved only while the post still
+     *     reads so, since an edit made during translation starts a new one.
+     */
+    NewsTranslationsIn: {
+      /** Title */
+      title: string
+      /** Text */
+      text: string
+      /** Translations */
+      translations: {
+        [key: string]: components["schemas"]["NewsTranslationIn"]
+      }
     }
     /** OptionIn */
     OptionIn: {
@@ -2235,6 +2427,137 @@ export interface operations {
       }
     }
   }
+  list_news_superadmin_news_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AdminNewsOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  create_news_superadmin_news_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["NewsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AdminNewsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  update_news_superadmin_news__news_id__put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        news_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["NewsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AdminNewsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  delete_news_superadmin_news__news_id__delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        news_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   list_flagged_superadmin_quality_flagged_get: {
     parameters: {
       query?: {
@@ -2630,6 +2953,40 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["SampleQuestionOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_news_news_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["NewsOut"][]
         }
       }
       /** @description Validation Error */
@@ -3289,6 +3646,70 @@ export interface operations {
         content: {
           "application/json": unknown
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_news_source_internal_news__news_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        news_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["NewsSourceOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  save_news_translations_internal_news__news_id__translations_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        news_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["NewsTranslationsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {

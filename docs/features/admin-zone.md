@@ -6,7 +6,7 @@ The admin zone is for superadmins: prepza's own team, not a company's admins.
 - Only they see the Admin zone in the account menu.
 - Everyone else gets "not found" from its pages and routes.
 
-It has eight tabs, in this order: [Templates](#templates), [Flagged](#flagged-and-replaced), [Replaced](#flagged-and-replaced), [Pass rates](#pass-rates), [Verification](#verification), [Stats](#stats), [Controls](#controls) and [Emails](#emails).
+It has nine tabs, in this order: [Templates](#templates), [News](#news), [Flagged](#flagged-and-replaced), [Replaced](#flagged-and-replaced), [Pass rates](#pass-rates), [Verification](#verification), [Stats](#stats), [Emails](#emails) and [Controls](#controls). On a phone the row scrolls sideways.
 
 ## Templates
 
@@ -15,6 +15,23 @@ Ready-made interviews by role (see [Templates and practice](templates-and-practi
 - Generated from a role description, through the same topic review as a company's interview.
 - Titles never name a company.
 - Can be renamed, checked question by question, re-generated or deleted.
+
+## News
+
+The posts on the public [news page](site.md#news), newest first, like the templates list.
+
+- **New post** opens a dialog: a title (up to 120 characters), a date (today unless changed) and the text (up to 500 characters, with a live count of the characters left). Library checks the limits (`MAX_NEWS_TITLE_LENGTH`, `MAX_NEWS_TEXT_LENGTH` in `prepza_common.constants`); the form only shows them.
+- Posts are written in English only. Each row's pencil opens the same dialog to edit it; its bin deletes it after asking.
+- Each row says "translated" once the post is in every other language, "translating…" until then.
+
+**Translation:** after a save, library asks generation (`POST /internal/news/{id}/translate`), which queues a worker job (Cloud Tasks). The job reads the post and the languages it lacks from library, translates it into each with the generation model (meaning, not words: each language's hiring terms; "prepza" and product and ATS names kept), and saves those that worked (`PUT /internal/news/{id}/translations`).
+
+- A language that fails, or whose translation is past the limits, keeps showing the English post. The job then fails, so Cloud Tasks runs it again for the missing languages; library's daily schedule sends every post that still lacks one again.
+- A changed title or text deletes the post's translations and starts a new translation; a new date alone keeps them. Translations of an older text that arrive after an edit are dropped, and saving the same translation again replaces it.
+- While the emergency pause is on, generation refuses the request and the daily schedule sends the post later.
+- Without an OpenAI key (locally), nothing is translated, and every language shows the English post.
+
+Routes (library): `GET/POST /superadmin/news`, `PUT/DELETE /superadmin/news/{id}`.
 
 ## Flagged and replaced
 

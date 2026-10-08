@@ -35,6 +35,7 @@ export const PUBLIC_PATHS = [
   "/faq",
   "/about",
   "/contact",
+  "/news",
   "/practice",
 ]
 
@@ -53,6 +54,7 @@ export const LOCALIZED_PATHS = [
   "/guides",
   "/pre-employment-testing",
   "/ai-interviews",
+  "/news",
 ]
 
 // Articles also have an address in every language: in a language without a translation yet they
@@ -63,6 +65,10 @@ export const LOCALIZED_ARTICLE = /^\/(compare|guides)\/[a-z0-9-]+$/
 // template's language besides English (/de/tests/<slug> for a German template); the page itself
 // answers "not found" in any other language.
 export const TEMPLATE_PAGE = /^\/(tests|practice)\/[a-z0-9-]+$/
+
+// The news page's RSS feed, also served in every other language under its prefix
+// (/de/news/rss.xml); not a page, so it isn't in the sitemap.
+export const NEWS_FEED = "/news/rss.xml"
 
 // Set by proxy.ts on a request that came in under a language prefix: that language, which the
 // page then renders in and names as its canonical address.

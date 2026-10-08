@@ -64,7 +64,8 @@
     "aiInterviews": "AI interviews",
     "compare": "Ikumpara",
     "guides": "Mga gabay",
-    "apiDocs": "Dokumentasyon ng API"
+    "apiDocs": "Dokumentasyon ng API",
+    "news": "Balita"
   },
   "signIn": {
     "title": "Mag-sign in",
@@ -227,7 +228,23 @@
     "companyStopped": "Nakahinto ang lahat ng email",
     "remindersStopped": "{count, plural, one {Nakahinto ang mga paalala para sa # imbitasyon} other {Nakahinto ang mga paalala para sa # imbitasyon}}",
     "stopEmails": "Ihinto ang mga email",
-    "resumeEmails": "Ituloy ang mga email"
+    "resumeEmails": "Ituloy ang mga email",
+    "news": "Balita",
+    "newPost": "Bagong post",
+    "editPost": "I-edit ang post",
+    "postInEnglish": "Isulat sa Ingles. Pagka-save, isinasalin ang post sa lahat ng iba pang wika.",
+    "postTitlePlaceholder": "Isulat dito ang pamagat…",
+    "postTextPlaceholder": "Isulat dito ang balita…",
+    "postDate": "Petsa",
+    "postText": "Teksto",
+    "charactersLeft": "{count, plural, one {# character na lang} other {# character na lang}}",
+    "noNews": "Wala pang post.",
+    "translated": "naisalin na",
+    "translating": "isinasalin…",
+    "deletePostTitle": "Burahin ang post na ito?",
+    "deletePostText": "Aalisin ito sa pahina ng balita sa lahat ng wika.",
+    "postSaveFailed": "Hindi ma-save ang post. Pakisubukang muli.",
+    "postDeleteFailed": "Hindi mabura ang post. Pakisubukang muli."
   },
   "templates": {
     "title": "Mga template",
@@ -934,6 +951,13 @@
       "quote": "Hindi dapat pribilehiyo lang ng malalaking kumpanya na may malaking budget ang mahusay na hiring. Ginawa ko ang prepza para kahit anong team ay magawang patas na interview ang isang job description sa loob ng ilang minuto, makita kung sino ang talagang marunong sa trabaho, at magbayad lang para sa mga aplikanteng sumagot nito. Sana ay matulungan ka nitong mahanap nang mas mabilis ang mga tamang tao.",
       "role": "Solo founder ng prepza"
     }
+  },
+  "news": {
+    "title": "Mga balita ng prepza",
+    "description": "Ano'ng bago sa prepza: mga bagong feature, pagpapahusay at update.",
+    "metaDescription": "Mga balita ng prepza: bagong feature, wika at pagpapahusay sa skills test, AI interview at libreng practice, sa paglabas nila. Sundan dito o sa RSS.",
+    "empty": "Wala pang balita.",
+    "rss": "RSS feed"
   },
   "notifications": {
     "title": "Mga notification",

@@ -64,7 +64,8 @@
     "aiInterviews": "AI 面试",
     "compare": "对比",
     "guides": "指南",
-    "apiDocs": "API 文档"
+    "apiDocs": "API 文档",
+    "news": "新闻"
   },
   "signIn": {
     "title": "登录",
@@ -227,7 +228,23 @@
     "companyStopped": "已停止所有邮件",
     "remindersStopped": "{count, plural, other {已停止 # 个邀请的提醒}}",
     "stopEmails": "停止邮件",
-    "resumeEmails": "恢复邮件"
+    "resumeEmails": "恢复邮件",
+    "news": "新闻",
+    "newPost": "新建文章",
+    "editPost": "编辑文章",
+    "postInEnglish": "请用英文撰写。保存后，文章会被翻译成其他所有语言。",
+    "postTitlePlaceholder": "在此输入标题…",
+    "postTextPlaceholder": "在此输入新闻内容…",
+    "postDate": "日期",
+    "postText": "正文",
+    "charactersLeft": "{count, plural, other {还可输入 # 个字符}}",
+    "noNews": "暂无文章。",
+    "translated": "已翻译",
+    "translating": "翻译中…",
+    "deletePostTitle": "删除这篇文章？",
+    "deletePostText": "它会从所有语言的新闻页面中移除。",
+    "postSaveFailed": "无法保存文章，请重试。",
+    "postDeleteFailed": "无法删除文章，请重试。"
   },
   "templates": {
     "title": "模板",
@@ -921,6 +938,13 @@
       "quote": "好的招聘不应该是预算充足的大公司的特权。我做 prepza，是为了让任何团队都能在几分钟内把职位描述变成公平的面试，看出谁真正懂这份工作，并且只为参加面试的候选人付费。希望它能帮你更快找到合适的人。",
       "role": "prepza 独立创始人"
     }
+  },
+  "news": {
+    "title": "prepza 新闻",
+    "description": "prepza 的最新动态：新功能、改进和更新。",
+    "metaDescription": "prepza 新闻：技能测试、AI 面试和免费练习的新功能、新语言与改进，第一时间发布。可在此页面或通过 RSS 关注。",
+    "empty": "暂无新闻。",
+    "rss": "RSS 订阅"
   },
   "notifications": {
     "title": "通知",

@@ -6,6 +6,23 @@ export function formatDate(iso: string, locale: string) {
   )
 }
 
+/** A calendar day ("2026-10-08") as a medium date in the language asked: the same day in every
+ * time zone. */
+export function formatDay(day: string, locale: string) {
+  return new Intl.DateTimeFormat(locale, {
+    dateStyle: "medium",
+    timeZone: "UTC",
+  }).format(new Date(day))
+}
+
+/** The browser's day today, as a date field takes it ("2026-10-08"). */
+export function today(now = new Date()) {
+  const month = String(now.getMonth() + 1).padStart(2, "0")
+  const day = String(now.getDate()).padStart(2, "0")
+
+  return `${now.getFullYear()}-${month}-${day}`
+}
+
 /** 2400 cents in USD: "$24". */
 export function formatPrice(cents: number, currency: string, locale: string) {
   return new Intl.NumberFormat(locale, {

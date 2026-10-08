@@ -64,7 +64,8 @@
     "aiInterviews": "Entrevistas com IA",
     "compare": "Comparar",
     "guides": "Guias",
-    "apiDocs": "Documentação da API"
+    "apiDocs": "Documentação da API",
+    "news": "Novidades"
   },
   "signIn": {
     "title": "Entrar",
@@ -227,7 +228,23 @@
     "companyStopped": "Todos os e-mails interrompidos",
     "remindersStopped": "{count, plural, one {Lembretes interrompidos para # convite} other {Lembretes interrompidos para # convites}}",
     "stopEmails": "Interromper e-mails",
-    "resumeEmails": "Retomar e-mails"
+    "resumeEmails": "Retomar e-mails",
+    "news": "Novidades",
+    "newPost": "Nova publicação",
+    "editPost": "Editar publicação",
+    "postInEnglish": "Escreva em inglês. Depois de salvar, a publicação é traduzida para todos os outros idiomas.",
+    "postTitlePlaceholder": "Escreva o título aqui…",
+    "postTextPlaceholder": "Escreva a novidade aqui…",
+    "postDate": "Data",
+    "postText": "Texto",
+    "charactersLeft": "{count, plural, one {Resta # caractere} other {Restam # caracteres}}",
+    "noNews": "Ainda não há publicações.",
+    "translated": "traduzida",
+    "translating": "traduzindo…",
+    "deletePostTitle": "Excluir esta publicação?",
+    "deletePostText": "Ela sai da página de novidades em todos os idiomas.",
+    "postSaveFailed": "Não foi possível salvar a publicação. Tente de novo.",
+    "postDeleteFailed": "Não foi possível excluir a publicação. Tente de novo."
   },
   "templates": {
     "title": "Modelos",
@@ -926,6 +943,13 @@
       "quote": "Contratar bem não deveria ser privilégio de grandes empresas com grandes orçamentos. Criei a prepza para que qualquer equipe possa transformar uma descrição de vaga em uma entrevista justa em minutos, ver quem realmente conhece o trabalho e pagar só pelos candidatos que fazem a entrevista. Espero que ela ajude você a encontrar as pessoas certas mais rápido.",
       "role": "Fundador solo da prepza"
     }
+  },
+  "news": {
+    "title": "Novidades da prepza",
+    "description": "O que há de novo na prepza: novos recursos, melhorias e atualizações.",
+    "metaDescription": "Novidades da prepza: novos recursos, idiomas e melhorias nos testes de habilidades, entrevistas com IA e prática gratuita. Acompanhe aqui ou por RSS.",
+    "empty": "Ainda não há novidades.",
+    "rss": "Feed RSS"
   },
   "notifications": {
     "title": "Notificações",

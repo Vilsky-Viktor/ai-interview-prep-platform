@@ -22,8 +22,9 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 - **Public API:** API keys to list interviews, invite candidates and read results, and a signed web hook when a candidate finishes; its reference is on the site.
 - **Pay per candidate:** credits that never expire, $1–3 per candidate, with no paid subscription (an optional automatic top-up saves the card with Paddle as a $0 subscription).
 - **Free practice:** people preparing for a role practise on the templates' revealed questions.
-- **23 languages:** the interface, generated interviews and emails.
-- **Admin zone:** templates, question quality, verification, pass rates, stats, and the pause and maintenance switches.
+- **23 languages:** the interface, generated interviews, emails and news posts.
+- **News:** a public news page; posts are written in English in the admin zone and translated automatically.
+- **Admin zone:** templates, news, question quality, verification, pass rates, stats, and the pause and maintenance switches.
 
 ## Quick start
 
@@ -51,7 +52,7 @@ Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emula
 | [ATS integrations](docs/features/ats.md) | Connecting Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR, linked jobs, results back to the ATS |
 | [Public API](docs/features/api.md) | API keys and their expiry, the routes, signed web hooks, the API page and docs |
 | [Notifications and emails](docs/features/notifications.md) | The bell, emails, Slack, setting up Resend and Slack |
-| [Admin zone](docs/features/admin-zone.md) | Superadmins' templates, quality, pass rates, stats, pause and maintenance mode |
+| [Admin zone](docs/features/admin-zone.md) | Superadmins' templates, news, quality, pass rates, stats, pause and maintenance mode |
 | [Public site](docs/features/site.md) | Home page, skills tests, articles, FAQ and help chat, legal pages, contact, SEO |
 | [Languages](docs/features/languages.md) | The 23 languages, language addresses, fonts, right-to-left |
 

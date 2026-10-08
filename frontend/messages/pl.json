@@ -64,7 +64,8 @@
     "aiInterviews": "Rozmowy z AI",
     "compare": "Porównanie",
     "guides": "Poradniki",
-    "apiDocs": "Dokumentacja API"
+    "apiDocs": "Dokumentacja API",
+    "news": "Aktualności"
   },
   "signIn": {
     "title": "Zaloguj się",
@@ -227,7 +228,23 @@
     "companyStopped": "Wszystkie e-maile zatrzymane",
     "remindersStopped": "{count, plural, other {Zaproszenia z zatrzymanymi przypomnieniami: #}}",
     "stopEmails": "Zatrzymaj e-maile",
-    "resumeEmails": "Wznów e-maile"
+    "resumeEmails": "Wznów e-maile",
+    "news": "Aktualności",
+    "newPost": "Nowy wpis",
+    "editPost": "Edytuj wpis",
+    "postInEnglish": "Pisz po angielsku. Po zapisaniu wpis zostanie przetłumaczony na wszystkie pozostałe języki.",
+    "postTitlePlaceholder": "Tu wpisz tytuł…",
+    "postTextPlaceholder": "Tu wpisz treść wpisu…",
+    "postDate": "Data",
+    "postText": "Treść",
+    "charactersLeft": "{count, plural, one {Został # znak} few {Zostały # znaki} many {Zostało # znaków} other {Zostało # znaku}}",
+    "noNews": "Na razie brak wpisów.",
+    "translated": "przetłumaczony",
+    "translating": "tłumaczenie…",
+    "deletePostTitle": "Usunąć ten wpis?",
+    "deletePostText": "Zniknie ze strony aktualności we wszystkich językach.",
+    "postSaveFailed": "Nie udało się zapisać wpisu. Spróbuj ponownie.",
+    "postDeleteFailed": "Nie udało się usunąć wpisu. Spróbuj ponownie."
   },
   "templates": {
     "title": "Szablony",
@@ -930,6 +947,13 @@
       "quote": "Dobra rekrutacja nie powinna być przywilejem dużych firm z dużymi budżetami. Zbudowałem prepza, aby każdy zespół mógł w kilka minut zamienić opis stanowiska w uczciwą rozmowę, zobaczyć, kto naprawdę zna się na rzeczy, i płacić tylko za kandydatów, którzy wezmą w niej udział. Mam nadzieję, że pomoże Ci szybciej znaleźć właściwych ludzi.",
       "role": "Jedyny założyciel prepza"
     }
+  },
+  "news": {
+    "title": "Aktualności prepza",
+    "description": "Co nowego w prepza: nowe funkcje, ulepszenia i aktualizacje.",
+    "metaDescription": "Aktualności prepza: nowe funkcje, języki i ulepszenia testów umiejętności, rozmów z AI i darmowej praktyki, gdy tylko się pojawią. Śledź tutaj lub przez RSS.",
+    "empty": "Na razie brak aktualności.",
+    "rss": "Kanał RSS"
   },
   "notifications": {
     "title": "Powiadomienia",

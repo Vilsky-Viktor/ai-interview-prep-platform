@@ -127,3 +127,41 @@ export function techArticleData(
     publisher: { "@type": "Organization", name: BRAND, url: site },
   }
 }
+
+/** The news page as a blog in its language, with its posts (as the page shows them) as blog
+ * posts by prepza, each at its place on the page. */
+export function newsData(
+  site: string,
+  page: { title: string; description: string; path: string; language: string },
+  posts: {
+    id: string
+    title: string
+    text: string
+    published_on: string
+    updated_at: string
+  }[]
+) {
+  const url = `${site}${page.path}`
+  const organization = { "@type": "Organization", name: BRAND, url: site }
+
+  return {
+    "@context": CONTEXT,
+    "@type": "Blog",
+    name: page.title,
+    description: page.description,
+    url,
+    inLanguage: page.language,
+    publisher: organization,
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      articleBody: post.text,
+      url: `${url}#${post.id}`,
+      datePublished: post.published_on,
+      dateModified: post.updated_at,
+      inLanguage: page.language,
+      author: organization,
+      publisher: organization,
+    })),
+  }
+}

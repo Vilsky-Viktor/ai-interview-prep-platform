@@ -25,6 +25,7 @@ job text -> extract requirements and level -> draft topics          (both cached
 - Companies hears how an interview's generation ends through events: `generation.completed` stores its questions and title, `generation.failed` (a failed run, or one the sweeper finds stuck) marks it as failed until a retry, and `generation.cancelled` removes it. Interview lists read only what these stored and never ask generation; an interview's own page asks once, in case an event hasn't come yet, and shows what companies knows when generation can't answer.
 - A generation can be cancelled at any step.
 - Every LLM call of the pipeline shares one rate limit across the API and all workers (`LLM_REQUESTS_PER_SECOND`).
+- The worker also translates news posts into every language, with the generation model (`INTERVIEW_MODEL`), as a `translate-news` job (see [Admin zone](features/admin-zone.md#news)).
 
 ## Reusing proven questions
 

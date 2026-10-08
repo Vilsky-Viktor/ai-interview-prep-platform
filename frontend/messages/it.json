@@ -64,7 +64,8 @@
     "aiInterviews": "Colloqui con IA",
     "compare": "Confronta",
     "guides": "Guide",
-    "apiDocs": "Documentazione API"
+    "apiDocs": "Documentazione API",
+    "news": "Novità"
   },
   "signIn": {
     "title": "Accedi",
@@ -227,7 +228,23 @@
     "companyStopped": "Tutte le email fermate",
     "remindersStopped": "{count, plural, one {Promemoria fermati per # invito} other {Promemoria fermati per # inviti}}",
     "stopEmails": "Ferma le email",
-    "resumeEmails": "Riprendi le email"
+    "resumeEmails": "Riprendi le email",
+    "news": "Novità",
+    "newPost": "Nuovo post",
+    "editPost": "Modifica post",
+    "postInEnglish": "Scrivi in inglese. Dopo il salvataggio il post viene tradotto in tutte le altre lingue.",
+    "postTitlePlaceholder": "Scrivi qui il titolo…",
+    "postTextPlaceholder": "Scrivi qui la novità…",
+    "postDate": "Data",
+    "postText": "Testo",
+    "charactersLeft": "{count, plural, one {Resta # carattere} other {Restano # caratteri}}",
+    "noNews": "Ancora nessun post.",
+    "translated": "tradotto",
+    "translating": "traduzione in corso…",
+    "deletePostTitle": "Eliminare questo post?",
+    "deletePostText": "Sparisce dalla pagina delle novità in tutte le lingue.",
+    "postSaveFailed": "Impossibile salvare il post. Riprova.",
+    "postDeleteFailed": "Impossibile eliminare il post. Riprova."
   },
   "templates": {
     "title": "Modelli",
@@ -930,6 +947,13 @@
       "quote": "Assumere bene non dovrebbe essere un privilegio delle grandi aziende con grandi budget. Ho creato prepza perché qualsiasi team possa trasformare una descrizione del ruolo in un colloquio equo in pochi minuti, vedere chi conosce davvero il lavoro e pagare solo per i candidati che lo svolgono. Spero che ti aiuti a trovare prima le persone giuste.",
       "role": "Fondatore unico di prepza"
     }
+  },
+  "news": {
+    "title": "Novità di prepza",
+    "description": "Le novità di prepza: nuove funzioni, miglioramenti e aggiornamenti.",
+    "metaDescription": "Novità di prepza: nuove funzioni, lingue e miglioramenti di test delle competenze, colloqui con IA e pratica gratuita, appena escono. Seguile qui o via RSS.",
+    "empty": "Ancora nessuna novità.",
+    "rss": "Feed RSS"
   },
   "notifications": {
     "title": "Notifiche",

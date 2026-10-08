@@ -29,3 +29,6 @@ export const MAX_EMAIL_LENGTH = 254
 export const MAX_SEARCH_LENGTH = 254
 // companies MAX_BULK_TEXT_LENGTH: a pasted or uploaded list of candidate emails.
 export const MAX_BULK_TEXT_LENGTH = 50000
+// prepza_common MAX_NEWS_TITLE_LENGTH and MAX_NEWS_TEXT_LENGTH: a news post.
+export const MAX_NEWS_TITLE_LENGTH = 120
+export const MAX_NEWS_TEXT_LENGTH = 500

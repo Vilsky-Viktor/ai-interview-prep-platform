@@ -9,6 +9,7 @@ The pages anyone can open without signing in, and how search engines see them. E
 - [Legal pages](#legal-pages)
 - [Documents for companies](#documents-for-companies)
 - [Contact us](#contact-us)
+- [News](#news)
 - [About us and the footer](#about-us-and-the-footer)
 - [Search engines](#search-engines)
 
@@ -119,11 +120,21 @@ The `/api-docs` page ("api docs" in the footer) is the public API's reference, i
 - At most 5 messages a day per address (the `CONTACT_IP_LIMIT` constant in `services/rounds/app/constants/contact.py`).
 - At most 200 a day in all (the `CONTACT_DAILY_LIMIT` setting).
 
+## News
+
+`/news` ("prepza news.") lists prepza's posts newest first, one after another: title (ending with the blue dot, like the site's headings), date and text. No pictures, links or detail pages; the text is plain, with its line breaks. Superadmins write them in the [admin zone](admin-zone.md#news).
+
+- Posts are written in English and translated into every other language after they're saved. Each language's page (`/de/news`, …) shows its translation, or the English post while there's none.
+- The first page is rendered on the server; the next loads when you scroll near the end (library's public `GET /news?offset=&limit=`, in the `Accept-Language` language, no sign-in).
+- Posts are read fresh on every request, not through the public data cache, so a new, changed or deleted post shows at once (`lib/news-posts.ts`).
+- **Search engines:** its own title and meta description in each language, canonical and hreflang addresses for every language, the link-preview picture, and structured data: a `Blog` with the page's posts as `BlogPosting`s by prepza (`newsData` in `lib/structured-data.ts`). The sitemap lists it in every language, dated by its newest post.
+- **RSS:** `/news/rss.xml` (and `/de/news/rss.xml`, … in each language, with the same translations) is an RSS 2.0 feed of the newest 50 posts: each with its title, its text as plain text, its day and its id as the guid, linking to its place on that language's news page (`#<id>`). The page names it in its head and links it with the large RSS icon on the right of its title. It isn't in the sitemap.
+
 ## About us and the footer
 
 `/about` explains why prepza exists for companies, free practice for people preparing, and its solo founder.
 
-The footer links, in three columns: skills tests by role and the articles (pre-employment testing, AI interviews, comparisons, guides); the privacy policy, the terms, the documents and the API docs; free practice, the FAQ, About us and Contact us. Pricing is in the header's menu, not in the footer.
+The footer links, in three columns: skills tests by role and the articles (pre-employment testing, AI interviews, comparisons, guides); the privacy policy, the terms, the documents and the API docs; free practice, the FAQ, About us, News and Contact us. Pricing is in the header's menu, not in the footer.
 
 ## Search engines
 
@@ -136,7 +147,7 @@ Every public page has its title, description, canonical address and link-preview
 
 **Structured data:** organization, product and price range, founder, articles (with their picture and language), the API docs as a technical article in English, breadcrumbs (role and practice pages, the API docs), FAQ (left out when there are no questions).
 
-**Sitemap:** every language version, article, and the pages of each indexable template, dated by the template's last change. The privacy policy, terms and DPA are dated by their last update.
+**Sitemap:** every language version, article, and the pages of each indexable template, dated by the template's last change. The news page is dated by its newest post, and the privacy policy, terms and DPA by their last update.
 
 **Indexing:**
 

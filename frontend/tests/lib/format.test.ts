@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest"
 
-import { formatDate, formatPrice, formatPriceRange } from "@/lib/format"
+import {
+  formatDate,
+  formatDay,
+  formatPrice,
+  formatPriceRange,
+  today,
+} from "@/lib/format"
 
 // Intl puts no-break spaces in some languages' numbers and currencies.
 function plain(text: string) {
@@ -14,6 +20,20 @@ describe("formatDate", () => {
   it("writes a medium date in the language asked", () => {
     expect(formatDate(iso, "en")).toBe("Mar 5, 2026")
     expect(formatDate(iso, "de")).toBe("05.03.2026")
+  })
+})
+
+describe("formatDay", () => {
+  it("writes the day itself, whatever the time zone", () => {
+    expect(formatDay("2026-03-05", "en")).toBe("Mar 5, 2026")
+    expect(formatDay("2026-03-05", "de")).toBe("05.03.2026")
+  })
+})
+
+describe("today", () => {
+  it("is the local day as a date field takes it", () => {
+    expect(today(new Date(2026, 0, 9, 23, 30))).toBe("2026-01-09")
+    expect(today(new Date(2026, 11, 31, 0, 5))).toBe("2026-12-31")
   })
 })
 
