@@ -87,6 +87,17 @@ The service sends, as HTML with a plain-text version:
 
 `SITE_URL` is the site address that links in emails point to.
 
+### Email preferences and consent
+
+Each user chooses, in Settings > Emails, which emails they get beyond service emails (invites, reports, billing problems, legal changes), which always go out. `library` stores the choices (`/library/me/email-preferences`; other services read them at `/internal/users/{id}/email-preferences`):
+
+- the activity digest, one setting per kind: a candidate finished, an invite wasn't delivered, an ATS candidate wasn't invited, an interview is ready; on by default, with one checkbox in Settings that turns all four on or off,
+- reminders (low credits, an interview with no candidates, topics waiting for review); on by default,
+- product updates and news: a soft opt-in for prepza's own users. The sign-in dialog offers an unticked "Don't send me product updates and news"; a first sign-in without it ticked turns updates on, with it ticked leaves them off. A later sign-in never turns them back on, and users who haven't signed in since (no stored preferences) have them off,
+- offers and promotions: off until the user ticks them, in Settings or on the sign-in dialog. Signing in only turns them on: an unticked box there changes nothing.
+
+Every change is logged and never edited (`email_consents`): the setting, on or off, where (`sign_in`, `settings`, `unsubscribe`), on what basis (`choice`, or `soft_opt_in` for updates turned on at a first sign-in that showed the opt-out), the wording's version (`CONSENT_TEXT_VERSION` in `services/library/app/constants/emails.py`, changed whenever the checkboxes' wording changes) and the time. The account export includes both; deleting the account removes them.
+
 ### Sending real emails
 
 Without `RESEND_API_KEY`, emails go to `SMTP_HOST` and `SMTP_PORT`: Mailpit locally (http://localhost:8125). To send real emails through [Resend](https://resend.com):

@@ -66,7 +66,7 @@ flowchart LR
 
 | Service | Responsibility |
 |---|---|
-| `library` | Question sets (topics and questions) of interviews and templates: the template catalog, the question bank's stages, revealed questions for practice; candidates' votes and reports, question quality flags and reuse; also account deletion and export across services |
+| `library` | Question sets (topics and questions) of interviews and templates: the template catalog, the question bank's stages, revealed questions for practice; candidates' votes and reports, question quality flags and reuse; users' email preferences and their consent log; also account deletion and export across services |
 | `generation` | The generation pipeline (LangGraph), run by its worker (`app/worker_main.py`) as Cloud Tasks jobs; topic review, re-generating single questions, the question verifier, and scheduled sweeps |
 | `rounds` | Candidates' interview sessions and their answers, free practice rounds; the FAQ, the help chat, the legal texts and the contact form (`/help/...`) |
 | `companies` | Companies (unique names, logos, verification), members (owner, admins, viewers), interviews, candidate invites (one by one, in bulk, through a shareable link, with reminders), reports |

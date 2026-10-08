@@ -3,8 +3,10 @@ from fastapi.encoders import jsonable_encoder
 from prepza_common.auth import CurrentUser
 from prepza_common.superadmin import is_superadmin
 
+from app.schemas.emails import EmailPreferencesIn, EmailPreferencesOut
 from app.schemas.me import MeOut, SettingsIn
 from app.services.accounts import delete_account, export_account, set_language
+from app.storage import emails
 
 router = APIRouter()
 
@@ -18,6 +20,19 @@ def me(user: CurrentUser) -> MeOut:
 async def update_settings(body: SettingsIn, user: CurrentUser) -> None:
     """Takes effect once the frontend refreshes the user's ID token."""
     await set_language(user, body.language)
+
+
+@router.get("/me/email-preferences")
+async def get_email_preferences(user: CurrentUser) -> EmailPreferencesOut:
+    return EmailPreferencesOut(**await emails.preferences(user.uid))
+
+
+@router.put("/me/email-preferences")
+async def update_email_preferences(
+    body: EmailPreferencesIn, user: CurrentUser
+) -> EmailPreferencesOut:
+    """Changes some settings; each change is logged as consent given or withdrawn."""
+    return EmailPreferencesOut(**await emails.change(user.uid, body.changes, body.source))
 
 
 @router.delete("/me", status_code=status.HTTP_204_NO_CONTENT)

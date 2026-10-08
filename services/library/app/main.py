@@ -13,6 +13,7 @@ from app.config.settings import settings
 from app.integrations.redis import get_redis
 from app.routers import (
     internal,
+    internal_emails,
     internal_events,
     internal_feedback,
     internal_practice,
@@ -52,6 +53,7 @@ app.include_router(superadmin.router)
 app.include_router(superadmin_quality.router)
 app.include_router(templates.router)
 app.include_router(internal.router)
+app.include_router(internal_emails.router)
 app.include_router(schedules.router)
 app.include_router(internal_events.router)
 app.include_router(internal_feedback.router)

@@ -1,0 +1,112 @@
+import pytest
+from prepza_common.auth import current_user
+from prepza_common.user import User
+
+from app.constants.emails import DEFAULTS
+from app.main import app
+from app.storage import emails
+from tests.unit.test_internal import token
+
+USER = User(uid="ann", email="ann@example.com", email_verified=True, name="Ann")
+
+
+@pytest.fixture
+def signed_in(monkeypatch):
+    """Ann is signed in; returns the changes the routes pass to storage."""
+    calls = []
+
+    async def preferences(user_id):
+        return dict(DEFAULTS)
+
+    async def change(user_id, changes, source):
+        calls.append((user_id, changes, source))
+
+        return {**DEFAULTS, **changes}
+
+    monkeypatch.setattr(emails, "preferences", preferences)
+    monkeypatch.setattr(emails, "change", change)
+    app.dependency_overrides[current_user] = lambda: USER
+    yield calls
+
+    app.dependency_overrides.clear()
+
+
+def test_a_new_user_gets_activity_and_reminders_but_no_marketing(client, signed_in):
+    response = client.get("/me/email-preferences")
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "candidate_finished": True,
+        "invite_undelivered": True,
+        "ats_not_invited": True,
+        "interview_ready": True,
+        "reminders": True,
+        "updates": False,
+        "promotions": False,
+    }
+
+
+def test_settings_change_any_setting_either_way(client, signed_in):
+    body = {"changes": {"reminders": False, "updates": True}, "source": "settings"}
+
+    response = client.put("/me/email-preferences", json=body)
+
+    assert response.status_code == 200
+    assert response.json()["reminders"] is False
+    assert response.json()["updates"] is True
+    assert signed_in == [("ann", {"reminders": False, "updates": True}, "settings")]
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"updates": True, "promotions": True},
+        # The updates opt-out was ticked.
+        {"updates": False},
+    ],
+)
+def test_signing_in_sets_updates_and_turns_on_promotions(client, signed_in, changes):
+    body = {"changes": changes, "source": "sign_in"}
+
+    assert client.put("/me/email-preferences", json=body).status_code == 200
+    assert signed_in == [("ann", changes, "sign_in")]
+
+
+@pytest.mark.parametrize(
+    "body",
+    [
+        # Signing in never turns promotions off, nor touches anything but marketing.
+        {"changes": {"promotions": False}, "source": "sign_in"},
+        {"changes": {"reminders": True}, "source": "sign_in"},
+        # Unsubscribing has its own way in.
+        {"changes": {"updates": False}, "source": "unsubscribe"},
+        {"changes": {"newsletter": True}, "source": "settings"},
+        {"changes": {}, "source": "settings"},
+    ],
+)
+def test_refused_changes_change_nothing(client, signed_in, body):
+    assert client.put("/me/email-preferences", json=body).status_code == 422
+    assert signed_in == []
+
+
+def test_preferences_need_a_sign_in(client):
+    assert client.get("/me/email-preferences").status_code == 401
+
+
+def test_services_read_a_users_preferences(client, signed_in):
+    response = client.get(
+        "/internal/users/ann/email-preferences",
+        headers={"Authorization": f"Bearer {token()}"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["updates"] is False
+
+
+def test_the_internal_route_needs_a_service_token(client, signed_in):
+    response = client.get(
+        "/internal/users/ann/email-preferences",
+        headers={"Authorization": "Bearer good-token"},
+    )
+
+    assert response.status_code == 401
