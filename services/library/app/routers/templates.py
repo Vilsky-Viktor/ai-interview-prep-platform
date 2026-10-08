@@ -16,6 +16,7 @@ from app.schemas.templates import (
     TemplateOut,
     TemplateSummary,
 )
+from app.services.templates import summaries
 from app.storage import preparations, templates
 
 # Templates: public, for the practice pages search engines index and for companies to start a
@@ -38,7 +39,7 @@ async def list_templates(
 ) -> list[TemplateSummary]:
     rows = await templates.list_templates(q.strip(), level, language or [], page.offset, page.limit)
 
-    return [TemplateSummary.model_validate(row, from_attributes=True) for row in rows]
+    return await summaries(rows)
 
 
 @router.get("/copyable")
@@ -54,7 +55,7 @@ async def list_copyable_templates(
         q.strip(), level, language or [], page.offset, page.limit, copyable=True
     )
 
-    return [TemplateSummary.model_validate(row, from_attributes=True) for row in rows]
+    return await summaries(rows)
 
 
 async def find_template(key: str) -> QuestionSet:
@@ -80,9 +81,10 @@ async def get_template(key: str) -> TemplateOut:
     """A template's topics and subtopics, by its id or slug, to review before using it."""
     template = await find_template(key)
     topics = await preparations.get_topics(template.id)
+    [summary] = await summaries([template])
 
     return TemplateOut(
-        **TemplateSummary.model_validate(template, from_attributes=True).model_dump(),
+        **summary.model_dump(),
         topics=[
             TopicOut(
                 id=topic.id, title=topic.title, subtopics=topic.subtopics, question_count=count

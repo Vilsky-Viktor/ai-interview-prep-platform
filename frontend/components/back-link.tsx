@@ -3,9 +3,9 @@
 import { cn } from "cn"
 import { ArrowLeftIcon } from "lucide-react"
 import type { ReactNode } from "react"
-import Link from "next/link"
 import { useTranslations } from "next-intl"
 
+import { LocalizedLink } from "@/components/localized-link"
 import { Button } from "@/components/ui/button"
 
 export function BackLink({
@@ -33,7 +33,7 @@ export function BackLink({
         "-ms-3 mb-2 size-11 rounded-xl text-muted-foreground xl:absolute xl:inset-y-0 xl:end-[calc(100%+0.25rem)] xl:my-auto xl:ms-0 xl:size-14",
         className
       )}
-      render={<Link href={href} />}
+      render={<LocalizedLink href={href} />}
       nativeButton={false}
     >
       <ArrowLeftIcon className="size-6 xl:size-8 rtl:-scale-x-100" />

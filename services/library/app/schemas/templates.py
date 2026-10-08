@@ -17,6 +17,10 @@ class TemplateSummary(BaseModel):
     language: str
     topic_count: int
     created_at: datetime
+    # When its title last changed; a sitemap's "last modified".
+    updated_at: datetime
+    # Whether search engines should index its public pages (helpers/templates.py).
+    indexable: bool = False
 
 
 class TemplateCopyIn(BaseModel):

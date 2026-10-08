@@ -1409,6 +1409,16 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string
+      /**
+       * Indexable
+       * @default false
+       */
+      indexable: boolean
       /** Topics */
       topics: components["schemas"]["TopicOut"][]
     }
@@ -1437,6 +1447,16 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string
+      /**
+       * Indexable
+       * @default false
+       */
+      indexable: boolean
     }
     /** TitleIn */
     TitleIn: {
@@ -1635,7 +1655,9 @@ export interface operations {
               | "et"
             )[]
           | null
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -1792,7 +1814,9 @@ export interface operations {
   list_question_reports_superadmin_templates__template_id__questions__question_id__reports_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -1857,7 +1881,9 @@ export interface operations {
   list_flagged_superadmin_quality_flagged_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -1889,7 +1915,9 @@ export interface operations {
   list_replaced_superadmin_quality_replaced_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -1981,7 +2009,9 @@ export interface operations {
   list_reports_superadmin_quality__question_id__reports_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -2015,7 +2045,9 @@ export interface operations {
   list_revision_reports_superadmin_quality_revisions__revision_id__reports_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -2098,7 +2130,9 @@ export interface operations {
               | "et"
             )[]
           | null
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -2159,7 +2193,9 @@ export interface operations {
               | "et"
             )[]
           | null
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -2510,7 +2546,9 @@ export interface operations {
   list_question_reports_internal_sets__set_id__questions__question_id__reports_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never

@@ -197,6 +197,11 @@
     "searchAction": "חיפוש",
     "level": "רמה: {level}",
     "anyLevel": "כל רמה",
+    "levels": {
+      "basic": "בסיסית",
+      "medium": "בינונית",
+      "hard": "קשה"
+    },
     "allLanguages": "כל השפות",
     "languages": "{count, plural, one {שפה אחת} two {# שפות} other {# שפות}}",
     "noMatches": "אין תבניות תואמות.",

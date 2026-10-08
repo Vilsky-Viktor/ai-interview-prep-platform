@@ -197,6 +197,11 @@
     "searchAction": "Buscar",
     "level": "Nivel: {level}",
     "anyLevel": "Cualquier nivel",
+    "levels": {
+      "basic": "básico",
+      "medium": "intermedio",
+      "hard": "difícil"
+    },
     "allLanguages": "Todos los idiomas",
     "languages": "{count, plural, one {# idioma} other {# idiomas}}",
     "noMatches": "Ninguna plantilla coincide.",

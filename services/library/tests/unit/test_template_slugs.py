@@ -16,6 +16,7 @@ TEMPLATE = SimpleNamespace(
     language="en",
     topic_count=2,
     created_at=datetime(2026, 10, 5, tzinfo=UTC),
+    updated_at=datetime(2026, 10, 5, tzinfo=UTC),
 )
 
 
@@ -66,10 +67,14 @@ def stored(monkeypatch):
 
         return [(question, "Ledgers")]
 
+    async def duplicate_ids(ids):
+        return set()
+
     monkeypatch.setattr(preparations, "get", get)
     monkeypatch.setattr(preparations, "get_topics", get_topics)
     monkeypatch.setattr(templates, "get_by_slug", get_by_slug)
     monkeypatch.setattr(templates, "sample_questions", sample_questions)
+    monkeypatch.setattr(templates, "duplicate_ids", duplicate_ids)
 
     return asked
 
@@ -81,6 +86,8 @@ def test_a_template_is_found_by_its_slug_or_its_id(client, stored):
     assert by_slug["id"] == by_id["id"] == str(TEMPLATE.id)
     assert by_slug["slug"] == "senior-accountant"
     assert by_slug["created_at"].startswith("2026-10-05")
+    # Two topics: too thin for search engines.
+    assert by_slug["indexable"] is False
     assert client.get("/templates/no-such-template").status_code == 404
     assert client.get(f"/templates/{uuid.uuid4()}").status_code == 404
 

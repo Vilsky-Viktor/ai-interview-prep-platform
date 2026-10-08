@@ -4,6 +4,7 @@ import { LayersIcon } from "lucide-react"
 import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
 
+import { useUrlLocale } from "@/components/localized-link"
 import { UseTemplate } from "@/components/templates/use-template"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -15,6 +16,7 @@ import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { byId } from "@/lib/paged-list"
 import { formatDate } from "@/lib/format"
+import { localizedPath } from "@/lib/locale-path"
 import type { TemplateSummary } from "@/types/superadmin"
 
 /** The templates at `path`, newest first, a page at a time; `initial` is the server's first
@@ -38,6 +40,7 @@ export function TemplateList({
 }) {
   const t = useTranslations("templates")
   const locale = useLocale()
+  const urlLocale = useUrlLocale()
   const { items, loadMore } = usePagedList(path, byId, initial)
 
   if (items.length === 0) {
@@ -67,7 +70,7 @@ export function TemplateList({
             {/* Their own column, so the tags line up whatever the title's length. */}
             <span className="flex shrink-0 gap-2">
               <Badge variant="outline" className="h-7 px-3 text-sm font-light">
-                {template.level}
+                {t(`levels.${template.level}`)}
               </Badge>
               <Badge
                 variant="outline"
@@ -96,11 +99,19 @@ export function TemplateList({
           </>
         )
 
+        const href = `${openBase}/${(bySlug && template.slug) || template.id}`
+
         // One hover surface: the link stretches over the whole row, "Use template" sits on top.
         return (
           <div className="relative flex items-center gap-6 p-6 transition-colors hover:bg-muted/50">
             <Link
-              href={`${openBase}/${(bySlug && template.slug) || template.id}`}
+              // On a language's address (/de/tests), a template in that language opens there
+              // too; the others have only their English address.
+              href={
+                template.language === urlLocale
+                  ? localizedPath(urlLocale, href)
+                  : href
+              }
               // On phones the title takes its own line, the tags and count the next.
               className="flex min-w-0 flex-1 flex-wrap items-center gap-x-6 gap-y-3 after:absolute after:inset-0 sm:flex-nowrap"
             >

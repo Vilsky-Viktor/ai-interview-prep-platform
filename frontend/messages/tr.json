@@ -197,6 +197,11 @@
     "searchAction": "Ara",
     "level": "Seviye: {level}",
     "anyLevel": "Her seviye",
+    "levels": {
+      "basic": "temel",
+      "medium": "orta",
+      "hard": "zor"
+    },
     "allLanguages": "Tüm diller",
     "languages": "{count, plural, one {# dil} other {# dil}}",
     "noMatches": "Eşleşen şablon yok.",
@@ -912,7 +917,7 @@
     "intro": "Bir pozisyon için süreli bir mülakatla pratik yapın, sonra notunuzu ve tüm doğru cevapları görün. Ücretsiz.",
     "about": "Süreli pratik mülakat. Bitirdiğinizde notunuzu ve tüm doğru cevapları görün. Gizli ve ücretsiz.",
     "pageTitle": "{title}: ücretsiz mülakat simülasyonu",
-    "pageDescription": "{title} için ücretsiz {level} mülakat simülasyonu: {count, plural, one {# konu} other {# konu}}, süreli, sonunda notunuz ve tüm doğru cevaplarla. Gerçek bir iş mülakatı değil, pratik.",
+    "pageDescription": "{title} için ücretsiz {level} seviye mülakat simülasyonu: {count, plural, one {# konu} other {# konu}}, süreli, sonunda notunuz ve tüm doğru cevaplarla. Gerçek bir iş mülakatı değil, pratik.",
     "start": "Pratiğe başla",
     "again": "Tekrar pratik yap",
     "continue": "Devam et",

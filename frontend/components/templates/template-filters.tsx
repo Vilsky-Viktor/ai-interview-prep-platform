@@ -93,7 +93,9 @@ export function TemplateFilterBar({
         <DropdownMenuTrigger
           render={<Button type="button" variant="ghost" className={TRIGGER} />}
         >
-          {t("level", { level: current.level ?? t("anyLevel") })}
+          {t("level", {
+            level: current.level ? t(`levels.${current.level}`) : t("anyLevel"),
+          })}
           <ChevronDownIcon className="text-muted-foreground" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-48 p-2">
@@ -112,7 +114,7 @@ export function TemplateFilterBar({
                 value={level}
                 className="px-3 py-2 lowercase"
               >
-                {level}
+                {t(`levels.${level}`)}
               </DropdownMenuRadioItem>
             ))}
           </DropdownMenuRadioGroup>

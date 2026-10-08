@@ -9,3 +9,8 @@ FALLBACK_SLUG = "template"
 
 # Slugs a template never gets: the words of the other /templates/<word> routes (routers/templates.py).
 RESERVED_SLUGS = {"filters", "copyable"}
+
+# Search engines index a template's public pages (its role test and practice pages) only with at
+# least this many topics: a page about one or two topics is too thin to rank, and a demo or test
+# template has one (helpers/templates.py).
+MIN_INDEXABLE_TOPICS = 3

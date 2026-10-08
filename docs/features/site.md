@@ -136,10 +136,11 @@ Every public page has its title, description, canonical address and link-preview
 
 **Structured data:** organization, product and price range, founder, articles, breadcrumbs, FAQ.
 
-**Sitemap:** every language version, template page and article.
+**Sitemap:** every language version, article, and the pages of each indexable template, dated by the template's last change.
 
 **Indexing:**
 
 - Private pages (signed-in areas and personal links) answer with `X-Robots-Tag: noindex`.
+- A template's role test and practice pages are indexable only when the template has at least 3 topics (`MIN_INDEXABLE_TOPICS`) and is the first template of its title in its language. Others say `noindex` and stay out of the sitemap.
 - robots.txt blocks only `/api/` and `/monitoring`.
 - `GOOGLE_SITE_VERIFICATION` and `BING_SITE_VERIFICATION` add Search Console's and Bing's ownership tags when set.

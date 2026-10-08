@@ -26,17 +26,23 @@ export async function generateMetadata({ params }: Params) {
   const t = await getTranslations("tests")
   const template = await publicFetch<Template>(`/library/templates/${slug}`)
 
-  return template
-    ? pageMetadata(
-        t("pageTitle", { role: template.title }),
-        t("pageDescription", {
-          role: template.title,
-          count: template.topic_count,
-        }),
-        `/tests/${template.slug ?? template.id}`,
-        templateLocales(template.language)
-      )
-    : {}
+  if (!template) {
+    return {}
+  }
+
+  return {
+    ...(await pageMetadata(
+      t("pageTitle", { role: template.title }),
+      t("pageDescription", {
+        role: template.title,
+        count: template.topic_count,
+      }),
+      `/tests/${template.slug ?? template.id}`,
+      templateLocales(template.language)
+    )),
+    // Kept out of search results when the API says it's too thin or a near-duplicate.
+    robots: template.indexable ? undefined : { index: false },
+  }
 }
 
 /** A role's skills test for companies hiring for it, made from its template: what it checks,
@@ -45,9 +51,13 @@ export async function generateMetadata({ params }: Params) {
 export default async function RoleTestPage({ params }: Params) {
   const { slug: key } = await params
   const t = await getTranslations("tests")
+  const tLevel = await getTranslations("templates.levels")
   const template = await publicFetch<Template>(`/library/templates/${key}`)
 
   const locale = await urlLocale()
+
+  // Links stay in the language of the page's address (/de/tests/… leads to /de/…).
+  const at = (path: string) => localizedPath(locale ?? DEFAULT_LOCALE, path)
 
   // Only English and the template's own language have this page.
   if (!template || (locale && locale !== template.language)) {
@@ -55,9 +65,7 @@ export default async function RoleTestPage({ params }: Params) {
   }
 
   if (template.slug && key !== template.slug) {
-    permanentRedirect(
-      localizedPath(locale ?? DEFAULT_LOCALE, `/tests/${template.slug}`)
-    )
+    permanentRedirect(at(`/tests/${template.slug}`))
   }
 
   const slug = template.slug ?? template.id
@@ -75,9 +83,9 @@ export default async function RoleTestPage({ params }: Params) {
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
       <JsonLd
         data={breadcrumbData(siteUrl(), [
-          { name: "prepza", path: "/" },
-          { name: t("title"), path: "/tests" },
-          { name: template.title, path: `/tests/${slug}` },
+          { name: "prepza", path: at("/") },
+          { name: t("title"), path: at("/tests") },
+          { name: template.title, path: at(`/tests/${slug}`) },
         ])}
       />
       <PageHeader
@@ -85,7 +93,7 @@ export default async function RoleTestPage({ params }: Params) {
         tags={
           <>
             <Badge variant="outline" className="h-7 px-3 text-sm font-light">
-              {template.level}
+              {tLevel(template.level)}
             </Badge>
             <Badge
               variant="outline"
@@ -106,7 +114,7 @@ export default async function RoleTestPage({ params }: Params) {
         <div className="flex flex-wrap items-center gap-3">
           <Button
             className="h-12 px-6 text-base"
-            render={<Link href="/" />}
+            render={<Link href={at("/")} />}
             nativeButton={false}
           >
             {t("create")}
@@ -114,7 +122,7 @@ export default async function RoleTestPage({ params }: Params) {
           <Button
             variant="outline"
             className="h-12 px-6 text-base"
-            render={<Link href={`/practice/${slug}`} />}
+            render={<Link href={at(`/practice/${slug}`)} />}
             nativeButton={false}
           >
             {t("practise")}

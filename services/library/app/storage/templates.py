@@ -1,8 +1,8 @@
 import uuid
 
 from prepza_common.sets import PreparationIn
-from sqlalchemy import Text, cast, func, or_, select, text
-from sqlalchemy.orm import selectinload
+from sqlalchemy import Text, and_, cast, func, or_, select, text
+from sqlalchemy.orm import aliased, selectinload
 
 from app.constants.reuse import MIN_COPY_QUESTIONS
 from app.constants.sets import PLATFORM_OWNER, REVEALED_EVERY, OwnerType, SetKind, Stage
@@ -73,6 +73,29 @@ async def get_by_slug(slug: str) -> QuestionSet | None:
 
     async with Session() as session:
         return await session.scalar(query)
+
+
+async def duplicate_ids(ids: list[uuid.UUID]) -> set[uuid.UUID]:
+    """The templates among `ids` with an older template of the same title (any case) and
+    language: near-duplicates of it. Of two made at once, the one with the smaller id is older."""
+    older = aliased(QuestionSet)
+    has_older = (
+        select(older.id)
+        .where(
+            older.kind == SetKind.TEMPLATE,
+            func.lower(older.title) == func.lower(QuestionSet.title),
+            older.language == QuestionSet.language,
+            or_(
+                older.created_at < QuestionSet.created_at,
+                and_(older.created_at == QuestionSet.created_at, older.id < QuestionSet.id),
+            ),
+        )
+        .exists()
+    )
+    query = select(QuestionSet.id).where(QuestionSet.id.in_(ids), has_older)
+
+    async with Session() as session:
+        return set(await session.scalars(query))
 
 
 async def sample_questions(template_id: uuid.UUID, limit: int) -> list[tuple[Question, str]]:

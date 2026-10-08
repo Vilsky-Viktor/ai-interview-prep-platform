@@ -39,7 +39,7 @@
     "contact": "Contact",
     "about": "Over ons",
     "practice": "Gratis oefenen",
-    "tests": "Vaardigheidstests",
+    "tests": "Selectietesten per functie",
     "preEmploymentTesting": "Selectietests",
     "aiInterviews": "AI-interviews",
     "compare": "Vergelijken",
@@ -197,6 +197,11 @@
     "searchAction": "Zoeken",
     "level": "Niveau: {level}",
     "anyLevel": "Elk niveau",
+    "levels": {
+      "basic": "basis",
+      "medium": "gemiddeld",
+      "hard": "moeilijk"
+    },
     "allLanguages": "Alle talen",
     "languages": "{count, plural, one {# taal} other {# talen}}",
     "noMatches": "Geen sjablonen gevonden.",
@@ -909,7 +914,7 @@
     "intro": "Oefen voor een functie met een interview met tijdslimiet en bekijk daarna je score en elk juist antwoord. Kosteloos.",
     "about": "Oefeninterview met tijdslimiet. Als je klaar bent, zie je je score en elk juist antwoord. Privé en gratis.",
     "pageTitle": "{title}: sollicitatiegesprek gratis oefenen",
-    "pageDescription": "Sollicitatiegesprek gratis oefenen op {level}-niveau voor {title}: {count, plural, one {# onderwerp} other {# onderwerpen}}, met tijdslimiet, met je score en elk juist antwoord achteraf. Oefening, geen echt sollicitatiegesprek.",
+    "pageDescription": "Sollicitatiegesprek gratis oefenen (niveau: {level}) voor {title}: {count, plural, one {# onderwerp} other {# onderwerpen}}, met tijdslimiet, met je score en elk juist antwoord achteraf. Oefening, geen echt sollicitatiegesprek.",
     "start": "Oefenen starten",
     "again": "Opnieuw oefenen",
     "continue": "Doorgaan",
@@ -956,7 +961,7 @@
     "updated": "Laatst bijgewerkt",
     "englishOnly": "Deze pagina is alleen in het Engels.",
     "startTitle": "Test je kandidaten",
-    "startText": "Maak een vaardigheidstest met tijdslimiet op basis van je vacaturetekst. $1–3 per kandidaat, zonder abonnement.",
+    "startText": "Maak een selectietest met tijdslimiet op basis van je vacaturetekst. $1–3 per kandidaat, zonder abonnement.",
     "startButton": "Test maken"
   },
   "compare": {
@@ -965,12 +970,12 @@
   },
   "guides": {
     "title": "Gidsen voor werving",
-    "intro": "Praktische gidsen voor hiring managers: sollicitanten screenen, vaardigheidstests en AI eerlijk en wettig inzetten bij werving."
+    "intro": "Praktische gidsen voor hiring managers: sollicitanten screenen, selectietesten en AI eerlijk en wettig inzetten bij werving."
   },
   "tests": {
     "title": "Selectietesten per functie",
-    "intro": "Kant-en-klare vaardigheidstests met tijdslimiet voor veelvoorkomende functies. Gebruik er een zoals hij is, of maak een test op basis van je eigen vacaturetekst.",
-    "heading": "Vaardigheidstest {role} voor werving",
+    "intro": "Kant-en-klare selectietesten met tijdslimiet voor veelvoorkomende functies. Gebruik er een zoals hij is, of maak een test op basis van je eigen vacaturetekst.",
+    "heading": "{role} test voor sollicitanten",
     "pageTitle": "{role} test voor sollicitanten",
     "pageDescription": "Getimede {role} test voor sollicitanten, over {count, plural, one {# onderwerp} other {# onderwerpen}}. Elke kandidaat krijgt eigen willekeurige vragen. $1–3 per kandidaat.",
     "lead": "Een meerkeuzetest met tijdslimiet over de vaardigheden voor deze functie. Elke kandidaat krijgt een eigen willekeurige set vragen met een timer bij elke vraag, en jij krijgt een scorekaart met elk antwoord en de tijd ervan. $1–3 per kandidaat, zonder abonnement.",

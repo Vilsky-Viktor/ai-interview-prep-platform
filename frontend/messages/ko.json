@@ -197,6 +197,11 @@
     "searchAction": "검색",
     "level": "수준: {level}",
     "anyLevel": "모든 수준",
+    "levels": {
+      "basic": "초급",
+      "medium": "중급",
+      "hard": "고급"
+    },
     "allLanguages": "모든 언어",
     "languages": "{count, plural, other {#개 언어}}",
     "noMatches": "일치하는 템플릿이 없습니다.",

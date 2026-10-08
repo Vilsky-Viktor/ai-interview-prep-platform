@@ -197,6 +197,11 @@
     "searchAction": "ค้นหา",
     "level": "ระดับ: {level}",
     "anyLevel": "ทุกระดับ",
+    "levels": {
+      "basic": "พื้นฐาน",
+      "medium": "กลาง",
+      "hard": "ยาก"
+    },
     "allLanguages": "ทุกภาษา",
     "languages": "{count, plural, other {# ภาษา}}",
     "noMatches": "ไม่มีเทมเพลตที่ตรงกัน",

@@ -197,6 +197,11 @@
     "searchAction": "بحث",
     "level": "المستوى: {level}",
     "anyLevel": "أي مستوى",
+    "levels": {
+      "basic": "أساسي",
+      "medium": "متوسط",
+      "hard": "صعب"
+    },
     "allLanguages": "كل اللغات",
     "languages": "{count, plural, zero {لا لغات} one {لغة واحدة} two {لغتان} few {# لغات} many {# لغةً} other {# لغة}}",
     "noMatches": "لا توجد قوالب مطابقة.",

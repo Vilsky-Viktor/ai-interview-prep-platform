@@ -19,7 +19,8 @@ type Template = {
   id: string
   slug: string | null
   language: string
-  created_at: string
+  updated_at: string
+  indexable: boolean
 }
 
 /** Every template, read from the public list a page at a time. */
@@ -86,8 +87,8 @@ async function articles(site: string) {
 }
 
 /** The public pages (those in every language with each language's address), the articles in
- * their languages with their dates, and each template's role test page and free practice
- * page. */
+ * their languages with their dates, and the role test page and free practice page of each
+ * template the API marks indexable. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const site = siteUrl()
   const absolute = (links: Record<string, string>) =>
@@ -113,21 +114,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ),
     ...written,
     // A template's pages in English and in its language, each naming the other.
-    ...rows.flatMap((row) => {
-      const languages = templateLocales(row.language)
+    ...rows
+      .filter((row) => row.indexable)
+      .flatMap((row) => {
+        const languages = templateLocales(row.language)
 
-      return ["/tests", "/practice"].flatMap((base) => {
-        const path = `${base}/${row.slug ?? row.id}`
-        const alternates = languages
-          ? { languages: absolute(languageAlternates(path, languages)) }
-          : undefined
+        return ["/tests", "/practice"].flatMap((base) => {
+          const path = `${base}/${row.slug ?? row.id}`
+          const alternates = languages
+            ? { languages: absolute(languageAlternates(path, languages)) }
+            : undefined
 
-        return (languages || [DEFAULT_LOCALE]).map((locale) => ({
-          url: `${site}${localizedPath(locale, path)}`,
-          lastModified: row.created_at,
-          alternates,
-        }))
-      })
-    }),
+          return (languages || [DEFAULT_LOCALE]).map((locale) => ({
+            url: `${site}${localizedPath(locale, path)}`,
+            lastModified: row.updated_at,
+            alternates,
+          }))
+        })
+      }),
   ]
 }

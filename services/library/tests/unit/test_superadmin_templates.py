@@ -18,6 +18,7 @@ TEMPLATE = SimpleNamespace(
     language="en",
     topic_count=7,
     created_at=datetime(2026, 10, 5, tzinfo=UTC),
+    updated_at=datetime(2026, 10, 6, tzinfo=UTC),
 )
 
 
@@ -49,7 +50,11 @@ def stored(monkeypatch):
     async def get(set_id):
         return TEMPLATE if set_id == TEMPLATE.id else SimpleNamespace(kind="interview")
 
+    async def duplicate_ids(ids):
+        return set()
+
     monkeypatch.setattr(templates, "list_templates", list_templates)
+    monkeypatch.setattr(templates, "duplicate_ids", duplicate_ids)
     monkeypatch.setattr(preparations, "get", get)
 
     return asked
@@ -202,3 +207,24 @@ def test_a_replaced_questions_kept_reports_are_listed_newest_first(client, signe
     reports = client.get(f"/superadmin/quality/revisions/{uuid.uuid4()}/reports").json()
 
     assert [report["comment"] for report in reports] == ["New", "Old"]
+
+
+def test_a_template_says_whether_its_pages_are_indexed(client, stored, monkeypatch):
+    async def get_topics(set_id):
+        return []
+
+    async def duplicate_ids(ids):
+        return set(ids)
+
+    monkeypatch.setattr(preparations, "get_topics", get_topics)
+
+    [listed] = client.get("/templates").json()
+    found = client.get(f"/templates/{TEMPLATE.id}").json()
+
+    assert listed["indexable"] and found["indexable"]
+    assert found["updated_at"] == "2026-10-06T00:00:00Z"
+
+    # A later template with the same title is a near-duplicate.
+    monkeypatch.setattr(templates, "duplicate_ids", duplicate_ids)
+
+    assert not client.get("/templates").json()[0]["indexable"]

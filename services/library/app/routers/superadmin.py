@@ -14,6 +14,7 @@ from app.schemas.preparations import QuestionText, TitleIn, TopicOut
 from app.schemas.templates import TemplateOut, TemplateSummary
 from app.services import quality as quality_service
 from app.services.questions import question_texts
+from app.services.templates import summaries
 from app.storage import feedback, preparations
 from app.storage import templates as template_storage
 
@@ -42,16 +43,17 @@ async def list_templates(
         q.strip(), level, language or [], page.offset, page.limit
     )
 
-    return [TemplateSummary.model_validate(item, from_attributes=True) for item in templates]
+    return await summaries(templates)
 
 
 @router.get("/{template_id}")
 async def get_template_detail(template_id: UUID, superadmin: SuperadminUser) -> TemplateOut:
     template = await get_template(template_id)
     topics = await preparations.get_topics(template_id)
+    [summary] = await summaries([template])
 
     return TemplateOut(
-        **TemplateSummary.model_validate(template, from_attributes=True).model_dump(),
+        **summary.model_dump(),
         topics=[
             TopicOut(
                 id=topic.id, title=topic.title, subtopics=topic.subtopics, question_count=count

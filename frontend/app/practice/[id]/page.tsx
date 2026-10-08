@@ -25,20 +25,27 @@ export async function generateMetadata({
 }) {
   const { id } = await params
   const t = await getTranslations("practice")
+  const tLevel = await getTranslations("templates.levels")
   const template = await serverFetch<Template>(`/library/templates/${id}`)
 
-  return template
-    ? pageMetadata(
-        t("pageTitle", { title: template.title }),
-        t("pageDescription", {
-          title: template.title,
-          level: template.level,
-          count: template.topic_count,
-        }),
-        `/practice/${template.slug ?? template.id}`,
-        templateLocales(template.language)
-      )
-    : {}
+  if (!template) {
+    return {}
+  }
+
+  return {
+    ...(await pageMetadata(
+      t("pageTitle", { title: template.title }),
+      t("pageDescription", {
+        title: template.title,
+        level: tLevel(template.level),
+        count: template.topic_count,
+      }),
+      `/practice/${template.slug ?? template.id}`,
+      templateLocales(template.language)
+    )),
+    // Kept out of search results when the API says it's too thin or a near-duplicate.
+    robots: template.indexable ? undefined : { index: false },
+  }
 }
 
 /** One free practice test, public for search engines: the role, its level and language, and
@@ -51,6 +58,7 @@ export default async function PracticeTestPage({
 }) {
   const { id: key } = await params
   const t = await getTranslations("practice")
+  const tLevel = await getTranslations("templates.levels")
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const template = await serverFetch<Template>(`/library/templates/${key}`)
 
@@ -85,7 +93,7 @@ export default async function PracticeTestPage({
         tags={
           <>
             <Badge variant="outline" className="h-7 px-3 text-sm font-light">
-              {template.level}
+              {tLevel(template.level)}
             </Badge>
             <Badge
               variant="outline"

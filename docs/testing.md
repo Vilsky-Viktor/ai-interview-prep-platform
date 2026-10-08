@@ -76,7 +76,7 @@ They check:
 - the footer at the end,
 - lowercase titles (articles keep their capitals).
 
-`seo.spec.ts` checks language addresses and hreflang, titles, structured data, the sitemap, robots.txt, noindex on private pages, redirects and the footer.
+`seo.spec.ts` checks language addresses and hreflang, titles, structured data, the sitemap, robots.txt, noindex on private pages and thin template pages, links and levels on a template's page in its language, redirects and the footer.
 
 ```bash
 ./e2e_tests/pages.sh

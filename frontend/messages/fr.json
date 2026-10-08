@@ -197,6 +197,11 @@
     "searchAction": "Rechercher",
     "level": "Niveau : {level}",
     "anyLevel": "Tous niveaux",
+    "levels": {
+      "basic": "basique",
+      "medium": "intermédiaire",
+      "hard": "difficile"
+    },
     "allLanguages": "Toutes les langues",
     "languages": "{count, plural, one {# langue} other {# langues}}",
     "noMatches": "Aucun modèle ne correspond.",

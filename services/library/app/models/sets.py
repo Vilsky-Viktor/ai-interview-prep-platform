@@ -35,6 +35,9 @@ class QuestionSet(Base):
     # Stored so lists don't count per row; storage/stats.py keeps them up to date.
     topic_count: Mapped[int] = mapped_column(default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
 
     topics: Mapped[list["Topic"]] = relationship(
         order_by="Topic.position", cascade="all, delete-orphan"

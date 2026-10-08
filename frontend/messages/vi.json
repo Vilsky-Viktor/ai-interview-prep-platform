@@ -197,6 +197,11 @@
     "searchAction": "Tìm",
     "level": "Cấp độ: {level}",
     "anyLevel": "Mọi cấp độ",
+    "levels": {
+      "basic": "cơ bản",
+      "medium": "trung bình",
+      "hard": "khó"
+    },
     "allLanguages": "Mọi ngôn ngữ",
     "languages": "{count, plural, other {# ngôn ngữ}}",
     "noMatches": "Không có mẫu phù hợp.",

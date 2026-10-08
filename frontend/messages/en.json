@@ -197,6 +197,11 @@
     "searchAction": "Search",
     "level": "Level: {level}",
     "anyLevel": "Any level",
+    "levels": {
+      "basic": "basic",
+      "medium": "medium",
+      "hard": "hard"
+    },
     "allLanguages": "All languages",
     "languages": "{count, plural, one {# language} other {# languages}}",
     "noMatches": "No templates match.",

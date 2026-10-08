@@ -197,6 +197,11 @@
     "searchAction": "جست‌وجو",
     "level": "سطح: {level}",
     "anyLevel": "هر سطحی",
+    "levels": {
+      "basic": "مقدماتی",
+      "medium": "متوسط",
+      "hard": "دشوار"
+    },
     "allLanguages": "همه زبان‌ها",
     "languages": "{count, plural, one {# زبان} other {# زبان}}",
     "noMatches": "قالبی مطابق نیست.",

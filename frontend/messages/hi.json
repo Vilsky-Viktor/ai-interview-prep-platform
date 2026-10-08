@@ -197,6 +197,11 @@
     "searchAction": "खोजें",
     "level": "स्तर: {level}",
     "anyLevel": "कोई भी स्तर",
+    "levels": {
+      "basic": "बुनियादी",
+      "medium": "मध्यम",
+      "hard": "कठिन"
+    },
     "allLanguages": "सभी भाषाएँ",
     "languages": "{count, plural, one {# भाषा} other {# भाषाएँ}}",
     "noMatches": "कोई टेम्पलेट मेल नहीं खाता।",

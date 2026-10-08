@@ -197,6 +197,11 @@
     "searchAction": "Otsi",
     "level": "Tase: {level}",
     "anyLevel": "Iga tase",
+    "levels": {
+      "basic": "lihtne",
+      "medium": "keskmine",
+      "hard": "raske"
+    },
     "allLanguages": "Kõik keeled",
     "languages": "{count, plural, one {# keel} other {# keelt}}",
     "noMatches": "Sobivaid malle pole.",
@@ -917,7 +922,7 @@
     "intro": "Harjuta rolli jaoks ajapiiranguga intervjuuga ning vaata siis oma hinnet ja kõiki õigeid vastuseid. Tasuta.",
     "about": "Ajapiiranguga harjutusintervjuu. Kui oled valmis, näed oma hinnet ja kõiki õigeid vastuseid. Privaatne ja tasuta.",
     "pageTitle": "{title}: tasuta harjutustest tööintervjuuks",
-    "pageDescription": "Tasuta {level} taseme harjutustest tööintervjuuks valmistumiseks, roll {title}: {count, plural, one {# teema} other {# teemat}}, ajapiiranguga, lõpus hinne ja kõik õiged vastused. Harjutus, mitte päris töövestlus.",
+    "pageDescription": "Tasuta harjutustest tööintervjuuks valmistumiseks ({level}), roll {title}: {count, plural, one {# teema} other {# teemat}}, ajapiiranguga, lõpus hinne ja kõik õiged vastused. Harjutus, mitte päris töövestlus.",
     "start": "Alusta harjutamist",
     "again": "Harjuta uuesti",
     "continue": "Jätka",

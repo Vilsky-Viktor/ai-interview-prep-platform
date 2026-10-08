@@ -197,6 +197,11 @@
     "searchAction": "Buscar",
     "level": "Nível: {level}",
     "anyLevel": "Qualquer nível",
+    "levels": {
+      "basic": "básico",
+      "medium": "intermediário",
+      "hard": "difícil"
+    },
     "allLanguages": "Todos os idiomas",
     "languages": "{count, plural, one {# idioma} other {# idiomas}}",
     "noMatches": "Nenhum modelo encontrado.",

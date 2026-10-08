@@ -197,6 +197,11 @@
     "searchAction": "Maghanap",
     "level": "Level: {level}",
     "anyLevel": "Kahit anong level",
+    "levels": {
+      "basic": "basic",
+      "medium": "medium",
+      "hard": "hard"
+    },
     "allLanguages": "Lahat ng wika",
     "languages": "{count, plural, one {# wika} other {# wika}}",
     "noMatches": "Walang tugmang template.",

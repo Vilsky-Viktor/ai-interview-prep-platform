@@ -79,3 +79,36 @@ def test_the_sample_has_at_most_ten_revealed_questions_spread_across_topics(run)
     assert all(question.stage == Stage.REVEALED for question, _ in sample)
     assert [topic for _, topic in sample[:4]] == ["Python 0", "Python 1", "Python 0", "Python 1"]
     assert empty == []
+
+
+def test_a_later_template_of_the_same_title_and_language_is_a_near_duplicate(run):
+    word = uuid.uuid4().hex[:8]
+
+    async def scenario():
+        first = await interview(f"Duplicate {word}", template=True, language="de")
+        same = await interview(f"DUPLICATE {word}", template=True, language="de")
+        other_language = await interview(f"Duplicate {word}", template=True, language="fr")
+
+        return (
+            await templates.duplicate_ids([first, same, other_language]),
+            first,
+            same,
+        )
+
+    duplicates, first, same = run(scenario())
+
+    assert first not in duplicates
+    assert duplicates == {same}
+
+
+def test_a_rename_moves_a_templates_updated_at(run):
+    async def scenario():
+        template_id = await interview(f"Rename {uuid.uuid4().hex[:8]}", template=True)
+        before = (await preparations.get(template_id)).updated_at
+        await preparations.set_title(template_id, "Renamed")
+
+        return before, (await preparations.get(template_id)).updated_at
+
+    before, after = run(scenario())
+
+    assert after > before

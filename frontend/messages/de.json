@@ -39,8 +39,8 @@
     "contact": "Kontakt",
     "about": "Über uns",
     "practice": "Kostenlos üben",
-    "tests": "Kompetenztests",
-    "preEmploymentTesting": "Eignungstests",
+    "tests": "Einstellungstests nach Rolle",
+    "preEmploymentTesting": "Einstellungstests",
     "aiInterviews": "KI-Interviews",
     "compare": "Vergleich",
     "guides": "Ratgeber",
@@ -197,6 +197,11 @@
     "searchAction": "Suchen",
     "level": "Level: {level}",
     "anyLevel": "Jedes Level",
+    "levels": {
+      "basic": "grundlegend",
+      "medium": "mittel",
+      "hard": "schwer"
+    },
     "allLanguages": "Alle Sprachen",
     "languages": "{count, plural, one {# Sprache} other {# Sprachen}}",
     "noMatches": "Keine passenden Vorlagen.",
@@ -960,21 +965,21 @@
     "updated": "Zuletzt aktualisiert",
     "englishOnly": "Diese Seite gibt es nur auf Englisch.",
     "startTitle": "Teste deine Kandidaten",
-    "startText": "Erstelle einen Kompetenztest mit Zeitlimit aus deiner Stellenbeschreibung. $1–3 pro Kandidat, ohne Abo.",
+    "startText": "Erstelle einen Einstellungstest mit Zeitlimit aus deiner Stellenbeschreibung. $1–3 pro Kandidat, ohne Abo.",
     "startButton": "Test erstellen"
   },
   "compare": {
     "title": "prepza im Vergleich",
-    "intro": "Vergleiche mit Quellen zu anderen Tools für Eignungstests: wie die Tests entstehen, was sie kosten und wann welches besser passt."
+    "intro": "Vergleiche mit Quellen zu anderen Tools für Einstellungstests: wie die Tests entstehen, was sie kosten und wann welches besser passt."
   },
   "guides": {
     "title": "Ratgeber für die Personalauswahl",
-    "intro": "Praktische Ratgeber für Hiring Manager: Bewerber vorauswählen, Kompetenztests und KI fair und rechtssicher in der Personalauswahl einsetzen."
+    "intro": "Praktische Ratgeber für Hiring Manager: Bewerber vorauswählen, Einstellungstests und KI fair und rechtssicher in der Personalauswahl einsetzen."
   },
   "tests": {
     "title": "Einstellungstests nach Rolle",
-    "intro": "Fertige Kompetenztests mit Zeitlimit für gängige Rollen. Nutze einen direkt oder erstelle einen Test aus deiner eigenen Stellenbeschreibung.",
-    "heading": "Kompetenztest für {role} zur Personalauswahl",
+    "intro": "Fertige Einstellungstests mit Zeitlimit für gängige Rollen. Nutze einen direkt oder erstelle einen Test aus deiner eigenen Stellenbeschreibung.",
+    "heading": "{role} Test für Bewerber",
     "pageTitle": "{role} Test für Bewerber",
     "pageDescription": "Einstellungstest für {role} mit Zeitlimit, mit {count, plural, one {# Thema} other {# Themen}}. Jeder Bewerber bekommt eigene, zufällige Fragen. $1–3 pro Kandidat.",
     "lead": "Ein Multiple-Choice-Test mit Zeitlimit zu den Kompetenzen dieser Rolle. Jeder Kandidat bekommt eigene, zufällige Fragen mit einem Zeitlimit für jede, und du bekommst eine Auswertung mit jeder Antwort und ihrer Dauer. $1–3 pro Kandidat, ohne Abo.",

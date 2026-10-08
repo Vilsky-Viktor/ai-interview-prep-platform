@@ -197,6 +197,11 @@
     "searchAction": "Cari",
     "level": "Level: {level}",
     "anyLevel": "Semua level",
+    "levels": {
+      "basic": "dasar",
+      "medium": "menengah",
+      "hard": "sulit"
+    },
     "allLanguages": "Semua bahasa",
     "languages": "{count, plural, other {# bahasa}}",
     "noMatches": "Tidak ada templat yang cocok.",

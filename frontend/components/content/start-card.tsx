@@ -1,7 +1,7 @@
 import { BriefcaseBusinessIcon } from "lucide-react"
-import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 
+import { LocalizedLink } from "@/components/localized-link"
 import { Button } from "@/components/ui/button"
 
 /** The way from a content page to a first test: the home page, where a job description becomes
@@ -23,7 +23,7 @@ export async function StartCard() {
       </div>
       <Button
         className="h-10 shrink-0 px-5 text-base"
-        render={<Link href="/" />}
+        render={<LocalizedLink href="/" />}
         nativeButton={false}
       >
         {t("startButton")}

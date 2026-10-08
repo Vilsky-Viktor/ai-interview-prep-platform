@@ -197,6 +197,11 @@
     "searchAction": "検索",
     "level": "レベル: {level}",
     "anyLevel": "すべてのレベル",
+    "levels": {
+      "basic": "初級",
+      "medium": "中級",
+      "hard": "上級"
+    },
     "allLanguages": "すべての言語",
     "languages": "{count, plural, other {# 言語}}",
     "noMatches": "一致するテンプレートはありません。",

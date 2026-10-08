@@ -197,6 +197,11 @@
     "searchAction": "Szukaj",
     "level": "Poziom: {level}",
     "anyLevel": "Dowolny poziom",
+    "levels": {
+      "basic": "podstawowy",
+      "medium": "średni",
+      "hard": "trudny"
+    },
     "allLanguages": "Wszystkie języki",
     "languages": "{count, plural, one {# język} few {# języki} many {# języków} other {# języka}}",
     "noMatches": "Brak pasujących szablonów.",
@@ -913,7 +918,7 @@
     "intro": "Poćwicz pod daną rolę w rozmowie na czas, a potem zobacz swój wynik i wszystkie poprawne odpowiedzi. Bezpłatnie.",
     "about": "Próbna rozmowa na czas. Po zakończeniu zobaczysz swój wynik i wszystkie poprawne odpowiedzi. Prywatnie i za darmo.",
     "pageTitle": "{title}: darmowa symulacja rozmowy kwalifikacyjnej",
-    "pageDescription": "Darmowa symulacja rozmowy kwalifikacyjnej na poziomie {level} dla roli {title}: {count, plural, one {# temat} few {# tematy} many {# tematów} other {# tematu}}, na czas, z oceną i wszystkimi poprawnymi odpowiedziami na końcu. To ćwiczenie, nie prawdziwa rozmowa o pracę.",
+    "pageDescription": "Darmowa symulacja rozmowy kwalifikacyjnej (poziom: {level}) dla roli {title}: {count, plural, one {# temat} few {# tematy} many {# tematów} other {# tematu}}, na czas, z oceną i wszystkimi poprawnymi odpowiedziami na końcu. To ćwiczenie, nie prawdziwa rozmowa o pracę.",
     "start": "Zacznij ćwiczyć",
     "again": "Ćwicz ponownie",
     "continue": "Kontynuuj",
