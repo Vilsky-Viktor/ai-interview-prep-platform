@@ -754,12 +754,15 @@
       }
     },
     "ats": {
-      "title": "Töötab sinu ATS-süsteemi ja Slackiga",
-      "text": "Kandidaadid, kelle viid ATS-süsteemis etappi, saavad intervjuu. Nende tulemused jõuavad tagasi sinu ATS-süsteemi ja Slacki.",
+      "title": "Töötab sinu tööriistadega",
+      "text": "Kandidaadid, keda ATS-süsteemis liigutad, saavad intervjuu ja tulemused jõuavad tagasi. Slack ja API ühendavad ülejäänu.",
       "points": {
-        "move": "Vii kandidaat etappi: kutse läheb kohe teele",
-        "back": "Hinne, märked ja hindamislehe link jõuavad sinu ATS-süsteemi"
-      }
+        "move": "Liiguta kandidaati: kutse läheb teele",
+        "back": "Hinne ja märked jõuavad ATS-süsteemi",
+        "api": "Sinu platvorm: võtmed ja webhookid"
+      },
+      "docs": "API dokumentatsioon",
+      "apiName": "prepza API"
     },
     "companies": {
       "title": "Vaata, kes tööd tunneb",

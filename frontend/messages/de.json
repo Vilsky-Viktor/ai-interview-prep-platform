@@ -750,12 +750,15 @@
       }
     },
     "ats": {
-      "title": "Funktioniert mit deinem ATS und Slack",
-      "text": "Kandidaten, die du in deinem ATS in eine Phase verschiebst, bekommen das Interview. Ihre Ergebnisse landen wieder in deinem ATS und in Slack.",
+      "title": "Passt zu deinen Tools",
+      "text": "Kandidaten, die du in deinem ATS verschiebst, bekommen das Interview, und die Ergebnisse kommen zurück. Slack und die API verbinden den Rest.",
       "points": {
-        "move": "Verschiebe einen Kandidaten in eine Phase: Die Einladung geht raus",
-        "back": "Ergebnis, Hinweise und ein Link zur Auswertung landen in deinem ATS"
-      }
+        "move": "Kandidat verschoben: Einladung geht raus",
+        "back": "Ergebnis und Hinweise landen im ATS",
+        "api": "Deine Plattform: Schlüssel und Webhooks"
+      },
+      "docs": "API-Dokumentation",
+      "apiName": "prepza API"
     },
     "companies": {
       "title": "Sieh, wer den Job beherrscht",

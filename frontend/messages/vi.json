@@ -746,12 +746,15 @@
       }
     },
     "ats": {
-      "title": "Hoạt động với ATS và Slack của bạn",
-      "text": "Ứng viên bạn chuyển vào một giai đoạn trong ATS sẽ nhận buổi phỏng vấn. Kết quả được gửi về ATS và Slack của bạn.",
+      "title": "Hoạt động với các công cụ của bạn",
+      "text": "Ứng viên bạn chuyển trong ATS sẽ nhận buổi phỏng vấn, và kết quả được gửi về. Slack và API kết nối phần còn lại.",
       "points": {
-        "move": "Chuyển ứng viên vào một giai đoạn: lời mời được gửi đi ngay",
-        "back": "Điểm, cảnh báo và liên kết bảng điểm được gửi về ATS của bạn"
-      }
+        "move": "Chuyển ứng viên: lời mời được gửi đi",
+        "back": "Điểm và cảnh báo được gửi về ATS",
+        "api": "Nền tảng của bạn: khóa và webhook"
+      },
+      "docs": "Tài liệu API",
+      "apiName": "API prepza"
     },
     "companies": {
       "title": "Biết ai thạo việc",

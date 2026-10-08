@@ -750,12 +750,15 @@
       }
     },
     "ats": {
-      "title": "Funziona con il tuo ATS e con Slack",
-      "text": "I candidati che sposti in una fase del tuo ATS ricevono il colloquio. I loro risultati tornano nel tuo ATS e in Slack.",
+      "title": "Funziona con i tuoi strumenti",
+      "text": "I candidati che sposti nel tuo ATS ricevono il colloquio e i risultati tornano indietro. Slack e l'API collegano il resto.",
       "points": {
-        "move": "Sposta un candidato in una fase: l'invito parte da solo",
-        "back": "Punteggio, segnalazioni e link alla scheda di valutazione arrivano nel tuo ATS"
-      }
+        "move": "Sposta un candidato: l'invito parte",
+        "back": "Punteggio e segnalazioni nel tuo ATS",
+        "api": "La tua piattaforma: chiavi e webhook"
+      },
+      "docs": "Documentazione API",
+      "apiName": "API di prepza"
     },
     "companies": {
       "title": "Scopri chi conosce il lavoro",

@@ -750,12 +750,15 @@
       }
     },
     "ats": {
-      "title": "Compatible avec votre ATS et Slack",
-      "text": "Les candidats que vous déplacez vers une étape dans votre ATS reçoivent l'entretien. Leurs résultats reviennent dans votre ATS et dans Slack.",
+      "title": "Compatible avec vos outils",
+      "text": "Les candidats que vous déplacez dans votre ATS reçoivent l'entretien, et les résultats reviennent. Slack et l'API relient le reste.",
       "points": {
-        "move": "Déplacez un candidat vers une étape : l'invitation part aussitôt",
-        "back": "Note, alertes et lien vers la fiche d'évaluation arrivent dans votre ATS"
-      }
+        "move": "Déplacez un candidat : l'invitation part",
+        "back": "Note et alertes arrivent dans votre ATS",
+        "api": "Votre plateforme : clés et webhooks"
+      },
+      "docs": "Documentation de l'API",
+      "apiName": "API prepza"
     },
     "companies": {
       "title": "Voyez qui maîtrise le poste",

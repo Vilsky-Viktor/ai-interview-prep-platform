@@ -754,12 +754,15 @@
       }
     },
     "ats": {
-      "title": "Gumagana sa ATS mo at sa Slack",
-      "text": "Makukuha ng mga aplikanteng inilipat mo sa isang stage sa ATS mo ang interview. Babalik ang mga resulta nila sa ATS mo at sa Slack.",
+      "title": "Gumagana sa mga tool mo",
+      "text": "Makukuha ng mga aplikanteng inilipat mo sa ATS mo ang interview, at babalik ang mga resulta. Ikinokonekta ng Slack at API ang iba pa.",
       "points": {
-        "move": "Ilipat ang aplikante sa isang stage: maipapadala agad ang invite",
-        "back": "Mapupunta sa ATS mo ang grade, mga flag at link sa scorecard"
-      }
+        "move": "Ilipat ang aplikante: ipapadala ang invite",
+        "back": "Grade at mga flag, papunta sa ATS mo",
+        "api": "Platform mo: mga key at webhook"
+      },
+      "docs": "Dokumentasyon ng API",
+      "apiName": "prepza API"
     },
     "companies": {
       "title": "Alamin kung sino ang marunong sa trabaho",

@@ -750,12 +750,15 @@
       }
     },
     "ats": {
-      "title": "Works with your ATS and Slack",
-      "text": "Candidates you move to a stage in your ATS get the interview. Their results come back to your ATS and Slack.",
+      "title": "Works with your tools",
+      "text": "Candidates you move in your ATS get the interview, and results come back. Slack and the API connect the rest.",
       "points": {
-        "move": "Move a candidate to a stage: the invite goes out",
-        "back": "Grade, flags and a scorecard link land in your ATS"
-      }
+        "move": "Move a candidate: the invite goes out",
+        "back": "Grade and flags land in your ATS",
+        "api": "Your platform: keys and web hooks"
+      },
+      "docs": "API docs",
+      "apiName": "prepza API"
     },
     "companies": {
       "title": "See who knows the job",

@@ -746,12 +746,15 @@
       }
     },
     "ats": {
-      "title": "Funciona com o seu ATS e o Slack",
-      "text": "Os candidatos que você move para uma etapa no seu ATS recebem a entrevista. Os resultados voltam para o seu ATS e o Slack.",
+      "title": "Funciona com as suas ferramentas",
+      "text": "Os candidatos que você move no seu ATS recebem a entrevista, e os resultados voltam. O Slack e a API conectam o resto.",
       "points": {
-        "move": "Mova um candidato para uma etapa: o convite é enviado",
-        "back": "Nota, alertas e um link para a ficha de avaliação chegam ao seu ATS"
-      }
+        "move": "Mova um candidato: o convite é enviado",
+        "back": "Nota e alertas chegam ao seu ATS",
+        "api": "Sua plataforma: chaves e webhooks"
+      },
+      "docs": "Documentação da API",
+      "apiName": "prepza API"
     },
     "companies": {
       "title": "Veja quem conhece o trabalho",

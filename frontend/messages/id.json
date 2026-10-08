@@ -750,12 +750,15 @@
       }
     },
     "ats": {
-      "title": "Bekerja dengan ATS-mu dan Slack",
-      "text": "Kandidat yang kamu pindahkan ke suatu tahap di ATS-mu mendapat wawancara. Hasilnya kembali ke ATS-mu dan Slack.",
+      "title": "Bekerja dengan alat-alatmu",
+      "text": "Kandidat yang kamu pindahkan di ATS-mu mendapat wawancara, dan hasilnya kembali. Slack dan API menghubungkan sisanya.",
       "points": {
-        "move": "Pindahkan kandidat ke suatu tahap: undangan langsung terkirim",
-        "back": "Nilai, tanda, dan tautan scorecard masuk ke ATS-mu"
-      }
+        "move": "Pindahkan kandidat: undangan terkirim",
+        "back": "Nilai dan tanda masuk ke ATS-mu",
+        "api": "Platformmu: kunci dan webhook"
+      },
+      "docs": "Dokumentasi API",
+      "apiName": "API prepza"
     },
     "companies": {
       "title": "Lihat siapa yang menguasai pekerjaan",

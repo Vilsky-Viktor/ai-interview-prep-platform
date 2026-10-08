@@ -741,12 +741,15 @@
       }
     },
     "ats": {
-      "title": "与你的 ATS 和 Slack 对接",
-      "text": "你在 ATS 中移到某个阶段的候选人会收到面试。结果会回传到你的 ATS 和 Slack。",
+      "title": "与你的工具对接",
+      "text": "你在 ATS 中移动的候选人会收到面试，结果也会回传。其余由 Slack 和 API 连接。",
       "points": {
-        "move": "把候选人移到某个阶段，邀请即自动发出",
-        "back": "成绩、标记和评分卡链接回传到你的 ATS"
-      }
+        "move": "移动候选人，邀请即自动发出",
+        "back": "成绩和标记回传到你的 ATS",
+        "api": "你的平台：密钥和 Webhook"
+      },
+      "docs": "API 文档",
+      "apiName": "prepza API"
     },
     "companies": {
       "title": "看出谁真正懂这份工作",

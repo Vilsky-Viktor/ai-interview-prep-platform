@@ -30,7 +30,7 @@ Below, a landing page walks through prepza, one section per screen:
 - topic review,
 - questions that fix themselves,
 - one link for a job ad,
-- the ATS integrations: Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR, with their logos,
+- the tools prepza works with: the ATSs (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR) and Slack as their logos, and the API as an example request with a link to its docs,
 - a verified brand,
 - languages,
 - pricing ("$1–3 per candidate, with no subscription"),

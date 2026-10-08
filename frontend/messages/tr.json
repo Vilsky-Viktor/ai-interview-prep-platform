@@ -749,12 +749,15 @@
       }
     },
     "ats": {
-      "title": "ATS sisteminiz ve Slack ile çalışır",
-      "text": "ATS sisteminizde bir aşamaya taşıdığınız adaylar mülakatı alır. Sonuçları ATS sisteminize ve Slack'e geri gelir.",
+      "title": "Araçlarınızla çalışır",
+      "text": "ATS sisteminizde taşıdığınız adaylar mülakatı alır ve sonuçlar geri gelir. Gerisini Slack ve API bağlar.",
       "points": {
-        "move": "Adayı bir aşamaya taşıyın: davet hemen gönderilir",
-        "back": "Not, işaretler ve değerlendirme kartı bağlantısı ATS sisteminize gelir"
-      }
+        "move": "Adayı taşıyın: davet gönderilir",
+        "back": "Not ve işaretler ATS sisteminize gelir",
+        "api": "Platformunuz: anahtarlar ve webhook'lar"
+      },
+      "docs": "API belgeleri",
+      "apiName": "prepza API"
     },
     "companies": {
       "title": "İşi kimin bildiğini görün",

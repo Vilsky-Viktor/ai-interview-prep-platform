@@ -750,12 +750,15 @@
       }
     },
     "ats": {
-      "title": "Działa z Twoim systemem ATS i Slackiem",
-      "text": "Kandydaci, których przeniesiesz do etapu w swoim systemie ATS, dostają rozmowę. Ich wyniki wracają do Twojego systemu ATS i Slacka.",
+      "title": "Działa z Twoimi narzędziami",
+      "text": "Kandydaci, których przeniesiesz w swoim systemie ATS, dostają rozmowę, a wyniki wracają. Slack i API łączą resztę.",
       "points": {
-        "move": "Przenieś kandydata do etapu: zaproszenie wychodzi samo",
-        "back": "Wynik, ostrzeżenia i link do karty wyników trafiają do Twojego systemu ATS"
-      }
+        "move": "Przenieś kandydata: zaproszenie wychodzi",
+        "back": "Wynik i ostrzeżenia trafiają do ATS",
+        "api": "Twoja platforma: klucze i webhooki"
+      },
+      "docs": "Dokumentacja API",
+      "apiName": "API prepza"
     },
     "companies": {
       "title": "Zobacz, kto zna się na rzeczy",

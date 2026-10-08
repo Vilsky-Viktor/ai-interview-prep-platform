@@ -1,19 +1,24 @@
 import { cn } from "cn"
+import { ArrowRightIcon, CodeXmlIcon } from "lucide-react"
+import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 
 import { LandingSection } from "@/components/landing/section"
+import { Button } from "@/components/ui/button"
+import { API_DOCS_PATH, API_EXAMPLE } from "@/constants/api"
 import { ATS_PROVIDERS } from "@/constants/ats"
 import { SLACK } from "@/constants/slack"
 
-const POINTS = ["move", "back"] as const
+const POINTS = ["move", "back", "api"] as const
 
-/** The ATSs and Slack a company can connect, as their own full logos in their colors. */
+/** The tools a company can connect: its ATS and Slack, as their own full logos in their colors,
+ * and its own platform through the API, as an example request and the link to its docs. */
 export async function AtsSection() {
   const t = await getTranslations("landing.ats")
 
   return (
     <LandingSection title={t("title")} text={t("text")}>
-      <ul className="mx-auto mt-16 flex w-full max-w-4xl flex-wrap items-center justify-center gap-y-12">
+      <ul className="mx-auto mt-10 flex w-full max-w-4xl flex-wrap items-center justify-center gap-y-8">
         {[...ATS_PROVIDERS, SLACK].map((provider) => (
           <li
             key={provider.id}
@@ -31,7 +36,44 @@ export async function AtsSection() {
           </li>
         ))}
       </ul>
-      <ul className="mx-auto mt-20 grid w-full max-w-4xl gap-x-12 gap-y-3 text-muted-foreground sm:grid-cols-2">
+      <div className="mx-auto mt-8 w-full max-w-4xl">
+        {/* prepza's API, named over it; code, so it reads left to right in every language. Each
+            part's first lines on the left, its body on the right. */}
+        <div dir="ltr" className="overflow-hidden rounded-2xl bg-muted text-sm">
+          {/* The API's name, and its docs at the end of the row. */}
+          <div className="flex items-center justify-between gap-4 border-b px-5 py-3">
+            <p className="flex items-center gap-2 text-base font-medium">
+              <CodeXmlIcon className="size-5" />
+              {t("apiName")}
+            </p>
+            <Button
+              variant="outline"
+              className="h-9 px-4 text-sm"
+              render={<Link href={API_DOCS_PATH} />}
+              nativeButton={false}
+            >
+              {t("docs")}
+              <ArrowRightIcon className="size-4" />
+            </Button>
+          </div>
+          <div className="divide-y overflow-x-auto font-mono leading-relaxed">
+            {[API_EXAMPLE.request, API_EXAMPLE.response].map((part, index) => (
+              <div
+                key={index}
+                className="grid gap-x-10 gap-y-2 p-5 sm:grid-cols-2"
+              >
+                <pre className={cn(index && "text-muted-foreground")}>
+                  {part.head}
+                </pre>
+                <pre className={cn(index && "text-muted-foreground")}>
+                  {part.body}
+                </pre>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <ul className="mx-auto mt-8 grid w-full max-w-5xl gap-x-10 gap-y-3 text-muted-foreground sm:grid-cols-3">
         {POINTS.map((point) => (
           <li key={point} className="flex gap-3">
             <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary" />

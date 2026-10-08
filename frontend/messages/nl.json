@@ -746,12 +746,15 @@
       }
     },
     "ats": {
-      "title": "Werkt met je ATS en Slack",
-      "text": "Kandidaten die je in je ATS naar een fase verplaatst, krijgen het interview. Hun resultaten komen terug in je ATS en Slack.",
+      "title": "Werkt met je tools",
+      "text": "Kandidaten die je in je ATS verplaatst, krijgen het interview en de resultaten komen terug. Slack en de API koppelen de rest.",
       "points": {
-        "move": "Verplaats een kandidaat naar een fase: de uitnodiging gaat eruit",
-        "back": "Score, signalen en een link naar de scorekaart komen in je ATS"
-      }
+        "move": "Kandidaat verplaatst: uitnodiging gaat eruit",
+        "back": "Score en signalen komen in je ATS",
+        "api": "Je eigen platform: sleutels en webhooks"
+      },
+      "docs": "API-documentatie",
+      "apiName": "prepza API"
     },
     "companies": {
       "title": "Zie wie het vak kent",
