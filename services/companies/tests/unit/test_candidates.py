@@ -102,12 +102,15 @@ def test_finished_interview_status(client, monkeypatch):
     assert asked == [(INTERVIEW_ID, 20, 20, False)]
 
 
-def revoke(client, monkeypatch, status):
-    """Revokes the candidate; what was removed, whose sessions were erased, what was released."""
+def revoke(client, monkeypatch, status, progress=0, removed_as=None):
+    """Revokes the candidate, who has answered `progress` percent and is `removed_as` (their
+    status read, by default) when deleted; what was removed, whose sessions were erased, how
+    many credits were released and how many charged."""
     sign_in()
     removed = []
     erased = []
     released = []
+    charged = []
     invite = CandidateInvite(
         id=INVITE_ID,
         interview_id=INTERVIEW_ID,
@@ -146,6 +149,8 @@ def revoke(client, monkeypatch, status):
         assert company_id == COMPANY_ID
         removed.append(invite.id)
 
+        return removed_as or status
+
     async def no_flush():
         pass
 
@@ -155,27 +160,52 @@ def revoke(client, monkeypatch, status):
     async def fake_release(key):
         released.append(key)
 
+    async def fake_charge(key):
+        charged.append(key)
+
+    async def fake_scores(invite_ids):
+        return {str(invite_id): {"progress": progress} for invite_id in invite_ids}
+
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(invite_store, "remove", fake_remove)
     monkeypatch.setattr(candidates_router.outbox_service, "flush_quietly", no_flush)
     monkeypatch.setattr(rounds, "delete_invite_sessions", fake_erase)
     monkeypatch.setattr(billing, "release_candidate", fake_release)
+    monkeypatch.setattr(billing, "charge_candidate", fake_charge)
+    monkeypatch.setattr(rounds, "invite_scores", fake_scores)
     response = client.delete(f"/interviews/{INTERVIEW_ID}/candidates/{INVITE_ID}")
 
-    return response.status_code, removed, erased, len(released)
+    return response.status_code, removed, erased, len(released), len(charged)
 
 
 def test_an_unused_invite_is_revoked(client, monkeypatch):
-    assert revoke(client, monkeypatch, InviteStatus.INVITED) == (204, [INVITE_ID], [], 1)
+    assert revoke(client, monkeypatch, InviteStatus.INVITED) == (204, [INVITE_ID], [], 1, 0)
 
 
-def test_a_started_candidate_is_erased_and_their_credits_come_back(client, monkeypatch):
-    assert revoke(client, monkeypatch, InviteStatus.IN_PROCESS) == (
+def test_a_started_candidate_without_an_answer_is_erased_and_their_credits_come_back(
+    client, monkeypatch
+):
+    status = InviteStatus.IN_PROCESS
+
+    assert revoke(client, monkeypatch, status) == (204, [INVITE_ID], [INVITE_ID], 1, 0)
+
+
+def test_a_started_candidate_who_answered_is_erased_and_charged(client, monkeypatch):
+    status = InviteStatus.IN_PROCESS
+
+    assert revoke(client, monkeypatch, status, 10) == (204, [INVITE_ID], [INVITE_ID], 0, 1)
+
+
+def test_a_candidate_who_started_while_revoked_loses_their_new_sessions(client, monkeypatch):
+    status, started = InviteStatus.INVITED, InviteStatus.IN_PROCESS
+
+    assert revoke(client, monkeypatch, status, removed_as=started) == (
         204,
         [INVITE_ID],
         [INVITE_ID],
         1,
+        0,
     )
 
 
@@ -184,6 +214,7 @@ def test_a_finished_candidate_is_erased_and_stays_charged(client, monkeypatch):
         204,
         [INVITE_ID],
         [INVITE_ID],
+        0,
         0,
     )
 

@@ -6,7 +6,7 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.integrations import generation, library, rounds
+from app.integrations import billing, generation, library, rounds
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
@@ -69,6 +69,9 @@ def calls(monkeypatch):
     async def fake_delete(company_id):
         recorded.append(("company", company_id))
 
+    async def fake_billing(company_id):
+        recorded.append(("billing", company_id))
+
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(interviews, "list_for_company", fake_list)
     monkeypatch.setattr(generation, "cancel", fake_cancel)
@@ -77,6 +80,7 @@ def calls(monkeypatch):
     monkeypatch.setattr(rounds, "delete_interview_data", fake_rounds)
     monkeypatch.setattr(library, "delete_interview", fake_library)
     monkeypatch.setattr(companies, "delete", fake_delete)
+    monkeypatch.setattr(billing, "delete_company", fake_billing)
     app.dependency_overrides[current_user] = lambda: User(
         uid="bob", email="bob@example.com", email_verified=True, name="bob"
     )
@@ -95,6 +99,7 @@ def test_cleans_up_every_interview_before_the_company(client, calls):
         ("cancel", FINISHING_ID),
         ("rounds", FINISHED_SET_ID),
         ("library", FINISHED_SET_ID),
+        ("billing", COMPANY_ID),
         ("company", COMPANY_ID),
     ]
 
@@ -106,6 +111,22 @@ def test_a_failed_cleanup_keeps_the_company(client, calls, monkeypatch):
         raise httpx.HTTPStatusError("down", request=request, response=httpx.Response(503))
 
     monkeypatch.setattr(library, "delete_interview", failing_library)
+
+    with pytest.raises(httpx.HTTPStatusError):
+        client.delete(URL)
+
+    assert ("company", COMPANY_ID) not in calls
+
+
+def test_a_failed_billing_cleanup_keeps_the_company_to_delete_again(client, calls, monkeypatch):
+    """Otherwise a retry finds no company, and its automatic top-up's saved card stays."""
+
+    async def failing_billing(_company_id):
+        request = httpx.Request("DELETE", "http://billing")
+
+        raise httpx.HTTPStatusError("down", request=request, response=httpx.Response(503))
+
+    monkeypatch.setattr(billing, "delete_company", failing_billing)
 
     with pytest.raises(httpx.HTTPStatusError):
         client.delete(URL)

@@ -17,18 +17,19 @@ from app.constants.invites import (
     CandidateSort,
     InviteStatus,
 )
-from app.helpers.candidates import hold_key, passed, section_passed
+from app.helpers.candidates import passed, section_passed
 from app.helpers.interviews import (
     attach_set,
     interview_title,
 )
 from app.helpers.logos import logo_path
-from app.integrations import billing, rounds
+from app.integrations import rounds
 from app.integrations.redis import get_redis
 from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateOut
 from app.services import candidate_invites, candidate_results
 from app.services import outbox as outbox_service
 from app.services.access import can_edit, require_company, require_editor
+from app.services.candidate_billing import settle_removed
 from app.storage import audit, candidates, interviews, invites
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
@@ -91,8 +92,9 @@ async def list_candidates(
 @router.delete("/{interview_id}/candidates/{invite_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUser) -> None:
     """Withdraws an invite the candidate hasn't used yet. Once they've started, it erases them for
-    good, answers and results included, for example when they ask to have their data deleted;
-    credits still held come back, and a finished candidate stays charged."""
+    good, answers and results included, for example when they ask to have their data deleted.
+    A candidate who answered at least one question is charged; other credits still held come
+    back."""
     interview = await interviews.get(interview_id)
     invite = await candidates.get(interview_id, invite_id) if interview else None
 
@@ -102,12 +104,17 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
     await require_editor(user, interview.company_id)
 
     if invite.status != InviteStatus.FINISHED:
-        await billing.release_candidate(hold_key(interview.id, invite.email, invite.hold_key))
+        await settle_removed([invite])
 
     if invite.status not in NOT_STARTED:
         await rounds.delete_invite_sessions([invite.id])
 
-    await invites.remove(invite, interview.company_id)
+    removed = await invites.remove(invite, interview.company_id)
+
+    # Started since it was read: the sessions it made go too.
+    if invite.status in NOT_STARTED and removed == InviteStatus.IN_PROCESS:
+        await rounds.delete_invite_sessions([invite.id])
+
     await outbox_service.flush_quietly()
     revoked = invite.status in NOT_STARTED
     action = AuditAction.INVITE_REVOKED if revoked else AuditAction.CANDIDATE_DELETED

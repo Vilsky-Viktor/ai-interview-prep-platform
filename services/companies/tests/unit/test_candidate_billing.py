@@ -11,7 +11,7 @@ from app.constants.invites import INVITE_EXPIRY_DAYS, InviteStatus
 from app.integrations import billing, rounds
 from app.services import candidate_billing
 from app.services import outbox as outbox_service
-from app.storage import interviews, invites
+from app.storage import interviews, invite_expiry, invites
 
 INTERVIEW_ID = uuid.uuid4()
 
@@ -118,33 +118,40 @@ def test_a_grade_under_the_pass_mark_or_none_hasnt_passed(ledger, monkeypatch):
     asyncio.run(candidate_billing.handle("interview.finished", data, "event-1"))
     under = invite.result["passed"]
 
-    async def down(invite_ids):
-        raise httpx.ConnectError("rounds is down")
+    async def no_grade(invite_ids):
+        return {}
 
-    monkeypatch.setattr(rounds, "invite_scores", down)
+    monkeypatch.setattr(rounds, "invite_scores", no_grade)
     asyncio.run(candidate_billing.handle("interview.finished", data, "event-2"))
 
     assert under is False
     assert (invite.result["grade"], invite.result["passed"]) == (None, False)
 
 
-def test_rounds_being_down_doesnt_hold_up_the_charge(ledger, monkeypatch):
+def test_rounds_being_down_charges_but_retries_for_the_grade(ledger, monkeypatch):
+    """The charge goes through; nothing is sent without the grade, and the event comes again."""
     invite, notices = finished(monkeypatch)
+    data = {"candidate_invite_id": str(invite.id), "answered": 2}
+    scores = rounds.invite_scores
 
     async def down(invite_ids):
         raise httpx.ConnectError("rounds is down")
 
     monkeypatch.setattr(rounds, "invite_scores", down)
-    asyncio.run(
-        candidate_billing.handle(
-            "interview.finished", {"candidate_invite_id": str(invite.id), "answered": 2}, "event-1"
-        )
-    )
 
-    assert "grade" not in notices[0]["data"]
-    # The candidates list stores them once rounds answers again.
-    assert invite.results == (None, False)
+    with pytest.raises(httpx.ConnectError):
+        asyncio.run(candidate_billing.handle("interview.finished", data, "event-1"))
+
+    assert notices == []
     assert ledger == [("charge", f"{INTERVIEW_ID}:carol@example.com")]
+
+    # Retried once rounds answers: the company and its ATS get the grade.
+    monkeypatch.setattr(rounds, "invite_scores", scores)
+    asyncio.run(candidate_billing.handle("interview.finished", data, "event-1"))
+
+    assert notices[0]["data"]["grade"] == 85
+    assert invite.result["grade"] == 85
+    assert ledger == [("charge", f"{INTERVIEW_ID}:carol@example.com")] * 2
 
 
 def test_a_finished_interview_without_an_answer_gives_the_credits_back(ledger, monkeypatch):
@@ -192,8 +199,8 @@ def test_invites_never_started_expire_and_give_their_credits_back(ledger, monkey
 
         return True
 
-    monkeypatch.setattr(invites, "expiring", fake_expiring)
-    monkeypatch.setattr(invites, "mark_expired", fake_mark)
+    monkeypatch.setattr(invite_expiry, "expiring", fake_expiring)
+    monkeypatch.setattr(invite_expiry, "mark_expired", fake_mark)
 
     assert asyncio.run(candidate_billing.expire_unstarted()) == 1
     expected = datetime.now(UTC) - timedelta(days=INVITE_EXPIRY_DAYS)
@@ -224,8 +231,8 @@ def test_an_invite_started_or_sent_again_while_expiring_keeps_its_credits(ledger
     async def sent_again(invite_id):
         return SimpleNamespace(id=invite_id, status=InviteStatus.INVITED)
 
-    monkeypatch.setattr(invites, "expiring", fake_expiring)
-    monkeypatch.setattr(invites, "mark_expired", not_marked)
+    monkeypatch.setattr(invite_expiry, "expiring", fake_expiring)
+    monkeypatch.setattr(invite_expiry, "mark_expired", not_marked)
     monkeypatch.setattr(invites, "get", sent_again)
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(billing, "hold_candidate", hold)
@@ -258,8 +265,8 @@ def test_an_invite_another_run_expired_meanwhile_keeps_nothing_set_aside(ledger,
     async def hold(company_id, key):
         ledger.append(("hold", key))
 
-    monkeypatch.setattr(invites, "expiring", fake_expiring)
-    monkeypatch.setattr(invites, "mark_expired", not_marked)
+    monkeypatch.setattr(invite_expiry, "expiring", fake_expiring)
+    monkeypatch.setattr(invite_expiry, "mark_expired", not_marked)
     monkeypatch.setattr(invites, "get", expired)
     monkeypatch.setattr(billing, "hold_candidate", hold)
 

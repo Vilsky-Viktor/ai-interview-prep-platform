@@ -30,7 +30,7 @@ async def events(event_type: str, key: str, value: str) -> list[dict]:
 def test_a_finished_candidate_delivered_twice_is_announced_once(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "gus@example.com", "Backend", "Acme", "en")
+        invite, _ = await invites.upsert(found.id, "gus@example.com", "Backend", "Acme", "en")
         result = {"candidate_invite_id": str(invite.id), "grade": 70, "passed": True}
         event_id = str(uuid.uuid4())
         await invites.finish(invite.id, 70, False, None, event_id, result)
@@ -123,3 +123,33 @@ def test_a_failed_generation_marks_its_interview_once_until_the_questions_come(r
 
     assert (failed, redelivered) == (True, False)
     assert ready.generation_failed is False and ready.set_id is not None
+
+
+def test_a_removed_interview_returns_its_unfinished_invites_for_their_credits(run):
+    async def scenario():
+        found = await interview()
+        waiting, _ = await invites.upsert(found.id, "w@example.com", "Backend", "Acme", "en")
+        done, _ = await invites.upsert(found.id, "d@example.com", "Backend", "Acme", "en")
+        await invites.finish(done.id, 80, False, None)
+
+        return waiting, await interviews.remove(found.id), await interviews.remove(found.id)
+
+    waiting, removed, again = run(scenario())
+
+    # A finished candidate stays charged, so only the waiting one is returned.
+    assert removed == [(waiting.interview_id, "w@example.com", "invited", waiting.hold_key)]
+    assert again == []
+
+
+def test_a_removed_invite_says_its_status_as_it_was_deleted(run):
+    async def scenario():
+        found = await interview()
+        invite, _ = await invites.upsert(found.id, "s@example.com", "Backend", "Acme", "en")
+        await invites.start(invite.id, "s-uid")
+
+        return await invites.remove(invite, found.company_id), await invites.remove(
+            invite, found.company_id
+        )
+
+    # Started since it was read: revoking it erases the sessions that start made.
+    assert run(scenario()) == ("in_process", None)

@@ -62,7 +62,7 @@ def invite_setup(monkeypatch):
         sent.append(email)
         invited.add(email)
 
-        return invite
+        return invite, False
 
     async def fake_status(_interview_id, email):
         return (await fake_held(_interview_id, email))[0]
@@ -153,3 +153,29 @@ def test_an_email_limit_refusal_sets_no_credits_aside(client, monkeypatch):
 
     assert response.status_code == 429
     assert used == []
+
+
+def test_an_invite_that_expired_while_sent_again_has_its_credits_set_aside_again(
+    client, monkeypatch
+):
+    """Expiry gave them back after the invite was read; otherwise it finishes uncharged."""
+    _, used = invite_setup(monkeypatch)
+    upsert = invites.upsert
+    held = []
+
+    async def revived(*args, **kwargs):
+        invite, _ = await upsert(*args, **kwargs)
+
+        return invite, True
+
+    async def hold_again(invite, key):
+        held.append(key)
+
+    monkeypatch.setattr(invites, "upsert", revived)
+    monkeypatch.setattr(candidate_invites, "hold_again", hold_again)
+
+    response = client.post(URL, json={"email": "gina@example.com"})
+    app.dependency_overrides.clear()
+
+    assert response.status_code == 201
+    assert held == used

@@ -2,7 +2,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 from app.constants.invites import CandidateFilter, InviteStatus
-from app.storage import accounts, candidates, companies, interviews, invites
+from app.storage import accounts, candidates, companies, interviews, invite_expiry, invites
 
 
 async def interview():
@@ -12,7 +12,9 @@ async def interview():
 
 
 async def invite(found, email):
-    return await invites.upsert(found.id, email, "Backend", "Acme", "en")
+    invite, _ = await invites.upsert(found.id, email, "Backend", "Acme", "en")
+
+    return invite
 
 
 def emails(rows):
@@ -131,16 +133,33 @@ def test_an_expired_invite_started_through_the_link_is_in_process(run):
         found = await interview()
         ann = await invite(found, "ann@example.com")
         later = datetime.now(UTC) + timedelta(seconds=1)
-        await invites.mark_expired(ann.id, later)
-        await invites.start(ann.id, "ann-uid")
+        await invite_expiry.mark_expired(ann.id, later)
+        before = await invites.start(ann.id, "ann-uid")
 
-        return await invites.get(ann.id), await invites.start(uuid.uuid4(), "nobody")
+        return before, await invites.get(ann.id), await invites.start(uuid.uuid4(), "nobody")
 
-    started, missing = run(scenario())
+    before, started, missing = run(scenario())
 
     assert (started.status, started.user_id) == (InviteStatus.IN_PROCESS, "ann-uid")
+    # Its status before, so its credits are set aside again.
+    assert before == InviteStatus.EXPIRED
     # An invite revoked meanwhile isn't started.
-    assert missing is False
+    assert missing is None
+
+
+def test_sending_an_expired_invite_again_says_it_revived_it(run):
+    async def scenario():
+        found = await interview()
+        ann = await invite(found, "ann@example.com")
+        _, fresh = await invites.upsert(found.id, "ann@example.com", "Backend", "Acme", "en")
+        later = datetime.now(UTC) + timedelta(seconds=1)
+        await invite_expiry.mark_expired(ann.id, later)
+        _, revived = await invites.upsert(found.id, "ann@example.com", "Backend", "Acme", "en")
+
+        return fresh, revived, (await invites.get(ann.id)).status
+
+    # Only an expired one: its credits were given back, so they're set aside again.
+    assert run(scenario()) == (False, True, InviteStatus.INVITED)
 
 
 def test_an_invite_sent_again_while_expiring_isnt_expired(run):
@@ -150,12 +169,39 @@ def test_an_invite_sent_again_while_expiring_isnt_expired(run):
         cutoff = datetime.now(UTC)
         # Sent again after the run read it: its new send is after the cutoff.
         await invite(found, "ann@example.com")
-        resent = await invites.mark_expired(ann.id, cutoff)
+        resent = await invite_expiry.mark_expired(ann.id, cutoff)
 
         bob = await invite(found, "bob@example.com")
         later = datetime.now(UTC) + timedelta(seconds=1)
-        expired = await invites.mark_expired(bob.id, later)
+        expired = await invite_expiry.mark_expired(bob.id, later)
 
         return resent, expired
 
     assert run(scenario()) == (False, True)
+
+
+def test_only_stale_unstarted_invites_are_expiring_and_marking_one_expires_it(run):
+    async def scenario():
+        found = await interview()
+        stale, _ = await invites.upsert(found.id, "old@example.com", "Backend", "Acme", "en")
+        await invites.upsert(found.id, "new@example.com", "Backend", "Acme", "en")
+        later = datetime.now(UTC) + timedelta(seconds=1)
+        due = [
+            row.email
+            for row in await invite_expiry.expiring(later, 500)
+            if row.interview_id == found.id
+        ]
+        await invite_expiry.mark_expired(stale.id, later)
+        after = [
+            row.email
+            for row in await invite_expiry.expiring(later, 500)
+            if row.interview_id == found.id
+        ]
+
+        return due, after, (await invites.get(stale.id)).status
+
+    due, after, status = run(scenario())
+
+    assert sorted(due) == ["new@example.com", "old@example.com"]
+    assert after == ["new@example.com"]
+    assert status == InviteStatus.EXPIRED

@@ -10,7 +10,9 @@ from app.integrations import library, rounds
 from app.services import candidate_start
 from app.storage import invites
 
-INVITE = SimpleNamespace(id=uuid.uuid4(), extra_time=0)
+INVITE = SimpleNamespace(
+    id=uuid.uuid4(), extra_time=0, interview_id=uuid.uuid4(), email="cand@example.com", hold_key="k"
+)
 INTERVIEW = SimpleNamespace(set_id=uuid.uuid4(), question_seconds=60, topic_limits={})
 
 
@@ -33,7 +35,7 @@ def steps(monkeypatch):
     async def start(invite_id, user_id):
         done.append("started")
 
-        return True
+        return "invited"
 
     async def erase(invite_ids):
         done.append("erased")
@@ -68,7 +70,7 @@ def test_rounds_failing_leaves_the_invite_unstarted_so_expiry_frees_its_credits(
 
 def test_an_invite_revoked_while_starting_loses_its_sessions(steps, monkeypatch):
     async def gone(invite_id, user_id):
-        return False
+        return None
 
     monkeypatch.setattr(invites, "start", gone)
 
@@ -77,3 +79,34 @@ def test_an_invite_revoked_while_starting_loses_its_sessions(steps, monkeypatch)
 
     assert refused.value.status_code == 404
     assert steps == ["sessions", "erased"]
+
+
+def test_an_invite_that_expired_while_starting_has_its_credits_set_aside_again(steps, monkeypatch):
+    """Expiry gave them back after the invite was read; otherwise it finishes uncharged."""
+    held = []
+
+    async def expired(invite_id, user_id):
+        steps.append("started")
+
+        return "expired"
+
+    async def hold_again(invite, key):
+        held.append(key)
+
+    monkeypatch.setattr(invites, "start", expired)
+    monkeypatch.setattr(candidate_start, "hold_again", hold_again)
+    asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, "cand"))
+
+    assert held == ["k"]
+
+
+def test_an_invite_started_as_read_isnt_held_again(steps, monkeypatch):
+    held = []
+
+    async def hold_again(invite, key):
+        held.append(key)
+
+    monkeypatch.setattr(candidate_start, "hold_again", hold_again)
+    asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, "cand"))
+
+    assert held == []

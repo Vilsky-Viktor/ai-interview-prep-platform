@@ -24,9 +24,10 @@ async def upsert(
     language: str,
     logo_path: str | None = None,
     hold_key: str | None = None,
-) -> CandidateInvite:
+) -> tuple[CandidateInvite, bool]:
     """Creates the invite (with `hold_key`, its credits' key), or returns the existing one so it
-    can be sent again, and saves the email's event with it."""
+    can be sent again, and saves the email's event with it. True when it revived an expired
+    invite, whose credits were given back."""
     email = email.lower()
     statement = (
         insert(CandidateInvite)
@@ -50,6 +51,8 @@ async def upsert(
                 CandidateInvite.interview_id == interview_id, CandidateInvite.email == email
             )
         )
+
+        revived = invite.status == InviteStatus.EXPIRED
 
         # Sending again revives an undelivered or expired invite and restarts its 30 days.
         if invite.status in (InviteStatus.UNDELIVERED, InviteStatus.EXPIRED):
@@ -75,7 +78,7 @@ async def upsert(
         )
         await session.commit()
 
-        return invite
+        return invite, revived
 
 
 async def for_link(interview_id, email: str, hold_key: str | None = None) -> CandidateInvite:
@@ -132,60 +135,20 @@ async def status_of(interview_id, email: str) -> str | None:
         return await session.scalar(query)
 
 
-async def unfinished(interview_id) -> list[tuple]:
-    """(interview id, email, status, hold key) of the interview's invites not finished yet."""
-    query = select(
-        CandidateInvite.interview_id,
-        CandidateInvite.email,
-        CandidateInvite.status,
-        CandidateInvite.hold_key,
-    ).where(
+async def unfinished(interview_id) -> list[CandidateInvite]:
+    """The interview's invites not finished yet."""
+    query = select(CandidateInvite).where(
         CandidateInvite.interview_id == interview_id,
         CandidateInvite.status != InviteStatus.FINISHED,
     )
 
     async with Session() as session:
-        return [tuple(row) for row in await session.execute(query)]
+        return list(await session.scalars(query))
 
 
 async def get(invite_id: uuid.UUID) -> CandidateInvite | None:
     async with Session() as session:
         return await session.get(CandidateInvite, invite_id)
-
-
-async def expiring(before: datetime, limit: int) -> list[CandidateInvite]:
-    """Up to `limit` invites never started and last sent before `before`."""
-    async with Session() as session:
-        rows = await session.scalars(
-            select(CandidateInvite)
-            .where(
-                CandidateInvite.status.in_([InviteStatus.INVITED, InviteStatus.UNDELIVERED]),
-                CandidateInvite.sent_at < before,
-            )
-            .order_by(CandidateInvite.sent_at)
-            .limit(limit)
-        )
-
-        return list(rows)
-
-
-async def mark_expired(invite_id: uuid.UUID, before: datetime) -> bool:
-    """Expires an invite that still hasn't started and wasn't sent again since `before`; False
-    when it was started or sent again meanwhile."""
-    async with Session() as session:
-        marked = await session.scalar(
-            update(CandidateInvite)
-            .where(
-                CandidateInvite.id == invite_id,
-                CandidateInvite.status.in_([InviteStatus.INVITED, InviteStatus.UNDELIVERED]),
-                CandidateInvite.sent_at < before,
-            )
-            .values(status=InviteStatus.EXPIRED)
-            .returning(CandidateInvite.id)
-        )
-        await session.commit()
-
-    return marked is not None
 
 
 async def get_by_token(token: str) -> tuple[CandidateInvite, Interview] | None:
@@ -201,15 +164,16 @@ async def get_by_token(token: str) -> tuple[CandidateInvite, Interview] | None:
         return tuple(row) if row else None
 
 
-async def start(invite_id: uuid.UUID, user_id: str) -> bool:
+async def start(invite_id: uuid.UUID, user_id: str) -> str | None:
     """Marks the invite in process, an expired one too (a candidate back through the test's
-    link). False when it's gone: revoked meanwhile."""
+    link), and returns its status before. None when it's gone: revoked meanwhile."""
     async with Session() as session:
         stored = await session.get(CandidateInvite, invite_id, with_for_update=True)
 
         if stored is None:
-            return False
+            return None
 
+        before = stored.status
         stored.user_id = user_id
 
         if stored.status in NOT_STARTED:
@@ -217,7 +181,7 @@ async def start(invite_id: uuid.UUID, user_id: str) -> bool:
 
         await session.commit()
 
-    return True
+    return before
 
 
 async def mark_undelivered(invite_id: uuid.UUID, notice: dict) -> None:
@@ -268,11 +232,16 @@ async def finish(
         await session.commit()
 
 
-async def remove(invite: CandidateInvite, company_id) -> None:
+async def remove(invite: CandidateInvite, company_id) -> str | None:
     """Deletes the invite (its link stops working) and tells the other services, which forget the
-    candidate too: the company's notifications about them, the ATS's record of them."""
+    candidate too: the company's notifications about them, the ATS's record of them. Returns its
+    status as it was deleted."""
     async with Session() as session:
-        await session.execute(delete(CandidateInvite).where(CandidateInvite.id == invite.id))
+        removed = await session.scalar(
+            delete(CandidateInvite)
+            .where(CandidateInvite.id == invite.id)
+            .returning(CandidateInvite.status)
+        )
         outbox.add(
             session,
             OutboxEvent,
@@ -284,6 +253,8 @@ async def remove(invite: CandidateInvite, company_id) -> None:
             },
         )
         await session.commit()
+
+    return removed
 
 
 async def set_extra_time(invite_id: uuid.UUID, extra_time: int) -> None:

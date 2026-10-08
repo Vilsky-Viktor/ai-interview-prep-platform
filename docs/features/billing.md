@@ -15,6 +15,7 @@ Companies pay per candidate from a wallet of credits. There's no paid subscripti
 - A company pays 300 credits per candidate who answers at least one question.
 - Generating an interview is free.
 - Only what works is charged: a candidate's credits are set aside on invite and given back if they never answer.
+- A candidate removed before finishing (revoked, or with their interview deleted) is charged if they answered at least one question; otherwise their credits come back.
 - Each invite has its own hold, so a candidate removed and invited again is charged again when they finish.
 - Whenever a company gets credits (a top-up, a referral reward, a chargeback reversed), billing publishes `credits.added`: candidates its ATSs sent that weren't invited for lack of credits are invited then (see [ATS integrations](ats.md)).
 - A person's first company gets 900 credits, enough for 3 candidates.

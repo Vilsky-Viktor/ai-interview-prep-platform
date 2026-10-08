@@ -1,11 +1,13 @@
 from fastapi import HTTPException, status
 
-from app.helpers.candidates import candidate_seconds
+from app.constants.invites import InviteStatus
+from app.helpers.candidates import candidate_seconds, hold_key
 from app.helpers.interviews import attach_set, session_topics
 from app.integrations import library, rounds
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.schemas.invites import InviteStartOut, SessionSummary
+from app.services.candidate_billing import hold_again
 from app.storage import invites
 
 
@@ -35,11 +37,17 @@ async def start_sessions(
         }
     )
 
+    before = await invites.start(invite.id, user_id)
+
     # Revoked meanwhile: its sessions go too.
-    if not await invites.start(invite.id, user_id):
+    if before is None:
         await rounds.delete_invite_sessions([invite.id])
 
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
+
+    # Expired after it was read: expiry gave its credits back.
+    if before == InviteStatus.EXPIRED:
+        await hold_again(invite, hold_key(invite.interview_id, invite.email, invite.hold_key))
 
     return InviteStartOut(
         sessions=[

@@ -10,6 +10,7 @@ from app.integrations import billing, library, rounds
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
+from app.models.invites import CandidateInvite
 from app.storage import companies, interviews, invites
 
 COMPANY_ID = uuid.uuid4()
@@ -47,6 +48,8 @@ def setup(monkeypatch, role, set_id=SET_ID):
 
     async def fake_remove(interview_id):
         calls.append(("interview", interview_id))
+
+        return []
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
@@ -110,20 +113,65 @@ def test_a_failed_cleanup_keeps_the_interview(client, monkeypatch):
     app.dependency_overrides.clear()
 
 
-def test_deleting_an_interview_gives_back_unfinished_candidates_credits(client, monkeypatch):
+def candidate(email, status):
+    return CandidateInvite(id=uuid.uuid4(), interview_id=INTERVIEW_ID, email=email, status=status)
+
+
+def test_deleting_an_interview_settles_unfinished_candidates_credits(client, monkeypatch):
+    """Charged for one who answered something, given back for the rest, before rounds forgets
+    their answers."""
+    calls = setup(monkeypatch, "admin")
+    carol = candidate("carol@example.com", "invited")
+    dan = candidate("dan@example.com", "in_process")
+    erin = candidate("erin@example.com", "in_process")
+
+    async def unfinished(interview_id):
+        return [carol, dan, erin]
+
+    async def scores(invite_ids):
+        calls.append(("scores", sorted(invite_ids)))
+
+        return {str(dan.id): {"progress": 20}, str(erin.id): {"progress": 0}}
+
+    async def release(key):
+        calls.append(("release", key))
+
+    async def charge(key):
+        calls.append(("charge", key))
+
+    monkeypatch.setattr(invites, "unfinished", unfinished)
+    monkeypatch.setattr(rounds, "invite_scores", scores)
+    monkeypatch.setattr(billing, "release_candidate", release)
+    monkeypatch.setattr(billing, "charge_candidate", charge)
+
+    assert client.delete(URL).status_code == 204
+    assert calls == [
+        ("scores", sorted([dan.id, erin.id])),
+        ("release", f"{INTERVIEW_ID}:carol@example.com"),
+        ("charge", f"{INTERVIEW_ID}:dan@example.com"),
+        ("release", f"{INTERVIEW_ID}:erin@example.com"),
+        ("rounds", SET_ID),
+        ("library", SET_ID),
+        ("interview", INTERVIEW_ID),
+    ]
+
+    app.dependency_overrides.clear()
+
+
+def test_an_invite_made_while_the_interview_is_deleted_gives_its_credits_back(client, monkeypatch):
     setup(monkeypatch, "admin")
     released = []
 
-    async def unfinished(interview_id):
-        return [(INTERVIEW_ID, "carol@example.com", "invited", None)]
+    async def remove(interview_id):
+        return [(INTERVIEW_ID, "late@example.com", "invited", "late-key")]
 
     async def release(key):
         released.append(key)
 
-    monkeypatch.setattr(invites, "unfinished", unfinished)
+    monkeypatch.setattr(interviews, "remove", remove)
     monkeypatch.setattr(billing, "release_candidate", release)
 
     assert client.delete(URL).status_code == 204
-    assert released == [f"{INTERVIEW_ID}:carol@example.com"]
+    assert released == ["late-key"]
 
     app.dependency_overrides.clear()

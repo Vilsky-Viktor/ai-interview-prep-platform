@@ -75,6 +75,25 @@ def test_anyone_signed_in_starts_through_the_link_and_is_charged_like_an_invite(
     assert [invite.email for invite in linked["started"]] == ["Cand@Example.com"]
 
 
+def test_a_new_invite_that_cant_be_saved_gives_its_credits_back(client, linked, monkeypatch):
+    """Its interview was deleted meanwhile."""
+    released = []
+
+    async def gone(interview_id, email, hold_key=None):
+        raise RuntimeError("interview deleted")
+
+    async def release(key):
+        released.append(key)
+
+    monkeypatch.setattr(invites, "for_link", gone)
+    monkeypatch.setattr(billing, "release_candidate", release)
+
+    with pytest.raises(RuntimeError):
+        client.post("/links/abc/start")
+
+    assert released == linked["held"] and len(released) == 1
+
+
 def test_coming_back_continues_without_charging_again(client, linked):
     linked["status"] = "in_process"
 

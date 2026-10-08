@@ -95,7 +95,15 @@ async def start_link(token: str, user: CurrentUser) -> InviteStartOut:
 
             raise
 
-    invite = await invites.for_link(interview.id, user.email, hold_key=key)
+    try:
+        invite = await invites.for_link(interview.id, user.email, hold_key=key)
+    except Exception:
+        # A new invite that couldn't be saved (its interview deleted meanwhile) gives its
+        # credits back.
+        if current is None:
+            await billing.release_candidate(key)
+
+        raise
 
     # Started at the same moment by another request, whose own key and credits were kept.
     if current is None and invite.hold_key != key:

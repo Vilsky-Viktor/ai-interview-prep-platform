@@ -12,6 +12,7 @@ from app.integrations.redis import get_redis
 from app.models.companies import Company
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
+from app.services.candidate_billing import hold_again
 from app.storage import invites
 
 
@@ -39,7 +40,7 @@ async def invite(interview: Interview, company: Company, user: User, email: str)
     title = await interview_title(interview) or "an interview"
 
     try:
-        invite = await invites.upsert(
+        invite, revived = await invites.upsert(
             interview.id,
             email,
             title,
@@ -58,6 +59,10 @@ async def invite(interview: Interview, company: Company, user: User, email: str)
     # Invited at the same moment by another request, whose own key and credits were kept.
     if current is None and invite.hold_key != key:
         await billing.release_candidate(key)
+
+    # Expired after it was read here: expiry gave its credits back.
+    if revived:
+        await hold_again(invite, key)
 
     if current is None:
         await track("candidate_invited", user_id=user.uid, company_id=company.id)

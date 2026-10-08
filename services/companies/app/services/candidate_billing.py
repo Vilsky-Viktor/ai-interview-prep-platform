@@ -10,29 +10,16 @@ from app.helpers.candidates import finished_result, hold_key, stored_results
 from app.helpers.notifications import candidate_finished
 from app.integrations import billing, rounds
 from app.services import outbox as outbox_service
-from app.storage import interviews, invites
+from app.storage import interviews, invite_expiry, invites
 
 logger = logging.getLogger(__name__)
 
 
-async def results_of(invite_id: uuid.UUID) -> dict:
-    """The candidate's results from rounds; none when rounds can't say now (the candidates list
-    stores them later)."""
-    try:
-        scores = await rounds.invite_scores([invite_id])
-    except Exception:
-        logger.warning("No results for invite %s: rounds didn't answer", invite_id, exc_info=True)
-
-        return {}
-
-    return scores.get(str(invite_id)) or {}
-
-
 async def handle(event_type: str, data: dict, event_id: str) -> None:
     """A finished interview charges the company for the candidate if they picked at least one
-    answer, and tells it once, however often the event comes; one finished without an answer
-    gives the credits back. Billing counts each charge or release once too. Other events aren't
-    ours."""
+    answer, and tells it once, with their grade, however often the event comes; one finished
+    without an answer gives the credits back. Billing counts each charge or release once too.
+    Other events aren't ours."""
     if event_type != INTERVIEW_FINISHED:
         return
 
@@ -44,9 +31,19 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
 
     interview = await interviews.get(invite.interview_id)
     charged = data["answered"] > 0
+    key = hold_key(invite.interview_id, invite.email, invite.hold_key)
+
+    # The charge first, so rounds being down never holds it up.
+    if charged:
+        await billing.charge_candidate(key)
+    else:
+        await billing.release_candidate(key)
+
+    # Raises when rounds doesn't answer, so the event comes again and the company and its ATS
+    # get the grade.
+    scores = await rounds.invite_scores([invite.id])
+    grade, flagged = stored_results(scores.get(str(invite.id)) or {})
     notice = None
-    # Results from rounds when it answers; they never hold up the charge.
-    grade, flagged = stored_results(await results_of(invite.id))
 
     # The company hears of candidates who answered something, with their grade.
     if charged:
@@ -55,14 +52,6 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
     result = finished_result(interview, invite.id, grade, flagged)
     await invites.finish(invite.id, grade, flagged, notice, event_id, result)
     await outbox_service.flush_quietly()
-
-    key = hold_key(invite.interview_id, invite.email, invite.hold_key)
-
-    if charged:
-        await billing.charge_candidate(key)
-    else:
-        await billing.release_candidate(key)
-
     await track(
         "interview_finished",
         company_id=interview.company_id,
@@ -79,13 +68,13 @@ async def expire_unstarted() -> int:
 
     # Each invite's credits are released before it's marked expired: if billing fails, the
     # rest stay unexpired and the next run tries them again, so no hold is left open.
-    while rows := await invites.expiring(before, EXPIRIES_PER_BATCH):
+    while rows := await invite_expiry.expiring(before, EXPIRIES_PER_BATCH):
         for invite in rows:
             key = hold_key(invite.interview_id, invite.email, invite.hold_key)
             await billing.release_candidate(key)
 
             # Started or sent again since it was read: it keeps its credits after all.
-            if not await invites.mark_expired(invite.id, before):
+            if not await invite_expiry.mark_expired(invite.id, before):
                 await hold_again(invite, key)
 
         count += len(rows)
@@ -115,3 +104,19 @@ async def release_unfinished(rows: list) -> None:
     for interview_id, email, status, stored in rows:
         if status in (*NOT_STARTED, InviteStatus.IN_PROCESS):
             await billing.release_candidate(hold_key(interview_id, email, stored))
+
+
+async def settle_removed(rows: list) -> None:
+    """Credits of candidates removed before they finished: one who answered at least one
+    question is charged, the others' come back. It asks rounds, so it goes before their answers
+    are deleted; safe to repeat (a charged candidate stays charged)."""
+    started = [row.id for row in rows if row.status == InviteStatus.IN_PROCESS]
+    scores = await rounds.invite_scores(started)
+
+    for row in rows:
+        key = hold_key(row.interview_id, row.email, row.hold_key)
+
+        if (scores.get(str(row.id)) or {}).get("progress"):
+            await billing.charge_candidate(key)
+        else:
+            await billing.release_candidate(key)

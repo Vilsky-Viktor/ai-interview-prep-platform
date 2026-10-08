@@ -5,6 +5,7 @@ from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, func, select, update
 
 from app.constants.events import INTERVIEW_DELETED, INTERVIEW_READY
+from app.constants.invites import InviteStatus
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
@@ -132,9 +133,29 @@ async def set_topic_limit(interview_id, topic_id: uuid.UUID, limit: int) -> None
         await session.commit()
 
 
-async def remove(interview_id) -> None:
-    """Deletes the interview, with the interview.deleted event when one is removed."""
+async def remove(interview_id) -> list[tuple]:
+    """Deletes the interview, with the interview.deleted event when one is removed, and returns
+    (interview id, email, status, hold key) of its invites not finished, deleted with it."""
     async with Session() as session:
+        # Locked first: an invite being saved now is saved before and returned, or waits and
+        # then fails, as its interview is gone.
+        await session.scalar(
+            select(Interview.id).where(Interview.id == interview_id).with_for_update()
+        )
+        removed = await session.execute(
+            delete(CandidateInvite)
+            .where(
+                CandidateInvite.interview_id == interview_id,
+                CandidateInvite.status != InviteStatus.FINISHED,
+            )
+            .returning(
+                CandidateInvite.interview_id,
+                CandidateInvite.email,
+                CandidateInvite.status,
+                CandidateInvite.hold_key,
+            )
+        )
+        removed = [tuple(row) for row in removed]
         company_id = await session.scalar(
             delete(Interview).where(Interview.id == interview_id).returning(Interview.company_id)
         )
@@ -143,6 +164,8 @@ async def remove(interview_id) -> None:
             add_deleted(session, interview_id, company_id)
 
         await session.commit()
+
+    return removed
 
 
 def add_deleted(session, interview_id, company_id) -> None:

@@ -6,8 +6,9 @@ from app.storage import companies, interviews
 
 
 async def delete_company(company_id) -> None:
-    """Each interview's results and questions go first, so a failure leaves the company to
-    delete again. Its notifications go through the company.deleted event."""
+    """Each interview's results and questions go first, then its credits and automatic top-up,
+    so a failure leaves the company to delete again. Its notifications go through the
+    company.deleted event."""
     for interview in await interviews.list_for_company(company_id):
         if interview.set_id is None:
             cancelled = await generation_api.cancel(interview.generation_id, company_id)
@@ -21,6 +22,6 @@ async def delete_company(company_id) -> None:
             await rounds.delete_interview_data(interview.set_id)
             await library.delete_interview(interview.set_id)
 
-    await companies.delete(company_id)
     await billing.delete_company(company_id)
+    await companies.delete(company_id)
     await outbox.flush_quietly()

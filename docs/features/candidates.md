@@ -32,7 +32,7 @@ A candidate's credits are set aside on invite and given back if they never answe
 | When | What happens |
 |---|---|
 | Not started after 3 days | One reminder email. A daily job runs it (`/internal/schedules/invite-reminders`) |
-| Not started within 30 days | The invite expires and its credits come back |
+| Not started within 30 days | The invite expires and its credits come back. Sending it again, or the candidate starting through the shareable link, sets them aside again |
 
 Candidates can also arrive from an ATS (see [ATS integrations](ats.md)).
 
@@ -41,7 +41,7 @@ Candidates can also arrive from an ATS (see [ATS integrations](ats.md)).
 Owners and admins can revoke any candidate in the list (`DELETE /interviews/{id}/candidates/{invite_id}` in companies):
 
 - **Not started yet:** the invite is withdrawn; its link stops working and the credits set aside come back. The candidate can be invited again later.
-- **Started or finished:** the candidate is erased for good, with their answers, timings and results in rounds, for example when they ask to have their data deleted. Credits still held come back; a finished candidate stays charged.
+- **Started or finished:** the candidate is erased for good, with their answers, timings and results in rounds, for example when they ask to have their data deleted. A candidate who answered at least one question is charged (a finished one stays charged); other credits still held come back.
 
 Either way the company's [audit log](companies.md#audit-log) records it, and companies publishes `candidate.removed`: the company's bell notifications about the candidate go, and so does the ATS's record of them for that interview.
 

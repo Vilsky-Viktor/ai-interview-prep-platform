@@ -12,7 +12,7 @@ def test_a_candidate_invite_and_its_email_event_are_saved_together(run):
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         # A Russian interview: its invite email goes out in Russian.
         interview = await interviews.create(company.id, uuid.uuid4(), "ru")
-        invite = await invites.upsert(
+        invite, _ = await invites.upsert(
             interview.id, "erin@example.com", "Backend", "Acme", interview.language
         )
 

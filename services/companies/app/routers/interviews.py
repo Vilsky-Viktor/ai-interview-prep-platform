@@ -37,7 +37,7 @@ from app.schemas.interviews import (
 )
 from app.services import set_cache
 from app.services.access import can_edit, require_company, require_editor
-from app.services.candidate_billing import release_unfinished
+from app.services.candidate_billing import release_unfinished, settle_removed
 from app.storage import audit, candidates, interviews, invites
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
@@ -178,7 +178,8 @@ async def rename_interview(interview_id: UUID, body: TitleIn, user: CurrentUser)
 
 @router.delete("/{interview_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_interview(interview_id: UUID, user: CurrentUser) -> None:
-    """Results and questions go first, so a failure leaves the interview to delete again."""
+    """Credits, results and questions go first, so a failure leaves the interview to delete
+    again."""
     interview = await interviews.get(interview_id)
 
     if interview is None:
@@ -190,10 +191,12 @@ async def delete_interview(interview_id: UUID, user: CurrentUser) -> None:
     if interview.set_id is None:
         raise HTTPException(status.HTTP_409_CONFLICT, "Cancel the generation instead")
 
+    # Settled while rounds still has the answers. Released again as it's removed, for an invite
+    # made or sent again meanwhile; a charged candidate stays charged.
+    await settle_removed(await invites.unfinished(interview.id))
     await rounds.delete_interview_data(interview.set_id)
     await library.delete_interview(interview.set_id)
-    await release_unfinished(await invites.unfinished(interview.id))
-    await interviews.remove(interview.id)
+    await release_unfinished(await interviews.remove(interview.id))
 
 
 @router.post("/{interview_id}/preview", status_code=status.HTTP_201_CREATED)

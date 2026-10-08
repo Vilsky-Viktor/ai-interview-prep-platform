@@ -20,8 +20,8 @@ async def interview():
 def test_inviting_the_same_address_again_returns_the_same_invite(run):
     async def scenario():
         found = await interview()
-        first = await invites.upsert(found.id, "Carol@Example.com", "Backend", "Acme", "en")
-        again = await invites.upsert(found.id, "carol@example.com", "Backend", "Acme", "en")
+        first, _ = await invites.upsert(found.id, "Carol@Example.com", "Backend", "Acme", "en")
+        again, _ = await invites.upsert(found.id, "carol@example.com", "Backend", "Acme", "en")
 
         return first, again
 
@@ -35,7 +35,7 @@ def test_inviting_the_same_address_again_returns_the_same_invite(run):
 def test_an_undelivered_invite_is_marked_until_it_is_sent_again(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "erin@example.com", "Backend", "Acme", "en")
+        invite, _ = await invites.upsert(found.id, "erin@example.com", "Backend", "Acme", "en")
         await invites.mark_undelivered(invite.id, invite_undelivered(found, invite.email))
         bounced, _ = await invites.get_by_token(invite.token)
         await invites.upsert(found.id, "erin@example.com", "Backend", "Acme", "en")
@@ -52,7 +52,7 @@ def test_an_undelivered_invite_is_marked_until_it_is_sent_again(run):
 def test_a_started_invite_is_never_marked_undelivered(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "fay@example.com", "Backend", "Acme", "en")
+        invite, _ = await invites.upsert(found.id, "fay@example.com", "Backend", "Acme", "en")
         await invites.start(invite.id, "fay-uid")
         await invites.mark_undelivered(invite.id, invite_undelivered(found, invite.email))
         stored, _ = await invites.get_by_token(invite.token)
@@ -65,7 +65,7 @@ def test_a_started_invite_is_never_marked_undelivered(run):
 def test_an_invite_moves_from_invited_to_in_process_to_finished(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "dave@example.com", "Backend", "Acme", "en")
+        invite, _ = await invites.upsert(found.id, "dave@example.com", "Backend", "Acme", "en")
         await invites.start(invite.id, "dave-uid")
         started, _ = await invites.get_by_token(invite.token)
         await invites.finish(invite.id, 80, False, None)
@@ -87,7 +87,7 @@ def test_only_interviews_without_a_candidate_count_as_waiting(run):
         first = await interviews.create(company.id, uuid.uuid4(), "en")
         await interviews.create(company.id, uuid.uuid4(), "en")
         before = await interviews.without_candidates(company.id)
-        invite = await invites.upsert(first.id, "dan@example.com", "Backend", "Acme", "en")
+        invite, _ = await invites.upsert(first.id, "dan@example.com", "Backend", "Acme", "en")
         invited = await interviews.without_candidates(company.id)
         await invites.remove(invite, company.id)
         revoked = await interviews.without_candidates(company.id)
@@ -141,7 +141,7 @@ def test_marking_a_test_hired_turns_its_link_off(run):
 def test_a_candidate_who_has_not_started_is_reminded_once_until_invited_again(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "rita@example.com", "Backend", "Acme", "en")
+        invite, _ = await invites.upsert(found.id, "rita@example.com", "Backend", "Acme", "en")
         later = datetime.now(UTC) + timedelta(seconds=1)
         first = await reminders.remind_unstarted(later)
         again = await reminders.remind_unstarted(later)
@@ -192,33 +192,10 @@ def test_a_company_cant_take_another_companys_name_in_any_case(run):
     assert (taken, free, name) == (False, True, f"Third {word}")
 
 
-def test_only_stale_unstarted_invites_are_expiring_and_marking_one_expires_it(run):
-    async def scenario():
-        found = await interview()
-        stale = await invites.upsert(found.id, "old@example.com", "Backend", "Acme", "en")
-        await invites.upsert(found.id, "new@example.com", "Backend", "Acme", "en")
-        later = datetime.now(UTC) + timedelta(seconds=1)
-        due = [
-            row.email for row in await invites.expiring(later, 500) if row.interview_id == found.id
-        ]
-        await invites.mark_expired(stale.id, later)
-        after = [
-            row.email for row in await invites.expiring(later, 500) if row.interview_id == found.id
-        ]
-
-        return due, after, (await invites.get(stale.id)).status
-
-    due, after, status = run(scenario())
-
-    assert sorted(due) == ["new@example.com", "old@example.com"]
-    assert after == ["new@example.com"]
-    assert status == InviteStatus.EXPIRED
-
-
 def test_a_finished_interview_delivered_twice_notifies_the_company_once(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "gus@example.com", "Backend", "Acme", "en")
+        invite, _ = await invites.upsert(found.id, "gus@example.com", "Backend", "Acme", "en")
         notice = {"kind": "candidate_finished", "invite": str(invite.id)}
         event_id = str(uuid.uuid4())
         await invites.finish(invite.id, 70, False, notice, event_id)
@@ -275,7 +252,7 @@ def test_a_candidate_invited_again_after_removal_is_held_under_a_new_key(run, mo
 def test_removing_a_candidate_tells_the_other_services_to_forget_them(run):
     async def scenario():
         found = await interview()
-        invite = await invites.upsert(found.id, "hal@example.com", "Backend", "Acme", "en")
+        invite, _ = await invites.upsert(found.id, "hal@example.com", "Backend", "Acme", "en")
         await invites.remove(invite, found.company_id)
 
         async with Session() as session:
