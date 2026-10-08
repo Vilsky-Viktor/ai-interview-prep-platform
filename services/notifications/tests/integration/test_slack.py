@@ -1,14 +1,18 @@
 from datetime import UTC, datetime, timedelta
+from urllib.parse import parse_qs, urlparse
 
 import httpx
 import pytest
+from prepza_common.auth import current_user
 from prepza_common.encryption import encrypt
+from prepza_common.user import User
 
 from app.config.settings import settings
 from app.constants.notifications import KEEP_DAYS
 from app.constants.slack import SlackStatus
 from app.integrations import companies
 from app.integrations import slack as slack_api
+from app.main import app
 from app.models.slack import SlackPost
 from app.storage import notifications
 from app.storage import slack as storage
@@ -47,13 +51,14 @@ def configured(monkeypatch):
     return found
 
 
-async def connect(company_id, channel="#hiring", kinds=("candidate_finished",)):
+async def connect(company_id, channel="#hiring", kinds=("candidate_finished",), token=None):
+    """The company's channel; its workspace's token is its own unless `token` names a shared one."""
     await storage.connect(
         company_id,
         "Acme",
         channel,
         encrypt(KEY, f"https://hooks/{channel}"),
-        encrypt(KEY, "token"),
+        encrypt(KEY, token or f"token-{company_id}"),
         list(kinds),
         "u1",
     )
@@ -161,7 +166,57 @@ def test_a_deleted_companys_channel_and_app_go(run, configured):
         return await storage.get(company_id)
 
     assert run(scenario()) is None
-    assert configured["revoked"] == ["token"]
+    assert configured["revoked"] == [f"token-{company_id}"]
+
+
+def test_the_app_stays_while_another_company_uses_its_workspace(run, configured):
+    first, second = company(), company()
+    shared = f"token-{first}"
+
+    async def scenario():
+        await connect(first, token=shared)
+        await connect(second, token=shared)
+
+        async with api() as client:
+            await client.post("/internal/events", json=gone(first, "m-s4"))
+            kept = list(configured["revoked"])
+            await client.post("/internal/events", json=gone(second, "m-s5"))
+
+        return kept
+
+    assert run(scenario()) == []
+    assert configured["revoked"] == [shared]
+
+
+def gone(company_id, message_id):
+    return push("company.deleted", {"company_id": company_id}, message_id=message_id)
+
+
+def test_an_add_to_slack_trip_finishes_once(run, monkeypatch):
+    company_id = company()
+
+    async def exchange(code):
+        return {"team": "Acme", "channel": "#hiring", "url": "https://hooks/x", "token": "t"}
+
+    monkeypatch.setattr(slack_api, "exchange", exchange)
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="u1", email="u1@example.com", email_verified=True, name="Ann"
+    )
+
+    async def scenario():
+        async with api() as client:
+            started = await client.get(f"/slack/start?company_id={company_id}")
+            state = parse_qs(urlparse(started.json()["url"]).query)["state"][0]
+
+            return [
+                (await client.get(f"/slack/callback?code=ok&state={state}")).status_code
+                for _ in range(2)
+            ]
+
+    try:
+        assert run(scenario()) == [303, 400]
+    finally:
+        app.dependency_overrides.clear()
 
 
 def test_a_slack_mark_is_taken_once_freed_on_failure_and_pruned_when_expired(run):

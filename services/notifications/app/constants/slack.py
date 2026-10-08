@@ -12,6 +12,8 @@ SLACK_CALLBACK = "{site}/api/notifications/slack/callback"
 SLACK_PAGE = "{site}/companies/{company_id}/integrations/slack"
 # How long an "Add to Slack" trip may take, from the button to the callback.
 SLACK_STATE_SECONDS = 15 * 60
+# A trip's nonce in Redis, until the callback takes it (once) or SLACK_STATE_SECONDS pass.
+SLACK_STATE_KEY = "slack:state:{nonce}"
 SLACK_TIMEOUT_SECONDS = 10
 # What Slack answers when the web hook is gone (the app removed, the channel deleted or
 # archived): the connection needs reconnecting.

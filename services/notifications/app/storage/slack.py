@@ -14,6 +14,12 @@ async def get(company_id: str) -> SlackConnection | None:
         return await session.get(SlackConnection, company_id)
 
 
+async def tokens() -> list[str]:
+    """Every company's sealed token: companies on one workspace share it."""
+    async with Session() as session:
+        return list(await session.scalars(select(SlackConnection.token)))
+
+
 async def connect(
     company_id: str, team: str, channel: str, webhook: str, token: str, kinds: list, user_id: str
 ) -> None:

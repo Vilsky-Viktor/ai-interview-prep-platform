@@ -21,13 +21,13 @@ async def start(company_id: str, user: CurrentUser) -> SlackStartOut:
     """Where "Add to Slack" goes: Slack's page to approve prepza and pick a channel."""
     await slack.require(company_id, user.uid, editor=True)
 
-    return SlackStartOut(url=slack.start(company_id, user.uid))
+    return SlackStartOut(url=await slack.start(company_id, user.uid))
 
 
 @router.get("/callback")
 async def callback(state: str, code: str | None = None, error: str | None = None):
-    """Slack sends the browser back here; the signed state says whose company it is. Then on to
-    the company's Slack page."""
+    """Slack sends the browser back here; the signed, one-time state says whose company it is.
+    Then on to the company's Slack page."""
     return RedirectResponse(await slack.finish(code, state, error), status.HTTP_303_SEE_OTHER)
 
 

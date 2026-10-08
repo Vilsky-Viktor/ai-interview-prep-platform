@@ -1,4 +1,5 @@
 import logging
+import secrets
 import time
 from urllib.parse import urlencode
 
@@ -15,10 +16,12 @@ from app.constants.slack import (
     SLACK_KINDS,
     SLACK_PAGE,
     SLACK_SCOPE,
+    SLACK_STATE_KEY,
     SLACK_STATE_SECONDS,
 )
 from app.helpers.slack import message, read_state, signed_state
 from app.integrations import companies, slack
+from app.integrations.redis import get_redis
 from app.schemas.slack import SlackOut
 from app.storage import notifications
 from app.storage import slack as storage
@@ -67,14 +70,15 @@ async def overview(company_id: str) -> SlackOut:
     )
 
 
-def start(company_id: str, user_id: str) -> str:
+async def start(company_id: str, user_id: str) -> str:
     """Slack's approval page, for the company's editor who pressed "Add to Slack"."""
     if not available():
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Slack isn't set up yet")
 
-    state = signed_state(
-        settings.service_secret, company_id, user_id, int(time.time()) + SLACK_STATE_SECONDS
-    )
+    nonce = secrets.token_urlsafe(16)
+    await get_redis().set(SLACK_STATE_KEY.format(nonce=nonce), 1, ex=SLACK_STATE_SECONDS)
+    expires = int(time.time()) + SLACK_STATE_SECONDS
+    state = signed_state(settings.service_secret, company_id, user_id, expires, nonce)
     query = urlencode(
         {
             "client_id": settings.slack_client_id,
@@ -89,13 +93,17 @@ def start(company_id: str, user_id: str) -> str:
 
 async def finish(code: str | None, state: str, error: str | None) -> str:
     """Back from Slack: the approved channel is saved (replacing an earlier one, whose app is
-    removed). Where to send the browser: the company's Slack page, saying how it went."""
+    removed unless a company still uses it). Each state works once, and only while whoever
+    started the trip is still an editor. Where to send the browser: the company's Slack page,
+    saying how it went."""
     found = read_state(settings.service_secret, state, int(time.time()))
 
-    if found is None:
+    # Deleting the nonce takes the state: a second callback with it finds nothing.
+    if found is None or not await get_redis().delete(SLACK_STATE_KEY.format(nonce=found[2])):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "This Slack link expired: try again")
 
-    company_id, user_id = found
+    company_id, user_id, _ = found
+    await require(company_id, user_id, editor=True)
     page = SLACK_PAGE.format(site=settings.site_url, company_id=company_id)
 
     if error or not code:
@@ -135,19 +143,23 @@ async def set_kinds(company_id: str, kinds: list[str]) -> None:
 
 
 async def remove_app(sealed_token: str) -> None:
-    token = decrypt(settings.slack_encryption_key, sealed_token)
+    """Revokes a token no company uses any more. Slack gives every company on a workspace (and a
+    company reconnecting to it) the same token, and revoking it removes the app for all of them."""
+    key = settings.slack_encryption_key
+    token = decrypt(key, sealed_token)
 
-    if token:
+    if token and token not in [decrypt(key, sealed) for sealed in await storage.tokens()]:
         await slack.revoke(token)
 
 
 async def disconnect(company_id: str) -> None:
-    """Removes prepza's app from the workspace (as far as Slack answers), then the channel."""
+    """Removes the channel, then prepza's app from the workspace (as far as Slack answers) unless
+    another company still uses it."""
     found = await storage.get(company_id)
 
     if found is not None:
-        await remove_app(found.token)
         await storage.remove(company_id)
+        await remove_app(found.token)
 
 
 async def deliver(event: dict, key: str) -> None:

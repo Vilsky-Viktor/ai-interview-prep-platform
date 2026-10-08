@@ -12,31 +12,36 @@ NOT_INVITED = {
 }
 
 
-def signed_state(secret: str, company_id: str, user_id: str, expires: int) -> str:
+def escaped(text: str) -> str:
+    """`text` as Slack shows it, never as markup: a title "<!channel>" doesn't ping anyone."""
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def signed_state(secret: str, company_id: str, user_id: str, expires: int, nonce: str) -> str:
     """The "Add to Slack" trip's state: the company and who started it, until `expires` (Unix
-    seconds), signed so the callback can trust it."""
-    payload = f"{company_id}|{user_id}|{expires}"
+    seconds), signed so the callback can trust it; `nonce` lets the callback take it once."""
+    payload = f"{company_id}|{user_id}|{expires}|{nonce}"
     signature = hmac.new(secret.encode(), payload.encode(), hashlib.sha256).hexdigest()
 
     return base64.urlsafe_b64encode(f"{payload}|{signature}".encode()).decode()
 
 
-def read_state(secret: str, state: str, now: int) -> tuple[str, str] | None:
-    """The company and user a state names, if it's ours and not expired."""
+def read_state(secret: str, state: str, now: int) -> tuple[str, str, str] | None:
+    """The company, user and nonce a state names, if it's ours and not expired."""
     try:
-        company_id, user_id, expires, signature = (
+        company_id, user_id, expires, nonce, signature = (
             base64.urlsafe_b64decode(state.encode()).decode().split("|")
         )
     except ValueError:
         return None
 
-    payload = f"{company_id}|{user_id}|{expires}"
+    payload = f"{company_id}|{user_id}|{expires}|{nonce}"
     expected = hmac.new(secret.encode(), payload.encode(), hashlib.sha256).hexdigest()
 
     if not hmac.compare_digest(signature, expected) or int(expires) < now:
         return None
 
-    return company_id, user_id
+    return company_id, user_id, nonce
 
 
 def message(event: dict, site: str) -> str | None:
@@ -63,4 +68,5 @@ def message(event: dict, site: str) -> str | None:
     if text is None:
         return None
 
-    return f"{text} <{site}{event.get('link', '')}|Open in prepza>"
+    # Only the values people wrote are escaped: the link is ours.
+    return f"{escaped(text)} <{site}{event.get('link', '')}|Open in prepza>"

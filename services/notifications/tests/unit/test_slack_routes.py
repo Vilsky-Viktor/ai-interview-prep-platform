@@ -12,6 +12,7 @@ from app.helpers.slack import signed_state
 from app.integrations import companies
 from app.integrations import slack as slack_api
 from app.main import app
+from app.services import slack as service
 from app.storage import slack as storage
 
 KEY = "Zm9vYmFyYmF6cXV4cXV1eGNvcmdlZ3JhdWx0Z2FycGw="
@@ -26,8 +27,29 @@ def configured(monkeypatch):
     app.dependency_overrides[current_user] = lambda: User(
         uid="u1", email="u1@example.com", email_verified=True, name="Ann"
     )
+    member(monkeypatch, editor=True)
     yield
     app.dependency_overrides.clear()
+
+
+class FakeRedis:
+    def __init__(self, nonces):
+        self.nonces = nonces
+
+    async def set(self, key, value, ex):
+        self.nonces[key] = ex
+
+    async def delete(self, key):
+        return 1 if self.nonces.pop(key, None) else 0
+
+
+@pytest.fixture(autouse=True)
+def nonces(monkeypatch):
+    """The trips' nonces Redis holds, and how long each lives."""
+    found = {}
+    monkeypatch.setattr(service, "get_redis", lambda: FakeRedis(found))
+
+    return found
 
 
 def member(monkeypatch, editor: bool, is_member: bool = True):
@@ -37,14 +59,32 @@ def member(monkeypatch, editor: bool, is_member: bool = True):
     monkeypatch.setattr(companies, "access", access)
 
 
-def test_add_to_slack_goes_to_slacks_page_with_a_signed_state(client, monkeypatch):
-    member(monkeypatch, editor=True)
+def test_add_to_slack_goes_to_slacks_page_with_a_signed_state(client, monkeypatch, nonces):
     url = client.get("/slack/start?company_id=c1").json()["url"]
     query = parse_qs(urlparse(url).query)
 
     assert url.startswith("https://slack.com/oauth/v2/authorize?")
     assert query["scope"] == ["incoming-webhook"]
     assert query["redirect_uri"] == ["http://localhost:8090/api/notifications/slack/callback"]
+    assert list(nonces.values()) == [15 * 60]
+
+
+def test_a_state_works_once_and_only_for_a_current_editor(client, monkeypatch, saved):
+    async def exchange(code):
+        return {"team": "Acme", "channel": "#hiring", "url": "https://hooks/x", "token": "t"}
+
+    monkeypatch.setattr(slack_api, "exchange", exchange)
+    url = client.get("/slack/start?company_id=c1").json()["url"]
+    started = parse_qs(urlparse(url).query)["state"][0]
+
+    assert callback(client, f"code=ok&state={started}").status_code == 303
+    assert callback(client, f"code=ok&state={started}").status_code == 400
+
+    saved["saved"] = None
+    member(monkeypatch, editor=False)
+
+    assert callback(client, f"code=ok&state={state()}").status_code == 403
+    assert saved["saved"] is None
 
 
 def test_a_viewer_cant_add_slack_and_a_stranger_doesnt_see_the_company(client, monkeypatch):
@@ -59,7 +99,6 @@ def test_a_viewer_cant_add_slack_and_a_stranger_doesnt_see_the_company(client, m
 
 
 def test_slack_not_set_up_on_the_server_says_so(client, monkeypatch):
-    member(monkeypatch, editor=True)
     monkeypatch.setattr(settings, "slack_client_id", "")
     response = client.get("/slack/start?company_id=c1")
 
@@ -68,12 +107,17 @@ def test_slack_not_set_up_on_the_server_says_so(client, monkeypatch):
 
 
 def state(expires_in=60):
-    return signed_state(settings.service_secret, "c1", "u1", int(time.time()) + expires_in)
+    """A state whose nonce Redis holds, as if "Add to Slack" was just pressed."""
+    nonce = f"n{time.time_ns()}"
+    service.get_redis().nonces[f"slack:state:{nonce}"] = 1
+
+    return signed_state(settings.service_secret, "c1", "u1", int(time.time()) + expires_in, nonce)
 
 
 @pytest.fixture
 def saved(monkeypatch):
-    """What the callback saves and which earlier apps it removes; c1 had no channel before."""
+    """What the callback saves and which earlier apps it removes; c1 had no channel before, and
+    no other company has one."""
     found = {"saved": None, "revoked": [], "earlier": None}
 
     async def get(company_id):
@@ -82,11 +126,15 @@ def saved(monkeypatch):
     async def connect(*args):
         found["saved"] = args
 
+    async def tokens():
+        return [found["saved"][4]] if found["saved"] else []
+
     async def revoke(token):
         found["revoked"].append(token)
 
     monkeypatch.setattr(storage, "get", get)
     monkeypatch.setattr(storage, "connect", connect)
+    monkeypatch.setattr(storage, "tokens", tokens)
     monkeypatch.setattr(slack_api, "revoke", revoke)
 
     return found
@@ -125,6 +173,19 @@ def test_reconnecting_keeps_the_kinds_and_removes_the_earlier_app(client, monkey
     assert saved["revoked"] == ["t1"]
 
 
+def test_reconnecting_to_the_same_workspace_keeps_its_app(client, monkeypatch, saved):
+    """Slack gives the same token again: revoking it would remove the app just added."""
+
+    async def exchange(code):
+        return {"team": "Acme", "channel": "#new", "url": "https://hooks/y", "token": "t1"}
+
+    saved["earlier"] = SimpleNamespace(kinds=["interview_ready"], token=encrypt(KEY, "t1"))
+    monkeypatch.setattr(slack_api, "exchange", exchange)
+
+    assert callback(client, f"code=ok&state={state()}").status_code == 303
+    assert saved["revoked"] == []
+
+
 def test_cancelled_refused_and_expired_trips(client, monkeypatch, saved):
     async def refused(code):
         raise slack_api.SlackRefused("invalid_code")
@@ -144,7 +205,6 @@ def test_cancelled_refused_and_expired_trips(client, monkeypatch, saved):
 
 
 def test_only_known_kinds_are_saved(client, monkeypatch):
-    member(monkeypatch, editor=True)
     chosen = []
 
     async def get(company_id):

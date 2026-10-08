@@ -11,15 +11,15 @@ from app.integrations import slack
 SECRET = "test-secret-that-is-at-least-32-bytes"
 
 
-def test_a_state_names_its_company_and_user_until_it_expires():
-    state = signed_state(SECRET, "c1", "u1", expires=1_000)
+def test_a_state_names_its_company_user_and_nonce_until_it_expires():
+    state = signed_state(SECRET, "c1", "u1", expires=1_000, nonce="n1")
 
-    assert read_state(SECRET, state, now=999) == ("c1", "u1")
+    assert read_state(SECRET, state, now=999) == ("c1", "u1", "n1")
     assert read_state(SECRET, state, now=1_001) is None
 
 
 def test_a_state_signed_with_another_secret_or_changed_is_refused():
-    state = signed_state(SECRET, "c1", "u1", expires=1_000)
+    state = signed_state(SECRET, "c1", "u1", expires=1_000, nonce="n1")
     forged = base64.urlsafe_b64encode(
         base64.urlsafe_b64decode(state).replace(b"c1|", b"c2|")
     ).decode()
@@ -57,6 +57,18 @@ def test_a_not_invited_candidate_names_the_ats_and_why():
     )
 
     assert text.startswith("a@b.c from Greenhouse wasn't invited to “Backend”: out of credits.")
+
+
+def test_what_people_wrote_is_shown_not_read_as_slack_markup():
+    text = message(
+        event(NotificationKind.INTERVIEW_READY, title="<!channel> R&D <https://x|y>"),
+        "https://prepza.ai",
+    )
+
+    assert text == (
+        "The interview “&lt;!channel&gt; R&amp;D &lt;https://x|y&gt;” is ready."
+        " <https://prepza.ai/companies/c1/x|Open in prepza>"
+    )
 
 
 def test_a_kind_slack_doesnt_get_has_no_message():
