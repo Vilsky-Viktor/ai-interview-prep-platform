@@ -52,7 +52,7 @@ export function UserMenu() {
 
   if (!user) {
     return (
-      <Button variant="outline" onClick={() => signIn()}>
+      <Button variant="outline" className="px-4" onClick={() => signIn()}>
         {t("signIn")}
       </Button>
     )
