@@ -1,0 +1,169 @@
+# The services around them: billing, notifications (email and Slack), ATS integrations and the
+# public API; each with its migrations, run first.
+
+x-billing-env: &billing-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/billing
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  PADDLE_ENVIRONMENT: ${PADDLE_ENVIRONMENT:-sandbox}
+  PADDLE_CLIENT_TOKEN: ${PADDLE_CLIENT_TOKEN:-}
+  PADDLE_WEBHOOK_SECRET: ${PADDLE_WEBHOOK_SECRET:-}
+  PADDLE_PRICE_TOPUP_30: ${PADDLE_PRICE_TOPUP_30:-}
+  PADDLE_PRICE_TOPUP_150: ${PADDLE_PRICE_TOPUP_150:-}
+  PADDLE_PRICE_TOPUP_250: ${PADDLE_PRICE_TOPUP_250:-}
+  PADDLE_PRICE_TOPUP_1000: ${PADDLE_PRICE_TOPUP_1000:-}
+  PADDLE_PRICE_AUTO_TOP_UP: ${PADDLE_PRICE_AUTO_TOP_UP:-}
+  PADDLE_API_KEY: ${PADDLE_API_KEY:-}
+
+x-notifications-env: &notifications-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/notifications
+  REDIS_URL: redis://redis:6379
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  RESEND_API_KEY: ${RESEND_API_KEY:-}
+  RESEND_WEBHOOK_SECRET: ${RESEND_WEBHOOK_SECRET:-}
+  MAIL_FROM: ${MAIL_FROM:-prepza. <no-reply@prepza.local>}
+  COMPANIES_URL: http://companies:8000
+  SMTP_HOST: ${SMTP_HOST:-mailpit}
+  SMTP_PORT: ${SMTP_PORT:-1025}
+  SITE_URL: ${SITE_URL:-http://localhost:8090}
+  CONTACT_EMAIL: ${CONTACT_EMAIL:-hello@prepza.ai}
+  SLACK_CLIENT_ID: ${SLACK_CLIENT_ID:-}
+  SLACK_CLIENT_SECRET: ${SLACK_CLIENT_SECRET:-}
+  SLACK_ENCRYPTION_KEY: ${SLACK_ENCRYPTION_KEY:-}
+
+x-ats-env: &ats-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/ats
+  REDIS_URL: redis://redis:6379
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  COMPANIES_URL: http://companies:8000
+  # Encrypts companies' ATS keys (a Fernet key); empty turns ATS integrations off.
+  ATS_ENCRYPTION_KEY: ${ATS_ENCRYPTION_KEY:-}
+  # The site's address: where an ATS sends candidates, and links in results written back.
+  SITE_URL: ${SITE_URL:-http://localhost:8090}
+
+x-api-env: &api-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/api
+  REDIS_URL: redis://redis:6379
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  COMPANIES_URL: http://companies:8000
+  # Encrypts web hooks' signing secrets (a Fernet key); empty, web hooks can't be added.
+  API_ENCRYPTION_KEY: ${API_ENCRYPTION_KEY:-}
+  # The site's address: links to candidates' results in what the API returns.
+  SITE_URL: ${SITE_URL:-http://localhost:8090}
+
+# Each service's mounted source; migrations read it too, so new ones run without a rebuild.
+x-billing-source: &billing-source
+  - ./services/billing/app:/services/billing/app
+  - ./services/billing/migrations:/services/billing/migrations
+  - ./services/billing/alembic.ini:/services/billing/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+x-notifications-source: &notifications-source
+  - ./services/notifications/app:/services/notifications/app
+  - ./services/notifications/migrations:/services/notifications/migrations
+  - ./services/notifications/alembic.ini:/services/notifications/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+x-ats-source: &ats-source
+  - ./services/ats/app:/services/ats/app
+  - ./services/ats/migrations:/services/ats/migrations
+  - ./services/ats/alembic.ini:/services/ats/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+x-api-source: &api-source
+  - ./services/api/app:/services/api/app
+  - ./services/api/migrations:/services/api/migrations
+  - ./services/api/alembic.ini:/services/api/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+services:
+  billing-migrate:
+    extends: {file: compose/base.yml, service: migrate}
+    build:
+      context: .
+      dockerfile: services/billing/Dockerfile
+      target: dev
+    volumes: *billing-source
+    environment: *billing-env
+
+  billing:
+    extends: {file: compose/base.yml, service: server}
+    build:
+      context: .
+      dockerfile: services/billing/Dockerfile
+      target: dev
+    volumes: *billing-source
+    environment: *billing-env
+    depends_on:
+      billing-migrate:
+        condition: service_completed_successfully
+
+  notifications-migrate:
+    extends: {file: compose/base.yml, service: migrate}
+    build:
+      context: .
+      dockerfile: services/notifications/Dockerfile
+      target: dev
+    volumes: *notifications-source
+    environment: *notifications-env
+
+  notifications:
+    extends: {file: compose/base.yml, service: server}
+    build:
+      context: .
+      dockerfile: services/notifications/Dockerfile
+      target: dev
+    volumes: *notifications-source
+    environment: *notifications-env
+    depends_on:
+      notifications-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+
+  ats-migrate:
+    extends: {file: compose/base.yml, service: migrate}
+    build:
+      context: .
+      dockerfile: services/ats/Dockerfile
+      target: dev
+    volumes: *ats-source
+    environment: *ats-env
+
+  ats:
+    extends: {file: compose/base.yml, service: server}
+    build:
+      context: .
+      dockerfile: services/ats/Dockerfile
+      target: dev
+    volumes: *ats-source
+    environment: *ats-env
+    depends_on:
+      ats-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+
+  api-migrate:
+    extends: {file: compose/base.yml, service: migrate}
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+      target: dev
+    volumes: *api-source
+    environment: *api-env
+
+  api:
+    extends: {file: compose/base.yml, service: server}
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+      target: dev
+    volumes: *api-source
+    environment: *api-env
+    depends_on:
+      api-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy

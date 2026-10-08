@@ -1,0 +1,69 @@
+# Postgres, Redis and the local stand-ins for Google Cloud and email: Pub/Sub, the Firebase Auth
+# emulator, Mailpit.
+
+services:
+  postgres:
+    restart: unless-stopped
+    build: database
+    environment:
+      POSTGRES_USER: prepza
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "prepza"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    restart: unless-stopped
+    image: redis:8-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Google's Pub/Sub emulator: events between services, pushed like in Google Cloud.
+  pubsub:
+    restart: unless-stopped
+    image: google/cloud-sdk:emulators
+    command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085 --project=${FIREBASE_PROJECT_ID}
+
+  # Creates the topic and push subscriptions before the services start.
+  pubsub-setup:
+    restart: "no"
+    image: curlimages/curl:8.17.0
+    entrypoint: ["sh", "/pubsub-setup.sh"]
+    volumes:
+      - ./scripts/local/pubsub-setup.sh:/pubsub-setup.sh:ro
+    environment:
+      PUBSUB_EMULATOR_HOST: pubsub:8085
+      GOOGLE_CLOUD_PROJECT: ${FIREBASE_PROJECT_ID}
+    depends_on:
+      - pubsub
+
+  mailpit:
+    restart: unless-stopped
+    image: axllent/mailpit
+    ports:
+      # Web UI with every email sent locally.
+      - "8125:8025"
+  firebase-auth:
+    restart: unless-stopped
+    build: firebase
+    ports:
+      - "9199:9199"
+      - "4100:4100"
+    volumes:
+      # Emulator users survive restarts, so the user ids stored in the databases stay valid.
+      - firebase-data:/firebase/data
+    # The emulator saves its users on a graceful stop; give it time to finish.
+    stop_signal: SIGINT
+    stop_grace_period: 30s
+
+volumes:
+  postgres-data:
+  firebase-data:

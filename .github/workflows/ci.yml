@@ -84,7 +84,7 @@ jobs:
           # The whole-stack tests run when any part, or the stack and its tests, changed.
           stack=false
 
-          if [ -n "$changed" ] || echo "${files:-}" | grep -qE '^(e2e_tests|gateway|database|firebase|scripts)/|^docker-compose\.yml$'; then
+          if [ -n "$changed" ] || echo "${files:-}" | grep -qE '^(e2e_tests|gateway|database|firebase|scripts|compose)/|^docker-compose\.yml$'; then
             stack=true
           fi
 

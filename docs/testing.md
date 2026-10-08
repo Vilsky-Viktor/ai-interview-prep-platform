@@ -164,7 +164,7 @@ CI runs all of these except the end-to-end test, which needs an OpenAI key, and 
 - A pull request compares with its base. `main` compares with the last commit CI passed on, so a failed run's changes are tested and built by the next one.
 - Each changed part's unit tests run and its production image is built. A changed frontend also gets lint, types and the translations check (`pnpm check:messages`). On `main`, an unchanged part's image is the last passing commit's, tagged with the new commit too.
 - Ruff runs on every change.
-- It starts the whole stack for the smoke, integration, page and signed-in tests when any part changed, or `e2e_tests/`, `gateway/`, `database/`, `firebase/`, `scripts/` or `docker-compose.yml` did. A change to docs alone skips it.
+- It starts the whole stack for the smoke, integration, page and signed-in tests when any part changed, or `e2e_tests/`, `gateway/`, `database/`, `firebase/`, `scripts/`, `compose/` or `docker-compose.yml` did. A change to docs alone skips it.
 - Its stack has no templates, so before the signed-in tests it adds a small English one (`e2e_tests/signed-in/seed/template.py`, no OpenAI).
 - Its superadmin is a CI-only emulator account.
 - On failure, the screenshots and traces are kept as the run's `signed-in-test-results` artifact.

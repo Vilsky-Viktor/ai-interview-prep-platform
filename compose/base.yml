@@ -1,0 +1,58 @@
+# What every API service and its migrations share; the other files extend these (`extends:`),
+# so this file is not included and starts nothing by itself.
+
+x-firebase-env: &firebase-env
+  FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
+  # While set, the services accept unsigned tokens from the Auth emulator. Never in production.
+  FIREBASE_AUTH_EMULATOR_HOST: ${FIREBASE_AUTH_EMULATOR_HOST}
+  # Development only: serves /docs and /openapi.json, which `pnpm api-types` reads.
+  API_DOCS: "true"
+  # Superadmins, prepza's own team (templates, the question bank): verified Google emails, comma-separated.
+  SUPERADMIN_EMAILS: ${SUPERADMIN_EMAILS:-}
+  # Salts user ids in funnel events; in Google Cloud it's a secret.
+  ANALYTICS_SALT: ${ANALYTICS_SALT:-local-analytics-salt}
+  # The key of each service, for tokens calling it; in Google Cloud each service has its own.
+  LIBRARY_SERVICE_SECRET: ${SERVICE_SECRET}
+  GENERATION_SERVICE_SECRET: ${SERVICE_SECRET}
+  ROUNDS_SERVICE_SECRET: ${SERVICE_SECRET}
+  COMPANIES_SERVICE_SECRET: ${SERVICE_SECRET}
+  BILLING_SERVICE_SECRET: ${SERVICE_SECRET}
+  NOTIFICATIONS_SERVICE_SECRET: ${SERVICE_SECRET}
+  ATS_SERVICE_SECRET: ${SERVICE_SECRET}
+  API_SERVICE_SECRET: ${SERVICE_SECRET}
+  # Events go through the Pub/Sub emulator locally; Google Cloud uses the real service.
+  GOOGLE_CLOUD_PROJECT: ${FIREBASE_PROJECT_ID}
+  PUBSUB_EMULATOR_HOST: pubsub:8085
+  # Error reports; nothing is sent while SENTRY_DSN is empty.
+  SENTRY_DSN: ${SENTRY_DSN:-}
+  SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
+  SENTRY_TRACES_SAMPLE_RATE: ${SENTRY_TRACES_SAMPLE_RATE:-0.1}
+
+services:
+  # An API service: restarts, and is healthy once its /ready answers.
+  server:
+    restart: unless-stopped
+    environment:
+      <<: *firebase-env
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://localhost:8000/ready')
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # Runs a service's migrations once, before its API starts, so replicas never race on them.
+  migrate:
+    restart: "no"
+    command: ["uv", "run", "--no-sync", "alembic", "upgrade", "head"]
+    environment:
+      <<: *firebase-env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      # Every API publishes events, so the topic must exist before any of them starts.
+      pubsub-setup:
+        condition: service_completed_successfully

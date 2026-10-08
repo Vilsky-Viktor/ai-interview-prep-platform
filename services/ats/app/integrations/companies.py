@@ -1,7 +1,7 @@
 from uuid import UUID
 
 from fastapi import HTTPException, status
-from prepza_common import http
+from prepza_common import company_access, http
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -23,20 +23,10 @@ def _headers() -> dict:
 
 
 async def access(company_id: UUID, user_id: str) -> dict:
-    """What the user may do in the company: {"member": bool, "editor": bool}. A company that
-    doesn't exist is one they aren't a member of."""
-    response = await http.get_client().get(
-        f"{settings.companies_url}/internal/companies/{company_id}/access",
-        params={"user_id": user_id},
-        headers=_headers(),
+    """What the user may do in the company; a company that's gone is no access."""
+    return await company_access.access(
+        settings.companies_url, service_token("companies"), company_id, user_id
     )
-
-    if response.status_code == status.HTTP_404_NOT_FOUND:
-        return {"member": False, "editor": False}
-
-    response.raise_for_status()
-
-    return response.json()
 
 
 async def interviews(ids) -> dict[UUID, dict]:

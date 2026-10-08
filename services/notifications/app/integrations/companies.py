@@ -1,4 +1,4 @@
-from prepza_common import http
+from prepza_common import company_access, http
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -26,14 +26,7 @@ async def company_ids(user_id: str) -> list[str]:
 
 
 async def access(company_id: str, user_id: str) -> dict:
-    """Whether the user is a member of the company, and an editor (owner or admin); a company
-    that doesn't exist answers 404."""
-    response = await http.get_client().get(
-        f"{settings.companies_url}/internal/companies/{company_id}/access",
-        params={"user_id": user_id},
-        headers={"Authorization": f"Bearer {service_token('companies')}"},
+    """What the user may do in the company; a company that's gone is no access."""
+    return await company_access.access(
+        settings.companies_url, service_token("companies"), company_id, user_id
     )
-
-    response.raise_for_status()
-
-    return response.json()

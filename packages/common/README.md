@@ -1,8 +1,9 @@
 # prepza-common
 
 Code every prepza API service shares: sign-in, service tokens, logging, database and HTTP setup,
-the outbox and Pub/Sub, notifications, translated messages, a small in-memory cache, the admin
-zone's stats counting and the limits several services read.
+the outbox and Pub/Sub, notifications, who may do what in a company (asked of companies; a
+company that's gone is no access), translated messages, a small in-memory cache, the admin zone's
+stats counting and the limits several services read.
 Settings: `ServiceSettings` (`settings.py`) is the base of every service's `Settings`, with the
 sign-in settings they all read (`FIREBASE_PROJECT_ID`, and `FIREBASE_AUTH_EMULATOR_HOST`, refused
 unless the project is a `demo-` one). Each service's own settings live in its

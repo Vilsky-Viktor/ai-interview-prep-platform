@@ -3,6 +3,7 @@ from types import SimpleNamespace
 
 import httpx
 import pytest
+from prepza_common import http
 from prepza_common.encryption import encrypt
 from prepza_common.notifications import NotificationKind, Recipient, notification
 
@@ -13,6 +14,8 @@ from app.services import slack
 from app.storage import notifications
 from app.storage import slack as storage
 
+# The real call to companies, before the fixture stands in for it.
+REAL_ACCESS = companies.access
 KEY = "Zm9vYmFyYmF6cXV4cXV1eGNvcmdlZ3JhdWx0Z2FycGw="
 
 
@@ -143,6 +146,20 @@ def test_a_gone_web_hook_marks_the_channel_and_a_refused_message_is_skipped(chan
 
 def test_a_channel_connected_by_someone_no_longer_an_editor_asks_for_reconnecting(channel):
     channel["left"].add("u1")
+    deliver()
+
+    assert channel["posted"] == []
+    assert channel["broken"] == ["c1"]
+
+
+def test_a_company_thats_gone_asks_for_reconnecting_instead_of_retrying(channel, monkeypatch):
+    def gone(request):
+        return httpx.Response(404, json={"detail": "Company not found"})
+
+    monkeypatch.setattr(companies, "access", REAL_ACCESS)
+    monkeypatch.setattr(
+        http, "get_client", lambda: httpx.AsyncClient(transport=httpx.MockTransport(gone))
+    )
     deliver()
 
     assert channel["posted"] == []

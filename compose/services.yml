@@ -1,0 +1,218 @@
+# The services behind the tests: the question bank (library), question generation and its worker,
+# practice rounds, and companies; each with its migrations, run first.
+
+x-library-env: &library-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/library
+  REDIS_URL: redis://redis:6379
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  ROUNDS_URL: http://rounds:8000
+  GENERATION_URL: http://generation:8000
+  COMPANIES_URL: http://companies:8000
+  BILLING_URL: http://billing:8000
+  NOTIFICATIONS_URL: http://notifications:8000
+  ATS_URL: http://ats:8000
+  API_URL: http://api:8000
+
+x-generation-env: &generation-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/generation
+  REDIS_URL: redis://redis:6379
+  LIBRARY_URL: http://library:8000
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  INTERVIEW_QUESTIONS_PER_TOPIC: ${INTERVIEW_QUESTIONS_PER_TOPIC:-70}
+  TEMPLATE_QUESTIONS_PER_TOPIC: ${TEMPLATE_QUESTIONS_PER_TOPIC:-90}
+  MAX_TOPICS: ${MAX_TOPICS:-10}
+  MAX_SUBTOPICS: ${MAX_SUBTOPICS:-10}
+  INTERVIEW_MODEL: ${INTERVIEW_MODEL:-gpt-6.1-sol}
+  INTERVIEW_REASONING_EFFORT: ${INTERVIEW_REASONING_EFFORT:-low}
+  VERIFY_MODEL: ${VERIFY_MODEL:-gpt-6.1-sol}
+  VERIFY_REASONING_EFFORT: ${VERIFY_REASONING_EFFORT:-medium}
+  GENERATION_LIMIT: ${GENERATION_LIMIT:-20}
+  GENERATION_WINDOW_SECONDS: ${GENERATION_WINDOW_SECONDS:-86400}
+  REGENERATION_LIMIT: ${REGENERATION_LIMIT:-100}
+  DAILY_GENERATION_LIMIT: ${DAILY_GENERATION_LIMIT:-200}
+  LLM_REQUESTS_PER_SECOND: ${LLM_REQUESTS_PER_SECOND:-8}
+
+x-rounds-env: &rounds-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/rounds
+  REDIS_URL: redis://redis:6379
+  LIBRARY_URL: http://library:8000
+  BILLING_URL: http://billing:8000
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  OPENAI_API_KEY: ${OPENAI_API_KEY}
+  LANGSMITH_TRACING: ${LANGSMITH_TRACING}
+  LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+  LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+  HELP_MODEL: ${HELP_MODEL:-gpt-6-luna}
+  HELP_REASONING_EFFORT: ${HELP_REASONING_EFFORT:-none}
+  HELP_USER_LIMIT: ${HELP_USER_LIMIT:-30}
+  HELP_DAILY_LIMIT: ${HELP_DAILY_LIMIT:-5000}
+  CONTACT_DAILY_LIMIT: ${CONTACT_DAILY_LIMIT:-200}
+
+x-companies-env: &companies-env
+  # Candidate invite email limits.
+  EMAIL_HOURLY_LIMIT: ${EMAIL_HOURLY_LIMIT:-100}
+  EMAIL_DAILY_LIMIT: ${EMAIL_DAILY_LIMIT:-200}
+  EMAIL_RECIPIENT_DAILY_LIMIT: ${EMAIL_RECIPIENT_DAILY_LIMIT:-3}
+  REPORT_EMAILS_PER_COMPANY_DAY: ${REPORT_EMAILS_PER_COMPANY_DAY:-20}
+  BILLING_URL: http://billing:8000
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/companies
+  REDIS_URL: redis://redis:6379
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  GENERATION_URL: http://generation:8000
+  LIBRARY_URL: http://library:8000
+  ROUNDS_URL: http://rounds:8000
+
+# Each service's mounted source; migrations read it too, so new ones run without a rebuild.
+x-library-source: &library-source
+  - ./services/library/app:/services/library/app
+  - ./services/library/migrations:/services/library/migrations
+  - ./services/library/alembic.ini:/services/library/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+x-generation-source: &generation-source
+  - ./services/generation/app:/services/generation/app
+  - ./services/generation/migrations:/services/generation/migrations
+  - ./services/generation/alembic.ini:/services/generation/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+x-rounds-source: &rounds-source
+  - ./services/rounds/app:/services/rounds/app
+  - ./services/rounds/migrations:/services/rounds/migrations
+  - ./services/rounds/alembic.ini:/services/rounds/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+x-companies-source: &companies-source
+  - ./services/companies/app:/services/companies/app
+  - ./services/companies/migrations:/services/companies/migrations
+  - ./services/companies/alembic.ini:/services/companies/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+services:
+  library-migrate:
+    extends: {file: compose/base.yml, service: migrate}
+    build:
+      context: .
+      dockerfile: services/library/Dockerfile
+      target: dev
+    volumes: *library-source
+    environment: *library-env
+
+  library:
+    extends: {file: compose/base.yml, service: server}
+    build:
+      context: .
+      dockerfile: services/library/Dockerfile
+      target: dev
+    volumes: *library-source
+    environment: *library-env
+    depends_on:
+      library-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+
+  generation-migrate:
+    extends: {file: compose/base.yml, service: migrate}
+    build:
+      context: .
+      dockerfile: services/generation/Dockerfile
+      target: dev
+    volumes: *generation-source
+    environment: *generation-env
+
+  generation:
+    extends: {file: compose/base.yml, service: server}
+    build:
+      context: .
+      dockerfile: services/generation/Dockerfile
+      target: dev
+    volumes: *generation-source
+    environment:
+      <<: *generation-env
+      # Re-generating a single question runs in the request, not in the worker.
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+    depends_on:
+      generation-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+
+  # Runs jobs (Cloud Tasks in Google Cloud; called directly here) and scheduled work.
+  generation-worker:
+    extends: {file: compose/base.yml, service: server}
+    build:
+      context: .
+      dockerfile: services/generation/Dockerfile
+      target: dev
+    volumes: *generation-source
+    command:
+      [
+        "uv", "run", "--no-sync", "uvicorn", "app.worker_main:app", "--host", "0.0.0.0",
+        "--port", "8000", "--reload", "--reload-dir", "app", "--reload-dir", "/packages/common/src",
+      ]
+    environment:
+      <<: *generation-env
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+    depends_on:
+      generation-migrate:
+        condition: service_completed_successfully
+      library:
+        condition: service_healthy
+
+  rounds-migrate:
+    extends: {file: compose/base.yml, service: migrate}
+    build:
+      context: .
+      dockerfile: services/rounds/Dockerfile
+      target: dev
+    volumes: *rounds-source
+    environment: *rounds-env
+
+  rounds:
+    extends: {file: compose/base.yml, service: server}
+    build:
+      context: .
+      dockerfile: services/rounds/Dockerfile
+      target: dev
+    volumes: *rounds-source
+    environment: *rounds-env
+    depends_on:
+      rounds-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+
+  companies-migrate:
+    extends: {file: compose/base.yml, service: migrate}
+    build:
+      context: .
+      dockerfile: services/companies/Dockerfile
+      target: dev
+    volumes: *companies-source
+    environment: *companies-env
+
+  companies:
+    extends: {file: compose/base.yml, service: server}
+    build:
+      context: .
+      dockerfile: services/companies/Dockerfile
+      target: dev
+    volumes: *companies-source
+    environment: *companies-env
+    depends_on:
+      companies-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      generation:
+        condition: service_healthy
+      library:
+        condition: service_healthy
+      rounds:
+        condition: service_healthy

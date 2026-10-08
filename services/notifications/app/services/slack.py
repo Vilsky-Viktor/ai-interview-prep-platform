@@ -5,6 +5,7 @@ from urllib.parse import urlencode
 
 import httpx
 from fastapi import HTTPException, status
+from prepza_common import company_access
 from prepza_common.encryption import decrypt, encrypt
 from prepza_common.notifications import Recipient
 
@@ -36,21 +37,8 @@ def available() -> bool:
 
 
 async def require(company_id: str, user_id: str, editor: bool) -> None:
-    """A member may look; only an editor (owner or admin) may change. Others get 404, as if the
-    company weren't there; a viewer changing gets 403."""
-    try:
-        found = await companies.access(company_id, user_id)
-    except httpx.HTTPStatusError as error:
-        if error.response.status_code == status.HTTP_404_NOT_FOUND:
-            raise HTTPException(status.HTTP_404_NOT_FOUND, "Company not found") from None
-
-        raise
-
-    if not found["member"]:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Company not found")
-
-    if editor and not found["editor"]:
-        raise HTTPException(status.HTTP_403_FORBIDDEN, "Viewers can't change anything here")
+    """A member may look; only an editor (owner or admin) may change."""
+    company_access.require(await companies.access(company_id, user_id), editor)
 
 
 async def overview(company_id: str) -> SlackOut:
