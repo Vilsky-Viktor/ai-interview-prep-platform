@@ -24,7 +24,7 @@ Deze pagina legt uit hoe ze verschillen, waar elk beter past en hoe je ze combin
 | Hoe een test wordt gemaakt | Geschreven op basis van je functieomschrijving; je bekijkt de onderwerpen voordat er vragen worden geschreven. Er zijn ook kant-en-klare sjablonen per functie | Samengesteld uit een bibliotheek met kant-en-klare tests; eigen vragen in betaalde plannen ([prijspagina](https://www.testgorilla.com/pricing/)) |
 | Soorten tests | Interviews over vaardigheden en kennis met tijdslimiet en meerkeuzevragen, met vragen over code lezen voor technische onderwerpen | Cognitieve vaardigheden, taal, persoonlijkheid en cultuur, programmeren, functiespecifieke vaardigheden, situational judgment, softwarevaardigheden, typen ([testbibliotheek](https://www.testgorilla.com/test-library/)) |
 | Videovragen | Nee | Ja, in betaalde plannen |
-| AI-interviews | Geen conversationele AI; AI stelt onderwerpen voor en schrijft en controleert vragen | AI-interviews in het duurdere plan |
+| AI-interviews | Geen conversationele AI; AI stelt onderwerpen voor en schrijft vragen, waarvan een steekproef van de antwoordsleutels wordt gecontroleerd | AI-interviews in het duurdere plan |
 | Code in de test | Vragen over code lezen (wat code doet of uitvoert); geen code schrijven of draaien | Programmeertests in de bibliotheek; eigen programmeeropdrachten in het duurdere plan |
 | Vragen per kandidaat | Een eigen willekeurige set per kandidaat, in een eigen volgorde | Hier niet vergeleken |
 | Integriteitsfuncties | Timer bij elke vraag (door de server afgedwongen), signalen bij te snelle antwoorden, het verlaten van de pagina en kopieerpogingen | Webcamfoto's, uitgeschakeld kopiëren/plakken en volledig scherm in het duurdere plan |
@@ -42,7 +42,7 @@ Deze pagina legt uit hoe ze verschillen, waar elk beter past en hoe je ze combin
 
 **prepza** begint bij je functieomschrijving. Het haalt eruit wat een kandidaat moet weten en stelt onderwerpen met subonderwerpen voor. Je houdt ze, vinkt ze uit, hernoemt of bewerkt ze, of beschrijft wijzigingen in gewone taal. Pas daarna worden de vragen geschreven: een vragenbank met meerkeuzevragen per onderwerp, elk met één juist antwoord en drie aannemelijke foute. Je kunt elke vraag zien en elke vraag opnieuw laten genereren. Bij technische onderwerpen tonen veel vragen een kort codevoorbeeld, een query of een commando en vragen ze wat het uitvoert, wat het doet, waarom het faalt of welke wijziging het oplost.
 
-Het praktische verschil: een test uit een bibliotheek ligt vast en is al vaak gebruikt, maar is niet voor jouw functie geschreven. Een interview van prepza is voor jouw functie geschreven, ook de nichedelen, maar is elke keer nieuw. Door AI geschreven vragen kunnen fouten bevatten, dus prepza controleert antwoordsleutels en verbetert vragen naarmate kandidaten antwoorden, en je kunt elke vraag markeren.
+Het praktische verschil: een test uit een bibliotheek ligt vast en is al vaak gebruikt, maar is niet voor jouw functie geschreven. Een interview van prepza is voor jouw functie geschreven, ook de nichedelen, maar is elke keer nieuw. Door AI geschreven vragen kunnen fouten bevatten, dus prepza controleert vóór vrijgave een steekproef van de antwoordsleutels van elk onderwerp en de rest zodra een vraag wordt gemarkeerd, verbetert vragen naarmate kandidaten antwoorden, en je kunt elke vraag markeren.
 
 ## Hoe de prijzen werken
 

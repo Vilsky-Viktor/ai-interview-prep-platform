@@ -24,7 +24,7 @@ Esta página explica como elas diferem, onde cada uma se encaixa melhor e como c
 | Como um teste é criado | Escrito a partir da sua descrição da vaga; você revisa os tópicos antes de as perguntas serem escritas. Também há modelos prontos por cargo | Montado a partir de um catálogo de testes prontos; perguntas personalizadas nos planos pagos ([página de preços](https://www.testgorilla.com/pricing/)) |
 | Tipos de teste | Entrevistas de habilidades e conhecimentos de múltipla escolha cronometradas, com perguntas de leitura de código em tópicos técnicos | Habilidade cognitiva, idiomas, personalidade e cultura, programação, habilidades específicas da função, julgamento situacional, habilidades com softwares, digitação ([catálogo de testes](https://www.testgorilla.com/test-library/)) |
 | Perguntas em vídeo | Não | Sim, nos planos pagos |
-| Entrevistas com IA | Sem IA conversacional; a IA propõe tópicos e escreve e verifica as perguntas | Entrevistas com IA no plano mais alto |
+| Entrevistas com IA | Sem IA conversacional; a IA propõe tópicos e escreve as perguntas, e uma amostra dos gabaritos é verificada | Entrevistas com IA no plano mais alto |
 | Código no teste | Perguntas de leitura de código (o que o código faz ou imprime); sem escrever ou executar código | Testes de programação no catálogo; desafios de programação personalizados no plano mais alto |
 | Perguntas por candidato | Conjunto aleatório próprio para cada candidato, em ordem própria | Não comparado aqui |
 | Recursos de integridade | Cronômetro em cada pergunta (controlado pelo servidor), alertas para respostas rápidas demais, saídas da página e tentativas de cópia | Fotos pela webcam, copiar/colar desativado e modo de tela cheia no plano mais alto |
@@ -42,7 +42,7 @@ Esta página explica como elas diferem, onde cada uma se encaixa melhor e como c
 
 **A prepza** parte da sua descrição da vaga. Ela identifica o que um candidato precisa saber e propõe tópicos com subtópicos. Você os mantém, desmarca, renomeia ou edita, ou descreve as mudanças em texto livre. Só então as perguntas são escritas: um banco de perguntas de múltipla escolha por tópico, cada uma com uma resposta correta e três erradas, mas plausíveis. Você pode ver cada pergunta e gerar qualquer uma novamente. Em tópicos técnicos, muitas perguntas mostram um pequeno exemplo de código, consulta ou comando e perguntam o que ele imprime, o que faz, por que falha ou qual mudança o corrige.
 
-A diferença prática: um teste de catálogo é fixo e já foi usado muitas vezes, mas não foi escrito para a sua vaga. Uma entrevista da prepza é escrita para a sua vaga, incluindo as partes mais de nicho, mas é nova a cada vez. Perguntas escritas por IA podem conter erros, por isso a prepza verifica os gabaritos e melhora as perguntas à medida que os candidatos respondem, e você pode sinalizar qualquer pergunta.
+A diferença prática: um teste de catálogo é fixo e já foi usado muitas vezes, mas não foi escrito para a sua vaga. Uma entrevista da prepza é escrita para a sua vaga, incluindo as partes mais de nicho, mas é nova a cada vez. Perguntas escritas por IA podem conter erros, por isso a prepza verifica uma amostra dos gabaritos de cada tópico antes da liberação e os demais quando uma pergunta é sinalizada, melhora as perguntas à medida que os candidatos respondem, e você pode sinalizar qualquer pergunta.
 
 ## Como funcionam os preços
 

@@ -639,7 +639,7 @@
       "title": "Ba bước để tuyển được người tiếp theo",
       "paste": {
         "title": "Dán mô tả công việc",
-        "text": "Mọi vị trí, mọi ngôn ngữ.\nprepza chọn ra những gì ứng viên phải biết và đề xuất chủ đề."
+        "text": "Mọi vị trí, 23 ngôn ngữ.\nprepza chọn ra những gì ứng viên phải biết và đề xuất chủ đề."
       },
       "review": {
         "title": "Kiểm tra các chủ đề",
@@ -825,7 +825,7 @@
         "time": "Thêm thời gian cho bất kỳ ai yêu cầu",
         "notice": "Ứng viên biết điều gì đang chờ trước khi bắt đầu",
         "own": "Ứng viên có thể tải xuống hoặc xóa dữ liệu của mình",
-        "data": "Dữ liệu bị xóa sau 12 tháng\nLưu trữ tại EU, một số nhà cung cấp ở Mỹ",
+        "data": "Kết quả của ứng viên bị xóa 12 tháng sau lời mời cuối cùng\nLưu trữ tại EU, một số nhà cung cấp ở Mỹ",
         "payments": "Thanh toán qua Paddle, không lưu thông tin thẻ",
         "documents": "Kèm thỏa thuận xử lý dữ liệu và hướng dẫn"
       },

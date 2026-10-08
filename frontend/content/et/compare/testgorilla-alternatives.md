@@ -33,7 +33,7 @@ Seejärel võrdle hinnamudelit oma värbamismahuga. Pakett sobib ühtlaseks vär
 | **Alooba** | Tehniliste ja andmerollide eelvalik | Kuu- või aastapaketid krediitidega ([hinnaleht](https://www.alooba.com/pricing/)) |
 | **Bryq** | Kognitiivsete võimete, isiksuse ja oskuste hindamine | Kuu- või aastapaketid ([hinnaleht](https://www.bryq.com/pricing)) |
 | **Codility** | Programmeerimisoskuste hindamine | Aastapaketid kutsekrediitidega ([hinnaleht](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Psühhomeetriline ja kognitiivne testimine | Individuaalsed hinnapakkumised |
+| **Criteria, Wonderlic, SHL** | Psühhomeetriline ja kognitiivne testimine | Vaata pakkujate veebilehti |
 
 ## Tööriistad lähemalt
 
@@ -75,7 +75,7 @@ Bryqi paketid sisaldavad kognitiivsete võimete ja isiksuse hindamist, oskuste h
 
 ### Psühhomeetria spetsialistid: Criteria, Wonderlic, SHL
 
-Need pakkujad keskenduvad kognitiivsete võimete ja isiksuse testimisele, tavaliselt individuaalse hinnapakkumise alusel. Kui psühhomeetria on sinu värbamises kesksel kohal, sobivad nad selle osa jaoks tõenäoliselt paremini kui prepza ja prepza saab ikkagi katta erialased teadmised.
+Need pakkujad keskenduvad kognitiivsete võimete ja isiksuse testimisele. Kui psühhomeetria on sinu värbamises kesksel kohal, sobivad nad selle osa jaoks tõenäoliselt paremini kui prepza ja prepza saab ikkagi katta erialased teadmised.
 
 ## Millal sobib TestGorilla ikkagi paremini
 

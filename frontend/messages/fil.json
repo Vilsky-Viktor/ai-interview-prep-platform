@@ -639,7 +639,7 @@
       "title": "Tatlong hakbang sa susunod mong hire",
       "paste": {
         "title": "I-paste ang job description",
-        "text": "Anumang role, anumang wika.\nKinukuha ng prepza ang dapat malaman ng aplikante at nagmumungkahi ng mga topic."
+        "text": "Anumang role, 23 wika.\nKinukuha ng prepza ang dapat malaman ng aplikante at nagmumungkahi ng mga topic."
       },
       "review": {
         "title": "Suriin ang mga topic",
@@ -833,7 +833,7 @@
         "time": "Dagdag na oras para sa sinumang humiling",
         "notice": "Alam ng mga aplikante ang aasahan bago magsimula",
         "own": "Puwedeng i-download o burahin ng aplikante ang kanilang data",
-        "data": "Binubura ang data pagkalipas ng 12 buwan\nNaka-host sa EU, ilang provider sa US",
+        "data": "Binubura ang resulta ng aplikante 12 buwan pagkatapos ng huling imbitasyon\nNaka-host sa EU, ilang provider sa US",
         "payments": "Bayad sa Paddle, walang naka-save na detalye ng card",
         "documents": "Kasama ang data processing agreement at mga tagubilin"
       },

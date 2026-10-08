@@ -33,7 +33,7 @@ Następnie porównaj model cenowy ze swoim wolumenem rekrutacji. Plan sprawdza s
 | **Alooba** | Preselekcja na stanowiska techniczne i związane z danymi | Plany miesięczne lub roczne z kredytami ([strona z cenami](https://www.alooba.com/pricing/)) |
 | **Bryq** | Oceny zdolności poznawczych, osobowości i umiejętności | Plany miesięczne lub roczne ([strona z cenami](https://www.bryq.com/pricing)) |
 | **Codility** | Ocena umiejętności programistycznych | Plany roczne z kredytami na zaproszenia ([strona z cenami](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Testy psychometryczne i poznawcze | Indywidualne wyceny |
+| **Criteria, Wonderlic, SHL** | Testy psychometryczne i poznawcze | Zobacz stronę każdego dostawcy |
 
 ## Narzędzia bardziej szczegółowo
 
@@ -75,7 +75,7 @@ Plany Bryq obejmują oceny zdolności poznawczych i osobowości, oceny umiejętn
 
 ### Specjaliści od psychometrii: Criteria, Wonderlic, SHL
 
-Ci dostawcy koncentrują się na testach poznawczych i osobowości, zwykle w oparciu o indywidualne wyceny. Jeśli psychometria jest kluczowa w Twojej rekrutacji, w tej części prawdopodobnie sprawdzą się lepiej niż prepza, a prepza nadal może sprawdzać wiedzę zawodową.
+Ci dostawcy koncentrują się na testach poznawczych i osobowości. Jeśli psychometria jest kluczowa w Twojej rekrutacji, w tej części prawdopodobnie sprawdzą się lepiej niż prepza, a prepza nadal może sprawdzać wiedzę zawodową.
 
 ## Kiedy TestGorilla nadal sprawdzi się lepiej
 

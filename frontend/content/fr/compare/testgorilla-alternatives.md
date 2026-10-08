@@ -33,7 +33,7 @@ Comparez ensuite le modèle de prix à votre volume de recrutement. Un abonnemen
 | **Alooba** | Présélection pour les postes techniques et data | Offres mensuelles ou annuelles avec crédits ([page tarifs](https://www.alooba.com/pricing/)) |
 | **Bryq** | Évaluations cognitives, de personnalité et de compétences | Offres mensuelles ou annuelles ([page tarifs](https://www.bryq.com/pricing)) |
 | **Codility** | Évaluation du code | Offres annuelles avec crédits d'invitation ([page tarifs](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Tests psychométriques et cognitifs | Devis sur mesure |
+| **Criteria, Wonderlic, SHL** | Tests psychométriques et cognitifs | Voir le site de chaque fournisseur |
 
 ## Les outils en détail
 
@@ -75,7 +75,7 @@ Les offres de Bryq incluent des évaluations cognitives et de personnalité, des
 
 ### Spécialistes de la psychométrie : Criteria, Wonderlic, SHL
 
-Ces fournisseurs se concentrent sur les tests cognitifs et de personnalité, généralement sur devis. Si la psychométrie est au cœur de votre façon de recruter, ils conviennent probablement mieux que prepza pour cette partie, et prepza peut toujours couvrir les connaissances métier.
+Ces fournisseurs se concentrent sur les tests cognitifs et de personnalité. Si la psychométrie est au cœur de votre façon de recruter, ils conviennent probablement mieux que prepza pour cette partie, et prepza peut toujours couvrir les connaissances métier.
 
 ## Quand TestGorilla reste le meilleur choix
 

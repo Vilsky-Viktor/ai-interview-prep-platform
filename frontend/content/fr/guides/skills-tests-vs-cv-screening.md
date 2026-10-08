@@ -85,7 +85,7 @@ prepza couvre l'étape 2 : un test chronométré à choix multiples sur les conn
 - **Les mêmes conditions pour tous.** Les mêmes thèmes et le même nombre de questions, et un compte à rebours pour chaque question. Vous pouvez accorder du temps supplémentaire aux candidats qui le demandent.
 - **Chaque candidat reçoit ses propres questions,** une série aléatoire tirée de la banque de chaque thème, pour que les réponses soient plus difficiles à partager.
 - **Des résultats lisibles.** Une fiche d'évaluation par candidat avec chaque réponse et son temps, classée par score, avec des alertes pour les réponses trop rapides, les sorties de la page et les tentatives de copie.
-- **Des réponses notées d'après un corrigé** que l'IA rédige et vérifie ; aucune IA ne lit ni ne juge la réponse d'un candidat.
+- **Des réponses notées d'après un corrigé** que l'IA rédige ; un échantillon des corrigés de chaque thème est vérifié avant la mise en ligne, les autres dès qu'une question est signalée. Aucune IA ne lit ni ne juge la réponse d'un candidat.
 
 prepza ne mène pas d'entretiens structurés, de mises en situation ni de tests cognitifs. Utilisez-le en complément. Pour en savoir plus sur les types de tests et l'équité, lisez [Tests de recrutement](/pre-employment-testing).
 

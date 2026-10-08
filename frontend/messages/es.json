@@ -639,7 +639,7 @@
       "title": "Tres pasos para tu próxima contratación",
       "paste": {
         "title": "Pega la descripción del puesto",
-        "text": "Cualquier puesto, cualquier idioma.\nprepza detecta lo que un candidato debe saber y propone temas."
+        "text": "Cualquier puesto, 23 idiomas.\nprepza detecta lo que un candidato debe saber y propone temas."
       },
       "review": {
         "title": "Revisa los temas",
@@ -829,7 +829,7 @@
         "time": "Tiempo extra para quien lo pida",
         "notice": "Los candidatos saben qué esperar antes de empezar",
         "own": "Los candidatos pueden descargar o borrar sus datos",
-        "data": "Datos borrados a los 12 meses\nAlojado en la UE, algunos proveedores de EE. UU.",
+        "data": "Resultados de candidatos borrados 12 meses después de la última invitación\nAlojado en la UE, algunos proveedores de EE. UU.",
         "payments": "Pagos con Paddle, sin guardar datos de tarjeta",
         "documents": "Acuerdo de tratamiento de datos e instrucciones incluidos"
       },

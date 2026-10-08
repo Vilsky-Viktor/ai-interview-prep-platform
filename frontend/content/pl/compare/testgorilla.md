@@ -24,7 +24,7 @@ Ta strona wyjaśnia, czym się różnią, gdzie każde z nich sprawdza się lepi
 | Jak powstaje test | Napisany na podstawie Twojego opisu stanowiska; przeglądasz tematy, zanim powstaną pytania. Dostępne są też gotowe szablony dla stanowisk | Złożony z biblioteki gotowych testów; własne pytania w płatnych planach ([strona z cenami](https://www.testgorilla.com/pricing/)) |
 | Rodzaje testów | Rozmowy sprawdzające umiejętności i wiedzę, z pytaniami zamkniętymi i limitem czasu, z pytaniami o czytanie kodu w tematach technicznych | Zdolności poznawcze, język, osobowość i kultura, programowanie, umiejętności dla konkretnych stanowisk, ocena sytuacyjna, obsługa oprogramowania, pisanie na klawiaturze ([biblioteka testów](https://www.testgorilla.com/test-library/)) |
 | Pytania wideo | Nie | Tak, w płatnych planach |
-| Rozmowy z AI | Bez konwersacyjnej AI; AI proponuje tematy oraz pisze i sprawdza pytania | Rozmowy z AI w wyższym planie |
+| Rozmowy z AI | Bez konwersacyjnej AI; AI proponuje tematy i pisze pytania, a próbka kluczy odpowiedzi jest sprawdzana | Rozmowy z AI w wyższym planie |
 | Kod w teście | Pytania o czytanie kodu (co kod robi lub wypisuje); bez pisania ani uruchamiania kodu | Testy programistyczne w bibliotece; własne zadania programistyczne w wyższym planie |
 | Pytania na kandydata | Własny losowy zestaw każdego kandydata, we własnej kolejności | Nie porównujemy tutaj |
 | Funkcje rzetelności | Limit czasu przy każdym pytaniu (kontrolowany po stronie serwera), oznaczenia zbyt szybkich odpowiedzi, opuszczenia strony i prób kopiowania | Zdjęcia z kamery internetowej, wyłączone kopiowanie/wklejanie i tryb pełnoekranowy w wyższym planie |
@@ -42,7 +42,7 @@ Ta strona wyjaśnia, czym się różnią, gdzie każde z nich sprawdza się lepi
 
 **prepza** zaczyna od Twojego opisu stanowiska. Wyodrębnia, co kandydat musi wiedzieć, i proponuje tematy z podtematami. Zostawiasz je, odznaczasz, zmieniasz ich nazwy lub je edytujesz albo opisujesz zmiany zwykłym tekstem. Dopiero wtedy powstają pytania: pula pytań jednokrotnego wyboru dla każdego tematu, każde z jedną poprawną odpowiedzią i trzema wiarygodnymi błędnymi. Widzisz każde pytanie i możesz wygenerować ponownie dowolne z nich. W tematach technicznych wiele pytań pokazuje krótki fragment kodu, zapytanie lub polecenie i pyta, co wypisze, co robi, dlaczego nie działa lub która zmiana to naprawi.
 
-Różnica w praktyce: test z biblioteki jest stały i był używany wiele razy, ale nie jest napisany pod Twoje stanowisko. Rozmowa w prepza jest napisana pod Twoje stanowisko, łącznie z jego niszowymi elementami, ale za każdym razem jest nowa. Pytania napisane przez AI mogą zawierać błędy, dlatego prepza sprawdza klucze odpowiedzi i ulepsza pytania w miarę, jak kandydaci odpowiadają, a Ty możesz oznaczyć dowolne pytanie.
+Różnica w praktyce: test z biblioteki jest stały i był używany wiele razy, ale nie jest napisany pod Twoje stanowisko. Rozmowa w prepza jest napisana pod Twoje stanowisko, łącznie z jego niszowymi elementami, ale za każdym razem jest nowa. Pytania napisane przez AI mogą zawierać błędy, dlatego prepza przed udostępnieniem sprawdza próbkę kluczy odpowiedzi z każdego tematu, a pozostałe, gdy pytanie zostanie oznaczone, ulepsza pytania w miarę, jak kandydaci odpowiadają, a Ty możesz oznaczyć dowolne pytanie.
 
 ## Jak działają ceny
 

@@ -85,7 +85,7 @@ prepza copre il passo 2: un test di conoscenze professionali a scelta multipla e
 - **Le stesse condizioni per tutti.** Stessi argomenti e stesso numero di domande, e un conto alla rovescia su ogni domanda. Puoi dare più tempo ai candidati che lo chiedono.
 - **Ogni candidato riceve le proprie domande,** un set casuale dalla banca di ogni argomento, così le risposte sono più difficili da condividere.
 - **Risultati leggibili.** Una scheda di valutazione per candidato con ogni risposta e il relativo tempo, in classifica per punteggio, con segnalazioni per risposte troppo rapide, uscite dalla pagina e tentativi di copia.
-- **Risposte corrette in base a una chiave di correzione** che l'IA scrive e verifica; nessuna IA legge o giudica la risposta di un candidato.
+- **Risposte corrette in base a una chiave di correzione** che l'IA scrive; un campione delle chiavi di ogni argomento viene verificato prima della pubblicazione, le altre quando una domanda viene segnalata. Nessuna IA legge o giudica la risposta di un candidato.
 
 prepza non conduce colloqui strutturati, prove pratiche o test cognitivi. Usalo insieme a questi. Per saperne di più sui tipi di test e sull'equità, leggi [Test pre-assunzione](/pre-employment-testing).
 

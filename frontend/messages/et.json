@@ -639,7 +639,7 @@
       "title": "Kolm sammu järgmise töötajani",
       "paste": {
         "title": "Kleebi töökuulutus",
-        "text": "Iga roll, iga keel.\nprepza toob välja, mida kandidaat peab teadma, ja pakub teemasid."
+        "text": "Iga roll, 23 keelt.\nprepza toob välja, mida kandidaat peab teadma, ja pakub teemasid."
       },
       "review": {
         "title": "Vaata teemad üle",
@@ -833,7 +833,7 @@
         "time": "Lisaaeg kõigile, kes seda paluvad",
         "notice": "Kandidaadid teavad enne alustamist, mis neid ees ootab",
         "own": "Kandidaadid saavad oma andmed alla laadida või kustutada",
-        "data": "Andmed kustutatakse 12 kuu pärast\nAndmeid hoitakse ELis, osa teenusepakkujaid USAs",
+        "data": "Kandidaatide tulemused kustutatakse 12 kuud pärast viimast kutset\nAndmeid hoitakse ELis, osa teenusepakkujaid USAs",
         "payments": "Maksed Paddle'i kaudu, kaardiandmeid ei salvestata",
         "documents": "Andmetöötlusleping ja juhised kaasas"
       },

@@ -639,7 +639,7 @@
       "title": "Trzy kroki do kolejnego zatrudnienia",
       "paste": {
         "title": "Wklej opis stanowiska",
-        "text": "Dowolna rola, dowolny język.\nprepza wyłuskuje, co kandydat musi wiedzieć, i proponuje tematy."
+        "text": "Dowolna rola, 23 języki.\nprepza wyłuskuje, co kandydat musi wiedzieć, i proponuje tematy."
       },
       "review": {
         "title": "Sprawdź tematy",
@@ -829,7 +829,7 @@
         "time": "Dodatkowy czas dla każdego, kto o niego poprosi",
         "notice": "Kandydaci wiedzą, czego się spodziewać, zanim zaczną",
         "own": "Kandydaci mogą pobrać lub usunąć swoje dane",
-        "data": "Dane usuwane po 12 miesiącach\nHosting w UE, część dostawców z USA",
+        "data": "Wyniki kandydatów usuwane 12 miesięcy po ostatnim zaproszeniu\nHosting w UE, część dostawców z USA",
         "payments": "Płatności przez Paddle, bez przechowywania danych karty",
         "documents": "Umowa powierzenia danych i instrukcje w zestawie"
       },

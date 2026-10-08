@@ -98,7 +98,7 @@ Ginagawang timed multiple-choice skills interview ng prepza ang isang job descri
 
 - **Sariling random na set ang bawat aplikante** mula sa bank ng bawat topic, na may countdown na ipinapatupad ng server sa bawat tanong. Puwede kang magbigay ng dagdag na oras sa sinumang humingi.
 - **Ipinapakita ng scorecards** ang bawat sagot, kung tama ito at gaano katagal ito, na may flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy. Hindi binabago ng mga flag ang score.
-- **Mina-mark ang mga sagot ayon sa answer key** na isinusulat at chine-check ng AI; walang AI na bumabasa o humuhusga sa sagot ng aplikante. Sinasaklaw ng isang PDF report ang isang aplikante o ang buong listahan.
+- **Mina-mark ang mga sagot ayon sa answer key** na isinusulat ng AI; chine-check ang ilan sa bawat topic bago i-release, at ang iba kapag na-flag ang tanong. Walang AI na bumabasa o humuhusga sa sagot ng aplikante. Sinasaklaw ng isang PDF report ang isang aplikante o ang buong listahan.
 - **Gumagana sa mga tool mo:** natatanggap ang interview ng mga aplikanteng inililipat mo sa isang stage sa Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR, at bumabalik sa ATS ang kanilang mga resulta. Nalalaman ng Slack kapag may aplikanteng natapos, at ikinokonekta ng [API](/api-docs) ang sarili mong platform. Tingnan ang [paano ikonekta ang skills tests sa iyong ATS](/guides/ats-integration-skills-tests).
 
 Bawat aplikanteng sumasagot ang presyo, walang subscription: $1–3 bawat aplikante depende sa laki ng iyong top-up, sa US dollars, at libre ang unang 3 aplikante mo. Naka-host ang data sa EU (may ilang sub-processor sa US; tingnan ang [privacy policy](/privacy)), at kasama ang data processing agreement at ang mga instruksyon para sa mga kumpanya.

@@ -24,7 +24,7 @@ See leht selgitab, mille poolest need erinevad, kuhu kumbki paremini sobib ja ku
 | Kuidas test koostatakse | Kirjutatakse sinu töökuulutuse põhjal; vaatad teemad üle enne küsimuste kirjutamist. Saadaval ka rollipõhised valmis mallid | Pannakse kokku valmis testide kogust; omaküsimused tasulistes pakettides ([hinnaleht](https://www.testgorilla.com/pricing/)) |
 | Testiliigid | Ajapiiranguga valikvastustega oskuste ja teadmiste intervjuud, tehniliste teemade puhul koodi lugemise küsimustega | Kognitiivsed võimed, keel, isiksus ja kultuur, programmeerimine, rollipõhised oskused, situatsioonipõhine otsustamine, tarkvaraoskused, trükkimine ([testikogu](https://www.testgorilla.com/test-library/)) |
 | Videoküsimused | Ei | Jah, tasulistes pakettides |
-| AI-intervjuud | Vestlevat AI-d pole; AI pakub teemad ning kirjutab ja kontrollib küsimused | AI-intervjuud kõrgemas paketis |
+| AI-intervjuud | Vestlevat AI-d pole; AI pakub teemad ja kirjutab küsimused ning valim nende vastusevõtmetest kontrollitakse | AI-intervjuud kõrgemas paketis |
 | Kood testis | Koodi lugemise küsimused (mida kood teeb või väljastab); koodi ei kirjutata ega käivitata | Programmeerimistestid testikogus; kohandatud programmeerimisülesanded kõrgemas paketis |
 | Küsimused kandidaadi kohta | Igal kandidaadil oma juhuslik komplekt, oma järjekorras | Siin ei võrrelda |
 | Aususe tagamise funktsioonid | Taimer igal küsimusel (serveri jõustatud), märked liiga kiirete vastuste, lehelt lahkumise ja kopeerimiskatsete kohta | Veebikaamera hetktõmmised, keelatud kopeerimine/kleepimine ja täisekraanirežiim kõrgemas paketis |
@@ -42,7 +42,7 @@ See leht selgitab, mille poolest need erinevad, kuhu kumbki paremini sobib ja ku
 
 **prepza** alustab sinu töökuulutusest. See toob välja, mida kandidaat peab teadma, ja pakub teemad koos alateemadega. Jätad need alles, eemaldad linnukese, nimetad ümber või muudad neid või kirjeldad muudatusi tavalise tekstiga. Alles siis kirjutatakse küsimused: iga teema jaoks valikvastustega küsimuste pank, igas küsimuses üks õige ja kolm usutavat valet vastust. Näed iga küsimust ja saad ükskõik millise neist uuesti luua. Tehnilistes teemades näitavad paljud küsimused lühikest koodinäidet, päringut või käsku ja küsivad, mida see väljastab, mida see teeb, miks see ebaõnnestub või milline muudatus selle parandab.
 
-Praktiline erinevus: valmis test on muutumatu ja seda on kasutatud palju kordi, kuid see pole kirjutatud sinu rolli jaoks. prepza intervjuu on kirjutatud sinu rolli jaoks, sh selle nišiosad, kuid see on iga kord uus. AI kirjutatud küsimustes võib olla vigu, seega kontrollib prepza vastusevõtmeid ja parandab küsimusi kandidaatide vastuste põhjal ning sina saad iga küsimuse märkida.
+Praktiline erinevus: valmis test on muutumatu ja seda on kasutatud palju kordi, kuid see pole kirjutatud sinu rolli jaoks. prepza intervjuu on kirjutatud sinu rolli jaoks, sh selle nišiosad, kuid see on iga kord uus. AI kirjutatud küsimustes võib olla vigu, seega kontrollib prepza enne avaldamist igast teemast valimi vastusevõtmeid, ülejäänuid siis, kui küsimusest teatatakse, ja parandab küsimusi kandidaatide vastuste põhjal ning sina saad iga küsimuse märkida.
 
 ## Kuidas hinnastus toimib
 

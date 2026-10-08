@@ -639,7 +639,7 @@
       "title": "Três passos para a sua próxima contratação",
       "paste": {
         "title": "Cole a descrição da vaga",
-        "text": "Qualquer cargo, qualquer idioma.\nA prepza identifica o que um candidato precisa saber e propõe tópicos."
+        "text": "Qualquer cargo, 23 idiomas.\nA prepza identifica o que um candidato precisa saber e propõe tópicos."
       },
       "review": {
         "title": "Confira os tópicos",
@@ -825,7 +825,7 @@
         "time": "Tempo extra para quem pedir",
         "notice": "Os candidatos sabem o que esperar antes de começar",
         "own": "Os candidatos podem baixar ou apagar seus dados",
-        "data": "Dados apagados após 12 meses\nHospedado na UE, alguns fornecedores dos EUA",
+        "data": "Resultados dos candidatos apagados 12 meses após o último convite\nHospedado na UE, alguns fornecedores dos EUA",
         "payments": "Pagamentos pela Paddle, sem guardar dados do cartão",
         "documents": "Acordo de tratamento de dados e instruções incluídos"
       },

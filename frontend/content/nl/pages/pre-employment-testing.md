@@ -98,7 +98,7 @@ prepza maakt van een functieomschrijving een interview over vaardigheden, met ti
 
 - **Elke kandidaat krijgt een eigen willekeurige set** uit de vragenbank van elk onderwerp, met een aftelklok bij elke vraag die de server afdwingt. Je kunt iedereen die erom vraagt extra tijd geven.
 - **Scorekaarten** tonen elk antwoord, of het goed was en hoe lang het duurde, met signalen bij te snelle antwoorden, het verlaten van de pagina en kopieerpogingen. Signalen veranderen de score niet.
-- **Antwoorden worden nagekeken met een antwoordsleutel** die AI schrijft en controleert; geen AI leest of beoordeelt het antwoord van een kandidaat. Een pdf-rapport behandelt één kandidaat of de hele lijst.
+- **Antwoorden worden nagekeken met een antwoordsleutel** die AI schrijft; een steekproef van de sleutels van elk onderwerp wordt vóór vrijgave gecontroleerd, de rest zodra een vraag wordt gemarkeerd. Geen AI leest of beoordeelt het antwoord van een kandidaat. Een pdf-rapport behandelt één kandidaat of de hele lijst.
 - **Werkt met je tools:** kandidaten die je in Workable, Greenhouse, Teamtailor, Recruitee of Breezy HR naar een fase verplaatst, krijgen het interview, en hun resultaten gaan terug naar het ATS. Slack laat weten wanneer een kandidaat klaar is, en de [API](/api-docs) koppelt je eigen platform. Zie [Zo koppel je vaardigheidstests aan je ATS](/guides/ats-integration-skills-tests).
 
 Je betaalt per kandidaat die antwoordt, zonder abonnement: $1–3 per kandidaat, afhankelijk van de grootte van je opwaardering, in US dollars, en je eerste 3 kandidaten zijn gratis. Gegevens worden gehost in de EU (sommige subverwerkers zitten in de VS; zie het [privacybeleid](/privacy)), en de verwerkersovereenkomst en instructies voor bedrijven zijn inbegrepen.

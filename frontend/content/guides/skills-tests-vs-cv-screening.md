@@ -85,7 +85,7 @@ prepza covers step 2: a timed multiple-choice job knowledge test, written from y
 - **The same conditions for everyone.** The same topics and number of questions, and a countdown on every question. You can give extra time to candidates who ask.
 - **Each candidate gets their own questions,** a random set from each topic's bank, so answers are harder to share.
 - **Readable results.** A scorecard per candidate with every answer and its timing, ranked by score, with flags for too-fast answers, leaving the page and copy attempts.
-- **Answers marked against an answer key** that AI writes and checks; no AI reads or judges a candidate's answer.
+- **Answers marked against an answer key** that AI writes; a sample of each topic's keys is checked before release, the rest when a question is flagged. No AI reads or judges a candidate's answer.
 
 prepza doesn't run structured interviews, work samples or cognitive tests. Use it alongside them. For more on testing types and fairness, read [Pre-employment testing](/pre-employment-testing).
 

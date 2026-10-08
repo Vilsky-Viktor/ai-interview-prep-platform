@@ -85,7 +85,7 @@ prepza 2. adımı kapsar: iş tanımınızdan yazılmış süreli, çoktan seçm
 - **Herkes için aynı koşullar.** Aynı konular ve soru sayısı, her soruda bir geri sayım. İsteyen adaylara ek süre verebilirsiniz.
 - **Her aday kendi sorularını alır;** her konunun havuzundan rastgele bir set, böylece yanıtları paylaşmak zorlaşır.
 - **Okunabilir sonuçlar.** Her aday için her yanıtı ve süresini gösteren, puana göre sıralanmış bir değerlendirme kartı; çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretlerle.
-- **Yanıtlar, yapay zekânın yazıp kontrol ettiği bir cevap anahtarına göre değerlendirilir;** hiçbir yapay zekâ adayın yanıtını okumaz veya yargılamaz.
+- **Yanıtlar, yapay zekânın yazdığı bir cevap anahtarına göre değerlendirilir;** her konudaki anahtarlardan bir örneklem yayından önce kontrol edilir, diğerleri bir soru bildirildiğinde; hiçbir yapay zekâ adayın yanıtını okumaz veya yargılamaz.
 
 prepza yapılandırılmış mülakatlar, iş örnekleri veya bilişsel testler yürütmez. Onlarla birlikte kullanın. Test türleri ve adillik hakkında daha fazlası için [İşe alım öncesi testler](/pre-employment-testing) sayfasını okuyun.
 

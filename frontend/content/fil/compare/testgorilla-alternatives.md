@@ -33,7 +33,7 @@ Pagkatapos, itapat ang pricing model sa dami ng iyong hiring. Bagay ang isang pl
 | **Alooba** | Screening para sa technical at data roles | Buwanan o taunang plan na may credits ([pricing page](https://www.alooba.com/pricing/)) |
 | **Bryq** | Cognitive, personality at skills assessments | Buwanan o taunang plan ([pricing page](https://www.bryq.com/pricing)) |
 | **Codility** | Coding assessment | Taunang plan na may invite credits ([pricing page](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Psychometric at cognitive testing | Custom quote |
+| **Criteria, Wonderlic, SHL** | Psychometric at cognitive testing | Tingnan ang website ng bawat vendor |
 
 ## Mas detalyadong pagtingin sa mga tool
 
@@ -75,7 +75,7 @@ Kasama sa mga plan ng Bryq ang cognitive at personality assessments, skills asse
 
 ### Mga psychometric specialist: Criteria, Wonderlic, SHL
 
-Nakatuon ang mga vendor na ito sa cognitive at personality testing, kadalasan sa custom quote. Kung sentro ng iyong hiring ang psychometrics, malamang mas bagay sila kaysa sa prepza para sa bahaging iyon, at kaya pa ring saklawin ng prepza ang kaalaman sa role.
+Nakatuon ang mga vendor na ito sa cognitive at personality testing. Kung sentro ng iyong hiring ang psychometrics, malamang mas bagay sila kaysa sa prepza para sa bahaging iyon, at kaya pa ring saklawin ng prepza ang kaalaman sa role.
 
 ## Kung saan mas bagay pa rin ang TestGorilla
 

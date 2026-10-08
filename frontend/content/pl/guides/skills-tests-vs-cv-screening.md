@@ -85,7 +85,7 @@ prepza obejmuje krok 2: test wiedzy zawodowej w formie testu wyboru z limitem cz
 - **Te same warunki dla wszystkich.** Te same tematy i liczba pytań oraz odliczanie przy każdym pytaniu. Kandydatom, którzy o to poproszą, możesz dać dodatkowy czas.
 - **Każdy kandydat dostaje własne pytania,** losowy zestaw z puli każdego tematu, więc trudniej dzielić się odpowiedziami.
 - **Czytelne wyniki.** Karta wyników dla każdego kandydata z każdą odpowiedzią i czasem jej udzielenia, ranking według punktacji, z oznaczeniami zbyt szybkich odpowiedzi, opuszczenia strony i prób kopiowania.
-- **Odpowiedzi oceniane według klucza odpowiedzi,** który pisze i sprawdza AI; żadna AI nie czyta ani nie ocenia odpowiedzi kandydata.
+- **Odpowiedzi oceniane według klucza odpowiedzi,** który pisze AI; próbka kluczy z każdego tematu jest sprawdzana przed udostępnieniem, a pozostałe, gdy pytanie zostanie oznaczone. Żadna AI nie czyta ani nie ocenia odpowiedzi kandydata.
 
 prepza nie prowadzi ustrukturyzowanych rozmów kwalifikacyjnych, próbek pracy ani testów poznawczych. Używaj jej razem z nimi. Więcej o rodzajach testów i uczciwości przeczytasz w poradniku [Testy rekrutacyjne](/pre-employment-testing).
 

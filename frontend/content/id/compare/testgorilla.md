@@ -24,7 +24,7 @@ Halaman ini menjelaskan perbedaannya, kapan masing-masing lebih cocok, dan cara 
 | Cara tes dibuat | Dibuat dari deskripsi pekerjaanmu; kamu meninjau topiknya sebelum soal ditulis. Tersedia juga templat siap pakai per posisi | Disusun dari pustaka tes siap pakai; soal kustom di paket berbayar ([halaman harga](https://www.testgorilla.com/pricing/)) |
 | Jenis tes | Wawancara keterampilan dan pengetahuan pilihan ganda berbatas waktu, dengan soal membaca kode untuk topik teknis | Kemampuan kognitif, bahasa, kepribadian dan budaya, pemrograman, keterampilan khusus posisi, penilaian situasional, keterampilan software, mengetik ([pustaka tes](https://www.testgorilla.com/test-library/)) |
 | Pertanyaan video | Tidak | Ya, di paket berbayar |
-| Wawancara AI | Tidak ada AI percakapan; AI mengusulkan topik serta menulis dan memeriksa soal | Wawancara AI di paket yang lebih tinggi |
+| Wawancara AI | Tidak ada AI percakapan; AI mengusulkan topik dan menulis soal, dan sebagian kunci jawabannya diperiksa | Wawancara AI di paket yang lebih tinggi |
 | Kode dalam tes | Soal membaca kode (apa yang dilakukan atau dihasilkan kode); tidak menulis atau menjalankan kode | Tes pemrograman di pustaka; tantangan coding kustom di paket yang lebih tinggi |
 | Soal per kandidat | Setiap kandidat mendapat set acaknya sendiri, dengan urutannya sendiri | Tidak dibandingkan di sini |
 | Fitur anti-kecurangan | Timer di setiap soal (ditegakkan oleh server), tanda untuk jawaban yang terlalu cepat, meninggalkan halaman, dan percobaan menyalin | Snapshot webcam, salin/tempel dinonaktifkan, dan mode layar penuh di paket yang lebih tinggi |
@@ -42,7 +42,7 @@ Halaman ini menjelaskan perbedaannya, kapan masing-masing lebih cocok, dan cara 
 
 **prepza** dimulai dari deskripsi pekerjaanmu. prepza mengambil apa yang wajib diketahui kandidat dan mengusulkan topik beserta subtopiknya. Kamu bisa mempertahankan, menghapus centang, mengganti nama, atau mengubahnya, atau menjelaskan perubahan dengan teks biasa. Baru setelah itu soal ditulis: bank soal pilihan ganda per topik, masing-masing dengan satu jawaban benar dan tiga jawaban salah yang masuk akal. Kamu bisa melihat setiap soal dan membuat ulang soal mana pun. Untuk topik teknis, banyak soal menampilkan contoh kode, query, atau perintah singkat, lalu menanyakan apa hasilnya, apa fungsinya, kenapa gagal, atau perubahan mana yang memperbaikinya.
 
-Perbedaan praktisnya: tes dari pustaka bersifat tetap dan sudah dipakai berkali-kali, tetapi tidak ditulis untuk posisimu. Wawancara prepza ditulis untuk posisimu, termasuk bagian-bagiannya yang spesifik, tetapi selalu baru. Soal yang ditulis AI bisa mengandung kesalahan, jadi prepza memeriksa kunci jawaban dan memperbaiki soal seiring kandidat menjawab, dan kamu bisa menandai soal mana pun.
+Perbedaan praktisnya: tes dari pustaka bersifat tetap dan sudah dipakai berkali-kali, tetapi tidak ditulis untuk posisimu. Wawancara prepza ditulis untuk posisimu, termasuk bagian-bagiannya yang spesifik, tetapi selalu baru. Soal yang ditulis AI bisa mengandung kesalahan, jadi prepza memeriksa sebagian kunci jawaban di tiap topik sebelum dirilis, memeriksa sisanya saat soalnya ditandai, dan memperbaiki soal seiring kandidat menjawab, dan kamu bisa menandai soal mana pun.
 
 ## Cara harganya bekerja
 

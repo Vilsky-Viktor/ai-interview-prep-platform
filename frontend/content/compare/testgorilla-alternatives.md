@@ -33,7 +33,7 @@ Then check the pricing model against your hiring volume. A plan suits steady hir
 | **Alooba** | Technical and data-role screening | Monthly or annual plans with credits ([pricing page](https://www.alooba.com/pricing/)) |
 | **Bryq** | Cognitive, personality and skills assessments | Monthly or annual plans ([pricing page](https://www.bryq.com/pricing)) |
 | **Codility** | Coding assessment | Annual plans with invite credits ([pricing page](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Psychometric and cognitive testing | Custom quotes |
+| **Criteria, Wonderlic, SHL** | Psychometric and cognitive testing | See each vendor's site |
 
 ## The tools in more detail
 
@@ -75,7 +75,7 @@ Bryq's plans include cognitive and personality assessments, skills assessments, 
 
 ### Psychometric specialists: Criteria, Wonderlic, SHL
 
-These vendors focus on cognitive and personality testing, usually on custom quotes. If psychometrics are central to how you hire, they are likely a better fit than prepza for that part, and prepza can still cover role knowledge.
+These vendors focus on cognitive and personality testing. If psychometrics are central to how you hire, they are likely a better fit than prepza for that part, and prepza can still cover role knowledge.
 
 ## Where TestGorilla is still the better fit
 

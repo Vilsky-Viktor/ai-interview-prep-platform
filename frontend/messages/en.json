@@ -639,7 +639,7 @@
       "title": "Three steps to your next hire",
       "paste": {
         "title": "Paste the job description",
-        "text": "Any role, any language.\nprepza picks out what a candidate must know and proposes topics."
+        "text": "Any role, 23 languages.\nprepza picks out what a candidate must know and proposes topics."
       },
       "review": {
         "title": "Check the topics",
@@ -829,7 +829,7 @@
         "time": "Extra time for anyone who asks",
         "notice": "Candidates know what to expect before they start",
         "own": "Candidates can download or delete their data",
-        "data": "Data deleted after 12 months\nEU-hosted, some US providers",
+        "data": "Candidate results deleted 12 months after the last invite\nEU-hosted, some US providers",
         "payments": "Payments by Paddle, no card details stored",
         "documents": "Data processing agreement and instructions included"
       },

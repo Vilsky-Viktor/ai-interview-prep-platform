@@ -33,7 +33,7 @@ Check daarna het prijsmodel tegen je wervingsvolume. Een plan past bij constant 
 | **Alooba** | Screening voor technische en datafuncties | Maand- of jaarplannen met credits ([prijspagina](https://www.alooba.com/pricing/)) |
 | **Bryq** | Cognitieve, persoonlijkheids- en vaardigheidsassessments | Maand- of jaarplannen ([prijspagina](https://www.bryq.com/pricing)) |
 | **Codility** | Programmeerassessments | Jaarplannen met uitnodigingscredits ([prijspagina](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Psychometrische en cognitieve tests | Offertes op maat |
+| **Criteria, Wonderlic, SHL** | Psychometrische en cognitieve tests | Zie de website van elke leverancier |
 
 ## De tools in meer detail
 
@@ -75,7 +75,7 @@ De plannen van Bryq omvatten cognitieve en persoonlijkheidsassessments, vaardigh
 
 ### Psychometrische specialisten: Criteria, Wonderlic, SHL
 
-Deze leveranciers richten zich op cognitieve en persoonlijkheidstests, meestal op offerte. Staat psychometrie centraal in hoe je werft, dan passen zij voor dat deel waarschijnlijk beter dan prepza, en kan prepza nog steeds de functiekennis dekken.
+Deze leveranciers richten zich op cognitieve en persoonlijkheidstests. Staat psychometrie centraal in hoe je werft, dan passen zij voor dat deel waarschijnlijk beter dan prepza, en kan prepza nog steeds de functiekennis dekken.
 
 ## Waar TestGorilla nog steeds beter past
 

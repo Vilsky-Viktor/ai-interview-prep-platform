@@ -24,7 +24,7 @@ Diese Seite erklärt, wie sie sich unterscheiden, wofür sich welches Tool besse
 | Wie ein Test entsteht | Geschrieben aus deiner Stellenbeschreibung; du prüfst die Themen, bevor Fragen geschrieben werden. Auch fertige Vorlagen nach Stelle verfügbar | Zusammengestellt aus einer Bibliothek fertiger Tests; eigene Fragen in Bezahltarifen ([Preisseite](https://www.testgorilla.com/pricing/)) |
 | Testarten | Zeitlich begrenzte Multiple-Choice-Interviews zu Fachkenntnissen und Wissen, mit Fragen zum Lesen von Code bei technischen Themen | Kognitive Fähigkeiten, Sprache, Persönlichkeit und Kultur, Programmieren, stellenspezifische Kenntnisse, situatives Urteilsvermögen, Softwarekenntnisse, Tippen ([Testbibliothek](https://www.testgorilla.com/test-library/)) |
 | Videofragen | Nein | Ja, in Bezahltarifen |
-| KI-Interviews | Keine Gesprächs-KI; die KI schlägt Themen vor und schreibt und prüft Fragen | KI-Interviews im höheren Tarif |
+| KI-Interviews | Keine Gesprächs-KI; die KI schlägt Themen vor und schreibt Fragen, eine Stichprobe ihrer Lösungsschlüssel wird geprüft | KI-Interviews im höheren Tarif |
 | Code im Test | Fragen zum Lesen von Code (was Code tut oder ausgibt); kein Schreiben oder Ausführen von Code | Programmiertests in der Bibliothek; eigene Coding-Challenges im höheren Tarif |
 | Fragen pro Kandidat | Eigener zufälliger Fragensatz für jeden Kandidaten, in eigener Reihenfolge | Hier nicht verglichen |
 | Schutz vor Schummeln | Timer bei jeder Frage (serverseitig erzwungen), Hinweise auf zu schnelle Antworten, das Verlassen der Seite und Kopierversuche | Webcam-Schnappschüsse, deaktiviertes Kopieren/Einfügen und Vollbildmodus im höheren Tarif |
@@ -42,7 +42,7 @@ Diese Seite erklärt, wie sie sich unterscheiden, wofür sich welches Tool besse
 
 **prepza** geht von deiner Stellenbeschreibung aus. Es erkennt, was ein Kandidat wissen muss, und schlägt Themen mit Unterthemen vor. Du kannst sie behalten, abwählen, umbenennen oder bearbeiten oder Änderungen in normalem Text beschreiben. Erst dann werden die Fragen geschrieben: ein Pool aus Multiple-Choice-Fragen pro Thema, jede mit einer richtigen und drei plausiblen falschen Antworten. Du kannst jede Frage sehen und jede neu generieren lassen. Bei technischen Themen zeigen viele Fragen ein kurzes Codebeispiel, eine Abfrage oder einen Befehl und fragen, was es ausgibt, was es tut, warum es fehlschlägt oder welche Änderung es behebt.
 
-Der praktische Unterschied: Ein Bibliothekstest ist fest und wurde schon oft eingesetzt, ist aber nicht für deine Stelle geschrieben. Ein prepza-Interview ist für deine Stelle geschrieben, einschließlich ihrer Nischenthemen, aber jedes Mal neu. Von KI geschriebene Fragen können Fehler enthalten; deshalb prüft prepza Lösungsschlüssel und verbessert Fragen, während Kandidaten antworten, und du kannst jede Frage markieren.
+Der praktische Unterschied: Ein Bibliothekstest ist fest und wurde schon oft eingesetzt, ist aber nicht für deine Stelle geschrieben. Ein prepza-Interview ist für deine Stelle geschrieben, einschließlich ihrer Nischenthemen, aber jedes Mal neu. Von KI geschriebene Fragen können Fehler enthalten; deshalb prüft prepza vor der Freigabe eine Stichprobe der Lösungsschlüssel jedes Themas und die übrigen, sobald eine Frage markiert wird, verbessert Fragen, während Kandidaten antworten, und du kannst jede Frage markieren.
 
 ## Wie die Preise funktionieren
 

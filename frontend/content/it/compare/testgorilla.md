@@ -24,7 +24,7 @@ Questa pagina spiega come differiscono, dove ciascuno è più adatto e come comb
 | Come viene creato un test | Scritto dalla tua descrizione del ruolo; rivedi gli argomenti prima che vengano scritte le domande. Disponibili anche modelli pronti per ruolo | Composto da un catalogo di test pronti; domande personalizzate nei piani a pagamento ([pagina prezzi](https://www.testgorilla.com/pricing/)) |
 | Tipi di test | Colloqui di competenze e conoscenze a scelta multipla e a tempo, con domande di lettura del codice per gli argomenti tecnici | Abilità cognitive, lingua, personalità e cultura, programmazione, competenze specifiche del ruolo, giudizio situazionale, competenze software, dattilografia ([catalogo dei test](https://www.testgorilla.com/test-library/)) |
 | Domande video | No | Sì, nei piani a pagamento |
-| Colloqui con IA | Nessuna IA conversazionale; l'IA propone gli argomenti e scrive e controlla le domande | Colloqui con IA nel suo piano superiore |
+| Colloqui con IA | Nessuna IA conversazionale; l'IA propone gli argomenti e scrive le domande, e un campione delle chiavi di risposta viene controllato | Colloqui con IA nel suo piano superiore |
 | Codice nel test | Domande di lettura del codice (cosa fa o cosa stampa il codice); niente scrittura o esecuzione di codice | Test di programmazione nel catalogo; sfide di coding personalizzate nel piano superiore |
 | Domande per candidato | Un set casuale per ogni candidato, in un ordine tutto suo | Non confrontato qui |
 | Funzioni anti-imbroglio | Timer su ogni domanda (gestito dal server), segnalazioni per risposte troppo rapide, uscite dalla pagina e tentativi di copia | Istantanee dalla webcam, copia/incolla disattivato e modalità a schermo intero nel piano superiore |
@@ -42,7 +42,7 @@ Questa pagina spiega come differiscono, dove ciascuno è più adatto e come comb
 
 **prepza** parte dalla tua descrizione del ruolo. Individua ciò che un candidato deve sapere e propone argomenti con sottoargomenti. Li mantieni, deselezioni, rinomini o modifichi, oppure descrivi le modifiche in linguaggio semplice. Solo allora vengono scritte le domande: una serie di domande a scelta multipla per argomento, ognuna con una risposta corretta e tre sbagliate ma plausibili. Puoi vedere ogni domanda e rigenerarne qualsiasi. Per gli argomenti tecnici, molte domande mostrano un breve esempio di codice, una query o un comando e chiedono cosa stampa, cosa fa, perché fallisce o quale modifica lo corregge.
 
-La differenza pratica: un test di catalogo è fisso ed è stato usato molte volte, ma non è scritto per il tuo ruolo. Un colloquio di prepza è scritto per il tuo ruolo, comprese le sue parti più di nicchia, ma è nuovo ogni volta. Le domande scritte dall'IA possono contenere errori, quindi prepza controlla le chiavi di risposta e migliora le domande man mano che i candidati rispondono, e tu puoi segnalare qualsiasi domanda.
+La differenza pratica: un test di catalogo è fisso ed è stato usato molte volte, ma non è scritto per il tuo ruolo. Un colloquio di prepza è scritto per il tuo ruolo, comprese le sue parti più di nicchia, ma è nuovo ogni volta. Le domande scritte dall'IA possono contenere errori, quindi prepza controlla un campione delle chiavi di risposta di ogni argomento prima della pubblicazione e le altre quando una domanda viene segnalata, migliora le domande man mano che i candidati rispondono, e tu puoi segnalare qualsiasi domanda.
 
 ## Come funzionano i prezzi
 

@@ -85,7 +85,7 @@ prepza đảm nhận bước 2: một bài kiểm tra kiến thức chuyên môn
 - **Điều kiện như nhau cho mọi người.** Cùng chủ đề và số câu hỏi, và đồng hồ đếm ngược cho mọi câu hỏi. Bạn có thể cho thêm thời gian với ứng viên có yêu cầu.
 - **Mỗi ứng viên nhận câu hỏi của riêng mình,** một bộ ngẫu nhiên từ ngân hàng câu hỏi của mỗi chủ đề, nên khó chia sẻ đáp án hơn.
 - **Kết quả dễ đọc.** Một bảng điểm cho mỗi ứng viên với từng câu trả lời và thời gian, xếp hạng theo điểm, kèm cảnh báo về trả lời quá nhanh, rời khỏi trang và cố sao chép.
-- **Câu trả lời được chấm theo đáp án** do AI viết và kiểm tra; không có AI nào đọc hay đánh giá câu trả lời của ứng viên.
+- **Câu trả lời được chấm theo đáp án** do AI viết; một phần đáp án của mỗi chủ đề được kiểm tra trước khi phát hành, phần còn lại khi câu hỏi bị đánh dấu. Không có AI nào đọc hay đánh giá câu trả lời của ứng viên.
 
 prepza không tổ chức phỏng vấn có cấu trúc, mẫu công việc hay bài kiểm tra nhận thức. Hãy dùng prepza cùng với các phương pháp đó. Để tìm hiểu thêm về các loại bài kiểm tra và tính công bằng, đọc [Kiểm tra trước tuyển dụng](/pre-employment-testing).
 

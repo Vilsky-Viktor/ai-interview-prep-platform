@@ -33,7 +33,7 @@ Poi confronta il modello di prezzo con il tuo volume di assunzioni. Un piano è 
 | **Alooba** | Screening per ruoli tecnici e legati ai dati | Piani mensili o annuali con crediti ([pagina prezzi](https://www.alooba.com/pricing/)) |
 | **Bryq** | Valutazioni cognitive, di personalità e di competenze | Piani mensili o annuali ([pagina prezzi](https://www.bryq.com/pricing)) |
 | **Codility** | Valutazione del coding | Piani annuali con crediti di invito ([pagina prezzi](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Test psicometrici e cognitivi | Preventivi personalizzati |
+| **Criteria, Wonderlic, SHL** | Test psicometrici e cognitivi | Vedi il sito di ciascun fornitore |
 
 ## Gli strumenti più nel dettaglio
 
@@ -75,7 +75,7 @@ I piani di Bryq includono valutazioni cognitive e di personalità, valutazioni d
 
 ### Specialisti psicometrici: Criteria, Wonderlic, SHL
 
-Questi fornitori si concentrano su test cognitivi e di personalità, di solito su preventivo personalizzato. Se la psicometria è centrale nel tuo modo di assumere, per quella parte sono probabilmente più adatti di prepza, e prepza può comunque coprire le conoscenze di ruolo.
+Questi fornitori si concentrano su test cognitivi e di personalità. Se la psicometria è centrale nel tuo modo di assumere, per quella parte sono probabilmente più adatti di prepza, e prepza può comunque coprire le conoscenze di ruolo.
 
 ## Quando TestGorilla resta la scelta migliore
 

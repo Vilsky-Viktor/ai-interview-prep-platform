@@ -85,7 +85,7 @@ A prepza cobre o passo 2: um teste de conhecimentos da função, de múltipla es
 - **As mesmas condições para todos.** Os mesmos tópicos e número de perguntas, e uma contagem regressiva em cada pergunta. Você pode dar tempo extra aos candidatos que pedirem.
 - **Cada candidato recebe suas próprias perguntas,** um conjunto aleatório do banco de cada tópico, o que dificulta compartilhar respostas.
 - **Resultados fáceis de ler.** Uma ficha de avaliação por candidato com cada resposta e seu tempo, ordenada por pontuação, com alertas para respostas rápidas demais, saídas da página e tentativas de cópia.
-- **Respostas corrigidas com base em um gabarito** que a IA escreve e verifica; nenhuma IA lê ou julga a resposta de um candidato.
+- **Respostas corrigidas com base em um gabarito** que a IA escreve; uma amostra dos gabaritos de cada tópico é verificada antes da liberação, e os demais quando uma pergunta é sinalizada. Nenhuma IA lê ou julga a resposta de um candidato.
 
 A prepza não faz entrevistas estruturadas, amostras de trabalho nem testes cognitivos. Use-a junto com eles. Para saber mais sobre tipos de teste e imparcialidade, leia [Testes de seleção](/pre-employment-testing).
 

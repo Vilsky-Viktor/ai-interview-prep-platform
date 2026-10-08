@@ -33,7 +33,7 @@ Prüf dann das Preismodell anhand deines Einstellungsvolumens. Ein Abo passt zu 
 | **Alooba** | Vorauswahl für technische und Datenrollen | Monats- oder Jahrestarife mit Credits ([Preisseite](https://www.alooba.com/pricing/)) |
 | **Bryq** | Kognitive, Persönlichkeits- und Kompetenz-Assessments | Monats- oder Jahrestarife ([Preisseite](https://www.bryq.com/pricing)) |
 | **Codility** | Programmier-Assessments | Jahrestarife mit Einladungs-Credits ([Preisseite](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Psychometrische und kognitive Tests | Individuelle Angebote |
+| **Criteria, Wonderlic, SHL** | Psychometrische und kognitive Tests | Siehe die Website des Anbieters |
 
 ## Die Tools im Detail
 
@@ -75,7 +75,7 @@ Die Tarife von Bryq umfassen kognitive und Persönlichkeits-Assessments, Kompete
 
 ### Spezialisten für Psychometrie: Criteria, Wonderlic, SHL
 
-Diese Anbieter konzentrieren sich auf kognitive Tests und Persönlichkeitstests, meist auf individuelles Angebot. Wenn Psychometrie für deine Personalauswahl zentral ist, passen sie für diesen Teil wahrscheinlich besser als prepza, und prepza kann trotzdem das Fachwissen abdecken.
+Diese Anbieter konzentrieren sich auf kognitive Tests und Persönlichkeitstests. Wenn Psychometrie für deine Personalauswahl zentral ist, passen sie für diesen Teil wahrscheinlich besser als prepza, und prepza kann trotzdem das Fachwissen abdecken.
 
 ## Wann TestGorilla weiterhin besser passt
 

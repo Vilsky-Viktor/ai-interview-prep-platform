@@ -33,7 +33,7 @@ Después, contrasta el modelo de precios con tu volumen de contratación. Un pla
 | **Alooba** | Filtrado para puestos técnicos y de datos | Planes mensuales o anuales con créditos ([página de precios](https://www.alooba.com/pricing/)) |
 | **Bryq** | Evaluaciones cognitivas, de personalidad y de habilidades | Planes mensuales o anuales ([página de precios](https://www.bryq.com/pricing)) |
 | **Codility** | Evaluación de programación | Planes anuales con créditos de invitación ([página de precios](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Pruebas psicométricas y cognitivas | Presupuestos a medida |
+| **Criteria, Wonderlic, SHL** | Pruebas psicométricas y cognitivas | Consulta la web de cada proveedor |
 
 ## Las herramientas en detalle
 
@@ -75,7 +75,7 @@ Los planes de Bryq incluyen evaluaciones cognitivas y de personalidad, evaluacio
 
 ### Especialistas en psicometría: Criteria, Wonderlic, SHL
 
-Estos proveedores se centran en las pruebas cognitivas y de personalidad, normalmente con presupuestos a medida. Si la psicometría es central en tu forma de contratar, probablemente encajen mejor que prepza para esa parte, y prepza puede seguir cubriendo los conocimientos del puesto.
+Estos proveedores se centran en las pruebas cognitivas y de personalidad. Si la psicometría es central en tu forma de contratar, probablemente encajen mejor que prepza para esa parte, y prepza puede seguir cubriendo los conocimientos del puesto.
 
 ## Dónde TestGorilla sigue encajando mejor
 

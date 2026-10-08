@@ -639,7 +639,7 @@
       "title": "Drie stappen naar je volgende nieuwe medewerker",
       "paste": {
         "title": "Plak de functieomschrijving",
-        "text": "Elke functie, elke taal.\nprepza haalt eruit wat een kandidaat moet weten en stelt onderwerpen voor."
+        "text": "Elke functie, 23 talen.\nprepza haalt eruit wat een kandidaat moet weten en stelt onderwerpen voor."
       },
       "review": {
         "title": "Controleer de onderwerpen",
@@ -825,7 +825,7 @@
         "time": "Extra tijd voor iedereen die erom vraagt",
         "notice": "Kandidaten weten vooraf wat ze kunnen verwachten",
         "own": "Kandidaten kunnen hun gegevens downloaden of verwijderen",
-        "data": "Gegevens na 12 maanden verwijderd\nGehost in de EU, enkele Amerikaanse leveranciers",
+        "data": "Kandidaatresultaten 12 maanden na de laatste uitnodiging verwijderd\nGehost in de EU, enkele Amerikaanse leveranciers",
         "payments": "Betalingen via Paddle, geen kaartgegevens opgeslagen",
         "documents": "Verwerkersovereenkomst en instructies inbegrepen"
       },

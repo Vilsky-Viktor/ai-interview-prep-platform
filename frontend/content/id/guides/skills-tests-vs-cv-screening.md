@@ -85,7 +85,7 @@ prepza menangani langkah 2: tes pengetahuan kerja pilihan ganda berbatas waktu, 
 - **Kondisi yang sama untuk semua orang.** Topik dan jumlah soal yang sama, serta hitung mundur di setiap soal. Kamu bisa memberi tambahan waktu kepada kandidat yang memintanya.
 - **Setiap kandidat mendapat soalnya sendiri,** set acak dari bank soal tiap topik, sehingga jawaban lebih sulit dibagikan.
 - **Hasil yang mudah dibaca.** Scorecard per kandidat dengan setiap jawaban dan waktunya, diurutkan berdasarkan skor, dengan tanda untuk jawaban yang terlalu cepat, meninggalkan halaman, dan percobaan menyalin.
-- **Jawaban dinilai berdasarkan kunci jawaban** yang ditulis dan diperiksa AI; tidak ada AI yang membaca atau menilai jawaban kandidat.
+- **Jawaban dinilai berdasarkan kunci jawaban** yang ditulis AI; sebagian kunci di tiap topik diperiksa sebelum dirilis, sisanya saat soalnya ditandai. Tidak ada AI yang membaca atau menilai jawaban kandidat.
 
 prepza tidak menjalankan wawancara terstruktur, sampel kerja, atau tes kognitif. Pakai prepza berdampingan dengan semua itu. Untuk informasi lebih lanjut tentang jenis-jenis tes dan keadilan, baca [Tes seleksi karyawan](/pre-employment-testing).
 

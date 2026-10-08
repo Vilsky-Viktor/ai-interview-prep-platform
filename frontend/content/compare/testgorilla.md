@@ -24,7 +24,7 @@ This page explains how they differ, where each one fits better, and how to combi
 | How a test is built | Written from your job description; you review the topics before questions are written. Ready-made templates by role also available | Assembled from a library of ready-made tests; custom questions on paid plans ([pricing page](https://www.testgorilla.com/pricing/)) |
 | Test types | Timed multiple-choice skills and knowledge interviews, with code-reading questions for technical topics | Cognitive ability, language, personality and culture, programming, role-specific skills, situational judgment, software skills, typing ([test library](https://www.testgorilla.com/test-library/)) |
 | Video questions | No | Yes, on paid plans |
-| AI interviews | No conversational AI; AI proposes topics and writes and checks questions | AI interviews on its higher plan |
+| AI interviews | No conversational AI; AI proposes topics and writes questions, and a sample of their answer keys is checked | AI interviews on its higher plan |
 | Code in the test | Code-reading questions (what code does or outputs); no writing or running code | Programming tests in the library; custom coding challenges on its higher plan |
 | Questions per candidate | Each candidate's own random set, in its own order | Not compared here |
 | Integrity features | Timer on every question (server-enforced), flags for too-fast answers, leaving the page and copy attempts | Webcam snapshots, disabled copy/paste and full-screen mode on its higher plan |
@@ -42,7 +42,7 @@ This page explains how they differ, where each one fits better, and how to combi
 
 **prepza** starts from your job description. It picks out what a candidate must know and proposes topics with subtopics. You keep, uncheck, rename or edit them, or describe changes in plain text. Only then are the questions written: a bank of multiple-choice questions per topic, each with one correct answer and three plausible wrong ones. You can see every question and re-generate any of them. For technical topics, many questions show a short code example, query or command and ask what it outputs, what it does, why it fails or which change fixes it.
 
-The practical difference: a library test is fixed and has been used many times, but it isn't written for your role. A prepza interview is written for your role, including its niche parts, but it's new each time. AI-written questions can contain mistakes, so prepza checks answer keys and improves questions as candidates answer, and you can flag any question.
+The practical difference: a library test is fixed and has been used many times, but it isn't written for your role. A prepza interview is written for your role, including its niche parts, but it's new each time. AI-written questions can contain mistakes, so prepza checks a sample of each topic's answer keys before release and the rest when a question is flagged, improves questions as candidates answer, and lets you flag any question.
 
 ## How pricing works
 

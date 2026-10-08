@@ -639,7 +639,7 @@
       "title": "Tre passi verso la tua prossima assunzione",
       "paste": {
         "title": "Incolla la descrizione del ruolo",
-        "text": "Qualsiasi ruolo, qualsiasi lingua.\nprepza individua cosa deve sapere un candidato e propone gli argomenti."
+        "text": "Qualsiasi ruolo, 23 lingue.\nprepza individua cosa deve sapere un candidato e propone gli argomenti."
       },
       "review": {
         "title": "Controlla gli argomenti",
@@ -829,7 +829,7 @@
         "time": "Tempo in più per chi lo chiede",
         "notice": "I candidati sanno cosa aspettarsi prima di iniziare",
         "own": "I candidati possono scaricare o cancellare i propri dati",
-        "data": "Dati cancellati dopo 12 mesi\nOspitato nell'UE, alcuni fornitori USA",
+        "data": "Risultati dei candidati cancellati 12 mesi dopo l'ultimo invito\nOspitato nell'UE, alcuni fornitori USA",
         "payments": "Pagamenti con Paddle, nessun dato della carta salvato",
         "documents": "Accordo sul trattamento dei dati e istruzioni inclusi"
       },

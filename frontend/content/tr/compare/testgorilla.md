@@ -24,7 +24,7 @@ Bu sayfa ikisinin nasıl farklılaştığını, hangisinin nerede daha uygun old
 | Test nasıl oluşturulur | İş tanımınızdan yazılır; sorular yazılmadan önce konuları siz gözden geçirirsiniz. Pozisyona göre hazır şablonlar da mevcuttur | Hazır testlerden oluşan bir kütüphaneden derlenir; ücretli planlarda özel sorular ([fiyat sayfası](https://www.testgorilla.com/pricing/)) |
 | Test türleri | Süreli, çoktan seçmeli beceri ve bilgi mülakatları; teknik konularda kod okuma soruları | Bilişsel yetenek, dil, kişilik ve kültür, programlama, pozisyona özel beceriler, durumsal muhakeme, yazılım becerileri, klavye hızı ([test kütüphanesi](https://www.testgorilla.com/test-library/)) |
 | Video soruları | Hayır | Evet, ücretli planlarda |
-| Yapay zekâ mülakatları | Sohbet tabanlı yapay zekâ yok; yapay zekâ konu önerir, soruları yazar ve kontrol eder | Üst planında yapay zekâ mülakatları |
+| Yapay zekâ mülakatları | Sohbet tabanlı yapay zekâ yok; yapay zekâ konu önerir ve soruları yazar; cevap anahtarlarından bir örneklem kontrol edilir | Üst planında yapay zekâ mülakatları |
 | Testte kod | Kod okuma soruları (kodun ne yaptığı veya ne çıktı verdiği); kod yazma veya çalıştırma yok | Kütüphanede programlama testleri; üst planında özel kodlama görevleri |
 | Aday başına sorular | Her adaya kendi sırasıyla, kendine ait rastgele bir soru seti | Burada karşılaştırılmadı |
 | Güvenilirlik özellikleri | Her soruda süre sınırı (sunucu tarafından uygulanır), çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler | Üst planında web kamerası fotoğrafları, kopyala/yapıştır engeli ve tam ekran modu |
@@ -42,7 +42,7 @@ Bu sayfa ikisinin nasıl farklılaştığını, hangisinin nerede daha uygun old
 
 **prepza** iş tanımınızdan başlar. Bir adayın bilmesi gerekenleri çıkarır ve alt konularıyla birlikte konular önerir. Bunları tutabilir, işaretini kaldırabilir, yeniden adlandırabilir veya düzenleyebilir ya da değişiklikleri düz metinle anlatabilirsiniz. Sorular ancak bundan sonra yazılır: her konu için, her birinde bir doğru ve üç akla yatkın yanlış yanıt bulunan çoktan seçmeli sorulardan oluşan bir soru havuzu. Her soruyu görebilir ve istediğinizi yeniden oluşturabilirsiniz. Teknik konularda birçok soru kısa bir kod örneği, sorgu veya komut gösterir ve bunun ne çıktı verdiğini, ne yaptığını, neden hata verdiğini ya da hangi değişikliğin sorunu düzelttiğini sorar.
 
-Pratikteki fark şu: kütüphane testi sabittir ve defalarca kullanılmıştır, ancak sizin pozisyonunuz için yazılmamıştır. prepza mülakatı ise niş kısımları dahil sizin pozisyonunuz için yazılır, ama her seferinde yenidir. Yapay zekânın yazdığı sorular hata içerebilir; bu nedenle prepza adaylar yanıt verdikçe cevap anahtarlarını kontrol eder ve soruları iyileştirir, siz de herhangi bir soruyu işaretleyebilirsiniz.
+Pratikteki fark şu: kütüphane testi sabittir ve defalarca kullanılmıştır, ancak sizin pozisyonunuz için yazılmamıştır. prepza mülakatı ise niş kısımları dahil sizin pozisyonunuz için yazılır, ama her seferinde yenidir. Yapay zekânın yazdığı sorular hata içerebilir; bu nedenle prepza her konudaki cevap anahtarlarından bir örneklemi yayından önce, diğerlerini bir soru bildirildiğinde kontrol eder ve adaylar yanıt verdikçe soruları iyileştirir, siz de herhangi bir soruyu işaretleyebilirsiniz.
 
 ## Fiyatlandırma nasıl işler
 

@@ -33,7 +33,7 @@ Sau đó đối chiếu mô hình giá với số lượng tuyển dụng của 
 | **Alooba** | Sàng lọc vị trí kỹ thuật và dữ liệu | Gói theo tháng hoặc theo năm kèm credit ([trang bảng giá](https://www.alooba.com/pricing/)) |
 | **Bryq** | Đánh giá nhận thức, tính cách và kỹ năng | Gói theo tháng hoặc theo năm ([trang bảng giá](https://www.bryq.com/pricing)) |
 | **Codility** | Đánh giá lập trình | Gói theo năm kèm credit lời mời ([trang bảng giá](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Trắc nghiệm tâm lý và kiểm tra nhận thức | Báo giá riêng |
+| **Criteria, Wonderlic, SHL** | Trắc nghiệm tâm lý và kiểm tra nhận thức | Xem trang web của từng nhà cung cấp |
 
 ## Chi tiết từng công cụ
 
@@ -75,7 +75,7 @@ Các gói của Bryq bao gồm đánh giá nhận thức và tính cách, đánh
 
 ### Các nhà cung cấp chuyên về trắc nghiệm tâm lý: Criteria, Wonderlic, SHL
 
-Các nhà cung cấp này tập trung vào kiểm tra nhận thức và tính cách, thường theo báo giá riêng. Nếu trắc nghiệm tâm lý là trọng tâm trong cách bạn tuyển dụng, họ có thể phù hợp hơn prepza cho phần đó, và prepza vẫn có thể đảm nhận phần kiến thức chuyên môn.
+Các nhà cung cấp này tập trung vào kiểm tra nhận thức và tính cách. Nếu trắc nghiệm tâm lý là trọng tâm trong cách bạn tuyển dụng, họ có thể phù hợp hơn prepza cho phần đó, và prepza vẫn có thể đảm nhận phần kiến thức chuyên môn.
 
 ## Khi TestGorilla vẫn là lựa chọn phù hợp hơn
 

@@ -639,7 +639,7 @@
       "title": "Trois étapes vers votre prochain recrutement",
       "paste": {
         "title": "Collez la fiche de poste",
-        "text": "Tout poste, toute langue.\nprepza repère ce qu'un candidat doit savoir et propose des thèmes."
+        "text": "Tout poste, 23 langues.\nprepza repère ce qu'un candidat doit savoir et propose des thèmes."
       },
       "review": {
         "title": "Vérifiez les thèmes",
@@ -829,7 +829,7 @@
         "time": "Du temps en plus pour qui le demande",
         "notice": "Les candidats savent à quoi s'attendre avant de commencer",
         "own": "Les candidats peuvent télécharger ou supprimer leurs données",
-        "data": "Données supprimées après 12 mois\nHébergé dans l'UE, quelques prestataires US",
+        "data": "Résultats des candidats supprimés 12 mois après la dernière invitation\nHébergé dans l'UE, quelques prestataires US",
         "payments": "Paiements par Paddle, aucune donnée de carte conservée",
         "documents": "Accord de traitement des données et instructions inclus"
       },

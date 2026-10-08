@@ -639,7 +639,7 @@
       "title": "Bir sonraki işe alımınıza üç adım",
       "paste": {
         "title": "İş tanımını yapıştırın",
-        "text": "Her pozisyon, her dil.\nprepza adayın bilmesi gerekenleri çıkarır ve konular önerir."
+        "text": "Her pozisyon, 23 dil.\nprepza adayın bilmesi gerekenleri çıkarır ve konular önerir."
       },
       "review": {
         "title": "Konuları kontrol edin",
@@ -828,7 +828,7 @@
         "time": "İsteyen herkese ek süre",
         "notice": "Adaylar başlamadan önce ne bekleyeceklerini bilir",
         "own": "Adaylar verilerini indirebilir ya da silebilir",
-        "data": "Veriler 12 ay sonra silinir\nAB'de barındırılıyor, bazı ABD sağlayıcıları",
+        "data": "Aday sonuçları son davetten 12 ay sonra silinir\nAB'de barındırılıyor, bazı ABD sağlayıcıları",
         "payments": "Ödemeler Paddle ile, kart bilgisi saklanmaz",
         "documents": "Veri işleme sözleşmesi ve talimatlar dahil"
       },

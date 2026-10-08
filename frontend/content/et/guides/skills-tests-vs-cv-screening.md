@@ -85,7 +85,7 @@ prepza katab 2. sammu: ajapiiranguga valikvastustega erialaste teadmiste test, m
 - **Kõigile samad tingimused.** Samad teemad ja küsimuste arv ning igal küsimusel taimer. Kandidaatidele, kes seda paluvad, saad anda lisaaega.
 - **Iga kandidaat saab oma küsimused,** juhusliku komplekti iga teema pangast, nii et vastuseid on raskem jagada.
 - **Loetavad tulemused.** Iga kandidaadi hindamisleht kõigi vastuste ja nende ajakuluga, järjestatud tulemuse järgi, märgetega liiga kiirete vastuste, lehelt lahkumise ja kopeerimiskatsete kohta.
-- **Vastuseid kontrollitakse vastusevõtme järgi,** mille AI kirjutab ja üle kontrollib; ükski AI ei loe ega hinda kandidaadi vastust.
+- **Vastuseid kontrollitakse vastusevõtme järgi,** mille AI kirjutab; igast teemast kontrollitakse enne avaldamist valim võtmeid, ülejäänuid siis, kui küsimusest teatatakse; ükski AI ei loe ega hinda kandidaadi vastust.
 
 prepza ei korralda struktureeritud intervjuusid, proovitöid ega kognitiivseid teste. Kasuta seda nende kõrval. Testiliikide ja õigluse kohta loe lähemalt lehelt [Kandidaatide testimine värbamisel](/pre-employment-testing).
 

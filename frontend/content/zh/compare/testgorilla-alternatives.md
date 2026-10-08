@@ -33,7 +33,7 @@ TestGorilla 是一个技能测试平台，拥有庞大的测试库和免费套�
 | **Alooba** | 技术和数据类职位筛选 | 带点数的月度或年度套餐（[价格页](https://www.alooba.com/pricing/)） |
 | **Bryq** | 认知、性格和技能测评 | 月度或年度套餐（[价格页](https://www.bryq.com/pricing)） |
 | **Codility** | 编程测评 | 带邀请点数的年度套餐（[价格页](https://www.codility.com/pricing/)） |
-| **Criteria、Wonderlic、SHL** | 心理测评和认知测试 | 定制报价 |
+| **Criteria、Wonderlic、SHL** | 心理测评和认知测试 | 见各厂商网站 |
 
 ## 各工具详解
 
@@ -75,7 +75,7 @@ Bryq 的套餐包括认知和性格测评、技能测评、无限邀请、AI 职
 
 ### 心理测评专业厂商：Criteria、Wonderlic、SHL
 
-这些厂商专注于认知和性格测试，通常采用定制报价。如果心理测评是你招聘方式的核心，那么在这一部分它们很可能比 prepza 更合适，而 prepza 仍可覆盖岗位知识。
+这些厂商专注于认知和性格测试。如果心理测评是你招聘方式的核心，那么在这一部分它们很可能比 prepza 更合适，而 prepza 仍可覆盖岗位知识。
 
 ## TestGorilla 仍然更合适的情况
 

@@ -24,7 +24,7 @@ Esta página explica en qué se diferencian, dónde encaja mejor cada uno y cóm
 | Cómo se crea una prueba | Redactada a partir de tu descripción del puesto; revisas los temas antes de que se redacten las preguntas. También hay plantillas listas por puesto | Se monta a partir de un catálogo de pruebas listas; preguntas personalizadas en los planes de pago ([página de precios](https://www.testgorilla.com/pricing/)) |
 | Tipos de prueba | Entrevistas de habilidades y conocimientos de opción múltiple con tiempo límite, con preguntas de lectura de código en los temas técnicos | Aptitud cognitiva, idiomas, personalidad y cultura, programación, habilidades específicas del puesto, juicio situacional, manejo de software, mecanografía ([catálogo de pruebas](https://www.testgorilla.com/test-library/)) |
 | Preguntas en video | No | Sí, en los planes de pago |
-| Entrevistas con IA | Sin IA conversacional; la IA propone temas y redacta y revisa las preguntas | Entrevistas con IA en su plan superior |
+| Entrevistas con IA | Sin IA conversacional; la IA propone temas y redacta las preguntas, y se revisa una muestra de sus claves de respuestas | Entrevistas con IA en su plan superior |
 | Código en la prueba | Preguntas de lectura de código (qué hace o qué imprime el código); no se escribe ni se ejecuta código | Pruebas de programación en el catálogo; retos de programación personalizados en su plan superior |
 | Preguntas por candidato | Un conjunto aleatorio propio para cada candidato, en su propio orden | No comparado aquí |
 | Funciones de integridad | Temporizador en cada pregunta (controlado por el servidor), alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar | Capturas de webcam, copiar/pegar desactivado y modo de pantalla completa en su plan superior |
@@ -42,7 +42,7 @@ Esta página explica en qué se diferencian, dónde encaja mejor cada uno y cóm
 
 **prepza** parte de tu descripción del puesto. Extrae lo que un candidato debe saber y propone temas con subtemas. Los conservas, desmarcas, renombras o editas, o describes los cambios en texto libre. Solo entonces se redactan las preguntas: un banco de preguntas de opción múltiple por tema, cada una con una respuesta correcta y tres incorrectas pero verosímiles. Puedes ver cada pregunta y volver a generar cualquiera. En los temas técnicos, muchas preguntas muestran un breve ejemplo de código, consulta o comando y preguntan qué imprime, qué hace, por qué falla o qué cambio lo corrige.
 
-La diferencia práctica: una prueba de catálogo es fija y se ha usado muchas veces, pero no está escrita para tu puesto. Una entrevista de prepza está escrita para tu puesto, incluidas sus partes más específicas, pero es nueva cada vez. Las preguntas redactadas por IA pueden contener errores, así que prepza revisa las claves de respuestas y mejora las preguntas a medida que responden los candidatos, y tú puedes marcar cualquier pregunta.
+La diferencia práctica: una prueba de catálogo es fija y se ha usado muchas veces, pero no está escrita para tu puesto. Una entrevista de prepza está escrita para tu puesto, incluidas sus partes más específicas, pero es nueva cada vez. Las preguntas redactadas por IA pueden contener errores, así que prepza revisa una muestra de las claves de respuestas de cada tema antes de publicarlas y el resto cuando se marca una pregunta, mejora las preguntas a medida que responden los candidatos, y tú puedes marcar cualquier pregunta.
 
 ## Cómo funcionan los precios
 

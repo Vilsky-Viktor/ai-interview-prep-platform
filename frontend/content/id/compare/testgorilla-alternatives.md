@@ -33,7 +33,7 @@ Lalu cocokkan model harganya dengan volume rekrutmenmu. Paket langganan cocok un
 | **Alooba** | Penyaringan untuk posisi teknis dan data | Paket bulanan atau tahunan dengan kredit ([halaman harga](https://www.alooba.com/pricing/)) |
 | **Bryq** | Asesmen kognitif, kepribadian, dan keterampilan | Paket bulanan atau tahunan ([halaman harga](https://www.bryq.com/pricing)) |
 | **Codility** | Asesmen coding | Paket tahunan dengan kredit undangan ([halaman harga](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Tes psikometri dan kognitif | Penawaran khusus |
+| **Criteria, Wonderlic, SHL** | Tes psikometri dan kognitif | Lihat situs tiap vendor |
 
 ## Penjelasan tiap alat
 
@@ -75,7 +75,7 @@ Paket Bryq mencakup asesmen kognitif dan kepribadian, asesmen keterampilan, unda
 
 ### Spesialis psikometri: Criteria, Wonderlic, SHL
 
-Vendor-vendor ini berfokus pada tes kognitif dan kepribadian, biasanya dengan penawaran harga khusus. Kalau psikometri menjadi inti cara kamu merekrut, mereka kemungkinan lebih cocok daripada prepza untuk bagian itu, dan prepza tetap bisa menangani pengetahuan khusus posisi.
+Vendor-vendor ini berfokus pada tes kognitif dan kepribadian. Kalau psikometri menjadi inti cara kamu merekrut, mereka kemungkinan lebih cocok daripada prepza untuk bagian itu, dan prepza tetap bisa menangani pengetahuan khusus posisi.
 
 ## Kapan TestGorilla tetap lebih cocok
 

@@ -24,7 +24,7 @@ Trang này giải thích hai công cụ khác nhau thế nào, mỗi công cụ 
 | Cách xây dựng bài kiểm tra | Viết từ mô tả công việc của bạn; bạn duyệt các chủ đề trước khi câu hỏi được viết. Cũng có sẵn các mẫu theo vị trí | Ghép từ thư viện các bài kiểm tra có sẵn; câu hỏi tùy chỉnh ở các gói trả phí ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
 | Loại bài kiểm tra | Phỏng vấn kỹ năng và kiến thức trắc nghiệm có tính giờ, có câu hỏi đọc code cho chủ đề kỹ thuật | Năng lực nhận thức, ngoại ngữ, tính cách và văn hóa, lập trình, kỹ năng theo vị trí, phán đoán tình huống, kỹ năng phần mềm, đánh máy ([thư viện bài kiểm tra](https://www.testgorilla.com/test-library/)) |
 | Câu hỏi video | Không | Có, ở các gói trả phí |
-| Phỏng vấn AI | Không có AI hội thoại; AI đề xuất chủ đề, viết và kiểm tra câu hỏi | Phỏng vấn AI ở gói cao hơn |
+| Phỏng vấn AI | Không có AI hội thoại; AI đề xuất chủ đề và viết câu hỏi, một phần đáp án được kiểm tra | Phỏng vấn AI ở gói cao hơn |
 | Code trong bài kiểm tra | Câu hỏi đọc code (code làm gì hoặc in ra gì); không viết hay chạy code | Bài kiểm tra lập trình trong thư viện; thử thách lập trình tùy chỉnh ở gói cao hơn |
 | Câu hỏi cho mỗi ứng viên | Bộ câu hỏi ngẫu nhiên riêng cho mỗi ứng viên, theo thứ tự riêng | Không so sánh ở đây |
 | Tính năng chống gian lận | Đồng hồ cho mọi câu hỏi (do máy chủ áp dụng), cảnh báo về trả lời quá nhanh, rời khỏi trang và cố sao chép | Chụp ảnh qua webcam, chặn sao chép/dán và chế độ toàn màn hình ở gói cao hơn |
@@ -42,7 +42,7 @@ Trang này giải thích hai công cụ khác nhau thế nào, mỗi công cụ 
 
 **prepza** bắt đầu từ mô tả công việc của bạn. prepza chọn ra những gì ứng viên phải biết và đề xuất chủ đề kèm chủ đề con. Bạn giữ, bỏ chọn, đổi tên hoặc chỉnh sửa chúng, hoặc mô tả thay đổi bằng lời. Chỉ khi đó câu hỏi mới được viết: một ngân hàng câu hỏi trắc nghiệm cho mỗi chủ đề, mỗi câu có một đáp án đúng và ba đáp án sai nhưng hợp lý. Bạn có thể xem mọi câu hỏi và tạo lại bất kỳ câu nào. Với chủ đề kỹ thuật, nhiều câu hỏi đưa ra một ví dụ code, truy vấn hoặc lệnh ngắn và hỏi nó in ra gì, làm gì, vì sao lỗi hoặc thay đổi nào sửa được nó.
 
-Khác biệt thực tế: một bài kiểm tra từ thư viện là cố định và đã được dùng nhiều lần, nhưng không được viết cho vị trí của bạn. Một buổi phỏng vấn prepza được viết cho vị trí của bạn, kể cả những phần chuyên biệt, nhưng mỗi lần đều mới. Câu hỏi do AI viết có thể có sai sót, nên prepza kiểm tra đáp án và cải thiện câu hỏi khi ứng viên trả lời, và bạn có thể đánh dấu bất kỳ câu hỏi nào.
+Khác biệt thực tế: một bài kiểm tra từ thư viện là cố định và đã được dùng nhiều lần, nhưng không được viết cho vị trí của bạn. Một buổi phỏng vấn prepza được viết cho vị trí của bạn, kể cả những phần chuyên biệt, nhưng mỗi lần đều mới. Câu hỏi do AI viết có thể có sai sót, nên prepza kiểm tra một phần đáp án của mỗi chủ đề trước khi phát hành, kiểm tra phần còn lại khi câu hỏi bị đánh dấu, và cải thiện câu hỏi khi ứng viên trả lời, và bạn có thể đánh dấu bất kỳ câu hỏi nào.
 
 ## Cách tính giá
 

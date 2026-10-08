@@ -33,7 +33,7 @@ Ardından fiyatlandırma modelini işe alım hacminizle karşılaştırın. Plan
 | **Alooba** | Teknik ve veri pozisyonları için aday elemesi | Kredili aylık veya yıllık planlar ([fiyat sayfası](https://www.alooba.com/pricing/)) |
 | **Bryq** | Bilişsel, kişilik ve beceri değerlendirmeleri | Aylık veya yıllık planlar ([fiyat sayfası](https://www.bryq.com/pricing)) |
 | **Codility** | Kodlama değerlendirmesi | Davet kredili yıllık planlar ([fiyat sayfası](https://www.codility.com/pricing/)) |
-| **Criteria, Wonderlic, SHL** | Psikometrik ve bilişsel testler | Özel teklif |
+| **Criteria, Wonderlic, SHL** | Psikometrik ve bilişsel testler | Sağlayıcıların sitelerine bakın |
 
 ## Araçlara daha yakından bakış
 
@@ -75,7 +75,7 @@ Bryq'nun planları bilişsel ve kişilik değerlendirmelerini, beceri değerlend
 
 ### Psikometri uzmanları: Criteria, Wonderlic, SHL
 
-Bu sağlayıcılar bilişsel ve kişilik testlerine odaklanır, genellikle özel teklifle çalışır. Psikometri işe alım yönteminizin merkezindeyse, o kısım için muhtemelen prepza'dan daha uygundurlar; pozisyona özel bilgiyi ise yine prepza kapsayabilir.
+Bu sağlayıcılar bilişsel ve kişilik testlerine odaklanır. Psikometri işe alım yönteminizin merkezindeyse, o kısım için muhtemelen prepza'dan daha uygundurlar; pozisyona özel bilgiyi ise yine prepza kapsayabilir.
 
 ## TestGorilla'nın hâlâ daha uygun olduğu durumlar
 
