@@ -5,10 +5,12 @@ import { BackLink } from "@/components/back-link"
 import { Markdown } from "@/components/content/markdown"
 import { StartCard } from "@/components/content/start-card"
 import { JsonLd } from "@/components/json-ld"
-import { RTL_LOCALES, type Locale } from "@/constants/i18n"
+import { DEFAULT_LOCALE } from "@/constants/i18n"
 import type { ContentPage } from "@/lib/content"
+import { formatDate } from "@/lib/format"
+import { textDirection } from "@/lib/locale"
 import { localizeHref } from "@/lib/locale-path"
-import { siteUrl, urlLocale } from "@/lib/site"
+import { previewImage, siteUrl, urlLocale } from "@/lib/site"
 import { articleData, breadcrumbData } from "@/lib/structured-data"
 
 /** One content page (a category page, a comparison or a guide): its heading, date and text,
@@ -27,9 +29,6 @@ export async function ContentArticle({
   const t = await getTranslations("content")
   const locale = await getLocale()
   const address = await urlLocale()
-  const direction = RTL_LOCALES.includes(page.language as Locale)
-    ? "rtl"
-    : "ltr"
   // The breadcrumb names the addresses in the page's own language.
   const steps = [
     { name: "prepza", path: "/" },
@@ -44,6 +43,9 @@ export async function ContentArticle({
           articleData(siteUrl(), {
             ...page,
             path: localizeHref(address, path),
+            // The page's link preview picture (lib/site.ts pageMetadata).
+            image: previewImage(page.seoTitle, address ?? DEFAULT_LOCALE)[0]
+              .url,
           }),
           breadcrumbData(siteUrl(), steps),
         ]}
@@ -63,10 +65,18 @@ export async function ContentArticle({
           {page.language !== locale && (
             <span className="block pb-2">{t("englishOnly")}</span>
           )}
-          {t("updated")} <time dateTime={page.updated}>{page.updated}</time>
+          {t("updated")}{" "}
+          <time dateTime={page.updated}>
+            {/* At midday UTC, so the day is the same in any time zone. */}
+            {formatDate(`${page.updated}T12:00:00Z`, locale)}
+          </time>
         </p>
       </header>
-      <article lang={page.language} dir={direction} className="space-y-5">
+      <article
+        lang={page.language}
+        dir={textDirection(page.language)}
+        className="space-y-5"
+      >
         <Markdown text={page.body} />
       </article>
       <StartCard />

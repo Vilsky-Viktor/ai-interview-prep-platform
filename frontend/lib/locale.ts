@@ -2,11 +2,17 @@ import {
   LOCALE_COOKIE,
   LOCALE_COOKIE_MAX_AGE,
   LOCALES,
+  RTL_LOCALES,
   type Locale,
 } from "@/constants/i18n"
 
 export function isLocale(value: string): value is Locale {
   return (LOCALES as readonly string[]).includes(value)
+}
+
+/** The way a language is written: right to left for Arabic, Hebrew and Persian. */
+export function textDirection(language: string) {
+  return RTL_LOCALES.includes(language as Locale) ? "rtl" : "ltr"
 }
 
 export function readLocaleCookie() {

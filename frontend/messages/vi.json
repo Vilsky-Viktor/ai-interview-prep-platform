@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. trang chủ",
     "main": "Menu chính",
-    "legal": "Pháp lý",
+    "footer": "Chân trang",
     "pricing": "Bảng giá",
     "privacy": "Quyền riêng tư",
     "terms": "Điều khoản",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Bảng giá",
     "intro": "Trả tiền theo ứng viên. Tạo buổi phỏng vấn là miễn phí, và không có gói đăng ký.",
+    "description": "Bảng giá prepza: tạo buổi phỏng vấn là miễn phí, và bạn chỉ trả tiền cho mỗi ứng viên có trả lời. Không có gói đăng ký hay phí theo người dùng, và credit không bao giờ hết hạn.",
     "test": "Tạo một buổi phỏng vấn",
     "free": "Miễn phí",
     "candidate": "Mỗi ứng viên trả lời ít nhất một câu hỏi",
@@ -836,6 +837,7 @@
   "faq": {
     "title": "Câu hỏi thường gặp",
     "intro": "Không tìm thấy câu trả lời? Hãy hỏi khung chat cuối trang này, hoặc viết cho chúng tôi theo địa chỉ trong chính sách quyền riêng tư.",
+    "description": "Giải đáp về prepza: cách tạo buổi phỏng vấn từ mô tả công việc, ứng viên thấy gì, giá và credit, kết quả, tích hợp ATS, ngôn ngữ và dữ liệu của bạn.",
     "chat": {
       "title": "Hỏi về prepza",
       "text": "Câu hỏi về tính năng, giá, thanh toán, điều khoản hoặc quyền riêng tư. AI trả lời dựa trên tài liệu của chính prepza. Câu trả lời do AI viết và có thể sai. Trang bảng giá, điều khoản và chính sách quyền riêng tư mới là căn cứ.",
@@ -858,6 +860,7 @@
   "about": {
     "title": "Về chúng tôi",
     "intro": "prepza giúp các công ty tìm được người thật sự thạo việc: một buổi phỏng vấn công bằng, có tính giờ, tạo từ mô tả công việc của bạn, với mức giá nhóm nào cũng chi trả được. Và ai đang chuẩn bị phỏng vấn cũng có thể luyện tập miễn phí.",
+    "description": "prepza biến mô tả công việc thành một buổi phỏng vấn công bằng, có giới hạn thời gian chỉ trong vài phút, với mức giá đội nào cũng chi trả được, và ai cũng có thể luyện phỏng vấn miễn phí.",
     "company": {
       "title": "Vì sao chúng tôi tồn tại",
       "problem": "Tuyển dụng thường dựa vào CV và một cuộc trò chuyện tốt, và cả hai đều có thể gây hiểu lầm. Các công cụ đánh giá hữu ích lại có giá dành cho công ty lớn, với gói năm và phí theo người dùng, nên phần lớn các nhóm đành bỏ qua.",
@@ -966,6 +969,7 @@
   },
   "compare": {
     "title": "So sánh prepza",
+    "metaTitle": "So sánh các công cụ kiểm tra trước tuyển dụng",
     "intro": "So sánh có dẫn nguồn với các công cụ kiểm tra trước tuyển dụng khác: bài kiểm tra được tạo thế nào, chi phí bao nhiêu và khi nào công cụ nào phù hợp hơn."
   },
   "guides": {

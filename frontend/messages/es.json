@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. inicio",
     "main": "Principal",
-    "legal": "Legal",
+    "footer": "Pie de página",
     "pricing": "Precios",
     "privacy": "Privacidad",
     "terms": "Términos",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Precios",
     "intro": "Paga por candidato. Generar entrevistas es gratis y no hay suscripciones.",
+    "description": "Precios de prepza: generar entrevistas es gratis y solo pagas por cada candidato que responde. Sin suscripciones ni cuotas por usuario, y los créditos no caducan.",
     "test": "Generar una entrevista",
     "free": "Gratis",
     "candidate": "Cada candidato que responde al menos una pregunta",
@@ -840,6 +841,7 @@
   "faq": {
     "title": "Preguntas frecuentes",
     "intro": "¿No encuentras tu respuesta? Pregunta al chat al final de esta página o escríbenos a la dirección de la política de privacidad.",
+    "description": "Respuestas sobre prepza: cómo se crean las entrevistas a partir de una oferta de empleo, qué ven los candidatos, precios y créditos, resultados, integraciones con ATS, idiomas y tus datos.",
     "chat": {
       "title": "Pregunta sobre prepza",
       "text": "Preguntas sobre funciones, precios, pagos, los términos o la privacidad. La IA responde con los documentos de prepza. Las respuestas las escribe una IA y pueden tener errores. Lo que vale es la página de precios, los términos y la política de privacidad.",
@@ -862,6 +864,7 @@
   "about": {
     "title": "Sobre nosotros",
     "intro": "prepza ayuda a las empresas a encontrar personas que de verdad dominan el trabajo: una entrevista justa y cronometrada, creada a partir de tu descripción del puesto, a un precio que cualquier equipo puede pagar. Y quien se prepara para una entrevista puede practicar gratis.",
+    "description": "prepza convierte una oferta de empleo en una entrevista justa y cronometrada en minutos, a un precio que cualquier equipo puede pagar, y permite a cualquiera practicar entrevistas gratis.",
     "company": {
       "title": "Por qué existimos",
       "problem": "Contratar suele depender de un CV y una buena conversación, y ambos pueden engañar. Las herramientas de evaluación que ayudan tienen precios para grandes empresas, con planes anuales y cuotas por usuario, así que la mayoría de los equipos prescinden de ellas.",
@@ -970,6 +973,7 @@
   },
   "compare": {
     "title": "Compara prepza",
+    "metaTitle": "Comparativa de herramientas de evaluación preempleo",
     "intro": "Comparaciones con fuentes frente a otras herramientas de evaluación preempleo: cómo se crean las pruebas, cuánto cuestan y cuándo encaja mejor cada una."
   },
   "guides": {

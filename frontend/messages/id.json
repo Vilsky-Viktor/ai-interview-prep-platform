@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. beranda",
     "main": "Menu utama",
-    "legal": "Legal",
+    "footer": "Footer",
     "pricing": "Harga",
     "privacy": "Privasi",
     "terms": "Ketentuan",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Harga",
     "intro": "Bayar per kandidat. Membuat wawancara gratis, dan tidak ada langganan.",
+    "description": "Harga prepza: membuat wawancara gratis, dan Anda hanya membayar untuk setiap kandidat yang menjawab. Tanpa langganan atau biaya per pengguna, dan kredit tidak pernah kedaluwarsa.",
     "test": "Membuat wawancara",
     "free": "Gratis",
     "candidate": "Setiap kandidat yang menjawab minimal satu soal",
@@ -840,6 +841,7 @@
   "faq": {
     "title": "Pertanyaan yang sering diajukan",
     "intro": "Tidak menemukan jawabannya? Tanyakan ke chat di akhir halaman ini, atau kirim pesan ke alamat di kebijakan privasi.",
+    "description": "Jawaban tentang prepza: cara wawancara dibuat dari deskripsi pekerjaan, apa yang dilihat kandidat, harga dan kredit, hasil, integrasi ATS, bahasa, dan data Anda.",
     "chat": {
       "title": "Tanya tentang prepza",
       "text": "Pertanyaan tentang fitur, harga, pembayaran, ketentuan, atau privasi. AI menjawab berdasarkan dokumen prepza sendiri. Jawaban ditulis oleh AI dan bisa salah. Yang berlaku adalah halaman harga, ketentuan, dan kebijakan privasi.",
@@ -862,6 +864,7 @@
   "about": {
     "title": "Tentang kami",
     "intro": "prepza membantu perusahaan menemukan orang yang benar-benar menguasai pekerjaannya: wawancara yang adil dan berbatas waktu, dibuat dari deskripsi pekerjaanmu, dengan harga yang terjangkau bagi tim mana pun. Dan siapa pun yang sedang bersiap untuk wawancara bisa berlatih gratis.",
+    "description": "prepza mengubah deskripsi pekerjaan menjadi wawancara yang adil dan berbatas waktu dalam hitungan menit, dengan harga terjangkau bagi tim mana pun. Siapa saja juga bisa berlatih wawancara gratis.",
     "company": {
       "title": "Mengapa kami ada",
       "problem": "Rekrutmen sering bergantung pada CV dan percakapan yang menyenangkan, dan keduanya bisa menyesatkan. Alat asesmen yang membantu dipatok dengan harga untuk perusahaan besar, dengan paket tahunan dan biaya per pengguna, sehingga kebanyakan tim tidak memakainya.",
@@ -970,6 +973,7 @@
   },
   "compare": {
     "title": "Bandingkan prepza",
+    "metaTitle": "Perbandingan alat tes seleksi karyawan",
     "intro": "Perbandingan bersumber dengan alat tes seleksi karyawan lainnya: cara tesnya dibuat, berapa biayanya, dan kapan masing-masing lebih cocok."
   },
   "guides": {

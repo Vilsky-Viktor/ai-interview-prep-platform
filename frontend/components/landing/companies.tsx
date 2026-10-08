@@ -5,12 +5,13 @@ import { CandidateSignals } from "@/components/company/candidate-signals"
 import { CandidateStatsDemo } from "@/components/landing/candidate-stats-demo"
 import { LandingSection, Stage } from "@/components/landing/section"
 import { Badge } from "@/components/ui/badge"
+import { DEMO_PASS_MARK } from "@/constants/landing"
 import { formatDate } from "@/lib/format"
+import { gradeTone } from "@/lib/grade-tone"
 import type { Candidate } from "@/types/company"
 
 const POINTS = ["own", "timed", "flags", "answers"] as const
 const DAY_MS = 24 * 60 * 60 * 1000
-const PASS_MARK = 70
 
 // The in-process candidate's progress and grade after each answer, as the demo plays them.
 const LIVE = [
@@ -63,7 +64,7 @@ export async function CompaniesSection() {
         <div className="rounded-2xl border bg-background text-start">
           {/* The test and its passing grade, which colors each finished grade. */}
           <p className="border-b px-8 py-5 text-sm text-muted-foreground">
-            {t("role", { mark: PASS_MARK })}
+            {t("role", { mark: DEMO_PASS_MARK })}
           </p>
           <ul className="divide-y">
             {CANDIDATES.map(
@@ -109,10 +110,9 @@ export async function CompaniesSection() {
                             className={cn(
                               "block text-2xl font-light tabular-nums",
                               grade == null && "text-muted-foreground",
-                              grade != null &&
-                                (grade >= PASS_MARK
-                                  ? "text-green-600 dark:text-green-400"
-                                  : "text-red-600 dark:text-red-400")
+                              gradeTone(
+                                grade == null ? null : grade >= DEMO_PASS_MARK
+                              )
                             )}
                           >
                             {grade == null ? "—" : `${grade}%`}

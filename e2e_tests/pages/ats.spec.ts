@@ -25,3 +25,16 @@ test("the home page shows the ATSs, Slack and the API", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "dark" });
   await section.screenshot({ path: test.info().outputPath("ats-section-dark.png") });
 });
+
+// Right to left, the API's row reads from the right with the docs arrow facing left; the example
+// request is code, so it stays left to right.
+test("the API's docs arrow follows the reading direction", async ({ page }) => {
+  await page.goto("/ar");
+  const docs = page.locator('main a[href="/api-docs"]');
+  await docs.scrollIntoViewIfNeeded();
+
+  const scale = await docs.locator("svg").evaluate((icon) => getComputedStyle(icon).scale);
+  expect(scale).toBe("-1 1");
+  const request = page.getByText("POST /api/v1/interviews/{id}/candidates", { exact: false });
+  await expect(request.locator("xpath=ancestor::*[@dir][1]")).toHaveAttribute("dir", "ltr");
+});

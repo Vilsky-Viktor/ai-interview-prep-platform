@@ -13,7 +13,7 @@ import type { Catalog } from "@/types/billing"
 export async function generateMetadata() {
   const t = await getTranslations("pricing")
 
-  return pageMetadata(t("title"), t("intro"), "/pricing", true)
+  return pageMetadata(t("title"), t("description"), "/pricing", true)
 }
 
 function PriceRow({ what, price }: { what: string; price: string }) {

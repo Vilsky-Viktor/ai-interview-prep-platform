@@ -7,6 +7,7 @@ import { CompanyLogo } from "@/components/company/company-logo"
 import { VerifiedBadge } from "@/components/company/verified-badge"
 import { Wordmark } from "@/components/wordmark"
 import { INTERVIEW_REPORT_ID } from "@/constants/report"
+import { gradeTone } from "@/lib/grade-tone"
 import type { InterviewReportData } from "@/types/company"
 
 /** All of a test's candidates with their totals, best first, for the PDF: like a candidate's
@@ -88,8 +89,7 @@ export function InterviewReport({ report }: { report: InterviewReportData }) {
                   label={candidates("grade")}
                   className={cn(
                     candidate.grade == null && "text-muted-foreground",
-                    candidate.passed === true && "text-green-600",
-                    candidate.passed === false && "text-red-600"
+                    gradeTone(candidate.passed)
                   )}
                 >
                   {candidate.grade == null ? "—" : `${candidate.grade}%`}

@@ -15,7 +15,7 @@ import { personData } from "@/lib/structured-data"
 export async function generateMetadata() {
   const t = await getTranslations("about")
 
-  return pageMetadata(t("title"), t("intro"), "/about", true)
+  return pageMetadata(t("title"), t("description"), "/about", true)
 }
 
 export default async function AboutPage() {

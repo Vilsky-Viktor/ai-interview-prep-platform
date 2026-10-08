@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. accueil",
     "main": "Principal",
-    "legal": "Mentions légales",
+    "footer": "Pied de page",
     "pricing": "Tarifs",
     "privacy": "Confidentialité",
     "terms": "Conditions",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Tarifs",
     "intro": "Payez par candidat. La génération d'entretiens est gratuite, et il n'y a pas d'abonnement.",
+    "description": "Tarifs de prepza : la génération d'entretiens est gratuite, et vous ne payez que pour chaque candidat qui répond. Ni abonnement ni frais par utilisateur, et les crédits n'expirent jamais.",
     "test": "Générer un entretien",
     "free": "Gratuit",
     "candidate": "Chaque candidat qui répond à au moins une question",
@@ -840,6 +841,7 @@
   "faq": {
     "title": "Questions fréquentes",
     "intro": "Vous ne trouvez pas votre réponse ? Posez-la au chat en bas de cette page, ou écrivez-nous à l’adresse indiquée dans la politique de confidentialité.",
+    "description": "Réponses sur prepza : comment les entretiens sont créés à partir d'une fiche de poste, ce que voient les candidats, prix et crédits, résultats, intégrations ATS, langues et vos données.",
     "chat": {
       "title": "Une question sur prepza ?",
       "text": "Questions sur les fonctionnalités, les tarifs, les paiements, les conditions ou la confidentialité. L’IA répond à partir des documents de prepza. Les réponses sont rédigées par une IA et peuvent être erronées. Seuls la page des tarifs, les conditions et la politique de confidentialité font foi.",
@@ -862,6 +864,7 @@
   "about": {
     "title": "À propos de nous",
     "intro": "prepza aide les entreprises à trouver les personnes qui maîtrisent vraiment le poste : un entretien équitable et chronométré, créé à partir de votre fiche de poste, à un prix abordable pour toute équipe. Et toute personne qui prépare un entretien peut s'entraîner gratuitement.",
+    "description": "prepza transforme une fiche de poste en entretien équitable et chronométré en quelques minutes, à un prix abordable pour toute équipe. Et chacun peut s'entraîner gratuitement aux entretiens.",
     "company": {
       "title": "Pourquoi nous existons",
       "problem": "Le recrutement repose souvent sur un CV et une bonne conversation, et les deux peuvent tromper. Les outils d'évaluation qui aident sont tarifés pour les grandes entreprises, avec des abonnements annuels et des frais par utilisateur, alors la plupart des équipes s'en passent.",
@@ -970,6 +973,7 @@
   },
   "compare": {
     "title": "Comparer prepza",
+    "metaTitle": "Comparatif des outils de tests de pré-embauche",
     "intro": "Des comparaisons sourcées avec d'autres outils de tests de pré-embauche : comment les tests sont créés, ce qu'ils coûtent et quand chacun convient le mieux."
   },
   "guides": {

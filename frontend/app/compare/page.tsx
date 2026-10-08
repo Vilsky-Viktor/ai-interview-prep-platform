@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/site"
 export async function generateMetadata() {
   const t = await getTranslations("compare")
 
-  return pageMetadata(t("title"), t("intro"), "/compare", true)
+  return pageMetadata(t("metaTitle"), t("intro"), "/compare", true)
 }
 
 /** The compare hub: every page in content/compare, by title. */

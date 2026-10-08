@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. ana sayfa",
     "main": "Ana menü",
-    "legal": "Yasal",
+    "footer": "Alt bilgi",
     "pricing": "Fiyatlar",
     "privacy": "Gizlilik",
     "terms": "Koşullar",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Fiyatlar",
     "intro": "Aday başına ödeyin. Mülakat oluşturmak ücretsizdir ve abonelik yoktur.",
+    "description": "prepza fiyatları: mülakat oluşturmak ücretsizdir ve yalnızca yanıt veren her aday için ödersiniz. Abonelik ya da kullanıcı başı ücret yoktur, krediler hiç sona ermez.",
     "test": "Mülakat oluşturma",
     "free": "Ücretsiz",
     "candidate": "En az bir soruyu cevaplayan her aday",
@@ -839,6 +840,7 @@
   "faq": {
     "title": "Sıkça sorulan sorular",
     "intro": "Yanıtınızı bulamadınız mı? Bu sayfanın sonundaki sohbete sorun ya da gizlilik politikasındaki adrese yazın.",
+    "description": "prepza hakkında yanıtlar: mülakatlar iş tanımından nasıl hazırlanır, adaylar ne görür, fiyatlar ve krediler, sonuçlar, ATS entegrasyonları, diller ve verileriniz.",
     "chat": {
       "title": "prepza hakkında sorun",
       "text": "Özellikler, fiyatlar, ödemeler, koşullar veya gizlilik hakkında sorular. Yapay zekâ, prepza’nın kendi belgelerine göre yanıtlar. Yanıtları yapay zekâ yazar ve hatalı olabilir. Geçerli olan fiyatlar sayfası, koşullar ve gizlilik politikasıdır.",
@@ -861,6 +863,7 @@
   "about": {
     "title": "Hakkımızda",
     "intro": "prepza, şirketlerin işi gerçekten bilen kişileri bulmasına yardımcı olur: iş tanımınızdan hazırlanan adil, süreli bir mülakat, her ekibin karşılayabileceği bir fiyata. Mülakata hazırlanan herkes de ücretsiz pratik yapabilir.",
+    "description": "prepza, iş tanımınızı dakikalar içinde adil ve süreli bir mülakata dönüştürür, her ekibin karşılayabileceği bir fiyata. Herkes de mülakatlara ücretsiz pratik yapabilir.",
     "company": {
       "title": "Neden varız",
       "problem": "İşe alım çoğu zaman bir özgeçmişe ve iyi geçen bir sohbete dayanır; ikisi de yanıltabilir. İşe yarayan değerlendirme araçları ise yıllık planlar ve kullanıcı başı ücretlerle büyük şirketlere göre fiyatlanır, bu yüzden çoğu ekip onlarsız idare eder.",
@@ -969,6 +972,7 @@
   },
   "compare": {
     "title": "prepza'yı karşılaştırın",
+    "metaTitle": "İşe alım öncesi test araçlarının karşılaştırması",
     "intro": "Diğer işe alım öncesi test araçlarıyla kaynaklı karşılaştırmalar: testler nasıl hazırlanır, ne kadar tutar ve hangisi ne zaman daha uygundur."
   },
   "guides": {

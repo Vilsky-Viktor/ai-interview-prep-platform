@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. avaleht",
     "main": "Peamenüü",
-    "legal": "Õigusteave",
+    "footer": "Jalus",
     "pricing": "Hinnad",
     "privacy": "Privaatsus",
     "terms": "Tingimused",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Hinnad",
     "intro": "Maksa kandidaadi kohta. Intervjuude loomine on tasuta ja tellimusi pole.",
+    "description": "prepza hinnad: intervjuude loomine on tasuta ja maksad ainult iga vastava kandidaadi eest. Tellimusi ega kasutajapõhiseid tasusid pole ning krediidid ei aegu.",
     "test": "Intervjuu loomine",
     "free": "Tasuta",
     "candidate": "Iga kandidaat, kes vastab vähemalt ühele küsimusele",
@@ -844,6 +845,7 @@
   "faq": {
     "title": "Korduma kippuvad küsimused",
     "intro": "Ei leidnud vastust? Küsi selle lehe lõpus olevas vestlusaknas või kirjuta meile privaatsuspoliitikas toodud aadressil.",
+    "description": "Vastused prepza kohta: kuidas intervjuud töökuulutusest luuakse, mida kandidaadid näevad, hinnad ja krediidid, tulemused, ATS-i liidesed, keeled ja sinu andmed.",
     "chat": {
       "title": "Küsi prepza kohta",
       "text": "Küsimused funktsioonide, hindade, maksete, tingimuste või privaatsuse kohta. Tehisaru vastab prepza enda dokumentide põhjal. Vastused kirjutab tehisaru ja need võivad olla valed. Kehtivad hinnaleht, tingimused ja privaatsuspoliitika.",
@@ -866,6 +868,7 @@
   "about": {
     "title": "Meist",
     "intro": "prepza aitab ettevõtetel leida inimesi, kes tööd päriselt tunnevad: õiglane ajapiiranguga intervjuu sinu töökuulutuse põhjal, hinnaga, mida iga meeskond saab endale lubada. Ja igaüks, kes intervjuuks valmistub, saab tasuta harjutada.",
+    "description": "prepza muudab töökuulutuse mõne minutiga ausaks ajapiiranguga intervjuuks hinnaga, mida iga meeskond jõuab maksta, ning igaüks saab tasuta intervjuuks harjutada.",
     "company": {
       "title": "Miks me olemas oleme",
       "problem": "Värbamine toetub sageli CV-le ja heale vestlusele, kuid mõlemad võivad eksitada. Abiks olevad hindamisvahendid on hinnastatud suurtele ettevõtetele, aastaplaanide ja kasutajatasudega, nii et enamik meeskondi jääb neist ilma.",
@@ -974,6 +977,7 @@
   },
   "compare": {
     "title": "prepza võrdlus",
+    "metaTitle": "Värbamistestide tööriistade võrdlus",
     "intro": "Allikatega võrdlused teiste värbamistestide tööriistadega: kuidas testid luuakse, mis need maksavad ja millal milline paremini sobib."
   },
   "guides": {

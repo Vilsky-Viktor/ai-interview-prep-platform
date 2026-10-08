@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. home",
     "main": "Principale",
-    "legal": "Note legali",
+    "footer": "Piè di pagina",
     "pricing": "Prezzi",
     "privacy": "Privacy",
     "terms": "Termini",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Prezzi",
     "intro": "Paghi per candidato. Generare colloqui è gratis e non ci sono abbonamenti.",
+    "description": "Prezzi di prepza: generare colloqui è gratis e paghi solo per ogni candidato che risponde. Niente abbonamenti né costi per utente, e i crediti non scadono.",
     "test": "Generare un colloquio",
     "free": "Gratis",
     "candidate": "Ogni candidato che risponde ad almeno una domanda",
@@ -840,6 +841,7 @@
   "faq": {
     "title": "Domande frequenti",
     "intro": "Non trovi la risposta? Chiedi alla chat in fondo a questa pagina o scrivici all’indirizzo indicato nell’informativa sulla privacy.",
+    "description": "Risposte su prepza: come i colloqui nascono da un annuncio di lavoro, cosa vedono i candidati, prezzi e crediti, risultati, integrazioni con gli ATS, lingue e i tuoi dati.",
     "chat": {
       "title": "Chiedi di prepza",
       "text": "Domande su funzioni, prezzi, pagamenti, termini o privacy. L’IA risponde in base ai documenti di prepza. Le risposte sono scritte da un’IA e possono essere sbagliate. Valgono la pagina dei prezzi, i termini e l’informativa sulla privacy.",
@@ -862,6 +864,7 @@
   "about": {
     "title": "Chi siamo",
     "intro": "prepza aiuta le aziende a trovare persone che conoscono davvero il lavoro: un colloquio equo e a tempo, creato dalla tua descrizione del ruolo, a un prezzo alla portata di qualsiasi team. E chiunque si prepari a un colloquio può esercitarsi gratis.",
+    "description": "prepza trasforma un annuncio di lavoro in un colloquio equo e a tempo in pochi minuti, a un prezzo alla portata di ogni team, e permette a chiunque di esercitarsi gratis per i colloqui.",
     "company": {
       "title": "Perché esistiamo",
       "problem": "Le assunzioni si basano spesso su un CV e una buona conversazione, ed entrambi possono ingannare. Gli strumenti di valutazione che aiutano hanno prezzi pensati per le grandi aziende, con piani annuali e costi per utente, così la maggior parte dei team ne fa a meno.",
@@ -970,6 +973,7 @@
   },
   "compare": {
     "title": "Confronta prepza",
+    "metaTitle": "Strumenti di test pre-assunzione a confronto",
     "intro": "Confronti con fonti rispetto ad altri strumenti di test pre-assunzione: come vengono creati i test, quanto costano e quando ciascuno è più adatto."
   },
   "guides": {

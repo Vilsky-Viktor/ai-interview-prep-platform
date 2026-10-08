@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. home",
     "main": "Hoofdmenu",
-    "legal": "Juridisch",
+    "footer": "Voettekst",
     "pricing": "Prijzen",
     "privacy": "Privacy",
     "terms": "Voorwaarden",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Prijzen",
     "intro": "Betaal per kandidaat. Interviews genereren is gratis, en er zijn geen abonnementen.",
+    "description": "Prijzen van prepza: interviews genereren is gratis, en je betaalt alleen voor elke kandidaat die antwoordt. Geen abonnementen of kosten per gebruiker, en credits verlopen nooit.",
     "test": "Een interview genereren",
     "free": "Gratis",
     "candidate": "Elke kandidaat die minstens één vraag beantwoordt",
@@ -836,6 +837,7 @@
   "faq": {
     "title": "Veelgestelde vragen",
     "intro": "Staat je antwoord er niet bij? Vraag het de chat onderaan deze pagina, of schrijf ons op het adres in het privacybeleid.",
+    "description": "Antwoorden over prepza: hoe interviews uit een vacaturetekst ontstaan, wat kandidaten zien, prijzen en credits, resultaten, ATS-koppelingen, talen en je gegevens.",
     "chat": {
       "title": "Vraag over prepza",
       "text": "Vragen over functies, prijzen, betalingen, de voorwaarden of privacy. De AI antwoordt op basis van prepza’s eigen documenten. Antwoorden worden door AI geschreven en kunnen fout zijn. De prijspagina, de voorwaarden en het privacybeleid zijn bepalend.",
@@ -858,6 +860,7 @@
   "about": {
     "title": "Over ons",
     "intro": "prepza helpt bedrijven mensen te vinden die het vak echt kennen: een eerlijk interview met tijdslimiet, gemaakt op basis van je functieomschrijving, voor een prijs die elk team kan betalen. En wie zich voorbereidt op een sollicitatiegesprek, kan gratis oefenen.",
+    "description": "prepza maakt van een vacaturetekst in een paar minuten een eerlijk interview met tijdslimiet, voor een prijs die elk team kan betalen, en iedereen kan gratis oefenen voor sollicitatiegesprekken.",
     "company": {
       "title": "Waarom we bestaan",
       "problem": "Werving leunt vaak op een cv en een goed gesprek, en allebei kunnen ze misleiden. De beoordelingstools die wel helpen, zijn geprijsd voor grote bedrijven, met jaarabonnementen en kosten per gebruiker, dus de meeste teams doen het zonder.",
@@ -966,6 +969,7 @@
   },
   "compare": {
     "title": "Vergelijk prepza",
+    "metaTitle": "Tools voor selectietests vergeleken",
     "intro": "Vergelijkingen met bronnen met andere tools voor selectietests: hoe de tests worden gemaakt, wat ze kosten en wanneer welke beter past."
   },
   "guides": {

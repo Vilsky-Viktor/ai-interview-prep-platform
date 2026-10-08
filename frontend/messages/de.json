@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. Startseite",
     "main": "Hauptmenü",
-    "legal": "Rechtliches",
+    "footer": "Fußzeile",
     "pricing": "Preise",
     "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Preise",
     "intro": "Du zahlst pro Kandidat. Interviews zu generieren ist kostenlos, und es gibt keine Abos.",
+    "description": "prepza-Preise: Interviews zu generieren ist kostenlos, und du zahlst nur für jeden Kandidaten, der antwortet. Keine Abos, keine Gebühren pro Nutzer, und Credits verfallen nie.",
     "test": "Ein Interview generieren",
     "free": "Kostenlos",
     "candidate": "Jeder Kandidat, der mindestens eine Frage beantwortet",
@@ -840,6 +841,7 @@
   "faq": {
     "title": "Häufige Fragen",
     "intro": "Keine Antwort gefunden? Frag den Chat unten auf dieser Seite oder schreib uns an die Adresse in der Datenschutzerklärung.",
+    "description": "Antworten zu prepza: wie Interviews aus einer Stellenbeschreibung entstehen, was Kandidaten sehen, Preise und Credits, Ergebnisse, ATS-Integrationen, Sprachen und deine Daten.",
     "chat": {
       "title": "Frag zu prepza",
       "text": "Fragen zu Funktionen, Preisen, Zahlungen, den Bedingungen oder dem Datenschutz. Die KI antwortet aus prepzas eigenen Dokumenten. Die Antworten schreibt eine KI, sie können falsch sein. Maßgeblich sind die Preisseite, die Bedingungen und die Datenschutzerklärung.",
@@ -862,6 +864,7 @@
   "about": {
     "title": "Über uns",
     "intro": "prepza hilft Unternehmen, Menschen zu finden, die den Job wirklich beherrschen: ein faires Interview mit Zeitlimit, erstellt aus deiner Stellenbeschreibung, zu einem Preis, den sich jedes Team leisten kann. Und wer sich auf ein Interview vorbereitet, kann kostenlos üben.",
+    "description": "prepza macht aus einer Stellenbeschreibung in wenigen Minuten ein faires Interview mit Zeitlimit, zu einem Preis, den sich jedes Team leisten kann. Und jeder kann kostenlos für Interviews üben.",
     "company": {
       "title": "Warum es uns gibt",
       "problem": "Einstellungen stützen sich oft auf einen Lebenslauf und ein gutes Gespräch, und beides kann täuschen. Die Bewertungstools, die helfen, sind für große Unternehmen bepreist, mit Jahresverträgen und Lizenzgebühren pro Nutzer, also verzichten die meisten Teams darauf.",
@@ -970,6 +973,7 @@
   },
   "compare": {
     "title": "prepza im Vergleich",
+    "metaTitle": "Tools für Einstellungstests im Vergleich",
     "intro": "Vergleiche mit Quellen zu anderen Tools für Einstellungstests: wie die Tests entstehen, was sie kosten und wann welches besser passt."
   },
   "guides": {

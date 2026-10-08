@@ -6,6 +6,7 @@ import { IntegrityLine } from "@/components/company/integrity-line"
 import { VerifiedBadge } from "@/components/company/verified-badge"
 import { Wordmark } from "@/components/wordmark"
 import { REPORT_ID } from "@/constants/report"
+import { gradeTone } from "@/lib/grade-tone"
 import type { CandidateReportData } from "@/types/company"
 
 /** The candidate's report the PDF is made from: one compact A4-wide page with the logo, the
@@ -58,7 +59,7 @@ export async function CandidateReport({
         <p
           className={cn(
             "text-4xl font-light tabular-nums",
-            tone(passed),
+            gradeTone(passed),
             grade == null && "text-muted-foreground"
           )}
         >
@@ -83,7 +84,7 @@ export async function CandidateReport({
             <p
               className={cn(
                 "text-xl font-light tabular-nums",
-                tone(section.passed),
+                gradeTone(section.passed),
                 section.final_score == null && "text-muted-foreground"
               )}
             >
@@ -95,16 +96,4 @@ export async function CandidateReport({
       <p className="text-xs text-muted-foreground">{t("humanReview")}</p>
     </div>
   )
-}
-
-function tone(passed: boolean | null) {
-  if (passed === true) {
-    return "text-green-600 dark:text-green-400"
-  }
-
-  if (passed === false) {
-    return "text-red-600 dark:text-red-400"
-  }
-
-  return ""
 }

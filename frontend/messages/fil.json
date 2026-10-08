@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. home",
     "main": "Pangunahing menu",
-    "legal": "Legal",
+    "footer": "Footer",
     "pricing": "Presyo",
     "privacy": "Privacy",
     "terms": "Mga tuntunin",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Presyo",
     "intro": "Magbayad bawat aplikante. Libre ang paggawa ng interview, at walang subscription.",
+    "description": "Presyo ng prepza: libre ang paggawa ng interview, at nagbabayad ka lang para sa bawat aplikanteng sumasagot. Walang subscription o bayad kada user, at hindi nag-e-expire ang credits.",
     "test": "Paggawa ng interview",
     "free": "Libre",
     "candidate": "Bawat aplikanteng sumagot ng kahit isang tanong",
@@ -844,6 +845,7 @@
   "faq": {
     "title": "Mga madalas itanong",
     "intro": "Hindi mo makita ang sagot? Itanong sa chat sa dulo ng page na ito, o sumulat sa amin sa address na nasa privacy policy.",
+    "description": "Mga sagot tungkol sa prepza: paano ginagawa ang interview mula sa job description, ano ang nakikita ng mga aplikante, presyo at credits, resulta, ATS integration, mga wika at ang data mo.",
     "chat": {
       "title": "Magtanong tungkol sa prepza",
       "text": "Mga tanong tungkol sa features, presyo, bayad, terms, o privacy. Sumasagot ang AI batay sa sariling mga dokumento ng prepza. AI ang sumusulat ng mga sagot at puwedeng magkamali. Ang pricing page, terms, at privacy policy ang masusunod.",
@@ -866,6 +868,7 @@
   "about": {
     "title": "Tungkol sa amin",
     "intro": "Tinutulungan ng prepza ang mga kumpanya na makahanap ng mga taong talagang marunong sa trabaho: isang patas na timed interview mula sa iyong job description, sa presyong kaya ng kahit anong team. At ang sinumang naghahanda para sa interview ay puwedeng mag-practice nang libre.",
+    "description": "Ginagawa ng prepza ang job description na patas at may orasang interview sa loob ng ilang minuto, sa presyong kaya ng anumang team. Libre ring mag-practice ng interview ang kahit sino.",
     "company": {
       "title": "Bakit kami narito",
       "problem": "Madalas nakasalalay ang hiring sa isang CV at isang magandang usapan, at puwedeng makapanlinlang ang dalawa. Ang mga assessment tool na nakakatulong ay naka-presyo para sa malalaking kumpanya, may annual plan at bayad bawat seat, kaya karamihan ng team ay wala nito.",
@@ -974,6 +977,7 @@
   },
   "compare": {
     "title": "Ikumpara ang prepza",
+    "metaTitle": "Paghahambing ng mga pre-employment testing tool",
     "intro": "Mga paghahambing na may sources sa ibang pre-employment testing tool: paano ginagawa ang mga test, magkano ang mga ito at kailan mas bagay ang bawat isa."
   },
   "guides": {

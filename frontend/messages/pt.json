@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. início",
     "main": "Principal",
-    "legal": "Jurídico",
+    "footer": "Rodapé",
     "pricing": "Preços",
     "privacy": "Privacidade",
     "terms": "Termos",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Preços",
     "intro": "Pague por candidato. Gerar entrevistas é grátis, e não há assinaturas.",
+    "description": "Preços da prepza: gerar entrevistas é grátis, e você paga apenas por cada candidato que responde. Sem assinaturas nem cobrança por usuário, e os créditos não expiram.",
     "test": "Gerar uma entrevista",
     "free": "Grátis",
     "candidate": "Cada candidato que responde pelo menos uma questão",
@@ -836,6 +837,7 @@
   "faq": {
     "title": "Perguntas frequentes",
     "intro": "Não encontrou sua resposta? Pergunte ao chat no fim desta página ou escreva para o endereço da política de privacidade.",
+    "description": "Respostas sobre a prepza: como as entrevistas são criadas a partir de uma descrição de vaga, o que os candidatos veem, preços e créditos, resultados, integrações com ATS, idiomas e seus dados.",
     "chat": {
       "title": "Pergunte sobre a prepza",
       "text": "Perguntas sobre recursos, preços, pagamentos, os termos ou a privacidade. A IA responde com base nos documentos da prepza. As respostas são escritas por IA e podem conter erros. O que vale é a página de preços, os termos e a política de privacidade.",
@@ -858,6 +860,7 @@
   "about": {
     "title": "Sobre nós",
     "intro": "A prepza ajuda empresas a encontrar pessoas que realmente conhecem o trabalho: uma entrevista justa e cronometrada, criada a partir da sua descrição de vaga, por um preço que qualquer equipe pode pagar. E quem está se preparando para uma entrevista pode praticar de graça.",
+    "description": "A prepza transforma uma descrição de vaga em uma entrevista justa e cronometrada em minutos, por um preço acessível a qualquer equipe. E qualquer pessoa pode treinar para entrevistas de graça.",
     "company": {
       "title": "Por que existimos",
       "problem": "Contratar muitas vezes depende de um currículo e de uma boa conversa, e os dois podem enganar. As ferramentas de avaliação que ajudam têm preços pensados para grandes empresas, com planos anuais e cobrança por usuário, então a maioria das equipes fica sem elas.",
@@ -966,6 +969,7 @@
   },
   "compare": {
     "title": "Compare a prepza",
+    "metaTitle": "Ferramentas de testes pré-admissão comparadas",
     "intro": "Comparações com fontes com outras ferramentas de testes pré-admissão: como os testes são criados, quanto custam e quando cada uma se encaixa melhor."
   },
   "guides": {

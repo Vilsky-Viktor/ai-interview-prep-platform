@@ -1,41 +1,8 @@
-import { notFound } from "next/navigation"
-import { getLocale } from "next-intl/server"
+import { categoryRoute } from "@/components/content/content-routes"
 
-import { ContentArticle } from "@/components/content/content-article"
-import { contentLanguages, contentPage } from "@/lib/content"
-import { pageMetadata } from "@/lib/site"
+/** A category page (content/pages/pre-employment-testing.md). */
+const route = categoryRoute("pre-employment-testing")
 
-const PATH = "/pre-employment-testing"
+export const generateMetadata = route.generateMetadata
 
-export async function generateMetadata() {
-  const page = await contentPage(
-    "pages",
-    "pre-employment-testing",
-    await getLocale()
-  )
-
-  return page
-    ? pageMetadata(
-        page.seoTitle,
-        page.description,
-        PATH,
-        await contentLanguages("pages", "pre-employment-testing")
-      )
-    : {}
-}
-
-/** A category page for companies searching the category (content/pages/pre-employment-testing.md). */
-export default async function CategoryPage() {
-  // In the interface's language where translated.
-  const page = await contentPage(
-    "pages",
-    "pre-employment-testing",
-    await getLocale()
-  )
-
-  if (!page) {
-    notFound()
-  }
-
-  return <ContentArticle page={page} path={PATH} />
-}
+export default route.Page

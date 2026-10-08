@@ -10,6 +10,7 @@ import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { byId } from "@/lib/paged-list"
 import { formatDate } from "@/lib/format"
+import { gradeTone } from "@/lib/grade-tone"
 import type { Candidate } from "@/types/company"
 
 /** An interview's candidates, a page at a time, from `path` (the API list with its sort and
@@ -76,9 +77,7 @@ export function CandidateList({
                 className={cn(
                   "block text-2xl font-light tabular-nums",
                   candidate.grade == null && "text-muted-foreground",
-                  candidate.passed === true &&
-                    "text-green-600 dark:text-green-400",
-                  candidate.passed === false && "text-red-600 dark:text-red-400"
+                  gradeTone(candidate.passed)
                 )}
               >
                 {candidate.grade == null ? "—" : `${candidate.grade}%`}

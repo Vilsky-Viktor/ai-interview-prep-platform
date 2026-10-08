@@ -5,8 +5,8 @@ import { VerifiedBadge } from "@/components/company/verified-badge"
 import { DemoLogo } from "@/components/landing/demo-logo"
 import { PdfIcon } from "@/components/pdf-icon"
 import { Wordmark } from "@/components/wordmark"
-
-const PASS_MARK = 70
+import { DEMO_PASS_MARK } from "@/constants/landing"
+import { gradeTone } from "@/lib/grade-tone"
 
 // The picture's candidates, best first, as the report lists them.
 const CANDIDATES = [
@@ -38,7 +38,7 @@ export async function ReportPdfDemo({ role }: { role: string }) {
             {" · "}
             {t("candidateCount", { count: CANDIDATES.length })}
             {" · "}
-            {t("passMark", { mark: PASS_MARK })}
+            {t("passMark", { mark: DEMO_PASS_MARK })}
           </p>
           <p className="font-heading text-lg font-medium tracking-tight">
             {role}
@@ -82,10 +82,11 @@ export async function ReportPdfDemo({ role }: { role: string }) {
                 <Total
                   label={candidates("grade")}
                   className={cn(
-                    candidate.progress === 100 &&
-                      (candidate.grade >= PASS_MARK
-                        ? "text-green-600"
-                        : "text-red-600")
+                    gradeTone(
+                      candidate.progress === 100
+                        ? candidate.grade >= DEMO_PASS_MARK
+                        : null
+                    )
                   )}
                 >
                   {candidate.grade}%

@@ -84,10 +84,18 @@ export function breadcrumbData(
   }
 }
 
-/** An article (a guide, a comparison or a pillar page) with its dates. */
+/** An article (a guide, a comparison or a pillar page) with its date, language and preview
+ * picture. */
 export function articleData(
   site: string,
-  page: { title: string; description: string; path: string; updated: string }
+  page: {
+    title: string
+    description: string
+    path: string
+    updated: string
+    language: string
+    image: string
+  }
 ) {
   return {
     "@context": CONTEXT,
@@ -95,6 +103,8 @@ export function articleData(
     headline: page.title,
     description: page.description,
     url: `${site}${page.path}`,
+    image: page.image,
+    inLanguage: page.language,
     dateModified: page.updated,
     author: { "@type": "Person", name: FOUNDER.name, url: `${site}/about` },
     publisher: { "@type": "Organization", name: BRAND, url: site },

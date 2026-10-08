@@ -10,7 +10,7 @@ import type { FaqItem } from "@/types/help"
 export async function generateMetadata() {
   const t = await getTranslations("faq")
 
-  return pageMetadata(t("title"), t("intro"), "/faq", true)
+  return pageMetadata(t("title"), t("description"), "/faq", true)
 }
 
 export default async function FaqPage() {
@@ -30,7 +30,8 @@ export default async function FaqPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
-      <JsonLd data={structured} />
+      {/* None without questions: an empty FAQPage is invalid. */}
+      {items.length > 0 && <JsonLd data={structured} />}
       <header className="space-y-4">
         <h1 className="font-heading text-4xl font-medium tracking-tight">
           {t("title")}

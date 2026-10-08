@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { isLocale, preferredLocale } from "@/lib/locale"
+import { isLocale, preferredLocale, textDirection } from "@/lib/locale"
 
 describe("isLocale", () => {
   it("knows the supported languages only", () => {
@@ -8,6 +8,19 @@ describe("isLocale", () => {
     expect(isLocale("fil")).toBe(true)
     expect(isLocale("xx")).toBe(false)
     expect(isLocale("EN")).toBe(false)
+  })
+})
+
+describe("textDirection", () => {
+  it("writes Arabic, Hebrew and Persian right to left", () => {
+    expect(textDirection("ar")).toBe("rtl")
+    expect(textDirection("he")).toBe("rtl")
+    expect(textDirection("fa")).toBe("rtl")
+  })
+
+  it("writes the other languages left to right", () => {
+    expect(textDirection("en")).toBe("ltr")
+    expect(textDirection("ja")).toBe("ltr")
   })
 })
 

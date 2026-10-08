@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { ROLE_PAGE_FAQ } from "@/constants/role-tests"
 import { publicFetch } from "@/lib/server-api"
+import { textDirection } from "@/lib/locale"
 import { localizedPath, templateLocales } from "@/lib/locale-path"
 import { pageMetadata, siteUrl, urlLocale } from "@/lib/site"
 import { breadcrumbData } from "@/lib/structured-data"
@@ -132,7 +133,11 @@ export default async function RoleTestPage({ params }: Params) {
 
       <section className="space-y-4">
         <h2 className="font-heading text-2xl font-medium">{t("topics")}</h2>
-        <ul lang={template.language} className="divide-y rounded-2xl border">
+        <ul
+          lang={template.language}
+          dir={textDirection(template.language)}
+          className="divide-y rounded-2xl border"
+        >
           {template.topics.map((topic) => (
             <li key={topic.id} className="space-y-3 p-4 sm:p-6">
               <span className="block text-lg font-medium">{topic.title}</span>

@@ -78,7 +78,7 @@ They check:
 
 Other specs check the home page's sections: the advantages' titles beside their icons in every language (`advantages.spec.ts`), the ATSs, Slack and the API (`ats.spec.ts`), the catalog's prices and free candidates on the home and pricing pages (`pricing.spec.ts`), the chat apps a report can be shared to (`reports.spec.ts`), smooth scrolling and back to top (`scroll.spec.ts`), and the API docs (`api-docs.spec.ts`).
 
-`seo.spec.ts` checks language addresses and hreflang, titles, structured data, the sitemap, robots.txt, noindex on private pages and thin template pages, links and levels on a template's page in its language, redirects and the footer.
+`seo.spec.ts` checks language addresses and hreflang, titles, structured data, the sitemap, robots.txt, noindex on private pages and thin template pages, links and levels on a template's page in its language, redirects and the footer. `metadata.spec.ts` checks page descriptions, the compare hub's title, FAQ and article data, practice breadcrumbs, the direction of right-to-left template text, the preview picture's noindex and the footer's menu.
 
 ```bash
 ./e2e_tests/pages.sh

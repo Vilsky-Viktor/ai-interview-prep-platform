@@ -38,9 +38,8 @@ export async function AtsSection() {
         ))}
       </ul>
       <div className="mx-auto mt-8 w-full max-w-4xl">
-        {/* prepza's API, named over it, and a request typed out with its answer; code, so it
-            reads left to right in every language. */}
-        <div dir="ltr" className="overflow-hidden rounded-2xl bg-muted text-sm">
+        {/* prepza's API, named over it, and a request typed out with its answer. */}
+        <div className="overflow-hidden rounded-2xl bg-muted text-sm">
           {/* The API's name, and its docs at the end of the row. */}
           <div className="flex items-center justify-between gap-4 border-b px-5 py-3">
             <p className="flex items-center gap-2 text-base font-medium">
@@ -54,10 +53,13 @@ export async function AtsSection() {
               nativeButton={false}
             >
               {t("docs")}
-              <ArrowRightIcon className="size-4" />
+              <ArrowRightIcon className="size-4 rtl:-scale-x-100" />
             </Button>
           </div>
-          <ApiDemo />
+          {/* Code, so it reads left to right in every language. */}
+          <div dir="ltr">
+            <ApiDemo />
+          </div>
         </div>
       </div>
       <ul className="mx-auto mt-8 grid w-full max-w-5xl gap-x-10 gap-y-3 text-muted-foreground sm:grid-cols-3">

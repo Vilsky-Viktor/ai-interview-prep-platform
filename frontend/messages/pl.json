@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. strona główna",
     "main": "Menu główne",
-    "legal": "Informacje prawne",
+    "footer": "Stopka",
     "pricing": "Cennik",
     "privacy": "Prywatność",
     "terms": "Regulamin",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Cennik",
     "intro": "Płać za kandydata. Generowanie rozmów jest darmowe i nie ma abonamentu.",
+    "description": "Cennik prepza: generowanie rozmów jest darmowe, a płacisz tylko za każdego kandydata, który odpowiada. Bez abonamentu i opłat za użytkownika, a kredyty nie wygasają.",
     "test": "Generowanie rozmowy",
     "free": "Za darmo",
     "candidate": "Każdy kandydat, który odpowie na co najmniej jedno pytanie",
@@ -840,6 +841,7 @@
   "faq": {
     "title": "Często zadawane pytania",
     "intro": "Nie ma tu Twojej odpowiedzi? Zapytaj czat na końcu tej strony albo napisz do nas na adres z polityki prywatności.",
+    "description": "Odpowiedzi o prepza: jak rozmowa powstaje z opisu stanowiska, co widzą kandydaci, ceny i kredyty, wyniki, integracje z ATS, języki i Twoje dane.",
     "chat": {
       "title": "Zapytaj o prepza",
       "text": "Pytania o funkcje, ceny, płatności, regulamin lub prywatność. AI odpowiada na podstawie dokumentów prepza. Odpowiedzi pisze AI i mogą zawierać błędy. Wiążące są cennik, regulamin i polityka prywatności.",
@@ -862,6 +864,7 @@
   "about": {
     "title": "O nas",
     "intro": "prepza pomaga firmom znaleźć ludzi, którzy naprawdę znają się na rzeczy: uczciwa rozmowa na czas, stworzona z Twojego opisu stanowiska, w cenie, na którą stać każdy zespół. A każdy, kto przygotowuje się do rozmowy kwalifikacyjnej, może ćwiczyć za darmo.",
+    "description": "prepza w kilka minut zamienia opis stanowiska w uczciwą rozmowę na czas, w cenie, na którą stać każdy zespół. A każdy może za darmo ćwiczyć przed rozmową kwalifikacyjną.",
     "company": {
       "title": "Po co istniejemy",
       "problem": "Rekrutacja często opiera się na CV i dobrej rozmowie, a jedno i drugie może zmylić. Narzędzia do oceny, które pomagają, są wycenione dla dużych firm, z planami rocznymi i opłatami za użytkownika, więc większość zespołów się bez nich obywa.",
@@ -970,6 +973,7 @@
   },
   "compare": {
     "title": "Porównaj prepza",
+    "metaTitle": "Porównanie narzędzi do testów rekrutacyjnych",
     "intro": "Porównania z innymi narzędziami do testów rekrutacyjnych, ze źródłami: jak powstają testy, ile kosztują i kiedy które pasuje lepiej."
   },
   "guides": {

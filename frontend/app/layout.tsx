@@ -16,8 +16,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner"
 import { FONT_VARIABLES } from "@/constants/fonts"
-import { CJK_LOCALES, RTL_LOCALES, type Locale } from "@/constants/i18n"
+import { CJK_LOCALES, type Locale } from "@/constants/i18n"
 import { SITE_NAME } from "@/constants/seo"
+import { textDirection } from "@/lib/locale"
 import { previewImage, siteUrl, urlLocale } from "@/lib/site"
 import { cn } from "cn"
 
@@ -49,14 +50,13 @@ export default async function RootLayout({
   // The Content-Security-Policy's nonce from proxy.ts, for the theme's inline script.
   const nonce = (await headers()).get("x-nonce") ?? undefined
   const locale = await getLocale()
-  const direction = RTL_LOCALES.includes(locale as Locale) ? "rtl" : "ltr"
 
   return (
     // In-page links ("how it works" on the home page) scroll smoothly; Next.js turns it off for
     // navigation between pages (data-scroll-behavior), and reduced motion keeps the jump.
     <html
       lang={locale}
-      dir={direction}
+      dir={textDirection(locale)}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={cn(

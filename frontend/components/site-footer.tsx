@@ -22,32 +22,16 @@ export async function SiteFooter() {
           </span>
           {/* prepza's social accounts; links come once the accounts exist. */}
           <div className="flex items-center gap-5">
-            <span
-              role="img"
-              aria-label="LinkedIn"
-              className="transition-colors hover:text-foreground"
-            >
+            <span role="img" aria-label="LinkedIn">
               <LinkedInIcon className="size-6" />
             </span>
-            <span
-              role="img"
-              aria-label="X"
-              className="transition-colors hover:text-foreground"
-            >
+            <span role="img" aria-label="X">
               <XIcon className="size-6" />
             </span>
-            <span
-              role="img"
-              aria-label="YouTube"
-              className="transition-colors hover:text-foreground"
-            >
+            <span role="img" aria-label="YouTube">
               <YouTubeIcon className="size-6" />
             </span>
-            <span
-              role="img"
-              aria-label="Facebook"
-              className="transition-colors hover:text-foreground"
-            >
+            <span role="img" aria-label="Facebook">
               <FacebookIcon className="size-6" />
             </span>
           </div>
@@ -55,7 +39,7 @@ export async function SiteFooter() {
         {/* Lowercase with the blue dot, like the header's menu (globals.css, by data-slot). */}
         <nav
           data-slot="footer-nav"
-          aria-label={t("legal")}
+          aria-label={t("footer")}
           className="grid grid-cols-3 gap-x-6 sm:gap-x-16"
         >
           {FOOTER_COLUMNS.map((column) => (

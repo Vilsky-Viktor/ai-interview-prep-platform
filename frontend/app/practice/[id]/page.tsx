@@ -4,6 +4,7 @@ import { notFound, permanentRedirect } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
+import { JsonLd } from "@/components/json-ld"
 import { PageHeader } from "@/components/page-header"
 import { HireWithTemplate } from "@/components/practice/hire-with-template"
 import { PracticeActions } from "@/components/practice/practice-actions"
@@ -12,9 +13,11 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
+import { textDirection } from "@/lib/locale"
 import { localizedPath, templateLocales } from "@/lib/locale-path"
-import { pageMetadata, urlLocale } from "@/lib/site"
+import { pageMetadata, siteUrl, urlLocale } from "@/lib/site"
 import { serverFetch } from "@/lib/server-api"
+import { breadcrumbData } from "@/lib/structured-data"
 import type { PracticeSize, PracticeTopicProgress } from "@/types/round"
 import type { Template } from "@/types/superadmin"
 
@@ -64,15 +67,16 @@ export default async function PracticeTestPage({
 
   const locale = await urlLocale()
 
+  // Links stay in the language of the page's address (/de/practice/… leads to /de/…).
+  const at = (path: string) => localizedPath(locale ?? DEFAULT_LOCALE, path)
+
   // Only English and the template's own language have this page.
   if (!template || (locale && locale !== template.language)) {
     notFound()
   }
 
   if (template.slug && key !== template.slug) {
-    permanentRedirect(
-      localizedPath(locale ?? DEFAULT_LOCALE, `/practice/${template.slug}`)
-    )
+    permanentRedirect(at(`/practice/${template.slug}`))
   }
 
   const id = template.id
@@ -88,6 +92,16 @@ export default async function PracticeTestPage({
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
+      <JsonLd
+        data={breadcrumbData(siteUrl(), [
+          { name: "prepza", path: at("/") },
+          { name: t("title"), path: at("/practice") },
+          {
+            name: template.title,
+            path: at(`/practice/${template.slug ?? id}`),
+          },
+        ])}
+      />
       <PageHeader
         back={<BackLink href="/practice">{t("title")}</BackLink>}
         tags={
@@ -127,7 +141,11 @@ export default async function PracticeTestPage({
         )}
       </div>
 
-      <ul className="divide-y rounded-2xl border">
+      <ul
+        lang={template.language}
+        dir={textDirection(template.language)}
+        className="divide-y rounded-2xl border"
+      >
         {template.topics.map((topic) => {
           const step = reached.get(topic.id)
 

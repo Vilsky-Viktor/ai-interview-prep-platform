@@ -27,7 +27,7 @@
   "nav": {
     "home": "prepza. home",
     "main": "Main",
-    "legal": "Legal",
+    "footer": "Footer",
     "pricing": "Pricing",
     "privacy": "Privacy",
     "terms": "Terms",
@@ -551,6 +551,7 @@
   "pricing": {
     "title": "Pricing",
     "intro": "Pay per candidate. Generating interviews is free, and there are no subscriptions.",
+    "description": "prepza pricing: generating interviews is free, and you pay only for each candidate who answers. No subscriptions or seat fees, and credits never expire.",
     "test": "Generating an interview",
     "free": "Free",
     "candidate": "Each candidate who answers at least one question",
@@ -840,6 +841,7 @@
   "faq": {
     "title": "Frequently asked questions",
     "intro": "Can't find your answer? Ask the chat at the end of this page, or write to us at the address in the privacy policy.",
+    "description": "Answers about prepza: how interviews are made from a job description, what candidates see, prices and credits, results, ATS integrations, languages and your data.",
     "chat": {
       "title": "Ask about prepza",
       "text": "Questions about features, prices, billing, the terms or privacy. The AI answers from prepza's own documents but can be wrong; the pricing page, terms and privacy policy are what count.",
@@ -862,6 +864,7 @@
   "about": {
     "title": "About us",
     "intro": "prepza helps companies find people who really know the job: a fair, timed interview made from your job description, at a price any team can afford. And anyone preparing for an interview can practise for free.",
+    "description": "prepza turns a job description into a fair, timed interview in minutes, at a price any team can afford, and lets anyone practise for interviews for free.",
     "company": {
       "title": "Why we exist",
       "problem": "Hiring often rests on a CV and a good conversation, and both can mislead. The assessment tools that help are priced for big companies, with annual plans and seat fees, so most teams go without.",
@@ -970,6 +973,7 @@
   },
   "compare": {
     "title": "Compare prepza",
+    "metaTitle": "Pre-employment testing tools compared",
     "intro": "Sourced comparisons with other pre-employment testing tools: how tests are made, what they cost and when each one fits better."
   },
   "guides": {

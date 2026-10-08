@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 
 import {
+  articleData,
   breadcrumbData,
   organizationData,
   softwareData,
@@ -52,5 +53,27 @@ describe("organizationData", () => {
 
     expect(organization.name).toBe("prepza")
     expect(website.url).toBe(SITE)
+  })
+})
+
+describe("articleData", () => {
+  it("names the article's address, picture, language and date", () => {
+    const data = articleData(SITE, {
+      title: "Hiring engineers",
+      description: "How to test engineers.",
+      path: "/de/guides/hiring-engineers",
+      updated: "2026-10-08",
+      language: "de",
+      image: `${SITE}/preview?title=Hiring+engineers&lang=de`,
+    })
+
+    expect(data).toMatchObject({
+      "@type": "Article",
+      headline: "Hiring engineers",
+      url: `${SITE}/de/guides/hiring-engineers`,
+      image: `${SITE}/preview?title=Hiring+engineers&lang=de`,
+      inLanguage: "de",
+      dateModified: "2026-10-08",
+    })
   })
 })
