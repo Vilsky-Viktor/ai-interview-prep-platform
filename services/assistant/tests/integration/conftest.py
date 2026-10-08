@@ -91,3 +91,12 @@ def user():
 @pytest.fixture
 def token(user):
     return user[1]
+
+
+@pytest.fixture(autouse=True)
+def no_openai_titles(monkeypatch):
+    """Titles come from a fake model: integration tests never call OpenAI."""
+    from app.integrations import llm
+    from tests.fake_model import FakeTitleModel
+
+    monkeypatch.setattr(llm, "get_title_model", lambda: FakeTitleModel("Your companies"))

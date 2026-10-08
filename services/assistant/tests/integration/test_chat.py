@@ -70,12 +70,15 @@ def test_a_conversation_is_streamed_saved_listed_exported_and_deleted(run, user,
         ["block"],
         *[["delta"]] * 5,
         ["done"],
+        # The first answer brings the conversation's title.
+        ["title"],
     ]
     assert first[2]["tool"]["state"] == "done"
     assert second[-1]["done"]["message_id"] == opened["messages"][-1]["id"]
     # The second turn's model reads the stored text only: tools' data isn't kept.
     assert not [m for m in model.prompts[2] if isinstance(m, ToolMessage)]
-    assert [item["title"] for item in listed] == ["My companies?"]
+    assert first[-1] == {"title": "Your companies"}
+    assert [item["title"] for item in listed] == ["Your companies"]
     assert [(m["role"], m["content"], m["status"]) for m in opened["messages"]] == [
         ("user", "My companies?", "complete"),
         ("assistant", "You have no companies yet.", "complete"),

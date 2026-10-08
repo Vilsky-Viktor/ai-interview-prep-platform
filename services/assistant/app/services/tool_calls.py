@@ -99,7 +99,8 @@ async def call_tool(
 def read(tool: Tool, response: httpx.Response, wanted: int) -> tuple[dict, object]:
     """What the model reads of a successful answer, and the trimmed data alone."""
     is_json = response.headers.get("content-type", "").startswith("application/json")
-    data = response.json() if is_json else response.text
+    # A write may answer with no body at all (204).
+    data = response.json() if is_json and response.content else response.text or None
     more = isinstance(data, list) and len(data) > wanted
 
     if more:

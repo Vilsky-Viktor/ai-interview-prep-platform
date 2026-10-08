@@ -16,7 +16,7 @@ from prepza_common.scope import SCOPE_RULE
 from app.constants.chat import COMPANY_NOT_FOUND, MAX_TOOL_STEPS, ToolState
 from app.constants.client_tools import SIGN_OUT, SIGN_OUT_DEFINITION, SIGN_OUT_FOR_MODEL
 from app.constants.tool_calls import INVALID_ARGUMENTS
-from app.constants.tool_labels import TOOL_LABELS, UNKNOWN_TOOL_LABEL
+from app.constants.tool_labels import ACTION_LABEL, TOOL_LABELS, UNKNOWN_TOOL_LABEL
 from app.helpers.blocks import reference
 from app.helpers.history import history
 from app.integrations import llm
@@ -107,7 +107,9 @@ async def ask(model, messages: list[BaseMessage], answer: Answer, emit: Emit) ->
 
 
 def tool_event(name: str, state: ToolState, language: str) -> dict:
-    label = translate(TOOL_LABELS.get(name, UNKNOWN_TOOL_LABEL), language)
+    tool = tools().get(name)
+    fallback = ACTION_LABEL if tool is not None and tool.confirm else UNKNOWN_TOOL_LABEL
+    label = translate(TOOL_LABELS.get(name, fallback), language)
 
     return {"tool": {"name": name, "state": state, "label": label}}
 
@@ -160,8 +162,11 @@ async def run_tools(calls: list[dict], turn: Turn, answer: Answer, emit: Emit) -
         if result.tool == SIGN_OUT:
             emit({"sign_out": True})
 
-        # A card to confirm isn't kept with the answer.
+        # A card to confirm isn't kept with the answer: only in Redis, until it's handled.
         pending = result.action_id is not None
+
+        if pending:
+            answer.pending.append(result.action_id)
         state = ToolState.DONE if result.succeeded or pending else ToolState.FAILED
         emit(tool_event(call["name"], state, turn.language))
 

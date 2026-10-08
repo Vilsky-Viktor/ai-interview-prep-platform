@@ -54,6 +54,8 @@ def build(name: str, entry: dict) -> Tool:
         confirm=entry.get("confirm", False),
         destructive=entry.get("destructive", False),
         preview=tuple(entry.get("preview", entry.get("body", []))),
+        subject=entry.get("subject"),
+        result_label=entry.get("result_label"),
     )
 
 

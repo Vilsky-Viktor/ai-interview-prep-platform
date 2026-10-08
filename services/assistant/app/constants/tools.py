@@ -14,9 +14,11 @@
 
 from app.constants.actions import ACTIONS
 from app.constants.company_tools import COMPANY_TOOLS
+from app.constants.detail_tools import DETAIL_TOOLS
 
 TOOLS = {
     **COMPANY_TOOLS,
+    **DETAIL_TOOLS,
     **ACTIONS,
     "get_price_catalog": {
         "service": "billing",

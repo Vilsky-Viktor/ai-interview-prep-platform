@@ -137,13 +137,14 @@ def test_preparing_runs_nothing_and_keeps_the_action_in_redis_for_ten_minutes(re
     kept = json.loads(redis.values[store.key(action_id)])
 
     assert writes == []
-    assert kept == {
+    assert {key: kept[key] for key in ("user_id", "conversation_id", "company_id", "tool")} == {
         "user_id": "ann",
         "conversation_id": str(CONVERSATION),
         "company_id": None,
         "tool": "create_company",
-        "arguments": {"name": "Acme"},
     }
+    assert kept["arguments"] == {"name": "Acme"}
+    assert kept["card"]["preview"] == {"name": "Acme"}
     assert redis.expiry[store.key(action_id)] == ACTION_TTL_SECONDS == 600
 
 
@@ -205,8 +206,13 @@ def test_only_its_user_in_its_conversation_may_confirm_it(redis, writes, user, c
 
 
 def test_a_company_no_longer_the_users_is_refused_on_confirm(redis, writes, monkeypatch):
-    turn = Turn(CONVERSATION, "ann", uuid.UUID(COMPANY), "t", "en", frozenset({COMPANY}))
-    result = asyncio.run(actions.prepare(tools()["create_company"], {"name": "A"}, turn))
+    async def get(service, path, query, token, language):
+        return httpx.Response(200, json={"name": "Acme"}, request=httpx.Request("GET", "http://x"))
+
+    monkeypatch.setattr(services, "get", get)
+    arguments = {"company_id": COMPANY, "title": "Acme 2"}
+    result = asyncio.run(actions.prepare(tools()["rename_company"], arguments, TURN))
+    assert result.block["subject"] == "Acme"
 
     async def none_left(token, language):
         return frozenset()
@@ -285,3 +291,41 @@ def test_signing_out_tells_the_panel_to_and_calls_nothing(monkeypatch):
 
     assert {"sign_out": True} in emitted
     assert answer.blocks == []
+
+
+def test_an_action_about_something_the_user_cant_see_gets_no_card(redis, writes, monkeypatch):
+    async def get(service, path, query, token, language):
+        return httpx.Response(404, json={}, request=httpx.Request("GET", "http://x"))
+
+    monkeypatch.setattr(services, "get", get)
+    interview = "11111111-1111-4111-8111-111111111111"
+    result = asyncio.run(
+        actions.prepare(tools()["delete_interview"], {"interview_id": interview}, TURN)
+    )
+
+    assert result.block is None
+    assert result.content["error"] == 404
+    assert redis.values == {}
+
+
+def test_a_list_subject_is_the_matching_item(monkeypatch):
+    members = [{"id": "m1", "email": "bo@example.com"}, {"id": "m2", "email": "cy@example.com"}]
+
+    async def get(service, path, query, token, language):
+        assert (path, query) == ("/members", {"company_id": COMPANY})
+
+        return httpx.Response(200, json=members, request=httpx.Request("GET", "http://x"))
+
+    monkeypatch.setattr(services, "get", get)
+    arguments = {"member_id": "m2", "company_id": COMPANY}
+
+    assert asyncio.run(actions.subject_of(tools()["remove_member"], arguments, "t", "en")) == (
+        "cy@example.com"
+    )
+
+
+def test_a_done_card_names_what_the_action_made(redis, writes):
+    action_id = prepared(redis)
+    *_, block = asyncio.run(actions.run(CONVERSATION, action_id, ANN, "t", "en"))
+
+    assert block["result_label"] == "Acme"

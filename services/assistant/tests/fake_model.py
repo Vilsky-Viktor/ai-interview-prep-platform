@@ -56,3 +56,17 @@ class FakeModel:
         usage = {"input_tokens": 10, "output_tokens": 5, "total_tokens": 15}
 
         yield AIMessageChunk(content="", tool_call_chunks=chunks, usage_metadata=usage)
+
+
+class FakeTitleModel:
+    """The titles' model, answering `title` (no OpenAI)."""
+
+    def __init__(self, title: str = "A chat"):
+        self.title = title
+
+    async def ainvoke(self, messages):
+        from langchain_core.messages import AIMessage
+
+        usage = {"input_tokens": 3, "output_tokens": 2, "total_tokens": 5}
+
+        return AIMessage(content=self.title, usage_metadata=usage)

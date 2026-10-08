@@ -1,7 +1,17 @@
 from app.constants.tool_calls import FORBIDDEN_PATH_PREFIXES, WRITE_METHODS
 
 # What a parameter's schema keeps for the model; the rest (titles, defaults) is noise.
-KEPT_KEYWORDS = ("type", "enum", "format", "maxLength", "minLength", "minimum", "maximum")
+KEPT_KEYWORDS = (
+    "type",
+    "enum",
+    "format",
+    "maxLength",
+    "minLength",
+    "minimum",
+    "maximum",
+    "minItems",
+    "maxItems",
+)
 
 
 def check_route(name: str, entry: dict) -> None:
@@ -32,9 +42,27 @@ def resolve(schema: dict, components: dict) -> dict:
     return schema
 
 
+def kept_schema(schema: dict, components: dict) -> dict:
+    """A value's schema as the model needs it: its keywords, and a list's items or an object's
+    values, resolved the same way."""
+    schema = resolve(schema, components)
+    kept = {key: schema[key] for key in KEPT_KEYWORDS if key in schema}
+
+    if isinstance(schema.get("items"), dict):
+        kept["items"] = kept_schema(schema["items"], components)
+
+    if isinstance(schema.get("additionalProperties"), dict):
+        kept["additionalProperties"] = kept_schema(schema["additionalProperties"], components)
+
+    if isinstance(schema.get("propertyNames"), dict):
+        kept["propertyNames"] = kept_schema(schema["propertyNames"], components)
+
+    return kept
+
+
 def parameter_schema(parameter: dict, components: dict) -> dict:
     schema = resolve(parameter["schema"], components)
-    kept = {key: schema[key] for key in KEPT_KEYWORDS if key in schema}
+    kept = kept_schema(schema, components)
     description = parameter.get("description") or schema.get("description")
 
     if description:

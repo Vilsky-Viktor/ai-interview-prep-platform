@@ -1,8 +1,10 @@
 import uuid
 from uuid import UUID
 
+import httpx
 from fastapi import HTTPException, status
 from prepza_common.constants import HOUR_SECONDS
+from prepza_common.i18n import translate
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 from prepza_common.user import User
@@ -14,10 +16,12 @@ from app.constants.actions_flow import (
     FAILED,
     PENDING,
     PENDING_FOR_MODEL,
+    SUBJECT_NOT_FOUND,
 )
 from app.constants.chat import SESSION_EXPIRED
 from app.constants.limits import ACTIONS_PER_USER_HOUR
-from app.helpers.arguments import problems
+from app.helpers.arguments import fill_path, problems
+from app.integrations import services
 from app.integrations.redis import get_redis
 from app.models.answers import Turn
 from app.models.tools import Tool, ToolResult
@@ -30,8 +34,8 @@ from app.storage import actions
 
 
 def card(action_id: UUID, tool: Tool, arguments: dict, state: str, **more) -> dict:
-    """The confirmation card's block: the action, the arguments it shows (exactly what runs),
-    whether it can't be undone, and its state."""
+    """The confirmation card's block: the action, what it's about (`subject`), the arguments it
+    shows (exactly what runs), whether it can't be undone, and its state."""
     shown = {name: arguments[name] for name in tool.preview if arguments.get(name) is not None}
 
     return {
@@ -48,9 +52,41 @@ def card(action_id: UUID, tool: Tool, arguments: dict, state: str, **more) -> di
     }
 
 
+async def subject_of(tool: Tool, arguments: dict, token: str, language: str) -> str | None:
+    """What the action is about, as the user may see it (a company's name, an interview's
+    title), read with their token; raises LookupError when it's not theirs or is gone."""
+    entry = tool.subject
+
+    if entry is None:
+        return None
+
+    path = fill_path(entry["path"], arguments)
+    query = {name: arguments[name] for name in entry.get("query", []) if name in arguments}
+
+    try:
+        response = await services.get(entry["service"], path, query, token, language)
+    except httpx.HTTPError:
+        return None
+
+    if not response.is_success:
+        raise LookupError
+
+    data = response.json()
+
+    if isinstance(data, list):
+        wanted = str(arguments[entry["match"]])
+        data = next((item for item in data if str(item.get("id")) == wanted), None)
+
+        if data is None:
+            raise LookupError
+
+    return data.get(entry["field"]) if isinstance(data, dict) else None
+
+
 async def prepare(tool: Tool, arguments: dict, turn: Turn) -> ToolResult:
     """What the model asked for, kept (in Redis, for a short while) for the user to confirm: bound
-    to them, the conversation and the company. Nothing runs yet."""
+    to them, the conversation and the company. Nothing runs yet; what it's about is read with
+    the user's token to name it on the card, and must be theirs to see."""
     found = problems(arguments, tool.parameters)
 
     if found:
@@ -58,18 +94,29 @@ async def prepare(tool: Tool, arguments: dict, turn: Turn) -> ToolResult:
 
         return ToolResult(tool.name, arguments, None, content, None, 0)
 
+    try:
+        subject = await subject_of(tool, arguments, turn.token, turn.language)
+    except LookupError:
+        content = {"error": 404, "detail": translate(SUBJECT_NOT_FOUND, turn.language)}
+
+        return ToolResult(tool.name, arguments, None, content, None, 0)
+
     action_id = uuid.uuid4()
-    company_id = arguments.get("company_id") or (str(turn.company_id) if turn.company_id else None)
+    company_id = arguments.get("company_id")
+    block = card(action_id, tool, arguments, PENDING, subject=subject)
     pending = {
         "user_id": turn.user_id,
         "conversation_id": str(turn.conversation_id),
+        # The company it changes (checked again on confirm), and the panel's company, for the
+        # link its result opens.
         "company_id": company_id,
+        "context_company_id": company_id or (str(turn.company_id) if turn.company_id else None),
         "tool": tool.name,
         "arguments": arguments,
+        "card": block,
     }
     await actions.save(action_id, pending)
     content = {"pending_confirmation": True, "detail": PENDING_FOR_MODEL}
-    block = card(action_id, tool, arguments, PENDING)
 
     return ToolResult(tool.name, arguments, None, content, block, 0, action_id)
 
@@ -128,7 +175,7 @@ async def run(
     tool = tools()[pending["tool"]]
     arguments = pending["arguments"]
     result = await call_tool(
-        tool.name, arguments, token, language, pending["company_id"], str(action_id)
+        tool.name, arguments, token, language, pending["context_company_id"], str(action_id)
     )
 
     # The service refused the token: nothing ran, so it can be confirmed again once refreshed.
@@ -136,13 +183,15 @@ async def run(
         await actions.put_back(action_id, pending)
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, SESSION_EXPIRED)
 
-    links = result.block["links"] if result.succeeded and result.block else []
-    state = DONE if result.succeeded else FAILED
-    detail = None if result.succeeded else result.content.get("detail")
+    done = result.succeeded
+    data = result.content.get("data") if done else None
+    label = data.get(tool.result_label) if tool.result_label and isinstance(data, dict) else None
+    block = {
+        **pending["card"],
+        "state": DONE if done else FAILED,
+        "links": result.block["links"] if done and result.block else [],
+        "result_label": label,
+        "detail": None if done else result.content.get("detail"),
+    }
 
-    return (
-        tool,
-        pending,
-        result,
-        card(action_id, tool, arguments, state, links=links, detail=detail),
-    )
+    return tool, pending, result, block

@@ -26,6 +26,7 @@ from app.services import limits, titles
 from app.services.chat import Emit, SessionExpired, build_messages, converse
 from app.services.conversations import open_conversation
 from app.services.tenancy import require_company, user_companies
+from app.storage import actions as pending_actions
 from app.storage import conversations, messages
 
 logger = logging.getLogger(__name__)
@@ -128,6 +129,10 @@ async def run_turn(turn: Turn, prompt: list, emit: Emit) -> None:
 
     try:
         message_id = await messages.add_answer(turn.conversation_id, answer, status)
+
+        # Its cards show under it again when the conversation is opened, while they wait.
+        for action_id in answer.pending:
+            await pending_actions.attach(action_id, message_id)
 
         if error is None:
             last = {"done": {"message_id": str(message_id)}}

@@ -25,6 +25,10 @@ class Tool:
     confirm: bool = False
     destructive: bool = False
     preview: tuple[str, ...] = ()
+    # What the action is about, named on its card (see constants/actions.py), and the result's
+    # field naming what it made.
+    subject: dict | None = None
+    result_label: str | None = None
 
     @property
     def parameters(self) -> dict:

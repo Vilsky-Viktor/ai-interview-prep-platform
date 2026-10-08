@@ -9,7 +9,7 @@ from app.constants.chat import NOT_FOUND, RESTORE_MINUTES
 from app.schemas.conversations import ConversationDetailOut, ConversationOut, MessageOut
 from app.services.conversations import open_conversation
 from app.services.live_blocks import live
-from app.storage import conversations, messages
+from app.storage import actions, conversations, messages
 
 router = APIRouter(prefix="/conversations", tags=["conversations"])
 
@@ -53,9 +53,21 @@ async def get_conversation(
     language = request_language(request)
     conversation = await open_conversation(conversation_id, user.uid, token, language)
     found = await messages.of_conversation(conversation.id)
+    # Cards still waiting for the user's confirmation (in Redis for a while), by their answer.
+    cards: dict[str, list] = {}
+
+    for pending in await actions.of_conversation(conversation.id):
+        if pending["user_id"] == user.uid and pending.get("message_id"):
+            cards.setdefault(pending["message_id"], []).append(pending["card"])
+
     shown = [
         MessageOut.model_validate(item).model_copy(
-            update={"blocks": await live(item.blocks, token, language)}
+            update={
+                "blocks": [
+                    *await live(item.blocks, token, language),
+                    *cards.get(str(item.id), []),
+                ]
+            }
         )
         for item in found
     ]

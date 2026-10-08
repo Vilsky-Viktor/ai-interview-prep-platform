@@ -1,7 +1,12 @@
 import json
 from uuid import UUID
 
-from app.constants.actions_flow import ACTION_KEY, ACTION_TTL_SECONDS, USER_ACTIONS_KEY
+from app.constants.actions_flow import (
+    ACTION_KEY,
+    ACTION_TTL_SECONDS,
+    CONVERSATION_ACTIONS_KEY,
+    USER_ACTIONS_KEY,
+)
 from app.integrations.redis import get_redis
 
 
@@ -11,13 +16,19 @@ def key(action_id: UUID) -> str:
 
 async def save(action_id: UUID, pending: dict) -> None:
     """A prepared action, for ACTION_TTL_SECONDS: whose it is (user, conversation, company), the
-    tool and its exact arguments."""
-    mine = USER_ACTIONS_KEY.format(user_id=pending["user_id"])
+    tool, its exact arguments and its card; indexed by its user and its conversation."""
+    indexes = [
+        USER_ACTIONS_KEY.format(user_id=pending["user_id"]),
+        CONVERSATION_ACTIONS_KEY.format(conversation_id=pending["conversation_id"]),
+    ]
 
     async with get_redis().pipeline(transaction=True) as pipe:
         pipe.set(key(action_id), json.dumps(pending), ex=ACTION_TTL_SECONDS)
-        pipe.sadd(mine, str(action_id))
-        pipe.expire(mine, ACTION_TTL_SECONDS)
+
+        for index in indexes:
+            pipe.sadd(index, str(action_id))
+            pipe.expire(index, ACTION_TTL_SECONDS)
+
         await pipe.execute()
 
 
@@ -25,6 +36,25 @@ async def peek(action_id: UUID) -> dict | None:
     found = await get_redis().get(key(action_id))
 
     return json.loads(found) if found else None
+
+
+async def attach(action_id: UUID, message_id: UUID) -> None:
+    """Names the answer that prepared it, once that's saved, so its card shows under it again;
+    nothing when it's gone meanwhile."""
+    pending = await peek(action_id)
+
+    if pending is not None:
+        pending["message_id"] = str(message_id)
+        await get_redis().set(key(action_id), json.dumps(pending), keepttl=True, xx=True)
+
+
+async def of_conversation(conversation_id: UUID) -> list[dict]:
+    """The conversation's actions still waiting for confirmation."""
+    redis = get_redis()
+    ids = await redis.smembers(CONVERSATION_ACTIONS_KEY.format(conversation_id=conversation_id))
+    found = [await peek(UUID(item.decode())) for item in ids]
+
+    return [pending for pending in found if pending is not None]
 
 
 async def claim(action_id: UUID) -> dict | None:

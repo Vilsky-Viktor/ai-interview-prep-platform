@@ -1,5 +1,5 @@
 # What the panel shows while a tool runs, by tool; translated by its English text (prepza_common's
-# messages). A new tool needs its label here and in every language.
+# messages). A new read needs its label here and in every language; actions share one.
 
 TOOL_LABELS = {
     "list_companies": "Reading your companies…",
@@ -30,10 +30,19 @@ TOOL_LABELS = {
     "get_template": "Reading the template…",
     "get_faq": "Reading the FAQ…",
     "get_platform_guide": "Reading prepza's guide…",
-    # Actions: preparing the card the user confirms.
-    "create_company": "Preparing the company…",
+    "list_topic_questions": "Reading the questions…",
+    "list_question_reports": "Reading the question's reports…",
+    "list_audit_events": "Reading the audit log…",
+    "get_email_preferences": "Reading your email settings…",
+    "list_copyable_templates": "Searching templates…",
+    "list_ats_stages": "Reading the job's stages…",
+    "list_news": "Reading prepza's news…",
+    "list_practice_rounds": "Reading your practice rounds…",
+    "get_practice_progress": "Reading your practice progress…",
     # The panel's own: signing out.
     "sign_out": "Signing out…",
 }
+# Every action, while its card is prepared.
+ACTION_LABEL = "Preparing it for you to confirm…"
 # For a tool the model made up.
 UNKNOWN_TOOL_LABEL = "Working…"

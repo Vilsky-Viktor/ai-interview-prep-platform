@@ -14,6 +14,8 @@ class Answer:
     results: list[ToolResult] = field(default_factory=list)
     input_tokens: int = 0
     output_tokens: int = 0
+    # The actions it prepared, waiting for the user's confirmation (kept in Redis only).
+    pending: list = field(default_factory=list)
 
     @property
     def content(self) -> str:

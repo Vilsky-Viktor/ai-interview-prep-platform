@@ -4,6 +4,7 @@ import httpx
 import pytest
 
 from app.integrations import services
+from app.services.registry import tools
 from app.services.tool_calls import call_tool, call_tools
 
 COMPANY = "8c1d2b8e-1a2b-4c3d-8e9f-0a1b2c3d4e5f"
@@ -130,7 +131,7 @@ def test_a_service_that_doesnt_answer_is_an_error_too(calls, error, status):
 
 def test_refused_arguments_and_unknown_tools_call_nothing(calls):
     bad = run("get_company", {"company_id": "../internal/users"})
-    unknown = run("delete_company", {"company_id": COMPANY})
+    unknown = run("drop_everything", {"company_id": COMPANY})
 
     assert calls == []
     assert bad.content["error"] == 422
@@ -156,3 +157,16 @@ def test_a_steps_calls_run_at_most_four_at_a_time_in_order(monkeypatch):
 
     assert most == 4
     assert [result.tool for result in results] == names
+
+
+def test_a_write_answered_without_a_body_reads_as_nothing():
+    from app.services.tool_calls import read
+
+    tool = tools()["delete_interview"]
+    response = httpx.Response(
+        204,
+        headers={"content-type": "application/json"},
+        request=httpx.Request("DELETE", "http://x"),
+    )
+
+    assert read(tool, response, 20)[1] is None

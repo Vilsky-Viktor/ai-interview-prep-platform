@@ -51,7 +51,7 @@ def test_deleting_an_account_deletes_its_pending_actions(run):
 
     async def scenario():
         for action_id in ids:
-            await actions.save(action_id, {"user_id": user_id})
+            await actions.save(action_id, {"user_id": user_id, "conversation_id": "c"})
 
         await actions.delete_user(user_id)
 
@@ -107,3 +107,34 @@ def test_a_confirmed_company_is_created_once_as_the_user_and_nothing_of_it_is_st
     # The action's arguments and result were never written to the database.
     assert all(name not in json.dumps(call.arguments) for call in stored)
     assert all(call.result is None for call in stored)
+
+
+def test_a_pending_card_comes_back_with_its_answer_until_its_handled(run, user, monkeypatch):
+    _, token = user
+    model = FakeModel(calls(("create_company", {"name": "Later Ltd"})), text("Here it is:"))
+    monkeypatch.setattr(llm, "get_chat_model", lambda: model)
+    headers = {"Authorization": f"Bearer {token}", "Accept-Language": "en"}
+
+    async def scenario():
+        async with client() as api:
+            asked = events(
+                (
+                    await api.post("/chat", json={"message": "Create Later Ltd"}, headers=headers)
+                ).text
+            )
+            conversation_id = asked[0]["conversation"]["id"]
+            [card] = [event["block"] for event in asked if "block" in event]
+            opened = (await api.get(f"/conversations/{conversation_id}", headers=headers)).json()
+            path = f"/conversations/{conversation_id}/actions/{card['action_id']}"
+            await api.post(f"{path}/cancel", headers=headers)
+            after = (await api.get(f"/conversations/{conversation_id}", headers=headers)).json()
+
+        return card, opened, after
+
+    card, opened, after = run(scenario())
+
+    answer = opened["messages"][-1]
+    assert answer["role"] == "assistant"
+    assert [block["action_id"] for block in answer["blocks"]] == [card["action_id"]]
+    assert answer["blocks"][0]["preview"] == {"name": "Later Ltd"}
+    assert after["messages"][-1]["blocks"] == []
