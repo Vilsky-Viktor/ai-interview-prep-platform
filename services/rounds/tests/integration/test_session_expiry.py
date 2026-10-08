@@ -11,7 +11,7 @@ from app.models.sessions import Session
 from app.services import session_expiry
 from app.storage import sessions
 from app.storage.db import Session as Db
-from tests.integration.factories import topic
+from tests.integration.factories import option_index, topic
 
 
 async def interview(started_minutes_ago: float):
@@ -77,7 +77,7 @@ def test_the_last_section_finishing_announces_the_interview_with_its_answers(run
             Answer(
                 session_id=rows[0].id,
                 question_id=uuid.UUID(question["id"]),
-                option_index=0,
+                option_index=option_index(question, True),
                 correct=True,
                 score=100,
             )

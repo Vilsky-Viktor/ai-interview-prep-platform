@@ -77,3 +77,35 @@ def test_a_rescore_looks_only_at_the_questions_interview_and_tells_companies(run
 
     assert (elsewhere, changed) == (0, 1)
     assert {"candidate_invite_ids": [str(invite_id)]} in events
+
+
+def test_an_answer_checked_before_a_rescore_but_saved_after_it_is_marked_on_the_new_key(run):
+    async def scenario():
+        [session] = await sessions.create_many("cand", uuid.uuid4(), [topic(size=1)], 60)
+        question = session.questions[0]
+        # Checked against the old key, where "right" is right; a rescore lands before it's saved.
+        checked = Answer(
+            session_id=session.id,
+            question_id=uuid.UUID(question["id"]),
+            option_index=option_index(question, True),
+            correct=True,
+            score=100,
+        )
+        corrected = [{"answer": "right", "correct": False}, {"answer": "wrong", "correct": True}]
+        await rescore.rescore_question(question["id"], question["text"], corrected)
+        await sessions.add_answer(checked, ("answer.recorded", {"question_id": question["id"]}))
+
+        async with Db() as db:
+            event = await db.scalar(
+                select(OutboxEvent.data).where(
+                    OutboxEvent.data["question_id"].astext == question["id"]
+                )
+            )
+
+        return await sessions.get(session.id), event
+
+    after, event = run(scenario())
+
+    [answer] = after.answers
+    assert answer.correct is False and answer.score == 0
+    assert event["correct"] is False

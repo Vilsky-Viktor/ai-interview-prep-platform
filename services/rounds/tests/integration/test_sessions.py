@@ -3,7 +3,7 @@ import uuid
 
 from app.models.answers import Answer
 from app.storage import sessions
-from tests.integration.factories import topic
+from tests.integration.factories import option_index, topic
 
 
 def timed_out(session_id, question_id):
@@ -135,7 +135,11 @@ def test_a_finished_section_takes_no_more_answers_and_is_scored_from_its_saved_o
         [row] = await sessions.create_many("cand", uuid.uuid4(), [topic(4)], 60)
         first, second = (uuid.UUID(question["id"]) for question in row.questions[:2])
         right = Answer(
-            session_id=row.id, question_id=first, option_index=0, correct=True, score=100
+            session_id=row.id,
+            question_id=first,
+            option_index=option_index(row.questions[0], True),
+            correct=True,
+            score=100,
         )
         await sessions.add_answer(right)
         await sessions.finish(row.id)
@@ -170,12 +174,12 @@ def test_scores_add_up_every_section_its_signals_and_fast_answers(run):
         rows = await sessions.create_many("cand", invite_id, [topic(2), topic(2)], 60)
         await sessions.create_many("cand", other_id, [topic(2)], 60)
 
-        for row, (option_index, score, seconds) in zip(rows, [(0, 100, 1), (1, 0, 20)]):
+        for row, (score, seconds) in zip(rows, [(100, 1), (0, 20)]):
             await sessions.add_answer(
                 Answer(
                     session_id=row.id,
                     question_id=uuid.UUID(row.questions[0]["id"]),
-                    option_index=option_index,
+                    option_index=option_index(row.questions[0], bool(score)),
                     correct=bool(score),
                     score=score,
                     seconds=seconds,
