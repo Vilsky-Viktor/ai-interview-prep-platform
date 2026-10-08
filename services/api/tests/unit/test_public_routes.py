@@ -125,3 +125,15 @@ def test_the_public_reference_lists_only_the_public_api(client):
         "/interviews/{interview_id}/candidates/{candidate_id}",
     }
     assert list(spec["webhooks"]) == ["candidate.finished"]
+
+
+def test_the_reference_says_results_must_not_reject_candidates_automatically(client):
+    spec = client.get("/openapi.json").json()
+    candidate = spec["components"]["schemas"]["Candidate"]["properties"]
+
+    assert "don't reject candidates automatically" in spec["info"]["description"].lower()
+    assert "reject a candidate automatically" in candidate["passed"]["description"]
+    assert (
+        "reject a candidate automatically"
+        in spec["components"]["schemas"]["Signals"]["description"]
+    )

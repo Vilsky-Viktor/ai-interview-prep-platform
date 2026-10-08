@@ -50,7 +50,7 @@ FAQ = [
     {
         "key": "expire",
         "question": "Os créditos expiram?",
-        "answer": "Não. Os créditos nunca expiram, e não há assinaturas nem renovações.",
+        "answer": "Não. Os créditos nunca expiram, e não há assinaturas pagas. Se você ativar a recarga automática opcional, a Paddle salva seu cartão como uma assinatura de US$ 0; você paga só pelas recargas que ela fizer.",
     },
     {
         "key": "refunds",

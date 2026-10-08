@@ -84,6 +84,14 @@ def test_faq_names_no_competitor_prices():
         assert "215" not in answer and "100" not in answer, language
 
 
+def test_faq_says_automatic_top_up_saves_the_card_as_a_free_subscription():
+    # Automatic top-up is a $0 Paddle subscription, so no language may say there are none.
+    for language, items in FAQS.items():
+        answer = next(item["answer"] for item in items if item["key"] == "expire")
+
+        assert "Paddle" in answer, language
+
+
 def test_faq_still_shows_when_billing_is_down(client, monkeypatch):
     monkeypatch.setattr("app.routers.help.billing.catalog", fake_catalog(None))
 

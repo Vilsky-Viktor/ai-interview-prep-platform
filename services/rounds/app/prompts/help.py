@@ -75,7 +75,8 @@ invite is revoked, never used, or the candidate answers nothing.
 for a company you belong to. Larger top-ups buy more credits per dollar, \
 so a candidate costs less (see prices). Payments go through Paddle, which issues the receipt.
 - Automatic top-up, optional, on the top-up page: choose a top-up and a balance to refill \
-under; the card is saved through Paddle.
+under. Turning it on saves the card through Paddle as a $0 subscription; only the top-ups \
+it makes are charged.
 - Referrals: a company's link is in its referrals tab. Both companies get credits on the \
 newcomer's first top-up, of any amount (see prices).
 

@@ -50,7 +50,7 @@ FAQ = [
     {
         "key": "expire",
         "question": "Czy kredyty wygasają?",
-        "answer": "Nie. Kredyty nigdy nie wygasają i nie ma abonamentu ani odnowień.",
+        "answer": "Nie. Kredyty nigdy nie wygasają i nie ma płatnego abonamentu. Jeśli włączysz opcjonalne automatyczne doładowanie, Paddle zapisze Twoją kartę jako subskrypcję za 0 USD; płacisz tylko za wykonane doładowania.",
     },
     {
         "key": "refunds",

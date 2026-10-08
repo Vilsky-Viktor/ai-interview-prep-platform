@@ -17,7 +17,10 @@ class Interview(BaseModel):
 
 
 class Signals(BaseModel):
-    """Integrity signals recorded while the candidate answered."""
+    """Integrity signals recorded while the candidate answered.
+
+    They can have innocent causes; never reject a candidate automatically on them.
+    """
 
     tab_leaves: int = Field(description="How many times the candidate left the page")
     copies: int = Field(description="How many times the candidate tried to copy text")
@@ -35,7 +38,10 @@ class Candidate(BaseModel):
         description="Final grade in percent; null until the candidate finishes"
     )
     passed: bool | None = Field(
-        description="Whether the grade reached the pass mark; null until the candidate finishes"
+        description=(
+            "Whether the grade reached the pass mark; null until the candidate finishes. It "
+            "supports a person's decision: don't reject a candidate automatically on it"
+        )
     )
     signals: Signals
     results_url: str = Field(description="Link to the candidate's full results in prepza")

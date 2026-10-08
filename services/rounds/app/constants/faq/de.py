@@ -50,7 +50,7 @@ FAQ = [
     {
         "key": "expire",
         "question": "Verfallen Credits?",
-        "answer": "Nein. Credits verfallen nie, und es gibt keine Abos oder Verlängerungen.",
+        "answer": "Nein. Credits verfallen nie, und es gibt keine kostenpflichtigen Abos. Wenn du das optionale automatische Aufladen einschaltest, speichert Paddle deine Karte als Abo für 0 $; du zahlst nur die Aufladungen, die es vornimmt.",
     },
     {
         "key": "refunds",

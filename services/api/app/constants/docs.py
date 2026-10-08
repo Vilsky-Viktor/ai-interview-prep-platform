@@ -5,6 +5,12 @@ API_DESCRIPTION = """The prepza API connects prepza to your own platform. Use it
 company's interviews, invite candidates and read their results, and receive a web hook as soon as
 a candidate finishes.
 
+## Results support a person's decision
+
+A candidate's `grade`, `passed` and `signals` help a person decide; they are not a decision.
+Don't reject candidates automatically on them: before rejecting anyone, a person should open the
+candidate's full results (`results_url`) and review them.
+
 ## Getting an API key
 
 1. Sign in to prepza as an owner or admin of your company.

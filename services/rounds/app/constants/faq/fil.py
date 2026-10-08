@@ -50,7 +50,7 @@ FAQ = [
     {
         "key": "expire",
         "question": "Nag-e-expire ba ang credits?",
-        "answer": "Hindi. Hindi kailanman nag-e-expire ang credits, at walang subscription o renewal.",
+        "answer": "Hindi. Hindi kailanman nag-e-expire ang credits, at walang bayad na subscription. Kung bubuksan mo ang opsyonal na awtomatikong top-up, ise-save ng Paddle ang card mo bilang $0 na subscription; ang mga top-up lang na ginagawa nito ang babayaran mo.",
     },
     {
         "key": "refunds",

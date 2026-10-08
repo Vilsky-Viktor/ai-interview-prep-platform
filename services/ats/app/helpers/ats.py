@@ -139,6 +139,7 @@ def result_comment(title: str, grade: int | None, passed: bool, flagged: bool, l
     if flagged:
         lines.append("Integrity flags: yes, see the scorecard.")
 
+    lines.append("A person decides: don't reject automatically on this result.")
     lines.append(f"Scorecard: {link}")
 
     return "\n".join(lines)

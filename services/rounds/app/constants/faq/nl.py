@@ -50,7 +50,7 @@ FAQ = [
     {
         "key": "expire",
         "question": "Verlopen credits?",
-        "answer": "Nee. Credits verlopen nooit, en er zijn geen abonnementen of verlengingen.",
+        "answer": "Nee. Credits verlopen nooit, en er zijn geen betaalde abonnementen. Zet je het optionele automatisch opwaarderen aan, dan bewaart Paddle je kaart als abonnement van $ 0; je betaalt alleen de opwaarderingen die het doet.",
     },
     {
         "key": "refunds",

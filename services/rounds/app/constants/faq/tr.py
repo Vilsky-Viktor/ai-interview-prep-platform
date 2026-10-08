@@ -50,7 +50,7 @@ FAQ = [
     {
         "key": "expire",
         "question": "Kredilerin süresi dolar mı?",
-        "answer": "Hayır. Kredilerin süresi asla dolmaz; abonelik veya yenileme yoktur.",
+        "answer": "Hayır. Kredilerin süresi asla dolmaz; ücretli abonelik yoktur. İsteğe bağlı otomatik yüklemeyi açarsanız Paddle kartınızı 0 $'lık bir abonelik olarak kaydeder; yalnızca yapılan yüklemeler için ödersiniz.",
     },
     {
         "key": "refunds",

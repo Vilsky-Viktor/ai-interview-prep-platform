@@ -42,13 +42,14 @@ def test_only_bodies_signed_with_the_token_count_in_hex_or_base64():
     assert not workable_signed(TOKEN, body + b" ", sign(body))
 
 
-def test_the_results_comment_says_the_grade_the_outcome_and_where_the_scorecard_is():
+def test_the_results_comment_says_the_grade_the_outcome_where_the_scorecard_is_and_who_decides():
     text = result_comment("Accountant", 82, True, True, "https://prepza.ai/s/1")
 
     assert text.splitlines() == [
         "prepza: Accountant",
         "Grade: 82% (passed)",
         "Integrity flags: yes, see the scorecard.",
+        "A person decides: don't reject automatically on this result.",
         "Scorecard: https://prepza.ai/s/1",
     ]
     assert "below the passing grade" in result_comment("A", 40, False, False, "x")

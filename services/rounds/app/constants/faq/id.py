@@ -50,7 +50,7 @@ FAQ = [
     {
         "key": "expire",
         "question": "Apakah kredit bisa kedaluwarsa?",
-        "answer": "Tidak. Kredit tidak pernah kedaluwarsa, dan tidak ada langganan atau perpanjangan.",
+        "answer": "Tidak. Kredit tidak pernah kedaluwarsa, dan tidak ada langganan berbayar. Jika Anda menyalakan isi ulang otomatis yang opsional, Paddle menyimpan kartu Anda sebagai langganan $0; Anda hanya membayar isi ulang yang dilakukannya.",
     },
     {
         "key": "refunds",
