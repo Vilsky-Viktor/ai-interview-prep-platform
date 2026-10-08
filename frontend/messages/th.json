@@ -135,6 +135,7 @@
     "replaced": "แทนที่แล้ว",
     "noFlagged": "ขณะนี้ไม่มีคำถามที่ถูกแจ้ง",
     "noReplaced": "ยังไม่มีคำถามที่ถูกแทนที่",
+    "replacedWith": "แทนที่ด้วย",
     "answers": "{count, plural, other {# คำตอบ}}",
     "right": "ถูก {percent}%",
     "reports": "{count, plural, =0 {ไม่มีรายงาน} other {# รายงาน}}",

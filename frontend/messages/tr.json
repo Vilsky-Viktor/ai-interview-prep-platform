@@ -135,6 +135,7 @@
     "replaced": "Değiştirilenler",
     "noFlagged": "Şu anda işaretli bir şey yok.",
     "noReplaced": "Henüz hiçbir şey değiştirilmedi.",
+    "replacedWith": "Yerine gelen",
     "answers": "{count, plural, one {# cevap} other {# cevap}}",
     "right": "%{percent} doğru",
     "reports": "{count, plural, =0 {bildirim yok} one {# bildirim} other {# bildirim}}",

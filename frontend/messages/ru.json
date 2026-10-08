@@ -135,6 +135,7 @@
     "replaced": "Заменённые",
     "noFlagged": "Сейчас ничего не отмечено.",
     "noReplaced": "Пока ничего не заменено.",
+    "replacedWith": "Заменён на",
     "answers": "{count, plural, one {# ответ} few {# ответа} many {# ответов} other {# ответа}}",
     "right": "{percent}% верно",
     "reports": "{count, plural, =0 {нет жалоб} one {# жалоба} few {# жалобы} many {# жалоб} other {# жалобы}}",

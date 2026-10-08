@@ -135,6 +135,7 @@
     "replaced": "Vervangen",
     "noFlagged": "Er is nu niets gemarkeerd.",
     "noReplaced": "Er is nog niets vervangen.",
+    "replacedWith": "Vervangen door",
     "answers": "{count, plural, one {# antwoord} other {# antwoorden}}",
     "right": "{percent}% goed",
     "reports": "{count, plural, =0 {geen meldingen} one {# melding} other {# meldingen}}",

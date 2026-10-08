@@ -52,8 +52,12 @@ async def list_replaced(superadmin: SuperadminUser, page: PageParams) -> list[Re
             set_title=question_set.title,
             set_kind=question_set.kind,
             at=revision.replaced_at,
+            new_text=new_text,
+            new_options=new_options,
         )
-        for revision, question_set in await quality_report.replaced(page.offset, page.limit)
+        for revision, question_set, (new_text, new_options) in await quality_report.replaced(
+            page.offset, page.limit
+        )
     ]
 
 

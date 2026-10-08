@@ -135,6 +135,7 @@
     "replaced": "Đã thay thế",
     "noFlagged": "Hiện không có gì bị đánh dấu.",
     "noReplaced": "Chưa có gì được thay thế.",
+    "replacedWith": "Được thay bằng",
     "answers": "{count, plural, other {# câu trả lời}}",
     "right": "{percent}% đúng",
     "reports": "{count, plural, =0 {không có báo cáo} other {# báo cáo}}",

@@ -135,6 +135,7 @@
     "replaced": "已替换",
     "noFlagged": "目前没有被标记的题目。",
     "noReplaced": "还没有被替换的题目。",
+    "replacedWith": "替换为",
     "answers": "{count, plural, other {# 次作答}}",
     "right": "正确率 {percent}%",
     "reports": "{count, plural, =0 {无举报} other {# 条举报}}",

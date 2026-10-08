@@ -135,6 +135,7 @@
     "replaced": "مُستبدَلة",
     "noFlagged": "لا يوجد شيء مُعلَّم حاليًا.",
     "noReplaced": "لم يُستبدَل شيء بعد.",
+    "replacedWith": "استُبدل بـ",
     "answers": "{count, plural, zero {لا إجابات} one {إجابة واحدة} two {إجابتان} few {# إجابات} many {# إجابةً} other {# إجابة}}",
     "right": "{percent}٪ صحيحة",
     "reports": "{count, plural, =0 {لا بلاغات} zero {لا بلاغات} one {بلاغ واحد} two {بلاغان} few {# بلاغات} many {# بلاغًا} other {# بلاغ}}",

@@ -135,6 +135,7 @@
     "replaced": "הוחלפו",
     "noFlagged": "אין כרגע שום דבר מסומן.",
     "noReplaced": "עדיין לא הוחלף דבר.",
+    "replacedWith": "הוחלפה ב",
     "answers": "{count, plural, one {תשובה אחת} two {# תשובות} other {# תשובות}}",
     "right": "{percent}% נכונות",
     "reports": "{count, plural, =0 {אין דיווחים} one {דיווח אחד} two {# דיווחים} other {# דיווחים}}",

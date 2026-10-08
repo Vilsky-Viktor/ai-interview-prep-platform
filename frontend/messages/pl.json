@@ -135,6 +135,7 @@
     "replaced": "Zastąpione",
     "noFlagged": "Obecnie nic nie jest oznaczone.",
     "noReplaced": "Nic jeszcze nie zastąpiono.",
+    "replacedWith": "Zastąpione przez",
     "answers": "{count, plural, one {# odpowiedź} few {# odpowiedzi} many {# odpowiedzi} other {# odpowiedzi}}",
     "right": "{percent}% poprawnych",
     "reports": "{count, plural, =0 {brak zgłoszeń} one {# zgłoszenie} few {# zgłoszenia} many {# zgłoszeń} other {# zgłoszenia}}",

@@ -8,6 +8,7 @@ import { toast } from "sonner"
 import { AnswerOptions } from "@/components/questions/answer-options"
 import { QuestionReports } from "@/components/questions/question-reports"
 import { QuestionText } from "@/components/questions/question-text"
+import { ReplacementDialog } from "@/components/superadmin/replacement-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { VirtualList } from "@/components/virtual-list"
@@ -133,6 +134,12 @@ export function QualityList({
                 </button>
               ) : (
                 <span>{t("reports", { count: row.reports })}</span>
+              )}
+              {row.new_text && (
+                <ReplacementDialog
+                  text={row.new_text}
+                  options={row.new_options ?? []}
+                />
               )}
               {row.actionable && (
                 <span className="flex gap-2 pt-1">

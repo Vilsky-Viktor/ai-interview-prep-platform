@@ -27,9 +27,11 @@ async def flagged(offset: int, limit: int) -> list:
 
 
 async def replaced(offset: int, limit: int) -> list:
-    """Questions the verifier or an owner replaced, newest first: the old content and its set."""
+    """Questions the verifier or an owner replaced, newest first: the old content, its set, and
+    what replaced it — the question's next kept revision, or its current content if it hasn't
+    been replaced again since."""
     query = (
-        select(QuestionRevision, QuestionSet)
+        select(QuestionRevision, QuestionSet, Question)
         .join(Question, Question.id == QuestionRevision.question_id)
         .join(Topic, Topic.id == Question.topic_id)
         .join(QuestionSet, QuestionSet.id == Topic.set_id)
@@ -39,7 +41,37 @@ async def replaced(offset: int, limit: int) -> list:
     )
 
     async with Session() as session:
-        return list(await session.execute(query))
+        rows = list(await session.execute(query))
+        later = await session.scalars(
+            select(QuestionRevision)
+            .where(QuestionRevision.question_id.in_({row[0].question_id for row in rows}))
+            .order_by(QuestionRevision.replaced_at, QuestionRevision.id)
+        )
+        versions = list(later)
+
+    return [
+        (revision, question_set, replacement(revision, question, versions))
+        for revision, question_set, question in rows
+    ]
+
+
+def replacement(revision, question, versions) -> tuple[str, list]:
+    """The text and options that replaced `revision`: the next kept revision of its question, or
+    the question as it is now."""
+    following = next(
+        (
+            version
+            for version in versions
+            if version.question_id == revision.question_id
+            and version.replaced_at > revision.replaced_at
+        ),
+        None,
+    )
+
+    if following is not None:
+        return following.text, following.options
+
+    return question.text, question.options
 
 
 async def revision(revision_id) -> QuestionRevision | None:

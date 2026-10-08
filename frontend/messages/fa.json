@@ -135,6 +135,7 @@
     "replaced": "جایگزین‌شده",
     "noFlagged": "اکنون چیزی علامت نخورده است.",
     "noReplaced": "هنوز چیزی جایگزین نشده است.",
+    "replacedWith": "جایگزین شده با",
     "answers": "{count, plural, one {# پاسخ} other {# پاسخ}}",
     "right": "{percent}٪ درست",
     "reports": "{count, plural, =0 {بدون گزارش} one {# گزارش} other {# گزارش}}",

@@ -40,3 +40,6 @@ class ReplacedQuestionOut(BaseModel):
     set_kind: str
     # When it was replaced.
     at: datetime
+    # What replaced it: the question's next version.
+    new_text: str
+    new_options: list[OptionIn]

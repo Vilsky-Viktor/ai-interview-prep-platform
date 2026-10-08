@@ -135,6 +135,7 @@
     "replaced": "Ersetzt",
     "noFlagged": "Gerade ist nichts gemeldet.",
     "noReplaced": "Noch wurde nichts ersetzt.",
+    "replacedWith": "Ersetzt durch",
     "answers": "{count, plural, one {# Antwort} other {# Antworten}}",
     "right": "{percent} % richtig",
     "reports": "{count, plural, =0 {keine Meldungen} one {# Meldung} other {# Meldungen}}",

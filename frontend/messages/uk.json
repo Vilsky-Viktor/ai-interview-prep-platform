@@ -135,6 +135,7 @@
     "replaced": "Замінені",
     "noFlagged": "Зараз нічого не позначено.",
     "noReplaced": "Ще нічого не замінено.",
+    "replacedWith": "Замінено на",
     "answers": "{count, plural, one {# відповідь} few {# відповіді} many {# відповідей} other {# відповіді}}",
     "right": "{percent}% правильних",
     "reports": "{count, plural, =0 {скарг немає} one {# скарга} few {# скарги} many {# скарг} other {# скарги}}",

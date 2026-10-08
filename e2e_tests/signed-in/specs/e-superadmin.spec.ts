@@ -2,9 +2,10 @@ import type { Locator, Page } from "@playwright/test"
 
 import { expect, test } from "../fixtures"
 import { api, createCompany } from "../helpers/api"
+import { addReplacedVersion, addTemplate, deleteTemplate } from "../helpers/db"
 import { visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
-import { ownerEmail } from "../helpers/users"
+import { ownerEmail, randomId } from "../helpers/users"
 
 const PAUSE_NOTICE = "New interviews are paused for now"
 const MAINTENANCE_NOTICE = "Maintenance mode is on: only superadmins can use prepza right now."
@@ -160,5 +161,27 @@ test("superadmin turns the pause and maintenance mode on and off", async ({
   } finally {
     await api(superadmin, "PUT", "/companies/superadmin/maintenance", { on: false })
     await api(superadmin, "PUT", "/companies/superadmin/pause", { paused: false })
+  }
+})
+
+// A replaced question shows, behind its "replaced with" button, the question that took its place.
+test("superadmin sees what a replaced question was replaced with", async ({ signInSuperadmin }) => {
+  const oldText = `E2E old question ${randomId()}?`
+  const templateId = await addTemplate(`E2E replaced ${randomId()}`, 1)
+  await addReplacedVersion(templateId, oldText)
+
+  try {
+    const superadmin = await signInSuperadmin()
+    await visit(superadmin, "/superadmin/replaced")
+    const row = superadmin.getByRole("listitem").filter({ hasText: oldText })
+    await expect(row).toBeVisible()
+    await shot(superadmin, "replaced")
+    await row.getByRole("button", { name: "Replaced with" }).click()
+    const dialog = superadmin.getByRole("dialog")
+    await expect(dialog).toContainText("E2E question 1?")
+    await expect(dialog).toContainText("Skip the check")
+    await shot(superadmin, "replaced-with")
+  } finally {
+    await deleteTemplate(templateId)
   }
 })

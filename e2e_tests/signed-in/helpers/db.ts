@@ -202,3 +202,20 @@ export async function failGeneration(interviewId: string, companyId: string) {
     )
   )
 }
+
+/** Keeps `oldText` as a replaced version of the first question of a template addTemplate made,
+ * as the verifier does when it replaces a question (that needs OpenAI). Deleting the template
+ * deletes it too. */
+export async function addReplacedVersion(templateId: string, oldText: string) {
+  await withDatabase("library", (client) =>
+    client.query(
+      `INSERT INTO question_revisions (id, question_id, text, options, answers, correct,
+         option_picks, likes, dislikes, reports, replaced_at)
+       SELECT gen_random_uuid(), q.id, $2, '[{"answer": "Old right", "correct": true},
+         {"answer": "Old wrong", "correct": false}]', 4, 1, '{}', 0, 3, '[]', now()
+       FROM questions q JOIN topics t ON t.id = q.topic_id
+       WHERE t.set_id = $1 AND q.position = 0`,
+      [templateId, oldText]
+    )
+  )
+}

@@ -13,6 +13,9 @@ def test_the_quality_tab_lists_flagged_and_replaced_questions(run):
         await preparations.replace_question(
             kept.id, "A clearer question?", [{"answer": "Yes", "correct": True}]
         )
+        await preparations.replace_question(
+            kept.id, "The clearest question?", [{"answer": "Yes", "correct": True}]
+        )
 
         return (
             await quality_report.flagged(0, 100),
@@ -32,6 +35,13 @@ def test_the_quality_tab_lists_flagged_and_replaced_questions(run):
         0,
     )
 
-    [(revision, revised_set)] = [row for row in replaced_rows if row[0].question_id == kept.id]
-    assert revision.text == kept.text
-    assert revised_set.title == "Quality template"
+    # Replaced twice: the first version shows what came next, the second the question as it is.
+    first, second = sorted(
+        (row for row in replaced_rows if row[0].question_id == kept.id),
+        key=lambda row: row[0].replaced_at,
+    )
+    assert first[0].text == kept.text
+    assert first[1].title == "Quality template"
+    assert first[2][0] == "A clearer question?"
+    assert second[0].text == "A clearer question?"
+    assert second[2][0] == "The clearest question?"

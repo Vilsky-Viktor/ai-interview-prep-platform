@@ -135,6 +135,7 @@
     "replaced": "Asendatud",
     "noFlagged": "Praegu pole midagi märgitud.",
     "noReplaced": "Midagi pole veel asendatud.",
+    "replacedWith": "Asendatud",
     "answers": "{count, plural, one {# vastus} other {# vastust}}",
     "right": "{percent}% õigesti",
     "reports": "{count, plural, =0 {teateid pole} one {# teade} other {# teadet}}",

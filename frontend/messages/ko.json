@@ -135,6 +135,7 @@
     "replaced": "교체됨",
     "noFlagged": "현재 신고된 문제가 없습니다.",
     "noReplaced": "아직 교체된 문제가 없습니다.",
+    "replacedWith": "교체된 문제",
     "answers": "{count, plural, other {답변 #개}}",
     "right": "정답률 {percent}%",
     "reports": "{count, plural, =0 {신고 없음} other {신고 #건}}",

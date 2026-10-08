@@ -135,6 +135,7 @@
     "replaced": "Napalitan",
     "noFlagged": "Walang naka-flag ngayon.",
     "noReplaced": "Wala pang napapalitan.",
+    "replacedWith": "Pinalitan ng",
     "answers": "{count, plural, one {# sagot} other {# sagot}}",
     "right": "{percent}% tama",
     "reports": "{count, plural, =0 {walang report} one {# report} other {# report}}",

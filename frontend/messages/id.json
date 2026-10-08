@@ -135,6 +135,7 @@
     "replaced": "Diganti",
     "noFlagged": "Tidak ada yang ditandai saat ini.",
     "noReplaced": "Belum ada yang diganti.",
+    "replacedWith": "Diganti dengan",
     "answers": "{count, plural, other {# jawaban}}",
     "right": "{percent}% benar",
     "reports": "{count, plural, =0 {tidak ada laporan} other {# laporan}}",

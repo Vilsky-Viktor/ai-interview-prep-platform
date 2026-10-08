@@ -135,6 +135,7 @@
     "replaced": "差し替え済み",
     "noFlagged": "現在、報告された問題はありません。",
     "noReplaced": "差し替えられた問題はまだありません。",
+    "replacedWith": "置き換え後",
     "answers": "{count, plural, other {回答 # 件}}",
     "right": "正答率 {percent}%",
     "reports": "{count, plural, =0 {報告なし} other {報告 # 件}}",

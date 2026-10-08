@@ -135,6 +135,7 @@
     "replaced": "Remplacées",
     "noFlagged": "Rien n'est signalé pour l'instant.",
     "noReplaced": "Rien n'a encore été remplacé.",
+    "replacedWith": "Remplacée par",
     "answers": "{count, plural, one {# réponse} other {# réponses}}",
     "right": "{percent} % de bonnes réponses",
     "reports": "{count, plural, =0 {aucun signalement} one {# signalement} other {# signalements}}",

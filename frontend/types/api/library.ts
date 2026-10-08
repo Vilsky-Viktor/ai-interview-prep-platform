@@ -1418,6 +1418,10 @@ export interface components {
       /** Level */
       level: string
       /** Language */
+      /** New Text */
+      new_text: string
+      /** New Options */
+      new_options: components["schemas"]["OptionIn"][]
       language: string
       /** Topics */
       topics: components["schemas"]["TopicOut"][]

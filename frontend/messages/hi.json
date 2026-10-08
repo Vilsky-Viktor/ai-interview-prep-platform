@@ -135,6 +135,7 @@
     "replaced": "बदले गए",
     "noFlagged": "अभी कुछ भी फ़्लैग नहीं किया गया है।",
     "noReplaced": "अभी तक कुछ नहीं बदला गया।",
+    "replacedWith": "इससे बदला गया",
     "answers": "{count, plural, one {# जवाब} other {# जवाब}}",
     "right": "{percent}% सही",
     "reports": "{count, plural, =0 {कोई रिपोर्ट नहीं} one {# रिपोर्ट} other {# रिपोर्ट}}",
