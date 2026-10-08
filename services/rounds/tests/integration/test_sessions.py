@@ -155,6 +155,23 @@ def test_a_finished_section_takes_no_more_answers_and_is_scored_from_its_saved_o
     assert row.final_score == 25
 
 
+def test_timed_out_questions_count_in_progress_but_not_as_picked_answers(run):
+    invite_id = uuid.uuid4()
+
+    async def scenario():
+        [row] = await sessions.create_many("cand", invite_id, [topic(4)], 60)
+        first, second = (uuid.UUID(question["id"]) for question in row.questions[:2])
+        await sessions.add_answer(timed_out(row.id, first))
+        await sessions.add_answer(timed_out(row.id, second))
+
+        return await sessions.scores_for_invites([invite_id])
+
+    totals = run(scenario())[invite_id]
+
+    # Two of four ran out: half way through, yet nothing picked, so nothing to charge for.
+    assert (totals["progress"], totals["picked"]) == (50, 0)
+
+
 def test_two_tabs_starting_the_clock_get_the_same_time(run):
     async def scenario():
         [row] = await sessions.create_many("cand", uuid.uuid4(), [topic()], 30)
@@ -202,6 +219,7 @@ def test_scores_add_up_every_section_its_signals_and_fast_answers(run):
         "tab_leaves": 2,
         "copies": 1,
         "fast_answers": 1,
+        "picked": 2,
     }
     assert found[other_id] == {
         "progress": 0,
@@ -210,6 +228,7 @@ def test_scores_add_up_every_section_its_signals_and_fast_answers(run):
         "tab_leaves": 0,
         "copies": 0,
         "fast_answers": 0,
+        "picked": 0,
     }
 
 

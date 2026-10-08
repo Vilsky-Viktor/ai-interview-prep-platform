@@ -102,8 +102,9 @@ def test_finished_interview_status(client, monkeypatch):
     assert asked == [(INTERVIEW_ID, 20, 20, False)]
 
 
-def revoke(client, monkeypatch, status, progress=0, removed_as=None):
-    """Revokes the candidate, who has answered `progress` percent and is `removed_as` (their
+def revoke(client, monkeypatch, status, progress=0, picked=0, removed_as=None):
+    """Revokes the candidate, who is `progress` percent through with `picked` answers chosen
+    (the rest timed out) and is `removed_as` (their
     status read, by default) when deleted; what was removed, whose sessions were erased, how
     many credits were released and how many charged."""
     sign_in()
@@ -164,7 +165,9 @@ def revoke(client, monkeypatch, status, progress=0, removed_as=None):
         charged.append(key)
 
     async def fake_scores(invite_ids):
-        return {str(invite_id): {"progress": progress} for invite_id in invite_ids}
+        return {
+            str(invite_id): {"progress": progress, "picked": picked} for invite_id in invite_ids
+        }
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
@@ -194,7 +197,17 @@ def test_a_started_candidate_without_an_answer_is_erased_and_their_credits_come_
 def test_a_started_candidate_who_answered_is_erased_and_charged(client, monkeypatch):
     status = InviteStatus.IN_PROCESS
 
-    assert revoke(client, monkeypatch, status, 10) == (204, [INVITE_ID], [INVITE_ID], 0, 1)
+    assert revoke(client, monkeypatch, status, 10, 1) == (204, [INVITE_ID], [INVITE_ID], 0, 1)
+
+
+def test_a_started_candidate_whose_questions_only_timed_out_gets_their_credits_back(
+    client, monkeypatch
+):
+    """Half way through, but every question ran out of time: nothing answered, nothing paid, as
+    when such a candidate finishes."""
+    status = InviteStatus.IN_PROCESS
+
+    assert revoke(client, monkeypatch, status, 50) == (204, [INVITE_ID], [INVITE_ID], 1, 0)
 
 
 def test_a_candidate_who_started_while_revoked_loses_their_new_sessions(client, monkeypatch):

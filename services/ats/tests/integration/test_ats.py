@@ -89,7 +89,7 @@ def test_a_candidate_is_one_row_claimed_once_counted_and_reported_once(run):
         counts = await ats_candidates.counts(company)
         failed = await ats_candidates.not_invited(company, link_id)
         to_report = await ats_results.for_invite(invite)
-        await ats_results.mark_reported(first.id)
+        await ats_results.mark_reported(first.id, None)
         reported = await ats_results.for_invite(invite)
         await ats.delete_company(company)
 
@@ -254,6 +254,7 @@ def test_results_are_claimed_once_until_kept(run):
         await ats_results.keep(row.id, {"name": "kept"})
         kept = [item.result for item in await ats_results.unreported() if item.id == row.id]
         claims.append(await ats_results.claim(row.id))
+        claims = [claim is not None for claim in claims]
         await ats.delete_company(company)
 
         return claims, kept

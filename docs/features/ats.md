@@ -63,7 +63,7 @@ On a company's **Integrations** tab, an owner or admin connects an ATS with its 
 - An invite cut off midway can be claimed again after 10 minutes, by **Invite again**, a new event or the ats service's `recover` job, which runs every 10 minutes.
 - One run (an event, **Invite again** or the job) invites at most 50 candidates, so it ends in time; the rest wait for the next `recover` run.
 
-**The invite** is the usual one. Companies sends it as if whoever connected Workable sent it: their limits, the company's credits, the pause. If that member is no longer an owner or admin (removed, or made a viewer), companies refuses it and the connection is marked for reconnecting by a current editor.
+**The invite** is the usual one. Companies sends it as if whoever connected Workable sent it: their limits, the company's credits, the pause. If that member is no longer an owner or admin (removed, or made a viewer), companies refuses it and the connection is marked for reconnecting by a current editor. If that member deletes their prepza account, their connections stay without their id (`deleted-user`), marked for reconnecting; their data export lists the connections they made.
 
 - A candidate for an interview still being made waits, and is invited once it's ready (`interview.ready`).
 - A candidate refused (credits, limits, the pause) is kept as not invited, and every member of the company gets an `ats_not_invited` notification (several within 24 hours add up to one, see [Grouping](notifications.md#grouping)). **Invite again** puts that job's not-invited candidates back to waiting and invites them.
@@ -147,6 +147,7 @@ When such a candidate finishes, companies publishes `candidate.finished` (grade,
 | Breezy HR | An internal note on the candidate in that position, as the person whose key it is |
 
 - It's sent once (`reported_at`): claimed before writing, so of two events at once only one writes; results that can't go now free the claim.
+- When an answer key is corrected and a finished candidate's grade changes, companies publishes `candidate.rescored` (the same result with the new grade and `rescored_at`, when it was stored), and ats writes a new comment in the same place, starting "Corrected result: an answer key was fixed. This replaces the earlier grade." None of the ATSs lets prepza edit its earlier note, so the new one goes next to it. The row keeps the latest results it knows: a correction is written once, and one older than what's stored (arriving late) or delivered again changes nothing. A correction arriving before the finish is written alone, with the corrected grade. One stored while another is being written waits and goes after it; one that can't go now is kept for the `recover` job like a first result.
 - When the ATS fails or doesn't answer, the results are kept and the event is done, so one company's ATS doesn't hold up events for everyone. The `recover` job (every 10 minutes) sends kept results again, the longest kept first, at most 20 a run and none started past 30 seconds into it, until they go back or the candidate is deleted after 365 days.
 - A key the ATS refuses marks the connection for reconnecting. Results are kept while it waits, and the `recover` job sends them once it's reconnected.
 - A candidate gone from the ATS (404) is given up, alone.

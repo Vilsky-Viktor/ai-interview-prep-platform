@@ -4,6 +4,7 @@ from uuid import UUID
 from app.constants.events import (
     CANDIDATE_FINISHED,
     CANDIDATE_REMOVED,
+    CANDIDATE_RESCORED,
     COMPANY_DELETED,
     COMPANY_OWNER,
     CREDITS_ADDED,
@@ -41,9 +42,9 @@ async def company_deleted(company_id: UUID) -> None:
 
 async def handle(event_type: str, data: dict) -> None:
     """Companies' and billing's events. Each is safe to run again on a redelivery: a report goes
-    back once (reported_at), a candidate is invited once (the claim), and deleting twice deletes
-    nothing more. Other events are ignored."""
-    if event_type == CANDIDATE_FINISHED:
+    back once (reported_at; a corrected grade once, by its rescored_at), a candidate is invited
+    once (the claim), and deleting twice deletes nothing more. Other events are ignored."""
+    if event_type in (CANDIDATE_FINISHED, CANDIDATE_RESCORED):
         await ats_candidates.report(data)
     elif event_type == INTERVIEW_READY:
         await ats_candidates.invite_waiting(UUID(data["interview_id"]))

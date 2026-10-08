@@ -2,12 +2,18 @@
 and filtered in SQL by the grade and flag stored on each invite when the candidate finishes."""
 
 import uuid
+from datetime import UTC, datetime
 
-from sqlalchemy import func, select, update
+from prepza_common import outbox
+from sqlalchemy import func, select
 
+from app.constants.events import CANDIDATE_RESCORED
 from app.constants.invites import CandidateFilter, InviteStatus
+from app.helpers.candidates import rescored_result
 from app.helpers.search import escape_like
+from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
+from app.models.outbox import OutboxEvent
 from app.storage.db import Session
 
 
@@ -136,19 +142,31 @@ async def unscored(interview_id) -> list[uuid.UUID]:
 async def save_results(results: dict[uuid.UUID, tuple[int | None, bool]]) -> None:
     """Stores these candidates' (grade, flagged). Their status is left alone: only
     interview.finished marks an invite finished, as it settles the candidate's credits, so an
-    invite removed before that event still gets its hold released."""
+    invite removed before that event still gets its hold released. A finished candidate whose
+    grade changes (an answer key was corrected since candidate.finished told it) is announced
+    with candidate.rescored in the same transaction; the rows are locked, so of two saves at
+    once (the event and the candidates list) only the first sees the change, and a repeat finds
+    the grade already stored. One without a grade before (finished before grades were stored)
+    is only filled in."""
     if not results:
         return
 
+    query = (
+        select(CandidateInvite, Interview)
+        .join(Interview, Interview.id == CandidateInvite.interview_id)
+        .where(CandidateInvite.id.in_(results), CandidateInvite.status != InviteStatus.DELETED)
+        .order_by(CandidateInvite.id)
+        .with_for_update(of=CandidateInvite)
+    )
+
     async with Session() as session:
-        for invite_id, (grade, flagged) in results.items():
-            await session.execute(
-                update(CandidateInvite)
-                .where(
-                    CandidateInvite.id == invite_id,
-                    CandidateInvite.status != InviteStatus.DELETED,
-                )
-                .values(grade=grade, flagged=flagged)
-            )
+        for invite, interview in (await session.execute(query)).all():
+            grade, flagged = results[invite.id]
+
+            if invite.status == InviteStatus.FINISHED and invite.grade not in (None, grade):
+                result = rescored_result(interview, invite.id, grade, flagged, datetime.now(UTC))
+                outbox.add(session, OutboxEvent, CANDIDATE_RESCORED, result)
+
+            invite.grade, invite.flagged = grade, flagged
 
         await session.commit()

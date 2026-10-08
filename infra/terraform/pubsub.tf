@@ -22,14 +22,15 @@ resource "google_pubsub_subscription" "dead_letter" {
 # is empty. Funnel events go only to BigQuery (analytics.tf).
 # Pub/Sub caps a filter at 256 bytes: each type adds 24 bytes plus its name. A type ending in ".*"
 # matches every type with that prefix (hasPrefix): notifications takes all "candidate." events
-# that way, as listing them one by one outgrew the cap; it ignores the ones it doesn't handle.
+# that way, and ats all "interview." ones (241 bytes; listing them, 277), as listing them one by
+# one outgrew the cap; each ignores the ones it doesn't handle. api's filter is 119 bytes.
 locals {
   consumes = {
     library       = ["answer.recorded", "session.scored"]
     companies     = ["generation.completed", "generation.failed", "generation.cancelled", "interview.finished", "results.rescored"]
     notifications = ["notification.requested", "candidate.*", "report.shared", "contact.sent", "company.deleted"]
-    ats           = ["candidate.finished", "candidate.removed", "interview.ready", "interview.deleted", "company.deleted", "credits.added"]
-    api           = ["candidate.finished", "company.deleted"]
+    ats           = ["candidate.finished", "candidate.rescored", "candidate.removed", "interview.*", "company.deleted", "credits.added"]
+    api           = ["candidate.finished", "candidate.rescored", "company.deleted"]
   }
 }
 

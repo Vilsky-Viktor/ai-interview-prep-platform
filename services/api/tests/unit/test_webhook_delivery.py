@@ -22,8 +22,8 @@ FINISHED = {
 }
 
 
-def finish(event_id="e1"):
-    asyncio.run(delivery.finished(FINISHED, event_id))
+def finish(event_id="e1", event_type="candidate.finished"):
+    asyncio.run(delivery.notify(event_type, FINISHED, event_id))
 
 
 def test_each_web_hook_gets_the_interview_and_candidate_signed(endpoints):
@@ -40,6 +40,22 @@ def test_each_web_hook_gets_the_interview_and_candidate_signed(endpoints):
     assert body["data"]["interview"]["id"] == str(INTERVIEW)
     assert body["data"]["candidate"]["grade"] == 86
     assert signature.startswith("t=") and ",v1=" in signature
+
+
+def test_a_changed_grade_reaches_each_web_hook_once_as_its_own_event(endpoints):
+    """companies' candidate.rescored goes out with its own type and id, after the finish that
+    the same web hooks already got; delivered again, it reaches nobody twice."""
+    endpoints["hook"]("https://a.example/x")
+    finish()
+
+    for _ in range(2):
+        asyncio.run(events.handle("candidate.rescored", FINISHED, "e2"))
+
+    [(_, finished, _), (_, rescored, _)] = endpoints["posted"]
+
+    assert (finished["id"], finished["type"]) == ("e1", "candidate.finished")
+    assert (rescored["id"], rescored["type"]) == ("e2", "candidate.rescored")
+    assert rescored["data"] == finished["data"]
 
 
 def test_a_failed_web_hook_is_left_to_the_retry_job_and_the_event_is_done(endpoints):

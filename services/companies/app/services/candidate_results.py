@@ -7,6 +7,7 @@ from app.constants.events import RESULTS_RESCORED
 from app.constants.invites import RESULT_FILTERS, InviteStatus
 from app.helpers.candidates import candidate_out, stored_results
 from app.integrations import rounds
+from app.services import outbox as outbox_service
 from app.storage import candidates
 
 
@@ -14,7 +15,8 @@ async def sync(listed: list, totals: dict[str, dict]) -> None:
     """Stores the results of listed candidates rounds says finished whose invite doesn't have
     them yet (interview.finished is still on its way) or has others (an answer key was corrected
     since), and shows them finished; the status itself is stored by that event
-    (candidates.save_results)."""
+    (candidates.save_results, which also announces a changed grade the rescore event hasn't
+    stored yet; the scheduled outbox flush sends it)."""
     results = {
         invite.id: stored_results(totals[str(invite.id)])
         for invite in listed
@@ -70,7 +72,8 @@ async def page(
 
 async def handle(event_type: str, data: dict) -> None:
     """A corrected answer key changed these candidates' scores in rounds: their stored grades
-    follow, so sorting, filters and pass rates stay right. Other events aren't ours."""
+    follow, so sorting, filters and pass rates stay right, and finished ones whose grade changed
+    are announced (candidate.rescored) to their web hooks and ATS. Other events aren't ours."""
     if event_type != RESULTS_RESCORED:
         return
 
@@ -83,3 +86,4 @@ async def handle(event_type: str, data: dict) -> None:
             if (totals.get(str(invite_id)) or {}).get("finished")
         }
     )
+    await outbox_service.flush_quietly()

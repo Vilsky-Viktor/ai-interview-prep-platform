@@ -107,8 +107,9 @@ async def release_unfinished(rows: list) -> None:
 
 
 async def settle_removed(rows: list) -> None:
-    """Credits of candidates removed before they finished: one who answered at least one
-    question is charged, the others' come back. It asks rounds, so it goes before their answers
+    """Credits of candidates removed before they finished: one who picked at least one answer
+    is charged, the others' come back, as when they finish (questions that ran out of time
+    don't count). It asks rounds, so it goes before their answers
     are deleted; safe to repeat (a charged candidate stays charged)."""
     started = [row.id for row in rows if row.status == InviteStatus.IN_PROCESS]
     scores = await rounds.invite_scores(started)
@@ -116,7 +117,7 @@ async def settle_removed(rows: list) -> None:
     for row in rows:
         key = hold_key(row.interview_id, row.email, row.hold_key)
 
-        if (scores.get(str(row.id)) or {}).get("progress"):
+        if (scores.get(str(row.id)) or {}).get("picked"):
             await billing.charge_candidate(key)
         else:
             await billing.release_candidate(key)

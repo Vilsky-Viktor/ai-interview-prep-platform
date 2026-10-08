@@ -19,6 +19,9 @@ COMPANY_DELETED = "company.deleted"
 # A candidate's interview.finished was stored: their grade, whether they passed, and the
 # interview's title; ats writes the result back to the ATS that sent them.
 CANDIDATE_FINISHED = "candidate.finished"
+# A finished candidate's stored grade changed (an answer key was corrected since): the same
+# result with the new grade and when it was stored; api sends web hooks, ats a new note.
+CANDIDATE_RESCORED = "candidate.rescored"
 # A generated interview got its questions; ats invites the candidates waiting for it.
 INTERVIEW_READY = "interview.ready"
 # An interview was deleted; ats removes its job links and the candidates sent for it.

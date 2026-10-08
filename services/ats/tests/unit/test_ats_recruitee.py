@@ -199,9 +199,9 @@ def finished(monkeypatch):
         state["notes"].append((company, token, candidate_id, member, text))
 
     async def claim_report(row_id):
-        return True
+        return row
 
-    async def mark_reported(row_id):
+    async def mark_reported(row_id, sent):
         state["reported"].append(row_id)
 
     monkeypatch.setattr(ats_results, "for_invite", for_invite)

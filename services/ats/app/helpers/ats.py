@@ -132,9 +132,15 @@ def breezy_signed(secret: str, body: bytes, signature: str) -> bool:
     )
 
 
-def result_comment(title: str, grade: int | None, passed: bool, flagged: bool, link: str) -> str:
-    """The comment a finished candidate's results go back to the ATS as."""
+def result_comment(
+    title: str, grade: int | None, passed: bool, flagged: bool, link: str, corrected: bool
+) -> str:
+    """The comment a finished candidate's results go back to the ATS as; a `corrected` one
+    replaces an earlier grade after an answer key was fixed."""
     lines = [f"prepza: {title}"]
+
+    if corrected:
+        lines.append("Corrected result: an answer key was fixed. This replaces the earlier grade.")
 
     if grade is None:
         lines.append("Finished; the grade is on the scorecard.")

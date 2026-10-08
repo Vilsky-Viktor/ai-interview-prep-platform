@@ -16,13 +16,14 @@ test("the API docs explain keys, routes, the web hook and the objects", async ({
 
   // The steps to a key, as a numbered list.
   await expect(page.locator("ol").first().locator("li")).toHaveCount(5);
-  // The base URL to copy, and the five routes.
+  // The base URL to copy, the five routes and the two web hooks.
   await expect(page.getByRole("textbox", { name: "Copy URL" })).toHaveValue(/\/api\/v1$/);
   const routes = page.locator("article").filter({ has: page.getByText(/^(GET|POST)$/) });
-  await expect(routes).toHaveCount(6);
+  await expect(routes).toHaveCount(7);
   await expect(routes.filter({ hasText: "/interviews/{interview_id}/candidates" }).first()).toBeVisible();
-  // The web hook, and the objects its types link to.
+  // The web hooks, and the objects their types link to.
   await expect(page.getByText("candidate.finished", { exact: true }).first()).toBeVisible();
+  await expect(page.getByText("candidate.rescored", { exact: true }).first()).toBeVisible();
   await page.getByRole("link", { name: "Candidate", exact: true }).first().click();
   await expect(page).toHaveURL(/#Candidate$/);
   await expect(page.locator("#Candidate")).toContainText("results_url");

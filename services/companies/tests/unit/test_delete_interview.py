@@ -131,7 +131,11 @@ def test_deleting_an_interview_settles_unfinished_candidates_credits(client, mon
     async def scores(invite_ids):
         calls.append(("scores", sorted(invite_ids)))
 
-        return {str(dan.id): {"progress": 20}, str(erin.id): {"progress": 0}}
+        # Erin's questions so far all ran out of time: not an answer.
+        return {
+            str(dan.id): {"progress": 20, "picked": 1},
+            str(erin.id): {"progress": 20, "picked": 0},
+        }
 
     async def release(key):
         calls.append(("release", key))

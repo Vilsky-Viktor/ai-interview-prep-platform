@@ -90,8 +90,9 @@ class AtsCandidate(Base):
     invite_id: Mapped[uuid.UUID | None] = mapped_column(index=True)
     # When their results went back to the ATS: once.
     reported_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
-    # Their results (companies' candidate.finished event) while the connection is broken or the
-    # ATS fails: sent by the recovery job once it works.
+    # Their latest results (companies' candidate.finished or candidate.rescored event): waiting
+    # while reported_at is empty (the connection is broken or the ATS fails, sent by the
+    # recovery job once it works), the ones sent once it's set.
     result: Mapped[dict | None] = mapped_column(JSONB)
     # When the results were last kept: the recovery job tries the longest kept first, so results
     # an ATS keeps refusing don't hold up the others.

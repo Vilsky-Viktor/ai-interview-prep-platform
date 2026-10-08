@@ -11,7 +11,7 @@ from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
 from app.constants.docs import API_DESCRIPTION, API_TITLE, API_VERSION
-from app.constants.events import CANDIDATE_FINISHED
+from app.constants.events import CANDIDATE_FINISHED, CANDIDATE_RESCORED
 from app.integrations import webhooks as endpoints
 from app.integrations.redis import get_redis
 from app.routers import events, internal_accounts, manage, public, schedules
@@ -59,6 +59,13 @@ app.include_router(schedules.router)
 def candidate_finished(event: FinishedEvent) -> None:
     """Sent when a candidate finishes one of your interviews. The request body is a JSON object
     with the event's `id`, its `type` (`candidate.finished`) and `data`, described below."""
+
+
+@app.webhooks.post(CANDIDATE_RESCORED, summary="A candidate's grade changed")
+def candidate_rescored(event: FinishedEvent) -> None:
+    """Sent when a finished candidate's grade changes because an answer key was corrected. The
+    body is shaped like `candidate.finished`'s, with `type` `candidate.rescored` and the
+    candidate's new grade; it replaces the grade you got before."""
 
 
 @app.get("/health", include_in_schema=False)

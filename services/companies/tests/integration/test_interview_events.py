@@ -1,11 +1,12 @@
 """The events ats consumes are saved with their change, in the same transaction, once."""
 
+import asyncio
 import uuid
 
 from sqlalchemy import select
 
 from app.models.outbox import OutboxEvent
-from app.storage import companies, interviews, invites
+from app.storage import candidates, companies, interviews, invites
 from app.storage.db import Session
 
 
@@ -153,3 +154,45 @@ def test_a_removed_invite_says_its_status_as_it_was_deleted(run):
 
     # Started since it was read: revoking it erases the sessions that start made.
     assert run(scenario()) == ("in_process", None)
+
+
+def test_a_changed_grade_of_a_finished_candidate_is_announced_once(run):
+    """The rescore event and the candidates list storing the new grade at once, then the event
+    again: one candidate.rescored. A grade stored on a running candidate, or filled in on one
+    finished without a grade, isn't a change anyone was told about."""
+
+    async def scenario():
+        found = await interview()
+        upserted = [
+            await invites.upsert(found.id, f"{name}@example.com", "Backend", "Acme", "en")
+            for name in ("ria", "sam", "tia")
+        ]
+        done, running, ungraded = (invite for invite, _ in upserted)
+        await invites.finish(done.id, 70, False, None)
+        await invites.finish(ungraded.id, None, False, None)
+        await invites.start(running.id, "sam-uid")
+        new = {done.id: (85, False), running.id: (40, False), ungraded.id: (50, False)}
+        await asyncio.gather(candidates.save_results(new), candidates.save_results(new))
+        await candidates.save_results(new)
+        saved = {
+            invite.id: await events("candidate.rescored", "candidate_invite_id", str(invite.id))
+            for invite in (done, running, ungraded)
+        }
+
+        return found, done, saved, await invites.get(done.id)
+
+    found, done, saved, stored = run(scenario())
+
+    [result] = saved.pop(done.id)
+    assert result.pop("rescored_at")
+    assert result == {
+        "candidate_invite_id": str(done.id),
+        "interview_id": str(found.id),
+        "company_id": str(found.company_id),
+        "title": "",
+        "grade": 85,
+        "passed": True,
+        "flagged": False,
+    }
+    assert list(saved.values()) == [[], []]
+    assert stored.grade == 85

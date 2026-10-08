@@ -12,7 +12,6 @@ from prepza_common.encryption import decrypt
 
 from app.config.settings import settings
 from app.constants.api import RETRY_BATCH, RETRY_GIVE_UP
-from app.constants.events import CANDIDATE_FINISHED
 from app.helpers.public import candidate_of, interview_of
 from app.helpers.webhooks import body_of, public_address, retry_delay, signature
 from app.integrations import companies
@@ -25,9 +24,10 @@ from app.storage import webhooks
 logger = logging.getLogger(__name__)
 
 
-async def finished(data: dict, event_id: str) -> None:
-    """A candidate finished (companies' candidate.finished): each of the company's web hooks gets
-    the interview and the candidate, once, while whoever added it is still an owner or admin.
+async def notify(event_type: str, data: dict, event_id: str) -> None:
+    """A candidate finished, or a finished one's grade changed (companies' candidate.finished and
+    candidate.rescored, sent as they are named): each of the company's web hooks gets the
+    interview and the candidate as they are now, once, while whoever added it is still an owner or admin.
     Web hooks that already got it are skipped, so a redelivered event reaches only the ones that
     failed. A web hook that doesn't take it is left to the retry job, and the event is done: a
     company's failing endpoint doesn't hold up Pub/Sub for everyone."""
@@ -64,7 +64,7 @@ async def finished(data: dict, event_id: str) -> None:
         interview=interview_of(interview),
         candidate=candidate_of(candidate, company_id, interview_id, settings.site_url),
     )
-    body = body_of(event_id, CANDIDATE_FINISHED, jsonable_encoder(event))
+    body = body_of(event_id, event_type, jsonable_encoder(event))
     # All at once, so slow endpoints together stay within Pub/Sub's acknowledgement deadline.
     taken = await asyncio.gather(*(deliver(hook, event_id, body) for hook in hooks))
     next_at = datetime.now(UTC) + retry_delay(1)

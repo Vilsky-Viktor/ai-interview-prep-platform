@@ -56,14 +56,20 @@ def finished(monkeypatch):
 
     async def claim_report(row_id):
         if row_id in state["claimed"]:
-            return False
+            return None
 
         state["claimed"].add(row_id)
 
-        return True
+        return row
 
-    async def mark_reported(row_id):
+    async def mark_reported(row_id, sent):
         state["reported"].append(row_id)
+
+    async def offer(invite_id, data):
+        # Stored when newer, and waiting again, as in the database.
+        if ats_results.stamp(data) > ats_results.stamp(row.result):
+            row.result = data
+            state["claimed"].discard(row.id)
 
     async def mark_broken(connection_id):
         state["broken"].append(connection_id)
@@ -76,6 +82,7 @@ def finished(monkeypatch):
     monkeypatch.setattr(ats_results, "claim", claim_report)
     monkeypatch.setattr(ats_results, "mark_reported", mark_reported)
     monkeypatch.setattr(ats_results, "keep", keep_result)
+    monkeypatch.setattr(ats_results, "offer", offer)
     monkeypatch.setattr(ats, "mark_broken", mark_broken)
     monkeypatch.setattr(integrations, "credentials", key)
     monkeypatch.setattr(workable, "comment", comment)
@@ -213,3 +220,37 @@ def test_results_that_couldnt_go_back_are_freed_for_the_recovery_job(finished, f
 
     assert len(state["comments"]) == 1
     assert state["reported"] == [state["row"].id]
+
+
+def rescored(invite_id, grade, at) -> dict:
+    """Companies' candidate.rescored event: the result with the corrected grade, and when."""
+    return {**result(invite_id, grade), "rescored_at": at}
+
+
+def test_a_corrected_grade_goes_back_as_a_new_comment_once(finished):
+    """After the first comment, a corrected grade is a second one; the same correction delivered
+    again, or an older one arriving late, writes nothing."""
+    state, _ = finished
+    invite_id = state["row"].invite_id
+    report(invite_id)
+
+    for data in (
+        rescored(invite_id, 91, "2026-10-08T10:00:00.000002+00:00"),
+        rescored(invite_id, 91, "2026-10-08T10:00:00.000002+00:00"),
+        rescored(invite_id, 60, "2026-10-08T10:00:00.000001+00:00"),
+    ):
+        asyncio.run(flow.report(data))
+
+    first, corrected = (text for _, _, text in state["comments"])
+    assert "Grade: 82%" in first and "Corrected" not in first
+    assert "Corrected result" in corrected and "Grade: 91% (passed)" in corrected
+
+
+def test_a_correction_arriving_before_the_finish_writes_only_the_corrected_grade(finished):
+    state, _ = finished
+    invite_id = state["row"].invite_id
+    asyncio.run(flow.report(rescored(invite_id, 91, "2026-10-08T10:00:00.000001+00:00")))
+    report(invite_id)
+
+    [(_, _, text)] = state["comments"]
+    assert "Grade: 91%" in text

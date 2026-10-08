@@ -78,8 +78,9 @@ async def list_for_invite(candidate_invite_id: uuid.UUID, signals: bool = False)
 
 
 async def scores_for_invites(invite_ids: list[uuid.UUID]) -> dict[uuid.UUID, dict]:
-    """Each candidate's progress, grade, whether they finished, and their integrity signals,
-    counted in the database rather than from every session's questions and answers."""
+    """Each candidate's progress, grade, whether they finished, how many answers they picked (not
+    timed out: what decides a charge, as in finish()), and their integrity signals, counted in
+    the database rather than from every session's questions and answers."""
     if not invite_ids:
         return {}
 
@@ -102,6 +103,7 @@ async def scores_for_invites(invite_ids: list[uuid.UUID]) -> dict[uuid.UUID, dic
             func.count(Answer.id).filter(
                 Answer.option_index.is_not(None), Answer.seconds < FAST_ANSWER_SECONDS
             ),
+            func.count(Answer.id).filter(Answer.option_index.is_not(None)),
         )
         .join(Answer, Answer.session_id == Session.id)
         .where(chosen)
@@ -126,13 +128,14 @@ async def scores_for_invites(invite_ids: list[uuid.UUID]) -> dict[uuid.UUID, dic
     result = {}
 
     for invite_id, total, finished in sections:
-        answered, score_sum, fast_answers = answers.get(invite_id, (0, 0, 0))
+        answered, score_sum, fast_answers, picked = answers.get(invite_id, (0, 0, 0, 0))
         tab_leaves, copies = signals.get(invite_id, (0, 0))
         result[invite_id] = {
             **invite_grade(answered, score_sum or 0, total, finished),
             "tab_leaves": tab_leaves,
             "copies": copies,
             "fast_answers": fast_answers,
+            "picked": picked,
         }
 
     return result
