@@ -5,9 +5,11 @@
 import logging
 
 from fastapi import HTTPException, status
+from prepza_common import memory_cache
 from prepza_common.auth import verify
 from prepza_common.constants import (
     MAINTENANCE,
+    MAINTENANCE_CACHE_SECONDS,
     MAINTENANCE_KEY,
     MAINTENANCE_OPEN_PATHS,
     MAINTENANCE_OPEN_PREFIXES,
@@ -23,13 +25,23 @@ logger = logging.getLogger(__name__)
 
 
 async def is_on(redis) -> bool:
-    """With Redis down, off: the switch must never stop the service by itself."""
+    """Every request asks, so each instance reads Redis at most once per
+    MAINTENANCE_CACHE_SECONDS. With Redis down, off: the switch must never stop the service by
+    itself."""
+    cached = memory_cache.get(MAINTENANCE_KEY)
+
+    if cached is not None:
+        return cached
+
     try:
-        return bool(await redis.exists(MAINTENANCE_KEY))
+        on = bool(await redis.exists(MAINTENANCE_KEY))
     except Exception:
         logger.warning("Couldn't read the maintenance switch; treating it as off", exc_info=True)
+        on = False
 
-        return False
+    memory_cache.put(MAINTENANCE_KEY, on, MAINTENANCE_CACHE_SECONDS)
+
+    return on
 
 
 async def set_on(redis, on: bool, user_id: str) -> None:
@@ -39,6 +51,8 @@ async def set_on(redis, on: bool, user_id: str) -> None:
     else:
         await redis.delete(MAINTENANCE_KEY)
 
+    # This instance knows at once; the others within MAINTENANCE_CACHE_SECONDS.
+    memory_cache.put(MAINTENANCE_KEY, on, MAINTENANCE_CACHE_SECONDS)
     logger.warning("Maintenance mode turned %s by superadmin %s", "on" if on else "off", user_id)
 
 

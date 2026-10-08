@@ -5,17 +5,21 @@ import sentry_sdk
 from prepza_common.constants import (
     DEFAULT_TRACES_SAMPLE_RATE,
     EMAIL_PATTERN,
+    QUERY_FIELDS,
     REDACTED_EMAIL,
+    URL_PATTERN,
+    URL_SCRUBBED,
 )
 
 
 def scrub(value):
-    """Replaces every email address in an event, however deep it sits, before it leaves us."""
+    """Replaces every email address in an event, however deep it sits, and cuts every URL to its
+    scheme and host, before it leaves us: outgoing calls' URLs (web hooks, Slack) are secrets."""
     if isinstance(value, str):
-        return re.sub(EMAIL_PATTERN, REDACTED_EMAIL, value)
+        return re.sub(EMAIL_PATTERN, REDACTED_EMAIL, re.sub(URL_PATTERN, URL_SCRUBBED, value))
 
     if isinstance(value, dict):
-        return {key: scrub(item) for key, item in value.items()}
+        return {key: scrub(item) for key, item in value.items() if key not in QUERY_FIELDS}
 
     if isinstance(value, list):
         return [scrub(item) for item in value]
@@ -30,8 +34,9 @@ def before_send(event, hint):
 def init_sentry(service: str, integrations: list | None = None) -> None:
     """Reports errors to Sentry when SENTRY_DSN is set; local development and tests send nothing.
 
-    No personal data: no IPs, cookies, headers or request bodies, and emails are scrubbed. A
-    signed-in user is known only by their id (see auth.current_user).
+    No personal data or secrets: no IPs, cookies, headers or request bodies; emails are scrubbed
+    and URLs cut to their host everywhere in an error or a trace, its breadcrumbs and spans
+    included. A signed-in user is known only by their id (see auth.current_user).
     """
     dsn = os.getenv("SENTRY_DSN")
 

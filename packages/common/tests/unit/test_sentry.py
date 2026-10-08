@@ -19,6 +19,29 @@ def test_emails_are_scrubbed_everywhere_in_an_event():
     }
 
 
+def test_urls_keep_only_their_scheme_and_host_and_queries_are_dropped():
+    hook = "https://hooks.slack.com/services/T0/B0/secret"
+    event = {
+        "request": {"url": "https://api.prepza.com/invites/token123", "query_string": "t=1"},
+        "breadcrumbs": [
+            {"category": "httplib", "data": {"url": hook, "http.query": "key=1"}},
+        ],
+        "spans": [{"description": f"POST {hook}", "data": {"url": "http://a:b@x.io:8080/p?q"}}],
+        "exception": {"values": [{"value": f"Client error '404 Not Found' for url '{hook}'"}]},
+    }
+
+    assert scrub(event) == {
+        "request": {"url": "https://api.prepza.com"},
+        "breadcrumbs": [{"category": "httplib", "data": {"url": "https://hooks.slack.com"}}],
+        "spans": [
+            {"description": "POST https://hooks.slack.com", "data": {"url": "http://x.io:8080"}}
+        ],
+        "exception": {
+            "values": [{"value": "Client error '404 Not Found' for url 'https://hooks.slack.com'"}]
+        },
+    }
+
+
 def test_nothing_is_sent_without_a_dsn(monkeypatch):
     monkeypatch.delenv("SENTRY_DSN", raising=False)
 
@@ -39,3 +62,4 @@ def test_with_a_dsn_no_personal_data_is_sent(monkeypatch):
     assert options["max_request_body_size"] == "never"
     assert options["server_name"] == "rounds"
     assert options["before_send"] is sentry.before_send
+    assert options["before_send_transaction"] is sentry.before_send

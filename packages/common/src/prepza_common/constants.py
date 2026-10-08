@@ -17,6 +17,11 @@ DAY_SECONDS = 24 * HOUR_SECONDS
 # budget (infra/terraform/database.tf).
 DB_POOL_SIZE = 5
 DB_MAX_OVERFLOW = 5
+# A pooled connection is replaced once it's this old, instead of pinged before each use (a
+# SELECT 1 per checkout). Nothing drops idle ones on the way (Postgres has no idle timeout set,
+# and the Cloud SQL connector none); one killed by a database restart fails one request, and
+# SQLAlchemy then replaces the whole pool.
+DB_POOL_RECYCLE_SECONDS = 1800
 
 # Lists are served a page at a time; a page holds at most this many items.
 MAX_PAGE_SIZE = 100
@@ -25,6 +30,12 @@ MAX_PAGE_SIZE = 100
 DEFAULT_TRACES_SAMPLE_RATE = "0.1"
 EMAIL_PATTERN = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
 REDACTED_EMAIL = "[email]"
+# A URL's path, query and user info can carry credentials (a Slack web hook's path, a customer's
+# web hook secret, an invite token): only its scheme and host (group 1) reach Sentry, and the
+# fields that hold a query alone are dropped.
+URL_PATTERN = r"(https?://)(?:[^\s/?#@'\"]*@)?([^\s/?#'\"]+)[^\s'\"]*"
+URL_SCRUBBED = r"\1\2"
+QUERY_FIELDS = {"query_string", "http.query", "http.fragment"}
 
 # Pub/Sub: the one topic every domain event goes to, and its REST API.
 EVENTS_TOPIC = "events"
@@ -127,3 +138,5 @@ MAINTENANCE_KEY = "maintenance:on"
 MAINTENANCE = "prepza is under maintenance. We'll be back soon."
 MAINTENANCE_OPEN_PATHS = {"/health", "/ready", "/maintenance", "/superadmin/maintenance"}
 MAINTENANCE_OPEN_PREFIXES = ("/internal/", "/webhooks/")
+# Each instance reads the switch at most this often; turning it takes that long to reach them all.
+MAINTENANCE_CACHE_SECONDS = 5

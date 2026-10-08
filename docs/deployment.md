@@ -33,7 +33,7 @@ Terraform passes only one generation setting to Google Cloud, `DAILY_GENERATION_
 
 ## Error reporting
 
-Errors go to Sentry when its DSN is set; empty, nothing is sent.
+Errors go to Sentry when its DSN is set; empty, nothing is sent. Emails are scrubbed from every event, and URLs are cut to their host, so web hook addresses (which can carry secrets) never reach it.
 
 | Setting | What it sets |
 |---|---|

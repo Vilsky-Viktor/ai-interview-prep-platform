@@ -1,10 +1,11 @@
 import asyncio
+import time
 
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-from prepza_common import maintenance
-from prepza_common.constants import MAINTENANCE, MAINTENANCE_KEY
+from prepza_common import maintenance, memory_cache
+from prepza_common.constants import MAINTENANCE, MAINTENANCE_CACHE_SECONDS, MAINTENANCE_KEY
 from prepza_common.maintenance import MaintenanceMiddleware, is_on, set_on
 from prepza_common.translations import TRANSLATIONS
 from prepza_common.user import User
@@ -55,8 +56,9 @@ client = TestClient(app)
 
 @pytest.fixture(autouse=True)
 def switched_on(monkeypatch):
-    """On, with ann as the only superadmin; a token is the email it signs in."""
+    """On, with ann as the only superadmin; a token is the email it signs in. Nothing cached."""
     REDIS.values = {MAINTENANCE_KEY: "ann"}
+    monkeypatch.setattr(memory_cache, "_entries", {})
     monkeypatch.setenv("SUPERADMIN_EMAILS", "ann@example.com")
     monkeypatch.setattr(
         maintenance,
@@ -121,6 +123,21 @@ def test_the_switch_turns_on_and_off_and_remembers_who():
     asyncio.run(set_on(redis, False, "ann"))
 
     assert not asyncio.run(is_on(redis))
+
+
+def test_each_instance_reads_the_switch_at_most_every_few_seconds(monkeypatch):
+    now = time.monotonic()
+    monkeypatch.setattr(time, "monotonic", lambda: now)
+
+    assert asyncio.run(is_on(REDIS))
+
+    REDIS.values = {}
+
+    assert asyncio.run(is_on(REDIS))
+
+    monkeypatch.setattr(time, "monotonic", lambda: now + MAINTENANCE_CACHE_SECONDS + 1)
+
+    assert not asyncio.run(is_on(REDIS))
 
 
 def test_the_message_has_translations():

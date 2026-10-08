@@ -114,4 +114,4 @@ Billing has no Redis and isn't switched; its only public route is the price cata
 
 Turning it on first asks to confirm, showing the number of candidates in an interview right now (a question shown in the last 15 minutes), who may lose time.
 
-It's one Redis key (`maintenance:on`). With Redis down, it counts as off. Who turned it goes to the logs.
+It's one Redis key (`maintenance:on`). With Redis down, it counts as off. Each service reads it at most every 5 seconds, so a change reaches every instance within 5 seconds. Who turned it goes to the logs.
