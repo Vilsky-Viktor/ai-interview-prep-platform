@@ -66,7 +66,7 @@ locals {
 
   # Secrets each service reads (Secret Manager name => environment variable).
   base_secrets = {
-    frontend             = {}
+    frontend             = { preview-secret = "PREVIEW_SECRET" }
     library              = { redis-url = "REDIS_URL" }
     generation           = { redis-url = "REDIS_URL", openai-api-key = "OPENAI_API_KEY" }
     generation-worker    = { redis-url = "REDIS_URL", openai-api-key = "OPENAI_API_KEY" }

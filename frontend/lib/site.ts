@@ -3,10 +3,14 @@ import { headers } from "next/headers"
 import { getTranslations } from "next-intl/server"
 
 import { DEFAULT_LOCALE, type Locale } from "@/constants/i18n"
-import { PREVIEW_UNSUPPORTED } from "@/constants/preview-image"
+import {
+  PREVIEW_TITLE_MAX,
+  PREVIEW_UNSUPPORTED,
+} from "@/constants/preview-image"
 import { CATEGORY_PAGES } from "@/constants/content"
 import { LOCALE_HEADER, LOCALIZED_ARTICLE, SITE_NAME } from "@/constants/seo"
 import { languageAlternates, localizedPath } from "@/lib/locale-path"
+import { previewSignature } from "@/lib/preview-signature"
 
 /** The site's public address, for absolute links in metadata, robots.txt and the sitemap. */
 export function siteUrl() {
@@ -19,7 +23,13 @@ export function siteUrl() {
  * language the picture can't draw. */
 export function previewImage(title?: string, locale: string = DEFAULT_LOCALE) {
   const drawn = title && !PREVIEW_UNSUPPORTED.includes(locale as Locale)
-  const query = new URLSearchParams({ title: title ?? "", lang: locale })
+  const shown = (title ?? "").slice(0, PREVIEW_TITLE_MAX)
+  // Signed, so the picture route draws only titles our own pages name.
+  const query = new URLSearchParams({
+    title: shown,
+    lang: locale,
+    sig: previewSignature(shown, locale),
+  })
   const url = drawn
     ? `${siteUrl()}/preview?${query}`
     : `${siteUrl()}/opengraph-image`

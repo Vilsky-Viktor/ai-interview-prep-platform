@@ -13,6 +13,10 @@ export const PREVIEW_COLORS = {
 // The longest title a preview draws: three lines at most.
 export const PREVIEW_TITLE_MAX = 90
 
+// Hex characters of a preview's signature (lib/preview-signature.ts): enough that guessing one
+// is hopeless, short enough for a tidy address.
+export const PREVIEW_SIGNATURE_LENGTH = 32
+
 // Languages the image renderer can't lay out: Arabic and Persian (joined letters), Hebrew
 // (right to left) and Hindi (stacked letters). Their pages show the site's own preview.
 export const PREVIEW_UNSUPPORTED: readonly Locale[] = ["ar", "fa", "he", "hi"]

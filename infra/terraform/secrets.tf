@@ -50,10 +50,32 @@ resource "google_secret_manager_secret_version" "service_secret" {
   secret_data = random_password.service_secret[each.value].result
 }
 
+# Signs the titles the frontend's link-preview pictures draw, so /preview draws only prepza's own.
+resource "random_password" "preview_secret" {
+  length  = 48
+  special = false
+}
+
+resource "google_secret_manager_secret" "preview_secret" {
+  secret_id = "preview-secret"
+
+  replication {
+    auto {}
+  }
+
+  depends_on = [google_project_service.apis]
+}
+
+resource "google_secret_manager_secret_version" "preview_secret" {
+  secret      = google_secret_manager_secret.preview_secret.id
+  secret_data = random_password.preview_secret.result
+}
+
 locals {
   secret_ids = merge(
     { for name, secret in google_secret_manager_secret.manual : name => secret.secret_id },
     { for name in local.keyed_services : "service-secret-${name}" => google_secret_manager_secret.service_secret[name].secret_id },
     { analytics-salt = google_secret_manager_secret.analytics_salt.secret_id },
+    { preview-secret = google_secret_manager_secret.preview_secret.secret_id },
   )
 }

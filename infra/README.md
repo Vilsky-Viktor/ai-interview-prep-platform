@@ -91,6 +91,8 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    python3 -c "import base64,os; print(base64.urlsafe_b64encode(os.urandom(32)).decode(), end='')" | gcloud secrets versions add slack-encryption-key --data-file=-
    ```
 
+   Terraform makes the generated ones itself: each service's secret for internal calls, the database passwords, `analytics-salt` and `preview-secret` (signs the frontend's link-preview titles).
+
    Services read `latest` when they start, so redeploy (step 9) after setting secrets.
 9. **Run the migrations, then restart the services** so they pick up the secrets.
    ```bash

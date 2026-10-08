@@ -111,17 +111,26 @@ test("a free practice page has breadcrumbs, and template text has its direction"
   }
 });
 
-test("the preview picture is kept out of image search, not from link previews", async ({
+test("the preview picture draws only signed titles, and is kept out of image search", async ({
   page,
 }) => {
-  const image = await page.request.get(
-    `${REQUEST_URL}/preview?title=pricing&lang=en`,
+  // The pricing page names its own picture, signed; the same address with another title isn't.
+  await page.goto("/pricing");
+  const named = new URL(
+    (await page.locator('meta[property="og:image"]').getAttribute("content")) ?? "",
   );
+  expect(named.pathname).toBe("/preview");
+  expect(named.searchParams.get("sig")).toMatch(/^[0-9a-f]{32}$/);
+  const image = await page.request.get(`${REQUEST_URL}${named.pathname}${named.search}`);
+  named.searchParams.set("title", "Anything someone else wrote");
+  const forged = await page.request.get(`${REQUEST_URL}${named.pathname}${named.search}`);
   const robots = await (
     await page.request.get(`${REQUEST_URL}/robots.txt`)
   ).text();
 
+  expect(image.status()).toBe(200);
   expect(image.headers()["x-robots-tag"]).toBe("noindex");
+  expect(forged.status()).toBe(404);
   expect(robots).not.toContain("Disallow: /preview");
 });
 
