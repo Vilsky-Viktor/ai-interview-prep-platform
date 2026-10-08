@@ -34,52 +34,56 @@ export function MenuPill({
 }) {
   const chosen = options.find((option) => option.value === value)
 
+  // In a div of its own: the open menu adds a hidden element beside its button, which a parent's
+  // spacing (space-y) would push the content below it down for.
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        disabled={disabled}
-        aria-label={ariaLabel}
-        className={cn(
-          "relative flex h-14 w-full items-center rounded-full border border-transparent bg-muted px-6 pe-16 text-start text-lg transition-colors outline-none focus-visible:border-ring disabled:opacity-50 dark:bg-input/30",
-          !chosen && "text-muted-foreground",
-          className
-        )}
-      >
-        <span className={cn("truncate", chosen?.keepCase && "normal-case")}>
-          {chosen?.label ?? placeholder}
-        </span>
-        <ChevronDownIcon
-          aria-hidden
-          className="pointer-events-none absolute end-6 top-1/2 size-6 -translate-y-1/2 text-muted-foreground"
-        />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="max-h-80 w-72 p-2">
-        <DropdownMenuRadioGroup value={value ?? ""} onValueChange={onChange}>
-          {options.map((option) => (
-            <DropdownMenuRadioItem
-              key={option.value}
-              value={option.value}
-              className="items-start px-3 py-2"
-            >
-              <span className="space-y-0.5">
-                <span
-                  className={cn(
-                    "block",
-                    option.keepCase ? "normal-case" : "lowercase"
-                  )}
-                >
-                  {option.label}
-                </span>
-                {option.note && (
-                  <span className="block text-sm text-muted-foreground">
-                    {option.note}
+    <div>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          disabled={disabled}
+          aria-label={ariaLabel}
+          className={cn(
+            "relative flex h-14 w-full items-center rounded-full border border-transparent bg-muted px-6 pe-16 text-start text-lg transition-colors outline-none focus-visible:border-ring disabled:opacity-50 dark:bg-input/30",
+            !chosen && "text-muted-foreground",
+            className
+          )}
+        >
+          <span className={cn("truncate", chosen?.keepCase && "normal-case")}>
+            {chosen?.label ?? placeholder}
+          </span>
+          <ChevronDownIcon
+            aria-hidden
+            className="pointer-events-none absolute end-6 top-1/2 size-6 -translate-y-1/2 text-muted-foreground"
+          />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="max-h-80 w-72 p-2">
+          <DropdownMenuRadioGroup value={value ?? ""} onValueChange={onChange}>
+            {options.map((option) => (
+              <DropdownMenuRadioItem
+                key={option.value}
+                value={option.value}
+                className="items-start px-3 py-2"
+              >
+                <span className="space-y-0.5">
+                  <span
+                    className={cn(
+                      "block",
+                      option.keepCase ? "normal-case" : "lowercase"
+                    )}
+                  >
+                    {option.label}
                   </span>
-                )}
-              </span>
-            </DropdownMenuRadioItem>
-          ))}
-        </DropdownMenuRadioGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+                  {option.note && (
+                    <span className="block text-sm text-muted-foreground">
+                      {option.note}
+                    </span>
+                  )}
+                </span>
+              </DropdownMenuRadioItem>
+            ))}
+          </DropdownMenuRadioGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   )
 }

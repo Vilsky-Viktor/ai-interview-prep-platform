@@ -1,6 +1,5 @@
 "use client"
 
-import { TriangleAlertIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
@@ -16,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { VirtualList } from "@/components/virtual-list"
+import { WarningCard } from "@/components/warning-card"
 import { ApiError, apiFetch } from "@/lib/api"
 import type { QuestionStats } from "@/types/feedback"
 
@@ -107,13 +107,7 @@ export function TopicQuestions({
         </DialogHeader>
         {/* Owners should know the keys can be wrong (the AI Act's instructions for use); the
             warning card the templates page used to have. */}
-        <div className="flex items-center gap-4 rounded-2xl bg-muted p-5 text-base">
-          <TriangleAlertIcon
-            aria-hidden
-            className="size-7 shrink-0 text-amber-600 dark:text-amber-400"
-          />
-          <p className="text-muted-foreground">{t("aiWritten")}</p>
-        </div>
+        <WarningCard>{t("aiWritten")}</WarningCard>
         {questions ? (
           <VirtualList
             items={questions}
