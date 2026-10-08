@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Docs",
+    "metaTitle": "Hiring compliance documents",
     "intro": "Documents for companies that assess candidates with prepza: instructions, templates and the data processing agreement.",
     "englishOnly": "",
     "download": "Download {format}",
@@ -905,6 +906,7 @@
   "contact": {
     "title": "Contact us",
     "intro": "Questions, ideas, partnership or something not working? Write to us and we'll reply by email.",
+    "description": "Contact the prepza team with questions about skills tests for hiring, ideas, partnership offers or something that isn't working. We reply by email.",
     "name": "Name",
     "email": "Email",
     "message": "Message",
@@ -1213,6 +1215,7 @@
   "apiDocs": {
     "title": "API docs",
     "intro": "Connect prepza to your own platform: list your interviews, invite candidates and get their results.",
+    "description": "The prepza API reference: get an API key, list your interviews, invite candidates, read their results and receive them by web hook.",
     "englishOnly": "This page is in English only.",
     "baseUrl": "Base URL",
     "copyBaseUrl": "Copy URL",

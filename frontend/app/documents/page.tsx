@@ -15,7 +15,7 @@ const ICON_BUTTON =
 export async function generateMetadata() {
   const t = await getTranslations("docs")
 
-  return pageMetadata(t("title"), t("intro"), "/documents", true)
+  return pageMetadata(t("metaTitle"), t("intro"), "/documents", true)
 }
 
 /** Documents for companies to download: instructions, notice and DPIA templates, the DPA. */

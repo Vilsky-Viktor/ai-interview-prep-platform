@@ -48,6 +48,47 @@ async function templates(): Promise<Template[]> {
   return rows
 }
 
+/** The day of the newest news post, for the news page's date; none without posts. */
+async function latestNews(): Promise<string | undefined> {
+  const response = await fetch(
+    `${process.env.API_URL}/api/library/news?offset=0&limit=1`,
+    { cache: "no-store" }
+  ).catch(() => null)
+
+  if (!response?.ok) {
+    return undefined
+  }
+
+  const [latest]: { published_on: string }[] = await response.json()
+
+  return latest?.published_on
+}
+
+// The legal pages, at the rounds service's address of each one's text.
+const LEGAL_PATHS = ["/privacy", "/terms", "/dpa"]
+
+/** The day a legal page was last updated, by its path; none when the API doesn't answer. */
+async function legalUpdated(): Promise<Record<string, string | undefined>> {
+  const days = await Promise.all(
+    LEGAL_PATHS.map(async (path) => {
+      const response = await fetch(
+        `${process.env.API_URL}/api/rounds/help/legal${path}`,
+        { cache: "no-store" }
+      ).catch(() => null)
+
+      if (!response?.ok) {
+        return [path, undefined]
+      }
+
+      const document: { updated: string } = await response.json()
+
+      return [path, document.updated]
+    })
+  )
+
+  return Object.fromEntries(days)
+}
+
 // Articles in each content folder, by the address they live at.
 const ARTICLES = [
   { folder: "pages", base: "" },
@@ -86,9 +127,10 @@ async function articles(site: string) {
   return lists.flat(2)
 }
 
-/** The public pages (those in every language with each language's address), the articles in
- * their languages with their dates, and the role test page and free practice page of each
- * template the API marks indexable. */
+/** The public pages (those in every language with each language's address; the news page with
+ * its newest post's day, the legal pages with their last update), the articles in their
+ * languages with their dates, and the role test page and free practice page of each template
+ * the API marks indexable. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const site = siteUrl()
   const absolute = (links: Record<string, string>) =>
@@ -99,18 +141,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const everyLanguage = LOCALIZED_PATHS.filter(
     (path) => !CATEGORY_PAGES.includes(path.slice(1))
   )
-  const [rows, written] = await Promise.all([templates(), articles(site)])
+  const [rows, written, news, legal] = await Promise.all([
+    templates(),
+    articles(site),
+    latestNews(),
+    legalUpdated(),
+  ])
 
   return [
     // A page in every language is listed once per language, each naming all of them.
     ...everyLanguage.flatMap((path) =>
       LOCALES.map((locale) => ({
         url: `${site}${localizedPath(locale, path)}`,
+        lastModified: path === "/news" ? news : undefined,
         alternates: { languages: absolute(languageAlternates(path)) },
       }))
     ),
     ...PUBLIC_PATHS.filter((path) => !LOCALIZED_PATHS.includes(path)).map(
-      (path) => ({ url: `${site}${path}` })
+      (path) => ({ url: `${site}${path}`, lastModified: legal[path] })
     ),
     ...written,
     // A template's pages in English and in its language, each naming the other.

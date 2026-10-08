@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Documenti",
+    "metaTitle": "Documenti di conformità per le assunzioni",
     "intro": "Documenti per le aziende che valutano i candidati con prepza: istruzioni, modelli e l'accordo sul trattamento dei dati.",
     "englishOnly": "Questi documenti sono disponibili solo in inglese.",
     "download": "Scarica {format}",
@@ -905,6 +906,7 @@
   "contact": {
     "title": "Contattaci",
     "intro": "Domande, idee, partnership o qualcosa non funziona? Scrivici e ti risponderemo via email.",
+    "description": "Contatta il team di prepza: domande sui test di selezione del personale, idee, proposte di partnership o qualcosa che non funziona. Rispondiamo via email.",
     "name": "Nome",
     "email": "Email",
     "message": "Messaggio",
@@ -1213,6 +1215,7 @@
   "apiDocs": {
     "title": "Documentazione API",
     "intro": "Collega prepza alla tua piattaforma: elenca i tuoi colloqui, invita candidati e ricevi i loro risultati.",
+    "description": "Il riferimento dell'API di prepza: ottieni una chiave API, elenca i tuoi colloqui, invita candidati, leggi i loro risultati e ricevili via webhook.",
     "englishOnly": "Questa pagina è disponibile solo in inglese.",
     "baseUrl": "URL di base",
     "copyBaseUrl": "Copia URL",

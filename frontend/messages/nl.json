@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Documenten",
+    "metaTitle": "Compliancedocumenten voor werving en selectie",
     "intro": "Documenten voor bedrijven die kandidaten beoordelen met prepza: instructies, sjablonen en de verwerkersovereenkomst.",
     "englishOnly": "Deze documenten zijn alleen in het Engels beschikbaar.",
     "download": "{format} downloaden",
@@ -901,6 +902,7 @@
   "contact": {
     "title": "Neem contact op",
     "intro": "Vragen, ideeën, samenwerking of werkt er iets niet? Schrijf ons en we antwoorden per e-mail.",
+    "description": "Neem contact op met het prepza-team: vragen over selectietesten, ideeën, samenwerkingsvoorstellen of iets dat niet werkt. We antwoorden per e-mail.",
     "name": "Naam",
     "email": "E-mail",
     "message": "Bericht",
@@ -1209,6 +1211,7 @@
   "apiDocs": {
     "title": "API-documentatie",
     "intro": "Koppel prepza aan je eigen platform: bekijk je interviews, nodig kandidaten uit en ontvang hun resultaten.",
+    "description": "De referentie van de prepza-API: vraag een API-sleutel aan, bekijk je interviews, nodig kandidaten uit, lees hun resultaten en ontvang ze via een webhook.",
     "englishOnly": "Deze pagina is alleen in het Engels.",
     "baseUrl": "Basis-URL",
     "copyBaseUrl": "URL kopiëren",

@@ -1,6 +1,7 @@
+import { headers } from "next/headers"
 import { describe, expect, it, vi } from "vitest"
 
-import { previewImage } from "@/lib/site"
+import { pageMetadata, previewImage } from "@/lib/site"
 
 // lib/site.ts also reads request headers and translations for pages; previewImage uses neither.
 vi.mock("next/headers", () => ({ headers: vi.fn() }))
@@ -27,5 +28,27 @@ describe("previewImage", () => {
         "/opengraph-image"
       )
     }
+  })
+})
+
+describe("pageMetadata", () => {
+  // A plain address: no language prefix.
+  vi.mocked(headers).mockResolvedValue(new Headers() as never)
+
+  async function pictureTitle(title: string, path: string) {
+    const { openGraph } = await pageMetadata(title, "Text.", path)
+    const [image] = openGraph?.images as { url: string }[]
+
+    return new URL(image.url).searchParams.get("title")
+  }
+
+  it("draws a page's title in lowercase like the site's titles", async () => {
+    expect(await pictureTitle("Privacy policy", "/privacy")).toBe(
+      "privacy policy"
+    )
+  })
+
+  it("keeps the API docs' capitals", async () => {
+    expect(await pictureTitle("API docs", "/api-docs")).toBe("API docs")
   })
 })

@@ -68,11 +68,14 @@ export async function pageMetadata(
   const languages = localized === true ? undefined : localized || undefined
   const own = localized === true || (languages ?? []).includes(locale)
   const canonical = own ? localizedPath(locale, path) : path
-  // The picture's title is lowercase like the site's titles; articles keep their capitals (names
-  // such as TestGorilla or EU), and the home page shows the site's own picture.
-  const article =
-    LOCALIZED_ARTICLE.test(path) || CATEGORY_PAGES.includes(path.slice(1))
-  const pictureTitle = article ? title : title.toLocaleLowerCase(locale)
+  // The picture's title is lowercase like the site's titles; articles and the API docs keep
+  // their capitals (names such as TestGorilla, EU or API), and the home page shows the site's own
+  // picture.
+  const capitals =
+    LOCALIZED_ARTICLE.test(path) ||
+    CATEGORY_PAGES.includes(path.slice(1)) ||
+    path === "/api-docs"
+  const pictureTitle = capitals ? title : title.toLocaleLowerCase(locale)
 
   return {
     title,

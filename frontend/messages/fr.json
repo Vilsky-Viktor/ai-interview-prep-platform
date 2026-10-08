@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Documents",
+    "metaTitle": "Documents de conformité pour le recrutement",
     "intro": "Des documents pour les entreprises qui évaluent des candidats avec prepza : instructions, modèles et l'accord de traitement des données.",
     "englishOnly": "Ces documents sont disponibles uniquement en anglais.",
     "download": "Télécharger le {format}",
@@ -905,6 +906,7 @@
   "contact": {
     "title": "Contactez-nous",
     "intro": "Une question, une idée, un partenariat ou quelque chose qui ne fonctionne pas ? Écrivez-nous, nous vous répondrons par e-mail.",
+    "description": "Contactez l'équipe prepza : questions sur les tests de recrutement, idées, propositions de partenariat ou quelque chose qui ne fonctionne pas. Nous répondons par e-mail.",
     "name": "Nom",
     "email": "E-mail",
     "message": "Message",
@@ -1213,6 +1215,7 @@
   "apiDocs": {
     "title": "Documentation de l'API",
     "intro": "Connectez prepza à votre propre plateforme : listez vos entretiens, invitez des candidats et récupérez leurs résultats.",
+    "description": "La référence de l'API prepza : obtenez une clé API, listez vos entretiens, invitez des candidats, lisez leurs résultats et recevez-les par webhook.",
     "englishOnly": "Cette page est uniquement en anglais.",
     "baseUrl": "URL de base",
     "copyBaseUrl": "Copier l'URL",

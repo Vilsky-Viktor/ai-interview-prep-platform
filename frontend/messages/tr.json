@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Belgeler",
+    "metaTitle": "İşe alım için mevzuata uyum belgeleri",
     "intro": "Adayları prepza ile değerlendiren şirketler için belgeler: talimatlar, şablonlar ve veri işleme sözleşmesi.",
     "englishOnly": "Bu belgeler yalnızca İngilizce olarak mevcuttur.",
     "download": "{format} indir",
@@ -904,6 +905,7 @@
   "contact": {
     "title": "Bize ulaşın",
     "intro": "Bir sorunuz, fikriniz veya iş birliği teklifiniz mi var, ya da bir şey çalışmıyor mu? Bize yazın, size e-postayla yanıt verelim.",
+    "description": "prepza ekibiyle iletişime geçin: işe alım testleriyle ilgili sorular, fikirler, iş birliği teklifleri ya da çalışmayan bir şey. E-postayla yanıt veriyoruz.",
     "name": "Ad",
     "email": "E-posta",
     "message": "Mesaj",
@@ -1212,6 +1214,7 @@
   "apiDocs": {
     "title": "API belgeleri",
     "intro": "prepza'yı kendi platformunuza bağlayın: mülakatlarınızı listeleyin, aday davet edin ve sonuçlarını alın.",
+    "description": "prepza API başvuru belgesi: API anahtarı alın, mülakatlarınızı listeleyin, aday davet edin, sonuçlarını okuyun ve webhook ile alın.",
     "englishOnly": "Bu sayfa yalnızca İngilizce.",
     "baseUrl": "Temel URL",
     "copyBaseUrl": "URL'yi kopyala",

@@ -26,10 +26,10 @@ async function structuredData(page: Page) {
   return scripts.flatMap((text) => [JSON.parse(text)].flat());
 }
 
-test("the FAQ, pricing and about pages have their own descriptions", async ({
+test("the FAQ, pricing, about and contact pages have their own descriptions", async ({
   page,
 }) => {
-  for (const path of ["/faq", "/pricing", "/about"]) {
+  for (const path of ["/faq", "/pricing", "/about", "/contact"]) {
     await page.goto(path);
     const intro = await page
       .locator("main header p, main p")
@@ -51,6 +51,71 @@ test("the compare hub's title doesn't repeat the site's name", async ({
   await expect(page).toHaveTitle(
     "Pre-employment testing tools compared · prepza.",
   );
+});
+
+test("the documents page's title says what its documents are for", async ({
+  page,
+}) => {
+  await page.goto("/documents");
+
+  await expect(page).toHaveTitle("Hiring compliance documents · prepza.");
+});
+
+// English only, like the legal pages: one address, no language versions, its own description,
+// its capitals in the preview picture, a technical article with breadcrumbs, in the sitemap.
+test("the API docs have their description, data and place in the sitemap", async ({
+  page,
+}) => {
+  await page.goto("/api-docs");
+
+  await expect(page).toHaveTitle("API docs · prepza.");
+  const text = (await description(page)) ?? "";
+  expect(text.length).toBeGreaterThan(100);
+  expect(text.length).toBeLessThanOrEqual(170);
+  expect(
+    await page.locator('head link[rel="canonical"]').getAttribute("href"),
+  ).toMatch(/\/api-docs$/);
+  await expect(page.locator('head link[rel="alternate"][hreflang]')).toHaveCount(0);
+  const picture = await page
+    .locator('head meta[property="og:image"]')
+    .first()
+    .getAttribute("content");
+  expect(new URL(picture ?? "").searchParams.get("title")).toBe("API docs");
+
+  const data = await structuredData(page);
+  const article = data.find((item) => item["@type"] === "TechArticle");
+  expect(article).toMatchObject({ inLanguage: "en", description: text, image: picture });
+  const crumbs = data.find((item) => item["@type"] === "BreadcrumbList");
+  expect(
+    crumbs.itemListElement.map((step: { item: string }) => new URL(step.item).pathname),
+  ).toEqual(["/", "/api-docs"]);
+
+  const sitemap = await (await page.request.get(`${REQUEST_URL}/sitemap.xml`)).text();
+  expect(sitemap).toContain("/api-docs</loc>");
+});
+
+test("the legal pages are dated in the sitemap by their last update", async ({
+  page,
+}) => {
+  const sitemap = await (await page.request.get(`${REQUEST_URL}/sitemap.xml`)).text();
+
+  for (const path of ["/privacy", "/terms", "/dpa"]) {
+    const legal = await (
+      await page.request.get(`${REQUEST_URL}/api/rounds/help/legal${path}`)
+    ).json();
+    expect(sitemap.replace(/\s+/g, ""), path).toContain(
+      `${path}</loc><lastmod>${legal.updated}</lastmod>`,
+    );
+  }
+});
+
+// Personal links, even when shared in a job ad, stay out of search results.
+test("personal links say noindex", async ({ page }) => {
+  for (const path of ["/apply/abc", "/invite/abc", "/join/abc", "/unsubscribe"]) {
+    const response = await page.request.get(`${REQUEST_URL}${path}`);
+
+    expect(response.headers()["x-robots-tag"], path).toBe("noindex");
+  }
 });
 
 test("the FAQ page's structured data lists its questions", async ({ page }) => {

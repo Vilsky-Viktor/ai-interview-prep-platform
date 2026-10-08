@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "文档",
+    "metaTitle": "招聘合规文档",
     "intro": "供使用 prepza 评估候选人的公司使用的文档：使用说明、模板和数据处理协议。",
     "englishOnly": "这些文档仅提供英文版本。",
     "download": "下载 {format}",
@@ -896,6 +897,7 @@
   "contact": {
     "title": "联系我们",
     "intro": "有问题、想法、合作意向，或者遇到故障？给我们留言，我们会通过电子邮件回复。",
+    "description": "联系 prepza 团队：关于招聘测评的问题、想法、合作意向或遇到的故障，都可以给我们留言。我们会通过电子邮件回复。",
     "name": "姓名",
     "email": "电子邮件",
     "message": "留言",
@@ -1204,6 +1206,7 @@
   "apiDocs": {
     "title": "API 文档",
     "intro": "将 prepza 连接到你自己的平台：列出你的面试、邀请候选人并获取他们的结果。",
+    "description": "prepza API 参考：获取 API 密钥、列出你的面试、邀请候选人、读取他们的结果，并通过 Webhook 接收。",
     "englishOnly": "此页面仅提供英文版。",
     "baseUrl": "基础 URL",
     "copyBaseUrl": "复制 URL",

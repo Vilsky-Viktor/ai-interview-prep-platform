@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Dokumendid",
+    "metaTitle": "Värbamise nõuetele vastavuse dokumendid",
     "intro": "Dokumendid ettevõtetele, kes hindavad kandidaate prepzaga: juhend, mallid ja andmetöötlusleping.",
     "englishOnly": "Need dokumendid on saadaval ainult inglise keeles.",
     "download": "Laadi {format} alla",
@@ -909,6 +910,7 @@
   "contact": {
     "title": "Võta meiega ühendust",
     "intro": "Küsimus, idee, koostööpakkumine või midagi ei tööta? Kirjuta meile ja vastame e-postiga.",
+    "description": "Võta ühendust prepza meeskonnaga: küsimused värbamistestide kohta, ideed, koostööpakkumised või midagi ei tööta. Vastame e-postiga.",
     "name": "Nimi",
     "email": "E-post",
     "message": "Sõnum",
@@ -1217,6 +1219,7 @@
   "apiDocs": {
     "title": "API dokumentatsioon",
     "intro": "Ühenda prepza oma platvormiga: vaata oma intervjuusid, kutsu kandidaate ja saa nende tulemused.",
+    "description": "prepza API dokumentatsioon: hangi API-võti, vaata oma intervjuusid, kutsu kandidaate, loe nende tulemusi ja saa need webhooki kaudu.",
     "englishOnly": "See leht on ainult inglise keeles.",
     "baseUrl": "Baas-URL",
     "copyBaseUrl": "Kopeeri URL",

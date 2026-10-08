@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Dokumente",
+    "metaTitle": "Compliance-Dokumente für die Personalauswahl",
     "intro": "Dokumente für Unternehmen, die Kandidaten mit prepza bewerten: Anleitung, Vorlagen und der Auftragsverarbeitungsvertrag.",
     "englishOnly": "Diese Dokumente sind nur auf Englisch verfügbar.",
     "download": "{format} herunterladen",
@@ -905,6 +906,7 @@
   "contact": {
     "title": "Kontakt",
     "intro": "Fragen, Ideen, Partnerschaften oder funktioniert etwas nicht? Schreib uns, wir antworten per E-Mail.",
+    "description": "Kontaktiere das prepza-Team: Fragen zu Einstellungstests, Ideen, Partnerschaftsangebote oder etwas funktioniert nicht. Wir antworten per E-Mail.",
     "name": "Name",
     "email": "E-Mail",
     "message": "Nachricht",
@@ -1213,6 +1215,7 @@
   "apiDocs": {
     "title": "API-Dokumentation",
     "intro": "Verbinde prepza mit deiner eigenen Plattform: Liste deine Interviews auf, lade Kandidaten ein und erhalte ihre Ergebnisse.",
+    "description": "Die Referenz der prepza-API: API-Schlüssel erhalten, Interviews auflisten, Kandidaten einladen, Ergebnisse abrufen und per Webhook empfangen.",
     "englishOnly": "Diese Seite gibt es nur auf Englisch.",
     "baseUrl": "Basis-URL",
     "copyBaseUrl": "URL kopieren",

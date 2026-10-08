@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Dokumen",
+    "metaTitle": "Dokumen kepatuhan untuk rekrutmen",
     "intro": "Dokumen untuk perusahaan yang menilai kandidat dengan prepza: petunjuk, templat, dan perjanjian pemrosesan data.",
     "englishOnly": "Dokumen ini hanya tersedia dalam bahasa Inggris.",
     "download": "Unduh {format}",
@@ -905,6 +906,7 @@
   "contact": {
     "title": "Hubungi kami",
     "intro": "Ada pertanyaan, ide, tawaran kemitraan, atau ada yang tidak berfungsi? Tulis pesan untuk kami dan kami akan membalas lewat email.",
+    "description": "Hubungi tim prepza: pertanyaan tentang tes seleksi karyawan, ide, tawaran kemitraan, atau ada yang tidak berfungsi. Kami membalas lewat email.",
     "name": "Nama",
     "email": "Email",
     "message": "Pesan",
@@ -1213,6 +1215,7 @@
   "apiDocs": {
     "title": "Dokumentasi API",
     "intro": "Hubungkan prepza ke platformmu sendiri: lihat daftar wawancaramu, undang kandidat, dan dapatkan hasilnya.",
+    "description": "Referensi API prepza: dapatkan kunci API, lihat daftar wawancaramu, undang kandidat, baca hasilnya, dan terima lewat webhook.",
     "englishOnly": "Halaman ini hanya tersedia dalam bahasa Inggris.",
     "baseUrl": "URL dasar",
     "copyBaseUrl": "Salin URL",

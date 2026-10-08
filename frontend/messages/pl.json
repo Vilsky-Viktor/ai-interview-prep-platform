@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Dokumenty",
+    "metaTitle": "Dokumenty zgodności z przepisami w rekrutacji",
     "intro": "Dokumenty dla firm, które oceniają kandydatów w prepza: instrukcje, szablony i umowa powierzenia przetwarzania danych.",
     "englishOnly": "Te dokumenty są dostępne tylko po angielsku.",
     "download": "Pobierz {format}",
@@ -905,6 +906,7 @@
   "contact": {
     "title": "Skontaktuj się z nami",
     "intro": "Masz pytanie, pomysł, propozycję współpracy albo coś nie działa? Napisz do nas, a odpowiemy e-mailem.",
+    "description": "Skontaktuj się z zespołem prepza: pytania o testy rekrutacyjne, pomysły, propozycje współpracy albo coś nie działa. Odpowiadamy e-mailem.",
     "name": "Imię",
     "email": "E-mail",
     "message": "Wiadomość",
@@ -1213,6 +1215,7 @@
   "apiDocs": {
     "title": "Dokumentacja API",
     "intro": "Połącz prepza z własną platformą: pobieraj listę rozmów, zapraszaj kandydatów i otrzymuj ich wyniki.",
+    "description": "Dokumentacja API prepza: uzyskaj klucz API, pobieraj listę rozmów, zapraszaj kandydatów, odczytuj ich wyniki i otrzymuj je przez webhook.",
     "englishOnly": "Ta strona jest dostępna tylko po angielsku.",
     "baseUrl": "Bazowy URL",
     "copyBaseUrl": "Kopiuj URL",

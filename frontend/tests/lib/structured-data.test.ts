@@ -5,6 +5,7 @@ import {
   breadcrumbData,
   organizationData,
   softwareData,
+  techArticleData,
 } from "@/lib/structured-data"
 import type { Catalog } from "@/types/billing"
 
@@ -74,6 +75,25 @@ describe("articleData", () => {
       image: `${SITE}/preview?title=Hiring+engineers&lang=de`,
       inLanguage: "de",
       dateModified: "2026-10-08",
+    })
+  })
+})
+
+describe("techArticleData", () => {
+  it("names the API docs as an English technical article with its picture", () => {
+    const data = techArticleData(SITE, {
+      title: "API docs",
+      description: "The API reference.",
+      path: "/api-docs",
+      image: `${SITE}/preview`,
+    })
+
+    expect(data).toMatchObject({
+      "@type": "TechArticle",
+      headline: "API docs",
+      url: `${SITE}/api-docs`,
+      image: `${SITE}/preview`,
+      inLanguage: "en",
     })
   })
 })

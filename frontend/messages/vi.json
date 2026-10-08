@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Tài liệu",
+    "metaTitle": "Tài liệu tuân thủ trong tuyển dụng",
     "intro": "Tài liệu cho các công ty đánh giá ứng viên bằng prepza: hướng dẫn, mẫu và thỏa thuận xử lý dữ liệu.",
     "englishOnly": "Các tài liệu này chỉ có bằng tiếng Anh.",
     "download": "Tải {format}",
@@ -901,6 +902,7 @@
   "contact": {
     "title": "Liên hệ với chúng tôi",
     "intro": "Bạn có câu hỏi, ý tưởng, đề xuất hợp tác hoặc gặp sự cố? Hãy viết cho chúng tôi, chúng tôi sẽ trả lời qua email.",
+    "description": "Liên hệ đội ngũ prepza: câu hỏi về bài test tuyển dụng, ý tưởng, đề xuất hợp tác hoặc sự cố. Chúng tôi trả lời qua email.",
     "name": "Tên",
     "email": "Email",
     "message": "Tin nhắn",
@@ -1209,6 +1211,7 @@
   "apiDocs": {
     "title": "Tài liệu API",
     "intro": "Kết nối prepza với nền tảng của riêng bạn: xem danh sách phỏng vấn, mời ứng viên và nhận kết quả của họ.",
+    "description": "Tài liệu tham khảo API của prepza: lấy khóa API, xem danh sách phỏng vấn, mời ứng viên, đọc kết quả và nhận kết quả qua webhook.",
     "englishOnly": "Trang này chỉ có bằng tiếng Anh.",
     "baseUrl": "URL gốc",
     "copyBaseUrl": "Sao chép URL",

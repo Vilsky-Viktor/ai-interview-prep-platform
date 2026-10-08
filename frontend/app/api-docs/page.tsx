@@ -5,16 +5,18 @@ import { Fields } from "@/components/api-docs/fields"
 import { Operation } from "@/components/api-docs/operation"
 import { RichText } from "@/components/api-docs/rich-text"
 import { CopyValue } from "@/components/copy-field"
+import { JsonLd } from "@/components/json-ld"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { fieldsOf, operationsOf, schemasOf } from "@/lib/openapi"
 import { serverFetch } from "@/lib/server-api"
-import { pageMetadata } from "@/lib/site"
+import { pageMetadata, previewImage, siteUrl } from "@/lib/site"
+import { breadcrumbData, techArticleData } from "@/lib/structured-data"
 import type { OpenApi } from "@/types/openapi"
 
 export async function generateMetadata() {
   const t = await getTranslations("apiDocs")
 
-  return pageMetadata(t("title"), t("intro"), "/api-docs")
+  return pageMetadata(t("title"), t("description"), "/api-docs")
 }
 
 /** The public API's reference, read from the API's own description, so it always matches it:
@@ -30,9 +32,24 @@ export default async function ApiDocsPage() {
   }
 
   const base = spec.servers?.[0]?.url ?? ""
+  const site = siteUrl()
 
   return (
     <main className="mx-auto max-w-5xl space-y-12 px-6 py-12">
+      <JsonLd
+        data={[
+          techArticleData(site, {
+            title: t("title"),
+            description: t("description"),
+            path: "/api-docs",
+            image: previewImage(t("title"))[0].url,
+          }),
+          breadcrumbData(site, [
+            { name: "prepza", path: "/" },
+            { name: t("title"), path: "/api-docs" },
+          ]),
+        ]}
+      />
       <header className="space-y-4">
         {/* An acronym: its capitals stay, though titles are lowercase. */}
         <h1 className="font-heading text-4xl font-medium tracking-tight normal-case">

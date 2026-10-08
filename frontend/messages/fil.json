@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Docs",
+    "metaTitle": "Mga dokumento sa compliance para sa hiring",
     "intro": "Mga dokumento para sa mga kumpanyang nag-a-assess ng mga aplikante gamit ang prepza: mga tagubilin, mga template at ang data processing agreement.",
     "englishOnly": "Available lang ang mga dokumentong ito sa English.",
     "download": "I-download ang {format}",
@@ -909,6 +910,7 @@
   "contact": {
     "title": "Makipag-ugnayan sa amin",
     "intro": "May tanong, ideya, alok na partnership, o may hindi gumagana? Sumulat sa amin at sasagot kami sa email.",
+    "description": "Makipag-ugnayan sa team ng prepza: mga tanong tungkol sa pre-employment assessment, mga ideya, alok na partnership, o may hindi gumagana. Sumasagot kami sa email.",
     "name": "Pangalan",
     "email": "Email",
     "message": "Mensahe",
@@ -1217,6 +1219,7 @@
   "apiDocs": {
     "title": "Dokumentasyon ng API",
     "intro": "Ikonekta ang prepza sa sarili mong platform: ilista ang mga interview mo, mag-imbita ng mga aplikante at kunin ang mga resulta nila.",
+    "description": "Ang reference ng prepza API: kumuha ng API key, ilista ang mga interview mo, mag-imbita ng mga aplikante, basahin ang mga resulta nila at tanggapin ang mga ito sa webhook.",
     "englishOnly": "English lang ang page na ito.",
     "baseUrl": "Base URL",
     "copyBaseUrl": "Kopyahin ang URL",

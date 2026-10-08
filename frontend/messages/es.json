@@ -615,6 +615,7 @@
   },
   "docs": {
     "title": "Documentos",
+    "metaTitle": "Documentos de cumplimiento normativo para la selección de personal",
     "intro": "Documentos para empresas que evalúan candidatos con prepza: instrucciones, plantillas y el acuerdo de tratamiento de datos.",
     "englishOnly": "Estos documentos solo están disponibles en inglés.",
     "download": "Descargar {format}",
@@ -905,6 +906,7 @@
   "contact": {
     "title": "Contáctanos",
     "intro": "¿Preguntas, ideas, colaboraciones o algo no funciona? Escríbenos y te responderemos por correo electrónico.",
+    "description": "Contacta con el equipo de prepza: preguntas sobre pruebas de selección de personal, ideas, propuestas de colaboración o algo que no funciona. Respondemos por correo electrónico.",
     "name": "Nombre",
     "email": "Correo electrónico",
     "message": "Mensaje",
@@ -1213,6 +1215,7 @@
   "apiDocs": {
     "title": "Documentación de la API",
     "intro": "Conecta prepza con tu propia plataforma: consulta tus entrevistas, invita a candidatos y obtén sus resultados.",
+    "description": "La referencia de la API de prepza: obtén una clave de API, consulta tus entrevistas, invita a candidatos, lee sus resultados y recíbelos por webhook.",
     "englishOnly": "Esta página solo está en inglés.",
     "baseUrl": "URL base",
     "copyBaseUrl": "Copiar URL",

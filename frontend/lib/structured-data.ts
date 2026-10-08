@@ -110,3 +110,20 @@ export function articleData(
     publisher: { "@type": "Organization", name: BRAND, url: site },
   }
 }
+
+/** The API docs as a technical reference in English, with its preview picture. */
+export function techArticleData(
+  site: string,
+  page: { title: string; description: string; path: string; image: string }
+) {
+  return {
+    "@context": CONTEXT,
+    "@type": "TechArticle",
+    headline: page.title,
+    description: page.description,
+    url: `${site}${page.path}`,
+    image: page.image,
+    inLanguage: "en",
+    publisher: { "@type": "Organization", name: BRAND, url: site },
+  }
+}
