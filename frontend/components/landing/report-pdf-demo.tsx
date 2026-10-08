@@ -23,7 +23,7 @@ export async function ReportPdfDemo({ role }: { role: string }) {
   const candidates = await getTranslations("candidates")
 
   return (
-    <div className="light-scope relative space-y-4 rounded-2xl border bg-background p-5 text-start text-foreground sm:p-6 dark:bg-neutral-100">
+    <div className="light-scope relative space-y-4 rounded-2xl border bg-background p-5 text-start text-foreground sm:p-6 dark:bg-[oklch(0.9_0_0)]">
       {/* It's a PDF: the file's icon in the corner. */}
       <PdfIcon className="absolute end-4 top-4 h-12 w-auto" />
       <div className="text-center">
