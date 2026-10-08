@@ -7,6 +7,7 @@ from prepza_common.notifications import Recipient
 from app.constants.notifications import CHANNEL, DROPDOWN_LIMIT, HEARTBEAT_SECONDS
 from app.integrations import companies
 from app.integrations.redis import get_redis
+from app.integrations.subscription import listening
 from app.schemas.notifications import FeedOut, NotificationOut
 from app.storage import notifications
 from app.storage.notifications import Recipients
@@ -37,27 +38,22 @@ async def announce(recipient: str, recipient_id: str) -> None:
 
 async def changes(user_id: str) -> AsyncIterator[str]:
     """Server-sent events for one open tab: {"new": true} whenever one of the user's recipients
-    gets a notification, and a comment every HEARTBEAT_SECONDS so the connection stays open."""
+    gets a notification, and a comment every HEARTBEAT_SECONDS so the connection stays open. The
+    instance's tabs share one Redis subscription."""
     recipients = await recipients_of(user_id)
     channels = [CHANNEL.format(recipient=kind, recipient_id=id_) for kind, id_ in recipients]
-    pubsub = get_redis().pubsub()
-    await pubsub.subscribe(*channels)
 
-    try:
+    async with listening(channels) as heard:
         yield ": connected\n\n"
 
         while True:
-            message = await pubsub.get_message(
-                ignore_subscribe_messages=True, timeout=HEARTBEAT_SECONDS
-            )
-
-            if message is None:
+            try:
+                await asyncio.wait_for(heard.wait(), HEARTBEAT_SECONDS)
+            except TimeoutError:
                 yield ": heartbeat\n\n"
-            else:
-                yield f"data: {json.dumps({'new': True})}\n\n"
 
-            # Lets a cancelled request (the tab closed) end the loop.
-            await asyncio.sleep(0)
-    finally:
-        await pubsub.unsubscribe()
-        await pubsub.aclose()
+                continue
+
+            heard.clear()
+
+            yield f"data: {json.dumps({'new': True})}\n\n"

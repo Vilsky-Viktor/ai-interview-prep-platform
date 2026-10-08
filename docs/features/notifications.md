@@ -30,7 +30,7 @@ A company can send its notifications to one Slack channel too, from its integrat
 
 - An owner or admin clicks "Add to Slack", allows prepza in Slack and picks the channel. Back on the company's Slack page, they choose which notifications go there. By default: finished candidates, ATS candidates that weren't invited, undelivered invites and failed automatic top-ups; ready interviews and charged top-ups can be added.
 - prepza gets only an incoming web hook for that channel (the `incoming-webhook` scope): it can post there and can't read anything.
-- Each notification is posted once, in English, with a link back to prepza. A redelivered event doesn't post again.
+- Each notification is posted once, in English, with a link back to prepza. A redelivered event doesn't post again, nor does one that adds to a grouped notification in the bell (see [Grouping](#grouping)): only the group's first is posted.
 - The bell gets the notification first, whatever happens in Slack. If Slack is busy or down (rate limited, a server error, a timeout), the event is retried with Pub/Sub's backoff and the retry posts the message; the bell doesn't get it twice.
 - If Slack says the web hook is gone (the app was removed or the channel deleted), the page shows "Reconnect". A message Slack refuses for good is logged and skipped.
 - Disconnecting, or deleting the company, removes prepza's app from the workspace and the channel from prepza.
@@ -99,6 +99,7 @@ With `RESEND_API_KEY` set, a message sent from the local contact page reaches th
 ### Failed sends
 
 - A failed send answers Pub/Sub's push with an error, so Pub/Sub retries it.
+- Over Resend's per-second limit (a burst of invites), it answers 429 instead: Pub/Sub retries with backoff, and it doesn't count as a server error in the alerts.
 - After the subscription's maximum attempts, Pub/Sub moves it to the dead-letter topic.
 - The error from Resend is in the logs.
 - Retries never send an email twice.

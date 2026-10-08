@@ -130,12 +130,19 @@ def test_an_address_resend_refuses_is_final(monkeypatch, status_code):
         asyncio.run(resend.send(candidate_invite_email({**DATA, "company": "Acme"}, ""), "k"))
 
 
-@pytest.mark.parametrize("status_code", [401, 409, 429, 503])
+@pytest.mark.parametrize("status_code", [401, 409, 503])
 def test_other_resend_errors_are_retried(monkeypatch, status_code):
     resend_answering(monkeypatch, status_code)
 
     with pytest.raises(RuntimeError):
         asyncio.run(resend.send(candidate_invite_email({**DATA, "company": "Acme"}, ""), "k"))
+
+
+def test_over_resends_limit_pubsub_retries_without_a_server_error(client, monkeypatch):
+    resend_answering(monkeypatch, 429)
+    monkeypatch.setattr(settings, "resend_api_key", "re_test")
+
+    assert client.post("/internal/events", json=push()).status_code == 429
 
 
 def test_a_refused_invite_is_marked_undelivered_and_not_retried(client, monkeypatch):

@@ -20,8 +20,12 @@ GROUPED_KINDS = {
     "ats_not_invited",
 }
 GROUP_HOURS = 24
-# A user's open tabs hear about a recipient's new notification on this Redis channel.
+# A user's open tabs hear about a recipient's new notification on this Redis channel. Each
+# instance holds one subscription to them all (CHANNELS) and passes each on to its open tabs.
 CHANNEL = "notifications:{recipient}:{recipient_id}"
+CHANNELS = "notifications:*"
+# After losing that subscription, it's made again this long after.
+RESUBSCRIBE_SECONDS = 1
 # A stream sends a comment this often, so proxies (nginx, the load balancer) don't close it as
 # idle.
 HEARTBEAT_SECONDS = 20

@@ -20,6 +20,7 @@ from app.constants.slack import (
 from app.helpers.slack import message, read_state, signed_state
 from app.integrations import companies, slack
 from app.schemas.slack import SlackOut
+from app.storage import notifications
 from app.storage import slack as storage
 
 logger = logging.getLogger(__name__)
@@ -152,7 +153,7 @@ async def disconnect(company_id: str) -> None:
 async def deliver(event: dict, key: str) -> None:
     """A company's notification goes to its Slack channel too, if it chose that kind and whoever
     connected it is still an owner or admin; once per `key` (the bell's), however often its event
-    comes. A gone web hook, or a connector no longer an editor, marks the channel for
+    comes. Only a new one: an event that added to a grouped notification isn't posted. A gone web hook, or a connector no longer an editor, marks the channel for
     reconnecting, and a message Slack refuses is logged: neither is retried. Slack (or the
     companies service) busy or down raises, so Pub/Sub retries the event, backing off, and the
     retry posts it."""
@@ -164,6 +165,10 @@ async def deliver(event: dict, key: str) -> None:
     text = message(event, settings.site_url)
 
     if found is None or event.get("kind") not in found.kinds or text is None:
+        return
+
+    # Asked of the stored rows, not of this delivery, so a retry after Slack failed still posts.
+    if not await notifications.stands_alone(key):
         return
 
     # The channel works while whoever connected it is still an owner or admin, like an API key;

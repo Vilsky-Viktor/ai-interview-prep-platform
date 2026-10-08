@@ -95,6 +95,18 @@ def test_a_failing_resend_answers_with_an_error_so_pub_sub_retries(run, outside)
     assert post_events(run, push("report.shared", REPORT)) == [500]
 
 
+def test_a_burst_over_resends_limit_is_retried_without_a_server_error(run, outside):
+    outside["resend"] = 429
+    busy = post_events(run, push("candidate.invited", INVITE, outbox_id="outbox-9"))
+    outside["resend"] = 200
+    retried = post_events(run, push("candidate.invited", INVITE, outbox_id="outbox-9"))
+    keys = {request.headers["Idempotency-Key"] for request in outside["requests"]}
+
+    # Pub/Sub retries a 429 with backoff; the retry sends it, under the same key.
+    assert (busy, retried) == ([429], [204])
+    assert keys == {"events/outbox-9"}
+
+
 def test_an_invite_resend_refuses_is_marked_undelivered_and_not_retried(run, outside):
     outside["resend"] = 422
 

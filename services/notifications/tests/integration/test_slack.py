@@ -120,6 +120,34 @@ def test_a_retry_after_slack_was_down_posts_it_without_a_second_bell_notificatio
     assert len(configured["posted"]) == 1
 
 
+def test_a_burst_grouped_in_the_bell_posts_only_its_first(run, configured):
+    company_id = company()
+    bodies = [
+        push("notification.requested", finished(company_id, email=f"{n}@x.com"), f"o-g{n}", "m")
+        for n in range(3)
+    ]
+
+    async def scenario():
+        await connect(company_id)
+
+        async with api() as client:
+            # Slack fails the first; the rest add to it in the bell; the first's retry posts it.
+            configured["down"] = True
+            await client.post("/internal/events", json=bodies[0])
+            configured["down"] = False
+
+            for body in [*bodies[1:], bodies[0], bodies[1]]:
+                await client.post("/internal/events", json=body)
+
+        return await notifications.latest([("company", company_id)], limit=None)
+
+    [bell] = run(scenario())
+
+    assert bell.data["count"] == 3
+    assert len(configured["posted"]) == 1
+    assert "0@x.com finished" in configured["posted"][0][1]
+
+
 def test_a_deleted_companys_channel_and_app_go(run, configured):
     company_id = company()
     deleted = push("company.deleted", {"company_id": company_id}, message_id="m-s2")

@@ -1,7 +1,9 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, HTTPException, status
+from prepza_common.constants import RATE_LIMITED
 from prepza_common.google import Invoker
 from prepza_common.pubsub import PushBody, event_of
 
+from app.integrations.resend import ResendBusy
 from app.services.events import handle
 
 router = APIRouter(prefix="/internal", tags=["internal"])
@@ -11,6 +13,12 @@ router = APIRouter(prefix="/internal", tags=["internal"])
 async def receive_event(body: PushBody) -> None:
     """Pub/Sub pushes every event here. A failed email or Slack post answers with an error, so
     Pub/Sub retries it, and moves it to the dead-letter topic after the subscription's maximum
-    attempts; neither Resend nor Slack gets the same message twice."""
+    attempts; neither Resend nor Slack gets the same message twice. Over Resend's per-second limit
+    (a burst of invites) it answers 429: Pub/Sub retries with backoff, and it isn't counted as a
+    server error."""
     event_type, data, event_id = event_of(body)
-    await handle(event_type, data, event_id)
+
+    try:
+        await handle(event_type, data, event_id)
+    except ResendBusy:
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, RATE_LIMITED) from None

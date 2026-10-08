@@ -1,3 +1,4 @@
+from fastapi import status
 from prepza_common import http
 
 from app.config.settings import settings
@@ -7,6 +8,10 @@ from app.models.email import Email
 
 class EmailRefused(Exception):
     """Resend won't ever send this email; retrying is pointless."""
+
+
+class ResendBusy(Exception):
+    """Over Resend's per-second limit (a burst of invites): nothing was sent, a retry will."""
 
 
 async def send(email: Email, idempotency_key: str) -> None:
@@ -39,6 +44,9 @@ async def send(email: Email, idempotency_key: str) -> None:
         },
         timeout=SEND_TIMEOUT_S,
     )
+
+    if response.status_code == status.HTTP_429_TOO_MANY_REQUESTS:
+        raise ResendBusy()
 
     if response.status_code in RESEND_REFUSED:
         raise EmailRefused(f"Resend refused the email ({response.status_code}): {response.text}")

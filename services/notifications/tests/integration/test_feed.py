@@ -10,7 +10,7 @@ from prepza_common.notifications import (
 )
 
 from app.constants.notifications import DROPDOWN_LIMIT
-from app.integrations import companies
+from app.integrations import companies, subscription
 from app.services import events, feed
 from app.storage import notifications
 from tests.integration.factories import company, finished
@@ -126,3 +126,45 @@ def test_an_open_tab_hears_of_a_new_notification_through_redis(run, member_of):
         return connected, heard
 
     assert run(scenario()) == (": connected\n\n", 'data: {"new": true}\n\n')
+
+
+async def heard(stream) -> str:
+    """The stream's next event, past heartbeat comments."""
+    line = await asyncio.wait_for(anext(stream), 5)
+
+    while line.startswith(":"):
+        line = await asyncio.wait_for(anext(stream), 5)
+
+    return line
+
+
+def test_an_instances_open_tabs_share_one_redis_subscription(run, member_of, monkeypatch):
+    ann, bob, shared = f"u-{uuid.uuid4()}", f"u-{uuid.uuid4()}", company()
+    member_of.update({ann: [shared], bob: [shared]})
+    made = []
+    real = subscription.get_redis
+
+    class CountingRedis:
+        def pubsub(self):
+            made.append(1)
+
+            return real().pubsub()
+
+    monkeypatch.setattr(subscription, "get_redis", CountingRedis)
+
+    async def scenario():
+        tabs = [feed.changes(ann), feed.changes(ann), feed.changes(bob)]
+
+        try:
+            for tab in tabs:
+                await anext(tab)
+
+            await events.handle(NOTIFICATION_REQUESTED, finished(shared), str(uuid.uuid4()))
+
+            return [await heard(tab) for tab in tabs]
+        finally:
+            for tab in tabs:
+                await tab.aclose()
+
+    assert run(scenario()) == ['data: {"new": true}\n\n'] * 3
+    assert len(made) == 1
