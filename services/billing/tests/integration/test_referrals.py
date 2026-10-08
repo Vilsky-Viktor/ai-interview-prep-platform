@@ -89,6 +89,29 @@ def test_a_deleted_referrer_leaves_the_new_company_its_own_reward(run):
     assert gone == {}
 
 
+def test_a_referrer_over_the_yearly_limit_is_neither_paid_nor_told(run, monkeypatch):
+    acme, first, second = company(), company(), company()
+    monkeypatch.setattr(referrals, "REFERRALS_PER_YEAR", 1)
+
+    async def scenario():
+        await ledger.welcome_company(acme, f"{acme}@example.com")
+        code = await referrals.code_of(COMPANY, acme)
+        paid = []
+
+        for newco in (first, second):
+            await ledger.welcome_company(newco, f"{newco}@example.com")
+            await referrals.record(code, COMPANY, newco, [])
+            paid.append(await referrals.reward(COMPANY, newco, f"txn_{newco}"))
+
+        return paid, await available(COMPANY, acme), await available(COMPANY, second)
+
+    paid, acme_credits, second_credits = run(scenario())
+
+    assert paid == [acme, None]
+    assert acme_credits == WELCOME_COMPANY + REFERRAL_REWARD
+    assert second_credits == WELCOME_COMPANY + REFERRAL_REWARD
+
+
 def refund(transaction_id, total):
     return {
         "id": f"adj_{uuid.uuid4().hex[:12]}",

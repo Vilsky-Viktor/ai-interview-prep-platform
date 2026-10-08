@@ -96,14 +96,16 @@ async def reward(owner_type: str, owner_id: str, transaction_id: str) -> str | N
             )
         )
         referrer = await session.get(Wallet, (owner_type, referrer_id))
-
         # This one is already counted, hence <=.
-        if referrer is not None and rewarded_this_year <= REFERRALS_PER_YEAR:
+        paid = referrer is not None and rewarded_this_year <= REFERRALS_PER_YEAR
+
+        if paid:
             await add(session, owner_type, referrer_id, amount, f"{key}:referrer", Reason.REFERRAL)
 
         await session.commit()
 
-        return referrer_id
+        # Over their yearly limit, or deleted: nothing to tell them.
+        return referrer_id if paid else None
 
 
 async def take_back(transaction_id: str) -> bool:
