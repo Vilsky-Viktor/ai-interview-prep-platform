@@ -26,10 +26,10 @@ Below, a landing page walks through prepza, one section per screen:
 - why prepza: six advantages at a glance (ready in minutes, any role, harder to cheat, no subscription, ranked results, 23 languages),
 - seeing who knows the job,
 - trying it before your candidates do (free templates and a preview),
+- four ways to invite candidates: by email, from a list or file, a shareable link for a job ad, and from an ATS,
 - sharing results,
 - topic review,
 - questions that fix themselves,
-- one link for a job ad,
 - the tools prepza works with: the ATSs (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR) and Slack as their logos, and the API as an example request with a link to its docs,
 - a verified brand,
 - fair to candidates and safe for your data: what's true about human review, answer keys, AI training, extra time, candidate notices and data, data retention and hosting, payments and the documents, with links to the documents, terms and privacy policy (no compliance badges),
@@ -123,7 +123,7 @@ The `/api-docs` page ("api docs" in the footer) is the public API's reference, i
 
 `/about` explains why prepza exists for companies, free practice for people preparing, and its solo founder.
 
-The footer links, in three columns: skills tests by role and the articles (pre-employment testing, AI interviews, comparisons, guides); the privacy policy, the terms, the documents and the API docs; free practice, the FAQ, About us and Contact us. Pricing is in the header's menu (hidden on phones), not in the footer.
+The footer links, in three columns: skills tests by role and the articles (pre-employment testing, AI interviews, comparisons, guides); the privacy policy, the terms, the documents and the API docs; free practice, the FAQ, About us and Contact us. Pricing is in the header's menu, not in the footer.
 
 ## Search engines
 

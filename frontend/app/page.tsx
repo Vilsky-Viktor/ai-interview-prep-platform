@@ -8,11 +8,11 @@ import { Closing } from "@/components/landing/closing"
 import { CompaniesSection } from "@/components/landing/companies"
 import { ControlSection } from "@/components/landing/control"
 import { HowItWorks } from "@/components/landing/how-it-works"
-import { JobAdLinkSection } from "@/components/landing/job-ad-link"
 import { PricingSection } from "@/components/landing/pricing"
 import { TrustSection } from "@/components/landing/trust"
 import { QualitySection } from "@/components/landing/quality"
 import { ReportsSection } from "@/components/landing/reports"
+import { InviteWaysSection } from "@/components/landing/invite-ways"
 import { TryFirstSection } from "@/components/landing/try-first"
 import { JsonLd } from "@/components/json-ld"
 import { StartTest } from "@/components/start-test"
@@ -80,10 +80,10 @@ export default async function HomePage() {
       <AdvantagesSection />
       <CompaniesSection />
       <TryFirstSection />
+      <InviteWaysSection />
       <ReportsSection />
       <ControlSection />
       <QualitySection />
-      <JobAdLinkSection />
       <AtsSection />
       <BrandSection />
       <TrustSection />

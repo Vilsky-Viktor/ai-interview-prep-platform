@@ -743,15 +743,6 @@
         "preview": "Xem buổi phỏng vấn của bạn như ứng viên"
       }
     },
-    "link": {
-      "title": "Một liên kết cho tin tuyển dụng",
-      "text": "Đặt link phỏng vấn vào tin tuyển dụng. Ứng viên làm ngay và hiện trong danh sách của bạn, xếp theo điểm.",
-      "note": "Bất kỳ ai có liên kết đều có thể tham gia phỏng vấn.",
-      "points": {
-        "anywhere": "Trên các trang việc làm, LinkedIn hoặc website của bạn",
-        "off": "Tắt liên kết khi đã tuyển được người"
-      }
-    },
     "ats": {
       "title": "Hoạt động với các công cụ của bạn",
       "text": "Ứng viên bạn chuyển trong ATS sẽ nhận buổi phỏng vấn, và kết quả được gửi về. Slack và API kết nối phần còn lại.",
@@ -777,6 +768,28 @@
       "rushed": "Trả lời vội",
       "left": "Rời trang",
       "role": "Lập trình viên backend · điểm đạt {mark}%"
+    },
+    "invite": {
+      "title": "Mời ứng viên theo bốn cách",
+      "text": "Mời họ từ prepza, mở bài phỏng vấn cho bất kỳ ai qua liên kết, hoặc để ATS của bạn gửi họ đến.",
+      "ways": {
+        "email": {
+          "title": "Qua email",
+          "text": "Nhập một hoặc nhiều email; mỗi ứng viên nhận lời mời riêng."
+        },
+        "list": {
+          "title": "Từ danh sách hoặc tệp",
+          "text": "Dán danh sách email, hoặc tải lên tệp CSV hay tệp văn bản."
+        },
+        "link": {
+          "title": "Liên kết cho tin tuyển dụng",
+          "text": "Bật liên kết chia sẻ và đặt vào tin tuyển dụng: ai mở liên kết cũng có thể làm bài phỏng vấn."
+        },
+        "ats": {
+          "title": "Từ ATS của bạn",
+          "text": "Liên kết một vị trí trong Workable, Greenhouse, Teamtailor, Recruitee hoặc Breezy HR, và ứng viên của vị trí đó được mời thay bạn."
+        }
+      }
     },
     "reports": {
       "title": "Chia sẻ kết quả chỉ với một cú nhấp",

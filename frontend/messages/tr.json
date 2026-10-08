@@ -746,15 +746,6 @@
         "preview": "Mülakatınızı aday gözüyle görün"
       }
     },
-    "link": {
-      "title": "İş ilanınız için tek bağlantı",
-      "text": "Mülakat bağlantısını iş ilanınıza koyun. Başvuranlar hemen girer ve puana göre listenizde görünür.",
-      "note": "Bağlantıya sahip herkes mülakata girebilir.",
-      "points": {
-        "anywhere": "İş ilanı sitelerinde, LinkedIn'de ya da kendi sitenizde",
-        "off": "Pozisyon dolunca kapatın"
-      }
-    },
     "ats": {
       "title": "Araçlarınızla çalışır",
       "text": "ATS sisteminizde taşıdığınız adaylar mülakatı alır ve sonuçlar geri gelir. Gerisini Slack ve API bağlar.",
@@ -780,6 +771,28 @@
       "rushed": "Aceleci yanıtlar",
       "left": "Sayfadan ayrıldı",
       "role": "Backend geliştirici · geçme notu %{mark}"
+    },
+    "invite": {
+      "title": "Adayları dört şekilde davet edin",
+      "text": "Onları prepza'dan davet edin, mülakatı bir bağlantıyla herkese açın veya ATS'nizin göndermesine izin verin.",
+      "ways": {
+        "email": {
+          "title": "E-postayla",
+          "text": "Bir veya birden çok e-posta yazın; her aday kendi davetini alır."
+        },
+        "list": {
+          "title": "Listeden veya dosyadan",
+          "text": "Bir e-posta listesi yapıştırın ya da CSV veya metin dosyası yükleyin."
+        },
+        "link": {
+          "title": "İş ilanı için bir bağlantı",
+          "text": "Paylaşılabilir bağlantıyı açıp ilanınıza koyun: bağlantıyı açan herkes mülakata girebilir."
+        },
+        "ats": {
+          "title": "ATS'nizden",
+          "text": "Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'da bir ilanı bağlayın, başvuranları sizin yerinize davet edilsin."
+        }
+      }
     },
     "reports": {
       "title": "Sonuçları tek tıkla paylaşın",

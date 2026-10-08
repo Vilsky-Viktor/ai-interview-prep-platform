@@ -747,15 +747,6 @@
         "preview": "Guarda il tuo colloquio da candidato"
       }
     },
-    "link": {
-      "title": "Un link per il tuo annuncio di lavoro",
-      "text": "Metti il link del colloquio nell'annuncio. I candidati lo svolgono subito e compaiono nella tua lista, ordinati per punteggio.",
-      "note": "Chiunque abbia il link può svolgere il colloquio.",
-      "points": {
-        "anywhere": "Su siti di lavoro, LinkedIn o il tuo sito",
-        "off": "Disattivalo quando il ruolo è coperto"
-      }
-    },
     "ats": {
       "title": "Funziona con i tuoi strumenti",
       "text": "I candidati che sposti nel tuo ATS ricevono il colloquio e i risultati tornano indietro. Slack e l'API collegano il resto.",
@@ -781,6 +772,28 @@
       "rushed": "Risposte affrettate",
       "left": "Ha lasciato la pagina",
       "role": "Sviluppatore backend · soglia {mark}%"
+    },
+    "invite": {
+      "title": "Invita i candidati in quattro modi",
+      "text": "Invitali da prepza, apri il colloquio a chiunque con un link, o lascia che te li mandi il tuo ATS.",
+      "ways": {
+        "email": {
+          "title": "Via email",
+          "text": "Scrivi una o più email: ogni candidato riceve il suo invito."
+        },
+        "list": {
+          "title": "Da una lista o un file",
+          "text": "Incolla una lista di email, o carica un file CSV o di testo."
+        },
+        "link": {
+          "title": "Un link per l'annuncio",
+          "text": "Attiva il link condivisibile e mettilo nell'annuncio: chi lo apre può svolgere il colloquio."
+        },
+        "ats": {
+          "title": "Dal tuo ATS",
+          "text": "Collega una posizione in Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR, e i suoi candidati vengono invitati per te."
+        }
+      }
     },
     "reports": {
       "title": "Condividi i risultati in un clic",

@@ -751,15 +751,6 @@
         "preview": "Vaata oma intervjuud kandidaadina"
       }
     },
-    "link": {
-      "title": "Üks link sinu töökuulutusse",
-      "text": "Lisa intervjuu link töökuulutusse. Kandideerijad teevad selle kohe ja ilmuvad sinu nimekirja punktide järjekorras.",
-      "note": "Intervjuu saab teha igaüks, kellel on link.",
-      "points": {
-        "anywhere": "Tööportaalides, LinkedInis või sinu veebilehel",
-        "off": "Lülita see välja, kui koht on täidetud"
-      }
-    },
     "ats": {
       "title": "Töötab sinu tööriistadega",
       "text": "Kandidaadid, keda ATS-süsteemis liigutad, saavad intervjuu ja tulemused jõuavad tagasi. Slack ja API ühendavad ülejäänu.",
@@ -785,6 +776,28 @@
       "rushed": "Kiirustatud vastused",
       "left": "Lahkus lehelt",
       "role": "Backend-arendaja · läbimise lävi {mark}%"
+    },
+    "invite": {
+      "title": "Kutsu kandidaate neljal viisil",
+      "text": "Kutsu neid prepzast, ava intervjuu lingiga kõigile või lase oma ATS-il nad saata.",
+      "ways": {
+        "email": {
+          "title": "E-postiga",
+          "text": "Sisesta üks või mitu aadressi; iga kandidaat saab oma kutse."
+        },
+        "list": {
+          "title": "Nimekirjast või failist",
+          "text": "Kleebi aadresside nimekiri või laadi üles CSV- või tekstifail."
+        },
+        "link": {
+          "title": "Link töökuulutusse",
+          "text": "Lülita jagatav link sisse ja pane see kuulutusse: igaüks, kes selle avab, saab intervjuu teha."
+        },
+        "ats": {
+          "title": "Sinu ATS-ist",
+          "text": "Seo töökuulutus Workable'is, Greenhouse'is, Teamtailoris, Recruitee's või Breezy HR-is ja selle kandideerijad kutsutakse sinu eest."
+        }
+      }
     },
     "reports": {
       "title": "Jaga tulemusi ühe klõpsuga",

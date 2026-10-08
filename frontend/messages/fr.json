@@ -747,15 +747,6 @@
         "preview": "Voyez votre entretien comme un candidat"
       }
     },
-    "link": {
-      "title": "Un lien pour votre offre d'emploi",
-      "text": "Mettez le lien de l'entretien dans votre annonce. Les candidats le passent aussitôt et apparaissent dans votre liste, classés par score.",
-      "note": "Toute personne disposant du lien peut passer l'entretien.",
-      "points": {
-        "anywhere": "Sur les sites d'emploi, LinkedIn ou votre site",
-        "off": "Désactivez-le une fois le poste pourvu"
-      }
-    },
     "ats": {
       "title": "Compatible avec vos outils",
       "text": "Les candidats que vous déplacez dans votre ATS reçoivent l'entretien, et les résultats reviennent. Slack et l'API relient le reste.",
@@ -781,6 +772,28 @@
       "rushed": "Réponses trop rapides",
       "left": "A quitté la page",
       "role": "Développeur backend · seuil de réussite {mark} %"
+    },
+    "invite": {
+      "title": "Invitez des candidats de quatre façons",
+      "text": "Invitez-les depuis prepza, ouvrez l'entretien à tous avec un lien, ou laissez votre ATS vous les envoyer.",
+      "ways": {
+        "email": {
+          "title": "Par e-mail",
+          "text": "Saisissez un ou plusieurs e-mails : chaque candidat reçoit sa propre invitation."
+        },
+        "list": {
+          "title": "Depuis une liste ou un fichier",
+          "text": "Collez une liste d'e-mails, ou importez un fichier CSV ou texte."
+        },
+        "link": {
+          "title": "Un lien pour votre annonce",
+          "text": "Activez le lien de partage et mettez-le dans votre annonce : toute personne qui l'ouvre peut passer l'entretien."
+        },
+        "ats": {
+          "title": "Depuis votre ATS",
+          "text": "Associez un poste dans Workable, Greenhouse, Teamtailor, Recruitee ou Breezy HR, et ses candidats sont invités pour vous."
+        }
+      }
     },
     "reports": {
       "title": "Partagez les résultats en un clic",

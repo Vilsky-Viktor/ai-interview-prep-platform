@@ -751,15 +751,6 @@
         "preview": "Tingnan ang interview mo bilang aplikante"
       }
     },
-    "link": {
-      "title": "Isang link para sa iyong job ad",
-      "text": "Ilagay ang link ng interview sa job ad mo. Agad itong sasagutan ng mga aplikante at lalabas sila sa listahan mo, ayon sa score.",
-      "note": "Puwedeng sagutan ng sinumang may link ang interview.",
-      "points": {
-        "anywhere": "Sa mga job board, LinkedIn o sa iyong site",
-        "off": "I-off ito kapag napunan na ang role"
-      }
-    },
     "ats": {
       "title": "Gumagana sa mga tool mo",
       "text": "Makukuha ng mga aplikanteng inilipat mo sa ATS mo ang interview, at babalik ang mga resulta. Ikinokonekta ng Slack at API ang iba pa.",
@@ -785,6 +776,28 @@
       "rushed": "Minadaling sagot",
       "left": "Umalis sa page",
       "role": "Backend developer · passing grade {mark}%"
+    },
+    "invite": {
+      "title": "Mag-imbita ng aplikante sa apat na paraan",
+      "text": "I-invite sila mula sa prepza, buksan ang interview sa kahit sino gamit ang link, o hayaang ipadala sila ng ATS mo.",
+      "ways": {
+        "email": {
+          "title": "Sa email",
+          "text": "Mag-type ng isa o maraming email; may sariling invite ang bawat aplikante."
+        },
+        "list": {
+          "title": "Mula sa listahan o file",
+          "text": "Mag-paste ng listahan ng email, o mag-upload ng CSV o text file."
+        },
+        "link": {
+          "title": "Link para sa job ad",
+          "text": "I-on ang link na puwedeng i-share at ilagay sa job ad mo: puwedeng mag-interview ang sinumang magbukas nito."
+        },
+        "ats": {
+          "title": "Mula sa ATS mo",
+          "text": "I-link ang isang job sa Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR, at iniimbita para sa iyo ang mga aplikante nito."
+        }
+      }
     },
     "reports": {
       "title": "I-share ang mga resulta sa isang click",

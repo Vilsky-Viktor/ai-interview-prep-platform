@@ -747,15 +747,6 @@
         "preview": "Lihat wawancaramu sebagai kandidat"
       }
     },
-    "link": {
-      "title": "Satu tautan untuk lowonganmu",
-      "text": "Pasang tautan wawancara di iklan lowonganmu. Pelamar langsung mengikutinya dan muncul di daftarmu, diurutkan menurut skor.",
-      "note": "Siapa pun yang punya tautan bisa mengikuti wawancara.",
-      "points": {
-        "anywhere": "Di situs lowongan kerja, LinkedIn, atau situsmu",
-        "off": "Matikan setelah posisinya terisi"
-      }
-    },
     "ats": {
       "title": "Bekerja dengan alat-alatmu",
       "text": "Kandidat yang kamu pindahkan di ATS-mu mendapat wawancara, dan hasilnya kembali. Slack dan API menghubungkan sisanya.",
@@ -781,6 +772,28 @@
       "rushed": "Jawaban terburu-buru",
       "left": "Meninggalkan halaman",
       "role": "Backend developer · nilai lulus {mark}%"
+    },
+    "invite": {
+      "title": "Undang kandidat dengan empat cara",
+      "text": "Undang mereka dari prepza, buka wawancara untuk siapa saja lewat tautan, atau biarkan ATS-mu mengirim mereka.",
+      "ways": {
+        "email": {
+          "title": "Lewat email",
+          "text": "Ketik satu email atau banyak; tiap kandidat mendapat undangannya sendiri."
+        },
+        "list": {
+          "title": "Dari daftar atau file",
+          "text": "Tempel daftar email, atau unggah file CSV atau teks."
+        },
+        "link": {
+          "title": "Tautan untuk lowongan",
+          "text": "Nyalakan tautan yang bisa dibagikan dan pasang di iklanmu: siapa pun yang membukanya bisa mengikuti wawancara."
+        },
+        "ats": {
+          "title": "Dari ATS-mu",
+          "text": "Hubungkan lowongan di Workable, Greenhouse, Teamtailor, Recruitee, atau Breezy HR, dan pelamarnya diundang untukmu."
+        }
+      }
     },
     "reports": {
       "title": "Bagikan hasil dengan satu klik",

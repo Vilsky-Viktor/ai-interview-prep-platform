@@ -747,15 +747,6 @@
         "preview": "Mira tu entrevista como candidato"
       }
     },
-    "link": {
-      "title": "Un enlace para tu oferta de empleo",
-      "text": "Pon el enlace de la entrevista en tu oferta. Los candidatos la hacen al momento y aparecen en tu lista, ordenados por puntuación.",
-      "note": "Cualquiera con el enlace puede hacer la entrevista.",
-      "points": {
-        "anywhere": "En portales de empleo, LinkedIn o tu web",
-        "off": "Desactívalo cuando cubras el puesto"
-      }
-    },
     "ats": {
       "title": "Funciona con tus herramientas",
       "text": "Los candidatos que muevas en tu ATS reciben la entrevista y los resultados vuelven. Slack y la API conectan el resto.",
@@ -781,6 +772,28 @@
       "rushed": "Respuestas precipitadas",
       "left": "Salió de la página",
       "role": "Desarrollador backend · nota de aprobado {mark} %"
+    },
+    "invite": {
+      "title": "Invita a candidatos de cuatro formas",
+      "text": "Invítalos desde prepza, abre la entrevista a cualquiera con un enlace o deja que tu ATS te los envíe.",
+      "ways": {
+        "email": {
+          "title": "Por correo",
+          "text": "Escribe uno o varios correos; cada candidato recibe su propia invitación."
+        },
+        "list": {
+          "title": "Desde una lista o archivo",
+          "text": "Pega una lista de correos o sube un archivo CSV o de texto."
+        },
+        "link": {
+          "title": "Un enlace para tu oferta",
+          "text": "Activa el enlace para compartir y ponlo en tu oferta: quien lo abra puede hacer la entrevista."
+        },
+        "ats": {
+          "title": "Desde tu ATS",
+          "text": "Vincula un puesto en Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR y sus candidatos se invitan solos."
+        }
+      }
     },
     "reports": {
       "title": "Comparte resultados con un clic",

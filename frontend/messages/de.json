@@ -747,15 +747,6 @@
         "preview": "Sieh dein Interview als Kandidat"
       }
     },
-    "link": {
-      "title": "Ein Link für deine Stellenanzeige",
-      "text": "Setz den Link zum Interview in deine Stellenanzeige. Bewerber machen es sofort und erscheinen in deiner Liste, nach Punktzahl sortiert.",
-      "note": "Jeder mit dem Link kann das Interview machen.",
-      "points": {
-        "anywhere": "Auf Jobbörsen, LinkedIn oder deiner Website",
-        "off": "Schalte ihn ab, sobald die Stelle besetzt ist"
-      }
-    },
     "ats": {
       "title": "Passt zu deinen Tools",
       "text": "Kandidaten, die du in deinem ATS verschiebst, bekommen das Interview, und die Ergebnisse kommen zurück. Slack und die API verbinden den Rest.",
@@ -781,6 +772,28 @@
       "rushed": "Überhastete Antworten",
       "left": "Seite verlassen",
       "role": "Backend-Entwickler · Bestehensgrenze {mark} %"
+    },
+    "invite": {
+      "title": "Kandidaten auf vier Wegen einladen",
+      "text": "Lade sie aus prepza ein, öffne das Interview per Link für alle oder lass dein ATS sie schicken.",
+      "ways": {
+        "email": {
+          "title": "Per E-Mail",
+          "text": "Gib eine oder mehrere E-Mails ein; jeder Kandidat bekommt seine eigene Einladung."
+        },
+        "list": {
+          "title": "Aus einer Liste oder Datei",
+          "text": "Füge eine Liste von E-Mails ein oder lade eine CSV- oder Textdatei hoch."
+        },
+        "link": {
+          "title": "Ein Link für die Stellenanzeige",
+          "text": "Schalte den Link zum Teilen ein und setz ihn in deine Anzeige: Wer ihn öffnet, kann das Interview machen."
+        },
+        "ats": {
+          "title": "Aus deinem ATS",
+          "text": "Verknüpfe eine Stelle in Workable, Greenhouse, Teamtailor, Recruitee oder Breezy HR, und ihre Bewerber werden für dich eingeladen."
+        }
+      }
     },
     "reports": {
       "title": "Ergebnisse mit einem Klick teilen",

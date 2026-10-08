@@ -747,15 +747,6 @@
         "preview": "View your interview as a candidate"
       }
     },
-    "link": {
-      "title": "One link for your job ad",
-      "text": "Put the interview's link in your job ad. Applicants take it right away and appear in your list, ranked by score.",
-      "note": "Anyone with the link can take the interview.",
-      "points": {
-        "anywhere": "On job boards, LinkedIn or your site",
-        "off": "Turn it off once the role is filled"
-      }
-    },
     "ats": {
       "title": "Works with your tools",
       "text": "Candidates you move in your ATS get the interview, and results come back. Slack and the API connect the rest.",
@@ -781,6 +772,28 @@
       "rushed": "Rushed answers",
       "left": "Left the page",
       "role": "Backend developer · passing grade {mark}%"
+    },
+    "invite": {
+      "title": "Invite candidates four ways",
+      "text": "Invite them from prepza, open the test to anyone with a link, or let your ATS send them in.",
+      "ways": {
+        "email": {
+          "title": "By email",
+          "text": "Type one email or many; each candidate gets their own invite."
+        },
+        "list": {
+          "title": "From a list or file",
+          "text": "Paste a list of emails, or upload a CSV or text file."
+        },
+        "link": {
+          "title": "A link for a job ad",
+          "text": "Turn on the shareable link and put it in your ad: anyone who opens it can take the test."
+        },
+        "ats": {
+          "title": "From your ATS",
+          "text": "Link a job in Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR, and its applicants are invited for you."
+        }
+      }
     },
     "reports": {
       "title": "Share results in one click",

@@ -743,15 +743,6 @@
         "preview": "Bekijk je interview als kandidaat"
       }
     },
-    "link": {
-      "title": "Eén link voor je vacature",
-      "text": "Zet de link van het interview in je vacature. Sollicitanten doen het meteen en verschijnen in je lijst, gerangschikt op score.",
-      "note": "Iedereen met de link kan het interview doen.",
-      "points": {
-        "anywhere": "Op vacaturesites, LinkedIn of je eigen website",
-        "off": "Zet hem uit zodra de functie vervuld is"
-      }
-    },
     "ats": {
       "title": "Werkt met je tools",
       "text": "Kandidaten die je in je ATS verplaatst, krijgen het interview en de resultaten komen terug. Slack en de API koppelen de rest.",
@@ -777,6 +768,28 @@
       "rushed": "Overhaaste antwoorden",
       "left": "Pagina verlaten",
       "role": "Backend-ontwikkelaar · slaaggrens {mark}%"
+    },
+    "invite": {
+      "title": "Nodig kandidaten op vier manieren uit",
+      "text": "Nodig ze uit vanuit prepza, open het interview voor iedereen met een link, of laat je ATS ze sturen.",
+      "ways": {
+        "email": {
+          "title": "Per e-mail",
+          "text": "Typ één of meer e-mailadressen; elke kandidaat krijgt een eigen uitnodiging."
+        },
+        "list": {
+          "title": "Uit een lijst of bestand",
+          "text": "Plak een lijst met e-mailadressen, of upload een CSV- of tekstbestand."
+        },
+        "link": {
+          "title": "Een link voor je vacature",
+          "text": "Zet de deelbare link aan en plaats hem in je vacature: wie hem opent, kan het interview doen."
+        },
+        "ats": {
+          "title": "Uit je ATS",
+          "text": "Koppel een vacature in Workable, Greenhouse, Teamtailor, Recruitee of Breezy HR, en de sollicitanten worden voor je uitgenodigd."
+        }
+      }
     },
     "reports": {
       "title": "Deel resultaten met één klik",

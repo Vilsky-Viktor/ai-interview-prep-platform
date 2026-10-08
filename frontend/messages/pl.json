@@ -747,15 +747,6 @@
         "preview": "Zobacz swoją rozmowę jako kandydat"
       }
     },
-    "link": {
-      "title": "Jeden link do Twojego ogłoszenia o pracę",
-      "text": "Wstaw link do rozmowy w ogłoszeniu. Kandydaci od razu biorą w niej udział i trafiają na Twoją listę według wyniku.",
-      "note": "Każdy, kto ma link, może wziąć udział w rozmowie.",
-      "points": {
-        "anywhere": "Na portalach z ofertami pracy, LinkedIn lub Twojej stronie",
-        "off": "Wyłącz go, gdy stanowisko zostanie obsadzone"
-      }
-    },
     "ats": {
       "title": "Działa z Twoimi narzędziami",
       "text": "Kandydaci, których przeniesiesz w swoim systemie ATS, dostają rozmowę, a wyniki wracają. Slack i API łączą resztę.",
@@ -781,6 +772,28 @@
       "rushed": "Pośpieszne odpowiedzi",
       "left": "Opuścił stronę",
       "role": "Backend developer · próg zaliczenia {mark}%"
+    },
+    "invite": {
+      "title": "Zapraszaj kandydatów na cztery sposoby",
+      "text": "Zaproś ich z prepza, udostępnij rozmowę każdemu przez link albo pozwól, by przysłał ich Twój ATS.",
+      "ways": {
+        "email": {
+          "title": "E-mailem",
+          "text": "Wpisz jeden lub wiele adresów; każdy kandydat dostaje własne zaproszenie."
+        },
+        "list": {
+          "title": "Z listy lub pliku",
+          "text": "Wklej listę adresów albo prześlij plik CSV lub tekstowy."
+        },
+        "link": {
+          "title": "Link do ogłoszenia",
+          "text": "Włącz link do udostępnienia i wstaw go w ogłoszenie: każdy, kto go otworzy, może wziąć udział w rozmowie."
+        },
+        "ats": {
+          "title": "Z Twojego ATS",
+          "text": "Połącz ofertę w Workable, Greenhouse, Teamtailor, Recruitee lub Breezy HR, a jej kandydaci zostaną zaproszeni za Ciebie."
+        }
+      }
     },
     "reports": {
       "title": "Udostępniaj wyniki jednym kliknięciem",
