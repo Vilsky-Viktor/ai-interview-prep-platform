@@ -516,7 +516,7 @@
     "saved": "Postęp jest zapisywany: otwórz ten link ponownie, aby kontynuować.",
     "extraTime": "Potrzebujesz więcej czasu, np. z powodu niepełnosprawności? Przed startem zapytaj, czy {company} może go przyznać.",
     "people": "Pytania pisze AI. Wyniki sprawdzają ludzie, a decyzję podejmuje {company}; możesz poprosić o sprawdzenie swojego wyniku.",
-    "stay": "Zostań na tej stronie: opuszczenie jej i kopiowanie są rejestrowane (<link>prywatność</link>).",
+    "stay": "Zostań na tej stronie: opuszczenie jej, kopiowanie i odpowiedzi zbyt szybkie, by przeczytać pytanie, są rejestrowane (<link>prywatność</link>).",
     "finished": "Ta rozmowa jest już zakończona.",
     "continue": "Kontynuuj",
     "start": "Akceptuj i rozpocznij",

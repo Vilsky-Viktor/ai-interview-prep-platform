@@ -516,7 +516,7 @@
     "saved": "El progreso se guarda: vuelve a usar este enlace para continuar.",
     "extraTime": "¿Necesitas más tiempo, por ejemplo por una discapacidad? Pídeselo a {company} antes de empezar.",
     "people": "Las preguntas las escribe una IA. Personas de {company} revisan los resultados y deciden; puedes pedirles que revisen el tuyo.",
-    "stay": "Quédate en esta página: salir de ella o copiar queda registrado (<link>privacidad</link>).",
+    "stay": "Quédate en esta página: se registra si sales de ella, si copias y si respondes demasiado rápido para haber leído la pregunta (<link>privacidad</link>).",
     "finished": "Esta entrevista ya terminó.",
     "continue": "Continuar",
     "start": "Aceptar y empezar",

@@ -516,7 +516,7 @@
     "saved": "Votre progression est enregistrée : utilisez à nouveau ce lien pour continuer.",
     "extraTime": "Besoin de plus de temps, par exemple en raison d'un handicap ? Contactez {company} avant de commencer.",
     "people": "Les questions sont rédigées par une IA. Chez {company}, des personnes examinent les résultats et prennent la décision ; vous pouvez leur demander de réexaminer le vôtre.",
-    "stay": "Restez sur cette page : les sorties de la page et les copies sont enregistrées (<link>confidentialité</link>).",
+    "stay": "Restez sur cette page : les sorties de la page, les copies et les réponses trop rapides pour avoir lu la question sont enregistrées (<link>confidentialité</link>).",
     "finished": "Cet entretien est déjà terminé.",
     "continue": "Continuer",
     "start": "Accepter et commencer",

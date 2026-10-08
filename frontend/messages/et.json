@@ -516,7 +516,7 @@
     "saved": "Edenemine salvestatakse: jätkamiseks ava see link uuesti.",
     "extraTime": "Vajad rohkem aega, näiteks puude tõttu? Küsi seda enne alustamist: lisaaega saab anda {company}.",
     "people": "Küsimused kirjutab tehisaru, kuid tulemused vaatavad üle ja otsuse teevad inimesed. Võid paluda, et {company} laseks sinu tulemuse inimesel üle vaadata.",
-    "stay": "Jää sellele lehele: lehelt lahkumine ja kopeerimine registreeritakse (<link>privaatsus</link>).",
+    "stay": "Jää sellele lehele: lehelt lahkumine, kopeerimine ja liiga kiire vastamine, enne kui küsimuse jõuab läbi lugeda, registreeritakse (<link>privaatsus</link>).",
     "finished": "See intervjuu on juba lõppenud.",
     "continue": "Jätka",
     "start": "Nõustu ja alusta",
