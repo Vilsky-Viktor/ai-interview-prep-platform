@@ -20,9 +20,10 @@ Only what matters, for every member of a company:
 - an interview ready or cancelled,
 - a flagged and fixed interview question,
 - a referral reward,
-- an automatic top-up charged or failed.
+- an automatic top-up charged or failed,
+- an ATS candidate who couldn't be invited (`ats_not_invited`, see [ATS integrations](ats.md#candidates-from-workable)).
 
-Companies' verification decisions and ATS candidates that couldn't be invited (`ats_not_invited`) reach owners and admins in the bell too (see [Companies](companies.md#verification) and [ATS integrations](ats.md#candidates-from-workable)).
+Companies' verification decisions reach only the owner and admins, one notification each, as viewers can't act on them (see [Companies](companies.md#verification)).
 
 ## Slack
 
@@ -73,7 +74,7 @@ When a company erases a candidate (`candidate.removed` from companies), its noti
 
 ### Grouping
 
-Bursts are grouped. Another finished candidate, undelivered invite, or flagged or fixed question about the same interview within 24 hours adds to the last notification ("3 candidates finished …") instead of making a new one.
+Bursts are grouped. Another finished candidate, undelivered invite, flagged or fixed question, or ATS candidate who couldn't be invited, about the same page and title (for example the same interview) within 24 hours, adds to the last notification ("3 candidates finished …") instead of making a new one.
 
 ## Emails
 

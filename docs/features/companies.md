@@ -10,7 +10,7 @@ A company is where a hiring team works: its interviews, candidates, credits and 
 
 ## Team
 
-A company has one owner. On the company's **Team** tab, the owner invites members by email as an **admin** or a **viewer**, and can change a member's role later.
+A company has one owner. On the company's **Team** tab, the owner adds a member's email with a role, **admin** or **viewer**, and copies the join link that appears; no email is sent, so the owner passes the link on. Only someone signed in with that email can accept it, so a forwarded link is useless to anyone else. The owner can change a member's role later, and remove a member or withdraw a pending invite.
 
 | Role | What they can do |
 |---|---|
@@ -46,6 +46,21 @@ Later changes:
 
 - Renaming a verified, pending or declined company sends the new name for review, taking any check away.
 - Changing the website starts over.
+
+## Audit log
+
+The companies service records the human decisions taken in a company, as evidence of human oversight: who took each one, what it was, on which interview or candidate, and when.
+
+| Recorded | When |
+|---|---|
+| Topics approved | A member approves an interview's topics |
+| Results viewed | A member opens a candidate's results |
+| Report emailed | A member emails a candidate's or an interview's report |
+| Candidate deleted / invite revoked | A member revokes a candidate (see [Candidates](candidates.md#revoking-a-candidate)) |
+| Extra time set | A member gives a candidate extra time |
+| Pass mark changed | A member changes an interview's pass mark |
+
+Only the owner can read the log, newest first, through `GET /companies/{id}/audit`; the app has no page for it. Events are kept for 24 months, then the daily retention job deletes them, and they go with the company when it's removed.
 
 ## Related pages
 

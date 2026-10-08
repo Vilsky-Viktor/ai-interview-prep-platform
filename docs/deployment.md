@@ -15,7 +15,7 @@ Production runs on Google Cloud in `europe-west1`, set up by Terraform in [`infr
 Every app Dockerfile (on Alpine) has a `prod` target, with the code built in and no reload. The API images are built from the repo root, because they include `packages/common`:
 
 ```bash
-docker build --target prod -f services/library/Dockerfile -t prepza-library .   # also generation, rounds, companies, billing, notifications, ats
+docker build --target prod -f services/library/Dockerfile -t prepza-library .   # also generation, rounds, companies, billing, notifications, ats, api
 docker build --target prod -t prepza-frontend \
   --build-arg NEXT_PUBLIC_FIREBASE_API_KEY=... --build-arg NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=... \
   --build-arg NEXT_PUBLIC_FIREBASE_PROJECT_ID=... frontend
@@ -23,12 +23,12 @@ docker build --target prod -t prepza-frontend \
 
 Never set `FIREBASE_AUTH_EMULATOR_HOST` in production.
 
-Terraform passes none of the generation settings to Google Cloud, so production runs on their defaults (see [Generation settings](generation.md#generation-settings)).
+Terraform passes only one generation setting to Google Cloud, `DAILY_GENERATION_LIMIT` (its `daily_generation_limit` variable, default 200); production runs on the defaults of the others (see [Generation settings](generation.md#generation-settings) and [infra/README.md](../infra/README.md#notes)).
 
 ## Migrations
 
 - Run each API's migrations once before it starts: `uv run --no-sync alembic upgrade head`.
-- Every API but the frontend has them, notifications included.
+- Each of the 8 API services has them (library, generation, rounds, companies, billing, notifications, ats, api); the generation worker and the bell stream share generation's and notifications' databases. In Google Cloud, each runs as a `<service>-migrate` job, after the `db-roles` job that gives each service its own database user.
 - Migrations only go forward, so keep them additive for rollbacks to stay safe.
 
 ## Error reporting
@@ -41,6 +41,7 @@ Errors go to Sentry when its DSN is set; empty, nothing is sent.
 | `NEXT_PUBLIC_SENTRY_DSN` | The DSN for the frontend, a build argument |
 | `SENTRY_ENVIRONMENT` | The environment's name (`development` locally) |
 | `SENTRY_TRACES_SAMPLE_RATE` | The share of requests traced (default 0.1) |
+| `SENTRY_RELEASE` | The release the backend's events are tagged with. Nothing sets it in production today (neither Terraform nor the deploy), so backend events carry no release |
 | `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` | Passed to the frontend build, to see the original code in frontend stack traces |
 
 Events carry user ids only, with emails scrubbed.

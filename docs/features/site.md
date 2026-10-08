@@ -32,8 +32,8 @@ Below, a landing page walks through prepza, one section per screen:
 - one link for a job ad,
 - the tools prepza works with: the ATSs (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR) and Slack as their logos, and the API as an example request with a link to its docs,
 - a verified brand,
-- languages,
-- pricing ("$1–3 per candidate, with no subscription"),
+- fair to candidates and safe for your data: what's true about human review, answer keys, AI training, extra time, candidate notices and data, data retention and hosting, payments and the documents, with links to the documents, terms and privacy policy (no compliance badges),
+- pricing ("Pay per candidate": interviews and the first candidates free, then a price per candidate, with no subscription),
 - a closing call to action.
 
 Each section has a picture of the real interface, several of them animated. Prices come from billing, so they follow any change. Signed-in users see the landing page too.
@@ -76,12 +76,12 @@ The articles are `/pre-employment-testing`, `/ai-interviews`, `/compare` and its
 - It answers in the page's language.
 - Nothing of the conversation is stored.
 
-| Limit | Setting | Value |
+| Limit | Where it's set | Value |
 |---|---|---|
-| Messages an hour per account | `HELP_USER_LIMIT` | 30 |
-| Questions an hour per address | `HELP_IP_LIMIT` | 60 |
-| Questions a day in all | `HELP_DAILY_LIMIT` | 5,000 |
-| Questions per 10 minutes per IP, at the edge (Google Cloud only) | — | 20 |
+| Messages an hour per account | `HELP_USER_LIMIT` setting | 30 |
+| Questions an hour per address | `HELP_IP_LIMIT` constant (`services/rounds/app/constants/help.py`) | 60 |
+| Questions a day in all | `HELP_DAILY_LIMIT` setting | 5,000 |
+| Questions per 10 minutes per IP, at the edge (Google Cloud only) | Cloud Armor (Terraform) | 20 |
 
 The chat's model is set in [Generation settings](../generation.md#models).
 
@@ -116,14 +116,14 @@ The `/api-docs` page ("api docs" in the footer) is the public API's reference, i
 
 - The message is emailed to hello@prepza.ai (`CONTACT_EMAIL` in notifications).
 - The visitor's address is the reply-to, so answering the email answers them.
-- At most 5 messages a day per address (`CONTACT_IP_LIMIT`).
-- At most 200 a day in all (`CONTACT_DAILY_LIMIT`).
+- At most 5 messages a day per address (the `CONTACT_IP_LIMIT` constant in `services/rounds/app/constants/contact.py`).
+- At most 200 a day in all (the `CONTACT_DAILY_LIMIT` setting).
 
 ## About us and the footer
 
 `/about` explains why prepza exists for companies, free practice for people preparing, and its solo founder.
 
-The footer links free practice, pricing, the privacy policy, the terms, the documents, the API docs, the FAQ, About us and Contact us.
+The footer links, in three columns: skills tests by role and the articles (pre-employment testing, AI interviews, comparisons, guides); the privacy policy, the terms, the documents and the API docs; free practice, the FAQ, About us and Contact us. Pricing is in the header's menu (hidden on phones), not in the footer.
 
 ## Search engines
 

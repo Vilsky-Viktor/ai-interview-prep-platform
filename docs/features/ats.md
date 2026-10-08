@@ -15,7 +15,7 @@ A company can connect its applicant tracking system (ATS): Workable, Greenhouse,
 
 ## Connecting an ATS
 
-On a company's **ATS** tab, an owner or admin connects an ATS with its key:
+On a company's **Integrations** tab, an owner or admin connects an ATS with its key:
 
 | ATS | What to paste | Permissions |
 |---|---|---|
@@ -41,13 +41,13 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 
 ## The ATS pages
 
-- The ATS tab lists the ATSs, with a "connected" tag once connected.
+- The Integrations tab lists the ATSs, with a "connected" tag once connected.
 - Each ATS opens its own page: `/companies/<id>/integrations/<workable, greenhouse, teamtailor, recruitee or breezy>`. Before it's connected, the page says so in place of the linked jobs.
 - The page lists its linked jobs. For each job:
   - how many of its candidates were invited (an icon and the number),
   - how many are waiting or weren't invited, above **Invite again**, which tries that job's again,
   - **Unlink**, after a confirmation.
-- Each ATS has one **Instructions** button, on its row and its page. Its dialog holds everything to know: the candidate flow, starting with a stage just for prepza, and, for a connected Greenhouse, Teamtailor or Recruitee, the web hook to set up (owners and admins only). The dialog opens by itself right after connecting either of them.
+- Each ATS has one **Instructions** button, on its row and its page. Its dialog holds everything to know: the candidate flow, starting with a stage just for prepza, and, for a connected Greenhouse, Teamtailor or Recruitee, the web hook to set up (owners and admins only). The dialog opens by itself right after connecting any of those three.
 - Every member sees these pages; viewers change nothing.
 
 ## Candidates from Workable
@@ -66,7 +66,7 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 **The invite** is the usual one. Companies sends it as if whoever connected Workable sent it: their limits, the company's credits, the pause. If that member is no longer an owner or admin (removed, or made a viewer), companies refuses it and the connection is marked for reconnecting by a current editor.
 
 - A candidate for an interview still being made waits, and is invited once it's ready (`interview.ready`).
-- A candidate refused (credits, limits, the pause) is kept as not invited, and owners and admins get an `ats_not_invited` notification. **Invite again** puts that job's not-invited candidates back to waiting and invites them.
+- A candidate refused (credits, limits, the pause) is kept as not invited, and every member of the company gets an `ats_not_invited` notification (several within 24 hours add up to one, see [Grouping](notifications.md#grouping)). **Invite again** puts that job's not-invited candidates back to waiting and invites them.
 - When companies fails or doesn't answer, the candidate waits and the `recover` job tries again, 6 times in all (about an hour); only then are they kept as not invited, with the notification.
 - Candidates refused for lack of credits are invited again by themselves once the company gets credits: billing publishes `credits.added` after a top-up (automatic ones too), a referral reward or a chargeback reversed, and ats invites the company's credit-refused candidates from every ATS, as far as the credits go (the rest stay not invited, with a new notification). Billing publishes without an outbox, so a lost event leaves them for **Invite again**.
 

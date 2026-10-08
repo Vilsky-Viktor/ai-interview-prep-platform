@@ -160,6 +160,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm typecheck
+      # Every translation has en.json's keys, arguments and tags, in valid ICU syntax.
+      - run: pnpm check:messages
       - run: pnpm test
 
   # A changed part's image is built (and, on main, pushed). On main, an unchanged one is the image

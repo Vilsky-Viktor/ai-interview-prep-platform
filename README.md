@@ -18,7 +18,7 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 - **ATS integrations:** candidates from Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR are invited automatically, and results go back.
 - **Slack:** a company picks a channel and which of its notifications go there.
 - **Public API:** API keys to list interviews, invite candidates and read results, and a signed web hook when a candidate finishes; its reference is on the site.
-- **Pay per candidate:** credits that never expire, from $1 per candidate, with no subscription.
+- **Pay per candidate:** credits that never expire, $1–3 per candidate, with no paid subscription (an optional automatic top-up saves the card with Paddle as a $0 subscription).
 - **Free practice:** people preparing for a role practise on the templates' revealed questions.
 - **23 languages:** the interface, generated interviews and emails.
 - **Admin zone:** templates, question quality, verification, pass rates, stats, and the pause and maintenance switches.

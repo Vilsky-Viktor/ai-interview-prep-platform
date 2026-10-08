@@ -20,12 +20,12 @@ prepza has unit, integration, browser, end-to-end and load tests, plus offline e
 |---|---|---|
 | Python unit tests | `cd services/rounds && uv sync && uv run pytest` | Nothing running |
 | Python lint and format | `uvx ruff@0.16.10 check ...` (below) | Nothing running |
-| Frontend lint, types and unit tests | `cd frontend && pnpm install && pnpm lint && pnpm typecheck && pnpm test` | Nothing running |
+| Frontend lint, types, translations and unit tests | `cd frontend && pnpm install && pnpm lint && pnpm typecheck && pnpm check:messages && pnpm test` | Nothing running |
 | Smoke test | `./e2e_tests/smoke.sh` | The running stack |
 | Integration tests | `./scripts/integration.sh` | The running stack |
 | Signed-out pages | `./e2e_tests/pages.sh` | The running stack |
 | Signed-in pages | `./e2e_tests/signed-in.sh` | The running stack |
-| Translations | `docker compose exec frontend pnpm check:messages` | The running stack |
+| Translations | `cd frontend && pnpm check:messages` | Nothing running |
 | End-to-end | `python3 e2e_tests/flow.py` | `OPENAI_API_KEY` |
 | Load tests | `./e2e_tests/load.sh candidates` | The local stack only |
 
@@ -44,8 +44,8 @@ cd services/rounds && uv sync && uv run pytest
 # Python lint and format, as CI runs them (ruff's version is pinned in CI)
 uvx ruff@0.16.10 check services packages evals && uvx ruff@0.16.10 format --check services packages evals
 
-# Frontend: lint, types, and unit tests of the pure helpers (frontend/tests, vitest)
-cd frontend && pnpm install && pnpm lint && pnpm typecheck && pnpm test
+# Frontend: lint, types, translations, and unit tests of the pure helpers (frontend/tests, vitest)
+cd frontend && pnpm install && pnpm lint && pnpm typecheck && pnpm check:messages && pnpm test
 ```
 
 ## Integration tests
@@ -66,7 +66,7 @@ A smoke test against a running stack:
 
 ## Browser tests of the signed-out pages
 
-Playwright tests of the signed-out pages, on desktop and phone sizes, in Playwright's Docker image. The pages: home, companies, pricing, terms, privacy, docs, FAQ, about, contact, practice.
+Playwright tests of the signed-out pages, on desktop and phone sizes, in Playwright's Docker image. The pages (`pages.spec.ts`): home, companies, pricing (also in German and Japanese), terms, privacy, documents, FAQ, about, contact, practice, skills tests by role, and the articles (pre-employment testing, AI interviews, a comparison, a guide and their hubs).
 
 They check:
 
@@ -75,6 +75,8 @@ They check:
 - the same page width everywhere,
 - the footer at the end,
 - lowercase titles (articles keep their capitals).
+
+Other specs check the home page's sections: the advantages' titles beside their icons in every language (`advantages.spec.ts`), the ATSs, Slack and the API (`ats.spec.ts`), the catalog's prices and free candidates on the home and pricing pages (`pricing.spec.ts`), the chat apps a report can be shared to (`reports.spec.ts`), smooth scrolling and back to top (`scroll.spec.ts`), and the API docs (`api-docs.spec.ts`).
 
 `seo.spec.ts` checks language addresses and hreflang, titles, structured data, the sitemap, robots.txt, noindex on private pages and thin template pages, links and levels on a template's page in its language, redirects and the footer.
 
@@ -94,12 +96,19 @@ Playwright tests of the signed-in pages, in the same Docker image, against the r
 
 **What they cover:**
 
-- a company owner,
+- a company owner making an interview from a template and inviting a candidate,
 - a candidate taking an interview,
 - the team and a viewer,
 - verification,
 - the admin zone's pass rates, stats, pause and maintenance mode (turned off again afterwards),
-- the candidates' PDF report.
+- the candidates' PDF report,
+- a practice result leading to a company's test,
+- an interview's settings tab,
+- API keys and web hooks,
+- each ATS: Workable's linked jobs, and connecting Greenhouse, Teamtailor, Recruitee and Breezy HR,
+- Slack,
+- the automatic top-up,
+- an interview whose generation failed.
 
 **Cleanup.** After every run, `teardown.ts` deletes every throwaway account, and so their companies and data, leftovers of stopped runs included. It fails if any is left.
 
@@ -111,10 +120,10 @@ Screenshots land in `e2e_tests/signed-in/test-results/screenshots`.
 
 ## Translations
 
-Every language has every key of `en.json`, with the same placeholders and plurals:
+Every language has exactly the keys of `en.json`, with the same arguments and rich-text tags, valid ICU syntax and an `other` form in every plural. CI runs it in the frontend job.
 
 ```bash
-docker compose exec frontend pnpm check:messages
+cd frontend && pnpm check:messages     # or name languages: pnpm check:messages de fr
 ```
 
 ## End-to-end test
@@ -149,11 +158,11 @@ Model and prompt quality is tested offline with the prepared datasets, judge pro
 
 ## CI
 
-CI runs all of these except the end-to-end test, which needs an OpenAI key, but only for what changed.
+CI runs all of these except the end-to-end test, which needs an OpenAI key, and the load tests, but only for what changed.
 
 - A service counts as changed when its folder or `packages/common` changed; the frontend, when `frontend/` did. A change to `ci.yml` or `.python-version` counts as everything.
 - A pull request compares with its base. `main` compares with the last commit CI passed on, so a failed run's changes are tested and built by the next one.
-- Each changed part's unit tests run and its production image is built. On `main`, an unchanged part's image is the last passing commit's, tagged with the new commit too.
+- Each changed part's unit tests run and its production image is built. A changed frontend also gets lint, types and the translations check (`pnpm check:messages`). On `main`, an unchanged part's image is the last passing commit's, tagged with the new commit too.
 - Ruff runs on every change.
 - It starts the whole stack for the smoke, integration, page and signed-in tests when any part changed, or `e2e_tests/`, `gateway/`, `database/`, `firebase/`, `scripts/` or `docker-compose.yml` did. A change to docs alone skips it.
 - Its stack has no templates, so before the signed-in tests it adds a small English one (`e2e_tests/signed-in/seed/template.py`, no OpenAI).

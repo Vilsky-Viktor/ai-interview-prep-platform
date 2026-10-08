@@ -20,7 +20,7 @@ updates:
     groups:
       base-images:
         patterns: ["*"]
-    # Minor and patch updates only: a new major (Node 26, Python 3.14, Postgres 19) is planned by hand.
+    # Minor and patch updates only: a new major (Node 26, Python 3.15, Postgres 19) is planned by hand.
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]

@@ -20,14 +20,21 @@ flowchart LR
     gateway --> rounds
     gateway --> companies
     gateway --> billing
+    gateway --> notifications
     gateway --> ats
     gateway --> api
     platforms[Companies' platforms] -- API keys --> gateway
-    paddle[Paddle] -- payment webhooks --> billing
-    atss[Workable / Greenhouse / Teamtailor / Recruitee / Breezy HR] -- candidate webhooks --> ats
+    paddle[Paddle] -- payment webhooks --> gateway
+    resend[Resend] -- delivery webhooks --> gateway
+    atss[Workable / Greenhouse / Teamtailor / Recruitee / Breezy HR] -- candidate webhooks --> gateway
 
     generation -- jobs via Cloud Tasks --> worker[generation worker]
-    scheduler[Cloud Scheduler] -- sweeps, retention --> worker
+    scheduler[Cloud Scheduler] -- sweeps, key checks, retention, outbox --> worker
+    scheduler -- retention, invite reminders and expiry, outbox --> companies
+    scheduler -- question bank, outbox --> library
+    scheduler -- expired interviews, outbox --> rounds
+    scheduler -- recovery, outbox --> ats
+    scheduler -- web hook retries --> api
     worker -- saves sets, reuses questions --> library
     library -- re-generate, verify --> generation
     rounds -- questions --> library
@@ -51,6 +58,7 @@ flowchart LR
     pubsub -- push --> ats
     pubsub -- push --> api
     pubsub -- push --> notifications -- email --> smtp[Resend / mailpit]
+    notifications -- chosen notifications --> slack[Slack]
     pubsub -- funnel.* events --> bigquery[(BigQuery: funnel_events)]
 ```
 
@@ -83,7 +91,7 @@ What each service does for users is described in the feature pages, linked from 
 | Kind | In Google Cloud | Examples |
 |---|---|---|
 | Long jobs | Cloud Tasks that call the generation worker's `/internal/jobs/...` | A generation, a question check |
-| Periodic work | Cloud Scheduler calling `/internal/schedules/...` | Stuck-generation sweeps, key-check batches, invite reminders and expiry, stalled ATS invites and kept ATS results, web hook retries, retention |
+| Periodic work | Cloud Scheduler calling `/internal/schedules/...` ([`infra/terraform/jobs.tf`](../infra/terraform/jobs.tf)) | Every minute: outbox flushes (library, companies, rounds, generation worker, ats) and interviews whose time ran out (rounds). Every 5 minutes: stuck-generation sweeps and web hook retries (api). Every 10 minutes: key-check batches and ATS recovery (waiting and stalled ATS invites, kept ATS results, ATS candidates past retention). Daily: generation and candidate retention, invite expiry and reminders, the question bank's stages |
 
 - Google signs those calls, and Pub/Sub pushes, as one invoker service account, which each service checks.
 - Locally there is no queue: the API calls the worker directly.
@@ -91,22 +99,33 @@ What each service does for users is described in the feature pages, linked from 
 
 ## Events
 
-Domain events go through an outbox, so a change never loses its event:
+Domain events go through an outbox in library, generation, rounds, companies and ats, so a change never loses its event:
 
 1. An event is saved in an `outbox` table, in the same transaction as the change it announces.
 2. It is published right after. A request publishes only the events it saved, in one batch, with a 5-second timeout.
 3. If that failed, a per-minute scheduled flush publishes it. Each run sends batches of 100 until none wait, for up to 20 seconds, so a backlog after an outage drains in minutes; two runs never send the same row.
 
+Billing has no outbox: it publishes `credits.added` and its notifications (referral rewards, automatic top-ups charged or failed) straight after the change, with a 5-second timeout, and only logs a failure, so a lost event never fails a payment. A lost `credits.added` leaves credit-refused ATS candidates for **Invite again**. Notifications and api publish no domain events.
+
 Refusals and duplicates:
 
 - An event Pub/Sub refuses is counted in its row's `attempts`, and parked after 5 refusals, so it can't hold up the rest. A parked event is logged as an error, which Sentry reports.
-- Each event carries a stable `event_id` attribute (its outbox row id), so a consumer that gets it twice acts once. Notifications' emails and bell, library's statistics and companies' notifications track this through their `processed_events`.
+- Each event carries a stable `event_id` attribute (its outbox row id), so a consumer that gets it twice acts once. Library's statistics and companies keep the ids they handled in `processed_events`; notifications passes the id to Resend as the email's idempotency key and stores one bell notification per key; api records each web hook's delivery per event; ats invites a candidate once (a unique key and a claim), sends a result back once (`reported_at`) and deletes idempotently.
 
 Delivery:
 
 - All events go to one Pub/Sub topic, `events`.
 - It pushes each event to the `/internal/events` endpoint of library, companies, notifications, ats and api.
-- In Google Cloud, each subscription carries only the types its consumer handles ([`infra/terraform/pubsub.tf`](../infra/terraform/pubsub.tf)).
+- In Google Cloud, each subscription carries only the types its consumer handles ([`infra/terraform/pubsub.tf`](../infra/terraform/pubsub.tf), `locals.consumes`):
+
+| Consumer | Event types |
+|---|---|
+| library | `answer.recorded`, `session.scored` |
+| companies | `generation.completed`, `generation.failed`, `generation.cancelled`, `interview.finished`, `results.rescored` |
+| notifications | `notification.requested`, every `candidate.*` (it handles `candidate.invited`, `candidate.reminded` and `candidate.removed`), `report.shared`, `contact.sent`, `company.deleted` |
+| ats | `candidate.finished`, `candidate.removed`, `interview.ready`, `interview.deleted`, `company.deleted`, `credits.added` |
+| api | `candidate.finished`, `company.deleted` |
+
 - Locally, each consumer ignores events that aren't its own.
 - Locally, Google's Pub/Sub emulator runs in docker-compose, and [`scripts/local/pubsub-setup.sh`](../scripts/local/pubsub-setup.sh) creates the topic and subscriptions.
 

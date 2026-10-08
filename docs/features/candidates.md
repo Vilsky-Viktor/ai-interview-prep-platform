@@ -3,6 +3,7 @@
 How candidates get to an interview, how they take it, and what the company sees afterwards.
 
 - [Invites](#invites)
+- [Revoking a candidate](#revoking-a-candidate)
 - [Shareable link](#shareable-link)
 - [Taking an interview](#taking-an-interview)
 - [Timing](#timing)
@@ -10,6 +11,7 @@ How candidates get to an interview, how they take it, and what the company sees 
 - [The candidate list](#the-candidate-list)
 - [Reports](#reports)
 - [Email limits](#email-limits)
+- [Retention](#retention)
 
 ## Invites
 
@@ -21,7 +23,7 @@ Owners and admins invite candidates by email:
 
 A list or file takes up to 100 emails at once, and only the emails in it count. A list skips candidates who already started, so they aren't emailed again.
 
-An invite can be resent, or revoked while the candidate hasn't used it yet. The invite page tells candidates what to expect before they start.
+An invite can be resent or revoked (see [Revoking a candidate](#revoking-a-candidate)). The invite page tells candidates what to expect before they start.
 
 A candidate's credits are set aside on invite and given back if they never answer (see [Credits and payments](billing.md)).
 
@@ -33,6 +35,15 @@ A candidate's credits are set aside on invite and given back if they never answe
 | Not started within 30 days | The invite expires and its credits come back |
 
 Candidates can also arrive from an ATS (see [ATS integrations](ats.md)).
+
+## Revoking a candidate
+
+Owners and admins can revoke any candidate in the list (`DELETE /interviews/{id}/candidates/{invite_id}` in companies):
+
+- **Not started yet:** the invite is withdrawn; its link stops working and the credits set aside come back. The candidate can be invited again later.
+- **Started or finished:** the candidate is erased for good, with their answers, timings and results in rounds, for example when they ask to have their data deleted. Credits still held come back; a finished candidate stays charged.
+
+Either way the company's [audit log](companies.md#audit-log) records it, and companies publishes `candidate.removed`: the company's bell notifications about the candidate go, and so does the ATS's record of them for that interview.
 
 ## Shareable link
 
@@ -62,6 +73,10 @@ Every interview is timed. Each question has its own countdown.
 - 60 seconds by default, adjustable per interview on its settings tab.
 - The countdown turns red for the last 10 seconds, or for the last third of a shorter question.
 - At zero, the pick on screen counts. If nothing is picked, the question counts as wrong.
+
+### Extra time
+
+For a candidate who needs more time, for example because of a disability, owners and admins can give extra time on each question: +25%, +50% or +100% (`PUT /interviews/{id}/candidates/{invite_id}/extra-time` in companies). It is set per candidate, on their page, and only before they start: their questions' time is fixed then. No reason is recorded, and the company's [audit log](companies.md#audit-log) records the change. The invite page tells candidates to ask the company before they start.
 
 The server enforces the clock:
 
@@ -108,3 +123,12 @@ Candidate invite and report emails are limited:
 | Reports a company emails a day | `REPORT_EMAILS_PER_COMPANY_DAY` | 20 |
 
 A company emails a candidate's report only once that candidate has finished the interview.
+
+## Retention
+
+| Data | Kept | Deleted by |
+|---|---|---|
+| A candidate's invite, answers, timings, integrity signals and results | 365 days after the invite was last sent | The daily retention job in companies (`/internal/schedules/retention`), with the sessions in rounds and any credits still held |
+| A candidate an ATS sent (email and ATS ids), with any results waiting to go back | 365 days | The ats `recover` job (every 10 minutes); see [ATS integrations](ats.md) |
+
+Both go earlier with their interview, their company, or when the company revokes the candidate.

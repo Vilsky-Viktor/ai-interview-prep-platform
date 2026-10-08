@@ -2,10 +2,10 @@
 
 Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) behind Google's global load balancer:
 
-- **Cloud Run:** the frontend, six APIs, the generation worker and notifications, whose bell stream runs as its own service (`notifications-stream`, same image) so open tabs never take the capacity event pushes need. Billed per request, and idle services cost nothing.
+- **Cloud Run:** the frontend, eight APIs (library, generation, rounds, companies, billing, notifications, ats, api) and the generation worker; notifications' bell stream runs as its own service (`notifications-stream`, same image) so open tabs never take the capacity event pushes need. That's 11 services from 9 images. Billed per request, and idle services cost nothing.
 - **Cloud SQL Postgres 18** (as locally): one database per service, with daily backups and point-in-time recovery.
-- **Pub/Sub:** domain events. One `events` topic is pushed to library, companies, notifications, ats and api, each getting only the event types it handles (`pubsub.tf`; add a type there when a consumer starts handling it), with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
-- **Cloud Tasks:** generation jobs on the worker, each tried up to 3 times. **Cloud Scheduler:** sweeps, retention, the question bank's stages, candidate invite reminders and expiry, ATS recovery and web hook retries; a failed daily job is retried 3 times.
+- **Pub/Sub:** domain events. One `events` topic is pushed to library, companies, notifications, ats and api, each getting only the event types it handles (`locals.consumes` in `pubsub.tf`; add a type there when a consumer starts handling it), with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
+- **Cloud Tasks:** generation jobs on the worker, each tried up to 3 times. **Cloud Scheduler** (`jobs.tf`): outbox flushes and expired interviews every minute, generation sweeps and web hook retries every 5 minutes, key-check batches and ATS recovery every 10 minutes, and daily retention, invite expiry and reminders and the question bank's stages; a failed daily job is retried 3 times.
 - **The global load balancer:**
   - HTTPS with a Google-managed certificate;
   - `/api/<service>/` routes to each API, and everything else to the frontend;
@@ -126,13 +126,13 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
 
 ## Deploys
 
-- **Pull requests:** CI (lint, tests, image builds, and the smoke, integration and page tests on the whole stack) runs on every push, and a new push cancels the previous run.
-- **Merging to `main`:** the same CI runs again on the merged code, and pushes the 7 production images for `linux/amd64`, tagged with the commit. Nothing is deployed.
+- **Pull requests:** CI runs on every push, and a new push cancels the previous run. It tests and builds only what changed: ruff always; a changed service's unit tests and image; a changed frontend's lint, types, translations check, unit tests and image; and the smoke, integration and page tests on the whole stack when any part, the stack or its tests changed (see [Testing](../docs/testing.md#ci)).
+- **Merging to `main`:** the same CI runs again on the merged code, compared with the last commit it passed on, and pushes the 9 production images for `linux/amd64`, tagged with the commit: the changed ones are built, the others are that commit's images with the new tag added. Nothing is deployed.
 - **Releasing:** tag a commit on `main` that CI passed on, the last commit of a push, and push the tag:
   ```bash
   git tag v1.4.0 && git push origin v1.4.0
   ```
-  [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) then checks that the tag is on `main` and CI passed on it, gives that commit's images the version as a tag (nothing is rebuilt), runs the 6 migration jobs, moves every service to the images, smoke-tests the site and creates a GitHub release with the changes since the last tag.
+  [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) then checks that the tag is on `main` and CI passed on it, gives that commit's images the version as a tag (nothing is rebuilt), runs the `db-roles` job and then the 8 migration jobs, moves all 11 services to the images, smoke-tests the site and creates a GitHub release with the changes since the last tag.
 
 A failed step stops the deploy, and the services keep running the previous images.
 
@@ -179,7 +179,7 @@ Then point `DATABASE_URL` at the clone, or copy the needed data back.
   done
   ```
 
-  The replay goes to every consumer subscribed to that type, not only the one that failed: today each type has one consumer, but a type two consumers handle would reach the one that succeeded a second time.
+  The replay goes to every consumer subscribed to that type, not only the one that failed. `candidate.finished` and `company.deleted` reach notifications, ats and api, and `candidate.removed` reaches notifications and ats, so a replay of those also reaches the consumers that already handled them; each consumer handles a redelivered event safely, so that changes nothing twice (see [Architecture](../docs/architecture.md#events)).
 - **Generation jobs:** a job may run up to 25 minutes, under Cloud Tasks' 30-minute limit. The queue tries a task up to 3 times (`jobs.tf`), for a delivery that fails before the job starts, such as a worker restarting; a job first moves its generation from queued to running in one atomic step, so a repeated delivery does nothing. A generation that fails once running is retried by the user.
 - **Database connections:** Cloud SQL starts at `db-g1-small` with 200 connections allowed, 20 kept free. Each API process holds up to 10 connections (generation and the worker 14, notifications, ats and api 4); the services' `max` instances fit within the rest, and the plan fails if they don't (`database.tf`): today at most 132 of the 180. A deploy moves the services one at a time and runs each one's old instances until their requests end, so the plan also fails if a deploy at the instance limits could pass the 200: the peak, plus the old worker and bell-stream instances (their requests outlast the deploy), plus the largest other service; today 188. The APIs with a pool of 10 take 40 requests at once per instance, so a busy one scales out rather than queueing on its pool; the worker takes 10 jobs on each of its 2 instances, the queue's 20 at once. Raise `db_tier` (and `db_max_connections`), or add PgBouncer, before allowing more instances or once services often run near their `max`.
 - **High availability:** `db_high_availability = true` adds a standby in another zone, at about double the database cost.

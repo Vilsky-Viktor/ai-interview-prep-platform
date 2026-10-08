@@ -1,6 +1,6 @@
 # Credits and payments
 
-Companies pay per candidate from a wallet of credits. There are no subscriptions.
+Companies pay per candidate from a wallet of credits. There's no paid subscription: the optional automatic top-up saves the card through Paddle as a $0 subscription, and charges only the top-ups.
 
 - [Credits](#credits)
 - [Top-ups](#top-ups)
@@ -55,6 +55,7 @@ On the top-up page, under each balance ("Automatic top-up: off"), choose a top-u
 
 - A company's referral link is in its referrals tab.
 - Both companies get 500 credits once the new one first tops up, any amount.
+- A referrer earns the reward for at most 25 referrals in any 365 days; past that, only the new company gets its 500 credits.
 - If that top-up is refunded in full or charged back, both rewards are taken back.
 
 ## Refunds and chargebacks

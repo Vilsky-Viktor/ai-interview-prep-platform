@@ -62,11 +62,11 @@ Rounds publish every answer. Library keeps per-question stats (answers, correct,
 - The replaced version is archived with its stats and feedback.
 - A replacement question must differ in meaning from every question already in the topic, checked by embeddings like the pipeline's duplicate step.
 
-Superadmins see flagged and replaced questions on the admin zone's Quality tab (see [Admin zone](features/admin-zone.md#quality)).
+Superadmins see flagged and replaced questions on the admin zone's Flagged and Replaced tabs (see [Admin zone](features/admin-zone.md#flagged-and-replaced)).
 
 ## Generation settings
 
-These settings in `.env` shape every generation. Terraform passes none of them to Google Cloud, so production runs on the defaults below (see [infra/README.md](../infra/README.md#notes)).
+These settings in `.env` shape every generation. Terraform passes none of them to Google Cloud (of generation's settings it passes only `DAILY_GENERATION_LIMIT`, under [Rate limits](#rate-limits)), so production runs on the defaults below (see [infra/README.md](../infra/README.md#notes)).
 
 | Setting | Default | What it sets |
 |---|---|---|
@@ -96,15 +96,17 @@ Every generation runs on `gpt-6.1-sol` at low. In testing ([evals/README.md](../
 
 ## Rate limits
 
-| Limit | Setting | Default |
+| Limit | Where it's set | Default |
 |---|---|---|
-| Generations per account in the window (0 turns it off) | `GENERATION_LIMIT` | 20 |
-| The window for the per-account limits | `GENERATION_WINDOW_SECONDS` | A day |
-| Re-generated questions per account in the same window (0 turns it off) | `REGENERATION_LIMIT` | 100 |
-| Revisions in words per topic review; after that, topics are only chosen by checkbox | `MAX_TOPIC_REVISIONS` | 10 |
-| New generations a day for everyone together, a ceiling on LLM spending (0 turns it off) | `DAILY_GENERATION_LIMIT` | 200 |
-| Question reports per user a day (library) | `REPORTS_PER_DAY` | 30 |
-| Thumbs (ratings) per user a day (library) | `RATINGS_PER_DAY` | 200 |
-| Verifier jobs a day for everyone together; a superadmin's "Fix now" isn't counted | `DAILY_VERIFY_LIMIT` | 300 |
+| Generations per account in the window (0 turns it off) | `GENERATION_LIMIT` setting | 20 |
+| The window for the per-account limits | `GENERATION_WINDOW_SECONDS` setting | A day |
+| Re-generated questions per account in the same window (0 turns it off) | `REGENERATION_LIMIT` setting | 100 |
+| New generations a day for everyone together, a ceiling on LLM spending (0 turns it off) | `DAILY_GENERATION_LIMIT` setting | 200 |
+| Revisions in words per topic review; after that, topics are only chosen by checkbox | `MAX_TOPIC_REVISIONS` constant (`services/generation/app/constants/generation.py`) | 10 |
+| Verifier jobs a day for everyone together; a superadmin's "Fix now" isn't counted | `DAILY_VERIFY_LIMIT` constant (`services/generation/app/constants/quality.py`) | 300 |
+| Question reports per user a day (library) | `REPORTS_PER_DAY` constant (`services/library/app/constants/feedback.py`) | 30 |
+| Thumbs (ratings) per user a day (library) | `RATINGS_PER_DAY` constant (`services/library/app/constants/feedback.py`) | 200 |
+
+Settings come from `.env` (or Terraform in the cloud); constants change only in the code.
 
 Email limits are in [Candidates](features/candidates.md#email-limits).

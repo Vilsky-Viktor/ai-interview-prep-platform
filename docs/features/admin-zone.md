@@ -6,7 +6,7 @@ The admin zone is for superadmins: prepza's own team, not a company's admins.
 - Only they see the Admin zone in the account menu.
 - Everyone else gets "not found" from its pages and routes.
 
-It has these tabs: [Templates](#templates), [Quality](#quality), [Verification](#verification), [Pass rates](#pass-rates), [Stats](#stats) and [Controls](#controls).
+It has seven tabs, in this order: [Templates](#templates), [Flagged](#flagged-and-replaced), [Replaced](#flagged-and-replaced), [Pass rates](#pass-rates), [Verification](#verification), [Stats](#stats) and [Controls](#controls).
 
 ## Templates
 
@@ -16,10 +16,10 @@ Ready-made interviews by role (see [Templates and practice](templates-and-practi
 - Titles never name a company.
 - Can be renamed, checked question by question, re-generated or deleted.
 
-## Quality
+## Flagged and replaced
 
-- The flagged questions: fix now or dismiss. A superadmin's "Fix now" isn't counted towards the verifier's daily limit.
-- The replaced questions.
+- **Flagged:** the flagged questions, each to fix now or dismiss. A superadmin's "Fix now" isn't counted towards the verifier's daily limit.
+- **Replaced:** the questions the verifier replaced.
 
 See [Question quality](../generation.md#question-quality) for how questions get flagged.
 
