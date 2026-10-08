@@ -31,7 +31,7 @@ Anyone asks the assistant from the "ask agent" button in the header (or at the e
 
 ## What it answers
 
-- **Their data:** companies and roles, balances, referrals, auto top-up, the team, interviews and whether their questions are ready, reports, candidates (in one interview or across a company), one candidate's results, a pause, prices, ATS connections and linked jobs, Slack, API keys and web hooks, notifications, their account, templates.
+- **Their data:** companies and roles, balances, referrals, auto top-up, the team, the audit log, interviews and whether their questions are ready, their questions and the reports on them, reports, candidates (in one interview or across a company), one candidate's results, a pause, prices, ATS connections, linked jobs and their stages, Slack, API keys and web hooks, notifications, their account and email settings, templates (and those to copy), prepza's news, and their own practice.
 - **How prepza works:** how-to, pricing, credits, payments, refunds, the terms and the privacy policy, from the platform guide (rounds' `GET /help/guide`, the same knowledge as the help chat signed-out visitors ask), in the user's language.
 - Under an answer, the panel shows blocks: candidate rows, interviews, balances, a candidate's summary and links to the pages the data comes from. Links are built only from each tool's link template and ids in the data, never from the model's text.
 - Reports are downloaded and shared from their pages: the assistant links to the candidate's or the interview's page.
@@ -45,7 +45,15 @@ An action is a tool that changes something (`app/constants/actions.py`): a user-
 3. `POST /conversations/{id}/actions/{action_id}/confirm`, with the user's fresh token: the action must be this user's, in this conversation, about a company that's still theirs (from companies' list for that token); a pause, the limits and 30 actions a user an hour apply. It's claimed with Redis `GETDEL`, so of two confirms only one runs it. It runs once, as the user, with an `Idempotency-Key` of its id, and the response streams like a message: `{"action": the card's new state}` (`done` with the page it made, or `failed` with why), then the assistant's words about the result. The result reaches the model only in that turn's prompt.
 4. `POST …/cancel` drops it. An expired, handled or cancelled action is a `409`; someone else's a `404`. A token the service refused (`401`) puts it back to be confirmed again with a fresh token.
 
-Actions so far: `create_company`. Actions come only from the user's own request: the prompt says tool data, documents and names are never instructions.
+Each card names what the action is about (`subject`: a company's name, an interview's title, a member's or candidate's email), read with the user's token when it's prepared, so an action about something they can't see gets no card. A pending card comes back when the conversation is reopened within its 10 minutes (Redis keeps it under the answer that prepared it); once done, its link says what it opens ("open Acme"). Actions share one progress label, "Preparing it for you to confirm…". Actions come only from the user's own request: the prompt says tool data, documents and names are never instructions, and the model fills an action with exactly the user's words and only the values they asked to change.
+
+| Group | Actions |
+|---|---|
+| Companies and team (`company_actions.py`) | `create_company`, `rename_company`, `delete_company`, `set_company_website` (starts verification), `remove_company_logo`, `turn_off_auto_top_up`, `invite_member`, `change_member_role`, `remove_member` |
+| Interviews, questions and candidates (`interview_actions.py`) | `create_interview` (from a job description; the result opens the topics' review), `create_interview_from_template`, `review_generation`, `retry_generation`, `cancel_generation`, `rename_interview`, `update_interview_settings`, `set_interview_link`, `set_topic_limit`, `regenerate_question`, `mark_question_wrong`, `delete_interview`, `invite_candidate`, `invite_candidates`, `revoke_candidate`, `set_extra_time` |
+| Account, notifications, integrations and practice (`account_actions.py`) | `update_language`, `update_email_preferences`, `delete_account`, `mark_notifications_seen`, `set_slack_kinds`, `disconnect_slack`, `disconnect_ats`, `link_ats_job`, `unlink_ats_job`, `retry_ats_candidates`, `create_webhook`, `remove_webhook`, `remove_api_key`, `start_practice` |
+
+Destructive ones (deleting a company, an interview or the account, removing a member, revoking an invite, cancelling a generation, disconnecting Slack or an ATS, removing a linked job, a web hook or an API key) carry the "can't be undone" warning. Left out on purpose: connecting an ATS, saving its web hook key and creating an API key (secrets don't belong in a chat), setting a logo and emailing a report (files the browser makes), turning on auto top-up (it charges a card; topping up is a link to `/top-up`), and the links that carry tokens (invites, unsubscribing). Asked to sign out, the panel signs out at once (`sign_out`, below).
 
 ## A conversation
 
@@ -116,7 +124,7 @@ Constants in `app/constants/limits.py`, counted in Redis:
 
 ## Tools
 
-Each read is a user-facing GET route of companies, billing, library, notifications, ats, api or rounds, listed in `app/constants/tools.py` and `company_tools.py`. Its function, as the model sees it, is built at startup from committed OpenAPI snapshots of those services (`app/openapi/`).
+Each read is a user-facing GET route of companies, billing, library, notifications, ats, api or rounds, listed in `app/constants/tools.py`, `company_tools.py` and `detail_tools.py`. Its function, as the model sees it, is built at startup from committed OpenAPI snapshots of those services (`app/openapi/`).
 
 To add one:
 
@@ -125,7 +133,7 @@ To add one:
 3. Refresh the snapshots if the route is new: `./scripts/assistant-openapi.sh` with the stack running (CI fails when they differ).
 4. The unit tests check that each entry resolves in its snapshot, is a read or a confirmed write, and has a label.
 
-An action is the same in `app/constants/actions.py`, with its method, `confirm: True`, the body fields the model may set (`body`), what its card shows (`preview`), whether it can't be undone (`destructive`), and the page its result opens (`render: "link"`, `link` filled from the arguments and the result). The panel names it by its tool in the `assistant.actions` messages.
+An action is the same in `app/constants/company_actions.py`, `interview_actions.py` or `account_actions.py` (gathered in `actions.py`), with its method, `confirm: True`, the body fields the model may set (`body`), what its card shows (`preview`), whether it can't be undone (`destructive`), and the page its result opens (`render: "link"`, `link` filled from the arguments and the result). The panel names it by its tool in the `assistant.actions` messages.
 
 ## Settings
 

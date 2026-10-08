@@ -1296,7 +1296,10 @@
       "candidate": "候选人",
       "candidates": "候选人",
       "interview": "面试",
-      "interviews": "面试"
+      "interviews": "面试",
+      "topics": "查看主题",
+      "practice": "练习",
+      "news": "动态"
     },
     "voice": {
       "hold": "按住说话",
@@ -1322,32 +1325,32 @@
       "no_company": {
         "text": "我们开始吧：你的第一场面试、你的公司以及公司认证。",
         "questions": {
-          "firstInterview": "怎么创建第一场面试？",
-          "createCompany": "怎么创建公司？",
-          "verify": "怎么认证我的公司？"
+          "firstInterview": "帮我创建第一场面试",
+          "createCompany": "帮我创建一家公司",
+          "verify": "公司认证是怎么进行的？"
         }
       },
       "unverified": {
         "text": "认证公司后，候选人能看到是谁邀请了他们。你也可以开始创建面试。",
         "questions": {
-          "verify": "怎么认证我的公司？",
+          "verify": "认证我的公司",
           "whyVerify": "为什么要认证公司？",
-          "createInterview": "怎么创建面试？"
+          "createInterview": "根据职位描述创建面试"
         }
       },
       "no_interviews": {
         "text": "根据职位描述创建面试：题目会针对该职位编写。",
         "questions": {
-          "fromDescription": "怎么根据职位描述创建面试？",
-          "template": "可以从模板开始吗？",
+          "fromDescription": "根据职位描述创建面试",
+          "template": "从模板创建面试",
           "changeQuestions": "可以修改题目吗？"
         }
       },
       "no_candidates": {
         "text": "通过邮件、分享链接或你的 ATS 邀请候选人。",
         "questions": {
-          "invite": "怎么邀请候选人？",
-          "shareLink": "分享链接怎么用？",
+          "invite": "邀请候选人",
+          "shareLink": "开启分享链接",
           "ats": "怎么连接我的 ATS？"
         }
       },
@@ -1356,7 +1359,7 @@
         "questions": {
           "passed": "本周谁通过了？",
           "compare": "比较我最好的几位候选人",
-          "replace": "怎么替换一道题？",
+          "replace": "替换一道题",
           "signals": "离开页面和尝试复制是什么意思？"
         }
       }
@@ -1373,11 +1376,78 @@
       "cancelled": "已取消",
       "cantUndo": "此操作无法撤销。",
       "titles": {
-        "create_company": "创建公司"
+        "create_company": "创建公司",
+        "rename_company": "重命名公司",
+        "delete_company": "删除公司",
+        "set_company_website": "填写网站并认证公司",
+        "remove_company_logo": "移除公司标志",
+        "turn_off_auto_top_up": "关闭自动充值",
+        "invite_member": "邀请加入团队",
+        "change_member_role": "更改团队成员的角色",
+        "remove_member": "从团队中移除",
+        "update_language": "更改你的语言",
+        "update_email_preferences": "更改你的邮件设置",
+        "delete_account": "删除你的账户",
+        "mark_notifications_seen": "将通知标为已读",
+        "set_slack_kinds": "选择 Slack 通知",
+        "disconnect_slack": "断开 Slack",
+        "disconnect_ats": "断开 ATS",
+        "link_ats_job": "将 ATS 职位关联到面试",
+        "unlink_ats_job": "取消关联 ATS 职位",
+        "retry_ats_candidates": "重新邀请 ATS 职位的候选人",
+        "create_webhook": "添加 Webhook",
+        "remove_webhook": "移除 Webhook",
+        "remove_api_key": "移除 API 密钥",
+        "start_practice": "开始一轮练习",
+        "create_interview": "根据职位描述创建面试",
+        "create_interview_from_template": "从模板创建面试",
+        "delete_interview": "删除面试",
+        "rename_interview": "重命名面试",
+        "update_interview_settings": "更改面试设置",
+        "set_interview_link": "开启或关闭分享链接",
+        "set_topic_limit": "设置每个主题的题数",
+        "regenerate_question": "替换题目",
+        "mark_question_wrong": "将题目标为错误",
+        "review_generation": "确认主题",
+        "retry_generation": "重新生成",
+        "cancel_generation": "取消生成",
+        "invite_candidate": "邀请一位候选人",
+        "invite_candidates": "邀请候选人",
+        "revoke_candidate": "撤销邀请",
+        "set_extra_time": "给予额外时间"
       },
       "fields": {
         "company": "公司",
-        "name": "名称"
+        "name": "名称",
+        "title": "新名称",
+        "email": "邮箱",
+        "role": "角色",
+        "text": "职位描述",
+        "generate_in": "题目语言",
+        "website": "网站",
+        "question_seconds": "每题秒数",
+        "pass_mark": "及格线 (%)",
+        "hired": "已录用",
+        "on": "分享链接已开启",
+        "limit": "每位候选人的题数",
+        "instructions": "更改",
+        "selected": "保留的主题",
+        "extra_time": "额外时间 (%)",
+        "language": "语言",
+        "changes": "邮件",
+        "kinds": "通知",
+        "provider": "ATS",
+        "job_id": "职位",
+        "stage_id": "阶段",
+        "url": "地址"
+      },
+      "yes": "是",
+      "no": "否",
+      "openNamed": "打开 {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "邮箱地址"
+        }
       }
     }
   }

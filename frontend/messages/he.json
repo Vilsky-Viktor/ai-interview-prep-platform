@@ -1296,7 +1296,10 @@
       "candidate": "מועמד",
       "candidates": "מועמדים",
       "interview": "ראיון",
-      "interviews": "ראיונות"
+      "interviews": "ראיונות",
+      "topics": "בדיקת הנושאים",
+      "practice": "תרגול",
+      "news": "חדשות"
     },
     "voice": {
       "hold": "יש ללחוץ לחיצה ארוכה כדי לדבר",
@@ -1322,32 +1325,32 @@
       "no_company": {
         "text": "בואו נתחיל: הראיון הראשון שלך, החברה שלך והאימות שלה.",
         "questions": {
-          "firstInterview": "איך יוצרים ראיון ראשון?",
-          "createCompany": "איך יוצרים חברה?",
-          "verify": "איך מאמתים את החברה?"
+          "firstInterview": "צור את הראיון הראשון שלי",
+          "createCompany": "צור לי חברה",
+          "verify": "איך עובד אימות החברה?"
         }
       },
       "unverified": {
         "text": "כדאי לאמת את החברה כדי שמועמדים יראו מי מזמין אותם, וליצור ראיונות.",
         "questions": {
-          "verify": "איך מאמתים את החברה?",
+          "verify": "אמת את החברה שלי",
           "whyVerify": "למה לאמת את החברה?",
-          "createInterview": "איך יוצרים ראיון?"
+          "createInterview": "צור ראיון מתיאור משרה"
         }
       },
       "no_interviews": {
         "text": "אפשר ליצור ראיון מתיאור משרה: השאלות נכתבות בשביל התפקיד.",
         "questions": {
-          "fromDescription": "איך יוצרים ראיון מתיאור משרה?",
-          "template": "אפשר להתחיל מתבנית?",
+          "fromDescription": "צור ראיון מתיאור משרה",
+          "template": "צור ראיון מתבנית",
           "changeQuestions": "אפשר לשנות את השאלות?"
         }
       },
       "no_candidates": {
         "text": "אפשר להזמין מועמדים במייל, בקישור לשיתוף או מה-ATS שלך.",
         "questions": {
-          "invite": "איך מזמינים מועמדים?",
-          "shareLink": "איך עובד הקישור לשיתוף?",
+          "invite": "הזמן מועמדים",
+          "shareLink": "הפעל את הקישור לשיתוף",
           "ats": "איך מחברים את ה-ATS?"
         }
       },
@@ -1356,7 +1359,7 @@
         "questions": {
           "passed": "מי עבר השבוע?",
           "compare": "השווה בין המועמדים הטובים שלי",
-          "replace": "איך מחליפים שאלה?",
+          "replace": "החלף שאלה",
           "signals": "מה המשמעות של יציאות מהדף וניסיונות העתקה?"
         }
       }
@@ -1373,11 +1376,78 @@
       "cancelled": "בוטל",
       "cantUndo": "אי אפשר לבטל את זה.",
       "titles": {
-        "create_company": "יצירת חברה"
+        "create_company": "יצירת חברה",
+        "rename_company": "שינוי שם החברה",
+        "delete_company": "מחיקת החברה",
+        "set_company_website": "הגדרת האתר ואימות החברה",
+        "remove_company_logo": "הסרת הלוגו של החברה",
+        "turn_off_auto_top_up": "כיבוי הטעינה האוטומטית",
+        "invite_member": "הזמנה לצוות",
+        "change_member_role": "שינוי תפקיד של חבר צוות",
+        "remove_member": "הסרה מהצוות",
+        "update_language": "שינוי השפה שלך",
+        "update_email_preferences": "שינוי הגדרות המייל שלך",
+        "delete_account": "מחיקת החשבון שלך",
+        "mark_notifications_seen": "סימון ההתראות כנקראו",
+        "set_slack_kinds": "בחירת התראות ל-Slack",
+        "disconnect_slack": "ניתוק Slack",
+        "disconnect_ats": "ניתוק ה-ATS",
+        "link_ats_job": "קישור משרה מה-ATS לראיון",
+        "unlink_ats_job": "ביטול הקישור של משרת ה-ATS",
+        "retry_ats_candidates": "הזמנה חוזרת של המועמדים ממשרת ה-ATS",
+        "create_webhook": "הוספת webhook",
+        "remove_webhook": "הסרת ה-webhook",
+        "remove_api_key": "הסרת מפתח ה-API",
+        "start_practice": "התחלת סבב תרגול",
+        "create_interview": "יצירת ראיון מתיאור משרה",
+        "create_interview_from_template": "יצירת ראיון מתבנית",
+        "delete_interview": "מחיקת הראיון",
+        "rename_interview": "שינוי שם הראיון",
+        "update_interview_settings": "שינוי הגדרות הראיון",
+        "set_interview_link": "הפעלה או כיבוי של הקישור לשיתוף",
+        "set_topic_limit": "קביעת מספר שאלות לנושא",
+        "regenerate_question": "החלפת השאלה",
+        "mark_question_wrong": "סימון השאלה כשגויה",
+        "review_generation": "אישור הנושאים",
+        "retry_generation": "ניסיון יצירה חוזר",
+        "cancel_generation": "ביטול היצירה",
+        "invite_candidate": "הזמנת מועמד",
+        "invite_candidates": "הזמנת מועמדים",
+        "revoke_candidate": "ביטול ההזמנה",
+        "set_extra_time": "מתן זמן נוסף"
       },
       "fields": {
         "company": "חברה",
-        "name": "שם"
+        "name": "שם",
+        "title": "שם חדש",
+        "email": "מייל",
+        "role": "תפקיד",
+        "text": "תיאור המשרה",
+        "generate_in": "שפת השאלות",
+        "website": "אתר",
+        "question_seconds": "שניות לשאלה",
+        "pass_mark": "ציון עובר (%)",
+        "hired": "גויס",
+        "on": "קישור לשיתוף פעיל",
+        "limit": "שאלות למועמד",
+        "instructions": "שינויים",
+        "selected": "נושאים שנשמרו",
+        "extra_time": "זמן נוסף (%)",
+        "language": "שפה",
+        "changes": "מיילים",
+        "kinds": "התראות",
+        "provider": "ATS",
+        "job_id": "משרה",
+        "stage_id": "שלב",
+        "url": "כתובת"
+      },
+      "yes": "כן",
+      "no": "לא",
+      "openNamed": "פתיחת {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "כתובות מייל"
+        }
       }
     }
   }

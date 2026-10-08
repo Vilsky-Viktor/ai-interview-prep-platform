@@ -1305,7 +1305,10 @@
       "candidate": "Kandidat",
       "candidates": "Kandidaten",
       "interview": "Interview",
-      "interviews": "Interviews"
+      "interviews": "Interviews",
+      "topics": "Themen prüfen",
+      "practice": "Übung",
+      "news": "Neuigkeiten"
     },
     "voice": {
       "hold": "Zum Sprechen gedrückt halten",
@@ -1331,32 +1334,32 @@
       "no_company": {
         "text": "Los geht's: dein erstes Interview, dein Unternehmen und seine Verifizierung.",
         "questions": {
-          "firstInterview": "Wie erstelle ich mein erstes Interview?",
-          "createCompany": "Wie lege ich ein Unternehmen an?",
-          "verify": "Wie verifiziere ich mein Unternehmen?"
+          "firstInterview": "Erstelle mein erstes Interview",
+          "createCompany": "Lege ein Unternehmen für mich an",
+          "verify": "Wie funktioniert die Verifizierung?"
         }
       },
       "unverified": {
         "text": "Verifiziere dein Unternehmen, damit Kandidaten sehen, wer sie einlädt, und erstelle deine Interviews.",
         "questions": {
-          "verify": "Wie verifiziere ich mein Unternehmen?",
+          "verify": "Verifiziere mein Unternehmen",
           "whyVerify": "Warum mein Unternehmen verifizieren?",
-          "createInterview": "Wie erstelle ich ein Interview?"
+          "createInterview": "Erstelle ein Interview aus einer Stellenbeschreibung"
         }
       },
       "no_interviews": {
         "text": "Erstelle ein Interview aus einer Stellenbeschreibung: Die Fragen werden für die Rolle geschrieben.",
         "questions": {
-          "fromDescription": "Wie erstelle ich ein Interview aus einer Stellenbeschreibung?",
-          "template": "Kann ich mit einer Vorlage beginnen?",
+          "fromDescription": "Erstelle ein Interview aus einer Stellenbeschreibung",
+          "template": "Erstelle ein Interview aus einer Vorlage",
           "changeQuestions": "Kann ich die Fragen ändern?"
         }
       },
       "no_candidates": {
         "text": "Lade Kandidaten per E-Mail, über einen teilbaren Link oder aus deinem ATS ein.",
         "questions": {
-          "invite": "Wie lade ich Kandidaten ein?",
-          "shareLink": "Wie funktioniert der teilbare Link?",
+          "invite": "Lade Kandidaten ein",
+          "shareLink": "Schalte den teilbaren Link ein",
           "ats": "Wie verbinde ich mein ATS?"
         }
       },
@@ -1365,7 +1368,7 @@
         "questions": {
           "passed": "Wer hat diese Woche bestanden?",
           "compare": "Vergleiche meine besten Kandidaten",
-          "replace": "Wie ersetze ich eine Frage?",
+          "replace": "Ersetze eine Frage",
           "signals": "Was bedeuten Seitenwechsel und Kopierversuche?"
         }
       }
@@ -1382,11 +1385,78 @@
       "cancelled": "Abgebrochen",
       "cantUndo": "Das lässt sich nicht rückgängig machen.",
       "titles": {
-        "create_company": "Unternehmen anlegen"
+        "create_company": "Unternehmen anlegen",
+        "rename_company": "Unternehmen umbenennen",
+        "delete_company": "Unternehmen löschen",
+        "set_company_website": "Website angeben und Unternehmen verifizieren",
+        "remove_company_logo": "Logo des Unternehmens entfernen",
+        "turn_off_auto_top_up": "Automatisches Aufladen ausschalten",
+        "invite_member": "Ins Team einladen",
+        "change_member_role": "Rolle eines Teammitglieds ändern",
+        "remove_member": "Aus dem Team entfernen",
+        "update_language": "Deine Sprache ändern",
+        "update_email_preferences": "Deine E-Mail-Einstellungen ändern",
+        "delete_account": "Dein Konto löschen",
+        "mark_notifications_seen": "Benachrichtigungen als gelesen markieren",
+        "set_slack_kinds": "Slack-Benachrichtigungen wählen",
+        "disconnect_slack": "Slack trennen",
+        "disconnect_ats": "ATS trennen",
+        "link_ats_job": "Stelle im ATS mit dem Interview verknüpfen",
+        "unlink_ats_job": "Verknüpfung der ATS-Stelle entfernen",
+        "retry_ats_candidates": "Kandidaten der ATS-Stelle erneut einladen",
+        "create_webhook": "Webhook hinzufügen",
+        "remove_webhook": "Webhook entfernen",
+        "remove_api_key": "API-Schlüssel entfernen",
+        "start_practice": "Übungsrunde starten",
+        "create_interview": "Interview aus einer Stellenbeschreibung erstellen",
+        "create_interview_from_template": "Interview aus einer Vorlage erstellen",
+        "delete_interview": "Interview löschen",
+        "rename_interview": "Interview umbenennen",
+        "update_interview_settings": "Einstellungen des Interviews ändern",
+        "set_interview_link": "Teilbaren Link ein- oder ausschalten",
+        "set_topic_limit": "Fragen pro Thema festlegen",
+        "regenerate_question": "Frage ersetzen",
+        "mark_question_wrong": "Frage als falsch markieren",
+        "review_generation": "Themen bestätigen",
+        "retry_generation": "Generierung erneut versuchen",
+        "cancel_generation": "Generierung abbrechen",
+        "invite_candidate": "Einen Kandidaten einladen",
+        "invite_candidates": "Kandidaten einladen",
+        "revoke_candidate": "Einladung widerrufen",
+        "set_extra_time": "Zusätzliche Zeit geben"
       },
       "fields": {
         "company": "Unternehmen",
-        "name": "Name"
+        "name": "Name",
+        "title": "Neuer Name",
+        "email": "E-Mail",
+        "role": "Rolle",
+        "text": "Stellenbeschreibung",
+        "generate_in": "Fragen auf",
+        "website": "Website",
+        "question_seconds": "Sekunden pro Frage",
+        "pass_mark": "Bestehensgrenze (%)",
+        "hired": "Eingestellt",
+        "on": "Teilbarer Link an",
+        "limit": "Fragen pro Kandidat",
+        "instructions": "Änderungen",
+        "selected": "Beibehaltene Themen",
+        "extra_time": "Zusätzliche Zeit (%)",
+        "language": "Sprache",
+        "changes": "E-Mails",
+        "kinds": "Benachrichtigungen",
+        "provider": "ATS",
+        "job_id": "Stelle",
+        "stage_id": "Phase",
+        "url": "Adresse"
+      },
+      "yes": "ja",
+      "no": "nein",
+      "openNamed": "{name} öffnen",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "E-Mail-Adressen"
+        }
       }
     }
   }

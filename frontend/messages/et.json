@@ -1309,7 +1309,10 @@
       "candidate": "Kandidaat",
       "candidates": "Kandidaadid",
       "interview": "Intervjuu",
-      "interviews": "Intervjuud"
+      "interviews": "Intervjuud",
+      "topics": "vaata teemad üle",
+      "practice": "harjutamine",
+      "news": "uudised"
     },
     "voice": {
       "hold": "Hoia all, et rääkida",
@@ -1335,32 +1338,32 @@
       "no_company": {
         "text": "Alustame: sinu esimene intervjuu, ettevõte ja selle kinnitamine.",
         "questions": {
-          "firstInterview": "Kuidas luua esimene intervjuu?",
-          "createCompany": "Kuidas luua ettevõte?",
-          "verify": "Kuidas oma ettevõte kinnitada?"
+          "firstInterview": "Loo minu esimene intervjuu",
+          "createCompany": "Loo mulle ettevõte",
+          "verify": "Kuidas ettevõtte kinnitamine käib?"
         }
       },
       "unverified": {
         "text": "Kinnita oma ettevõte, et kandidaadid näeksid, kes neid kutsub, ja loo intervjuud.",
         "questions": {
-          "verify": "Kuidas oma ettevõte kinnitada?",
+          "verify": "Kinnita minu ettevõte",
           "whyVerify": "Miks ettevõte kinnitada?",
-          "createInterview": "Kuidas luua intervjuu?"
+          "createInterview": "Loo intervjuu töökuulutuse põhjal"
         }
       },
       "no_interviews": {
         "text": "Loo intervjuu töökuulutuse põhjal: küsimused kirjutatakse selle rolli jaoks.",
         "questions": {
-          "fromDescription": "Kuidas luua intervjuu töökuulutuse põhjal?",
-          "template": "Kas saan alustada mallist?",
+          "fromDescription": "Loo intervjuu töökuulutuse põhjal",
+          "template": "Loo intervjuu mallist",
           "changeQuestions": "Kas saan küsimusi muuta?"
         }
       },
       "no_candidates": {
         "text": "Kutsu kandidaate e-kirjaga, jagatava lingiga või oma ATS-ist.",
         "questions": {
-          "invite": "Kuidas kandidaate kutsuda?",
-          "shareLink": "Kuidas jagatav link töötab?",
+          "invite": "Kutsu kandidaate",
+          "shareLink": "Lülita jagatav link sisse",
           "ats": "Kuidas oma ATS ühendada?"
         }
       },
@@ -1369,7 +1372,7 @@
         "questions": {
           "passed": "Kes sel nädalal läbis?",
           "compare": "Võrdle minu parimaid kandidaate",
-          "replace": "Kuidas küsimust asendada?",
+          "replace": "Asenda üks küsimus",
           "signals": "Mida tähendavad lehelt lahkumised ja kopeerimiskatsed?"
         }
       }
@@ -1386,11 +1389,78 @@
       "cancelled": "Tühistatud",
       "cantUndo": "Seda ei saa tagasi võtta.",
       "titles": {
-        "create_company": "Loo ettevõte"
+        "create_company": "Loo ettevõte",
+        "rename_company": "Nimeta ettevõte ümber",
+        "delete_company": "Kustuta ettevõte",
+        "set_company_website": "Lisa veebileht ja kinnita ettevõte",
+        "remove_company_logo": "Eemalda ettevõtte logo",
+        "turn_off_auto_top_up": "Lülita automaatne juurdelaadimine välja",
+        "invite_member": "Kutsu meeskonda",
+        "change_member_role": "Muuda meeskonnaliikme rolli",
+        "remove_member": "Eemalda meeskonnast",
+        "update_language": "Muuda oma keelt",
+        "update_email_preferences": "Muuda oma e-kirjade seadeid",
+        "delete_account": "Kustuta oma konto",
+        "mark_notifications_seen": "Märgi teavitused loetuks",
+        "set_slack_kinds": "Vali Slacki teavitused",
+        "disconnect_slack": "Katkesta Slacki ühendus",
+        "disconnect_ats": "Katkesta ATS-i ühendus",
+        "link_ats_job": "Seo ATS-i töökuulutus intervjuuga",
+        "unlink_ats_job": "Eemalda ATS-i töökuulutuse seos",
+        "retry_ats_candidates": "Kutsu ATS-i töökuulutuse kandidaadid uuesti",
+        "create_webhook": "Lisa veebihaak",
+        "remove_webhook": "Eemalda veebihaak",
+        "remove_api_key": "Eemalda API-võti",
+        "start_practice": "Alusta harjutusvooru",
+        "create_interview": "Loo intervjuu töökuulutuse põhjal",
+        "create_interview_from_template": "Loo intervjuu mallist",
+        "delete_interview": "Kustuta intervjuu",
+        "rename_interview": "Nimeta intervjuu ümber",
+        "update_interview_settings": "Muuda intervjuu seadeid",
+        "set_interview_link": "Lülita jagatav link sisse või välja",
+        "set_topic_limit": "Määra küsimuste arv teema kohta",
+        "regenerate_question": "Asenda küsimus",
+        "mark_question_wrong": "Märgi küsimus vigaseks",
+        "review_generation": "Kinnita teemad",
+        "retry_generation": "Proovi uuesti luua",
+        "cancel_generation": "Tühista loomine",
+        "invite_candidate": "Kutsu kandidaat",
+        "invite_candidates": "Kutsu kandidaadid",
+        "revoke_candidate": "Tühista kutse",
+        "set_extra_time": "Anna lisaaega"
       },
       "fields": {
         "company": "Ettevõte",
-        "name": "Nimi"
+        "name": "Nimi",
+        "title": "Uus nimi",
+        "email": "E-post",
+        "role": "Roll",
+        "text": "Töökuulutus",
+        "generate_in": "Küsimuste keel",
+        "website": "Veebileht",
+        "question_seconds": "Sekundit küsimuse kohta",
+        "pass_mark": "Läbimise piir (%)",
+        "hired": "Palgatud",
+        "on": "Jagatav link sees",
+        "limit": "Küsimusi kandidaadi kohta",
+        "instructions": "Muudatused",
+        "selected": "Alles jäetud teemad",
+        "extra_time": "Lisaaeg (%)",
+        "language": "Keel",
+        "changes": "E-kirjad",
+        "kinds": "Teavitused",
+        "provider": "ATS",
+        "job_id": "Töökuulutus",
+        "stage_id": "Etapp",
+        "url": "Aadress"
+      },
+      "yes": "jah",
+      "no": "ei",
+      "openNamed": "ava {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "E-posti aadressid"
+        }
       }
     }
   }

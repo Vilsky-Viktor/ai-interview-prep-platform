@@ -1305,7 +1305,10 @@
       "candidate": "Kandydat",
       "candidates": "Kandydaci",
       "interview": "Rozmowa",
-      "interviews": "Rozmowy"
+      "interviews": "Rozmowy",
+      "topics": "sprawdź tematy",
+      "practice": "ćwiczenia",
+      "news": "nowości"
     },
     "voice": {
       "hold": "Przytrzymaj, aby mówić",
@@ -1331,32 +1334,32 @@
       "no_company": {
         "text": "Zaczynajmy: Twoja pierwsza rozmowa, Twoja firma i jej weryfikacja.",
         "questions": {
-          "firstInterview": "Jak utworzyć pierwszą rozmowę?",
-          "createCompany": "Jak utworzyć firmę?",
-          "verify": "Jak zweryfikować firmę?"
+          "firstInterview": "Utwórz moją pierwszą rozmowę",
+          "createCompany": "Utwórz dla mnie firmę",
+          "verify": "Jak działa weryfikacja firmy?"
         }
       },
       "unverified": {
         "text": "Zweryfikuj firmę, aby kandydaci widzieli, kto ich zaprasza, i twórz rozmowy.",
         "questions": {
-          "verify": "Jak zweryfikować firmę?",
+          "verify": "Zweryfikuj moją firmę",
           "whyVerify": "Po co weryfikować firmę?",
-          "createInterview": "Jak utworzyć rozmowę?"
+          "createInterview": "Utwórz rozmowę z opisu stanowiska"
         }
       },
       "no_interviews": {
         "text": "Utwórz rozmowę na podstawie opisu stanowiska: pytania powstają pod tę rolę.",
         "questions": {
-          "fromDescription": "Jak utworzyć rozmowę z opisu stanowiska?",
-          "template": "Czy mogę zacząć od szablonu?",
+          "fromDescription": "Utwórz rozmowę z opisu stanowiska",
+          "template": "Utwórz rozmowę z szablonu",
           "changeQuestions": "Czy mogę zmienić pytania?"
         }
       },
       "no_candidates": {
         "text": "Zapraszaj kandydatów e-mailem, linkiem do udostępnienia albo ze swojego ATS.",
         "questions": {
-          "invite": "Jak zaprosić kandydatów?",
-          "shareLink": "Jak działa link do udostępnienia?",
+          "invite": "Zaproś kandydatów",
+          "shareLink": "Włącz link do udostępnienia",
           "ats": "Jak połączyć mój ATS?"
         }
       },
@@ -1365,7 +1368,7 @@
         "questions": {
           "passed": "Kto zaliczył w tym tygodniu?",
           "compare": "Porównaj moich najlepszych kandydatów",
-          "replace": "Jak wymienić pytanie?",
+          "replace": "Wymień pytanie",
           "signals": "Co oznaczają opuszczenia strony i próby kopiowania?"
         }
       }
@@ -1382,11 +1385,78 @@
       "cancelled": "Anulowano",
       "cantUndo": "Tego nie da się cofnąć.",
       "titles": {
-        "create_company": "Utwórz firmę"
+        "create_company": "Utwórz firmę",
+        "rename_company": "Zmień nazwę firmy",
+        "delete_company": "Usuń firmę",
+        "set_company_website": "Podaj stronę i zweryfikuj firmę",
+        "remove_company_logo": "Usuń logo firmy",
+        "turn_off_auto_top_up": "Wyłącz automatyczne doładowanie",
+        "invite_member": "Zaproś do zespołu",
+        "change_member_role": "Zmień rolę członka zespołu",
+        "remove_member": "Usuń z zespołu",
+        "update_language": "Zmień język",
+        "update_email_preferences": "Zmień ustawienia e-maili",
+        "delete_account": "Usuń konto",
+        "mark_notifications_seen": "Oznacz powiadomienia jako przeczytane",
+        "set_slack_kinds": "Wybierz powiadomienia w Slacku",
+        "disconnect_slack": "Odłącz Slacka",
+        "disconnect_ats": "Odłącz ATS",
+        "link_ats_job": "Powiąż ofertę z ATS z rozmową",
+        "unlink_ats_job": "Odłącz ofertę z ATS",
+        "retry_ats_candidates": "Zaproś ponownie kandydatów z oferty w ATS",
+        "create_webhook": "Dodaj webhook",
+        "remove_webhook": "Usuń webhook",
+        "remove_api_key": "Usuń klucz API",
+        "start_practice": "Zacznij rundę ćwiczeń",
+        "create_interview": "Utwórz rozmowę z opisu stanowiska",
+        "create_interview_from_template": "Utwórz rozmowę z szablonu",
+        "delete_interview": "Usuń rozmowę",
+        "rename_interview": "Zmień nazwę rozmowy",
+        "update_interview_settings": "Zmień ustawienia rozmowy",
+        "set_interview_link": "Włącz lub wyłącz link do udostępnienia",
+        "set_topic_limit": "Ustaw liczbę pytań z tematu",
+        "regenerate_question": "Wymień pytanie",
+        "mark_question_wrong": "Oznacz pytanie jako błędne",
+        "review_generation": "Potwierdź tematy",
+        "retry_generation": "Spróbuj wygenerować ponownie",
+        "cancel_generation": "Anuluj generowanie",
+        "invite_candidate": "Zaproś kandydata",
+        "invite_candidates": "Zaproś kandydatów",
+        "revoke_candidate": "Cofnij zaproszenie",
+        "set_extra_time": "Daj dodatkowy czas"
       },
       "fields": {
         "company": "Firma",
-        "name": "Nazwa"
+        "name": "Nazwa",
+        "title": "Nowa nazwa",
+        "email": "E-mail",
+        "role": "Rola",
+        "text": "Opis stanowiska",
+        "generate_in": "Pytania w języku",
+        "website": "Strona",
+        "question_seconds": "Sekund na pytanie",
+        "pass_mark": "Próg zaliczenia (%)",
+        "hired": "Zatrudniony",
+        "on": "Link do udostępnienia włączony",
+        "limit": "Pytań na kandydata",
+        "instructions": "Zmiany",
+        "selected": "Zostawione tematy",
+        "extra_time": "Dodatkowy czas (%)",
+        "language": "Język",
+        "changes": "E-maile",
+        "kinds": "Powiadomienia",
+        "provider": "ATS",
+        "job_id": "Oferta",
+        "stage_id": "Etap",
+        "url": "Adres"
+      },
+      "yes": "tak",
+      "no": "nie",
+      "openNamed": "otwórz {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "Adresy e-mail"
+        }
       }
     }
   }

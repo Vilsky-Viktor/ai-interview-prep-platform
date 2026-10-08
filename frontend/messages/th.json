@@ -1300,7 +1300,10 @@
       "candidate": "ผู้สมัคร",
       "candidates": "ผู้สมัคร",
       "interview": "การสัมภาษณ์",
-      "interviews": "การสัมภาษณ์"
+      "interviews": "การสัมภาษณ์",
+      "topics": "ตรวจหัวข้อ",
+      "practice": "ฝึก",
+      "news": "ข่าว"
     },
     "voice": {
       "hold": "กดค้างไว้เพื่อพูด",
@@ -1326,32 +1329,32 @@
       "no_company": {
         "text": "มาเริ่มกันเลย: การสัมภาษณ์ครั้งแรก บริษัทของคุณ และการยืนยันบริษัท",
         "questions": {
-          "firstInterview": "สร้างการสัมภาษณ์ครั้งแรกอย่างไร",
-          "createCompany": "สร้างบริษัทอย่างไร",
-          "verify": "ยืนยันบริษัทอย่างไร"
+          "firstInterview": "สร้างการสัมภาษณ์แรกให้ฉัน",
+          "createCompany": "สร้างบริษัทให้ฉัน",
+          "verify": "การยืนยันบริษัททำอย่างไร"
         }
       },
       "unverified": {
         "text": "ยืนยันบริษัทเพื่อให้ผู้สมัครเห็นว่าใครเป็นผู้เชิญ แล้วสร้างการสัมภาษณ์ของคุณ",
         "questions": {
-          "verify": "ยืนยันบริษัทอย่างไร",
+          "verify": "ยืนยันบริษัทของฉัน",
           "whyVerify": "ทำไมต้องยืนยันบริษัท",
-          "createInterview": "สร้างการสัมภาษณ์อย่างไร"
+          "createInterview": "สร้างการสัมภาษณ์จากรายละเอียดงาน"
         }
       },
       "no_interviews": {
         "text": "สร้างการสัมภาษณ์จากรายละเอียดงาน: คำถามจะเขียนขึ้นสำหรับตำแหน่งนั้น",
         "questions": {
-          "fromDescription": "สร้างการสัมภาษณ์จากรายละเอียดงานอย่างไร",
-          "template": "เริ่มจากเทมเพลตได้ไหม",
+          "fromDescription": "สร้างการสัมภาษณ์จากรายละเอียดงาน",
+          "template": "สร้างการสัมภาษณ์จากเทมเพลต",
           "changeQuestions": "เปลี่ยนคำถามได้ไหม"
         }
       },
       "no_candidates": {
         "text": "เชิญผู้สมัครทางอีเมล ด้วยลิงก์ที่แชร์ได้ หรือจาก ATS ของคุณ",
         "questions": {
-          "invite": "เชิญผู้สมัครอย่างไร",
-          "shareLink": "ลิงก์ที่แชร์ได้ทำงานอย่างไร",
+          "invite": "เชิญผู้สมัคร",
+          "shareLink": "เปิดลิงก์ที่แชร์ได้",
           "ats": "เชื่อมต่อ ATS อย่างไร"
         }
       },
@@ -1360,7 +1363,7 @@
         "questions": {
           "passed": "สัปดาห์นี้ใครผ่านบ้าง",
           "compare": "เปรียบเทียบผู้สมัครที่ดีที่สุดของฉัน",
-          "replace": "เปลี่ยนคำถามอย่างไร",
+          "replace": "เปลี่ยนคำถามหนึ่งข้อ",
           "signals": "การออกจากหน้าและการพยายามคัดลอกหมายความว่าอะไร"
         }
       }
@@ -1377,11 +1380,78 @@
       "cancelled": "ยกเลิกแล้ว",
       "cantUndo": "ย้อนกลับไม่ได้",
       "titles": {
-        "create_company": "สร้างบริษัท"
+        "create_company": "สร้างบริษัท",
+        "rename_company": "เปลี่ยนชื่อบริษัท",
+        "delete_company": "ลบบริษัท",
+        "set_company_website": "ใส่เว็บไซต์และยืนยันบริษัท",
+        "remove_company_logo": "ลบโลโก้บริษัท",
+        "turn_off_auto_top_up": "ปิดการเติมเครดิตอัตโนมัติ",
+        "invite_member": "เชิญเข้าทีม",
+        "change_member_role": "เปลี่ยนบทบาทสมาชิกทีม",
+        "remove_member": "นำออกจากทีม",
+        "update_language": "เปลี่ยนภาษาของคุณ",
+        "update_email_preferences": "เปลี่ยนการตั้งค่าอีเมลของคุณ",
+        "delete_account": "ลบบัญชีของคุณ",
+        "mark_notifications_seen": "ทำเครื่องหมายว่าอ่านการแจ้งเตือนแล้ว",
+        "set_slack_kinds": "เลือกการแจ้งเตือนใน Slack",
+        "disconnect_slack": "ยกเลิกการเชื่อมต่อ Slack",
+        "disconnect_ats": "ยกเลิกการเชื่อมต่อ ATS",
+        "link_ats_job": "ลิงก์ตำแหน่งงานใน ATS กับการสัมภาษณ์",
+        "unlink_ats_job": "ยกเลิกลิงก์ตำแหน่งงานใน ATS",
+        "retry_ats_candidates": "เชิญผู้สมัครของตำแหน่งงานใน ATS อีกครั้ง",
+        "create_webhook": "เพิ่มเว็บฮุก",
+        "remove_webhook": "ลบเว็บฮุก",
+        "remove_api_key": "ลบคีย์ API",
+        "start_practice": "เริ่มรอบฝึก",
+        "create_interview": "สร้างการสัมภาษณ์จากรายละเอียดงาน",
+        "create_interview_from_template": "สร้างการสัมภาษณ์จากเทมเพลต",
+        "delete_interview": "ลบการสัมภาษณ์",
+        "rename_interview": "เปลี่ยนชื่อการสัมภาษณ์",
+        "update_interview_settings": "เปลี่ยนการตั้งค่าการสัมภาษณ์",
+        "set_interview_link": "เปิดหรือปิดลิงก์ที่แชร์ได้",
+        "set_topic_limit": "กำหนดจำนวนคำถามต่อหัวข้อ",
+        "regenerate_question": "เปลี่ยนคำถาม",
+        "mark_question_wrong": "ทำเครื่องหมายว่าคำถามผิด",
+        "review_generation": "ยืนยันหัวข้อ",
+        "retry_generation": "ลองสร้างอีกครั้ง",
+        "cancel_generation": "ยกเลิกการสร้าง",
+        "invite_candidate": "เชิญผู้สมัคร",
+        "invite_candidates": "เชิญผู้สมัครหลายคน",
+        "revoke_candidate": "เพิกถอนคำเชิญ",
+        "set_extra_time": "ให้เวลาเพิ่ม"
       },
       "fields": {
         "company": "บริษัท",
-        "name": "ชื่อ"
+        "name": "ชื่อ",
+        "title": "ชื่อใหม่",
+        "email": "อีเมล",
+        "role": "บทบาท",
+        "text": "รายละเอียดงาน",
+        "generate_in": "ภาษาของคำถาม",
+        "website": "เว็บไซต์",
+        "question_seconds": "วินาทีต่อคำถาม",
+        "pass_mark": "เกณฑ์ผ่าน (%)",
+        "hired": "จ้างแล้ว",
+        "on": "เปิดลิงก์ที่แชร์ได้",
+        "limit": "คำถามต่อผู้สมัคร",
+        "instructions": "การเปลี่ยนแปลง",
+        "selected": "หัวข้อที่เก็บไว้",
+        "extra_time": "เวลาเพิ่ม (%)",
+        "language": "ภาษา",
+        "changes": "อีเมล",
+        "kinds": "การแจ้งเตือน",
+        "provider": "ATS",
+        "job_id": "ตำแหน่งงาน",
+        "stage_id": "ขั้นตอน",
+        "url": "ที่อยู่"
+      },
+      "yes": "ใช่",
+      "no": "ไม่",
+      "openNamed": "เปิด {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "อีเมล"
+        }
       }
     }
   }

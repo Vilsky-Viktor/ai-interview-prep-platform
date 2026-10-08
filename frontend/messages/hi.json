@@ -1300,7 +1300,10 @@
       "candidate": "उम्मीदवार",
       "candidates": "उम्मीदवार",
       "interview": "इंटरव्यू",
-      "interviews": "इंटरव्यू"
+      "interviews": "इंटरव्यू",
+      "topics": "विषय देखें",
+      "practice": "अभ्यास",
+      "news": "खबरें"
     },
     "voice": {
       "hold": "बोलने के लिए दबाकर रखें",
@@ -1326,32 +1329,32 @@
       "no_company": {
         "text": "चलिए शुरू करें: आपका पहला इंटरव्यू, आपकी कंपनी और उसका वेरिफ़िकेशन।",
         "questions": {
-          "firstInterview": "अपना पहला इंटरव्यू कैसे बनाऊँ?",
-          "createCompany": "कंपनी कैसे बनाऊँ?",
-          "verify": "अपनी कंपनी वेरिफ़ाई कैसे करूँ?"
+          "firstInterview": "मेरा पहला इंटरव्यू बनाओ",
+          "createCompany": "मेरे लिए कंपनी बनाओ",
+          "verify": "कंपनी वेरिफ़िकेशन कैसे होता है?"
         }
       },
       "unverified": {
         "text": "अपनी कंपनी वेरिफ़ाई करें ताकि उम्मीदवार देख सकें कि उन्हें कौन बुला रहा है, और इंटरव्यू बनाएँ।",
         "questions": {
-          "verify": "अपनी कंपनी वेरिफ़ाई कैसे करूँ?",
+          "verify": "मेरी कंपनी वेरिफ़ाई करो",
           "whyVerify": "कंपनी वेरिफ़ाई क्यों करूँ?",
-          "createInterview": "इंटरव्यू कैसे बनाऊँ?"
+          "createInterview": "जॉब डिस्क्रिप्शन से इंटरव्यू बनाओ"
         }
       },
       "no_interviews": {
         "text": "जॉब डिस्क्रिप्शन से इंटरव्यू बनाएँ: सवाल उसी भूमिका के लिए लिखे जाते हैं।",
         "questions": {
-          "fromDescription": "जॉब डिस्क्रिप्शन से इंटरव्यू कैसे बनाऊँ?",
-          "template": "क्या टेम्पलेट से शुरू कर सकता हूँ?",
+          "fromDescription": "जॉब डिस्क्रिप्शन से इंटरव्यू बनाओ",
+          "template": "टेम्पलेट से इंटरव्यू बनाओ",
           "changeQuestions": "क्या सवाल बदल सकता हूँ?"
         }
       },
       "no_candidates": {
         "text": "उम्मीदवारों को ईमेल, शेयर किए जा सकने वाले लिंक या अपने ATS से बुलाएँ।",
         "questions": {
-          "invite": "उम्मीदवारों को कैसे बुलाऊँ?",
-          "shareLink": "शेयर लिंक कैसे काम करता है?",
+          "invite": "उम्मीदवारों को बुलाओ",
+          "shareLink": "शेयर लिंक चालू करो",
           "ats": "अपना ATS कैसे जोड़ूँ?"
         }
       },
@@ -1360,7 +1363,7 @@
         "questions": {
           "passed": "इस हफ़्ते कौन पास हुआ?",
           "compare": "मेरे सबसे अच्छे उम्मीदवारों की तुलना करो",
-          "replace": "सवाल कैसे बदलूँ?",
+          "replace": "एक सवाल बदलो",
           "signals": "पेज छोड़ने और कॉपी की कोशिशों का क्या मतलब है?"
         }
       }
@@ -1377,11 +1380,78 @@
       "cancelled": "रद्द किया गया",
       "cantUndo": "इसे पूर्ववत नहीं किया जा सकता।",
       "titles": {
-        "create_company": "कंपनी बनाएँ"
+        "create_company": "कंपनी बनाएँ",
+        "rename_company": "कंपनी का नाम बदलें",
+        "delete_company": "कंपनी हटाएँ",
+        "set_company_website": "वेबसाइट जोड़ें और कंपनी वेरिफ़ाई करें",
+        "remove_company_logo": "कंपनी का लोगो हटाएँ",
+        "turn_off_auto_top_up": "ऑटो टॉप अप बंद करें",
+        "invite_member": "टीम में बुलाएँ",
+        "change_member_role": "टीम सदस्य की भूमिका बदलें",
+        "remove_member": "टीम से हटाएँ",
+        "update_language": "अपनी भाषा बदलें",
+        "update_email_preferences": "अपनी ईमेल सेटिंग्स बदलें",
+        "delete_account": "अपना खाता हटाएँ",
+        "mark_notifications_seen": "सूचनाओं को देखा हुआ मार्क करें",
+        "set_slack_kinds": "Slack सूचनाएँ चुनें",
+        "disconnect_slack": "Slack डिस्कनेक्ट करें",
+        "disconnect_ats": "ATS डिस्कनेक्ट करें",
+        "link_ats_job": "ATS की नौकरी को इंटरव्यू से जोड़ें",
+        "unlink_ats_job": "ATS की नौकरी का जुड़ाव हटाएँ",
+        "retry_ats_candidates": "ATS की नौकरी के उम्मीदवारों को फिर से बुलाएँ",
+        "create_webhook": "वेबहुक जोड़ें",
+        "remove_webhook": "वेबहुक हटाएँ",
+        "remove_api_key": "API कुंजी हटाएँ",
+        "start_practice": "अभ्यास राउंड शुरू करें",
+        "create_interview": "जॉब डिस्क्रिप्शन से इंटरव्यू बनाएँ",
+        "create_interview_from_template": "टेम्पलेट से इंटरव्यू बनाएँ",
+        "delete_interview": "इंटरव्यू हटाएँ",
+        "rename_interview": "इंटरव्यू का नाम बदलें",
+        "update_interview_settings": "इंटरव्यू की सेटिंग्स बदलें",
+        "set_interview_link": "शेयर लिंक चालू या बंद करें",
+        "set_topic_limit": "हर विषय के सवाल तय करें",
+        "regenerate_question": "सवाल बदलें",
+        "mark_question_wrong": "सवाल को गलत मार्क करें",
+        "review_generation": "विषयों की पुष्टि करें",
+        "retry_generation": "फिर से बनाने की कोशिश करें",
+        "cancel_generation": "बनाना रद्द करें",
+        "invite_candidate": "एक उम्मीदवार को बुलाएँ",
+        "invite_candidates": "उम्मीदवारों को बुलाएँ",
+        "revoke_candidate": "न्योता वापस लें",
+        "set_extra_time": "अतिरिक्त समय दें"
       },
       "fields": {
         "company": "कंपनी",
-        "name": "नाम"
+        "name": "नाम",
+        "title": "नया नाम",
+        "email": "ईमेल",
+        "role": "भूमिका",
+        "text": "जॉब डिस्क्रिप्शन",
+        "generate_in": "सवालों की भाषा",
+        "website": "वेबसाइट",
+        "question_seconds": "हर सवाल के सेकंड",
+        "pass_mark": "पास मार्क (%)",
+        "hired": "नियुक्त",
+        "on": "शेयर लिंक चालू",
+        "limit": "हर उम्मीदवार के सवाल",
+        "instructions": "बदलाव",
+        "selected": "रखे गए विषय",
+        "extra_time": "अतिरिक्त समय (%)",
+        "language": "भाषा",
+        "changes": "ईमेल",
+        "kinds": "सूचनाएँ",
+        "provider": "ATS",
+        "job_id": "नौकरी",
+        "stage_id": "चरण",
+        "url": "पता"
+      },
+      "yes": "हाँ",
+      "no": "नहीं",
+      "openNamed": "{name} खोलें",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "ईमेल पते"
+        }
       }
     }
   }

@@ -1305,7 +1305,10 @@
       "candidate": "Candidate",
       "candidates": "Candidates",
       "interview": "Interview",
-      "interviews": "Interviews"
+      "interviews": "Interviews",
+      "topics": "review topics",
+      "practice": "practice",
+      "news": "news"
     },
     "voice": {
       "hold": "Hold to talk",
@@ -1331,32 +1334,32 @@
       "no_company": {
         "text": "Let's get you started: your first interview, your company and getting it verified.",
         "questions": {
-          "firstInterview": "How do I create my first interview?",
-          "createCompany": "How do I create a company?",
-          "verify": "How do I verify my company?"
+          "firstInterview": "Create my first interview",
+          "createCompany": "Create a company for me",
+          "verify": "How does company verification work?"
         }
       },
       "unverified": {
         "text": "Verify your company so candidates see who's inviting them, and create your interviews.",
         "questions": {
-          "verify": "How do I verify my company?",
+          "verify": "Verify my company",
           "whyVerify": "Why verify my company?",
-          "createInterview": "How do I create an interview?"
+          "createInterview": "Create an interview from a job description"
         }
       },
       "no_interviews": {
         "text": "Create an interview from a job description: its questions are written for the role.",
         "questions": {
-          "fromDescription": "How do I create an interview from a job description?",
-          "template": "Can I start from a template?",
+          "fromDescription": "Create an interview from a job description",
+          "template": "Create an interview from a template",
           "changeQuestions": "Can I change the questions?"
         }
       },
       "no_candidates": {
         "text": "Invite candidates by email, with a shareable link or from your ATS.",
         "questions": {
-          "invite": "How do I invite candidates?",
-          "shareLink": "How does the shareable link work?",
+          "invite": "Invite candidates",
+          "shareLink": "Turn on the shareable link",
           "ats": "How do I connect my ATS?"
         }
       },
@@ -1365,7 +1368,7 @@
         "questions": {
           "passed": "Who passed this week?",
           "compare": "Compare my best candidates",
-          "replace": "How do I replace a question?",
+          "replace": "Replace a question",
           "signals": "What do page leaves and copy attempts mean?"
         }
       }
@@ -1382,11 +1385,78 @@
       "cancelled": "Cancelled",
       "cantUndo": "This can't be undone.",
       "titles": {
-        "create_company": "Create a company"
+        "create_company": "Create a company",
+        "rename_company": "Rename the company",
+        "delete_company": "Delete the company",
+        "set_company_website": "Set the website and verify the company",
+        "remove_company_logo": "Remove the company's logo",
+        "turn_off_auto_top_up": "Turn off automatic top-up",
+        "invite_member": "Invite to the team",
+        "change_member_role": "Change a team member's role",
+        "remove_member": "Remove from the team",
+        "update_language": "Change your language",
+        "update_email_preferences": "Change your email settings",
+        "delete_account": "Delete your account",
+        "mark_notifications_seen": "Mark notifications as seen",
+        "set_slack_kinds": "Choose Slack notifications",
+        "disconnect_slack": "Disconnect Slack",
+        "disconnect_ats": "Disconnect the ATS",
+        "link_ats_job": "Link an ATS job to the interview",
+        "unlink_ats_job": "Unlink the ATS job",
+        "retry_ats_candidates": "Invite the ATS job's candidates again",
+        "create_webhook": "Add a web hook",
+        "remove_webhook": "Remove the web hook",
+        "remove_api_key": "Remove the API key",
+        "start_practice": "Start a practice round",
+        "create_interview": "Create an interview from a job description",
+        "create_interview_from_template": "Create an interview from a template",
+        "delete_interview": "Delete the interview",
+        "rename_interview": "Rename the interview",
+        "update_interview_settings": "Change the interview's settings",
+        "set_interview_link": "Turn the shareable link on or off",
+        "set_topic_limit": "Set questions per topic",
+        "regenerate_question": "Replace the question",
+        "mark_question_wrong": "Mark the question as wrong",
+        "review_generation": "Confirm the topics",
+        "retry_generation": "Try generating again",
+        "cancel_generation": "Cancel the generation",
+        "invite_candidate": "Invite a candidate",
+        "invite_candidates": "Invite candidates",
+        "revoke_candidate": "Revoke the invite",
+        "set_extra_time": "Give extra time"
       },
       "fields": {
         "company": "Company",
-        "name": "Name"
+        "name": "Name",
+        "title": "New name",
+        "email": "Email",
+        "role": "Role",
+        "text": "Job description",
+        "generate_in": "Questions in",
+        "website": "Website",
+        "question_seconds": "Seconds per question",
+        "pass_mark": "Pass mark (%)",
+        "hired": "Hired",
+        "on": "Shareable link on",
+        "limit": "Questions per candidate",
+        "instructions": "Changes",
+        "selected": "Topics kept",
+        "extra_time": "Extra time (%)",
+        "language": "Language",
+        "changes": "Emails",
+        "kinds": "Notifications",
+        "provider": "ATS",
+        "job_id": "Job",
+        "stage_id": "Stage",
+        "url": "Address"
+      },
+      "yes": "yes",
+      "no": "no",
+      "openNamed": "open {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "Emails"
+        }
       }
     }
   }

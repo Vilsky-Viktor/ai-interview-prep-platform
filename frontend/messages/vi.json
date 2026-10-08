@@ -1301,7 +1301,10 @@
       "candidate": "Ứng viên",
       "candidates": "Ứng viên",
       "interview": "Phỏng vấn",
-      "interviews": "Phỏng vấn"
+      "interviews": "Phỏng vấn",
+      "topics": "xem lại chủ đề",
+      "practice": "luyện tập",
+      "news": "tin tức"
     },
     "voice": {
       "hold": "Nhấn giữ để nói",
@@ -1327,32 +1330,32 @@
       "no_company": {
         "text": "Cùng bắt đầu nhé: buổi phỏng vấn đầu tiên, công ty của bạn và việc xác minh công ty.",
         "questions": {
-          "firstInterview": "Tạo buổi phỏng vấn đầu tiên thế nào?",
-          "createCompany": "Tạo công ty thế nào?",
-          "verify": "Xác minh công ty thế nào?"
+          "firstInterview": "Tạo buổi phỏng vấn đầu tiên của tôi",
+          "createCompany": "Tạo công ty cho tôi",
+          "verify": "Xác minh công ty diễn ra thế nào?"
         }
       },
       "unverified": {
         "text": "Xác minh công ty để ứng viên biết ai đang mời họ, và tạo các buổi phỏng vấn.",
         "questions": {
-          "verify": "Xác minh công ty thế nào?",
+          "verify": "Xác minh công ty của tôi",
           "whyVerify": "Vì sao nên xác minh công ty?",
-          "createInterview": "Tạo buổi phỏng vấn thế nào?"
+          "createInterview": "Tạo phỏng vấn từ mô tả công việc"
         }
       },
       "no_interviews": {
         "text": "Tạo buổi phỏng vấn từ mô tả công việc: câu hỏi được viết cho đúng vị trí.",
         "questions": {
-          "fromDescription": "Tạo phỏng vấn từ mô tả công việc thế nào?",
-          "template": "Tôi có thể bắt đầu từ mẫu không?",
+          "fromDescription": "Tạo phỏng vấn từ mô tả công việc",
+          "template": "Tạo phỏng vấn từ mẫu",
           "changeQuestions": "Tôi có thể đổi câu hỏi không?"
         }
       },
       "no_candidates": {
         "text": "Mời ứng viên qua email, bằng liên kết chia sẻ hoặc từ ATS của bạn.",
         "questions": {
-          "invite": "Mời ứng viên thế nào?",
-          "shareLink": "Liên kết chia sẻ hoạt động thế nào?",
+          "invite": "Mời ứng viên",
+          "shareLink": "Bật liên kết chia sẻ",
           "ats": "Kết nối ATS thế nào?"
         }
       },
@@ -1361,7 +1364,7 @@
         "questions": {
           "passed": "Tuần này ai đạt?",
           "compare": "So sánh các ứng viên tốt nhất của tôi",
-          "replace": "Thay một câu hỏi thế nào?",
+          "replace": "Thay một câu hỏi",
           "signals": "Rời trang và thử sao chép nghĩa là gì?"
         }
       }
@@ -1378,11 +1381,78 @@
       "cancelled": "Đã hủy",
       "cantUndo": "Không thể hoàn tác.",
       "titles": {
-        "create_company": "Tạo công ty"
+        "create_company": "Tạo công ty",
+        "rename_company": "Đổi tên công ty",
+        "delete_company": "Xóa công ty",
+        "set_company_website": "Nhập website và xác minh công ty",
+        "remove_company_logo": "Gỡ logo công ty",
+        "turn_off_auto_top_up": "Tắt tự động nạp",
+        "invite_member": "Mời vào nhóm",
+        "change_member_role": "Đổi vai trò thành viên",
+        "remove_member": "Xóa khỏi nhóm",
+        "update_language": "Đổi ngôn ngữ của bạn",
+        "update_email_preferences": "Đổi cài đặt email của bạn",
+        "delete_account": "Xóa tài khoản của bạn",
+        "mark_notifications_seen": "Đánh dấu thông báo đã xem",
+        "set_slack_kinds": "Chọn thông báo Slack",
+        "disconnect_slack": "Ngắt kết nối Slack",
+        "disconnect_ats": "Ngắt kết nối ATS",
+        "link_ats_job": "Liên kết vị trí tuyển dụng trong ATS với buổi phỏng vấn",
+        "unlink_ats_job": "Bỏ liên kết vị trí tuyển dụng trong ATS",
+        "retry_ats_candidates": "Mời lại ứng viên của vị trí trong ATS",
+        "create_webhook": "Thêm webhook",
+        "remove_webhook": "Xóa webhook",
+        "remove_api_key": "Xóa khóa API",
+        "start_practice": "Bắt đầu lượt luyện tập",
+        "create_interview": "Tạo phỏng vấn từ mô tả công việc",
+        "create_interview_from_template": "Tạo phỏng vấn từ mẫu",
+        "delete_interview": "Xóa buổi phỏng vấn",
+        "rename_interview": "Đổi tên buổi phỏng vấn",
+        "update_interview_settings": "Đổi cài đặt buổi phỏng vấn",
+        "set_interview_link": "Bật hoặc tắt liên kết chia sẻ",
+        "set_topic_limit": "Đặt số câu hỏi mỗi chủ đề",
+        "regenerate_question": "Thay câu hỏi",
+        "mark_question_wrong": "Đánh dấu câu hỏi sai",
+        "review_generation": "Xác nhận chủ đề",
+        "retry_generation": "Thử tạo lại",
+        "cancel_generation": "Hủy tạo",
+        "invite_candidate": "Mời một ứng viên",
+        "invite_candidates": "Mời ứng viên",
+        "revoke_candidate": "Thu hồi lời mời",
+        "set_extra_time": "Cho thêm thời gian"
       },
       "fields": {
         "company": "Công ty",
-        "name": "Tên"
+        "name": "Tên",
+        "title": "Tên mới",
+        "email": "Email",
+        "role": "Vai trò",
+        "text": "Mô tả công việc",
+        "generate_in": "Ngôn ngữ câu hỏi",
+        "website": "Website",
+        "question_seconds": "Giây mỗi câu hỏi",
+        "pass_mark": "Điểm đạt (%)",
+        "hired": "Đã tuyển",
+        "on": "Liên kết chia sẻ đang bật",
+        "limit": "Câu hỏi mỗi ứng viên",
+        "instructions": "Thay đổi",
+        "selected": "Chủ đề giữ lại",
+        "extra_time": "Thêm thời gian (%)",
+        "language": "Ngôn ngữ",
+        "changes": "Email",
+        "kinds": "Thông báo",
+        "provider": "ATS",
+        "job_id": "Vị trí",
+        "stage_id": "Vòng",
+        "url": "Địa chỉ"
+      },
+      "yes": "có",
+      "no": "không",
+      "openNamed": "mở {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "Địa chỉ email"
+        }
       }
     }
   }

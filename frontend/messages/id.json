@@ -1305,7 +1305,10 @@
       "candidate": "Kandidat",
       "candidates": "Kandidat",
       "interview": "Wawancara",
-      "interviews": "Wawancara"
+      "interviews": "Wawancara",
+      "topics": "tinjau topik",
+      "practice": "latihan",
+      "news": "berita"
     },
     "voice": {
       "hold": "Tahan untuk bicara",
@@ -1331,32 +1334,32 @@
       "no_company": {
         "text": "Ayo mulai: wawancara pertamamu, perusahaanmu, dan verifikasinya.",
         "questions": {
-          "firstInterview": "Bagaimana membuat wawancara pertama?",
-          "createCompany": "Bagaimana membuat perusahaan?",
-          "verify": "Bagaimana memverifikasi perusahaan saya?"
+          "firstInterview": "Buat wawancara pertamaku",
+          "createCompany": "Buatkan perusahaan untukku",
+          "verify": "Bagaimana verifikasi perusahaan berjalan?"
         }
       },
       "unverified": {
         "text": "Verifikasi perusahaanmu agar kandidat tahu siapa yang mengundang mereka, lalu buat wawancaramu.",
         "questions": {
-          "verify": "Bagaimana memverifikasi perusahaan saya?",
+          "verify": "Verifikasi perusahaanku",
           "whyVerify": "Kenapa perlu verifikasi perusahaan?",
-          "createInterview": "Bagaimana membuat wawancara?"
+          "createInterview": "Buat wawancara dari deskripsi pekerjaan"
         }
       },
       "no_interviews": {
         "text": "Buat wawancara dari deskripsi pekerjaan: pertanyaannya ditulis untuk peran itu.",
         "questions": {
-          "fromDescription": "Bagaimana membuat wawancara dari deskripsi pekerjaan?",
-          "template": "Bisakah saya mulai dari templat?",
+          "fromDescription": "Buat wawancara dari deskripsi pekerjaan",
+          "template": "Buat wawancara dari templat",
           "changeQuestions": "Bisakah saya mengubah pertanyaannya?"
         }
       },
       "no_candidates": {
         "text": "Undang kandidat lewat email, tautan yang bisa dibagikan, atau dari ATS-mu.",
         "questions": {
-          "invite": "Bagaimana mengundang kandidat?",
-          "shareLink": "Bagaimana cara kerja tautan yang bisa dibagikan?",
+          "invite": "Undang kandidat",
+          "shareLink": "Nyalakan tautan berbagi",
           "ats": "Bagaimana menghubungkan ATS saya?"
         }
       },
@@ -1365,7 +1368,7 @@
         "questions": {
           "passed": "Siapa yang lulus minggu ini?",
           "compare": "Bandingkan kandidat terbaik saya",
-          "replace": "Bagaimana mengganti pertanyaan?",
+          "replace": "Ganti sebuah pertanyaan",
           "signals": "Apa arti meninggalkan halaman dan percobaan menyalin?"
         }
       }
@@ -1382,11 +1385,78 @@
       "cancelled": "Dibatalkan",
       "cantUndo": "Ini tidak bisa dibatalkan.",
       "titles": {
-        "create_company": "Buat perusahaan"
+        "create_company": "Buat perusahaan",
+        "rename_company": "Ganti nama perusahaan",
+        "delete_company": "Hapus perusahaan",
+        "set_company_website": "Isi situs web dan verifikasi perusahaan",
+        "remove_company_logo": "Hapus logo perusahaan",
+        "turn_off_auto_top_up": "Matikan isi ulang otomatis",
+        "invite_member": "Undang ke tim",
+        "change_member_role": "Ubah peran anggota tim",
+        "remove_member": "Keluarkan dari tim",
+        "update_language": "Ubah bahasamu",
+        "update_email_preferences": "Ubah pengaturan emailmu",
+        "delete_account": "Hapus akunmu",
+        "mark_notifications_seen": "Tandai notifikasi sudah dilihat",
+        "set_slack_kinds": "Pilih notifikasi Slack",
+        "disconnect_slack": "Putuskan Slack",
+        "disconnect_ats": "Putuskan ATS",
+        "link_ats_job": "Tautkan lowongan ATS ke wawancara",
+        "unlink_ats_job": "Lepaskan tautan lowongan ATS",
+        "retry_ats_candidates": "Undang lagi kandidat lowongan ATS",
+        "create_webhook": "Tambah webhook",
+        "remove_webhook": "Hapus webhook",
+        "remove_api_key": "Hapus kunci API",
+        "start_practice": "Mulai ronde latihan",
+        "create_interview": "Buat wawancara dari deskripsi pekerjaan",
+        "create_interview_from_template": "Buat wawancara dari templat",
+        "delete_interview": "Hapus wawancara",
+        "rename_interview": "Ganti nama wawancara",
+        "update_interview_settings": "Ubah pengaturan wawancara",
+        "set_interview_link": "Nyalakan atau matikan tautan berbagi",
+        "set_topic_limit": "Atur pertanyaan per topik",
+        "regenerate_question": "Ganti pertanyaan",
+        "mark_question_wrong": "Tandai pertanyaan salah",
+        "review_generation": "Konfirmasi topik",
+        "retry_generation": "Coba buat lagi",
+        "cancel_generation": "Batalkan pembuatan",
+        "invite_candidate": "Undang kandidat",
+        "invite_candidates": "Undang beberapa kandidat",
+        "revoke_candidate": "Cabut undangan",
+        "set_extra_time": "Beri waktu tambahan"
       },
       "fields": {
         "company": "Perusahaan",
-        "name": "Nama"
+        "name": "Nama",
+        "title": "Nama baru",
+        "email": "Email",
+        "role": "Peran",
+        "text": "Deskripsi pekerjaan",
+        "generate_in": "Bahasa pertanyaan",
+        "website": "Situs web",
+        "question_seconds": "Detik per pertanyaan",
+        "pass_mark": "Nilai lulus (%)",
+        "hired": "Diterima",
+        "on": "Tautan berbagi aktif",
+        "limit": "Pertanyaan per kandidat",
+        "instructions": "Perubahan",
+        "selected": "Topik yang dipertahankan",
+        "extra_time": "Waktu tambahan (%)",
+        "language": "Bahasa",
+        "changes": "Email",
+        "kinds": "Notifikasi",
+        "provider": "ATS",
+        "job_id": "Lowongan",
+        "stage_id": "Tahap",
+        "url": "Alamat"
+      },
+      "yes": "ya",
+      "no": "tidak",
+      "openNamed": "buka {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "Alamat email"
+        }
       }
     }
   }

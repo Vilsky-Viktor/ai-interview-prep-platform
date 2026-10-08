@@ -1309,7 +1309,10 @@
       "candidate": "候補者",
       "candidates": "候補者",
       "interview": "面接",
-      "interviews": "面接"
+      "interviews": "面接",
+      "topics": "トピックを確認",
+      "practice": "練習",
+      "news": "お知らせ"
     },
     "voice": {
       "hold": "押し続けて話す",
@@ -1335,32 +1338,32 @@
       "no_company": {
         "text": "さあ始めましょう。最初の面接、会社の作成、会社の認証についてお手伝いします。",
         "questions": {
-          "firstInterview": "最初の面接はどう作る？",
-          "createCompany": "会社はどう作る？",
-          "verify": "会社の認証はどうする？"
+          "firstInterview": "最初の面接を作成して",
+          "createCompany": "会社を作成して",
+          "verify": "会社の認証はどう進む？"
         }
       },
       "unverified": {
         "text": "会社を認証すると、候補者は誰から招待されたかがわかります。面接の作成もお手伝いします。",
         "questions": {
-          "verify": "会社の認証はどうする？",
+          "verify": "会社を認証して",
           "whyVerify": "会社を認証する理由は？",
-          "createInterview": "面接はどう作る？"
+          "createInterview": "求人内容から面接を作成して"
         }
       },
       "no_interviews": {
         "text": "求人内容から面接を作成できます。質問はその職種に合わせて作られます。",
         "questions": {
-          "fromDescription": "求人内容から面接を作るには？",
-          "template": "テンプレートから始められる？",
+          "fromDescription": "求人内容から面接を作成して",
+          "template": "テンプレートから面接を作成して",
           "changeQuestions": "質問は変えられる？"
         }
       },
       "no_candidates": {
         "text": "候補者はメール、共有リンク、または ATS から招待できます。",
         "questions": {
-          "invite": "候補者を招待するには？",
-          "shareLink": "共有リンクの仕組みは？",
+          "invite": "候補者を招待して",
+          "shareLink": "共有リンクをオンにして",
           "ats": "ATS を連携するには？"
         }
       },
@@ -1369,7 +1372,7 @@
         "questions": {
           "passed": "今週合格したのは誰？",
           "compare": "上位の候補者を比較して",
-          "replace": "質問を差し替えるには？",
+          "replace": "質問を差し替えて",
           "signals": "ページ離脱やコピー試行は何を意味する？"
         }
       }
@@ -1386,11 +1389,78 @@
       "cancelled": "キャンセルしました",
       "cantUndo": "元に戻せません。",
       "titles": {
-        "create_company": "会社を作成"
+        "create_company": "会社を作成",
+        "rename_company": "会社名を変更",
+        "delete_company": "会社を削除",
+        "set_company_website": "ウェブサイトを設定して会社を認証",
+        "remove_company_logo": "会社のロゴを削除",
+        "turn_off_auto_top_up": "自動チャージをオフにする",
+        "invite_member": "チームに招待",
+        "change_member_role": "メンバーの役割を変更",
+        "remove_member": "チームから外す",
+        "update_language": "言語を変更",
+        "update_email_preferences": "メール設定を変更",
+        "delete_account": "アカウントを削除",
+        "mark_notifications_seen": "お知らせを既読にする",
+        "set_slack_kinds": "Slack に送るお知らせを選ぶ",
+        "disconnect_slack": "Slack の連携を解除",
+        "disconnect_ats": "ATS の連携を解除",
+        "link_ats_job": "ATS の求人を面接に連携",
+        "unlink_ats_job": "ATS の求人の連携を解除",
+        "retry_ats_candidates": "ATS の求人の候補者を再招待",
+        "create_webhook": "Webhook を追加",
+        "remove_webhook": "Webhook を削除",
+        "remove_api_key": "API キーを削除",
+        "start_practice": "練習ラウンドを開始",
+        "create_interview": "求人内容から面接を作成",
+        "create_interview_from_template": "テンプレートから面接を作成",
+        "delete_interview": "面接を削除",
+        "rename_interview": "面接名を変更",
+        "update_interview_settings": "面接の設定を変更",
+        "set_interview_link": "共有リンクをオン・オフ",
+        "set_topic_limit": "トピックごとの質問数を設定",
+        "regenerate_question": "質問を差し替え",
+        "mark_question_wrong": "質問を誤りとして報告",
+        "review_generation": "トピックを確定",
+        "retry_generation": "もう一度生成する",
+        "cancel_generation": "生成をキャンセル",
+        "invite_candidate": "候補者を招待",
+        "invite_candidates": "候補者をまとめて招待",
+        "revoke_candidate": "招待を取り消す",
+        "set_extra_time": "延長時間を付与"
       },
       "fields": {
         "company": "会社",
-        "name": "名前"
+        "name": "名前",
+        "title": "新しい名前",
+        "email": "メール",
+        "role": "役割",
+        "text": "求人内容",
+        "generate_in": "質問の言語",
+        "website": "ウェブサイト",
+        "question_seconds": "1 問あたりの秒数",
+        "pass_mark": "合格ライン (%)",
+        "hired": "採用済み",
+        "on": "共有リンクをオン",
+        "limit": "候補者ごとの質問数",
+        "instructions": "変更内容",
+        "selected": "残すトピック",
+        "extra_time": "延長時間 (%)",
+        "language": "言語",
+        "changes": "メール",
+        "kinds": "お知らせ",
+        "provider": "ATS",
+        "job_id": "求人",
+        "stage_id": "選考段階",
+        "url": "アドレス"
+      },
+      "yes": "はい",
+      "no": "いいえ",
+      "openNamed": "{name} を開く",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "メールアドレス"
+        }
       }
     }
   }

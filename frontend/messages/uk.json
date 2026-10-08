@@ -1305,7 +1305,10 @@
       "candidate": "Кандидат",
       "candidates": "Кандидати",
       "interview": "Співбесіда",
-      "interviews": "Співбесіди"
+      "interviews": "Співбесіди",
+      "topics": "перевірити теми",
+      "practice": "тренування",
+      "news": "новини"
     },
     "voice": {
       "hold": "Утримуйте, щоб говорити",
@@ -1331,32 +1334,32 @@
       "no_company": {
         "text": "Почнімо: ваша перша співбесіда, компанія та її підтвердження.",
         "questions": {
-          "firstInterview": "Як створити першу співбесіду?",
-          "createCompany": "Як створити компанію?",
-          "verify": "Як підтвердити компанію?"
+          "firstInterview": "Створи мою першу співбесіду",
+          "createCompany": "Створи для мене компанію",
+          "verify": "Як працює підтвердження компанії?"
         }
       },
       "unverified": {
         "text": "Підтвердьте компанію, щоб кандидати бачили, хто їх запрошує, і створюйте співбесіди.",
         "questions": {
-          "verify": "Як підтвердити компанію?",
+          "verify": "Підтвердь мою компанію",
           "whyVerify": "Навіщо підтверджувати компанію?",
-          "createInterview": "Як створити співбесіду?"
+          "createInterview": "Створи співбесіду з опису вакансії"
         }
       },
       "no_interviews": {
         "text": "Створіть співбесіду з опису вакансії: запитання пишуться під цю роль.",
         "questions": {
-          "fromDescription": "Як створити співбесіду з опису вакансії?",
-          "template": "Чи можна почати з шаблону?",
+          "fromDescription": "Створи співбесіду з опису вакансії",
+          "template": "Створи співбесіду із шаблону",
           "changeQuestions": "Чи можна змінити запитання?"
         }
       },
       "no_candidates": {
         "text": "Запрошуйте кандидатів через email, спільне посилання або зі своєї ATS.",
         "questions": {
-          "invite": "Як запросити кандидатів?",
-          "shareLink": "Як працює спільне посилання?",
+          "invite": "Запроси кандидатів",
+          "shareLink": "Увімкни спільне посилання",
           "ats": "Як підключити ATS?"
         }
       },
@@ -1365,7 +1368,7 @@
         "questions": {
           "passed": "Хто пройшов цього тижня?",
           "compare": "Порівняй моїх найкращих кандидатів",
-          "replace": "Як замінити запитання?",
+          "replace": "Заміни запитання",
           "signals": "Що означають виходи зі сторінки та спроби копіювання?"
         }
       }
@@ -1382,11 +1385,78 @@
       "cancelled": "Скасовано",
       "cantUndo": "Цю дію не можна скасувати.",
       "titles": {
-        "create_company": "Створити компанію"
+        "create_company": "Створити компанію",
+        "rename_company": "Перейменувати компанію",
+        "delete_company": "Видалити компанію",
+        "set_company_website": "Вказати сайт і підтвердити компанію",
+        "remove_company_logo": "Видалити логотип компанії",
+        "turn_off_auto_top_up": "Вимкнути автопоповнення",
+        "invite_member": "Запросити до команди",
+        "change_member_role": "Змінити роль учасника",
+        "remove_member": "Видалити з команди",
+        "update_language": "Змінити мову",
+        "update_email_preferences": "Змінити налаштування листів",
+        "delete_account": "Видалити обліковий запис",
+        "mark_notifications_seen": "Позначити сповіщення переглянутими",
+        "set_slack_kinds": "Вибрати сповіщення в Slack",
+        "disconnect_slack": "Відключити Slack",
+        "disconnect_ats": "Відключити ATS",
+        "link_ats_job": "Пов'язати вакансію ATS зі співбесідою",
+        "unlink_ats_job": "Відв'язати вакансію ATS",
+        "retry_ats_candidates": "Знову запросити кандидатів із вакансії ATS",
+        "create_webhook": "Додати вебхук",
+        "remove_webhook": "Видалити вебхук",
+        "remove_api_key": "Видалити API-ключ",
+        "start_practice": "Почати тренування",
+        "create_interview": "Створити співбесіду з опису вакансії",
+        "create_interview_from_template": "Створити співбесіду із шаблону",
+        "delete_interview": "Видалити співбесіду",
+        "rename_interview": "Перейменувати співбесіду",
+        "update_interview_settings": "Змінити налаштування співбесіди",
+        "set_interview_link": "Увімкнути або вимкнути спільне посилання",
+        "set_topic_limit": "Задати кількість запитань із теми",
+        "regenerate_question": "Замінити запитання",
+        "mark_question_wrong": "Позначити запитання як помилкове",
+        "review_generation": "Підтвердити теми",
+        "retry_generation": "Спробувати згенерувати ще раз",
+        "cancel_generation": "Скасувати генерацію",
+        "invite_candidate": "Запросити кандидата",
+        "invite_candidates": "Запросити кандидатів",
+        "revoke_candidate": "Відкликати запрошення",
+        "set_extra_time": "Дати додатковий час"
       },
       "fields": {
         "company": "Компанія",
-        "name": "Назва"
+        "name": "Назва",
+        "title": "Нова назва",
+        "email": "Email",
+        "role": "Роль",
+        "text": "Опис вакансії",
+        "generate_in": "Мова запитань",
+        "website": "Сайт",
+        "question_seconds": "Секунд на запитання",
+        "pass_mark": "Прохідний бал (%)",
+        "hired": "Найнято",
+        "on": "Спільне посилання ввімкнено",
+        "limit": "Запитань на кандидата",
+        "instructions": "Зміни",
+        "selected": "Залишені теми",
+        "extra_time": "Дод. час (%)",
+        "language": "Мова",
+        "changes": "Листи",
+        "kinds": "Сповіщення",
+        "provider": "ATS",
+        "job_id": "Вакансія",
+        "stage_id": "Етап",
+        "url": "Адреса"
+      },
+      "yes": "так",
+      "no": "ні",
+      "openNamed": "відкрити {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "Адреси"
+        }
       }
     }
   }

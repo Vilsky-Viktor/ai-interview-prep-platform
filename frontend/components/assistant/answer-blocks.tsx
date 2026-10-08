@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "cn"
-import { ArrowUpRightIcon } from "lucide-react"
+import { ArrowRightIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 
 import {
@@ -178,7 +178,7 @@ export function AnswerBlocks({
                 nativeButton={false}
               >
                 {page ? t(page) : t("open")}
-                <ArrowUpRightIcon
+                <ArrowRightIcon
                   data-icon="inline-end"
                   className="rtl:-scale-x-100"
                 />

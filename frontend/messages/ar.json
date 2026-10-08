@@ -1301,7 +1301,10 @@
       "candidate": "المرشح",
       "candidates": "المرشحون",
       "interview": "المقابلة",
-      "interviews": "المقابلات"
+      "interviews": "المقابلات",
+      "topics": "مراجعة المواضيع",
+      "practice": "التدريب",
+      "news": "الأخبار"
     },
     "voice": {
       "hold": "اضغط مطولًا للتحدث",
@@ -1327,32 +1330,32 @@
       "no_company": {
         "text": "لنبدأ: مقابلتك الأولى، وشركتك، والتحقق منها.",
         "questions": {
-          "firstInterview": "كيف أنشئ مقابلتي الأولى؟",
-          "createCompany": "كيف أنشئ شركة؟",
-          "verify": "كيف أوثّق شركتي؟"
+          "firstInterview": "أنشئ مقابلتي الأولى",
+          "createCompany": "أنشئ لي شركة",
+          "verify": "كيف يعمل توثيق الشركة؟"
         }
       },
       "unverified": {
         "text": "وثّق شركتك ليعرف المرشحون من يدعوهم، وأنشئ مقابلاتك.",
         "questions": {
-          "verify": "كيف أوثّق شركتي؟",
+          "verify": "وثّق شركتي",
           "whyVerify": "لماذا أوثّق شركتي؟",
-          "createInterview": "كيف أنشئ مقابلة؟"
+          "createInterview": "أنشئ مقابلة من وصف وظيفي"
         }
       },
       "no_interviews": {
         "text": "أنشئ مقابلة من وصف وظيفي: تُكتب أسئلتها لهذا الدور.",
         "questions": {
-          "fromDescription": "كيف أنشئ مقابلة من وصف وظيفي؟",
-          "template": "هل يمكنني البدء من قالب؟",
+          "fromDescription": "أنشئ مقابلة من وصف وظيفي",
+          "template": "أنشئ مقابلة من قالب",
           "changeQuestions": "هل يمكنني تغيير الأسئلة؟"
         }
       },
       "no_candidates": {
         "text": "ادعُ المرشحين بالبريد الإلكتروني، أو برابط قابل للمشاركة، أو من نظام ATS لديك.",
         "questions": {
-          "invite": "كيف أدعو المرشحين؟",
-          "shareLink": "كيف يعمل الرابط القابل للمشاركة؟",
+          "invite": "ادعُ المرشحين",
+          "shareLink": "فعّل الرابط القابل للمشاركة",
           "ats": "كيف أربط نظام ATS؟"
         }
       },
@@ -1361,7 +1364,7 @@
         "questions": {
           "passed": "من نجح هذا الأسبوع؟",
           "compare": "قارن بين أفضل مرشحيّ",
-          "replace": "كيف أستبدل سؤالًا؟",
+          "replace": "استبدل سؤالًا",
           "signals": "ماذا تعني مغادرة الصفحة ومحاولات النسخ؟"
         }
       }
@@ -1378,11 +1381,78 @@
       "cancelled": "أُلغي",
       "cantUndo": "لا يمكن التراجع عن هذا.",
       "titles": {
-        "create_company": "إنشاء شركة"
+        "create_company": "إنشاء شركة",
+        "rename_company": "إعادة تسمية الشركة",
+        "delete_company": "حذف الشركة",
+        "set_company_website": "إضافة الموقع وتوثيق الشركة",
+        "remove_company_logo": "إزالة شعار الشركة",
+        "turn_off_auto_top_up": "إيقاف الشحن التلقائي",
+        "invite_member": "دعوة إلى الفريق",
+        "change_member_role": "تغيير دور عضو في الفريق",
+        "remove_member": "إزالة من الفريق",
+        "update_language": "تغيير لغتك",
+        "update_email_preferences": "تغيير إعدادات بريدك",
+        "delete_account": "حذف حسابك",
+        "mark_notifications_seen": "تعليم الإشعارات كمقروءة",
+        "set_slack_kinds": "اختيار إشعارات Slack",
+        "disconnect_slack": "فصل Slack",
+        "disconnect_ats": "فصل نظام ATS",
+        "link_ats_job": "ربط وظيفة من ATS بالمقابلة",
+        "unlink_ats_job": "إلغاء ربط وظيفة ATS",
+        "retry_ats_candidates": "دعوة مرشحي وظيفة ATS مرة أخرى",
+        "create_webhook": "إضافة خطاف ويب",
+        "remove_webhook": "إزالة خطاف الويب",
+        "remove_api_key": "إزالة مفتاح API",
+        "start_practice": "بدء جولة تدريب",
+        "create_interview": "إنشاء مقابلة من وصف وظيفي",
+        "create_interview_from_template": "إنشاء مقابلة من قالب",
+        "delete_interview": "حذف المقابلة",
+        "rename_interview": "إعادة تسمية المقابلة",
+        "update_interview_settings": "تغيير إعدادات المقابلة",
+        "set_interview_link": "تشغيل الرابط القابل للمشاركة أو إيقافه",
+        "set_topic_limit": "تحديد عدد الأسئلة لكل موضوع",
+        "regenerate_question": "استبدال السؤال",
+        "mark_question_wrong": "تعليم السؤال كخاطئ",
+        "review_generation": "تأكيد المواضيع",
+        "retry_generation": "إعادة محاولة الإنشاء",
+        "cancel_generation": "إلغاء الإنشاء",
+        "invite_candidate": "دعوة مرشح",
+        "invite_candidates": "دعوة مرشحين",
+        "revoke_candidate": "إلغاء الدعوة",
+        "set_extra_time": "منح وقت إضافي"
       },
       "fields": {
         "company": "الشركة",
-        "name": "الاسم"
+        "name": "الاسم",
+        "title": "الاسم الجديد",
+        "email": "البريد الإلكتروني",
+        "role": "الدور",
+        "text": "الوصف الوظيفي",
+        "generate_in": "لغة الأسئلة",
+        "website": "الموقع",
+        "question_seconds": "ثوانٍ لكل سؤال",
+        "pass_mark": "درجة النجاح (%)",
+        "hired": "تم التوظيف",
+        "on": "الرابط القابل للمشاركة مفعّل",
+        "limit": "أسئلة لكل مرشح",
+        "instructions": "التغييرات",
+        "selected": "المواضيع المحتفَظ بها",
+        "extra_time": "وقت إضافي (%)",
+        "language": "اللغة",
+        "changes": "الرسائل",
+        "kinds": "الإشعارات",
+        "provider": "ATS",
+        "job_id": "الوظيفة",
+        "stage_id": "المرحلة",
+        "url": "العنوان"
+      },
+      "yes": "نعم",
+      "no": "لا",
+      "openNamed": "فتح {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "عناوين البريد"
+        }
       }
     }
   }

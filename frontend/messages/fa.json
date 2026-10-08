@@ -1301,7 +1301,10 @@
       "candidate": "متقاضی",
       "candidates": "متقاضیان",
       "interview": "مصاحبه",
-      "interviews": "مصاحبه‌ها"
+      "interviews": "مصاحبه‌ها",
+      "topics": "بررسی موضوع‌ها",
+      "practice": "تمرین",
+      "news": "اخبار"
     },
     "voice": {
       "hold": "برای صحبت نگه دارید",
@@ -1327,32 +1330,32 @@
       "no_company": {
         "text": "بیایید شروع کنیم: اولین مصاحبه، شرکت‌تان و تأیید آن.",
         "questions": {
-          "firstInterview": "اولین مصاحبه‌ام را چطور بسازم؟",
-          "createCompany": "چطور شرکت بسازم؟",
-          "verify": "شرکتم را چطور تأیید کنم؟"
+          "firstInterview": "اولین مصاحبه‌ام را بساز",
+          "createCompany": "برایم یک شرکت بساز",
+          "verify": "تأیید شرکت چطور کار می‌کند؟"
         }
       },
       "unverified": {
         "text": "شرکت‌تان را تأیید کنید تا متقاضیان ببینند چه کسی دعوتشان می‌کند، و مصاحبه‌هایتان را بسازید.",
         "questions": {
-          "verify": "شرکتم را چطور تأیید کنم؟",
+          "verify": "شرکتم را تأیید کن",
           "whyVerify": "چرا شرکتم را تأیید کنم؟",
-          "createInterview": "چطور مصاحبه بسازم؟"
+          "createInterview": "از روی شرح شغل یک مصاحبه بساز"
         }
       },
       "no_interviews": {
         "text": "از روی شرح شغل مصاحبه بسازید: سؤال‌ها برای همان نقش نوشته می‌شوند.",
         "questions": {
-          "fromDescription": "چطور از روی شرح شغل مصاحبه بسازم؟",
-          "template": "می‌توانم با یک قالب شروع کنم؟",
+          "fromDescription": "از روی شرح شغل یک مصاحبه بساز",
+          "template": "از یک قالب مصاحبه بساز",
           "changeQuestions": "می‌توانم سؤال‌ها را تغییر دهم؟"
         }
       },
       "no_candidates": {
         "text": "متقاضیان را با ایمیل، با پیوند اشتراکی یا از ATS خود دعوت کنید.",
         "questions": {
-          "invite": "چطور متقاضیان را دعوت کنم؟",
-          "shareLink": "پیوند اشتراکی چطور کار می‌کند؟",
+          "invite": "از متقاضیان دعوت کن",
+          "shareLink": "پیوند اشتراکی را روشن کن",
           "ats": "ATS خودم را چطور وصل کنم؟"
         }
       },
@@ -1361,7 +1364,7 @@
         "questions": {
           "passed": "این هفته چه کسی قبول شد؟",
           "compare": "بهترین متقاضیانم را مقایسه کن",
-          "replace": "چطور یک سؤال را جایگزین کنم؟",
+          "replace": "یک سؤال را جایگزین کن",
           "signals": "ترک صفحه و تلاش برای کپی چه معنایی دارد؟"
         }
       }
@@ -1378,11 +1381,78 @@
       "cancelled": "لغو شد",
       "cantUndo": "این کار برگشت‌پذیر نیست.",
       "titles": {
-        "create_company": "ساختن شرکت"
+        "create_company": "ساختن شرکت",
+        "rename_company": "تغییر نام شرکت",
+        "delete_company": "حذف شرکت",
+        "set_company_website": "ثبت وب‌سایت و تأیید شرکت",
+        "remove_company_logo": "حذف لوگوی شرکت",
+        "turn_off_auto_top_up": "خاموش کردن شارژ خودکار",
+        "invite_member": "دعوت به تیم",
+        "change_member_role": "تغییر نقش یکی از اعضای تیم",
+        "remove_member": "حذف از تیم",
+        "update_language": "تغییر زبان شما",
+        "update_email_preferences": "تغییر تنظیمات ایمیل شما",
+        "delete_account": "حذف حساب شما",
+        "mark_notifications_seen": "علامت‌گذاری اعلان‌ها به‌عنوان دیده‌شده",
+        "set_slack_kinds": "انتخاب اعلان‌های Slack",
+        "disconnect_slack": "قطع اتصال Slack",
+        "disconnect_ats": "قطع اتصال ATS",
+        "link_ats_job": "پیوند آگهی شغلی ATS به مصاحبه",
+        "unlink_ats_job": "لغو پیوند آگهی شغلی ATS",
+        "retry_ats_candidates": "دعوت دوباره از متقاضیان آگهی ATS",
+        "create_webhook": "افزودن وب‌هوک",
+        "remove_webhook": "حذف وب‌هوک",
+        "remove_api_key": "حذف کلید API",
+        "start_practice": "شروع دور تمرین",
+        "create_interview": "ساختن مصاحبه از شرح شغل",
+        "create_interview_from_template": "ساختن مصاحبه از قالب",
+        "delete_interview": "حذف مصاحبه",
+        "rename_interview": "تغییر نام مصاحبه",
+        "update_interview_settings": "تغییر تنظیمات مصاحبه",
+        "set_interview_link": "روشن یا خاموش کردن پیوند اشتراکی",
+        "set_topic_limit": "تعیین تعداد سؤال هر موضوع",
+        "regenerate_question": "جایگزینی سؤال",
+        "mark_question_wrong": "علامت‌گذاری سؤال به‌عنوان نادرست",
+        "review_generation": "تأیید موضوع‌ها",
+        "retry_generation": "تلاش دوباره برای ساخت",
+        "cancel_generation": "لغو ساخت",
+        "invite_candidate": "دعوت از یک متقاضی",
+        "invite_candidates": "دعوت از متقاضیان",
+        "revoke_candidate": "لغو دعوت",
+        "set_extra_time": "دادن زمان اضافه"
       },
       "fields": {
         "company": "شرکت",
-        "name": "نام"
+        "name": "نام",
+        "title": "نام جدید",
+        "email": "ایمیل",
+        "role": "نقش",
+        "text": "شرح شغل",
+        "generate_in": "زبان سؤال‌ها",
+        "website": "وب‌سایت",
+        "question_seconds": "ثانیه برای هر سؤال",
+        "pass_mark": "نمره قبولی (٪)",
+        "hired": "استخدام شد",
+        "on": "پیوند اشتراکی روشن",
+        "limit": "سؤال برای هر متقاضی",
+        "instructions": "تغییرات",
+        "selected": "موضوع‌های نگه‌داشته",
+        "extra_time": "زمان اضافه (٪)",
+        "language": "زبان",
+        "changes": "ایمیل‌ها",
+        "kinds": "اعلان‌ها",
+        "provider": "ATS",
+        "job_id": "آگهی شغلی",
+        "stage_id": "مرحله",
+        "url": "نشانی"
+      },
+      "yes": "بله",
+      "no": "خیر",
+      "openNamed": "باز کردن {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "نشانی‌های ایمیل"
+        }
       }
     }
   }

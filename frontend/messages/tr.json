@@ -1304,7 +1304,10 @@
       "candidate": "Aday",
       "candidates": "Adaylar",
       "interview": "Mülakat",
-      "interviews": "Mülakatlar"
+      "interviews": "Mülakatlar",
+      "topics": "konuları gözden geçir",
+      "practice": "pratik",
+      "news": "haberler"
     },
     "voice": {
       "hold": "Konuşmak için basılı tut",
@@ -1330,32 +1333,32 @@
       "no_company": {
         "text": "Haydi başlayalım: ilk mülakatın, şirketin ve şirketinin doğrulanması.",
         "questions": {
-          "firstInterview": "İlk mülakatımı nasıl oluştururum?",
-          "createCompany": "Nasıl şirket oluştururum?",
-          "verify": "Şirketimi nasıl doğrularım?"
+          "firstInterview": "İlk mülakatımı oluştur",
+          "createCompany": "Benim için bir şirket oluştur",
+          "verify": "Şirket doğrulaması nasıl çalışıyor?"
         }
       },
       "unverified": {
         "text": "Adaylar onları kimin davet ettiğini görsün diye şirketini doğrula ve mülakatlarını oluştur.",
         "questions": {
-          "verify": "Şirketimi nasıl doğrularım?",
+          "verify": "Şirketimi doğrula",
           "whyVerify": "Şirketimi neden doğrulamalıyım?",
-          "createInterview": "Nasıl mülakat oluştururum?"
+          "createInterview": "İş tanımından bir mülakat oluştur"
         }
       },
       "no_interviews": {
         "text": "Bir iş tanımından mülakat oluştur: sorular o rol için yazılır.",
         "questions": {
-          "fromDescription": "İş tanımından nasıl mülakat oluştururum?",
-          "template": "Bir şablonla başlayabilir miyim?",
+          "fromDescription": "İş tanımından bir mülakat oluştur",
+          "template": "Şablondan bir mülakat oluştur",
           "changeQuestions": "Soruları değiştirebilir miyim?"
         }
       },
       "no_candidates": {
         "text": "Adayları e-postayla, paylaşılabilir bir bağlantıyla ya da ATS'inden davet et.",
         "questions": {
-          "invite": "Adayları nasıl davet ederim?",
-          "shareLink": "Paylaşılabilir bağlantı nasıl çalışır?",
+          "invite": "Adayları davet et",
+          "shareLink": "Paylaşılabilir bağlantıyı aç",
           "ats": "ATS'imi nasıl bağlarım?"
         }
       },
@@ -1364,7 +1367,7 @@
         "questions": {
           "passed": "Bu hafta kim geçti?",
           "compare": "En iyi adaylarımı karşılaştır",
-          "replace": "Bir soruyu nasıl değiştiririm?",
+          "replace": "Bir soruyu değiştir",
           "signals": "Sayfadan ayrılma ve kopyalama denemeleri ne anlama geliyor?"
         }
       }
@@ -1381,11 +1384,78 @@
       "cancelled": "İptal edildi",
       "cantUndo": "Bu işlem geri alınamaz.",
       "titles": {
-        "create_company": "Şirket oluştur"
+        "create_company": "Şirket oluştur",
+        "rename_company": "Şirketi yeniden adlandır",
+        "delete_company": "Şirketi sil",
+        "set_company_website": "Web sitesini gir ve şirketi doğrula",
+        "remove_company_logo": "Şirket logosunu kaldır",
+        "turn_off_auto_top_up": "Otomatik yüklemeyi kapat",
+        "invite_member": "Ekibe davet et",
+        "change_member_role": "Bir ekip üyesinin rolünü değiştir",
+        "remove_member": "Ekipten çıkar",
+        "update_language": "Dilini değiştir",
+        "update_email_preferences": "E-posta ayarlarını değiştir",
+        "delete_account": "Hesabını sil",
+        "mark_notifications_seen": "Bildirimleri görüldü olarak işaretle",
+        "set_slack_kinds": "Slack bildirimlerini seç",
+        "disconnect_slack": "Slack bağlantısını kes",
+        "disconnect_ats": "ATS bağlantısını kes",
+        "link_ats_job": "Bir ATS ilanını mülakata bağla",
+        "unlink_ats_job": "ATS ilanının bağlantısını kaldır",
+        "retry_ats_candidates": "ATS ilanının adaylarını yeniden davet et",
+        "create_webhook": "Web hook ekle",
+        "remove_webhook": "Web hook'u kaldır",
+        "remove_api_key": "API anahtarını kaldır",
+        "start_practice": "Pratik turu başlat",
+        "create_interview": "İş tanımından mülakat oluştur",
+        "create_interview_from_template": "Şablondan mülakat oluştur",
+        "delete_interview": "Mülakatı sil",
+        "rename_interview": "Mülakatı yeniden adlandır",
+        "update_interview_settings": "Mülakat ayarlarını değiştir",
+        "set_interview_link": "Paylaşılabilir bağlantıyı aç veya kapat",
+        "set_topic_limit": "Konu başına soru sayısını ayarla",
+        "regenerate_question": "Soruyu değiştir",
+        "mark_question_wrong": "Soruyu hatalı olarak işaretle",
+        "review_generation": "Konuları onayla",
+        "retry_generation": "Yeniden oluşturmayı dene",
+        "cancel_generation": "Oluşturmayı iptal et",
+        "invite_candidate": "Bir aday davet et",
+        "invite_candidates": "Adayları davet et",
+        "revoke_candidate": "Daveti geri al",
+        "set_extra_time": "Ek süre ver"
       },
       "fields": {
         "company": "Şirket",
-        "name": "Ad"
+        "name": "Ad",
+        "title": "Yeni ad",
+        "email": "E-posta",
+        "role": "Rol",
+        "text": "İş tanımı",
+        "generate_in": "Soruların dili",
+        "website": "Web sitesi",
+        "question_seconds": "Soru başına saniye",
+        "pass_mark": "Geçme notu (%)",
+        "hired": "İşe alındı",
+        "on": "Paylaşılabilir bağlantı açık",
+        "limit": "Aday başına soru",
+        "instructions": "Değişiklikler",
+        "selected": "Tutulan konular",
+        "extra_time": "Ek süre (%)",
+        "language": "Dil",
+        "changes": "E-postalar",
+        "kinds": "Bildirimler",
+        "provider": "ATS",
+        "job_id": "İlan",
+        "stage_id": "Aşama",
+        "url": "Adres"
+      },
+      "yes": "evet",
+      "no": "hayır",
+      "openNamed": "{name} aç",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "E-posta adresleri"
+        }
       }
     }
   }

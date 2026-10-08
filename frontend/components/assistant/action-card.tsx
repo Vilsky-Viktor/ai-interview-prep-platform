@@ -1,10 +1,11 @@
 "use client"
 
-import { ArrowUpRightIcon, CheckIcon } from "lucide-react"
+import { ArrowRightIcon, CheckIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { LocalizedLink } from "@/components/localized-link"
 import { Button } from "@/components/ui/button"
+import { previewValue } from "@/lib/action-values"
 import { linkPage } from "@/lib/assistant"
 import type { AssistantBlock } from "@/types/assistant"
 
@@ -32,14 +33,21 @@ export function ActionCard({
   const pages = useTranslations("assistant.pages")
   const tool = card.tool ?? ""
   const state = card.state ?? "pending"
-  const company = card.company_id && actions.companyNames[card.company_id]
+  // The company, unless the card is about it already.
+  const named = card.company_id && actions.companyNames[card.company_id]
+  const company = named !== card.subject ? named : null
   const fields = Object.entries(card.preview ?? {})
 
   return (
     <div className="space-y-3 rounded-2xl border p-4 text-sm">
-      <p className="font-medium">
-        {t.has(`titles.${tool}`) ? t(`titles.${tool}`) : t("generic")}
-      </p>
+      <div className="space-y-0.5">
+        <p className="font-medium">
+          {t.has(`titles.${tool}`) ? t(`titles.${tool}`) : t("generic")}
+        </p>
+        {card.subject && (
+          <p className="bidi-auto break-words">{card.subject}</p>
+        )}
+      </div>
       {(company || fields.length > 0) && (
         <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
           {company && (
@@ -51,10 +59,14 @@ export function ActionCard({
           {fields.map(([key, value]) => (
             <div key={key} className="contents">
               <dt className="text-muted-foreground">
-                {t.has(`fields.${key}`) ? t(`fields.${key}`) : key}
+                {t.has(`fieldsOf.${tool}.${key}`)
+                  ? t(`fieldsOf.${tool}.${key}`)
+                  : t.has(`fields.${key}`)
+                    ? t(`fields.${key}`)
+                    : key}
               </dt>
               <dd className="bidi-auto break-words whitespace-pre-wrap">
-                {String(value)}
+                {previewValue(key, value, t("yes"), t("no"))}
               </dd>
             </div>
           ))}
@@ -96,13 +108,17 @@ export function ActionCard({
                   key={href}
                   variant="outline"
                   size="sm"
+                  // A name keeps its capitals in the lowercase button.
+                  className={card.result_label ? "normal-case" : undefined}
                   render={<LocalizedLink href={href} onClick={onNavigate} />}
                   nativeButton={false}
                 >
-                  {pages.has(linkPage(href) ?? "")
-                    ? pages(linkPage(href)!)
-                    : pages("open")}
-                  <ArrowUpRightIcon
+                  {card.result_label
+                    ? t("openNamed", { name: card.result_label })
+                    : pages.has(linkPage(href) ?? "")
+                      ? pages(linkPage(href)!)
+                      : pages("open")}
+                  <ArrowRightIcon
                     data-icon="inline-end"
                     className="rtl:-scale-x-100"
                   />

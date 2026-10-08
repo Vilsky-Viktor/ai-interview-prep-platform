@@ -106,7 +106,7 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
 
   // No company yet, then a company that isn't verified: the service decides the stage.
   await expect(panel.getByText("Let's get you started")).toBeVisible();
-  await expect(panel.getByRole("button", { name: "How do I create a company?" })).toBeVisible();
+  await expect(panel.getByRole("button", { name: "Create a company for me" })).toBeVisible();
   await shot(owner, "welcome-no-company");
   await panel.getByRole("button", { name: "Close" }).click();
   const company = await createCompany(owner);

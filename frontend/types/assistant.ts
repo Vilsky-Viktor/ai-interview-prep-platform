@@ -32,6 +32,9 @@ export type ActionCard = {
   state: "pending" | "running" | "done" | "failed" | "cancelled"
   // Why it failed, in the user's language.
   detail?: string | null
+  // What it's about (a company's name, an interview's title), and what it made.
+  subject?: string | null
+  result_label?: string | null
 }
 
 export type ToolProgress = {

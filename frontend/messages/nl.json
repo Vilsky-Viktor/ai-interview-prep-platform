@@ -1301,7 +1301,10 @@
       "candidate": "Kandidaat",
       "candidates": "Kandidaten",
       "interview": "Interview",
-      "interviews": "Interviews"
+      "interviews": "Interviews",
+      "topics": "onderwerpen nakijken",
+      "practice": "oefenen",
+      "news": "nieuws"
     },
     "voice": {
       "hold": "Ingedrukt houden om te praten",
@@ -1327,32 +1330,32 @@
       "no_company": {
         "text": "Aan de slag: je eerste interview, je bedrijf en de verificatie ervan.",
         "questions": {
-          "firstInterview": "Hoe maak ik mijn eerste interview?",
-          "createCompany": "Hoe maak ik een bedrijf aan?",
-          "verify": "Hoe verifieer ik mijn bedrijf?"
+          "firstInterview": "Maak mijn eerste interview",
+          "createCompany": "Maak een bedrijf voor me aan",
+          "verify": "Hoe werkt de verificatie van een bedrijf?"
         }
       },
       "unverified": {
         "text": "Verifieer je bedrijf zodat kandidaten zien wie hen uitnodigt, en maak je interviews.",
         "questions": {
-          "verify": "Hoe verifieer ik mijn bedrijf?",
+          "verify": "Verifieer mijn bedrijf",
           "whyVerify": "Waarom mijn bedrijf verifiëren?",
-          "createInterview": "Hoe maak ik een interview?"
+          "createInterview": "Maak een interview van een vacaturetekst"
         }
       },
       "no_interviews": {
         "text": "Maak een interview van een vacaturetekst: de vragen worden voor de functie geschreven.",
         "questions": {
-          "fromDescription": "Hoe maak ik een interview van een vacaturetekst?",
-          "template": "Kan ik met een sjabloon beginnen?",
+          "fromDescription": "Maak een interview van een vacaturetekst",
+          "template": "Maak een interview van een sjabloon",
           "changeQuestions": "Kan ik de vragen aanpassen?"
         }
       },
       "no_candidates": {
         "text": "Nodig kandidaten uit per e-mail, met een deelbare link of vanuit je ATS.",
         "questions": {
-          "invite": "Hoe nodig ik kandidaten uit?",
-          "shareLink": "Hoe werkt de deelbare link?",
+          "invite": "Nodig kandidaten uit",
+          "shareLink": "Zet de deelbare link aan",
           "ats": "Hoe koppel ik mijn ATS?"
         }
       },
@@ -1361,7 +1364,7 @@
         "questions": {
           "passed": "Wie is deze week geslaagd?",
           "compare": "Vergelijk mijn beste kandidaten",
-          "replace": "Hoe vervang ik een vraag?",
+          "replace": "Vervang een vraag",
           "signals": "Wat betekenen pagina verlaten en kopieerpogingen?"
         }
       }
@@ -1378,11 +1381,78 @@
       "cancelled": "Geannuleerd",
       "cantUndo": "Dit kan niet ongedaan worden gemaakt.",
       "titles": {
-        "create_company": "Een bedrijf aanmaken"
+        "create_company": "Een bedrijf aanmaken",
+        "rename_company": "Het bedrijf hernoemen",
+        "delete_company": "Het bedrijf verwijderen",
+        "set_company_website": "Website opgeven en bedrijf verifiëren",
+        "remove_company_logo": "Logo van het bedrijf verwijderen",
+        "turn_off_auto_top_up": "Automatisch opwaarderen uitzetten",
+        "invite_member": "Uitnodigen voor het team",
+        "change_member_role": "Rol van een teamlid wijzigen",
+        "remove_member": "Uit het team verwijderen",
+        "update_language": "Je taal wijzigen",
+        "update_email_preferences": "Je e-mailinstellingen wijzigen",
+        "delete_account": "Je account verwijderen",
+        "mark_notifications_seen": "Meldingen als gezien markeren",
+        "set_slack_kinds": "Slack-meldingen kiezen",
+        "disconnect_slack": "Slack ontkoppelen",
+        "disconnect_ats": "Het ATS ontkoppelen",
+        "link_ats_job": "Een ATS-vacature aan het interview koppelen",
+        "unlink_ats_job": "De ATS-vacature ontkoppelen",
+        "retry_ats_candidates": "Kandidaten van de ATS-vacature opnieuw uitnodigen",
+        "create_webhook": "Een webhook toevoegen",
+        "remove_webhook": "De webhook verwijderen",
+        "remove_api_key": "De API-sleutel verwijderen",
+        "start_practice": "Een oefenronde starten",
+        "create_interview": "Een interview maken van een vacaturetekst",
+        "create_interview_from_template": "Een interview maken van een sjabloon",
+        "delete_interview": "Het interview verwijderen",
+        "rename_interview": "Het interview hernoemen",
+        "update_interview_settings": "Instellingen van het interview wijzigen",
+        "set_interview_link": "De deelbare link aan- of uitzetten",
+        "set_topic_limit": "Vragen per onderwerp instellen",
+        "regenerate_question": "De vraag vervangen",
+        "mark_question_wrong": "De vraag als fout markeren",
+        "review_generation": "De onderwerpen bevestigen",
+        "retry_generation": "Opnieuw genereren",
+        "cancel_generation": "Het genereren annuleren",
+        "invite_candidate": "Een kandidaat uitnodigen",
+        "invite_candidates": "Kandidaten uitnodigen",
+        "revoke_candidate": "De uitnodiging intrekken",
+        "set_extra_time": "Extra tijd geven"
       },
       "fields": {
         "company": "Bedrijf",
-        "name": "Naam"
+        "name": "Naam",
+        "title": "Nieuwe naam",
+        "email": "E-mail",
+        "role": "Rol",
+        "text": "Vacaturetekst",
+        "generate_in": "Vragen in",
+        "website": "Website",
+        "question_seconds": "Seconden per vraag",
+        "pass_mark": "Slaaggrens (%)",
+        "hired": "Aangenomen",
+        "on": "Deelbare link aan",
+        "limit": "Vragen per kandidaat",
+        "instructions": "Wijzigingen",
+        "selected": "Behouden onderwerpen",
+        "extra_time": "Extra tijd (%)",
+        "language": "Taal",
+        "changes": "E-mails",
+        "kinds": "Meldingen",
+        "provider": "ATS",
+        "job_id": "Vacature",
+        "stage_id": "Fase",
+        "url": "Adres"
+      },
+      "yes": "ja",
+      "no": "nee",
+      "openNamed": "{name} openen",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "E-mailadressen"
+        }
       }
     }
   }

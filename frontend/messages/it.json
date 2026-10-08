@@ -1305,7 +1305,10 @@
       "candidate": "Candidato",
       "candidates": "Candidati",
       "interview": "Colloquio",
-      "interviews": "Colloqui"
+      "interviews": "Colloqui",
+      "topics": "rivedi gli argomenti",
+      "practice": "pratica",
+      "news": "novità"
     },
     "voice": {
       "hold": "Tieni premuto per parlare",
@@ -1331,32 +1334,32 @@
       "no_company": {
         "text": "Iniziamo: il tuo primo colloquio, la tua azienda e la sua verifica.",
         "questions": {
-          "firstInterview": "Come creo il mio primo colloquio?",
-          "createCompany": "Come creo un'azienda?",
-          "verify": "Come verifico la mia azienda?"
+          "firstInterview": "Crea il mio primo colloquio",
+          "createCompany": "Crea un'azienda per me",
+          "verify": "Come funziona la verifica dell'azienda?"
         }
       },
       "unverified": {
         "text": "Verifica la tua azienda così i candidati vedono chi li invita, e crea i tuoi colloqui.",
         "questions": {
-          "verify": "Come verifico la mia azienda?",
+          "verify": "Verifica la mia azienda",
           "whyVerify": "Perché verificare la mia azienda?",
-          "createInterview": "Come creo un colloquio?"
+          "createInterview": "Crea un colloquio da una descrizione del lavoro"
         }
       },
       "no_interviews": {
         "text": "Crea un colloquio da una descrizione del lavoro: le domande sono scritte per il ruolo.",
         "questions": {
-          "fromDescription": "Come creo un colloquio da una descrizione del lavoro?",
-          "template": "Posso partire da un modello?",
+          "fromDescription": "Crea un colloquio da una descrizione del lavoro",
+          "template": "Crea un colloquio da un modello",
           "changeQuestions": "Posso cambiare le domande?"
         }
       },
       "no_candidates": {
         "text": "Invita i candidati via email, con un link condivisibile o dal tuo ATS.",
         "questions": {
-          "invite": "Come invito i candidati?",
-          "shareLink": "Come funziona il link condivisibile?",
+          "invite": "Invita candidati",
+          "shareLink": "Attiva il link condivisibile",
           "ats": "Come collego il mio ATS?"
         }
       },
@@ -1365,7 +1368,7 @@
         "questions": {
           "passed": "Chi ha superato il colloquio questa settimana?",
           "compare": "Confronta i miei candidati migliori",
-          "replace": "Come sostituisco una domanda?",
+          "replace": "Sostituisci una domanda",
           "signals": "Cosa significano le uscite dalla pagina e i tentativi di copia?"
         }
       }
@@ -1382,11 +1385,78 @@
       "cancelled": "Annullato",
       "cantUndo": "Non si può annullare.",
       "titles": {
-        "create_company": "Crea un'azienda"
+        "create_company": "Crea un'azienda",
+        "rename_company": "Rinomina l'azienda",
+        "delete_company": "Elimina l'azienda",
+        "set_company_website": "Indica il sito e verifica l'azienda",
+        "remove_company_logo": "Rimuovi il logo dell'azienda",
+        "turn_off_auto_top_up": "Disattiva la ricarica automatica",
+        "invite_member": "Invita nel team",
+        "change_member_role": "Cambia il ruolo di un membro",
+        "remove_member": "Rimuovi dal team",
+        "update_language": "Cambia la tua lingua",
+        "update_email_preferences": "Cambia le impostazioni email",
+        "delete_account": "Elimina il tuo account",
+        "mark_notifications_seen": "Segna le notifiche come viste",
+        "set_slack_kinds": "Scegli le notifiche Slack",
+        "disconnect_slack": "Disconnetti Slack",
+        "disconnect_ats": "Disconnetti l'ATS",
+        "link_ats_job": "Collega un'offerta dell'ATS al colloquio",
+        "unlink_ats_job": "Scollega l'offerta dell'ATS",
+        "retry_ats_candidates": "Invita di nuovo i candidati dell'offerta dell'ATS",
+        "create_webhook": "Aggiungi un webhook",
+        "remove_webhook": "Rimuovi il webhook",
+        "remove_api_key": "Rimuovi la chiave API",
+        "start_practice": "Inizia un round di pratica",
+        "create_interview": "Crea un colloquio da una descrizione del lavoro",
+        "create_interview_from_template": "Crea un colloquio da un modello",
+        "delete_interview": "Elimina il colloquio",
+        "rename_interview": "Rinomina il colloquio",
+        "update_interview_settings": "Cambia le impostazioni del colloquio",
+        "set_interview_link": "Attiva o disattiva il link condivisibile",
+        "set_topic_limit": "Imposta le domande per argomento",
+        "regenerate_question": "Sostituisci la domanda",
+        "mark_question_wrong": "Segna la domanda come sbagliata",
+        "review_generation": "Conferma gli argomenti",
+        "retry_generation": "Riprova la generazione",
+        "cancel_generation": "Annulla la generazione",
+        "invite_candidate": "Invita un candidato",
+        "invite_candidates": "Invita candidati",
+        "revoke_candidate": "Revoca l'invito",
+        "set_extra_time": "Concedi tempo extra"
       },
       "fields": {
         "company": "Azienda",
-        "name": "Nome"
+        "name": "Nome",
+        "title": "Nuovo nome",
+        "email": "Email",
+        "role": "Ruolo",
+        "text": "Descrizione del lavoro",
+        "generate_in": "Domande in",
+        "website": "Sito",
+        "question_seconds": "Secondi per domanda",
+        "pass_mark": "Soglia di superamento (%)",
+        "hired": "Assunto",
+        "on": "Link condivisibile attivo",
+        "limit": "Domande per candidato",
+        "instructions": "Modifiche",
+        "selected": "Argomenti tenuti",
+        "extra_time": "Tempo extra (%)",
+        "language": "Lingua",
+        "changes": "Email",
+        "kinds": "Notifiche",
+        "provider": "ATS",
+        "job_id": "Offerta",
+        "stage_id": "Fase",
+        "url": "Indirizzo"
+      },
+      "yes": "sì",
+      "no": "no",
+      "openNamed": "apri {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "Email"
+        }
       }
     }
   }

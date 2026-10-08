@@ -1309,7 +1309,10 @@
       "candidate": "Aplikante",
       "candidates": "Mga aplikante",
       "interview": "Interview",
-      "interviews": "Mga interview"
+      "interviews": "Mga interview",
+      "topics": "suriin ang mga paksa",
+      "practice": "practice",
+      "news": "balita"
     },
     "voice": {
       "hold": "Pindutin nang matagal para magsalita",
@@ -1335,32 +1338,32 @@
       "no_company": {
         "text": "Simulan na natin: ang una mong interview, ang kumpanya mo at ang pag-verify nito.",
         "questions": {
-          "firstInterview": "Paano gumawa ng una kong interview?",
-          "createCompany": "Paano gumawa ng kumpanya?",
-          "verify": "Paano i-verify ang kumpanya ko?"
+          "firstInterview": "Gawin ang una kong interview",
+          "createCompany": "Gumawa ka ng kumpanya para sa akin",
+          "verify": "Paano gumagana ang pag-verify ng kumpanya?"
         }
       },
       "unverified": {
         "text": "I-verify ang kumpanya mo para makita ng mga aplikante kung sino ang nag-iimbita sa kanila, at gumawa ng mga interview.",
         "questions": {
-          "verify": "Paano i-verify ang kumpanya ko?",
+          "verify": "I-verify ang kumpanya ko",
           "whyVerify": "Bakit dapat i-verify ang kumpanya ko?",
-          "createInterview": "Paano gumawa ng interview?"
+          "createInterview": "Gumawa ng interview mula sa job description"
         }
       },
       "no_interviews": {
         "text": "Gumawa ng interview mula sa job description: isinusulat ang mga tanong para sa role.",
         "questions": {
-          "fromDescription": "Paano gumawa ng interview mula sa job description?",
-          "template": "Puwede ba akong magsimula sa template?",
+          "fromDescription": "Gumawa ng interview mula sa job description",
+          "template": "Gumawa ng interview mula sa template",
           "changeQuestions": "Puwede ko bang palitan ang mga tanong?"
         }
       },
       "no_candidates": {
         "text": "Mag-imbita ng mga aplikante sa email, gamit ang shareable link o mula sa ATS mo.",
         "questions": {
-          "invite": "Paano mag-imbita ng mga aplikante?",
-          "shareLink": "Paano gumagana ang shareable link?",
+          "invite": "Mag-imbita ng mga aplikante",
+          "shareLink": "I-on ang shareable link",
           "ats": "Paano ikonekta ang ATS ko?"
         }
       },
@@ -1369,7 +1372,7 @@
         "questions": {
           "passed": "Sino ang pumasa ngayong linggo?",
           "compare": "Ikumpara ang pinakamahuhusay kong aplikante",
-          "replace": "Paano palitan ang isang tanong?",
+          "replace": "Palitan ang isang tanong",
           "signals": "Ano ang ibig sabihin ng pag-alis sa page at pagtatangkang kumopya?"
         }
       }
@@ -1386,11 +1389,78 @@
       "cancelled": "Kinansela",
       "cantUndo": "Hindi na ito maibabalik.",
       "titles": {
-        "create_company": "Gumawa ng kumpanya"
+        "create_company": "Gumawa ng kumpanya",
+        "rename_company": "Palitan ang pangalan ng kumpanya",
+        "delete_company": "Burahin ang kumpanya",
+        "set_company_website": "Ilagay ang website at i-verify ang kumpanya",
+        "remove_company_logo": "Alisin ang logo ng kumpanya",
+        "turn_off_auto_top_up": "I-off ang awtomatikong top-up",
+        "invite_member": "Imbitahan sa team",
+        "change_member_role": "Palitan ang role ng miyembro",
+        "remove_member": "Alisin sa team",
+        "update_language": "Palitan ang wika mo",
+        "update_email_preferences": "Palitan ang mga email setting mo",
+        "delete_account": "Burahin ang account mo",
+        "mark_notifications_seen": "Markahang nakita ang mga notification",
+        "set_slack_kinds": "Piliin ang mga notification sa Slack",
+        "disconnect_slack": "I-disconnect ang Slack",
+        "disconnect_ats": "I-disconnect ang ATS",
+        "link_ats_job": "I-link ang trabaho sa ATS sa interview",
+        "unlink_ats_job": "Alisin ang link ng trabaho sa ATS",
+        "retry_ats_candidates": "Imbitahan ulit ang mga aplikante ng trabaho sa ATS",
+        "create_webhook": "Magdagdag ng web hook",
+        "remove_webhook": "Alisin ang web hook",
+        "remove_api_key": "Alisin ang API key",
+        "start_practice": "Magsimula ng practice round",
+        "create_interview": "Gumawa ng interview mula sa job description",
+        "create_interview_from_template": "Gumawa ng interview mula sa template",
+        "delete_interview": "Burahin ang interview",
+        "rename_interview": "Palitan ang pangalan ng interview",
+        "update_interview_settings": "Palitan ang mga setting ng interview",
+        "set_interview_link": "I-on o i-off ang shareable link",
+        "set_topic_limit": "Itakda ang mga tanong bawat paksa",
+        "regenerate_question": "Palitan ang tanong",
+        "mark_question_wrong": "Markahang mali ang tanong",
+        "review_generation": "Kumpirmahin ang mga paksa",
+        "retry_generation": "Subukang gumawa ulit",
+        "cancel_generation": "Kanselahin ang paggawa",
+        "invite_candidate": "Mag-imbita ng aplikante",
+        "invite_candidates": "Mag-imbita ng mga aplikante",
+        "revoke_candidate": "Bawiin ang imbitasyon",
+        "set_extra_time": "Magbigay ng dagdag na oras"
       },
       "fields": {
         "company": "Kumpanya",
-        "name": "Pangalan"
+        "name": "Pangalan",
+        "title": "Bagong pangalan",
+        "email": "Email",
+        "role": "Role",
+        "text": "Job description",
+        "generate_in": "Wika ng mga tanong",
+        "website": "Website",
+        "question_seconds": "Segundo bawat tanong",
+        "pass_mark": "Pass mark (%)",
+        "hired": "Na-hire",
+        "on": "Naka-on ang shareable link",
+        "limit": "Tanong bawat aplikante",
+        "instructions": "Mga pagbabago",
+        "selected": "Mga paksang itinira",
+        "extra_time": "Dagdag na oras (%)",
+        "language": "Wika",
+        "changes": "Mga email",
+        "kinds": "Mga notification",
+        "provider": "ATS",
+        "job_id": "Trabaho",
+        "stage_id": "Stage",
+        "url": "Address"
+      },
+      "yes": "oo",
+      "no": "hindi",
+      "openNamed": "buksan ang {name}",
+      "fieldsOf": {
+        "invite_candidates": {
+          "text": "Mga email"
+        }
       }
     }
   }
