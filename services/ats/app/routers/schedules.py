@@ -25,8 +25,8 @@ async def flush_outbox() -> None:
 async def recover() -> None:
     """Every 10 minutes, from Cloud Scheduler: waiting candidates and invites cut off midway are
     invited (companies refuses them during the emergency pause, and they're kept to retry),
-    results kept while a connection was broken go back, and candidates past their retention
-    period go."""
+    results kept while a connection was broken or the ATS failed go back, and candidates past
+    their retention period go."""
     recovered = await ats_candidates.recover()
 
     if recovered:

@@ -37,8 +37,9 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 - An owner or admin adds up to 5 HTTPS addresses on the API page's **web hooks** tab. Like a key, a web hook works while whoever added it is still an owner or admin of the company; after that it gets nothing. An address must lead to the public internet: prepza refuses private, loopback and link-local addresses when it's added and again before each send, and never follows redirects.
 - Each web hook gets a signing secret (`whsec_...`), shown once and stored encrypted with `API_ENCRYPTION_KEY`.
 - When a candidate finishes (companies' `candidate.finished`), each web hook gets `POST {"id", "type": "candidate.finished", "data": {"interview", "candidate"}}`, the same objects the API returns, with `Prepza-Signature: t=<unix seconds>,v1=<hex HMAC-SHA256 of "<t>.<body>">`.
-- Delivery: all of a company's web hooks are sent to at once, each with 10 seconds to answer `2xx`. A web hook that took the event is remembered (`webhook_deliveries`, for 30 days), so a redelivered event reaches only the ones that failed. If any failed, the event fails and Pub/Sub retries it with backoff (from 10 seconds to 10 minutes, up to 50 times). An event can arrive more than once; its `id` stays the same.
-- A web hook whose secret can't be read, or whose address no longer leads to the public internet, is skipped. An address whose lookup fails counts as a failed send and is retried. A candidate or interview deleted since is told to nobody; if the companies service can't answer for now, the event fails and is retried, and nothing has been sent yet.
+- Delivery: all of a company's web hooks are sent to at once, each with 10 seconds to answer `2xx`. A web hook that took the event is remembered (`webhook_deliveries`, for 30 days), so a redelivered event reaches only the ones that failed. An event can arrive more than once; its `id` stays the same.
+- Retries: an event a web hook didn't take is kept for it (`webhook_retries`), and the Pub/Sub event is done, so one company's failing endpoint doesn't hold up events for everyone. The `webhook-retries` job (every 5 minutes) sends it again after 5 minutes, then twice as long each time, at most 6 hours apart; each run sends up to 25 at once, and two runs never send the same one. It's dropped when it gets there, when whoever added the web hook is no longer an owner or admin, or after 3 days of failing: then the web hook shows as failing (`failing` in the API page's list) until it takes an event again.
+- A web hook whose secret can't be read, or whose address no longer leads to the public internet, is skipped. An address whose lookup fails counts as a failed send and is retried. A candidate or interview deleted since is told to nobody; if the companies service can't answer for now, the event fails and Pub/Sub retries it, and nothing has been sent yet.
 
 ## The API page
 
@@ -49,7 +50,7 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 
 ## How it's built
 
-- The `api` service (`services/api`) owns the keys, web hooks and deliveries in its own database. It has no business rules of its own: interviews, candidates and invites come from companies' internal routes (`/internal/companies/{id}/interviews/...` and `/internal/interviews/{id}/invites`).
+- The `api` service (`services/api`) owns the keys, web hooks, deliveries and retries in its own database. It has no business rules of its own: interviews, candidates and invites come from companies' internal routes (`/internal/companies/{id}/interviews/...` and `/internal/interviews/{id}/invites`).
 - It's reached at `/api/v1/` (the gateway locally, the load balancer's `v1` path in Google Cloud). The management routes (`/api/v1/manage`, for the API page, signed in with Firebase) and the internal ones are left out of the public OpenAPI.
 - It consumes `candidate.finished` (web hooks) and `company.deleted` (deletes the company's keys and web hooks).
 

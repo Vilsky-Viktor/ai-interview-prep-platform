@@ -32,8 +32,10 @@ locals {
     invite-reminders = { service = "companies", path = "/internal/schedules/invite-reminders", cron = "0 9 * * *" }
     bank-stages      = { service = "library", path = "/internal/schedules/bank", cron = "45 3 * * *" }
     # ATS candidates still waiting or whose invite stalled, results kept while a connection was
-    # broken, and candidates past their retention.
+    # broken or the ATS failed, and candidates past their retention.
     ats-recover      = { service = "ats", path = "/internal/schedules/recover", cron = "*/10 * * * *" }
+    # Events companies' web hooks didn't take, sent again with backoff.
+    webhook-retries = { service = "api", path = "/internal/schedules/webhook-retries", cron = "*/5 * * * *" }
     # Events not published right after their change (the outbox).
     library-outbox    = { service = "library", path = "/internal/schedules/outbox", cron = "* * * * *" }
     companies-outbox  = { service = "companies", path = "/internal/schedules/outbox", cron = "* * * * *" }

@@ -1,5 +1,6 @@
 import asyncio
 import uuid
+from types import SimpleNamespace
 
 import httpx
 import pytest
@@ -168,3 +169,28 @@ def test_the_recovery_job_invites_waiting_candidates_and_sends_kept_results(worl
     assert world["api"]["sent"] == [("ann@example.com", "ann")]
     assert world["settled"][waiting.id][0] == "invited"
     assert reported == ["two"]
+
+
+def test_the_recovery_job_starts_no_new_result_late_in_the_run(world, monkeypatch):
+    kept = [AtsCandidate(id=uuid.uuid4(), result={"candidate_invite_id": n}) for n in "abc"]
+    reported = []
+    # Each look at the clock is 20 seconds later: a slow ATS.
+    clock = iter(range(0, 1000, 20))
+
+    async def nothing():
+        return []
+
+    async def unreported():
+        return kept
+
+    async def report(data):
+        reported.append(data["candidate_invite_id"])
+
+    monkeypatch.setattr(ats_candidates, "recoverable", nothing)
+    monkeypatch.setattr(ats_candidates, "unreported", unreported)
+    monkeypatch.setattr(flow, "report", report)
+    monkeypatch.setattr(flow, "time", SimpleNamespace(monotonic=lambda: next(clock)))
+    asyncio.run(flow.recover())
+
+    # Started at 0, so 20 seconds in it sends one; at 40, past REPORT_SECONDS, it stops.
+    assert reported == ["a"]

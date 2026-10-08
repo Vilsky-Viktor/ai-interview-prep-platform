@@ -32,6 +32,8 @@ class WebhookOut(BaseModel):
     id: UUID
     url: str
     created_at: datetime
+    # It didn't take an event for days (it was dropped), and has taken none since.
+    failing: bool
 
 
 class NewWebhookOut(WebhookOut):

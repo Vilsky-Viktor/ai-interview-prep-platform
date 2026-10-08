@@ -1,6 +1,8 @@
 import logging
+import time
 from uuid import UUID
 
+import httpx
 from fastapi import HTTPException, status
 
 from app.config.settings import settings
@@ -9,6 +11,7 @@ from app.constants.ats import (
     INVITE_BATCH,
     MAX_INVITE_ATTEMPTS,
     NEEDS_AUTHOR,
+    REPORT_SECONDS,
     SCORECARD_LINK,
     CandidateStatus,
     ConnectionStatus,
@@ -153,11 +156,16 @@ async def recover() -> int:
     """Every 10 minutes: candidates still waiting (left for later by a run, by companies not
     answering, or sent while the connection was broken) and invites cut off midway (the server
     stopped) are invited, as far as one batch goes; results kept while a connection was broken
-    go back. How many candidates were found."""
+    or the ATS failed go back, as far as REPORT_SECONDS into the run. How many candidates were
+    found."""
+    stop_at = time.monotonic() + REPORT_SECONDS
     rows = await ats_candidates.recoverable()
     await invite_all(rows)
 
     for row in await ats_candidates.unreported():
+        if time.monotonic() >= stop_at:
+            break
+
         try:
             await report(row.result)
         except Exception:
@@ -168,10 +176,10 @@ async def recover() -> int:
 
 async def report(data: dict) -> None:
     """A candidate the ATS sent finished (companies' candidate.finished event, or results kept
-    earlier): their results go back to the ATS as a comment, once. A failing ATS raises, so the
-    event comes again; while the connection is broken they're kept, for the recovery job to
-    send once it's reconnected. No member to write as gives up, and so does a candidate gone
-    from the ATS. Candidates no ATS sent are ignored."""
+    earlier): their results go back to the ATS as a comment, once. While the connection is
+    broken, or when the ATS fails, they're kept for the recovery job, and the event is done: a
+    company's failing ATS doesn't hold up Pub/Sub for everyone. No member to write as gives up,
+    and so does a candidate gone from the ATS. Candidates no ATS sent are ignored."""
     found = await ats_candidates.for_invite(UUID(data["candidate_invite_id"]))
 
     if found is None:
@@ -208,19 +216,18 @@ async def report(data: dict) -> None:
             member=connection.member_id,
             text=text,
         )
-    except HTTPException as error:
-        # A refused key was marked broken: kept until it's reconnected.
-        if error.status_code == status.HTTP_409_CONFLICT:
-            await ats_candidates.keep_result(row.id, data)
-
-            return
-
-        # The candidate is gone from the ATS: nowhere to write. Anything else comes again.
-        if error.status_code == status.HTTP_404_NOT_FOUND:
+    except (HTTPException, httpx.HTTPError) as error:
+        # The candidate is gone from the ATS: nowhere to write.
+        if isinstance(error, HTTPException) and error.status_code == status.HTTP_404_NOT_FOUND:
             await ats_candidates.mark_reported(row.id)
 
             return
 
-        raise
+        # A refused key (the connection was marked broken) or a failing ATS: kept for the
+        # recovery job.
+        logger.warning("Kept the results of ATS candidate %s: %r", row.id, error)
+        await ats_candidates.keep_result(row.id, data)
+
+        return
 
     await ats_candidates.mark_reported(row.id)

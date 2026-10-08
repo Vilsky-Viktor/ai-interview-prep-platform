@@ -1,6 +1,7 @@
 import asyncio
 import uuid
 
+import httpx
 import pytest
 from fastapi import HTTPException, status
 
@@ -110,14 +111,21 @@ def test_without_a_workable_member_nothing_goes_back(finished):
     assert state["reported"] == [state["row"].id]
 
 
-def test_a_failing_workable_raises_so_the_event_comes_again(finished):
+@pytest.mark.parametrize(
+    "failure",
+    [HTTPException(status.HTTP_502_BAD_GATEWAY, "down"), httpx.ReadTimeout("no answer")],
+)
+def test_a_failing_ats_keeps_the_results_for_the_recovery_job_and_the_event_is_done(
+    finished, failure
+):
     state, _ = finished
-    state["fail"] = HTTPException(status.HTTP_502_BAD_GATEWAY, "down")
+    state["fail"] = failure
 
-    with pytest.raises(HTTPException):
-        report(state["row"].invite_id)
+    # No error: Pub/Sub doesn't send the event again for one company's ATS.
+    report(state["row"].invite_id)
 
     assert state["reported"] == []
+    assert [row_id for row_id, _ in state["kept"]] == [state["row"].id]
 
 
 def test_a_refused_key_marks_the_connection_broken_and_keeps_the_results(finished):

@@ -39,5 +39,16 @@ WEBHOOK_TIMEOUT_SECONDS = 10
 SIGNATURE_HEADER = "Prepza-Signature"
 # How long a web hook's deliveries are remembered: past Pub/Sub's redelivery of an event.
 DELIVERIES_KEPT = timedelta(days=30)
+# An event a web hook didn't take is sent again by the retry job (every 5 minutes): first after
+# RETRY_FIRST_DELAY, then twice as long each time, at most RETRY_MAX_DELAY apart. After
+# RETRY_GIVE_UP it's dropped, and the web hook shows as failing until it takes an event.
+RETRY_FIRST_DELAY = timedelta(minutes=5)
+RETRY_MAX_DELAY = timedelta(hours=6)
+RETRY_GIVE_UP = timedelta(days=3)
+# The most events one run of the retry job sends, all at once, so it ends well within its 60
+# seconds (each send has WEBHOOK_TIMEOUT_SECONDS); the rest wait for the next run.
+RETRY_BATCH = 25
+# A run that was cut off leaves its events to be sent again after this long.
+RETRY_LEASE = timedelta(minutes=10)
 # Where a candidate's results are in prepza.
 CANDIDATE_LINK = "{site}/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}"

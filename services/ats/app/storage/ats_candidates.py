@@ -204,8 +204,9 @@ async def for_invite(invite_id: UUID) -> tuple[AtsCandidate, AtsConnection] | No
 
 
 async def keep_result(row_id: UUID, data: dict) -> None:
-    """Results that can't go back while the connection is broken: kept, to send after."""
-    query = update(AtsCandidate).where(AtsCandidate.id == row_id).values(result=data)
+    """Results that can't go back now (a broken connection, a failing ATS): kept, to send."""
+    values = {"result": data, "kept_at": datetime.now(UTC)}
+    query = update(AtsCandidate).where(AtsCandidate.id == row_id).values(**values)
 
     async with Session() as session:
         await session.execute(query)
@@ -213,7 +214,7 @@ async def keep_result(row_id: UUID, data: dict) -> None:
 
 
 async def unreported() -> list[AtsCandidate]:
-    """Kept results of working connections, oldest first, as many as one run sends."""
+    """Kept results of working connections, longest kept first, as many as one run sends."""
     working = select(AtsConnection.id).where(AtsConnection.status == ConnectionStatus.CONNECTED)
     query = (
         select(AtsCandidate)
@@ -222,7 +223,7 @@ async def unreported() -> list[AtsCandidate]:
             AtsCandidate.result.is_not(None),
             AtsCandidate.reported_at.is_(None),
         )
-        .order_by(AtsCandidate.created_at)
+        .order_by(AtsCandidate.kept_at)
         .limit(REPORT_BATCH)
     )
 

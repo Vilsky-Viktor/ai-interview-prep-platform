@@ -97,6 +97,19 @@ def test_a_web_hook_gets_a_secret_shown_once_and_stored_encrypted(
     assert decrypt(KEY, sealed) == made["secret"]
 
 
+def test_the_api_page_shows_which_web_hooks_are_failing(client, companies_api, stored, public):
+    sign_in()
+    client.post(HOOKS, json={"url": "https://ok.example/x"})
+    client.post(HOOKS, json={"url": "https://down.example/x"})
+    stored["webhooks"][1].failing = True
+    shown = client.get(f"/manage?company_id={COMPANY}").json()["webhooks"]
+
+    assert [(hook["url"], hook["failing"]) for hook in shown] == [
+        ("https://ok.example/x", False),
+        ("https://down.example/x", True),
+    ]
+
+
 def test_a_web_hook_must_reach_the_public_internet(client, companies_api, stored, public):
     sign_in()
     response = client.post(HOOKS, json={"url": "https://internal/x"})

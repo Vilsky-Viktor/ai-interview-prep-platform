@@ -1,17 +1,13 @@
 import asyncio
-import json
-import socket
-import uuid
-from types import SimpleNamespace
+from datetime import UTC, datetime, timedelta
 
-import httpx
 import pytest
 from fastapi import HTTPException
-from prepza_common.encryption import encrypt
 
+from app.constants.api import RETRY_FIRST_DELAY
 from app.services import events
 from app.services import webhooks as delivery
-from tests.unit.conftest import CANDIDATE, COMPANY, INTERVIEW, KEY
+from tests.unit.conftest import CANDIDATE, COMPANY, INTERVIEW
 
 FINISHED = {
     "candidate_invite_id": str(CANDIDATE),
@@ -22,60 +18,6 @@ FINISHED = {
     "passed": True,
     "flagged": True,
 }
-
-
-@pytest.fixture
-def endpoints(monkeypatch, companies_api):
-    """COMPANY's web hooks, what each endpoint got, which fail or don't resolve,
-    and which got which event."""
-    state = {
-        "hooks": [],
-        "posted": [],
-        "failing": set(),
-        "delivered": set(),
-        "public": True,
-        "unresolved": set(),
-    }
-
-    def hook(url, secret="whsec_a", maker="u1"):
-        found = SimpleNamespace(
-            id=uuid.uuid4(), url=url, secret=encrypt(KEY, secret), created_by=maker
-        )
-        state["hooks"].append(found)
-
-        return found
-
-    async def of_company(company_id):
-        return state["hooks"] if company_id == COMPANY else []
-
-    async def delivered(webhook_id, event_id):
-        return (webhook_id, event_id) in state["delivered"]
-
-    async def mark_delivered(webhook_id, event_id):
-        state["delivered"].add((webhook_id, event_id))
-
-    async def post(url, body, signature):
-        if url in state["failing"]:
-            raise httpx.ConnectError("down")
-
-        state["posted"].append((url, json.loads(body), signature))
-
-    monkeypatch.setattr(delivery.webhooks, "of_company", of_company)
-    monkeypatch.setattr(delivery.webhooks, "delivered", delivered)
-    monkeypatch.setattr(delivery.webhooks, "mark_delivered", mark_delivered)
-    monkeypatch.setattr(delivery.endpoints, "post", post)
-    monkeypatch.setattr(delivery, "public_address", lambda url: check(url, state))
-    state["hook"] = hook
-
-    return state
-
-
-def check(url, state):
-    """public_address, faked: an address in state["unresolved"] doesn't resolve."""
-    if url in state["unresolved"]:
-        raise socket.gaierror
-
-    return state["public"]
 
 
 def finish(event_id="e1"):
@@ -98,24 +40,42 @@ def test_each_web_hook_gets_the_interview_and_candidate_signed(endpoints):
     assert signature.startswith("t=") and ",v1=" in signature
 
 
-def test_a_redelivered_event_reaches_only_the_web_hooks_that_failed(endpoints):
+def test_a_failed_web_hook_is_left_to_the_retry_job_and_the_event_is_done(endpoints):
     endpoints["hook"]("https://a.example/x")
-    endpoints["hook"]("https://down.example/x")
+    down = endpoints["hook"]("https://down.example/x")
     endpoints["failing"].add("https://down.example/x")
 
-    # One failed: the event raises, so Pub/Sub sends it again.
-    with pytest.raises(delivery.DeliveryFailed):
-        finish()
+    # No error: Pub/Sub doesn't send the event again for one company's endpoint.
+    finish()
+    retry = endpoints["retries"][(down.id, "e1")]
+    wait = retry.next_at - datetime.now(UTC)
+
+    assert [item[0] for item in endpoints["posted"]] == ["https://a.example/x"]
+    assert list(endpoints["retries"]) == [(down.id, "e1")] and retry.attempts == 1
+    assert RETRY_FIRST_DELAY - timedelta(minutes=1) < wait <= RETRY_FIRST_DELAY
+    assert '"id":"e1"' in retry.body
+
+
+def test_a_redelivered_event_reaches_only_the_web_hooks_that_failed_and_keeps_one_retry(
+    endpoints,
+):
+    endpoints["hook"]("https://a.example/x")
+    down = endpoints["hook"]("https://down.example/x")
+    endpoints["failing"].add("https://down.example/x")
+    finish()
+    finish()
+
+    assert len(endpoints["posted"]) == 1
+    assert endpoints["retries"][(down.id, "e1")].attempts == 1
 
     endpoints["failing"].clear()
+    finish()
     finish()
 
     assert [item[0] for item in endpoints["posted"]] == [
         "https://a.example/x",
         "https://down.example/x",
     ]
-    finish()
-    assert len(endpoints["posted"]) == 2
 
 
 def test_a_web_hook_added_by_someone_no_longer_an_editor_gets_nothing(endpoints, companies_api):
@@ -162,19 +122,12 @@ def test_an_address_no_longer_public_or_an_unreadable_secret_is_skipped(endpoint
 
 def test_an_address_that_doesnt_resolve_now_is_retried(endpoints):
     endpoints["hook"]("https://a.example/x")
-    endpoints["hook"]("https://flaky.example/x")
+    flaky = endpoints["hook"]("https://flaky.example/x")
     endpoints["unresolved"].add("https://flaky.example/x")
-
-    with pytest.raises(delivery.DeliveryFailed):
-        finish()
-
-    endpoints["unresolved"].clear()
     finish()
 
-    assert [item[0] for item in endpoints["posted"]] == [
-        "https://a.example/x",
-        "https://flaky.example/x",
-    ]
+    assert [item[0] for item in endpoints["posted"]] == ["https://a.example/x"]
+    assert list(endpoints["retries"]) == [(flaky.id, "e1")]
 
 
 def test_companies_busy_raises_so_the_event_comes_again(endpoints, monkeypatch):

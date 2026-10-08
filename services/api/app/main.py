@@ -13,7 +13,7 @@ from app.config.settings import settings
 from app.constants.docs import API_DESCRIPTION, API_TITLE, API_VERSION
 from app.constants.events import CANDIDATE_FINISHED
 from app.integrations.redis import get_redis
-from app.routers import events, internal_accounts, manage, public
+from app.routers import events, internal_accounts, manage, public, schedules
 from app.schemas.public import FinishedEvent
 from app.storage.db import ping as ping_database
 
@@ -48,6 +48,7 @@ app.include_router(public.router)
 app.include_router(manage.router)
 app.include_router(events.router)
 app.include_router(internal_accounts.router)
+app.include_router(schedules.router)
 
 
 @app.webhooks.post(CANDIDATE_FINISHED, summary="A candidate finished")

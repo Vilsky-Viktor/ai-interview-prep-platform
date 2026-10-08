@@ -113,6 +113,33 @@ def test_results_kept_while_broken_are_found_once_reconnected_and_sent_once(run)
     assert reconnected == [{"candidate_invite_id": str(invite)}]
 
 
+def test_results_an_ats_keeps_refusing_go_to_the_back_of_the_line(run):
+    async def scenario():
+        company = uuid.uuid4()
+        await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann", "m-1")
+        connection = await ats.connection(company, AtsProvider.WORKABLE)
+        rows = [
+            await ats_candidates.add(connection.id, None, uuid.uuid4(), name, f"{name}@x.com")
+            for name in ("first", "second")
+        ]
+
+        for row in rows:
+            await ats_candidates.keep_result(row.id, {"name": row.candidate_id})
+
+        # The first one's ATS refused it again: kept again, so it's tried after the second.
+        await ats_candidates.keep_result(rows[0].id, {"name": "first"})
+        found = [
+            item.candidate_id
+            for item in await ats_candidates.unreported()
+            if item.connection_id == connection.id
+        ]
+        await ats.delete_company(company)
+
+        return found
+
+    assert run(scenario()) == ["second", "first"]
+
+
 def test_a_failed_reconnect_puts_the_earlier_connection_back_marked_broken(run):
     async def scenario():
         company = uuid.uuid4()

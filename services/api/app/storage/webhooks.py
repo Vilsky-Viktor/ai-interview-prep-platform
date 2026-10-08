@@ -1,7 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import delete, func, select
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.api import DELIVERIES_KEPT
@@ -87,5 +87,13 @@ async def mark_delivered(webhook_id: uuid.UUID, event_id: str) -> None:
 
     async with Session() as session:
         await session.execute(old)
+        await session.execute(query)
+        await session.commit()
+
+
+async def set_failing(webhook_id: uuid.UUID, failing: bool) -> None:
+    query = update(Webhook).where(Webhook.id == webhook_id).values(failing=failing)
+
+    async with Session() as session:
         await session.execute(query)
         await session.commit()

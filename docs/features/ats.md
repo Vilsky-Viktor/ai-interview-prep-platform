@@ -146,7 +146,7 @@ When such a candidate finishes, companies publishes `candidate.finished` (grade,
 | Breezy HR | An internal note on the candidate in that position, as the person whose key it is |
 
 - It's sent once (`reported_at`).
-- A failing ATS makes the event come again.
+- When the ATS fails or doesn't answer, the results are kept and the event is done, so one company's ATS doesn't hold up events for everyone. The `recover` job (every 10 minutes) sends kept results again, the longest kept first, at most 20 a run and none started past 30 seconds into it, until they go back or the candidate is deleted after 365 days.
 - A key the ATS refuses marks the connection for reconnecting. Results are kept while it waits, and the `recover` job sends them once it's reconnected.
 - A candidate gone from Recruitee or Greenhouse (404) is given up, alone.
 

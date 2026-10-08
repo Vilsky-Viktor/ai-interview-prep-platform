@@ -4,7 +4,10 @@ import ipaddress
 import json
 import secrets
 import socket
+from datetime import timedelta
 from urllib.parse import urlsplit
+
+from app.constants.api import RETRY_FIRST_DELAY, RETRY_MAX_DELAY
 
 
 def new_secret() -> str:
@@ -41,3 +44,9 @@ def public_address(url: str) -> bool:
         return False
 
     return all(ipaddress.ip_address(item[4][0]).is_global for item in found)
+
+
+def retry_delay(attempts: int) -> timedelta:
+    """How long an event waits to be sent again after its `attempts`-th failed send: twice as
+    long each time, from RETRY_FIRST_DELAY up to RETRY_MAX_DELAY."""
+    return min(RETRY_FIRST_DELAY * 2 ** (attempts - 1), RETRY_MAX_DELAY)

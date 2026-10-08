@@ -56,8 +56,11 @@ STALE_CLAIM_MINUTES = 10
 # The most candidates one run invites (an event, Invite again or the recovery job), so it ends
 # well within its 60 seconds; the rest stay waiting for the recovery job, every 10 minutes.
 INVITE_BATCH = 50
-# The most results one recovery run sends to the ATSs.
+# The most results one recovery run sends to the ATSs, one after another; it starts no new one
+# REPORT_SECONDS into the run, so it ends within its 60 seconds even when an ATS doesn't answer
+# (each call has ATS_TIMEOUT_SECONDS). The rest wait for the next run.
 REPORT_BATCH = 20
+REPORT_SECONDS = 30
 # Invites that failed in passing are tried again by the recovery job this many times in all
 # (about an hour), then the candidate is kept as not invited, and the company hears.
 MAX_INVITE_ATTEMPTS = 6
