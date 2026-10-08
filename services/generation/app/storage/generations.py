@@ -9,6 +9,7 @@ from sqlalchemy import update as sql_update
 from app.constants.events import GENERATION_CANCELLED
 from app.constants.kinds import GenerationKind
 from app.constants.statuses import FINISHED, Status
+from app.helpers.events import failed_event
 from app.models.generation import Generation
 from app.models.outbox import OutboxEvent
 from app.storage.db import Session
@@ -94,8 +95,8 @@ async def cancel(generation_id: uuid.UUID) -> bool:
 
 async def fail_stuck(running_before: datetime, queued_before: datetime, error: str) -> list:
     """Marks generations running untouched since `running_before`, or queued since
-    `queued_before`, as failed; returns them. A queued one may only be waiting for the queue,
-    so it gets longer."""
+    `queued_before`, as failed, with the event that tells companies of each interview's
+    failure; returns them. A queued one may only be waiting for the queue, so it gets longer."""
     async with Session() as session:
         failed = await session.scalars(
             sql_update(Generation)
@@ -111,6 +112,13 @@ async def fail_stuck(running_before: datetime, queued_before: datetime, error: s
             .returning(Generation)
         )
         failed = list(failed)
+
+        for generation in failed:
+            event = failed_event(generation)
+
+            if event:
+                outbox.add(session, OutboxEvent, *event)
+
         await session.commit()
 
         return failed

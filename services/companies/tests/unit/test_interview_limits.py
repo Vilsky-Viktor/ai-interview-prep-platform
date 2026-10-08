@@ -56,6 +56,7 @@ def generate(client, monkeypatch, waiting):
             "id": str(interview.id),
             "generation_id": str(uuid.uuid4()),
             "set_id": None,
+            "generation_failed": False,
             "title": None,
             "question_seconds": 60,
             "candidate_count": 0,

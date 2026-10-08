@@ -26,6 +26,7 @@ def setup(monkeypatch, role, set_id=SET_ID):
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
         set_id=set_id,
+        generation_failed=False,
     )
     company = Company(id=COMPANY_ID, name="Acme", created_at=datetime.now(UTC))
     company.members = [

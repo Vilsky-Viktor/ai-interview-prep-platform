@@ -18,6 +18,7 @@ from app.constants.invites import (
 )
 from app.helpers.interviews import (
     attach_set,
+    attach_set_if_reachable,
     interview_out,
     session_topics,
     topics_out,
@@ -132,6 +133,7 @@ async def get_interview(interview_id: UUID, user: CurrentUser) -> InterviewDetai
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
     _, member = await require_company(user, interview.company_id)
+    interview = await attach_set_if_reachable(interview)
     totals = await candidates.counts([interview.id])
     base = await interview_out(interview, totals.get(interview.id, 0))
     found = await set_cache.get_set(interview.set_id) if interview.set_id else None

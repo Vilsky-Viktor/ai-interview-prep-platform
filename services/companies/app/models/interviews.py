@@ -22,6 +22,9 @@ class Interview(Base):
     title: Mapped[str | None] = mapped_column(Text)
     # None for a test made from a template, which needs no generation.
     generation_id: Mapped[uuid.UUID | None] = mapped_column(index=True)
+    # Its generation failed (generation's generation.failed event); a retry or the questions
+    # arriving clear it.
+    generation_failed: Mapped[bool] = mapped_column(default=False, server_default="false")
     # What the interview is generated in, as its set in library; invites are emailed in it.
     language: Mapped[str] = mapped_column(String(8), default=DEFAULT_LANGUAGE)
     # The company marked the test as hired; it stays usable.

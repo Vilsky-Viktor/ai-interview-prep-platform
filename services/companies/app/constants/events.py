@@ -5,6 +5,8 @@ REPORT_SHARED = "report.shared"
 CANDIDATE_REMINDED = "candidate.reminded"
 # A company interview's questions are saved; the event carries the set and its title.
 GENERATION_COMPLETED = "generation.completed"
+# An interview's generation failed; the interview shows it until a retry or its questions.
+GENERATION_FAILED = "generation.failed"
 # Generation cancelled an interview's topic review that waited too long; the interview goes too.
 GENERATION_CANCELLED = "generation.cancelled"
 # Rounds: every section of a candidate's interview is finished, with how many answers they

@@ -49,6 +49,7 @@ def setup(monkeypatch):
             company_id=company_id,
             generation_id=None,
             set_id=uuid.UUID(set_id),
+            generation_failed=False,
             title=title,
             language=language,
             question_seconds=60,

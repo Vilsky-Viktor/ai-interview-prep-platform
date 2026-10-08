@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.paging import PageParams
 
 from app.helpers.candidates import candidate_out
-from app.helpers.interviews import interview_out
+from app.helpers.interviews import attach_set_if_reachable, interview_out
 from app.integrations import rounds
 from app.schemas.interviews import InterviewOut
 from app.schemas.invites import CandidateOut
@@ -40,7 +40,7 @@ async def list_interviews(
 async def get_interview(
     company_id: UUID, interview_id: UUID, caller: ServiceCaller
 ) -> InterviewOut:
-    interview = await company_interview(company_id, interview_id)
+    interview = await attach_set_if_reachable(await company_interview(company_id, interview_id))
     totals = await candidates.counts([interview.id])
 
     return await interview_out(interview, totals.get(interview.id, 0))

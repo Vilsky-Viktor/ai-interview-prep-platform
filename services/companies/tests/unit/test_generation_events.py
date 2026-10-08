@@ -92,6 +92,19 @@ def test_a_cancelled_generation_removes_its_interview_and_tells_the_company(clie
     assert removed == [(GENERATION_ID, cancelled)]
 
 
+def test_a_failed_generation_marks_its_interview_once_per_event(client, monkeypatch):
+    marked = []
+
+    async def mark_failed(generation_id, event_id):
+        marked.append((generation_id, event_id))
+
+    monkeypatch.setattr(interviews, "mark_failed", mark_failed)
+    event = push("generation.failed", {"generation_id": str(GENERATION_ID)})
+
+    assert client.post("/internal/events", json=event).status_code == 204
+    assert marked == [(GENERATION_ID, "1")]
+
+
 def test_an_interview_already_removed_is_left_alone(client, monkeypatch):
     async def gone(generation_id):
         return None

@@ -154,7 +154,9 @@ def add_deleted(session, interview_id, company_id) -> None:
 async def set_set_id(interview_id, set_id: uuid.UUID) -> None:
     async with Session() as session:
         await session.execute(
-            update(Interview).where(Interview.id == interview_id).values(set_id=set_id)
+            update(Interview)
+            .where(Interview.id == interview_id)
+            .values(set_id=set_id, generation_failed=False)
         )
         await session.commit()
 
@@ -177,7 +179,7 @@ async def set_generated(
         interview_id = await session.scalar(
             update(Interview)
             .where(Interview.generation_id == generation_id)
-            .values(set_id=set_id, title=title)
+            .values(set_id=set_id, title=title, generation_failed=False)
             .returning(Interview.id)
         )
 
@@ -187,6 +189,28 @@ async def set_generated(
         if new and interview_id is not None:
             outbox.add(session, OutboxEvent, INTERVIEW_READY, {"interview_id": str(interview_id)})
 
+        await session.commit()
+
+
+async def mark_failed(generation_id: uuid.UUID, event_id: str) -> None:
+    """Marks the interview of a failed generation, once per event: a late redelivery doesn't
+    mark it again after a retry. One with its questions already isn't touched."""
+    async with Session() as session:
+        if await processed_events.claim(session, event_id):
+            await session.execute(
+                update(Interview)
+                .where(Interview.generation_id == generation_id, Interview.set_id.is_(None))
+                .values(generation_failed=True)
+            )
+
+        await session.commit()
+
+
+async def set_generation_failed(interview_id, failed: bool) -> None:
+    async with Session() as session:
+        await session.execute(
+            update(Interview).where(Interview.id == interview_id).values(generation_failed=failed)
+        )
         await session.commit()
 
 

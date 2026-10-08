@@ -36,6 +36,8 @@ class InterviewOut(BaseModel):
     # None for a test made from a template.
     generation_id: UUID | None
     set_id: UUID | None
+    # Without a set: its generation failed and waits for a retry; otherwise it's generating.
+    generation_failed: bool
     title: str | None
     question_seconds: int
     candidate_count: int

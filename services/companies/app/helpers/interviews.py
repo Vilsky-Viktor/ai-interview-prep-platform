@@ -1,14 +1,26 @@
+import logging
 import random
 
-from app.constants.interviews import DEFAULT_TOPIC_QUESTIONS, InterviewStatus
+import httpx
+
+from app.constants.interviews import (
+    DEFAULT_TOPIC_QUESTIONS,
+    GENERATION_FAILED_STATUS,
+    InterviewStatus,
+)
 from app.integrations import generation as generation_api
 from app.integrations import library
 from app.models.interviews import Interview
 from app.schemas.interviews import InterviewOut, TopicOut
 from app.storage import interviews
 
+logger = logging.getLogger(__name__)
+
 
 async def attach_set(interview: Interview) -> Interview:
+    """Asks generation once, for a route about this one interview, in case its
+    generation.completed or generation.failed hasn't come yet. Lists never ask: they show what
+    those events stored."""
     if interview.set_id:
         return interview
 
@@ -18,8 +30,28 @@ async def attach_set(interview: Interview) -> Interview:
     if set_id:
         await interviews.set_set_id(interview.id, set_id)
         interview.set_id = set_id
+        interview.generation_failed = False
+
+        return interview
+
+    failed = bool(row) and row.get("status") == GENERATION_FAILED_STATUS
+
+    if failed != interview.generation_failed:
+        await interviews.set_generation_failed(interview.id, failed)
+        interview.generation_failed = failed
 
     return interview
+
+
+async def attach_set_if_reachable(interview: Interview) -> Interview:
+    """attach_set for an interview's own page: with generation down, the page shows what
+    companies knows instead of failing."""
+    try:
+        return await attach_set(interview)
+    except httpx.HTTPError:
+        logger.warning("Generation unreachable; interview %s shown as stored", interview.id)
+
+        return interview
 
 
 async def interview_title(interview: Interview) -> str | None:
@@ -44,13 +76,13 @@ def interview_status(hired: bool, candidate_count: int) -> InterviewStatus:
 
 
 async def interview_out(interview: Interview, candidate_count: int = 0) -> InterviewOut:
-    interview = await attach_set(interview)
     title = await interview_title(interview)
 
     return InterviewOut(
         id=interview.id,
         generation_id=interview.generation_id,
         set_id=interview.set_id,
+        generation_failed=interview.generation_failed,
         title=title,
         question_seconds=interview.question_seconds,
         candidate_count=candidate_count,

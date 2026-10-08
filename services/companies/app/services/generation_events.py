@@ -2,16 +2,17 @@ import uuid
 
 from prepza_common.analytics import track
 
-from app.constants.events import GENERATION_CANCELLED, GENERATION_COMPLETED
+from app.constants.events import GENERATION_CANCELLED, GENERATION_COMPLETED, GENERATION_FAILED
 from app.helpers.notifications import interview_cancelled, interview_ready
 from app.services import outbox as outbox_service
 from app.storage import interviews
 
 
 async def handle(event_type: str, data: dict, event_id: str) -> None:
-    """Stores what an interview generation produced, or removes the interview of a cancelled
-    one, and tells the company once, however often the event comes; other events aren't ours."""
-    if event_type not in (GENERATION_COMPLETED, GENERATION_CANCELLED):
+    """Stores what an interview generation produced, marks the interview of a failed one, or
+    removes the interview of a cancelled one, and tells the company once, however often the
+    event comes; other events aren't ours."""
+    if event_type not in (GENERATION_COMPLETED, GENERATION_FAILED, GENERATION_CANCELLED):
         return
 
     generation_id = uuid.UUID(data["generation_id"])
@@ -30,6 +31,8 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
             event_id,
         )
         await track("test_ready", company_id=interview.company_id, how="generated")
+    elif event_type == GENERATION_FAILED:
+        await interviews.mark_failed(generation_id, event_id)
     else:
         await interviews.remove_for_generation(generation_id, interview_cancelled(interview))
 

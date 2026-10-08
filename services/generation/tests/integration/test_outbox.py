@@ -66,3 +66,21 @@ def test_a_failed_publish_leaves_the_event_for_the_next_flush(run, monkeypatch):
         return [row.event_type for row in await waiting()]
 
     assert "test.event" in run(scenario())
+
+
+def test_a_stuck_interview_generation_saves_its_failed_event_and_a_template_none(run):
+    async def scenario():
+        interview = await generations.create("ann", "job", uuid.uuid4())
+        template = await generations.create("ann", "template", kind="template")
+        await generations.claim_run(interview.id)
+        await generations.claim_run(template.id)
+        later = datetime.now(UTC) + timedelta(seconds=1)
+        await generations.fail_stuck(later, later, "stopped")
+        saved = [(row.event_type, row.data) for row in await waiting()]
+
+        return interview.id, template.id, saved
+
+    interview_id, template_id, saved = run(scenario())
+
+    assert ("generation.failed", {"generation_id": str(interview_id)}) in saved
+    assert ("generation.failed", {"generation_id": str(template_id)}) not in saved

@@ -123,9 +123,13 @@ def test_second_review_passes_the_conflict_through(client, monkeypatch, audited)
     app.dependency_overrides.clear()
 
 
-def test_only_managers_retry(client, monkeypatch):
+def test_only_managers_retry_and_a_retry_clears_the_failure(client, monkeypatch):
     sign_in("bob")
     calls = []
+    cleared = []
+
+    async def set_generation_failed(interview_id, failed):
+        cleared.append((interview_id, failed))
 
     async def fake_retry(generation_id, company_id):
         calls.append(generation_id)
@@ -141,10 +145,12 @@ def test_only_managers_retry(client, monkeypatch):
 
     for role, expected in (("viewer", 403), ("admin", 200)):
         setup(monkeypatch, role)
+        monkeypatch.setattr(interviews, "set_generation_failed", set_generation_failed)
 
         assert client.post(url).status_code == expected
 
     assert calls == [GENERATION_ID]
+    assert cleared == [(INTERVIEW_ID, False)]
 
     app.dependency_overrides.clear()
 

@@ -73,8 +73,13 @@ async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
     await refuse_if_paused(get_redis())
     interview = await get_interview(interview_id)
     await require_editor(user, interview.company_id)
+    retried = passed_through(
+        await generation_api.retry(interview.generation_id, interview.company_id)
+    )
+    # Generating again: its lists stop showing the failure.
+    await interviews.set_generation_failed(interview.id, False)
 
-    return passed_through(await generation_api.retry(interview.generation_id, interview.company_id))
+    return retried
 
 
 @router.post("/{interview_id}/generation/cancel")

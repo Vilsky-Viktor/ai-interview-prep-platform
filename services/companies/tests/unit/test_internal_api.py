@@ -10,7 +10,9 @@ from app.services import candidate_results
 from app.storage import candidates, interviews
 
 COMPANY_ID, OTHER_ID = uuid.uuid4(), uuid.uuid4()
-INTERVIEW = SimpleNamespace(id=uuid.uuid4(), company_id=COMPANY_ID, pass_mark=70)
+INTERVIEW = SimpleNamespace(
+    id=uuid.uuid4(), company_id=COMPANY_ID, set_id=uuid.uuid4(), pass_mark=70
+)
 INVITE = SimpleNamespace(
     id=uuid.uuid4(),
     email="anna@example.com",
@@ -43,6 +45,7 @@ def stored(monkeypatch):
             "id": interview.id,
             "generation_id": None,
             "set_id": uuid.uuid4(),
+            "generation_failed": False,
             "title": "Backend",
             "question_seconds": 60,
             "candidate_count": count,

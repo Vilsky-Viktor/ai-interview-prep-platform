@@ -97,3 +97,29 @@ def test_interviews_by_ids_skip_the_ones_gone(run):
     kept, found, none = run(scenario())
 
     assert (found, none) == ([kept.id], [])
+
+
+def test_a_failed_generation_marks_its_interview_once_until_the_questions_come(run):
+    async def scenario():
+        found = await interview()
+        event_id = str(uuid.uuid4())
+        await interviews.mark_failed(found.generation_id, event_id)
+        failed = (await interviews.get(found.id)).generation_failed
+        # Retried; the same event delivered again doesn't mark it again.
+        await interviews.set_generation_failed(found.id, False)
+        await interviews.mark_failed(found.generation_id, event_id)
+        redelivered = (await interviews.get(found.id)).generation_failed
+        # Failed again, then the retry's questions come: they clear it, and a late failure of
+        # an earlier run leaves the ready interview alone.
+        await interviews.mark_failed(found.generation_id, str(uuid.uuid4()))
+        await interviews.set_generated(
+            found.generation_id, uuid.uuid4(), "Backend", {"kind": "x"}, str(uuid.uuid4())
+        )
+        await interviews.mark_failed(found.generation_id, str(uuid.uuid4()))
+
+        return failed, redelivered, await interviews.get(found.id)
+
+    failed, redelivered, ready = run(scenario())
+
+    assert (failed, redelivered) == (True, False)
+    assert ready.generation_failed is False and ready.set_id is not None

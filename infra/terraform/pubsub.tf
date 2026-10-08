@@ -26,7 +26,7 @@ resource "google_pubsub_subscription" "dead_letter" {
 locals {
   consumes = {
     library       = ["answer.recorded", "session.scored"]
-    companies     = ["generation.completed", "generation.cancelled", "interview.finished", "results.rescored"]
+    companies     = ["generation.completed", "generation.failed", "generation.cancelled", "interview.finished", "results.rescored"]
     notifications = ["notification.requested", "candidate.*", "report.shared", "contact.sent", "company.deleted"]
     ats           = ["candidate.finished", "candidate.removed", "interview.ready", "interview.deleted", "company.deleted", "credits.added"]
     api           = ["candidate.finished", "company.deleted"]

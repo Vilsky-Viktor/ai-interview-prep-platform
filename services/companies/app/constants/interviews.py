@@ -14,6 +14,8 @@ class InterviewStatus(StrEnum):
     HIRED = "hired"
 
 
+# A generation's status (as generation reports it) once it has failed and waits for a retry.
+GENERATION_FAILED_STATUS = "failed"
 # Timed interviews: the seconds each question starts with, and the range an admin can set.
 MIN_QUESTION_SECONDS = 10
 MAX_QUESTION_SECONDS = 600
