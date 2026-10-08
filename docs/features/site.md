@@ -35,7 +35,7 @@ Below, a landing page walks through prepza, one section per screen:
 - a verified brand,
 - fair to candidates and safe for your data: what's true about human review, answer keys, AI training, extra time, candidate notices and data, data retention and hosting, payments and the documents, with links to the documents, terms and privacy policy (no compliance badges),
 - pricing ("Pay per candidate": interviews and the first candidates free, then a price per candidate, with no subscription),
-- a closing call to action: "Create an interview", with "Demos" beside it.
+- a closing call to action: "Create an interview", then the demos and the FAQ ("Demos" with "Go to FAQ" beside it).
 
 Each section has a picture of the real interface, several of them animated. Prices come from billing, so they follow any change. Signed-in users see the landing page too.
 

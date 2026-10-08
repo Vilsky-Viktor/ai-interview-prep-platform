@@ -4,7 +4,8 @@ import { DemosButton } from "@/components/landing/demos-button"
 import { MoreLink } from "@/components/landing/section"
 import { StartButton } from "@/components/landing/start-button"
 
-/** The landing page's last screen: back to the job description box, and a link to the FAQ. */
+/** The landing page's last screen: back to the job description box, and links to the FAQ and
+ * the demo videos. */
 export async function Closing() {
   const t = await getTranslations("landing")
 
@@ -14,17 +15,17 @@ export async function Closing() {
         <h2 className="no-dot font-heading text-5xl font-medium tracking-tight sm:text-7xl">
           {t("ready.title")}
         </h2>
-        <div className="flex flex-wrap justify-center gap-3">
-          <StartButton label={t("ready.start")} />
-          <DemosButton />
-        </div>
+        <StartButton label={t("ready.start")} />
       </div>
       <div className="space-y-3">
         <h3 className="font-heading text-2xl font-medium">{t("faq.title")}</h3>
         <p className="text-lg text-muted-foreground">{t("faq.text")}</p>
-        <MoreLink href="/faq" keepCase>
-          {t("faq.read")}
-        </MoreLink>
+        <div className="flex flex-wrap justify-center gap-3">
+          <DemosButton className="h-11" />
+          <MoreLink href="/faq" keepCase>
+            {t("faq.read")}
+          </MoreLink>
+        </div>
       </div>
     </section>
   )

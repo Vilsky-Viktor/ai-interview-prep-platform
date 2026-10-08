@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 // The home page offers prepza's demo videos twice: beside the promise (under it on phones) and
-// next to "Create an interview" at the end. Both open YouTube in a new tab.
+// beside "Go to FAQ" at the end. Both open YouTube in a new tab.
 test("the home page links to the demo videos at the top and at the end", async ({ page }) => {
   await page.goto("/");
   const demos = page.getByRole("link", { name: "Demos" }).filter({ visible: true });
@@ -17,5 +17,5 @@ test("the home page links to the demo videos at the top and at the end", async (
     has: page.getByRole("heading", { name: /Ready to interview/i }),
   });
   await expect(closing.getByRole("link", { name: "Demos" })).toBeVisible();
-  await expect(closing.getByRole("button", { name: "Create an interview" })).toBeVisible();
+  await expect(closing.getByRole("link", { name: /go to FAQ/i })).toBeVisible();
 });

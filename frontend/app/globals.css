@@ -151,9 +151,9 @@
   body {
     @apply bg-background text-foreground;
   }
-  /* On phones, a heading's long words (German, Russian, Polish…) break with a hyphen in the
+  /* On the narrowest phones (under 360px), a heading's long words (German, Russian, Polish…) break with a hyphen in the
      page's language instead of running past the screen. */
-  @media (width < 40rem) {
+  @media (width < 22.5rem) {
     h1,
     h2,
     h3 {
