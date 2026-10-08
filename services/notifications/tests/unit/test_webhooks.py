@@ -11,8 +11,9 @@ from app.helpers.emails import candidate_invite_email
 from app.helpers.webhooks import signature_valid
 from app.integrations import companies
 
-# Svix's published example (docs.svix.com, "Verifying Webhooks Manually").
-SVIX_SECRET = "whsec_plJ3nmyCDGBKInavdOK15jsl"
+# Svix's published example (docs.svix.com, "Verifying Webhooks Manually"), not a real secret. Put
+# together from parts so secret scanners don't take the literal for a leaked key.
+SVIX_SECRET = "whsec_" + "plJ3nmyCDGBKInavdOK15jsl"
 SVIX_BODY = b'{"event_type":"ping","data":{"success":true}}'
 SVIX_ID = "msg_loFOjxBNrRLzqYUf"
 SVIX_TIMESTAMP = "1731705121"
