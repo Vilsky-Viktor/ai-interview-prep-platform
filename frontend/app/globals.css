@@ -151,6 +151,16 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* On phones, a heading's long words (German, Russian, Polish…) break with a hyphen in the
+     page's language instead of running past the screen. */
+  @media (width < 40rem) {
+    h1,
+    h2,
+    h3 {
+      hyphens: auto;
+      overflow-wrap: anywhere;
+    }
+  }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;

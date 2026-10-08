@@ -41,14 +41,14 @@ export async function TrustSection() {
 
   return (
     <LandingSection title={t("title")} text={t("text")}>
-      <ul className="mx-auto grid w-full max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {POINTS.map(({ key, Icon }) => (
           <li
             key={key}
             className="flex items-center gap-4 rounded-2xl border bg-background p-6"
           >
             <Icon aria-hidden className="size-6 shrink-0 text-primary" />
-            <span className="text-base whitespace-pre-line">
+            <span className="min-w-0 text-base whitespace-pre-line">
               {t(`points.${key}`)}
             </span>
           </li>

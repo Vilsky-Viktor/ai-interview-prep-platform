@@ -52,7 +52,11 @@ export function UserMenu() {
 
   if (!user) {
     return (
-      <Button variant="outline" className="px-4" onClick={() => signIn()}>
+      <Button
+        variant="outline"
+        className="px-4 max-[359px]:px-2.5"
+        onClick={() => signIn()}
+      >
         {t("signIn")}
       </Button>
     )

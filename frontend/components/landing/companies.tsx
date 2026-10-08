@@ -63,7 +63,7 @@ export async function CompaniesSection() {
       <Stage>
         <div className="rounded-2xl border bg-background text-start">
           {/* The test and its passing grade, which colors each finished grade. */}
-          <p className="border-b px-8 py-5 text-sm text-muted-foreground">
+          <p className="border-b px-5 py-5 text-sm text-muted-foreground sm:px-8">
             {t("role", { mark: DEMO_PASS_MARK })}
           </p>
           <ul className="divide-y">
@@ -71,7 +71,7 @@ export async function CompaniesSection() {
               ({ email, daysAgo, progress, grade, status, signals }) => (
                 <li
                   key={email}
-                  className="flex flex-col gap-4 px-8 py-5 sm:flex-row sm:items-center sm:justify-between"
+                  className="flex flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8"
                 >
                   <span className="min-w-0 space-y-1">
                     <span className="block text-lg font-medium break-all">
@@ -86,7 +86,7 @@ export async function CompaniesSection() {
                       <CandidateSignals candidate={signals as Candidate} />
                     </span>
                   </span>
-                  <span className="flex shrink-0 items-center gap-6">
+                  <span className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-2 sm:gap-6">
                     {status === "in_process" ? (
                       <CandidateStatsDemo
                         steps={LIVE}
@@ -123,7 +123,7 @@ export async function CompaniesSection() {
                         </span>
                       </>
                     )}
-                    <span className="flex w-28 justify-end">
+                    <span className="ms-auto flex justify-end sm:w-28">
                       <Badge
                         variant="outline"
                         className="h-7 px-3 text-sm font-light"
