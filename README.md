@@ -1,5 +1,7 @@
 # prepza.
 
+⭐ Don't be lazy - give a star ⭐
+
 Timed knowledge interviews for hiring, made from a job description or a ready-made template. A company pastes the role, reviews the topics, and invites candidates; each candidate gets their own random questions with a countdown on every one, and the company sees their scores and integrity signals. People preparing for a role practise free on the templates. Any role, 23 languages, from $1 per candidate.
 
 **For private and research use only.** This repository may not be used for commercial purposes. See [LICENSE.md](LICENSE.md) (PolyForm Noncommercial 1.0.0).
