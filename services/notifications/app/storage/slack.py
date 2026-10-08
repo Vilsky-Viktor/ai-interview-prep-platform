@@ -1,8 +1,11 @@
+from datetime import UTC, datetime, timedelta
+
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
+from app.constants.notifications import EXPIRED_PER_PRUNE, KEEP_DAYS
 from app.constants.slack import SlackStatus
-from app.models.slack import SlackConnection
+from app.models.slack import SlackConnection, SlackPost
 from app.storage.db import Session
 
 
@@ -66,3 +69,35 @@ async def connected(company_id: str) -> SlackConnection | None:
 
     async with Session() as session:
         return await session.scalar(query)
+
+
+async def claim(key: str) -> bool:
+    """Marks the notification `key` as posted to Slack; False when it already was (or is being
+    posted right now), so a retried or duplicate event posts it once. Expired marks go, at most
+    EXPIRED_PER_PRUNE a call, long after Pub/Sub stops redelivering (7 days)."""
+    now = datetime.now(UTC)
+    expired = (
+        select(SlackPost.event_id)
+        .where(SlackPost.posted_at < now - timedelta(days=KEEP_DAYS))
+        .limit(EXPIRED_PER_PRUNE)
+        .with_for_update(skip_locked=True)
+    )
+
+    async with Session() as session:
+        await session.execute(delete(SlackPost).where(SlackPost.event_id.in_(expired)))
+        claimed = await session.scalar(
+            insert(SlackPost)
+            .values(event_id=key, posted_at=now)
+            .on_conflict_do_nothing(index_elements=["event_id"])
+            .returning(SlackPost.event_id)
+        )
+        await session.commit()
+
+    return claimed is not None
+
+
+async def release(key: str) -> None:
+    """Slack didn't take the notification `key`: the event's retry may post it."""
+    async with Session() as session:
+        await session.execute(delete(SlackPost).where(SlackPost.event_id == key))
+        await session.commit()

@@ -1,13 +1,10 @@
-import asyncio
 import time
 from types import SimpleNamespace
 from urllib.parse import parse_qs, urlparse
 
-import httpx
 import pytest
 from prepza_common.auth import current_user
 from prepza_common.encryption import encrypt
-from prepza_common.notifications import NotificationKind, Recipient, notification
 from prepza_common.user import User
 
 from app.config.settings import settings
@@ -15,7 +12,6 @@ from app.helpers.slack import signed_state
 from app.integrations import companies
 from app.integrations import slack as slack_api
 from app.main import app
-from app.services import slack
 from app.storage import slack as storage
 
 KEY = "Zm9vYmFyYmF6cXV4cXV1eGNvcmdlZ3JhdWx0Z2FycGw="
@@ -163,75 +159,3 @@ def test_only_known_kinds_are_saved(client, monkeypatch):
 
     assert client.put("/slack/kinds?company_id=c1", json=body).status_code == 204
     assert chosen == [["candidate_finished", "interview_ready"]]
-
-
-@pytest.fixture
-def channel(monkeypatch):
-    """c1's working channel, which takes candidate_finished, and what reaches it."""
-    found = {"posted": [], "broken": [], "answer": None}
-    hook = SimpleNamespace(
-        kinds=["candidate_finished"], webhook=encrypt(KEY, "https://hooks/x"), created_by="u1"
-    )
-
-    async def connected(company_id):
-        return hook if company_id == "c1" else None
-
-    async def post(webhook, text):
-        if found["answer"]:
-            raise found["answer"]
-
-        found["posted"].append((webhook, text))
-
-    async def mark_broken(company_id):
-        found["broken"].append(company_id)
-
-    async def access(company_id, user_id):
-        return {"member": True, "editor": user_id not in found["left"]}
-
-    found["left"] = set()
-    monkeypatch.setattr(storage, "connected", connected)
-    monkeypatch.setattr(storage, "mark_broken", mark_broken)
-    monkeypatch.setattr(slack_api, "post", post)
-    monkeypatch.setattr(companies, "access", access)
-
-    return found
-
-
-def finished(company_id="c1", kind=NotificationKind.CANDIDATE_FINISHED):
-    return notification(Recipient.COMPANY, company_id, kind, "/x", email="a@b.c", title="T")
-
-
-def test_a_chosen_notification_reaches_the_channel(channel):
-    asyncio.run(slack.deliver(finished()))
-
-    assert [webhook for webhook, text in channel["posted"]] == ["https://hooks/x"]
-
-
-def test_unchosen_kinds_other_companies_and_users_notifications_dont(channel):
-    asyncio.run(slack.deliver(finished(kind=NotificationKind.INTERVIEW_READY)))
-    asyncio.run(slack.deliver(finished(company_id="c2")))
-    asyncio.run(
-        slack.deliver(notification(Recipient.USER, "u1", NotificationKind.AUTO_TOP_UP_FAILED, "/"))
-    )
-
-    assert channel["posted"] == []
-
-
-def test_a_gone_web_hook_marks_the_channel_and_slack_down_is_only_logged(channel):
-    channel["answer"] = httpx.ConnectError("down")
-    asyncio.run(slack.deliver(finished()))
-
-    assert channel["broken"] == []
-
-    channel["answer"] = slack_api.WebhookGone()
-    asyncio.run(slack.deliver(finished()))
-
-    assert channel["broken"] == ["c1"]
-
-
-def test_a_channel_connected_by_someone_no_longer_an_editor_asks_for_reconnecting(channel):
-    channel["left"].add("u1")
-    asyncio.run(slack.deliver(finished()))
-
-    assert channel["posted"] == []
-    assert channel["broken"] == ["c1"]

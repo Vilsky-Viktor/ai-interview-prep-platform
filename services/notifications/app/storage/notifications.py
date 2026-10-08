@@ -23,12 +23,11 @@ def for_recipients(recipients: Recipients):
 
 
 async def add(event_id: str, event: dict) -> bool:
-    """Stores a requested notification once, however often Pub/Sub delivers it (or, with a
-    `key`, however often its producer asks); False when it was already there. A grouped kind adds
-    to a recent one about the same thing instead. Then the recipient's oldest go, beyond
-    MAX_PER_RECIPIENT or KEEP_DAYS."""
+    """Stores a requested notification once per `event_id` (the event's, or the producer's `key`),
+    however often it comes; False when it was already there. A grouped kind adds to a recent one
+    about the same thing instead. Then the recipient's oldest go, beyond MAX_PER_RECIPIENT or
+    KEEP_DAYS."""
     now = datetime.now(UTC)
-    event_id = event.get("key") or event_id
 
     async with Session() as session:
         # One recipient's notifications are stored one at a time, though Pub/Sub delivers in

@@ -71,10 +71,19 @@ def test_a_web_hook_slack_says_is_gone(monkeypatch, answer):
         asyncio.run(slack.post("https://hooks.slack.com/x", "hi"))
 
 
-def test_slack_busy_is_an_http_error_not_a_gone_web_hook(monkeypatch):
-    monkeypatch.setattr(slack.http, "get_client", lambda: client(httpx.Response(500)))
+@pytest.mark.parametrize("status", [429, 500, 503])
+def test_slack_busy_or_down_is_an_http_error_not_a_gone_web_hook(monkeypatch, status):
+    monkeypatch.setattr(slack.http, "get_client", lambda: client(httpx.Response(status)))
 
     with pytest.raises(httpx.HTTPStatusError):
+        asyncio.run(slack.post("https://hooks.slack.com/x", "hi"))
+
+
+def test_a_message_slack_turns_down_says_why(monkeypatch):
+    answer = httpx.Response(400, text="invalid_payload")
+    monkeypatch.setattr(slack.http, "get_client", lambda: client(answer))
+
+    with pytest.raises(slack.SlackRefused, match="invalid_payload"):
         asyncio.run(slack.post("https://hooks.slack.com/x", "hi"))
 
 

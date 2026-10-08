@@ -30,8 +30,9 @@ A company can send its notifications to one Slack channel too, from its integrat
 
 - An owner or admin clicks "Add to Slack", allows prepza in Slack and picks the channel. Back on the company's Slack page, they choose which notifications go there. By default: finished candidates, ATS candidates that weren't invited, undelivered invites and failed automatic top-ups; ready interviews and charged top-ups can be added.
 - prepza gets only an incoming web hook for that channel (the `incoming-webhook` scope): it can post there and can't read anything.
-- Each new notification is posted once, in English, with a link back to prepza. A redelivered event doesn't post again.
-- If Slack says the web hook is gone (the app was removed or the channel deleted), the page shows "Reconnect". Other Slack errors are logged and that message is skipped; the bell always gets it.
+- Each notification is posted once, in English, with a link back to prepza. A redelivered event doesn't post again.
+- The bell gets the notification first, whatever happens in Slack. If Slack is busy or down (rate limited, a server error, a timeout), the event is retried with Pub/Sub's backoff and the retry posts the message; the bell doesn't get it twice.
+- If Slack says the web hook is gone (the app was removed or the channel deleted), the page shows "Reconnect". A message Slack refuses for good is logged and skipped.
 - Disconnecting, or deleting the company, removes prepza's app from the workspace and the channel from prepza.
 - Members who can't edit see the channel and its notifications without changing them.
 - The channel works while whoever connected it is still an owner or admin; once they're removed or made a viewer, it's marked for reconnecting by a current editor.

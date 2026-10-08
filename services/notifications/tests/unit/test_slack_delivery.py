@@ -1,0 +1,128 @@
+import asyncio
+from types import SimpleNamespace
+
+import httpx
+import pytest
+from prepza_common.encryption import encrypt
+from prepza_common.notifications import NotificationKind, Recipient, notification
+
+from app.config.settings import settings
+from app.integrations import companies
+from app.integrations import slack as slack_api
+from app.services import slack
+from app.storage import slack as storage
+
+KEY = "Zm9vYmFyYmF6cXV4cXV1eGNvcmdlZ3JhdWx0Z2FycGw="
+
+
+@pytest.fixture(autouse=True)
+def channel(monkeypatch):
+    """Slack set up on the server; c1's working channel, which takes candidate_finished, and what
+    reaches it."""
+    found = {"posted": [], "broken": [], "claimed": set(), "answer": None, "left": set()}
+    hook = SimpleNamespace(
+        kinds=["candidate_finished"], webhook=encrypt(KEY, "https://hooks/x"), created_by="u1"
+    )
+
+    async def connected(company_id):
+        return hook if company_id == "c1" else None
+
+    async def post(webhook, text):
+        if found["answer"]:
+            raise found["answer"]
+
+        found["posted"].append((webhook, text))
+
+    async def mark_broken(company_id):
+        found["broken"].append(company_id)
+
+    async def claim(key):
+        new = key not in found["claimed"]
+        found["claimed"].add(key)
+
+        return new
+
+    async def release(key):
+        found["claimed"].discard(key)
+
+    async def access(company_id, user_id):
+        return {"member": True, "editor": user_id not in found["left"]}
+
+    monkeypatch.setattr(settings, "slack_client_id", "client")
+    monkeypatch.setattr(settings, "slack_client_secret", "secret")
+    monkeypatch.setattr(settings, "slack_encryption_key", KEY)
+    monkeypatch.setattr(storage, "connected", connected)
+    monkeypatch.setattr(storage, "mark_broken", mark_broken)
+    monkeypatch.setattr(storage, "claim", claim)
+    monkeypatch.setattr(storage, "release", release)
+    monkeypatch.setattr(slack_api, "post", post)
+    monkeypatch.setattr(companies, "access", access)
+
+    return found
+
+
+def finished(company_id="c1", kind=NotificationKind.CANDIDATE_FINISHED):
+    return notification(Recipient.COMPANY, company_id, kind, "/x", email="a@b.c", title="T")
+
+
+def deliver(event=None, key="e1"):
+    asyncio.run(slack.deliver(event or finished(), key))
+
+
+def test_a_chosen_notification_reaches_the_channel_once(channel):
+    deliver()
+    deliver()
+
+    assert [webhook for webhook, text in channel["posted"]] == ["https://hooks/x"]
+
+
+def test_unchosen_kinds_other_companies_and_users_notifications_dont(channel):
+    deliver(finished(kind=NotificationKind.INTERVIEW_READY))
+    deliver(finished(company_id="c2"))
+    deliver(notification(Recipient.USER, "u1", NotificationKind.AUTO_TOP_UP_FAILED, "/"))
+
+    assert channel["posted"] == []
+    assert channel["claimed"] == set()
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        httpx.ConnectTimeout("slow"),
+        httpx.HTTPStatusError(
+            "429", request=httpx.Request("POST", "https://x"), response=httpx.Response(429)
+        ),
+    ],
+)
+def test_slack_busy_or_down_raises_so_the_retry_posts_it(channel, answer):
+    channel["answer"] = answer
+
+    with pytest.raises(httpx.HTTPError):
+        deliver()
+
+    assert channel["claimed"] == set()
+
+    channel["answer"] = None
+    deliver()
+
+    assert len(channel["posted"]) == 1
+    assert channel["broken"] == []
+
+
+def test_a_gone_web_hook_marks_the_channel_and_a_refused_message_is_skipped(channel):
+    channel["answer"] = slack_api.WebhookGone()
+    deliver(key="e1")
+    channel["answer"] = slack_api.SlackRefused("invalid_payload")
+    deliver(key="e2")
+
+    assert channel["broken"] == ["c1"]
+    # Neither is retried.
+    assert channel["claimed"] == {"e1", "e2"}
+
+
+def test_a_channel_connected_by_someone_no_longer_an_editor_asks_for_reconnecting(channel):
+    channel["left"].add("u1")
+    deliver()
+
+    assert channel["posted"] == []
+    assert channel["broken"] == ["c1"]

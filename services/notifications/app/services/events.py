@@ -48,18 +48,20 @@ async def deliver(email: Email, event_id: str) -> None:
 
 
 async def notify(data: dict, event_id: str) -> None:
-    """Stores a requested notification and tells the recipient's open tabs. A retried event is
-    stored once and announced once; if announcing fails, the tabs see it on their next load."""
-    if not await notifications.add(event_id, data):
-        return
+    """Stores a requested notification, tells the recipient's open tabs, and posts it to the
+    company's Slack channel. A retried event is stored once and announced once (if announcing
+    fails, the tabs see it on their next load) and posted once; a retry after Slack failed posts
+    it then, without a second notification in the bell."""
+    # With a `key`, its producer asking again is the same notification.
+    key = data.get("key") or event_id
 
-    # New, so it's posted once: also to the company's Slack channel, if it chose it.
-    await slack.deliver(data)
+    if await notifications.add(key, data):
+        try:
+            await announce(data["recipient"], data["recipient_id"])
+        except Exception:
+            logger.exception("Couldn't announce a %s notification", data["kind"])
 
-    try:
-        await announce(data["recipient"], data["recipient_id"])
-    except Exception:
-        logger.exception("Couldn't announce a %s notification", data["kind"])
+    await slack.deliver(data, key)
 
 
 async def handle(event_type: str, data: dict, event_id: str) -> None:

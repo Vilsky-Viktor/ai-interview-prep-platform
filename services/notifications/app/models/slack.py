@@ -25,3 +25,13 @@ class SlackConnection(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
+
+
+class SlackPost(Base):
+    """A notification posted (or being posted) to its company's Slack channel, so a retried
+    event posts it once; the bell's own record is Received. Pruned after KEEP_DAYS."""
+
+    __tablename__ = "slack_posts"
+
+    event_id: Mapped[str] = mapped_column(String(128), primary_key=True)
+    posted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)

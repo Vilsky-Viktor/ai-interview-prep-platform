@@ -149,11 +149,13 @@ async def disconnect(company_id: str) -> None:
         await storage.remove(company_id)
 
 
-async def deliver(event: dict) -> None:
-    """A new notification for a company goes to its Slack channel too, if it chose that kind and
-    whoever connected it is still an owner or admin. Slack failing never stops the bell: a gone
-    web hook, or a connector no longer an editor, marks the channel for reconnecting; anything
-    else is logged."""
+async def deliver(event: dict, key: str) -> None:
+    """A company's notification goes to its Slack channel too, if it chose that kind and whoever
+    connected it is still an owner or admin; once per `key` (the bell's), however often its event
+    comes. A gone web hook, or a connector no longer an editor, marks the channel for
+    reconnecting, and a message Slack refuses is logged: neither is retried. Slack (or the
+    companies service) busy or down raises, so Pub/Sub retries the event, backing off, and the
+    retry posts it."""
     if event.get("recipient") != Recipient.COMPANY or not available():
         return
 
@@ -166,14 +168,7 @@ async def deliver(event: dict) -> None:
 
     # The channel works while whoever connected it is still an owner or admin, like an API key;
     # otherwise an editor reconnects it.
-    try:
-        editor = (await companies.access(company_id, found.created_by))["editor"]
-    except httpx.HTTPError:
-        logger.warning("Couldn't check who connected Slack for %s", company_id)
-
-        return
-
-    if not editor:
+    if not (await companies.access(company_id, found.created_by))["editor"]:
         await storage.mark_broken(company_id)
 
         return
@@ -185,9 +180,19 @@ async def deliver(event: dict) -> None:
 
         return
 
+    # Claimed before posting, so two deliveries of one event at once post it once.
+    if not await storage.claim(key):
+        return
+
     try:
         await slack.post(webhook, text)
     except slack.WebhookGone:
         await storage.mark_broken(company_id)
-    except httpx.HTTPError:
-        logger.warning("Couldn't post a %s notification to Slack for %s", event["kind"], company_id)
+    except slack.SlackRefused as refused:
+        logger.warning(
+            "Slack refused a %s notification for %s: %s", event["kind"], company_id, refused.error
+        )
+    except Exception:
+        await storage.release(key)
+
+        raise

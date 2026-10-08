@@ -60,14 +60,20 @@ def test_the_same_key_from_different_events_makes_one_notification(run):
     )
 
     async def scenario():
-        first = await notifications.add(str(uuid.uuid4()), event)
-        again = await notifications.add(str(uuid.uuid4()), event)
+        async with api() as client:
+            answers = [
+                await client.post(
+                    "/internal/events",
+                    json=push(NOTIFICATION_REQUESTED, event, str(uuid.uuid4()), message_id),
+                )
+                for message_id in ["m-k1", "m-k2"]
+            ]
 
-        return first, again, await rows(company_id)
+        return [answer.status_code for answer in answers], await rows(company_id)
 
-    first, again, saved = run(scenario())
+    codes, saved = run(scenario())
 
-    assert (first, again) == (True, False)
+    assert codes == [204, 204]
     assert [row.event_id for row in saved] == ["interview_ready:invite-1"]
 
 
