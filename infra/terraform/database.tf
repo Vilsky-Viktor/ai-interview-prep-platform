@@ -100,13 +100,28 @@ locals {
   # Kept free for migrations, Query Insights and an admin's session.
   db_reserved_connections = 20
   db_connections_at_peak  = sum([for service in local.services : service.max * service.connections])
+  # A deploy (.github/workflows/deploy.yml) moves the services one at a time, after the migrations,
+  # and each one's old instances run until their requests end. So on top of the peak: the old
+  # instances of the services whose requests may last past the deploy (the worker's jobs, the
+  # bell's streams) and of the largest other one.
+  db_connections_in_deploy = local.db_connections_at_peak + sum([
+    for service in local.services : service.max * service.connections if service.timeout > 300
+    ]) + max([
+    for service in local.services : service.max * service.connections if service.timeout <= 300
+  ]...)
 }
 
-# Fails the plan if instance limits could open more connections than Postgres allows; raise
-# db_tier (and db_max_connections) or add PgBouncer before raising a service's `max`.
+# Fails the plan if instance limits could open more connections than Postgres allows, at peak
+# within the budget and during a deploy within max_connections; raise db_tier (and
+# db_max_connections) or add PgBouncer before raising a service's `max`.
 check "database_connections" {
   assert {
     condition     = local.db_connections_at_peak <= local.db_max_connections - local.db_reserved_connections
     error_message = "Services at their instance limits could open ${local.db_connections_at_peak} database connections; the budget is ${local.db_max_connections - local.db_reserved_connections}."
+  }
+
+  assert {
+    condition     = local.db_connections_in_deploy <= local.db_max_connections
+    error_message = "A deploy at the services' instance limits could open ${local.db_connections_in_deploy} database connections; Postgres allows ${local.db_max_connections}."
   }
 }

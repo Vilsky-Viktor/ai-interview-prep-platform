@@ -40,7 +40,7 @@ flowchart LR
     api -- signed web hooks --> platforms
 
     rounds -- answer.recorded / session.scored / interview.finished / results.rescored --> pubsub[(Pub/Sub topic: events)]
-    worker -- generation.completed / cancelled --> pubsub
+    worker -- generation.completed / failed / cancelled --> pubsub
     companies -- candidate.invited / reminded / removed, report.shared, company.deleted --> pubsub
     companies -- candidate.finished, interview.ready / deleted --> pubsub
     rounds -- contact.sent --> pubsub
@@ -63,7 +63,7 @@ flowchart LR
 | `rounds` | Candidates' interview sessions and their answers, free practice rounds; the FAQ, the help chat, the legal texts and the contact form (`/help/...`) |
 | `companies` | Companies (unique names, logos, verification), members (owner, admins, viewers), interviews, candidate invites (one by one, in bulk, through a shareable link, with reminders), reports |
 | `billing` | Companies' credit wallets (holds and charges), welcome credits, referrals, Paddle top-ups, automatic top-ups, refunds and chargebacks (webhooks); companies sets a candidate's credits aside and charges them through it |
-| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites and reminders, emailed PDF reports, and contact messages to prepza's inbox. Also the bell: stores the notifications other services ask for (`notification.requested`), removes a deleted company's (`company.deleted`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them. Posts a company's chosen notifications to its Slack channel too, through the channel's incoming web hook |
+| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites and reminders, emailed PDF reports, and contact messages to prepza's inbox. Also the bell: stores the notifications other services ask for (`notification.requested`), removes a deleted company's (`company.deleted`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them (one subscription per instance, shared by its open tabs). Posts a company's chosen notifications to its Slack channel too, through the channel's incoming web hook |
 | `ats` | ATS integrations (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): companies' encrypted ATS keys, linked jobs and the candidates the ATSs send (their webhooks); invites them through companies and writes their results back to the ATS |
 | `api` | The public API at `/api/v1/`: companies' API keys (as hashes, with their expiry), their web hooks (secrets encrypted) and deliveries; reads interviews and candidates and invites through companies, and sends a signed web hook when a candidate finishes |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
@@ -83,7 +83,7 @@ What each service does for users is described in the feature pages, linked from 
 | Kind | In Google Cloud | Examples |
 |---|---|---|
 | Long jobs | Cloud Tasks that call the generation worker's `/internal/jobs/...` | A generation, a question check |
-| Periodic work | Cloud Scheduler calling `/internal/schedules/...` | Stuck-generation sweeps, key-check batches, invite reminders and expiry, stalled ATS invites, retention |
+| Periodic work | Cloud Scheduler calling `/internal/schedules/...` | Stuck-generation sweeps, key-check batches, invite reminders and expiry, stalled ATS invites and kept ATS results, web hook retries, retention |
 
 - Google signs those calls, and Pub/Sub pushes, as one invoker service account, which each service checks.
 - Locally there is no queue: the API calls the worker directly.
@@ -95,11 +95,11 @@ Domain events go through an outbox, so a change never loses its event:
 
 1. An event is saved in an `outbox` table, in the same transaction as the change it announces.
 2. It is published right after. A request publishes only the events it saved, in one batch, with a 5-second timeout.
-3. If that failed, a per-minute scheduled flush publishes it.
+3. If that failed, a per-minute scheduled flush publishes it. Each run sends batches of 100 until none wait, for up to 20 seconds, so a backlog after an outage drains in minutes; two runs never send the same row.
 
 Refusals and duplicates:
 
-- An event Pub/Sub refuses is counted in its row's `attempts`, and parked after 5 refusals, so it can't hold up the rest.
+- An event Pub/Sub refuses is counted in its row's `attempts`, and parked after 5 refusals, so it can't hold up the rest. A parked event is logged as an error, which Sentry reports.
 - Each event carries a stable `event_id` attribute (its outbox row id), so a consumer that gets it twice acts once. Notifications' emails and bell, library's statistics and companies' notifications track this through their `processed_events`.
 
 Delivery:

@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import httpx
 import pytest
 from prepza_common import outbox, pubsub
-from prepza_common.constants import OUTBOX_MAX_ATTEMPTS
+from prepza_common.constants import OUTBOX_BATCH, OUTBOX_MAX_ATTEMPTS
 
 
 def row(name, attempts=0):
@@ -62,7 +62,9 @@ def test_an_event_rejected_too_often_is_parked(calls, caplog):
     asyncio.run(outbox.send([bad], 5))
 
     assert bad.attempts == OUTBOX_MAX_ATTEMPTS
-    assert "parked" in caplog.text
+    # Logged as an error, which Sentry reports.
+    [record] = [item for item in caplog.records if "parked" in item.message]
+    assert record.levelname == "ERROR"
 
 
 def test_an_outage_raises_and_counts_against_no_event(monkeypatch):
@@ -103,3 +105,69 @@ def test_a_quiet_flush_publishes_only_the_events_this_request_saved(monkeypatch)
     [(ids, timeout)] = flushed
     assert len(ids) == 2
     assert timeout == 5
+
+
+@pytest.fixture
+def batches(monkeypatch):
+    """The scheduled flush, with each batch's (published, taken) given in turn."""
+    calls = []
+
+    def run(*results):
+        queue = list(results)
+
+        async def flush_batch(sessionmaker, model, ids, timeout):
+            calls.append(ids)
+
+            return queue.pop(0)
+
+        async def delete_published(sessionmaker, model):
+            calls.append("delete")
+
+        monkeypatch.setattr(outbox, "flush_batch", flush_batch)
+        monkeypatch.setattr(outbox, "delete_published", delete_published)
+
+        return asyncio.run(outbox.flush(None, None))
+
+    run.calls = calls
+
+    return run
+
+
+def test_the_scheduled_flush_sends_batches_until_none_wait(batches):
+    full = (OUTBOX_BATCH, OUTBOX_BATCH)
+
+    assert batches(full, full, (30, 30)) == 2 * OUTBOX_BATCH + 30
+    assert batches.calls == [None, None, None, "delete"]
+
+
+def test_a_rejected_event_ends_the_run_and_waits_for_the_next(batches):
+    assert (
+        batches((OUTBOX_BATCH - 1, OUTBOX_BATCH), (OUTBOX_BATCH, OUTBOX_BATCH)) == OUTBOX_BATCH - 1
+    )
+    assert batches.calls == [None, "delete"]
+
+
+def test_the_scheduled_flush_starts_no_batch_after_its_time(batches, monkeypatch):
+    monkeypatch.setattr(outbox, "OUTBOX_FLUSH_SECONDS", 0)
+    full = (OUTBOX_BATCH, OUTBOX_BATCH)
+
+    assert batches(full, full) == OUTBOX_BATCH
+    assert batches.calls == [None, "delete"]
+
+
+def test_an_outage_ends_the_run_and_still_deletes_old_events(monkeypatch):
+    deleted = []
+
+    async def down(sessionmaker, model, ids, timeout):
+        raise ConnectionError("Pub/Sub is down")
+
+    async def delete_published(sessionmaker, model):
+        deleted.append(True)
+
+    monkeypatch.setattr(outbox, "flush_batch", down)
+    monkeypatch.setattr(outbox, "delete_published", delete_published)
+
+    with pytest.raises(ConnectionError):
+        asyncio.run(outbox.flush(None, None))
+
+    assert deleted == [True]

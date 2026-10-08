@@ -12,9 +12,9 @@ SIGN_IN_UNAVAILABLE = "Sign-in is temporarily unavailable. Please try again shor
 HOUR_SECONDS = 60 * 60
 DAY_SECONDS = 24 * HOUR_SECONDS
 
-# Database connections per process: at most DB_POOL_SIZE + DB_MAX_OVERFLOW. Four APIs and the
-# generation worker use 50 at most, plus generation's checkpointer pool, under Postgres's default
-# 100. Add PgBouncer before replicas would push the total past that.
+# Database connections per process: at most DB_POOL_SIZE + DB_MAX_OVERFLOW. Services with few,
+# short queries pass smaller ones. Every instance's total must fit the database's connection
+# budget (infra/terraform/database.tf).
 DB_POOL_SIZE = 5
 DB_MAX_OVERFLOW = 5
 
@@ -38,8 +38,12 @@ PUBLISH_IN_REQUEST_TIMEOUT_SECONDS = 5
 # Google APIs our services call with their own credentials (Pub/Sub, Cloud Tasks).
 GOOGLE_SCOPE = "https://www.googleapis.com/auth/cloud-platform"
 
-# Outbox: events published per flush (in one call), and how long published ones are kept.
+# Outbox: events published per call to Pub/Sub, and how long published ones are kept. The
+# scheduled flush sends batch after batch until none wait, starting no new batch after
+# OUTBOX_FLUSH_SECONDS, so a run (plus its last call's timeout) ends within the shortest
+# service timeout (60 s) and a backlog drains in minutes.
 OUTBOX_BATCH = 100
+OUTBOX_FLUSH_SECONDS = 20
 OUTBOX_KEEP_DAYS = 7
 # Pub/Sub's answers that mean it won't take a message (too large or malformed): the event is
 # tried alone, and parked after OUTBOX_MAX_ATTEMPTS of them so it can't hold up the others.

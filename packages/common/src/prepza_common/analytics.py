@@ -4,7 +4,7 @@ import logging
 import os
 from datetime import UTC, datetime
 
-from prepza_common.constants import FUNNEL_PREFIX
+from prepza_common.constants import FUNNEL_PREFIX, PUBLISH_IN_REQUEST_TIMEOUT_SECONDS
 from prepza_common.pubsub import publish
 
 logger = logging.getLogger(__name__)
@@ -25,8 +25,9 @@ async def track(
     company_id: object | None = None,
     **props: object,
 ) -> None:
-    """Records one funnel event (internal_docs/measurement.md). Best effort: a lost event is logged and
-    never breaks the request. `props` hold counts and choices only, never text people wrote."""
+    """Records one funnel event (internal_docs/measurement.md). Best effort: it waits for Pub/Sub
+    only as long as an in-request publish may, and a lost event is logged and never breaks the
+    request. `props` hold counts and choices only, never text people wrote."""
     data = {
         "at": datetime.now(UTC).isoformat(),
         "user": pseudonym(user_id) if user_id else None,
@@ -35,6 +36,6 @@ async def track(
     }
 
     try:
-        await publish(FUNNEL_PREFIX + event, data)
+        await publish(FUNNEL_PREFIX + event, data, PUBLISH_IN_REQUEST_TIMEOUT_SECONDS)
     except Exception:
         logger.warning("Couldn't record funnel event %s", event, exc_info=True)

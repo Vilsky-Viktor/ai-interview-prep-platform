@@ -1,4 +1,5 @@
 import logging
+import time
 import uuid
 from contextvars import ContextVar
 from datetime import UTC, datetime, timedelta
@@ -8,6 +9,7 @@ from prepza_common import pubsub
 from prepza_common.constants import (
     HTTP_TIMEOUT_SECONDS,
     OUTBOX_BATCH,
+    OUTBOX_FLUSH_SECONDS,
     OUTBOX_KEEP_DAYS,
     OUTBOX_MAX_ATTEMPTS,
     OUTBOX_REJECTED_STATUSES,
@@ -48,7 +50,8 @@ def count_rejection(row, error: Exception) -> None:
     row.attempts += 1
 
     if row.attempts >= OUTBOX_MAX_ATTEMPTS:
-        # Parked: no flush tries it again. Setting attempts back to 0 sends it once fixed.
+        # Parked: no flush tries it again. Setting attempts back to 0 sends it once fixed. Logged
+        # as an error, so Sentry reports it (its logging integration sends errors).
         logger.error("Outbox event %s (%s) parked: %s", row.id, row.event_type, error)
     else:
         logger.warning("Pub/Sub rejected outbox event %s (%s): %s", row.id, row.event_type, error)
@@ -82,13 +85,13 @@ async def send(rows: list, timeout: float) -> None:
         row.published_at = now
 
 
-async def flush(
-    sessionmaker, model, ids: list[uuid.UUID] | None = None, timeout: float = HTTP_TIMEOUT_SECONDS
-) -> int:
-    """Publishes waiting events, oldest first, and returns how many; with `ids`, only those.
-    Two runs never send the same row (SKIP LOCKED), and a row is locked only for its batch's
-    one call. Parked rows are left out. A failure keeps the rest for the next run. The
-    scheduled flush (no `ids`) also deletes published rows after OUTBOX_KEEP_DAYS."""
+async def flush_batch(
+    sessionmaker, model, ids: list[uuid.UUID] | None, timeout: float
+) -> tuple[int, int]:
+    """Publishes one batch of waiting events, oldest first (with `ids`, only those), and returns
+    how many it published and how many it took. Two runs never take the same row (SKIP LOCKED),
+    and a row is locked only for its batch's one call. Parked rows are left out. A failure keeps
+    the rest for the next run."""
     query = (
         select(model)
         .where(model.published_at.is_(None), model.attempts < OUTBOX_MAX_ATTEMPTS)
@@ -102,24 +105,51 @@ async def flush(
 
     async with sessionmaker() as session:
         rows = list(await session.scalars(query))
-        published = 0
 
         try:
             if rows:
                 await send(rows, timeout)
-
-            published = sum(row.published_at is not None for row in rows)
         finally:
-            if ids is None:
-                await session.execute(
-                    delete(model).where(
-                        model.published_at < datetime.now(UTC) - timedelta(days=OUTBOX_KEEP_DAYS)
-                    )
-                )
-
             await session.commit()
 
-    return published
+    return sum(row.published_at is not None for row in rows), len(rows)
+
+
+async def delete_published(sessionmaker, model) -> None:
+    """Deletes events published more than OUTBOX_KEEP_DAYS ago."""
+    async with sessionmaker() as session:
+        await session.execute(
+            delete(model).where(
+                model.published_at < datetime.now(UTC) - timedelta(days=OUTBOX_KEEP_DAYS)
+            )
+        )
+        await session.commit()
+
+
+async def flush(
+    sessionmaker, model, ids: list[uuid.UUID] | None = None, timeout: float = HTTP_TIMEOUT_SECONDS
+) -> int:
+    """Publishes waiting events and returns how many; with `ids`, only those, in one batch. The
+    scheduled flush (no `ids`) sends batch after batch until none wait, a batch has a row Pub/Sub
+    rejected (it waits for the next run), or OUTBOX_FLUSH_SECONDS have passed; then it deletes
+    old published rows."""
+    if ids is not None:
+        published, _ = await flush_batch(sessionmaker, model, ids, timeout)
+
+        return published
+
+    deadline = time.monotonic() + OUTBOX_FLUSH_SECONDS
+    total = 0
+
+    try:
+        while True:
+            published, taken = await flush_batch(sessionmaker, model, None, timeout)
+            total += published
+
+            if taken < OUTBOX_BATCH or published < taken or time.monotonic() >= deadline:
+                return total
+    finally:
+        await delete_published(sessionmaker, model)
 
 
 async def flush_quietly(sessionmaker, model) -> None:

@@ -6,18 +6,20 @@ from prepza_common import analytics
 def test_events_carry_a_pseudonym_and_never_break_the_caller(monkeypatch):
     sent = []
 
-    async def fake_publish(event_type, data):
-        sent.append((event_type, data))
+    async def fake_publish(event_type, data, timeout):
+        sent.append((event_type, data, timeout))
 
-    async def broken(event_type, data):
+    async def broken(event_type, data, timeout):
         raise RuntimeError("pubsub down")
 
     monkeypatch.setenv("ANALYTICS_SALT", "salt")
     monkeypatch.setattr(analytics, "publish", fake_publish)
     asyncio.run(analytics.track("test_ready", user_id="ann", topics=7))
 
-    [(event_type, data)] = sent
+    [(event_type, data, timeout)] = sent
     assert event_type == "funnel.test_ready"
+    # A slow Pub/Sub holds the request no longer than an in-request publish may.
+    assert timeout == 5
     assert data["user"] == analytics.pseudonym("ann") != "ann"
     assert data["props"] == {"topics": 7}
 
