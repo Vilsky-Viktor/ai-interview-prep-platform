@@ -909,14 +909,8 @@
   },
   "faq": {
     "title": "Perguntas frequentes",
-    "intro": "Não encontrou sua resposta? Pergunte ao chat no fim desta página ou escreva para o endereço da política de privacidade.",
-    "description": "Respostas sobre a prepza: como as entrevistas são criadas a partir de uma descrição de vaga, o que os candidatos veem, preços e créditos, resultados, integrações com ATS, idiomas e seus dados.",
-    "chat": {
-      "title": "Pergunte sobre a prepza",
-      "text": "Perguntas sobre recursos, preços, pagamentos, os termos ou a privacidade. A IA responde com base nos documentos da prepza. As respostas são escritas por IA e podem conter erros. O que vale é a página de preços, os termos e a política de privacidade.",
-      "placeholder": "Faça uma pergunta sobre a prepza…",
-      "failed": "Não foi possível obter uma resposta. Tente novamente."
-    }
+    "intro": "Não encontrou sua resposta? Pergunte ao assistente de IA (o botão no topo da página) ou escreva para o endereço da política de privacidade.",
+    "description": "Respostas sobre a prepza: como as entrevistas são criadas a partir de uma descrição de vaga, o que os candidatos veem, preços e créditos, resultados, integrações com ATS, idiomas e seus dados."
   },
   "contact": {
     "title": "Fale conosco",

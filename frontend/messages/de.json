@@ -913,14 +913,8 @@
   },
   "faq": {
     "title": "Häufige Fragen",
-    "intro": "Keine Antwort gefunden? Frag den Chat unten auf dieser Seite oder schreib uns an die Adresse in der Datenschutzerklärung.",
-    "description": "Antworten zu prepza: wie Interviews aus einer Stellenbeschreibung entstehen, was Kandidaten sehen, Preise und Credits, Ergebnisse, ATS-Integrationen, Sprachen und deine Daten.",
-    "chat": {
-      "title": "Frag zu prepza",
-      "text": "Fragen zu Funktionen, Preisen, Zahlungen, den Bedingungen oder dem Datenschutz. Die KI antwortet aus prepzas eigenen Dokumenten. Die Antworten schreibt eine KI, sie können falsch sein. Maßgeblich sind die Preisseite, die Bedingungen und die Datenschutzerklärung.",
-      "placeholder": "Stell eine Frage zu prepza…",
-      "failed": "Gerade keine Antwort möglich. Bitte versuche es erneut."
-    }
+    "intro": "Keine Antwort gefunden? Frag den KI-Assistenten (die Schaltfläche oben auf der Seite) oder schreib uns an die Adresse in der Datenschutzerklärung.",
+    "description": "Antworten zu prepza: wie Interviews aus einer Stellenbeschreibung entstehen, was Kandidaten sehen, Preise und Credits, Ergebnisse, ATS-Integrationen, Sprachen und deine Daten."
   },
   "contact": {
     "title": "Kontakt",

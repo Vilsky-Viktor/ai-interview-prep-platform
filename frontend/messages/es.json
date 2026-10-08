@@ -913,14 +913,8 @@
   },
   "faq": {
     "title": "Preguntas frecuentes",
-    "intro": "¿No encuentras tu respuesta? Pregunta al chat al final de esta página o escríbenos a la dirección de la política de privacidad.",
-    "description": "Respuestas sobre prepza: cómo se crean las entrevistas a partir de una oferta de empleo, qué ven los candidatos, precios y créditos, resultados, integraciones con ATS, idiomas y tus datos.",
-    "chat": {
-      "title": "Pregunta sobre prepza",
-      "text": "Preguntas sobre funciones, precios, pagos, los términos o la privacidad. La IA responde con los documentos de prepza. Las respuestas las escribe una IA y pueden tener errores. Lo que vale es la página de precios, los términos y la política de privacidad.",
-      "placeholder": "Haz una pregunta sobre prepza…",
-      "failed": "No se pudo obtener una respuesta. Inténtalo de nuevo."
-    }
+    "intro": "¿No encuentras tu respuesta? Pregunta al asistente de IA (el botón de la parte superior de la página) o escríbenos a la dirección de la política de privacidad.",
+    "description": "Respuestas sobre prepza: cómo se crean las entrevistas a partir de una oferta de empleo, qué ven los candidatos, precios y créditos, resultados, integraciones con ATS, idiomas y tus datos."
   },
   "contact": {
     "title": "Contáctanos",

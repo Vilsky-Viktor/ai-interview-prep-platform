@@ -912,14 +912,8 @@
   },
   "faq": {
     "title": "Sıkça sorulan sorular",
-    "intro": "Yanıtınızı bulamadınız mı? Bu sayfanın sonundaki sohbete sorun ya da gizlilik politikasındaki adrese yazın.",
-    "description": "prepza hakkında yanıtlar: mülakatlar iş tanımından nasıl hazırlanır, adaylar ne görür, fiyatlar ve krediler, sonuçlar, ATS entegrasyonları, diller ve verileriniz.",
-    "chat": {
-      "title": "prepza hakkında sorun",
-      "text": "Özellikler, fiyatlar, ödemeler, koşullar veya gizlilik hakkında sorular. Yapay zekâ, prepza’nın kendi belgelerine göre yanıtlar. Yanıtları yapay zekâ yazar ve hatalı olabilir. Geçerli olan fiyatlar sayfası, koşullar ve gizlilik politikasıdır.",
-      "placeholder": "prepza hakkında bir soru sorun…",
-      "failed": "Şu anda yanıt alınamadı. Lütfen tekrar deneyin."
-    }
+    "intro": "Yanıtınızı bulamadınız mı? Yapay zekâ asistanına sorun (sayfanın üstündeki düğme) ya da gizlilik politikasındaki adrese yazın.",
+    "description": "prepza hakkında yanıtlar: mülakatlar iş tanımından nasıl hazırlanır, adaylar ne görür, fiyatlar ve krediler, sonuçlar, ATS entegrasyonları, diller ve verileriniz."
   },
   "contact": {
     "title": "Bize ulaşın",

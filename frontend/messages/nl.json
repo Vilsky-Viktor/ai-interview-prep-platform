@@ -909,14 +909,8 @@
   },
   "faq": {
     "title": "Veelgestelde vragen",
-    "intro": "Staat je antwoord er niet bij? Vraag het de chat onderaan deze pagina, of schrijf ons op het adres in het privacybeleid.",
-    "description": "Antwoorden over prepza: hoe interviews uit een vacaturetekst ontstaan, wat kandidaten zien, prijzen en credits, resultaten, ATS-koppelingen, talen en je gegevens.",
-    "chat": {
-      "title": "Vraag over prepza",
-      "text": "Vragen over functies, prijzen, betalingen, de voorwaarden of privacy. De AI antwoordt op basis van prepza’s eigen documenten. Antwoorden worden door AI geschreven en kunnen fout zijn. De prijspagina, de voorwaarden en het privacybeleid zijn bepalend.",
-      "placeholder": "Stel een vraag over prepza…",
-      "failed": "Er kon nu geen antwoord worden opgehaald. Probeer het opnieuw."
-    }
+    "intro": "Staat je antwoord er niet bij? Vraag het de AI-assistent (de knop bovenaan de pagina), of schrijf ons op het adres in het privacybeleid.",
+    "description": "Antwoorden over prepza: hoe interviews uit een vacaturetekst ontstaan, wat kandidaten zien, prijzen en credits, resultaten, ATS-koppelingen, talen en je gegevens."
   },
   "contact": {
     "title": "Neem contact op",

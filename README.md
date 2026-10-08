@@ -54,7 +54,7 @@ Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emula
 | [Notifications and emails](docs/features/notifications.md) | The bell, emails, Slack, setting up Resend and Slack |
 | [In-app assistant](docs/features/assistant.md) | Answers about a user's companies and about prepza, its limits, retention and tools |
 | [Admin zone](docs/features/admin-zone.md) | Superadmins' templates, news, quality, pass rates, stats, pause and maintenance mode |
-| [Public site](docs/features/site.md) | Home page, skills tests, articles, FAQ and help chat, legal pages, contact, SEO |
+| [Public site](docs/features/site.md) | Home page, skills tests, articles, FAQ, legal pages, contact, SEO |
 | [Languages](docs/features/languages.md) | The 23 languages, language addresses, fonts, right-to-left |
 
 ### Engineering

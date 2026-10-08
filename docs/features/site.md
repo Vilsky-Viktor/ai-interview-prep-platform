@@ -71,11 +71,14 @@ The articles are `/pre-employment-testing`, `/ai-interviews`, `/compare` and its
 
 ## FAQ and help chat
 
-`/faq` has the common questions, in the interface language, with today's prices. At the end is an AI help chat about prepza, open to visitors too.
+`/faq` has the common questions, in the interface language, with today's prices; its intro points to the assistant ("ask agent" in the header) for anything else.
+
+The help chat (rounds' `POST /help/chat`) answers signed-out visitors in the [assistant's panel](assistant.md#the-panel):
 
 - It answers only from the platform guide, the FAQ, the prices, the terms and the privacy policy.
 - It answers in the page's language.
-- Nothing of the conversation is stored.
+- Nothing of the conversation is stored: the panel sends it whole each time.
+- A visitor asking to sign in or sign up gets a sign-in card in the panel (the site's own sign-in buttons, the way they named first): the model starts its reply with a `[[sign_in:<provider>]]` marker, which the service turns into a `{"block": {"kind": "sign_in", "provider"}}` event.
 - The same knowledge, with the FAQ in the page's language, is served as text at `GET /api/rounds/help/guide` (public, kept for 5 minutes per language); the in-app assistant reads it to answer questions about prepza.
 
 | Limit | Where it's set | Value |

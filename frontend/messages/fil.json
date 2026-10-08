@@ -917,14 +917,8 @@
   },
   "faq": {
     "title": "Mga madalas itanong",
-    "intro": "Hindi mo makita ang sagot? Itanong sa chat sa dulo ng page na ito, o sumulat sa amin sa address na nasa privacy policy.",
-    "description": "Mga sagot tungkol sa prepza: paano ginagawa ang interview mula sa job description, ano ang nakikita ng mga aplikante, presyo at credits, resulta, ATS integration, mga wika at ang data mo.",
-    "chat": {
-      "title": "Magtanong tungkol sa prepza",
-      "text": "Mga tanong tungkol sa features, presyo, bayad, terms, o privacy. Sumasagot ang AI batay sa sariling mga dokumento ng prepza. AI ang sumusulat ng mga sagot at puwedeng magkamali. Ang pricing page, terms, at privacy policy ang masusunod.",
-      "placeholder": "Magtanong tungkol sa prepza…",
-      "failed": "Hindi makakuha ng sagot ngayon. Pakisubukang muli."
-    }
+    "intro": "Hindi mo makita ang sagot? Itanong sa AI assistant (ang button sa itaas ng page), o sumulat sa amin sa address na nasa privacy policy.",
+    "description": "Mga sagot tungkol sa prepza: paano ginagawa ang interview mula sa job description, ano ang nakikita ng mga aplikante, presyo at credits, resulta, ATS integration, mga wika at ang data mo."
   },
   "contact": {
     "title": "Makipag-ugnayan sa amin",

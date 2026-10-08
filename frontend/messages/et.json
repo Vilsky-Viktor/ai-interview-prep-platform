@@ -917,14 +917,8 @@
   },
   "faq": {
     "title": "Korduma kippuvad küsimused",
-    "intro": "Ei leidnud vastust? Küsi selle lehe lõpus olevas vestlusaknas või kirjuta meile privaatsuspoliitikas toodud aadressil.",
-    "description": "Vastused prepza kohta: kuidas intervjuud töökuulutusest luuakse, mida kandidaadid näevad, hinnad ja krediidid, tulemused, ATS-i liidesed, keeled ja sinu andmed.",
-    "chat": {
-      "title": "Küsi prepza kohta",
-      "text": "Küsimused funktsioonide, hindade, maksete, tingimuste või privaatsuse kohta. Tehisaru vastab prepza enda dokumentide põhjal. Vastused kirjutab tehisaru ja need võivad olla valed. Kehtivad hinnaleht, tingimused ja privaatsuspoliitika.",
-      "placeholder": "Esita küsimus prepza kohta…",
-      "failed": "Praegu ei õnnestunud vastust saada. Proovi uuesti."
-    }
+    "intro": "Ei leidnud vastust? Küsi tehisaru assistendilt (nupp lehe ülaosas) või kirjuta meile privaatsuspoliitikas toodud aadressil.",
+    "description": "Vastused prepza kohta: kuidas intervjuud töökuulutusest luuakse, mida kandidaadid näevad, hinnad ja krediidid, tulemused, ATS-i liidesed, keeled ja sinu andmed."
   },
   "contact": {
     "title": "Võta meiega ühendust",

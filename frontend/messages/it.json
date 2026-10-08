@@ -913,14 +913,8 @@
   },
   "faq": {
     "title": "Domande frequenti",
-    "intro": "Non trovi la risposta? Chiedi alla chat in fondo a questa pagina o scrivici all’indirizzo indicato nell’informativa sulla privacy.",
-    "description": "Risposte su prepza: come i colloqui nascono da un annuncio di lavoro, cosa vedono i candidati, prezzi e crediti, risultati, integrazioni con gli ATS, lingue e i tuoi dati.",
-    "chat": {
-      "title": "Chiedi di prepza",
-      "text": "Domande su funzioni, prezzi, pagamenti, termini o privacy. L’IA risponde in base ai documenti di prepza. Le risposte sono scritte da un’IA e possono essere sbagliate. Valgono la pagina dei prezzi, i termini e l’informativa sulla privacy.",
-      "placeholder": "Fai una domanda su prepza…",
-      "failed": "Impossibile ottenere una risposta ora. Riprova."
-    }
+    "intro": "Non trovi la risposta? Chiedi all’assistente IA (il pulsante in alto nella pagina) o scrivici all’indirizzo indicato nell’informativa sulla privacy.",
+    "description": "Risposte su prepza: come i colloqui nascono da un annuncio di lavoro, cosa vedono i candidati, prezzi e crediti, risultati, integrazioni con gli ATS, lingue e i tuoi dati."
   },
   "contact": {
     "title": "Contattaci",

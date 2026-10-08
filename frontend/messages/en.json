@@ -913,14 +913,8 @@
   },
   "faq": {
     "title": "Frequently asked questions",
-    "intro": "Can't find your answer? Ask the chat at the end of this page, or write to us at the address in the privacy policy.",
-    "description": "Answers about prepza: how interviews are made from a job description, what candidates see, prices and credits, results, ATS integrations, languages and your data.",
-    "chat": {
-      "title": "Ask about prepza",
-      "text": "Questions about features, prices, billing, the terms or privacy. The AI answers from prepza's own documents but can be wrong; the pricing page, terms and privacy policy are what count.",
-      "placeholder": "Ask a question about prepza…",
-      "failed": "Couldn't get an answer right now. Please try again."
-    }
+    "intro": "Can't find your answer? Ask the AI assistant (the button at the top of the page), or write to us at the address in the privacy policy.",
+    "description": "Answers about prepza: how interviews are made from a job description, what candidates see, prices and credits, results, ATS integrations, languages and your data."
   },
   "contact": {
     "title": "Contact us",

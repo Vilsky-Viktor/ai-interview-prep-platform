@@ -909,14 +909,8 @@
   },
   "faq": {
     "title": "Câu hỏi thường gặp",
-    "intro": "Không tìm thấy câu trả lời? Hãy hỏi khung chat cuối trang này, hoặc viết cho chúng tôi theo địa chỉ trong chính sách quyền riêng tư.",
-    "description": "Giải đáp về prepza: cách tạo buổi phỏng vấn từ mô tả công việc, ứng viên thấy gì, giá và credit, kết quả, tích hợp ATS, ngôn ngữ và dữ liệu của bạn.",
-    "chat": {
-      "title": "Hỏi về prepza",
-      "text": "Câu hỏi về tính năng, giá, thanh toán, điều khoản hoặc quyền riêng tư. AI trả lời dựa trên tài liệu của chính prepza. Câu trả lời do AI viết và có thể sai. Trang bảng giá, điều khoản và chính sách quyền riêng tư mới là căn cứ.",
-      "placeholder": "Đặt câu hỏi về prepza…",
-      "failed": "Hiện chưa lấy được câu trả lời. Vui lòng thử lại."
-    }
+    "intro": "Không tìm thấy câu trả lời? Hãy hỏi trợ lý AI (nút ở đầu trang), hoặc viết cho chúng tôi theo địa chỉ trong chính sách quyền riêng tư.",
+    "description": "Giải đáp về prepza: cách tạo buổi phỏng vấn từ mô tả công việc, ứng viên thấy gì, giá và credit, kết quả, tích hợp ATS, ngôn ngữ và dữ liệu của bạn."
   },
   "contact": {
     "title": "Liên hệ với chúng tôi",

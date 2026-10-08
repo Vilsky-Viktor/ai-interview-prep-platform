@@ -913,14 +913,8 @@
   },
   "faq": {
     "title": "Pertanyaan yang sering diajukan",
-    "intro": "Tidak menemukan jawabannya? Tanyakan ke chat di akhir halaman ini, atau kirim pesan ke alamat di kebijakan privasi.",
-    "description": "Jawaban tentang prepza: cara wawancara dibuat dari deskripsi pekerjaan, apa yang dilihat kandidat, harga dan kredit, hasil, integrasi ATS, bahasa, dan data Anda.",
-    "chat": {
-      "title": "Tanya tentang prepza",
-      "text": "Pertanyaan tentang fitur, harga, pembayaran, ketentuan, atau privasi. AI menjawab berdasarkan dokumen prepza sendiri. Jawaban ditulis oleh AI dan bisa salah. Yang berlaku adalah halaman harga, ketentuan, dan kebijakan privasi.",
-      "placeholder": "Ajukan pertanyaan tentang prepza…",
-      "failed": "Jawaban tidak bisa didapat sekarang. Coba lagi."
-    }
+    "intro": "Tidak menemukan jawabannya? Tanyakan ke asisten AI (tombol di bagian atas halaman), atau kirim pesan ke alamat di kebijakan privasi.",
+    "description": "Jawaban tentang prepza: cara wawancara dibuat dari deskripsi pekerjaan, apa yang dilihat kandidat, harga dan kredit, hasil, integrasi ATS, bahasa, dan data Anda."
   },
   "contact": {
     "title": "Hubungi kami",

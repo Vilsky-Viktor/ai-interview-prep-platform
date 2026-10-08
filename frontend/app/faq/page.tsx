@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server"
 
 import { FaqList } from "@/components/faq-list"
-import { HelpChat } from "@/components/help-chat"
 import { JsonLd } from "@/components/json-ld"
 import { publicFetch } from "@/lib/server-api"
 import { pageMetadata } from "@/lib/site"
@@ -39,7 +38,6 @@ export default async function FaqPage() {
         <p className="text-base text-muted-foreground">{t("intro")}</p>
       </header>
       <FaqList items={items} />
-      <HelpChat />
     </main>
   )
 }
