@@ -4,6 +4,8 @@ import uuid
 
 import pytest
 
+from app.models.ats import AtsConnection, AtsJobLink
+from app.services import ats as integrations
 from app.services import ats_candidates
 from app.storage import ats
 
@@ -37,6 +39,21 @@ def calls(monkeypatch):
     monkeypatch.setattr(ats_candidates, "topped_up", record("topped_up"))
     monkeypatch.setattr(ats, "delete_interview", record("delete_interview"))
     monkeypatch.setattr(ats, "delete_company", record("delete_company"))
+    monkeypatch.setattr(integrations, "unsubscribe", record("unsubscribe"))
+    monkeypatch.setattr(integrations, "release", record("release"))
+
+    async def interview_links(interview_id):
+        return []
+
+    async def connections(company_id):
+        return []
+
+    async def subscriptions(company_id):
+        return []
+
+    monkeypatch.setattr(ats, "interview_links", interview_links)
+    monkeypatch.setattr(ats, "connections", connections)
+    monkeypatch.setattr(ats, "subscriptions", subscriptions)
 
     return seen
 
@@ -59,6 +76,37 @@ def test_a_deleted_interview_or_company_deletes_its_rows(client, calls):
     push(client, "company.deleted", {"company_id": str(COMPANY_ID)})
 
     assert calls == [("delete_interview", INTERVIEW_ID), ("delete_company", COMPANY_ID)]
+
+
+def test_what_prepza_set_up_in_the_ats_is_cancelled_before_the_rows_go(client, calls, monkeypatch):
+    workable = AtsConnection(id=uuid.uuid4(), provider="workable")
+    breezy = AtsConnection(id=uuid.uuid4(), provider="breezy")
+    linked = AtsJobLink(id=uuid.uuid4(), subscription_id="sub-1")
+    unsubscribed = AtsJobLink(id=uuid.uuid4(), subscription_id=None)
+
+    async def interview_links(interview_id):
+        return [(linked, workable), (unsubscribed, workable)]
+
+    async def connections(company_id):
+        return [workable, breezy]
+
+    async def subscriptions(company_id):
+        return ["sub-1", "sub-2"]
+
+    monkeypatch.setattr(ats, "interview_links", interview_links)
+    monkeypatch.setattr(ats, "connections", connections)
+    monkeypatch.setattr(ats, "subscriptions", subscriptions)
+
+    push(client, "interview.deleted", {"interview_id": str(INTERVIEW_ID), "company_id": "c"})
+    push(client, "company.deleted", {"company_id": str(COMPANY_ID)})
+
+    assert calls == [
+        ("unsubscribe", workable, ["sub-1"]),
+        ("delete_interview", INTERVIEW_ID),
+        ("release", workable, ["sub-1", "sub-2"]),
+        ("release", breezy, ["sub-1", "sub-2"]),
+        ("delete_company", COMPANY_ID),
+    ]
 
 
 def test_a_company_that_got_credits_invites_its_candidates_short_of_them(client, calls):

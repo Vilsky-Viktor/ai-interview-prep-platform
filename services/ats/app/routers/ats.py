@@ -52,8 +52,7 @@ async def disconnect(company_id: UUID, provider: AtsProvider, user: CurrentUser)
     connection = await ats.connection(company_id, provider)
 
     if connection is not None:
-        await integrations.unsubscribe(connection, await ats.subscriptions(company_id))
-        await integrations.remove_webhook(connection)
+        await integrations.release(connection, await ats.subscriptions(company_id))
 
     await ats.disconnect(company_id, provider)
 
@@ -127,11 +126,18 @@ async def add_link(company_id: UUID, body: JobLinkIn, user: CurrentUser) -> None
     if interview is None or UUID(interview["company_id"]) != company_id:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
-    # The names as the ATS has them now, which also checks the job and stage exist.
-    job = next(
-        (job for job in await integrations.jobs(connection) if job["id"] == body.job_id), None
-    )
-    stage_list = await integrations.stages(connection, body.job_id) if job else []
+    # The names as the ATS has them now, read for the one job, which also checks the job and
+    # stage exist (a job deleted in the ATS answers 404).
+    try:
+        found = await integrations.job(connection, body.job_id)
+        job = {"id": body.job_id, "name": found["name"]}
+        stage_list = await integrations.stages(connection, body.job_id)
+    except HTTPException as error:
+        if error.status_code != status.HTTP_404_NOT_FOUND:
+            raise
+
+        job, stage_list = None, []
+
     stage = next((stage for stage in stage_list if stage["id"] == body.stage_id), None)
 
     if job is None or stage is None:

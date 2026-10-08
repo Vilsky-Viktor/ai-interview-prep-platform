@@ -10,7 +10,7 @@ from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
 from app.services import ats as integrations
 from app.services import ats_candidates as flow
 from app.services import ats_webhooks as hooks
-from app.storage import ats, ats_candidates
+from app.storage import ats, ats_candidates, ats_results
 from tests.unit.conftest import interview
 from tests.unit.test_teamtailor import signature
 
@@ -50,6 +50,7 @@ def world(monkeypatch, companies_api):
         },
         "read": [],
         "rows": {},
+        "linked": True,
         "sent": companies_api["sent"],
     }
 
@@ -67,6 +68,9 @@ def world(monkeypatch, companies_api):
             job_id=job_id,
             stage_id="7",
         )
+
+    async def has_links(connection_id):
+        return state["linked"]
 
     async def key(found):
         return state["key"]
@@ -92,6 +96,7 @@ def world(monkeypatch, companies_api):
 
     monkeypatch.setattr(ats, "connection_by_id", connection_by_id)
     monkeypatch.setattr(ats, "link_for_job", link_for_job)
+    monkeypatch.setattr(ats, "has_links", has_links)
     monkeypatch.setattr(integrations, "credentials", key)
     monkeypatch.setattr(teamtailor, "application", application)
     monkeypatch.setattr(ats_candidates, "add", add)
@@ -163,6 +168,26 @@ def test_another_stage_or_job_or_a_candidate_without_email_isnt_invited(world, c
     assert world["sent"] == [] and world["rows"] == {}
 
 
+def test_without_a_linked_job_teamtailor_isnt_asked(world):
+    world["linked"] = False
+    receive(event())
+
+    assert world["read"] == [] and world["sent"] == []
+
+
+def test_teamtailor_busy_answers_the_event_429_to_send_it_later(world, monkeypatch):
+    async def busy(host, key, application_id):
+        raise HTTPException(429, "Teamtailor didn't answer")
+
+    monkeypatch.setattr(teamtailor, "application", busy)
+
+    with pytest.raises(HTTPException) as answered:
+        receive(event())
+
+    assert answered.value.status_code == 429
+    assert world["rows"] == {}
+
+
 def test_an_unknown_or_non_teamtailor_connection_is_ignored_even_unsigned(world):
     receive(event(), given="", connection_id=uuid.uuid4())
     world["connection"].provider = "greenhouse"
@@ -204,11 +229,15 @@ def finished(monkeypatch):
     async def comment(host, key, candidate_id, member, text):
         state["notes"].append((host, key, candidate_id, member, text))
 
+    async def claim_report(row_id):
+        return True
+
     async def mark_reported(row_id):
         state["reported"].append(row_id)
 
-    monkeypatch.setattr(ats_candidates, "for_invite", for_invite)
-    monkeypatch.setattr(ats_candidates, "mark_reported", mark_reported)
+    monkeypatch.setattr(ats_results, "for_invite", for_invite)
+    monkeypatch.setattr(ats_results, "claim", claim_report)
+    monkeypatch.setattr(ats_results, "mark_reported", mark_reported)
     monkeypatch.setattr(integrations, "credentials", key)
     monkeypatch.setattr(teamtailor, "comment", comment)
 

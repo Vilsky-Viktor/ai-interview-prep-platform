@@ -42,6 +42,15 @@ async def _call(method: str, host: str, key: str, path_or_url: str, params=None,
     if response.status_code in REJECTED:
         raise KeyRejected
 
+    # Something deleted in Teamtailor (a job, a candidate): only that is gone, not the key.
+    if response.status_code == status.HTTP_404_NOT_FOUND:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
+
+    # Too many calls for now: passed on as 429, so a web hook is answered that way (Teamtailor
+    # may send it again later) rather than as a failure of ours.
+    if response.status_code == status.HTTP_429_TOO_MANY_REQUESTS:
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, "Teamtailor didn't answer")
+
     if not response.is_success:
         raise _failed()
 

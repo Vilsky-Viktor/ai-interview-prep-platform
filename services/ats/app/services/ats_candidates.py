@@ -25,7 +25,7 @@ from app.integrations import companies
 from app.models.ats import AtsCandidate, AtsConnection
 from app.services import ats as integrations
 from app.services import outbox as outbox_service
-from app.storage import ats, ats_candidates
+from app.storage import ats, ats_candidates, ats_results
 
 logger = logging.getLogger(__name__)
 
@@ -162,7 +162,7 @@ async def recover() -> int:
     rows = await ats_candidates.recoverable()
     await invite_all(rows)
 
-    for row in await ats_candidates.unreported():
+    for row in await ats_results.unreported():
         if time.monotonic() >= stop_at:
             break
 
@@ -176,11 +176,12 @@ async def recover() -> int:
 
 async def report(data: dict) -> None:
     """A candidate the ATS sent finished (companies' candidate.finished event, or results kept
-    earlier): their results go back to the ATS as a comment, once. While the connection is
-    broken, or when the ATS fails, they're kept for the recovery job, and the event is done: a
-    company's failing ATS doesn't hold up Pub/Sub for everyone. No member to write as gives up,
-    and so does a candidate gone from the ATS. Candidates no ATS sent are ignored."""
-    found = await ats_candidates.for_invite(UUID(data["candidate_invite_id"]))
+    earlier): their results go back to the ATS as a comment, once. They're claimed first, so of
+    two events at once only one writes. While the connection is broken, or when the ATS fails,
+    they're kept (and the claim freed) for the recovery job, and the event is done: a company's
+    failing ATS doesn't hold up Pub/Sub for everyone. No member to write as gives up, and so does
+    a candidate gone from the ATS. Candidates no ATS sent are ignored."""
+    found = await ats_results.for_invite(UUID(data["candidate_invite_id"]))
 
     if found is None:
         return
@@ -189,12 +190,15 @@ async def report(data: dict) -> None:
 
     # Workable's comments need an author; Greenhouse's notes don't. Without one, nowhere to write.
     if connection.provider in NEEDS_AUTHOR and connection.member_id is None:
-        await ats_candidates.mark_reported(row.id)
+        await ats_results.mark_reported(row.id)
 
         return
 
+    if not await ats_results.claim(row.id):
+        return
+
     if connection.status != ConnectionStatus.CONNECTED or await key_of(connection) is None:
-        await ats_candidates.keep_result(row.id, data)
+        await ats_results.keep(row.id, data)
 
         return
 
@@ -219,15 +223,21 @@ async def report(data: dict) -> None:
     except (HTTPException, httpx.HTTPError) as error:
         # The candidate is gone from the ATS: nowhere to write.
         if isinstance(error, HTTPException) and error.status_code == status.HTTP_404_NOT_FOUND:
-            await ats_candidates.mark_reported(row.id)
+            await ats_results.mark_reported(row.id)
 
             return
 
         # A refused key (the connection was marked broken) or a failing ATS: kept for the
         # recovery job.
         logger.warning("Kept the results of ATS candidate %s: %r", row.id, error)
-        await ats_candidates.keep_result(row.id, data)
+        await ats_results.keep(row.id, data)
+
+        return
+    except Exception:
+        # Anything else: kept too, as the claim would stop the event's redelivery.
+        logger.exception("Kept the results of ATS candidate %s", row.id)
+        await ats_results.keep(row.id, data)
 
         return
 
-    await ats_candidates.mark_reported(row.id)
+    await ats_results.mark_reported(row.id)

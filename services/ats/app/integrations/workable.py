@@ -24,9 +24,10 @@ async def _call(
     path: str,
     params: dict | None = None,
     body: dict | None = None,
+    rejected: set[int] = REJECTED,
 ) -> dict:
-    """One call to Workable's API. A refused key raises KeyRejected; anything else that fails
-    (down, rate limited, unknown subdomain) is a 502 the caller can retry."""
+    """One call to Workable's API. A refused key raises KeyRejected; something gone, a 404;
+    anything else that fails (down, rate limited) is a 502 the caller can retry."""
     try:
         response = await http.get_client().request(
             method,
@@ -39,8 +40,12 @@ async def _call(
     except httpx.HTTPError as error:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Workable didn't answer") from error
 
-    if response.status_code in REJECTED:
+    if response.status_code in rejected:
         raise KeyRejected
+
+    # Something deleted in Workable (a job, a candidate): only that is gone, not the key.
+    if response.status_code == status.HTTP_404_NOT_FOUND:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
 
     if not response.is_success:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Workable didn't answer")
@@ -53,8 +58,10 @@ async def _get(subdomain: str, token: str, path: str, params: dict | None = None
 
 
 async def check(subdomain: str, token: str) -> None:
-    """Raises KeyRejected unless the key may read the account's jobs."""
-    await _get(subdomain, token, "/jobs", {"limit": 1})
+    """Raises KeyRejected unless the key may read the account's jobs. An account that isn't
+    there answers 404: the address is wrong, as good as a refused key."""
+    rejected = REJECTED | {status.HTTP_404_NOT_FOUND}
+    await _call("GET", subdomain, token, "/jobs", {"limit": 1}, rejected=rejected)
 
 
 async def jobs(subdomain: str, token: str) -> list[dict]:

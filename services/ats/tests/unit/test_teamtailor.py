@@ -3,6 +3,7 @@ import base64
 import hashlib
 import hmac
 import json
+import time
 
 import httpx
 import pytest
@@ -241,7 +242,8 @@ def test_a_note_goes_on_the_candidate_as_the_user(api):
     }
 
 
-def signature(secret: str, body: bytes, timestamp="1700000000") -> str:
+def signature(secret: str, body: bytes, timestamp: str | None = None) -> str:
+    timestamp = timestamp or str(int(time.time()))
     signed = timestamp.encode() + b"." + body
     digest = hmac.new(secret.encode(), signed, hashlib.sha256).hexdigest()
 
@@ -257,6 +259,25 @@ def test_only_bodies_signed_with_the_signature_key_count():
     assert not teamtailor_signed("secret", body + b" ", given)
 
 
+@pytest.mark.parametrize("age", [301, -301, 3600])
+def test_a_signature_older_than_five_minutes_or_from_the_future_doesnt_count(age):
+    body = b'{"event_name": "job_application.update"}'
+
+    assert teamtailor_signed("secret", body, signature("secret", body, str(int(time.time()) - 290)))
+    assert not teamtailor_signed(
+        "secret", body, signature("secret", body, str(int(time.time()) - age))
+    )
+
+
+def test_too_many_calls_are_answered_429_not_as_a_failure(api):
+    api["answers"]["/v1/job-applications/55"] = 429
+
+    with pytest.raises(HTTPException) as busy:
+        asyncio.run(teamtailor.application(HOST, "k", "55"))
+
+    assert busy.value.status_code == 429
+
+
 @pytest.mark.parametrize(
     "given",
     [
@@ -265,6 +286,7 @@ def test_only_bodies_signed_with_the_signature_key_count():
         base64.b64encode(b"\xff\xfe").decode(),
         base64.b64encode(b"t=1").decode(),
         base64.b64encode(b"v2=abc").decode(),
+        base64.b64encode(b"t=soon,v2=abc").decode(),
     ],
 )
 def test_a_broken_or_incomplete_signature_counts_as_unsigned(given):
@@ -274,3 +296,12 @@ def test_a_broken_or_incomplete_signature_counts_as_unsigned(given):
 def test_teamtailor_has_its_client():
     assert ats_clients.client("teamtailor") is teamtailor
     assert teamtailor.KEYS == ("host", "key")
+
+
+def test_a_job_deleted_in_teamtailor_is_a_404_not_a_failure(api):
+    api["answers"]["/v1/jobs/101"] = 404
+
+    with pytest.raises(HTTPException) as gone:
+        asyncio.run(teamtailor.job(HOST, "key", "101"))
+
+    assert gone.value.status_code == 404

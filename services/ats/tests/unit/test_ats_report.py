@@ -10,7 +10,7 @@ from app.integrations.errors import KeyRejected
 from app.models.ats import AtsCandidate, AtsConnection
 from app.services import ats as integrations
 from app.services import ats_candidates as flow
-from app.storage import ats, ats_candidates
+from app.storage import ats, ats_results
 
 INTERVIEW_ID = uuid.uuid4()
 COMPANY_ID = uuid.uuid4()
@@ -23,12 +23,21 @@ KEYS = {
 @pytest.fixture
 def finished(monkeypatch):
     """A candidate the ATS sent who finished with 82%, and comments (Workable) or notes
-    (Greenhouse) recorded instead of sent. The connection is Workable's, with a member."""
+    (Greenhouse) recorded instead of sent. The connection is Workable's, with a member. A claim
+    holds until the results are kept, as in the database."""
     connection = AtsConnection(
         id=uuid.uuid4(), provider="workable", status="connected", member_id="m-1"
     )
     row = AtsCandidate(id=uuid.uuid4(), candidate_id="c-1", invite_id=uuid.uuid4())
-    state = {"comments": [], "reported": [], "broken": [], "kept": [], "fail": None, "row": row}
+    state = {
+        "comments": [],
+        "reported": [],
+        "broken": [],
+        "kept": [],
+        "claimed": set(),
+        "fail": None,
+        "row": row,
+    }
 
     async def for_invite(invite_id):
         return (row, connection) if invite_id == row.invite_id else None
@@ -37,10 +46,21 @@ def finished(monkeypatch):
         return KEYS[found.provider]
 
     async def comment(candidate_id, member, text, **credentials):
+        # A slow ATS: a second event can arrive meanwhile.
+        await asyncio.sleep(0)
+
         if state["fail"]:
             raise state["fail"]
 
         state["comments"].append((candidate_id, member, text))
+
+    async def claim_report(row_id):
+        if row_id in state["claimed"]:
+            return False
+
+        state["claimed"].add(row_id)
+
+        return True
 
     async def mark_reported(row_id):
         state["reported"].append(row_id)
@@ -49,11 +69,13 @@ def finished(monkeypatch):
         state["broken"].append(connection_id)
 
     async def keep_result(row_id, data):
+        state["claimed"].discard(row_id)
         state["kept"].append((row_id, data))
 
-    monkeypatch.setattr(ats_candidates, "for_invite", for_invite)
-    monkeypatch.setattr(ats_candidates, "mark_reported", mark_reported)
-    monkeypatch.setattr(ats_candidates, "keep_result", keep_result)
+    monkeypatch.setattr(ats_results, "for_invite", for_invite)
+    monkeypatch.setattr(ats_results, "claim", claim_report)
+    monkeypatch.setattr(ats_results, "mark_reported", mark_reported)
+    monkeypatch.setattr(ats_results, "keep", keep_result)
     monkeypatch.setattr(ats, "mark_broken", mark_broken)
     monkeypatch.setattr(integrations, "credentials", key)
     monkeypatch.setattr(workable, "comment", comment)
@@ -165,4 +187,29 @@ def test_results_go_back_to_greenhouse_as_a_note_without_a_member(finished):
     [(candidate_id, member, text)] = state["comments"]
     assert (candidate_id, member) == ("c-1", None)
     assert "the grade is on the scorecard" in text
+    assert state["reported"] == [state["row"].id]
+
+
+def test_two_events_at_once_write_the_results_once(finished):
+    state, _ = finished
+    data = result(state["row"].invite_id)
+
+    async def both():
+        await asyncio.gather(flow.report(data), flow.report(data))
+
+    asyncio.run(both())
+
+    assert len(state["comments"]) == 1
+    assert state["reported"] == [state["row"].id]
+
+
+@pytest.mark.parametrize("failure", [HTTPException(status.HTTP_502_BAD_GATEWAY), ValueError()])
+def test_results_that_couldnt_go_back_are_freed_for_the_recovery_job(finished, failure):
+    state, _ = finished
+    state["fail"] = failure
+    report(state["row"].invite_id)
+    state["fail"] = None
+    report(state["row"].invite_id)
+
+    assert len(state["comments"]) == 1
     assert state["reported"] == [state["row"].id]

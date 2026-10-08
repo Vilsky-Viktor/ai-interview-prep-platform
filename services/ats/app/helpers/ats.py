@@ -3,9 +3,10 @@ import hashlib
 import hmac
 import json
 import re
+import time
 from html.parser import HTMLParser
 
-from app.constants.ats import SUBDOMAIN
+from app.constants.ats import SUBDOMAIN, TEAMTAILOR_SIGNATURE_SECONDS
 
 
 def subdomain(text: str, domain: str) -> str | None:
@@ -81,9 +82,10 @@ def greenhouse_signed(secret: str, body: bytes, signature: str) -> bool:
 
 
 def teamtailor_signed(secret: str, body: bytes, signature: str) -> bool:
-    """Whether a Teamtailor web hook is Teamtailor's: its TT-Signature is base64 of
+    """Whether a Teamtailor web hook is Teamtailor's, and new: its TT-Signature is base64 of
     "t=<timestamp>,v2=<hex>", the HMAC-SHA256 of "<timestamp>.<raw body>" with the signature key
-    Teamtailor gave the web hook."""
+    Teamtailor gave the web hook, signed within TEAMTAILOR_SIGNATURE_SECONDS of now (an older one
+    is a replay)."""
     try:
         parts = dict(
             part.split("=", 1)
@@ -93,7 +95,10 @@ def teamtailor_signed(secret: str, body: bytes, signature: str) -> bool:
     except ValueError:
         return False
 
-    if "t" not in parts or "v2" not in parts:
+    if "t" not in parts or "v2" not in parts or not parts["t"].isdigit():
+        return False
+
+    if abs(time.time() - int(parts["t"])) > TEAMTAILOR_SIGNATURE_SECONDS:
         return False
 
     signed = parts["t"].encode() + b"." + body

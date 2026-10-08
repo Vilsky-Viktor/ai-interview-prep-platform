@@ -11,7 +11,7 @@ from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
 from app.services import ats as integrations
 from app.services import ats_candidates as flow
 from app.services import ats_webhooks as hooks
-from app.storage import ats, ats_candidates
+from app.storage import ats, ats_candidates, ats_results
 from tests.unit.conftest import interview
 from tests.unit.test_breezy import signature
 
@@ -231,11 +231,15 @@ def finished(monkeypatch):
     async def comment(company, token, candidate_id, member, text):
         state["notes"].append((company, token, candidate_id, member, text))
 
+    async def claim_report(row_id):
+        return True
+
     async def mark_reported(row_id):
         state["reported"].append(row_id)
 
-    monkeypatch.setattr(ats_candidates, "for_invite", for_invite)
-    monkeypatch.setattr(ats_candidates, "mark_reported", mark_reported)
+    monkeypatch.setattr(ats_results, "for_invite", for_invite)
+    monkeypatch.setattr(ats_results, "claim", claim_report)
+    monkeypatch.setattr(ats_results, "mark_reported", mark_reported)
     monkeypatch.setattr(integrations, "credentials", key)
     monkeypatch.setattr(breezy, "comment", comment)
 

@@ -1,7 +1,7 @@
 import uuid
 
 from app.constants.ats import AtsProvider, CandidateStatus, FailReason
-from app.storage import ats, ats_candidates
+from app.storage import ats, ats_candidates, ats_results
 
 JOB = {"id": "A1", "name": "Accountant"}
 STAGE = {"id": "assessment", "name": "Assessment"}
@@ -96,12 +96,12 @@ def test_results_kept_while_broken_are_found_once_reconnected_and_sent_once(run)
         row = await ats_candidates.add(connection.id, None, uuid.uuid4(), "c-1", "a@x.com")
         await ats_candidates.settle(row.id, CandidateStatus.INVITED, invite_id=invite)
         await ats.mark_broken(connection.id)
-        await ats_candidates.keep_result(row.id, {"candidate_invite_id": str(invite)})
-        results = [await ats_candidates.unreported()]
+        await ats_results.keep(row.id, {"candidate_invite_id": str(invite)})
+        results = [await ats_results.unreported()]
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed-2", "ann", "m-1")
-        results.append(await ats_candidates.unreported())
-        await ats_candidates.mark_reported(row.id)
-        results.append(await ats_candidates.unreported())
+        results.append(await ats_results.unreported())
+        await ats_results.mark_reported(row.id)
+        results.append(await ats_results.unreported())
         await ats.delete_company(company)
         mine = [[item.result for item in found if item.id == row.id] for found in results]
 
@@ -124,13 +124,13 @@ def test_results_an_ats_keeps_refusing_go_to_the_back_of_the_line(run):
         ]
 
         for row in rows:
-            await ats_candidates.keep_result(row.id, {"name": row.candidate_id})
+            await ats_results.keep(row.id, {"name": row.candidate_id})
 
         # The first one's ATS refused it again: kept again, so it's tried after the second.
-        await ats_candidates.keep_result(rows[0].id, {"name": "first"})
+        await ats_results.keep(rows[0].id, {"name": "first"})
         found = [
             item.candidate_id
-            for item in await ats_candidates.unreported()
+            for item in await ats_results.unreported()
             if item.connection_id == connection.id
         ]
         await ats.delete_company(company)

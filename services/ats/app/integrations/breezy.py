@@ -28,6 +28,10 @@ async def _call(method: str, token: str, path: str, params=None, body=None):
     if response.status_code in REJECTED:
         raise KeyRejected
 
+    # Something deleted in Breezy HR (a job, a candidate): only that is gone, not the key.
+    if response.status_code == status.HTTP_404_NOT_FOUND:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
+
     if not response.is_success:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Breezy HR didn't answer")
 

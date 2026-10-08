@@ -13,3 +13,15 @@ def test_every_migration_ran_on_a_fresh_database(run):
             ).scalar()
 
     assert run(current()) == ScriptDirectory.from_config(Config("alembic.ini")).get_current_head()
+
+
+def test_candidates_are_indexed_by_email_and_age(run):
+    from app.storage.db import engine
+
+    async def indexes():
+        async with engine.connect() as connection:
+            query = text("SELECT indexname FROM pg_indexes WHERE tablename = 'ats_candidates'")
+
+            return set((await connection.execute(query)).scalars())
+
+    assert {"ix_ats_candidates_email", "ix_ats_candidates_created_at"} <= run(indexes())

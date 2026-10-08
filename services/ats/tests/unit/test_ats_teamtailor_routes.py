@@ -176,3 +176,15 @@ def test_the_web_hook_answers_only_what_the_signature_key_signed(client, stored)
     assert client.post(url, content=body).status_code == 401
     # An address no connection has is answered, so Teamtailor doesn't keep sending.
     assert client.post(f"/webhooks/teamtailor/{uuid.uuid4()}", content=body).status_code == 200
+
+
+def test_a_reconnect_after_the_encryption_key_changed_works_without_the_old_signature_key(
+    client, stored
+):
+    connect(client)
+    save_key(client, "signature-key")
+    # Sealed with an encryption key that's gone.
+    stored["connection"].credentials = Fernet(Fernet.generate_key()).encrypt(b"{}").decode()
+
+    assert connect(client).status_code == 204
+    assert saved(stored) == {"host": HOST, "key": "good"}

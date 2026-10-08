@@ -99,8 +99,9 @@ async def receive_greenhouse(connection_id: UUID, body: bytes, signature: str) -
 async def receive_teamtailor(connection_id: UUID, body: bytes, signature: str) -> None:
     """A Teamtailor web hook: a candidate whose application is now in a linked job's stage gets
     the interview. Only events signed with the signature key the company saved count (none
-    count before it's saved). The event only says an application changed, so the application is
-    read from Teamtailor: its job, stage and candidate as they are now."""
+    count before it's saved), and only recent ones. The event only says an application changed,
+    so the application is read from Teamtailor: its job, stage and candidate as they are now.
+    When Teamtailor answers that read with 429 (too many calls), so is the event."""
     connection = await ats.connection_by_id(connection_id)
 
     if connection is None or connection.provider != AtsProvider.TEAMTAILOR:
@@ -122,6 +123,10 @@ async def receive_teamtailor(connection_id: UUID, body: bytes, signature: str) -
     changed = event.get("data") or {}
 
     if event.get("event_name") not in TEAMTAILOR_EVENTS or not changed.get("id"):
+        return
+
+    # Teamtailor sends every application's changes: read only while a job is linked.
+    if not await ats.has_links(connection.id):
         return
 
     found = await integrations.call(connection, "application", application_id=str(changed["id"]))

@@ -1,7 +1,7 @@
 import asyncio
 import uuid
 
-from app.integrations import greenhouse
+from app.integrations import greenhouse, workable
 from app.models.ats import AtsConnection
 from app.services import ats as integrations
 
@@ -23,3 +23,22 @@ def test_a_client_gets_only_its_own_credentials_not_the_web_hooks_secret(monkeyp
 
     assert asyncio.run(integrations.jobs(connection)) == [{"id": "7", "name": "Accountant"}]
     assert asked == [("id", "secret", "/jobs")]
+
+
+def test_only_a_workable_connection_cancels_workable_subscriptions(monkeypatch):
+    connection = AtsConnection(id=uuid.uuid4(), provider="greenhouse", status="connected")
+    cancelled = []
+
+    async def credentials(found):
+        return {"client_id": "id", "client_secret": "secret", "webhook_secret": "hook"}
+
+    async def unsubscribe(subdomain, token, subscription_id):
+        cancelled.append(subscription_id)
+
+    monkeypatch.setattr(integrations, "credentials", credentials)
+    monkeypatch.setattr(workable, "unsubscribe", unsubscribe)
+
+    # Disconnecting Greenhouse while Workable has linked jobs: theirs are left alone.
+    asyncio.run(integrations.unsubscribe(connection, ["sub-1"]))
+
+    assert cancelled == []

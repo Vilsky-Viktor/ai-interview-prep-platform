@@ -77,7 +77,7 @@ class AtsCandidate(Base):
     )
     # The ATS's own candidate id, and who they are.
     candidate_id: Mapped[str] = mapped_column(String(100))
-    email: Mapped[str] = mapped_column(String(320))
+    email: Mapped[str] = mapped_column(String(320), index=True)
     status: Mapped[str] = mapped_column(String(16), default=CandidateStatus.WAITING)
     # When an invite was last started (status inviting): one left too long was cut off.
     claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
@@ -97,5 +97,5 @@ class AtsCandidate(Base):
     # an ATS keeps refusing don't hold up the others.
     kept_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), index=True
     )

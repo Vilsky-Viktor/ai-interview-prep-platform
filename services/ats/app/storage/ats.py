@@ -173,6 +173,19 @@ async def link(link_id: UUID) -> tuple[AtsJobLink, AtsConnection] | None:
         return tuple(row) if row else None
 
 
+async def interview_links(interview_id: UUID) -> list[tuple[AtsJobLink, AtsConnection]]:
+    """The jobs linked to an interview, each with its connection: what to cancel in the ATS
+    when the interview goes."""
+    query = (
+        select(AtsJobLink, AtsConnection)
+        .join(AtsConnection, AtsConnection.id == AtsJobLink.connection_id)
+        .where(AtsJobLink.interview_id == interview_id)
+    )
+
+    async with Session() as session:
+        return [tuple(row) for row in (await session.execute(query)).all()]
+
+
 async def link_for_job(connection_id: UUID, job_id: str) -> AtsJobLink | None:
     query = select(AtsJobLink).where(
         AtsJobLink.connection_id == connection_id, AtsJobLink.job_id == job_id
@@ -180,6 +193,13 @@ async def link_for_job(connection_id: UUID, job_id: str) -> AtsJobLink | None:
 
     async with Session() as session:
         return await session.scalar(query)
+
+
+async def has_links(connection_id: UUID) -> bool:
+    query = select(AtsJobLink.id).where(AtsJobLink.connection_id == connection_id).limit(1)
+
+    async with Session() as session:
+        return await session.scalar(query) is not None
 
 
 async def subscriptions(company_id: UUID, link_id: UUID | None = None) -> list[str]:

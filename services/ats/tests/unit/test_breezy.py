@@ -56,7 +56,7 @@ def test_a_refused_key_is_a_rejected_key(api, refusal):
         asyncio.run(breezy.company("bad"))
 
 
-@pytest.mark.parametrize("failure", [404, 500])
+@pytest.mark.parametrize("failure", [500, 503])
 def test_a_failing_or_unreachable_breezy_is_a_502(api, failure):
     api["answers"]["/v3/companies"] = failure
 
@@ -192,3 +192,12 @@ def test_a_body_that_isnt_json_is_still_checked_as_it_came():
 def test_breezy_has_its_client():
     assert ats_clients.client("breezy") is breezy
     assert breezy.KEYS == ("company", "token")
+
+
+def test_a_position_deleted_in_breezy_is_a_404_not_a_failure(api):
+    api["answers"]["/v3/company/c1/position/p1"] = 404
+
+    with pytest.raises(HTTPException) as gone:
+        asyncio.run(breezy.job("c1", "key", "p1"))
+
+    assert gone.value.status_code == 404

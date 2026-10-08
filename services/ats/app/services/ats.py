@@ -126,9 +126,19 @@ async def remove_webhook(connection: AtsConnection) -> None:
         )
 
 
+async def release(connection: AtsConnection, subscription_ids: list[str]) -> None:
+    """What prepza set up in the ATS for a connection that goes (Workable's notifications,
+    Breezy HR's web hook): cancelled as far as the ATS answers."""
+    await unsubscribe(connection, subscription_ids)
+    await remove_webhook(connection)
+
+
 async def unsubscribe(connection: AtsConnection, subscription_ids: list[str]) -> None:
     """Cancels Workable's notifications, as far as Workable answers: a link or connection goes
-    either way, and events for it are ignored after."""
+    either way, and events for it are ignored after. Only a Workable connection has them."""
+    if connection.provider != AtsProvider.WORKABLE:
+        return
+
     for subscription_id in subscription_ids:
         try:
             subdomain, token = await workable_key(connection)

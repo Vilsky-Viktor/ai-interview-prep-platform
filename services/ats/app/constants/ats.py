@@ -66,6 +66,9 @@ REPORT_SECONDS = 30
 MAX_INVITE_ATTEMPTS = 6
 # Candidates an ATS sent are kept this long (they hold emails), like companies' candidates.
 CANDIDATE_RETENTION_DAYS = 365
+# A top-up invites again the candidates refused for lack of credits whom the ATS sent this
+# recently; older ones are left for Invite again.
+TOPPED_UP_DAYS = 30
 
 
 class FailReason(StrEnum):
@@ -107,6 +110,8 @@ TEAMTAILOR_CLOSED_JOBS = {"archived"}
 # Where a company's Teamtailor web hook sends its events, one address per connection; the company
 # pastes the signature key Teamtailor generates for it back into prepza.
 TEAMTAILOR_WEBHOOK = "{site}/api/ats/webhooks/teamtailor/{connection_id}"
+# A Teamtailor event signed longer ago than this (or this far ahead) is refused: a replay.
+TEAMTAILOR_SIGNATURE_SECONDS = 300
 # The events that can bring a candidate into a stage: an application moved, or one made there.
 TEAMTAILOR_EVENTS = {"job_application.update", "job_application.create"}
 # Recruitee's API for one company, by its subdomain (acme for acme.recruitee.com) or id.

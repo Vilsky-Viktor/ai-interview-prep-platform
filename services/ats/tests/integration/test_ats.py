@@ -1,7 +1,12 @@
 import uuid
+from datetime import UTC, datetime, timedelta
+
+from sqlalchemy import update
 
 from app.constants.ats import AtsProvider, CandidateStatus, FailReason
-from app.storage import ats, ats_candidates
+from app.models.ats import AtsCandidate
+from app.storage import ats, ats_candidates, ats_results
+from app.storage.db import Session
 
 JOB = {"id": "A1", "name": "Accountant"}
 STAGE = {"id": "assessment", "name": "Assessment"}
@@ -83,9 +88,9 @@ def test_a_candidate_is_one_row_claimed_once_counted_and_reported_once(run):
         await ats_candidates.settle(other.id, CandidateStatus.FAILED, "credits")
         counts = await ats_candidates.counts(company)
         failed = await ats_candidates.not_invited(company, link_id)
-        to_report = await ats_candidates.for_invite(invite)
-        await ats_candidates.mark_reported(first.id)
-        reported = await ats_candidates.for_invite(invite)
+        to_report = await ats_results.for_invite(invite)
+        await ats_results.mark_reported(first.id)
+        reported = await ats_results.for_invite(invite)
         await ats.delete_company(company)
 
         return first, again, claims, counts[link_id], failed, to_report, reported
@@ -181,7 +186,7 @@ def test_new_credentials_replace_only_that_connections(run):
     assert other.credentials == "sealed-g"
 
 
-def test_a_top_up_finds_only_the_companys_candidates_not_invited_for_lack_of_credits(run):
+def test_a_top_up_finds_only_the_companys_recent_linked_candidates_short_of_credits(run):
     async def scenario():
         company = uuid.uuid4()
         other_company = uuid.uuid4()
@@ -192,6 +197,10 @@ def test_a_top_up_finds_only_the_companys_candidates_not_invited_for_lack_of_cre
         workable = await ats.connection(company, AtsProvider.WORKABLE)
         greenhouse = await ats.connection(company, AtsProvider.GREENHOUSE)
         theirs = await ats.connection(other_company, AtsProvider.WORKABLE)
+        links = {
+            connection.id: await ats.add_link(connection.id, interview, JOB, STAGE)
+            for connection in (workable, greenhouse, theirs)
+        }
         rows = {
             "credits": (workable.id, CandidateStatus.FAILED, FailReason.CREDITS),
             "credits-other-ats": (greenhouse.id, CandidateStatus.FAILED, FailReason.CREDITS),
@@ -200,15 +209,28 @@ def test_a_top_up_finds_only_the_companys_candidates_not_invited_for_lack_of_cre
             "invited": (workable.id, CandidateStatus.INVITED, None),
             "waiting": (workable.id, CandidateStatus.WAITING, None),
             "other-company": (theirs.id, CandidateStatus.FAILED, FailReason.CREDITS),
+            "unlinked": (workable.id, CandidateStatus.FAILED, FailReason.CREDITS),
+            "old": (workable.id, CandidateStatus.FAILED, FailReason.CREDITS),
         }
 
         for candidate_id, (connection_id, status, reason) in rows.items():
+            link_id = None if candidate_id == "unlinked" else links[connection_id]
             row = await ats_candidates.add(
-                connection_id, None, interview, candidate_id, f"{candidate_id}@x.com"
+                connection_id, link_id, interview, candidate_id, f"{candidate_id}@x.com"
             )
 
             if status != CandidateStatus.WAITING:
                 await ats_candidates.settle(row.id, status, reason)
+
+        async with Session() as session:
+            await session.execute(
+                update(AtsCandidate)
+                .where(
+                    AtsCandidate.connection_id == workable.id, AtsCandidate.candidate_id == "old"
+                )
+                .values(created_at=datetime.now(UTC) - timedelta(days=31))
+            )
+            await session.commit()
 
         found = await ats_candidates.short_of_credits(company)
         await ats.delete_company(company)
@@ -218,4 +240,48 @@ def test_a_top_up_finds_only_the_companys_candidates_not_invited_for_lack_of_cre
 
     found = run(scenario())
 
+    # Not the candidates of an unlinked job, nor those sent more than 30 days ago.
     assert sorted(row.candidate_id for row in found) == ["credits", "credits-other-ats"]
+
+
+def test_results_are_claimed_once_until_kept(run):
+    async def scenario():
+        company = uuid.uuid4()
+        await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann", "m-1")
+        connection = await ats.connection(company, AtsProvider.WORKABLE)
+        row = await ats_candidates.add(connection.id, None, uuid.uuid4(), "c-1", "a@x.com")
+        claims = [await ats_results.claim(row.id), await ats_results.claim(row.id)]
+        await ats_results.keep(row.id, {"name": "kept"})
+        kept = [item.result for item in await ats_results.unreported() if item.id == row.id]
+        claims.append(await ats_results.claim(row.id))
+        await ats.delete_company(company)
+
+        return claims, kept
+
+    claims, kept = run(scenario())
+
+    # Two events at once: one writes. Results kept free the claim, for the recovery job.
+    assert claims == [True, False, True]
+    assert kept == [{"name": "kept"}]
+
+
+def test_an_interviews_links_and_whether_a_connection_has_any(run):
+    async def scenario():
+        company = uuid.uuid4()
+        interview = uuid.uuid4()
+        await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann")
+        await ats.connect(company, AtsProvider.TEAMTAILOR, "Acme", "sealed", "ann")
+        workable = await ats.connection(company, AtsProvider.WORKABLE)
+        teamtailor = await ats.connection(company, AtsProvider.TEAMTAILOR)
+        link_id = await ats.add_link(workable.id, interview, JOB, STAGE)
+        await ats.add_link(workable.id, uuid.uuid4(), {"id": "B2", "name": "Support"}, STAGE)
+        found = await ats.interview_links(interview)
+        has = await ats.has_links(workable.id), await ats.has_links(teamtailor.id)
+        await ats.delete_company(company)
+
+        return link_id, found, has
+
+    link_id, found, has = run(scenario())
+
+    assert [(link.id, connection.provider) for link, connection in found] == [(link_id, "workable")]
+    assert has == (True, False)

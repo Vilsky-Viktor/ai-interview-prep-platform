@@ -7,8 +7,8 @@ from sqlalchemy import and_, delete, func, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.ats import (
-    REPORT_BATCH,
     STALE_CLAIM_MINUTES,
+    TOPPED_UP_DAYS,
     CandidateStatus,
     ConnectionStatus,
     FailReason,
@@ -115,13 +115,17 @@ async def not_invited(company_id: UUID, link_id: UUID) -> list[AtsCandidate]:
 
 
 async def short_of_credits(company_id: UUID) -> list[AtsCandidate]:
-    """The company's candidates, from any ATS, that weren't invited for lack of credits: put
-    back to waiting (with their attempts reset), oldest first."""
+    """The company's candidates, from any ATS, that weren't invited for lack of credits: those
+    the ATS sent in the last TOPPED_UP_DAYS, for a job still linked, put back to waiting (with
+    their attempts reset), oldest first. An unlinked job's (no longer shown) and older ones stay
+    as they are."""
     owned = select(AtsConnection.id).where(AtsConnection.company_id == company_id)
     query = (
         update(AtsCandidate)
         .where(
             AtsCandidate.connection_id.in_(owned),
+            AtsCandidate.link_id.is_not(None),
+            AtsCandidate.created_at >= datetime.now(UTC) - timedelta(days=TOPPED_UP_DAYS),
             AtsCandidate.status == CandidateStatus.FAILED,
             AtsCandidate.reason == FailReason.CREDITS,
         )
@@ -187,61 +191,6 @@ async def waiting(interview_id: UUID) -> list[AtsCandidate]:
 
     async with Session() as session:
         return list((await session.scalars(query)).all())
-
-
-async def for_invite(invite_id: UUID) -> tuple[AtsCandidate, AtsConnection] | None:
-    """The ATS candidate an invite came from, with its connection, until its results went back."""
-    query = (
-        select(AtsCandidate, AtsConnection)
-        .join(AtsConnection, AtsConnection.id == AtsCandidate.connection_id)
-        .where(AtsCandidate.invite_id == invite_id, AtsCandidate.reported_at.is_(None))
-    )
-
-    async with Session() as session:
-        row = (await session.execute(query)).first()
-
-        return tuple(row) if row else None
-
-
-async def keep_result(row_id: UUID, data: dict) -> None:
-    """Results that can't go back now (a broken connection, a failing ATS): kept, to send."""
-    values = {"result": data, "kept_at": datetime.now(UTC)}
-    query = update(AtsCandidate).where(AtsCandidate.id == row_id).values(**values)
-
-    async with Session() as session:
-        await session.execute(query)
-        await session.commit()
-
-
-async def unreported() -> list[AtsCandidate]:
-    """Kept results of working connections, longest kept first, as many as one run sends."""
-    working = select(AtsConnection.id).where(AtsConnection.status == ConnectionStatus.CONNECTED)
-    query = (
-        select(AtsCandidate)
-        .where(
-            AtsCandidate.connection_id.in_(working),
-            AtsCandidate.result.is_not(None),
-            AtsCandidate.reported_at.is_(None),
-        )
-        .order_by(AtsCandidate.kept_at)
-        .limit(REPORT_BATCH)
-    )
-
-    async with Session() as session:
-        return list((await session.scalars(query)).all())
-
-
-async def mark_reported(row_id: UUID) -> None:
-    """Their results went back, or have nowhere to go (the candidate is gone from the ATS)."""
-    query = (
-        update(AtsCandidate)
-        .where(AtsCandidate.id == row_id)
-        .values(reported_at=datetime.now(UTC), result=None)
-    )
-
-    async with Session() as session:
-        await session.execute(query)
-        await session.commit()
 
 
 async def counts(company_id: UUID) -> dict[UUID, dict[str, int]]:

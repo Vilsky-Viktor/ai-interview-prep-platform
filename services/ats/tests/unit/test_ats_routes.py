@@ -1,8 +1,10 @@
 import uuid
 from datetime import UTC, datetime
 
+import httpx
 import pytest
 from cryptography.fernet import Fernet
+from prepza_common import http
 from prepza_common.auth import current_user
 from prepza_common.encryption import decrypt
 from prepza_common.user import User
@@ -20,6 +22,8 @@ INTERVIEW_ID = uuid.uuid4()
 THEIR_INTERVIEW = uuid.uuid4()
 JOBS = [{"id": "A1", "name": "Accountant"}]
 STAGES = [{"id": "assessment", "name": "Assessment"}]
+# Workable's real job read, which the `stored` fixture replaces.
+WORKABLE_JOB = workable.job
 
 
 def sign_in(uid):
@@ -53,7 +57,7 @@ def stored(monkeypatch, companies_api):
         INTERVIEW_ID: interview(COMPANY_ID, interview_id=INTERVIEW_ID),
         THEIR_INTERVIEW: interview(OTHER_COMPANY, "Theirs", interview_id=THEIR_INTERVIEW),
     }
-    rows = {"connection": None, "links": [], "subscriptions": [], "targets": []}
+    rows = {"connection": None, "links": [], "subscriptions": [], "targets": [], "read": []}
 
     async def connect(company_id, provider, account, credentials, user_id, member_id=None):
         rows["connection"] = AtsConnection(
@@ -104,7 +108,14 @@ def stored(monkeypatch, companies_api):
             raise workable.KeyRejected
 
     async def jobs(subdomain, token):
+        rows["read"].append("every job")
+
         return JOBS
+
+    async def job(subdomain, token, job_id):
+        rows["read"].append(job_id)
+
+        return {"name": "Accountant", "sections": []}
 
     async def stages(subdomain, token, job_id):
         return STAGES
@@ -121,6 +132,7 @@ def stored(monkeypatch, companies_api):
         monkeypatch.setattr(ats, name, fake)
     monkeypatch.setattr(workable, "check", check)
     monkeypatch.setattr(workable, "jobs", jobs)
+    monkeypatch.setattr(workable, "job", job)
     monkeypatch.setattr(workable, "stages", stages)
     monkeypatch.setattr(workable, "member_id", member_id)
     monkeypatch.setattr(workable, "subscribe", subscribe)
@@ -197,6 +209,8 @@ def test_a_job_links_to_one_of_the_companys_interviews(client, stored, key):
         == 201
     )
     assert stored["links"] == [(INTERVIEW_ID, "A1", "assessment")]
+    # Linking reads the one job, not the whole list again.
+    assert stored["read"] == ["every job", "A1"]
     # Workable notifies this link's own address, and the subscription is kept to cancel it.
     assert stored["targets"][0].startswith("http://localhost:8090/api/ats/webhooks/workable/")
     assert stored["subscriptions"] == ["sub-1"]
@@ -265,3 +279,41 @@ def test_linked_jobs_show_their_interviews_titles_from_companies(client, stored,
     ]
 
     assert titles == ["Accountant", None]
+
+
+@pytest.mark.parametrize("provider", ["workable", "teamtailor", "breezy"])
+def test_a_job_deleted_in_the_ats_isnt_linked_and_says_so(
+    client, stored, key, monkeypatch, provider
+):
+    from app.services import ats as integrations
+
+    async def credentials(connection):
+        return {
+            "subdomain": "acme",
+            "token": "good",
+            "host": "https://api.teamtailor.com",
+            "key": "k",
+            "company": "c",
+        }
+
+    def gone(request):
+        return httpx.Response(404)
+
+    api = httpx.AsyncClient(transport=httpx.MockTransport(gone))
+    sign_in("ann")
+    connect(client)
+    stored["connection"].provider = provider
+    # The ATS's own client, answering 404 for the deleted job.
+    monkeypatch.setattr(workable, "job", WORKABLE_JOB)
+    monkeypatch.setattr(integrations, "credentials", credentials)
+    monkeypatch.setattr(http, "get_client", lambda: api)
+    body = {"provider": provider, "job_id": "A1", "stage_id": "assessment"}
+
+    response = client.post(
+        f"/links?company_id={COMPANY_ID}", json={**body, "interview_id": str(INTERVIEW_ID)}
+    )
+    names = {"workable": "Workable", "teamtailor": "Teamtailor", "breezy": "Breezy HR"}
+
+    assert response.status_code == 404
+    assert response.json()["detail"] == f"That job or stage isn't in {names[provider]}"
+    assert stored["links"] == []

@@ -117,3 +117,15 @@ def test_a_jobs_stages_and_text_come_from_workable(monkeypatch):
         "name": "Accountant",
         "sections": ["<p>Close</p>", "", ""],
     }
+
+
+def test_a_job_deleted_in_workable_is_a_404_and_an_unknown_account_a_refused_key(monkeypatch):
+    answering(monkeypatch, lambda request: httpx.Response(404))
+
+    with pytest.raises(HTTPException) as gone:
+        asyncio.run(workable.job("acme", "token", "A1"))
+
+    assert gone.value.status_code == 404
+
+    with pytest.raises(workable.KeyRejected):
+        asyncio.run(workable.check("nobody", "token"))

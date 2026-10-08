@@ -1,8 +1,10 @@
+import json
 import secrets
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
+from prepza_common.encryption import decrypt
 
 from app.config.settings import settings
 from app.constants.ats import (
@@ -35,10 +37,12 @@ router = APIRouter(tags=["ats"])
 
 async def kept_secret(company_id: UUID, provider: AtsProvider) -> str | None:
     """The web hook secret key of the connection a reconnect replaces, so its web hook goes on
-    working."""
+    working. None when there's none, or its key can't be read any more (the encryption key
+    changed): the reconnect then starts afresh."""
     earlier = await ats.connection(company_id, provider)
+    opened = decrypt(settings.ats_encryption_key, earlier.credentials) if earlier else None
 
-    return (await integrations.credentials(earlier)).get("webhook_secret") if earlier else None
+    return json.loads(opened).get("webhook_secret") if opened else None
 
 
 @router.put("/workable", status_code=status.HTTP_204_NO_CONTENT)
