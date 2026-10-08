@@ -41,7 +41,6 @@ TRANSACTION_COMPLETED = "transaction.completed"
 # Refunds and chargebacks; a refund is approved after it's created, so both events matter.
 ADJUSTMENT_EVENTS = ("adjustment.created", "adjustment.updated")
 ADJUSTMENT_APPROVED = "approved"
-DELETED_OWNER = "deleted-user"
 
 # Automatic top-up: the balances (in credits) it can refill under, and the least time between two
 # automatic charges, so a webhook still on its way can't cause a second one.

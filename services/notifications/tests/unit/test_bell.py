@@ -114,4 +114,4 @@ def test_opening_the_bell_marks_everything_seen(client, monkeypatch):
 
 def test_only_services_delete_or_export_a_users_notifications(client):
     assert client.delete("/internal/users/u1").status_code in (401, 403)
-    assert client.get("/internal/users/u1/export").status_code in (401, 403)
+    assert client.post("/internal/users/u1/export").status_code in (401, 403)

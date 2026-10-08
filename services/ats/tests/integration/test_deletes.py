@@ -1,10 +1,13 @@
 import uuid
 from datetime import UTC, datetime, timedelta
 
+from prepza_common.constants import DELETED_USER
 from sqlalchemy import select, update
 
-from app.constants.ats import AtsProvider
+from app.constants.ats import AtsProvider, ConnectionStatus
+from app.integrations import companies
 from app.models.ats import AtsCandidate, AtsJobLink
+from app.services import ats_candidates as candidate_service
 from app.services.events import handle
 from app.storage import ats, ats_candidates
 from app.storage.db import Session
@@ -13,9 +16,9 @@ JOB = {"id": "A1", "name": "Accountant"}
 STAGE = {"id": "assessment", "name": "Assessment"}
 
 
-async def linked(company_id, interview_id, job=JOB):
+async def linked(company_id, interview_id, job=JOB, maker="ann"):
     """A Workable connection with one job linked to the interview and one candidate sent."""
-    await ats.connect(company_id, AtsProvider.WORKABLE, "acme", "sealed", "ann")
+    await ats.connect(company_id, AtsProvider.WORKABLE, "acme", "sealed", maker)
     connection = await ats.connection(company_id, AtsProvider.WORKABLE)
     link_id = await ats.add_link(connection.id, interview_id, job, STAGE)
     row = await ats_candidates.add(connection.id, link_id, interview_id, "c-1", "Ann@x.com")
@@ -134,3 +137,37 @@ def test_a_candidate_the_company_erased_goes_from_the_ats_record_too(run):
         return [row.email for row in left]
 
     assert run(scenario()) == ["bo@x.com"]
+
+
+def test_a_deleted_makers_connection_stays_without_their_id_and_stops_inviting(run, monkeypatch):
+    invited = []
+
+    async def invite(interview_id, email, sender_id):
+        invited.append(sender_id)
+
+        return uuid.uuid4()
+
+    monkeypatch.setattr(companies, "invite", invite)
+    maker = f"gone-{uuid.uuid4()}"
+
+    async def scenario():
+        company, interview_id = uuid.uuid4(), uuid.uuid4()
+        _, _, row = await linked(company, interview_id, maker=maker)
+        exported = await ats.made_by(maker)
+        await ats.forget_maker(maker)
+        # Safe to repeat.
+        await ats.forget_maker(maker)
+        connection = await ats.connection(company, AtsProvider.WORKABLE)
+        interview = {"company_id": str(company), "title": "Accountant", "ready": True}
+        await candidate_service.invite(row, connection, interview)
+        left = await ats.made_by(maker)
+        await ats.delete_company(company)
+
+        return exported, connection, left
+
+    exported, connection, left = run(scenario())
+
+    assert [row.account for row in exported] == ["acme"]
+    assert (connection.created_by, connection.status) == (DELETED_USER, ConnectionStatus.BROKEN)
+    assert left == []
+    assert invited == []

@@ -5,6 +5,7 @@ from sqlalchemy.orm import aliased
 
 from app.constants.invites import InviteStatus
 from app.constants.roles import Role
+from app.models.audit import AuditEvent
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
@@ -78,6 +79,12 @@ async def export(user_id: str, email: str) -> dict:
             .join(Interview, Interview.id == CandidateInvite.interview_id)
             .where(or_(CandidateInvite.user_id == user_id, CandidateInvite.email == email.lower()))
         )
+        decisions = await session.execute(
+            select(Company.name, AuditEvent.action, AuditEvent.target_id, AuditEvent.created_at)
+            .join(Company, Company.id == AuditEvent.company_id)
+            .where(AuditEvent.user_id == user_id)
+            .order_by(AuditEvent.created_at)
+        )
 
         return {
             "company_memberships": [
@@ -86,6 +93,10 @@ async def export(user_id: str, email: str) -> dict:
             "interview_invites": [
                 {"interview": title, "status": status, "invited_at": at}
                 for title, status, at in invites
+            ],
+            "company_decisions": [
+                {"company": name, "action": action, "target_id": target_id, "at": at}
+                for name, action, target_id, at in decisions
             ],
         }
 

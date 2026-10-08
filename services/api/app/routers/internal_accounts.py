@@ -8,14 +8,14 @@ router = APIRouter(prefix="/internal", tags=["internal"], include_in_schema=Fals
 
 
 @router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_user(user_id: str, email: str, caller: ServiceCaller) -> None:
+async def delete_user(user_id: str, caller: ServiceCaller) -> None:
     """Library, deleting an account: the keys and web hooks they made go."""
     await keys.remove_user(user_id)
     await webhooks.remove_user(user_id)
 
 
-@router.get("/users/{user_id}/export")
-async def export_user(user_id: str, email: str, caller: ServiceCaller) -> dict:
+@router.post("/users/{user_id}/export")
+async def export_user(user_id: str, caller: ServiceCaller) -> dict:
     """Library, for "Download my data": the keys (names only) and web hooks they made."""
     return jsonable_encoder(
         {

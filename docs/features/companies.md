@@ -60,7 +60,7 @@ The companies service records the human decisions taken in a company, as evidenc
 | Extra time set | A member gives a candidate extra time |
 | Pass mark changed | A member changes an interview's pass mark |
 
-Only the owner can read the log, newest first, through `GET /companies/{id}/audit`; the app has no page for it. Events are kept for 24 months, then the daily retention job deletes them, and they go with the company when it's removed.
+Only the owner can read the log, newest first, through `GET /companies/{id}/audit`; the app has no page for it. Events are kept for 24 months, then the daily retention job deletes them, and they go with the company when it's removed. When a member deletes their account, their events stay with the company without their id (`deleted-user`); their data export lists them.
 
 ## Related pages
 

@@ -1,7 +1,8 @@
 import uuid
 from datetime import UTC, datetime, timedelta
 
-from app.constants.accounts import DELETED_OWNER
+from prepza_common.constants import DELETED_USER
+
 from app.constants.statuses import Status
 from app.storage import accounts, generations
 
@@ -19,7 +20,7 @@ def test_deleting_a_user_keeps_company_tests_without_their_id(run):
     exported, mine, other = run(scenario())
 
     assert [item["pasted_text"] for item in exported] == ["company job"]
-    assert mine.owner_uid == DELETED_OWNER
+    assert mine.owner_uid == DELETED_USER
     assert other.owner_uid == "stays"
 
 

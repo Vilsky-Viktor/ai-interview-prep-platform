@@ -1,5 +1,6 @@
 from datetime import UTC, datetime, timedelta
 
+from prepza_common.constants import DELETED_USER
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
@@ -56,6 +57,27 @@ async def mark_broken(company_id: str) -> None:
 
     async with Session() as session:
         await session.execute(query.values(status=SlackStatus.BROKEN))
+        await session.commit()
+
+
+async def made_by(user_id: str) -> list[SlackConnection]:
+    query = select(SlackConnection).where(SlackConnection.created_by == user_id)
+
+    async with Session() as session:
+        return list(await session.scalars(query))
+
+
+async def forget_maker(user_id: str) -> None:
+    """The channels the user connected stay with their companies, without the user's id, and
+    stop working, as when their maker stops being an editor: an editor reconnects them."""
+    query = (
+        update(SlackConnection)
+        .where(SlackConnection.created_by == user_id)
+        .values(created_by=DELETED_USER, status=SlackStatus.BROKEN)
+    )
+
+    async with Session() as session:
+        await session.execute(query)
         await session.commit()
 
 

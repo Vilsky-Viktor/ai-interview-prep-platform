@@ -26,6 +26,10 @@ DB_POOL_RECYCLE_SECONDS = 1800
 # Lists are served a page at a time; a page holds at most this many items.
 MAX_PAGE_SIZE = 100
 
+# Who a kept row is by once its user deleted their account (a referral, a generation, an ATS or
+# Slack connection, an audit entry): the row stays for its company, without their id.
+DELETED_USER = "deleted-user"
+
 # Sentry: share of requests traced for performance, and emails scrubbed from every event.
 DEFAULT_TRACES_SAMPLE_RATE = "0.1"
 EMAIL_PATTERN = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"

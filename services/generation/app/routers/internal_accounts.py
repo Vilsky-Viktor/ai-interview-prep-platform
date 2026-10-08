@@ -13,6 +13,6 @@ async def delete_user(user_id: str, caller: ServiceCaller) -> None:
     await accounts.delete_user(user_id)
 
 
-@router.get("/users/{user_id}/export")
+@router.post("/users/{user_id}/export")
 async def export_user(user_id: str, caller: ServiceCaller) -> dict:
     return jsonable_encoder({"generations": await accounts.export(user_id)})

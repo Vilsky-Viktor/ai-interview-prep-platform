@@ -1,8 +1,8 @@
 from datetime import datetime
 
+from prepza_common.constants import DELETED_USER
 from sqlalchemy import select, update
 
-from app.constants.accounts import DELETED_OWNER
 from app.constants.statuses import Status
 from app.models.generation import Generation
 from app.storage.checkpointer import delete_threads
@@ -16,9 +16,7 @@ async def delete_user(user_id: str) -> None:
     repeat."""
     async with Session() as session:
         await session.execute(
-            update(Generation)
-            .where(Generation.owner_uid == user_id)
-            .values(owner_uid=DELETED_OWNER)
+            update(Generation).where(Generation.owner_uid == user_id).values(owner_uid=DELETED_USER)
         )
         await session.commit()
 

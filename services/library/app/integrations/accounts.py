@@ -19,9 +19,11 @@ def services() -> dict[str, str]:
 
 async def delete_user(service: str, user_id: str, email: str) -> None:
     """Deletes the user's data in one service; raises if it can't, so deletion can be retried."""
-    response = await http.get_client().delete(
+    # The email goes in the body, never the query string, which request logs record.
+    response = await http.get_client().request(
+        "DELETE",
         f"{services()[service]}/internal/users/{user_id}",
-        params={"email": email},
+        json={"email": email},
         headers={"Authorization": f"Bearer {service_token(service)}"},
     )
 
@@ -29,9 +31,9 @@ async def delete_user(service: str, user_id: str, email: str) -> None:
 
 
 async def export_user(service: str, user_id: str, email: str) -> dict:
-    response = await http.get_client().get(
+    response = await http.get_client().post(
         f"{services()[service]}/internal/users/{user_id}/export",
-        params={"email": email},
+        json={"email": email},
         headers={"Authorization": f"Bearer {service_token(service)}"},
     )
 

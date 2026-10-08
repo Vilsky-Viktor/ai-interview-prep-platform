@@ -1,5 +1,6 @@
 from uuid import UUID
 
+from prepza_common.constants import DELETED_USER
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
@@ -95,6 +96,27 @@ async def mark_broken(connection_id: UUID) -> None:
         update(AtsConnection)
         .where(AtsConnection.id == connection_id)
         .values(status=ConnectionStatus.BROKEN)
+    )
+
+    async with Session() as session:
+        await session.execute(query)
+        await session.commit()
+
+
+async def made_by(user_id: str) -> list[AtsConnection]:
+    query = select(AtsConnection).where(AtsConnection.created_by == user_id)
+
+    async with Session() as session:
+        return list(await session.scalars(query))
+
+
+async def forget_maker(user_id: str) -> None:
+    """The connections the user made stay with their companies, without the user's id, and
+    stop inviting, as when their maker stops being an editor: an editor reconnects them."""
+    query = (
+        update(AtsConnection)
+        .where(AtsConnection.created_by == user_id)
+        .values(created_by=DELETED_USER, status=ConnectionStatus.BROKEN)
     )
 
     async with Session() as session:

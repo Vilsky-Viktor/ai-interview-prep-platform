@@ -91,7 +91,7 @@ async def delete_user(user_id: str, caller: ServiceCaller) -> None:
     await purchases.forget_buyer(user_id)
 
 
-@router.get("/users/{user_id}/export")
+@router.post("/users/{user_id}/export")
 async def export_user(user_id: str, caller: ServiceCaller) -> dict:
     """What the user bought for their companies."""
     return jsonable_encoder(

@@ -3,7 +3,7 @@ from types import SimpleNamespace
 from app.constants.credits import CANDIDATE_CREDITS
 from app.service_auth import service_token
 from app.services import auto_top_ups
-from app.storage import ledger
+from app.storage import ledger, purchases
 
 AUTH = {"Authorization": f"Bearer {service_token('billing')}"}
 HOLD = {"company_id": "acme", "key": "session-1"}
@@ -71,3 +71,16 @@ def test_a_removed_members_card_turns_off_only_their_auto_top_up(client, monkeyp
 
     assert response.status_code == 204
     assert calls == [("company", "acme", "ann")]
+
+
+def test_library_exports_a_users_purchases_with_a_post(client, monkeypatch):
+    """The export is a POST, like every service's, so library sends nothing in the URL."""
+
+    async def purchases_of(user_id):
+        return []
+
+    monkeypatch.setattr(purchases, "purchases_of", purchases_of)
+
+    response = client.post("/internal/users/ann/export", headers=AUTH)
+
+    assert response.json() == {"purchases": []}

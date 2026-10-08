@@ -1,6 +1,7 @@
 import secrets
 from datetime import UTC, datetime, timedelta
 
+from prepza_common.constants import DELETED_USER
 from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -11,7 +12,6 @@ from app.constants.credits import (
     REFERRALS_PER_YEAR,
     Reason,
 )
-from app.constants.products import DELETED_OWNER
 from app.models.billing import Entry, Referral, Wallet
 from app.storage.db import Session
 from app.storage.ledger import add, ensure
@@ -181,5 +181,5 @@ async def forget(session: AsyncSession, owner_type: str, owner_id: str) -> None:
     await session.execute(
         update(Referral)
         .filter_by(**is_owner, referrer_id=owner_id)
-        .values(referrer_id=DELETED_OWNER)
+        .values(referrer_id=DELETED_USER)
     )

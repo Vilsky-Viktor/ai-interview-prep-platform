@@ -1,9 +1,11 @@
+import uuid
 from datetime import UTC, datetime, timedelta
 from urllib.parse import parse_qs, urlparse
 
 import httpx
 import pytest
 from prepza_common.auth import current_user
+from prepza_common.constants import DELETED_USER
 from prepza_common.encryption import encrypt
 from prepza_common.user import User
 
@@ -51,7 +53,9 @@ def configured(monkeypatch):
     return found
 
 
-async def connect(company_id, channel="#hiring", kinds=("candidate_finished",), token=None):
+async def connect(
+    company_id, channel="#hiring", kinds=("candidate_finished",), token=None, user_id="u1"
+):
     """The company's channel; its workspace's token is its own unless `token` names a shared one."""
     await storage.connect(
         company_id,
@@ -60,8 +64,32 @@ async def connect(company_id, channel="#hiring", kinds=("candidate_finished",), 
         encrypt(KEY, f"https://hooks/{channel}"),
         encrypt(KEY, token or f"token-{company_id}"),
         list(kinds),
-        "u1",
+        user_id,
     )
+
+
+def test_a_deleted_makers_channel_stays_without_their_id_and_stops_posting(run, configured):
+    company_id, maker = company(), f"gone-{uuid.uuid4()}"
+    event = push("notification.requested", finished(company_id, email="a@x.com"), "o-d", "m-d")
+
+    async def scenario():
+        await connect(company_id, user_id=maker)
+        exported = await storage.made_by(maker)
+        await storage.forget_maker(maker)
+        # Safe to repeat.
+        await storage.forget_maker(maker)
+
+        async with api() as client:
+            await client.post("/internal/events", json=event)
+
+        return exported, await storage.get(company_id), await storage.made_by(maker)
+
+    exported, found, left = run(scenario())
+
+    assert [row.company_id for row in exported] == [company_id]
+    assert (found.created_by, found.status) == (DELETED_USER, SlackStatus.BROKEN)
+    assert left == []
+    assert configured["posted"] == []
 
 
 def test_reconnecting_replaces_the_channel_and_keeps_the_kinds(run):

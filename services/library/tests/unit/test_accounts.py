@@ -2,6 +2,7 @@ import asyncio
 
 import httpx
 import pytest
+from prepza_common import http
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
@@ -98,3 +99,28 @@ def test_the_export_holds_every_service_and_downloads_as_a_file(client, monkeypa
         "ats": {"from": "ats"},
         "api": {"from": "api"},
     }
+
+
+def test_deletion_and_export_send_the_email_in_the_body_not_the_url(monkeypatch):
+    """Request logs record URLs, so the email never goes in the query string."""
+    sent = []
+
+    def handler(request):
+        sent.append((request.method, str(request.url), request.content))
+
+        return httpx.Response(200, json={})
+
+    client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    monkeypatch.setattr(http, "get_client", lambda: client)
+    monkeypatch.setattr(account_services, "service_token", lambda callee: "token")
+
+    asyncio.run(account_services.delete_user("ats", "ann", "ann@example.com"))
+    asyncio.run(account_services.export_user("ats", "ann", "ann@example.com"))
+
+    url = account_services.services()["ats"]
+    body = b'{"email":"ann@example.com"}'
+
+    assert sent == [
+        ("DELETE", f"{url}/internal/users/ann", body),
+        ("POST", f"{url}/internal/users/ann/export", body),
+    ]

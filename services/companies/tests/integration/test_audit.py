@@ -1,11 +1,12 @@
 import uuid
 from datetime import UTC, datetime, timedelta
 
+from prepza_common.constants import DELETED_USER
 from sqlalchemy import func, select, update
 
 from app.constants.audit import AuditAction
 from app.models.audit import AuditEvent
-from app.storage import audit, companies
+from app.storage import accounts, audit, companies
 from app.storage.db import Session
 
 
@@ -54,3 +55,30 @@ def test_audit_events_list_newest_first_age_out_and_go_with_the_company(run):
         AuditAction.RESULTS_VIEWED,
     ]
     assert left == 0
+
+
+def test_a_deleted_users_decisions_are_exported_then_stay_without_their_id(run):
+    user = f"gone-{uuid.uuid4()}"
+
+    async def scenario():
+        name = f"Audit {uuid.uuid4()}"
+        company = await companies.create(name, "owner", "owner@example.com")
+        await audit.record(company.id, user, AuditAction.RESULTS_VIEWED)
+        await audit.record(company.id, "owner", AuditAction.TOPICS_APPROVED)
+        exported = (await accounts.export(user, "gone@example.com"))["company_decisions"]
+        await audit.forget_user(user)
+        # Safe to repeat.
+        await audit.forget_user(user)
+        listed = await audit.list_for_company(company.id, 0, 10)
+        left = (await accounts.export(user, "gone@example.com"))["company_decisions"]
+        await companies.delete(company.id)
+
+        return name, exported, listed, left
+
+    name, exported, listed, left = run(scenario())
+
+    assert [(row["company"], row["action"]) for row in exported] == [
+        (name, AuditAction.RESULTS_VIEWED)
+    ]
+    assert sorted(row.user_id for row in listed) == sorted([DELETED_USER, "owner"])
+    assert left == []

@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from sqlalchemy import delete, select
+from prepza_common.constants import DELETED_USER
+from sqlalchemy import delete, select, update
 
 from app.models.audit import AuditEvent
 from app.storage.db import Session
@@ -26,6 +27,15 @@ async def list_for_company(company_id, offset: int, limit: int) -> list[AuditEve
 
     async with Session() as session:
         return list(await session.scalars(query))
+
+
+async def forget_user(user_id: str) -> None:
+    """The user's decisions stay in their companies' logs, without the user's id."""
+    query = update(AuditEvent).where(AuditEvent.user_id == user_id).values(user_id=DELETED_USER)
+
+    async with Session() as session:
+        await session.execute(query)
+        await session.commit()
 
 
 async def delete_before(before: datetime) -> int:
