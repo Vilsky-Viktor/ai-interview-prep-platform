@@ -1,0 +1,110 @@
+import uuid
+from datetime import UTC, datetime
+from types import SimpleNamespace
+
+import pytest
+from prepza_common.service_auth import issue_token
+
+from app.routers import internal_api
+from app.services import candidate_results
+from app.storage import candidates, interviews
+
+COMPANY_ID, OTHER_ID = uuid.uuid4(), uuid.uuid4()
+INTERVIEW = SimpleNamespace(id=uuid.uuid4(), company_id=COMPANY_ID, pass_mark=70)
+INVITE = SimpleNamespace(
+    id=uuid.uuid4(),
+    email="anna@example.com",
+    status="finished",
+    created_at=datetime(2026, 10, 2, tzinfo=UTC),
+)
+TOKEN = issue_token("api", "companies", "test-secret-that-is-at-least-32-bytes")
+HEADERS = {"Authorization": f"Bearer {TOKEN}"}
+BASE = f"/internal/companies/{COMPANY_ID}/interviews"
+
+
+@pytest.fixture(autouse=True)
+def stored(monkeypatch):
+    """The company's one interview with one finished candidate; returns the pages asked for."""
+    asked = []
+
+    async def get_interview(interview_id):
+        return INTERVIEW if interview_id == INTERVIEW.id else None
+
+    async def list_for_company(company_id, offset, limit):
+        asked.append((company_id, offset, limit))
+
+        return [INTERVIEW] if company_id == COMPANY_ID else []
+
+    async def counts(ids):
+        return {INTERVIEW.id: 1}
+
+    async def interview_out(interview, count=0):
+        return {
+            "id": interview.id,
+            "generation_id": None,
+            "set_id": uuid.uuid4(),
+            "title": "Backend",
+            "question_seconds": 60,
+            "candidate_count": count,
+            "hired": False,
+            "pass_mark": 70,
+            "link_token": None,
+            "status": "in_process",
+            "created_at": datetime(2026, 10, 1, tzinfo=UTC),
+        }
+
+    async def get_candidate(interview_id, invite_id):
+        return INVITE if invite_id == INVITE.id else None
+
+    async def scores(ids):
+        return {str(INVITE.id): {"finished": True, "grade": 86, "progress": 100, "copies": 1}}
+
+    async def page(interview, offset, limit, by_grade, q="", filter_by=None):
+        asked.append(("candidates", offset, limit, by_grade))
+
+        return []
+
+    monkeypatch.setattr(interviews, "get", get_interview)
+    monkeypatch.setattr(interviews, "list_for_company", list_for_company)
+    monkeypatch.setattr(candidates, "counts", counts)
+    monkeypatch.setattr(candidates, "get", get_candidate)
+    monkeypatch.setattr(internal_api, "interview_out", interview_out)
+    monkeypatch.setattr(internal_api.rounds, "invite_scores", scores)
+    monkeypatch.setattr(candidate_results, "page", page)
+
+    return asked
+
+
+def test_the_api_service_lists_a_companys_interviews_a_page_at_a_time(client, stored):
+    response = client.get(f"{BASE}?offset=5&limit=10", headers=HEADERS)
+
+    assert response.status_code == 200
+    assert [item["candidate_count"] for item in response.json()] == [1]
+    assert stored == [(COMPANY_ID, 5, 10)]
+
+
+def test_an_interview_and_its_candidates_newest_first(client, stored):
+    assert client.get(f"{BASE}/{INTERVIEW.id}", headers=HEADERS).status_code == 200
+    assert client.get(f"{BASE}/{INTERVIEW.id}/candidates", headers=HEADERS).json() == []
+    assert stored == [("candidates", 0, 100, False)]
+
+
+def test_a_candidate_comes_with_their_results(client):
+    found = client.get(f"{BASE}/{INTERVIEW.id}/candidates/{INVITE.id}", headers=HEADERS).json()
+
+    assert (found["grade"], found["passed"], found["copies"]) == (86, True, 1)
+
+
+def test_another_companys_interview_or_an_unknown_candidate_is_not_found(client):
+    other = f"/internal/companies/{OTHER_ID}/interviews/{INTERVIEW.id}"
+
+    assert client.get(other, headers=HEADERS).status_code == 404
+    assert client.get(f"{other}/candidates", headers=HEADERS).status_code == 404
+    assert (
+        client.get(f"{BASE}/{INTERVIEW.id}/candidates/{uuid.uuid4()}", headers=HEADERS).status_code
+        == 404
+    )
+
+
+def test_only_services_may_ask(client):
+    assert client.get(BASE).status_code in (401, 403)

@@ -19,6 +19,7 @@ from app.routers import (
     candidates,
     companies,
     internal_accounts,
+    internal_api,
     internal_ats,
     internal_events,
     internal_invites,
@@ -77,6 +78,7 @@ app.include_router(reports.router)
 app.include_router(verification.router)
 app.include_router(internal_accounts.router)
 app.include_router(internal_ats.router)
+app.include_router(internal_api.router)
 app.include_router(internal_invites.router)
 app.include_router(internal_events.router)
 app.include_router(schedules.router)

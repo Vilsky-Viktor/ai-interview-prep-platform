@@ -13,12 +13,11 @@ from app.constants.invites import (
     EXTRA_TIME_OPTIONS,
     MAX_SEARCH_LENGTH,
     NOT_STARTED,
-    RESULT_FILTERS,
     CandidateFilter,
     CandidateSort,
     InviteStatus,
 )
-from app.helpers.candidates import candidate_key, candidate_out, passed, section_passed
+from app.helpers.candidates import candidate_key, passed, section_passed
 from app.helpers.interviews import (
     attach_set,
     interview_title,
@@ -75,9 +74,7 @@ async def list_candidates(
     q: Annotated[str, Query(max_length=MAX_SEARCH_LENGTH)] = "",
     filter_by: Annotated[CandidateFilter | None, Query(alias="status")] = None,
 ) -> list[CandidateOut]:
-    """A page at a time, best grade first or newest first, narrowed to an email containing `q`
-    and a status or result, all in SQL on the results stored when candidates finish. Progress
-    and signals come from rounds for this page only."""
+    """A page at a time (candidate_results.page)."""
     interview = await interviews.get(interview_id)
 
     if interview is None:
@@ -86,16 +83,9 @@ async def list_candidates(
     await require_company(user, interview.company_id)
     by_grade = sort == CandidateSort.GRADE
 
-    if by_grade or filter_by in RESULT_FILTERS:
-        await candidate_results.backfill(interview.id)
-
-    listed = await candidates.page(
-        interview.id, page.offset, page.limit, by_grade, q.strip(), filter_by, interview.pass_mark
+    return await candidate_results.page(
+        interview, page.offset, page.limit, by_grade, q.strip(), filter_by
     )
-    totals = await rounds.invite_scores([invite.id for invite in listed])
-    await candidate_results.sync(listed, totals)
-
-    return [candidate_out(invite, totals.get(str(invite.id)) or {}, interview) for invite in listed]
 
 
 @router.delete("/{interview_id}/candidates/{invite_id}", status_code=status.HTTP_204_NO_CONTENT)
