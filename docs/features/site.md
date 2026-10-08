@@ -15,7 +15,7 @@ The pages anyone can open without signing in, and how search engines see them. E
 
 ## Home page
 
-The first screen: "Test everyone. Hire the best." and the box to paste a job description. Submitting it:
+The first screen: "Test everyone. Hire the best.", a "Watch demos" button beside it (under the text on phones) to prepza's YouTube channel, and the box to paste a job description. Submitting it:
 
 1. signs you in if needed,
 2. asks which company the interview is for (or its name, for a first company),
@@ -35,7 +35,7 @@ Below, a landing page walks through prepza, one section per screen:
 - a verified brand,
 - fair to candidates and safe for your data: what's true about human review, answer keys, AI training, extra time, candidate notices and data, data retention and hosting, payments and the documents, with links to the documents, terms and privacy policy (no compliance badges),
 - pricing ("Pay per candidate": interviews and the first candidates free, then a price per candidate, with no subscription),
-- a closing call to action.
+- a closing call to action: "Create an interview", with "Watch demos" beside it.
 
 Each section has a picture of the real interface, several of them animated. Prices come from billing, so they follow any change. Signed-in users see the landing page too.
 

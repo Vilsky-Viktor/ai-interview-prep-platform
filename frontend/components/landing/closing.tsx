@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server"
 
+import { DemosButton } from "@/components/landing/demos-button"
 import { MoreLink } from "@/components/landing/section"
 import { StartButton } from "@/components/landing/start-button"
 
@@ -13,7 +14,10 @@ export async function Closing() {
         <h2 className="no-dot font-heading text-5xl font-medium tracking-tight sm:text-7xl">
           {t("ready.title")}
         </h2>
-        <StartButton label={t("ready.start")} />
+        <div className="flex flex-wrap justify-center gap-3">
+          <StartButton label={t("ready.start")} />
+          <DemosButton />
+        </div>
       </div>
       <div className="space-y-3">
         <h3 className="font-heading text-2xl font-medium">{t("faq.title")}</h3>

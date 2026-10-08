@@ -5,6 +5,7 @@ import { AdvantagesSection } from "@/components/landing/advantages"
 import { AtsSection } from "@/components/landing/ats"
 import { BrandSection } from "@/components/landing/brand"
 import { Closing } from "@/components/landing/closing"
+import { DemosButton } from "@/components/landing/demos-button"
 import { CompaniesSection } from "@/components/landing/companies"
 import { ControlSection } from "@/components/landing/control"
 import { HowItWorks } from "@/components/landing/how-it-works"
@@ -51,20 +52,26 @@ export default async function HomePage() {
       <div className="relative flex min-h-[calc(100svh-3.5rem)] flex-col items-center justify-center pb-24">
         <div className="w-full max-w-176 space-y-10">
           <div className="space-y-4">
-            {/* Two lines, each ending with the logo's blue dot. */}
-            <h1 className="no-dot font-heading text-[min(3rem,10.5vw)] font-medium tracking-tight text-balance sm:text-6xl">
-              {t("title")
-                .split("\n")
-                .map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                    <span className="text-primary">.</span>
-                  </span>
-                ))}
-            </h1>
+            {/* The promise, with the demos beside it from tablets up. */}
+            <div className="flex items-start justify-between gap-6">
+              {/* Two lines, each ending with the logo's blue dot. */}
+              <h1 className="no-dot font-heading text-[min(3rem,10.5vw)] font-medium tracking-tight text-balance sm:text-6xl">
+                {t("title")
+                  .split("\n")
+                  .map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                      <span className="text-primary">.</span>
+                    </span>
+                  ))}
+              </h1>
+              <DemosButton className="mt-2 hidden shrink-0 sm:inline-flex" />
+            </div>
             <p className="text-lg text-balance text-muted-foreground">
               {t("text")}
             </p>
+            {/* On phones the demos come under the promise. */}
+            <DemosButton className="sm:hidden" />
           </div>
           <StartTest freeCandidates={freeCandidates} />
         </div>
