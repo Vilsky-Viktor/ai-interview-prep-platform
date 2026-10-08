@@ -554,8 +554,8 @@
     "test": "יצירת ראיון",
     "free": "חינם",
     "candidate": "כל מועמד שעונה על שאלה אחת לפחות",
-    "candidateVolume": "עם קרדיטים מטעינה של ${from, number} ומעלה",
-    "perCandidate": "${dollars, number} למועמד",
+    "candidateVolume": "עם קרדיטים מטעינה של {from} ומעלה",
+    "perCandidate": "{price} למועמד",
     "welcome": "{count, plural, one {המועמד הראשון שלכם} two {# המועמדים הראשונים שלכם} other {# המועמדים הראשונים שלכם}}",
     "credits": "דולר אחד = 100 קרדיטים, והקרדיטים לא פגים לעולם.",
     "referrals": "הפניות",
@@ -797,8 +797,8 @@
       "see": "למחירים",
       "perCandidate": "למועמד",
       "base": "תשלום לפי שימוש",
-      "volume": "עם טעינה מ-${from, number}",
-      "compare": "${min}–{max} למועמד, בלי מנוי"
+      "volume": "עם טעינה מ-{from}",
+      "compare": "{range} למועמד, בלי מנוי"
     },
     "faq": {
       "title": "עדיין יש לכם שאלות?",

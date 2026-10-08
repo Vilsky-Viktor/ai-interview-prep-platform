@@ -554,8 +554,8 @@
     "test": "Générer un entretien",
     "free": "Gratuit",
     "candidate": "Chaque candidat qui répond à au moins une question",
-    "candidateVolume": "Avec des crédits d'une recharge de {from, number} $ ou plus",
-    "perCandidate": "{dollars, number} $ par candidat",
+    "candidateVolume": "Avec des crédits d'une recharge de {from} ou plus",
+    "perCandidate": "{price} par candidat",
     "welcome": "{count, plural, one {Votre premier candidat} other {Vos # premiers candidats}}",
     "credits": "1 $ = 100 crédits, les crédits n'expirent jamais.",
     "referrals": "Parrainage",
@@ -806,8 +806,8 @@
       "see": "Voir les tarifs",
       "perCandidate": "par candidat",
       "base": "Paiement à l'usage",
-      "volume": "Avec une recharge dès {from, number} $",
-      "compare": "{min}–{max} $ par candidat, sans abonnement"
+      "volume": "Avec une recharge dès {from}",
+      "compare": "{range} par candidat, sans abonnement"
     },
     "faq": {
       "title": "Encore des questions ?",

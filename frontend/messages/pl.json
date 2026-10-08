@@ -554,8 +554,8 @@
     "test": "Generowanie rozmowy",
     "free": "Za darmo",
     "candidate": "Każdy kandydat, który odpowie na co najmniej jedno pytanie",
-    "candidateVolume": "Z kredytami z doładowania za ${from, number} lub więcej",
-    "perCandidate": "${dollars, number} za kandydata",
+    "candidateVolume": "Z kredytami z doładowania za {from} lub więcej",
+    "perCandidate": "{price} za kandydata",
     "welcome": "{count, plural, one {Twój pierwszy kandydat} few {Twoich pierwszych # kandydatów} many {Twoich pierwszych # kandydatów} other {Twoich pierwszych # kandydata}}",
     "credits": "$1 = 100 kredytów, kredyty nie wygasają.",
     "referrals": "Polecenia",
@@ -806,8 +806,8 @@
       "see": "Zobacz cennik",
       "perCandidate": "za kandydata",
       "base": "Płać za użycie",
-      "volume": "Przy doładowaniu od ${from, number}",
-      "compare": "${min}–{max} za kandydata, bez abonamentu"
+      "volume": "Przy doładowaniu od {from}",
+      "compare": "{range} za kandydata, bez abonamentu"
     },
     "faq": {
       "title": "Masz jeszcze pytania?",

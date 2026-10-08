@@ -380,8 +380,14 @@ export interface components {
       candidate_credits: number
       /** Candidate Prices */
       candidate_prices: components["schemas"]["CandidatePriceOut"][]
+      /** Candidate Cents Min */
+      candidate_cents_min: number
+      /** Candidate Cents Max */
+      candidate_cents_max: number
       /** Welcome Company */
       welcome_company: number
+      /** Free Candidates */
+      free_candidates: number
       /** Referral Company */
       referral_company: number
       /** Products */

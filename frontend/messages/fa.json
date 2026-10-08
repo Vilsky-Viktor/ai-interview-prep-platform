@@ -554,8 +554,8 @@
     "test": "ساختن مصاحبه",
     "free": "رایگان",
     "candidate": "هر متقاضی‌ای که دست‌کم به یک پرسش پاسخ دهد",
-    "candidateVolume": "با اعتبار از شارژ ${from, number} یا بیشتر",
-    "perCandidate": "${dollars, number} برای هر متقاضی",
+    "candidateVolume": "با اعتبار از شارژ {from} یا بیشتر",
+    "perCandidate": "{price} برای هر متقاضی",
     "welcome": "{count, plural, one {نخستین متقاضی شما} other {# متقاضی نخست شما}}",
     "credits": "۱ دلار = ۱۰۰ اعتبار، و اعتبارها هرگز منقضی نمی‌شوند.",
     "referrals": "معرفی‌ها",
@@ -802,8 +802,8 @@
       "see": "دیدن قیمت‌ها",
       "perCandidate": "برای هر متقاضی",
       "base": "پرداخت به اندازه مصرف",
-      "volume": "با شارژ از ${from, number}",
-      "compare": "${min}–{max} برای هر متقاضی، بدون اشتراک"
+      "volume": "با شارژ از {from}",
+      "compare": "{range} برای هر متقاضی، بدون اشتراک"
     },
     "faq": {
       "title": "هنوز پرسشی دارید؟",

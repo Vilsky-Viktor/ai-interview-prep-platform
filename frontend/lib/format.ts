@@ -14,3 +14,17 @@ export function formatPrice(cents: number, currency: string, locale: string) {
     maximumFractionDigits: cents % 100 === 0 ? 0 : 2,
   }).format(cents / 100)
 }
+
+/** 100 to 300 cents in USD: "$1–$3", written as the locale writes a range. */
+export function formatPriceRange(
+  minCents: number,
+  maxCents: number,
+  currency: string,
+  locale: string
+) {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    maximumFractionDigits: minCents % 100 === 0 && maxCents % 100 === 0 ? 0 : 2,
+  }).formatRange(minCents / 100, maxCents / 100)
+}

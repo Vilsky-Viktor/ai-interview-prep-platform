@@ -554,8 +554,8 @@
     "test": "Mülakat oluşturma",
     "free": "Ücretsiz",
     "candidate": "En az bir soruyu cevaplayan her aday",
-    "candidateVolume": "${from, number} veya üzeri bir yüklemeden gelen kredilerle",
-    "perCandidate": "Aday başına ${dollars, number}",
+    "candidateVolume": "{from} veya üzeri bir yüklemeden gelen kredilerle",
+    "perCandidate": "Aday başına {price}",
     "welcome": "{count, plural, one {İlk adayınız} other {İlk # adayınız}}",
     "credits": "$1 = 100 kredi, krediler hiç sona ermez.",
     "referrals": "Davetler",
@@ -805,8 +805,8 @@
       "see": "Fiyatları gör",
       "perCandidate": "aday başına",
       "base": "Kullandıkça öde",
-      "volume": "${from, number} ve üzeri yüklemeyle",
-      "compare": "Aday başına ${min}–{max}, abonelik yok"
+      "volume": "{from} ve üzeri yüklemeyle",
+      "compare": "Aday başına {range}, abonelik yok"
     },
     "faq": {
       "title": "Hâlâ sorunuz mu var?",

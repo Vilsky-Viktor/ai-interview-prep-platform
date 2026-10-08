@@ -35,6 +35,7 @@ Large top-ups buy more credits per dollar: 50% more from $250, and three times a
 
 - Top up on the top-up page, for any company you belong to.
 - Paddle's checkout doesn't offer a discount code field.
+- The home and pricing pages show the prices, their range and the free candidates as billing's catalog (`/billing/catalog`) gives them, in its currency.
 
 Balances follow a payment as it lands:
 

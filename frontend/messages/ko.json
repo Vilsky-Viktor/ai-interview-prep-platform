@@ -554,8 +554,8 @@
     "test": "면접 생성",
     "free": "무료",
     "candidate": "한 문제 이상 답한 지원자 1명당",
-    "candidateVolume": "${from, number} 이상 충전한 크레딧 사용 시",
-    "perCandidate": "지원자당 ${dollars, number}",
+    "candidateVolume": "{from} 이상 충전한 크레딧 사용 시",
+    "perCandidate": "지원자당 {price}",
     "welcome": "처음 {count, plural, other {지원자 #명}}",
     "credits": "$1 = 100 크레딧, 크레딧은 만료되지 않습니다.",
     "referrals": "추천",
@@ -797,8 +797,8 @@
       "see": "요금 보기",
       "perCandidate": "지원자당",
       "base": "사용한 만큼 결제",
-      "volume": "${from, number}부터 충전 시",
-      "compare": "지원자당 ${min}–{max}, 구독 없음"
+      "volume": "{from}부터 충전 시",
+      "compare": "지원자당 {range}, 구독 없음"
     },
     "faq": {
       "title": "궁금한 점이 더 있나요?",

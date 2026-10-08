@@ -554,8 +554,8 @@
     "test": "生成面试",
     "free": "免费",
     "candidate": "每位至少回答一道题的候选人",
-    "candidateVolume": "使用 ${from, number} 及以上充值所得的点数",
-    "perCandidate": "每位候选人 ${dollars, number}",
+    "candidateVolume": "使用 {from} 及以上充值所得的点数",
+    "perCandidate": "每位候选人 {price}",
     "welcome": "你的前 {count, plural, other {# 位候选人}}",
     "credits": "$1 = 100 点数，点数永不过期。",
     "referrals": "推荐",
@@ -797,8 +797,8 @@
       "see": "查看价格",
       "perCandidate": "每位候选人",
       "base": "按量付费",
-      "volume": "充值 ${from, number} 起",
-      "compare": "每位候选人 ${min}–{max}，无需订阅"
+      "volume": "充值 {from} 起",
+      "compare": "每位候选人 {range}，无需订阅"
     },
     "faq": {
       "title": "还有疑问？",

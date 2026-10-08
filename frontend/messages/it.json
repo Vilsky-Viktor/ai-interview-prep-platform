@@ -554,8 +554,8 @@
     "test": "Generare un colloquio",
     "free": "Gratis",
     "candidate": "Ogni candidato che risponde ad almeno una domanda",
-    "candidateVolume": "Con crediti da una ricarica di ${from, number} o più",
-    "perCandidate": "${dollars, number} a candidato",
+    "candidateVolume": "Con crediti da una ricarica di {from} o più",
+    "perCandidate": "{price} a candidato",
     "welcome": "{count, plural, one {Il tuo primo candidato} other {I tuoi primi # candidati}}",
     "credits": "$1 = 100 crediti, i crediti non scadono.",
     "referrals": "Referral",
@@ -806,8 +806,8 @@
       "see": "Vedi i prezzi",
       "perCandidate": "per candidato",
       "base": "A consumo",
-      "volume": "Con una ricarica da ${from, number}",
-      "compare": "${min}–{max} per candidato, senza abbonamento"
+      "volume": "Con una ricarica da {from}",
+      "compare": "{range} per candidato, senza abbonamento"
     },
     "faq": {
       "title": "Hai ancora domande?",

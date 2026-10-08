@@ -554,8 +554,8 @@
     "test": "Generating an interview",
     "free": "Free",
     "candidate": "Each candidate who answers at least one question",
-    "candidateVolume": "With credits from a top-up of ${from, number} or more",
-    "perCandidate": "${dollars, number} a candidate",
+    "candidateVolume": "With credits from a top-up of {from} or more",
+    "perCandidate": "{price} a candidate",
     "welcome": "Your first {count, plural, one {candidate} other {# candidates}}",
     "credits": "$1 = 100 credits, credits never expire.",
     "referrals": "Referrals",
@@ -806,8 +806,8 @@
       "see": "See pricing",
       "perCandidate": "per candidate",
       "base": "Pay as you go",
-      "volume": "With a top-up from ${from, number}",
-      "compare": "${min}–{max} per candidate, with no subscription"
+      "volume": "With a top-up from {from}",
+      "compare": "{range} per candidate, with no subscription"
     },
     "faq": {
       "title": "Still have questions?",

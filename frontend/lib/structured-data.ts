@@ -37,8 +37,6 @@ export function softwareData(
   description: string,
   catalog: Catalog
 ) {
-  const cents = catalog.candidate_prices.map((price) => price.cents)
-
   return {
     "@context": CONTEXT,
     "@type": "SoftwareApplication",
@@ -50,8 +48,8 @@ export function softwareData(
     offers: {
       "@type": "AggregateOffer",
       priceCurrency: catalog.currency,
-      lowPrice: Math.min(...cents) / 100,
-      highPrice: Math.max(...cents) / 100,
+      lowPrice: catalog.candidate_cents_min / 100,
+      highPrice: catalog.candidate_cents_max / 100,
       unitText: "candidate",
     },
   }

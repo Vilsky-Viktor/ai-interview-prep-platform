@@ -42,10 +42,7 @@ export default async function HomePage() {
   const catalog = await publicFetch<Catalog>("/billing/catalog").catch(
     () => null
   )
-  // The candidates a first company's welcome credits cover.
-  const freeCandidates = catalog
-    ? Math.floor(catalog.welcome_company / catalog.candidate_credits)
-    : null
+  const freeCandidates = catalog?.free_candidates ?? null
 
   return (
     <main className="mx-auto max-w-5xl px-6">

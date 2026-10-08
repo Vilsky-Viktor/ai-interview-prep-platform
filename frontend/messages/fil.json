@@ -554,8 +554,8 @@
     "test": "Paggawa ng interview",
     "free": "Libre",
     "candidate": "Bawat aplikanteng sumagot ng kahit isang tanong",
-    "candidateVolume": "Gamit ang credits mula sa top-up na ${from, number} o higit pa",
-    "perCandidate": "${dollars, number} bawat aplikante",
+    "candidateVolume": "Gamit ang credits mula sa top-up na {from} o higit pa",
+    "perCandidate": "{price} bawat aplikante",
     "welcome": "{count, plural, one {Ang iyong unang aplikante} other {Ang iyong unang # aplikante}}",
     "credits": "$1 = 100 credits, hindi nag-e-expire ang credits.",
     "referrals": "Referrals",
@@ -810,8 +810,8 @@
       "see": "Tingnan ang presyo",
       "perCandidate": "bawat aplikante",
       "base": "Pay as you go",
-      "volume": "Sa top-up mula ${from, number}",
-      "compare": "${min}–{max} bawat aplikante, walang subscription"
+      "volume": "Sa top-up mula {from}",
+      "compare": "{range} bawat aplikante, walang subscription"
     },
     "faq": {
       "title": "May tanong pa?",

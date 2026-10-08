@@ -554,8 +554,8 @@
     "test": "Membuat wawancara",
     "free": "Gratis",
     "candidate": "Setiap kandidat yang menjawab minimal satu soal",
-    "candidateVolume": "Dengan kredit dari isi ulang ${from, number} atau lebih",
-    "perCandidate": "${dollars, number} per kandidat",
+    "candidateVolume": "Dengan kredit dari isi ulang {from} atau lebih",
+    "perCandidate": "{price} per kandidat",
     "welcome": "{count, plural, other {# kandidat}} pertamamu",
     "credits": "$1 = 100 kredit, kredit tidak pernah kedaluwarsa.",
     "referrals": "Referal",
@@ -806,8 +806,8 @@
       "see": "Lihat harga",
       "perCandidate": "per kandidat",
       "base": "Bayar sesuai pemakaian",
-      "volume": "Dengan isi ulang mulai ${from, number}",
-      "compare": "${min}–{max} per kandidat, tanpa langganan"
+      "volume": "Dengan isi ulang mulai {from}",
+      "compare": "{range} per kandidat, tanpa langganan"
     },
     "faq": {
       "title": "Masih ada pertanyaan?",

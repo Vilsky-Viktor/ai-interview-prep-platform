@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { formatDate, formatPrice } from "@/lib/format"
+import { formatDate, formatPrice, formatPriceRange } from "@/lib/format"
 
 // Intl puts no-break spaces in some languages' numbers and currencies.
 function plain(text: string) {
@@ -31,5 +31,16 @@ describe("formatPrice", () => {
   it("follows the language's way of writing money", () => {
     expect(plain(formatPrice(2450, "EUR", "de"))).toBe("24,50 €")
     expect(plain(formatPrice(2400, "EUR", "de"))).toBe("24 €")
+  })
+})
+
+describe("formatPriceRange", () => {
+  it("writes a price range as the language does", () => {
+    expect(plain(formatPriceRange(100, 300, "USD", "en"))).toBe("$1 – $3")
+    expect(plain(formatPriceRange(100, 300, "USD", "de"))).toBe("1–3 $")
+  })
+
+  it("shows cents when either end has them", () => {
+    expect(plain(formatPriceRange(50, 300, "USD", "en"))).toBe("$0.50 – $3.00")
   })
 })

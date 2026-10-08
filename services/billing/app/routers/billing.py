@@ -29,6 +29,8 @@ router = APIRouter(tags=["billing"])
 @router.get("/catalog")
 def catalog() -> CatalogOut:
     prices = price_ids()
+    tiers = candidate_prices()
+    cents = [price for _, price in tiers]
 
     return CatalogOut(
         environment=settings.paddle_environment,
@@ -36,10 +38,12 @@ def catalog() -> CatalogOut:
         currency=CURRENCY,
         candidate_credits=CANDIDATE_CREDITS,
         candidate_prices=[
-            CandidatePriceOut(from_dollars=floor, cents=cents)
-            for floor, cents in candidate_prices()
+            CandidatePriceOut(from_dollars=floor, cents=price) for floor, price in tiers
         ],
+        candidate_cents_min=min(cents),
+        candidate_cents_max=max(cents),
         welcome_company=WELCOME_COMPANY,
+        free_candidates=WELCOME_COMPANY // CANDIDATE_CREDITS,
         referral_company=REFERRAL_REWARD,
         products=[
             TopUpOut(

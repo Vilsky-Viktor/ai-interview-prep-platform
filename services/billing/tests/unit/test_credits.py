@@ -38,3 +38,10 @@ def test_a_candidate_costs_3_then_2_then_1_dollar_by_top_up_size(client):
         {"from_dollars": 250, "cents": 200},
         {"from_dollars": 1000, "cents": 100},
     ]
+
+
+def test_the_catalog_gives_the_free_candidates_and_the_price_range(client):
+    catalog = client.get("/catalog").json()
+
+    assert catalog["free_candidates"] == 3
+    assert (catalog["candidate_cents_min"], catalog["candidate_cents_max"]) == (100, 300)

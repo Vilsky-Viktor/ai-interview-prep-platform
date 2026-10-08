@@ -1,9 +1,10 @@
 import { InfoIcon } from "lucide-react"
 import Link from "next/link"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 
 import { JsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
+import { formatPrice } from "@/lib/format"
 import { publicFetch } from "@/lib/server-api"
 import { pageMetadata, siteUrl } from "@/lib/site"
 import { softwareData } from "@/lib/structured-data"
@@ -28,16 +29,13 @@ function PriceRow({ what, price }: { what: string; price: string }) {
 
 export default async function PricingPage() {
   const t = await getTranslations("pricing")
+  const locale = await getLocale()
   const catalog = await publicFetch<Catalog>("/billing/catalog")
 
   if (!catalog) {
     return null
   }
 
-  // The candidates a first company's welcome credits cover.
-  const freeCandidates = Math.floor(
-    catalog.welcome_company / catalog.candidate_credits
-  )
   const [standard, ...volume] = catalog.candidate_prices
 
   return (
@@ -63,19 +61,29 @@ export default async function PricingPage() {
         <ul className="divide-y rounded-xl border">
           <PriceRow what={t("test")} price={t("free")} />
           <PriceRow
-            what={t("welcome", { count: freeCandidates })}
+            what={t("welcome", { count: catalog.free_candidates })}
             price={t("free")}
           />
           <PriceRow
             what={t("candidate")}
-            price={t("perCandidate", { dollars: standard.cents / 100 })}
+            price={t("perCandidate", {
+              price: formatPrice(standard.cents, catalog.currency, locale),
+            })}
           />
           {/* Volume prices: large top-ups buy more credits per dollar (billing decides). */}
           {volume.map((tier) => (
             <PriceRow
               key={tier.from_dollars}
-              what={t("candidateVolume", { from: tier.from_dollars })}
-              price={t("perCandidate", { dollars: tier.cents / 100 })}
+              what={t("candidateVolume", {
+                from: formatPrice(
+                  tier.from_dollars * 100,
+                  catalog.currency,
+                  locale
+                ),
+              })}
+              price={t("perCandidate", {
+                price: formatPrice(tier.cents, catalog.currency, locale),
+              })}
             />
           ))}
         </ul>

@@ -554,8 +554,8 @@
     "test": "Tạo một buổi phỏng vấn",
     "free": "Miễn phí",
     "candidate": "Mỗi ứng viên trả lời ít nhất một câu hỏi",
-    "candidateVolume": "Với credit từ lần nạp ${from, number} trở lên",
-    "perCandidate": "${dollars, number} mỗi ứng viên",
+    "candidateVolume": "Với credit từ lần nạp {from} trở lên",
+    "perCandidate": "{price} mỗi ứng viên",
     "welcome": "{count, plural, other {# ứng viên}} đầu tiên của bạn",
     "credits": "$1 = 100 credit, credit không bao giờ hết hạn.",
     "referrals": "Giới thiệu",
@@ -802,8 +802,8 @@
       "see": "Xem bảng giá",
       "perCandidate": "mỗi ứng viên",
       "base": "Dùng bao nhiêu trả bấy nhiêu",
-      "volume": "Khi nạp từ ${from, number}",
-      "compare": "${min}–{max} mỗi ứng viên, không cần gói đăng ký"
+      "volume": "Khi nạp từ {from}",
+      "compare": "{range} mỗi ứng viên, không cần gói đăng ký"
     },
     "faq": {
       "title": "Vẫn còn thắc mắc?",

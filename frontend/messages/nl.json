@@ -554,8 +554,8 @@
     "test": "Een interview genereren",
     "free": "Gratis",
     "candidate": "Elke kandidaat die minstens één vraag beantwoordt",
-    "candidateVolume": "Met credits uit een opwaardering van ${from, number} of meer",
-    "perCandidate": "${dollars, number} per kandidaat",
+    "candidateVolume": "Met credits uit een opwaardering van {from} of meer",
+    "perCandidate": "{price} per kandidaat",
     "welcome": "{count, plural, one {Je eerste kandidaat} other {Je eerste # kandidaten}}",
     "credits": "$1 = 100 credits, credits verlopen nooit.",
     "referrals": "Doorverwijzingen",
@@ -802,8 +802,8 @@
       "see": "Prijzen bekijken",
       "perCandidate": "per kandidaat",
       "base": "Betalen naar gebruik",
-      "volume": "Met een opwaardering vanaf ${from, number}",
-      "compare": "${min}–{max} per kandidaat, zonder abonnement"
+      "volume": "Met een opwaardering vanaf {from}",
+      "compare": "{range} per kandidaat, zonder abonnement"
     },
     "faq": {
       "title": "Nog vragen?",

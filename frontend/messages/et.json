@@ -554,8 +554,8 @@
     "test": "Intervjuu loomine",
     "free": "Tasuta",
     "candidate": "Iga kandidaat, kes vastab vähemalt ühele küsimusele",
-    "candidateVolume": "Krediitidega vähemalt {from, number} $ juurdelaadimisest",
-    "perCandidate": "{dollars, number} $ kandidaadi kohta",
+    "candidateVolume": "Krediitidega vähemalt {from} juurdelaadimisest",
+    "perCandidate": "{price} kandidaadi kohta",
     "welcome": "{count, plural, one {Sinu esimene kandidaat} other {Sinu esimesed # kandidaati}}",
     "credits": "1 $ = 100 krediiti, krediidid ei aegu.",
     "referrals": "Soovitused",
@@ -810,8 +810,8 @@
       "see": "Vaata hindu",
       "perCandidate": "kandidaadi kohta",
       "base": "Maksa kasutuse järgi",
-      "volume": "Juurdelaadimisega alates {from, number} $",
-      "compare": "${min}–{max} kandidaadi kohta, ilma tellimuseta"
+      "volume": "Juurdelaadimisega alates {from}",
+      "compare": "{range} kandidaadi kohta, ilma tellimuseta"
     },
     "faq": {
       "title": "Küsimusi veel?",

@@ -554,8 +554,8 @@
     "test": "Generar una entrevista",
     "free": "Gratis",
     "candidate": "Cada candidato que responde al menos una pregunta",
-    "candidateVolume": "Con créditos de una recarga de ${from, number} o más",
-    "perCandidate": "${dollars, number} por candidato",
+    "candidateVolume": "Con créditos de una recarga de {from} o más",
+    "perCandidate": "{price} por candidato",
     "welcome": "{count, plural, one {Tu primer candidato} other {Tus primeros # candidatos}}",
     "credits": "$1 = 100 créditos, los créditos no caducan.",
     "referrals": "Recomendaciones",
@@ -806,8 +806,8 @@
       "see": "Ver precios",
       "perCandidate": "por candidato",
       "base": "Pago por uso",
-      "volume": "Con una recarga desde ${from, number}",
-      "compare": "${min}–{max} por candidato, sin suscripción"
+      "volume": "Con una recarga desde {from}",
+      "compare": "{range} por candidato, sin suscripción"
     },
     "faq": {
       "title": "¿Aún tienes preguntas?",

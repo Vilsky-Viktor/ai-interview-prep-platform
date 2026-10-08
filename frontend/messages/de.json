@@ -554,8 +554,8 @@
     "test": "Ein Interview generieren",
     "free": "Kostenlos",
     "candidate": "Jeder Kandidat, der mindestens eine Frage beantwortet",
-    "candidateVolume": "Mit Credits aus einer Aufladung ab ${from, number}",
-    "perCandidate": "${dollars, number} pro Kandidat",
+    "candidateVolume": "Mit Credits aus einer Aufladung ab {from}",
+    "perCandidate": "{price} pro Kandidat",
     "welcome": "{count, plural, one {Dein erster Kandidat} other {Deine ersten # Kandidaten}}",
     "credits": "$1 = 100 Credits, Credits verfallen nie.",
     "referrals": "Empfehlungen",
@@ -806,8 +806,8 @@
       "see": "Preise ansehen",
       "perCandidate": "pro Kandidat",
       "base": "Nach Verbrauch",
-      "volume": "Mit einer Aufladung ab ${from, number}",
-      "compare": "${min}–{max} pro Kandidat, ohne Abo"
+      "volume": "Mit einer Aufladung ab {from}",
+      "compare": "{range} pro Kandidat, ohne Abo"
     },
     "faq": {
       "title": "Noch Fragen?",

@@ -554,8 +554,8 @@
     "test": "إنشاء مقابلة",
     "free": "مجانًا",
     "candidate": "كل مرشح يجيب عن سؤال واحد على الأقل",
-    "candidateVolume": "برصيد من عملية شحن بقيمة ${from, number} أو أكثر",
-    "perCandidate": "${dollars, number} لكل مرشح",
+    "candidateVolume": "برصيد من عملية شحن بقيمة {from} أو أكثر",
+    "perCandidate": "{price} لكل مرشح",
     "welcome": "{count, plural, zero {أول مرشح لديك} one {أول مرشح لديك} two {أول مرشحَين لديك} few {أول # مرشحين لديك} many {أول # مرشحًا لديك} other {أول # مرشح لديك}}",
     "credits": "1 دولار = 100 رصيد، ولا تنتهي صلاحية الرصيد أبدًا.",
     "referrals": "الإحالات",
@@ -802,8 +802,8 @@
       "see": "عرض الأسعار",
       "perCandidate": "لكل مرشح",
       "base": "ادفع حسب الاستخدام",
-      "volume": "مع شحن بقيمة ${from, number} فأكثر",
-      "compare": "${min}–{max} لكل مرشح، دون اشتراك"
+      "volume": "مع شحن بقيمة {from} فأكثر",
+      "compare": "{range} لكل مرشح، دون اشتراك"
     },
     "faq": {
       "title": "هل لديك أسئلة أخرى؟",

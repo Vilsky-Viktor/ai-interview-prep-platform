@@ -13,11 +13,8 @@ describe("softwareData", () => {
   it("offers the price per candidate from cheapest to dearest", () => {
     const catalog = {
       currency: "USD",
-      candidate_prices: [
-        { from_dollars: 0, cents: 300 },
-        { from_dollars: 250, cents: 200 },
-        { from_dollars: 1000, cents: 100 },
-      ],
+      candidate_cents_min: 100,
+      candidate_cents_max: 300,
     } as Catalog
 
     expect(softwareData(SITE, "Tests.", catalog).offers).toEqual({
