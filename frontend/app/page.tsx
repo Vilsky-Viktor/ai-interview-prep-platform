@@ -52,7 +52,7 @@ export default async function HomePage() {
         <div className="w-full max-w-176 space-y-10">
           <div className="space-y-4">
             {/* Two lines, each ending with the logo's blue dot. */}
-            <h1 className="no-dot font-heading text-5xl font-medium tracking-tight text-balance sm:text-6xl">
+            <h1 className="no-dot font-heading text-[min(3rem,10.5vw)] font-medium tracking-tight text-balance sm:text-6xl">
               {t("title")
                 .split("\n")
                 .map((line) => (

@@ -32,7 +32,7 @@ export async function InviteWaysSection() {
 
   return (
     <LandingSection title={t("title")} text={t("text")}>
-      <ul className="mx-auto mt-8 grid w-full max-w-4xl gap-8 pe-1 sm:grid-cols-2 sm:pe-0">
+      <ul className="mx-auto mt-8 grid w-full max-w-4xl grid-cols-1 gap-8 pe-4 sm:grid-cols-2 sm:pe-0">
         {WAYS.map(({ key, Icon }) => (
           <li
             key={key}

@@ -27,7 +27,7 @@ export async function AdvantagesSection() {
 
   return (
     <LandingSection id="advantages" title={t("title")} text={t("text")}>
-      <ul className="mx-auto mt-8 grid w-full max-w-5xl gap-8 pe-1 sm:grid-cols-2 sm:pe-0 lg:grid-cols-3">
+      <ul className="mx-auto mt-8 grid w-full max-w-5xl gap-8 pe-4 sm:grid-cols-2 sm:pe-0 lg:grid-cols-3">
         {POINTS.map(({ key, Icon }) => (
           <li
             key={key}

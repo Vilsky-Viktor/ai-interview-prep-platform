@@ -32,7 +32,8 @@ export function GenerateIn({
 
   return (
     <div className="flex items-center gap-2 text-xs text-muted-foreground">
-      <span className="shrink-0">{t("label")}</span>
+      {/* The picker carries the same name, so the narrowest phones can drop it for room. */}
+      <span className="shrink-0 max-[359px]:hidden">{t("label")}</span>
       <LanguagePicker
         languages={languages}
         value={value}
