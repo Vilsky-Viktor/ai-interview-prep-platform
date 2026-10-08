@@ -3,7 +3,10 @@ only with INTEGRATION_TESTS set (see scripts/integration.sh); plain `pytest` ski
 
 import asyncio
 import os
+import uuid
 
+import firebase_admin
+import httpx
 import pytest
 from alembic import command
 from alembic.config import Config
@@ -60,3 +63,31 @@ def run():
         return asyncio.run(wrapped())
 
     return run
+
+
+@pytest.fixture
+def user():
+    """A new Auth emulator user: (uid, ID token); the user is deleted after the test. The
+    assistant checks the token as it does in the running stack."""
+    if not firebase_admin._apps:
+        firebase_admin.initialize_app(options={"projectId": os.environ["FIREBASE_PROJECT_ID"]})
+
+    auth = f"http://{os.environ['FIREBASE_AUTH_EMULATOR_HOST']}/identitytoolkit.googleapis.com/v1"
+    email = f"assistant-{uuid.uuid4().hex[:8]}@example.com"
+    found = httpx.post(
+        f"{auth}/accounts:signUp?key=demo",
+        json={"email": email, "password": "secret123", "returnSecureToken": True},
+    ).json()
+
+    yield found["localId"], found["idToken"]
+
+    httpx.post(
+        f"{auth}/projects/{os.environ['FIREBASE_PROJECT_ID']}/accounts:delete",
+        json={"localId": found["localId"]},
+        headers={"Authorization": "Bearer owner"},
+    )
+
+
+@pytest.fixture
+def token(user):
+    return user[1]

@@ -15,6 +15,7 @@ class Settings(ServiceSettings):
     notifications_url: str
     ats_url: str
     api_url: str
+    assistant_url: str
 
     @property
     def sqlalchemy_url(self) -> str:

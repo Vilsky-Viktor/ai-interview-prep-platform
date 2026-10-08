@@ -1,31 +1,8 @@
 """The tools against the running stack's services, as a throwaway Auth emulator user."""
 
-import os
 import uuid
 
-import httpx
-import pytest
-
 from app.services.tool_calls import call_tool
-
-
-@pytest.fixture
-def token():
-    """A new emulator user's ID token; the user is deleted after the test."""
-    auth = f"http://{os.environ['FIREBASE_AUTH_EMULATOR_HOST']}/identitytoolkit.googleapis.com/v1"
-    email = f"assistant-{uuid.uuid4().hex[:8]}@example.com"
-    user = httpx.post(
-        f"{auth}/accounts:signUp?key=demo",
-        json={"email": email, "password": "secret123", "returnSecureToken": True},
-    ).json()
-
-    yield user["idToken"]
-
-    httpx.post(
-        f"{auth}/projects/{os.environ['FIREBASE_PROJECT_ID']}/accounts:delete",
-        json={"localId": user["localId"]},
-        headers={"Authorization": "Bearer owner"},
-    )
 
 
 def test_a_tool_calls_companies_as_the_user(run, token):

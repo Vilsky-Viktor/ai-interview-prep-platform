@@ -8,9 +8,9 @@ locals {
   # Every service. `public` ones are reached through the load balancer at /api/<path>/ (or / for
   # the frontend); the others only by Google (Cloud Tasks, Scheduler, Pub/Sub) as the invoker.
   # `connections` is what one instance may open to Postgres (a pool of 5 plus 5 extra; generation
-  # and the worker 4 more for LangGraph's checkpoints; notifications, ats and api 2 plus 2), and `max` instances
-  # keep their total within the database's budget, even while a deploy runs old and new instances
-  # side by side (see database.tf). The APIs with a pool of 10 take 40 requests at once per
+  # and the worker 4 more for LangGraph's checkpoints; notifications, ats, api and assistant 2 plus
+  # 2), and `max` instances keep their total within the database's budget, even while a deploy
+  # runs old and new instances side by side (see database.tf). The APIs with a pool of 10 take 40 requests at once per
   # instance, so a busy one scales out instead of queueing on its pool; the others 80, except
   # notifications-stream: it runs notifications' image only for the
   # bell's live stream (load_balancer.tf routes it there), where each open tab holds one request
@@ -28,16 +28,18 @@ locals {
     notifications-stream = { image = "notifications", public = true, path = null, port = 8000, min = 0, max = 2, connections = 4, cpu = "1", memory = "512Mi", timeout = 3600, concurrency = 500, database = "notifications", command = null }
     ats                  = { image = "ats", public = true, path = "ats", port = 8000, min = 0, max = 1, connections = 4, cpu = "1", memory = "512Mi", timeout = 60, concurrency = 80, database = "ats", command = null }
     # The public API at /api/v1/ (path "v1").
-    api               = { image = "api", public = true, path = "v1", port = 8000, min = 0, max = 1, connections = 4, cpu = "1", memory = "512Mi", timeout = 60, concurrency = 80, database = "api", command = null }
+    api = { image = "api", public = true, path = "v1", port = 8000, min = 0, max = 1, connections = 4, cpu = "1", memory = "512Mi", timeout = 60, concurrency = 80, database = "api", command = null }
+    # The in-app assistant: a turn streams up to 90 s while its tools call the other services.
+    assistant         = { image = "assistant", public = true, path = "assistant", port = 8000, min = 0, max = 2, connections = 4, cpu = "1", memory = "512Mi", timeout = 300, concurrency = 80, database = "assistant", command = null }
     generation-worker = { image = "generation", public = false, path = null, port = 8000, min = 0, max = 2, connections = 14, cpu = "1", memory = "2Gi", timeout = 1800, concurrency = 10, database = "generation", command = ["uv", "run", "--no-sync", "uvicorn", "app.worker_main:app", "--host", "0.0.0.0", "--port", "8000"] }
   }
 
-  databases = ["library", "generation", "rounds", "companies", "billing", "notifications", "ats", "api"]
+  databases = ["library", "generation", "rounds", "companies", "billing", "notifications", "ats", "api", "assistant"]
 
   # Which services each one calls; it gets their keys, to sign tokens for them.
   calls = {
     frontend             = []
-    library              = ["rounds", "generation", "companies", "billing", "notifications", "ats", "api"]
+    library              = ["rounds", "generation", "companies", "billing", "notifications", "ats", "api", "assistant"]
     generation           = ["library"]
     generation-worker    = ["library"]
     rounds               = ["library"]
@@ -47,6 +49,8 @@ locals {
     notifications-stream = ["companies", "library"]
     ats                  = ["companies"]
     api                  = ["companies"]
+    # Its X-Assistant header, so companies audits reads made through it as such.
+    assistant = ["companies"]
   }
 
   # Each service's own key checks calls to it. The worker and the stream share generation's and
@@ -62,6 +66,7 @@ locals {
     notifications-stream = "notifications"
     ats                  = "ats"
     api                  = "api"
+    assistant            = "assistant"
   }
 
   # Secrets each service reads (Secret Manager name => environment variable).
@@ -77,6 +82,7 @@ locals {
     notifications-stream = { redis-url = "REDIS_URL", email-link-secret = "EMAIL_LINK_SECRET" }
     ats                  = { redis-url = "REDIS_URL", ats-encryption-key = "ATS_ENCRYPTION_KEY" }
     api                  = { redis-url = "REDIS_URL", api-encryption-key = "API_ENCRYPTION_KEY" }
+    assistant            = { redis-url = "REDIS_URL", openai-api-key = "OPENAI_API_KEY" }
   }
 
   secrets = {

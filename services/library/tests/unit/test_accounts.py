@@ -45,6 +45,7 @@ def test_every_service_is_cleaned_before_the_sign_in_goes(steps):
         ("service", "notifications"),
         ("service", "ats"),
         ("service", "api"),
+        ("service", "assistant"),
         ("library", "ann"),
         ("sign-in", "ann"),
     ]
@@ -98,6 +99,7 @@ def test_the_export_holds_every_service_and_downloads_as_a_file(client, monkeypa
         "notifications": {"from": "notifications"},
         "ats": {"from": "ats"},
         "api": {"from": "api"},
+        "assistant": {"from": "assistant"},
     }
 
 

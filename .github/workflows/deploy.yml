@@ -31,7 +31,7 @@ permissions:
 env:
   REGISTRY: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/prepza
   VERSION: ${{ inputs.tag || github.ref_name }}
-  SERVICES: library generation rounds companies billing notifications ats api frontend
+  SERVICES: library generation rounds companies billing notifications ats api assistant frontend
 
 jobs:
   verify:
@@ -114,7 +114,7 @@ jobs:
       - name: Migrations
         if: github.event_name == 'push' || inputs.migrate
         run: |
-          for db in library generation rounds companies billing notifications ats api; do
+          for db in library generation rounds companies billing notifications ats api assistant; do
             gcloud run jobs update "$db-migrate" --image="$REGISTRY/$db:$VERSION" --region="${{ vars.GCP_REGION }}" --quiet
             gcloud run jobs execute "$db-migrate" --region="${{ vars.GCP_REGION }}" --wait --quiet
           done
@@ -134,6 +134,7 @@ jobs:
           deploy notifications-stream notifications
           deploy ats ats
           deploy api api
+          deploy assistant assistant
           deploy frontend frontend
       - name: Smoke test
         run: ./e2e_tests/smoke.sh "${{ vars.SITE_URL }}"

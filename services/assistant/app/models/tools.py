@@ -35,3 +35,7 @@ class ToolResult:
     content: dict
     block: dict | None
     duration_ms: int
+
+    @property
+    def succeeded(self) -> bool:
+        return self.status_code is not None and 200 <= self.status_code < 300

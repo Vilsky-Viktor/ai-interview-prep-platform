@@ -31,6 +31,8 @@ locals {
     # In the morning (UTC), not the night: a reminder candidates see.
     invite-reminders = { service = "companies", path = "/internal/schedules/invite-reminders", cron = "0 9 * * *" }
     bank-stages      = { service = "library", path = "/internal/schedules/bank", cron = "45 3 * * *" }
+    # Assistant conversations nobody added to for its retention period (90 days).
+    assistant-retention = { service = "assistant", path = "/internal/schedules/retention", cron = "0 4 * * *" }
     # Emails to company members, in the morning (UTC): every 10 minutes for an hour, each run
     # going on where the last stopped (none is sent twice): the activity digest from 7:00,
     # reminders from 8:00.
@@ -38,7 +40,7 @@ locals {
     member-reminders = { service = "notifications", path = "/internal/schedules/reminders", cron = "*/10 8 * * *" }
     # ATS candidates still waiting or whose invite stalled, results kept while a connection was
     # broken or the ATS failed, and candidates past their retention.
-    ats-recover      = { service = "ats", path = "/internal/schedules/recover", cron = "*/10 * * * *" }
+    ats-recover = { service = "ats", path = "/internal/schedules/recover", cron = "*/10 * * * *" }
     # Events companies' web hooks didn't take, sent again with backoff.
     webhook-retries = { service = "api", path = "/internal/schedules/webhook-retries", cron = "*/5 * * * *" }
     # Events not published right after their change (the outbox).
@@ -53,11 +55,11 @@ locals {
 }
 
 resource "google_cloud_scheduler_job" "schedule" {
-  for_each         = local.schedules
-  name             = each.key
-  region           = var.region
-  schedule         = each.value.cron
-  time_zone        = "Etc/UTC"
+  for_each  = local.schedules
+  name      = each.key
+  region    = var.region
+  schedule  = each.value.cron
+  time_zone = "Etc/UTC"
   # As long as the service lets the request run (Scheduler allows 15s to 30 minutes): waiting
   # longer only delays the retry. A retry may still overlap a run Cloud Run cut off, so each job
   # is safe to run twice at once (invite expiry re-checks before holding credits again).

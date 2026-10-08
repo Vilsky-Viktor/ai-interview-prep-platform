@@ -23,12 +23,12 @@ docker build --target prod -t prepza-frontend \
 
 Never set `FIREBASE_AUTH_EMULATOR_HOST` in production.
 
-Terraform passes only one generation setting to Google Cloud, `DAILY_GENERATION_LIMIT` (its `daily_generation_limit` variable, default 200); production runs on the defaults of the others (see [Generation settings](generation.md#generation-settings) and [infra/README.md](../infra/README.md#notes)).
+Terraform passes only one generation setting to Google Cloud, `DAILY_GENERATION_LIMIT` (its `daily_generation_limit` variable, default 200); production runs on the defaults of the others (see [Generation settings](generation.md#generation-settings) and [infra/README.md](../infra/README.md#notes)). The assistant runs on its defaults too (`ASSISTANT_MODEL`, `ASSISTANT_REASONING_EFFORT`, `ASSISTANT_RETENTION_DAYS`); its usage limits are constants in its code (see [The in-app assistant](features/assistant.md#limits)).
 
 ## Migrations
 
 - Run each API's migrations once before it starts: `uv run --no-sync alembic upgrade head`.
-- Each of the 8 API services has them (library, generation, rounds, companies, billing, notifications, ats, api); the generation worker and the bell stream share generation's and notifications' databases. In Google Cloud, each runs as a `<service>-migrate` job, after the `db-roles` job that gives each service its own database user.
+- Each of the 9 API services has them (library, generation, rounds, companies, billing, notifications, ats, api, assistant); the generation worker and the bell stream share generation's and notifications' databases. In Google Cloud, each runs as a `<service>-migrate` job, after the `db-roles` job that gives each service its own database user.
 - Migrations only go forward, so keep them additive for rollbacks to stay safe.
 
 ## Error reporting

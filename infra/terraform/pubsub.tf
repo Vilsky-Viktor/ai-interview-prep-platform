@@ -23,7 +23,9 @@ resource "google_pubsub_subscription" "dead_letter" {
 # Pub/Sub caps a filter at 256 bytes: each type adds 24 bytes plus its name. A type ending in ".*"
 # matches every type with that prefix (hasPrefix): notifications takes all "candidate." events
 # that way, and ats all "interview." ones (241 bytes; listing them, 277), as listing them one by
-# one outgrew the cap; each ignores the ones it doesn't handle. api's filter is 119 bytes.
+# one outgrew the cap; each ignores the ones it doesn't handle. api's filter is 119 bytes, the
+# assistant's 35. A new consumer's subscription is created on apply and gets only the events
+# published after that.
 locals {
   consumes = {
     library       = ["answer.recorded", "session.scored"]
@@ -31,6 +33,7 @@ locals {
     notifications = ["notification.requested", "candidate.*", "report.shared", "contact.sent", "company.deleted"]
     ats           = ["candidate.finished", "candidate.rescored", "candidate.removed", "interview.*", "company.deleted", "credits.added"]
     api           = ["candidate.finished", "candidate.rescored", "company.deleted"]
+    assistant     = ["company.deleted"]
   }
 }
 

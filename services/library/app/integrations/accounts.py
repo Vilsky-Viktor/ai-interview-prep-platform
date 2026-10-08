@@ -14,6 +14,7 @@ def services() -> dict[str, str]:
         "notifications": settings.notifications_url,
         "ats": settings.ats_url,
         "api": settings.api_url,
+        "assistant": settings.assistant_url,
     }
 
 

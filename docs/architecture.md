@@ -23,6 +23,7 @@ flowchart LR
     gateway --> notifications
     gateway --> ats
     gateway --> api
+    gateway --> assistant
     platforms[Companies' platforms] -- API keys --> gateway
     paddle[Paddle] -- payment webhooks --> gateway
     resend[Resend] -- delivery webhooks --> gateway
@@ -36,6 +37,9 @@ flowchart LR
     scheduler -- recovery, outbox --> ats
     scheduler -- web hook retries --> api
     scheduler -- activity digest, reminders --> notifications
+    scheduler -- retention --> assistant
+    assistant -- user's own GET routes, as the user --> companies
+    library -- delete, export a user --> assistant
     notifications -- members, waiting interviews --> companies
     notifications -- low credits --> billing
     notifications -- topic review statuses --> generation
@@ -62,6 +66,7 @@ flowchart LR
     pubsub -- push --> companies
     pubsub -- push --> ats
     pubsub -- push --> api
+    pubsub -- push --> assistant
     pubsub -- push --> notifications -- email --> smtp[Resend / mailpit]
     notifications -- chosen notifications --> slack[Slack]
     pubsub -- funnel.* events --> bigquery[(BigQuery: funnel_events)]
@@ -79,7 +84,7 @@ flowchart LR
 | `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites and reminders, emailed PDF reports, contact messages to prepza's inbox, and to company members the daily activity digest, reminders (low credits, interviews nobody was invited to, topics waiting for review) and failed automatic top-ups. Also the bell: stores the notifications other services ask for (`notification.requested`), removes a deleted company's (`company.deleted`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them (one subscription per instance, shared by its open tabs). Posts a company's chosen notifications to its Slack channel too, through the channel's incoming web hook. Signs emails' unsubscribe links and applies them (`/unsubscribe/{token}`, no sign-in): a user's email settings in library, a candidate's opt-out from a company's emails in its own database, checked before each invite and reminder |
 | `ats` | ATS integrations (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): companies' encrypted ATS keys, linked jobs and the candidates the ATSs send (their webhooks); invites them through companies and writes their results back to the ATS |
 | `api` | The public API at `/api/v1/`: companies' API keys (as hashes, with their expiry), their web hooks (secrets encrypted) and deliveries; reads interviews and candidates and invites through companies, and sends a signed web hook when a candidate finishes |
-| `assistant` | The in-app AI assistant (being built): its conversations, and tools made from the other services' user-facing GET routes, called with the user's own token. The tools are an allow-list (`app/constants/tools.py`) over committed OpenAPI snapshots of those services (`app/openapi/`, written by `scripts/assistant-openapi.sh`); a tool's data is trimmed for the model, and the panel's links are built only from the tool's link template and ids. Calls to companies carry a signed `X-Assistant` header, so companies audits those reads as the assistant's |
+| `assistant` | The in-app AI assistant ([feature page](features/assistant.md)): signed-in users' conversations, streamed over server-sent events (`POST /chat`), and tools made from the other services' user-facing GET routes, called with the user's own token. The tools are an allow-list (`app/constants/tools.py`) over committed OpenAPI snapshots of those services (`app/openapi/`, written by `scripts/assistant-openapi.sh`); a tool's data is trimmed for the model, and the panel's links are built only from the tool's link template and ids. Calls to companies carry a signed `X-Assistant` header, so companies audits those reads as the assistant's |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
 What each service does for users is described in the feature pages, linked from the [README](../README.md#documentation). Generation is described in [Generation and question quality](generation.md).
@@ -97,7 +102,7 @@ What each service does for users is described in the feature pages, linked from 
 | Kind | In Google Cloud | Examples |
 |---|---|---|
 | Long jobs | Cloud Tasks that call the generation worker's `/internal/jobs/...` | A generation, a question check |
-| Periodic work | Cloud Scheduler calling `/internal/schedules/...` ([`infra/terraform/jobs.tf`](../infra/terraform/jobs.tf)) | Every minute: outbox flushes (library, companies, rounds, generation worker, ats) and interviews whose time ran out (rounds). Every 5 minutes: stuck-generation sweeps and web hook retries (api). Every 10 minutes: key-check batches and ATS recovery (waiting and stalled ATS invites, kept ATS results, ATS candidates past retention). Daily: generation and candidate retention, invite expiry and reminders, the question bank's stages. Every 10 minutes for an hour each morning: the activity digest (from 7:00 UTC) and member reminders (from 8:00), each run going on where the last stopped |
+| Periodic work | Cloud Scheduler calling `/internal/schedules/...` ([`infra/terraform/jobs.tf`](../infra/terraform/jobs.tf)) | Every minute: outbox flushes (library, companies, rounds, generation worker, ats) and interviews whose time ran out (rounds). Every 5 minutes: stuck-generation sweeps and web hook retries (api). Every 10 minutes: key-check batches and ATS recovery (waiting and stalled ATS invites, kept ATS results, ATS candidates past retention). Daily: generation, candidate and assistant conversation retention, invite expiry and reminders, the question bank's stages. Every 10 minutes for an hour each morning: the activity digest (from 7:00 UTC) and member reminders (from 8:00), each run going on where the last stopped |
 
 - Google signs those calls, and Pub/Sub pushes, as one invoker service account, which each service checks.
 - Locally there is no queue: the API calls the worker directly.
@@ -111,7 +116,7 @@ Domain events go through an outbox in library, generation, rounds, companies and
 2. It is published right after. A request publishes only the events it saved, in one batch, with a 5-second timeout.
 3. If that failed, a per-minute scheduled flush publishes it. Each run sends batches of 100 until none wait, for up to 20 seconds, so a backlog after an outage drains in minutes; two runs never send the same row.
 
-Billing has no outbox: it publishes `credits.added` and its notifications (referral rewards, automatic top-ups charged or failed) straight after the change, with a 5-second timeout, and only logs a failure, so a lost event never fails a payment. A lost `credits.added` leaves credit-refused ATS candidates for **Invite again**. Notifications and api publish no domain events.
+Billing has no outbox: it publishes `credits.added` and its notifications (referral rewards, automatic top-ups charged or failed) straight after the change, with a 5-second timeout, and only logs a failure, so a lost event never fails a payment. A lost `credits.added` leaves credit-refused ATS candidates for **Invite again**. Notifications, api and the assistant publish no domain events.
 
 Refusals and duplicates:
 
@@ -121,7 +126,7 @@ Refusals and duplicates:
 Delivery:
 
 - All events go to one Pub/Sub topic, `events`.
-- It pushes each event to the `/internal/events` endpoint of library, companies, notifications, ats and api.
+- It pushes each event to the `/internal/events` endpoint of library, companies, notifications, ats, api and assistant.
 - In Google Cloud, each subscription carries only the types its consumer handles ([`infra/terraform/pubsub.tf`](../infra/terraform/pubsub.tf), `locals.consumes`):
 
 | Consumer | Event types |
@@ -131,6 +136,7 @@ Delivery:
 | notifications | `notification.requested`, every `candidate.*` (it handles `candidate.invited`, `candidate.reminded` and `candidate.removed`), `report.shared`, `contact.sent`, `company.deleted` |
 | ats | `candidate.finished`, `candidate.rescored`, `candidate.removed`, every `interview.*` (it handles `interview.ready` and `interview.deleted`), `company.deleted`, `credits.added` |
 | api | `candidate.finished`, `candidate.rescored`, `company.deleted` |
+| assistant | `company.deleted` (deletes the company's conversations; deleting again deletes nothing more) |
 
 - Locally, each consumer ignores events that aren't its own.
 - Locally, Google's Pub/Sub emulator runs in docker-compose, and [`scripts/local/pubsub-setup.sh`](../scripts/local/pubsub-setup.sh) creates the topic and subscriptions.

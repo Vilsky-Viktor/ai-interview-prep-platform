@@ -2,10 +2,10 @@
 
 Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) behind Google's global load balancer:
 
-- **Cloud Run:** the frontend, eight APIs (library, generation, rounds, companies, billing, notifications, ats, api) and the generation worker; notifications' bell stream runs as its own service (`notifications-stream`, same image) so open tabs never take the capacity event pushes need. That's 11 services from 9 images. Billed per request, and idle services cost nothing.
+- **Cloud Run:** the frontend, nine APIs (library, generation, rounds, companies, billing, notifications, ats, api, assistant) and the generation worker; notifications' bell stream runs as its own service (`notifications-stream`, same image) so open tabs never take the capacity event pushes need. That's 12 services from 10 images. Billed per request, and idle services cost nothing.
 - **Cloud SQL Postgres 18** (as locally): one database per service, with daily backups and point-in-time recovery.
-- **Pub/Sub:** domain events. One `events` topic is pushed to library, companies, notifications, ats and api, each getting only the event types it handles (`locals.consumes` in `pubsub.tf`; add a type there when a consumer starts handling it; a filter is capped at 256 bytes, and changing one replaces that subscription, dropping the messages it still holds, so apply when its backlog is empty), with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
-- **Cloud Tasks:** generation jobs on the worker, each tried up to 3 times. **Cloud Scheduler** (`jobs.tf`): outbox flushes and expired interviews every minute, generation sweeps and web hook retries every 5 minutes, key-check batches and ATS recovery every 10 minutes, daily retention, invite expiry and reminders and the question bank's stages, and every 10 minutes for an hour each morning the activity digest (7:00 UTC) and member reminders (8:00); a failed daily job is retried 3 times (the morning email runs aren't: the next run goes on).
+- **Pub/Sub:** domain events. One `events` topic is pushed to library, companies, notifications, ats, api and assistant, each getting only the event types it handles (`locals.consumes` in `pubsub.tf`; add a type there when a consumer starts handling it; a filter is capped at 256 bytes, and changing one replaces that subscription, dropping the messages it still holds, so apply when its backlog is empty; a new consumer's subscription gets only the events published after it's created), with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
+- **Cloud Tasks:** generation jobs on the worker, each tried up to 3 times. **Cloud Scheduler** (`jobs.tf`): outbox flushes and expired interviews every minute, generation sweeps and web hook retries every 5 minutes, key-check batches and ATS recovery every 10 minutes, daily retention (generations, candidates, the assistant's idle conversations), invite expiry and reminders and the question bank's stages, and every 10 minutes for an hour each morning the activity digest (7:00 UTC) and member reminders (8:00); a failed daily job is retried 3 times (the morning email runs aren't: the next run goes on).
 - **The global load balancer:**
   - HTTPS with a Google-managed certificate;
   - `/api/<service>/` routes to each API, and everything else to the frontend;
@@ -59,7 +59,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    terraform apply -target=google_artifact_registry_repository.images
    gcloud auth configure-docker europe-west1-docker.pkg.dev
    REGISTRY=europe-west1-docker.pkg.dev/prepza-prod/prepza
-   for service in library generation rounds companies billing notifications ats api; do
+   for service in library generation rounds companies billing notifications ats api assistant; do
      docker build --platform linux/amd64 --target prod -f services/$service/Dockerfile -t $REGISTRY/$service:first . && docker push $REGISTRY/$service:first
    done
    docker build --platform linux/amd64 --target prod -t $REGISTRY/frontend:first \
@@ -96,11 +96,11 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    Services read `latest` when they start, so redeploy (step 9) after setting secrets.
 9. **Run the migrations, then restart the services** so they pick up the secrets.
    ```bash
-   for db in library generation rounds companies billing notifications ats api; do
+   for db in library generation rounds companies billing notifications ats api assistant; do
      gcloud run jobs execute $db-migrate --region=europe-west1 --wait
    done
    # A new revision of each service reads the secrets you just set.
-   for service in frontend library generation rounds companies billing notifications notifications-stream ats api generation-worker; do
+   for service in frontend library generation rounds companies billing notifications notifications-stream ats api assistant generation-worker; do
      gcloud run services update $service --region=europe-west1 --update-labels=restarted=$(date +%s)
    done
    ```
@@ -171,12 +171,12 @@ What the emails do themselves: each has a plain-text part next to the HTML, `Aut
 ## Deploys
 
 - **Pull requests:** CI runs on every push, and a new push cancels the previous run. It tests and builds only what changed: ruff always; a changed service's unit tests and image; a changed frontend's lint, types, translations check, unit tests and image; and the smoke, integration and page tests on the whole stack when any part, the stack or its tests changed (see [Testing](../docs/testing.md#ci)).
-- **Merging to `main`:** the same CI runs again on the merged code, compared with the last commit it passed on, and pushes the 9 production images for `linux/amd64`, tagged with the commit: the changed ones are built, the others are that commit's images with the new tag added. Nothing is deployed.
+- **Merging to `main`:** the same CI runs again on the merged code, compared with the last commit it passed on, and pushes the 10 production images for `linux/amd64`, tagged with the commit: the changed ones are built, the others are that commit's images with the new tag added. Nothing is deployed.
 - **Releasing:** tag a commit on `main` that CI passed on, the last commit of a push, and push the tag:
   ```bash
   git tag v1.4.0 && git push origin v1.4.0
   ```
-  [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) then checks that the tag is on `main` and CI passed on it, gives that commit's images the version as a tag (nothing is rebuilt), runs the `db-roles` job and then the 8 migration jobs, moves all 11 services to the images, smoke-tests the site and creates a GitHub release with the changes since the last tag.
+  [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) then checks that the tag is on `main` and CI passed on it, gives that commit's images the version as a tag (nothing is rebuilt), runs the `db-roles` job and then the 9 migration jobs, moves all 12 services to the images, smoke-tests the site and creates a GitHub release with the changes since the last tag.
 
 A failed step stops the deploy, and the services keep running the previous images.
 

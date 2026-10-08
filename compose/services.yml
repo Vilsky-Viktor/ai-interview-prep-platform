@@ -12,6 +12,7 @@ x-library-env: &library-env
   NOTIFICATIONS_URL: http://notifications:8000
   ATS_URL: http://ats:8000
   API_URL: http://api:8000
+  ASSISTANT_URL: http://assistant:8000
 
 x-generation-env: &generation-env
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/generation

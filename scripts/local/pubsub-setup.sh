@@ -12,7 +12,7 @@ done
 
 curl -s -o /dev/null -X PUT "$base/topics/events"
 
-for consumer in library companies notifications ats api; do
+for consumer in library companies notifications ats api assistant; do
   curl -s -o /dev/null -X PUT "$base/subscriptions/$consumer-events" \
     -H "Content-Type: application/json" \
     -d "{\"topic\": \"projects/${GOOGLE_CLOUD_PROJECT}/topics/events\",
