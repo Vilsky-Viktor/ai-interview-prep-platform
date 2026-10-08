@@ -1,0 +1,150 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
+
+import { ApiError } from "@/lib/api"
+import {
+  answerParts,
+  inAppHref,
+  linkPage,
+  pageCompany,
+  transcribe,
+} from "@/lib/assistant"
+import type { AssistantBlock } from "@/types/assistant"
+
+// No Firebase in a unit test: nobody is signed in.
+vi.mock("@/lib/firebase", () => ({
+  firebaseAuth: async () => ({
+    authStateReady: async () => {},
+    currentUser: null,
+  }),
+}))
+
+const COMPANY = "8c1d2b8e-1a2b-4c3d-8e9f-0a1b2c3d4e5f"
+
+describe("inAppHref", () => {
+  it("keeps the app's own paths", () => {
+    expect(inAppHref("/companies")).toBe("/companies")
+    expect(inAppHref("/faq#credits")).toBe("/faq#credits")
+  })
+
+  it.each([
+    "https://evil.example",
+    "//evil.example/x",
+    "javascript:alert(1)",
+    "mailto:a@b.c",
+    "/\\evil.example",
+    "faq",
+    "",
+    null,
+    42,
+  ])("drops %s", (href) => {
+    expect(inAppHref(href)).toBeNull()
+  })
+})
+
+describe("linkPage", () => {
+  it.each([
+    ["/pricing", "pricing"],
+    ["/top-up", "topUp"],
+    [`/companies/${COMPANY}/integrations/slack`, "slack"],
+    [`/companies/${COMPANY}/integrations/greenhouse`, "integrations"],
+    [`/companies/${COMPANY}/interviews/i1/candidates/c1`, "candidate"],
+    [`/companies/${COMPANY}/interviews/i1/candidates`, "candidates"],
+    [`/companies/${COMPANY}/interviews/i1`, "interview"],
+    [`/companies/${COMPANY}/members`, "team"],
+  ])("names %s", (href, page) => {
+    expect(linkPage(href)).toBe(page)
+  })
+
+  it("names nothing for a page it doesn't know", () => {
+    expect(linkPage("/somewhere")).toBeNull()
+  })
+})
+
+describe("answerParts", () => {
+  it("pairs each item with its page, and lists link blocks' pages once", () => {
+    const blocks: AssistantBlock[] = [
+      { kind: "link", items: [], links: ["/settings"] },
+      {
+        kind: "candidate_rows",
+        items: [{ email: "ann@example.com" }, { email: "bob@example.com" }],
+        links: ["/companies/x/interviews/i/candidates/1", "https://evil"],
+      },
+      { kind: "link", items: [], links: ["/settings", "//evil", null] },
+    ]
+
+    expect(answerParts(blocks)).toEqual({
+      rows: [
+        {
+          kind: "candidate_rows",
+          items: [
+            {
+              item: { email: "ann@example.com" },
+              href: "/companies/x/interviews/i/candidates/1",
+            },
+            { item: { email: "bob@example.com" }, href: null },
+          ],
+        },
+      ],
+      links: ["/settings"],
+      signIn: undefined,
+    })
+  })
+
+  it("keeps a sign-in card apart from the rows and links", () => {
+    const card: AssistantBlock = {
+      kind: "sign_in",
+      items: [],
+      links: [],
+      provider: "github",
+    }
+
+    expect(answerParts([card])).toEqual({ rows: [], links: [], signIn: card })
+  })
+})
+
+describe("pageCompany", () => {
+  it("reads the company from its pages, with or without a language", () => {
+    expect(pageCompany(`/companies/${COMPANY}/interviews`)).toBe(COMPANY)
+    expect(pageCompany(`/de/companies/${COMPANY}`)).toBe(COMPANY)
+    expect(pageCompany("/companies")).toBeNull()
+    expect(pageCompany("/pricing")).toBeNull()
+  })
+})
+
+describe("transcribe", () => {
+  beforeEach(() => {
+    vi.stubGlobal("fetch", vi.fn())
+    vi.stubGlobal("document", { documentElement: { lang: "de" } })
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it("posts the recording as the body, in its format and the page's language", async () => {
+    vi.mocked(fetch).mockResolvedValue(Response.json({ text: "Who passed?" }))
+    const audio = new Blob(["opus"], { type: "audio/webm" })
+
+    expect(await transcribe(audio)).toBe("Who passed?")
+    const [url, init] = vi.mocked(fetch).mock.calls[0]
+    expect(url).toBe("/api/assistant/transcribe")
+    expect(init?.body).toBe(audio)
+    expect(init?.headers).toMatchObject({
+      "Content-Type": "audio/webm",
+      "Accept-Language": "de",
+    })
+  })
+
+  it("throws the service's message with its status", async () => {
+    vi.mocked(fetch).mockResolvedValue(
+      Response.json({ detail: "Couldn't hear anything." }, { status: 422 })
+    )
+    const failed = transcribe(new Blob([], { type: "audio/mp4" }))
+
+    await expect(failed).rejects.toBeInstanceOf(ApiError)
+    await expect(failed).rejects.toMatchObject({
+      status: 422,
+      message: "Couldn't hear anything.",
+    })
+  })
+})

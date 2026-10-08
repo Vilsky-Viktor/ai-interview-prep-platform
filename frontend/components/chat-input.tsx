@@ -1,0 +1,102 @@
+"use client"
+
+import { cn } from "cn"
+import { ArrowUpIcon, SquareIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
+
+import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
+import { isSubmitShortcut } from "@/lib/keys"
+
+/** A chat's input row: a round text field with Send at its end (⌘/Ctrl + Enter sends). While
+ * an answer streams, Send is off, or is Stop when `onStop` is given. `children` sit before it
+ * (the assistant's voice button). */
+export function ChatInput({
+  value,
+  onChange,
+  onSubmit,
+  label,
+  placeholder,
+  maxLength,
+  streaming,
+  onStop,
+  stopLabel,
+  children,
+  inputRef,
+}: {
+  value: string
+  onChange: (value: string) => void
+  onSubmit: () => void
+  label: string
+  placeholder: string
+  maxLength?: number
+  streaming: boolean
+  onStop?: () => void
+  stopLabel?: string
+  children?: React.ReactNode
+  inputRef?: React.Ref<HTMLTextAreaElement>
+}) {
+  const common = useTranslations("common")
+
+  function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    if (value.trim() && !streaming) {
+      onSubmit()
+    }
+  }
+
+  function handleKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (isSubmitShortcut(event)) {
+      event.preventDefault()
+      event.currentTarget.form?.requestSubmit()
+    }
+  }
+
+  return (
+    <form
+      onSubmit={submit}
+      className="relative rounded-[2rem] border border-transparent transition-colors focus-within:border-ring"
+    >
+      <Textarea
+        ref={inputRef}
+        maxLength={maxLength}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder={placeholder}
+        aria-label={label}
+        className={cn(
+          "max-h-40 min-h-16 resize-none overscroll-contain rounded-[2rem] border-0 bg-muted px-6 py-4 pe-20 text-lg shadow-none focus-visible:border-transparent focus-visible:ring-0 md:text-lg dark:bg-input/30",
+          children && "pe-32"
+        )}
+      />
+      {/* The width of the field, so what the buttons show above it (the voice button's status)
+          centers on it; clicks pass through to the field. */}
+      <div className="pointer-events-none absolute inset-x-3 top-3 flex items-center justify-end gap-2 *:pointer-events-auto">
+        {children}
+        {streaming && onStop ? (
+          <Button
+            type="button"
+            size="icon"
+            className="size-10 rounded-full"
+            onClick={onStop}
+            aria-label={stopLabel}
+          >
+            <SquareIcon className="size-4 fill-current" />
+          </Button>
+        ) : (
+          <Button
+            type="submit"
+            size="icon"
+            className="size-10 rounded-full"
+            disabled={!value.trim() || streaming}
+            aria-label={common("send")}
+          >
+            <ArrowUpIcon className="size-5" />
+          </Button>
+        )}
+      </div>
+    </form>
+  )
+}

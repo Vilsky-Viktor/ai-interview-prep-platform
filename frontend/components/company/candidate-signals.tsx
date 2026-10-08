@@ -12,7 +12,11 @@ import type { Candidate } from "@/types/company"
 
 /** A candidate's integrity signals at a glance: page leaves, copy attempts and answers picked
  * too fast, each with its count; only the ones that happened show. */
-export function CandidateSignals({ candidate }: { candidate: Candidate }) {
+export function CandidateSignals({
+  candidate,
+}: {
+  candidate: Pick<Candidate, "tab_leaves" | "copies" | "fast_answers">
+}) {
   const t = useTranslations("candidates")
   const signals = [
     {

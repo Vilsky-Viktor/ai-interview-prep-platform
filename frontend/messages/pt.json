@@ -905,7 +905,8 @@
       },
       "terms": "Termos",
       "privacy": "Política de privacidade"
-    }
+    },
+    "askAgent": "perguntar ao agente"
   },
   "faq": {
     "title": "Perguntas frequentes",
@@ -1264,5 +1265,108 @@
       "invite_reminders": "Você não vai mais receber lembretes desta entrevista.",
       "company": "Você não vai mais receber e-mails de {company}."
     }
+  },
+  "assistant": {
+    "title": "Assistente",
+    "company": "Empresa",
+    "allCompanies": "Todas as empresas",
+    "newChat": "Nova conversa",
+    "history": "Histórico",
+    "stop": "Parar",
+    "placeholder": "pergunte o que quiser…",
+    "failed": "Não foi possível obter uma resposta agora. Tente novamente.",
+    "openFailed": "Não foi possível abrir esta conversa.",
+    "historyFailed": "Não foi possível carregar suas conversas.",
+    "historyEmpty": "Ainda não há conversas.",
+    "deleteChat": "Excluir “{title}”",
+    "deleteTitle": "Excluir esta conversa?",
+    "deleteText": "A conversa e as respostas são excluídas para sempre.",
+    "emptyTitle": "Pergunte sobre suas contratações",
+    "emptyText": "Candidatos, entrevistas, créditos, integrações e como o prepza funciona, a partir do que você vê nas suas empresas. A IA pode errar; o que vale são as páginas para as quais ela aponta.",
+    "emptyTitleFaq": "Pergunte sobre o prepza",
+    "pages": {
+      "open": "Abrir",
+      "pricing": "Preços",
+      "topUp": "Recarregar",
+      "settings": "Configurações",
+      "faq": "Perguntas frequentes",
+      "companies": "Empresas",
+      "slack": "Slack",
+      "api": "API",
+      "integrations": "Integrações",
+      "template": "Modelo",
+      "templates": "Modelos",
+      "team": "Equipe",
+      "referrals": "Indicações",
+      "candidate": "Candidato",
+      "candidates": "Candidatos",
+      "interview": "Entrevista",
+      "interviews": "Entrevistas"
+    },
+    "voice": {
+      "hold": "Segure para falar",
+      "stop": "Parar a gravação",
+      "recording": "Gravando…",
+      "transcribing": "Transcrevendo…",
+      "notAllowed": "Permita o microfone no navegador para falar.",
+      "noMicrophone": "Nenhum microfone encontrado.",
+      "tooShort": "Curto demais: segure o botão enquanto fala.",
+      "holdHint": "Segure o botão enquanto fala.",
+      "failed": "Não foi possível transformar a gravação em texto. Tente novamente."
+    },
+    "welcome": {
+      "signed_out": {
+        "text": "Como o prepza funciona, quanto custa e o que os candidatos veem, com respostas das perguntas frequentes do prepza. Entre para perguntar sobre suas empresas e candidatos.",
+        "questions": {
+          "what": "O que é o prepza?",
+          "pricing": "Quanto custa?",
+          "takeTest": "Como os candidatos fazem o teste?",
+          "account": "Os candidatos precisam de uma conta?"
+        }
+      },
+      "no_company": {
+        "text": "Vamos começar: sua primeira entrevista, sua empresa e a verificação dela.",
+        "questions": {
+          "firstInterview": "Como crio minha primeira entrevista?",
+          "createCompany": "Como crio uma empresa?",
+          "verify": "Como verifico minha empresa?"
+        }
+      },
+      "unverified": {
+        "text": "Verifique sua empresa para que os candidatos vejam quem os convida, e crie suas entrevistas.",
+        "questions": {
+          "verify": "Como verifico minha empresa?",
+          "whyVerify": "Por que verificar minha empresa?",
+          "createInterview": "Como crio uma entrevista?"
+        }
+      },
+      "no_interviews": {
+        "text": "Crie uma entrevista a partir de uma descrição da vaga: as perguntas são escritas para a função.",
+        "questions": {
+          "fromDescription": "Como crio uma entrevista a partir de uma descrição da vaga?",
+          "template": "Posso começar com um modelo?",
+          "changeQuestions": "Posso mudar as perguntas?"
+        }
+      },
+      "no_candidates": {
+        "text": "Convide candidatos por e-mail, com um link compartilhável ou pelo seu ATS.",
+        "questions": {
+          "invite": "Como convido candidatos?",
+          "shareLink": "Como funciona o link compartilhável?",
+          "ats": "Como conecto meu ATS?"
+        }
+      },
+      "has_candidates": {
+        "text": "Pergunte sobre seus candidatos: quem passou, como se comparam e o que os resultados significam.",
+        "questions": {
+          "passed": "Quem passou esta semana?",
+          "compare": "Compare meus melhores candidatos",
+          "replace": "Como substituo uma pergunta?",
+          "signals": "O que significam as saídas da página e as tentativas de cópia?"
+        }
+      }
+    },
+    "signInCard": "Entre ou crie uma conta; depois pergunte sobre suas empresas e candidatos.",
+    "resize": "Ajustar a largura do painel"
   }
 }

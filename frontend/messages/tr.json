@@ -908,7 +908,8 @@
       },
       "terms": "Koşullar",
       "privacy": "Gizlilik politikası"
-    }
+    },
+    "askAgent": "asistana sor"
   },
   "faq": {
     "title": "Sıkça sorulan sorular",
@@ -1267,5 +1268,108 @@
       "invite_reminders": "Artık bu mülakat için hatırlatma almayacaksınız.",
       "company": "Artık {company} adına e-posta almayacaksınız."
     }
+  },
+  "assistant": {
+    "title": "Asistan",
+    "company": "Şirket",
+    "allCompanies": "Tüm şirketler",
+    "newChat": "Yeni sohbet",
+    "history": "Geçmiş",
+    "stop": "Durdur",
+    "placeholder": "ne istersen sor…",
+    "failed": "Şu anda yanıt alınamadı. Tekrar dene.",
+    "openFailed": "Bu sohbet açılamadı.",
+    "historyFailed": "Sohbetlerin yüklenemedi.",
+    "historyEmpty": "Henüz sohbet yok.",
+    "deleteChat": "“{title}” sohbetini sil",
+    "deleteTitle": "Bu sohbet silinsin mi?",
+    "deleteText": "Sohbet ve yanıtları kalıcı olarak silinir.",
+    "emptyTitle": "İşe alımın hakkında sor",
+    "emptyText": "Adaylar, mülakatlar, krediler, entegrasyonlar ve prepza'nın nasıl çalıştığı; şirketlerinde gördüklerine dayanarak. Yapay zekâ yanılabilir; esas olan bağlantı verdiği sayfalardır.",
+    "emptyTitleFaq": "prepza hakkında sor",
+    "pages": {
+      "open": "Aç",
+      "pricing": "Fiyatlar",
+      "topUp": "Kredi yükle",
+      "settings": "Ayarlar",
+      "faq": "SSS",
+      "companies": "Şirketler",
+      "slack": "Slack",
+      "api": "API",
+      "integrations": "Entegrasyonlar",
+      "template": "Şablon",
+      "templates": "Şablonlar",
+      "team": "Ekip",
+      "referrals": "Davetler",
+      "candidate": "Aday",
+      "candidates": "Adaylar",
+      "interview": "Mülakat",
+      "interviews": "Mülakatlar"
+    },
+    "voice": {
+      "hold": "Konuşmak için basılı tut",
+      "stop": "Kaydı durdur",
+      "recording": "Kaydediliyor…",
+      "transcribing": "Metne dönüştürülüyor…",
+      "notAllowed": "Konuşmak için tarayıcında mikrofona izin ver.",
+      "noMicrophone": "Mikrofon bulunamadı.",
+      "tooShort": "Çok kısa: konuşurken düğmeyi basılı tut.",
+      "holdHint": "Konuşurken düğmeyi basılı tut.",
+      "failed": "Kayıt metne dönüştürülemedi. Tekrar dene."
+    },
+    "welcome": {
+      "signed_out": {
+        "text": "prepza'nın nasıl çalıştığı, ne kadar tuttuğu ve adayların ne gördüğü, prepza'nın SSS'sinden yanıtlanır. Şirketlerin ve adayların hakkında sormak için giriş yap.",
+        "questions": {
+          "what": "prepza nedir?",
+          "pricing": "Ne kadar tutuyor?",
+          "takeTest": "Adaylar testi nasıl çözüyor?",
+          "account": "Adayların hesaba ihtiyacı var mı?"
+        }
+      },
+      "no_company": {
+        "text": "Haydi başlayalım: ilk mülakatın, şirketin ve şirketinin doğrulanması.",
+        "questions": {
+          "firstInterview": "İlk mülakatımı nasıl oluştururum?",
+          "createCompany": "Nasıl şirket oluştururum?",
+          "verify": "Şirketimi nasıl doğrularım?"
+        }
+      },
+      "unverified": {
+        "text": "Adaylar onları kimin davet ettiğini görsün diye şirketini doğrula ve mülakatlarını oluştur.",
+        "questions": {
+          "verify": "Şirketimi nasıl doğrularım?",
+          "whyVerify": "Şirketimi neden doğrulamalıyım?",
+          "createInterview": "Nasıl mülakat oluştururum?"
+        }
+      },
+      "no_interviews": {
+        "text": "Bir iş tanımından mülakat oluştur: sorular o rol için yazılır.",
+        "questions": {
+          "fromDescription": "İş tanımından nasıl mülakat oluştururum?",
+          "template": "Bir şablonla başlayabilir miyim?",
+          "changeQuestions": "Soruları değiştirebilir miyim?"
+        }
+      },
+      "no_candidates": {
+        "text": "Adayları e-postayla, paylaşılabilir bir bağlantıyla ya da ATS'inden davet et.",
+        "questions": {
+          "invite": "Adayları nasıl davet ederim?",
+          "shareLink": "Paylaşılabilir bağlantı nasıl çalışır?",
+          "ats": "ATS'imi nasıl bağlarım?"
+        }
+      },
+      "has_candidates": {
+        "text": "Adayların hakkında sor: kim geçti, birbirleriyle nasıl karşılaştırılıyorlar ve sonuçları ne anlama geliyor.",
+        "questions": {
+          "passed": "Bu hafta kim geçti?",
+          "compare": "En iyi adaylarımı karşılaştır",
+          "replace": "Bir soruyu nasıl değiştiririm?",
+          "signals": "Sayfadan ayrılma ve kopyalama denemeleri ne anlama geliyor?"
+        }
+      }
+    },
+    "signInCard": "Giriş yap ya da hesap oluştur; ardından şirketlerin ve adayların hakkında sor.",
+    "resize": "Panelin genişliğini değiştir"
   }
 }

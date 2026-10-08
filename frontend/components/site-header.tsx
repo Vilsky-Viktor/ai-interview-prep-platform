@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl"
 
+import { AssistantButton } from "@/components/assistant/assistant-button"
 import { useAuth } from "@/components/auth-provider"
 import { LocalizedLink } from "@/components/localized-link"
 import { NotificationBell } from "@/components/notification-bell"
@@ -31,7 +32,7 @@ export function SiteHeader() {
           <span aria-hidden className="h-5 w-px self-center bg-border" />
           <SiteNav />
         </div>
-        <div className="flex h-8 items-center gap-3">
+        <div className="flex h-8 items-center gap-3 max-[359px]:gap-1.5">
           {/* Hidden on phones, where it doesn't fit next to Sign in; signed-in users have it in
               their menu. */}
           {!loading && !user && (
@@ -39,6 +40,7 @@ export function SiteHeader() {
               <ThemeModes />
             </div>
           )}
+          <AssistantButton />
           <NotificationBell />
           <UserMenu />
         </div>

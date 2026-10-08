@@ -1,11 +1,12 @@
 import { getTranslations } from "next-intl/server"
 
+import { AskAgentButton } from "@/components/landing/ask-agent-button"
 import { DemosButton } from "@/components/landing/demos-button"
 import { MoreLink } from "@/components/landing/section"
 import { StartButton } from "@/components/landing/start-button"
 
-/** The landing page's last screen: back to the job description box, and links to the FAQ and
- * the demo videos. */
+/** The landing page's last screen: back to the job description box, and links to the demo videos,
+ * the assistant and the FAQ. */
 export async function Closing() {
   const t = await getTranslations("landing")
 
@@ -22,6 +23,7 @@ export async function Closing() {
         <p className="text-lg text-muted-foreground">{t("faq.text")}</p>
         <div className="flex flex-wrap justify-center gap-3">
           <DemosButton className="h-11" />
+          <AskAgentButton className="h-11" />
           <MoreLink href="/faq" keepCase>
             {t("faq.read")}
           </MoreLink>

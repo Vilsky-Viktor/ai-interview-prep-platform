@@ -4,15 +4,19 @@ import { cn } from "cn"
 export function ChatBubble({
   role,
   content,
+  className,
 }: {
   role: "user" | "assistant"
-  content: string
+  // Plain text keeps its line breaks; the assistant's answers come as rendered markdown.
+  content: React.ReactNode
+  className?: string
 }) {
   return (
     <li
       className={cn(
         "bidi-auto w-fit max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap",
-        role === "user" ? "ms-auto bg-muted" : "bg-card"
+        role === "user" ? "ms-auto bg-muted" : "bg-card",
+        className
       )}
     >
       {content}
@@ -20,10 +24,11 @@ export function ChatBubble({
   )
 }
 
-/** The AI's bubble before its first words arrive: three dots rising in turn. */
-export function ThinkingBubble({ label }: { label: string }) {
+/** The AI's answer before its first words arrive: three dots rising in turn, named `label`
+ * for screen readers. */
+export function ThinkingDots({ label }: { label: string }) {
   return (
-    <li className="flex w-fit items-center gap-1 rounded-2xl bg-card px-4 py-4">
+    <>
       <span className="sr-only">{label}</span>
       {[0, 150, 300].map((delay) => (
         <span
@@ -33,6 +38,6 @@ export function ThinkingBubble({ label }: { label: string }) {
           style={{ animationDelay: `${delay}ms` }}
         />
       ))}
-    </li>
+    </>
   )
 }

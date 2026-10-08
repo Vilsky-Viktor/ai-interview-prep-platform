@@ -1,12 +1,25 @@
 import { ApiError, authHeaders, errorDetail } from "@/lib/api"
+import type { AssistantBlock } from "@/types/assistant"
 import type { HelpMessage } from "@/types/help"
 
-/** Posts to a streaming chat route and calls onDelta with each piece of the reply, until
-the reply ends or `signal` aborts. */
-async function streamReply(
+/** An error event in a stream: its message, already in the user's language, and its code when
+the service gave one (the assistant's "session_expired"). */
+export class StreamError extends Error {
+  constructor(
+    message: string,
+    public code?: string
+  ) {
+    super(message)
+  }
+}
+
+/** Posts to a streaming route (server-sent events) and calls onEvent with each event's data,
+until the stream ends or `signal` aborts. An error event throws a StreamError; a refused request
+throws an ApiError. */
+export async function streamEvents<T>(
   path: string,
   body: unknown,
-  onDelta: (delta: string) => void,
+  onEvent: (event: T) => void,
   signal: AbortSignal
 ) {
   const response = await fetch(`/api${path}`, {
@@ -54,21 +67,21 @@ async function streamReply(
       const data = JSON.parse(lines.join("\n"))
 
       if (data.error) {
-        throw new Error(data.error)
+        throw new StreamError(data.error, data.code)
       }
 
-      if (data.delta) {
-        onDelta(data.delta)
-      }
+      onEvent(data)
     }
   }
 }
 
-/** Asks the FAQ page's help chat; the page keeps the conversation and sends it whole. */
+/** Asks prepza's help chat (signed-out visitors' assistant); the panel keeps the conversation
+and sends it whole. Its events: {"delta"}, and a {"block"} sign-in card when the visitor asks to
+sign in. */
 export function streamHelp(
   messages: HelpMessage[],
-  onDelta: (delta: string) => void,
+  onEvent: (event: { delta?: string; block?: AssistantBlock }) => void,
   signal: AbortSignal
 ) {
-  return streamReply("/rounds/help/chat", { messages }, onDelta, signal)
+  return streamEvents("/rounds/help/chat", { messages }, onEvent, signal)
 }

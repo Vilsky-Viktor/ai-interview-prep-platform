@@ -900,7 +900,8 @@
       },
       "terms": "条款",
       "privacy": "隐私政策"
-    }
+    },
+    "askAgent": "问问智能助手"
   },
   "faq": {
     "title": "常见问题",
@@ -1259,5 +1260,108 @@
       "invite_reminders": "你将不再收到此面试的提醒。",
       "company": "你将不再收到来自 {company} 的邮件。"
     }
+  },
+  "assistant": {
+    "title": "助手",
+    "company": "公司",
+    "allCompanies": "所有公司",
+    "newChat": "新对话",
+    "history": "历史记录",
+    "stop": "停止",
+    "placeholder": "随便问点什么…",
+    "failed": "暂时无法获得回复，请重试。",
+    "openFailed": "无法打开此对话。",
+    "historyFailed": "无法加载你的对话。",
+    "historyEmpty": "还没有对话。",
+    "deleteChat": "删除“{title}”",
+    "deleteTitle": "删除此对话？",
+    "deleteText": "此对话及其回答将被永久删除。",
+    "emptyTitle": "询问你的招聘",
+    "emptyText": "候选人、面试、点数、集成以及 prepza 的使用方式，依据你在公司中能看到的内容作答。AI 可能出错；以其链接的页面为准。",
+    "emptyTitleFaq": "询问 prepza",
+    "pages": {
+      "open": "打开",
+      "pricing": "价格",
+      "topUp": "充值",
+      "settings": "设置",
+      "faq": "常见问题",
+      "companies": "公司",
+      "slack": "Slack",
+      "api": "API",
+      "integrations": "集成",
+      "template": "模板",
+      "templates": "模板",
+      "team": "团队",
+      "referrals": "推荐",
+      "candidate": "候选人",
+      "candidates": "候选人",
+      "interview": "面试",
+      "interviews": "面试"
+    },
+    "voice": {
+      "hold": "按住说话",
+      "stop": "停止录音",
+      "recording": "正在录音…",
+      "transcribing": "正在转为文字…",
+      "notAllowed": "请在浏览器中允许使用麦克风后再说话。",
+      "noMicrophone": "未找到麦克风。",
+      "tooShort": "太短了：说话时请按住按钮。",
+      "holdHint": "说话时请按住按钮。",
+      "failed": "无法将录音转为文字，请重试。"
+    },
+    "welcome": {
+      "signed_out": {
+        "text": "prepza 如何运作、费用多少、候选人会看到什么，依据 prepza 的常见问题作答。登录后可询问你的公司和候选人。",
+        "questions": {
+          "what": "prepza 是什么？",
+          "pricing": "费用是多少？",
+          "takeTest": "候选人如何参加测试？",
+          "account": "候选人需要注册账户吗？"
+        }
+      },
+      "no_company": {
+        "text": "我们开始吧：你的第一场面试、你的公司以及公司认证。",
+        "questions": {
+          "firstInterview": "怎么创建第一场面试？",
+          "createCompany": "怎么创建公司？",
+          "verify": "怎么认证我的公司？"
+        }
+      },
+      "unverified": {
+        "text": "认证公司后，候选人能看到是谁邀请了他们。你也可以开始创建面试。",
+        "questions": {
+          "verify": "怎么认证我的公司？",
+          "whyVerify": "为什么要认证公司？",
+          "createInterview": "怎么创建面试？"
+        }
+      },
+      "no_interviews": {
+        "text": "根据职位描述创建面试：题目会针对该职位编写。",
+        "questions": {
+          "fromDescription": "怎么根据职位描述创建面试？",
+          "template": "可以从模板开始吗？",
+          "changeQuestions": "可以修改题目吗？"
+        }
+      },
+      "no_candidates": {
+        "text": "通过邮件、分享链接或你的 ATS 邀请候选人。",
+        "questions": {
+          "invite": "怎么邀请候选人？",
+          "shareLink": "分享链接怎么用？",
+          "ats": "怎么连接我的 ATS？"
+        }
+      },
+      "has_candidates": {
+        "text": "询问你的候选人：谁通过了、他们之间如何比较、结果意味着什么。",
+        "questions": {
+          "passed": "本周谁通过了？",
+          "compare": "比较我最好的几位候选人",
+          "replace": "怎么替换一道题？",
+          "signals": "离开页面和尝试复制是什么意思？"
+        }
+      }
+    },
+    "signInCard": "登录或创建账户后，即可询问你的公司和候选人。",
+    "resize": "调整面板宽度"
   }
 }

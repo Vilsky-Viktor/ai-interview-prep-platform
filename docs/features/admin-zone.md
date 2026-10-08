@@ -103,7 +103,7 @@ While it's on, every service answers these with a 503:
 - previews,
 - generations and re-generations,
 - verifier jobs,
-- the help chat.
+- the help chat and the assistant (its messages and voice).
 
 Also while it's on:
 

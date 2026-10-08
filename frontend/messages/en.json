@@ -909,7 +909,8 @@
       },
       "terms": "Terms",
       "privacy": "Privacy policy"
-    }
+    },
+    "askAgent": "ask agent"
   },
   "faq": {
     "title": "Frequently asked questions",
@@ -1268,5 +1269,108 @@
       "invite_reminders": "You won't get reminders for this interview anymore.",
       "company": "You won't get emails from {company} anymore."
     }
+  },
+  "assistant": {
+    "title": "Assistant",
+    "company": "Company",
+    "allCompanies": "All companies",
+    "newChat": "New chat",
+    "history": "History",
+    "stop": "Stop",
+    "placeholder": "ask anything…",
+    "failed": "Couldn't get a reply right now. Please try again.",
+    "openFailed": "Couldn't open this chat.",
+    "historyFailed": "Couldn't load your chats.",
+    "historyEmpty": "No chats yet.",
+    "deleteChat": "Delete “{title}”",
+    "deleteTitle": "Delete this chat?",
+    "deleteText": "The chat and its answers are deleted for good.",
+    "emptyTitle": "Ask about your hiring",
+    "emptyText": "Candidates, interviews, credits, integrations and how prepza works, from what you can see in your companies. The AI can be wrong; the pages it links to are what count.",
+    "emptyTitleFaq": "Ask about prepza",
+    "pages": {
+      "open": "Open",
+      "pricing": "Pricing",
+      "topUp": "Top up",
+      "settings": "Settings",
+      "faq": "FAQ",
+      "companies": "Companies",
+      "slack": "Slack",
+      "api": "API",
+      "integrations": "Integrations",
+      "template": "Template",
+      "templates": "Templates",
+      "team": "Team",
+      "referrals": "Referrals",
+      "candidate": "Candidate",
+      "candidates": "Candidates",
+      "interview": "Interview",
+      "interviews": "Interviews"
+    },
+    "voice": {
+      "hold": "Hold to talk",
+      "stop": "Stop recording",
+      "recording": "Recording…",
+      "transcribing": "Transcribing…",
+      "notAllowed": "Allow the microphone in your browser to talk.",
+      "noMicrophone": "No microphone found.",
+      "tooShort": "Too short: hold the button while you talk.",
+      "holdHint": "Hold the button while you talk.",
+      "failed": "Couldn't turn the recording into text. Please try again."
+    },
+    "welcome": {
+      "signed_out": {
+        "text": "How prepza works, what it costs and what candidates see, answered from prepza's FAQ. Sign in to ask about your companies and candidates.",
+        "questions": {
+          "what": "What is prepza?",
+          "pricing": "How much does it cost?",
+          "takeTest": "How do candidates take a test?",
+          "account": "Do candidates need an account?"
+        }
+      },
+      "no_company": {
+        "text": "Let's get you started: your first interview, your company and getting it verified.",
+        "questions": {
+          "firstInterview": "How do I create my first interview?",
+          "createCompany": "How do I create a company?",
+          "verify": "How do I verify my company?"
+        }
+      },
+      "unverified": {
+        "text": "Verify your company so candidates see who's inviting them, and create your interviews.",
+        "questions": {
+          "verify": "How do I verify my company?",
+          "whyVerify": "Why verify my company?",
+          "createInterview": "How do I create an interview?"
+        }
+      },
+      "no_interviews": {
+        "text": "Create an interview from a job description: its questions are written for the role.",
+        "questions": {
+          "fromDescription": "How do I create an interview from a job description?",
+          "template": "Can I start from a template?",
+          "changeQuestions": "Can I change the questions?"
+        }
+      },
+      "no_candidates": {
+        "text": "Invite candidates by email, with a shareable link or from your ATS.",
+        "questions": {
+          "invite": "How do I invite candidates?",
+          "shareLink": "How does the shareable link work?",
+          "ats": "How do I connect my ATS?"
+        }
+      },
+      "has_candidates": {
+        "text": "Ask about your candidates: who passed, how they compare, and what their results mean.",
+        "questions": {
+          "passed": "Who passed this week?",
+          "compare": "Compare my best candidates",
+          "replace": "How do I replace a question?",
+          "signals": "What do page leaves and copy attempts mean?"
+        }
+      }
+    },
+    "signInCard": "Sign in or create an account; then ask about your companies and candidates.",
+    "resize": "Resize the panel"
   }
 }

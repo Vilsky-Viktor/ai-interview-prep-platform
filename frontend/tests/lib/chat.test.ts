@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
 import { ApiError } from "@/lib/api"
-import { streamHelp } from "@/lib/chat"
+import { StreamError, streamEvents, streamHelp } from "@/lib/chat"
 
 // No Firebase in a unit test: nobody is signed in.
 vi.mock("@/lib/firebase", () => ({
@@ -33,7 +33,11 @@ function streamed(chunks: string[]) {
 async function deltas(response: Response) {
   vi.mocked(fetch).mockResolvedValue(response)
   const got: string[] = []
-  await streamHelp([], (delta) => got.push(delta), new AbortController().signal)
+  await streamHelp(
+    [],
+    (event) => event.delta && got.push(event.delta),
+    new AbortController().signal
+  )
 
   return got
 }
@@ -134,5 +138,35 @@ describe("streamHelp", () => {
     await expect(deltas(response)).rejects.toThrow(
       "Chat failed with status 500"
     )
+  })
+})
+
+describe("streamEvents", () => {
+  it("passes every event's data on, and an error event's code with its message", async () => {
+    vi.mocked(fetch).mockResolvedValue(
+      streamed([
+        'data: {"conversation":{"id":"c1"}}\n\n',
+        'data: {"tool":{"name":"get_me","state":"running"}}\n\n',
+        'data: {"error":"Sign in again.","code":"session_expired"}\n\n',
+      ])
+    )
+    const got: unknown[] = []
+    const streaming = streamEvents(
+      "/assistant/chat",
+      { message: "Hi" },
+      (event) => got.push(event),
+      new AbortController().signal
+    )
+
+    await expect(streaming).rejects.toBeInstanceOf(StreamError)
+    await expect(streaming).rejects.toMatchObject({
+      message: "Sign in again.",
+      code: "session_expired",
+    })
+    expect(got).toEqual([
+      { conversation: { id: "c1" } },
+      { tool: { name: "get_me", state: "running" } },
+    ])
+    expect(vi.mocked(fetch).mock.calls[0][0]).toBe("/api/assistant/chat")
   })
 })

@@ -9,13 +9,14 @@
    pages (constants/cjk-fonts.ts), and :lang() puts each one's own font first. */
 :root {
   --font-scripts:
-    var(--font-arabic), var(--font-hebrew), var(--font-devanagari), var(--font-thai),
-    var(--font-vietnamese);
+    var(--font-arabic), var(--font-hebrew), var(--font-devanagari),
+    var(--font-thai), var(--font-vietnamese);
 }
 :root:lang(ja) {
   --font-scripts:
-    var(--font-arabic), var(--font-hebrew), var(--font-devanagari), var(--font-thai),
-    var(--font-vietnamese), var(--font-japanese), var(--font-chinese), var(--font-korean);
+    var(--font-arabic), var(--font-hebrew), var(--font-devanagari),
+    var(--font-thai), var(--font-vietnamese), var(--font-japanese),
+    var(--font-chinese), var(--font-korean);
 }
 :root:lang(zh) {
   --font-scripts: var(--font-chinese), var(--font-japanese), var(--font-korean);
@@ -28,7 +29,8 @@
   /* Poppins has no Cyrillic: those letters fall back to Geist, never to a serif. Letters neither
      has fall back to the script fonts (constants/fonts.ts); Chinese, Japanese and Korean pages
      put their own first (below), as the three draw shared characters differently. */
-  --font-heading: var(--font-poppins), var(--font-geist), var(--font-scripts), sans-serif;
+  --font-heading:
+    var(--font-poppins), var(--font-geist), var(--font-scripts), sans-serif;
   --font-sans: var(--font-geist), var(--font-scripts), sans-serif;
   --font-mono: var(--font-mono);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -240,6 +242,105 @@
 @keyframes caret-blink {
   50% {
     opacity: 0;
+  }
+}
+
+/* "ask agent": an outline pill whose brand-blue border has a bright arc circling it, once every
+   4.4 s. On hover the arc speeds up and brightens, the border glows and the pill takes a light
+   blue tint. Under reduced motion the border stays still; the hover tint and glow remain. */
+@property --agent-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* Turns added on hover: paused at rest, so the arc never jumps when the speed changes. */
+@property --agent-boost {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --agent-fill {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --agent-faint {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 25%;
+}
+
+@keyframes agent-border {
+  to {
+    --agent-angle: 360deg;
+  }
+}
+
+@keyframes agent-boost {
+  to {
+    --agent-boost: 360deg;
+  }
+}
+
+.agent-border {
+  --agent-fill: var(--background);
+  --agent-faint: 25%;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--agent-fill), var(--agent-fill)) padding-box,
+    conic-gradient(
+        from calc(var(--agent-angle) + var(--agent-boost)),
+        var(--primary),
+        color-mix(in oklch, var(--primary) var(--agent-faint), transparent) 25%,
+        color-mix(in oklch, var(--primary) var(--agent-faint), transparent) 75%,
+        var(--primary)
+      )
+      border-box;
+  animation:
+    agent-border 4.4s linear infinite,
+    agent-boost 2.2s linear infinite paused;
+  transition:
+    --agent-fill 0.3s ease,
+    --agent-faint 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.agent-border:hover {
+  --agent-fill: color-mix(in srgb, var(--primary) 12%, var(--background));
+  --agent-faint: 55%;
+  box-shadow: 0 0 12px 1px color-mix(in oklch, var(--primary) 30%, transparent);
+  animation-play-state: running, running;
+}
+
+/* Its sparkles twinkle: a quick pulse (about 0.6 s), every 3.5 s. */
+@keyframes agent-twinkle {
+  0%,
+  17%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  8% {
+    transform: scale(1.3);
+    opacity: 0.6;
+  }
+}
+
+.agent-border svg {
+  animation: agent-twinkle 3.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-border {
+    --agent-faint: 100%;
+    animation: none;
+  }
+
+  .agent-border svg {
+    animation: none;
   }
 }
 

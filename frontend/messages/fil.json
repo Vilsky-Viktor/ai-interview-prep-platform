@@ -913,7 +913,8 @@
       },
       "terms": "Mga tuntunin",
       "privacy": "Patakaran sa privacy"
-    }
+    },
+    "askAgent": "magtanong sa agent"
   },
   "faq": {
     "title": "Mga madalas itanong",
@@ -1272,5 +1273,108 @@
       "invite_reminders": "Hindi ka na makakatanggap ng mga paalala para sa interview na ito.",
       "company": "Hindi ka na makakatanggap ng email para sa {company}."
     }
+  },
+  "assistant": {
+    "title": "Assistant",
+    "company": "Kumpanya",
+    "allCompanies": "Lahat ng kumpanya",
+    "newChat": "Bagong chat",
+    "history": "History",
+    "stop": "Ihinto",
+    "placeholder": "magtanong ng kahit ano…",
+    "failed": "Hindi makakuha ng sagot ngayon. Subukang muli.",
+    "openFailed": "Hindi mabuksan ang chat na ito.",
+    "historyFailed": "Hindi ma-load ang mga chat mo.",
+    "historyEmpty": "Wala pang chat.",
+    "deleteChat": "Burahin ang “{title}”",
+    "deleteTitle": "Burahin ang chat na ito?",
+    "deleteText": "Permanenteng mabubura ang chat at ang mga sagot nito.",
+    "emptyTitle": "Magtanong tungkol sa hiring mo",
+    "emptyText": "Mga aplikante, interview, credits, integration at kung paano gumagana ang prepza, mula sa nakikita mo sa mga kumpanya mo. Puwedeng magkamali ang AI; ang mga page na ini-link nito ang masusunod.",
+    "emptyTitleFaq": "Magtanong tungkol sa prepza",
+    "pages": {
+      "open": "Buksan",
+      "pricing": "Presyo",
+      "topUp": "Mag-top up",
+      "settings": "Settings",
+      "faq": "FAQ",
+      "companies": "Mga kumpanya",
+      "slack": "Slack",
+      "api": "API",
+      "integrations": "Mga integration",
+      "template": "Template",
+      "templates": "Mga template",
+      "team": "Team",
+      "referrals": "Referrals",
+      "candidate": "Aplikante",
+      "candidates": "Mga aplikante",
+      "interview": "Interview",
+      "interviews": "Mga interview"
+    },
+    "voice": {
+      "hold": "Pindutin nang matagal para magsalita",
+      "stop": "Ihinto ang recording",
+      "recording": "Nagre-record…",
+      "transcribing": "Ginagawang text…",
+      "notAllowed": "Payagan ang mikropono sa browser mo para makapagsalita.",
+      "noMicrophone": "Walang nakitang mikropono.",
+      "tooShort": "Masyadong maikli: pindutin nang matagal ang button habang nagsasalita.",
+      "holdHint": "Pindutin nang matagal ang button habang nagsasalita.",
+      "failed": "Hindi ma-convert sa text ang recording. Subukang muli."
+    },
+    "welcome": {
+      "signed_out": {
+        "text": "Kung paano gumagana ang prepza, magkano ito at ano ang nakikita ng mga aplikante, na sinasagot mula sa FAQ ng prepza. Mag-sign in para magtanong tungkol sa mga kumpanya at aplikante mo.",
+        "questions": {
+          "what": "Ano ang prepza?",
+          "pricing": "Magkano ito?",
+          "takeTest": "Paano kumukuha ng test ang mga aplikante?",
+          "account": "Kailangan ba ng account ng mga aplikante?"
+        }
+      },
+      "no_company": {
+        "text": "Simulan na natin: ang una mong interview, ang kumpanya mo at ang pag-verify nito.",
+        "questions": {
+          "firstInterview": "Paano gumawa ng una kong interview?",
+          "createCompany": "Paano gumawa ng kumpanya?",
+          "verify": "Paano i-verify ang kumpanya ko?"
+        }
+      },
+      "unverified": {
+        "text": "I-verify ang kumpanya mo para makita ng mga aplikante kung sino ang nag-iimbita sa kanila, at gumawa ng mga interview.",
+        "questions": {
+          "verify": "Paano i-verify ang kumpanya ko?",
+          "whyVerify": "Bakit dapat i-verify ang kumpanya ko?",
+          "createInterview": "Paano gumawa ng interview?"
+        }
+      },
+      "no_interviews": {
+        "text": "Gumawa ng interview mula sa job description: isinusulat ang mga tanong para sa role.",
+        "questions": {
+          "fromDescription": "Paano gumawa ng interview mula sa job description?",
+          "template": "Puwede ba akong magsimula sa template?",
+          "changeQuestions": "Puwede ko bang palitan ang mga tanong?"
+        }
+      },
+      "no_candidates": {
+        "text": "Mag-imbita ng mga aplikante sa email, gamit ang shareable link o mula sa ATS mo.",
+        "questions": {
+          "invite": "Paano mag-imbita ng mga aplikante?",
+          "shareLink": "Paano gumagana ang shareable link?",
+          "ats": "Paano ikonekta ang ATS ko?"
+        }
+      },
+      "has_candidates": {
+        "text": "Magtanong tungkol sa mga aplikante mo: sino ang pumasa, paano sila nagkukumpara at ano ang ibig sabihin ng mga resulta nila.",
+        "questions": {
+          "passed": "Sino ang pumasa ngayong linggo?",
+          "compare": "Ikumpara ang pinakamahuhusay kong aplikante",
+          "replace": "Paano palitan ang isang tanong?",
+          "signals": "Ano ang ibig sabihin ng pag-alis sa page at pagtatangkang kumopya?"
+        }
+      }
+    },
+    "signInCard": "Mag-sign in o gumawa ng account; pagkatapos, magtanong tungkol sa mga kumpanya at aplikante mo.",
+    "resize": "Baguhin ang lapad ng panel"
   }
 }

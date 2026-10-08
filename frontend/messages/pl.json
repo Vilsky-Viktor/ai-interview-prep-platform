@@ -909,7 +909,8 @@
       },
       "terms": "Regulamin",
       "privacy": "Polityka prywatności"
-    }
+    },
+    "askAgent": "zapytaj agenta"
   },
   "faq": {
     "title": "Często zadawane pytania",
@@ -1268,5 +1269,108 @@
       "invite_reminders": "Nie będziesz już dostawać przypomnień o tej rozmowie.",
       "company": "Nie będziesz już dostawać e-maili od {company}."
     }
+  },
+  "assistant": {
+    "title": "Asystent",
+    "company": "Firma",
+    "allCompanies": "Wszystkie firmy",
+    "newChat": "Nowy czat",
+    "history": "Historia",
+    "stop": "Zatrzymaj",
+    "placeholder": "zapytaj o cokolwiek…",
+    "failed": "Nie udało się teraz uzyskać odpowiedzi. Spróbuj ponownie.",
+    "openFailed": "Nie udało się otworzyć tego czatu.",
+    "historyFailed": "Nie udało się wczytać Twoich czatów.",
+    "historyEmpty": "Nie ma jeszcze czatów.",
+    "deleteChat": "Usuń „{title}”",
+    "deleteTitle": "Usunąć ten czat?",
+    "deleteText": "Czat i jego odpowiedzi zostaną usunięte na zawsze.",
+    "emptyTitle": "Zapytaj o swoją rekrutację",
+    "emptyText": "Kandydaci, rozmowy, kredyty, integracje i to, jak działa prepza, na podstawie tego, co widzisz w swoich firmach. AI może się mylić; wiążące są strony, do których odsyła.",
+    "emptyTitleFaq": "Zapytaj o prepza",
+    "pages": {
+      "open": "Otwórz",
+      "pricing": "Cennik",
+      "topUp": "Doładuj",
+      "settings": "Ustawienia",
+      "faq": "Częste pytania",
+      "companies": "Firmy",
+      "slack": "Slack",
+      "api": "API",
+      "integrations": "Integracje",
+      "template": "Szablon",
+      "templates": "Szablony",
+      "team": "Zespół",
+      "referrals": "Polecenia",
+      "candidate": "Kandydat",
+      "candidates": "Kandydaci",
+      "interview": "Rozmowa",
+      "interviews": "Rozmowy"
+    },
+    "voice": {
+      "hold": "Przytrzymaj, aby mówić",
+      "stop": "Zatrzymaj nagrywanie",
+      "recording": "Nagrywanie…",
+      "transcribing": "Zamiana na tekst…",
+      "notAllowed": "Zezwól na mikrofon w przeglądarce, aby mówić.",
+      "noMicrophone": "Nie znaleziono mikrofonu.",
+      "tooShort": "Za krótko: przytrzymaj przycisk, gdy mówisz.",
+      "holdHint": "Przytrzymaj przycisk, gdy mówisz.",
+      "failed": "Nie udało się zamienić nagrania na tekst. Spróbuj ponownie."
+    },
+    "welcome": {
+      "signed_out": {
+        "text": "Jak działa prepza, ile kosztuje i co widzą kandydaci — odpowiedzi z częstych pytań prepza. Zaloguj się, aby pytać o swoje firmy i kandydatów.",
+        "questions": {
+          "what": "Czym jest prepza?",
+          "pricing": "Ile to kosztuje?",
+          "takeTest": "Jak kandydaci rozwiązują test?",
+          "account": "Czy kandydaci potrzebują konta?"
+        }
+      },
+      "no_company": {
+        "text": "Zaczynajmy: Twoja pierwsza rozmowa, Twoja firma i jej weryfikacja.",
+        "questions": {
+          "firstInterview": "Jak utworzyć pierwszą rozmowę?",
+          "createCompany": "Jak utworzyć firmę?",
+          "verify": "Jak zweryfikować firmę?"
+        }
+      },
+      "unverified": {
+        "text": "Zweryfikuj firmę, aby kandydaci widzieli, kto ich zaprasza, i twórz rozmowy.",
+        "questions": {
+          "verify": "Jak zweryfikować firmę?",
+          "whyVerify": "Po co weryfikować firmę?",
+          "createInterview": "Jak utworzyć rozmowę?"
+        }
+      },
+      "no_interviews": {
+        "text": "Utwórz rozmowę na podstawie opisu stanowiska: pytania powstają pod tę rolę.",
+        "questions": {
+          "fromDescription": "Jak utworzyć rozmowę z opisu stanowiska?",
+          "template": "Czy mogę zacząć od szablonu?",
+          "changeQuestions": "Czy mogę zmienić pytania?"
+        }
+      },
+      "no_candidates": {
+        "text": "Zapraszaj kandydatów e-mailem, linkiem do udostępnienia albo ze swojego ATS.",
+        "questions": {
+          "invite": "Jak zaprosić kandydatów?",
+          "shareLink": "Jak działa link do udostępnienia?",
+          "ats": "Jak połączyć mój ATS?"
+        }
+      },
+      "has_candidates": {
+        "text": "Pytaj o swoich kandydatów: kto zaliczył, jak wypadają na tle innych i co znaczą ich wyniki.",
+        "questions": {
+          "passed": "Kto zaliczył w tym tygodniu?",
+          "compare": "Porównaj moich najlepszych kandydatów",
+          "replace": "Jak wymienić pytanie?",
+          "signals": "Co oznaczają opuszczenia strony i próby kopiowania?"
+        }
+      }
+    },
+    "signInCard": "Zaloguj się lub załóż konto, a potem pytaj o swoje firmy i kandydatów.",
+    "resize": "Zmień szerokość panelu"
   }
 }

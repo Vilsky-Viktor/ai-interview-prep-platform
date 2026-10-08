@@ -909,7 +909,8 @@
       },
       "terms": "Ketentuan",
       "privacy": "Kebijakan privasi"
-    }
+    },
+    "askAgent": "tanya agen"
   },
   "faq": {
     "title": "Pertanyaan yang sering diajukan",
@@ -1268,5 +1269,108 @@
       "invite_reminders": "Kamu tidak akan menerima pengingat untuk wawancara ini lagi.",
       "company": "Kamu tidak akan menerima email dari {company} lagi."
     }
+  },
+  "assistant": {
+    "title": "Asisten",
+    "company": "Perusahaan",
+    "allCompanies": "Semua perusahaan",
+    "newChat": "Obrolan baru",
+    "history": "Riwayat",
+    "stop": "Hentikan",
+    "placeholder": "tanyakan apa saja…",
+    "failed": "Belum bisa mendapat jawaban sekarang. Coba lagi.",
+    "openFailed": "Obrolan ini tidak bisa dibuka.",
+    "historyFailed": "Obrolanmu tidak bisa dimuat.",
+    "historyEmpty": "Belum ada obrolan.",
+    "deleteChat": "Hapus “{title}”",
+    "deleteTitle": "Hapus obrolan ini?",
+    "deleteText": "Obrolan dan jawabannya dihapus permanen.",
+    "emptyTitle": "Tanyakan tentang rekrutmenmu",
+    "emptyText": "Kandidat, wawancara, kredit, integrasi, dan cara kerja prepza, dari apa yang bisa kamu lihat di perusahaanmu. AI bisa keliru; yang berlaku adalah halaman yang ditautkannya.",
+    "emptyTitleFaq": "Tanyakan tentang prepza",
+    "pages": {
+      "open": "Buka",
+      "pricing": "Harga",
+      "topUp": "Isi ulang",
+      "settings": "Pengaturan",
+      "faq": "Tanya jawab",
+      "companies": "Perusahaan",
+      "slack": "Slack",
+      "api": "API",
+      "integrations": "Integrasi",
+      "template": "Templat",
+      "templates": "Templat",
+      "team": "Tim",
+      "referrals": "Referal",
+      "candidate": "Kandidat",
+      "candidates": "Kandidat",
+      "interview": "Wawancara",
+      "interviews": "Wawancara"
+    },
+    "voice": {
+      "hold": "Tahan untuk bicara",
+      "stop": "Hentikan rekaman",
+      "recording": "Merekam…",
+      "transcribing": "Mengubah ke teks…",
+      "notAllowed": "Izinkan mikrofon di browser untuk bicara.",
+      "noMicrophone": "Mikrofon tidak ditemukan.",
+      "tooShort": "Terlalu singkat: tahan tombolnya selama bicara.",
+      "holdHint": "Tahan tombolnya selama bicara.",
+      "failed": "Rekaman tidak bisa diubah menjadi teks. Coba lagi."
+    },
+    "welcome": {
+      "signed_out": {
+        "text": "Cara kerja prepza, biayanya, dan apa yang dilihat kandidat, dijawab dari tanya jawab prepza. Masuk untuk bertanya tentang perusahaan dan kandidatmu.",
+        "questions": {
+          "what": "Apa itu prepza?",
+          "pricing": "Berapa biayanya?",
+          "takeTest": "Bagaimana kandidat mengerjakan tes?",
+          "account": "Apakah kandidat perlu akun?"
+        }
+      },
+      "no_company": {
+        "text": "Ayo mulai: wawancara pertamamu, perusahaanmu, dan verifikasinya.",
+        "questions": {
+          "firstInterview": "Bagaimana membuat wawancara pertama?",
+          "createCompany": "Bagaimana membuat perusahaan?",
+          "verify": "Bagaimana memverifikasi perusahaan saya?"
+        }
+      },
+      "unverified": {
+        "text": "Verifikasi perusahaanmu agar kandidat tahu siapa yang mengundang mereka, lalu buat wawancaramu.",
+        "questions": {
+          "verify": "Bagaimana memverifikasi perusahaan saya?",
+          "whyVerify": "Kenapa perlu verifikasi perusahaan?",
+          "createInterview": "Bagaimana membuat wawancara?"
+        }
+      },
+      "no_interviews": {
+        "text": "Buat wawancara dari deskripsi pekerjaan: pertanyaannya ditulis untuk peran itu.",
+        "questions": {
+          "fromDescription": "Bagaimana membuat wawancara dari deskripsi pekerjaan?",
+          "template": "Bisakah saya mulai dari templat?",
+          "changeQuestions": "Bisakah saya mengubah pertanyaannya?"
+        }
+      },
+      "no_candidates": {
+        "text": "Undang kandidat lewat email, tautan yang bisa dibagikan, atau dari ATS-mu.",
+        "questions": {
+          "invite": "Bagaimana mengundang kandidat?",
+          "shareLink": "Bagaimana cara kerja tautan yang bisa dibagikan?",
+          "ats": "Bagaimana menghubungkan ATS saya?"
+        }
+      },
+      "has_candidates": {
+        "text": "Tanyakan tentang kandidatmu: siapa yang lulus, bagaimana perbandingannya, dan apa arti hasilnya.",
+        "questions": {
+          "passed": "Siapa yang lulus minggu ini?",
+          "compare": "Bandingkan kandidat terbaik saya",
+          "replace": "Bagaimana mengganti pertanyaan?",
+          "signals": "Apa arti meninggalkan halaman dan percobaan menyalin?"
+        }
+      }
+    },
+    "signInCard": "Masuk atau buat akun, lalu tanyakan tentang perusahaan dan kandidatmu.",
+    "resize": "Ubah lebar panel"
   }
 }

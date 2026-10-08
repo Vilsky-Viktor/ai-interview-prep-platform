@@ -86,7 +86,7 @@ Each AI task has its own model and reasoning effort. The effort is `none`, `mini
 |---|---|---|
 | Generation of an interview or template, at any level | `INTERVIEW_MODEL` (`gpt-6.1-sol`) | `INTERVIEW_REASONING_EFFORT` (`low`) |
 | Verifier: answer-key checks, at once and in batches | `VERIFY_MODEL` (`gpt-6.1-sol`) | `VERIFY_REASONING_EFFORT` (`medium`) |
-| FAQ help chat | `HELP_MODEL` (`gpt-6-luna`) | `HELP_REASONING_EFFORT` (`none`, which also lets it take a temperature) |
+| Help chat (the signed-out assistant) | `HELP_MODEL` (`gpt-6-luna`) | `HELP_REASONING_EFFORT` (`none`, which also lets it take a temperature) |
 | In-app assistant | `ASSISTANT_MODEL` (`gpt-6-luna`) | `ASSISTANT_REASONING_EFFORT` (`low`) |
 | Assistant's voice messages to text | `TRANSCRIBE_MODEL` (`gpt-4o-mini-transcribe`) | None |
 

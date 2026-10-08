@@ -905,7 +905,8 @@
       },
       "terms": "Điều khoản",
       "privacy": "Chính sách quyền riêng tư"
-    }
+    },
+    "askAgent": "hỏi trợ lý AI"
   },
   "faq": {
     "title": "Câu hỏi thường gặp",
@@ -1264,5 +1265,108 @@
       "invite_reminders": "Bạn sẽ không nhận lời nhắc về buổi phỏng vấn này nữa.",
       "company": "Bạn sẽ không nhận email từ {company} nữa."
     }
+  },
+  "assistant": {
+    "title": "Trợ lý",
+    "company": "Công ty",
+    "allCompanies": "Tất cả công ty",
+    "newChat": "Cuộc trò chuyện mới",
+    "history": "Lịch sử",
+    "stop": "Dừng",
+    "placeholder": "hỏi bất cứ điều gì…",
+    "failed": "Hiện chưa nhận được câu trả lời. Hãy thử lại.",
+    "openFailed": "Không thể mở cuộc trò chuyện này.",
+    "historyFailed": "Không thể tải các cuộc trò chuyện của bạn.",
+    "historyEmpty": "Chưa có cuộc trò chuyện nào.",
+    "deleteChat": "Xóa “{title}”",
+    "deleteTitle": "Xóa cuộc trò chuyện này?",
+    "deleteText": "Cuộc trò chuyện và các câu trả lời sẽ bị xóa vĩnh viễn.",
+    "emptyTitle": "Hỏi về việc tuyển dụng của bạn",
+    "emptyText": "Ứng viên, phỏng vấn, credit, tích hợp và cách prepza hoạt động, dựa trên những gì bạn thấy trong các công ty của mình. AI có thể sai; các trang mà nó liên kết mới là chính xác.",
+    "emptyTitleFaq": "Hỏi về prepza",
+    "pages": {
+      "open": "Mở",
+      "pricing": "Bảng giá",
+      "topUp": "Nạp credit",
+      "settings": "Cài đặt",
+      "faq": "Câu hỏi thường gặp",
+      "companies": "Công ty",
+      "slack": "Slack",
+      "api": "API",
+      "integrations": "Tích hợp",
+      "template": "Mẫu",
+      "templates": "Mẫu",
+      "team": "Nhóm",
+      "referrals": "Giới thiệu",
+      "candidate": "Ứng viên",
+      "candidates": "Ứng viên",
+      "interview": "Phỏng vấn",
+      "interviews": "Phỏng vấn"
+    },
+    "voice": {
+      "hold": "Nhấn giữ để nói",
+      "stop": "Dừng ghi âm",
+      "recording": "Đang ghi âm…",
+      "transcribing": "Đang chuyển thành văn bản…",
+      "notAllowed": "Hãy cho phép micrô trong trình duyệt để nói.",
+      "noMicrophone": "Không tìm thấy micrô.",
+      "tooShort": "Quá ngắn: hãy giữ nút trong khi nói.",
+      "holdHint": "Hãy giữ nút trong khi nói.",
+      "failed": "Không thể chuyển bản ghi âm thành văn bản. Hãy thử lại."
+    },
+    "welcome": {
+      "signed_out": {
+        "text": "prepza hoạt động thế nào, chi phí bao nhiêu và ứng viên thấy gì, trả lời từ câu hỏi thường gặp của prepza. Đăng nhập để hỏi về công ty và ứng viên của bạn.",
+        "questions": {
+          "what": "prepza là gì?",
+          "pricing": "Chi phí bao nhiêu?",
+          "takeTest": "Ứng viên làm bài kiểm tra thế nào?",
+          "account": "Ứng viên có cần tài khoản không?"
+        }
+      },
+      "no_company": {
+        "text": "Cùng bắt đầu nhé: buổi phỏng vấn đầu tiên, công ty của bạn và việc xác minh công ty.",
+        "questions": {
+          "firstInterview": "Tạo buổi phỏng vấn đầu tiên thế nào?",
+          "createCompany": "Tạo công ty thế nào?",
+          "verify": "Xác minh công ty thế nào?"
+        }
+      },
+      "unverified": {
+        "text": "Xác minh công ty để ứng viên biết ai đang mời họ, và tạo các buổi phỏng vấn.",
+        "questions": {
+          "verify": "Xác minh công ty thế nào?",
+          "whyVerify": "Vì sao nên xác minh công ty?",
+          "createInterview": "Tạo buổi phỏng vấn thế nào?"
+        }
+      },
+      "no_interviews": {
+        "text": "Tạo buổi phỏng vấn từ mô tả công việc: câu hỏi được viết cho đúng vị trí.",
+        "questions": {
+          "fromDescription": "Tạo phỏng vấn từ mô tả công việc thế nào?",
+          "template": "Tôi có thể bắt đầu từ mẫu không?",
+          "changeQuestions": "Tôi có thể đổi câu hỏi không?"
+        }
+      },
+      "no_candidates": {
+        "text": "Mời ứng viên qua email, bằng liên kết chia sẻ hoặc từ ATS của bạn.",
+        "questions": {
+          "invite": "Mời ứng viên thế nào?",
+          "shareLink": "Liên kết chia sẻ hoạt động thế nào?",
+          "ats": "Kết nối ATS thế nào?"
+        }
+      },
+      "has_candidates": {
+        "text": "Hỏi về ứng viên của bạn: ai đạt, họ so với nhau thế nào và kết quả có ý nghĩa gì.",
+        "questions": {
+          "passed": "Tuần này ai đạt?",
+          "compare": "So sánh các ứng viên tốt nhất của tôi",
+          "replace": "Thay một câu hỏi thế nào?",
+          "signals": "Rời trang và thử sao chép nghĩa là gì?"
+        }
+      }
+    },
+    "signInCard": "Đăng nhập hoặc tạo tài khoản, rồi hỏi về công ty và ứng viên của bạn.",
+    "resize": "Đổi độ rộng của bảng"
   }
 }

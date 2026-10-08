@@ -913,7 +913,8 @@
       },
       "terms": "Tingimused",
       "privacy": "Privaatsuspoliitika"
-    }
+    },
+    "askAgent": "küsi agendilt"
   },
   "faq": {
     "title": "Korduma kippuvad küsimused",
@@ -1272,5 +1273,108 @@
       "invite_reminders": "Sa ei saa enam selle intervjuu meeldetuletusi.",
       "company": "Sa ei saa enam e-kirju ettevõttelt {company}."
     }
+  },
+  "assistant": {
+    "title": "Assistent",
+    "company": "Ettevõte",
+    "allCompanies": "Kõik ettevõtted",
+    "newChat": "Uus vestlus",
+    "history": "Ajalugu",
+    "stop": "Peata",
+    "placeholder": "küsi mida tahes…",
+    "failed": "Praegu ei õnnestunud vastust saada. Proovi uuesti.",
+    "openFailed": "Seda vestlust ei õnnestunud avada.",
+    "historyFailed": "Sinu vestlusi ei õnnestunud laadida.",
+    "historyEmpty": "Vestlusi veel pole.",
+    "deleteChat": "Kustuta „{title}”",
+    "deleteTitle": "Kas kustutada see vestlus?",
+    "deleteText": "Vestlus ja selle vastused kustutatakse jäädavalt.",
+    "emptyTitle": "Küsi oma värbamise kohta",
+    "emptyText": "Kandidaadid, intervjuud, krediit, integratsioonid ja prepza toimimine – selle põhjal, mida sa oma ettevõtetes näed. Tehisintellekt võib eksida; kehtivad lehed, millele see viitab.",
+    "emptyTitleFaq": "Küsi prepza kohta",
+    "pages": {
+      "open": "Ava",
+      "pricing": "Hinnad",
+      "topUp": "Laadi juurde",
+      "settings": "Seaded",
+      "faq": "KKK",
+      "companies": "Ettevõtted",
+      "slack": "Slack",
+      "api": "API",
+      "integrations": "Integratsioonid",
+      "template": "Mall",
+      "templates": "Mallid",
+      "team": "Meeskond",
+      "referrals": "Soovitused",
+      "candidate": "Kandidaat",
+      "candidates": "Kandidaadid",
+      "interview": "Intervjuu",
+      "interviews": "Intervjuud"
+    },
+    "voice": {
+      "hold": "Hoia all, et rääkida",
+      "stop": "Peata salvestamine",
+      "recording": "Salvestan…",
+      "transcribing": "Muudan tekstiks…",
+      "notAllowed": "Rääkimiseks luba brauseris mikrofon.",
+      "noMicrophone": "Mikrofoni ei leitud.",
+      "tooShort": "Liiga lühike: hoia nuppu rääkimise ajal all.",
+      "holdHint": "Hoia nuppu rääkimise ajal all.",
+      "failed": "Salvestist ei õnnestunud tekstiks muuta. Proovi uuesti."
+    },
+    "welcome": {
+      "signed_out": {
+        "text": "Kuidas prepza töötab, mis see maksab ja mida kandidaadid näevad – vastused prepza KKK-st. Logi sisse, et küsida oma ettevõtete ja kandidaatide kohta.",
+        "questions": {
+          "what": "Mis on prepza?",
+          "pricing": "Mis see maksab?",
+          "takeTest": "Kuidas kandidaadid testi teevad?",
+          "account": "Kas kandidaadid vajavad kontot?"
+        }
+      },
+      "no_company": {
+        "text": "Alustame: sinu esimene intervjuu, ettevõte ja selle kinnitamine.",
+        "questions": {
+          "firstInterview": "Kuidas luua esimene intervjuu?",
+          "createCompany": "Kuidas luua ettevõte?",
+          "verify": "Kuidas oma ettevõte kinnitada?"
+        }
+      },
+      "unverified": {
+        "text": "Kinnita oma ettevõte, et kandidaadid näeksid, kes neid kutsub, ja loo intervjuud.",
+        "questions": {
+          "verify": "Kuidas oma ettevõte kinnitada?",
+          "whyVerify": "Miks ettevõte kinnitada?",
+          "createInterview": "Kuidas luua intervjuu?"
+        }
+      },
+      "no_interviews": {
+        "text": "Loo intervjuu töökuulutuse põhjal: küsimused kirjutatakse selle rolli jaoks.",
+        "questions": {
+          "fromDescription": "Kuidas luua intervjuu töökuulutuse põhjal?",
+          "template": "Kas saan alustada mallist?",
+          "changeQuestions": "Kas saan küsimusi muuta?"
+        }
+      },
+      "no_candidates": {
+        "text": "Kutsu kandidaate e-kirjaga, jagatava lingiga või oma ATS-ist.",
+        "questions": {
+          "invite": "Kuidas kandidaate kutsuda?",
+          "shareLink": "Kuidas jagatav link töötab?",
+          "ats": "Kuidas oma ATS ühendada?"
+        }
+      },
+      "has_candidates": {
+        "text": "Küsi oma kandidaatide kohta: kes läbis, kuidas nad üksteisega võrreldes paistavad ja mida nende tulemused tähendavad.",
+        "questions": {
+          "passed": "Kes sel nädalal läbis?",
+          "compare": "Võrdle minu parimaid kandidaate",
+          "replace": "Kuidas küsimust asendada?",
+          "signals": "Mida tähendavad lehelt lahkumised ja kopeerimiskatsed?"
+        }
+      }
+    },
+    "signInCard": "Logi sisse või loo konto ning küsi siis oma ettevõtete ja kandidaatide kohta.",
+    "resize": "Muuda paneeli laiust"
   }
 }

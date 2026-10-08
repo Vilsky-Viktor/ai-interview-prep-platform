@@ -905,7 +905,8 @@
       },
       "terms": "Voorwaarden",
       "privacy": "Privacybeleid"
-    }
+    },
+    "askAgent": "vraag de agent"
   },
   "faq": {
     "title": "Veelgestelde vragen",
@@ -1264,5 +1265,108 @@
       "invite_reminders": "Je krijgt geen herinneringen meer voor dit interview.",
       "company": "Je krijgt geen e-mails meer namens {company}."
     }
+  },
+  "assistant": {
+    "title": "Assistent",
+    "company": "Bedrijf",
+    "allCompanies": "Alle bedrijven",
+    "newChat": "Nieuwe chat",
+    "history": "Geschiedenis",
+    "stop": "Stoppen",
+    "placeholder": "vraag wat je wilt…",
+    "failed": "Er kon nu geen antwoord worden opgehaald. Probeer het opnieuw.",
+    "openFailed": "Deze chat kon niet worden geopend.",
+    "historyFailed": "Je chats konden niet worden geladen.",
+    "historyEmpty": "Nog geen chats.",
+    "deleteChat": "‘{title}’ verwijderen",
+    "deleteTitle": "Deze chat verwijderen?",
+    "deleteText": "De chat en de antwoorden worden definitief verwijderd.",
+    "emptyTitle": "Vraag iets over je werving",
+    "emptyText": "Kandidaten, interviews, credits, koppelingen en hoe prepza werkt, op basis van wat je in je bedrijven ziet. De AI kan zich vergissen; de pagina's waarnaar hij linkt zijn leidend.",
+    "emptyTitleFaq": "Vraag iets over prepza",
+    "pages": {
+      "open": "Openen",
+      "pricing": "Prijzen",
+      "topUp": "Opwaarderen",
+      "settings": "Instellingen",
+      "faq": "Veelgestelde vragen",
+      "companies": "Bedrijven",
+      "slack": "Slack",
+      "api": "API",
+      "integrations": "Integraties",
+      "template": "Sjabloon",
+      "templates": "Sjablonen",
+      "team": "Team",
+      "referrals": "Doorverwijzingen",
+      "candidate": "Kandidaat",
+      "candidates": "Kandidaten",
+      "interview": "Interview",
+      "interviews": "Interviews"
+    },
+    "voice": {
+      "hold": "Ingedrukt houden om te praten",
+      "stop": "Opname stoppen",
+      "recording": "Opnemen…",
+      "transcribing": "Omzetten naar tekst…",
+      "notAllowed": "Sta de microfoon toe in je browser om te praten.",
+      "noMicrophone": "Geen microfoon gevonden.",
+      "tooShort": "Te kort: houd de knop ingedrukt terwijl je praat.",
+      "holdHint": "Houd de knop ingedrukt terwijl je praat.",
+      "failed": "De opname kon niet in tekst worden omgezet. Probeer het opnieuw."
+    },
+    "welcome": {
+      "signed_out": {
+        "text": "Hoe prepza werkt, wat het kost en wat kandidaten zien, beantwoord vanuit de veelgestelde vragen van prepza. Log in om vragen te stellen over je bedrijven en kandidaten.",
+        "questions": {
+          "what": "Wat is prepza?",
+          "pricing": "Wat kost het?",
+          "takeTest": "Hoe maken kandidaten een test?",
+          "account": "Hebben kandidaten een account nodig?"
+        }
+      },
+      "no_company": {
+        "text": "Aan de slag: je eerste interview, je bedrijf en de verificatie ervan.",
+        "questions": {
+          "firstInterview": "Hoe maak ik mijn eerste interview?",
+          "createCompany": "Hoe maak ik een bedrijf aan?",
+          "verify": "Hoe verifieer ik mijn bedrijf?"
+        }
+      },
+      "unverified": {
+        "text": "Verifieer je bedrijf zodat kandidaten zien wie hen uitnodigt, en maak je interviews.",
+        "questions": {
+          "verify": "Hoe verifieer ik mijn bedrijf?",
+          "whyVerify": "Waarom mijn bedrijf verifiëren?",
+          "createInterview": "Hoe maak ik een interview?"
+        }
+      },
+      "no_interviews": {
+        "text": "Maak een interview van een vacaturetekst: de vragen worden voor de functie geschreven.",
+        "questions": {
+          "fromDescription": "Hoe maak ik een interview van een vacaturetekst?",
+          "template": "Kan ik met een sjabloon beginnen?",
+          "changeQuestions": "Kan ik de vragen aanpassen?"
+        }
+      },
+      "no_candidates": {
+        "text": "Nodig kandidaten uit per e-mail, met een deelbare link of vanuit je ATS.",
+        "questions": {
+          "invite": "Hoe nodig ik kandidaten uit?",
+          "shareLink": "Hoe werkt de deelbare link?",
+          "ats": "Hoe koppel ik mijn ATS?"
+        }
+      },
+      "has_candidates": {
+        "text": "Vraag naar je kandidaten: wie er geslaagd is, hoe ze zich verhouden en wat hun resultaten betekenen.",
+        "questions": {
+          "passed": "Wie is deze week geslaagd?",
+          "compare": "Vergelijk mijn beste kandidaten",
+          "replace": "Hoe vervang ik een vraag?",
+          "signals": "Wat betekenen pagina verlaten en kopieerpogingen?"
+        }
+      }
+    },
+    "signInCard": "Log in of maak een account aan; vraag daarna naar je bedrijven en kandidaten.",
+    "resize": "Breedte van het paneel aanpassen"
   }
 }

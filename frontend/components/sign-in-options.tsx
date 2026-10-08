@@ -27,9 +27,16 @@ const ICONS: Record<SignInProvider, () => React.ReactNode> = {
 }
 
 /** The ways to sign in, Google, LinkedIn or GitHub, one account per email whichever is used;
- * the sign-in dialog shows them, and so does a page that only asks to sign in. `onSignedIn`
- * runs once signed in. */
-export function SignInOptions({ onSignedIn }: { onSignedIn?: () => void }) {
+ * the sign-in dialog shows them, a page that only asks to sign in and the assistant's sign-in
+ * card. `onSignedIn` runs once signed in. */
+export function SignInOptions({
+  onSignedIn,
+  first,
+}: {
+  onSignedIn?: () => void
+  // Shown first: the way the visitor asked the assistant for.
+  first?: SignInProvider | null
+}) {
   const t = useTranslations("signIn")
   const [busy, setBusy] = useState(false)
   // The way just tried, when its email already has an account under another way.
@@ -76,31 +83,36 @@ export function SignInOptions({ onSignedIn }: { onSignedIn?: () => void }) {
         </p>
       )}
       <div className="space-y-3">
-        {SIGN_IN_PROVIDERS.filter((name) => name !== linking).map((name) => {
-          const Icon = ICONS[name]
+        {[
+          ...SIGN_IN_PROVIDERS.filter((name) => name === first),
+          ...SIGN_IN_PROVIDERS.filter((name) => name !== first),
+        ]
+          .filter((name) => name !== linking)
+          .map((name) => {
+            const Icon = ICONS[name]
 
-          return (
-            <Button
-              key={name}
-              variant="outline"
-              className="h-12 w-full gap-3 text-base"
-              disabled={busy}
-              onClick={() => choose(name)}
-            >
-              <Icon />
-              {/* One phrase, so each language puts the name where it belongs; the name keeps
+            return (
+              <Button
+                key={name}
+                variant="outline"
+                className="h-12 w-full gap-3 text-base"
+                disabled={busy}
+                onClick={() => choose(name)}
+              >
+                <Icon />
+                {/* One phrase, so each language puts the name where it belongs; the name keeps
                   its capitals inside the lowercase button. */}
-              <span>
-                {t.rich("continueWith", {
-                  provider: NAMES[name],
-                  name: (chunks) => (
-                    <span className="normal-case">{chunks}</span>
-                  ),
-                })}
-              </span>
-            </Button>
-          )
-        })}
+                <span>
+                  {t.rich("continueWith", {
+                    provider: NAMES[name],
+                    name: (chunks) => (
+                      <span className="normal-case">{chunks}</span>
+                    ),
+                  })}
+                </span>
+              </Button>
+            )
+          })}
       </div>
       {/* Set a little apart from the buttons. */}
       <div className="space-y-4 pt-2">

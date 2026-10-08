@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { getLocale, getTranslations } from "next-intl/server"
 
 import "./globals.css"
+import { AssistantProvider } from "@/components/assistant/assistant-provider"
 import { AuthProvider } from "@/components/auth-provider"
 import { CjkFonts } from "@/components/cjk-fonts"
 import { UrlLocaleProvider } from "@/components/localized-link"
@@ -76,14 +77,16 @@ export default async function RootLayout({
               <AuthProvider>
                 <TooltipProvider>
                   <SignInProvider>
-                    <SiteHeader />
-                    <div className="flex flex-1 flex-col [&>*]:w-full">
-                      <MaintenanceNotice />
-                      {children}
-                    </div>
-                    <SiteFooter />
-                    <ScrollTopButton />
-                    <Toaster />
+                    <AssistantProvider>
+                      <SiteHeader />
+                      <div className="flex flex-1 flex-col [&>*]:w-full">
+                        <MaintenanceNotice />
+                        {children}
+                      </div>
+                      <SiteFooter />
+                      <ScrollTopButton />
+                      <Toaster />
+                    </AssistantProvider>
                   </SignInProvider>
                 </TooltipProvider>
               </AuthProvider>

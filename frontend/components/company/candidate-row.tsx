@@ -1,0 +1,98 @@
+"use client"
+
+import { cn } from "cn"
+import Link from "next/link"
+import { useLocale, useTranslations } from "next-intl"
+
+import { CandidateSignals } from "@/components/company/candidate-signals"
+import { Badge } from "@/components/ui/badge"
+import { formatDate } from "@/lib/format"
+import { gradeTone } from "@/lib/grade-tone"
+import type { Candidate } from "@/types/company"
+
+// What a row shows; the assistant's answers may leave out the date or the progress.
+export type CandidateRowData = Pick<
+  Candidate,
+  | "email"
+  | "status"
+  | "grade"
+  | "passed"
+  | "tab_leaves"
+  | "copies"
+  | "fast_answers"
+> & { created_at?: string; progress?: number }
+
+/** One candidate in a list: email, date and integrity signals, progress, grade and status,
+ * opening `href`. Side by side when its list is wide enough, stacked in a narrow one (the
+ * assistant's panel). */
+export function CandidateRow({
+  candidate,
+  href,
+  onClick,
+}: {
+  candidate: CandidateRowData
+  href: string
+  onClick?: () => void
+}) {
+  const t = useTranslations("candidates")
+  const statuses = useTranslations("candidateStatus")
+  const locale = useLocale()
+
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className="@container block transition-colors hover:bg-muted/50"
+    >
+      <span className="flex flex-col gap-4 p-4 @xl:flex-row @xl:items-center @xl:justify-between @xl:p-6">
+        <span className="min-w-0 space-y-1">
+          <span className="block text-lg font-medium break-all">
+            {candidate.status === "deleted" ? t("deleted") : candidate.email}
+          </span>
+          <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+            {candidate.created_at && (
+              <time dateTime={candidate.created_at} suppressHydrationWarning>
+                {formatDate(candidate.created_at, locale)}
+              </time>
+            )}
+            <CandidateSignals candidate={candidate} />
+          </span>
+        </span>
+        <span className="flex shrink-0 items-center gap-6 @xl:gap-10">
+          <span className="w-20 text-center @xl:w-24">
+            <span className="block text-2xl font-light tabular-nums">
+              {candidate.progress == null ? "—" : `${candidate.progress}%`}
+            </span>
+            <span className="block text-sm text-muted-foreground">
+              {t("progress")}
+            </span>
+          </span>
+          <span className="w-20 text-center @xl:w-24">
+            <span
+              className={cn(
+                "block text-2xl font-light tabular-nums",
+                candidate.grade == null && "text-muted-foreground",
+                gradeTone(candidate.passed)
+              )}
+            >
+              {candidate.grade == null ? "—" : `${candidate.grade}%`}
+            </span>
+            <span className="block text-sm text-muted-foreground">
+              {t("grade")}
+            </span>
+          </span>
+          <span className="flex justify-end @xl:w-32">
+            <Badge
+              variant={
+                candidate.status === "undelivered" ? "destructive" : "outline"
+              }
+              className="h-7 px-3 text-sm font-light"
+            >
+              {statuses(candidate.status)}
+            </Badge>
+          </span>
+        </span>
+      </span>
+    </Link>
+  )
+}
