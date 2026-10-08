@@ -28,7 +28,8 @@ def signature(secret: str, timestamp: int, body: bytes) -> str:
 
 def public_address(url: str) -> bool:
     """Whether the URL is HTTPS to a host whose every address is on the public internet, so a
-    web hook can't reach prepza's own services or the cloud's metadata server."""
+    web hook can't reach prepza's own services or the cloud's metadata server. A lookup that
+    fails raises socket.gaierror: it may work on a retry."""
     parts = urlsplit(url)
 
     if parts.scheme != "https" or not parts.hostname:
@@ -36,7 +37,7 @@ def public_address(url: str) -> bool:
 
     try:
         found = socket.getaddrinfo(parts.hostname, parts.port or 443, proto=socket.IPPROTO_TCP)
-    except (socket.gaierror, UnicodeError):
+    except UnicodeError:
         return False
 
     return all(ipaddress.ip_address(item[4][0]).is_global for item in found)

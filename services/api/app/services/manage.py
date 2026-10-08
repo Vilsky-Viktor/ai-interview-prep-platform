@@ -1,4 +1,5 @@
 import asyncio
+import socket
 from datetime import UTC, datetime
 from uuid import UUID
 
@@ -64,7 +65,12 @@ async def create_webhook(company_id: UUID, url: str, user_id: str) -> NewWebhook
 
     url = url.strip()
 
-    if not await asyncio.to_thread(public_address, url):
+    try:
+        public = await asyncio.to_thread(public_address, url)
+    except socket.gaierror:
+        public = False
+
+    if not public:
         raise HTTPException(
             status.HTTP_422_UNPROCESSABLE_CONTENT,
             "Use an HTTPS address that's reachable from the internet",

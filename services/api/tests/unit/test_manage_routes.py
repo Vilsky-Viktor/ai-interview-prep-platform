@@ -1,3 +1,5 @@
+import socket
+
 import pytest
 from prepza_common.encryption import decrypt
 
@@ -70,8 +72,16 @@ def test_a_viewer_sees_but_cant_change_and_a_stranger_sees_nothing(client, compa
 
 @pytest.fixture
 def public(monkeypatch):
-    """Every address counts as on the public internet unless it has "internal" in it."""
-    monkeypatch.setattr(manage, "public_address", lambda url: "internal" not in url)
+    """Every address counts as on the public internet unless it has "internal" in it; one with
+    "unknown" in it doesn't resolve."""
+
+    def check(url):
+        if "unknown" in url:
+            raise socket.gaierror
+
+        return "internal" not in url
+
+    monkeypatch.setattr(manage, "public_address", check)
 
 
 def test_a_web_hook_gets_a_secret_shown_once_and_stored_encrypted(
@@ -92,6 +102,7 @@ def test_a_web_hook_must_reach_the_public_internet(client, companies_api, stored
     response = client.post(HOOKS, json={"url": "https://internal/x"})
 
     assert response.status_code == 422
+    assert client.post(HOOKS, json={"url": "https://unknown/x"}).status_code == 422
     assert stored["webhooks"] == []
 
 

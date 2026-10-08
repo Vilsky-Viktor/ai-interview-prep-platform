@@ -58,16 +58,22 @@ def test_a_web_hook_is_signed_over_its_time_and_raw_body():
         ("https://metadata/hook", ["169.254.169.254"], False),
         ("https://intranet/hook", ["10.0.0.5"], False),
         ("https://split/hook", ["93.184.216.34", "192.168.1.2"], False),
-        ("https://unknown/hook", None, False),
     ],
 )
 def test_only_https_to_the_public_internet(monkeypatch, url, addresses, public):
     def resolve(host, port, proto=0):
-        if addresses is None:
-            raise socket.gaierror
-
         return [(socket.AF_INET, 1, 6, "", (address, port)) for address in addresses]
 
     monkeypatch.setattr(webhooks.socket, "getaddrinfo", resolve)
 
     assert public_address(url) is public
+
+
+def test_a_failed_lookup_raises_so_the_send_is_retried(monkeypatch):
+    def resolve(host, port, proto=0):
+        raise socket.gaierror
+
+    monkeypatch.setattr(webhooks.socket, "getaddrinfo", resolve)
+
+    with pytest.raises(socket.gaierror):
+        public_address("https://unknown/hook")

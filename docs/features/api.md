@@ -38,7 +38,7 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 - Each web hook gets a signing secret (`whsec_...`), shown once and stored encrypted with `API_ENCRYPTION_KEY`.
 - When a candidate finishes (companies' `candidate.finished`), each web hook gets `POST {"id", "type": "candidate.finished", "data": {"interview", "candidate"}}`, the same objects the API returns, with `Prepza-Signature: t=<unix seconds>,v1=<hex HMAC-SHA256 of "<t>.<body>">`.
 - Delivery: all of a company's web hooks are sent to at once, each with 10 seconds to answer `2xx`. A web hook that took the event is remembered (`webhook_deliveries`, for 30 days), so a redelivered event reaches only the ones that failed. If any failed, the event fails and Pub/Sub retries it with backoff (from 10 seconds to 10 minutes, up to 50 times). An event can arrive more than once; its `id` stays the same.
-- A web hook whose secret can't be read, or whose address no longer leads to the public internet, is skipped. A candidate or interview deleted since is told to nobody.
+- A web hook whose secret can't be read, or whose address no longer leads to the public internet, is skipped. An address whose lookup fails counts as a failed send and is retried. A candidate or interview deleted since is told to nobody; if the companies service can't answer for now, the event fails and is retried, and nothing has been sent yet.
 
 ## The API page
 

@@ -1,10 +1,12 @@
 import asyncio
 import json
+import socket
 import uuid
 from types import SimpleNamespace
 
 import httpx
 import pytest
+from fastapi import HTTPException
 from prepza_common.encryption import encrypt
 
 from app.services import events
@@ -24,8 +26,16 @@ FINISHED = {
 
 @pytest.fixture
 def endpoints(monkeypatch, companies_api):
-    """COMPANY's web hooks, what each endpoint got, which fail, and which got which event."""
-    state = {"hooks": [], "posted": [], "failing": set(), "delivered": set(), "public": True}
+    """COMPANY's web hooks, what each endpoint got, which fail or don't resolve,
+    and which got which event."""
+    state = {
+        "hooks": [],
+        "posted": [],
+        "failing": set(),
+        "delivered": set(),
+        "public": True,
+        "unresolved": set(),
+    }
 
     def hook(url, secret="whsec_a", maker="u1"):
         found = SimpleNamespace(
@@ -54,10 +64,18 @@ def endpoints(monkeypatch, companies_api):
     monkeypatch.setattr(delivery.webhooks, "delivered", delivered)
     monkeypatch.setattr(delivery.webhooks, "mark_delivered", mark_delivered)
     monkeypatch.setattr(delivery.endpoints, "post", post)
-    monkeypatch.setattr(delivery, "public_address", lambda url: state["public"])
+    monkeypatch.setattr(delivery, "public_address", lambda url: check(url, state))
     state["hook"] = hook
 
     return state
+
+
+def check(url, state):
+    """public_address, faked: an address in state["unresolved"] doesn't resolve."""
+    if url in state["unresolved"]:
+        raise socket.gaierror
+
+    return state["public"]
 
 
 def finish(event_id="e1"):
@@ -140,6 +158,44 @@ def test_an_address_no_longer_public_or_an_unreadable_secret_is_skipped(endpoint
     finish("e2")
 
     assert endpoints["posted"] == []
+
+
+def test_an_address_that_doesnt_resolve_now_is_retried(endpoints):
+    endpoints["hook"]("https://a.example/x")
+    endpoints["hook"]("https://flaky.example/x")
+    endpoints["unresolved"].add("https://flaky.example/x")
+
+    with pytest.raises(delivery.DeliveryFailed):
+        finish()
+
+    endpoints["unresolved"].clear()
+    finish()
+
+    assert [item[0] for item in endpoints["posted"]] == [
+        "https://a.example/x",
+        "https://flaky.example/x",
+    ]
+
+
+def test_companies_busy_raises_so_the_event_comes_again(endpoints, monkeypatch):
+    endpoints["hook"]("https://a.example/x")
+    real = delivery.companies.interview
+
+    async def busy(company_id, interview_id):
+        raise HTTPException(503, "Unavailable")
+
+    monkeypatch.setattr(delivery.companies, "interview", busy)
+
+    with pytest.raises(HTTPException):
+        finish()
+
+    assert endpoints["posted"] == []
+
+    monkeypatch.setattr(delivery.companies, "interview", real)
+    finish()
+    finish()
+
+    assert [item[0] for item in endpoints["posted"]] == ["https://a.example/x"]
 
 
 def test_a_deleted_company_loses_its_keys_and_web_hooks(monkeypatch):

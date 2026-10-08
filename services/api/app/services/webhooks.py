@@ -1,10 +1,11 @@
 import asyncio
 import logging
+import socket
 import time
 from uuid import UUID
 
 import httpx
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from prepza_common.encryption import decrypt
 
@@ -49,8 +50,12 @@ async def finished(data: dict, event_id: str) -> None:
     try:
         interview = await companies.interview(company_id, interview_id)
         candidate = await companies.candidate(company_id, interview_id, invite_id)
-    except HTTPException:
-        # The interview or the candidate is gone since: nothing to tell.
+    except HTTPException as error:
+        # The interview or the candidate is gone since: nothing to tell. Any other refusal
+        # (busy, unavailable) raises, so Pub/Sub sends the event again; nothing was sent yet.
+        if error.status_code != status.HTTP_404_NOT_FOUND:
+            raise
+
         return
 
     event = FinishedEvent(
@@ -69,10 +74,19 @@ async def finished(data: dict, event_id: str) -> None:
 async def deliver(hook, event_id: str, body: bytes) -> bool:
     """Sends the event to one web hook; whether it took it. An address that no longer leads to
     the public internet, or a secret that can't be read, is skipped as taken: retrying can't
-    help."""
+    help. An address that doesn't resolve now is a failure, retried like a refused send."""
     secret = decrypt(settings.api_encryption_key, hook.secret)
 
-    if secret is None or not await asyncio.to_thread(public_address, hook.url):
+    try:
+        public = await asyncio.to_thread(public_address, hook.url)
+    except socket.gaierror as error:
+        logger.info(
+            "Web hook %s didn't take %s: address lookup failed: %s", hook.id, event_id, error
+        )
+
+        return False
+
+    if secret is None or not public:
         logger.warning("Skipped web hook %s: unreadable secret or non-public address", hook.id)
 
         return True
