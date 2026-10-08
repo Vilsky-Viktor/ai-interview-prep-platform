@@ -23,6 +23,78 @@ env:
   PUBLISH: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
 
 jobs:
+  # What changed, so only that is tested and built. A pull request compares with its base; main
+  # compares with the last commit CI passed on (runs on main go one at a time), so a failed run's
+  # changes are built by the next one. Each service also depends on packages/common; a change to
+  # CI itself or the Python version counts as everything.
+  changes:
+    name: what changed
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      changed: ${{ steps.diff.outputs.changed }}
+      stack: ${{ steps.diff.outputs.stack }}
+      base: ${{ steps.diff.outputs.base }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - id: diff
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          everything="library generation rounds companies billing notifications ats api frontend common"
+
+          if [ -n "$PR_BASE" ]; then
+            base="$PR_BASE"
+          else
+            base="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?branch=main&event=push&status=success&per_page=1" --jq '.workflow_runs[0].head_sha // ""')"
+          fi
+
+          # No earlier passing commit to build on: everything.
+          if [ -z "$base" ] || ! git merge-base --is-ancestor "$base" HEAD; then
+            base=""
+            changed="$everything"
+          else
+            files="$(git diff --name-only "$base" HEAD)"
+            changed=""
+
+            if echo "$files" | grep -qE '^(\.github/workflows/ci\.yml|\.python-version)$'; then
+              changed="$everything"
+            else
+              for name in library generation rounds companies billing notifications ats api; do
+                if echo "$files" | grep -qE "^(services/$name|packages/common)/"; then
+                  changed="$changed $name"
+                fi
+              done
+
+              if echo "$files" | grep -q '^frontend/'; then
+                changed="$changed frontend"
+              fi
+
+              if echo "$files" | grep -q '^packages/common/'; then
+                changed="$changed common"
+              fi
+            fi
+          fi
+
+          # The whole-stack tests run when any part, or the stack and its tests, changed.
+          stack=false
+
+          if [ -n "$changed" ] || echo "${files:-}" | grep -qE '^(e2e_tests|gateway|database|firebase|scripts)/|^docker-compose\.yml$'; then
+            stack=true
+          fi
+
+          echo "Since ${base:-the start}: ${changed:-nothing}"
+          {
+            echo "changed=$(jq -nc --arg names "$changed" '$names | split(" ") | map(select(. != ""))')"
+            echo "stack=$stack"
+            echo "base=$base"
+          } >> "$GITHUB_OUTPUT"
+
   lint:
     name: python lint and format
     runs-on: ubuntu-latest
@@ -32,35 +104,45 @@ jobs:
       - run: uvx ruff@${{ env.RUFF_VERSION }} check services packages evals
       - run: uvx ruff@${{ env.RUFF_VERSION }} format --check services packages evals
 
+  # Every part keeps its job, so required checks always report; an unchanged part skips its steps.
   tests:
     name: ${{ matrix.path }} tests
+    needs: changes
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        path:
-          - services/library
-          - services/generation
-          - services/rounds
-          - services/companies
-          - services/notifications
-          - services/billing
-          - services/ats
-          - services/api
-          - packages/common
+        include:
+          - { name: library, path: services/library }
+          - { name: generation, path: services/generation }
+          - { name: rounds, path: services/rounds }
+          - { name: companies, path: services/companies }
+          - { name: notifications, path: services/notifications }
+          - { name: billing, path: services/billing }
+          - { name: ats, path: services/ats }
+          - { name: api, path: services/api }
+          - { name: common, path: packages/common }
+    env:
+      CHANGED: ${{ contains(fromJSON(needs.changes.outputs.changed), matrix.name) }}
     defaults:
       run:
         working-directory: ${{ matrix.path }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      - if: env.CHANGED == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - if: env.CHANGED == 'true'
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
         with:
           working-directory: ${{ matrix.path }}
-      - run: uv sync --frozen
-      - run: uv run pytest -q
+      - if: env.CHANGED == 'true'
+        run: uv sync --frozen
+      - if: env.CHANGED == 'true'
+        run: uv run pytest -q
 
   frontend:
     name: frontend lint and types
+    needs: changes
+    if: contains(fromJSON(needs.changes.outputs.changed), 'frontend')
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -80,8 +162,12 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
 
+  # A changed part's image is built (and, on main, pushed). On main, an unchanged one is the image
+  # of the last commit CI passed on, tagged with this commit too, so every image exists for every
+  # commit deploy.yml may release.
   images:
     name: ${{ matrix.name }} production image
+    needs: changes
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -101,6 +187,9 @@ jobs:
           - { name: ats, context: ., file: services/ats/Dockerfile }
           - { name: api, context: ., file: services/api/Dockerfile }
           - { name: frontend, context: frontend, file: frontend/Dockerfile }
+    env:
+      CHANGED: ${{ contains(fromJSON(needs.changes.outputs.changed), matrix.name) }}
+      BASE: ${{ needs.changes.outputs.base }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - if: env.PUBLISH == 'true'
@@ -112,8 +201,13 @@ jobs:
         uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
       - if: env.PUBLISH == 'true'
         run: gcloud auth configure-docker ${{ vars.GCP_REGION }}-docker.pkg.dev --quiet
-      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
-      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+      - if: env.PUBLISH == 'true' && env.CHANGED != 'true'
+        name: Tag the unchanged image
+        run: gcloud artifacts docker tags add "$REGISTRY/${{ matrix.name }}:$BASE" "$REGISTRY/${{ matrix.name }}:$GITHUB_SHA" --quiet
+      - if: env.CHANGED == 'true'
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - if: env.CHANGED == 'true'
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
         with:
           context: ${{ matrix.context }}
           file: ${{ matrix.file }}
@@ -137,6 +231,8 @@ jobs:
 
   smoke:
     name: smoke test (whole stack)
+    needs: changes
+    if: needs.changes.outputs.stack == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
