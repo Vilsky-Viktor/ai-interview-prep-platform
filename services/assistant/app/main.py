@@ -11,7 +11,14 @@ from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
 from app.integrations.redis import get_redis
-from app.routers import chat, conversations, events, internal_accounts, schedules
+from app.routers import (
+    chat,
+    conversations,
+    events,
+    internal_accounts,
+    schedules,
+    transcribe,
+)
 from app.services.registry import tools
 from app.storage.db import ping as ping_database
 
@@ -42,6 +49,7 @@ add_localized_errors(app)
 app.add_middleware(MaintenanceMiddleware, get_redis=get_redis)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(chat.router)
+app.include_router(transcribe.router)
 app.include_router(conversations.router)
 app.include_router(events.router)
 app.include_router(schedules.router)

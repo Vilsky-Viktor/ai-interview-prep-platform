@@ -44,14 +44,18 @@ async def start(body: ChatRequest, user: User, token: str, language: str) -> Asy
 
     if body.conversation_id is not None:
         conversation = await open_conversation(body.conversation_id, user.uid, token, language)
-        company_id = conversation.company_id
-    elif company_id is not None:
+
+    # The company picked in the panel, for this message: one the user can see, or none.
+    if company_id is not None:
         await require_company(company_id, token, language)
 
     await limits.check(redis, user.uid, company_id)
 
     if conversation is None:
         conversation = await conversations.create(user.uid, company_id, body.message[:TITLE_LENGTH])
+
+        if body.earlier:
+            await messages.add_earlier(conversation.id, body.earlier)
 
     earlier = await messages.recent(conversation.id, HISTORY_MESSAGES)
     await messages.add_question(conversation.id, body.message, body.source)

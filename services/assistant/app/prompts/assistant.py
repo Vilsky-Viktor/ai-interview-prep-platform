@@ -33,9 +33,14 @@ Context:
 - The user is on the page {page}.
 """
 
-COMPANY_CONTEXT = "The conversation is about the company with id {company_id}."
+# The company the user picked in the panel's header, or "all companies".
+COMPANY_CONTEXT = (
+    "The user picked the company with id {company_id} in the panel: apply everything to that "
+    "company and never ask which company. Another company only when the user names it."
+)
 NO_COMPANY_CONTEXT = (
-    "The conversation isn't about one company: use list_companies when a company is needed, "
-    "and ask which one when there are several."
+    'The user picked "all companies" in the panel. For anything that targets one company (an '
+    "action, or reading one company's data), ask in the chat which company, unless the user "
+    "named it or has only one (list_companies tells). Creating a new company needs no choice."
 )
 UNKNOWN_PAGE = "(not given)"

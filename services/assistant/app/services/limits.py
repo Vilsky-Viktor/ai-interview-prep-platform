@@ -13,6 +13,7 @@ from app.constants.limits import (
     TOKENS_PER_COMPANY_DAY,
     TOKENS_PER_DAY,
     TOKENS_PER_USER_DAY,
+    TRANSCRIPTIONS_PER_USER_HOUR,
 )
 
 logger = logging.getLogger(__name__)
@@ -28,11 +29,15 @@ def budgets(user_id: str, company_id: UUID | None) -> list[tuple[str, int]]:
     return [*found, ("spend:assistant:all", TOKENS_PER_DAY)]
 
 
-async def check(redis, user_id: str, company_id: UUID | None) -> None:
-    """Counts one message, and refuses it (429) over a message limit or a spent budget."""
+async def check_budgets(redis, user_id: str, company_id: UUID | None) -> None:
+    """Refuses (429) once a budget is spent."""
     for key, budget in budgets(user_id, company_id):
         await spend(redis, key, 0, budget, DAY_SECONDS)
 
+
+async def check(redis, user_id: str, company_id: UUID | None) -> None:
+    """Counts one message, and refuses it (429) over a message limit or a spent budget."""
+    await check_budgets(redis, user_id, company_id)
     await hit(redis, f"rate:assistant:hour:{user_id}", MESSAGES_PER_USER_HOUR, HOUR_SECONDS)
     await hit(redis, f"rate:assistant:day:{user_id}", MESSAGES_PER_USER_DAY, DAY_SECONDS)
 
@@ -41,6 +46,14 @@ async def check(redis, user_id: str, company_id: UUID | None) -> None:
         await hit(redis, key, MESSAGES_PER_COMPANY_DAY, DAY_SECONDS)
 
     await hit(redis, "rate:assistant:all", MESSAGES_PER_DAY, DAY_SECONDS)
+
+
+async def check_transcription(redis, user_id: str) -> None:
+    """Counts one voice message, and refuses it (429) over the user's hourly limit or a spent
+    budget. Its transcript is then sent as a message, which counts as one."""
+    await check_budgets(redis, user_id, None)
+    key = f"rate:assistant:transcribe:hour:{user_id}"
+    await hit(redis, key, TRANSCRIPTIONS_PER_USER_HOUR, HOUR_SECONDS)
 
 
 async def record(redis, user_id: str, company_id: UUID | None, tokens: int) -> None:

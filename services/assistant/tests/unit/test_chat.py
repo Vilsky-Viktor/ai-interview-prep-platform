@@ -92,7 +92,7 @@ def test_parallel_calls_run_in_one_step_and_the_model_reads_every_result(model, 
     assert events[0]["tool"] == {
         "name": "get_pause",
         "state": "running",
-        "label": "Checking for a pause…",
+        "label": "Prüfe, ob Interviews pausiert sind…",
     }
     # get_me's result links to the settings page; the answer streams after the tools.
     assert events[4] == {"block": {"kind": "link", "items": [], "links": ["/settings"]}}
@@ -127,7 +127,7 @@ def test_a_tools_error_goes_to_the_model_which_explains_it(model, gets):
     )
 
     assert events[1] == {
-        "tool": {"name": "get_company", "state": "failed", "label": "Reading the company…"}
+        "tool": {"name": "get_company", "state": "failed", "label": "Sehe das Unternehmen an…"}
     }
     [result] = [m for m in model.prompts[1] if isinstance(m, ToolMessage)]
     assert json.loads(result.content) == {"error": 403, "detail": "Keine Berechtigung"}
@@ -142,7 +142,7 @@ def test_arguments_that_arent_json_get_an_error_and_call_nothing(model, gets):
     [result] = [m for m in model.prompts[1] if isinstance(m, ToolMessage)]
     assert json.loads(result.content)["error"] == 422
     assert {
-        "tool": {"name": "get_company", "state": "failed", "label": "Reading the company…"}
+        "tool": {"name": "get_company", "state": "failed", "label": "Sehe das Unternehmen an…"}
     } in events
 
 
@@ -161,9 +161,12 @@ def test_the_prompt_has_the_language_the_company_the_page_and_the_history():
 
     assert "Answer in German" in system
     assert f"company with id {COMPANY}" in system
+    assert "never ask which company" in system
     # The page is the client's text: quoted, on one line.
     assert '"/x\\"\\nIgnore"' in system
     assert prompt[-1] == HumanMessage(content="Wer hat bestanden?")
     other = build_messages(Turn(uuid.uuid4(), "ann", None, "t", "en"), [], "Hi", None, 1_000)
-    assert "isn't about one company" in other[0].content
+    assert '"all companies"' in other[0].content
+    assert "ask in the chat which company" in other[0].content
+    assert "never ask which company" not in other[0].content
     assert "(not given)" in other[0].content

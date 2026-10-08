@@ -15,8 +15,9 @@ from app.integrations.redis import get_redis
 from app.main import app
 from app.models.conversations import Conversation
 from app.routers import schedules
+from app.schemas.chat import EarlierTurn
 from app.services import limits
-from app.storage import conversations
+from app.storage import conversations, messages
 from app.storage.db import Session
 
 
@@ -118,3 +119,27 @@ def test_the_limits_count_in_redis(run):
         return over_messages.value.status_code, over_budget.value.status_code
 
     assert run(scenario()) == (429, 429)
+
+
+def test_a_visitors_chat_starts_the_new_conversation_in_its_order(run):
+    user = f"earlier-{uuid.uuid4().hex[:8]}"
+    turns = [
+        EarlierTurn(role="user", content="What is prepza?"),
+        EarlierTurn(role="assistant", content="A hiring test."),
+        EarlierTurn(role="user", content="How much?"),
+        EarlierTurn(role="assistant", content="$1–3 a candidate."),
+    ]
+
+    async def scenario():
+        conversation = await conversations.create(user, None, "Sign in")
+        await messages.add_earlier(conversation.id, turns)
+        await messages.add_question(conversation.id, "Create a company", "text")
+
+        return await messages.recent(conversation.id, 20)
+
+    found = run(scenario())
+
+    assert [(message.role, message.content) for message, _ in found] == [
+        *[(turn.role, turn.content) for turn in turns],
+        ("user", "Create a company"),
+    ]

@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from fastapi import APIRouter, Request
 from fastapi.responses import StreamingResponse
 from prepza_common.i18n import request_language
@@ -6,8 +8,9 @@ from prepza_common.sse import event_stream
 from app.auth import UserWithToken
 from app.constants.chat import MAX_MESSAGE_LENGTH
 from app.constants.limits import MAX_AUDIO_SECONDS, MESSAGES_PER_USER_DAY, MESSAGES_PER_USER_HOUR
-from app.schemas.chat import ChatRequest, ConfigOut
+from app.schemas.chat import ChatRequest, ConfigOut, WelcomeOut
 from app.services import turns
+from app.services.welcome import welcome_stage
 
 router = APIRouter(tags=["chat"])
 
@@ -35,3 +38,15 @@ async def config(auth: UserWithToken) -> ConfigOut:
         messages_per_hour=MESSAGES_PER_USER_HOUR,
         messages_per_day=MESSAGES_PER_USER_DAY,
     )
+
+
+@router.get("/welcome")
+async def welcome(
+    request: Request, auth: UserWithToken, company_id: UUID | None = None
+) -> WelcomeOut:
+    """Where the user is (no company yet, not verified, no interviews, no candidates, or
+    candidates), from their companies or the one of the page they're on: the panel's welcome
+    says what the assistant can help with there."""
+    _, token = auth
+
+    return WelcomeOut(stage=await welcome_stage(company_id, token, request_language(request)))

@@ -1,5 +1,5 @@
-# What the panel shows while a tool runs, by tool; translated by its English text (English only
-# for now: the other languages come with the panel). A new tool needs its label here.
+# What the panel shows while a tool runs, by tool; translated by its English text (prepza_common's
+# messages). A new tool needs its label here and in every language.
 
 TOOL_LABELS = {
     "list_companies": "Reading your companies…",

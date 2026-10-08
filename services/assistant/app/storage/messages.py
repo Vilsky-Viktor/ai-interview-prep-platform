@@ -1,3 +1,4 @@
+from datetime import timedelta
 from uuid import UUID
 
 from sqlalchemy import select, update
@@ -19,6 +20,26 @@ async def add_question(conversation_id: UUID, content: str, source: Source) -> M
         await session.commit()
 
         return message
+
+
+async def add_earlier(conversation_id: UUID, turns: list) -> None:
+    """Messages from before the user signed in, in their order, at the start of a new
+    conversation."""
+    async with Session() as session:
+        start = now()
+
+        for index, turn in enumerate(turns):
+            session.add(
+                Message(
+                    conversation_id=conversation_id,
+                    role=turn.role,
+                    source=Source.TEXT,
+                    content=turn.content,
+                    created_at=start + timedelta(microseconds=index),
+                )
+            )
+
+        await session.commit()
 
 
 async def add_answer(conversation_id: UUID, answer: Answer, status: Status) -> UUID:

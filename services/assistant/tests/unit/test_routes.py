@@ -162,3 +162,16 @@ def test_only_company_deleted_is_handled_and_a_malformed_one_is_dropped(monkeypa
     asyncio.run(events.handle("company.deleted", {"company_id": str(COMPANY)}))
 
     assert deleted == [COMPANY]
+
+
+def test_a_visitors_earlier_chat_is_cut_to_a_messages_length_and_limited_in_count(
+    client, signed_in
+):
+    from app.schemas.chat import ChatRequest
+
+    body = ChatRequest(message="Hi", earlier=[{"role": "assistant", "content": "x" * 3_000}])
+    assert len(body.earlier[0].content) == 2_000
+
+    too_many = [{"role": "user", "content": "Hi"}] * 21
+    response = client.post("/chat", json={"message": "Hi", "earlier": too_many})
+    assert response.status_code == 422

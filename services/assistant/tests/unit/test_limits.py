@@ -11,6 +11,7 @@ from app.constants.limits import (
     TOKENS_PER_COMPANY_DAY,
     TOKENS_PER_DAY,
     TOKENS_PER_USER_DAY,
+    TRANSCRIPTIONS_PER_USER_HOUR,
 )
 from app.services import limits
 
@@ -73,4 +74,14 @@ def test_a_turns_tokens_are_added_and_going_over_never_fails_the_turn(monkeypatc
         ("spend:assistant:user:ann", 1_234),
         (f"spend:assistant:company:{COMPANY}", 1_234),
         ("spend:assistant:all", 1_234),
+    ]
+
+
+def test_a_voice_message_checks_the_users_and_everyones_budgets_and_its_own_limit(counted):
+    asyncio.run(limits.check_transcription(None, "ann"))
+
+    assert counted == [
+        ("spend", "spend:assistant:user:ann", 0, TOKENS_PER_USER_DAY),
+        ("spend", "spend:assistant:all", 0, TOKENS_PER_DAY),
+        ("hit", "rate:assistant:transcribe:hour:ann", TRANSCRIPTIONS_PER_USER_HOUR),
     ]

@@ -15,3 +15,6 @@ TOKENS_PER_DAY = 200_000_000
 
 # The longest voice message (the panel stops recording then).
 MAX_AUDIO_SECONDS = 60
+# Voice messages a user may have transcribed in an hour (each also counts as a message once sent;
+# this one counts the ones too short or silent to send as well).
+TRANSCRIPTIONS_PER_USER_HOUR = 60
