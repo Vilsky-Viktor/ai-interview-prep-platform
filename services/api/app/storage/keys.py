@@ -16,13 +16,6 @@ async def of_company(company_id: uuid.UUID) -> list[ApiKey]:
         return list(await session.scalars(query))
 
 
-async def count(company_id: uuid.UUID) -> int:
-    query = select(func.count()).select_from(ApiKey).where(ApiKey.company_id == company_id)
-
-    async with Session() as session:
-        return await session.scalar(query) or 0
-
-
 async def add(
     company_id: uuid.UUID,
     name: str,
@@ -30,7 +23,11 @@ async def add(
     hashed: str,
     user_id: str,
     expires_at: datetime | None,
-) -> ApiKey:
+    limit: int,
+) -> ApiKey | None:
+    """None when the company already has `limit` keys. One company's keys are added one at a
+    time, so two at once can't both pass the count."""
+    count = select(func.count()).select_from(ApiKey).where(ApiKey.company_id == company_id)
     key = ApiKey(
         company_id=company_id,
         name=name,
@@ -41,6 +38,13 @@ async def add(
     )
 
     async with Session() as session:
+        await session.execute(
+            select(func.pg_advisory_xact_lock(func.hashtext(f"api_keys:{company_id}")))
+        )
+
+        if await session.scalar(count) >= limit:
+            return None
+
         session.add(key)
         await session.commit()
         await session.refresh(key)

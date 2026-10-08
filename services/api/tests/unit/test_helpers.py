@@ -50,23 +50,25 @@ def test_a_web_hook_is_signed_over_its_time_and_raw_body():
 
 
 @pytest.mark.parametrize(
-    ("url", "addresses", "public"),
+    ("url", "addresses", "address"),
     [
-        ("https://example.com/hook", ["93.184.216.34"], True),
-        ("http://example.com/hook", ["93.184.216.34"], False),
-        ("https://localhost/hook", ["127.0.0.1"], False),
-        ("https://metadata/hook", ["169.254.169.254"], False),
-        ("https://intranet/hook", ["10.0.0.5"], False),
-        ("https://split/hook", ["93.184.216.34", "192.168.1.2"], False),
+        ("https://example.com/hook", ["93.184.216.34", "2606:2800::1"], "93.184.216.34"),
+        ("http://example.com/hook", ["93.184.216.34"], None),
+        ("https://localhost/hook", ["127.0.0.1"], None),
+        ("https://metadata/hook", ["169.254.169.254"], None),
+        ("https://intranet/hook", ["10.0.0.5"], None),
+        ("https://split/hook", ["93.184.216.34", "192.168.1.2"], None),
     ],
 )
-def test_only_https_to_the_public_internet(monkeypatch, url, addresses, public):
+def test_only_https_to_the_public_internet_and_the_address_checked(
+    monkeypatch, url, addresses, address
+):
     def resolve(host, port, proto=0):
         return [(socket.AF_INET, 1, 6, "", (address, port)) for address in addresses]
 
     monkeypatch.setattr(webhooks.socket, "getaddrinfo", resolve)
 
-    assert public_address(url) is public
+    assert public_address(url) == address
 
 
 def test_a_failed_lookup_raises_so_the_send_is_retried(monkeypatch):

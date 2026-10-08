@@ -28,9 +28,12 @@ MAX_KEYS = 10
 MAX_WEBHOOKS = 5
 MAX_NAME_LENGTH = 80
 MAX_URL_LENGTH = 500
-# Requests per key per minute.
+# Requests per company per minute, all its keys together.
 REQUESTS_PER_MINUTE = 60
 MINUTE_SECONDS = 60
+# How long a key maker's access (still an owner or admin?) is trusted before companies is asked
+# again, in this instance's memory.
+ACCESS_CACHE_SECONDS = 60
 # A key's "last used" is written at most this often.
 LAST_USED_EVERY = timedelta(minutes=1)
 # How long a web hook's endpoint may take to answer.

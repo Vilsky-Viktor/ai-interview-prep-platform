@@ -2,8 +2,12 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 import pytest
+from redis.exceptions import ConnectionError as RedisConnectionError
 
+from app import auth
+from app.constants.api import LAST_USED_EVERY
 from app.helpers.keys import hashed
+from app.integrations import companies
 from tests.unit.conftest import CANDIDATE, COMPANY, INTERVIEW
 
 KEY = "pz_test-key"
@@ -14,7 +18,7 @@ def key(stored):
     """A working key of COMPANY, made by u1 (an owner)."""
     row = type("Key", (), {})()
     row.id, row.company_id, row.created_by = uuid.uuid4(), COMPANY, "u1"
-    row.hash, row.expires_at = hashed(KEY), None
+    row.hash, row.expires_at, row.last_used_at = hashed(KEY), None, None
     stored["keys"].append(row)
 
     return row
@@ -113,6 +117,53 @@ def test_over_the_rate_limit_is_refused(client, companies_api, key, stored):
     stored["limited"] = True
 
     assert call(client, "GET", "/interviews").status_code == 429
+
+
+def test_a_companys_keys_share_one_rate_limit(client, companies_api, key, stored):
+    other = type("Key", (), {})()
+    other.id, other.company_id, other.created_by = uuid.uuid4(), COMPANY, "u1"
+    other.hash, other.expires_at, other.last_used_at = hashed("pz_other"), None, None
+    stored["keys"].append(other)
+    call(client, "GET", "/interviews")
+    call(client, "GET", "/interviews", key="pz_other")
+
+    assert stored["counted"] == [f"rate:api:{COMPANY}"] * 2
+
+
+def test_with_redis_down_requests_go_through_unlimited(client, companies_api, key, monkeypatch):
+    async def down(*args, **kwargs):
+        raise RedisConnectionError("down")
+
+    monkeypatch.setattr(auth, "hit", down)
+
+    assert call(client, "GET", "/interviews").status_code == 200
+
+
+def test_companies_is_asked_about_the_keys_maker_once_a_minute(
+    client, companies_api, key, monkeypatch
+):
+    asked = []
+    access = companies.access
+
+    async def counted(company_id, user_id):
+        asked.append(user_id)
+
+        return await access(company_id, user_id)
+
+    monkeypatch.setattr(companies, "access", counted)
+    call(client, "GET", "/interviews")
+    call(client, "GET", "/interviews")
+
+    assert asked == ["u1"]
+
+
+def test_a_key_used_within_the_minute_isnt_noted_again(client, companies_api, key, stored):
+    key.last_used_at = datetime.now(UTC) - timedelta(seconds=10)
+    call(client, "GET", "/interviews")
+    key.last_used_at = datetime.now(UTC) - LAST_USED_EVERY
+    call(client, "GET", "/interviews")
+
+    assert stored["used"] == [key.id]
 
 
 def test_the_public_reference_lists_only_the_public_api(client):

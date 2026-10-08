@@ -39,13 +39,13 @@ def key_out(key: ApiKey) -> KeyOut:
 
 
 async def create_key(company_id: UUID, name: str, expiry: KeyExpiry, user_id: str) -> NewKeyOut:
-    if await keys.count(company_id) >= MAX_KEYS:
-        raise HTTPException(status.HTTP_409_CONFLICT, "A company can have up to 10 API keys")
-
     key, shown, hashed = new_key()
     months = KEY_EXPIRY_MONTHS[expiry]
     expires_at = add_months(datetime.now(UTC), months) if months else None
-    row = await keys.add(company_id, name.strip(), shown, hashed, user_id, expires_at)
+    row = await keys.add(company_id, name.strip(), shown, hashed, user_id, expires_at, MAX_KEYS)
+
+    if row is None:
+        raise HTTPException(status.HTTP_409_CONFLICT, "A company can have up to 10 API keys")
 
     return NewKeyOut(**key_out(row).model_dump(), key=key)
 
@@ -60,24 +60,25 @@ async def create_webhook(company_id: UUID, url: str, user_id: str) -> NewWebhook
     if not settings.api_encryption_key:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Web hooks aren't set up yet")
 
-    if await webhooks.count(company_id) >= MAX_WEBHOOKS:
-        raise HTTPException(status.HTTP_409_CONFLICT, "A company can have up to 5 web hooks")
-
     url = url.strip()
 
     try:
-        public = await asyncio.to_thread(public_address, url)
+        address = await asyncio.to_thread(public_address, url)
     except socket.gaierror:
-        public = False
+        address = None
 
-    if not public:
+    if address is None:
         raise HTTPException(
             status.HTTP_422_UNPROCESSABLE_CONTENT,
             "Use an HTTPS address that's reachable from the internet",
         )
 
     secret = new_secret()
-    row = await webhooks.add(company_id, url, encrypt(settings.api_encryption_key, secret), user_id)
+    sealed = encrypt(settings.api_encryption_key, secret)
+    row = await webhooks.add(company_id, url, sealed, user_id, MAX_WEBHOOKS)
+
+    if row is None:
+        raise HTTPException(status.HTTP_409_CONFLICT, "A company can have up to 5 web hooks")
 
     return NewWebhookOut(
         **WebhookOut.model_validate(row, from_attributes=True).model_dump(), secret=secret

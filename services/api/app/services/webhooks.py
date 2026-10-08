@@ -129,7 +129,7 @@ async def deliver(hook: Webhook, event_id: str, body: bytes) -> bool:
     secret = decrypt(settings.api_encryption_key, hook.secret)
 
     try:
-        public = await asyncio.to_thread(public_address, hook.url)
+        address = await asyncio.to_thread(public_address, hook.url)
     except socket.gaierror as error:
         logger.info(
             "Web hook %s didn't take %s: address lookup failed: %s", hook.id, event_id, error
@@ -137,15 +137,21 @@ async def deliver(hook: Webhook, event_id: str, body: bytes) -> bool:
 
         return False
 
-    if secret is None or not public:
+    if secret is None or address is None:
         logger.warning("Skipped web hook %s: unreadable secret or non-public address", hook.id)
 
         return True
 
     try:
-        await endpoints.post(hook.url, body, signature(secret, int(time.time()), body))
+        await endpoints.post(hook.url, address, body, signature(secret, int(time.time()), body))
     except httpx.HTTPError as error:
-        logger.info("Web hook %s didn't take %s: %s", hook.id, event_id, error)
+        # Not the error's text: it can carry the web hook's URL, and a URL can carry a secret.
+        reason = (
+            error.response.status_code
+            if isinstance(error, httpx.HTTPStatusError)
+            else type(error).__name__
+        )
+        logger.info("Web hook %s didn't take %s: %s", hook.id, event_id, reason)
 
         return False
 

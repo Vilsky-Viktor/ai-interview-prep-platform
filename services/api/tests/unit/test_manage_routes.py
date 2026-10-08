@@ -79,7 +79,7 @@ def public(monkeypatch):
         if "unknown" in url:
             raise socket.gaierror
 
-        return "internal" not in url
+        return None if "internal" in url else "203.0.113.10"
 
     monkeypatch.setattr(manage, "public_address", check)
 

@@ -32,8 +32,8 @@ or admin, the key stops working and requests return `401`.
 
 ## Rate limits and pagination
 
-Each key can make up to 60 requests per minute; further requests return `429` until the minute
-ends. List endpoints return the newest items first and accept `offset` and `limit` (up to 100
+Your company's keys together can make up to 60 requests per minute; further requests return
+`429` until the minute ends. List endpoints return the newest items first and accept `offset` and `limit` (up to 100
 items per request).
 
 ## Errors
@@ -53,5 +53,6 @@ web hook's signing secret, which is shown once when the web hook is added. Verif
 and reject requests whose timestamp is more than a few minutes old, before processing an event.
 
 Respond with any `2xx` status within 10 seconds to confirm delivery. Other responses and timeouts
-are retried with exponential backoff for several hours. An event can occasionally arrive more
-than once; use its `id` to ignore duplicates."""
+are retried with growing pauses, from 5 minutes up to 6 hours apart, for 3 days; after that the
+web hook is marked as failing on the API page until it takes an event again. An event can
+occasionally arrive more than once; use its `id` to ignore duplicates."""

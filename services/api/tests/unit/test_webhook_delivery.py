@@ -1,10 +1,12 @@
 import asyncio
 from datetime import UTC, datetime, timedelta
 
+import httpx
 import pytest
 from fastapi import HTTPException
 
 from app.constants.api import RETRY_FIRST_DELAY
+from app.integrations import webhooks as integration
 from app.services import events
 from app.services import webhooks as delivery
 from tests.unit.conftest import CANDIDATE, COMPANY, INTERVIEW
@@ -166,3 +168,53 @@ def test_a_deleted_company_loses_its_keys_and_web_hooks(monkeypatch):
     asyncio.run(events.handle("interview.ready", {"interview_id": str(INTERVIEW)}, "e2"))
 
     assert removed == [("keys", COMPANY), ("webhooks", COMPANY)]
+
+
+def test_a_send_goes_to_the_checked_address_under_the_hosts_name(monkeypatch):
+    """So a lookup that answers differently the second time (DNS rebinding) can't lead it to
+    a private address: TLS and the Host header still name the web hook's host."""
+    sent = []
+
+    def endpoint(request):
+        sent.append(request)
+
+        return httpx.Response(200)
+
+    client = httpx.AsyncClient(transport=httpx.MockTransport(endpoint))
+    monkeypatch.setattr(integration, "get_client", lambda: client)
+    asyncio.run(integration.post("https://hooks.example:8443/x?a=1", "203.0.113.10", b"{}", "s"))
+
+    assert str(sent[0].url) == "https://203.0.113.10:8443/x?a=1"
+    assert sent[0].headers["host"] == "hooks.example:8443"
+    assert sent[0].extensions["sni_hostname"] == "hooks.example"
+    assert sent[0].headers["prepza-signature"] == "s"
+
+
+SECRET_URL = "https://hooks.example/in/s3cr3t-token"
+
+
+def test_a_failed_send_is_logged_without_the_web_hooks_url(endpoints, monkeypatch, caplog):
+    endpoints["hook"](SECRET_URL)
+
+    async def refused(url, address, body, signature):
+        request = httpx.Request("POST", url)
+
+        raise httpx.HTTPStatusError(
+            f"Server error for url {url}", request=request, response=httpx.Response(500)
+        )
+
+    monkeypatch.setattr(delivery.endpoints, "post", refused)
+    caplog.set_level("INFO")
+    finish()
+
+    assert "didn't take e1: 500" in caplog.text
+    assert "s3cr3t" not in caplog.text
+
+
+def test_a_send_isnt_logged_with_its_url(monkeypatch, caplog):
+    client = httpx.AsyncClient(transport=httpx.MockTransport(lambda _: httpx.Response(200)))
+    monkeypatch.setattr(integration, "get_client", lambda: client)
+    caplog.set_level("INFO", logger="app")
+    asyncio.run(integration.post(SECRET_URL, "203.0.113.10", b"{}", "s"))
+
+    assert "s3cr3t" not in caplog.text

@@ -17,17 +17,22 @@ async def of_company(company_id: uuid.UUID) -> list[Webhook]:
         return list(await session.scalars(query))
 
 
-async def count(company_id: uuid.UUID) -> int:
-    query = select(func.count()).select_from(Webhook).where(Webhook.company_id == company_id)
-
-    async with Session() as session:
-        return await session.scalar(query) or 0
-
-
-async def add(company_id: uuid.UUID, url: str, sealed_secret: str, user_id: str) -> Webhook:
+async def add(
+    company_id: uuid.UUID, url: str, sealed_secret: str, user_id: str, limit: int
+) -> Webhook | None:
+    """None when the company already has `limit` web hooks. One company's web hooks are added
+    one at a time, so two at once can't both pass the count."""
+    count = select(func.count()).select_from(Webhook).where(Webhook.company_id == company_id)
     hook = Webhook(company_id=company_id, url=url, secret=sealed_secret, created_by=user_id)
 
     async with Session() as session:
+        await session.execute(
+            select(func.pg_advisory_xact_lock(func.hashtext(f"webhooks:{company_id}")))
+        )
+
+        if await session.scalar(count) >= limit:
+            return None
+
         session.add(hook)
         await session.commit()
         await session.refresh(hook)

@@ -7,6 +7,7 @@ from types import SimpleNamespace
 import httpx
 import pytest
 from fastapi import HTTPException
+from prepza_common import memory_cache
 from prepza_common.auth import current_user
 from prepza_common.encryption import encrypt
 from prepza_common.user import User
@@ -57,8 +58,10 @@ def candidate(**changes) -> dict:
 
 @pytest.fixture(autouse=True)
 def configured(monkeypatch):
-    """Web hooks set up, and no signed-in user unless a test signs one in."""
+    """Web hooks set up, nothing remembered from another test, and no signed-in user unless a
+    test signs one in."""
     monkeypatch.setattr(settings, "api_encryption_key", KEY)
+    monkeypatch.setattr(memory_cache, "_entries", {})
     yield
     app.dependency_overrides.clear()
 
@@ -123,8 +126,8 @@ def companies_api(monkeypatch):
 @pytest.fixture
 def stored(monkeypatch):
     """Keys and web hooks in memory instead of the database, and requests never rate limited
-    unless a test says so."""
-    state = {"keys": [], "webhooks": [], "used": [], "limited": False}
+    unless a test says so (the rate counters asked for are in "counted")."""
+    state = {"keys": [], "webhooks": [], "used": [], "limited": False, "counted": []}
 
     async def by_hash(hashed):
         return next((key for key in state["keys"] if key.hash == hashed), None)
@@ -132,7 +135,10 @@ def stored(monkeypatch):
     async def used(key_id):
         state["used"].append(key_id)
 
-    async def add_key(company_id, name, shown, hashed, user_id, expires_at):
+    async def add_key(company_id, name, shown, hashed, user_id, expires_at, limit):
+        if sum(key.company_id == company_id for key in state["keys"]) >= limit:
+            return None
+
         key = SimpleNamespace(
             id=uuid.uuid4(),
             company_id=company_id,
@@ -148,13 +154,13 @@ def stored(monkeypatch):
 
         return key
 
-    async def count_keys(company_id):
-        return sum(key.company_id == company_id for key in state["keys"])
-
     async def keys_of(company_id):
         return [key for key in state["keys"] if key.company_id == company_id]
 
-    async def add_webhook(company_id, url, sealed, user_id):
+    async def add_webhook(company_id, url, sealed, user_id, limit):
+        if sum(hook.company_id == company_id for hook in state["webhooks"]) >= limit:
+            return None
+
         hook = SimpleNamespace(
             id=uuid.uuid4(),
             company_id=company_id,
@@ -168,23 +174,20 @@ def stored(monkeypatch):
 
         return hook
 
-    async def count_webhooks(company_id):
-        return sum(hook.company_id == company_id for hook in state["webhooks"])
-
     async def webhooks_of(company_id):
         return [hook for hook in state["webhooks"] if hook.company_id == company_id]
 
     async def hit(redis, key, limit, window, message="Too many requests. Try again later."):
+        state["counted"].append(key)
+
         if state["limited"]:
             raise HTTPException(429, message)
 
     monkeypatch.setattr(keys, "by_hash", by_hash)
     monkeypatch.setattr(keys, "used", used)
     monkeypatch.setattr(keys, "add", add_key)
-    monkeypatch.setattr(keys, "count", count_keys)
     monkeypatch.setattr(keys, "of_company", keys_of)
     monkeypatch.setattr(webhooks, "add", add_webhook)
-    monkeypatch.setattr(webhooks, "count", count_webhooks)
     monkeypatch.setattr(webhooks, "of_company", webhooks_of)
     monkeypatch.setattr(auth, "hit", hit)
 
@@ -230,7 +233,7 @@ def endpoints(monkeypatch, companies_api):
     async def set_failing(webhook_id, failing):
         next(item for item in state["hooks"] if item.id == webhook_id).failing = failing
 
-    async def post(url, body, signature):
+    async def post(url, address, body, signature):
         if url in state["failing"]:
             raise httpx.ConnectError("down")
 
@@ -286,4 +289,4 @@ def check(url, state):
     if url in state["unresolved"]:
         raise socket.gaierror
 
-    return state["public"]
+    return "203.0.113.10" if state["public"] else None

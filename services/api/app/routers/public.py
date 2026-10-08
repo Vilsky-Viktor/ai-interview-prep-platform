@@ -17,7 +17,7 @@ router = APIRouter(
         401: {
             "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
         },
-        429: {"description": "The key exceeded 60 requests per minute"},
+        429: {"description": "Your company's keys exceeded 60 requests per minute"},
     },
 )
 NOT_FOUND = {404: {"description": "The interview or candidate doesn't exist in your company"}}

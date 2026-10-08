@@ -12,12 +12,15 @@ from prepza_common.sentry import init_sentry
 from app.config.settings import settings
 from app.constants.docs import API_DESCRIPTION, API_TITLE, API_VERSION
 from app.constants.events import CANDIDATE_FINISHED
+from app.integrations import webhooks as endpoints
 from app.integrations.redis import get_redis
 from app.routers import events, internal_accounts, manage, public, schedules
 from app.schemas.public import FinishedEvent
 from app.storage.db import ping as ping_database
 
 configure_logging()
+# httpx logs every request's full URL at INFO; a web hook's URL can carry a secret in its path.
+logging.getLogger("httpx").setLevel(logging.WARNING)
 init_sentry("api")
 
 
@@ -28,6 +31,7 @@ async def lifespan(app: FastAPI):
     yield
 
     await http.get_client().aclose()
+    await endpoints.get_client().aclose()
     await get_redis().aclose()
 
 
