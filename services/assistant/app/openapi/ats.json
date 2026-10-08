@@ -1,0 +1,1756 @@
+{
+ "paths": {
+  "/workable": {
+   "put": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Connect Workable",
+    "description": "Connects Workable with an account's API access token, checked with one read first. A\nsecond connect replaces the key.",
+    "operationId": "connect_workable_workable_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/WorkableIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/greenhouse": {
+   "put": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Connect Greenhouse",
+    "description": "Connects Greenhouse with a Harvest V3 (OAuth) API credential, checked with one read\nfirst. Each connection gets its own secret key for the web hook the company sets up; a\nreconnect keeps it, so the web hook goes on working.",
+    "operationId": "connect_greenhouse_greenhouse_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GreenhouseIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/teamtailor": {
+   "put": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Connect Teamtailor",
+    "description": "Connects Teamtailor with an Admin, Read/Write API key, checked first in each region until\none accepts it. The web hook's signature key comes later (Teamtailor makes it); a reconnect\nkeeps it.",
+    "operationId": "connect_teamtailor_teamtailor_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TeamtailorIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recruitee": {
+   "put": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Connect Recruitee",
+    "description": "Connects Recruitee with the company's address and a personal API token (it acts as the\nperson who made it), checked with one read first. The web hook's secret comes later\n(Recruitee shows it); a reconnect keeps it.",
+    "operationId": "connect_recruitee_recruitee_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RecruiteeIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/breezy": {
+   "put": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Connect Breezy",
+    "description": "Connects Breezy HR with a personal API key (it acts as the person who made it), checked\nwith one read first, then creates the web hook that sends its stage changes, whose secret\nBreezy gives only now. A reconnect replaces the earlier web hook; one that fails keeps the\nearlier connection, marked for reconnecting.",
+    "operationId": "connect_breezy_breezy_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/BreezyIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/{provider}/webhook": {
+   "get": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Webhook",
+    "description": "Where the company's web hook sends its events, and its secret key (empty while one the\nATS makes isn't saved yet); owners and admins only.",
+    "operationId": "webhook__provider__webhook_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "provider",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/AtsProvider"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/WebhookOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Save Webhook Key",
+    "description": "Saves the secret key the ATS made for the company's web hook (Teamtailor, Recruitee): its\nevents count from then on.",
+    "operationId": "save_webhook_key__provider__webhook_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "provider",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/AtsProvider"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/WebhookKeyIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/connections": {
+   "get": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "List Connections",
+    "description": "The company's ATS connections; every member sees them, only owners and admins change\nthem.",
+    "operationId": "list_connections_connections_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/IntegrationsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/{provider}": {
+   "delete": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Disconnect",
+    "description": "Disconnects: Workable's notifications and Breezy HR's web hook are cancelled, then the key\nis deleted, and its linked jobs with it.",
+    "operationId": "disconnect__provider__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "provider",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/AtsProvider"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/{provider}/jobs": {
+   "get": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "List Jobs",
+    "operationId": "list_jobs__provider__jobs_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "provider",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/AtsProvider"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/AtsItemOut"
+         },
+         "title": "Response List Jobs  Provider  Jobs Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/{provider}/jobs/{job_id}/stages": {
+   "get": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "List Stages",
+    "operationId": "list_stages__provider__jobs__job_id__stages_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "provider",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/AtsProvider"
+      }
+     },
+     {
+      "name": "job_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Job Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/AtsItemOut"
+         },
+         "title": "Response List Stages  Provider  Jobs  Job Id  Stages Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/{provider}/jobs/{job_id}/text": {
+   "get": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Job Text Of",
+    "description": "A job's title, description, requirements and benefits as plain text, to make an\ninterview from (the same limit as a pasted job description).",
+    "operationId": "job_text_of__provider__jobs__job_id__text_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "provider",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/AtsProvider"
+      }
+     },
+     {
+      "name": "job_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Job Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/JobTextOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links": {
+   "get": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "List Links",
+    "operationId": "list_links_links_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/JobLinkOut"
+         },
+         "title": "Response List Links Links Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Add Link",
+    "description": "Links an ATS job to one of the company's interviews: its candidates who reach the stage\nwill get the interview. A job has one interview.",
+    "operationId": "add_link_links_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/JobLinkIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links/{link_id}": {
+   "delete": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Remove Link",
+    "operationId": "remove_link_links__link_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "link_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Link Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links/{link_id}/retry": {
+   "post": {
+    "tags": [
+     "ats"
+    ],
+    "summary": "Retry Candidates",
+    "description": "Invites again the candidates the ATS sent for this job who weren't invited (after a\ntop-up, or once the pause is off).",
+    "operationId": "retry_candidates_links__link_id__retry_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "link_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Link Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/webhooks/workable/{link_id}": {
+   "post": {
+    "tags": [
+     "webhooks"
+    ],
+    "summary": "Workable Event",
+    "description": "Workable's events for one linked job, signed with the account's token (checked on the raw\nbody). Open in maintenance mode like every /webhooks/ route, so no candidate is lost.",
+    "operationId": "workable_event_webhooks_workable__link_id__post",
+    "parameters": [
+     {
+      "name": "link_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Link Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/webhooks/greenhouse/{connection_id}": {
+   "post": {
+    "tags": [
+     "webhooks"
+    ],
+    "summary": "Greenhouse Event",
+    "description": "The company's Greenhouse web hook (stage changes), signed with the connection's secret key\n(the Signature header, checked on the raw body). Greenhouse's ping on saving it is\nanswered too.",
+    "operationId": "greenhouse_event_webhooks_greenhouse__connection_id__post",
+    "parameters": [
+     {
+      "name": "connection_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Connection Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/webhooks/teamtailor/{connection_id}": {
+   "post": {
+    "tags": [
+     "webhooks"
+    ],
+    "summary": "Teamtailor Event",
+    "description": "The company's Teamtailor web hook (job applications changed), signed with the signature\nkey Teamtailor gave it (the TT-Signature header, checked on the raw body).",
+    "operationId": "teamtailor_event_webhooks_teamtailor__connection_id__post",
+    "parameters": [
+     {
+      "name": "connection_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Connection Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/webhooks/recruitee/{connection_id}": {
+   "post": {
+    "tags": [
+     "webhooks"
+    ],
+    "summary": "Recruitee Event",
+    "description": "The company's Recruitee web hook (candidates moved), signed with the secret Recruitee\nshows for it (the X-Recruitee-Signature header, checked on the raw body).",
+    "operationId": "recruitee_event_webhooks_recruitee__connection_id__post",
+    "parameters": [
+     {
+      "name": "connection_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Connection Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/webhooks/breezy/{connection_id}": {
+   "post": {
+    "tags": [
+     "webhooks"
+    ],
+    "summary": "Breezy Event",
+    "description": "The web hook prepza created in Breezy HR (candidates' stage changes), signed with its\nsecret (the X-Hook-Signature header, checked on the body).",
+    "operationId": "breezy_event_webhooks_breezy__connection_id__post",
+    "parameters": [
+     {
+      "name": "connection_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Connection Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/events": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Receive Event",
+    "description": "Pub/Sub pushes every event here. A failure answers with an error, so Pub/Sub retries it,\nand moves it to the dead-letter topic after the subscription's maximum attempts.",
+    "operationId": "receive_event_internal_events_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PushBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/schedules/outbox": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Flush Outbox",
+    "description": "Every minute, from Cloud Scheduler: publishes events that weren't published right after\ntheir change.",
+    "operationId": "flush_outbox_internal_schedules_outbox_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/schedules/recover": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Recover",
+    "description": "Every 10 minutes, from Cloud Scheduler: waiting candidates and invites cut off midway are\ninvited (companies refuses them during the emergency pause, and they're kept to retry),\nresults kept while a connection was broken or the ATS failed go back, and candidates past\ntheir retention period go.",
+    "operationId": "recover_internal_schedules_recover_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}": {
+   "delete": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Delete User",
+    "description": "Library, deleting an account: an ATS's records of them as a candidate go; the ATS\nconnections they made stay with their companies, without their id.",
+    "operationId": "delete_user_internal_users__user_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}/export": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Export User",
+    "description": "Library, for \"Download my data\": what ATSs sent about them as a candidate, and the ATS\nconnections they made.",
+    "operationId": "export_user_internal_users__user_id__export_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Export User Internal Users  User Id  Export Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/health": {
+   "get": {
+    "summary": "Health",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Health Health Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/ready": {
+   "get": {
+    "summary": "Ready",
+    "description": "Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis\nisn't checked: an outage there shouldn't stop the service from starting.",
+    "operationId": "ready_ready_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Ready Ready Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "AtsItemOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name"
+    ],
+    "title": "AtsItemOut",
+    "description": "A job or a stage in the ATS: its own id and name."
+   },
+   "AtsProvider": {
+    "type": "string",
+    "enum": [
+     "workable",
+     "greenhouse",
+     "teamtailor",
+     "recruitee",
+     "breezy"
+    ],
+    "title": "AtsProvider",
+    "description": "The applicant tracking systems a company can connect."
+   },
+   "BreezyIn": {
+    "properties": {
+     "token": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Token"
+     }
+    },
+    "type": "object",
+    "required": [
+     "token"
+    ],
+    "title": "BreezyIn"
+   },
+   "ConnectionOut": {
+    "properties": {
+     "provider": {
+      "$ref": "#/components/schemas/AtsProvider"
+     },
+     "account": {
+      "type": "string",
+      "title": "Account"
+     },
+     "status": {
+      "$ref": "#/components/schemas/ConnectionStatus"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "provider",
+     "account",
+     "status",
+     "created_at"
+    ],
+    "title": "ConnectionOut",
+    "description": "A connection as the company sees it: never its key."
+   },
+   "ConnectionStatus": {
+    "type": "string",
+    "enum": [
+     "connected",
+     "broken"
+    ],
+    "title": "ConnectionStatus"
+   },
+   "GreenhouseIn": {
+    "properties": {
+     "client_id": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Client Id"
+     },
+     "client_secret": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Client Secret"
+     }
+    },
+    "type": "object",
+    "required": [
+     "client_id",
+     "client_secret"
+    ],
+    "title": "GreenhouseIn"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "IntegrationsOut": {
+    "properties": {
+     "available": {
+      "type": "boolean",
+      "title": "Available"
+     },
+     "connections": {
+      "items": {
+       "$ref": "#/components/schemas/ConnectionOut"
+      },
+      "type": "array",
+      "title": "Connections"
+     }
+    },
+    "type": "object",
+    "required": [
+     "available",
+     "connections"
+    ],
+    "title": "IntegrationsOut"
+   },
+   "JobLinkIn": {
+    "properties": {
+     "provider": {
+      "$ref": "#/components/schemas/AtsProvider"
+     },
+     "job_id": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Job Id"
+     },
+     "stage_id": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Stage Id"
+     },
+     "interview_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Interview Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "provider",
+     "job_id",
+     "stage_id",
+     "interview_id"
+    ],
+    "title": "JobLinkIn"
+   },
+   "JobLinkOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "provider": {
+      "$ref": "#/components/schemas/AtsProvider"
+     },
+     "job_name": {
+      "type": "string",
+      "title": "Job Name"
+     },
+     "stage_name": {
+      "type": "string",
+      "title": "Stage Name"
+     },
+     "interview_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Interview Id"
+     },
+     "interview_title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Interview Title"
+     },
+     "invited": {
+      "type": "integer",
+      "title": "Invited",
+      "default": 0
+     },
+     "not_invited": {
+      "type": "integer",
+      "title": "Not Invited",
+      "default": 0
+     },
+     "waiting": {
+      "type": "integer",
+      "title": "Waiting",
+      "default": 0
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "provider",
+     "job_name",
+     "stage_name",
+     "interview_id",
+     "interview_title"
+    ],
+    "title": "JobLinkOut"
+   },
+   "JobTextOut": {
+    "properties": {
+     "text": {
+      "type": "string",
+      "title": "Text"
+     }
+    },
+    "type": "object",
+    "required": [
+     "text"
+    ],
+    "title": "JobTextOut",
+    "description": "A job's text to make an interview from, which the company can edit first."
+   },
+   "PushBody": {
+    "properties": {
+     "message": {
+      "$ref": "#/components/schemas/PushMessage"
+     },
+     "subscription": {
+      "type": "string",
+      "title": "Subscription"
+     }
+    },
+    "type": "object",
+    "required": [
+     "message",
+     "subscription"
+    ],
+    "title": "PushBody",
+    "description": "What Pub/Sub sends to a push endpoint."
+   },
+   "PushMessage": {
+    "properties": {
+     "data": {
+      "type": "string",
+      "title": "Data",
+      "default": ""
+     },
+     "attributes": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Attributes",
+      "default": {}
+     },
+     "messageId": {
+      "type": "string",
+      "title": "Messageid"
+     }
+    },
+    "type": "object",
+    "required": [
+     "messageId"
+    ],
+    "title": "PushMessage"
+   },
+   "RecruiteeIn": {
+    "properties": {
+     "account": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Account"
+     },
+     "token": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Token"
+     }
+    },
+    "type": "object",
+    "required": [
+     "account",
+     "token"
+    ],
+    "title": "RecruiteeIn"
+   },
+   "TeamtailorIn": {
+    "properties": {
+     "key": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Key"
+     }
+    },
+    "type": "object",
+    "required": [
+     "key"
+    ],
+    "title": "TeamtailorIn"
+   },
+   "UserEmailIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "title": "Email"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email"
+    ],
+    "title": "UserEmailIn",
+    "description": "An email address sent in the body, so request logs don't record it: the account's, in\nlibrary's calls to delete or export a user's data, or the one a superadmin looks up."
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   },
+   "WebhookKeyIn": {
+    "properties": {
+     "secret": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Secret"
+     }
+    },
+    "type": "object",
+    "required": [
+     "secret"
+    ],
+    "title": "WebhookKeyIn"
+   },
+   "WebhookOut": {
+    "properties": {
+     "url": {
+      "type": "string",
+      "title": "Url"
+     },
+     "secret": {
+      "type": "string",
+      "title": "Secret"
+     }
+    },
+    "type": "object",
+    "required": [
+     "url",
+     "secret"
+    ],
+    "title": "WebhookOut",
+    "description": "What the company pastes into its ATS's web hook: where it sends, and its secret key."
+   },
+   "WorkableIn": {
+    "properties": {
+     "account": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Account"
+     },
+     "token": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Token"
+     }
+    },
+    "type": "object",
+    "required": [
+     "account",
+     "token"
+    ],
+    "title": "WorkableIn"
+   }
+  },
+  "securitySchemes": {
+   "HTTPBearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

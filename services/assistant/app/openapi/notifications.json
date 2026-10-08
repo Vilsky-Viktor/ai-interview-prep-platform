@@ -1,0 +1,1107 @@
+{
+ "paths": {
+  "/me": {
+   "get": {
+    "tags": [
+     "notifications"
+    ],
+    "summary": "Get Feed",
+    "description": "The bell: the latest notifications, the user's own and their companies', and how many\ncame since they last opened it.",
+    "operationId": "get_feed_me_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/FeedOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/me/seen": {
+   "post": {
+    "tags": [
+     "notifications"
+    ],
+    "summary": "Mark Seen",
+    "description": "Opening the bell: everything so far counts as read.",
+    "operationId": "mark_seen_me_seen_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/me/stream": {
+   "get": {
+    "tags": [
+     "notifications"
+    ],
+    "summary": "Stream",
+    "description": "Server-sent events while a tab is open: {\"new\": true} as soon as a notification comes,\nso the bell reloads; heartbeat comments in between.",
+    "operationId": "stream_me_stream_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/events": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Receive Event",
+    "description": "Pub/Sub pushes every event here. A failed email or Slack post answers with an error, so\nPub/Sub retries it, and moves it to the dead-letter topic after the subscription's maximum\nattempts; neither Resend nor Slack gets the same message twice. Over Resend's per-second limit\n(a burst of invites) it answers 429: Pub/Sub retries with backoff, and it isn't counted as a\nserver error.",
+    "operationId": "receive_event_internal_events_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PushBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/webhooks/resend": {
+   "post": {
+    "tags": [
+     "webhooks"
+    ],
+    "summary": "Resend Webhook",
+    "description": "Resend retries until it gets a 2xx, and marking an invite is idempotent, so a failed\ncall to its owner simply comes back later.",
+    "operationId": "resend_webhook_webhooks_resend_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}": {
+   "delete": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Delete User",
+    "description": "Library, deleting an account: the user's own notifications go, and companies'\nnotifications about them as a candidate (their email and grade); the Slack channels they\nconnected stay with their companies, without their id. The log of digests and reminders\nsent to them goes too.",
+    "operationId": "delete_user_internal_users__user_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}/export": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Export User",
+    "description": "Library, for \"Download my data\": the user's own notifications and the Slack channels\nthey connected.",
+    "operationId": "export_user_internal_users__user_id__export_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Export User Internal Users  User Id  Export Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/slack": {
+   "get": {
+    "tags": [
+     "slack"
+    ],
+    "summary": "Get Slack",
+    "description": "The company's Slack channel and the notifications it gets; every member sees it.",
+    "operationId": "get_slack_slack_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SlackOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "slack"
+    ],
+    "summary": "Disconnect",
+    "operationId": "disconnect_slack_delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/slack/start": {
+   "get": {
+    "tags": [
+     "slack"
+    ],
+    "summary": "Start",
+    "description": "Where \"Add to Slack\" goes: Slack's page to approve prepza and pick a channel.",
+    "operationId": "start_slack_start_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SlackStartOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/slack/callback": {
+   "get": {
+    "tags": [
+     "slack"
+    ],
+    "summary": "Callback",
+    "description": "Slack sends the browser back here; the signed, one-time state says whose company it is.\nThen on to the company's Slack page.",
+    "operationId": "callback_slack_callback_get",
+    "parameters": [
+     {
+      "name": "state",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "State"
+      }
+     },
+     {
+      "name": "code",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Code"
+      }
+     },
+     {
+      "name": "error",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Error"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/slack/kinds": {
+   "put": {
+    "tags": [
+     "slack"
+    ],
+    "summary": "Set Kinds",
+    "operationId": "set_kinds_slack_kinds_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SlackKindsIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/unsubscribe/{token}": {
+   "get": {
+    "tags": [
+     "unsubscribe"
+    ],
+    "summary": "Describe",
+    "description": "What an email's unsubscribe link stops; no sign-in. Reading it changes nothing, as mail\nscanners open links.",
+    "operationId": "describe_unsubscribe__token__get",
+    "parameters": [
+     {
+      "name": "token",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Token"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UnsubscribeOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "unsubscribe"
+    ],
+    "summary": "Unsubscribe",
+    "description": "Applies the link; no sign-in. The unsubscribe page's button posts here, and so do mail\nclients' own unsubscribe buttons (RFC 8058: `List-Unsubscribe=One-Click` as the body, which\nneeds nothing more). Safe to repeat.",
+    "operationId": "unsubscribe_unsubscribe__token__post",
+    "parameters": [
+     {
+      "name": "token",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Token"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/candidate-opt-outs/lookup": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Look Up",
+    "description": "The companies that invited the address or whose emails it stopped, by name.",
+    "operationId": "look_up_superadmin_candidate_opt_outs_lookup_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CandidateOptOutsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/superadmin/candidate-opt-outs": {
+   "put": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Change",
+    "description": "Stops a company's emails to the address (only a company that invited it), or lets them\nthrough again; answers with the companies as the lookup does.",
+    "operationId": "change_superadmin_candidate_opt_outs_put",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CandidateOptOutIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CandidateOptOutsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/schedules/digest": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Digest",
+    "description": "Every 10 minutes for an hour each morning, from Cloud Scheduler: the activity digest. Each\nrun goes on where the last one stopped; nobody gets it twice in a day.",
+    "operationId": "digest_internal_schedules_digest_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/schedules/reminders": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Reminders",
+    "description": "Every 10 minutes for an hour each morning, from Cloud Scheduler: reminders, each kind\nat most once a week to a user. The sent log's old rows go too.",
+    "operationId": "reminders_internal_schedules_reminders_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/health": {
+   "get": {
+    "summary": "Health",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Health Health Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/ready": {
+   "get": {
+    "summary": "Ready",
+    "description": "Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis\nisn't checked: an outage there shouldn't stop the service from starting.",
+    "operationId": "ready_ready_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Ready Ready Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "CandidateOptOutIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "company_id": {
+      "type": "string",
+      "title": "Company Id"
+     },
+     "stopped": {
+      "type": "boolean",
+      "title": "Stopped"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email",
+     "company_id",
+     "stopped"
+    ],
+    "title": "CandidateOptOutIn",
+    "description": "A superadmin stops a company's emails to the address, or lets them through again."
+   },
+   "CandidateOptOutsOut": {
+    "properties": {
+     "companies": {
+      "items": {
+       "$ref": "#/components/schemas/CompanyOptOutOut"
+      },
+      "type": "array",
+      "title": "Companies"
+     }
+    },
+    "type": "object",
+    "required": [
+     "companies"
+    ],
+    "title": "CandidateOptOutsOut"
+   },
+   "CompanyOptOutOut": {
+    "properties": {
+     "company_id": {
+      "type": "string",
+      "title": "Company Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "stopped": {
+      "type": "boolean",
+      "title": "Stopped"
+     },
+     "stopped_reminders": {
+      "type": "integer",
+      "title": "Stopped Reminders"
+     }
+    },
+    "type": "object",
+    "required": [
+     "company_id",
+     "name",
+     "stopped",
+     "stopped_reminders"
+    ],
+    "title": "CompanyOptOutOut",
+    "description": "A company that invited an address, or whose emails it stopped: whether every email from\nthe company to it is stopped, and for how many invites only the reminders are."
+   },
+   "FeedOut": {
+    "properties": {
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/NotificationOut"
+      },
+      "type": "array",
+      "title": "Items"
+     },
+     "unread": {
+      "type": "integer",
+      "title": "Unread"
+     }
+    },
+    "type": "object",
+    "required": [
+     "items",
+     "unread"
+    ],
+    "title": "FeedOut"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "NotificationOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "kind": {
+      "type": "string",
+      "title": "Kind"
+     },
+     "link": {
+      "type": "string",
+      "title": "Link"
+     },
+     "data": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Data"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "kind",
+     "link",
+     "data",
+     "created_at"
+    ],
+    "title": "NotificationOut",
+    "description": "What the bell shows: `kind` picks the text, `data` fills it, `link` opens the page."
+   },
+   "PushBody": {
+    "properties": {
+     "message": {
+      "$ref": "#/components/schemas/PushMessage"
+     },
+     "subscription": {
+      "type": "string",
+      "title": "Subscription"
+     }
+    },
+    "type": "object",
+    "required": [
+     "message",
+     "subscription"
+    ],
+    "title": "PushBody",
+    "description": "What Pub/Sub sends to a push endpoint."
+   },
+   "PushMessage": {
+    "properties": {
+     "data": {
+      "type": "string",
+      "title": "Data",
+      "default": ""
+     },
+     "attributes": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Attributes",
+      "default": {}
+     },
+     "messageId": {
+      "type": "string",
+      "title": "Messageid"
+     }
+    },
+    "type": "object",
+    "required": [
+     "messageId"
+    ],
+    "title": "PushMessage"
+   },
+   "SlackKindsIn": {
+    "properties": {
+     "kinds": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Kinds"
+     }
+    },
+    "type": "object",
+    "required": [
+     "kinds"
+    ],
+    "title": "SlackKindsIn"
+   },
+   "SlackOut": {
+    "properties": {
+     "connected": {
+      "type": "boolean",
+      "title": "Connected"
+     },
+     "status": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Status"
+     },
+     "team": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Team"
+     },
+     "channel": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Channel"
+     },
+     "kinds": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Kinds"
+     },
+     "all_kinds": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "All Kinds"
+     }
+    },
+    "type": "object",
+    "required": [
+     "connected",
+     "kinds",
+     "all_kinds"
+    ],
+    "title": "SlackOut",
+    "description": "The company's Slack channel as the page shows it: never its web hook."
+   },
+   "SlackStartOut": {
+    "properties": {
+     "url": {
+      "type": "string",
+      "title": "Url"
+     }
+    },
+    "type": "object",
+    "required": [
+     "url"
+    ],
+    "title": "SlackStartOut"
+   },
+   "UnsubscribeOut": {
+    "properties": {
+     "type": {
+      "$ref": "#/components/schemas/UnsubscribeType"
+     },
+     "company": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Company"
+     }
+    },
+    "type": "object",
+    "required": [
+     "type"
+    ],
+    "title": "UnsubscribeOut",
+    "description": "What a link stops, for the page to say before it's confirmed: the type, and for a\ncandidate's link the company's name."
+   },
+   "UnsubscribeType": {
+    "type": "string",
+    "enum": [
+     "candidate_finished",
+     "invite_undelivered",
+     "ats_not_invited",
+     "interview_ready",
+     "digest",
+     "reminders",
+     "updates",
+     "promotions",
+     "invite_reminders",
+     "company"
+    ],
+    "title": "UnsubscribeType",
+    "description": "What an unsubscribe link stops. A user's optional emails: one kind of the activity digest,\nthe whole digest, reminders, product updates or offers. A candidate's emails, sent on a\ncompany's behalf: the reminders for one invite, or every email from that company."
+   },
+   "UserEmailIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "title": "Email"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email"
+    ],
+    "title": "UserEmailIn",
+    "description": "An email address sent in the body, so request logs don't record it: the account's, in\nlibrary's calls to delete or export a user's data, or the one a superadmin looks up."
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   }
+  },
+  "securitySchemes": {
+   "HTTPBearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

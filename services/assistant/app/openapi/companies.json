@@ -1,0 +1,7496 @@
+{
+ "paths": {
+  "/companies": {
+   "post": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Create Company",
+    "operationId": "create_company_companies_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CompanyCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CompanyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "List Companies",
+    "operationId": "list_companies_companies_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CompanyOut"
+         },
+         "title": "Response List Companies Companies Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/credits": {
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "List Credits",
+    "description": "The companies the user may top up, as an owner or admin, with their credits. Declared\nbefore /{company_id}, which would otherwise take \"credits\" as an id.",
+    "operationId": "list_credits_companies_credits_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CompanyBalanceOut"
+         },
+         "title": "Response List Credits Companies Credits Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}": {
+   "delete": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Delete Company",
+    "description": "Only the owner can do it.",
+    "operationId": "delete_company_companies__company_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Get Company",
+    "operationId": "get_company_companies__company_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CompanyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/credits": {
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Get Credits",
+    "description": "Candidates the company can still invite; any member may see it.",
+    "operationId": "get_credits_companies__company_id__credits_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CompanyCreditsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/referral": {
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Get Referral",
+    "description": "The company's referral link; any member may share it.",
+    "operationId": "get_referral_companies__company_id__referral_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ReferralOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/name": {
+   "patch": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Rename Company",
+    "description": "Owners and admins rename the company; names stay unique across prepza, ignoring case.",
+    "operationId": "rename_company_companies__company_id__name_patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CompanyRename"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/audit": {
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "List Audit Events",
+    "description": "The company's recorded human decisions, newest first; for the owner only.",
+    "operationId": "list_audit_events_companies__company_id__audit_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/AuditEventOut"
+         },
+         "title": "Response List Audit Events Companies  Company Id  Audit Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/auto-top-up": {
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Get Auto Top Up",
+    "operationId": "get_auto_top_up_companies__company_id__auto_top_up_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AutoTopUpOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Turn On",
+    "operationId": "turn_on_companies__company_id__auto_top_up_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AutoTopUpIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AutoTopUpOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Turn Off",
+    "operationId": "turn_off_companies__company_id__auto_top_up_delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/members": {
+   "get": {
+    "tags": [
+     "members"
+    ],
+    "summary": "List Members",
+    "operationId": "list_members_members_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/MemberOut"
+         },
+         "title": "Response List Members Members Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "members"
+    ],
+    "summary": "Invite Member",
+    "description": "The owner invites an admin or a viewer; the role applies once the invite is accepted.",
+    "operationId": "invite_member_members_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/MemberIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MemberOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/members/{member_id}/role": {
+   "put": {
+    "tags": [
+     "members"
+    ],
+    "summary": "Change Role",
+    "description": "The owner makes an admin a viewer or the other way round. A new viewer's automatic\ntop-up goes off, as viewers spend no credits.",
+    "operationId": "change_role_members__member_id__role_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "member_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Member Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/MemberRoleIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/members/{member_id}": {
+   "delete": {
+    "tags": [
+     "members"
+    ],
+    "summary": "Remove Member",
+    "description": "The owner removes a member or withdraws a pending invite; never the owner. An automatic\ntop-up paid with the removed member's card goes off, so it's never charged again.",
+    "operationId": "remove_member_members__member_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "member_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Member Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/members/invites/{token}": {
+   "get": {
+    "tags": [
+     "members"
+    ],
+    "summary": "Get Admin Invite",
+    "operationId": "get_admin_invite_members_invites__token__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "token",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Token"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AdminInviteOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/members/invites/{token}/accept": {
+   "post": {
+    "tags": [
+     "members"
+    ],
+    "summary": "Accept Admin Invite",
+    "description": "Only the invited email can accept, so a forwarded link is useless to anyone else.",
+    "operationId": "accept_admin_invite_members_invites__token__accept_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "token",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Token"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews": {
+   "post": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Create Interview",
+    "operationId": "create_interview_interviews_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/InterviewCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InterviewOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "List Interviews",
+    "operationId": "list_interviews_interviews_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/InterviewOut"
+         },
+         "title": "Response List Interviews Interviews Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/from-template": {
+   "post": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Create From Template",
+    "description": "A test copied from a template: free and ready at once, so no generation limits apply.",
+    "operationId": "create_from_template_interviews_from_template_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/InterviewFromTemplate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InterviewOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}": {
+   "get": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Get Interview",
+    "operationId": "get_interview_interviews__interview_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InterviewDetail"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Delete Interview",
+    "description": "Credits, results and questions go first, so a failure leaves the interview to delete\nagain.",
+    "operationId": "delete_interview_interviews__interview_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/settings": {
+   "patch": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Update Settings",
+    "operationId": "update_settings_interviews__interview_id__settings_patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/InterviewSettings"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/title": {
+   "patch": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Rename Interview",
+    "description": "Company owners and admins can rename an interview once it has been generated.",
+    "operationId": "rename_interview_interviews__interview_id__title_patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TitleIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/preview": {
+   "post": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Preview Interview",
+    "description": "A company member takes their own test as a candidate would: free, kept out of the\ncandidate list, and its answers out of the questions' statistics. Each preview is new.",
+    "operationId": "preview_interview_interviews__interview_id__preview_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PreviewOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/candidates": {
+   "post": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Invite Candidate",
+    "operationId": "invite_candidate_interviews__interview_id__candidates_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CandidateIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CandidateOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "List Candidates",
+    "description": "A page at a time (candidate_results.page).",
+    "operationId": "list_candidates_interviews__interview_id__candidates_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "sort",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "$ref": "#/components/schemas/CandidateSort",
+       "default": "grade"
+      }
+     },
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "maxLength": 254,
+       "default": "",
+       "title": "Q"
+      }
+     },
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "$ref": "#/components/schemas/CandidateFilter"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Status"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CandidateOut"
+         },
+         "title": "Response List Candidates Interviews  Interview Id  Candidates Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/candidates/filters": {
+   "get": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Candidate Filters",
+    "description": "What candidates can be filtered by.",
+    "operationId": "candidate_filters_interviews_candidates_filters_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CandidateFiltersOut"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/candidates/{invite_id}": {
+   "delete": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Revoke Candidate",
+    "description": "Withdraws an invite the candidate hasn't used yet. Once they've started, it erases them for\ngood, answers and results included, for example when they ask to have their data deleted.\nA candidate who answered at least one question is charged; other credits still held come\nback.",
+    "operationId": "revoke_candidate_interviews__interview_id__candidates__invite_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "invite_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Invite Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Candidate Scorecard",
+    "description": "A view through the in-app assistant (a valid X-Assistant token) is audited as via the\nassistant and isn't the funnel's \"results viewed\".",
+    "operationId": "candidate_scorecard_interviews__interview_id__candidates__invite_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "invite_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Invite Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ScorecardOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/candidates": {
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Search Candidates",
+    "description": "The company's candidates across its interviews, newest first, a page at a time; `q`\nnarrows them to emails containing it. Any member, viewers too.",
+    "operationId": "search_candidates_companies__company_id__candidates_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "maxLength": 254,
+       "default": "",
+       "title": "Q"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CompanyCandidateOut"
+         },
+         "title": "Response Search Candidates Companies  Company Id  Candidates Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/candidates/{invite_id}/extra-time": {
+   "put": {
+    "tags": [
+     "candidates"
+    ],
+    "summary": "Set Extra Time",
+    "operationId": "set_extra_time_interviews__interview_id__candidates__invite_id__extra_time_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "invite_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Invite Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ExtraTimeIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/candidates/bulk": {
+   "post": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Invite Many",
+    "description": "Invites every email in a pasted or uploaded list, one by one as a single invite would,\nand says who was invited and why the others weren't.",
+    "operationId": "invite_many_interviews__interview_id__candidates_bulk_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/BulkInviteIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BulkInviteOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/generation": {
+   "get": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Get Generation",
+    "description": "Every company member follows the generation, not only the admin who started it.",
+    "operationId": "get_generation_interviews__interview_id__generation_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GenerationOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/generation/review": {
+   "post": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Review Generation",
+    "description": "Approved topics resume the generation, so a pause refuses it.",
+    "operationId": "review_generation_interviews__interview_id__generation_review_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReviewIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Review Generation Interviews  Interview Id  Generation Review Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/generation/retry": {
+   "post": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Retry Generation",
+    "operationId": "retry_generation_interviews__interview_id__generation_retry_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Retry Generation Interviews  Interview Id  Generation Retry Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/generation/cancel": {
+   "post": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Cancel Generation",
+    "description": "Removes the interview too, so it isn't left without questions.",
+    "operationId": "cancel_generation_interviews__interview_id__generation_cancel_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Cancel Generation Interviews  Interview Id  Generation Cancel Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/topics/{topic_id}/questions": {
+   "get": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "List Topic Questions",
+    "operationId": "list_topic_questions_interviews__interview_id__topics__topic_id__questions_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "topic_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Topic Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/QuestionText"
+         },
+         "title": "Response List Topic Questions Interviews  Interview Id  Topics  Topic Id  Questions Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/topics/{topic_id}/limit": {
+   "put": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Set Topic Limit",
+    "operationId": "set_topic_limit_interviews__interview_id__topics__topic_id__limit_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "topic_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Topic Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TopicLimitIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/questions/{question_id}/regenerate": {
+   "post": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Regenerate Question",
+    "operationId": "regenerate_question_interviews__interview_id__questions__question_id__regenerate_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Regenerate Question Interviews  Interview Id  Questions  Question Id  Regenerate Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/questions/{question_id}/wrong": {
+   "post": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "Mark Wrong",
+    "description": "One click: the marked answer is wrong. The verifier checks it and fixes or replaces it.",
+    "operationId": "mark_wrong_interviews__interview_id__questions__question_id__wrong_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/questions/{question_id}/reports": {
+   "get": {
+    "tags": [
+     "interviews"
+    ],
+    "summary": "List Question Reports",
+    "description": "Candidates' reports on a question, read where it's fixed: owners and admins.",
+    "operationId": "list_question_reports_interviews__interview_id__questions__question_id__reports_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ReportOut"
+         },
+         "title": "Response List Question Reports Interviews  Interview Id  Questions  Question Id  Reports Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/invites/{token}": {
+   "get": {
+    "tags": [
+     "invites"
+    ],
+    "summary": "Get Invite",
+    "operationId": "get_invite_invites__token__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "token",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Token"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InviteView"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/invites/{token}/start": {
+   "post": {
+    "tags": [
+     "invites"
+    ],
+    "summary": "Start Invite",
+    "description": "Only the invited, verified email can start; a forwarded link is useless to anyone else.",
+    "operationId": "start_invite_invites__token__start_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "token",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Token"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InviteStartOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/link": {
+   "put": {
+    "tags": [
+     "links"
+    ],
+    "summary": "Set Link",
+    "description": "Owners and admins turn the link on (a new code) or off (it stops working at once).",
+    "operationId": "set_link_interviews__interview_id__link_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LinkIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LinkOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links/{token}": {
+   "get": {
+    "tags": [
+     "links"
+    ],
+    "summary": "Get Link",
+    "description": "Shown to anyone with the link, signed in or not, before they start. Signed in, it also\nsays how far they got, so a finished test is never offered again.",
+    "operationId": "get_link_links__token__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "token",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Token"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LinkView"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links/{token}/start": {
+   "post": {
+    "tags": [
+     "links"
+    ],
+    "summary": "Start Link",
+    "description": "The signed-in person becomes a candidate (their verified email, one attempt each) and\nstarts, with credits set aside as for an email invite.",
+    "operationId": "start_link_links__token__start_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "token",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Token"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InviteStartOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/logo": {
+   "put": {
+    "tags": [
+     "logos"
+    ],
+    "summary": "Set Logo",
+    "description": "Any of the company's owners and admins sets the logo: PNG, JPEG or WebP, up to 500 KB.",
+    "operationId": "set_logo_companies__company_id__logo_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LogoIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LogoOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "logos"
+    ],
+    "summary": "Remove Logo",
+    "operationId": "remove_logo_companies__company_id__logo_delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "logos"
+    ],
+    "summary": "Get Logo",
+    "description": "Public: candidates' pages and email clients load it without signing in.",
+    "operationId": "get_logo_companies__company_id__logo_get",
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/candidates/{invite_id}/brand": {
+   "get": {
+    "tags": [
+     "logos"
+    ],
+    "summary": "Candidate Brand",
+    "description": "The company and logo for the candidate taking the interview, or a member previewing it.",
+    "operationId": "candidate_brand_candidates__invite_id__brand_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "invite_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Invite Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BrandOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/candidates/{invite_id}/report/email": {
+   "post": {
+    "tags": [
+     "reports"
+    ],
+    "summary": "Email Report",
+    "description": "Emails the candidate's PDF report, made on their page, to someone such as a hiring\nmanager. A reply goes to the member who sent it. Counts towards the member's email limits\nand the company's daily reports.",
+    "operationId": "email_report_interviews__interview_id__candidates__invite_id__report_email_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "invite_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Invite Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReportEmailIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "202": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/report": {
+   "get": {
+    "tags": [
+     "reports"
+    ],
+    "summary": "Interview Report",
+    "operationId": "interview_report_interviews__interview_id__report_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InterviewReportOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/report/email": {
+   "post": {
+    "tags": [
+     "reports"
+    ],
+    "summary": "Email Interview Report",
+    "description": "Emails the test's candidates report, made on its candidates tab, like a candidate's.",
+    "operationId": "email_interview_report_interviews__interview_id__report_email_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReportEmailIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "202": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/website": {
+   "put": {
+    "tags": [
+     "verification"
+    ],
+    "summary": "Set Website",
+    "operationId": "set_website_companies__company_id__website_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/WebsiteIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/VerificationOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}": {
+   "delete": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Delete User",
+    "description": "Part of deleting an account (library coordinates it); safe to repeat.",
+    "operationId": "delete_user_internal_users__user_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}/export": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Export User",
+    "operationId": "export_user_internal_users__user_id__export_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Export User Internal Users  User Id  Export Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}/companies": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "User Companies",
+    "description": "Every company the user is a member of, in any role; notifications sends them theirs.",
+    "operationId": "user_companies_internal_users__user_id__companies_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserCompaniesOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/{company_id}/access": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Access",
+    "description": "What the user may do in the company: ats guards its pages with it. A company that\ndoesn't exist is 404.",
+    "operationId": "access_internal_companies__company_id__access_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "user_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AccessOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/interviews": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Interviews By Ids",
+    "description": "The interviews of those ids that still exist, for ats's linked jobs.",
+    "operationId": "interviews_by_ids_internal_interviews_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "ids",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "format": "uuid"
+       },
+       "title": "Ids"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/InterviewBriefOut"
+         },
+         "title": "Response Interviews By Ids Internal Interviews Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/interviews/{interview_id}/invites": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Invite",
+    "description": "A candidate an ATS sent is invited, as the member who connected it. Refused with 503\nduring the emergency pause, 402 without credits and 429 over the email limits; 404 when the\ninterview is gone, 409 while it has no questions yet, and 403 when that member is no longer\nan owner or admin (a removed member's connection invites no one).",
+    "operationId": "invite_internal_interviews__interview_id__invites_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AtsInviteIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AtsInviteOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/{company_id}/interviews": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "List Interviews",
+    "description": "The company's interviews, newest first, for the api service (an API key's company).",
+    "operationId": "list_interviews_internal_companies__company_id__interviews_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/InterviewOut"
+         },
+         "title": "Response List Interviews Internal Companies  Company Id  Interviews Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/{company_id}/interviews/{interview_id}": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get Interview",
+    "operationId": "get_interview_internal_companies__company_id__interviews__interview_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InterviewOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/{company_id}/interviews/{interview_id}/candidates": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "List Candidates",
+    "description": "The interview's candidates, newest first, with their results.",
+    "operationId": "list_candidates_internal_companies__company_id__interviews__interview_id__candidates_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CandidateOut"
+         },
+         "title": "Response List Candidates Internal Companies  Company Id  Interviews  Interview Id  Candidates Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get Candidate",
+    "operationId": "get_candidate_internal_companies__company_id__interviews__interview_id__candidates__invite_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "invite_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Invite Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CandidateOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/invites/{invite_id}/undelivered": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Invite Undelivered",
+    "description": "Notifications reports a bounced or spam-flagged invite email; safe to repeat. The\ncompany is told.",
+    "operationId": "invite_undelivered_internal_invites__invite_id__undelivered_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "invite_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Invite Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/invites/companies": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Invited Companies",
+    "description": "Notifications, for the admin zone's emails tab: the companies that invited the address,\nwhose emails to it a superadmin may stop. The address goes in the body, never the query\nstring, which request logs record.",
+    "operationId": "invited_companies_internal_invites_companies_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InvitedCompaniesOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/companies/members": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Companies Members",
+    "description": "Notifications, for its emails to members: the companies of those ids that still exist,\ntheir names and who joined them, and whether each is an owner or admin.",
+    "operationId": "companies_members_internal_companies_members_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CompanyIdsIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CompaniesMembersOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/interviews/waiting": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Waiting Interviews",
+    "description": "Notifications, for its reminders: interviews ready between the `ready_` times that\nnobody was invited to, and interviews started between the `started_` times still waiting\nfor their questions.",
+    "operationId": "waiting_interviews_internal_interviews_waiting_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "ready_after",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "date-time",
+       "title": "Ready After"
+      }
+     },
+     {
+      "name": "ready_before",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "date-time",
+       "title": "Ready Before"
+      }
+     },
+     {
+      "name": "started_after",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "date-time",
+       "title": "Started After"
+      }
+     },
+     {
+      "name": "started_before",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "date-time",
+       "title": "Started Before"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/WaitingInterviewsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/events": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Receive Event",
+    "description": "Pub/Sub pushes every event here. A failure answers with an error, so Pub/Sub retries it,\nand moves it to the dead-letter topic after the subscription's maximum attempts.",
+    "operationId": "receive_event_internal_events_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PushBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/schedules/retention": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Retention",
+    "description": "Daily, from Cloud Scheduler: candidate data and audit events past their retention\nperiods go, and the notes of events long processed.",
+    "operationId": "retention_internal_schedules_retention_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/schedules/invite-expiry": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Invite Expiry",
+    "description": "Daily, from Cloud Scheduler: invites never started expire, and their credits come back.",
+    "operationId": "invite_expiry_internal_schedules_invite_expiry_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/schedules/invite-reminders": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Invite Reminders",
+    "description": "Daily, from Cloud Scheduler: candidates who haven't started get one reminder; not during\nthe emergency pause (they're reminded once it's off).",
+    "operationId": "invite_reminders_internal_schedules_invite_reminders_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/schedules/outbox": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Flush Outbox",
+    "description": "Every minute, from Cloud Scheduler: publishes events that weren't published right after\ntheir change.",
+    "operationId": "flush_outbox_internal_schedules_outbox_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/pause": {
+   "get": {
+    "tags": [
+     "pause"
+    ],
+    "summary": "Get Pause",
+    "description": "Public: the candidate's invite page and the new interview page say so while it's on.",
+    "operationId": "get_pause_pause_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PauseOut"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/pause": {
+   "put": {
+    "tags": [
+     "pause"
+    ],
+    "summary": "Switch Pause",
+    "description": "Who switched it and when goes to the logs.",
+    "operationId": "switch_pause_superadmin_pause_put",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PauseIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PauseOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/maintenance": {
+   "get": {
+    "tags": [
+     "maintenance"
+    ],
+    "summary": "Get Maintenance",
+    "description": "Public: every page shows the maintenance screen while it's on, except to superadmins.",
+    "operationId": "get_maintenance_maintenance_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MaintenanceOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/superadmin/maintenance": {
+   "get": {
+    "tags": [
+     "maintenance"
+    ],
+    "summary": "Get Switch",
+    "operationId": "get_switch_superadmin_maintenance_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MaintenanceSwitchOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   },
+   "put": {
+    "tags": [
+     "maintenance"
+    ],
+    "summary": "Switch",
+    "description": "Who switched it and when goes to the logs.",
+    "operationId": "switch_superadmin_maintenance_put",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/MaintenanceIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MaintenanceSwitchOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/superadmin/pass-rates": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Pass Rates",
+    "operationId": "list_pass_rates_superadmin_pass_rates_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "sort",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "$ref": "#/components/schemas/PassRateSort",
+       "default": "pass_rate"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/PassRateOut"
+         },
+         "title": "Response List Pass Rates Superadmin Pass Rates Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/stats": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Stats",
+    "description": "Companies, interviews and candidates, all time or in one year or\nmonth, for the stats tab.",
+    "operationId": "get_stats_superadmin_stats_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "period",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^\\d{4}(-(0[1-9]|1[0-2]))?$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Period"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/StatsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/verifications": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Requests",
+    "description": "Pending requests first, then those decided.",
+    "operationId": "list_requests_superadmin_verifications_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/VerificationRequestOut"
+         },
+         "title": "Response List Requests Superadmin Verifications Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/verifications/{company_id}/approve": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Approve",
+    "description": "Only the name and domain the superadmin reviewed: a rename since sends it back.",
+    "operationId": "approve_superadmin_verifications__company_id__approve_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ApproveIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/verifications/{company_id}/decline": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Decline",
+    "operationId": "decline_superadmin_verifications__company_id__decline_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DeclineIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/health": {
+   "get": {
+    "summary": "Health",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Health Health Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/ready": {
+   "get": {
+    "summary": "Ready",
+    "description": "Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis\nisn't checked: an outage there shouldn't stop the service from starting.",
+    "operationId": "ready_ready_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Ready Ready Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "AccessOut": {
+    "properties": {
+     "member": {
+      "type": "boolean",
+      "title": "Member"
+     },
+     "editor": {
+      "type": "boolean",
+      "title": "Editor"
+     }
+    },
+    "type": "object",
+    "required": [
+     "member",
+     "editor"
+    ],
+    "title": "AccessOut"
+   },
+   "AdminInviteOut": {
+    "properties": {
+     "company_name": {
+      "type": "string",
+      "title": "Company Name"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "joined": {
+      "type": "boolean",
+      "title": "Joined"
+     }
+    },
+    "type": "object",
+    "required": [
+     "company_name",
+     "email",
+     "joined"
+    ],
+    "title": "AdminInviteOut",
+    "description": "What the invited member sees before accepting."
+   },
+   "ApproveIn": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "domain": {
+      "type": "string",
+      "title": "Domain"
+     }
+    },
+    "type": "object",
+    "required": [
+     "name",
+     "domain"
+    ],
+    "title": "ApproveIn",
+    "description": "The name and domain the superadmin reviewed; approved only if the request still has them."
+   },
+   "AtsInviteIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+     },
+     "sender_id": {
+      "type": "string",
+      "title": "Sender Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email",
+     "sender_id"
+    ],
+    "title": "AtsInviteIn"
+   },
+   "AtsInviteOut": {
+    "properties": {
+     "invite_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Invite Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "invite_id"
+    ],
+    "title": "AtsInviteOut"
+   },
+   "AuditEventOut": {
+    "properties": {
+     "user_id": {
+      "type": "string",
+      "title": "User Id"
+     },
+     "action": {
+      "type": "string",
+      "title": "Action"
+     },
+     "target_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target Id"
+     },
+     "via": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Via"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_id",
+     "action",
+     "target_id",
+     "created_at"
+    ],
+    "title": "AuditEventOut"
+   },
+   "AutoTopUpIn": {
+    "properties": {
+     "product": {
+      "type": "string",
+      "title": "Product"
+     },
+     "threshold": {
+      "type": "integer",
+      "title": "Threshold"
+     }
+    },
+    "type": "object",
+    "required": [
+     "product",
+     "threshold"
+    ],
+    "title": "AutoTopUpIn",
+    "description": "Which top-up to buy, and under which available balance (credits)."
+   },
+   "AutoTopUpOut": {
+    "properties": {
+     "offered": {
+      "type": "boolean",
+      "title": "Offered"
+     },
+     "on": {
+      "type": "boolean",
+      "title": "On"
+     },
+     "waiting": {
+      "type": "boolean",
+      "title": "Waiting"
+     },
+     "product": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Product"
+     },
+     "threshold": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Threshold"
+     },
+     "products": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Products"
+     },
+     "thresholds": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array",
+      "title": "Thresholds"
+     },
+     "checkout": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CheckoutOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "type": "object",
+    "required": [
+     "offered",
+     "on",
+     "waiting",
+     "product",
+     "threshold",
+     "products",
+     "thresholds"
+    ],
+    "title": "AutoTopUpOut",
+    "description": "The company's automatic top-up, as billing has it."
+   },
+   "BrandOut": {
+    "properties": {
+     "company": {
+      "type": "string",
+      "title": "Company"
+     },
+     "logo_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Logo Url"
+     }
+    },
+    "type": "object",
+    "required": [
+     "company",
+     "logo_url"
+    ],
+    "title": "BrandOut",
+    "description": "Who a candidate's interview is for, shown while they take it."
+   },
+   "BulkInviteIn": {
+    "properties": {
+     "text": {
+      "type": "string",
+      "maxLength": 50000,
+      "minLength": 1,
+      "title": "Text"
+     }
+    },
+    "type": "object",
+    "required": [
+     "text"
+    ],
+    "title": "BulkInviteIn",
+    "description": "A list of emails as pasted or read from a file; any other text around them is ignored."
+   },
+   "BulkInviteOut": {
+    "properties": {
+     "invited": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Invited"
+     },
+     "skipped": {
+      "items": {
+       "$ref": "#/components/schemas/SkippedInvite"
+      },
+      "type": "array",
+      "title": "Skipped"
+     }
+    },
+    "type": "object",
+    "required": [
+     "invited",
+     "skipped"
+    ],
+    "title": "BulkInviteOut"
+   },
+   "CandidateFilter": {
+    "type": "string",
+    "enum": [
+     "invited",
+     "in_process",
+     "finished",
+     "passed",
+     "flagged",
+     "undelivered",
+     "expired"
+    ],
+    "title": "CandidateFilter"
+   },
+   "CandidateFiltersOut": {
+    "properties": {
+     "filters": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Filters"
+     }
+    },
+    "type": "object",
+    "required": [
+     "filters"
+    ],
+    "title": "CandidateFiltersOut",
+    "description": "What a company can narrow its candidates to: statuses and results."
+   },
+   "CandidateIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email"
+    ],
+    "title": "CandidateIn"
+   },
+   "CandidateOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "progress": {
+      "type": "integer",
+      "title": "Progress",
+      "default": 0
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "passed": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Passed"
+     },
+     "tab_leaves": {
+      "type": "integer",
+      "title": "Tab Leaves",
+      "default": 0
+     },
+     "copies": {
+      "type": "integer",
+      "title": "Copies",
+      "default": 0
+     },
+     "fast_answers": {
+      "type": "integer",
+      "title": "Fast Answers",
+      "default": 0
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "email",
+     "status",
+     "created_at"
+    ],
+    "title": "CandidateOut"
+   },
+   "CandidateSort": {
+    "type": "string",
+    "enum": [
+     "grade",
+     "date"
+    ],
+    "title": "CandidateSort"
+   },
+   "CheckoutOut": {
+    "properties": {
+     "price_id": {
+      "type": "string",
+      "title": "Price Id"
+     },
+     "custom_data": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Custom Data"
+     }
+    },
+    "type": "object",
+    "required": [
+     "price_id",
+     "custom_data"
+    ],
+    "title": "CheckoutOut",
+    "description": "The Paddle checkout to open: its price and the custom data to send with it."
+   },
+   "CompaniesMembersOut": {
+    "properties": {
+     "companies": {
+      "items": {
+       "$ref": "#/components/schemas/CompanyMembersOut"
+      },
+      "type": "array",
+      "title": "Companies"
+     }
+    },
+    "type": "object",
+    "required": [
+     "companies"
+    ],
+    "title": "CompaniesMembersOut"
+   },
+   "CompanyBalanceOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "available": {
+      "type": "integer",
+      "title": "Available"
+     },
+     "low": {
+      "type": "boolean",
+      "title": "Low"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "available",
+     "low"
+    ],
+    "title": "CompanyBalanceOut",
+    "description": "A company the user can top up, with its credits."
+   },
+   "CompanyCandidateOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "progress": {
+      "type": "integer",
+      "title": "Progress",
+      "default": 0
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "passed": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Passed"
+     },
+     "tab_leaves": {
+      "type": "integer",
+      "title": "Tab Leaves",
+      "default": 0
+     },
+     "copies": {
+      "type": "integer",
+      "title": "Copies",
+      "default": 0
+     },
+     "fast_answers": {
+      "type": "integer",
+      "title": "Fast Answers",
+      "default": 0
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "interview_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Interview Id"
+     },
+     "interview_title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Interview Title"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "email",
+     "status",
+     "created_at",
+     "interview_id",
+     "interview_title"
+    ],
+    "title": "CompanyCandidateOut",
+    "description": "A candidate found across the company's interviews, with the interview they're in."
+   },
+   "CompanyCreate": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "maxLength": 45,
+      "minLength": 1,
+      "title": "Name"
+     }
+    },
+    "type": "object",
+    "required": [
+     "name"
+    ],
+    "title": "CompanyCreate"
+   },
+   "CompanyCreditsOut": {
+    "properties": {
+     "available": {
+      "type": "integer",
+      "title": "Available"
+     },
+     "low": {
+      "type": "boolean",
+      "title": "Low"
+     }
+    },
+    "type": "object",
+    "required": [
+     "available",
+     "low"
+    ],
+    "title": "CompanyCreditsOut"
+   },
+   "CompanyIdsIn": {
+    "properties": {
+     "company_ids": {
+      "items": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "type": "array",
+      "maxItems": 1000,
+      "title": "Company Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "company_ids"
+    ],
+    "title": "CompanyIdsIn"
+   },
+   "CompanyMembersOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "members": {
+      "items": {
+       "$ref": "#/components/schemas/MemberBriefOut"
+      },
+      "type": "array",
+      "title": "Members"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "members"
+    ],
+    "title": "CompanyMembersOut"
+   },
+   "CompanyOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "role": {
+      "type": "string",
+      "title": "Role"
+     },
+     "can_edit": {
+      "type": "boolean",
+      "title": "Can Edit"
+     },
+     "can_delete": {
+      "type": "boolean",
+      "title": "Can Delete"
+     },
+     "can_manage_members": {
+      "type": "boolean",
+      "title": "Can Manage Members"
+     },
+     "interview_count": {
+      "type": "integer",
+      "title": "Interview Count"
+     },
+     "logo_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Logo Url"
+     },
+     "website_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Website Domain"
+     },
+     "verified_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verified Domain"
+     },
+     "verification_status": {
+      "$ref": "#/components/schemas/VerificationStatus",
+      "default": "none"
+     },
+     "decline_reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Decline Reason"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "role",
+     "can_edit",
+     "can_delete",
+     "can_manage_members",
+     "interview_count",
+     "created_at"
+    ],
+    "title": "CompanyOut"
+   },
+   "CompanyRename": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "maxLength": 45,
+      "minLength": 1,
+      "title": "Title"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title"
+    ],
+    "title": "CompanyRename",
+    "description": "A new name, edited in place like a test's title (hence `title`)."
+   },
+   "DeclineIn": {
+    "properties": {
+     "reason": {
+      "type": "string",
+      "maxLength": 500,
+      "title": "Reason",
+      "default": ""
+     }
+    },
+    "type": "object",
+    "title": "DeclineIn"
+   },
+   "DraftTopic": {
+    "properties": {
+     "main_topic": {
+      "type": "string",
+      "title": "Main Topic"
+     },
+     "subtopics": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Subtopics"
+     }
+    },
+    "type": "object",
+    "required": [
+     "main_topic",
+     "subtopics"
+    ],
+    "title": "DraftTopic"
+   },
+   "ExtraTimeIn": {
+    "properties": {
+     "extra_time": {
+      "type": "integer",
+      "title": "Extra Time"
+     }
+    },
+    "type": "object",
+    "required": [
+     "extra_time"
+    ],
+    "title": "ExtraTimeIn",
+    "description": "Extra time for a candidate who needs it, in percent of each question's time."
+   },
+   "GenerationOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "kind": {
+      "type": "string",
+      "title": "Kind"
+     },
+     "company_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Company Id"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "topics": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/DraftTopic"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Topics"
+     },
+     "progress": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/GenerationProgress"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "preparation_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Preparation Id"
+     },
+     "error": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Error"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
+     "max_topics": {
+      "type": "integer",
+      "title": "Max Topics"
+     },
+     "max_subtopics": {
+      "type": "integer",
+      "title": "Max Subtopics"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "kind",
+     "company_id",
+     "status",
+     "topics",
+     "progress",
+     "preparation_id",
+     "error",
+     "language",
+     "max_topics",
+     "max_subtopics"
+    ],
+    "title": "GenerationOut"
+   },
+   "GenerationProgress": {
+    "properties": {
+     "done": {
+      "type": "integer",
+      "title": "Done"
+     },
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     },
+     "topics": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Topics"
+     },
+     "topics_ready": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Topics Ready"
+     }
+    },
+    "type": "object",
+    "required": [
+     "done",
+     "total"
+    ],
+    "title": "GenerationProgress"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "InterviewBriefOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "company_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Company Id"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "ready": {
+      "type": "boolean",
+      "title": "Ready"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "company_id",
+     "title",
+     "ready"
+    ],
+    "title": "InterviewBriefOut"
+   },
+   "InterviewCreate": {
+    "properties": {
+     "text": {
+      "type": "string",
+      "maxLength": 10000,
+      "minLength": 1,
+      "title": "Text"
+     },
+     "generate_in": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "en",
+         "ru",
+         "uk",
+         "es",
+         "pt",
+         "de",
+         "fr",
+         "it",
+         "pl",
+         "nl",
+         "tr",
+         "ar",
+         "he",
+         "fa",
+         "ja",
+         "zh",
+         "ko",
+         "hi",
+         "id",
+         "th",
+         "vi",
+         "fil",
+         "et"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Generate In"
+     }
+    },
+    "type": "object",
+    "required": [
+     "text"
+    ],
+    "title": "InterviewCreate"
+   },
+   "InterviewDetail": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "generation_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Generation Id"
+     },
+     "set_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Set Id"
+     },
+     "generation_failed": {
+      "type": "boolean",
+      "title": "Generation Failed"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "question_seconds": {
+      "type": "integer",
+      "title": "Question Seconds"
+     },
+     "candidate_count": {
+      "type": "integer",
+      "title": "Candidate Count"
+     },
+     "hired": {
+      "type": "boolean",
+      "title": "Hired"
+     },
+     "pass_mark": {
+      "type": "integer",
+      "title": "Pass Mark"
+     },
+     "link_token": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Link Token"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/TopicOut"
+      },
+      "type": "array",
+      "title": "Topics"
+     },
+     "can_edit": {
+      "type": "boolean",
+      "title": "Can Edit",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "generation_id",
+     "set_id",
+     "generation_failed",
+     "title",
+     "question_seconds",
+     "candidate_count",
+     "hired",
+     "pass_mark",
+     "link_token",
+     "status",
+     "created_at",
+     "topics"
+    ],
+    "title": "InterviewDetail"
+   },
+   "InterviewFromTemplate": {
+    "properties": {
+     "template_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Template Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "template_id"
+    ],
+    "title": "InterviewFromTemplate"
+   },
+   "InterviewOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "generation_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Generation Id"
+     },
+     "set_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Set Id"
+     },
+     "generation_failed": {
+      "type": "boolean",
+      "title": "Generation Failed"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "question_seconds": {
+      "type": "integer",
+      "title": "Question Seconds"
+     },
+     "candidate_count": {
+      "type": "integer",
+      "title": "Candidate Count"
+     },
+     "hired": {
+      "type": "boolean",
+      "title": "Hired"
+     },
+     "pass_mark": {
+      "type": "integer",
+      "title": "Pass Mark"
+     },
+     "link_token": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Link Token"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "generation_id",
+     "set_id",
+     "generation_failed",
+     "title",
+     "question_seconds",
+     "candidate_count",
+     "hired",
+     "pass_mark",
+     "link_token",
+     "status",
+     "created_at"
+    ],
+    "title": "InterviewOut"
+   },
+   "InterviewReportOut": {
+    "properties": {
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "company": {
+      "type": "string",
+      "title": "Company"
+     },
+     "logo_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Logo Url"
+     },
+     "verified_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verified Domain"
+     },
+     "pass_mark": {
+      "type": "integer",
+      "title": "Pass Mark"
+     },
+     "candidates": {
+      "items": {
+       "$ref": "#/components/schemas/CandidateOut"
+      },
+      "type": "array",
+      "title": "Candidates"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title",
+     "company",
+     "logo_url",
+     "verified_domain",
+     "pass_mark",
+     "candidates"
+    ],
+    "title": "InterviewReportOut",
+    "description": "Every candidate of a test with their totals, as its candidates tab lists them, for the\ntest's PDF report: best grade first."
+   },
+   "InterviewSettings": {
+    "properties": {
+     "question_seconds": {
+      "type": "integer",
+      "maximum": 600.0,
+      "minimum": 10.0,
+      "title": "Question Seconds",
+      "default": 60
+     },
+     "hired": {
+      "type": "boolean",
+      "title": "Hired",
+      "default": false
+     },
+     "pass_mark": {
+      "type": "integer",
+      "maximum": 100.0,
+      "minimum": 1.0,
+      "title": "Pass Mark",
+      "default": 70
+     }
+    },
+    "type": "object",
+    "title": "InterviewSettings"
+   },
+   "InviteStartOut": {
+    "properties": {
+     "sessions": {
+      "items": {
+       "$ref": "#/components/schemas/SessionSummary"
+      },
+      "type": "array",
+      "title": "Sessions"
+     }
+    },
+    "type": "object",
+    "required": [
+     "sessions"
+    ],
+    "title": "InviteStartOut"
+   },
+   "InviteView": {
+    "properties": {
+     "interview_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Interview Id"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "company": {
+      "type": "string",
+      "title": "Company"
+     },
+     "logo_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Logo Url"
+     },
+     "verified_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verified Domain"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "question_seconds": {
+      "type": "integer",
+      "title": "Question Seconds"
+     }
+    },
+    "type": "object",
+    "required": [
+     "interview_id",
+     "title",
+     "company",
+     "email",
+     "status",
+     "question_seconds"
+    ],
+    "title": "InviteView"
+   },
+   "InvitedCompaniesOut": {
+    "properties": {
+     "company_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Company Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "company_ids"
+    ],
+    "title": "InvitedCompaniesOut",
+    "description": "The companies that invited an address, for the notifications service."
+   },
+   "LinkIn": {
+    "properties": {
+     "on": {
+      "type": "boolean",
+      "title": "On"
+     }
+    },
+    "type": "object",
+    "required": [
+     "on"
+    ],
+    "title": "LinkIn"
+   },
+   "LinkOut": {
+    "properties": {
+     "link_token": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Link Token"
+     }
+    },
+    "type": "object",
+    "required": [
+     "link_token"
+    ],
+    "title": "LinkOut",
+    "description": "The test's shareable link code, or None while it's off."
+   },
+   "LinkView": {
+    "properties": {
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "company": {
+      "type": "string",
+      "title": "Company"
+     },
+     "logo_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Logo Url"
+     },
+     "verified_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verified Domain"
+     },
+     "question_seconds": {
+      "type": "integer",
+      "title": "Question Seconds"
+     },
+     "status": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Status"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title",
+     "company",
+     "question_seconds"
+    ],
+    "title": "LinkView",
+    "description": "What a test's shareable link shows before anyone starts."
+   },
+   "LogoIn": {
+    "properties": {
+     "image": {
+      "type": "string",
+      "maxLength": 666670,
+      "minLength": 1,
+      "title": "Image"
+     }
+    },
+    "type": "object",
+    "required": [
+     "image"
+    ],
+    "title": "LogoIn",
+    "description": "The logo image, base64-encoded."
+   },
+   "LogoOut": {
+    "properties": {
+     "logo_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Logo Url"
+     }
+    },
+    "type": "object",
+    "required": [
+     "logo_url"
+    ],
+    "title": "LogoOut"
+   },
+   "MaintenanceIn": {
+    "properties": {
+     "on": {
+      "type": "boolean",
+      "title": "On"
+     }
+    },
+    "type": "object",
+    "required": [
+     "on"
+    ],
+    "title": "MaintenanceIn"
+   },
+   "MaintenanceOut": {
+    "properties": {
+     "on": {
+      "type": "boolean",
+      "title": "On"
+     },
+     "superadmin": {
+      "type": "boolean",
+      "title": "Superadmin",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "on"
+    ],
+    "title": "MaintenanceOut"
+   },
+   "MaintenanceSwitchOut": {
+    "properties": {
+     "on": {
+      "type": "boolean",
+      "title": "On"
+     },
+     "running": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Running"
+     }
+    },
+    "type": "object",
+    "required": [
+     "on",
+     "running"
+    ],
+    "title": "MaintenanceSwitchOut"
+   },
+   "MemberBriefOut": {
+    "properties": {
+     "user_id": {
+      "type": "string",
+      "title": "User Id"
+     },
+     "editor": {
+      "type": "boolean",
+      "title": "Editor"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_id",
+     "editor"
+    ],
+    "title": "MemberBriefOut"
+   },
+   "MemberIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+     },
+     "role": {
+      "type": "string",
+      "enum": [
+       "admin",
+       "viewer"
+      ],
+      "title": "Role",
+      "default": "admin"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email"
+    ],
+    "title": "MemberIn"
+   },
+   "MemberOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "role": {
+      "type": "string",
+      "title": "Role"
+     },
+     "joined": {
+      "type": "boolean",
+      "title": "Joined"
+     },
+     "token": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Token"
+     },
+     "removable": {
+      "type": "boolean",
+      "title": "Removable",
+      "default": false
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "email",
+     "role",
+     "joined",
+     "created_at"
+    ],
+    "title": "MemberOut"
+   },
+   "MemberRoleIn": {
+    "properties": {
+     "role": {
+      "type": "string",
+      "enum": [
+       "admin",
+       "viewer"
+      ],
+      "title": "Role"
+     }
+    },
+    "type": "object",
+    "required": [
+     "role"
+    ],
+    "title": "MemberRoleIn"
+   },
+   "PassRateOut": {
+    "properties": {
+     "interview_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Interview Id"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "company": {
+      "type": "string",
+      "title": "Company"
+     },
+     "finished": {
+      "type": "integer",
+      "title": "Finished"
+     },
+     "pass_rate": {
+      "type": "integer",
+      "title": "Pass Rate"
+     },
+     "pass_mark": {
+      "type": "integer",
+      "title": "Pass Mark"
+     },
+     "average_grade": {
+      "type": "integer",
+      "title": "Average Grade"
+     },
+     "timeout_share": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Timeout Share"
+     },
+     "outside_triggers": {
+      "type": "boolean",
+      "title": "Outside Triggers"
+     }
+    },
+    "type": "object",
+    "required": [
+     "interview_id",
+     "title",
+     "company",
+     "finished",
+     "pass_rate",
+     "pass_mark",
+     "average_grade",
+     "timeout_share",
+     "outside_triggers"
+    ],
+    "title": "PassRateOut",
+    "description": "One company interview with finished candidates, for the superadmin's monitoring."
+   },
+   "PassRateSort": {
+    "type": "string",
+    "enum": [
+     "pass_rate",
+     "finished"
+    ],
+    "title": "PassRateSort"
+   },
+   "PauseIn": {
+    "properties": {
+     "paused": {
+      "type": "boolean",
+      "title": "Paused"
+     }
+    },
+    "type": "object",
+    "required": [
+     "paused"
+    ],
+    "title": "PauseIn"
+   },
+   "PauseOut": {
+    "properties": {
+     "paused": {
+      "type": "boolean",
+      "title": "Paused"
+     }
+    },
+    "type": "object",
+    "required": [
+     "paused"
+    ],
+    "title": "PauseOut"
+   },
+   "PreviewOut": {
+    "properties": {
+     "session_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Session Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "session_id"
+    ],
+    "title": "PreviewOut",
+    "description": "The first session of a member's preview, to open in the player."
+   },
+   "PushBody": {
+    "properties": {
+     "message": {
+      "$ref": "#/components/schemas/PushMessage"
+     },
+     "subscription": {
+      "type": "string",
+      "title": "Subscription"
+     }
+    },
+    "type": "object",
+    "required": [
+     "message",
+     "subscription"
+    ],
+    "title": "PushBody",
+    "description": "What Pub/Sub sends to a push endpoint."
+   },
+   "PushMessage": {
+    "properties": {
+     "data": {
+      "type": "string",
+      "title": "Data",
+      "default": ""
+     },
+     "attributes": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Attributes",
+      "default": {}
+     },
+     "messageId": {
+      "type": "string",
+      "title": "Messageid"
+     }
+    },
+    "type": "object",
+    "required": [
+     "messageId"
+    ],
+    "title": "PushMessage"
+   },
+   "QuestionOption": {
+    "properties": {
+     "answer": {
+      "type": "string",
+      "title": "Answer"
+     },
+     "correct": {
+      "type": "boolean",
+      "title": "Correct"
+     }
+    },
+    "type": "object",
+    "required": [
+     "answer",
+     "correct"
+    ],
+    "title": "QuestionOption"
+   },
+   "QuestionText": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/QuestionOption"
+      },
+      "type": "array",
+      "title": "Options"
+     },
+     "likes": {
+      "type": "integer",
+      "title": "Likes"
+     },
+     "dislikes": {
+      "type": "integer",
+      "title": "Dislikes"
+     },
+     "reports": {
+      "type": "integer",
+      "title": "Reports"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "text",
+     "options",
+     "likes",
+     "dislikes",
+     "reports"
+    ],
+    "title": "QuestionText",
+    "description": "A question as the company manages it: text, answer options and feedback counts."
+   },
+   "ReferralOut": {
+    "properties": {
+     "code": {
+      "type": "string",
+      "title": "Code"
+     },
+     "reward": {
+      "type": "integer",
+      "title": "Reward"
+     },
+     "rewarded": {
+      "type": "integer",
+      "title": "Rewarded"
+     },
+     "rewards": {
+      "items": {
+       "$ref": "#/components/schemas/ReferralRewardOut"
+      },
+      "type": "array",
+      "title": "Rewards"
+     }
+    },
+    "type": "object",
+    "required": [
+     "code",
+     "reward",
+     "rewarded",
+     "rewards"
+    ],
+    "title": "ReferralOut",
+    "description": "The company's referral link code, what it earns, how many it has earned for, and the latest\nof those, newest first."
+   },
+   "ReferralRewardOut": {
+    "properties": {
+     "name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name"
+     },
+     "rewarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Rewarded At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "name",
+     "rewarded_at"
+    ],
+    "title": "ReferralRewardOut",
+    "description": "A company that came through the link and topped up; no name once it's deleted."
+   },
+   "ReportEmailIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+     },
+     "pdf": {
+      "type": "string",
+      "maxLength": 1333337,
+      "minLength": 1,
+      "title": "Pdf"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email",
+     "pdf"
+    ],
+    "title": "ReportEmailIn",
+    "description": "Who gets the candidate's report, and the PDF the page made, base64-encoded."
+   },
+   "ReportOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "reason": {
+      "type": "string",
+      "title": "Reason"
+     },
+     "comment": {
+      "type": "string",
+      "title": "Comment"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "reason",
+     "comment",
+     "created_at"
+    ],
+    "title": "ReportOut"
+   },
+   "ReviewIn": {
+    "properties": {
+     "selected": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Selected"
+     },
+     "instructions": {
+      "type": "string",
+      "title": "Instructions",
+      "default": ""
+     },
+     "topics": {
+      "anyOf": [
+       {
+        "items": {
+         "additionalProperties": true,
+         "type": "object"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Topics"
+     }
+    },
+    "type": "object",
+    "required": [
+     "selected"
+    ],
+    "title": "ReviewIn",
+    "description": "Topic indices to keep, and optional free-text changes, as the generation service takes them."
+   },
+   "ScorecardAnswer": {
+    "properties": {
+     "answer_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Answer Id"
+     },
+     "option_index": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Option Index"
+     },
+     "correct": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Correct"
+     },
+     "seconds": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seconds"
+     },
+     "fast": {
+      "type": "boolean",
+      "title": "Fast",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "answer_id",
+     "option_index",
+     "correct"
+    ],
+    "title": "ScorecardAnswer"
+   },
+   "ScorecardOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "extra_time": {
+      "type": "integer",
+      "title": "Extra Time"
+     },
+     "can_edit": {
+      "type": "boolean",
+      "title": "Can Edit"
+     },
+     "extra_time_options": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array",
+      "title": "Extra Time Options"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "company": {
+      "type": "string",
+      "title": "Company"
+     },
+     "logo_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Logo Url"
+     },
+     "verified_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verified Domain"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "passed": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Passed"
+     },
+     "pass_mark": {
+      "type": "integer",
+      "title": "Pass Mark"
+     },
+     "sessions": {
+      "items": {
+       "$ref": "#/components/schemas/ScorecardSection"
+      },
+      "type": "array",
+      "title": "Sessions"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "email",
+     "status",
+     "extra_time",
+     "can_edit",
+     "extra_time_options",
+     "title",
+     "company",
+     "logo_url",
+     "verified_domain",
+     "grade",
+     "passed",
+     "pass_mark",
+     "sessions"
+    ],
+    "title": "ScorecardOut"
+   },
+   "ScorecardQuestion": {
+    "properties": {
+     "question_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Question Id"
+     },
+     "number": {
+      "type": "integer",
+      "title": "Number"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Options"
+     },
+     "correct_option_index": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Correct Option Index"
+     },
+     "answer": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ScorecardAnswer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "tab_leaves": {
+      "type": "integer",
+      "title": "Tab Leaves",
+      "default": 0
+     },
+     "copies": {
+      "type": "integer",
+      "title": "Copies",
+      "default": 0
+     }
+    },
+    "type": "object",
+    "required": [
+     "question_id",
+     "number",
+     "text",
+     "options",
+     "correct_option_index",
+     "answer"
+    ],
+    "title": "ScorecardQuestion"
+   },
+   "ScorecardSection": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "topic_title": {
+      "type": "string",
+      "title": "Topic Title"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "final_score": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Final Score"
+     },
+     "tab_leaves": {
+      "type": "integer",
+      "title": "Tab Leaves"
+     },
+     "copies": {
+      "type": "integer",
+      "title": "Copies"
+     },
+     "fast_answers": {
+      "type": "integer",
+      "title": "Fast Answers"
+     },
+     "review": {
+      "items": {
+       "$ref": "#/components/schemas/ScorecardQuestion"
+      },
+      "type": "array",
+      "title": "Review"
+     },
+     "passed": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Passed"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "topic_title",
+     "status",
+     "final_score",
+     "tab_leaves",
+     "copies",
+     "fast_answers",
+     "review",
+     "passed"
+    ],
+    "title": "ScorecardSection",
+    "description": "One topic's round."
+   },
+   "SessionSummary": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "topic_title": {
+      "type": "string",
+      "title": "Topic Title"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "topic_title",
+     "status"
+    ],
+    "title": "SessionSummary"
+   },
+   "SkippedInvite": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "reason": {
+      "type": "string",
+      "title": "Reason"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email",
+     "reason"
+    ],
+    "title": "SkippedInvite"
+   },
+   "StatsOut": {
+    "properties": {
+     "counts": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "type": "object",
+      "title": "Counts"
+     },
+     "currency": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Currency"
+     }
+    },
+    "type": "object",
+    "required": [
+     "counts"
+    ],
+    "title": "StatsOut"
+   },
+   "TitleIn": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "maxLength": 70,
+      "minLength": 1,
+      "title": "Title"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title"
+    ],
+    "title": "TitleIn"
+   },
+   "TopicLimitIn": {
+    "properties": {
+     "limit": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Limit"
+     }
+    },
+    "type": "object",
+    "required": [
+     "limit"
+    ],
+    "title": "TopicLimitIn"
+   },
+   "TopicOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "subtopics": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Subtopics",
+      "default": []
+     },
+     "question_count": {
+      "type": "integer",
+      "title": "Question Count"
+     },
+     "question_limit": {
+      "type": "integer",
+      "title": "Question Limit"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "question_count",
+     "question_limit"
+    ],
+    "title": "TopicOut"
+   },
+   "UserCompaniesOut": {
+    "properties": {
+     "company_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Company Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "company_ids"
+    ],
+    "title": "UserCompaniesOut",
+    "description": "Every company the user is a member of, for the notifications service."
+   },
+   "UserEmailIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "title": "Email"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email"
+    ],
+    "title": "UserEmailIn",
+    "description": "An email address sent in the body, so request logs don't record it: the account's, in\nlibrary's calls to delete or export a user's data, or the one a superadmin looks up."
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   },
+   "VerificationOut": {
+    "properties": {
+     "website_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Website Domain"
+     },
+     "verified_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verified Domain"
+     },
+     "verification_status": {
+      "$ref": "#/components/schemas/VerificationStatus"
+     },
+     "decline_reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Decline Reason"
+     }
+    },
+    "type": "object",
+    "required": [
+     "website_domain",
+     "verified_domain",
+     "verification_status"
+    ],
+    "title": "VerificationOut"
+   },
+   "VerificationRequestOut": {
+    "properties": {
+     "company_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Company Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "domain": {
+      "type": "string",
+      "title": "Domain"
+     },
+     "email": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Email"
+     },
+     "status": {
+      "$ref": "#/components/schemas/VerificationStatus"
+     },
+     "submitted_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Submitted At"
+     },
+     "decided_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Decided At"
+     },
+     "decline_reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Decline Reason"
+     }
+    },
+    "type": "object",
+    "required": [
+     "company_id",
+     "name",
+     "domain",
+     "email",
+     "status",
+     "submitted_at",
+     "decided_at",
+     "decline_reason"
+    ],
+    "title": "VerificationRequestOut",
+    "description": "A company sent for review, for the superadmin: the name and domain to check, the work\nemail that proved the domain, and the decision once made."
+   },
+   "VerificationStatus": {
+    "type": "string",
+    "enum": [
+     "none",
+     "waiting_email",
+     "pending",
+     "approved",
+     "declined"
+    ],
+    "title": "VerificationStatus",
+    "description": "Where a company's verification stands. A work email on the website's domain is the\nproof; a superadmin then approves or declines it, and only approved shows the badge."
+   },
+   "WaitingInterviewOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "company_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Company Id"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "generation_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Generation Id"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "company_id",
+     "title",
+     "generation_id",
+     "created_at"
+    ],
+    "title": "WaitingInterviewOut"
+   },
+   "WaitingInterviewsOut": {
+    "properties": {
+     "without_candidates": {
+      "items": {
+       "$ref": "#/components/schemas/WaitingInterviewOut"
+      },
+      "type": "array",
+      "title": "Without Candidates"
+     },
+     "being_generated": {
+      "items": {
+       "$ref": "#/components/schemas/WaitingInterviewOut"
+      },
+      "type": "array",
+      "title": "Being Generated"
+     }
+    },
+    "type": "object",
+    "required": [
+     "without_candidates",
+     "being_generated"
+    ],
+    "title": "WaitingInterviewsOut"
+   },
+   "WebsiteIn": {
+    "properties": {
+     "website": {
+      "type": "string",
+      "maxLength": 253,
+      "title": "Website",
+      "default": ""
+     }
+    },
+    "type": "object",
+    "title": "WebsiteIn",
+    "description": "The company's website as typed; empty removes it, and the verification with it."
+   }
+  },
+  "securitySchemes": {
+   "HTTPBearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

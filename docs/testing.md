@@ -56,6 +56,14 @@ Each service's `tests/integration` runs against the running stack's real Postgre
 ./scripts/integration.sh            # or: ./scripts/integration.sh rounds library
 ```
 
+## The assistant's OpenAPI snapshots
+
+The assistant builds its tools from snapshots of the other services' OpenAPI descriptions in `services/assistant/app/openapi/`. After changing a route of companies, billing, library, notifications, ats, api or rounds, refresh them with the stack running and commit the result; CI's stack job runs the script and fails when a snapshot differs.
+
+```bash
+./scripts/assistant-openapi.sh
+```
+
 ## Smoke test
 
 A smoke test against a running stack:

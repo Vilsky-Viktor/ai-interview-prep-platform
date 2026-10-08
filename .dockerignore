@@ -9,6 +9,7 @@
 !services/notifications
 !services/ats
 !services/api
+!services/assistant
 **/.venv
 **/__pycache__
 **/.pytest_cache

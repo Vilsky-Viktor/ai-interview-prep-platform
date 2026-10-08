@@ -15,7 +15,7 @@ Production runs on Google Cloud in `europe-west1`, set up by Terraform in [`infr
 Every app Dockerfile (on Alpine) has a `prod` target, with the code built in and no reload. The API images are built from the repo root, because they include `packages/common`:
 
 ```bash
-docker build --target prod -f services/library/Dockerfile -t prepza-library .   # also generation, rounds, companies, billing, notifications, ats, api
+docker build --target prod -f services/library/Dockerfile -t prepza-library .   # also generation, rounds, companies, billing, notifications, ats, api, assistant
 docker build --target prod -t prepza-frontend \
   --build-arg NEXT_PUBLIC_FIREBASE_API_KEY=... --build-arg NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=... \
   --build-arg NEXT_PUBLIC_FIREBASE_PROJECT_ID=... frontend

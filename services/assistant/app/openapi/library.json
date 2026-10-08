@@ -1,0 +1,5125 @@
+{
+ "paths": {
+  "/me": {
+   "get": {
+    "summary": "Me",
+    "operationId": "me_me_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MeOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   },
+   "delete": {
+    "summary": "Delete Me",
+    "description": "Deletes the account and everything about it. A company the user alone owns goes too.",
+    "operationId": "delete_me_me_delete",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/me/settings": {
+   "put": {
+    "summary": "Update Settings",
+    "description": "Takes effect once the frontend refreshes the user's ID token.",
+    "operationId": "update_settings_me_settings_put",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SettingsIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/me/email-preferences": {
+   "get": {
+    "summary": "Get Email Preferences",
+    "operationId": "get_email_preferences_me_email_preferences_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EmailPreferencesOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   },
+   "put": {
+    "summary": "Update Email Preferences",
+    "description": "Changes some settings; each change is logged as consent given or withdrawn.",
+    "operationId": "update_email_preferences_me_email_preferences_put",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/EmailPreferencesIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EmailPreferencesOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/me/export": {
+   "get": {
+    "summary": "Export Me",
+    "description": "Everything prepza holds about the user, as one JSON file to download.",
+    "operationId": "export_me_me_export_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Export Me Me Export Get"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/superadmin/templates": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Templates",
+    "operationId": "list_templates_superadmin_templates_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "maxLength": 70,
+       "default": "",
+       "title": "Q"
+      }
+     },
+     {
+      "name": "level",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "basic",
+          "medium",
+          "hard"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Level"
+      }
+     },
+     {
+      "name": "language",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "array",
+         "items": {
+          "enum": [
+           "en",
+           "ru",
+           "uk",
+           "es",
+           "pt",
+           "de",
+           "fr",
+           "it",
+           "pl",
+           "nl",
+           "tr",
+           "ar",
+           "he",
+           "fa",
+           "ja",
+           "zh",
+           "ko",
+           "hi",
+           "id",
+           "th",
+           "vi",
+           "fil",
+           "et"
+          ],
+          "type": "string"
+         }
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Language"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/TemplateSummary"
+         },
+         "title": "Response List Templates Superadmin Templates Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/templates/{template_id}": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Template Detail",
+    "operationId": "get_template_detail_superadmin_templates__template_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/TemplateOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Delete Template",
+    "operationId": "delete_template_superadmin_templates__template_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/templates/{template_id}/title": {
+   "patch": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Rename Template",
+    "operationId": "rename_template_superadmin_templates__template_id__title_patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TitleIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/templates/{template_id}/topics/{topic_id}/questions": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Topic Questions",
+    "description": "A topic's questions with their options and feedback counts.",
+    "operationId": "list_topic_questions_superadmin_templates__template_id__topics__topic_id__questions_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     },
+     {
+      "name": "topic_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Topic Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/QuestionText"
+         },
+         "title": "Response List Topic Questions Superadmin Templates  Template Id  Topics  Topic Id  Questions Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/templates/{template_id}/questions/{question_id}/reports": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Question Reports",
+    "operationId": "list_question_reports_superadmin_templates__template_id__questions__question_id__reports_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     },
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ReportOut"
+         },
+         "title": "Response List Question Reports Superadmin Templates  Template Id  Questions  Question Id  Reports Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/templates/{template_id}/questions/{question_id}/wrong": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Mark Wrong",
+    "operationId": "mark_wrong_superadmin_templates__template_id__questions__question_id__wrong_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     },
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/emails/lookup": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Look Up",
+    "description": "The account signed in with the address, whatever its case, with its email settings.",
+    "operationId": "look_up_superadmin_emails_lookup_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EmailLookupOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/superadmin/emails/{user_id}/preferences": {
+   "put": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Change Preferences",
+    "description": "Changes some of the user's settings, each change logged with the admin source and the\nsuperadmin's id. Safe to repeat: a setting already as asked logs nothing.",
+    "operationId": "change_preferences_superadmin_emails__user_id__preferences_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AdminEmailChangesIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EmailPreferencesOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/news": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List News",
+    "operationId": "list_news_superadmin_news_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/AdminNewsOut"
+         },
+         "title": "Response List News Superadmin News Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Create News",
+    "operationId": "create_news_superadmin_news_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NewsIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AdminNewsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/news/{news_id}": {
+   "put": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Update News",
+    "description": "A changed title or text is translated again; a new date alone keeps the translations.",
+    "operationId": "update_news_superadmin_news__news_id__put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "news_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "News Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NewsIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AdminNewsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Delete News",
+    "operationId": "delete_news_superadmin_news__news_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "news_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "News Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/quality/flagged": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Flagged",
+    "operationId": "list_flagged_superadmin_quality_flagged_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/FlaggedQuestionOut"
+         },
+         "title": "Response List Flagged Superadmin Quality Flagged Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/quality/replaced": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Replaced",
+    "operationId": "list_replaced_superadmin_quality_replaced_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ReplacedQuestionOut"
+         },
+         "title": "Response List Replaced Superadmin Quality Replaced Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/quality/{question_id}/fix": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Fix Now",
+    "description": "Sends the question to the verifier at once; it fixes or replaces it in the background.",
+    "operationId": "fix_now_superadmin_quality__question_id__fix_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "202": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/quality/{question_id}/dismiss": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Dismiss",
+    "description": "The flag is wrong: the question stays, and isn't flagged again until it changes.",
+    "operationId": "dismiss_superadmin_quality__question_id__dismiss_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/quality/{question_id}/reports": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Reports",
+    "description": "A flagged question's reports, newest first.",
+    "operationId": "list_reports_superadmin_quality__question_id__reports_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ReportOut"
+         },
+         "title": "Response List Reports Superadmin Quality  Question Id  Reports Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/quality/revisions/{revision_id}/reports": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Revision Reports",
+    "description": "The reports a replaced question had, as kept with its old content, newest first.",
+    "operationId": "list_revision_reports_superadmin_quality_revisions__revision_id__reports_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "revision_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Revision Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ReportOut"
+         },
+         "title": "Response List Revision Reports Superadmin Quality Revisions  Revision Id  Reports Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/templates/filters": {
+   "get": {
+    "tags": [
+     "templates"
+    ],
+    "summary": "Template Filters",
+    "operationId": "template_filters_templates_filters_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/TemplateFiltersOut"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/templates": {
+   "get": {
+    "tags": [
+     "templates"
+    ],
+    "summary": "List Templates",
+    "operationId": "list_templates_templates_get",
+    "parameters": [
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "maxLength": 70,
+       "default": "",
+       "title": "Q"
+      }
+     },
+     {
+      "name": "level",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "basic",
+          "medium",
+          "hard"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Level"
+      }
+     },
+     {
+      "name": "language",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "array",
+         "items": {
+          "enum": [
+           "en",
+           "ru",
+           "uk",
+           "es",
+           "pt",
+           "de",
+           "fr",
+           "it",
+           "pl",
+           "nl",
+           "tr",
+           "ar",
+           "he",
+           "fa",
+           "ja",
+           "zh",
+           "ko",
+           "hi",
+           "id",
+           "th",
+           "vi",
+           "fil",
+           "et"
+          ],
+          "type": "string"
+         }
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Language"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/TemplateSummary"
+         },
+         "title": "Response List Templates Templates Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/templates/copyable": {
+   "get": {
+    "tags": [
+     "templates"
+    ],
+    "summary": "List Copyable Templates",
+    "description": "The templates a company can start a test from: only those it can copy, so using one never\nfails. Practice lists every template.",
+    "operationId": "list_copyable_templates_templates_copyable_get",
+    "parameters": [
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "maxLength": 70,
+       "default": "",
+       "title": "Q"
+      }
+     },
+     {
+      "name": "level",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "basic",
+          "medium",
+          "hard"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Level"
+      }
+     },
+     {
+      "name": "language",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "array",
+         "items": {
+          "enum": [
+           "en",
+           "ru",
+           "uk",
+           "es",
+           "pt",
+           "de",
+           "fr",
+           "it",
+           "pl",
+           "nl",
+           "tr",
+           "ar",
+           "he",
+           "fa",
+           "ja",
+           "zh",
+           "ko",
+           "hi",
+           "id",
+           "th",
+           "vi",
+           "fil",
+           "et"
+          ],
+          "type": "string"
+         }
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Language"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/TemplateSummary"
+         },
+         "title": "Response List Copyable Templates Templates Copyable Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/templates/{key}": {
+   "get": {
+    "tags": [
+     "templates"
+    ],
+    "summary": "Get Template",
+    "description": "A template's topics and subtopics, by its id or slug, to review before using it.",
+    "operationId": "get_template_templates__key__get",
+    "parameters": [
+     {
+      "name": "key",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Key"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/TemplateOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/templates/{key}/sample": {
+   "get": {
+    "tags": [
+     "templates"
+    ],
+    "summary": "Sample Questions",
+    "description": "A few of the template's revealed questions, with answers, spread across its topics, for\nits practice page. Private and retiring questions are never shown.",
+    "operationId": "sample_questions_templates__key__sample_get",
+    "parameters": [
+     {
+      "name": "key",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Key"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/SampleQuestionOut"
+         },
+         "title": "Response Sample Questions Templates  Key  Sample Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/news": {
+   "get": {
+    "tags": [
+     "news"
+    ],
+    "summary": "List News",
+    "operationId": "list_news_news_get",
+    "parameters": [
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/NewsOut"
+         },
+         "title": "Response List News News Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/interviews": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Create Interview",
+    "description": "A retried save from the same generation returns the set it already made.",
+    "operationId": "create_interview_internal_interviews_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PreparationIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CreatedOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/templates": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Create Template",
+    "description": "A retried save from the same generation returns the template it already made.",
+    "operationId": "create_template_internal_templates_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PreparationIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CreatedOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/templates/{template_id}/copy": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Copy Template",
+    "description": "For companies: a company's own test made from a template, with no generation.",
+    "operationId": "copy_template_internal_templates__template_id__copy_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TemplateCopyIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/TemplateCopyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/interviews/{set_id}": {
+   "delete": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Delete Interview",
+    "description": "Deletes an interview set; safe to repeat.",
+    "operationId": "delete_interview_internal_interviews__set_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "set_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Set Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/sets/{set_id}/title": {
+   "patch": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Rename Set",
+    "operationId": "rename_set_internal_sets__set_id__title_patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "set_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Set Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TitleIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/sets/{set_id}": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get Set",
+    "operationId": "get_set_internal_sets__set_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "set_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Set Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SetOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/sets/{set_id}/content": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get Set Content",
+    "operationId": "get_set_content_internal_sets__set_id__content_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "set_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Set Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SetContent"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/sets/{set_id}/topics/{topic_id}/questions": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "List Topic Questions",
+    "description": "One topic's questions in a set, with their options and feedback counts.",
+    "operationId": "list_topic_questions_internal_sets__set_id__topics__topic_id__questions_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "set_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Set Id"
+      }
+     },
+     {
+      "name": "topic_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Topic Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/QuestionText"
+         },
+         "title": "Response List Topic Questions Internal Sets  Set Id  Topics  Topic Id  Questions Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/sets/{set_id}/questions/{question_id}/reports": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "List Question Reports",
+    "operationId": "list_question_reports_internal_sets__set_id__questions__question_id__reports_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "set_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Set Id"
+      }
+     },
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ReportOut"
+         },
+         "title": "Response List Question Reports Internal Sets  Set Id  Questions  Question Id  Reports Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/questions/{question_id}/context": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get Question Context",
+    "operationId": "get_question_context_internal_questions__question_id__context_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/QuestionContext"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/questions/{question_id}": {
+   "put": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Replace Question",
+    "operationId": "replace_question_internal_questions__question_id__put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/QuestionReplace"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}/email-preferences": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get Email Preferences",
+    "description": "For the services that send emails: what the user wants beyond service emails.",
+    "operationId": "get_email_preferences_internal_users__user_id__email_preferences_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EmailPreferencesOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}/unsubscribe": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Unsubscribe",
+    "description": "Notifications, for an email's unsubscribe link (checked there): turns the settings off,\nlogged as an unsubscribe. Safe to repeat: a setting already off logs nothing.",
+    "operationId": "unsubscribe_internal_users__user_id__unsubscribe_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UnsubscribeIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EmailPreferencesOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/email-recipients": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Email Recipients",
+    "description": "Notifications, for its emails to many users at once (the activity digest, reminders): each\nuser's address, interface language and preferences; users who are gone are left out.",
+    "operationId": "email_recipients_internal_users_email_recipients_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RecipientsIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RecipientsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/schedules/outbox": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Flush Outbox",
+    "description": "Every minute, from Cloud Scheduler: publishes events that weren't published right after\ntheir change.",
+    "operationId": "flush_outbox_internal_schedules_outbox_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/schedules/bank": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Move Bank Stages",
+    "description": "Daily, from Cloud Scheduler: bank questions move one way, private to retiring to\nrevealed (constants/sets.py Stage). The same daily run sends flags the verifier hasn't acted\non to it again, and forgets old notes of processed events.",
+    "operationId": "move_bank_stages_internal_schedules_bank_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/events": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Receive Event",
+    "description": "Pub/Sub pushes every event here. A failure answers with an error, so Pub/Sub retries it,\nand moves it to the dead-letter topic after the subscription's maximum attempts.",
+    "operationId": "receive_event_internal_events_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PushBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/questions/{question_id}/rating": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get Rating",
+    "description": "For callers that already checked the user may see this question, e.g. a candidate.",
+    "operationId": "get_rating_internal_questions__question_id__rating_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     },
+     {
+      "name": "user_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/QuestionRatingOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Rate",
+    "operationId": "rate_internal_questions__question_id__rating_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/InternalRatingIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/questions/{question_id}/reports/mine": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "My Report",
+    "operationId": "my_report_internal_questions__question_id__reports_mine_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     },
+     {
+      "name": "user_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MyReportOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/questions/{question_id}/reports": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Report",
+    "description": "One report per user and question, whatever its revision.",
+    "operationId": "report_internal_questions__question_id__reports_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/InternalReportIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/news/{news_id}": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get News Source",
+    "operationId": "get_news_source_internal_news__news_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "news_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "News Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NewsSourceOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/news/{news_id}/translations": {
+   "put": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Save News Translations",
+    "description": "Safe to repeat; translations of an older version of the post, or of a deleted one, are\ndropped.",
+    "operationId": "save_news_translations_internal_news__news_id__translations_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "news_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "News Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NewsTranslationsIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/templates/{template_id}/practice": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Practice Content",
+    "description": "The template's revealed questions, with answers, by topic; topics without any are left\nout. Rounds picks each practice round's questions from them.",
+    "operationId": "practice_content_internal_templates__template_id__practice_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SetContent"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/questions/{question_id}/quality": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get Quality",
+    "operationId": "get_quality_internal_questions__question_id__quality_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/QuestionQuality"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/questions/{question_id}/keep": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Keep",
+    "description": "The verifier found nothing wrong: serve the question again and stop flagging it.",
+    "operationId": "keep_internal_questions__question_id__keep_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/questions/{question_id}/wrong": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Mark Wrong",
+    "description": "For companies, once it has checked the question is in the company's test.",
+    "operationId": "mark_wrong_internal_questions__question_id__wrong_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/reuse": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Find Reusable",
+    "description": "Proven private bank questions on a similar topic, for a new generation.",
+    "operationId": "find_reusable_internal_reuse_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReuseIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/ReusedQuestion"
+         },
+         "type": "array",
+         "title": "Response Find Reusable Internal Reuse Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/embeddings/missing": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "List Missing Embeddings",
+    "description": "Template topics without an embedding, for generation's embed_templates job.",
+    "operationId": "list_missing_embeddings_internal_embeddings_missing_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/TopicToEmbed"
+         },
+         "title": "Response List Missing Embeddings Internal Embeddings Missing Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/embeddings": {
+   "put": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Save Embeddings",
+    "operationId": "save_embeddings_internal_embeddings_put",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "items": {
+         "$ref": "#/components/schemas/TopicEmbedding"
+        },
+        "type": "array",
+        "title": "Body"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/health": {
+   "get": {
+    "summary": "Health",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Health Health Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/ready": {
+   "get": {
+    "summary": "Ready",
+    "description": "Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis\nisn't checked: an outage there shouldn't stop the service from starting.",
+    "operationId": "ready_ready_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Ready Ready Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "AdminEmailChangesIn": {
+    "properties": {
+     "changes": {
+      "additionalProperties": {
+       "type": "boolean"
+      },
+      "propertyNames": {
+       "$ref": "#/components/schemas/EmailSetting"
+      },
+      "type": "object",
+      "minProperties": 1,
+      "title": "Changes"
+     }
+    },
+    "type": "object",
+    "required": [
+     "changes"
+    ],
+    "title": "AdminEmailChangesIn",
+    "description": "A superadmin's changes to a user's settings; the rest stay as they are."
+   },
+   "AdminNewsOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "published_on": {
+      "type": "string",
+      "format": "date",
+      "title": "Published On"
+     },
+     "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Updated At"
+     },
+     "translated": {
+      "type": "boolean",
+      "title": "Translated"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "text",
+     "published_on",
+     "updated_at",
+     "translated"
+    ],
+    "title": "AdminNewsOut"
+   },
+   "CreatedOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id"
+    ],
+    "title": "CreatedOut"
+   },
+   "EmailAccountOut": {
+    "properties": {
+     "user_id": {
+      "type": "string",
+      "title": "User Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "preferences": {
+      "$ref": "#/components/schemas/EmailPreferencesOut"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_id",
+     "email",
+     "preferences"
+    ],
+    "title": "EmailAccountOut"
+   },
+   "EmailLookupOut": {
+    "properties": {
+     "account": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/EmailAccountOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "type": "object",
+    "required": [
+     "account"
+    ],
+    "title": "EmailLookupOut",
+    "description": "The account with the address a superadmin looked up, or none."
+   },
+   "EmailPreferencesIn": {
+    "properties": {
+     "changes": {
+      "additionalProperties": {
+       "type": "boolean"
+      },
+      "propertyNames": {
+       "$ref": "#/components/schemas/EmailSetting"
+      },
+      "type": "object",
+      "minProperties": 1,
+      "title": "Changes"
+     },
+     "source": {
+      "type": "string",
+      "enum": [
+       "sign_in",
+       "settings"
+      ],
+      "title": "Source"
+     }
+    },
+    "type": "object",
+    "required": [
+     "changes",
+     "source"
+    ],
+    "title": "EmailPreferencesIn",
+    "description": "Only the settings to change; the rest stay as they are."
+   },
+   "EmailPreferencesOut": {
+    "properties": {
+     "candidate_finished": {
+      "type": "boolean",
+      "title": "Candidate Finished"
+     },
+     "invite_undelivered": {
+      "type": "boolean",
+      "title": "Invite Undelivered"
+     },
+     "ats_not_invited": {
+      "type": "boolean",
+      "title": "Ats Not Invited"
+     },
+     "interview_ready": {
+      "type": "boolean",
+      "title": "Interview Ready"
+     },
+     "reminders": {
+      "type": "boolean",
+      "title": "Reminders"
+     },
+     "updates": {
+      "type": "boolean",
+      "title": "Updates"
+     },
+     "promotions": {
+      "type": "boolean",
+      "title": "Promotions"
+     }
+    },
+    "type": "object",
+    "required": [
+     "candidate_finished",
+     "invite_undelivered",
+     "ats_not_invited",
+     "interview_ready",
+     "reminders",
+     "updates",
+     "promotions"
+    ],
+    "title": "EmailPreferencesOut"
+   },
+   "EmailSetting": {
+    "type": "string",
+    "enum": [
+     "candidate_finished",
+     "invite_undelivered",
+     "ats_not_invited",
+     "interview_ready",
+     "reminders",
+     "updates",
+     "promotions"
+    ],
+    "title": "EmailSetting",
+    "description": "What a user may get by email beyond service emails, which always go out. The activity\ndigest's kinds are notification kinds."
+   },
+   "FlaggedQuestionOut": {
+    "properties": {
+     "question_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Question Id"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/OptionIn"
+      },
+      "type": "array",
+      "title": "Options"
+     },
+     "flag": {
+      "type": "string",
+      "title": "Flag"
+     },
+     "actionable": {
+      "type": "boolean",
+      "title": "Actionable"
+     },
+     "answers": {
+      "type": "integer",
+      "title": "Answers"
+     },
+     "correct": {
+      "type": "integer",
+      "title": "Correct"
+     },
+     "reports": {
+      "type": "integer",
+      "title": "Reports"
+     },
+     "set_title": {
+      "type": "string",
+      "title": "Set Title"
+     },
+     "set_kind": {
+      "type": "string",
+      "title": "Set Kind"
+     },
+     "at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "question_id",
+     "text",
+     "options",
+     "flag",
+     "actionable",
+     "answers",
+     "correct",
+     "reports",
+     "set_title",
+     "set_kind",
+     "at"
+    ],
+    "title": "FlaggedQuestionOut",
+    "description": "A question flagged now, for the admin zone's quality tab."
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "InternalRatingIn": {
+    "properties": {
+     "value": {
+      "type": "integer",
+      "enum": [
+       -1,
+       1
+      ],
+      "title": "Value"
+     },
+     "user_id": {
+      "type": "string",
+      "title": "User Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "value",
+     "user_id"
+    ],
+    "title": "InternalRatingIn"
+   },
+   "InternalReportIn": {
+    "properties": {
+     "reason": {
+      "$ref": "#/components/schemas/ReportReason"
+     },
+     "comment": {
+      "type": "string",
+      "maxLength": 1000,
+      "title": "Comment",
+      "default": ""
+     },
+     "user_id": {
+      "type": "string",
+      "title": "User Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "reason",
+     "user_id"
+    ],
+    "title": "InternalReportIn"
+   },
+   "MeOut": {
+    "properties": {
+     "uid": {
+      "type": "string",
+      "title": "Uid"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "email_verified": {
+      "type": "boolean",
+      "title": "Email Verified"
+     },
+     "name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name"
+     },
+     "language": {
+      "type": "string",
+      "enum": [
+       "en",
+       "ru",
+       "uk",
+       "es",
+       "pt",
+       "de",
+       "fr",
+       "it",
+       "pl",
+       "nl",
+       "tr",
+       "ar",
+       "he",
+       "fa",
+       "ja",
+       "zh",
+       "ko",
+       "hi",
+       "id",
+       "th",
+       "vi",
+       "fil",
+       "et"
+      ],
+      "title": "Language",
+      "default": "en"
+     },
+     "is_superadmin": {
+      "type": "boolean",
+      "title": "Is Superadmin"
+     }
+    },
+    "type": "object",
+    "required": [
+     "uid",
+     "email",
+     "email_verified",
+     "is_superadmin"
+    ],
+    "title": "MeOut",
+    "description": "The signed-in user, and whether they may open the superadmin pages."
+   },
+   "MyReportOut": {
+    "properties": {
+     "reported": {
+      "type": "boolean",
+      "title": "Reported"
+     }
+    },
+    "type": "object",
+    "required": [
+     "reported"
+    ],
+    "title": "MyReportOut"
+   },
+   "NewsIn": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Title"
+     },
+     "text": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Text"
+     },
+     "published_on": {
+      "type": "string",
+      "format": "date",
+      "title": "Published On"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title",
+     "text",
+     "published_on"
+    ],
+    "title": "NewsIn",
+    "description": "A post as a superadmin writes it, in English."
+   },
+   "NewsOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "published_on": {
+      "type": "string",
+      "format": "date",
+      "title": "Published On"
+     },
+     "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Updated At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "text",
+     "published_on",
+     "updated_at"
+    ],
+    "title": "NewsOut",
+    "description": "A post as the news page shows it, in the reader's language when it's translated."
+   },
+   "NewsSourceOut": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "missing": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Missing"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title",
+     "text",
+     "missing"
+    ],
+    "title": "NewsSourceOut",
+    "description": "A post to translate (generation): its English text and the languages it lacks."
+   },
+   "NewsTranslationIn": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Title"
+     },
+     "text": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Text"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title",
+     "text"
+    ],
+    "title": "NewsTranslationIn"
+   },
+   "NewsTranslationsIn": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "translations": {
+      "additionalProperties": {
+       "$ref": "#/components/schemas/NewsTranslationIn"
+      },
+      "propertyNames": {
+       "enum": [
+        "en",
+        "ru",
+        "uk",
+        "es",
+        "pt",
+        "de",
+        "fr",
+        "it",
+        "pl",
+        "nl",
+        "tr",
+        "ar",
+        "he",
+        "fa",
+        "ja",
+        "zh",
+        "ko",
+        "hi",
+        "id",
+        "th",
+        "vi",
+        "fil",
+        "et"
+       ]
+      },
+      "type": "object",
+      "title": "Translations"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title",
+     "text",
+     "translations"
+    ],
+    "title": "NewsTranslationsIn",
+    "description": "Translations of the post's English `title` and `text`: saved only while the post still\nreads so, since an edit made during translation starts a new one."
+   },
+   "OptionIn": {
+    "properties": {
+     "answer": {
+      "type": "string",
+      "title": "Answer"
+     },
+     "correct": {
+      "type": "boolean",
+      "title": "Correct"
+     }
+    },
+    "type": "object",
+    "required": [
+     "answer",
+     "correct"
+    ],
+    "title": "OptionIn"
+   },
+   "PreparationIn": {
+    "properties": {
+     "generation_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Generation Id"
+     },
+     "owner_uid": {
+      "type": "string",
+      "title": "Owner Uid"
+     },
+     "source_text": {
+      "type": "string",
+      "title": "Source Text"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "level": {
+      "type": "string",
+      "title": "Level"
+     },
+     "requirements": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Requirements"
+     },
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/TopicIn"
+      },
+      "type": "array",
+      "title": "Topics"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language",
+      "default": "en"
+     }
+    },
+    "type": "object",
+    "required": [
+     "generation_id",
+     "owner_uid",
+     "source_text",
+     "title",
+     "level",
+     "requirements",
+     "topics"
+    ],
+    "title": "PreparationIn",
+    "description": "A generated test, as generation saves it in library."
+   },
+   "PushBody": {
+    "properties": {
+     "message": {
+      "$ref": "#/components/schemas/PushMessage"
+     },
+     "subscription": {
+      "type": "string",
+      "title": "Subscription"
+     }
+    },
+    "type": "object",
+    "required": [
+     "message",
+     "subscription"
+    ],
+    "title": "PushBody",
+    "description": "What Pub/Sub sends to a push endpoint."
+   },
+   "PushMessage": {
+    "properties": {
+     "data": {
+      "type": "string",
+      "title": "Data",
+      "default": ""
+     },
+     "attributes": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Attributes",
+      "default": {}
+     },
+     "messageId": {
+      "type": "string",
+      "title": "Messageid"
+     }
+    },
+    "type": "object",
+    "required": [
+     "messageId"
+    ],
+    "title": "PushMessage"
+   },
+   "QuestionContext": {
+    "properties": {
+     "set_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Set Id"
+     },
+     "kind": {
+      "type": "string",
+      "title": "Kind"
+     },
+     "owner_id": {
+      "type": "string",
+      "title": "Owner Id"
+     },
+     "level": {
+      "type": "string",
+      "title": "Level"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
+     "topic": {
+      "type": "string",
+      "title": "Topic"
+     },
+     "subtopics": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Subtopics"
+     },
+     "existing": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Existing"
+     }
+    },
+    "type": "object",
+    "required": [
+     "set_id",
+     "kind",
+     "owner_id",
+     "level",
+     "language",
+     "topic",
+     "subtopics",
+     "existing"
+    ],
+    "title": "QuestionContext",
+    "description": "What the generator needs to replace a question without repeating its topic."
+   },
+   "QuestionIn": {
+    "properties": {
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/OptionIn"
+      },
+      "type": "array",
+      "title": "Options"
+     },
+     "source_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Source Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "text",
+     "options"
+    ],
+    "title": "QuestionIn"
+   },
+   "QuestionOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/OptionIn"
+      },
+      "type": "array",
+      "title": "Options"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "text",
+     "options"
+    ],
+    "title": "QuestionOut"
+   },
+   "QuestionQuality": {
+    "properties": {
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/OptionIn"
+      },
+      "type": "array",
+      "title": "Options"
+     },
+     "answers": {
+      "type": "integer",
+      "title": "Answers"
+     },
+     "option_picks": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "type": "object",
+      "title": "Option Picks"
+     },
+     "reports": {
+      "items": {
+       "$ref": "#/components/schemas/ReportNote"
+      },
+      "type": "array",
+      "title": "Reports"
+     },
+     "flag": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Flag"
+     }
+    },
+    "type": "object",
+    "required": [
+     "text",
+     "options",
+     "answers",
+     "option_picks",
+     "reports"
+    ],
+    "title": "QuestionQuality",
+    "description": "What the verifier looks at: the question, how it's answered and what users reported."
+   },
+   "QuestionRatingOut": {
+    "properties": {
+     "value": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "enum": [
+         -1,
+         1
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Value"
+     }
+    },
+    "type": "object",
+    "title": "QuestionRatingOut"
+   },
+   "QuestionReplace": {
+    "properties": {
+     "text": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/OptionIn"
+      },
+      "type": "array",
+      "title": "Options"
+     }
+    },
+    "type": "object",
+    "required": [
+     "text",
+     "options"
+    ],
+    "title": "QuestionReplace"
+   },
+   "QuestionText": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/OptionIn"
+      },
+      "type": "array",
+      "title": "Options"
+     },
+     "likes": {
+      "type": "integer",
+      "title": "Likes",
+      "default": 0
+     },
+     "dislikes": {
+      "type": "integer",
+      "title": "Dislikes",
+      "default": 0
+     },
+     "reports": {
+      "type": "integer",
+      "title": "Reports",
+      "default": 0
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "text",
+     "options"
+    ],
+    "title": "QuestionText",
+    "description": "A question as its owner manages it: text, answer options and feedback counts."
+   },
+   "RecipientOut": {
+    "properties": {
+     "user_id": {
+      "type": "string",
+      "title": "User Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
+     "preferences": {
+      "$ref": "#/components/schemas/EmailPreferencesOut"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_id",
+     "email",
+     "language",
+     "preferences"
+    ],
+    "title": "RecipientOut"
+   },
+   "RecipientsIn": {
+    "properties": {
+     "user_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "maxItems": 1000,
+      "title": "User Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_ids"
+    ],
+    "title": "RecipientsIn"
+   },
+   "RecipientsOut": {
+    "properties": {
+     "recipients": {
+      "items": {
+       "$ref": "#/components/schemas/RecipientOut"
+      },
+      "type": "array",
+      "title": "Recipients"
+     }
+    },
+    "type": "object",
+    "required": [
+     "recipients"
+    ],
+    "title": "RecipientsOut"
+   },
+   "ReplacedQuestionOut": {
+    "properties": {
+     "revision_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Revision Id"
+     },
+     "question_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Question Id"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/OptionIn"
+      },
+      "type": "array",
+      "title": "Options"
+     },
+     "answers": {
+      "type": "integer",
+      "title": "Answers"
+     },
+     "correct": {
+      "type": "integer",
+      "title": "Correct"
+     },
+     "reports": {
+      "type": "integer",
+      "title": "Reports"
+     },
+     "set_title": {
+      "type": "string",
+      "title": "Set Title"
+     },
+     "set_kind": {
+      "type": "string",
+      "title": "Set Kind"
+     },
+     "at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "At"
+     },
+     "new_text": {
+      "type": "string",
+      "title": "New Text"
+     },
+     "new_options": {
+      "items": {
+       "$ref": "#/components/schemas/OptionIn"
+      },
+      "type": "array",
+      "title": "New Options"
+     }
+    },
+    "type": "object",
+    "required": [
+     "revision_id",
+     "question_id",
+     "text",
+     "options",
+     "answers",
+     "correct",
+     "reports",
+     "set_title",
+     "set_kind",
+     "at",
+     "new_text",
+     "new_options"
+    ],
+    "title": "ReplacedQuestionOut",
+    "description": "A question's old content, kept when it was replaced."
+   },
+   "ReportNote": {
+    "properties": {
+     "reason": {
+      "type": "string",
+      "title": "Reason"
+     },
+     "comment": {
+      "type": "string",
+      "title": "Comment"
+     }
+    },
+    "type": "object",
+    "required": [
+     "reason",
+     "comment"
+    ],
+    "title": "ReportNote"
+   },
+   "ReportOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "reason": {
+      "type": "string",
+      "title": "Reason"
+     },
+     "comment": {
+      "type": "string",
+      "title": "Comment"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "reason",
+     "comment",
+     "created_at"
+    ],
+    "title": "ReportOut",
+    "description": "A report without the reporter's identity."
+   },
+   "ReportReason": {
+    "type": "string",
+    "enum": [
+     "wrong_answer",
+     "unclear",
+     "off_topic",
+     "other"
+    ],
+    "title": "ReportReason"
+   },
+   "ReuseIn": {
+    "properties": {
+     "embedding": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array",
+      "title": "Embedding"
+     },
+     "level": {
+      "type": "string",
+      "title": "Level"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language",
+      "default": "en"
+     },
+     "count": {
+      "type": "integer",
+      "maximum": 100.0,
+      "minimum": 1.0,
+      "title": "Count"
+     }
+    },
+    "type": "object",
+    "required": [
+     "embedding",
+     "level",
+     "count"
+    ],
+    "title": "ReuseIn"
+   },
+   "ReusedQuestion": {
+    "properties": {
+     "source_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Source Id"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/OptionIn"
+      },
+      "type": "array",
+      "title": "Options"
+     }
+    },
+    "type": "object",
+    "required": [
+     "source_id",
+     "text",
+     "options"
+    ],
+    "title": "ReusedQuestion"
+   },
+   "SampleQuestionOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "topic": {
+      "type": "string",
+      "title": "Topic"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/OptionIn"
+      },
+      "type": "array",
+      "title": "Options"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "topic",
+     "text",
+     "options"
+    ],
+    "title": "SampleQuestionOut",
+    "description": "A revealed question of a template, with its answer, shown on its public practice page."
+   },
+   "SetContent": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/SetTopicOut"
+      },
+      "type": "array",
+      "title": "Topics"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "topics"
+    ],
+    "title": "SetContent",
+    "description": "Internal: every question of an interview, with answers."
+   },
+   "SetOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "kind": {
+      "type": "string",
+      "title": "Kind"
+     },
+     "owner_id": {
+      "type": "string",
+      "title": "Owner Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "level": {
+      "type": "string",
+      "title": "Level"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/TopicOut"
+      },
+      "type": "array",
+      "title": "Topics"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "kind",
+     "owner_id",
+     "title",
+     "level",
+     "language",
+     "topics"
+    ],
+    "title": "SetOut"
+   },
+   "SetTopicOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "questions": {
+      "items": {
+       "$ref": "#/components/schemas/QuestionOut"
+      },
+      "type": "array",
+      "title": "Questions"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "questions"
+    ],
+    "title": "SetTopicOut"
+   },
+   "SettingsIn": {
+    "properties": {
+     "language": {
+      "type": "string",
+      "enum": [
+       "en",
+       "ru",
+       "uk",
+       "es",
+       "pt",
+       "de",
+       "fr",
+       "it",
+       "pl",
+       "nl",
+       "tr",
+       "ar",
+       "he",
+       "fa",
+       "ja",
+       "zh",
+       "ko",
+       "hi",
+       "id",
+       "th",
+       "vi",
+       "fil",
+       "et"
+      ],
+      "title": "Language"
+     }
+    },
+    "type": "object",
+    "required": [
+     "language"
+    ],
+    "title": "SettingsIn"
+   },
+   "TemplateCopyIn": {
+    "properties": {
+     "company_id": {
+      "type": "string",
+      "title": "Company Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "company_id"
+    ],
+    "title": "TemplateCopyIn"
+   },
+   "TemplateCopyOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "language"
+    ],
+    "title": "TemplateCopyOut",
+    "description": "The company's new test set."
+   },
+   "TemplateFiltersOut": {
+    "properties": {
+     "levels": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Levels"
+     },
+     "languages": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Languages"
+     }
+    },
+    "type": "object",
+    "required": [
+     "levels",
+     "languages"
+    ],
+    "title": "TemplateFiltersOut",
+    "description": "What the template list can be filtered by."
+   },
+   "TemplateOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "slug": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Slug"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "level": {
+      "type": "string",
+      "title": "Level"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
+     "topic_count": {
+      "type": "integer",
+      "title": "Topic Count"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Updated At"
+     },
+     "indexable": {
+      "type": "boolean",
+      "title": "Indexable",
+      "default": false
+     },
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/TopicOut"
+      },
+      "type": "array",
+      "title": "Topics"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "slug",
+     "title",
+     "level",
+     "language",
+     "topic_count",
+     "created_at",
+     "updated_at",
+     "topics"
+    ],
+    "title": "TemplateOut"
+   },
+   "TemplateSummary": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "slug": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Slug"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "level": {
+      "type": "string",
+      "title": "Level"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
+     "topic_count": {
+      "type": "integer",
+      "title": "Topic Count"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Updated At"
+     },
+     "indexable": {
+      "type": "boolean",
+      "title": "Indexable",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "slug",
+     "title",
+     "level",
+     "language",
+     "topic_count",
+     "created_at",
+     "updated_at"
+    ],
+    "title": "TemplateSummary",
+    "description": "A template in the admin's list."
+   },
+   "TitleIn": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "maxLength": 70,
+      "minLength": 1,
+      "title": "Title"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title"
+    ],
+    "title": "TitleIn"
+   },
+   "TopicEmbedding": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "embedding": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array",
+      "title": "Embedding"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "embedding"
+    ],
+    "title": "TopicEmbedding"
+   },
+   "TopicIn": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "subtopics": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Subtopics"
+     },
+     "questions": {
+      "items": {
+       "$ref": "#/components/schemas/QuestionIn"
+      },
+      "type": "array",
+      "title": "Questions"
+     },
+     "embedding": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "number"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Embedding"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title",
+     "subtopics",
+     "questions"
+    ],
+    "title": "TopicIn"
+   },
+   "TopicOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "subtopics": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Subtopics"
+     },
+     "question_count": {
+      "type": "integer",
+      "title": "Question Count"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "subtopics",
+     "question_count"
+    ],
+    "title": "TopicOut"
+   },
+   "TopicToEmbed": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "subtopics": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Subtopics"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "subtopics"
+    ],
+    "title": "TopicToEmbed"
+   },
+   "UnsubscribeIn": {
+    "properties": {
+     "settings": {
+      "items": {
+       "$ref": "#/components/schemas/EmailSetting"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Settings"
+     }
+    },
+    "type": "object",
+    "required": [
+     "settings"
+    ],
+    "title": "UnsubscribeIn",
+    "description": "The settings an unsubscribe link turns off."
+   },
+   "UserEmailIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "title": "Email"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email"
+    ],
+    "title": "UserEmailIn",
+    "description": "An email address sent in the body, so request logs don't record it: the account's, in\nlibrary's calls to delete or export a user's data, or the one a superadmin looks up."
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   }
+  },
+  "securitySchemes": {
+   "HTTPBearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

@@ -1,0 +1,1161 @@
+{
+ "paths": {
+  "/interviews": {
+   "get": {
+    "tags": [
+     "Interviews"
+    ],
+    "summary": "List interviews",
+    "description": "Returns your company's interviews, newest first.",
+    "operationId": "list_interviews_interviews_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Interview"
+         },
+         "title": "Response List Interviews Interviews Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "Your company's keys exceeded 60 requests per minute"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}": {
+   "get": {
+    "tags": [
+     "Interviews"
+    ],
+    "summary": "Get an interview",
+    "description": "Returns one of your company's interviews.",
+    "operationId": "get_interview_interviews__interview_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Interview"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "Your company's keys exceeded 60 requests per minute"
+     },
+     "404": {
+      "description": "The interview or candidate doesn't exist in your company"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/candidates": {
+   "get": {
+    "tags": [
+     "Interviews",
+     "Candidates"
+    ],
+    "summary": "List candidates",
+    "description": "Returns the interview's candidates with their progress and results, newest first.",
+    "operationId": "list_candidates_interviews__interview_id__candidates_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Candidate"
+         },
+         "title": "Response List Candidates Interviews  Interview Id  Candidates Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "Your company's keys exceeded 60 requests per minute"
+     },
+     "404": {
+      "description": "The interview or candidate doesn't exist in your company"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "Interviews",
+     "Candidates"
+    ],
+    "summary": "Invite a candidate",
+    "description": "Emails the candidate an invitation to the interview on behalf of the key's creator and\nreserves credits for them. Inviting an address that was already invited sends the invitation\nagain.",
+    "operationId": "invite_candidate_interviews__interview_id__candidates_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CandidateIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Candidate"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "The key's creator reached their email limits, or the key its rate limit"
+     },
+     "404": {
+      "description": "The interview or candidate doesn't exist in your company"
+     },
+     "402": {
+      "description": "The company doesn't have enough credits"
+     },
+     "409": {
+      "description": "The interview's questions are still being generated"
+     },
+     "503": {
+      "description": "Invitations are temporarily paused"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/candidates/{candidate_id}": {
+   "get": {
+    "tags": [
+     "Interviews",
+     "Candidates"
+    ],
+    "summary": "Get a candidate",
+    "description": "Returns one candidate of the interview with their progress and results.",
+    "operationId": "get_candidate_interviews__interview_id__candidates__candidate_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "candidate_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Candidate Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Candidate"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "Your company's keys exceeded 60 requests per minute"
+     },
+     "404": {
+      "description": "The interview or candidate doesn't exist in your company"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/manage": {
+   "get": {
+    "tags": [
+     "manage"
+    ],
+    "summary": "Get Settings",
+    "description": "Every member sees the keys (never the keys themselves) and web hooks.",
+    "operationId": "get_settings_manage_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiSettingsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/manage/keys": {
+   "post": {
+    "tags": [
+     "manage"
+    ],
+    "summary": "Create Key",
+    "operationId": "create_key_manage_keys_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/KeyIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NewKeyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/manage/keys/{key_id}": {
+   "delete": {
+    "tags": [
+     "manage"
+    ],
+    "summary": "Remove Key",
+    "operationId": "remove_key_manage_keys__key_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "key_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Key Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/manage/webhooks": {
+   "post": {
+    "tags": [
+     "manage"
+    ],
+    "summary": "Create Webhook",
+    "operationId": "create_webhook_manage_webhooks_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/WebhookIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NewWebhookOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/manage/webhooks/{webhook_id}": {
+   "delete": {
+    "tags": [
+     "manage"
+    ],
+    "summary": "Remove Webhook",
+    "operationId": "remove_webhook_manage_webhooks__webhook_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "webhook_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Webhook Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "ApiSettingsOut": {
+    "properties": {
+     "keys": {
+      "items": {
+       "$ref": "#/components/schemas/KeyOut"
+      },
+      "type": "array",
+      "title": "Keys"
+     },
+     "expiries": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Expiries"
+     },
+     "webhooks": {
+      "items": {
+       "$ref": "#/components/schemas/WebhookOut"
+      },
+      "type": "array",
+      "title": "Webhooks"
+     }
+    },
+    "type": "object",
+    "required": [
+     "keys",
+     "expiries",
+     "webhooks"
+    ],
+    "title": "ApiSettingsOut"
+   },
+   "Candidate": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status",
+      "description": "One of invited, undelivered, in_process, finished, expired or deleted"
+     },
+     "progress": {
+      "type": "integer",
+      "title": "Progress",
+      "description": "Percentage of the interview answered"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade",
+      "description": "Final grade in percent; null until the candidate finishes"
+     },
+     "passed": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Passed",
+      "description": "Whether the grade reached the pass mark; null until the candidate finishes. It supports a person's decision: don't reject a candidate automatically on it"
+     },
+     "signals": {
+      "$ref": "#/components/schemas/Signals"
+     },
+     "results_url": {
+      "type": "string",
+      "title": "Results Url",
+      "description": "Link to the candidate's full results in prepza"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At",
+      "description": "When the invitation was first sent"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "email",
+     "status",
+     "progress",
+     "grade",
+     "passed",
+     "signals",
+     "results_url",
+     "created_at"
+    ],
+    "title": "Candidate"
+   },
+   "CandidateIn": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email",
+      "description": "The candidate's email address"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email"
+    ],
+    "title": "CandidateIn"
+   },
+   "FinishedEvent": {
+    "properties": {
+     "interview": {
+      "$ref": "#/components/schemas/Interview"
+     },
+     "candidate": {
+      "$ref": "#/components/schemas/Candidate"
+     }
+    },
+    "type": "object",
+    "required": [
+     "interview",
+     "candidate"
+    ],
+    "title": "FinishedEvent",
+    "description": "The `data` object of a `candidate.finished` or `candidate.rescored` event."
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "Interview": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title",
+      "description": "Null while the interview's questions are being generated"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status",
+      "description": "One of new, in_process or hired"
+     },
+     "ready": {
+      "type": "boolean",
+      "title": "Ready",
+      "description": "Whether the questions are ready and candidates can be invited"
+     },
+     "pass_mark": {
+      "type": "integer",
+      "title": "Pass Mark",
+      "description": "The minimum grade, in percent, a candidate needs to pass"
+     },
+     "candidate_count": {
+      "type": "integer",
+      "title": "Candidate Count"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "status",
+     "ready",
+     "pass_mark",
+     "candidate_count",
+     "created_at"
+    ],
+    "title": "Interview"
+   },
+   "KeyExpiry": {
+    "type": "string",
+    "enum": [
+     "1",
+     "3",
+     "6",
+     "12",
+     "never"
+    ],
+    "title": "KeyExpiry"
+   },
+   "KeyIn": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Name"
+     },
+     "expiry": {
+      "$ref": "#/components/schemas/KeyExpiry"
+     }
+    },
+    "type": "object",
+    "required": [
+     "name",
+     "expiry"
+    ],
+    "title": "KeyIn"
+   },
+   "KeyOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "shown": {
+      "type": "string",
+      "title": "Shown"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "expires_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Expires At"
+     },
+     "expired": {
+      "type": "boolean",
+      "title": "Expired"
+     },
+     "last_used_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Last Used At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "shown",
+     "created_at",
+     "expires_at",
+     "expired",
+     "last_used_at"
+    ],
+    "title": "KeyOut"
+   },
+   "NewKeyOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "shown": {
+      "type": "string",
+      "title": "Shown"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "expires_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Expires At"
+     },
+     "expired": {
+      "type": "boolean",
+      "title": "Expired"
+     },
+     "last_used_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Last Used At"
+     },
+     "key": {
+      "type": "string",
+      "title": "Key"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "shown",
+     "created_at",
+     "expires_at",
+     "expired",
+     "last_used_at",
+     "key"
+    ],
+    "title": "NewKeyOut"
+   },
+   "NewWebhookOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "url": {
+      "type": "string",
+      "title": "Url"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "failing": {
+      "type": "boolean",
+      "title": "Failing"
+     },
+     "secret": {
+      "type": "string",
+      "title": "Secret"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "url",
+     "created_at",
+     "failing",
+     "secret"
+    ],
+    "title": "NewWebhookOut"
+   },
+   "Signals": {
+    "properties": {
+     "tab_leaves": {
+      "type": "integer",
+      "title": "Tab Leaves",
+      "description": "How many times the candidate left the page"
+     },
+     "copies": {
+      "type": "integer",
+      "title": "Copies",
+      "description": "How many times the candidate tried to copy text"
+     },
+     "fast_answers": {
+      "type": "integer",
+      "title": "Fast Answers",
+      "description": "Answers given too quickly to have read the question"
+     }
+    },
+    "type": "object",
+    "required": [
+     "tab_leaves",
+     "copies",
+     "fast_answers"
+    ],
+    "title": "Signals",
+    "description": "Integrity signals recorded while the candidate answered.\n\nThey can have innocent causes; never reject a candidate automatically on them."
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   },
+   "WebhookIn": {
+    "properties": {
+     "url": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Url"
+     }
+    },
+    "type": "object",
+    "required": [
+     "url"
+    ],
+    "title": "WebhookIn"
+   },
+   "WebhookOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "url": {
+      "type": "string",
+      "title": "Url"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "failing": {
+      "type": "boolean",
+      "title": "Failing"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "url",
+     "created_at",
+     "failing"
+    ],
+    "title": "WebhookOut"
+   }
+  },
+  "securitySchemes": {
+   "HTTPBearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

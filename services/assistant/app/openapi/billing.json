@@ -1,0 +1,1304 @@
+{
+ "paths": {
+  "/catalog": {
+   "get": {
+    "tags": [
+     "billing"
+    ],
+    "summary": "Catalog",
+    "operationId": "catalog_catalog_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CatalogOut"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/webhooks/paddle": {
+   "post": {
+    "tags": [
+     "billing"
+    ],
+    "summary": "Paddle Webhook",
+    "description": "Paddle retries until it gets a 2xx, and granting is idempotent, so retries are safe.",
+    "operationId": "paddle_webhook_webhooks_paddle_post",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Paddle Webhook Webhooks Paddle Post"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/candidates/hold": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Hold Candidate",
+    "description": "Set aside on invite. Charged once the interview finishes with at least one answer.",
+    "operationId": "hold_candidate_internal_candidates_hold_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "key",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Key"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/candidates/charge": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Charge Candidate",
+    "operationId": "charge_candidate_internal_candidates_charge_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "key",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Key"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/candidates/release": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Release Candidate",
+    "operationId": "release_candidate_internal_candidates_release_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "key",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Key"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/{company_id}/welcome": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Welcome Company",
+    "description": "The company's wallet. The welcome credits come once per owner's email; a company new\nin that sense can be referred by another, unrelated one.",
+    "operationId": "welcome_company_internal_companies__company_id__welcome_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/WelcomeIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/{company_id}/referral": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Company Referral",
+    "operationId": "company_referral_internal_companies__company_id__referral_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ReferralOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/{company_id}/credits": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Company Credits",
+    "operationId": "company_credits_internal_companies__company_id__credits_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BalanceOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/credits": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Companies Credits",
+    "description": "Several companies' balances at once, for the top-up page.",
+    "operationId": "companies_credits_internal_companies_credits_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/OwnersIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": {
+          "$ref": "#/components/schemas/BalanceOut"
+         },
+         "type": "object",
+         "title": "Response Companies Credits Internal Companies Credits Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/companies/low": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Low Companies",
+    "description": "Notifications, for its reminders: companies running low on credits that no automatic\ntop-up refills.",
+    "operationId": "low_companies_internal_companies_low_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LowCompaniesOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/companies/{company_id}": {
+   "delete": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Delete Company",
+    "operationId": "delete_company_internal_companies__company_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}": {
+   "delete": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Delete User",
+    "description": "The user's purchases for their companies stay for bookkeeping, without their id; any\nautomatic top-up paid with their card goes off.",
+    "operationId": "delete_user_internal_users__user_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}/export": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Export User",
+    "description": "What the user bought for their companies.",
+    "operationId": "export_user_internal_users__user_id__export_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Export User Internal Users  User Id  Export Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/{company_id}/auto-top-up": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Company Auto Top Up",
+    "operationId": "company_auto_top_up_internal_companies__company_id__auto_top_up_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AutoTopUpOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Turn On Company",
+    "operationId": "turn_on_company_internal_companies__company_id__auto_top_up_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "buyer_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Buyer Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AutoTopUpIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AutoTopUpOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Turn Off Company",
+    "description": "With `buyer_id`, off only when that person's card pays for it.",
+    "operationId": "turn_off_company_internal_companies__company_id__auto_top_up_delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "buyer_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Buyer Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/stats": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Stats",
+    "description": "Top-ups, what they paid and the credits spent, all time or in one year or\nmonth, for the stats tab.",
+    "operationId": "get_stats_superadmin_stats_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "period",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^\\d{4}(-(0[1-9]|1[0-2]))?$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Period"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/StatsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/health": {
+   "get": {
+    "summary": "Health",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Health Health Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/ready": {
+   "get": {
+    "summary": "Ready",
+    "description": "Ready only once the database answers; Docker's healthcheck uses this.",
+    "operationId": "ready_ready_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Ready Ready Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "AutoTopUpIn": {
+    "properties": {
+     "product": {
+      "type": "string",
+      "title": "Product"
+     },
+     "threshold": {
+      "type": "integer",
+      "title": "Threshold"
+     }
+    },
+    "type": "object",
+    "required": [
+     "product",
+     "threshold"
+    ],
+    "title": "AutoTopUpIn",
+    "description": "Which top-up to buy, and under which available balance (credits)."
+   },
+   "AutoTopUpOut": {
+    "properties": {
+     "offered": {
+      "type": "boolean",
+      "title": "Offered"
+     },
+     "on": {
+      "type": "boolean",
+      "title": "On"
+     },
+     "waiting": {
+      "type": "boolean",
+      "title": "Waiting"
+     },
+     "product": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Product"
+     },
+     "threshold": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Threshold"
+     },
+     "products": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Products"
+     },
+     "thresholds": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array",
+      "title": "Thresholds"
+     },
+     "checkout": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CheckoutOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "type": "object",
+    "required": [
+     "offered",
+     "on",
+     "waiting",
+     "product",
+     "threshold",
+     "products",
+     "thresholds"
+    ],
+    "title": "AutoTopUpOut",
+    "description": "A wallet's automatic top-up: whether it's offered at all, running, or waiting for its\ncheckout, what it buys and when, and the choices."
+   },
+   "BalanceOut": {
+    "properties": {
+     "balance": {
+      "type": "integer",
+      "title": "Balance"
+     },
+     "reserved": {
+      "type": "integer",
+      "title": "Reserved"
+     },
+     "available": {
+      "type": "integer",
+      "title": "Available"
+     },
+     "low": {
+      "type": "boolean",
+      "title": "Low"
+     }
+    },
+    "type": "object",
+    "required": [
+     "balance",
+     "reserved",
+     "available",
+     "low"
+    ],
+    "title": "BalanceOut"
+   },
+   "CandidatePriceOut": {
+    "properties": {
+     "from_dollars": {
+      "type": "integer",
+      "title": "From Dollars"
+     },
+     "cents": {
+      "type": "integer",
+      "title": "Cents"
+     }
+    },
+    "type": "object",
+    "required": [
+     "from_dollars",
+     "cents"
+    ],
+    "title": "CandidatePriceOut",
+    "description": "A candidate's price when credits are bought in a top-up from this many dollars."
+   },
+   "CatalogOut": {
+    "properties": {
+     "environment": {
+      "type": "string",
+      "title": "Environment"
+     },
+     "client_token": {
+      "type": "string",
+      "title": "Client Token"
+     },
+     "currency": {
+      "type": "string",
+      "title": "Currency"
+     },
+     "candidate_credits": {
+      "type": "integer",
+      "title": "Candidate Credits"
+     },
+     "candidate_prices": {
+      "items": {
+       "$ref": "#/components/schemas/CandidatePriceOut"
+      },
+      "type": "array",
+      "title": "Candidate Prices"
+     },
+     "candidate_cents_min": {
+      "type": "integer",
+      "title": "Candidate Cents Min"
+     },
+     "candidate_cents_max": {
+      "type": "integer",
+      "title": "Candidate Cents Max"
+     },
+     "welcome_company": {
+      "type": "integer",
+      "title": "Welcome Company"
+     },
+     "free_candidates": {
+      "type": "integer",
+      "title": "Free Candidates"
+     },
+     "referral_company": {
+      "type": "integer",
+      "title": "Referral Company"
+     },
+     "products": {
+      "items": {
+       "$ref": "#/components/schemas/TopUpOut"
+      },
+      "type": "array",
+      "title": "Products"
+     }
+    },
+    "type": "object",
+    "required": [
+     "environment",
+     "client_token",
+     "currency",
+     "candidate_credits",
+     "candidate_prices",
+     "candidate_cents_min",
+     "candidate_cents_max",
+     "welcome_company",
+     "free_candidates",
+     "referral_company",
+     "products"
+    ],
+    "title": "CatalogOut",
+    "description": "What the pricing page and Paddle.js need. Prices are decided here, not in the client."
+   },
+   "CheckoutOut": {
+    "properties": {
+     "price_id": {
+      "type": "string",
+      "title": "Price Id"
+     },
+     "custom_data": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Custom Data"
+     }
+    },
+    "type": "object",
+    "required": [
+     "price_id",
+     "custom_data"
+    ],
+    "title": "CheckoutOut",
+    "description": "The Paddle checkout to open: its price and the custom data to send with it."
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "LowCompaniesOut": {
+    "properties": {
+     "companies": {
+      "items": {
+       "$ref": "#/components/schemas/LowCompanyOut"
+      },
+      "type": "array",
+      "title": "Companies"
+     }
+    },
+    "type": "object",
+    "required": [
+     "companies"
+    ],
+    "title": "LowCompaniesOut"
+   },
+   "LowCompanyOut": {
+    "properties": {
+     "company_id": {
+      "type": "string",
+      "title": "Company Id"
+     },
+     "available": {
+      "type": "integer",
+      "title": "Available"
+     }
+    },
+    "type": "object",
+    "required": [
+     "company_id",
+     "available"
+    ],
+    "title": "LowCompanyOut"
+   },
+   "OwnersIn": {
+    "properties": {
+     "owner_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "maxItems": 100,
+      "title": "Owner Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "owner_ids"
+    ],
+    "title": "OwnersIn"
+   },
+   "ReferralOut": {
+    "properties": {
+     "code": {
+      "type": "string",
+      "title": "Code"
+     },
+     "reward": {
+      "type": "integer",
+      "title": "Reward"
+     },
+     "rewarded": {
+      "type": "integer",
+      "title": "Rewarded"
+     },
+     "rewards": {
+      "items": {
+       "$ref": "#/components/schemas/ReferralRewardOut"
+      },
+      "type": "array",
+      "title": "Rewards"
+     }
+    },
+    "type": "object",
+    "required": [
+     "code",
+     "reward",
+     "rewarded",
+     "rewards"
+    ],
+    "title": "ReferralOut",
+    "description": "The owner's referral link code, what it earns, and how many it has earned for."
+   },
+   "ReferralRewardOut": {
+    "properties": {
+     "company_id": {
+      "type": "string",
+      "title": "Company Id"
+     },
+     "rewarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Rewarded At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "company_id",
+     "rewarded_at"
+    ],
+    "title": "ReferralRewardOut",
+    "description": "A company that came through the link and topped up, so both got the reward."
+   },
+   "StatsOut": {
+    "properties": {
+     "counts": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "type": "object",
+      "title": "Counts"
+     },
+     "currency": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Currency"
+     }
+    },
+    "type": "object",
+    "required": [
+     "counts"
+    ],
+    "title": "StatsOut"
+   },
+   "TopUpOut": {
+    "properties": {
+     "key": {
+      "type": "string",
+      "title": "Key"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "price_cents": {
+      "type": "integer",
+      "title": "Price Cents"
+     },
+     "credits": {
+      "type": "integer",
+      "title": "Credits"
+     },
+     "candidates": {
+      "type": "integer",
+      "title": "Candidates"
+     },
+     "candidate_cents": {
+      "type": "integer",
+      "title": "Candidate Cents"
+     },
+     "price_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Price Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "key",
+     "title",
+     "price_cents",
+     "credits",
+     "candidates",
+     "candidate_cents",
+     "price_id"
+    ],
+    "title": "TopUpOut"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   },
+   "WelcomeIn": {
+    "properties": {
+     "owner_email": {
+      "type": "string",
+      "title": "Owner Email"
+     },
+     "referral": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Referral"
+     },
+     "related": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "maxItems": 100,
+      "title": "Related",
+      "default": []
+     }
+    },
+    "type": "object",
+    "required": [
+     "owner_email"
+    ],
+    "title": "WelcomeIn"
+   }
+  },
+  "securitySchemes": {
+   "HTTPBearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

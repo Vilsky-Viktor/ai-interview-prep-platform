@@ -46,7 +46,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PR_BASE: ${{ github.event.pull_request.base.sha }}
         run: |
-          everything="library generation rounds companies billing notifications ats api frontend common"
+          everything="library generation rounds companies billing notifications ats api assistant frontend common"
 
           if [ -n "$PR_BASE" ]; then
             base="$PR_BASE"
@@ -65,7 +65,7 @@ jobs:
             if echo "$files" | grep -qE '^(\.github/workflows/ci\.yml|\.python-version)$'; then
               changed="$everything"
             else
-              for name in library generation rounds companies billing notifications ats api; do
+              for name in library generation rounds companies billing notifications ats api assistant; do
                 if echo "$files" | grep -qE "^(services/$name|packages/common)/"; then
                   changed="$changed $name"
                 fi
@@ -121,6 +121,7 @@ jobs:
           - { name: billing, path: services/billing }
           - { name: ats, path: services/ats }
           - { name: api, path: services/api }
+          - { name: assistant, path: services/assistant }
           - { name: common, path: packages/common }
     env:
       CHANGED: ${{ contains(fromJSON(needs.changes.outputs.changed), matrix.name) }}
@@ -188,6 +189,7 @@ jobs:
           - { name: notifications, context: ., file: services/notifications/Dockerfile }
           - { name: ats, context: ., file: services/ats/Dockerfile }
           - { name: api, context: ., file: services/api/Dockerfile }
+          - { name: assistant, context: ., file: services/assistant/Dockerfile }
           - { name: frontend, context: frontend, file: frontend/Dockerfile }
     env:
       CHANGED: ${{ contains(fromJSON(needs.changes.outputs.changed), matrix.name) }}
@@ -258,6 +260,12 @@ jobs:
           done
 
           exit 1
+      # The assistant's tools are built from the services' OpenAPI snapshots: a changed route must
+      # come with refreshed snapshots (scripts/assistant-openapi.sh, committed).
+      - name: Assistant's OpenAPI snapshots are current
+        run: |
+          ./scripts/assistant-openapi.sh
+          git diff --exit-code services/assistant/app/openapi
       # Each service's tests/integration, against the stack's real Postgres and Redis.
       - name: Integration tests
         run: ./scripts/integration.sh

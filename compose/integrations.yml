@@ -1,5 +1,5 @@
-# The services around them: billing, notifications (email and Slack), ATS integrations and the
-# public API; each with its migrations, run first.
+# The services around them: billing, notifications (email and Slack), ATS integrations, the
+# public API and the in-app assistant; each with its migrations, run first.
 
 x-billing-env: &billing-env
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/billing
@@ -58,6 +58,27 @@ x-api-env: &api-env
   # The site's address: links to candidates' results in what the API returns.
   SITE_URL: ${SITE_URL:-http://localhost:8090}
 
+x-assistant-env: &assistant-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/assistant
+  REDIS_URL: redis://redis:6379
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  OPENAI_API_KEY: ${OPENAI_API_KEY}
+  LANGSMITH_TRACING: ${LANGSMITH_TRACING}
+  LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+  LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+  ASSISTANT_MODEL: ${ASSISTANT_MODEL:-gpt-6-luna}
+  ASSISTANT_REASONING_EFFORT: ${ASSISTANT_REASONING_EFFORT:-low}
+  TRANSCRIBE_MODEL: ${TRANSCRIBE_MODEL:-gpt-4o-mini-transcribe}
+  ASSISTANT_RETENTION_DAYS: ${ASSISTANT_RETENTION_DAYS:-90}
+  # The services whose GET routes are its tools, called with the user's own token.
+  COMPANIES_URL: http://companies:8000
+  BILLING_URL: http://billing:8000
+  LIBRARY_URL: http://library:8000
+  NOTIFICATIONS_URL: http://notifications:8000
+  ATS_URL: http://ats:8000
+  API_URL: http://api:8000
+  ROUNDS_URL: http://rounds:8000
+
 # Each service's mounted source; migrations read it too, so new ones run without a rebuild.
 x-billing-source: &billing-source
   - ./services/billing/app:/services/billing/app
@@ -81,6 +102,12 @@ x-api-source: &api-source
   - ./services/api/app:/services/api/app
   - ./services/api/migrations:/services/api/migrations
   - ./services/api/alembic.ini:/services/api/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+x-assistant-source: &assistant-source
+  - ./services/assistant/app:/services/assistant/app
+  - ./services/assistant/migrations:/services/assistant/migrations
+  - ./services/assistant/alembic.ini:/services/assistant/alembic.ini:ro
   - ./packages/common/src:/packages/common/src
 
 services:
@@ -172,6 +199,29 @@ services:
     environment: *api-env
     depends_on:
       api-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+
+  assistant-migrate:
+    extends: {file: compose/base.yml, service: migrate}
+    build:
+      context: .
+      dockerfile: services/assistant/Dockerfile
+      target: dev
+    volumes: *assistant-source
+    environment: *assistant-env
+
+  assistant:
+    extends: {file: compose/base.yml, service: server}
+    build:
+      context: .
+      dockerfile: services/assistant/Dockerfile
+      target: dev
+    volumes: *assistant-source
+    environment: *assistant-env
+    depends_on:
+      assistant-migrate:
         condition: service_completed_successfully
       redis:
         condition: service_healthy

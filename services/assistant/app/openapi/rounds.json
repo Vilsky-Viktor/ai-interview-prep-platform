@@ -1,0 +1,2930 @@
+{
+ "paths": {
+  "/sessions/{session_id}": {
+   "get": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Get Session",
+    "operationId": "get_session_sessions__session_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/topics": {
+   "get": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "List Topics",
+    "description": "Every topic of this candidate's interview, so they can open the ones besides the first.",
+    "operationId": "list_topics_sessions__session_id__topics_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/SessionTopicOut"
+         },
+         "title": "Response List Topics Sessions  Session Id  Topics Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/next": {
+   "get": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Get Next Question",
+    "operationId": "get_next_question_sessions__session_id__next_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "anyOf": [
+          {
+           "$ref": "#/components/schemas/NextQuestion"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "title": "Response Get Next Question Sessions  Session Id  Next Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/signals": {
+   "post": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Add Signal",
+    "description": "The candidate's browser reports leaving the page or copying, saved with the question on\nscreen so the scorecard can show where it happened.",
+    "operationId": "add_signal_sessions__session_id__signals_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SignalIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/answers": {
+   "post": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Answer Question",
+    "operationId": "answer_question_sessions__session_id__answers_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AnswerCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionAnswerResult"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/review": {
+   "get": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Review Session",
+    "description": "Once a section is finished, candidates see the questions they answered and their picks,\nnever whether they were right or the key. Never while it runs: that would show questions\nbefore their clock starts.",
+    "operationId": "review_session_sessions__session_id__review_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ReviewItem"
+         },
+         "title": "Response Review Session Sessions  Session Id  Review Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/finish": {
+   "post": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Finish",
+    "operationId": "finish_sessions__session_id__finish_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/step": {
+   "post": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Next Step",
+    "description": "Opens the candidate's interview, or moves it on after an answer or a time-out: the\nserver decides which section and question come next, and when the interview is done.",
+    "operationId": "next_step_sessions__session_id__step_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InterviewStep"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/finish-interview": {
+   "post": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Finish Interview",
+    "operationId": "finish_interview_sessions__session_id__finish_interview_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InterviewStep"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/practice/{template_id}": {
+   "post": {
+    "tags": [
+     "practice"
+    ],
+    "summary": "Start Practice",
+    "operationId": "start_practice_practice__template_id__post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PracticeStartOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/practice/{template_id}/size": {
+   "get": {
+    "tags": [
+     "practice"
+    ],
+    "summary": "Practice Size",
+    "description": "Public, for the test's page: how many questions a round has, kept for a few minutes.",
+    "operationId": "practice_size_practice__template_id__size_get",
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PracticeSizeOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/practice/rounds/{round_id}": {
+   "get": {
+    "tags": [
+     "practice"
+    ],
+    "summary": "Get Round",
+    "description": "The talent's own round only.",
+    "operationId": "get_round_practice_rounds__round_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "round_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Round Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PracticeRoundOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/practice/{template_id}/rounds": {
+   "get": {
+    "tags": [
+     "practice"
+    ],
+    "summary": "List Rounds",
+    "description": "The talent's rounds on the template, newest first, to see their progress.",
+    "operationId": "list_rounds_practice__template_id__rounds_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/PracticeRoundSummary"
+         },
+         "title": "Response List Rounds Practice  Template Id  Rounds Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/practice/{template_id}/progress": {
+   "get": {
+    "tags": [
+     "practice"
+    ],
+    "summary": "Topic Progress Route",
+    "description": "How far the talent got on each of the template's topics in their latest round.",
+    "operationId": "topic_progress_route_practice__template_id__progress_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/PracticeTopicProgress"
+         },
+         "title": "Response Topic Progress Route Practice  Template Id  Progress Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/questions/{question_id}/rating": {
+   "get": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Get Rating",
+    "operationId": "get_rating_sessions__session_id__questions__question_id__rating_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     },
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Rate",
+    "operationId": "rate_sessions__session_id__questions__question_id__rating_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     },
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RatingIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/questions/{question_id}/reports/mine": {
+   "get": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "My Report",
+    "operationId": "my_report_sessions__session_id__questions__question_id__reports_mine_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     },
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sessions/{session_id}/questions/{question_id}/reports": {
+   "post": {
+    "tags": [
+     "sessions"
+    ],
+    "summary": "Report",
+    "operationId": "report_sessions__session_id__questions__question_id__reports_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Session Id"
+      }
+     },
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReportIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/help/faq": {
+   "get": {
+    "tags": [
+     "help"
+    ],
+    "summary": "Get Faq",
+    "description": "The FAQ in the page's language, with today's prices; public.",
+    "operationId": "get_faq_help_faq_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/FaqItemOut"
+         },
+         "type": "array",
+         "title": "Response Get Faq Help Faq Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/help/guide": {
+   "get": {
+    "tags": [
+     "help"
+    ],
+    "summary": "Get Guide",
+    "description": "Everything prepza's help chat answers from, as text: how prepza works and how to use it,\nthe FAQ in the page's language, today's prices, the terms and the privacy policy; public.",
+    "operationId": "get_guide_help_guide_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/help/legal/{document}": {
+   "get": {
+    "tags": [
+     "help"
+    ],
+    "summary": "Get Legal",
+    "description": "The terms or the privacy policy, in English only; public.",
+    "operationId": "get_legal_help_legal__document__get",
+    "parameters": [
+     {
+      "name": "document",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/LegalDocument"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LegalOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/help/chat": {
+   "post": {
+    "tags": [
+     "help"
+    ],
+    "summary": "Help Chat",
+    "description": "Answers questions about prepza, for visitors too. Streams server-sent events:\n{\"delta\"}..., then {\"done\"} or {\"error\"}. Refused during the emergency pause, as it's AI.",
+    "operationId": "help_chat_help_chat_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/HelpChatRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/help/contact": {
+   "post": {
+    "tags": [
+     "help"
+    ],
+    "summary": "Contact",
+    "description": "The contact page's message; notifications emails it to prepza's inbox. Public.",
+    "operationId": "contact_help_contact_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ContactRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/sessions": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Create Sessions",
+    "description": "Creates one session per topic for a candidate invite; returns existing ones if any.",
+    "operationId": "create_sessions_internal_sessions_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SessionsCreate"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/SessionOut"
+         },
+         "type": "array",
+         "title": "Response Create Sessions Internal Sessions Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/invite-scores": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Invite Scores",
+    "operationId": "invite_scores_internal_invite_scores_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/InviteScoresIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": {
+          "additionalProperties": {
+           "anyOf": [
+            {
+             "type": "integer"
+            },
+            {
+             "type": "null"
+            }
+           ]
+          },
+          "type": "object"
+         },
+         "type": "object",
+         "title": "Response Invite Scores Internal Invite Scores Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/answer-counts": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Interview Answer Counts",
+    "description": "For the superadmin's pass rates: each interview's answers, [timed out, all].",
+    "operationId": "interview_answer_counts_internal_answer_counts_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SetIdsIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": {
+          "items": {
+           "type": "integer"
+          },
+          "type": "array"
+         },
+         "type": "object",
+         "title": "Response Interview Answer Counts Internal Answer Counts Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/interviews/{interview_set_id}": {
+   "delete": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Delete Interview Data",
+    "description": "Called by companies before it deletes an interview; safe to repeat.",
+    "operationId": "delete_interview_data_internal_interviews__interview_set_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_set_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Set Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/invites/{invite_id}/scorecard": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Invite Scorecard",
+    "operationId": "invite_scorecard_internal_invites__invite_id__scorecard_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "invite_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Invite Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ScorecardSession"
+         },
+         "title": "Response Invite Scorecard Internal Invites  Invite Id  Scorecard Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/questions/{question_id}/rescore": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Rescore Question",
+    "description": "The question's answer key was corrected: candidates who answered it are marked again.",
+    "operationId": "rescore_question_internal_questions__question_id__rescore_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "question_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Question Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RescoreIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Rescore Question Internal Questions  Question Id  Rescore Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/schedules/outbox": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Flush Outbox",
+    "description": "Every minute, from Cloud Scheduler: publishes events that weren't published right after\ntheir change.",
+    "operationId": "flush_outbox_internal_schedules_outbox_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/schedules/expire-interviews": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Expire Interviews",
+    "description": "Every minute, from Cloud Scheduler: finishes interviews whose time ran out after the\ncandidate left, so companies see them as finished.",
+    "operationId": "expire_interviews_internal_schedules_expire_interviews_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/superadmin/stats": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Stats",
+    "description": "Practice rounds, all time or in one year or\nmonth, for the stats tab.",
+    "operationId": "get_stats_superadmin_stats_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "period",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^\\d{4}(-(0[1-9]|1[0-2]))?$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Period"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/StatsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}": {
+   "delete": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Delete User",
+    "description": "Part of deleting an account (library coordinates it); safe to repeat.",
+    "operationId": "delete_user_internal_users__user_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/users/{user_id}/export": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Export User",
+    "operationId": "export_user_internal_users__user_id__export_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Export User Internal Users  User Id  Export Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/invites/delete": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Delete Invite Sessions",
+    "description": "Companies' retention: candidates' sessions go with their expired invites.",
+    "operationId": "delete_invite_sessions_internal_invites_delete_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/InviteIdsIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/maintenance/running": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Running Interviews",
+    "description": "For companies' maintenance switch: the candidates who may lose time if it's turned on.",
+    "operationId": "running_interviews_internal_maintenance_running_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RunningOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/health": {
+   "get": {
+    "summary": "Health",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Health Health Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/ready": {
+   "get": {
+    "summary": "Ready",
+    "description": "Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis\nisn't checked: an outage there shouldn't stop the service from starting.",
+    "operationId": "ready_ready_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Ready Ready Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "AnswerCreate": {
+    "properties": {
+     "question_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Question Id"
+     },
+     "option_index": {
+      "type": "integer",
+      "exclusiveMaximum": 4.0,
+      "minimum": 0.0,
+      "title": "Option Index"
+     }
+    },
+    "type": "object",
+    "required": [
+     "question_id",
+     "option_index"
+    ],
+    "title": "AnswerCreate"
+   },
+   "AnswerView": {
+    "properties": {
+     "answer_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Answer Id"
+     },
+     "option_index": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Option Index"
+     },
+     "correct": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Correct"
+     },
+     "seconds": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seconds"
+     },
+     "fast": {
+      "type": "boolean",
+      "title": "Fast",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "answer_id",
+     "option_index",
+     "correct"
+    ],
+    "title": "AnswerView"
+   },
+   "ContactRequest": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Name"
+     },
+     "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+     },
+     "message": {
+      "type": "string",
+      "maxLength": 5000,
+      "minLength": 1,
+      "title": "Message"
+     }
+    },
+    "type": "object",
+    "required": [
+     "name",
+     "email",
+     "message"
+    ],
+    "title": "ContactRequest"
+   },
+   "FaqItemOut": {
+    "properties": {
+     "key": {
+      "type": "string",
+      "title": "Key"
+     },
+     "question": {
+      "type": "string",
+      "title": "Question"
+     },
+     "answer": {
+      "type": "string",
+      "title": "Answer"
+     }
+    },
+    "type": "object",
+    "required": [
+     "key",
+     "question",
+     "answer"
+    ],
+    "title": "FaqItemOut"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "HelpChatRequest": {
+    "properties": {
+     "messages": {
+      "items": {
+       "$ref": "#/components/schemas/HelpMessage"
+      },
+      "type": "array",
+      "maxItems": 200,
+      "minItems": 1,
+      "title": "Messages"
+     }
+    },
+    "type": "object",
+    "required": [
+     "messages"
+    ],
+    "title": "HelpChatRequest",
+    "description": "The conversation so far, ending with the new question; the page keeps it."
+   },
+   "HelpMessage": {
+    "properties": {
+     "role": {
+      "$ref": "#/components/schemas/HelpRole"
+     },
+     "content": {
+      "type": "string",
+      "maxLength": 10000,
+      "minLength": 1,
+      "title": "Content"
+     }
+    },
+    "type": "object",
+    "required": [
+     "role",
+     "content"
+    ],
+    "title": "HelpMessage"
+   },
+   "HelpRole": {
+    "type": "string",
+    "enum": [
+     "user",
+     "assistant"
+    ],
+    "title": "HelpRole"
+   },
+   "IntegritySignal": {
+    "type": "string",
+    "enum": [
+     "tab_leave",
+     "copy"
+    ],
+    "title": "IntegritySignal",
+    "description": "What the candidate's browser reports during an interview."
+   },
+   "InterviewStep": {
+    "properties": {
+     "session": {
+      "$ref": "#/components/schemas/SessionOut"
+     },
+     "question": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/NextQuestion"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/SessionTopicOut"
+      },
+      "type": "array",
+      "title": "Topics"
+     },
+     "done": {
+      "type": "boolean",
+      "title": "Done"
+     }
+    },
+    "type": "object",
+    "required": [
+     "session",
+     "question",
+     "topics",
+     "done"
+    ],
+    "title": "InterviewStep",
+    "description": "Where a candidate's interview stands: the section on screen and its waiting question,\nevery section, and whether the whole interview is finished."
+   },
+   "InviteIdsIn": {
+    "properties": {
+     "invite_ids": {
+      "items": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "type": "array",
+      "title": "Invite Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "invite_ids"
+    ],
+    "title": "InviteIdsIn"
+   },
+   "InviteScoresIn": {
+    "properties": {
+     "invite_ids": {
+      "items": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "type": "array",
+      "title": "Invite Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "invite_ids"
+    ],
+    "title": "InviteScoresIn"
+   },
+   "LegalDocument": {
+    "type": "string",
+    "enum": [
+     "terms",
+     "privacy",
+     "dpa"
+    ],
+    "title": "LegalDocument"
+   },
+   "LegalOut": {
+    "properties": {
+     "intro": {
+      "type": "string",
+      "title": "Intro"
+     },
+     "updated": {
+      "type": "string",
+      "title": "Updated"
+     },
+     "sections": {
+      "items": {
+       "$ref": "#/components/schemas/LegalSectionOut"
+      },
+      "type": "array",
+      "title": "Sections"
+     }
+    },
+    "type": "object",
+    "required": [
+     "intro",
+     "updated",
+     "sections"
+    ],
+    "title": "LegalOut"
+   },
+   "LegalSectionOut": {
+    "properties": {
+     "heading": {
+      "type": "string",
+      "title": "Heading"
+     },
+     "paragraphs": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Paragraphs",
+      "default": []
+     },
+     "items": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Items",
+      "default": []
+     }
+    },
+    "type": "object",
+    "required": [
+     "heading"
+    ],
+    "title": "LegalSectionOut"
+   },
+   "NextQuestion": {
+    "properties": {
+     "question_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Question Id"
+     },
+     "number": {
+      "type": "integer",
+      "title": "Number"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Options"
+     },
+     "seconds_left": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seconds Left"
+     }
+    },
+    "type": "object",
+    "required": [
+     "question_id",
+     "number",
+     "text",
+     "options"
+    ],
+    "title": "NextQuestion",
+    "description": "The next unanswered question, without the correct flags."
+   },
+   "Option": {
+    "properties": {
+     "answer": {
+      "type": "string",
+      "title": "Answer"
+     },
+     "correct": {
+      "type": "boolean",
+      "title": "Correct"
+     }
+    },
+    "type": "object",
+    "required": [
+     "answer",
+     "correct"
+    ],
+    "title": "Option"
+   },
+   "PracticeRoundOut": {
+    "properties": {
+     "round_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Round Id"
+     },
+     "template_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Template Id"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "finished": {
+      "type": "boolean",
+      "title": "Finished"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "answered": {
+      "type": "integer",
+      "title": "Answered"
+     },
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     },
+     "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+     },
+     "open_session_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Open Session Id"
+     },
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/PracticeTopicResult"
+      },
+      "type": "array",
+      "title": "Topics"
+     }
+    },
+    "type": "object",
+    "required": [
+     "round_id",
+     "template_id",
+     "title",
+     "finished",
+     "grade",
+     "answered",
+     "total",
+     "started_at",
+     "open_session_id",
+     "topics"
+    ],
+    "title": "PracticeRoundOut",
+    "description": "A talent's round, with every question's right answer once it's finished."
+   },
+   "PracticeRoundSummary": {
+    "properties": {
+     "round_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Round Id"
+     },
+     "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+     },
+     "finished": {
+      "type": "boolean",
+      "title": "Finished"
+     },
+     "progress": {
+      "type": "integer",
+      "title": "Progress"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     }
+    },
+    "type": "object",
+    "required": [
+     "round_id",
+     "started_at",
+     "finished",
+     "progress",
+     "grade"
+    ],
+    "title": "PracticeRoundSummary"
+   },
+   "PracticeSizeOut": {
+    "properties": {
+     "questions": {
+      "type": "integer",
+      "title": "Questions"
+     }
+    },
+    "type": "object",
+    "required": [
+     "questions"
+    ],
+    "title": "PracticeSizeOut",
+    "description": "How many questions a practice round on the template has."
+   },
+   "PracticeStartOut": {
+    "properties": {
+     "round_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Round Id"
+     },
+     "session_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Session Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "round_id",
+     "session_id"
+    ],
+    "title": "PracticeStartOut",
+    "description": "A new practice round: its id, and the first section to open."
+   },
+   "PracticeTopicProgress": {
+    "properties": {
+     "topic_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Topic Id"
+     },
+     "answered": {
+      "type": "integer",
+      "title": "Answered"
+     },
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     }
+    },
+    "type": "object",
+    "required": [
+     "topic_id",
+     "answered",
+     "total"
+    ],
+    "title": "PracticeTopicProgress",
+    "description": "How far the talent got on one of the template's topics in their latest round."
+   },
+   "PracticeTopicResult": {
+    "properties": {
+     "session_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Session Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "score": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Score"
+     },
+     "review": {
+      "items": {
+       "$ref": "#/components/schemas/ReviewItem"
+      },
+      "type": "array",
+      "title": "Review"
+     }
+    },
+    "type": "object",
+    "required": [
+     "session_id",
+     "title",
+     "score",
+     "review"
+    ],
+    "title": "PracticeTopicResult"
+   },
+   "Question": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/Option"
+      },
+      "type": "array",
+      "title": "Options"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "text",
+     "options"
+    ],
+    "title": "Question"
+   },
+   "RatingIn": {
+    "properties": {
+     "value": {
+      "type": "integer",
+      "enum": [
+       -1,
+       1
+      ],
+      "title": "Value"
+     }
+    },
+    "type": "object",
+    "required": [
+     "value"
+    ],
+    "title": "RatingIn"
+   },
+   "ReportIn": {
+    "properties": {
+     "reason": {
+      "type": "string",
+      "title": "Reason"
+     },
+     "comment": {
+      "type": "string",
+      "title": "Comment",
+      "default": ""
+     }
+    },
+    "type": "object",
+    "required": [
+     "reason"
+    ],
+    "title": "ReportIn"
+   },
+   "RescoreIn": {
+    "properties": {
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "type": "array",
+      "title": "Options"
+     },
+     "set_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Set Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "text",
+     "options"
+    ],
+    "title": "RescoreIn",
+    "description": "A question's corrected content: its text and options with the right one marked, and the\ninterview it belongs to (left out by older callers: every session is looked at)."
+   },
+   "ReviewItem": {
+    "properties": {
+     "question_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Question Id"
+     },
+     "number": {
+      "type": "integer",
+      "title": "Number"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "options": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Options"
+     },
+     "correct_option_index": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Correct Option Index"
+     },
+     "answer": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/AnswerView"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "tab_leaves": {
+      "type": "integer",
+      "title": "Tab Leaves",
+      "default": 0
+     },
+     "copies": {
+      "type": "integer",
+      "title": "Copies",
+      "default": 0
+     }
+    },
+    "type": "object",
+    "required": [
+     "question_id",
+     "number",
+     "text",
+     "options",
+     "correct_option_index",
+     "answer"
+    ],
+    "title": "ReviewItem",
+    "description": "One question of a round. The correct option only once it's answered."
+   },
+   "RoundStatus": {
+    "type": "string",
+    "enum": [
+     "in_progress",
+     "finished"
+    ],
+    "title": "RoundStatus"
+   },
+   "RunningOut": {
+    "properties": {
+     "running": {
+      "type": "integer",
+      "title": "Running"
+     }
+    },
+    "type": "object",
+    "required": [
+     "running"
+    ],
+    "title": "RunningOut"
+   },
+   "ScorecardSession": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "topic_title": {
+      "type": "string",
+      "title": "Topic Title"
+     },
+     "status": {
+      "$ref": "#/components/schemas/RoundStatus"
+     },
+     "final_score": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Final Score"
+     },
+     "tab_leaves": {
+      "type": "integer",
+      "title": "Tab Leaves"
+     },
+     "copies": {
+      "type": "integer",
+      "title": "Copies"
+     },
+     "fast_answers": {
+      "type": "integer",
+      "title": "Fast Answers"
+     },
+     "review": {
+      "items": {
+       "$ref": "#/components/schemas/ReviewItem"
+      },
+      "type": "array",
+      "title": "Review"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "topic_title",
+     "status",
+     "final_score",
+     "tab_leaves",
+     "copies",
+     "fast_answers",
+     "review"
+    ],
+    "title": "ScorecardSession"
+   },
+   "SessionAnswerResult": {
+    "properties": {
+     "answer_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Answer Id"
+     },
+     "answered": {
+      "type": "integer",
+      "title": "Answered"
+     },
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     }
+    },
+    "type": "object",
+    "required": [
+     "answer_id",
+     "answered",
+     "total"
+    ],
+    "title": "SessionAnswerResult"
+   },
+   "SessionOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "topic_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Topic Id"
+     },
+     "candidate_invite_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Candidate Invite Id"
+     },
+     "topic_title": {
+      "type": "string",
+      "title": "Topic Title"
+     },
+     "interview_title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Interview Title"
+     },
+     "language": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Language"
+     },
+     "practice": {
+      "type": "boolean",
+      "title": "Practice",
+      "default": false
+     },
+     "status": {
+      "$ref": "#/components/schemas/RoundStatus"
+     },
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     },
+     "answered": {
+      "type": "integer",
+      "title": "Answered"
+     },
+     "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+     },
+     "finished_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Finished At"
+     },
+     "question_seconds": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Question Seconds"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "topic_id",
+     "candidate_invite_id",
+     "topic_title",
+     "status",
+     "total",
+     "answered",
+     "started_at",
+     "finished_at",
+     "question_seconds"
+    ],
+    "title": "SessionOut"
+   },
+   "SessionTopicOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "topic_title": {
+      "type": "string",
+      "title": "Topic Title"
+     },
+     "status": {
+      "$ref": "#/components/schemas/RoundStatus"
+     },
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     },
+     "answered": {
+      "type": "integer",
+      "title": "Answered"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "topic_title",
+     "status",
+     "total",
+     "answered"
+    ],
+    "title": "SessionTopicOut"
+   },
+   "SessionsCreate": {
+    "properties": {
+     "user_id": {
+      "type": "string",
+      "title": "User Id"
+     },
+     "candidate_invite_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Candidate Invite Id"
+     },
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/TopicQuestions"
+      },
+      "type": "array",
+      "title": "Topics"
+     },
+     "question_seconds": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Question Seconds"
+     },
+     "preview": {
+      "type": "boolean",
+      "title": "Preview",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_id",
+     "candidate_invite_id",
+     "topics",
+     "question_seconds"
+    ],
+    "title": "SessionsCreate"
+   },
+   "SetIdsIn": {
+    "properties": {
+     "set_ids": {
+      "items": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "type": "array",
+      "title": "Set Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "set_ids"
+    ],
+    "title": "SetIdsIn"
+   },
+   "SignalIn": {
+    "properties": {
+     "kind": {
+      "$ref": "#/components/schemas/IntegritySignal"
+     }
+    },
+    "type": "object",
+    "required": [
+     "kind"
+    ],
+    "title": "SignalIn"
+   },
+   "StatsOut": {
+    "properties": {
+     "counts": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "type": "object",
+      "title": "Counts"
+     },
+     "currency": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Currency"
+     }
+    },
+    "type": "object",
+    "required": [
+     "counts"
+    ],
+    "title": "StatsOut"
+   },
+   "TopicQuestions": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "preparation_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Preparation Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "questions": {
+      "items": {
+       "$ref": "#/components/schemas/Question"
+      },
+      "type": "array",
+      "title": "Questions"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "preparation_id",
+     "title",
+     "questions"
+    ],
+    "title": "TopicQuestions"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   }
+  },
+  "securitySchemes": {
+   "HTTPBearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}
