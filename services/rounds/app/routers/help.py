@@ -21,6 +21,7 @@ from app.constants.rounds import CHAT_FAILED
 from app.constants.terms import TERMS_INTRO, TERMS_SECTIONS
 from app.helpers.client_ip import client_ip
 from app.helpers.help import faq_items
+from app.helpers.sign_in import with_sign_in
 from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.schemas.contact import ContactRequest
@@ -68,7 +69,8 @@ async def help_chat(
     body: HelpChatRequest, request: Request, user: OptionalUser
 ) -> StreamingResponse:
     """Answers questions about prepza, for visitors too. Streams server-sent events:
-    {"delta"}..., then {"done"} or {"error"}. Refused during the emergency pause, as it's AI."""
+    {"delta"}... (and a {"block"} sign-in card when a visitor asks to sign in or sign up), then
+    {"done"} or {"error"}. Refused during the emergency pause, as it's AI."""
     redis = get_redis()
     await refuse_if_paused(redis)
 
@@ -83,8 +85,8 @@ async def help_chat(
 
     async def events():
         try:
-            async for delta in stream_reply(messages):
-                yield sse_event({"delta": delta})
+            async for event in with_sign_in(stream_reply(messages)):
+                yield sse_event(event)
         except Exception:
             logger.exception("Help chat failed")
             yield sse_event({"error": translate(CHAT_FAILED, language)})

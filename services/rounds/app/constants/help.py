@@ -1,3 +1,4 @@
+import re
 from enum import StrEnum
 
 
@@ -35,3 +36,7 @@ QUESTION_TOO_LONG = "The question is too long."
 FAQ_EXAMPLE_CANDIDATES = 5
 # How long the platform guide (GET /help/guide) is kept, per language, before it's built again.
 GUIDE_CACHE_SECONDS = CATALOG_CACHE_SECONDS
+# A reply to a visitor asking to sign in or sign up starts with this marker (the prompt says
+# so), naming the way they asked for if any; the chat sends a sign-in card in its place.
+SIGN_IN_MARKER = re.compile(r"^\s*\[\[sign_in(?::(google|linkedin|github))?\]\]\s*")
+SIGN_IN_PREFIX = "[[sign_in"
