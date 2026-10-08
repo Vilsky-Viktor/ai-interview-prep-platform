@@ -93,6 +93,11 @@ FAQ = [
         "answer": "Stellenbeschreibungen werden genutzt, um deine Interviews zu erstellen, und die Antworten der Kandidaten, um sie zu bewerten, nur für dein Unternehmen. Die Datenschutzerklärung erklärt, was wir speichern, wie lange und welche Rechte alle haben.",
     },
     {
+        "key": "emails",
+        "question": "Welche E-Mails sendet prepza und wie stelle ich sie ab?",
+        "answer": "Service-E-Mails wie Einladungen, Berichte, Zahlungsprobleme und Änderungen unserer Bedingungen werden immer gesendet. Alles andere, etwa die tägliche Aktivitätsübersicht, Erinnerungen und Produkt-Updates, wählst du in den Einstellungen unter E-Mails oder stellst es mit dem Link „Abmelden“ in jeder E-Mail ab. Kandidaten können die E-Mails deines Unternehmens oder die Erinnerungen zu einem Interview mit den Links in ihren Einladungen und Erinnerungen abstellen.",
+    },
+    {
         "key": "delete",
         "question": "Kann ich mein Konto löschen?",
         "answer": "Ja, in den Einstellungen. Dein Konto und deine Daten werden gelöscht, und vorher kannst du eine Kopie deiner Daten herunterladen.",

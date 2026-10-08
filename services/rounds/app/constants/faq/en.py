@@ -92,6 +92,11 @@ FAQ = [
         "answer": "Job descriptions are used to build your interviews, and candidates' answers to score them, for your company only. The privacy policy explains what we keep, for how long, and everyone's rights.",
     },
     {
+        "key": "emails",
+        "question": "Which emails does prepza send, and how do I stop them?",
+        "answer": "Service emails, such as invites, reports, billing problems and changes to our terms, are always sent. The rest, such as the daily activity digest, reminders and product updates, you choose in Settings, under Emails, or stop with the Unsubscribe link in each email. Candidates can stop your company's emails, or an interview's reminders, with the links in their invites and reminders.",
+    },
+    {
         "key": "delete",
         "question": "Can I delete my account?",
         "answer": "Yes, in Settings. Your account and your data are deleted, and you can download a copy of your data first.",

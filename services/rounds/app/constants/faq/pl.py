@@ -93,6 +93,11 @@ FAQ = [
         "answer": "Opisy stanowisk służą do tworzenia Twoich rozmów, a odpowiedzi kandydatów do ich oceny, wyłącznie dla Twojej firmy. Polityka prywatności wyjaśnia, co przechowujemy, jak długo i jakie prawa przysługują każdemu.",
     },
     {
+        "key": "emails",
+        "question": "Jakie e-maile wysyła prepza i jak je wyłączyć?",
+        "answer": "E-maile serwisowe, takie jak zaproszenia, raporty, problemy z płatnością i zmiany naszego regulaminu, są wysyłane zawsze. Resztę, na przykład codzienne podsumowanie aktywności, przypomnienia i nowości o produkcie, wybierasz w Ustawieniach, w sekcji E-maile, albo wyłączasz linkiem „Wypisz się” w każdym e-mailu. Kandydaci mogą wyłączyć e-maile od Twojej firmy lub przypomnienia o danej rozmowie linkami w zaproszeniach i przypomnieniach.",
+    },
+    {
         "key": "delete",
         "question": "Czy mogę usunąć konto?",
         "answer": "Tak, w Ustawieniach. Twoje konto i dane zostają usunięte, a wcześniej możesz pobrać ich kopię.",

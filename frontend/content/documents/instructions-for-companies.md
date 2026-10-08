@@ -92,11 +92,18 @@ templates (at prepza.ai/documents) are a starting point. prepza's invite page al
 to expect and links prepza's privacy policy, but the notice about **your** use of the results is
 yours to give.
 
+prepza's invite and reminder emails let candidates stop your company's emails, or that interview's
+reminders, with a link at the bottom. Once a candidate stops your company's emails, prepza doesn't
+email them for your company again: an invite to them shows as undelivered in the candidate list,
+so reach them another way if you still need to.
+
 ## 8. Retention
 
 - Candidate results, timings and signals are **deleted automatically 12 months after the invite**
   was last sent.
 - Invites never started expire after 30 days.
+- A candidate's request to stop your company's emails is kept, as a one-way hash of their email
+  address, until you delete the company, also after you delete the candidate.
 - PDFs you download are yours to keep and delete under your own retention policy.
 - Job description text is kept 90 days in generation records; the interview stays until you delete
   it.

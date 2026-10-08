@@ -93,6 +93,11 @@ FAQ = [
         "answer": "Le descrizioni dei ruoli servono a creare i tuoi colloqui, e le risposte dei candidati a valutarli, solo per la tua azienda. L'informativa sulla privacy spiega cosa conserviamo, per quanto tempo e i diritti di ciascuno.",
     },
     {
+        "key": "emails",
+        "question": "Quali email invia prepza e come posso interromperle?",
+        "answer": 'Le email di servizio, come inviti, report, problemi di pagamento e modifiche ai nostri termini, vengono sempre inviate. Le altre, come il riepilogo attività giornaliero, i promemoria e le novità sul prodotto, le scegli nelle Impostazioni, alla voce Email, oppure le interrompi con il link "Annulla l\'iscrizione" in ogni email. I candidati possono interrompere le email della tua azienda, o i promemoria di un colloquio, con i link nei loro inviti e promemoria.',
+    },
+    {
         "key": "delete",
         "question": "Posso eliminare il mio account?",
         "answer": "Sì, nelle Impostazioni. Il tuo account e i tuoi dati vengono eliminati, e prima puoi scaricarne una copia.",

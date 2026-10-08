@@ -96,7 +96,20 @@ candidate finishes, signed with its secret. The reference is the "api docs" page
 the footer.
 
 Account and settings:
-- Settings has the interface language, "Download my data" and "Delete account".
+- Settings has the interface language, Emails, "Download my data" and "Delete account".
+
+Emails:
+- Service emails always go out: invites, candidate reports, billing problems (such as a failed \
+automatic top-up) and changes to the terms.
+- Settings → Emails chooses the rest: the activity digest (one email a day about what happened \
+in your companies: candidates who finished, undelivered invites, ATS candidates not invited, \
+interviews ready; each can be turned off), reminders to owners and admins (low credits, \
+interviews with no candidates, topics waiting for review), product updates and news, and offers \
+and promotions. Every one of these has an "Unsubscribe" link that stops it without signing in, \
+and a link to the email settings.
+- Candidates' invites have a "Don't email me for <company>" link, and reminders also "Don't \
+send me reminders for this interview". After a candidate stops a company's emails, prepza \
+doesn't email them for that company again and the company sees the invite as not delivered.
 - The site works in {language_count} languages: {languages}. On a first visit it opens in the \
 browser's language if supported. Arabic, Hebrew and Persian read right to left.
 """

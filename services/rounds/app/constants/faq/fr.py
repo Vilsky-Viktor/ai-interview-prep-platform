@@ -93,6 +93,11 @@ FAQ = [
         "answer": "Les fiches de poste servent à créer vos entretiens, et les réponses des candidats à les noter, uniquement pour votre entreprise. La politique de confidentialité explique ce que nous conservons, pendant combien de temps, et les droits de chacun.",
     },
     {
+        "key": "emails",
+        "question": "Quels e-mails prepza envoie-t-il, et comment les arrêter ?",
+        "answer": "Les e-mails de service, comme les invitations, les rapports, les problèmes de paiement et les modifications de nos conditions, sont toujours envoyés. Les autres, comme le récapitulatif d'activité quotidien, les rappels et les nouveautés du produit, se choisissent dans les Paramètres, sous E-mails, ou s'arrêtent avec le lien « Se désabonner » de chaque e-mail. Les candidats peuvent arrêter les e-mails de votre entreprise, ou les rappels d'un entretien, avec les liens de leurs invitations et rappels.",
+    },
+    {
         "key": "delete",
         "question": "Puis-je supprimer mon compte ?",
         "answer": "Oui, dans les Paramètres. Votre compte et vos données sont supprimés, et vous pouvez d'abord télécharger une copie de vos données.",

@@ -93,6 +93,11 @@ FAQ = [
         "answer": "Deskripsi pekerjaan dipakai untuk membuat wawancaramu, dan jawaban kandidat untuk menilainya, hanya untuk perusahaanmu. Kebijakan privasi menjelaskan apa yang kami simpan, berapa lama, dan hak setiap orang.",
     },
     {
+        "key": "emails",
+        "question": "Email apa saja yang dikirim prepza, dan bagaimana cara menghentikannya?",
+        "answer": 'Email layanan, seperti undangan, laporan, masalah pembayaran, dan perubahan ketentuan kami, selalu dikirim. Sisanya, seperti ringkasan aktivitas harian, pengingat, dan pembaruan produk, kamu pilih di Pengaturan, bagian Email, atau hentikan dengan tautan "Berhenti berlangganan" di setiap email. Kandidat bisa menghentikan email dari perusahaanmu, atau pengingat sebuah wawancara, lewat tautan di undangan dan pengingat mereka.',
+    },
+    {
         "key": "delete",
         "question": "Bisakah aku menghapus akunku?",
         "answer": "Bisa, di Pengaturan. Akun dan datamu dihapus, dan sebelumnya kamu bisa mengunduh salinan datamu.",

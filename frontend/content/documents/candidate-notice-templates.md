@@ -1,6 +1,6 @@
 # Candidate notice templates
 
-Version: 2026-10-06\
+Version: 2026-10-08\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai
 
 For companies to adapt and send **before** inviting candidates to a prepza interview. Replace
@@ -80,6 +80,9 @@ in New York City (see prepza's instructions for companies).
 > before entering into a contract]. You can ask us for a copy of your data, its correction or
 > deletion, or object, at [contact]. In the EU or UK you can complain to your data protection
 > authority. prepza's privacy policy: https://prepza.ai/privacy.
+>
+> **Emails.** prepza sends your invitation and reminders for us. Each has a link to stop our emails
+> through prepza, or that test's reminders.
 >
 > **Tips.** Use a computer with a stable connection, in a quiet place, and keep the test page open:
 > each question's timer keeps running if you leave.

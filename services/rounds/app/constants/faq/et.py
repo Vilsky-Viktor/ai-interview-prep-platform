@@ -93,6 +93,11 @@ FAQ = [
         "answer": "Töökuulutusi kasutatakse sinu intervjuude loomiseks ja kandidaatide vastuseid nende hindamiseks, ainult sinu ettevõtte jaoks. Privaatsuspoliitika selgitab, mida me säilitame, kui kaua ja millised on kõigi õigused.",
     },
     {
+        "key": "emails",
+        "question": "Milliseid e-kirju prepza saadab ja kuidas neid peatada?",
+        "answer": "Teenusekirjad, nagu kutsed, aruanded, makseprobleemid ja meie tingimuste muudatused, saadetakse alati. Ülejäänud, näiteks igapäevase tegevuste kokkuvõtte, meeldetuletused ja tooteuudised, valid seadetes jaotises E-kirjad või peatad iga kirja lingiga „Loobu tellimusest“. Kandidaadid saavad sinu ettevõtte kirjad või ühe intervjuu meeldetuletused peatada oma kutsetes ja meeldetuletustes olevate linkidega.",
+    },
+    {
         "key": "delete",
         "question": "Kas saan oma konto kustutada?",
         "answer": "Jah, seadetes. Sinu konto ja andmed kustutatakse ning enne seda saad oma andmetest koopia alla laadida.",

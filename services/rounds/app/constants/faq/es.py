@@ -93,6 +93,11 @@ FAQ = [
         "answer": "Las descripciones de puesto se usan para crear tus entrevistas, y las respuestas de los candidatos para puntuarlas, solo para tu empresa. La política de privacidad explica qué guardamos, durante cuánto tiempo y los derechos de cada persona.",
     },
     {
+        "key": "emails",
+        "question": "¿Qué correos envía prepza y cómo dejo de recibirlos?",
+        "answer": "Los correos del servicio, como invitaciones, informes, problemas de pago y cambios en nuestros términos, se envían siempre. El resto, como el resumen de actividad diario, los recordatorios y las novedades del producto, lo eliges en Ajustes, en Correos, o lo detienes con el enlace «Cancelar la suscripción» de cada correo. Los candidatos pueden dejar de recibir los correos de tu empresa, o los recordatorios de una entrevista, con los enlaces de sus invitaciones y recordatorios.",
+    },
+    {
         "key": "delete",
         "question": "¿Puedo eliminar mi cuenta?",
         "answer": "Sí, en Ajustes. Tu cuenta y tus datos se eliminan, y antes puedes descargar una copia de tus datos.",

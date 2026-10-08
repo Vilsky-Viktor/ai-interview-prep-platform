@@ -93,6 +93,11 @@ FAQ = [
         "answer": "İş tanımları mülakatlarınızı hazırlamak, adayların cevapları ise onları puanlamak için yalnızca şirketiniz adına kullanılır. Gizlilik politikası neleri, ne kadar süre sakladığımızı ve herkesin haklarını açıklar.",
     },
     {
+        "key": "emails",
+        "question": "prepza hangi e-postaları gönderir ve bunları nasıl durdururum?",
+        "answer": 'Davetler, raporlar, ödeme sorunları ve koşullarımızdaki değişiklikler gibi hizmet e-postaları her zaman gönderilir. Günlük etkinlik özeti, hatırlatmalar ve ürün güncellemeleri gibi diğerlerini Ayarlar\'da, E-postalar bölümünde seçebilir ya da her e-postadaki "Abonelikten çık" bağlantısıyla durdurabilirsiniz. Adaylar, davet ve hatırlatma e-postalarındaki bağlantılarla şirketinizin e-postalarını ya da bir mülakatın hatırlatmalarını durdurabilir.',
+    },
+    {
         "key": "delete",
         "question": "Hesabımı silebilir miyim?",
         "answer": "Evet, Ayarlar'dan. Hesabınız ve verileriniz silinir; öncesinde verilerinizin bir kopyasını indirebilirsiniz.",

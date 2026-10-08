@@ -9,6 +9,7 @@ TERMS_SECTIONS = [
         "heading": "Your account",
         "paragraphs": [
             "You sign in with Google, LinkedIn or GitHub (one account per email, whichever you use) and are responsible for what happens in your account. You can delete it at any time in Settings.",
+            "We send you service emails, such as invites, reports, billing problems and changes to these terms. You choose which other emails you get in Settings, under Emails, and every one of them has an unsubscribe link.",
         ],
     },
     {

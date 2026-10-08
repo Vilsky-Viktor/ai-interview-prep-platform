@@ -93,6 +93,11 @@ FAQ = [
         "answer": "Mô tả công việc được dùng để tạo các buổi phỏng vấn của bạn, và câu trả lời của ứng viên để chấm điểm, chỉ cho công ty của bạn. Chính sách quyền riêng tư giải thích chúng tôi lưu gì, trong bao lâu, và quyền của mọi người.",
     },
     {
+        "key": "emails",
+        "question": "prepza gửi những email nào, và làm sao để dừng nhận?",
+        "answer": 'Email dịch vụ, như lời mời, báo cáo, vấn đề thanh toán và thay đổi điều khoản của chúng tôi, luôn được gửi. Những email còn lại, như tóm tắt hoạt động hằng ngày, lời nhắc và cập nhật sản phẩm, bạn chọn trong Cài đặt, mục Email, hoặc dừng bằng liên kết "Hủy đăng ký" trong mỗi email. Ứng viên có thể dừng nhận email từ công ty bạn, hoặc lời nhắc của một buổi phỏng vấn, bằng các liên kết trong lời mời và lời nhắc của họ.',
+    },
+    {
         "key": "delete",
         "question": "Tôi có thể xóa tài khoản không?",
         "answer": "Có, trong Cài đặt. Tài khoản và dữ liệu của bạn bị xóa, và trước đó bạn có thể tải xuống bản sao dữ liệu.",

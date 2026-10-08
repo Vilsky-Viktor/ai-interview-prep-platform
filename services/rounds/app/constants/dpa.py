@@ -11,7 +11,7 @@ DPA_SECTIONS = [
         "items": [
             "Purpose: running the company's interviews: inviting candidates, timing and scoring their answers, showing the company the results and the integrity signals, sending the emails the company asks for, sending results to the tools the company connects (its applicant tracking system, Slack, and its own systems through prepza's API and web hooks), and keeping the results for the company.",
             "People: the candidates the company invites, who apply through its link or whom its applicant tracking system sends, and the members of the company.",
-            "Data: candidates' email addresses, names and account ids from their sign-in, their answers, how long each took, page leaves, copy attempts and answers too fast to have read the question during the interview, any extra time the company gives them (without a reason), and the results; the email and applicant tracking system id of candidates that system sends; and the emails of people the company sends a report to.",
+            "Data: candidates' email addresses, names and account ids from their sign-in, their answers, how long each took, page leaves, copy attempts and answers too fast to have read the question during the interview, any extra time the company gives them (without a reason), and the results; the email and applicant tracking system id of candidates that system sends; the emails of people the company sends a report to; and a one-way hash of the email address of each candidate who stops the company's emails.",
             "Duration: while the company uses prepza. Candidates' results are deleted 12 months after their invitation was last sent, candidates an applicant tracking system sends 12 months after they arrive, and everything when the company is deleted.",
         ],
     },
@@ -25,6 +25,7 @@ DPA_SECTIONS = [
             "We tell the company without undue delay, and within 48 hours where we can, after becoming aware of a breach of its data, with what we know.",
             "At the end, the data is deleted as described above; the company can download its results before deleting its company.",
             "Tools the company connects (an applicant tracking system, a Slack workspace, or its own systems through prepza's API and web hooks) are its own recipients, not our sub-processors: we send them data only on the company's instruction, given when its owner or admin connects them, and stop when they are disconnected. Where they are outside the EU, that transfer is the company's responsibility.",
+            "Invites and reminders sent on the company's behalf include links for the candidate to stop the company's emails, or that interview's reminders. After a candidate stops the company's emails, prepza doesn't email them for the company again and the company sees their invite as undelivered. The request is kept as a one-way hash of the email address until the company is deleted, also when the company erases the candidate.",
             "We give the company the information needed to show that this agreement is kept, and answer reasonable audit questions in writing.",
         ],
     },

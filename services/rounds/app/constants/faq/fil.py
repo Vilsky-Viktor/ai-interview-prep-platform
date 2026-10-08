@@ -93,6 +93,11 @@ FAQ = [
         "answer": "Ginagamit ang mga job description para buuin ang iyong mga interview, at ang mga sagot ng aplikante para i-score ang mga ito, para sa iyong kumpanya lang. Ipinapaliwanag ng privacy policy kung ano ang itinatago namin, gaano katagal, at ang mga karapatan ng lahat.",
     },
     {
+        "key": "emails",
+        "question": "Anong mga email ang ipinapadala ng prepza, at paano ko ito ihihinto?",
+        "answer": 'Laging ipinapadala ang mga email ng serbisyo, gaya ng mga imbitasyon, report, problema sa bayad at pagbabago sa aming mga tuntunin. Ang iba, gaya ng araw-araw na buod ng aktibidad, mga paalala at mga update tungkol sa produkto, ay pinipili mo sa Mga setting, sa ilalim ng Mga email, o inihihinto gamit ang link na "Mag-unsubscribe" sa bawat email. Puwedeng ihinto ng mga aplikante ang mga email ng iyong kumpanya, o ang mga paalala ng isang interview, gamit ang mga link sa kanilang mga imbitasyon at paalala.',
+    },
+    {
         "key": "delete",
         "question": "Puwede ko bang burahin ang account ko?",
         "answer": "Oo, sa Settings. Buburahin ang account at data mo, at puwede mo munang i-download ang kopya ng data mo.",

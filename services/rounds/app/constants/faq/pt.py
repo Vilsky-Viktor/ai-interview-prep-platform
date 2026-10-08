@@ -93,6 +93,11 @@ FAQ = [
         "answer": "As descrições de vaga são usadas para criar suas entrevistas, e as respostas dos candidatos para avaliá-las, apenas para a sua empresa. A política de privacidade explica o que guardamos, por quanto tempo e os direitos de cada pessoa.",
     },
     {
+        "key": "emails",
+        "question": "Quais e-mails a prepza envia, e como faço para pará-los?",
+        "answer": 'E-mails de serviço, como convites, relatórios, problemas de pagamento e mudanças nos nossos termos, são sempre enviados. Os demais, como o resumo de atividades diário, os lembretes e as novidades do produto, você escolhe em Configurações, na seção E-mails, ou cancela pelo link "Cancelar inscrição" em cada e-mail. Os candidatos podem parar de receber os e-mails da sua empresa, ou os lembretes de uma entrevista, pelos links nos convites e lembretes.',
+    },
+    {
         "key": "delete",
         "question": "Posso excluir minha conta?",
         "answer": "Sim, nas Configurações. Sua conta e seus dados são excluídos, e antes você pode baixar uma cópia dos seus dados.",

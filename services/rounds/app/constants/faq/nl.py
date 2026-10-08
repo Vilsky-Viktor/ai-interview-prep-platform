@@ -93,6 +93,11 @@ FAQ = [
         "answer": "Functieomschrijvingen worden gebruikt om je interviews te maken, en de antwoorden van kandidaten om ze te beoordelen, alleen voor jouw bedrijf. Het privacybeleid legt uit wat we bewaren, hoe lang en welke rechten iedereen heeft.",
     },
     {
+        "key": "emails",
+        "question": "Welke e-mails stuurt prepza, en hoe stop ik ze?",
+        "answer": "Service-e-mails, zoals uitnodigingen, rapporten, betalingsproblemen en wijzigingen in onze voorwaarden, worden altijd verstuurd. De rest, zoals het dagelijkse activiteitenoverzicht, herinneringen en productupdates, kies je in Instellingen, onder E-mails, of stop je met de link 'Afmelden' in elke e-mail. Kandidaten kunnen de e-mails van je bedrijf, of de herinneringen voor een interview, stoppen met de links in hun uitnodigingen en herinneringen.",
+    },
+    {
         "key": "delete",
         "question": "Kan ik mijn account verwijderen?",
         "answer": "Ja, in Instellingen. Je account en je gegevens worden verwijderd, en vooraf kun je een kopie van je gegevens downloaden.",

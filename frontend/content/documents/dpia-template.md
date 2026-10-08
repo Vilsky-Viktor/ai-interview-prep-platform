@@ -51,6 +51,7 @@ multiple-choice test, as one input to a hiring decision made by **[COMPANY: who]
 | Integrity signals | Times the candidate left the page, copy attempts, answers under 3 seconds, each with the question on screen |
 | Feedback | Candidate's ratings and reports of questions (reports may include a free-text comment) |
 | Reports | PDFs made in your browser; if emailed through prepza, kept at most 7 days to send |
+| Email opt-outs | A one-way hash of the email address of a candidate who stops your emails (or one interview's reminders) through the link in prepza's invites and reminders |
 | Special categories | None requested. **[COMPANY]** confirm you do not add any (e.g. in job descriptions or notes) |
 
 **Data subjects.** Job candidates **[COMPANY: approx. number per year]**; your staff using prepza.
@@ -80,7 +81,8 @@ clauses (see the DPA).
 
 **Retention.** Candidate results, timings and signals: deleted automatically 12 months after the
 invite was last sent. Unstarted invites expire after 30 days. Job description text in generation
-records: 90 days. Database backups: 14 days, then overwritten. **[COMPANY]**: your own retention of
+records: 90 days. Candidates' requests to stop your emails: until your company is deleted.
+Database backups: 14 days, then overwritten. **[COMPANY]**: your own retention of
 downloaded PDFs and notes.
 
 **Automated decision-making.** prepza computes a grade and ranking but makes no decision. Whether
@@ -95,8 +97,8 @@ describe who reviews results and how (see section 5).
 | Is the knowledge tested a genuine requirement of the role? | **[COMPANY]** you approved the topics; keep that record |
 | Could a less intrusive method work? | **[COMPANY]** |
 | Data minimisation | Only sign-in details and test data; no CV, video, voice or demographics are collected by prepza |
-| Information to candidates | Invite page tells candidates what to expect, that leaving the page and copying are recorded, that questions are AI-written, that people at your company decide and can review their result, and to ask you for more time if needed. **[COMPANY]** add your notice (see prepza's candidate notice templates) |
-| Rights | Access: candidate's scorecard page and PDF report give you everything to answer; erasure: "Delete candidate" on the candidate's page; objection: **[COMPANY]** process; candidates can also write to prepza, who passes requests on |
+| Information to candidates | Invite page tells candidates what to expect, that leaving the page and copying are recorded, that questions are AI-written, that people at your company decide and can review their result, and to ask you for more time if needed. Invites and reminders have links to stop your emails or that interview's reminders. **[COMPANY]** add your notice (see prepza's candidate notice templates) |
+| Rights | Access: candidate's scorecard page and PDF report give you everything to answer; erasure: "Delete candidate" on the candidate's page; objection: **[COMPANY]** process; stopping your emails: the link in prepza's invites and reminders, after which an invite to them shows as undelivered; candidates can also write to prepza, who passes requests on |
 | Human review on request | **[COMPANY]** who handles it and how fast |
 | Accommodations | Extra time per candidate (+25%, +50% or +100%), set before they start, no reason stored; **[COMPANY]** alternative process |
 
