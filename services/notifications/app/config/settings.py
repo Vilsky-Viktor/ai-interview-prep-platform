@@ -15,9 +15,14 @@ class Settings(ServiceSettings):
     resend_webhook_secret: str = ""
     smtp_host: str = "mailpit"
     smtp_port: int = 25
-    # Resend sends only from a domain verified in its dashboard.
+    # Resend sends only from a domain verified in its dashboard. Service emails (invites,
+    # reports, billing) come from mail_from; emails a user may turn off (the digest, reminders)
+    # from mail_from_updates, on a domain of their own, so spam complaints about them can't
+    # hurt the service emails' reputation.
     mail_from: str = "prepza. <no-reply@prepza.local>"
-    # prepza's inbox: the contact page's messages go here.
+    mail_from_updates: str = "prepza. <updates@mail.prepza.local>"
+    # prepza's inbox: the contact page's messages go here, and replies to emails that have no
+    # one else to answer (rather than to an unread no-reply address).
     contact_email: str = "hello@prepza.ai"
     # Public address of the site, used for links in emails.
     site_url: str

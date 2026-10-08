@@ -178,7 +178,7 @@ def candidate_reminder_email(data: dict, site_url: str, secret: str) -> Email:
 
     email = render("reminder", data, f"{site_url.rstrip('/')}/invite/{data['token']}", links)
     email.tags = invite_tags(CANDIDATE_INVITE_KIND, data.get("invite_id"))
-    email.headers = headers
+    email.headers.update(headers)
 
     return email
 
@@ -195,14 +195,18 @@ def optional_email(
 ) -> Email:
     """An email a prepza user may turn off (the activity digest, reminders, updates, offers):
     the `kind` email, with "Unsubscribe" (from `unsubscribe`) and "Change your email settings"
-    under its footer, and the one-click unsubscribe headers mail clients show as a button."""
+    under its footer, and the one-click unsubscribe headers mail clients show as a button. Sent
+    from the optional emails' own address, and tagged with the user and `unsubscribe`, so a spam
+    complaint about it turns it off (services/webhooks.py)."""
     token = user_token(user_id, unsubscribe, secret)
     links = [
         ("unsubscribe", page_url(site_url, token)),
         ("email_settings", site_url.rstrip("/") + SETTINGS_PATH),
     ]
     email = render(kind, data, link, links, sections)
-    email.headers = one_click_headers(site_url, token)
+    email.headers.update(one_click_headers(site_url, token))
+    email.optional = True
+    email.tags = {KIND_TAG: unsubscribe, ID_TAG: user_id}
 
     return email
 

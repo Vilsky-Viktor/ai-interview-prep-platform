@@ -4,6 +4,7 @@ from datetime import UTC, datetime
 import pytest
 from prepza_common.notifications import NotificationKind, Recipient, notification
 
+from app.constants.email import AUTOMATED_HEADERS
 from app.integrations import billing, companies, generation, library
 from app.integrations.resend import ResendBusy
 from app.services import delivery, digest, events, reminders
@@ -187,7 +188,7 @@ def test_a_failed_top_up_emails_the_companys_owners_and_admins_at_once(world, mo
         ("ann@example.com", "events/e-1/ann"),
         ("ann@example.com", "events/e-1/ann"),
     ]
-    assert world["sent"][0][0].headers == {}
+    assert world["sent"][0][0].headers == AUTOMATED_HEADERS
 
 
 def test_other_notifications_email_nobody(world, monkeypatch):

@@ -56,9 +56,10 @@ locals {
       { for key, price in var.paddle_prices : "PADDLE_PRICE_${upper(key)}" => price },
     )
     notifications = {
-      INVOKER_AUDIENCE = local.run_url["notifications"]
-      SITE_URL         = "https://${var.domain}"
-      MAIL_FROM        = var.mail_from
+      INVOKER_AUDIENCE  = local.run_url["notifications"]
+      SITE_URL          = "https://${var.domain}"
+      MAIL_FROM         = var.mail_from
+      MAIL_FROM_UPDATES = var.mail_from_updates
     }
     notifications-stream = {
       INVOKER_AUDIENCE = local.run_url["notifications-stream"]

@@ -5,6 +5,7 @@ from types import SimpleNamespace
 import pytest
 from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGES
 
+from app.constants.email import AUTOMATED_HEADERS
 from app.constants.member_emails import MemberEmail
 from app.helpers.member_emails import digest_email, reminder_email, top_up_failed_email
 from app.helpers.member_selection import (
@@ -114,7 +115,7 @@ def test_a_failed_top_up_is_a_service_email_without_unsubscribe():
     email = top_up_failed_email(recipient(), "Acme <Co>", SITE)
 
     assert email.subject == "Automatic top-up failed for Acme <Co>"
-    assert email.headers == {}
+    assert email.headers == AUTOMATED_HEADERS
     assert "unsubscribe" not in email.text.lower()
     assert "whatever your email settings" in email.text
     assert "Acme &lt;Co&gt;" in email.html

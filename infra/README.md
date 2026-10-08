@@ -111,7 +111,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
     Until the certificate is active, the uptime checks fail and their alerts email you; they clear by themselves once the site answers.
 11. **Update the services that call back to the site:**
     - **Paddle:** the webhook destination is `https://prepza.ai/api/billing/webhooks/paddle`, for `transaction.completed`, `adjustment.created`, `adjustment.updated`, `subscription.created` and `subscription.canceled`. The adjustments are refunds and chargebacks, which take the credits back; the subscriptions start and end automatic top-ups.
-    - **Resend:** the `prepza.ai` sending domain is already verified. Add a webhook at `https://prepza.ai/api/notifications/webhooks/resend` for `email.bounced`, `email.complained` and `email.suppressed`; its signing secret is `resend-webhook-secret` in step 8.
+    - **Resend:** the `prepza.ai` sending domain is already verified; verify `mail.prepza.ai` too, the optional emails' sender (see [Email deliverability](#email-deliverability)). Add a webhook at `https://prepza.ai/api/notifications/webhooks/resend` for `email.bounced`, `email.complained` and `email.suppressed`; its signing secret is `resend-webhook-secret` in step 8.
     - **Sentry:** set `sentry_dsn` in `terraform.tfvars`.
 
 12. **Connect GitHub for deploys.** In the repository's **Settings → Secrets and variables → Actions → Variables**, add:
@@ -125,6 +125,48 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
     - **Rules:** restrict creations, restrict updates and restrict deletions.
     - **Bypass list:** Repository admin, so you can still create them.
 14. **Optionally, require an approval for deploys.** Deploys run in the `production` environment, which GitHub creates on the first deploy. In **Settings → Environments → production**, add yourself under **Required reviewers**; each deploy then waits for your click. Rulesets and required reviewers on a private repository need a paid GitHub plan.
+
+## Email deliverability
+
+Emails go out through Resend in two streams, each from its own domain, so spam complaints about the optional ones can't hurt the reputation of the service ones:
+
+| Stream | Emails | Sender (`terraform.tfvars`) |
+| --- | --- | --- |
+| Service | candidate invites and reminders, shared reports, failed automatic top-ups, contact messages | `mail_from = "prepza. <no-reply@prepza.ai>"` |
+| Optional | the activity digest and reminders (later product updates and offers) | `mail_from_updates = "prepza. <updates@mail.prepza.ai>"` |
+
+The DNS records below are what Gmail, Yahoo (their 2024 rules for bulk senders) and Outlook check. Add them in GoDaddy's DNS, where a record's name is relative to `prepza.ai` (`send` means `send.prepza.ai`):
+
+1. **Add both domains in Resend.** At resend.com/domains, `prepza.ai` is there; add `mail.prepza.ai` in the same region. Each domain's page lists its exact records: copy the values from there, as the DKIM key is unique to the domain and the bounce host depends on the region.
+2. **SPF and the bounce address (return path).** Resend sends with a bounce address on a `send` subdomain of each domain, so SPF is checked there, not on `prepza.ai` itself:
+
+   | Type | Name | Value |
+   | --- | --- | --- |
+   | MX (priority 10) | `send` | `feedback-smtp.eu-west-1.amazonses.com` (the host on Resend's page) |
+   | TXT | `send` | `v=spf1 include:amazonses.com ~all` |
+   | MX (priority 10) | `send.mail` | the same host |
+   | TXT | `send.mail` | `v=spf1 include:amazonses.com ~all` |
+
+   A name has at most one SPF record. If something else sends as `@prepza.ai` (the mailbox behind `hello@prepza.ai`), its own SPF record on `@` stays as its provider says.
+3. **DKIM.** One TXT record per domain, with the key from Resend's page:
+
+   | Type | Name | Value |
+   | --- | --- | --- |
+   | TXT | `resend._domainkey` | `p=MIGfMA0GCSqGSIb3DQEB…` (prepza.ai's key) |
+   | TXT | `resend._domainkey.mail` | `p=MIGfMA0GCSqGSIb3DQEB…` (mail.prepza.ai's key) |
+
+   Click **Verify** on each domain's page once the records are in; both should show "Verified".
+4. **DMARC.** One record on `prepza.ai` covers `mail.prepza.ai` too. Start by only collecting reports, sent to an address you read:
+
+   | Type | Name | Value |
+   | --- | --- | --- |
+   | TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:dmarc@prepza.ai; adkim=r; aspf=r` |
+
+   After 2–4 weeks of reports showing every legitimate sender passing (Resend, and the mailbox provider of `hello@prepza.ai`), move to `p=quarantine`, and later to `p=reject`.
+5. **Turn tracking off.** On each domain's page in Resend, under **Configuration**, keep **Click tracking** and **Open tracking** off: click tracking rewrites links into redirects through another domain, and the open pixel is an image from elsewhere; both look like spam. Emails link only to `prepza.ai`.
+6. **Check it.** Send an invite and a digest to the address mail-tester.com gives you and aim for 10/10; in Gmail, **Show original** should say `PASS` for SPF, DKIM and DMARC. Add `prepza.ai` to [Google Postmaster Tools](https://postmaster.google.com) (verified with one more TXT record) and keep the spam rate under 0.1%, never reaching 0.3%; Outlook's [SNDS](https://sendersupport.olc.protection.outlook.com/snds/) shows the same for Microsoft.
+
+What the emails do themselves: each has a plain-text part next to the HTML, `Auto-Submitted: auto-generated`, and a Reply-To that someone reads (the member who shared a report, the visitor for contact messages, otherwise `CONTACT_EMAIL`). Only emails the recipient may stop (the digest, reminders, a candidate's reminder) carry the one-click `List-Unsubscribe` headers; a spam complaint about the digest or reminders turns them off for that user (see [Notifications and emails](../docs/features/notifications.md#unsubscribing)).
 
 ## Deploys
 

@@ -6,6 +6,8 @@ import pytest
 from prepza_common import http
 
 from app.config.settings import settings
+from app.helpers.member_emails import digest_email
+from app.services import delivery
 from tests.integration.factories import api, push, signed
 
 SECRET = "whsec_" + base64.b64encode(b"test-webhook-key").decode()
@@ -48,6 +50,7 @@ def outside(monkeypatch):
     monkeypatch.setattr(settings, "resend_api_key", "re_test")
     monkeypatch.setattr(settings, "resend_webhook_secret", SECRET)
     monkeypatch.setattr(settings, "companies_url", "http://companies")
+    monkeypatch.setattr(settings, "library_url", "http://library")
     monkeypatch.setattr(
         http, "get_client", lambda: httpx.AsyncClient(transport=httpx.MockTransport(answer))
     )
@@ -146,3 +149,38 @@ def test_a_webhook_with_a_wrong_signature_is_refused(run, outside):
 
     assert run(scenario()).status_code == 401
     assert outside["requests"] == []
+
+
+def test_a_spam_complaint_on_a_sent_digest_turns_the_digest_off_in_library(run, outside):
+    recipient = {"user_id": "ann", "email": "ann@example.com", "language": "en"}
+    email = digest_email(recipient, [], "http://localhost:8090", settings.email_link_secret)
+
+    async def scenario():
+        await delivery.send(email, "digest/ann/1")
+        [request] = outside["requests"]
+        sent = json.loads(request.content)
+        # Resend's webhook carries back the tags the email was sent with.
+        tags = {tag["name"]: tag["value"] for tag in sent["tags"]}
+        body = json.dumps({"type": "email.complained", "data": {"tags": tags}}).encode()
+
+        async with api() as client:
+            response = await client.post(
+                "/webhooks/resend", content=body, headers=signed(body, SECRET)
+            )
+
+        return sent, response
+
+    sent, response = run(scenario())
+    unsubscribe = outside["requests"][1]
+
+    assert sent["from"] == settings.mail_from_updates
+    assert response.status_code == 204
+    assert str(unsubscribe.url) == "http://library/internal/users/ann/unsubscribe"
+    assert json.loads(unsubscribe.content) == {
+        "settings": [
+            "candidate_finished",
+            "invite_undelivered",
+            "ats_not_invited",
+            "interview_ready",
+        ]
+    }

@@ -24,14 +24,14 @@ async def send(email: Email, idempotency_key: str) -> None:
             "Idempotency-Key": idempotency_key,
         },
         json={
-            "from": settings.mail_from,
+            "from": settings.mail_from_updates if email.optional else settings.mail_from,
             "to": [email.to],
             "subject": email.subject,
             "html": email.html,
             "text": email.text,
             "tags": [{"name": name, "value": value} for name, value in email.tags.items()],
-            **({"reply_to": email.reply_to} if email.reply_to else {}),
-            **({"headers": email.headers} if email.headers else {}),
+            "reply_to": email.reply_to or settings.contact_email,
+            "headers": email.headers,
             **(
                 {
                     "attachments": [

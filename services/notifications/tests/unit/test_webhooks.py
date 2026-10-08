@@ -9,7 +9,7 @@ import pytest
 from app.config.settings import settings
 from app.helpers.emails import candidate_invite_email
 from app.helpers.webhooks import signature_valid
-from app.integrations import companies
+from app.integrations import companies, library
 
 # Svix's published example (docs.svix.com, "Verifying Webhooks Manually"), not a real secret. Put
 # together from parts so secret scanners don't take the literal for a leaked key.
@@ -65,14 +65,18 @@ def reported(monkeypatch):
     async def fake_invite(invite_id):
         calls.append(("companies", invite_id))
 
+    async def fake_unsubscribe(user_id, email_settings):
+        calls.append(("library", user_id, email_settings))
+
     monkeypatch.setattr(settings, "resend_webhook_secret", SECRET)
     monkeypatch.setattr(companies, "invite_undelivered", fake_invite)
+    monkeypatch.setattr(library, "unsubscribe", fake_unsubscribe)
 
     return calls
 
 
-def event(event_type, kind=None):
-    tags = {"kind": kind, "id": INVITE_ID} if kind else {}
+def event(event_type, kind=None, tag_id=INVITE_ID):
+    tags = {"kind": kind, "id": tag_id} if kind else {}
 
     return {"type": event_type, "data": {"to": ["bob@example.com"], "tags": tags}}
 
@@ -109,3 +113,27 @@ def test_invite_emails_are_tagged_with_what_they_are():
 
     assert invite.tags == {"kind": "candidate_invite", "id": INVITE_ID}
     assert untagged.tags == {}
+
+
+def test_a_spam_complaint_on_the_digest_turns_the_users_digest_off(client, reported):
+    assert signed_post(client, event("email.complained", "digest", "ann")).status_code == 204
+    assert reported == [
+        (
+            "library",
+            "ann",
+            ["candidate_finished", "invite_undelivered", "ats_not_invited", "interview_ready"],
+        )
+    ]
+
+
+def test_a_spam_complaint_on_a_reminder_turns_reminders_off(client, reported):
+    signed_post(client, event("email.complained", "reminders", "ann"))
+
+    assert reported == [("library", "ann", ["reminders"])]
+
+
+def test_a_bounce_on_an_optional_email_changes_no_settings(client, reported):
+    signed_post(client, event("email.bounced", "digest", "ann"))
+    signed_post(client, event("email.suppressed", "reminders", "ann"))
+
+    assert reported == []

@@ -2,6 +2,7 @@ import asyncio
 import base64
 import smtplib
 from email.message import EmailMessage
+from email.utils import formatdate, make_msgid
 
 from app.config.settings import settings
 from app.constants.email import SEND_TIMEOUT_S
@@ -10,12 +11,13 @@ from app.models.email import Email
 
 def send_sync(email: Email) -> None:
     message = EmailMessage()
-    message["From"] = settings.mail_from
+    message["From"] = settings.mail_from_updates if email.optional else settings.mail_from
     message["To"] = email.to
     message["Subject"] = email.subject
-
-    if email.reply_to:
-        message["Reply-To"] = email.reply_to
+    message["Reply-To"] = email.reply_to or settings.contact_email
+    # Resend adds these itself; an SMTP server may not.
+    message["Date"] = formatdate()
+    message["Message-ID"] = make_msgid()
 
     for name, value in email.headers.items():
         message[name] = value

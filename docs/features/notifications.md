@@ -86,7 +86,11 @@ The service sends, as HTML with a plain-text version:
 - contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default),
 - to company members: the activity digest, reminders, and failed automatic top-ups (see [Emails to company members](#emails-to-company-members)).
 
-`SITE_URL` is the site address that links in emails point to.
+`SITE_URL` is the site address that links in emails point to; emails link only there (no shorteners or tracking redirects).
+
+- **Two senders:** service emails come from `MAIL_FROM`, and the emails a user may turn off (the digest and reminders) from `MAIL_FROM_UPDATES`, on a subdomain of its own, so spam complaints about them can't hurt the service emails' reputation. The DNS records both need are in [infra/README.md](../../infra/README.md#email-deliverability).
+- **Replies** go to the member who shared a report, to the visitor for contact messages, and otherwise to `CONTACT_EMAIL`, prepza's inbox, rather than to an unread no-reply address.
+- **Headers:** every email has `Auto-Submitted: auto-generated` (no out-of-office replies); only those the recipient may stop carry the one-click unsubscribe headers (see [Unsubscribing](#unsubscribing)).
 
 ### Emails to company members
 
@@ -125,7 +129,7 @@ Emails carry signed unsubscribe links (`EMAIL_LINK_SECRET`, an HMAC-SHA256; `ser
 
 A link opens `/unsubscribe?token=…` (no sign-in, not indexed): it says what stops ("You won't get the activity digest anymore", "You won't get reminders for this interview anymore", "You won't get emails from Acme anymore") and changes nothing until "Confirm", since mail scanners open links. Then it says "You're unsubscribed", with "Email settings" for a signed-in user. The page reads the link at `GET /api/notifications/unsubscribe/{token}` and confirms with a `POST` there; mail clients' one-click `POST` (body `List-Unsubscribe=One-Click`) goes to the same address and needs nothing more. Repeating either changes nothing.
 
-- A user's link turns the setting (or the digest's four kinds) off in `library`, logged with the source `unsubscribe`.
+- A user's link turns the setting (or the digest's four kinds) off in `library`, logged with the source `unsubscribe`. Marking the digest or reminders as spam does the same: those emails are tagged with the user and what they are, and Resend's `email.complained` webhook (see [Undelivered emails](#undelivered-emails)) turns that email off as its link would.
 - A candidate's link is kept in notifications (`candidate_opt_outs`, by the address's hash). An invite to an address that stopped the company's emails isn't sent, and the company sees it as undelivered, as with a bounce. A reminder isn't sent when the address stopped the company's emails or that interview's reminders; the company isn't told. An opt-out stays when the company erases the candidate, and goes with the company.
 
 Changing `EMAIL_LINK_SECRET` breaks the links in emails already sent; opt-outs already made stay.
@@ -135,7 +139,7 @@ Changing `EMAIL_LINK_SECRET` breaks the links in emails already sent; opt-outs a
 Without `RESEND_API_KEY`, emails go to `SMTP_HOST` and `SMTP_PORT`: Mailpit locally (http://localhost:8125). To send real emails through [Resend](https://resend.com):
 
 1. Verify your domain at resend.com/domains.
-2. In `.env`, set `RESEND_API_KEY` (a sending-only key is enough) and `MAIL_FROM` with an address on that domain, for example `prepza. <no-reply@yourdomain.com>`.
+2. In `.env`, set `RESEND_API_KEY` (a sending-only key is enough), `MAIL_FROM` with an address on that domain, for example `prepza. <no-reply@yourdomain.com>`, and `MAIL_FROM_UPDATES` with one on a subdomain verified too, for example `prepza. <updates@mail.yourdomain.com>`. Keep click and open tracking off for both domains in Resend.
 3. Restart the service: it reads `.env` only when it starts.
 
 With `RESEND_API_KEY` set, a message sent from the local contact page reaches the real `CONTACT_EMAIL` inbox.
@@ -150,7 +154,7 @@ With `RESEND_API_KEY` set, a message sent from the local contact page reaches th
 
 ### Undelivered emails
 
-To show invites whose email bounced or was marked as spam ("Email not delivered" in the candidate list):
+To show invites whose email bounced or was marked as spam ("Email not delivered" in the candidate list), and to turn off the digest or reminders for a user who marked them as spam:
 
 1. Add a webhook at resend.com/webhooks pointing at `https://<your domain>/api/notifications/webhooks/resend`, with the events `email.bounced`, `email.complained` and `email.suppressed`.
 2. Put its signing secret (`whsec_...`) in `.env` as `RESEND_WEBHOOK_SECRET`.

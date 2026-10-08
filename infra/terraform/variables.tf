@@ -46,9 +46,15 @@ variable "daily_generation_limit" {
 }
 
 variable "mail_from" {
-  description = "Sender of every email, on a domain verified in Resend."
+  description = "Sender of service emails (invites, reports, billing), on a domain verified in Resend."
   type        = string
   default     = "prepza. <no-reply@prepza.ai>"
+}
+
+variable "mail_from_updates" {
+  description = "Sender of the emails users may turn off (the activity digest, reminders), on a subdomain verified in Resend on its own, so their spam complaints can't hurt the service emails."
+  type        = string
+  default     = "prepza. <updates@mail.prepza.ai>"
 }
 
 variable "sentry_dsn" {

@@ -5,6 +5,7 @@ from html import unescape
 
 import pytest
 
+from app.constants.email import AUTOMATED_HEADERS
 from app.constants.unsubscribe import UnsubscribeType
 from app.helpers.emails import candidate_invite_email, candidate_reminder_email, optional_email
 from app.helpers.unsubscribe import address_hash, candidate_token, sign, user_token, verify
@@ -92,7 +93,7 @@ def test_the_invite_links_to_stopping_the_companys_emails():
     assert ">Don't email me for Acme &amp; Co</a>" in email.html
     assert f"Don't email me for Acme & Co: {SITE}/unsubscribe?token={token}" in email.text
     # Not a mail client's unsubscribe button: the invite is the company's one email.
-    assert email.headers == {}
+    assert email.headers == AUTOMATED_HEADERS
 
 
 def test_the_reminder_links_to_stopping_its_reminders_or_the_companys_emails():
@@ -105,6 +106,7 @@ def test_the_reminder_links_to_stopping_its_reminders_or_the_companys_emails():
     assert ">Don't send me reminders for this interview</a>" in email.html
     # A mail client's own button stops this invite's reminders, at once.
     assert email.headers == {
+        **AUTOMATED_HEADERS,
         "List-Unsubscribe": f"<{SITE}/api/notifications/unsubscribe/{reminders}>",
         "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
     }
@@ -121,7 +123,7 @@ def test_events_saved_before_they_named_the_company_have_no_links():
     data = {key: value for key, value in INVITE.items() if key != "company_id"}
 
     assert tokens(candidate_invite_email(data, SITE, SECRET).html) == []
-    assert candidate_reminder_email(data, SITE, SECRET).headers == {}
+    assert candidate_reminder_email(data, SITE, SECRET).headers == AUTOMATED_HEADERS
 
 
 def test_an_optional_email_links_to_unsubscribing_and_the_email_settings():

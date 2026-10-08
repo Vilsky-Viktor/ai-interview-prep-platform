@@ -4,8 +4,9 @@ region     = "europe-west1"
 domain     = "prepza.ai"
 image_tag  = "first"
 
-mail_from  = "prepza. <no-reply@prepza.ai>"
-sentry_dsn = ""
+mail_from         = "prepza. <no-reply@prepza.ai>"
+mail_from_updates = "prepza. <updates@mail.prepza.ai>"
+sentry_dsn        = ""
 
 # Outage and budget alerts (monitoring.tf).
 alert_email     = "you@example.com"
