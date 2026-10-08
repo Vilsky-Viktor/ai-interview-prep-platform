@@ -1,3 +1,4 @@
+import asyncio
 import uuid
 from datetime import UTC, datetime
 
@@ -110,6 +111,38 @@ def test_a_referrer_over_the_yearly_limit_is_neither_paid_nor_told(run, monkeypa
     assert paid == [acme, None]
     assert acme_credits == WELCOME_COMPANY + REFERRAL_REWARD
     assert second_credits == WELCOME_COMPANY + REFERRAL_REWARD
+
+
+def test_two_rewards_at_once_dont_pass_the_referrers_yearly_limit(run, monkeypatch):
+    acme, first, second = company(), company(), company()
+    monkeypatch.setattr(referrals, "REFERRALS_PER_YEAR", 1)
+    add = referrals.add
+
+    async def slow_add(*args):
+        # Both rewards reach the count before either is saved.
+        await asyncio.sleep(0.3)
+
+        return await add(*args)
+
+    async def scenario():
+        await ledger.welcome_company(acme, f"{acme}@example.com")
+        code = await referrals.code_of(COMPANY, acme)
+
+        for newco in (first, second):
+            await ledger.welcome_company(newco, f"{newco}@example.com")
+            await referrals.record(code, COMPANY, newco, [])
+
+        monkeypatch.setattr(referrals, "add", slow_add)
+        paid = await asyncio.gather(
+            *(referrals.reward(COMPANY, newco, f"txn_{newco}") for newco in (first, second))
+        )
+
+        return paid, await available(COMPANY, acme)
+
+    paid, acme_credits = run(scenario())
+
+    assert sorted(paid, key=bool) == [None, acme]
+    assert acme_credits == WELCOME_COMPANY + REFERRAL_REWARD
 
 
 def refund(transaction_id, total):

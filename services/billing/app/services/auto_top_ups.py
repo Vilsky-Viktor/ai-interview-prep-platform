@@ -1,6 +1,7 @@
 import logging
 from datetime import UTC, datetime
 
+import httpx
 from fastapi import HTTPException, status
 from prepza_common.analytics import track
 from prepza_common.notifications import NotificationKind, notification, publish_quietly
@@ -129,9 +130,11 @@ async def ended(subscription_id: str) -> None:
 
 async def check(owner_type: str, owner_id: str) -> None:
     """After credits are used: if the balance is now under the threshold, buys the chosen
-    top-up with the saved card. Never fails the request that used the credits; a charge that
-    fails (a declined card) is told to the owner and tried again only after
-    AUTO_TOP_UP_RETRY_AFTER."""
+    top-up with the saved card. Never fails the request that used the credits; a charge Paddle
+    refuses (a declined card) is told to the owner and tried again only after
+    AUTO_TOP_UP_RETRY_AFTER. After a timeout or Paddle's own error the charge may have gone
+    through: its transaction.completed web hook adds the credits, and if it didn't, the next
+    check tries again after AUTO_TOP_UP_COOLDOWN."""
     row = None
     now = datetime.now(UTC)
 
@@ -142,10 +145,10 @@ async def check(owner_type: str, owner_id: str) -> None:
             return
 
         await paddle.charge(row.subscription_id, price_ids()[row.product])
-    except Exception:
+    except Exception as error:
         logger.exception("Automatic top-up failed for %s %s", owner_type, owner_id)
 
-        if row is not None:
+        if isinstance(error, httpx.HTTPStatusError) and error.response.is_client_error:
             await auto_top_ups.failed(owner_type, owner_id, now)
             await publish_quietly(
                 notification(owner_type, owner_id, NotificationKind.AUTO_TOP_UP_FAILED, TOP_UP_LINK)

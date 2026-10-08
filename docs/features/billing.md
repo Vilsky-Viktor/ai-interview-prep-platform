@@ -50,6 +50,7 @@ On the top-up page, under each balance ("Automatic top-up: off"), choose a top-u
 - The card is saved through Paddle once.
 - It is shown only when Paddle's API key and the $0 price are set (see [Setting up Paddle](#setting-up-paddle)).
 - A card that declines an automatic top-up is tried again at most once a day (`AUTO_TOP_UP_RETRY_AFTER`), and the owner is told.
+- A charge Paddle doesn't answer (a timeout or an error on its side) isn't counted as declined: if it went through, Paddle's webhook adds the credits; if not, it's tried again after 10 minutes (`AUTO_TOP_UP_COOLDOWN`).
 
 ## Referrals
 

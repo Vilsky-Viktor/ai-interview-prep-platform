@@ -1,6 +1,7 @@
 import asyncio
 from types import SimpleNamespace
 
+import httpx
 import pytest
 from prepza_common.notifications import notification
 
@@ -71,12 +72,22 @@ def test_a_top_up_bought_by_hand_tells_nobody(granted, notified):
     assert notified == []
 
 
-def test_a_declined_automatic_charge_tells_the_owner(monkeypatch, notified):
+def paddle_error(code):
+    request = httpx.Request("POST", "https://paddle.test")
+
+    return httpx.HTTPStatusError(
+        "", request=request, response=httpx.Response(code, request=request)
+    )
+
+
+def charge_failing_with(monkeypatch, error):
+    """Paddle's charge fails with `error`; the owners marked failed."""
+
     async def claimed(owner_type, owner_id, now):
         return SimpleNamespace(subscription_id="sub_01", product="topup_30")
 
-    async def declined(subscription_id, price_id):
-        raise RuntimeError("declined")
+    async def charge(subscription_id, price_id):
+        raise error
 
     marked = []
 
@@ -85,9 +96,25 @@ def test_a_declined_automatic_charge_tells_the_owner(monkeypatch, notified):
 
     monkeypatch.setattr(auto_top_ups_storage, "claim_charge", claimed)
     monkeypatch.setattr(auto_top_ups_storage, "failed", failed)
-    monkeypatch.setattr(paddle, "charge", declined)
+    monkeypatch.setattr(paddle, "charge", charge)
+
+    return marked
+
+
+def test_a_declined_automatic_charge_tells_the_owner(monkeypatch, notified):
+    marked = charge_failing_with(monkeypatch, paddle_error(400))
 
     asyncio.run(auto_top_ups.check("company", "acme"))
 
     assert notified == [notification("company", "acme", "auto_top_up_failed", "/top-up")]
     assert marked == ["acme"]
+
+
+@pytest.mark.parametrize("error", [httpx.ReadTimeout("timed out"), paddle_error(503)])
+def test_an_automatic_charge_paddle_may_have_taken_isnt_failed(monkeypatch, notified, error):
+    marked = charge_failing_with(monkeypatch, error)
+
+    asyncio.run(auto_top_ups.check("company", "acme"))
+
+    assert notified == []
+    assert marked == []

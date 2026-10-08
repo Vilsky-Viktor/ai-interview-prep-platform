@@ -58,7 +58,10 @@ def run():
 @pytest.fixture
 def paddle_calls(monkeypatch):
     """Paddle's API, faked: what was charged and cancelled. A subscription whose id starts
-    with sub_ended has ended in Paddle; one starting with sub_declined has a declined card."""
+    with sub_ended has ended in Paddle; one starting with sub_declined has a declined card;
+    one starting with sub_timeout times out."""
+    import httpx
+
     from app.config.settings import settings
     from app.integrations import paddle
 
@@ -68,7 +71,13 @@ def paddle_calls(monkeypatch):
         calls.append(("charge", subscription_id, price_id))
 
         if subscription_id.startswith("sub_declined"):
-            raise RuntimeError("declined")
+            request = httpx.Request("POST", "https://paddle.test")
+            response = httpx.Response(400, request=request)
+
+            raise httpx.HTTPStatusError("declined", request=request, response=response)
+
+        if subscription_id.startswith("sub_timeout"):
+            raise httpx.ReadTimeout("timed out")
 
     async def cancel(subscription_id):
         calls.append(("cancel", subscription_id))

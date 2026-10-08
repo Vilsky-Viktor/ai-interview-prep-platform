@@ -95,9 +95,9 @@ async def reserve(owner_type: str, owner_id: str, amount: int, key: str, reason:
 async def charge(key: str) -> None:
     """Takes the credits a hold set aside. Safe to repeat; does nothing without an open hold."""
     async with Session() as session:
-        hold = await session.get(Hold, key, with_for_update=True)
+        hold = await open_hold(session, key)
 
-        if hold is None or hold.status != HoldStatus.OPEN:
+        if hold is None:
             return
 
         await session.execute(
@@ -113,9 +113,9 @@ async def charge(key: str) -> None:
 async def release(key: str) -> None:
     """Gives back credits a hold set aside. Safe to repeat."""
     async with Session() as session:
-        hold = await session.get(Hold, key, with_for_update=True)
+        hold = await open_hold(session, key)
 
-        if hold is None or hold.status != HoldStatus.OPEN:
+        if hold is None:
             return
 
         await session.execute(
@@ -125,6 +125,20 @@ async def release(key: str) -> None:
         )
         hold.status = HoldStatus.RELEASED
         await session.commit()
+
+
+async def open_hold(session: AsyncSession, key: str) -> Hold | None:
+    """The open hold, locked. Its wallet is locked first, as everywhere else (reserve, deleting
+    a company), so two transactions never wait on each other's lock."""
+    hold = await session.get(Hold, key)
+
+    if hold is None:
+        return None
+
+    await session.get(Wallet, (hold.owner_type, hold.owner_id), with_for_update=True)
+    hold = await session.get(Hold, key, with_for_update=True, populate_existing=True)
+
+    return hold if hold is not None and hold.status == HoldStatus.OPEN else None
 
 
 async def ensure(session: AsyncSession, owner_type: str, owner_id: str) -> None:

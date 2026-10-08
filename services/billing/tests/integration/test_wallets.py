@@ -1,8 +1,12 @@
+import asyncio
 import uuid
 from datetime import UTC, datetime
 
+from sqlalchemy import delete
+
 from app.constants.credits import CANDIDATE_CREDITS, WELCOME_COMPANY, Reason
 from app.constants.products import TOP_UPS, OwnerType
+from app.models.billing import Hold, Wallet
 from app.storage import ledger, purchases
 from app.storage.db import Session
 from app.storage.ledger import add
@@ -139,3 +143,26 @@ def test_partial_refunds_add_up_and_one_counted_under_its_old_key_isnt_counted_a
         return first, both, again, other, (await ledger.wallet(COMPANY, acme)).balance
 
     assert run(scenario()) == (400, 1_000, 1_000, 50, TOPUP_CREDITS - 1_150)
+
+
+def test_charging_a_hold_while_its_company_is_deleted_doesnt_deadlock(run):
+    acme = company()
+    key = f"candidate:{acme}"
+
+    async def scenario():
+        await ledger.welcome_company(acme, f"{acme}@example.com")
+        await ledger.reserve(COMPANY, acme, CANDIDATE_CREDITS, key, Reason.CANDIDATE)
+
+        async with Session() as session:
+            # As deleting the company does: the wallet goes first, then its holds.
+            await session.execute(delete(Wallet).filter_by(owner_type=COMPANY, owner_id=acme))
+            charging = asyncio.create_task(ledger.charge(key))
+            await asyncio.sleep(0.5)
+            await session.execute(delete(Hold).filter_by(key=key))
+            await session.commit()
+
+        await charging
+
+        return await ledger.wallets(COMPANY, [acme])
+
+    assert run(scenario()) == {}
