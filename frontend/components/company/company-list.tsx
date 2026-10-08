@@ -135,7 +135,7 @@ export function CompanyList({
               )}
             </span>
           </Link>
-          {company.role === "owner" && !templateId && (
+          {company.can_delete && !templateId && (
             <div className="relative z-10 shrink-0">
               <RemoveCompany companyId={company.id} name={company.name} />
             </div>

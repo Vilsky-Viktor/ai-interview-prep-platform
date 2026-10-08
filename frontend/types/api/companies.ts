@@ -1653,6 +1653,10 @@ export interface components {
       role: string
       /** Can Edit */
       can_edit: boolean
+      /** Can Delete */
+      can_delete: boolean
+      /** Can Manage Members */
+      can_manage_members: boolean
       /** Interview Count */
       interview_count: number
       /** Logo Url */

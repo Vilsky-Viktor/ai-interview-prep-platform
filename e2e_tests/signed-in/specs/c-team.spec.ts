@@ -25,6 +25,11 @@ test("owner adds a viewer, who sees the company read-only", async ({ signInAs })
   await inviteCandidate(owner, interviewId, throwawayEmail("candidate"))
   const viewer = throwawayEmail("viewer")
 
+  // Only the owner removes the company.
+  await visit(owner, "/companies")
+  await expect(owner.getByRole("button", { name: `Remove ${company.name}` })).toBeVisible()
+  await shot(owner, "owner-companies")
+
   await visit(owner, `/companies/${company.id}/interviews`)
   await openTab(owner, "Team")
   await shot(owner, "team")
@@ -70,6 +75,9 @@ test("owner adds a viewer, who sees the company read-only", async ({ signInAs })
   await shot(page, "join")
   await page.getByRole("button", { name: "Join company" }).click()
   await expect(page).toHaveURL(/\/companies$/)
+  await expect(page.getByText(company.name).first()).toBeVisible()
+  await expect(page.getByRole("button", { name: `Remove ${company.name}` })).toHaveCount(0)
+  await shot(page, "viewer-companies")
   await page.getByText(company.name).first().click()
 
   // Read-only: no New interview, the name isn't a button to rename it, no verify.

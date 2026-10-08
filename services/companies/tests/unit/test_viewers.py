@@ -12,7 +12,7 @@ from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.routers import companies as companies_route
-from app.services.access import can_edit
+from app.services.access import can_edit, is_owner
 from app.storage import companies, interviews, invites, members
 from tests.unit import fake_candidates
 
@@ -127,6 +127,7 @@ def test_a_viewer_reads_the_company_without_verifying_it(client, viewer, monkeyp
 
     assert company.status_code == 200
     assert (company.json()["role"], company.json()["can_edit"]) == ("viewer", False)
+    assert (company.json()["can_delete"], company.json()["can_manage_members"]) == (False, False)
     assert verified == []
     assert client.get(f"{COMPANY}/credits").status_code == 200
     assert client.get(f"/members?company_id={COMPANY_ID}").status_code == 200
@@ -146,3 +147,10 @@ def test_a_viewer_reads_questions(client, viewer, monkeypatch):
 )
 def test_only_owners_and_admins_edit(role, editor):
     assert can_edit(Member(role=role)) is editor
+
+
+@pytest.mark.parametrize(
+    ("role", "owner"), [(Role.OWNER, True), (Role.ADMIN, False), (Role.VIEWER, False)]
+)
+def test_only_the_owner_is_the_owner(role, owner):
+    assert is_owner(Member(role=role)) is owner

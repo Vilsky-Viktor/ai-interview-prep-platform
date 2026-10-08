@@ -81,6 +81,15 @@ def test_lists_every_membership(client, two_companies):
     ]
 
 
+def test_only_the_owner_may_delete_the_company_and_manage_its_members(client, two_companies):
+    sign_in()
+    response = client.get("/companies")
+
+    assert [
+        (row["name"], row["can_delete"], row["can_manage_members"]) for row in response.json()
+    ] == [("My company", True, True), ("Arcolabs", False, False)]
+
+
 def test_opens_joined_company(client, two_companies):
     sign_in()
     response = client.get(f"/companies/{JOINED_ID}")

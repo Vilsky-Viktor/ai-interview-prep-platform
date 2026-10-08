@@ -8,7 +8,7 @@ from app.constants.roles import Role
 from app.integrations import billing
 from app.models.companies import Member
 from app.schemas.companies import AdminInviteOut, MemberIn, MemberOut, MemberRoleIn
-from app.services.access import require_company
+from app.services.access import is_owner, require_company
 from app.storage import members
 
 router = APIRouter(prefix="/members", tags=["members"])
@@ -23,7 +23,7 @@ def member_out(member: Member, caller: Member) -> MemberOut:
         role=member.role,
         joined=joined,
         token=None if joined else member.token,
-        removable=caller.role == Role.OWNER and member.role != Role.OWNER,
+        removable=is_owner(caller) and not is_owner(member),
         created_at=member.created_at,
     )
 
@@ -41,7 +41,7 @@ async def invite_member(company_id: UUID, body: MemberIn, user: CurrentUser) -> 
     """The owner invites an admin or a viewer; the role applies once the invite is accepted."""
     company, caller = await require_company(user, company_id)
 
-    if caller.role != Role.OWNER:
+    if not is_owner(caller):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Only the owner can add members")
 
     email = str(body.email).lower()
@@ -63,10 +63,10 @@ async def owned_member(user: CurrentUser, company_id: UUID, member_id: UUID) -> 
     if member is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Member not found")
 
-    if caller.role != Role.OWNER:
+    if not is_owner(caller):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Only the owner can manage members")
 
-    if member.role == Role.OWNER:
+    if is_owner(member):
         raise HTTPException(status.HTTP_409_CONFLICT, "The owner can't be changed")
 
     return member

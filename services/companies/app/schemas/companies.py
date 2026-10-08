@@ -45,6 +45,9 @@ class CompanyOut(BaseModel):
     role: str
     # Owners and admins change things and spend credits; viewers only look and share reports.
     can_edit: bool
+    # Only the owner deletes the company, and adds, removes and changes the roles of its members.
+    can_delete: bool
+    can_manage_members: bool
     interview_count: int
     # The logo's address on the site; None until one is set.
     logo_url: str | None = None

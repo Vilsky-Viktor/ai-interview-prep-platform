@@ -21,7 +21,7 @@ from app.schemas.companies import (
     ReferralRewardOut,
 )
 from app.services import company_deletion
-from app.services.access import can_edit, require_company, require_editor
+from app.services.access import can_edit, is_owner, require_company, require_editor
 from app.services.verification import verify_by_email
 from app.storage import companies, interviews
 
@@ -36,6 +36,8 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
         name=company.name,
         role=member.role,
         can_edit=can_edit(member),
+        can_delete=is_owner(member),
+        can_manage_members=is_owner(member),
         interview_count=interview_count,
         logo_url=logo_path(company),
         website_domain=company.website_domain,
@@ -79,6 +81,8 @@ async def create_company(body: CompanyCreate, user: CurrentUser, request: Reques
         name=company.name,
         role=Role.OWNER,
         can_edit=True,
+        can_delete=True,
+        can_manage_members=True,
         interview_count=0,
         created_at=company.created_at,
     )
@@ -107,7 +111,7 @@ async def delete_company(company_id: UUID, user: CurrentUser) -> None:
     """Only the owner can do it."""
     _, member = await require_company(user, company_id)
 
-    if member.role != Role.OWNER:
+    if not is_owner(member):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Only the owner can remove the company")
 
     await company_deletion.delete_company(company_id)

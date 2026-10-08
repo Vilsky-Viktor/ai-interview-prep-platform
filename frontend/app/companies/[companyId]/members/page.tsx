@@ -54,7 +54,7 @@ export default async function MembersPage({
         current="members"
         canEdit={company.can_edit}
         action={
-          company.role === "owner" ? (
+          company.can_manage_members ? (
             <InviteAdmin companyId={companyId} />
           ) : undefined
         }

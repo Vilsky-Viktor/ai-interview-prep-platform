@@ -3,7 +3,7 @@ from uuid import UUID
 from fastapi import HTTPException, Request, status
 from prepza_common.auth import CurrentUser
 
-from app.constants.roles import EDITORS
+from app.constants.roles import EDITORS, Role
 from app.models.companies import Company, Member
 from app.storage import companies
 
@@ -29,6 +29,11 @@ def member_of(company: Company, user_id: str) -> Member | None:
 
 def can_edit(member: Member) -> bool:
     return member.role in EDITORS
+
+
+# Only the owner deletes the company and manages its members.
+def is_owner(member: Member) -> bool:
+    return member.role == Role.OWNER
 
 
 async def require_editor(user: CurrentUser, company_id: UUID) -> tuple[Company, Member]:
