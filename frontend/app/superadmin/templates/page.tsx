@@ -25,6 +25,7 @@ export default async function TemplatesPage({
     listPath: "/library/superadmin/templates",
     params: await searchParams,
     openBase: "/superadmin/templates",
+    allLanguages: true,
   })
 
   if (!browser) {

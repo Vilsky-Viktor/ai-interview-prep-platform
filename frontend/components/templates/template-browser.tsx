@@ -1,12 +1,14 @@
 import { SearchIcon } from "lucide-react"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 
 import { InputAction } from "@/components/input-action"
 import {
+  ALL_LANGUAGES,
   type TemplateChoice,
   TemplateFilterBar,
 } from "@/components/templates/template-filters"
 import { TemplateList } from "@/components/templates/template-list"
+import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { MAX_TITLE_LENGTH } from "@/constants/limits"
 import { PAGE_SIZE } from "@/constants/lists"
 import { serverFetch } from "@/lib/server-api"
@@ -21,7 +23,9 @@ export type TemplateSearchParams = {
 /** The templates searched and filtered like the old public library, on the page at `base` (the
  * address keeps the choices). `listPath` is the API list; rows open under `openBase` (by their
  * readable slug with `bySlug`, the public practice pages), and carry a "Use template" button for
- * `companyId`. Null when the list can't be read. */
+ * `companyId`. Until a language is chosen, the list shows the visitor's interface language and
+ * English (every language with `allLanguages`, the admin zone's). Null when the list can't be
+ * read. */
 export async function TemplateBrowser({
   base,
   listPath,
@@ -29,6 +33,7 @@ export async function TemplateBrowser({
   openBase,
   companyId,
   bySlug,
+  allLanguages,
 }: {
   base: string
   listPath: string
@@ -36,6 +41,7 @@ export async function TemplateBrowser({
   openBase: string
   companyId?: string
   bySlug?: boolean
+  allLanguages?: boolean
 }) {
   const t = await getTranslations("templates")
   const filters = await serverFetch<TemplateFilters>(
@@ -47,11 +53,18 @@ export async function TemplateBrowser({
   }
 
   const asked = [params.lang ?? []].flat()
+  // Nothing chosen yet: the visitor's own language and English, unless every language is asked.
+  const preferred =
+    asked.length > 0 || allLanguages
+      ? asked
+      : [await getLocale(), DEFAULT_LOCALE]
   // Only what the API offers; anything else in the address is ignored.
   const choice: TemplateChoice = {
     q: params.q?.trim() ?? "",
     level: filters.levels.find((level) => level === params.level) ?? null,
-    languages: filters.languages.filter((code) => asked.includes(code)),
+    languages: asked.includes(ALL_LANGUAGES)
+      ? []
+      : filters.languages.filter((code) => preferred.includes(code)),
   }
   const query = new URLSearchParams()
 
@@ -95,6 +108,9 @@ export async function TemplateBrowser({
         {/* A new search keeps the level and languages. */}
         {choice.level && (
           <input type="hidden" name="level" value={choice.level} />
+        )}
+        {choice.languages.length === 0 && (
+          <input type="hidden" name="lang" value={ALL_LANGUAGES} />
         )}
         {choice.languages.map((language) => (
           <input key={language} type="hidden" name="lang" value={language} />

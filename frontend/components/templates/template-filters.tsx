@@ -20,6 +20,9 @@ import type { TemplateFilters } from "@/types/superadmin"
 
 // "Any level" in the level menu; levels themselves come from the API.
 const ANY = "any"
+// "All languages" in the address, so a list that starts in the visitor's languages can show
+// every language once that's chosen.
+export const ALL_LANGUAGES = "all"
 const TRIGGER = "h-10 gap-1.5 px-3 text-sm"
 
 export type TemplateChoice = {
@@ -40,6 +43,10 @@ function templatesHref(base: string, { q, level, languages }: TemplateChoice) {
 
   if (level) {
     params.set("level", level)
+  }
+
+  if (languages.length === 0) {
+    params.set("lang", ALL_LANGUAGES)
   }
 
   languages.forEach((language) => params.append("lang", language))
@@ -144,6 +151,13 @@ export function TemplateFilterBar({
           align="start"
           className="max-h-80 w-56 overflow-y-auto p-2"
         >
+          <DropdownMenuCheckboxItem
+            checked={current.languages.length === 0}
+            onCheckedChange={() => choose({ languages: [] })}
+            className="px-3 py-2 lowercase"
+          >
+            {t("allLanguages")}
+          </DropdownMenuCheckboxItem>
           {filters.languages.map((language) => (
             <DropdownMenuCheckboxItem
               key={language}
