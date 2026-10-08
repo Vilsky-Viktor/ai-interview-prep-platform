@@ -65,7 +65,12 @@ FAQ = [
     {
         "key": "reports",
         "question": "Posso compartilhar os resultados com um gestor contratante?",
-        "answer": "Sim. Baixe um relatório em PDF de um candidato ou de todos os candidatos de uma entrevista, envie-o por e-mail direto da prepza ou mande um resumo curto pelo WhatsApp ou Telegram.",
+        "answer": "Sim. Baixe um relatório em PDF de um candidato ou de todos os candidatos de uma entrevista, envie-o por e-mail direto da prepza ou mande um resumo curto pelo WhatsApp, Telegram, Viber ou LINE.",
+    },
+    {
+        "key": "integrations",
+        "question": "A prepza funciona com meu ATS ou outras ferramentas?",
+        "answer": "Sim, sem custo extra. Conecte Workable, Greenhouse, Teamtailor, Recruitee ou Breezy HR na aba Integrações da sua empresa: os candidatos que você move para uma etapa recebem a entrevista, e os resultados voltam para o ATS. O Slack pode publicar as notificações da sua empresa em um canal, e a API permite que sua própria plataforma convide candidatos e receba os resultados deles; veja a Documentação da API.",
     },
     {
         "key": "candidates",

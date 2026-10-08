@@ -65,7 +65,12 @@ FAQ = [
     {
         "key": "reports",
         "question": "Bisakah aku membagikan hasil ke hiring manager?",
-        "answer": "Bisa. Unduh laporan PDF untuk satu kandidat atau semua kandidat sebuah wawancara, kirim lewat email langsung dari prepza, atau kirim ringkasan singkat di WhatsApp atau Telegram.",
+        "answer": "Bisa. Unduh laporan PDF untuk satu kandidat atau semua kandidat sebuah wawancara, kirim lewat email langsung dari prepza, atau kirim ringkasan singkat di WhatsApp, Telegram, Viber, atau LINE.",
+    },
+    {
+        "key": "integrations",
+        "question": "Apakah prepza bisa dipakai dengan ATS atau tools lain yang saya gunakan?",
+        "answer": "Bisa, tanpa biaya tambahan. Hubungkan Workable, Greenhouse, Teamtailor, Recruitee, atau Breezy HR di tab Integrasi perusahaanmu: kandidat yang kamu pindahkan ke suatu tahap mendapat wawancara, dan hasilnya dikirim kembali ke ATS. Slack bisa memposting notifikasi perusahaanmu ke sebuah channel, dan API memungkinkan platformmu sendiri mengundang kandidat serta menerima hasil mereka; lihat Dokumentasi API.",
     },
     {
         "key": "candidates",

@@ -65,7 +65,12 @@ FAQ = [
     {
         "key": "reports",
         "question": "Kas saan tulemusi värbava juhiga jagada?",
-        "answer": "Jah. Laadi alla PDF-aruanne ühe kandidaadi või intervjuu kõigi kandidaatide kohta, saada see e-postiga otse prepzast või saada lühike kokkuvõte WhatsAppis või Telegramis.",
+        "answer": "Jah. Laadi alla PDF-aruanne ühe kandidaadi või intervjuu kõigi kandidaatide kohta, saada see e-postiga otse prepzast või saada lühike kokkuvõte WhatsAppis, Telegramis, Viberis või LINE'is.",
+    },
+    {
+        "key": "integrations",
+        "question": "Kas prepza töötab minu ATS-i või muude tööriistadega?",
+        "answer": "Jah, ilma lisatasuta. Ühenda Workable, Greenhouse, Teamtailor, Recruitee või Breezy HR oma ettevõtte vahekaardil Integratsioonid: kandidaadid, kelle viid etappi, saavad intervjuu ja nende tulemused lähevad tagasi ATS-i. Slack saab postitada sinu ettevõtte teavitusi kanalisse ja API kaudu saab sinu enda platvorm kandidaate kutsuda ning nende tulemusi vastu võtta; vaata: API dokumentatsioon.",
     },
     {
         "key": "candidates",

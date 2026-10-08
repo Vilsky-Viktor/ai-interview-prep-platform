@@ -65,7 +65,12 @@ FAQ = [
     {
         "key": "reports",
         "question": "結果を採用責任者と共有できますか？",
-        "answer": "はい。候補者1人分、または面接の候補者全員分のPDFレポートをダウンロードしたり、prepzaから直接メールで送ったり、WhatsAppやTelegramで短い要約を送ったりできます。",
+        "answer": "はい。候補者1人分、または面接の候補者全員分のPDFレポートをダウンロードしたり、prepzaから直接メールで送ったり、WhatsApp、Telegram、Viber、LINEで短い要約を送ったりできます。",
+    },
+    {
+        "key": "integrations",
+        "question": "prepzaは使っているATSや他のツールと連携できますか？",
+        "answer": "はい、追加費用なしで連携できます。会社の「連携」タブでWorkable、Greenhouse、Teamtailor、Recruitee、Breezy HRを接続すると、選考ステップに移した候補者に面接が届き、結果はATSに戻ります。Slackでは会社のお知らせをチャンネルに投稿でき、APIを使えば自社のプラットフォームから候補者を招待して結果を受け取れます。詳しくは「API ドキュメント」をご覧ください。",
     },
     {
         "key": "candidates",

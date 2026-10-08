@@ -65,7 +65,12 @@ FAQ = [
     {
         "key": "reports",
         "question": "Kan ik resultaten delen met een hiring manager?",
-        "answer": "Ja. Download een PDF-rapport voor één kandidaat of voor alle kandidaten van een interview, mail het rechtstreeks vanuit prepza, of stuur een korte samenvatting via WhatsApp of Telegram.",
+        "answer": "Ja. Download een PDF-rapport voor één kandidaat of voor alle kandidaten van een interview, mail het rechtstreeks vanuit prepza, of stuur een korte samenvatting via WhatsApp, Telegram, Viber of LINE.",
+    },
+    {
+        "key": "integrations",
+        "question": "Werkt prepza met mijn ATS of andere tools?",
+        "answer": "Ja, zonder extra kosten. Koppel Workable, Greenhouse, Teamtailor, Recruitee of Breezy HR op het tabblad Integraties van je bedrijf: kandidaten die je naar een fase verplaatst, krijgen het interview, en hun resultaten gaan terug naar het ATS. Slack kan de meldingen van je bedrijf in een kanaal plaatsen, en met de API kan je eigen platform kandidaten uitnodigen en hun resultaten ontvangen; zie de API-documentatie.",
     },
     {
         "key": "candidates",

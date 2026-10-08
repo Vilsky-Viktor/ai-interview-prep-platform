@@ -65,7 +65,12 @@ FAQ = [
     {
         "key": "reports",
         "question": "Czy mogę udostępnić wyniki menedżerowi rekrutującemu?",
-        "answer": "Tak. Pobierz raport PDF dla jednego kandydata lub dla wszystkich kandydatów rozmowy, wyślij go e-mailem prosto z prepza albo prześlij krótkie podsumowanie przez WhatsApp lub Telegram.",
+        "answer": "Tak. Pobierz raport PDF dla jednego kandydata lub dla wszystkich kandydatów rozmowy, wyślij go e-mailem prosto z prepza albo prześlij krótkie podsumowanie przez WhatsApp, Telegram, Viber lub LINE.",
+    },
+    {
+        "key": "integrations",
+        "question": "Czy prepza działa z moim ATS lub innymi narzędziami?",
+        "answer": "Tak, bez dodatkowych opłat. Połącz Workable, Greenhouse, Teamtailor, Recruitee lub Breezy HR w zakładce Integracje swojej firmy: kandydaci, których przeniesiesz do etapu, dostają rozmowę, a ich wyniki wracają do ATS. Slack może publikować powiadomienia firmy na kanale, a API pozwala Twojej własnej platformie zapraszać kandydatów i odbierać ich wyniki; zobacz: Dokumentacja API.",
     },
     {
         "key": "candidates",

@@ -64,7 +64,12 @@ FAQ = [
     {
         "key": "reports",
         "question": "Can I share results with a hiring manager?",
-        "answer": "Yes. Download a PDF report for one candidate or for all of an interview's candidates, email it straight from prepza, or send a short summary on WhatsApp or Telegram.",
+        "answer": "Yes. Download a PDF report for one candidate or for all of an interview's candidates, email it straight from prepza, or send a short summary on WhatsApp, Telegram, Viber or LINE.",
+    },
+    {
+        "key": "integrations",
+        "question": "Does prepza work with my ATS or other tools?",
+        "answer": "Yes, at no extra cost. Connect Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR on your company's Integrations tab: candidates you move to a stage get the interview, and their results go back to the ATS. Slack can post your company's notifications to a channel, and the API lets your own platform invite candidates and receive their results; see the API docs.",
     },
     {
         "key": "candidates",

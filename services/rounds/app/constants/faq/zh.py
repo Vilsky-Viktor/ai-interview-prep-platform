@@ -65,7 +65,12 @@ FAQ = [
     {
         "key": "reports",
         "question": "可以和招聘经理分享结果吗？",
-        "answer": "可以。为一位候选人或面试的全部候选人下载 PDF 报告，直接从 prepza 通过邮件发送，或者在 WhatsApp 或 Telegram 上发送一份简短摘要。",
+        "answer": "可以。为一位候选人或面试的全部候选人下载 PDF 报告，直接从 prepza 通过邮件发送，或者在 WhatsApp、Telegram、Viber 或 LINE 上发送一份简短摘要。",
+    },
+    {
+        "key": "integrations",
+        "question": "prepza 能和我的 ATS 或其他工具一起使用吗？",
+        "answer": "可以，且不额外收费。在公司的“集成”标签页中连接 Workable、Greenhouse、Teamtailor、Recruitee 或 Breezy HR：你移到某个阶段的候选人会收到面试，结果会回传到 ATS。Slack 可以将公司的通知发布到频道，API 则让你自己的平台邀请候选人并接收他们的结果；详见“API 文档”。",
     },
     {
         "key": "candidates",

@@ -65,7 +65,12 @@ FAQ = [
     {
         "key": "reports",
         "question": "Sonuçları işe alım yöneticisiyle paylaşabilir miyim?",
-        "answer": "Evet. Tek bir aday ya da bir mülakatın tüm adayları için PDF raporu indirin, doğrudan prepza'dan e-postayla gönderin ya da WhatsApp veya Telegram'da kısa bir özet gönderin.",
+        "answer": "Evet. Tek bir aday ya da bir mülakatın tüm adayları için PDF raporu indirin, doğrudan prepza'dan e-postayla gönderin ya da WhatsApp, Telegram, Viber veya LINE'da kısa bir özet gönderin.",
+    },
+    {
+        "key": "integrations",
+        "question": "prepza, ATS'imle veya diğer araçlarla çalışır mı?",
+        "answer": "Evet, ek ücret olmadan. Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'ı şirketinizin Entegrasyonlar sekmesinden bağlayın: bir aşamaya taşıdığınız adaylar mülakatı alır ve sonuçları ATS'ye geri gönderilir. Slack, şirketinizin bildirimlerini bir kanala gönderebilir; API ise kendi platformunuzun adayları davet etmesini ve sonuçlarını almasını sağlar. Ayrıntılar için API belgeleri sayfasına bakın.",
     },
     {
         "key": "candidates",

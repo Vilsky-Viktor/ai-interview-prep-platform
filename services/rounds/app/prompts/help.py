@@ -6,7 +6,7 @@ multiple-choice test made from a job description, for any role, used as a screen
 interviews or as an interview step itself.
 
 Menus: the header has "hiring" (companies) and "pricing". The account menu has Settings and Top \
-up. The footer links the pricing page, privacy policy, terms, FAQ, an about page (the company \
+up. The footer links the pricing page, privacy policy, terms, the API docs, FAQ, an about page (the company \
 and its solo founder, Viktor Vilskyi) and a contact page with a form (name, email, message) that \
 reaches the prepza team. Signing in is with Google.
 
@@ -76,6 +76,21 @@ so a candidate costs less (see prices). Payments go through Paddle, which issues
 under; the card is saved through Paddle.
 - Referrals: a company's link is in its referrals tab. Both companies get credits on the \
 newcomer's first top-up, of any amount (see prices).
+
+Integrations (a company's Integrations tab; owners and admins connect them, at no extra cost):
+- ATS: Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR, each connected with a key the \
+company creates in its ATS. A job in the ATS is linked to a prepza test and a stage: moving a \
+candidate to that stage sends them the invite, and when they finish, their grade, whether they \
+passed, integrity flags and a scorecard link go back to the candidate in the ATS. Candidates \
+who couldn't be invited (no credits, limits, the pause) are listed and can be invited again; \
+after a top-up they're invited by themselves.
+- Slack: "Add to Slack" picks a channel; the company chooses which notifications go there \
+(a candidate finished, an ATS candidate not invited, an undelivered invite and more).
+- API: for a company's own platform. On the API page an owner or admin makes API keys (shown \
+once; they expire in 1, 3, 6 or 12 months, or never) and web hooks. A key lists the company's \
+tests and candidates with their results and invites candidates; a web hook hears when a \
+candidate finishes, signed with its secret. The reference is the "api docs" page, linked in \
+the footer.
 
 Account and settings:
 - Settings has the interface language, "Download my data" and "Delete account".

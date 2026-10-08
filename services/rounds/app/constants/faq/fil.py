@@ -65,7 +65,12 @@ FAQ = [
     {
         "key": "reports",
         "question": "Puwede ko bang i-share ang mga resulta sa isang hiring manager?",
-        "answer": "Oo. Mag-download ng PDF report para sa isang aplikante o para sa lahat ng aplikante ng isang interview, i-email ito direkta mula sa prepza, o magpadala ng maikling buod sa WhatsApp o Telegram.",
+        "answer": "Oo. Mag-download ng PDF report para sa isang aplikante o para sa lahat ng aplikante ng isang interview, i-email ito direkta mula sa prepza, o magpadala ng maikling buod sa WhatsApp, Telegram, Viber o LINE.",
+    },
+    {
+        "key": "integrations",
+        "question": "Gumagana ba ang prepza sa ATS ko o sa iba pang tool?",
+        "answer": "Oo, nang walang dagdag na bayad. I-connect ang Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR sa tab na Mga integration ng iyong kumpanya: makukuha ng mga aplikanteng ililipat mo sa isang stage ang interview, at babalik sa ATS ang mga resulta nila. Kayang i-post ng Slack ang mga notification ng iyong kumpanya sa isang channel, at sa pamamagitan ng API, makakapag-imbita ang sarili mong platform ng mga aplikante at makakatanggap ng mga resulta nila; tingnan ang Dokumentasyon ng API.",
     },
     {
         "key": "candidates",
