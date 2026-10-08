@@ -12,8 +12,9 @@ class FakeClient:
     def __init__(self):
         self.calls = []
 
-    async def get(self, url, params, headers, timeout):
+    async def request(self, method, url, params, json, headers, timeout):
         self.calls.append((url, params, headers, timeout))
+        self.sent = (method, json)
 
         return httpx.Response(200, json={})
 
@@ -38,3 +39,16 @@ def test_calls_go_as_the_user_and_companies_learns_its_the_assistant(monkeypatch
     secret = "test-secret-that-is-at-least-32-bytes"
     assert token_caller(headers["X-Assistant"], secret, "companies") == "assistant"
     assert "X-Assistant" not in other_headers
+
+
+def test_a_confirmed_write_sends_its_method_and_body_as_the_user(monkeypatch):
+    client = FakeClient()
+    monkeypatch.setattr(http, "get_client", lambda: client)
+
+    asyncio.run(
+        services.send("companies", "POST", "/companies", {}, {"name": "Acme"}, "token", "en")
+    )
+
+    assert client.calls[0][0] == "http://companies/companies"
+    assert client.sent == ("POST", {"name": "Acme"})
+    assert client.calls[0][2]["Authorization"] == "Bearer token"

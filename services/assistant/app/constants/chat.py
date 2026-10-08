@@ -27,7 +27,10 @@ class ToolState(StrEnum):
 # A message the user sends, and the page they're on (context for the model only).
 MAX_MESSAGE_LENGTH = 2_000
 MAX_PAGE_LENGTH = 200
-# A conversation's title: the start of its first message.
+# A chat the panel brings back after a reload: one whose last message is at most this old;
+# an older one stays in the history and the panel starts a new chat.
+RESTORE_MINUTES = 30
+# A conversation's title until the model writes one: the start of its first message.
 TITLE_LENGTH = 80
 
 # The model: one call's longest answer, how long it may take and how often it's retried.

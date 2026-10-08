@@ -139,7 +139,7 @@ def test_a_visitors_chat_starts_the_new_conversation_in_its_order(run):
 
     found = run(scenario())
 
-    assert [(message.role, message.content) for message, _ in found] == [
+    assert [(message.role, message.content) for message in found] == [
         *[(turn.role, turn.content) for turn in turns],
         ("user", "Create a company"),
     ]

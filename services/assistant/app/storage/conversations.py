@@ -1,7 +1,7 @@
-from datetime import datetime
+from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
-from sqlalchemy import delete, select
+from sqlalchemy import delete, select, update
 
 from app.models.conversations import Conversation
 from app.storage.db import Session
@@ -76,3 +76,24 @@ async def delete_user(user_id: str) -> None:
     async with Session() as session:
         await session.execute(delete(Conversation).where(Conversation.user_id == user_id))
         await session.commit()
+
+
+async def set_title(conversation_id: UUID, title: str) -> None:
+    async with Session() as session:
+        await session.execute(
+            update(Conversation).where(Conversation.id == conversation_id).values(title=title)
+        )
+        await session.commit()
+
+
+async def latest(user_id: str, minutes: int) -> Conversation | None:
+    """The user's conversation with the latest message, if that's at most `minutes` old."""
+    since = datetime.now(UTC) - timedelta(minutes=minutes)
+
+    async with Session() as session:
+        return await session.scalar(
+            select(Conversation)
+            .where(Conversation.user_id == user_id, Conversation.updated_at >= since)
+            .order_by(Conversation.updated_at.desc())
+            .limit(1)
+        )

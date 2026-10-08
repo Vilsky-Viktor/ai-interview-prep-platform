@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from uuid import UUID
 
 
 @dataclass(frozen=True)
@@ -7,6 +8,7 @@ class Tool:
 
     name: str
     service: str
+    method: str
     path: str
     path_params: tuple[str, ...]
     query_params: tuple[str, ...]
@@ -17,6 +19,12 @@ class Tool:
     max_length: int
     render: str | None
     link: str | None
+    # A write: its body's fields, and the user confirms it first (a destructive one with a
+    # warning); `preview` are the arguments the confirmation card shows.
+    body_params: tuple[str, ...] = ()
+    confirm: bool = False
+    destructive: bool = False
+    preview: tuple[str, ...] = ()
 
     @property
     def parameters(self) -> dict:
@@ -35,6 +43,8 @@ class ToolResult:
     content: dict
     block: dict | None
     duration_ms: int
+    # A write waiting for the user's confirmation: the id its card confirms it by.
+    action_id: UUID | None = None
 
     @property
     def succeeded(self) -> bool:

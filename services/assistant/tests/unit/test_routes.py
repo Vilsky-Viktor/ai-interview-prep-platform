@@ -1,5 +1,6 @@
 import asyncio
 import uuid
+from datetime import UTC, datetime
 
 import httpx
 import pytest
@@ -72,7 +73,11 @@ def test_paused_or_over_a_limit_is_refused_before_anything_is_saved(
     async def not_paused(redis):
         pass
 
+    async def companies(token, language):
+        return frozenset()
+
     monkeypatch.setattr(turns, "refuse_if_paused", not_paused)
+    monkeypatch.setattr(turns, "user_companies", companies)
     monkeypatch.setattr(turns.limits, "check", over)
     assert client.post("/chat", json={"message": "Hi"}).status_code == 429
     assert created == []
@@ -84,17 +89,21 @@ def test_a_new_conversation_only_about_a_company_the_user_can_see(
     async def not_paused(redis):
         pass
 
+    async def companies(token, language):
+        return frozenset({"another-company"})
+
     monkeypatch.setattr(turns, "refuse_if_paused", not_paused)
-    companies_answers(monkeypatch, 404)
+    monkeypatch.setattr(turns, "user_companies", companies)
     response = client.post("/chat", json={"message": "Hi", "company_id": str(COMPANY)})
 
     assert (response.status_code, response.json()["detail"]) == (404, "Company not found")
     assert created == []
 
 
-def test_the_panel_reads_its_limits(client, signed_in):
+def test_the_panel_reads_its_limits_signed_out_too(client):
     config = client.get("/config").json()
 
+    assert config["restore_minutes"] == 30
     assert config["max_message_length"] == 2_000
     assert config["max_audio_seconds"] == MAX_AUDIO_SECONDS
     assert config["messages_per_hour"] == MESSAGES_PER_USER_HOUR
@@ -175,3 +184,28 @@ def test_a_visitors_earlier_chat_is_cut_to_a_messages_length_and_limited_in_coun
     too_many = [{"role": "user", "content": "Hi"}] * 21
     response = client.post("/chat", json={"message": "Hi", "earlier": too_many})
     assert response.status_code == 422
+
+
+def test_only_a_recent_conversation_is_brought_back(client, signed_in, monkeypatch):
+    windows = []
+
+    async def latest(user_id, minutes):
+        windows.append((user_id, minutes))
+
+        return latest.found
+
+    latest.found = None
+    monkeypatch.setattr(conversations, "latest", latest)
+    assert client.get("/conversations/active").status_code == 204
+
+    latest.found = Conversation(
+        id=uuid.uuid4(),
+        user_id="ann",
+        company_id=None,
+        title="Hi",
+        created_at=datetime.now(UTC),
+        updated_at=datetime.now(UTC),
+    )
+    response = client.get("/conversations/active")
+    assert response.json()["id"] == str(latest.found.id)
+    assert windows == [("ann", 30), ("ann", 30)]

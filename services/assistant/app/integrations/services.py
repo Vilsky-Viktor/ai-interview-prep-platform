@@ -7,16 +7,37 @@ from app.service_auth import service_token
 
 
 async def get(service: str, path: str, query: dict, token: str, language: str) -> httpx.Response:
-    """A GET to another service's user-facing route as the user, in their language. Companies
-    also gets the assistant's signed header, so it audits the read as the assistant's."""
+    """A GET to another service's user-facing route as the user, in their language."""
+    return await send(service, "GET", path, query, None, token, language)
+
+
+async def send(
+    service: str,
+    method: str,
+    path: str,
+    query: dict,
+    body: dict | None,
+    token: str,
+    language: str,
+    idempotency_key: str | None = None,
+) -> httpx.Response:
+    """A call to another service's user-facing route as the user, in their language: a read, or
+    a write the user confirmed. Companies also gets the assistant's signed header, so it audits
+    it as the assistant's."""
     headers = {"Authorization": f"Bearer {token}", "Accept-Language": language}
 
     if service == "companies":
         headers[ASSISTANT_HEADER] = service_token("companies")
 
-    return await http.get_client().get(
+    # A confirmed action's id: a service that takes the header runs it at most once.
+    if idempotency_key:
+        headers["Idempotency-Key"] = idempotency_key
+
+    return await http.get_client().request(
+        method,
         getattr(settings, SERVICE_URLS[service]) + path,
         params=query,
+        json=body,
         headers=headers,
         timeout=TOOL_TIMEOUT_SECONDS,
     )

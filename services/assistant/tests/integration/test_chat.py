@@ -8,10 +8,13 @@ import uuid
 import httpx
 from langchain_core.messages import ToolMessage
 from prepza_common.service_auth import issue_token
+from sqlalchemy import select
 
 from app.integrations import llm
 from app.main import app
+from app.models.conversations import ToolCall
 from app.storage import conversations, messages
+from app.storage.db import Session
 from tests.fake_model import FakeModel, calls, text
 
 
@@ -48,6 +51,7 @@ def test_a_conversation_is_streamed_saved_listed_exported_and_deleted(run, user,
             listed = (await api.get("/conversations", headers=headers)).json()
             opened = (await api.get(f"/conversations/{conversation_id}", headers=headers)).json()
             stored = await messages.recent(uuid.UUID(conversation_id), 20)
+            calls = await tool_calls_of(stored[1].id)
             body = {"email": "ann@example.com"}
             exported = await api.post(f"/internal/users/{uid}/export", json=body, headers=library())
             deleted = await api.request(
@@ -55,9 +59,9 @@ def test_a_conversation_is_streamed_saved_listed_exported_and_deleted(run, user,
             )
             after = (await api.get("/conversations", headers=headers)).json()
 
-            return first, second, listed, opened, stored, exported.json(), deleted, after
+            return first, second, listed, opened, stored, calls, exported.json(), deleted, after
 
-    first, second, listed, opened, stored, exported, deleted, after = run(scenario())
+    first, second, listed, opened, stored, await_calls, exported, deleted, after = run(scenario())
 
     assert [list(event) for event in first] == [
         ["conversation"],
@@ -69,9 +73,8 @@ def test_a_conversation_is_streamed_saved_listed_exported_and_deleted(run, user,
     ]
     assert first[2]["tool"]["state"] == "done"
     assert second[-1]["done"]["message_id"] == opened["messages"][-1]["id"]
-    # The second turn's model reads the first one's tool result again.
-    earlier = [m for m in model.prompts[2] if isinstance(m, ToolMessage)]
-    assert json.loads(earlier[0].content) == {"data": [], "source": "list_companies"}
+    # The second turn's model reads the stored text only: tools' data isn't kept.
+    assert not [m for m in model.prompts[2] if isinstance(m, ToolMessage)]
     assert [item["title"] for item in listed] == ["My companies?"]
     assert [(m["role"], m["content"], m["status"]) for m in opened["messages"]] == [
         ("user", "My companies?", "complete"),
@@ -79,20 +82,34 @@ def test_a_conversation_is_streamed_saved_listed_exported_and_deleted(run, user,
         ("user", "And now?", "complete"),
         ("assistant", "Still none.", "complete"),
     ]
-    answer, [call] = stored[1]
+    answer = stored[1]
     assert (answer.input_tokens, answer.output_tokens) == (20, 10)
-    assert (call.tool, call.status_code, call.state, call.result["data"]) == (
+    # Which tool, how it ended: never its arguments' values or its result.
+    [call] = await_calls
+    assert (call.tool, call.status_code, call.state, call.arguments, call.result) == (
         "list_companies",
         200,
         "done",
         [],
+        None,
     )
+    assert answer.blocks == [{"kind": "link", "refs": [], "links": ["/companies"]}]
     [conversation] = exported["assistant_conversations"]
     assert len(conversation["messages"]) == 4
-    # Never what the tools read.
-    assert "result" not in json.dumps(exported) and "blocks" not in json.dumps(exported)
+    # The text, and the blocks as references: never what the tools read.
+    assert conversation["messages"][1]["blocks"] == [
+        {"kind": "link", "refs": [], "links": ["/companies"]}
+    ]
+    assert "result" not in json.dumps(exported)
     assert deleted.status_code == 204
     assert after == []
+
+
+async def tool_calls_of(message_id) -> list[ToolCall]:
+    async with Session() as session:
+        return list(
+            await session.scalars(select(ToolCall).where(ToolCall.message_id == message_id))
+        )
 
 
 def test_a_company_the_user_cant_see_is_refused_and_a_stored_one_is_deleted(run, user):

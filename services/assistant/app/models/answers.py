@@ -34,3 +34,11 @@ class Turn:
     company_id: UUID | None
     token: str = field(repr=False)
     language: str
+    # The ids of the user's companies, for their token: a tool naming another company is
+    # refused before it's called.
+    companies: frozenset[str] = frozenset()
+    # The name on the user's account, if any: the model addresses them by it.
+    user_name: str | None = None
+    # A turn answering the user's new message (not one after a confirmed action): the
+    # conversation's title may be refreshed after it.
+    new_question: bool = True

@@ -25,10 +25,11 @@ def build(name: str, entry: dict) -> Tool:
         raise ValueError(f"Tool {name}: unknown service {entry['service']}")
 
     spec = snapshot(entry["service"])
-    operation = spec["paths"].get(entry["path"], {}).get("get")
+    method = entry["method"]
+    operation = spec["paths"].get(entry["path"], {}).get(method.lower())
 
     if operation is None:
-        raise ValueError(f"Tool {name}: {entry['service']} has no GET {entry['path']}")
+        raise ValueError(f"Tool {name}: {entry['service']} has no {method} {entry['path']}")
 
     max_items = entry.get("max_items", DEFAULT_MAX_ITEMS)
     schemas = spec.get("components", {}).get("schemas", {})
@@ -39,6 +40,7 @@ def build(name: str, entry: dict) -> Tool:
     return Tool(
         name=name,
         service=entry["service"],
+        method=method,
         path=entry["path"],
         path_params=tuple(param for param in entry["params"] if located[param] == "path"),
         query_params=tuple(param for param in entry["params"] if located[param] == "query"),
@@ -48,6 +50,10 @@ def build(name: str, entry: dict) -> Tool:
         max_length=entry.get("max_length", MAX_STRING_LENGTH),
         render=entry.get("render"),
         link=entry.get("link"),
+        body_params=tuple(entry.get("body", [])),
+        confirm=entry.get("confirm", False),
+        destructive=entry.get("destructive", False),
+        preview=tuple(entry.get("preview", entry.get("body", []))),
     )
 
 

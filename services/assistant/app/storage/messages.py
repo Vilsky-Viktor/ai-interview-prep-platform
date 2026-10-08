@@ -1,7 +1,7 @@
 from datetime import timedelta
 from uuid import UUID
 
-from sqlalchemy import select, update
+from sqlalchemy import func, select, update
 
 from app.constants.chat import Role, Source, Status, ToolState
 from app.models.answers import Answer
@@ -43,8 +43,9 @@ async def add_earlier(conversation_id: UUID, turns: list) -> None:
 
 
 async def add_answer(conversation_id: UUID, answer: Answer, status: Status) -> UUID:
-    """The assistant's answer with the tools it called (their trimmed results, which later turns
-    read again); its id."""
+    """The assistant's answer: its text, its blocks as references (ids, see helpers/blocks.py),
+    and which tools it called, how long they took and how they ended; never their arguments'
+    values or their results, which are other people's data. Its id."""
     async with Session() as session:
         message = Message(
             conversation_id=conversation_id,
@@ -63,10 +64,10 @@ async def add_answer(conversation_id: UUID, answer: Answer, status: Status) -> U
                 ToolCall(
                     message_id=message.id,
                     tool=result.tool,
-                    arguments=result.arguments,
+                    arguments=sorted(result.arguments),
                     status_code=result.status_code,
                     duration_ms=result.duration_ms,
-                    result=result.content,
+                    result=None,
                     state=ToolState.DONE if result.succeeded else ToolState.FAILED,
                 )
             )
@@ -83,8 +84,8 @@ async def _touch(session, conversation_id: UUID) -> None:
     )
 
 
-async def recent(conversation_id: UUID, limit: int) -> list[tuple[Message, list[ToolCall]]]:
-    """The latest `limit` messages, oldest first, each with the tools it called."""
+async def recent(conversation_id: UUID, limit: int) -> list[Message]:
+    """The latest `limit` messages, oldest first."""
     async with Session() as session:
         messages = list(
             await session.scalars(
@@ -94,18 +95,8 @@ async def recent(conversation_id: UUID, limit: int) -> list[tuple[Message, list[
                 .limit(limit)
             )
         )
-        calls = await session.scalars(
-            select(ToolCall)
-            .where(ToolCall.message_id.in_([message.id for message in messages]))
-            .order_by(ToolCall.created_at, ToolCall.id)
-        )
 
-    by_message: dict[UUID, list[ToolCall]] = {}
-
-    for call in calls:
-        by_message.setdefault(call.message_id, []).append(call)
-
-    return [(message, by_message.get(message.id, [])) for message in reversed(messages)]
+    return list(reversed(messages))
 
 
 async def of_conversation(conversation_id: UUID) -> list[Message]:
@@ -120,8 +111,8 @@ async def of_conversation(conversation_id: UUID) -> list[Message]:
 
 
 async def export(user_id: str) -> list[dict]:
-    """The user's conversations with their messages, oldest first; never the tools' results,
-    which are their companies' data, not theirs."""
+    """The user's conversations with their messages (text, and the blocks' references), oldest
+    first."""
     async with Session() as session:
         conversations = list(
             await session.scalars(
@@ -144,6 +135,7 @@ async def export(user_id: str) -> list[dict]:
                 "role": message.role,
                 "source": message.source,
                 "content": message.content,
+                "blocks": message.blocks,
                 "status": message.status,
                 "at": message.created_at,
             }
@@ -158,3 +150,13 @@ async def export(user_id: str) -> list[dict]:
         }
         for conversation in conversations
     ]
+
+
+async def count_questions(conversation_id: UUID) -> int:
+    """How many messages the user sent in the conversation."""
+    async with Session() as session:
+        return await session.scalar(
+            select(func.count())
+            .select_from(Message)
+            .where(Message.conversation_id == conversation_id, Message.role == Role.USER)
+        )

@@ -3,7 +3,7 @@ from uuid import UUID
 import httpx
 from fastapi import HTTPException, status
 
-from app.constants.chat import CHAT_FAILED, COMPANY_NOT_FOUND, NOT_FOUND
+from app.constants.chat import CHAT_FAILED, NOT_FOUND
 from app.integrations import services
 from app.models.conversations import Conversation
 from app.storage import conversations
@@ -44,9 +44,3 @@ async def open_conversation(
         raise HTTPException(status.HTTP_404_NOT_FOUND, NOT_FOUND)
 
     return conversation
-
-
-async def require_company(company_id: UUID, token: str, language: str) -> None:
-    """A new conversation is only about a company the user can see."""
-    if not await has_access(company_id, token, language):
-        raise HTTPException(status.HTTP_404_NOT_FOUND, COMPANY_NOT_FOUND)

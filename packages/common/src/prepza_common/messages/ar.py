@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "جارٍ الاطلاع على الأسئلة الشائعة…",
     "Reading prepza's guide…": "جارٍ الاطلاع على دليل prepza…",
     "Working…": "جارٍ العمل…",
+    "Preparing the company…": "جارٍ تجهيز الشركة…",
+    "This action expired or was already handled. Ask again to prepare it.": "انتهت صلاحية هذا الإجراء أو تمت معالجته بالفعل. اطلب تجهيزه مرة أخرى.",
+    "Signing out…": "جارٍ تسجيل الخروج…",
 }

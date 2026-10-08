@@ -166,4 +166,7 @@ MESSAGES = {
     "Reading the FAQ…": "Vaatan KKK-d…",
     "Reading prepza's guide…": "Vaatan prepza juhendit…",
     "Working…": "Töötan…",
+    "Preparing the company…": "Valmistan ettevõtet ette…",
+    "This action expired or was already handled. Ask again to prepare it.": "See toiming aegus või on juba tehtud. Palu see uuesti ette valmistada.",
+    "Signing out…": "Login välja…",
 }

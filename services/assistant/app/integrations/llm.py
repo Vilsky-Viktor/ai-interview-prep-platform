@@ -6,6 +6,7 @@ from prepza_common.llm import chat_model
 
 from app.config.settings import settings
 from app.constants.chat import MAX_ANSWER_TOKENS, MODEL_RETRIES, MODEL_TIMEOUT_SECONDS
+from app.constants.titles import TITLE_MAX_TOKENS, TITLE_REASONING_EFFORT
 from app.constants.transcribe import TRANSCRIBE_RETRIES, TRANSCRIBE_TIMEOUT_SECONDS
 
 
@@ -29,4 +30,16 @@ def get_openai() -> AsyncOpenAI:
         api_key=settings.openai_api_key or None,
         timeout=TRANSCRIBE_TIMEOUT_SECONDS,
         max_retries=TRANSCRIBE_RETRIES,
+    )
+
+
+@cache
+def get_title_model() -> ChatOpenAI:
+    """The conversations' titles: the assistant's model, without reasoning, a few tokens."""
+    return chat_model(
+        settings.assistant_model,
+        TITLE_REASONING_EFFORT,
+        max_tokens=TITLE_MAX_TOKENS,
+        timeout=MODEL_TIMEOUT_SECONDS,
+        max_retries=MODEL_RETRIES,
     )

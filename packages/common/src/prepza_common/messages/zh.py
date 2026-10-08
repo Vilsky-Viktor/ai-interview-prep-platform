@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "正在查看常见问题…",
     "Reading prepza's guide…": "正在查看 prepza 指南…",
     "Working…": "处理中…",
+    "Preparing the company…": "正在准备公司…",
+    "This action expired or was already handled. Ask again to prepare it.": "此操作已过期或已处理。请重新让助手准备。",
+    "Signing out…": "正在退出登录…",
 }

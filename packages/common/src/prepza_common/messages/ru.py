@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "Смотрю вопросы и ответы…",
     "Reading prepza's guide…": "Смотрю руководство prepza…",
     "Working…": "Работаю…",
+    "Preparing the company…": "Готовлю компанию…",
+    "This action expired or was already handled. Ask again to prepare it.": "Срок действия истёк, или действие уже выполнено. Попросите подготовить его снова.",
+    "Signing out…": "Выхожу из аккаунта…",
 }

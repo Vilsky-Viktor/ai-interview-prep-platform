@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "よくある質問を確認しています…",
     "Reading prepza's guide…": "prepza のガイドを確認しています…",
     "Working…": "処理しています…",
+    "Preparing the company…": "会社を準備しています…",
+    "This action expired or was already handled. Ask again to prepare it.": "この操作は期限切れか、すでに処理済みです。もう一度準備を依頼してください。",
+    "Signing out…": "ログアウトしています…",
 }

@@ -30,6 +30,10 @@ TOOL_LABELS = {
     "get_template": "Reading the template…",
     "get_faq": "Reading the FAQ…",
     "get_platform_guide": "Reading prepza's guide…",
+    # Actions: preparing the card the user confirms.
+    "create_company": "Preparing the company…",
+    # The panel's own: signing out.
+    "sign_out": "Signing out…",
 }
 # For a tool the model made up.
 UNKNOWN_TOOL_LABEL = "Working…"

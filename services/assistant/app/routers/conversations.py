@@ -1,13 +1,14 @@
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, HTTPException, Request, Response, status
 from prepza_common.i18n import request_language
 from prepza_common.paging import PageParams
 
 from app.auth import UserWithToken
-from app.constants.chat import NOT_FOUND
+from app.constants.chat import NOT_FOUND, RESTORE_MINUTES
 from app.schemas.conversations import ConversationDetailOut, ConversationOut, MessageOut
 from app.services.conversations import open_conversation
+from app.services.live_blocks import live
 from app.storage import conversations, messages
 
 router = APIRouter(prefix="/conversations", tags=["conversations"])
@@ -24,21 +25,43 @@ async def list_conversations(
     return [ConversationOut.model_validate(item) for item in found]
 
 
+@router.get(
+    "/active",
+    response_model=ConversationOut,
+    responses={204: {"description": "No recent conversation"}},
+)
+async def active_conversation(auth: UserWithToken) -> ConversationOut | Response:
+    """The conversation the panel brings back after a reload: the user's latest, if its last
+    message is at most RESTORE_MINUTES old; 204 otherwise."""
+    user, _ = auth
+    found = await conversations.latest(user.uid, RESTORE_MINUTES)
+
+    if found is None:
+        return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+    return ConversationOut.model_validate(found)
+
+
 @router.get("/{conversation_id}")
 async def get_conversation(
     conversation_id: UUID, request: Request, auth: UserWithToken
 ) -> ConversationDetailOut:
-    """One of the user's conversations with its messages. One about a company they can no
+    """One of the user's conversations with its messages; their blocks are fetched again with
+    the user's token, so they show what the user may see now. One about a company they can no
     longer see is deleted, and is a 404."""
     user, token = auth
-    conversation = await open_conversation(
-        conversation_id, user.uid, token, request_language(request)
-    )
+    language = request_language(request)
+    conversation = await open_conversation(conversation_id, user.uid, token, language)
     found = await messages.of_conversation(conversation.id)
+    shown = [
+        MessageOut.model_validate(item).model_copy(
+            update={"blocks": await live(item.blocks, token, language)}
+        )
+        for item in found
+    ]
 
     return ConversationDetailOut(
-        **ConversationOut.model_validate(conversation).model_dump(),
-        messages=[MessageOut.model_validate(item) for item in found],
+        **ConversationOut.model_validate(conversation).model_dump(), messages=shown
     )
 
 

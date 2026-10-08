@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "De veelgestelde vragen bekijken…",
     "Reading prepza's guide…": "De gids van prepza bekijken…",
     "Working…": "Bezig…",
+    "Preparing the company…": "Het bedrijf voorbereiden…",
+    "This action expired or was already handled. Ask again to prepare it.": "Deze actie is verlopen of al afgehandeld. Vraag opnieuw om haar voor te bereiden.",
+    "Signing out…": "Uitloggen…",
 }

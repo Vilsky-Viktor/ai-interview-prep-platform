@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "अक्सर पूछे जाने वाले सवाल देख रहा है…",
     "Reading prepza's guide…": "prepza की गाइड देख रहा है…",
     "Working…": "काम कर रहा है…",
+    "Preparing the company…": "कंपनी तैयार कर रहा है…",
+    "This action expired or was already handled. Ask again to prepare it.": "यह कार्रवाई समाप्त हो गई या पहले ही हो चुकी है। इसे फिर से तैयार करने को कहें।",
+    "Signing out…": "साइन आउट कर रहा है…",
 }

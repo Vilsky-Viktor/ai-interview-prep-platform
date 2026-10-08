@@ -31,7 +31,8 @@ def render_block(kind: str | None, template: str | None, data, context: dict) ->
         return None
 
     if kind == "link":
-        found = link(template, context)
+        # An action's result names what it made ({id} of a new company).
+        found = link(template, {**context, **data} if isinstance(data, dict) else context)
 
         return {"kind": kind, "items": [], "links": [found] if found else []}
 
@@ -41,3 +42,26 @@ def render_block(kind: str | None, template: str | None, data, context: dict) ->
     links = [link(template, {**context, **item}) for item in items]
 
     return {"kind": kind, "items": items, "links": links}
+
+
+# What a stored block keeps of each item: ids only, enough to fetch it again with the viewer's
+# token when the conversation is opened. Each id comes from the item's key, or else from the
+# arguments the tool was called with (an interview's candidates carry only their own id).
+REFERENCE_KEYS = {
+    "candidate_rows": {"id": "id", "interview_id": "interview_id"},
+    "scorecard_summary": {"id": "id", "interview_id": "interview_id"},
+    "interview": {"id": "id"},
+    "credits": {"company_id": "id"},
+}
+
+
+def reference(block: dict, arguments: dict) -> dict:
+    """A block as a conversation stores it: its kind, its items' ids and its links (app paths
+    made of ids), never the data it showed."""
+    keys = REFERENCE_KEYS.get(block["kind"], {})
+    refs = [
+        {ref: str(item.get(key) or arguments.get(ref) or "") for ref, key in keys.items()}
+        for item in block["items"]
+    ]
+
+    return {"kind": block["kind"], "refs": refs, "links": block["links"]}

@@ -12,10 +12,12 @@
 # A new tool is a new entry here; scripts/assistant-openapi.sh refreshes the snapshots.
 
 
+from app.constants.actions import ACTIONS
 from app.constants.company_tools import COMPANY_TOOLS
 
 TOOLS = {
     **COMPANY_TOOLS,
+    **ACTIONS,
     "get_price_catalog": {
         "service": "billing",
         "method": "GET",

@@ -32,9 +32,15 @@ async def call_tools(
 
 
 async def call_tool(
-    name: str, arguments: dict, token: str, language: str, company_id: str | None
+    name: str,
+    arguments: dict,
+    token: str,
+    language: str,
+    company_id: str | None,
+    idempotency_key: str | None = None,
 ) -> ToolResult:
-    """Calls one tool as the user. Errors are results too, which the model explains: an unknown
+    """Calls one tool as the user (a write only once they confirmed it, with its id as the
+    idempotency key). Errors are results too, which the model explains: an unknown
     tool, refused arguments, the service's own error (its detail is in the user's language) or
     no answer."""
     started = time.monotonic()
@@ -65,9 +71,15 @@ async def call_tool(
         query["limit"] = wanted + 1
 
     path = fill_path(tool.path, {param: given[param] for param in tool.path_params})
+    body = {field: given[field] for field in tool.body_params if field in given}
 
     try:
-        response = await services.get(tool.service, path, query, token, language)
+        if tool.method == "GET":
+            response = await services.get(tool.service, path, query, token, language)
+        else:
+            response = await services.send(
+                tool.service, tool.method, path, query, body, token, language, idempotency_key
+            )
     except httpx.TimeoutException:
         return result(None, {"error": 504, "detail": translate(SERVICE_UNAVAILABLE, language)})
     except httpx.HTTPError:

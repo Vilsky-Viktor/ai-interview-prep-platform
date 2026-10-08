@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "בודק את השאלות הנפוצות…",
     "Reading prepza's guide…": "בודק את המדריך של prepza…",
     "Working…": "עובד על זה…",
+    "Preparing the company…": "מכין את החברה…",
+    "This action expired or was already handled. Ask again to prepare it.": "תוקף הפעולה פג או שהיא כבר טופלה. אפשר לבקש להכין אותה שוב.",
+    "Signing out…": "מתנתק…",
 }

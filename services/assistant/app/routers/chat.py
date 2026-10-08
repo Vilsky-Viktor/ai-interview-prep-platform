@@ -6,7 +6,7 @@ from prepza_common.i18n import request_language
 from prepza_common.sse import event_stream
 
 from app.auth import UserWithToken
-from app.constants.chat import MAX_MESSAGE_LENGTH
+from app.constants.chat import MAX_MESSAGE_LENGTH, RESTORE_MINUTES
 from app.constants.limits import MAX_AUDIO_SECONDS, MESSAGES_PER_USER_DAY, MESSAGES_PER_USER_HOUR
 from app.schemas.chat import ChatRequest, ConfigOut, WelcomeOut
 from app.services import turns
@@ -30,9 +30,10 @@ async def chat(body: ChatRequest, request: Request, auth: UserWithToken) -> Stre
 
 
 @router.get("/config")
-async def config(auth: UserWithToken) -> ConfigOut:
-    """The limits the panel keeps to."""
+async def config() -> ConfigOut:
+    """The limits the panel keeps to; public, as the panel asks it signed out too."""
     return ConfigOut(
+        restore_minutes=RESTORE_MINUTES,
         max_message_length=MAX_MESSAGE_LENGTH,
         max_audio_seconds=MAX_AUDIO_SECONDS,
         messages_per_hour=MESSAGES_PER_USER_HOUR,

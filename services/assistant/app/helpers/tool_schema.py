@@ -1,14 +1,17 @@
-from app.constants.tool_calls import FORBIDDEN_PATH_PREFIXES
+from app.constants.tool_calls import FORBIDDEN_PATH_PREFIXES, WRITE_METHODS
 
 # What a parameter's schema keeps for the model; the rest (titles, defaults) is noise.
 KEPT_KEYWORDS = ("type", "enum", "format", "maxLength", "minLength", "minimum", "maximum")
 
 
 def check_route(name: str, entry: dict) -> None:
-    """Refuses an allow-list entry the assistant must never call: anything but GET, and other
-    services' or prepza's own team's routes."""
-    if entry["method"] != "GET":
-        raise ValueError(f"Tool {name}: only GET routes are allowed, not {entry['method']}")
+    """Refuses an allow-list entry the assistant must never call: a write that doesn't wait for
+    the user's confirmation, and other services' or prepza's own team's routes."""
+    if entry["method"] not in WRITE_METHODS + ("GET",):
+        raise ValueError(f"Tool {name}: method {entry['method']} isn't allowed")
+
+    if entry["method"] != "GET" and entry.get("confirm") is not True:
+        raise ValueError(f"Tool {name}: a {entry['method']} needs confirm: True")
 
     if entry["path"].startswith(FORBIDDEN_PATH_PREFIXES):
         raise ValueError(f"Tool {name}: {entry['path']} is not a user-facing route")
@@ -40,11 +43,34 @@ def parameter_schema(parameter: dict, components: dict) -> dict:
     return kept
 
 
+def body_fields(operation: dict, components: dict) -> tuple[dict, list[str]]:
+    """A write's JSON body: its fields (as parameters are declared) and the required ones."""
+    content = operation.get("requestBody", {}).get("content", {}).get("application/json")
+
+    if content is None:
+        return {}, []
+
+    schema = resolve(content["schema"], components)
+    fields = {
+        field: {"name": field, "schema": value, "description": value.get("description")}
+        for field, value in schema.get("properties", {}).items()
+    }
+
+    return fields, schema.get("required", [])
+
+
 def definition(name: str, entry: dict, operation: dict, components: dict, max_items: int) -> dict:
-    """The function the model is given for a tool: its allow-listed parameters as the route
-    declares them, `limit` capped at the tool's `max_items`."""
+    """The function the model is given for a tool: its allow-listed parameters (and a write's
+    body fields) as the route declares them, `limit` capped at the tool's `max_items`."""
     declared = {parameter["name"]: parameter for parameter in operation.get("parameters", [])}
+    body, body_required = body_fields(operation, components)
     properties = {}
+
+    for field in entry.get("body", []):
+        if field not in body:
+            raise ValueError(f"Tool {name}: the body has no field {field}")
+
+        properties[field] = parameter_schema(body[field], components)
 
     for param in entry["params"]:
         if param not in declared:
@@ -59,6 +85,7 @@ def definition(name: str, entry: dict, operation: dict, components: dict, max_it
         properties["limit"]["description"] = f"Number of items to return, up to {max_items}"
 
     required = [param for param, parameter in declared.items() if parameter.get("required")]
+    required += body_required
     missing = [param for param in required if param not in properties]
 
     if missing:

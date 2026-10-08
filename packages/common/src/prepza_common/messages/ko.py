@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "자주 묻는 질문을 확인하는 중…",
     "Reading prepza's guide…": "prepza 가이드를 확인하는 중…",
     "Working…": "처리하는 중…",
+    "Preparing the company…": "회사를 준비하는 중…",
+    "This action expired or was already handled. Ask again to prepare it.": "이 작업은 만료되었거나 이미 처리되었습니다. 다시 준비해 달라고 요청하세요.",
+    "Signing out…": "로그아웃하는 중…",
 }

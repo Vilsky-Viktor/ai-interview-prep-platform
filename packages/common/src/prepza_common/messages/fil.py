@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "Tinitingnan ang FAQ…",
     "Reading prepza's guide…": "Tinitingnan ang gabay ng prepza…",
     "Working…": "Ginagawa…",
+    "Preparing the company…": "Inihahanda ang kumpanya…",
+    "This action expired or was already handled. Ask again to prepare it.": "Nag-expire na o naasikaso na ang aksyong ito. Hilingin ulit na ihanda ito.",
+    "Signing out…": "Nagsa-sign out…",
 }

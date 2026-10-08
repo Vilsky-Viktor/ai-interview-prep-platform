@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "SSS'ye bakılıyor…",
     "Reading prepza's guide…": "prepza rehberine bakılıyor…",
     "Working…": "Çalışılıyor…",
+    "Preparing the company…": "Şirket hazırlanıyor…",
+    "This action expired or was already handled. Ask again to prepare it.": "Bu işlemin süresi doldu ya da zaten yapıldı. Yeniden hazırlanmasını iste.",
+    "Signing out…": "Çıkış yapılıyor…",
 }

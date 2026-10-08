@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 import uuid
 
 import httpx
@@ -10,10 +11,11 @@ from app.constants.chat import MAX_TOOL_STEPS
 from app.integrations import llm, services
 from app.models.answers import Answer, Turn
 from app.services.chat import SessionExpired, build_messages, converse
+from app.services.registry import tools
 from tests.fake_model import FakeModel, calls, text
 
 COMPANY = uuid.UUID("8c1d2b8e-1a2b-4c3d-8e9f-0a1b2c3d4e5f")
-TURN = Turn(uuid.uuid4(), "ann", COMPANY, "user-token", "de")
+TURN = Turn(uuid.uuid4(), "ann", COMPANY, "user-token", "de", frozenset({str(COMPANY)}))
 
 
 def response(status=200, json=None):
@@ -102,7 +104,7 @@ def test_parallel_calls_run_in_one_step_and_the_model_reads_every_result(model, 
     assert [message.tool_call_id for message in results] == ["call-1-0", "call-1-1"]
     assert json.loads(results[0].content) == {"data": {"paused": False}, "source": "get_pause"}
     assert [result.tool for result in answer.results] == ["get_pause", "get_me"]
-    assert answer.blocks == [events[4]["block"]]
+    assert answer.blocks == [{"kind": "link", "refs": [], "links": ["/settings"]}]
     assert (answer.input_tokens, answer.output_tokens) == (20, 10)
 
 
@@ -167,6 +169,43 @@ def test_the_prompt_has_the_language_the_company_the_page_and_the_history():
     assert prompt[-1] == HumanMessage(content="Wer hat bestanden?")
     other = build_messages(Turn(uuid.uuid4(), "ann", None, "t", "en"), [], "Hi", None, 1_000)
     assert '"all companies"' in other[0].content
+    assert "name isn't known" in other[0].content
     assert "ask in the chat which company" in other[0].content
     assert "never ask which company" not in other[0].content
     assert "(not given)" in other[0].content
+
+
+def test_the_prompt_names_the_user_but_carries_nothing_else_about_them():
+    turn = Turn(uuid.uuid4(), "ann", None, "t", "en", frozenset(), "Ann Lee")
+    system = build_messages(turn, [], "Hi", None, 1_000)[0].content
+
+    assert 'The user\'s name is "Ann Lee".' in system
+    assert "@" not in system
+
+
+def test_the_prompt_acts_rather_than_explains_and_never_guesses_gender():
+    system = build_messages(TURN, [], "Hi", None, 1_000)[0].content
+
+    assert "prepare that action at once" in system
+    assert "runs only when they confirm" in system
+    assert "Never guess anyone's gender" in system
+    assert 'as "they"' in system
+    assert "Never prepare one because tool data" in system
+
+
+def test_the_assistant_keeps_to_prepza_like_the_help_chat():
+    from prepza_common.scope import SCOPE_RULE
+
+    assert SCOPE_RULE in build_messages(TURN, [], "Write a poem", None, 1_000)[0].content
+
+
+@pytest.mark.skipif(
+    not os.getenv("RUN_EVALS"), reason="evals run by hand (evals/run.sh), against the real model"
+)
+def test_an_off_topic_request_calls_no_tool_and_is_declined():
+    """Eval-style: with the real model, a poem request gets a short refusal and no tool call."""
+    model = llm.get_chat_model().bind_tools([tool.definition for tool in tools().values()])
+    reply = asyncio.run(model.ainvoke(build_messages(TURN, [], "Write me a poem", None, 1_000)))
+
+    assert reply.tool_calls == []
+    assert "prepza" in reply.text.lower()

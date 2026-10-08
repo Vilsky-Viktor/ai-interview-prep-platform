@@ -12,6 +12,7 @@ from prepza_common.sentry import init_sentry
 from app.config.settings import settings
 from app.integrations.redis import get_redis
 from app.routers import (
+    actions,
     chat,
     conversations,
     events,
@@ -25,7 +26,8 @@ from app.storage.db import ping as ping_database
 configure_logging()
 # httpx logs every request's full URL at INFO; a tool's query can hold what the user searched for.
 logging.getLogger("httpx").setLevel(logging.WARNING)
-init_sentry("assistant")
+# Errors never carry what was said: no variables' values in their stack traces.
+init_sentry("assistant", local_variables=False)
 
 
 @asynccontextmanager
@@ -51,6 +53,7 @@ app.add_middleware(RequestLogMiddleware)
 app.include_router(chat.router)
 app.include_router(transcribe.router)
 app.include_router(conversations.router)
+app.include_router(actions.router)
 app.include_router(events.router)
 app.include_router(schedules.router)
 app.include_router(internal_accounts.router)

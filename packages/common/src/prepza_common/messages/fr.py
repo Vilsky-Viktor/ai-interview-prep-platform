@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "Lecture de la FAQ…",
     "Reading prepza's guide…": "Lecture du guide de prepza…",
     "Working…": "En cours…",
+    "Preparing the company…": "Préparation de l'entreprise…",
+    "This action expired or was already handled. Ask again to prepare it.": "Cette action a expiré ou a déjà été traitée. Demandez à la préparer de nouveau.",
+    "Signing out…": "Déconnexion…",
 }

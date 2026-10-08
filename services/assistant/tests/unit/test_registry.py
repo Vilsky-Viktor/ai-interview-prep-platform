@@ -13,18 +13,19 @@ def test_every_tool_resolves_in_its_services_snapshot():
 
 
 @pytest.mark.parametrize("name", sorted(TOOLS))
-def test_every_tool_is_a_user_facing_get(name):
+def test_every_tool_is_a_user_facing_read_or_a_write_the_user_confirms(name):
     entry = TOOLS[name]
 
-    assert entry["method"] == "GET"
+    assert entry["method"] == "GET" or entry["confirm"] is True
     assert not entry["path"].startswith(FORBIDDEN_PATH_PREFIXES)
 
 
 @pytest.mark.parametrize(
     "change, problem",
     [
-        ({"method": "POST"}, "only GET"),
-        ({"method": "DELETE"}, "only GET"),
+        ({"method": "POST"}, "a POST needs confirm: True"),
+        ({"method": "DELETE", "confirm": False}, "a DELETE needs confirm: True"),
+        ({"method": "OPTIONS"}, "isn't allowed"),
         ({"path": "/internal/users/{user_id}"}, "not a user-facing route"),
         ({"path": "/superadmin/companies"}, "not a user-facing route"),
         ({"path": "/nowhere"}, "has no GET /nowhere"),
@@ -78,3 +79,19 @@ def test_a_tool_is_described_by_its_route_or_its_override():
     )
     assert built["list_interviews"].definition["function"]["description"]
     assert built["get_api_settings"].path == "/manage"
+
+
+def test_a_write_takes_its_body_fields_as_the_route_declares_them():
+    tool = tools()["create_company"]
+
+    assert (tool.method, tool.path, tool.confirm) == ("POST", "/companies", True)
+    assert tool.body_params == ("name",)
+    assert tool.parameters["required"] == ["name"]
+    assert tool.parameters["properties"]["name"]["type"] == "string"
+
+
+def test_a_write_refuses_a_body_field_its_route_lacks():
+    entry = {**TOOLS["create_company"], "body": ["name", "nope"]}
+
+    with pytest.raises(ValueError, match="the body has no field nope"):
+        build("create_company", entry)

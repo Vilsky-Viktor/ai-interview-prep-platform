@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "กำลังดูคำถามที่พบบ่อย…",
     "Reading prepza's guide…": "กำลังดูคู่มือของ prepza…",
     "Working…": "กำลังดำเนินการ…",
+    "Preparing the company…": "กำลังเตรียมบริษัท…",
+    "This action expired or was already handled. Ask again to prepare it.": "การดำเนินการนี้หมดอายุหรือทำไปแล้ว โปรดขอให้เตรียมใหม่อีกครั้ง",
+    "Signing out…": "กำลังออกจากระบบ…",
 }

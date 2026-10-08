@@ -22,9 +22,10 @@ from app.constants.chat import (
 from app.integrations.redis import get_redis
 from app.models.answers import Answer, Turn
 from app.schemas.chat import ChatRequest
-from app.services import limits
+from app.services import limits, titles
 from app.services.chat import Emit, SessionExpired, build_messages, converse
-from app.services.conversations import open_conversation, require_company
+from app.services.conversations import open_conversation
+from app.services.tenancy import require_company, user_companies
 from app.storage import conversations, messages
 
 logger = logging.getLogger(__name__)
@@ -45,9 +46,9 @@ async def start(body: ChatRequest, user: User, token: str, language: str) -> Asy
     if body.conversation_id is not None:
         conversation = await open_conversation(body.conversation_id, user.uid, token, language)
 
-    # The company picked in the panel, for this message: one the user can see, or none.
-    if company_id is not None:
-        await require_company(company_id, token, language)
+    # The company picked in the panel, for this message: one of the user's, or none.
+    companies = await user_companies(token, language)
+    require_company(company_id, companies)
 
     await limits.check(redis, user.uid, company_id)
 
@@ -59,13 +60,13 @@ async def start(body: ChatRequest, user: User, token: str, language: str) -> Asy
 
     earlier = await messages.recent(conversation.id, HISTORY_MESSAGES)
     await messages.add_question(conversation.id, body.message, body.source)
-    turn = Turn(conversation.id, user.uid, company_id, token, language)
+    turn = Turn(conversation.id, user.uid, company_id, token, language, companies, user.name)
 
     return stream(turn, build_messages(turn, earlier, body.message, body.page, HISTORY_CHARACTERS))
 
 
-async def stream(turn: Turn, prompt: list) -> AsyncIterator[str]:
-    """The turn's events: the conversation's id first, a keep-alive comment whenever nothing
+async def stream(turn: Turn, prompt: list, first: dict | None = None) -> AsyncIterator[str]:
+    """The turn's events: the conversation's id first (and `first`, when given), a keep-alive comment whenever nothing
     came for KEEP_ALIVE_SECONDS. The turn runs as a task of its own; when the client goes (the
     user stopped it, or closed the tab), it's cancelled and saves what it had."""
     queue: asyncio.Queue = asyncio.Queue()
@@ -73,6 +74,9 @@ async def stream(turn: Turn, prompt: list) -> AsyncIterator[str]:
 
     try:
         yield sse_event({"conversation": {"id": str(turn.conversation_id)}})
+
+        if first is not None:
+            yield sse_event(first)
 
         while True:
             try:
@@ -112,9 +116,10 @@ async def run_turn(turn: Turn, prompt: list, emit: Emit) -> None:
     except SessionExpired:
         status = Status.FAILED
         error = {"error": translate(SESSION_EXPIRED, turn.language), "code": SESSION_EXPIRED_CODE}
-    except Exception:
-        # The model failed, or the turn ran out of time.
-        logger.exception("An assistant turn failed")
+    except Exception as failure:  # noqa: BLE001 - logged by its type only
+        # The model failed, or the turn ran out of time. Only the error's type: its message or
+        # traceback could quote the conversation.
+        logger.error("An assistant turn failed: %s", type(failure).__name__)
         status = Status.FAILED
         error = {"error": translate(CHAT_FAILED, turn.language)}
 
@@ -126,10 +131,18 @@ async def run_turn(turn: Turn, prompt: list, emit: Emit) -> None:
 
         if error is None:
             last = {"done": {"message_id": str(message_id)}}
-    except Exception:
+    except Exception as failure:  # noqa: BLE001 - logged by its type only
         # The conversation was deleted meanwhile (its company, or by the user).
-        logger.exception("Couldn't save an assistant answer")
+        logger.error("Couldn't save an assistant answer: %s", type(failure).__name__)
     finally:
-        # However the turn ended, the panel hears how, and the stream ends.
+        # However the turn ended, the panel hears how, and the stream ends; after a new
+        # question's answer, with the conversation's new title when it's time for one.
         emit(last)
+
+        if turn.new_question and "done" in last:
+            title = await titles.refresh(turn)
+
+            if title:
+                emit({"title": title})
+
         emit(END)

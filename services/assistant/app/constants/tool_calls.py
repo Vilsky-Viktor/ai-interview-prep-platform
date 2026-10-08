@@ -6,6 +6,8 @@ MAX_PARALLEL_TOOL_CALLS = 4
 # DEFAULT_MAX_ITEMS), strings of at most MAX_STRING_LENGTH characters.
 DEFAULT_MAX_ITEMS = 20
 MAX_STRING_LENGTH = 300
+# The methods of the routes that change something: each waits for the user's confirmation.
+WRITE_METHODS = ("POST", "PUT", "PATCH", "DELETE")
 # Routes the assistant never calls: other services' and prepza's own team's.
 FORBIDDEN_PATH_PREFIXES = ("/internal", "/superadmin")
 # The header that tells companies a read came through the assistant (audited as such), holding a

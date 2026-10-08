@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "در حال بررسی پرسش‌های متداول…",
     "Reading prepza's guide…": "در حال بررسی راهنمای prepza…",
     "Working…": "در حال انجام…",
+    "Preparing the company…": "در حال آماده‌سازی شرکت…",
+    "This action expired or was already handled. Ask again to prepare it.": "این اقدام منقضی شده یا قبلاً انجام شده است. دوباره بخواهید آماده‌اش کند.",
+    "Signing out…": "در حال خروج…",
 }

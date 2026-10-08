@@ -41,7 +41,8 @@ class Message(Base):
     # "text" or "voice" (transcribed; the audio itself is never kept).
     source: Mapped[str] = mapped_column(String(8), default="text")
     content: Mapped[str] = mapped_column(Text)
-    # What the panel shows under an answer: candidate rows, links and the like.
+    # What the panel shows under an answer, as references: each block's kind, its items' ids and
+    # its links; the items are fetched again when the conversation is opened.
     blocks: Mapped[list] = mapped_column(JSONB, default=list)
     # "complete", "cancelled" (stopped, with its partial text) or "failed".
     status: Mapped[str] = mapped_column(String(16), default="complete")
@@ -51,7 +52,7 @@ class Message(Base):
 
 
 class ToolCall(Base):
-    """A tool an answer used: a GET to another service, with the trimmed data the model read."""
+    """A tool an answer used: which, how long it took and how it ended; never its data."""
 
     __tablename__ = "tool_calls"
 
@@ -60,10 +61,12 @@ class ToolCall(Base):
         ForeignKey("messages.id", ondelete="CASCADE"), index=True
     )
     tool: Mapped[str] = mapped_column(String(64))
-    arguments: Mapped[dict] = mapped_column(JSONB)
+    # The names of the arguments it was called with, never their values.
+    arguments: Mapped[list] = mapped_column(JSONB)
     # The service's answer; None when it didn't answer.
     status_code: Mapped[int | None] = mapped_column(Integer)
     duration_ms: Mapped[int] = mapped_column(Integer)
+    # No longer kept (other people's data): always None.
     result: Mapped[dict | None] = mapped_column(JSONB)
     # "done" or "failed".
     state: Mapped[str] = mapped_column(String(32), default="done")

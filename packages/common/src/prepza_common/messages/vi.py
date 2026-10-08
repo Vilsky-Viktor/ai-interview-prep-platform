@@ -154,4 +154,7 @@ MESSAGES = {
     "Reading the FAQ…": "Đang xem câu hỏi thường gặp…",
     "Reading prepza's guide…": "Đang xem hướng dẫn của prepza…",
     "Working…": "Đang xử lý…",
+    "Preparing the company…": "Đang chuẩn bị công ty…",
+    "This action expired or was already handled. Ask again to prepare it.": "Thao tác này đã hết hạn hoặc đã được xử lý. Hãy yêu cầu chuẩn bị lại.",
+    "Signing out…": "Đang đăng xuất…",
 }

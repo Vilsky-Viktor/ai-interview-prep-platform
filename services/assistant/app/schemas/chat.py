@@ -52,6 +52,8 @@ class ConfigOut(BaseModel):
     """The limits the panel shows and keeps to."""
 
     max_message_length: int
+    # A chat older than this isn't brought back after a reload.
+    restore_minutes: int
     max_audio_seconds: int
     messages_per_hour: int
     messages_per_day: int
