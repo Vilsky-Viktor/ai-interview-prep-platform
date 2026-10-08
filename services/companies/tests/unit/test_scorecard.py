@@ -1,0 +1,167 @@
+import uuid
+from datetime import UTC, datetime
+
+import pytest
+from prepza_common.service_auth import issue_token
+
+from app.constants.audit import AuditAction
+from app.constants.invites import InviteStatus
+from app.integrations import rounds
+from app.main import app
+from app.models.companies import Company, Member
+from app.models.interviews import Interview
+from app.models.invites import CandidateInvite
+from app.routers import candidates as candidates_router
+from app.storage import companies, interviews
+from tests.unit import fake_candidates
+from tests.unit.test_candidates import COMPANY_ID, INTERVIEW_ID, INVITE_ID, sign_in
+
+URL = f"/interviews/{INTERVIEW_ID}/candidates/{INVITE_ID}"
+SECRET = "test-secret-that-is-at-least-32-bytes"
+# A section as rounds returns it: one answered question.
+SECTION = {
+    "id": str(uuid.uuid4()),
+    "topic_title": "Python",
+    "status": "finished",
+    "final_score": 80,
+    "tab_leaves": 1,
+    "copies": 0,
+    "fast_answers": 0,
+    "review": [
+        {
+            "question_id": str(uuid.uuid4()),
+            "number": 1,
+            "text": "What does len([]) return?",
+            "options": ["0", "None"],
+            "correct_option_index": 0,
+            "answer": {
+                "answer_id": str(uuid.uuid4()),
+                "option_index": 0,
+                "correct": True,
+                "seconds": 12,
+                "fast": False,
+            },
+            "tab_leaves": 1,
+            "copies": 0,
+        }
+    ],
+}
+
+
+@pytest.fixture(autouse=True)
+def clear_overrides():
+    yield
+    app.dependency_overrides.clear()
+
+
+@pytest.fixture
+def tracked(monkeypatch):
+    """The funnel events sent, by name."""
+    events = []
+
+    async def track(name, **kwargs):
+        events.append(name)
+
+    monkeypatch.setattr(candidates_router, "track", track)
+
+    return events
+
+
+def open_scorecard(client, monkeypatch, headers=None):
+    sign_in()
+    fake_candidates.add(
+        CandidateInvite(
+            id=INVITE_ID,
+            interview_id=INTERVIEW_ID,
+            email="ann@example.com",
+            token="token-ann",
+            status=InviteStatus.FINISHED,
+            extra_time=0,
+            created_at=datetime.now(UTC),
+        )
+    )
+    interview = Interview(
+        id=INTERVIEW_ID,
+        company_id=COMPANY_ID,
+        generation_id=uuid.uuid4(),
+        set_id=uuid.uuid4(),
+        title="Backend",
+        pass_mark=70,
+    )
+    company = Company(id=COMPANY_ID, name="Arcolabs", created_at=datetime.now(UTC))
+    company.members = [
+        Member(company_id=COMPANY_ID, user_id="bob", invited_email="bob@example.com", role="owner")
+    ]
+
+    async def fake_interview(_interview_id):
+        return interview
+
+    async def fake_company(_company_id):
+        return company
+
+    async def fake_scorecard(_invite_id):
+        return [SECTION]
+
+    async def fake_scores(_invite_ids):
+        return {str(INVITE_ID): {"progress": 100, "grade": 80, "finished": True}}
+
+    monkeypatch.setattr(interviews, "get", fake_interview)
+    monkeypatch.setattr(companies, "get", fake_company)
+    monkeypatch.setattr(rounds, "scorecard", fake_scorecard)
+    monkeypatch.setattr(rounds, "invite_scores", fake_scores)
+
+    return client.get(URL, headers=headers or {})
+
+
+def test_the_scorecard_carries_the_overall_result_for_the_pdf(client, monkeypatch, tracked):
+    response = open_scorecard(client, monkeypatch)
+    card = response.json()
+
+    assert response.status_code == 200
+    assert (card["title"], card["company"], card["grade"], card["passed"]) == (
+        "Backend",
+        "Arcolabs",
+        80,
+        True,
+    )
+    assert card["sessions"] == [{**SECTION, "passed": True}]
+
+
+def test_viewing_a_finished_candidates_results_is_recorded(client, monkeypatch, audited, tracked):
+    assert open_scorecard(client, monkeypatch).status_code == 200
+    assert audited == [(COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID)]
+    assert tracked == ["results_viewed"]
+
+
+def test_a_read_through_the_assistant_is_recorded_as_such_and_not_in_the_funnel(
+    client, monkeypatch, audited, tracked
+):
+    token = issue_token("assistant", "companies", SECRET)
+
+    assert open_scorecard(client, monkeypatch, {"X-Assistant": token}).status_code == 200
+    assert audited == [(COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID, "assistant")]
+    assert tracked == []
+
+
+@pytest.mark.parametrize(
+    "token",
+    [
+        "forged",
+        # Signed with another key, or by another service.
+        issue_token("assistant", "companies", "another-secret-that-is-at-least-32-bytes"),
+        issue_token("rounds", "companies", SECRET),
+        issue_token("assistant", "rounds", SECRET),
+    ],
+    ids=["not a token", "wrong key", "another service", "for another service"],
+)
+def test_a_forged_assistant_header_is_ignored(client, monkeypatch, audited, tracked, token):
+    assert open_scorecard(client, monkeypatch, {"X-Assistant": token}).status_code == 200
+    assert audited == [(COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID)]
+    assert tracked == ["results_viewed"]
+
+
+def test_the_assistant_header_is_not_in_the_api_description():
+    route = app.openapi()["paths"]["/interviews/{interview_id}/candidates/{invite_id}"]
+    parameters = route["get"]["parameters"]
+
+    assert [parameter["name"] for parameter in parameters] == ["interview_id", "invite_id"]

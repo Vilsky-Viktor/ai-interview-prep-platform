@@ -25,7 +25,7 @@ def candidate_filters(
     filters = [CandidateInvite.interview_id == interview_id]
 
     if q:
-        filters.append(CandidateInvite.email.ilike(f"%{escape_like(q.lower())}%", escape="\\"))
+        filters.append(email_contains(q))
 
     if filter_by == CandidateFilter.PASSED:
         filters += [
@@ -38,6 +38,11 @@ def candidate_filters(
         filters.append(CandidateInvite.status == filter_by)
 
     return filters
+
+
+def email_contains(q: str):
+    """An email containing `q` as typed, in any case."""
+    return CandidateInvite.email.ilike(f"%{escape_like(q.lower())}%", escape="\\")
 
 
 def candidate_order(by_grade: bool) -> list:
@@ -70,6 +75,29 @@ async def page(
 
     async with Session() as session:
         return list(await session.scalars(query))
+
+
+async def company_page(
+    company_id, offset: int, limit: int, q: str = ""
+) -> list[tuple[CandidateInvite, Interview]]:
+    """The company's candidates across its interviews, each with its interview, newest first,
+    narrowed to an email containing `q`. A deleted interview's candidates went with it."""
+    filters = [Interview.company_id == company_id]
+
+    if q:
+        filters.append(email_contains(q))
+
+    query = (
+        select(CandidateInvite, Interview)
+        .join(Interview, Interview.id == CandidateInvite.interview_id)
+        .where(*filters)
+        .order_by(*candidate_order(False))
+        .offset(offset)
+        .limit(limit)
+    )
+
+    async with Session() as session:
+        return [tuple(row) for row in await session.execute(query)]
 
 
 async def for_report(interview_id) -> list[CandidateInvite]:

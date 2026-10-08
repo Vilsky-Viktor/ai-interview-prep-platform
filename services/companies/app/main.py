@@ -18,6 +18,7 @@ from app.routers import (
     bulk_invites,
     candidates,
     companies,
+    company_candidates,
     internal_accounts,
     internal_api,
     internal_ats,
@@ -68,6 +69,7 @@ app.include_router(auto_top_ups.router)
 app.include_router(members.router)
 app.include_router(interviews.router)
 app.include_router(candidates.router)
+app.include_router(company_candidates.router)
 app.include_router(accommodations.router)
 app.include_router(bulk_invites.router)
 app.include_router(interview_generation.router)

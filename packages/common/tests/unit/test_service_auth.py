@@ -4,7 +4,7 @@ import jwt
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-from prepza_common.service_auth import callee_secret, issue_token, service_caller
+from prepza_common.service_auth import callee_secret, issue_token, service_caller, token_caller
 
 LIBRARY_SECRET = "library-secret-that-is-at-least-32-bytes"
 ROUNDS_SECRET = "rounds-secret-that-is-at-least-32-bytes!"
@@ -62,3 +62,15 @@ def test_a_caller_reads_the_key_of_the_service_it_calls(monkeypatch):
     monkeypatch.setenv("LIBRARY_SERVICE_SECRET", LIBRARY_SECRET)
 
     assert callee_secret("library") == LIBRARY_SECRET
+
+
+def test_a_token_is_checked_without_a_request():
+    assert (
+        token_caller(issue_token("assistant", "library", LIBRARY_SECRET), LIBRARY_SECRET, "library")
+        == "assistant"
+    )
+    assert (
+        token_caller(issue_token("assistant", "library", ROUNDS_SECRET), LIBRARY_SECRET, "library")
+        is None
+    )
+    assert token_caller("not a token", LIBRARY_SECRET, "library") is None

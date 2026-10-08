@@ -14,3 +14,9 @@ class AuditAction(StrEnum):
     INVITE_REVOKED = "invite_revoked"
     EXTRA_TIME_SET = "extra_time_set"
     PASS_MARK_CHANGED = "pass_mark_changed"
+
+
+# What an audit event was recorded through when not a person in the app (audit_events.via): the
+# in-app assistant reading for a member. It is also the assistant service's name, the issuer of
+# the X-Assistant token.
+VIA_ASSISTANT = "assistant"

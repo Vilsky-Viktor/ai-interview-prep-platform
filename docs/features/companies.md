@@ -60,7 +60,9 @@ The companies service records the human decisions taken in a company, as evidenc
 | Extra time set | A member gives a candidate extra time |
 | Pass mark changed | A member changes an interview's pass mark |
 
-Only the owner can read the log, newest first, through `GET /companies/{id}/audit`; the app has no page for it. Events are kept for 24 months, then the daily retention job deletes them, and they go with the company when it's removed. When a member deletes their account, their events stay with the company without their id (`deleted-user`); their data export lists them.
+An event also says what it came through (`via`): empty when a member acted in the app, `assistant` when the in-app assistant opened a candidate's results for them. Companies trusts that only from a service token the assistant signs (the `X-Assistant` header, checked like other service calls); a missing or invalid one counts as the app. A view through the assistant isn't counted as the "results viewed" step of the sign-up funnel.
+
+Only the owner can read the log, newest first, with `via`, through `GET /companies/{id}/audit`; the app has no page for it. Events are kept for 24 months, then the daily retention job deletes them, and they go with the company when it's removed. When a member deletes their account, their events stay with the company without their id (`deleted-user`); their data export lists them.
 
 ## Related pages
 

@@ -80,7 +80,13 @@ async def export(user_id: str, email: str) -> dict:
             .where(or_(CandidateInvite.user_id == user_id, CandidateInvite.email == email.lower()))
         )
         decisions = await session.execute(
-            select(Company.name, AuditEvent.action, AuditEvent.target_id, AuditEvent.created_at)
+            select(
+                Company.name,
+                AuditEvent.action,
+                AuditEvent.target_id,
+                AuditEvent.via,
+                AuditEvent.created_at,
+            )
             .join(Company, Company.id == AuditEvent.company_id)
             .where(AuditEvent.user_id == user_id)
             .order_by(AuditEvent.created_at)
@@ -95,8 +101,8 @@ async def export(user_id: str, email: str) -> dict:
                 for title, status, at in invites
             ],
             "company_decisions": [
-                {"company": name, "action": action, "target_id": target_id, "at": at}
-                for name, action, target_id, at in decisions
+                {"company": name, "action": action, "target_id": target_id, "via": via, "at": at}
+                for name, action, target_id, via, at in decisions
             ],
         }
 

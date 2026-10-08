@@ -25,6 +25,13 @@ class CandidateOut(BaseModel):
     created_at: datetime
 
 
+class CompanyCandidateOut(CandidateOut):
+    """A candidate found across the company's interviews, with the interview they're in."""
+
+    interview_id: UUID
+    interview_title: str | None
+
+
 class InviteView(BaseModel):
     interview_id: UUID
     title: str | None

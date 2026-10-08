@@ -314,7 +314,8 @@ export interface paths {
     post?: never
     /**
      * Delete Interview
-     * @description Results and questions go first, so a failure leaves the interview to delete again.
+     * @description Credits, results and questions go first, so a failure leaves the interview to delete
+     *     again.
      */
     delete: operations["delete_interview_interviews__interview_id__delete"]
     options?: never
@@ -428,17 +429,43 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** Candidate Scorecard */
+    /**
+     * Candidate Scorecard
+     * @description A view through the in-app assistant (a valid X-Assistant token) is audited as via the
+     *     assistant and isn't the funnel's "results viewed".
+     */
     get: operations["candidate_scorecard_interviews__interview_id__candidates__invite_id__get"]
     put?: never
     post?: never
     /**
      * Revoke Candidate
      * @description Withdraws an invite the candidate hasn't used yet. Once they've started, it erases them for
-     *     good, answers and results included, for example when they ask to have their data deleted;
-     *     credits still held come back, and a finished candidate stays charged.
+     *     good, answers and results included, for example when they ask to have their data deleted.
+     *     A candidate who answered at least one question is charged; other credits still held come
+     *     back.
      */
     delete: operations["revoke_candidate_interviews__interview_id__candidates__invite_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/companies/{company_id}/candidates": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Search Candidates
+     * @description The company's candidates across its interviews, newest first, a page at a time; `q`
+     *     narrows them to emails containing it. Any member, viewers too.
+     */
+    get: operations["search_candidates_companies__company_id__candidates_get"]
+    put?: never
+    post?: never
+    delete?: never
     options?: never
     head?: never
     patch?: never
@@ -897,10 +924,10 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** Export User */
-    get: operations["export_user_internal_users__user_id__export_get"]
+    get?: never
     put?: never
-    post?: never
+    /** Export User */
+    post: operations["export_user_internal_users__user_id__export_post"]
     delete?: never
     options?: never
     head?: never
@@ -1080,6 +1107,71 @@ export interface paths {
      *     company is told.
      */
     post: operations["invite_undelivered_internal_invites__invite_id__undelivered_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/invites/companies": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Invited Companies
+     * @description Notifications, for the admin zone's emails tab: the companies that invited the address,
+     *     whose emails to it a superadmin may stop. The address goes in the body, never the query
+     *     string, which request logs record.
+     */
+    post: operations["invited_companies_internal_invites_companies_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/members": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Companies Members
+     * @description Notifications, for its emails to members: the companies of those ids that still exist,
+     *     their names and who joined them, and whether each is an owner or admin.
+     */
+    post: operations["companies_members_internal_companies_members_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/interviews/waiting": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Waiting Interviews
+     * @description Notifications, for its reminders: interviews ready between the `ready_` times that
+     *     nobody was invited to, and interviews started between the `started_` times still waiting
+     *     for their questions.
+     */
+    get: operations["waiting_interviews_internal_interviews_waiting_get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -1463,6 +1555,8 @@ export interface components {
       action: string
       /** Target Id */
       target_id: string | null
+      /** Via */
+      via?: string | null
       /**
        * Created At
        * Format: date-time
@@ -1611,6 +1705,11 @@ export interface components {
         [key: string]: string
       }
     }
+    /** CompaniesMembersOut */
+    CompaniesMembersOut: {
+      /** Companies */
+      companies: components["schemas"]["CompanyMembersOut"][]
+    }
     /**
      * CompanyBalanceOut
      * @description A company the user can top up, with its credits.
@@ -1628,6 +1727,57 @@ export interface components {
       /** Low */
       low: boolean
     }
+    /**
+     * CompanyCandidateOut
+     * @description A candidate found across the company's interviews, with the interview they're in.
+     */
+    CompanyCandidateOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Email */
+      email: string
+      /** Status */
+      status: string
+      /**
+       * Progress
+       * @default 0
+       */
+      progress: number
+      /** Grade */
+      grade?: number | null
+      /** Passed */
+      passed?: boolean | null
+      /**
+       * Tab Leaves
+       * @default 0
+       */
+      tab_leaves: number
+      /**
+       * Copies
+       * @default 0
+       */
+      copies: number
+      /**
+       * Fast Answers
+       * @default 0
+       */
+      fast_answers: number
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /**
+       * Interview Id
+       * Format: uuid
+       */
+      interview_id: string
+      /** Interview Title */
+      interview_title: string | null
+    }
     /** CompanyCreate */
     CompanyCreate: {
       /** Name */
@@ -1639,6 +1789,23 @@ export interface components {
       available: number
       /** Low */
       low: boolean
+    }
+    /** CompanyIdsIn */
+    CompanyIdsIn: {
+      /** Company Ids */
+      company_ids: string[]
+    }
+    /** CompanyMembersOut */
+    CompanyMembersOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Name */
+      name: string
+      /** Members */
+      members: components["schemas"]["MemberBriefOut"][]
     }
     /** CompanyOut */
     CompanyOut: {
@@ -1691,6 +1858,13 @@ export interface components {
        */
       reason: string
     }
+    /** DraftTopic */
+    DraftTopic: {
+      /** Main Topic */
+      main_topic: string
+      /** Subtopics */
+      subtopics: string[]
+    }
     /**
      * ExtraTimeIn
      * @description Extra time for a candidate who needs it, in percent of each question's time.
@@ -1698,6 +1872,44 @@ export interface components {
     ExtraTimeIn: {
       /** Extra Time */
       extra_time: number
+    }
+    /** GenerationOut */
+    GenerationOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Kind */
+      kind: string
+      /** Company Id */
+      company_id: string | null
+      /** Status */
+      status: string
+      /** Topics */
+      topics: components["schemas"]["DraftTopic"][] | null
+      progress: components["schemas"]["GenerationProgress"] | null
+      /** Preparation Id */
+      preparation_id: string | null
+      /** Error */
+      error: string | null
+      /** Language */
+      language: string
+      /** Max Topics */
+      max_topics: number
+      /** Max Subtopics */
+      max_subtopics: number
+    }
+    /** GenerationProgress */
+    GenerationProgress: {
+      /** Done */
+      done: number
+      /** Total */
+      total: number
+      /** Topics */
+      topics?: number | null
+      /** Topics Ready */
+      topics_ready?: number | null
     }
     /** HTTPValidationError */
     HTTPValidationError: {
@@ -1899,6 +2111,14 @@ export interface components {
       /** Question Seconds */
       question_seconds: number
     }
+    /**
+     * InvitedCompaniesOut
+     * @description The companies that invited an address, for the notifications service.
+     */
+    InvitedCompaniesOut: {
+      /** Company Ids */
+      company_ids: string[]
+    }
     /** LinkIn */
     LinkIn: {
       /** On */
@@ -1964,6 +2184,13 @@ export interface components {
       on: boolean
       /** Running */
       running: number | null
+    }
+    /** MemberBriefOut */
+    MemberBriefOut: {
+      /** User Id */
+      user_id: string
+      /** Editor */
+      editor: boolean
     }
     /** MemberIn */
     MemberIn: {
@@ -2197,6 +2424,113 @@ export interface components {
           }[]
         | null
     }
+    /** ScorecardAnswer */
+    ScorecardAnswer: {
+      /**
+       * Answer Id
+       * Format: uuid
+       */
+      answer_id: string
+      /** Option Index */
+      option_index: number | null
+      /** Correct */
+      correct: boolean | null
+      /** Seconds */
+      seconds?: number | null
+      /**
+       * Fast
+       * @default false
+       */
+      fast: boolean
+    }
+    /** ScorecardOut */
+    ScorecardOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Email */
+      email: string
+      /** Status */
+      status: string
+      /** Extra Time */
+      extra_time: number
+      /** Can Edit */
+      can_edit: boolean
+      /** Extra Time Options */
+      extra_time_options: number[]
+      /** Title */
+      title: string | null
+      /** Company */
+      company: string
+      /** Logo Url */
+      logo_url: string | null
+      /** Verified Domain */
+      verified_domain: string | null
+      /** Grade */
+      grade: number | null
+      /** Passed */
+      passed: boolean | null
+      /** Pass Mark */
+      pass_mark: number
+      /** Sessions */
+      sessions: components["schemas"]["ScorecardSection"][]
+    }
+    /** ScorecardQuestion */
+    ScorecardQuestion: {
+      /**
+       * Question Id
+       * Format: uuid
+       */
+      question_id: string
+      /** Number */
+      number: number
+      /** Text */
+      text: string
+      /** Options */
+      options: string[]
+      /** Correct Option Index */
+      correct_option_index: number | null
+      answer: components["schemas"]["ScorecardAnswer"] | null
+      /**
+       * Tab Leaves
+       * @default 0
+       */
+      tab_leaves: number
+      /**
+       * Copies
+       * @default 0
+       */
+      copies: number
+    }
+    /**
+     * ScorecardSection
+     * @description One topic's round.
+     */
+    ScorecardSection: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Topic Title */
+      topic_title: string
+      /** Status */
+      status: string
+      /** Final Score */
+      final_score: number | null
+      /** Tab Leaves */
+      tab_leaves: number
+      /** Copies */
+      copies: number
+      /** Fast Answers */
+      fast_answers: number
+      /** Review */
+      review: components["schemas"]["ScorecardQuestion"][]
+      /** Passed */
+      passed: boolean | null
+    }
     /** SessionSummary */
     SessionSummary: {
       /**
@@ -2262,6 +2596,15 @@ export interface components {
       /** Company Ids */
       company_ids: string[]
     }
+    /**
+     * UserEmailIn
+     * @description An email address sent in the body, so request logs don't record it: the account's, in
+     *     library's calls to delete or export a user's data, or the one a superadmin looks up.
+     */
+    UserEmailIn: {
+      /** Email */
+      email: string
+    }
     /** ValidationError */
     ValidationError: {
       /** Location */
@@ -2318,6 +2661,35 @@ export interface components {
      */
     VerificationStatus:
       "none" | "waiting_email" | "pending" | "approved" | "declined"
+    /** WaitingInterviewOut */
+    WaitingInterviewOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /**
+       * Company Id
+       * Format: uuid
+       */
+      company_id: string
+      /** Title */
+      title: string | null
+      /** Generation Id */
+      generation_id: string | null
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+    }
+    /** WaitingInterviewsOut */
+    WaitingInterviewsOut: {
+      /** Without Candidates */
+      without_candidates: components["schemas"]["WaitingInterviewOut"][]
+      /** Being Generated */
+      being_generated: components["schemas"]["WaitingInterviewOut"][]
+    }
     /**
      * WebsiteIn
      * @description The company's website as typed; empty removes it, and the verification with it.
@@ -3295,9 +3667,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": {
-            [key: string]: unknown
-          }
+          "application/json": components["schemas"]["ScorecardOut"]
         }
       }
       /** @description Validation Error */
@@ -3329,6 +3699,43 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  search_candidates_companies__company_id__candidates_get: {
+    parameters: {
+      query?: {
+        q?: string
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CompanyCandidateOut"][]
+        }
       }
       /** @description Validation Error */
       422: {
@@ -3427,9 +3834,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": {
-            [key: string]: unknown
-          }
+          "application/json": components["schemas"]["GenerationOut"]
         }
       }
       /** @description Validation Error */
@@ -4137,16 +4542,18 @@ export interface operations {
   }
   delete_user_internal_users__user_id__delete: {
     parameters: {
-      query: {
-        email: string
-      }
+      query?: never
       header?: never
       path: {
         user_id: string
       }
       cookie?: never
     }
-    requestBody?: never
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
     responses: {
       /** @description Successful Response */
       204: {
@@ -4166,18 +4573,20 @@ export interface operations {
       }
     }
   }
-  export_user_internal_users__user_id__export_get: {
+  export_user_internal_users__user_id__export_post: {
     parameters: {
-      query: {
-        email: string
-      }
+      query?: never
       header?: never
       path: {
         user_id: string
       }
       cookie?: never
     }
-    requestBody?: never
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
     responses: {
       /** @description Successful Response */
       200: {
@@ -4486,6 +4895,106 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  invited_companies_internal_invites_companies_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InvitedCompaniesOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  companies_members_internal_companies_members_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CompanyIdsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CompaniesMembersOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  waiting_interviews_internal_interviews_waiting_get: {
+    parameters: {
+      query: {
+        ready_after: string
+        ready_before: string
+        started_after: string
+        started_before: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["WaitingInterviewsOut"]
+        }
       }
       /** @description Validation Error */
       422: {

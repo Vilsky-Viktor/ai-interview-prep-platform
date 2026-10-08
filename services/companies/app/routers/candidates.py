@@ -2,13 +2,13 @@ import asyncio
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Header, HTTPException, Query, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 from prepza_common.pause import refuse_if_paused
 
-from app.constants.audit import AuditAction
+from app.constants.audit import VIA_ASSISTANT, AuditAction
 from app.constants.invites import (
     EXTRA_TIME_OPTIONS,
     MAX_SEARCH_LENGTH,
@@ -26,6 +26,8 @@ from app.helpers.logos import logo_path
 from app.integrations import rounds
 from app.integrations.redis import get_redis
 from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateOut
+from app.schemas.scorecards import ScorecardOut
+from app.service_auth import from_assistant
 from app.services import candidate_invites, candidate_results
 from app.services import outbox as outbox_service
 from app.services.access import can_edit, require_company, require_editor
@@ -122,7 +124,14 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
 
 
 @router.get("/{interview_id}/candidates/{invite_id}")
-async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: CurrentUser) -> dict:
+async def candidate_scorecard(
+    interview_id: UUID,
+    invite_id: UUID,
+    user: CurrentUser,
+    x_assistant: Annotated[str | None, Header(include_in_schema=False)] = None,
+) -> ScorecardOut:
+    """A view through the in-app assistant (a valid X-Assistant token) is audited as via the
+    assistant and isn't the funnel's "results viewed"."""
     interview = await interviews.get(interview_id)
     invite = await candidates.get(interview_id, invite_id) if interview else None
 
@@ -138,35 +147,36 @@ async def candidate_scorecard(interview_id: UUID, invite_id: UUID, user: Current
     totals = scores.get(str(invite.id)) or {}
     await candidate_results.sync([invite], {str(invite.id): totals})
 
-    # The funnel's "first results viewed": a finished candidate's results, opened by a member.
-    # The audit row is written whatever happens to the funnel event, which never raises.
-    if invite.status == InviteStatus.FINISHED:
+    # The funnel's "first results viewed": a finished candidate's results, opened by a member
+    # (not the assistant). The audit row is written whatever happens to the funnel event, which
+    # never raises.
+    if invite.status == InviteStatus.FINISHED and from_assistant(x_assistant):
+        await audit.record(
+            company.id, user.uid, AuditAction.RESULTS_VIEWED, invite.id, via=VIA_ASSISTANT
+        )
+    elif invite.status == InviteStatus.FINISHED:
         await asyncio.gather(
             track("results_viewed", user_id=user.uid, company_id=company.id),
             audit.record(company.id, user.uid, AuditAction.RESULTS_VIEWED, invite.id),
         )
 
-    return {
-        "id": str(invite.id),
-        "email": invite.email,
-        "status": invite.status,
-        "extra_time": invite.extra_time,
-        # Whether the user may change the candidate (extra time, revoke): not a viewer.
-        "can_edit": can_edit(member),
-        # What extra time can still be given: only before the candidate starts, and not by a
-        # viewer.
-        "extra_time_options": (
+    return ScorecardOut(
+        id=invite.id,
+        email=invite.email,
+        status=invite.status,
+        extra_time=invite.extra_time,
+        can_edit=can_edit(member),
+        extra_time_options=(
             list(EXTRA_TIME_OPTIONS) if invite.status in NOT_STARTED and can_edit(member) else []
         ),
-        # For the PDF report: the test, the company, and the overall result.
-        "title": await interview_title(interview),
-        "company": company.name,
-        "logo_url": logo_path(company),
-        "verified_domain": company.verified_domain,
-        "grade": totals.get("grade"),
-        "passed": passed(totals, interview.pass_mark),
-        "pass_mark": interview.pass_mark,
-        "sessions": [
+        title=await interview_title(interview),
+        company=company.name,
+        logo_url=logo_path(company),
+        verified_domain=company.verified_domain,
+        grade=totals.get("grade"),
+        passed=passed(totals, interview.pass_mark),
+        pass_mark=interview.pass_mark,
+        sessions=[
             {**section, "passed": section_passed(section, interview.pass_mark)} for section in card
         ],
-    }
+    )

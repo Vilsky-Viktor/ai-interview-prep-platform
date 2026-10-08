@@ -6,15 +6,11 @@ from prepza_common.user import User
 
 from app.constants.audit import AuditAction
 from app.constants.invites import InviteStatus
-from app.integrations import rounds
 from app.main import app
 from app.models.audit import AuditEvent
 from app.models.companies import Company, Member
-from app.models.interviews import Interview
-from app.models.invites import CandidateInvite
-from app.storage import audit, companies, interviews
-from tests.unit import fake_candidates
-from tests.unit.test_candidates import COMPANY_ID, INTERVIEW_ID, INVITE_ID, revoke
+from app.storage import audit, companies
+from tests.unit.test_candidates import COMPANY_ID, INVITE_ID, revoke
 from tests.unit.test_report_email import PDF, URL, queued  # noqa: F401 (the fixture)
 
 
@@ -52,35 +48,6 @@ def test_revoking_or_deleting_a_candidate_is_recorded(client, monkeypatch, audit
     assert audited == [(COMPANY_ID, "bob", action, INVITE_ID)]
 
 
-def test_viewing_a_finished_candidates_results_is_recorded(client, monkeypatch, audited):
-    sign_in("bob")
-    invite = CandidateInvite(
-        id=INVITE_ID, interview_id=INTERVIEW_ID, email="ann@example.com", status="finished"
-    )
-    interview = Interview(id=INTERVIEW_ID, company_id=COMPANY_ID, pass_mark=70, title="Backend")
-    fake_candidates.add(invite)
-
-    async def fake_interview(_interview_id):
-        return interview
-
-    async def fake_company(_company_id):
-        return company_of("admin")
-
-    async def fake_scorecard(_invite_id):
-        return [{"topic_title": "Python", "status": "finished", "final_score": 80}]
-
-    async def fake_scores(_invite_ids):
-        return {str(INVITE_ID): {"progress": 100, "grade": 80, "finished": True}}
-
-    monkeypatch.setattr(interviews, "get", fake_interview)
-    monkeypatch.setattr(companies, "get", fake_company)
-    monkeypatch.setattr(rounds, "scorecard", fake_scorecard)
-    monkeypatch.setattr(rounds, "invite_scores", fake_scores)
-
-    assert client.get(f"/interviews/{INTERVIEW_ID}/candidates/{INVITE_ID}").status_code == 200
-    assert audited == [(COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID)]
-
-
 def test_emailing_a_report_is_recorded(client, queued, audited):  # noqa: F811
     assert client.post(URL, json={"email": "boss@example.com", "pdf": PDF}).status_code == 202
     assert [event[2] for event in audited] == [AuditAction.REPORT_EMAILED]
@@ -116,6 +83,7 @@ def test_only_the_owner_reads_the_audit_log_newest_first(client, monkeypatch):
             "user_id": "bob",
             "action": "results_viewed",
             "target_id": str(INVITE_ID),
+            "via": None,
             "created_at": now.isoformat().replace("+00:00", "Z"),
         }
     ]

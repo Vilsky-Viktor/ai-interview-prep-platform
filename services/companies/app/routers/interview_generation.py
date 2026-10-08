@@ -9,6 +9,7 @@ from app.constants.audit import AuditAction
 from app.integrations import generation as generation_api
 from app.integrations.redis import get_redis
 from app.models.interviews import Interview
+from app.schemas.generations import GenerationOut
 from app.schemas.interviews import ReviewIn
 from app.services.access import require_company, require_editor
 from app.storage import audit, interviews
@@ -41,7 +42,7 @@ def passed_through(response: httpx.Response) -> dict:
 
 
 @router.get("/{interview_id}/generation")
-async def get_generation(interview_id: UUID, user: CurrentUser) -> dict:
+async def get_generation(interview_id: UUID, user: CurrentUser) -> GenerationOut:
     """Every company member follows the generation, not only the admin who started it."""
     interview = await get_interview(interview_id)
     await require_company(user, interview.company_id)

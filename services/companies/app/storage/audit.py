@@ -7,10 +7,14 @@ from app.models.audit import AuditEvent
 from app.storage.db import Session
 
 
-async def record(company_id, user_id: str, action: str, target_id=None) -> None:
+async def record(
+    company_id, user_id: str, action: str, target_id=None, via: str | None = None
+) -> None:
     async with Session() as session:
         session.add(
-            AuditEvent(company_id=company_id, user_id=user_id, action=action, target_id=target_id)
+            AuditEvent(
+                company_id=company_id, user_id=user_id, action=action, target_id=target_id, via=via
+            )
         )
         await session.commit()
 

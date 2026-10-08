@@ -5,7 +5,7 @@ import uuid
 
 from app.constants.events import RESULTS_RESCORED
 from app.constants.invites import RESULT_FILTERS, InviteStatus
-from app.helpers.candidates import candidate_out, stored_results
+from app.helpers.candidates import candidate_out, company_candidate_out, stored_results
 from app.integrations import rounds
 from app.services import outbox as outbox_service
 from app.storage import candidates
@@ -68,6 +68,20 @@ async def page(
     await sync(listed, totals)
 
     return [candidate_out(invite, totals.get(str(invite.id)) or {}, interview) for invite in listed]
+
+
+async def company_page(company_id, offset: int, limit: int, q: str = "") -> list:
+    """A page of the company's candidates across its interviews, newest first, narrowed to an
+    email containing `q`; progress and signals come from rounds for this page only, as in page."""
+    listed = await candidates.company_page(company_id, offset, limit, q)
+    found = [invite for invite, _ in listed]
+    totals = await rounds.invite_scores([invite.id for invite in found])
+    await sync(found, totals)
+
+    return [
+        company_candidate_out(invite, totals.get(str(invite.id)) or {}, interview)
+        for invite, interview in listed
+    ]
 
 
 async def handle(event_type: str, data: dict) -> None:

@@ -28,11 +28,12 @@ def no_billing_calls(monkeypatch):
 
 @pytest.fixture(autouse=True)
 def audited(monkeypatch):
-    """The audit log, in memory: (company id, user id, action, target id) as recorded."""
+    """The audit log, in memory: (company id, user id, action, target id) as recorded, with
+    via after them when it's set."""
     events = []
 
-    async def record(company_id, user_id, action, target_id=None):
-        events.append((company_id, user_id, action, target_id))
+    async def record(company_id, user_id, action, target_id=None, via=None):
+        events.append((company_id, user_id, action, target_id, *([via] if via else [])))
 
     monkeypatch.setattr(audit, "record", record)
 

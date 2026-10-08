@@ -15,6 +15,20 @@ from app.storage import companies, interviews
 COMPANY_ID = uuid.uuid4()
 INTERVIEW_ID = uuid.uuid4()
 GENERATION_ID = uuid.uuid4()
+# A generation as the generation service returns it, waiting for its topics to be reviewed.
+GENERATION = {
+    "id": str(GENERATION_ID),
+    "kind": "interview",
+    "company_id": str(COMPANY_ID),
+    "status": "awaiting_review",
+    "topics": [{"main_topic": "Python", "subtopics": ["Typing", "Async"]}],
+    "progress": {"done": 0, "total": 10, "topics": 1, "topics_ready": 0},
+    "preparation_id": None,
+    "error": None,
+    "language": "en",
+    "max_topics": 5,
+    "max_subtopics": 6,
+}
 
 
 def sign_in(uid):
@@ -57,12 +71,13 @@ def test_admin_who_did_not_start_it_sees_the_generation(client, monkeypatch):
     async def fake_get(generation_id, company_id):
         calls.append((generation_id, company_id))
 
-        return {"id": str(generation_id), "status": "awaiting_review"}
+        return GENERATION
 
     monkeypatch.setattr(generation, "get", fake_get)
     response = client.get(f"/interviews/{INTERVIEW_ID}/generation")
 
     assert response.status_code == 200
+    assert response.json() == GENERATION
     assert calls == [(GENERATION_ID, COMPANY_ID)]
 
     app.dependency_overrides.clear()

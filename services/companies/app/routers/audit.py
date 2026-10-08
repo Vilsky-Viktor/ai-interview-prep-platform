@@ -29,6 +29,7 @@ async def list_audit_events(
             user_id=row.user_id,
             action=row.action,
             target_id=row.target_id,
+            via=row.via,
             created_at=row.created_at,
         )
         for row in rows

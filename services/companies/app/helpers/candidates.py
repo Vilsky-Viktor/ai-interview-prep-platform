@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 
 from app.constants.invites import SIGNAL_KEYS
-from app.schemas.invites import CandidateOut
+from app.schemas.invites import CandidateOut, CompanyCandidateOut
 
 
 def candidate_key(interview_id, email: str) -> str:
@@ -83,6 +83,15 @@ def candidate_out(invite, totals: dict, interview) -> CandidateOut:
         passed=passed(totals, interview.pass_mark),
         **{key: totals.get(key, 0) for key in SIGNAL_KEYS},
         created_at=invite.created_at,
+    )
+
+
+def company_candidate_out(invite, totals: dict, interview) -> CompanyCandidateOut:
+    """A candidate row of the company's search: the candidate row, with its interview."""
+    return CompanyCandidateOut(
+        **candidate_out(invite, totals, interview).model_dump(),
+        interview_id=interview.id,
+        interview_title=interview.title,
     )
 
 

@@ -4,7 +4,7 @@ from datetime import UTC, datetime, timedelta
 from prepza_common.constants import DELETED_USER
 from sqlalchemy import func, select, update
 
-from app.constants.audit import AuditAction
+from app.constants.audit import VIA_ASSISTANT, AuditAction
 from app.models.audit import AuditEvent
 from app.storage import accounts, audit, companies
 from app.storage.db import Session
@@ -82,3 +82,23 @@ def test_a_deleted_users_decisions_are_exported_then_stay_without_their_id(run):
     ]
     assert sorted(row.user_id for row in listed) == sorted([DELETED_USER, "owner"])
     assert left == []
+
+
+def test_a_read_through_the_assistant_is_listed_and_exported_with_via(run):
+    user = f"reader-{uuid.uuid4()}"
+    target = uuid.uuid4()
+
+    async def scenario():
+        company = await companies.create(f"Audit {uuid.uuid4()}", user, f"{user}@example.com")
+        await audit.record(company.id, user, AuditAction.RESULTS_VIEWED, target)
+        await audit.record(company.id, user, AuditAction.RESULTS_VIEWED, target, via=VIA_ASSISTANT)
+        listed = await audit.list_for_company(company.id, 0, 10)
+        exported = (await accounts.export(user, f"{user}@example.com"))["company_decisions"]
+        await companies.delete(company.id)
+
+        return listed, exported
+
+    listed, exported = run(scenario())
+
+    assert sorted(row.via or "" for row in listed) == ["", VIA_ASSISTANT]
+    assert sorted(row["via"] or "" for row in exported) == ["", VIA_ASSISTANT]

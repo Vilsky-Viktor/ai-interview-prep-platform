@@ -24,6 +24,23 @@ def issue_token(caller: str, callee: str, secret: str) -> str:
     return jwt.encode(claims, secret, algorithm="HS256")
 
 
+def token_caller(token: str, secret: str, name: str) -> str | None:
+    """The calling service's name when `token` is addressed to service `name`, signed with its
+    key and not expired; None otherwise."""
+    try:
+        claims = jwt.decode(
+            token,
+            secret,
+            algorithms=["HS256"],
+            audience=name,
+            options={"require": ["exp", "iss", "aud"]},
+        )
+    except jwt.InvalidTokenError:
+        return None
+
+    return claims["iss"]
+
+
 def service_caller(secret: str, name: str):
     """A FastAPI parameter type that admits only tokens addressed to service `name` and signed
     with its key; it holds the calling service's name."""
@@ -31,17 +48,11 @@ def service_caller(secret: str, name: str):
     def verify_service(
         credentials: Annotated[HTTPAuthorizationCredentials, Depends(bearer)],
     ) -> str:
-        try:
-            claims = jwt.decode(
-                credentials.credentials,
-                secret,
-                algorithms=["HS256"],
-                audience=name,
-                options={"require": ["exp", "iss", "aud"]},
-            )
-        except jwt.InvalidTokenError:
+        caller = token_caller(credentials.credentials, secret, name)
+
+        if caller is None:
             raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid service token")
 
-        return claims["iss"]
+        return caller
 
     return Annotated[str, Depends(verify_service)]

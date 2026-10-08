@@ -99,6 +99,8 @@ A scorecard shows every answer, whether it was right and how long it took. It fl
 - Can be searched by email.
 - Can be filtered by status: invited, in process, finished, passed, flagged, not delivered, expired.
 
+Any member, viewers too, can also search a company's candidates across all its interviews by email, newest first, a page at a time (`GET /companies/{id}/candidates?q=&offset=&limit=` in companies). Each row is a list row with its interview's id and title; candidates of a deleted interview are gone with it. The app has no page for it.
+
 "Not delivered" means the invite email bounced or was marked as spam (see [Notifications and emails](notifications.md#undelivered-emails)).
 
 Each candidate's grade and integrity flag are stored on their invite when they finish, so the list is sorted, filtered and paged in the database.
