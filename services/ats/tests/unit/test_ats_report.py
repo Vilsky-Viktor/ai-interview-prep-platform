@@ -123,6 +123,15 @@ def test_results_go_back_to_workable_once_as_a_comment(finished):
     assert state["reported"] == [state["row"].id]
 
 
+def test_results_are_written_in_the_language_of_the_interview(finished):
+    state, _ = finished
+    asyncio.run(flow.report({**result(state["row"].invite_id), "language": "de"}))
+
+    [(_, _, text)] = state["comments"]
+    assert "Ergebnis: 82 % (bestanden)" in text
+    assert "Grade" not in text
+
+
 def test_a_candidate_no_ats_sent_is_ignored(finished):
     state, _ = finished
     report(uuid.uuid4())

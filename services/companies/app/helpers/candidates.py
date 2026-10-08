@@ -31,12 +31,14 @@ def passed(totals: dict, pass_mark: int) -> bool | None:
 
 
 def finished_result(interview, invite_id, grade: int | None, flagged: bool) -> dict:
-    """The candidate.finished event: what ats writes back to the ATS that sent the candidate."""
+    """The candidate.finished event: what ats writes back to the ATS that sent the candidate, in
+    the interview's language."""
     return {
         "candidate_invite_id": str(invite_id),
         "interview_id": str(interview.id),
         "company_id": str(interview.company_id),
         "title": interview.title or "",
+        "language": interview.language,
         "grade": grade,
         "passed": grade is not None and grade >= interview.pass_mark,
         "flagged": flagged,

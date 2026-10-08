@@ -1,0 +1,13 @@
+# The comment on a finished candidate in the ATS, in Russian. Values are filled in with
+# str.format.
+
+TEXTS = {
+    "corrected": "Исправленный результат: исправлен ключ ответа. Эта оценка заменяет прежнюю.",
+    "finished": "Завершено; оценка — в оценочном листе.",
+    "grade": "Оценка: {grade}% ({result})",
+    "passed": "прошёл",
+    "below": "ниже проходного балла",
+    "flagged": "Подозрения: есть, см. оценочный лист.",
+    "decide": "Решение принимает человек: не отклоняйте кандидата автоматически по этому результату.",
+    "scorecard": "Оценочный лист: {link}",
+}

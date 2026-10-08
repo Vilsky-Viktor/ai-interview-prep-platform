@@ -6,7 +6,10 @@ import re
 import time
 from html.parser import HTMLParser
 
+from prepza_common.constants import DEFAULT_LANGUAGE
+
 from app.constants.ats import SUBDOMAIN, TEAMTAILOR_SIGNATURE_SECONDS
+from app.templates.comments import COMMENTS
 
 
 def subdomain(text: str, domain: str) -> str | None:
@@ -133,24 +136,33 @@ def breezy_signed(secret: str, body: bytes, signature: str) -> bool:
 
 
 def result_comment(
-    title: str, grade: int | None, passed: bool, flagged: bool, link: str, corrected: bool
+    title: str,
+    grade: int | None,
+    passed: bool,
+    flagged: bool,
+    link: str,
+    corrected: bool,
+    language: str | None,
 ) -> str:
-    """The comment a finished candidate's results go back to the ATS as; a `corrected` one
-    replaces an earlier grade after an answer key was fixed."""
+    """The comment a finished candidate's results go back to the ATS as, in the interview's
+    `language` (English when it's unknown); a `corrected` one replaces an earlier grade after an
+    answer key was fixed."""
+    texts = COMMENTS.get(language or DEFAULT_LANGUAGE, COMMENTS[DEFAULT_LANGUAGE])
     lines = [f"prepza: {title}"]
 
     if corrected:
-        lines.append("Corrected result: an answer key was fixed. This replaces the earlier grade.")
+        lines.append(texts["corrected"])
 
     if grade is None:
-        lines.append("Finished; the grade is on the scorecard.")
+        lines.append(texts["finished"])
     else:
-        lines.append(f"Grade: {grade}% ({'passed' if passed else 'below the passing grade'})")
+        result = texts["passed"] if passed else texts["below"]
+        lines.append(texts["grade"].format(grade=grade, result=result))
 
     if flagged:
-        lines.append("Integrity flags: yes, see the scorecard.")
+        lines.append(texts["flagged"])
 
-    lines.append("A person decides: don't reject automatically on this result.")
-    lines.append(f"Scorecard: {link}")
+    lines.append(texts["decide"])
+    lines.append(texts["scorecard"].format(link=link))
 
     return "\n".join(lines)

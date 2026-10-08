@@ -1,0 +1,44 @@
+from prepza_common.constants import LANGUAGES
+
+from app.helpers.ats import result_comment
+from app.templates.comments import COMMENTS
+
+
+def test_a_german_interview_gets_the_note_in_german():
+    text = result_comment("Buchhalter", 82, True, True, "https://prepza.ai/s/1", False, "de")
+
+    assert text.splitlines() == [
+        "prepza: Buchhalter",
+        "Ergebnis: 82 % (bestanden)",
+        "Auffälligkeiten: ja, siehe Auswertung.",
+        "Die Entscheidung trifft ein Mensch: nicht automatisch anhand dieses Ergebnisses ablehnen.",
+        "Auswertung: https://prepza.ai/s/1",
+    ]
+
+
+def test_a_corrected_note_is_in_the_interviews_language():
+    lines = result_comment("A", 40, False, False, "x", True, "fr").splitlines()
+
+    assert lines[1] == COMMENTS["fr"]["corrected"]
+    assert lines[2] == "Note : 40 % (sous le seuil de réussite)"
+
+
+def test_an_unknown_or_missing_language_gets_the_note_in_english():
+    english = result_comment("A", None, False, False, "x", False, "en")
+
+    assert result_comment("A", None, False, False, "x", False, "xx") == english
+    assert result_comment("A", None, False, False, "x", False, None) == english
+    assert "Finished; the grade is on the scorecard." in english
+
+
+def test_every_language_has_every_text_with_the_same_fields():
+    assert set(COMMENTS) == set(LANGUAGES)
+
+    for language, texts in COMMENTS.items():
+        assert set(texts) == set(COMMENTS["en"]), language
+
+        for key, text in texts.items():
+            assert text.strip(), (language, key)
+
+        assert "{grade}" in texts["grade"] and "{result}" in texts["grade"], language
+        assert "{link}" in texts["scorecard"], language

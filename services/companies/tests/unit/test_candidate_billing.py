@@ -57,7 +57,11 @@ def finished(monkeypatch, status=InviteStatus.IN_PROCESS, pass_mark=70):
 
     async def fake_interview(interview_id):
         return SimpleNamespace(
-            id=interview_id, company_id=COMPANY_ID, title="Backend", pass_mark=pass_mark
+            id=interview_id,
+            company_id=COMPANY_ID,
+            title="Backend",
+            language="de",
+            pass_mark=pass_mark,
         )
 
     async def fake_scores(invite_ids):
@@ -106,6 +110,7 @@ def test_a_finished_interview_with_an_answer_charges_and_tells_the_company(ledge
         "interview_id": str(INTERVIEW_ID),
         "company_id": str(COMPANY_ID),
         "title": "Backend",
+        "language": "de",
         "grade": 85,
         "passed": True,
         "flagged": True,

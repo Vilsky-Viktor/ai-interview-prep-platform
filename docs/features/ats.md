@@ -131,7 +131,7 @@ prepza sets up Breezy HR's web hook itself, so the company only pastes the key:
 
 ## Results back to the ATS
 
-When such a candidate finishes, companies publishes `candidate.finished` (grade, passed, flagged), and ats writes a comment about them in the ATS, in English:
+When such a candidate finishes, companies publishes `candidate.finished` (grade, passed, flagged), and ats writes a comment about them in the ATS, in the interview's language when the event carries it as `language` (one of the 23 the app speaks, with the app's own words for grade, passing grade, flags and scorecard), and in English when it carries none or an unknown one. The texts are in `services/ats/app/templates/languages/<language>.py`:
 
 - their grade,
 - whether they passed,
@@ -147,7 +147,7 @@ When such a candidate finishes, companies publishes `candidate.finished` (grade,
 | Breezy HR | An internal note on the candidate in that position, as the person whose key it is |
 
 - It's sent once (`reported_at`): claimed before writing, so of two events at once only one writes; results that can't go now free the claim.
-- When an answer key is corrected and a finished candidate's grade changes, companies publishes `candidate.rescored` (the same result with the new grade and `rescored_at`, when it was stored), and ats writes a new comment in the same place, starting "Corrected result: an answer key was fixed. This replaces the earlier grade." None of the ATSs lets prepza edit its earlier note, so the new one goes next to it. The row keeps the latest results it knows: a correction is written once, and one older than what's stored (arriving late) or delivered again changes nothing. A correction arriving before the finish is written alone, with the corrected grade. One stored while another is being written waits and goes after it; one that can't go now is kept for the `recover` job like a first result.
+- When an answer key is corrected and a finished candidate's grade changes, companies publishes `candidate.rescored` (the same result with the new grade and `rescored_at`, when it was stored), and ats writes a new comment in the same place, starting "Corrected result: an answer key was fixed. This replaces the earlier grade." (in the interview's language). None of the ATSs lets prepza edit its earlier note, so the new one goes next to it. The row keeps the latest results it knows: a correction is written once, and one older than what's stored (arriving late) or delivered again changes nothing. A correction arriving before the finish is written alone, with the corrected grade. One stored while another is being written waits and goes after it; one that can't go now is kept for the `recover` job like a first result.
 - When the ATS fails or doesn't answer, the results are kept and the event is done, so one company's ATS doesn't hold up events for everyone. The `recover` job (every 10 minutes) sends kept results again, the longest kept first, at most 20 a run and none started past 30 seconds into it, until they go back or the candidate is deleted after 365 days.
 - A key the ATS refuses marks the connection for reconnecting. Results are kept while it waits, and the `recover` job sends them once it's reconnected.
 - A candidate gone from the ATS (404) is given up, alone.

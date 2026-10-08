@@ -1,0 +1,13 @@
+# The comment on a finished candidate in the ATS, in Thai. Values are filled in with
+# str.format.
+
+TEXTS = {
+    "corrected": "ผลที่แก้ไขแล้ว: มีการแก้ไขเฉลย ผลนี้แทนที่คะแนนก่อนหน้า",
+    "finished": "ทำเสร็จแล้ว ดูคะแนนได้ในใบประเมิน",
+    "grade": "คะแนน: {grade}% ({result})",
+    "passed": "ผ่าน",
+    "below": "ต่ำกว่าเกณฑ์ผ่าน",
+    "flagged": "สัญญาณเตือน: มี ดูในใบประเมิน",
+    "decide": "ให้คนเป็นผู้ตัดสินใจ: อย่าปฏิเสธผู้สมัครโดยอัตโนมัติจากผลนี้",
+    "scorecard": "ใบประเมิน: {link}",
+}

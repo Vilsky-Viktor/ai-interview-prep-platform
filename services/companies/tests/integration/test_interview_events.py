@@ -190,6 +190,7 @@ def test_a_changed_grade_of_a_finished_candidate_is_announced_once(run):
         "interview_id": str(found.id),
         "company_id": str(found.company_id),
         "title": "",
+        "language": found.language,
         "grade": 85,
         "passed": True,
         "flagged": False,

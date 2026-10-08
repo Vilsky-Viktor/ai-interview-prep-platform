@@ -226,6 +226,7 @@ async def report(data: dict) -> None:
         data["flagged"],
         link,
         corrected=bool(ats_results.stamp(data)),
+        language=data.get("language"),
     )
 
     try:

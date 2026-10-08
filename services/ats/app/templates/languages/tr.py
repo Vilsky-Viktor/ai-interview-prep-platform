@@ -1,0 +1,13 @@
+# The comment on a finished candidate in the ATS, in Turkish. Values are filled in with
+# str.format.
+
+TEXTS = {
+    "corrected": "Düzeltilmiş sonuç: bir cevap anahtarı düzeltildi. Bu, önceki notun yerini alır.",
+    "finished": "Tamamlandı; not değerlendirme kartında.",
+    "grade": "Not: %{grade} ({result})",
+    "passed": "geçti",
+    "below": "geçme notunun altında",
+    "flagged": "İşaretler: var, değerlendirme kartına bakın.",
+    "decide": "Kararı bir insan verir: bu sonuca göre otomatik olarak reddetmeyin.",
+    "scorecard": "Değerlendirme kartı: {link}",
+}
