@@ -46,7 +46,7 @@ Karşılaştırırken bunları da kontrol edin:
 - **Hiç başlamayan adaylar.** prepza yalnızca en az bir soruyu yanıtlayan adaylar için ücret alır; kullanılmayan bir davetin kredileri geri gelir.
 - **Süresi dolan krediler.** prepza'nın kredileri süresiz geçerlidir. Diğer sağlayıcıların kredilerinin sonraki döneme devredilip devredilmediğini kontrol edin.
 - **Vergiler.** Listelenen fiyatın KDV veya satış vergisini içerip içermediğini kontrol edin.
-- **Üst planlardaki özellikler.** ATS entegrasyonları, gözetim ve özel kodlama genellikle daha pahalı planlarda bulunur. Gerçekte hangi plana ihtiyacınız olacağını kontrol edin. prepza, ek ücret olmadan Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR ile entegre olur.
+- **Üst planlardaki özellikler.** ATS entegrasyonları, gözetim ve özel kodlama genellikle daha pahalı planlarda bulunur. Gerçekte hangi plana ihtiyacınız olacağını kontrol edin. prepza, ek ücret olmadan Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR ve Slack ile entegre olur ve API'sini de sunar.
 - **Birden fazla araç.** Bir bilgi testine ve bir psikometrik ya da kodlama testine ihtiyacınız varsa ikisini toplayın.
 
 ## Düşük fiyatın doğru seçim olmadığı durumlar

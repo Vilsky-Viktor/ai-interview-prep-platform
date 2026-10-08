@@ -43,7 +43,7 @@ prepza 把职位描述变成限时选择题技能面试。在编写任何题目�
 
 - **定价：** 按至少回答了一道题的候选人收费，充值越多每位候选人越便宜。点数永不过期，无需订阅。见[价格](/pricing)。
 - **适合：** 招聘任何职位、每次招几个人的中小团队，用作第一轮筛选。
-- **与你的 ATS 协同：** Workable、Greenhouse、Teamtailor、Recruitee 和 Breezy HR 将候选人发送到 prepza，并取回他们的结果，无额外费用。
+- **与你的工具协同：** Workable、Greenhouse、Teamtailor、Recruitee 和 Breezy HR 将候选人发送到 prepza，并取回他们的结果；候选人完成后 Slack 会收到通知；公开 API 可连接你自己的平台。均无额外费用。
 - **不适合：** 认知或性格测试、编写或运行代码或视频面试。prepza 不提供这些，需要时请与提供它们的工具搭配使用。
 
 ### CodeSignal

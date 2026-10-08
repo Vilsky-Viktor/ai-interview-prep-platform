@@ -65,6 +65,7 @@ Nodig daarna iedereen uit die overblijft:
 
 - **Plak een lijst met e-mailadressen of upload een bestand.** prepza neemt tot 100 e-mailadressen tegelijk en slaat iedereen over die al begonnen is.
 - **Of gebruik één link.** Heb je de vacature nog niet geplaatst, zet dan de deelbare link van het interview in de vacaturetekst. Sollicitanten kunnen de test meteen maken en verschijnen gerangschikt in je lijst. Zet de link uit zodra de functie is vervuld.
+- **Of laat je ATS ze uitnodigen.** Staan je sollicitanten in Workable, Greenhouse, Teamtailor, Recruitee of Breezy HR, koppel het dan één keer: een kandidaat naar een fase verplaatsen verstuurt de uitnodiging, en de resultaten gaan terug naar het ATS. Zie [Zo koppel je vaardigheidstests aan je ATS](/guides/ats-integration-skills-tests).
 
 Voordat ze beginnen, zien kandidaten wat ze kunnen verwachten: de timer, dat iemand bij jouw bedrijf de resultaten beoordeelt en dat ze om meer tijd kunnen vragen. Vraagt iemand om een aanpassing, dan kun je die kandidaat extra tijd geven voordat hij of zij begint.
 

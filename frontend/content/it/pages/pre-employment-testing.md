@@ -83,6 +83,7 @@ Domande da fare a qualsiasi fornitore:
 | Come è strutturato il prezzo? | Un piano mensile può costare più di quanto valga tutto il tuo volume di assunzioni |
 | Dove vengono conservati i dati, e per quanto tempo? | GDPR, le tue policy interne, la fiducia dei candidati |
 | Cosa dice il fornitore sull'AI Act e sui bias? | Condividi gli obblighi con lui |
+| Funziona con il tuo ATS e con gli altri strumenti? | Copiare a mano candidati e risultati fa perdere tempo e candidati |
 
 Per confrontare i prezzi, vedi [come confrontare i costi dei test](/compare/cheapest-pre-employment-test) e [test pre-assunzione senza abbonamento](/compare/pre-employment-tests-without-subscription).
 
@@ -98,6 +99,7 @@ prepza trasforma una descrizione del ruolo in un colloquio sulle competenze a sc
 - **Ogni candidato riceve un proprio set casuale** dalla serie di domande di ciascun argomento, con un conto alla rovescia gestito dal server su ogni domanda. Puoi dare tempo extra a chiunque lo chieda.
 - **Le schede di valutazione** mostrano ogni risposta, se era giusta e quanto tempo ha richiesto, con segnalazioni per risposte troppo rapide, uscite dalla pagina e tentativi di copia. Le segnalazioni non cambiano il punteggio.
 - **Le risposte vengono corrette in base a una chiave di correzione** che l'IA scrive e controlla; nessuna IA legge o giudica la risposta di un candidato. Un report PDF copre un singolo candidato o l'intero elenco.
+- **Funziona con i tuoi strumenti:** i candidati che sposti in una fase su Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR ricevono il colloquio, e i loro risultati tornano nell'ATS. Slack ti avvisa quando un candidato finisce, e l'[API](/api-docs) collega la tua piattaforma. Vedi [Come collegare i test di competenze al tuo ATS](/guides/ats-integration-skills-tests).
 
 Il prezzo è per candidato che risponde, senza abbonamento: $1–3 per candidato a seconda dell'importo della ricarica, in dollari statunitensi, e i tuoi primi 3 candidati sono gratis. I dati sono ospitati nell'UE (alcuni sub-responsabili si trovano negli Stati Uniti; vedi l'[informativa sulla privacy](/privacy)), e l'accordo sul trattamento dei dati e le istruzioni per le aziende sono inclusi.
 

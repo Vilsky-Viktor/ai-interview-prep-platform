@@ -46,7 +46,7 @@ Check bij het vergelijken ook dit:
 - **Kandidaten die nooit beginnen.** prepza rekent alleen voor kandidaten die minstens één vraag beantwoorden; de credits van een ongebruikte uitnodiging komen terug.
 - **Verlopende credits.** De credits van prepza verlopen niet. Check of credits bij andere leveranciers meegaan naar de volgende periode.
 - **Belastingen.** Check of een vermelde prijs inclusief btw of sales tax is.
-- **Functies in duurdere plannen.** ATS-koppelingen, proctoring en eigen programmeeropdrachten zitten vaak in duurdere plannen. Check welk plan je echt nodig hebt. prepza koppelt zonder meerkosten met Workable, Greenhouse, Teamtailor, Recruitee en Breezy HR.
+- **Functies in duurdere plannen.** ATS-koppelingen, proctoring en eigen programmeeropdrachten zitten vaak in duurdere plannen. Check welk plan je echt nodig hebt. prepza koppelt met Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR en Slack, en biedt zijn API, zonder meerkosten.
 - **Meer dan één tool.** Heb je een kennistest en een psychometrische of programmeertest nodig, tel ze dan allebei op.
 
 ## Wanneer een lagere prijs niet de juiste keuze is

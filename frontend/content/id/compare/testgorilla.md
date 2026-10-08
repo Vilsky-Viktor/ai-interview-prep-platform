@@ -28,7 +28,7 @@ Halaman ini menjelaskan perbedaannya, kapan masing-masing lebih cocok, dan cara 
 | Kode dalam tes | Soal membaca kode (apa yang dilakukan atau dihasilkan kode); tidak menulis atau menjalankan kode | Tes pemrograman di pustaka; tantangan coding kustom di paket yang lebih tinggi |
 | Soal per kandidat | Setiap kandidat mendapat set acaknya sendiri, dengan urutannya sendiri | Tidak dibandingkan di sini |
 | Fitur anti-kecurangan | Timer di setiap soal (ditegakkan oleh server), tanda untuk jawaban yang terlalu cepat, meninggalkan halaman, dan percobaan menyalin | Snapshot webcam, salin/tempel dinonaktifkan, dan mode layar penuh di paket yang lebih tinggi |
-| Integrasi ATS | Workable, Greenhouse, Teamtailor, Recruitee, dan Breezy HR, tanpa biaya tambahan | Integrasi ATS/API di paket yang lebih tinggi |
+| Integrasi | Workable, Greenhouse, Teamtailor, Recruitee, dan Breezy HR; Slack; API publik dengan webhook bertanda tangan ([Dokumentasi API](/api-docs)). Semuanya tanpa biaya tambahan | Integrasi ATS/API di paket yang lebih tinggi |
 | Laporan | Scorecard dengan jawaban dan waktunya; PDF untuk satu atau semua kandidat | Tidak dibandingkan di sini |
 | Bahasa | 23 bahasa untuk antarmuka, wawancara, dan email | Tidak dibandingkan di sini; pustakanya mencakup tes kemahiran bahasa |
 | Model harga | Per kandidat yang menjawab, dari kredit prabayar; tanpa langganan ([harga](/pricing)) | Paket gratis dan paket berbayar yang ditagih tahunan ([halaman harga](https://www.testgorilla.com/pricing/)) |

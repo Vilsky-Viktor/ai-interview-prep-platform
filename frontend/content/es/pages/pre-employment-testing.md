@@ -83,6 +83,7 @@ Preguntas que vale la pena hacer a cualquier proveedor:
 | ¿Cómo se fija el precio? | Un plan mensual puede costar más de lo que vale todo tu volumen de contratación |
 | ¿Dónde se almacenan los datos y durante cuánto tiempo? | El RGPD, tus propias políticas, la confianza de los candidatos |
 | ¿Qué dice el proveedor sobre el Reglamento de IA y el sesgo? | Compartes las obligaciones con él |
+| ¿Funciona con tu ATS y tus otras herramientas? | Copiar candidatos y resultados a mano lleva tiempo y hace perder candidatos |
 
 Para comparar precios, consulta [cómo comparar el coste de las pruebas](/compare/cheapest-pre-employment-test) y [pruebas de selección sin suscripción](/compare/pre-employment-tests-without-subscription).
 
@@ -98,6 +99,7 @@ prepza convierte una descripción del puesto en una entrevista de habilidades de
 - **Cada candidato recibe su propio conjunto aleatorio** del banco de cada tema, con una cuenta atrás controlada por el servidor en cada pregunta. Puedes dar tiempo extra a quien lo pida.
 - **Las fichas de evaluación** muestran cada respuesta, si fue correcta y cuánto tardó, con alertas de respuestas demasiado rápidas, salidas de la página e intentos de copiar. Las alertas no cambian la puntuación.
 - **Las respuestas se corrigen con una clave de respuestas** que la IA redacta y revisa; ninguna IA lee ni juzga la respuesta de un candidato. Un informe en PDF cubre a un candidato o a toda la lista.
+- **Funciona con tus herramientas:** los candidatos que mueves a una etapa en Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR reciben la entrevista, y sus resultados vuelven al ATS. Slack te avisa cuando un candidato termina, y la [API](/api-docs) conecta tu propia plataforma. Consulta [Cómo conectar las pruebas de habilidades a tu ATS](/guides/ats-integration-skills-tests).
 
 El precio es por candidato que responde, sin suscripción: $1–3 por candidato según el tamaño de tu recarga, en dólares estadounidenses, y tus 3 primeros candidatos son gratis. Los datos se alojan en la UE (algunos subencargados están en EE. UU.; consulta la [política de privacidad](/privacy)), y se incluyen el contrato de encargo del tratamiento y las instrucciones para empresas.
 

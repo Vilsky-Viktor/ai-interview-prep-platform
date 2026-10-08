@@ -28,7 +28,7 @@ This page explains how they differ, where each one fits better, and how to combi
 | Code in the test | Code-reading questions (what code does or outputs); no writing or running code | Programming tests in the library; custom coding challenges on its higher plan |
 | Questions per candidate | Each candidate's own random set, in its own order | Not compared here |
 | Integrity features | Timer on every question (server-enforced), flags for too-fast answers, leaving the page and copy attempts | Webcam snapshots, disabled copy/paste and full-screen mode on its higher plan |
-| ATS integrations | Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR, at no extra cost | ATS/API integrations on its higher plan |
+| Integrations | Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR; Slack; a public API with signed web hooks ([API docs](/api-docs)). All at no extra cost | ATS/API integrations on its higher plan |
 | Reports | Scorecards with answers and timings; PDF for one or all candidates | Not compared here |
 | Languages | 23 languages for the interface, interviews and emails | Not compared here; the library includes language-proficiency tests |
 | Pricing model | Per candidate who answers, from prepaid credits; no subscription ([pricing](/pricing)) | A free plan and paid plans billed annually ([pricing page](https://www.testgorilla.com/pricing/)) |

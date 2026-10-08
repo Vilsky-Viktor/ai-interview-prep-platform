@@ -65,6 +65,7 @@ Laden Sie dann alle Übrigen ein:
 
 - **Fügen Sie eine Liste mit E-Mail-Adressen ein oder laden Sie eine Datei hoch.** prepza nimmt bis zu 100 E-Mail-Adressen auf einmal an und überspringt alle, die bereits begonnen haben.
 - **Oder nutzen Sie einen Link.** Wenn Sie die Stelle noch nicht ausgeschrieben haben, setzen Sie den Link zum Teilen des Interviews in die Anzeige. Bewerber können den Test sofort machen und erscheinen in Ihrer Liste, nach Rang sortiert. Deaktivieren Sie den Link, sobald die Stelle besetzt ist.
+- **Oder lassen Sie Ihr ATS einladen.** Wenn Ihre Bewerber in Workable, Greenhouse, Teamtailor, Recruitee oder Breezy HR sind, verbinden Sie es einmal: Das Verschieben eines Kandidaten in eine Phase verschickt die Einladung, und die Ergebnisse gehen zurück ins ATS. Siehe [So verbinden Sie Fachtests mit Ihrem ATS](/guides/ats-integration-skills-tests).
 
 Bevor sie beginnen, sehen Kandidaten, was sie erwartet: den Timer, dass eine Person in Ihrem Unternehmen die Ergebnisse prüft und dass sie mehr Zeit beantragen können. Bittet jemand um eine Anpassung, können Sie diesem Kandidaten vor dem Start zusätzliche Zeit geben.
 

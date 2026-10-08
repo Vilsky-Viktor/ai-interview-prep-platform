@@ -28,7 +28,7 @@ Trang này giải thích hai công cụ khác nhau thế nào, mỗi công cụ 
 | Code trong bài kiểm tra | Câu hỏi đọc code (code làm gì hoặc in ra gì); không viết hay chạy code | Bài kiểm tra lập trình trong thư viện; thử thách lập trình tùy chỉnh ở gói cao hơn |
 | Câu hỏi cho mỗi ứng viên | Bộ câu hỏi ngẫu nhiên riêng cho mỗi ứng viên, theo thứ tự riêng | Không so sánh ở đây |
 | Tính năng chống gian lận | Đồng hồ cho mọi câu hỏi (do máy chủ áp dụng), cảnh báo về trả lời quá nhanh, rời khỏi trang và cố sao chép | Chụp ảnh qua webcam, chặn sao chép/dán và chế độ toàn màn hình ở gói cao hơn |
-| Tích hợp ATS | Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR, không tốn thêm phí | Tích hợp ATS/API ở gói cao hơn |
+| Tích hợp | Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR; Slack; API công khai với webhook có chữ ký ([Tài liệu API](/api-docs)). Tất cả đều không tốn thêm phí | Tích hợp ATS/API ở gói cao hơn |
 | Báo cáo | Bảng điểm với câu trả lời và thời gian; PDF cho một hoặc tất cả ứng viên | Không so sánh ở đây |
 | Ngôn ngữ | 23 ngôn ngữ cho giao diện, buổi phỏng vấn và email | Không so sánh ở đây; thư viện có bài kiểm tra trình độ ngoại ngữ |
 | Mô hình giá | Theo mỗi ứng viên có trả lời, từ credit trả trước; không có gói đăng ký ([bảng giá](/pricing)) | Một gói miễn phí và các gói trả phí thanh toán theo năm ([trang bảng giá](https://www.testgorilla.com/pricing/)) |

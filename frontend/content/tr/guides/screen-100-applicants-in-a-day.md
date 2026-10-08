@@ -65,6 +65,7 @@ Ardından kalan herkesi davet edin:
 
 - **Bir e-posta listesi yapıştırın veya bir dosya yükleyin.** prepza aynı anda 100'e kadar e-posta alır ve zaten başlamış olanları atlar.
 - **Ya da tek bir bağlantı kullanın.** İlanı henüz yayınlamadıysanız, mülakatın paylaşılabilir bağlantısını ilana koyun. Başvuru sahipleri testi hemen çözebilir ve listenizde sıralı olarak görünür. Pozisyon dolduğunda bağlantıyı kapatın.
+- **Ya da davetleri ATS'niz göndersin.** Başvuru sahipleriniz Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'daysa, onu bir kez bağlayın: bir adayı bir aşamaya taşımak daveti gönderir ve sonuçlar ATS'ye geri döner. Bkz. [Beceri testleri ATS'nize nasıl bağlanır](/guides/ats-integration-skills-tests).
 
 Adaylar başlamadan önce ne bekleyeceklerini görür: zamanlayıcıyı, sonuçları şirketinizden bir kişinin incelediğini ve ek süre isteyebileceklerini. Biri makul düzenleme talep ederse, o aday başlamadan önce ona ek süre ekleyebilirsiniz.
 

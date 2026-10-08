@@ -43,7 +43,7 @@ prepza macht aus einer Stellenbeschreibung ein zeitlich begrenztes Multiple-Choi
 
 - **Preise:** pro Kandidat, der mindestens eine Frage beantwortet, pro Kandidat günstiger bei größeren Aufladungen. Credits verfallen nicht, und es gibt kein Abo. Siehe [Preise](/pricing).
 - **Geeignet für:** kleine und mittlere Teams, die für beliebige Stellen ein paar Personen auf einmal einstellen, als erste Vorauswahl.
-- **Funktioniert mit Ihrem ATS:** Workable, Greenhouse, Teamtailor, Recruitee und Breezy HR übergeben Kandidaten an prepza und erhalten ihre Ergebnisse zurück, ohne Aufpreis.
+- **Funktioniert mit Ihren Tools:** Workable, Greenhouse, Teamtailor, Recruitee und Breezy HR übergeben Kandidaten an prepza und erhalten ihre Ergebnisse zurück, Slack meldet, wenn Kandidaten fertig sind, und eine öffentliche API bindet Ihre eigene Plattform an. Alles ohne Aufpreis.
 - **Nicht geeignet für:** kognitive Tests oder Persönlichkeitstests, das Schreiben oder Ausführen von Code oder Videointerviews. prepza bietet das nicht an; kombinieren Sie es also mit einem Tool, das es anbietet, wenn Sie es brauchen.
 
 ### CodeSignal

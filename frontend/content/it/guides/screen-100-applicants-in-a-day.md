@@ -65,6 +65,7 @@ Poi invita tutti quelli rimasti:
 
 - **Incolla un elenco di email o carica un file.** prepza accetta fino a 100 email alla volta e salta chi ha già iniziato.
 - **Oppure usa un unico link.** Se non hai ancora pubblicato l'annuncio, inserisci il link condivisibile del colloquio nell'annuncio. I candidati possono fare subito il test e compaiono nella tua lista, in classifica. Disattiva il link quando la posizione è coperta.
+- **Oppure lascia che sia il tuo ATS a invitarli.** Se i tuoi candidati sono su Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR, collegalo una volta: spostare un candidato in una fase invia l'invito, e i risultati tornano nell'ATS. Vedi [Come collegare i test di competenze al tuo ATS](/guides/ats-integration-skills-tests).
 
 Prima di iniziare, i candidati vedono cosa aspettarsi: il timer, il fatto che una persona della tua azienda esamina i risultati e che possono chiedere più tempo. Se qualcuno chiede un accomodamento, puoi aggiungere tempo extra per quel candidato prima che inizi.
 

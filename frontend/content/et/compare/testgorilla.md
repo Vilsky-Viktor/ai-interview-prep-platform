@@ -28,7 +28,7 @@ See leht selgitab, mille poolest need erinevad, kuhu kumbki paremini sobib ja ku
 | Kood testis | Koodi lugemise küsimused (mida kood teeb või väljastab); koodi ei kirjutata ega käivitata | Programmeerimistestid testikogus; kohandatud programmeerimisülesanded kõrgemas paketis |
 | Küsimused kandidaadi kohta | Igal kandidaadil oma juhuslik komplekt, oma järjekorras | Siin ei võrrelda |
 | Aususe tagamise funktsioonid | Taimer igal küsimusel (serveri jõustatud), märked liiga kiirete vastuste, lehelt lahkumise ja kopeerimiskatsete kohta | Veebikaamera hetktõmmised, keelatud kopeerimine/kleepimine ja täisekraanirežiim kõrgemas paketis |
-| ATS-integratsioonid | Workable, Greenhouse, Teamtailor, Recruitee ja Breezy HR, ilma lisatasuta | ATS/API-integratsioonid kõrgemas paketis |
+| Integratsioonid | Workable, Greenhouse, Teamtailor, Recruitee ja Breezy HR; Slack; avalik API allkirjastatud webhookidega ([API dokumentatsioon](/api-docs)). Kõik ilma lisatasuta | ATS/API-integratsioonid kõrgemas paketis |
 | Aruanded | Hindamislehed vastuste ja ajakuluga; PDF ühe või kõigi kandidaatide kohta | Siin ei võrrelda |
 | Keeled | 23 keelt liidese, intervjuude ja e-kirjade jaoks | Siin ei võrrelda; testikogus on keeleoskuse testid |
 | Hinnamudel | Iga vastanud kandidaadi eest, ettemakstud krediitidest; ilma tellimuseta ([hinnad](/pricing)) | Tasuta pakett ja aastase arveldusega tasulised paketid ([hinnaleht](https://www.testgorilla.com/pricing/)) |

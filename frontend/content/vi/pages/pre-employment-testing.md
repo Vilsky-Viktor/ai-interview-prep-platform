@@ -83,6 +83,7 @@ Những câu hỏi đáng hỏi mọi nhà cung cấp:
 | Giá được tính thế nào? | Một gói hằng tháng có thể tốn hơn giá trị của toàn bộ nhu cầu tuyển dụng của bạn |
 | Dữ liệu được lưu ở đâu, và trong bao lâu? | GDPR, chính sách của bạn, sự tin tưởng của ứng viên |
 | Nhà cung cấp nói gì về Đạo luật AI và thiên lệch? | Bạn cùng chia sẻ nghĩa vụ với họ |
+| Công cụ có hoạt động với ATS và các công cụ khác của bạn không? | Sao chép ứng viên và kết quả thủ công vừa tốn thời gian vừa làm mất ứng viên |
 
 Để so sánh giá, xem [cách so sánh chi phí bài kiểm tra](/compare/cheapest-pre-employment-test) và [bài kiểm tra trước tuyển dụng không cần gói đăng ký](/compare/pre-employment-tests-without-subscription).
 
@@ -98,6 +99,7 @@ prepza biến mô tả công việc thành một buổi phỏng vấn kỹ năng
 - **Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên của riêng mình** từ ngân hàng của mỗi chủ đề, với đồng hồ đếm ngược do máy chủ áp dụng cho mọi câu hỏi. Bạn có thể cho thêm thời gian với bất kỳ ai yêu cầu.
 - **Bảng điểm** hiển thị mọi câu trả lời, đúng hay sai và mất bao lâu, kèm cảnh báo về trả lời quá nhanh, rời khỏi trang và cố sao chép. Cảnh báo không làm thay đổi điểm số.
 - **Câu trả lời được chấm theo đáp án** do AI viết và kiểm tra; không có AI nào đọc hay đánh giá câu trả lời của ứng viên. Báo cáo PDF bao gồm một ứng viên hoặc cả danh sách.
+- **Hoạt động với các công cụ của bạn:** ứng viên bạn chuyển sang một giai đoạn trong Workable, Greenhouse, Teamtailor, Recruitee hoặc Breezy HR sẽ được mời làm buổi phỏng vấn, và kết quả của họ được gửi về ATS. Slack được báo khi một ứng viên làm xong, và [API](/api-docs) kết nối nền tảng riêng của bạn. Xem [cách kết nối bài kiểm tra kỹ năng với ATS](/guides/ats-integration-skills-tests).
 
 Giá tính theo ứng viên có trả lời, không có gói đăng ký: $1–3 mỗi ứng viên tùy mức nạp, bằng đô la Mỹ, và 3 ứng viên đầu tiên của bạn được miễn phí. Dữ liệu được lưu trữ tại EU (một số bên xử lý phụ ở Mỹ; xem [chính sách quyền riêng tư](/privacy)), có kèm thỏa thuận xử lý dữ liệu và hướng dẫn cho công ty.
 

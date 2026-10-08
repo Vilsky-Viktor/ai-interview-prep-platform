@@ -65,6 +65,7 @@ Seejärel kutsu kõik ülejäänud:
 
 - **Kleebi e-posti aadresside nimekiri või laadi üles fail.** prepza võtab korraga kuni 100 aadressi ja jätab vahele need, kes on juba alustanud.
 - **Või kasuta ühte linki.** Kui sa pole töökuulutust veel avaldanud, pane intervjuu jagatav link kuulutusse. Kandideerijad saavad testi kohe teha ja ilmuvad sinu nimekirja järjestatuna. Lülita link välja, kui koht on täidetud.
+- **Või lase kutsed saata oma ATS-il.** Kui sinu kandideerijad on Workable'is, Greenhouse'is, Teamtailoris, Recruitee's või Breezy HR-is, ühenda see üks kord: kandidaadi viimine etappi saadab kutse ja tulemused jõuavad tagasi ATS-i. Vaata [Kuidas ühendada oskustestid oma ATS-süsteemiga](/guides/ats-integration-skills-tests).
 
 Enne alustamist näevad kandidaadid, mida oodata: taimerit, seda, et tulemused vaatab üle inimene sinu ettevõttest, ja seda, et nad võivad paluda rohkem aega. Kui keegi palub kohandust, saad sellele kandidaadile enne alustamist lisaaega anda.
 

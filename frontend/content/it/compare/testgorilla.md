@@ -28,7 +28,7 @@ Questa pagina spiega come differiscono, dove ciascuno è più adatto e come comb
 | Codice nel test | Domande di lettura del codice (cosa fa o cosa stampa il codice); niente scrittura o esecuzione di codice | Test di programmazione nel catalogo; sfide di coding personalizzate nel piano superiore |
 | Domande per candidato | Un set casuale per ogni candidato, in un ordine tutto suo | Non confrontato qui |
 | Funzioni anti-imbroglio | Timer su ogni domanda (gestito dal server), segnalazioni per risposte troppo rapide, uscite dalla pagina e tentativi di copia | Istantanee dalla webcam, copia/incolla disattivato e modalità a schermo intero nel piano superiore |
-| Integrazioni con l'ATS | Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR, senza costi aggiuntivi | Integrazioni ATS/API nel piano superiore |
+| Integrazioni | Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR; Slack; un'API pubblica con webhook firmati ([documentazione API](/api-docs)). Tutto senza costi aggiuntivi | Integrazioni ATS/API nel piano superiore |
 | Report | Schede di valutazione con risposte e tempi; PDF per uno o tutti i candidati | Non confrontato qui |
 | Lingue | 23 lingue per interfaccia, colloqui ed email | Non confrontato qui; il catalogo include test di competenza linguistica |
 | Modello di prezzo | Per candidato che risponde, con crediti prepagati; nessun abbonamento ([prezzi](/pricing)) | Un piano gratuito e piani a pagamento fatturati annualmente ([pagina prezzi](https://www.testgorilla.com/pricing/)) |

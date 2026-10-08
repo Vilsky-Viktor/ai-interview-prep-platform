@@ -43,7 +43,7 @@ prepza maakt van een functieomschrijving een interview over vaardigheden, met ti
 
 - **Prijs:** per kandidaat die minstens één vraag beantwoordt, goedkoper per kandidaat bij grotere opwaarderingen. Credits verlopen niet, en er is geen abonnement. Zie [prijzen](/pricing).
 - **Geschikt voor:** kleine en middelgrote teams die voor elke functie werven, een paar mensen tegelijk, als eerste screening.
-- **Werkt met je ATS:** Workable, Greenhouse, Teamtailor, Recruitee en Breezy HR sturen kandidaten door naar prepza en krijgen hun resultaten terug, zonder meerkosten.
+- **Werkt met je tools:** Workable, Greenhouse, Teamtailor, Recruitee en Breezy HR sturen kandidaten door naar prepza en krijgen hun resultaten terug, Slack laat weten wanneer kandidaten klaar zijn, en een openbare API koppelt je eigen platform. Alles zonder meerkosten.
 - **Niet voor:** cognitieve of persoonlijkheidstests, code schrijven of draaien, of video-interviews. prepza biedt die niet, dus combineer het met een tool die dat wel doet als je ze nodig hebt.
 
 ### CodeSignal

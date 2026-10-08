@@ -43,7 +43,7 @@ A prepza transforma uma descrição da vaga em uma entrevista de habilidades de 
 
 - **Preço:** por candidato que responde pelo menos uma pergunta, mais barato por candidato em recargas maiores. Os créditos não expiram e não há assinatura. Veja os [preços](/pricing).
 - **Indicada para:** equipes pequenas e médias que contratam para qualquer função, poucas pessoas por vez, como primeira triagem.
-- **Funciona com o seu ATS:** Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR enviam os candidatos para a prepza e recebem os resultados de volta, sem custo adicional.
+- **Funciona com as suas ferramentas:** Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR enviam os candidatos para a prepza e recebem os resultados de volta, o Slack avisa quando os candidatos terminam, e uma API pública conecta a sua própria plataforma. Tudo sem custo adicional.
 - **Não serve para:** testes cognitivos ou de personalidade, escrever ou executar código ou entrevistas em vídeo. A prepza não oferece esses recursos, então combine-a com uma ferramenta que ofereça quando precisar deles.
 
 ### CodeSignal

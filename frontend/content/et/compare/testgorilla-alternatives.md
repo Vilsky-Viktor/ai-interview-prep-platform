@@ -43,7 +43,7 @@ prepza muudab töökuulutuse ajapiiranguga valikvastustega oskuste intervjuuks. 
 
 - **Hind:** iga kandidaadi eest, kes vastab vähemalt ühele küsimusele, suuremate juurdelaadimiste puhul kandidaadi kohta odavam. Krediidid ei aegu ja tellimust pole. Vaata [hindu](/pricing).
 - **Sobib:** väikestele ja keskmise suurusega meeskondadele, kes värbavad mis tahes rolli, mõne inimese kaupa, esmaseks sõelaks.
-- **Töötab sinu ATS-iga:** Workable, Greenhouse, Teamtailor, Recruitee ja Breezy HR saadavad kandidaadid prepzasse ja saavad nende tulemused tagasi, ilma lisatasuta.
+- **Töötab sinu tööriistadega:** Workable, Greenhouse, Teamtailor, Recruitee ja Breezy HR saadavad kandidaadid prepzasse ja saavad nende tulemused tagasi, Slack annab teada, kui kandidaadid lõpetavad, ja avalik API ühendab sinu enda platvormi. Kõik ilma lisatasuta.
 - **Ei sobi:** kognitiivseteks ja isiksustestideks, koodi kirjutamiseks või käivitamiseks ega videointervjuudeks. prepza neid ei paku, nii et kui neid vajad, kombineeri see tööriistaga, mis seda teeb.
 
 ### CodeSignal

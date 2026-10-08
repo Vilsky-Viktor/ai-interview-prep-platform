@@ -28,7 +28,7 @@ updated: "2026-10-07"
 | 测试中的代码 | 读代码题（代码做什么或输出什么）；不编写或运行代码 | 测试库中有编程测试；高级套餐提供自定义编程挑战 |
 | 每位候选人的题目 | 每位候选人有自己的一套随机题目，顺序也各不相同 | 本页不作比较 |
 | 诚信功能 | 每道题都有计时（由服务器强制执行），标记作答过快、离开页面和复制尝试 | 高级套餐提供摄像头快照、禁用复制粘贴和全屏模式 |
-| ATS 集成 | Workable、Greenhouse、Teamtailor、Recruitee 和 Breezy HR，无额外费用 | 高级套餐提供 ATS/API 集成 |
+| 集成 | Workable、Greenhouse、Teamtailor、Recruitee 和 Breezy HR；Slack；带签名 Webhook 的公开 API（[API 文档](/api-docs)）。均无额外费用 | 高级套餐提供 ATS/API 集成 |
 | 报告 | 包含答案和用时的评分卡；单个或全部候选人的 PDF | 本页不作比较 |
 | 语言 | 界面、面试和邮件支持 23 种语言 | 本页不作比较；测试库包含语言能力测试 |
 | 定价模式 | 按作答的候选人从预付点数中扣费；无需订阅（[价格](/pricing)） | 免费套餐和按年计费的付费套餐（[价格页](https://www.testgorilla.com/pricing/)） |

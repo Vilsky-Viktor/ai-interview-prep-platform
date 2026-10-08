@@ -65,6 +65,7 @@ Sau đó mời tất cả những người còn lại:
 
 - **Dán danh sách email hoặc tải tệp lên.** prepza nhận tối đa 100 email một lần và bỏ qua những ai đã bắt đầu.
 - **Hoặc dùng một liên kết.** Nếu bạn chưa đăng tin tuyển dụng, hãy đặt liên kết chia sẻ của buổi phỏng vấn vào tin. Ứng viên có thể làm bài ngay và xuất hiện trong danh sách của bạn, đã xếp hạng. Tắt liên kết khi đã tuyển đủ.
+- **Hoặc để ATS của bạn gửi lời mời.** Nếu ứng viên của bạn nằm trong Workable, Greenhouse, Teamtailor, Recruitee hoặc Breezy HR, hãy kết nối một lần: chuyển ứng viên sang một giai đoạn sẽ gửi lời mời, và kết quả được gửi về ATS. Xem [cách kết nối bài kiểm tra kỹ năng với ATS](/guides/ats-integration-skills-tests).
 
 Trước khi bắt đầu, ứng viên thấy những gì cần biết: đồng hồ tính giờ, việc một người ở công ty bạn sẽ xem kết quả, và việc họ có thể yêu cầu thêm thời gian. Nếu ai đó yêu cầu điều chỉnh hợp lý, bạn có thể thêm thời gian cho ứng viên đó trước khi họ bắt đầu.
 

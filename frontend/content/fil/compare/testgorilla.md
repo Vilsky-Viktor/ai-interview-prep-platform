@@ -28,7 +28,7 @@ Ipinapaliwanag ng pahinang ito kung paano sila nagkakaiba, kung saan mas bagay a
 | Code sa test | Code-reading questions (ano ang ginagawa o inilalabas ng code); walang pagsulat o pagpapatakbo ng code | Programming tests sa library; custom coding challenges sa mas mataas nitong plan |
 | Mga tanong bawat aplikante | Sariling random na set ang bawat aplikante, sa sarili nitong pagkakasunod-sunod | Hindi ikinumpara rito |
 | Integrity features | Timer sa bawat tanong (ipinapatupad ng server), flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy | Webcam snapshots, naka-disable na copy/paste at full-screen mode sa mas mataas nitong plan |
-| ATS integrations | Workable, Greenhouse, Teamtailor, Recruitee at Breezy HR, nang walang dagdag na bayad | ATS/API integrations sa mas mataas nitong plan |
+| Integrations | Workable, Greenhouse, Teamtailor, Recruitee at Breezy HR; Slack; isang public API na may signed webhooks ([Dokumentasyon ng API](/api-docs)). Lahat nang walang dagdag na bayad | ATS/API integrations sa mas mataas nitong plan |
 | Reports | Scorecards na may mga sagot at oras; PDF para sa isa o lahat ng aplikante | Hindi ikinumpara rito |
 | Mga wika | 23 wika para sa interface, interviews at emails | Hindi ikinumpara rito; may language-proficiency tests ang library |
 | Pricing model | Bawat aplikanteng sumasagot, mula sa prepaid credits; walang subscription ([presyo](/pricing)) | Libreng plan at mga paid plan na sinisingil taun-taon ([pricing page](https://www.testgorilla.com/pricing/)) |

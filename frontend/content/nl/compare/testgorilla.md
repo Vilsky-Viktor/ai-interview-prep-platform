@@ -28,7 +28,7 @@ Deze pagina legt uit hoe ze verschillen, waar elk beter past en hoe je ze combin
 | Code in de test | Vragen over code lezen (wat code doet of uitvoert); geen code schrijven of draaien | Programmeertests in de bibliotheek; eigen programmeeropdrachten in het duurdere plan |
 | Vragen per kandidaat | Een eigen willekeurige set per kandidaat, in een eigen volgorde | Hier niet vergeleken |
 | Integriteitsfuncties | Timer bij elke vraag (door de server afgedwongen), signalen bij te snelle antwoorden, het verlaten van de pagina en kopieerpogingen | Webcamfoto's, uitgeschakeld kopiëren/plakken en volledig scherm in het duurdere plan |
-| ATS-koppelingen | Workable, Greenhouse, Teamtailor, Recruitee en Breezy HR, zonder meerkosten | ATS-/API-koppelingen in het duurdere plan |
+| Koppelingen | Workable, Greenhouse, Teamtailor, Recruitee en Breezy HR; Slack; een openbare API met ondertekende webhooks ([API-documentatie](/api-docs)). Alles zonder meerkosten | ATS-/API-koppelingen in het duurdere plan |
 | Rapporten | Scorekaarten met antwoorden en tijden; pdf voor één of alle kandidaten | Hier niet vergeleken |
 | Talen | 23 talen voor de interface, interviews en e-mails | Hier niet vergeleken; de bibliotheek bevat taalvaardigheidstests |
 | Prijsmodel | Per kandidaat die antwoordt, uit vooraf gekochte credits; geen abonnement ([prijzen](/pricing)) | Een gratis plan en betaalde plannen die jaarlijks worden gefactureerd ([prijspagina](https://www.testgorilla.com/pricing/)) |

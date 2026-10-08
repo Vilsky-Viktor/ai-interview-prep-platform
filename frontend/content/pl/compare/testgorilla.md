@@ -28,7 +28,7 @@ Ta strona wyjaśnia, czym się różnią, gdzie każde z nich sprawdza się lepi
 | Kod w teście | Pytania o czytanie kodu (co kod robi lub wypisuje); bez pisania ani uruchamiania kodu | Testy programistyczne w bibliotece; własne zadania programistyczne w wyższym planie |
 | Pytania na kandydata | Własny losowy zestaw każdego kandydata, we własnej kolejności | Nie porównujemy tutaj |
 | Funkcje rzetelności | Limit czasu przy każdym pytaniu (kontrolowany po stronie serwera), oznaczenia zbyt szybkich odpowiedzi, opuszczenia strony i prób kopiowania | Zdjęcia z kamery internetowej, wyłączone kopiowanie/wklejanie i tryb pełnoekranowy w wyższym planie |
-| Integracje z ATS | Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR, bez dodatkowych opłat | Integracje z ATS/API w wyższym planie |
+| Integracje | Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR; Slack; publiczne API z podpisanymi webhookami ([dokumentacja API](/api-docs)). Wszystko bez dodatkowych opłat | Integracje z ATS/API w wyższym planie |
 | Raporty | Karty wyników z odpowiedziami i czasami; PDF dla jednego lub wszystkich kandydatów | Nie porównujemy tutaj |
 | Języki | 23 języki interfejsu, rozmów i e-maili | Nie porównujemy tutaj; biblioteka zawiera testy biegłości językowej |
 | Model cenowy | Za kandydata, który odpowiada, z przedpłaconych kredytów; bez subskrypcji ([cennik](/pricing)) | Plan bezpłatny i płatne plany rozliczane rocznie ([strona z cenami](https://www.testgorilla.com/pricing/)) |

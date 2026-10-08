@@ -43,7 +43,7 @@ Ginagawang timed multiple-choice skills interview ng prepza ang isang job descri
 
 - **Presyo:** bawat aplikanteng sumagot ng kahit isang tanong, mas mura bawat aplikante sa mas malalaking top-up. Hindi nag-e-expire ang credits, at walang subscription. Tingnan ang [presyo](/pricing).
 - **Bagay sa:** maliliit at katamtamang laking team na nagha-hire para sa anumang role, ilang tao bawat pagkakataon, bilang unang screen.
-- **Gumagana sa ATS mo:** Ipinapadala ng Workable, Greenhouse, Teamtailor, Recruitee at Breezy HR ang mga aplikante sa prepza at natatanggap nila pabalik ang mga resulta, nang walang dagdag na bayad.
+- **Gumagana sa mga tool mo:** Ipinapadala ng Workable, Greenhouse, Teamtailor, Recruitee at Breezy HR ang mga aplikante sa prepza at natatanggap nila pabalik ang mga resulta, nalalaman ng Slack kapag may aplikanteng natapos, at ikinokonekta ng isang public API ang sarili mong platform. Lahat nang walang dagdag na bayad.
 - **Hindi para sa:** cognitive o personality tests, pagsulat o pagpapatakbo ng code, o video interviews. Wala ang mga ito sa prepza, kaya ipares ito sa tool na mayroon kapag kailangan mo.
 
 ### CodeSignal

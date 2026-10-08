@@ -43,7 +43,7 @@ prepza biến mô tả công việc thành một buổi phỏng vấn kỹ năng
 
 - **Giá:** theo mỗi ứng viên trả lời ít nhất một câu hỏi, rẻ hơn mỗi ứng viên với các mức nạp lớn hơn. Credit không hết hạn, và không có gói đăng ký. Xem [bảng giá](/pricing).
 - **Phù hợp với:** các nhóm vừa và nhỏ tuyển cho mọi vị trí, vài người mỗi lần, làm vòng sàng lọc đầu tiên.
-- **Hoạt động với ATS của bạn:** Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR gửi ứng viên sang prepza và nhận lại kết quả của họ, không tốn thêm phí.
+- **Hoạt động với các công cụ của bạn:** Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR gửi ứng viên sang prepza và nhận lại kết quả của họ, Slack được báo khi ứng viên làm xong, và API công khai kết nối nền tảng riêng của bạn. Tất cả đều không tốn thêm phí.
 - **Không dành cho:** bài kiểm tra nhận thức hay tính cách, viết hoặc chạy code hay phỏng vấn video. prepza không có những thứ đó, vì vậy hãy dùng kèm một công cụ có chúng khi bạn cần.
 
 ### CodeSignal

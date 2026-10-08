@@ -43,7 +43,7 @@ prepza bir iş tanımını süreli, çoktan seçmeli bir beceri mülakatına dö
 
 - **Fiyatlandırma:** en az bir soruyu yanıtlayan aday başına; daha büyük kredi yüklemelerinde aday başına daha ucuz. Krediler süresiz geçerlidir ve abonelik yoktur. Bkz. [fiyatlar](/pricing).
 - **Kimlere uygun:** herhangi bir pozisyon için, bir seferde birkaç kişiyi işe alan küçük ve orta ölçekli ekiplere, ilk eleme olarak.
-- **ATS'nizle çalışır:** Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR, adayları ek ücret olmadan prepza'ya gönderir ve sonuçlarını geri alır.
+- **Araçlarınızla çalışır:** Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR adayları prepza'ya gönderir ve sonuçlarını geri alır, adaylar bitirdiğinde Slack haberdar olur ve herkese açık bir API kendi platformunuzu bağlar. Hepsi ek ücret olmadan.
 - **Uygun olmadığı durumlar:** bilişsel veya kişilik testleri, kod yazma veya çalıştırma ya da video mülakatlar. prepza bunları sunmaz; ihtiyaç duyduğunuzda sunan bir araçla birlikte kullanın.
 
 ### CodeSignal

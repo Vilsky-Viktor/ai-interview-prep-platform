@@ -43,7 +43,7 @@ prepza turns a job description into a timed multiple-choice skills interview. Yo
 
 - **Pricing:** per candidate who answers at least one question, cheaper per candidate on larger top-ups. Credits don't expire, and there's no subscription. See [pricing](/pricing).
 - **Suits:** small and mid-size teams hiring for any role, a few people at a time, as a first screen.
-- **Works with your ATS:** Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR send candidates in and get their results back, at no extra cost.
+- **Works with your tools:** Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR send candidates in and get their results back, Slack hears when candidates finish, and a public API connects your own platform. All at no extra cost.
 - **Not for:** cognitive or personality tests, writing or running code, or video interviews. prepza doesn't offer them, so pair it with a tool that does when you need them.
 
 ### CodeSignal

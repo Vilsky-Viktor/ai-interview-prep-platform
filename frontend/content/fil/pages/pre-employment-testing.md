@@ -83,6 +83,7 @@ Mga tanong na sulit itanong sa kahit anong vendor:
 | Paano ito naka-presyo? | Puwedeng mas mahal ang buwanang plan kaysa sa halaga ng buong hiring volume mo |
 | Saan iniimbak ang data, at gaano katagal? | GDPR, sarili mong mga patakaran, tiwala ng mga aplikante |
 | Ano ang sinasabi ng vendor tungkol sa AI Act at bias? | Kahati mo sila sa mga obligasyon |
+| Gumagana ba ito sa ATS mo at sa iba mo pang tool? | Kumakain ng oras ang mano-manong pagkopya ng mga aplikante at resulta, at nawawalan ka ng mga aplikante |
 
 Para sa paghahambing ng presyo, tingnan ang [paano ikumpara ang gastos ng mga test](/compare/cheapest-pre-employment-test) at [pre-employment tests na walang subscription](/compare/pre-employment-tests-without-subscription).
 
@@ -98,6 +99,7 @@ Ginagawang timed multiple-choice skills interview ng prepza ang isang job descri
 - **Sariling random na set ang bawat aplikante** mula sa bank ng bawat topic, na may countdown na ipinapatupad ng server sa bawat tanong. Puwede kang magbigay ng dagdag na oras sa sinumang humingi.
 - **Ipinapakita ng scorecards** ang bawat sagot, kung tama ito at gaano katagal ito, na may flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy. Hindi binabago ng mga flag ang score.
 - **Mina-mark ang mga sagot ayon sa answer key** na isinusulat at chine-check ng AI; walang AI na bumabasa o humuhusga sa sagot ng aplikante. Sinasaklaw ng isang PDF report ang isang aplikante o ang buong listahan.
+- **Gumagana sa mga tool mo:** natatanggap ang interview ng mga aplikanteng inililipat mo sa isang stage sa Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR, at bumabalik sa ATS ang kanilang mga resulta. Nalalaman ng Slack kapag may aplikanteng natapos, at ikinokonekta ng [API](/api-docs) ang sarili mong platform. Tingnan ang [paano ikonekta ang skills tests sa iyong ATS](/guides/ats-integration-skills-tests).
 
 Bawat aplikanteng sumasagot ang presyo, walang subscription: $1–3 bawat aplikante depende sa laki ng iyong top-up, sa US dollars, at libre ang unang 3 aplikante mo. Naka-host ang data sa EU (may ilang sub-processor sa US; tingnan ang [privacy policy](/privacy)), at kasama ang data processing agreement at ang mga instruksyon para sa mga kumpanya.
 

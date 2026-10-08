@@ -83,6 +83,7 @@ Questions worth asking any vendor:
 | How is it priced? | A monthly plan can cost more than your whole hiring volume is worth |
 | Where is data stored, and for how long? | GDPR, your own policies, candidates' trust |
 | What does the vendor say about the AI Act and bias? | You share the duties with them |
+| Does it work with your ATS and other tools? | Copying candidates and results by hand costs time and loses applicants |
 
 For price comparisons, see [how to compare test costs](/compare/cheapest-pre-employment-test) and [pre-employment tests without a subscription](/compare/pre-employment-tests-without-subscription).
 
@@ -98,6 +99,7 @@ prepza turns a job description into a timed multiple-choice skills interview.
 - **Each candidate gets their own random set** from each topic's bank, with a server-enforced countdown on every question. You can give extra time to anyone who asks.
 - **Scorecards** show every answer, whether it was right and how long it took, with flags for too-fast answers, leaving the page and copy attempts. Flags don't change the score.
 - **Answers are marked against an answer key** that AI writes and checks; no AI reads or judges a candidate's answer. A PDF report covers one candidate or the whole list.
+- **Works with your tools:** candidates you move to a stage in Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR get the interview, and their results go back to the ATS. Slack hears when a candidate finishes, and the [API](/api-docs) connects your own platform. See [how to connect skills tests to your ATS](/guides/ats-integration-skills-tests).
 
 Pricing is per candidate who answers, with no subscription: $1–3 per candidate depending on your top-up size, in US dollars, and your first 3 candidates are free. Data is hosted in the EU (some sub-processors are in the US; see the [privacy policy](/privacy)), and the data processing agreement and instructions for companies are included.
 

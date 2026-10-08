@@ -83,6 +83,7 @@ Fragen, die Sie jedem Anbieter stellen sollten:
 | Wie sieht das Preismodell aus? | Ein Monatsabo kann mehr kosten, als Ihr gesamtes Einstellungsvolumen wert ist |
 | Wo werden die Daten gespeichert und wie lange? | DSGVO, Ihre eigenen Richtlinien, das Vertrauen der Kandidaten |
 | Was sagt der Anbieter zur KI-Verordnung und zu Bias? | Sie teilen sich die Pflichten mit ihm |
+| Funktioniert es mit Ihrem ATS und anderen Tools? | Kandidaten und Ergebnisse von Hand zu übertragen kostet Zeit, und Bewerber springen ab |
 
 Für Preisvergleiche siehe [Kosten von Einstellungstests vergleichen](/compare/cheapest-pre-employment-test) und [Einstellungstests ohne Abo](/compare/pre-employment-tests-without-subscription).
 
@@ -98,6 +99,7 @@ prepza macht aus einer Stellenbeschreibung ein zeitlich begrenztes Multiple-Choi
 - **Jeder Kandidat erhält einen eigenen zufälligen Fragensatz** aus dem Fragenpool jedes Themas, mit einem serverseitig erzwungenen Countdown bei jeder Frage. Allen, die darum bitten, können Sie zusätzliche Zeit geben.
 - **Auswertungen** zeigen jede Antwort, ob sie richtig war und wie lange sie gedauert hat, mit Hinweisen auf zu schnelle Antworten, das Verlassen der Seite und Kopierversuche. Die Hinweise ändern die Punktzahl nicht.
 - **Antworten werden anhand eines Lösungsschlüssels bewertet**, den KI schreibt und prüft; keine KI liest oder beurteilt die Antwort eines Kandidaten. Ein PDF-Bericht deckt einen Kandidaten oder die ganze Liste ab.
+- **Funktioniert mit Ihren Tools:** Kandidaten, die Sie in Workable, Greenhouse, Teamtailor, Recruitee oder Breezy HR in eine Phase verschieben, erhalten das Interview, und ihre Ergebnisse gehen zurück ins ATS. Slack meldet, wenn ein Kandidat fertig ist, und die [API](/api-docs) bindet Ihre eigene Plattform an. Siehe [So verbinden Sie Fachtests mit Ihrem ATS](/guides/ats-integration-skills-tests).
 
 Bezahlt wird pro Kandidat, der antwortet, ohne Abo: 1–3 $ pro Kandidat je nach Höhe Ihrer Aufladung, in US-Dollar, und Ihre ersten 3 Kandidaten sind kostenlos. Die Daten werden in der EU gehostet (einige Unterauftragsverarbeiter sitzen in den USA; siehe die [Datenschutzerklärung](/privacy)), und der Auftragsverarbeitungsvertrag sowie die Anleitung für Unternehmen sind enthalten.
 

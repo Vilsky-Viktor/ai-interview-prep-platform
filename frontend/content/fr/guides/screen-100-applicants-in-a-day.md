@@ -65,6 +65,7 @@ Invitez ensuite tous les autres :
 
 - **Collez une liste d'e-mails ou importez un fichier.** prepza accepte jusqu'à 100 e-mails à la fois et ignore ceux qui ont déjà commencé.
 - **Ou utilisez un lien unique.** Si vous n'avez pas encore publié l'offre, placez-y le lien de partage de l'entretien. Les candidats peuvent passer le test immédiatement et apparaissent dans votre liste, classés. Désactivez le lien une fois le poste pourvu.
+- **Ou laissez votre ATS les inviter.** Si vos candidats sont dans Workable, Greenhouse, Teamtailor, Recruitee ou Breezy HR, connectez-le une fois : déplacer un candidat vers une étape envoie l'invitation, et les résultats reviennent dans l'ATS. Voir [Comment connecter vos tests de compétences à votre ATS](/guides/ats-integration-skills-tests).
 
 Avant de commencer, les candidats savent à quoi s'attendre : le minuteur, le fait qu'une personne de votre entreprise examine les résultats, et la possibilité de demander plus de temps. Si quelqu'un demande un aménagement, vous pouvez ajouter du temps pour ce candidat avant qu'il ne commence.
 

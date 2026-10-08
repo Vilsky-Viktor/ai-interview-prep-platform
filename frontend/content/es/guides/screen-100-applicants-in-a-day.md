@@ -65,6 +65,7 @@ Después, invita a todos los que queden:
 
 - **Pega una lista de correos electrónicos o sube un archivo.** prepza admite hasta 100 correos a la vez y omite a quien ya haya empezado.
 - **O usa un único enlace.** Si aún no has publicado la oferta, pon en ella el enlace para compartir de la entrevista. Los candidatos pueden hacer la prueba al momento y aparecen en tu lista, ordenados. Desactiva el enlace cuando se cubra el puesto.
+- **O deja que tu ATS los invite.** Si tus candidatos están en Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR, conéctalo una vez: mover a un candidato a una etapa envía la invitación, y los resultados vuelven al ATS. Consulta [Cómo conectar las pruebas de habilidades a tu ATS](/guides/ats-integration-skills-tests).
 
 Antes de empezar, los candidatos ven qué esperar: el temporizador, que una persona de tu empresa revisa los resultados y que pueden pedir más tiempo. Si alguien pide una adaptación, puedes añadir tiempo extra para ese candidato antes de que empiece.
 

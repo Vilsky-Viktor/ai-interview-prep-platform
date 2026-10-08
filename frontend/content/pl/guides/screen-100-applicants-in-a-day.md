@@ -65,6 +65,7 @@ Potem zaproś wszystkich pozostałych:
 
 - **Wklej listę adresów e-mail lub prześlij plik.** prepza przyjmuje do 100 adresów naraz i pomija każdego, kto już zaczął.
 - **Albo użyj jednego linku.** Jeśli jeszcze nie opublikowałeś ogłoszenia, umieść w nim link do udostępnienia rozmowy. Kandydaci mogą od razu rozwiązać test i pojawiają się na Twojej liście w rankingu. Wyłącz link, gdy stanowisko zostanie obsadzone.
+- **Albo pozwól, by zaproszenia wysłał Twój ATS.** Jeśli Twoi kandydaci są w Workable, Greenhouse, Teamtailor, Recruitee lub Breezy HR, połącz go raz: przeniesienie kandydata na etap wysyła zaproszenie, a wyniki wracają do ATS. Zobacz [Jak połączyć testy umiejętności z ATS](/guides/ats-integration-skills-tests).
 
 Przed rozpoczęciem kandydaci widzą, czego się spodziewać: licznik czasu, informację, że wyniki przegląda osoba z Twojej firmy, oraz że mogą poprosić o więcej czasu. Jeśli ktoś poprosi o racjonalne usprawnienie, możesz dodać temu kandydatowi czas, zanim zacznie.
 

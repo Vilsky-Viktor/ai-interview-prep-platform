@@ -83,6 +83,7 @@ Questions à poser à tout fournisseur :
 | Quel est le modèle de prix ? | Un abonnement mensuel peut coûter plus que ne vaut tout votre volume de recrutement |
 | Où les données sont-elles stockées, et combien de temps ? | RGPD, vos propres règles, la confiance des candidats |
 | Que dit le fournisseur sur le Règlement sur l'IA et les biais ? | Vous partagez les obligations avec lui |
+| Fonctionne-t-il avec votre ATS et vos autres outils ? | Recopier candidats et résultats à la main prend du temps et fait perdre des candidats |
 
 Pour comparer les prix, voir [comment comparer le coût des tests](/compare/cheapest-pre-employment-test) et [tests de recrutement sans abonnement](/compare/pre-employment-tests-without-subscription).
 
@@ -98,6 +99,7 @@ prepza transforme une fiche de poste en entretien de compétences chronométré 
 - **Chaque candidat reçoit sa propre série aléatoire** tirée de la banque de questions de chaque thème, avec un compte à rebours imposé par le serveur pour chaque question. Vous pouvez accorder du temps supplémentaire à quiconque le demande.
 - **Les fiches d'évaluation** montrent chaque réponse, si elle était juste et le temps qu'elle a pris, avec des alertes pour les réponses trop rapides, les sorties de la page et les tentatives de copie. Les alertes ne modifient pas le score.
 - **Les réponses sont notées d'après un corrigé** que l'IA rédige et vérifie ; aucune IA ne lit ni ne juge la réponse d'un candidat. Un rapport PDF couvre un candidat ou toute la liste.
+- **Fonctionne avec vos outils :** les candidats que vous déplacez vers une étape dans Workable, Greenhouse, Teamtailor, Recruitee ou Breezy HR reçoivent l'entretien, et leurs résultats reviennent dans l'ATS. Slack vous prévient quand un candidat termine, et l'[API](/api-docs) connecte votre propre plateforme. Voir [Comment connecter vos tests de compétences à votre ATS](/guides/ats-integration-skills-tests).
 
 La tarification se fait par candidat qui répond, sans abonnement : 1 à 3 $ par candidat selon le montant de votre recharge, en dollars américains, et vos 3 premiers candidats sont gratuits. Les données sont hébergées dans l'UE (certains sous-traitants ultérieurs sont aux États-Unis ; voir la [politique de confidentialité](/privacy)), et l'accord de traitement des données ainsi que les instructions pour les entreprises sont inclus.
 

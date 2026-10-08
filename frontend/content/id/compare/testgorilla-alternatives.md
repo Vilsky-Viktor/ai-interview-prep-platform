@@ -43,7 +43,7 @@ prepza mengubah deskripsi pekerjaan menjadi wawancara keterampilan pilihan ganda
 
 - **Harga:** per kandidat yang menjawab setidaknya satu soal, lebih murah per kandidat dengan isi ulang yang lebih besar. Kredit tidak kedaluwarsa, dan tidak ada langganan. Lihat [harga](/pricing).
 - **Cocok untuk:** tim kecil dan menengah yang merekrut untuk posisi apa pun, beberapa orang sekaligus, sebagai penyaringan pertama.
-- **Bekerja dengan ATS kamu:** Workable, Greenhouse, Teamtailor, Recruitee, dan Breezy HR mengirim kandidat ke prepza dan menerima hasilnya kembali, tanpa biaya tambahan.
+- **Bekerja dengan alat yang kamu pakai:** Workable, Greenhouse, Teamtailor, Recruitee, dan Breezy HR mengirim kandidat ke prepza dan menerima hasilnya kembali, Slack diberi tahu saat kandidat selesai, dan API publik menghubungkan platformmu sendiri. Semuanya tanpa biaya tambahan.
 - **Bukan untuk:** tes kognitif atau kepribadian, menulis atau menjalankan kode, atau wawancara video. prepza tidak menyediakannya, jadi pasangkan dengan alat yang menyediakannya kalau kamu membutuhkannya.
 
 ### CodeSignal

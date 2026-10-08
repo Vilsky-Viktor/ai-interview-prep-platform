@@ -28,7 +28,7 @@ Diese Seite erklärt, wie sie sich unterscheiden, wofür sich welches Tool besse
 | Code im Test | Fragen zum Lesen von Code (was Code tut oder ausgibt); kein Schreiben oder Ausführen von Code | Programmiertests in der Bibliothek; eigene Coding-Challenges im höheren Tarif |
 | Fragen pro Kandidat | Eigener zufälliger Fragensatz für jeden Kandidaten, in eigener Reihenfolge | Hier nicht verglichen |
 | Schutz vor Schummeln | Timer bei jeder Frage (serverseitig erzwungen), Hinweise auf zu schnelle Antworten, das Verlassen der Seite und Kopierversuche | Webcam-Schnappschüsse, deaktiviertes Kopieren/Einfügen und Vollbildmodus im höheren Tarif |
-| ATS-Integrationen | Workable, Greenhouse, Teamtailor, Recruitee und Breezy HR, ohne Aufpreis | ATS-/API-Integrationen im höheren Tarif |
+| Integrationen | Workable, Greenhouse, Teamtailor, Recruitee und Breezy HR; Slack; eine öffentliche API mit signierten Webhooks ([API-Dokumentation](/api-docs)). Alles ohne Aufpreis | ATS-/API-Integrationen im höheren Tarif |
 | Berichte | Auswertungen mit Antworten und Zeiten; PDF für einen oder alle Kandidaten | Hier nicht verglichen |
 | Sprachen | 23 Sprachen für Oberfläche, Interviews und E-Mails | Hier nicht verglichen; die Bibliothek enthält Sprachtests |
 | Preismodell | Pro Kandidat, der antwortet, aus vorausbezahlten Credits; kein Abo ([Preise](/pricing)) | Ein Gratis-Tarif und jährlich abgerechnete Bezahltarife ([Preisseite](https://www.testgorilla.com/pricing/)) |

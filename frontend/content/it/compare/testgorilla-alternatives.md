@@ -43,7 +43,7 @@ prepza trasforma una descrizione del ruolo in un colloquio sulle competenze a sc
 
 - **Prezzi:** per candidato che risponde ad almeno una domanda, più economico per candidato con ricariche più grandi. I crediti non scadono e non c'è abbonamento. Vedi i [prezzi](/pricing).
 - **Adatto per:** piccoli e medi team che assumono per qualsiasi ruolo, poche persone alla volta, come primo screening.
-- **Funziona con il tuo ATS:** Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR inviano i candidati a prepza e ne ricevono i risultati, senza costi aggiuntivi.
+- **Funziona con i tuoi strumenti:** Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR inviano i candidati a prepza e ne ricevono i risultati, Slack ti avvisa quando i candidati finiscono e un'API pubblica collega la tua piattaforma. Tutto senza costi aggiuntivi.
 - **Non per:** test cognitivi o di personalità, scrittura o esecuzione di codice o videocolloqui. prepza non li offre, quindi abbinalo a uno strumento che lo fa quando ti servono.
 
 ### CodeSignal

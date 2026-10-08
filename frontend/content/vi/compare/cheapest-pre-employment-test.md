@@ -46,7 +46,7 @@ Khi so sánh, hãy kiểm tra cả những điều sau:
 - **Ứng viên không bao giờ bắt đầu.** prepza chỉ tính phí cho ứng viên trả lời ít nhất một câu hỏi; credit của lời mời không được dùng sẽ được hoàn lại.
 - **Credit hết hạn.** Credit của prepza không hết hạn. Hãy kiểm tra credit của các nhà cung cấp khác có được chuyển sang kỳ sau không.
 - **Thuế.** Kiểm tra giá niêm yết đã gồm VAT hoặc thuế bán hàng chưa.
-- **Tính năng ở gói cao hơn.** Tích hợp ATS, giám sát thi (proctoring) và bài lập trình tùy chỉnh thường nằm ở các gói đắt hơn. Hãy kiểm tra bạn thực sự cần gói nào. prepza tích hợp với Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR mà không tốn thêm phí.
+- **Tính năng ở gói cao hơn.** Tích hợp ATS, giám sát thi (proctoring) và bài lập trình tùy chỉnh thường nằm ở các gói đắt hơn. Hãy kiểm tra bạn thực sự cần gói nào. prepza tích hợp với Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR và Slack, kèm cả API, mà không tốn thêm phí.
 - **Nhiều hơn một công cụ.** Nếu bạn cần cả bài kiểm tra kiến thức lẫn bài trắc nghiệm tâm lý hoặc bài lập trình, hãy cộng cả hai.
 
 ## Khi giá thấp hơn không phải lựa chọn đúng

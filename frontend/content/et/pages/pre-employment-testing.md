@@ -83,6 +83,7 @@ Küsimused, mida tasub igalt pakkujalt küsida:
 | Kuidas hind on üles ehitatud? | Kuupakett võib maksta rohkem, kui kogu sinu värbamismaht väärt on |
 | Kus andmeid hoitakse ja kui kaua? | Isikuandmete kaitse üldmäärus, sinu enda reeglid, kandidaatide usaldus |
 | Mida ütleb pakkuja AI Acti ja kallutatuse kohta? | Jagad kohustusi temaga |
+| Kas see töötab sinu ATS-i ja muude tööriistadega? | Kandidaatide ja tulemuste käsitsi ümbertõstmine võtab aega ja kandideerijaid läheb kaotsi |
 
 Hindade võrdluse leiad lehtedelt [kuidas testide hindu võrrelda](/compare/cheapest-pre-employment-test) ja [värbamistestid ilma tellimuseta](/compare/pre-employment-tests-without-subscription).
 
@@ -98,6 +99,7 @@ prepza muudab töökuulutuse ajapiiranguga valikvastustega oskuste intervjuuks.
 - **Iga kandidaat saab oma juhusliku komplekti** iga teema pangast ja iga küsimuse juures on serveri jõustatud taimer. Igaühele, kes palub, saad anda lisaaega.
 - **Hindamislehed** näitavad iga vastust, kas see oli õige ja kui kaua see aega võttis, koos märgetega liiga kiirete vastuste, lehelt lahkumise ja kopeerimiskatsete kohta. Märked tulemust ei muuda.
 - **Vastuseid kontrollitakse vastusevõtme järgi**, mille AI kirjutab ja üle kontrollib; ükski AI ei loe ega hinda kandidaadi vastust. PDF-aruanne hõlmab ühte kandidaati või kogu nimekirja.
+- **Töötab sinu tööriistadega:** kandidaadid, keda viid Workable'is, Greenhouse'is, Teamtailoris, Recruitee's või Breezy HR-is mõnda etappi, saavad intervjuu ja nende tulemused jõuavad tagasi ATS-i. Slack annab teada, kui kandidaat lõpetab, ja [API](/api-docs) ühendab sinu enda platvormi. Vaata [Kuidas ühendada oskustestid oma ATS-süsteemiga](/guides/ats-integration-skills-tests).
 
 Maksad iga vastanud kandidaadi eest, ilma tellimuseta: 1–3 $ kandidaadi kohta sõltuvalt juurdelaadimise suurusest, USA dollarites, ja sinu esimesed 3 kandidaati on tasuta. Andmeid hoitakse ELis (mõned volitatud alamtöötlejad asuvad USAs; vaata [privaatsuspoliitikat](/privacy)) ning andmetöötlusleping ja juhised ettevõtetele on hinnas.
 

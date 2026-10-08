@@ -65,6 +65,7 @@ Lalu undang semua yang tersisa:
 
 - **Tempel daftar email atau unggah file.** prepza menerima hingga 100 email sekaligus dan melewati siapa pun yang sudah mulai.
 - **Atau pakai satu tautan.** Kalau lowongannya belum kamu pasang, sertakan tautan wawancara yang bisa dibagikan di iklan lowongan. Pelamar bisa langsung mengerjakan tes dan muncul di daftarmu, berurutan sesuai peringkat. Matikan tautannya setelah posisinya terisi.
+- **Atau biarkan ATS-mu yang mengirim undangan.** Kalau pelamarmu ada di Workable, Greenhouse, Teamtailor, Recruitee, atau Breezy HR, hubungkan sekali saja: memindahkan kandidat ke suatu tahap langsung mengirim undangan, dan hasilnya kembali ke ATS. Lihat [cara menghubungkan tes keterampilan ke ATS-mu](/guides/ats-integration-skills-tests).
 
 Sebelum mulai, kandidat melihat apa yang akan terjadi: timer, bahwa orang di perusahaanmu yang meninjau hasil, dan bahwa mereka bisa meminta tambahan waktu. Kalau seseorang meminta akomodasi, kamu bisa menambah waktu untuk kandidat itu sebelum ia mulai.
 

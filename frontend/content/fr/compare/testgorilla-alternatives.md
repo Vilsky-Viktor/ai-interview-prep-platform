@@ -43,7 +43,7 @@ prepza transforme une fiche de poste en entretien de compétences chronométré 
 
 - **Tarifs :** par candidat qui répond à au moins une question, moins cher par candidat avec des recharges plus importantes. Les crédits n'expirent pas et il n'y a pas d'abonnement. Voir les [tarifs](/pricing).
 - **Adapté à :** les PME qui recrutent pour tout type de poste, quelques personnes à la fois, comme première présélection.
-- **Fonctionne avec votre ATS :** Workable, Greenhouse, Teamtailor, Recruitee et Breezy HR envoient les candidats à prepza et récupèrent leurs résultats, sans surcoût.
+- **Fonctionne avec vos outils :** Workable, Greenhouse, Teamtailor, Recruitee et Breezy HR envoient les candidats à prepza et récupèrent leurs résultats, Slack vous prévient quand des candidats terminent, et une API publique connecte votre propre plateforme. Le tout sans surcoût.
 - **Pas adapté à :** les tests cognitifs ou de personnalité, l'écriture ou l'exécution de code, ou les entretiens vidéo. prepza ne les propose pas : associez-le à un outil qui le fait quand vous en avez besoin.
 
 ### CodeSignal

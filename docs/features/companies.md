@@ -53,3 +53,5 @@ Later changes:
 - [Candidates](candidates.md): invites, scorecards and reports.
 - [Credits and payments](billing.md): the company's wallet and referrals.
 - [ATS integrations](ats.md): connecting Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR.
+- [Notifications and emails](notifications.md#slack): a company's notifications in Slack.
+- [Public API](api.md): API keys and web hooks for a company's own platform.

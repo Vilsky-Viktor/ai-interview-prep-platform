@@ -65,6 +65,7 @@ Then invite everyone left:
 
 - **Paste a list of emails or upload a file.** prepza takes up to 100 emails at once and skips anyone who already started.
 - **Or use one link.** If you haven't posted the job yet, put the interview's shareable link in the ad. Applicants can take the test right away and appear in your list, ranked. Turn the link off once the role is filled.
+- **Or let your ATS send them.** If your applicants are in Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR, connect it once: moving a candidate to a stage sends the invite, and results go back to the ATS. See [how to connect skills tests to your ATS](/guides/ats-integration-skills-tests).
 
 Before they start, candidates see what to expect: the timer, that a person at your company reviews results, and that they can ask for more time. If someone asks for an accommodation, you can add extra time for that candidate before they begin.
 

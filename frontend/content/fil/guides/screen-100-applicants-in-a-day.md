@@ -65,6 +65,7 @@ Saka imbitahan ang lahat ng natira:
 
 - **Mag-paste ng listahan ng emails o mag-upload ng file.** Tumatanggap ang prepza ng hanggang 100 email nang sabay at nilalaktawan ang sinumang nakapagsimula na.
 - **O gumamit ng iisang link.** Kung hindi mo pa naipo-post ang trabaho, ilagay sa ad ang shareable link ng interview. Puwedeng kunin agad ng mga aplikante ang test at lalabas sila sa iyong listahan, naka-rank. I-off ang link kapag napunan na ang role.
+- **O hayaang ang ATS mo ang magpadala ng imbitasyon.** Kung nasa Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR ang mga aplikante mo, ikonekta ito nang isang beses: kapag inilipat ang aplikante sa isang stage, naipapadala ang imbitasyon, at bumabalik sa ATS ang mga resulta. Tingnan ang [paano ikonekta ang skills tests sa iyong ATS](/guides/ats-integration-skills-tests).
 
 Bago sila magsimula, nakikita ng mga aplikante kung ano ang aasahan: ang timer, na isang tao sa iyong kumpanya ang nagre-review ng resulta, at na puwede silang humingi ng dagdag na oras. Kung may humingi ng accommodation, puwede kang magdagdag ng oras para sa aplikanteng iyon bago siya magsimula.
 

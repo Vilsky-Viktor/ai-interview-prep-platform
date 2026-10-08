@@ -83,6 +83,7 @@ Pytania, które warto zadać każdemu dostawcy:
 | Jaki jest model cenowy? | Plan miesięczny może kosztować więcej, niż wart jest cały Twój wolumen rekrutacji |
 | Gdzie i jak długo przechowywane są dane? | RODO, Twoje własne zasady, zaufanie kandydatów |
 | Co dostawca mówi o akcie w sprawie AI i uprzedzeniach? | Dzielisz z nim obowiązki |
+| Czy współpracuje z Twoim ATS i innymi narzędziami? | Ręczne przenoszenie kandydatów i wyników zabiera czas, a kandydaci przepadają |
 
 Porównania cen znajdziesz w artykułach [jak porównać koszty testów](/compare/cheapest-pre-employment-test) i [testy rekrutacyjne bez subskrypcji](/compare/pre-employment-tests-without-subscription).
 
@@ -98,6 +99,7 @@ prepza zamienia opis stanowiska w rozmowę sprawdzającą umiejętności z pytan
 - **Każdy kandydat dostaje własny losowy zestaw** z puli każdego tematu, z odliczaniem czasu kontrolowanym po stronie serwera przy każdym pytaniu. Każdemu, kto o to poprosi, możesz dać dodatkowy czas.
 - **Karty wyników** pokazują każdą odpowiedź, to, czy była poprawna, i ile czasu zajęła, z oznaczeniami zbyt szybkich odpowiedzi, opuszczenia strony i prób kopiowania. Oznaczenia nie zmieniają wyniku.
 - **Odpowiedzi są oceniane według klucza odpowiedzi**, który AI pisze i sprawdza; żadna AI nie czyta ani nie ocenia odpowiedzi kandydata. Raport PDF obejmuje jednego kandydata lub całą listę.
+- **Współpracuje z Twoimi narzędziami:** kandydaci, których przenosisz na etap w Workable, Greenhouse, Teamtailor, Recruitee lub Breezy HR, dostają rozmowę, a ich wyniki wracają do ATS. Slack powiadamia, gdy kandydat skończy test, a [API](/api-docs) łączy prepza z Twoją własną platformą. Zobacz [Jak połączyć testy umiejętności z ATS](/guides/ats-integration-skills-tests).
 
 Cena naliczana jest za kandydata, który odpowiada, bez subskrypcji: $1–3 za kandydata w zależności od wielkości doładowania, w dolarach amerykańskich, a pierwszych 3 kandydatów masz za darmo. Dane są hostowane w UE (niektórzy podprzetwarzający są w USA; zobacz [politykę prywatności](/privacy)), a umowa powierzenia przetwarzania danych i instrukcje dla firm są w cenie.
 

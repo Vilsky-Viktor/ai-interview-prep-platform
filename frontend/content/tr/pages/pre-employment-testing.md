@@ -83,6 +83,7 @@ Her sağlayıcıya sormaya değer sorular:
 | Fiyatlandırma nasıl? | Aylık bir plan, tüm işe alım hacminizin değerinden daha pahalıya gelebilir |
 | Veriler nerede ve ne kadar süre saklanıyor? | GDPR, kendi politikalarınız, adayların güveni |
 | Sağlayıcı Yapay Zekâ Yasası ve yanlılık hakkında ne diyor? | Yükümlülükleri onlarla paylaşırsınız |
+| ATS'niz ve diğer araçlarınızla çalışıyor mu? | Adayları ve sonuçları elle kopyalamak zaman alır ve başvuru sahiplerini kaybettirir |
 
 Fiyat karşılaştırmaları için [işe alım öncesi test maliyetleri nasıl karşılaştırılır](/compare/cheapest-pre-employment-test) ve [abonelik gerektirmeyen işe alım öncesi testler](/compare/pre-employment-tests-without-subscription) sayfalarına bakın.
 
@@ -98,6 +99,7 @@ prepza bir iş tanımını süreli, çoktan seçmeli bir beceri mülakatına dö
 - **Her aday, her konunun havuzundan kendine ait rastgele bir set alır;** her soruda sunucu tarafından uygulanan bir geri sayım vardır. İsteyen herkese ek süre verebilirsiniz.
 - **Değerlendirme kartları** her yanıtı, doğru olup olmadığını ve ne kadar sürdüğünü; çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretlerle birlikte gösterir. İşaretler puanı değiştirmez.
 - **Yanıtlar, yapay zekânın yazıp kontrol ettiği bir cevap anahtarına göre değerlendirilir;** hiçbir yapay zekâ adayın yanıtını okumaz veya yargılamaz. PDF rapor tek bir adayı veya tüm listeyi kapsar.
+- **Araçlarınızla çalışır:** Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'da bir aşamaya taşıdığınız adaylar mülakatı alır ve sonuçları ATS'ye geri döner. Bir aday bitirdiğinde Slack haberdar olur ve [API](/api-docs) kendi platformunuzu bağlar. Bkz. [Beceri testleri ATS'nize nasıl bağlanır](/guides/ats-integration-skills-tests).
 
 Fiyatlandırma yanıt veren aday başınadır ve abonelik yoktur: kredi yükleme tutarınıza göre aday başına $1–3, ABD doları cinsinden; ilk 3 adayınız ücretsizdir. Veriler AB'de barındırılır (bazı alt işleyenler ABD'dedir; bkz. [gizlilik politikası](/privacy)); veri işleme sözleşmesi ve şirketler için talimatlar dahildir.
 

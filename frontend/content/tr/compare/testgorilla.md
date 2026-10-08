@@ -28,7 +28,7 @@ Bu sayfa ikisinin nasıl farklılaştığını, hangisinin nerede daha uygun old
 | Testte kod | Kod okuma soruları (kodun ne yaptığı veya ne çıktı verdiği); kod yazma veya çalıştırma yok | Kütüphanede programlama testleri; üst planında özel kodlama görevleri |
 | Aday başına sorular | Her adaya kendi sırasıyla, kendine ait rastgele bir soru seti | Burada karşılaştırılmadı |
 | Güvenilirlik özellikleri | Her soruda süre sınırı (sunucu tarafından uygulanır), çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler | Üst planında web kamerası fotoğrafları, kopyala/yapıştır engeli ve tam ekran modu |
-| ATS entegrasyonları | Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR, ek ücret olmadan | Üst planında ATS/API entegrasyonları |
+| Entegrasyonlar | Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR; Slack; imzalı webhook'larla herkese açık bir API ([API belgeleri](/api-docs)). Hepsi ek ücret olmadan | Üst planında ATS/API entegrasyonları |
 | Raporlar | Yanıtlar ve sürelerle değerlendirme kartları; tek aday veya tüm adaylar için PDF | Burada karşılaştırılmadı |
 | Diller | Arayüz, mülakatlar ve e-postalar için 23 dil | Burada karşılaştırılmadı; kütüphanede dil yeterlilik testleri bulunur |
 | Fiyatlandırma modeli | Yanıt veren aday başına, ön ödemeli kredilerden; abonelik yok ([fiyatlar](/pricing)) | Ücretsiz bir plan ve yıllık faturalandırılan ücretli planlar ([fiyat sayfası](https://www.testgorilla.com/pricing/)) |

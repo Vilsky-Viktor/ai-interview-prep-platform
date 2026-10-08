@@ -43,7 +43,7 @@ prepza zamienia opis stanowiska w rozmowę sprawdzającą umiejętności z pytan
 
 - **Ceny:** za kandydata, który odpowie na co najmniej jedno pytanie, taniej za kandydata przy większych doładowaniach. Kredyty nie wygasają i nie ma subskrypcji. Zobacz [cennik](/pricing).
 - **Pasuje do:** małych i średnich zespołów rekrutujących na dowolne stanowisko, po kilka osób naraz, jako pierwszy etap selekcji.
-- **Współpracuje z Twoim ATS:** Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR przekazują kandydatów do prepza i otrzymują z powrotem ich wyniki, bez dodatkowych opłat.
+- **Współpracuje z Twoimi narzędziami:** Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR przekazują kandydatów do prepza i otrzymują z powrotem ich wyniki, Slack powiadamia, gdy kandydaci skończą test, a publiczne API łączy prepza z Twoją własną platformą. Wszystko bez dodatkowych opłat.
 - **Nie nadaje się do:** testów poznawczych lub osobowości, pisania ani uruchamiania kodu ani rozmów wideo. prepza ich nie oferuje, więc gdy ich potrzebujesz, połącz ją z narzędziem, które je ma.
 
 ### CodeSignal

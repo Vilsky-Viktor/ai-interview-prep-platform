@@ -83,6 +83,7 @@ Perguntas que vale a pena fazer a qualquer fornecedor:
 | Como é a cobrança? | Um plano mensal pode custar mais do que todo o seu volume de contratação vale |
 | Onde os dados ficam armazenados, e por quanto tempo? | GDPR, as suas próprias políticas, a confiança dos candidatos |
 | O que o fornecedor diz sobre o Regulamento de IA e sobre viés? | Você divide as obrigações com ele |
+| Funciona com o seu ATS e outras ferramentas? | Copiar candidatos e resultados à mão leva tempo e faz você perder candidatos |
 
 Para comparar preços, veja [como comparar o custo dos testes](/compare/cheapest-pre-employment-test) e [testes de seleção sem assinatura](/compare/pre-employment-tests-without-subscription).
 
@@ -98,6 +99,7 @@ A prepza transforma uma descrição da vaga em uma entrevista de habilidades de 
 - **Cada candidato recebe seu próprio conjunto aleatório** do banco de cada tópico, com contagem regressiva controlada pelo servidor em cada pergunta. Você pode dar tempo extra a quem pedir.
 - **As fichas de avaliação** mostram cada resposta, se estava certa e quanto tempo levou, com alertas para respostas rápidas demais, saídas da página e tentativas de cópia. Os alertas não mudam a pontuação.
 - **As respostas são corrigidas com base em um gabarito** que a IA escreve e verifica; nenhuma IA lê ou julga a resposta de um candidato. Um relatório em PDF cobre um candidato ou a lista inteira.
+- **Funciona com as suas ferramentas:** os candidatos que você move para uma etapa no Workable, Greenhouse, Teamtailor, Recruitee ou Breezy HR recebem a entrevista, e os resultados deles voltam para o ATS. O Slack avisa quando um candidato termina, e a [API](/api-docs) conecta a sua própria plataforma. Veja [Como integrar testes de habilidades ao seu ATS](/guides/ats-integration-skills-tests).
 
 A cobrança é por candidato que responde, sem assinatura: $1–3 por candidato, dependendo do tamanho da recarga, em dólares americanos, e os seus 3 primeiros candidatos são gratuitos. Os dados ficam hospedados na UE (alguns suboperadores estão nos EUA; veja a [política de privacidade](/privacy)), e o acordo de tratamento de dados e as instruções para empresas estão incluídos.
 
