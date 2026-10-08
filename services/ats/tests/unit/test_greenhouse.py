@@ -19,7 +19,7 @@ NEXT = GREENHOUSE_API + "/jobs?cursor=2"
 
 @pytest.fixture(autouse=True)
 def no_tokens(monkeypatch):
-    """Tokens are kept per client id across calls: each test starts without any."""
+    """Tokens are kept per credential across calls: each test starts without any."""
     monkeypatch.setattr(greenhouse, "_tokens", {})
 
 
@@ -78,6 +78,18 @@ def test_a_token_is_asked_for_with_the_credential_once_and_reused(harvest):
     assert token_request.content == b"grant_type=client_credentials"
     assert harvest["issued"] == 1
     assert calls(harvest) == [("GET", "/v3/jobs", "Bearer t1")] * 2
+
+
+def test_a_kept_token_never_passes_a_check_with_another_secret(harvest):
+    # One company's credential is checked and its token kept; another company sends the same
+    # client id with a wrong secret: Greenhouse is asked again, and refuses it.
+    asyncio.run(greenhouse.check("id", "secret"))
+    harvest["token"] = 401
+
+    with pytest.raises(KeyRejected):
+        asyncio.run(greenhouse.check("id", "wrong"))
+
+    assert calls(harvest) == [("GET", "/v3/jobs", "Bearer t1")]
 
 
 def test_a_token_near_its_expiry_is_renewed(harvest, monkeypatch):

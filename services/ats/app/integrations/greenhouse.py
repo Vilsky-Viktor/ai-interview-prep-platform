@@ -1,3 +1,4 @@
+import hashlib
 import time
 
 import httpx
@@ -18,8 +19,9 @@ from app.integrations.errors import KeyRejected
 KEYS = ("client_id", "client_secret")
 # Greenhouse's answers that mean the credential is wrong, revoked or lacks a permission.
 REJECTED = {status.HTTP_400_BAD_REQUEST, status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
-# Access tokens by client id, with when each stops being used: they last about an hour.
-_tokens: dict[str, tuple[str, float]] = {}
+# Access tokens by credential (client id and a hash of its secret, so another company's cached
+# token is never used for a wrong secret), with when each stops being used: about an hour.
+_tokens: dict[tuple[str, str], tuple[str, float]] = {}
 
 
 def _failed() -> HTTPException:
@@ -29,7 +31,8 @@ def _failed() -> HTTPException:
 async def _token(client_id: str, client_secret: str, fresh: bool = False) -> str:
     """An access token for the credential (client credentials grant), kept until shortly before
     it expires."""
-    kept = _tokens.get(client_id)
+    credential = (client_id, hashlib.sha256(client_secret.encode()).hexdigest())
+    kept = _tokens.get(credential)
 
     if kept and not fresh and kept[1] > time.monotonic():
         return kept[0]
@@ -52,7 +55,7 @@ async def _token(client_id: str, client_secret: str, fresh: bool = False) -> str
 
     body = response.json()
     expires = time.monotonic() + body.get("expires_in", 3600) - GREENHOUSE_TOKEN_MARGIN_SECONDS
-    _tokens[client_id] = (body["access_token"], expires)
+    _tokens[credential] = (body["access_token"], expires)
 
     return body["access_token"]
 
