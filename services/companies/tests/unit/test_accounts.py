@@ -68,7 +68,7 @@ def test_retention_deletes_results_and_holds_before_the_invites_in_batches(monke
     done = []
     expired = uuid.uuid4()
     batches = [
-        [(expired, INTERVIEW_ID, "ann@example.com", InviteStatus.IN_PROCESS)],
+        [(expired, INTERVIEW_ID, "ann@example.com", InviteStatus.IN_PROCESS, None)],
         [],
     ]
 

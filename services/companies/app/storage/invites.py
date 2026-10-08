@@ -17,10 +17,16 @@ from app.storage.db import Session
 
 
 async def upsert(
-    interview_id, email: str, title: str, company: str, language: str, logo_path: str | None = None
+    interview_id,
+    email: str,
+    title: str,
+    company: str,
+    language: str,
+    logo_path: str | None = None,
+    hold_key: str | None = None,
 ) -> CandidateInvite:
-    """Creates the invite, or returns the existing one so it can be sent again, and saves the
-    email's event with it."""
+    """Creates the invite (with `hold_key`, its credits' key), or returns the existing one so it
+    can be sent again, and saves the email's event with it."""
     email = email.lower()
     statement = (
         insert(CandidateInvite)
@@ -32,6 +38,7 @@ async def upsert(
             status=InviteStatus.INVITED,
             created_at=datetime.now(UTC),
             sent_at=datetime.now(UTC),
+            hold_key=hold_key,
         )
         .on_conflict_do_nothing(index_elements=["interview_id", "email"])
     )
@@ -71,9 +78,9 @@ async def upsert(
         return invite
 
 
-async def for_link(interview_id, email: str) -> CandidateInvite:
-    """The candidate who came through the test's link: their invite, made now if it's new. No
-    email goes out: they're already here."""
+async def for_link(interview_id, email: str, hold_key: str | None = None) -> CandidateInvite:
+    """The candidate who came through the test's link: their invite, made now if it's new (with
+    `hold_key`, its credits' key). No email goes out: they're already here."""
     email = email.lower()
     statement = (
         insert(CandidateInvite)
@@ -85,6 +92,7 @@ async def for_link(interview_id, email: str) -> CandidateInvite:
             status=InviteStatus.INVITED,
             created_at=datetime.now(UTC),
             sent_at=datetime.now(UTC),
+            hold_key=hold_key,
         )
         .on_conflict_do_nothing(index_elements=["interview_id", "email"])
     )
@@ -101,6 +109,19 @@ async def for_link(interview_id, email: str) -> CandidateInvite:
         return invite
 
 
+async def held(interview_id, email: str) -> tuple[str | None, str | None]:
+    """The invite's status and its credits' key, or (None, None) when this email hasn't been
+    invited."""
+    query = select(CandidateInvite.status, CandidateInvite.hold_key).where(
+        CandidateInvite.interview_id == interview_id, CandidateInvite.email == email.lower()
+    )
+
+    async with Session() as session:
+        row = (await session.execute(query)).first()
+
+    return (row[0], row[1]) if row else (None, None)
+
+
 async def status_of(interview_id, email: str) -> str | None:
     """The invite's status, or None when this email hasn't been invited."""
     query = select(CandidateInvite.status).where(
@@ -112,9 +133,12 @@ async def status_of(interview_id, email: str) -> str | None:
 
 
 async def unfinished(interview_id) -> list[tuple]:
-    """(interview id, email, status) of the interview's invites not finished yet."""
+    """(interview id, email, status, hold key) of the interview's invites not finished yet."""
     query = select(
-        CandidateInvite.interview_id, CandidateInvite.email, CandidateInvite.status
+        CandidateInvite.interview_id,
+        CandidateInvite.email,
+        CandidateInvite.status,
+        CandidateInvite.hold_key,
     ).where(
         CandidateInvite.interview_id == interview_id,
         CandidateInvite.status != InviteStatus.FINISHED,

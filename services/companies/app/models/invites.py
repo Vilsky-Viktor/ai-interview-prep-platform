@@ -38,3 +38,7 @@ class CandidateInvite(Base):
     # None until then.
     grade: Mapped[int | None]
     flagged: Mapped[bool] = mapped_column(default=False, server_default="false")
+    # The key of the credits billing set aside for this invite: its own, so an email invited
+    # again after its invite was removed is held and charged anew. None on invites made before
+    # it existed, which keep candidate_key.
+    hold_key: Mapped[str | None] = mapped_column(String(200))

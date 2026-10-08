@@ -6,7 +6,7 @@ from prepza_common.analytics import track
 
 from app.constants.events import INTERVIEW_FINISHED
 from app.constants.invites import EXPIRIES_PER_BATCH, INVITE_EXPIRY_DAYS, NOT_STARTED, InviteStatus
-from app.helpers.candidates import candidate_key, finished_result, stored_results
+from app.helpers.candidates import finished_result, hold_key, stored_results
 from app.helpers.notifications import candidate_finished
 from app.integrations import billing, rounds
 from app.services import outbox as outbox_service
@@ -56,7 +56,7 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
     await invites.finish(invite.id, grade, flagged, notice, event_id, result)
     await outbox_service.flush_quietly()
 
-    key = candidate_key(invite.interview_id, invite.email)
+    key = hold_key(invite.interview_id, invite.email, invite.hold_key)
 
     if charged:
         await billing.charge_candidate(key)
@@ -81,7 +81,7 @@ async def expire_unstarted() -> int:
     # rest stay unexpired and the next run tries them again, so no hold is left open.
     while rows := await invites.expiring(before, EXPIRIES_PER_BATCH):
         for invite in rows:
-            key = candidate_key(invite.interview_id, invite.email)
+            key = hold_key(invite.interview_id, invite.email, invite.hold_key)
             await billing.release_candidate(key)
 
             # Started or sent again since it was read: it keeps its credits after all.
@@ -112,6 +112,6 @@ async def hold_again(invite, key: str) -> None:
 async def release_unfinished(rows: list) -> None:
     """Before a candidate's invites lose their email: the ones not finished give their credits
     back."""
-    for interview_id, email, status in rows:
+    for interview_id, email, status, stored in rows:
         if status in (*NOT_STARTED, InviteStatus.IN_PROCESS):
-            await billing.release_candidate(candidate_key(interview_id, email))
+            await billing.release_candidate(hold_key(interview_id, email, stored))

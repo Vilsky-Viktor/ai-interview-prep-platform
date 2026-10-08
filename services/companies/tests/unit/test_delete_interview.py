@@ -114,7 +114,7 @@ def test_deleting_an_interview_gives_back_unfinished_candidates_credits(client, 
     released = []
 
     async def unfinished(interview_id):
-        return [(INTERVIEW_ID, "carol@example.com", "invited")]
+        return [(INTERVIEW_ID, "carol@example.com", "invited", None)]
 
     async def release(key):
         released.append(key)

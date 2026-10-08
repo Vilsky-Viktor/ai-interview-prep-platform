@@ -1,4 +1,5 @@
 import uuid
+from types import SimpleNamespace
 
 import pytest
 from fastapi import HTTPException
@@ -34,14 +35,17 @@ def linked(monkeypatch):
     async def status_of(_interview_id, _email):
         return state["status"]
 
+    async def held(_interview_id, _email):
+        return state["status"], None
+
     async def hold(company_id, key):
         if state["broke"]:
             raise HTTPException(402, "Not enough credits. Top up to continue.")
 
         state["held"].append(key)
 
-    async def for_link(interview_id, email):
-        return email
+    async def for_link(interview_id, email, hold_key=None):
+        return SimpleNamespace(email=email, hold_key=hold_key)
 
     async def start(invite, interview, user_id):
         state["started"].append(invite)
@@ -49,6 +53,7 @@ def linked(monkeypatch):
         return InviteStartOut(sessions=[])
 
     monkeypatch.setattr(interviews, "get_by_link", get_by_link)
+    monkeypatch.setattr(invites, "held", held)
     monkeypatch.setattr(invites, "status_of", status_of)
     monkeypatch.setattr(invites, "for_link", for_link)
     monkeypatch.setattr(billing, "hold_candidate", hold)
@@ -64,8 +69,10 @@ def linked(monkeypatch):
 
 def test_anyone_signed_in_starts_through_the_link_and_is_charged_like_an_invite(client, linked):
     assert client.post("/links/abc/start").status_code == 200
-    assert linked["held"] == [f"{INTERVIEW.id}:cand@example.com"]
-    assert linked["started"] == ["Cand@Example.com"]
+    # Set aside under the new invite's own key.
+    (key,) = linked["held"]
+    assert key.startswith(f"{INTERVIEW.id}:cand@example.com:")
+    assert [invite.email for invite in linked["started"]] == ["Cand@Example.com"]
 
 
 def test_coming_back_continues_without_charging_again(client, linked):

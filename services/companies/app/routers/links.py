@@ -7,7 +7,7 @@ from prepza_common.auth import CurrentUser, OptionalUser
 from prepza_common.pause import refuse_if_paused
 
 from app.constants.invites import LINK_CLOSED, LINK_TOKEN_BYTES, NOT_STARTED, InviteStatus
-from app.helpers.candidates import candidate_key
+from app.helpers.candidates import hold_key, new_hold_key
 from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
 from app.integrations import billing
@@ -72,7 +72,12 @@ async def start_link(token: str, user: CurrentUser) -> InviteStartOut:
     if not user.email_verified:
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Sign in with a verified email")
 
-    current = await invites.status_of(interview.id, user.email)
+    current, stored = await invites.held(interview.id, user.email)
+    key = (
+        hold_key(interview.id, user.email, stored)
+        if current
+        else new_hold_key(interview.id, user.email)
+    )
 
     if current == InviteStatus.FINISHED:
         raise HTTPException(status.HTTP_409_CONFLICT, "This interview is already finished")
@@ -83,16 +88,18 @@ async def start_link(token: str, user: CurrentUser) -> InviteStartOut:
 
     if current is None or current in NOT_STARTED:
         try:
-            await billing.hold_candidate(
-                interview.company_id, candidate_key(interview.id, user.email)
-            )
+            await billing.hold_candidate(interview.company_id, key)
         except HTTPException as error:
             if error.status_code == status.HTTP_402_PAYMENT_REQUIRED:
                 raise HTTPException(status.HTTP_409_CONFLICT, LINK_CLOSED) from error
 
             raise
 
-    invite = await invites.for_link(interview.id, user.email)
+    invite = await invites.for_link(interview.id, user.email, hold_key=key)
+
+    # Started at the same moment by another request, whose own key and credits were kept.
+    if current is None and invite.hold_key != key:
+        await billing.release_candidate(key)
 
     if current is None:
         await track("candidate_joined_by_link", company_id=interview.company_id)

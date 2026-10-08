@@ -37,9 +37,12 @@ async def remove_member(member_id) -> None:
 
 
 async def candidate_invites(user_id: str, email: str) -> list[tuple]:
-    """(interview id, email, status) of every invite the user was sent or accepted."""
+    """(interview id, email, status, hold key) of every invite the user was sent or accepted."""
     query = select(
-        CandidateInvite.interview_id, CandidateInvite.email, CandidateInvite.status
+        CandidateInvite.interview_id,
+        CandidateInvite.email,
+        CandidateInvite.status,
+        CandidateInvite.hold_key,
     ).where(or_(CandidateInvite.user_id == user_id, CandidateInvite.email == email.lower()))
 
     async with Session() as session:
@@ -88,7 +91,7 @@ async def export(user_id: str, email: str) -> dict:
 
 
 async def expired_invites(before: datetime, limit: int) -> list[tuple]:
-    """(id, interview id, email, status) of up to `limit` invites last sent before `before`:
+    """(id, interview id, email, status, hold key) of up to `limit` invites last sent before `before`:
     kept CANDIDATE_RETENTION_DAYS after the latest send, as the privacy policy says, so sending
     one again keeps its results longer."""
     query = (
@@ -97,6 +100,7 @@ async def expired_invites(before: datetime, limit: int) -> list[tuple]:
             CandidateInvite.interview_id,
             CandidateInvite.email,
             CandidateInvite.status,
+            CandidateInvite.hold_key,
         )
         .where(CandidateInvite.sent_at < before)
         .order_by(CandidateInvite.sent_at)

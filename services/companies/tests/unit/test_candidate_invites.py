@@ -53,7 +53,11 @@ def invite_setup(monkeypatch):
     async def fake_company(_company_id):
         return company
 
-    async def fake_upsert(_interview_id, email, title, company, language, logo_path=None):
+    async def fake_upsert(
+        _interview_id, email, title, company, language, logo_path=None, hold_key=None
+    ):
+        # A new invite keeps the key its credits were set aside under.
+        invite.hold_key = invite.hold_key or hold_key
         # The storage saves the email's event in the invite's transaction.
         sent.append(email)
         invited.add(email)
@@ -61,7 +65,10 @@ def invite_setup(monkeypatch):
         return invite
 
     async def fake_status(_interview_id, email):
-        return "invited" if email in invited else None
+        return (await fake_held(_interview_id, email))[0]
+
+    async def fake_held(_interview_id, email):
+        return ("invited", invite.hold_key) if email in invited else (None, None)
 
     async def fake_hold(company_id, key):
         # Billing sets credits aside once per key, however often it's asked.
@@ -74,6 +81,7 @@ def invite_setup(monkeypatch):
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(invites, "upsert", fake_upsert)
+    monkeypatch.setattr(invites, "held", fake_held)
     monkeypatch.setattr(invites, "status_of", fake_status)
     monkeypatch.setattr(billing, "hold_candidate", fake_hold)
     monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
@@ -95,7 +103,9 @@ def test_inviting_the_same_email_again_resends_the_invite(client, monkeypatch):
 
     assert first.status_code == second.status_code == 201
     # Credits are set aside once for the candidate; the resend costs nothing more.
-    assert used == [f"{INTERVIEW_ID}:carol@example.com"]
+    # Set aside once, under the invite's own key.
+    assert len(used) == 1
+    assert used[0].startswith(f"{INTERVIEW_ID}:carol@example.com:")
     assert first.json()["id"] == second.json()["id"]
     assert sent == ["carol@example.com", "carol@example.com"]
 

@@ -232,3 +232,41 @@ def test_a_finished_interview_delivered_twice_notifies_the_company_once(run):
             )
 
     assert run(scenario()) == 1
+
+
+def test_a_candidate_invited_again_after_removal_is_held_under_a_new_key(run, monkeypatch):
+    # A finished candidate removed and invited again must be charged again: billing keeps a
+    # charged key charged, so the new invite needs its own key.
+    from prepza_common.user import User
+
+    from app.integrations import billing
+    from app.services import candidate_invites
+    from app.storage import interviews as interview_storage
+
+    held = []
+
+    async def hold(company_id, key):
+        held.append(key)
+
+    monkeypatch.setattr(billing, "hold_candidate", hold)
+    owner = User(uid="owner", email="owner@example.com", email_verified=True)
+
+    async def scenario():
+        found = await interview()
+        await interview_storage.set_set_id(found.id, uuid.uuid4())
+        found = await interview_storage.get(found.id)
+        company = await companies.get(found.company_id)
+        first = await candidate_invites.invite(found, company, owner, "dana@example.com")
+        resent = await candidate_invites.invite(found, company, owner, "dana@example.com")
+        await invites.remove(first.id)
+        again = await candidate_invites.invite(found, company, owner, "dana@example.com")
+
+        return first, resent, again, await invites.held(found.id, "dana@example.com")
+
+    first, resent, again, (status, stored) = run(scenario())
+
+    assert first.hold_key and first.hold_key == resent.hold_key
+    assert again.hold_key != first.hold_key
+    # The resend holds the same key again (billing does it once); the new invite a new one.
+    assert held == [first.hold_key, first.hold_key, again.hold_key]
+    assert (status, stored) == (InviteStatus.INVITED, again.hold_key)

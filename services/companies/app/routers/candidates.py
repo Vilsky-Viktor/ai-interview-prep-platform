@@ -17,7 +17,7 @@ from app.constants.invites import (
     CandidateSort,
     InviteStatus,
 )
-from app.helpers.candidates import candidate_key, passed, section_passed
+from app.helpers.candidates import hold_key, passed, section_passed
 from app.helpers.interviews import (
     attach_set,
     interview_title,
@@ -102,7 +102,7 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
     await require_editor(user, interview.company_id)
 
     if invite.status != InviteStatus.FINISHED:
-        await billing.release_candidate(candidate_key(interview.id, invite.email))
+        await billing.release_candidate(hold_key(interview.id, invite.email, invite.hold_key))
 
     if invite.status not in NOT_STARTED:
         await rounds.delete_invite_sessions([invite.id])

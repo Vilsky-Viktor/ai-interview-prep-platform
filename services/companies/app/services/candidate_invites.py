@@ -4,7 +4,7 @@ from prepza_common.user import User
 
 from app.config.settings import settings
 from app.constants.invites import NOT_STARTED
-from app.helpers.candidates import candidate_key
+from app.helpers.candidates import hold_key, new_hold_key
 from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
 from app.integrations import billing
@@ -29,8 +29,8 @@ async def invite(interview: Interview, company: Company, user: User, email: str)
         settings.email_daily_limit,
         settings.email_recipient_daily_limit,
     )
-    current = await invites.status_of(interview.id, email)
-    key = candidate_key(interview.id, email)
+    current, stored = await invites.held(interview.id, email)
+    key = hold_key(interview.id, email, stored) if current else new_hold_key(interview.id, email)
 
     # A candidate who hasn't started has credits set aside: new, or sent again after expiring.
     if current is None or current in NOT_STARTED:
@@ -40,7 +40,13 @@ async def invite(interview: Interview, company: Company, user: User, email: str)
 
     try:
         invite = await invites.upsert(
-            interview.id, email, title, company.name, interview.language, logo_path(company)
+            interview.id,
+            email,
+            title,
+            company.name,
+            interview.language,
+            logo_path(company),
+            hold_key=key,
         )
     except Exception:
         # A brand-new invite that couldn't be saved gives its credits back.
@@ -48,6 +54,10 @@ async def invite(interview: Interview, company: Company, user: User, email: str)
             await billing.release_candidate(key)
 
         raise
+
+    # Invited at the same moment by another request, whose own key and credits were kept.
+    if current is None and invite.hold_key != key:
+        await billing.release_candidate(key)
 
     if current is None:
         await track("candidate_invited", user_id=user.uid, company_id=company.id)

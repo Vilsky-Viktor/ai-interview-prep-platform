@@ -39,7 +39,11 @@ def finished(monkeypatch, status=InviteStatus.IN_PROCESS, pass_mark=70):
     """The invite, and the notifications saved as it's finished (its candidate.finished event
     in `invite.result`)."""
     invite = SimpleNamespace(
-        id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="carol@example.com", status=status
+        id=uuid.uuid4(),
+        interview_id=INTERVIEW_ID,
+        email="carol@example.com",
+        status=status,
+        hold_key=None,
     )
     notices = []
 
@@ -170,7 +174,9 @@ def test_a_deleted_candidate_is_left_alone(ledger, monkeypatch):
 
 
 def test_invites_never_started_expire_and_give_their_credits_back(ledger, monkeypatch):
-    stale = SimpleNamespace(id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="dave@example.com")
+    stale = SimpleNamespace(
+        id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="dave@example.com", hold_key=None
+    )
     waiting = [stale]
     asked = []
 
@@ -196,7 +202,9 @@ def test_invites_never_started_expire_and_give_their_credits_back(ledger, monkey
 
 
 def test_an_invite_started_or_sent_again_while_expiring_keeps_its_credits(ledger, monkeypatch):
-    revived = SimpleNamespace(id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="eve@example.com")
+    revived = SimpleNamespace(
+        id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="eve@example.com", hold_key=None
+    )
     waiting = [revived]
 
     async def fake_expiring(before, limit):
@@ -231,7 +239,9 @@ def test_an_invite_started_or_sent_again_while_expiring_keeps_its_credits(ledger
 
 
 def test_an_invite_another_run_expired_meanwhile_keeps_nothing_set_aside(ledger, monkeypatch):
-    stale = SimpleNamespace(id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="fay@example.com")
+    stale = SimpleNamespace(
+        id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="fay@example.com", hold_key=None
+    )
     waiting = [stale]
 
     async def fake_expiring(before, limit):
@@ -263,9 +273,9 @@ def test_a_leaving_candidate_frees_only_unfinished_invites(ledger):
     asyncio.run(
         candidate_billing.release_unfinished(
             [
-                (INTERVIEW_ID, "a@example.com", InviteStatus.INVITED),
-                (INTERVIEW_ID, "b@example.com", InviteStatus.IN_PROCESS),
-                (INTERVIEW_ID, "c@example.com", InviteStatus.FINISHED),
+                (INTERVIEW_ID, "a@example.com", InviteStatus.INVITED, None),
+                (INTERVIEW_ID, "b@example.com", InviteStatus.IN_PROCESS, None),
+                (INTERVIEW_ID, "c@example.com", InviteStatus.FINISHED, None),
             ]
         )
     )

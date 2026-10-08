@@ -1,5 +1,6 @@
 import uuid
 from datetime import UTC, datetime
+from types import SimpleNamespace
 
 import pytest
 from prepza_common.auth import current_user
@@ -73,14 +74,14 @@ def linked(monkeypatch, status):
     async def get_by_link(token):
         return INTERVIEW
 
-    async def status_of(interview_id, email):
-        return status
+    async def held(interview_id, email):
+        return status, None
 
-    async def for_link(interview_id, email):
-        return email
+    async def for_link(interview_id, email, hold_key=None):
+        return SimpleNamespace(email=email, hold_key=hold_key)
 
     monkeypatch.setattr(interviews, "get_by_link", get_by_link)
-    monkeypatch.setattr(invites, "status_of", status_of)
+    monkeypatch.setattr(invites, "held", held)
     monkeypatch.setattr(invites, "for_link", for_link)
 
 
