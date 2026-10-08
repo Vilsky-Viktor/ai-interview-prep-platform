@@ -1,6 +1,6 @@
 # Using prepza responsibly: instructions for companies
 
-Version: 2026-10-06\
+Version: 2026-10-08\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai
 
 For owners and admins of a company on prepza. These are prepza's instructions for use. They don't
@@ -24,9 +24,9 @@ replace advice on the employment and data protection law that applies to you.
 - Not a qualification or certificate.
 - Not exactly comparable between candidates: each one gets a different random set of questions from
   the same bank, so small differences (a few points) can come from the draw.
-- Not free of error: questions are written by AI. They are checked before release and improved as
-  answers come in, but a question can still be wrong or unclear, especially in a new interview
-  before about 30 people have answered it.
+- Not free of error: questions are written by AI. A sample of answer keys in each topic is checked
+  before release, and questions are improved as answers and reports come in, but a question can
+  still be wrong or unclear, especially in a new interview before about 30 people have answered it.
 - Also a test of **reading speed and language** when the interview is timed and not in the
   candidate's first language.
 
@@ -48,6 +48,10 @@ People at your company make the hiring decision. prepza never tells a candidate 
 - In the EU, a decision based solely on automated processing that significantly affects a candidate
   is restricted (GDPR Art. 22). Rejecting automatically everyone below the passing grade may count
   as one.
+- The same applies to results prepza sends to the tools you connect: your applicant tracking
+  system, Slack, or your own systems through the API and web hooks receive the grade and whether
+  it reached the passing grade. **Don't set them up to reject candidates automatically** on those
+  results; the human review above applies there too.
 
 ## 4. Choosing a passing grade
 

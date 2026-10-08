@@ -1,6 +1,6 @@
 # Data protection impact assessment (DPIA): template for companies using prepza
 
-Version: 2026-10-06\
+Version: 2026-10-08\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai
 
 For companies that invite candidates through prepza. Your company is the **controller** of
@@ -67,6 +67,13 @@ multiple-choice test, as one input to a hiring decision made by **[COMPANY: who]
 - Upstash (short-lived counters for limits and live updates).
 - Paddle (payments; receives no candidate data).
 
+**Tools you connect** (your own recipients, not prepza's sub-processors; delete the ones you don't
+use): **[COMPANY: your applicant tracking system (Workable, Greenhouse, Teamtailor, Recruitee or
+Breezy HR), your Slack workspace, your own systems through prepza's API and web hooks]**. They
+receive candidates' emails, grades, whether the grade reached the passing grade, integrity signals
+and a link to the results; your applicant tracking system also sends prepza the email and id of
+each candidate you move to a linked stage, kept 12 months.
+
 **International transfers.** Some sub-processors are in the US. Transfers outside the EU are
 covered by the EU-US Data Privacy Framework or the European Commission's standard contractual
 clauses (see the DPA).
@@ -99,7 +106,7 @@ Likelihood and severity: **[COMPANY]** to rate. Starting points from prepza:
 
 | Risk | Typical source | prepza controls | Your controls **[COMPANY]** |
 |---|---|---|---|
-| Unfair rejection from a wrong or ambiguous question | AI-written content | Your topic review and trial run; answer keys checked before release; statistics and reports flag questions for a fix, and corrected keys re-mark past answers | |
+| Unfair rejection from a wrong or ambiguous question | AI-written content | Your topic review and trial run; a sample of answer keys per topic checked before release; statistics and reports flag questions for a fix, and corrected keys re-mark past answers | |
 | Discrimination (age, disability, language, origin) | Time pressure, language, content | Knowledge questions only; questions flagged when too slow or not discriminating; extra time | |
 | Over-reliance on the grade or signals | Ranked list, green/red | All answers visible; signals as counts; no automatic decisions | |
 | Wrongful cheating suspicion | Page-leave and fast-answer signals | Shown as hints with the question on screen | |

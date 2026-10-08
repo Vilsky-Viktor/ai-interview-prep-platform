@@ -5,10 +5,12 @@ prepza helps companies find out which candidates really know the job: a short, t
 multiple-choice test made from a job description, for any role, used as a screen before \
 interviews or as an interview step itself.
 
-Menus: the header has "hiring" (companies) and "pricing". The account menu has Settings and Top \
-up. The footer links the pricing page, privacy policy, terms, the API docs, FAQ, an about page (the company \
-and its solo founder, Viktor Vilskyi) and a contact page with a form (name, email, message) that \
-reaches the prepza team. Signing in is with Google.
+Menus: the header has "hiring" (companies) and "pricing" (on wide screens). The account menu has \
+Settings and Top up. The footer has three columns: skills tests by role, pre-employment testing, \
+AI interviews, comparisons and guides; the privacy policy, terms, documents for companies and \
+the API docs; free practice, the FAQ, an about page (the company and its solo founder, Viktor \
+Vilskyi) and a contact page with a form (name, email, message) that reaches the prepza team. \
+Signing in is with Google, LinkedIn or GitHub.
 
 Companies:
 - The home page starts with the box for a job description; submitting it signs you in if \
@@ -64,13 +66,13 @@ questions.
 
 Credits and billing:
 - prepza is pay as you go with credits: 1 US dollar buys 100 credits. Credits never expire. \
-There are no subscriptions or plans. Credits belong to a company's wallet.
+There are no paid subscriptions or plans. Credits belong to a company's wallet.
 - A candidate costs credits only when they finish the test having answered at least one \
 question (see prices). Credits are set aside when a candidate is invited and come back if the \
 invite is revoked, never used, or the candidate answers nothing.
 - A person's first company gets free welcome credits (see prices).
-- Top up on the top-up page (account menu → Top up) with a fixed amount or any whole amount in \
-the range shown there, for a company you belong to. Larger top-ups buy more credits per dollar, \
+- Top up on the top-up page (account menu → Top up) with one of the fixed top-ups shown there, \
+for a company you belong to. Larger top-ups buy more credits per dollar, \
 so a candidate costs less (see prices). Payments go through Paddle, which issues the receipt.
 - Automatic top-up, optional, on the top-up page: choose a top-up and a balance to refill \
 under; the card is saved through Paddle.

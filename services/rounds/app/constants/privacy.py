@@ -20,8 +20,9 @@ PRIVACY_SECTIONS = [
             "Companies: the company's name, logo and website, and the email domain it was verified with.",
             "Practice: if you take free practice interviews, your answers, grades and how long each answer took. Only you see them.",
             "Contact messages: the name, email address and message you send through the contact page.",
-            "Interviews, if a company invites you: the email you were invited with, your answers, how long each answer took, when you left the interview page or copied text during it, any extra time the company gave you (no reason is recorded), and your ratings and reports of questions. You are told about this before you start.",
+            "Interviews, if a company invites you: the email you were invited with, your answers, how long each answer took, when you left the interview page, copied text or answered too fast to have read the question, any extra time the company gave you (no reason is recorded), and your ratings and reports of questions. You are told about this before you start.",
             "Technical: error reports without your IP address or email, and short-lived server logs needed to run and secure the service.",
+            "Tools a company connects: the keys or tokens its owner or admin creates in its applicant tracking system (Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR) or Slack, stored encrypted; a one-way hash of each prepza API key and the addresses of its web hooks; and, from its applicant tracking system, the email and id of each candidate it sends to prepza.",
             "Referrals: whose referral link you or your company came through, and whether it has been rewarded.",
             "Usage statistics: steps such as signing up, a company being created, a candidate invited or a top-up, with counts like a score or an amount. Your account id is replaced by a code that can't be traced back to you, and no names, emails or texts are included.",
         ],
@@ -33,13 +34,13 @@ PRIVACY_SECTIONS = [
             "To keep prepza secure and working: preventing abuse, rate limits, error reports, and statistics that improve question quality (our legitimate interest).",
             "Usage statistics show which parts of prepza help people and which prices and limits work, so we can improve them (our legitimate interest).",
             "Showing a company as verified, by checking its website against the email domains of its owners and admins (our legitimate interest).",
-            "Interview results, timings, page-leave and copy signals help the hiring company assess your answers fairly (the company's legitimate interest). People at the company make the hiring decision; prepza makes no decision about you on its own. You can ask the company for a person to review your result, and for an accommodation such as extra time before you start.",
+            "Interview results, timings and integrity signals help the hiring company assess your answers fairly (the company's legitimate interest). People at the company make the hiring decision; prepza makes no decision about you on its own. You can ask the company for a person to review your result, and for an accommodation such as extra time before you start.",
         ],
     },
     {
         "heading": "Who we share it with",
         "paragraphs": [
-            "We share data only with the service providers that run prepza for us, under agreements that protect it:",
+            "We share data with the service providers that run prepza for us, under agreements that protect it:",
         ],
         "items": [
             "Google (Firebase Authentication): sign-in. LinkedIn and GitHub only confirm who you are when you sign in with them; we don't receive anything else from them.",
@@ -52,6 +53,12 @@ PRIVACY_SECTIONS = [
         ],
     },
     {
+        "heading": "Tools a company connects",
+        "paragraphs": [
+            "A company can connect its own tools to prepza, and then we send them data on its instruction, as part of the service it asked for: its applicant tracking system (Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR) receives your grade, whether it reached the passing grade, the integrity signals and a link to your results; a Slack channel it chose receives its notifications, such as that you finished and your grade; and its own systems, through prepza's API or web hooks, receive your email, progress, grade and integrity signals. The company chooses and controls these tools, which may be outside the EU, and is responsible for how they use your data.",
+        ],
+    },
+    {
         "heading": "Transfers outside the EU",
         "paragraphs": [
             "Some of these providers are in the United States. Transfers are covered by the EU-US Data Privacy Framework or the European Commission's standard contractual clauses.",
@@ -61,7 +68,10 @@ PRIVACY_SECTIONS = [
         "heading": "How long we keep it",
         "items": [
             "Your account and everything in it: until you delete your account.",
-            "Interview results, timings, page-leave and copy signals: 12 months after the invitation was sent, then deleted automatically.",
+            "Interview results, timings and integrity signals: 12 months after the invitation was last sent, then deleted automatically.",
+            "Candidates an applicant tracking system sends: their email and id there, 12 months after they arrive.",
+            "Notifications in the app, such as that a candidate finished: 90 days.",
+            "The record of a company's decisions, such as removing a candidate: 24 months.",
             "Practice rounds: until you delete your account.",
             "A report emailed from prepza: the PDF is kept only to send the email, and deleted at most 7 days later.",
             "Pasted job descriptions in our generation records: 90 days after the generation finishes. The interview made from them stays in the company's account until it's deleted.",
