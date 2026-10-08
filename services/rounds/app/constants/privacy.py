@@ -1,7 +1,7 @@
 from app.constants.legal import COMPANY
 
 # The privacy policy, in English only: it's a legal text, and a translation would need its own
-# legal review. The FAQ page's chat answers from it too.
+# legal review. The help chat (the signed-out assistant) answers from it too.
 PRIVACY_INTRO = f"This policy explains what personal data prepza collects, why, how long we keep it, and the rights you have. prepza is run by {COMPANY['name']} (registry code {COMPANY['registry_code']}), {COMPANY['address']}."
 
 PRIVACY_SECTIONS = [
@@ -16,7 +16,8 @@ PRIVACY_SECTIONS = [
         "heading": "What we collect",
         "items": [
             "Account: your name, email address, profile photo and account id, from the Google, LinkedIn or GitHub account you sign in with, and which of them are linked to your account.",
-            "What you give us: job descriptions you paste and the interviews made from them, the emails of the candidates you invite and of the people you send a report to, and your ratings and reports of questions. Questions you ask the help chat on the FAQ page are used only to answer them and aren't stored.",
+            "What you give us: job descriptions you paste and the interviews made from them, the emails of the candidates you invite and of the people you send a report to, and your ratings and reports of questions.",
+            "The assistant: when you're signed in, what you write or say to it (a voice message is turned into text and never stored) and its answers, so you can come back to a chat. It doesn't keep what it read to answer you, such as candidates' results: when you open a chat again, it fetches them again with your current access. If you aren't signed in, your questions are used only to answer them and aren't stored.",
             "Companies: the company's name, logo and website, and the email domain it was verified with.",
             "Practice: if you take free practice interviews, your answers, grades and how long each answer took. Only you see them.",
             "Contact messages: the name, email address and message you send through the contact page.",
@@ -52,7 +53,7 @@ PRIVACY_SECTIONS = [
         ],
         "items": [
             "Google (Firebase Authentication): sign-in. LinkedIn and GitHub only confirm who you are when you sign in with them; we don't receive anything else from them.",
-            "OpenAI: writing questions and help chat answers from the text you provide, and checking reported questions (only the reasons given, never the comments). Under OpenAI's API terms, this data is not used to train their models.",
+            "OpenAI: writing questions from the text you provide; the assistant's answers, from your questions and the data it reads with your access to answer them; turning voice messages into text; and checking reported questions (only the reasons given, never the comments). Under OpenAI's API terms, this data is not used to train their models.",
             "Resend: sending emails: invites and reminders to candidates, reports, emails to company members such as the activity digest, and contact messages.",
             "Sentry: error reports, with emails removed.",
             "Google Cloud, our hosting provider, which stores the data.",
@@ -86,6 +87,7 @@ PRIVACY_SECTIONS = [
             "Interview results, timings and integrity signals: 12 months after the invitation was last sent, then deleted automatically.",
             "Candidates an applicant tracking system sends: their email and id there, 12 months after they arrive.",
             "Notifications in the app, such as that a candidate finished: 90 days.",
+            "Your chats with the assistant: 90 days after their last message. You can delete a chat at any time, and they're deleted with your account or the company they're about.",
             "The record of a company's decisions, such as removing a candidate: 24 months.",
             "Practice rounds: until you delete your account.",
             "A report emailed from prepza: the PDF is kept only to send the email, and deleted at most 7 days later.",

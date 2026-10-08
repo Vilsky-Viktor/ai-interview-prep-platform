@@ -31,12 +31,16 @@ def before_send(event, hint):
     return scrub(event)
 
 
-def init_sentry(service: str, integrations: list | None = None) -> None:
+def init_sentry(
+    service: str, integrations: list | None = None, local_variables: bool = True
+) -> None:
     """Reports errors to Sentry when SENTRY_DSN is set; local development and tests send nothing.
 
     No personal data or secrets: no IPs, cookies, headers or request bodies; emails are scrubbed
     and URLs cut to their host everywhere in an error or a trace, its breadcrumbs and spans
-    included. A signed-in user is known only by their id (see auth.current_user).
+    included. A signed-in user is known only by their id (see auth.current_user). Without
+    `local_variables`, a stack trace carries no variables' values (the assistant's hold
+    conversations).
     """
     dsn = os.getenv("SENTRY_DSN")
 
@@ -53,6 +57,7 @@ def init_sentry(service: str, integrations: list | None = None) -> None:
         ),
         send_default_pii=False,
         max_request_body_size="never",
+        include_local_variables=local_variables,
         integrations=integrations or [],
         before_send=before_send,
         before_send_transaction=before_send,

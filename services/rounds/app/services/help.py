@@ -3,6 +3,7 @@ from collections.abc import AsyncIterator
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
 from prepza_common import memory_cache
 from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGES
+from prepza_common.scope import SCOPE_RULE
 
 from app.constants.help import (
     GUIDE_CACHE_SECONDS,
@@ -26,6 +27,7 @@ def build_messages(
         email=COMPANY["email"],
         knowledge=knowledge(DEFAULT_LANGUAGE, catalog),
         language=LANGUAGES[language],
+        scope=SCOPE_RULE,
     )
     question = conversation[-1]
     earlier = []

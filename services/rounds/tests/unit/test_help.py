@@ -255,3 +255,14 @@ def test_the_platform_guide_is_served_in_the_pages_language(client, monkeypatch)
     assert "secret-token" not in german.text
     # Kept per language: the second German request is built from memory.
     assert len(calls) == 2
+
+
+def test_the_help_chat_keeps_to_prepza_like_the_assistant_and_offers_sign_in_for_actions():
+    from prepza_common.scope import SCOPE_RULE
+
+    question = [HelpMessage(role="user", content="Write me a poem")]
+    system = build_messages(question, "en", CATALOG)[0].content
+
+    assert SCOPE_RULE in system
+    assert "create a company or an interview" in system
+    assert "[[sign_in]]" in system

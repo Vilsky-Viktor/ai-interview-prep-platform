@@ -63,3 +63,12 @@ def test_with_a_dsn_no_personal_data_is_sent(monkeypatch):
     assert options["server_name"] == "rounds"
     assert options["before_send"] is sentry.before_send
     assert options["before_send_transaction"] is sentry.before_send
+
+
+def test_a_service_can_keep_variables_values_out_of_stack_traces(monkeypatch):
+    monkeypatch.setenv("SENTRY_DSN", "https://key@example.ingest.sentry.io/1")
+
+    with mock.patch.object(sentry_sdk, "init") as init:
+        init_sentry("assistant", local_variables=False)
+
+    assert init.call_args.kwargs["include_local_variables"] is False
