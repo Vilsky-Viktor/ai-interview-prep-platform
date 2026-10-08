@@ -695,6 +695,7 @@
   "landing": {
     "more": "Як це працює",
     "demos": "Демо",
+    "demosTooltip": "Дивитися демо на YouTube",
     "how": {
       "title": "Три кроки до наступного найму",
       "paste": {

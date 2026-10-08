@@ -695,6 +695,7 @@
   "landing": {
     "more": "Paano ito gumagana",
     "demos": "Mga demo",
+    "demosTooltip": "Panoorin ang mga demo sa YouTube",
     "how": {
       "title": "Tatlong hakbang sa susunod mong hire",
       "paste": {

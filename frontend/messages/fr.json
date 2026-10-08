@@ -695,6 +695,7 @@
   "landing": {
     "more": "Comment ça marche",
     "demos": "Démos",
+    "demosTooltip": "Voir les démos sur YouTube",
     "how": {
       "title": "Trois étapes vers votre prochain recrutement",
       "paste": {

@@ -695,6 +695,7 @@
   "landing": {
     "more": "Cómo funciona",
     "demos": "Demos",
+    "demosTooltip": "Ver demos en YouTube",
     "how": {
       "title": "Tres pasos para tu próxima contratación",
       "paste": {

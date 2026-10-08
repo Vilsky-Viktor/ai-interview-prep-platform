@@ -695,6 +695,7 @@
   "landing": {
     "more": "Cách hoạt động",
     "demos": "Demo",
+    "demosTooltip": "Xem demo trên YouTube",
     "how": {
       "title": "Ba bước để tuyển được người tiếp theo",
       "paste": {

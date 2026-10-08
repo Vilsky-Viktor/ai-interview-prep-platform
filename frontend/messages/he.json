@@ -695,6 +695,7 @@
   "landing": {
     "more": "איך זה עובד",
     "demos": "הדגמות",
+    "demosTooltip": "צפו בהדגמות ב-YouTube",
     "how": {
       "title": "שלושה צעדים לגיוס הבא שלכם",
       "paste": {

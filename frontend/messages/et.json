@@ -695,6 +695,7 @@
   "landing": {
     "more": "Kuidas see töötab",
     "demos": "Demod",
+    "demosTooltip": "Vaata demosid YouTube'is",
     "how": {
       "title": "Kolm sammu järgmise töötajani",
       "paste": {

@@ -695,6 +695,7 @@
   "landing": {
     "more": "使い方",
     "demos": "デモ",
+    "demosTooltip": "YouTube でデモを見る",
     "how": {
       "title": "次の採用まで、3 ステップ",
       "paste": {

@@ -695,6 +695,7 @@
   "landing": {
     "more": "Как это работает",
     "demos": "Демо",
+    "demosTooltip": "Смотреть демо на YouTube",
     "how": {
       "title": "Три шага до следующего найма",
       "paste": {

@@ -695,6 +695,7 @@
   "landing": {
     "more": "Nasıl çalışır",
     "demos": "Demolar",
+    "demosTooltip": "Demoları YouTube'da izle",
     "how": {
       "title": "Bir sonraki işe alımınıza üç adım",
       "paste": {

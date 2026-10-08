@@ -695,6 +695,7 @@
   "landing": {
     "more": "Hoe het werkt",
     "demos": "Demo's",
+    "demosTooltip": "Demo's bekijken op YouTube",
     "how": {
       "title": "Drie stappen naar je volgende nieuwe medewerker",
       "paste": {

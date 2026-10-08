@@ -695,6 +695,7 @@
   "landing": {
     "more": "چطور کار می‌کند",
     "demos": "دموها",
+    "demosTooltip": "تماشای دموها در YouTube",
     "how": {
       "title": "سه گام تا استخدام بعدی شما",
       "paste": {

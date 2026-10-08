@@ -695,6 +695,7 @@
   "landing": {
     "more": "So funktioniert's",
     "demos": "Demos",
+    "demosTooltip": "Demos auf YouTube ansehen",
     "how": {
       "title": "Drei Schritte zu deiner nächsten Einstellung",
       "paste": {

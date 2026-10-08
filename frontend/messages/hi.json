@@ -695,6 +695,7 @@
   "landing": {
     "more": "यह कैसे काम करता है",
     "demos": "डेमो",
+    "demosTooltip": "YouTube पर डेमो देखें",
     "how": {
       "title": "आपकी अगली हायरिंग तक तीन कदम",
       "paste": {
