@@ -43,7 +43,8 @@
     "preEmploymentTesting": "招聘前测评",
     "aiInterviews": "AI 面试",
     "compare": "对比",
-    "guides": "指南"
+    "guides": "指南",
+    "apiDocs": "API 文档"
   },
   "signIn": {
     "title": "登录",
@@ -1055,7 +1056,8 @@
     "bzStepCreate": "以能看到所有职位的管理员身份创建 API 密钥：密钥以你的身份操作，结果也以你的名义写入。Breezy 的 API 和 Webhook 包含在其 Pro 套餐中。",
     "bzStepPaste": "将密钥粘贴到下方。我们会自行在 Breezy HR 中添加 Webhook。",
     "atsGroup": "ATS",
-    "messagingGroup": "消息应用"
+    "messagingGroup": "消息应用",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "添加到 Slack",
@@ -1081,5 +1083,71 @@
     "stepChannel": "选择团队查看通知的频道，例如 #hiring，然后点击允许。",
     "stepKinds": "回到这里，选择哪些通知发送到该频道：候选人完成面试、邀请未送达等。",
     "stepPrivacy": "prepza 只能在该频道发消息。它无法读取你的 Slack，断开连接后即会被移除。"
+  },
+  "api": {
+    "name": "API",
+    "rowText": "用于连接你自己平台的密钥和 Webhook。",
+    "counts": "{keys, plural, other {# 个密钥}} · {webhooks, plural, other {# 个 Webhook}}",
+    "docs": "API 文档",
+    "keysTitle": "API 密钥",
+    "keysText": "密钥会以创建者的身份读取你的面试和候选人，并邀请候选人。",
+    "noKeys": "还没有密钥。",
+    "newKey": "新建密钥",
+    "newKeyTitle": "新建 API 密钥",
+    "keyName": "密钥名称，例如 招聘官网",
+    "expiresIn": "有效期",
+    "expiries": {
+      "1": "1 个月",
+      "3": "3 个月",
+      "6": "6 个月",
+      "12": "12 个月",
+      "never": "永不过期"
+    },
+    "neverWarning": "永不过期的密钥在你删除前一直有效，一旦泄露就可能被无限期使用。除非你会自行定期轮换密钥，否则请选择有效期。",
+    "keyCreatedTitle": "你的新密钥",
+    "keyCreatedText": "请立即复制并妥善保管：它不会再次显示。",
+    "copyKey": "复制密钥",
+    "keyCopied": "密钥已复制",
+    "created": "创建于 {date}",
+    "lastUsed": "上次使用 {date}",
+    "expires": "{date} 过期",
+    "neverExpires": "永不过期",
+    "expired": "已过期",
+    "neverUsed": "从未使用",
+    "removeKey": "删除密钥",
+    "removeKeyTitle": "删除此密钥？",
+    "removeKeyText": "所有使用“{name}”的地方都会立即停止工作。",
+    "webhooksTitle": "Webhook",
+    "webhooksText": "候选人完成后，prepza 会将其结果发送到这些地址，并用各自的签名密钥签名。",
+    "noWebhooks": "还没有 Webhook。",
+    "addWebhook": "添加 Webhook",
+    "addWebhookTitle": "新建 Webhook",
+    "webhookUrl": "HTTPS 地址，例如 https://example.com/prepza",
+    "webhookCreatedTitle": "你的 Webhook 签名密钥",
+    "webhookCreatedText": "用它校验每个请求的签名（参见 API 文档）。请立即复制：它不会再次显示。",
+    "copySecret": "复制签名密钥",
+    "secretCopied": "签名密钥已复制",
+    "added": "添加于 {date}",
+    "removeWebhook": "删除 Webhook",
+    "removeWebhookTitle": "删除此 Webhook？",
+    "removeWebhookText": "{url} 将不再接收事件。",
+    "createFailed": "无法创建。",
+    "removeFailed": "无法删除。"
+  },
+  "apiDocs": {
+    "title": "API 文档",
+    "intro": "将 prepza 连接到你自己的平台：列出你的面试、邀请候选人并获取他们的结果。",
+    "englishOnly": "此页面仅提供英文版。",
+    "baseUrl": "基础 URL",
+    "copyBaseUrl": "复制 URL",
+    "baseUrlCopied": "URL 已复制",
+    "endpoints": "接口",
+    "webhooks": "Webhook 事件",
+    "objects": "对象",
+    "parameters": "参数",
+    "body": "请求体",
+    "returns": "返回",
+    "errors": "错误",
+    "required": "必填"
   }
 }

@@ -2,6 +2,7 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
+import { ApiRow } from "@/components/company/api-row"
 import { AtsConnectionRow } from "@/components/company/ats-connection"
 import { SlackRow } from "@/components/company/slack-connection"
 import { CompanyHeader } from "@/components/company/company-header"
@@ -10,13 +11,14 @@ import { ATS_PROVIDERS } from "@/constants/ats"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
+import type { ApiSettings } from "@/types/api-access"
 import type { AtsIntegrations, Company } from "@/types/company"
 import type { SlackOverview } from "@/types/notifications"
 
 export const generateMetadata = () => translatedTitle("company", "integrations")
 
-/** The company's integrations: its ATSs and Slack, a row each laid out like the companies list,
- * in two groups, messaging first; each opens its own page. Everyone in the company sees them; owners and admins change them. */
+/** The company's integrations: Slack, its ATSs and the API, a row each laid out like the
+ * companies list, in three groups, messaging first; each opens its own page. Everyone in the company sees them; owners and admins change them. */
 export default async function IntegrationsPage({
   params,
 }: {
@@ -28,7 +30,7 @@ export default async function IntegrationsPage({
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
     : null
-  const [integrations, slack] = company
+  const [integrations, slack, api] = company
     ? await Promise.all([
         serverFetch<AtsIntegrations>(
           `/ats/connections?company_id=${companyId}`
@@ -36,8 +38,9 @@ export default async function IntegrationsPage({
         serverFetch<SlackOverview>(
           `/notifications/slack?company_id=${companyId}`
         ),
+        serverFetch<ApiSettings>(`/v1/manage?company_id=${companyId}`),
       ])
-    : [null, null]
+    : [null, null, null]
 
   if (!signedIn) {
     return (
@@ -105,6 +108,16 @@ export default async function IntegrationsPage({
           </p>
         )}
       </section>
+      {api && (
+        <section className="space-y-6">
+          <h2 className="font-heading text-2xl font-medium normal-case">
+            {t("apiGroup")}
+          </h2>
+          <ul className="divide-y overflow-hidden rounded-2xl border">
+            <ApiRow companyId={companyId} settings={api} />
+          </ul>
+        </section>
+      )}
     </main>
   )
 }

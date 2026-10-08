@@ -43,7 +43,8 @@
     "preEmploymentTesting": "채용 전 테스트",
     "aiInterviews": "AI 면접",
     "compare": "비교",
-    "guides": "가이드"
+    "guides": "가이드",
+    "apiDocs": "API 문서"
   },
   "signIn": {
     "title": "로그인",
@@ -1055,7 +1056,8 @@
     "bzStepCreate": "모든 채용 공고를 볼 수 있는 관리자 계정으로 API 키를 만드세요. 키는 본인 명의로 동작하고, 결과도 본인 명의로 기록됩니다. Breezy의 API와 웹훅은 Pro 요금제에서 제공됩니다.",
     "bzStepPaste": "아래에 키를 붙여 넣으세요. Breezy HR의 웹훅은 저희가 직접 추가합니다.",
     "atsGroup": "ATS",
-    "messagingGroup": "메신저"
+    "messagingGroup": "메신저",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Slack에 추가",
@@ -1081,5 +1083,71 @@
     "stepChannel": "팀이 알림을 확인할 채널(예: #hiring)을 선택하고 허용하세요.",
     "stepKinds": "이 화면으로 돌아와 그 채널로 보낼 알림을 선택하세요. 지원자의 면접 완료, 전달되지 않은 초대 등이 있습니다.",
     "stepPrivacy": "prepza는 해당 채널에만 게시할 수 있습니다. Slack의 내용을 읽을 수 없으며, 연동을 해제하면 삭제됩니다."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "자체 플랫폼을 연결하기 위한 키와 웹훅입니다.",
+    "counts": "{keys, plural, other {키 #개}} · {webhooks, plural, other {웹훅 #개}}",
+    "docs": "API 문서",
+    "keysTitle": "API 키",
+    "keysText": "키는 만든 사람의 권한으로 면접과 지원자를 조회하고 지원자를 초대합니다.",
+    "noKeys": "아직 키가 없습니다.",
+    "newKey": "새 키",
+    "newKeyTitle": "새 API 키",
+    "keyName": "키 이름 (예: 채용 사이트)",
+    "expiresIn": "만료 기간",
+    "expiries": {
+      "1": "1개월",
+      "3": "3개월",
+      "6": "6개월",
+      "12": "12개월",
+      "never": "만료 없음"
+    },
+    "neverWarning": "만료되지 않는 키는 삭제할 때까지 유효하므로, 유출되면 무기한 악용될 수 있습니다. 키를 직접 주기적으로 교체하는 경우가 아니라면 만료 기간을 선택하세요.",
+    "keyCreatedTitle": "새 키",
+    "keyCreatedText": "지금 복사해서 안전하게 보관하세요. 다시 표시되지 않습니다.",
+    "copyKey": "키 복사",
+    "keyCopied": "키를 복사했습니다",
+    "created": "{date}에 생성",
+    "lastUsed": "마지막 사용 {date}",
+    "expires": "{date}에 만료",
+    "neverExpires": "만료 없음",
+    "expired": "만료됨",
+    "neverUsed": "사용한 적 없음",
+    "removeKey": "키 삭제",
+    "removeKeyTitle": "이 키를 삭제할까요?",
+    "removeKeyText": "“{name}”을(를) 사용하는 모든 곳이 즉시 작동을 멈춥니다.",
+    "webhooksTitle": "웹훅",
+    "webhooksText": "지원자가 마치면 prepza가 결과를 이 주소들로 보내며, 각 주소의 시크릿으로 서명합니다.",
+    "noWebhooks": "아직 웹훅이 없습니다.",
+    "addWebhook": "웹훅 추가",
+    "addWebhookTitle": "새 웹훅",
+    "webhookUrl": "HTTPS 주소 (예: https://example.com/prepza)",
+    "webhookCreatedTitle": "웹훅 시크릿",
+    "webhookCreatedText": "각 요청의 서명을 확인하는 데 사용하세요(API 문서 참고). 지금 복사하세요. 다시 표시되지 않습니다.",
+    "copySecret": "시크릿 복사",
+    "secretCopied": "시크릿을 복사했습니다",
+    "added": "{date}에 추가",
+    "removeWebhook": "웹훅 삭제",
+    "removeWebhookTitle": "이 웹훅을 삭제할까요?",
+    "removeWebhookText": "{url}은(는) 더 이상 이벤트를 받지 않습니다.",
+    "createFailed": "만들지 못했습니다.",
+    "removeFailed": "삭제하지 못했습니다."
+  },
+  "apiDocs": {
+    "title": "API 문서",
+    "intro": "prepza를 자체 플랫폼에 연결하세요. 면접 목록을 조회하고, 지원자를 초대하고, 결과를 받을 수 있습니다.",
+    "englishOnly": "이 페이지는 영어로만 제공됩니다.",
+    "baseUrl": "기본 URL",
+    "copyBaseUrl": "URL 복사",
+    "baseUrlCopied": "URL을 복사했습니다",
+    "endpoints": "엔드포인트",
+    "webhooks": "웹훅 이벤트",
+    "objects": "객체",
+    "parameters": "매개변수",
+    "body": "요청 본문",
+    "returns": "반환값",
+    "errors": "오류",
+    "required": "필수"
   }
 }

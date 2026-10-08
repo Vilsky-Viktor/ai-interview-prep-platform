@@ -43,7 +43,8 @@
     "preEmploymentTesting": "採用前テスト",
     "aiInterviews": "AI 面接",
     "compare": "比較",
-    "guides": "ガイド"
+    "guides": "ガイド",
+    "apiDocs": "API ドキュメント"
   },
   "signIn": {
     "title": "サインイン",
@@ -1068,7 +1069,8 @@
     "bzStepCreate": "すべての求人を閲覧できる管理者として API キーを作成します。キーはあなたとして動作し、結果もあなたの名前で書き込まれます。Breezy の API と Webhook は Pro プランで利用できます。",
     "bzStepPaste": "下にキーを貼り付けてください。Breezy HR の Webhook はこちらで追加します。",
     "atsGroup": "ATS",
-    "messagingGroup": "メッセージアプリ"
+    "messagingGroup": "メッセージアプリ",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Slack に追加",
@@ -1094,5 +1096,71 @@
     "stepChannel": "チームがお知らせを見るチャンネル（例：#hiring）を選び、許可します。",
     "stepKinds": "この画面に戻り、そこに送るお知らせを選びます。候補者の完了、届かなかった招待などがあります。",
     "stepPrivacy": "prepza が投稿できるのはそのチャンネルだけです。Slack の内容を読むことはできず、接続を解除すると削除されます。"
+  },
+  "api": {
+    "name": "API",
+    "rowText": "自社のプラットフォームと連携するためのキーと Webhook。",
+    "counts": "{keys, plural, other {キー # 件}} · {webhooks, plural, other {Webhook # 件}}",
+    "docs": "API ドキュメント",
+    "keysTitle": "API キー",
+    "keysText": "キーは、作成した人として面接と候補者を読み取り、候補者を招待します。",
+    "noKeys": "キーはまだありません。",
+    "newKey": "新しいキー",
+    "newKeyTitle": "新しい API キー",
+    "keyName": "キーの名前（例：採用サイト）",
+    "expiresIn": "有効期限",
+    "expiries": {
+      "1": "1 か月",
+      "3": "3 か月",
+      "6": "6 か月",
+      "12": "12 か月",
+      "never": "無期限"
+    },
+    "neverWarning": "無期限のキーは削除するまで有効なため、漏えいすると無期限に悪用されるおそれがあります。キーを自分で定期的に更新する場合を除き、有効期限を選んでください。",
+    "keyCreatedTitle": "新しいキー",
+    "keyCreatedText": "今すぐコピーして安全に保管してください。今後は表示されません。",
+    "copyKey": "キーをコピー",
+    "keyCopied": "キーをコピーしました",
+    "created": "{date} に作成",
+    "lastUsed": "最終使用 {date}",
+    "expires": "{date} に期限切れ",
+    "neverExpires": "無期限",
+    "expired": "期限切れ",
+    "neverUsed": "未使用",
+    "removeKey": "キーを削除",
+    "removeKeyTitle": "このキーを削除しますか？",
+    "removeKeyText": "「{name}」を使っているものはすべて、すぐに動作しなくなります。",
+    "webhooksTitle": "Webhook",
+    "webhooksText": "候補者が受験を終えると、prepza は結果をこれらのアドレスに送信します。各送信はそれぞれのシークレットで署名されます。",
+    "noWebhooks": "Webhook はまだありません。",
+    "addWebhook": "Webhook を追加",
+    "addWebhookTitle": "新しい Webhook",
+    "webhookUrl": "HTTPS アドレス（例：https://example.com/prepza）",
+    "webhookCreatedTitle": "Webhook のシークレット",
+    "webhookCreatedText": "各リクエストの署名の検証に使います（API ドキュメントを参照）。今すぐコピーしてください。今後は表示されません。",
+    "copySecret": "シークレットをコピー",
+    "secretCopied": "シークレットをコピーしました",
+    "added": "{date} に追加",
+    "removeWebhook": "Webhook を削除",
+    "removeWebhookTitle": "この Webhook を削除しますか？",
+    "removeWebhookText": "{url} にはイベントが届かなくなります。",
+    "createFailed": "作成できませんでした。",
+    "removeFailed": "削除できませんでした。"
+  },
+  "apiDocs": {
+    "title": "API ドキュメント",
+    "intro": "prepza を自社のプラットフォームと連携できます。面接の一覧取得、候補者の招待、結果の取得が可能です。",
+    "englishOnly": "このページは英語のみです。",
+    "baseUrl": "ベース URL",
+    "copyBaseUrl": "URL をコピー",
+    "baseUrlCopied": "URL をコピーしました",
+    "endpoints": "エンドポイント",
+    "webhooks": "Webhook イベント",
+    "objects": "オブジェクト",
+    "parameters": "パラメーター",
+    "body": "リクエストボディ",
+    "returns": "戻り値",
+    "errors": "エラー",
+    "required": "必須"
   }
 }

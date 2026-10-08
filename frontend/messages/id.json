@@ -43,7 +43,8 @@
     "preEmploymentTesting": "Tes seleksi karyawan",
     "aiInterviews": "Wawancara AI",
     "compare": "Bandingkan",
-    "guides": "Panduan"
+    "guides": "Panduan",
+    "apiDocs": "Dokumentasi API"
   },
   "signIn": {
     "title": "Masuk",
@@ -1064,7 +1065,8 @@
     "bzStepCreate": "Buat kunci API sebagai admin yang bisa melihat semua lowongan: kunci ini bertindak atas namamu, dan hasilnya ditulis atas namamu. API dan webhook Breezy tersedia di paket Pro-nya.",
     "bzStepPaste": "Tempel kunci di bawah. Webhook di Breezy HR kami tambahkan sendiri.",
     "atsGroup": "ATS",
-    "messagingGroup": "Aplikasi pesan"
+    "messagingGroup": "Aplikasi pesan",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Tambahkan ke Slack",
@@ -1090,5 +1092,71 @@
     "stepChannel": "Pilih channel tempat timmu akan melihatnya, misalnya #hiring, lalu izinkan.",
     "stepKinds": "Kembali ke sini, pilih notifikasi mana yang dikirim ke sana: kandidat yang selesai, undangan yang tidak terkirim, dan lainnya.",
     "stepPrivacy": "prepza hanya bisa memposting ke channel itu. prepza tidak bisa membaca Slack-mu, dan memutuskannya akan menghapus prepza."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Kunci dan webhook untuk menghubungkan platformmu sendiri.",
+    "counts": "{keys, plural, other {# kunci}} · {webhooks, plural, other {# webhook}}",
+    "docs": "Dokumentasi API",
+    "keysTitle": "Kunci API",
+    "keysText": "Kunci membaca wawancara dan kandidatmu, serta mengundang kandidat atas nama orang yang membuatnya.",
+    "noKeys": "Belum ada kunci.",
+    "newKey": "Kunci baru",
+    "newKeyTitle": "Kunci API baru",
+    "keyName": "Nama kunci, misalnya Situs karier",
+    "expiresIn": "Kedaluwarsa dalam",
+    "expiries": {
+      "1": "1 bulan",
+      "3": "3 bulan",
+      "6": "6 bulan",
+      "12": "12 bulan",
+      "never": "Tidak pernah"
+    },
+    "neverWarning": "Kunci yang tidak pernah kedaluwarsa tetap berlaku sampai kamu menghapusnya, jadi kunci yang bocor bisa dipakai tanpa batas waktu. Pilih masa berlaku, kecuali kamu sendiri rutin mengganti kunci.",
+    "keyCreatedTitle": "Kunci barumu",
+    "keyCreatedText": "Salin sekarang dan simpan dengan aman: kunci ini tidak akan ditampilkan lagi.",
+    "copyKey": "Salin kunci",
+    "keyCopied": "Kunci disalin",
+    "created": "dibuat {date}",
+    "lastUsed": "terakhir dipakai {date}",
+    "expires": "kedaluwarsa {date}",
+    "neverExpires": "tidak pernah kedaluwarsa",
+    "expired": "sudah kedaluwarsa",
+    "neverUsed": "belum pernah dipakai",
+    "removeKey": "Hapus kunci",
+    "removeKeyTitle": "Hapus kunci ini?",
+    "removeKeyText": "Semua yang memakai “{name}” akan langsung berhenti berfungsi.",
+    "webhooksTitle": "Webhook",
+    "webhooksText": "Saat kandidat selesai, prepza mengirim hasilnya ke alamat-alamat ini, ditandatangani dengan secret masing-masing.",
+    "noWebhooks": "Belum ada webhook.",
+    "addWebhook": "Tambah webhook",
+    "addWebhookTitle": "Webhook baru",
+    "webhookUrl": "Alamat HTTPS, mis. https://example.com/prepza",
+    "webhookCreatedTitle": "Secret webhook-mu",
+    "webhookCreatedText": "Gunakan untuk memeriksa tanda tangan setiap permintaan (lihat dokumentasi API). Salin sekarang: secret ini tidak akan ditampilkan lagi.",
+    "copySecret": "Salin secret",
+    "secretCopied": "Secret disalin",
+    "added": "ditambahkan {date}",
+    "removeWebhook": "Hapus webhook",
+    "removeWebhookTitle": "Hapus webhook ini?",
+    "removeWebhookText": "{url} tidak akan menerima event lagi.",
+    "createFailed": "Gagal membuat.",
+    "removeFailed": "Gagal menghapus."
+  },
+  "apiDocs": {
+    "title": "Dokumentasi API",
+    "intro": "Hubungkan prepza ke platformmu sendiri: lihat daftar wawancaramu, undang kandidat, dan dapatkan hasilnya.",
+    "englishOnly": "Halaman ini hanya tersedia dalam bahasa Inggris.",
+    "baseUrl": "URL dasar",
+    "copyBaseUrl": "Salin URL",
+    "baseUrlCopied": "URL disalin",
+    "endpoints": "Endpoint",
+    "webhooks": "Event webhook",
+    "objects": "Objek",
+    "parameters": "Parameter",
+    "body": "Isi permintaan",
+    "returns": "Respons",
+    "errors": "Kesalahan",
+    "required": "wajib"
   }
 }

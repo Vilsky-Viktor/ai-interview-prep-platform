@@ -43,7 +43,8 @@
     "preEmploymentTesting": "İşe alım öncesi testler",
     "aiInterviews": "Yapay zekâ mülakatları",
     "compare": "Karşılaştır",
-    "guides": "Rehberler"
+    "guides": "Rehberler",
+    "apiDocs": "API belgeleri"
   },
   "signIn": {
     "title": "Giriş yap",
@@ -1063,7 +1064,8 @@
     "bzStepCreate": "API anahtarını tüm ilanları gören bir yönetici olarak oluşturun: anahtar sizin adınıza işlem yapar ve sonuçlar sizin adınıza yazılır. Breezy'nin API'si ve webhook'ları Pro planıyla gelir.",
     "bzStepPaste": "Anahtarı aşağıya yapıştırın. Breezy HR'daki webhook'u kendimiz ekleriz.",
     "atsGroup": "ATS",
-    "messagingGroup": "Mesajlaşma"
+    "messagingGroup": "Mesajlaşma",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Slack'e ekle",
@@ -1089,5 +1091,71 @@
     "stepChannel": "Ekibinizin bunları göreceği kanalı seçin, örneğin #hiring, ve izin verin.",
     "stepKinds": "Buraya döndüğünüzde oraya hangi bildirimlerin gideceğini seçin: mülakatı tamamlayan bir aday, iletilemeyen bir davet ve daha fazlası.",
     "stepPrivacy": "prepza yalnızca o kanala gönderi yapabilir. Slack'inizi okuyamaz ve bağlantıyı kesmek onu kaldırır."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Kendi platformunuzu bağlamak için anahtarlar ve webhook'lar.",
+    "counts": "{keys, plural, one {# anahtar} other {# anahtar}} · {webhooks, plural, one {# webhook} other {# webhook}}",
+    "docs": "API belgeleri",
+    "keysTitle": "API anahtarları",
+    "keysText": "Bir anahtar, mülakatlarınızı ve adaylarınızı okur ve onu oluşturan kişi adına aday davet eder.",
+    "noKeys": "Henüz anahtar yok.",
+    "newKey": "Yeni anahtar",
+    "newKeyTitle": "Yeni API anahtarı",
+    "keyName": "Anahtar adı, örneğin Kariyer sitesi",
+    "expiresIn": "Geçerlilik süresi",
+    "expiries": {
+      "1": "1 ay",
+      "3": "3 ay",
+      "6": "6 ay",
+      "12": "12 ay",
+      "never": "Süresiz"
+    },
+    "neverWarning": "Süresi hiç dolmayan bir anahtar siz silene kadar geçerli kalır; bu yüzden sızdırılan bir anahtar süresiz kullanılabilir. Anahtarları kendiniz düzenli olarak yenilemiyorsanız bir süre seçin.",
+    "keyCreatedTitle": "Yeni anahtarınız",
+    "keyCreatedText": "Şimdi kopyalayın ve güvenli bir yerde saklayın: bir daha gösterilmeyecek.",
+    "copyKey": "Anahtarı kopyala",
+    "keyCopied": "Anahtar kopyalandı",
+    "created": "oluşturulma: {date}",
+    "lastUsed": "son kullanım: {date}",
+    "expires": "son geçerlilik: {date}",
+    "neverExpires": "süresiz",
+    "expired": "süresi doldu",
+    "neverUsed": "hiç kullanılmadı",
+    "removeKey": "Anahtarı sil",
+    "removeKeyTitle": "Bu anahtar silinsin mi?",
+    "removeKeyText": "“{name}” kullanan her şey hemen çalışmayı bırakır.",
+    "webhooksTitle": "Webhook'lar",
+    "webhooksText": "Bir aday bitirdiğinde prepza sonuçlarını bu adreslere, her birinin gizli anahtarıyla imzalayarak gönderir.",
+    "noWebhooks": "Henüz webhook yok.",
+    "addWebhook": "Webhook ekle",
+    "addWebhookTitle": "Yeni webhook",
+    "webhookUrl": "HTTPS adresi, ör. https://example.com/prepza",
+    "webhookCreatedTitle": "Webhook'unuzun gizli anahtarı",
+    "webhookCreatedText": "Her isteğin imzasını doğrulamak için kullanın (API belgelerine bakın). Şimdi kopyalayın: bir daha gösterilmeyecek.",
+    "copySecret": "Gizli anahtarı kopyala",
+    "secretCopied": "Gizli anahtar kopyalandı",
+    "added": "eklenme: {date}",
+    "removeWebhook": "Webhook'u sil",
+    "removeWebhookTitle": "Bu webhook silinsin mi?",
+    "removeWebhookText": "{url} artık olay almayacak.",
+    "createFailed": "Oluşturulamadı.",
+    "removeFailed": "Silinemedi."
+  },
+  "apiDocs": {
+    "title": "API belgeleri",
+    "intro": "prepza'yı kendi platformunuza bağlayın: mülakatlarınızı listeleyin, aday davet edin ve sonuçlarını alın.",
+    "englishOnly": "Bu sayfa yalnızca İngilizce.",
+    "baseUrl": "Temel URL",
+    "copyBaseUrl": "URL'yi kopyala",
+    "baseUrlCopied": "URL kopyalandı",
+    "endpoints": "Uç noktalar",
+    "webhooks": "Webhook olayları",
+    "objects": "Nesneler",
+    "parameters": "Parametreler",
+    "body": "İstek gövdesi",
+    "returns": "Dönüş değeri",
+    "errors": "Hatalar",
+    "required": "zorunlu"
   }
 }

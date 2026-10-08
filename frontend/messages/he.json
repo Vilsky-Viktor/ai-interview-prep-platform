@@ -43,7 +43,8 @@
     "preEmploymentTesting": "מבחנים לפני גיוס",
     "aiInterviews": "ראיונות AI",
     "compare": "השוואה",
-    "guides": "מדריכים"
+    "guides": "מדריכים",
+    "apiDocs": "תיעוד ה-API"
   },
   "signIn": {
     "title": "התחברות",
@@ -1055,7 +1056,8 @@
     "bzStepCreate": "צרו מפתח API כמנהלים שרואים את כל המשרות: הוא פועל בשמכם, והתוצאות נכתבות בשמכם. ה-API והוובהוקים של Breezy כלולים בתוכנית Pro שלה.",
     "bzStepPaste": "הדביקו את המפתח למטה. את הוובהוק ב-Breezy HR נוסיף בעצמנו.",
     "atsGroup": "ATS",
-    "messagingGroup": "אפליקציות הודעות"
+    "messagingGroup": "אפליקציות הודעות",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "הוספה ל-Slack",
@@ -1081,5 +1083,71 @@
     "stepChannel": "בחרו את הערוץ שבו הצוות שלכם יראה אותן, למשל #hiring, ואשרו.",
     "stepKinds": "בחזרה כאן, בחרו אילו התראות יישלחו לשם: מועמד/ת שסיים/ה, הזמנה שלא נמסרה ועוד.",
     "stepPrivacy": "prepza יכול לפרסם רק בערוץ הזה. הוא לא יכול לקרוא את ה-Slack שלכם, וניתוק מסיר אותו."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "מפתחות ו-וובהוקים לחיבור הפלטפורמה שלכם.",
+    "counts": "{keys, plural, one {מפתח אחד} two {שני מפתחות} other {# מפתחות}} · {webhooks, plural, one {וובהוק אחד} two {שני וובהוקים} other {# וובהוקים}}",
+    "docs": "תיעוד ה-API",
+    "keysTitle": "מפתחות API",
+    "keysText": "מפתח קורא את הראיונות והמועמדים שלכם ומזמין מועמדים בשם מי שיצר אותו.",
+    "noKeys": "עדיין אין מפתחות.",
+    "newKey": "מפתח חדש",
+    "newKeyTitle": "מפתח API חדש",
+    "keyName": "שם המפתח, לדוגמה אתר הקריירה",
+    "expiresIn": "תוקף",
+    "expiries": {
+      "1": "חודש אחד",
+      "3": "3 חודשים",
+      "6": "6 חודשים",
+      "12": "12 חודשים",
+      "never": "ללא תפוגה"
+    },
+    "neverWarning": "מפתח ללא תפוגה נשאר בתוקף עד שתמחקו אותו, כך שבמפתח שדלף אפשר להשתמש ללא הגבלת זמן. בחרו תוקף, אלא אם אתם מחליפים מפתחות בעצמכם.",
+    "keyCreatedTitle": "המפתח החדש שלכם",
+    "keyCreatedText": "העתיקו אותו עכשיו ושמרו אותו במקום בטוח: הוא לא יוצג שוב.",
+    "copyKey": "העתקת המפתח",
+    "keyCopied": "המפתח הועתק",
+    "created": "נוצר ב-{date}",
+    "lastUsed": "שימוש אחרון ב-{date}",
+    "expires": "יפוג ב-{date}",
+    "neverExpires": "ללא תפוגה",
+    "expired": "פג תוקף",
+    "neverUsed": "לא נעשה בו שימוש",
+    "removeKey": "מחיקת המפתח",
+    "removeKeyTitle": "למחוק את המפתח הזה?",
+    "removeKeyText": "כל מה שמשתמש ב-\"{name}\" יפסיק לעבוד מיד.",
+    "webhooksTitle": "וובהוקים",
+    "webhooksText": "כשמועמד מסיים, prepza שולח את התוצאות שלו לכתובות האלה, חתומות בסוד של כל אחת.",
+    "noWebhooks": "עדיין אין וובהוקים.",
+    "addWebhook": "הוספת וובהוק",
+    "addWebhookTitle": "וובהוק חדש",
+    "webhookUrl": "כתובת HTTPS, לדוגמה https://example.com/prepza",
+    "webhookCreatedTitle": "הסוד של הוובהוק שלכם",
+    "webhookCreatedText": "השתמשו בו כדי לאמת את החתימה של כל בקשה (ראו את תיעוד ה-API). העתיקו אותו עכשיו: הוא לא יוצג שוב.",
+    "copySecret": "העתקת הסוד",
+    "secretCopied": "הסוד הועתק",
+    "added": "נוסף ב-{date}",
+    "removeWebhook": "מחיקת הוובהוק",
+    "removeWebhookTitle": "למחוק את הוובהוק הזה?",
+    "removeWebhookText": "{url} יפסיק לקבל אירועים.",
+    "createFailed": "היצירה נכשלה.",
+    "removeFailed": "המחיקה נכשלה."
+  },
+  "apiDocs": {
+    "title": "תיעוד ה-API",
+    "intro": "חברו את prepza לפלטפורמה שלכם: הציגו את רשימת הראיונות, הזמינו מועמדים וקבלו את התוצאות שלהם.",
+    "englishOnly": "הדף הזה זמין באנגלית בלבד.",
+    "baseUrl": "כתובת URL בסיסית",
+    "copyBaseUrl": "העתקת ה-URL",
+    "baseUrlCopied": "ה-URL הועתק",
+    "endpoints": "נקודות קצה",
+    "webhooks": "אירועי וובהוק",
+    "objects": "אובייקטים",
+    "parameters": "פרמטרים",
+    "body": "גוף הבקשה",
+    "returns": "ערך מוחזר",
+    "errors": "שגיאות",
+    "required": "חובה"
   }
 }

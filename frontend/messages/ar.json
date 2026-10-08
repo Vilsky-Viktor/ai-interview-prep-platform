@@ -43,7 +43,8 @@
     "preEmploymentTesting": "اختبارات ما قبل التوظيف",
     "aiInterviews": "مقابلات الذكاء الاصطناعي",
     "compare": "مقارنة",
-    "guides": "أدلة"
+    "guides": "أدلة",
+    "apiDocs": "توثيق API"
   },
   "signIn": {
     "title": "تسجيل الدخول",
@@ -1060,7 +1061,8 @@
     "bzStepCreate": "أنشئ مفتاح API بحساب مسؤول يرى كل الوظائف: فهو يعمل باسمك، وتُكتب النتائج باسمك. واجهة API والويب هوك في Breezy متاحة ضمن خطة Pro.",
     "bzStepPaste": "الصق المفتاح أدناه. سنضيف الويب هوك في Breezy HR بأنفسنا.",
     "atsGroup": "ATS",
-    "messagingGroup": "تطبيقات المراسلة"
+    "messagingGroup": "تطبيقات المراسلة",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "إضافة إلى Slack",
@@ -1086,5 +1088,71 @@
     "stepChannel": "اختر القناة التي يجب أن يراها فريقك فيها، مثل #hiring، ثم اسمح.",
     "stepKinds": "بعد العودة إلى هنا، اختر الإشعارات التي تُرسَل إليها: مرشح أنهى المقابلة، ودعوة لم تُسلَّم، وغير ذلك.",
     "stepPrivacy": "لا يستطيع prepza النشر إلا في تلك القناة. ولا يمكنه قراءة Slack لديك، وإلغاء الربط يزيله."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "مفاتيح وويب هوك لربط منصتك الخاصة.",
+    "counts": "{keys, plural, zero {لا مفاتيح} one {مفتاح واحد} two {مفتاحان} few {# مفاتيح} many {# مفتاحًا} other {# مفتاح}} · {webhooks, plural, zero {لا ويب هوك} one {ويب هوك واحد} two {# ويب هوك} few {# ويب هوك} many {# ويب هوك} other {# ويب هوك}}",
+    "docs": "توثيق API",
+    "keysTitle": "مفاتيح API",
+    "keysText": "يقرأ المفتاح مقابلاتك ومرشحيك ويدعو المرشحين باسم الشخص الذي أنشأه.",
+    "noKeys": "لا توجد مفاتيح بعد.",
+    "newKey": "مفتاح جديد",
+    "newKeyTitle": "مفتاح API جديد",
+    "keyName": "اسم المفتاح، مثل موقع الوظائف",
+    "expiresIn": "مدة الصلاحية",
+    "expiries": {
+      "1": "شهر واحد",
+      "3": "3 أشهر",
+      "6": "6 أشهر",
+      "12": "12 شهرًا",
+      "never": "بلا انتهاء"
+    },
+    "neverWarning": "المفتاح الذي لا تنتهي صلاحيته يبقى صالحًا حتى تحذفه، لذا يمكن استخدام المفتاح المسرَّب إلى أجل غير مسمى. اختر مدة صلاحية ما لم تكن تغيّر المفاتيح بنفسك بانتظام.",
+    "keyCreatedTitle": "مفتاحك الجديد",
+    "keyCreatedText": "انسخه الآن واحفظه في مكان آمن: لن يُعرض مرة أخرى.",
+    "copyKey": "نسخ المفتاح",
+    "keyCopied": "تم نسخ المفتاح",
+    "created": "أُنشئ في {date}",
+    "lastUsed": "آخر استخدام {date}",
+    "expires": "ينتهي في {date}",
+    "neverExpires": "لا تنتهي صلاحيته",
+    "expired": "منتهي الصلاحية",
+    "neverUsed": "لم يُستخدم",
+    "removeKey": "حذف المفتاح",
+    "removeKeyTitle": "حذف هذا المفتاح؟",
+    "removeKeyText": "كل ما يستخدم «{name}» سيتوقف عن العمل فورًا.",
+    "webhooksTitle": "الويب هوك",
+    "webhooksText": "عندما ينهي المرشح، يرسل prepza نتائجه إلى هذه العناوين، موقّعة بسر كل عنوان.",
+    "noWebhooks": "لا يوجد ويب هوك بعد.",
+    "addWebhook": "إضافة ويب هوك",
+    "addWebhookTitle": "ويب هوك جديد",
+    "webhookUrl": "عنوان HTTPS، مثل https://example.com/prepza",
+    "webhookCreatedTitle": "سر الويب هوك الخاص بك",
+    "webhookCreatedText": "استخدمه للتحقق من توقيع كل طلب (راجع توثيق API). انسخه الآن: لن يُعرض مرة أخرى.",
+    "copySecret": "نسخ السر",
+    "secretCopied": "تم نسخ السر",
+    "added": "أُضيف في {date}",
+    "removeWebhook": "حذف الويب هوك",
+    "removeWebhookTitle": "حذف هذا الويب هوك؟",
+    "removeWebhookText": "لن يتلقى {url} أي أحداث بعد الآن.",
+    "createFailed": "تعذّر الإنشاء.",
+    "removeFailed": "تعذّر الحذف."
+  },
+  "apiDocs": {
+    "title": "توثيق API",
+    "intro": "اربط prepza بمنصتك الخاصة: اعرض مقابلاتك، وادعُ المرشحين، واحصل على نتائجهم.",
+    "englishOnly": "هذه الصفحة متوفرة بالإنجليزية فقط.",
+    "baseUrl": "عنوان URL الأساسي",
+    "copyBaseUrl": "نسخ عنوان URL",
+    "baseUrlCopied": "تم نسخ عنوان URL",
+    "endpoints": "نقاط النهاية",
+    "webhooks": "أحداث الويب هوك",
+    "objects": "الكائنات",
+    "parameters": "المعاملات",
+    "body": "نص الطلب",
+    "returns": "القيمة المُرجعة",
+    "errors": "الأخطاء",
+    "required": "مطلوب"
   }
 }

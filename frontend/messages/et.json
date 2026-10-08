@@ -43,7 +43,8 @@
     "preEmploymentTesting": "Värbamistestid",
     "aiInterviews": "AI-intervjuud",
     "compare": "Võrdlus",
-    "guides": "Juhendid"
+    "guides": "Juhendid",
+    "apiDocs": "API dokumentatsioon"
   },
   "signIn": {
     "title": "Logi sisse",
@@ -1068,7 +1069,8 @@
     "bzStepCreate": "Loo API-võti administraatorina, kes näeb kõiki töökuulutusi: see tegutseb sinu nimel ja tulemused kirjutatakse sinu nimel. Breezy API ja webhookid on saadaval Pro paketiga.",
     "bzStepPaste": "Kleebi võti allpool. Webhooki lisame Breezy HR-is ise.",
     "atsGroup": "ATS",
-    "messagingGroup": "Sõnumirakendused"
+    "messagingGroup": "Sõnumirakendused",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Lisa Slacki",
@@ -1094,5 +1096,71 @@
     "stepChannel": "Vali kanal, kus su meeskond neid näeb, näiteks #hiring, ja luba.",
     "stepKinds": "Siia tagasi tulles vali, millised teavitused sinna lähevad: kandidaat lõpetas, kutse ei jõudnud kohale ja muud.",
     "stepPrivacy": "prepza saab postitada ainult sellesse kanalisse. See ei saa sinu Slacki lugeda ja ühenduse katkestamine eemaldab selle."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Võtmed ja webhookid oma platvormi ühendamiseks.",
+    "counts": "{keys, plural, one {# võti} other {# võtit}} · {webhooks, plural, one {# webhook} other {# webhooki}}",
+    "docs": "API dokumentatsioon",
+    "keysTitle": "API-võtmed",
+    "keysText": "Võti loeb sinu intervjuusid ja kandidaate ning kutsub kandidaate selle inimese nimel, kes võtme lõi.",
+    "noKeys": "Võtmeid veel pole.",
+    "newKey": "Uus võti",
+    "newKeyTitle": "Uus API-võti",
+    "keyName": "Võtme nimi, näiteks Karjäärileht",
+    "expiresIn": "Aegub",
+    "expiries": {
+      "1": "1 kuu pärast",
+      "3": "3 kuu pärast",
+      "6": "6 kuu pärast",
+      "12": "12 kuu pärast",
+      "never": "Mitte kunagi"
+    },
+    "neverWarning": "Võti, mis ei aegu kunagi, kehtib seni, kuni sa selle kustutad, nii et lekkinud võtit saab kasutada piiramatult. Vali aegumisaeg, kui sa just ise võtmeid regulaarselt ei vaheta.",
+    "keyCreatedTitle": "Sinu uus võti",
+    "keyCreatedText": "Kopeeri see kohe ja hoia turvaliselt: seda ei näidata uuesti.",
+    "copyKey": "Kopeeri võti",
+    "keyCopied": "Võti kopeeritud",
+    "created": "loodud {date}",
+    "lastUsed": "viimati kasutatud {date}",
+    "expires": "aegub {date}",
+    "neverExpires": "ei aegu kunagi",
+    "expired": "aegunud",
+    "neverUsed": "pole kasutatud",
+    "removeKey": "Kustuta võti",
+    "removeKeyTitle": "Kas kustutada see võti?",
+    "removeKeyText": "Kõik, mis kasutab võtit „{name}”, lakkab kohe töötamast.",
+    "webhooksTitle": "Webhookid",
+    "webhooksText": "Kui kandidaat lõpetab, saadab prepza tema tulemused nendele aadressidele, allkirjastatuna iga aadressi saladusega.",
+    "noWebhooks": "Webhooke veel pole.",
+    "addWebhook": "Lisa webhook",
+    "addWebhookTitle": "Uus webhook",
+    "webhookUrl": "HTTPS-aadress, nt https://example.com/prepza",
+    "webhookCreatedTitle": "Sinu webhooki saladus",
+    "webhookCreatedText": "Kasuta seda iga päringu allkirja kontrollimiseks (vt API dokumentatsiooni). Kopeeri see kohe: seda ei näidata uuesti.",
+    "copySecret": "Kopeeri saladus",
+    "secretCopied": "Saladus kopeeritud",
+    "added": "lisatud {date}",
+    "removeWebhook": "Kustuta webhook",
+    "removeWebhookTitle": "Kas kustutada see webhook?",
+    "removeWebhookText": "{url} ei saa enam sündmusi.",
+    "createFailed": "Loomine ebaõnnestus.",
+    "removeFailed": "Kustutamine ebaõnnestus."
+  },
+  "apiDocs": {
+    "title": "API dokumentatsioon",
+    "intro": "Ühenda prepza oma platvormiga: vaata oma intervjuusid, kutsu kandidaate ja saa nende tulemused.",
+    "englishOnly": "See leht on ainult inglise keeles.",
+    "baseUrl": "Baas-URL",
+    "copyBaseUrl": "Kopeeri URL",
+    "baseUrlCopied": "URL kopeeritud",
+    "endpoints": "Lõpp-punktid",
+    "webhooks": "Webhooki sündmused",
+    "objects": "Objektid",
+    "parameters": "Parameetrid",
+    "body": "Päringu sisu",
+    "returns": "Tagastab",
+    "errors": "Vead",
+    "required": "kohustuslik"
   }
 }

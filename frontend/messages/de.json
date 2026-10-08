@@ -43,7 +43,8 @@
     "preEmploymentTesting": "Eignungstests",
     "aiInterviews": "KI-Interviews",
     "compare": "Vergleich",
-    "guides": "Ratgeber"
+    "guides": "Ratgeber",
+    "apiDocs": "API-Dokumentation"
   },
   "signIn": {
     "title": "Anmelden",
@@ -1064,7 +1065,8 @@
     "bzStepCreate": "Erstelle einen API-Schlüssel als Admin, der alle Stellen sieht: Er handelt in deinem Namen, und Ergebnisse werden unter deinem Namen eingetragen. Die API und Webhooks von Breezy gibt es im Pro-Tarif.",
     "bzStepPaste": "Füge den Schlüssel unten ein. Den Webhook in Breezy HR richten wir selbst ein.",
     "atsGroup": "ATS",
-    "messagingGroup": "Messenger"
+    "messagingGroup": "Messenger",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Zu Slack hinzufügen",
@@ -1090,5 +1092,71 @@
     "stepChannel": "Wähle den Kanal, in dem dein Team sie sehen soll, zum Beispiel #hiring, und erlaube den Zugriff.",
     "stepKinds": "Wähle danach hier, welche Benachrichtigungen dort ankommen: ein Kandidat ist fertig, eine Einladung wurde nicht zugestellt und mehr.",
     "stepPrivacy": "prepza kann nur in diesem Kanal posten. Es kann dein Slack nicht lesen, und beim Trennen wird es entfernt."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Schlüssel und Webhooks, um deine eigene Plattform anzubinden.",
+    "counts": "{keys, plural, one {# Schlüssel} other {# Schlüssel}} · {webhooks, plural, one {# Webhook} other {# Webhooks}}",
+    "docs": "API-Dokumentation",
+    "keysTitle": "API-Schlüssel",
+    "keysText": "Ein Schlüssel liest deine Interviews und Kandidaten und lädt Kandidaten im Namen der Person ein, die ihn erstellt hat.",
+    "noKeys": "Noch keine Schlüssel.",
+    "newKey": "Neuer Schlüssel",
+    "newKeyTitle": "Neuer API-Schlüssel",
+    "keyName": "Name des Schlüssels, zum Beispiel Karriereseite",
+    "expiresIn": "Läuft ab in",
+    "expiries": {
+      "1": "1 Monat",
+      "3": "3 Monate",
+      "6": "6 Monate",
+      "12": "12 Monate",
+      "never": "Nie"
+    },
+    "neverWarning": "Ein Schlüssel, der nie abläuft, bleibt gültig, bis du ihn löschst – ein geleakter Schlüssel kann also unbegrenzt genutzt werden. Wähle ein Ablaufdatum, es sei denn, du rotierst Schlüssel selbst.",
+    "keyCreatedTitle": "Dein neuer Schlüssel",
+    "keyCreatedText": "Kopiere ihn jetzt und bewahre ihn sicher auf: Er wird nicht noch einmal angezeigt.",
+    "copyKey": "Schlüssel kopieren",
+    "keyCopied": "Schlüssel kopiert",
+    "created": "erstellt {date}",
+    "lastUsed": "zuletzt genutzt {date}",
+    "expires": "läuft ab {date}",
+    "neverExpires": "läuft nie ab",
+    "expired": "abgelaufen",
+    "neverUsed": "nie genutzt",
+    "removeKey": "Schlüssel löschen",
+    "removeKeyTitle": "Diesen Schlüssel löschen?",
+    "removeKeyText": "Alles, was „{name}“ nutzt, funktioniert sofort nicht mehr.",
+    "webhooksTitle": "Webhooks",
+    "webhooksText": "Wenn ein Kandidat fertig ist, sendet prepza seine Ergebnisse an diese Adressen, jeweils mit deren Secret signiert.",
+    "noWebhooks": "Noch keine Webhooks.",
+    "addWebhook": "Webhook hinzufügen",
+    "addWebhookTitle": "Neuer Webhook",
+    "webhookUrl": "HTTPS-Adresse, z. B. https://example.com/prepza",
+    "webhookCreatedTitle": "Das Secret deines Webhooks",
+    "webhookCreatedText": "Prüfe damit die Signatur jeder Anfrage (siehe API-Dokumentation). Kopiere es jetzt: Es wird nicht noch einmal angezeigt.",
+    "copySecret": "Secret kopieren",
+    "secretCopied": "Secret kopiert",
+    "added": "hinzugefügt {date}",
+    "removeWebhook": "Webhook löschen",
+    "removeWebhookTitle": "Diesen Webhook löschen?",
+    "removeWebhookText": "{url} erhält keine Ereignisse mehr.",
+    "createFailed": "Konnte nicht erstellt werden.",
+    "removeFailed": "Konnte nicht gelöscht werden."
+  },
+  "apiDocs": {
+    "title": "API-Dokumentation",
+    "intro": "Verbinde prepza mit deiner eigenen Plattform: Liste deine Interviews auf, lade Kandidaten ein und erhalte ihre Ergebnisse.",
+    "englishOnly": "Diese Seite gibt es nur auf Englisch.",
+    "baseUrl": "Basis-URL",
+    "copyBaseUrl": "URL kopieren",
+    "baseUrlCopied": "URL kopiert",
+    "endpoints": "Endpunkte",
+    "webhooks": "Webhook-Ereignisse",
+    "objects": "Objekte",
+    "parameters": "Parameter",
+    "body": "Body",
+    "returns": "Rückgabe",
+    "errors": "Fehler",
+    "required": "erforderlich"
   }
 }

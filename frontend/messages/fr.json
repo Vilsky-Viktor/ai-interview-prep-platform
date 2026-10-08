@@ -43,7 +43,8 @@
     "preEmploymentTesting": "Tests de pré-embauche",
     "aiInterviews": "Entretiens IA",
     "compare": "Comparer",
-    "guides": "Guides"
+    "guides": "Guides",
+    "apiDocs": "Documentation de l'API"
   },
   "signIn": {
     "title": "Se connecter",
@@ -1064,7 +1065,8 @@
     "bzStepCreate": "Créez une clé API en tant qu'administrateur qui voit tous les postes : elle agit en votre nom, et les résultats sont écrits en votre nom. L'API et les webhooks de Breezy sont inclus dans son offre Pro.",
     "bzStepPaste": "Collez la clé ci-dessous. Nous ajoutons nous-mêmes le webhook dans Breezy HR.",
     "atsGroup": "ATS",
-    "messagingGroup": "Messagerie"
+    "messagingGroup": "Messagerie",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Ajouter à Slack",
@@ -1090,5 +1092,71 @@
     "stepChannel": "Choisissez le canal où votre équipe doit les voir, par exemple #hiring, puis autorisez.",
     "stepKinds": "De retour ici, choisissez les notifications qui y sont envoyées : un candidat qui termine, une invitation non remise, et plus encore.",
     "stepPrivacy": "prepza ne peut publier que dans ce canal. Il ne peut pas lire votre Slack, et la déconnexion le supprime."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Clés et webhooks pour connecter votre propre plateforme.",
+    "counts": "{keys, plural, one {# clé} other {# clés}} · {webhooks, plural, one {# webhook} other {# webhooks}}",
+    "docs": "Documentation de l'API",
+    "keysTitle": "Clés API",
+    "keysText": "Une clé lit vos entretiens et vos candidats, et invite des candidats au nom de la personne qui l'a créée.",
+    "noKeys": "Aucune clé pour l'instant.",
+    "newKey": "Nouvelle clé",
+    "newKeyTitle": "Nouvelle clé API",
+    "keyName": "Nom de la clé, par exemple Site carrières",
+    "expiresIn": "Expire dans",
+    "expiries": {
+      "1": "1 mois",
+      "3": "3 mois",
+      "6": "6 mois",
+      "12": "12 mois",
+      "never": "Jamais"
+    },
+    "neverWarning": "Une clé qui n'expire jamais reste valide jusqu'à ce que vous la supprimiez : une clé divulguée peut donc être utilisée indéfiniment. Choisissez une durée de validité, sauf si vous renouvelez vous-même vos clés.",
+    "keyCreatedTitle": "Votre nouvelle clé",
+    "keyCreatedText": "Copiez-la maintenant et conservez-la en lieu sûr : elle ne sera plus affichée.",
+    "copyKey": "Copier la clé",
+    "keyCopied": "Clé copiée",
+    "created": "créée le {date}",
+    "lastUsed": "dernière utilisation le {date}",
+    "expires": "expire le {date}",
+    "neverExpires": "n'expire jamais",
+    "expired": "expirée",
+    "neverUsed": "jamais utilisée",
+    "removeKey": "Supprimer la clé",
+    "removeKeyTitle": "Supprimer cette clé ?",
+    "removeKeyText": "Tout ce qui utilise « {name} » cesse immédiatement de fonctionner.",
+    "webhooksTitle": "Webhooks",
+    "webhooksText": "Quand un candidat termine, prepza envoie ses résultats à ces adresses, signés avec le secret de chacune.",
+    "noWebhooks": "Aucun webhook pour l'instant.",
+    "addWebhook": "Ajouter un webhook",
+    "addWebhookTitle": "Nouveau webhook",
+    "webhookUrl": "Adresse HTTPS, par ex. https://example.com/prepza",
+    "webhookCreatedTitle": "Le secret de votre webhook",
+    "webhookCreatedText": "Utilisez-le pour vérifier la signature de chaque requête (voir la documentation de l'API). Copiez-le maintenant : il ne sera plus affiché.",
+    "copySecret": "Copier le secret",
+    "secretCopied": "Secret copié",
+    "added": "ajouté le {date}",
+    "removeWebhook": "Supprimer le webhook",
+    "removeWebhookTitle": "Supprimer ce webhook ?",
+    "removeWebhookText": "{url} ne recevra plus d'événements.",
+    "createFailed": "Impossible de le créer.",
+    "removeFailed": "Impossible de le supprimer."
+  },
+  "apiDocs": {
+    "title": "Documentation de l'API",
+    "intro": "Connectez prepza à votre propre plateforme : listez vos entretiens, invitez des candidats et récupérez leurs résultats.",
+    "englishOnly": "Cette page est uniquement en anglais.",
+    "baseUrl": "URL de base",
+    "copyBaseUrl": "Copier l'URL",
+    "baseUrlCopied": "URL copiée",
+    "endpoints": "Endpoints",
+    "webhooks": "Événements de webhook",
+    "objects": "Objets",
+    "parameters": "Paramètres",
+    "body": "Corps",
+    "returns": "Réponse",
+    "errors": "Erreurs",
+    "required": "obligatoire"
   }
 }

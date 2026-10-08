@@ -43,7 +43,8 @@
     "preEmploymentTesting": "Kiểm tra trước tuyển dụng",
     "aiInterviews": "Phỏng vấn AI",
     "compare": "So sánh",
-    "guides": "Hướng dẫn"
+    "guides": "Hướng dẫn",
+    "apiDocs": "Tài liệu API"
   },
   "signIn": {
     "title": "Đăng nhập",
@@ -1060,7 +1061,8 @@
     "bzStepCreate": "Tạo khóa API bằng tài khoản quản trị viên xem được mọi tin tuyển dụng: khóa hoạt động thay mặt bạn, và kết quả được ghi dưới tên bạn. API và webhook của Breezy có trong gói Pro.",
     "bzStepPaste": "Dán khóa bên dưới. Chúng tôi tự thêm webhook trong Breezy HR.",
     "atsGroup": "ATS",
-    "messagingGroup": "Nhắn tin"
+    "messagingGroup": "Nhắn tin",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Thêm vào Slack",
@@ -1086,5 +1088,71 @@
     "stepChannel": "Chọn kênh mà nhóm của bạn sẽ xem thông báo, ví dụ #hiring, rồi cho phép.",
     "stepKinds": "Quay lại đây, chọn những thông báo nào được gửi đến đó: ứng viên hoàn thành, lời mời chưa được gửi đến và nhiều hơn nữa.",
     "stepPrivacy": "prepza chỉ có thể đăng vào kênh đó. prepza không thể đọc Slack của bạn, và ngắt kết nối sẽ gỡ prepza."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Khóa và webhook để kết nối nền tảng của riêng bạn.",
+    "counts": "{keys, plural, other {# khóa}} · {webhooks, plural, other {# webhook}}",
+    "docs": "Tài liệu API",
+    "keysTitle": "Khóa API",
+    "keysText": "Khóa có thể đọc các buổi phỏng vấn và ứng viên của bạn, đồng thời mời ứng viên với tư cách người đã tạo khóa.",
+    "noKeys": "Chưa có khóa nào.",
+    "newKey": "Khóa mới",
+    "newKeyTitle": "Khóa API mới",
+    "keyName": "Tên khóa, ví dụ Trang tuyển dụng",
+    "expiresIn": "Hết hạn sau",
+    "expiries": {
+      "1": "1 tháng",
+      "3": "3 tháng",
+      "6": "6 tháng",
+      "12": "12 tháng",
+      "never": "Không bao giờ"
+    },
+    "neverWarning": "Khóa không bao giờ hết hạn sẽ còn hiệu lực cho đến khi bạn xóa, nên khóa bị lộ có thể bị dùng vô thời hạn. Hãy chọn thời hạn, trừ khi bạn tự xoay vòng khóa.",
+    "keyCreatedTitle": "Khóa mới của bạn",
+    "keyCreatedText": "Hãy sao chép ngay và cất giữ an toàn: khóa sẽ không được hiển thị lại.",
+    "copyKey": "Sao chép khóa",
+    "keyCopied": "Đã sao chép khóa",
+    "created": "tạo ngày {date}",
+    "lastUsed": "dùng lần cuối {date}",
+    "expires": "hết hạn {date}",
+    "neverExpires": "không bao giờ hết hạn",
+    "expired": "đã hết hạn",
+    "neverUsed": "chưa từng dùng",
+    "removeKey": "Xóa khóa",
+    "removeKeyTitle": "Xóa khóa này?",
+    "removeKeyText": "Mọi thứ đang dùng “{name}” sẽ ngừng hoạt động ngay lập tức.",
+    "webhooksTitle": "Webhook",
+    "webhooksText": "Khi ứng viên hoàn thành, prepza gửi kết quả đến các địa chỉ này, được ký bằng secret của từng địa chỉ.",
+    "noWebhooks": "Chưa có webhook nào.",
+    "addWebhook": "Thêm webhook",
+    "addWebhookTitle": "Webhook mới",
+    "webhookUrl": "Địa chỉ HTTPS, ví dụ https://example.com/prepza",
+    "webhookCreatedTitle": "Secret của webhook",
+    "webhookCreatedText": "Dùng nó để kiểm tra chữ ký của mỗi yêu cầu (xem tài liệu API). Hãy sao chép ngay: secret sẽ không được hiển thị lại.",
+    "copySecret": "Sao chép secret",
+    "secretCopied": "Đã sao chép secret",
+    "added": "thêm ngày {date}",
+    "removeWebhook": "Xóa webhook",
+    "removeWebhookTitle": "Xóa webhook này?",
+    "removeWebhookText": "{url} sẽ không nhận sự kiện nữa.",
+    "createFailed": "Không tạo được.",
+    "removeFailed": "Không xóa được."
+  },
+  "apiDocs": {
+    "title": "Tài liệu API",
+    "intro": "Kết nối prepza với nền tảng của riêng bạn: xem danh sách phỏng vấn, mời ứng viên và nhận kết quả của họ.",
+    "englishOnly": "Trang này chỉ có bằng tiếng Anh.",
+    "baseUrl": "URL gốc",
+    "copyBaseUrl": "Sao chép URL",
+    "baseUrlCopied": "Đã sao chép URL",
+    "endpoints": "Endpoint",
+    "webhooks": "Sự kiện webhook",
+    "objects": "Đối tượng",
+    "parameters": "Tham số",
+    "body": "Nội dung yêu cầu",
+    "returns": "Giá trị trả về",
+    "errors": "Lỗi",
+    "required": "bắt buộc"
   }
 }

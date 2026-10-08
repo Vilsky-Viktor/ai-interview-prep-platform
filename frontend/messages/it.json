@@ -43,7 +43,8 @@
     "preEmploymentTesting": "Test pre-assunzione",
     "aiInterviews": "Colloqui con IA",
     "compare": "Confronta",
-    "guides": "Guide"
+    "guides": "Guide",
+    "apiDocs": "Documentazione API"
   },
   "signIn": {
     "title": "Accedi",
@@ -1064,7 +1065,8 @@
     "bzStepCreate": "Crea una chiave API come amministratore che vede tutte le posizioni: agisce a tuo nome, e i risultati vengono scritti a tuo nome. L'API e i webhook di Breezy sono inclusi nel suo piano Pro.",
     "bzStepPaste": "Incolla qui sotto la chiave. Il webhook in Breezy HR lo aggiungiamo noi.",
     "atsGroup": "ATS",
-    "messagingGroup": "Messaggistica"
+    "messagingGroup": "Messaggistica",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Aggiungi a Slack",
@@ -1090,5 +1092,71 @@
     "stepChannel": "Scegli il canale in cui il tuo team deve vederle, ad esempio #hiring, e autorizza.",
     "stepKinds": "Poi, qui, scegli quali notifiche arrivano lì: un candidato che completa il colloquio, un invito non consegnato e altro.",
     "stepPrivacy": "prepza può pubblicare solo in quel canale. Non può leggere il tuo Slack e, se lo scolleghi, viene rimosso."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Chiavi e webhook per collegare la tua piattaforma.",
+    "counts": "{keys, plural, one {# chiave} other {# chiavi}} · {webhooks, plural, one {# webhook} other {# webhook}}",
+    "docs": "Documentazione API",
+    "keysTitle": "Chiavi API",
+    "keysText": "Una chiave legge i tuoi colloqui e candidati e invita candidati a nome della persona che l'ha creata.",
+    "noKeys": "Ancora nessuna chiave.",
+    "newKey": "Nuova chiave",
+    "newKeyTitle": "Nuova chiave API",
+    "keyName": "Nome della chiave, ad esempio Sito carriere",
+    "expiresIn": "Scade tra",
+    "expiries": {
+      "1": "1 mese",
+      "3": "3 mesi",
+      "6": "6 mesi",
+      "12": "12 mesi",
+      "never": "Mai"
+    },
+    "neverWarning": "Una chiave che non scade mai resta valida finché non la elimini, quindi una chiave trapelata può essere usata a tempo indeterminato. Scegli una scadenza, a meno che tu non ruoti le chiavi da solo.",
+    "keyCreatedTitle": "La tua nuova chiave",
+    "keyCreatedText": "Copiala ora e conservala al sicuro: non verrà più mostrata.",
+    "copyKey": "Copia chiave",
+    "keyCopied": "Chiave copiata",
+    "created": "creata il {date}",
+    "lastUsed": "ultimo utilizzo {date}",
+    "expires": "scade il {date}",
+    "neverExpires": "non scade mai",
+    "expired": "scaduta",
+    "neverUsed": "mai usata",
+    "removeKey": "Elimina chiave",
+    "removeKeyTitle": "Eliminare questa chiave?",
+    "removeKeyText": "Tutto ciò che usa “{name}” smette subito di funzionare.",
+    "webhooksTitle": "Webhook",
+    "webhooksText": "Quando un candidato termina, prepza invia i suoi risultati a questi indirizzi, firmati con il secret di ciascuno.",
+    "noWebhooks": "Ancora nessun webhook.",
+    "addWebhook": "Aggiungi webhook",
+    "addWebhookTitle": "Nuovo webhook",
+    "webhookUrl": "Indirizzo HTTPS, ad es. https://example.com/prepza",
+    "webhookCreatedTitle": "Il secret del tuo webhook",
+    "webhookCreatedText": "Usalo per verificare la firma di ogni richiesta (vedi la documentazione API). Copialo ora: non verrà più mostrato.",
+    "copySecret": "Copia secret",
+    "secretCopied": "Secret copiato",
+    "added": "aggiunto il {date}",
+    "removeWebhook": "Elimina webhook",
+    "removeWebhookTitle": "Eliminare questo webhook?",
+    "removeWebhookText": "{url} non riceverà più eventi.",
+    "createFailed": "Impossibile crearlo.",
+    "removeFailed": "Impossibile eliminarlo."
+  },
+  "apiDocs": {
+    "title": "Documentazione API",
+    "intro": "Collega prepza alla tua piattaforma: elenca i tuoi colloqui, invita candidati e ricevi i loro risultati.",
+    "englishOnly": "Questa pagina è disponibile solo in inglese.",
+    "baseUrl": "URL di base",
+    "copyBaseUrl": "Copia URL",
+    "baseUrlCopied": "URL copiato",
+    "endpoints": "Endpoint",
+    "webhooks": "Eventi webhook",
+    "objects": "Oggetti",
+    "parameters": "Parametri",
+    "body": "Body",
+    "returns": "Risposta",
+    "errors": "Errori",
+    "required": "obbligatorio"
   }
 }

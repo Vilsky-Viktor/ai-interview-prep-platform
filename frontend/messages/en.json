@@ -43,7 +43,8 @@
     "preEmploymentTesting": "Pre-employment testing",
     "aiInterviews": "AI interviews",
     "compare": "Compare",
-    "guides": "Guides"
+    "guides": "Guides",
+    "apiDocs": "API docs"
   },
   "signIn": {
     "title": "Sign in",
@@ -1064,7 +1065,8 @@
     "bzStepCreate": "Create an API key as an admin who sees every position: it acts as you, and results are written as you. Breezy's API and web hooks come with its Pro plan.",
     "bzStepPaste": "Paste the key below. We add the web hook in Breezy HR ourselves.",
     "atsGroup": "ATS",
-    "messagingGroup": "Messaging"
+    "messagingGroup": "Messaging",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Add to Slack",
@@ -1090,5 +1092,71 @@
     "stepChannel": "Pick the channel your team should see them in, for example #hiring, and allow.",
     "stepKinds": "Back here, choose which notifications go there: a candidate finishing, an invite that wasn't delivered and more.",
     "stepPrivacy": "prepza can only post to that channel. It can't read your Slack, and disconnecting removes it."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Keys and web hooks to connect your own platform.",
+    "counts": "{keys, plural, one {# key} other {# keys}} · {webhooks, plural, one {# web hook} other {# web hooks}}",
+    "docs": "API docs",
+    "keysTitle": "API keys",
+    "keysText": "A key reads your interviews and candidates and invites candidates as the person who made it.",
+    "noKeys": "No keys yet.",
+    "newKey": "New key",
+    "newKeyTitle": "New API key",
+    "keyName": "Key name, for example Careers site",
+    "expiresIn": "Expires in",
+    "expiries": {
+      "1": "1 month",
+      "3": "3 months",
+      "6": "6 months",
+      "12": "12 months",
+      "never": "Never"
+    },
+    "neverWarning": "A key that never expires stays valid until you delete it, so a leaked key can be used indefinitely. Choose an expiry unless you rotate keys yourself.",
+    "keyCreatedTitle": "Your new key",
+    "keyCreatedText": "Copy it now and keep it safe: it won't be shown again.",
+    "copyKey": "Copy key",
+    "keyCopied": "Key copied",
+    "created": "made {date}",
+    "lastUsed": "last used {date}",
+    "expires": "expires {date}",
+    "neverExpires": "never expires",
+    "expired": "expired",
+    "neverUsed": "never used",
+    "removeKey": "Delete key",
+    "removeKeyTitle": "Delete this key?",
+    "removeKeyText": "Anything using “{name}” stops working at once.",
+    "webhooksTitle": "Web hooks",
+    "webhooksText": "When a candidate finishes, prepza sends their results to these addresses, signed with each one's secret.",
+    "noWebhooks": "No web hooks yet.",
+    "addWebhook": "Add web hook",
+    "addWebhookTitle": "New web hook",
+    "webhookUrl": "HTTPS address, e.g. https://example.com/prepza",
+    "webhookCreatedTitle": "Your web hook's secret",
+    "webhookCreatedText": "Use it to check each request's signature (see the API docs). Copy it now: it won't be shown again.",
+    "copySecret": "Copy secret",
+    "secretCopied": "Secret copied",
+    "added": "added {date}",
+    "removeWebhook": "Delete web hook",
+    "removeWebhookTitle": "Delete this web hook?",
+    "removeWebhookText": "{url} stops getting events.",
+    "createFailed": "Couldn't create it.",
+    "removeFailed": "Couldn't delete it."
+  },
+  "apiDocs": {
+    "title": "API docs",
+    "intro": "Connect prepza to your own platform: list your interviews, invite candidates and get their results.",
+    "englishOnly": "This page is in English only.",
+    "baseUrl": "Base URL",
+    "copyBaseUrl": "Copy URL",
+    "baseUrlCopied": "URL copied",
+    "endpoints": "Endpoints",
+    "webhooks": "Web hook events",
+    "objects": "Objects",
+    "parameters": "Parameters",
+    "body": "Body",
+    "returns": "Returns",
+    "errors": "Errors",
+    "required": "required"
   }
 }

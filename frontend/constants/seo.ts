@@ -30,6 +30,7 @@ export const PUBLIC_PATHS = [
   "/terms",
   "/dpa",
   "/documents",
+  "/api-docs",
   "/faq",
   "/about",
   "/contact",

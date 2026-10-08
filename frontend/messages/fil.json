@@ -43,7 +43,8 @@
     "preEmploymentTesting": "Pre-employment testing",
     "aiInterviews": "AI interviews",
     "compare": "Ikumpara",
-    "guides": "Mga gabay"
+    "guides": "Mga gabay",
+    "apiDocs": "Dokumentasyon ng API"
   },
   "signIn": {
     "title": "Mag-sign in",
@@ -1068,7 +1069,8 @@
     "bzStepCreate": "Gumawa ng API key bilang admin na nakikita ang lahat ng job: kikilos ito bilang ikaw, at sa pangalan mo isusulat ang mga resulta. Kasama sa Pro plan ng Breezy ang API at webhooks nito.",
     "bzStepPaste": "I-paste ang key sa ibaba. Kami na ang magdadagdag ng webhook sa Breezy HR.",
     "atsGroup": "ATS",
-    "messagingGroup": "Mga messaging app"
+    "messagingGroup": "Mga messaging app",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Idagdag sa Slack",
@@ -1094,5 +1096,71 @@
     "stepChannel": "Piliin ang channel kung saan dapat makita ng team mo ang mga ito, halimbawa #hiring, at payagan.",
     "stepKinds": "Pagbalik dito, piliin kung aling mga notification ang mapupunta roon: aplikanteng nakatapos, imbitasyong hindi naihatid at iba pa.",
     "stepPrivacy": "Sa channel na iyon lang makakapag-post ang prepza. Hindi nito mababasa ang Slack mo, at maaalis ito kapag nag-disconnect ka."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Mga key at webhook para ikonekta ang sarili mong platform.",
+    "counts": "{keys, plural, one {# key} other {# key}} · {webhooks, plural, one {# webhook} other {# webhook}}",
+    "docs": "Dokumentasyon ng API",
+    "keysTitle": "Mga API key",
+    "keysText": "Binabasa ng key ang mga interview at aplikante mo, at nag-iimbita ito ng mga aplikante bilang taong gumawa nito.",
+    "noKeys": "Wala pang key.",
+    "newKey": "Bagong key",
+    "newKeyTitle": "Bagong API key",
+    "keyName": "Pangalan ng key, halimbawa Careers site",
+    "expiresIn": "Mag-e-expire sa loob ng",
+    "expiries": {
+      "1": "1 buwan",
+      "3": "3 buwan",
+      "6": "6 na buwan",
+      "12": "12 buwan",
+      "never": "Hindi kailanman"
+    },
+    "neverWarning": "Ang key na hindi nag-e-expire ay valid hanggang burahin mo ito, kaya puwedeng gamitin nang walang hanggan ang key na na-leak. Pumili ng expiry maliban kung ikaw mismo ang nagro-rotate ng mga key.",
+    "keyCreatedTitle": "Ang bago mong key",
+    "keyCreatedText": "Kopyahin ito ngayon at itago nang ligtas: hindi na ito ipapakita ulit.",
+    "copyKey": "Kopyahin ang key",
+    "keyCopied": "Nakopya ang key",
+    "created": "ginawa noong {date}",
+    "lastUsed": "huling ginamit noong {date}",
+    "expires": "mag-e-expire sa {date}",
+    "neverExpires": "hindi nag-e-expire",
+    "expired": "expired na",
+    "neverUsed": "hindi pa nagagamit",
+    "removeKey": "Burahin ang key",
+    "removeKeyTitle": "Burahin ang key na ito?",
+    "removeKeyText": "Agad na hihinto ang anumang gumagamit ng “{name}”.",
+    "webhooksTitle": "Mga webhook",
+    "webhooksText": "Kapag natapos ang isang aplikante, ipinapadala ng prepza ang mga resulta niya sa mga address na ito, naka-sign gamit ang secret ng bawat isa.",
+    "noWebhooks": "Wala pang webhook.",
+    "addWebhook": "Magdagdag ng webhook",
+    "addWebhookTitle": "Bagong webhook",
+    "webhookUrl": "HTTPS address, hal. https://example.com/prepza",
+    "webhookCreatedTitle": "Ang secret ng webhook mo",
+    "webhookCreatedText": "Gamitin ito para i-check ang signature ng bawat request (tingnan ang dokumentasyon ng API). Kopyahin ito ngayon: hindi na ito ipapakita ulit.",
+    "copySecret": "Kopyahin ang secret",
+    "secretCopied": "Nakopya ang secret",
+    "added": "idinagdag noong {date}",
+    "removeWebhook": "Burahin ang webhook",
+    "removeWebhookTitle": "Burahin ang webhook na ito?",
+    "removeWebhookText": "Hindi na makakatanggap ng mga event ang {url}.",
+    "createFailed": "Hindi ito magawa.",
+    "removeFailed": "Hindi ito mabura."
+  },
+  "apiDocs": {
+    "title": "Dokumentasyon ng API",
+    "intro": "Ikonekta ang prepza sa sarili mong platform: ilista ang mga interview mo, mag-imbita ng mga aplikante at kunin ang mga resulta nila.",
+    "englishOnly": "English lang ang page na ito.",
+    "baseUrl": "Base URL",
+    "copyBaseUrl": "Kopyahin ang URL",
+    "baseUrlCopied": "Nakopya ang URL",
+    "endpoints": "Mga endpoint",
+    "webhooks": "Mga event ng webhook",
+    "objects": "Mga object",
+    "parameters": "Mga parameter",
+    "body": "Body ng request",
+    "returns": "Ibinabalik",
+    "errors": "Mga error",
+    "required": "kailangan"
   }
 }

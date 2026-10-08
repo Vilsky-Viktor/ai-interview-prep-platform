@@ -43,7 +43,8 @@
     "preEmploymentTesting": "Testy rekrutacyjne",
     "aiInterviews": "Rozmowy z AI",
     "compare": "Porównanie",
-    "guides": "Poradniki"
+    "guides": "Poradniki",
+    "apiDocs": "Dokumentacja API"
   },
   "signIn": {
     "title": "Zaloguj się",
@@ -1064,7 +1065,8 @@
     "bzStepCreate": "Utwórz klucz API jako administrator, który widzi wszystkie oferty: klucz działa w Twoim imieniu, a wyniki są zapisywane w Twoim imieniu. API i webhooki Breezy są dostępne w planie Pro.",
     "bzStepPaste": "Wklej klucz poniżej. Webhook w Breezy HR dodamy sami.",
     "atsGroup": "ATS",
-    "messagingGroup": "Komunikatory"
+    "messagingGroup": "Komunikatory",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Dodaj do Slacka",
@@ -1090,5 +1092,71 @@
     "stepChannel": "Wybierz kanał, na którym Twój zespół ma je widzieć, np. #hiring, i zezwól.",
     "stepKinds": "Po powrocie tutaj wybierz, które powiadomienia mają tam trafiać: ukończona rozmowa kandydata, niedostarczone zaproszenie i inne.",
     "stepPrivacy": "prepza może publikować tylko na tym kanale. Nie może czytać Twojego Slacka, a odłączenie go usuwa."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Klucze i webhooki do połączenia z Twoją własną platformą.",
+    "counts": "{keys, plural, one {# klucz} few {# klucze} many {# kluczy} other {# klucza}} · {webhooks, plural, one {# webhook} few {# webhooki} many {# webhooków} other {# webhooka}}",
+    "docs": "Dokumentacja API",
+    "keysTitle": "Klucze API",
+    "keysText": "Klucz odczytuje Twoje rozmowy i kandydatów oraz zaprasza kandydatów w imieniu osoby, która go utworzyła.",
+    "noKeys": "Nie ma jeszcze kluczy.",
+    "newKey": "Nowy klucz",
+    "newKeyTitle": "Nowy klucz API",
+    "keyName": "Nazwa klucza, np. Strona kariery",
+    "expiresIn": "Wygasa za",
+    "expiries": {
+      "1": "1 miesiąc",
+      "3": "3 miesiące",
+      "6": "6 miesięcy",
+      "12": "12 miesięcy",
+      "never": "Nigdy"
+    },
+    "neverWarning": "Klucz, który nigdy nie wygasa, pozostaje ważny, dopóki go nie usuniesz, więc wyciekły klucz może być używany bez końca. Wybierz termin ważności, chyba że sam regularnie wymieniasz klucze.",
+    "keyCreatedTitle": "Twój nowy klucz",
+    "keyCreatedText": "Skopiuj go teraz i przechowuj bezpiecznie: nie zostanie pokazany ponownie.",
+    "copyKey": "Kopiuj klucz",
+    "keyCopied": "Skopiowano klucz",
+    "created": "utworzony {date}",
+    "lastUsed": "ostatnio użyty {date}",
+    "expires": "wygasa {date}",
+    "neverExpires": "nigdy nie wygasa",
+    "expired": "wygasł",
+    "neverUsed": "nigdy nieużyty",
+    "removeKey": "Usuń klucz",
+    "removeKeyTitle": "Usunąć ten klucz?",
+    "removeKeyText": "Wszystko, co używa „{name}”, natychmiast przestanie działać.",
+    "webhooksTitle": "Webhooki",
+    "webhooksText": "Gdy kandydat skończy, prepza wysyła jego wyniki na te adresy, podpisane sekretem każdego z nich.",
+    "noWebhooks": "Nie ma jeszcze webhooków.",
+    "addWebhook": "Dodaj webhook",
+    "addWebhookTitle": "Nowy webhook",
+    "webhookUrl": "Adres HTTPS, np. https://example.com/prepza",
+    "webhookCreatedTitle": "Sekret Twojego webhooka",
+    "webhookCreatedText": "Użyj go do sprawdzania podpisu każdego żądania (zobacz dokumentację API). Skopiuj go teraz: nie zostanie pokazany ponownie.",
+    "copySecret": "Kopiuj sekret",
+    "secretCopied": "Skopiowano sekret",
+    "added": "dodany {date}",
+    "removeWebhook": "Usuń webhook",
+    "removeWebhookTitle": "Usunąć ten webhook?",
+    "removeWebhookText": "{url} przestanie otrzymywać zdarzenia.",
+    "createFailed": "Nie udało się utworzyć.",
+    "removeFailed": "Nie udało się usunąć."
+  },
+  "apiDocs": {
+    "title": "Dokumentacja API",
+    "intro": "Połącz prepza z własną platformą: pobieraj listę rozmów, zapraszaj kandydatów i otrzymuj ich wyniki.",
+    "englishOnly": "Ta strona jest dostępna tylko po angielsku.",
+    "baseUrl": "Bazowy URL",
+    "copyBaseUrl": "Kopiuj URL",
+    "baseUrlCopied": "Skopiowano URL",
+    "endpoints": "Endpointy",
+    "webhooks": "Zdarzenia webhooków",
+    "objects": "Obiekty",
+    "parameters": "Parametry",
+    "body": "Treść żądania",
+    "returns": "Zwraca",
+    "errors": "Błędy",
+    "required": "wymagane"
   }
 }

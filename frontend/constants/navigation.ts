@@ -31,6 +31,7 @@ export const FOOTER_COLUMNS = [
     { href: "/privacy", label: "privacy" },
     { href: "/terms", label: "terms" },
     { href: "/documents", label: "docs" },
+    { href: "/api-docs", label: "apiDocs" },
   ],
   [
     { href: "/practice", label: "practice" },

@@ -43,7 +43,8 @@
     "preEmploymentTesting": "Selectietests",
     "aiInterviews": "AI-interviews",
     "compare": "Vergelijken",
-    "guides": "Gidsen"
+    "guides": "Gidsen",
+    "apiDocs": "API-documentatie"
   },
   "signIn": {
     "title": "Inloggen",
@@ -1060,7 +1061,8 @@
     "bzStepCreate": "Maak een API-sleutel aan als beheerder die alle vacatures ziet: die handelt namens jou, en resultaten worden op jouw naam geschreven. De API en webhooks van Breezy horen bij het Pro-abonnement.",
     "bzStepPaste": "Plak de sleutel hieronder. De webhook in Breezy HR voegen we zelf toe.",
     "atsGroup": "ATS",
-    "messagingGroup": "Berichtenapps"
+    "messagingGroup": "Berichtenapps",
+    "apiGroup": "API"
   },
   "slack": {
     "add": "Toevoegen aan Slack",
@@ -1086,5 +1088,71 @@
     "stepChannel": "Kies het kanaal waarin je team ze moet zien, bijvoorbeeld #hiring, en sta toe.",
     "stepKinds": "Kies daarna hier welke meldingen daarheen gaan: een kandidaat die klaar is, een uitnodiging die niet is bezorgd en meer.",
     "stepPrivacy": "prepza kan alleen in dat kanaal posten. Het kan je Slack niet lezen, en ontkoppelen verwijdert het."
+  },
+  "api": {
+    "name": "API",
+    "rowText": "Sleutels en webhooks om je eigen platform te koppelen.",
+    "counts": "{keys, plural, one {# sleutel} other {# sleutels}} · {webhooks, plural, one {# webhook} other {# webhooks}}",
+    "docs": "API-documentatie",
+    "keysTitle": "API-sleutels",
+    "keysText": "Een sleutel leest je interviews en kandidaten en nodigt kandidaten uit namens de persoon die hem heeft gemaakt.",
+    "noKeys": "Nog geen sleutels.",
+    "newKey": "Nieuwe sleutel",
+    "newKeyTitle": "Nieuwe API-sleutel",
+    "keyName": "Naam van de sleutel, bijvoorbeeld Vacaturesite",
+    "expiresIn": "Verloopt over",
+    "expiries": {
+      "1": "1 maand",
+      "3": "3 maanden",
+      "6": "6 maanden",
+      "12": "12 maanden",
+      "never": "Nooit"
+    },
+    "neverWarning": "Een sleutel die nooit verloopt, blijft geldig tot je hem verwijdert, dus een gelekte sleutel kan onbeperkt worden gebruikt. Kies een vervaltermijn, tenzij je sleutels zelf roteert.",
+    "keyCreatedTitle": "Je nieuwe sleutel",
+    "keyCreatedText": "Kopieer hem nu en bewaar hem veilig: hij wordt niet opnieuw getoond.",
+    "copyKey": "Sleutel kopiëren",
+    "keyCopied": "Sleutel gekopieerd",
+    "created": "gemaakt op {date}",
+    "lastUsed": "laatst gebruikt op {date}",
+    "expires": "verloopt op {date}",
+    "neverExpires": "verloopt nooit",
+    "expired": "verlopen",
+    "neverUsed": "nooit gebruikt",
+    "removeKey": "Sleutel verwijderen",
+    "removeKeyTitle": "Deze sleutel verwijderen?",
+    "removeKeyText": "Alles wat “{name}” gebruikt, werkt meteen niet meer.",
+    "webhooksTitle": "Webhooks",
+    "webhooksText": "Als een kandidaat klaar is, stuurt prepza de resultaten naar deze adressen, ondertekend met het secret van elk adres.",
+    "noWebhooks": "Nog geen webhooks.",
+    "addWebhook": "Webhook toevoegen",
+    "addWebhookTitle": "Nieuwe webhook",
+    "webhookUrl": "HTTPS-adres, bijv. https://example.com/prepza",
+    "webhookCreatedTitle": "Het secret van je webhook",
+    "webhookCreatedText": "Gebruik het om de handtekening van elk verzoek te controleren (zie de API-documentatie). Kopieer het nu: het wordt niet opnieuw getoond.",
+    "copySecret": "Secret kopiëren",
+    "secretCopied": "Secret gekopieerd",
+    "added": "toegevoegd op {date}",
+    "removeWebhook": "Webhook verwijderen",
+    "removeWebhookTitle": "Deze webhook verwijderen?",
+    "removeWebhookText": "{url} ontvangt geen gebeurtenissen meer.",
+    "createFailed": "Kan niet worden gemaakt.",
+    "removeFailed": "Kan niet worden verwijderd."
+  },
+  "apiDocs": {
+    "title": "API-documentatie",
+    "intro": "Koppel prepza aan je eigen platform: bekijk je interviews, nodig kandidaten uit en ontvang hun resultaten.",
+    "englishOnly": "Deze pagina is alleen in het Engels.",
+    "baseUrl": "Basis-URL",
+    "copyBaseUrl": "URL kopiëren",
+    "baseUrlCopied": "URL gekopieerd",
+    "endpoints": "Endpoints",
+    "webhooks": "Webhook-gebeurtenissen",
+    "objects": "Objecten",
+    "parameters": "Parameters",
+    "body": "Body",
+    "returns": "Retourneert",
+    "errors": "Fouten",
+    "required": "verplicht"
   }
 }
