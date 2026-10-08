@@ -1,7 +1,7 @@
 import { expect, test } from "../fixtures"
 import { createCompany, createInterview, inviteCandidate } from "../helpers/api"
 import { inviteToken } from "../helpers/db"
-import { visit } from "../helpers/navigation"
+import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { answered } from "../helpers/session"
 import { ownerEmail, throwawayEmail } from "../helpers/users"
@@ -35,6 +35,19 @@ test("candidate takes the interview from the invite link", async ({ signInAs }) 
   await expect(options.nth(1)).toHaveAttribute("aria-pressed", "true")
   await expect(options.nth(0)).toHaveAttribute("aria-pressed", "false")
   await shot(candidate, "pick-changed")
+
+  // A picked question can be reported; its reason comes from the site's menu, not the browser's.
+  await openDialog(candidate, candidate.getByRole("button", { name: "Report question" }))
+  const report = candidate.getByRole("dialog")
+  await report.getByRole("button", { name: "Report reason" }).click()
+  await expect(candidate.locator("select")).toHaveCount(0)
+  await shot(candidate, "report-reasons")
+  await candidate.getByRole("menu").getByRole("menuitemradio").first().click()
+  await expect(candidate.getByRole("menu")).toHaveCount(0)
+  await expect(report.getByRole("button", { name: "Report reason" })).not.toHaveText("Select a reason")
+  await shot(candidate, "report-reason-picked")
+  await report.getByRole("button", { name: "Cancel" }).click()
+  await expect(report).toHaveCount(0)
   const first = await question.textContent()
   await candidate.getByRole("button", { name: "Next question" }).click()
   await expect(question).not.toHaveText(first ?? "")

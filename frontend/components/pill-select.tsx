@@ -1,8 +1,9 @@
 import { cn } from "cn"
-import { ChevronDownIcon } from "lucide-react"
 
-/** The site's select: a grey pill with a chevron at its end, as on the automatic top-up and
- * the question report forms. */
+import { MenuPill } from "@/components/menu-pill"
+
+/** The site's select, with an optional label above it: the pill opens the site's menu, never
+ * the browser's own list. */
 export function PillSelect({
   label,
   ariaLabel,
@@ -22,27 +23,17 @@ export function PillSelect({
   className?: string
 }) {
   return (
-    <label className={cn("block space-y-2", className)}>
-      {label && <span className="text-sm text-muted-foreground">{label}</span>}
-      <span className="relative block rounded-full border border-transparent transition-colors focus-within:border-ring">
-        <select
-          value={value}
-          aria-label={label ? undefined : ariaLabel}
-          disabled={disabled}
-          onChange={(event) => onChange(event.target.value)}
-          className="h-14 w-full appearance-none rounded-full border-0 bg-muted px-6 pe-16 text-lg outline-none disabled:opacity-50 dark:bg-input/30"
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <ChevronDownIcon
-          aria-hidden
-          className="pointer-events-none absolute end-6 top-1/2 size-6 -translate-y-1/2 text-muted-foreground"
-        />
-      </span>
-    </label>
+    <div className={cn("space-y-2", className)}>
+      {label && (
+        <span className="block text-sm text-muted-foreground">{label}</span>
+      )}
+      <MenuPill
+        ariaLabel={label ?? ariaLabel ?? ""}
+        value={value}
+        options={options.map((option) => ({ ...option, keepCase: true }))}
+        onChange={onChange}
+        disabled={disabled}
+      />
+    </div>
   )
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "cn"
-import { ChevronDownIcon, FlagIcon } from "lucide-react"
+import { FlagIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
@@ -17,6 +17,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { MenuPill } from "@/components/menu-pill"
 import { Textarea } from "@/components/ui/textarea"
 import { FEEDBACK_HOVER_CLASS, REPORT_REASONS } from "@/constants/feedback"
 import { MAX_REPORT_COMMENT_LENGTH } from "@/constants/limits"
@@ -105,31 +106,19 @@ export function ReportDialog({ basePath }: { basePath: string }) {
           <DialogDescription>{t("whatsWrong")}</DialogDescription>
         </DialogHeader>
         <form id="report-question-form" onSubmit={send} className="space-y-4">
-          <div className="relative rounded-full border border-transparent transition-colors focus-within:border-ring">
-            <select
-              required
-              aria-label={t("reason")}
-              value={reason}
-              onChange={(event) =>
-                setReason(event.target.value as ReportReason | "")
-              }
-              className={cn(
-                "h-16 w-full appearance-none rounded-full border-0 bg-transparent px-6 pe-16 text-lg outline-none dark:bg-input/30",
-                !reason && "text-muted-foreground"
-              )}
-            >
-              <option value="">{t("selectReason")}</option>
-              {REPORT_REASONS.map((key) => (
-                <option key={key} value={key}>
-                  {reasons(key)}
-                </option>
-              ))}
-            </select>
-            <ChevronDownIcon
-              aria-hidden
-              className="pointer-events-none absolute end-6 top-1/2 size-6 -translate-y-1/2 text-muted-foreground"
-            />
-          </div>
+          {/* The site's select, opening the site's menu (not the browser's). */}
+          <MenuPill
+            ariaLabel={t("reason")}
+            placeholder={t("selectReason")}
+            value={reason || null}
+            options={REPORT_REASONS.map((key) => ({
+              value: key,
+              label: reasons(key),
+              keepCase: true,
+            }))}
+            onChange={(next) => setReason(next as ReportReason)}
+            className="h-16"
+          />
           <div className="rounded-xl border border-transparent transition-colors focus-within:border-ring">
             <Textarea
               maxLength={MAX_REPORT_COMMENT_LENGTH}
