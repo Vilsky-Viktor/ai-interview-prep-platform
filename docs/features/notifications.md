@@ -66,6 +66,10 @@ A company can send its notifications to one Slack channel too, from its integrat
 
 Until all three are set, "Add to Slack" answers "Slack isn't set up yet" and nothing is posted.
 
+### Erased candidates
+
+When a company erases a candidate (`candidate.removed` from companies), its notifications about them (their email and grade) go. When a candidate deletes their prepza account, every company's notifications about them go too.
+
 ### Grouping
 
 Bursts are grouped. Another finished candidate, undelivered invite, or flagged or fixed question about the same interview within 24 hours adds to the last notification ("3 candidates finished …") instead of making a new one.

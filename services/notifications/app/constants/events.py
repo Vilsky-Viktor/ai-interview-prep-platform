@@ -10,3 +10,5 @@ REPORT_SHARED = "report.shared"
 CONTACT_SENT = "contact.sent"
 # Companies: a company was deleted; its notifications go with it.
 COMPANY_DELETED = "company.deleted"
+# Companies: a company erased a candidate; its notifications about them go.
+CANDIDATE_REMOVED = "candidate.removed"

@@ -12,6 +12,7 @@ from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
+from app.routers import candidates as candidates_router
 from app.storage import candidates, companies, interviews
 from app.storage import invites as invite_store
 from tests.unit import fake_candidates
@@ -140,8 +141,13 @@ def revoke(client, monkeypatch, status):
     async def fake_company(_company_id):
         return company
 
-    async def fake_remove(invite_id):
-        removed.append(invite_id)
+    async def fake_remove(invite, company_id):
+        # The other services hear of it with the company and the candidate's email.
+        assert company_id == COMPANY_ID
+        removed.append(invite.id)
+
+    async def no_flush():
+        pass
 
     async def fake_erase(invite_ids):
         erased.extend(invite_ids)
@@ -152,6 +158,7 @@ def revoke(client, monkeypatch, status):
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(invite_store, "remove", fake_remove)
+    monkeypatch.setattr(candidates_router.outbox_service, "flush_quietly", no_flush)
     monkeypatch.setattr(rounds, "delete_invite_sessions", fake_erase)
     monkeypatch.setattr(billing, "release_candidate", fake_release)
     response = client.delete(f"/interviews/{INTERVIEW_ID}/candidates/{INVITE_ID}")

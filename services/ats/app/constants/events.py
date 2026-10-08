@@ -11,3 +11,5 @@ COMPANY_DELETED = "company.deleted"
 CREDITS_ADDED = "credits.added"
 # Only companies have wallets; the event names the owner's kind.
 COMPANY_OWNER = "company"
+# A company erased a candidate: its ATS record of them goes.
+CANDIDATE_REMOVED = "candidate.removed"

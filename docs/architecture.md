@@ -41,7 +41,7 @@ flowchart LR
 
     rounds -- answer.recorded / session.scored / interview.finished / results.rescored --> pubsub[(Pub/Sub topic: events)]
     worker -- generation.completed / cancelled --> pubsub
-    companies -- candidate.invited / reminded, report.shared, company.deleted --> pubsub
+    companies -- candidate.invited / reminded / removed, report.shared, company.deleted --> pubsub
     companies -- candidate.finished, interview.ready / deleted --> pubsub
     rounds -- contact.sent --> pubsub
     billing -- credits.added --> pubsub

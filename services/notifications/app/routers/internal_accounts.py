@@ -9,10 +9,11 @@ router = APIRouter(prefix="/internal", tags=["internal"])
 
 
 @router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_user(user_id: str, caller: ServiceCaller) -> None:
-    """Library, deleting an account: the user's own notifications go; their companies' stay
-    with the companies."""
+async def delete_user(user_id: str, email: str, caller: ServiceCaller) -> None:
+    """Library, deleting an account: the user's own notifications go, and companies'
+    notifications about them as a candidate (their email and grade)."""
     await notifications.remove_user(user_id)
+    await notifications.remove_candidate(email)
 
 
 @router.get("/users/{user_id}/export")

@@ -36,3 +36,41 @@ def test_a_deleted_companys_notifications_go_and_none_come_after(run):
     assert left == []
     # Another company keeps its own.
     assert [item.data["email"] for item in others] == ["b@x.com"]
+
+
+def test_an_erased_candidate_leaves_only_that_companys_bell_and_a_deleted_account_every_one(run):
+    company_id, other_id = company(), company()
+    removed = push(
+        "candidate.removed",
+        {"company_id": company_id, "interview_id": str(uuid.uuid4()), "email": "gone@x.com"},
+        message_id=f"m-{uuid.uuid4()}",
+    )
+
+    async def latest(recipient_id):
+        found = await notifications.latest([(Recipient.COMPANY, recipient_id)], limit=None)
+
+        return [item.data["email"] for item in found]
+
+    async def scenario():
+        for recipient_id, email in [
+            (company_id, "gone@x.com"),
+            (company_id, "stays@x.com"),
+            (other_id, "gone@x.com"),
+        ]:
+            await notifications.add(str(uuid.uuid4()), finished(recipient_id, email=email))
+
+        async with api() as client:
+            code = (await client.post("/internal/events", json=removed)).status_code
+
+        after_erasure = (await latest(company_id), await latest(other_id))
+        # The candidate deletes their prepza account: every company forgets them.
+        await notifications.remove_candidate("Gone@x.com")
+
+        return code, after_erasure, await latest(other_id)
+
+    code, (own, other), other_after_account = run(scenario())
+
+    assert code == 204
+    assert own == ["stays@x.com"]
+    assert other == ["gone@x.com"]
+    assert other_after_account == []

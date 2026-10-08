@@ -20,15 +20,15 @@ resource "google_pubsub_subscription" "dead_letter" {
 # candidate_results.py). A consumer that starts handling a new type needs it added here. Changing
 # a filter replaces the subscription, dropping the messages it still holds: apply when its backlog
 # is empty. Funnel events go only to BigQuery (analytics.tf).
-# Pub/Sub caps a filter at 256 bytes: each type adds 24 bytes plus its name (notifications' is at
-# 237 of them). Before one outgrows it, give its types a shared prefix and filter on
-# hasPrefix(attributes.type, "...") instead.
+# Pub/Sub caps a filter at 256 bytes: each type adds 24 bytes plus its name. A type ending in ".*"
+# matches every type with that prefix (hasPrefix): notifications takes all "candidate." events
+# that way, as listing them one by one outgrew the cap; it ignores the ones it doesn't handle.
 locals {
   consumes = {
     library       = ["answer.recorded", "session.scored"]
     companies     = ["generation.completed", "generation.cancelled", "interview.finished", "results.rescored"]
-    notifications = ["notification.requested", "candidate.invited", "candidate.reminded", "report.shared", "contact.sent", "company.deleted"]
-    ats           = ["candidate.finished", "interview.ready", "interview.deleted", "company.deleted", "credits.added"]
+    notifications = ["notification.requested", "candidate.*", "report.shared", "contact.sent", "company.deleted"]
+    ats           = ["candidate.finished", "candidate.removed", "interview.ready", "interview.deleted", "company.deleted", "credits.added"]
     api           = ["candidate.finished", "company.deleted"]
   }
 }
@@ -38,7 +38,11 @@ resource "google_pubsub_subscription" "push" {
   for_each = local.consumes
   name     = "${each.key}-events"
   topic    = google_pubsub_topic.events.id
-  filter   = join(" OR ", [for type in each.value : "attributes.type = \"${type}\""])
+  filter = join(" OR ", [
+    for type in each.value : endswith(type, ".*")
+    ? "hasPrefix(attributes.type, \"${trimsuffix(type, "*")}\")"
+    : "attributes.type = \"${type}\""
+  ])
 
   ack_deadline_seconds = 60
 

@@ -89,7 +89,7 @@ def test_only_interviews_without_a_candidate_count_as_waiting(run):
         before = await interviews.without_candidates(company.id)
         invite = await invites.upsert(first.id, "dan@example.com", "Backend", "Acme", "en")
         invited = await interviews.without_candidates(company.id)
-        await invites.remove(invite.id)
+        await invites.remove(invite, company.id)
         revoked = await interviews.without_candidates(company.id)
 
         return before, invited, revoked
@@ -258,7 +258,7 @@ def test_a_candidate_invited_again_after_removal_is_held_under_a_new_key(run, mo
         company = await companies.get(found.company_id)
         first = await candidate_invites.invite(found, company, owner, "dana@example.com")
         resent = await candidate_invites.invite(found, company, owner, "dana@example.com")
-        await invites.remove(first.id)
+        await invites.remove(first, found.company_id)
         again = await candidate_invites.invite(found, company, owner, "dana@example.com")
 
         return first, resent, again, await invites.held(found.id, "dana@example.com")
@@ -270,3 +270,33 @@ def test_a_candidate_invited_again_after_removal_is_held_under_a_new_key(run, mo
     # The resend holds the same key again (billing does it once); the new invite a new one.
     assert held == [first.hold_key, first.hold_key, again.hold_key]
     assert (status, stored) == (InviteStatus.INVITED, again.hold_key)
+
+
+def test_removing_a_candidate_tells_the_other_services_to_forget_them(run):
+    async def scenario():
+        found = await interview()
+        invite = await invites.upsert(found.id, "hal@example.com", "Backend", "Acme", "en")
+        await invites.remove(invite, found.company_id)
+
+        async with Session() as session:
+            events = (
+                await session.scalars(
+                    select(OutboxEvent.data).where(
+                        OutboxEvent.event_type == "candidate.removed",
+                        OutboxEvent.data["interview_id"].astext == str(found.id),
+                    )
+                )
+            ).all()
+
+        return found, await invites.status_of(found.id, "hal@example.com"), events
+
+    found, status, events = run(scenario())
+
+    assert status is None
+    assert events == [
+        {
+            "company_id": str(found.company_id),
+            "interview_id": str(found.id),
+            "email": "hal@example.com",
+        }
+    ]

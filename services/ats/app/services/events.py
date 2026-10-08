@@ -3,6 +3,7 @@ from uuid import UUID
 
 from app.constants.events import (
     CANDIDATE_FINISHED,
+    CANDIDATE_REMOVED,
     COMPANY_DELETED,
     COMPANY_OWNER,
     CREDITS_ADDED,
@@ -11,6 +12,7 @@ from app.constants.events import (
 )
 from app.services import ats_candidates
 from app.storage import ats
+from app.storage import ats_candidates as ats_candidates_storage
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +25,8 @@ async def handle(event_type: str, data: dict) -> None:
         await ats_candidates.report(data)
     elif event_type == INTERVIEW_READY:
         await ats_candidates.invite_waiting(UUID(data["interview_id"]))
+    elif event_type == CANDIDATE_REMOVED:
+        await ats_candidates_storage.delete_candidate(UUID(data["interview_id"]), data["email"])
     elif event_type == INTERVIEW_DELETED:
         await ats.delete_interview(UUID(data["interview_id"]))
     elif event_type == COMPANY_DELETED:

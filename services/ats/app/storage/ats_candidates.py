@@ -200,3 +200,14 @@ async def delete_email(email: str) -> None:
     async with Session() as session:
         await session.execute(delete(AtsCandidate).where(AtsCandidate.email == email.lower()))
         await session.commit()
+
+
+async def delete_candidate(interview_id: UUID, email: str) -> None:
+    """The company erased this candidate: the ATS's record of them for that interview goes."""
+    query = delete(AtsCandidate).where(
+        AtsCandidate.interview_id == interview_id, AtsCandidate.email == email.lower()
+    )
+
+    async with Session() as session:
+        await session.execute(query)
+        await session.commit()

@@ -113,3 +113,24 @@ def test_candidates_past_their_retention_period_go(run):
 
     assert deleted == 1
     assert len(left) == 1
+
+
+def test_a_candidate_the_company_erased_goes_from_the_ats_record_too(run):
+    async def scenario():
+        company, interview_id = uuid.uuid4(), uuid.uuid4()
+        connection, link_id, _ = await linked(company, interview_id)
+        await ats_candidates.add(connection.id, link_id, interview_id, "c-2", "bo@x.com")
+        event = {
+            "company_id": str(company),
+            "interview_id": str(interview_id),
+            "email": "ann@x.com",
+        }
+        # Redelivered: deleting twice deletes nothing more.
+        await handle("candidate.removed", event)
+        await handle("candidate.removed", event)
+        left = await rows_of(AtsCandidate, AtsCandidate.connection_id, connection.id)
+        await ats.delete_company(company)
+
+        return [row.email for row in left]
+
+    assert run(scenario()) == ["bo@x.com"]

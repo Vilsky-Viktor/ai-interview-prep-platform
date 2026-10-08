@@ -23,3 +23,5 @@ INTERVIEW_READY = "interview.ready"
 INTERVIEW_DELETED = "interview.deleted"
 # Processed events are remembered this long: past Pub/Sub's 7 days of redeliveries.
 PROCESSED_EVENT_DAYS = 8
+# A company erased a candidate (removed them, results included): other services forget them.
+CANDIDATE_REMOVED = "candidate.removed"

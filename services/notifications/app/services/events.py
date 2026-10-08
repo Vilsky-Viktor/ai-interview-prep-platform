@@ -2,6 +2,7 @@ import logging
 
 from app.config.settings import settings
 from app.constants.events import (
+    CANDIDATE_REMOVED,
     CANDIDATE_INVITED,
     CANDIDATE_REMINDED,
     COMPANY_DELETED,
@@ -78,6 +79,9 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
     if event_type == COMPANY_DELETED:
         await notifications.remove_company(data["company_id"])
         await slack.disconnect(data["company_id"])
+
+    if event_type == CANDIDATE_REMOVED:
+        await notifications.remove_candidate(data["email"], data["company_id"])
 
     if event_type == CONTACT_SENT:
         await deliver(contact_email(data, settings.contact_email), event_id)

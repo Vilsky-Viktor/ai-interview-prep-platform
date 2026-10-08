@@ -107,7 +107,8 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
     if invite.status not in NOT_STARTED:
         await rounds.delete_invite_sessions([invite.id])
 
-    await invites.remove(invite.id)
+    await invites.remove(invite, interview.company_id)
+    await outbox_service.flush_quietly()
     revoked = invite.status in NOT_STARTED
     action = AuditAction.INVITE_REVOKED if revoked else AuditAction.CANDIDATE_DELETED
     await audit.record(interview.company_id, user.uid, action, invite.id)

@@ -72,6 +72,7 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 - after 365 days, by the same daily job,
 - with their interview (`interview.deleted`),
 - with their company (`company.deleted`),
+- when the company erases the candidate in prepza (`candidate.removed`),
 - with the candidate's account. Account deletion and export include them.
 
 ## Candidates from Greenhouse

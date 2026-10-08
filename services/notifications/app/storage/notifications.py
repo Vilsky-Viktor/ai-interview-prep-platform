@@ -179,6 +179,22 @@ async def remove_user(user_id: str) -> None:
         await session.commit()
 
 
+async def remove_candidate(email: str, company_id: str | None = None) -> None:
+    """Company notifications about the candidate with this email go: one company's when it erased
+    them, every company's when they deleted their account. Safe to repeat."""
+    query = delete(Notification).where(
+        Notification.recipient == Recipient.COMPANY,
+        Notification.data["email"].astext == email.lower(),
+    )
+
+    if company_id is not None:
+        query = query.where(Notification.recipient_id == company_id)
+
+    async with Session() as session:
+        await session.execute(query)
+        await session.commit()
+
+
 def deleted_key(recipient: str) -> str:
     """The Received row that marks a recipient as deleted; it's pruned with the others after
     KEEP_DAYS, long after Pub/Sub stops redelivering (7 days)."""

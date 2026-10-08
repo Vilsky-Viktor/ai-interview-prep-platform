@@ -7,7 +7,7 @@ from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from app.constants.events import CANDIDATE_FINISHED, CANDIDATE_INVITED
+from app.constants.events import CANDIDATE_FINISHED, CANDIDATE_INVITED, CANDIDATE_REMOVED
 from app.constants.invites import NOT_STARTED, InviteStatus
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
@@ -268,10 +268,21 @@ async def finish(
         await session.commit()
 
 
-async def remove(invite_id: uuid.UUID) -> None:
-    """Deletes the invite; its link stops working."""
+async def remove(invite: CandidateInvite, company_id) -> None:
+    """Deletes the invite (its link stops working) and tells the other services, which forget the
+    candidate too: the company's notifications about them, the ATS's record of them."""
     async with Session() as session:
-        await session.execute(delete(CandidateInvite).where(CandidateInvite.id == invite_id))
+        await session.execute(delete(CandidateInvite).where(CandidateInvite.id == invite.id))
+        outbox.add(
+            session,
+            OutboxEvent,
+            CANDIDATE_REMOVED,
+            {
+                "company_id": str(company_id),
+                "interview_id": str(invite.interview_id),
+                "email": invite.email,
+            },
+        )
         await session.commit()
 
 
