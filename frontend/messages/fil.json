@@ -1212,5 +1212,25 @@
     "returns": "Ibinabalik",
     "errors": "Mga error",
     "required": "kailangan"
+  },
+  "unsubscribe": {
+    "title": "Mag-unsubscribe",
+    "confirm": "Kumpirmahin",
+    "done": "Naka-unsubscribe ka na",
+    "settings": "Mga setting ng email",
+    "failed": "Hindi ka ma-unsubscribe. Pakisubukan ulit.",
+    "invalid": "Hindi valid ang link na ito para mag-unsubscribe.",
+    "what": {
+      "digest": "Hindi mo na matatanggap ang buod ng aktibidad.",
+      "candidate_finished": "Hindi na isasama sa buod ng aktibidad ang mga aplikanteng nakatapos.",
+      "invite_undelivered": "Hindi na isasama sa buod ng aktibidad ang mga imbitasyong hindi naihatid.",
+      "ats_not_invited": "Hindi na isasama sa buod ng aktibidad ang mga aplikante mula sa ATS na hindi na-imbitahan.",
+      "interview_ready": "Hindi na isasama sa buod ng aktibidad ang mga interview na handa na.",
+      "reminders": "Hindi ka na makakatanggap ng mga paalala.",
+      "updates": "Hindi ka na makakatanggap ng mga update at balita tungkol sa produkto.",
+      "promotions": "Hindi ka na makakatanggap ng mga alok at promo.",
+      "invite_reminders": "Hindi ka na makakatanggap ng mga paalala para sa interview na ito.",
+      "company": "Hindi ka na makakatanggap ng email para sa {company}."
+    }
   }
 }

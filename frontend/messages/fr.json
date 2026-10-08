@@ -1208,5 +1208,25 @@
     "returns": "Réponse",
     "errors": "Erreurs",
     "required": "obligatoire"
+  },
+  "unsubscribe": {
+    "title": "Se désabonner",
+    "confirm": "Confirmer",
+    "done": "Vous êtes désabonné",
+    "settings": "Préférences d'e-mail",
+    "failed": "Impossible de vous désabonner. Veuillez réessayer.",
+    "invalid": "Ce lien de désabonnement n'est pas valide.",
+    "what": {
+      "digest": "Vous ne recevrez plus le récapitulatif d'activité.",
+      "candidate_finished": "Le récapitulatif d'activité n'inclura plus les candidats ayant terminé.",
+      "invite_undelivered": "Le récapitulatif d'activité n'inclura plus les invitations non remises.",
+      "ats_not_invited": "Le récapitulatif d'activité n'inclura plus les candidats de l'ATS non invités.",
+      "interview_ready": "Le récapitulatif d'activité n'inclura plus les entretiens prêts.",
+      "reminders": "Vous ne recevrez plus de rappels.",
+      "updates": "Vous ne recevrez plus les nouveautés du produit ni les actualités.",
+      "promotions": "Vous ne recevrez plus d'offres ni de promotions.",
+      "invite_reminders": "Vous ne recevrez plus de rappels pour cet entretien.",
+      "company": "Vous ne recevrez plus d'e-mails de la part de {company}."
+    }
   }
 }

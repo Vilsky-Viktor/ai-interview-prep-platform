@@ -1212,5 +1212,25 @@
     "returns": "Tagastab",
     "errors": "Vead",
     "required": "kohustuslik"
+  },
+  "unsubscribe": {
+    "title": "Loobu tellimusest",
+    "confirm": "Kinnita",
+    "done": "Sa loobusid tellimusest",
+    "settings": "E-kirjade seaded",
+    "failed": "Tellimusest loobumine ei õnnestunud. Proovi uuesti.",
+    "invalid": "See tellimusest loobumise link ei kehti.",
+    "what": {
+      "digest": "Sa ei saa enam tegevuste kokkuvõtet.",
+      "candidate_finished": "Tegevuste kokkuvõttes ei ole enam lõpetanud kandidaate.",
+      "invite_undelivered": "Tegevuste kokkuvõttes ei ole enam kohale jõudmata kutseid.",
+      "ats_not_invited": "Tegevuste kokkuvõttes ei ole enam kutsumata ATS-i kandidaate.",
+      "interview_ready": "Tegevuste kokkuvõttes ei ole enam valmis intervjuusid.",
+      "reminders": "Sa ei saa enam meeldetuletusi.",
+      "updates": "Sa ei saa enam tooteuudiseid.",
+      "promotions": "Sa ei saa enam pakkumisi ja kampaaniaid.",
+      "invite_reminders": "Sa ei saa enam selle intervjuu meeldetuletusi.",
+      "company": "Sa ei saa enam e-kirju ettevõttelt {company}."
+    }
   }
 }

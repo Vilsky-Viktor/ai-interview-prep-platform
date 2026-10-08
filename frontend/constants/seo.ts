@@ -17,6 +17,7 @@ export const PRIVATE_PATHS = [
   "/settings",
   "/superadmin",
   "/top-up",
+  "/unsubscribe",
 ]
 
 // Not crawled at all: the API and Sentry's tunnel aren't pages.

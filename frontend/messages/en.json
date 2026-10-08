@@ -1208,5 +1208,25 @@
     "returns": "Returns",
     "errors": "Errors",
     "required": "required"
+  },
+  "unsubscribe": {
+    "title": "Unsubscribe",
+    "confirm": "Confirm",
+    "done": "You're unsubscribed",
+    "settings": "Email settings",
+    "failed": "Couldn't unsubscribe. Please try again.",
+    "invalid": "This unsubscribe link isn't valid.",
+    "what": {
+      "digest": "You won't get the activity digest anymore.",
+      "candidate_finished": "The activity digest won't include candidates who finished anymore.",
+      "invite_undelivered": "The activity digest won't include undelivered invites anymore.",
+      "ats_not_invited": "The activity digest won't include ATS candidates not invited anymore.",
+      "interview_ready": "The activity digest won't include interviews that are ready anymore.",
+      "reminders": "You won't get reminders anymore.",
+      "updates": "You won't get product updates and news anymore.",
+      "promotions": "You won't get offers and promotions anymore.",
+      "invite_reminders": "You won't get reminders for this interview anymore.",
+      "company": "You won't get emails from {company} anymore."
+    }
   }
 }

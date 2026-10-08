@@ -1208,5 +1208,25 @@
     "returns": "Respons",
     "errors": "Kesalahan",
     "required": "wajib"
+  },
+  "unsubscribe": {
+    "title": "Berhenti berlangganan",
+    "confirm": "Konfirmasi",
+    "done": "Kamu sudah berhenti berlangganan",
+    "settings": "Pengaturan email",
+    "failed": "Gagal berhenti berlangganan. Coba lagi.",
+    "invalid": "Tautan berhenti berlangganan ini tidak valid.",
+    "what": {
+      "digest": "Kamu tidak akan menerima ringkasan aktivitas lagi.",
+      "candidate_finished": "Ringkasan aktivitas tidak akan memuat kandidat yang selesai lagi.",
+      "invite_undelivered": "Ringkasan aktivitas tidak akan memuat undangan yang tidak terkirim lagi.",
+      "ats_not_invited": "Ringkasan aktivitas tidak akan memuat kandidat ATS yang tidak diundang lagi.",
+      "interview_ready": "Ringkasan aktivitas tidak akan memuat wawancara yang siap lagi.",
+      "reminders": "Kamu tidak akan menerima pengingat lagi.",
+      "updates": "Kamu tidak akan menerima pembaruan produk dan berita lagi.",
+      "promotions": "Kamu tidak akan menerima penawaran dan promosi lagi.",
+      "invite_reminders": "Kamu tidak akan menerima pengingat untuk wawancara ini lagi.",
+      "company": "Kamu tidak akan menerima email dari {company} lagi."
+    }
   }
 }

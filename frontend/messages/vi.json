@@ -1204,5 +1204,25 @@
     "returns": "Giá trị trả về",
     "errors": "Lỗi",
     "required": "bắt buộc"
+  },
+  "unsubscribe": {
+    "title": "Hủy đăng ký",
+    "confirm": "Xác nhận",
+    "done": "Bạn đã hủy đăng ký",
+    "settings": "Cài đặt email",
+    "failed": "Không hủy đăng ký được. Vui lòng thử lại.",
+    "invalid": "Liên kết hủy đăng ký này không hợp lệ.",
+    "what": {
+      "digest": "Bạn sẽ không nhận tóm tắt hoạt động nữa.",
+      "candidate_finished": "Tóm tắt hoạt động sẽ không còn gồm ứng viên đã hoàn thành.",
+      "invite_undelivered": "Tóm tắt hoạt động sẽ không còn gồm lời mời chưa được gửi đến.",
+      "ats_not_invited": "Tóm tắt hoạt động sẽ không còn gồm ứng viên từ ATS chưa được mời.",
+      "interview_ready": "Tóm tắt hoạt động sẽ không còn gồm buổi phỏng vấn đã sẵn sàng.",
+      "reminders": "Bạn sẽ không nhận lời nhắc nữa.",
+      "updates": "Bạn sẽ không nhận cập nhật sản phẩm và tin tức nữa.",
+      "promotions": "Bạn sẽ không nhận ưu đãi và khuyến mãi nữa.",
+      "invite_reminders": "Bạn sẽ không nhận lời nhắc về buổi phỏng vấn này nữa.",
+      "company": "Bạn sẽ không nhận email từ {company} nữa."
+    }
   }
 }

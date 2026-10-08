@@ -15,8 +15,14 @@ fi
 gateway="$("${compose[@]}" ps -q gateway)"
 network="$(docker inspect -f '{{range $name, $_ := .NetworkSettings.Networks}}{{$name}}{{end}}' "$gateway")"
 
+# The secret that signs emails' unsubscribe links, as notifications has it (compose's default when
+# .env has none), passed by name so it's never printed or put on the command line.
+EMAIL_LINK_SECRET="$(sed -n 's/^EMAIL_LINK_SECRET=//p' .env 2>/dev/null)"
+export EMAIL_LINK_SECRET="${EMAIL_LINK_SECRET:-local-email-link-secret}"
+
 docker run --rm --network "$network" \
   -v "$PWD/e2e_tests/pages:/tests" -w /tests \
+  -e EMAIL_LINK_SECRET \
   -e SITE_URL=http://localhost:8090 \
   -e HOST_RULES="MAP localhost:8090 gateway:80" \
   -e REQUEST_URL=http://gateway \

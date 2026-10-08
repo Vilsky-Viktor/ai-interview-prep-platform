@@ -1208,5 +1208,25 @@
     "returns": "Zwraca",
     "errors": "Błędy",
     "required": "wymagane"
+  },
+  "unsubscribe": {
+    "title": "Wypisz się",
+    "confirm": "Potwierdź",
+    "done": "Wypisano Cię",
+    "settings": "Ustawienia e-maili",
+    "failed": "Nie udało się wypisać. Spróbuj ponownie.",
+    "invalid": "Ten link do wypisania się nie jest ważny.",
+    "what": {
+      "digest": "Nie będziesz już dostawać podsumowania aktywności.",
+      "candidate_finished": "Podsumowanie aktywności nie będzie już obejmować kandydatów, którzy skończyli.",
+      "invite_undelivered": "Podsumowanie aktywności nie będzie już obejmować niedostarczonych zaproszeń.",
+      "ats_not_invited": "Podsumowanie aktywności nie będzie już obejmować niezaproszonych kandydatów z ATS.",
+      "interview_ready": "Podsumowanie aktywności nie będzie już obejmować gotowych rozmów.",
+      "reminders": "Nie będziesz już dostawać przypomnień.",
+      "updates": "Nie będziesz już dostawać nowości o produkcie i aktualności.",
+      "promotions": "Nie będziesz już dostawać ofert i promocji.",
+      "invite_reminders": "Nie będziesz już dostawać przypomnień o tej rozmowie.",
+      "company": "Nie będziesz już dostawać e-maili od {company}."
+    }
   }
 }

@@ -624,6 +624,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/users/{user_id}/unsubscribe": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Unsubscribe
+     * @description Notifications, for an email's unsubscribe link (checked there): turns the settings off,
+     *     logged as an unsubscribe. Safe to repeat: a setting already off logs nothing.
+     */
+    post: operations["unsubscribe_internal_users__user_id__unsubscribe_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/schedules/outbox": {
     parameters: {
       query?: never
@@ -1596,6 +1617,14 @@ export interface components {
       title: string
       /** Subtopics */
       subtopics: string[]
+    }
+    /**
+     * UnsubscribeIn
+     * @description The settings an unsubscribe link turns off.
+     */
+    UnsubscribeIn: {
+      /** Settings */
+      settings: components["schemas"]["EmailSetting"][]
     }
     /** ValidationError */
     ValidationError: {
@@ -2794,6 +2823,41 @@ export interface operations {
       cookie?: never
     }
     requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["EmailPreferencesOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  unsubscribe_internal_users__user_id__unsubscribe_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UnsubscribeIn"]
+      }
+    }
     responses: {
       /** @description Successful Response */
       200: {

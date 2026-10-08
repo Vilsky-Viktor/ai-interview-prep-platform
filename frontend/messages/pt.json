@@ -1204,5 +1204,25 @@
     "returns": "Retorno",
     "errors": "Erros",
     "required": "obrigatório"
+  },
+  "unsubscribe": {
+    "title": "Cancelar inscrição",
+    "confirm": "Confirmar",
+    "done": "Sua inscrição foi cancelada",
+    "settings": "Configurações de e-mail",
+    "failed": "Não foi possível cancelar a inscrição. Tente novamente.",
+    "invalid": "Este link para cancelar a inscrição não é válido.",
+    "what": {
+      "digest": "Você não vai mais receber o resumo de atividades.",
+      "candidate_finished": "O resumo de atividades não vai mais incluir candidatos que concluíram.",
+      "invite_undelivered": "O resumo de atividades não vai mais incluir convites não entregues.",
+      "ats_not_invited": "O resumo de atividades não vai mais incluir candidatos do ATS não convidados.",
+      "interview_ready": "O resumo de atividades não vai mais incluir entrevistas prontas.",
+      "reminders": "Você não vai mais receber lembretes.",
+      "updates": "Você não vai mais receber novidades do produto e notícias.",
+      "promotions": "Você não vai mais receber ofertas e promoções.",
+      "invite_reminders": "Você não vai mais receber lembretes desta entrevista.",
+      "company": "Você não vai mais receber e-mails de {company}."
+    }
   }
 }

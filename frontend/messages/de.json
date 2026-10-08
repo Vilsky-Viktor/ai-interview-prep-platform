@@ -1208,5 +1208,25 @@
     "returns": "Rückgabe",
     "errors": "Fehler",
     "required": "erforderlich"
+  },
+  "unsubscribe": {
+    "title": "Abmelden",
+    "confirm": "Bestätigen",
+    "done": "Du bist abgemeldet",
+    "settings": "E-Mail-Einstellungen",
+    "failed": "Die Abmeldung hat nicht geklappt. Bitte versuche es erneut.",
+    "invalid": "Dieser Abmeldelink ist nicht gültig.",
+    "what": {
+      "digest": "Du bekommst die Aktivitätsübersicht nicht mehr.",
+      "candidate_finished": "Die Aktivitätsübersicht enthält keine Kandidaten mehr, die fertig sind.",
+      "invite_undelivered": "Die Aktivitätsübersicht enthält keine nicht zugestellten Einladungen mehr.",
+      "ats_not_invited": "Die Aktivitätsübersicht enthält keine nicht eingeladenen Kandidaten aus dem ATS mehr.",
+      "interview_ready": "Die Aktivitätsübersicht enthält keine fertigen Interviews mehr.",
+      "reminders": "Du bekommst keine Erinnerungen mehr.",
+      "updates": "Du bekommst keine Produkt-Updates und Neuigkeiten mehr.",
+      "promotions": "Du bekommst keine Angebote und Aktionen mehr.",
+      "invite_reminders": "Du bekommst keine Erinnerungen mehr zu diesem Interview.",
+      "company": "Du bekommst keine E-Mails mehr von {company}."
+    }
   }
 }

@@ -1204,5 +1204,25 @@
     "returns": "Retourneert",
     "errors": "Fouten",
     "required": "verplicht"
+  },
+  "unsubscribe": {
+    "title": "Afmelden",
+    "confirm": "Bevestigen",
+    "done": "Je bent afgemeld",
+    "settings": "E-mailinstellingen",
+    "failed": "Afmelden is niet gelukt. Probeer het opnieuw.",
+    "invalid": "Deze afmeldlink is niet geldig.",
+    "what": {
+      "digest": "Je krijgt het activiteitenoverzicht niet meer.",
+      "candidate_finished": "Het activiteitenoverzicht bevat niet langer kandidaten die klaar zijn.",
+      "invite_undelivered": "Het activiteitenoverzicht bevat niet langer niet-bezorgde uitnodigingen.",
+      "ats_not_invited": "Het activiteitenoverzicht bevat niet langer niet-uitgenodigde kandidaten uit het ATS.",
+      "interview_ready": "Het activiteitenoverzicht bevat niet langer interviews die klaar zijn.",
+      "reminders": "Je krijgt geen herinneringen meer.",
+      "updates": "Je krijgt geen productupdates en nieuws meer.",
+      "promotions": "Je krijgt geen aanbiedingen en acties meer.",
+      "invite_reminders": "Je krijgt geen herinneringen meer voor dit interview.",
+      "company": "Je krijgt geen e-mails meer namens {company}."
+    }
   }
 }

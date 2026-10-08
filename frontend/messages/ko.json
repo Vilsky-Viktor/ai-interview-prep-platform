@@ -1199,5 +1199,25 @@
     "returns": "반환값",
     "errors": "오류",
     "required": "필수"
+  },
+  "unsubscribe": {
+    "title": "수신 거부",
+    "confirm": "확인",
+    "done": "수신 거부되었습니다",
+    "settings": "이메일 설정",
+    "failed": "수신 거부하지 못했습니다. 다시 시도해 주세요.",
+    "invalid": "이 수신 거부 링크는 유효하지 않습니다.",
+    "what": {
+      "digest": "이제 활동 요약을 받지 않습니다.",
+      "candidate_finished": "이제 활동 요약에 면접을 완료한 지원자가 포함되지 않습니다.",
+      "invite_undelivered": "이제 활동 요약에 전달되지 않은 초대가 포함되지 않습니다.",
+      "ats_not_invited": "이제 활동 요약에 초대되지 않은 ATS 지원자가 포함되지 않습니다.",
+      "interview_ready": "이제 활동 요약에 준비된 면접이 포함되지 않습니다.",
+      "reminders": "이제 리마인더를 받지 않습니다.",
+      "updates": "이제 제품 업데이트 및 소식을 받지 않습니다.",
+      "promotions": "이제 혜택 및 프로모션을 받지 않습니다.",
+      "invite_reminders": "이제 이 면접의 알림을 받지 않습니다.",
+      "company": "이제 {company}의 이메일을 받지 않습니다."
+    }
   }
 }

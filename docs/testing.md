@@ -76,7 +76,7 @@ They check:
 - the footer at the end,
 - lowercase titles (articles keep their capitals).
 
-Other specs check the home page's sections: the advantages' titles beside their icons in every language (`advantages.spec.ts`), the ATSs, Slack and the API (`ats.spec.ts`), the catalog's prices and free candidates on the home and pricing pages (`pricing.spec.ts`), the chat apps a report can be shared to (`reports.spec.ts`), smooth scrolling and back to top (`scroll.spec.ts`), and the API docs (`api-docs.spec.ts`).
+Other specs check the home page's sections: the advantages' titles beside their icons in every language (`advantages.spec.ts`), the ATSs, Slack and the API (`ats.spec.ts`), the catalog's prices and free candidates on the home and pricing pages (`pricing.spec.ts`), the chat apps a report can be shared to (`reports.spec.ts`), smooth scrolling and back to top (`scroll.spec.ts`), and the API docs (`api-docs.spec.ts`). `unsubscribe.spec.ts` checks the unsubscribe page: an invalid link says so, the page isn't indexed, and a candidate's link to a made-up company changes nothing until "Confirm". It signs that link with `EMAIL_LINK_SECRET`, which `pages.sh` passes from `.env` without printing it; each run leaves its made-up companies' opt-outs in the local notifications database.
 
 `seo.spec.ts` checks language addresses and hreflang, titles, structured data, the sitemap, robots.txt, noindex on private pages and thin template pages, links and levels on a template's page in its language, redirects and the footer. `metadata.spec.ts` checks page descriptions, the compare hub's title, FAQ and article data, practice breadcrumbs, the direction of right-to-left template text, the preview picture's noindex and the footer's menu.
 
@@ -109,7 +109,8 @@ Playwright tests of the signed-in pages, in the same Docker image, against the r
 - Slack,
 - the automatic top-up,
 - an interview whose generation failed,
-- email settings: the defaults, each kind saved as it changes, the activity digest's box (all, none, some), and what the sign-in's email boxes turn on, at a first sign-in and a later one.
+- email settings: the defaults, each kind saved as it changes, the activity digest's box (all, none, some), and what the sign-in's email boxes turn on, at a first sign-in and a later one,
+- unsubscribing: a user's activity digest link turns its four kinds off in Settings, and after a candidate's "Don't email me for <company>" link, the company's next invite to that address shows as undelivered. Links are signed with `EMAIL_LINK_SECRET` from `.env`.
 
 **Cleanup.** After every run, `teardown.ts` deletes every throwaway account, and so their companies and data, leftovers of stopped runs included. It fails if any is left.
 

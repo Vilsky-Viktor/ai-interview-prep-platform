@@ -1208,5 +1208,25 @@
     "returns": "Risposta",
     "errors": "Errori",
     "required": "obbligatorio"
+  },
+  "unsubscribe": {
+    "title": "Annulla l'iscrizione",
+    "confirm": "Conferma",
+    "done": "Iscrizione annullata",
+    "settings": "Impostazioni email",
+    "failed": "Impossibile annullare l'iscrizione. Riprova.",
+    "invalid": "Questo link per annullare l'iscrizione non è valido.",
+    "what": {
+      "digest": "Non riceverai più il riepilogo attività.",
+      "candidate_finished": "Il riepilogo attività non includerà più i candidati che hanno finito.",
+      "invite_undelivered": "Il riepilogo attività non includerà più gli inviti non consegnati.",
+      "ats_not_invited": "Il riepilogo attività non includerà più i candidati dall'ATS non invitati.",
+      "interview_ready": "Il riepilogo attività non includerà più i colloqui pronti.",
+      "reminders": "Non riceverai più promemoria.",
+      "updates": "Non riceverai più novità sul prodotto e notizie.",
+      "promotions": "Non riceverai più offerte e promozioni.",
+      "invite_reminders": "Non riceverai più promemoria per questo colloquio.",
+      "company": "Non riceverai più email da parte di {company}."
+    }
   }
 }

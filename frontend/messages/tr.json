@@ -1207,5 +1207,25 @@
     "returns": "Dönüş değeri",
     "errors": "Hatalar",
     "required": "zorunlu"
+  },
+  "unsubscribe": {
+    "title": "Abonelikten çık",
+    "confirm": "Onayla",
+    "done": "Abonelikten çıktınız",
+    "settings": "E-posta ayarları",
+    "failed": "Abonelikten çıkılamadı. Lütfen tekrar deneyin.",
+    "invalid": "Bu abonelikten çıkma bağlantısı geçerli değil.",
+    "what": {
+      "digest": "Artık etkinlik özetini almayacaksınız.",
+      "candidate_finished": "Etkinlik özeti artık mülakatı tamamlayan adayları içermeyecek.",
+      "invite_undelivered": "Etkinlik özeti artık iletilemeyen davetleri içermeyecek.",
+      "ats_not_invited": "Etkinlik özeti artık davet edilmeyen ATS adaylarını içermeyecek.",
+      "interview_ready": "Etkinlik özeti artık hazır mülakatları içermeyecek.",
+      "reminders": "Artık hatırlatma almayacaksınız.",
+      "updates": "Artık ürün güncellemeleri ve haberler almayacaksınız.",
+      "promotions": "Artık teklifler ve kampanyalar almayacaksınız.",
+      "invite_reminders": "Artık bu mülakat için hatırlatma almayacaksınız.",
+      "company": "Artık {company} adına e-posta almayacaksınız."
+    }
   }
 }

@@ -1199,5 +1199,25 @@
     "returns": "返回",
     "errors": "错误",
     "required": "必填"
+  },
+  "unsubscribe": {
+    "title": "退订",
+    "confirm": "确认",
+    "done": "你已退订",
+    "settings": "邮件设置",
+    "failed": "无法退订，请重试。",
+    "invalid": "此退订链接无效。",
+    "what": {
+      "digest": "你将不再收到动态摘要。",
+      "candidate_finished": "动态摘要将不再包含已完成面试的候选人。",
+      "invite_undelivered": "动态摘要将不再包含未送达的邀请。",
+      "ats_not_invited": "动态摘要将不再包含未被邀请的 ATS 候选人。",
+      "interview_ready": "动态摘要将不再包含已就绪的面试。",
+      "reminders": "你将不再收到提醒。",
+      "updates": "你将不再收到产品更新与新闻。",
+      "promotions": "你将不再收到优惠与促销。",
+      "invite_reminders": "你将不再收到此面试的提醒。",
+      "company": "你将不再收到来自 {company} 的邮件。"
+    }
   }
 }

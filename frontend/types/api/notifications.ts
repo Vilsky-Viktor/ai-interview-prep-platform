@@ -77,9 +77,11 @@ export interface paths {
     put?: never
     /**
      * Receive Event
-     * @description Pub/Sub pushes every event here. A failed email answers with an error, so Pub/Sub
-     *     retries it, and moves it to the dead-letter topic after the subscription's maximum
-     *     attempts; Resend never sends the same message twice.
+     * @description Pub/Sub pushes every event here. A failed email or Slack post answers with an error, so
+     *     Pub/Sub retries it, and moves it to the dead-letter topic after the subscription's maximum
+     *     attempts; neither Resend nor Slack gets the same message twice. Over Resend's per-second limit
+     *     (a burst of invites) it answers 429: Pub/Sub retries with backoff, and it isn't counted as a
+     *     server error.
      */
     post: operations["receive_event_internal_events_post"]
     delete?: never
@@ -121,8 +123,9 @@ export interface paths {
     post?: never
     /**
      * Delete User
-     * @description Library, deleting an account: the user's own notifications go; their companies' stay
-     *     with the companies.
+     * @description Library, deleting an account: the user's own notifications go, and companies'
+     *     notifications about them as a candidate (their email and grade); the Slack channels they
+     *     connected stay with their companies, without their id.
      */
     delete: operations["delete_user_internal_users__user_id__delete"]
     options?: never
@@ -137,13 +140,14 @@ export interface paths {
       path?: never
       cookie?: never
     }
+    get?: never
+    put?: never
     /**
      * Export User
-     * @description Library, for "Download my data": the user's own notifications.
+     * @description Library, for "Download my data": the user's own notifications and the Slack channels
+     *     they connected.
      */
-    get: operations["export_user_internal_users__user_id__export_get"]
-    put?: never
-    post?: never
+    post: operations["export_user_internal_users__user_id__export_post"]
     delete?: never
     options?: never
     head?: never
@@ -200,8 +204,8 @@ export interface paths {
     }
     /**
      * Callback
-     * @description Slack sends the browser back here; the signed state says whose company it is. Then on to
-     *     the company's Slack page.
+     * @description Slack sends the browser back here; the signed, one-time state says whose company it is.
+     *     Then on to the company's Slack page.
      */
     get: operations["callback_slack_callback_get"]
     put?: never
@@ -223,6 +227,33 @@ export interface paths {
     /** Set Kinds */
     put: operations["set_kinds_slack_kinds_put"]
     post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/unsubscribe/{token}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Describe
+     * @description What an email's unsubscribe link stops; no sign-in. Reading it changes nothing, as mail
+     *     scanners open links.
+     */
+    get: operations["describe_unsubscribe__token__get"]
+    put?: never
+    /**
+     * Unsubscribe
+     * @description Applies the link; no sign-in. The unsubscribe page's button posts here, and so do mail
+     *     clients' own unsubscribe buttons (RFC 8058: `List-Unsubscribe=One-Click` as the body, which
+     *     needs nothing more). Safe to repeat.
+     */
+    post: operations["unsubscribe_unsubscribe__token__post"]
     delete?: never
     options?: never
     head?: never
@@ -360,6 +391,43 @@ export interface components {
     SlackStartOut: {
       /** Url */
       url: string
+    }
+    /**
+     * UnsubscribeOut
+     * @description What a link stops, for the page to say before it's confirmed: the type, and for a
+     *     candidate's link the company's name.
+     */
+    UnsubscribeOut: {
+      type: components["schemas"]["UnsubscribeType"]
+      /** Company */
+      company?: string | null
+    }
+    /**
+     * UnsubscribeType
+     * @description What an unsubscribe link stops. A user's optional emails: one kind of the activity digest,
+     *     the whole digest, reminders, product updates or offers. A candidate's emails, sent on a
+     *     company's behalf: the reminders for one invite, or every email from that company.
+     * @enum {string}
+     */
+    UnsubscribeType:
+      | "candidate_finished"
+      | "invite_undelivered"
+      | "ats_not_invited"
+      | "interview_ready"
+      | "digest"
+      | "reminders"
+      | "updates"
+      | "promotions"
+      | "invite_reminders"
+      | "company"
+    /**
+     * UserEmailIn
+     * @description The account's email, sent in the body of library's calls to delete or export a user's
+     *     data, so request logs don't record it.
+     */
+    UserEmailIn: {
+      /** Email */
+      email: string
     }
     /** ValidationError */
     ValidationError: {
@@ -499,7 +567,11 @@ export interface operations {
       }
       cookie?: never
     }
-    requestBody?: never
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
     responses: {
       /** @description Successful Response */
       204: {
@@ -519,7 +591,7 @@ export interface operations {
       }
     }
   }
-  export_user_internal_users__user_id__export_get: {
+  export_user_internal_users__user_id__export_post: {
     parameters: {
       query?: never
       header?: never
@@ -690,6 +762,66 @@ export interface operations {
         "application/json": components["schemas"]["SlackKindsIn"]
       }
     }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  describe_unsubscribe__token__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        token: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["UnsubscribeOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  unsubscribe_unsubscribe__token__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        token: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
     responses: {
       /** @description Successful Response */
       204: {
