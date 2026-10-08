@@ -69,7 +69,7 @@ Gerçek bir pozisyon için açmadan önce:
 1. **ATS'nizde yalnızca test için bir aşama oluşturun,** örneğin "Beceri testi". Başka bir anlamı olan bir aşamayı yeniden kullanmayın, yoksa adaylar yanlışlıkla davet edilir.
 2. **Anahtarı bir yönetici hesabından oluşturun;** bu hesap bağlamak istediğiniz tüm ilanları görebilmeli ve yalnızca dokümantasyonda listelenen yetkilere sahip olmalı.
 3. **Her ilanı kendi testine bağlayın** ve daveti tetikleyen aşamayı seçin.
-4. **ATS'niz elle yapmanızı istiyorsa webhook'u kurun** ve sırrını aracın istediği yere yapıştırın.
+4. **ATS'niz elle yapmanızı istiyorsa webhook'u kurun** ve gizli anahtarını aracın istediği yere yapıştırın.
 5. **Kendinizle deneyin.** Kendi e-posta adresinizle bir aday ekleyin, onu aşamaya taşıyın, testi çözün ve notun ATS'de göründüğünü kontrol edin.
 6. **Başarısızlıkları kimin takip edeceğine karar verin:** bir davet gönderilemediğinde kime haber verileceğine ve bunu kimin düzelteceğine.
 7. **Sonuçların nasıl okunacağında anlaşın.** Geçme notu bir rehberdir, otomatik bir ret değildir. Buna sonuçlar gelmeden önce karar verin, sonra değil.
@@ -96,9 +96,9 @@ prepza **Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR**'a bağlanır
 - **Kendi platformunuz.** ATS'niz listede yoksa prepza'nın [API](/api-docs)'si, bir API anahtarıyla aday davet etmenize ve bir aday bitirdiğinde imzalı bir webhook almanıza olanak tanır.
 - **Veriler belirli bir süre saklanır.** Bir ATS'den kaydedilen adaylar 365 gün sonra ya da daha önce, mülakatları veya şirketleriyle birlikte silinir.
 
-Bazı ATS'ler kendi tarafında bir adım gerektirir. Greenhouse, Teamtailor ve Recruitee webhook'u elle eklemenizi ister; prepza'nın Talimatlar penceresi adresi ve sırrın nereye yapıştırılacağını gösterir. Teamtailor'ın webhook'ları ücretli bir eklentidir, Breezy HR'ın API'si ise Pro planıyla gelir. Workable ve Breezy HR'ın webhook'larını prepza kendisi kurar.
+Bazı ATS'ler kendi tarafında bir adım gerektirir. Greenhouse, Teamtailor ve Recruitee webhook'u elle eklemenizi ister; prepza'nın Talimatlar penceresi adresi ve gizli anahtarın nereye yapıştırılacağını gösterir. Teamtailor'ın webhook'ları bir eklentidir, Breezy HR'ın API'si ise Pro planıyla gelir. Workable ve Breezy HR'ın webhook'larını prepza kendisi kurar.
 
-Fiyatlandırma aday başınadır ve abonelik yoktur: yalnızca en az bir soruyu yanıtlayan adaylar için ödeme yaparsınız; $30 ve $150'lık yüklemelerde aday başına $3, $250'lık yüklemeden itibaren $2 ve $1,000'lık yüklemeden itibaren $1. Fiyatlar ABD doları cinsindendir; KDV veya satış vergisi ödeme adımında hesaplanır. ATS bağlamak ve mülakat oluşturmak ücretsizdir ve ilk şirketinizin ilk 3 adayı ücretsizdir. Bkz. [fiyatlar](/pricing).
+Fiyatlandırma aday başınadır ve abonelik yoktur: yalnızca en az bir soruyu yanıtlayan adaylar için ödeme yaparsınız; $30 ve $150'lık yüklemelerde aday başına $3, $250'lık yüklemeden itibaren $2 ve $1.000'lık yüklemeden itibaren $1. Fiyatlar ABD doları cinsindendir; KDV veya satış vergisi ödeme adımında hesaplanır. ATS bağlamak ve mülakat oluşturmak ücretsizdir ve ilk şirketinizin ilk 3 adayı ücretsizdir. Bkz. [fiyatlar](/pricing).
 
 ## İlgili yazılar
 

@@ -29,7 +29,7 @@ Một tích hợp tốt bám theo các giai đoạn bạn đang dùng. Nó khôn
 
 1. **Ứng viên nộp đơn** và vào ATS của bạn như bình thường.
 2. **Một người chuyển ứng viên sang giai đoạn kiểm tra,** ví dụ "Kiểm tra kỹ năng". Việc chuyển này là điểm kích hoạt, nên con người vẫn quyết định ai được kiểm tra.
-3. **Công cụ kiểm tra tự động gửi lời mời** cho bài kiểm tra gắn với vị trí đó.
+3. **Công cụ kiểm tra tự động gửi lời mời** cho bài kiểm tra gắn với tin tuyển dụng đó.
 4. **Ứng viên làm bài** vào thời gian thuận tiện, trong hạn bạn đặt ra.
 5. **Kết quả được ghi lại vào hồ sơ ứng viên trong ATS:** điểm số, có đạt hay không, các cảnh báo về tính trung thực và đường dẫn đến toàn bộ câu trả lời.
 6. **Một người xem xét kết quả** và chuyển ứng viên sang bước tiếp theo, hoặc không.
@@ -46,14 +46,14 @@ Không phải lời quảng cáo "tích hợp với ATS của bạn" nào cũng 
 
 | Câu hỏi | Vì sao quan trọng | Một câu trả lời tốt |
 | --- | --- | --- |
-| Kết nối bằng cách nào? | Mật khẩu dùng chung và tài khoản do nhà cung cấp giữ khó kiểm soát hoặc thu hồi | Một API key hoặc token do công ty bạn tạo và có thể xóa bất cứ lúc nào |
-| Key được phép làm gì? | Một key có toàn quyền là rủi ro nếu bị lộ | Quyền tối thiểu mà tích hợp cần, được liệt kê trong tài liệu |
-| Điều gì kích hoạt lời mời? | Bạn cần biết chính xác khi nào ứng viên nhận email | Một giai đoạn cụ thể do bạn chọn cho từng vị trí |
+| Kết nối bằng cách nào? | Mật khẩu dùng chung và tài khoản do nhà cung cấp giữ khó kiểm soát hoặc thu hồi | Một khóa API hoặc token do công ty bạn tạo và có thể xóa bất cứ lúc nào |
+| Khóa được phép làm gì? | Một khóa có toàn quyền là rủi ro nếu bị lộ | Quyền tối thiểu mà tích hợp cần, được liệt kê trong tài liệu |
+| Điều gì kích hoạt lời mời? | Bạn cần biết chính xác khi nào ứng viên nhận email | Một giai đoạn cụ thể do bạn chọn cho từng tin tuyển dụng |
 | Kết quả hiển thị ở đâu? | Kết quả không ai nhìn thấy thì vô ích | Trên hồ sơ ứng viên, dưới dạng ghi chú hoặc bình luận mà đội của bạn vẫn đọc |
 | Điều gì xảy ra khi lời mời gửi thất bại? | Hết credit, gõ sai, tài khoản bị tạm dừng: ứng viên bị kẹt mà không ai hay | Có người được báo, và ứng viên có thể được mời lại |
 | Một sự kiện có thể bị xử lý hai lần không? | ATS gửi lại sự kiện; ứng viên không nên nhận hai lời mời | Mỗi ứng viên chỉ được mời một lần cho mỗi bài kiểm tra, dù sự kiện đến bao nhiêu lần |
 | Sự kiện gửi đến được xác minh thế nào? | Một địa chỉ không xác minh có thể nhận sự kiện giả mạo | Yêu cầu có chữ ký mà công cụ kiểm tra |
-| Dữ liệu ứng viên được lưu bao lâu? | Các luật bảo vệ dữ liệu như GDPR yêu cầu thời hạn lưu trữ rõ ràng | Một thời hạn cụ thể, và xóa khi bạn xóa vị trí, bài kiểm tra hoặc tài khoản |
+| Dữ liệu ứng viên được lưu bao lâu? | Các luật bảo vệ dữ liệu như GDPR yêu cầu thời hạn lưu trữ rõ ràng | Một thời hạn cụ thể, và xóa khi bạn xóa tin tuyển dụng, bài kiểm tra hoặc tài khoản |
 | Chi phí bao nhiêu? | Gói tính theo người dùng có thể khiến tự động hóa trở nên đắt đỏ | Chi phí dự đoán được cho mỗi ứng viên được kiểm tra |
 
 Nếu nhà cung cấp không trả lời rõ được các câu hỏi về lỗi và trùng lặp, hãy chuẩn bị tinh thần tự phát hiện ra theo cách khó khăn.
@@ -67,9 +67,9 @@ Kết nối hai hệ thống nghĩa là dữ liệu ứng viên, ít nhất là 
 Trước khi bật cho một vị trí đang tuyển thật:
 
 1. **Tạo một giai đoạn chỉ dành cho kiểm tra** trong ATS, chẳng hạn "Kiểm tra kỹ năng". Đừng dùng lại một giai đoạn mang ý nghĩa khác, nếu không ứng viên sẽ bị mời nhầm.
-2. **Tạo key từ một tài khoản quản trị** thấy được mọi vị trí bạn muốn liên kết, chỉ với các quyền mà tài liệu liệt kê.
-3. **Liên kết mỗi vị trí với bài kiểm tra của nó** và chọn giai đoạn kích hoạt lời mời.
-4. **Thiết lập webhook** nếu ATS yêu cầu làm thủ công, và dán secret của nó vào chỗ công cụ yêu cầu.
+2. **Tạo khóa từ một tài khoản quản trị** thấy được mọi tin tuyển dụng bạn muốn liên kết, chỉ với các quyền mà tài liệu liệt kê.
+3. **Liên kết mỗi tin tuyển dụng với bài kiểm tra của nó** và chọn giai đoạn kích hoạt lời mời.
+4. **Thiết lập webhook** nếu ATS yêu cầu làm thủ công, và dán khóa bí mật của nó vào chỗ công cụ yêu cầu.
 5. **Tự thử với chính mình.** Thêm một ứng viên bằng email của bạn, chuyển sang giai đoạn đó, làm bài và kiểm tra xem ghi chú có xuất hiện trong ATS không.
 6. **Quyết định ai theo dõi lỗi:** ai được báo khi không gửi được lời mời, và ai xử lý.
 7. **Thống nhất cách đọc kết quả.** Điểm đạt là mức tham khảo, không phải lý do loại tự động. Hãy quyết định trước khi có kết quả, không phải sau.
@@ -78,27 +78,27 @@ Trước khi bật cho một vị trí đang tuyển thật:
 
 - **Tự động hóa quyết định thay vì giấy tờ.** Tự động loại mọi ứng viên dưới một mức điểm sẽ bỏ đi bước kiểm tra của con người, vốn phát hiện được câu hỏi kém hoặc ứng viên gặp sự cố mạng. Hãy để điểm số sắp xếp; để con người quyết định.
 - **Kích hoạt từ sai giai đoạn.** Một giai đoạn mà recruiter dùng cho mục đích khác sẽ gửi bài kiểm tra cho những người không nên nhận.
-- **Một bài kiểm tra cho mọi vị trí.** Kết nối khiến việc gửi cùng một bài kiểm tra cho mọi nơi trở nên dễ dàng. Bài kiểm tra hữu ích nhất khi được xây dựng cho đúng vị trí đó. Xem [Bài kiểm tra kỹ năng và sàng lọc CV](/guides/skills-tests-vs-cv-screening).
+- **Một bài kiểm tra cho mọi tin tuyển dụng.** Kết nối khiến việc gửi cùng một bài kiểm tra cho mọi nơi trở nên dễ dàng. Bài kiểm tra hữu ích nhất khi được xây dựng cho đúng vị trí đó. Xem [Bài kiểm tra kỹ năng và sàng lọc CV](/guides/skills-tests-vs-cv-screening).
 - **Không ai theo dõi lỗi.** Nếu lời mời thất bại mà không ai hay, ứng viên chờ một email không bao giờ đến, còn bạn nghĩ họ đã phớt lờ.
-- **Key gắn với người sắp nghỉ việc.** Một số key ATS hoạt động dưới danh nghĩa người đã tạo ra chúng. Khi tài khoản người đó bị đóng, kết nối dừng lại. Hãy dùng một tài khoản sẽ còn tồn tại, và kết nối lại khi mọi người đổi vai trò.
+- **Khóa gắn với người sắp nghỉ việc.** Một số khóa ATS hoạt động dưới danh nghĩa người đã tạo ra chúng. Khi tài khoản người đó bị đóng, kết nối dừng lại. Hãy dùng một tài khoản sẽ còn tồn tại, và kết nối lại khi mọi người đổi vai trò.
 - **Quên ứng viên ngoài ATS.** Ứng viên được giới thiệu và ứng viên ứng tuyển trực tiếp không bao giờ vào ATS vẫn cần lời mời. Hãy giữ cả cách mời thủ công.
 
 ## Cách prepza thực hiện
 
 prepza kết nối với **Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR**, theo đúng quy trình ở trên.
 
-- **Key của bạn, bạn kiểm soát.** Chủ sở hữu hoặc quản trị viên kết nối ATS trong tab Tích hợp của công ty bằng một key do công ty bạn tạo trong ATS. prepza kiểm tra key trước khi lưu, lưu trữ ở dạng mã hóa và không bao giờ hiển thị lại. Ngắt kết nối sẽ xóa ngay key và các vị trí đã liên kết.
-- **Liên kết một vị trí với một buổi phỏng vấn.** Chọn một vị trí trong ATS và giai đoạn kích hoạt lời mời, rồi liên kết với một buổi phỏng vấn có sẵn trong prepza hoặc tạo buổi mới từ nội dung tin tuyển dụng trong ATS. Bạn xem lại các chủ đề trước khi bất kỳ câu hỏi nào được viết.
+- **Khóa của bạn, bạn kiểm soát.** Chủ sở hữu hoặc quản trị viên kết nối ATS trong tab Tích hợp của công ty bằng một khóa do công ty bạn tạo trong ATS. prepza kiểm tra khóa trước khi lưu, lưu trữ ở dạng mã hóa và không bao giờ hiển thị lại. Ngắt kết nối sẽ xóa ngay khóa và các tin tuyển dụng đã liên kết.
+- **Liên kết một tin tuyển dụng với một buổi phỏng vấn.** Chọn một tin tuyển dụng trong ATS và giai đoạn kích hoạt lời mời, rồi liên kết với một buổi phỏng vấn có sẵn trong prepza hoặc tạo buổi mới từ nội dung tin tuyển dụng trong ATS. Bạn xem lại các chủ đề trước khi bất kỳ câu hỏi nào được viết.
 - **Chuyển ứng viên là lời mời được gửi.** Mỗi ứng viên chỉ được mời một lần cho mỗi buổi phỏng vấn, kể cả khi ATS gửi cùng một sự kiện hai lần.
 - **Kết quả trở lại ATS.** Khi ứng viên làm xong, prepza thêm một ghi chú hoặc bình luận vào hồ sơ của họ trong ATS, gồm điểm, có đạt hay không, các cảnh báo về tính trung thực (rời khỏi trang, cố sao chép, chọn câu trả lời quá nhanh để kịp đọc câu hỏi) và đường dẫn đến bảng điểm với mọi câu trả lời.
-- **Lỗi không bị bỏ qua.** Nếu không mời được một ứng viên, chẳng hạn vì công ty hết credit, chạm giới hạn email hoặc đã tạm dừng lời mời, chủ sở hữu và quản trị viên nhận được thông báo ghi rõ tên ATS. Những ứng viên chưa được mời vì thiếu credit sẽ được mời tự động sau khi nạp credit, và các ứng viên đang chờ của bất kỳ vị trí nào cũng có thể được mời lại chỉ với một cú nhấp.
+- **Lỗi không bị bỏ qua.** Nếu không mời được một ứng viên, chẳng hạn vì công ty hết credit, chạm giới hạn email hoặc đã tạm dừng lời mời, chủ sở hữu và quản trị viên nhận được thông báo ghi rõ tên ATS. Những ứng viên chưa được mời vì thiếu credit sẽ được mời tự động sau khi nạp credit, và các ứng viên đang chờ của bất kỳ tin tuyển dụng nào cũng có thể được mời lại chỉ với một cú nhấp.
 - **Slack, nếu bạn dùng.** prepza có thể đăng thông báo, chẳng hạn một ứng viên đã làm xong hoặc một ứng viên từ ATS không mời được, lên kênh Slack do bạn chọn.
-- **Nền tảng riêng của bạn.** Nếu ATS của bạn không có trong danh sách, [API](/api-docs) của prepza cho phép bạn mời ứng viên bằng API key và nhận một webhook có chữ ký khi ứng viên làm xong.
+- **Nền tảng riêng của bạn.** Nếu ATS của bạn không có trong danh sách, [API](/api-docs) của prepza cho phép bạn mời ứng viên bằng khóa API và nhận một webhook có chữ ký khi ứng viên làm xong.
 - **Dữ liệu được lưu trong thời hạn xác định.** Ứng viên được lưu từ ATS sẽ bị xóa sau 365 ngày, hoặc sớm hơn cùng với buổi phỏng vấn hoặc công ty của họ.
 
-Một số ATS cần một bước ở phía họ. Greenhouse, Teamtailor và Recruitee yêu cầu bạn thêm webhook thủ công; hộp thoại Hướng dẫn của prepza hiển thị địa chỉ và chỗ dán secret. Webhook của Teamtailor là tiện ích bổ sung trả phí, còn API của Breezy HR đi kèm gói Pro. prepza tự thiết lập webhook cho Workable và Breezy HR.
+Một số ATS cần một bước ở phía họ. Greenhouse, Teamtailor và Recruitee yêu cầu bạn thêm webhook thủ công; hộp thoại Hướng dẫn của prepza hiển thị địa chỉ và chỗ dán khóa bí mật. Webhook của Teamtailor là tiện ích bổ sung, còn API của Breezy HR đi kèm gói Pro. prepza tự thiết lập webhook cho Workable và Breezy HR.
 
-Giá tính theo ứng viên, không có gói đăng ký: bạn chỉ trả tiền cho những ứng viên trả lời ít nhất một câu hỏi, $3 mỗi người với gói nạp $30 và $150, $2 từ gói nạp $250 và $1 từ gói nạp $1,000. Giá tính bằng đô la Mỹ; VAT hoặc thuế bán hàng được xử lý khi thanh toán. Kết nối ATS và tạo buổi phỏng vấn là miễn phí, và 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí. Xem [bảng giá](/pricing).
+Giá tính theo ứng viên, không có gói đăng ký: bạn chỉ trả tiền cho những ứng viên trả lời ít nhất một câu hỏi, $3 mỗi người với gói nạp $30 và $150, $2 từ gói nạp $250 và $1 từ gói nạp $1.000. Giá tính bằng đô la Mỹ; VAT hoặc thuế bán hàng được xử lý khi thanh toán. Kết nối ATS và tạo buổi phỏng vấn là miễn phí, và 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí. Xem [bảng giá](/pricing).
 
 ## Đọc thêm
 

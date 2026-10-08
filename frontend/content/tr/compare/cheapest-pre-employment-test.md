@@ -31,11 +31,11 @@ Bu sayfa diğer sağlayıcıların fiyatlarını listelemez, çünkü sık deği
 3. **Abonelik:** aylık fiyat × 12 veya yıllık fiyat. Kredilerinin kaç adayı kapsadığını kontrol edin; aşacaksanız bir üst planın fiyatına bakın.
 4. **Başabaş noktanızı bulun:** planın yıllık maliyeti ÷ aday başı fiyat. Yılda bu sayının altında aday için aday başına ödeme daha ucuzdur. Üstünde ise plan daha ucuzdur.
 
-**Uydurma sayılarla örnek bir hesaplama.** Diyelim ki bir plan yılda $1,500, aday başına ödeme seçeneği ise aday başı $3 tutuyor. Başabaş noktası 1,500 ÷ 3 = yılda 500 adaydır. Yılda 60 aday test eden bir ekip, plan için $1,500 yerine aday başı ücret olarak $180 öder. 600 aday test eden bir ekip ise aday başı ücret olarak $1,800 öder ve plan daha ucuza gelir. Karşılaştırdığınız fiyat sayfalarındaki gerçek sayıları kullanın.
+**Uydurma sayılarla örnek bir hesaplama.** Diyelim ki bir plan yılda $1.500, aday başına ödeme seçeneği ise aday başı $3 tutuyor. Başabaş noktası 1.500 ÷ 3 = yılda 500 adaydır. Yılda 60 aday test eden bir ekip, plan için $1.500 yerine aday başı ücret olarak $180 öder. 600 aday test eden bir ekip ise aday başı ücret olarak $1.800 öder ve plan daha ucuza gelir. Karşılaştırdığınız fiyat sayfalarındaki gerçek sayıları kullanın.
 
 ### Tahmininiz için prepza fiyatları
 
-prepza, en az bir soruyu yanıtlayan aday başına ücret alır. Aday başı fiyat, kredi yükleme tutarınıza bağlıdır: küçük yüklemelerde $3, $250'lık yüklemeden itibaren $2 ve $1,000'lık yüklemeden itibaren $1. İlk şirketinizin ilk 3 adayı ücretsizdir. Fiyatlar ABD doları cinsindendir; ödemeleri işleyen Paddle, KDV ve satış vergisini ödeme adımında hesaplar. Güncel yükleme seçenekleri için [fiyatlar](/pricing) sayfasına bakın.
+prepza, en az bir soruyu yanıtlayan aday başına ücret alır. Aday başı fiyat, kredi yükleme tutarınıza bağlıdır: küçük yüklemelerde $3, $250'lık yüklemeden itibaren $2 ve $1.000'lık yüklemeden itibaren $1. İlk şirketinizin ilk 3 adayı ücretsizdir. Fiyatlar ABD doları cinsindendir; ödemeleri işleyen Paddle, KDV ve satış vergisini ödeme adımında hesaplar. Güncel yükleme seçenekleri için [fiyatlar](/pricing) sayfasına bakın.
 
 ## Etiket fiyatının ötesindeki maliyetler
 

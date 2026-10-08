@@ -31,11 +31,11 @@ Je hebt drie getallen nodig: hoeveel kandidaten je per jaar test, de prijs per k
 3. **Abonnement:** de maandprijs × 12, of de jaarprijs. Check hoeveel kandidaten de credits dekken; kom je erboven, reken dan met het eerstvolgende plan.
 4. **Bepaal je break-evenpunt:** de jaarkosten van het plan ÷ de prijs per kandidaat. Onder dat aantal kandidaten per jaar is betalen per kandidaat goedkoper. Daarboven is het plan goedkoper.
 
-**Een rekenvoorbeeld, met verzonnen getallen.** Stel dat een plan $1,500 per jaar kost en een optie met betalen per kandidaat $3 per kandidaat. Het break-evenpunt is 1,500 ÷ 3 = 500 kandidaten per jaar. Een team dat 60 kandidaten per jaar test, betaalt $180 aan kosten per kandidaat in plaats van $1,500 voor het plan. Een team dat er 600 test, betaalt $1,800 aan kosten per kandidaat, en dan is het plan goedkoper. Gebruik de echte getallen van de prijspagina's die je vergelijkt.
+**Een rekenvoorbeeld, met verzonnen getallen.** Stel dat een plan $1.500 per jaar kost en een optie met betalen per kandidaat $3 per kandidaat. Het break-evenpunt is 1,500 ÷ 3 = 500 kandidaten per jaar. Een team dat 60 kandidaten per jaar test, betaalt $180 aan kosten per kandidaat in plaats van $1.500 voor het plan. Een team dat er 600 test, betaalt $1.800 aan kosten per kandidaat, en dan is het plan goedkoper. Gebruik de echte getallen van de prijspagina's die je vergelijkt.
 
 ### De prijzen van prepza voor je berekening
 
-prepza rekent per kandidaat die minstens één vraag beantwoordt. De prijs per kandidaat hangt af van de grootte van je opwaardering: $3 bij de kleinere opwaarderingen, $2 vanaf een opwaardering van $250 en $1 vanaf een opwaardering van $1,000. De eerste 3 kandidaten van je eerste bedrijf zijn gratis. Prijzen zijn in US dollars; Paddle, dat de betalingen verwerkt, regelt btw en sales tax bij het afrekenen. Zie [prijzen](/pricing) voor de huidige opwaarderingen.
+prepza rekent per kandidaat die minstens één vraag beantwoordt. De prijs per kandidaat hangt af van de grootte van je opwaardering: $3 bij de kleinere opwaarderingen, $2 vanaf een opwaardering van $250 en $1 vanaf een opwaardering van $1.000. De eerste 3 kandidaten van je eerste bedrijf zijn gratis. Prijzen zijn in US dollars; Paddle, dat de betalingen verwerkt, regelt btw en sales tax bij het afrekenen. Zie [prijzen](/pricing) voor de huidige opwaarderingen.
 
 ## Kosten bovenop de vermelde prijs
 

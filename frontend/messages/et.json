@@ -585,15 +585,15 @@
       },
       "notices": {
         "title": "Kandidaaditeate mallid",
-        "description": "Muudetavad teated, mille saadate kandidaatidele enne kutsumist, sh üks New Yorgi jaoks."
+        "description": "Muudetavad teated, mille saadad kandidaatidele enne kutsumist, sh üks New Yorgi jaoks."
       },
       "dpia": {
         "title": "Andmekaitsealase mõjuhinnangu mall",
-        "description": "Andmekaitsealane mõjuhinnang, milles prepza osa on täidetud ja mille teie lõpetate."
+        "description": "Andmekaitsealane mõjuhinnang, milles prepza osa on täidetud, ülejäänu täidad sina."
       },
       "dpa": {
         "title": "Andmetöötlusleping",
-        "description": "Kuidas prepza teie kandidaatide andmeid teie nimel töötleb. See on osa tingimustest."
+        "description": "Kuidas prepza sinu kandidaatide andmeid sinu nimel töötleb. See on osa tingimustest."
       }
     }
   },
@@ -1053,9 +1053,9 @@
     "webhookText": "Ühe korra, et {ats} annaks meile teada, kui kandidaat liigub teise etappi.",
     "webhookEvent": "Loo selle sündmuse jaoks webhook:",
     "webhookUrl": "Kleebi see lõpp-punkti URL-iks:",
-    "webhookSecret": "Ja see salajaseks võtmeks:",
+    "webhookSecret": "Ja see saladuseks:",
     "copyUrl": "Kopeeri URL",
-    "copySecret": "Kopeeri võti",
+    "copySecret": "Kopeeri saladus",
     "copied": "Kopeeritud",
     "webhookTitle": "Seadista webhook",
     "flowHow": "Kuidas kandidaadid tulevad",
@@ -1138,7 +1138,7 @@
     "neverUsed": "pole kasutatud",
     "removeKey": "Kustuta võti",
     "removeKeyTitle": "Kas kustutada see võti?",
-    "removeKeyText": "Kõik, mis kasutab võtit „{name}”, lakkab kohe töötamast.",
+    "removeKeyText": "Kõik, mis kasutab võtit „{name}“, lakkab kohe töötamast.",
     "webhooksTitle": "Webhookid",
     "webhooksText": "Kui kandidaat lõpetab, saadab prepza tema tulemused nendele aadressidele, allkirjastatuna iga aadressi saladusega.",
     "noWebhooks": "Webhooke veel pole.",

@@ -103,7 +103,7 @@ Annota perché ogni persona è entrata nella rosa. Richiede un minuto per candid
 
 ## Quanto costa
 
-Con prepza paghi solo per i candidati che rispondono ad almeno una domanda: $3 ciascuno con le ricariche da $30 e $150, $2 da una ricarica di $250 e $1 da una ricarica di $1,000. Per 100 candidati sono $300 a $3 ciascuno, oppure $200 di una ricarica da $250 a $2 ciascuno, senza abbonamento. I prezzi sono in dollari USA; IVA o sales tax vengono gestite al pagamento. Generare il test è gratuito, e i primi 3 candidati della tua prima azienda sono gratis.
+Con prepza paghi solo per i candidati che rispondono ad almeno una domanda: $3 ciascuno con le ricariche da $30 e $150, $2 da una ricarica di $250 e $1 da una ricarica di $1.000. Per 100 candidati sono $300 a $3 ciascuno, oppure $200 di una ricarica da $250 a $2 ciascuno, senza abbonamento. I prezzi sono in dollari USA; IVA o sales tax vengono gestite al pagamento. Generare il test è gratuito, e i primi 3 candidati della tua prima azienda sono gratis.
 
 ## Letture correlate
 

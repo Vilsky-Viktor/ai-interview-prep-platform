@@ -31,11 +31,11 @@ Bạn cần ba con số: số ứng viên bạn kiểm tra trong một năm, gi�
 3. **Gói đăng ký:** giá hằng tháng × 12, hoặc giá theo năm. Kiểm tra credit của gói đủ cho bao nhiêu ứng viên; nếu bạn sẽ vượt mức, hãy tính giá của gói cao hơn.
 4. **Tìm điểm hòa vốn:** chi phí một năm của gói ÷ giá mỗi ứng viên. Dưới số ứng viên đó mỗi năm, trả theo ứng viên rẻ hơn. Trên mức đó, gói đăng ký rẻ hơn.
 
-**Ví dụ minh họa, với số liệu giả định.** Giả sử một gói có giá $1,500 một năm và một lựa chọn trả theo ứng viên có giá $3 mỗi ứng viên. Điểm hòa vốn là 1,500 ÷ 3 = 500 ứng viên một năm. Một nhóm kiểm tra 60 ứng viên mỗi năm sẽ trả $180 phí theo ứng viên thay vì $1,500 cho gói. Một nhóm kiểm tra 600 ứng viên sẽ trả $1,800 phí theo ứng viên, và gói đăng ký sẽ rẻ hơn. Hãy dùng số liệu thật từ các trang bảng giá bạn đang so sánh.
+**Ví dụ minh họa, với số liệu giả định.** Giả sử một gói có giá $1.500 một năm và một lựa chọn trả theo ứng viên có giá $3 mỗi ứng viên. Điểm hòa vốn là 1.500 ÷ 3 = 500 ứng viên một năm. Một nhóm kiểm tra 60 ứng viên mỗi năm sẽ trả $180 phí theo ứng viên thay vì $1.500 cho gói. Một nhóm kiểm tra 600 ứng viên sẽ trả $1.800 phí theo ứng viên, và gói đăng ký sẽ rẻ hơn. Hãy dùng số liệu thật từ các trang bảng giá bạn đang so sánh.
 
 ### Giá của prepza để bạn ước tính
 
-prepza tính phí cho mỗi ứng viên trả lời ít nhất một câu hỏi. Giá mỗi ứng viên phụ thuộc vào mức nạp: $3 với các mức nạp nhỏ hơn, $2 từ mức nạp $250 và $1 từ mức nạp $1,000. 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí. Giá tính bằng đô la Mỹ; Paddle, đơn vị xử lý thanh toán, xử lý VAT và thuế bán hàng khi thanh toán. Xem [bảng giá](/pricing) để biết các mức nạp hiện tại.
+prepza tính phí cho mỗi ứng viên trả lời ít nhất một câu hỏi. Giá mỗi ứng viên phụ thuộc vào mức nạp: $3 với các mức nạp nhỏ hơn, $2 từ mức nạp $250 và $1 từ mức nạp $1.000. 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí. Giá tính bằng đô la Mỹ; Paddle, đơn vị xử lý thanh toán, xử lý VAT và thuế bán hàng khi thanh toán. Xem [bảng giá](/pricing) để biết các mức nạp hiện tại.
 
 ## Chi phí ngoài giá niêm yết
 

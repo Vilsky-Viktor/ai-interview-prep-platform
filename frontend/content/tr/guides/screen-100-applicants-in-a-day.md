@@ -103,7 +103,7 @@ Her kişinin listeye neden girdiğini not edin. Aday başına bir dakika sürer 
 
 ## Maliyeti ne kadar
 
-prepza ile yalnızca en az bir soruyu yanıtlayan adaylar için ödeme yaparsınız: $30 ve $150'lık yüklemelerde aday başına $3, $250'lık yüklemeden itibaren $2 ve $1,000'lık yüklemeden itibaren $1. 100 başvuru sahibi için bu, aday başı $3 ile $300 ya da aday başı $2 ile $250'lık bir yüklemenin $200'ü demektir; abonelik yoktur. Fiyatlar ABD doları cinsindendir; KDV veya satış vergisi ödeme adımında hesaplanır. Testi oluşturmak ücretsizdir ve ilk şirketinizin ilk 3 adayı ücretsizdir.
+prepza ile yalnızca en az bir soruyu yanıtlayan adaylar için ödeme yaparsınız: $30 ve $150'lık yüklemelerde aday başına $3, $250'lık yüklemeden itibaren $2 ve $1.000'lık yüklemeden itibaren $1. 100 başvuru sahibi için bu, aday başı $3 ile $300 ya da aday başı $2 ile $250'lık bir yüklemenin $200'ü demektir; abonelik yoktur. Fiyatlar ABD doları cinsindendir; KDV veya satış vergisi ödeme adımında hesaplanır. Testi oluşturmak ücretsizdir ve ilk şirketinizin ilk 3 adayı ücretsizdir.
 
 ## İlgili yazılar
 

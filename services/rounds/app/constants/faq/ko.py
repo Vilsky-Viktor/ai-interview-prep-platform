@@ -70,7 +70,7 @@ FAQ = [
     {
         "key": "integrations",
         "question": "prepza를 사용 중인 ATS나 다른 도구와 연동할 수 있나요?",
-        "answer": "네, 추가 비용 없이 가능합니다. 회사의 '연동' 탭에서 Workable, Greenhouse, Teamtailor, Recruitee 또는 Breezy HR을 연결하면, 특정 단계로 옮긴 지원자는 면접을 받고 결과는 ATS로 전달됩니다. Slack은 회사 알림을 채널에 게시할 수 있고, API를 사용하면 자체 플랫폼에서 지원자를 초대하고 결과를 받을 수 있습니다. 자세한 내용은 'API 문서'를 참고하세요.",
+        "answer": "네, 추가 비용 없이 가능합니다. 회사의 '연동' 탭에서 Workable, Greenhouse, Teamtailor, Recruitee 또는 Breezy HR을 연동하면, 특정 단계로 옮긴 지원자는 면접을 받고 결과는 ATS로 전달됩니다. Slack은 회사 알림을 채널에 게시할 수 있고, API를 사용하면 자체 플랫폼에서 지원자를 초대하고 결과를 받을 수 있습니다. 자세한 내용은 'API 문서'를 참고하세요.",
     },
     {
         "key": "candidates",

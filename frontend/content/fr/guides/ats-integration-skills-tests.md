@@ -29,7 +29,7 @@ Une bonne intégration suit les étapes que vous utilisez déjà. Elle n'invente
 
 1. **Un candidat postule** et arrive dans votre ATS comme d'habitude.
 2. **Une personne le déplace vers une étape de test,** par exemple « Test de compétences ». Ce déplacement est le déclencheur : c'est donc toujours un humain qui décide qui passe le test.
-3. **L'outil de test envoie l'invitation** automatiquement, pour le test associé à ce poste.
+3. **L'outil de test envoie l'invitation** automatiquement, pour le test lié à ce poste.
 4. **Le candidat passe le test** quand cela lui convient, dans le délai que vous fixez.
 5. **Les résultats sont inscrits sur le candidat dans l'ATS :** le score, s'il a réussi, les alertes d'intégrité et un lien vers toutes ses réponses.
 6. **Une personne examine le résultat** et fait avancer le candidat, ou non.
@@ -67,8 +67,8 @@ Connecter deux systèmes, c'est faire circuler des données de candidats, au min
 Avant de l'activer pour un vrai poste :
 
 1. **Créez dans votre ATS une étape réservée au test,** comme « Test de compétences ». Ne réutilisez pas une étape qui signifie autre chose, sinon des candidats seront invités par erreur.
-2. **Créez la clé depuis un compte administrateur** qui voit tous les postes que vous voulez associer, avec uniquement les permissions indiquées dans la documentation.
-3. **Associez chaque poste à son test** et choisissez l'étape qui déclenche l'invitation.
+2. **Créez la clé depuis un compte administrateur** qui voit tous les postes que vous voulez lier, avec uniquement les permissions indiquées dans la documentation.
+3. **Liez chaque poste à son test** et choisissez l'étape qui déclenche l'invitation.
 4. **Configurez le webhook** si votre ATS vous demande de le faire à la main, et collez son secret là où l'outil le demande.
 5. **Testez avec vous-même.** Ajoutez un candidat avec votre propre e-mail, déplacez-le vers l'étape, passez le test et vérifiez que la note apparaît dans l'ATS.
 6. **Décidez qui surveille les échecs :** qui est prévenu quand une invitation ne peut pas partir, et qui règle le problème.
@@ -87,16 +87,16 @@ Avant de l'activer pour un vrai poste :
 
 prepza se connecte à **Workable, Greenhouse, Teamtailor, Recruitee et Breezy HR** et suit le flux décrit ci-dessus.
 
-- **Votre clé, votre contrôle.** Un propriétaire ou un administrateur connecte l'ATS dans l'onglet Intégrations de l'entreprise avec une clé que votre entreprise crée dans l'ATS. prepza la vérifie avant de l'enregistrer, la stocke chiffrée et ne l'affiche plus jamais. La déconnexion supprime immédiatement la clé et les postes associés.
-- **Associer un poste à un entretien.** Choisissez un poste de l'ATS et l'étape qui déclenche l'invitation, puis associez-le à un entretien prepza existant ou créez-en un à partir du texte du poste dans l'ATS. Vous validez les thèmes avant qu'une seule question soit rédigée.
+- **Votre clé, votre contrôle.** Un propriétaire ou un admin connecte l'ATS dans l'onglet Intégrations de l'entreprise avec une clé que votre entreprise crée dans l'ATS. prepza la vérifie avant de l'enregistrer, la stocke chiffrée et ne l'affiche plus jamais. La déconnexion supprime immédiatement la clé et les postes liés.
+- **Lier un poste à un entretien.** Choisissez un poste de l'ATS et l'étape qui déclenche l'invitation, puis liez-le à un entretien prepza existant ou créez-en un à partir du texte du poste dans l'ATS. Vous validez les thèmes avant qu'une seule question soit rédigée.
 - **Vous déplacez un candidat, l'invitation part.** Chaque candidat est invité une seule fois par entretien, même si l'ATS envoie deux fois le même événement.
 - **Les résultats reviennent dans l'ATS.** Quand un candidat a terminé, prepza lui ajoute dans l'ATS une note ou un commentaire avec son résultat, s'il a réussi, les alertes d'intégrité (sortie de la page, tentatives de copie, réponses choisies trop vite pour avoir lu la question) et un lien vers sa fiche d'évaluation avec toutes ses réponses.
-- **Les échecs ne passent pas inaperçus.** Si un candidat ne peut pas être invité, par exemple parce que l'entreprise n'a plus de crédits, a atteint une limite d'e-mails ou a mis les invitations en pause, les propriétaires et les administrateurs reçoivent une notification qui nomme l'ATS. Les candidats non invités faute de crédits sont invités automatiquement après une recharge, et les candidats en attente de n'importe quel poste peuvent être réinvités en un clic.
+- **Les échecs ne passent pas inaperçus.** Si un candidat ne peut pas être invité, par exemple parce que l'entreprise n'a plus de crédits, a atteint une limite d'e-mails ou a mis les invitations en pause, les propriétaires et les admins reçoivent une notification qui nomme l'ATS. Les candidats non invités faute de crédits sont invités automatiquement après une recharge, et les candidats en attente de n'importe quel poste peuvent être réinvités en un clic.
 - **Slack, si vous l'utilisez.** prepza peut publier des notifications, comme un candidat qui a terminé ou un candidat de l'ATS qui n'a pas pu être invité, dans le canal Slack de votre choix.
 - **Votre propre plateforme.** Si votre ATS ne figure pas dans la liste, l'[API](/api-docs) de prepza vous permet d'inviter des candidats avec une clé API et de recevoir un webhook signé quand un candidat a terminé.
 - **Des données conservées pour une durée fixe.** Les candidats issus d'un ATS sont supprimés au bout de 365 jours, ou plus tôt avec leur entretien ou leur entreprise.
 
-Certains ATS demandent une étape de leur côté. Greenhouse, Teamtailor et Recruitee vous demandent d'ajouter un webhook à la main ; la fenêtre Instructions de prepza indique l'adresse et où coller son secret. Les webhooks de Teamtailor sont une option payante, et l'API de Breezy HR est incluse dans son offre Pro. prepza configure lui-même les webhooks de Workable et de Breezy HR.
+Certains ATS demandent une étape de leur côté. Greenhouse, Teamtailor et Recruitee vous demandent d'ajouter un webhook à la main ; la fenêtre Instructions de prepza indique l'adresse et où coller son secret. Les webhooks de Teamtailor sont un module complémentaire, et l'API de Breezy HR est incluse dans son offre Pro. prepza configure lui-même les webhooks de Workable et de Breezy HR.
 
 La tarification se fait par candidat, sans abonnement : vous ne payez que pour les candidats qui répondent à au moins une question, 3 $ chacun avec les recharges de 30 $ et de 150 $, 2 $ à partir d'une recharge de 250 $ et 1 $ à partir d'une recharge de 1 000 $. Les prix sont en dollars américains ; la TVA ou la sales tax est gérée au moment du paiement. Connecter un ATS et créer des entretiens est gratuit, et les 3 premiers candidats de votre première entreprise sont gratuits. Voir les [tarifs](/pricing).
 

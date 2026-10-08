@@ -67,12 +67,12 @@ Kahe süsteemi ühendamine tähendab, et kandidaatide andmed, vähemalt nimed ja
 Enne kui lülitad selle päris ametikoha jaoks sisse:
 
 1. **Loo ATS-süsteemis eraldi etapp ainult testimiseks,** näiteks „Oskustest“. Ära kasuta etappi, mis tähendab midagi muud, muidu kutsutakse kandidaate kogemata.
-2. **Loo võti administraatori kontolt,** mis näeb kõiki ametikohti, mida soovid siduda, ja ainult dokumentatsioonis nimetatud õigustega.
-3. **Seo iga ametikoht oma testiga** ja vali etapp, mis kutse käivitab.
+2. **Loo võti administraatori kontolt,** mis näeb kõiki töökuulutusi, mida soovid siduda, ja ainult dokumentatsioonis nimetatud õigustega.
+3. **Seo iga töökuulutus oma testiga** ja vali etapp, mis kutse käivitab.
 4. **Seadista webhook,** kui sinu ATS nõuab seda käsitsi, ja kleebi selle saladus sinna, kus tööriist seda küsib.
 5. **Testi iseendaga.** Lisa kandidaat oma e-posti aadressiga, vii ta etappi, tee test ja kontrolli, et märge ilmub ATS-süsteemi.
 6. **Otsusta, kes jälgib tõrkeid:** kes saab teate, kui kutset ei saa saata, ja kes selle korda teeb.
-7. **Leppige kokku, kuidas tulemusi lugeda.** Läbimispiir on suunis, mitte automaatne äraütlemine. Otsustage see enne tulemuste saabumist, mitte pärast.
+7. **Lepi meeskonnaga kokku, kuidas tulemusi lugeda.** Läbimispiir on suunis, mitte automaatne äraütlemine. Otsusta see enne tulemuste saabumist, mitte pärast.
 
 ## Levinud vead
 
@@ -87,11 +87,11 @@ Enne kui lülitad selle päris ametikoha jaoks sisse:
 
 prepza ühendub süsteemidega **Workable, Greenhouse, Teamtailor, Recruitee ja Breezy HR** ning järgib ülal kirjeldatud töövoogu.
 
-- **Sinu võti, sinu kontroll.** Omanik või administraator ühendab ATS-i ettevõtte vahekaardil Integratsioonid võtmega, mille sinu ettevõte ATS-is loob. prepza kontrollib seda enne salvestamist, hoiab seda krüpteeritult ega näita seda enam kunagi. Ühenduse katkestamine kustutab võtme ja seotud ametikohad kohe.
-- **Seo ametikoht intervjuuga.** Vali ATS-i ametikoht ja kutse käivitav etapp ning seo see olemasoleva prepza intervjuuga või loo uus ametikoha ATS-is oleva teksti põhjal. Vaatad teemad üle enne, kui ühtki küsimust kirjutatakse.
+- **Sinu võti, sinu kontroll.** Omanik või administraator ühendab ATS-i ettevõtte vahekaardil Integratsioonid võtmega, mille sinu ettevõte ATS-is loob. prepza kontrollib seda enne salvestamist, hoiab seda krüpteeritult ega näita seda enam kunagi. Ühenduse katkestamine kustutab võtme ja seotud töökuulutused kohe.
+- **Seo töökuulutus intervjuuga.** Vali ATS-i töökuulutus ja kutse käivitav etapp ning seo see olemasoleva prepza intervjuuga või loo uus intervjuu töökuulutuse ATS-is oleva teksti põhjal. Vaatad teemad üle enne, kui ühtki küsimust kirjutatakse.
 - **Liiguta kandidaati, kutse läheb välja.** Iga kandidaat kutsutakse intervjuule üks kord, isegi kui ATS saadab sama sündmuse kaks korda.
 - **Tulemused tagasi ATS-is.** Kui kandidaat lõpetab, lisab prepza talle ATS-is märkme või kommentaari tema hinde, läbimise, võimalike aususe märgetega (lehelt lahkumine, kopeerimiskatsed, vastused, mis valiti liiga kiiresti, et küsimust lugeda) ja lingiga hindamislehele, kus on kõik vastused.
-- **Tõrked ei jää märkamata.** Kui kandidaati ei saa kutsuda, näiteks sest ettevõttel on krediit otsas, e-kirjade limiit täis või kutsed peatatud, saavad omanikud ja administraatorid teate, kus on ATS-i nimi. Krediidi puudumise tõttu kutsumata jäänud kandidaadid kutsutakse pärast juurdelaadimist automaatselt ja iga ametikoha ootel kandidaate saab ühe klikiga uuesti kutsuda.
+- **Tõrked ei jää märkamata.** Kui kandidaati ei saa kutsuda, näiteks sest ettevõttel on krediit otsas, e-kirjade limiit täis või kutsed peatatud, saavad omanikud ja administraatorid teate, kus on ATS-i nimi. Krediidi puudumise tõttu kutsumata jäänud kandidaadid kutsutakse pärast juurdelaadimist automaatselt ja iga töökuulutuse ootel kandidaate saab ühe klikiga uuesti kutsuda.
 - **Slack, kui sa seda kasutad.** prepza saab postitada teateid, näiteks lõpetanud kandidaadist või ATS-i kandidaadist, keda ei õnnestunud kutsuda, sinu valitud Slacki kanalisse.
 - **Sinu oma platvorm.** Kui sinu ATS-i nimekirjas pole, saad prepza [API](/api-docs) abil kutsuda kandidaate API-võtmega ja saada allkirjastatud webhooki, kui kandidaat lõpetab.
 - **Andmeid hoitakse kindla aja.** ATS-ist salvestatud kandidaadid kustutatakse 365 päeva pärast või varem koos nende intervjuu või ettevõttega.

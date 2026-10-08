@@ -1051,7 +1051,7 @@
     "webhookUrl": "Collez ceci comme URL de l'endpoint :",
     "webhookSecret": "Et ceci comme clé secrète :",
     "copyUrl": "Copier l'URL",
-    "copySecret": "Copier la clé",
+    "copySecret": "Copier le secret",
     "copied": "Copié",
     "webhookTitle": "Configurer le webhook",
     "flowHow": "Comment arrivent les candidats",

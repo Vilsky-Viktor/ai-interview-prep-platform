@@ -68,7 +68,7 @@ Zanim włączysz integrację dla prawdziwej rekrutacji:
 
 1. **Utwórz w ATS osobny etap na test,** na przykład „Test umiejętności”. Nie używaj etapu, który oznacza coś innego, bo kandydaci będą dostawać zaproszenia przez przypadek.
 2. **Utwórz klucz z konta administratora,** które widzi wszystkie oferty pracy, które chcesz połączyć, i tylko z uprawnieniami wymienionymi w dokumentacji.
-3. **Połącz każdą ofertę pracy z jej testem** i wybierz etap, który uruchamia zaproszenie.
+3. **Powiąż każdą ofertę pracy z jej testem** i wybierz etap, który uruchamia zaproszenie.
 4. **Skonfiguruj webhook,** jeśli Twój ATS wymaga zrobienia tego ręcznie, i wklej jego sekret tam, gdzie prosi o to narzędzie.
 5. **Przetestuj na sobie.** Dodaj kandydata ze swoim adresem e-mail, przenieś go na etap, rozwiąż test i sprawdź, czy notatka pojawiła się w ATS.
 6. **Ustal, kto pilnuje błędów:** kto dostaje informację, gdy zaproszenia nie da się wysłać, i kto to naprawia.
@@ -87,8 +87,8 @@ Zanim włączysz integrację dla prawdziwej rekrutacji:
 
 prepza łączy się z **Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR**. Działa według opisanego wyżej procesu.
 
-- **Twój klucz, Twoja kontrola.** Właściciel lub administrator łączy ATS na karcie Integracje firmy za pomocą klucza, który Twoja firma tworzy w ATS. prepza sprawdza go przed zapisaniem, przechowuje zaszyfrowany i nigdy więcej go nie pokazuje. Rozłączenie od razu usuwa klucz i połączone oferty pracy.
-- **Połącz ofertę pracy z rozmową.** Wybierz ofertę pracy w ATS i etap, który uruchamia zaproszenie, a następnie połącz ją z istniejącą rozmową w prepza albo utwórz nową na podstawie treści ogłoszenia z ATS. Sprawdzasz tematy, zanim powstanie jakiekolwiek pytanie.
+- **Twój klucz, Twoja kontrola.** Właściciel lub administrator łączy ATS w zakładce Integracje firmy za pomocą klucza, który Twoja firma tworzy w ATS. prepza sprawdza go przed zapisaniem, przechowuje zaszyfrowany i nigdy więcej go nie pokazuje. Odłączenie od razu usuwa klucz i powiązane oferty pracy.
+- **Powiąż ofertę pracy z rozmową.** Wybierz ofertę pracy w ATS i etap, który uruchamia zaproszenie, a następnie powiąż ją z istniejącą rozmową w prepza albo utwórz nową na podstawie treści ogłoszenia z ATS. Sprawdzasz tematy, zanim powstanie jakiekolwiek pytanie.
 - **Przenosisz kandydata, zaproszenie wychodzi.** Każdy kandydat jest zapraszany na rozmowę raz, nawet jeśli ATS wyśle to samo zdarzenie dwa razy.
 - **Wyniki wracają do ATS.** Gdy kandydat skończy, prepza dodaje przy nim w ATS notatkę lub komentarz z oceną, informacją, czy zdał, ewentualnymi sygnałami nieuczciwości (opuszczenie strony, próby kopiowania, odpowiedzi wybrane zbyt szybko, by zdążyć przeczytać pytanie) i linkiem do jego karty wyników ze wszystkimi odpowiedziami.
 - **Błędy nie przechodzą niezauważone.** Jeśli kandydata nie da się zaprosić, na przykład dlatego, że firmie skończyły się kredyty, osiągnęła limit e-maili albo wstrzymała zaproszenia, właściciele i administratorzy dostają powiadomienie z nazwą ATS. Kandydaci niezaproszeni z powodu braku kredytów są zapraszani automatycznie po doładowaniu, a oczekujących kandydatów z dowolnej oferty pracy można zaprosić ponownie jednym kliknięciem.
@@ -96,7 +96,7 @@ prepza łączy się z **Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR*
 - **Twoja własna platforma.** Jeśli Twojego ATS nie ma na liście, [API](/api-docs) prepza pozwala zapraszać kandydatów za pomocą klucza API i odbierać podpisany webhook, gdy kandydat skończy.
 - **Dane przechowywane przez określony czas.** Kandydaci zapisani z ATS są usuwani po 365 dniach albo wcześniej, razem z ich rozmową lub firmą.
 
-Niektóre ATS wymagają kroku po swojej stronie. Greenhouse, Teamtailor i Recruitee wymagają ręcznego dodania webhooka; okno Instrukcja w prepza pokazuje adres i miejsce, w które należy wkleić jego sekret. Webhooki w Teamtailor są płatnym dodatkiem, a API Breezy HR jest dostępne w planie Pro. Webhooki Workable i Breezy HR prepza konfiguruje samodzielnie.
+Niektóre ATS wymagają kroku po swojej stronie. Greenhouse, Teamtailor i Recruitee wymagają ręcznego dodania webhooka; okno Instrukcja w prepza pokazuje adres i miejsce, w które należy wkleić jego sekret. Webhooki w Teamtailor są dodatkiem, a API Breezy HR jest dostępne w planie Pro. Webhooki Workable i Breezy HR prepza konfiguruje samodzielnie.
 
 Płacisz za kandydata, bez subskrypcji: tylko za kandydatów, którzy odpowiedzą na co najmniej jedno pytanie — $3 za kandydata przy doładowaniach $30 i $150, $2 od doładowania $250 i $1 od doładowania $1000. Ceny są w dolarach amerykańskich; VAT lub podatek od sprzedaży jest naliczany przy płatności. Połączenie ATS i tworzenie rozmów jest bezpłatne, a pierwszych 3 kandydatów Twojej pierwszej firmy jest za darmo. Zobacz [cennik](/pricing).
 

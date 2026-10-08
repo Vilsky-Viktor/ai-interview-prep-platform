@@ -1055,7 +1055,7 @@
     "webhookUrl": "エンドポイント URL にはこれを貼り付けます：",
     "webhookSecret": "シークレットキーにはこれを貼り付けます：",
     "copyUrl": "URL をコピー",
-    "copySecret": "キーをコピー",
+    "copySecret": "シークレットをコピー",
     "copied": "コピーしました",
     "webhookTitle": "Webhook を設定",
     "flowHow": "候補者が届く流れ",

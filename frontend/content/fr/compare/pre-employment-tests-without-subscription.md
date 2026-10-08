@@ -49,7 +49,7 @@ prepza n'a ni abonnement ni contrat. Vous achetez des crédits quand vous en ave
 - **Un candidat coûte 300 crédits,** débités uniquement s'il répond à au moins une question. Si un candidat invité ne commence jamais, les crédits vous sont rendus. Une invitation non commencée sous 30 jours expire et restitue ses crédits.
 - **Les recharges plus importantes donnent plus de crédits par dollar,** si bien que le prix par candidat baisse quand la recharge augmente. Voir les [tarifs](/pricing) pour les recharges.
 - **Générer des entretiens est gratuit,** tout comme essayer votre entretien en tant que candidat.
-- **Pas de frais par utilisateur.** Ajoutez gratuitement des administrateurs et des lecteurs à votre entreprise.
+- **Pas de frais par utilisateur.** Ajoutez gratuitement des admins et des lecteurs à votre entreprise.
 - **Crédits de bienvenue :** les 3 premiers candidats de votre première entreprise sont gratuits.
 
 Les prix sont en dollars américains. Les paiements passent par Paddle, qui gère la TVA et la sales tax et affiche le montant final au moment du paiement ; prepza ne conserve aucune donnée de carte. Vous pouvez activer une recharge automatique qui réapprovisionne votre solde quand il baisse, mais c'est facultatif.

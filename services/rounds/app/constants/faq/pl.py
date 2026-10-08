@@ -70,7 +70,7 @@ FAQ = [
     {
         "key": "integrations",
         "question": "Czy prepza działa z moim ATS lub innymi narzędziami?",
-        "answer": "Tak, bez dodatkowych opłat. Połącz Workable, Greenhouse, Teamtailor, Recruitee lub Breezy HR w zakładce Integracje swojej firmy: kandydaci, których przeniesiesz do etapu, dostają rozmowę, a ich wyniki wracają do ATS. Slack może publikować powiadomienia firmy na kanale, a API pozwala Twojej własnej platformie zapraszać kandydatów i odbierać ich wyniki; zobacz: Dokumentacja API.",
+        "answer": "Tak, bez dodatkowych opłat. Połącz Workable, Greenhouse, Teamtailor, Recruitee lub Breezy HR w zakładce Integracje swojej firmy: kandydaci, których przeniesiesz na etap, dostają rozmowę, a ich wyniki wracają do ATS. Slack może publikować powiadomienia firmy na kanale, a API pozwala Twojej własnej platformie zapraszać kandydatów i odbierać ich wyniki; zobacz: Dokumentacja API.",
     },
     {
         "key": "candidates",

@@ -1,7 +1,7 @@
 ---
 title: "Alternativen zu TestGorilla: wofür sich welches Tool eignet und wie sie zusammenspielen"
 seoTitle: "TestGorilla-Alternativen: Welches Tool passt wofür?"
-description: "Alternativen zu TestGorilla nach Testinhalten und Preisen verglichen: prepza, CodeSignal, HackerRank, Alooba, Bryq und mehr, und wie Sie sie kombinieren."
+description: "Alternativen zu TestGorilla nach Testinhalten und Preisen verglichen: prepza, CodeSignal, HackerRank, Alooba, Bryq und mehr, und wie du sie kombinierst."
 updated: "2026-10-07"
 ---
 
@@ -9,25 +9,25 @@ updated: "2026-10-07"
 
 TestGorilla ist eine Plattform für Kompetenztests mit einer großen Testbibliothek und einem Gratis-Tarif ([Preisseite von TestGorilla](https://www.testgorilla.com/pricing/)). Teams sehen sich aus einigen typischen Gründen nach anderen Tools um: Eine Jahresbindung passt nicht zu gelegentlichen Einstellungen, sie wollen praktische Programmiertests, oder sie wollen Tests, die für genau ihre Stelle geschrieben sind.
 
-Die meisten dieser Tools sind kein direkter Ersatz füreinander. Sie prüfen unterschiedliche Dinge, und viele Auswahlprozesse nutzen zwei davon zusammen. Gerade prepza ist überwiegend eine Ergänzung: Es setzt einen schnellen Wissenstest, geschrieben aus Ihrer Stellenbeschreibung, vor alles, was Sie sonst nutzen. Diese Seite erklärt, wofür sich welches Tool eignet und wie sie sich kombinieren lassen. Fakten verlinken auf die eigenen Seiten des jeweiligen Anbieters mit Stand Oktober 2026; prüfen Sie diese vor dem Kauf.
+Die meisten dieser Tools sind kein direkter Ersatz füreinander. Sie prüfen unterschiedliche Dinge, und viele Auswahlprozesse nutzen zwei davon zusammen. Gerade prepza ist überwiegend eine Ergänzung: Es setzt einen schnellen Wissenstest, geschrieben aus deiner Stellenbeschreibung, vor alles, was du sonst nutzt. Diese Seite erklärt, wofür sich welches Tool eignet und wie sie sich kombinieren lassen. Fakten verlinken auf die eigenen Seiten des jeweiligen Anbieters mit Stand Oktober 2026; prüf diese vor dem Kauf.
 
-## So wählen Sie aus
+## So wählst du aus
 
-Beginnen Sie damit, was Sie prüfen müssen:
+Beginne damit, was du prüfen musst:
 
-- **Fachwissen für jede Stelle** (Vertrieb, Buchhaltung, Support, Operations, Marketing, Entwicklung, einschließlich Fragen zum Lesen von Code): ein Tool, das Tests für Ihre Stelle erstellt. Hier passt prepza.
+- **Fachwissen für jede Stelle** (Vertrieb, Buchhaltung, Support, Operations, Marketing, Entwicklung, einschließlich Fragen zum Lesen von Code): ein Tool, das Tests für deine Stelle erstellt. Hier passt prepza.
 - **Praktisches Programmieren** (Code schreiben und ausführen): eine auf Entwickler ausgerichtete Plattform wie HackerRank, CodeSignal oder Codility.
 - **Daten- und Analytics-Rollen:** Darauf konzentriert sich Alooba.
 - **Kognitive Fähigkeiten und Persönlichkeit:** ein Anbieter für Psychometrie, Bryq oder TestGorilla selbst.
 
-Prüfen Sie dann das Preismodell anhand Ihres Einstellungsvolumens. Ein Abo passt zu regelmäßigen Einstellungen, die Abrechnung pro Kandidat zu gelegentlichen. Wenn Sie mehr als eine Art von Test brauchen, landen Sie vielleicht bei zwei Tools, von denen jedes tut, wofür es gebaut ist.
+Prüf dann das Preismodell anhand deines Einstellungsvolumens. Ein Abo passt zu regelmäßigen Einstellungen, die Abrechnung pro Kandidat zu gelegentlichen. Wenn du mehr als eine Art von Test brauchst, landest du vielleicht bei zwei Tools, von denen jedes tut, wofür es gebaut ist.
 
 ## Vergleichstabelle
 
 | Tool | Wofür es gebaut ist | Preismodell (Stand Oktober 2026) |
 | --- | --- | --- |
 | **TestGorilla** | Breite Bibliothek: kognitive Fähigkeiten, Persönlichkeit, Sprache, Programmieren, Fachkenntnisse | Gratis-Tarif und jährlich abgerechnete Bezahltarife ([Preisseite](https://www.testgorilla.com/pricing/)) |
-| **prepza** | Zeitlich begrenzte Multiple-Choice-Interviews zu Fachkenntnissen, geschrieben aus Ihrer Stellenbeschreibung | Pro Kandidat, der antwortet, ohne Abo ([Preise](/pricing)) |
+| **prepza** | Zeitlich begrenzte Multiple-Choice-Interviews zu Fachkenntnissen, geschrieben aus deiner Stellenbeschreibung | Pro Kandidat, der antwortet, ohne Abo ([Preise](/pricing)) |
 | **CodeSignal** | Technische Assessments und KI-Interviewer; Go-to-Market-Rollen in höheren Tarifen | Monats- oder Jahrestarife mit Credits ([Preisseite](https://codesignal.com/pricing/)) |
 | **HackerRank** | Programmiertests und technische Interviews | Siehe [Preisseite](https://www.hackerrank.com/pricing/) |
 | **Alooba** | Vorauswahl für technische und Datenrollen | Monats- oder Jahrestarife mit Credits ([Preisseite](https://www.alooba.com/pricing/)) |
@@ -39,12 +39,12 @@ Prüfen Sie dann das Preismodell anhand Ihres Einstellungsvolumens. Ein Abo pass
 
 ### prepza
 
-prepza macht aus einer Stellenbeschreibung ein zeitlich begrenztes Multiple-Choice-Interview zu Fachkenntnissen. Sie prüfen die vorgeschlagenen Themen, bevor eine Frage geschrieben wird, und jeder Kandidat erhält einen eigenen zufälligen Fragensatz mit einem Countdown bei jeder Frage. Bei technischen Stellen können Fragen ein kurzes Codebeispiel zeigen und fragen, was es tut oder ausgibt. Auswertungen zeigen jede Antwort und ihre Dauer, mit Hinweisen auf zu schnelle Antworten, das Verlassen der Seite und Kopierversuche. Sie laden per E-Mail oder mit einem Link in Ihrer Stellenanzeige ein, und Erinnerungen gehen automatisch raus.
+prepza macht aus einer Stellenbeschreibung ein zeitlich begrenztes Multiple-Choice-Interview zu Fachkenntnissen. Du prüfst die vorgeschlagenen Themen, bevor eine Frage geschrieben wird, und jeder Kandidat erhält einen eigenen zufälligen Fragensatz mit einem Countdown bei jeder Frage. Bei technischen Stellen können Fragen ein kurzes Codebeispiel zeigen und fragen, was es tut oder ausgibt. Auswertungen zeigen jede Antwort und ihre Dauer, mit Hinweisen auf zu schnelle Antworten, das Verlassen der Seite und Kopierversuche. Du lädst per E-Mail oder mit einem Link in deiner Stellenanzeige ein, und Erinnerungen gehen automatisch raus.
 
 - **Preise:** pro Kandidat, der mindestens eine Frage beantwortet, pro Kandidat günstiger bei größeren Aufladungen. Credits verfallen nicht, und es gibt kein Abo. Siehe [Preise](/pricing).
 - **Geeignet für:** kleine und mittlere Teams, die für beliebige Stellen ein paar Personen auf einmal einstellen, als erste Vorauswahl.
-- **Funktioniert mit Ihren Tools:** Workable, Greenhouse, Teamtailor, Recruitee und Breezy HR übergeben Kandidaten an prepza und erhalten ihre Ergebnisse zurück, Slack meldet, wenn Kandidaten fertig sind, und eine öffentliche API bindet Ihre eigene Plattform an. Alles ohne Aufpreis.
-- **Nicht geeignet für:** kognitive Tests oder Persönlichkeitstests, das Schreiben oder Ausführen von Code oder Videointerviews. prepza bietet das nicht an; kombinieren Sie es also mit einem Tool, das es anbietet, wenn Sie es brauchen.
+- **Funktioniert mit deinen Tools:** Workable, Greenhouse, Teamtailor, Recruitee und Breezy HR übergeben Kandidaten an prepza und erhalten ihre Ergebnisse zurück, Slack meldet, wenn Kandidaten fertig sind, und eine öffentliche API bindet deine eigene Plattform an. Alles ohne Aufpreis.
+- **Nicht geeignet für:** kognitive Tests oder Persönlichkeitstests, das Schreiben oder Ausführen von Code oder Videointerviews. prepza bietet das nicht an; kombiniere es also mit einem Tool, das es anbietet, wenn du es brauchst.
 
 ### CodeSignal
 
@@ -58,7 +58,7 @@ Die Tarife von CodeSignal decken technische Assessments und KI-Interviewer für 
 HackerRank konzentriert sich auf die Einstellung von Entwicklern. Mit Stand Oktober 2026 beschreibt die Website Screening-Tests, Live-Pair-Programming-Interviews und einen KI-Interviewer ([hackerrank.com](https://www.hackerrank.com/)).
 
 - **Besser als prepza für:** Entwickler-Recruiting, bei dem Code geschrieben und ausgeführt werden muss, oder Live-Coding-Interviews.
-- **Zusammen:** Unter [Alternativen zu HackerRank](/compare/hackerrank-alternatives) sehen Sie, wie ein Wissenstest und eine Entwicklerplattform in einen Prozess passen.
+- **Zusammen:** Unter [Alternativen zu HackerRank](/compare/hackerrank-alternatives) siehst du, wie ein Wissenstest und eine Entwicklerplattform in einen Prozess passen.
 
 ### Alooba
 
@@ -75,28 +75,28 @@ Die Tarife von Bryq umfassen kognitive und Persönlichkeits-Assessments, Kompete
 
 ### Spezialisten für Psychometrie: Criteria, Wonderlic, SHL
 
-Diese Anbieter konzentrieren sich auf kognitive Tests und Persönlichkeitstests, meist auf individuelles Angebot. Wenn Psychometrie für Ihre Personalauswahl zentral ist, passen sie für diesen Teil wahrscheinlich besser als prepza, und prepza kann trotzdem das Fachwissen abdecken.
+Diese Anbieter konzentrieren sich auf kognitive Tests und Persönlichkeitstests, meist auf individuelles Angebot. Wenn Psychometrie für deine Personalauswahl zentral ist, passen sie für diesen Teil wahrscheinlich besser als prepza, und prepza kann trotzdem das Fachwissen abdecken.
 
 ## Wann TestGorilla weiterhin besser passt
 
-TestGorilla passt womöglich besser zu Ihnen, wenn:
+TestGorilla passt womöglich besser zu dir, wenn:
 
-- Sie mehrere Testarten zusammen einsetzen: Fachkenntnisse, kognitive Fähigkeiten, Persönlichkeit, Sprache.
-- Sie einen Gratis-Tarif für sehr geringe Nutzung wollen ([Preisseite](https://www.testgorilla.com/pricing/)).
-- Sie Videofragen, Jobsimulationen oder Webcam-Schnappschüsse brauchen.
-- Sie regelmäßig in hohem Volumen einstellen, sodass ein Pauschaltarif pro Kandidat günstiger ist.
+- du mehrere Testarten zusammen einsetzt: Fachkenntnisse, kognitive Fähigkeiten, Persönlichkeit, Sprache.
+- du einen Gratis-Tarif für sehr geringe Nutzung willst ([Preisseite](https://www.testgorilla.com/pricing/)).
+- du Videofragen, Jobsimulationen oder Webcam-Schnappschüsse brauchst.
+- du regelmäßig in hohem Volumen einstellst, sodass ein Pauschaltarif pro Kandidat günstiger ist.
 
-Und es kann trotzdem neben prepza stehen: zuerst ein stellenspezifischer Wissenstest, später die breiteren Tests von TestGorilla. Einen direkten Vergleich finden Sie unter [prepza und TestGorilla](/compare/testgorilla).
+Und es kann trotzdem neben prepza stehen: zuerst ein stellenspezifischer Wissenstest, später die breiteren Tests von TestGorilla. Einen direkten Vergleich findest du unter [prepza und TestGorilla](/compare/testgorilla).
 
 ## Tools kombinieren
 
 Ein einfacher kombinierter Prozess:
 
-1. **Prüfen Sie bei allen das Fachwissen** mit einem kurzen Test, der aus der Stellenbeschreibung geschrieben ist.
-2. **Ergänzen Sie den Spezialtest** für die Shortlist: Programmieren, kognitive Fähigkeiten, Persönlichkeit oder Daten, je nach Stelle.
-3. **Führen Sie Interviews** mit den Finalisten, mit festgelegten Fragen und einem Bewertungsleitfaden.
+1. **Prüf bei allen das Fachwissen** mit einem kurzen Test, der aus der Stellenbeschreibung geschrieben ist.
+2. **Ergänze den Spezialtest** für die Shortlist: Programmieren, kognitive Fähigkeiten, Persönlichkeit oder Daten, je nach Stelle.
+3. **Führe Interviews** mit den Finalisten, mit festgelegten Fragen und einem Bewertungsleitfaden.
 
-Was jedes Tool kostet, hängt von Ihrem Volumen und den benötigten Tarifen ab. [Kosten von Einstellungstests vergleichen](/compare/cheapest-pre-employment-test) zeigt, wie Sie das anhand der Preisseite jedes Anbieters schätzen.
+Was jedes Tool kostet, hängt von deinem Volumen und den benötigten Tarifen ab. [Kosten von Einstellungstests vergleichen](/compare/cheapest-pre-employment-test) zeigt, wie du das anhand der Preisseite jedes Anbieters schätzen.
 
 *Produktnamen gehören ihren Inhabern. prepza ist mit keinem der auf dieser Seite genannten Unternehmen verbunden und wird von keinem davon unterstützt.*
 

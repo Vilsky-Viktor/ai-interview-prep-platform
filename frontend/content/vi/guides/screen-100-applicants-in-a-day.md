@@ -103,7 +103,7 @@ Ghi lại lý do mỗi người được chọn. Mỗi ứng viên chỉ mất m
 
 ## Chi phí
 
-Với prepza, bạn chỉ trả tiền cho những ứng viên trả lời ít nhất một câu hỏi: $3 mỗi người với gói nạp $30 và $150, $2 từ gói nạp $250 và $1 từ gói nạp $1,000. Với 100 ứng viên, chi phí là $300 ở mức $3 mỗi người, hoặc $200 trong gói nạp $250 ở mức $2 mỗi người, không có gói đăng ký. Giá tính bằng đô la Mỹ; VAT hoặc thuế bán hàng được xử lý khi thanh toán. Tạo bài kiểm tra là miễn phí, và 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí.
+Với prepza, bạn chỉ trả tiền cho những ứng viên trả lời ít nhất một câu hỏi: $3 mỗi người với gói nạp $30 và $150, $2 từ gói nạp $250 và $1 từ gói nạp $1.000. Với 100 ứng viên, chi phí là $300 ở mức $3 mỗi người, hoặc $200 trong gói nạp $250 ở mức $2 mỗi người, không có gói đăng ký. Giá tính bằng đô la Mỹ; VAT hoặc thuế bán hàng được xử lý khi thanh toán. Tạo bài kiểm tra là miễn phí, và 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí.
 
 ## Đọc thêm
 

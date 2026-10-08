@@ -72,7 +72,7 @@ Prima di attivarlo per una posizione reale:
 4. **Configura il webhook** se il tuo ATS richiede di farlo a mano, e incolla il suo secret dove lo strumento lo chiede.
 5. **Fai una prova su di te.** Aggiungi un candidato con la tua email, spostalo nella fase, fai il test e controlla che la nota compaia nell'ATS.
 6. **Decidi chi tiene d'occhio gli errori:** chi viene avvisato quando un invito non può partire, e chi risolve il problema.
-7. **Concordate come leggere i risultati.** Una soglia di superamento è un riferimento, non uno scarto automatico. Decidetelo prima che arrivino i risultati, non dopo.
+7. **Concorda con il team come leggere i risultati.** Una soglia di superamento è un riferimento, non uno scarto automatico. Decidilo prima che arrivino i risultati, non dopo.
 
 ## Errori comuni
 
@@ -98,7 +98,7 @@ prepza si collega a **Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR** 
 
 Alcuni ATS richiedono un passaggio dal loro lato. Greenhouse, Teamtailor e Recruitee ti chiedono di aggiungere un webhook a mano; la finestra Istruzioni di prepza mostra l'indirizzo e dove incollare il suo secret. I webhook di Teamtailor sono un componente aggiuntivo, e l'API di Breezy HR è inclusa nel suo piano Pro. I webhook di Workable e Breezy HR li configura prepza da solo.
 
-Il prezzo è per candidato, senza abbonamento: paghi solo per i candidati che rispondono ad almeno una domanda, $3 ciascuno con le ricariche da $30 e $150, $2 da una ricarica di $250 e $1 da una ricarica di $1,000. I prezzi sono in dollari USA; IVA o sales tax vengono gestite al pagamento. Collegare un ATS e creare colloqui è gratuito, e i primi 3 candidati della tua prima azienda sono gratis. Vedi i [prezzi](/pricing).
+Il prezzo è per candidato, senza abbonamento: paghi solo per i candidati che rispondono ad almeno una domanda, $3 ciascuno con le ricariche da $30 e $150, $2 da una ricarica di $250 e $1 da una ricarica di $1.000. I prezzi sono in dollari USA; IVA o sales tax vengono gestite al pagamento. Collegare un ATS e creare colloqui è gratuito, e i primi 3 candidati della tua prima azienda sono gratis. Vedi i [prezzi](/pricing).
 
 ## Letture correlate
 

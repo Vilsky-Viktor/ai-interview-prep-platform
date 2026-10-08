@@ -1042,7 +1042,7 @@
     "webhookUrl": "이 값을 엔드포인트 URL로 붙여 넣으세요:",
     "webhookSecret": "이 값은 시크릿 키로 붙여 넣으세요:",
     "copyUrl": "URL 복사",
-    "copySecret": "키 복사",
+    "copySecret": "시크릿 복사",
     "copied": "복사됨",
     "webhookTitle": "웹훅 설정",
     "flowHow": "지원자가 들어오는 방식",

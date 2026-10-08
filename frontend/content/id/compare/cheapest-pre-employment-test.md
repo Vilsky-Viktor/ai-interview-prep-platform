@@ -31,11 +31,11 @@ Kamu butuh tiga angka: berapa banyak kandidat yang kamu tes dalam setahun, harga
 3. **Langganan:** harga bulanan × 12, atau harga tahunan. Periksa berapa banyak kandidat yang ditanggung kreditnya; kalau kamu akan melebihinya, hitung harga paket satu tingkat di atasnya.
 4. **Temukan titik impasmu (break-even):** biaya tahunan paket ÷ harga per kandidat. Di bawah jumlah kandidat per tahun itu, bayar per kandidat lebih murah. Di atasnya, paket yang lebih murah.
 
-**Contoh perhitungan, dengan angka karangan.** Misalnya sebuah paket berharga $1,500 per tahun dan opsi bayar per kandidat berharga $3 per kandidat. Titik impasnya adalah 1,500 ÷ 3 = 500 kandidat per tahun. Tim yang menguji 60 kandidat per tahun akan membayar $180 untuk biaya per kandidat, bukan $1,500 untuk paket. Tim yang menguji 600 kandidat akan membayar $1,800 untuk biaya per kandidat, dan paket akan lebih murah. Gunakan angka sebenarnya dari halaman harga yang sedang kamu bandingkan.
+**Contoh perhitungan, dengan angka karangan.** Misalnya sebuah paket berharga $1.500 per tahun dan opsi bayar per kandidat berharga $3 per kandidat. Titik impasnya adalah 1.500 ÷ 3 = 500 kandidat per tahun. Tim yang menguji 60 kandidat per tahun akan membayar $180 untuk biaya per kandidat, bukan $1.500 untuk paket. Tim yang menguji 600 kandidat akan membayar $1.800 untuk biaya per kandidat, dan paket akan lebih murah. Gunakan angka sebenarnya dari halaman harga yang sedang kamu bandingkan.
 
 ### Harga prepza untuk perkiraanmu
 
-prepza mengenakan biaya per kandidat yang menjawab setidaknya satu soal. Harga per kandidat tergantung besar isi ulangmu: $3 untuk isi ulang yang lebih kecil, $2 mulai dari isi ulang $250, dan $1 mulai dari isi ulang $1,000. 3 kandidat pertama dari perusahaan pertamamu gratis. Harga dalam dolar AS; Paddle, yang memproses pembayaran, menangani PPN (VAT) dan pajak penjualan saat checkout. Lihat [harga](/pricing) untuk pilihan isi ulang terbaru.
+prepza mengenakan biaya per kandidat yang menjawab setidaknya satu soal. Harga per kandidat tergantung besar isi ulangmu: $3 untuk isi ulang yang lebih kecil, $2 mulai dari isi ulang $250, dan $1 mulai dari isi ulang $1.000. 3 kandidat pertama dari perusahaan pertamamu gratis. Harga dalam dolar AS; Paddle, yang memproses pembayaran, menangani PPN (VAT) dan pajak penjualan saat checkout. Lihat [harga](/pricing) untuk pilihan isi ulang terbaru.
 
 ## Biaya di luar harga yang tercantum
 

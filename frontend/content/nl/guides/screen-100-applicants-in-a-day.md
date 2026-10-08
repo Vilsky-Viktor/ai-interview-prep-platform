@@ -103,7 +103,7 @@ Schrijf op waarom elke persoon op de lijst staat. Dat kost een minuut per kandid
 
 ## Wat het kost
 
-Met prepza betaal je alleen voor kandidaten die minstens één vraag beantwoorden: $3 per kandidaat bij de opwaarderingen van $30 en $150, $2 vanaf een opwaardering van $250 en $1 vanaf een opwaardering van $1,000. Voor 100 sollicitanten is dat $300 tegen $3 per kandidaat, of $200 van een opwaardering van $250 tegen $2 per kandidaat, zonder abonnement. Prijzen zijn in Amerikaanse dollars; btw of sales tax wordt bij het afrekenen geregeld. De test genereren is gratis, en de eerste 3 kandidaten van je eerste bedrijf zijn gratis.
+Met prepza betaal je alleen voor kandidaten die minstens één vraag beantwoorden: $3 per kandidaat bij de opwaarderingen van $30 en $150, $2 vanaf een opwaardering van $250 en $1 vanaf een opwaardering van $1.000. Voor 100 sollicitanten is dat $300 tegen $3 per kandidaat, of $200 van een opwaardering van $250 tegen $2 per kandidaat, zonder abonnement. Prijzen zijn in Amerikaanse dollars; btw of sales tax wordt bij het afrekenen geregeld. De test genereren is gratis, en de eerste 3 kandidaten van je eerste bedrijf zijn gratis.
 
 ## Verder lezen
 

@@ -42,7 +42,7 @@ prepza facture chaque candidat qui répond à au moins une question. Le prix par
 Lors de votre comparaison, vérifiez aussi :
 
 - **L'engagement annuel.** Une offre « facturée annuellement » signifie payer 12 mois d'avance, même si vous ne recrutez que pendant deux d'entre eux.
-- **Les licences utilisateurs.** Certaines offres limitent le nombre de personnes de votre équipe qui peuvent les utiliser. prepza ne facture pas de licences : propriétaires, administrateurs et lecteurs sont gratuits.
+- **Les licences utilisateurs.** Certaines offres limitent le nombre de personnes de votre équipe qui peuvent les utiliser. prepza ne facture pas de licences : propriétaires, admins et lecteurs sont gratuits.
 - **Les candidats qui ne commencent jamais.** prepza ne facture que les candidats qui répondent à au moins une question ; les crédits d'une invitation inutilisée vous sont rendus.
 - **Les crédits qui expirent.** Les crédits de prepza n'expirent pas. Vérifiez si les crédits des autres fournisseurs sont reportés.
 - **Les taxes.** Vérifiez si un prix affiché inclut la TVA ou la sales tax.

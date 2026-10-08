@@ -31,11 +31,11 @@ Ti servono tre numeri: quanti candidati valuti in un anno, il prezzo per candida
 3. **Abbonamento:** il prezzo mensile × 12, oppure il prezzo annuale. Verifica quanti candidati coprono i suoi crediti; se li superassi, calcola il prezzo del piano superiore.
 4. **Trova il tuo punto di pareggio:** il costo annuo del piano ÷ il prezzo per candidato. Sotto quel numero di candidati all'anno, pagare per candidato costa meno. Sopra, conviene il piano.
 
-**Un esempio pratico, con numeri inventati.** Supponi che un piano costi $1,500 all'anno e che un'opzione a pagamento per candidato costi $3 a candidato. Il punto di pareggio è 1,500 ÷ 3 = 500 candidati all'anno. Un team che valuta 60 candidati all'anno pagherebbe $180 in costi per candidato invece di $1,500 per il piano. Un team che ne valuta 600 pagherebbe $1,800 in costi per candidato, e il piano costerebbe meno. Usa i numeri reali delle pagine prezzi che stai confrontando.
+**Un esempio pratico, con numeri inventati.** Supponi che un piano costi $1.500 all'anno e che un'opzione a pagamento per candidato costi $3 a candidato. Il punto di pareggio è 1,500 ÷ 3 = 500 candidati all'anno. Un team che valuta 60 candidati all'anno pagherebbe $180 in costi per candidato invece di $1.500 per il piano. Un team che ne valuta 600 pagherebbe $1.800 in costi per candidato, e il piano costerebbe meno. Usa i numeri reali delle pagine prezzi che stai confrontando.
 
 ### I prezzi di prepza per la tua stima
 
-prepza addebita per ogni candidato che risponde ad almeno una domanda. Il prezzo per candidato dipende dall'importo della ricarica: $3 con le ricariche più piccole, $2 da una ricarica di $250 e $1 da una ricarica di $1,000. I primi 3 candidati della tua prima azienda sono gratis. I prezzi sono in dollari statunitensi; Paddle, che elabora i pagamenti, gestisce IVA e imposte sulle vendite al momento del pagamento. Vedi i [prezzi](/pricing) per le ricariche attuali.
+prepza addebita per ogni candidato che risponde ad almeno una domanda. Il prezzo per candidato dipende dall'importo della ricarica: $3 con le ricariche più piccole, $2 da una ricarica di $250 e $1 da una ricarica di $1.000. I primi 3 candidati della tua prima azienda sono gratis. I prezzi sono in dollari statunitensi; Paddle, che elabora i pagamenti, gestisce IVA e imposte sulle vendite al momento del pagamento. Vedi i [prezzi](/pricing) per le ricariche attuali.
 
 ## Costi oltre il prezzo di listino
 

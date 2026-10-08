@@ -42,7 +42,7 @@ Naniningil ang prepza bawat aplikanteng sumagot ng kahit isang tanong. Nakadepen
 Kapag nagkukumpara ka, tingnan din ang mga ito:
 
 - **Taunang commitment.** Ang plan na "sinisingil taun-taon" ay nangangahulugang babayaran mo nang paunang ang 12 buwan, kahit dalawang buwan ka lang magha-hire.
-- **Seats.** May mga plan na naglilimita kung ilang tao sa team mo ang puwedeng gumamit nito. Walang seat fees ang prepza: libre ang owners, admins at viewers.
+- **Seats.** May mga plan na naglilimita kung ilang tao sa team mo ang puwedeng gumamit nito. Walang seat fees ang prepza: libre ang may-ari, mga admin at mga viewer.
 - **Mga aplikanteng hindi nagsimula.** Naniningil lang ang prepza para sa mga aplikanteng sumagot ng kahit isang tanong; bumabalik ang credits ng hindi nagamit na imbitasyon.
 - **Nag-e-expire na credits.** Hindi nag-e-expire ang credits ng prepza. Tingnan kung naililipat sa susunod na panahon ang credits ng ibang vendor.
 - **Buwis.** Tingnan kung kasama na sa nakalistang presyo ang VAT o sales tax.

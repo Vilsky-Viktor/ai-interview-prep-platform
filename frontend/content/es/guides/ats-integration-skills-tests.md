@@ -19,15 +19,15 @@ Esta guía explica qué hace una buena conexión entre un ATS y una herramienta 
 | Las invitaciones salen cuando alguien tiene tiempo | Las invitaciones salen a los pocos minutos del cambio |
 | Los resultados se quedan en la herramienta de evaluación | Los resultados aparecen en la ficha del candidato en el ATS |
 | Los responsables de contratación preguntan "¿alguien lo ha evaluado ya?" | El ATS muestra a quién se evaluó y cómo le fue |
-| Errores en los correos y candidatos olvidados | El ATS es la única lista de quién se postuló |
+| Errores en los correos y candidatos olvidados | El ATS es la única lista de quienes han presentado su candidatura |
 
-La rapidez importa más de lo que parece. Cuanto más tiempo pasa entre la postulación y la respuesta, más candidatos abandonan o aceptan otro trabajo. Las tasas exactas de abandono varían mucho según el puesto y el mercado, así que toma las cifras publicadas con cautela, pero la tendencia es constante: un proceso lento pierde gente, y los mejores candidatos suelen ser los que más opciones tienen.
+La rapidez importa más de lo que parece. Cuanto más tiempo pasa entre la candidatura y la respuesta, más candidatos abandonan o aceptan otro trabajo. Las tasas exactas de abandono varían mucho según el puesto y el mercado, así que toma las cifras publicadas con cautela, pero la tendencia es constante: un proceso lento pierde gente, y los mejores candidatos suelen ser los que más opciones tienen.
 
 ## Cómo es un buen flujo
 
 Una buena integración sigue las etapas que ya usas. No inventa un proceso nuevo.
 
-1. **Un candidato se postula** y llega a tu ATS como siempre.
+1. **Un candidato presenta su candidatura** y llega a tu ATS como siempre.
 2. **Una persona lo mueve a una etapa de evaluación,** por ejemplo "Prueba de habilidades". Ese cambio es el disparador, así que una persona sigue decidiendo a quién se evalúa.
 3. **La herramienta de evaluación envía la invitación** automáticamente, para la prueba vinculada a esa vacante.
 4. **El candidato hace la prueba** cuando le venga bien, dentro del plazo que fijes.
@@ -36,9 +36,9 @@ Una buena integración sigue las etapas que ya usas. No inventa un proceso nuevo
 
 Dos cosas siguen siendo manuales a propósito: elegir a quién se evalúa y decidir qué pasa después. La conexión solo elimina el copiado intermedio.
 
-### ¿Por qué no disparar con cada nueva postulación?
+### ¿Por qué no disparar con cada nueva candidatura?
 
-Algunas herramientas invitan a todos los que se postulan. Puede estar bien en puestos de alto volumen donde todos hacen la misma prueba. Pero una etapa a la que mueves candidatos es más fácil de controlar: puedes saltarte a quienes claramente no cumplen un requisito indispensable (sin permiso de trabajo, ubicación equivocada) y nunca evalúas, ni pagas, a alguien a quien ibas a descartar de todos modos.
+Algunas herramientas invitan a todos los que presentan su candidatura. Puede estar bien en puestos de alto volumen donde todos hacen la misma prueba. Pero una etapa a la que mueves candidatos es más fácil de controlar: puedes saltarte a quienes claramente no cumplen un requisito indispensable (sin permiso de trabajo, ubicación equivocada) y nunca evalúas, ni pagas, a alguien a quien ibas a descartar de todos modos.
 
 ## Qué revisar antes de elegir una integración
 
@@ -96,7 +96,7 @@ prepza se conecta con **Workable, Greenhouse, Teamtailor, Recruitee y Breezy HR*
 - **Tu propia plataforma.** Si tu ATS no está en la lista, la [API](/api-docs) de prepza te permite invitar a candidatos con una clave API y recibir un webhook firmado cuando un candidato termina.
 - **Datos guardados durante un tiempo fijo.** Los candidatos que llegan desde un ATS se eliminan a los 365 días, o antes junto con su entrevista o su empresa.
 
-Algunos ATS necesitan un paso por su lado. Greenhouse, Teamtailor y Recruitee te piden añadir un webhook a mano; el diálogo Instrucciones de prepza muestra la dirección y dónde pegar su secreto. Los webhooks de Teamtailor son un complemento de pago, y la API de Breezy HR viene con su plan Pro. prepza configura por sí mismo los webhooks de Workable y Breezy HR.
+Algunos ATS necesitan un paso por su lado. Greenhouse, Teamtailor y Recruitee te piden añadir un webhook a mano; el diálogo Instrucciones de prepza muestra la dirección y dónde pegar su secreto. Los webhooks de Teamtailor son un complemento, y la API de Breezy HR viene con su plan Pro. prepza configura por sí mismo los webhooks de Workable y Breezy HR.
 
 El precio es por candidato, sin suscripción: solo pagas por los candidatos que responden al menos una pregunta, $3 cada uno con las recargas de $30 y $150, $2 a partir de una recarga de $250 y $1 a partir de una recarga de $1000. Los precios están en dólares estadounidenses; el IVA o los impuestos sobre las ventas se gestionan al pagar. Conectar un ATS y crear entrevistas es gratis, y los 3 primeros candidatos de tu primera empresa son gratis. Consulta los [precios](/pricing).
 

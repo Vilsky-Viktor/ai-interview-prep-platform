@@ -96,7 +96,7 @@ A prepza se integra com **Workable, Greenhouse, Teamtailor, Recruitee e Breezy H
 - **Sua própria plataforma.** Se o seu ATS não está na lista, a [API](/api-docs) da prepza permite convidar candidatos com uma chave de API e receber um webhook assinado quando um candidato termina.
 - **Dados guardados por um prazo definido.** Candidatos salvos a partir de um ATS são excluídos após 365 dias, ou antes, junto com a entrevista ou a empresa.
 
-Alguns ATSs exigem uma etapa do lado deles. Greenhouse, Teamtailor e Recruitee pedem que você adicione um webhook manualmente; a janela Instruções da prepza mostra o endereço e onde colar o segredo. Os webhooks do Teamtailor são um complemento pago, e a API do Breezy HR vem com o plano Pro. A prepza configura sozinha os webhooks do Workable e do Breezy HR.
+Alguns ATSs exigem uma etapa do lado deles. Greenhouse, Teamtailor e Recruitee pedem que você adicione um webhook manualmente; a janela Instruções da prepza mostra o endereço e onde colar o segredo. Os webhooks do Teamtailor são um complemento, e a API do Breezy HR vem com o plano Pro. A prepza configura sozinha os webhooks do Workable e do Breezy HR.
 
 O preço é por candidato, sem assinatura: você paga só pelos candidatos que respondem pelo menos uma pergunta, $3 cada nas recargas de $30 e $150, $2 a partir de uma recarga de $250 e $1 a partir de uma recarga de $1.000. Os preços são em dólares americanos; IVA ou impostos sobre vendas são tratados no checkout. Conectar um ATS e criar entrevistas é gratuito, e os 3 primeiros candidatos da sua primeira empresa são gratuitos. Veja os [preços](/pricing).
 
