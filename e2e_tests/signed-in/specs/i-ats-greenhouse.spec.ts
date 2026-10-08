@@ -61,7 +61,7 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
   await expect(dialog.getByRole("textbox", { name: "Copy URL" })).toHaveValue(
     /\/api\/ats\/webhooks\/greenhouse\/[0-9a-f-]{36}$/
   )
-  await expect(dialog.getByRole("textbox", { name: "Copy key" })).toHaveValue(
+  await expect(dialog.getByRole("textbox", { name: "Copy secret" })).toHaveValue(
     GREENHOUSE_E2E_SECRET
   )
   await owner.setViewportSize({ width: 1280, height: 1400 })

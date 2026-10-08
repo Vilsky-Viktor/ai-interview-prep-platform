@@ -59,7 +59,7 @@ LANGUAGES = {
     "ru": "Russian",
     "uk": "Ukrainian",
     "es": "Spanish",
-    "pt": "Portuguese",
+    "pt": "Portuguese (Brazil)",
     "de": "German",
     "fr": "French",
     "it": "Italian",
