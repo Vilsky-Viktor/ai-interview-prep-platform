@@ -10,7 +10,27 @@
     "downloadFailed": "데이터를 준비하지 못했습니다. 다시 시도해 주세요.",
     "delete": "계정 삭제",
     "searchLanguage": "언어 검색",
-    "noLanguage": "언어를 찾을 수 없습니다."
+    "noLanguage": "언어를 찾을 수 없습니다.",
+    "emails": {
+      "title": "이메일",
+      "note": "prepza.에서 받을 이메일을 선택하세요.",
+      "failed": "이메일 설정을 저장하지 못했습니다. 다시 시도해 주세요.",
+      "digest": "활동 요약",
+      "digestNote": "회사에서 있었던 일을 하루 한 번 이메일로 알려 드립니다.",
+      "kinds": {
+        "candidate_finished": "면접을 완료한 지원자",
+        "invite_undelivered": "전달되지 않은 초대",
+        "ats_not_invited": "초대되지 않은 ATS 지원자",
+        "interview_ready": "준비된 면접"
+      },
+      "reminders": "리마인더",
+      "remindersNote": "크레딧 부족, 지원자가 없는 면접, 검토를 기다리는 주제.",
+      "updates": "제품 업데이트 및 소식",
+      "updatesNote": "prepza.의 새 기능과 소식.",
+      "promotions": "혜택 및 프로모션",
+      "promotionsNote": "할인 및 특별 혜택.",
+      "alwaysSent": "초대, 지원자 보고서, 결제 문제, 약관 변경 등 서비스 이메일은 항상 발송됩니다."
+    }
   },
   "userMenu": {
     "signIn": "로그인",
@@ -52,7 +72,10 @@
     "link": "이 이메일에는 이미 prepza 계정이 있습니다. 이전에 로그인한 방법으로 계속하면 {provider}이(가) 해당 계정에 연결됩니다.",
     "consent": "로그인하면 만 16세 이상임을 확인하고 <terms>이용약관</terms> 및 <privacy>개인정보처리방침</privacy>에 동의하는 것으로 간주됩니다.",
     "failed": "로그인하지 못했습니다. 다시 시도해 주세요.",
-    "verify": "이메일 인증 링크를 보냈습니다. 링크를 연 다음 다시 로그인하면 면접을 볼 수 있습니다."
+    "verify": "이메일 인증 링크를 보냈습니다. 링크를 연 다음 다시 로그인하면 면접을 볼 수 있습니다.",
+    "noUpdates": "제품 업데이트 및 소식 받지 않기",
+    "promotions": "혜택 및 프로모션 받기",
+    "emailsFailed": "이메일 수신 선택을 저장하지 못했습니다. 설정에서 변경할 수 있습니다."
   },
   "common": {
     "backToTop": "맨 위로",

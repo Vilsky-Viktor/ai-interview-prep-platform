@@ -10,7 +10,27 @@
     "downloadFailed": "Hindi maihanda ang iyong data. Pakisubukang muli.",
     "delete": "Burahin ang account",
     "searchLanguage": "Maghanap ng wika",
-    "noLanguage": "Walang nahanap na wika."
+    "noLanguage": "Walang nahanap na wika.",
+    "emails": {
+      "title": "Mga email",
+      "note": "Piliin kung aling mga email ang ipapadala sa iyo ng prepza.",
+      "failed": "Hindi na-save ang mga setting ng email mo. Pakisubukan ulit.",
+      "digest": "Buod ng aktibidad",
+      "digestNote": "Isang email bawat araw tungkol sa nangyari sa mga kumpanya mo.",
+      "kinds": {
+        "candidate_finished": "Mga aplikanteng nakatapos",
+        "invite_undelivered": "Mga imbitasyong hindi naihatid",
+        "ats_not_invited": "Mga aplikante mula sa ATS na hindi na-imbitahan",
+        "interview_ready": "Mga interview na handa na"
+      },
+      "reminders": "Mga paalala",
+      "remindersNote": "Kaunti na lang ang credit, mga interview na walang aplikante, mga topic na naghihintay ng review.",
+      "updates": "Mga update at balita tungkol sa produkto",
+      "updatesNote": "Mga bagong feature at balita mula sa prepza.",
+      "promotions": "Mga alok at promo",
+      "promotionsNote": "Mga discount at espesyal na alok.",
+      "alwaysSent": "Laging ipinapadala ang mga email ng serbisyo, gaya ng mga imbitasyon, report ng aplikante, problema sa bayad at pagbabago sa aming mga tuntunin."
+    }
   },
   "userMenu": {
     "signIn": "Mag-sign in",
@@ -52,7 +72,10 @@
     "link": "May prepza account na ang email na ito. Magpatuloy sa paraang ginamit mo dati, at maili-link dito ang {provider}.",
     "consent": "Sa pag-sign in, kinukumpirma mong 16 taong gulang ka o higit pa at sumasang-ayon ka sa <terms>Mga tuntunin</terms> at sa <privacy>Patakaran sa privacy</privacy>.",
     "failed": "Hindi nakapag-sign in. Pakisubukang muli.",
-    "verify": "Nagpadala kami sa iyo ng link para i-verify ang iyong email. Buksan ito, saka mag-sign in ulit para makasagot ng mga interview."
+    "verify": "Nagpadala kami sa iyo ng link para i-verify ang iyong email. Buksan ito, saka mag-sign in ulit para makasagot ng mga interview.",
+    "noUpdates": "Huwag akong padalhan ng mga update at balita tungkol sa produkto",
+    "promotions": "Padalhan ako ng mga alok at promo",
+    "emailsFailed": "Hindi na-save ang mga pinili mo para sa email. Mababago mo ito sa Mga setting."
   },
   "common": {
     "backToTop": "Bumalik sa itaas",

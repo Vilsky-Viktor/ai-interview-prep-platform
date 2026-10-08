@@ -10,7 +10,27 @@
     "downloadFailed": "No se pudieron preparar tus datos. Inténtalo de nuevo.",
     "delete": "Eliminar cuenta",
     "searchLanguage": "Buscar idiomas",
-    "noLanguage": "No se encontró ningún idioma."
+    "noLanguage": "No se encontró ningún idioma.",
+    "emails": {
+      "title": "Correos",
+      "note": "Elige qué correos te envía prepza.",
+      "failed": "No se pudo guardar tu configuración de correo. Inténtalo de nuevo.",
+      "digest": "Resumen de actividad",
+      "digestNote": "Un correo al día con lo que pasó en tus empresas.",
+      "kinds": {
+        "candidate_finished": "Candidatos que terminaron",
+        "invite_undelivered": "Invitaciones no entregadas",
+        "ats_not_invited": "Candidatos del ATS no invitados",
+        "interview_ready": "Entrevistas listas"
+      },
+      "reminders": "Recordatorios",
+      "remindersNote": "Pocos créditos, entrevistas sin candidatos, temas pendientes de revisión.",
+      "updates": "Novedades del producto",
+      "updatesNote": "Nuevas funciones y noticias de prepza.",
+      "promotions": "Ofertas y promociones",
+      "promotionsNote": "Descuentos y ofertas especiales.",
+      "alwaysSent": "Los correos de servicio, como invitaciones, informes de candidatos, problemas de pago y cambios en nuestros términos, se envían siempre."
+    }
   },
   "userMenu": {
     "signIn": "Iniciar sesión",
@@ -52,7 +72,10 @@
     "link": "Este correo ya tiene una cuenta de prepza. Continúa como iniciaste sesión la otra vez y {provider} se vinculará a ella.",
     "consent": "Al iniciar sesión, confirmas que tienes 16 años o más y aceptas los <terms>Términos</terms> y la <privacy>Política de privacidad</privacy>.",
     "failed": "No se pudo iniciar sesión. Inténtalo de nuevo.",
-    "verify": "Te enviamos un enlace para verificar tu correo. Ábrelo y vuelve a iniciar sesión para hacer entrevistas."
+    "verify": "Te enviamos un enlace para verificar tu correo. Ábrelo y vuelve a iniciar sesión para hacer entrevistas.",
+    "noUpdates": "No quiero recibir novedades del producto",
+    "promotions": "Quiero recibir ofertas y promociones",
+    "emailsFailed": "No se pudieron guardar tus preferencias de correo. Puedes cambiarlas en Ajustes."
   },
   "common": {
     "backToTop": "Volver arriba",

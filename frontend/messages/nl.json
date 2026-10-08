@@ -10,7 +10,27 @@
     "downloadFailed": "Je gegevens konden niet worden voorbereid. Probeer het opnieuw.",
     "delete": "Account verwijderen",
     "searchLanguage": "Talen zoeken",
-    "noLanguage": "Geen taal gevonden."
+    "noLanguage": "Geen taal gevonden.",
+    "emails": {
+      "title": "E-mails",
+      "note": "Kies welke e-mails prepza. je stuurt.",
+      "failed": "Je e-mailinstellingen konden niet worden opgeslagen. Probeer het opnieuw.",
+      "digest": "Activiteitenoverzicht",
+      "digestNote": "Eén e-mail per dag over wat er in je bedrijven is gebeurd.",
+      "kinds": {
+        "candidate_finished": "Kandidaten die klaar zijn",
+        "invite_undelivered": "Niet-bezorgde uitnodigingen",
+        "ats_not_invited": "Niet-uitgenodigde kandidaten uit het ATS",
+        "interview_ready": "Interviews die klaar zijn"
+      },
+      "reminders": "Herinneringen",
+      "remindersNote": "Weinig credits, interviews zonder kandidaten, onderwerpen die op beoordeling wachten.",
+      "updates": "Productupdates en nieuws",
+      "updatesNote": "Nieuwe functies en nieuws van prepza.",
+      "promotions": "Aanbiedingen en acties",
+      "promotionsNote": "Kortingen en speciale aanbiedingen.",
+      "alwaysSent": "Service-e-mails, zoals uitnodigingen, kandidaatrapporten, betalingsproblemen en wijzigingen in onze voorwaarden, worden altijd verstuurd."
+    }
   },
   "userMenu": {
     "signIn": "Inloggen",
@@ -52,7 +72,10 @@
     "link": "Dit e-mailadres heeft al een prepza-account. Ga verder zoals je eerder hebt ingelogd, dan wordt {provider} eraan gekoppeld.",
     "consent": "Door in te loggen bevestig je dat je 16 jaar of ouder bent en ga je akkoord met de <terms>Voorwaarden</terms> en het <privacy>Privacybeleid</privacy>.",
     "failed": "Inloggen is mislukt. Probeer het opnieuw.",
-    "verify": "We hebben je een link gestuurd om je e-mailadres te verifiëren. Open hem en log daarna opnieuw in om interviews te doen."
+    "verify": "We hebben je een link gestuurd om je e-mailadres te verifiëren. Open hem en log daarna opnieuw in om interviews te doen.",
+    "noUpdates": "Stuur me geen productupdates en nieuws",
+    "promotions": "Stuur me aanbiedingen en acties",
+    "emailsFailed": "Je e-mailkeuzes konden niet worden opgeslagen. Je kunt ze wijzigen in Instellingen."
   },
   "common": {
     "backToTop": "Terug naar boven",

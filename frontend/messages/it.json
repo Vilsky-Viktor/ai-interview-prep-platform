@@ -10,7 +10,27 @@
     "downloadFailed": "Impossibile preparare i tuoi dati. Riprova.",
     "delete": "Elimina account",
     "searchLanguage": "Cerca lingue",
-    "noLanguage": "Nessuna lingua trovata."
+    "noLanguage": "Nessuna lingua trovata.",
+    "emails": {
+      "title": "Email",
+      "note": "Scegli quali email ti invia prepza.",
+      "failed": "Impossibile salvare le impostazioni email. Riprova.",
+      "digest": "Riepilogo attività",
+      "digestNote": "Un'email al giorno su ciò che è successo nelle tue aziende.",
+      "kinds": {
+        "candidate_finished": "Candidati che hanno finito",
+        "invite_undelivered": "Inviti non consegnati",
+        "ats_not_invited": "Candidati dall'ATS non invitati",
+        "interview_ready": "Colloqui pronti"
+      },
+      "reminders": "Promemoria",
+      "remindersNote": "Crediti in esaurimento, colloqui senza candidati, argomenti in attesa di revisione.",
+      "updates": "Novità sul prodotto e notizie",
+      "updatesNote": "Nuove funzionalità e notizie da prepza.",
+      "promotions": "Offerte e promozioni",
+      "promotionsNote": "Sconti e offerte speciali.",
+      "alwaysSent": "Le email di servizio, come inviti, report sui candidati, problemi di pagamento e modifiche ai nostri termini, vengono sempre inviate."
+    }
   },
   "userMenu": {
     "signIn": "Accedi",
@@ -52,7 +72,10 @@
     "link": "Questa email ha già un account prepza. Continua come hai fatto l'ultima volta e {provider} verrà collegato.",
     "consent": "Accedendo, confermi di avere almeno 16 anni e accetti i <terms>Termini</terms> e l’<privacy>Informativa sulla privacy</privacy>.",
     "failed": "Accesso non riuscito. Riprova.",
-    "verify": "Ti abbiamo inviato un link per verificare la tua email. Aprilo, poi accedi di nuovo per svolgere i colloqui."
+    "verify": "Ti abbiamo inviato un link per verificare la tua email. Aprilo, poi accedi di nuovo per svolgere i colloqui.",
+    "noUpdates": "Non inviarmi novità sul prodotto e notizie",
+    "promotions": "Inviami offerte e promozioni",
+    "emailsFailed": "Impossibile salvare le tue scelte email. Puoi cambiarle nelle Impostazioni."
   },
   "common": {
     "backToTop": "Torna su",

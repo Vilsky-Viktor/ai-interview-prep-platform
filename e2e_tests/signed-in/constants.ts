@@ -30,6 +30,7 @@ export const WARM_UP_PATHS = [
   "/superadmin/pass-rates",
   "/superadmin/verification",
   "/superadmin/controls",
+  "/settings",
 ]
 
 // The web hook secret key of the Greenhouse connection the tests save.

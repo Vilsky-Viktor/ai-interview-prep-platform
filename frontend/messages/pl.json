@@ -10,7 +10,27 @@
     "downloadFailed": "Nie udało się przygotować Twoich danych. Spróbuj ponownie.",
     "delete": "Usuń konto",
     "searchLanguage": "Szukaj języków",
-    "noLanguage": "Nie znaleziono języka."
+    "noLanguage": "Nie znaleziono języka.",
+    "emails": {
+      "title": "E-maile",
+      "note": "Wybierz, jakie e-maile wysyła Ci prepza.",
+      "failed": "Nie udało się zapisać ustawień e-maili. Spróbuj ponownie.",
+      "digest": "Podsumowanie aktywności",
+      "digestNote": "Jeden e-mail dziennie o tym, co wydarzyło się w Twoich firmach.",
+      "kinds": {
+        "candidate_finished": "Kandydaci, którzy skończyli",
+        "invite_undelivered": "Niedostarczone zaproszenia",
+        "ats_not_invited": "Niezaproszeni kandydaci z ATS",
+        "interview_ready": "Gotowe rozmowy"
+      },
+      "reminders": "Przypomnienia",
+      "remindersNote": "Mało kredytów, rozmowy bez kandydatów, tematy czekające na sprawdzenie.",
+      "updates": "Nowości o produkcie i aktualności",
+      "updatesNote": "Nowe funkcje i aktualności od prepza.",
+      "promotions": "Oferty i promocje",
+      "promotionsNote": "Rabaty i oferty specjalne.",
+      "alwaysSent": "E-maile serwisowe, takie jak zaproszenia, raporty o kandydatach, problemy z płatnościami i zmiany naszego regulaminu, są wysyłane zawsze."
+    }
   },
   "userMenu": {
     "signIn": "Zaloguj się",
@@ -52,7 +72,10 @@
     "link": "Ten adres e-mail ma już konto w prepza. Kontynuuj tak, jak logowałeś się wcześniej, a {provider} zostanie z nim połączony.",
     "consent": "Logując się, potwierdzasz, że masz co najmniej 16 lat, i akceptujesz <terms>Regulamin</terms> i <privacy>Politykę prywatności</privacy>.",
     "failed": "Nie udało się zalogować. Spróbuj ponownie.",
-    "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, a potem zaloguj się ponownie, aby brać udział w rozmowach."
+    "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, a potem zaloguj się ponownie, aby brać udział w rozmowach.",
+    "noUpdates": "Nie chcę otrzymywać nowości o produkcie i aktualności",
+    "promotions": "Chcę otrzymywać oferty i promocje",
+    "emailsFailed": "Nie udało się zapisać Twoich wyborów dotyczących e-maili. Możesz je zmienić w Ustawieniach."
   },
   "common": {
     "backToTop": "Na górę",

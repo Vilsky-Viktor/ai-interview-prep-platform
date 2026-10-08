@@ -10,7 +10,27 @@
     "downloadFailed": "Sinu andmeid ei õnnestunud ette valmistada. Proovi uuesti.",
     "delete": "Kustuta konto",
     "searchLanguage": "Otsi keelt",
-    "noLanguage": "Keelt ei leitud."
+    "noLanguage": "Keelt ei leitud.",
+    "emails": {
+      "title": "E-kirjad",
+      "note": "Vali, milliseid e-kirju prepza. sulle saadab.",
+      "failed": "E-kirjade seadeid ei õnnestunud salvestada. Proovi uuesti.",
+      "digest": "Tegevuste kokkuvõte",
+      "digestNote": "Üks e-kiri päevas sellest, mis sinu ettevõtetes juhtus.",
+      "kinds": {
+        "candidate_finished": "Lõpetanud kandidaadid",
+        "invite_undelivered": "Kohale jõudmata kutsed",
+        "ats_not_invited": "Kutsumata ATS-i kandidaadid",
+        "interview_ready": "Valmis intervjuud"
+      },
+      "reminders": "Meeldetuletused",
+      "remindersNote": "Vähe krediiti, kandidaatideta intervjuud, ülevaatust ootavad teemad.",
+      "updates": "Tooteuudised",
+      "updatesNote": "Uued funktsioonid ja prepza. uudised.",
+      "promotions": "Pakkumised ja kampaaniad",
+      "promotionsNote": "Allahindlused ja eripakkumised.",
+      "alwaysSent": "Teenusekirjad, näiteks kutsed, kandidaatide aruanded, makseprobleemid ja muudatused meie tingimustes, saadetakse alati."
+    }
   },
   "userMenu": {
     "signIn": "Logi sisse",
@@ -52,7 +72,10 @@
     "link": "Selle e-posti aadressiga on juba prepza konto. Jätka samal viisil nagu varem ja {provider} seotakse selle kontoga.",
     "consent": "Sisse logides kinnitad, et oled vähemalt 16-aastane, ja nõustud <terms>tingimustega</terms> ja <privacy>privaatsuspoliitikaga</privacy>.",
     "failed": "Sisselogimine ebaõnnestus. Proovi uuesti.",
-    "verify": "Saatsime sulle lingi e-posti aadressi kinnitamiseks. Ava see ja logi siis uuesti sisse, et intervjuusid teha."
+    "verify": "Saatsime sulle lingi e-posti aadressi kinnitamiseks. Ava see ja logi siis uuesti sisse, et intervjuusid teha.",
+    "noUpdates": "Ma ei soovi tooteuudiseid",
+    "promotions": "Soovin saada pakkumisi ja kampaaniaid",
+    "emailsFailed": "E-kirjade valikut ei õnnestunud salvestada. Saad seda muuta seadetes."
   },
   "common": {
     "backToTop": "Tagasi üles",

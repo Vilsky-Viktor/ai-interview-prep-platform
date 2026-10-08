@@ -124,3 +124,21 @@ test("only Japanese, Chinese and Korean pages load their fonts", async ({
   );
   expect(font).toContain("Noto Sans JP");
 });
+
+// Signing in offers two email boxes, both unticked: product updates can be declined, offers are
+// sent only when asked for.
+test("the sign-in dialog offers the email boxes, unticked", async ({ page }) => {
+  await page.goto("/");
+  const dialog = page.getByRole("dialog");
+
+  await expect(async () => {
+    await page.getByRole("banner").getByRole("button", { name: /sign in/i }).click();
+    await expect(dialog).toBeVisible({ timeout: 2_000 });
+  }).toPass();
+  await expect(
+    dialog.getByRole("checkbox", { name: "Don't send me product updates and news" }),
+  ).not.toBeChecked();
+  await expect(
+    dialog.getByRole("checkbox", { name: "Send me offers and promotions" }),
+  ).not.toBeChecked();
+});

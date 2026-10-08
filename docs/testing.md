@@ -66,7 +66,7 @@ A smoke test against a running stack:
 
 ## Browser tests of the signed-out pages
 
-Playwright tests of the signed-out pages, on desktop and phone sizes, in Playwright's Docker image. The pages (`pages.spec.ts`): home, companies, pricing (also in German and Japanese), terms, privacy, documents, FAQ, about, contact, practice, skills tests by role, and the articles (pre-employment testing, AI interviews, a comparison, a guide and their hubs).
+Playwright tests of the signed-out pages, on desktop and phone sizes, in Playwright's Docker image. The pages (`pages.spec.ts`): home, companies, pricing (also in German and Japanese), terms, privacy, documents, FAQ, about, contact, practice, skills tests by role, and the articles (pre-employment testing, AI interviews, a comparison, a guide and their hubs). It also checks that the sign-in dialog offers its two email boxes, unticked.
 
 They check:
 
@@ -90,7 +90,7 @@ Extra arguments go to Playwright, for example `--workers=2` when the dev server 
 
 Playwright tests of the signed-in pages, in the same Docker image, against the running stack.
 
-**Signing in.** Users sign in through "Continue with Google" and the Firebase Auth emulator's own sign-in page (local only). The superadmin is the first address in `SUPERADMIN_EMAILS`.
+**Signing in.** Users sign in through "Continue with Google" and the Firebase Auth emulator's own sign-in page (local only), optionally ticking the sign-in's email boxes first (`signInAs(email, { noUpdates, promotions })`). The superadmin is the first address in `SUPERADMIN_EMAILS`.
 
 **Test data.** Every test makes throwaway users, companies and interviews. Interviews are made from local templates: no OpenAI. The owner spec adds and deletes its own throwaway templates in the library database.
 
@@ -108,7 +108,8 @@ Playwright tests of the signed-in pages, in the same Docker image, against the r
 - each ATS: Workable's linked jobs, and connecting Greenhouse, Teamtailor, Recruitee and Breezy HR,
 - Slack,
 - the automatic top-up,
-- an interview whose generation failed.
+- an interview whose generation failed,
+- email settings: the defaults, each kind saved as it changes, the activity digest's box (all, none, some), and what the sign-in's email boxes turn on, at a first sign-in and a later one.
 
 **Cleanup.** After every run, `teardown.ts` deletes every throwaway account, and so their companies and data, leftovers of stopped runs included. It fails if any is left.
 

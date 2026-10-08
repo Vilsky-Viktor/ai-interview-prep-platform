@@ -10,7 +10,27 @@
     "downloadFailed": "Verileriniz hazırlanamadı. Lütfen tekrar deneyin.",
     "delete": "Hesabı sil",
     "searchLanguage": "Dil ara",
-    "noLanguage": "Dil bulunamadı."
+    "noLanguage": "Dil bulunamadı.",
+    "emails": {
+      "title": "E-postalar",
+      "note": "prepza.'nın size hangi e-postaları göndereceğini seçin.",
+      "failed": "E-posta ayarlarınız kaydedilemedi. Lütfen tekrar deneyin.",
+      "digest": "Etkinlik özeti",
+      "digestNote": "Şirketlerinizde olanlarla ilgili günde bir e-posta.",
+      "kinds": {
+        "candidate_finished": "Mülakatı tamamlayan adaylar",
+        "invite_undelivered": "İletilemeyen davetler",
+        "ats_not_invited": "Davet edilmeyen ATS adayları",
+        "interview_ready": "Hazır mülakatlar"
+      },
+      "reminders": "Hatırlatmalar",
+      "remindersNote": "Azalan kredi, adayı olmayan mülakatlar, inceleme bekleyen konular.",
+      "updates": "Ürün güncellemeleri ve haberler",
+      "updatesNote": "prepza.'dan yeni özellikler ve haberler.",
+      "promotions": "Teklifler ve kampanyalar",
+      "promotionsNote": "İndirimler ve özel teklifler.",
+      "alwaysSent": "Davetler, aday raporları, ödeme sorunları ve koşullarımızdaki değişiklikler gibi hizmet e-postaları her zaman gönderilir."
+    }
   },
   "userMenu": {
     "signIn": "Giriş yap",
@@ -52,7 +72,10 @@
     "link": "Bu e-postanın zaten bir prepza hesabı var. Daha önce giriş yaptığınız yolla devam edin; {provider} bu hesaba bağlanacak.",
     "consent": "Giriş yaparak 16 yaşında veya daha büyük olduğunuzu onaylar, <terms>Koşulları</terms> ve <privacy>Gizlilik politikasını</privacy> kabul etmiş olursunuz.",
     "failed": "Giriş yapılamadı. Lütfen tekrar deneyin.",
-    "verify": "E-postanızı doğrulamanız için bir bağlantı gönderdik. Bağlantıyı açın, ardından mülakatlara girmek için yeniden giriş yapın."
+    "verify": "E-postanızı doğrulamanız için bir bağlantı gönderdik. Bağlantıyı açın, ardından mülakatlara girmek için yeniden giriş yapın.",
+    "noUpdates": "Bana ürün güncellemeleri ve haberler göndermeyin",
+    "promotions": "Bana teklifler ve kampanyalar gönderin",
+    "emailsFailed": "E-posta tercihleriniz kaydedilemedi. Bunları Ayarlar'dan değiştirebilirsiniz."
   },
   "common": {
     "backToTop": "Başa dön",

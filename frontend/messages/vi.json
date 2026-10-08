@@ -10,7 +10,27 @@
     "downloadFailed": "Không thể chuẩn bị dữ liệu của bạn. Vui lòng thử lại.",
     "delete": "Xóa tài khoản",
     "searchLanguage": "Tìm ngôn ngữ",
-    "noLanguage": "Không tìm thấy ngôn ngữ."
+    "noLanguage": "Không tìm thấy ngôn ngữ.",
+    "emails": {
+      "title": "Email",
+      "note": "Chọn những email prepza. gửi cho bạn.",
+      "failed": "Không lưu được cài đặt email. Vui lòng thử lại.",
+      "digest": "Tóm tắt hoạt động",
+      "digestNote": "Mỗi ngày một email về những gì đã diễn ra ở các công ty của bạn.",
+      "kinds": {
+        "candidate_finished": "Ứng viên đã hoàn thành",
+        "invite_undelivered": "Lời mời chưa được gửi đến",
+        "ats_not_invited": "Ứng viên từ ATS chưa được mời",
+        "interview_ready": "Buổi phỏng vấn đã sẵn sàng"
+      },
+      "reminders": "Lời nhắc",
+      "remindersNote": "Sắp hết credit, buổi phỏng vấn chưa có ứng viên, chủ đề đang chờ xem xét.",
+      "updates": "Cập nhật sản phẩm và tin tức",
+      "updatesNote": "Tính năng mới và tin tức từ prepza.",
+      "promotions": "Ưu đãi và khuyến mãi",
+      "promotionsNote": "Giảm giá và ưu đãi đặc biệt.",
+      "alwaysSent": "Email dịch vụ, như lời mời, báo cáo ứng viên, sự cố thanh toán và thay đổi điều khoản của chúng tôi, luôn được gửi."
+    }
   },
   "userMenu": {
     "signIn": "Đăng nhập",
@@ -52,7 +72,10 @@
     "link": "Email này đã có tài khoản prepza. Hãy tiếp tục theo cách bạn đã đăng nhập trước đây, và {provider} sẽ được liên kết với tài khoản đó.",
     "consent": "Khi đăng nhập, bạn xác nhận mình từ 16 tuổi trở lên và đồng ý với <terms>Điều khoản</terms> và <privacy>Chính sách quyền riêng tư</privacy>.",
     "failed": "Đăng nhập không thành công. Vui lòng thử lại.",
-    "verify": "Chúng tôi đã gửi cho bạn một liên kết để xác minh email. Hãy mở liên kết, rồi đăng nhập lại để tham gia phỏng vấn."
+    "verify": "Chúng tôi đã gửi cho bạn một liên kết để xác minh email. Hãy mở liên kết, rồi đăng nhập lại để tham gia phỏng vấn.",
+    "noUpdates": "Không gửi cho tôi cập nhật sản phẩm và tin tức",
+    "promotions": "Gửi cho tôi ưu đãi và khuyến mãi",
+    "emailsFailed": "Không lưu được lựa chọn email của bạn. Bạn có thể thay đổi trong Cài đặt."
   },
   "common": {
     "backToTop": "Lên đầu trang",

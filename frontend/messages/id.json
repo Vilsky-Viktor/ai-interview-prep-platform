@@ -10,7 +10,27 @@
     "downloadFailed": "Datamu tidak bisa disiapkan. Coba lagi.",
     "delete": "Hapus akun",
     "searchLanguage": "Cari bahasa",
-    "noLanguage": "Bahasa tidak ditemukan."
+    "noLanguage": "Bahasa tidak ditemukan.",
+    "emails": {
+      "title": "Email",
+      "note": "Pilih email mana yang dikirim prepza. kepadamu.",
+      "failed": "Pengaturan email-mu gagal disimpan. Coba lagi.",
+      "digest": "Ringkasan aktivitas",
+      "digestNote": "Satu email sehari tentang apa yang terjadi di perusahaanmu.",
+      "kinds": {
+        "candidate_finished": "Kandidat yang selesai",
+        "invite_undelivered": "Undangan yang tidak terkirim",
+        "ats_not_invited": "Kandidat ATS yang tidak diundang",
+        "interview_ready": "Wawancara yang siap"
+      },
+      "reminders": "Pengingat",
+      "remindersNote": "Kredit hampir habis, wawancara tanpa kandidat, topik yang menunggu peninjauan.",
+      "updates": "Pembaruan produk dan berita",
+      "updatesNote": "Fitur baru dan berita dari prepza.",
+      "promotions": "Penawaran dan promosi",
+      "promotionsNote": "Diskon dan penawaran khusus.",
+      "alwaysSent": "Email layanan, seperti undangan, laporan kandidat, masalah pembayaran, dan perubahan ketentuan kami, selalu dikirim."
+    }
   },
   "userMenu": {
     "signIn": "Masuk",
@@ -52,7 +72,10 @@
     "link": "Email ini sudah punya akun prepza. Lanjutkan dengan cara kamu masuk sebelumnya, dan {provider} akan ditautkan ke akun tersebut.",
     "consent": "Dengan masuk, kamu menyatakan berusia 16 tahun ke atas dan menyetujui <terms>Ketentuan</terms> dan <privacy>Kebijakan privasi</privacy>.",
     "failed": "Gagal masuk. Coba lagi.",
-    "verify": "Kami mengirimkan tautan untuk memverifikasi email-mu. Buka tautannya, lalu masuk lagi untuk mengikuti wawancara."
+    "verify": "Kami mengirimkan tautan untuk memverifikasi email-mu. Buka tautannya, lalu masuk lagi untuk mengikuti wawancara.",
+    "noUpdates": "Jangan kirimi saya pembaruan produk dan berita",
+    "promotions": "Kirimi saya penawaran dan promosi",
+    "emailsFailed": "Pilihan email-mu gagal disimpan. Kamu bisa mengubahnya di Pengaturan."
   },
   "common": {
     "backToTop": "Kembali ke atas",

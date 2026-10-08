@@ -10,7 +10,27 @@
     "downloadFailed": "Couldn't prepare your data. Please try again.",
     "delete": "Delete account",
     "searchLanguage": "Search languages",
-    "noLanguage": "No language found."
+    "noLanguage": "No language found.",
+    "emails": {
+      "title": "Emails",
+      "note": "Choose which emails prepza. sends you.",
+      "failed": "Couldn't save your email settings. Please try again.",
+      "digest": "Activity digest",
+      "digestNote": "One email a day about what happened in your companies.",
+      "kinds": {
+        "candidate_finished": "Candidates who finished",
+        "invite_undelivered": "Undelivered invites",
+        "ats_not_invited": "ATS candidates not invited",
+        "interview_ready": "Interviews ready"
+      },
+      "reminders": "Reminders",
+      "remindersNote": "Low credits, interviews with no candidates, topics waiting for review.",
+      "updates": "Product updates and news",
+      "updatesNote": "New features and news from prepza.",
+      "promotions": "Offers and promotions",
+      "promotionsNote": "Discounts and special offers.",
+      "alwaysSent": "Service emails, such as invites, candidate reports, billing problems and changes to our terms, are always sent."
+    }
   },
   "userMenu": {
     "signIn": "Sign in",
@@ -52,7 +72,10 @@
     "link": "This email already has a prepza account. Continue the way you signed in before, and {provider} will be linked to it.",
     "consent": "By signing in, you confirm you're 16 or older and agree to the <terms>Terms</terms> and the <privacy>Privacy policy</privacy>.",
     "failed": "Sign-in failed. Please try again.",
-    "verify": "We sent you a link to verify your email. Open it, then sign in again to take interviews."
+    "verify": "We sent you a link to verify your email. Open it, then sign in again to take interviews.",
+    "noUpdates": "Don't send me product updates and news",
+    "promotions": "Send me offers and promotions",
+    "emailsFailed": "Couldn't save your email choices. You can change them in Settings."
   },
   "common": {
     "backToTop": "Back to top",

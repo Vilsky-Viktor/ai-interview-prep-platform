@@ -4,10 +4,23 @@ import { TOKEN_COOKIE } from "../constants"
 import { env } from "./env"
 import { visit } from "./navigation"
 
+// The email boxes under the sign-in buttons to tick first; both start unticked.
+export type SignInEmails = { noUpdates?: boolean; promotions?: boolean }
+
+const EMAIL_BOXES = {
+  noUpdates: "Don't send me product updates and news",
+  promotions: "Send me offers and promotions",
+}
+
 /** A new browser signed in as `email`, through the site's own "Continue with Google" and the
  * Auth emulator's sign-in page (never real Google): an account the emulator already has is
- * picked from its list, any other is added. The emulator marks these emails verified. */
-export async function signIn(browser: Browser, email: string): Promise<Page> {
+ * picked from its list, any other is added. The emulator marks these emails verified. `emails`
+ * ticks the email boxes first. */
+export async function signIn(
+  browser: Browser,
+  email: string,
+  emails: SignInEmails = {},
+): Promise<Page> {
   if (!env("NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL")) {
     throw new Error("Signed-in tests need the Firebase Auth emulator")
   }
@@ -16,6 +29,15 @@ export async function signIn(browser: Browser, email: string): Promise<Page> {
   const page = await context.newPage()
   // A page that only asks to sign in shows the options inline.
   await visit(page, "/companies")
+
+  for (const [box, label] of Object.entries(EMAIL_BOXES)) {
+    if (emails[box as keyof SignInEmails]) {
+      const checkbox = page.getByRole("checkbox", { name: label })
+      await checkbox.click()
+      await expect(checkbox).toBeChecked()
+    }
+  }
+
   const popup = await openGooglePopup(page)
   await popup.waitForLoadState()
   // Each listed account carries its claims, the email among them, URL-encoded.

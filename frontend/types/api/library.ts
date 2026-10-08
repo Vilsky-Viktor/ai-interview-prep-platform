@@ -45,6 +45,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/me/email-preferences": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Email Preferences */
+    get: operations["get_email_preferences_me_email_preferences_get"]
+    /**
+     * Update Email Preferences
+     * @description Changes some settings; each change is logged as consent given or withdrawn.
+     */
+    put: operations["update_email_preferences_me_email_preferences_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/me/export": {
     parameters: {
       query?: never
@@ -583,6 +604,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/users/{user_id}/email-preferences": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Email Preferences
+     * @description For the services that send emails: what the user wants beyond service emails.
+     */
+    get: operations["get_email_preferences_internal_users__user_id__email_preferences_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/schedules/outbox": {
     parameters: {
       query?: never
@@ -890,6 +931,52 @@ export interface components {
        */
       id: string
     }
+    /**
+     * EmailPreferencesIn
+     * @description Only the settings to change; the rest stay as they are.
+     */
+    EmailPreferencesIn: {
+      /** Changes */
+      changes: {
+        [key: string]: boolean
+      }
+      /**
+       * Source
+       * @enum {string}
+       */
+      source: "sign_in" | "settings"
+    }
+    /** EmailPreferencesOut */
+    EmailPreferencesOut: {
+      /** Candidate Finished */
+      candidate_finished: boolean
+      /** Invite Undelivered */
+      invite_undelivered: boolean
+      /** Ats Not Invited */
+      ats_not_invited: boolean
+      /** Interview Ready */
+      interview_ready: boolean
+      /** Reminders */
+      reminders: boolean
+      /** Updates */
+      updates: boolean
+      /** Promotions */
+      promotions: boolean
+    }
+    /**
+     * EmailSetting
+     * @description What a user may get by email beyond service emails, which always go out. The activity
+     *     digest's kinds are notification kinds.
+     * @enum {string}
+     */
+    EmailSetting:
+      | "candidate_finished"
+      | "invite_undelivered"
+      | "ats_not_invited"
+      | "interview_ready"
+      | "reminders"
+      | "updates"
+      | "promotions"
     /**
      * FlaggedQuestionOut
      * @description A question flagged now, for the admin zone's quality tab.
@@ -1589,6 +1676,59 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_email_preferences_me_email_preferences_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["EmailPreferencesOut"]
+        }
+      }
+    }
+  }
+  update_email_preferences_me_email_preferences_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["EmailPreferencesIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["EmailPreferencesOut"]
+        }
       }
       /** @description Validation Error */
       422: {
@@ -2632,6 +2772,37 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_email_preferences_internal_users__user_id__email_preferences_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["EmailPreferencesOut"]
+        }
       }
       /** @description Validation Error */
       422: {

@@ -10,7 +10,27 @@
     "downloadFailed": "无法准备你的数据，请重试。",
     "delete": "删除账户",
     "searchLanguage": "搜索语言",
-    "noLanguage": "未找到语言。"
+    "noLanguage": "未找到语言。",
+    "emails": {
+      "title": "邮件",
+      "note": "选择 prepza. 给你发送哪些邮件。",
+      "failed": "无法保存邮件设置，请重试。",
+      "digest": "动态摘要",
+      "digestNote": "每天一封邮件，告诉你公司里发生的事。",
+      "kinds": {
+        "candidate_finished": "已完成面试的候选人",
+        "invite_undelivered": "未送达的邀请",
+        "ats_not_invited": "未被邀请的 ATS 候选人",
+        "interview_ready": "已就绪的面试"
+      },
+      "reminders": "提醒",
+      "remindersNote": "点数不足、没有候选人的面试、等待审核的主题。",
+      "updates": "产品更新与新闻",
+      "updatesNote": "prepza. 的新功能和新闻。",
+      "promotions": "优惠与促销",
+      "promotionsNote": "折扣和特别优惠。",
+      "alwaysSent": "服务类邮件，例如邀请、候选人报告、付款问题和条款变更，始终会发送。"
+    }
   },
   "userMenu": {
     "signIn": "登录",
@@ -52,7 +72,10 @@
     "link": "此邮箱已有 prepza 账户。请用你之前的登录方式继续，{provider} 将关联到该账户。",
     "consent": "登录即表示你确认已年满 16 周岁，并同意<terms>条款</terms>和<privacy>隐私政策</privacy>。",
     "failed": "登录失败，请重试。",
-    "verify": "我们已向你发送一个验证邮箱的链接。打开链接后重新登录，即可参加面试。"
+    "verify": "我们已向你发送一个验证邮箱的链接。打开链接后重新登录，即可参加面试。",
+    "noUpdates": "不要给我发送产品更新与新闻",
+    "promotions": "给我发送优惠与促销",
+    "emailsFailed": "无法保存你的邮件选择。你可以在设置中更改。"
   },
   "common": {
     "backToTop": "返回顶部",

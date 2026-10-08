@@ -10,7 +10,27 @@
     "downloadFailed": "Deine Daten konnten nicht vorbereitet werden. Bitte versuche es erneut.",
     "delete": "Konto löschen",
     "searchLanguage": "Sprachen suchen",
-    "noLanguage": "Keine Sprache gefunden."
+    "noLanguage": "Keine Sprache gefunden.",
+    "emails": {
+      "title": "E-Mails",
+      "note": "Wähle, welche E-Mails dir prepza. schickt.",
+      "failed": "Deine E-Mail-Einstellungen konnten nicht gespeichert werden. Bitte versuche es erneut.",
+      "digest": "Aktivitätsübersicht",
+      "digestNote": "Eine E-Mail pro Tag zu allem, was in deinen Unternehmen passiert ist.",
+      "kinds": {
+        "candidate_finished": "Kandidaten, die fertig sind",
+        "invite_undelivered": "Nicht zugestellte Einladungen",
+        "ats_not_invited": "Nicht eingeladene Kandidaten aus dem ATS",
+        "interview_ready": "Fertige Interviews"
+      },
+      "reminders": "Erinnerungen",
+      "remindersNote": "Wenig Credits, Interviews ohne Kandidaten, Themen, die auf Prüfung warten.",
+      "updates": "Produkt-Updates und Neuigkeiten",
+      "updatesNote": "Neue Funktionen und Neuigkeiten von prepza.",
+      "promotions": "Angebote und Aktionen",
+      "promotionsNote": "Rabatte und Sonderangebote.",
+      "alwaysSent": "Service-E-Mails wie Einladungen, Kandidatenberichte, Zahlungsprobleme und Änderungen unserer Bedingungen werden immer gesendet."
+    }
   },
   "userMenu": {
     "signIn": "Anmelden",
@@ -52,7 +72,10 @@
     "link": "Für diese E-Mail-Adresse gibt es bereits ein prepza-Konto. Melde dich so an wie beim letzten Mal, dann wird {provider} damit verknüpft.",
     "consent": "Mit der Anmeldung bestätigst du, dass du mindestens 16 Jahre alt bist, und akzeptierst die <terms>Nutzungsbedingungen</terms> und die <privacy>Datenschutzerklärung</privacy>.",
     "failed": "Die Anmeldung ist fehlgeschlagen. Bitte versuche es erneut.",
-    "verify": "Wir haben dir einen Link zur Bestätigung deiner E-Mail-Adresse geschickt. Öffne ihn und melde dich dann erneut an, um Interviews zu machen."
+    "verify": "Wir haben dir einen Link zur Bestätigung deiner E-Mail-Adresse geschickt. Öffne ihn und melde dich dann erneut an, um Interviews zu machen.",
+    "noUpdates": "Ich möchte keine Produkt-Updates und Neuigkeiten erhalten",
+    "promotions": "Ich möchte Angebote und Aktionen erhalten",
+    "emailsFailed": "Deine E-Mail-Auswahl konnte nicht gespeichert werden. Du kannst sie in den Einstellungen ändern."
   },
   "common": {
     "backToTop": "Nach oben",

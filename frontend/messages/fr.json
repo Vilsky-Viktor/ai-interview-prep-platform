@@ -10,7 +10,27 @@
     "downloadFailed": "Impossible de préparer vos données. Veuillez réessayer.",
     "delete": "Supprimer le compte",
     "searchLanguage": "Rechercher une langue",
-    "noLanguage": "Aucune langue trouvée."
+    "noLanguage": "Aucune langue trouvée.",
+    "emails": {
+      "title": "E-mails",
+      "note": "Choisissez les e-mails que prepza. vous envoie.",
+      "failed": "Impossible d'enregistrer vos préférences d'e-mail. Veuillez réessayer.",
+      "digest": "Récapitulatif d'activité",
+      "digestNote": "Un e-mail par jour sur ce qui s'est passé dans vos entreprises.",
+      "kinds": {
+        "candidate_finished": "Candidats ayant terminé",
+        "invite_undelivered": "Invitations non remises",
+        "ats_not_invited": "Candidats de l'ATS non invités",
+        "interview_ready": "Entretiens prêts"
+      },
+      "reminders": "Rappels",
+      "remindersNote": "Crédits faibles, entretiens sans candidats, thèmes en attente d'examen.",
+      "updates": "Nouveautés du produit et actualités",
+      "updatesNote": "Nouvelles fonctionnalités et actualités de prepza.",
+      "promotions": "Offres et promotions",
+      "promotionsNote": "Réductions et offres spéciales.",
+      "alwaysSent": "Les e-mails de service, comme les invitations, les rapports sur les candidats, les problèmes de paiement et les modifications de nos conditions, sont toujours envoyés."
+    }
   },
   "userMenu": {
     "signIn": "Se connecter",
@@ -52,7 +72,10 @@
     "link": "Cet e-mail a déjà un compte prepza. Continuez comme lors de votre dernière connexion, et {provider} y sera associé.",
     "consent": "En vous connectant, vous confirmez avoir 16 ans ou plus et acceptez les <terms>Conditions</terms> et la <privacy>Politique de confidentialité</privacy>.",
     "failed": "La connexion a échoué. Veuillez réessayer.",
-    "verify": "Nous vous avons envoyé un lien pour vérifier votre e-mail. Ouvrez-le, puis reconnectez-vous pour passer des entretiens."
+    "verify": "Nous vous avons envoyé un lien pour vérifier votre e-mail. Ouvrez-le, puis reconnectez-vous pour passer des entretiens.",
+    "noUpdates": "Ne pas recevoir les nouveautés du produit ni les actualités",
+    "promotions": "Recevoir les offres et promotions",
+    "emailsFailed": "Impossible d'enregistrer vos choix d'e-mail. Vous pouvez les modifier dans les Paramètres."
   },
   "common": {
     "backToTop": "Haut de page",

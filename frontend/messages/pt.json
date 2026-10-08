@@ -10,7 +10,27 @@
     "downloadFailed": "Não foi possível preparar seus dados. Tente novamente.",
     "delete": "Excluir conta",
     "searchLanguage": "Buscar idiomas",
-    "noLanguage": "Nenhum idioma encontrado."
+    "noLanguage": "Nenhum idioma encontrado.",
+    "emails": {
+      "title": "E-mails",
+      "note": "Escolha quais e-mails a prepza. envia para você.",
+      "failed": "Não foi possível salvar suas configurações de e-mail. Tente novamente.",
+      "digest": "Resumo de atividades",
+      "digestNote": "Um e-mail por dia sobre o que aconteceu nas suas empresas.",
+      "kinds": {
+        "candidate_finished": "Candidatos que concluíram",
+        "invite_undelivered": "Convites não entregues",
+        "ats_not_invited": "Candidatos do ATS não convidados",
+        "interview_ready": "Entrevistas prontas"
+      },
+      "reminders": "Lembretes",
+      "remindersNote": "Poucos créditos, entrevistas sem candidatos, tópicos aguardando análise.",
+      "updates": "Novidades do produto e notícias",
+      "updatesNote": "Novos recursos e notícias da prepza.",
+      "promotions": "Ofertas e promoções",
+      "promotionsNote": "Descontos e ofertas especiais.",
+      "alwaysSent": "E-mails de serviço, como convites, relatórios de candidatos, problemas de pagamento e mudanças nos nossos termos, são sempre enviados."
+    }
   },
   "userMenu": {
     "signIn": "Entrar",
@@ -52,7 +72,10 @@
     "link": "Este e-mail já tem uma conta na prepza. Continue da forma como você entrou antes, e o {provider} será vinculado a ela.",
     "consent": "Ao entrar, você confirma que tem 16 anos ou mais e concorda com os <terms>Termos</terms> e a <privacy>Política de privacidade</privacy>.",
     "failed": "Não foi possível entrar. Tente novamente.",
-    "verify": "Enviamos um link para verificar seu e-mail. Abra-o e depois entre de novo para fazer entrevistas."
+    "verify": "Enviamos um link para verificar seu e-mail. Abra-o e depois entre de novo para fazer entrevistas.",
+    "noUpdates": "Não quero receber novidades do produto e notícias",
+    "promotions": "Quero receber ofertas e promoções",
+    "emailsFailed": "Não foi possível salvar suas escolhas de e-mail. Você pode alterá-las em Configurações."
   },
   "common": {
     "backToTop": "Voltar ao topo",
