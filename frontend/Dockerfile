@@ -19,6 +19,8 @@ ARG NEXT_PUBLIC_SENTRY_ENVIRONMENT
 ARG SENTRY_AUTH_TOKEN
 ARG SENTRY_ORG
 ARG SENTRY_PROJECT
+# The commit, as the release Sentry's build plugin names (and tags errors with).
+ARG SENTRY_RELEASE
 RUN pnpm build
 
 # Development: docker-compose.yml mounts the source, and Next reloads on change.

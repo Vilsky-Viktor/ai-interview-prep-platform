@@ -37,6 +37,9 @@ COPY services/ats/app ./app
 # that user can't write it later.
 RUN python -m compileall -q app && adduser -D -H -u 10001 app
 ENV UV_CACHE_DIR=/tmp/uv-cache
+# The commit the image is built from, as the release Sentry tags its errors with.
+ARG SENTRY_RELEASE
+ENV SENTRY_RELEASE=$SENTRY_RELEASE
 USER app
 
 CMD ["uv", "run", "--no-sync", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -225,6 +225,7 @@ jobs:
           # The frontend bakes its public settings in at build time: the real ones for the images
           # main pushes, placeholders for pull requests.
           build-args: |
+            SENTRY_RELEASE=${{ github.sha }}
             NEXT_PUBLIC_FIREBASE_API_KEY=${{ env.PUBLISH == 'true' && vars.NEXT_PUBLIC_FIREBASE_API_KEY || 'demo-api-key' }}
             NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${{ env.PUBLISH == 'true' && vars.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || 'demo-prepza.firebaseapp.com' }}
             NEXT_PUBLIC_FIREBASE_PROJECT_ID=${{ env.PUBLISH == 'true' && vars.GCP_PROJECT_ID || 'demo-prepza' }}
