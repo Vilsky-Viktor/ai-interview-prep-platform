@@ -17,6 +17,24 @@ async def hit(redis, key: str, limit: int, window: int, message: str = RATE_LIMI
         raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, message)
 
 
+async def spend(
+    redis, key: str, amount: int, limit: int, window: int, message: str = RATE_LIMITED
+) -> None:
+    """Adds `amount` (a cost, such as tokens or micro-dollars) to the window's total; once the
+    total is over `limit`, a 429 with `message`. An `amount` of 0 only checks the budget."""
+    if limit <= 0:
+        return
+
+    # One transaction, so the total never exists without its expiry.
+    async with redis.pipeline(transaction=True) as pipe:
+        pipe.set(key, 0, ex=window, nx=True)
+        pipe.incrby(key, amount)
+        _, total = await pipe.execute()
+
+    if total > limit:
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, message)
+
+
 async def hit_emails(
     redis, sender: str, recipient: str, per_hour: int, per_day: int, per_recipient: int
 ) -> None:

@@ -76,6 +76,7 @@ The articles are `/pre-employment-testing`, `/ai-interviews`, `/compare` and its
 - It answers only from the platform guide, the FAQ, the prices, the terms and the privacy policy.
 - It answers in the page's language.
 - Nothing of the conversation is stored.
+- The same knowledge, with the FAQ in the page's language, is served as text at `GET /api/rounds/help/guide` (public, kept for 5 minutes per language); the in-app assistant reads it to answer questions about prepza.
 
 | Limit | Where it's set | Value |
 |---|---|---|

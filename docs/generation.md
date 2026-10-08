@@ -76,7 +76,7 @@ These settings in `.env` shape every generation. Terraform passes none of them t
 | `INTERVIEW_QUESTIONS_PER_TOPIC` | 70 | Questions per topic of a company's interview, from which each candidate gets a random subset |
 | `TEMPLATE_QUESTIONS_PER_TOPIC` | 90 | Questions per topic of a template; a third is revealed for free practice, the rest is copied into companies' interviews |
 | `LLM_REQUESTS_PER_SECOND` | 8 | Generation's LLM requests a second, shared by the API and every worker through Redis; 0 turns it off. The help chat isn't limited by it, so it stays responsive during big generations |
-| `LANGSMITH_TRACING`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT` | Off | Trace generation and help chat calls to LangSmith |
+| `LANGSMITH_TRACING`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT` | Off | Trace generation, help chat and assistant calls to LangSmith |
 
 ## Models
 
@@ -87,6 +87,10 @@ Each AI task has its own model and reasoning effort. The effort is `none`, `mini
 | Generation of an interview or template, at any level | `INTERVIEW_MODEL` (`gpt-6.1-sol`) | `INTERVIEW_REASONING_EFFORT` (`low`) |
 | Verifier: answer-key checks, at once and in batches | `VERIFY_MODEL` (`gpt-6.1-sol`) | `VERIFY_REASONING_EFFORT` (`medium`) |
 | FAQ help chat | `HELP_MODEL` (`gpt-6-luna`) | `HELP_REASONING_EFFORT` (`none`, which also lets it take a temperature) |
+| In-app assistant | `ASSISTANT_MODEL` (`gpt-6-luna`) | `ASSISTANT_REASONING_EFFORT` (`low`) |
+| Assistant's voice messages to text | `TRANSCRIBE_MODEL` (`gpt-4o-mini-transcribe`) | None |
+
+Every service builds its chat models with `prepza_common.llm.chat_model`, which leaves the temperature out at any effort but `none`.
 
 Every generation runs on `gpt-6.1-sol` at low. In testing ([evals/README.md](../evals/README.md)):
 

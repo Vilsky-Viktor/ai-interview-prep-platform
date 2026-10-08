@@ -1,5 +1,5 @@
 class FakePipeline:
-    """The SET NX + INCR transaction of prepza_common.rate_limit.hit, in memory."""
+    """The SET NX + INCR (or INCRBY) transaction of prepza_common.rate_limit, in memory."""
 
     def __init__(self, redis):
         self.redis = redis
@@ -15,11 +15,14 @@ class FakePipeline:
         self.redis.counts.setdefault(key, value)
 
     def incr(self, key):
-        self.keys.append(key)
+        self.incrby(key, 1)
+
+    def incrby(self, key, amount):
+        self.keys.append((key, amount))
 
     async def execute(self):
-        key = self.keys.pop()
-        self.redis.counts[key] += 1
+        key, amount = self.keys.pop()
+        self.redis.counts[key] += amount
 
         return [True, self.redis.counts[key]]
 

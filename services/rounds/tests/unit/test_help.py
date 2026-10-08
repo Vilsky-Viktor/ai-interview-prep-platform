@@ -217,3 +217,41 @@ def test_billings_prices_are_kept_for_a_while(monkeypatch):
     assert asyncio.run(billing.catalog()) == CATALOG
     assert asyncio.run(billing.catalog()) == CATALOG
     assert len(calls) == 1
+
+
+def test_the_chat_and_the_platform_guide_share_one_text():
+    from app.helpers.help import knowledge
+
+    question = [HelpMessage(role="user", content="How do refunds work?")]
+    system = build_messages(question, "de", CATALOG)[0].content
+
+    assert knowledge("en", CATALOG) in system
+
+
+def test_the_platform_guide_is_served_in_the_pages_language(client, monkeypatch):
+    from prepza_common import memory_cache
+
+    from app.constants.faq import FAQS
+
+    calls = []
+
+    async def catalog():
+        calls.append(1)
+
+        return CATALOG
+
+    monkeypatch.setattr(memory_cache, "_entries", {})
+    monkeypatch.setattr("app.services.help.billing.catalog", catalog)
+
+    german = client.get("/help/guide", headers={"Accept-Language": "de"})
+    english = client.get("/help/guide")
+    client.get("/help/guide", headers={"Accept-Language": "de"})
+
+    assert german.status_code == 200
+    assert german.headers["content-type"].startswith("text/plain")
+    assert f"Q: {FAQS['de'][0]['question']}" in german.text
+    assert f"Q: {FAQS['en'][0]['question']}" in english.text
+    assert f"can own up to {MAX_OWNED_COMPANIES}" in german.text
+    assert "secret-token" not in german.text
+    # Kept per language: the second German request is built from memory.
+    assert len(calls) == 2

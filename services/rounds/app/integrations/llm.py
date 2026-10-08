@@ -1,6 +1,7 @@
 from functools import cache
 
 from langchain_openai import ChatOpenAI
+from prepza_common.llm import chat_model
 
 from app.config.settings import settings
 from app.constants.rounds import CHAT_TIMEOUT_SECONDS
@@ -8,13 +9,11 @@ from app.constants.rounds import CHAT_TIMEOUT_SECONDS
 
 @cache
 def get_help_llm() -> ChatOpenAI:
-    """The FAQ's help chat. Reasoning models accept a temperature only at effort "none"."""
-    effort = settings.help_reasoning_effort
-
-    return ChatOpenAI(
-        model=settings.help_model,
-        reasoning_effort=effort,
-        temperature=0.3 if effort == "none" else None,
+    """The FAQ's help chat; at effort "none" it answers at a low temperature."""
+    return chat_model(
+        settings.help_model,
+        settings.help_reasoning_effort,
+        temperature=0.3,
         max_retries=3,
         timeout=CHAT_TIMEOUT_SECONDS,
     )

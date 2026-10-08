@@ -9,8 +9,11 @@ from prepza_common.constants import (
     MAX_OWNED_COMPANIES,
 )
 
+from app.constants.faq import FAQS
 from app.constants.help import FAQ_EXAMPLE_CANDIDATES
-from app.prompts.help import PLATFORM_GUIDE
+from app.constants.privacy import PRIVACY_INTRO, PRIVACY_SECTIONS
+from app.constants.terms import TERMS_INTRO, TERMS_SECTIONS
+from app.prompts.help import HELP_KNOWLEDGE, PLATFORM_GUIDE
 
 # Catalog fields only Paddle.js needs; they say nothing about prices.
 CATALOG_INTERNALS = {"environment", "client_token"}
@@ -96,3 +99,16 @@ def legal_text(intro: str, sections: list[dict]) -> str:
         parts.extend(f"- {item}" for item in section.get("items", []))
 
     return "\n".join(parts)
+
+
+def knowledge(language: str, catalog: dict | None) -> str:
+    """What prepza's help answers from: the platform guide, the FAQ in `language`, the prices,
+    the terms and the privacy policy. The help chat's prompt holds it, and the in-app assistant
+    reads it from GET /help/guide."""
+    return HELP_KNOWLEDGE.format(
+        guide=guide(),
+        faq=faq_text(FAQS[language], catalog),
+        prices=prices_text(catalog),
+        terms=legal_text(TERMS_INTRO, TERMS_SECTIONS),
+        privacy=legal_text(PRIVACY_INTRO, PRIVACY_SECTIONS),
+    )

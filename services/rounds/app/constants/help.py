@@ -33,3 +33,5 @@ QUESTION_TOO_LONG = "The question is too long."
 
 # The FAQ's example of a small company's hiring, in candidates a month, priced over a year.
 FAQ_EXAMPLE_CANDIDATES = 5
+# How long the platform guide (GET /help/guide) is kept, per language, before it's built again.
+GUIDE_CACHE_SECONDS = CATALOG_CACHE_SECONDS

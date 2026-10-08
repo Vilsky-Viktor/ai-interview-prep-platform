@@ -2,7 +2,7 @@ import asyncio
 
 import pytest
 from fastapi import HTTPException
-from prepza_common.rate_limit import hit, hit_emails
+from prepza_common.rate_limit import hit, hit_emails, spend
 
 from tests.unit.fake_redis import FakeRedis
 
@@ -62,3 +62,29 @@ def test_non_positive_limits_never_refuse(limit):
     redis = FakeRedis()
 
     assert statuses([lambda: hit(redis, "key", limit, 60)] * 3) == [200, 200, 200]
+
+
+def test_spend_refuses_once_the_total_is_over_the_limit():
+    redis = FakeRedis()
+    calls = [lambda amount=amount: spend(redis, "key", amount, 100, 60) for amount in (60, 40, 1)]
+
+    assert statuses(calls) == [200, 200, 429]
+    assert redis.counts == {"key": 101}
+
+
+def test_spending_nothing_only_checks_the_budget():
+    redis = FakeRedis()
+
+    def check():
+        return spend(redis, "key", 0, 20, 60)
+
+    assert statuses([check, lambda: spend(redis, "key", 25, 20, 60), check]) == [200, 429, 429]
+    assert redis.counts == {"key": 25}
+
+
+@pytest.mark.parametrize("limit", [-1, 0])
+def test_spend_with_no_limit_counts_nothing(limit):
+    redis = FakeRedis()
+
+    assert statuses([lambda: spend(redis, "key", 1_000, limit, 60)] * 2) == [200, 200]
+    assert redis.counts == {}

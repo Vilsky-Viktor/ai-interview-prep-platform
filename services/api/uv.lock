@@ -954,14 +954,19 @@ requires-dist = [
     { name = "firebase-admin", specifier = ">=7.7.0" },
     { name = "google-auth", extras = ["requests"], specifier = ">=2.40.0" },
     { name = "httpx", specifier = ">=0.28.1" },
+    { name = "langchain-openai", marker = "extra == 'llm'", specifier = ">=1.6.6" },
     { name = "pydantic-settings", specifier = ">=2.15.0" },
     { name = "pyjwt", specifier = ">=2.15.1" },
     { name = "sentry-sdk", extras = ["fastapi"], specifier = ">=2.71.0" },
     { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.1.1" },
 ]
+provides-extras = ["llm"]
 
 [package.metadata.requires-dev]
-dev = [{ name = "pytest", specifier = ">=9.1.1" }]
+dev = [
+    { name = "prepza-common", extras = ["llm"] },
+    { name = "pytest", specifier = ">=9.1.1" },
+]
 
 [[package]]
 name = "proto-plus"

@@ -1,7 +1,7 @@
 import logging
 
 from fastapi import APIRouter, Request, status
-from fastapi.responses import StreamingResponse
+from fastapi.responses import PlainTextResponse, StreamingResponse
 from prepza_common.analytics import track
 from prepza_common.auth import OptionalUser
 from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS
@@ -26,7 +26,7 @@ from app.integrations.redis import get_redis
 from app.schemas.contact import ContactRequest
 from app.schemas.help import FaqItemOut, HelpChatRequest, LegalOut
 from app.services import outbox as outbox_service
-from app.services.help import build_messages, stream_reply
+from app.services.help import build_messages, platform_guide, stream_reply
 from app.storage import contact as contact_store
 
 logger = logging.getLogger(__name__)
@@ -46,6 +46,13 @@ async def get_faq(request: Request) -> list[FaqItemOut]:
     items = faq_items(FAQS[request_language(request)], await billing.catalog())
 
     return [FaqItemOut(**item) for item in items]
+
+
+@router.get("/guide", response_class=PlainTextResponse)
+async def get_guide(request: Request) -> str:
+    """Everything prepza's help chat answers from, as text: how prepza works and how to use it,
+    the FAQ in the page's language, today's prices, the terms and the privacy policy; public."""
+    return await platform_guide(request_language(request))
 
 
 @router.get("/legal/{document}")

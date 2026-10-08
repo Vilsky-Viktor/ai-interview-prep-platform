@@ -1,6 +1,7 @@
 from functools import cache
 
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from prepza_common.llm import chat_model
 
 from app.config.settings import settings
 from app.constants.generation import LLM_TIMEOUT_SECONDS, MAX_OUTPUT_TOKENS
@@ -8,12 +9,11 @@ from app.constants.reuse import EMBEDDING_DIMENSIONS, EMBEDDING_MODEL
 from app.integrations.llm_limiter import SharedRateLimiter
 
 
-# Reasoning models reject temperature unless reasoning_effort is "none".
 @cache
 def build_llm(model: str, reasoning_effort: str) -> ChatOpenAI:
-    return ChatOpenAI(
-        model=model,
-        reasoning_effort=reasoning_effort,
+    return chat_model(
+        model,
+        reasoning_effort,
         max_retries=5,
         max_tokens=MAX_OUTPUT_TOKENS,
         timeout=LLM_TIMEOUT_SECONDS,
