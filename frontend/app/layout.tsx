@@ -5,6 +5,7 @@ import { getLocale, getTranslations } from "next-intl/server"
 
 import "./globals.css"
 import { AuthProvider } from "@/components/auth-provider"
+import { CjkFonts } from "@/components/cjk-fonts"
 import { UrlLocaleProvider } from "@/components/localized-link"
 import { MaintenanceNotice } from "@/components/maintenance-notice"
 import { ScrollTopButton } from "@/components/scroll-top-button"
@@ -15,7 +16,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner"
 import { FONT_VARIABLES } from "@/constants/fonts"
-import { RTL_LOCALES, type Locale } from "@/constants/i18n"
+import { CJK_LOCALES, RTL_LOCALES, type Locale } from "@/constants/i18n"
 import { SITE_NAME } from "@/constants/seo"
 import { previewImage, siteUrl, urlLocale } from "@/lib/site"
 import { cn } from "cn"
@@ -68,6 +69,7 @@ export default async function RootLayout({
           pages without making them scroll. Pages take the full width, as auto margins in a
           flex column would otherwise shrink them to their content. */}
       <body className="flex min-h-svh flex-col">
+        {CJK_LOCALES.includes(locale as Locale) && <CjkFonts />}
         <NextIntlClientProvider>
           <UrlLocaleProvider locale={await urlLocale()}>
             <ThemeProvider nonce={nonce}>

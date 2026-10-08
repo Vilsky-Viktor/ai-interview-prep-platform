@@ -5,17 +5,15 @@ import {
   Noto_Sans_Arabic,
   Noto_Sans_Devanagari,
   Noto_Sans_Hebrew,
-  Noto_Sans_JP,
-  Noto_Sans_KR,
-  Noto_Sans_SC,
   Noto_Sans_Thai,
   Poppins,
 } from "next/font/google"
 
 // The site's fonts. Geist and Poppins carry the design; the Noto fonts cover the scripts they
-// lack, for the languages the site speaks (Arabic and Persian, Hebrew, Hindi, Thai, Vietnamese,
-// Japanese, Chinese, Korean). Each font's files download only for pages with characters in its
-// script, and the script fonts aren't preloaded, so an English page loads nothing extra.
+// lack, for the languages the site speaks (Arabic and Persian, Hebrew, Hindi, Thai, Vietnamese;
+// Japanese, Chinese and Korean are in cjk-fonts.ts). Each font's files download only for pages
+// with characters in its script, and the script fonts aren't preloaded, so an English page loads
+// nothing extra.
 
 const geist = Geist({
   subsets: ["latin", "latin-ext", "cyrillic"],
@@ -61,22 +59,6 @@ const thai = Noto_Sans_Thai({
   subsets: ["thai"],
   variable: "--font-thai",
 })
-const japanese = Noto_Sans_JP({
-  preload: false,
-  display: "swap",
-  variable: "--font-japanese",
-})
-const chinese = Noto_Sans_SC({
-  preload: false,
-  display: "swap",
-  variable: "--font-chinese",
-})
-const korean = Noto_Sans_KR({
-  preload: false,
-  display: "swap",
-  variable: "--font-korean",
-})
-
 // The class names that define every font's CSS variable, for <html>.
 export const FONT_VARIABLES = [
   geist,
@@ -87,7 +69,4 @@ export const FONT_VARIABLES = [
   hebrew,
   devanagari,
   thai,
-  japanese,
-  chinese,
-  korean,
 ].map((font) => font.variable)

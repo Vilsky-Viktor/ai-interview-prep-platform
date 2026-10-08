@@ -41,6 +41,12 @@ export async function proxy(request: NextRequest) {
     requestHeaders.set(LOCALE_HEADER, localized.locale)
   }
 
+  // A public page's language comes from its address (or the visitor's chosen one), never from
+  // the browser's, so its plain address is the English page that search engines index.
+  if (!isPrivatePath(request.nextUrl.pathname)) {
+    requestHeaders.delete("accept-language")
+  }
+
   const response =
     maintenance === "closed"
       ? NextResponse.rewrite(new URL("/maintenance", request.url), {

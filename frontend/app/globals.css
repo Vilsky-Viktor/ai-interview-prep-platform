@@ -5,8 +5,14 @@
 /* Dark, except inside .light-scope: the candidate PDF report keeps the light design. */
 @custom-variant dark (&:is(.dark *):not(.light-scope *));
 
-/* The script fonts in fallback order; :lang() puts each CJK page's own font first. */
+/* The script fonts in fallback order. The CJK fonts are only on Chinese, Japanese and Korean
+   pages (constants/cjk-fonts.ts), and :lang() puts each one's own font first. */
 :root {
+  --font-scripts:
+    var(--font-arabic), var(--font-hebrew), var(--font-devanagari), var(--font-thai),
+    var(--font-vietnamese);
+}
+:root:lang(ja) {
   --font-scripts:
     var(--font-arabic), var(--font-hebrew), var(--font-devanagari), var(--font-thai),
     var(--font-vietnamese), var(--font-japanese), var(--font-chinese), var(--font-korean);

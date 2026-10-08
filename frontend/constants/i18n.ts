@@ -28,6 +28,9 @@ export const LOCALES = [
 // Written right to left: the whole page mirrors.
 export const RTL_LOCALES: readonly Locale[] = ["ar", "he", "fa"]
 
+// Written in Chinese characters: their pages load the fonts for them (constants/cjk-fonts.ts).
+export const CJK_LOCALES: readonly Locale[] = ["ja", "zh", "ko"]
+
 export const DEFAULT_LOCALE = "en"
 
 export const LOCALE_COOKIE = "prepza_locale"

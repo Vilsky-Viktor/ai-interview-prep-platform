@@ -10,7 +10,8 @@ Arabic, Hebrew and Persian read right to left, on the site and in emails.
 
 ## The interface language
 
-- On a first visit, the site opens in the browser's preferred language if it's supported, otherwise in English.
+- A public page's plain address is always in English (the address carries the language: `/de/pricing`), unless the visitor chose a language or came in through a language's address before.
+- On a first visit, a private page (sign-in areas, invite and job ad links) opens in the browser's preferred language if it's supported, otherwise in English.
 - A new account keeps the language it signed up in.
 - The language can be changed in Settings.
 
@@ -29,7 +30,7 @@ Some pages exist only in certain languages: a skills test page and a free practi
 
 ## Fonts
 
-Scripts other than Latin and Cyrillic use Noto fonts (`constants/fonts.ts`), loaded only on pages that need them.
+Scripts other than Latin and Cyrillic use Noto fonts (`constants/fonts.ts`), loaded only on pages that need them. The Japanese, Chinese and Korean fonts (`constants/cjk-fonts.ts`) are only on pages in those languages, so other pages' stylesheets stay small.
 
 ## Language of interviews and emails
 

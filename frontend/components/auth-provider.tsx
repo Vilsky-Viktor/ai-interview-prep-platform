@@ -1,13 +1,13 @@
 "use client"
 
 import * as Sentry from "@sentry/nextjs"
-import { onIdTokenChanged } from "firebase/auth"
+import type { User } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { createContext, useContext, useEffect, useState } from "react"
 
 import { apiFetch } from "@/lib/api"
 import { readTokenCookie, writeTokenCookie } from "@/lib/auth"
-import { auth } from "@/lib/firebase"
+import { firebaseAuth } from "@/lib/firebase"
 import { isLocale, readLocaleCookie, writeLocaleCookie } from "@/lib/locale"
 import type { AuthState } from "@/types/auth"
 
@@ -18,7 +18,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<AuthState>({ user: null, loading: true })
 
   useEffect(() => {
-    return onIdTokenChanged(auth, async (user) => {
+    // Firebase loads after the page is up, so pages show without waiting for it.
+    let unsubscribe: (() => void) | undefined
+    let stopped = false
+
+    Promise.all([firebaseAuth(), import("firebase/auth")]).then(
+      ([auth, { onIdTokenChanged }]) => {
+        if (stopped) {
+          return
+        }
+
+        unsubscribe = onIdTokenChanged(auth, onChange)
+      }
+    )
+
+    async function onChange(user: User | null) {
       const token = user ? await user.getIdToken() : null
       // Firebase reports the restored session on every page load; the pages were already
       // rendered with that token, so they re-render only when the token or language changes.
@@ -53,11 +67,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Errors name the account by id only, never by email.
       Sentry.setUser(user ? { id: user.uid } : null)
       setState({ user, loading: false })
+
       // Server-rendered pages read the token cookie, so re-render them with the new one.
       if (changed) {
         router.refresh()
       }
-    })
+    }
+
+    return () => {
+      stopped = true
+      unsubscribe?.()
+    }
   }, [router])
 
   return <AuthContext value={state}>{children}</AuthContext>

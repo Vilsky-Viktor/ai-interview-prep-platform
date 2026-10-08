@@ -3,7 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 // What search engines see on the public pages: addresses in every language, titles and
 // structured data, the sitemap and robots.txt, redirects, and private pages kept out.
 
-type Template = { id: string; slug: string; language: string };
+type Template = { id: string; slug: string; language: string; indexable: boolean };
 
 // Requests made outside the browser go to the gateway itself: the container's "localhost" isn't
 // the site (pages.sh sets REQUEST_URL; locally the site's address works).
@@ -14,6 +14,14 @@ async function firstTemplate(page: Page): Promise<Template> {
   const [template] = await response.json();
 
   return template;
+}
+
+async function templates(page: Page, query = ""): Promise<Template[]> {
+  const response = await page.request.get(
+    `${REQUEST_URL}/api/library/templates?limit=100${query}`,
+  );
+
+  return response.json();
 }
 
 function head(page: Page, selector: string, attribute: string) {
@@ -36,6 +44,18 @@ test("a page in another language has its own address, language and alternates", 
   expect(
     await head(page, 'link[rel="alternate"][hreflang="x-default"]', "href"),
   ).toMatch(/\/pricing$/);
+});
+
+// A plain address is the English page whatever the browser's language, as its canonical and
+// hreflang say; the language's own address has its version.
+test("a page's plain address is in English for any browser language", async ({
+  page,
+}) => {
+  await page.setExtraHTTPHeaders({ "Accept-Language": "de" });
+  await page.goto("/pricing");
+
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.locator("h1")).toContainText(/pricing|price/i);
 });
 
 // Each language's titles use the words its employers search for (internal_docs/seo-plan.md), not a
@@ -168,14 +188,19 @@ test("robots.txt and the sitemap list what should be found", async ({
   expect(robots).not.toContain("Disallow: /companies");
   expect(robots).toContain("/sitemap.xml");
 
-  const template = await firstTemplate(page);
   const sitemap = await (await page.request.get(`${REQUEST_URL}/sitemap.xml`)).text();
+
+  // Only the templates the API calls indexable (enough topics, not a near-duplicate).
+  for (const template of await templates(page)) {
+    for (const base of ["/tests", "/practice"]) {
+      const listed = sitemap.includes(`${base}/${template.slug}</loc>`);
+      expect(listed, `${base}/${template.slug}`).toBe(template.indexable);
+    }
+  }
 
   for (const path of [
     "/de/pricing",
     "/tests",
-    `/tests/${template.slug}`,
-    `/practice/${template.slug}`,
     "/compare/testgorilla",
     "/guides/hiring-engineers",
     "/pre-employment-testing",
@@ -247,4 +272,58 @@ test("links on a page in another language stay in it", async ({ page }) => {
   await expect(
     footer.locator('a[href="/privacy"]'),
   ).toHaveCount(1);
+});
+
+// A template the API doesn't call indexable (too few topics, or a near-duplicate) keeps its pages
+// out of search results; an indexable one doesn't.
+test("only an indexable template's pages may be found", async ({ page }) => {
+  const all = await templates(page);
+  const thin = all.find((template) => !template.indexable);
+  const full = all.find((template) => template.indexable);
+
+  for (const [template, robots] of [
+    [thin, "noindex"],
+    [full, null],
+  ] as const) {
+    if (!template) {
+      continue;
+    }
+
+    for (const base of ["/tests", "/practice"]) {
+      await page.goto(`${base}/${template.slug}`);
+      // Read at once: an indexable page has no robots tag to wait for.
+      const meta = await page
+        .locator('head meta[name="robots"]')
+        .evaluateAll((tags) => tags.map((tag) => tag.getAttribute("content")).join());
+      expect(meta.includes("noindex") ? "noindex" : null).toBe(robots);
+    }
+  }
+});
+
+// A template in another language has its pages at that language's address too: their links,
+// back to the list, to the home page and between its two pages, stay in it, and the level is
+// in the page's language.
+test("a template's page in its language keeps its links and level in it", async ({
+  page,
+}) => {
+  const [template] = await templates(page, "&language=de");
+  test.skip(!template, "the check needs a German template");
+
+  await page.goto(`/de/tests/${template.slug}`);
+  await expect(page.locator("h1")).toContainText("Test für Bewerber");
+  await expect(page.locator('main a[aria-label="Einstellungstests nach Rolle"]')).toHaveAttribute(
+    "href",
+    "/de/tests",
+  );
+  await expect(
+    page.getByRole("button", { name: /test für deine kandidaten erstellen/i }),
+  ).toHaveAttribute("href", "/de");
+  await expect(page.getByRole("button", { name: /kostenlos üben/i })).toHaveAttribute(
+    "href",
+    `/de/practice/${template.slug}`,
+  );
+  await expect(page.getByText(/^(grundlegend|mittel|schwer)$/)).toBeVisible();
+
+  await page.goto("/de/tests");
+  await expect(page.locator(`a[href="/de/tests/${template.slug}"]`)).toHaveCount(1);
 });

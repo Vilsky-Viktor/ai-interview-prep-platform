@@ -1,5 +1,5 @@
 import { DEFAULT_LOCALE } from "@/constants/i18n"
-import { auth } from "@/lib/firebase"
+import { firebaseAuth } from "@/lib/firebase"
 
 export class ApiError extends Error {
   constructor(
@@ -27,6 +27,7 @@ export function errorDetail(body: unknown): string | null {
 /** The signed-in user's token, and the interface language for the services' messages. */
 export async function authHeaders(): Promise<Record<string, string>> {
   // Right after page load Firebase may still be restoring the signed-in user.
+  const auth = await firebaseAuth()
   await auth.authStateReady()
   const token = await auth.currentUser?.getIdToken()
   // The page's own language: a first visit has no cookie yet.

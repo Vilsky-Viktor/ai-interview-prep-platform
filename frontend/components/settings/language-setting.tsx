@@ -7,7 +7,7 @@ import { toast } from "sonner"
 import { LanguagePicker } from "@/components/language-picker"
 import { LOCALES, type Locale } from "@/constants/i18n"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
-import { auth } from "@/lib/firebase"
+import { firebaseAuth } from "@/lib/firebase"
 
 /** The interface language, saved right away. */
 export function LanguageSetting({ current }: { current: Locale }) {
@@ -23,7 +23,7 @@ export function LanguageSetting({ current }: { current: Locale }) {
         body: JSON.stringify({ language }),
       })
       // The new token carries the language; auth-provider.tsx switches the interface to it.
-      await auth.currentUser?.getIdToken(true)
+      await (await firebaseAuth()).currentUser?.getIdToken(true)
     } catch (error) {
       toast.error(apiErrorMessage(error, t("languageFailed")))
     } finally {

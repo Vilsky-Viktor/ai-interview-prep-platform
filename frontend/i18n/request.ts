@@ -7,7 +7,8 @@ import { isLocale, preferredLocale } from "@/lib/locale"
 
 // The interface language: the address's (/de/pricing, set by proxy.ts), else the signed-in
 // user's setting, which auth-provider.tsx keeps in a cookie. Without either (a first visit), the
-// browser's preferred language if we support it.
+// browser's preferred language if we support it, on private pages only: proxy.ts leaves it out
+// of public ones, whose plain address is English.
 export default getRequestConfig(async () => {
   const requestHeaders = await headers()
   const value =

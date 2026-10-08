@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest"
 
 import { errorDetail } from "@/lib/api"
 
-vi.mock("@/lib/firebase", () => ({ auth: {} }))
+vi.mock("@/lib/firebase", () => ({ firebaseAuth: async () => ({}) }))
 
 describe("errorDetail", () => {
   it("takes the message a service raised", () => {

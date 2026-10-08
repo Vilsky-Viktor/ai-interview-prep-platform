@@ -96,3 +96,31 @@ for (const path of PAGES) {
     ).toBeVisible();
   });
 }
+
+// The Japanese, Chinese and Korean fonts (hundreds of character ranges) come only with pages in
+// those languages, and draw their text there.
+test("only Japanese, Chinese and Korean pages load their fonts", async ({
+  page,
+}) => {
+  const cjkFontFaces = () =>
+    page.evaluate(
+      () =>
+        [...document.styleSheets]
+          .flatMap((sheet) => [...sheet.cssRules])
+          .filter(
+            (rule) =>
+              rule instanceof CSSFontFaceRule &&
+              /Noto Sans (JP|SC|KR)/.test(rule.style.fontFamily),
+          ).length,
+    );
+
+  await page.goto("/pricing");
+  expect(await cjkFontFaces()).toBe(0);
+
+  await page.goto("/ja/pricing");
+  expect(await cjkFontFaces()).toBeGreaterThan(0);
+  const font = await page.evaluate(
+    () => getComputedStyle(document.querySelector("h1")!).fontFamily,
+  );
+  expect(font).toContain("Noto Sans JP");
+});

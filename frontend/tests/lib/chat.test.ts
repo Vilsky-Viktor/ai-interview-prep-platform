@@ -5,7 +5,10 @@ import { streamHelp } from "@/lib/chat"
 
 // No Firebase in a unit test: nobody is signed in.
 vi.mock("@/lib/firebase", () => ({
-  auth: { authStateReady: async () => {}, currentUser: null },
+  firebaseAuth: async () => ({
+    authStateReady: async () => {},
+    currentUser: null,
+  }),
 }))
 
 /** A streamed 200 answer that sends `chunks` one by one, as the network may split them. */

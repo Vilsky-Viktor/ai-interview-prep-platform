@@ -1,15 +1,5 @@
-import { FirebaseError } from "firebase/app"
-import {
-  type AuthCredential,
-  type AuthProvider,
-  GithubAuthProvider,
-  GoogleAuthProvider,
-  linkWithCredential,
-  OAuthProvider,
-  sendEmailVerification,
-  signInWithPopup,
-  signOut as firebaseSignOut,
-} from "firebase/auth"
+import type { FirebaseError } from "firebase/app"
+import type { AuthCredential, AuthProvider } from "firebase/auth"
 
 import {
   ACCOUNT_EXISTS,
@@ -18,23 +8,26 @@ import {
   TOKEN_COOKIE,
   TOKEN_COOKIE_MAX_AGE,
 } from "@/constants/auth"
-import { auth } from "@/lib/firebase"
+import { firebaseAuth } from "@/lib/firebase"
 import type { SignInProvider, SignInResult } from "@/types/sign-in"
 
 // A way of signing in that met an existing account with the same email, waiting to be linked
 // once its owner signs in the way they did before.
 let pending: { credential: AuthCredential; email: string } | null = null
 
-function providerFor(name: SignInProvider): AuthProvider {
+// Firebase's sign-in functions, loaded with Firebase itself (lib/firebase.ts).
+type Firebase = typeof import("firebase/auth")
+
+function providerFor(firebase: Firebase, name: SignInProvider): AuthProvider {
   if (name === "github") {
-    const github = new GithubAuthProvider()
+    const github = new firebase.GithubAuthProvider()
     github.addScope("user:email")
 
     return github
   }
 
   if (name === "linkedin") {
-    const linkedin = new OAuthProvider(LINKEDIN_PROVIDER_ID)
+    const linkedin = new firebase.OAuthProvider(LINKEDIN_PROVIDER_ID)
     linkedin.addScope("openid")
     linkedin.addScope("profile")
     linkedin.addScope("email")
@@ -42,29 +35,45 @@ function providerFor(name: SignInProvider): AuthProvider {
     return linkedin
   }
 
-  return new GoogleAuthProvider()
+  return new firebase.GoogleAuthProvider()
 }
 
-function credentialFrom(name: SignInProvider, error: FirebaseError) {
+function credentialFrom(
+  firebase: Firebase,
+  name: SignInProvider,
+  error: FirebaseError
+) {
   if (name === "github") {
-    return GithubAuthProvider.credentialFromError(error)
+    return firebase.GithubAuthProvider.credentialFromError(error)
   }
 
   if (name === "linkedin") {
-    return OAuthProvider.credentialFromError(error)
+    return firebase.OAuthProvider.credentialFromError(error)
   }
 
-  return GoogleAuthProvider.credentialFromError(error)
+  return firebase.GoogleAuthProvider.credentialFromError(error)
 }
 
 /** Signs in with one of the ways offered. One account per email: when the email already has
  * one under another way, this way is kept and linked once the person signs in as before. */
 export async function signIn(name: SignInProvider): Promise<SignInResult> {
+  // Already loaded by auth-provider.tsx, so the popup still opens from the click.
+  const [auth, firebase, app] = await Promise.all([
+    firebaseAuth(),
+    import("firebase/auth"),
+    import("firebase/app"),
+  ])
+
   try {
-    const { user } = await signInWithPopup(auth, providerFor(name))
+    const { user } = await firebase.signInWithPopup(
+      auth,
+      providerFor(firebase, name)
+    )
 
     if (pending && pending.email === user.email) {
-      await linkWithCredential(user, pending.credential).catch(() => {})
+      await firebase
+        .linkWithCredential(user, pending.credential)
+        .catch(() => {})
     }
 
     pending = null
@@ -72,14 +81,14 @@ export async function signIn(name: SignInProvider): Promise<SignInResult> {
     // Invites need a verified email; some ways of signing in (GitHub) don't verify it, so a
     // link is sent to confirm it.
     if (!user.emailVerified) {
-      await sendEmailVerification(user).catch(() => {})
+      await firebase.sendEmailVerification(user).catch(() => {})
 
       return "verify"
     }
 
     return "done"
   } catch (error) {
-    if (!(error instanceof FirebaseError)) {
+    if (!(error instanceof app.FirebaseError)) {
       return "failed"
     }
 
@@ -87,7 +96,7 @@ export async function signIn(name: SignInProvider): Promise<SignInResult> {
       return "cancelled"
     }
 
-    const credential = credentialFrom(name, error)
+    const credential = credentialFrom(firebase, name, error)
     const email = (error.customData?.email as string | undefined) ?? null
 
     if (error.code === ACCOUNT_EXISTS && credential && email) {
@@ -100,8 +109,13 @@ export async function signIn(name: SignInProvider): Promise<SignInResult> {
   }
 }
 
-export function signOut() {
-  return firebaseSignOut(auth)
+export async function signOut() {
+  const [auth, { signOut }] = await Promise.all([
+    firebaseAuth(),
+    import("firebase/auth"),
+  ])
+
+  return signOut(auth)
 }
 
 export function readTokenCookie() {
