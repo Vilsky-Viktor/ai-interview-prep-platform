@@ -1,6 +1,7 @@
 import { expect, test } from "../fixtures"
 import { API_URL } from "../constants"
 import { createCompany, createInterview } from "../helpers/api"
+import { markWebhookFailing } from "../helpers/db"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { ownerEmail } from "../helpers/users"
@@ -93,4 +94,10 @@ test("an owner makes an API key and adds a web hook", async ({ signInAs }) => {
   await shot(owner, "filled")
   await visit(owner, tab)
   await shot(owner, "list-filled")
+
+  // A web hook that stopped taking events, after days of retries, says so in its row.
+  await markWebhookFailing("https://example.com/prepza", company.id)
+  await visit(owner, `${tab}/api?tab=webhooks`)
+  await expect(owner.getByText("Not answering: recent results didn't reach it")).toBeVisible()
+  await shot(owner, "webhook-failing")
 })

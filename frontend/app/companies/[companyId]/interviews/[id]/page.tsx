@@ -123,7 +123,9 @@ export default async function InterviewPage({
                   />
                 ) : (
                   <h1 className="font-heading text-3xl font-medium tracking-tight text-balance">
-                    {t("generating")}
+                    {interview.generation_failed
+                      ? t("generationFailed")
+                      : t("generating")}
                   </h1>
                 )}
               </div>

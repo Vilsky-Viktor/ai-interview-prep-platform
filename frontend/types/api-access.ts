@@ -14,7 +14,13 @@ export type ApiKey = {
 
 export type NewApiKey = ApiKey & { key: string }
 
-export type ApiWebhook = { id: string; url: string; created_at: string }
+export type ApiWebhook = {
+  id: string
+  url: string
+  created_at: string
+  // Events stopped reaching it after days of retries; the next one it takes clears this.
+  failing: boolean
+}
 
 export type NewApiWebhook = ApiWebhook & { secret: string }
 

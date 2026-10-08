@@ -168,3 +168,37 @@ export async function addSlackConnection(companyId: string) {
     )
   )
 }
+
+/** Marks a throwaway company's web hook as failing, as the api service does after days of
+ * retries, without waiting for them. */
+export async function markWebhookFailing(url: string, companyId: string) {
+  await withDatabase("api", (client) =>
+    client.query("UPDATE webhooks SET failing = true WHERE url = $1 AND company_id = $2", [
+      url,
+      companyId,
+    ])
+  )
+}
+
+/** Turns a throwaway company's interview into one whose generation failed: a failed generation
+ * in the generation database, and the interview waiting on it, marked as companies marks it on
+ * generation's failed event. */
+export async function failGeneration(interviewId: string, companyId: string) {
+  const generationId = await withDatabase("generation", async (client) => {
+    const found = await client.query(
+      `INSERT INTO generations (id, owner_uid, kind, company_id, text, language, status)
+       VALUES (gen_random_uuid(), 'e2e', 'interview', $1, 'E2E', 'en', 'failed')
+       RETURNING id`,
+      [companyId]
+    )
+
+    return found.rows[0].id as string
+  })
+  await withDatabase("companies", (client) =>
+    client.query(
+      `UPDATE interviews SET set_id = NULL, title = NULL, generation_id = $2,
+         generation_failed = true WHERE id = $1`,
+      [interviewId, generationId]
+    )
+  )
+}

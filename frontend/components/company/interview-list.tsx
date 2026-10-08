@@ -59,7 +59,10 @@ export function InterviewList({
           >
             <span className="min-w-0 space-y-1">
               <span className="block text-lg font-medium">
-                {interview.title ?? t("generating")}
+                {interview.title ??
+                  (interview.generation_failed
+                    ? t("generationFailed")
+                    : t("generating"))}
               </span>
               <span className="block text-sm text-muted-foreground">
                 <time dateTime={interview.created_at} suppressHydrationWarning>

@@ -389,9 +389,7 @@ export interface paths {
     }
     /**
      * List Candidates
-     * @description A page at a time, best grade first or newest first, narrowed to an email containing `q`
-     *     and a status or result, all in SQL on the results stored when candidates finish. Progress
-     *     and signals come from rounds for this page only.
+     * @description A page at a time (candidate_results.page).
      */
     get: operations["list_candidates_interviews__interview_id__candidates_get"]
     put?: never
@@ -983,9 +981,84 @@ export interface paths {
      * Invite
      * @description A candidate an ATS sent is invited, as the member who connected it. Refused with 503
      *     during the emergency pause, 402 without credits and 429 over the email limits; 404 when the
-     *     interview is gone and 409 while it has no questions yet.
+     *     interview is gone, 409 while it has no questions yet, and 403 when that member is no longer
+     *     an owner or admin (a removed member's connection invites no one).
      */
     post: operations["invite_internal_interviews__interview_id__invites_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/interviews": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Interviews
+     * @description The company's interviews, newest first, for the api service (an API key's company).
+     */
+    get: operations["list_interviews_internal_companies__company_id__interviews_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/interviews/{interview_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Interview */
+    get: operations["get_interview_internal_companies__company_id__interviews__interview_id__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/interviews/{interview_id}/candidates": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Candidates
+     * @description The interview's candidates, newest first, with their results.
+     */
+    get: operations["list_candidates_internal_companies__company_id__interviews__interview_id__candidates_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Candidate */
+    get: operations["get_candidate_internal_companies__company_id__interviews__interview_id__candidates__invite_id__get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -1688,6 +1761,8 @@ export interface components {
       generation_id: string | null
       /** Set Id */
       set_id: string | null
+      /** Generation Failed */
+      generation_failed: boolean
       /** Title */
       title: string | null
       /** Question Seconds */
@@ -1734,6 +1809,8 @@ export interface components {
       generation_id: string | null
       /** Set Id */
       set_id: string | null
+      /** Generation Failed */
+      generation_failed: boolean
       /** Title */
       title: string | null
       /** Question Seconds */
@@ -2260,7 +2337,9 @@ export interface operations {
   list_companies_companies_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -2325,7 +2404,9 @@ export interface operations {
   list_credits_companies_credits_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -2512,7 +2593,9 @@ export interface operations {
   list_audit_events_companies__company_id__audit_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -2642,7 +2725,9 @@ export interface operations {
     parameters: {
       query: {
         company_id: string
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -2836,7 +2921,9 @@ export interface operations {
     parameters: {
       query: {
         company_id: string
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -3098,7 +3185,9 @@ export interface operations {
         sort?: components["schemas"]["CandidateSort"]
         q?: string
         status?: components["schemas"]["CandidateFilter"] | null
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -3586,7 +3675,9 @@ export interface operations {
   list_question_reports_interviews__interview_id__questions__question_id__reports_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -4236,6 +4327,144 @@ export interface operations {
       }
     }
   }
+  list_interviews_internal_companies__company_id__interviews_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InterviewOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_interview_internal_companies__company_id__interviews__interview_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InterviewOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_candidates_internal_companies__company_id__interviews__interview_id__candidates_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CandidateOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_candidate_internal_companies__company_id__interviews__interview_id__candidates__invite_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+        interview_id: string
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CandidateOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   invite_undelivered_internal_invites__invite_id__undelivered_post: {
     parameters: {
       query?: never
@@ -4498,7 +4727,9 @@ export interface operations {
     parameters: {
       query?: {
         sort?: components["schemas"]["PassRateSort"]
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never
@@ -4561,7 +4792,9 @@ export interface operations {
   list_requests_superadmin_verifications_get: {
     parameters: {
       query?: {
+        /** @description Number of items to skip */
         offset?: number
+        /** @description Number of items to return, up to 100 */
         limit?: number
       }
       header?: never

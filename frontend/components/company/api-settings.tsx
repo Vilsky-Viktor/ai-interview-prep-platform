@@ -163,9 +163,17 @@ export function ApiWebhooks({
           key={hook.id}
           title={hook.url}
           details={
-            <time suppressHydrationWarning>
-              {t("added", { date: formatDate(hook.created_at, locale) })}
-            </time>
+            <>
+              <time suppressHydrationWarning>
+                {t("added", { date: formatDate(hook.created_at, locale) })}
+              </time>
+              {hook.failing && (
+                <>
+                  {" · "}
+                  <span className="text-destructive">{t("failing")}</span>
+                </>
+              )}
+            </>
           }
           remove={
             canEdit && (
