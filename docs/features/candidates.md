@@ -122,6 +122,8 @@ Candidate invite and report emails are limited:
 | Per recipient address, a day | `EMAIL_RECIPIENT_DAILY_LIMIT` | 3 |
 | Reports a company emails a day | `REPORT_EMAILS_PER_COMPANY_DAY` | 20 |
 
+An invite counts towards these limits only once the company's credits are set aside for it: an invite refused for lack of credits (an ATS's too) uses up none of them, and one refused over a limit gives back the credits it just set aside.
+
 A company emails a candidate's report only once that candidate has finished the interview.
 
 ## Retention

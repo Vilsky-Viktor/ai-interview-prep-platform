@@ -1,9 +1,10 @@
+from fastapi import HTTPException
 from prepza_common.analytics import track
 from prepza_common.rate_limit import hit_emails
 from prepza_common.user import User
 
 from app.config.settings import settings
-from app.constants.invites import NOT_STARTED
+from app.constants.invites import NOT_STARTED, InviteStatus
 from app.helpers.candidates import hold_key, new_hold_key
 from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
@@ -21,21 +22,27 @@ async def invite(interview: Interview, company: Company, user: User, email: str)
     429 over the member's email limits and billing's 402 when the company is out of credits."""
     email = email.lower()
 
-    # Email limits first, so a refused invite never leaves credits set aside.
-    await hit_emails(
-        get_redis(),
-        user.uid,
-        f"{interview.id}:{email}",
-        settings.email_hourly_limit,
-        settings.email_daily_limit,
-        settings.email_recipient_daily_limit,
-    )
     current, stored = await invites.held(interview.id, email)
     key = hold_key(interview.id, email, stored) if current else new_hold_key(interview.id, email)
 
     # A candidate who hasn't started has credits set aside: new, or sent again after expiring.
+    # Credits first, so an invite refused for them never uses up the email limits.
     if current is None or current in NOT_STARTED:
         await billing.hold_candidate(company.id, key)
+
+    try:
+        await hit_emails(
+            get_redis(),
+            user.uid,
+            f"{interview.id}:{email}",
+            settings.email_hourly_limit,
+            settings.email_daily_limit,
+            settings.email_recipient_daily_limit,
+        )
+    except HTTPException:
+        await give_back(interview, company, email, current, key)
+
+        raise
 
     title = await interview_title(interview) or "an interview"
 
@@ -68,3 +75,19 @@ async def invite(interview: Interview, company: Company, user: User, email: str)
         await track("candidate_invited", user_id=user.uid, company_id=company.id)
 
     return invite
+
+
+async def give_back(interview: Interview, company: Company, email: str, current, key: str) -> None:
+    """An invite refused over the email limits gives back the credits set aside for it just now:
+    a new one's, or an expired one's (expiry had given them back). One already invited keeps
+    its own. An expired invite sent again by another request meanwhile keeps them after all."""
+    if current is not None and current != InviteStatus.EXPIRED:
+        return
+
+    await billing.release_candidate(key)
+
+    if current == InviteStatus.EXPIRED and await invites.status_of(interview.id, email) not in (
+        InviteStatus.EXPIRED,
+        InviteStatus.DELETED,
+    ):
+        await billing.hold_candidate(company.id, key)

@@ -140,19 +140,107 @@ def test_a_company_without_credits_cannot_invite_new_candidates(client, monkeypa
     assert sent == []
 
 
-def test_an_email_limit_refusal_sets_no_credits_aside(client, monkeypatch):
+def test_invites_refused_for_credits_use_up_no_email_limits(client, monkeypatch):
+    """Otherwise a company out of credits (an ATS sending candidates) would use up the limits,
+    and invites would be refused with 429 once it tops up."""
+    sent, _ = invite_setup(monkeypatch)
+    hold = billing.hold_candidate
+
+    async def no_credits(company_id, key):
+        raise HTTPException(402, "No candidate credits left.")
+
+    monkeypatch.setattr(billing, "hold_candidate", no_credits)
+    refused = [client.post(URL, json={"email": "erin@example.com"}).status_code for _ in range(4)]
+    monkeypatch.setattr(billing, "hold_candidate", hold)
+    codes = [client.post(URL, json={"email": "erin@example.com"}).status_code for _ in range(3)]
+    app.dependency_overrides.clear()
+
+    assert refused == [402] * 4
+    assert codes == [201] * 3
+    assert len(sent) == 3
+
+
+def limited_setup(monkeypatch, current):
+    """An invite in `current` status refused over the email limits; returns the credits held
+    and released."""
     _, used = invite_setup(monkeypatch)
+    released = []
 
     async def limited(*args):
         raise HTTPException(429, "Too many requests. Try again later.")
 
+    async def fake_held(_interview_id, email):
+        return current, "stored-key" if current else None
+
+    async def fake_status(_interview_id, email):
+        return current
+
+    async def fake_release(key):
+        released.append(key)
+
     monkeypatch.setattr(candidate_invites, "hit_emails", limited)
+    monkeypatch.setattr(invites, "held", fake_held)
+    monkeypatch.setattr(invites, "status_of", fake_status)
+    monkeypatch.setattr(billing, "release_candidate", fake_release)
+
+    return used, released
+
+
+def test_a_new_invite_refused_over_the_email_limits_gives_its_credits_back(client, monkeypatch):
+    used, released = limited_setup(monkeypatch, None)
 
     response = client.post(URL, json={"email": "frank@example.com"})
     app.dependency_overrides.clear()
 
     assert response.status_code == 429
-    assert used == []
+    assert len(used) == 1
+    assert released == used
+
+
+def test_an_expired_invite_refused_over_the_email_limits_gives_its_credits_back(
+    client, monkeypatch
+):
+    used, released = limited_setup(monkeypatch, "expired")
+
+    response = client.post(URL, json={"email": "frank@example.com"})
+    app.dependency_overrides.clear()
+
+    assert response.status_code == 429
+    assert used == released == ["stored-key"]
+
+
+def test_an_expired_invite_sent_again_meanwhile_keeps_its_credits(client, monkeypatch):
+    """Another request revived it between the read and the refusal: its credits stay held."""
+    _, released = limited_setup(monkeypatch, "expired")
+    holds = []
+
+    async def fake_status(_interview_id, email):
+        return "invited"
+
+    async def fake_hold(company_id, key):
+        holds.append(key)
+
+    monkeypatch.setattr(invites, "status_of", fake_status)
+    monkeypatch.setattr(billing, "hold_candidate", fake_hold)
+
+    response = client.post(URL, json={"email": "frank@example.com"})
+    app.dependency_overrides.clear()
+
+    assert response.status_code == 429
+    assert released == ["stored-key"]
+    assert holds == ["stored-key", "stored-key"]
+
+
+def test_an_invited_candidate_refused_over_the_email_limits_keeps_their_credits(
+    client, monkeypatch
+):
+    _, released = limited_setup(monkeypatch, "invited")
+
+    response = client.post(URL, json={"email": "frank@example.com"})
+    app.dependency_overrides.clear()
+
+    assert response.status_code == 429
+    assert released == []
 
 
 def test_an_invite_that_expired_while_sent_again_has_its_credits_set_aside_again(
