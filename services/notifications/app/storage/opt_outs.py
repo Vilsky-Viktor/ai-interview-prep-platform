@@ -32,6 +32,27 @@ async def opted_out(address: str, company_id: str, invite_id: str | None = None)
         return bool(await session.scalar(query))
 
 
+async def of_address(address: str) -> list[CandidateOptOut]:
+    """Every opt-out of the address (its hash): from a company's emails, or an invite's
+    reminders."""
+    query = select(CandidateOptOut).where(CandidateOptOut.address == address)
+
+    async with Session() as session:
+        return list(await session.scalars(query))
+
+
+async def remove(address: str, company_id: str) -> None:
+    """The address (its hash) hears from the company again: its opt-out from all the company's
+    emails and from any invite's reminders go. Safe to repeat."""
+    async with Session() as session:
+        await session.execute(
+            delete(CandidateOptOut).where(
+                CandidateOptOut.address == address, CandidateOptOut.company_id == company_id
+            )
+        )
+        await session.commit()
+
+
 async def remove_company(company_id: str) -> None:
     """A deleted company emails nobody again: its candidates' wishes go with it."""
     async with Session() as session:

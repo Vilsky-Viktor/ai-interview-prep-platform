@@ -55,3 +55,21 @@ class RecipientOut(BaseModel):
 
 class RecipientsOut(BaseModel):
     recipients: list[RecipientOut]
+
+
+class AdminEmailChangesIn(BaseModel):
+    """A superadmin's changes to a user's settings; the rest stay as they are."""
+
+    changes: dict[EmailSetting, bool] = Field(min_length=1)
+
+
+class EmailAccountOut(BaseModel):
+    user_id: str
+    email: str
+    preferences: EmailPreferencesOut
+
+
+class EmailLookupOut(BaseModel):
+    """The account with the address a superadmin looked up, or none."""
+
+    account: EmailAccountOut | None

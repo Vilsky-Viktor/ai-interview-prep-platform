@@ -24,6 +24,8 @@ class ConsentSource(StrEnum):
     SIGN_IN = "sign_in"
     SETTINGS = "settings"
     UNSUBSCRIBE = "unsubscribe"
+    # A superadmin, for someone who asked prepza (by email, say) to stop its emails.
+    ADMIN = "admin"
 
 
 class ConsentBasis(StrEnum):

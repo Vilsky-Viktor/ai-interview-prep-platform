@@ -30,7 +30,7 @@ class EmailPreferences(Base):
 
 class EmailConsent(Base):
     """One change of one email setting, never edited: the proof of what the user agreed to,
-    where, under which wording and when."""
+    where, under which wording and when, or which superadmin changed it on their behalf."""
 
     __tablename__ = "email_consents"
 
@@ -41,4 +41,6 @@ class EmailConsent(Base):
     source: Mapped[str] = mapped_column(String(16))
     basis: Mapped[str] = mapped_column(String(16))
     text_version: Mapped[str] = mapped_column(String(16))
+    # The superadmin who made the change, for the admin source only.
+    changed_by: Mapped[str | None] = mapped_column(String(128))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)

@@ -270,3 +270,16 @@ async def set_extra_time(invite_id: uuid.UUID, extra_time: int) -> None:
             .values(extra_time=extra_time)
         )
         await session.commit()
+
+
+async def company_ids_for(email: str) -> list[str]:
+    """The companies with an invite for the address, whatever its case."""
+    query = (
+        select(Interview.company_id)
+        .join(CandidateInvite, CandidateInvite.interview_id == Interview.id)
+        .where(CandidateInvite.email == email.strip().lower())
+        .distinct()
+    )
+
+    async with Session() as session:
+        return [str(company_id) for company_id in await session.scalars(query)]

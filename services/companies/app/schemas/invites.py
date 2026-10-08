@@ -105,3 +105,9 @@ class ExtraTimeIn(BaseModel):
             raise ValueError(f"Extra time must be one of {EXTRA_TIME_OPTIONS}")
 
         return value
+
+
+class InvitedCompaniesOut(BaseModel):
+    """The companies that invited an address, for the notifications service."""
+
+    company_ids: list[str]

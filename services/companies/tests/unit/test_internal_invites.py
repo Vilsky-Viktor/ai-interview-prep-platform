@@ -48,3 +48,30 @@ def test_notifications_marks_an_invite_undelivered_and_the_company_is_told(clien
 
 def test_marking_needs_a_service_token(client):
     assert client.post(URL).status_code in (401, 403)
+
+
+def test_notifications_asks_which_companies_invited_an_address(client, monkeypatch):
+    asked = []
+
+    async def fake_company_ids(email):
+        asked.append(email)
+
+        return ["c-1"]
+
+    monkeypatch.setattr(invites, "company_ids_for", fake_company_ids)
+    token = issue_token("notifications", "companies", "test-secret-that-is-at-least-32-bytes")
+
+    response = client.post(
+        "/internal/invites/companies",
+        json={"email": "ann@example.com"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert response.json() == {"company_ids": ["c-1"]}
+    assert asked == ["ann@example.com"]
+
+
+def test_asking_which_companies_invited_an_address_needs_a_service_token(client):
+    response = client.post("/internal/invites/companies", json={"email": "ann@example.com"})
+
+    assert response.status_code in (401, 403)

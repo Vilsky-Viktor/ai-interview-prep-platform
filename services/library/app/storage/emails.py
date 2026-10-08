@@ -37,10 +37,14 @@ async def preferences_of(user_ids: list[str]) -> dict[str, dict[str, bool]]:
 
 
 async def change(
-    user_id: str, changes: dict[EmailSetting, bool], source: ConsentSource
+    user_id: str,
+    changes: dict[EmailSetting, bool],
+    source: ConsentSource,
+    changed_by: str | None = None,
 ) -> dict[str, bool]:
     """Applies the changes and logs each one that changes something, so a repeated request
     logs nothing twice. The row is locked, so concurrent changes don't miss each other.
+    `changed_by` is the superadmin, for the admin source.
 
     A sign-in turns updates on only for a user without a row yet, the first time they see the
     opt-out: it never turns them back on for someone who turned them off."""
@@ -69,6 +73,7 @@ async def change(
                     source=source,
                     basis=ConsentBasis.SOFT_OPT_IN if soft_opt_in else ConsentBasis.CHOICE,
                     text_version=CONSENT_TEXT_VERSION,
+                    changed_by=changed_by,
                 )
             )
 

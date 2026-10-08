@@ -18,7 +18,7 @@ class User(BaseModel):
 
 
 class UserEmailIn(BaseModel):
-    """The account's email, sent in the body of library's calls to delete or export a user's
-    data, so request logs don't record it."""
+    """An email address sent in the body, so request logs don't record it: the account's, in
+    library's calls to delete or export a user's data, or the one a superadmin looks up."""
 
     email: str

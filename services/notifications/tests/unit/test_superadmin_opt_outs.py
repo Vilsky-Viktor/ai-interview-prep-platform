@@ -1,0 +1,122 @@
+import logging
+from types import SimpleNamespace
+
+import pytest
+from prepza_common.auth import current_user
+from prepza_common.user import User
+
+from app.helpers.unsubscribe import address_hash
+from app.integrations import companies
+from app.main import app
+from app.storage import opt_outs
+
+ANN = address_hash("ann@example.com")
+URL = "/superadmin/candidate-opt-outs"
+
+
+@pytest.fixture
+def signed_in(monkeypatch):
+    """Acme and Bolt invited Ann; Ann stopped Acme's emails and one of Bolt's invites' reminders,
+    and Cold's emails before Cold erased her. Signs in as the superadmin Sam, or as `email`."""
+    monkeypatch.setenv("SUPERADMIN_EMAILS", "sam@prepza.dev")
+    rows = [
+        SimpleNamespace(company_id="acme", invite_id=None),
+        SimpleNamespace(company_id="bolt", invite_id="i-1"),
+        SimpleNamespace(company_id="cold", invite_id=None),
+    ]
+    calls = SimpleNamespace(added=[], removed=[], invited=[], names=[])
+
+    async def of_address(address):
+        return rows if address == ANN else []
+
+    async def add(address, company_id, invite_id=None):
+        calls.added.append((address, company_id, invite_id))
+
+    async def remove(address, company_id):
+        calls.removed.append((address, company_id))
+
+    async def invited_company_ids(email):
+        calls.invited.append(email)
+
+        return ["bolt", "acme"]
+
+    async def members(company_ids):
+        calls.names.append(company_ids)
+        names = {"acme": "acme", "bolt": "Bolt", "cold": "Cold"}
+
+        return [{"id": id, "name": names[id], "members": []} for id in company_ids]
+
+    monkeypatch.setattr(opt_outs, "of_address", of_address)
+    monkeypatch.setattr(opt_outs, "add", add)
+    monkeypatch.setattr(opt_outs, "remove", remove)
+    monkeypatch.setattr(companies, "invited_company_ids", invited_company_ids)
+    monkeypatch.setattr(companies, "members", members)
+
+    def sign_in(email="sam@prepza.dev"):
+        app.dependency_overrides[current_user] = lambda: User(
+            uid="sam", email=email, email_verified=True
+        )
+
+    sign_in()
+    calls.sign_in = sign_in
+    yield calls
+
+    app.dependency_overrides.clear()
+
+
+def test_the_lookup_lists_invited_and_opted_out_companies_by_name_whatever_the_case(
+    client, signed_in
+):
+    response = client.post(f"{URL}/lookup", json={"email": "Ann@Example.com"})
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "companies": [
+            {"company_id": "acme", "name": "acme", "stopped": True, "stopped_reminders": 0},
+            {"company_id": "bolt", "name": "Bolt", "stopped": False, "stopped_reminders": 1},
+            {"company_id": "cold", "name": "Cold", "stopped": True, "stopped_reminders": 0},
+        ]
+    }
+    # Every name in one call to companies.
+    assert signed_in.names == [["acme", "bolt", "cold"]]
+
+
+def test_a_superadmin_stops_an_inviting_companys_emails_and_it_is_logged(client, signed_in, caplog):
+    body = {"email": "ann@example.com", "company_id": "bolt", "stopped": True}
+
+    with caplog.at_level(logging.WARNING):
+        response = client.put(URL, json=body)
+
+    assert response.status_code == 200
+    assert signed_in.added == [(ANN, "bolt", None)]
+    assert "by superadmin sam" in caplog.text
+    assert "ann@example.com" not in caplog.text
+
+
+def test_only_a_company_that_invited_the_address_can_be_stopped(client, signed_in):
+    body = {"email": "ann@example.com", "company_id": "zeta", "stopped": True}
+
+    assert client.put(URL, json=body).status_code == 404
+    assert signed_in.added == []
+
+
+def test_a_superadmin_lets_a_companys_emails_through_again(client, signed_in):
+    body = {"email": "ANN@example.com", "company_id": "cold", "stopped": False}
+
+    assert client.put(URL, json=body).status_code == 200
+    assert signed_in.removed == [(ANN, "cold")]
+
+
+def test_anyone_else_gets_not_found(client, signed_in):
+    signed_in.sign_in("bob@example.com")
+    body = {"email": "ann@example.com", "company_id": "bolt", "stopped": True}
+
+    lookup = client.post(f"{URL}/lookup", json={"email": "ann@example.com"})
+    change = client.put(URL, json=body)
+
+    assert (lookup.status_code, change.status_code) == (404, 404)
+    assert (signed_in.invited, signed_in.added) == ([], [])
+
+
+def test_signed_out_gets_401(client):
+    assert client.post(f"{URL}/lookup", json={"email": "a@b.c"}).status_code == 401

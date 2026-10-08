@@ -28,6 +28,20 @@ async def company_ids(user_id: str) -> list[str]:
     return response.json()["company_ids"]
 
 
+async def invited_company_ids(email: str) -> list[str]:
+    """The companies that invited the address; it goes in the body, which request logs don't
+    record."""
+    response = await http.get_client().post(
+        f"{settings.companies_url}/internal/invites/companies",
+        json={"email": email},
+        headers={"Authorization": f"Bearer {service_token('companies')}"},
+    )
+
+    response.raise_for_status()
+
+    return response.json()["company_ids"]
+
+
 async def access(company_id: str, user_id: str) -> dict:
     """What the user may do in the company; a company that's gone is no access."""
     return await company_access.access(

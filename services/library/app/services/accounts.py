@@ -16,6 +16,23 @@ def delete_sign_in(user_id: str) -> None:
         pass
 
 
+async def account_by_email(email: str) -> firebase_auth.UserRecord | None:
+    """The account signed in with the address, whatever its case; None when there's none."""
+    try:
+        return await asyncio.to_thread(firebase_auth.get_user_by_email, email.strip().lower())
+    except firebase_auth.UserNotFoundError:
+        return None
+
+
+async def account_exists(user_id: str) -> bool:
+    try:
+        await asyncio.to_thread(firebase_auth.get_user, user_id)
+    except firebase_auth.UserNotFoundError:
+        return False
+
+    return True
+
+
 async def set_language(user: User, language: Language) -> None:
     """Stored on the sign-in, so every service reads it from the user's next ID token. A new
     account sets it on its first sign-in (the frontend does), which counts as signing up."""

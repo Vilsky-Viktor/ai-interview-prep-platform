@@ -17,6 +17,7 @@ from app.routers import (
     me,
     schedules,
     slack,
+    superadmin,
     unsubscribe,
     webhooks,
 )
@@ -50,6 +51,7 @@ app.include_router(webhooks.router)
 app.include_router(internal_accounts.router)
 app.include_router(slack.router)
 app.include_router(unsubscribe.router)
+app.include_router(superadmin.router)
 app.include_router(schedules.router)
 
 

@@ -22,6 +22,7 @@ from app.routers import (
     me,
     schedules,
     superadmin,
+    superadmin_emails,
     superadmin_quality,
     templates,
 )
@@ -50,6 +51,7 @@ app.add_middleware(MaintenanceMiddleware, get_redis=get_redis)
 app.add_middleware(RequestLogMiddleware)
 app.include_router(me.router)
 app.include_router(superadmin.router)
+app.include_router(superadmin_emails.router)
 app.include_router(superadmin_quality.router)
 app.include_router(templates.router)
 app.include_router(internal.router)
