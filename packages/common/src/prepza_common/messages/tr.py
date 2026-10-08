@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Şirketiniz günlük rapor gönderme sınırına ulaştı. Yarın tekrar deneyin.",
     "New interviews and AI features are paused for now. Please try again later.": "Yeni mülakatlar ve yapay zekâ özellikleri şimdilik duraklatıldı. Daha sonra tekrar deneyin.",
     "prepza is under maintenance. We'll be back soon.": "prepza bakımda. Yakında geri döneceğiz.",
+    "A company can have up to 10 API keys": "Bir şirketin en fazla 10 API anahtarı olabilir",
+    "A company can have up to 5 web hooks": "Bir şirketin en fazla 5 webhook'u olabilir",
+    "Use an HTTPS address that's reachable from the internet": "İnternetten erişilebilen bir HTTPS adresi kullanın",
+    "Web hooks aren't set up yet": "Webhook'lar henüz kurulmadı",
+    "API key not found": "API anahtarı bulunamadı",
+    "Web hook not found": "Webhook bulunamadı",
 }

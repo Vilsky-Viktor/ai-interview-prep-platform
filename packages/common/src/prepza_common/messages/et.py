@@ -44,4 +44,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Sinu ettevõte on jõudnud aruannete saatmise päevalimiidini. Proovi homme uuesti.",
     "New interviews and AI features are paused for now. Please try again later.": "Uued intervjuud ja tehisintellekti funktsioonid on praegu peatatud. Proovi hiljem uuesti.",
     "prepza is under maintenance. We'll be back soon.": "prepza on hoolduses. Oleme varsti tagasi.",
+    "A company can have up to 10 API keys": "Ettevõttel võib olla kuni 10 API-võtit",
+    "A company can have up to 5 web hooks": "Ettevõttel võib olla kuni 5 webhooki",
+    "Use an HTTPS address that's reachable from the internet": "Kasuta HTTPS-aadressi, mis on internetist kättesaadav",
+    "Web hooks aren't set up yet": "Webhooke pole veel seadistatud",
+    "API key not found": "API-võtit ei leitud",
+    "Web hook not found": "Webhooki ei leitud",
 }

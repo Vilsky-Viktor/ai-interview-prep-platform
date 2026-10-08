@@ -13,6 +13,7 @@ def services() -> dict[str, str]:
         "billing": settings.billing_url,
         "notifications": settings.notifications_url,
         "ats": settings.ats_url,
+        "api": settings.api_url,
     }
 
 

@@ -25,6 +25,7 @@ os.environ.setdefault("COMPANIES_URL", "http://companies:8000")
 os.environ.setdefault("BILLING_URL", "http://billing:8000")
 os.environ.setdefault("NOTIFICATIONS_URL", "http://notifications:8000")
 os.environ.setdefault("ATS_URL", "http://ats:8000")
+os.environ.setdefault("API_URL", "http://api:8000")
 
 import pytest
 from fastapi.testclient import TestClient

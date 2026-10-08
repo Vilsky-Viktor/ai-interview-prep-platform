@@ -1,7 +1,7 @@
 # Secrets you set yourself after the first apply (see README.md); they start as "set-me", and
 # Terraform never overwrites what you set.
 resource "google_secret_manager_secret" "manual" {
-  for_each  = toset(["openai-api-key", "redis-url", "resend-api-key", "resend-webhook-secret", "paddle-webhook-secret", "paddle-api-key", "ats-encryption-key", "slack-client-id", "slack-client-secret", "slack-encryption-key"])
+  for_each  = toset(["openai-api-key", "redis-url", "resend-api-key", "resend-webhook-secret", "paddle-webhook-secret", "paddle-api-key", "ats-encryption-key", "slack-client-id", "slack-client-secret", "slack-encryption-key", "api-encryption-key"])
   secret_id = each.value
 
   replication {
@@ -24,7 +24,7 @@ resource "google_secret_manager_secret_version" "manual" {
 # Secrets Terraform makes: each service's own key. Tokens calling a service are signed with its
 # key and addressed to it, so a leaked key lets someone call one service, not all of them.
 locals {
-  keyed_services = ["library", "generation", "rounds", "companies", "billing", "notifications", "ats"]
+  keyed_services = ["library", "generation", "rounds", "companies", "billing", "notifications", "ats", "api"]
 }
 
 resource "random_password" "service_secret" {

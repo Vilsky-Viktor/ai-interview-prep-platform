@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Ваша компания уже отправила дневной лимит отчётов. Попробуйте завтра.",
     "New interviews and AI features are paused for now. Please try again later.": "Новые собеседования и функции ИИ пока приостановлены. Попробуйте позже.",
     "prepza is under maintenance. We'll be back soon.": "prepza на техническом обслуживании. Скоро вернёмся.",
+    "A company can have up to 10 API keys": "У компании может быть не больше 10 API-ключей",
+    "A company can have up to 5 web hooks": "У компании может быть не больше 5 вебхуков",
+    "Use an HTTPS address that's reachable from the internet": "Укажите HTTPS-адрес, доступный из интернета",
+    "Web hooks aren't set up yet": "Вебхуки ещё не настроены",
+    "API key not found": "API-ключ не найден",
+    "Web hook not found": "Вебхук не найден",
 }

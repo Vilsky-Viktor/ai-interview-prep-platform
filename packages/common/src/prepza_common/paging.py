@@ -12,8 +12,13 @@ class Page:
 
 
 def page(
-    offset: Annotated[int, Query(ge=0)] = 0,
-    limit: Annotated[int, Query(ge=1, le=MAX_PAGE_SIZE)] = MAX_PAGE_SIZE,
+    offset: Annotated[int, Query(ge=0, description="Number of items to skip")] = 0,
+    limit: Annotated[
+        int,
+        Query(
+            ge=1, le=MAX_PAGE_SIZE, description=f"Number of items to return, up to {MAX_PAGE_SIZE}"
+        ),
+    ] = MAX_PAGE_SIZE,
 ) -> Page:
     """`?offset=&limit=`; without them, the first full page."""
     return Page(offset=offset, limit=limit)

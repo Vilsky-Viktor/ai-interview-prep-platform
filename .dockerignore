@@ -8,6 +8,7 @@
 !services/billing
 !services/notifications
 !services/ats
+!services/api
 **/.venv
 **/__pycache__
 **/.pytest_cache

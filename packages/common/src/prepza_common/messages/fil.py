@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Naabot na ng iyong kumpanya ang pang-araw-araw na limit ng mga report na ma-email. Subukang muli bukas.",
     "New interviews and AI features are paused for now. Please try again later.": "Naka-pause muna ang mga bagong interview at AI feature. Subukang muli mamaya.",
     "prepza is under maintenance. We'll be back soon.": "Kasalukuyang nasa maintenance ang prepza. Babalik kami agad.",
+    "A company can have up to 10 API keys": "Hanggang 10 API key lang ang puwede sa isang kumpanya",
+    "A company can have up to 5 web hooks": "Hanggang 5 webhook lang ang puwede sa isang kumpanya",
+    "Use an HTTPS address that's reachable from the internet": "Gumamit ng HTTPS address na naaabot mula sa internet",
+    "Web hooks aren't set up yet": "Hindi pa naka-set up ang mga webhook",
+    "API key not found": "Hindi nakita ang API key",
+    "Web hook not found": "Hindi nakita ang webhook",
 }

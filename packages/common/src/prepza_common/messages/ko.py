@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "회사가 오늘 이메일로 보낼 수 있는 보고서 한도에 도달했습니다. 내일 다시 시도해 주세요.",
     "New interviews and AI features are paused for now. Please try again later.": "새 면접과 AI 기능이 지금은 일시 중지되었습니다. 잠시 후 다시 시도해 주세요.",
     "prepza is under maintenance. We'll be back soon.": "prepza는 점검 중입니다. 곧 돌아오겠습니다.",
+    "A company can have up to 10 API keys": "회사당 API 키는 최대 10개까지 만들 수 있습니다",
+    "A company can have up to 5 web hooks": "회사당 웹훅은 최대 5개까지 추가할 수 있습니다",
+    "Use an HTTPS address that's reachable from the internet": "인터넷에서 접근할 수 있는 HTTPS 주소를 사용하세요",
+    "Web hooks aren't set up yet": "웹훅이 아직 설정되지 않았습니다",
+    "API key not found": "API 키를 찾을 수 없습니다",
+    "Web hook not found": "웹훅을 찾을 수 없습니다",
 }

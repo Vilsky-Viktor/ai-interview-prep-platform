@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Je bedrijf heeft de daglimiet voor gemailde rapporten bereikt. Probeer het morgen opnieuw.",
     "New interviews and AI features are paused for now. Please try again later.": "Nieuwe interviews en AI-functies zijn voorlopig gepauzeerd. Probeer het later opnieuw.",
     "prepza is under maintenance. We'll be back soon.": "prepza is in onderhoud. We zijn snel terug.",
+    "A company can have up to 10 API keys": "Een bedrijf kan maximaal 10 API-sleutels hebben",
+    "A company can have up to 5 web hooks": "Een bedrijf kan maximaal 5 webhooks hebben",
+    "Use an HTTPS address that's reachable from the internet": "Gebruik een HTTPS-adres dat bereikbaar is vanaf internet",
+    "Web hooks aren't set up yet": "Webhooks zijn nog niet ingesteld",
+    "API key not found": "API-sleutel niet gevonden",
+    "Web hook not found": "Webhook niet gevonden",
 }

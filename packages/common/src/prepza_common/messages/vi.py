@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Công ty của bạn đã gửi đủ số báo cáo qua email cho phép trong ngày. Vui lòng thử lại vào ngày mai.",
     "New interviews and AI features are paused for now. Please try again later.": "Phỏng vấn mới và các tính năng AI đang tạm dừng. Vui lòng thử lại sau.",
     "prepza is under maintenance. We'll be back soon.": "prepza đang được bảo trì. Chúng tôi sẽ sớm trở lại.",
+    "A company can have up to 10 API keys": "Mỗi công ty có thể có tối đa 10 khóa API",
+    "A company can have up to 5 web hooks": "Mỗi công ty có thể có tối đa 5 webhook",
+    "Use an HTTPS address that's reachable from the internet": "Hãy dùng địa chỉ HTTPS có thể truy cập từ internet",
+    "Web hooks aren't set up yet": "Webhook chưa được thiết lập",
+    "API key not found": "Không tìm thấy khóa API",
+    "Web hook not found": "Không tìm thấy webhook",
 }

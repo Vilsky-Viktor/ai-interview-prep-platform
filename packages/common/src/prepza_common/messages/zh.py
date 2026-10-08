@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "你的公司今天通过邮件发送的报告已达上限。请明天再试。",
     "New interviews and AI features are paused for now. Please try again later.": "新面试和 AI 功能暂时已暂停，请稍后再试。",
     "prepza is under maintenance. We'll be back soon.": "prepza 正在维护中，我们很快回来。",
+    "A company can have up to 10 API keys": "每家公司最多可以有 10 个 API 密钥",
+    "A company can have up to 5 web hooks": "每家公司最多可以有 5 个 Webhook",
+    "Use an HTTPS address that's reachable from the internet": "请使用可从互联网访问的 HTTPS 地址",
+    "Web hooks aren't set up yet": "Webhook 尚未设置",
+    "API key not found": "未找到 API 密钥",
+    "Web hook not found": "未找到 Webhook",
 }

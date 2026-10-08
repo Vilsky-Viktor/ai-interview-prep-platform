@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Perusahaanmu sudah mencapai batas harian pengiriman laporan lewat email. Coba lagi besok.",
     "New interviews and AI features are paused for now. Please try again later.": "Wawancara baru dan fitur AI dijeda untuk sementara. Coba lagi nanti.",
     "prepza is under maintenance. We'll be back soon.": "prepza sedang dalam pemeliharaan. Kami akan segera kembali.",
+    "A company can have up to 10 API keys": "Satu perusahaan bisa memiliki maksimal 10 kunci API",
+    "A company can have up to 5 web hooks": "Satu perusahaan bisa memiliki maksimal 5 webhook",
+    "Use an HTTPS address that's reachable from the internet": "Gunakan alamat HTTPS yang bisa diakses dari internet",
+    "Web hooks aren't set up yet": "Webhook belum disiapkan",
+    "API key not found": "Kunci API tidak ditemukan",
+    "Web hook not found": "Webhook tidak ditemukan",
 }

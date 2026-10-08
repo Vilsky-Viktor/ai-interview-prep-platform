@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "החברה שלכם שלחה באימייל את המכסה היומית של דוחות. נסו שוב מחר.",
     "New interviews and AI features are paused for now. Please try again later.": "ראיונות חדשים ותכונות AI מושהים כרגע. נסו שוב מאוחר יותר.",
     "prepza is under maintenance. We'll be back soon.": "prepza בתחזוקה. נחזור בקרוב.",
+    "A company can have up to 10 API keys": "לחברה יכולים להיות עד 10 מפתחות API",
+    "A company can have up to 5 web hooks": "לחברה יכולים להיות עד 5 וובהוקים",
+    "Use an HTTPS address that's reachable from the internet": "השתמשו בכתובת HTTPS שאפשר לגשת אליה מהאינטרנט",
+    "Web hooks aren't set up yet": "הוובהוקים עדיין לא הוגדרו",
+    "API key not found": "מפתח ה-API לא נמצא",
+    "Web hook not found": "הוובהוק לא נמצא",
 }

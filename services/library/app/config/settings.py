@@ -14,6 +14,7 @@ class Settings(ServiceSettings):
     billing_url: str
     notifications_url: str
     ats_url: str
+    api_url: str
 
     @property
     def sqlalchemy_url(self) -> str:

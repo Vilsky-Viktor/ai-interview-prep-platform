@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "أرسلت شركتك الحد اليومي من التقارير بالبريد. حاول مرة أخرى غدًا.",
     "New interviews and AI features are paused for now. Please try again later.": "تم إيقاف المقابلات الجديدة وميزات الذكاء الاصطناعي مؤقتًا. حاول مرة أخرى لاحقًا.",
     "prepza is under maintenance. We'll be back soon.": "prepza قيد الصيانة. سنعود قريبًا.",
+    "A company can have up to 10 API keys": "يمكن أن يكون لدى الشركة 10 مفاتيح API كحد أقصى",
+    "A company can have up to 5 web hooks": "يمكن أن يكون لدى الشركة 5 ويب هوك كحد أقصى",
+    "Use an HTTPS address that's reachable from the internet": "استخدم عنوان HTTPS يمكن الوصول إليه من الإنترنت",
+    "Web hooks aren't set up yet": "لم يتم إعداد الويب هوك بعد",
+    "API key not found": "لم يتم العثور على مفتاح API",
+    "Web hook not found": "لم يتم العثور على الويب هوك",
 }

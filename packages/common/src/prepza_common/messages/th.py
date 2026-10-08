@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "บริษัทของคุณส่งรายงานทางอีเมลครบจำนวนสูงสุดต่อวันแล้ว โปรดลองอีกครั้งพรุ่งนี้",
     "New interviews and AI features are paused for now. Please try again later.": "การสัมภาษณ์ใหม่และฟีเจอร์ AI หยุดชั่วคราวอยู่ในขณะนี้ โปรดลองอีกครั้งในภายหลัง",
     "prepza is under maintenance. We'll be back soon.": "prepza กำลังปิดปรับปรุง เราจะกลับมาเร็ว ๆ นี้",
+    "A company can have up to 10 API keys": "บริษัทหนึ่งมีคีย์ API ได้สูงสุด 10 คีย์",
+    "A company can have up to 5 web hooks": "บริษัทหนึ่งมีเว็บฮุกได้สูงสุด 5 รายการ",
+    "Use an HTTPS address that's reachable from the internet": "ใช้ที่อยู่ HTTPS ที่เข้าถึงได้จากอินเทอร์เน็ต",
+    "Web hooks aren't set up yet": "ยังไม่ได้ตั้งค่าเว็บฮุก",
+    "API key not found": "ไม่พบคีย์ API",
+    "Web hook not found": "ไม่พบเว็บฮุก",
 }

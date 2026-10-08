@@ -20,6 +20,7 @@ x-firebase-env: &firebase-env
   BILLING_SERVICE_SECRET: ${SERVICE_SECRET}
   NOTIFICATIONS_SERVICE_SECRET: ${SERVICE_SECRET}
   ATS_SERVICE_SECRET: ${SERVICE_SECRET}
+  API_SERVICE_SECRET: ${SERVICE_SECRET}
   # Events go through the Pub/Sub emulator locally; Google Cloud uses the real service.
   GOOGLE_CLOUD_PROJECT: ${FIREBASE_PROJECT_ID}
   PUBSUB_EMULATOR_HOST: pubsub:8085
@@ -53,6 +54,7 @@ x-library-env: &library-env
   BILLING_URL: http://billing:8000
   NOTIFICATIONS_URL: http://notifications:8000
   ATS_URL: http://ats:8000
+  API_URL: http://api:8000
 
 x-rounds-env: &rounds-env
   <<: *firebase-env
@@ -169,6 +171,23 @@ x-ats-source: &ats-source
   - ./services/ats/app:/services/ats/app
   - ./services/ats/migrations:/services/ats/migrations
   - ./services/ats/alembic.ini:/services/ats/alembic.ini:ro
+  - ./packages/common/src:/packages/common/src
+
+x-api-env: &api-env
+  <<: *firebase-env
+  DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/api
+  REDIS_URL: redis://redis:6379
+  SERVICE_SECRET: ${SERVICE_SECRET}
+  COMPANIES_URL: http://companies:8000
+  # Encrypts web hooks' signing secrets (a Fernet key); empty, web hooks can't be added.
+  API_ENCRYPTION_KEY: ${API_ENCRYPTION_KEY:-}
+  # The site's address: links to candidates' results in what the API returns.
+  SITE_URL: ${SITE_URL:-http://localhost:8090}
+
+x-api-source: &api-source
+  - ./services/api/app:/services/api/app
+  - ./services/api/migrations:/services/api/migrations
+  - ./services/api/alembic.ini:/services/api/alembic.ini:ro
   - ./packages/common/src:/packages/common/src
 
 # Runs a service's migrations once, before its API starts, so replicas never race on them.
@@ -461,6 +480,29 @@ services:
     environment: *ats-env
     depends_on:
       ats-migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+
+  api-migrate:
+    <<: *migrate
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+      target: dev
+    volumes: *api-source
+    environment: *api-env
+
+  api:
+    <<: *service
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+      target: dev
+    volumes: *api-source
+    environment: *api-env
+    depends_on:
+      api-migrate:
         condition: service_completed_successfully
       redis:
         condition: service_healthy

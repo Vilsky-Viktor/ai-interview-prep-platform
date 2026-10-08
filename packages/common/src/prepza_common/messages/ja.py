@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "会社がメールで送れるレポートの 1 日の上限に達しました。明日もう一度お試しください。",
     "New interviews and AI features are paused for now. Please try again later.": "新しい面接とAI機能は現在一時停止中です。しばらくしてからもう一度お試しください。",
     "prepza is under maintenance. We'll be back soon.": "prepza はメンテナンス中です。まもなく再開します。",
+    "A company can have up to 10 API keys": "1 社あたりの API キーは最大 10 個です",
+    "A company can have up to 5 web hooks": "1 社あたりの Webhook は最大 5 個です",
+    "Use an HTTPS address that's reachable from the internet": "インターネットからアクセスできる HTTPS アドレスを使用してください",
+    "Web hooks aren't set up yet": "Webhook はまだ設定されていません",
+    "API key not found": "API キーが見つかりません",
+    "Web hook not found": "Webhook が見つかりません",
 }

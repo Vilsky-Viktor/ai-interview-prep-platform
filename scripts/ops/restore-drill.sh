@@ -44,4 +44,5 @@ echo "companies:   $(count companies companies) companies, $(count companies can
 echo "generation:  $(count generation generations) generations"
 echo "billing:     $(count billing purchases) purchases"
 echo "ats:         $(count ats ats_connections) ATS connections"
+echo "api:         $(count api api_keys) API keys"
 echo "Restore drill passed: the backup restores and its data reads back."

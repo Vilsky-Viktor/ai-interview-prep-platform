@@ -46,6 +46,7 @@ jobs:
           - services/notifications
           - services/billing
           - services/ats
+          - services/api
           - packages/common
     defaults:
       run:
@@ -98,6 +99,7 @@ jobs:
           - { name: billing, context: ., file: services/billing/Dockerfile }
           - { name: notifications, context: ., file: services/notifications/Dockerfile }
           - { name: ats, context: ., file: services/ats/Dockerfile }
+          - { name: api, context: ., file: services/api/Dockerfile }
           - { name: frontend, context: frontend, file: frontend/Dockerfile }
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0

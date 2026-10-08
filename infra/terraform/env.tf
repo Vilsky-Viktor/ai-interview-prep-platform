@@ -27,6 +27,8 @@ locals {
     }
     library = {
       INVOKER_AUDIENCE = local.run_url["library"]
+      # The api service (not common: the frontend's API_URL is the site itself).
+      API_URL = local.run_url["api"]
     }
     generation = {
       INVOKER_AUDIENCE       = local.run_url["generation"]
@@ -64,6 +66,10 @@ locals {
     }
     ats = {
       INVOKER_AUDIENCE = local.run_url["ats"]
+      SITE_URL         = "https://${var.domain}"
+    }
+    api = {
+      INVOKER_AUDIENCE = local.run_url["api"]
       SITE_URL         = "https://${var.domain}"
     }
   }

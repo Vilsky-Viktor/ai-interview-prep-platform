@@ -32,4 +32,10 @@ MESSAGES = {
     "Your company has emailed its daily limit of reports. Try again tomorrow.": "Dein Unternehmen hat sein Tageslimit für Berichte per E-Mail erreicht. Versuche es morgen erneut.",
     "New interviews and AI features are paused for now. Please try again later.": "Neue Interviews und KI-Funktionen sind gerade pausiert. Versuche es später erneut.",
     "prepza is under maintenance. We'll be back soon.": "prepza wird gerade gewartet. Wir sind bald zurück.",
+    "A company can have up to 10 API keys": "Ein Unternehmen kann bis zu 10 API-Schlüssel haben",
+    "A company can have up to 5 web hooks": "Ein Unternehmen kann bis zu 5 Webhooks haben",
+    "Use an HTTPS address that's reachable from the internet": "Verwende eine HTTPS-Adresse, die aus dem Internet erreichbar ist",
+    "Web hooks aren't set up yet": "Webhooks sind noch nicht eingerichtet",
+    "API key not found": "API-Schlüssel nicht gefunden",
+    "Web hook not found": "Webhook nicht gefunden",
 }
