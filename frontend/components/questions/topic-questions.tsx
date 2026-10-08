@@ -116,10 +116,9 @@ export function TopicQuestions({
             estimateSize={200}
             scrollClassName="max-h-[60vh] overflow-y-auto rounded-xl border"
             className="divide-y"
-            renderItem={(question, index) => (
+            renderItem={(question) => (
               <QuestionRow
                 question={question}
-                number={index + 1}
                 canRegenerate={Boolean(regeneratePath)}
                 wrongPath={wrongPath}
                 reportsPath={reportsPath}

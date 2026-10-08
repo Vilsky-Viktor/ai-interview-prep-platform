@@ -40,7 +40,7 @@ function Feedback({
   wrongAnswer: string
 }) {
   return (
-    <span className="col-start-2 flex flex-wrap items-center justify-between gap-3 text-sm whitespace-nowrap text-muted-foreground tabular-nums sm:col-start-auto sm:flex-col sm:items-end">
+    <span className="flex flex-wrap items-center justify-between gap-3 text-sm whitespace-nowrap text-muted-foreground tabular-nums sm:flex-col sm:items-end">
       <span className="flex items-center gap-4">
         <span className="flex items-center gap-1.5">
           <ThumbsUpIcon className="size-4" />
@@ -107,7 +107,7 @@ function QuestionCell({
 }
 
 const ROW =
-  "grid grid-cols-[1.5rem_minmax(0,1fr)] items-start gap-x-3 gap-y-3 p-4 sm:grid-cols-[2.5rem_1fr_auto] sm:gap-x-5 sm:p-5"
+  "grid grid-cols-[minmax(0,1fr)] items-start gap-x-3 gap-y-3 p-4 sm:grid-cols-[1fr_auto] sm:gap-x-5 sm:p-5"
 
 /** A topic's questions as their owner sees them (components/questions/question-row.tsx),
  * playing on a loop: a weak question's report opened, then the question re-generated. */
@@ -169,9 +169,6 @@ export function QualityDemo({
       <div className="min-h-[800px] sm:min-h-[436px]">
         <ul className="divide-y rounded-xl border">
           <li className={ROW}>
-            <span className="font-light text-muted-foreground tabular-nums">
-              1
-            </span>
             <QuestionCell question={good} />
             <Feedback
               counts={{ likes: 14, dislikes: 0, reports: 0 }}
@@ -185,9 +182,6 @@ export function QualityDemo({
           </li>
           <li>
             <div className={ROW}>
-              <span className="font-light text-muted-foreground tabular-nums">
-                2
-              </span>
               <QuestionCell
                 question={replaced ? better : weak}
                 dimmed={regenerating}
@@ -210,7 +204,7 @@ export function QualityDemo({
               />
             </div>
             {reportOpen && (
-              <div className="space-y-1 bg-muted/40 px-4 py-4 ps-[2.75rem] text-sm sm:py-5 sm:ps-[5rem] sm:pe-6">
+              <div className="space-y-1 bg-muted/40 p-4 text-sm sm:p-5 sm:pe-6">
                 <p className="flex flex-wrap items-baseline justify-between gap-2">
                   <span className="font-medium">{report.reason}</span>
                   <span className="text-muted-foreground">{report.date}</span>

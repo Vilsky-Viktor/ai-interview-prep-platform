@@ -27,7 +27,6 @@ import type { QuestionStats } from "@/types/feedback"
 
 export function QuestionRow({
   question,
-  number,
   canRegenerate,
   wrongPath,
   reportsPath,
@@ -36,7 +35,6 @@ export function QuestionRow({
   onRegenerate,
 }: {
   question: QuestionStats
-  number: number
   canRegenerate: boolean
   // Where to say the marked answer is wrong (owners and admins, superadmins).
   wrongPath?: string
@@ -64,11 +62,8 @@ export function QuestionRow({
   const canViewReports = Boolean(reportsPath)
 
   return (
-    // Columns: number, question, then feedback and actions; reports open in a row below.
-    <div className="grid grid-cols-[3.5rem_1fr_auto]">
-      <div className="px-5 py-5 font-light text-muted-foreground tabular-nums">
-        {number}
-      </div>
+    // Columns: the question, then feedback and actions; reports open in a row below.
+    <div className="grid grid-cols-[1fr_auto]">
       <div
         className={cn(
           "min-w-0 px-5 py-5 font-light",
@@ -154,7 +149,7 @@ export function QuestionRow({
         </span>
       </div>
       {canViewReports && showReports && (
-        <div className="col-span-3 bg-muted/40 py-5 ps-[4.75rem] pe-6">
+        <div className="col-span-2 bg-muted/40 py-5 ps-5 pe-6">
           <QuestionReports path={`${reportsPath}/${question.id}/reports`} />
         </div>
       )}
