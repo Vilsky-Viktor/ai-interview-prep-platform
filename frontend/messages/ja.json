@@ -211,7 +211,23 @@
       "approved": "承認済み",
       "declined": "却下"
     },
-    "requestChanged": "このリクエストは変更されました。もう一度確認してください。"
+    "requestChanged": "このリクエストは変更されました。もう一度確認してください。",
+    "emails": "メール",
+    "emailSearch": "メールアドレス",
+    "emailSearchAction": "検索",
+    "emailsIntro": "メールで依頼してきた人のために、メールアドレスを検索して、prepza がそのアドレスに送るメールを確認・停止できます。",
+    "account": "prepza アカウント",
+    "accountText": "{email} にはアカウントがあります。ここでの変更はあなたの操作として記録されます。",
+    "noAccount": "このアドレスを使っている prepza アカウントはありません。",
+    "turnOffAll": "任意のメールをすべてオフにする",
+    "companyEmails": "会社からのメール",
+    "companyEmailsText": "会社が prepza を通じてこのアドレスに送る招待とリマインダー。ここでの変更はあなたの操作として記録されます。",
+    "noCompanies": "このアドレスを招待した会社はありません。",
+    "companySending": "メールは送信されます",
+    "companyStopped": "すべてのメールを停止中",
+    "remindersStopped": "{count, plural, other {# 件の招待のリマインダーを停止中}}",
+    "stopEmails": "メールを停止",
+    "resumeEmails": "メールを再開"
   },
   "templates": {
     "title": "テンプレート",

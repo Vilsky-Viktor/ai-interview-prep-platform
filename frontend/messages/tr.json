@@ -211,7 +211,23 @@
       "approved": "onaylandı",
       "declined": "reddedildi"
     },
-    "requestChanged": "Bu istek değişti; yeniden kontrol edin."
+    "requestChanged": "Bu istek değişti; yeniden kontrol edin.",
+    "emails": "E-postalar",
+    "emailSearch": "E-posta adresi",
+    "emailSearchAction": "Bul",
+    "emailsIntro": "Bizden e-postayla isteyen biri için bir e-posta adresini bulun; prepza'nın bu adrese gönderdiği e-postaları görün ve durdurun.",
+    "account": "prepza hesabı",
+    "accountText": "{email} adresinin bir hesabı var. Burada yapılan değişiklikler sizin adınıza kaydedilir.",
+    "noAccount": "Bu adresi kullanan bir prepza hesabı yok.",
+    "turnOffAll": "Tüm isteğe bağlı e-postaları kapat",
+    "companyEmails": "Şirketlerden gelen e-postalar",
+    "companyEmailsText": "Şirketlerin prepza üzerinden bu adrese gönderdiği davetler ve hatırlatmalar. Burada yapılan değişiklikler sizin adınıza kaydedilir.",
+    "noCompanies": "Bu adresi davet eden bir şirket yok.",
+    "companySending": "E-postalar gönderiliyor",
+    "companyStopped": "Tüm e-postalar durduruldu",
+    "remindersStopped": "{count, plural, other {# davet için hatırlatmalar durduruldu}}",
+    "stopEmails": "E-postaları durdur",
+    "resumeEmails": "E-postaları sürdür"
   },
   "templates": {
     "title": "Şablonlar",

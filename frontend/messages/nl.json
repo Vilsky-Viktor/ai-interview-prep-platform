@@ -211,7 +211,23 @@
       "approved": "goedgekeurd",
       "declined": "afgewezen"
     },
-    "requestChanged": "Dit verzoek is gewijzigd; controleer het opnieuw."
+    "requestChanged": "Dit verzoek is gewijzigd; controleer het opnieuw.",
+    "emails": "E-mails",
+    "emailSearch": "E-mailadres",
+    "emailSearchAction": "Zoeken",
+    "emailsIntro": "Zoek een e-mailadres om de e-mails te zien en te stoppen die prepza ernaar stuurt, voor iemand die ons dat per e-mail vroeg.",
+    "account": "prepza-account",
+    "accountText": "{email} heeft een account. Wijzigingen hier worden als de jouwe vastgelegd.",
+    "noAccount": "Geen prepza-account gebruikt dit adres.",
+    "turnOffAll": "Alle optionele e-mails uitzetten",
+    "companyEmails": "E-mails van bedrijven",
+    "companyEmailsText": "Uitnodigingen en herinneringen die bedrijven via prepza naar dit adres sturen. Wijzigingen hier worden als de jouwe vastgelegd.",
+    "noCompanies": "Geen bedrijf heeft dit adres uitgenodigd.",
+    "companySending": "E-mails worden verstuurd",
+    "companyStopped": "Alle e-mails gestopt",
+    "remindersStopped": "{count, plural, one {Herinneringen gestopt voor # uitnodiging} other {Herinneringen gestopt voor # uitnodigingen}}",
+    "stopEmails": "E-mails stoppen",
+    "resumeEmails": "E-mails hervatten"
   },
   "templates": {
     "title": "Sjablonen",

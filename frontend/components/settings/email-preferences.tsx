@@ -8,26 +8,29 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { DIGEST_KINDS, OTHER_EMAILS } from "@/constants/emails"
 import { apiErrorMessage } from "@/lib/api"
 import { saveEmailPreferences } from "@/lib/emails"
-import type { EmailPreferences } from "@/types/emails"
+import type { EmailChanges, EmailPreferences } from "@/types/emails"
 
 // The size of the Slack kinds' and the interview settings' checkboxes.
 const BIG = "size-7 shrink-0 [&_[data-slot=checkbox-indicator]>svg]:size-5"
 
-/** Which emails the user gets beyond service emails; each change is saved at once. */
+/** Which emails the user gets beyond service emails; each change is saved at once, as the user's
+ * own unless `onSave` saves it another way (a superadmin's, in the admin zone). */
 export function EmailPreferencesSetting({
   initial,
+  onSave = (changes) => saveEmailPreferences(changes, "settings"),
 }: {
   initial: EmailPreferences
+  onSave?: (changes: EmailChanges) => Promise<EmailPreferences>
 }) {
   const t = useTranslations("settings.emails")
   const [saved, setSaved] = useState(initial)
   const [saving, setSaving] = useState(false)
 
-  async function save(changes: Partial<EmailPreferences>) {
+  async function save(changes: EmailChanges) {
     setSaving(true)
 
     try {
-      setSaved(await saveEmailPreferences(changes, "settings"))
+      setSaved(await onSave(changes))
     } catch (error) {
       toast.error(apiErrorMessage(error, t("failed")))
     } finally {

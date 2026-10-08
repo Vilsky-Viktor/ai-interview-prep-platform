@@ -211,7 +211,23 @@
       "approved": "freigegeben",
       "declined": "abgelehnt"
     },
-    "requestChanged": "Diese Anfrage hat sich geändert; prüfe sie erneut."
+    "requestChanged": "Diese Anfrage hat sich geändert; prüfe sie erneut.",
+    "emails": "E-Mails",
+    "emailSearch": "E-Mail-Adresse",
+    "emailSearchAction": "Suchen",
+    "emailsIntro": "Suche eine E-Mail-Adresse, um die E-Mails zu sehen und zu stoppen, die prepza an sie schickt – für jemanden, der uns per E-Mail darum gebeten hat.",
+    "account": "prepza-Konto",
+    "accountText": "{email} hat ein Konto. Änderungen hier werden als deine protokolliert.",
+    "noAccount": "Kein prepza-Konto nutzt diese Adresse.",
+    "turnOffAll": "Alle optionalen E-Mails ausschalten",
+    "companyEmails": "E-Mails von Unternehmen",
+    "companyEmailsText": "Einladungen und Erinnerungen, die Unternehmen über prepza an diese Adresse schicken. Änderungen hier werden als deine protokolliert.",
+    "noCompanies": "Kein Unternehmen hat diese Adresse eingeladen.",
+    "companySending": "E-Mails werden gesendet",
+    "companyStopped": "Alle E-Mails gestoppt",
+    "remindersStopped": "{count, plural, one {Erinnerungen für # Einladung gestoppt} other {Erinnerungen für # Einladungen gestoppt}}",
+    "stopEmails": "E-Mails stoppen",
+    "resumeEmails": "E-Mails wieder senden"
   },
   "templates": {
     "title": "Vorlagen",

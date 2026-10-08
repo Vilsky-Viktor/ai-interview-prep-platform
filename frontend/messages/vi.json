@@ -211,7 +211,23 @@
       "approved": "đã duyệt",
       "declined": "đã từ chối"
     },
-    "requestChanged": "Yêu cầu này đã thay đổi; hãy kiểm tra lại."
+    "requestChanged": "Yêu cầu này đã thay đổi; hãy kiểm tra lại.",
+    "emails": "Email",
+    "emailSearch": "Địa chỉ email",
+    "emailSearchAction": "Tìm",
+    "emailsIntro": "Tìm một địa chỉ email để xem và dừng các email prepza gửi đến địa chỉ đó, cho người đã yêu cầu chúng tôi qua email.",
+    "account": "Tài khoản prepza",
+    "accountText": "{email} có tài khoản. Các thay đổi ở đây được ghi lại dưới tên bạn.",
+    "noAccount": "Không có tài khoản prepza nào dùng địa chỉ này.",
+    "turnOffAll": "Tắt mọi email không bắt buộc",
+    "companyEmails": "Email từ các công ty",
+    "companyEmailsText": "Lời mời và lời nhắc mà các công ty gửi đến địa chỉ này qua prepza. Các thay đổi ở đây được ghi lại dưới tên bạn.",
+    "noCompanies": "Chưa có công ty nào mời địa chỉ này.",
+    "companySending": "Email vẫn được gửi",
+    "companyStopped": "Đã dừng mọi email",
+    "remindersStopped": "{count, plural, other {Đã dừng lời nhắc cho # lời mời}}",
+    "stopEmails": "Dừng email",
+    "resumeEmails": "Gửi lại email"
   },
   "templates": {
     "title": "Mẫu",

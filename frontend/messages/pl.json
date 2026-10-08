@@ -211,7 +211,23 @@
       "approved": "zatwierdzono",
       "declined": "odrzucono"
     },
-    "requestChanged": "To zgłoszenie się zmieniło; sprawdź je ponownie."
+    "requestChanged": "To zgłoszenie się zmieniło; sprawdź je ponownie.",
+    "emails": "E-maile",
+    "emailSearch": "Adres e-mail",
+    "emailSearchAction": "Znajdź",
+    "emailsIntro": "Znajdź adres e-mail, by zobaczyć i zatrzymać e-maile, które prepza na niego wysyła – dla osoby, która poprosiła nas o to e-mailem.",
+    "account": "Konto prepza",
+    "accountText": "{email} ma konto. Zmiany wprowadzone tutaj są zapisywane jako Twoje.",
+    "noAccount": "Żadne konto prepza nie używa tego adresu.",
+    "turnOffAll": "Wyłącz wszystkie opcjonalne e-maile",
+    "companyEmails": "E-maile od firm",
+    "companyEmailsText": "Zaproszenia i przypomnienia, które firmy wysyłają na ten adres przez prepza. Zmiany wprowadzone tutaj są zapisywane jako Twoje.",
+    "noCompanies": "Żadna firma nie zaprosiła tego adresu.",
+    "companySending": "E-maile są wysyłane",
+    "companyStopped": "Wszystkie e-maile zatrzymane",
+    "remindersStopped": "{count, plural, other {Zaproszenia z zatrzymanymi przypomnieniami: #}}",
+    "stopEmails": "Zatrzymaj e-maile",
+    "resumeEmails": "Wznów e-maile"
   },
   "templates": {
     "title": "Szablony",

@@ -211,7 +211,23 @@
       "approved": "approuvée",
       "declined": "refusée"
     },
-    "requestChanged": "Cette demande a changé ; vérifiez-la à nouveau."
+    "requestChanged": "Cette demande a changé ; vérifiez-la à nouveau.",
+    "emails": "E-mails",
+    "emailSearch": "Adresse e-mail",
+    "emailSearchAction": "Rechercher",
+    "emailsIntro": "Recherchez une adresse e-mail pour voir et arrêter les e-mails que prepza lui envoie, pour quelqu'un qui nous l'a demandé par e-mail.",
+    "account": "Compte prepza",
+    "accountText": "{email} a un compte. Les modifications faites ici sont enregistrées à votre nom.",
+    "noAccount": "Aucun compte prepza n'utilise cette adresse.",
+    "turnOffAll": "Désactiver tous les e-mails facultatifs",
+    "companyEmails": "E-mails des entreprises",
+    "companyEmailsText": "Les invitations et rappels que les entreprises envoient à cette adresse via prepza. Les modifications faites ici sont enregistrées à votre nom.",
+    "noCompanies": "Aucune entreprise n'a invité cette adresse.",
+    "companySending": "Les e-mails sont envoyés",
+    "companyStopped": "Tous les e-mails arrêtés",
+    "remindersStopped": "{count, plural, one {Rappels arrêtés pour # invitation} other {Rappels arrêtés pour # invitations}}",
+    "stopEmails": "Arrêter les e-mails",
+    "resumeEmails": "Reprendre les e-mails"
   },
   "templates": {
     "title": "Modèles",

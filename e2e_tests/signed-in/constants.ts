@@ -31,6 +31,7 @@ export const WARM_UP_PATHS = [
   "/superadmin/pass-rates",
   "/superadmin/verification",
   "/superadmin/controls",
+  "/superadmin/emails",
   "/settings",
 ]
 

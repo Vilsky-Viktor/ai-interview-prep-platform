@@ -211,7 +211,23 @@
       "approved": "aprobada",
       "declined": "rechazada"
     },
-    "requestChanged": "Esta solicitud ha cambiado; revísala de nuevo."
+    "requestChanged": "Esta solicitud ha cambiado; revísala de nuevo.",
+    "emails": "Correos",
+    "emailSearch": "Dirección de correo",
+    "emailSearchAction": "Buscar",
+    "emailsIntro": "Busca una dirección de correo para ver y detener los correos que prepza le envía, para alguien que nos lo pidió por correo.",
+    "account": "Cuenta de prepza",
+    "accountText": "{email} tiene una cuenta. Los cambios que hagas aquí quedan registrados como tuyos.",
+    "noAccount": "Ninguna cuenta de prepza usa esta dirección.",
+    "turnOffAll": "Desactivar todos los correos opcionales",
+    "companyEmails": "Correos de empresas",
+    "companyEmailsText": "Invitaciones y recordatorios que las empresas envían a esta dirección a través de prepza. Los cambios que hagas aquí quedan registrados como tuyos.",
+    "noCompanies": "Ninguna empresa ha invitado a esta dirección.",
+    "companySending": "Los correos se envían",
+    "companyStopped": "Todos los correos detenidos",
+    "remindersStopped": "{count, plural, one {Recordatorios detenidos para # invitación} other {Recordatorios detenidos para # invitaciones}}",
+    "stopEmails": "Detener correos",
+    "resumeEmails": "Reanudar correos"
   },
   "templates": {
     "title": "Plantillas",

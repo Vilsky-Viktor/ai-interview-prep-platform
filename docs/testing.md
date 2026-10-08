@@ -101,6 +101,7 @@ Playwright tests of the signed-in pages, in the same Docker image, against the r
 - the team and a viewer,
 - verification,
 - the admin zone's pass rates, stats, pause and maintenance mode (turned off again afterwards),
+- the admin zone's emails tab: finding an address in another case, turning off all its account's optional emails (still off after a reload), stopping and resuming one inviting company's emails, and "not found" for anyone else,
 - the candidates' PDF report,
 - a practice result leading to a company's test,
 - an interview's settings tab,

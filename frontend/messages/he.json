@@ -211,7 +211,23 @@
       "approved": "אושרה",
       "declined": "נדחתה"
     },
-    "requestChanged": "הבקשה הזו השתנתה; בדקו אותה שוב."
+    "requestChanged": "הבקשה הזו השתנתה; בדקו אותה שוב.",
+    "emails": "אימיילים",
+    "emailSearch": "כתובת אימייל",
+    "emailSearchAction": "חיפוש",
+    "emailsIntro": "חפשו כתובת אימייל כדי לראות ולעצור את האימיילים ש-prepza שולחת אליה, עבור מי שביקש זאת מאיתנו באימייל.",
+    "account": "חשבון prepza",
+    "accountText": "ל-{email} יש חשבון. שינויים שנעשים כאן נרשמים על שמכם.",
+    "noAccount": "אף חשבון prepza לא משתמש בכתובת הזו.",
+    "turnOffAll": "כיבוי כל האימיילים האופציונליים",
+    "companyEmails": "אימיילים מחברות",
+    "companyEmailsText": "הזמנות ותזכורות שחברות שולחות לכתובת הזו דרך prepza. שינויים שנעשים כאן נרשמים על שמכם.",
+    "noCompanies": "אף חברה לא הזמינה את הכתובת הזו.",
+    "companySending": "האימיילים נשלחים",
+    "companyStopped": "כל האימיילים הופסקו",
+    "remindersStopped": "{count, plural, one {התזכורות הופסקו להזמנה אחת} other {התזכורות הופסקו ל-# הזמנות}}",
+    "stopEmails": "עצירת אימיילים",
+    "resumeEmails": "חידוש אימיילים"
   },
   "templates": {
     "title": "תבניות",

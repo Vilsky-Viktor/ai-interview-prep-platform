@@ -125,7 +125,8 @@ export interface paths {
      * Delete User
      * @description Library, deleting an account: the user's own notifications go, and companies'
      *     notifications about them as a candidate (their email and grade); the Slack channels they
-     *     connected stay with their companies, without their id.
+     *     connected stay with their companies, without their id. The log of digests and reminders
+     *     sent to them goes too.
      */
     delete: operations["delete_user_internal_users__user_id__delete"]
     options?: never
@@ -260,6 +261,89 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/candidate-opt-outs/lookup": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Look Up
+     * @description The companies that invited the address or whose emails it stopped, by name.
+     */
+    post: operations["look_up_superadmin_candidate_opt_outs_lookup_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/candidate-opt-outs": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Change
+     * @description Stops a company's emails to the address (only a company that invited it), or lets them
+     *     through again; answers with the companies as the lookup does.
+     */
+    put: operations["change_superadmin_candidate_opt_outs_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/schedules/digest": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Digest
+     * @description Every 10 minutes for an hour each morning, from Cloud Scheduler: the activity digest. Each
+     *     run goes on where the last one stopped; nobody gets it twice in a day.
+     */
+    post: operations["digest_internal_schedules_digest_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/schedules/reminders": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Reminders
+     * @description Every 10 minutes for an hour each morning, from Cloud Scheduler: reminders, each kind
+     *     at most once a week to a user. The sent log's old rows go too.
+     */
+    post: operations["reminders_internal_schedules_reminders_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/health": {
     parameters: {
       query?: never
@@ -302,6 +386,38 @@ export interface paths {
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
+    /**
+     * CandidateOptOutIn
+     * @description A superadmin stops a company's emails to the address, or lets them through again.
+     */
+    CandidateOptOutIn: {
+      /** Email */
+      email: string
+      /** Company Id */
+      company_id: string
+      /** Stopped */
+      stopped: boolean
+    }
+    /** CandidateOptOutsOut */
+    CandidateOptOutsOut: {
+      /** Companies */
+      companies: components["schemas"]["CompanyOptOutOut"][]
+    }
+    /**
+     * CompanyOptOutOut
+     * @description A company that invited an address, or whose emails it stopped: whether every email from
+     *     the company to it is stopped, and for how many invites only the reminders are.
+     */
+    CompanyOptOutOut: {
+      /** Company Id */
+      company_id: string
+      /** Name */
+      name: string
+      /** Stopped */
+      stopped: boolean
+      /** Stopped Reminders */
+      stopped_reminders: number
+    }
     /** FeedOut */
     FeedOut: {
       /** Items */
@@ -422,8 +538,8 @@ export interface components {
       | "company"
     /**
      * UserEmailIn
-     * @description The account's email, sent in the body of library's calls to delete or export a user's
-     *     data, so request logs don't record it.
+     * @description An email address sent in the body, so request logs don't record it: the account's, in
+     *     library's calls to delete or export a user's data, or the one a superadmin looks up.
      */
     UserEmailIn: {
       /** Email */
@@ -838,6 +954,108 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
         }
+      }
+    }
+  }
+  look_up_superadmin_candidate_opt_outs_lookup_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CandidateOptOutsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  change_superadmin_candidate_opt_outs_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CandidateOptOutIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CandidateOptOutsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  digest_internal_schedules_digest_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  reminders_internal_schedules_reminders_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
     }
   }

@@ -211,7 +211,23 @@
       "approved": "approved",
       "declined": "declined"
     },
-    "requestChanged": "This request changed; check it again."
+    "requestChanged": "This request changed; check it again.",
+    "emails": "Emails",
+    "emailSearch": "Email address",
+    "emailSearchAction": "Find",
+    "emailsIntro": "Find an email address to see and stop the emails prepza sends to it, for someone who asked us by email.",
+    "account": "prepza account",
+    "accountText": "{email} has an account. Changes made here are logged as yours.",
+    "noAccount": "No prepza account uses this address.",
+    "turnOffAll": "Turn off all optional emails",
+    "companyEmails": "Emails from companies",
+    "companyEmailsText": "Invites and reminders that companies send to this address through prepza. Changes made here are logged as yours.",
+    "noCompanies": "No company has invited this address.",
+    "companySending": "Emails are sent",
+    "companyStopped": "All emails stopped",
+    "remindersStopped": "{count, plural, one {Reminders stopped for # invite} other {Reminders stopped for # invites}}",
+    "stopEmails": "Stop emails",
+    "resumeEmails": "Resume emails"
   },
   "templates": {
     "title": "Templates",

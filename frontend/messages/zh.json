@@ -211,7 +211,23 @@
       "approved": "已批准",
       "declined": "已拒绝"
     },
-    "requestChanged": "此申请已变更，请重新检查。"
+    "requestChanged": "此申请已变更，请重新检查。",
+    "emails": "邮件",
+    "emailSearch": "邮箱地址",
+    "emailSearchAction": "查找",
+    "emailsIntro": "为通过邮件向我们提出请求的人查找邮箱地址，查看并停止 prepza 发往该地址的邮件。",
+    "account": "prepza 账号",
+    "accountText": "{email} 有账号。在这里做的更改会以你的名义记录。",
+    "noAccount": "没有 prepza 账号使用这个地址。",
+    "turnOffAll": "关闭所有可选邮件",
+    "companyEmails": "来自公司的邮件",
+    "companyEmailsText": "公司通过 prepza 发往该地址的邀请和提醒。在这里做的更改会以你的名义记录。",
+    "noCompanies": "没有公司邀请过这个地址。",
+    "companySending": "邮件正常发送",
+    "companyStopped": "已停止所有邮件",
+    "remindersStopped": "{count, plural, other {已停止 # 个邀请的提醒}}",
+    "stopEmails": "停止邮件",
+    "resumeEmails": "恢复邮件"
   },
   "templates": {
     "title": "模板",

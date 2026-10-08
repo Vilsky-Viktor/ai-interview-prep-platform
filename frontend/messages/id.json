@@ -211,7 +211,23 @@
       "approved": "disetujui",
       "declined": "ditolak"
     },
-    "requestChanged": "Permintaan ini berubah; periksa lagi."
+    "requestChanged": "Permintaan ini berubah; periksa lagi.",
+    "emails": "Email",
+    "emailSearch": "Alamat email",
+    "emailSearchAction": "Cari",
+    "emailsIntro": "Cari alamat email untuk melihat dan menghentikan email yang dikirim prepza ke alamat itu, untuk orang yang memintanya kepada kami lewat email.",
+    "account": "Akun prepza",
+    "accountText": "{email} punya akun. Perubahan di sini dicatat atas namamu.",
+    "noAccount": "Tidak ada akun prepza yang memakai alamat ini.",
+    "turnOffAll": "Matikan semua email opsional",
+    "companyEmails": "Email dari perusahaan",
+    "companyEmailsText": "Undangan dan pengingat yang dikirim perusahaan ke alamat ini lewat prepza. Perubahan di sini dicatat atas namamu.",
+    "noCompanies": "Belum ada perusahaan yang mengundang alamat ini.",
+    "companySending": "Email dikirim",
+    "companyStopped": "Semua email dihentikan",
+    "remindersStopped": "{count, plural, other {Pengingat dihentikan untuk # undangan}}",
+    "stopEmails": "Hentikan email",
+    "resumeEmails": "Lanjutkan email"
   },
   "templates": {
     "title": "Templat",

@@ -192,6 +192,47 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/emails/lookup": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Look Up
+     * @description The account signed in with the address, whatever its case, with its email settings.
+     */
+    post: operations["look_up_superadmin_emails_lookup_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/emails/{user_id}/preferences": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Change Preferences
+     * @description Changes some of the user's settings, each change logged with the admin source and the
+     *     superadmin's id. Safe to repeat: a setting already as asked logs nothing.
+     */
+    put: operations["change_preferences_superadmin_emails__user_id__preferences_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/superadmin/quality/flagged": {
     parameters: {
       query?: never
@@ -645,6 +686,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/users/email-recipients": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Email Recipients
+     * @description Notifications, for its emails to many users at once (the activity digest, reminders): each
+     *     user's address, interface language and preferences; users who are gone are left out.
+     */
+    post: operations["email_recipients_internal_users_email_recipients_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/schedules/outbox": {
     parameters: {
       query?: never
@@ -944,6 +1006,16 @@ export interface paths {
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
+    /**
+     * AdminEmailChangesIn
+     * @description A superadmin's changes to a user's settings; the rest stay as they are.
+     */
+    AdminEmailChangesIn: {
+      /** Changes */
+      changes: {
+        [key: string]: boolean
+      }
+    }
     /** CreatedOut */
     CreatedOut: {
       /**
@@ -951,6 +1023,21 @@ export interface components {
        * Format: uuid
        */
       id: string
+    }
+    /** EmailAccountOut */
+    EmailAccountOut: {
+      /** User Id */
+      user_id: string
+      /** Email */
+      email: string
+      preferences: components["schemas"]["EmailPreferencesOut"]
+    }
+    /**
+     * EmailLookupOut
+     * @description The account with the address a superadmin looked up, or none.
+     */
+    EmailLookupOut: {
+      account: components["schemas"]["EmailAccountOut"] | null
     }
     /**
      * EmailPreferencesIn
@@ -1277,6 +1364,26 @@ export interface components {
        */
       reports: number
     }
+    /** RecipientOut */
+    RecipientOut: {
+      /** User Id */
+      user_id: string
+      /** Email */
+      email: string
+      /** Language */
+      language: string
+      preferences: components["schemas"]["EmailPreferencesOut"]
+    }
+    /** RecipientsIn */
+    RecipientsIn: {
+      /** User Ids */
+      user_ids: string[]
+    }
+    /** RecipientsOut */
+    RecipientsOut: {
+      /** Recipients */
+      recipients: components["schemas"]["RecipientOut"][]
+    }
     /**
      * ReplacedQuestionOut
      * @description A question's old content, kept when it was replaced.
@@ -1311,6 +1418,10 @@ export interface components {
        * Format: date-time
        */
       at: string
+      /** New Text */
+      new_text: string
+      /** New Options */
+      new_options: components["schemas"]["OptionIn"][]
     }
     /** ReportNote */
     ReportNote: {
@@ -1418,10 +1529,6 @@ export interface components {
       /** Level */
       level: string
       /** Language */
-      /** New Text */
-      new_text: string
-      /** New Options */
-      new_options: components["schemas"]["OptionIn"][]
       language: string
       /** Topics */
       topics: components["schemas"]["TopicOut"][]
@@ -1629,6 +1736,15 @@ export interface components {
     UnsubscribeIn: {
       /** Settings */
       settings: components["schemas"]["EmailSetting"][]
+    }
+    /**
+     * UserEmailIn
+     * @description An email address sent in the body, so request logs don't record it: the account's, in
+     *     library's calls to delete or export a user's data, or the one a superadmin looks up.
+     */
+    UserEmailIn: {
+      /** Email */
+      email: string
     }
     /** ValidationError */
     ValidationError: {
@@ -2039,6 +2155,74 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  look_up_superadmin_emails_lookup_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["EmailLookupOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  change_preferences_superadmin_emails__user_id__preferences_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AdminEmailChangesIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["EmailPreferencesOut"]
+        }
       }
       /** @description Validation Error */
       422: {
@@ -2870,6 +3054,39 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["EmailPreferencesOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  email_recipients_internal_users_email_recipients_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["RecipientsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["RecipientsOut"]
         }
       }
       /** @description Validation Error */

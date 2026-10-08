@@ -211,7 +211,23 @@
       "approved": "inaprubahan",
       "declined": "tinanggihan"
     },
-    "requestChanged": "Nagbago ang request na ito; suriin ulit."
+    "requestChanged": "Nagbago ang request na ito; suriin ulit.",
+    "emails": "Mga email",
+    "emailSearch": "Email address",
+    "emailSearchAction": "Hanapin",
+    "emailsIntro": "Maghanap ng email address para makita at mapahinto ang mga email na ipinapadala ng prepza rito, para sa taong humiling nito sa amin sa email.",
+    "account": "prepza account",
+    "accountText": "May account ang {email}. Naitatala bilang iyo ang mga pagbabagong ginawa rito.",
+    "noAccount": "Walang prepza account na gumagamit ng address na ito.",
+    "turnOffAll": "I-off ang lahat ng opsyonal na email",
+    "companyEmails": "Mga email mula sa mga kumpanya",
+    "companyEmailsText": "Mga imbitasyon at paalala na ipinapadala ng mga kumpanya sa address na ito sa pamamagitan ng prepza. Naitatala bilang iyo ang mga pagbabagong ginawa rito.",
+    "noCompanies": "Walang kumpanyang nag-imbita sa address na ito.",
+    "companySending": "Ipinapadala ang mga email",
+    "companyStopped": "Nakahinto ang lahat ng email",
+    "remindersStopped": "{count, plural, one {Nakahinto ang mga paalala para sa # imbitasyon} other {Nakahinto ang mga paalala para sa # imbitasyon}}",
+    "stopEmails": "Ihinto ang mga email",
+    "resumeEmails": "Ituloy ang mga email"
   },
   "templates": {
     "title": "Mga template",

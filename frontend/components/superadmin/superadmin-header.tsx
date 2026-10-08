@@ -18,6 +18,7 @@ export function SuperadminHeader({
     | "verification"
     | "stats"
     | "controls"
+    | "emails"
   action?: ReactNode
 }) {
   const t = useTranslations("superadmin")
@@ -59,6 +60,7 @@ export function SuperadminHeader({
             href: "/superadmin/controls",
             label: t("controls"),
           },
+          { id: "emails", href: "/superadmin/emails", label: t("emails") },
         ]}
         current={current}
       />

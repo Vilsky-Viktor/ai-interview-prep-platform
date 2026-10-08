@@ -6,7 +6,7 @@ The admin zone is for superadmins: prepza's own team, not a company's admins.
 - Only they see the Admin zone in the account menu.
 - Everyone else gets "not found" from its pages and routes.
 
-It has seven tabs, in this order: [Templates](#templates), [Flagged](#flagged-and-replaced), [Replaced](#flagged-and-replaced), [Pass rates](#pass-rates), [Verification](#verification), [Stats](#stats) and [Controls](#controls).
+It has eight tabs, in this order: [Templates](#templates), [Flagged](#flagged-and-replaced), [Replaced](#flagged-and-replaced), [Pass rates](#pass-rates), [Verification](#verification), [Stats](#stats), [Controls](#controls) and [Emails](#emails).
 
 ## Templates
 
@@ -20,6 +20,7 @@ Ready-made interviews by role (see [Templates and practice](templates-and-practi
 
 - **Flagged:** the flagged questions, each to fix now or dismiss. A superadmin's "Fix now" isn't counted towards the verifier's daily limit.
 - **Replaced:** the questions the verifier replaced.
+- Each replaced question has a "replaced with" button showing the question that took its place: the next kept version, or the question as it is now.
 
 See [Question quality](../generation.md#question-quality) for how questions get flagged.
 
@@ -115,3 +116,27 @@ Billing has no Redis and isn't switched; its only public route is the price cata
 Turning it on first asks to confirm, showing the number of candidates in an interview right now (a question shown in the last 15 minutes), who may lose time.
 
 It's one Redis key (`maintenance:on`). With Redis down, it counts as off. Each service reads it at most every 5 seconds, so a change reaches every instance within 5 seconds. Who turned it goes to the logs.
+
+## Emails
+
+Stops the emails prepza sends to an address, for someone who asked by email rather than with a link (see [Unsubscribing](notifications.md#unsubscribing)).
+
+- **Find:** an email address, whatever its case. It's sent in the request body, never in a page or API address, which logs record.
+- **prepza account:** whether an account signs in with that address (library asks Firebase). If so, its email settings, as Settings → Emails shows them, each changed at once, and "Turn off all optional emails". Service emails can't be turned off.
+- **Emails from companies:** the companies that invited the address (companies' invites) or whose emails it stopped, by name, each "Emails are sent", "All emails stopped" or "Reminders stopped for N invites":
+  - "Stop emails" stops every email from that company to the address, only for a company that invited it.
+  - "Resume emails" lets them through again, reminders included (the person changed their mind).
+
+Both are safe to repeat. A company that's gone isn't listed.
+
+```
+POST /library/superadmin/emails/lookup                     {email}
+PUT  /library/superadmin/emails/{user_id}/preferences      {changes}
+POST /notifications/superadmin/candidate-opt-outs/lookup   {email}
+PUT  /notifications/superadmin/candidate-opt-outs          {email, company_id, stopped}
+```
+
+What's logged:
+
+- A settings change goes to the consent log (`email_consents`) with the source `admin` and the superadmin's id (`changed_by`), and to library's logs.
+- Stopping or resuming a company's emails goes to notifications' logs with the superadmin's id, the company and the address's hash, never the address.

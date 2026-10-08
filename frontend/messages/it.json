@@ -211,7 +211,23 @@
       "approved": "approvata",
       "declined": "rifiutata"
     },
-    "requestChanged": "Questa richiesta è cambiata; controllala di nuovo."
+    "requestChanged": "Questa richiesta è cambiata; controllala di nuovo.",
+    "emails": "Email",
+    "emailSearch": "Indirizzo email",
+    "emailSearchAction": "Cerca",
+    "emailsIntro": "Cerca un indirizzo email per vedere e fermare le email che prepza gli invia, per chi ce lo ha chiesto via email.",
+    "account": "Account prepza",
+    "accountText": "{email} ha un account. Le modifiche fatte qui sono registrate a tuo nome.",
+    "noAccount": "Nessun account prepza usa questo indirizzo.",
+    "turnOffAll": "Disattiva tutte le email facoltative",
+    "companyEmails": "Email delle aziende",
+    "companyEmailsText": "Inviti e promemoria che le aziende inviano a questo indirizzo tramite prepza. Le modifiche fatte qui sono registrate a tuo nome.",
+    "noCompanies": "Nessuna azienda ha invitato questo indirizzo.",
+    "companySending": "Le email vengono inviate",
+    "companyStopped": "Tutte le email fermate",
+    "remindersStopped": "{count, plural, one {Promemoria fermati per # invito} other {Promemoria fermati per # inviti}}",
+    "stopEmails": "Ferma le email",
+    "resumeEmails": "Riprendi le email"
   },
   "templates": {
     "title": "Modelli",

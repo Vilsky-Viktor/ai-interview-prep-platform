@@ -211,7 +211,23 @@
       "approved": "aprovada",
       "declined": "recusada"
     },
-    "requestChanged": "Esta solicitação mudou; verifique-a de novo."
+    "requestChanged": "Esta solicitação mudou; verifique-a de novo.",
+    "emails": "E-mails",
+    "emailSearch": "Endereço de e-mail",
+    "emailSearchAction": "Buscar",
+    "emailsIntro": "Busque um endereço de e-mail para ver e interromper os e-mails que a prepza envia a ele, para quem nos pediu isso por e-mail.",
+    "account": "Conta prepza",
+    "accountText": "{email} tem uma conta. As alterações feitas aqui ficam registradas em seu nome.",
+    "noAccount": "Nenhuma conta prepza usa este endereço.",
+    "turnOffAll": "Desativar todos os e-mails opcionais",
+    "companyEmails": "E-mails de empresas",
+    "companyEmailsText": "Convites e lembretes que as empresas enviam a este endereço pela prepza. As alterações feitas aqui ficam registradas em seu nome.",
+    "noCompanies": "Nenhuma empresa convidou este endereço.",
+    "companySending": "Os e-mails são enviados",
+    "companyStopped": "Todos os e-mails interrompidos",
+    "remindersStopped": "{count, plural, one {Lembretes interrompidos para # convite} other {Lembretes interrompidos para # convites}}",
+    "stopEmails": "Interromper e-mails",
+    "resumeEmails": "Retomar e-mails"
   },
   "templates": {
     "title": "Modelos",

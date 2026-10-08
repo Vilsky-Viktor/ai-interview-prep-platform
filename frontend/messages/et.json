@@ -211,7 +211,23 @@
       "approved": "kinnitatud",
       "declined": "tagasi lükatud"
     },
-    "requestChanged": "See taotlus muutus; vaata see uuesti üle."
+    "requestChanged": "See taotlus muutus; vaata see uuesti üle.",
+    "emails": "E-kirjad",
+    "emailSearch": "E-posti aadress",
+    "emailSearchAction": "Otsi",
+    "emailsIntro": "Otsi e-posti aadressi, et näha ja peatada e-kirju, mida prepza sellele saadab, kui keegi on meilt seda e-kirjaga palunud.",
+    "account": "prepza konto",
+    "accountText": "Aadressil {email} on konto. Siin tehtud muudatused logitakse sinu nimele.",
+    "noAccount": "Ükski prepza konto ei kasuta seda aadressi.",
+    "turnOffAll": "Lülita kõik valikulised e-kirjad välja",
+    "companyEmails": "E-kirjad ettevõtetelt",
+    "companyEmailsText": "Kutsed ja meeldetuletused, mida ettevõtted saadavad sellele aadressile prepza kaudu. Siin tehtud muudatused logitakse sinu nimele.",
+    "noCompanies": "Ükski ettevõte pole seda aadressi kutsunud.",
+    "companySending": "E-kirjad lähevad välja",
+    "companyStopped": "Kõik e-kirjad peatatud",
+    "remindersStopped": "{count, plural, one {Meeldetuletused peatatud # kutse jaoks} other {Meeldetuletused peatatud # kutse jaoks}}",
+    "stopEmails": "Peata e-kirjad",
+    "resumeEmails": "Jätka e-kirju"
   },
   "templates": {
     "title": "Mallid",
