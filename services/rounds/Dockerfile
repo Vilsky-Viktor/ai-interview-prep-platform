@@ -1,5 +1,5 @@
 # Built from the repo root (see docker-compose.yml), so the shared package can be copied in.
-FROM python:3.13-alpine@sha256:79e7a9b9ff1cbceff819f856fb374477792a5967759d94df266de7b7b4120e6f AS base
+FROM python:3.14-alpine@sha256:f6a589d43c42b9e7f7dc67a12d37132491f362859a5d750607710cc56da3bc72 AS base
 
 COPY --from=ghcr.io/astral-sh/uv:0.12 /uv /uvx /bin/
 
