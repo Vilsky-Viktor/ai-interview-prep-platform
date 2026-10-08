@@ -1,6 +1,7 @@
 from fastapi import APIRouter, status
 from fastapi.responses import StreamingResponse
 from prepza_common.auth import CurrentUser
+from prepza_common.sse import event_stream
 
 from app.schemas.notifications import FeedOut
 from app.services.feed import changes, feed
@@ -26,9 +27,4 @@ async def mark_seen(user: CurrentUser) -> None:
 async def stream(user: CurrentUser) -> StreamingResponse:
     """Server-sent events while a tab is open: {"new": true} as soon as a notification comes,
     so the bell reloads; heartbeat comments in between."""
-    return StreamingResponse(
-        changes(user.uid),
-        media_type="text/event-stream",
-        # Tells nginx not to buffer the stream.
-        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
-    )
+    return event_stream(changes(user.uid))

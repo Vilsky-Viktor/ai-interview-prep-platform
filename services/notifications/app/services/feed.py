@@ -1,8 +1,8 @@
 import asyncio
-import json
 from collections.abc import AsyncIterator
 
 from prepza_common.notifications import Recipient
+from prepza_common.sse import sse_event
 
 from app.constants.notifications import CHANNEL, DROPDOWN_LIMIT, HEARTBEAT_SECONDS
 from app.integrations import companies
@@ -56,4 +56,4 @@ async def changes(user_id: str) -> AsyncIterator[str]:
 
             heard.clear()
 
-            yield f"data: {json.dumps({'new': True})}\n\n"
+            yield sse_event({"new": True})

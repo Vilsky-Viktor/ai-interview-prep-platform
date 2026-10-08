@@ -8,6 +8,7 @@ from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS
 from prepza_common.i18n import request_language, translate
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
+from prepza_common.sse import event_stream, sse_event
 
 from app.config.settings import settings
 from app.constants.contact import CONTACT_IP_LIMIT
@@ -20,7 +21,6 @@ from app.constants.rounds import CHAT_FAILED
 from app.constants.terms import TERMS_INTRO, TERMS_SECTIONS
 from app.helpers.client_ip import client_ip
 from app.helpers.help import faq_items
-from app.helpers.sse import sse_event
 from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.schemas.contact import ContactRequest
@@ -95,12 +95,7 @@ async def help_chat(
 
         yield sse_event({"done": True})
 
-    return StreamingResponse(
-        events(),
-        media_type="text/event-stream",
-        # Tells nginx not to buffer the stream.
-        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
-    )
+    return event_stream(events())
 
 
 @router.post("/contact", status_code=status.HTTP_204_NO_CONTENT)
