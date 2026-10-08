@@ -6,6 +6,7 @@ from prepza_common.sets import PreparationIn, QuestionIn
 
 from app.config.settings import settings
 from app.schemas.library import ReuseIn
+from app.schemas.news import NewsSource, TranslatedNews
 from app.schemas.regenerate import QuestionContext, RegeneratedQuestion
 from app.schemas.verify import QuestionQuality
 from app.service_auth import service_token
@@ -137,3 +138,35 @@ async def get_question_ids(set_id: UUID) -> list[list[UUID]]:
         [UUID(question["id"]) for question in topic["questions"]]
         for topic in response.json()["topics"]
     ]
+
+
+async def get_news_source(news_id: UUID) -> NewsSource | None:
+    """A news post's English text and the languages it lacks; None once it's deleted."""
+    response = await http.get_client().get(
+        f"{settings.library_url}/internal/news/{news_id}",
+        headers={"Authorization": f"Bearer {service_token('library')}"},
+    )
+
+    if response.status_code == httpx.codes.NOT_FOUND:
+        return None
+
+    response.raise_for_status()
+
+    return NewsSource.model_validate(response.json())
+
+
+async def save_news_translations(
+    news_id: UUID, source: NewsSource, translations: dict[str, TranslatedNews]
+) -> None:
+    """Saves the translations of `source`; the library drops them if the post changed since."""
+    response = await http.get_client().put(
+        f"{settings.library_url}/internal/news/{news_id}/translations",
+        json={
+            "title": source.title,
+            "text": source.text,
+            "translations": {code: item.model_dump() for code, item in translations.items()},
+        },
+        headers={"Authorization": f"Bearer {service_token('library')}"},
+    )
+
+    response.raise_for_status()

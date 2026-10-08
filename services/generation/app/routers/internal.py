@@ -5,7 +5,7 @@ from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
 from app.config.settings import settings
-from app.constants.generation import RUN_GENERATION, VERIFY_QUESTION
+from app.constants.generation import RUN_GENERATION, TRANSLATE_NEWS, VERIFY_QUESTION
 from app.helpers.language import text_language
 from app.integrations import library, tasks
 from app.integrations.redis import get_redis
@@ -151,3 +151,11 @@ async def verify_question(
     await tasks.enqueue(
         VERIFY_QUESTION, {"question_id": str(question_id), "flag": body.flag, "now": body.now}
     )
+
+
+@router.post("/news/{news_id}/translate", status_code=status.HTTP_202_ACCEPTED)
+async def translate_news(news_id: UUID, caller: ServiceCaller) -> None:
+    """The library saved a news post; the worker translates it into the languages it lacks.
+    While paused the call is refused, and the library sends the post again later."""
+    await refuse_if_paused(get_redis())
+    await tasks.enqueue(TRANSLATE_NEWS, {"news_id": str(news_id)})

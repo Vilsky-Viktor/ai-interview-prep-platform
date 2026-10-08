@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 
 import app.models.events  # registers the tables on Base.metadata
 import app.models.feedback
+import app.models.news
 import app.models.outbox
 import app.models.quality
 import app.models.sets  # noqa: F401

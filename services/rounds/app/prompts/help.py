@@ -9,7 +9,8 @@ Menus: the header has "hiring" (companies) and "pricing" (on wide screens). The 
 Settings and Top up. The footer has three columns: skills tests by role, pre-employment testing, \
 AI interviews, comparisons and guides; the privacy policy, terms, documents for companies and \
 the API docs; free practice, the FAQ, an about page (the company and its solo founder, Viktor \
-Vilskyi) and a contact page with a form (name, email, message) that reaches the prepza team. \
+Vilskyi), a news page with prepza's latest updates, and a contact page with a form (name, email, \
+message) that reaches the prepza team. \
 Signing in is with Google, LinkedIn or GitHub.
 
 Companies:

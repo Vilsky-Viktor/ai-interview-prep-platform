@@ -16,13 +16,16 @@ from app.routers import (
     internal_emails,
     internal_events,
     internal_feedback,
+    internal_news,
     internal_practice,
     internal_quality,
     internal_reuse,
     me,
+    news,
     schedules,
     superadmin,
     superadmin_emails,
+    superadmin_news,
     superadmin_quality,
     templates,
 )
@@ -52,13 +55,16 @@ app.add_middleware(RequestLogMiddleware)
 app.include_router(me.router)
 app.include_router(superadmin.router)
 app.include_router(superadmin_emails.router)
+app.include_router(superadmin_news.router)
 app.include_router(superadmin_quality.router)
 app.include_router(templates.router)
+app.include_router(news.router)
 app.include_router(internal.router)
 app.include_router(internal_emails.router)
 app.include_router(schedules.router)
 app.include_router(internal_events.router)
 app.include_router(internal_feedback.router)
+app.include_router(internal_news.router)
 app.include_router(internal_practice.router)
 app.include_router(internal_quality.router)
 app.include_router(internal_reuse.router)

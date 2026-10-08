@@ -28,7 +28,8 @@ class Settings(ServiceSettings):
     max_subtopics: int = Field(default=10, gt=0)
     # Each AI task has its own model and effort, so one can change without the others. Effort is
     # how hard a reasoning model thinks: "none", "minimal", "low", "medium" or "high".
-    # Generation: extraction, topics, questions, answers and a re-generated question.
+    # Generation: extraction, topics, questions, answers and a re-generated question; also
+    # translates news posts.
     interview_model: str = "gpt-6.1-sol"
     interview_reasoning_effort: ReasoningEffort = "low"
     # Checks answer keys, at once and in batches: rare, and it must be right.

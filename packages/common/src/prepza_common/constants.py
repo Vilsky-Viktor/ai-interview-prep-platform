@@ -129,6 +129,11 @@ MAX_TITLE_LENGTH = 70
 # A job description, as pasted to generate a test.
 MAX_GOAL_LENGTH = 10_000
 
+# A news post's title and text (library), written in English and translated into each language
+# (generation); a translation must fit them too.
+MAX_NEWS_TITLE_LENGTH = 120
+MAX_NEWS_TEXT_LENGTH = 500
+
 # The emergency pause (pause.py): one Redis key every service reads, and the message it refuses
 # with while it's on.
 PAUSE_KEY = "pause:on"
