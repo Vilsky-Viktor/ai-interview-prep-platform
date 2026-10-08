@@ -1,5 +1,10 @@
 # Email texts in Korean. Values are filled in with str.format; the HTML version escapes them.
 
+# The footer of reminders to a company's owners and admins.
+MEMBER_FOOTER = (
+    "prepza에서 회사의 소유자 또는 관리자이므로 {email}(으)로 이 이메일이 발송되었습니다."
+)
+
 TEXTS = {
     "candidate": {
         "subject": "{company}에서 면접에 초대했습니다",
@@ -42,6 +47,75 @@ TEXTS = {
         ],
         "button": "prepza 방문",
         "footer": "{sender} 님이 prepza에서 이 주소로 전체 지원자 보고서를 공유하여 {email}(으)로 이 이메일이 발송되었습니다. 예상하지 못한 이메일이라면 무시하셔도 됩니다.",
+    },
+    "digest": {
+        "subject": "prepza 활동 요약",
+        "preheader": "지난 24시간 동안 회사에서 있었던 일입니다.",
+        "heading": "활동 요약",
+        "lines": [
+            "지난 24시간 동안 prepza의 회사에서 있었던 일입니다.",
+        ],
+        "rows": {
+            "candidate_finished": "면접을 완료한 지원자: {count} · “{title}”",
+            "invite_undelivered": "전달되지 않은 초대: {count} · “{title}”",
+            "ats_not_invited": "초대되지 않은 ATS 지원자: {count}",
+            "interview_ready": "준비된 면접: “{title}”",
+        },
+        "button": "prepza 열기",
+        "footer": "prepza에서 회사 멤버로 활동 요약을 받고 있으므로 {email}(으)로 이 이메일이 발송되었습니다.",
+    },
+    "low_credits": {
+        "subject": "크레딧이 곧 소진됩니다",
+        "preheader": "지원자를 계속 초대하려면 충전하세요.",
+        "heading": "크레딧이 곧 소진됩니다",
+        "lines": [
+            "이 회사들은 지원자를 한 명 더 초대할 크레딧이 부족합니다. 지원자를 계속 초대하려면 충전하세요.",
+        ],
+        "rows": {
+            "company": "{company} · 사용 가능한 크레딧: {available}",
+        },
+        "button": "충전",
+        "footer": MEMBER_FOOTER,
+    },
+    "no_candidates": {
+        "subject": "지원자를 기다리고 있습니다",
+        "preheader": "이메일로 지원자를 초대하거나 면접 링크를 공유하세요.",
+        "heading": "지원자를 기다리고 있습니다",
+        "lines": [
+            "이 면접들은 며칠 전에 준비되었지만 아직 아무도 초대되지 않았습니다. 이메일로 지원자를 초대하거나 면접 링크를 공유하세요.",
+        ],
+        "rows": {
+            "interview": "“{title}” · {company}",
+        },
+        "button": "지원자 초대",
+        "footer": MEMBER_FOOTER,
+    },
+    "review_waiting": {
+        "subject": "주제 검토를 기다리고 있습니다",
+        "preheader": "주제를 확정하면 문제가 만들어집니다.",
+        "heading": "주제 검토",
+        "lines": [
+            "시작하신 면접의 주제가 검토를 기다리고 있습니다. 주제를 확정하면 문제가 만들어집니다. 14일 동안 검토하지 않으면 취소됩니다.",
+        ],
+        "rows": {
+            "interview": "{company} · 대기 일수: {days}",
+        },
+        "button": "주제 검토하기",
+        "footer": MEMBER_FOOTER,
+    },
+    "top_up_failed": {
+        "subject": "{company}의 자동 충전에 실패했습니다",
+        "preheader": "카드 결제에 실패했습니다. 지원자를 계속 초대하려면 충전하세요.",
+        "heading": "자동 충전 실패",
+        "lines": [
+            "{company}의 자동 충전 중 카드 결제에 실패하여 크레딧이 추가되지 않았습니다.",
+            "지원자를 계속 초대하려면 충전하세요. 자동 충전은 나중에 카드 결제를 다시 시도합니다.",
+        ],
+        "button": "충전",
+        "footer": (
+            "prepza에서 {company}의 소유자 또는 관리자이므로 {email}(으)로 이 이메일이 발송되었습니다. 회사 결제에 관한 내용이므로 "
+            "이메일 설정과 관계없이 발송됩니다."
+        ),
     },
     "footer": "prepza에서 누군가 이 주소를 초대하여 {email}(으)로 이 이메일이 발송되었습니다. 예상하지 못한 이메일이라면 무시하셔도 됩니다.",
     "paste_link": "또는 이 링크를 브라우저에 붙여 넣으세요",

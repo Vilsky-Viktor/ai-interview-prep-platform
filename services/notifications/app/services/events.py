@@ -17,9 +17,8 @@ from app.helpers.emails import (
     report_email,
 )
 from app.helpers.unsubscribe import address_hash
-from app.integrations import resend, smtp
 from app.models.email import Email
-from app.services import slack
+from app.services import delivery, service_emails, slack
 from app.services.feed import announce
 from app.services.webhooks import report_undelivered
 from app.storage import notifications, opt_outs
@@ -28,24 +27,9 @@ logger = logging.getLogger(__name__)
 
 
 async def deliver(email: Email, event_id: str) -> None:
-    if settings.resend_api_key:
-        # The event's id as the key (the outbox's, the same on a re-send, or Pub/Sub's), so a
-        # retried or re-sent event never sends the email twice.
-        try:
-            await resend.send(email, f"events/{event_id}")
-        except resend.EmailRefused:
-            # Final, like a bounce: the event isn't retried. An invite shows as undelivered; any
-            # other email (a report, a contact message) would be lost unseen, so it's an error.
-            if email.tags:
-                logger.warning("Email for %s refused", email.tags, exc_info=True)
-            else:
-                logger.exception("An untagged email was refused")
-
-            await report_undelivered(email.tags)
-
-        return
-
-    await smtp.send(email)
+    # The event's id as the key (the outbox's, the same on a re-send, or Pub/Sub's), so a
+    # retried or re-sent event never sends the email twice.
+    await delivery.send(email, f"events/{event_id}")
 
 
 async def notify(data: dict, event_id: str) -> None:
@@ -53,7 +37,7 @@ async def notify(data: dict, event_id: str) -> None:
     the company's Slack channel; one that adds to a group isn't posted again. A retried event is
     stored once and announced once (if announcing fails, the tabs see it on their next load) and
     posted once; a retry after Slack failed posts it then, without a second notification in the
-    bell."""
+    bell. A failed automatic top-up is emailed to the company's owners and admins too."""
     # With a `key`, its producer asking again is the same notification.
     key = data.get("key") or event_id
 
@@ -64,6 +48,7 @@ async def notify(data: dict, event_id: str) -> None:
             logger.exception("Couldn't announce a %s notification", data["kind"])
 
     await slack.deliver(data, key)
+    await service_emails.top_up_failed(data, key)
 
 
 async def invite(data: dict, event_id: str) -> None:

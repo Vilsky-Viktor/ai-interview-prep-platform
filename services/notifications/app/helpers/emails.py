@@ -14,17 +14,32 @@ from app.templates.layout import (
     HTML_LOGO,
     HTML_NAME,
     HTML_PARAGRAPH,
+    HTML_ROW,
+    HTML_SECTION,
+    HTML_SECTION_HEADING,
     PREHEADER_PADDING,
     TEXT_FOOTER_LINK,
     TEXT_LAYOUT,
+    TEXT_ROW,
+    TEXT_SECTION_HEADING,
 )
 
+# A list under an email's text: its heading ("" for none) and its items, each the key of its
+# line in the template's "rows", the values that fill it, and where it links.
+Section = tuple[str, list[tuple[str, dict, str]]]
 
-def render(kind: str, data: dict, link: str, links: list[tuple[str, str]] = ()) -> Email:
+
+def render(
+    kind: str,
+    data: dict,
+    link: str,
+    links: list[tuple[str, str]] = (),
+    sections: list[Section] = (),
+) -> Email:
     """Builds the plain-text and HTML versions of the `kind` email ("candidate"), in the
     interview's language (English for older events), right to left where that language is;
-    names and titles are escaped in the HTML. `links` go under the footer: each one's text (a
-    key of the language's texts) and address."""
+    names and titles are escaped in the HTML. `sections` are lists after the text. `links` go
+    under the footer: each one's text (a key of the language's texts) and address."""
     language = data.get("language")
     # English until the language has this email (new emails are translated later).
     language = language if kind in EMAILS.get(language, {}) else DEFAULT_LANGUAGE
@@ -44,10 +59,21 @@ def render(kind: str, data: dict, link: str, links: list[tuple[str, str]] = ()) 
     }
 
     footer_links = [(texts[key], url) for key, url in links]
+    # Each list's heading and its lines, filled in.
+    filled = [
+        (heading, [(template["rows"][row].format(**values), url) for row, values, url in rows])
+        for heading, rows in sections
+    ]
 
     text = TEXT_LAYOUT.format(
         heading=template["heading"],
         lines="\n\n".join(line.format(**data) for line in template["lines"]),
+        sections="".join(
+            "\n"
+            + (TEXT_SECTION_HEADING.format(heading=heading) if heading else "")
+            + "".join(TEXT_ROW.format(text=text, url=url) for text, url in rows)
+            for heading, rows in filled
+        ),
         button=template["button"],
         link=link,
         footer=footer.format(**data),
@@ -66,6 +92,15 @@ def render(kind: str, data: dict, link: str, links: list[tuple[str, str]] = ()) 
         heading=template["heading"],
         lines="\n".join(
             HTML_PARAGRAPH.format(text=line.format(**emphasized)) for line in template["lines"]
+        ),
+        sections="".join(
+            HTML_SECTION.format(
+                heading=HTML_SECTION_HEADING.format(heading=escape(heading)) if heading else "",
+                rows="".join(
+                    HTML_ROW.format(text=escape(text), url=escape(url)) for text, url in rows
+                ),
+            )
+            for heading, rows in filled
         ),
         button=template["button"],
         link=escape(link),
@@ -156,6 +191,7 @@ def optional_email(
     secret: str,
     user_id: str,
     unsubscribe: UnsubscribeType,
+    sections: list[Section] = (),
 ) -> Email:
     """An email a prepza user may turn off (the activity digest, reminders, updates, offers):
     the `kind` email, with "Unsubscribe" (from `unsubscribe`) and "Change your email settings"
@@ -165,7 +201,7 @@ def optional_email(
         ("unsubscribe", page_url(site_url, token)),
         ("email_settings", site_url.rstrip("/") + SETTINGS_PATH),
     ]
-    email = render(kind, data, link, links)
+    email = render(kind, data, link, links, sections)
     email.headers = one_click_headers(site_url, token)
 
     return email

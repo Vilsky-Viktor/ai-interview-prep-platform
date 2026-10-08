@@ -1,5 +1,11 @@
 # Email texts in Dutch. Values are filled in with str.format; the HTML version escapes them.
 
+# The footer of reminders to a company's owners and admins.
+MEMBER_FOOTER = (
+    "Deze e-mail is naar {email} gestuurd omdat je eigenaar of beheerder bent van een "
+    "bedrijf op prepza."
+)
+
 TEXTS = {
     "candidate": {
         "subject": "{company} nodigt je uit voor een interview",
@@ -62,6 +68,98 @@ TEXTS = {
         "footer": "Deze e-mail is naar {email} gestuurd omdat {sender} op prepza een "
         "kandidatenrapport met dit adres heeft gedeeld. Verwachtte je hem niet, dan kun je hem "
         "negeren.",
+    },
+    "digest": {
+        "subject": "Je activiteitenoverzicht op prepza",
+        "preheader": "Wat er de afgelopen 24 uur in je bedrijven is gebeurd.",
+        "heading": "Je activiteitenoverzicht",
+        "lines": [
+            "Dit is er de afgelopen 24 uur in je bedrijven op prepza gebeurd.",
+        ],
+        "rows": {
+            "candidate_finished": "Kandidaten die klaar zijn: {count} · “{title}”",
+            "invite_undelivered": "Niet-bezorgde uitnodigingen: {count} · “{title}”",
+            "ats_not_invited": "Niet-uitgenodigde kandidaten uit het ATS: {count}",
+            "interview_ready": "Interview klaar: “{title}”",
+        },
+        "button": "prepza openen",
+        "footer": (
+            "Deze e-mail is naar {email} gestuurd omdat je lid bent van een bedrijf op "
+            "prepza en het activiteitenoverzicht ervan ontvangt."
+        ),
+    },
+    "low_credits": {
+        "subject": "Je credits raken op",
+        "preheader": "Waardeer op om kandidaten te blijven uitnodigen.",
+        "heading": "Credits raken op",
+        "lines": [
+            (
+                "Deze bedrijven hebben niet genoeg credits om nog een kandidaat uit te "
+                "nodigen. Waardeer op om kandidaten te blijven uitnodigen."
+            ),
+        ],
+        "rows": {
+            "company": "{company} · beschikbare credits: {available}",
+        },
+        "button": "Opwaarderen",
+        "footer": MEMBER_FOOTER,
+    },
+    "no_candidates": {
+        "subject": "Wachten op kandidaten",
+        "preheader": "Nodig kandidaten uit per e-mail of deel de link van het interview.",
+        "heading": "Wachten op kandidaten",
+        "lines": [
+            (
+                "Deze interviews zijn al een paar dagen klaar, maar er is nog niemand "
+                "uitgenodigd. Nodig kandidaten uit per e-mail of deel de link van het "
+                "interview."
+            ),
+        ],
+        "rows": {
+            "interview": "“{title}” · {company}",
+        },
+        "button": "Kandidaten uitnodigen",
+        "footer": MEMBER_FOOTER,
+    },
+    "review_waiting": {
+        "subject": "Je onderwerpen wachten op controle",
+        "preheader": "Bevestig de onderwerpen, dan worden de vragen gemaakt.",
+        "heading": "Controleer je onderwerpen",
+        "lines": [
+            (
+                "De onderwerpen van de interviews die je bent begonnen, wachten op je "
+                "controle. Zodra je ze bevestigt, worden de vragen gemaakt. Een controle "
+                "die 14 dagen openstaat, wordt geannuleerd."
+            ),
+        ],
+        "rows": {
+            "interview": "{company} · wachttijd in dagen: {days}",
+        },
+        "button": "Onderwerpen controleren",
+        "footer": MEMBER_FOOTER,
+    },
+    "top_up_failed": {
+        "subject": "Automatisch opwaarderen mislukt voor {company}",
+        "preheader": (
+            "De kaart kon niet worden belast. Waardeer op om kandidaten te blijven uitnodigen."
+        ),
+        "heading": "Automatisch opwaarderen mislukt",
+        "lines": [
+            (
+                "Automatisch opwaarderen kon de kaart voor {company} niet belasten, dus er "
+                "zijn geen credits toegevoegd."
+            ),
+            (
+                "Waardeer op om kandidaten te blijven uitnodigen. Automatisch opwaarderen "
+                "probeert de kaart later opnieuw."
+            ),
+        ],
+        "button": "Opwaarderen",
+        "footer": (
+            "Deze e-mail is naar {email} gestuurd omdat je eigenaar of beheerder bent van "
+            "{company} op prepza. Hij gaat over de facturering van je bedrijf en wordt "
+            "daarom altijd verstuurd, wat je e-mailinstellingen ook zijn."
+        ),
     },
     "footer": "Deze e-mail is naar {email} gestuurd omdat iemand dit adres op prepza heeft "
     "uitgenodigd. Verwachtte je hem niet, dan kun je hem negeren.",

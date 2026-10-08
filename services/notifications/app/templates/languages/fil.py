@@ -1,5 +1,11 @@
 # Email texts in Filipino. Values are filled in with str.format; the HTML version escapes them.
 
+# The footer of reminders to a company's owners and admins.
+MEMBER_FOOTER = (
+    "Ipinadala ang email na ito sa {email} dahil ikaw ay may-ari o admin ng isang kumpanya "
+    "sa prepza."
+)
+
 TEXTS = {
     "candidate": {
         "subject": "Iniimbitahan ka ng {company} sa isang interview",
@@ -66,6 +72,98 @@ TEXTS = {
         "footer": "Ipinadala ang email na ito sa {email} dahil nag-share si {sender} ng report ng "
         "mga aplikante sa address na ito sa prepza. Kung hindi mo ito inaasahan, puwede mo itong "
         "balewalain.",
+    },
+    "digest": {
+        "subject": "Ang iyong buod ng aktibidad sa prepza",
+        "preheader": "Ang nangyari sa mga kumpanya mo sa nakalipas na 24 oras.",
+        "heading": "Ang iyong buod ng aktibidad",
+        "lines": [
+            "Narito ang nangyari sa mga kumpanya mo sa prepza sa nakalipas na 24 oras.",
+        ],
+        "rows": {
+            "candidate_finished": "Mga aplikanteng nakatapos: {count} · “{title}”",
+            "invite_undelivered": "Mga imbitasyong hindi naihatid: {count} · “{title}”",
+            "ats_not_invited": "Mga aplikante mula sa ATS na hindi na-imbitahan: {count}",
+            "interview_ready": "Handa na ang interview: “{title}”",
+        },
+        "button": "Buksan ang prepza",
+        "footer": (
+            "Ipinadala ang email na ito sa {email} dahil miyembro ka ng isang kumpanya sa "
+            "prepza at natatanggap mo ang buod ng aktibidad nito."
+        ),
+    },
+    "low_credits": {
+        "subject": "Paubos na ang iyong mga credit",
+        "preheader": "Mag-top up para patuloy na makapag-imbita ng aplikante.",
+        "heading": "Paubos na ang mga credit",
+        "lines": [
+            (
+                "Kulang na ang credits ng mga kumpanyang ito para mag-imbita ng isa pang "
+                "aplikante. Mag-top up para patuloy na makapag-imbita ng aplikante."
+            ),
+        ],
+        "rows": {
+            "company": "{company} · available na credits: {available}",
+        },
+        "button": "Mag-top up",
+        "footer": MEMBER_FOOTER,
+    },
+    "no_candidates": {
+        "subject": "Naghihintay ng mga aplikante",
+        "preheader": "Mag-imbita ng mga aplikante sa email o ibahagi ang link ng interview.",
+        "heading": "Naghihintay ng mga aplikante",
+        "lines": [
+            (
+                "Ilang araw nang handa ang mga interview na ito, pero wala pang "
+                "naiimbitahan. Mag-imbita ng mga aplikante sa email o ibahagi ang link ng "
+                "interview."
+            ),
+        ],
+        "rows": {
+            "interview": "“{title}” · {company}",
+        },
+        "button": "Mag-imbita ng mga aplikante",
+        "footer": MEMBER_FOOTER,
+    },
+    "review_waiting": {
+        "subject": "Naghihintay ng review ang iyong mga topic",
+        "preheader": "Kumpirmahin ang mga topic, at gagawin na ang mga tanong.",
+        "heading": "I-review ang iyong mga topic",
+        "lines": [
+            (
+                "Naghihintay ng iyong review ang mga topic ng mga interview na sinimulan "
+                "mo. Kapag kinumpirma mo ang mga ito, gagawin na ang mga tanong. "
+                "Kinakansela ang review na nakabukas nang 14 na araw."
+            ),
+        ],
+        "rows": {
+            "interview": "{company} · araw na naghihintay: {days}",
+        },
+        "button": "I-review ang mga topic",
+        "footer": MEMBER_FOOTER,
+    },
+    "top_up_failed": {
+        "subject": "Pumalya ang awtomatikong top-up para sa {company}",
+        "preheader": (
+            "Hindi ma-charge ang card. Mag-top up para patuloy na makapag-imbita ng aplikante."
+        ),
+        "heading": "Pumalya ang awtomatikong top-up",
+        "lines": [
+            (
+                "Hindi ma-charge ng awtomatikong top-up ang card para sa {company}, kaya "
+                "walang naidagdag na credits."
+            ),
+            (
+                "Mag-top up para patuloy na makapag-imbita ng aplikante. Susubukan ulit ng "
+                "awtomatikong top-up ang card mamaya."
+            ),
+        ],
+        "button": "Mag-top up",
+        "footer": (
+            "Ipinadala ang email na ito sa {email} dahil ikaw ay may-ari o admin ng "
+            "{company} sa prepza. Tungkol ito sa billing ng kumpanya mo, kaya ipinapadala "
+            "ito anuman ang iyong email settings."
+        ),
     },
     "footer": "Ipinadala ang email na ito sa {email} dahil may nag-imbita sa address na ito sa "
     "prepza. Kung hindi mo ito inaasahan, puwede mo itong balewalain.",

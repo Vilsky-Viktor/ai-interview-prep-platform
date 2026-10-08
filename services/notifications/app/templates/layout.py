@@ -4,7 +4,7 @@
 TEXT_LAYOUT = """\
 {heading}.
 
-{lines}
+{lines}{sections}
 
 {button}: {link}
 
@@ -19,6 +19,24 @@ TEXT_FOOTER_LINK = "\n{text}: {url}"
 HTML_FOOTER_LINK = (
     '<br><a href="{url}" target="_blank" style="color:#737373;text-decoration:underline;">'
     "{text}</a>"
+)
+
+# Lists under the text (a digest's companies, a reminder's interviews): a bordered box per list,
+# its heading (a company's name) if any, and one linked line per item.
+TEXT_SECTION_HEADING = "\n{heading}"
+TEXT_ROW = "\n- {text}\n  {url}"
+HTML_SECTION = (
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" '
+    'style="margin:0 0 16px;border:1px solid #e5e5e5;border-radius:12px;">'
+    '<tr><td style="padding:16px 20px;">{heading}{rows}</td></tr></table>\n'
+)
+HTML_SECTION_HEADING = (
+    '<p style="margin:0 0 4px;font-size:16px;line-height:24px;font-weight:600;color:#0a0a0a;">'
+    "{heading}</p>"
+)
+HTML_ROW = (
+    '<p style="margin:4px 0 0;font-size:15px;line-height:22px;"><a href="{url}" target="_blank" '
+    'style="color:#0071e0;text-decoration:none;">{text}</a></p>'
 )
 
 # Who sent the invite, in the body: bold, so it stands out.
@@ -63,7 +81,7 @@ sans-serif;">
 {logo}<h1 style="margin:0 0 24px;font-size:24px;line-height:32px;font-weight:600;color:#0a0a0a;">\
 {heading}<span style="color:#0071e0;">.</span></h1>
 {lines}
-<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 32px;">
+{sections}<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 32px;">
 <tr><td style="border-radius:10px;background-color:#0071e0;">\
 <a href="{link}" target="_blank" style="display:inline-block;padding:14px 28px;\
 font-size:16px;line-height:20px;font-weight:600;color:#ffffff;text-decoration:none;\

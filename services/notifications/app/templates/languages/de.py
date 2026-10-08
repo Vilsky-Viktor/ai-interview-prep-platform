@@ -1,5 +1,11 @@
 # Email texts in German. Values are filled in with str.format; the HTML version escapes them.
 
+# The footer of reminders to a company's owners and admins.
+MEMBER_FOOTER = (
+    "Diese E-Mail wurde an {email} gesendet, weil du Inhaber oder Admin eines Unternehmens "
+    "auf prepza bist."
+)
+
 TEXTS = {
     "candidate": {
         "subject": "{company} lädt dich zu einem Interview ein",
@@ -64,6 +70,98 @@ TEXTS = {
         "footer": "Diese E-Mail wurde an {email} gesendet, weil {sender} einen Kandidatenbericht "
         "mit dieser Adresse auf prepza geteilt hat. Wenn du sie nicht erwartet hast, kannst "
         "du sie ignorieren.",
+    },
+    "digest": {
+        "subject": "Deine Aktivitätsübersicht auf prepza",
+        "preheader": "Was in den letzten 24 Stunden in deinen Unternehmen passiert ist.",
+        "heading": "Deine Aktivitätsübersicht",
+        "lines": [
+            "Das ist in den letzten 24 Stunden in deinen Unternehmen auf prepza passiert.",
+        ],
+        "rows": {
+            "candidate_finished": "Kandidaten, die fertig sind: {count} · „{title}“",
+            "invite_undelivered": "Nicht zugestellte Einladungen: {count} · „{title}“",
+            "ats_not_invited": "Nicht eingeladene Kandidaten aus dem ATS: {count}",
+            "interview_ready": "Interview fertig: „{title}“",
+        },
+        "button": "prepza öffnen",
+        "footer": (
+            "Diese E-Mail wurde an {email} gesendet, weil du Mitglied eines Unternehmens "
+            "auf prepza bist und seine Aktivitätsübersicht erhältst."
+        ),
+    },
+    "low_credits": {
+        "subject": "Deine Credits werden knapp",
+        "preheader": "Lade auf, um weiter Kandidaten einzuladen.",
+        "heading": "Credits werden knapp",
+        "lines": [
+            (
+                "Diese Unternehmen haben nicht genug Credits, um einen weiteren Kandidaten "
+                "einzuladen. Lade auf, um weiter Kandidaten einzuladen."
+            ),
+        ],
+        "rows": {
+            "company": "{company} · verfügbare Credits: {available}",
+        },
+        "button": "Aufladen",
+        "footer": MEMBER_FOOTER,
+    },
+    "no_candidates": {
+        "subject": "Warten auf Kandidaten",
+        "preheader": "Lade Kandidaten per E-Mail ein oder teile den Link des Interviews.",
+        "heading": "Warten auf Kandidaten",
+        "lines": [
+            (
+                "Diese Interviews sind seit ein paar Tagen fertig, aber noch niemand wurde "
+                "eingeladen. Lade Kandidaten per E-Mail ein oder teile den Link des "
+                "Interviews."
+            ),
+        ],
+        "rows": {
+            "interview": "„{title}“ · {company}",
+        },
+        "button": "Kandidaten einladen",
+        "footer": MEMBER_FOOTER,
+    },
+    "review_waiting": {
+        "subject": "Deine Themen warten auf deine Prüfung",
+        "preheader": "Bestätige die Themen, dann werden die Fragen erstellt.",
+        "heading": "Prüfe deine Themen",
+        "lines": [
+            (
+                "Die Themen der Interviews, die du begonnen hast, warten auf deine Prüfung."
+                " Sobald du sie bestätigst, werden die Fragen erstellt. Eine Prüfung, die "
+                "14 Tage offen bleibt, wird abgebrochen."
+            ),
+        ],
+        "rows": {
+            "interview": "{company} · Wartezeit in Tagen: {days}",
+        },
+        "button": "Themen prüfen",
+        "footer": MEMBER_FOOTER,
+    },
+    "top_up_failed": {
+        "subject": "Automatisches Aufladen für {company} fehlgeschlagen",
+        "preheader": (
+            "Die Karte konnte nicht belastet werden. Lade auf, um weiter Kandidaten einzuladen."
+        ),
+        "heading": "Automatisches Aufladen fehlgeschlagen",
+        "lines": [
+            (
+                "Automatisches Aufladen konnte die Karte für {company} nicht belasten, "
+                "daher wurden keine Credits hinzugefügt."
+            ),
+            (
+                "Lade auf, um weiter Kandidaten einzuladen. Automatisches Aufladen versucht"
+                " es später erneut mit der Karte."
+            ),
+        ],
+        "button": "Aufladen",
+        "footer": (
+            "Diese E-Mail wurde an {email} gesendet, weil du Inhaber oder Admin von "
+            "{company} auf prepza bist. Sie betrifft die Abrechnung deines Unternehmens und"
+            " wird daher unabhängig von deinen E-Mail-Einstellungen gesendet."
+        ),
     },
     "footer": "Diese E-Mail wurde an {email} gesendet, weil jemand diese Adresse auf prepza "
     "eingeladen hat. Wenn du sie nicht erwartet hast, kannst du sie ignorieren.",

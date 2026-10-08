@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 
 import app.models.notifications
 import app.models.opt_outs
+import app.models.sent_emails
 import app.models.slack  # noqa: F401
 from app.config.settings import settings
 from app.models.base import Base

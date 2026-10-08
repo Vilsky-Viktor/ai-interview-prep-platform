@@ -6,6 +6,10 @@
 30 3 * * * curl -s -X POST http://companies:8000/internal/schedules/invite-expiry
 0 9 * * * curl -s -X POST http://companies:8000/internal/schedules/invite-reminders
 45 3 * * * curl -s -X POST http://library:8000/internal/schedules/bank
+# The activity digest and reminders to company members (notifications), every 10 minutes for an
+# hour each morning.
+*/10 7 * * * curl -s -X POST http://notifications:8000/internal/schedules/digest
+*/10 8 * * * curl -s -X POST http://notifications:8000/internal/schedules/reminders
 # ATS candidates whose invite stalled, and old ones (the ats service), every 10 minutes.
 */10 * * * * curl -s -X POST http://ats:8000/internal/schedules/recover
 # Events companies' web hooks didn't take (the api service), every 5 minutes.

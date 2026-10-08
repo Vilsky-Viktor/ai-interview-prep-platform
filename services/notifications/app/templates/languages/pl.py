@@ -1,5 +1,11 @@
 # Email texts in Polish. Values are filled in with str.format; the HTML version escapes them.
 
+# The footer of reminders to a company's owners and admins.
+MEMBER_FOOTER = (
+    "Ta wiadomość została wysłana na {email}, ponieważ masz rolę właściciela lub "
+    "administratora w firmie w prepza."
+)
+
 TEXTS = {
     "candidate": {
         "subject": "{company} zaprasza Cię na rozmowę kwalifikacyjną",
@@ -60,6 +66,95 @@ TEXTS = {
         "button": "Odwiedź prepza",
         "footer": "Ta wiadomość została wysłana na {email}, ponieważ {sender} udostępnił(a) temu "
         "adresowi raport kandydatów w prepza. Jeśli się jej nie spodziewasz, możesz ją zignorować.",
+    },
+    "digest": {
+        "subject": "Twoje podsumowanie aktywności w prepza",
+        "preheader": "Co wydarzyło się w Twoich firmach w ciągu ostatnich 24 godzin.",
+        "heading": "Twoje podsumowanie aktywności",
+        "lines": [
+            "Oto, co wydarzyło się w Twoich firmach w prepza w ciągu ostatnich 24 godzin.",
+        ],
+        "rows": {
+            "candidate_finished": "Kandydaci, którzy skończyli: {count} · „{title}”",
+            "invite_undelivered": "Niedostarczone zaproszenia: {count} · „{title}”",
+            "ats_not_invited": "Niezaproszeni kandydaci z ATS: {count}",
+            "interview_ready": "Gotowa rozmowa: „{title}”",
+        },
+        "button": "Otwórz prepza",
+        "footer": (
+            "Ta wiadomość została wysłana na {email}, ponieważ należysz do firmy w prepza i"
+            " otrzymujesz jej podsumowanie aktywności."
+        ),
+    },
+    "low_credits": {
+        "subject": "Twoje kredyty się kończą",
+        "preheader": "Doładuj, aby dalej zapraszać kandydatów.",
+        "heading": "Kredyty się kończą",
+        "lines": [
+            (
+                "Te firmy nie mają wystarczająco kredytów, aby zaprosić kolejnego "
+                "kandydata. Doładuj, aby dalej zapraszać kandydatów."
+            ),
+        ],
+        "rows": {
+            "company": "{company} · dostępne kredyty: {available}",
+        },
+        "button": "Doładuj",
+        "footer": MEMBER_FOOTER,
+    },
+    "no_candidates": {
+        "subject": "Oczekiwanie na kandydatów",
+        "preheader": "Zaproś kandydatów e-mailem lub udostępnij link do rozmowy.",
+        "heading": "Oczekiwanie na kandydatów",
+        "lines": [
+            (
+                "Te rozmowy są gotowe od kilku dni, ale nikt nie został jeszcze zaproszony."
+                " Zaproś kandydatów e-mailem lub udostępnij link do rozmowy."
+            ),
+        ],
+        "rows": {
+            "interview": "„{title}” · {company}",
+        },
+        "button": "Zaproś kandydatów",
+        "footer": MEMBER_FOOTER,
+    },
+    "review_waiting": {
+        "subject": "Twoje tematy czekają na przegląd",
+        "preheader": "Zatwierdź tematy, a pytania zostaną wygenerowane.",
+        "heading": "Przejrzyj tematy",
+        "lines": [
+            (
+                "Tematy rozpoczętych przez Ciebie rozmów czekają na Twój przegląd. Gdy je "
+                "zatwierdzisz, pytania zostaną wygenerowane. Przegląd pozostawiony otwarty "
+                "przez 14 dni zostaje anulowany."
+            ),
+        ],
+        "rows": {
+            "interview": "{company} · dni oczekiwania: {days}",
+        },
+        "button": "Przejrzyj tematy",
+        "footer": MEMBER_FOOTER,
+    },
+    "top_up_failed": {
+        "subject": "Automatyczne doładowanie dla {company} nie powiodło się",
+        "preheader": "Nie udało się obciążyć karty. Doładuj, aby dalej zapraszać kandydatów.",
+        "heading": "Automatyczne doładowanie nie powiodło się",
+        "lines": [
+            (
+                "Automatyczne doładowanie nie mogło obciążyć karty dla {company}, więc nie "
+                "dodano kredytów."
+            ),
+            (
+                "Doładuj, aby dalej zapraszać kandydatów. Automatyczne doładowanie spróbuje"
+                " ponownie obciążyć kartę później."
+            ),
+        ],
+        "button": "Doładuj",
+        "footer": (
+            "Ta wiadomość została wysłana na {email}, ponieważ masz rolę właściciela lub "
+            "administratora w {company} w prepza. Dotyczy rozliczeń Twojej firmy, więc jest"
+            " wysyłana niezależnie od Twoich ustawień e-maili."
+        ),
     },
     "footer": "Ta wiadomość została wysłana na {email}, ponieważ ktoś zaprosił ten adres w "
     "prepza. Jeśli się jej nie spodziewasz, możesz ją zignorować.",

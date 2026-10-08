@@ -1,5 +1,10 @@
 # Email texts in Indonesian. Values are filled in with str.format; the HTML version escapes them.
 
+# The footer of reminders to a company's owners and admins.
+MEMBER_FOOTER = (
+    "Email ini dikirim ke {email} karena kamu pemilik atau admin sebuah perusahaan di prepza."
+)
+
 TEXTS = {
     "candidate": {
         "subject": "{company} mengundangmu mengikuti wawancara",
@@ -59,6 +64,95 @@ TEXTS = {
         "button": "Kunjungi prepza",
         "footer": "Email ini dikirim ke {email} karena {sender} membagikan laporan kandidat "
         "dengan alamat ini di prepza. Jika kamu tidak mengharapkannya, abaikan saja.",
+    },
+    "digest": {
+        "subject": "Ringkasan aktivitasmu di prepza",
+        "preheader": "Apa yang terjadi di perusahaanmu dalam 24 jam terakhir.",
+        "heading": "Ringkasan aktivitasmu",
+        "lines": [
+            "Inilah yang terjadi di perusahaanmu di prepza dalam 24 jam terakhir.",
+        ],
+        "rows": {
+            "candidate_finished": "Kandidat yang selesai: {count} · “{title}”",
+            "invite_undelivered": "Undangan yang tidak terkirim: {count} · “{title}”",
+            "ats_not_invited": "Kandidat ATS yang tidak diundang: {count}",
+            "interview_ready": "Wawancara siap: “{title}”",
+        },
+        "button": "Buka prepza",
+        "footer": (
+            "Email ini dikirim ke {email} karena kamu anggota sebuah perusahaan di prepza "
+            "dan menerima ringkasan aktivitasnya."
+        ),
+    },
+    "low_credits": {
+        "subject": "Kreditmu hampir habis",
+        "preheader": "Isi ulang untuk terus mengundang kandidat.",
+        "heading": "Kredit hampir habis",
+        "lines": [
+            (
+                "Perusahaan ini tidak punya cukup kredit untuk mengundang satu kandidat "
+                "lagi. Isi ulang untuk terus mengundang kandidat."
+            ),
+        ],
+        "rows": {
+            "company": "{company} · kredit tersedia: {available}",
+        },
+        "button": "Isi ulang",
+        "footer": MEMBER_FOOTER,
+    },
+    "no_candidates": {
+        "subject": "Menunggu kandidat",
+        "preheader": "Undang kandidat lewat email atau bagikan tautan wawancaranya.",
+        "heading": "Menunggu kandidat",
+        "lines": [
+            (
+                "Wawancara ini sudah siap sejak beberapa hari lalu, tetapi belum ada yang "
+                "diundang. Undang kandidat lewat email atau bagikan tautan wawancaranya."
+            ),
+        ],
+        "rows": {
+            "interview": "“{title}” · {company}",
+        },
+        "button": "Undang kandidat",
+        "footer": MEMBER_FOOTER,
+    },
+    "review_waiting": {
+        "subject": "Topikmu menunggu ditinjau",
+        "preheader": "Konfirmasi topiknya, lalu pertanyaan akan dibuat.",
+        "heading": "Tinjau topikmu",
+        "lines": [
+            (
+                "Topik wawancara yang kamu mulai sedang menunggu tinjauanmu. Setelah kamu "
+                "mengonfirmasinya, pertanyaan akan dibuat. Tinjauan yang dibiarkan terbuka "
+                "selama 14 hari akan dibatalkan."
+            ),
+        ],
+        "rows": {
+            "interview": "{company} · hari menunggu: {days}",
+        },
+        "button": "Tinjau topik",
+        "footer": MEMBER_FOOTER,
+    },
+    "top_up_failed": {
+        "subject": "Isi ulang otomatis untuk {company} gagal",
+        "preheader": "Kartu tidak dapat ditagih. Isi ulang untuk terus mengundang kandidat.",
+        "heading": "Isi ulang otomatis gagal",
+        "lines": [
+            (
+                "Isi ulang otomatis gagal menagih kartu untuk {company}, jadi tidak ada "
+                "kredit yang ditambahkan."
+            ),
+            (
+                "Isi ulang untuk terus mengundang kandidat. Isi ulang otomatis akan mencoba"
+                " kartu itu lagi nanti."
+            ),
+        ],
+        "button": "Isi ulang",
+        "footer": (
+            "Email ini dikirim ke {email} karena kamu pemilik atau admin {company} di "
+            "prepza. Email ini tentang penagihan perusahaanmu, jadi selalu dikirim apa pun "
+            "pengaturan emailmu."
+        ),
     },
     "footer": "Email ini dikirim ke {email} karena seseorang mengundang alamat ini di prepza. "
     "Jika kamu tidak mengharapkannya, abaikan saja.",

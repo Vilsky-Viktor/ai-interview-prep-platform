@@ -5,7 +5,7 @@ from prepza_common.user import UserEmailIn
 
 from app.schemas.notifications import NotificationOut
 from app.service_auth import ServiceCaller
-from app.storage import notifications, slack
+from app.storage import notifications, sent_emails, slack
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -14,8 +14,10 @@ router = APIRouter(prefix="/internal", tags=["internal"])
 async def delete_user(user_id: str, body: UserEmailIn, caller: ServiceCaller) -> None:
     """Library, deleting an account: the user's own notifications go, and companies'
     notifications about them as a candidate (their email and grade); the Slack channels they
-    connected stay with their companies, without their id."""
+    connected stay with their companies, without their id. The log of digests and reminders
+    sent to them goes too."""
     await notifications.remove_user(user_id)
+    await sent_emails.remove_user(user_id)
     await notifications.remove_candidate(body.email)
     await slack.forget_maker(user_id)
 

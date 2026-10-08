@@ -1,5 +1,10 @@
 # Email texts in Japanese. Values are filled in with str.format; the HTML version escapes them.
 
+# The footer of reminders to a company's owners and admins.
+MEMBER_FOOTER = (
+    "このメールは、prepza で会社の所有者または管理者であるため {email} に送信されました。"
+)
+
 TEXTS = {
     "candidate": {
         "subject": "{company}から面接の招待が届いています",
@@ -42,6 +47,72 @@ TEXTS = {
         ],
         "button": "prepza にアクセス",
         "footer": "このメールは、{sender}さんが prepza でこのアドレスに全候補者のレポートを共有したため {email} に送信されました。心当たりがない場合は無視してください。",
+    },
+    "digest": {
+        "subject": "prepza のアクティビティのまとめ",
+        "preheader": "過去24時間にあなたの会社で起きたこと。",
+        "heading": "アクティビティのまとめ",
+        "lines": [
+            "過去24時間に prepza のあなたの会社で起きたことをお知らせします。",
+        ],
+        "rows": {
+            "candidate_finished": "面接を完了した候補者：{count} · 「{title}」",
+            "invite_undelivered": "届かなかった招待：{count} · 「{title}」",
+            "ats_not_invited": "招待されなかった ATS の候補者：{count}",
+            "interview_ready": "準備ができた面接：「{title}」",
+        },
+        "button": "prepza を開く",
+        "footer": "このメールは、prepza の会社のメンバーとしてアクティビティのまとめを受け取っているため {email} に送信されました。",
+    },
+    "low_credits": {
+        "subject": "クレジットが残りわずかです",
+        "preheader": "候補者の招待を続けるにはチャージしてください。",
+        "heading": "クレジットが残りわずかです",
+        "lines": [
+            "これらの会社には、候補者をもう1人招待するのに十分なクレジットがありません。候補者の招待を続けるにはチャージしてください。",
+        ],
+        "rows": {
+            "company": "{company} · 利用可能なクレジット：{available}",
+        },
+        "button": "チャージする",
+        "footer": MEMBER_FOOTER,
+    },
+    "no_candidates": {
+        "subject": "候補者を待っています",
+        "preheader": "メールで候補者を招待するか、面接のリンクを共有してください。",
+        "heading": "候補者を待っています",
+        "lines": [
+            "これらの面接は数日前から準備ができていますが、まだ誰も招待されていません。メールで候補者を招待するか、面接のリンクを共有してください。",
+        ],
+        "rows": {
+            "interview": "「{title}」 · {company}",
+        },
+        "button": "候補者を招待する",
+        "footer": MEMBER_FOOTER,
+    },
+    "review_waiting": {
+        "subject": "トピックの確認をお待ちしています",
+        "preheader": "トピックを確定すると、問題が作られます。",
+        "heading": "トピックを確認",
+        "lines": [
+            "作成を始めた面接のトピックが確認を待っています。確定すると問題が作られます。14日間確認されないままのものはキャンセルされます。",
+        ],
+        "rows": {
+            "interview": "{company} · 待機日数：{days}",
+        },
+        "button": "トピックを確認する",
+        "footer": MEMBER_FOOTER,
+    },
+    "top_up_failed": {
+        "subject": "{company} の自動チャージに失敗しました",
+        "preheader": "カードに請求できませんでした。候補者の招待を続けるにはチャージしてください。",
+        "heading": "自動チャージに失敗しました",
+        "lines": [
+            "自動チャージで {company} のカードに請求できなかったため、クレジットは追加されていません。",
+            "候補者の招待を続けるにはチャージしてください。自動チャージは後でもう一度カードへの請求を試みます。",
+        ],
+        "button": "チャージする",
+        "footer": "このメールは、prepza で {company} の所有者または管理者であるため {email} に送信されました。会社の請求に関する内容のため、メール設定にかかわらず送信されます。",
     },
     "footer": "このメールは、prepza で誰かがこのアドレスを招待したため {email} に送信されました。心当たりがない場合は無視してください。",
     "paste_link": "または、このリンクをブラウザに貼り付けてください",

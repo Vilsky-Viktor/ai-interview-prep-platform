@@ -1,5 +1,11 @@
 # Email texts in Italian. Values are filled in with str.format; the HTML version escapes them.
 
+# The footer of reminders to a company's owners and admins.
+MEMBER_FOOTER = (
+    "Questa email è stata inviata a {email} perché sei proprietario o amministratore di "
+    "un'azienda su prepza."
+)
+
 TEXTS = {
     "candidate": {
         "subject": "{company} ti invita a un colloquio",
@@ -61,6 +67,99 @@ TEXTS = {
         "button": "Visita prepza",
         "footer": "Questa email è stata inviata a {email} perché {sender} ha condiviso il report "
         "dei candidati con questo indirizzo su prepza. Se non te l'aspettavi, puoi ignorarla.",
+    },
+    "digest": {
+        "subject": "Il tuo riepilogo attività su prepza",
+        "preheader": "Cosa è successo nelle tue aziende nelle ultime 24 ore.",
+        "heading": "Il tuo riepilogo attività",
+        "lines": [
+            "Ecco cosa è successo nelle tue aziende su prepza nelle ultime 24 ore.",
+        ],
+        "rows": {
+            "candidate_finished": "Candidati che hanno finito: {count} · «{title}»",
+            "invite_undelivered": "Inviti non consegnati: {count} · «{title}»",
+            "ats_not_invited": "Candidati dall'ATS non invitati: {count}",
+            "interview_ready": "Colloquio pronto: «{title}»",
+        },
+        "button": "Apri prepza",
+        "footer": (
+            "Questa email è stata inviata a {email} perché fai parte di un'azienda su "
+            "prepza e ricevi il suo riepilogo attività."
+        ),
+    },
+    "low_credits": {
+        "subject": "I tuoi crediti stanno finendo",
+        "preheader": "Ricarica per continuare a invitare candidati.",
+        "heading": "I crediti stanno finendo",
+        "lines": [
+            (
+                "Queste aziende non hanno abbastanza crediti per invitare un altro "
+                "candidato. Ricarica per continuare a invitare candidati."
+            ),
+        ],
+        "rows": {
+            "company": "{company} · crediti disponibili: {available}",
+        },
+        "button": "Ricarica",
+        "footer": MEMBER_FOOTER,
+    },
+    "no_candidates": {
+        "subject": "In attesa di candidati",
+        "preheader": "Invita i candidati via email o condividi il link del colloquio.",
+        "heading": "In attesa di candidati",
+        "lines": [
+            (
+                "Questi colloqui sono pronti da qualche giorno, ma non è ancora stato "
+                "invitato nessuno. Invita i candidati via email o condividi il link del "
+                "colloquio."
+            ),
+        ],
+        "rows": {
+            "interview": "«{title}» · {company}",
+        },
+        "button": "Invita i candidati",
+        "footer": MEMBER_FOOTER,
+    },
+    "review_waiting": {
+        "subject": "I tuoi argomenti aspettano la revisione",
+        "preheader": "Conferma gli argomenti e le domande verranno generate.",
+        "heading": "Rivedi i tuoi argomenti",
+        "lines": [
+            (
+                "Gli argomenti dei colloqui che hai avviato aspettano la tua revisione. "
+                "Appena li confermi, le domande vengono generate. Una revisione lasciata "
+                "aperta per 14 giorni viene annullata."
+            ),
+        ],
+        "rows": {
+            "interview": "{company} · giorni di attesa: {days}",
+        },
+        "button": "Rivedi gli argomenti",
+        "footer": MEMBER_FOOTER,
+    },
+    "top_up_failed": {
+        "subject": "Ricarica automatica non riuscita per {company}",
+        "preheader": (
+            "Non è stato possibile addebitare la carta. Ricarica per continuare a invitare "
+            "candidati."
+        ),
+        "heading": "Ricarica automatica non riuscita",
+        "lines": [
+            (
+                "La ricarica automatica non è riuscita ad addebitare la carta per "
+                "{company}, quindi non sono stati aggiunti crediti."
+            ),
+            (
+                "Ricarica per continuare a invitare candidati. La ricarica automatica "
+                "riproverà più tardi con la carta."
+            ),
+        ],
+        "button": "Ricarica",
+        "footer": (
+            "Questa email è stata inviata a {email} perché sei proprietario o "
+            "amministratore di {company} su prepza. Riguarda la fatturazione della tua "
+            "azienda, quindi viene inviata indipendentemente dalle tue impostazioni email."
+        ),
     },
     "footer": "Questa email è stata inviata a {email} perché qualcuno ha invitato questo "
     "indirizzo su prepza. Se non te l'aspettavi, puoi ignorarla.",

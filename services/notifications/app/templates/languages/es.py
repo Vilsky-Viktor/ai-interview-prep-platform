@@ -1,5 +1,11 @@
 # Email texts in Spanish. Values are filled in with str.format; the HTML version escapes them.
 
+# The footer of reminders to a company's owners and admins.
+MEMBER_FOOTER = (
+    "Este correo se envió a {email} porque eres propietario o administrador de una empresa "
+    "en prepza."
+)
+
 TEXTS = {
     "candidate": {
         "subject": "{company} te invita a una entrevista",
@@ -61,6 +67,96 @@ TEXTS = {
         "button": "Visitar prepza",
         "footer": "Este correo se envió a {email} porque {sender} compartió un informe de "
         "candidatos con esta dirección en prepza. Si no lo esperabas, puedes ignorarlo.",
+    },
+    "digest": {
+        "subject": "Tu resumen de actividad en prepza",
+        "preheader": "Lo que pasó en tus empresas en las últimas 24 horas.",
+        "heading": "Tu resumen de actividad",
+        "lines": [
+            "Esto es lo que pasó en tus empresas en prepza en las últimas 24 horas.",
+        ],
+        "rows": {
+            "candidate_finished": "Candidatos que terminaron: {count} · «{title}»",
+            "invite_undelivered": "Invitaciones no entregadas: {count} · «{title}»",
+            "ats_not_invited": "Candidatos del ATS no invitados: {count}",
+            "interview_ready": "Entrevista lista: «{title}»",
+        },
+        "button": "Abrir prepza",
+        "footer": (
+            "Este correo se envió a {email} porque eres miembro de una empresa en prepza y "
+            "recibes su resumen de actividad."
+        ),
+    },
+    "low_credits": {
+        "subject": "Te estás quedando sin créditos",
+        "preheader": "Recarga para seguir invitando a candidatos.",
+        "heading": "Se están acabando los créditos",
+        "lines": [
+            (
+                "Estas empresas no tienen créditos suficientes para invitar a otro "
+                "candidato. Recarga para seguir invitando a candidatos."
+            ),
+        ],
+        "rows": {
+            "company": "{company} · créditos disponibles: {available}",
+        },
+        "button": "Recargar",
+        "footer": MEMBER_FOOTER,
+    },
+    "no_candidates": {
+        "subject": "Esperando candidatos",
+        "preheader": "Invita a candidatos por correo o comparte el enlace de la entrevista.",
+        "heading": "Esperando candidatos",
+        "lines": [
+            (
+                "Estas entrevistas están listas desde hace unos días, pero aún no se ha "
+                "invitado a nadie. Invita a candidatos por correo o comparte el enlace de "
+                "la entrevista."
+            ),
+        ],
+        "rows": {
+            "interview": "«{title}» · {company}",
+        },
+        "button": "Invitar a candidatos",
+        "footer": MEMBER_FOOTER,
+    },
+    "review_waiting": {
+        "subject": "Tus temas esperan tu revisión",
+        "preheader": "Confirma los temas y se generarán las preguntas.",
+        "heading": "Revisa tus temas",
+        "lines": [
+            (
+                "Los temas de las entrevistas que iniciaste esperan tu revisión. Cuando los"
+                " confirmes, se generarán las preguntas. Una revisión que quede abierta 14 "
+                "días se cancela."
+            ),
+        ],
+        "rows": {
+            "interview": "{company} · días de espera: {days}",
+        },
+        "button": "Revisar los temas",
+        "footer": MEMBER_FOOTER,
+    },
+    "top_up_failed": {
+        "subject": "Falló la recarga automática de {company}",
+        "preheader": "No se pudo cobrar a la tarjeta. Recarga para seguir invitando a candidatos.",
+        "heading": "Falló la recarga automática",
+        "lines": [
+            (
+                "La recarga automática no pudo cobrar a la tarjeta de {company}, así que no"
+                " se añadieron créditos."
+            ),
+            (
+                "Recarga para seguir invitando a candidatos. La recarga automática volverá "
+                "a intentarlo con la tarjeta más tarde."
+            ),
+        ],
+        "button": "Recargar",
+        "footer": (
+            "Este correo se envió a {email} porque eres propietario o administrador de "
+            "{company} en prepza. Trata sobre la facturación de tu empresa, así que se "
+            "envía sin importar tu configuración de correo."
+        ),
     },
     "footer": "Este correo se envió a {email} porque alguien invitó a esta dirección en prepza. "
     "Si no lo esperabas, puedes ignorarlo.",

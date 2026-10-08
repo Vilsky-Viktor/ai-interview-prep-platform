@@ -43,7 +43,7 @@ locals {
     rounds               = ["library"]
     companies            = ["generation", "library", "rounds", "billing"]
     billing              = []
-    notifications        = ["companies", "library"]
+    notifications        = ["companies", "library", "billing", "generation"]
     notifications-stream = ["companies", "library"]
     ats                  = ["companies"]
     api                  = ["companies"]

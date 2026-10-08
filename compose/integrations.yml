@@ -23,6 +23,9 @@ x-notifications-env: &notifications-env
   MAIL_FROM: ${MAIL_FROM:-prepza. <no-reply@prepza.local>}
   COMPANIES_URL: http://companies:8000
   LIBRARY_URL: http://library:8000
+  # The reminders ask billing for low credits and generation for topics waiting for review.
+  BILLING_URL: http://billing:8000
+  GENERATION_URL: http://generation:8000
   # Signs emails' unsubscribe links; in Google Cloud it's a generated secret.
   EMAIL_LINK_SECRET: ${EMAIL_LINK_SECRET:-local-email-link-secret}
   SMTP_HOST: ${SMTP_HOST:-mailpit}

@@ -1,5 +1,11 @@
 # Email texts in Vietnamese. Values are filled in with str.format; the HTML version escapes them.
 
+# The footer of reminders to a company's owners and admins.
+MEMBER_FOOTER = (
+    "Email này được gửi đến {email} vì bạn là chủ sở hữu hoặc quản trị viên của một công ty"
+    " trên prepza."
+)
+
 TEXTS = {
     "candidate": {
         "subject": "{company} mời bạn tham gia phỏng vấn",
@@ -66,6 +72,92 @@ TEXTS = {
         "button": "Truy cập prepza",
         "footer": "Email này được gửi đến {email} vì {sender} đã chia sẻ một báo cáo ứng viên "
         "với địa chỉ này trên prepza. Nếu bạn không mong đợi email này, bạn có thể bỏ qua.",
+    },
+    "digest": {
+        "subject": "Tóm tắt hoạt động của bạn trên prepza",
+        "preheader": "Những gì đã diễn ra ở các công ty của bạn trong 24 giờ qua.",
+        "heading": "Tóm tắt hoạt động của bạn",
+        "lines": [
+            "Đây là những gì đã diễn ra ở các công ty của bạn trên prepza trong 24 giờ qua.",
+        ],
+        "rows": {
+            "candidate_finished": "Ứng viên đã hoàn thành: {count} · “{title}”",
+            "invite_undelivered": "Lời mời chưa được gửi đến: {count} · “{title}”",
+            "ats_not_invited": "Ứng viên từ ATS chưa được mời: {count}",
+            "interview_ready": "Buổi phỏng vấn đã sẵn sàng: “{title}”",
+        },
+        "button": "Mở prepza",
+        "footer": (
+            "Email này được gửi đến {email} vì bạn là thành viên của một công ty trên "
+            "prepza và nhận tóm tắt hoạt động của công ty đó."
+        ),
+    },
+    "low_credits": {
+        "subject": "Credit của bạn sắp hết",
+        "preheader": "Hãy nạp thêm để tiếp tục mời ứng viên.",
+        "heading": "Credit sắp hết",
+        "lines": [
+            (
+                "Các công ty này không còn đủ credit để mời thêm một ứng viên. Hãy nạp thêm"
+                " để tiếp tục mời ứng viên."
+            ),
+        ],
+        "rows": {
+            "company": "{company} · credit khả dụng: {available}",
+        },
+        "button": "Nạp credit",
+        "footer": MEMBER_FOOTER,
+    },
+    "no_candidates": {
+        "subject": "Đang chờ ứng viên",
+        "preheader": "Mời ứng viên qua email hoặc chia sẻ liên kết của buổi phỏng vấn.",
+        "heading": "Đang chờ ứng viên",
+        "lines": [
+            (
+                "Các buổi phỏng vấn này đã sẵn sàng được vài ngày nhưng chưa có ai được "
+                "mời. Hãy mời ứng viên qua email hoặc chia sẻ liên kết của buổi phỏng vấn."
+            ),
+        ],
+        "rows": {
+            "interview": "“{title}” · {company}",
+        },
+        "button": "Mời ứng viên",
+        "footer": MEMBER_FOOTER,
+    },
+    "review_waiting": {
+        "subject": "Các chủ đề đang chờ bạn duyệt",
+        "preheader": "Xác nhận các chủ đề để câu hỏi được tạo.",
+        "heading": "Duyệt các chủ đề",
+        "lines": [
+            (
+                "Các chủ đề của những buổi phỏng vấn bạn đã bắt đầu đang chờ bạn duyệt. Khi"
+                " bạn xác nhận, câu hỏi sẽ được tạo. Phần duyệt để mở quá 14 ngày sẽ bị "
+                "hủy."
+            ),
+        ],
+        "rows": {
+            "interview": "{company} · số ngày chờ: {days}",
+        },
+        "button": "Duyệt các chủ đề",
+        "footer": MEMBER_FOOTER,
+    },
+    "top_up_failed": {
+        "subject": "Tự động nạp cho {company} không thành công",
+        "preheader": "Không trừ tiền được từ thẻ. Hãy nạp thêm để tiếp tục mời ứng viên.",
+        "heading": "Tự động nạp không thành công",
+        "lines": [
+            (
+                "Tự động nạp không trừ tiền được từ thẻ của {company}, nên chưa có credit "
+                "nào được thêm."
+            ),
+            "Hãy nạp thêm để tiếp tục mời ứng viên. Tự động nạp sẽ thử lại thẻ sau.",
+        ],
+        "button": "Nạp credit",
+        "footer": (
+            "Email này được gửi đến {email} vì bạn là chủ sở hữu hoặc quản trị viên của "
+            "{company} trên prepza. Email liên quan đến việc thanh toán của công ty bạn nên"
+            " luôn được gửi, bất kể cài đặt email của bạn."
+        ),
     },
     "footer": "Email này được gửi đến {email} vì có người đã mời địa chỉ này trên prepza. Nếu "
     "bạn không mong đợi email này, bạn có thể bỏ qua.",

@@ -31,6 +31,11 @@ locals {
     # In the morning (UTC), not the night: a reminder candidates see.
     invite-reminders = { service = "companies", path = "/internal/schedules/invite-reminders", cron = "0 9 * * *" }
     bank-stages      = { service = "library", path = "/internal/schedules/bank", cron = "45 3 * * *" }
+    # Emails to company members, in the morning (UTC): every 10 minutes for an hour, each run
+    # going on where the last stopped (none is sent twice): the activity digest from 7:00,
+    # reminders from 8:00.
+    member-digest    = { service = "notifications", path = "/internal/schedules/digest", cron = "*/10 7 * * *" }
+    member-reminders = { service = "notifications", path = "/internal/schedules/reminders", cron = "*/10 8 * * *" }
     # ATS candidates still waiting or whose invite stalled, results kept while a connection was
     # broken or the ATS failed, and candidates past their retention.
     ats-recover      = { service = "ats", path = "/internal/schedules/recover", cron = "*/10 * * * *" }

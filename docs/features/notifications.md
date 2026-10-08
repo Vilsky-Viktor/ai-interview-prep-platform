@@ -81,11 +81,29 @@ Bursts are grouped. Another finished candidate, undelivered invite, flagged or f
 The service sends, as HTML with a plain-text version:
 
 - candidate invites,
-- reminders,
+- candidates' reminders,
 - emailed reports, with the PDF attached,
-- contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default).
+- contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default),
+- to company members: the activity digest, reminders, and failed automatic top-ups (see [Emails to company members](#emails-to-company-members)).
 
 `SITE_URL` is the site address that links in emails point to.
+
+### Emails to company members
+
+All three follow the invites' layout, with a plain-text version, in the member's interface language (their sign-in's language, from library). What they list links into the app.
+
+- **Activity digest** (optional, `digest`): one email a day per person, covering every company they're a member of (any role). It lists what reached the companies' bells in the 24 hours before the hour its runs are in, only of the kinds the person gets, grouped by company: candidates who finished and undelivered invites, each with its count and interview; ATS candidates not invited, with their count; interviews ready. Nothing happened, or every kind is off: no email. It shows counts and titles only, no candidate's address or grade. Its "Unsubscribe" stops the whole digest; "Change your email settings" chooses kinds.
+- **Reminders** (optional, the one `reminders` setting), to owners and admins, each kind at most once in 7 days to a person:
+  - credits running low: companies whose available credits can't pay for another candidate and that no automatic top-up refills (billing decides), again each week while that lasts,
+  - waiting for candidates: an interview nobody was invited to, 3 days after it got its questions (not one marked hired); each interview once, and none ready more than 10 days ago,
+  - topics waiting for review: to whoever started the interview, while they're still an owner or admin, once its topics have waited a day; each interview once. Generation cancels a review after 14 days, which the email says.
+- **Automatic top-up failed** (a service email, always sent): at once to the company's owners and admins, with the bell's notification. No unsubscribe link; its footer says it's about the company's billing, so it's sent whatever their email settings. A retried event doesn't send it twice (Resend's key is the event and the person).
+
+The digest and reminders are sent by `notifications` on a schedule: `POST /internal/schedules/digest` every 10 minutes from 7:00 to 7:50 UTC and `/internal/schedules/reminders` from 8:00 to 8:50 (`infra/terraform/jobs.tf`, `scripts/local/crontab`). A run reads what it needs with one batched call to each service (members from companies, low credits from billing, waiting interviews from companies and their review statuses from generation, addresses, languages and settings from library), then sends for at most 40 seconds, one email every 0.6 seconds to stay under Resend's per-second limit; the next run goes on with the rest.
+
+- **Never twice:** each email is claimed in a sent log (`sent_emails`: the person, the kind, the day or what a reminder named) under a per-person lock and a unique constraint, so a re-run or two runs at once send it once. A send that fails gives its claim back for the next run; Resend's idempotency key (the person, the kind and the email's content) keeps a send that failed but went through from going out again.
+- **Resend busy** (429): the run gives back its claim and stops; the next run sends the rest. Any other failure fails the run (and the scheduler's alert) after giving the claim back.
+- The log keeps 30 days; deleting an account removes the person's rows.
 
 ### Email preferences and consent
 

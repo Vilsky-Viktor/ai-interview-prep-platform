@@ -28,6 +28,10 @@ class Settings(ServiceSettings):
     companies_url: str
     # Library keeps each user's email settings; an unsubscribe link turns them off there.
     library_url: str
+    # Billing says which companies run low on credits, and generation which topics wait for a
+    # review: the reminders.
+    billing_url: str
+    generation_url: str
     # prepza's Slack app (api.slack.com: incoming-webhook scope), and the Fernet key that seals
     # each company's web hook. Without all three, Slack isn't offered.
     slack_client_id: str = ""

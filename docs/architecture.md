@@ -35,6 +35,11 @@ flowchart LR
     scheduler -- expired interviews, outbox --> rounds
     scheduler -- recovery, outbox --> ats
     scheduler -- web hook retries --> api
+    scheduler -- activity digest, reminders --> notifications
+    notifications -- members, waiting interviews --> companies
+    notifications -- low credits --> billing
+    notifications -- topic review statuses --> generation
+    notifications -- addresses, languages, email settings --> library
     worker -- saves sets, reuses questions --> library
     library -- re-generate, verify --> generation
     rounds -- questions --> library
@@ -71,7 +76,7 @@ flowchart LR
 | `rounds` | Candidates' interview sessions and their answers, free practice rounds; the FAQ, the help chat, the legal texts and the contact form (`/help/...`) |
 | `companies` | Companies (unique names, logos, verification), members (owner, admins, viewers), interviews, candidate invites (one by one, in bulk, through a shareable link, with reminders), reports |
 | `billing` | Companies' credit wallets (holds and charges), welcome credits, referrals, Paddle top-ups, automatic top-ups, refunds and chargebacks (webhooks); companies sets a candidate's credits aside and charges them through it |
-| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites and reminders, emailed PDF reports, and contact messages to prepza's inbox. Also the bell: stores the notifications other services ask for (`notification.requested`), removes a deleted company's (`company.deleted`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them (one subscription per instance, shared by its open tabs). Posts a company's chosen notifications to its Slack channel too, through the channel's incoming web hook. Signs emails' unsubscribe links and applies them (`/unsubscribe/{token}`, no sign-in): a user's email settings in library, a candidate's opt-out from a company's emails in its own database, checked before each invite and reminder |
+| `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites and reminders, emailed PDF reports, contact messages to prepza's inbox, and to company members the daily activity digest, reminders (low credits, interviews nobody was invited to, topics waiting for review) and failed automatic top-ups. Also the bell: stores the notifications other services ask for (`notification.requested`), removes a deleted company's (`company.deleted`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them (one subscription per instance, shared by its open tabs). Posts a company's chosen notifications to its Slack channel too, through the channel's incoming web hook. Signs emails' unsubscribe links and applies them (`/unsubscribe/{token}`, no sign-in): a user's email settings in library, a candidate's opt-out from a company's emails in its own database, checked before each invite and reminder |
 | `ats` | ATS integrations (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): companies' encrypted ATS keys, linked jobs and the candidates the ATSs send (their webhooks); invites them through companies and writes their results back to the ATS |
 | `api` | The public API at `/api/v1/`: companies' API keys (as hashes, with their expiry), their web hooks (secrets encrypted) and deliveries; reads interviews and candidates and invites through companies, and sends a signed web hook when a candidate finishes |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
@@ -91,7 +96,7 @@ What each service does for users is described in the feature pages, linked from 
 | Kind | In Google Cloud | Examples |
 |---|---|---|
 | Long jobs | Cloud Tasks that call the generation worker's `/internal/jobs/...` | A generation, a question check |
-| Periodic work | Cloud Scheduler calling `/internal/schedules/...` ([`infra/terraform/jobs.tf`](../infra/terraform/jobs.tf)) | Every minute: outbox flushes (library, companies, rounds, generation worker, ats) and interviews whose time ran out (rounds). Every 5 minutes: stuck-generation sweeps and web hook retries (api). Every 10 minutes: key-check batches and ATS recovery (waiting and stalled ATS invites, kept ATS results, ATS candidates past retention). Daily: generation and candidate retention, invite expiry and reminders, the question bank's stages |
+| Periodic work | Cloud Scheduler calling `/internal/schedules/...` ([`infra/terraform/jobs.tf`](../infra/terraform/jobs.tf)) | Every minute: outbox flushes (library, companies, rounds, generation worker, ats) and interviews whose time ran out (rounds). Every 5 minutes: stuck-generation sweeps and web hook retries (api). Every 10 minutes: key-check batches and ATS recovery (waiting and stalled ATS invites, kept ATS results, ATS candidates past retention). Daily: generation and candidate retention, invite expiry and reminders, the question bank's stages. Every 10 minutes for an hour each morning: the activity digest (from 7:00 UTC) and member reminders (from 8:00), each run going on where the last stopped |
 
 - Google signs those calls, and Pub/Sub pushes, as one invoker service account, which each service checks.
 - Locally there is no queue: the API calls the worker directly.
