@@ -29,7 +29,8 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 - The key is saved encrypted with `ATS_ENCRYPTION_KEY`, the ats service's Fernet key. An empty key turns integrations off.
 - prepza never shows the key again.
 - Disconnecting deletes the key and the linked jobs at once.
-- A key the ATS stops accepting marks the connection for reconnecting.
+- A key the ATS stops accepting marks the connection for reconnecting. Only a refusal of the key counts (401 or 403; when connecting, also a wrong address): something deleted in the ATS, like one candidate, affects only that candidate.
+- While a connection waits for reconnecting, its web hooks still count, checked with the secrets it keeps: the candidates it sends wait, and results are kept. Within 10 minutes of reconnecting, the `recover` job invites those candidates and sends those results. Teamtailor's events are the exception when its key is refused: ats can't read the application, so the event is answered with an error.
 
 ## Linking a job
 
@@ -59,17 +60,19 @@ On a company's **ATS** tab, an owner or admin connects an ATS with its key:
 
 - The candidate is saved once per Workable candidate and interview (a unique key).
 - It is then claimed in one update before the invite, so a repeated or simultaneous event invites once.
-- An invite cut off midway can be claimed again after 10 minutes, by **Invite again**, a new event or the ats service's daily `recover` job.
+- An invite cut off midway can be claimed again after 10 minutes, by **Invite again**, a new event or the ats service's `recover` job, which runs every 10 minutes.
+- One run (an event, **Invite again** or the job) invites at most 50 candidates, so it ends in time; the rest wait for the next `recover` run.
 
 **The invite** is the usual one. Companies sends it as if whoever connected Workable sent it: their limits, the company's credits, the pause. If that member is no longer an owner or admin (removed, or made a viewer), companies refuses it and the connection is marked for reconnecting by a current editor.
 
 - A candidate for an interview still being made waits, and is invited once it's ready (`interview.ready`).
-- A candidate refused (credits, limits, the pause) is kept as not invited, and owners and admins get an `ats_not_invited` notification.
+- A candidate refused (credits, limits, the pause) is kept as not invited, and owners and admins get an `ats_not_invited` notification. **Invite again** puts that job's not-invited candidates back to waiting and invites them.
+- When companies fails or doesn't answer, the candidate waits and the `recover` job tries again, 6 times in all (about an hour); only then are they kept as not invited, with the notification.
 - Candidates refused for lack of credits are invited again by themselves once the company gets credits: billing publishes `credits.added` after a top-up (automatic ones too), a referral reward or a chargeback reversed, and ats invites the company's credit-refused candidates from every ATS, as far as the credits go (the rest stay not invited, with a new notification). Billing publishes without an outbox, so a lost event leaves them for **Invite again**.
 
 **Retention.** The saved candidates, with their emails, are deleted:
 
-- after 365 days, by the same daily job,
+- after 365 days, by the same `recover` job,
 - with their interview (`interview.deleted`),
 - with their company (`company.deleted`),
 - when the company erases the candidate in prepza (`candidate.removed`),
@@ -120,7 +123,7 @@ The company sets up Recruitee's web hook by hand too:
 prepza sets up Breezy HR's web hook itself, so the company only pastes the key:
 
 - Connecting creates a web hook in Breezy (`candidateStatusUpdated`) at the connection's own address, `/api/ats/webhooks/breezy/<connection id>`, and keeps the signing secret Breezy gives then, once. Breezy refuses web hooks without its Pro plan; connecting then fails with that reason, and nothing is saved.
-- Reconnecting replaces the web hook; disconnecting deletes it in Breezy.
+- Reconnecting replaces the web hook; disconnecting deletes it in Breezy. If the new web hook can't be made, the earlier connection stays, with its linked jobs and candidates, marked for reconnecting.
 - A key's person in several Breezy companies connects the first one.
 - An event counts only when its `X-Hook-Signature` is the HMAC-SHA256 hex digest of the body with that secret (of the raw body, or the JSON written compactly: Breezy's docs say both).
 - The event carries the position, the new stage and the candidate's email: a candidate moved into a linked position's stage is saved and invited exactly as from Workable, as `<position id>:<candidate id>`.
@@ -144,7 +147,8 @@ When such a candidate finishes, companies publishes `candidate.finished` (grade,
 
 - It's sent once (`reported_at`).
 - A failing ATS makes the event come again.
-- A key the ATS refuses marks the connection for reconnecting.
+- A key the ATS refuses marks the connection for reconnecting. Results are kept while it waits, and the `recover` job sends them once it's reconnected.
+- A candidate gone from Recruitee or Greenhouse (404) is given up, alone.
 
 ## How it's built
 

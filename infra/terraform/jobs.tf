@@ -31,8 +31,9 @@ locals {
     # In the morning (UTC), not the night: a reminder candidates see.
     invite-reminders = { service = "companies", path = "/internal/schedules/invite-reminders", cron = "0 9 * * *" }
     bank-stages      = { service = "library", path = "/internal/schedules/bank", cron = "45 3 * * *" }
-    # ATS candidates whose invite stalled, and ones past their retention.
-    ats-recover      = { service = "ats", path = "/internal/schedules/recover", cron = "0 4 * * *" }
+    # ATS candidates still waiting or whose invite stalled, results kept while a connection was
+    # broken, and candidates past their retention.
+    ats-recover      = { service = "ats", path = "/internal/schedules/recover", cron = "*/10 * * * *" }
     # Events not published right after their change (the outbox).
     library-outbox    = { service = "library", path = "/internal/schedules/outbox", cron = "* * * * *" }
     companies-outbox  = { service = "companies", path = "/internal/schedules/outbox", cron = "* * * * *" }

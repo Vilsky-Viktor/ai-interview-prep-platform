@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 from sqlalchemy import DateTime, ForeignKey, String, Text, UniqueConstraint
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.constants.ats import CandidateStatus, ConnectionStatus
@@ -82,10 +83,16 @@ class AtsCandidate(Base):
     claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     # Why they weren't invited (constants/ats.py FailReason).
     reason: Mapped[str | None] = mapped_column(String(16))
+    # Invites that failed in passing (companies erred or didn't answer), tried again until
+    # MAX_INVITE_ATTEMPTS.
+    attempts: Mapped[int] = mapped_column(default=0, server_default="0")
     # The candidate's invite, in the companies service.
     invite_id: Mapped[uuid.UUID | None] = mapped_column(index=True)
     # When their results went back to the ATS: once.
     reported_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # Their results (companies' candidate.finished event) while the connection is broken: sent
+    # once it's reconnected.
+    result: Mapped[dict | None] = mapped_column(JSONB)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )

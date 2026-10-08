@@ -27,7 +27,7 @@ def finished(monkeypatch):
         id=uuid.uuid4(), provider="workable", status="connected", member_id="m-1"
     )
     row = AtsCandidate(id=uuid.uuid4(), candidate_id="c-1", invite_id=uuid.uuid4())
-    state = {"comments": [], "reported": [], "broken": [], "fail": None, "row": row}
+    state = {"comments": [], "reported": [], "broken": [], "kept": [], "fail": None, "row": row}
 
     async def for_invite(invite_id):
         return (row, connection) if invite_id == row.invite_id else None
@@ -47,8 +47,12 @@ def finished(monkeypatch):
     async def mark_broken(connection_id):
         state["broken"].append(connection_id)
 
+    async def keep_result(row_id, data):
+        state["kept"].append((row_id, data))
+
     monkeypatch.setattr(ats_candidates, "for_invite", for_invite)
     monkeypatch.setattr(ats_candidates, "mark_reported", mark_reported)
+    monkeypatch.setattr(ats_candidates, "keep_result", keep_result)
     monkeypatch.setattr(ats, "mark_broken", mark_broken)
     monkeypatch.setattr(integrations, "credentials", key)
     monkeypatch.setattr(workable, "comment", comment)
@@ -57,9 +61,9 @@ def finished(monkeypatch):
     return state, connection
 
 
-def report(invite_id, grade=82, passed=True):
+def result(invite_id, grade=82, passed=True) -> dict:
     """Companies' candidate.finished event, as it carries the result."""
-    data = {
+    return {
         "candidate_invite_id": str(invite_id),
         "interview_id": str(INTERVIEW_ID),
         "company_id": str(COMPANY_ID),
@@ -68,7 +72,10 @@ def report(invite_id, grade=82, passed=True):
         "passed": passed,
         "flagged": False,
     }
-    asyncio.run(flow.report(data))
+
+
+def report(invite_id, grade=82, passed=True):
+    asyncio.run(flow.report(result(invite_id, grade, passed)))
 
 
 def test_results_go_back_to_workable_once_as_a_comment(finished):
@@ -99,6 +106,8 @@ def test_without_a_workable_member_nothing_goes_back(finished):
     report(state["row"].invite_id)
 
     assert state["comments"] == []
+    # Given up, so the recovery job doesn't try it again and again.
+    assert state["reported"] == [state["row"].id]
 
 
 def test_a_failing_workable_raises_so_the_event_comes_again(finished):
@@ -111,13 +120,33 @@ def test_a_failing_workable_raises_so_the_event_comes_again(finished):
     assert state["reported"] == []
 
 
-def test_a_refused_key_marks_the_connection_broken_and_gives_up(finished):
+def test_a_refused_key_marks_the_connection_broken_and_keeps_the_results(finished):
     state, _ = finished
     state["fail"] = KeyRejected()
     report(state["row"].invite_id)
 
     assert len(state["broken"]) == 1
     assert state["reported"] == []
+    # Sent once it's reconnected, by the recovery job.
+    assert state["kept"] == [(state["row"].id, result(state["row"].invite_id))]
+
+
+def test_a_broken_connection_keeps_the_results_without_calling_the_ats(finished):
+    state, connection = finished
+    connection.status = "broken"
+    report(state["row"].invite_id)
+
+    assert state["comments"] == [] and state["reported"] == []
+    assert state["kept"] == [(state["row"].id, result(state["row"].invite_id))]
+
+
+def test_a_candidate_gone_from_the_ats_is_given_up_alone(finished):
+    state, _ = finished
+    state["fail"] = HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
+    report(state["row"].invite_id)
+
+    assert state["reported"] == [state["row"].id]
+    assert state["broken"] == [] and state["kept"] == []
 
 
 def test_results_go_back_to_greenhouse_as_a_note_without_a_member(finished):

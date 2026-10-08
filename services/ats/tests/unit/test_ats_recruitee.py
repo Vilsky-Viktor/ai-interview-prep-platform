@@ -158,15 +158,27 @@ def test_another_stage_or_job_isnt_invited(world, offer_id, stage_id):
     assert world["sent"] == [] and world["rows"] == {}
 
 
-def test_an_unknown_non_recruitee_or_broken_connection_is_ignored_even_unsigned(world):
+def test_an_unknown_or_non_recruitee_connection_is_ignored_even_unsigned(world):
     receive(event(), given="", connection_id=uuid.uuid4())
     world["connection"].provider = "teamtailor"
     receive(event(), given="")
-    world["connection"].provider = "recruitee"
-    world["connection"].status = "broken"
-    receive(event(), given="")
 
     assert world["jobs"] == [] and world["sent"] == []
+
+
+def test_a_broken_connections_candidate_waits_to_be_invited_once_reconnected(world):
+    world["connection"].status = "broken"
+
+    with pytest.raises(HTTPException) as refused:
+        receive(event(), given="forged")
+
+    assert refused.value.status_code == 401
+    assert world["rows"] == {}
+
+    receive(event())
+
+    assert world["sent"] == []
+    assert len(world["rows"]) == 1
 
 
 @pytest.fixture

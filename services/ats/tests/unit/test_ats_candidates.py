@@ -89,6 +89,7 @@ def world(monkeypatch, companies_api):
                 candidate_id=candidate_id,
                 email=email,
                 status="waiting",
+                attempts=0,
             ),
         )
 
@@ -239,7 +240,7 @@ def test_waiting_candidates_are_invited_once_the_interview_is_ready(world, monke
         return [row for row in state["rows"].values() if row.interview_id == interview_id]
 
     async def connection_by_id(connection_id):
-        return AtsConnection(id=connection_id, created_by="ann")
+        return AtsConnection(id=connection_id, created_by="ann", status="connected")
 
     monkeypatch.setattr(ats_candidates, "waiting", waiting)
     monkeypatch.setattr(ats, "connection_by_id", connection_by_id)
@@ -262,7 +263,7 @@ def test_a_top_up_invites_the_candidates_kept_for_lack_of_credits(world, monkeyp
         return [row for row in state["rows"].values() if row.reason == "credits"]
 
     async def connection_by_id(connection_id):
-        return AtsConnection(id=connection_id, created_by="ann")
+        return AtsConnection(id=connection_id, created_by="ann", status="connected")
 
     monkeypatch.setattr(ats_candidates, "short_of_credits", short_of_credits)
     monkeypatch.setattr(ats, "connection_by_id", connection_by_id)

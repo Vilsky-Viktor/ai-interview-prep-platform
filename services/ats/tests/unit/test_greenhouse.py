@@ -119,8 +119,8 @@ def test_a_refused_credential_is_a_rejected_key(harvest, refusal):
         asyncio.run(greenhouse.check("id", "bad"))
 
 
-@pytest.mark.parametrize("refusal", [401, 403])
-def test_a_call_refused_even_with_a_fresh_token_is_a_rejected_key(harvest, refusal):
+@pytest.mark.parametrize("refusal", [400, 401, 403, 404])
+def test_a_check_refused_even_with_a_fresh_token_is_a_rejected_key(harvest, refusal):
     harvest["answers"]["/v3/jobs"] = refusal
 
     with pytest.raises(KeyRejected):
@@ -200,6 +200,17 @@ def test_a_note_goes_on_the_candidate_and_application(harvest, candidate_id, mem
         "visibility": "public",
         **extra,
     }
+
+
+@pytest.mark.parametrize(("answer", "raised"), [(400, 502), (404, 404)])
+def test_a_note_greenhouse_doesnt_take_isnt_a_rejected_key(harvest, answer, raised):
+    # Only checking a credential takes a 400 or 404 as a refusal; on a note it's that note.
+    harvest["answers"]["/v3/notes"] = answer
+
+    with pytest.raises(HTTPException) as failed:
+        asyncio.run(greenhouse.comment("id", "secret", "11:22", None, "Grade: 82%"))
+
+    assert failed.value.status_code == raised
 
 
 def test_only_bodies_signed_with_the_secret_key_count():

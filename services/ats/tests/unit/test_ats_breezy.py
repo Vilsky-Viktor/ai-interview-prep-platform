@@ -155,15 +155,27 @@ def test_another_stage_or_position_isnt_invited(world, position_id, stage_id):
     assert world["sent"] == [] and world["rows"] == {}
 
 
-def test_an_unknown_non_breezy_or_broken_connection_is_ignored_even_unsigned(world):
+def test_an_unknown_or_non_breezy_connection_is_ignored_even_unsigned(world):
     receive(event(), given="", connection_id=uuid.uuid4())
     world["connection"].provider = "recruitee"
     receive(event(), given="")
-    world["connection"].provider = "breezy"
-    world["connection"].status = "broken"
-    receive(event(), given="")
 
     assert world["jobs"] == [] and world["sent"] == []
+
+
+def test_a_broken_connections_candidate_waits_to_be_invited_once_reconnected(world):
+    world["connection"].status = "broken"
+
+    with pytest.raises(HTTPException) as refused:
+        receive(event(), given="forged")
+
+    assert refused.value.status_code == 401
+    assert world["rows"] == {}
+
+    receive(event())
+
+    assert world["sent"] == []
+    assert len(world["rows"]) == 1
 
 
 def test_removing_the_web_hook_deletes_it_in_breezy(world):

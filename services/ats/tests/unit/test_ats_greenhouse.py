@@ -136,8 +136,20 @@ def test_an_unknown_or_non_greenhouse_connection_is_ignored_even_unsigned(world)
     receive(event(), signature="", connection_id=uuid.uuid4())
     world["connection"].provider = "workable"
     receive(event(), signature="")
-    world["connection"].provider = "greenhouse"
-    world["connection"].status = "broken"
-    receive(event(), signature="")
 
     assert world["sent"] == []
+
+
+def test_a_broken_connections_candidate_waits_to_be_invited_once_reconnected(world):
+    world["connection"].status = "broken"
+
+    with pytest.raises(HTTPException) as refused:
+        receive(event(), signature="forged")
+
+    assert refused.value.status_code == 401
+    assert world["rows"] == {}
+
+    receive(event())
+
+    assert world["sent"] == []
+    assert len(world["rows"]) == 1

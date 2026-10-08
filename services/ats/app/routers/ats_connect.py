@@ -164,7 +164,8 @@ async def connect_recruitee(company_id: UUID, body: RecruiteeIn, user: CurrentUs
 async def connect_breezy(company_id: UUID, body: BreezyIn, user: CurrentUser) -> None:
     """Connects Breezy HR with a personal API key (it acts as the person who made it), checked
     with one read first, then creates the web hook that sends its stage changes, whose secret
-    Breezy gives only now. A reconnect replaces the earlier web hook."""
+    Breezy gives only now. A reconnect replaces the earlier web hook; one that fails keeps the
+    earlier connection, marked for reconnecting."""
     await require_editor(user, company_id)
     integrations.require_available()
     token = body.token.strip()
@@ -198,8 +199,13 @@ async def connect_breezy(company_id: UUID, body: BreezyIn, user: CurrentUser) ->
     try:
         hook, secret = await breezy.subscribe(found["id"], token, url)
     except (KeyRejected, HTTPException):
-        # Without its web hook no candidate would come: the connection doesn't stay.
-        await ats.disconnect(company_id, AtsProvider.BREEZY)
+        # Without its web hook no candidate would come: a new connection doesn't stay. An
+        # earlier one gets its key back, with its linked jobs and candidates, marked for
+        # reconnecting, as its own web hook may be gone already.
+        if earlier is None:
+            await ats.disconnect(company_id, AtsProvider.BREEZY)
+        else:
+            await ats.restore_broken(earlier)
 
         raise HTTPException(
             status.HTTP_400_BAD_REQUEST,

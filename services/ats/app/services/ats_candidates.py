@@ -6,6 +6,8 @@ from fastapi import HTTPException, status
 from app.config.settings import settings
 from app.constants.ats import (
     ATS_NAMES,
+    INVITE_BATCH,
+    MAX_INVITE_ATTEMPTS,
     NEEDS_AUTHOR,
     SCORECARD_LINK,
     CandidateStatus,
@@ -33,11 +35,8 @@ REASONS = {
 
 
 async def key_of(connection: AtsConnection) -> dict | None:
-    """A working connection's credentials, or None when it isn't connected or its key can't be
-    read (then marked broken)."""
-    if connection.status != ConnectionStatus.CONNECTED:
-        return None
-
+    """The connection's credentials, also while it's broken (its web hooks' secrets still
+    count), or None when its key can't be read (then marked broken)."""
     try:
         return await integrations.credentials(connection)
     except HTTPException:
@@ -45,18 +44,29 @@ async def key_of(connection: AtsConnection) -> dict | None:
 
 
 async def arrived(link, connection: AtsConnection, candidate_id: str, email: str) -> None:
-    """A candidate the ATS sent for a linked job: saved once, then invited."""
+    """A candidate the ATS sent for a linked job: saved once, then invited. When companies
+    doesn't answer, they wait for the recovery job."""
     row = await ats_candidates.add(connection.id, link.id, link.interview_id, candidate_id, email)
-    found = await companies.interviews([row.interview_id])
+
+    try:
+        found = await companies.interviews([row.interview_id])
+    except Exception:
+        logger.exception("Couldn't read the interview of ATS candidate %s", row.id)
+
+        return
+
     await invite(row, connection, found.get(row.interview_id))
 
 
 async def invite(row: AtsCandidate, connection: AtsConnection, interview: dict | None) -> None:
     """Invites the candidate, once: only a waiting or not-invited one, and only the request that
-    claims it. An interview still being made keeps them waiting; a refused invite (credits,
-    limits, the pause) is kept with its reason, to retry. One that's gone is left: its
-    interview.deleted event removes the row."""
+    claims it. An interview still being made, or a broken connection, keeps them waiting (until
+    it's ready, or reconnected); a refused invite (credits, limits, the pause) is kept with its
+    reason, to retry. One that's gone is left: its interview.deleted event removes the row."""
     if interview is None or not interview["ready"]:
+        return
+
+    if connection.status != ConnectionStatus.CONNECTED:
         return
 
     claimed = await ats_candidates.claim(row.id, (CandidateStatus.WAITING, CandidateStatus.FAILED))
@@ -81,8 +91,14 @@ async def invite(row: AtsCandidate, connection: AtsConnection, interview: dict |
 
         return
     except Exception:
+        # Companies failed or didn't answer: the recovery job tries again, and only the last
+        # attempt keeps them as not invited, with a notice.
         logger.exception("Couldn't invite ATS candidate %s", row.id)
-        await refused(row, connection, interview, FailReason.OTHER)
+
+        if row.attempts + 1 >= MAX_INVITE_ATTEMPTS:
+            await refused(row, connection, interview, FailReason.OTHER)
+        else:
+            await ats_candidates.postpone(row.id)
 
         return
 
@@ -100,14 +116,18 @@ async def refused(
 
 
 async def invite_all(rows: list[AtsCandidate]) -> None:
-    """Invites each candidate, with their interviews read from companies in one call."""
+    """Invites the candidates whose interviews are ready (read from companies in one call), in
+    their order, at most INVITE_BATCH, so one run ends in time: the rest stay waiting, for the
+    recovery job. Each is claimed first, so a run again (a redelivered event) invites nobody
+    twice."""
     found = await companies.interviews({row.interview_id for row in rows})
+    ready = [row for row in rows if (found.get(row.interview_id) or {}).get("ready")]
 
-    for row in rows:
+    for row in ready[:INVITE_BATCH]:
         connection = await ats.connection_by_id(row.connection_id)
 
         if connection is not None:
-            await invite(row, connection, found.get(row.interview_id))
+            await invite(row, connection, found[row.interview_id])
 
 
 async def invite_waiting(interview_id: UUID) -> None:
@@ -117,39 +137,57 @@ async def invite_waiting(interview_id: UUID) -> None:
 
 async def retry(company_id: UUID, link_id: UUID) -> None:
     """A linked job's candidates that weren't invited, or whose invite was cut off, are tried
-    again (after a top-up, or once the pause is off)."""
+    again (after a top-up, or once the pause is off): a batch now, the rest by the recovery
+    job."""
     await invite_all(await ats_candidates.not_invited(company_id, link_id))
 
 
 async def topped_up(company_id: UUID) -> None:
     """The company got credits: its candidates not invited for lack of them are invited, as far
-    as the credits go (the rest are kept, with a new notification)."""
+    as the credits go (the rest are kept, with a new notification); a batch now, the rest by
+    the recovery job."""
     await invite_all(await ats_candidates.short_of_credits(company_id))
 
 
 async def recover() -> int:
-    """Daily: invites cut off midway (the server stopped) are started again; how many."""
-    rows = await ats_candidates.stale()
+    """Every 10 minutes: candidates still waiting (left for later by a run, by companies not
+    answering, or sent while the connection was broken) and invites cut off midway (the server
+    stopped) are invited, as far as one batch goes; results kept while a connection was broken
+    go back. How many candidates were found."""
+    rows = await ats_candidates.recoverable()
     await invite_all(rows)
+
+    for row in await ats_candidates.unreported():
+        try:
+            await report(row.result)
+        except Exception:
+            logger.exception("Couldn't send the results of ATS candidate %s", row.id)
 
     return len(rows)
 
 
 async def report(data: dict) -> None:
-    """A candidate the ATS sent finished (companies' candidate.finished event): their results go
-    back to the ATS as a comment, once. A failing ATS raises, so the event comes again; a broken
-    key or no member to write as gives up. Candidates no ATS sent are ignored."""
+    """A candidate the ATS sent finished (companies' candidate.finished event, or results kept
+    earlier): their results go back to the ATS as a comment, once. A failing ATS raises, so the
+    event comes again; while the connection is broken they're kept, for the recovery job to
+    send once it's reconnected. No member to write as gives up, and so does a candidate gone
+    from the ATS. Candidates no ATS sent are ignored."""
     found = await ats_candidates.for_invite(UUID(data["candidate_invite_id"]))
 
     if found is None:
         return
 
     row, connection = found
-    key = await key_of(connection)
-    # Workable's comments need an author; Greenhouse's notes don't.
-    no_author = connection.provider in NEEDS_AUTHOR and connection.member_id is None
 
-    if key is None or no_author:
+    # Workable's comments need an author; Greenhouse's notes don't. Without one, nowhere to write.
+    if connection.provider in NEEDS_AUTHOR and connection.member_id is None:
+        await ats_candidates.mark_reported(row.id)
+
+        return
+
+    if connection.status != ConnectionStatus.CONNECTED or await key_of(connection) is None:
+        await ats_candidates.keep_result(row.id, data)
+
         return
 
     link = SCORECARD_LINK.format(
@@ -171,8 +209,16 @@ async def report(data: dict) -> None:
             text=text,
         )
     except HTTPException as error:
-        # A refused key was marked broken: nothing to retry. Anything else comes again.
+        # A refused key was marked broken: kept until it's reconnected.
         if error.status_code == status.HTTP_409_CONFLICT:
+            await ats_candidates.keep_result(row.id, data)
+
+            return
+
+        # The candidate is gone from the ATS: nowhere to write. Anything else comes again.
+        if error.status_code == status.HTTP_404_NOT_FOUND:
+            await ats_candidates.mark_reported(row.id)
+
             return
 
         raise

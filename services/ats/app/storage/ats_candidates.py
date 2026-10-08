@@ -6,7 +6,13 @@ from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import and_, delete, func, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from app.constants.ats import STALE_CLAIM_MINUTES, CandidateStatus, FailReason
+from app.constants.ats import (
+    REPORT_BATCH,
+    STALE_CLAIM_MINUTES,
+    CandidateStatus,
+    ConnectionStatus,
+    FailReason,
+)
 from app.models.ats import AtsCandidate, AtsConnection
 from app.models.outbox import OutboxEvent
 from app.storage.db import Session
@@ -67,37 +73,81 @@ async def claim(row_id: UUID, statuses: tuple[str, ...]) -> bool:
     return claimed is not None
 
 
-async def stale() -> list[AtsCandidate]:
-    """Invites cut off midway, to start again."""
-    async with Session() as session:
-        return list((await session.scalars(select(AtsCandidate).where(_stale()))).all())
-
-
-async def not_invited(company_id: UUID, link_id: UUID) -> list[AtsCandidate]:
-    """A linked job's candidates that weren't invited, or whose invite was cut off midway; only
-    the company's own."""
-    owned = select(AtsConnection.id).where(AtsConnection.company_id == company_id)
-    query = select(AtsCandidate).where(
-        AtsCandidate.link_id == link_id,
-        AtsCandidate.connection_id.in_(owned),
-        or_(AtsCandidate.status == CandidateStatus.FAILED, _stale()),
+async def recoverable() -> list[AtsCandidate]:
+    """For the recovery job, oldest first: the candidates of working connections still waiting
+    (left for later, or arrived while the connection was broken), and invites cut off midway."""
+    working = select(AtsConnection.id).where(AtsConnection.status == ConnectionStatus.CONNECTED)
+    query = (
+        select(AtsCandidate)
+        .where(
+            AtsCandidate.connection_id.in_(working),
+            or_(AtsCandidate.status == CandidateStatus.WAITING, _stale()),
+        )
+        .order_by(AtsCandidate.created_at)
     )
 
     async with Session() as session:
+        return list((await session.scalars(query)).all())
+
+
+async def not_invited(company_id: UUID, link_id: UUID) -> list[AtsCandidate]:
+    """A linked job's candidates that weren't invited, put back to waiting (with their attempts
+    reset), with the ones still waiting or whose invite was cut off midway, oldest first; only
+    the company's own."""
+    owned = select(AtsConnection.id).where(AtsConnection.company_id == company_id)
+    mine = (AtsCandidate.link_id == link_id, AtsCandidate.connection_id.in_(owned))
+    requeue = (
+        update(AtsCandidate)
+        .where(*mine, AtsCandidate.status == CandidateStatus.FAILED)
+        .values(status=CandidateStatus.WAITING, reason=None, attempts=0)
+    )
+    query = (
+        select(AtsCandidate)
+        .where(*mine, or_(AtsCandidate.status == CandidateStatus.WAITING, _stale()))
+        .order_by(AtsCandidate.created_at)
+    )
+
+    async with Session() as session:
+        await session.execute(requeue)
+        await session.commit()
+
         return list((await session.scalars(query)).all())
 
 
 async def short_of_credits(company_id: UUID) -> list[AtsCandidate]:
-    """The company's candidates, from any ATS, that weren't invited for lack of credits."""
+    """The company's candidates, from any ATS, that weren't invited for lack of credits: put
+    back to waiting (with their attempts reset), oldest first."""
     owned = select(AtsConnection.id).where(AtsConnection.company_id == company_id)
-    query = select(AtsCandidate).where(
-        AtsCandidate.connection_id.in_(owned),
-        AtsCandidate.status == CandidateStatus.FAILED,
-        AtsCandidate.reason == FailReason.CREDITS,
+    query = (
+        update(AtsCandidate)
+        .where(
+            AtsCandidate.connection_id.in_(owned),
+            AtsCandidate.status == CandidateStatus.FAILED,
+            AtsCandidate.reason == FailReason.CREDITS,
+        )
+        .values(status=CandidateStatus.WAITING, reason=None, attempts=0)
+        .returning(AtsCandidate)
     )
 
     async with Session() as session:
-        return list((await session.scalars(query)).all())
+        found = list((await session.scalars(query)).all())
+        await session.commit()
+
+    return sorted(found, key=lambda row: row.created_at)
+
+
+async def postpone(row_id: UUID) -> None:
+    """An invite that failed in passing: back to waiting, for the recovery job, one attempt
+    more."""
+    query = (
+        update(AtsCandidate)
+        .where(AtsCandidate.id == row_id)
+        .values(status=CandidateStatus.WAITING, attempts=AtsCandidate.attempts + 1)
+    )
+
+    async with Session() as session:
+        await session.execute(query)
+        await session.commit()
 
 
 async def settle(
@@ -125,9 +175,14 @@ async def settle(
 
 
 async def waiting(interview_id: UUID) -> list[AtsCandidate]:
-    """The candidates waiting for an interview to be ready."""
-    query = select(AtsCandidate).where(
-        AtsCandidate.status == CandidateStatus.WAITING, AtsCandidate.interview_id == interview_id
+    """The candidates waiting for an interview to be ready, oldest first."""
+    query = (
+        select(AtsCandidate)
+        .where(
+            AtsCandidate.status == CandidateStatus.WAITING,
+            AtsCandidate.interview_id == interview_id,
+        )
+        .order_by(AtsCandidate.created_at)
     )
 
     async with Session() as session:
@@ -148,9 +203,39 @@ async def for_invite(invite_id: UUID) -> tuple[AtsCandidate, AtsConnection] | No
         return tuple(row) if row else None
 
 
-async def mark_reported(row_id: UUID) -> None:
+async def keep_result(row_id: UUID, data: dict) -> None:
+    """Results that can't go back while the connection is broken: kept, to send after."""
+    query = update(AtsCandidate).where(AtsCandidate.id == row_id).values(result=data)
+
+    async with Session() as session:
+        await session.execute(query)
+        await session.commit()
+
+
+async def unreported() -> list[AtsCandidate]:
+    """Kept results of working connections, oldest first, as many as one run sends."""
+    working = select(AtsConnection.id).where(AtsConnection.status == ConnectionStatus.CONNECTED)
     query = (
-        update(AtsCandidate).where(AtsCandidate.id == row_id).values(reported_at=datetime.now(UTC))
+        select(AtsCandidate)
+        .where(
+            AtsCandidate.connection_id.in_(working),
+            AtsCandidate.result.is_not(None),
+            AtsCandidate.reported_at.is_(None),
+        )
+        .order_by(AtsCandidate.created_at)
+        .limit(REPORT_BATCH)
+    )
+
+    async with Session() as session:
+        return list((await session.scalars(query)).all())
+
+
+async def mark_reported(row_id: UUID) -> None:
+    """Their results went back, or have nowhere to go (the candidate is gone from the ATS)."""
+    query = (
+        update(AtsCandidate)
+        .where(AtsCandidate.id == row_id)
+        .values(reported_at=datetime.now(UTC), result=None)
     )
 
     async with Session() as session:

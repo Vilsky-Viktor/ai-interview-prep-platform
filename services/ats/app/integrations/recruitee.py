@@ -12,7 +12,9 @@ KEYS = ("company", "token")
 REJECTED = {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
 
 
-async def _call(method: str, company: str, token: str, path: str, params=None, body=None) -> dict:
+async def _call(
+    method: str, company: str, token: str, path: str, params=None, body=None, rejected=REJECTED
+) -> dict:
     try:
         response = await http.get_client().request(
             method,
@@ -25,9 +27,12 @@ async def _call(method: str, company: str, token: str, path: str, params=None, b
     except httpx.HTTPError as error:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Recruitee didn't answer") from error
 
-    # A company that isn't there answers 404: the address is wrong, as good as a refused key.
-    if response.status_code in REJECTED or response.status_code == status.HTTP_404_NOT_FOUND:
+    if response.status_code in rejected:
         raise KeyRejected
+
+    # Something deleted in Recruitee (a job, a candidate): only that is gone, not the key.
+    if response.status_code == status.HTTP_404_NOT_FOUND:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
 
     if not response.is_success:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Recruitee didn't answer")
@@ -36,8 +41,10 @@ async def _call(method: str, company: str, token: str, path: str, params=None, b
 
 
 async def check(company: str, token: str) -> None:
-    """Raises KeyRejected unless the token may read the company's jobs."""
-    await _call("GET", company, token, "/offers", {"limit": 1})
+    """Raises KeyRejected unless the token may read the company's jobs. A company that isn't
+    there answers 404: the address is wrong, as good as a refused key."""
+    rejected = REJECTED | {status.HTTP_404_NOT_FOUND}
+    await _call("GET", company, token, "/offers", {"limit": 1}, rejected=rejected)
 
 
 async def jobs(company: str, token: str) -> list[dict]:

@@ -70,6 +70,26 @@ async def set_credentials(connection_id: UUID, credentials: str) -> None:
         await session.commit()
 
 
+async def restore_broken(earlier: AtsConnection) -> None:
+    """Puts back a connection as it was before a reconnect that failed (its key, account, maker
+    and member), marked for reconnecting: its linked jobs and candidates stay."""
+    query = (
+        update(AtsConnection)
+        .where(AtsConnection.id == earlier.id)
+        .values(
+            account=earlier.account,
+            credentials=earlier.credentials,
+            created_by=earlier.created_by,
+            member_id=earlier.member_id,
+            status=ConnectionStatus.BROKEN,
+        )
+    )
+
+    async with Session() as session:
+        await session.execute(query)
+        await session.commit()
+
+
 async def mark_broken(connection_id: UUID) -> None:
     query = (
         update(AtsConnection)

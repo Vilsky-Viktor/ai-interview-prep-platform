@@ -117,7 +117,7 @@ def test_an_invite_cut_off_midway_can_be_claimed_again_after_a_while(run):
         first = await ats_candidates.claim(row.id, (CandidateStatus.WAITING,))
         # Started just now: not stale, so nobody else may claim it.
         fresh = await ats_candidates.claim(row.id, (CandidateStatus.WAITING,))
-        stale_before = [item for item in await ats_candidates.stale() if item.id == row.id]
+        stale_before = [i for i in await ats_candidates.recoverable() if i.id == row.id]
 
         async with Session() as session:
             await session.execute(
@@ -127,7 +127,7 @@ def test_an_invite_cut_off_midway_can_be_claimed_again_after_a_while(run):
             )
             await session.commit()
 
-        stale_after = [item for item in await ats_candidates.stale() if item.id == row.id]
+        stale_after = [i for i in await ats_candidates.recoverable() if i.id == row.id]
         again = await ats_candidates.claim(row.id, (CandidateStatus.WAITING,))
         await ats.delete_company(company)
 

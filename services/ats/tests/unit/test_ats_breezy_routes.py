@@ -68,6 +68,10 @@ def stored(monkeypatch, companies_api):
     async def disconnect(company_id, provider):
         rows["connection"] = None
 
+    async def restore_broken(earlier):
+        rows["connection"] = earlier
+        earlier.status = "broken"
+
     async def link_for_job(connection_id, job_id):
         return None
 
@@ -97,6 +101,7 @@ def stored(monkeypatch, companies_api):
         "connection_by_id": connection_by_id,
         "set_credentials": set_credentials,
         "disconnect": disconnect,
+        "restore_broken": restore_broken,
         "link_for_job": link_for_job,
         "subscriptions": subscriptions,
     }.items():
@@ -160,6 +165,25 @@ def test_without_its_web_hook_the_connection_doesnt_stay(client, stored, monkeyp
     assert response.status_code == 400
     assert "web hooks come with Breezy's Pro plan" in response.json()["detail"]
     assert stored["connection"] is None
+
+
+def test_a_failed_reconnect_keeps_the_earlier_connection_marked_for_reconnecting(
+    client, stored, monkeypatch
+):
+    connect(client)
+    earlier = stored["connection"]
+
+    async def refuse(company, token, url):
+        raise HTTPException(502)
+
+    monkeypatch.setattr(breezy, "subscribe", refuse)
+    response = connect(client)
+
+    assert response.status_code == 400
+    # Not disconnected (which would delete its linked jobs and candidates): its key is back.
+    assert stored["connection"].id == earlier.id
+    assert stored["connection"].status == "broken"
+    assert saved(stored)["webhook_secret"] == "secret-1"
 
 
 def test_a_reconnect_replaces_the_earlier_web_hook(client, stored):

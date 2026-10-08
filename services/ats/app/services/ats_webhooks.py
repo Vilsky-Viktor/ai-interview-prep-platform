@@ -26,6 +26,8 @@ from app.storage import ats
 # The events each ATS's web hook sends: checked as that ATS's, then a candidate who reached a
 # linked job's stage is handed to the candidate flow (ats_candidates.arrived). Anything for a job,
 # stage or connection that's gone, or another event, is ignored, so the ATS doesn't send it again.
+# A broken connection's events still count, checked with the secrets it keeps: the candidate
+# waits, and is invited once it's reconnected.
 
 
 async def receive_workable(link_id: UUID, body: bytes, signature: str) -> None:

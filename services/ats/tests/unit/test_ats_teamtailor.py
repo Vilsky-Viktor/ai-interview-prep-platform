@@ -163,15 +163,27 @@ def test_another_stage_or_job_or_a_candidate_without_email_isnt_invited(world, c
     assert world["sent"] == [] and world["rows"] == {}
 
 
-def test_an_unknown_non_teamtailor_or_broken_connection_is_ignored_even_unsigned(world):
+def test_an_unknown_or_non_teamtailor_connection_is_ignored_even_unsigned(world):
     receive(event(), given="", connection_id=uuid.uuid4())
     world["connection"].provider = "greenhouse"
     receive(event(), given="")
-    world["connection"].provider = "teamtailor"
-    world["connection"].status = "broken"
-    receive(event(), given="")
 
     assert world["read"] == [] and world["sent"] == []
+
+
+def test_a_broken_connections_candidate_waits_to_be_invited_once_reconnected(world):
+    world["connection"].status = "broken"
+
+    with pytest.raises(HTTPException) as refused:
+        receive(event(), given="forged")
+
+    assert refused.value.status_code == 401
+    assert world["rows"] == {}
+
+    receive(event())
+
+    assert world["sent"] == []
+    assert len(world["rows"]) == 1
 
 
 @pytest.fixture
@@ -229,4 +241,5 @@ def test_without_a_teamtailor_user_to_write_as_nothing_goes_back(finished):
     finished["connection"].member_id = None
     report(finished)
 
-    assert finished["notes"] == [] and finished["reported"] == []
+    # Given up: marked, so it isn't tried again.
+    assert finished["notes"] == [] and finished["reported"] == [finished["row"].id]

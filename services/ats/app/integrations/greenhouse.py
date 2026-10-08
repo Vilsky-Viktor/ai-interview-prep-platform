@@ -18,7 +18,10 @@ from app.integrations.errors import KeyRejected
 # The credentials this client takes (a connection also keeps its web hook's secret key).
 KEYS = ("client_id", "client_secret")
 # Greenhouse's answers that mean the credential is wrong, revoked or lacks a permission.
-REJECTED = {status.HTTP_400_BAD_REQUEST, status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
+REJECTED = {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
+# Its token endpoint (OAuth) answers a wrong or revoked credential with 400 too. On any other
+# call a 400 is a request it didn't take (one note, one candidate), not a refused key.
+TOKEN_REJECTED = REJECTED | {status.HTTP_400_BAD_REQUEST}
 # Access tokens by credential (client id and a hash of its secret, so another company's cached
 # token is never used for a wrong secret), with when each stops being used: about an hour.
 _tokens: dict[tuple[str, str], tuple[str, float]] = {}
@@ -47,7 +50,7 @@ async def _token(client_id: str, client_secret: str, fresh: bool = False) -> str
     except httpx.HTTPError as error:
         raise _failed() from error
 
-    if response.status_code in REJECTED:
+    if response.status_code in TOKEN_REJECTED:
         raise KeyRejected
 
     if not response.is_success:
@@ -67,8 +70,10 @@ async def _call(
     url: str,
     params: dict | None = None,
     body: dict | None = None,
+    rejected: set[int] = REJECTED,
 ) -> httpx.Response:
-    """One call to the Harvest API; a 401 renews the token once (it may have expired early)."""
+    """One call to the Harvest API; a 401 renews the token once (it may have expired early). A
+    404 is what was asked for being gone (a candidate deleted), not a refused key."""
     for fresh in (False, True):
         token = await _token(client_id, client_secret, fresh)
 
@@ -87,8 +92,11 @@ async def _call(
         if response.status_code != status.HTTP_401_UNAUTHORIZED:
             break
 
-    if response.status_code in REJECTED:
+    if response.status_code in rejected:
         raise KeyRejected
+
+    if response.status_code == status.HTTP_404_NOT_FOUND:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
 
     if not response.is_success:
         raise _failed()
@@ -123,8 +131,10 @@ async def _list(client_id: str, client_secret: str, path: str, params: dict) -> 
 
 
 async def check(client_id: str, client_secret: str) -> None:
-    """Raises KeyRejected unless the credential may read jobs."""
-    await _call("GET", client_id, client_secret, GREENHOUSE_API + "/jobs", {"per_page": 1})
+    """Raises KeyRejected unless the credential may read jobs (any refusal counts here)."""
+    url = GREENHOUSE_API + "/jobs"
+    rejected = TOKEN_REJECTED | {status.HTTP_404_NOT_FOUND}
+    await _call("GET", client_id, client_secret, url, {"per_page": 1}, rejected=rejected)
 
 
 async def jobs(client_id: str, client_secret: str) -> list[dict]:

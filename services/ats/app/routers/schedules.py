@@ -23,13 +23,14 @@ async def flush_outbox() -> None:
 
 @router.post("/recover", status_code=status.HTTP_204_NO_CONTENT)
 async def recover() -> None:
-    """Daily, from Cloud Scheduler: invites cut off midway start again (companies refuses them
-    during the emergency pause, and they're kept to retry), and candidates past their
-    retention period go."""
+    """Every 10 minutes, from Cloud Scheduler: waiting candidates and invites cut off midway are
+    invited (companies refuses them during the emergency pause, and they're kept to retry),
+    results kept while a connection was broken go back, and candidates past their retention
+    period go."""
     recovered = await ats_candidates.recover()
 
     if recovered:
-        logger.info("Started again %d ATS invites cut off midway", recovered)
+        logger.info("Found %d ATS candidates waiting or cut off midway", recovered)
 
     before = datetime.now(UTC) - timedelta(days=CANDIDATE_RETENTION_DAYS)
     deleted = await candidates_storage.delete_older_than(before)

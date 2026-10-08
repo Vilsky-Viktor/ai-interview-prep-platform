@@ -138,6 +138,15 @@ def test_a_note_goes_on_the_candidate_as_the_tokens_person(api):
     }
 
 
+def test_a_candidate_gone_from_recruitee_is_a_404_not_a_rejected_key(api):
+    api["answers"]["/c/acme/candidates/44/notes"] = 404
+
+    with pytest.raises(HTTPException) as failed:
+        asyncio.run(recruitee.comment("acme", "token", "44", None, "Grade: 82%"))
+
+    assert failed.value.status_code == 404
+
+
 def signature(secret: str, body: bytes) -> str:
     return hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
 
