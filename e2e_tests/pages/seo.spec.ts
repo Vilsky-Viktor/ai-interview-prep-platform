@@ -220,7 +220,8 @@ test("a translated article has its own address, language, direction and alternat
     await head(page, 'link[rel="alternate"][hreflang="de"]', "href"),
   ).toMatch(/\/de\/compare\/testgorilla$/);
 
-  // Links inside the article stay in its language; the legal pages have one address.
+  // Links inside the article stay in its language; the legal pages and the API docs have one
+  // address.
   const internal = await article
     .locator('a[href^="/"]')
     .evaluateAll((links) => links.map((link) => link.getAttribute("href")));
@@ -228,7 +229,8 @@ test("a translated article has its own address, language, direction and alternat
   expect(
     internal.every(
       (href) =>
-        href!.startsWith("/ar") || ["/privacy", "/terms", "/dpa"].includes(href!),
+        href!.startsWith("/ar") ||
+        ["/privacy", "/terms", "/dpa", "/api-docs"].includes(href!),
     ),
   ).toBe(true);
 });

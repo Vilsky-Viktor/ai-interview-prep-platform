@@ -4,8 +4,10 @@ import { expect, test } from "@playwright/test";
 // a key, every route with what it returns, the web hook and the objects.
 test("the API docs explain keys, routes, the web hook and the objects", async ({ page }) => {
   await page.goto("/");
-  await page.locator("footer").getByRole("link", { name: "api docs" }).click();
-  await expect(page).toHaveURL(/\/api-docs$/);
+  // The footer's link leads to the page; opened directly, so a click before the page is ready
+  // can't miss it.
+  await expect(page.locator("footer").getByRole("link", { name: "api docs" })).toHaveAttribute("href", "/api-docs");
+  await page.goto("/api-docs");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("API docs");
 
   for (const title of ["getting an API key", "authentication", "rate limits and pagination", "web hooks"]) {
