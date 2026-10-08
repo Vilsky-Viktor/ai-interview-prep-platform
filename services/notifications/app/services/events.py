@@ -2,9 +2,9 @@ import logging
 
 from app.config.settings import settings
 from app.constants.events import (
-    CANDIDATE_REMOVED,
     CANDIDATE_INVITED,
     CANDIDATE_REMINDED,
+    CANDIDATE_REMOVED,
     COMPANY_DELETED,
     CONTACT_SENT,
     NOTIFICATION_REQUESTED,

@@ -87,3 +87,25 @@ def test_a_three_letter_language_with_a_region_is_read_whole():
     response = client.get("/limited", headers={"Accept-Language": "fil-PH,fil;q=0.9"})
 
     assert response.json() == {"detail": "Masyadong maraming request. Subukang muli mamaya."}
+
+
+def test_raised_messages_finds_literals_and_constants_but_not_f_strings(tmp_path, monkeypatch):
+    from prepza_common.translations import raised_messages
+
+    package = tmp_path / "fakeapp"
+    (package / "constants").mkdir(parents=True)
+    (package / "__init__.py").write_text("")
+    (package / "constants" / "__init__.py").write_text("")
+    (package / "constants" / "texts.py").write_text('GONE = "It is gone"\n')
+    (package / "routes.py").write_text(
+        "from fastapi import HTTPException, status\n"
+        "from fakeapp.constants import texts\n"
+        "from fakeapp.constants.texts import GONE\n"
+        "def a(): raise HTTPException(404, 'Not here')\n"
+        "def b(): raise HTTPException(status.HTTP_410_GONE, GONE)\n"
+        "def c(): raise HTTPException(410, detail=texts.GONE)\n"
+        "def d(name): raise HTTPException(409, f'{name} is taken')\n"
+    )
+    monkeypatch.syspath_prepend(str(tmp_path))
+
+    assert raised_messages(package) == {"Not here", "It is gone"}
