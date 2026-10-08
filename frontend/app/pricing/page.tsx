@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server"
 
 import { JsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
-import { serverFetch } from "@/lib/server-api"
+import { publicFetch } from "@/lib/server-api"
 import { pageMetadata, siteUrl } from "@/lib/site"
 import { softwareData } from "@/lib/structured-data"
 import type { Catalog } from "@/types/billing"
@@ -28,7 +28,7 @@ function PriceRow({ what, price }: { what: string; price: string }) {
 
 export default async function PricingPage() {
   const t = await getTranslations("pricing")
-  const catalog = await serverFetch<Catalog>("/billing/catalog")
+  const catalog = await publicFetch<Catalog>("/billing/catalog")
 
   if (!catalog) {
     return null

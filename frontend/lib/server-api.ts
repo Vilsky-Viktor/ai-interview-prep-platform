@@ -1,6 +1,7 @@
 import { cookies } from "next/headers"
 import { getLocale } from "next-intl/server"
 
+import { PUBLIC_REVALIDATE_SECONDS, PUBLIC_TIMEOUT_MS } from "@/constants/api"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { REFERRAL_COOKIE } from "@/constants/referral"
 
@@ -30,10 +31,24 @@ export async function serverFetch<T>(path: string): Promise<T | null> {
     headers.Cookie = `${REFERRAL_COOKIE}=${referral}`
   }
 
-  const response = await fetch(`${process.env.API_URL}/api${path}`, {
-    headers,
-    cache: "no-store",
+  return request<T>(path, { headers, cache: "no-store" })
+}
+
+/**
+ * Server-side API call for data that is the same for every visitor, without the user's token:
+ * kept for a few minutes, and given up on after a few seconds so a slow or sleeping service
+ * doesn't hold the page. Null and errors as in serverFetch.
+ */
+export async function publicFetch<T>(path: string): Promise<T | null> {
+  return request<T>(path, {
+    headers: { "Accept-Language": await getLocale() },
+    next: { revalidate: PUBLIC_REVALIDATE_SECONDS },
+    signal: AbortSignal.timeout(PUBLIC_TIMEOUT_MS),
   })
+}
+
+async function request<T>(path: string, init: RequestInit): Promise<T | null> {
+  const response = await fetch(`${process.env.API_URL}/api${path}`, init)
 
   if (EXPECTED_MISSES.includes(response.status)) {
     return null

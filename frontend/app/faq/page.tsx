@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { FaqList } from "@/components/faq-list"
 import { HelpChat } from "@/components/help-chat"
 import { JsonLd } from "@/components/json-ld"
-import { serverFetch } from "@/lib/server-api"
+import { publicFetch } from "@/lib/server-api"
 import { pageMetadata } from "@/lib/site"
 import type { FaqItem } from "@/types/help"
 
@@ -16,7 +16,7 @@ export async function generateMetadata() {
 export default async function FaqPage() {
   const t = await getTranslations("faq")
   // The questions come from the rounds service in the page's language, with today's prices.
-  const items = (await serverFetch<FaqItem[]>("/rounds/help/faq")) ?? []
+  const items = (await publicFetch<FaqItem[]>("/rounds/help/faq")) ?? []
   // FAQ structured data, so search engines can show the answers.
   const structured = {
     "@context": "https://schema.org",

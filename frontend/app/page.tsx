@@ -17,7 +17,7 @@ import { TryFirstSection } from "@/components/landing/try-first"
 import { JsonLd } from "@/components/json-ld"
 import { StartTest } from "@/components/start-test"
 import { SITE_NAME } from "@/constants/seo"
-import { serverFetch } from "@/lib/server-api"
+import { publicFetch } from "@/lib/server-api"
 import { pageMetadata, siteUrl } from "@/lib/site"
 import { organizationData } from "@/lib/structured-data"
 import type { Catalog } from "@/types/billing"
@@ -38,7 +38,10 @@ export default async function HomePage() {
   const t = await getTranslations("home")
   const site = await getTranslations("site")
   const landing = await getTranslations("landing")
-  const catalog = await serverFetch<Catalog>("/billing/catalog")
+  // Without prices (billing is slow or down) the page still shows, without the free offer.
+  const catalog = await publicFetch<Catalog>("/billing/catalog").catch(
+    () => null
+  )
   // The candidates a first company's welcome credits cover.
   const freeCandidates = catalog
     ? Math.floor(catalog.welcome_company / catalog.candidate_credits)

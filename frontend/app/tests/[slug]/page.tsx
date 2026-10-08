@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { ROLE_PAGE_FAQ } from "@/constants/role-tests"
-import { serverFetch } from "@/lib/server-api"
+import { publicFetch } from "@/lib/server-api"
 import { localizedPath, templateLocales } from "@/lib/locale-path"
 import { pageMetadata, siteUrl, urlLocale } from "@/lib/site"
 import { breadcrumbData } from "@/lib/structured-data"
@@ -24,7 +24,7 @@ type Params = { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Params) {
   const { slug } = await params
   const t = await getTranslations("tests")
-  const template = await serverFetch<Template>(`/library/templates/${slug}`)
+  const template = await publicFetch<Template>(`/library/templates/${slug}`)
 
   return template
     ? pageMetadata(
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: Params) {
 export default async function RoleTestPage({ params }: Params) {
   const { slug: key } = await params
   const t = await getTranslations("tests")
-  const template = await serverFetch<Template>(`/library/templates/${key}`)
+  const template = await publicFetch<Template>(`/library/templates/${key}`)
 
   const locale = await urlLocale()
 
@@ -62,12 +62,12 @@ export default async function RoleTestPage({ params }: Params) {
 
   const slug = template.slug ?? template.id
   const questions =
-    (await serverFetch<SampleQuestion[]>(
+    (await publicFetch<SampleQuestion[]>(
       `/library/templates/${slug}/sample`
     )) ?? []
   // The site FAQ's answers to what companies ask before testing candidates, in the page's
   // language and with today's prices.
-  const faq = ((await serverFetch<FaqItem[]>("/rounds/help/faq")) ?? []).filter(
+  const faq = ((await publicFetch<FaqItem[]>("/rounds/help/faq")) ?? []).filter(
     (item) => ROLE_PAGE_FAQ.includes(item.key)
   )
 

@@ -1,13 +1,16 @@
 import { getTranslations } from "next-intl/server"
 
 import { LandingSection, MoreLink } from "@/components/landing/section"
-import { serverFetch } from "@/lib/server-api"
+import { publicFetch } from "@/lib/server-api"
 import type { Catalog } from "@/types/billing"
 
 /** A candidate's price at each volume tier, as billing sets them, cheapest last. */
 export async function PricingSection() {
   const t = await getTranslations("landing.pricing")
-  const catalog = await serverFetch<Catalog>("/billing/catalog")
+  // Without prices (billing is slow or down) the landing page leaves this section out.
+  const catalog = await publicFetch<Catalog>("/billing/catalog").catch(
+    () => null
+  )
 
   if (!catalog) {
     return null

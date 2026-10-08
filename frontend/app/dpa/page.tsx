@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 
 import { LegalPage } from "@/components/legal-page"
-import { serverFetch } from "@/lib/server-api"
+import { publicFetch } from "@/lib/server-api"
 import { pageMetadata } from "@/lib/site"
 import type { LegalDocument } from "@/types/help"
 
@@ -13,7 +13,7 @@ export const generateMetadata = () =>
   )
 
 export default async function DpaPage() {
-  const document = await serverFetch<LegalDocument>("/rounds/help/legal/dpa")
+  const document = await publicFetch<LegalDocument>("/rounds/help/legal/dpa")
 
   if (!document) {
     notFound()

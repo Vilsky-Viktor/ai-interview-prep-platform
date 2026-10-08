@@ -16,3 +16,7 @@ export const API_EXAMPLE = {
     body: '{ "status": "invited", "progress": 0 }',
   },
 }
+// Public pages' data, the same for every visitor (prices, FAQ, legal texts, role tests): how
+// long the site keeps a copy, in seconds, and how long it waits for a service, in milliseconds.
+export const PUBLIC_REVALIDATE_SECONDS = 300
+export const PUBLIC_TIMEOUT_MS = 5000
