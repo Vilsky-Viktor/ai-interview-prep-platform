@@ -12,6 +12,7 @@ from app.integrations.redis import get_redis
 from app.models.generation import Generation
 from app.schemas.generation import GenerationOut, InterviewGenerationCreate, ReviewRequest
 from app.schemas.regenerate import RegeneratedOut, RegenerateIn
+from app.schemas.statuses import GenerationIdsIn, GenerationStatusesOut, GenerationStatusOut
 from app.schemas.verify import VerifyIn
 from app.service_auth import ServiceCaller
 from app.services.budget import use_daily_budget, use_verify_budget
@@ -54,6 +55,19 @@ async def create_interview_generation(
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
 
     return GenerationOut.model_validate(generation)
+
+
+@router.post("/generations/statuses")
+async def generation_statuses(
+    body: GenerationIdsIn, caller: ServiceCaller
+) -> GenerationStatusesOut:
+    """Notifications, for its reminders: the status of each of those generations that still
+    exists, who started it and since when."""
+    found = await generations.by_ids(body.ids)
+
+    return GenerationStatusesOut(
+        generations=[GenerationStatusOut.model_validate(row) for row in found]
+    )
 
 
 @router.get("/generations/{generation_id}")

@@ -26,6 +26,16 @@ async def preferences(user_id: str) -> dict[str, bool]:
         return as_dict(await session.get(EmailPreferences, user_id))
 
 
+async def preferences_of(user_ids: list[str]) -> dict[str, dict[str, bool]]:
+    """Several users' preferences at once, by id."""
+    query = select(EmailPreferences).where(EmailPreferences.user_id.in_(user_ids))
+
+    async with Session() as session:
+        found = {row.user_id: row for row in await session.scalars(query)}
+
+    return {user_id: as_dict(found.get(user_id)) for user_id in user_ids}
+
+
 async def change(
     user_id: str, changes: dict[EmailSetting, bool], source: ConsentSource
 ) -> dict[str, bool]:

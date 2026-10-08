@@ -44,6 +44,17 @@ async def get(generation_id: uuid.UUID) -> Generation | None:
         return await session.get(Generation, generation_id)
 
 
+async def by_ids(generation_ids: list) -> list[Generation]:
+    """The generations of those ids that still exist."""
+    if not generation_ids:
+        return []
+
+    async with Session() as session:
+        return list(
+            await session.scalars(select(Generation).where(Generation.id.in_(generation_ids)))
+        )
+
+
 async def update(generation_id: uuid.UUID, event: tuple[str, dict] | None = None, **values) -> bool:
     """Never touches a finished (done or cancelled) generation, so a job still running can't
     bring it back or move it on. An `event` is saved with the change, for the outbox to publish.

@@ -145,3 +145,15 @@ def test_an_unsubscribe_link_turns_settings_off_once_logged_as_an_unsubscribe(ru
         ("updates", False, "unsubscribe"),
         ("reminders", False, "unsubscribe"),
     ]
+
+
+def test_several_users_preferences_are_read_at_once_with_defaults_for_the_rest(run):
+    async def scenario():
+        await emails.change("many-1", {"reminders": False}, "settings")
+
+        return await emails.preferences_of(["many-1", "many-2"])
+
+    found = run(scenario())
+
+    assert found["many-1"] == {**DEFAULTS, "reminders": False}
+    assert found["many-2"] == DEFAULTS

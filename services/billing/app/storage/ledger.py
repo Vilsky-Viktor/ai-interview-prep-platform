@@ -1,11 +1,11 @@
-from sqlalchemy import select, update
+from sqlalchemy import exists, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.constants.credits import WELCOME_COMPANY, WELCOME_GIFT, HoldStatus, Reason
+from app.constants.credits import LOW_BALANCE, WELCOME_COMPANY, WELCOME_GIFT, HoldStatus, Reason
 from app.constants.products import OwnerType
 from app.helpers.gifts import gift_key, legacy_gift_key
-from app.models.billing import Entry, Gift, Hold, Wallet
+from app.models.billing import AutoTopUp, Entry, Gift, Hold, Wallet
 from app.storage.db import Session
 
 
@@ -24,6 +24,21 @@ async def wallets(owner_type: str, owner_ids: list[str]) -> dict[str, Wallet]:
 
     async with Session() as session:
         return {row.owner_id: row for row in await session.scalars(query)}
+
+
+async def running_low(owner_type: str) -> list[Wallet]:
+    """Wallets running low (as helpers/wallets.py tells it) that no automatic top-up refills."""
+    refilled = exists().where(
+        AutoTopUp.owner_type == Wallet.owner_type,
+        AutoTopUp.owner_id == Wallet.owner_id,
+        AutoTopUp.subscription_id.is_not(None),
+    )
+    query = select(Wallet).where(
+        Wallet.owner_type == owner_type, Wallet.balance - Wallet.reserved < LOW_BALANCE, ~refilled
+    )
+
+    async with Session() as session:
+        return list(await session.scalars(query))
 
 
 async def welcome_company(company_id: str, owner_email: str) -> bool:

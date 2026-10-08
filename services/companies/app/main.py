@@ -23,6 +23,7 @@ from app.routers import (
     internal_ats,
     internal_events,
     internal_invites,
+    internal_reminders,
     interview_generation,
     interview_questions,
     interviews,
@@ -80,6 +81,7 @@ app.include_router(internal_accounts.router)
 app.include_router(internal_ats.router)
 app.include_router(internal_api.router)
 app.include_router(internal_invites.router)
+app.include_router(internal_reminders.router)
 app.include_router(internal_events.router)
 app.include_router(schedules.router)
 app.include_router(pause.router)

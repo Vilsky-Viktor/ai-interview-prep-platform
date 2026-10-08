@@ -38,3 +38,8 @@ class ConsentBasis(StrEnum):
 # the opt-out); everything else is on until they turn it off.
 MARKETING_SETTINGS = {EmailSetting.UPDATES, EmailSetting.PROMOTIONS}
 DEFAULTS = {setting: setting not in MARKETING_SETTINGS for setting in EmailSetting}
+
+# Notifications asks for at most this many users' addresses and preferences in one call; Firebase
+# looks up at most FIREBASE_LOOKUP_LIMIT accounts at once.
+MAX_RECIPIENTS_PER_CALL = 1000
+FIREBASE_LOOKUP_LIMIT = 100

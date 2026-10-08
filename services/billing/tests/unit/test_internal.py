@@ -84,3 +84,14 @@ def test_library_exports_a_users_purchases_with_a_post(client, monkeypatch):
     response = client.post("/internal/users/ann/export", headers=AUTH)
 
     assert response.json() == {"purchases": []}
+
+
+def test_low_companies_say_how_many_credits_are_available(client, monkeypatch):
+    async def running_low(owner_type):
+        return [SimpleNamespace(owner_id="acme", balance=400, reserved=300)]
+
+    monkeypatch.setattr(ledger, "running_low", running_low)
+
+    response = client.get("/internal/companies/low", headers=AUTH)
+
+    assert response.json() == {"companies": [{"company_id": "acme", "available": 100}]}

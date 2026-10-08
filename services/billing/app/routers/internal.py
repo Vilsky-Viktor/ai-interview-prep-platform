@@ -5,7 +5,14 @@ from prepza_common.analytics import track
 from app.constants.credits import CANDIDATE_CREDITS, NOT_ENOUGH, Reason
 from app.constants.products import OwnerType
 from app.helpers.wallets import balance_out
-from app.schemas.billing import BalanceOut, OwnersIn, ReferralOut, WelcomeIn
+from app.schemas.billing import (
+    BalanceOut,
+    LowCompaniesOut,
+    LowCompanyOut,
+    OwnersIn,
+    ReferralOut,
+    WelcomeIn,
+)
 from app.service_auth import ServiceCaller
 from app.services import auto_top_ups
 from app.services.referrals import referral_out
@@ -75,6 +82,18 @@ async def companies_credits(body: OwnersIn, caller: ServiceCaller) -> dict[str, 
         owner_id: balance_out(found[owner_id]) if owner_id in found else empty
         for owner_id in body.owner_ids
     }
+
+
+@router.get("/companies/low")
+async def low_companies(caller: ServiceCaller) -> LowCompaniesOut:
+    """Notifications, for its reminders: companies running low on credits that no automatic
+    top-up refills."""
+    return LowCompaniesOut(
+        companies=[
+            LowCompanyOut(company_id=row.owner_id, available=row.balance - row.reserved)
+            for row in await ledger.running_low(OwnerType.COMPANY)
+        ]
+    )
 
 
 @router.delete("/companies/{company_id}", status_code=status.HTTP_204_NO_CONTENT)

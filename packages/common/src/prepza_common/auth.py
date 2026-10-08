@@ -24,15 +24,20 @@ def verify(token: str) -> User | None:
     except firebase_auth.CertificateFetchError:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, SIGN_IN_UNAVAILABLE)
 
-    language = claims.get(LANGUAGE_CLAIM)
-
     return User(
         uid=claims["uid"],
         email=claims.get("email", ""),
         email_verified=claims.get("email_verified", False),
         name=claims.get("name"),
-        language=language if language in LANGUAGES else DEFAULT_LANGUAGE,
+        language=claims_language(claims),
     )
+
+
+def claims_language(claims: dict) -> str:
+    """The interface language a user's sign-in claims hold (the default when none is set)."""
+    language = claims.get(LANGUAGE_CLAIM)
+
+    return language if language in LANGUAGES else DEFAULT_LANGUAGE
 
 
 def current_user(

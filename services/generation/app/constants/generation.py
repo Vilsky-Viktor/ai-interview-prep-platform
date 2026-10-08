@@ -85,3 +85,5 @@ GENERATIONS_PAUSED = (
     "We've reached today's limit for new generations. Please try again tomorrow; practice and "
     "interviews keep working."
 )
+# Notifications asks for at most this many generations' statuses in one call (its reminders).
+MAX_STATUSES_PER_CALL = 1000

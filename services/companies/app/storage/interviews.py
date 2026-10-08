@@ -1,4 +1,5 @@
 import uuid
+from datetime import UTC, datetime
 
 from prepza_common import outbox
 from prepza_common.notifications import NOTIFICATION_REQUESTED
@@ -37,6 +38,7 @@ async def create_from_template(company_id, set_id, title: str, language: str) ->
         set_id=set_id,
         title=title,
         language=language,
+        ready_at=datetime.now(UTC),
     )
 
     async with Session() as session:
@@ -202,7 +204,12 @@ async def set_generated(
         interview_id = await session.scalar(
             update(Interview)
             .where(Interview.generation_id == generation_id)
-            .values(set_id=set_id, title=title, generation_failed=False)
+            .values(
+                set_id=set_id,
+                title=title,
+                generation_failed=False,
+                ready_at=func.coalesce(Interview.ready_at, func.now()),
+            )
             .returning(Interview.id)
         )
 

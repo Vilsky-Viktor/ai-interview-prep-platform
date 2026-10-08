@@ -49,6 +49,15 @@ class BalanceOut(BaseModel):
     low: bool
 
 
+class LowCompanyOut(BaseModel):
+    company_id: str
+    available: int
+
+
+class LowCompaniesOut(BaseModel):
+    companies: list[LowCompanyOut]
+
+
 class OwnersIn(BaseModel):
     owner_ids: list[str] = Field(max_length=MAX_PAGE_SIZE)
 

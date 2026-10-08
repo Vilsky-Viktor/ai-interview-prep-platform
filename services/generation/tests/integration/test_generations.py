@@ -1,3 +1,4 @@
+import uuid
 from datetime import UTC, datetime, timedelta
 
 from app.constants.statuses import Status
@@ -69,3 +70,14 @@ def test_a_queued_generation_is_claimed_once_and_finished_ones_never_change(run)
     assert claims == [True, False]
     assert failed is False
     assert (generation.status, generation.error) == (Status.DONE, None)
+
+
+def test_generations_are_found_by_their_ids(run):
+    async def scenario():
+        created = await generations.create("ann", "by ids")
+
+        return created.id, await generations.by_ids([created.id, uuid.uuid4()])
+
+    created, found = run(scenario())
+
+    assert [row.id for row in found] == [created]

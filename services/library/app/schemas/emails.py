@@ -2,7 +2,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, model_validator
 
-from app.constants.emails import ConsentSource, EmailSetting
+from app.constants.emails import MAX_RECIPIENTS_PER_CALL, ConsentSource, EmailSetting
 
 
 class EmailPreferencesOut(BaseModel):
@@ -39,3 +39,19 @@ class UnsubscribeIn(BaseModel):
     """The settings an unsubscribe link turns off."""
 
     settings: list[EmailSetting] = Field(min_length=1)
+
+
+class RecipientsIn(BaseModel):
+    user_ids: list[str] = Field(max_length=MAX_RECIPIENTS_PER_CALL)
+
+
+class RecipientOut(BaseModel):
+    user_id: str
+    email: str
+    # The interface language, emails are written in.
+    language: str
+    preferences: EmailPreferencesOut
+
+
+class RecipientsOut(BaseModel):
+    recipients: list[RecipientOut]

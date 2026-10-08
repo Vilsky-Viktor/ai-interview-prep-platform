@@ -25,6 +25,9 @@ class Interview(Base):
     # Its generation failed (generation's generation.failed event); a retry or the questions
     # arriving clear it.
     generation_failed: Mapped[bool] = mapped_column(default=False, server_default="false")
+    # When it got its questions (one from a template, when made): a reminder to invite
+    # candidates counts from it. None while it has none.
+    ready_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     # What the interview is generated in, as its set in library; invites are emailed in it.
     language: Mapped[str] = mapped_column(String(8), default=DEFAULT_LANGUAGE)
     # The company marked the test as hired; it stays usable.
