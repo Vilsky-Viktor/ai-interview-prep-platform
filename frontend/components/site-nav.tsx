@@ -41,8 +41,7 @@ export function SiteNav() {
             aria-current={current ? "page" : undefined}
             className={cn(
               "rounded-md px-1.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:px-2.5",
-              current && "text-foreground",
-              link.wide && "hidden sm:inline"
+              current && "text-foreground"
             )}
           >
             {t(link.label)}
