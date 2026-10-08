@@ -1,11 +1,11 @@
 import { cn } from "cn"
+import { PlayIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { YouTubeIcon } from "@/components/brand-icons"
 import { buttonVariants } from "@/components/ui/button"
 import { DEMOS_URL } from "@/constants/landing"
 
-/** "watch demos": prepza's demo videos on YouTube, in a new tab, as an outline button. */
+/** "demos": prepza's demo videos on YouTube, in a new tab, as an outline button with a play icon. */
 export async function DemosButton({ className }: { className?: string }) {
   const t = await getTranslations("landing")
 
@@ -20,7 +20,7 @@ export async function DemosButton({ className }: { className?: string }) {
         className
       )}
     >
-      <YouTubeIcon className="size-5" />
+      <PlayIcon aria-hidden className="size-5" />
       {t("demos")}
     </a>
   )

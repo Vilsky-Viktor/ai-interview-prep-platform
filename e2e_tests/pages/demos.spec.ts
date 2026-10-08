@@ -4,7 +4,7 @@ import { expect, test } from "@playwright/test";
 // next to "Create an interview" at the end. Both open YouTube in a new tab.
 test("the home page links to the demo videos at the top and at the end", async ({ page }) => {
   await page.goto("/");
-  const demos = page.getByRole("link", { name: "Watch demos" }).filter({ visible: true });
+  const demos = page.getByRole("link", { name: "Demos" }).filter({ visible: true });
   await expect(demos).toHaveCount(2);
 
   for (const link of await demos.all()) {
@@ -16,6 +16,6 @@ test("the home page links to the demo videos at the top and at the end", async (
   const closing = page.locator("section", {
     has: page.getByRole("heading", { name: /Ready to interview/i }),
   });
-  await expect(closing.getByRole("link", { name: "Watch demos" })).toBeVisible();
+  await expect(closing.getByRole("link", { name: "Demos" })).toBeVisible();
   await expect(closing.getByRole("button", { name: "Create an interview" })).toBeVisible();
 });
