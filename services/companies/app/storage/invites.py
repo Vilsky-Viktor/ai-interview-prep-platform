@@ -60,6 +60,9 @@ async def upsert(
 
         invite.sent_at = datetime.now(UTC)
         invite.reminded_at = None
+        company_id = await session.scalar(
+            select(Interview.company_id).where(Interview.id == interview_id)
+        )
 
         outbox.add(
             session,
@@ -67,6 +70,8 @@ async def upsert(
             CANDIDATE_INVITED,
             {
                 "invite_id": str(invite.id),
+                # Notifications skips an address that stopped this company's emails.
+                "company_id": str(company_id),
                 "email": invite.email,
                 "token": invite.token,
                 "title": title,

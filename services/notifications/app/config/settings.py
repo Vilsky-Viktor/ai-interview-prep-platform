@@ -21,9 +21,13 @@ class Settings(ServiceSettings):
     contact_email: str = "hello@prepza.ai"
     # Public address of the site, used for links in emails.
     site_url: str
+    # Signs the unsubscribe links in emails, so nobody can make one for someone else.
+    email_link_secret: str
     # Companies owns the invites, told when an invite's email wasn't delivered, and says which
     # companies a user belongs to, whose notifications they see.
     companies_url: str
+    # Library keeps each user's email settings; an unsubscribe link turns them off there.
+    library_url: str
     # prepza's Slack app (api.slack.com: incoming-webhook scope), and the Fernet key that seals
     # each company's web hook. Without all three, Slack isn't offered.
     slack_client_id: str = ""

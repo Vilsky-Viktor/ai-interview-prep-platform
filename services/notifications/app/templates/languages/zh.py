@@ -45,4 +45,9 @@ TEXTS = {
     },
     "footer": "这封邮件发送到 {email}，因为有人在 prepza 上邀请了这个地址。如果这封邮件与你无关，可以忽略。",
     "paste_link": "或者将此链接粘贴到浏览器中",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "退订",
+    "email_settings": "更改邮件设置",
+    "stop_reminders": "不再给我发送此面试的提醒",
+    "stop_company": "不再给我发送来自 {company} 的邮件",
 }

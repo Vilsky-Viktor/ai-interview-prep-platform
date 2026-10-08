@@ -17,6 +17,9 @@ def send_sync(email: Email) -> None:
     if email.reply_to:
         message["Reply-To"] = email.reply_to
 
+    for name, value in email.headers.items():
+        message[name] = value
+
     message.set_content(email.text)
     message.add_alternative(email.html, subtype="html")
 

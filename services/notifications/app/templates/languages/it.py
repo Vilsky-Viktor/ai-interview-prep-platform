@@ -65,4 +65,9 @@ TEXTS = {
     "footer": "Questa email è stata inviata a {email} perché qualcuno ha invitato questo "
     "indirizzo su prepza. Se non te l'aspettavi, puoi ignorarla.",
     "paste_link": "Oppure incolla questo link nel tuo browser",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "Annulla l'iscrizione",
+    "email_settings": "Modifica le impostazioni email",
+    "stop_reminders": "Non inviarmi promemoria per questo colloquio",
+    "stop_company": "Non inviarmi email da parte di {company}",
 }

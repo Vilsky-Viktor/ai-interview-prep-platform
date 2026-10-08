@@ -60,4 +60,9 @@ TEXTS = {
     "footer": "أُرسلت هذه الرسالة إلى {email} لأن أحدهم دعا هذا العنوان على prepza. إذا لم تكن "
     "تتوقعها، فيمكنك تجاهلها.",
     "paste_link": "أو الصق هذا الرابط في متصفحك",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "إلغاء الاشتراك",
+    "email_settings": "تغيير إعدادات البريد الإلكتروني",
+    "stop_reminders": "لا ترسلوا إليّ تذكيرات بهذه المقابلة",
+    "stop_company": "لا ترسلوا إليّ رسائل من {company}",
 }

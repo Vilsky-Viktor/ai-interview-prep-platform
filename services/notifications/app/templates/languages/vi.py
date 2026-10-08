@@ -70,4 +70,9 @@ TEXTS = {
     "footer": "Email này được gửi đến {email} vì có người đã mời địa chỉ này trên prepza. Nếu "
     "bạn không mong đợi email này, bạn có thể bỏ qua.",
     "paste_link": "Hoặc dán liên kết này vào trình duyệt của bạn",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "Hủy đăng ký",
+    "email_settings": "Thay đổi cài đặt email",
+    "stop_reminders": "Đừng gửi lời nhắc về buổi phỏng vấn này cho tôi",
+    "stop_company": "Đừng gửi email từ {company} cho tôi",
 }

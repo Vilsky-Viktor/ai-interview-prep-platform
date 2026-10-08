@@ -61,4 +61,9 @@ TEXTS = {
     "footer": "הודעה זו נשלחה אל {email} כי מישהו הזמין את הכתובת הזו ב-prepza. אם לא ציפית לה, "
     "אפשר להתעלם ממנה.",
     "paste_link": "או להדביק את הקישור הזה בדפדפן",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "ביטול הרשמה",
+    "email_settings": "שינוי הגדרות האימייל",
+    "stop_reminders": "לא לשלוח לי תזכורות לראיון הזה",
+    "stop_company": "לא לשלוח לי אימיילים מטעם {company}",
 }

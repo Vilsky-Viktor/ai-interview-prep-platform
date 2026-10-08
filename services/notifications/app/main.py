@@ -11,7 +11,7 @@ from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
 from app.integrations.redis import get_redis
-from app.routers import events, internal_accounts, me, slack, webhooks
+from app.routers import events, internal_accounts, me, slack, unsubscribe, webhooks
 from app.storage.db import ping as ping_database
 
 configure_logging()
@@ -41,6 +41,7 @@ app.include_router(events.router)
 app.include_router(webhooks.router)
 app.include_router(internal_accounts.router)
 app.include_router(slack.router)
+app.include_router(unsubscribe.router)
 
 
 @app.get("/health")

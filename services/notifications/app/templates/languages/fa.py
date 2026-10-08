@@ -63,4 +63,9 @@ TEXTS = {
     "footer": "این ایمیل به {email} فرستاده شد چون کسی این نشانی را در prepza دعوت کرده است. اگر "
     "انتظارش را نداشتید، می\u200cتوانید آن را نادیده بگیرید.",
     "paste_link": "یا این پیوند را در مرورگر خود بچسبانید",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "لغو اشتراک",
+    "email_settings": "تغییر تنظیمات ایمیل",
+    "stop_reminders": "برای این مصاحبه یادآوری نفرستید",
+    "stop_company": "از طرف {company} برایم ایمیل نفرستید",
 }

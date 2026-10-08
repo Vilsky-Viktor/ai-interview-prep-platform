@@ -110,3 +110,35 @@ def test_the_internal_route_needs_a_service_token(client, signed_in):
     )
 
     assert response.status_code == 401
+
+
+def test_notifications_unsubscribes_a_user_from_an_email_link(client, signed_in):
+    response = client.post(
+        "/internal/users/ann/unsubscribe",
+        json={"settings": ["candidate_finished", "interview_ready"]},
+        headers={"Authorization": f"Bearer {token()}"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["interview_ready"] is False
+    assert signed_in == [
+        ("ann", {"candidate_finished": False, "interview_ready": False}, "unsubscribe")
+    ]
+
+
+@pytest.mark.parametrize("settings", [[], ["newsletter"]])
+def test_an_unsubscribe_names_known_settings(client, signed_in, settings):
+    response = client.post(
+        "/internal/users/ann/unsubscribe",
+        json={"settings": settings},
+        headers={"Authorization": f"Bearer {token()}"},
+    )
+
+    assert response.status_code == 422
+    assert signed_in == []
+
+
+def test_only_services_unsubscribe_a_user(client, signed_in):
+    response = client.post("/internal/users/ann/unsubscribe", json={"settings": ["updates"]})
+
+    assert response.status_code == 401

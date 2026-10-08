@@ -1,7 +1,12 @@
 import asyncio
 
+import httpx
+
+from app.config.settings import settings
 from app.constants.emails import CONSENT_TEXT_VERSION, DEFAULTS
+from app.main import app
 from app.storage import accounts, emails
+from tests.unit.test_internal import token
 
 
 def test_a_user_without_a_row_has_the_defaults(run):
@@ -114,3 +119,29 @@ def test_the_export_has_them_and_deleting_the_user_removes_them(run):
     )
     assert (after, log) == (DEFAULTS, [])
     assert kept["promotions"] is True
+
+
+def test_an_unsubscribe_link_turns_settings_off_once_logged_as_an_unsubscribe(run):
+    async def scenario():
+        await emails.change("leaving", {"updates": True}, "sign_in")
+        transport = httpx.ASGITransport(app=app)
+
+        async with httpx.AsyncClient(transport=transport, base_url="http://library") as client:
+            # The same link used twice (a mail client's one-click, then the page).
+            for _ in range(2):
+                response = await client.post(
+                    "/internal/users/leaving/unsubscribe",
+                    json={"settings": ["updates", "reminders"]},
+                    headers={"Authorization": f"Bearer {token(settings.service_secret)}"},
+                )
+
+        return response.json(), await emails.consents("leaving")
+
+    current, log = run(scenario())
+
+    assert (current["updates"], current["reminders"]) == (False, False)
+    assert [(row["setting"], row["granted"], row["source"]) for row in log] == [
+        ("updates", True, "sign_in"),
+        ("updates", False, "unsubscribe"),
+        ("reminders", False, "unsubscribe"),
+    ]

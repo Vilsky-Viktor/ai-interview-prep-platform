@@ -38,7 +38,7 @@ def test_candidate_invite_email():
         "title": "Backend",
         "company": "Acme",
     }
-    email = candidate_invite_email(data, "http://localhost:8090")
+    email = candidate_invite_email(data, "http://localhost:8090", "secret")
 
     assert email.to == "bob@example.com"
     assert email.subject == "Acme invited you to an interview"
@@ -49,7 +49,9 @@ def test_candidate_invite_email():
 
 
 def test_html_escapes_names_and_titles():
-    email = candidate_invite_email({**DATA, "company": "<b>Acme</b>"}, "http://localhost:8090")
+    email = candidate_invite_email(
+        {**DATA, "company": "<b>Acme</b>"}, "http://localhost:8090", "secret"
+    )
 
     assert "<b>Acme</b>" not in email.html
     assert "&lt;b&gt;Acme&lt;/b&gt;" in email.html
@@ -127,7 +129,9 @@ def test_an_address_resend_refuses_is_final(monkeypatch, status_code):
     resend_answering(monkeypatch, status_code)
 
     with pytest.raises(resend.EmailRefused):
-        asyncio.run(resend.send(candidate_invite_email({**DATA, "company": "Acme"}, ""), "k"))
+        asyncio.run(
+            resend.send(candidate_invite_email({**DATA, "company": "Acme"}, "", "secret"), "k")
+        )
 
 
 @pytest.mark.parametrize("status_code", [401, 409, 503])
@@ -135,7 +139,9 @@ def test_other_resend_errors_are_retried(monkeypatch, status_code):
     resend_answering(monkeypatch, status_code)
 
     with pytest.raises(RuntimeError):
-        asyncio.run(resend.send(candidate_invite_email({**DATA, "company": "Acme"}, ""), "k"))
+        asyncio.run(
+            resend.send(candidate_invite_email({**DATA, "company": "Acme"}, "", "secret"), "k")
+        )
 
 
 def test_over_resends_limit_pubsub_retries_without_a_server_error(client, monkeypatch):
@@ -167,7 +173,7 @@ def test_a_refused_invite_is_marked_undelivered_and_not_retried(client, monkeypa
 
 def test_an_invite_is_emailed_in_the_interviews_language():
     data = {**DATA, "company": "Acme", "language": "ru"}
-    email = candidate_invite_email(data, "http://localhost:8090")
+    email = candidate_invite_email(data, "http://localhost:8090", "secret")
 
     assert email.subject == "Acme приглашает вас на собеседование"
     assert '<html lang="ru" dir="ltr">' in email.html
@@ -177,7 +183,9 @@ def test_an_invite_is_emailed_in_the_interviews_language():
 
 def test_an_invite_in_a_language_without_texts_is_emailed_in_english():
     for language in ("xx", None):
-        email = candidate_invite_email({**DATA, "language": language}, "http://localhost:8090")
+        email = candidate_invite_email(
+            {**DATA, "language": language}, "http://localhost:8090", "secret"
+        )
 
         assert email.subject == "Acme invited you to an interview"
         assert '<html lang="en" dir="ltr">' in email.html
@@ -185,7 +193,7 @@ def test_an_invite_in_a_language_without_texts_is_emailed_in_english():
 
 def test_an_arabic_invite_reads_right_to_left():
     data = {**DATA, "company": "Acme", "language": "ar"}
-    email = candidate_invite_email(data, "http://localhost:8090")
+    email = candidate_invite_email(data, "http://localhost:8090", "secret")
 
     assert '<html lang="ar" dir="rtl">' in email.html
     assert 'dir="rtl"' in email.html.split("<body")[1]
@@ -195,7 +203,7 @@ def test_an_arabic_invite_reads_right_to_left():
 
 @pytest.mark.parametrize("language", sorted(LANGUAGES))
 def test_every_content_language_has_the_invite_email(language):
-    email = candidate_invite_email({**DATA, "language": language}, "")
+    email = candidate_invite_email({**DATA, "language": language}, "", "secret")
 
     # Every placeholder is filled in, and the texts aren't English stand-ins.
     assert "{" not in email.html and "{" not in email.text

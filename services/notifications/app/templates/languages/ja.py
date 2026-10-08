@@ -45,4 +45,9 @@ TEXTS = {
     },
     "footer": "このメールは、prepza で誰かがこのアドレスを招待したため {email} に送信されました。心当たりがない場合は無視してください。",
     "paste_link": "または、このリンクをブラウザに貼り付けてください",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "配信停止",
+    "email_settings": "メール設定を変更",
+    "stop_reminders": "この面接のリマインダーを受け取らない",
+    "stop_company": "{company}からのメールを受け取らない",
 }

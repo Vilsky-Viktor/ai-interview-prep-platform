@@ -2,24 +2,29 @@ from html import escape
 
 from prepza_common.constants import DEFAULT_LANGUAGE, RTL_LANGUAGES
 
+from app.constants.unsubscribe import SETTINGS_PATH, UnsubscribeType
 from app.constants.webhooks import CANDIDATE_INVITE_KIND, ID_TAG, KIND_TAG
+from app.helpers.unsubscribe import candidate_token, one_click_headers, page_url, user_token
 from app.models.email import Email
 from app.templates.contact import CONTACT_HTML, CONTACT_SUBJECT, CONTACT_TEXT
 from app.templates.emails import EMAILS
 from app.templates.layout import (
+    HTML_FOOTER_LINK,
     HTML_LAYOUT,
     HTML_LOGO,
     HTML_NAME,
     HTML_PARAGRAPH,
     PREHEADER_PADDING,
+    TEXT_FOOTER_LINK,
     TEXT_LAYOUT,
 )
 
 
-def render(kind: str, data: dict, link: str) -> Email:
+def render(kind: str, data: dict, link: str, links: list[tuple[str, str]] = ()) -> Email:
     """Builds the plain-text and HTML versions of the `kind` email ("candidate"), in the
     interview's language (English for older events), right to left where that language is;
-    names and titles are escaped in the HTML."""
+    names and titles are escaped in the HTML. `links` go under the footer: each one's text (a
+    key of the language's texts) and address."""
     language = data.get("language")
     # English until the language has this email (new emails are translated later).
     language = language if kind in EMAILS.get(language, {}) else DEFAULT_LANGUAGE
@@ -38,12 +43,21 @@ def render(kind: str, data: dict, link: str) -> Email:
         },
     }
 
+    footer_links = [(texts[key], url) for key, url in links]
+
     text = TEXT_LAYOUT.format(
         heading=template["heading"],
         lines="\n\n".join(line.format(**data) for line in template["lines"]),
         button=template["button"],
         link=link,
         footer=footer.format(**data),
+        links="\n"
+        + "".join(
+            TEXT_FOOTER_LINK.format(text=label.format(**data), url=url)
+            for label, url in footer_links
+        )
+        if footer_links
+        else "",
     )
     html = HTML_LAYOUT.format(
         subject=escape(template["subject"].format(**data)),
@@ -56,6 +70,13 @@ def render(kind: str, data: dict, link: str) -> Email:
         button=template["button"],
         link=escape(link),
         footer=footer.format(**safe),
+        links="<br>"
+        + "".join(
+            HTML_FOOTER_LINK.format(text=label.format(**safe), url=escape(url))
+            for label, url in footer_links
+        )
+        if footer_links
+        else "",
         language=language,
         direction="rtl" if rtl else "ltr",
         align="right" if rtl else "left",
@@ -83,20 +104,69 @@ def with_logo(data: dict, site_url: str) -> dict:
     return {**data, "logo_url": f"{site_url.rstrip('/')}{path}"} if path else data
 
 
-def candidate_invite_email(data: dict, site_url: str) -> Email:
+def candidate_invite_email(data: dict, site_url: str, secret: str) -> Email:
+    """The invite, with a link that stops the company's emails to this address (events saved
+    before invites carried the company's id have none)."""
     data = with_logo(data, site_url)
-    email = render("candidate", data, f"{site_url.rstrip('/')}/invite/{data['token']}")
+    links = (
+        [
+            (
+                "stop_company",
+                page_url(site_url, candidate_token(data, UnsubscribeType.COMPANY, secret)),
+            )
+        ]
+        if data.get("company_id")
+        else []
+    )
+    email = render("candidate", data, f"{site_url.rstrip('/')}/invite/{data['token']}", links)
     email.tags = invite_tags(CANDIDATE_INVITE_KIND, data.get("invite_id"))
 
     return email
 
 
-def candidate_reminder_email(data: dict, site_url: str) -> Email:
+def candidate_reminder_email(data: dict, site_url: str, secret: str) -> Email:
     """The one reminder to a candidate who hasn't started: the same invite link. Tagged like the
-    invite, so a bounce marks the invite undelivered."""
+    invite, so a bounce marks the invite undelivered. Its links stop this invite's reminders or
+    all the company's emails; a mail client's own unsubscribe stops the reminders."""
     data = with_logo(data, site_url)
-    email = render("reminder", data, f"{site_url.rstrip('/')}/invite/{data['token']}")
+    links = []
+    headers = {}
+
+    if data.get("company_id") and data.get("invite_id"):
+        reminders = candidate_token(data, UnsubscribeType.INVITE_REMINDERS, secret)
+        company = candidate_token(data, UnsubscribeType.COMPANY, secret)
+        links = [
+            ("stop_reminders", page_url(site_url, reminders)),
+            ("stop_company", page_url(site_url, company)),
+        ]
+        headers = one_click_headers(site_url, reminders)
+
+    email = render("reminder", data, f"{site_url.rstrip('/')}/invite/{data['token']}", links)
     email.tags = invite_tags(CANDIDATE_INVITE_KIND, data.get("invite_id"))
+    email.headers = headers
+
+    return email
+
+
+def optional_email(
+    kind: str,
+    data: dict,
+    link: str,
+    site_url: str,
+    secret: str,
+    user_id: str,
+    unsubscribe: UnsubscribeType,
+) -> Email:
+    """An email a prepza user may turn off (the activity digest, reminders, updates, offers):
+    the `kind` email, with "Unsubscribe" (from `unsubscribe`) and "Change your email settings"
+    under its footer, and the one-click unsubscribe headers mail clients show as a button."""
+    token = user_token(user_id, unsubscribe, secret)
+    links = [
+        ("unsubscribe", page_url(site_url, token)),
+        ("email_settings", site_url.rstrip("/") + SETTINGS_PATH),
+    ]
+    email = render(kind, data, link, links)
+    email.headers = one_click_headers(site_url, token)
 
     return email
 

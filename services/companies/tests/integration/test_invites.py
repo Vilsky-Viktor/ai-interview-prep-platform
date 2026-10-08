@@ -148,14 +148,26 @@ def test_a_candidate_who_has_not_started_is_reminded_once_until_invited_again(ru
         await invites.upsert(found.id, "rita@example.com", "Backend", "Acme", "en")
         after_resend = await reminders.remind_unstarted(datetime.now(UTC) + timedelta(seconds=1))
 
-        return invite.id, first, again, after_resend
+        async with Session() as session:
+            sent = list(
+                await session.scalars(
+                    select(OutboxEvent.data).where(
+                        OutboxEvent.event_type == "candidate.reminded",
+                        OutboxEvent.data["invite_id"].astext == str(invite.id),
+                    )
+                )
+            )
 
-    _, first, again, after_resend = run(scenario())
+        return found, first, again, after_resend, sent
+
+    found, first, again, after_resend, sent = run(scenario())
 
     # Other tests' invites may be reminded too: at least this one, then none, then this one.
     assert first >= 1
     assert again == 0
     assert after_resend == 1
+    # Each names the company, so notifications skips an address that stopped its emails.
+    assert [event["company_id"] for event in sent] == [str(found.company_id)] * 2
 
 
 def test_a_logo_is_saved_served_and_removed_with_a_new_address_each_time(run):

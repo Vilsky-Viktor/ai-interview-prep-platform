@@ -33,3 +33,9 @@ class EmailPreferencesIn(BaseModel):
             raise ValueError("Signing in may only set updates and turn on promotions.")
 
         return self
+
+
+class UnsubscribeIn(BaseModel):
+    """The settings an unsubscribe link turns off."""
+
+    settings: list[EmailSetting] = Field(min_length=1)

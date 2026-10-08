@@ -65,4 +65,9 @@ TEXTS = {
     "footer": "Это письмо отправлено на {email}, потому что этот адрес пригласили на prepza. "
     "Если вы его не ждали, просто проигнорируйте его.",
     "paste_link": "Или вставьте эту ссылку в браузер",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "Отписаться",
+    "email_settings": "Изменить настройки писем",
+    "stop_reminders": "Не присылать мне напоминания об этом собеседовании",
+    "stop_company": "Не присылать мне письма от {company}",
 }

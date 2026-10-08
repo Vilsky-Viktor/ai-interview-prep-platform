@@ -45,4 +45,9 @@ TEXTS = {
     },
     "footer": "อีเมลนี้ส่งถึง {email} เนื่องจากมีผู้เชิญที่อยู่นี้บน prepza หากคุณไม่ได้คาดว่าจะได้รับ ก็ไม่ต้องสนใจอีเมลนี้",
     "paste_link": "หรือวางลิงก์นี้ในเบราว์เซอร์ของคุณ",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "ยกเลิกการรับอีเมล",
+    "email_settings": "เปลี่ยนการตั้งค่าอีเมล",
+    "stop_reminders": "ไม่ต้องส่งการแจ้งเตือนสำหรับการสัมภาษณ์นี้ถึงฉัน",
+    "stop_company": "ไม่ต้องส่งอีเมลจาก {company} ถึงฉัน",
 }

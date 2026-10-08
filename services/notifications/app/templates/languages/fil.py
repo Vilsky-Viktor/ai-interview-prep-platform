@@ -70,4 +70,9 @@ TEXTS = {
     "footer": "Ipinadala ang email na ito sa {email} dahil may nag-imbita sa address na ito sa "
     "prepza. Kung hindi mo ito inaasahan, puwede mo itong balewalain.",
     "paste_link": "O i-paste ang link na ito sa iyong browser",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "Mag-unsubscribe",
+    "email_settings": "Baguhin ang iyong mga setting sa email",
+    "stop_reminders": "Huwag na akong padalhan ng paalala para sa interview na ito",
+    "stop_company": "Huwag na akong padalhan ng email para sa {company}",
 }

@@ -40,6 +40,7 @@ async def remind_unstarted(before: datetime) -> int:
                 CANDIDATE_REMINDED,
                 {
                     "invite_id": str(invite.id),
+                    "company_id": str(company.id),
                     "email": invite.email,
                     "token": invite.token,
                     "title": interview.title or "an interview",

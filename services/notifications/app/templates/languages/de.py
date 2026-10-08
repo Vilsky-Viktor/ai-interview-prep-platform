@@ -68,4 +68,9 @@ TEXTS = {
     "footer": "Diese E-Mail wurde an {email} gesendet, weil jemand diese Adresse auf prepza "
     "eingeladen hat. Wenn du sie nicht erwartet hast, kannst du sie ignorieren.",
     "paste_link": "Oder füge diesen Link in deinen Browser ein",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "Abmelden",
+    "email_settings": "E-Mail-Einstellungen ändern",
+    "stop_reminders": "Keine Erinnerungen mehr zu diesem Interview",
+    "stop_company": "Keine E-Mails mehr von {company}",
 }

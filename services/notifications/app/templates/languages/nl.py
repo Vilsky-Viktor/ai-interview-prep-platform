@@ -66,4 +66,9 @@ TEXTS = {
     "footer": "Deze e-mail is naar {email} gestuurd omdat iemand dit adres op prepza heeft "
     "uitgenodigd. Verwachtte je hem niet, dan kun je hem negeren.",
     "paste_link": "Of plak deze link in je browser",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "Afmelden",
+    "email_settings": "E-mailinstellingen wijzigen",
+    "stop_reminders": "Stuur me geen herinneringen meer voor dit interview",
+    "stop_company": "Stuur me geen e-mails meer namens {company}",
 }

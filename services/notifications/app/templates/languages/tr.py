@@ -66,4 +66,9 @@ TEXTS = {
     "footer": "Bu e-posta {email} adresine, biri bu adresi prepza'ya davet ettiği için "
     "gönderildi. Beklemiyorsanız görmezden gelebilirsiniz.",
     "paste_link": "Ya da bu bağlantıyı tarayıcınıza yapıştırın",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "Abonelikten çık",
+    "email_settings": "E-posta ayarlarını değiştir",
+    "stop_reminders": "Bu mülakat için bana hatırlatma gönderme",
+    "stop_company": "{company} adına bana e-posta gönderme",
 }

@@ -45,4 +45,9 @@ TEXTS = {
     },
     "footer": "prepza에서 누군가 이 주소를 초대하여 {email}(으)로 이 이메일이 발송되었습니다. 예상하지 못한 이메일이라면 무시하셔도 됩니다.",
     "paste_link": "또는 이 링크를 브라우저에 붙여 넣으세요",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "수신 거부",
+    "email_settings": "이메일 설정 변경",
+    "stop_reminders": "이 면접의 알림 받지 않기",
+    "stop_company": "{company}의 이메일 받지 않기",
 }

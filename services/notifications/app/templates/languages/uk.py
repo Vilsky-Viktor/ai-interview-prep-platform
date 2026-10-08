@@ -64,4 +64,9 @@ TEXTS = {
     "footer": "Цей лист надіслано на {email}, тому що цю адресу запросили на prepza. Якщо ви "
     "його не чекали, просто проігноруйте його.",
     "paste_link": "Або вставте це посилання в браузер",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "Відписатися",
+    "email_settings": "Змінити налаштування листів",
+    "stop_reminders": "Не надсилати мені нагадування про цю співбесіду",
+    "stop_company": "Не надсилати мені листи від {company}",
 }

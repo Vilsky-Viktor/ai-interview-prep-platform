@@ -63,4 +63,9 @@ TEXTS = {
     "footer": "यह ईमेल {email} पर भेजा गया क्योंकि किसी ने prepza पर इस पते को इनवाइट किया। "
     "अगर आपको इसकी उम्मीद नहीं थी, तो आप इसे अनदेखा कर सकते हैं।",
     "paste_link": "या यह लिंक अपने ब्राउज़र में पेस्ट करें",
+    # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
+    "unsubscribe": "अनसब्सक्राइब करें",
+    "email_settings": "अपनी ईमेल सेटिंग बदलें",
+    "stop_reminders": "इस इंटरव्यू के लिए मुझे रिमाइंडर न भेजें",
+    "stop_company": "{company} की ओर से मुझे ईमेल न भेजें",
 }

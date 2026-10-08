@@ -47,6 +47,7 @@ Settings are described with the feature they shape:
 | Generation, models, rate limits, LangSmith | [Generation and question quality](generation.md#generation-settings) |
 | Paddle | [Credits and payments](features/billing.md#setting-up-paddle) |
 | Resend, Mailpit, `SITE_URL`, `CONTACT_EMAIL` | [Notifications and emails](features/notifications.md#emails) |
+| `EMAIL_LINK_SECRET` | [Notifications and emails](features/notifications.md#unsubscribing) |
 | Email limits | [Candidates](features/candidates.md#email-limits) |
 | Help chat and contact form limits | [Public site](features/site.md#faq-and-help-chat) |
 | `ATS_ENCRYPTION_KEY` | [ATS integrations](features/ats.md#connecting-an-ats) |

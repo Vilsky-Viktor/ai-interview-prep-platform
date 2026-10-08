@@ -102,8 +102,10 @@ def test_an_unsigned_webhook_is_refused(client, reported):
 
 def test_invite_emails_are_tagged_with_what_they_are():
     base = {"email": "bob@example.com", "token": "t", "title": "Backend"}
-    invite = candidate_invite_email({**base, "company": "Acme", "invite_id": INVITE_ID}, "http://x")
-    untagged = candidate_invite_email({**base, "company": "Acme"}, "http://x")
+    invite = candidate_invite_email(
+        {**base, "company": "Acme", "invite_id": INVITE_ID}, "http://x", "secret"
+    )
+    untagged = candidate_invite_email({**base, "company": "Acme"}, "http://x", "secret")
 
     assert invite.tags == {"kind": "candidate_invite", "id": INVITE_ID}
     assert untagged.tags == {}

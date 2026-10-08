@@ -101,11 +101,11 @@ def test_a_reminder_opens_the_same_invite_and_is_tagged_like_it():
         "language": "en",
     }
 
-    reminder = candidate_reminder_email(data, "https://prepza.com")
+    reminder = candidate_reminder_email(data, "https://prepza.com", "secret")
 
     assert reminder.subject == "Reminder: Acme is waiting for your interview"
     assert "https://prepza.com/invite/abc" in reminder.text
-    assert reminder.tags == candidate_invite_email(data, "https://prepza.com").tags
+    assert reminder.tags == candidate_invite_email(data, "https://prepza.com", "secret").tags
 
 
 def test_an_invite_from_a_company_with_a_logo_shows_it_at_the_top():
@@ -119,8 +119,8 @@ def test_an_invite_from_a_company_with_a_logo_shows_it_at_the_top():
         "logo_path": "/api/companies/companies/c-1/logo?v=2",
     }
 
-    with_logo = candidate_invite_email(data, "https://prepza.com/")
-    without = candidate_invite_email({**data, "logo_path": None}, "https://prepza.com/")
+    with_logo = candidate_invite_email(data, "https://prepza.com/", "secret")
+    without = candidate_invite_email({**data, "logo_path": None}, "https://prepza.com/", "secret")
 
     assert (
         '<img src="https://prepza.com/api/companies/companies/c-1/logo?v=2" alt="Acme &amp; Co"'

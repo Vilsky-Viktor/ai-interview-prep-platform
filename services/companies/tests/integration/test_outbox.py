@@ -23,12 +23,13 @@ def test_a_candidate_invite_and_its_email_event_are_saved_together(run):
                 )
             )
 
-        return invite, [event.data for event in events]
+        return company, invite, [event.data for event in events]
 
-    invite, events = run(scenario())
+    company, invite, events = run(scenario())
 
     assert {
         "invite_id": str(invite.id),
+        "company_id": str(company.id),
         "email": "erin@example.com",
         "token": invite.token,
         "title": "Backend",

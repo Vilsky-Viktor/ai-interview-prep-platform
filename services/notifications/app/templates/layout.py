@@ -9,10 +9,17 @@ TEXT_LAYOUT = """\
 {button}: {link}
 
 --
-{footer}
+{footer}{links}
 
 prepza.
 """
+
+# The footer's links (unsubscribe, email settings), each on its own line after the footer text.
+TEXT_FOOTER_LINK = "\n{text}: {url}"
+HTML_FOOTER_LINK = (
+    '<br><a href="{url}" target="_blank" style="color:#737373;text-decoration:underline;">'
+    "{text}</a>"
+)
 
 # Who sent the invite, in the body: bold, so it stands out.
 # The inviting company's logo, at the top of the card, when it has one.
@@ -67,7 +74,7 @@ border-radius:10px;">{button}</a></td></tr>
 <a href="{link}" target="_blank" style="color:#0071e0;word-break:break-all;">{link}</a></p>
 </td></tr>
 <tr><td style="padding:24px 8px 0;text-align:{align};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',\
-Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#737373;">{footer}</td></tr>
+Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#737373;">{footer}{links}</td></tr>
 </table>
 </td></tr>
 </table>
