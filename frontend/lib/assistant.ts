@@ -1,13 +1,16 @@
 import { COMPANY_PATH, LINK_PAGES } from "@/constants/assistant"
 import { ApiError, apiFetch, authHeaders, errorDetail } from "@/lib/api"
 import { streamEvents } from "@/lib/chat"
+import { firebaseAuth } from "@/lib/firebase"
 import type {
   AssistantBlock,
+  ChatMessage,
   AssistantConfig,
   AssistantEvent,
   Conversation,
   ConversationDetail,
 } from "@/types/assistant"
+import type { HelpMessage } from "@/types/help"
 
 const BASE = "/assistant"
 
@@ -36,6 +39,36 @@ export async function getWelcomeStage(companyId: string | null) {
   const query = companyId ? `?company_id=${companyId}` : ""
 
   return (await apiFetch<{ stage: string }>(`${BASE}/welcome${query}`)).stage
+}
+
+/** The conversation to bring back after a reload: the user's latest, if it's recent (the
+ * service decides); null when there's none. */
+export async function getActiveConversation() {
+  const found = await apiFetch<Conversation | undefined>(
+    `${BASE}/conversations/active`
+  )
+
+  return found ?? null
+}
+
+/** Runs an action the user confirmed: its card's new state ({"action"}), then the assistant's
+ * words about it, streamed like an answer. */
+export function confirmAction(
+  conversationId: string,
+  actionId: string,
+  onEvent: (event: AssistantEvent) => void,
+  signal: AbortSignal
+) {
+  const path = `${BASE}/conversations/${conversationId}/actions/${actionId}/confirm`
+
+  return streamEvents<AssistantEvent>(path, {}, onEvent, signal)
+}
+
+export function cancelAction(conversationId: string, actionId: string) {
+  return apiFetch<{ action_id: string; state: "cancelled" }>(
+    `${BASE}/conversations/${conversationId}/actions/${actionId}/cancel`,
+    { method: "POST" }
+  )
 }
 
 export function listConversations() {
@@ -93,7 +126,7 @@ export function linkPage(href: string): string | null {
  * the "link" blocks lead to once each, after the rows. */
 export function answerParts(blocks: AssistantBlock[]) {
   const rows = blocks
-    .filter((block) => block.kind !== "link" && block.kind !== "sign_in")
+    .filter((block) => !["link", "sign_in", "confirm"].includes(block.kind))
     .map((block) => ({
       kind: block.kind,
       items: block.items.map((item, index) => ({
@@ -107,11 +140,38 @@ export function answerParts(blocks: AssistantBlock[]) {
     .filter((href): href is string => href !== null)
 
   const signIn = blocks.find((block) => block.kind === "sign_in")
+  const cards = blocks.filter((block) => block.kind === "confirm")
 
-  return { rows, links: [...new Set(links)], signIn }
+  return { rows, links: [...new Set(links)], signIn, cards }
 }
 
 /** The company a page is about (/companies/<id>/…), or null. */
 export function pageCompany(path: string): string | null {
   return COMPANY_PATH.exec(path)?.[1] ?? null
+}
+
+/** The conversation as the help chat reads it: the questions and the answers that came. */
+export function helpConversation(messages: ChatMessage[]): HelpMessage[] {
+  return messages
+    .filter((message) => message.content && !message.error)
+    .map(({ role, content }) => ({ role, content }))
+}
+
+/** `messages` with one action card's fields changed, wherever it is. */
+export function withCard(
+  messages: ChatMessage[],
+  actionId: string,
+  change: Partial<AssistantBlock>
+): ChatMessage[] {
+  return messages.map((message) => ({
+    ...message,
+    blocks: message.blocks.map((block) =>
+      block.action_id === actionId ? { ...block, ...change } : block
+    ),
+  }))
+}
+
+/** A fresh token for the next call, after a service refused the one it had. */
+export async function refreshToken() {
+  await (await firebaseAuth()).currentUser?.getIdToken(true)
 }

@@ -1371,6 +1371,23 @@
       }
     },
     "signInCard": "Connectez-vous ou créez un compte, puis posez vos questions sur vos entreprises et vos candidats.",
-    "resize": "Redimensionner le panneau"
+    "resize": "Redimensionner le panneau",
+    "actions": {
+      "generic": "Le faire ?",
+      "confirm": "Confirmer",
+      "running": "En cours…",
+      "cancel": "Annuler",
+      "done": "Fait",
+      "failed": "Impossible pour le moment. Réessayez.",
+      "cancelled": "Annulé",
+      "cantUndo": "C'est irréversible.",
+      "titles": {
+        "create_company": "Créer une entreprise"
+      },
+      "fields": {
+        "company": "Entreprise",
+        "name": "Nom"
+      }
+    }
   }
 }

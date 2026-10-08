@@ -8,6 +8,10 @@ import {
   CandidateRow,
   type CandidateRowData,
 } from "@/components/company/candidate-row"
+import {
+  ActionCard,
+  type CardActions,
+} from "@/components/assistant/action-card"
 import { InterviewSummary } from "@/components/company/interview-summary"
 import { LocalizedLink } from "@/components/localized-link"
 import { SignInOptions } from "@/components/sign-in-options"
@@ -113,14 +117,16 @@ function BlockRow({
  * sign-in card when a visitor asked to sign in. */
 export function AnswerBlocks({
   blocks,
+  actions,
   onNavigate,
 }: {
   blocks: AssistantBlock[]
+  actions: CardActions
   onNavigate: () => void
 }) {
   const t = useTranslations("assistant.pages")
   const card = useTranslations("assistant")
-  const { rows, links, signIn } = answerParts(blocks)
+  const { rows, links, signIn, cards } = answerParts(blocks)
 
   return (
     <div className="space-y-3">
@@ -144,6 +150,14 @@ export function AnswerBlocks({
             </ul>
           )
       )}
+      {cards.map((card) => (
+        <ActionCard
+          key={card.action_id}
+          card={card}
+          actions={actions}
+          onNavigate={onNavigate}
+        />
+      ))}
       {signIn && (
         <div className="space-y-4 rounded-2xl border p-4">
           <p className="text-sm text-muted-foreground">{card("signInCard")}</p>

@@ -1371,6 +1371,23 @@
       }
     },
     "signInCard": "Melde dich an oder erstelle ein Konto – dann frag zu deinen Unternehmen und Kandidaten.",
-    "resize": "Breite des Bereichs ändern"
+    "resize": "Breite des Bereichs ändern",
+    "actions": {
+      "generic": "Ausführen?",
+      "confirm": "Bestätigen",
+      "running": "Wird ausgeführt…",
+      "cancel": "Abbrechen",
+      "done": "Erledigt",
+      "failed": "Das hat nicht geklappt. Versuche es erneut.",
+      "cancelled": "Abgebrochen",
+      "cantUndo": "Das lässt sich nicht rückgängig machen.",
+      "titles": {
+        "create_company": "Unternehmen anlegen"
+      },
+      "fields": {
+        "company": "Unternehmen",
+        "name": "Name"
+      }
+    }
   }
 }

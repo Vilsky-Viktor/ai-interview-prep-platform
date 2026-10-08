@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { ApiError } from "@/lib/api"
 import {
   answerParts,
+  withCard,
   inAppHref,
   linkPage,
   pageCompany,
@@ -87,6 +88,7 @@ describe("answerParts", () => {
       ],
       links: ["/settings"],
       signIn: undefined,
+      cards: [],
     })
   })
 
@@ -98,7 +100,12 @@ describe("answerParts", () => {
       provider: "github",
     }
 
-    expect(answerParts([card])).toEqual({ rows: [], links: [], signIn: card })
+    expect(answerParts([card])).toEqual({
+      rows: [],
+      links: [],
+      signIn: card,
+      cards: [],
+    })
   })
 })
 
@@ -146,5 +153,25 @@ describe("transcribe", () => {
       status: 422,
       message: "Couldn't hear anything.",
     })
+  })
+})
+
+describe("withCard", () => {
+  it("changes only the card with that action, wherever it is", () => {
+    const card = (id: string): AssistantBlock => ({
+      kind: "confirm",
+      items: [],
+      links: [],
+      action_id: id,
+      state: "pending",
+    })
+    const messages = [
+      { role: "assistant" as const, content: "a", blocks: [card("a1")] },
+      { role: "assistant" as const, content: "b", blocks: [card("a2")] },
+    ]
+    const changed = withCard(messages, "a2", { state: "done", links: ["/x"] })
+
+    expect(changed[0].blocks[0].state).toBe("pending")
+    expect(changed[1].blocks[0]).toMatchObject({ state: "done", links: ["/x"] })
   })
 })

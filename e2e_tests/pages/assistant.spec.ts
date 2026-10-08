@@ -123,9 +123,21 @@ test("a reload in the middle of a visitor's chat brings it back", async ({ page 
   await expect(again.getByRole("list").getByText("What is prepza?")).toBeVisible();
   await expect(again.getByRole("list").getByText("A hiring test.")).toBeVisible();
 
-  // Closed, it stays closed after a reload.
+  // A chat older than the service's window (GET /config) isn't brought back.
+  await page.evaluate(() => {
+    const kept = JSON.parse(sessionStorage.getItem("prepza:assistant:visitor") ?? "{}");
+    kept.lastAt = new Date(Date.now() - 31 * 60_000).toISOString();
+    sessionStorage.setItem("prepza:assistant:visitor", JSON.stringify(kept));
+  });
+  await page.reload();
+  await expect(page.getByRole("banner").getByRole("button", { name: "ask agent" })).toBeVisible();
+  await expect(again).toHaveCount(0);
+
+  // Opened, it's a new chat; closed, it stays closed after a reload.
+  await page.getByRole("banner").getByRole("button", { name: "ask agent" }).click();
+  await expect(again.getByRole("button", { name: "What is prepza?" })).toBeVisible();
   await again.getByRole("button", { name: "Close" }).click();
   await page.reload();
   await expect(page.getByRole("banner").getByRole("button", { name: "ask agent" })).toBeVisible();
-  await expect(page.getByRole("dialog", { name: "Assistant" })).toHaveCount(0);
+  await expect(again).toHaveCount(0);
 });

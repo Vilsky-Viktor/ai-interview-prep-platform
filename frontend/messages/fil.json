@@ -1375,6 +1375,23 @@
       }
     },
     "signInCard": "Mag-sign in o gumawa ng account; pagkatapos, magtanong tungkol sa mga kumpanya at aplikante mo.",
-    "resize": "Baguhin ang lapad ng panel"
+    "resize": "Baguhin ang lapad ng panel",
+    "actions": {
+      "generic": "Gawin ito?",
+      "confirm": "Kumpirmahin",
+      "running": "Ginagawa…",
+      "cancel": "Kanselahin",
+      "done": "Tapos na",
+      "failed": "Hindi nagawa. Subukang muli.",
+      "cancelled": "Kinansela",
+      "cantUndo": "Hindi na ito maibabalik.",
+      "titles": {
+        "create_company": "Gumawa ng kumpanya"
+      },
+      "fields": {
+        "company": "Kumpanya",
+        "name": "Pangalan"
+      }
+    }
   }
 }

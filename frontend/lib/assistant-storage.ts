@@ -1,12 +1,13 @@
 import { SAVED_CHAT_KEY, SAVED_VISITOR_CHAT_KEY } from "@/constants/assistant"
-import type { ChatMessage } from "@/types/assistant"
+import type { AssistantConfig, ChatMessage } from "@/types/assistant"
 
-/** The panel as it was before a reload: open or not, and the conversation it showed (signed in)
- * or the visitor's messages (signed out). */
+/** The panel as it was before a reload: open or not, the company picked (signed in), and the
+ * visitor's messages with their last one's time (signed out). Signed in, the service knows
+ * the conversation to bring back. */
 export type SavedChat = {
   open?: boolean
-  conversationId?: string | null
   messages?: ChatMessage[]
+  lastAt?: string
   // The company picked in the panel (null: all companies), on the page's company it was picked
   // on (null: a page without one).
   choice?: { page: string | null; company: string | null }
@@ -59,4 +60,20 @@ export function clearChat(both: boolean) {
  * in. */
 export function wasOpen(signedIn: boolean) {
   return Boolean(readChat(false).open || (signedIn && readChat(true).open))
+}
+
+/** The visitor's kept messages when their last one is within the service's window (`config`'s
+ * restore_minutes) of `now`; null when there are none, they're older, or the window is
+ * unknown. */
+export function recentVisitorChat(
+  saved: SavedChat,
+  config: AssistantConfig | null,
+  now: number
+): ChatMessage[] | null {
+  const age = now - Date.parse(saved.lastAt ?? "")
+  const recent = config !== null && age <= config.restore_minutes * 60_000
+
+  return recent && Array.isArray(saved.messages) && saved.messages.length > 0
+    ? saved.messages
+    : null
 }

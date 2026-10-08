@@ -1371,6 +1371,23 @@
       }
     },
     "signInCard": "Sign in or create an account; then ask about your companies and candidates.",
-    "resize": "Resize the panel"
+    "resize": "Resize the panel",
+    "actions": {
+      "generic": "Do this?",
+      "confirm": "Confirm",
+      "running": "Doing it…",
+      "cancel": "Cancel",
+      "done": "Done",
+      "failed": "Couldn't do it. Please try again.",
+      "cancelled": "Cancelled",
+      "cantUndo": "This can't be undone.",
+      "titles": {
+        "create_company": "Create a company"
+      },
+      "fields": {
+        "company": "Company",
+        "name": "Name"
+      }
+    }
   }
 }

@@ -7,6 +7,11 @@ import { toast } from "sonner"
 
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { Button } from "@/components/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { apiErrorMessage } from "@/lib/api"
 import { deleteConversation, listConversations } from "@/lib/assistant"
 import { formatDate } from "@/lib/format"
@@ -81,23 +86,33 @@ export function AssistantHistory({
             key={item.id}
             className="relative flex items-center gap-2 p-4 pe-2 transition-colors hover:bg-muted/50"
           >
-            <button
-              type="button"
-              onClick={() => onOpen(item.id)}
-              className="min-w-0 flex-1 space-y-1 text-start outline-none after:absolute after:inset-0 focus-visible:underline"
-            >
-              <span className="bidi-auto block truncate font-medium">
+            {/* The title is cut to one line; the tooltip shows it whole. */}
+            <Tooltip>
+              <TooltipTrigger
+                render={
+                  <button
+                    type="button"
+                    onClick={() => onOpen(item.id)}
+                    className="min-w-0 flex-1 space-y-1 text-start outline-none after:absolute after:inset-0 focus-visible:underline"
+                  />
+                }
+              >
+                <span className="bidi-auto block truncate font-medium">
+                  {item.title}
+                </span>
+                <span className="block truncate text-sm text-muted-foreground">
+                  <time dateTime={item.updated_at} suppressHydrationWarning>
+                    {formatDate(item.updated_at, locale)}
+                  </time>
+                  {item.company_id && companyNames[item.company_id] && (
+                    <> · {companyNames[item.company_id]}</>
+                  )}
+                </span>
+              </TooltipTrigger>
+              <TooltipContent className="bidi-auto max-w-xs">
                 {item.title}
-              </span>
-              <span className="block truncate text-sm text-muted-foreground">
-                <time dateTime={item.updated_at} suppressHydrationWarning>
-                  {formatDate(item.updated_at, locale)}
-                </time>
-                {item.company_id && companyNames[item.company_id] && (
-                  <> · {companyNames[item.company_id]}</>
-                )}
-              </span>
-            </button>
+              </TooltipContent>
+            </Tooltip>
             <Button
               variant="ghost"
               size="icon"

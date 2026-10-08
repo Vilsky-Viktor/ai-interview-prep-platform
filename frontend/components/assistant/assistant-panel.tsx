@@ -35,9 +35,12 @@ import type { Company } from "@/types/company"
 export function AssistantPanel({
   open,
   onOpenChange,
+  onRestored,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
+  // Whether a recent chat came back after the page loaded.
+  onRestored: (recent: boolean) => void
 }) {
   const t = useTranslations("assistant")
   const { user } = useAuth()
@@ -59,7 +62,7 @@ export function AssistantPanel({
     onPage,
     companies.map((company) => company.id)
   )
-  const chat = useAssistantChat(choice.company, signedIn)
+  const chat = useAssistantChat(choice.company, signedIn, onRestored)
   const [stage, setStage] = useState<string | null>(null)
   const scroller = useRef<HTMLDivElement>(null)
   // The panel's element, there only while it's open.
@@ -208,7 +211,10 @@ export function AssistantPanel({
                 setHistory(false)
                 // The picker follows the conversation's company.
                 void chat.open(id).then((company) => {
-                  choice.pick(company)
+                  if (company !== undefined) {
+                    choice.pick(company)
+                  }
+
                   focusInput()
                 })
               }}
@@ -226,6 +232,12 @@ export function AssistantPanel({
               }}
               onRetry={chat.retry}
               onNavigate={navigated}
+              actions={{
+                onConfirm: (id) => void chat.confirm(id),
+                onCancel: (id) => void chat.cancel(id),
+                busy: chat.streaming,
+                companyNames: names,
+              }}
             />
           )}
         </div>

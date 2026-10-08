@@ -1367,6 +1367,23 @@
       }
     },
     "signInCard": "Log in of maak een account aan; vraag daarna naar je bedrijven en kandidaten.",
-    "resize": "Breedte van het paneel aanpassen"
+    "resize": "Breedte van het paneel aanpassen",
+    "actions": {
+      "generic": "Uitvoeren?",
+      "confirm": "Bevestigen",
+      "running": "Bezig…",
+      "cancel": "Annuleren",
+      "done": "Klaar",
+      "failed": "Dat lukte niet. Probeer het opnieuw.",
+      "cancelled": "Geannuleerd",
+      "cantUndo": "Dit kan niet ongedaan worden gemaakt.",
+      "titles": {
+        "create_company": "Een bedrijf aanmaken"
+      },
+      "fields": {
+        "company": "Bedrijf",
+        "name": "Naam"
+      }
+    }
   }
 }

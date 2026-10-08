@@ -60,10 +60,16 @@ async function assistantAnswers(page: Page) {
     created_at: "2026-10-09T10:00:00Z",
     updated_at: "2026-10-09T10:00:00Z",
   };
-  await page.route(`**/api/assistant/conversations/${CONVERSATION}`, (route) =>
-    route.request().method() === "DELETE"
-      ? route.fulfill({ status: 204 })
-      : route.fulfill({
+  // The service brings back a recent conversation after a reload, until it's deleted.
+  let active = true;
+  await page.route(`**/api/assistant/conversations/${CONVERSATION}`, (route) => {
+    if (route.request().method() === "DELETE") {
+      active = false;
+
+      return route.fulfill({ status: 204 });
+    }
+
+    return route.fulfill({
           json: {
             ...saved,
             messages: [
@@ -71,10 +77,13 @@ async function assistantAnswers(page: Page) {
               { id: "a", role: "assistant", source: "text", content: "**Ann** passed with 82%.", blocks: [], status: "complete", created_at: saved.created_at },
             ],
           },
-        })
-  );
+        });
+  });
   await page.route("**/api/assistant/conversations?*", (route) => route.fulfill({ json: [saved] }));
   await page.route("**/api/assistant/conversations", (route) => route.fulfill({ json: [saved] }));
+  await page.route("**/api/assistant/conversations/active", (route) =>
+    active ? route.fulfill({ json: saved }) : route.fulfill({ status: 204 })
+  );
 
   return sent;
 }
@@ -198,16 +207,27 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
   // The history lists it; deleting asks first.
   await panel.getByRole("button", { name: "History" }).click();
   await expect(panel.getByRole("button", { name: /^Who passed\? / })).toBeVisible();
+  // Hovering a chat shows its whole title, above the panel (the tooltip has no ARIA role: it
+  // repeats the row's own text), and the panel stays open.
+  await panel.getByRole("button", { name: /^Who passed\? / }).hover();
+  const tooltip = owner.locator("[data-side][data-open][tabindex]", { hasText: /^Who passed\?$/ });
+  await expect(tooltip).toBeVisible();
+  await expect(tooltip).toBeInViewport();
+  await expect(panel).toBeVisible();
   await shot(owner, "history");
   await panel.getByRole("button", { name: "Delete “Who passed?”" }).click();
   await owner.getByRole("dialog", { name: "Delete this chat?" }).getByRole("button", { name: "Delete" }).click();
   await expect(panel.getByText("No chats yet.")).toBeVisible();
 
-  // New chat forgets it, with the input ready again: a reload shows the welcome.
+  // New chat starts over, with the input ready again. With no recent conversation (the service
+  // says none, as for one older than its window), a reload leaves the panel closed, and it
+  // opens on the welcome.
   await panel.getByRole("button", { name: "New chat" }).click();
   await expect(panel.getByRole("textbox")).toBeFocused();
   await owner.reload();
-  panel = owner.getByRole("dialog", { name: "Assistant" });
+  await expect(owner.getByRole("banner").getByRole("button", { name: "ask agent" })).toBeVisible();
+  await expect(owner.getByRole("dialog", { name: "Assistant" })).toHaveCount(0);
+  panel = await openPanel(owner);
   await expect(panel.getByText("Verify your company so candidates see")).toBeVisible();
 });
 
@@ -260,4 +280,74 @@ test("a visitor who signs in from the sign-in card keeps their chat", async ({ b
     ],
   });
   await context.close();
+});
+
+test("an action runs once its card is confirmed, and asking to sign out signs out", async ({
+  signInAs,
+}) => {
+  const owner = await signInAs(ownerEmail());
+  const actionId = "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee";
+  const card = {
+    kind: "confirm",
+    items: [],
+    links: [],
+    action_id: actionId,
+    tool: "create_company",
+    preview: { name: "Acme" },
+    company_id: null,
+    destructive: false,
+    state: "pending",
+  };
+  let confirms = 0;
+  await owner.route("**/api/assistant/chat", (route) => {
+    const asked = route.request().postDataJSON().message;
+
+    return route.fulfill({
+      contentType: "text/event-stream",
+      body:
+        asked === "Sign me out"
+          ? events({ conversation: { id: CONVERSATION } }, { sign_out: true }, { delta: "Bye." })
+          : events(
+              { conversation: { id: CONVERSATION } },
+              { block: card },
+              { delta: "Confirm it below." },
+              { done: { message_id: "m1" } }
+            ),
+    });
+  });
+  await owner.route(`**/api/assistant/conversations/${CONVERSATION}/actions/${actionId}/confirm`, (route) => {
+    confirms += 1;
+
+    return route.fulfill({
+      contentType: "text/event-stream",
+      body: events(
+        { conversation: { id: CONVERSATION } },
+        { action: { ...card, state: "done", links: ["/companies/c1/interviews"] } },
+        { delta: "Acme is ready." },
+        { done: { message_id: "m2" } }
+      ),
+    });
+  });
+  const panel = await openPanel(owner);
+  await panel.getByRole("textbox").fill("Create a company called Acme");
+  await panel.getByRole("button", { name: "Send" }).click();
+
+  // The card shows exactly what runs; Confirm runs it once.
+  await expect(panel.getByText("Create a company", { exact: true })).toBeVisible();
+  await expect(panel.getByText("Acme", { exact: true })).toBeVisible();
+  await shot(owner, "action-card");
+  await panel.getByRole("button", { name: "Confirm" }).click();
+  await expect(panel.getByText("Done", { exact: true })).toBeVisible();
+  await expect(panel.locator('a[href="/companies/c1/interviews"]')).toBeVisible();
+  await expect(panel.getByRole("list").getByText("Acme is ready.")).toBeVisible();
+  await expect(panel.getByRole("button", { name: "Confirm" })).toHaveCount(0);
+  expect(confirms).toBe(1);
+  await shot(owner, "action-done");
+
+  // Asked to sign out, the panel signs out at once and shows the visitor's welcome.
+  await panel.getByRole("textbox").fill("Sign me out");
+  await panel.getByRole("button", { name: "Send" }).click();
+  await expect(owner.getByRole("banner").getByRole("button", { name: /sign in/i })).toBeVisible();
+  await expect(panel.getByRole("button", { name: "History" })).toHaveCount(0);
+  await expect(panel.getByRole("button", { name: "What is prepza?" })).toBeVisible();
 });

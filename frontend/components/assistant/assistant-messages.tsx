@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { AnswerBlocks } from "@/components/assistant/answer-blocks"
+import { type CardActions } from "@/components/assistant/action-card"
 import { AnswerMarkdown } from "@/components/assistant/answer-markdown"
 import { ChatBubble, ThinkingDots } from "@/components/chat-bubble"
 import { Button } from "@/components/ui/button"
@@ -21,6 +22,7 @@ export function AssistantMessages({
   onAsk,
   onRetry,
   onNavigate,
+  actions,
 }: {
   messages: ChatMessage[]
   streaming: boolean
@@ -31,6 +33,7 @@ export function AssistantMessages({
   onAsk: (question: string) => void
   onRetry: () => void
   onNavigate: () => void
+  actions: CardActions
 }) {
   const t = useTranslations("assistant")
   const common = useTranslations("common")
@@ -129,7 +132,11 @@ export function AssistantMessages({
             ),
             message.blocks.length > 0 && (
               <li key={`${index}-blocks`}>
-                <AnswerBlocks blocks={message.blocks} onNavigate={onNavigate} />
+                <AnswerBlocks
+                  blocks={message.blocks}
+                  actions={actions}
+                  onNavigate={onNavigate}
+                />
               </li>
             ),
           ]

@@ -1367,6 +1367,23 @@
       }
     },
     "signInCard": "Entre ou crie uma conta; depois pergunte sobre suas empresas e candidatos.",
-    "resize": "Ajustar a largura do painel"
+    "resize": "Ajustar a largura do painel",
+    "actions": {
+      "generic": "Fazer isso?",
+      "confirm": "Confirmar",
+      "running": "Fazendo…",
+      "cancel": "Cancelar",
+      "done": "Feito",
+      "failed": "Não foi possível. Tente novamente.",
+      "cancelled": "Cancelado",
+      "cantUndo": "Isso não pode ser desfeito.",
+      "titles": {
+        "create_company": "Criar uma empresa"
+      },
+      "fields": {
+        "company": "Empresa",
+        "name": "Nome"
+      }
+    }
   }
 }

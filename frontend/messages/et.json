@@ -1375,6 +1375,23 @@
       }
     },
     "signInCard": "Logi sisse või loo konto ning küsi siis oma ettevõtete ja kandidaatide kohta.",
-    "resize": "Muuda paneeli laiust"
+    "resize": "Muuda paneeli laiust",
+    "actions": {
+      "generic": "Kas teha?",
+      "confirm": "Kinnita",
+      "running": "Teen…",
+      "cancel": "Tühista",
+      "done": "Tehtud",
+      "failed": "Ei õnnestunud. Proovi uuesti.",
+      "cancelled": "Tühistatud",
+      "cantUndo": "Seda ei saa tagasi võtta.",
+      "titles": {
+        "create_company": "Loo ettevõte"
+      },
+      "fields": {
+        "company": "Ettevõte",
+        "name": "Nimi"
+      }
+    }
   }
 }

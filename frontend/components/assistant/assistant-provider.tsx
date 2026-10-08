@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useState } from "react"
 
 import { AssistantPanel } from "@/components/assistant/assistant-panel"
 import { useAuth } from "@/components/auth-provider"
@@ -14,16 +14,8 @@ const AssistantContext = createContext<() => void>(() => {})
  * toggles it. */
 export function AssistantProvider({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false)
-  const { user, loading } = useAuth()
+  const { user } = useAuth()
   const signedIn = user !== null
-
-  // Open again after a reload when it was open, once the page knows who's signed in.
-  useEffect(() => {
-    if (!loading && wasOpen(signedIn)) {
-      void Promise.resolve().then(() => setOpen(true))
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading])
 
   function change(next: boolean) {
     setOpen(next)
@@ -38,7 +30,12 @@ export function AssistantProvider({ children }: { children: React.ReactNode }) {
   return (
     <AssistantContext value={() => change(!open)}>
       {children}
-      <AssistantPanel open={open} onOpenChange={change} />
+      <AssistantPanel
+        open={open}
+        onOpenChange={change}
+        // Open again after a reload when it was open, and only with a recent chat.
+        onRestored={(recent) => recent && wasOpen(signedIn) && setOpen(true)}
+      />
     </AssistantContext>
   )
 }

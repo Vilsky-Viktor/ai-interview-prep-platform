@@ -1370,6 +1370,23 @@
       }
     },
     "signInCard": "Giriş yap ya da hesap oluştur; ardından şirketlerin ve adayların hakkında sor.",
-    "resize": "Panelin genişliğini değiştir"
+    "resize": "Panelin genişliğini değiştir",
+    "actions": {
+      "generic": "Yapılsın mı?",
+      "confirm": "Onayla",
+      "running": "Yapılıyor…",
+      "cancel": "İptal",
+      "done": "Tamamlandı",
+      "failed": "Yapılamadı. Tekrar dene.",
+      "cancelled": "İptal edildi",
+      "cantUndo": "Bu işlem geri alınamaz.",
+      "titles": {
+        "create_company": "Şirket oluştur"
+      },
+      "fields": {
+        "company": "Şirket",
+        "name": "Ad"
+      }
+    }
   }
 }

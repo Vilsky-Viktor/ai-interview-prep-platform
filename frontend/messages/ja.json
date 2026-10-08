@@ -1375,6 +1375,23 @@
       }
     },
     "signInCard": "ログインまたはアカウントを作成すると、会社や候補者について質問できます。",
-    "resize": "パネルの幅を変更"
+    "resize": "パネルの幅を変更",
+    "actions": {
+      "generic": "実行しますか？",
+      "confirm": "確認",
+      "running": "実行中…",
+      "cancel": "キャンセル",
+      "done": "完了",
+      "failed": "実行できませんでした。もう一度お試しください。",
+      "cancelled": "キャンセルしました",
+      "cantUndo": "元に戻せません。",
+      "titles": {
+        "create_company": "会社を作成"
+      },
+      "fields": {
+        "company": "会社",
+        "name": "名前"
+      }
+    }
   }
 }

@@ -1371,6 +1371,23 @@
       }
     },
     "signInCard": "Accedi o crea un account, poi chiedi delle tue aziende e dei tuoi candidati.",
-    "resize": "Ridimensiona il pannello"
+    "resize": "Ridimensiona il pannello",
+    "actions": {
+      "generic": "Procedere?",
+      "confirm": "Conferma",
+      "running": "In corso…",
+      "cancel": "Annulla",
+      "done": "Fatto",
+      "failed": "Non è stato possibile. Riprova.",
+      "cancelled": "Annullato",
+      "cantUndo": "Non si può annullare.",
+      "titles": {
+        "create_company": "Crea un'azienda"
+      },
+      "fields": {
+        "company": "Azienda",
+        "name": "Nome"
+      }
+    }
   }
 }

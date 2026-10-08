@@ -1362,6 +1362,23 @@
       }
     },
     "signInCard": "登录或创建账户后，即可询问你的公司和候选人。",
-    "resize": "调整面板宽度"
+    "resize": "调整面板宽度",
+    "actions": {
+      "generic": "要执行吗？",
+      "confirm": "确认",
+      "running": "正在执行…",
+      "cancel": "取消",
+      "done": "已完成",
+      "failed": "未能完成，请重试。",
+      "cancelled": "已取消",
+      "cantUndo": "此操作无法撤销。",
+      "titles": {
+        "create_company": "创建公司"
+      },
+      "fields": {
+        "company": "公司",
+        "name": "名称"
+      }
+    }
   }
 }

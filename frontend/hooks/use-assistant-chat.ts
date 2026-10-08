@@ -5,37 +5,37 @@ import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
-import { useAuth } from "@/components/auth-provider"
 import { apiErrorMessage } from "@/lib/api"
-import { getConversation, streamAssistant } from "@/lib/assistant"
-import { clearChat, readChat, saveChat } from "@/lib/assistant-storage"
+import {
+  getConversation,
+  helpConversation,
+  refreshToken,
+  streamAssistant,
+  withCard,
+} from "@/lib/assistant"
+import { clearChat } from "@/lib/assistant-storage"
+import { signOut } from "@/lib/auth"
 import { StreamError, streamHelp } from "@/lib/chat"
-import { firebaseAuth } from "@/lib/firebase"
+import { useActionCards } from "@/hooks/use-action-cards"
+import { useChatRestore } from "@/hooks/use-chat-restore"
 import type { AssistantEvent, ChatMessage } from "@/types/assistant"
-import type { HelpMessage } from "@/types/help"
 
 // The service's error code for a token it stopped taking mid-answer.
 const SESSION_EXPIRED = "session_expired"
 
-/** The conversation as the FAQ's help chat reads it: the questions and the answers that came. */
-function helpConversation(messages: ChatMessage[]): HelpMessage[] {
-  return messages
-    .filter((message) => message.content && !message.error)
-    .map(({ role, content }) => ({ role, content }))
-}
-
 /** The assistant's conversation in the panel: its messages, the answer streaming into the last
  * one. Each message goes with the company picked in the panel (`company`; null: all of them).
  * Signed out, the FAQ's help chat answers instead: the conversation lives only here (and in the
- * tab's sessionStorage). A reload brings back the conversation it showed; a visitor who signs in
- * keeps their chat, which the first message then saves as the start of a conversation. */
-export function useAssistantChat(company: string | null, signedIn: boolean) {
+ * tab's sessionStorage). A reload brings back a recent chat; a visitor who signs in keeps their
+ * chat, which the first message then saves as the start of a conversation. Actions the
+ * assistant prepares run when the user confirms their cards. */
+export function useAssistantChat(
+  company: string | null,
+  signedIn: boolean,
+  onRestored: (recent: boolean) => void
+) {
   const t = useTranslations("assistant")
   const pathname = usePathname()
-  const { user, loading } = useAuth()
-  // Who the panel was restored for: undefined until the page knows, null for a visitor.
-  const uid = loading ? undefined : (user?.uid ?? null)
-  const restoredFor = useRef<string | null | undefined>(undefined)
   const [conversationId, setConversationId] = useState<string | null>(null)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [streaming, setStreaming] = useState(false)
@@ -43,55 +43,22 @@ export function useAssistantChat(company: string | null, signedIn: boolean) {
 
   useEffect(() => () => stream.current?.abort(), [])
 
-  // A visitor's chat is kept for a reload, once each answer is done (and only once what a
-  // reload kept was brought back, so it isn't overwritten first).
-  useEffect(() => {
-    if (restoredFor.current !== undefined && !signedIn && !streaming) {
-      saveChat(false, { messages })
-    }
-  }, [signedIn, streaming, messages])
+  const { confirm, cancel } = useActionCards({
+    conversationId,
+    messages,
+    setMessages,
+    streamAnswer,
+  })
 
-  useEffect(() => {
-    if (uid === undefined || restoredFor.current === uid) {
-      return
-    }
-
-    const before = restoredFor.current
-    restoredFor.current = uid
-    void restore(before, uid)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [uid])
-
-  /** After the page learns who's signed in: on its first load, the conversation the panel
-   * showed (or the visitor's chat, while signing in); signing out or another account starts
-   * over; a visitor who just signed in keeps their chat on screen. */
-  async function restore(
-    before: string | null | undefined,
-    now: string | null
-  ) {
-    if (before) {
-      clearChat(true)
-      startNew()
-    }
-
-    if (before !== undefined) {
-      return
-    }
-
-    const saved = now ? readChat(true).conversationId : null
-
-    if (saved) {
-      await open(saved, true)
-
-      return
-    }
-
-    const visitor = readChat(false).messages
-
-    if (Array.isArray(visitor) && visitor.length > 0) {
-      setMessages(visitor)
-    }
-  }
+  useChatRestore({
+    signedIn,
+    streaming,
+    messages,
+    setMessages,
+    open,
+    startNew,
+    onRestored,
+  })
 
   // The answer being written is always the last message.
   function updateAnswer(change: (answer: ChatMessage) => ChatMessage) {
@@ -123,6 +90,60 @@ export function useAssistantChat(company: string | null, signedIn: boolean) {
     }
   }
 
+  function onEvent(event: AssistantEvent) {
+    if (event.conversation) {
+      setConversationId(event.conversation.id)
+      clearChat(false)
+    }
+
+    if (event.action?.action_id) {
+      setMessages((current) =>
+        withCard(current, event.action!.action_id!, event.action!)
+      )
+    }
+
+    // The user asked to sign out: done at once, and the panel shows the visitor's welcome.
+    if (event.sign_out) {
+      void signOut()
+    }
+
+    apply(event)
+  }
+
+  /** Shows `shown` (ending with the answer to write) and streams into its last message; the
+   * error, if the stream failed (not when the user stopped it). */
+  async function streamAnswer(
+    shown: ChatMessage[],
+    start: (
+      onEvent: (event: AssistantEvent) => void,
+      signal: AbortSignal
+    ) => Promise<void>
+  ) {
+    setMessages(shown)
+    setStreaming(true)
+    stream.current = new AbortController()
+    const { signal } = stream.current
+    let failure: unknown = null
+
+    try {
+      await start(onEvent, signal)
+    } catch (error) {
+      failure = signal.aborted ? null : error
+    }
+
+    setStreaming(false)
+
+    return failure
+  }
+
+  function showError(error: unknown) {
+    const message =
+      error instanceof StreamError
+        ? error.message
+        : apiErrorMessage(error, t("failed"))
+    updateAnswer((current) => ({ ...current, error: message }))
+  }
+
   /** Asks `text`, after `earlier` (the conversation without a failed attempt). A token the
    * service stopped taking is refreshed and the message sent again, once. */
   async function ask(
@@ -139,69 +160,40 @@ export function useAssistantChat(company: string | null, signedIn: boolean) {
       source,
     }
     const answer: ChatMessage = { role: "assistant", content: "", blocks: [] }
-    setMessages([...earlier, question, answer])
-    setStreaming(true)
-    stream.current = new AbortController()
-    const { signal } = stream.current
-    let created = conversation
+    const error = await streamAnswer(
+      [...earlier, question, answer],
+      (handle, signal) =>
+        signedIn
+          ? streamAssistant(
+              {
+                message: text,
+                source,
+                page: pathname,
+                ...(company && { company_id: company }),
+                // A new conversation starts with what the user asked before signing in.
+                ...(conversation
+                  ? { conversation_id: conversation }
+                  : { earlier: helpConversation(earlier) }),
+              },
+              handle,
+              signal
+            )
+          : streamHelp(helpConversation([...earlier, question]), handle, signal)
+    )
 
-    try {
-      if (!signedIn) {
-        await streamHelp(
-          helpConversation([...earlier, question]),
-          apply,
-          signal
-        )
-      } else {
-        await streamAssistant(
-          {
-            message: text,
-            source,
-            page: pathname,
-            ...(company && { company_id: company }),
-            // A new conversation starts with what the user asked before signing in.
-            ...(conversation
-              ? { conversation_id: conversation }
-              : { earlier: helpConversation(earlier) }),
-          },
-          (event) => {
-            if (event.conversation) {
-              created = event.conversation.id
-              setConversationId(created)
-              saveChat(true, { conversationId: created })
-              clearChat(false)
-            }
+    if (
+      error instanceof StreamError &&
+      error.code === SESSION_EXPIRED &&
+      !resent
+    ) {
+      await refreshToken()
 
-            apply(event)
-          },
-          signal
-        )
-      }
-    } catch (error) {
-      if (signal.aborted) {
-        setStreaming(false)
-
-        return
-      }
-
-      if (
-        error instanceof StreamError &&
-        error.code === SESSION_EXPIRED &&
-        !resent
-      ) {
-        await (await firebaseAuth()).currentUser?.getIdToken(true)
-
-        return ask(text, source, earlier, created, true)
-      }
-
-      const message =
-        error instanceof StreamError
-          ? error.message
-          : apiErrorMessage(error, t("failed"))
-      updateAnswer((current) => ({ ...current, error: message }))
+      return ask(text, source, earlier, conversationId ?? conversation, true)
     }
 
-    setStreaming(false)
+    if (error) {
+      showError(error)
+    }
   }
 
   function send(text: string, source: "text" | "voice" = "text") {
@@ -231,13 +223,16 @@ export function useAssistantChat(company: string | null, signedIn: boolean) {
     stop()
     setConversationId(null)
     setMessages([])
-    saveChat(true, { conversationId: null })
     clearChat(false)
   }
 
-  /** Opens one of the user's conversations, and gives its company; `quietly` (restoring after a
-   * reload), one that's gone leaves the welcome without an error. */
-  async function open(id: string, quietly = false): Promise<string | null> {
+  /** Opens one of the user's conversations, and gives its company (undefined when it couldn't);
+   * `quietly` (restoring after a reload), one that's gone leaves the welcome without an
+   * error. */
+  async function open(
+    id: string,
+    quietly = false
+  ): Promise<string | null | undefined> {
     stop()
 
     try {
@@ -251,17 +246,13 @@ export function useAssistantChat(company: string | null, signedIn: boolean) {
           source: message.source,
         }))
       )
-      saveChat(true, { conversationId: found.id })
-
       return found.company_id
     } catch (error) {
-      if (quietly) {
-        saveChat(true, { conversationId: null })
-      } else {
+      if (!quietly) {
         toast.error(apiErrorMessage(error, t("openFailed")))
       }
 
-      return null
+      return undefined
     }
   }
 
@@ -272,6 +263,8 @@ export function useAssistantChat(company: string | null, signedIn: boolean) {
     streaming,
     send,
     retry,
+    confirm,
+    cancel,
     stop,
     startNew,
     open,

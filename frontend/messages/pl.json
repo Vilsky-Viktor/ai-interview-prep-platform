@@ -1371,6 +1371,23 @@
       }
     },
     "signInCard": "Zaloguj się lub załóż konto, a potem pytaj o swoje firmy i kandydatów.",
-    "resize": "Zmień szerokość panelu"
+    "resize": "Zmień szerokość panelu",
+    "actions": {
+      "generic": "Wykonać?",
+      "confirm": "Potwierdź",
+      "running": "Wykonuję…",
+      "cancel": "Anuluj",
+      "done": "Gotowe",
+      "failed": "Nie udało się. Spróbuj ponownie.",
+      "cancelled": "Anulowano",
+      "cantUndo": "Tego nie da się cofnąć.",
+      "titles": {
+        "create_company": "Utwórz firmę"
+      },
+      "fields": {
+        "company": "Firma",
+        "name": "Nazwa"
+      }
+    }
   }
 }

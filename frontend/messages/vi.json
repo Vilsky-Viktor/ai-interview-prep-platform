@@ -1367,6 +1367,23 @@
       }
     },
     "signInCard": "Đăng nhập hoặc tạo tài khoản, rồi hỏi về công ty và ứng viên của bạn.",
-    "resize": "Đổi độ rộng của bảng"
+    "resize": "Đổi độ rộng của bảng",
+    "actions": {
+      "generic": "Thực hiện?",
+      "confirm": "Xác nhận",
+      "running": "Đang thực hiện…",
+      "cancel": "Hủy",
+      "done": "Xong",
+      "failed": "Không thực hiện được. Hãy thử lại.",
+      "cancelled": "Đã hủy",
+      "cantUndo": "Không thể hoàn tác.",
+      "titles": {
+        "create_company": "Tạo công ty"
+      },
+      "fields": {
+        "company": "Công ty",
+        "name": "Tên"
+      }
+    }
   }
 }

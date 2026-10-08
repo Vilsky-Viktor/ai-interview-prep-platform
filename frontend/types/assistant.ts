@@ -13,10 +13,25 @@ export type AssistantBlock = {
     | "credits"
     | "link"
     | "sign_in"
+    | "confirm"
   items: Record<string, unknown>[]
   links: (string | null)[]
   // A sign-in card's way to sign in first: the one the visitor asked for.
   provider?: SignInProvider | null
+} & Partial<ActionCard>
+
+/** An action the assistant prepared, as its confirmation card shows it: exactly what runs
+ * (`preview`), whether it can't be undone, and where it stands. "running" is the panel's own,
+ * while a confirm is on its way. */
+export type ActionCard = {
+  action_id: string
+  tool: string
+  preview: Record<string, string | number | boolean>
+  company_id: string | null
+  destructive: boolean
+  state: "pending" | "running" | "done" | "failed" | "cancelled"
+  // Why it failed, in the user's language.
+  detail?: string | null
 }
 
 export type ToolProgress = {
@@ -32,6 +47,12 @@ export type AssistantEvent = {
   block?: AssistantBlock
   delta?: string
   done?: { message_id: string }
+  // A confirmed action's card, in its new state.
+  action?: AssistantBlock
+  // The user asked to sign out: the panel does it.
+  sign_out?: boolean
+  // The conversation's new title, for the history.
+  title?: string
 }
 
 export type AssistantMessage = {
@@ -59,6 +80,8 @@ export type ConversationDetail = Conversation & {
 /** The limits the panel keeps to (GET /config). */
 export type AssistantConfig = {
   max_message_length: number
+  // A chat older than this isn't brought back after a reload.
+  restore_minutes: number
   max_audio_seconds: number
   messages_per_hour: number
   messages_per_day: number

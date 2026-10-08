@@ -1371,6 +1371,23 @@
       }
     },
     "signInCard": "Masuk atau buat akun, lalu tanyakan tentang perusahaan dan kandidatmu.",
-    "resize": "Ubah lebar panel"
+    "resize": "Ubah lebar panel",
+    "actions": {
+      "generic": "Lakukan ini?",
+      "confirm": "Konfirmasi",
+      "running": "Sedang dilakukan…",
+      "cancel": "Batal",
+      "done": "Selesai",
+      "failed": "Tidak berhasil. Coba lagi.",
+      "cancelled": "Dibatalkan",
+      "cantUndo": "Ini tidak bisa dibatalkan.",
+      "titles": {
+        "create_company": "Buat perusahaan"
+      },
+      "fields": {
+        "company": "Perusahaan",
+        "name": "Nama"
+      }
+    }
   }
 }
