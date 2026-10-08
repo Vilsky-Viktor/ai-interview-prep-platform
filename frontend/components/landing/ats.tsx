@@ -3,9 +3,10 @@ import { ArrowRightIcon, CodeXmlIcon } from "lucide-react"
 import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 
+import { ApiDemo } from "@/components/landing/api-demo"
 import { LandingSection } from "@/components/landing/section"
 import { Button } from "@/components/ui/button"
-import { API_DOCS_PATH, API_EXAMPLE } from "@/constants/api"
+import { API_DOCS_PATH } from "@/constants/api"
 import { ATS_PROVIDERS } from "@/constants/ats"
 import { SLACK } from "@/constants/slack"
 
@@ -37,8 +38,8 @@ export async function AtsSection() {
         ))}
       </ul>
       <div className="mx-auto mt-8 w-full max-w-4xl">
-        {/* prepza's API, named over it; code, so it reads left to right in every language. Each
-            part's first lines on the left, its body on the right. */}
+        {/* prepza's API, named over it, and a request typed out with its answer; code, so it
+            reads left to right in every language. */}
         <div dir="ltr" className="overflow-hidden rounded-2xl bg-muted text-sm">
           {/* The API's name, and its docs at the end of the row. */}
           <div className="flex items-center justify-between gap-4 border-b px-5 py-3">
@@ -56,21 +57,7 @@ export async function AtsSection() {
               <ArrowRightIcon className="size-4" />
             </Button>
           </div>
-          <div className="divide-y overflow-x-auto font-mono leading-relaxed">
-            {[API_EXAMPLE.request, API_EXAMPLE.response].map((part, index) => (
-              <div
-                key={index}
-                className="grid gap-x-10 gap-y-2 p-5 sm:grid-cols-2"
-              >
-                <pre className={cn(index && "text-muted-foreground")}>
-                  {part.head}
-                </pre>
-                <pre className={cn(index && "text-muted-foreground")}>
-                  {part.body}
-                </pre>
-              </div>
-            ))}
-          </div>
+          <ApiDemo />
         </div>
       </div>
       <ul className="mx-auto mt-8 grid w-full max-w-5xl gap-x-10 gap-y-3 text-muted-foreground sm:grid-cols-3">
