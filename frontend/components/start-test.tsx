@@ -141,7 +141,7 @@ export function StartTest({
           className="max-h-72 min-h-40 resize-none border-0 bg-transparent p-2 text-base shadow-none focus-visible:ring-0 md:text-base dark:bg-transparent"
         />
         <div className="flex flex-wrap items-center justify-between gap-4 ps-2 pt-2">
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground pointer-coarse:hidden">
             {common("submitHint")}
           </p>
           <div className="ms-auto flex items-center gap-3">

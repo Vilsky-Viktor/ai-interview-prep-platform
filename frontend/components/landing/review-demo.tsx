@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { Caret } from "@/components/landing/caret"
 import { TopicEditDemo } from "@/components/landing/topic-edit-demo"
 import { buttonVariants } from "@/components/ui/button"
+import { useTallest } from "@/hooks/use-tallest"
 
 // The demo's steps and how long each shows, in milliseconds. A step that types shows one more
 // letter of its text each `ms`: the new subtopic, then the request for changes, which is then
@@ -61,6 +62,7 @@ export function ReviewDemo({
     apply: string
   }
 }) {
+  const { ref, tallest } = useTallest<HTMLDivElement>()
   const [index, setIndex] = useState(0)
   const [letters, setLetters] = useState({ added: 0, change: 0 })
   const step = STEPS[index].name
@@ -111,7 +113,11 @@ export function ReviewDemo({
 
   return (
     // Room for the open editor, so the page doesn't move while the demo plays.
-    <div className="min-h-[612px] space-y-4 text-start sm:min-h-[452px]">
+    <div
+      ref={ref}
+      style={{ minHeight: tallest }}
+      className="space-y-4 text-start"
+    >
       <p className="font-heading text-xl font-medium tracking-tight lowercase">
         {title}
         <span className="text-primary">.</span>

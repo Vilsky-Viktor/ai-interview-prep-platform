@@ -29,6 +29,7 @@ Below, a landing page walks through prepza, one section per screen:
 - trying it before your candidates do (free templates and a preview),
 - four ways to invite candidates: by email, from a list or file, a shareable link for a job ad, and from an ATS,
 - sharing results,
+- asking the agent: the assistant's panel inviting a candidate, with its input typing more requests one after another (a placeholder only, with reduced motion), and "ask agent" to open it,
 - topic review,
 - questions that fix themselves,
 - the tools prepza works with: the ATSs (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR) and Slack as their logos, and the API as an example request with a link to its docs,
@@ -37,7 +38,7 @@ Below, a landing page walks through prepza, one section per screen:
 - pricing ("Pay per candidate": interviews and the first candidates free, then a price per candidate, with no subscription),
 - a closing call to action: "Create an interview", then the demos and the FAQ ("Demos" with "Go to FAQ" beside it).
 
-Each section has a picture of the real interface, several of them animated. Prices come from billing, so they follow any change. Signed-in users see the landing page too.
+Each section has a picture of the real interface, several of them animated. Prices come from billing, so they follow any change. Signed-in users see the landing page too. On phones the pictures' gray panels reach the screen's edges, and an animated picture keeps the height of its tallest moment, so the page below never moves back up.
 
 ## Skills tests by role
 
@@ -139,7 +140,9 @@ The `/api-docs` page ("api docs" in the footer) is the public API's reference, i
 
 `/about` explains why prepza exists for companies, free practice for people preparing, and its solo founder.
 
-The footer links, in three columns: skills tests by role and the articles (pre-employment testing, AI interviews, comparisons, guides); the privacy policy, the terms, the documents and the API docs; free practice, the FAQ, About us, News and Contact us. Pricing is in the header's menu, not in the footer.
+The footer has the social icons and "ask agent", which opens the assistant, and its links in three columns: the product (skills tests, pre-employment testing, AI interviews, free practice, comparisons), resources (guides, FAQ, docs, API docs, news) and the company (About us, Contact us, privacy, terms). On phones everything is centered, with the links in one column. Pricing is in the header's menu, not in the footer.
+
+On phones dialogs and menus span the screen's width, with square corners, and the "⌘/Ctrl + Enter to send" hint is hidden on touch screens.
 
 ## Search engines
 

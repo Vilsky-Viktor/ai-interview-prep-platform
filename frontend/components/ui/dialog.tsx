@@ -43,11 +43,11 @@ function DialogOverlay({
 // Open and close: the sheet slides in from its side (from the bottom on phones), a popup fades
 // in rising a little and growing slightly; about 200 ms in and 150 ms out, eased. Reduced
 // motion makes them instant (globals.css). Base UI keeps a closing popup mounted until its
-// transition ends.
+// transition ends. On phones a popup spans the screen's width, with square corners.
 const SHEET_CLASSES =
   "fixed inset-y-0 end-0 z-50 flex w-full flex-col bg-popover text-base text-popover-foreground ring-1 ring-foreground/10 outline-none transition-[translate] duration-200 ease-out sm:w-[var(--sheet-width,28rem)] data-[ending-style]:duration-150 data-[ending-style]:ease-in max-sm:data-[starting-style]:translate-y-full max-sm:data-[ending-style]:translate-y-full sm:data-[starting-style]:translate-x-full sm:data-[ending-style]:translate-x-full sm:rtl:data-[starting-style]:-translate-x-full sm:rtl:data-[ending-style]:-translate-x-full"
 const POPUP_CLASSES =
-  "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-8 rounded-xl bg-popover px-10 pt-10 pb-10 text-base text-popover-foreground ring-1 ring-foreground/10 outline-none transition-[opacity,translate,scale] duration-200 ease-out sm:max-w-sm data-[ending-style]:translate-y-[calc(-50%+10px)] data-[ending-style]:scale-[0.97] data-[ending-style]:opacity-0 data-[ending-style]:duration-150 data-[starting-style]:translate-y-[calc(-50%+10px)] data-[starting-style]:scale-[0.97] data-[starting-style]:opacity-0"
+  "fixed top-1/2 left-1/2 z-50 grid w-full max-w-full -translate-x-1/2 -translate-y-1/2 gap-8 sm:rounded-xl bg-popover px-10 pt-10 pb-10 text-base text-popover-foreground ring-1 ring-foreground/10 outline-none transition-[opacity,translate,scale] duration-200 ease-out sm:max-w-sm data-[ending-style]:translate-y-[calc(-50%+10px)] data-[ending-style]:scale-[0.97] data-[ending-style]:opacity-0 data-[ending-style]:duration-150 data-[starting-style]:translate-y-[calc(-50%+10px)] data-[starting-style]:scale-[0.97] data-[starting-style]:opacity-0"
 
 function DialogContent({
   className,
@@ -116,7 +116,7 @@ function DialogFooter({
     <div
       data-slot="dialog-footer"
       className={cn(
-        "-mx-10 -mb-10 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 px-4 py-3 sm:flex-row sm:justify-end",
+        "-mx-10 -mb-10 flex flex-col-reverse gap-2 border-t bg-muted/50 px-4 py-3 sm:flex-row sm:justify-end sm:rounded-b-xl",
         className
       )}
       {...props}

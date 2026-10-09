@@ -55,7 +55,8 @@ export function LandingSection({
 }
 
 /** The soft panel a section's picture sits on. Screen readers skip the picture unless it holds
- * real links (`decorative={false}`); `wide` gives room for two pictures side by side. */
+ * real links (`decorative={false}`); `wide` gives room for two pictures side by side. On phones
+ * it spans the screen, out to its edges, with square corners. */
 export function Stage({
   wide = false,
   decorative = true,
@@ -68,7 +69,7 @@ export function Stage({
   return (
     <div
       aria-hidden={decorative}
-      className="flex justify-center rounded-[2rem] bg-muted/60 px-5 py-10 sm:px-12 dark:bg-muted/30"
+      className="-mx-6 flex justify-center bg-muted/60 px-5 py-10 sm:mx-0 sm:rounded-[2rem] sm:px-12 dark:bg-muted/30"
     >
       <div className={wide ? "w-full max-w-4xl" : "w-full max-w-2xl"}>
         {children}

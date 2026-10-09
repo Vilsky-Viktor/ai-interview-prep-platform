@@ -56,8 +56,9 @@ export default async function HomePage() {
           <div className="space-y-4">
             {/* The promise, with the demos beside it from tablets up. */}
             <div className="flex items-start justify-between gap-6">
-              {/* Two lines, each ending with the logo's blue dot. */}
-              <h1 className="no-dot font-heading text-[min(3rem,10.5vw)] font-medium tracking-tight text-balance sm:text-6xl">
+              {/* Two lines, each ending with the logo's blue dot; close together, with room for
+                  marks above and below in Arabic, Persian, Hindi, Thai and Vietnamese. */}
+              <h1 className="no-dot font-heading text-[min(3rem,10.5vw)] leading-none font-medium tracking-tight text-balance sm:text-6xl [:lang(ar)_&]:leading-tight [:lang(fa)_&]:leading-tight [:lang(hi)_&]:leading-tight [:lang(th)_&]:leading-tight [:lang(vi)_&]:leading-tight">
                 {t("title")
                   .split("\n")
                   .map((line) => (

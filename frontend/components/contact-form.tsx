@@ -103,7 +103,7 @@ export function ContactForm() {
           }}
           className={`min-h-48 resize-none rounded-[2rem] px-6 pt-4 pb-20 text-lg md:text-lg ${BORDERLESS}`}
         />
-        <p className="pointer-events-none absolute start-6 bottom-6 text-xs text-muted-foreground">
+        <p className="pointer-events-none absolute start-6 bottom-6 text-xs text-muted-foreground pointer-coarse:hidden">
           {common("submitHint")}
         </p>
         <Button

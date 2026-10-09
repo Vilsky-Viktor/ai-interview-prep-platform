@@ -12,6 +12,7 @@ import { useEffect, useState } from "react"
 
 import { AnswerOptions } from "@/components/questions/answer-options"
 import { buttonVariants } from "@/components/ui/button"
+import { useTallest } from "@/hooks/use-tallest"
 
 // The demo's steps and how long each shows, in milliseconds. It starts with the weak question's
 // report open, which is also what shows with reduced motion.
@@ -153,6 +154,7 @@ export function QualityDemo({
     return () => window.clearTimeout(timer)
   }, [])
 
+  const { ref, tallest } = useTallest<HTMLDivElement>()
   const replaced = step === "regenerated"
   const reportOpen = ["open", "press", "regenerating"].includes(step)
   const regenerating = step === "regenerating"
@@ -166,7 +168,7 @@ export function QualityDemo({
       </p>
       {/* Room for the open report below the list, so the card keeps its size while the demo
           plays; the list itself only grows when the report opens. */}
-      <div className="min-h-[800px] sm:min-h-[436px]">
+      <div ref={ref} style={{ minHeight: tallest }}>
         <ul className="divide-y rounded-xl border">
           <li className={ROW}>
             <QuestionCell question={good} />

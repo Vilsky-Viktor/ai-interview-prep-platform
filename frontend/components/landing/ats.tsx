@@ -39,7 +39,7 @@ export async function AtsSection() {
       </ul>
       <div className="mx-auto mt-8 w-full max-w-4xl">
         {/* prepza's API, named over it, and a request typed out with its answer. */}
-        <div className="overflow-hidden rounded-2xl bg-muted text-sm">
+        <div className="-mx-6 overflow-hidden bg-muted text-sm sm:mx-0 sm:rounded-2xl">
           {/* The API's name, and its docs at the end of the row. */}
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b px-5 py-3">
             <p className="flex items-center gap-2 text-base font-medium">

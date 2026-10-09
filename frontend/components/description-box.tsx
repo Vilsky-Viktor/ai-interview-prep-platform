@@ -68,7 +68,9 @@ export function DescriptionBox({
         autoFocus
       />
       <div className="flex flex-wrap items-center justify-between gap-4 ps-2 pt-2">
-        <p className="text-xs text-muted-foreground">{common("submitHint")}</p>
+        <p className="text-xs text-muted-foreground pointer-coarse:hidden">
+          {common("submitHint")}
+        </p>
         <div className="ms-auto flex items-center gap-3">
           <GenerateIn value={generateIn} onChange={setGenerateIn} />
           <Button
