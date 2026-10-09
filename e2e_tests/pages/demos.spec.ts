@@ -14,9 +14,12 @@ test("the home page links to the demo videos at the top and at the end", async (
     await expect(link).toHaveAttribute("rel", /noopener/);
   }
 
-  // Hovering says where it leads.
-  await demos.first().hover();
-  await expect(page.getByText("Watch demos on YouTube")).toBeVisible();
+  // Hovering says where it leads (again if the first hover came before the page was ready).
+  await expect(async () => {
+    await page.mouse.move(0, 0);
+    await demos.first().hover();
+    await expect(page.getByText("Watch demos on YouTube")).toBeVisible({ timeout: 2_000 });
+  }).toPass();
 
   const closing = page.locator("section", {
     has: page.getByRole("heading", { name: /Ready to interview/i }),
