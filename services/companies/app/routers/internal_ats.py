@@ -65,7 +65,7 @@ async def invite(interview_id: UUID, body: AtsInviteIn, caller: ServiceCaller) -
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Only an owner or admin can invite")
 
     user = User(uid=body.sender_id, email="", email_verified=True)
-    sent = await candidate_invites.invite(interview, company, user, body.email)
+    sent = await candidate_invites.invite(interview, company, user, body.email, body.name)
     await outbox_service.flush_quietly()
 
     return AtsInviteOut(invite_id=sent.id)

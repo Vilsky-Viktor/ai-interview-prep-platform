@@ -47,6 +47,8 @@ class ScorecardSection(BaseModel):
 class ScorecardOut(BaseModel):
     id: UUID
     email: str
+    # The name from the candidate's sign-in; None until they start, or when it has none.
+    name: str | None = None
     status: str
     extra_time: int
     # Whether the user may change the candidate (extra time, revoke): not a viewer.

@@ -1,4 +1,6 @@
 from fastapi import HTTPException, status
+from prepza_common.names import clean_name
+from prepza_common.user import User
 
 from app.constants.invites import InviteStatus
 from app.helpers.candidates import candidate_seconds, hold_key
@@ -12,10 +14,11 @@ from app.storage import invites
 
 
 async def start_sessions(
-    invite: CandidateInvite, interview: Interview, user_id: str
+    invite: CandidateInvite, interview: Interview, user: User
 ) -> InviteStartOut:
     """Starts (or returns) the candidate's sessions: one per topic, with fresh random questions,
-    and marks the invite in process."""
+    and marks the invite in process. The candidate's name comes only from their verified sign-in
+    (`user`), never from the request, and fills only a name not known yet."""
     interview = await attach_set(interview)
 
     if interview.set_id is None:
@@ -30,14 +33,14 @@ async def start_sessions(
     # back. Starting again returns the sessions already made.
     created = await rounds.create_sessions(
         {
-            "user_id": user_id,
+            "user_id": user.uid,
             "candidate_invite_id": str(invite.id),
             "question_seconds": candidate_seconds(interview.question_seconds, invite.extra_time),
             "topics": session_topics(interview, content),
         }
     )
 
-    before = await invites.start(invite.id, user_id)
+    before = await invites.start(invite.id, user.uid, clean_name(user.name))
 
     # Revoked meanwhile: its sessions go too.
     if before is None:

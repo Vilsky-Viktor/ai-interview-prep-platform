@@ -21,7 +21,7 @@ async def search_candidates(
     q: Annotated[str, Query(max_length=MAX_SEARCH_LENGTH)] = "",
 ) -> list[CompanyCandidateOut]:
     """The company's candidates across its interviews, newest first, a page at a time; `q`
-    narrows them to emails containing it. Any member, viewers too."""
+    narrows them to an email or name containing it. Any member, viewers too."""
     company, _ = await require_company(user, company_id)
 
     return await candidate_results.company_page(company.id, page.offset, page.limit, q.strip())

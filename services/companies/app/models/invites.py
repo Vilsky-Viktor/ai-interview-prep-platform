@@ -4,7 +4,7 @@ from datetime import UTC, datetime
 from sqlalchemy import DateTime, ForeignKey, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
-from app.constants.invites import InviteStatus
+from app.constants.invites import MAX_CANDIDATE_NAME_LENGTH, InviteStatus
 from app.models.base import Base
 
 
@@ -17,6 +17,9 @@ class CandidateInvite(Base):
         ForeignKey("interviews.id", ondelete="CASCADE"), index=True
     )
     email: Mapped[str] = mapped_column(String(320))
+    # The candidate's name from their verified sign-in, filled once when they start; None until
+    # then, or when their sign-in has none.
+    name: Mapped[str | None] = mapped_column(String(MAX_CANDIDATE_NAME_LENGTH))
     token: Mapped[str] = mapped_column(String(64), unique=True)
     user_id: Mapped[str | None] = mapped_column(String(128), index=True)
     status: Mapped[str] = mapped_column(String(32), default=InviteStatus.INVITED)

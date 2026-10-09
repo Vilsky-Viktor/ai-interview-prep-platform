@@ -3,17 +3,20 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
+from prepza_common.names import clean_name
 from prepza_common.pause import refuse_if_paused
 
 from app.constants.invites import (
     MAX_BULK_INVITES,
+    NAME_NEEDS_ONE_EMAIL,
     NO_EMAILS,
     SKIP_REASONS,
     STARTED,
     TOO_MANY_EMAILS,
     SkipReason,
 )
-from app.helpers.email_lists import emails_in, is_email
+from app.helpers.candidate_lists import candidates_in
+from app.helpers.email_lists import is_email
 from app.helpers.interviews import attach_set
 from app.integrations.redis import get_redis
 from app.schemas.invites import BulkInviteIn, BulkInviteOut, SkippedInvite
@@ -30,7 +33,8 @@ router = APIRouter(prefix="/interviews", tags=["interviews"])
 @router.post("/{interview_id}/candidates/bulk")
 async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser) -> BulkInviteOut:
     """Invites every email in a pasted or uploaded list, one by one as a single invite would,
-    and says who was invited and why the others weren't."""
+    with the names the list gives ("Name <email>", "email, Name", or a CSV's name columns), and
+    says who was invited and why the others weren't."""
     interview = await interviews.get(interview_id)
 
     if interview is None:
@@ -44,19 +48,27 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
     if interview.set_id is None:
         raise HTTPException(status.HTTP_409_CONFLICT, "Interview is still being generated")
 
-    emails = emails_in(body.text)
+    found = candidates_in(body.text)
+    name = clean_name(body.name)
 
-    if not emails:
+    if not found:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NO_EMAILS)
 
-    if len(emails) > MAX_BULK_INVITES:
+    if name and len(found) > 1:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NAME_NEEDS_ONE_EMAIL)
+
+    # The form's name field wins over a name in the text.
+    if name:
+        found = [(found[0][0], name)]
+
+    if len(found) > MAX_BULK_INVITES:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, TOO_MANY_EMAILS)
 
     invited: list[str] = []
     skipped: list[SkippedInvite] = []
     out_of_credits = False
 
-    for email in emails:
+    for email, name in found:
         reason = None
 
         if out_of_credits:
@@ -67,7 +79,7 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
             reason = SkipReason.STARTED
         else:
             try:
-                await candidate_invites.invite(interview, company, user, email)
+                await candidate_invites.invite(interview, company, user, email, name)
             except HTTPException as error:
                 out_of_credits = error.status_code == status.HTTP_402_PAYMENT_REQUIRED
                 reason = SKIP_REASONS.get(error.status_code, SkipReason.FAILED)

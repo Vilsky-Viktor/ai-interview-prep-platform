@@ -16,7 +16,9 @@ def test_notifications_marks_an_invite_undelivered_and_the_company_is_told(clien
     marked = []
 
     async def fake_get(invite_id):
-        return SimpleNamespace(id=invite_id, interview_id=INTERVIEW.id, email="erin@example.com")
+        return SimpleNamespace(
+            id=invite_id, interview_id=INTERVIEW.id, email="erin@example.com", name=None
+        )
 
     async def fake_interview(interview_id):
         return INTERVIEW

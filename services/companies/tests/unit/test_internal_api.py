@@ -16,6 +16,7 @@ INTERVIEW = SimpleNamespace(
 INVITE = SimpleNamespace(
     id=uuid.uuid4(),
     email="anna@example.com",
+    name="Anna Nowak",
     status="finished",
     created_at=datetime(2026, 10, 2, tzinfo=UTC),
 )
@@ -96,6 +97,7 @@ def test_a_candidate_comes_with_their_results(client):
     found = client.get(f"{BASE}/{INTERVIEW.id}/candidates/{INVITE.id}", headers=HEADERS).json()
 
     assert (found["grade"], found["passed"], found["copies"]) == (86, True, 1)
+    assert found["name"] == "Anna Nowak"
 
 
 def test_another_companys_interview_or_an_unknown_candidate_is_not_found(client):

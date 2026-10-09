@@ -74,6 +74,7 @@ def open_scorecard(client, monkeypatch, headers=None):
             id=INVITE_ID,
             interview_id=INTERVIEW_ID,
             email="ann@example.com",
+            name="Ann Lee",
             token="token-ann",
             status=InviteStatus.FINISHED,
             extra_time=0,
@@ -125,6 +126,7 @@ def test_the_scorecard_carries_the_overall_result_for_the_pdf(client, monkeypatc
         True,
     )
     assert card["sessions"] == [{**SECTION, "passed": True}]
+    assert card["name"] == "Ann Lee"
 
 
 def test_viewing_a_finished_candidates_results_is_recorded(client, monkeypatch, audited, tracked):

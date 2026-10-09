@@ -51,7 +51,7 @@ async def candidate_invites(user_id: str, email: str) -> list[tuple]:
 
 
 async def forget_candidate(user_id: str, email: str) -> None:
-    """Keeps the company's invite row, marked deleted, without the candidate's email or a
+    """Keeps the company's invite row, marked deleted, without the candidate's email, name or a
     usable link. The email becomes unique per invite, as an interview can't hold it twice."""
     async with Session() as session:
         await session.execute(
@@ -60,6 +60,7 @@ async def forget_candidate(user_id: str, email: str) -> None:
             .values(
                 status=InviteStatus.DELETED,
                 email=literal("deleted-") + func.cast(CandidateInvite.id, Text()),
+                name=None,
                 token=func.md5(func.random().cast(Text()) + func.cast(CandidateInvite.id, Text())),
                 user_id=None,
             )
@@ -75,7 +76,12 @@ async def export(user_id: str, email: str) -> dict:
             .where(Member.user_id == user_id)
         )
         invites = await session.execute(
-            select(Interview.title, CandidateInvite.status, CandidateInvite.created_at)
+            select(
+                Interview.title,
+                CandidateInvite.name,
+                CandidateInvite.status,
+                CandidateInvite.created_at,
+            )
             .join(Interview, Interview.id == CandidateInvite.interview_id)
             .where(or_(CandidateInvite.user_id == user_id, CandidateInvite.email == email.lower()))
         )
@@ -97,8 +103,8 @@ async def export(user_id: str, email: str) -> dict:
                 {"company": name, "role": role, "since": since} for name, role, since in companies
             ],
             "interview_invites": [
-                {"interview": title, "status": status, "invited_at": at}
-                for title, status, at in invites
+                {"interview": title, "name": name, "status": status, "invited_at": at}
+                for title, name, status, at in invites
             ],
             "company_decisions": [
                 {"company": name, "action": action, "target_id": target_id, "via": via, "at": at}

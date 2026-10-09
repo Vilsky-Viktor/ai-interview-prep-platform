@@ -23,7 +23,7 @@ async def invite_undelivered(invite_id: UUID, caller: ServiceCaller) -> None:
 
     interview = await interviews.get(invite.interview_id)
     await invites.mark_undelivered(
-        invite_id, notifications.invite_undelivered(interview, invite.email)
+        invite_id, notifications.invite_undelivered(interview, invite.email, invite.name)
     )
     await outbox_service.flush_quietly()
 

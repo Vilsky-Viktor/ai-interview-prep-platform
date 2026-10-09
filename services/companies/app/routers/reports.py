@@ -5,7 +5,7 @@ from prepza_common.auth import CurrentUser
 
 from app.constants.audit import AuditAction
 from app.constants.invites import InviteStatus
-from app.helpers.candidates import candidate_out
+from app.helpers.candidates import candidate_label, candidate_out
 from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
 from app.integrations import rounds
@@ -45,7 +45,7 @@ async def email_report(
             "reply_to": user.email,
             "company": company.name,
             "title": await interview_title(interview) or "",
-            "candidate": invite.email,
+            "candidate": candidate_label(invite),
             "language": interview.language,
             "filename": f"Report {invite.email}.pdf",
             "pdf": body.pdf,

@@ -3,11 +3,12 @@ from http import HTTPStatus
 
 from prepza_common.constants import (  # noqa: F401 (re-exported)
     INTERVIEWS_PER_DAY,
+    MAX_CANDIDATE_NAME_LENGTH,
     MAX_INTERVIEWS_WITHOUT_CANDIDATES,
     MAX_OWNED_COMPANIES,
 )
 
-# The longest search through candidates' emails (an email is at most 254 characters).
+# The longest search through candidates' emails and names (an email is at most 254 characters).
 MAX_SEARCH_LENGTH = 254
 
 
@@ -45,6 +46,7 @@ INVITE_EXPIRY_DAYS = 30
 MAX_BULK_INVITES = 100
 TOO_MANY_EMAILS = "At most 100 emails at once."
 NO_EMAILS = "No emails found."
+NAME_NEEDS_ONE_EMAIL = "A name goes with one email. In a list, write each as Name <email>."
 MAX_BULK_TEXT_LENGTH = 50_000
 # Anything in a list that looks like an email; each is checked properly after.
 EMAIL_PATTERN = r"[^\s,;<>()\"']+@[^\s,;<>()\"']+"

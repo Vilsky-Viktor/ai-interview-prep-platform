@@ -42,6 +42,7 @@ def finished(monkeypatch, status=InviteStatus.IN_PROCESS, pass_mark=70):
         id=uuid.uuid4(),
         interview_id=INTERVIEW_ID,
         email="carol@example.com",
+        name="Carol Diaz",
         status=status,
         hold_key=None,
     )
@@ -99,6 +100,7 @@ def test_a_finished_interview_with_an_answer_charges_and_tells_the_company(ledge
             email="carol@example.com",
             title="Backend",
             grade=85,
+            candidate_name="Carol Diaz",
         )
     ]
     # Stored on the invite, so the candidates list sorts and filters by them.

@@ -3,16 +3,24 @@ from uuid import UUID
 
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
-from app.constants.invites import EXTRA_TIME_OPTIONS, MAX_BULK_TEXT_LENGTH
+from app.constants.invites import (
+    EXTRA_TIME_OPTIONS,
+    MAX_BULK_TEXT_LENGTH,
+    MAX_CANDIDATE_NAME_LENGTH,
+)
 
 
 class CandidateIn(BaseModel):
     email: EmailStr
+    # Optional; trimmed and cut to MAX_CANDIDATE_NAME_LENGTH as it's saved.
+    name: str | None = None
 
 
 class CandidateOut(BaseModel):
     id: UUID
     email: str
+    # The name from the candidate's sign-in; None until they start, or when it has none.
+    name: str | None = None
     status: str
     progress: int = 0
     grade: int | None = None
@@ -87,6 +95,8 @@ class BulkInviteIn(BaseModel):
     """A list of emails as pasted or read from a file; any other text around them is ignored."""
 
     text: str = Field(min_length=1, max_length=MAX_BULK_TEXT_LENGTH)
+    # The form's name field, for a text with one email; trimmed and cut as it's saved.
+    name: str | None = None
 
 
 class SkippedInvite(BaseModel):
@@ -112,6 +122,17 @@ class ExtraTimeIn(BaseModel):
             raise ValueError(f"Extra time must be one of {EXTRA_TIME_OPTIONS}")
 
         return value
+
+
+class CandidateNameIn(BaseModel):
+    """A candidate's name as an owner or admin corrects it; blank means not known."""
+
+    name: str = Field(max_length=MAX_CANDIDATE_NAME_LENGTH)
+
+    @field_validator("name")
+    @classmethod
+    def stripped(cls, value: str) -> str:
+        return value.strip()
 
 
 class InvitedCompaniesOut(BaseModel):

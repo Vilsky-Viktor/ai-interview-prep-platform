@@ -25,7 +25,7 @@ from app.helpers.interviews import (
 from app.helpers.logos import logo_path
 from app.integrations import rounds
 from app.integrations.redis import get_redis
-from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateOut
+from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateNameIn, CandidateOut
 from app.schemas.scorecards import ScorecardOut
 from app.service_auth import from_assistant
 from app.services import candidate_invites, candidate_results
@@ -54,11 +54,15 @@ async def invite_candidate(
     if interview.set_id is None:
         raise HTTPException(status.HTTP_409_CONFLICT, "Interview is still being generated")
 
-    invite = await candidate_invites.invite(interview, company, user, str(body.email))
+    invite = await candidate_invites.invite(interview, company, user, str(body.email), body.name)
     await outbox_service.flush_quietly()
 
     return CandidateOut(
-        id=invite.id, email=invite.email, status=invite.status, created_at=invite.created_at
+        id=invite.id,
+        email=invite.email,
+        name=invite.name,
+        status=invite.status,
+        created_at=invite.created_at,
     )
 
 
@@ -123,6 +127,22 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
     await audit.record(interview.company_id, user.uid, action, invite.id)
 
 
+@router.patch("/{interview_id}/candidates/{invite_id}/name", status_code=status.HTTP_204_NO_CONTENT)
+async def rename_candidate(
+    interview_id: UUID, invite_id: UUID, body: CandidateNameIn, user: CurrentUser
+) -> None:
+    """Owners and admins correct the name a candidate's sign-in gave, a nickname for example; a
+    blank name makes it not known. The sign-in fills only a name not known, so this one stays."""
+    interview = await interviews.get(interview_id)
+    invite = await candidates.get(interview_id, invite_id) if interview else None
+
+    if interview is None or invite is None or invite.status == InviteStatus.DELETED:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
+
+    await require_editor(user, interview.company_id)
+    await candidates.set_name(invite.id, body.name or None)
+
+
 @router.get("/{interview_id}/candidates/{invite_id}")
 async def candidate_scorecard(
     interview_id: UUID,
@@ -163,6 +183,7 @@ async def candidate_scorecard(
     return ScorecardOut(
         id=invite.id,
         email=invite.email,
+        name=invite.name,
         status=invite.status,
         extra_time=invite.extra_time,
         can_edit=can_edit(member),

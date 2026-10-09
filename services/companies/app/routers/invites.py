@@ -63,4 +63,4 @@ async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
     if invite.status != InviteStatus.IN_PROCESS:
         await refuse_if_paused(get_redis())
 
-    return await start_sessions(invite, interview, user.uid)
+    return await start_sessions(invite, interview, user)

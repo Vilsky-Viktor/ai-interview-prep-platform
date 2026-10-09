@@ -42,6 +42,7 @@ def queued(monkeypatch):
         id=INVITE_ID,
         interview_id=INTERVIEW_ID,
         email="ann@example.com",
+        name="Ann Lee",
         token="token-ann",
         status="finished",
         created_at=datetime.now(UTC),
@@ -94,8 +95,9 @@ def test_a_member_emails_the_pdf_report_and_replies_go_to_them(client, queued):
         "Bob",
         "bob@example.com",
     )
+    # The candidate as the email names them: their name, with the email.
     assert (event["candidate"], event["company"], event["title"]) == (
-        "ann@example.com",
+        "Ann Lee (ann@example.com)",
         "Arcolabs",
         "Backend",
     )

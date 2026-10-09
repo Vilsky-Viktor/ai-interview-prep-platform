@@ -5,7 +5,7 @@ import uuid
 from datetime import UTC, datetime
 
 from prepza_common import outbox
-from sqlalchemy import func, select
+from sqlalchemy import func, or_, select, update
 
 from app.constants.events import CANDIDATE_RESCORED
 from app.constants.invites import CandidateFilter, InviteStatus
@@ -20,12 +20,12 @@ from app.storage.db import Session
 def candidate_filters(
     interview_id, q: str, filter_by: str | None, pass_mark: int | None = None
 ) -> list:
-    """An interview's candidates, narrowed to an email containing `q` and a status or result:
+    """An interview's candidates, narrowed to an email or name containing `q` and a status or result:
     passed (finished at or above the pass mark) or flagged (finished with integrity signals)."""
     filters = [CandidateInvite.interview_id == interview_id]
 
     if q:
-        filters.append(email_contains(q))
+        filters.append(matches(q))
 
     if filter_by == CandidateFilter.PASSED:
         filters += [
@@ -40,9 +40,14 @@ def candidate_filters(
     return filters
 
 
-def email_contains(q: str):
-    """An email containing `q` as typed, in any case."""
-    return CandidateInvite.email.ilike(f"%{escape_like(q.lower())}%", escape="\\")
+def matches(q: str):
+    """An email or a name containing `q` as typed, in any case."""
+    pattern = f"%{escape_like(q.lower())}%"
+
+    return or_(
+        CandidateInvite.email.ilike(pattern, escape="\\"),
+        CandidateInvite.name.ilike(pattern, escape="\\"),
+    )
 
 
 def candidate_order(by_grade: bool) -> list:
@@ -81,11 +86,11 @@ async def company_page(
     company_id, offset: int, limit: int, q: str = ""
 ) -> list[tuple[CandidateInvite, Interview]]:
     """The company's candidates across its interviews, each with its interview, newest first,
-    narrowed to an email containing `q`. A deleted interview's candidates went with it."""
+    narrowed to an email or name containing `q`. A deleted interview's candidates went with it."""
     filters = [Interview.company_id == company_id]
 
     if q:
-        filters.append(email_contains(q))
+        filters.append(matches(q))
 
     query = (
         select(CandidateInvite, Interview)
@@ -138,6 +143,15 @@ async def get(interview_id, invite_id: uuid.UUID) -> CandidateInvite | None:
 
     async with Session() as session:
         return await session.scalar(query)
+
+
+async def set_name(invite_id: uuid.UUID, name: str | None) -> None:
+    """The candidate's name as an owner or admin corrected it; None makes it not known again."""
+    async with Session() as session:
+        await session.execute(
+            update(CandidateInvite).where(CandidateInvite.id == invite_id).values(name=name)
+        )
+        await session.commit()
 
 
 async def any_finished(interview_id) -> bool:

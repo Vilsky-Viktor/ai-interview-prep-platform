@@ -10,13 +10,18 @@ def interview_link(interview: Interview) -> str:
     return INTERVIEW_LINK.format(company_id=interview.company_id, interview_id=interview.id)
 
 
-def candidate_finished(interview: Interview, invite_id: str, email: str, grade: int | None) -> dict:
-    """The grade is left out while rounds has none. One per invite, though a retried event
-    finishes the candidate again."""
+def candidate_finished(
+    interview: Interview, invite_id: str, email: str, grade: int | None, name: str | None = None
+) -> dict:
+    """The grade and the candidate's name are left out while unknown. One per invite, though a
+    retried event finishes the candidate again."""
     data = {"email": email, "title": interview.title}
 
     if grade is not None:
         data["grade"] = grade
+
+    if name:
+        data["candidate_name"] = name
 
     return notification(
         Recipient.COMPANY,
@@ -28,7 +33,8 @@ def candidate_finished(interview: Interview, invite_id: str, email: str, grade: 
     )
 
 
-def invite_undelivered(interview: Interview, email: str) -> dict:
+def invite_undelivered(interview: Interview, email: str, name: str | None = None) -> dict:
+    """With the candidate's name when it's known (the inviter's or the ATS's)."""
     return notification(
         Recipient.COMPANY,
         interview.company_id,
@@ -36,6 +42,7 @@ def invite_undelivered(interview: Interview, email: str) -> dict:
         interview_link(interview),
         email=email,
         title=interview.title,
+        **({"candidate_name": name} if name else {}),
     )
 
 

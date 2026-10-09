@@ -21,6 +21,8 @@ class AtsInviteIn(BaseModel):
     email: EmailStr
     # Whoever connected the ATS: the invite is sent as them, under their email limits.
     sender_id: str
+    # The candidate's name from the ATS or the API caller, if any: it fills a name not known yet.
+    name: str | None = None
 
 
 class AtsInviteOut(BaseModel):

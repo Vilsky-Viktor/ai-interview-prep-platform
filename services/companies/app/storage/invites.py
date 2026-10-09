@@ -24,10 +24,12 @@ async def upsert(
     language: str,
     logo_path: str | None = None,
     hold_key: str | None = None,
+    name: str | None = None,
 ) -> tuple[CandidateInvite, bool]:
     """Creates the invite (with `hold_key`, its credits' key), or returns the existing one so it
     can be sent again, and saves the email's event with it. True when it revived an expired
-    invite, whose credits were given back."""
+    invite, whose credits were given back. `name`, the inviter's or the ATS's, fills a name not
+    known yet: a name an owner or admin set stays, also when the same invite comes again."""
     email = email.lower()
     statement = (
         insert(CandidateInvite)
@@ -44,14 +46,15 @@ async def upsert(
         .on_conflict_do_nothing(index_elements=["interview_id", "email"])
     )
 
+    this = (CandidateInvite.interview_id == interview_id, CandidateInvite.email == email)
+
     async with Session() as session:
         await session.execute(statement)
-        invite = await session.scalar(
-            select(CandidateInvite).where(
-                CandidateInvite.interview_id == interview_id, CandidateInvite.email == email
-            )
+        # In SQL, so an owner's edit made meanwhile is never written over.
+        await session.execute(
+            update(CandidateInvite).where(*this, CandidateInvite.name.is_(None)).values(name=name)
         )
-
+        invite = await session.scalar(select(CandidateInvite).where(*this))
         revived = invite.status == InviteStatus.EXPIRED
 
         # Sending again revives an undelivered or expired invite and restarts its 30 days.
@@ -169,9 +172,11 @@ async def get_by_token(token: str) -> tuple[CandidateInvite, Interview] | None:
         return tuple(row) if row else None
 
 
-async def start(invite_id: uuid.UUID, user_id: str) -> str | None:
+async def start(invite_id: uuid.UUID, user_id: str, name: str | None = None) -> str | None:
     """Marks the invite in process, an expired one too (a candidate back through the test's
-    link), and returns its status before. None when it's gone: revoked meanwhile."""
+    link), and returns its status before. None when it's gone: revoked meanwhile. `name`, from
+    the candidate's verified sign-in, fills a name not known yet; a known one is kept. The row
+    is locked, so of two starts at once only the first fills it."""
     async with Session() as session:
         stored = await session.get(CandidateInvite, invite_id, with_for_update=True)
 
@@ -180,6 +185,7 @@ async def start(invite_id: uuid.UUID, user_id: str) -> str | None:
 
         before = stored.status
         stored.user_id = user_id
+        stored.name = stored.name or name
 
         if stored.status in NOT_STARTED:
             stored.status = InviteStatus.IN_PROCESS

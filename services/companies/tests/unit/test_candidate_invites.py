@@ -54,7 +54,7 @@ def invite_setup(monkeypatch):
         return company
 
     async def fake_upsert(
-        _interview_id, email, title, company, language, logo_path=None, hold_key=None
+        _interview_id, email, title, company, language, logo_path=None, hold_key=None, name=None
     ):
         # A new invite keeps the key its credits were set aside under.
         invite.hold_key = invite.hold_key or hold_key

@@ -47,7 +47,7 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
 
     # The company hears of candidates who answered something, with their grade.
     if charged:
-        notice = candidate_finished(interview, invite.id, invite.email, grade)
+        notice = candidate_finished(interview, invite.id, invite.email, grade, invite.name)
 
     result = finished_result(interview, invite.id, grade, flagged)
     await invites.finish(invite.id, grade, flagged, notice, event_id, result)

@@ -1,5 +1,6 @@
 from fastapi import HTTPException
 from prepza_common.analytics import track
+from prepza_common.names import clean_name
 from prepza_common.rate_limit import hit_emails
 from prepza_common.user import User
 
@@ -17,9 +18,12 @@ from app.services.candidate_billing import hold_again
 from app.storage import invites
 
 
-async def invite(interview: Interview, company: Company, user: User, email: str) -> CandidateInvite:
-    """Invites one candidate, or sends their invite again, with the invite email queued. Raises
-    429 over the member's email limits and billing's 402 when the company is out of credits."""
+async def invite(
+    interview: Interview, company: Company, user: User, email: str, name: str | None = None
+) -> CandidateInvite:
+    """Invites one candidate, or sends their invite again, with the invite email queued; `name`
+    (untrusted: cleaned here) fills their name if it isn't known yet. Raises 429 over the
+    member's email limits and billing's 402 when the company is out of credits."""
     email = email.lower()
 
     current, stored = await invites.held(interview.id, email)
@@ -55,6 +59,7 @@ async def invite(interview: Interview, company: Company, user: User, email: str)
             interview.language,
             logo_path(company),
             hold_key=key,
+            name=clean_name(name),
         )
     except Exception:
         # A brand-new invite that couldn't be saved gives its credits back.

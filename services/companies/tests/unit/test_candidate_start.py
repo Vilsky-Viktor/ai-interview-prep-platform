@@ -5,10 +5,13 @@ from types import SimpleNamespace
 import httpx
 import pytest
 from fastapi import HTTPException
+from prepza_common.user import User
 
 from app.integrations import library, rounds
 from app.services import candidate_start
 from app.storage import invites
+
+USER = User(uid="cand", email="cand@example.com", email_verified=True)
 
 INVITE = SimpleNamespace(
     id=uuid.uuid4(), extra_time=0, interview_id=uuid.uuid4(), email="cand@example.com", hold_key="k"
@@ -32,7 +35,7 @@ def steps(monkeypatch):
 
         return [{"id": str(uuid.uuid4()), "topic_title": "Python", "status": "in_progress"}]
 
-    async def start(invite_id, user_id):
+    async def start(invite_id, user_id, name=None):
         done.append("started")
 
         return "invited"
@@ -50,7 +53,7 @@ def steps(monkeypatch):
 
 
 def test_the_invite_is_marked_started_once_its_sessions_exist(steps):
-    out = asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, "cand"))
+    out = asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, USER))
 
     assert [row.topic_title for row in out.sessions] == ["Python"]
     assert steps == ["sessions", "started"]
@@ -63,19 +66,19 @@ def test_rounds_failing_leaves_the_invite_unstarted_so_expiry_frees_its_credits(
     monkeypatch.setattr(rounds, "create_sessions", down)
 
     with pytest.raises(httpx.ConnectError):
-        asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, "cand"))
+        asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, USER))
 
     assert steps == []
 
 
 def test_an_invite_revoked_while_starting_loses_its_sessions(steps, monkeypatch):
-    async def gone(invite_id, user_id):
+    async def gone(invite_id, user_id, name=None):
         return None
 
     monkeypatch.setattr(invites, "start", gone)
 
     with pytest.raises(HTTPException) as refused:
-        asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, "cand"))
+        asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, USER))
 
     assert refused.value.status_code == 404
     assert steps == ["sessions", "erased"]
@@ -85,7 +88,7 @@ def test_an_invite_that_expired_while_starting_has_its_credits_set_aside_again(s
     """Expiry gave them back after the invite was read; otherwise it finishes uncharged."""
     held = []
 
-    async def expired(invite_id, user_id):
+    async def expired(invite_id, user_id, name=None):
         steps.append("started")
 
         return "expired"
@@ -95,7 +98,7 @@ def test_an_invite_that_expired_while_starting_has_its_credits_set_aside_again(s
 
     monkeypatch.setattr(invites, "start", expired)
     monkeypatch.setattr(candidate_start, "hold_again", hold_again)
-    asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, "cand"))
+    asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, USER))
 
     assert held == ["k"]
 
@@ -107,6 +110,6 @@ def test_an_invite_started_as_read_isnt_held_again(steps, monkeypatch):
         held.append(key)
 
     monkeypatch.setattr(candidate_start, "hold_again", hold_again)
-    asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, "cand"))
+    asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, USER))
 
     assert held == []

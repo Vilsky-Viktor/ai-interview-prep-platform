@@ -22,6 +22,12 @@ def hold_key(interview_id, email: str, stored: str | None) -> str:
     return stored or candidate_key(interview_id, email)
 
 
+def candidate_label(invite) -> str:
+    """How a message names the candidate: "Name (email)", or the email while the name is
+    unknown."""
+    return f"{invite.name} ({invite.email})" if invite.name else invite.email
+
+
 def passed(totals: dict, pass_mark: int) -> bool | None:
     """Whether a finished candidate reached the pass mark; None before they finish."""
     if not totals.get("finished") or totals.get("grade") is None:
@@ -77,6 +83,7 @@ def candidate_out(invite, totals: dict, interview) -> CandidateOut:
     return CandidateOut(
         id=invite.id,
         email=invite.email,
+        name=invite.name,
         status=invite.status,
         progress=totals.get("progress", 0),
         grade=totals.get("grade"),

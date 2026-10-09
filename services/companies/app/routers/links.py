@@ -112,4 +112,4 @@ async def start_link(token: str, user: CurrentUser) -> InviteStartOut:
     if current is None:
         await track("candidate_joined_by_link", company_id=interview.company_id)
 
-    return await start_sessions(invite, interview, user.uid)
+    return await start_sessions(invite, interview, user)

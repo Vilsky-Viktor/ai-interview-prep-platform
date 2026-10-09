@@ -41,8 +41,9 @@ def stored(monkeypatch):
     async def by_ids(ids):
         return [item for item in (READY, MAKING) if item.id in ids]
 
-    async def invite(interview, company, user, email):
+    async def invite(interview, company, user, email, name=None):
         calls["invites"].append((interview.id, company.id, user.uid, email))
+        calls.setdefault("names", []).append(name)
 
         return SimpleNamespace(id=uuid.UUID(int=7))
 
@@ -152,3 +153,11 @@ def test_the_ats_routes_need_a_service_token(client):
         401,
         403,
     )
+
+
+def test_the_ats_name_goes_with_the_invite(client, stored):
+    body = {"email": "cara@example.com", "sender_id": "ann", "name": "Cara Diaz"}
+    response = client.post(f"/internal/interviews/{READY.id}/invites", json=body, headers=HEADERS)
+
+    assert response.status_code == 201
+    assert stored["names"] == ["Cara Diaz"]
