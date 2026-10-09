@@ -33,8 +33,8 @@ in New York City (see prepza's instructions for companies).
 > candidates' scores. [Name or role at Company] reviews every result before any decision, together
 > with [your application / interviews]. The tool does not make the hiring decision.
 >
-> **Data.** The tool uses only your email address, the name and account id from your sign-in, and
-> your answers in the test. The questions were written with AI from the job description and
+> **Data.** The tool uses only your email address, your name (from your application or your
+> sign-in), the account id from your sign-in, and your answers in the test. The questions were written with AI from the job description and
 > reviewed by [Company]. Your test data is kept by prepza for 12 months after your invitation, then
 > deleted. [Company's own retention policy: ...]. More information about the data collected, its
 > source and retention policy is available on request at [contact], within 30 days of a written

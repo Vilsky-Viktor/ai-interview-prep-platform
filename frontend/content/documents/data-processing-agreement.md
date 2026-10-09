@@ -1,6 +1,6 @@
 # Data processing agreement
 
-Version: 2026-10-08\
+Version: 2026-10-09\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai\
 Also online at https://prepza.ai/dpa
 
@@ -10,7 +10,7 @@ This agreement applies when a company uses prepza to assess candidates. The comp
 
 - Purpose: running the company's interviews: inviting candidates, timing and scoring their answers, showing the company the results and the integrity signals, sending the emails the company asks for, sending results to the tools the company connects (its applicant tracking system, Slack, and its own systems through prepza's API and web hooks), and keeping the results for the company.
 - People: the candidates the company invites, who apply through its link or whom its applicant tracking system sends, and the members of the company.
-- Data: candidates' email addresses, names and account ids from their sign-in, their answers, how long each took, page leaves, copy attempts and answers too fast to have read the question during the interview, any extra time the company gives them (without a reason), and the results; the email and applicant tracking system id of candidates that system sends; the emails of people the company sends a report to; and a one-way hash of the email address of each candidate who stops the company's emails.
+- Data: candidates' email addresses, their names (given by the company or its applicant tracking system, or from their sign-in) and account ids from their sign-in, their answers, how long each took, page leaves, copy attempts and answers too fast to have read the question during the interview, any extra time the company gives them (without a reason), and the results; the email, name and applicant tracking system id of candidates that system sends; the emails of people the company sends a report to; and a one-way hash of the email address of each candidate who stops the company's emails.
 - Duration: while the company uses prepza. Candidates' results are deleted 12 months after their invitation was last sent, candidates an applicant tracking system sends 12 months after they arrive, and everything when the company is deleted.
 
 ## Our duties
