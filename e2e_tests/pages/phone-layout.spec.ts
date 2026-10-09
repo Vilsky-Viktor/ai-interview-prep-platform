@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./helpers/templates";
 
 // How the public pages fit a phone: wider previews, a centered footer in one column, popups
 // across the screen, no keyboard hint on a touch screen. Desktop keeps its layout.
@@ -220,15 +220,12 @@ test("the API example shows whole with reduced motion", async ({ page }) => {
 // On phones a test's practice page has its level and language under the title, then its start.
 test("a practice page starts under its tags on a phone", async ({
   page,
+  addTemplate,
 }, info) => {
   test.skip(!isPhone(info.project.name), "phones only");
   test.setTimeout(120_000);
-  await page.goto("/practice");
-  const href = await page
-    .locator("main a[href^='/practice/']")
-    .first()
-    .getAttribute("href");
-  await page.goto(href!);
+  const template = await addTemplate();
+  await page.goto(`/practice/${template.slug}`);
   const tags = (await page
     .locator("main [data-slot=badge]")
     .first()

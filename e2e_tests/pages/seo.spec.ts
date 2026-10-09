@@ -1,28 +1,14 @@
-import { expect, test, type Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
+
+import { expect, test } from "./helpers/templates";
 
 // What search engines see on the public pages: addresses in every language, titles and
-// structured data, the sitemap and robots.txt, redirects, and private pages kept out.
-
-type Template = { id: string; slug: string; language: string; indexable: boolean };
+// structured data, the sitemap and robots.txt, redirects, and private pages kept out. Template
+// pages are checked on the test's own throwaway templates (helpers/templates.ts).
 
 // Requests made outside the browser go to the gateway itself: the container's "localhost" isn't
 // the site (pages.sh sets REQUEST_URL; locally the site's address works).
 const REQUEST_URL = process.env.REQUEST_URL ?? "http://localhost:8090";
-
-async function firstTemplate(page: Page): Promise<Template> {
-  const response = await page.request.get(`${REQUEST_URL}/api/library/templates?limit=1`);
-  const [template] = await response.json();
-
-  return template;
-}
-
-async function templates(page: Page, query = ""): Promise<Template[]> {
-  const response = await page.request.get(
-    `${REQUEST_URL}/api/library/templates?limit=100${query}`,
-  );
-
-  return response.json();
-}
 
 function head(page: Page, selector: string, attribute: string) {
   return page.locator(`head ${selector}`).first().getAttribute(attribute);
@@ -113,8 +99,9 @@ test("each page's preview image shows its own title", async ({ page }) => {
 // The two ways on are links drawn as the site's buttons.
 test("a role test page is for hiring, with the way to practise second", async ({
   page,
+  addTemplate,
 }) => {
-  const template = await firstTemplate(page);
+  const template = await addTemplate();
   await page.goto(`/tests/${template.slug}`);
 
   await expect(page.locator("h1")).toContainText("skills test for hiring");
@@ -144,9 +131,9 @@ test("a role test page is for hiring, with the way to practise second", async ({
 // addresses under another language aren't found.
 test("a template's pages are only in English and its template's language", async ({
   page,
+  addTemplate,
 }) => {
-  const template = await firstTemplate(page);
-  test.skip(template.language !== "en", "the check needs an English template");
+  const template = await addTemplate();
 
   for (const base of ["/tests", "/practice"]) {
     await page.goto(`${base}/${template.slug}`);
@@ -156,8 +143,8 @@ test("a template's pages are only in English and its template's language", async
   }
 });
 
-test("old addresses move to their readable ones for good", async ({ page }) => {
-  const template = await firstTemplate(page);
+test("old addresses move to their readable ones for good", async ({ page, addTemplate }) => {
+  const template = await addTemplate();
 
   const practice = await page.request.get(`${REQUEST_URL}/practice/${template.id}`, {
     maxRedirects: 0,
@@ -182,7 +169,10 @@ test("private pages say noindex; public ones don't", async ({ page }) => {
 
 test("robots.txt and the sitemap list what should be found", async ({
   page,
+  addTemplate,
 }) => {
+  const full = await addTemplate("en", 3);
+  const thin = await addTemplate("en", 1);
   const robots = await (await page.request.get(`${REQUEST_URL}/robots.txt`)).text();
   expect(robots).toContain("Disallow: /api/");
   expect(robots).not.toContain("Disallow: /companies");
@@ -191,10 +181,13 @@ test("robots.txt and the sitemap list what should be found", async ({
   const sitemap = await (await page.request.get(`${REQUEST_URL}/sitemap.xml`)).text();
 
   // Only the templates the API calls indexable (enough topics, not a near-duplicate).
-  for (const template of await templates(page)) {
+  for (const [template, indexable] of [
+    [full, true],
+    [thin, false],
+  ] as const) {
     for (const base of ["/tests", "/practice"]) {
       const listed = sitemap.includes(`${base}/${template.slug}</loc>`);
-      expect(listed, `${base}/${template.slug}`).toBe(template.indexable);
+      expect(listed, `${base}/${template.slug}`).toBe(indexable);
     }
   }
 
@@ -276,19 +269,14 @@ test("links on a page in another language stay in it", async ({ page }) => {
 
 // A template the API doesn't call indexable (too few topics, or a near-duplicate) keeps its pages
 // out of search results; an indexable one doesn't.
-test("only an indexable template's pages may be found", async ({ page }) => {
-  const all = await templates(page);
-  const thin = all.find((template) => !template.indexable);
-  const full = all.find((template) => template.indexable);
+test("only an indexable template's pages may be found", async ({ page, addTemplate }) => {
+  const thin = await addTemplate("en", 1);
+  const full = await addTemplate("en", 3);
 
   for (const [template, robots] of [
     [thin, "noindex"],
     [full, null],
   ] as const) {
-    if (!template) {
-      continue;
-    }
-
     for (const base of ["/tests", "/practice"]) {
       await page.goto(`${base}/${template.slug}`);
       // Read at once: an indexable page has no robots tag to wait for.
@@ -305,9 +293,9 @@ test("only an indexable template's pages may be found", async ({ page }) => {
 // in the page's language.
 test("a template's page in its language keeps its links and level in it", async ({
   page,
+  addTemplate,
 }) => {
-  const [template] = await templates(page, "&language=de");
-  test.skip(!template, "the check needs a German template");
+  const template = await addTemplate("de");
 
   await page.goto(`/de/tests/${template.slug}`);
   await expect(page.locator("h1")).toContainText("Test für Bewerber");

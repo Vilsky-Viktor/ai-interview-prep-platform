@@ -1,9 +1,10 @@
-import { expect, test, type Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
+
+import { expect, test } from "./helpers/templates";
 
 // What search engines and link previews read beyond seo.spec.ts: each page's own description,
-// template pages' breadcrumbs and text direction, articles' data, and the preview picture.
-
-type Template = { slug: string; language: string; title: string };
+// template pages' breadcrumbs and text direction (on the test's own throwaway templates),
+// articles' data, and the preview picture.
 
 // Requests made outside the browser go to the gateway itself (pages.sh sets REQUEST_URL).
 const REQUEST_URL = process.env.REQUEST_URL ?? "http://localhost:8090";
@@ -150,14 +151,14 @@ test("an article names its picture, language and date, and shows the date as wor
 
 test("a free practice page has breadcrumbs, and template text has its direction", async ({
   page,
+  addTemplate,
 }) => {
-  const response = await page.request.get(
-    `${REQUEST_URL}/api/library/templates?limit=1`,
-  );
-  const [template]: Template[] = await response.json();
-  const direction = RTL.includes(template.language) ? "rtl" : "ltr";
+  // Five pages, which the dev server may compile first.
+  test.setTimeout(120_000);
+  const english = await addTemplate("en");
+  const arabic = await addTemplate("ar");
 
-  await page.goto(`/practice/${template.slug}`);
+  await page.goto(`/practice/${english.slug}`);
   const crumbs = (await structuredData(page)).find(
     (item) => item["@type"] === "BreadcrumbList",
   );
@@ -165,14 +166,18 @@ test("a free practice page has breadcrumbs, and template text has its direction"
     crumbs.itemListElement.map(
       (step: { item: string }) => new URL(step.item).pathname,
     ),
-  ).toEqual(["/", "/practice", `/practice/${template.slug}`]);
-  expect(crumbs.itemListElement[2].name).toBe(template.title);
+  ).toEqual(["/", "/practice", `/practice/${english.slug}`]);
+  expect(crumbs.itemListElement[2].name).toBe(english.title);
 
-  for (const base of ["/practice", "/tests"]) {
-    await page.goto(`${base}/${template.slug}`);
-    const topics = page.locator("main ul[lang]").first();
-    await expect(topics).toHaveAttribute("lang", template.language);
-    await expect(topics).toHaveAttribute("dir", direction);
+  for (const template of [english, arabic]) {
+    const direction = RTL.includes(template.language) ? "rtl" : "ltr";
+
+    for (const base of ["/practice", "/tests"]) {
+      await page.goto(`${base}/${template.slug}`);
+      const topics = page.locator("main ul[lang]").first();
+      await expect(topics).toHaveAttribute("lang", template.language);
+      await expect(topics).toHaveAttribute("dir", direction);
+    }
   }
 });
 

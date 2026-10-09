@@ -88,6 +88,8 @@ Other specs check the home page's sections: the advantages' titles beside their 
 
 `seo.spec.ts` checks language addresses and hreflang, titles, structured data, the sitemap, robots.txt, noindex on private pages and thin template pages, links and levels on a template's page in its language, redirects and the footer. `metadata.spec.ts` checks page descriptions, the compare hub's title, FAQ and article data, practice breadcrumbs, the direction of right-to-left template text, the preview picture's noindex and the footer's menu.
 
+Tests that need a template never use the platform's own: each adds its own throwaway templates straight into the library database (`helpers/templates.ts`: a unique title and readable address, topics with subtopics and private and revealed questions; at least 3 topics makes one indexable, fewer doesn't), checks only those, and deletes them when it ends. `pages.sh` mounts `.env` read-only for `POSTGRES_PASSWORD`, read without printing it.
+
 ```bash
 ./e2e_tests/pages.sh
 ```
