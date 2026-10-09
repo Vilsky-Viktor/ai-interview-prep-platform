@@ -6,6 +6,8 @@ import { AskAgentButton } from "@/components/landing/ask-agent-button"
 import { LandingSection, Stage } from "@/components/landing/section"
 
 const POINTS = ["answers", "acts", "voice", "help"] as const
+// What the preview's input types, one after another, to show what the agent can do.
+const TYPED = ["best", "create", "passMark", "ats", "credits"] as const
 
 /** The assistant: a request in its panel and the card it prepares for the user to confirm, and
  * what else it does, with the button that opens it. */
@@ -21,7 +23,10 @@ export async function AgentSection() {
           <AskAgentButton className="h-11 bg-background" />
         </div>
         <Stage>
-          <AgentDemo question={t("demo.question")} />
+          <AgentDemo
+            question={t("demo.question")}
+            typed={TYPED.map((key) => t(`demo.typed.${key}`))}
+          />
         </Stage>
       </div>
       <ul className="mx-auto grid w-full max-w-2xl gap-x-8 gap-y-3 text-muted-foreground sm:grid-cols-2">

@@ -721,7 +721,14 @@
       "title": "Zapytaj agenta\nOn wykona pracę",
       "text": "Pytaj o wszystko, co dotyczy prepza i Twojej rekrutacji. Agent odpowiada, a po Twoim potwierdzeniu wykonuje pracę za Ciebie.",
       "demo": {
-        "question": "Zaproś Ann Lee, ann.lee@example.com, na Architect"
+        "question": "Zaproś Ann Lee, ann.lee@example.com, na Architect",
+        "typed": {
+          "best": "Kto wypadł najlepiej w Architect?",
+          "create": "Utwórz rozmowę dla analityka danych",
+          "passMark": "Próg zaliczenia Architect: 75%",
+          "ats": "Połącz Architect z Greenhouse",
+          "credits": "Ile kredytów nam zostało?"
+        }
       },
       "points": {
         "answers": "Odpowiedzi na podstawie Twoich rozmów, kandydatów i wyników",

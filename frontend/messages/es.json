@@ -721,7 +721,14 @@
       "title": "Pregunta al agente\nÉl hace el trabajo",
       "text": "Pregunta lo que quieras sobre prepza y tus procesos de selección. El agente responde y, cuando confirmas, hace el trabajo por ti.",
       "demo": {
-        "question": "Invita a Ann Lee, ann.lee@example.com, a Architect"
+        "question": "Invita a Ann Lee, ann.lee@example.com, a Architect",
+        "typed": {
+          "best": "¿Quién destacó en Architect?",
+          "create": "Crea una entrevista para analista de datos",
+          "passMark": "Nota de aprobado de Architect al 75 %",
+          "ats": "Vincula Architect con Greenhouse",
+          "credits": "¿Cuántos créditos nos quedan?"
+        }
       },
       "points": {
         "answers": "Respuestas basadas en tus propias entrevistas, candidatos y resultados",

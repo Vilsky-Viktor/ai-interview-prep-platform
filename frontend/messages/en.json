@@ -721,7 +721,14 @@
       "title": "Ask the agent\nIt does the work",
       "text": "Ask anything about prepza and your hiring. The agent answers, and once you confirm, it does the work for you.",
       "demo": {
-        "question": "Invite Ann Lee, ann.lee@example.com, to Architect"
+        "question": "Invite Ann Lee, ann.lee@example.com, to Architect",
+        "typed": {
+          "best": "Who scored best on Architect?",
+          "create": "Create an interview for a data analyst",
+          "passMark": "Set Architect's passing grade to 75%",
+          "ats": "Link Architect to Greenhouse",
+          "credits": "How many credits are left?"
+        }
       },
       "points": {
         "answers": "Answers from your own interviews, candidates and results",

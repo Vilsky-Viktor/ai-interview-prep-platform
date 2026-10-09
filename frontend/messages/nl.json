@@ -721,7 +721,14 @@
       "title": "Vraag het de agent\nDie doet het werk",
       "text": "Vraag alles over prepza en je werving. De agent antwoordt en doet het werk voor je zodra je bevestigt.",
       "demo": {
-        "question": "Nodig Ann Lee, ann.lee@example.com, uit voor Architect"
+        "question": "Nodig Ann Lee, ann.lee@example.com, uit voor Architect",
+        "typed": {
+          "best": "Wie scoorde het best op Architect?",
+          "create": "Maak een interview voor een data-analist",
+          "passMark": "Zet de slaaggrens van Architect op 75%",
+          "ats": "Koppel Architect aan Greenhouse",
+          "credits": "Hoeveel credits hebben we nog?"
+        }
       },
       "points": {
         "answers": "Antwoorden uit je eigen interviews, kandidaten en resultaten",

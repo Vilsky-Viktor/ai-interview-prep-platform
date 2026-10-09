@@ -721,7 +721,14 @@
       "title": "Tanya agen\nDia yang mengerjakan",
       "text": "Tanyakan apa saja tentang prepza dan rekrutmen Anda. Agen menjawab, dan setelah Anda konfirmasi, dia mengerjakannya untuk Anda.",
       "demo": {
-        "question": "Undang Ann Lee, ann.lee@example.com, ke Architect"
+        "question": "Undang Ann Lee, ann.lee@example.com, ke Architect",
+        "typed": {
+          "best": "Siapa yang nilainya tertinggi di Architect?",
+          "create": "Buat wawancara untuk data analyst",
+          "passMark": "Ubah nilai lulus Architect menjadi 75%",
+          "ats": "Hubungkan Architect ke Greenhouse",
+          "credits": "Berapa kredit yang tersisa?"
+        }
       },
       "points": {
         "answers": "Jawaban dari wawancara, kandidat, dan hasil Anda sendiri",

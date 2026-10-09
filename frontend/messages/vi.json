@@ -721,7 +721,14 @@
       "title": "Hỏi trợ lý AI\nTrợ lý làm thay bạn",
       "text": "Hỏi bất cứ điều gì về prepza và việc tuyển dụng của bạn. Trợ lý sẽ trả lời và, khi bạn xác nhận, sẽ làm thay bạn.",
       "demo": {
-        "question": "Mời Ann Lee, ann.lee@example.com, tham gia Architect"
+        "question": "Mời Ann Lee, ann.lee@example.com, tham gia Architect",
+        "typed": {
+          "best": "Ai đạt điểm cao nhất ở Architect?",
+          "create": "Tạo buổi phỏng vấn cho Data Analyst",
+          "passMark": "Đặt điểm đạt của Architect là 75%",
+          "ats": "Liên kết Architect với Greenhouse",
+          "credits": "Chúng ta còn bao nhiêu credit?"
+        }
       },
       "points": {
         "answers": "Câu trả lời từ chính các buổi phỏng vấn, ứng viên và kết quả của bạn",

@@ -721,7 +721,14 @@
       "title": "Küsi agendilt\nTema teeb töö ära",
       "text": "Küsi kõike prepza ja oma värbamise kohta. Agent vastab ja kui sa kinnitad, teeb ta töö sinu eest ära.",
       "demo": {
-        "question": "Kutsu Ann Lee, ann.lee@example.com, intervjuule Architect"
+        "question": "Kutsu Ann Lee, ann.lee@example.com, intervjuule Architect",
+        "typed": {
+          "best": "Kes oli Architectis parim?",
+          "create": "Loo intervjuu andmeanalüütikule",
+          "passMark": "Architecti läbimise lävi 75%",
+          "ats": "Seo Architect Greenhouse'iga",
+          "credits": "Mitu krediiti meil alles on?"
+        }
       },
       "points": {
         "answers": "Vastused sinu enda intervjuude, kandidaatide ja tulemuste põhjal",

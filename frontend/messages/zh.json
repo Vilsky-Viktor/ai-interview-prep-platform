@@ -721,7 +721,14 @@
       "title": "问问智能助手\n活儿交给它",
       "text": "关于 prepza 和招聘的任何问题都可以问。智能助手会回答，你确认后，它就替你把事情办好。",
       "demo": {
-        "question": "邀请 Ann Lee（ann.lee@example.com）参加 Architect"
+        "question": "邀请 Ann Lee（ann.lee@example.com）参加 Architect",
+        "typed": {
+          "best": "谁在 Architect 中得分最高？",
+          "create": "为数据分析师创建一场面试",
+          "passMark": "把 Architect 的及格线设为 75%",
+          "ats": "将 Architect 关联到 Greenhouse",
+          "credits": "我们还剩多少点数？"
+        }
       },
       "points": {
         "answers": "根据你自己的面试、候选人和结果来回答",

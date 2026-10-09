@@ -721,7 +721,14 @@
       "title": "에이전트에게 물어보세요\n일은 에이전트가 합니다",
       "text": "prepza와 채용에 관한 것이라면 무엇이든 물어보세요. 에이전트가 답하고, 확인하시면 일을 대신 처리합니다.",
       "demo": {
-        "question": "Ann Lee(ann.lee@example.com)를 Architect에 초대해 줘"
+        "question": "Ann Lee(ann.lee@example.com)를 Architect에 초대해 줘",
+        "typed": {
+          "best": "Architect에서 가장 높은 점수를 받은 사람은?",
+          "create": "데이터 분석가 면접을 만들어 줘",
+          "passMark": "Architect의 합격 기준을 75%로 바꿔 줘",
+          "ats": "Architect를 Greenhouse와 연결해 줘",
+          "credits": "크레딧이 얼마나 남았어?"
+        }
       },
       "points": {
         "answers": "내 면접, 지원자, 결과를 바탕으로 한 답변",

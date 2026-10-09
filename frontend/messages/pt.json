@@ -721,7 +721,14 @@
       "title": "Pergunte ao agente\nEle faz o trabalho",
       "text": "Pergunte o que quiser sobre o prepza e suas contratações. O agente responde e, quando você confirma, faz o trabalho por você.",
       "demo": {
-        "question": "Convide Ann Lee, ann.lee@example.com, para Architect"
+        "question": "Convide Ann Lee, ann.lee@example.com, para Architect",
+        "typed": {
+          "best": "Quem teve a melhor nota em Architect?",
+          "create": "Crie uma entrevista para analista de dados",
+          "passMark": "Nota de aprovação de Architect: 75%",
+          "ats": "Vincule Architect ao Greenhouse",
+          "credits": "Quantos créditos ainda temos?"
+        }
       },
       "points": {
         "answers": "Respostas com base nas suas próprias entrevistas, candidatos e resultados",

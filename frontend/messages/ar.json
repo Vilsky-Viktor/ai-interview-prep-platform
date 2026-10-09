@@ -721,7 +721,14 @@
       "title": "اسأل الوكيل\nوهو ينجز العمل",
       "text": "اسأل عن أي شيء يخص prepza والتوظيف لديك. يجيبك الوكيل، وبعد تأكيدك ينجز العمل نيابةً عنك.",
       "demo": {
-        "question": "ادعُ Ann Lee على ann.lee@example.com إلى Architect"
+        "question": "ادعُ Ann Lee على ann.lee@example.com إلى Architect",
+        "typed": {
+          "best": "مَن حصل على أعلى درجة في Architect؟",
+          "create": "أنشئ مقابلة لمحلل بيانات",
+          "passMark": "اجعل درجة النجاح في Architect ‏75٪",
+          "ats": "اربط Architect بـ Greenhouse",
+          "credits": "كم رصيدًا تبقّى لدينا؟"
+        }
       },
       "points": {
         "answers": "إجابات من مقابلاتك ومرشحيك ونتائجك أنت",

@@ -721,7 +721,14 @@
       "title": "Asistana sorun\nİşi o yapsın",
       "text": "prepza ve işe alımınız hakkında her şeyi sorun. Asistan yanıtlar ve siz onayladığınızda işi sizin yerinize yapar.",
       "demo": {
-        "question": "Ann Lee'yi (ann.lee@example.com) Architect'e davet et"
+        "question": "Ann Lee'yi (ann.lee@example.com) Architect'e davet et",
+        "typed": {
+          "best": "Architect'te en yüksek puanı kim aldı?",
+          "create": "Veri analisti için mülakat oluştur",
+          "passMark": "Architect'in geçme notunu %75 yap",
+          "ats": "Architect'i Greenhouse'a bağla",
+          "credits": "Kaç kredimiz kaldı?"
+        }
       },
       "points": {
         "answers": "Kendi mülakatlarınıza, adaylarınıza ve sonuçlarınıza dayanan yanıtlar",

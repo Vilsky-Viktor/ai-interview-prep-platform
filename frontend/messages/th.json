@@ -721,7 +721,14 @@
       "title": "ถามเอเจนต์\nแล้วให้เอเจนต์ทำงานแทน",
       "text": "ถามอะไรก็ได้เกี่ยวกับ prepza และการสรรหาของคุณ เอเจนต์จะตอบ และเมื่อคุณยืนยัน ก็จะลงมือทำงานให้",
       "demo": {
-        "question": "เชิญ Ann Lee (ann.lee@example.com) เข้าสัมภาษณ์ Architect"
+        "question": "เชิญ Ann Lee (ann.lee@example.com) เข้าสัมภาษณ์ Architect",
+        "typed": {
+          "best": "ใครได้คะแนนสูงสุดใน Architect",
+          "create": "สร้างการสัมภาษณ์สำหรับ Data Analyst",
+          "passMark": "ตั้งเกณฑ์ผ่านของ Architect เป็น 75%",
+          "ats": "เชื่อม Architect กับ Greenhouse",
+          "credits": "เราเหลือเครดิตเท่าไร"
+        }
       },
       "points": {
         "answers": "คำตอบจากการสัมภาษณ์ ผู้สมัคร และผลลัพธ์ของคุณเอง",

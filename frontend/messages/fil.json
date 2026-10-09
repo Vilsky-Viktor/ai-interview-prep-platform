@@ -721,7 +721,14 @@
       "title": "Magtanong sa agent\nSiya ang gagawa",
       "text": "Itanong ang kahit ano tungkol sa prepza at sa pagha-hire mo. Sasagot ang agent, at kapag kinumpirma mo, siya na ang gagawa para sa iyo.",
       "demo": {
-        "question": "I-invite si Ann Lee, ann.lee@example.com, sa Architect"
+        "question": "I-invite si Ann Lee, ann.lee@example.com, sa Architect",
+        "typed": {
+          "best": "Sino ang pinakamagaling sa Architect?",
+          "create": "Gumawa ng interview para sa data analyst",
+          "passMark": "75% na passing grade sa Architect",
+          "ats": "I-link ang Architect sa Greenhouse",
+          "credits": "Ilan pa ang natitira naming credits?"
+        }
       },
       "points": {
         "answers": "Mga sagot mula sa sarili mong mga interview, aplikante at resulta",

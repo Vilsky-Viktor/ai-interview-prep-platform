@@ -721,7 +721,14 @@
       "title": "از دستیار بپرسید\nکار را انجام می‌دهد",
       "text": "هر سؤالی درباره prepza و استخدام خود دارید بپرسید. دستیار پاسخ می‌دهد و پس از تأیید شما، کار را برایتان انجام می‌دهد.",
       "demo": {
-        "question": "Ann Lee را با ann.lee@example.com به Architect دعوت کن"
+        "question": "Ann Lee را با ann.lee@example.com به Architect دعوت کن",
+        "typed": {
+          "best": "چه کسی در Architect بهترین نمره را گرفت؟",
+          "create": "یک مصاحبه برای تحلیلگر داده بساز",
+          "passMark": "نمره قبولی Architect را ۷۵٪ کن",
+          "ats": "Architect را به Greenhouse وصل کن",
+          "credits": "چقدر اعتبار برایمان مانده؟"
+        }
       },
       "points": {
         "answers": "پاسخ‌ها بر اساس مصاحبه‌ها، متقاضیان و نتایج خودتان",

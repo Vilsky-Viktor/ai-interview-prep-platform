@@ -721,7 +721,14 @@
       "title": "Запитайте агента\nВін зробить роботу",
       "text": "Питайте будь-що про prepza та ваш найм. Агент відповість, а після вашого підтвердження зробить роботу за вас.",
       "demo": {
-        "question": "Запроси Ann Lee, ann.lee@example.com, на Architect"
+        "question": "Запроси Ann Lee, ann.lee@example.com, на Architect",
+        "typed": {
+          "best": "Хто найкраще пройшов Architect?",
+          "create": "Створи співбесіду для аналітика даних",
+          "passMark": "Прохідний бал Architect — 75%",
+          "ats": "Зв'яжи Architect з Greenhouse",
+          "credits": "Скільки в нас лишилося кредитів?"
+        }
       },
       "points": {
         "answers": "Відповіді на основі ваших власних співбесід, кандидатів і результатів",

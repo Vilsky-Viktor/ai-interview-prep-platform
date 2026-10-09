@@ -721,7 +721,14 @@
       "title": "Chiedi all'agente\nFa lui il lavoro",
       "text": "Chiedi qualsiasi cosa su prepza e sulle tue selezioni. L'agente risponde e, quando confermi, fa il lavoro al posto tuo.",
       "demo": {
-        "question": "Invita Ann Lee, ann.lee@example.com, a Architect"
+        "question": "Invita Ann Lee, ann.lee@example.com, a Architect",
+        "typed": {
+          "best": "Chi è andato meglio in Architect?",
+          "create": "Crea un colloquio per un data analyst",
+          "passMark": "Soglia di Architect al 75%",
+          "ats": "Collega Architect a Greenhouse",
+          "credits": "Quanti crediti ci restano?"
+        }
       },
       "points": {
         "answers": "Risposte basate sui tuoi colloqui, candidati e risultati",

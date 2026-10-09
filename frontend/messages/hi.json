@@ -721,7 +721,14 @@
       "title": "एजेंट से पूछें\nकाम वही करेगा",
       "text": "prepza और अपनी हायरिंग के बारे में कुछ भी पूछें। एजेंट जवाब देता है, और आपकी पुष्टि के बाद आपका काम कर देता है।",
       "demo": {
-        "question": "Ann Lee, ann.lee@example.com, को Architect के लिए आमंत्रित करें"
+        "question": "Ann Lee, ann.lee@example.com, को Architect के लिए आमंत्रित करें",
+        "typed": {
+          "best": "Architect में सबसे अच्छा स्कोर किसका रहा?",
+          "create": "डेटा एनालिस्ट के लिए इंटरव्यू बनाएँ",
+          "passMark": "Architect का पासिंग ग्रेड 75% करें",
+          "ats": "Architect को Greenhouse से जोड़ें",
+          "credits": "हमारे पास कितने क्रेडिट बचे हैं?"
+        }
       },
       "points": {
         "answers": "आपके अपने इंटरव्यू, उम्मीदवारों और नतीजों से जवाब",

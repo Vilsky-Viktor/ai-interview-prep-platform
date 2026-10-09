@@ -721,7 +721,14 @@
       "title": "エージェントに聞く\n作業も任せられる",
       "text": "prepza や採用のことなら何でも聞けます。エージェントが答え、あなたが確認すれば作業も代わりに行います。",
       "demo": {
-        "question": "Ann Lee（ann.lee@example.com）を Architect に招待して"
+        "question": "Ann Lee（ann.lee@example.com）を Architect に招待して",
+        "typed": {
+          "best": "Architect で一番成績が良かったのは誰？",
+          "create": "データアナリストの面接を作成して",
+          "passMark": "Architect の合格ラインを 75% にして",
+          "ats": "Architect を Greenhouse と連携して",
+          "credits": "クレジットはあとどれくらい残ってる？"
+        }
       },
       "points": {
         "answers": "あなた自身の面接・候補者・結果に基づいて回答",

@@ -721,7 +721,14 @@
       "title": "שאלו את הסוכן\nהוא עושה את העבודה",
       "text": "שאלו כל דבר על prepza ועל הגיוס שלכם. הסוכן עונה, ואחרי שתאשרו הוא עושה את העבודה בשבילכם.",
       "demo": {
-        "question": "הזמן את Ann Lee,‏ ann.lee@example.com, ל-Architect"
+        "question": "הזמן את Ann Lee,‏ ann.lee@example.com, ל-Architect",
+        "typed": {
+          "best": "מי קיבל את הציון הכי גבוה ב-Architect?",
+          "create": "צור ראיון לאנליסט דאטה",
+          "passMark": "קבע את הציון העובר של Architect ל-75%",
+          "ats": "קשר את Architect ל-Greenhouse",
+          "credits": "כמה קרדיטים נשארו לנו?"
+        }
       },
       "points": {
         "answers": "תשובות מהראיונות, המועמדים והתוצאות שלכם",
