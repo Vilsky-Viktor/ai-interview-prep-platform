@@ -3,6 +3,7 @@ import { cn } from "cn"
 
 import { CompanyLogo } from "@/components/company/company-logo"
 import { IntegrityLine } from "@/components/company/integrity-line"
+import { PassStatus } from "@/components/company/pass-status"
 import { VerifiedBadge } from "@/components/company/verified-badge"
 import { Wordmark } from "@/components/wordmark"
 import { REPORT_ID } from "@/constants/report"
@@ -30,7 +31,7 @@ export async function CandidateReport({
       <div className="py-4 text-center">
         <Wordmark className="text-xl" />
       </div>
-      {/* The logo on the left of the test and the candidate's email. */}
+      {/* The logo on the left of the test and the candidate's email, with their name. */}
       <div className="flex items-center gap-5">
         {logoUrl && (
           <CompanyLogo
@@ -53,6 +54,11 @@ export async function CandidateReport({
           <h1 className="font-heading text-2xl font-medium tracking-tight break-all">
             {email}
           </h1>
+          {report.name && (
+            <p className="text-sm break-all text-muted-foreground">
+              {report.name}
+            </p>
+          )}
         </div>
       </div>
       <div className="flex items-baseline gap-3">
@@ -65,10 +71,8 @@ export async function CandidateReport({
         >
           {grade == null ? "—" : `${grade}%`}
         </p>
-        <p className="text-sm text-muted-foreground">
-          {passed == null
-            ? t("notFinished")
-            : t(passed ? "passed" : "notPassed", { mark: passMark })}
+        <p className="text-sm">
+          <PassStatus passed={passed} passMark={passMark} />
         </p>
       </div>
       <ul className="divide-y rounded-xl border">

@@ -1,6 +1,6 @@
 "use client"
 
-import { MinusIcon, PencilIcon } from "lucide-react"
+import { MinusIcon, SquarePenIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import type { ReactNode } from "react"
 import { useState } from "react"
@@ -132,7 +132,7 @@ export function TopicReview({
                 tooltip={common("edit")}
                 onClick={() => setEditing(index)}
               >
-                <PencilIcon />
+                <SquarePenIcon />
               </Button>
             </li>
           )

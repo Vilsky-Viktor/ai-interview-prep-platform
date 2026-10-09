@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
 
 import { CandidateSignals } from "@/components/company/candidate-signals"
+import { NoName } from "@/components/company/no-name"
 import { Badge } from "@/components/ui/badge"
 import { formatDate } from "@/lib/format"
 import { gradeTone } from "@/lib/grade-tone"
@@ -14,6 +15,7 @@ import type { Candidate } from "@/types/company"
 export type CandidateRowData = Pick<
   Candidate,
   | "email"
+  | "name"
   | "status"
   | "grade"
   | "passed"
@@ -22,17 +24,20 @@ export type CandidateRowData = Pick<
   | "fast_answers"
 > & { created_at?: string; progress?: number }
 
-/** One candidate in a list: email, date and integrity signals, progress, grade and status,
+/** One candidate in a list: email, name ("no name yet" until known), date and integrity signals, progress, grade and status,
  * opening `href`. Side by side when its list is wide enough, stacked in a narrow one (the
  * assistant's panel). */
 export function CandidateRow({
   candidate,
   href,
   onClick,
+  canEdit = false,
 }: {
   candidate: CandidateRowData
   href: string
   onClick?: () => void
+  // An owner or admin, who can enter a missing name on the candidate's page.
+  canEdit?: boolean
 }) {
   const t = useTranslations("candidates")
   const statuses = useTranslations("candidateStatus")
@@ -46,8 +51,15 @@ export function CandidateRow({
     >
       <span className="flex flex-col gap-4 p-4 @xl:flex-row @xl:items-center @xl:justify-between @xl:p-6">
         <span className="min-w-0 space-y-1">
-          <span className="block text-lg font-medium break-all">
-            {candidate.status === "deleted" ? t("deleted") : candidate.email}
+          <span className="block">
+            <span className="block text-lg font-medium break-all">
+              {candidate.status === "deleted" ? t("deleted") : candidate.email}
+            </span>
+            {candidate.status !== "deleted" && (
+              <span className="block text-sm leading-tight break-all text-muted-foreground">
+                {candidate.name ?? <NoName hint={canEdit ? "list" : "view"} />}
+              </span>
+            )}
           </span>
           <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
             {candidate.created_at && (

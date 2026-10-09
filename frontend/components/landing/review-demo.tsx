@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "cn"
-import { CheckIcon, MinusIcon, PencilIcon } from "lucide-react"
+import { CheckIcon, MinusIcon, SquarePenIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { Caret } from "@/components/landing/caret"
@@ -158,7 +158,7 @@ export function ReviewDemo({
                 </span>
               </span>
               <span className="flex size-8 shrink-0 items-center justify-center">
-                <PencilIcon className="size-4 text-muted-foreground" />
+                <SquarePenIcon className="size-4 text-muted-foreground" />
               </span>
             </li>
           )

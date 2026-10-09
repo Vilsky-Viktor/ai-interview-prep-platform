@@ -10,8 +10,14 @@ import { ExtraTime } from "@/components/company/extra-time"
 import { IntegrityLine } from "@/components/company/integrity-line"
 import { CandidateReportActions } from "@/components/company/candidate-report-actions"
 import { ScorecardReview } from "@/components/company/scorecard-review"
+import { EditableTitle } from "@/components/editable-title"
+import { GradeBlock, GradeCard } from "@/components/grade-card"
+import { NoName } from "@/components/company/no-name"
+import { PassStatus } from "@/components/company/pass-status"
 import { PageHeader } from "@/components/page-header"
 import { Badge } from "@/components/ui/badge"
+import { MAX_CANDIDATE_NAME_LENGTH } from "@/constants/limits"
+import { gradeTone } from "@/lib/grade-tone"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Scorecard } from "@/types/company"
@@ -44,6 +50,7 @@ export default async function ScorecardPage({
     verifiedDomain: card.verified_domain,
     title: card.title,
     email: card.email,
+    name: card.name,
     grade: card.grade,
     passed: card.passed,
     passMark: card.pass_mark,
@@ -72,20 +79,38 @@ export default async function ScorecardPage({
               {t("interview")}
             </BackLink>
           }
-          tags={
-            <Badge
-              variant={
-                card.status === "undelivered" ? "destructive" : "outline"
-              }
-              className="h-7 px-3 text-sm font-light"
-            >
-              {statuses(card.status)}
-            </Badge>
-          }
           title={
-            <h1 className="font-heading text-3xl font-medium tracking-tight">
-              {deleted ? t("deleted") : card.email}
-            </h1>
+            <div className="space-y-1">
+              <h1 className="font-heading text-3xl font-medium tracking-tight">
+                {deleted ? t("deleted") : card.email}
+              </h1>
+              {/* The name and the status on one line, to save one. */}
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                {!deleted && (
+                  <EditableTitle
+                    title={card.name ?? ""}
+                    path={`/companies/interviews/${id}/candidates/${inviteId}/name`}
+                    maxLength={MAX_CANDIDATE_NAME_LENGTH}
+                    editable={card.can_edit}
+                    field="name"
+                    label={t("name")}
+                    editLabel={t("editName")}
+                    small
+                    emptyLabel={
+                      <NoName hint={card.can_edit ? "page" : "view"} />
+                    }
+                  />
+                )}
+                <Badge
+                  variant={
+                    card.status === "undelivered" ? "destructive" : "outline"
+                  }
+                  className="h-7 px-3 text-sm font-light"
+                >
+                  {statuses(card.status)}
+                </Badge>
+              </div>
+            </div>
           }
         />
         {!deleted && (
@@ -116,10 +141,28 @@ export default async function ScorecardPage({
         )}
       </div>
 
+      {/* The overall grade, like the practice result's, with whether it passed. */}
+      {card.sessions.length > 0 && (
+        <GradeCard>
+          <GradeBlock
+            value={card.grade == null ? "—" : `${card.grade}%`}
+            label={t("grade")}
+            tone={
+              card.passed == null
+                ? "text-muted-foreground"
+                : gradeTone(card.passed)
+            }
+          />
+          <div className="flex items-center px-8 py-6 text-base">
+            <PassStatus passed={card.passed} passMark={card.pass_mark} />
+          </div>
+        </GradeCard>
+      )}
+
       {/* The score supports a decision people make; in the gray info card, like the practice
           test page's. */}
       {card.sessions.length > 0 && (
-        <div className="flex items-center gap-3 rounded-2xl border bg-muted px-5 py-4 text-base text-muted-foreground">
+        <div className="flex items-center gap-3 rounded-2xl border bg-muted px-5 py-4 text-sm text-muted-foreground">
           <InfoIcon aria-hidden className="size-6 shrink-0 text-primary" />
           <p>{reportT("humanReview")}</p>
         </div>

@@ -5,6 +5,17 @@ type Translate = (
   values?: Record<string, string | number>
 ) => string
 
+/** A candidate as a message names them: "Name (email)", or the email while the name is
+ * unknown. */
+export function candidateLabel(candidate: {
+  email: string
+  name?: string | null
+}) {
+  return candidate.name
+    ? `${candidate.name} (${candidate.email})`
+    : candidate.email
+}
+
 /** The candidate's result as a short chat message, for WhatsApp and Telegram, which can't carry
  * the PDF: the test, the overall result, then each topic's score and any signals. */
 export function reportSummary(report: CandidateReportData, t: Translate) {
@@ -25,7 +36,7 @@ export function reportSummary(report: CandidateReportData, t: Translate) {
 
   return [
     [report.company, report.title].filter(Boolean).join(" · "),
-    `${report.email}: ${report.grade == null ? "—" : `${report.grade}%`}, ${result}`,
+    `${candidateLabel(report)}: ${report.grade == null ? "—" : `${report.grade}%`}, ${result}`,
     "",
     ...topics,
     "",
@@ -45,7 +56,7 @@ export function candidatesSummary(report: InterviewReportData, t: Translate) {
     ].filter(Boolean)
     const grade = candidate.grade == null ? "—" : `${candidate.grade}%`
 
-    return `• ${candidate.email}: ${[grade, t("progressOf", { progress: candidate.progress }), ...signals].join(", ")}`
+    return `• ${candidateLabel(candidate)}: ${[grade, t("progressOf", { progress: candidate.progress }), ...signals].join(", ")}`
   })
 
   return [

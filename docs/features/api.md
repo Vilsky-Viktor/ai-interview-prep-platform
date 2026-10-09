@@ -27,7 +27,7 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 | `GET /interviews/{id}` | One interview |
 | `GET /interviews/{id}/candidates` | Its candidates with progress, grade, pass, integrity signals and a link to their results, newest first |
 | `GET /interviews/{id}/candidates/{candidate_id}` | One candidate |
-| `POST /interviews/{id}/candidates` | Invites a candidate by email (or sends the invite again), as the key's maker; credits are set aside as in the app |
+| `POST /interviews/{id}/candidates` | Invites a candidate by email, with an optional name (or sends the invite again), as the key's maker; credits are set aside as in the app |
 
 - Lists take `offset` and `limit` (up to 100).
 - Companies' refusals pass through as they are: `402` without credits, `409` while the interview's questions are being made, `429` over the email limits, `503` while invites are paused, `404` for another company's interview.

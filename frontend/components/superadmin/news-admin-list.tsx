@@ -1,6 +1,6 @@
 "use client"
 
-import { PencilIcon, Trash2Icon } from "lucide-react"
+import { SquarePenIcon, Trash2Icon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
@@ -96,7 +96,7 @@ export function NewsAdminList({ initial }: { initial: AdminNewsPost[] }) {
                 tooltip={t("editPost")}
                 onClick={() => setEditing(post)}
               >
-                <PencilIcon className="size-6" />
+                <SquarePenIcon className="size-6" />
               </Button>
               <Button
                 variant="ghost"

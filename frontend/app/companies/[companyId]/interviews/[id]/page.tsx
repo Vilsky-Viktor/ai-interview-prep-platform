@@ -222,6 +222,7 @@ export default async function InterviewPage({
             interviewHref={interviewHref}
             narrowed={Boolean(search || status)}
             initial={candidates ?? []}
+            canEdit={canEdit}
           />
         </div>
       ) : (

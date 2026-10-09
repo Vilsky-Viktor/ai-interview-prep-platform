@@ -3,6 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
+import { GradeBlock, GradeCard } from "@/components/grade-card"
 import { BackLink } from "@/components/back-link"
 import { PageHeader } from "@/components/page-header"
 import { HireWithTemplate } from "@/components/practice/hire-with-template"
@@ -79,26 +80,20 @@ export default async function PracticeRoundPage({
         </div>
       ) : (
         <>
-          {/* One centered double card, both halves transparent with a line between: the grade,
-              and how many the talent picked an answer for. */}
-          <div className="mx-auto flex w-fit flex-wrap items-stretch divide-x overflow-hidden rounded-2xl border">
-            <div className="flex items-baseline gap-4 px-8 py-6">
-              <p className="text-6xl font-light text-primary tabular-nums">
-                {round.grade ?? 0}%
-              </p>
-              <p className="text-base text-muted-foreground">{t("grade")}</p>
-            </div>
-            <div className="flex items-baseline gap-4 px-8 py-6">
-              <p className="text-6xl font-light text-primary tabular-nums">
-                {round.answered}
-                {/* The total smaller, so the answered count stands out. */}
-                <span className="text-3xl">/{round.total}</span>
-              </p>
-              <p className="text-base text-muted-foreground">
-                {t("answeredLabel")}
-              </p>
-            </div>
-          </div>
+          {/* The grade, and how many the talent picked an answer for. */}
+          <GradeCard>
+            <GradeBlock value={`${round.grade ?? 0}%`} label={t("grade")} />
+            <GradeBlock
+              value={
+                <>
+                  {round.answered}
+                  {/* The total smaller, so the answered count stands out. */}
+                  <span className="text-3xl">/{round.total}</span>
+                </>
+              }
+              label={t("answeredLabel")}
+            />
+          </GradeCard>
           {round.topics.map((topic) => (
             <section key={topic.title} className="space-y-4">
               <div className="flex items-center justify-between gap-4">

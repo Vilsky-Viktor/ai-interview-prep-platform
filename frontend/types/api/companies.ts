@@ -450,6 +450,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/interviews/{interview_id}/candidates/{invite_id}/name": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * Rename Candidate
+     * @description Owners and admins correct the name a candidate's sign-in gave, a nickname for example; a
+     *     blank name makes it not known. The sign-in fills only a name not known, so this one stays.
+     */
+    patch: operations["rename_candidate_interviews__interview_id__candidates__invite_id__name_patch"]
+    trace?: never
+  }
   "/companies/{company_id}/candidates": {
     parameters: {
       query?: never
@@ -460,7 +481,7 @@ export interface paths {
     /**
      * Search Candidates
      * @description The company's candidates across its interviews, newest first, a page at a time; `q`
-     *     narrows them to emails containing it. Any member, viewers too.
+     *     narrows them to an email or name containing it. Any member, viewers too.
      */
     get: operations["search_candidates_companies__company_id__candidates_get"]
     put?: never
@@ -500,7 +521,8 @@ export interface paths {
     /**
      * Invite Many
      * @description Invites every email in a pasted or uploaded list, one by one as a single invite would,
-     *     and says who was invited and why the others weren't.
+     *     with the names the list gives ("Name <email>", "email, Name", or a CSV's name columns), and
+     *     says who was invited and why the others weren't.
      */
     post: operations["invite_many_interviews__interview_id__candidates_bulk_post"]
     delete?: never
@@ -1538,6 +1560,8 @@ export interface components {
       email: string
       /** Sender Id */
       sender_id: string
+      /** Name */
+      name?: string | null
     }
     /** AtsInviteOut */
     AtsInviteOut: {
@@ -1611,6 +1635,8 @@ export interface components {
     BulkInviteIn: {
       /** Text */
       text: string
+      /** Name */
+      name?: string | null
     }
     /** BulkInviteOut */
     BulkInviteOut: {
@@ -1646,6 +1672,16 @@ export interface components {
        * Format: email
        */
       email: string
+      /** Name */
+      name?: string | null
+    }
+    /**
+     * CandidateNameIn
+     * @description A candidate's name as an owner or admin corrects it; blank means not known.
+     */
+    CandidateNameIn: {
+      /** Name */
+      name: string
     }
     /** CandidateOut */
     CandidateOut: {
@@ -1656,6 +1692,8 @@ export interface components {
       id: string
       /** Email */
       email: string
+      /** Name */
+      name?: string | null
       /** Status */
       status: string
       /**
@@ -1739,6 +1777,8 @@ export interface components {
       id: string
       /** Email */
       email: string
+      /** Name */
+      name?: string | null
       /** Status */
       status: string
       /**
@@ -2452,6 +2492,8 @@ export interface components {
       id: string
       /** Email */
       email: string
+      /** Name */
+      name?: string | null
       /** Status */
       status: string
       /** Extra Time */
@@ -3692,6 +3734,40 @@ export interface operations {
       cookie?: never
     }
     requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  rename_candidate_interviews__interview_id__candidates__invite_id__name_patch: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CandidateNameIn"]
+      }
+    }
     responses: {
       /** @description Successful Response */
       204: {

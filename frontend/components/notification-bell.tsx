@@ -30,7 +30,10 @@ function useNotificationText() {
     const values = {
       title: data.title ?? "none",
       topic: data.topic ?? "",
-      email: data.email ?? "",
+      // "Name (email)" once the candidate's name is known.
+      email: data.candidate_name
+        ? `${data.candidate_name} (${data.email})`
+        : (data.email ?? ""),
       grade: data.grade ?? "none",
       name: data.name ?? "",
       domain: data.domain ?? "",

@@ -10,6 +10,8 @@ export const MAX_INSTRUCTIONS_LENGTH = 500
 export const MAX_TOPIC_NAME_LENGTH = 50
 // prepza_common MAX_TITLE_LENGTH: a kit's or an interview's title.
 export const MAX_TITLE_LENGTH = 70
+// prepza_common MAX_CANDIDATE_NAME_LENGTH: a candidate's name.
+export const MAX_CANDIDATE_NAME_LENGTH = 200
 // companies MAX_COMPANY_NAME_LENGTH: a company's name.
 export const MAX_COMPANY_NAME_LENGTH = 45
 // companies MAX_DECLINE_REASON_LENGTH: why a superadmin declined a company's verification.

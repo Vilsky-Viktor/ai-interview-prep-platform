@@ -41,6 +41,7 @@ export type CandidateReportData = {
   verifiedDomain: string | null
   title: string | null
   email: string
+  name: string | null
   grade: number | null
   passed: boolean | null
   passMark: number
@@ -63,6 +64,8 @@ export type VerificationStatus = Schemas["VerificationStatus"]
 export type Scorecard = {
   id: string
   email: string
+  // The name from the candidate's sign-in, or as an owner or admin corrected it; null when unknown.
+  name: string | null
   status: string
   // Extra time on each question, in percent, and the amounts still offered (none once started).
   extra_time: number

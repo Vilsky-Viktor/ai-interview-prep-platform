@@ -4,6 +4,7 @@ How candidates get to an interview, how they take it, and what the company sees 
 
 - [Invites](#invites)
 - [Revoking a candidate](#revoking-a-candidate)
+- [Candidate names](#candidate-names)
 - [Shareable link](#shareable-link)
 - [Taking an interview](#taking-an-interview)
 - [Timing](#timing)
@@ -15,13 +16,13 @@ How candidates get to an interview, how they take it, and what the company sees 
 
 ## Invites
 
-Owners and admins invite candidates by email:
+Owners and admins invite candidates by email, in the "New candidate(s)" dialog's three tabs (the last one used is remembered in the browser):
 
-- one by one,
-- by pasting a list,
-- or by uploading a file.
+- **invite one:** an email and an optional name,
+- **invite many:** a pasted list, one candidate per line (or several separated by commas or semicolons), with or without names (`Name <email>` or `email, Name`),
+- **upload from file:** a CSV or TXT file; the tab has buttons that download example files (`frontend/public/examples/prepza-candidates-example.csv` and `prepza-candidates-example.txt`).
 
-A list or file takes up to 100 emails at once, and only the emails in it count. A list skips candidates who already started, so they aren't emailed again.
+A list or file takes up to 100 emails at once, and only the emails in it count, with the names written with them (see [Candidate names](#candidate-names)). A list skips candidates who already started, so they aren't emailed again.
 
 An invite can be resent or revoked (see [Revoking a candidate](#revoking-a-candidate)). The invite page tells candidates what to expect before they start.
 
@@ -44,6 +45,22 @@ Owners and admins can revoke any candidate in the list (`DELETE /interviews/{id}
 - **Started or finished:** the candidate is erased for good, with their answers, timings and results in rounds, for example when they ask to have their data deleted. A candidate who picked an answer to at least one question (one whose time ran out doesn't count) is charged (a finished one stays charged); other credits still held come back.
 
 Either way the company's [audit log](companies.md#audit-log) records it, and companies publishes `candidate.removed`: the company's bell notifications about the candidate go, and so does the ATS's record of them for that interview.
+
+## Candidate names
+
+Each candidate may have a name (`name`, null while unknown; the app shows "No name yet"). It's untrusted text: trimmed, cut to 200 characters (`MAX_CANDIDATE_NAME_LENGTH` in prepza_common) and shown only as text.
+
+Where it comes from, first one wins (each fills only a name not known yet):
+
+- **The inviter:** the invite dialog's optional name field (for one email), a list's `Name <email>` or `email, Name` lines, or a CSV file whose header has a name column (`name`, `full name`, or a first and a last name, in English or the 23 languages: `constants/name_headers.py` in companies). The list is read on the backend (`helpers/candidate_lists.py`). The public API's invite takes an optional `name`.
+- **The ATS:** the name the ATS sends with the candidate (Workable's and Recruitee's and Breezy HR's `name`, Greenhouse's `first_name` and `last_name`, Teamtailor's `first-name` and `last-name`), kept on the ATS candidate and passed with the invite.
+- **The sign-in:** when a candidate starts, through an invite or the shareable link, the name claim of their verified sign-in (Google, LinkedIn or GitHub). A name sent in the request is never used.
+
+Inviting the same address again (a list pasted again, an ATS event delivered twice) keeps a known name. Owners and admins correct it on the candidate's page, under the email, like a title (`PATCH /interviews/{id}/candidates/{invite_id}/name` in companies), for example when the sign-in gave a nickname; a blank name makes it unknown again. Viewers see it read-only.
+
+**Where it shows:** under the email in the candidate list and on the candidate's page; in the candidate's and the test's PDF reports, the shared summaries, a report's email ("Name (email)"), and the bell's and Slack's notifications about the candidate; as `name` in the candidate APIs and the public API. Searching candidates matches part of the email or the name, in any case.
+
+**Personal data:** it is kept and deleted with the invite (revoking or deleting the candidate, retention, the interview or the company going), with the ATS's record of the candidate, and with the notifications about them. When the candidate deletes their account, the name is erased with their email, and their data export lists it.
 
 ## Shareable link
 
@@ -96,10 +113,10 @@ A scorecard shows every answer, whether it was right and how long it took. It fl
 
 - Sorted by grade by default: best first, candidates without a grade yet last.
 - Can be sorted by invite date instead.
-- Can be searched by email.
+- Can be searched by email or name.
 - Can be filtered by status: invited, in process, finished, passed, flagged, not delivered, expired.
 
-Any member, viewers too, can also search a company's candidates across all its interviews by email, newest first, a page at a time (`GET /companies/{id}/candidates?q=&offset=&limit=` in companies). Each row is a list row with its interview's id and title; candidates of a deleted interview are gone with it. The app has no page for it.
+Any member, viewers too, can also search a company's candidates across all its interviews by email or name, newest first, a page at a time (`GET /companies/{id}/candidates?q=&offset=&limit=` in companies). Each row is a list row with its interview's id and title; candidates of a deleted interview are gone with it. The app has no page for it.
 
 "Not delivered" means the invite email bounced or was marked as spam (see [Notifications and emails](notifications.md#undelivered-emails)).
 
@@ -132,7 +149,7 @@ A company emails a candidate's report only once that candidate has finished the 
 
 | Data | Kept | Deleted by |
 |---|---|---|
-| A candidate's invite, answers, timings, integrity signals and results | 365 days after the invite was last sent | The daily retention job in companies (`/internal/schedules/retention`), with the sessions in rounds and any credits still held |
+| A candidate's invite (email and name), answers, timings, integrity signals and results | 365 days after the invite was last sent | The daily retention job in companies (`/internal/schedules/retention`), with the sessions in rounds and any credits still held |
 | A candidate an ATS sent (email and ATS ids), with any results waiting to go back | 365 days | The ats `recover` job (every 10 minutes); see [ATS integrations](ats.md) |
 
 Both go earlier with their interview, their company, or when the company revokes the candidate.

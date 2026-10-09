@@ -59,6 +59,7 @@ On a company's **Integrations** tab, an owner or admin connects an ATS with its 
 **Inviting once.**
 
 - The candidate is saved once per Workable candidate and interview (a unique key).
+- With the candidate's name when the ATS sends one (the first event's is kept). It goes with the invite and fills the candidate's name only while it's unknown, so an event delivered again never replaces a name an owner or admin corrected (see [Candidate names](candidates.md#candidate-names)).
 - It is then claimed in one update before the invite, so a repeated or simultaneous event invites once.
 - An invite cut off midway can be claimed again after 10 minutes, by **Invite again**, a new event or the ats service's `recover` job, which runs every 10 minutes.
 - One run (an event, **Invite again** or the job) invites at most 50 candidates, so it ends in time; the rest wait for the next `recover` run.

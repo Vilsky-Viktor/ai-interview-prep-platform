@@ -1,5 +1,11 @@
 import { cn } from "cn"
-import { CheckIcon, MinusIcon, PencilIcon, PlusIcon, XIcon } from "lucide-react"
+import {
+  CheckIcon,
+  MinusIcon,
+  SquarePenIcon,
+  PlusIcon,
+  XIcon,
+} from "lucide-react"
 
 import { Caret } from "@/components/landing/caret"
 import { buttonVariants } from "@/components/ui/button"
@@ -122,7 +128,7 @@ export function TopicEditDemo({
           step === "pencil" && "bg-muted"
         )}
       >
-        <PencilIcon className="size-4 text-muted-foreground" />
+        <SquarePenIcon className="size-4 text-muted-foreground" />
       </span>
     </div>
   )

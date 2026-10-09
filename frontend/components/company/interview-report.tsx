@@ -75,6 +75,11 @@ export function InterviewReport({ report }: { report: InterviewReportData }) {
                 <p className="text-base font-medium break-all">
                   {candidate.email}
                 </p>
+                {candidate.name && (
+                  <p className="text-sm break-all text-muted-foreground">
+                    {candidate.name}
+                  </p>
+                )}
                 {signals.length > 0 && (
                   <p className="text-sm text-amber-600">
                     {signals.join(" · ")}
