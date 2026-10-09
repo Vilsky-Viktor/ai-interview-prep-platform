@@ -16,8 +16,10 @@ class Answer:
     output_tokens: int = 0
     # The actions it prepared, waiting for the user's confirmation (kept in Redis only).
     pending: list = field(default_factory=list)
-    # What it showed with the `show` tool: "rows" and "link", one of each at most.
+    # What it showed with the `show` tool: "rows" and "link", one of each at most, and those
+    # blocks, sent under the answer once it's written.
     shown: set = field(default_factory=set)
+    shown_blocks: list = field(default_factory=list)
 
     @property
     def content(self) -> str:

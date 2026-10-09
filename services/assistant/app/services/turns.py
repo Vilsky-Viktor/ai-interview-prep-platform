@@ -22,7 +22,7 @@ from app.constants.chat import (
 from app.integrations.redis import get_redis
 from app.models.answers import Answer, Turn
 from app.schemas.chat import ChatRequest
-from app.services import limits, titles
+from app.services import limits, show, titles
 from app.services.chat import Emit, SessionExpired, build_messages, converse
 from app.services.conversations import open_conversation
 from app.services.tenancy import require_company, user_companies
@@ -110,6 +110,7 @@ async def run_turn(turn: Turn, prompt: list, emit: Emit) -> None:
     try:
         async with asyncio.timeout(TURN_SECONDS):
             await converse(prompt, turn, answer, emit)
+            await show.finish(answer, turn, emit)
     except asyncio.CancelledError:
         # Nobody reads the events any more; the answer is still saved below.
         asyncio.current_task().uncancel()

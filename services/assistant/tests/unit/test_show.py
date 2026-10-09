@@ -99,3 +99,74 @@ def test_one_list_and_one_link_an_answer(companies):
         {"kind": "candidates", "rows": [{"interview_id": "i1", "candidate_id": "c2"}]}, shown
     )
     assert rows is not None
+
+
+def test_an_answer_about_one_interview_gets_its_candidates_link_when_the_model_gave_none(
+    companies,
+):
+    from app.models.answers import Answer
+    from app.models.tools import ToolResult
+    from app.services.show import finish
+
+    answer = Answer()
+    answer.results.append(ToolResult("list_candidates", {"interview_id": "i1"}, 200, {}, None, 0))
+    emitted = []
+    asyncio.run(finish(answer, TURN, emitted.append))
+
+    assert emitted == [
+        {
+            "block": {
+                "kind": "link",
+                "items": [],
+                "links": [f"/companies/{COMPANY}/interviews/i1/candidates"],
+                "page": "interview_candidates",
+                "label": "Senior Backend",
+            }
+        }
+    ]
+    assert answer.blocks[0]["page"] == "interview_candidates"
+
+
+def test_one_candidates_report_is_linked_and_a_single_row_shows_alone(companies):
+    from app.models.answers import Answer
+    from app.models.tools import ToolResult
+    from app.services.show import finish
+
+    answer = Answer()
+    answer.results.append(
+        ToolResult("get_scorecard", {"interview_id": "i1", "invite_id": "c1"}, 200, {}, None, 0)
+    )
+    emitted = []
+    asyncio.run(finish(answer, TURN, emitted.append))
+    assert emitted[0]["block"]["links"] == [f"/companies/{COMPANY}/interviews/i1/candidates/c1"]
+
+    row = Answer()
+    row.results = answer.results
+    shown = set()
+    _, rows = run(
+        {"kind": "candidates", "rows": [{"interview_id": "i1", "candidate_id": "c1"}]}, shown
+    )
+    _, link = run(
+        {"kind": "link", "page": "candidate", "interview_id": "i1", "candidate_id": "c1"}, shown
+    )
+    row.shown_blocks = [rows, link]
+    emitted = []
+    asyncio.run(finish(row, TURN, emitted.append))
+
+    assert [event["block"]["kind"] for event in emitted] == ["candidate_rows"]
+
+
+def test_no_link_is_guessed_for_an_answer_about_several_interviews(companies):
+    from app.models.answers import Answer
+    from app.models.tools import ToolResult
+    from app.services.show import finish
+
+    answer = Answer()
+    answer.results += [
+        ToolResult("list_candidates", {"interview_id": "i1"}, 200, {}, None, 0),
+        ToolResult("list_candidates", {"interview_id": "i2"}, 200, {}, None, 0),
+    ]
+    emitted = []
+    asyncio.run(finish(answer, TURN, emitted.append))
+
+    assert emitted == []

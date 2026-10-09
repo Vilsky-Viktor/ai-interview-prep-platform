@@ -113,3 +113,56 @@ async def show(arguments: dict, turn: Turn, shown: set) -> tuple[dict, dict | No
     shown.add(slot)
 
     return {"detail": SHOWN}, block
+
+
+# The reads that are about one interview, or one candidate, by the argument naming it.
+INTERVIEW_ARGUMENT = "interview_id"
+CANDIDATE_READS = {"get_scorecard": "invite_id"}
+
+
+async def implied_link(answer, turn: Turn) -> dict | None:
+    """The link an answer about one interview or one candidate needs when the model gave none:
+    that candidate's report, or that interview's candidates, from what the turn read."""
+    interviews, candidates = set(), set()
+
+    for result in answer.results:
+        if not result.succeeded:
+            continue
+
+        if result.arguments.get(INTERVIEW_ARGUMENT):
+            interviews.add(str(result.arguments[INTERVIEW_ARGUMENT]))
+
+        if result.tool in CANDIDATE_READS:
+            candidates.add(str(result.arguments.get(CANDIDATE_READS[result.tool])))
+
+    if len(interviews) != 1:
+        return None
+
+    [interview_id] = interviews
+
+    if len(candidates) == 1:
+        [candidate_id] = candidates
+        target = {"page": "candidate", "interview_id": interview_id, "candidate_id": candidate_id}
+    else:
+        target = {"page": "interview_candidates", "interview_id": interview_id}
+
+    return await link_block({"kind": "link", **target}, turn)
+
+
+async def finish(answer, turn: Turn, emit) -> None:
+    """Sends what the answer shows, once it's written, and keeps its references: the rows, and
+    the link to the most specific page (added from what the turn read when the model gave
+    none). A single row opens its own page, so it shows alone."""
+    rows = next((block for block in answer.shown_blocks if block["kind"] != "link"), None)
+    found = next((block for block in answer.shown_blocks if block["kind"] == "link"), None)
+    single = rows is not None and len(rows["items"]) == 1
+
+    if single:
+        found = None
+    elif found is None:
+        found = await implied_link(answer, turn)
+
+    for block in (rows, found):
+        if block is not None:
+            emit({"block": {key: value for key, value in block.items() if key != "ref"}})
+            answer.blocks.append(block["ref"])

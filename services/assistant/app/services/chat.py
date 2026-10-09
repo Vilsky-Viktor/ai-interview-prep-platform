@@ -185,13 +185,12 @@ async def run_tools(calls: list[dict], turn: Turn, answer: Answer, emit: Emit) -
         if not pending:
             answer.results.append(result)
 
-        if result.block is not None:
-            # What the answer keeps of a shown block is its reference (`ref`): ids and links.
-            ref = result.block.get("ref")
-            emit({"block": {key: value for key, value in result.block.items() if key != "ref"}})
-
-            if ref is not None:
-                answer.blocks.append(ref)
+        # What the model shows goes under the answer once it's written (show.finish); an
+        # action's card, at once.
+        if result.block is not None and "ref" in result.block:
+            answer.shown_blocks.append(result.block)
+        elif result.block is not None:
+            emit({"block": result.block})
 
         content = json.dumps(result.content, ensure_ascii=False)
         replies.append(ToolMessage(content=content, tool_call_id=call["id"]))

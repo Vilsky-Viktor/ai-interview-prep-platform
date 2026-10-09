@@ -218,6 +218,8 @@ def test_the_prompt_answers_in_text_and_shows_only_what_answers():
     system = build_messages(TURN, [], "Hi", None, 1_000)[0].content
 
     assert "Tools are for you to read" in system
-    assert "or when one row is the answer" in system
-    assert "don't repeat them in" in system
-    assert "at most one link" in system
+    assert "or when a row is the answer" in system
+    assert "for a tie, the rows of all who share it" in " ".join(system.split())
+    assert "never repeating them" in " ".join(system.split())
+    assert "as percentages" in system
+    assert "add one link with show to its most specific page" in " ".join(system.split())
