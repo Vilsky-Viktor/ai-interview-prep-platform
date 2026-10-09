@@ -178,4 +178,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Vaatan sinu harjutusvoore…",
     "Reading your practice progress…": "Vaatan sinu harjutamise edenemist…",
     "Preparing what to show…": "Valmistan näidatavat ette…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "Selles salvestises oli saladus, näiteks võti või parool, seega see eemaldati. Sisesta saladused ise prepza vastavatesse vormidesse.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Eemaldasin sinu sõnumi: selles oli saladus, näiteks võti, token või parool. Sinu turvalisuse huvides ei liigu saladused kunagi vestluse kaudu. Sisesta see ise saidi õigesse vormi.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Eemaldasin sinu sõnumi: selles oli saladus, näiteks võti, token või parool. Sinu turvalisuse huvides ei liigu saladused kunagi vestluse kaudu. Sisesta see ise API-võtmete lehel.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Eemaldasin sinu sõnumi: selles oli saladus, näiteks võti, token või parool. Sinu turvalisuse huvides ei liigu saladused kunagi vestluse kaudu. Sisesta see ise Slacki lehel.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Eemaldasin sinu sõnumi: selles oli saladus, näiteks võti, token või parool. Sinu turvalisuse huvides ei liigu saladused kunagi vestluse kaudu. Sisesta see ise integratsioonide lehel.",
+    "API keys": "API-võtmed",
+    "integrations": "integratsioonid",
 }

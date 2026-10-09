@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Pratik turlarına bakılıyor…",
     "Reading your practice progress…": "Pratik ilerlemene bakılıyor…",
     "Preparing what to show…": "Gösterilecekler hazırlanıyor…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "Bu kayıt anahtar ya da parola gibi bir gizli bilgi içerdiği için kaldırıldı. Gizli bilgileri prepza'daki ilgili formlara kendin gir.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Mesajını kaldırdım: anahtar, token ya da parola gibi bir gizli bilgi içeriyordu. Güvenliğin için gizli bilgiler hiçbir zaman sohbetten geçmez. Onu sitedeki doğru forma kendin gir.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Mesajını kaldırdım: anahtar, token ya da parola gibi bir gizli bilgi içeriyordu. Güvenliğin için gizli bilgiler hiçbir zaman sohbetten geçmez. Onu API anahtarları sayfasına kendin gir.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Mesajını kaldırdım: anahtar, token ya da parola gibi bir gizli bilgi içeriyordu. Güvenliğin için gizli bilgiler hiçbir zaman sohbetten geçmez. Onu Slack sayfasına kendin gir.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Mesajını kaldırdım: anahtar, token ya da parola gibi bir gizli bilgi içeriyordu. Güvenliğin için gizli bilgiler hiçbir zaman sohbetten geçmez. Onu entegrasyonlar sayfasına kendin gir.",
+    "API keys": "API anahtarları",
+    "integrations": "entegrasyonlar",
 }

@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Tinitingnan ang mga practice round mo…",
     "Reading your practice progress…": "Tinitingnan ang progreso mo sa practice…",
     "Preparing what to show…": "Inihahanda ang ipapakita…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "May lihim ang recording na iyon, gaya ng key o password, kaya inalis ito. Ikaw mismo ang maglagay ng mga lihim sa kanilang form sa prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Inalis ko ang mensahe mo: may lihim ito, gaya ng key, token o password. Para sa seguridad mo, hindi kailanman dumadaan sa chat ang mga lihim. Ikaw mismo ang maglagay nito sa tamang form sa site.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Inalis ko ang mensahe mo: may lihim ito, gaya ng key, token o password. Para sa seguridad mo, hindi kailanman dumadaan sa chat ang mga lihim. Ikaw mismo ang maglagay nito sa page ng mga API key.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Inalis ko ang mensahe mo: may lihim ito, gaya ng key, token o password. Para sa seguridad mo, hindi kailanman dumadaan sa chat ang mga lihim. Ikaw mismo ang maglagay nito sa page ng Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Inalis ko ang mensahe mo: may lihim ito, gaya ng key, token o password. Para sa seguridad mo, hindi kailanman dumadaan sa chat ang mga lihim. Ikaw mismo ang maglagay nito sa page ng mga integration.",
+    "API keys": "mga API key",
+    "integrations": "mga integration",
 }

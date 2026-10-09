@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Consulto i tuoi round di pratica…",
     "Reading your practice progress…": "Consulto i tuoi progressi di pratica…",
     "Preparing what to show…": "Preparo cosa mostrare…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "Quella registrazione conteneva un segreto, come una chiave o una password, quindi è stata rimossa. Inserisci tu i segreti nel loro modulo in prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Ho rimosso il tuo messaggio: conteneva un segreto, come una chiave, un token o una password. Per la tua sicurezza, i segreti non passano mai dalla chat. Inseriscilo tu nel modulo giusto del sito.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Ho rimosso il tuo messaggio: conteneva un segreto, come una chiave, un token o una password. Per la tua sicurezza, i segreti non passano mai dalla chat. Inseriscilo tu nella pagina delle chiavi API.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Ho rimosso il tuo messaggio: conteneva un segreto, come una chiave, un token o una password. Per la tua sicurezza, i segreti non passano mai dalla chat. Inseriscilo tu nella pagina di Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Ho rimosso il tuo messaggio: conteneva un segreto, come una chiave, un token o una password. Per la tua sicurezza, i segreti non passano mai dalla chat. Inseriscilo tu nella pagina delle integrazioni.",
+    "API keys": "chiavi API",
+    "integrations": "integrazioni",
 }

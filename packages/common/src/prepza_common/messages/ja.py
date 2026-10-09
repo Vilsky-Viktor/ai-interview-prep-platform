@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "練習ラウンドを確認しています…",
     "Reading your practice progress…": "練習の進み具合を確認しています…",
     "Preparing what to show…": "表示する内容を準備しています…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "録音にキーやパスワードなどの機密情報が含まれていたため、削除しました。機密情報は prepza の該当するフォームにご自身で入力してください。",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "メッセージを削除しました。キー、トークン、パスワードなどの機密情報が含まれていたためです。安全のため、機密情報はチャットでは扱いません。サイトの該当するフォームにご自身で入力してください。",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "メッセージを削除しました。キー、トークン、パスワードなどの機密情報が含まれていたためです。安全のため、機密情報はチャットでは扱いません。API キーのページでご自身で入力してください。",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "メッセージを削除しました。キー、トークン、パスワードなどの機密情報が含まれていたためです。安全のため、機密情報はチャットでは扱いません。Slack のページでご自身で入力してください。",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "メッセージを削除しました。キー、トークン、パスワードなどの機密情報が含まれていたためです。安全のため、機密情報はチャットでは扱いません。連携のページでご自身で入力してください。",
+    "API keys": "API キー",
+    "integrations": "連携",
 }

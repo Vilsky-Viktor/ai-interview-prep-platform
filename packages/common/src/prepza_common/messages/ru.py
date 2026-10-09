@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Смотрю ваши тренировки…",
     "Reading your practice progress…": "Смотрю ваш прогресс в тренировке…",
     "Preparing what to show…": "Готовлю, что показать…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "В записи был секрет — ключ или пароль, поэтому она удалена. Вводите секреты сами в соответствующих формах в prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Я удалил ваше сообщение: в нём был секрет — ключ, токен или пароль. Ради вашей безопасности секреты никогда не передаются через чат. Введите его сами в нужной форме на сайте.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Я удалил ваше сообщение: в нём был секрет — ключ, токен или пароль. Ради вашей безопасности секреты никогда не передаются через чат. Введите его сами на странице API-ключей.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Я удалил ваше сообщение: в нём был секрет — ключ, токен или пароль. Ради вашей безопасности секреты никогда не передаются через чат. Введите его сами на странице Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Я удалил ваше сообщение: в нём был секрет — ключ, токен или пароль. Ради вашей безопасности секреты никогда не передаются через чат. Введите его сами на странице интеграций.",
+    "API keys": "API-ключи",
+    "integrations": "интеграции",
 }

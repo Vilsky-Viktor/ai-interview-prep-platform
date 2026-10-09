@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "בודק את סבבי התרגול שלך…",
     "Reading your practice progress…": "בודק את ההתקדמות שלך בתרגול…",
     "Preparing what to show…": "מכין מה להציג…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "ההקלטה הכילה סוד, כמו מפתח או סיסמה, ולכן נמחקה. יש להזין סודות בעצמך בטפסים המתאימים ב-prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "מחקתי את ההודעה שלך: היה בה סוד, כמו מפתח, טוקן או סיסמה. למען האבטחה שלך, סודות אף פעם לא עוברים דרך הצ'אט. יש להזין אותו בעצמך בטופס המתאים באתר.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "מחקתי את ההודעה שלך: היה בה סוד, כמו מפתח, טוקן או סיסמה. למען האבטחה שלך, סודות אף פעם לא עוברים דרך הצ'אט. יש להזין אותו בעצמך בדף מפתחות ה-API.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "מחקתי את ההודעה שלך: היה בה סוד, כמו מפתח, טוקן או סיסמה. למען האבטחה שלך, סודות אף פעם לא עוברים דרך הצ'אט. יש להזין אותו בעצמך בדף Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "מחקתי את ההודעה שלך: היה בה סוד, כמו מפתח, טוקן או סיסמה. למען האבטחה שלך, סודות אף פעם לא עוברים דרך הצ'אט. יש להזין אותו בעצמך בדף האינטגרציות.",
+    "API keys": "מפתחות API",
+    "integrations": "אינטגרציות",
 }

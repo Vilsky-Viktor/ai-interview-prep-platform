@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "正在查看你的练习轮次…",
     "Reading your practice progress…": "正在查看你的练习进度…",
     "Preparing what to show…": "正在准备要显示的内容…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "这段录音包含密钥或密码等机密信息，已被删除。请你自己在 prepza 中对应的表单里填写机密信息。",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "我删除了你的消息：其中包含密钥、令牌或密码等机密信息。为了你的安全，机密信息绝不经过聊天。请你自己在网站上对应的表单里填写。",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "我删除了你的消息：其中包含密钥、令牌或密码等机密信息。为了你的安全，机密信息绝不经过聊天。请你自己在 API 密钥页面填写。",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "我删除了你的消息：其中包含密钥、令牌或密码等机密信息。为了你的安全，机密信息绝不经过聊天。请你自己在 Slack 页面填写。",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "我删除了你的消息：其中包含密钥、令牌或密码等机密信息。为了你的安全，机密信息绝不经过聊天。请你自己在集成页面填写。",
+    "API keys": "API 密钥",
+    "integrations": "集成",
 }

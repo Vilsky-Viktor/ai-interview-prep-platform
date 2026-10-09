@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Sprawdzam Twoje rundy ćwiczeń…",
     "Reading your practice progress…": "Sprawdzam Twoje postępy w ćwiczeniach…",
     "Preparing what to show…": "Przygotowuję, co pokazać…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "To nagranie zawierało sekret, np. klucz lub hasło, więc zostało usunięte. Wpisuj sekrety sam w odpowiednich formularzach w prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Usunąłem Twoją wiadomość: zawierała sekret, np. klucz, token lub hasło. Dla Twojego bezpieczeństwa sekrety nigdy nie przechodzą przez czat. Wpisz go sam w odpowiednim formularzu na stronie.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Usunąłem Twoją wiadomość: zawierała sekret, np. klucz, token lub hasło. Dla Twojego bezpieczeństwa sekrety nigdy nie przechodzą przez czat. Wpisz go sam na stronie kluczy API.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Usunąłem Twoją wiadomość: zawierała sekret, np. klucz, token lub hasło. Dla Twojego bezpieczeństwa sekrety nigdy nie przechodzą przez czat. Wpisz go sam na stronie Slacka.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Usunąłem Twoją wiadomość: zawierała sekret, np. klucz, token lub hasło. Dla Twojego bezpieczeństwa sekrety nigdy nie przechodzą przez czat. Wpisz go sam na stronie integracji.",
+    "API keys": "klucze API",
+    "integrations": "integracje",
 }

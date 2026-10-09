@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "در حال بررسی دورهای تمرین شما…",
     "Reading your practice progress…": "در حال بررسی پیشرفت تمرین شما…",
     "Preparing what to show…": "در حال آماده‌سازی آنچه نشان داده می‌شود…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "این ضبط شامل اطلاعات محرمانه‌ای مثل کلید یا رمز عبور بود، برای همین حذف شد. اطلاعات محرمانه را خودتان در فرم‌های مربوط در prepza وارد کنید.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "پیامتان را حذف کردم: یک اطلاعات محرمانه مثل کلید، توکن یا رمز عبور در آن بود. برای امنیت شما، اطلاعات محرمانه هرگز از گفت‌وگو عبور نمی‌کند. آن را خودتان در فرم مناسب در سایت وارد کنید.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "پیامتان را حذف کردم: یک اطلاعات محرمانه مثل کلید، توکن یا رمز عبور در آن بود. برای امنیت شما، اطلاعات محرمانه هرگز از گفت‌وگو عبور نمی‌کند. آن را خودتان در صفحه کلیدهای API وارد کنید.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "پیامتان را حذف کردم: یک اطلاعات محرمانه مثل کلید، توکن یا رمز عبور در آن بود. برای امنیت شما، اطلاعات محرمانه هرگز از گفت‌وگو عبور نمی‌کند. آن را خودتان در صفحه Slack وارد کنید.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "پیامتان را حذف کردم: یک اطلاعات محرمانه مثل کلید، توکن یا رمز عبور در آن بود. برای امنیت شما، اطلاعات محرمانه هرگز از گفت‌وگو عبور نمی‌کند. آن را خودتان در صفحه یکپارچه‌سازی‌ها وارد کنید.",
+    "API keys": "کلیدهای API",
+    "integrations": "یکپارچه‌سازی‌ها",
 }

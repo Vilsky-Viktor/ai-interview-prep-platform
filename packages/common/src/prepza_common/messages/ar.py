@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "جارٍ الاطلاع على جولات التدريب…",
     "Reading your practice progress…": "جارٍ الاطلاع على تقدّمك في التدريب…",
     "Preparing what to show…": "جارٍ تجهيز ما سيُعرض…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "احتوى هذا التسجيل على سرّ مثل مفتاح أو كلمة مرور، لذا حُذف. أدخل الأسرار بنفسك في النماذج المخصصة لها في prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "حذفتُ رسالتك: كانت تحتوي على سرّ مثل مفتاح أو رمز أو كلمة مرور. حفاظًا على أمانك، لا تمرّ الأسرار عبر المحادثة أبدًا. أدخله بنفسك في النموذج المناسب على الموقع.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "حذفتُ رسالتك: كانت تحتوي على سرّ مثل مفتاح أو رمز أو كلمة مرور. حفاظًا على أمانك، لا تمرّ الأسرار عبر المحادثة أبدًا. أدخله بنفسك في صفحة مفاتيح API.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "حذفتُ رسالتك: كانت تحتوي على سرّ مثل مفتاح أو رمز أو كلمة مرور. حفاظًا على أمانك، لا تمرّ الأسرار عبر المحادثة أبدًا. أدخله بنفسك في صفحة Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "حذفتُ رسالتك: كانت تحتوي على سرّ مثل مفتاح أو رمز أو كلمة مرور. حفاظًا على أمانك، لا تمرّ الأسرار عبر المحادثة أبدًا. أدخله بنفسك في صفحة التكاملات.",
+    "API keys": "مفاتيح API",
+    "integrations": "التكاملات",
 }

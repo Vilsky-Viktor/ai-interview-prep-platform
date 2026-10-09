@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "연습 라운드를 확인하는 중…",
     "Reading your practice progress…": "연습 진행 상황을 확인하는 중…",
     "Preparing what to show…": "보여 줄 내용을 준비하는 중…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "녹음에 키나 비밀번호 같은 비밀 정보가 들어 있어 삭제했습니다. 비밀 정보는 prepza의 해당 양식에 직접 입력하세요.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "메시지를 삭제했습니다. 키, 토큰, 비밀번호 같은 비밀 정보가 들어 있었습니다. 보안을 위해 비밀 정보는 채팅을 거치지 않습니다. 사이트의 알맞은 양식에 직접 입력하세요.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "메시지를 삭제했습니다. 키, 토큰, 비밀번호 같은 비밀 정보가 들어 있었습니다. 보안을 위해 비밀 정보는 채팅을 거치지 않습니다. API 키 페이지에서 직접 입력하세요.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "메시지를 삭제했습니다. 키, 토큰, 비밀번호 같은 비밀 정보가 들어 있었습니다. 보안을 위해 비밀 정보는 채팅을 거치지 않습니다. Slack 페이지에서 직접 입력하세요.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "메시지를 삭제했습니다. 키, 토큰, 비밀번호 같은 비밀 정보가 들어 있었습니다. 보안을 위해 비밀 정보는 채팅을 거치지 않습니다. 연동 페이지에서 직접 입력하세요.",
+    "API keys": "API 키",
+    "integrations": "연동",
 }

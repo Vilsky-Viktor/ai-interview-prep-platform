@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Consultando tus rondas de práctica…",
     "Reading your practice progress…": "Consultando tu progreso de práctica…",
     "Preparing what to show…": "Preparando lo que se mostrará…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "Esa grabación contenía un secreto, como una clave o una contraseña, así que se eliminó. Introduce tú los secretos en su formulario en prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Eliminé tu mensaje: contenía un secreto, como una clave, un token o una contraseña. Por tu seguridad, los secretos nunca pasan por el chat. Introdúcelo tú en el formulario correspondiente del sitio.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Eliminé tu mensaje: contenía un secreto, como una clave, un token o una contraseña. Por tu seguridad, los secretos nunca pasan por el chat. Introdúcelo tú en la página de claves de API.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Eliminé tu mensaje: contenía un secreto, como una clave, un token o una contraseña. Por tu seguridad, los secretos nunca pasan por el chat. Introdúcelo tú en la página de Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Eliminé tu mensaje: contenía un secreto, como una clave, un token o una contraseña. Por tu seguridad, los secretos nunca pasan por el chat. Introdúcelo tú en la página de integraciones.",
+    "API keys": "claves de API",
+    "integrations": "integraciones",
 }

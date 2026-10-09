@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Melihat ronde latihanmu…",
     "Reading your practice progress…": "Melihat progres latihanmu…",
     "Preparing what to show…": "Menyiapkan yang akan ditampilkan…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "Rekaman itu berisi rahasia, seperti kunci atau kata sandi, jadi dihapus. Masukkan rahasia sendiri di formulirnya di prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Saya menghapus pesanmu: isinya rahasia, seperti kunci, token, atau kata sandi. Demi keamananmu, rahasia tidak pernah lewat chat. Masukkan sendiri di formulir yang tepat di situs.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Saya menghapus pesanmu: isinya rahasia, seperti kunci, token, atau kata sandi. Demi keamananmu, rahasia tidak pernah lewat chat. Masukkan sendiri di halaman kunci API.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Saya menghapus pesanmu: isinya rahasia, seperti kunci, token, atau kata sandi. Demi keamananmu, rahasia tidak pernah lewat chat. Masukkan sendiri di halaman Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Saya menghapus pesanmu: isinya rahasia, seperti kunci, token, atau kata sandi. Demi keamananmu, rahasia tidak pernah lewat chat. Masukkan sendiri di halaman integrasi.",
+    "API keys": "kunci API",
+    "integrations": "integrasi",
 }

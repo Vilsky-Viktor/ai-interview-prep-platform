@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "กำลังดูรอบฝึกของคุณ…",
     "Reading your practice progress…": "กำลังดูความคืบหน้าการฝึกของคุณ…",
     "Preparing what to show…": "กำลังเตรียมสิ่งที่จะแสดง…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "การบันทึกนั้นมีข้อมูลลับ เช่น คีย์หรือรหัสผ่าน จึงถูกลบ โปรดกรอกข้อมูลลับเองในแบบฟอร์มของข้อมูลนั้นใน prepza",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "ฉันลบข้อความของคุณแล้ว เพราะมีข้อมูลลับ เช่น คีย์ โทเคน หรือรหัสผ่าน เพื่อความปลอดภัยของคุณ ข้อมูลลับจะไม่ส่งผ่านแชตเลย โปรดกรอกเองในแบบฟอร์มที่ถูกต้องบนเว็บไซต์",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "ฉันลบข้อความของคุณแล้ว เพราะมีข้อมูลลับ เช่น คีย์ โทเคน หรือรหัสผ่าน เพื่อความปลอดภัยของคุณ ข้อมูลลับจะไม่ส่งผ่านแชตเลย โปรดกรอกเองในหน้าคีย์ API",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "ฉันลบข้อความของคุณแล้ว เพราะมีข้อมูลลับ เช่น คีย์ โทเคน หรือรหัสผ่าน เพื่อความปลอดภัยของคุณ ข้อมูลลับจะไม่ส่งผ่านแชตเลย โปรดกรอกเองในหน้า Slack",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "ฉันลบข้อความของคุณแล้ว เพราะมีข้อมูลลับ เช่น คีย์ โทเคน หรือรหัสผ่าน เพื่อความปลอดภัยของคุณ ข้อมูลลับจะไม่ส่งผ่านแชตเลย โปรดกรอกเองในหน้าการเชื่อมต่อระบบ",
+    "API keys": "คีย์ API",
+    "integrations": "การเชื่อมต่อระบบ",
 }

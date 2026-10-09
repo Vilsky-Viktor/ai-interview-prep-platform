@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Sehe deine Übungsrunden an…",
     "Reading your practice progress…": "Sehe deinen Übungsfortschritt an…",
     "Preparing what to show…": "Bereite vor, was ich zeige…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "Die Aufnahme enthielt ein Geheimnis wie einen Schlüssel oder ein Passwort und wurde deshalb entfernt. Gib Geheimnisse selbst im passenden Formular in prepza ein.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Ich habe deine Nachricht entfernt: Sie enthielt ein Geheimnis wie einen Schlüssel, ein Token oder ein Passwort. Zu deiner Sicherheit laufen Geheimnisse nie über den Chat. Gib es selbst im passenden Formular auf der Website ein.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Ich habe deine Nachricht entfernt: Sie enthielt ein Geheimnis wie einen Schlüssel, ein Token oder ein Passwort. Zu deiner Sicherheit laufen Geheimnisse nie über den Chat. Gib es selbst auf der Seite für API-Schlüssel ein.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Ich habe deine Nachricht entfernt: Sie enthielt ein Geheimnis wie einen Schlüssel, ein Token oder ein Passwort. Zu deiner Sicherheit laufen Geheimnisse nie über den Chat. Gib es selbst auf der Slack-Seite ein.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Ich habe deine Nachricht entfernt: Sie enthielt ein Geheimnis wie einen Schlüssel, ein Token oder ein Passwort. Zu deiner Sicherheit laufen Geheimnisse nie über den Chat. Gib es selbst auf der Seite für Integrationen ein.",
+    "API keys": "API-Schlüssel",
+    "integrations": "Integrationen",
 }

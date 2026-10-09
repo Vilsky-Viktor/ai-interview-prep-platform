@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "आपके अभ्यास राउंड देख रहा है…",
     "Reading your practice progress…": "आपकी अभ्यास प्रगति देख रहा है…",
     "Preparing what to show…": "दिखाने के लिए तैयार कर रहा है…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "उस रिकॉर्डिंग में कुंजी या पासवर्ड जैसी गोपनीय जानकारी थी, इसलिए उसे हटा दिया गया। गोपनीय जानकारी prepza में उसके फ़ॉर्म में खुद दर्ज करें।",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "मैंने आपका संदेश हटा दिया: उसमें कोई गोपनीय जानकारी थी, जैसे कुंजी, टोकन या पासवर्ड। आपकी सुरक्षा के लिए गोपनीय जानकारी कभी चैट से नहीं जाती। इसे साइट पर सही फ़ॉर्म में खुद दर्ज करें।",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "मैंने आपका संदेश हटा दिया: उसमें कोई गोपनीय जानकारी थी, जैसे कुंजी, टोकन या पासवर्ड। आपकी सुरक्षा के लिए गोपनीय जानकारी कभी चैट से नहीं जाती। इसे API कुंजियों वाले पेज पर खुद दर्ज करें।",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "मैंने आपका संदेश हटा दिया: उसमें कोई गोपनीय जानकारी थी, जैसे कुंजी, टोकन या पासवर्ड। आपकी सुरक्षा के लिए गोपनीय जानकारी कभी चैट से नहीं जाती। इसे Slack पेज पर खुद दर्ज करें।",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "मैंने आपका संदेश हटा दिया: उसमें कोई गोपनीय जानकारी थी, जैसे कुंजी, टोकन या पासवर्ड। आपकी सुरक्षा के लिए गोपनीय जानकारी कभी चैट से नहीं जाती। इसे इंटीग्रेशन पेज पर खुद दर्ज करें।",
+    "API keys": "API कुंजियाँ",
+    "integrations": "इंटीग्रेशन",
 }

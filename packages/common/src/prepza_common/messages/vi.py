@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Đang xem các lượt luyện tập của bạn…",
     "Reading your practice progress…": "Đang xem tiến độ luyện tập của bạn…",
     "Preparing what to show…": "Đang chuẩn bị nội dung hiển thị…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "Bản ghi âm đó chứa thông tin bí mật như khóa hoặc mật khẩu nên đã bị xóa. Hãy tự nhập thông tin bí mật vào biểu mẫu tương ứng trong prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Tôi đã xóa tin nhắn của bạn: nó chứa thông tin bí mật như khóa, token hoặc mật khẩu. Vì an toàn của bạn, thông tin bí mật không bao giờ đi qua cuộc trò chuyện. Hãy tự nhập vào đúng biểu mẫu trên trang.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Tôi đã xóa tin nhắn của bạn: nó chứa thông tin bí mật như khóa, token hoặc mật khẩu. Vì an toàn của bạn, thông tin bí mật không bao giờ đi qua cuộc trò chuyện. Hãy tự nhập ở trang khóa API.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Tôi đã xóa tin nhắn của bạn: nó chứa thông tin bí mật như khóa, token hoặc mật khẩu. Vì an toàn của bạn, thông tin bí mật không bao giờ đi qua cuộc trò chuyện. Hãy tự nhập ở trang Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Tôi đã xóa tin nhắn của bạn: nó chứa thông tin bí mật như khóa, token hoặc mật khẩu. Vì an toàn của bạn, thông tin bí mật không bao giờ đi qua cuộc trò chuyện. Hãy tự nhập ở trang tích hợp.",
+    "API keys": "khóa API",
+    "integrations": "tích hợp",
 }

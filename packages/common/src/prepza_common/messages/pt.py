@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Consultando suas rodadas de prática…",
     "Reading your practice progress…": "Consultando seu progresso na prática…",
     "Preparing what to show…": "Preparando o que mostrar…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "Essa gravação continha um segredo, como uma chave ou uma senha, então foi removida. Digite os segredos você mesmo no formulário certo no prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Removi sua mensagem: ela continha um segredo, como uma chave, um token ou uma senha. Para sua segurança, segredos nunca passam pelo chat. Digite-o você mesmo no formulário certo do site.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Removi sua mensagem: ela continha um segredo, como uma chave, um token ou uma senha. Para sua segurança, segredos nunca passam pelo chat. Digite-o você mesmo na página de chaves de API.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Removi sua mensagem: ela continha um segredo, como uma chave, um token ou uma senha. Para sua segurança, segredos nunca passam pelo chat. Digite-o você mesmo na página do Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Removi sua mensagem: ela continha um segredo, como uma chave, um token ou uma senha. Para sua segurança, segredos nunca passam pelo chat. Digite-o você mesmo na página de integrações.",
+    "API keys": "chaves de API",
+    "integrations": "integrações",
 }

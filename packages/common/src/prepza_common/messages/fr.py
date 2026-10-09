@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Lecture de vos sessions d'entraînement…",
     "Reading your practice progress…": "Lecture de votre progression d'entraînement…",
     "Preparing what to show…": "Préparation de ce qui sera affiché…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "Cet enregistrement contenait un secret, comme une clé ou un mot de passe : il a donc été supprimé. Saisissez vous-même les secrets dans leur formulaire dans prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "J'ai supprimé votre message : il contenait un secret, comme une clé, un jeton ou un mot de passe. Pour votre sécurité, les secrets ne passent jamais par le chat. Saisissez-le vous-même dans le bon formulaire du site.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "J'ai supprimé votre message : il contenait un secret, comme une clé, un jeton ou un mot de passe. Pour votre sécurité, les secrets ne passent jamais par le chat. Saisissez-le vous-même sur la page des clés API.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "J'ai supprimé votre message : il contenait un secret, comme une clé, un jeton ou un mot de passe. Pour votre sécurité, les secrets ne passent jamais par le chat. Saisissez-le vous-même sur la page Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "J'ai supprimé votre message : il contenait un secret, comme une clé, un jeton ou un mot de passe. Pour votre sécurité, les secrets ne passent jamais par le chat. Saisissez-le vous-même sur la page des intégrations.",
+    "API keys": "clés API",
+    "integrations": "intégrations",
 }

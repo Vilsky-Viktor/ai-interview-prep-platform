@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Переглядаю ваші тренування…",
     "Reading your practice progress…": "Переглядаю ваш прогрес у тренуванні…",
     "Preparing what to show…": "Готую, що показати…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "У записі був секрет — ключ або пароль, тому його видалено. Вводьте секрети самі у відповідних формах у prepza.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Я видалив ваше повідомлення: у ньому був секрет — ключ, токен або пароль. Задля вашої безпеки секрети ніколи не передаються через чат. Введіть його самі в потрібній формі на сайті.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Я видалив ваше повідомлення: у ньому був секрет — ключ, токен або пароль. Задля вашої безпеки секрети ніколи не передаються через чат. Введіть його самі на сторінці API-ключів.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Я видалив ваше повідомлення: у ньому був секрет — ключ, токен або пароль. Задля вашої безпеки секрети ніколи не передаються через чат. Введіть його самі на сторінці Slack.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Я видалив ваше повідомлення: у ньому був секрет — ключ, токен або пароль. Задля вашої безпеки секрети ніколи не передаються через чат. Введіть його самі на сторінці інтеграцій.",
+    "API keys": "API-ключі",
+    "integrations": "інтеграції",
 }

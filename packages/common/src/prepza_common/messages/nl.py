@@ -166,4 +166,11 @@ MESSAGES = {
     "Reading your practice rounds…": "Je oefenrondes bekijken…",
     "Reading your practice progress…": "Je oefenvoortgang bekijken…",
     "Preparing what to show…": "Voorbereiden wat te tonen…",
+    "That recording contained a secret, such as a key or a password, so it was removed. Enter secrets yourself in their form in prepza.": "Die opname bevatte een geheim, zoals een sleutel of een wachtwoord, en is daarom verwijderd. Vul geheimen zelf in hun formulier in prepza in.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself in the right form on the site.": "Ik heb je bericht verwijderd: er stond een geheim in, zoals een sleutel, een token of een wachtwoord. Voor je veiligheid gaan geheimen nooit via de chat. Vul het zelf in het juiste formulier op de site in.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the API keys page.": "Ik heb je bericht verwijderd: er stond een geheim in, zoals een sleutel, een token of een wachtwoord. Voor je veiligheid gaan geheimen nooit via de chat. Vul het zelf in op de pagina met API-sleutels.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the Slack page.": "Ik heb je bericht verwijderd: er stond een geheim in, zoals een sleutel, een token of een wachtwoord. Voor je veiligheid gaan geheimen nooit via de chat. Vul het zelf in op de Slack-pagina.",
+    "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Ik heb je bericht verwijderd: er stond een geheim in, zoals een sleutel, een token of een wachtwoord. Voor je veiligheid gaan geheimen nooit via de chat. Vul het zelf in op de pagina met integraties.",
+    "API keys": "API-sleutels",
+    "integrations": "integraties",
 }
