@@ -319,9 +319,9 @@ def test_a_list_subject_is_the_matching_item(monkeypatch):
     monkeypatch.setattr(services, "get", get)
     arguments = {"member_id": "m2", "company_id": COMPANY}
 
-    assert asyncio.run(actions.subject_of(tools()["remove_member"], arguments, "t", "en")) == (
-        "cy@example.com"
-    )
+    found = asyncio.run(actions.subject_of(tools()["remove_member"], arguments, "t", "en"))
+
+    assert found == members[1]
 
 
 def test_a_done_card_names_what_the_action_made(redis, writes):
@@ -329,3 +329,41 @@ def test_a_done_card_names_what_the_action_made(redis, writes):
     *_, block = asyncio.run(actions.run(CONVERSATION, action_id, ANN, "t", "en"))
 
     assert block["result_label"] == "Acme"
+
+
+def test_a_change_sends_only_what_differs_from_now(redis, monkeypatch):
+    interview = {
+        "id": "i1",
+        "title": "Backend",
+        "pass_mark": 60,
+        "question_seconds": 10,
+        "hired": False,
+    }
+
+    async def get(service, path, query, token, language):
+        return httpx.Response(200, json=interview, request=httpx.Request("GET", "http://x"))
+
+    monkeypatch.setattr(services, "get", get)
+    tool = tools()["set_pass_mark"]
+    arguments = {"interview_id": "11111111-1111-4111-8111-111111111111", "pass_mark": 75}
+    result = asyncio.run(actions.prepare(tool, arguments, TURN))
+
+    assert result.block["preview"] == {"pass_mark": 75}
+    assert result.block["subject"] == "Backend"
+
+    same = {"interview_id": arguments["interview_id"], "pass_mark": 60}
+    nothing = asyncio.run(actions.prepare(tools()["set_pass_mark"], same, TURN))
+    assert nothing.block is None
+    assert nothing.content["error"] == 422
+
+
+def test_each_setting_is_its_own_action_and_needs_its_value():
+    for name, field in [
+        ("set_pass_mark", "pass_mark"),
+        ("set_question_seconds", "question_seconds"),
+        ("mark_hired", "hired"),
+    ]:
+        parameters = tools()[name].parameters
+
+        assert set(parameters["properties"]) == {"interview_id", field}
+        assert set(parameters["required"]) == {"interview_id", field}

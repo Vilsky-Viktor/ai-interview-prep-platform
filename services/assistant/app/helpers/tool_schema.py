@@ -100,6 +100,10 @@ def definition(name: str, entry: dict, operation: dict, components: dict, max_it
 
         properties[field] = parameter_schema(body[field], components)
 
+        # An optional field of a change: sent only when the user asked to change it.
+        if field not in body_required and field not in entry.get("required", []):
+            properties[field]["description"] = "Only when the user asked to change it."
+
     for param in entry["params"]:
         if param not in declared:
             raise ValueError(f"Tool {name}: the route has no parameter {param}")
@@ -113,7 +117,11 @@ def definition(name: str, entry: dict, operation: dict, components: dict, max_it
         properties["limit"]["description"] = f"Number of items to return, up to {max_items}"
 
     required = [param for param, parameter in declared.items() if parameter.get("required")]
-    required += body_required
+    # The body's required fields, and those an entry requires of a route that doesn't (one
+    # setting of a partial update).
+    required += [
+        field for field in [*body_required, *entry.get("required", [])] if field not in required
+    ]
     missing = [param for param in required if param not in properties]
 
     if missing:

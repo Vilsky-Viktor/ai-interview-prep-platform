@@ -17,7 +17,7 @@ CANCELLED = "cancelled"
 # text: the app tells the model).
 PENDING_FOR_MODEL = (
     "Prepared, not done: the panel shows the user a card with exactly this action, which runs "
-    "only if they confirm it. At most one short, natural line before it; nothing more."
+    "only if they confirm it. Write no text about it: the card says it all."
 )
 CONFIRMED_NOTE = (
     "[From the app, not the user] The user confirmed the action {tool}; the service answered "
@@ -28,6 +28,8 @@ CONFIRMED_NOTE = (
 
 # The model's preparing an action about something the user can't see (or that's gone).
 SUBJECT_NOT_FOUND = "Not found, or you don't have access to it."
+# Every value the model sent for a change is already so (for the model only).
+NOTHING_TO_CHANGE = "Nothing to change: those values are already set."
 
 # What the user reads; translated by its English text.
 ACTION_GONE = "This action expired or was already handled. Ask again to prepare it."

@@ -77,12 +77,29 @@ INTERVIEW_ACTIONS = {
     "rename_interview": interview_action(
         "PATCH", "/interviews/{interview_id}/title", "Rename an interview.", body=["title"]
     ),
-    "update_interview_settings": interview_action(
+    # One setting each, so a change can't carry values the user didn't ask for.
+    "set_pass_mark": interview_action(
         "PATCH",
         "/interviews/{interview_id}/settings",
-        "Change an interview's settings: seconds per question, the pass mark (%), or mark it "
-        "hired. Send only what changes.",
-        body=["question_seconds", "pass_mark", "hired"],
+        "Set an interview's pass mark (%), the grade a candidate needs to pass.",
+        body=["pass_mark"],
+        required=["pass_mark"],
+        fields=INTERVIEW_FIELDS,
+    ),
+    "set_question_seconds": interview_action(
+        "PATCH",
+        "/interviews/{interview_id}/settings",
+        "Set how many seconds a candidate has for each question of an interview.",
+        body=["question_seconds"],
+        required=["question_seconds"],
+        fields=INTERVIEW_FIELDS,
+    ),
+    "mark_hired": interview_action(
+        "PATCH",
+        "/interviews/{interview_id}/settings",
+        "Mark an interview as hired (someone was hired through it), or not.",
+        body=["hired"],
+        required=["hired"],
         fields=INTERVIEW_FIELDS,
     ),
     "set_interview_link": interview_action(

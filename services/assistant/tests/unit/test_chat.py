@@ -188,7 +188,7 @@ def test_the_prompt_acts_rather_than_explains_and_never_guesses_gender():
 
     assert "prepare that action at once" in system
     assert "runs only when they confirm" in system
-    assert "at most one short, natural line" in system
+    assert "Write no text" in system
     assert "never a summary or a rewrite" in system
     assert "only the values they asked to change" in system
     assert "Never guess anyone's gender" in system

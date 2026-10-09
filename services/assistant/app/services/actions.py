@@ -14,6 +14,7 @@ from app.constants.actions_flow import (
     CANCELLED,
     DONE,
     FAILED,
+    NOTHING_TO_CHANGE,
     PENDING,
     PENDING_FOR_MODEL,
     SUBJECT_NOT_FOUND,
@@ -52,9 +53,9 @@ def card(action_id: UUID, tool: Tool, arguments: dict, state: str, **more) -> di
     }
 
 
-async def subject_of(tool: Tool, arguments: dict, token: str, language: str) -> str | None:
-    """What the action is about, as the user may see it (a company's name, an interview's
-    title), read with their token; raises LookupError when it's not theirs or is gone."""
+async def subject_of(tool: Tool, arguments: dict, token: str, language: str) -> dict | None:
+    """What the action is about, as the user may see it now (a company, an interview), read
+    with their token; raises LookupError when it's not theirs or is gone."""
     entry = tool.subject
 
     if entry is None:
@@ -80,7 +81,20 @@ async def subject_of(tool: Tool, arguments: dict, token: str, language: str) -> 
         if data is None:
             raise LookupError
 
-    return data.get(entry["field"]) if isinstance(data, dict) else None
+    return data if isinstance(data, dict) else None
+
+
+def unchanged(tool: Tool, arguments: dict, current: dict | None) -> dict:
+    """A partial update (PATCH) without the values that are already so, which the model may
+    have copied from what it read: the card shows, and the action sends, only what changes."""
+    if tool.method != "PATCH" or current is None:
+        return arguments
+
+    return {
+        name: value
+        for name, value in arguments.items()
+        if name not in tool.body_params or current.get(name) != value
+    }
 
 
 async def prepare(tool: Tool, arguments: dict, turn: Turn) -> ToolResult:
@@ -95,11 +109,20 @@ async def prepare(tool: Tool, arguments: dict, turn: Turn) -> ToolResult:
         return ToolResult(tool.name, arguments, None, content, None, 0)
 
     try:
-        subject = await subject_of(tool, arguments, turn.token, turn.language)
+        current = await subject_of(tool, arguments, turn.token, turn.language)
     except LookupError:
         content = {"error": 404, "detail": translate(SUBJECT_NOT_FOUND, turn.language)}
 
         return ToolResult(tool.name, arguments, None, content, None, 0)
+
+    arguments = unchanged(tool, arguments, current)
+
+    if tool.body_params and not any(name in arguments for name in tool.body_params):
+        content = {"error": 422, "detail": NOTHING_TO_CHANGE}
+
+        return ToolResult(tool.name, arguments, None, content, None, 0)
+
+    subject = current.get(tool.subject["field"]) if current else None
 
     action_id = uuid.uuid4()
     company_id = arguments.get("company_id")
