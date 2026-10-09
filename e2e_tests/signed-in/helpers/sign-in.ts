@@ -15,11 +15,13 @@ const EMAIL_BOXES = {
 /** A new browser signed in as `email`, through the site's own "Continue with Google" and the
  * Auth emulator's sign-in page (never real Google): an account the emulator already has is
  * picked from its list, any other is added. The emulator marks these emails verified. `emails`
- * ticks the email boxes first. */
+ * ticks the email boxes first. A new account's `displayName` (its sign-in's name claim) is the
+ * email's local part unless given. */
 export async function signIn(
   browser: Browser,
   email: string,
   emails: SignInEmails = {},
+  displayName = email.split("@")[0],
 ): Promise<Page> {
   if (!env("NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL")) {
     throw new Error("Signed-in tests need the Firebase Auth emulator")
@@ -49,7 +51,7 @@ export async function signIn(
   } else {
     await popup.getByText(/add new account/i).click()
     await popup.locator("#email-input").fill(email)
-    await popup.locator("#display-name-input").fill(email.split("@")[0])
+    await popup.locator("#display-name-input").fill(displayName)
     await popup.locator("#sign-in").click()
   }
 
@@ -64,15 +66,26 @@ export async function signIn(
 }
 
 /** Clicks "Continue with Google" until the emulator's page opens: a click before the page is
- * ready opens nothing. */
+ * ready opens nothing. A page that opens late still counts, and while one is open the buttons
+ * are disabled, so a click waits for them instead of failing. */
 async function openGooglePopup(page: Page): Promise<Page> {
   const popups: Page[] = []
+  const onPage = (opened: Page) => popups.push(opened)
+  page.context().on("page", onPage)
 
-  await expect(async () => {
-    const opened = page.context().waitForEvent("page", { timeout: 5_000 })
-    await page.getByRole("button", { name: /continue with google/i }).click()
-    popups.push(await opened)
-  }).toPass({ timeout: 120_000 })
+  try {
+    await expect(async () => {
+      if (popups.length === 0) {
+        const button = page.getByRole("button", { name: /continue with google/i })
+        await expect(button).toBeEnabled({ timeout: 5_000 })
+        await button.click()
+      }
+
+      await expect.poll(() => popups.length, { timeout: 5_000 }).toBeGreaterThan(0)
+    }).toPass({ timeout: 120_000 })
+  } finally {
+    page.context().off("page", onPage)
+  }
 
   return popups[0]
 }

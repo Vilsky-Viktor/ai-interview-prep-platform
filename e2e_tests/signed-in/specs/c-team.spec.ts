@@ -112,6 +112,17 @@ test("owner adds a viewer, who sees the company read-only", async ({ signInAs })
   await expect(page).toHaveURL(/sort=date/)
   await expect(page.getByRole("button", { name: "Sort by: date" })).toBeVisible()
 
+  // A candidate's name is read-only for them: no pencil to edit it.
+  await page.getByText("No name yet").first().click()
+  await expect(page).toHaveURL(/\/candidates\/[^/?]+$/, { timeout: 90_000 })
+  await expect(page.getByText("No name yet")).toBeVisible()
+  await expect(page.getByRole("button", { name: "Edit name" })).toHaveCount(0)
+  await page.getByText("No name yet").hover()
+  await expect(
+    page.getByText("Comes from the candidate's sign-in.", { exact: true })
+  ).toBeVisible()
+  await shot(page, "viewer-candidate-name")
+
   // Their own row in the team: a role badge, nothing to change.
   await visit(page, `/companies/${company.id}/members`)
   await expect(page.getByRole("button", { name: "Add member" })).toHaveCount(0)

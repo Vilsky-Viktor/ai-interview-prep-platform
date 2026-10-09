@@ -60,7 +60,7 @@ test("company verification: pending, declined, renamed, approved", async ({
 
   // A rename sends it for review again; the field says so while renaming.
   const renamed = `${company.name} Renamed`
-  await owner.getByRole("heading").getByRole("button", { name: company.name }).click()
+  await owner.getByRole("heading").getByRole("button", { name: "Edit title" }).click()
   await expect(owner.getByText("Renaming sends your company for verification again.")).toBeVisible()
   await shot(owner, "rename-hint")
   await owner.getByLabel("Title").fill(renamed)

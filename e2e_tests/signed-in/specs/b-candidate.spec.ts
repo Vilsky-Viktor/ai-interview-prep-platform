@@ -74,4 +74,10 @@ test("candidate takes the interview from the invite link", async ({ signInAs }) 
   await visit(owner, `/companies/${company.id}/interviews/${interviewId}?tab=candidates`)
   await expect(owner.getByText(email, { exact: true }).first()).toBeVisible()
   await shot(owner, "owner-candidates")
+
+  // Their report lists the questions they answered, without numbers.
+  await owner.getByText(email, { exact: true }).first().click()
+  await expect(owner.getByText(first ?? "").first()).toBeVisible()
+  await expect(owner.getByText(/^\d+\.$/)).toHaveCount(0)
+  await shot(owner, "owner-report")
 })
