@@ -55,7 +55,7 @@ export function TabNav({
             item.keepCase ? "normal-case" : "lowercase",
             item.id === current
               ? "border-primary text-foreground"
-              : "border-transparent text-muted-foreground hover:text-foreground"
+              : "border-transparent text-muted-foreground hover:text-foreground active:border-border active:text-foreground"
           )
 
           return onSelect ? (

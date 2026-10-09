@@ -1,10 +1,11 @@
 import type { ReactNode } from "react"
 
 /** A result's big numbers in one centered card, its halves split by a line: a test's grade, and
- * what goes with it (how many were answered, or whether it passed). */
+ * what goes with it (how many were answered, or whether it passed). On phones the halves stack,
+ * centered, without the line. */
 export function GradeCard({ children }: { children: ReactNode }) {
   return (
-    <div className="mx-auto flex w-fit flex-wrap items-stretch divide-x overflow-hidden rounded-2xl border">
+    <div className="mx-auto flex w-fit flex-wrap items-stretch divide-x overflow-hidden rounded-2xl border max-sm:w-full max-sm:flex-col max-sm:items-center max-sm:divide-x-0 max-sm:py-2 max-sm:*:justify-center max-sm:*:py-3">
       {children}
     </div>
   )

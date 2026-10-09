@@ -98,7 +98,8 @@ export function SessionPlay({
 
   return (
     <div className="space-y-8 pb-28">
-      <div className="relative">
+      {/* On phones the way back and the logo share a line, the progress under them. */}
+      <div className="relative max-sm:flex max-sm:flex-wrap max-sm:items-center max-sm:gap-x-2 max-sm:gap-y-4">
         {back}
         <SessionHeader
           brand={brand}
@@ -176,8 +177,10 @@ export function SessionPlay({
         }}
       >
         <DialogContent showCloseButton={false}>
-          <DialogHeader>
-            <DialogTitle className="no-dot">{t("finishTitle")}</DialogTitle>
+          <DialogHeader className="gap-4">
+            <DialogTitle className="no-dot mb-2">
+              {t("finishTitle")}
+            </DialogTitle>
             <DialogDescription>
               {section.count > 1
                 ? t("endsAll", { count: section.count })
@@ -238,11 +241,12 @@ function SessionHeader({
   const t = useTranslations("session")
   const candidates = useTranslations("candidates")
 
-  // The company's logo on the left of the section's title and the progress bar.
+  // The company's logo on the left of the section's title and the progress bar (above them, on
+  // phones, beside the way back).
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-4 max-sm:contents">
       {brand}
-      <div className="min-w-0 flex-1 space-y-3">
+      <div className="min-w-0 flex-1 space-y-3 max-sm:basis-full">
         <div className="flex min-w-0 items-center justify-between gap-4">
           <p className="flex min-w-0 items-center text-sm text-muted-foreground">
             <span className="truncate">{session.topic_title}</span>

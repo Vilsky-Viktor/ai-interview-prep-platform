@@ -123,8 +123,9 @@ export function StartTest({
     }
   }
 
+  // On phones the box spans the screen, with square corners.
   const box =
-    "w-full rounded-3xl border border-transparent bg-muted p-3 transition-colors focus-within:border-ring dark:bg-card"
+    "-mx-6 w-[calc(100%+3rem)] border border-transparent bg-muted p-3 transition-colors focus-within:border-ring sm:mx-0 sm:w-full sm:rounded-3xl dark:bg-card"
 
   if (companies === null) {
     return (
@@ -137,8 +138,7 @@ export function StartTest({
           onKeyDown={handleKeyDown}
           placeholder={t("placeholder")}
           aria-label={t("description")}
-          autoFocus
-          className="max-h-72 min-h-40 resize-none border-0 bg-transparent p-2 text-base shadow-none focus-visible:ring-0 md:text-base dark:bg-transparent"
+          className="max-h-72 min-h-40 resize-none border-0 bg-transparent p-2 text-base shadow-none focus-visible:ring-0 max-[399px]:min-h-28 md:text-base dark:bg-transparent [@media(max-height:700px)]:min-h-28"
         />
         <div className="flex flex-wrap items-center justify-between gap-4 ps-2 pt-2">
           <p className="text-xs text-muted-foreground pointer-coarse:hidden">

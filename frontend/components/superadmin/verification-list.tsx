@@ -12,6 +12,7 @@ import { apiFetch } from "@/lib/api"
 import { decisionFailed } from "@/lib/verification"
 import { formatDate } from "@/lib/format"
 import type { VerificationRequest } from "@/types/superadmin"
+import { LIST_BOX } from "@/constants/lists"
 
 function rowKey(row: VerificationRequest) {
   return row.company_id
@@ -70,13 +71,15 @@ export function VerificationList({
       getKey={rowKey}
       estimateSize={120}
       onEndReached={loadMore}
-      className="divide-y rounded-2xl border"
+      className={LIST_BOX}
       renderItem={(row) => {
         const date =
           row.status === "pending" ? row.submitted_at : row.decided_at
 
         return (
-          <div className="flex items-center gap-6 p-6">
+          // On phones the status and then the buttons go under the company and its details, each
+          // on a centered line of its own.
+          <div className="flex items-center gap-6 p-6 max-sm:flex-col max-sm:items-stretch max-sm:gap-4 max-sm:py-8">
             <div className="min-w-0 flex-1 space-y-1">
               <p className="text-lg font-medium">{row.name}</p>
               <p className="text-sm break-words text-muted-foreground">
@@ -104,12 +107,12 @@ export function VerificationList({
                 </p>
               )}
             </div>
-            <div className="flex shrink-0 flex-col items-end gap-2">
+            <div className="flex shrink-0 flex-col items-end gap-2 max-sm:flex-row max-sm:flex-wrap max-sm:items-center max-sm:justify-center max-sm:gap-4">
               <Badge variant="outline" className="h-7 px-3 text-sm font-light">
                 {t(`verificationStatus.${row.status}`)}
               </Badge>
               {row.status === "pending" && (
-                <span className="flex gap-2 pt-1">
+                <span className="flex gap-2 pt-1 max-sm:basis-full max-sm:items-center max-sm:justify-center max-sm:gap-4 max-sm:pt-0">
                   <DeclineVerification
                     companyId={row.company_id}
                     name={row.name}
@@ -117,7 +120,7 @@ export function VerificationList({
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-8 px-3 text-sm"
+                    className="h-8 px-3 text-sm max-sm:h-10 max-sm:px-5 max-sm:text-base"
                     onClick={() => approve(row)}
                   >
                     {t("approve")}

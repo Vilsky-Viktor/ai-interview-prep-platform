@@ -74,7 +74,8 @@ test("the agent's section shows the chat and opens the assistant", async ({
   await expect(page.getByRole("dialog", { name: "Assistant" })).toBeVisible();
 });
 
-// The preview's input types its questions one after another, each on one line.
+// The preview's input types its questions one after another, each on one line: the whole question
+// where it fits, its end where it doesn't (on a phone, before the buttons).
 test("the agent's preview types questions on one line", async ({ page }) => {
   // It waits through the animation, on top of the page load.
   test.slow();
@@ -82,14 +83,24 @@ test("the agent's preview types questions on one line", async ({ page }) => {
   const input = page.locator("[inert] textarea");
   await input.scrollIntoViewIfNeeded();
   const height = (await input.boundingBox())!.height;
-  await expect(input).toHaveValue("Who scored best on Architect?", {
-    timeout: 15_000,
-  });
-  expect((await input.boundingBox())!.height).toBe(height);
-  await expect(input).toHaveValue("Create an interview for a data analyst", {
-    timeout: 15_000,
-  });
-  expect((await input.boundingBox())!.height).toBe(height);
+
+  for (const question of [
+    "Who scored best on Architect?",
+    "Create an interview for a data analyst",
+  ]) {
+    // Held whole for a moment once typed: its end, the longest that fits, shows then.
+    await expect
+      .poll(
+        async () => {
+          const value = await input.inputValue();
+
+          return value.length > 8 && question.endsWith(value);
+        },
+        { timeout: 15_000 },
+      )
+      .toBe(true);
+    expect((await input.boundingBox())!.height).toBe(height);
+  }
 });
 
 // With reduced motion nothing is typed: the input shows its placeholder.

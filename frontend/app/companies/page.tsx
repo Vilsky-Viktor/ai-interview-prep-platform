@@ -32,7 +32,8 @@ export default async function CompanyPage() {
           </BackLink>
         }
         title={
-          <div className="flex items-center justify-between gap-4">
+          // On phones "new company" goes under the title, at full width.
+          <div className="flex items-center justify-between gap-4 max-sm:flex-col max-sm:items-stretch">
             <h1 className="font-heading text-3xl font-medium tracking-tight">
               {t("title")}
             </h1>

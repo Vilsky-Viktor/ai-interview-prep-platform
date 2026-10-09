@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { InterviewSettingsData } from "@/types/company"
+import { LIST_BOX } from "@/constants/lists"
 
 /** The interview's settings tab: the time each question has, the pass mark, and whether the
 company hired, one row each in a list like the topics'. Every interview is timed, and
@@ -63,7 +64,7 @@ export function InterviewSettings({
   }
 
   return (
-    <div className="divide-y rounded-2xl border">
+    <div className={LIST_BOX}>
       <NumberSetting
         label={t("timePerQuestion")}
         fieldLabel={t("secondsLabel")}

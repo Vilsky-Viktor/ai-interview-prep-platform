@@ -84,7 +84,7 @@ export function AssistantHistory({
           // One hover surface: the row opens the conversation, the bin sits on top of it.
           <li
             key={item.id}
-            className="relative flex items-center gap-2 p-4 pe-2 transition-colors hover:bg-muted/50"
+            className="relative flex items-center gap-2 p-4 pe-2 transition-colors hover:bg-muted/50 active:bg-muted/50"
           >
             {/* The title is cut to one line; the tooltip shows it whole. */}
             <Tooltip>

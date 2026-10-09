@@ -43,11 +43,12 @@ function DialogOverlay({
 // Open and close: the sheet slides in from its side (from the bottom on phones), a popup fades
 // in rising a little and growing slightly; about 200 ms in and 150 ms out, eased. Reduced
 // motion makes them instant (globals.css). Base UI keeps a closing popup mounted until its
-// transition ends. On phones a popup spans the screen's width, with square corners.
+// transition ends. On phones a popup spans the screen's width, with square corners. A popup taller
+// than the screen scrolls inside, its buttons (DialogFooter) staying at the bottom edge.
 const SHEET_CLASSES =
   "fixed inset-y-0 end-0 z-50 flex w-full flex-col bg-popover text-base text-popover-foreground ring-1 ring-foreground/10 outline-none transition-[translate] duration-200 ease-out sm:w-[var(--sheet-width,28rem)] data-[ending-style]:duration-150 data-[ending-style]:ease-in max-sm:data-[starting-style]:translate-y-full max-sm:data-[ending-style]:translate-y-full sm:data-[starting-style]:translate-x-full sm:data-[ending-style]:translate-x-full sm:rtl:data-[starting-style]:-translate-x-full sm:rtl:data-[ending-style]:-translate-x-full"
 const POPUP_CLASSES =
-  "fixed top-1/2 left-1/2 z-50 grid w-full max-w-full -translate-x-1/2 -translate-y-1/2 gap-8 sm:rounded-xl bg-popover px-10 pt-10 pb-10 text-base text-popover-foreground ring-1 ring-foreground/10 outline-none transition-[opacity,translate,scale] duration-200 ease-out sm:max-w-sm data-[ending-style]:translate-y-[calc(-50%+10px)] data-[ending-style]:scale-[0.97] data-[ending-style]:opacity-0 data-[ending-style]:duration-150 data-[starting-style]:translate-y-[calc(-50%+10px)] data-[starting-style]:scale-[0.97] data-[starting-style]:opacity-0"
+  "fixed top-1/2 left-1/2 z-50 grid max-h-dvh w-full max-w-full -translate-x-1/2 -translate-y-1/2 gap-8 overflow-y-auto overscroll-contain max-sm:flex max-sm:flex-col sm:rounded-xl bg-popover px-10 pt-10 pb-10 text-base text-popover-foreground ring-1 ring-foreground/10 outline-none transition-[opacity,translate,scale] duration-200 ease-out sm:max-w-sm data-[ending-style]:translate-y-[calc(-50%+10px)] data-[ending-style]:scale-[0.97] data-[ending-style]:opacity-0 data-[ending-style]:duration-150 data-[starting-style]:translate-y-[calc(-50%+10px)] data-[starting-style]:scale-[0.97] data-[starting-style]:opacity-0"
 
 function DialogContent({
   className,
@@ -96,12 +97,18 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("flex flex-col gap-2", className)}
+      // With a description under the title, more room between them, and between the lines.
+      className={cn(
+        "flex flex-col gap-2 has-data-[slot=dialog-description]:gap-4 has-data-[slot=dialog-description]:*:data-[slot=dialog-title]:mb-2",
+        className
+      )}
       {...props}
     />
   )
 }
 
+// A dialog's buttons, all one height and font: side by side and equal on phones, at the end
+// from tablets up. Always in sight, at the dialog's bottom, however much of it scrolls above.
 function DialogFooter({
   className,
   showCloseButton = false,
@@ -116,7 +123,7 @@ function DialogFooter({
     <div
       data-slot="dialog-footer"
       className={cn(
-        "-mx-10 -mb-10 flex flex-col-reverse gap-2 border-t bg-muted/50 px-4 py-3 sm:flex-row sm:justify-end sm:rounded-b-xl",
+        "sticky -bottom-10 -mx-10 mt-auto -mb-10 flex shrink-0 gap-2 border-t bg-[color-mix(in_oklab,var(--color-muted)_50%,var(--color-popover))] px-4 py-3 *:h-10 *:px-5 *:text-base max-sm:*:flex-1 sm:justify-end sm:rounded-b-xl",
         className
       )}
       {...props}

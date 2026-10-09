@@ -20,10 +20,10 @@ export function InputAction({
   if (addon) {
     return (
       // On phones the text takes its own row and the controls the row under it, inside the same
-      // field; from sm up it's one rounded row.
-      <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2 rounded-[2rem] border border-transparent bg-muted pe-3 pb-3 transition-colors focus-within:border-ring sm:flex-nowrap sm:rounded-full sm:pb-0 dark:bg-input/30">
+      // field, which spans the screen with square corners; from sm up it's one rounded row.
+      <div className="-mx-6 flex min-w-0 flex-1 flex-wrap items-center gap-2 border border-transparent bg-muted ps-3 pe-3 pb-3 transition-colors focus-within:border-ring sm:mx-0 sm:flex-nowrap sm:rounded-full sm:ps-0 sm:pb-0 dark:bg-input/30">
         <Input
-          className="h-16 min-w-0 flex-1 basis-full border-0 bg-transparent px-6 text-lg focus-visible:ring-0 sm:basis-auto md:text-lg dark:bg-transparent"
+          className="h-16 min-w-0 flex-1 basis-full border-0 bg-transparent px-3 text-lg focus-visible:ring-0 sm:basis-auto sm:px-6 md:text-lg dark:bg-transparent"
           {...props}
         />
         {addon}

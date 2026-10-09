@@ -20,6 +20,7 @@ import { serverFetch } from "@/lib/server-api"
 import { breadcrumbData } from "@/lib/structured-data"
 import type { PracticeSize, PracticeTopicProgress } from "@/types/round"
 import type { Template } from "@/types/superadmin"
+import { LIST_BOX } from "@/constants/lists"
 
 export async function generateMetadata({
   params,
@@ -104,25 +105,32 @@ export default async function PracticeTestPage({
       />
       <PageHeader
         back={<BackLink href="/practice">{t("title")}</BackLink>}
-        tags={
-          <>
-            <Badge variant="outline" className="h-7 px-3 text-sm font-light">
-              {tLevel(template.level)}
-            </Badge>
-            <Badge
-              variant="outline"
-              className="h-7 px-3 text-sm font-light uppercase"
-            >
-              {template.language}
-            </Badge>
-          </>
-        }
+        // The level and language under the title; on phones the actions come after them, on a
+        // line of their own, centered.
         title={
-          <div className="flex items-start justify-between gap-4">
-            <h1 className="min-w-0 flex-1 font-heading text-3xl font-medium tracking-tight text-balance normal-case">
-              {template.title}
-            </h1>
-            <PracticeActions templateId={id} startLabel={t("start")} />
+          <div className="flex items-start justify-between gap-4 max-sm:flex-wrap">
+            <div className="min-w-0 flex-1 space-y-2">
+              <h1 className="font-heading text-3xl font-medium tracking-tight text-balance normal-case">
+                {template.title}
+              </h1>
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge
+                  variant="outline"
+                  className="h-7 px-3 text-sm font-light"
+                >
+                  {tLevel(template.level)}
+                </Badge>
+                <Badge
+                  variant="outline"
+                  className="h-7 px-3 text-sm font-light uppercase"
+                >
+                  {template.language}
+                </Badge>
+              </div>
+            </div>
+            <div className="max-sm:flex max-sm:basis-full max-sm:justify-center max-sm:pt-2">
+              <PracticeActions templateId={id} startLabel={t("start")} />
+            </div>
           </div>
         }
       />
@@ -135,7 +143,8 @@ export default async function PracticeTestPage({
           <p>{t("about")}</p>
         </div>
         {size && (
-          <p className="flex items-center px-5 py-4">
+          // On phones on its own line, centered, in larger type.
+          <p className="flex items-center px-5 py-4 max-sm:basis-full max-sm:justify-center max-sm:text-xl">
             {t("questions", { count: size.questions })}
           </p>
         )}
@@ -144,13 +153,13 @@ export default async function PracticeTestPage({
       <ul
         lang={template.language}
         dir={textDirection(template.language)}
-        className="divide-y rounded-2xl border"
+        className={LIST_BOX}
       >
         {template.topics.map((topic) => {
           const step = reached.get(topic.id)
 
           return (
-            <li key={topic.id} className="p-4 sm:p-6">
+            <li key={topic.id} className="p-4 max-sm:px-6 max-sm:py-8 sm:p-6">
               <span className="block min-w-0 space-y-3">
                 <span className="block text-lg font-medium">{topic.title}</span>
                 <SubtopicList subtopics={topic.subtopics} />

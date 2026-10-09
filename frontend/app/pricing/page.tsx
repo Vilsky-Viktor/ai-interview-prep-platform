@@ -16,9 +16,12 @@ export async function generateMetadata() {
   return pageMetadata(t("title"), t("description"), "/pricing", true)
 }
 
+// The prices in one bordered list; on phones it spans the screen, with square corners.
+const PRICE_LIST = "-mx-6 divide-y border-y sm:mx-0 sm:rounded-xl sm:border"
+
 function PriceRow({ what, price }: { what: string; price: string }) {
   return (
-    <li className="flex items-baseline justify-between gap-6 px-5 py-4">
+    <li className="flex items-baseline justify-between gap-6 px-5 py-4 max-sm:gap-10 max-sm:px-6">
       <span>{what}</span>
       <span className="max-w-[65%] shrink-0 text-end font-medium tabular-nums">
         {price}
@@ -58,7 +61,7 @@ export default async function PricingPage() {
       </div>
 
       <section className="space-y-10">
-        <ul className="divide-y rounded-xl border">
+        <ul className={PRICE_LIST}>
           <PriceRow what={t("test")} price={t("free")} />
           <PriceRow
             what={t("welcome", { count: catalog.free_candidates })}
@@ -102,7 +105,7 @@ export default async function PricingPage() {
             {t("referralsNote")}
           </p>
         </div>
-        <ul className="divide-y rounded-xl border">
+        <ul className={PRICE_LIST}>
           <PriceRow
             what={t("companyReferral")}
             price={t("each", { count: catalog.referral_company })}

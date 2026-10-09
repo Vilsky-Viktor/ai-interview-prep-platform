@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { DOCUMENTS } from "@/constants/documents"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { pageMetadata } from "@/lib/site"
+import { LIST_BOX } from "@/constants/lists"
 
 // Like the report's download button (components/company/report-actions.tsx).
 const ICON_BUTTON =
@@ -37,7 +38,7 @@ export default async function DocsPage() {
           )}
         </p>
       </header>
-      <ul className="divide-y overflow-hidden rounded-2xl border">
+      <ul className={`${LIST_BOX} overflow-hidden`}>
         {DOCUMENTS.map((item) => (
           <li
             key={item.key}
@@ -62,7 +63,8 @@ export default async function DocsPage() {
                 )}
               </p>
             </div>
-            <div className="flex shrink-0 items-center gap-2">
+            {/* The format beside the download button; above it, on phones. */}
+            <div className="flex shrink-0 items-center gap-2 max-sm:flex-col max-sm:gap-1">
               <Badge
                 variant="secondary"
                 className="h-7 px-3 text-sm font-light"

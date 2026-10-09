@@ -106,7 +106,10 @@ function BlockRow({
     <LocalizedLink
       href={href}
       onClick={onNavigate}
-      className={cn(ROW, "transition-colors hover:bg-muted/50")}
+      className={cn(
+        ROW,
+        "transition-colors hover:bg-muted/50 active:bg-muted/50"
+      )}
     >
       {content}
     </LocalizedLink>

@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
 import { MAX_INSTRUCTIONS_LENGTH } from "@/constants/limits"
 import type { DraftTopic } from "@/types/generation"
+import { LIST_BOX } from "@/constants/lists"
 
 type TopicReviewProps = {
   topics: DraftTopic[]
@@ -81,7 +82,7 @@ export function TopicReview({
         <p className="text-muted-foreground">{t("reviewText")}</p>
       </div>
 
-      <ul className="divide-y rounded-2xl border">
+      <ul className={LIST_BOX}>
         {draft.map((topic, index) =>
           editing === index ? (
             <li key={index}>

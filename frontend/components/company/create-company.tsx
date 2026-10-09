@@ -77,7 +77,9 @@ export function CreateCompany({ templateId }: { templateId?: string }) {
 
   return (
     <Dialog open={open} onOpenChange={handleOpen}>
-      <DialogTrigger render={<Button className="h-12 px-6 text-base" />}>
+      <DialogTrigger
+        render={<Button className="h-12 px-6 text-base max-sm:w-full" />}
+      >
         {t("new")}
       </DialogTrigger>
       <DialogContent showCloseButton={false} className="sm:max-w-lg">

@@ -147,6 +147,36 @@
 }
 
 @layer base {
+  /* On a touch screen nothing shows a hover, so everything that can be tapped dims a little while
+     pressed: the sign a tap landed. :where keeps it the weakest rule, so a component's own pressed
+     style wins. */
+  @media (hover: none) {
+    :where(
+      a[href],
+      button,
+      [role="button"],
+      [role="tab"],
+      [role="menuitem"],
+      summary,
+      label[for]
+    ) {
+      -webkit-tap-highlight-color: transparent;
+      transition-property:
+        opacity, color, background-color, border-color, scale, translate;
+      transition-duration: 150ms;
+    }
+    :where(
+        a[href],
+        button,
+        [role="button"],
+        [role="tab"],
+        [role="menuitem"],
+        summary,
+        label[for]
+      ):not(:disabled):active {
+      opacity: 0.6;
+    }
+  }
   * {
     @apply border-border outline-ring/50;
   }

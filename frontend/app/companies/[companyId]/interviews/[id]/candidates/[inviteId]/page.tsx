@@ -116,8 +116,9 @@ export default async function ScorecardPage({
             </div>
           }
         />
+        {/* On phones the actions take their own line under the name, centered. */}
         {!deleted && (
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 max-sm:basis-full max-sm:justify-center">
             <ExtraTime
               interviewId={id}
               inviteId={inviteId}
@@ -188,8 +189,9 @@ export default async function ScorecardPage({
 
         return (
           <section key={session.id} className="space-y-4">
-            <div className="flex items-center justify-between gap-4">
-              <div className="min-w-0 space-y-1">
+            {/* On phones the topic, its signals and then its grade, centered. */}
+            <div className="flex items-center justify-between gap-4 max-sm:flex-col max-sm:text-center">
+              <div className="min-w-0 space-y-1 max-sm:[&_p]:justify-center">
                 <h2 className="font-heading text-2xl font-medium normal-case">
                   {session.topic_title}
                 </h2>

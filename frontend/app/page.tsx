@@ -50,8 +50,9 @@ export default async function HomePage() {
   return (
     <main className="mx-auto max-w-5xl px-6">
       <JsonLd data={organizationData(siteUrl(), site("description"))} />
-      {/* The promise and the box to start in fill the first screen, under the 3.5rem header. */}
-      <div className="relative flex min-h-[calc(100svh-3.5rem)] flex-col items-center justify-center pb-24">
+      {/* The promise and the box to start in fill the first screen, under the 3.5rem header; on a
+          short phone, with some room above the title. */}
+      <div className="relative flex min-h-[calc(100svh-3.5rem)] flex-col items-center justify-center pb-24 max-sm:pt-10">
         <div className="w-full max-w-176 space-y-10">
           <div className="space-y-4">
             {/* The promise, with the demos beside it from tablets up. */}

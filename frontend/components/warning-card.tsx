@@ -1,12 +1,22 @@
+import { cn } from "cn"
 import { TriangleAlertIcon } from "lucide-react"
 
 /** A warning on a gray card: a large amber warning sign and the text in the muted color, as the
  * maintenance notice shows it. */
-export function WarningCard({ children }: { children: React.ReactNode }) {
+export function WarningCard({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
   return (
     <div
       role="status"
-      className="flex items-center gap-4 rounded-2xl bg-muted p-5 text-base"
+      className={cn(
+        "flex items-center gap-4 rounded-2xl bg-muted p-5 text-base",
+        className
+      )}
     >
       <TriangleAlertIcon
         aria-hidden

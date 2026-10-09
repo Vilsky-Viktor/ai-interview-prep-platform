@@ -10,6 +10,7 @@ import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Company } from "@/types/company"
 import type { Template } from "@/types/superadmin"
+import { LIST_BOX } from "@/constants/lists"
 
 export const generateMetadata = () => translatedTitle("templates", "title")
 
@@ -52,7 +53,7 @@ export default async function CompanyTemplatePage({
         }
       />
 
-      <ul className="divide-y rounded-2xl border">
+      <ul className={LIST_BOX}>
         {template.topics.map((topic) => (
           <li
             key={topic.id}

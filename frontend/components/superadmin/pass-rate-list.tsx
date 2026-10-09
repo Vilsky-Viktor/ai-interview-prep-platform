@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import type { PassRate } from "@/types/superadmin"
+import { LIST_BOX } from "@/constants/lists"
 
 function rowKey(row: PassRate) {
   return row.interview_id
@@ -39,16 +40,17 @@ export function PassRateList({
       getKey={rowKey}
       estimateSize={120}
       onEndReached={loadMore}
-      className="divide-y rounded-2xl border"
+      className={LIST_BOX}
       renderItem={(row) => (
-        <div className="flex items-center gap-6 p-6">
+        // On phones the numbers go under the title and company, on the left.
+        <div className="flex items-center gap-6 p-6 max-sm:flex-col max-sm:items-stretch max-sm:gap-4 max-sm:py-8">
           <div className="min-w-0 flex-1 space-y-1">
             <p className="text-lg font-medium">
               {row.title ?? interviews("fallbackTitle")}
             </p>
             <p className="text-sm text-muted-foreground">{row.company}</p>
           </div>
-          <div className="flex shrink-0 flex-col items-end gap-2 text-sm text-muted-foreground tabular-nums">
+          <div className="flex shrink-0 flex-col items-end gap-2 text-sm text-muted-foreground tabular-nums max-sm:items-start">
             {row.outside_triggers && (
               <Badge variant="outline" className="h-7 px-3 text-sm font-light">
                 {t("outsideTriggers")}

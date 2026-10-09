@@ -16,24 +16,19 @@ const { request, response } = API_EXAMPLE
 const TYPED = request.head.length + request.body.length
 
 /** prepza's API at work, playing on a loop: a request typed out, its body, then the answer. Every
- * text keeps its place while it's typed, so the card never changes size. With reduced motion it
- * shows the whole exchange at once. */
+ * text keeps its place while it's typed, so the card never changes size. Without scripts or with
+ * reduced motion it shows the whole exchange. */
 export function ApiDemo() {
-  const [letters, setLetters] = useState(0)
-  const [answered, setAnswered] = useState(false)
+  // The whole exchange until the loop starts: without scripts or with reduced motion, it stays.
+  const [letters, setLetters] = useState(TYPED)
+  const [answered, setAnswered] = useState(true)
 
   useEffect(() => {
     let typed = 0
     let timer: number
 
-    // With reduced motion the whole exchange shows at once.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      timer = window.setTimeout(() => {
-        setLetters(TYPED)
-        setAnswered(true)
-      }, 0)
-
-      return () => window.clearTimeout(timer)
+      return
     }
 
     function next() {
@@ -58,7 +53,12 @@ export function ApiDemo() {
       }, HOLD_MS)
     }
 
-    timer = window.setTimeout(next, ANSWER_MS)
+    // The loop starts from an empty request.
+    timer = window.setTimeout(() => {
+      setLetters(0)
+      setAnswered(false)
+      timer = window.setTimeout(next, ANSWER_MS)
+    }, 0)
 
     return () => window.clearTimeout(timer)
   }, [])

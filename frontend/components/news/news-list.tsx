@@ -8,6 +8,7 @@ import { formatDay } from "@/lib/format"
 import { postHeading } from "@/lib/news"
 import { byId } from "@/lib/paged-list"
 import type { NewsPost } from "@/types/news"
+import { LIST_BOX } from "@/constants/lists"
 
 /** The news page's posts, newest first, one after another. `initial` is the server's first
  * page; the next loads near the end. */
@@ -27,7 +28,7 @@ export function NewsList({ initial }: { initial: NewsPost[] }) {
       getKey={byId}
       estimateSize={160}
       onEndReached={loadMore}
-      className="divide-y rounded-2xl border"
+      className={LIST_BOX}
       renderItem={(post) => <Post post={post} />}
     />
   )
@@ -40,7 +41,7 @@ function Post({ post }: { post: NewsPost }) {
   const heading = postHeading(post.title)
 
   return (
-    <article id={post.id} className="space-y-3 p-6">
+    <article id={post.id} className="space-y-3 p-6 max-sm:py-9">
       <div className="space-y-1">
         <h2 className="no-dot font-heading text-2xl font-medium break-words normal-case">
           {heading.text}

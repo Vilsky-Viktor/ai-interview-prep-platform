@@ -42,8 +42,9 @@ export async function ReportsSection() {
                     {report("orSummary")}
                   </span>
                   {CHAT_APPS.map(({ name, Icon }) => (
-                    <span key={name} className={ICON}>
-                      <Icon className="size-8" />
+                    // Smaller on the smallest phones, so the row fits.
+                    <span key={name} className={`${ICON} max-[399px]:size-9`}>
+                      <Icon className="size-8 max-[399px]:size-6" />
                     </span>
                   ))}
                 </span>

@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "cn"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
@@ -100,21 +101,28 @@ export function TopicQuestions({
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className={regeneratePath ? "sm:max-w-4xl" : "sm:max-w-3xl"}
+        // On phones it fills the screen, the questions taking the height left, with the
+        // warning and the list out to the screen's edges.
+        className={cn(
+          "max-sm:h-dvh max-sm:gap-6",
+          regeneratePath ? "sm:max-w-4xl" : "sm:max-w-3xl"
+        )}
       >
         <DialogHeader>
           <DialogTitle className="normal-case">{title}</DialogTitle>
         </DialogHeader>
         {/* Owners should know the keys can be wrong (the AI Act's instructions for use); the
             warning card the templates page used to have. */}
-        <WarningCard>{t("aiWritten")}</WarningCard>
+        <WarningCard className="max-sm:-mx-10 max-sm:rounded-none">
+          {t("aiWritten")}
+        </WarningCard>
         {questions ? (
           <VirtualList
             items={questions}
             getKey={(question) => question.id}
             // A question with its four answer options.
             estimateSize={200}
-            scrollClassName="max-h-[60vh] overflow-y-auto rounded-xl border"
+            scrollClassName="max-h-[60vh] overflow-y-auto rounded-xl border max-sm:-mx-10 max-sm:max-h-none max-sm:min-h-0 max-sm:flex-1 max-sm:rounded-none max-sm:border-x-0"
             className="divide-y"
             renderItem={(question) => (
               <QuestionRow

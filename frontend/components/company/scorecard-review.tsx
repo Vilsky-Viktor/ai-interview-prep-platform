@@ -9,6 +9,7 @@ import { QuestionText } from "@/components/questions/question-text"
 import { VirtualList } from "@/components/virtual-list"
 import { answerText, verdict } from "@/lib/rounds"
 import type { ReviewItem } from "@/types/round"
+import { LIST_BOX } from "@/constants/lists"
 
 export function ScorecardReview({ items }: { items: ReviewItem[] }) {
   return (
@@ -16,13 +17,14 @@ export function ScorecardReview({ items }: { items: ReviewItem[] }) {
       items={items}
       getKey={(item) => item.question_id}
       estimateSize={160}
-      className="divide-y rounded-2xl border"
+      className={LIST_BOX}
       renderItem={(item) => (
-        <div className="space-y-4 p-6">
-          <div className="flex items-start justify-between gap-4">
+        <div className="space-y-4 p-6 max-sm:py-8">
+          {/* On phones whether it was right sits above the question, centered. */}
+          <div className="flex items-start justify-between gap-4 max-sm:flex-col-reverse max-sm:items-center">
             <QuestionText
               text={item.text}
-              className="min-w-0 text-lg font-light"
+              className="min-w-0 text-lg font-light max-sm:self-stretch"
             />
             <ScorecardMark item={item} />
           </div>

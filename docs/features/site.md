@@ -142,7 +142,7 @@ The `/api-docs` page ("api docs" in the footer) is the public API's reference, i
 
 The footer has the social icons and "ask agent", which opens the assistant, and its links in three columns: the product (skills tests, pre-employment testing, AI interviews, free practice, comparisons), resources (guides, FAQ, docs, API docs, news) and the company (About us, Contact us, privacy, terms). On phones everything is centered, with the links in one column. Pricing is in the header's menu, not in the footer.
 
-On phones dialogs and menus span the screen's width, with square corners, and the "⌘/Ctrl + Enter to send" hint is hidden on touch screens.
+On phones dialogs and menus span the screen's width, with square corners. A dialog's buttons stay in sight at its bottom edge, with only its body scrolling, and help dialogs fill the screen. Lists, search boxes and gray panels reach the screen's edges, a page's main button ("new company", "new interview", "add member") takes its own full-width line under the title, and rows put their numbers and buttons under their title. On touch screens the "⌘/Ctrl + Enter to send" hint is hidden, and everything that can be tapped dims a little while pressed.
 
 ## Search engines
 

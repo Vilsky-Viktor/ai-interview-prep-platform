@@ -49,8 +49,14 @@ export function CompanyHeader({
 
   return (
     <div className="space-y-4">
-      <div className="relative flex min-h-14 items-center">
-        <BackLink href="/companies" help={COMPANY_TAB_HELP[current]}>
+      {/* On narrower screens the back arrow and info button take their own line above the
+          name, and on phones the action its own line below it, at full width. */}
+      <div className="relative flex min-h-14 flex-wrap items-center">
+        <BackLink
+          href="/companies"
+          help={COMPANY_TAB_HELP[current]}
+          className="max-xl:basis-full"
+        >
           {t("title")}
         </BackLink>
         {/* The logo candidates see; clicking it sets or changes it. */}
@@ -89,7 +95,11 @@ export function CompanyHeader({
             )
           )}
         </div>
-        {action}
+        {action && (
+          <div className="max-sm:my-4 max-sm:basis-full max-sm:*:w-full">
+            {action}
+          </div>
+        )}
       </div>
       <CompanyNav companyId={companyId} current={current} />
     </div>

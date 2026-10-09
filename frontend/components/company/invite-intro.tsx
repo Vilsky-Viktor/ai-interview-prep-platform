@@ -33,9 +33,9 @@ export function InviteIntro({
 
   const header = (
     <div className="space-y-4">
-      {/* The logo, with who invited them on its right, centered together. */}
+      {/* The logo, with who invited them on its right (under it, on phones), centered together. */}
       {company && (
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-4 max-sm:flex-col">
           {logoUrl && (
             <CompanyLogo
               url={logoUrl}
@@ -46,7 +46,7 @@ export function InviteIntro({
           <p
             className={cn(
               "text-base text-muted-foreground",
-              logoUrl && "text-start"
+              logoUrl && "text-start max-sm:text-center"
             )}
           >
             {t.rich("invitedYou", {
@@ -86,10 +86,11 @@ export function InviteIntro({
     )
   }
 
-  // The test and its start on the left, the rules on the right; stacked on phones.
+  // The test and its start on the left, the rules on the right; stacked on phones, the start
+  // after the rules.
   return (
-    <div className="grid w-full items-center gap-10 md:grid-cols-2 md:gap-16">
-      <div className="space-y-8 text-center">
+    <div className="grid w-full items-center gap-10 max-md:text-center md:grid-cols-2 md:gap-16">
+      <div className="space-y-8 text-center max-md:contents">
         {header}
         <p className="text-base text-muted-foreground">
           {t("timePerQuestion")}
@@ -100,10 +101,11 @@ export function InviteIntro({
             {t("secondsUnit")}
           </span>
         </p>
-        {action}
+        <div className="max-md:order-last">{action}</div>
       </div>
-      {/* The rules in a gray card, numbered in the brand color. */}
-      <ol className="space-y-4 rounded-2xl bg-muted p-8 text-base text-muted-foreground sm:p-10">
+      {/* The rules in a gray card, numbered in the brand color; on phones it spans the screen,
+          with square corners. */}
+      <ol className="-mx-6 space-y-4 bg-muted p-8 text-start text-base text-muted-foreground sm:mx-0 sm:rounded-2xl sm:p-10">
         {[
           t("pickOne"),
           t("changePick"),

@@ -65,7 +65,7 @@ export default async function InterviewsPage({
         current="interviews"
         canEdit={company.can_edit}
         action={
-          <div className="flex shrink-0 items-center gap-6">
+          <div className="flex shrink-0 items-center gap-6 max-sm:flex-col max-sm:items-stretch max-sm:gap-3">
             {credits != null && catalog && (
               <CreditsPanel
                 companyId={companyId}
@@ -78,7 +78,9 @@ export default async function InterviewsPage({
             )}
             {company.can_edit && (
               <Button
-                render={<Link href={`/companies/${companyId}/interviews/new`} />}
+                render={
+                  <Link href={`/companies/${companyId}/interviews/new`} />
+                }
                 nativeButton={false}
                 className="h-12 px-6 text-base"
               >

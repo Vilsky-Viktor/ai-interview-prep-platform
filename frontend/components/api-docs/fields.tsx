@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server"
 
 import { refName } from "@/lib/openapi"
 import type { Field } from "@/types/openapi"
+import { LIST_BOX } from "@/constants/lists"
 
 /** Fields in one list like the site's others: each name, its type (an object's links to it),
  * whether it's required and what it is. */
@@ -9,7 +10,7 @@ export async function Fields({ fields }: { fields: Field[] }) {
   const t = await getTranslations("apiDocs")
 
   return (
-    <ul className="divide-y rounded-2xl border">
+    <ul className={LIST_BOX}>
       {fields.map((field) => (
         <li key={field.name} className="space-y-1 px-5 py-4">
           <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">

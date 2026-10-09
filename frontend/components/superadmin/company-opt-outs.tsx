@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { apiErrorMessage } from "@/lib/api"
 import { setCompanyEmails } from "@/lib/superadmin-emails"
 import type { CandidateOptOuts } from "@/types/superadmin"
+import { LIST_BOX } from "@/constants/lists"
 
 type Company = CandidateOptOuts["companies"][number]
 
@@ -58,7 +59,7 @@ export function CompanyOptOuts({
       {companies.length === 0 ? (
         <p className="text-muted-foreground">{t("noCompanies")}</p>
       ) : (
-        <div className="divide-y rounded-2xl border">
+        <div className={LIST_BOX}>
           {companies.map((company) => {
             const stopping = company.stopped || company.stopped_reminders > 0
 

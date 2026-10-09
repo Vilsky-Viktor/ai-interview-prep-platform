@@ -16,6 +16,7 @@ import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { formatDay } from "@/lib/format"
 import { byId } from "@/lib/paged-list"
 import type { AdminNewsPost } from "@/types/news"
+import { LIST_BOX } from "@/constants/lists"
 
 /** The news tab's posts, newest first, like the templates list: each row's pencil opens the post
  * to edit, and its bin deletes it after asking. A badge tells whether the post is translated into
@@ -68,10 +69,11 @@ export function NewsAdminList({ initial }: { initial: AdminNewsPost[] }) {
         getKey={byId}
         estimateSize={89}
         onEndReached={loadMore}
-        className="divide-y rounded-2xl border"
+        className={LIST_BOX}
         renderItem={(post) => (
-          <div className="flex items-center gap-6 p-6">
-            <div className="min-w-0 flex-1 space-y-1">
+          // On phones the status and buttons take the line under the title.
+          <div className="flex items-center gap-6 p-6 max-sm:flex-wrap max-sm:gap-y-3">
+            <div className="min-w-0 flex-1 space-y-1 max-sm:basis-full">
               <span className="block text-lg font-medium break-words sm:truncate">
                 {post.title}
               </span>
@@ -87,7 +89,7 @@ export function NewsAdminList({ initial }: { initial: AdminNewsPost[] }) {
             >
               {post.translated ? t("translated") : t("translating")}
             </Badge>
-            <div className="flex shrink-0 items-center">
+            <div className="flex shrink-0 items-center max-sm:ms-auto max-sm:-me-3">
               <Button
                 variant="ghost"
                 size="icon"

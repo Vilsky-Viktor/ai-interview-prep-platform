@@ -18,6 +18,7 @@ import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { byId } from "@/lib/paged-list"
 import type { Company } from "@/types/company"
+import { LIST_BOX } from "@/constants/lists"
 
 const PATH = "/companies/companies"
 
@@ -49,23 +50,23 @@ export function CompanyList({
       getKey={byId}
       estimateSize={93}
       onEndReached={loadMore}
-      className="divide-y overflow-hidden rounded-2xl border"
+      className={`${LIST_BOX} overflow-hidden`}
       renderItem={(company) => (
         // One hover surface: the link stretches over the whole row, Remove sits on top of it.
-        <div className="relative flex items-center gap-2 pe-3 transition-colors hover:bg-muted/50">
+        <div className="relative flex items-center gap-2 pe-3 transition-colors hover:bg-muted/50 active:bg-muted/50">
           <Link
             href={
               templateId
                 ? `/companies/${company.id}/templates/${templateId}`
                 : `/companies/${company.id}/interviews`
             }
-            className="flex min-w-0 flex-1 items-center justify-between gap-4 py-8 after:absolute after:inset-0"
+            className="flex min-w-0 flex-1 items-center justify-between gap-4 py-8 after:absolute after:inset-0 max-sm:ps-6"
           >
             <span className="flex min-w-0 items-center gap-2">
               {/* The logo, or the first letter, as in the company's header: a square the
                   row's full height (32px padding twice, plus the name's line), from its
-                  left border. */}
-              <span className="-my-8 me-4 flex size-23 shrink-0 items-center justify-center overflow-hidden bg-muted">
+                  left border. Phones show only the name. */}
+              <span className="-my-8 me-4 flex size-23 shrink-0 items-center justify-center overflow-hidden bg-muted max-sm:hidden">
                 {company.logo_url ? (
                   <CompanyLogo
                     url={company.logo_url}
@@ -111,7 +112,7 @@ export function CompanyList({
                 <TooltipTrigger
                   render={
                     <span
-                      className="relative z-10 flex items-center gap-1.5 text-sm text-muted-foreground tabular-nums"
+                      className="relative z-10 flex items-center gap-1.5 text-sm text-muted-foreground tabular-nums max-sm:hidden"
                       aria-label={t("interviewCount", {
                         count: company.interview_count,
                       })}

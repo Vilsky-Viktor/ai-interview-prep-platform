@@ -62,19 +62,20 @@ export function QuestionRow({
   const canViewReports = Boolean(reportsPath)
 
   return (
-    // Columns: the question, then feedback and actions; reports open in a row below.
-    <div className="grid grid-cols-[1fr_auto]">
+    // Columns: the question, then feedback and actions (on phones, centered on the line under
+    // it); reports open in a row below.
+    <div className="grid grid-cols-[1fr_auto] max-sm:grid-cols-1">
       <div
         className={cn(
-          "min-w-0 px-5 py-5 font-light",
+          "min-w-0 px-5 py-5 font-light max-sm:pt-7",
           regenerating && "opacity-50"
         )}
       >
         <QuestionText text={question.text} />
         <AnswerOptions options={question.options} className="mt-3" />
       </div>
-      <div className="self-center py-5 ps-5 pe-6 text-sm whitespace-nowrap text-muted-foreground tabular-nums">
-        <span className="flex flex-col items-end gap-3">
+      <div className="self-center py-5 ps-5 pe-6 text-sm whitespace-nowrap text-muted-foreground tabular-nums max-sm:px-5 max-sm:pt-0 max-sm:pb-7">
+        <span className="flex flex-col items-end gap-3 max-sm:items-center">
           <span className="flex items-center gap-4">
             <Tooltip>
               <TooltipTrigger
@@ -127,29 +128,32 @@ export function QuestionRow({
               </Tooltip>
             )}
           </span>
-          {canRegenerate && (
-            <Button variant="outline" disabled={busy} onClick={onRegenerate}>
-              <RefreshCwIcon
-                data-icon="inline-start"
-                className={cn(regenerating && "animate-spin")}
-              />
-              {regenerating ? t("regenerating") : t("regenerate")}
-            </Button>
-          )}
-          {wrongPath && (
-            <Button
-              variant="outline"
-              disabled={busy || markedWrong}
-              onClick={markWrong}
-            >
-              <CircleAlertIcon data-icon="inline-start" />
-              {markedWrong ? t("checking") : t("wrongAnswer")}
-            </Button>
-          )}
+          {/* Under each other, beside the question; on one line, on phones. */}
+          <span className="flex flex-col items-end gap-3 max-sm:flex-row">
+            {canRegenerate && (
+              <Button variant="outline" disabled={busy} onClick={onRegenerate}>
+                <RefreshCwIcon
+                  data-icon="inline-start"
+                  className={cn(regenerating && "animate-spin")}
+                />
+                {regenerating ? t("regenerating") : t("regenerate")}
+              </Button>
+            )}
+            {wrongPath && (
+              <Button
+                variant="outline"
+                disabled={busy || markedWrong}
+                onClick={markWrong}
+              >
+                <CircleAlertIcon data-icon="inline-start" />
+                {markedWrong ? t("checking") : t("wrongAnswer")}
+              </Button>
+            )}
+          </span>
         </span>
       </div>
       {canViewReports && showReports && (
-        <div className="col-span-2 bg-muted/40 py-5 ps-5 pe-6">
+        <div className="col-span-full bg-muted/40 py-5 ps-5 pe-6">
           <QuestionReports path={`${reportsPath}/${question.id}/reports`} />
         </div>
       )}

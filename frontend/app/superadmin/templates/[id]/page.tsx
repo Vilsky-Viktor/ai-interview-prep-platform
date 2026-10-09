@@ -11,6 +11,7 @@ import { TopicQuestions } from "@/components/questions/topic-questions"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Template } from "@/types/superadmin"
+import { LIST_BOX } from "@/constants/lists"
 
 export const generateMetadata = () => translatedTitle("superadmin", "templates")
 
@@ -48,17 +49,18 @@ export default async function TemplatePage({
         }
       />
 
-      <ul className="divide-y rounded-2xl border">
+      <ul className={LIST_BOX}>
         {template.topics.map((topic) => (
+          // On phones the questions' button and count go under the subtopics, centered.
           <li
             key={topic.id}
-            className="flex items-center justify-between gap-6 p-4 sm:p-6"
+            className="flex items-center justify-between gap-6 p-4 max-sm:flex-col max-sm:items-stretch max-sm:px-6 max-sm:py-8 sm:p-6"
           >
             <span className="max-w-3xl min-w-0 space-y-3">
               <span className="block text-lg font-medium">{topic.title}</span>
               <SubtopicList subtopics={topic.subtopics} />
             </span>
-            <span className="flex shrink-0 flex-col items-center gap-3">
+            <span className="flex shrink-0 flex-col items-center gap-3 max-sm:flex-row max-sm:flex-wrap max-sm:justify-center max-sm:gap-4">
               <TopicQuestions
                 title={topic.title}
                 path={`${base}/topics/${topic.id}/questions`}

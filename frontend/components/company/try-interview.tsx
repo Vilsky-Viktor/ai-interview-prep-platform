@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "cn"
 import { PlayIcon } from "lucide-react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
@@ -11,10 +12,12 @@ export function TryInterview({
   companyId,
   interviewId,
   title,
+  className,
 }: {
   companyId: string
   interviewId: string
   title: string
+  className?: string
 }) {
   const t = useTranslations("interviews")
 
@@ -22,7 +25,10 @@ export function TryInterview({
     <Button
       variant="ghost"
       size="icon"
-      className="size-12 shrink-0 text-muted-foreground hover:text-foreground"
+      className={cn(
+        "size-12 shrink-0 text-muted-foreground hover:text-foreground",
+        className
+      )}
       aria-label={t("tryLabel", { title })}
       tooltip={t("try")}
       render={

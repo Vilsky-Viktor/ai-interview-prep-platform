@@ -6,6 +6,7 @@ import { CreateDialog, RemoveButton } from "@/components/company/api-dialogs"
 import { MAX_KEY_NAME, MAX_WEBHOOK_URL } from "@/constants/api"
 import { formatDate } from "@/lib/format"
 import type { ApiKey, ApiWebhook } from "@/types/api-access"
+import { LIST_BOX } from "@/constants/lists"
 
 /** "New key", in the title row while the keys tab is open: a name and when it expires, then
  * the key itself, shown this once. */
@@ -206,7 +207,7 @@ function Section({
     <section className="space-y-6">
       <p className="text-base text-muted-foreground">{text}</p>
       {rows.length ? (
-        <ul className="divide-y rounded-2xl border">{rows}</ul>
+        <ul className={LIST_BOX}>{rows}</ul>
       ) : (
         <p className="rounded-2xl border p-6 text-muted-foreground">{empty}</p>
       )}

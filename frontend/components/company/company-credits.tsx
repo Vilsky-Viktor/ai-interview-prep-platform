@@ -36,7 +36,7 @@ export function CompanyCredits({
   const { shown, rising } = useCountUp(credits)
 
   const card = (
-    <span className="text-base text-muted-foreground">
+    <span className="text-base text-muted-foreground max-sm:text-lg">
       <Tooltip disabled={!low}>
         <TooltipTrigger
           render={
@@ -58,6 +58,7 @@ export function CompanyCredits({
   )
 
   // A small card in the page header: the balance (amber when it runs low); it opens the top-up.
+  // On phones it spans the page, centered, in larger type.
   return (
     <>
       {canEdit ? (
@@ -68,7 +69,7 @@ export function CompanyCredits({
           card={card}
         />
       ) : (
-        <span className="rounded-xl border px-4 py-2 text-end whitespace-nowrap">
+        <span className="rounded-xl border px-4 py-2 text-end whitespace-nowrap max-sm:text-center">
           {card}
         </span>
       )}

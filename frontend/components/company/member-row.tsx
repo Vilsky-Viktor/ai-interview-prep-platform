@@ -49,14 +49,18 @@ export function MemberRow({
 
   return (
     <div className="space-y-3 p-6">
-      <div className="flex items-center justify-between gap-4">
-        <span>
-          <span className="block text-lg font-medium">{member.email}</span>
+      {/* On phones the role, or choosing it and removing the member, take their own line under
+          the email. */}
+      <div className="flex items-center justify-between gap-4 max-sm:flex-wrap max-sm:gap-3">
+        <span className="min-w-0 max-sm:basis-full">
+          <span className="block text-lg font-medium break-words">
+            {member.email}
+          </span>
           <span className="text-sm text-muted-foreground">
             {member.joined ? t("joined") : t("invited")}
           </span>
         </span>
-        <span className="flex items-center gap-2">
+        <span className="flex items-center gap-2 max-sm:basis-full">
           {/* The owner manages every row but their own: its role and removing it. */}
           {member.removable ? (
             <RolePicker

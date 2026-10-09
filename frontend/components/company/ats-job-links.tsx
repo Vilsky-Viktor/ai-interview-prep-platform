@@ -18,6 +18,7 @@ import {
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { AtsProvider } from "@/constants/ats"
 import type { AtsJobLink, Interview } from "@/types/company"
+import { LIST_BOX } from "@/constants/lists"
 
 /** The ATS's jobs linked to the company's interviews, on the ATS's own page, with "Link a job"
  * for owners and admins. */
@@ -58,7 +59,7 @@ export function AtsJobLinks({
           {t("noLinks")}
         </p>
       ) : (
-        <ul className="divide-y rounded-2xl border">
+        <ul className={LIST_BOX}>
           {links.map((link) => (
             <LinkRow
               key={link.id}

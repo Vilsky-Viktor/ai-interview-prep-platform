@@ -31,14 +31,14 @@ export function AtsConnectionRow({
   canEdit: boolean
 }) {
   return (
-    <li className="relative flex items-center justify-between gap-6 py-6 pe-4 transition-colors hover:bg-muted/50 sm:pe-6">
+    <li className="relative flex items-center justify-between gap-6 py-6 pe-4 transition-colors hover:bg-muted/50 active:bg-muted/50 max-sm:grid max-sm:grid-cols-[4.5rem_minmax(0,1fr)] max-sm:gap-x-4 max-sm:gap-y-3 sm:pe-6">
       <Link
         href={`/companies/${companyId}/integrations/${provider.id}`}
-        className="flex min-w-0 items-center gap-4 after:absolute after:inset-0"
+        className="flex min-w-0 items-center gap-4 after:absolute after:inset-0 max-sm:contents"
       >
         {/* The ATS's own icon (public/ats), as the companies list shows a logo: a square the
             row's full height (24px padding twice, plus two lines), from its left border. */}
-        <span className="-my-6 me-2 flex size-[6.25rem] shrink-0 items-center justify-center overflow-hidden bg-muted">
+        <span className="-my-6 me-2 flex size-[6.25rem] shrink-0 items-center justify-center overflow-hidden bg-muted max-sm:row-span-2 max-sm:me-0 max-sm:h-auto max-sm:w-auto max-sm:self-stretch">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={provider.logo}
@@ -58,7 +58,9 @@ export function AtsConnectionRow({
           )}
         </span>
       </Link>
-      <span className="relative z-10">
+      {/* On phones the logo spans the row, with the name and then these buttons beside it,
+          sharing their line equally (each on its own line where both don't fit). */}
+      <span className="relative z-10 max-sm:col-start-2 max-sm:*:flex max-sm:*:w-full max-sm:*:flex-wrap max-sm:[&>*>*]:flex-1 max-sm:[&>*>*]:px-3">
         <AtsActions
           companyId={companyId}
           provider={provider}

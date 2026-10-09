@@ -16,6 +16,7 @@ import { usePagedList } from "@/hooks/use-paged-list"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { formatDate } from "@/lib/format"
 import type { QualityRow } from "@/types/superadmin"
+import { LIST_BOX } from "@/constants/lists"
 
 // A row is a question as flagged now, or one revision of it as replaced.
 function rowKey(row: QualityRow) {
@@ -87,10 +88,12 @@ export function QualityList({
       getKey={rowKey}
       estimateSize={220}
       onEndReached={loadMore}
-      className="divide-y rounded-2xl border"
+      className={LIST_BOX}
       renderItem={(row) => (
         <div>
-          <div className="flex items-center gap-6 p-6">
+          {/* On phones the flag, numbers and buttons take the line under the question: the
+              numbers on the left, the buttons under each other on the right. */}
+          <div className="flex items-center gap-6 p-6 max-sm:flex-wrap max-sm:py-8">
             <div className="min-w-0 flex-1 space-y-4">
               {/* The question, where it is and when just under it, then its options. */}
               <div className="space-y-1">
@@ -108,7 +111,7 @@ export function QualityList({
               </div>
               <AnswerOptions options={row.options} className="space-y-2" />
             </div>
-            <div className="flex shrink-0 flex-col items-end gap-2 text-sm text-muted-foreground tabular-nums">
+            <div className="flex shrink-0 flex-col items-end gap-2 text-sm text-muted-foreground tabular-nums max-sm:grid max-sm:basis-full max-sm:grid-cols-[1fr_auto] max-sm:items-start max-sm:justify-items-start">
               {row.flag && (
                 <Badge
                   variant="outline"
@@ -136,13 +139,16 @@ export function QualityList({
                 <span>{t("reports", { count: row.reports })}</span>
               )}
               {row.new_text && (
-                <ReplacementDialog
-                  text={row.new_text}
-                  options={row.new_options ?? []}
-                />
+                // On phones on the right of the numbers, like the flagged tab's buttons.
+                <span className="max-sm:col-start-2 max-sm:row-span-4 max-sm:row-start-1 max-sm:justify-self-end">
+                  <ReplacementDialog
+                    text={row.new_text}
+                    options={row.new_options ?? []}
+                  />
+                </span>
               )}
               {row.actionable && (
-                <span className="flex gap-2 pt-1">
+                <span className="flex gap-2 pt-1 max-sm:col-start-2 max-sm:row-span-4 max-sm:row-start-1 max-sm:flex-col-reverse max-sm:items-end max-sm:gap-3 max-sm:justify-self-end max-sm:pt-0">
                   <Button
                     variant="ghost"
                     size="sm"
@@ -154,7 +160,7 @@ export function QualityList({
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-8 px-3 text-sm"
+                    className="h-8 px-3 text-sm max-sm:h-10 max-sm:px-5 max-sm:text-base"
                     disabled={sent.includes(row.question_id)}
                     onClick={() => act(row, "fix")}
                   >

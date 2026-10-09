@@ -28,7 +28,10 @@ export function SessionView({
   const interviews = useTranslations("interviews")
   const common = useTranslations("common")
   const back = testHref && (
-    <BackLink href={testHref.slice(0, testHref.lastIndexOf("/"))}>
+    <BackLink
+      href={testHref.slice(0, testHref.lastIndexOf("/"))}
+      className="max-sm:mb-0"
+    >
       {interviews("title")}
     </BackLink>
   )

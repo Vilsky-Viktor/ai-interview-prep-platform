@@ -9,6 +9,7 @@ import { DIGEST_KINDS, OTHER_EMAILS } from "@/constants/emails"
 import { apiErrorMessage } from "@/lib/api"
 import { saveEmailPreferences } from "@/lib/emails"
 import type { EmailChanges, EmailPreferences } from "@/types/emails"
+import { LIST_BOX } from "@/constants/lists"
 
 // The size of the Slack kinds' and the interview settings' checkboxes.
 const BIG = "size-7 shrink-0 [&_[data-slot=checkbox-indicator]>svg]:size-5"
@@ -61,7 +62,7 @@ export function EmailPreferencesSetting({
 
   return (
     <div className="space-y-4">
-      <div className="divide-y rounded-2xl border">
+      <div className={LIST_BOX}>
         <div className="space-y-4 p-4 sm:p-6">
           {block(
             // Turns every kind on or off at once; a dash when only some are on.

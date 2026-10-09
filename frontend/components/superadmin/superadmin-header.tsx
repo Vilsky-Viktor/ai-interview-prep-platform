@@ -26,11 +26,16 @@ export function SuperadminHeader({
 
   return (
     <div className="space-y-4">
-      <div className="flex min-h-14 items-center">
-        <h1 className="min-w-0 flex-1 font-heading text-3xl font-medium tracking-tight">
+      {/* On phones the action takes its own line under the title, at full width. */}
+      <div className="flex min-h-14 items-center max-sm:flex-wrap">
+        <h1 className="min-w-0 flex-1 font-heading text-3xl font-medium tracking-tight max-sm:basis-full">
           {t("zone")}
         </h1>
-        {action}
+        {action && (
+          <div className="max-sm:my-4 max-sm:basis-full max-sm:*:w-full">
+            {action}
+          </div>
+        )}
       </div>
       <TabNav
         items={[

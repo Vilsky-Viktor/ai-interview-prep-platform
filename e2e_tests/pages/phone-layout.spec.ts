@@ -151,6 +151,12 @@ test("a dialog spans a phone's width", async ({ page }, info) => {
     expect(Math.round(box.x)).toBe(0);
     expect(Math.round(box.width)).toBe(page.viewportSize()!.width);
     await expect(dialog).toHaveCSS("border-top-left-radius", "0px");
+    // The help fills the screen, and Close is in sight without scrolling, and after it.
+    expect(Math.round(box.height)).toBe(page.viewportSize()!.height);
+    const close = dialog.getByRole("button", { name: "Close" });
+    await expect(close).toBeInViewport();
+    await dialog.evaluate((element) => element.scrollBy(0, 2_000));
+    await expect(close).toBeInViewport();
   } else {
     expect(box.x).toBeGreaterThan(0);
     await expect(dialog).not.toHaveCSS("border-top-left-radius", "0px");
@@ -169,4 +175,66 @@ test("the send shortcut hint shows only without a touch screen", async ({
   } else {
     await expect(hint).toBeVisible();
   }
+});
+
+// On phones the home page's box to start in and the price lists reach the screen's edges.
+test("the home page's box and the prices span a phone's width", async ({
+  page,
+}, info) => {
+  test.skip(!isPhone(info.project.name), "phones only");
+  test.setTimeout(120_000);
+  const width = page.viewportSize()!.width;
+
+  await page.goto("/");
+  const start = page.locator("main form").first();
+  const startBox = (await start.boundingBox())!;
+  expect(Math.round(startBox.x)).toBe(0);
+  expect(Math.round(startBox.width)).toBe(width);
+
+  await page.goto("/pricing");
+  const prices = (await page.locator("main ul").first().boundingBox())!;
+  expect(Math.round(prices.x)).toBe(0);
+  expect(Math.round(prices.width)).toBe(width);
+});
+
+// Opening the home page doesn't put the cursor in its box: on a phone the keyboard would cover
+// the page.
+test("the home page's box isn't focused on load", async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.goto("/");
+  await page.waitForTimeout(1_000);
+  await expect(page.locator("main textarea").first()).not.toBeFocused();
+});
+
+// With reduced motion the API's example shows whole, its request and its answer.
+test("the API example shows whole with reduced motion", async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const example = page.locator("pre").first();
+  await expect(example).toContainText("POST /api/v1/interviews");
+  await page.waitForTimeout(1_500);
+  await expect(example).toContainText("POST /api/v1/interviews");
+});
+
+// On phones a test's practice page has its level and language under the title, then its start.
+test("a practice page starts under its tags on a phone", async ({
+  page,
+}, info) => {
+  test.skip(!isPhone(info.project.name), "phones only");
+  test.setTimeout(120_000);
+  await page.goto("/practice");
+  const href = await page
+    .locator("main a[href^='/practice/']")
+    .first()
+    .getAttribute("href");
+  await page.goto(href!);
+  const tags = (await page
+    .locator("main [data-slot=badge]")
+    .first()
+    .boundingBox())!;
+  const start = (await page
+    .getByRole("button", { name: "Start practice" })
+    .boundingBox())!;
+  expect(start.y).toBeGreaterThan(tags.y + tags.height);
 });

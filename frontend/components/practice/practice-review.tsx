@@ -6,6 +6,7 @@ import { QuestionActions } from "@/components/questions/question-actions"
 import { QuestionText } from "@/components/questions/question-text"
 import { VirtualList } from "@/components/virtual-list"
 import type { ReviewItem } from "@/types/round"
+import { LIST_BOX } from "@/constants/lists"
 
 /** A finished practice round's questions, laid out like a scorecard: each with right or wrong,
  * every option with the right one marked, and the talent's own pick. Under each, the talent
@@ -23,13 +24,14 @@ export function PracticeReview({
       items={items}
       getKey={(item) => item.question_id}
       estimateSize={200}
-      className="divide-y rounded-2xl border"
+      className={LIST_BOX}
       renderItem={(item) => (
-        <div className="space-y-4 p-6">
-          <div className="flex items-start justify-between gap-8">
+        <div className="space-y-4 p-6 max-sm:py-8">
+          {/* On phones whether it was right sits above the question, centered. */}
+          <div className="flex items-start justify-between gap-8 max-sm:flex-col-reverse max-sm:items-center max-sm:gap-4">
             <QuestionText
               text={item.text}
-              className="min-w-0 text-lg font-light"
+              className="min-w-0 text-lg font-light max-sm:self-stretch"
             />
             <ScorecardMark item={item} />
           </div>
@@ -42,9 +44,11 @@ export function PracticeReview({
             picked={item.answer?.option_index ?? null}
             className="text-base"
           />
-          <QuestionActions
-            basePath={`/rounds/sessions/${sessionId}/questions/${item.question_id}`}
-          />
+          <div className="max-sm:pt-4">
+            <QuestionActions
+              basePath={`/rounds/sessions/${sessionId}/questions/${item.question_id}`}
+            />
+          </div>
         </div>
       )}
     />

@@ -47,7 +47,7 @@ export function CandidateRow({
     <Link
       href={href}
       onClick={onClick}
-      className="@container block transition-colors hover:bg-muted/50"
+      className="@container block transition-colors hover:bg-muted/50 active:bg-muted/50"
     >
       <span className="flex flex-col gap-4 p-4 @xl:flex-row @xl:items-center @xl:justify-between @xl:p-6">
         <span className="min-w-0 space-y-1">
@@ -70,7 +70,8 @@ export function CandidateRow({
             <CandidateSignals candidate={candidate} />
           </span>
         </span>
-        <span className="flex shrink-0 items-center gap-6 @xl:gap-10">
+        {/* Progress, grade and status: centered on their own line in a narrow row. */}
+        <span className="flex shrink-0 items-center justify-center gap-6 @xl:justify-normal @xl:gap-10">
           <span className="w-20 text-center @xl:w-24">
             <span className="block text-2xl font-light tabular-nums">
               {candidate.progress == null ? "—" : `${candidate.progress}%`}

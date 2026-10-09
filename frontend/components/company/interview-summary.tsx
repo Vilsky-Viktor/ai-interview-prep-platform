@@ -37,7 +37,10 @@ export function InterviewSummary({
           </time>
         </span>
       </span>
-      <span className="flex shrink-0 items-center gap-6">
+      <span
+        data-slot="interview-stats"
+        className="flex shrink-0 items-center gap-6"
+      >
         {status && <InterviewStatus status={status} />}
         <Tooltip>
           {/* Above the row's link overlay, so hovering it shows the tooltip. */}

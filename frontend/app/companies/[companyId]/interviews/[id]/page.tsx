@@ -20,7 +20,7 @@ import { TopicQuestionLimit } from "@/components/questions/topic-question-limit"
 import { TopicQuestions } from "@/components/questions/topic-questions"
 import { Button } from "@/components/ui/button"
 import { CANDIDATE_SORTS } from "@/constants/interviews"
-import { PAGE_SIZE } from "@/constants/lists"
+import { PAGE_SIZE, LIST_BOX } from "@/constants/lists"
 import { INTERVIEW_TAB_HELP } from "@/constants/page-help"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
@@ -116,9 +116,8 @@ export default async function InterviewPage({
               {t("title")}
             </BackLink>
           }
-          tags={ready && <InterviewStatus status={interview.status} />}
           title={
-            <div className="flex items-start justify-between gap-4">
+            <div className="flex items-start justify-between gap-4 max-sm:flex-wrap">
               <div className="min-w-0 flex-1">
                 {interview.title ? (
                   <EditableTitle
@@ -133,11 +132,19 @@ export default async function InterviewPage({
                       : t("generating")}
                   </h1>
                 )}
+                {/* The status under the title, before the buttons on phones. */}
+                {ready && (
+                  <div className="mt-1 flex">
+                    <InterviewStatus status={interview.status} />
+                  </div>
+                )}
               </div>
               {/* The test's own actions sit on its tab; inviting, on the candidates tab. The
                   buttons overhang the title's line, so the row is as tall as the title on every
-                  tab: switching tabs doesn't move the page. */}
-              <div className="-my-1.5 flex shrink-0 items-center gap-4">
+                  tab: switching tabs doesn't move the page. On phones they take their own line
+                  under the title, centered, with "new candidate(s)" on a line of its own, at
+                  full width. */}
+              <div className="-my-1.5 flex shrink-0 items-center gap-4 max-sm:my-0 max-sm:basis-full max-sm:flex-wrap max-sm:justify-center">
                 {current === "topics" ? (
                   <>
                     {ready && (
@@ -232,11 +239,13 @@ export default async function InterviewPage({
         </div>
       ) : (
         interview.topics.length > 0 && (
-          <ul className="divide-y rounded-2xl border">
+          <ul className={LIST_BOX}>
             {interview.topics.map((topic) => (
+              // On phones the questions' button and their number take the line under the
+              // topic.
               <li
                 key={topic.id}
-                className="flex items-center justify-between gap-6 p-4 sm:p-6"
+                className="flex items-center justify-between gap-6 p-4 max-sm:flex-col max-sm:items-stretch max-sm:gap-6 max-sm:px-6 max-sm:py-8 sm:p-6"
               >
                 <span className="max-w-3xl min-w-0 space-y-3">
                   <span className="block text-lg font-medium">
@@ -244,7 +253,7 @@ export default async function InterviewPage({
                   </span>
                   <SubtopicList subtopics={topic.subtopics} />
                 </span>
-                <span className="flex shrink-0 flex-col items-center gap-3">
+                <span className="flex shrink-0 flex-col items-center gap-3 max-sm:flex-row max-sm:flex-wrap">
                   {/* Viewers read the questions; only owners and admins change them. */}
                   <TopicQuestions
                     title={topic.title}

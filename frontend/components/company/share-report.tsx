@@ -80,11 +80,12 @@ export function ShareReport({
     <Dialog open={open} onOpenChange={(next) => !sending && onOpenChange(next)}>
       <DialogContent showCloseButton={false} className="sm:max-w-xl">
         {/* The title on the left; the chat apps at the end of its row. */}
-        <DialogHeader className="flex-row items-center justify-between gap-4">
+        <DialogHeader className="flex-row items-center justify-between gap-4 max-sm:flex-col max-sm:items-stretch">
           <DialogTitle>{t("shareTitle")}</DialogTitle>
-          {/* Chats can't carry the PDF, so they get a text summary. */}
-          <div className="flex items-center gap-1">
-            <span className="me-2 text-sm text-muted-foreground lowercase">
+          {/* Chats can't carry the PDF, so they get a text summary. On phones "or send via" sits
+              above the apps, both centered, the icons a little smaller. */}
+          <div className="flex items-center gap-1 max-sm:flex-wrap max-sm:justify-center">
+            <span className="me-2 text-sm text-muted-foreground lowercase max-sm:me-0 max-sm:basis-full max-sm:text-center">
               {t("orSummary")}
             </span>
             {CHAT_APPS.map(({ name, Icon, link }) => (
@@ -103,7 +104,7 @@ export function ShareReport({
                 }
                 nativeButton={false}
               >
-                <Icon className="size-8" />
+                <Icon className="size-8 max-sm:size-7" />
               </Button>
             ))}
           </div>

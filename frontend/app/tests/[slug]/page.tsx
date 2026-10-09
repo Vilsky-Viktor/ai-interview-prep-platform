@@ -19,6 +19,7 @@ import { pageMetadata, siteUrl, urlLocale } from "@/lib/site"
 import { breadcrumbData } from "@/lib/structured-data"
 import type { FaqItem } from "@/types/help"
 import type { SampleQuestion, Template } from "@/types/superadmin"
+import { LIST_BOX } from "@/constants/lists"
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -136,10 +137,13 @@ export default async function RoleTestPage({ params }: Params) {
         <ul
           lang={template.language}
           dir={textDirection(template.language)}
-          className="divide-y rounded-2xl border"
+          className={LIST_BOX}
         >
           {template.topics.map((topic) => (
-            <li key={topic.id} className="space-y-3 p-4 sm:p-6">
+            <li
+              key={topic.id}
+              className="space-y-3 p-4 max-sm:px-6 max-sm:py-8 sm:p-6"
+            >
               <span className="block text-lg font-medium">{topic.title}</span>
               <SubtopicList subtopics={topic.subtopics} />
             </li>

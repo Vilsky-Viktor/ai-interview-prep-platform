@@ -53,15 +53,18 @@ export default async function PracticeRoundPage({
           </BackLink>
         }
         title={
-          <div className="flex items-start justify-between gap-4">
+          // On phones the actions take their own line under the title, centered.
+          <div className="flex items-start justify-between gap-4 max-sm:flex-wrap">
             <h1 className="min-w-0 flex-1 font-heading text-3xl font-medium tracking-tight text-balance normal-case">
               {round.title ?? t("title")}
             </h1>
             {round.finished && (
-              <PracticeActions
-                templateId={round.template_id}
-                startLabel={t("again")}
-              />
+              <div className="max-sm:flex max-sm:basis-full max-sm:justify-center max-sm:py-4">
+                <PracticeActions
+                  templateId={round.template_id}
+                  startLabel={t("again")}
+                />
+              </div>
             )}
           </div>
         }
@@ -96,7 +99,8 @@ export default async function PracticeRoundPage({
           </GradeCard>
           {round.topics.map((topic) => (
             <section key={topic.title} className="space-y-4">
-              <div className="flex items-center justify-between gap-4">
+              {/* On phones the topic, then its grade under it, centered. */}
+              <div className="flex items-center justify-between gap-4 max-sm:flex-col max-sm:text-center">
                 <h2 className="font-heading text-2xl font-medium normal-case">
                   {topic.title}
                 </h2>

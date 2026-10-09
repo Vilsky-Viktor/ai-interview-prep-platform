@@ -4,6 +4,7 @@ import { MemberRow } from "@/components/company/member-row"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import type { CompanyMember } from "@/types/company"
+import { LIST_BOX } from "@/constants/lists"
 
 function byEmail(member: CompanyMember) {
   return member.email
@@ -29,7 +30,7 @@ export function MemberList({
       getKey={byEmail}
       estimateSize={89}
       onEndReached={loadMore}
-      className="divide-y rounded-2xl border"
+      className={LIST_BOX}
       renderItem={(member) => (
         <MemberRow
           companyId={companyId}

@@ -11,6 +11,7 @@ import { formatDate } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Company, CompanyReferral } from "@/types/company"
+import { LIST_BOX } from "@/constants/lists"
 
 export const generateMetadata = () => translatedTitle("company", "referrals")
 
@@ -59,8 +60,9 @@ export default async function ReferralsPage({
       />
       {referral && (
         <>
-          {/* What a referral earns, and the link to share. */}
-          <div className="space-y-4 rounded-2xl border p-5">
+          {/* What a referral earns, and the link to share; on phones the card spans the screen,
+              with square corners. */}
+          <div className="-mx-6 space-y-4 border-y p-5 sm:mx-0 sm:rounded-2xl sm:border">
             <div className="flex items-center gap-4 text-base">
               <GiftIcon aria-hidden className="size-7 shrink-0 text-primary" />
               <p className="text-muted-foreground">
@@ -74,7 +76,7 @@ export default async function ReferralsPage({
               {referralText("rewarded", { count: 0 })}
             </p>
           ) : (
-            <ul className="divide-y rounded-2xl border">
+            <ul className={LIST_BOX}>
               {referral.rewards.map((reward, index) => (
                 <li
                   key={index}

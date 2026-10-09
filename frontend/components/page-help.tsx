@@ -60,9 +60,10 @@ export function PageHelp({
         </TooltipTrigger>
         <TooltipContent>{label}</TooltipContent>
       </Tooltip>
+      {/* On phones it fills the screen: the guide scrolls, Close stays at the bottom. */}
       <DialogContent
         showCloseButton={false}
-        className="max-h-[90dvh] gap-6 overflow-y-auto sm:max-w-lg"
+        className="max-h-[90dvh] gap-6 overflow-y-auto max-sm:h-dvh max-sm:max-h-dvh sm:max-w-lg"
       >
         <DialogHeader>
           <DialogTitle>{t(`${page}.title`)}</DialogTitle>

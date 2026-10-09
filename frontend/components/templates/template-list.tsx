@@ -18,6 +18,7 @@ import { byId } from "@/lib/paged-list"
 import { formatDate } from "@/lib/format"
 import { localizedPath } from "@/lib/locale-path"
 import type { TemplateSummary } from "@/types/superadmin"
+import { LIST_BOX } from "@/constants/lists"
 
 /** The templates at `path`, newest first, a page at a time; `initial` is the server's first
  * page, and `empty` shows when there are none. A row opens the template under `openBase` (by its
@@ -53,7 +54,7 @@ export function TemplateList({
       getKey={byId}
       estimateSize={89}
       onEndReached={loadMore}
-      className="divide-y rounded-2xl border"
+      className={LIST_BOX}
       renderItem={(template) => {
         const row = (
           <>
@@ -101,9 +102,10 @@ export function TemplateList({
 
         const href = `${openBase}/${(bySlug && template.slug) || template.id}`
 
-        // One hover surface: the link stretches over the whole row, "Use template" sits on top.
+        // One hover surface: the link stretches over the whole row, "Use template" sits on top;
+        // on phones it takes its own line, at full width.
         return (
-          <div className="relative flex items-center gap-6 p-6 transition-colors hover:bg-muted/50">
+          <div className="relative flex items-center gap-6 p-6 transition-colors hover:bg-muted/50 active:bg-muted/50 max-sm:flex-wrap max-sm:gap-4">
             <Link
               // On a language's address (/de/tests), a template in that language opens there
               // too; the others have only their English address.
@@ -118,7 +120,7 @@ export function TemplateList({
               {row}
             </Link>
             {companyId && (
-              <div className="relative z-10">
+              <div className="relative z-10 max-sm:basis-full max-sm:*:w-full">
                 <UseTemplate templateId={template.id} companyId={companyId} />
               </div>
             )}

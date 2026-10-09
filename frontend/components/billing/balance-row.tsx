@@ -28,8 +28,8 @@ export function BalanceRow({
   const { shown, rising } = useCountUp(available)
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5">
-      <div className="min-w-0 flex-1 space-y-1">
+    <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5 max-sm:gap-y-5 max-sm:py-7">
+      <div className="min-w-0 flex-1 space-y-1 max-sm:basis-full max-sm:text-center">
         <p className="truncate text-lg font-medium">{name}</p>
         {low && (
           <p className="text-sm text-amber-600 dark:text-amber-400">
@@ -38,7 +38,8 @@ export function BalanceRow({
         )}
         <AutoTopUpSetting catalog={catalog} companyId={companyId} />
       </div>
-      <div className="flex items-center gap-6">
+      {/* On phones the name and, on their own line, the balance and Top up are centered. */}
+      <div className="flex items-center gap-6 max-sm:basis-full max-sm:justify-center">
         <p className="text-end">
           <span
             className={cn(

@@ -14,6 +14,7 @@ import { translatedTitle } from "@/lib/site"
 import type { ApiSettings } from "@/types/api-access"
 import type { AtsIntegrations, Company } from "@/types/company"
 import type { SlackOverview } from "@/types/notifications"
+import { LIST_BOX } from "@/constants/lists"
 
 export const generateMetadata = () => translatedTitle("company", "integrations")
 
@@ -72,7 +73,7 @@ export default async function IntegrationsPage({
           <h2 className="font-heading text-2xl font-medium">
             {t("messagingGroup")}
           </h2>
-          <ul className="divide-y overflow-hidden rounded-2xl border">
+          <ul className={`${LIST_BOX} overflow-hidden`}>
             <SlackRow
               companyId={companyId}
               slack={slack}
@@ -87,7 +88,7 @@ export default async function IntegrationsPage({
           {t("atsGroup")}
         </h2>
         {integrations?.available ? (
-          <ul className="divide-y overflow-hidden rounded-2xl border">
+          <ul className={`${LIST_BOX} overflow-hidden`}>
             {ATS_PROVIDERS.map((provider) => (
               <AtsConnectionRow
                 key={provider.id}
@@ -113,7 +114,7 @@ export default async function IntegrationsPage({
           <h2 className="font-heading text-2xl font-medium normal-case">
             {t("apiGroup")}
           </h2>
-          <ul className="divide-y overflow-hidden rounded-2xl border">
+          <ul className={`${LIST_BOX} overflow-hidden`}>
             <ApiRow companyId={companyId} settings={api} />
           </ul>
         </section>

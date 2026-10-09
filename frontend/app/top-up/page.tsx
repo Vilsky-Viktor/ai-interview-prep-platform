@@ -11,6 +11,7 @@ import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Catalog } from "@/types/billing"
 import type { CompanyBalance } from "@/types/company"
+import { LIST_BOX } from "@/constants/lists"
 
 export const generateMetadata = () => translatedTitle("topUp", "title")
 
@@ -71,7 +72,7 @@ export default async function TopUpPage() {
       {catalog && companies && companies.length > 0 && (
         <section className="space-y-4">
           <SectionTitle title={t("companies")} note={t("companiesNote")} />
-          <div className="divide-y rounded-2xl border">
+          <div className={LIST_BOX}>
             {companies.map((company) => (
               <BalanceRow
                 key={company.id}
