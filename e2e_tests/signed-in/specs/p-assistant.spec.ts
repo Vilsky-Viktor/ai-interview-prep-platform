@@ -129,7 +129,7 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
   await expect(panel.locator("strong", { hasText: "Ann" })).toBeVisible();
   await expect(panel.getByRole("link", { name: /ann@example\.com/ })).toHaveAttribute("href", CANDIDATE_LINK);
   // One link, named by what it opens.
-  await expect(panel.locator("a", { hasText: "open Senior Backend" })).toHaveAttribute("href", "/companies/c/interviews/i");
+  await expect(panel.getByRole("link", { name: "open Senior Backend" })).toHaveAttribute("href", "/companies/c/interviews/i");
   await shot(owner, "answer");
   expect(sent[0]).toMatchObject({
     message: "Who passed?",
@@ -352,7 +352,7 @@ test("an action runs once its card is confirmed, and asking to sign out signs ou
   await shot(owner, "action-card");
   await panel.getByRole("button", { name: "Confirm" }).click();
   await expect(panel.getByText("Done", { exact: true })).toBeVisible();
-  await expect(panel.locator('a[href="/companies/c1/interviews"]')).toBeVisible();
+  await expect(panel.getByRole("link", { name: /interviews/i })).toHaveAttribute("href", "/companies/c1/interviews");
   await expect(panel.getByRole("list").getByText("Acme is ready.")).toBeVisible();
   await expect(panel.getByRole("button", { name: "Confirm" })).toHaveCount(0);
   expect(confirms).toBe(1);

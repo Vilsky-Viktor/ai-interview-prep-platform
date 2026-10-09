@@ -15,7 +15,7 @@ import {
 import { InterviewSummary } from "@/components/company/interview-summary"
 import { LocalizedLink } from "@/components/localized-link"
 import { SignInOptions } from "@/components/sign-in-options"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { PAGE_LABELS } from "@/constants/assistant"
 import { answerParts, linkPage } from "@/lib/assistant"
 import type { AssistantBlock } from "@/types/assistant"
@@ -172,12 +172,11 @@ export function AnswerBlocks({
             const key = (page && PAGE_LABELS[page]) ?? linkPage(href)
 
             return (
-              <Button
+              <LocalizedLink
                 key={href}
-                variant="outline"
-                size="sm"
-                render={<LocalizedLink href={href} onClick={onNavigate} />}
-                nativeButton={false}
+                href={href}
+                onClick={onNavigate}
+                className={buttonVariants({ variant: "outline", size: "sm" })}
               >
                 <span className={label ? "normal-case" : undefined}>
                   {label
@@ -190,7 +189,7 @@ export function AnswerBlocks({
                   data-icon="inline-end"
                   className="rtl:-scale-x-100"
                 />
-              </Button>
+              </LocalizedLink>
             )
           })}
         </div>

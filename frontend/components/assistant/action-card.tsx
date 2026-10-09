@@ -1,10 +1,11 @@
 "use client"
 
+import { cn } from "cn"
 import { ArrowRightIcon, CheckIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { LocalizedLink } from "@/components/localized-link"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { previewValue } from "@/lib/action-values"
 import { linkPage } from "@/lib/assistant"
 import type { AssistantBlock } from "@/types/assistant"
@@ -104,14 +105,15 @@ export function ActionCard({
           {card.links.map(
             (href) =>
               href && (
-                <Button
+                <LocalizedLink
                   key={href}
-                  variant="outline"
-                  size="sm"
-                  // A name keeps its capitals in the lowercase button.
-                  className={card.result_label ? "normal-case" : undefined}
-                  render={<LocalizedLink href={href} onClick={onNavigate} />}
-                  nativeButton={false}
+                  href={href}
+                  onClick={onNavigate}
+                  className={cn(
+                    buttonVariants({ variant: "outline", size: "sm" }),
+                    // A name keeps its capitals in the lowercase button.
+                    card.result_label && "normal-case"
+                  )}
                 >
                   {card.result_label
                     ? t("openNamed", { name: card.result_label })
@@ -122,7 +124,7 @@ export function ActionCard({
                     data-icon="inline-end"
                     className="rtl:-scale-x-100"
                   />
-                </Button>
+                </LocalizedLink>
               )
           )}
         </div>
