@@ -134,15 +134,27 @@ export function answerParts(blocks: AssistantBlock[]) {
         href: inAppHref(block.links[index]),
       })),
     }))
+  // The answer's link (the service sends one at most): where it goes and what names it.
   const links = blocks
     .filter((block) => block.kind === "link")
-    .flatMap((block) => block.links.map(inAppHref))
-    .filter((href): href is string => href !== null)
+    .flatMap((block) =>
+      block.links.map((href) => ({
+        href: inAppHref(href),
+        label: block.label ?? null,
+        page: block.page ?? null,
+      }))
+    )
+    .filter(
+      (
+        found
+      ): found is { href: string; label: string | null; page: string | null } =>
+        found.href !== null
+    )
 
   const signIn = blocks.find((block) => block.kind === "sign_in")
   const cards = blocks.filter((block) => block.kind === "confirm")
 
-  return { rows, links: [...new Set(links)], signIn, cards }
+  return { rows, links, signIn, cards }
 }
 
 /** The company a page is about (/companies/<id>/…), or null. */

@@ -35,6 +35,27 @@ export const LINK_PAGES: [RegExp, string][] = [
   [/\/interviews$/, "interviews"],
 ]
 
+// The service's link pages (its `show` tool) and the "assistant.pages" message naming each.
+export const PAGE_LABELS: Record<string, string> = {
+  interview: "interview",
+  interview_candidates: "candidates",
+  candidate: "candidate",
+  company: "interviews",
+  members: "team",
+  templates: "templates",
+  template: "template",
+  integrations: "integrations",
+  ats: "integrations",
+  slack: "slack",
+  api: "api",
+  referrals: "referrals",
+  top_up: "topUp",
+  pricing: "pricing",
+  settings: "settings",
+  faq: "faq",
+  news: "news",
+}
+
 // A company's pages: /companies/<id>/…, maybe under a language's prefix.
 export const COMPANY_PATH =
   /^(?:\/[a-z]{2,3})?\/companies\/([0-9a-f-]{36})(?:\/|$)/

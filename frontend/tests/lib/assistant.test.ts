@@ -63,7 +63,7 @@ describe("linkPage", () => {
 })
 
 describe("answerParts", () => {
-  it("pairs each item with its page, and lists link blocks' pages once", () => {
+  it("pairs each item with its page, and keeps link blocks' in-app pages", () => {
     const blocks: AssistantBlock[] = [
       { kind: "link", items: [], links: ["/settings"] },
       {
@@ -87,7 +87,11 @@ describe("answerParts", () => {
           ],
         },
       ],
-      links: ["/settings"],
+      // In-app pages only, as the service sent them.
+      links: [
+        { href: "/settings", label: null, page: null },
+        { href: "/settings", label: null, page: null },
+      ],
       signIn: undefined,
       cards: [],
     })

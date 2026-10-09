@@ -47,6 +47,7 @@ async function assistantAnswers(page: Page) {
             links: [CANDIDATE_LINK],
           },
         },
+        { block: { kind: "link", items: [], links: ["/companies/c/interviews/i"], page: "interview", label: "Senior Backend" } },
         { delta: "**Ann** passed with 82%." },
         { done: { message_id: "m1" } }
       ),
@@ -127,6 +128,8 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
   await panel.getByRole("button", { name: "Send" }).click();
   await expect(panel.locator("strong", { hasText: "Ann" })).toBeVisible();
   await expect(panel.getByRole("link", { name: /ann@example\.com/ })).toHaveAttribute("href", CANDIDATE_LINK);
+  // One link, named by what it opens.
+  await expect(panel.locator("a", { hasText: "open Senior Backend" })).toHaveAttribute("href", "/companies/c/interviews/i");
   await shot(owner, "answer");
   expect(sent[0]).toMatchObject({
     message: "Who passed?",

@@ -16,6 +16,9 @@ export type AssistantBlock = {
     | "confirm"
   items: Record<string, unknown>[]
   links: (string | null)[]
+  // A link's page (by the service's name for it) and what it opens (an interview's title).
+  page?: string | null
+  label?: string | null
   // A sign-in card's way to sign in first: the one the visitor asked for.
   provider?: SignInProvider | null
 } & Partial<ActionCard>

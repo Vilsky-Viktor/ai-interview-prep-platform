@@ -16,6 +16,7 @@ import { InterviewSummary } from "@/components/company/interview-summary"
 import { LocalizedLink } from "@/components/localized-link"
 import { SignInOptions } from "@/components/sign-in-options"
 import { Button } from "@/components/ui/button"
+import { PAGE_LABELS } from "@/constants/assistant"
 import { answerParts, linkPage } from "@/lib/assistant"
 import type { AssistantBlock } from "@/types/assistant"
 
@@ -125,6 +126,7 @@ export function AnswerBlocks({
   onNavigate: () => void
 }) {
   const t = useTranslations("assistant.pages")
+  const named = useTranslations("assistant.actions")
   const card = useTranslations("assistant")
   const { rows, links, signIn, cards } = answerParts(blocks)
 
@@ -166,8 +168,8 @@ export function AnswerBlocks({
       )}
       {links.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          {links.map((href) => {
-            const page = linkPage(href)
+          {links.map(({ href, label, page }) => {
+            const key = (page && PAGE_LABELS[page]) ?? linkPage(href)
 
             return (
               <Button
@@ -177,7 +179,13 @@ export function AnswerBlocks({
                 render={<LocalizedLink href={href} onClick={onNavigate} />}
                 nativeButton={false}
               >
-                {page ? t(page) : t("open")}
+                <span className={label ? "normal-case" : undefined}>
+                  {label
+                    ? named("openNamed", { name: label })
+                    : key
+                      ? t(key)
+                      : t("open")}
+                </span>
                 <ArrowRightIcon
                   data-icon="inline-end"
                   className="rtl:-scale-x-100"
