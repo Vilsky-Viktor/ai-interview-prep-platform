@@ -35,3 +35,10 @@ test("the home page links to the demo videos at the top and at the end", async (
   await buttons.nth(1).click();
   await expect(page.getByRole("dialog", { name: "Assistant" })).toBeVisible();
 });
+
+// Every page's footer has "ask agent" under the social icons; it opens the assistant's panel.
+test("the footer's ask agent opens the assistant", async ({ page }) => {
+  await page.goto("/faq");
+  await page.getByRole("contentinfo").getByRole("button", { name: "ask agent" }).click();
+  await expect(page.getByRole("dialog", { name: "Assistant" })).toBeVisible();
+});

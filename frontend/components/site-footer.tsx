@@ -6,6 +6,7 @@ import {
   XIcon,
   YouTubeIcon,
 } from "@/components/brand-icons"
+import { AskAgentButton } from "@/components/landing/ask-agent-button"
 import { LocalizedLink } from "@/components/localized-link"
 import { FOOTER_COLUMNS } from "@/constants/navigation"
 
@@ -35,6 +36,7 @@ export async function SiteFooter() {
               <FacebookIcon className="size-6" />
             </span>
           </div>
+          <AskAgentButton className="h-10 px-5 text-sm" />
         </div>
         {/* Lowercase with the blue dot, like the header's menu (globals.css, by data-slot). */}
         <nav
