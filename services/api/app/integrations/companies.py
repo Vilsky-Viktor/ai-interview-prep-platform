@@ -64,12 +64,12 @@ async def candidate(company_id: UUID, interview_id: UUID, invite_id: UUID) -> di
     return await _get(path)
 
 
-async def invite(interview_id: UUID, email: str, sender_id: str) -> UUID:
+async def invite(interview_id: UUID, email: str, sender_id: str, name: str | None = None) -> UUID:
     """Invites the candidate as `sender_id` would, and returns the invite's id. Companies'
     refusals (PASSED_ON) raise an HTTPException with its status and reason."""
     response = await http.get_client().post(
         f"{settings.companies_url}/internal/interviews/{interview_id}/invites",
-        json={"email": email, "sender_id": sender_id},
+        json={"email": email, "sender_id": sender_id, "name": name},
         headers=_headers(),
     )
 

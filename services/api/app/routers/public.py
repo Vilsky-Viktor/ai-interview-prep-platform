@@ -80,10 +80,10 @@ async def get_candidate(interview_id: UUID, candidate_id: UUID, key: ApiKeyDep) 
 )
 async def invite_candidate(interview_id: UUID, body: CandidateIn, key: ApiKeyDep) -> Candidate:
     """Emails the candidate an invitation to the interview on behalf of the key's creator and
-    reserves credits for them. Inviting an address that was already invited sends the invitation
-    again."""
+    reserves credits for them, with their name if given. Inviting an address that was already
+    invited sends the invitation again."""
     await companies.interview(key.company_id, interview_id)
-    invite_id = await companies.invite(interview_id, str(body.email), key.created_by)
+    invite_id = await companies.invite(interview_id, str(body.email), key.created_by, body.name)
     found = await companies.candidate(key.company_id, interview_id, invite_id)
 
     return candidate_of(found, key.company_id, interview_id, settings.site_url)

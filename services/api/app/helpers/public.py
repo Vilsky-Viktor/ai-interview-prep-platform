@@ -20,6 +20,7 @@ def candidate_of(found: dict, company_id, interview_id, site: str) -> Candidate:
     return Candidate(
         id=found["id"],
         email=found["email"],
+        name=found.get("name"),
         status=found["status"],
         progress=found["progress"],
         grade=found["grade"],

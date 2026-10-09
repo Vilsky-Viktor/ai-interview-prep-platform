@@ -44,6 +44,7 @@ def candidate(**changes) -> dict:
     return {
         "id": str(CANDIDATE),
         "email": "anna@example.com",
+        "name": "Anna Nowak",
         "status": "finished",
         "progress": 100,
         "grade": 86,
@@ -105,11 +106,12 @@ def companies_api(monkeypatch):
 
         return candidate(id=str(invite_id))
 
-    async def invite(interview_id, email, sender_id):
+    async def invite(interview_id, email, sender_id, name=None):
         if state["refuse"]:
             raise HTTPException(state["refuse"], "Refused")
 
         state["sent"].append((interview_id, email, sender_id))
+        state.setdefault("names", {})[email] = name
 
         return CANDIDATE
 

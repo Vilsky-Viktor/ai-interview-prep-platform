@@ -30,6 +30,13 @@ class Signals(BaseModel):
 class Candidate(BaseModel):
     id: UUID
     email: str
+    name: str | None = Field(
+        default=None,
+        description=(
+            "The candidate's name: as given when they were invited, edited by an owner or admin, "
+            "or else from their sign-in when they start; null while unknown"
+        ),
+    )
     status: str = Field(
         description="One of invited, undelivered, in_process, finished, expired or deleted"
     )
@@ -50,6 +57,14 @@ class Candidate(BaseModel):
 
 class CandidateIn(BaseModel):
     email: EmailStr = Field(description="The candidate's email address")
+    name: str | None = Field(
+        default=None,
+        max_length=200,
+        description=(
+            "The candidate's name, optional (at most 200 characters). It fills a name not known "
+            "yet; inviting the same address again doesn't change a known one"
+        ),
+    )
 
 
 class FinishedEvent(BaseModel):

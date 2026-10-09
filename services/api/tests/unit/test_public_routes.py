@@ -67,6 +67,21 @@ def test_an_invite_goes_out_as_the_keys_creator(client, companies_api, key):
     assert companies_api["sent"] == [(INTERVIEW, "bob@example.com", "u1")]
 
 
+def test_an_invite_passes_its_name_and_a_candidate_reads_with_theirs(client, companies_api, key):
+    body = {"email": "bob@example.com", "name": "Bob Stone"}
+    response = call(client, "POST", f"/interviews/{INTERVIEW}/candidates", json=body)
+
+    assert response.status_code == 201
+    assert companies_api["names"] == {"bob@example.com": "Bob Stone"}
+    assert response.json()["name"] == "Anna Nowak"
+
+
+def test_an_invite_with_a_too_long_name_is_refused(client, companies_api, key):
+    body = {"email": "bob@example.com", "name": "x" * 201}
+
+    assert call(client, "POST", f"/interviews/{INTERVIEW}/candidates", json=body).status_code == 422
+
+
 @pytest.mark.parametrize("refusal", [402, 409, 429, 503])
 def test_companies_refusals_pass_through(client, companies_api, key, refusal):
     companies_api["refuse"] = refusal
