@@ -141,3 +141,34 @@ test("a reload in the middle of a visitor's chat brings it back", async ({ page 
   await expect(page.getByRole("banner").getByRole("button", { name: "ask agent" })).toBeVisible();
   await expect(again).toHaveCount(0);
 });
+
+// Popups slide and fade in and out (components/ui/dialog.tsx): each closes fully, with nothing
+// left behind, and gives the focus back to what opened it; reduced motion still opens and
+// closes them.
+for (const reducedMotion of ["no-preference", "reduce"] as const) {
+  test(`the panel and a dialog open and close fully (${reducedMotion} motion)`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion });
+    await page.goto("/");
+    const askAgent = page.getByRole("banner").getByRole("button", { name: "ask agent" });
+    await askAgent.click();
+    const panel = page.getByRole("dialog", { name: "Assistant" });
+    await expect(panel).toBeVisible();
+    await expect(panel).toBeInViewport({ ratio: 1 });
+
+    await panel.getByRole("button", { name: "Close" }).click();
+    await expect(page.locator('[data-slot="dialog-content"]')).toHaveCount(0);
+    await expect(askAgent).toBeFocused();
+
+    // Signed out, the header's Sign in opens the sign-in dialog, over a dimmed page.
+    const signIn = page.getByRole("banner").getByRole("button", { name: /sign in/i });
+    await signIn.click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible();
+    await expect(page.locator('[data-slot="dialog-overlay"]')).toBeVisible();
+
+    await page.keyboard.press("Escape");
+    await expect(page.locator('[data-slot="dialog-content"]')).toHaveCount(0);
+    await expect(page.locator('[data-slot="dialog-overlay"]')).toHaveCount(0);
+    await expect(signIn).toBeFocused();
+  });
+}

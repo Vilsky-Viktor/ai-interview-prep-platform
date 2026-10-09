@@ -32,13 +32,22 @@ function DialogOverlay({
     <DialogPrimitive.Backdrop
       data-slot="dialog-overlay"
       className={cn(
-        "fixed inset-0 isolate z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        "fixed inset-0 isolate z-50 bg-black/10 transition-opacity duration-200 ease-out data-[ending-style]:opacity-0 data-[ending-style]:duration-150 data-[starting-style]:opacity-0 supports-backdrop-filter:backdrop-blur-xs",
         className
       )}
       {...props}
     />
   )
 }
+
+// Open and close: the sheet slides in from its side (from the bottom on phones), a popup fades
+// in rising a little and growing slightly; about 200 ms in and 150 ms out, eased. Reduced
+// motion makes them instant (globals.css). Base UI keeps a closing popup mounted until its
+// transition ends.
+const SHEET_CLASSES =
+  "fixed inset-y-0 end-0 z-50 flex w-full flex-col bg-popover text-base text-popover-foreground ring-1 ring-foreground/10 outline-none transition-[translate] duration-200 ease-out sm:w-[var(--sheet-width,28rem)] data-[ending-style]:duration-150 data-[ending-style]:ease-in max-sm:data-[starting-style]:translate-y-full max-sm:data-[ending-style]:translate-y-full sm:data-[starting-style]:translate-x-full sm:data-[ending-style]:translate-x-full sm:rtl:data-[starting-style]:-translate-x-full sm:rtl:data-[ending-style]:-translate-x-full"
+const POPUP_CLASSES =
+  "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-8 rounded-xl bg-popover px-10 pt-10 pb-10 text-base text-popover-foreground ring-1 ring-foreground/10 outline-none transition-[opacity,translate,scale] duration-200 ease-out sm:max-w-sm data-[ending-style]:translate-y-[calc(-50%+10px)] data-[ending-style]:scale-[0.97] data-[ending-style]:opacity-0 data-[ending-style]:duration-150 data-[starting-style]:translate-y-[calc(-50%+10px)] data-[starting-style]:scale-[0.97] data-[starting-style]:opacity-0"
 
 function DialogContent({
   className,
@@ -59,12 +68,7 @@ function DialogContent({
       {!sheet && <DialogOverlay />}
       <DialogPrimitive.Popup
         data-slot="dialog-content"
-        className={cn(
-          sheet
-            ? "fixed inset-y-0 end-0 z-50 flex w-full flex-col bg-popover text-base text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none sm:w-[var(--sheet-width,28rem)] data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0"
-            : "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-8 rounded-xl bg-popover px-10 pt-10 pb-10 text-base text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
-          className
-        )}
+        className={cn(sheet ? SHEET_CLASSES : POPUP_CLASSES, className)}
         {...props}
       >
         {children}
