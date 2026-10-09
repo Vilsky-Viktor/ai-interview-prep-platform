@@ -1,5 +1,9 @@
 from collections.abc import AsyncIterator
 
+from prepza_common.i18n import translate
+from prepza_common.secrets_check import SECRET_REMOVED
+from prepza_common.sse import sse_event
+
 from app.constants.help import SIGN_IN_MARKER, SIGN_IN_PREFIX
 
 
@@ -50,3 +54,10 @@ def split(text: str) -> list[dict]:
     events = [{"block": sign_in_block(found.group(1))}]
 
     return [*events, {"delta": rest}] if rest else events
+
+
+async def secret_reply(language: str) -> AsyncIterator[str]:
+    """The fixed answer to a message with a secret: the panel removes it, then reads why."""
+    yield sse_event({"removed": True})
+    yield sse_event({"delta": translate(SECRET_REMOVED, language)})
+    yield sse_event({"done": True})

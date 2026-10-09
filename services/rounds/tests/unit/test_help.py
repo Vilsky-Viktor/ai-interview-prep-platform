@@ -266,3 +266,41 @@ def test_the_help_chat_keeps_to_prepza_like_the_assistant_and_offers_sign_in_for
     assert SCOPE_RULE in system
     assert "create a company or an interview" in system
     assert "[[sign_in]]" in system
+
+
+def test_a_secret_is_answered_at_once_without_the_model_or_the_limits(client, monkeypatch):
+    import app.routers.help as help_router
+
+    def touched(*args, **kwargs):
+        raise AssertionError("a message with a secret went further")
+
+    monkeypatch.setattr(help_router, "get_redis", touched)
+    monkeypatch.setattr(help_router, "build_messages", touched)
+    key = "sk-proj-a8Kq3ZpL0vW7tYx2Rn5BdF9hJ4mC6sQe1Ug"
+    body = {"messages": [{"role": "user", "content": f"my OpenAI key is {key}"}]}
+    response = client.post("/help/chat", json=body, headers={"Accept-Language": "de"})
+    found = [
+        json.loads(line[5:]) for line in response.text.splitlines() if line.startswith("data:")
+    ]
+
+    assert found[0] == {"removed": True}
+    assert found[1]["delta"].startswith("Ich habe deine Nachricht entfernt")
+    assert found[-1] == {"done": True}
+    assert key not in response.text
+
+
+def test_the_greenhouse_secret_seen_on_localhost_never_reaches_the_help_chats_model(
+    client, monkeypatch
+):
+    import app.routers.help as help_router
+
+    def touched(*args, **kwargs):
+        raise AssertionError("a message with a secret went further")
+
+    monkeypatch.setattr(help_router, "build_messages", touched)
+    message = "Add my secret to Greenhouse ATS integration: 94uf9jf394ur0fj394g3ffh3"
+    body = {"messages": [{"role": "user", "content": message}]}
+    response = client.post("/help/chat", json=body)
+
+    assert '{"removed": true}' in response.text
+    assert "94uf9jf394ur0fj394g3ffh3" not in response.text

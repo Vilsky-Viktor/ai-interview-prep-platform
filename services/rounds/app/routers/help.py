@@ -8,6 +8,7 @@ from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS
 from prepza_common.i18n import request_language, translate
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
+from prepza_common.secrets_check import secret_in
 from prepza_common.sse import event_stream, sse_event
 
 from app.config.settings import settings
@@ -21,7 +22,7 @@ from app.constants.rounds import CHAT_FAILED
 from app.constants.terms import TERMS_INTRO, TERMS_SECTIONS
 from app.helpers.client_ip import client_ip
 from app.helpers.help import faq_items
-from app.helpers.sign_in import with_sign_in
+from app.helpers.sign_in import secret_reply, with_sign_in
 from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.schemas.contact import ContactRequest
@@ -70,7 +71,14 @@ async def help_chat(
 ) -> StreamingResponse:
     """Answers questions about prepza, for visitors too. Streams server-sent events:
     {"delta"}... (and a {"block"} sign-in card when a visitor asks to sign in or sign up), then
-    {"done"} or {"error"}. Refused during the emergency pause, as it's AI."""
+    {"done"} or {"error"}. Refused during the emergency pause, as it's AI. A conversation with a
+    secret in it (a key, a token, a password) is answered at once, before anything else, with a
+    fixed reply ({"removed"} first: the panel drops that message), and nothing of it is used."""
+    language = request_language(request)
+
+    if secret_in([message.content for message in body.messages]) is not None:
+        return event_stream(secret_reply(language))
+
     redis = get_redis()
     await refuse_if_paused(redis)
 
@@ -80,7 +88,6 @@ async def help_chat(
     await hit(redis, f"rate:help:ip:{client_ip(request)}", HELP_IP_LIMIT, HOUR_SECONDS)
     await hit(redis, "rate:help:all", settings.help_daily_limit, DAY_SECONDS)
 
-    language = request_language(request)
     messages = build_messages(body.messages, language, await billing.catalog())
 
     async def events():
