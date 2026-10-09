@@ -77,7 +77,7 @@ def candidate(state, email="ann@example.com", attempts=0, interview_id=None) -> 
 
 
 def failing_companies(monkeypatch):
-    async def invite(interview_id, email, sender_id):
+    async def invite(interview_id, email, sender_id, name=None):
         raise httpx.ConnectTimeout("companies didn't answer")
 
     monkeypatch.setattr(companies, "invite", invite)
@@ -106,7 +106,7 @@ def test_a_candidate_whose_interview_cant_be_read_waits_for_the_recovery_job(wor
     async def interviews(ids):
         raise httpx.ConnectTimeout("companies didn't answer")
 
-    async def add(connection_id, link_id, interview_id, candidate_id, email):
+    async def add(connection_id, link_id, interview_id, candidate_id, email, name=None):
         return candidate(world, email)
 
     monkeypatch.setattr(companies, "interviews", interviews)

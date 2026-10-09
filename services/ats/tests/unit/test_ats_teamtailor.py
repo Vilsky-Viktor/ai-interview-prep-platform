@@ -80,11 +80,15 @@ def world(monkeypatch, companies_api):
 
         return state["application"]
 
-    async def add(connection_id, link_id, interview_id, candidate_id, email):
+    async def add(connection_id, link_id, interview_id, candidate_id, email, name=None):
         return state["rows"].setdefault(
             candidate_id,
             AtsCandidate(
-                id=uuid.uuid4(), interview_id=interview_id, candidate_id=candidate_id, email=email
+                id=uuid.uuid4(),
+                interview_id=interview_id,
+                candidate_id=candidate_id,
+                email=email,
+                name=name,
             ),
         )
 
@@ -272,3 +276,10 @@ def test_without_a_teamtailor_user_to_write_as_nothing_goes_back(finished):
 
     # Given up: marked, so it isn't tried again.
     assert finished["notes"] == [] and finished["reported"] == [finished["row"].id]
+
+
+def test_the_name_teamtailor_has_goes_with_the_invite(world, companies_api):
+    world["application"]["name"] = "Ann Lee"
+    receive(event())
+
+    assert companies_api["names"] == {"ann@example.com": "Ann Lee"}

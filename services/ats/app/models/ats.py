@@ -78,6 +78,8 @@ class AtsCandidate(Base):
     # The ATS's own candidate id, and who they are.
     candidate_id: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(320), index=True)
+    # Their name as the ATS sent it, passed on with the invite; None when it sent none.
+    name: Mapped[str | None] = mapped_column(String(200))
     status: Mapped[str] = mapped_column(String(16), default=CandidateStatus.WAITING)
     # When an invite was last started (status inviting): one left too long was cut off.
     claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

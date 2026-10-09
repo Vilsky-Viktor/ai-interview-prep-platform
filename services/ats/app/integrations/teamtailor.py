@@ -1,6 +1,7 @@
 import httpx
 from fastapi import HTTPException, status
 from prepza_common import http
+from prepza_common.names import clean_name
 
 from app.constants.ats import (
     ATS_TIMEOUT_SECONDS,
@@ -126,7 +127,7 @@ async def job(host: str, key: str, job_id: str) -> dict:
 
 
 async def application(host: str, key: str, application_id: str) -> dict:
-    """A job application's job, stage and candidate (with their email), as Teamtailor has them
+    """A job application's job, stage and candidate (with their email and name), as Teamtailor has them
     now: a web hook only says one changed."""
     answer = await _call(
         "GET",
@@ -146,11 +147,14 @@ async def application(host: str, key: str, application_id: str) -> dict:
         (item for item in answer.get("included", []) if item.get("type") == "candidates"), {}
     )
 
+    attributes = candidate.get("attributes") or {}
+
     return {
         "job_id": related("job"),
         "stage_id": related("stage"),
         "candidate_id": related("candidate"),
-        "email": (candidate.get("attributes") or {}).get("email"),
+        "email": attributes.get("email"),
+        "name": clean_name(attributes.get("first-name"), attributes.get("last-name")),
     }
 
 

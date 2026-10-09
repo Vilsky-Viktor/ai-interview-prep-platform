@@ -46,10 +46,14 @@ async def key_of(connection: AtsConnection) -> dict | None:
         return None
 
 
-async def arrived(link, connection: AtsConnection, candidate_id: str, email: str) -> None:
-    """A candidate the ATS sent for a linked job: saved once, then invited. When companies
-    doesn't answer, they wait for the recovery job."""
-    row = await ats_candidates.add(connection.id, link.id, link.interview_id, candidate_id, email)
+async def arrived(
+    link, connection: AtsConnection, candidate_id: str, email: str, name: str | None = None
+) -> None:
+    """A candidate the ATS sent for a linked job (with their name, if it sent one): saved once,
+    then invited. When companies doesn't answer, they wait for the recovery job."""
+    row = await ats_candidates.add(
+        connection.id, link.id, link.interview_id, candidate_id, email, name
+    )
 
     try:
         found = await companies.interviews([row.interview_id])
@@ -79,7 +83,9 @@ async def invite(row: AtsCandidate, connection: AtsConnection, interview: dict |
 
     try:
         # As if whoever connected the ATS invited them: their email limits apply.
-        invite_id = await companies.invite(row.interview_id, row.email, connection.created_by)
+        invite_id = await companies.invite(
+            row.interview_id, row.email, connection.created_by, row.name
+        )
     except HTTPException as error:
         if error.status_code in (status.HTTP_404_NOT_FOUND, status.HTTP_409_CONFLICT):
             await ats_candidates.settle(row.id, CandidateStatus.WAITING)
@@ -113,7 +119,9 @@ async def refused(
 ) -> None:
     """Kept as not invited, to retry; owners and admins hear why, and from which ATS."""
     name = ATS_NAMES[connection.provider]
-    notice = ats_not_invited(interview["company_id"], name, interview["title"], row.email, reason)
+    notice = ats_not_invited(
+        interview["company_id"], name, interview["title"], row.email, reason, row.name
+    )
     await ats_candidates.settle(row.id, CandidateStatus.FAILED, reason, notice=notice)
     await outbox_service.flush_quietly()
 

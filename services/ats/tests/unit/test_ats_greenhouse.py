@@ -69,11 +69,15 @@ def world(monkeypatch, companies_api):
     async def key(found):
         return {"client_id": "id", "client_secret": "secret", "webhook_secret": SECRET}
 
-    async def add(connection_id, link_id, interview_id, candidate_id, email):
+    async def add(connection_id, link_id, interview_id, candidate_id, email, name=None):
         return state["rows"].setdefault(
             candidate_id,
             AtsCandidate(
-                id=uuid.uuid4(), interview_id=interview_id, candidate_id=candidate_id, email=email
+                id=uuid.uuid4(),
+                interview_id=interview_id,
+                candidate_id=candidate_id,
+                email=email,
+                name=name,
             ),
         )
 
@@ -153,3 +157,11 @@ def test_a_broken_connections_candidate_waits_to_be_invited_once_reconnected(wor
 
     assert world["sent"] == []
     assert len(world["rows"]) == 1
+
+
+def test_the_name_the_ats_sent_goes_with_the_invite(world, companies_api):
+    d = json.loads(event())
+    d["payload"]["application"]["candidate"].update(first_name="Ann", last_name=" Lee")
+    receive(json.dumps(d).encode())
+
+    assert companies_api["names"] == {"ann@example.com": "Ann Lee"}

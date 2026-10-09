@@ -25,6 +25,7 @@ async def export_user(user_id: str, body: UserEmailIn, caller: ServiceCaller) ->
             "ats_candidates": [
                 {
                     "email": row.email,
+                    "name": row.name,
                     "interview_id": row.interview_id,
                     "status": row.status,
                     "results_sent_at": row.reported_at,

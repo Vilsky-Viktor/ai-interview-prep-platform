@@ -84,7 +84,7 @@ def world(monkeypatch, companies_api):
     async def key(found):
         return {"subdomain": "acme", "token": TOKEN}
 
-    async def add(connection_id, link_id, interview_id, candidate_id, email):
+    async def add(connection_id, link_id, interview_id, candidate_id, email, name=None):
         return state["rows"].setdefault(
             candidate_id,
             AtsCandidate(
@@ -93,6 +93,7 @@ def world(monkeypatch, companies_api):
                 interview_id=interview_id,
                 candidate_id=candidate_id,
                 email=email,
+                name=name,
                 status="waiting",
                 attempts=0,
             ),
@@ -278,3 +279,11 @@ def test_a_top_up_invites_the_candidates_kept_for_lack_of_credits(world, monkeyp
     assert asked == [company_id]
     assert state["api"]["sent"] == [("ann@example.com", "ann")]
     assert state["rows"]["c-1"].status == "invited"
+
+
+def test_the_name_the_ats_sent_goes_with_the_invite(world, companies_api):
+    d = json.loads(event())
+    d["data"]["name"] = " Ann Lee "
+    receive(json.dumps(d).encode())
+
+    assert companies_api["names"] == {"ann@example.com": "Ann Lee"}

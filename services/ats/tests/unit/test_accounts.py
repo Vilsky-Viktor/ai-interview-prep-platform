@@ -38,6 +38,7 @@ def test_an_export_lists_what_atss_sent_about_them(client, monkeypatch):
     at = datetime(2026, 1, 2, tzinfo=UTC)
     row = AtsCandidate(
         email="ann@example.com",
+        name="Ann Lee",
         interview_id=interview_id,
         status="invited",
         reported_at=None,
@@ -61,6 +62,7 @@ def test_an_export_lists_what_atss_sent_about_them(client, monkeypatch):
         "ats_candidates": [
             {
                 "email": "ann@example.com",
+                "name": "Ann Lee",
                 "interview_id": str(interview_id),
                 "status": "invited",
                 "results_sent_at": None,

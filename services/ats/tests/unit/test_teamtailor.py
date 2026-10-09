@@ -172,7 +172,11 @@ def test_an_application_is_its_job_stage_and_candidate_with_their_email(api):
         },
         "included": [
             {"type": "jobs", "id": "101", "attributes": {"email": "no@x.com"}},
-            {"type": "candidates", "id": "44", "attributes": {"email": "ann@example.com"}},
+            {
+                "type": "candidates",
+                "id": "44",
+                "attributes": {"email": "ann@example.com", "first-name": "Ann", "last-name": "Lee"},
+            },
         ],
     }
 
@@ -181,6 +185,7 @@ def test_an_application_is_its_job_stage_and_candidate_with_their_email(api):
         "stage_id": "7",
         "candidate_id": "44",
         "email": "ann@example.com",
+        "name": "Ann Lee",
     }
     assert api["requests"][0].url.params["include"] == "candidate"
 
@@ -193,6 +198,7 @@ def test_an_application_without_relationships_has_nothing(api):
         "stage_id": None,
         "candidate_id": None,
         "email": None,
+        "name": None,
     }
 
 

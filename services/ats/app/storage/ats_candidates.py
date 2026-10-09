@@ -19,10 +19,15 @@ from app.storage.db import Session
 
 
 async def add(
-    connection_id: UUID, link_id: UUID, interview_id: UUID, candidate_id: str, email: str
+    connection_id: UUID,
+    link_id: UUID,
+    interview_id: UUID,
+    candidate_id: str,
+    email: str,
+    name: str | None = None,
 ) -> AtsCandidate:
     """The ATS's candidate for the interview: saved waiting the first time, the same row when
-    the event comes again (or twice at once: the unique key keeps one)."""
+    the event comes again (or twice at once: the unique key keeps one, with its first name)."""
     query = (
         insert(AtsCandidate)
         .values(
@@ -31,6 +36,7 @@ async def add(
             interview_id=interview_id,
             candidate_id=candidate_id,
             email=email.lower(),
+            name=name,
             status=CandidateStatus.WAITING,
         )
         .on_conflict_do_nothing(index_elements=["connection_id", "candidate_id", "interview_id"])

@@ -81,11 +81,15 @@ def world(monkeypatch, companies_api):
     async def key(found):
         return state["key"]
 
-    async def add(connection_id, link_id, interview_id, candidate_id, email):
+    async def add(connection_id, link_id, interview_id, candidate_id, email, name=None):
         return state["rows"].setdefault(
             candidate_id,
             AtsCandidate(
-                id=uuid.uuid4(), interview_id=interview_id, candidate_id=candidate_id, email=email
+                id=uuid.uuid4(),
+                interview_id=interview_id,
+                candidate_id=candidate_id,
+                email=email,
+                name=name,
             ),
         )
 
@@ -229,3 +233,11 @@ def test_results_go_back_to_recruitee_as_a_note_without_a_member(finished):
     assert (company, token, candidate_id, member) == ("acme", "t", "44", None)
     assert "Grade: 82% (passed)" in text
     assert finished["reported"] == [finished["row"].id]
+
+
+def test_the_name_the_ats_sent_goes_with_the_invite(world, companies_api):
+    d = json.loads(event())
+    d["payload"]["candidate"]["name"] = " Ann Lee "
+    receive(json.dumps(d).encode())
+
+    assert companies_api["names"] == {"ann@example.com": "Ann Lee"}

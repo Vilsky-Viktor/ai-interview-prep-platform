@@ -46,12 +46,13 @@ async def interviews(ids) -> dict[UUID, dict]:
     return {UUID(item["id"]): item for item in response.json()}
 
 
-async def invite(interview_id: UUID, email: str, sender_id: str) -> UUID:
-    """Invites the candidate to the interview as `sender_id` would, and returns the invite's id.
+async def invite(interview_id: UUID, email: str, sender_id: str, name: str | None = None) -> UUID:
+    """Invites the candidate to the interview as `sender_id` would, with their name from the ATS
+    (companies keeps a name already known), and returns the invite's id.
     A refusal raises an HTTPException with companies' status (INVITE_REFUSALS)."""
     response = await http.get_client().post(
         f"{settings.companies_url}/internal/interviews/{interview_id}/invites",
-        json={"email": email, "sender_id": sender_id},
+        json={"email": email, "sender_id": sender_id, "name": name},
         headers=_headers(),
     )
 

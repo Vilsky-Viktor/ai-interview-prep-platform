@@ -2,6 +2,7 @@ import json
 from uuid import UUID
 
 from fastapi import HTTPException, status
+from prepza_common.names import clean_name
 
 from app.constants.ats import (
     BREEZY_STATUS_UPDATED,
@@ -58,7 +59,13 @@ async def receive_workable(link_id: UUID, body: bytes, signature: str) -> None:
     ):
         return
 
-    await flow.arrived(link, connection, str(candidate["id"]), candidate["email"])
+    await flow.arrived(
+        link,
+        connection,
+        str(candidate["id"]),
+        candidate["email"],
+        clean_name(candidate.get("name")),
+    )
 
 
 async def receive_greenhouse(connection_id: UUID, body: bytes, signature: str) -> None:
@@ -93,7 +100,13 @@ async def receive_greenhouse(connection_id: UUID, body: bytes, signature: str) -
         # Its stage by id, or by name (which id Greenhouse's web hooks send isn't settled).
         if link and link.stage_id in (str(stage.get("id")), stage.get("name")):
             reference = f"{candidate.get('id')}:{application.get('id')}"
-            await flow.arrived(link, connection, reference, next(item for item in emails if item))
+            await flow.arrived(
+                link,
+                connection,
+                reference,
+                next(item for item in emails if item),
+                clean_name(candidate.get("first_name"), candidate.get("last_name")),
+            )
 
 
 async def receive_teamtailor(connection_id: UUID, body: bytes, signature: str) -> None:
@@ -133,7 +146,9 @@ async def receive_teamtailor(connection_id: UUID, body: bytes, signature: str) -
     link = await ats.link_for_job(connection.id, found["job_id"] or "")
 
     if link and link.stage_id == found["stage_id"] and found["email"]:
-        await flow.arrived(link, connection, found["candidate_id"], found["email"])
+        await flow.arrived(
+            link, connection, found["candidate_id"], found["email"], found.get("name")
+        )
 
 
 async def receive_recruitee(connection_id: UUID, body: bytes, signature: str) -> None:
@@ -170,7 +185,9 @@ async def receive_recruitee(connection_id: UUID, body: bytes, signature: str) ->
     link = await ats.link_for_job(connection.id, str((payload.get("offer") or {}).get("id")))
 
     if link and link.stage_id == str(stage.get("id")):
-        await flow.arrived(link, connection, str(candidate["id"]), emails[0])
+        await flow.arrived(
+            link, connection, str(candidate["id"]), emails[0], clean_name(candidate.get("name"))
+        )
 
 
 async def receive_breezy(connection_id: UUID, body: bytes, signature: str) -> None:
@@ -201,4 +218,10 @@ async def receive_breezy(connection_id: UUID, body: bytes, signature: str) -> No
 
     if link and link.stage_id == str((found.get("stage") or {}).get("id")):
         reference = f"{position['_id']}:{candidate.get('_id')}"
-        await flow.arrived(link, connection, reference, candidate["email_address"])
+        await flow.arrived(
+            link,
+            connection,
+            reference,
+            candidate["email_address"],
+            clean_name(candidate.get("name")),
+        )

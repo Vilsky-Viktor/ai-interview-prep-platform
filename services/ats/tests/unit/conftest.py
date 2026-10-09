@@ -32,11 +32,12 @@ def companies_api(monkeypatch):
     async def interviews(ids):
         return {item: state["interviews"][item] for item in ids if item in state["interviews"]}
 
-    async def invite(interview_id, email, sender_id):
+    async def invite(interview_id, email, sender_id, name=None):
         if state["refuse"]:
             raise HTTPException(state["refuse"])
 
         state["sent"].append((email, sender_id))
+        state.setdefault("names", {})[email] = name
 
         return uuid.uuid4()
 

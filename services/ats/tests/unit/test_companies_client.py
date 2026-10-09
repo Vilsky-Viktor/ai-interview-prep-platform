@@ -81,7 +81,7 @@ def test_an_invite_is_sent_as_whoever_connected_and_returns_its_id(answering):
     assert asyncio.run(companies.invite(INTERVIEW_ID, "a@x.com", "ann")) == invite_id
     [request] = seen
     assert request.url.path == f"/internal/interviews/{INTERVIEW_ID}/invites"
-    assert json.loads(request.content) == {"email": "a@x.com", "sender_id": "ann"}
+    assert json.loads(request.content) == {"email": "a@x.com", "sender_id": "ann", "name": None}
     assert signed_by_ats(request)
 
 
