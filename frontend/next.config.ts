@@ -19,11 +19,12 @@ const nextConfig: NextConfig = {
   watchOptions: {
     pollIntervalMs: 1000,
   },
-  // The dev server keeps every compiled page for an hour: recompiling one it dropped after a
-  // minute reloads the page that's open, closing its dialogs (the browser tests' flakes).
+  // The dev server keeps its last 30 compiled pages for 15 minutes: recompiling one it dropped
+  // after a minute reloads the page that's open, closing its dialogs (the browser tests' flakes),
+  // while keeping every page for an hour grew it past 7 GB.
   onDemandEntries: {
-    maxInactiveAge: 60 * 60 * 1000,
-    pagesBufferLength: 100,
+    maxInactiveAge: 15 * 60 * 1000,
+    pagesBufferLength: 30,
   },
   // Production builds use Turbopack and skip the webpack hook below, which only sets up polling
   // for the dev server (that runs with --webpack). Without this, Next 16 refuses to build.
