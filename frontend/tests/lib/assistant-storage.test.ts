@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
 import {
   clearChat,
+  newer,
   readChat,
   recentVisitorChat,
   saveChat,
@@ -121,5 +122,13 @@ describe("a visitor's chat after a reload", () => {
     expect(
       recentVisitorChat({ lastAt: "2026-10-09T11:59:00Z" }, config, now)
     ).toBeNull()
+  })
+})
+
+describe("newer", () => {
+  it("says whether a saved conversation came after the visitor's last message", () => {
+    expect(newer("2026-10-09T12:05:00Z", "2026-10-09T12:00:00Z")).toBe(true)
+    expect(newer("2026-10-09T11:55:00Z", "2026-10-09T12:00:00Z")).toBe(false)
+    expect(newer(null, "2026-10-09T12:00:00Z")).toBe(false)
   })
 })

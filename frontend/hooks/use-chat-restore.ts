@@ -3,19 +3,24 @@
 import { type Dispatch, type SetStateAction, useEffect, useRef } from "react"
 
 import { useAuth } from "@/components/auth-provider"
-import { getActiveConversation, getConfig } from "@/lib/assistant"
+import {
+  getActiveConversation,
+  getConfig,
+  withoutSignIn,
+} from "@/lib/assistant"
 import {
   clearChat,
+  newer,
   readChat,
   recentVisitorChat,
   saveChat,
 } from "@/lib/assistant-storage"
-import { withoutSignIn } from "@/lib/assistant"
 import type { ChatMessage } from "@/types/assistant"
 
 /** The panel's chat across reloads and sign-ins. On the page's first load, the recent chat
  * comes back (the service says which conversation is; a visitor's, by the window /config
- * gives), and `onRestored` hears whether one did. Signing out or another account starts over;
+ * gives, also after they signed in, until their first message saves it, unless their own
+ * conversation is newer), and `onRestored` hears whether one did. Signing out or another account starts over;
  * a visitor who just signed in keeps their chat on screen. A visitor's chat is kept in the tab
  * with its last message's time. */
 export function useChatRestore({
@@ -74,15 +79,33 @@ export function useChatRestore({
     onRestored(now ? await restoreConversation() : await restoreVisitor())
   }
 
+  // Signed in: the chat they had as a visitor (until their first message saves it), unless
+  // their own recent conversation is newer.
   async function restoreConversation() {
-    const found = await getActiveConversation().catch(() => null)
+    const [found, visitor] = await Promise.all([
+      getActiveConversation().catch(() => null),
+      recentVisitor(),
+    ])
+
+    if (visitor && !newer(found?.updated_at, visitor.lastAt)) {
+      setMessages(withoutSignIn(visitor.messages))
+
+      return true
+    }
 
     return found !== null && (await open(found.id, true)) !== undefined
   }
 
-  async function restoreVisitor() {
+  async function recentVisitor() {
     const config = await getConfig().catch(() => null)
-    const kept = recentVisitorChat(readChat(false), config, Date.now())
+    const saved = readChat(false)
+    const kept = recentVisitorChat(saved, config, Date.now())
+
+    return kept ? { messages: kept, lastAt: saved.lastAt } : null
+  }
+
+  async function restoreVisitor() {
+    const kept = await recentVisitor()
 
     if (kept === null) {
       clearChat(false)
@@ -90,7 +113,7 @@ export function useChatRestore({
       return false
     }
 
-    setMessages(kept)
+    setMessages(kept.messages)
 
     return true
   }

@@ -272,6 +272,14 @@ test("a visitor who signs in from the sign-in card keeps their chat", async ({ b
   await expect(again.getByRole("list").getByText("Create a company")).toBeVisible();
   await expect(again.getByRole("list").getByText("Sign in below to create it.")).toBeVisible();
   await expect(again.getByRole("button", { name: /continue with/i })).toHaveCount(0);
+
+  // A reload before the first message keeps that chat (the user has no newer conversation).
+  await page.route("**/api/assistant/conversations/active", (route) => route.fulfill({ status: 204 }));
+  await page.reload();
+  await expect(again.getByRole("button", { name: "History" })).toBeVisible({ timeout: 45_000 });
+  await expect(again.getByRole("list").getByText("Create a company")).toBeVisible();
+  await expect(again.getByRole("list").getByText("Sign in below to create it.")).toBeVisible();
+  await expect(again.getByRole("button", { name: /continue with/i })).toHaveCount(0);
   await again.getByRole("textbox").fill("Call it Acme");
   await again.getByRole("button", { name: "Send" }).click();
   await expect(again.locator("strong", { hasText: "Ann" })).toBeVisible();

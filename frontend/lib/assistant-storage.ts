@@ -77,3 +77,11 @@ export function recentVisitorChat(
     ? saved.messages
     : null
 }
+
+/** Whether the time `a` is after `b` (ISO dates; a missing one is never after). */
+export function newer(
+  a: string | undefined | null,
+  b: string | undefined | null
+) {
+  return Boolean(a) && Date.parse(a!) > Date.parse(b ?? "")
+}
