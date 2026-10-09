@@ -44,6 +44,13 @@ def test_a_finished_candidate_reads_with_the_grade_and_links_to_prepza():
     )
 
 
+def test_a_candidate_with_a_name_reads_with_it_escaped():
+    data = {"email": "a@b.c", "title": "Backend", "candidate_name": "Ann <Lee>"}
+    text = message(event(NotificationKind.CANDIDATE_FINISHED, **data), "https://prepza.ai")
+
+    assert text.startswith("Ann &lt;Lee&gt; (a@b.c) finished “Backend”.")
+
+
 def test_a_not_invited_candidate_names_the_ats_and_why():
     text = message(
         event(

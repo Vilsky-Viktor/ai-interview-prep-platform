@@ -49,13 +49,19 @@ def message(event: dict, site: str) -> str | None:
     where it points; None for a kind Slack doesn't get."""
     data = event.get("data") or {}
     title = data.get("title") or "an interview"
+    # "Name (email)" once the candidate's name is known.
+    candidate = (
+        f"{data['candidate_name']} ({data.get('email')})"
+        if data.get("candidate_name")
+        else data.get("email")
+    )
     texts = {
-        NotificationKind.CANDIDATE_FINISHED: f"{data.get('email')} finished “{title}”"
+        NotificationKind.CANDIDATE_FINISHED: f"{candidate} finished “{title}”"
         + (f": {data['grade']}%." if data.get("grade") is not None else "."),
-        NotificationKind.ATS_NOT_INVITED: f"{data.get('email')} from {data.get('ats', 'your ATS')}"
+        NotificationKind.ATS_NOT_INVITED: f"{candidate} from {data.get('ats', 'your ATS')}"
         f" wasn't invited to “{title}”: "
         f"{NOT_INVITED.get(data.get('reason'), 'something went wrong')}.",
-        NotificationKind.INVITE_UNDELIVERED: f"The invite to {data.get('email')} for “{title}”"
+        NotificationKind.INVITE_UNDELIVERED: f"The invite to {candidate} for “{title}”"
         " wasn't delivered.",
         NotificationKind.INTERVIEW_READY: f"The interview “{title}” is ready.",
         NotificationKind.AUTO_TOP_UP_CHARGED: f"Automatic top-up added {data.get('credits')}"
