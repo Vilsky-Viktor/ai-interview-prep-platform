@@ -229,7 +229,7 @@
      "Candidates"
     ],
     "summary": "Invite a candidate",
-    "description": "Emails the candidate an invitation to the interview on behalf of the key's creator and\nreserves credits for them. Inviting an address that was already invited sends the invitation\nagain.",
+    "description": "Emails the candidate an invitation to the interview on behalf of the key's creator and\nreserves credits for them, with their name if given. Inviting an address that was already\ninvited sends the invitation again.",
     "operationId": "invite_candidate_interviews__interview_id__candidates_post",
     "security": [
      {
@@ -682,6 +682,18 @@
       "type": "string",
       "title": "Email"
      },
+     "name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name",
+      "description": "The candidate's name: as given when they were invited, edited by an owner or admin, or else from their sign-in when they start; null while unknown"
+     },
      "status": {
       "type": "string",
       "title": "Status",
@@ -752,6 +764,19 @@
       "format": "email",
       "title": "Email",
       "description": "The candidate's email address"
+     },
+     "name": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 200
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name",
+      "description": "The candidate's name, optional (at most 200 characters). It fills a name not known yet; inviting the same address again doesn't change a known one"
      }
     },
     "type": "object",
