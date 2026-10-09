@@ -106,8 +106,8 @@ export function CandidateActions({
         }}
       >
         <DialogContent showCloseButton={false}>
-          <DialogHeader>
-            <DialogTitle className="no-dot">
+          <DialogHeader className="gap-4">
+            <DialogTitle className="no-dot mb-2">
               {t(unused ? "revokeTitle" : "eraseTitle")}
             </DialogTitle>
             <DialogDescription>

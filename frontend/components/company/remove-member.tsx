@@ -73,8 +73,10 @@ export function RemoveMember({
         }}
       >
         <DialogContent showCloseButton={false}>
-          <DialogHeader>
-            <DialogTitle className="no-dot">{t("removeTitle")}</DialogTitle>
+          <DialogHeader className="gap-4">
+            <DialogTitle className="no-dot mb-2">
+              {t("removeTitle")}
+            </DialogTitle>
             <DialogDescription>
               {t(member.joined ? "removeText" : "removeInviteText", { email })}
             </DialogDescription>

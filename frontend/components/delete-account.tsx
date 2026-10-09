@@ -52,8 +52,8 @@ export function DeleteAccount({
       onOpenChange={(next) => !deleting && onOpenChange(next)}
     >
       <DialogContent showCloseButton={false} className="sm:max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="no-dot">{t("title")}</DialogTitle>
+        <DialogHeader className="gap-4">
+          <DialogTitle className="no-dot mb-2">{t("title")}</DialogTitle>
           <DialogDescription className="space-y-2 text-base">
             <span className="block">{t("everything")}</span>
             <span className="block">{t("company")}</span>

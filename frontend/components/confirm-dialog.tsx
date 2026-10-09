@@ -37,8 +37,8 @@ export function ConfirmDialog({
   return (
     <Dialog open={open} onOpenChange={(next) => !busy && onOpenChange(next)}>
       <DialogContent showCloseButton={false}>
-        <DialogHeader>
-          <DialogTitle className="no-dot">{title}</DialogTitle>
+        <DialogHeader className="gap-4">
+          <DialogTitle className="no-dot mb-2">{title}</DialogTitle>
           <DialogDescription>{text}</DialogDescription>
         </DialogHeader>
         <DialogFooter>

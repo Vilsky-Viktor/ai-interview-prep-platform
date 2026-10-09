@@ -67,8 +67,10 @@ export function DeleteTemplate({
         }}
       >
         <DialogContent showCloseButton={false}>
-          <DialogHeader>
-            <DialogTitle className="no-dot">{t("deleteTitle")}</DialogTitle>
+          <DialogHeader className="gap-4">
+            <DialogTitle className="no-dot mb-2">
+              {t("deleteTitle")}
+            </DialogTitle>
             <DialogDescription>{t("deleteText")}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
