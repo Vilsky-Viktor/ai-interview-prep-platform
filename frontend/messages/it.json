@@ -1482,5 +1482,271 @@
       }
     },
     "removed": "Messaggio rimosso: conteneva un segreto"
+  },
+  "pageHelp": {
+    "label": "Informazioni su questa pagina",
+    "actionsTitle": "Cosa puoi fare",
+    "tipsTitle": "Suggerimenti",
+    "landing": {
+      "title": "Come funziona prepza",
+      "text": "prepza trasforma la descrizione del ruolo in un colloquio a scelta multipla a tempo, con domande casuali diverse per ogni candidato.",
+      "actions": [
+        "Incolla la descrizione del ruolo: prepza propone gli argomenti da valutare.",
+        "Rivedi gli argomenti: tienili, modificali o eliminali, poi approvali per far scrivere le domande.",
+        "Invita i candidati via email, da un file o con un unico link condivisibile.",
+        "Leggi i report: candidati ordinati per punteggio, con ogni risposta e le segnalazioni di integrità."
+      ],
+      "tips": [
+        "Creare colloqui è gratis. Paghi $1–3 per ogni candidato che risponde, e i tuoi primi candidati sono gratis.",
+        "Prova il tuo colloquio come candidato prima di invitare qualcuno."
+      ]
+    },
+    "companies": {
+      "title": "Aziende",
+      "text": "Le tue aziende. Tutto ciò che fai in prepza avviene dentro un'azienda: i suoi colloqui, candidati, team, crediti e integrazioni.",
+      "actions": [
+        "Crea un'azienda con «Nuova azienda». Il suo nome è unico in prepza.",
+        "Apri un'azienda per lavorare sui suoi colloqui e candidati.",
+        "Rimuovi un'azienda di cui sei proprietario, con tutti i suoi colloqui e inviti."
+      ],
+      "tips": [
+        "Accanto a ogni azienda di cui non sei proprietario compare il tuo ruolo: gli amministratori modificano, i visualizzatori possono solo guardare.",
+        "I crediti appartengono a un'azienda, quindi ognuna si ricarica separatamente."
+      ]
+    },
+    "pickCompany": {
+      "title": "Scegli un'azienda",
+      "text": "Hai scelto un modello. Scegli l'azienda a cui è destinato: il modello viene copiato lì come nuovo colloquio, gratis e pronto da inviare ai candidati.",
+      "actions": [
+        "Scegli un'azienda per aprirvi il modello, poi usalo.",
+        "Crea una nuova azienda se non ne hai ancora una; il modello si apre lì."
+      ],
+      "tips": [
+        "Una volta copiato, il colloquio appartiene all'azienda: modifica domande e impostazioni come preferisci."
+      ]
+    },
+    "interviews": {
+      "title": "Colloqui",
+      "text": "Tutti i colloqui di questa azienda e i suoi crediti per i candidati. Ogni colloquio è un test a tempo creato da una descrizione del ruolo.",
+      "actions": [
+        "Crea un colloquio da una descrizione del ruolo con «Nuovo colloquio».",
+        "Apri un colloquio per vederne argomenti, candidati e impostazioni.",
+        "Prova un colloquio come candidato, oppure eliminalo.",
+        "Ricarica i crediti, o attiva la ricarica automatica, dal saldo."
+      ],
+      "tips": [
+        "Il saldo diventa ambra quando i crediti stanno per finire. Senza crediti, i nuovi inviti non vengono inviati.",
+        "Le schede in alto portano a modelli, team, integrazioni e referral."
+      ]
+    },
+    "newInterview": {
+      "title": "Nuovo colloquio",
+      "text": "Crea un colloquio dalla descrizione del ruolo. prepza la legge, propone gli argomenti da valutare e scrive le domande dopo che li approvi.",
+      "actions": [
+        "Incolla la descrizione del ruolo: la posizione, i requisiti e i requisiti preferenziali.",
+        "Scegli la lingua in cui generare il colloquio.",
+        "Genera, poi rivedi gli argomenti proposti."
+      ],
+      "tips": [
+        "Più la descrizione è specifica, più le domande si adattano al ruolo.",
+        "Generare è gratis: paghi solo per i candidati che rispondono."
+      ]
+    },
+    "reviewTopics": {
+      "title": "Rivedi i tuoi argomenti",
+      "text": "prepza ha proposto questi argomenti dalla tua descrizione. Ogni argomento che tieni riceve il suo insieme di domande con risposte.",
+      "actions": [
+        "Deseleziona gli argomenti che non ti servono.",
+        "Modifica il nome e i sottoargomenti di un argomento con la sua matita.",
+        "Descrivi le modifiche con parole tue e applicale, ad esempio «aggiungi un argomento sulla leadership del team».",
+        "Approva e genera per far scrivere le domande."
+      ],
+      "tips": [
+        "Se gli argomenti sono troppi, deselezionane alcuni o descrivi come unirli.",
+        "Le domande vengono scritte solo dopo la tua approvazione, quindi prenditi un minuto qui."
+      ]
+    },
+    "generating": {
+      "title": "In generazione",
+      "text": "prepza sta creando il tuo colloquio: prima gli argomenti, poi le domande per ciascuno. Ci vuole qualche minuto.",
+      "actions": [
+        "Puoi lasciare questa pagina: la generazione continua.",
+        "Annulla la generazione se non ti serve più; nulla di quanto creato finora viene conservato."
+      ],
+      "tips": [
+        "Ricevi una notifica quando il colloquio è pronto.",
+        "Torna quando vuoi dall'elenco dei colloqui."
+      ]
+    },
+    "interviewTopics": {
+      "title": "Argomenti",
+      "text": "Cosa valuta questo colloquio: i suoi argomenti, ognuno con sottoargomenti e un proprio insieme di domande. Ogni candidato riceve una selezione casuale da ciascun insieme.",
+      "actions": [
+        "Apri «Gestisci domande» per leggere le domande e le risposte di un argomento.",
+        "Rigenera una domanda debole, segna una risposta sbagliata o leggi le segnalazioni dei candidati su una domanda.",
+        "Stabilisci quante domande riceve ogni candidato da un argomento.",
+        "Prova il colloquio come candidato, oppure eliminalo."
+      ],
+      "tips": [
+        "Le domande scritte dall'IA possono essere sbagliate: scorri ogni argomento prima di invitare qualcuno.",
+        "Fai clic sul titolo per rinominare il colloquio."
+      ]
+    },
+    "interviewCandidates": {
+      "title": "Candidati",
+      "text": "Tutte le persone invitate a questo colloquio, con stato, avanzamento e punteggio.",
+      "actions": [
+        "Invita i candidati: uno alla volta, un elenco fino a 100, o un file CSV o TXT.",
+        "Attiva il link condivisibile per un annuncio di lavoro: chiunque lo abbia può sostenere il colloquio.",
+        "Cerca per email o nome, filtra per stato e ordina per punteggio o data.",
+        "Apri il report di un candidato, oppure scarica o condividi il report su tutti i candidati."
+      ],
+      "tips": [
+        "Ogni candidato che risponde ad almeno una domanda consuma crediti, compresi quelli arrivati dal link.",
+        "I promemoria vengono inviati ai candidati automaticamente."
+      ]
+    },
+    "interviewSettings": {
+      "title": "Impostazioni",
+      "text": "Come si svolge questo colloquio per ogni candidato.",
+      "actions": [
+        "Imposta il tempo per domanda, in secondi.",
+        "Imposta la soglia di superamento: i candidati che la raggiungono superano il colloquio.",
+        "Segna il colloquio come assunto quando hai coperto la posizione."
+      ],
+      "tips": [
+        "Ogni impostazione viene salvata appena esci dal suo campo.",
+        "I candidati non vedono mai i loro punteggi; li vede solo il tuo team.",
+        "Per un candidato che ha bisogno di più tempo, aggiungi tempo extra nella sua pagina."
+      ]
+    },
+    "tryInterview": {
+      "title": "Prova come candidato",
+      "text": "Un'anteprima di questo colloquio esattamente come lo vedono i candidati: l'introduzione, poi le domande a tempo. È gratis.",
+      "actions": [
+        "Avvia l'anteprima e rispondi come farebbe un candidato.",
+        "Controlla i tempi, la formulazione e le risposte prima di invitare qualcuno."
+      ],
+      "tips": [
+        "Resta sulla pagina mentre rispondi: per i candidati vengono registrati l'uscita dalla pagina, la copia e le risposte troppo veloci."
+      ]
+    },
+    "candidate": {
+      "title": "Report del candidato",
+      "text": "I risultati di un candidato: il punteggio, se ha superato il colloquio e il punteggio di ogni argomento con ogni risposta.",
+      "actions": [
+        "Leggi ogni risposta, con le segnalazioni di integrità: uscite dalla pagina, tentativi di copia e risposte troppo veloci.",
+        "Scarica il report in PDF o condividilo via email.",
+        "Concedi tempo extra prima che inizi, ad esempio per una disabilità.",
+        "Aggiungi o modifica il nome del candidato.",
+        "Invia di nuovo o revoca l'invito, oppure elimina il candidato con i suoi risultati."
+      ],
+      "tips": [
+        "Il punteggio supporta la tua decisione, non la prende al posto tuo. Se il candidato lo chiede, fai rivedere il suo risultato da una persona."
+      ]
+    },
+    "templates": {
+      "title": "Modelli",
+      "text": "Colloqui pronti per i ruoli più comuni. Usarne uno lo copia in questa azienda come tuo colloquio.",
+      "actions": [
+        "Cerca per ruolo o argomento, e filtra per livello e lingua.",
+        "Apri un modello per vederne gli argomenti e quante domande ha ciascuno.",
+        "Usa un modello per avviare un colloquio a partire da esso."
+      ],
+      "tips": [
+        "Per un risultato più mirato, crea invece un colloquio dalla tua descrizione del ruolo.",
+        "Una volta copiato, il colloquio è tuo: modifica domande e impostazioni come preferisci."
+      ]
+    },
+    "template": {
+      "title": "Modello",
+      "text": "Un colloquio pronto: i suoi argomenti, i loro sottoargomenti e quante domande ha ogni argomento.",
+      "actions": [
+        "Verifica che gli argomenti corrispondano al ruolo per cui stai assumendo.",
+        "Usa il modello per copiarlo in questa azienda come nuovo colloquio."
+      ],
+      "tips": [
+        "Copiare è gratis; i candidati che rispondono consumano crediti come sempre.",
+        "Se gli argomenti non vanno bene, crea invece un colloquio dalla tua descrizione del ruolo."
+      ]
+    },
+    "team": {
+      "title": "Team",
+      "text": "Le persone che lavorano ai colloqui di questa azienda e i loro ruoli.",
+      "actions": [
+        "Aggiungi un membro via email, come amministratore o visualizzatore.",
+        "Cambia il ruolo di un membro tra amministratore e visualizzatore.",
+        "Copia il link di un invito in sospeso, oppure rimuovi un membro o un invito."
+      ],
+      "tips": [
+        "Gli amministratori creano e modificano i colloqui, invitano i candidati e ricaricano i crediti. I visualizzatori vedono colloqui e risultati e condividono i report, ma non modificano nulla.",
+        "Rimuovere un membro la cui carta paga le ricariche automatiche interrompe quelle ricariche."
+      ]
+    },
+    "integrations": {
+      "title": "Integrazioni",
+      "text": "Collega prepza agli strumenti che il tuo team usa già. Ogni integrazione apre una propria pagina con i passaggi di configurazione.",
+      "actions": [
+        "Slack: ricevi le notifiche della tua azienda in un canale.",
+        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): i candidati che sposti in una fase ricevono il colloquio, e i loro risultati tornano indietro.",
+        "API: chiavi e webhook per collegare la tua piattaforma."
+      ],
+      "tips": [
+        "Tutti nell'azienda vedono le integrazioni; proprietari e amministratori le modificano."
+      ]
+    },
+    "ats": {
+      "title": "Integrazione ATS",
+      "text": "Collega una posizione del tuo ATS a un colloquio: i candidati che sposti nella fase scelta ricevono il colloquio, e i loro risultati tornano come commento sul loro profilo.",
+      "actions": [
+        "Collega il tuo ATS seguendo le sue istruzioni.",
+        "Collega una posizione: scegli la posizione, la sua fase e un colloquio, oppure crea un nuovo colloquio dal testo della posizione.",
+        "Invita di nuovo i candidati che non sono stati invitati, ad esempio quando i crediti erano finiti.",
+        "Rimuovi il collegamento di una posizione, oppure scollega l'ATS."
+      ],
+      "tips": [
+        "Aggiungi una fase solo per prepza, come «Test delle competenze prepza», così non si mescola mai con gli altri tuoi strumenti.",
+        "prepza non sposta né scarta mai nessuno nel tuo ATS."
+      ]
+    },
+    "slack": {
+      "title": "Slack",
+      "text": "Le notifiche della tua azienda in un canale Slack, in tempo reale.",
+      "actions": [
+        "Aggiungi prepza a Slack e scegli il canale, ad esempio #hiring.",
+        "Scegli quali notifiche arrivano lì: un candidato che finisce, un invito non consegnato, un colloquio pronto e altro.",
+        "Scollega per fermarle e rimuovere l'app di prepza dal tuo Slack."
+      ],
+      "tips": [
+        "prepza può solo pubblicare in quel canale; non può leggere il tuo Slack.",
+        "Tutti continuano a vedere ogni notifica nella campanella."
+      ]
+    },
+    "api": {
+      "title": "API",
+      "text": "Collega a prepza la tua piattaforma, ad esempio il tuo sito carriere.",
+      "actions": [
+        "Crea una chiave API: legge i tuoi colloqui e candidati e invita candidati a tuo nome.",
+        "Aggiungi un webhook: quando un candidato finisce, i suoi risultati arrivano firmati al tuo indirizzo HTTPS.",
+        "Elimina le chiavi e i webhook che non usi più.",
+        "Apri la documentazione API con ogni endpoint ed evento."
+      ],
+      "tips": [
+        "Una nuova chiave e il secret di un webhook vengono mostrati una sola volta: copiali subito.",
+        "Scegli una scadenza per ogni chiave: una chiave trapelata che non scade mai resta utilizzabile."
+      ]
+    },
+    "referrals": {
+      "title": "Referral",
+      "text": "Invita altre aziende su prepza con il link di questa azienda, e ricevete entrambi crediti.",
+      "actions": [
+        "Copia o condividi il tuo link referral.",
+        "Vedi ogni premio ricevuto da questa azienda."
+      ],
+      "tips": [
+        "Ricevete entrambi crediti quando l'azienda invitata fa la sua prima ricarica, di qualsiasi importo.",
+        "I crediti vanno a questa azienda e non scadono mai."
+      ]
+    }
   }
 }

@@ -1482,5 +1482,271 @@
       }
     },
     "removed": "Nachricht entfernt: Sie enthielt ein Geheimnis"
+  },
+  "pageHelp": {
+    "label": "Über diese Seite",
+    "actionsTitle": "Was du tun kannst",
+    "tipsTitle": "Tipps",
+    "landing": {
+      "title": "So funktioniert prepza",
+      "text": "prepza macht aus deiner Stellenbeschreibung ein Multiple-Choice-Interview mit Zeitlimit, mit eigenen zufälligen Fragen für jeden Kandidaten.",
+      "actions": [
+        "Füge die Stellenbeschreibung ein: prepza schlägt die Themen vor, die getestet werden.",
+        "Prüfe die Themen: behalte, bearbeite oder streiche sie und bestätige sie dann, damit die Fragen geschrieben werden.",
+        "Lade Kandidaten per E-Mail, aus einer Datei oder mit einem Link zum Teilen ein.",
+        "Lies die Berichte: Kandidaten nach Ergebnis sortiert, mit jeder Antwort und Integritätshinweisen."
+      ],
+      "tips": [
+        "Interviews zu erstellen ist kostenlos. Du zahlst $1–3 pro Kandidat, der antwortet, und deine ersten Kandidaten sind kostenlos.",
+        "Probiere dein Interview als Kandidat aus, bevor du jemanden einlädst."
+      ]
+    },
+    "companies": {
+      "title": "Unternehmen",
+      "text": "Deine Unternehmen. Alles, was du in prepza tust, passiert in einem davon: seine Interviews, Kandidaten, sein Team, seine Credits und Integrationen.",
+      "actions": [
+        "Erstelle ein Unternehmen mit „Neues Unternehmen“. Sein Name ist in prepza eindeutig.",
+        "Öffne ein Unternehmen, um an seinen Interviews und Kandidaten zu arbeiten.",
+        "Entferne ein Unternehmen, dessen Inhaber du bist, mit allen Interviews und Einladungen."
+      ],
+      "tips": [
+        "Bei Unternehmen, deren Inhaber du nicht bist, steht deine Rolle daneben: Admins ändern Dinge, Betrachter sehen nur zu.",
+        "Credits gehören zu einem Unternehmen, daher wird jedes einzeln aufgeladen."
+      ]
+    },
+    "pickCompany": {
+      "title": "Wähle ein Unternehmen",
+      "text": "Du hast eine Vorlage gewählt. Wähle das Unternehmen, für das sie ist: Die Vorlage wird dort als neues Interview kopiert, kostenlos und bereit für Kandidaten.",
+      "actions": [
+        "Wähle ein Unternehmen, um die Vorlage darin zu öffnen, und verwende sie dann.",
+        "Erstelle ein neues Unternehmen, falls du noch keins hast; die Vorlage öffnet sich dort."
+      ],
+      "tips": [
+        "Nach dem Kopieren gehört das Interview dem Unternehmen: Ändere seine Fragen und Einstellungen nach Belieben."
+      ]
+    },
+    "interviews": {
+      "title": "Interviews",
+      "text": "Alle Interviews dieses Unternehmens und seine Credits für Kandidaten. Jedes Interview ist ein Test mit Zeitlimit, erstellt aus einer Stellenbeschreibung.",
+      "actions": [
+        "Erstelle mit „Neues Interview“ ein Interview aus einer Stellenbeschreibung.",
+        "Öffne ein Interview, um seine Themen, Kandidaten und Einstellungen zu sehen.",
+        "Probiere ein Interview als Kandidat aus oder lösche es.",
+        "Lade Credits auf oder schalte automatisches Aufladen ein, direkt beim Guthaben."
+      ],
+      "tips": [
+        "Das Guthaben wird gelb, wenn die Credits knapp werden. Ohne Credits werden keine neuen Einladungen gesendet.",
+        "Die Tabs oben führen zu Vorlagen, deinem Team, Integrationen und Empfehlungen."
+      ]
+    },
+    "newInterview": {
+      "title": "Neues Interview",
+      "text": "Starte ein Interview aus der Stellenbeschreibung. prepza liest sie, schlägt die Themen vor und schreibt die Fragen, sobald du sie bestätigst.",
+      "actions": [
+        "Füge die Stellenbeschreibung ein: die Rolle, ihre Anforderungen und Wünschenswertes.",
+        "Wähle die Sprache, in der das Interview generiert wird.",
+        "Generiere und prüfe dann die vorgeschlagenen Themen."
+      ],
+      "tips": [
+        "Je genauer die Beschreibung, desto besser passen die Fragen zur Rolle.",
+        "Das Generieren ist kostenlos: Du zahlst nur für Kandidaten, die antworten."
+      ]
+    },
+    "reviewTopics": {
+      "title": "Prüfe deine Themen",
+      "text": "prepza hat diese Themen aus deiner Beschreibung vorgeschlagen. Jedes Thema, das du behältst, bekommt eigene Fragen mit Antworten.",
+      "actions": [
+        "Entferne das Häkchen bei Themen, die du nicht brauchst.",
+        "Bearbeite den Namen und die Unterthemen eines Themas mit seinem Stift.",
+        "Beschreibe Änderungen in deinen eigenen Worten und wende sie an, zum Beispiel „ein Thema zu Teamführung hinzufügen“.",
+        "Bestätige und generiere, damit die Fragen geschrieben werden."
+      ],
+      "tips": [
+        "Bei zu vielen Themen entferne einige oder beschreibe, wie sie zusammengefasst werden sollen.",
+        "Die Fragen werden erst nach deiner Bestätigung geschrieben, nimm dir also hier eine Minute."
+      ]
+    },
+    "generating": {
+      "title": "Wird generiert",
+      "text": "prepza erstellt dein Interview: zuerst die Themen, dann die Fragen zu jedem. Das dauert ein paar Minuten.",
+      "actions": [
+        "Du kannst diese Seite verlassen: Die Generierung läuft weiter.",
+        "Brich die Generierung ab, wenn du sie nicht mehr brauchst; bisher Erstelltes wird nicht behalten."
+      ],
+      "tips": [
+        "Du bekommst eine Benachrichtigung, wenn das Interview fertig ist.",
+        "Du kannst jederzeit über die Liste der Interviews zurückkommen."
+      ]
+    },
+    "interviewTopics": {
+      "title": "Themen",
+      "text": "Was dieses Interview testet: seine Themen, jedes mit Unterthemen und einem eigenen Pool an Fragen. Jeder Kandidat bekommt eine zufällige Auswahl aus jedem Pool.",
+      "actions": [
+        "Öffne „Fragen verwalten“, um die Fragen und Antworten eines Themas zu lesen.",
+        "Generiere eine schwache Frage neu, markiere eine falsche Antwort oder lies Meldungen von Kandidaten zu einer Frage.",
+        "Lege fest, wie viele Fragen jeder Kandidat aus einem Thema bekommt.",
+        "Probiere das Interview als Kandidat aus oder lösche es."
+      ],
+      "tips": [
+        "Von KI geschriebene Fragen können falsch sein: Überfliege jedes Thema, bevor du jemanden einlädst.",
+        "Klicke auf den Titel, um das Interview umzubenennen."
+      ]
+    },
+    "interviewCandidates": {
+      "title": "Kandidaten",
+      "text": "Alle, die zu diesem Interview eingeladen wurden, mit Status, Fortschritt und Ergebnis.",
+      "actions": [
+        "Lade Kandidaten ein: einzeln, als Liste mit bis zu 100 oder aus einer CSV- oder TXT-Datei.",
+        "Schalte den Link zum Teilen für eine Stellenanzeige ein: Jeder mit dem Link kann das Interview machen.",
+        "Suche nach E-Mail oder Name, filtere nach Status und sortiere nach Ergebnis oder Datum.",
+        "Öffne den Bericht eines Kandidaten oder lade den Bericht über alle Kandidaten herunter oder teile ihn."
+      ],
+      "tips": [
+        "Jeder Kandidat, der mindestens eine Frage beantwortet, verbraucht Credits, auch über den Link.",
+        "Erinnerungen gehen automatisch an die Kandidaten."
+      ]
+    },
+    "interviewSettings": {
+      "title": "Einstellungen",
+      "text": "Wie dieses Interview für jeden Kandidaten abläuft.",
+      "actions": [
+        "Lege die Zeit pro Frage in Sekunden fest.",
+        "Lege die Bestehensgrenze fest: Kandidaten, die sie erreichen, bestehen.",
+        "Markiere das Interview als eingestellt, sobald die Stelle besetzt ist."
+      ],
+      "tips": [
+        "Jede Einstellung wird gespeichert, sobald du ihr Feld verlässt.",
+        "Kandidaten sehen ihre Punktzahlen nie; nur dein Team sieht sie.",
+        "Für einen Kandidaten, der mehr Zeit braucht, füge auf seiner Seite zusätzliche Zeit hinzu."
+      ]
+    },
+    "tryInterview": {
+      "title": "Als Kandidat ausprobieren",
+      "text": "Eine Vorschau dieses Interviews, genau so, wie Kandidaten es sehen: die Einleitung, dann die Fragen mit Zeitlimit. Sie ist kostenlos.",
+      "actions": [
+        "Starte die Vorschau und antworte wie ein Kandidat.",
+        "Prüfe Zeit, Formulierungen und Antworten, bevor du jemanden einlädst."
+      ],
+      "tips": [
+        "Bleib beim Antworten auf der Seite: Bei Kandidaten werden das Verlassen der Seite, Kopieren und zu schnelle Antworten erfasst."
+      ]
+    },
+    "candidate": {
+      "title": "Kandidatenbericht",
+      "text": "Die Ergebnisse eines Kandidaten: sein Ergebnis, ob er bestanden hat, und die Punktzahl jedes Themas mit jeder Antwort.",
+      "actions": [
+        "Lies jede Antwort mit Integritätshinweisen: Verlassen der Seite, Kopierversuche und zu schnelle Antworten.",
+        "Lade den Bericht als PDF herunter oder teile ihn per E-Mail.",
+        "Gib vor dem Start zusätzliche Zeit, zum Beispiel bei einer Behinderung.",
+        "Füge den Namen des Kandidaten hinzu oder bearbeite ihn.",
+        "Sende die Einladung erneut, widerrufe sie oder lösche den Kandidaten mit seinen Ergebnissen."
+      ],
+      "tips": [
+        "Das Ergebnis unterstützt deine Entscheidung, es trifft sie nicht. Wenn der Kandidat darum bittet, lass sein Ergebnis von einer Person prüfen."
+      ]
+    },
+    "templates": {
+      "title": "Vorlagen",
+      "text": "Fertige Interviews für gängige Rollen. Wenn du eine verwendest, wird sie als dein eigenes Interview in dieses Unternehmen kopiert.",
+      "actions": [
+        "Suche nach Rolle oder Thema und filtere nach Level und Sprache.",
+        "Öffne eine Vorlage, um ihre Themen und die Anzahl der Fragen pro Thema zu sehen.",
+        "Verwende eine Vorlage, um daraus ein Interview zu starten."
+      ],
+      "tips": [
+        "Für eine genauere Passung erstelle stattdessen ein Interview aus deiner eigenen Stellenbeschreibung.",
+        "Nach dem Kopieren gehört das Interview dir: Ändere seine Fragen und Einstellungen nach Belieben."
+      ]
+    },
+    "template": {
+      "title": "Vorlage",
+      "text": "Ein fertiges Interview: seine Themen, ihre Unterthemen und wie viele Fragen jedes Thema hat.",
+      "actions": [
+        "Prüfe, ob die Themen zu der Rolle passen, für die du einstellst.",
+        "Verwende die Vorlage, um sie als neues Interview in dieses Unternehmen zu kopieren."
+      ],
+      "tips": [
+        "Das Kopieren ist kostenlos; Kandidaten, die antworten, verbrauchen wie gewohnt Credits.",
+        "Wenn die Themen nicht passen, erstelle stattdessen ein Interview aus deiner Stellenbeschreibung."
+      ]
+    },
+    "team": {
+      "title": "Team",
+      "text": "Die Personen, die an den Interviews dieses Unternehmens arbeiten, und ihre Rollen.",
+      "actions": [
+        "Füge ein Mitglied per E-Mail hinzu, als Admin oder Betrachter.",
+        "Ändere die Rolle eines Mitglieds zwischen Admin und Betrachter.",
+        "Kopiere den Link einer offenen Einladung oder entferne ein Mitglied oder eine Einladung."
+      ],
+      "tips": [
+        "Admins erstellen und ändern Interviews, laden Kandidaten ein und laden Credits auf. Betrachter sehen Interviews und Ergebnisse und teilen Berichte, ändern aber nichts.",
+        "Wenn du ein Mitglied entfernst, dessen Karte das automatische Aufladen bezahlt, endet das automatische Aufladen."
+      ]
+    },
+    "integrations": {
+      "title": "Integrationen",
+      "text": "Verbinde prepza mit den Tools, die dein Team schon nutzt. Jede Integration öffnet eine eigene Seite mit Einrichtungsschritten.",
+      "actions": [
+        "Slack: Erhalte die Benachrichtigungen deines Unternehmens in einem Kanal.",
+        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): Kandidaten, die du in eine Phase verschiebst, bekommen das Interview, und ihre Ergebnisse gehen zurück.",
+        "API: Schlüssel und Webhooks, um deine eigene Plattform anzubinden."
+      ],
+      "tips": [
+        "Alle im Unternehmen sehen die Integrationen; Inhaber und Admins ändern sie."
+      ]
+    },
+    "ats": {
+      "title": "ATS-Integration",
+      "text": "Verknüpfe eine Stelle in deinem ATS mit einem Interview: Kandidaten, die du in eine gewählte Phase verschiebst, bekommen das Interview, und ihre Ergebnisse kommen als Kommentar in ihr Profil zurück.",
+      "actions": [
+        "Verbinde dein ATS anhand seiner Anleitung.",
+        "Verknüpfe eine Stelle: Wähle die Stelle, ihre Phase und ein Interview oder erstelle ein neues Interview aus dem Text der Stelle.",
+        "Lade Kandidaten erneut ein, die nicht eingeladen wurden, zum Beispiel weil die Credits aufgebraucht waren.",
+        "Löse die Verknüpfung einer Stelle oder trenne das ATS."
+      ],
+      "tips": [
+        "Füge eine Phase nur für prepza hinzu, etwa „prepza Skills-Test“, damit sie sich nie mit deinen anderen Tools vermischt.",
+        "prepza verschiebt oder lehnt in deinem ATS nie jemanden ab."
+      ]
+    },
+    "slack": {
+      "title": "Slack",
+      "text": "Die Benachrichtigungen deines Unternehmens in einem Slack-Kanal, sobald sie passieren.",
+      "actions": [
+        "Füge prepza zu Slack hinzu und wähle den Kanal, zum Beispiel #hiring.",
+        "Wähle, welche Benachrichtigungen dort ankommen: ein Kandidat ist fertig, eine Einladung wurde nicht zugestellt, ein Interview ist fertig und mehr.",
+        "Trenne die Verbindung, um sie zu stoppen und die App von prepza aus deinem Slack zu entfernen."
+      ],
+      "tips": [
+        "prepza kann nur in diesem Kanal posten; dein Slack lesen kann es nicht.",
+        "Alle sehen weiterhin jede Benachrichtigung in der Glocke."
+      ]
+    },
+    "api": {
+      "title": "API",
+      "text": "Verbinde deine eigene Plattform, etwa deine Karriereseite, mit prepza.",
+      "actions": [
+        "Erstelle einen API-Schlüssel: Er liest deine Interviews und Kandidaten und lädt in deinem Namen Kandidaten ein.",
+        "Füge einen Webhook hinzu: Wenn ein Kandidat fertig ist, gehen seine Ergebnisse signiert an deine HTTPS-Adresse.",
+        "Lösche Schlüssel und Webhooks, die du nicht mehr nutzt.",
+        "Öffne die API-Dokumentation mit jedem Endpunkt und jedem Ereignis."
+      ],
+      "tips": [
+        "Ein neuer Schlüssel und das Secret eines Webhooks werden nur einmal angezeigt: Kopiere sie sofort.",
+        "Wähle für jeden Schlüssel ein Ablaufdatum: Ein geleakter Schlüssel ohne Ablauf bleibt nutzbar."
+      ]
+    },
+    "referrals": {
+      "title": "Empfehlungen",
+      "text": "Lade andere Unternehmen mit dem Link dieses Unternehmens zu prepza ein, und ihr bekommt beide Credits.",
+      "actions": [
+        "Kopiere oder teile deinen Empfehlungslink.",
+        "Sieh dir jede Prämie an, die dieses Unternehmen erhalten hat."
+      ],
+      "tips": [
+        "Ihr bekommt beide Credits, wenn das eingeladene Unternehmen zum ersten Mal auflädt, egal mit welchem Betrag.",
+        "Die Credits gehen an dieses Unternehmen und verfallen nie."
+      ]
+    }
   }
 }

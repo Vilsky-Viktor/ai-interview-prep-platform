@@ -1486,5 +1486,271 @@
       }
     },
     "removed": "Sõnum eemaldatud: selles oli saladus"
+  },
+  "pageHelp": {
+    "label": "Selle lehe kohta",
+    "actionsTitle": "Mida saad teha",
+    "tipsTitle": "Nõuanded",
+    "landing": {
+      "title": "Kuidas prepza töötab",
+      "text": "prepza teeb sinu töökuulutusest ajapiiranguga valikvastustega intervjuu, kus igal kandidaadil on omad juhuslikud küsimused.",
+      "actions": [
+        "Kleebi töökuulutus: prepza pakub välja teemad, mida testida.",
+        "Vaata teemad üle: jäta alles, muuda või eemalda need ja kinnita, et küsimused kirjutataks.",
+        "Kutsu kandidaate e-kirjaga, failist või ühe jagatava lingiga.",
+        "Loe aruandeid: kandidaadid hinde järgi järjestatud, iga vastuse ja märgetega kahtlase käitumise kohta."
+      ],
+      "tips": [
+        "Intervjuude loomine on tasuta. Maksad $1–3 iga vastava kandidaadi eest ja esimesed kandidaadid on tasuta.",
+        "Proovi intervjuud kandidaadina, enne kui kedagi kutsud."
+      ]
+    },
+    "companies": {
+      "title": "Ettevõtted",
+      "text": "Sinu ettevõtted. Kõik, mida prepzas teed, toimub ühe ettevõtte sees: selle intervjuud, kandidaadid, meeskond, krediidid ja integratsioonid.",
+      "actions": [
+        "Loo ettevõte nupuga „Uus ettevõte“. Selle nimi on kogu prepzas ainulaadne.",
+        "Ava ettevõte, et töötada selle intervjuude ja kandidaatidega.",
+        "Eemalda enda ettevõte koos kõigi selle intervjuude ja kutsetega."
+      ],
+      "tips": [
+        "Ettevõtete juures, mille omanik sa ei ole, on näha sinu roll: administraatorid teevad muudatusi, vaatajad ainult vaatavad.",
+        "Krediidid kuuluvad ettevõttele, seega laetakse igale ettevõttele krediiti eraldi juurde."
+      ]
+    },
+    "pickCompany": {
+      "title": "Vali ettevõte",
+      "text": "Valisid malli. Vali ettevõte, mille jaoks see on: mall kopeeritakse sinna uue intervjuuna, tasuta ja kohe kandidaatidele saatmiseks valmis.",
+      "actions": [
+        "Vali ettevõte, et mall selles avada, ja kasuta seda.",
+        "Loo uus ettevõte, kui sul seda veel pole; mall avaneb seal."
+      ],
+      "tips": [
+        "Pärast kopeerimist kuulub intervjuu ettevõttele: muuda selle küsimusi ja seadeid, nagu soovid."
+      ]
+    },
+    "interviews": {
+      "title": "Intervjuud",
+      "text": "Kõik selle ettevõtte intervjuud ja selle krediidid kandidaatide jaoks. Iga intervjuu on töökuulutuse põhjal loodud ajapiiranguga test.",
+      "actions": [
+        "Loo töökuulutuse põhjal intervjuu nupuga „Uus intervjuu“.",
+        "Ava intervjuu, et näha selle teemasid, kandidaate ja seadeid.",
+        "Proovi intervjuud kandidaadina või kustuta see.",
+        "Laadi saldo juures krediiti juurde või lülita sisse automaatne juurdelaadimine."
+      ],
+      "tips": [
+        "Kui krediiti jääb vähe, muutub saldo merevaigukollaseks. Ilma krediidita uusi kutseid ei saadeta.",
+        "Ülal olevad vahekaardid viivad mallide, meeskonna, integratsioonide ja soovituste juurde."
+      ]
+    },
+    "newInterview": {
+      "title": "Uus intervjuu",
+      "text": "Alusta intervjuud töökuulutusest. prepza loeb selle läbi, pakub välja teemad, mida testida, ja kirjutab küsimused, kui oled teemad kinnitanud.",
+      "actions": [
+        "Kleebi töökuulutus: roll, nõuded ja mis tuleb kasuks.",
+        "Vali keel, milles intervjuu luuakse.",
+        "Loo intervjuu ja vaata seejärel pakutud teemad üle."
+      ],
+      "tips": [
+        "Mida täpsem kuulutus, seda paremini küsimused rolli sobivad.",
+        "Loomine on tasuta: maksad ainult kandidaatide eest, kes vastavad."
+      ]
+    },
+    "reviewTopics": {
+      "title": "Vaata oma teemad üle",
+      "text": "prepza pakkus need teemad välja sinu kuulutuse põhjal. Iga alles jäetud teema saab oma küsimuste komplekti koos vastustega.",
+      "actions": [
+        "Eemalda linnuke teemadelt, mida sul vaja pole.",
+        "Muuda teema nime ja alateemasid selle pliiatsiga.",
+        "Kirjelda muudatusi oma sõnadega ja rakenda need, näiteks „lisa teema meeskonna juhtimisest“.",
+        "Kinnita ja loo, et küsimused kirjutataks."
+      ],
+      "tips": [
+        "Kui teemasid on liiga palju, eemalda mõnelt linnuke või kirjelda, kuidas neid ühendada.",
+        "Küsimused kirjutatakse alles pärast kinnitamist, seega võta siin hetk aega."
+      ]
+    },
+    "generating": {
+      "title": "Loomisel",
+      "text": "prepza loob sinu intervjuud: kõigepealt teemad, siis igaühe küsimused. See võtab paar minutit.",
+      "actions": [
+        "Võid sellelt lehelt lahkuda: loomine jätkub.",
+        "Tühista loomine, kui sul seda enam vaja pole; seni loodust ei säilitata midagi."
+      ],
+      "tips": [
+        "Saad teavituse, kui intervjuu on valmis.",
+        "Tule igal ajal tagasi intervjuude loendist."
+      ]
+    },
+    "interviewTopics": {
+      "title": "Teemad",
+      "text": "Mida see intervjuu testib: selle teemad, igaühel alateemad ja oma küsimustekogum. Iga kandidaat saab igast kogumist juhusliku valiku.",
+      "actions": [
+        "Ava „Halda küsimusi“, et lugeda teema küsimusi ja vastuseid.",
+        "Loo nõrk küsimus uuesti, märgi vale vastus või loe kandidaatide teateid küsimuse kohta.",
+        "Määra, mitu küsimust iga kandidaat teemast saab.",
+        "Proovi intervjuud kandidaadina või kustuta see."
+      ],
+      "tips": [
+        "Tehisintellekti kirjutatud küsimustes võib olla vigu: sirvi iga teema läbi, enne kui kedagi kutsud.",
+        "Klõpsa pealkirjal, et intervjuu ümber nimetada."
+      ]
+    },
+    "interviewCandidates": {
+      "title": "Kandidaadid",
+      "text": "Kõik sellele intervjuule kutsutud, koos oleku, edenemise ja hindega.",
+      "actions": [
+        "Kutsu kandidaate: ükshaaval, kuni 100-liikmelise loendina või CSV- või TXT-failist.",
+        "Lülita töökuulutuse jaoks sisse jagatav link: igaüks, kellel see on, saab intervjuu teha.",
+        "Otsi e-posti või nime järgi, filtreeri oleku järgi ja sordi hinde või kuupäeva järgi.",
+        "Ava kandidaadi aruanne või laadi alla või jaga kõigi kandidaatide aruannet."
+      ],
+      "tips": [
+        "Iga kandidaat, kes vastab vähemalt ühele küsimusele, kasutab krediiti, ka lingi kaudu tulnud.",
+        "Kandidaadid saavad meeldetuletused automaatselt."
+      ]
+    },
+    "interviewSettings": {
+      "title": "Seaded",
+      "text": "Kuidas see intervjuu iga kandidaadi jaoks kulgeb.",
+      "actions": [
+        "Määra iga küsimuse aeg sekundites.",
+        "Määra läbimise lävi: selle saavutanud kandidaadid läbivad intervjuu.",
+        "Märgi intervjuu palgatuks, kui oled ametikoha täitnud."
+      ],
+      "tips": [
+        "Iga seade salvestub kohe, kui selle väljalt lahkud.",
+        "Kandidaadid ei näe kunagi oma punkte; neid näeb ainult sinu meeskond.",
+        "Kui üks kandidaat vajab rohkem aega, lisa talle tema lehel lisaaega."
+      ]
+    },
+    "tryInterview": {
+      "title": "Proovi kandidaadina",
+      "text": "Selle intervjuu eelvaade täpselt nii, nagu kandidaadid seda näevad: sissejuhatus ja siis ajapiiranguga küsimused. See on tasuta.",
+      "actions": [
+        "Alusta eelvaadet ja vasta nii, nagu vastaks kandidaat.",
+        "Kontrolli ajastust, sõnastust ja vastuseid, enne kui kedagi kutsud."
+      ],
+      "tips": [
+        "Vastamise ajal ära lahku lehelt: kandidaatide puhul salvestatakse lehelt lahkumised, kopeerimine ja liiga kiired vastused."
+      ]
+    },
+    "candidate": {
+      "title": "Kandidaadi aruanne",
+      "text": "Ühe kandidaadi tulemused: hinne, kas ta läbis, ja iga teema punktid koos kõigi vastustega.",
+      "actions": [
+        "Loe iga vastust koos märgetega kahtlase käitumise kohta: lehelt lahkumised, kopeerimiskatsed ja kiired vastused.",
+        "Laadi aruanne alla PDF-ina või jaga seda e-kirjaga.",
+        "Anna enne alustamist lisaaega, näiteks puude tõttu.",
+        "Lisa või muuda kandidaadi nime.",
+        "Saada kutse uuesti või tühista see või kustuta kandidaat koos tulemustega."
+      ],
+      "tips": [
+        "Punktid toetavad sinu otsust, kuid ei tee seda sinu eest. Kui kandidaat palub, lase tema tulemus inimesel üle vaadata."
+      ]
+    },
+    "templates": {
+      "title": "Mallid",
+      "text": "Valmis intervjuud levinud rollidele. Malli kasutamisel kopeeritakse see sellesse ettevõttesse sinu enda intervjuuna.",
+      "actions": [
+        "Otsi rolli või teema järgi ja filtreeri taseme ja keele järgi.",
+        "Ava mall, et näha selle teemasid ja igaühe küsimuste arvu.",
+        "Kasuta malli, et alustada selle põhjal intervjuud."
+      ],
+      "tips": [
+        "Täpsema sobivuse jaoks loo pigem intervjuu oma töökuulutuse põhjal.",
+        "Pärast kopeerimist on intervjuu sinu: muuda selle küsimusi ja seadeid, nagu soovid."
+      ]
+    },
+    "template": {
+      "title": "Mall",
+      "text": "Valmis intervjuu: selle teemad, nende alateemad ja iga teema küsimuste arv.",
+      "actions": [
+        "Kontrolli, kas teemad sobivad rolliga, kuhu töötajat otsid.",
+        "Kasuta malli, et kopeerida see sellesse ettevõttesse uue intervjuuna."
+      ],
+      "tips": [
+        "Kopeerimine on tasuta; vastavad kandidaadid kasutavad krediiti nagu tavaliselt.",
+        "Kui teemad ei sobi, loo pigem intervjuu oma töökuulutuse põhjal."
+      ]
+    },
+    "team": {
+      "title": "Meeskond",
+      "text": "Inimesed, kes töötavad selle ettevõtte intervjuudega, ja nende rollid.",
+      "actions": [
+        "Lisa liige e-posti teel administraatori või vaatajana.",
+        "Muuda liikme rolli administraatori ja vaataja vahel.",
+        "Kopeeri ootel kutse link või eemalda liige või kutse."
+      ],
+      "tips": [
+        "Administraatorid loovad ja muudavad intervjuusid, kutsuvad kandidaate ja laevad krediiti juurde. Vaatajad näevad intervjuusid ja tulemusi ning jagavad aruandeid, kuid ei muuda midagi.",
+        "Kui eemaldad liikme, kelle kaart maksab automaatse juurdelaadimise eest, see juurdelaadimine peatub."
+      ]
+    },
+    "integrations": {
+      "title": "Integratsioonid",
+      "text": "Ühenda prepza tööriistadega, mida su meeskond juba kasutab. Igal integratsioonil on oma leht seadistamise sammudega.",
+      "actions": [
+        "Slack: saa ettevõtte teavitused kanalisse.",
+        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): etappi viidud kandidaadid saavad intervjuu ja nende tulemused jõuavad tagasi ATS-i.",
+        "API: võtmed ja webhookid oma platvormi ühendamiseks."
+      ],
+      "tips": [
+        "Integratsioone näevad kõik ettevõttes; muuta saavad neid omanikud ja administraatorid."
+      ]
+    },
+    "ats": {
+      "title": "ATS-i integratsioon",
+      "text": "Seo oma ATS-i töökuulutus intervjuuga: valitud etappi viidud kandidaadid saavad intervjuu ja nende tulemused jõuavad tagasi kommentaarina nende profiilile.",
+      "actions": [
+        "Ühenda oma ATS selle juhiste järgi.",
+        "Seo töökuulutus: vali töökuulutus, selle etapp ja intervjuu või loo uus intervjuu töökuulutuse tekstist.",
+        "Kutsu uuesti kandidaadid, keda ei kutsutud, näiteks kui krediit sai otsa.",
+        "Eemalda töökuulutuse seos või katkesta ATS-i ühendus."
+      ],
+      "tips": [
+        "Lisa etapp ainult prepza jaoks, näiteks „prepza oskuste test“, et see ei läheks kunagi segamini sinu teiste tööriistadega.",
+        "prepza ei liiguta ega lükka sinu ATS-is kunagi kedagi tagasi."
+      ]
+    },
+    "slack": {
+      "title": "Slack",
+      "text": "Sinu ettevõtte teavitused Slacki kanalis kohe, kui midagi juhtub.",
+      "actions": [
+        "Lisa prepza Slacki ja vali kanal, näiteks #hiring.",
+        "Vali, millised teavitused sinna lähevad: kandidaat lõpetas, kutse jäi kohale toimetamata, intervjuu on valmis ja muud.",
+        "Katkesta ühendus, et teavitused peatada ja prepza rakendus su Slackist eemaldada."
+      ],
+      "tips": [
+        "prepza saab ainult sellesse kanalisse postitada; su Slacki lugeda see ei saa.",
+        "Kõik näevad endiselt iga teavitust kellukese all."
+      ]
+    },
+    "api": {
+      "title": "API",
+      "text": "Ühenda prepzaga oma platvorm, näiteks karjäärileht.",
+      "actions": [
+        "Loo API-võti: see loeb sinu intervjuusid ja kandidaate ning kutsub kandidaate sinu nimel.",
+        "Lisa webhook: kui kandidaat lõpetab, saadetakse tema tulemused allkirjastatult sinu HTTPS-aadressile.",
+        "Kustuta võtmed ja webhookid, mida enam ei kasuta.",
+        "Ava API dokumentatsioon kõigi otspunktide ja sündmustega."
+      ],
+      "tips": [
+        "Uut võtit ja webhooki saladust näidatakse ainult üks kord: kopeeri need kohe.",
+        "Vali igale võtmele aegumiskuupäev: lekkinud võti, mis kunagi ei aegu, jääb kasutatavaks."
+      ]
+    },
+    "referrals": {
+      "title": "Soovitused",
+      "text": "Kutsu teisi ettevõtteid prepzasse selle ettevõtte lingiga ja mõlemad ettevõtted saavad krediiti.",
+      "actions": [
+        "Kopeeri või jaga oma soovituslinki.",
+        "Vaata kõiki preemiaid, mille see ettevõte on saanud."
+      ],
+      "tips": [
+        "Mõlemad saavad krediiti, kui kutsutud ettevõte teeb esimese juurdelaadimise mis tahes summas.",
+        "Krediit läheb sellele ettevõttele ja ei aegu kunagi."
+      ]
+    }
   }
 }

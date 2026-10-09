@@ -1478,5 +1478,271 @@
       }
     },
     "removed": "Đã xóa tin nhắn: chứa thông tin bí mật"
+  },
+  "pageHelp": {
+    "label": "Về trang này",
+    "actionsTitle": "Bạn có thể làm gì",
+    "tipsTitle": "Mẹo",
+    "landing": {
+      "title": "prepza hoạt động thế nào",
+      "text": "prepza biến mô tả công việc của bạn thành một buổi phỏng vấn trắc nghiệm có giới hạn thời gian, mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng.",
+      "actions": [
+        "Dán mô tả công việc: prepza đề xuất các chủ đề cần kiểm tra.",
+        "Duyệt các chủ đề: giữ, sửa hoặc bỏ, rồi phê duyệt để tạo câu hỏi.",
+        "Mời ứng viên qua email, từ tệp hoặc bằng một liên kết chia sẻ.",
+        "Xem báo cáo: ứng viên được xếp theo điểm, kèm mọi câu trả lời và cảnh báo hành vi bất thường."
+      ],
+      "tips": [
+        "Tạo buổi phỏng vấn miễn phí. Bạn trả $1–3 cho mỗi ứng viên trả lời, và những ứng viên đầu tiên được miễn phí.",
+        "Hãy thử buổi phỏng vấn với vai trò ứng viên trước khi mời ai."
+      ]
+    },
+    "companies": {
+      "title": "Công ty",
+      "text": "Các công ty của bạn. Mọi việc bạn làm trong prepza đều diễn ra trong một công ty: buổi phỏng vấn, ứng viên, nhóm, credit và tích hợp.",
+      "actions": [
+        "Tạo công ty bằng “Công ty mới”. Tên công ty là duy nhất trên prepza.",
+        "Mở một công ty để làm việc với các buổi phỏng vấn và ứng viên của công ty đó.",
+        "Xóa công ty bạn sở hữu, cùng mọi buổi phỏng vấn và lời mời."
+      ],
+      "tips": [
+        "Vai trò của bạn hiện bên cạnh mỗi công ty bạn không sở hữu: quản trị viên được thay đổi, người xem chỉ được xem.",
+        "Credit thuộc về từng công ty, nên mỗi công ty nạp credit riêng."
+      ]
+    },
+    "pickCompany": {
+      "title": "Chọn công ty",
+      "text": "Bạn đã chọn một mẫu. Hãy chọn công ty sẽ dùng mẫu: mẫu được sao chép vào đó thành một buổi phỏng vấn mới, miễn phí và sẵn sàng gửi cho ứng viên.",
+      "actions": [
+        "Chọn một công ty để mở mẫu trong đó, rồi dùng mẫu.",
+        "Tạo công ty mới nếu bạn chưa có; mẫu sẽ mở ở đó."
+      ],
+      "tips": [
+        "Sau khi sao chép, buổi phỏng vấn thuộc về công ty: tùy ý thay đổi câu hỏi và cài đặt."
+      ]
+    },
+    "interviews": {
+      "title": "Phỏng vấn",
+      "text": "Tất cả buổi phỏng vấn của công ty này và credit dành cho ứng viên. Mỗi buổi phỏng vấn là một bài kiểm tra có giới hạn thời gian, tạo từ mô tả công việc.",
+      "actions": [
+        "Tạo buổi phỏng vấn từ mô tả công việc bằng “Buổi phỏng vấn mới”.",
+        "Mở một buổi phỏng vấn để xem chủ đề, ứng viên và cài đặt.",
+        "Thử buổi phỏng vấn với vai trò ứng viên, hoặc xóa nó.",
+        "Nạp credit, hoặc bật tự động nạp, từ số dư."
+      ],
+      "tips": [
+        "Số dư chuyển màu cam khi sắp hết credit. Khi hết credit, lời mời mới sẽ không được gửi.",
+        "Các thẻ phía trên dẫn tới mẫu, nhóm, tích hợp và giới thiệu."
+      ]
+    },
+    "newInterview": {
+      "title": "Buổi phỏng vấn mới",
+      "text": "Bắt đầu một buổi phỏng vấn từ mô tả công việc. prepza đọc mô tả, đề xuất các chủ đề cần kiểm tra và viết câu hỏi khi bạn phê duyệt.",
+      "actions": [
+        "Dán mô tả công việc: vị trí, yêu cầu bắt buộc và điểm cộng.",
+        "Chọn ngôn ngữ để tạo buổi phỏng vấn.",
+        "Tạo, rồi duyệt các chủ đề được đề xuất."
+      ],
+      "tips": [
+        "Mô tả càng cụ thể, câu hỏi càng sát với vị trí.",
+        "Tạo miễn phí: bạn chỉ trả cho ứng viên trả lời."
+      ]
+    },
+    "reviewTopics": {
+      "title": "Duyệt các chủ đề",
+      "text": "prepza đề xuất các chủ đề này từ mô tả của bạn. Mỗi chủ đề bạn giữ lại sẽ có bộ câu hỏi kèm đáp án riêng.",
+      "actions": [
+        "Bỏ chọn các chủ đề bạn không cần.",
+        "Sửa tên chủ đề và các chủ đề con bằng biểu tượng bút chì.",
+        "Mô tả thay đổi bằng lời của bạn rồi áp dụng, ví dụ “thêm một chủ đề về lãnh đạo nhóm”.",
+        "Phê duyệt và tạo để viết câu hỏi."
+      ],
+      "tips": [
+        "Nếu có quá nhiều chủ đề, hãy bỏ chọn bớt hoặc mô tả cách gộp chúng.",
+        "Câu hỏi chỉ được viết sau khi bạn phê duyệt, nên hãy dành một phút ở đây."
+      ]
+    },
+    "generating": {
+      "title": "Đang tạo",
+      "text": "prepza đang tạo buổi phỏng vấn của bạn: trước là các chủ đề, sau đó là câu hỏi cho từng chủ đề. Việc này mất vài phút.",
+      "actions": [
+        "Bạn có thể rời trang này: quá trình tạo vẫn tiếp tục.",
+        "Hủy quá trình tạo nếu không còn cần; những gì đã tạo sẽ không được giữ lại."
+      ],
+      "tips": [
+        "Bạn sẽ nhận thông báo khi buổi phỏng vấn sẵn sàng.",
+        "Quay lại bất cứ lúc nào từ danh sách buổi phỏng vấn."
+      ]
+    },
+    "interviewTopics": {
+      "title": "Chủ đề",
+      "text": "Những gì buổi phỏng vấn này kiểm tra: các chủ đề, mỗi chủ đề có các chủ đề con và ngân hàng câu hỏi riêng. Mỗi ứng viên nhận một bộ ngẫu nhiên từ từng ngân hàng.",
+      "actions": [
+        "Mở “Quản lý câu hỏi” để đọc câu hỏi và đáp án của một chủ đề.",
+        "Tạo lại câu hỏi chưa tốt, đánh dấu đáp án sai, hoặc đọc báo cáo của ứng viên về một câu hỏi.",
+        "Đặt số câu hỏi mỗi ứng viên nhận từ một chủ đề.",
+        "Thử buổi phỏng vấn với vai trò ứng viên, hoặc xóa nó."
+      ],
+      "tips": [
+        "Câu hỏi do AI viết có thể sai: hãy đọc lướt từng chủ đề trước khi mời ai.",
+        "Nhấp vào tiêu đề để đổi tên buổi phỏng vấn."
+      ]
+    },
+    "interviewCandidates": {
+      "title": "Ứng viên",
+      "text": "Mọi người được mời vào buổi phỏng vấn này, cùng trạng thái, tiến độ và điểm của họ.",
+      "actions": [
+        "Mời ứng viên: từng người một, danh sách tối đa 100 người, hoặc tệp CSV hay TXT.",
+        "Bật liên kết chia sẻ cho tin tuyển dụng: bất kỳ ai có liên kết đều có thể làm bài phỏng vấn.",
+        "Tìm theo email hoặc tên, lọc theo trạng thái, và sắp xếp theo điểm hoặc ngày.",
+        "Mở báo cáo của một ứng viên, hoặc tải xuống hay chia sẻ báo cáo về tất cả ứng viên."
+      ],
+      "tips": [
+        "Mỗi ứng viên trả lời ít nhất một câu sẽ dùng credit, kể cả ứng viên đến từ liên kết.",
+        "Lời nhắc được gửi tới ứng viên tự động."
+      ]
+    },
+    "interviewSettings": {
+      "title": "Cài đặt",
+      "text": "Cách buổi phỏng vấn này diễn ra với mọi ứng viên.",
+      "actions": [
+        "Đặt thời gian cho mỗi câu hỏi, tính bằng giây.",
+        "Đặt điểm đạt: ứng viên đạt mức này là đậu.",
+        "Đánh dấu buổi phỏng vấn là đã tuyển khi bạn đã tuyển được người cho vị trí."
+      ],
+      "tips": [
+        "Mỗi cài đặt được lưu ngay khi bạn rời khỏi ô nhập.",
+        "Ứng viên không bao giờ thấy điểm của mình; chỉ nhóm của bạn thấy.",
+        "Với ứng viên cần thêm thời gian, hãy thêm thời gian trên trang của họ."
+      ]
+    },
+    "tryInterview": {
+      "title": "Thử với vai trò ứng viên",
+      "text": "Bản xem trước buổi phỏng vấn đúng như ứng viên thấy: phần giới thiệu, rồi các câu hỏi có giới hạn thời gian. Miễn phí.",
+      "actions": [
+        "Bắt đầu xem trước và trả lời như một ứng viên.",
+        "Kiểm tra thời gian, cách diễn đạt và đáp án trước khi mời ai."
+      ],
+      "tips": [
+        "Hãy ở lại trang khi trả lời: với ứng viên, việc rời trang, sao chép và trả lời quá nhanh đều được ghi lại."
+      ]
+    },
+    "candidate": {
+      "title": "Báo cáo ứng viên",
+      "text": "Kết quả của một ứng viên: điểm, có đạt hay không, và điểm từng chủ đề kèm mọi câu trả lời.",
+      "actions": [
+        "Đọc từng câu trả lời, kèm cảnh báo hành vi bất thường: rời trang, thử sao chép và trả lời quá nhanh.",
+        "Tải báo cáo xuống dưới dạng PDF, hoặc chia sẻ qua email.",
+        "Cho thêm thời gian trước khi họ bắt đầu, ví dụ vì khuyết tật.",
+        "Thêm hoặc sửa họ tên ứng viên.",
+        "Gửi lại hoặc thu hồi lời mời, hoặc xóa ứng viên cùng kết quả của họ."
+      ],
+      "tips": [
+        "Điểm hỗ trợ quyết định của bạn chứ không thay bạn quyết định. Nếu ứng viên yêu cầu, hãy để một người xem xét lại kết quả của họ."
+      ]
+    },
+    "templates": {
+      "title": "Mẫu",
+      "text": "Các buổi phỏng vấn soạn sẵn cho những vị trí phổ biến. Dùng một mẫu sẽ sao chép nó vào công ty này thành buổi phỏng vấn của riêng bạn.",
+      "actions": [
+        "Tìm theo vị trí hoặc chủ đề, và lọc theo cấp bậc và ngôn ngữ.",
+        "Mở một mẫu để xem các chủ đề và số câu hỏi của mỗi chủ đề.",
+        "Dùng mẫu để bắt đầu một buổi phỏng vấn từ mẫu đó."
+      ],
+      "tips": [
+        "Để sát hơn, hãy tạo buổi phỏng vấn từ mô tả công việc của chính bạn.",
+        "Sau khi sao chép, buổi phỏng vấn là của bạn: tùy ý thay đổi câu hỏi và cài đặt."
+      ]
+    },
+    "template": {
+      "title": "Mẫu",
+      "text": "Một buổi phỏng vấn soạn sẵn: các chủ đề, chủ đề con và số câu hỏi của mỗi chủ đề.",
+      "actions": [
+        "Kiểm tra xem các chủ đề có khớp với vị trí bạn đang tuyển không.",
+        "Dùng mẫu để sao chép nó vào công ty này thành một buổi phỏng vấn mới."
+      ],
+      "tips": [
+        "Sao chép miễn phí; ứng viên trả lời vẫn dùng credit như thường lệ.",
+        "Nếu các chủ đề không phù hợp, hãy tạo buổi phỏng vấn từ mô tả công việc của bạn."
+      ]
+    },
+    "team": {
+      "title": "Nhóm",
+      "text": "Những người làm việc với các buổi phỏng vấn của công ty này, và vai trò của họ.",
+      "actions": [
+        "Thêm thành viên qua email, với vai trò quản trị viên hoặc người xem.",
+        "Đổi vai trò của thành viên giữa quản trị viên và người xem.",
+        "Sao chép liên kết của lời mời đang chờ, hoặc xóa thành viên hay lời mời."
+      ],
+      "tips": [
+        "Quản trị viên tạo và thay đổi buổi phỏng vấn, mời ứng viên và nạp credit. Người xem thấy buổi phỏng vấn và kết quả, chia sẻ báo cáo, nhưng không thay đổi được gì.",
+        "Xóa thành viên có thẻ đang dùng để tự động nạp sẽ dừng việc tự động nạp."
+      ]
+    },
+    "integrations": {
+      "title": "Tích hợp",
+      "text": "Kết nối prepza với các công cụ nhóm bạn đang dùng. Mỗi tích hợp có trang riêng với các bước thiết lập.",
+      "actions": [
+        "Slack: nhận thông báo của công ty trong một kênh.",
+        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): ứng viên bạn chuyển sang một giai đoạn sẽ nhận buổi phỏng vấn, và kết quả được gửi ngược lại.",
+        "API: khóa và webhook để kết nối nền tảng của riêng bạn."
+      ],
+      "tips": [
+        "Mọi người trong công ty đều thấy các tích hợp; chủ sở hữu và quản trị viên thay đổi chúng."
+      ]
+    },
+    "ats": {
+      "title": "Tích hợp ATS",
+      "text": "Liên kết một tin tuyển dụng trong ATS với một buổi phỏng vấn: ứng viên bạn chuyển vào giai đoạn đã chọn sẽ nhận buổi phỏng vấn, và kết quả quay về dưới dạng bình luận trên hồ sơ của họ.",
+      "actions": [
+        "Kết nối ATS của bạn theo hướng dẫn.",
+        "Liên kết tin tuyển dụng: chọn tin, giai đoạn và buổi phỏng vấn, hoặc tạo buổi phỏng vấn mới từ nội dung tin.",
+        "Mời lại những ứng viên chưa được mời, ví dụ khi hết credit.",
+        "Hủy liên kết tin tuyển dụng, hoặc ngắt kết nối ATS."
+      ],
+      "tips": [
+        "Thêm một giai đoạn riêng cho prepza, chẳng hạn “Kiểm tra kỹ năng prepza”, để không bao giờ lẫn với các công cụ khác của bạn.",
+        "prepza không bao giờ chuyển hay loại ai trong ATS của bạn."
+      ]
+    },
+    "slack": {
+      "title": "Slack",
+      "text": "Thông báo của công ty bạn trong một kênh Slack, ngay khi chúng xảy ra.",
+      "actions": [
+        "Thêm prepza vào Slack và chọn kênh, ví dụ #hiring.",
+        "Chọn những thông báo được gửi tới đó: ứng viên làm xong, lời mời không gửi được, buổi phỏng vấn đã sẵn sàng và hơn nữa.",
+        "Ngắt kết nối để dừng thông báo và gỡ ứng dụng prepza khỏi Slack của bạn."
+      ],
+      "tips": [
+        "prepza chỉ có thể đăng vào kênh đó; nó không thể đọc Slack của bạn.",
+        "Mọi người vẫn thấy mọi thông báo ở biểu tượng chuông."
+      ]
+    },
+    "api": {
+      "title": "API",
+      "text": "Kết nối nền tảng của riêng bạn, chẳng hạn trang tuyển dụng, với prepza.",
+      "actions": [
+        "Tạo khóa API: khóa này đọc buổi phỏng vấn, ứng viên và mời ứng viên thay mặt bạn.",
+        "Thêm webhook: khi ứng viên làm xong, kết quả được gửi tới địa chỉ HTTPS của bạn, có chữ ký.",
+        "Xóa các khóa và webhook bạn không dùng nữa.",
+        "Mở tài liệu API để xem mọi endpoint và sự kiện."
+      ],
+      "tips": [
+        "Khóa mới và khóa bí mật của webhook chỉ hiện một lần: hãy sao chép ngay.",
+        "Đặt thời hạn cho mỗi khóa: khóa bị lộ mà không bao giờ hết hạn thì vẫn dùng được mãi."
+      ]
+    },
+    "referrals": {
+      "title": "Giới thiệu",
+      "text": "Mời các công ty khác dùng prepza bằng liên kết của công ty này, và cả hai bên đều nhận credit.",
+      "actions": [
+        "Sao chép hoặc chia sẻ liên kết giới thiệu của bạn.",
+        "Xem mọi phần thưởng công ty này đã nhận."
+      ],
+      "tips": [
+        "Cả hai bên nhận credit khi công ty bạn mời nạp credit lần đầu, với bất kỳ số tiền nào.",
+        "Credit được cộng cho công ty này và không bao giờ hết hạn."
+      ]
+    }
   }
 }

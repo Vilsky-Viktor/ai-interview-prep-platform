@@ -1486,5 +1486,271 @@
       }
     },
     "removed": "Inalis ang mensahe: may lihim ito"
+  },
+  "pageHelp": {
+    "label": "Tungkol sa page na ito",
+    "actionsTitle": "Ang puwede mong gawin",
+    "tipsTitle": "Mga tip",
+    "landing": {
+      "title": "Paano gumagana ang prepza",
+      "text": "Ginagawa ng prepza ang iyong job description na isang interview na multiple choice at may oras, na may sariling random na mga tanong para sa bawat aplikante.",
+      "actions": [
+        "I-paste ang job description: magmumungkahi ang prepza ng mga topic na susubukin.",
+        "I-review ang mga topic: panatilihin, i-edit o alisin ang mga ito, saka aprubahan para maisulat ang mga tanong.",
+        "Mag-imbita ng mga aplikante sa email, mula sa file o gamit ang isang link na puwedeng i-share.",
+        "Basahin ang mga report: naka-ranggo ayon sa grade ang mga aplikante, kasama ang bawat sagot at mga integrity flag."
+      ],
+      "tips": [
+        "Libre ang paggawa ng interview. Magbabayad ka ng $1–3 bawat aplikanteng sumasagot, at libre ang mga una mong aplikante.",
+        "Subukan ang iyong interview bilang aplikante bago ka mag-imbita."
+      ]
+    },
+    "companies": {
+      "title": "Mga kumpanya",
+      "text": "Ang iyong mga kumpanya. Lahat ng ginagawa mo sa prepza ay nasa loob ng isa: ang mga interview, aplikante, team, credits at integration nito.",
+      "actions": [
+        "Gumawa ng kumpanya gamit ang “bagong kumpanya”. Natatangi sa buong prepza ang pangalan nito.",
+        "Buksan ang isang kumpanya para asikasuhin ang mga interview at aplikante nito.",
+        "Alisin ang kumpanyang pag-aari mo, kasama ang lahat ng interview at imbitasyon nito."
+      ],
+      "tips": [
+        "Makikita ang iyong role sa tabi ng bawat kumpanyang hindi mo pag-aari: nagbabago ang mga admin, tumitingin lang ang mga viewer.",
+        "Sa kumpanya nakalaan ang credits, kaya hiwalay na nagto-top up ang bawat isa."
+      ]
+    },
+    "pickCompany": {
+      "title": "Pumili ng kumpanya",
+      "text": "Pumili ka ng template. Piliin kung para saang kumpanya ito: makokopya roon ang template bilang bagong interview, libre at handa nang ipadala sa mga aplikante.",
+      "actions": [
+        "Pumili ng kumpanya para buksan doon ang template, saka ito gamitin.",
+        "Gumawa ng bagong kumpanya kung wala ka pa; doon magbubukas ang template."
+      ],
+      "tips": [
+        "Kapag nakopya na, sa kumpanya na ang interview: baguhin ang mga tanong at setting nito ayon sa gusto mo."
+      ]
+    },
+    "interviews": {
+      "title": "Mga interview",
+      "text": "Lahat ng interview ng kumpanyang ito at ang credits nito para sa mga aplikante. Bawat interview ay pagsusulit na may oras, ginawa mula sa job description.",
+      "actions": [
+        "Gumawa ng interview mula sa job description gamit ang “bagong interview”.",
+        "Buksan ang isang interview para makita ang mga topic, aplikante at setting nito.",
+        "Subukan ang interview bilang aplikante, o burahin ito.",
+        "Mag-top up ng credits, o i-on ang awtomatikong top-up, mula sa balanse."
+      ],
+      "tips": [
+        "Nagiging amber ang balanse kapag paubos na ang credits. Kapag walang credits, hindi naipapadala ang mga bagong imbitasyon.",
+        "Sa mga tab sa itaas makikita ang mga template, ang iyong team, mga integration at referrals."
+      ]
+    },
+    "newInterview": {
+      "title": "Bagong interview",
+      "text": "Simulan ang interview mula sa job description. Babasahin ito ng prepza, magmumungkahi ng mga topic na susubukin, at isusulat ang mga tanong kapag inaprubahan mo na.",
+      "actions": [
+        "I-paste ang job description: ang role, mga requirement nito at mga nice-to-have.",
+        "Piliin ang wikang gagamitin sa interview.",
+        "Gawin ito, saka i-review ang mga iminungkahing topic."
+      ],
+      "tips": [
+        "Kapag mas tiyak ang description, mas bagay sa role ang mga tanong.",
+        "Libre ang paggawa: magbabayad ka lang para sa mga aplikanteng sumasagot."
+      ]
+    },
+    "reviewTopics": {
+      "title": "I-review ang iyong mga topic",
+      "text": "Iminungkahi ng prepza ang mga topic na ito mula sa iyong description. Bawat topic na papanatilihin mo ay may sariling set ng mga tanong at sagot.",
+      "actions": [
+        "Alisan ng check ang mga topic na hindi mo kailangan.",
+        "I-edit ang pangalan at mga subtopic ng isang topic gamit ang lapis nito.",
+        "Ilarawan ang mga pagbabago sa sarili mong salita at ilapat ang mga ito, halimbawa “magdagdag ng topic tungkol sa pamumuno ng team”.",
+        "Pindutin ang “aprubahan at gawin” para maisulat ang mga tanong."
+      ],
+      "tips": [
+        "Kung sobra ang mga topic, alisan ng check ang ilan o ilarawan kung paano pagsasamahin ang mga ito.",
+        "Isusulat lang ang mga tanong pagkatapos mong mag-apruba, kaya maglaan ng isang minuto rito."
+      ]
+    },
+    "generating": {
+      "title": "Ginagawa",
+      "text": "Ginagawa ng prepza ang iyong interview: una ang mga topic, saka ang mga tanong para sa bawat isa. Ilang minuto ito.",
+      "actions": [
+        "Puwede mong iwan ang page na ito: tuloy ang paggawa.",
+        "Kanselahin ang paggawa kung hindi mo na ito kailangan; walang matitira sa nagawa na."
+      ],
+      "tips": [
+        "Makakatanggap ka ng notification kapag handa na ang interview.",
+        "Bumalik anumang oras mula sa listahan ng mga interview."
+      ]
+    },
+    "interviewTopics": {
+      "title": "Mga topic",
+      "text": "Ang sinusubok ng interview na ito: ang mga topic nito, bawat isa may mga subtopic at sariling pool ng mga tanong. Bawat aplikante ay may random na set mula sa bawat pool.",
+      "actions": [
+        "Buksan ang “pamahalaan ang mga tanong” para mabasa ang mga tanong at sagot ng isang topic.",
+        "I-regenerate ang mahinang tanong, markahan ang maling sagot, o basahin ang mga report ng aplikante tungkol sa isang tanong.",
+        "Itakda kung ilang tanong mula sa isang topic ang makukuha ng bawat aplikante.",
+        "Subukan ang interview bilang aplikante, o burahin ito."
+      ],
+      "tips": [
+        "Puwedeng mali ang mga tanong na isinulat ng AI: silipin ang bawat topic bago ka mag-imbita.",
+        "I-click ang pamagat para palitan ang pangalan ng interview."
+      ]
+    },
+    "interviewCandidates": {
+      "title": "Mga aplikante",
+      "text": "Lahat ng inimbitahan sa interview na ito, kasama ang kanilang status, progreso at grade.",
+      "actions": [
+        "Mag-imbita ng mga aplikante: isa-isa, listahan na hanggang 100, o CSV o TXT na file.",
+        "I-on ang link na puwedeng i-share para sa job ad: puwedeng sumagot sa interview ang sinumang may link.",
+        "Maghanap ayon sa email o pangalan, i-filter ayon sa status, at i-sort ayon sa grade o petsa.",
+        "Buksan ang report ng isang aplikante, o i-download o i-share ang report ng lahat ng aplikante."
+      ],
+      "tips": [
+        "Gumagamit ng credits ang bawat aplikanteng sumagot ng kahit isang tanong, kasama ang mga galing sa link.",
+        "Awtomatikong napapadalhan ng paalala ang mga aplikante."
+      ]
+    },
+    "interviewSettings": {
+      "title": "Mga setting",
+      "text": "Kung paano tumatakbo ang interview na ito para sa bawat aplikante.",
+      "actions": [
+        "Itakda ang oras ng bawat tanong, sa segundo.",
+        "Itakda ang passing grade: pasado ang mga aplikanteng aabot dito.",
+        "Markahan ang interview bilang na-hire kapag may napili ka na para sa role."
+      ],
+      "tips": [
+        "Nase-save ang bawat setting pagkaalis mo sa field nito.",
+        "Hindi nakikita ng mga aplikante ang kanilang score; ang team mo lang.",
+        "Para sa isang aplikanteng kailangan ng mas mahabang oras, magdagdag ng extra time sa kanyang page."
+      ]
+    },
+    "tryInterview": {
+      "title": "Subukan bilang aplikante",
+      "text": "Preview ng interview na ito gaya ng nakikita ng mga aplikante: ang intro, saka ang mga tanong na may oras. Libre ito.",
+      "actions": [
+        "Simulan ang preview at sumagot na parang aplikante.",
+        "Suriin ang oras, ang pagkakasulat at ang mga sagot bago ka mag-imbita."
+      ],
+      "tips": [
+        "Manatili sa page habang sumasagot: para sa mga aplikante, naitatala ang pag-alis sa page, pagkopya at sobrang bilis na pagsagot."
+      ]
+    },
+    "candidate": {
+      "title": "Report ng aplikante",
+      "text": "Ang resulta ng isang aplikante: ang kanyang grade, kung pumasa siya, at ang score ng bawat topic kasama ang bawat sagot.",
+      "actions": [
+        "Basahin ang bawat sagot, kasama ang mga integrity flag: pag-alis sa page, pagtatangkang kumopya at mabibilis na sagot.",
+        "I-download ang report bilang PDF, o i-share ito sa email.",
+        "Magbigay ng extra time bago siya magsimula, halimbawa dahil sa kapansanan.",
+        "Idagdag o i-edit ang pangalan ng aplikante.",
+        "Ipadala muli o bawiin ang imbitasyon, o burahin ang aplikante kasama ang kanyang resulta."
+      ],
+      "tips": [
+        "Tumutulong ang score sa iyong desisyon; hindi ito ang nagdedesisyon. Kung hilingin ng aplikante, ipa-review sa isang tao ang kanyang resulta."
+      ]
+    },
+    "templates": {
+      "title": "Mga template",
+      "text": "Mga handang interview para sa mga karaniwang role. Kapag ginamit mo ang isa, makokopya ito sa kumpanyang ito bilang sarili mong interview.",
+      "actions": [
+        "Maghanap ayon sa role o topic, at i-filter ayon sa level at wika.",
+        "Buksan ang isang template para makita ang mga topic nito at kung ilan ang tanong ng bawat isa.",
+        "Gamitin ang template para magsimula ng interview mula rito."
+      ],
+      "tips": [
+        "Para mas bumagay, gumawa na lang ng interview mula sa sarili mong job description.",
+        "Kapag nakopya na, iyo na ang interview: baguhin ang mga tanong at setting nito ayon sa gusto mo."
+      ]
+    },
+    "template": {
+      "title": "Template",
+      "text": "Isang handang interview: ang mga topic nito, ang kanilang mga subtopic at kung ilan ang tanong ng bawat topic.",
+      "actions": [
+        "Tiyaking tugma ang mga topic sa role na hina-hire mo.",
+        "Gamitin ang template para makopya ito sa kumpanyang ito bilang bagong interview."
+      ],
+      "tips": [
+        "Libre ang pagkopya; gumagamit ng credits ang mga aplikanteng sumasagot gaya ng dati.",
+        "Kung hindi bagay ang mga topic, gumawa na lang ng interview mula sa iyong job description."
+      ]
+    },
+    "team": {
+      "title": "Team",
+      "text": "Ang mga taong humahawak sa mga interview ng kumpanyang ito, at ang kanilang mga role.",
+      "actions": [
+        "Magdagdag ng miyembro sa email, bilang admin o viewer.",
+        "Palitan ang role ng miyembro mula admin patungong viewer o pabalik.",
+        "Kopyahin ang link ng nakabinbing imbitasyon, o alisin ang isang miyembro o imbitasyon."
+      ],
+      "tips": [
+        "Gumagawa at nagbabago ng mga interview ang mga admin, nag-iimbita ng mga aplikante at nagto-top up. Nakikita ng mga viewer ang mga interview at resulta at nagse-share ng mga report, pero walang binabago.",
+        "Kapag inalis ang miyembrong ang card ang nagbabayad ng awtomatikong top-up, titigil ang mga top-up na iyon."
+      ]
+    },
+    "integrations": {
+      "title": "Mga integration",
+      "text": "Ikonekta ang prepza sa mga tool na ginagamit na ng iyong team. Bawat integration ay may sariling page na may mga hakbang sa pag-set up.",
+      "actions": [
+        "Slack: matanggap ang mga notification ng iyong kumpanya sa isang channel.",
+        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): makakatanggap ng interview ang mga aplikanteng inilipat mo sa isang stage, at babalik doon ang kanilang resulta.",
+        "API: mga key at webhook para ikonekta ang sarili mong platform."
+      ],
+      "tips": [
+        "Nakikita ng lahat sa kumpanya ang mga integration; ang mga may-ari at admin ang nagbabago ng mga ito."
+      ]
+    },
+    "ats": {
+      "title": "ATS integration",
+      "text": "I-link ang isang job sa iyong ATS sa isang interview: makakatanggap ng interview ang mga aplikanteng inilipat mo sa napiling stage, at babalik ang kanilang resulta bilang comment sa kanilang profile.",
+      "actions": [
+        "Ikonekta ang iyong ATS ayon sa mga instruction nito.",
+        "Mag-link ng job: piliin ang job, ang stage nito at isang interview, o gumawa ng bagong interview mula sa text ng job.",
+        "Imbitahan muli ang mga aplikanteng hindi naimbitahan, halimbawa kapag naubos ang credits.",
+        "I-unlink ang isang job, o idiskonekta ang ATS."
+      ],
+      "tips": [
+        "Magdagdag ng stage para lang sa prepza, gaya ng “prepza skills test”, para hindi ito mahalo sa iba mong tool.",
+        "Hindi kailanman inililipat o nire-reject ng prepza ang sinuman sa iyong ATS."
+      ]
+    },
+    "slack": {
+      "title": "Slack",
+      "text": "Ang mga notification ng iyong kumpanya sa isang Slack channel, habang nangyayari.",
+      "actions": [
+        "Idagdag ang prepza sa Slack at piliin ang channel, halimbawa #hiring.",
+        "Piliin kung aling mga notification ang pupunta roon: may aplikanteng natapos, may imbitasyong hindi naihatid, may interview na handa na at iba pa.",
+        "Idiskonekta para itigil ang mga ito at alisin ang app ng prepza sa iyong Slack."
+      ],
+      "tips": [
+        "Sa channel na iyon lang puwedeng mag-post ang prepza; hindi nito nababasa ang iyong Slack.",
+        "Nakikita pa rin ng lahat ang bawat notification sa bell."
+      ]
+    },
+    "api": {
+      "title": "API",
+      "text": "Ikonekta ang sarili mong platform, gaya ng iyong careers site, sa prepza.",
+      "actions": [
+        "Gumawa ng API key: binabasa nito ang iyong mga interview at aplikante at nag-iimbita ng mga aplikante bilang ikaw.",
+        "Magdagdag ng webhook: kapag may aplikanteng natapos, ipinapadala ang kanyang resulta sa iyong HTTPS address, may pirma.",
+        "Burahin ang mga key at webhook na hindi mo na ginagamit.",
+        "Buksan ang API docs para sa bawat endpoint at event."
+      ],
+      "tips": [
+        "Isang beses lang ipinapakita ang bagong key at ang secret ng webhook: kopyahin agad.",
+        "Pumili ng expiry para sa bawat key: magagamit pa rin ang na-leak na key na hindi nag-e-expire."
+      ]
+    },
+    "referrals": {
+      "title": "Referrals",
+      "text": "Imbitahan ang ibang kumpanya sa prepza gamit ang link ng kumpanyang ito, at pareho kayong makakakuha ng credits.",
+      "actions": [
+        "Kopyahin o i-share ang iyong referral link.",
+        "Tingnan ang bawat reward na natanggap na ng kumpanyang ito."
+      ],
+      "tips": [
+        "Pareho kayong makakakuha ng credits kapag nag-top up sa unang pagkakataon ang kumpanyang inimbitahan mo, anumang halaga.",
+        "Napupunta ang credits sa kumpanyang ito at hindi nag-e-expire."
+      ]
+    }
   }
 }

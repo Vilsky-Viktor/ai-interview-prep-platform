@@ -1481,5 +1481,271 @@
       }
     },
     "removed": "Mesaj kaldırıldı: gizli bilgi içeriyordu"
+  },
+  "pageHelp": {
+    "label": "Bu sayfa hakkında",
+    "actionsTitle": "Neler yapabilirsiniz",
+    "tipsTitle": "İpuçları",
+    "landing": {
+      "title": "prepza nasıl çalışır",
+      "text": "prepza iş tanımınızı süreli, çoktan seçmeli bir mülakata dönüştürür; her aday kendi rastgele sorularını alır.",
+      "actions": [
+        "İş tanımını yapıştırın: prepza ölçülecek konuları önerir.",
+        "Konuları inceleyin: tutun, düzenleyin veya çıkarın, ardından soruların yazılması için onaylayın.",
+        "Adayları e-postayla, bir dosyadan veya tek bir paylaşılabilir bağlantıyla davet edin.",
+        "Raporları okuyun: adaylar nota göre sıralanır, her cevap ve dürüstlük uyarılarıyla birlikte."
+      ],
+      "tips": [
+        "Mülakat oluşturmak ücretsizdir. Cevap veren her aday için $1–3 ödersiniz ve ilk adaylarınız ücretsizdir.",
+        "Kimseyi davet etmeden önce mülakatınızı aday olarak deneyin."
+      ]
+    },
+    "companies": {
+      "title": "Şirketler",
+      "text": "Şirketleriniz. prepza'da yaptığınız her şey bir şirketin içinde olur: mülakatları, adayları, ekibi, kredileri ve entegrasyonları.",
+      "actions": [
+        "“Yeni şirket” ile bir şirket oluşturun. Adı tüm prepza'da benzersizdir.",
+        "Mülakatları ve adayları üzerinde çalışmak için bir şirketi açın.",
+        "Sahibi olduğunuz bir şirketi tüm mülakatları ve davetleriyle birlikte kaldırın."
+      ],
+      "tips": [
+        "Sahibi olmadığınız her şirketin yanında rolünüz görünür: yöneticiler değişiklik yapar, görüntüleyiciler yalnızca bakar.",
+        "Krediler şirkete aittir; bu yüzden her şirkete ayrı kredi yüklenir."
+      ]
+    },
+    "pickCompany": {
+      "title": "Bir şirket seçin",
+      "text": "Bir şablon seçtiniz. Hangi şirket için olduğunu seçin: şablon oraya yeni bir mülakat olarak kopyalanır, ücretsiz ve adaylara gönderilmeye hazır.",
+      "actions": [
+        "Şablonu açmak için bir şirket seçin, ardından şablonu kullanın.",
+        "Henüz şirketiniz yoksa yeni bir şirket oluşturun; şablon orada açılır."
+      ],
+      "tips": [
+        "Kopyalandıktan sonra mülakat şirketindir: sorularını ve ayarlarını dilediğiniz gibi değiştirin."
+      ]
+    },
+    "interviews": {
+      "title": "Mülakatlar",
+      "text": "Bu şirketin tüm mülakatları ve adaylar için kredileri. Her mülakat, bir iş tanımından oluşturulan süreli bir testtir.",
+      "actions": [
+        "“Yeni mülakat” ile bir iş tanımından mülakat oluşturun.",
+        "Konularını, adaylarını ve ayarlarını görmek için bir mülakatı açın.",
+        "Bir mülakatı aday olarak deneyin veya silin.",
+        "Bakiyeden kredi yükleyin veya otomatik yüklemeyi açın."
+      ],
+      "tips": [
+        "Krediler azaldığında bakiye kehribar rengine döner. Kredi yoksa yeni davetler gönderilmez.",
+        "Yukarıdaki sekmeler şablonlara, ekibinize, entegrasyonlara ve davetlere gider."
+      ]
+    },
+    "newInterview": {
+      "title": "Yeni mülakat",
+      "text": "Mülakata iş tanımından başlayın. prepza onu okur, ölçülecek konuları önerir ve siz onayladığınızda soruları yazar.",
+      "actions": [
+        "İş tanımını yapıştırın: pozisyon, gereksinimler ve tercih sebepleri.",
+        "Mülakatın oluşturulacağı dili seçin.",
+        "Oluşturun, ardından önerilen konuları inceleyin."
+      ],
+      "tips": [
+        "Tanım ne kadar ayrıntılı olursa sorular pozisyona o kadar iyi uyar.",
+        "Oluşturmak ücretsizdir: yalnızca cevap veren adaylar için ödersiniz."
+      ]
+    },
+    "reviewTopics": {
+      "title": "Konularınızı inceleyin",
+      "text": "prepza bu konuları tanımınızdan önerdi. Tuttuğunuz her konu, cevaplarıyla birlikte kendi soru setini alır.",
+      "actions": [
+        "İhtiyacınız olmayan konuların işaretini kaldırın.",
+        "Bir konunun adını ve alt konularını kalem simgesiyle düzenleyin.",
+        "Değişiklikleri kendi sözlerinizle anlatıp uygulayın, örneğin “ekip liderliği üzerine bir konu ekle”.",
+        "Soruların yazılması için onaylayıp oluşturun."
+      ],
+      "tips": [
+        "Konu çok fazlaysa bazılarının işaretini kaldırın veya nasıl birleştirileceklerini anlatın.",
+        "Sorular yalnızca onayınızdan sonra yazılır; burada bir dakikanızı ayırın."
+      ]
+    },
+    "generating": {
+      "title": "Oluşturuluyor",
+      "text": "prepza mülakatınızı hazırlıyor: önce konular, sonra her birinin soruları. Birkaç dakika sürer.",
+      "actions": [
+        "İsterseniz bu sayfadan ayrılın: oluşturma devam eder.",
+        "Artık gerekmiyorsa oluşturmayı iptal edin; o ana kadar hazırlanan hiçbir şey saklanmaz."
+      ],
+      "tips": [
+        "Mülakat hazır olduğunda bildirim alırsınız.",
+        "Mülakatlar listesinden istediğiniz zaman geri dönün."
+      ]
+    },
+    "interviewTopics": {
+      "title": "Konular",
+      "text": "Bu mülakatın ölçtükleri: konuları, her birinin alt konuları ve kendi soru havuzu. Her aday her havuzdan rastgele bir set alır.",
+      "actions": [
+        "Bir konunun sorularını ve cevaplarını okumak için “Soruları yönet”i açın.",
+        "Zayıf bir soruyu yeniden oluşturun, yanlış bir cevabı işaretleyin veya adayların bir soruyla ilgili bildirimlerini okuyun.",
+        "Her adayın bir konudan kaç soru alacağını belirleyin.",
+        "Mülakatı aday olarak deneyin veya silin."
+      ],
+      "tips": [
+        "Yapay zekânın yazdığı sorular hatalı olabilir: kimseyi davet etmeden önce her konuya göz atın.",
+        "Mülakatı yeniden adlandırmak için başlığa tıklayın."
+      ]
+    },
+    "interviewCandidates": {
+      "title": "Adaylar",
+      "text": "Bu mülakata davet edilen herkes; durumu, ilerlemesi ve notuyla birlikte.",
+      "actions": [
+        "Adayları davet edin: tek tek, en fazla 100 kişilik bir listeyle ya da bir CSV veya TXT dosyasıyla.",
+        "İş ilanı için paylaşılabilir bağlantıyı açın: bağlantıya sahip herkes mülakata girebilir.",
+        "E-posta veya ada göre arayın, duruma göre filtreleyin, nota veya tarihe göre sıralayın.",
+        "Bir adayın raporunu açın ya da tüm adayların raporunu indirin veya paylaşın."
+      ],
+      "tips": [
+        "En az bir soruyu cevaplayan her aday, bağlantıdan gelenler dahil, kredi kullanır.",
+        "Hatırlatmalar adaylara otomatik olarak gönderilir."
+      ]
+    },
+    "interviewSettings": {
+      "title": "Ayarlar",
+      "text": "Bu mülakatın her aday için nasıl işlediği.",
+      "actions": [
+        "Her soru için süreyi saniye olarak belirleyin.",
+        "Geçme notunu belirleyin: buna ulaşan adaylar geçer.",
+        "Pozisyonu doldurduğunuzda mülakatı işe alındı olarak işaretleyin."
+      ],
+      "tips": [
+        "Her ayar, alanından çıktığınız anda kaydedilir.",
+        "Adaylar puanlarını asla görmez; yalnızca ekibiniz görür.",
+        "Daha fazla süreye ihtiyacı olan bir aday için sayfasından ek süre verin."
+      ]
+    },
+    "tryInterview": {
+      "title": "Aday olarak dene",
+      "text": "Bu mülakatın adayların gördüğü haliyle önizlemesi: giriş, ardından süreli sorular. Ücretsizdir.",
+      "actions": [
+        "Önizlemeyi başlatın ve bir aday gibi cevaplayın.",
+        "Kimseyi davet etmeden önce süreyi, ifadeleri ve cevapları kontrol edin."
+      ],
+      "tips": [
+        "Cevaplarken sayfada kalın: adaylarda sayfadan ayrılma, kopyalama ve çok hızlı cevaplar kaydedilir."
+      ]
+    },
+    "candidate": {
+      "title": "Aday raporu",
+      "text": "Bir adayın sonuçları: notu, geçip geçmediği ve her cevabıyla birlikte her konudaki puanı.",
+      "actions": [
+        "Her cevabı dürüstlük uyarılarıyla okuyun: sayfadan ayrılmalar, kopyalama girişimleri ve hızlı cevaplar.",
+        "Raporu PDF olarak indirin veya e-postayla paylaşın.",
+        "Başlamadan önce ek süre verin, örneğin bir engel durumu için.",
+        "Adayın adını ekleyin veya düzenleyin.",
+        "Daveti yeniden gönderin veya geri alın ya da adayı sonuçlarıyla birlikte silin."
+      ],
+      "tips": [
+        "Puan kararınızı destekler, kararı sizin yerinize vermez. Aday isterse sonucunu bir insana inceletin."
+      ]
+    },
+    "templates": {
+      "title": "Şablonlar",
+      "text": "Yaygın pozisyonlar için hazır mülakatlar. Bir şablonu kullanmak onu bu şirkete kendi mülakatınız olarak kopyalar.",
+      "actions": [
+        "Pozisyona veya konuya göre arayın, seviyeye ve dile göre filtreleyin.",
+        "Konularını ve her birindeki soru sayısını görmek için bir şablonu açın.",
+        "Bir şablondan mülakat başlatmak için şablonu kullanın."
+      ],
+      "tips": [
+        "Daha iyi bir uyum için mülakatı kendi iş tanımınızdan oluşturun.",
+        "Kopyalandıktan sonra mülakat sizindir: sorularını ve ayarlarını dilediğiniz gibi değiştirin."
+      ]
+    },
+    "template": {
+      "title": "Şablon",
+      "text": "Hazır bir mülakat: konuları, alt konuları ve her konudaki soru sayısı.",
+      "actions": [
+        "Konuların işe aldığınız pozisyona uyup uymadığını kontrol edin.",
+        "Şablonu bu şirkete yeni bir mülakat olarak kopyalamak için kullanın."
+      ],
+      "tips": [
+        "Kopyalamak ücretsizdir; cevap veren adaylar her zamanki gibi kredi kullanır.",
+        "Konular uymuyorsa mülakatı iş tanımınızdan oluşturun."
+      ]
+    },
+    "team": {
+      "title": "Ekip",
+      "text": "Bu şirketin mülakatları üzerinde çalışan kişiler ve rolleri.",
+      "actions": [
+        "E-postayla yönetici veya görüntüleyici olarak üye ekleyin.",
+        "Bir üyenin rolünü yönetici ile görüntüleyici arasında değiştirin.",
+        "Bekleyen bir davetin bağlantısını kopyalayın ya da bir üyeyi veya daveti kaldırın."
+      ],
+      "tips": [
+        "Yöneticiler mülakat oluşturur ve değiştirir, aday davet eder ve kredi yükler. Görüntüleyiciler mülakatları ve sonuçları görür, raporları paylaşır ama hiçbir şeyi değiştirmez.",
+        "Kartı otomatik yüklemeleri ödeyen bir üyeyi kaldırmak bu yüklemeleri durdurur."
+      ]
+    },
+    "integrations": {
+      "title": "Entegrasyonlar",
+      "text": "prepza'yı ekibinizin zaten kullandığı araçlara bağlayın. Her entegrasyonun kurulum adımlarını içeren kendi sayfası vardır.",
+      "actions": [
+        "Slack: şirketinizin bildirimlerini bir kanalda alın.",
+        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): bir aşamaya taşıdığınız adaylar mülakatı alır, sonuçları ATS'e geri döner.",
+        "API: kendi platformunuzu bağlamak için anahtarlar ve webhook'lar."
+      ],
+      "tips": [
+        "Şirketteki herkes entegrasyonları görür; sahipler ve yöneticiler değiştirebilir."
+      ]
+    },
+    "ats": {
+      "title": "ATS entegrasyonu",
+      "text": "ATS'nizdeki bir ilanı bir mülakata bağlayın: seçtiğiniz aşamaya taşıdığınız adaylar mülakatı alır, sonuçları da profillerine yorum olarak geri gelir.",
+      "actions": [
+        "ATS'nizi talimatlarını izleyerek bağlayın.",
+        "Bir ilan bağlayın: ilanı, aşamasını ve bir mülakatı seçin ya da ilanın metninden yeni bir mülakat oluşturun.",
+        "Davet edilemeyen adayları yeniden davet edin, örneğin krediler bittiğinde.",
+        "Bir ilanın bağlantısını kaldırın veya ATS bağlantısını kesin."
+      ],
+      "tips": [
+        "Yalnızca prepza için bir aşama ekleyin, örneğin “prepza beceri testi”; böylece diğer araçlarınızla hiç karışmaz.",
+        "prepza ATS'nizde kimseyi asla taşımaz veya reddetmez."
+      ]
+    },
+    "slack": {
+      "title": "Slack",
+      "text": "Şirketinizin bildirimleri, oldukları anda bir Slack kanalında.",
+      "actions": [
+        "prepza'yı Slack'e ekleyin ve kanalı seçin, örneğin #hiring.",
+        "Oraya hangi bildirimlerin gideceğini seçin: bir adayın bitirmesi, teslim edilemeyen bir davet, bir mülakatın hazır olması ve daha fazlası.",
+        "Bildirimleri durdurmak ve prepza uygulamasını Slack'inizden kaldırmak için bağlantıyı kesin."
+      ],
+      "tips": [
+        "prepza yalnızca o kanala mesaj gönderebilir; Slack'inizi okuyamaz.",
+        "Herkes her bildirimi zil simgesinde görmeye devam eder."
+      ]
+    },
+    "api": {
+      "title": "API",
+      "text": "Kariyer siteniz gibi kendi platformunuzu prepza'ya bağlayın.",
+      "actions": [
+        "Bir API anahtarı oluşturun: mülakatlarınızı ve adaylarınızı okur, sizin adınıza aday davet eder.",
+        "Bir webhook ekleyin: bir aday bitirdiğinde sonuçları imzalı olarak HTTPS adresinize gönderilir.",
+        "Artık kullanmadığınız anahtarları ve webhook'ları silin.",
+        "Tüm uç noktalar ve olaylar için API belgelerini açın."
+      ],
+      "tips": [
+        "Yeni bir anahtar ve webhook'un gizli anahtarı yalnızca bir kez gösterilir: hemen kopyalayın.",
+        "Her anahtar için bir son geçerlilik tarihi seçin: sızdırılmış süresiz bir anahtar kullanılabilir kalır."
+      ]
+    },
+    "referrals": {
+      "title": "Davetler",
+      "text": "Bu şirketin bağlantısıyla diğer şirketleri prepza'ya davet edin, iki şirket de kredi kazansın.",
+      "actions": [
+        "Davet bağlantınızı kopyalayın veya paylaşın.",
+        "Bu şirketin aldığı tüm ödülleri görün."
+      ],
+      "tips": [
+        "Davet ettiğiniz şirket, tutar ne olursa olsun ilk kredi yüklemesini yaptığında ikiniz de kredi kazanırsınız.",
+        "Krediler bu şirkete gider ve hiç sona ermez."
+      ]
+    }
   }
 }

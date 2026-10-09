@@ -1482,5 +1482,271 @@
       }
     },
     "removed": "Pesan dihapus: berisi rahasia"
+  },
+  "pageHelp": {
+    "label": "Tentang halaman ini",
+    "actionsTitle": "Yang bisa kamu lakukan",
+    "tipsTitle": "Tips",
+    "landing": {
+      "title": "Cara kerja prepza",
+      "text": "prepza mengubah deskripsi pekerjaanmu menjadi wawancara pilihan ganda berbatas waktu, dengan soal acak tersendiri untuk setiap kandidat.",
+      "actions": [
+        "Tempel deskripsi pekerjaan: prepza mengusulkan topik yang akan diuji.",
+        "Tinjau topiknya: pertahankan, ubah, atau buang, lalu setujui untuk menulis soalnya.",
+        "Undang kandidat lewat email, dari file, atau dengan satu tautan yang bisa dibagikan.",
+        "Baca laporannya: kandidat diurutkan berdasarkan nilai, dengan setiap jawaban dan tanda integritas."
+      ],
+      "tips": [
+        "Membuat wawancara gratis. Kamu membayar $1–3 per kandidat yang menjawab, dan kandidat pertamamu gratis.",
+        "Coba wawancaramu sebagai kandidat sebelum mengundang siapa pun."
+      ]
+    },
+    "companies": {
+      "title": "Perusahaan",
+      "text": "Perusahaanmu. Semua yang kamu lakukan di prepza terjadi di dalam satu perusahaan: wawancara, kandidat, tim, kredit, dan integrasinya.",
+      "actions": [
+        "Buat perusahaan dengan “Perusahaan baru”. Namanya unik di seluruh prepza.",
+        "Buka perusahaan untuk mengelola wawancara dan kandidatnya.",
+        "Hapus perusahaan milikmu, beserta semua wawancara dan undangannya."
+      ],
+      "tips": [
+        "Peranmu tampil di samping setiap perusahaan yang bukan milikmu: admin bisa mengubah, pelihat hanya melihat.",
+        "Kredit dimiliki perusahaan, jadi setiap perusahaan diisi ulang sendiri-sendiri."
+      ]
+    },
+    "pickCompany": {
+      "title": "Pilih perusahaan",
+      "text": "Kamu memilih templat. Pilih perusahaan tujuannya: templat disalin ke sana sebagai wawancara baru, gratis dan siap dikirim ke kandidat.",
+      "actions": [
+        "Pilih perusahaan untuk membuka templat di sana, lalu pakai templatnya.",
+        "Buat perusahaan baru jika belum punya; templat akan terbuka di sana."
+      ],
+      "tips": [
+        "Setelah disalin, wawancara menjadi milik perusahaan: ubah soal dan pengaturannya sesukamu."
+      ]
+    },
+    "interviews": {
+      "title": "Wawancara",
+      "text": "Semua wawancara perusahaan ini dan kreditnya untuk kandidat. Setiap wawancara adalah tes berbatas waktu yang dibuat dari deskripsi pekerjaan.",
+      "actions": [
+        "Buat wawancara dari deskripsi pekerjaan dengan “Wawancara baru”.",
+        "Buka wawancara untuk melihat topik, kandidat, dan pengaturannya.",
+        "Coba wawancara sebagai kandidat, atau hapus.",
+        "Isi ulang kredit, atau aktifkan isi ulang otomatis, dari saldo."
+      ],
+      "tips": [
+        "Saldo berubah kuning saat kredit hampir habis. Tanpa kredit, undangan baru tidak dikirim.",
+        "Tab di atas mengarah ke templat, tim, integrasi, dan referal."
+      ]
+    },
+    "newInterview": {
+      "title": "Wawancara baru",
+      "text": "Mulai wawancara dari deskripsi pekerjaan. prepza membacanya, mengusulkan topik yang akan diuji, dan menulis soal setelah kamu menyetujuinya.",
+      "actions": [
+        "Tempel deskripsi pekerjaan: posisinya, persyaratannya, dan nilai tambah yang diharapkan.",
+        "Pilih bahasa wawancara yang akan dibuat.",
+        "Buat, lalu tinjau topik yang diusulkan."
+      ],
+      "tips": [
+        "Makin spesifik deskripsinya, makin pas soalnya dengan posisi.",
+        "Pembuatan gratis: kamu hanya membayar untuk kandidat yang menjawab."
+      ]
+    },
+    "reviewTopics": {
+      "title": "Tinjau topikmu",
+      "text": "prepza mengusulkan topik ini dari deskripsimu. Setiap topik yang kamu pertahankan mendapat set soal sendiri beserta jawabannya.",
+      "actions": [
+        "Hapus centang topik yang tidak kamu perlukan.",
+        "Ubah nama topik dan subtopiknya dengan ikon pensil.",
+        "Jelaskan perubahan dengan kata-katamu sendiri lalu terapkan, misalnya “tambahkan topik tentang kepemimpinan tim”.",
+        "Setujui dan buat untuk menulis soalnya."
+      ],
+      "tips": [
+        "Jika topiknya terlalu banyak, hapus centang beberapa atau jelaskan cara menggabungkannya.",
+        "Soal baru ditulis setelah kamu menyetujui, jadi luangkan waktu sebentar di sini."
+      ]
+    },
+    "generating": {
+      "title": "Sedang dibuat",
+      "text": "prepza sedang membuat wawancaramu: pertama topik, lalu soal untuk tiap topik. Ini butuh beberapa menit.",
+      "actions": [
+        "Tinggalkan halaman ini jika mau: pembuatan tetap berjalan.",
+        "Batalkan pembuatan jika tidak diperlukan lagi; tidak ada yang disimpan dari yang sudah dibuat."
+      ],
+      "tips": [
+        "Kamu akan mendapat notifikasi saat wawancara siap.",
+        "Kembali kapan saja dari daftar wawancara."
+      ]
+    },
+    "interviewTopics": {
+      "title": "Topik",
+      "text": "Yang diuji wawancara ini: topiknya, masing-masing dengan subtopik dan kumpulan soalnya sendiri. Setiap kandidat mendapat set acak dari tiap kumpulan.",
+      "actions": [
+        "Buka “Kelola soal” untuk membaca soal dan jawaban sebuah topik.",
+        "Buat ulang soal yang lemah, tandai jawaban yang salah, atau baca laporan kandidat tentang sebuah soal.",
+        "Atur berapa soal yang didapat setiap kandidat dari sebuah topik.",
+        "Coba wawancara sebagai kandidat, atau hapus."
+      ],
+      "tips": [
+        "Soal buatan AI bisa salah: periksa sekilas setiap topik sebelum mengundang siapa pun.",
+        "Klik judul untuk mengganti nama wawancara."
+      ]
+    },
+    "interviewCandidates": {
+      "title": "Kandidat",
+      "text": "Semua yang diundang ke wawancara ini, dengan status, progres, dan nilainya.",
+      "actions": [
+        "Undang kandidat: satu per satu, daftar hingga 100, atau file CSV atau TXT.",
+        "Aktifkan tautan yang bisa dibagikan untuk iklan lowongan: siapa pun yang memilikinya bisa mengikuti wawancara.",
+        "Cari berdasarkan email atau nama, filter berdasarkan status, dan urutkan berdasarkan nilai atau tanggal.",
+        "Buka laporan kandidat, atau unduh atau bagikan laporan semua kandidat."
+      ],
+      "tips": [
+        "Setiap kandidat yang menjawab setidaknya satu soal memakai kredit, termasuk yang datang dari tautan.",
+        "Pengingat dikirim ke kandidat secara otomatis."
+      ]
+    },
+    "interviewSettings": {
+      "title": "Pengaturan",
+      "text": "Cara wawancara ini berjalan untuk setiap kandidat.",
+      "actions": [
+        "Atur waktu untuk setiap soal, dalam detik.",
+        "Atur nilai lulus: kandidat yang mencapainya dinyatakan lulus.",
+        "Tandai wawancara sebagai diterima setelah posisinya terisi."
+      ],
+      "tips": [
+        "Setiap pengaturan tersimpan begitu kamu meninggalkan kolomnya.",
+        "Kandidat tidak pernah melihat skornya; hanya timmu yang melihat.",
+        "Untuk kandidat yang butuh waktu lebih, tambahkan waktu ekstra di halamannya."
+      ]
+    },
+    "tryInterview": {
+      "title": "Coba sebagai kandidat",
+      "text": "Pratinjau wawancara ini persis seperti yang dilihat kandidat: pengantar, lalu soal berbatas waktu. Gratis.",
+      "actions": [
+        "Mulai pratinjau dan jawab seperti kandidat.",
+        "Periksa waktu, kata-kata, dan jawabannya sebelum mengundang siapa pun."
+      ],
+      "tips": [
+        "Tetap di halaman saat menjawab: untuk kandidat, meninggalkan halaman, menyalin, dan menjawab terlalu cepat akan dicatat."
+      ]
+    },
+    "candidate": {
+      "title": "Laporan kandidat",
+      "text": "Hasil satu kandidat: nilainya, apakah lulus, dan skor tiap topik dengan setiap jawaban.",
+      "actions": [
+        "Baca setiap jawaban, dengan tanda integritas: meninggalkan halaman, upaya menyalin, dan jawaban cepat.",
+        "Unduh laporan sebagai PDF, atau bagikan lewat email.",
+        "Beri waktu ekstra sebelum kandidat mulai, misalnya karena disabilitas.",
+        "Tambah atau ubah nama kandidat.",
+        "Kirim ulang atau cabut undangan, atau hapus kandidat beserta hasilnya."
+      ],
+      "tips": [
+        "Skor mendukung keputusanmu, bukan menggantikannya. Jika kandidat memintanya, minta seseorang meninjau hasilnya."
+      ]
+    },
+    "templates": {
+      "title": "Templat",
+      "text": "Wawancara siap pakai untuk posisi umum. Memakai templat akan menyalinnya ke perusahaan ini sebagai wawancaramu sendiri.",
+      "actions": [
+        "Cari berdasarkan posisi atau topik, dan filter berdasarkan level dan bahasa.",
+        "Buka templat untuk melihat topiknya dan jumlah soal tiap topik.",
+        "Pakai templat untuk memulai wawancara darinya."
+      ],
+      "tips": [
+        "Agar lebih pas, buat wawancara dari deskripsi pekerjaanmu sendiri.",
+        "Setelah disalin, wawancara itu milikmu: ubah soal dan pengaturannya sesukamu."
+      ]
+    },
+    "template": {
+      "title": "Templat",
+      "text": "Wawancara siap pakai: topiknya, subtopiknya, dan jumlah soal tiap topik.",
+      "actions": [
+        "Pastikan topiknya cocok dengan posisi yang sedang kamu rekrut.",
+        "Pakai templat untuk menyalinnya ke perusahaan ini sebagai wawancara baru."
+      ],
+      "tips": [
+        "Menyalin gratis; kandidat yang menjawab memakai kredit seperti biasa.",
+        "Jika topiknya tidak cocok, buat wawancara dari deskripsi pekerjaanmu sendiri."
+      ]
+    },
+    "team": {
+      "title": "Tim",
+      "text": "Orang-orang yang mengelola wawancara perusahaan ini, dan perannya.",
+      "actions": [
+        "Tambah anggota lewat email, sebagai admin atau pelihat.",
+        "Ubah peran anggota antara admin dan pelihat.",
+        "Salin tautan undangan yang tertunda, atau hapus anggota atau undangan."
+      ],
+      "tips": [
+        "Admin membuat dan mengubah wawancara, mengundang kandidat, dan mengisi ulang kredit. Pelihat melihat wawancara dan hasil serta membagikan laporan, tetapi tidak mengubah apa pun.",
+        "Menghapus anggota yang kartunya membayar isi ulang otomatis akan menghentikan isi ulang tersebut."
+      ]
+    },
+    "integrations": {
+      "title": "Integrasi",
+      "text": "Hubungkan prepza ke alat yang sudah dipakai timmu. Setiap integrasi membuka halamannya sendiri dengan langkah penyiapan.",
+      "actions": [
+        "Slack: terima notifikasi perusahaanmu di sebuah channel.",
+        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): kandidat yang kamu pindahkan ke suatu tahap mendapat wawancara, dan hasilnya dikirim balik.",
+        "API: kunci dan webhook untuk menghubungkan platformmu sendiri."
+      ],
+      "tips": [
+        "Semua orang di perusahaan bisa melihat integrasi; pemilik dan admin yang mengubahnya."
+      ]
+    },
+    "ats": {
+      "title": "Integrasi ATS",
+      "text": "Tautkan lowongan di ATS-mu ke sebuah wawancara: kandidat yang kamu pindahkan ke tahap pilihan mendapat wawancara, dan hasilnya kembali sebagai komentar di profilnya.",
+      "actions": [
+        "Hubungkan ATS-mu dengan mengikuti petunjuknya.",
+        "Tautkan lowongan: pilih lowongan, tahapnya, dan wawancara, atau buat wawancara baru dari teks lowongan.",
+        "Undang ulang kandidat yang belum terundang, misalnya saat kredit habis.",
+        "Lepas tautan lowongan, atau putuskan ATS."
+      ],
+      "tips": [
+        "Tambahkan tahap khusus untuk prepza, misalnya “Tes keterampilan prepza”, supaya tidak pernah tercampur dengan alat lainmu.",
+        "prepza tidak pernah memindahkan atau menolak siapa pun di ATS-mu."
+      ]
+    },
+    "slack": {
+      "title": "Slack",
+      "text": "Notifikasi perusahaanmu di channel Slack, begitu terjadi.",
+      "actions": [
+        "Tambahkan prepza ke Slack dan pilih channel-nya, misalnya #hiring.",
+        "Pilih notifikasi yang dikirim ke sana: kandidat selesai, undangan yang tidak terkirim, wawancara siap, dan lainnya.",
+        "Putuskan untuk menghentikannya dan menghapus aplikasi prepza dari Slack-mu."
+      ],
+      "tips": [
+        "prepza hanya bisa memposting ke channel itu; prepza tidak bisa membaca Slack-mu.",
+        "Semua orang tetap melihat setiap notifikasi di ikon lonceng."
+      ]
+    },
+    "api": {
+      "title": "API",
+      "text": "Hubungkan platformmu sendiri, seperti situs karier, ke prepza.",
+      "actions": [
+        "Buat kunci API: kunci ini membaca wawancara dan kandidatmu serta mengundang kandidat atas namamu.",
+        "Tambahkan webhook: saat kandidat selesai, hasilnya dikirim ke alamat HTTPS-mu, dengan tanda tangan.",
+        "Hapus kunci dan webhook yang tidak lagi kamu pakai.",
+        "Buka dokumentasi API untuk setiap endpoint dan event."
+      ],
+      "tips": [
+        "Kunci baru dan secret webhook hanya ditampilkan sekali: segera salin.",
+        "Pilih masa berlaku untuk setiap kunci: kunci bocor yang tidak pernah kedaluwarsa tetap bisa dipakai."
+      ]
+    },
+    "referrals": {
+      "title": "Referal",
+      "text": "Undang perusahaan lain ke prepza dengan tautan perusahaan ini, dan kalian berdua mendapat kredit.",
+      "actions": [
+        "Salin atau bagikan tautan referalmu.",
+        "Lihat setiap hadiah yang sudah diterima perusahaan ini."
+      ],
+      "tips": [
+        "Kalian berdua mendapat kredit saat perusahaan yang kamu undang melakukan isi ulang pertamanya, berapa pun jumlahnya.",
+        "Kredit masuk ke perusahaan ini dan tidak pernah kedaluwarsa."
+      ]
+    }
   }
 }

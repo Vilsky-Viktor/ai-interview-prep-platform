@@ -1482,5 +1482,271 @@
       }
     },
     "removed": "Mensaje eliminado: contenía un secreto"
+  },
+  "pageHelp": {
+    "label": "Sobre esta página",
+    "actionsTitle": "Qué puedes hacer",
+    "tipsTitle": "Consejos",
+    "landing": {
+      "title": "Cómo funciona prepza",
+      "text": "prepza convierte tu descripción del puesto en una entrevista cronometrada de opción múltiple, con preguntas aleatorias propias para cada candidato.",
+      "actions": [
+        "Pega la descripción del puesto: prepza propone los temas que evaluar.",
+        "Revisa los temas: consérvalos, edítalos o descártalos, y luego apruébalos para que se escriban las preguntas.",
+        "Invita a candidatos por correo, desde un archivo o con un único enlace para compartir.",
+        "Lee los informes: candidatos ordenados por nota, con cada respuesta y alertas de integridad."
+      ],
+      "tips": [
+        "Crear entrevistas es gratis. Pagas $1–3 por cada candidato que responde, y tus primeros candidatos son gratis.",
+        "Prueba tu entrevista como candidato antes de invitar a nadie."
+      ]
+    },
+    "companies": {
+      "title": "Empresas",
+      "text": "Tus empresas. Todo lo que haces en prepza ocurre dentro de una: sus entrevistas, candidatos, equipo, créditos e integraciones.",
+      "actions": [
+        "Crea una empresa con «Nueva empresa». Su nombre es único en prepza.",
+        "Abre una empresa para trabajar en sus entrevistas y candidatos.",
+        "Elimina una empresa de la que eres propietario, con todas sus entrevistas e invitaciones."
+      ],
+      "tips": [
+        "Tu rol aparece junto a cada empresa de la que no eres propietario: los administradores hacen cambios, los lectores solo consultan.",
+        "Los créditos pertenecen a una empresa, así que cada una se recarga por separado."
+      ]
+    },
+    "pickCompany": {
+      "title": "Elige una empresa",
+      "text": "Has elegido una plantilla. Elige la empresa para la que es: la plantilla se copia allí como una nueva entrevista, gratis y lista para enviar a candidatos.",
+      "actions": [
+        "Elige una empresa para abrir la plantilla en ella y luego úsala.",
+        "Crea una nueva empresa si aún no tienes ninguna; la plantilla se abre allí."
+      ],
+      "tips": [
+        "Una vez copiada, la entrevista es de la empresa: cambia sus preguntas y ajustes como quieras."
+      ]
+    },
+    "interviews": {
+      "title": "Entrevistas",
+      "text": "Todas las entrevistas de esta empresa y sus créditos para candidatos. Cada entrevista es una prueba cronometrada creada a partir de una descripción del puesto.",
+      "actions": [
+        "Crea una entrevista a partir de una descripción del puesto con «Nueva entrevista».",
+        "Abre una entrevista para ver sus temas, candidatos y ajustes.",
+        "Prueba una entrevista como candidato o elimínala.",
+        "Recarga créditos o activa la recarga automática desde el saldo."
+      ],
+      "tips": [
+        "El saldo se vuelve ámbar cuando quedan pocos créditos. Sin créditos, no se envían nuevas invitaciones.",
+        "Las pestañas de arriba llevan a plantillas, tu equipo, integraciones y recomendaciones."
+      ]
+    },
+    "newInterview": {
+      "title": "Nueva entrevista",
+      "text": "Crea una entrevista a partir de la descripción del puesto. prepza la lee, propone los temas que evaluar y escribe las preguntas cuando los apruebas.",
+      "actions": [
+        "Pega la descripción del puesto: el rol, sus requisitos y lo que se valora.",
+        "Elige el idioma en que se generará la entrevista.",
+        "Genera y luego revisa los temas propuestos."
+      ],
+      "tips": [
+        "Cuanto más concreta sea la descripción, mejor se ajustarán las preguntas al puesto.",
+        "Generar es gratis: solo pagas por los candidatos que responden."
+      ]
+    },
+    "reviewTopics": {
+      "title": "Revisa tus temas",
+      "text": "prepza ha propuesto estos temas a partir de tu descripción. Cada tema que conserves tendrá su propio conjunto de preguntas con respuestas.",
+      "actions": [
+        "Desmarca los temas que no necesites.",
+        "Edita el nombre y los subtemas de un tema con su lápiz.",
+        "Describe los cambios con tus propias palabras y aplícalos, por ejemplo «añade un tema sobre liderazgo de equipos».",
+        "Aprueba y genera para que se escriban las preguntas."
+      ],
+      "tips": [
+        "Si hay demasiados temas, desmarca algunos o describe cómo combinarlos.",
+        "Las preguntas solo se escriben después de que apruebes, así que tómate un minuto aquí."
+      ]
+    },
+    "generating": {
+      "title": "Generando",
+      "text": "prepza está creando tu entrevista: primero los temas y luego las preguntas de cada uno. Tarda unos minutos.",
+      "actions": [
+        "Puedes salir de esta página: la generación continúa.",
+        "Cancela la generación si ya no la necesitas; no se conserva nada de lo creado hasta ahora."
+      ],
+      "tips": [
+        "Recibirás una notificación cuando la entrevista esté lista.",
+        "Vuelve cuando quieras desde la lista de entrevistas."
+      ]
+    },
+    "interviewTopics": {
+      "title": "Temas",
+      "text": "Lo que evalúa esta entrevista: sus temas, cada uno con subtemas y su propio banco de preguntas. Cada candidato recibe una selección aleatoria de cada banco.",
+      "actions": [
+        "Abre «Gestionar preguntas» para leer las preguntas y respuestas de un tema.",
+        "Regenera una pregunta floja, marca una respuesta incorrecta o lee los reportes de los candidatos sobre una pregunta.",
+        "Define cuántas preguntas recibe cada candidato de un tema.",
+        "Prueba la entrevista como candidato o elimínala."
+      ],
+      "tips": [
+        "Las preguntas escritas por IA pueden tener errores: repasa cada tema antes de invitar a nadie.",
+        "Haz clic en el título para cambiar el nombre de la entrevista."
+      ]
+    },
+    "interviewCandidates": {
+      "title": "Candidatos",
+      "text": "Todas las personas invitadas a esta entrevista, con su estado, avance y nota.",
+      "actions": [
+        "Invita a candidatos: uno a uno, una lista de hasta 100, o un archivo CSV o TXT.",
+        "Activa el enlace para compartir en una oferta de empleo: cualquiera que lo tenga puede hacer la entrevista.",
+        "Busca por correo o nombre, filtra por estado y ordena por nota o fecha.",
+        "Abre el informe de un candidato, o descarga o comparte el informe de todos los candidatos."
+      ],
+      "tips": [
+        "Cada candidato que responde al menos una pregunta consume créditos, incluidos los que llegan por el enlace.",
+        "Los recordatorios se envían a los candidatos automáticamente."
+      ]
+    },
+    "interviewSettings": {
+      "title": "Ajustes",
+      "text": "Cómo funciona esta entrevista para cada candidato.",
+      "actions": [
+        "Define el tiempo por pregunta, en segundos.",
+        "Define la nota de aprobado: los candidatos que la alcanzan aprueban.",
+        "Marca el puesto como cubierto cuando hayas contratado."
+      ],
+      "tips": [
+        "Cada ajuste se guarda en cuanto sales de su campo.",
+        "Los candidatos nunca ven sus puntuaciones; solo tu equipo las ve.",
+        "Para un candidato que necesite más tiempo, añade tiempo extra en su página."
+      ]
+    },
+    "tryInterview": {
+      "title": "Probar como candidato",
+      "text": "Una vista previa de esta entrevista tal como la ven los candidatos: la introducción y luego las preguntas cronometradas. Es gratis.",
+      "actions": [
+        "Inicia la vista previa y responde como lo haría un candidato.",
+        "Revisa los tiempos, la redacción y las respuestas antes de invitar a nadie."
+      ],
+      "tips": [
+        "Quédate en la página mientras respondes: en los candidatos se registra si salen de la página, copian o responden demasiado rápido."
+      ]
+    },
+    "candidate": {
+      "title": "Informe del candidato",
+      "text": "Los resultados de un candidato: su nota, si aprobó y la puntuación de cada tema con cada respuesta.",
+      "actions": [
+        "Lee cada respuesta con sus alertas de integridad: salidas de la página, intentos de copia y respuestas demasiado rápidas.",
+        "Descarga el informe en PDF o compártelo por correo.",
+        "Da tiempo extra antes de que empiece, por ejemplo por una discapacidad.",
+        "Añade o edita el nombre del candidato.",
+        "Reenvía o revoca la invitación, o elimina al candidato con sus resultados."
+      ],
+      "tips": [
+        "La puntuación apoya tu decisión; no la toma por ti. Si el candidato lo pide, haz que una persona revise su resultado."
+      ]
+    },
+    "templates": {
+      "title": "Plantillas",
+      "text": "Entrevistas listas para puestos habituales. Al usar una, se copia en esta empresa como tu propia entrevista.",
+      "actions": [
+        "Busca por puesto o tema, y filtra por nivel e idioma.",
+        "Abre una plantilla para ver sus temas y cuántas preguntas tiene cada uno.",
+        "Usa una plantilla para crear una entrevista a partir de ella."
+      ],
+      "tips": [
+        "Para un ajuste más preciso, crea en su lugar una entrevista a partir de tu propia descripción del puesto.",
+        "Una vez copiada, la entrevista es tuya: cambia sus preguntas y ajustes como quieras."
+      ]
+    },
+    "template": {
+      "title": "Plantilla",
+      "text": "Una entrevista lista: sus temas, sus subtemas y cuántas preguntas tiene cada tema.",
+      "actions": [
+        "Comprueba que los temas encajan con el puesto que quieres cubrir.",
+        "Usa la plantilla para copiarla en esta empresa como una nueva entrevista."
+      ],
+      "tips": [
+        "Copiar es gratis; los candidatos que responden consumen créditos como siempre.",
+        "Si los temas no encajan, crea en su lugar una entrevista a partir de tu descripción del puesto."
+      ]
+    },
+    "team": {
+      "title": "Equipo",
+      "text": "Las personas que trabajan en las entrevistas de esta empresa y sus roles.",
+      "actions": [
+        "Añade un miembro por correo, como administrador o lector.",
+        "Cambia el rol de un miembro entre administrador y lector.",
+        "Copia el enlace de una invitación pendiente, o quita a un miembro o una invitación."
+      ],
+      "tips": [
+        "Los administradores crean y cambian entrevistas, invitan a candidatos y recargan créditos. Los lectores ven entrevistas y resultados y comparten informes, pero no cambian nada.",
+        "Si quitas a un miembro cuya tarjeta paga las recargas automáticas, esas recargas se detienen."
+      ]
+    },
+    "integrations": {
+      "title": "Integraciones",
+      "text": "Conecta prepza con las herramientas que tu equipo ya usa. Cada integración abre su propia página con los pasos de configuración.",
+      "actions": [
+        "Slack: recibe las notificaciones de tu empresa en un canal.",
+        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): los candidatos que pasas a una etapa reciben la entrevista, y sus resultados vuelven al ATS.",
+        "API: claves y webhooks para conectar tu propia plataforma."
+      ],
+      "tips": [
+        "Todos en la empresa ven las integraciones; los propietarios y administradores las cambian."
+      ]
+    },
+    "ats": {
+      "title": "Integración con ATS",
+      "text": "Vincula una vacante de tu ATS a una entrevista: los candidatos que pasas a la etapa elegida reciben la entrevista, y sus resultados vuelven como comentario en su perfil.",
+      "actions": [
+        "Conecta tu ATS siguiendo sus instrucciones.",
+        "Vincula una vacante: elige la vacante, su etapa y una entrevista, o crea una nueva entrevista a partir del texto de la vacante.",
+        "Vuelve a invitar a los candidatos que no se invitaron, por ejemplo cuando se agotaron los créditos.",
+        "Desvincula una vacante o desconecta el ATS."
+      ],
+      "tips": [
+        "Añade una etapa solo para prepza, como «Prueba de habilidades prepza», para que nunca se mezcle con tus otras herramientas.",
+        "prepza nunca mueve ni rechaza a nadie en tu ATS."
+      ]
+    },
+    "slack": {
+      "title": "Slack",
+      "text": "Las notificaciones de tu empresa en un canal de Slack, en el momento en que ocurren.",
+      "actions": [
+        "Añade prepza a Slack y elige el canal, por ejemplo #hiring.",
+        "Elige qué notificaciones llegan allí: un candidato que termina, una invitación que no se entregó, una entrevista lista y más.",
+        "Desconecta para detenerlas y quitar la app de prepza de tu Slack."
+      ],
+      "tips": [
+        "prepza solo puede publicar en ese canal; no puede leer tu Slack.",
+        "Todos siguen viendo cada notificación en la campana."
+      ]
+    },
+    "api": {
+      "title": "API",
+      "text": "Conecta tu propia plataforma, como tu web de empleo, con prepza.",
+      "actions": [
+        "Crea una clave de API: lee tus entrevistas y candidatos e invita a candidatos en tu nombre.",
+        "Añade un webhook: cuando un candidato termina, sus resultados llegan firmados a tu dirección HTTPS.",
+        "Elimina las claves y los webhooks que ya no uses.",
+        "Abre la documentación de la API para ver cada endpoint y evento."
+      ],
+      "tips": [
+        "Una clave nueva y el secreto de un webhook se muestran solo una vez: cópialos de inmediato.",
+        "Elige una caducidad para cada clave: una clave filtrada que nunca caduca sigue siendo utilizable."
+      ]
+    },
+    "referrals": {
+      "title": "Recomendaciones",
+      "text": "Invita a otras empresas a prepza con el enlace de esta empresa, y ambas reciben créditos.",
+      "actions": [
+        "Copia o comparte tu enlace de recomendación.",
+        "Consulta cada recompensa que ha recibido esta empresa."
+      ],
+      "tips": [
+        "Las dos empresas reciben créditos cuando la invitada hace su primera recarga, de cualquier importe.",
+        "Los créditos van a esta empresa y nunca caducan."
+      ]
+    }
   }
 }

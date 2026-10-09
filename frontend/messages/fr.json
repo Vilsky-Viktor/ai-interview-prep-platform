@@ -1482,5 +1482,271 @@
       }
     },
     "removed": "Message supprimé : il contenait un secret"
+  },
+  "pageHelp": {
+    "label": "À propos de cette page",
+    "actionsTitle": "Ce que vous pouvez faire",
+    "tipsTitle": "Conseils",
+    "landing": {
+      "title": "Comment fonctionne prepza",
+      "text": "prepza transforme votre description de poste en un entretien chronométré à choix multiples, avec des questions aléatoires propres à chaque candidat.",
+      "actions": [
+        "Collez la description du poste : prepza propose les thèmes à évaluer.",
+        "Relisez les thèmes : gardez-les, modifiez-les ou retirez-les, puis validez pour faire rédiger les questions.",
+        "Invitez des candidats par e-mail, à partir d'un fichier ou avec un seul lien de partage.",
+        "Lisez les rapports : les candidats classés par note, avec chaque réponse et les alertes d'intégrité."
+      ],
+      "tips": [
+        "Créer des entretiens est gratuit. Vous payez $1–3 par candidat qui répond, et vos premiers candidats sont gratuits.",
+        "Essayez votre entretien en tant que candidat avant d'inviter qui que ce soit."
+      ]
+    },
+    "companies": {
+      "title": "Entreprises",
+      "text": "Vos entreprises. Tout ce que vous faites dans prepza se passe dans l'une d'elles : ses entretiens, ses candidats, son équipe, ses crédits et ses intégrations.",
+      "actions": [
+        "Créez une entreprise avec « Nouvelle entreprise ». Son nom est unique dans prepza.",
+        "Ouvrez une entreprise pour travailler sur ses entretiens et ses candidats.",
+        "Supprimez une entreprise dont vous êtes propriétaire, avec tous ses entretiens et invitations."
+      ],
+      "tips": [
+        "Votre rôle s'affiche à côté de chaque entreprise dont vous n'êtes pas propriétaire : les admins modifient, les lecteurs consultent seulement.",
+        "Les crédits appartiennent à une entreprise : chacune se recharge séparément."
+      ]
+    },
+    "pickCompany": {
+      "title": "Choisissez une entreprise",
+      "text": "Vous avez choisi un modèle. Choisissez l'entreprise à laquelle il est destiné : le modèle y est copié comme nouvel entretien, gratuit et prêt à envoyer aux candidats.",
+      "actions": [
+        "Choisissez une entreprise pour y ouvrir le modèle, puis utilisez-le.",
+        "Créez une nouvelle entreprise si vous n'en avez pas encore ; le modèle s'y ouvre."
+      ],
+      "tips": [
+        "Une fois copié, l'entretien appartient à l'entreprise : modifiez ses questions et ses paramètres comme vous le souhaitez."
+      ]
+    },
+    "interviews": {
+      "title": "Entretiens",
+      "text": "Tous les entretiens de cette entreprise et ses crédits pour les candidats. Chaque entretien est un test chronométré créé à partir d'une description de poste.",
+      "actions": [
+        "Créez un entretien à partir d'une description de poste avec « Nouvel entretien ».",
+        "Ouvrez un entretien pour voir ses thèmes, ses candidats et ses paramètres.",
+        "Essayez un entretien en tant que candidat, ou supprimez-le.",
+        "Rechargez des crédits, ou activez la recharge automatique, depuis le solde."
+      ],
+      "tips": [
+        "Le solde passe à l'orange quand les crédits s'épuisent. Sans crédits, les nouvelles invitations ne sont pas envoyées.",
+        "Les onglets ci-dessus mènent aux modèles, à votre équipe, aux intégrations et au parrainage."
+      ]
+    },
+    "newInterview": {
+      "title": "Nouvel entretien",
+      "text": "Lancez un entretien à partir de la description du poste. prepza la lit, propose les thèmes à évaluer et rédige les questions une fois que vous les validez.",
+      "actions": [
+        "Collez la description du poste : le rôle, ses exigences et les atouts appréciés.",
+        "Choisissez la langue dans laquelle générer l'entretien.",
+        "Lancez la génération, puis relisez les thèmes proposés."
+      ],
+      "tips": [
+        "Plus la description est précise, plus les questions correspondent au poste.",
+        "La génération est gratuite : vous ne payez que pour les candidats qui répondent."
+      ]
+    },
+    "reviewTopics": {
+      "title": "Relisez vos thèmes",
+      "text": "prepza a proposé ces thèmes à partir de votre description. Chaque thème que vous gardez reçoit ses propres questions avec leurs réponses.",
+      "actions": [
+        "Décochez les thèmes dont vous n'avez pas besoin.",
+        "Modifiez le nom et les sous-thèmes d'un thème avec son crayon.",
+        "Décrivez les changements avec vos propres mots et appliquez-les, par exemple « ajouter un thème sur le management d'équipe ».",
+        "Validez et lancez la génération pour faire rédiger les questions."
+      ],
+      "tips": [
+        "S'il y a trop de thèmes, décochez-en quelques-uns ou décrivez comment les fusionner.",
+        "Les questions ne sont rédigées qu'après votre validation : prenez une minute ici."
+      ]
+    },
+    "generating": {
+      "title": "Génération",
+      "text": "prepza crée votre entretien : d'abord les thèmes, puis les questions de chacun. Cela prend quelques minutes.",
+      "actions": [
+        "Vous pouvez quitter cette page : la génération continue.",
+        "Annulez la génération si vous n'en avez plus besoin ; rien de ce qui a été créé n'est conservé."
+      ],
+      "tips": [
+        "Vous recevez une notification quand l'entretien est prêt.",
+        "Revenez à tout moment depuis la liste des entretiens."
+      ]
+    },
+    "interviewTopics": {
+      "title": "Thèmes",
+      "text": "Ce que cet entretien évalue : ses thèmes, chacun avec des sous-thèmes et sa propre banque de questions. Chaque candidat reçoit une sélection aléatoire de chaque banque.",
+      "actions": [
+        "Ouvrez « Gérer les questions » pour lire les questions et les réponses d'un thème.",
+        "Régénérez une question faible, signalez une réponse erronée ou lisez les signalements des candidats sur une question.",
+        "Définissez combien de questions chaque candidat reçoit d'un thème.",
+        "Essayez l'entretien en tant que candidat, ou supprimez-le."
+      ],
+      "tips": [
+        "Les questions rédigées par l'IA peuvent être fausses : parcourez chaque thème avant d'inviter qui que ce soit.",
+        "Cliquez sur le titre pour renommer l'entretien."
+      ]
+    },
+    "interviewCandidates": {
+      "title": "Candidats",
+      "text": "Toutes les personnes invitées à cet entretien, avec leur statut, leur progression et leur note.",
+      "actions": [
+        "Invitez des candidats : un par un, une liste de 100 au maximum, ou un fichier CSV ou TXT.",
+        "Activez le lien de partage pour une offre d'emploi : toute personne qui l'a peut passer l'entretien.",
+        "Recherchez par e-mail ou par nom, filtrez par statut et triez par note ou par date.",
+        "Ouvrez le rapport d'un candidat, ou téléchargez ou partagez le rapport sur tous les candidats."
+      ],
+      "tips": [
+        "Chaque candidat qui répond à au moins une question consomme des crédits, y compris ceux venus par le lien.",
+        "Les rappels sont envoyés automatiquement aux candidats."
+      ]
+    },
+    "interviewSettings": {
+      "title": "Paramètres",
+      "text": "Le déroulement de cet entretien pour chaque candidat.",
+      "actions": [
+        "Définissez le temps par question, en secondes.",
+        "Définissez le seuil de réussite : les candidats qui l'atteignent réussissent.",
+        "Marquez l'entretien comme recruté une fois le poste pourvu."
+      ],
+      "tips": [
+        "Chaque paramètre est enregistré dès que vous quittez son champ.",
+        "Les candidats ne voient jamais leurs scores ; seule votre équipe les voit.",
+        "Pour un candidat qui a besoin de plus de temps, ajoutez du temps supplémentaire sur sa page."
+      ]
+    },
+    "tryInterview": {
+      "title": "Essayer en tant que candidat",
+      "text": "Un aperçu de cet entretien tel que le voient les candidats : l'introduction, puis les questions chronométrées. C'est gratuit.",
+      "actions": [
+        "Lancez l'aperçu et répondez comme le ferait un candidat.",
+        "Vérifiez le minutage, la formulation et les réponses avant d'inviter qui que ce soit."
+      ],
+      "tips": [
+        "Restez sur la page pendant que vous répondez : pour les candidats, quitter la page, copier et répondre trop vite sont enregistrés."
+      ]
+    },
+    "candidate": {
+      "title": "Rapport du candidat",
+      "text": "Les résultats d'un candidat : sa note, s'il a réussi, et le score de chaque thème avec chaque réponse.",
+      "actions": [
+        "Lisez chaque réponse, avec les alertes d'intégrité : sorties de la page, tentatives de copie et réponses trop rapides.",
+        "Téléchargez le rapport en PDF, ou partagez-le par e-mail.",
+        "Accordez du temps supplémentaire avant le début, par exemple en cas de handicap.",
+        "Ajoutez ou modifiez le nom du candidat.",
+        "Renvoyez ou révoquez l'invitation, ou supprimez le candidat avec ses résultats."
+      ],
+      "tips": [
+        "Le score éclaire votre décision ; il ne la prend pas. Si le candidat le demande, faites examiner son résultat par une personne."
+      ]
+    },
+    "templates": {
+      "title": "Modèles",
+      "text": "Des entretiens prêts à l'emploi pour les postes courants. En utiliser un le copie dans cette entreprise comme votre propre entretien.",
+      "actions": [
+        "Recherchez par poste ou par thème, et filtrez par niveau et par langue.",
+        "Ouvrez un modèle pour voir ses thèmes et le nombre de questions de chacun.",
+        "Utilisez un modèle pour lancer un entretien à partir de celui-ci."
+      ],
+      "tips": [
+        "Pour un résultat plus ciblé, créez plutôt un entretien à partir de votre propre description de poste.",
+        "Une fois copié, l'entretien est à vous : modifiez ses questions et ses paramètres comme vous le souhaitez."
+      ]
+    },
+    "template": {
+      "title": "Modèle",
+      "text": "Un entretien prêt à l'emploi : ses thèmes, leurs sous-thèmes et le nombre de questions de chaque thème.",
+      "actions": [
+        "Vérifiez que les thèmes correspondent au poste que vous voulez pourvoir.",
+        "Utilisez le modèle pour le copier dans cette entreprise comme nouvel entretien."
+      ],
+      "tips": [
+        "La copie est gratuite ; les candidats qui répondent consomment des crédits comme d'habitude.",
+        "Si les thèmes ne conviennent pas, créez plutôt un entretien à partir de votre description de poste."
+      ]
+    },
+    "team": {
+      "title": "Équipe",
+      "text": "Les personnes qui travaillent sur les entretiens de cette entreprise, et leurs rôles.",
+      "actions": [
+        "Ajoutez un membre par e-mail, comme admin ou lecteur.",
+        "Changez le rôle d'un membre entre admin et lecteur.",
+        "Copiez le lien d'une invitation en attente, ou retirez un membre ou une invitation."
+      ],
+      "tips": [
+        "Les admins créent et modifient les entretiens, invitent des candidats et rechargent les crédits. Les lecteurs voient les entretiens et les résultats et partagent les rapports, mais ne modifient rien.",
+        "Retirer un membre dont la carte paie les recharges automatiques arrête ces recharges."
+      ]
+    },
+    "integrations": {
+      "title": "Intégrations",
+      "text": "Connectez prepza aux outils que votre équipe utilise déjà. Chaque intégration ouvre sa propre page avec les étapes de configuration.",
+      "actions": [
+        "Slack : recevez les notifications de votre entreprise dans un canal.",
+        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR) : les candidats que vous passez à une étape reçoivent l'entretien, et leurs résultats y sont renvoyés.",
+        "API : des clés et des webhooks pour connecter votre propre plateforme."
+      ],
+      "tips": [
+        "Tous les membres de l'entreprise voient les intégrations ; les propriétaires et les admins les modifient."
+      ]
+    },
+    "ats": {
+      "title": "Intégration ATS",
+      "text": "Liez un poste de votre ATS à un entretien : les candidats que vous passez à l'étape choisie reçoivent l'entretien, et leurs résultats reviennent en commentaire sur leur profil.",
+      "actions": [
+        "Connectez votre ATS en suivant ses instructions.",
+        "Liez un poste : choisissez le poste, son étape et un entretien, ou créez un nouvel entretien à partir du texte du poste.",
+        "Invitez à nouveau les candidats qui n'ont pas été invités, par exemple quand les crédits étaient épuisés.",
+        "Déliez un poste, ou déconnectez l'ATS."
+      ],
+      "tips": [
+        "Ajoutez une étape réservée à prepza, comme « Test de compétences prepza », pour qu'elle ne se mélange jamais avec vos autres outils.",
+        "prepza ne déplace ni ne refuse jamais personne dans votre ATS."
+      ]
+    },
+    "slack": {
+      "title": "Slack",
+      "text": "Les notifications de votre entreprise dans un canal Slack, en temps réel.",
+      "actions": [
+        "Ajoutez prepza à Slack et choisissez le canal, par exemple #hiring.",
+        "Choisissez les notifications qui y arrivent : un candidat qui termine, une invitation non distribuée, un entretien prêt, et plus encore.",
+        "Déconnectez pour les arrêter et retirer l'application prepza de votre Slack."
+      ],
+      "tips": [
+        "prepza peut seulement publier dans ce canal ; il ne peut pas lire votre Slack.",
+        "Tout le monde voit toujours chaque notification dans la cloche."
+      ]
+    },
+    "api": {
+      "title": "API",
+      "text": "Connectez votre propre plateforme, comme votre site carrière, à prepza.",
+      "actions": [
+        "Créez une clé API : elle lit vos entretiens et vos candidats et invite des candidats en votre nom.",
+        "Ajoutez un webhook : quand un candidat termine, ses résultats sont envoyés, signés, à votre adresse HTTPS.",
+        "Supprimez les clés et les webhooks que vous n'utilisez plus.",
+        "Ouvrez la documentation de l'API pour chaque endpoint et chaque événement."
+      ],
+      "tips": [
+        "Une nouvelle clé et le secret d'un webhook ne s'affichent qu'une fois : copiez-les tout de suite.",
+        "Choisissez une date d'expiration pour chaque clé : une clé divulguée qui n'expire jamais reste utilisable."
+      ]
+    },
+    "referrals": {
+      "title": "Parrainage",
+      "text": "Invitez d'autres entreprises sur prepza avec le lien de cette entreprise, et vous gagnez tous les deux des crédits.",
+      "actions": [
+        "Copiez ou partagez votre lien de parrainage.",
+        "Consultez chaque récompense reçue par cette entreprise."
+      ],
+      "tips": [
+        "Vous recevez chacun des crédits lors de la première recharge de l'entreprise invitée, quel que soit le montant.",
+        "Les crédits vont à cette entreprise et n'expirent jamais."
+      ]
+    }
   }
 }
