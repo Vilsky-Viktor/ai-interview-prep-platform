@@ -64,6 +64,10 @@ An event also says what it came through (`via`): empty when a member acted in th
 
 Only the owner can read the log, newest first, with `via`, through `GET /companies/{id}/audit`; the app has no page for it. Events are kept for 24 months, then the daily retention job deletes them, and they go with the company when it's removed. When a member deletes their account, their events stay with the company without their id (`deleted-user`); their data export lists them.
 
+## Page guides
+
+Every page from the companies list inward has an info button (a question mark in a badge, labelled "About this page"): under the back arrow in the page margin, or right after the arrow on narrower screens. It opens a short guide to that page: what it's for, what you can do there and a tip or two. The companies list, each company tab (interviews, templates, team, integrations, referrals), each interview tab (topics, candidates, settings), a new interview and its topic review and generation, the preview, a candidate's report, a template, choosing a company for a template, and the ATS, Slack and API pages each have their own, in every language. The companies list's back arrow goes to the home page.
+
 ## Related pages
 
 - [Interviews](interviews.md): making and running a company's interviews.

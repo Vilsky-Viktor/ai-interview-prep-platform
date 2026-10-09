@@ -44,7 +44,7 @@ Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emula
 
 | Page | What it covers |
 |---|---|
-| [Companies](docs/features/companies.md) | Company names, the team and its roles, logos, verification |
+| [Companies](docs/features/companies.md) | Company names, the team and its roles, logos, verification, page guides |
 | [Interviews](docs/features/interviews.md) | Making an interview, topic review, the interview page and its settings, preview |
 | [Candidates](docs/features/candidates.md) | Invites, the shareable link, taking an interview, timing, scorecards, reports |
 | [Templates and practice](docs/features/templates-and-practice.md) | The question bank, copying templates, slugs, free practice |

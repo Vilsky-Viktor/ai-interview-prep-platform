@@ -15,7 +15,7 @@ The pages anyone can open without signing in, and how search engines see them. E
 
 ## Home page
 
-The first screen: "Test everyone. Hire the best.", a "Demos" button with a play icon beside it (under the text on phones) to prepza's YouTube channel, and the box to paste a job description. Submitting it:
+The first screen: "Test everyone. Hire the best.", a "Demos" button with a play icon beside it (under the text on phones) to prepza's YouTube channel, with an info button next to it that explains in a dialog how prepza works (the steps and the price per candidate), and the box to paste a job description. Submitting it:
 
 1. signs you in if needed,
 2. asks which company the interview is for (or its name, for a first company),
