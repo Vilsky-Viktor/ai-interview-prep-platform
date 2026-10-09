@@ -5,6 +5,7 @@ from collections.abc import AsyncIterator
 import anyio
 from prepza_common.i18n import translate
 from prepza_common.pause import refuse_if_paused
+from prepza_common.secrets_check import secret_in
 from prepza_common.sse import KEEP_ALIVE, sse_event
 from prepza_common.user import User
 
@@ -25,6 +26,7 @@ from app.schemas.chat import ChatRequest
 from app.services import limits, show, titles
 from app.services.chat import Emit, SessionExpired, build_messages, converse
 from app.services.conversations import open_conversation
+from app.services.secrets import secret_reply
 from app.services.tenancy import require_company, user_companies
 from app.storage import actions as pending_actions
 from app.storage import conversations, messages
@@ -38,7 +40,13 @@ END = object()
 async def start(body: ChatRequest, user: User, token: str, language: str) -> AsyncIterator[str]:
     """Checks a new message before anything streams (plain HTTP errors): the pause, the
     conversation (the user's own, about a company they can still see), the limits. Then saves it
-    and returns the turn's events."""
+    and returns the turn's events. A message with a secret in it (or in the chat sent along) is
+    answered before anything else, and nothing of it is kept."""
+    secret = secret_in([body.message, *(turn.content for turn in body.earlier)])
+
+    if secret is not None:
+        return secret_reply(secret, body, language)
+
     redis = get_redis()
     await refuse_if_paused(redis)
     conversation = None

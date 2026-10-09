@@ -3,6 +3,7 @@ import logging
 from fastapi import HTTPException, Request, status
 from openai import OpenAIError
 from prepza_common.pause import refuse_if_paused
+from prepza_common.secrets_check import SECRET_IN_VOICE, find_secret
 
 from app.config.settings import settings
 from app.constants.transcribe import (
@@ -75,5 +76,9 @@ async def transcribe(request: Request, user_id: str, language: str) -> str:
 
     if not text:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NOTHING_HEARD)
+
+    # A secret said aloud: its text never comes back.
+    if find_secret(text) is not None:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, SECRET_IN_VOICE)
 
     return text
