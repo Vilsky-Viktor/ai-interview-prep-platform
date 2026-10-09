@@ -205,7 +205,11 @@ export function GenerationView({
         topics={generation.topics}
         maxTopics={generation.max_topics}
         maxSubtopics={generation.max_subtopics}
-        back={<BackLink href={backHref}>{backLabel}</BackLink>}
+        back={
+          <BackLink href={backHref} help="reviewTopics">
+            {backLabel}
+          </BackLink>
+        }
         cancel={cancel}
         onSubmit={submitReview}
       />

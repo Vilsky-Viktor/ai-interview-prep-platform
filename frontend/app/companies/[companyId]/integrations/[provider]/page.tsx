@@ -81,7 +81,7 @@ export default async function AtsPage({ params }: { params: Params }) {
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
       <PageHeader
         back={
-          <BackLink href={`/companies/${companyId}/integrations`}>
+          <BackLink href={`/companies/${companyId}/integrations`} help="ats">
             {t("integrations")}
           </BackLink>
         }

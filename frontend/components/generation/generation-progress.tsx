@@ -31,7 +31,9 @@ export function GenerationProgress({
       <LoaderCircleIcon className="size-20 animate-spin text-primary" />
       <div className="space-y-4">
         <div className="relative">
-          <BackLink href={backHref}>{backLabel}</BackLink>
+          <BackLink href={backHref} help="generating">
+            {backLabel}
+          </BackLink>
           <h1 className="font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl">
             {writing ? t("writing") : t("drafting")}
           </h1>

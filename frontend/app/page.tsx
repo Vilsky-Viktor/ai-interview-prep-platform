@@ -16,6 +16,7 @@ import { ReportsSection } from "@/components/landing/reports"
 import { InviteWaysSection } from "@/components/landing/invite-ways"
 import { TryFirstSection } from "@/components/landing/try-first"
 import { JsonLd } from "@/components/json-ld"
+import { PageHelp } from "@/components/page-help"
 import { StartTest } from "@/components/start-test"
 import { SITE_NAME } from "@/constants/seo"
 import { publicFetch } from "@/lib/server-api"
@@ -65,13 +66,19 @@ export default async function HomePage() {
                     </span>
                   ))}
               </h1>
-              <DemosButton className="mt-2 hidden shrink-0 sm:inline-flex" />
+              <div className="mt-2 hidden shrink-0 items-center gap-1 sm:flex">
+                <DemosButton />
+                <PageHelp page="landing" className="size-12" />
+              </div>
             </div>
             <p className="text-lg text-balance text-muted-foreground">
               {t("text")}
             </p>
             {/* On phones the demos come under the promise. */}
-            <DemosButton className="sm:hidden" />
+            <div className="flex items-center gap-1 sm:hidden">
+              <DemosButton />
+              <PageHelp page="landing" className="size-12" />
+            </div>
           </div>
           <StartTest freeCandidates={freeCandidates} />
         </div>

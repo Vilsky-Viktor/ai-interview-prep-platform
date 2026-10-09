@@ -32,7 +32,10 @@ export default async function TryInterviewPage({
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-12">
       {/* Only a member's preview has a way back, beside the intro as on other pages. */}
       <div className="relative w-full">
-        <BackLink href={`/companies/${companyId}/interviews`}>
+        <BackLink
+          href={`/companies/${companyId}/interviews`}
+          help="tryInterview"
+        >
           {interviews("title")}
         </BackLink>
         <InviteIntro

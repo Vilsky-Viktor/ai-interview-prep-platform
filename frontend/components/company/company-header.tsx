@@ -11,6 +11,7 @@ import { VerifiedBadge } from "@/components/company/verified-badge"
 import { VerifyCompany } from "@/components/company/verify-company"
 import { EditableTitle } from "@/components/editable-title"
 import { MAX_COMPANY_NAME_LENGTH } from "@/constants/limits"
+import { COMPANY_TAB_HELP } from "@/constants/page-help"
 import type { VerificationStatus } from "@/types/company"
 
 export function CompanyHeader({
@@ -49,7 +50,9 @@ export function CompanyHeader({
   return (
     <div className="space-y-4">
       <div className="relative flex min-h-14 items-center">
-        <BackLink href="/companies">{t("title")}</BackLink>
+        <BackLink href="/companies" help={COMPANY_TAB_HELP[current]}>
+          {t("title")}
+        </BackLink>
         {/* The logo candidates see; clicking it sets or changes it. */}
         <div className="me-4">
           <LogoPicker

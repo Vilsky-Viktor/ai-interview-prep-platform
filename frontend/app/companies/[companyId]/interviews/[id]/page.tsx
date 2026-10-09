@@ -21,6 +21,7 @@ import { TopicQuestions } from "@/components/questions/topic-questions"
 import { Button } from "@/components/ui/button"
 import { CANDIDATE_SORTS } from "@/constants/interviews"
 import { PAGE_SIZE } from "@/constants/lists"
+import { INTERVIEW_TAB_HELP } from "@/constants/page-help"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type {
@@ -110,7 +111,11 @@ export default async function InterviewPage({
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
       <div className="space-y-6">
         <PageHeader
-          back={<BackLink href={interviewsHref}>{t("title")}</BackLink>}
+          back={
+            <BackLink href={interviewsHref} help={INTERVIEW_TAB_HELP[current]}>
+              {t("title")}
+            </BackLink>
+          }
           tags={ready && <InterviewStatus status={interview.status} />}
           title={
             <div className="flex items-start justify-between gap-4">

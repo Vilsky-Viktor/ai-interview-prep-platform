@@ -64,7 +64,7 @@ export default async function ApiPage({
       <div className="space-y-6">
         <PageHeader
           back={
-            <BackLink href={`/companies/${companyId}/integrations`}>
+            <BackLink href={`/companies/${companyId}/integrations`} help="api">
               {t("integrations")}
             </BackLink>
           }

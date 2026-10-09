@@ -60,7 +60,7 @@ export default async function SlackPage({
       </Suspense>
       <PageHeader
         back={
-          <BackLink href={`/companies/${companyId}/integrations`}>
+          <BackLink href={`/companies/${companyId}/integrations`} help="slack">
             {t("integrations")}
           </BackLink>
         }

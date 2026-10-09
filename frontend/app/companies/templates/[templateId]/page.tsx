@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server"
 
 import { CompanyList } from "@/components/company/company-list"
 import { CreateCompany } from "@/components/company/create-company"
+import { PageHeader } from "@/components/page-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { PAGE_SIZE } from "@/constants/lists"
@@ -34,15 +35,20 @@ export default async function PickCompanyPage({
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
-      <div className="flex items-center justify-between gap-4">
-        <div className="space-y-2">
-          <h1 className="font-heading text-3xl font-medium tracking-tight">
-            {t("pickTitle")}
-          </h1>
-          <p className="text-base text-muted-foreground">{t("pickText")}</p>
-        </div>
-        {signedIn && <CreateCompany templateId={templateId} />}
-      </div>
+      <PageHeader
+        help="pickCompany"
+        title={
+          <div className="flex items-center justify-between gap-4">
+            <div className="space-y-2">
+              <h1 className="font-heading text-3xl font-medium tracking-tight">
+                {t("pickTitle")}
+              </h1>
+              <p className="text-base text-muted-foreground">{t("pickText")}</p>
+            </div>
+            {signedIn && <CreateCompany templateId={templateId} />}
+          </div>
+        }
+      />
 
       {!signedIn && <SignInPrompt />}
 
