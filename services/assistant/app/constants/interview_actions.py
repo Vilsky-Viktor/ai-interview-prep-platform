@@ -150,8 +150,9 @@ INTERVIEW_ACTIONS = {
     "invite_candidate": interview_action(
         "POST",
         "/interviews/{interview_id}/candidates",
-        "Invite one candidate to an interview by email (it costs credits once they answer).",
-        body=["email"],
+        "Invite one candidate to an interview by email, with their name when the user gave it (it "
+        "costs credits once they answer).",
+        body=["email", "name"],
         fields=["id", "email", "status"],
         link=CANDIDATES_PAGE,
     ),

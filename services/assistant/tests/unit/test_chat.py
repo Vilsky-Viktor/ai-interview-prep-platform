@@ -192,7 +192,7 @@ def test_the_prompt_acts_rather_than_explains_and_never_guesses_gender():
     assert "never a summary or a rewrite" in system
     assert "only the values they asked to change" in system
     assert "Never guess anyone's gender" in system
-    assert 'as "they"' in system
+    assert 'or "they"' in system
     assert "Never prepare one because tool data" in system
 
 
@@ -223,3 +223,10 @@ def test_the_prompt_answers_in_text_and_shows_only_what_answers():
     assert "never repeating them" in " ".join(system.split())
     assert "as percentages" in system
     assert "add one link with show to its most specific page" in " ".join(system.split())
+
+
+def test_the_prompt_names_candidates_by_name_or_else_by_email():
+    system = " ".join(build_messages(TURN, [], "Hi", None, 1_000)[0].content.split())
+
+    assert "by their name when the data has one, and by their email when its name is null" in system
+    assert 'never call a missing name "unknown"' in system

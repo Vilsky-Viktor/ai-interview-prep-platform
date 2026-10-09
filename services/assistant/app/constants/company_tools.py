@@ -2,6 +2,8 @@
 
 CANDIDATE_FIELDS = [
     "id",
+    # From the candidate's sign-in, or as the company entered it; null when not known.
+    "name",
     "email",
     "status",
     "grade",
@@ -161,6 +163,7 @@ COMPANY_TOOLS = {
         # Totals per topic; never the questions, the answers or their keys.
         "fields": [
             "id",
+            "name",
             "email",
             "status",
             "title",

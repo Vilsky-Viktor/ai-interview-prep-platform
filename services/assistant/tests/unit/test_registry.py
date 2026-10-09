@@ -95,3 +95,15 @@ def test_a_write_refuses_a_body_field_its_route_lacks():
 
     with pytest.raises(ValueError, match="the body has no field nope"):
         build("create_company", entry)
+
+
+def test_candidates_are_read_with_their_names_and_invited_with_one():
+    built = tools()
+
+    for name in ("list_candidates", "search_candidates", "get_scorecard"):
+        assert "name" in built[name].fields, name
+
+    invite = built["invite_candidate"].parameters
+
+    assert set(invite["properties"]) >= {"email", "name"}
+    assert "name" not in invite["required"]
