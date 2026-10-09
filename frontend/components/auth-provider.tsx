@@ -9,6 +9,7 @@ import { apiFetch } from "@/lib/api"
 import { readTokenCookie, writeTokenCookie } from "@/lib/auth"
 import { firebaseAuth } from "@/lib/firebase"
 import { isLocale, readLocaleCookie, writeLocaleCookie } from "@/lib/locale"
+import { SIGNED_IN_BEFORE_KEY } from "@/constants/auth"
 import type { AuthState } from "@/types/auth"
 
 const AuthContext = createContext<AuthState>({ user: null, loading: true })
@@ -62,6 +63,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             .then(() => user.getIdToken(true))
             .catch(() => {})
         }
+      }
+
+      // The sign-in card leaves out a new account's email choices from now on (sign-in-options.tsx).
+      if (user) {
+        try {
+          localStorage.setItem(SIGNED_IN_BEFORE_KEY, "1")
+        } catch {}
       }
 
       // Errors name the account by id only, never by email.
