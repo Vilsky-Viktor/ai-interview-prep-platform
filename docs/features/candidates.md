@@ -93,6 +93,8 @@ Every interview is timed. Each question has its own countdown.
 - The countdown turns red for the last 10 seconds, or for the last third of a shorter question.
 - At zero, the pick on screen counts. If nothing is picked, the question counts as wrong.
 
+While the questions run, the page shows only them: no header, footer or "ask agent", nothing to leave the page through by accident (a page leave is recorded, and the clock keeps running). The same goes for practice rounds and a company's preview.
+
 ### Extra time
 
 For a candidate who needs more time, for example because of a disability, owners and admins can give extra time on each question: +25%, +50% or +100% (`PUT /interviews/{id}/candidates/{invite_id}/extra-time` in companies). It is set per candidate, on their page, and only before they start: their questions' time is fixed then. No reason is recorded, and the company's [audit log](companies.md#audit-log) records the change. The invite page tells candidates to ask the company before they start.

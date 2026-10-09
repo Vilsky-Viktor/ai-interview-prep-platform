@@ -11,6 +11,7 @@ import { UrlLocaleProvider } from "@/components/localized-link"
 import { MaintenanceNotice } from "@/components/maintenance-notice"
 import { ScrollTopButton } from "@/components/scroll-top-button"
 import { SignInProvider } from "@/components/sign-in-dialog"
+import { NotOnTimedPage } from "@/components/not-on-timed-page"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -78,12 +79,16 @@ export default async function RootLayout({
                 <TooltipProvider>
                   <SignInProvider>
                     <AssistantProvider>
-                      <SiteHeader />
+                      <NotOnTimedPage>
+                        <SiteHeader />
+                      </NotOnTimedPage>
                       <div className="flex flex-1 flex-col [&>*]:w-full">
                         <MaintenanceNotice />
                         {children}
                       </div>
-                      <SiteFooter />
+                      <NotOnTimedPage>
+                        <SiteFooter />
+                      </NotOnTimedPage>
                       <ScrollTopButton />
                       <Toaster />
                     </AssistantProvider>
