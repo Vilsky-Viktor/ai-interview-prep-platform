@@ -7,6 +7,7 @@ Anyone asks the assistant from the "ask agent" button in the header (or at the e
 - [Actions](#actions)
 - [A conversation](#a-conversation)
 - [Voice](#voice)
+- [Secrets pasted into the chat](#secrets-pasted-into-the-chat)
 - [Limits](#limits)
 - [Roles, tenancy and privacy](#roles-tenancy-and-privacy)
 - [What's stored](#whats-stored)
@@ -86,6 +87,16 @@ data: {"done": {"message_id": "a93e…"}}
 Signed in, the panel's microphone button takes a spoken question: hold it to talk and let go to send (sliding away or Esc cancels; from the keyboard, Enter or Space starts and stops). The recording (webm/opus, or mp4 on Safari) stops by itself after `max_audio_seconds` (60, from `GET /config`); under half a second nothing is sent. It's hidden where the browser can't record.
 
 `POST /transcribe` takes the recording as the request's body (`Content-Type` `audio/webm`, `audio/mp4` or `audio/ogg`, at most 2 MB; else `415` or `413`), kept in memory: it's never written to disk, the database or the logs. OpenAI's `TRANSCRIBE_MODEL` hears it in the interface's language (Filipino as Tagalog) and the text comes back (`{"text"}`); nothing heard is a `422`, OpenAI failing a `502`. The panel sends the text as a message with `source: "voice"`. Sign-in, the emergency pause and the limits apply: 60 transcriptions a user an hour, and their tokens count against the user's and everyone's budgets.
+
+## Secrets pasted into the chat
+
+A message holding a secret (a key, a token, a password) is caught before anything else happens to it, by one detector in `prepza_common/secrets_check.py` shared with the help chat and voice:
+
+- Known formats: prepza's `pz_` API keys and `whsec_` web hook secrets, Slack tokens and web hook URLs, OpenAI, Anthropic, GitHub, Stripe, Paddle, AWS and Google keys, JWTs and private keys.
+- A word saying it's a secret (secret, key, token, password, credential and the like in the 23 languages, `secret_words.py`) anywhere in the message: then any standalone value of 16+ characters mixing letters and digits counts, unless it's a URL, an email, a UUID, a path or glued words (`postgresql16django5`).
+- Without such a word, a value of 20+ characters whose letters and digits switch often (`94uf9jf394ur0fj394g3ffh3`), or that mixes upper case, lower case and digits and looks random. Order ids, product codes and UUIDs aren't caught.
+
+On a match, the message (or the chat carried from before signing in) isn't stored, counted, shown to the model, given a title or logged. The answer streams `{"removed": true}` (the panel replaces the question with a muted "Message removed: it contained a secret", on screen and in what it keeps for a reload) and a fixed, translated reply: secrets never go through the chat, enter it yourself in its form. When the message names where it belongs (an ATS or "integration", Slack, the API or a web hook) and the panel is about a company, the reply names that page and links to it ("open integrations"); otherwise it says to use the right form on the site. A voice message with a secret is a `422`, and its text never comes back.
 
 ## Limits
 

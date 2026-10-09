@@ -1460,6 +1460,7 @@
           "text": "Adresy e-mail"
         }
       }
-    }
+    },
+    "removed": "Wiadomość usunięta: zawierała sekret"
   }
 }

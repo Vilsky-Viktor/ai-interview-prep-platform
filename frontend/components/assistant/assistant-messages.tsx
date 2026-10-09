@@ -76,6 +76,17 @@ export function AssistantMessages({
     <>
       <ul className="space-y-3">
         {messages.map((message, index) => {
+          if (message.removed) {
+            return (
+              <li
+                key={index}
+                className="ms-auto w-fit text-sm text-muted-foreground italic"
+              >
+                {t("removed")}
+              </li>
+            )
+          }
+
           if (message.role === "user") {
             return (
               <ChatBubble key={index} role="user" content={message.content} />

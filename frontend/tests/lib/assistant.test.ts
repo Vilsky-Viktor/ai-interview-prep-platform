@@ -5,6 +5,7 @@ import {
   answerParts,
   withCard,
   withoutSignIn,
+  withoutSecret,
   inAppHref,
   linkPage,
   pageCompany,
@@ -202,5 +203,26 @@ describe("withoutSignIn", () => {
         blocks: [{ kind: "link", items: [], links: ["/faq"] }],
       },
     ])
+  })
+})
+
+describe("withoutSecret", () => {
+  it("empties and marks only the question being answered", () => {
+    const messages = [
+      { role: "user" as const, content: "Hi", blocks: [] },
+      { role: "assistant" as const, content: "Hello", blocks: [] },
+      { role: "user" as const, content: "my key pz_secret", blocks: [] },
+      { role: "assistant" as const, content: "", blocks: [] },
+    ]
+    const cleaned = withoutSecret(messages)
+
+    expect(cleaned[2]).toEqual({
+      role: "user",
+      content: "",
+      blocks: [],
+      removed: true,
+    })
+    expect(cleaned[0]).toEqual(messages[0])
+    expect(JSON.stringify(cleaned)).not.toContain("pz_secret")
   })
 })

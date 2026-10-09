@@ -78,6 +78,7 @@ The help chat (rounds' `POST /help/chat`) answers signed-out visitors in the [as
 - It answers only from the platform guide, the FAQ, the prices, the terms and the privacy policy, and keeps to prepza and hiring with it, like the assistant (`prepza_common.scope.SCOPE_RULE`).
 - It answers in the page's language.
 - Nothing of the conversation is stored: the panel sends it whole each time.
+- A conversation with a secret in it (a key, a token, a password) is answered at once with a fixed reply, before the limits or the model, and nothing of it is used; see [the assistant's secrets](assistant.md#secrets-pasted-into-the-chat).
 - A visitor asking to sign in or sign up, or to do something that needs an account (create a company, …), gets a sign-in card in the panel (the site's own sign-in buttons, the way they named first): the model starts its reply with a `[[sign_in:<provider>]]` marker, which the service turns into a `{"block": {"kind": "sign_in", "provider"}}` event.
 - The same knowledge, with the FAQ in the page's language, is served as text at `GET /api/rounds/help/guide` (public, kept for 5 minutes per language); the in-app assistant reads it to answer questions about prepza.
 

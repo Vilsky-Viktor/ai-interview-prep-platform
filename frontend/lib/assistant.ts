@@ -195,3 +195,13 @@ export function withoutSignIn(messages: ChatMessage[]): ChatMessage[] {
     blocks: message.blocks.filter((block) => block.kind !== "sign_in"),
   }))
 }
+
+/** The chat with the question before the answer being written (the last message) emptied and
+ * marked removed: it had a secret in it. */
+export function withoutSecret(messages: ChatMessage[]): ChatMessage[] {
+  const question = messages.length - 2
+
+  return messages.map((message, index) =>
+    index === question ? { ...message, content: "", removed: true } : message
+  )
+}

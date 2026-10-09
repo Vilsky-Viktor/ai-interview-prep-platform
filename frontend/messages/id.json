@@ -1460,6 +1460,7 @@
           "text": "Alamat email"
         }
       }
-    }
+    },
+    "removed": "Pesan dihapus: berisi rahasia"
   }
 }

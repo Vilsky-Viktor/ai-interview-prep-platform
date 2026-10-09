@@ -1459,6 +1459,7 @@
           "text": "E-posta adresleri"
         }
       }
-    }
+    },
+    "removed": "Mesaj kaldırıldı: gizli bilgi içeriyordu"
   }
 }

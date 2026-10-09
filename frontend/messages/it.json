@@ -1460,6 +1460,7 @@
           "text": "Email"
         }
       }
-    }
+    },
+    "removed": "Messaggio rimosso: conteneva un segreto"
   }
 }

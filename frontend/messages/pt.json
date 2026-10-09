@@ -1456,6 +1456,7 @@
           "text": "E-mails"
         }
       }
-    }
+    },
+    "removed": "Mensagem removida: continha um segredo"
   }
 }

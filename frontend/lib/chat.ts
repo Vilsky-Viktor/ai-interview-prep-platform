@@ -80,7 +80,11 @@ and sends it whole. Its events: {"delta"}, and a {"block"} sign-in card when the
 sign in. */
 export function streamHelp(
   messages: HelpMessage[],
-  onEvent: (event: { delta?: string; block?: AssistantBlock }) => void,
+  onEvent: (event: {
+    delta?: string
+    block?: AssistantBlock
+    removed?: boolean
+  }) => void,
   signal: AbortSignal
 ) {
   return streamEvents("/rounds/help/chat", { messages }, onEvent, signal)

@@ -1460,6 +1460,7 @@
           "text": "E-Mail-Adressen"
         }
       }
-    }
+    },
+    "removed": "Nachricht entfernt: Sie enthielt ein Geheimnis"
   }
 }

@@ -365,3 +365,33 @@ test("an action runs once its card is confirmed, and asking to sign out signs ou
   await expect(panel.getByRole("button", { name: "History" })).toHaveCount(0);
   await expect(panel.getByRole("button", { name: "What is prepza?" })).toBeVisible();
 });
+
+test("a pasted secret is removed from the chat and explained, with the page it belongs on", async ({
+  signInAs,
+}) => {
+  const owner = await signInAs(ownerEmail());
+  const company = await createCompany(owner);
+  await visit(owner, `/companies/${company.id}/integrations`);
+  const panel = await openPanel(owner);
+  // The case seen on localhost: no known format, named by the message.
+  const secret = "94uf9jf394ur0fj394g3ffh3";
+  await panel.getByRole("textbox").fill(`Add my secret to Greenhouse ATS integration: ${secret}`);
+  await panel.getByRole("button", { name: "Send" }).click();
+
+  await expect(panel.getByText("Message removed: it contained a secret")).toBeVisible();
+  await expect(panel.getByRole("list").getByText(/Enter it yourself on the integrations page\./)).toBeVisible();
+  await expect(panel.getByRole("link", { name: "open integrations" })).toHaveAttribute(
+    "href",
+    `/companies/${company.id}/integrations`
+  );
+  await shot(owner, "secret-removed");
+  // Nowhere on the page, nor in what the browser keeps.
+  await expect(panel.getByText(secret)).toHaveCount(0);
+  const kept = await owner.evaluate(() => JSON.stringify({ ...localStorage, ...sessionStorage }));
+  expect(kept).not.toContain(secret);
+
+  // Nothing of it was saved: a reload brings no conversation back.
+  await owner.reload();
+  await expect(owner.getByRole("banner").getByRole("button", { name: "ask agent" })).toBeVisible();
+  await expect(owner.getByRole("dialog", { name: "Assistant" })).toHaveCount(0);
+});

@@ -57,6 +57,8 @@ export type AssistantEvent = {
   action?: AssistantBlock
   // The user asked to sign out: the panel does it.
   sign_out?: boolean
+  // The question had a secret in it: it's removed from the chat.
+  removed?: boolean
   // The conversation's new title, for the history.
   title?: string
 }
@@ -98,8 +100,9 @@ export type ChatMessage = {
   role: "user" | "assistant"
   content: string
   blocks: AssistantBlock[]
-  // A question: typed or spoken.
+  // A question: typed or spoken; removed when it had a secret in it.
   source?: "text" | "voice"
+  removed?: boolean
   // An answer's tools so far, by their progress labels.
   progress?: string[]
   // An answer that failed, with what to show and whether a retry can fix it.

@@ -1460,6 +1460,7 @@
           "text": "Correos"
         }
       }
-    }
+    },
+    "removed": "Mensaje eliminado: contenía un secreto"
   }
 }

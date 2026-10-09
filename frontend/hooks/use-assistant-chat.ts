@@ -9,6 +9,7 @@ import { apiErrorMessage } from "@/lib/api"
 import {
   getConversation,
   helpConversation,
+  withoutSecret,
   refreshToken,
   streamAssistant,
   withCard,
@@ -67,6 +68,12 @@ export function useAssistantChat(
 
   function apply(event: AssistantEvent) {
     const { tool, block, delta } = event
+
+    // The question had a secret in it: the service kept nothing of it, and neither does the
+    // panel (nor what it keeps for a reload).
+    if (event.removed) {
+      setMessages((current) => withoutSecret(current))
+    }
 
     if (tool) {
       updateAnswer((answer) => ({

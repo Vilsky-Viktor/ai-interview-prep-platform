@@ -1460,6 +1460,7 @@
           "text": "Emails"
         }
       }
-    }
+    },
+    "removed": "Message removed: it contained a secret"
   }
 }
