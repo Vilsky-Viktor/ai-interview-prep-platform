@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "यह इंटरव्यू अभी नए उम्मीदवार नहीं ले रहा है।",
     "This interview has no practice questions yet.": "इस इंटरव्यू में अभी कोई प्रैक्टिस सवाल नहीं हैं।",
     "No emails found.": "कोई ईमेल नहीं मिला।",
+    "A name goes with one email. In a list, write each as Name <email>.": "नाम केवल एक ईमेल के साथ दिया जाता है। सूची में हर पंक्ति नाम <ईमेल> के रूप में लिखें।",
     "At most 100 emails at once.": "एक बार में अधिकतम 100 ईमेल।",
     "Use a PNG, JPEG or WebP image up to 500 KB": "500 KB तक की PNG, JPEG या WebP इमेज इस्तेमाल करें",
     "Enter the company's website, like acme.com": "कंपनी की वेबसाइट दर्ज करें, जैसे acme.com",

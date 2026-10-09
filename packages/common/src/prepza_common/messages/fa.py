@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "این مصاحبه فعلاً متقاضی جدید نمی‌پذیرد.",
     "This interview has no practice questions yet.": "این مصاحبه تمرینی هنوز پرسشی ندارد.",
     "No emails found.": "هیچ ایمیلی پیدا نشد.",
+    "A name goes with one email. In a list, write each as Name <email>.": "نام فقط با یک ایمیل همراه می‌شود. در فهرست، هر خط را به شکل نام <ایمیل> بنویسید.",
     "At most 100 emails at once.": "حداکثر ۱۰۰ ایمیل در هر بار.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "از تصویر PNG، JPEG یا WebP تا ۵۰۰ KB استفاده کنید",
     "Enter the company's website, like acme.com": "وب‌سایت شرکت را وارد کنید، مانند acme.com",

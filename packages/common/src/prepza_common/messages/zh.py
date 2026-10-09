@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "此面试目前不接受新的候选人。",
     "This interview has no practice questions yet.": "此练习面试还没有题目。",
     "No emails found.": "未找到邮箱。",
+    "A name goes with one email. In a list, write each as Name <email>.": "姓名只能对应一个邮箱。列表中请按“姓名 <邮箱>”的格式逐行填写。",
     "At most 100 emails at once.": "一次最多 100 个邮箱。",
     "Use a PNG, JPEG or WebP image up to 500 KB": "请使用不超过 500 KB 的 PNG、JPEG 或 WebP 图片",
     "Enter the company's website, like acme.com": "请输入公司网站，例如 acme.com",

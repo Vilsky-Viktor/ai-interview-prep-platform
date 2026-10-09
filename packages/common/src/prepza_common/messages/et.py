@@ -31,6 +31,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "See intervjuu ei võta praegu uusi kandidaate vastu.",
     "This interview has no practice questions yet.": "Selles harjutusintervjuus pole veel küsimusi.",
     "No emails found.": "E-posti aadresse ei leitud.",
+    "A name goes with one email. In a list, write each as Name <email>.": "Nimi käib ühe e-posti aadressiga. Loendis kirjuta iga rida kujul Nimi <e-post>.",
     "At most 100 emails at once.": "Korraga kuni 100 e-posti aadressi.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "Kasuta PNG-, JPEG- või WebP-pilti suurusega kuni 500 KB",
     "Enter the company's website, like acme.com": "Sisesta ettevõtte veebisait, näiteks acme.com",

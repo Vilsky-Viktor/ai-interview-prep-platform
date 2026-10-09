@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "Ця співбесіда зараз не приймає нових кандидатів.",
     "This interview has no practice questions yet.": "Для цієї співбесіди ще немає тренувальних питань.",
     "No emails found.": "Адрес email не знайдено.",
+    "A name goes with one email. In a list, write each as Name <email>.": "Ім'я вказується для однієї адреси. У списку пишіть кожен рядок як Ім'я <email>.",
     "At most 100 emails at once.": "Не більше 100 адрес за раз.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "Використайте зображення PNG, JPEG або WebP до 500 КБ",
     "Enter the company's website, like acme.com": "Вкажіть сайт компанії, наприклад acme.com",

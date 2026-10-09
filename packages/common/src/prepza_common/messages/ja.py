@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "この面接は現在、新しい候補者を受け付けていません。",
     "This interview has no practice questions yet.": "この練習面接にはまだ問題がありません。",
     "No emails found.": "メールアドレスが見つかりませんでした。",
+    "A name goes with one email. In a list, write each as Name <email>.": "氏名は1件のメールアドレスにのみ指定できます。リストでは各行を「氏名 <メールアドレス>」の形式で入力してください。",
     "At most 100 emails at once.": "一度に送れるメールアドレスは最大 100 件です。",
     "Use a PNG, JPEG or WebP image up to 500 KB": "500 KB 以下の PNG、JPEG、WebP 画像を使ってください",
     "Enter the company's website, like acme.com": "会社のウェブサイトを入力してください（例: acme.com）",

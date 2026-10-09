@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "لا تقبل هذه المقابلة مرشحين جددًا حاليًا.",
     "This interview has no practice questions yet.": "لا توجد أسئلة لهذه المقابلة التدريبية بعد.",
     "No emails found.": "لم يُعثر على أي بريد إلكتروني.",
+    "A name goes with one email. In a list, write each as Name <email>.": "يُكتب الاسم مع بريد إلكتروني واحد. في القائمة، اكتب كل سطر بالشكل: الاسم <البريد الإلكتروني>.",
     "At most 100 emails at once.": "100 بريد إلكتروني على الأكثر في المرة الواحدة.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "استخدم صورة PNG أو JPEG أو WebP بحجم 500 KB على الأكثر",
     "Enter the company's website, like acme.com": "أدخل موقع الشركة، مثل acme.com",

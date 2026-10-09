@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "การสัมภาษณ์นี้ไม่รับผู้สมัครใหม่ในขณะนี้",
     "This interview has no practice questions yet.": "การสัมภาษณ์ฝึกซ้อมนี้ยังไม่มีคำถาม",
     "No emails found.": "ไม่พบอีเมล",
+    "A name goes with one email. In a list, write each as Name <email>.": "ชื่อใช้กับอีเมลได้เพียงหนึ่งรายการ ในรายการ ให้เขียนแต่ละบรรทัดเป็น ชื่อ <อีเมล>",
     "At most 100 emails at once.": "ส่งได้ครั้งละไม่เกิน 100 อีเมล",
     "Use a PNG, JPEG or WebP image up to 500 KB": "ใช้รูปภาพ PNG, JPEG หรือ WebP ขนาดไม่เกิน 500 KB",
     "Enter the company's website, like acme.com": "ป้อนเว็บไซต์ของบริษัท เช่น acme.com",

@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "이 면접은 현재 새 지원자를 받지 않습니다.",
     "This interview has no practice questions yet.": "이 연습 면접에는 아직 문제가 없습니다.",
     "No emails found.": "이메일을 찾을 수 없습니다.",
+    "A name goes with one email. In a list, write each as Name <email>.": "이름은 이메일 한 개에만 지정할 수 있습니다. 목록에서는 각 줄을 이름 <이메일> 형식으로 입력하세요.",
     "At most 100 emails at once.": "한 번에 최대 100개의 이메일까지 가능합니다.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "500KB 이하의 PNG, JPEG 또는 WebP 이미지를 사용하세요",
     "Enter the company's website, like acme.com": "회사 웹사이트를 입력하세요. 예: acme.com",

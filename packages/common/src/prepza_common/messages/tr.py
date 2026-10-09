@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "Bu mülakat şu anda yeni aday kabul etmiyor.",
     "This interview has no practice questions yet.": "Bu pratik mülakatta henüz soru yok.",
     "No emails found.": "E-posta bulunamadı.",
+    "A name goes with one email. In a list, write each as Name <email>.": "Ad soyad yalnızca bir e-posta için girilir. Listede her satırı Ad Soyad <e-posta> biçiminde yazın.",
     "At most 100 emails at once.": "Tek seferde en fazla 100 e-posta.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "En fazla 500 KB boyutunda PNG, JPEG veya WebP görsel kullanın",
     "Enter the company's website, like acme.com": "Şirketin web sitesini girin, örneğin acme.com",

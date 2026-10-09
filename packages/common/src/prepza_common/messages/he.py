@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "הראיון הזה לא מקבל מועמדים חדשים כרגע.",
     "This interview has no practice questions yet.": "לראיון התרגול הזה עדיין אין שאלות.",
     "No emails found.": "לא נמצאו כתובות אימייל.",
+    "A name goes with one email. In a list, write each as Name <email>.": "שם מתאים לכתובת אימייל אחת. ברשימה, כתבו כל שורה בצורה שם <אימייל>.",
     "At most 100 emails at once.": "עד 100 כתובות אימייל בכל פעם.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "יש להשתמש בתמונת PNG, JPEG או WebP של עד 500 KB",
     "Enter the company's website, like acme.com": "הזינו את אתר החברה, למשל acme.com",

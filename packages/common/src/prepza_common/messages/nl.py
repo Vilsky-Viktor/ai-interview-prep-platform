@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "Dit interview staat op dit moment niet open voor nieuwe kandidaten.",
     "This interview has no practice questions yet.": "Dit interview heeft nog geen oefenvragen.",
     "No emails found.": "Geen e-mailadressen gevonden.",
+    "A name goes with one email. In a list, write each as Name <email>.": "Een naam hoort bij één e-mailadres. Schrijf in een lijst elke regel als Naam <e-mail>.",
     "At most 100 emails at once.": "Maximaal 100 e-mailadressen tegelijk.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "Gebruik een PNG-, JPEG- of WebP-afbeelding tot 500 KB",
     "Enter the company's website, like acme.com": "Voer de website van het bedrijf in, zoals acme.com",

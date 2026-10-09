@@ -125,6 +125,8 @@ REFERRAL_COOKIE = "prepza_ref"
 
 # A test's title, as its company can rename it; generated titles aim for 60.
 MAX_TITLE_LENGTH = 70
+# The longest candidate name kept (from a sign-in, an inviter or an ATS); a longer one is cut.
+MAX_CANDIDATE_NAME_LENGTH = 200
 
 # A job description, as pasted to generate a test.
 MAX_GOAL_LENGTH = 10_000

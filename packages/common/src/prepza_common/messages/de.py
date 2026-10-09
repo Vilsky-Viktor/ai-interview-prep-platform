@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "Dieses Interview nimmt gerade keine neuen Kandidaten an.",
     "This interview has no practice questions yet.": "Dieses Übungsinterview hat noch keine Fragen.",
     "No emails found.": "Keine E-Mails gefunden.",
+    "A name goes with one email. In a list, write each as Name <email>.": "Ein Name gehört zu einer E-Mail. In einer Liste schreiben Sie jede Zeile als Name <E-Mail>.",
     "At most 100 emails at once.": "Höchstens 100 E-Mails auf einmal.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "Verwende ein PNG-, JPEG- oder WebP-Bild bis 500 KB",
     "Enter the company's website, like acme.com": "Gib die Website des Unternehmens ein, z. B. acme.com",

@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "Buổi phỏng vấn này hiện không nhận thêm ứng viên mới.",
     "This interview has no practice questions yet.": "Buổi phỏng vấn luyện tập này chưa có câu hỏi.",
     "No emails found.": "Không tìm thấy email nào.",
+    "A name goes with one email. In a list, write each as Name <email>.": "Họ tên chỉ đi kèm một email. Trong danh sách, hãy viết mỗi dòng theo dạng Họ tên <email>.",
     "At most 100 emails at once.": "Tối đa 100 email mỗi lần.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "Hãy dùng ảnh PNG, JPEG hoặc WebP tối đa 500 KB",
     "Enter the company's website, like acme.com": "Nhập website của công ty, ví dụ acme.com",

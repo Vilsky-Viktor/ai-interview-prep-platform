@@ -19,6 +19,7 @@ MESSAGES = {
     "This interview isn't taking new candidates right now.": "Wawancara ini sedang tidak menerima kandidat baru.",
     "This interview has no practice questions yet.": "Wawancara ini belum punya soal latihan.",
     "No emails found.": "Tidak ada email yang ditemukan.",
+    "A name goes with one email. In a list, write each as Name <email>.": "Nama hanya untuk satu email. Dalam daftar, tulis setiap baris sebagai Nama <email>.",
     "At most 100 emails at once.": "Maksimal 100 email sekaligus.",
     "Use a PNG, JPEG or WebP image up to 500 KB": "Gunakan gambar PNG, JPEG, atau WebP hingga 500 KB",
     "Enter the company's website, like acme.com": "Masukkan situs web perusahaan, seperti acme.com",
