@@ -460,7 +460,8 @@
     "removeLogo": "Alisin ang logo",
     "logoFailed": "Hindi ma-save ang logo.",
     "pickTitle": "Pumili ng kumpanya",
-    "pickText": "Kokopyahin nang libre ang test sa kumpanyang pipiliin mo, handa nang ipadala sa mga aplikante."
+    "pickText": "Kokopyahin nang libre ang test sa kumpanyang pipiliin mo, handa nang ipadala sa mga aplikante.",
+    "removeCredits": "Mawawala ang {credits, plural, one {# credit} other {# credits}} nito{candidates, plural, =0 {} one { (mga # aplikante)} other { (mga # aplikante)}} at hindi ito ire-refund."
   },
   "candidates": {
     "scorecard": "Scorecard",
@@ -567,6 +568,11 @@
     "example": "halimbawa",
     "uploadFile": "Mag-upload ng file",
     "fileFormats": "CSV o TXT, hanggang 100 aplikante. Puwedeng ilagay ang pangalan sa isang column o katabi ng bawat email.",
+    "fileTooLarge": "Masyadong malaki ang file (max {kb} KB).",
+    "lineSkips": {
+      "noEmail": "{count, plural, one {# linya ang nilaktawan} other {# linya ang nilaktawan}}: walang nakitang email ({shown, plural, one {linya {lines}} other {mga linya {lines}}})",
+      "unreadName": "{count, plural, one {# pangalan ang hindi nabasa} other {# pangalan ang hindi nabasa}} ({shown, plural, one {linya {lines}} other {mga linya {lines}}})"
+    },
     "exampleCsv": "halimbawang .csv",
     "exampleTxt": "halimbawang .txt",
     "candidateName": "Pangalan (opsyonal)",
@@ -711,6 +717,19 @@
     "pricing": "Presyo"
   },
   "landing": {
+    "agent": {
+      "title": "Magtanong sa agent\nSiya ang gagawa",
+      "text": "Itanong ang kahit ano tungkol sa prepza at sa pagha-hire mo. Sasagot ang agent, at kapag kinumpirma mo, siya na ang gagawa para sa iyo.",
+      "demo": {
+        "question": "I-invite si Ann Lee, ann.lee@example.com, sa Backend Developer"
+      },
+      "points": {
+        "answers": "Mga sagot mula sa sarili mong mga interview, aplikante at resulta",
+        "acts": "Gumagawa ng mga interview, nag-iimbita ng mga aplikante at iba pa, pagkatapos mong kumpirmahin",
+        "voice": "Pindutin nang matagal ang mic at magsalita sa halip na mag-type",
+        "help": "May sariling help icon ang bawat page"
+      }
+    },
     "more": "Paano ito gumagana",
     "demos": "Mga demo",
     "demosTooltip": "Panoorin ang mga demo sa YouTube",

@@ -28,6 +28,7 @@ class Tool:
     # What the action is about, named on its card (see constants/actions.py), and the result's
     # field naming what it made.
     subject: dict | None = None
+    credits: bool = False
     result_label: str | None = None
 
     @property

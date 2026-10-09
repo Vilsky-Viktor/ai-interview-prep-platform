@@ -1,4 +1,4 @@
-from app.constants.credits import LOW_BALANCE
+from app.constants.credits import CANDIDATE_CREDITS, LOW_BALANCE
 from app.models.billing import Wallet
 from app.schemas.billing import BalanceOut
 
@@ -11,4 +11,5 @@ def balance_out(row: Wallet) -> BalanceOut:
         reserved=row.reserved,
         available=available,
         low=available < LOW_BALANCE,
+        candidates=max(available, 0) // CANDIDATE_CREDITS,
     )

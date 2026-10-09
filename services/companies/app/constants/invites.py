@@ -47,7 +47,18 @@ MAX_BULK_INVITES = 100
 TOO_MANY_EMAILS = "At most 100 emails at once."
 NO_EMAILS = "No emails found."
 NAME_NEEDS_ONE_EMAIL = "A name goes with one email. In a list, write each as Name <email>."
+# The longest list: characters pasted, or bytes of an uploaded file (the frontend checks a file's
+# size against it before reading it). The messages name the same limits.
 MAX_BULK_TEXT_LENGTH = 50_000
+FILE_TOO_LARGE = "The file is too large (max 50 KB)."
+LIST_TOO_LONG = "The list is too long (max 50,000 characters)."
+# An uploaded list is a CSV or TXT file, by its name, and text: no NUL bytes, and few characters
+# that couldn't be read (a renamed spreadsheet is mostly those).
+LIST_FILE_TYPES = (".csv", ".txt")
+NOT_A_LIST_FILE = "Only CSV or TXT files."
+MAX_UNREADABLE_SHARE = 0.05
+# How many line numbers a list's report gives for each kind of unusable line.
+MAX_REPORTED_LINES = 10
 # Anything in a list that looks like an email; each is checked properly after.
 EMAIL_PATTERN = r"[^\s,;<>()\"']+@[^\s,;<>()\"']+"
 

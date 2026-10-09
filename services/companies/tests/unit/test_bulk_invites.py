@@ -24,6 +24,8 @@ def test_every_email_in_the_list_is_invited_and_bad_ones_are_said_why(client, mo
     assert response.json() == {
         "invited": ["ann@example.com", "bob@example.com"],
         "skipped": [{"email": "bad@@example", "reason": "invalid"}],
+        "no_email": {"count": 0, "lines": []},
+        "unread_names": {"count": 0, "lines": []},
     }
     assert sent == ["ann@example.com", "bob@example.com"]
 

@@ -1,12 +1,16 @@
 "use client"
 
-import { UploadIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 
 import { InviteExample } from "@/components/company/invite-example"
+import { InviteFileTab } from "@/components/company/invite-file-tab"
+import {
+  LineSkips,
+  type LineReports,
+} from "@/components/company/invite-line-skips"
 import { TabNav } from "@/components/tab-nav"
 import { Button } from "@/components/ui/button"
 import {
@@ -21,7 +25,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import {
-  INVITE_EXAMPLES,
   INVITE_TAB_KEY,
   INVITE_TABS,
   type InviteTab,
@@ -53,7 +56,6 @@ export function InviteCandidate({
   const share = useTranslations("share")
   const common = useTranslations("common")
   const router = useRouter()
-  const fileInput = useRef<HTMLInputElement>(null)
   const [open, setOpen] = useState(false)
   const [tab, setTab] = useState<InviteTab>("one")
   const [email, setEmail] = useState("")
@@ -61,6 +63,7 @@ export function InviteCandidate({
   const [text, setText] = useState("")
   const [file, setFile] = useState<File | null>(null)
   const [skipped, setSkipped] = useState<BulkInviteResult["skipped"]>([])
+  const [lines, setLines] = useState<LineReports | null>(null)
   const [error, setError] = useState("")
   const [sending, setSending] = useState(false)
 
@@ -71,6 +74,8 @@ export function InviteCandidate({
     }
 
     if (next) {
+      setLines(null)
+
       try {
         const saved = localStorage.getItem(INVITE_TAB_KEY) as InviteTab
 
@@ -84,6 +89,7 @@ export function InviteCandidate({
   function choose(next: InviteTab) {
     setTab(next)
     setSkipped([])
+    setLines(null)
     setError("")
 
     try {
@@ -102,7 +108,9 @@ export function InviteCandidate({
       const body =
         tab === "one"
           ? { text: email, name }
-          : { text: tab === "many" ? text : await file!.text() }
+          : tab === "many"
+            ? { text }
+            : { text: await file!.text(), filename: file!.name }
       const result = await apiFetch<BulkInviteResult>(
         `/companies/interviews/${interviewId}/candidates/bulk`,
         { method: "POST", body: JSON.stringify(body) }
@@ -118,13 +126,16 @@ export function InviteCandidate({
       }
 
       setSkipped(result.skipped)
+      const unusable = result.no_email.count + result.unread_names.count > 0
+      setLines(unusable ? result : null)
 
       // What wasn't invited from a list stays, to fix or send again later.
       if (tab === "many") {
         setText(result.skipped.map((row) => row.email).join("\n"))
       }
 
-      if (result.skipped.length === 0) {
+      // Unusable lines stay said, until the dialog is closed.
+      if (result.skipped.length === 0 && !unusable) {
         setEmail("")
         setName("")
         setFile(null)
@@ -204,49 +215,18 @@ export function InviteCandidate({
             </>
           )}
           {tab === "file" && (
-            <>
-              <Button
-                type="button"
-                variant="outline"
-                className="h-16 w-full justify-start gap-3 rounded-full px-6 text-lg font-normal"
-                onClick={() => fileInput.current?.click()}
-              >
-                <UploadIcon className="size-5 shrink-0 text-muted-foreground" />
-                <span className="truncate normal-case">
-                  {file ? file.name : t("uploadFile")}
-                </span>
-              </Button>
-              <input
-                ref={fileInput}
-                type="file"
-                accept=".csv,.txt,text/csv,text/plain"
-                className="hidden"
-                onChange={(event) => {
-                  setFile(event.target.files?.[0] ?? null)
-                  setSkipped([])
-                  setError("")
-                  event.target.value = ""
-                }}
-              />
-              <p className="px-6 py-2 text-center text-sm text-muted-foreground">
-                {t("fileFormats")}
-              </p>
-              <div className="flex justify-center gap-3">
-                {INVITE_EXAMPLES.map((example) => (
-                  <Button
-                    key={example.href}
-                    variant="outline"
-                    className="h-10 px-5 text-base"
-                    render={<a href={example.href} download />}
-                    nativeButton={false}
-                  >
-                    {t(example.label)}
-                  </Button>
-                ))}
-              </div>
-            </>
+            <InviteFileTab
+              file={file}
+              onChoose={(chosen, tooLarge) => {
+                setFile(chosen)
+                setSkipped([])
+                setLines(null)
+                setError(tooLarge)
+              }}
+            />
           )}
           {error && <p className="px-6 text-sm text-destructive">{error}</p>}
+          {lines && <LineSkips report={lines} />}
           {reasons.length > 0 && (
             <ul className="space-y-1 px-6 text-sm text-destructive">
               {reasons.map((reason) => (

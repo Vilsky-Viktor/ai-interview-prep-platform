@@ -51,6 +51,8 @@ COMPANY_ACTIONS = {
             "credits. Can't be undone."
         ),
         "subject": COMPANY_SUBJECT,
+        # Its credits are lost with it: the card says how many.
+        "credits": True,
         "render": "link",
         "link": "/companies",
     },

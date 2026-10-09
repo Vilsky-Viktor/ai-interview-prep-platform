@@ -460,7 +460,8 @@
     "removeLogo": "Remove logo",
     "logoFailed": "Couldn't save the logo.",
     "pickTitle": "Choose a company",
-    "pickText": "The test is copied into the company you choose, free and ready to send to candidates."
+    "pickText": "The test is copied into the company you choose, free and ready to send to candidates.",
+    "removeCredits": "Its {credits, plural, one {# credit} other {# credits}}{candidates, plural, =0 {} one { (about # candidate)} other { (about # candidates)}} will be lost and aren't refunded."
   },
   "candidates": {
     "scorecard": "Scorecard",
@@ -567,6 +568,11 @@
     "example": "example",
     "uploadFile": "Upload a file",
     "fileFormats": "CSV or TXT, up to 100 candidates. Names can go in a name column or beside each email.",
+    "fileTooLarge": "The file is too large (max {kb} KB).",
+    "lineSkips": {
+      "noEmail": "{count, plural, one {# line skipped} other {# lines skipped}}: no email found ({shown, plural, one {line {lines}} other {lines {lines}}})",
+      "unreadName": "{count, plural, one {# name not read} other {# names not read}} ({shown, plural, one {line {lines}} other {lines {lines}}})"
+    },
     "exampleCsv": "example .csv",
     "exampleTxt": "example .txt",
     "candidateName": "Name (optional)",
@@ -711,6 +717,19 @@
     "pricing": "Pricing"
   },
   "landing": {
+    "agent": {
+      "title": "Ask the agent\nIt does the work",
+      "text": "Ask anything about prepza and your hiring. The agent answers, and once you confirm, it does the work for you.",
+      "demo": {
+        "question": "Invite Ann Lee, ann.lee@example.com, to Backend Developer"
+      },
+      "points": {
+        "answers": "Answers from your own interviews, candidates and results",
+        "acts": "Creates interviews, invites candidates and more, after you confirm",
+        "voice": "Hold the mic and speak instead of typing",
+        "help": "Every page has a dedicated help icon"
+      }
+    },
     "more": "How it works",
     "demos": "Demos",
     "demosTooltip": "Watch demos on YouTube",

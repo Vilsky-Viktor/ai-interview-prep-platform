@@ -38,6 +38,8 @@ export type ActionCard = {
   // What it's about (a company's name, an interview's title), and what it made.
   subject?: string | null
   result_label?: string | null
+  // The company's credits the action would lose (deleting it).
+  credits?: { available: number; candidates: number } | null
 }
 
 export type ToolProgress = {

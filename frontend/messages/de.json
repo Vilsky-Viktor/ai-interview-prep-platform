@@ -460,7 +460,8 @@
     "removeLogo": "Logo entfernen",
     "logoFailed": "Das Logo konnte nicht gespeichert werden.",
     "pickTitle": "Wähle ein Unternehmen",
-    "pickText": "Der Test wird kostenlos in das gewählte Unternehmen kopiert und ist sofort bereit für Kandidaten."
+    "pickText": "Der Test wird kostenlos in das gewählte Unternehmen kopiert und ist sofort bereit für Kandidaten.",
+    "removeCredits": "Seine {credits, plural, one {# Credit} other {# Credits}}{candidates, plural, =0 {} one { (etwa # Kandidat)} other { (etwa # Kandidaten)}} gehen verloren und werden nicht erstattet."
   },
   "candidates": {
     "scorecard": "Auswertung",
@@ -567,6 +568,11 @@
     "example": "Beispiel",
     "uploadFile": "Datei hochladen",
     "fileFormats": "CSV oder TXT, bis zu 100 Kandidaten. Namen können in einer Namensspalte oder neben jeder E-Mail stehen.",
+    "fileTooLarge": "Die Datei ist zu groß (max. {kb} KB).",
+    "lineSkips": {
+      "noEmail": "{count, plural, one {# Zeile übersprungen} other {# Zeilen übersprungen}}: keine E-Mail gefunden ({shown, plural, one {Zeile {lines}} other {Zeilen {lines}}})",
+      "unreadName": "{count, plural, one {# Name nicht gelesen} other {# Namen nicht gelesen}} ({shown, plural, one {Zeile {lines}} other {Zeilen {lines}}})"
+    },
     "exampleCsv": "Beispiel .csv",
     "exampleTxt": "Beispiel .txt",
     "candidateName": "Name (optional)",
@@ -711,6 +717,19 @@
     "pricing": "Preise"
   },
   "landing": {
+    "agent": {
+      "title": "Frag den Agenten\nEr erledigt die Arbeit",
+      "text": "Frag alles zu prepza und deinem Recruiting. Der Agent antwortet und erledigt die Arbeit für dich, sobald du bestätigst.",
+      "demo": {
+        "question": "Lade Ann Lee, ann.lee@example.com, zu Backend Developer ein"
+      },
+      "points": {
+        "answers": "Antworten aus deinen eigenen Interviews, Kandidaten und Ergebnissen",
+        "acts": "Erstellt Interviews, lädt Kandidaten ein und mehr, nachdem du bestätigt hast",
+        "voice": "Mikrofon gedrückt halten und sprechen statt tippen",
+        "help": "Jede Seite hat ein eigenes Hilfe-Symbol"
+      }
+    },
     "more": "So funktioniert's",
     "demos": "Demos",
     "demosTooltip": "Demos auf YouTube ansehen",

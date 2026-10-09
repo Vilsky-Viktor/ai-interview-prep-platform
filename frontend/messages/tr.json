@@ -460,7 +460,8 @@
     "removeLogo": "Logoyu kaldır",
     "logoFailed": "Logo kaydedilemedi.",
     "pickTitle": "Bir şirket seçin",
-    "pickText": "Test, seçtiğiniz şirkete ücretsiz kopyalanır ve adaylara gönderilmeye hazır olur."
+    "pickText": "Test, seçtiğiniz şirkete ücretsiz kopyalanır ve adaylara gönderilmeye hazır olur.",
+    "removeCredits": "Şirketin {credits, plural, other {# kredisi}}{candidates, plural, =0 {} other { (yaklaşık # aday)}} kaybolur ve iade edilmez."
   },
   "candidates": {
     "scorecard": "Değerlendirme kartı",
@@ -567,6 +568,11 @@
     "example": "örnek",
     "uploadFile": "Dosya yükle",
     "fileFormats": "CSV veya TXT, en fazla 100 aday. Ad soyadlar ayrı bir sütunda ya da her e-postanın yanında olabilir.",
+    "fileTooLarge": "Dosya çok büyük (en fazla {kb} KB).",
+    "lineSkips": {
+      "noEmail": "{count} satır atlandı: e-posta bulunamadı ({shown, plural, other {satır {lines}}})",
+      "unreadName": "{count} ad soyad okunamadı ({shown, plural, other {satır {lines}}})"
+    },
     "exampleCsv": "örnek .csv",
     "exampleTxt": "örnek .txt",
     "candidateName": "Ad soyad (isteğe bağlı)",
@@ -711,6 +717,19 @@
     "pricing": "Fiyatlar"
   },
   "landing": {
+    "agent": {
+      "title": "Asistana sorun\nİşi o yapsın",
+      "text": "prepza ve işe alımınız hakkında her şeyi sorun. Asistan yanıtlar ve siz onayladığınızda işi sizin yerinize yapar.",
+      "demo": {
+        "question": "Ann Lee'yi (ann.lee@example.com) Backend Developer'a davet et"
+      },
+      "points": {
+        "answers": "Kendi mülakatlarınıza, adaylarınıza ve sonuçlarınıza dayanan yanıtlar",
+        "acts": "Onayınızdan sonra mülakat oluşturur, aday davet eder ve daha fazlasını yapar",
+        "voice": "Yazmak yerine mikrofona basılı tutup konuşun",
+        "help": "Her sayfanın kendine ait bir yardım simgesi var"
+      }
+    },
     "more": "Nasıl çalışır",
     "demos": "Demolar",
     "demosTooltip": "Demoları YouTube'da izle",

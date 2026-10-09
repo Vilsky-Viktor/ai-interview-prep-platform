@@ -367,3 +367,36 @@ def test_each_setting_is_its_own_action_and_needs_its_value():
 
         assert set(parameters["properties"]) == {"interview_id", field}
         assert set(parameters["required"]) == {"interview_id", field}
+
+
+def test_deleting_a_company_says_how_many_of_its_credits_are_lost(redis, monkeypatch):
+    async def get(service, path, query, token, language):
+        body = (
+            {"available": 900, "low": False, "candidates": 3}
+            if path.endswith("/credits")
+            else {"name": "Acme"}
+        )
+
+        return httpx.Response(200, json=body, request=httpx.Request("GET", "http://x"))
+
+    monkeypatch.setattr(services, "get", get)
+    result = asyncio.run(actions.prepare(tools()["delete_company"], {"company_id": COMPANY}, TURN))
+
+    assert result.block["credits"] == {"available": 900, "candidates": 3}
+    assert result.block["destructive"] is True
+
+
+def test_a_company_without_credits_loses_none(redis, monkeypatch):
+    async def get(service, path, query, token, language):
+        body = (
+            {"available": 0, "low": True, "candidates": 0}
+            if path.endswith("/credits")
+            else {"name": "A"}
+        )
+
+        return httpx.Response(200, json=body, request=httpx.Request("GET", "http://x"))
+
+    monkeypatch.setattr(services, "get", get)
+    result = asyncio.run(actions.prepare(tools()["delete_company"], {"company_id": COMPANY}, TURN))
+
+    assert result.block["credits"] is None

@@ -460,7 +460,8 @@
     "removeLogo": "Xóa logo",
     "logoFailed": "Không thể lưu logo.",
     "pickTitle": "Chọn công ty",
-    "pickText": "Bài kiểm tra được sao chép miễn phí vào công ty bạn chọn, sẵn sàng gửi cho ứng viên."
+    "pickText": "Bài kiểm tra được sao chép miễn phí vào công ty bạn chọn, sẵn sàng gửi cho ứng viên.",
+    "removeCredits": "{credits, plural, other {# credit}} của công ty{candidates, plural, =0 {} other { (khoảng # ứng viên)}} sẽ mất và không được hoàn tiền."
   },
   "candidates": {
     "scorecard": "Bảng điểm",
@@ -567,6 +568,11 @@
     "example": "ví dụ",
     "uploadFile": "Tải tệp lên",
     "fileFormats": "CSV hoặc TXT, tối đa 100 ứng viên. Họ tên có thể nằm trong cột tên hoặc cạnh mỗi email.",
+    "fileTooLarge": "Tệp quá lớn (tối đa {kb} KB).",
+    "lineSkips": {
+      "noEmail": "Đã bỏ qua {count} dòng: không tìm thấy email ({shown, plural, other {dòng {lines}}})",
+      "unreadName": "Không đọc được {count} họ tên ({shown, plural, other {dòng {lines}}})"
+    },
     "exampleCsv": "tệp mẫu .csv",
     "exampleTxt": "tệp mẫu .txt",
     "candidateName": "Họ tên (không bắt buộc)",
@@ -711,6 +717,19 @@
     "pricing": "Bảng giá"
   },
   "landing": {
+    "agent": {
+      "title": "Hỏi trợ lý AI\nTrợ lý làm thay bạn",
+      "text": "Hỏi bất cứ điều gì về prepza và việc tuyển dụng của bạn. Trợ lý sẽ trả lời và, khi bạn xác nhận, sẽ làm thay bạn.",
+      "demo": {
+        "question": "Mời Ann Lee, ann.lee@example.com, tham gia Backend Developer"
+      },
+      "points": {
+        "answers": "Câu trả lời từ chính các buổi phỏng vấn, ứng viên và kết quả của bạn",
+        "acts": "Tạo buổi phỏng vấn, mời ứng viên và hơn thế nữa, sau khi bạn xác nhận",
+        "voice": "Giữ micro và nói thay vì gõ",
+        "help": "Mỗi trang đều có biểu tượng trợ giúp riêng"
+      }
+    },
     "more": "Cách hoạt động",
     "demos": "Demo",
     "demosTooltip": "Xem demo trên YouTube",

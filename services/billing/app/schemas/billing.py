@@ -47,6 +47,8 @@ class BalanceOut(BaseModel):
     available: int
     # Running low: time to suggest a top-up.
     low: bool
+    # Candidates the available credits pay for.
+    candidates: int = 0
 
 
 class LowCompanyOut(BaseModel):

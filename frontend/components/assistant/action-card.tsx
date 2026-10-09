@@ -32,6 +32,7 @@ export function ActionCard({
 }) {
   const t = useTranslations("assistant.actions")
   const pages = useTranslations("assistant.pages")
+  const companyText = useTranslations("company")
   const tool = card.tool ?? ""
   const state = card.state ?? "pending"
   // The company, unless the card is about it already.
@@ -72,6 +73,14 @@ export function ActionCard({
             </div>
           ))}
         </dl>
+      )}
+      {card.credits && state === "pending" && (
+        <p className="text-destructive">
+          {companyText("removeCredits", {
+            credits: card.credits.available,
+            candidates: card.credits.candidates,
+          })}
+        </p>
       )}
       {card.destructive && state === "pending" && (
         <p className="text-destructive">{t("cantUndo")}</p>

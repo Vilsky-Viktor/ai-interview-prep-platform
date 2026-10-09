@@ -460,7 +460,8 @@
     "removeLogo": "Usuń logo",
     "logoFailed": "Nie udało się zapisać logo.",
     "pickTitle": "Wybierz firmę",
-    "pickText": "Test zostanie skopiowany do wybranej firmy za darmo i od razu będzie gotowy do wysłania kandydatom."
+    "pickText": "Test zostanie skopiowany do wybranej firmy za darmo i od razu będzie gotowy do wysłania kandydatom.",
+    "removeCredits": "Jej {credits, plural, one {# kredyt} few {# kredyty} many {# kredytów} other {# kredytu}}{candidates, plural, =0 {} one { (około # kandydat)} few { (około # kandydatów)} many { (około # kandydatów)} other { (około # kandydata)}} przepadną i nie są zwracane."
   },
   "candidates": {
     "scorecard": "Wyniki",
@@ -567,6 +568,11 @@
     "example": "przykład",
     "uploadFile": "Prześlij plik",
     "fileFormats": "CSV lub TXT, do 100 kandydatów. Imiona i nazwiska mogą być w osobnej kolumnie lub obok każdego adresu.",
+    "fileTooLarge": "Plik jest za duży (maks. {kb} KB).",
+    "lineSkips": {
+      "noEmail": "Pominięte wiersze: {count} — nie znaleziono adresu e-mail ({shown, plural, one {wiersz {lines}} other {wiersze {lines}}})",
+      "unreadName": "Nieodczytane imiona i nazwiska: {count} ({shown, plural, one {wiersz {lines}} other {wiersze {lines}}})"
+    },
     "exampleCsv": "przykład .csv",
     "exampleTxt": "przykład .txt",
     "candidateName": "Imię i nazwisko (opcjonalnie)",
@@ -711,6 +717,19 @@
     "pricing": "Cennik"
   },
   "landing": {
+    "agent": {
+      "title": "Zapytaj agenta\nOn wykona pracę",
+      "text": "Pytaj o wszystko, co dotyczy prepza i Twojej rekrutacji. Agent odpowiada, a po Twoim potwierdzeniu wykonuje pracę za Ciebie.",
+      "demo": {
+        "question": "Zaproś Ann Lee, ann.lee@example.com, na Backend Developer"
+      },
+      "points": {
+        "answers": "Odpowiedzi na podstawie Twoich rozmów, kandydatów i wyników",
+        "acts": "Tworzy rozmowy, zaprasza kandydatów i nie tylko, po Twoim potwierdzeniu",
+        "voice": "Przytrzymaj mikrofon i mów zamiast pisać",
+        "help": "Każda strona ma własną ikonę pomocy"
+      }
+    },
     "more": "Jak to działa",
     "demos": "Dema",
     "demosTooltip": "Obejrzyj dema na YouTube",

@@ -42,7 +42,7 @@ export async function SiteFooter() {
         <nav
           data-slot="footer-nav"
           aria-label={t("footer")}
-          className="grid grid-cols-3 gap-x-6 sm:gap-x-16"
+          className="grid grid-cols-3 gap-x-6 [overflow-wrap:anywhere] hyphens-auto sm:gap-x-16"
         >
           {FOOTER_COLUMNS.map((column) => (
             <ul key={column[0].href} className="space-y-2">

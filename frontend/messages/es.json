@@ -460,7 +460,8 @@
     "removeLogo": "Quitar logo",
     "logoFailed": "No se pudo guardar el logo.",
     "pickTitle": "Elige una empresa",
-    "pickText": "La prueba se copia en la empresa que elijas, gratis y lista para enviar a candidatos."
+    "pickText": "La prueba se copia en la empresa que elijas, gratis y lista para enviar a candidatos.",
+    "removeCredits": "Sus {credits, plural, one {# crédito} other {# créditos}}{candidates, plural, =0 {} one { (unos # candidato)} other { (unos # candidatos)}} se perderán y no se reembolsan."
   },
   "candidates": {
     "scorecard": "Ficha de evaluación",
@@ -567,6 +568,11 @@
     "example": "ejemplo",
     "uploadFile": "Subir un archivo",
     "fileFormats": "CSV o TXT, hasta 100 candidatos. Los nombres pueden ir en una columna de nombre o junto a cada correo.",
+    "fileTooLarge": "El archivo es demasiado grande (máx. {kb} KB).",
+    "lineSkips": {
+      "noEmail": "{count, plural, one {# línea omitida} other {# líneas omitidas}}: no se encontró ningún correo ({shown, plural, one {línea {lines}} other {líneas {lines}}})",
+      "unreadName": "{count, plural, one {# nombre no leído} other {# nombres no leídos}} ({shown, plural, one {línea {lines}} other {líneas {lines}}})"
+    },
     "exampleCsv": "ejemplo .csv",
     "exampleTxt": "ejemplo .txt",
     "candidateName": "Nombre (opcional)",
@@ -711,6 +717,19 @@
     "pricing": "Precios"
   },
   "landing": {
+    "agent": {
+      "title": "Pregunta al agente\nÉl hace el trabajo",
+      "text": "Pregunta lo que quieras sobre prepza y tus procesos de selección. El agente responde y, cuando confirmas, hace el trabajo por ti.",
+      "demo": {
+        "question": "Invita a Ann Lee, ann.lee@example.com, a Backend Developer"
+      },
+      "points": {
+        "answers": "Respuestas basadas en tus propias entrevistas, candidatos y resultados",
+        "acts": "Crea entrevistas, invita a candidatos y más, después de que confirmes",
+        "voice": "Mantén pulsado el micrófono y habla en lugar de escribir",
+        "help": "Cada página tiene su propio icono de ayuda"
+      }
+    },
     "more": "Cómo funciona",
     "demos": "Demos",
     "demosTooltip": "Ver demos en YouTube",

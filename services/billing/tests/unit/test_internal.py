@@ -52,8 +52,8 @@ def test_several_companies_balances_at_once(client, monkeypatch):
     )
 
     assert response.json() == {
-        "a": {"balance": 900, "reserved": 300, "available": 600, "low": False},
-        "b": {"balance": 0, "reserved": 0, "available": 0, "low": True},
+        "a": {"balance": 900, "reserved": 300, "available": 600, "low": False, "candidates": 2},
+        "b": {"balance": 0, "reserved": 0, "available": 0, "low": True, "candidates": 0},
     }
 
 

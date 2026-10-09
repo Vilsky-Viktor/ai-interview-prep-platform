@@ -94,9 +94,12 @@ class CandidateFiltersOut(BaseModel):
 class BulkInviteIn(BaseModel):
     """A list of emails as pasted or read from a file; any other text around them is ignored."""
 
-    text: str = Field(min_length=1, max_length=MAX_BULK_TEXT_LENGTH)
+    # Its limit is checked with its own message (helpers/list_files.py); this only caps the body.
+    text: str = Field(min_length=1, max_length=4 * MAX_BULK_TEXT_LENGTH)
     # The form's name field, for a text with one email; trimmed and cut as it's saved.
     name: str | None = None
+    # The uploaded file's name, when the text was read from one.
+    filename: str | None = Field(default=None, max_length=255)
 
 
 class SkippedInvite(BaseModel):
@@ -105,9 +108,20 @@ class SkippedInvite(BaseModel):
     reason: str
 
 
+class LineReport(BaseModel):
+    """Lines of a list that couldn't be used: how many, and the first few line numbers."""
+
+    count: int = 0
+    lines: list[int] = []
+
+
 class BulkInviteOut(BaseModel):
     invited: list[str]
     skipped: list[SkippedInvite]
+    # Lines with no email (not counting empty lines or a CSV header), and lines whose name
+    # couldn't be read (as "Ann <ann@example.com" without its ">").
+    no_email: LineReport = LineReport()
+    unread_names: LineReport = LineReport()
 
 
 class ExtraTimeIn(BaseModel):

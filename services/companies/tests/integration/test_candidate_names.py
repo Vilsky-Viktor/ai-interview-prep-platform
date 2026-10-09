@@ -1,5 +1,6 @@
 import uuid
 
+from app.helpers.candidate_lists import candidates_in
 from app.storage import accounts, candidates, companies, interviews, invites
 
 
@@ -101,3 +102,19 @@ def test_candidates_are_found_by_part_of_their_name_or_email_in_any_case(run):
     assert by_both == ["maria@example.com", "ruiz.j@example.com"]
     assert by_name_or_email == ["maria@example.com"]
     assert none == []
+
+
+def test_a_csv_lists_names_are_stored_with_its_invites(run):
+    async def scenario():
+        company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
+        interview = await interviews.create(company.id, uuid.uuid4(), "en")
+        text = "Vorname;Nachname;E-Mail\nAnn;Lee;ann@example.com\n;;bob@example.com\n"
+
+        for email, name in candidates_in(text):
+            await invites.upsert(interview.id, email, "B", "A", "en", name=name)
+
+        rows = await candidates.page(interview.id, 0, 10, False)
+
+        return sorted((row.email, row.name) for row in rows)
+
+    assert run(scenario()) == [("ann@example.com", "Ann Lee"), ("bob@example.com", None)]

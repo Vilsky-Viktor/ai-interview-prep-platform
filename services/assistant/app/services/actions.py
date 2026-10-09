@@ -97,6 +97,27 @@ def unchanged(tool: Tool, arguments: dict, current: dict | None) -> dict:
     }
 
 
+async def credits_lost(tool: Tool, company_id: str | None, turn: Turn) -> dict | None:
+    """The company's credits an action would lose (deleting it), as the user may see them:
+    {available, candidates}; None when it has none or they can't be read."""
+    if company_id is None:
+        return None
+
+    path = f"/companies/{company_id}/credits"
+
+    try:
+        response = await services.get("companies", path, {}, turn.token, turn.language)
+    except httpx.HTTPError:
+        return None
+
+    found = response.json() if response.is_success else {}
+
+    if found.get("available", 0) <= 0:
+        return None
+
+    return {"available": found["available"], "candidates": found.get("candidates", 0)}
+
+
 async def prepare(tool: Tool, arguments: dict, turn: Turn) -> ToolResult:
     """What the model asked for, kept (in Redis, for a short while) for the user to confirm: bound
     to them, the conversation and the company. Nothing runs yet; what it's about is read with
@@ -126,7 +147,8 @@ async def prepare(tool: Tool, arguments: dict, turn: Turn) -> ToolResult:
 
     action_id = uuid.uuid4()
     company_id = arguments.get("company_id")
-    block = card(action_id, tool, arguments, PENDING, subject=subject)
+    lost = await credits_lost(tool, company_id, turn) if tool.credits else None
+    block = card(action_id, tool, arguments, PENDING, subject=subject, credits=lost)
     pending = {
         "user_id": turn.user_id,
         "conversation_id": str(turn.conversation_id),

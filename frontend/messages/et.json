@@ -460,7 +460,8 @@
     "removeLogo": "Eemalda logo",
     "logoFailed": "Logo ei õnnestunud salvestada.",
     "pickTitle": "Vali ettevõte",
-    "pickText": "Test kopeeritakse tasuta sinu valitud ettevõttesse ja on kohe valmis kandidaatidele saatmiseks."
+    "pickText": "Test kopeeritakse tasuta sinu valitud ettevõttesse ja on kohe valmis kandidaatidele saatmiseks.",
+    "removeCredits": "Selle {credits, plural, one {# krediit} other {# krediiti}}{candidates, plural, =0 {} one { (umbes # kandidaat)} other { (umbes # kandidaati)}} läheb kaotsi ja seda ei hüvitata."
   },
   "candidates": {
     "scorecard": "Hindamisleht",
@@ -567,6 +568,11 @@
     "example": "näide",
     "uploadFile": "Laadi fail üles",
     "fileFormats": "CSV või TXT, kuni 100 kandidaati. Nimed võivad olla nimeveerus või iga e-posti aadressi kõrval.",
+    "fileTooLarge": "Fail on liiga suur (kuni {kb} KB).",
+    "lineSkips": {
+      "noEmail": "{count, plural, one {# rida jäeti vahele} other {# rida jäeti vahele}}: e-posti aadressi ei leitud ({shown, plural, one {rida {lines}} other {read {lines}}})",
+      "unreadName": "{count, plural, one {# nime ei saanud lugeda} other {# nime ei saanud lugeda}} ({shown, plural, one {rida {lines}} other {read {lines}}})"
+    },
     "exampleCsv": "näidis .csv",
     "exampleTxt": "näidis .txt",
     "candidateName": "Nimi (valikuline)",
@@ -711,6 +717,19 @@
     "pricing": "Hinnad"
   },
   "landing": {
+    "agent": {
+      "title": "Küsi agendilt\nTema teeb töö ära",
+      "text": "Küsi kõike prepza ja oma värbamise kohta. Agent vastab ja kui sa kinnitad, teeb ta töö sinu eest ära.",
+      "demo": {
+        "question": "Kutsu Ann Lee, ann.lee@example.com, intervjuule Backend Developer"
+      },
+      "points": {
+        "answers": "Vastused sinu enda intervjuude, kandidaatide ja tulemuste põhjal",
+        "acts": "Loob intervjuusid, kutsub kandidaate ja muud, kui oled kinnitanud",
+        "voice": "Hoia mikrofoni all ja räägi kirjutamise asemel",
+        "help": "Igal lehel on oma abiikoon"
+      }
+    },
     "more": "Kuidas see töötab",
     "demos": "Demod",
     "demosTooltip": "Vaata demosid YouTube'is",

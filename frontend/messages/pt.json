@@ -460,7 +460,8 @@
     "removeLogo": "Remover logotipo",
     "logoFailed": "Não foi possível salvar o logotipo.",
     "pickTitle": "Escolha uma empresa",
-    "pickText": "O teste é copiado para a empresa que você escolher, grátis e pronto para enviar aos candidatos."
+    "pickText": "O teste é copiado para a empresa que você escolher, grátis e pronto para enviar aos candidatos.",
+    "removeCredits": "Seus {credits, plural, one {# crédito} other {# créditos}}{candidates, plural, =0 {} one { (cerca de # candidato)} other { (cerca de # candidatos)}} serão perdidos e não são reembolsados."
   },
   "candidates": {
     "scorecard": "Ficha de avaliação",
@@ -567,6 +568,11 @@
     "example": "exemplo",
     "uploadFile": "Enviar um arquivo",
     "fileFormats": "CSV ou TXT, até 100 candidatos. Os nomes podem ficar numa coluna de nome ou ao lado de cada e-mail.",
+    "fileTooLarge": "O arquivo é grande demais (máx. {kb} KB).",
+    "lineSkips": {
+      "noEmail": "{count, plural, one {# linha ignorada} other {# linhas ignoradas}}: nenhum e-mail encontrado ({shown, plural, one {linha {lines}} other {linhas {lines}}})",
+      "unreadName": "{count, plural, one {# nome não lido} other {# nomes não lidos}} ({shown, plural, one {linha {lines}} other {linhas {lines}}})"
+    },
     "exampleCsv": "exemplo .csv",
     "exampleTxt": "exemplo .txt",
     "candidateName": "Nome (opcional)",
@@ -711,6 +717,19 @@
     "pricing": "Preços"
   },
   "landing": {
+    "agent": {
+      "title": "Pergunte ao agente\nEle faz o trabalho",
+      "text": "Pergunte o que quiser sobre o prepza e suas contratações. O agente responde e, quando você confirma, faz o trabalho por você.",
+      "demo": {
+        "question": "Convide Ann Lee, ann.lee@example.com, para Backend Developer"
+      },
+      "points": {
+        "answers": "Respostas com base nas suas próprias entrevistas, candidatos e resultados",
+        "acts": "Cria entrevistas, convida candidatos e mais, depois que você confirma",
+        "voice": "Segure o microfone e fale em vez de digitar",
+        "help": "Cada página tem seu próprio ícone de ajuda"
+      }
+    },
     "more": "Como funciona",
     "demos": "Demos",
     "demosTooltip": "Ver demos no YouTube",

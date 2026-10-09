@@ -113,7 +113,7 @@ def test_a_viewer_reads_the_company_without_verifying_it(client, viewer, monkeyp
         verified.append(user.uid)
 
     async def fake_credits(company_id):
-        return {"available": 10, "low": False}
+        return {"available": 900, "low": False, "candidates": 3}
 
     async def fake_list(company_id, offset, limit):
         return viewer.members
@@ -129,7 +129,9 @@ def test_a_viewer_reads_the_company_without_verifying_it(client, viewer, monkeyp
     assert (company.json()["role"], company.json()["can_edit"]) == ("viewer", False)
     assert (company.json()["can_delete"], company.json()["can_manage_members"]) == (False, False)
     assert verified == []
-    assert client.get(f"{COMPANY}/credits").status_code == 200
+    credits = client.get(f"{COMPANY}/credits")
+    assert credits.status_code == 200
+    assert credits.json()["candidates"] == 3
     assert client.get(f"/members?company_id={COMPANY_ID}").status_code == 200
 
 

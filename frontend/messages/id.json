@@ -460,7 +460,8 @@
     "removeLogo": "Hapus logo",
     "logoFailed": "Logo tidak bisa disimpan.",
     "pickTitle": "Pilih perusahaan",
-    "pickText": "Tes disalin ke perusahaan yang kamu pilih, gratis dan siap dikirim ke kandidat."
+    "pickText": "Tes disalin ke perusahaan yang kamu pilih, gratis dan siap dikirim ke kandidat.",
+    "removeCredits": "{credits, plural, other {# kreditnya}}{candidates, plural, =0 {} other { (sekitar # kandidat)}} akan hilang dan tidak dikembalikan."
   },
   "candidates": {
     "scorecard": "Scorecard",
@@ -567,6 +568,11 @@
     "example": "contoh",
     "uploadFile": "Unggah file",
     "fileFormats": "CSV atau TXT, hingga 100 kandidat. Nama bisa ditulis di kolom nama atau di samping setiap email.",
+    "fileTooLarge": "File terlalu besar (maks. {kb} KB).",
+    "lineSkips": {
+      "noEmail": "{count} baris dilewati: tidak ada email ({shown, plural, other {baris {lines}}})",
+      "unreadName": "{count} nama tidak terbaca ({shown, plural, other {baris {lines}}})"
+    },
     "exampleCsv": "contoh .csv",
     "exampleTxt": "contoh .txt",
     "candidateName": "Nama (opsional)",
@@ -711,6 +717,19 @@
     "pricing": "Harga"
   },
   "landing": {
+    "agent": {
+      "title": "Tanya agen\nDia yang mengerjakan",
+      "text": "Tanyakan apa saja tentang prepza dan rekrutmen Anda. Agen menjawab, dan setelah Anda konfirmasi, dia mengerjakannya untuk Anda.",
+      "demo": {
+        "question": "Undang Ann Lee, ann.lee@example.com, ke Backend Developer"
+      },
+      "points": {
+        "answers": "Jawaban dari wawancara, kandidat, dan hasil Anda sendiri",
+        "acts": "Membuat wawancara, mengundang kandidat, dan lainnya setelah Anda konfirmasi",
+        "voice": "Tahan mikrofon dan bicara alih-alih mengetik",
+        "help": "Setiap halaman punya ikon bantuan sendiri"
+      }
+    },
     "more": "Cara kerjanya",
     "demos": "Demo",
     "demosTooltip": "Tonton demo di YouTube",

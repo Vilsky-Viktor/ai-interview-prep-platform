@@ -460,7 +460,8 @@
     "removeLogo": "로고 삭제",
     "logoFailed": "로고를 저장하지 못했습니다.",
     "pickTitle": "회사 선택",
-    "pickText": "테스트가 선택한 회사에 무료로 복사되며, 바로 지원자에게 보낼 수 있습니다."
+    "pickText": "테스트가 선택한 회사에 무료로 복사되며, 바로 지원자에게 보낼 수 있습니다.",
+    "removeCredits": "이 회사의 {credits, plural, other {# 크레딧}}{candidates, plural, =0 {} other {(지원자 약 #명분)}}은 사라지며 환불되지 않습니다."
   },
   "candidates": {
     "scorecard": "평가표",
@@ -567,6 +568,11 @@
     "example": "예시",
     "uploadFile": "파일 업로드",
     "fileFormats": "CSV 또는 TXT, 최대 100명. 이름은 이름 열이나 각 이메일 옆에 넣을 수 있습니다.",
+    "fileTooLarge": "파일이 너무 큽니다(최대 {kb}KB).",
+    "lineSkips": {
+      "noEmail": "{count}줄 건너뜀: 이메일 없음({shown, plural, other {{lines}번째 줄}})",
+      "unreadName": "이름 {count}개를 읽지 못함({shown, plural, other {{lines}번째 줄}})"
+    },
     "exampleCsv": "예시 .csv",
     "exampleTxt": "예시 .txt",
     "candidateName": "이름(선택)",
@@ -711,6 +717,19 @@
     "pricing": "요금"
   },
   "landing": {
+    "agent": {
+      "title": "에이전트에게 물어보세요\n일은 에이전트가 합니다",
+      "text": "prepza와 채용에 관한 것이라면 무엇이든 물어보세요. 에이전트가 답하고, 확인하시면 일을 대신 처리합니다.",
+      "demo": {
+        "question": "Ann Lee(ann.lee@example.com)를 Backend Developer에 초대해 줘"
+      },
+      "points": {
+        "answers": "내 면접, 지원자, 결과를 바탕으로 한 답변",
+        "acts": "확인 후 면접 생성, 지원자 초대 등을 처리",
+        "voice": "입력 대신 마이크를 길게 눌러 말하세요",
+        "help": "모든 페이지에 전용 도움말 아이콘이 있습니다"
+      }
+    },
     "more": "이용 방법",
     "demos": "데모",
     "demosTooltip": "YouTube에서 데모 보기",

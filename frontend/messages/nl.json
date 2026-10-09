@@ -460,7 +460,8 @@
     "removeLogo": "Logo verwijderen",
     "logoFailed": "Het logo kon niet worden opgeslagen.",
     "pickTitle": "Kies een bedrijf",
-    "pickText": "De test wordt gratis gekopieerd naar het bedrijf dat je kiest, klaar om naar kandidaten te sturen."
+    "pickText": "De test wordt gratis gekopieerd naar het bedrijf dat je kiest, klaar om naar kandidaten te sturen.",
+    "removeCredits": "De {credits, plural, one {# credit} other {# credits}}{candidates, plural, =0 {} one { (ongeveer # kandidaat)} other { (ongeveer # kandidaten)}} gaan verloren en worden niet terugbetaald."
   },
   "candidates": {
     "scorecard": "Scorekaart",
@@ -567,6 +568,11 @@
     "example": "voorbeeld",
     "uploadFile": "Bestand uploaden",
     "fileFormats": "CSV of TXT, tot 100 kandidaten. Namen kunnen in een naamkolom of naast elk e-mailadres staan.",
+    "fileTooLarge": "Het bestand is te groot (max. {kb} KB).",
+    "lineSkips": {
+      "noEmail": "{count, plural, one {# regel overgeslagen} other {# regels overgeslagen}}: geen e-mailadres gevonden ({shown, plural, one {regel {lines}} other {regels {lines}}})",
+      "unreadName": "{count, plural, one {# naam niet gelezen} other {# namen niet gelezen}} ({shown, plural, one {regel {lines}} other {regels {lines}}})"
+    },
     "exampleCsv": "voorbeeld .csv",
     "exampleTxt": "voorbeeld .txt",
     "candidateName": "Naam (optioneel)",
@@ -711,6 +717,19 @@
     "pricing": "Prijzen"
   },
   "landing": {
+    "agent": {
+      "title": "Vraag het de agent\nDie doet het werk",
+      "text": "Vraag alles over prepza en je werving. De agent antwoordt en doet het werk voor je zodra je bevestigt.",
+      "demo": {
+        "question": "Nodig Ann Lee, ann.lee@example.com, uit voor Backend Developer"
+      },
+      "points": {
+        "answers": "Antwoorden uit je eigen interviews, kandidaten en resultaten",
+        "acts": "Maakt interviews, nodigt kandidaten uit en meer, nadat je bevestigt",
+        "voice": "Houd de microfoon ingedrukt en spreek in plaats van te typen",
+        "help": "Elke pagina heeft een eigen help-icoon"
+      }
+    },
     "more": "Hoe het werkt",
     "demos": "Demo's",
     "demosTooltip": "Demo's bekijken op YouTube",

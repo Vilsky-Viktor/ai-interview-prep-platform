@@ -76,7 +76,7 @@ async def company_credits(company_id: str, caller: ServiceCaller) -> BalanceOut:
 async def companies_credits(body: OwnersIn, caller: ServiceCaller) -> dict[str, BalanceOut]:
     """Several companies' balances at once, for the top-up page."""
     found = await ledger.wallets(OwnerType.COMPANY, body.owner_ids)
-    empty = BalanceOut(balance=0, reserved=0, available=0, low=True)
+    empty = BalanceOut(balance=0, reserved=0, available=0, low=True, candidates=0)
 
     return {
         owner_id: balance_out(found[owner_id]) if owner_id in found else empty

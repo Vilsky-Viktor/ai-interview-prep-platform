@@ -2,6 +2,7 @@ import { ArrowDownIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { AdvantagesSection } from "@/components/landing/advantages"
+import { AgentSection } from "@/components/landing/agent"
 import { AtsSection } from "@/components/landing/ats"
 import { BrandSection } from "@/components/landing/brand"
 import { Closing } from "@/components/landing/closing"
@@ -96,6 +97,7 @@ export default async function HomePage() {
       <TryFirstSection />
       <InviteWaysSection />
       <ReportsSection />
+      <AgentSection />
       <ControlSection />
       <QualitySection />
       <AtsSection />

@@ -7,6 +7,7 @@ Companies pay per candidate from a wallet of credits. There's no paid subscripti
 - [Automatic top-up](#automatic-top-up)
 - [Referrals](#referrals)
 - [Refunds and chargebacks](#refunds-and-chargebacks)
+- [Deleting a company](#deleting-a-company)
 - [Setting up Paddle](#setting-up-paddle)
 
 ## Credits
@@ -63,6 +64,10 @@ On the top-up page, under each balance ("Automatic top-up: off"), choose a top-u
 ## Refunds and chargebacks
 
 Refunds and chargebacks in Paddle take back the credits they bought.
+
+## Deleting a company
+
+Deleting a company deletes its credits: billing's internal `DELETE /internal/companies/{id}` removes the wallet, its holds and its history, and turns off automatic top-up. Purchases stay on record, and nothing is refunded. Before it's deleted, the owner sees how many credits are lost: the remove dialog, and the assistant's delete card, read the company's balance (`GET /companies/{id}/credits`, whose `candidates` is how many candidates the available credits pay for, worked out by billing) and add "Its 900 credits (about 3 candidates) will be lost and aren't refunded." when there are any.
 
 ## Setting up Paddle
 

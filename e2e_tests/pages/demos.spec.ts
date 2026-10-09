@@ -45,3 +45,15 @@ test("the footer's ask agent opens the assistant", async ({ page }) => {
   await page.getByRole("contentinfo").getByRole("button", { name: "ask agent" }).click();
   await expect(page.getByRole("dialog", { name: "Assistant" })).toBeVisible();
 });
+
+// The agent's section shows a request with the card it prepares; its button opens the panel.
+test("the agent's section shows the chat and opens the assistant", async ({ page }) => {
+  await page.goto("/");
+  const section = page.locator("section", {
+    has: page.getByRole("heading", { name: /ask the agent/i }),
+  });
+  await expect(section.getByText("Invite a candidate")).toBeVisible();
+  await expect(section.getByText("Every page has a dedicated help icon")).toBeVisible();
+  await section.getByRole("button", { name: "ask agent" }).click();
+  await expect(page.getByRole("dialog", { name: "Assistant" })).toBeVisible();
+});

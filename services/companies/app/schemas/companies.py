@@ -93,6 +93,8 @@ class ReferralOut(BaseModel):
 class CompanyCreditsOut(BaseModel):
     available: int
     low: bool
+    # Candidates the available credits pay for (billing works it out).
+    candidates: int = 0
 
 
 class CompanyBalanceOut(BaseModel):

@@ -15,9 +15,10 @@ from app.constants.invites import (
     TOO_MANY_EMAILS,
     SkipReason,
 )
-from app.helpers.candidate_lists import candidates_in
+from app.helpers.candidate_lists import candidates_in, line_report, unusable_lines
 from app.helpers.email_lists import is_email
 from app.helpers.interviews import attach_set
+from app.helpers.list_files import list_refusal
 from app.integrations.redis import get_redis
 from app.schemas.invites import BulkInviteIn, BulkInviteOut, SkippedInvite
 from app.services import candidate_invites
@@ -47,6 +48,11 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
 
     if interview.set_id is None:
         raise HTTPException(status.HTTP_409_CONFLICT, "Interview is still being generated")
+
+    refusal = list_refusal(body.text, body.filename)
+
+    if refusal:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, refusal)
 
     found = candidates_in(body.text)
     name = clean_name(body.name)
@@ -94,4 +100,11 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
 
     await outbox_service.flush_quietly()
 
-    return BulkInviteOut(invited=invited, skipped=skipped)
+    no_email, unread_names = unusable_lines(body.text)
+
+    return BulkInviteOut(
+        invited=invited,
+        skipped=skipped,
+        no_email=line_report(no_email),
+        unread_names=line_report(unread_names),
+    )

@@ -460,7 +460,8 @@
     "removeLogo": "移除标志",
     "logoFailed": "无法保存标志。",
     "pickTitle": "选择公司",
-    "pickText": "测试会免费复制到你选择的公司，可立即发送给候选人。"
+    "pickText": "测试会免费复制到你选择的公司，可立即发送给候选人。",
+    "removeCredits": "其 {credits, plural, other {# 点数}}{candidates, plural, =0 {} other {（约 # 位候选人）}}将会作废，且不予退款。"
   },
   "candidates": {
     "scorecard": "评分卡",
@@ -567,6 +568,11 @@
     "example": "示例",
     "uploadFile": "上传文件",
     "fileFormats": "CSV 或 TXT，最多 100 位候选人。姓名可放在姓名列中，或写在每个邮箱旁边。",
+    "fileTooLarge": "文件过大（最大 {kb} KB）。",
+    "lineSkips": {
+      "noEmail": "已跳过 {count} 行：未找到邮箱（{shown, plural, other {第 {lines} 行}}）",
+      "unreadName": "{count} 个姓名未能读取（{shown, plural, other {第 {lines} 行}}）"
+    },
     "exampleCsv": "示例 .csv",
     "exampleTxt": "示例 .txt",
     "candidateName": "姓名（选填）",
@@ -711,6 +717,19 @@
     "pricing": "价格"
   },
   "landing": {
+    "agent": {
+      "title": "问问智能助手\n活儿交给它",
+      "text": "关于 prepza 和招聘的任何问题都可以问。智能助手会回答，你确认后，它就替你把事情办好。",
+      "demo": {
+        "question": "邀请 Ann Lee（ann.lee@example.com）参加 Backend Developer"
+      },
+      "points": {
+        "answers": "根据你自己的面试、候选人和结果来回答",
+        "acts": "确认后即可创建面试、邀请候选人等",
+        "voice": "按住麦克风说话，不用打字",
+        "help": "每个页面都有专属的帮助图标"
+      }
+    },
     "more": "如何运作",
     "demos": "演示",
     "demosTooltip": "在 YouTube 上观看演示",

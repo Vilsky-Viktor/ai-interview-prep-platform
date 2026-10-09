@@ -6,7 +6,7 @@ import re
 
 from prepza_common.names import clean_name
 
-from app.constants.invites import EMAIL_PATTERN
+from app.constants.invites import EMAIL_PATTERN, MAX_REPORTED_LINES
 from app.constants.name_headers import (
     FIRST_NAME_HEADERS,
     FULL_NAME_HEADERS,
@@ -82,3 +82,27 @@ def csv_names(lines: list[str]) -> dict[str, str] | None:
             names.setdefault(emails[0], name)
 
     return names
+
+
+def unusable_lines(text: str) -> tuple[list[int], list[int]]:
+    """Line numbers (from 1) of lines with no email, not counting empty lines or a CSV header
+    with a name column, and of lines whose name couldn't be read: a "<" or ">" around the email
+    that doesn't make "Name <email>"."""
+    numbered = [(number, line) for number, line in enumerate(text.splitlines(), 1) if line.strip()]
+    no_email, unread = [], []
+
+    if numbered and csv_names([line for _, line in numbered]) is not None:
+        numbered = numbered[1:]
+
+    for number, line in numbered:
+        if not re.search(EMAIL_PATTERN, line):
+            no_email.append(number)
+        elif ("<" in line or ">" in line) and not NAME_THEN_EMAIL.match(line):
+            unread.append(number)
+
+    return no_email, unread
+
+
+def line_report(numbers: list[int]) -> dict:
+    """How many lines, and the first MAX_REPORTED_LINES of their numbers."""
+    return {"count": len(numbers), "lines": numbers[:MAX_REPORTED_LINES]}

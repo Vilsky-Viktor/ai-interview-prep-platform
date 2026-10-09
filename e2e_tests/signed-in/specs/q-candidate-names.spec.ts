@@ -130,3 +130,43 @@ test("the sign-in fills a name once and an owner's correction stays", async ({ s
   await expect(nameLine).toContainText("Maria Nowak")
   await expect(owner.getByText("Maria Kowalska")).toHaveCount(0)
 })
+
+// A list's problems are said in the dialog: a file that isn't a CSV or TXT file, one too large to
+// send (not read at all), and a list's lines without an email or with a name that couldn't be read.
+test("the invite dialog says what it couldn't read", async ({ signInAs }) => {
+  const owner = await signInAs(ownerEmail())
+  const company = await createCompany(owner)
+  const interviewId = await createInterview(owner, company.id)
+  await visit(owner, `/companies/${company.id}/interviews/${interviewId}?tab=candidates`)
+  const dialog = owner.getByRole("dialog")
+  const file = owner.locator("input[type=file]")
+
+  await owner.getByRole("button", { name: "New candidate(s)" }).click()
+  await dialog.getByRole("tab", { name: "upload from file" }).click()
+  await file.setInputFiles({
+    name: "candidates.xlsx",
+    mimeType: "application/octet-stream",
+    buffer: Buffer.from(`email\n${throwawayEmail("xlsx")}\n`),
+  })
+  await dialog.getByRole("button", { name: "Invite" }).click()
+  await expect(dialog.getByText("Only CSV or TXT files.")).toBeVisible()
+  await shot(owner, "wrong-file-type")
+
+  await file.setInputFiles({
+    name: "big.csv",
+    mimeType: "text/csv",
+    buffer: Buffer.alloc(60_000, "a"),
+  })
+  await expect(dialog.getByText("The file is too large (max 50 KB).")).toBeVisible()
+  await expect(dialog.getByRole("button", { name: "Invite" })).toBeDisabled()
+  await shot(owner, "file-too-large")
+
+  await dialog.getByRole("tab", { name: "invite many" }).click()
+  await dialog
+    .getByLabel("Candidate emails")
+    .fill(`${throwawayEmail("lines")}\nno email here\n\nBob <${throwawayEmail("bob")}\nnor here`)
+  await dialog.getByRole("button", { name: "Invite" }).click()
+  await expect(dialog.getByText("2 lines skipped: no email found (lines 2, 5)")).toBeVisible()
+  await expect(dialog.getByText("1 name not read (line 4)")).toBeVisible()
+  await shot(owner, "unusable-lines")
+})

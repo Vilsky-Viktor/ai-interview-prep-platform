@@ -17,6 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { apiFetch } from "@/lib/api"
+import type { CompanyCredits } from "@/types/billing"
 
 export function RemoveCompany({
   companyId,
@@ -30,6 +31,16 @@ export function RemoveCompany({
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [removing, setRemoving] = useState(false)
+  // The company's credits, read when the dialog opens: they're lost with it.
+  const [credits, setCredits] = useState<CompanyCredits | null>(null)
+
+  function openDialog() {
+    setCredits(null)
+    setOpen(true)
+    apiFetch<CompanyCredits>(`/companies/companies/${companyId}/credits`)
+      .then(setCredits)
+      .catch(() => {})
+  }
 
   async function remove() {
     setRemoving(true)
@@ -53,7 +64,7 @@ export function RemoveCompany({
         className="size-12 text-muted-foreground hover:text-destructive"
         aria-label={t("removeLabel", { name })}
         tooltip={t("remove")}
-        onClick={() => setOpen(true)}
+        onClick={openDialog}
       >
         <Trash2Icon className="size-6" />
       </Button>
@@ -66,11 +77,19 @@ export function RemoveCompany({
         }}
       >
         <DialogContent showCloseButton={false}>
-          <DialogHeader>
-            <DialogTitle className="no-dot">
+          <DialogHeader className="gap-4">
+            <DialogTitle className="no-dot mb-2">
               {t("removeTitle", { name })}
             </DialogTitle>
             <DialogDescription>{t("removeText")}</DialogDescription>
+            {credits && credits.available > 0 && (
+              <p className="text-base text-destructive">
+                {t("removeCredits", {
+                  credits: credits.available,
+                  candidates: credits.candidates,
+                })}
+              </p>
+            )}
           </DialogHeader>
           <DialogFooter>
             <DialogClose

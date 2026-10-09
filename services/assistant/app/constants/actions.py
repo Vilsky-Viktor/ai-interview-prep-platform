@@ -8,7 +8,8 @@
 #   card names it (a company's name, an interview's title): its service, path (filled from the
 #   arguments), `query` arguments, the `field` to show and, for a list, the argument whose
 #   item it is (`match`);
-# - destructive: the card warns that it can't be undone;
+# - destructive: the card warns that it can't be undone; credits: it also says how many of the
+#   company's credits (and candidates they'd pay for) are lost, read with the user's token;
 # - render and link: the page the result opens (ids from the arguments and the result's data),
 #   and result_label: the result's field naming it.
 

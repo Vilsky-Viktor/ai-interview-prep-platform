@@ -460,7 +460,8 @@
     "removeLogo": "הסרת לוגו",
     "logoFailed": "לא ניתן לשמור את הלוגו.",
     "pickTitle": "בחרו חברה",
-    "pickText": "המבחן מועתק לחברה שתבחרו, בחינם ומוכן לשליחה למועמדים."
+    "pickText": "המבחן מועתק לחברה שתבחרו, בחינם ומוכן לשליחה למועמדים.",
+    "removeCredits": "{credits, plural, one {הקרדיט שלה (#)} other {# הקרדיטים שלה}}{candidates, plural, =0 {} one { (בערך מועמד אחד)} other { (בערך # מועמדים)}} יאבדו ולא יוחזרו."
   },
   "candidates": {
     "scorecard": "כרטיס הערכה",
@@ -567,6 +568,11 @@
     "example": "דוגמה",
     "uploadFile": "העלאת קובץ",
     "fileFormats": "CSV או TXT, עד 100 מועמדים. אפשר לכתוב שמות בעמודת שם או ליד כל אימייל.",
+    "fileTooLarge": "הקובץ גדול מדי (עד {kb}KB).",
+    "lineSkips": {
+      "noEmail": "{count, plural, one {שורה אחת דולגה} other {# שורות דולגו}}: לא נמצא אימייל ({shown, plural, one {שורה {lines}} other {שורות {lines}}})",
+      "unreadName": "{count, plural, one {שם אחד לא נקרא} other {# שמות לא נקראו}} ({shown, plural, one {שורה {lines}} other {שורות {lines}}})"
+    },
     "exampleCsv": "דוגמה ‎.csv",
     "exampleTxt": "דוגמה ‎.txt",
     "candidateName": "שם (לא חובה)",
@@ -711,6 +717,19 @@
     "pricing": "מחירים"
   },
   "landing": {
+    "agent": {
+      "title": "שאלו את הסוכן\nהוא עושה את העבודה",
+      "text": "שאלו כל דבר על prepza ועל הגיוס שלכם. הסוכן עונה, ואחרי שתאשרו הוא עושה את העבודה בשבילכם.",
+      "demo": {
+        "question": "הזמן את Ann Lee,‏ ann.lee@example.com, ל-Backend Developer"
+      },
+      "points": {
+        "answers": "תשובות מהראיונות, המועמדים והתוצאות שלכם",
+        "acts": "יוצר ראיונות, מזמין מועמדים ועוד, אחרי שאישרתם",
+        "voice": "החזיקו את המיקרופון ודברו במקום להקליד",
+        "help": "לכל עמוד יש סמל עזרה משלו"
+      }
+    },
     "more": "איך זה עובד",
     "demos": "הדגמות",
     "demosTooltip": "צפו בהדגמות ב-YouTube",

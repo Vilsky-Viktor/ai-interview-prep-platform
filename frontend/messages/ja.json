@@ -460,7 +460,8 @@
     "removeLogo": "ロゴを削除",
     "logoFailed": "ロゴを保存できませんでした。",
     "pickTitle": "会社を選択",
-    "pickText": "テストは選んだ会社に無料でコピーされ、すぐに候補者へ送れます。"
+    "pickText": "テストは選んだ会社に無料でコピーされ、すぐに候補者へ送れます。",
+    "removeCredits": "この会社の {credits, plural, other {# クレジット}}{candidates, plural, =0 {} other {（候補者 約 # 人分）}}は失われ、返金されません。"
   },
   "candidates": {
     "scorecard": "スコアカード",
@@ -567,6 +568,11 @@
     "example": "例",
     "uploadFile": "ファイルをアップロード",
     "fileFormats": "CSV または TXT、最大100人。氏名は氏名の列か、各メールアドレスの横に入力できます。",
+    "fileTooLarge": "ファイルが大きすぎます（最大 {kb} KB）。",
+    "lineSkips": {
+      "noEmail": "{count} 行をスキップしました：メールアドレスがありません（{shown, plural, other {{lines} 行目}}）",
+      "unreadName": "{count} 件の氏名を読み取れませんでした（{shown, plural, other {{lines} 行目}}）"
+    },
     "exampleCsv": "サンプル .csv",
     "exampleTxt": "サンプル .txt",
     "candidateName": "氏名（任意）",
@@ -711,6 +717,19 @@
     "pricing": "料金"
   },
   "landing": {
+    "agent": {
+      "title": "エージェントに聞く\n作業も任せられる",
+      "text": "prepza や採用のことなら何でも聞けます。エージェントが答え、あなたが確認すれば作業も代わりに行います。",
+      "demo": {
+        "question": "Ann Lee（ann.lee@example.com）を Backend Developer に招待して"
+      },
+      "points": {
+        "answers": "あなた自身の面接・候補者・結果に基づいて回答",
+        "acts": "確認後に、面接の作成や候補者の招待などを実行",
+        "voice": "入力の代わりにマイクを長押しして話せます",
+        "help": "どのページにも専用のヘルプアイコンがあります"
+      }
+    },
     "more": "使い方",
     "demos": "デモ",
     "demosTooltip": "YouTube でデモを見る",

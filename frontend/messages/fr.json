@@ -460,7 +460,8 @@
     "removeLogo": "Supprimer le logo",
     "logoFailed": "Impossible d'enregistrer le logo.",
     "pickTitle": "Choisissez une entreprise",
-    "pickText": "Le test est copié dans l'entreprise choisie, gratuitement et prêt à être envoyé aux candidats."
+    "pickText": "Le test est copié dans l'entreprise choisie, gratuitement et prêt à être envoyé aux candidats.",
+    "removeCredits": "Ses {credits, plural, one {# crédit} other {# crédits}}{candidates, plural, =0 {} one { (environ # candidat)} other { (environ # candidats)}} seront perdus et ne sont pas remboursés."
   },
   "candidates": {
     "scorecard": "Fiche d'évaluation",
@@ -567,6 +568,11 @@
     "example": "exemple",
     "uploadFile": "Importer un fichier",
     "fileFormats": "CSV ou TXT, jusqu'à 100 candidats. Les noms peuvent figurer dans une colonne « nom » ou à côté de chaque e-mail.",
+    "fileTooLarge": "Le fichier est trop volumineux ({kb} Ko max.).",
+    "lineSkips": {
+      "noEmail": "{count, plural, one {# ligne ignorée} other {# lignes ignorées}} : aucun e-mail trouvé ({shown, plural, one {ligne {lines}} other {lignes {lines}}})",
+      "unreadName": "{count, plural, one {# nom non lu} other {# noms non lus}} ({shown, plural, one {ligne {lines}} other {lignes {lines}}})"
+    },
     "exampleCsv": "exemple .csv",
     "exampleTxt": "exemple .txt",
     "candidateName": "Nom (facultatif)",
@@ -711,6 +717,19 @@
     "pricing": "Tarifs"
   },
   "landing": {
+    "agent": {
+      "title": "Demandez à l'agent\nIl s'occupe du travail",
+      "text": "Posez n'importe quelle question sur prepza et vos recrutements. L'agent répond et, une fois que vous confirmez, il fait le travail pour vous.",
+      "demo": {
+        "question": "Invite Ann Lee, ann.lee@example.com, à Backend Developer"
+      },
+      "points": {
+        "answers": "Des réponses tirées de vos propres entretiens, candidats et résultats",
+        "acts": "Crée des entretiens, invite des candidats et plus encore, après votre confirmation",
+        "voice": "Maintenez le micro et parlez au lieu de taper",
+        "help": "Chaque page a sa propre icône d'aide"
+      }
+    },
     "more": "Comment ça marche",
     "demos": "Démos",
     "demosTooltip": "Voir les démos sur YouTube",

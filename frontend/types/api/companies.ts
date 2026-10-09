@@ -1637,6 +1637,8 @@ export interface components {
       text: string
       /** Name */
       name?: string | null
+      /** Filename */
+      filename?: string | null
     }
     /** BulkInviteOut */
     BulkInviteOut: {
@@ -1644,6 +1646,20 @@ export interface components {
       invited: string[]
       /** Skipped */
       skipped: components["schemas"]["SkippedInvite"][]
+      /**
+       * @default {
+       *       "count": 0,
+       *       "lines": []
+       *     }
+       */
+      no_email: components["schemas"]["LineReport"]
+      /**
+       * @default {
+       *       "count": 0,
+       *       "lines": []
+       *     }
+       */
+      unread_names: components["schemas"]["LineReport"]
     }
     /**
      * CandidateFilter
@@ -1829,6 +1845,11 @@ export interface components {
       available: number
       /** Low */
       low: boolean
+      /**
+       * Candidates
+       * @default 0
+       */
+      candidates: number
     }
     /** CompanyIdsIn */
     CompanyIdsIn: {
@@ -2158,6 +2179,22 @@ export interface components {
     InvitedCompaniesOut: {
       /** Company Ids */
       company_ids: string[]
+    }
+    /**
+     * LineReport
+     * @description Lines of a list that couldn't be used: how many, and the first few line numbers.
+     */
+    LineReport: {
+      /**
+       * Count
+       * @default 0
+       */
+      count: number
+      /**
+       * Lines
+       * @default []
+       */
+      lines: number[]
     }
     /** LinkIn */
     LinkIn: {
