@@ -18,21 +18,16 @@ export function ScorecardReview({ items }: { items: ReviewItem[] }) {
       estimateSize={160}
       className="divide-y rounded-2xl border"
       renderItem={(item) => (
-        <div className="flex items-start gap-4 p-6">
-          <span className="w-16 shrink-0 font-heading text-4xl leading-none font-light text-muted-foreground tabular-nums">
-            {item.number}.
-          </span>
-          <div className="min-w-0 flex-1 space-y-4">
-            <div className="flex items-start justify-between gap-4">
-              <QuestionText
-                text={item.text}
-                className="min-w-0 text-lg font-light"
-              />
-              <ScorecardMark item={item} />
-            </div>
-            <ScorecardAnswer item={item} />
-            <ScorecardSignals item={item} />
+        <div className="space-y-4 p-6">
+          <div className="flex items-start justify-between gap-4">
+            <QuestionText
+              text={item.text}
+              className="min-w-0 text-lg font-light"
+            />
+            <ScorecardMark item={item} />
           </div>
+          <ScorecardAnswer item={item} />
+          <ScorecardSignals item={item} />
         </div>
       )}
     />
