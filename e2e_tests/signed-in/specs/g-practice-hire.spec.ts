@@ -43,3 +43,24 @@ test("a practice result leads to using its test in a company", async ({ signInAs
   await expect(user.getByRole("button", { name: "Remove" })).toHaveCount(0)
   await shot(user, "pick-several")
 })
+
+// A finished practice lists its questions by topic, without numbers.
+test("a finished practice lists its questions without numbers", async ({ signInAs }) => {
+  const user = await signInAs(throwawayEmail("practice-review"))
+  const [template] = await templatesBySize(user)
+  const round = await api<{ round_id: string }>(user, "POST", `/rounds/practice/${template.id}`)
+  const result = await api<{ topics: { session_id: string }[] }>(
+    user,
+    "GET",
+    `/rounds/practice/rounds/${round.round_id}`
+  )
+
+  for (const topic of result.topics) {
+    await api(user, "POST", `/rounds/sessions/${topic.session_id}/finish`)
+  }
+
+  await visit(user, `/practice/rounds/${round.round_id}`)
+  await expect(user.getByText("Good question?").first()).toBeVisible()
+  await expect(user.getByText(/^\d+\.$/)).toHaveCount(0)
+  await shot(user, "practice-review")
+})

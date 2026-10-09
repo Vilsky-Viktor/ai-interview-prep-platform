@@ -25,31 +25,26 @@ export function PracticeReview({
       estimateSize={200}
       className="divide-y rounded-2xl border"
       renderItem={(item) => (
-        <div className="flex items-start gap-4 p-6">
-          <span className="w-16 shrink-0 font-heading text-4xl leading-none font-light text-muted-foreground tabular-nums">
-            {item.number}.
-          </span>
-          <div className="min-w-0 flex-1 space-y-4">
-            <div className="flex items-start justify-between gap-8">
-              <QuestionText
-                text={item.text}
-                className="min-w-0 text-lg font-light"
-              />
-              <ScorecardMark item={item} />
-            </div>
-            <AnswerOptions
-              options={item.options.map((answer, index) => ({
-                answer,
-                correct: index === item.correct_option_index,
-              }))}
-              // null when unanswered or timed out: still a practice report.
-              picked={item.answer?.option_index ?? null}
-              className="text-base"
+        <div className="space-y-4 p-6">
+          <div className="flex items-start justify-between gap-8">
+            <QuestionText
+              text={item.text}
+              className="min-w-0 text-lg font-light"
             />
-            <QuestionActions
-              basePath={`/rounds/sessions/${sessionId}/questions/${item.question_id}`}
-            />
+            <ScorecardMark item={item} />
           </div>
+          <AnswerOptions
+            options={item.options.map((answer, index) => ({
+              answer,
+              correct: index === item.correct_option_index,
+            }))}
+            // null when unanswered or timed out: still a practice report.
+            picked={item.answer?.option_index ?? null}
+            className="text-base"
+          />
+          <QuestionActions
+            basePath={`/rounds/sessions/${sessionId}/questions/${item.question_id}`}
+          />
         </div>
       )}
     />
