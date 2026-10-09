@@ -721,7 +721,7 @@
       "title": "Запитайте агента\nВін зробить роботу",
       "text": "Питайте будь-що про prepza та ваш найм. Агент відповість, а після вашого підтвердження зробить роботу за вас.",
       "demo": {
-        "question": "Запроси Ann Lee, ann.lee@example.com, на Backend Developer"
+        "question": "Запроси Ann Lee, ann.lee@example.com, на Architect"
       },
       "points": {
         "answers": "Відповіді на основі ваших власних співбесід, кандидатів і результатів",

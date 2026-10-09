@@ -721,7 +721,7 @@
       "title": "Спросите агента\nОн сделает работу",
       "text": "Спрашивайте что угодно о prepza и вашем найме. Агент ответит, а после вашего подтверждения сделает работу за вас.",
       "demo": {
-        "question": "Пригласи Ann Lee, ann.lee@example.com, на Backend Developer"
+        "question": "Пригласи Ann Lee, ann.lee@example.com, на Architect"
       },
       "points": {
         "answers": "Ответы по вашим собственным собеседованиям, кандидатам и результатам",

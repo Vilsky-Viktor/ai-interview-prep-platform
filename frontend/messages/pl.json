@@ -721,7 +721,7 @@
       "title": "Zapytaj agenta\nOn wykona pracę",
       "text": "Pytaj o wszystko, co dotyczy prepza i Twojej rekrutacji. Agent odpowiada, a po Twoim potwierdzeniu wykonuje pracę za Ciebie.",
       "demo": {
-        "question": "Zaproś Ann Lee, ann.lee@example.com, na Backend Developer"
+        "question": "Zaproś Ann Lee, ann.lee@example.com, na Architect"
       },
       "points": {
         "answers": "Odpowiedzi na podstawie Twoich rozmów, kandydatów i wyników",

@@ -721,7 +721,7 @@
       "title": "Asistana sorun\nİşi o yapsın",
       "text": "prepza ve işe alımınız hakkında her şeyi sorun. Asistan yanıtlar ve siz onayladığınızda işi sizin yerinize yapar.",
       "demo": {
-        "question": "Ann Lee'yi (ann.lee@example.com) Backend Developer'a davet et"
+        "question": "Ann Lee'yi (ann.lee@example.com) Architect'e davet et"
       },
       "points": {
         "answers": "Kendi mülakatlarınıza, adaylarınıza ve sonuçlarınıza dayanan yanıtlar",

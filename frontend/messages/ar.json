@@ -721,7 +721,7 @@
       "title": "اسأل الوكيل\nوهو ينجز العمل",
       "text": "اسأل عن أي شيء يخص prepza والتوظيف لديك. يجيبك الوكيل، وبعد تأكيدك ينجز العمل نيابةً عنك.",
       "demo": {
-        "question": "ادعُ Ann Lee على ann.lee@example.com إلى Backend Developer"
+        "question": "ادعُ Ann Lee على ann.lee@example.com إلى Architect"
       },
       "points": {
         "answers": "إجابات من مقابلاتك ومرشحيك ونتائجك أنت",

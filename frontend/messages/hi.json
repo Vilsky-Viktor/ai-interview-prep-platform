@@ -721,7 +721,7 @@
       "title": "एजेंट से पूछें\nकाम वही करेगा",
       "text": "prepza और अपनी हायरिंग के बारे में कुछ भी पूछें। एजेंट जवाब देता है, और आपकी पुष्टि के बाद आपका काम कर देता है।",
       "demo": {
-        "question": "Ann Lee, ann.lee@example.com, को Backend Developer के लिए आमंत्रित करें"
+        "question": "Ann Lee, ann.lee@example.com, को Architect के लिए आमंत्रित करें"
       },
       "points": {
         "answers": "आपके अपने इंटरव्यू, उम्मीदवारों और नतीजों से जवाब",

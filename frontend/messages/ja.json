@@ -721,7 +721,7 @@
       "title": "エージェントに聞く\n作業も任せられる",
       "text": "prepza や採用のことなら何でも聞けます。エージェントが答え、あなたが確認すれば作業も代わりに行います。",
       "demo": {
-        "question": "Ann Lee（ann.lee@example.com）を Backend Developer に招待して"
+        "question": "Ann Lee（ann.lee@example.com）を Architect に招待して"
       },
       "points": {
         "answers": "あなた自身の面接・候補者・結果に基づいて回答",

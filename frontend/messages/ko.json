@@ -721,7 +721,7 @@
       "title": "에이전트에게 물어보세요\n일은 에이전트가 합니다",
       "text": "prepza와 채용에 관한 것이라면 무엇이든 물어보세요. 에이전트가 답하고, 확인하시면 일을 대신 처리합니다.",
       "demo": {
-        "question": "Ann Lee(ann.lee@example.com)를 Backend Developer에 초대해 줘"
+        "question": "Ann Lee(ann.lee@example.com)를 Architect에 초대해 줘"
       },
       "points": {
         "answers": "내 면접, 지원자, 결과를 바탕으로 한 답변",

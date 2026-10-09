@@ -721,7 +721,7 @@
       "title": "Pergunte ao agente\nEle faz o trabalho",
       "text": "Pergunte o que quiser sobre o prepza e suas contratações. O agente responde e, quando você confirma, faz o trabalho por você.",
       "demo": {
-        "question": "Convide Ann Lee, ann.lee@example.com, para Backend Developer"
+        "question": "Convide Ann Lee, ann.lee@example.com, para Architect"
       },
       "points": {
         "answers": "Respostas com base nas suas próprias entrevistas, candidatos e resultados",

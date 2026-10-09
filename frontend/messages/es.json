@@ -721,7 +721,7 @@
       "title": "Pregunta al agente\nÉl hace el trabajo",
       "text": "Pregunta lo que quieras sobre prepza y tus procesos de selección. El agente responde y, cuando confirmas, hace el trabajo por ti.",
       "demo": {
-        "question": "Invita a Ann Lee, ann.lee@example.com, a Backend Developer"
+        "question": "Invita a Ann Lee, ann.lee@example.com, a Architect"
       },
       "points": {
         "answers": "Respuestas basadas en tus propias entrevistas, candidatos y resultados",

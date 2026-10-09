@@ -721,7 +721,7 @@
       "title": "Küsi agendilt\nTema teeb töö ära",
       "text": "Küsi kõike prepza ja oma värbamise kohta. Agent vastab ja kui sa kinnitad, teeb ta töö sinu eest ära.",
       "demo": {
-        "question": "Kutsu Ann Lee, ann.lee@example.com, intervjuule Backend Developer"
+        "question": "Kutsu Ann Lee, ann.lee@example.com, intervjuule Architect"
       },
       "points": {
         "answers": "Vastused sinu enda intervjuude, kandidaatide ja tulemuste põhjal",

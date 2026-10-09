@@ -721,7 +721,7 @@
       "title": "Chiedi all'agente\nFa lui il lavoro",
       "text": "Chiedi qualsiasi cosa su prepza e sulle tue selezioni. L'agente risponde e, quando confermi, fa il lavoro al posto tuo.",
       "demo": {
-        "question": "Invita Ann Lee, ann.lee@example.com, a Backend Developer"
+        "question": "Invita Ann Lee, ann.lee@example.com, a Architect"
       },
       "points": {
         "answers": "Risposte basate sui tuoi colloqui, candidati e risultati",

@@ -721,7 +721,7 @@
       "title": "از دستیار بپرسید\nکار را انجام می‌دهد",
       "text": "هر سؤالی درباره prepza و استخدام خود دارید بپرسید. دستیار پاسخ می‌دهد و پس از تأیید شما، کار را برایتان انجام می‌دهد.",
       "demo": {
-        "question": "Ann Lee را با ann.lee@example.com به Backend Developer دعوت کن"
+        "question": "Ann Lee را با ann.lee@example.com به Architect دعوت کن"
       },
       "points": {
         "answers": "پاسخ‌ها بر اساس مصاحبه‌ها، متقاضیان و نتایج خودتان",

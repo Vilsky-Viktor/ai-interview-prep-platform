@@ -721,7 +721,7 @@
       "title": "Tanya agen\nDia yang mengerjakan",
       "text": "Tanyakan apa saja tentang prepza dan rekrutmen Anda. Agen menjawab, dan setelah Anda konfirmasi, dia mengerjakannya untuk Anda.",
       "demo": {
-        "question": "Undang Ann Lee, ann.lee@example.com, ke Backend Developer"
+        "question": "Undang Ann Lee, ann.lee@example.com, ke Architect"
       },
       "points": {
         "answers": "Jawaban dari wawancara, kandidat, dan hasil Anda sendiri",

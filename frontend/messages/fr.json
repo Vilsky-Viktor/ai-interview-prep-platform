@@ -721,7 +721,7 @@
       "title": "Demandez à l'agent\nIl s'occupe du travail",
       "text": "Posez n'importe quelle question sur prepza et vos recrutements. L'agent répond et, une fois que vous confirmez, il fait le travail pour vous.",
       "demo": {
-        "question": "Invite Ann Lee, ann.lee@example.com, à Backend Developer"
+        "question": "Invite Ann Lee, ann.lee@example.com, à Architect"
       },
       "points": {
         "answers": "Des réponses tirées de vos propres entretiens, candidats et résultats",

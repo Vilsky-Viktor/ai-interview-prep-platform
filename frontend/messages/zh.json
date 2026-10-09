@@ -721,7 +721,7 @@
       "title": "问问智能助手\n活儿交给它",
       "text": "关于 prepza 和招聘的任何问题都可以问。智能助手会回答，你确认后，它就替你把事情办好。",
       "demo": {
-        "question": "邀请 Ann Lee（ann.lee@example.com）参加 Backend Developer"
+        "question": "邀请 Ann Lee（ann.lee@example.com）参加 Architect"
       },
       "points": {
         "answers": "根据你自己的面试、候选人和结果来回答",
