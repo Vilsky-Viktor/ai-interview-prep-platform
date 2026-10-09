@@ -1408,7 +1408,6 @@
         "create_interview_from_template": "إنشاء مقابلة من قالب",
         "delete_interview": "حذف المقابلة",
         "rename_interview": "إعادة تسمية المقابلة",
-        "update_interview_settings": "تغيير إعدادات المقابلة",
         "set_interview_link": "تشغيل الرابط القابل للمشاركة أو إيقافه",
         "set_topic_limit": "تحديد عدد الأسئلة لكل موضوع",
         "regenerate_question": "استبدال السؤال",
@@ -1419,7 +1418,10 @@
         "invite_candidate": "دعوة مرشح",
         "invite_candidates": "دعوة مرشحين",
         "revoke_candidate": "إلغاء الدعوة",
-        "set_extra_time": "منح وقت إضافي"
+        "set_extra_time": "منح وقت إضافي",
+        "set_pass_mark": "تحديد درجة النجاح",
+        "set_question_seconds": "تحديد الوقت لكل سؤال",
+        "mark_hired": "تعليم المقابلة بأنه تم التوظيف"
       },
       "fields": {
         "company": "الشركة",

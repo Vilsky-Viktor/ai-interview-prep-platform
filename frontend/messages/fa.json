@@ -1408,7 +1408,6 @@
         "create_interview_from_template": "ساختن مصاحبه از قالب",
         "delete_interview": "حذف مصاحبه",
         "rename_interview": "تغییر نام مصاحبه",
-        "update_interview_settings": "تغییر تنظیمات مصاحبه",
         "set_interview_link": "روشن یا خاموش کردن پیوند اشتراکی",
         "set_topic_limit": "تعیین تعداد سؤال هر موضوع",
         "regenerate_question": "جایگزینی سؤال",
@@ -1419,7 +1418,10 @@
         "invite_candidate": "دعوت از یک متقاضی",
         "invite_candidates": "دعوت از متقاضیان",
         "revoke_candidate": "لغو دعوت",
-        "set_extra_time": "دادن زمان اضافه"
+        "set_extra_time": "دادن زمان اضافه",
+        "set_pass_mark": "تعیین نمره قبولی",
+        "set_question_seconds": "تعیین زمان هر سؤال",
+        "mark_hired": "علامت‌گذاری مصاحبه به‌عنوان استخدام‌شده"
       },
       "fields": {
         "company": "شرکت",

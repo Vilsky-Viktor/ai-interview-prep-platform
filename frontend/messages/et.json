@@ -1416,7 +1416,6 @@
         "create_interview_from_template": "Loo intervjuu mallist",
         "delete_interview": "Kustuta intervjuu",
         "rename_interview": "Nimeta intervjuu ümber",
-        "update_interview_settings": "Muuda intervjuu seadeid",
         "set_interview_link": "Lülita jagatav link sisse või välja",
         "set_topic_limit": "Määra küsimuste arv teema kohta",
         "regenerate_question": "Asenda küsimus",
@@ -1427,7 +1426,10 @@
         "invite_candidate": "Kutsu kandidaat",
         "invite_candidates": "Kutsu kandidaadid",
         "revoke_candidate": "Tühista kutse",
-        "set_extra_time": "Anna lisaaega"
+        "set_extra_time": "Anna lisaaega",
+        "set_pass_mark": "Määra läbimise piir",
+        "set_question_seconds": "Määra aeg küsimuse kohta",
+        "mark_hired": "Märgi intervjuu täidetuks"
       },
       "fields": {
         "company": "Ettevõte",

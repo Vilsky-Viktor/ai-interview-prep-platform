@@ -1412,7 +1412,6 @@
         "create_interview_from_template": "Crea un colloquio da un modello",
         "delete_interview": "Elimina il colloquio",
         "rename_interview": "Rinomina il colloquio",
-        "update_interview_settings": "Cambia le impostazioni del colloquio",
         "set_interview_link": "Attiva o disattiva il link condivisibile",
         "set_topic_limit": "Imposta le domande per argomento",
         "regenerate_question": "Sostituisci la domanda",
@@ -1423,7 +1422,10 @@
         "invite_candidate": "Invita un candidato",
         "invite_candidates": "Invita candidati",
         "revoke_candidate": "Revoca l'invito",
-        "set_extra_time": "Concedi tempo extra"
+        "set_extra_time": "Concedi tempo extra",
+        "set_pass_mark": "Imposta la soglia di superamento",
+        "set_question_seconds": "Imposta il tempo per domanda",
+        "mark_hired": "Segna il colloquio come assunzione fatta"
       },
       "fields": {
         "company": "Azienda",

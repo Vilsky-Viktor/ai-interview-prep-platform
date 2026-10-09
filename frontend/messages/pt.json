@@ -1408,7 +1408,6 @@
         "create_interview_from_template": "Criar uma entrevista a partir de um modelo",
         "delete_interview": "Excluir a entrevista",
         "rename_interview": "Renomear a entrevista",
-        "update_interview_settings": "Mudar as configurações da entrevista",
         "set_interview_link": "Ativar ou desativar o link compartilhável",
         "set_topic_limit": "Definir perguntas por tema",
         "regenerate_question": "Substituir a pergunta",
@@ -1419,7 +1418,10 @@
         "invite_candidate": "Convidar um candidato",
         "invite_candidates": "Convidar candidatos",
         "revoke_candidate": "Revogar o convite",
-        "set_extra_time": "Dar tempo extra"
+        "set_extra_time": "Dar tempo extra",
+        "set_pass_mark": "Definir a nota de aprovação",
+        "set_question_seconds": "Definir o tempo por pergunta",
+        "mark_hired": "Marcar a entrevista como contratada"
       },
       "fields": {
         "company": "Empresa",

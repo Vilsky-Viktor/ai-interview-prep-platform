@@ -1412,7 +1412,6 @@
         "create_interview_from_template": "Buat wawancara dari templat",
         "delete_interview": "Hapus wawancara",
         "rename_interview": "Ganti nama wawancara",
-        "update_interview_settings": "Ubah pengaturan wawancara",
         "set_interview_link": "Nyalakan atau matikan tautan berbagi",
         "set_topic_limit": "Atur pertanyaan per topik",
         "regenerate_question": "Ganti pertanyaan",
@@ -1423,7 +1422,10 @@
         "invite_candidate": "Undang kandidat",
         "invite_candidates": "Undang beberapa kandidat",
         "revoke_candidate": "Cabut undangan",
-        "set_extra_time": "Beri waktu tambahan"
+        "set_extra_time": "Beri waktu tambahan",
+        "set_pass_mark": "Atur nilai lulus",
+        "set_question_seconds": "Atur waktu per pertanyaan",
+        "mark_hired": "Tandai wawancara sudah merekrut"
       },
       "fields": {
         "company": "Perusahaan",

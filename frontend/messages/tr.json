@@ -1411,7 +1411,6 @@
         "create_interview_from_template": "Şablondan mülakat oluştur",
         "delete_interview": "Mülakatı sil",
         "rename_interview": "Mülakatı yeniden adlandır",
-        "update_interview_settings": "Mülakat ayarlarını değiştir",
         "set_interview_link": "Paylaşılabilir bağlantıyı aç veya kapat",
         "set_topic_limit": "Konu başına soru sayısını ayarla",
         "regenerate_question": "Soruyu değiştir",
@@ -1422,7 +1421,10 @@
         "invite_candidate": "Bir aday davet et",
         "invite_candidates": "Adayları davet et",
         "revoke_candidate": "Daveti geri al",
-        "set_extra_time": "Ek süre ver"
+        "set_extra_time": "Ek süre ver",
+        "set_pass_mark": "Geçme notunu ayarla",
+        "set_question_seconds": "Soru başına süreyi ayarla",
+        "mark_hired": "Mülakatı işe alım yapıldı olarak işaretle"
       },
       "fields": {
         "company": "Şirket",

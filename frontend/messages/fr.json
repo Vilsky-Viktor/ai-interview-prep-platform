@@ -1412,7 +1412,6 @@
         "create_interview_from_template": "Créer un entretien à partir d'un modèle",
         "delete_interview": "Supprimer l'entretien",
         "rename_interview": "Renommer l'entretien",
-        "update_interview_settings": "Modifier les réglages de l'entretien",
         "set_interview_link": "Activer ou désactiver le lien à partager",
         "set_topic_limit": "Définir les questions par thème",
         "regenerate_question": "Remplacer la question",
@@ -1423,7 +1422,10 @@
         "invite_candidate": "Inviter un candidat",
         "invite_candidates": "Inviter des candidats",
         "revoke_candidate": "Révoquer l'invitation",
-        "set_extra_time": "Accorder du temps supplémentaire"
+        "set_extra_time": "Accorder du temps supplémentaire",
+        "set_pass_mark": "Définir le seuil de réussite",
+        "set_question_seconds": "Définir le temps par question",
+        "mark_hired": "Marquer l'entretien comme pourvu"
       },
       "fields": {
         "company": "Entreprise",

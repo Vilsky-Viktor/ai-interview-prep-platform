@@ -1408,7 +1408,6 @@
         "create_interview_from_template": "Tạo phỏng vấn từ mẫu",
         "delete_interview": "Xóa buổi phỏng vấn",
         "rename_interview": "Đổi tên buổi phỏng vấn",
-        "update_interview_settings": "Đổi cài đặt buổi phỏng vấn",
         "set_interview_link": "Bật hoặc tắt liên kết chia sẻ",
         "set_topic_limit": "Đặt số câu hỏi mỗi chủ đề",
         "regenerate_question": "Thay câu hỏi",
@@ -1419,7 +1418,10 @@
         "invite_candidate": "Mời một ứng viên",
         "invite_candidates": "Mời ứng viên",
         "revoke_candidate": "Thu hồi lời mời",
-        "set_extra_time": "Cho thêm thời gian"
+        "set_extra_time": "Cho thêm thời gian",
+        "set_pass_mark": "Đặt điểm đạt",
+        "set_question_seconds": "Đặt thời gian mỗi câu hỏi",
+        "mark_hired": "Đánh dấu buổi phỏng vấn đã tuyển được"
       },
       "fields": {
         "company": "Công ty",

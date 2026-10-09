@@ -4,6 +4,7 @@ import { ApiError } from "@/lib/api"
 import {
   answerParts,
   withCard,
+  withoutSignIn,
   inAppHref,
   linkPage,
   pageCompany,
@@ -173,5 +174,29 @@ describe("withCard", () => {
 
     expect(changed[0].blocks[0].state).toBe("pending")
     expect(changed[1].blocks[0]).toMatchObject({ state: "done", links: ["/x"] })
+  })
+})
+
+describe("withoutSignIn", () => {
+  it("drops only the sign-in cards and keeps every message", () => {
+    const messages = [
+      { role: "user" as const, content: "Create a company", blocks: [] },
+      {
+        role: "assistant" as const,
+        content: "Sign in below.",
+        blocks: [
+          { kind: "sign_in" as const, items: [], links: [] },
+          { kind: "link" as const, items: [], links: ["/faq"] },
+        ],
+      },
+    ]
+
+    expect(withoutSignIn(messages)).toEqual([
+      messages[0],
+      {
+        ...messages[1],
+        blocks: [{ kind: "link", items: [], links: ["/faq"] }],
+      },
+    ])
   })
 })

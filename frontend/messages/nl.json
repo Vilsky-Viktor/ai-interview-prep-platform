@@ -1408,7 +1408,6 @@
         "create_interview_from_template": "Een interview maken van een sjabloon",
         "delete_interview": "Het interview verwijderen",
         "rename_interview": "Het interview hernoemen",
-        "update_interview_settings": "Instellingen van het interview wijzigen",
         "set_interview_link": "De deelbare link aan- of uitzetten",
         "set_topic_limit": "Vragen per onderwerp instellen",
         "regenerate_question": "De vraag vervangen",
@@ -1419,7 +1418,10 @@
         "invite_candidate": "Een kandidaat uitnodigen",
         "invite_candidates": "Kandidaten uitnodigen",
         "revoke_candidate": "De uitnodiging intrekken",
-        "set_extra_time": "Extra tijd geven"
+        "set_extra_time": "Extra tijd geven",
+        "set_pass_mark": "Slaaggrens instellen",
+        "set_question_seconds": "Tijd per vraag instellen",
+        "mark_hired": "Interview als ingevuld markeren"
       },
       "fields": {
         "company": "Bedrijf",

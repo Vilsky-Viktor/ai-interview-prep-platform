@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { type Dispatch, type SetStateAction, useEffect, useRef } from "react"
 
 import { useAuth } from "@/components/auth-provider"
 import { getActiveConversation, getConfig } from "@/lib/assistant"
@@ -10,6 +10,7 @@ import {
   recentVisitorChat,
   saveChat,
 } from "@/lib/assistant-storage"
+import { withoutSignIn } from "@/lib/assistant"
 import type { ChatMessage } from "@/types/assistant"
 
 /** The panel's chat across reloads and sign-ins. On the page's first load, the recent chat
@@ -29,7 +30,7 @@ export function useChatRestore({
   signedIn: boolean
   streaming: boolean
   messages: ChatMessage[]
-  setMessages: (messages: ChatMessage[]) => void
+  setMessages: Dispatch<SetStateAction<ChatMessage[]>>
   open: (id: string, quietly: boolean) => Promise<string | null | undefined>
   startNew: () => void
   onRestored: (recent: boolean) => void
@@ -53,6 +54,17 @@ export function useChatRestore({
     if (before) {
       clearChat(true)
       startNew()
+    }
+
+    // A visitor who just signed in keeps their chat, without the sign-in cards that did it
+    // (on screen, in the tab's copy, and so in what starts their first conversation).
+    if (before === null && now) {
+      setMessages((current) => {
+        const kept = withoutSignIn(current)
+        saveChat(false, { messages: kept })
+
+        return kept
+      })
     }
 
     if (before !== undefined) {

@@ -1412,7 +1412,6 @@
         "create_interview_from_template": "Interview aus einer Vorlage erstellen",
         "delete_interview": "Interview löschen",
         "rename_interview": "Interview umbenennen",
-        "update_interview_settings": "Einstellungen des Interviews ändern",
         "set_interview_link": "Teilbaren Link ein- oder ausschalten",
         "set_topic_limit": "Fragen pro Thema festlegen",
         "regenerate_question": "Frage ersetzen",
@@ -1423,7 +1422,10 @@
         "invite_candidate": "Einen Kandidaten einladen",
         "invite_candidates": "Kandidaten einladen",
         "revoke_candidate": "Einladung widerrufen",
-        "set_extra_time": "Zusätzliche Zeit geben"
+        "set_extra_time": "Zusätzliche Zeit geben",
+        "set_pass_mark": "Bestehensgrenze festlegen",
+        "set_question_seconds": "Zeit pro Frage festlegen",
+        "mark_hired": "Interview als besetzt markieren"
       },
       "fields": {
         "company": "Unternehmen",

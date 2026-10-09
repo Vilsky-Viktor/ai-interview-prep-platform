@@ -1407,7 +1407,6 @@
         "create_interview_from_template": "टेम्पलेट से इंटरव्यू बनाएँ",
         "delete_interview": "इंटरव्यू हटाएँ",
         "rename_interview": "इंटरव्यू का नाम बदलें",
-        "update_interview_settings": "इंटरव्यू की सेटिंग्स बदलें",
         "set_interview_link": "शेयर लिंक चालू या बंद करें",
         "set_topic_limit": "हर विषय के सवाल तय करें",
         "regenerate_question": "सवाल बदलें",
@@ -1418,7 +1417,10 @@
         "invite_candidate": "एक उम्मीदवार को बुलाएँ",
         "invite_candidates": "उम्मीदवारों को बुलाएँ",
         "revoke_candidate": "न्योता वापस लें",
-        "set_extra_time": "अतिरिक्त समय दें"
+        "set_extra_time": "अतिरिक्त समय दें",
+        "set_pass_mark": "पास मार्क तय करें",
+        "set_question_seconds": "हर सवाल का समय तय करें",
+        "mark_hired": "इंटरव्यू को नियुक्ति हुई मार्क करें"
       },
       "fields": {
         "company": "कंपनी",

@@ -1403,7 +1403,6 @@
         "create_interview_from_template": "从模板创建面试",
         "delete_interview": "删除面试",
         "rename_interview": "重命名面试",
-        "update_interview_settings": "更改面试设置",
         "set_interview_link": "开启或关闭分享链接",
         "set_topic_limit": "设置每个主题的题数",
         "regenerate_question": "替换题目",
@@ -1414,7 +1413,10 @@
         "invite_candidate": "邀请一位候选人",
         "invite_candidates": "邀请候选人",
         "revoke_candidate": "撤销邀请",
-        "set_extra_time": "给予额外时间"
+        "set_extra_time": "给予额外时间",
+        "set_pass_mark": "设置及格线",
+        "set_question_seconds": "设置每题时间",
+        "mark_hired": "将面试标为已录用"
       },
       "fields": {
         "company": "公司",

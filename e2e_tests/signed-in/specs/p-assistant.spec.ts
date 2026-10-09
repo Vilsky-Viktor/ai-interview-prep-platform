@@ -266,9 +266,12 @@ test("a visitor who signs in from the sign-in card keeps their chat", async ({ b
   await popup.locator("#sign-in").click();
   await popup.waitForEvent("close");
 
-  // Signed in, the panel is still open with the chat, and the next message carries it.
+  // Signed in, the panel is still open with the chat, without the sign-in card, and the next
+  // message carries the chat.
   await expect(again.getByRole("button", { name: "History" })).toBeVisible();
   await expect(again.getByRole("list").getByText("Create a company")).toBeVisible();
+  await expect(again.getByRole("list").getByText("Sign in below to create it.")).toBeVisible();
+  await expect(again.getByRole("button", { name: /continue with/i })).toHaveCount(0);
   await again.getByRole("textbox").fill("Call it Acme");
   await again.getByRole("button", { name: "Send" }).click();
   await expect(again.locator("strong", { hasText: "Ann" })).toBeVisible();

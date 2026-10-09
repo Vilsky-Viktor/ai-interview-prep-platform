@@ -1412,7 +1412,6 @@
         "create_interview_from_template": "Create an interview from a template",
         "delete_interview": "Delete the interview",
         "rename_interview": "Rename the interview",
-        "update_interview_settings": "Change the interview's settings",
         "set_interview_link": "Turn the shareable link on or off",
         "set_topic_limit": "Set questions per topic",
         "regenerate_question": "Replace the question",
@@ -1423,7 +1422,10 @@
         "invite_candidate": "Invite a candidate",
         "invite_candidates": "Invite candidates",
         "revoke_candidate": "Revoke the invite",
-        "set_extra_time": "Give extra time"
+        "set_extra_time": "Give extra time",
+        "set_pass_mark": "Set the pass mark",
+        "set_question_seconds": "Set the time per question",
+        "mark_hired": "Mark the interview as hired"
       },
       "fields": {
         "company": "Company",

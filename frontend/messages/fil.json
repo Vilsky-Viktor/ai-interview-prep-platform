@@ -1416,7 +1416,6 @@
         "create_interview_from_template": "Gumawa ng interview mula sa template",
         "delete_interview": "Burahin ang interview",
         "rename_interview": "Palitan ang pangalan ng interview",
-        "update_interview_settings": "Palitan ang mga setting ng interview",
         "set_interview_link": "I-on o i-off ang shareable link",
         "set_topic_limit": "Itakda ang mga tanong bawat paksa",
         "regenerate_question": "Palitan ang tanong",
@@ -1427,7 +1426,10 @@
         "invite_candidate": "Mag-imbita ng aplikante",
         "invite_candidates": "Mag-imbita ng mga aplikante",
         "revoke_candidate": "Bawiin ang imbitasyon",
-        "set_extra_time": "Magbigay ng dagdag na oras"
+        "set_extra_time": "Magbigay ng dagdag na oras",
+        "set_pass_mark": "Itakda ang pass mark",
+        "set_question_seconds": "Itakda ang oras bawat tanong",
+        "mark_hired": "Markahang may na-hire ang interview"
       },
       "fields": {
         "company": "Kumpanya",

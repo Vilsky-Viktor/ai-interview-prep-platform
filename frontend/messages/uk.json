@@ -1412,7 +1412,6 @@
         "create_interview_from_template": "Створити співбесіду із шаблону",
         "delete_interview": "Видалити співбесіду",
         "rename_interview": "Перейменувати співбесіду",
-        "update_interview_settings": "Змінити налаштування співбесіди",
         "set_interview_link": "Увімкнути або вимкнути спільне посилання",
         "set_topic_limit": "Задати кількість запитань із теми",
         "regenerate_question": "Замінити запитання",
@@ -1423,7 +1422,10 @@
         "invite_candidate": "Запросити кандидата",
         "invite_candidates": "Запросити кандидатів",
         "revoke_candidate": "Відкликати запрошення",
-        "set_extra_time": "Дати додатковий час"
+        "set_extra_time": "Дати додатковий час",
+        "set_pass_mark": "Задати прохідний бал",
+        "set_question_seconds": "Задати час на запитання",
+        "mark_hired": "Позначити співбесіду як завершену наймом"
       },
       "fields": {
         "company": "Компанія",

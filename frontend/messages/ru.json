@@ -1412,7 +1412,6 @@
         "create_interview_from_template": "Создать собеседование из шаблона",
         "delete_interview": "Удалить собеседование",
         "rename_interview": "Переименовать собеседование",
-        "update_interview_settings": "Изменить настройки собеседования",
         "set_interview_link": "Включить или выключить общую ссылку",
         "set_topic_limit": "Задать число вопросов по теме",
         "regenerate_question": "Заменить вопрос",
@@ -1423,7 +1422,10 @@
         "invite_candidate": "Пригласить кандидата",
         "invite_candidates": "Пригласить кандидатов",
         "revoke_candidate": "Отозвать приглашение",
-        "set_extra_time": "Дать дополнительное время"
+        "set_extra_time": "Дать дополнительное время",
+        "set_pass_mark": "Задать проходной балл",
+        "set_question_seconds": "Задать время на вопрос",
+        "mark_hired": "Отметить собеседование как закрытое наймом"
       },
       "fields": {
         "company": "Компания",

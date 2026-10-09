@@ -1416,7 +1416,6 @@
         "create_interview_from_template": "テンプレートから面接を作成",
         "delete_interview": "面接を削除",
         "rename_interview": "面接名を変更",
-        "update_interview_settings": "面接の設定を変更",
         "set_interview_link": "共有リンクをオン・オフ",
         "set_topic_limit": "トピックごとの質問数を設定",
         "regenerate_question": "質問を差し替え",
@@ -1427,7 +1426,10 @@
         "invite_candidate": "候補者を招待",
         "invite_candidates": "候補者をまとめて招待",
         "revoke_candidate": "招待を取り消す",
-        "set_extra_time": "延長時間を付与"
+        "set_extra_time": "延長時間を付与",
+        "set_pass_mark": "合格ラインを設定",
+        "set_question_seconds": "1 問あたりの時間を設定",
+        "mark_hired": "面接を採用済みにする"
       },
       "fields": {
         "company": "会社",

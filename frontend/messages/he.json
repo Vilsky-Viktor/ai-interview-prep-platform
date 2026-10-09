@@ -1403,7 +1403,6 @@
         "create_interview_from_template": "יצירת ראיון מתבנית",
         "delete_interview": "מחיקת הראיון",
         "rename_interview": "שינוי שם הראיון",
-        "update_interview_settings": "שינוי הגדרות הראיון",
         "set_interview_link": "הפעלה או כיבוי של הקישור לשיתוף",
         "set_topic_limit": "קביעת מספר שאלות לנושא",
         "regenerate_question": "החלפת השאלה",
@@ -1414,7 +1413,10 @@
         "invite_candidate": "הזמנת מועמד",
         "invite_candidates": "הזמנת מועמדים",
         "revoke_candidate": "ביטול ההזמנה",
-        "set_extra_time": "מתן זמן נוסף"
+        "set_extra_time": "מתן זמן נוסף",
+        "set_pass_mark": "קביעת ציון עובר",
+        "set_question_seconds": "קביעת זמן לשאלה",
+        "mark_hired": "סימון הראיון כגיוס שהושלם"
       },
       "fields": {
         "company": "חברה",

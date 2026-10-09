@@ -1407,7 +1407,6 @@
         "create_interview_from_template": "สร้างการสัมภาษณ์จากเทมเพลต",
         "delete_interview": "ลบการสัมภาษณ์",
         "rename_interview": "เปลี่ยนชื่อการสัมภาษณ์",
-        "update_interview_settings": "เปลี่ยนการตั้งค่าการสัมภาษณ์",
         "set_interview_link": "เปิดหรือปิดลิงก์ที่แชร์ได้",
         "set_topic_limit": "กำหนดจำนวนคำถามต่อหัวข้อ",
         "regenerate_question": "เปลี่ยนคำถาม",
@@ -1418,7 +1417,10 @@
         "invite_candidate": "เชิญผู้สมัคร",
         "invite_candidates": "เชิญผู้สมัครหลายคน",
         "revoke_candidate": "เพิกถอนคำเชิญ",
-        "set_extra_time": "ให้เวลาเพิ่ม"
+        "set_extra_time": "ให้เวลาเพิ่ม",
+        "set_pass_mark": "ตั้งเกณฑ์ผ่าน",
+        "set_question_seconds": "ตั้งเวลาต่อคำถาม",
+        "mark_hired": "ทำเครื่องหมายว่าการสัมภาษณ์จ้างคนได้แล้ว"
       },
       "fields": {
         "company": "บริษัท",

@@ -1412,7 +1412,6 @@
         "create_interview_from_template": "Utwórz rozmowę z szablonu",
         "delete_interview": "Usuń rozmowę",
         "rename_interview": "Zmień nazwę rozmowy",
-        "update_interview_settings": "Zmień ustawienia rozmowy",
         "set_interview_link": "Włącz lub wyłącz link do udostępnienia",
         "set_topic_limit": "Ustaw liczbę pytań z tematu",
         "regenerate_question": "Wymień pytanie",
@@ -1423,7 +1422,10 @@
         "invite_candidate": "Zaproś kandydata",
         "invite_candidates": "Zaproś kandydatów",
         "revoke_candidate": "Cofnij zaproszenie",
-        "set_extra_time": "Daj dodatkowy czas"
+        "set_extra_time": "Daj dodatkowy czas",
+        "set_pass_mark": "Ustaw próg zaliczenia",
+        "set_question_seconds": "Ustaw czas na pytanie",
+        "mark_hired": "Oznacz rozmowę jako zakończoną zatrudnieniem"
       },
       "fields": {
         "company": "Firma",

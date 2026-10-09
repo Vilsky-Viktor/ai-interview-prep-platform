@@ -175,3 +175,11 @@ export function withCard(
 export async function refreshToken() {
   await (await firebaseAuth()).currentUser?.getIdToken(true)
 }
+
+/** The chat without its sign-in cards, once the visitor has signed in. */
+export function withoutSignIn(messages: ChatMessage[]): ChatMessage[] {
+  return messages.map((message) => ({
+    ...message,
+    blocks: message.blocks.filter((block) => block.kind !== "sign_in"),
+  }))
+}
