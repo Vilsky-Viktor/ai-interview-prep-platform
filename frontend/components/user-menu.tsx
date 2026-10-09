@@ -3,6 +3,7 @@
 import {
   DollarSignIcon,
   ShieldCogCornerIcon,
+  LogInIcon,
   LogOutIcon,
   SettingsIcon,
 } from "lucide-react"
@@ -52,12 +53,17 @@ export function UserMenu() {
 
   if (!user) {
     return (
+      // Under 400px, where the header can't fit the label in every language, the icon alone.
       <Button
         variant="outline"
-        className="px-4 max-[359px]:px-2.5"
+        className="px-4 max-[399px]:w-8 max-[399px]:px-0"
+        aria-label={t("signIn")}
         onClick={() => signIn()}
       >
-        {t("signIn")}
+        <LogInIcon aria-hidden className="hidden max-[399px]:block" />
+        <span aria-hidden className="max-[399px]:hidden">
+          {t("signIn")}
+        </span>
       </Button>
     )
   }

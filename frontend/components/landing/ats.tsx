@@ -41,7 +41,7 @@ export async function AtsSection() {
         {/* prepza's API, named over it, and a request typed out with its answer. */}
         <div className="overflow-hidden rounded-2xl bg-muted text-sm">
           {/* The API's name, and its docs at the end of the row. */}
-          <div className="flex items-center justify-between gap-4 border-b px-5 py-3">
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b px-5 py-3">
             <p className="flex items-center gap-2 text-base font-medium">
               <CodeXmlIcon className="size-5" />
               {t("apiName")}
